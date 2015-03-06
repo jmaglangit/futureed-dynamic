@@ -29,6 +29,10 @@ class AppServiceProvider extends ServiceProvider {
 			'Illuminate\Contracts\Auth\Registrar',
 			'App\Services\Registrar'
 		);
+        $this->app->bind(
+            'Futereed\Repository\Users\UsersRepositoryInterface',
+            'Futureed\Repository\Users\UsersRepository'
+        );
 	}
 
 }
