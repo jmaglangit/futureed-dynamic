@@ -5,7 +5,7 @@
  * Date: 3/6/15
  * Time: 11:30 AM
  */
-namespace App\Futureed\Repository\Student;
+namespace FutureEd\Models\Repository\Student;
 
 interface StudentRepositoryInterface {
 

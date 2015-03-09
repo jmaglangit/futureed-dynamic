@@ -14,11 +14,10 @@
 	},
 	"autoload": {
 		"classmap": [
-			"database",
-            "app/Futureed"
+			"database"
 		],
 		"psr-4": {
-			"App\\": "app/"
+			"FutureEd\\": "app/"
 		}
 	},
 	"autoload-dev": {

@@ -6,10 +6,10 @@
  * Time: 5:38 PM
  */
 
-namespace App\Services;
+namespace FutureEd\Services;
 
 
-use App\Futureed\Repository\Student\StudentRepositoryInterface;
+use FutureEd\Futureed\Repository\Student\StudentRepositoryInterface;
 
 class StudentServices {
 
@@ -18,6 +18,7 @@ class StudentServices {
     }
 
     public function getStudents(){
+
         return $this->student->getStudents();
     }
 

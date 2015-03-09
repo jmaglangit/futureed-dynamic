@@ -6,9 +6,9 @@
  * Time: 1:50 PM
  */
 
-namespace App\Services;
+namespace FutureEd\Services;
 
-use App\Futureed\Repository\Users\UsersRepositoryInterface;
+use FutureEd\Futureed\Repository\Users\UsersRepositoryInterface;
 
 
 class UsersServices {

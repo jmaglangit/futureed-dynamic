@@ -1,4 +1,4 @@
-<?php namespace App\Commands;
+<?php namespace FutureEd\Commands;
 
 abstract class Command {
 

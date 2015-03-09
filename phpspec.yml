@@ -1,5 +1,5 @@
 suites:
     main:
-        namespace: App
-        psr4_prefix: App
+        namespace: FutureEd
+        psr4_prefix: FutureEd
         src_path: app

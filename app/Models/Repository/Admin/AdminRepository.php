@@ -5,7 +5,7 @@
  * Date: 3/6/15
  * Time: 11:21 AM
  */
-namespace App\Futureed\Repository\Admin;
+namespace FutureEd\Models\Repository\Admin;
 
 class AdminRepository implements  AdminRepositoryInterface {
 

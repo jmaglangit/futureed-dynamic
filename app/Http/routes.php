@@ -11,33 +11,14 @@
 |
 */
 
-//Route::get('/', 'WelcomeController@index');
-//Route::get('home', 'HomeController@index');
-Route::controllers([
-    'auth' => 'Auth\AuthController',
-    'password' => 'Auth\PasswordController',
-]);
+//Routes::get('/', 'WelcomeController@index');
+//Routes::get('home', 'HomeController@index');
+//Route::controllers([
+//    'auth' => 'Auth\AuthController',
+//    'password' => 'Auth\PasswordController',
+//]);
 
-/*
- * Home
- */
-Route::get('/','DashboardController@index');
-/*
- * Administrator
- *
- */
-Route::get('/Admin','AdminController@index');
-
-/*
- * Student
- * */
-Route::get('/student','StudentController@index');
-Route::get('/student/email','StudentController@email');
-Route::get('/student/password','StudentController@password');
-
-/*
- * Users (principal, teachers, and parents)
- */
-Route::get('/users','UsersController@index');
-
-
+$router->resource('admin','AdminController');
+$router->resource('dashboard','DashboardController');
+$router->resource('student','StudentController');
+$router->resource('student','StudentController');

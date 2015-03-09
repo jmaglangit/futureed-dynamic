@@ -6,10 +6,10 @@
  * Time: 6:01 PM
  */
 
-namespace App\Services;
+namespace FutureEd\Services;
 
 
-use App\Futureed\Repository\Admin\AdminRepositoryInterface;
+use FutureEd\Futureed\Repository\Admin\AdminRepositoryInterface;
 
 class AdminServices {
 

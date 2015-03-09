@@ -144,11 +144,11 @@ return [
 		/*
 		 * Application Service Providers...
 		 */
-		'App\Providers\AppServiceProvider',
-		'App\Providers\BusServiceProvider',
-		'App\Providers\ConfigServiceProvider',
-		'App\Providers\EventServiceProvider',
-		'App\Providers\RouteServiceProvider',
+		'FutureEd\Providers\AppServiceProvider',
+		'FutureEd\Providers\BusServiceProvider',
+		'FutureEd\Providers\ConfigServiceProvider',
+		'FutureEd\Providers\EventServiceProvider',
+		'FutureEd\Providers\RouteServiceProvider',
 
 	],
 
@@ -190,7 +190,7 @@ return [
 		'Redis'     => 'Illuminate\Support\Facades\Redis',
 		'Request'   => 'Illuminate\Support\Facades\Request',
 		'Response'  => 'Illuminate\Support\Facades\Response',
-		'Route'     => 'Illuminate\Support\Facades\Route',
+		'Routes'     => 'Illuminate\Support\Facades\Route',
 		'Schema'    => 'Illuminate\Support\Facades\Schema',
 		'Session'   => 'Illuminate\Support\Facades\Session',
 		'Storage'   => 'Illuminate\Support\Facades\Storage',

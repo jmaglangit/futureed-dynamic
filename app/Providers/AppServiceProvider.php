@@ -1,4 +1,4 @@
-<?php namespace App\Providers;
+<?php namespace FutureEd\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
@@ -27,12 +27,8 @@ class AppServiceProvider extends ServiceProvider {
 	{
 		$this->app->bind(
 			'Illuminate\Contracts\Auth\Registrar',
-			'App\Services\Registrar'
+			'FutureEd\Services\Registrar'
 		);
-        $this->app->bind(
-            'Futereed\Repository\Users\UsersRepositoryInterface',
-            'Futureed\Repository\Users\UsersRepository'
-        );
 	}
 
 }
