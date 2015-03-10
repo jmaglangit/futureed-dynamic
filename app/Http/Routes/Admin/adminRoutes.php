@@ -2,3 +2,4 @@
 /*
  * Admin Routes
  */
+$router->resource('/admin','AdminController');

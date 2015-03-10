@@ -9,7 +9,7 @@
 namespace FutureEd\Services;
 
 
-use FutureEd\Futureed\Repository\Admin\AdminRepositoryInterface;
+use FutureEd\Model\Repository\Admin\AdminRepositoryInterface;
 
 class AdminServices {
 

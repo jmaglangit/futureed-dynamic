@@ -1,3 +1,5 @@
 <?php
-
-Route::get('/','DashboardController@index');
+/*
+ * Dashboard Controller
+ */
+$router->resource('/dashboard','DashboardController');
