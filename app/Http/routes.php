@@ -26,9 +26,15 @@ $router->resource('student','StudentController');
 Routes::group(['prefix' => 'api/v1'], function()
 {
     //student login
-    Routes::get('/students/login/1/{email}','Api\v1\StudentsLoginController@email');
-    Routes::get('/students/login/2/{id}/{password}','Api\v1\StudentsLoginController@password');
-    Routes::get('/students/login/2/image/{id}','Api\v1\StudentsLoginController@imagePassword');
+    Routes::post('/students/login/1','Api\v1\StudentsLoginController@login');
+    Routes::post('/students/login/2/images','Api\v1\StudentsLoginController@imagePassword');
+    Routes::post('/students/login/2','Api\v1\StudentsLoginController@password');
     //student registration
+    Routes::post('/students/registration/email','Api\v1\StudentsRegistrationController@checkEmail');
+    Routes::post('/students/registration/username','Api\v1\StudentsRegistrationController@checkUserName');
+    //schools
+    Routes::get('/schools','Api\v1\SchoolsController@schools');
+
+
 
 });

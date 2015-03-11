@@ -19,5 +19,9 @@ interface UsersRepositoryInterface {
 
     public function deleteUser($id);
 
+    public function checkUserName($username);
+
+    public function checkEmail($email);
+
 
 }

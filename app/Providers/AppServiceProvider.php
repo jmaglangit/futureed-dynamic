@@ -29,6 +29,15 @@ class AppServiceProvider extends ServiceProvider {
 			'Illuminate\Contracts\Auth\Registrar',
 			'FutureEd\Services\Registrar'
 		);
+        $this->app->bind(
+            'FutureEd\Models\Repository\Users\UsersRepositoryInterface',
+            'FutureEd\Models\Repository\Users\UsersRepository'
+        );
+        $this->app->bind(
+            'FutureEd\Models\Repository\Validator\ValidatorRepositoryInterface',
+            'FutureEd\Models\Repository\Validator\ValidatorRepository'
+        );
+
 	}
 
 }
