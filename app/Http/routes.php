@@ -18,22 +18,31 @@
 //    'password' => 'Auth\PasswordController',
 //]);
 
+//TODO: Drill down routing into directory.
+
 Routes::get('/','DashboardController@index');
 $router->resource('admin','AdminController');
 $router->resource('dashboard','DashboardController');
 $router->resource('student','StudentController');
 
+
 Routes::group(['prefix' => 'api/v1'], function()
 {
     //student login
-    Routes::post('/students/login/1','Api\v1\StudentsLoginController@login');
-    Routes::post('/students/login/2/images','Api\v1\StudentsLoginController@imagePassword');
-    Routes::post('/students/login/2','Api\v1\StudentsLoginController@password');
+    Routes::post('/students/login/username','Api\v1\StudentsLoginController@login');
+    Routes::post('/students/login/image','Api\v1\StudentsLoginController@imagePassword');
+    Routes::post('/students/login/password','Api\v1\StudentsLoginController@password');
+    //student password
+    Routes::post('/students/password/reset','Api\v1\StudentsLoginController@resetPassword');
+    Routes::post('/students/password/forgot','Api\v1\StudentsLoginController@forgotPassword');
+    Routes::post('/students/password/image','Api\v1\StudentsLoginController@images');
     //student registration
     Routes::post('/students/registration/email','Api\v1\StudentsRegistrationController@checkEmail');
     Routes::post('/students/registration/username','Api\v1\StudentsRegistrationController@checkUserName');
+    Routes::post('/students/registration','Api\v1\StudentsRegistrationController@add');
     //schools
     Routes::get('/schools','Api\v1\SchoolsController@schools');
+    //
 
 
 

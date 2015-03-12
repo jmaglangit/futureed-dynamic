@@ -3,7 +3,6 @@
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
-use FutureEd\Services\UsersServices;
 
 use Illuminate\Http\Request;
 
@@ -34,19 +33,21 @@ class StudentsLoginController extends StudentsController{
 
     /*
      * image passwords
+     * param id
+     * response id, image password
      */
     public function imagePassword(){
         try{
-            //get student id
+
             $input = Input::get('id');
             $status = 200;
+            //TODO: Get image password of student.
             $response = "password candidate $input";
 
         }catch(Exception $e){
             $status = 400;
             $response = $e->getMessage();
         }
-        //return with image file name and image id from student table.
         return [
             'status' => $status,
             'response' => $response
@@ -54,15 +55,17 @@ class StudentsLoginController extends StudentsController{
     }
 
     /*
-     * user id and password
+     * param id, image password
+     * response success/fail
      */
     public function password(){
         //check email and password matched
         try{
             $input = Input::all();
-            //get matched return success or not
+            //TODO: get username id, and image password matched, return success/fail (boolean).
+
             $status = 200;
-            $response = $input;
+            $response = "TODO";
         }catch(Exception $e){
             $status = 400;
             $response = $e->getMessage();
@@ -72,6 +75,41 @@ class StudentsLoginController extends StudentsController{
             'response' => $response
         ];
     }
+
+    /*
+     * param id, image password
+     * response success/fail
+     */
+    public function resetPassword(){
+
+        try{
+            $input = Input::only('id','password');
+            //TODO: get user_id of student.
+            $status = 200;
+            $response = $input;
+
+        }catch(Exception $e){
+            $status = 400;
+            $response = $e->getMessage();
+        }
+
+        return [
+            'status' => $status,
+            'response' => $response
+        ];
+    }
+
+    /*
+     * param username/email
+     * response success/fail(doesn't exist)
+     */
+    public function forgotPassword(){
+        //TODO: check email, send email under student
+        $input = Input::only('username');
+        return $input;
+    }
+
+
 
 
 
