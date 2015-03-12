@@ -5,7 +5,7 @@ use FutureEd\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
-class AdminController extends Controller {
+class AdminController extends ApiController {
 
 	/**
 	 * Display a listing of the resource.

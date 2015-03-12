@@ -10,25 +10,19 @@ class StudentsLoginController extends StudentsController{
 
     //check email or username if valid user
     public function login(){
-        try{
             $input = Input::get('username');
-            $status = 200;
-            //check if email exist
-            $response = $this->users->checkLoginName($input);
 
-            $return =  [
-                'status' => $status,
-                'response' => $response
-            ];
-        }catch (Exception $e){
-            $return = [
-                'status' => 400,
-                'response' => $e->getMessage()
-            ];
-        }
-        //should return id
-        return $return;
+            if(!$input){
 
+                return $this->respondNotFound();
+
+            }else{
+                //check if email exist
+                $response = $this->users->checkLoginName($input);
+
+                return $this->respondSuccess($response);
+
+            }
     }
 
     /*
@@ -37,21 +31,19 @@ class StudentsLoginController extends StudentsController{
      * response id, image password
      */
     public function imagePassword(){
-        try{
 
             $input = Input::get('id');
-            $status = 200;
-            //TODO: Get image password of student.
-            $response = "password candidate $input";
 
-        }catch(Exception $e){
-            $status = 400;
-            $response = $e->getMessage();
-        }
-        return [
-            'status' => $status,
-            'response' => $response
-        ];
+            if(!$input){
+
+                return $this->respondNotFound();
+
+            } else {
+
+                //TODO: Get image password of student.
+                return $this->respondSuccess();
+            }
+
     }
 
     /*
@@ -60,20 +52,11 @@ class StudentsLoginController extends StudentsController{
      */
     public function password(){
         //check email and password matched
-        try{
             $input = Input::all();
             //TODO: get username id, and image password matched, return success/fail (boolean).
 
-            $status = 200;
-            $response = "TODO";
-        }catch(Exception $e){
-            $status = 400;
-            $response = $e->getMessage();
-        }
-        return [
-            'status' => $status,
-            'response' => $response
-        ];
+            return $this->respondNotFound($input);
+
     }
 
     /*
