@@ -18,7 +18,7 @@ class DashboardController extends Controller {
 	{
 		//
 //        return view('futureed.student.login_email');
-	    return view('home');
+	    return view('auth.reset-password');
     }
 
 	/**
