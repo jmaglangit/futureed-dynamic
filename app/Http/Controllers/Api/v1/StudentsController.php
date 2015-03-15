@@ -7,7 +7,7 @@ use FutureEd\Models\Core\Users;
 use FutureEd\Services\UsersServices;
 use Illuminate\Http\Request;
 
-class StudentsController extends Controller {
+class StudentsController extends ApiController {
 
     public function __construct(UsersServices $users){
         $this->users = $users;

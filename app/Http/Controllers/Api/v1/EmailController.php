@@ -5,7 +5,7 @@ use FutureEd\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
-class AdminController extends ApiController {
+class EmailController extends ApiController {
 
 	/**
 	 * Display a listing of the resource.
@@ -80,5 +80,23 @@ class AdminController extends ApiController {
 	{
 		//
 	}
+
+    /**
+     * Send email
+     * @param site
+     * @return success/fail send
+     */
+    public function mailSend(){
+        try{
+
+        }catch(Exception $e){
+            $status = 400;
+            $response = $e->getMessage();
+        }
+        return [
+            'status' => $status,
+            'response' => $response
+        ];
+    }
 
 }

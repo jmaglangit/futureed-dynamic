@@ -41,6 +41,12 @@ class StudentsRegistrationController extends StudentsController {
     }
 
 
+    /*
+     * Candidate users registration
+     * param firstname, lastname, gender, birthday, email, username, school id,grade
+     * response success/fail
+     */
+
     public function add(){
         try{
             $input = Input::all();
@@ -51,7 +57,6 @@ class StudentsRegistrationController extends StudentsController {
             $response = $e->getMessage();
 
         }
-        //returns success..
         return [
             'status' => $status,
             'response' => $response

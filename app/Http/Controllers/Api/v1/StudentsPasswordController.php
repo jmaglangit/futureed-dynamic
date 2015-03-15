@@ -5,16 +5,17 @@ use FutureEd\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
-class AdminController extends ApiController {
+class StudentsPasswordController extends Controller {
 
 	/**
 	 * Display a listing of the resource.
 	 *
-	 * @return Response
+	 * @return password images
 	 */
 	public function index()
 	{
 		//
+
 	}
 
 	/**
