@@ -142,6 +142,11 @@ return [
         'Laracasts\Generators\GeneratorsServiceProvider',
 
 		/*
+		 * Project Specific Service Providers...
+		 */
+		 'Illuminate\Html\HtmlServiceProvider',
+		 
+		/*
 		 * Application Service Providers...
 		 */
 		'FutureEd\Providers\AppServiceProvider',
@@ -197,6 +202,11 @@ return [
 		'URL'       => 'Illuminate\Support\Facades\URL',
 		'Validator' => 'Illuminate\Support\Facades\Validator',
 		'View'      => 'Illuminate\Support\Facades\View',
+
+		/*
+		 * Project Specific Service Providers...
+		 */
+		'Form'      => 'Illuminate\Html\FormFacade',
 
 	],
 
