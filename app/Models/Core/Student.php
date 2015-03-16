@@ -1,10 +1,9 @@
-<?php namespace FutureEd\Models\Core;
+<?php namespace FutureEd;
 
 use Illuminate\Database\Eloquent\Model;
 
 class Student extends Model {
 
 	//
-    protected $table = 'student';
 
 }

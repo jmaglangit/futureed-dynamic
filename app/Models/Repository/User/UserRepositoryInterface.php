@@ -5,9 +5,9 @@
  * Date: 3/5/15
  * Time: 6:06 PM
  */
-namespace FutureEd\Models\Repository\Users;
+namespace FutureEd\Models\Repository\User;
 
-interface UsersRepositoryInterface {
+interface UserRepositoryInterface {
 
     public function getUsers();
 

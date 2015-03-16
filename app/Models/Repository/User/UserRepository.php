@@ -7,10 +7,11 @@
  */
 namespace FutureEd\Models\Repository\Users;
 
-use FutureEd\Models\Core\Users;
+use FutureEd\Models\Core\User;
+use FutureEd\Models\Repository\User\UserRepositoryInterface;
 
 
-class UsersRepository implements UsersRepositoryInterface{
+class UserRepository implements UserRepositoryInterface{
 
     public function getUsers(){
         return 0;
@@ -57,14 +58,14 @@ class UsersRepository implements UsersRepositoryInterface{
 
     public function checkUserName($username){
         //return user id
-        return Users::select('id')
+        return User::select('id')
             ->where('username','=',$username)->get();
     }
 
     public function checkEmail($email){
         //return user id
 
-        return Users::select('id')
+        return User::select('id')
             ->where('email','=',$email)->get();
     }
 
