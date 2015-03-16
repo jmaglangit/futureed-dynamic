@@ -30,8 +30,8 @@ class AppServiceProvider extends ServiceProvider {
 			'FutureEd\Services\Registrar'
 		);
         $this->app->bind(
-            'FutureEd\Models\Repository\Users\UsersRepositoryInterface',
-            'FutureEd\Models\Repository\Users\UsersRepository'
+            'FutureEd\Models\Repository\User\UserRepositoryInterface',
+            'FutureEd\Models\Repository\User\UserRepository'
         );
         $this->app->bind(
             'FutureEd\Models\Repository\Validator\ValidatorRepositoryInterface',

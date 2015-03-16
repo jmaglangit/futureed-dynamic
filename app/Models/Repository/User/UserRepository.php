@@ -5,16 +5,15 @@
  * Date: 3/5/15
  * Time: 6:06 PM
  */
-namespace FutureEd\Models\Repository\Users;
+namespace FutureEd\Models\Repository\User;
 
 use FutureEd\Models\Core\User;
-use FutureEd\Models\Repository\User\UserRepositoryInterface;
 
 
 class UserRepository implements UserRepositoryInterface{
 
     public function getUsers(){
-        return 0;
+        return User::all();
     }
 
     public function getUser($id){

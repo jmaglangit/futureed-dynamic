@@ -8,16 +8,17 @@
 
 namespace FutureEd\Services;
 
-use FutureEd\Models\Repository\Users\UsersRepositoryInterface;
+
+use FutureEd\Models\Repository\User\UserRepositoryInterface;
 use FutureEd\Models\Repository\Validator\ValidatorRepositoryInterface;
 
 
-class UsersServices {
+class UserServices {
 
     /**
      *
      */
-    public function __construct(UsersRepositoryInterface $users,ValidatorRepositoryInterface $validator){
+    public function __construct(UserRepositoryInterface $users,ValidatorRepositoryInterface $validator){
         $this->users = $users;
         $this->validator = $validator;
     }
@@ -43,13 +44,18 @@ class UsersServices {
     }
 
    public function checkLoginName($username){
+
        //filter if login is email or username
        if($this->validator->email($username)){
+
            //check email if exist return id
            $return = $this->users->checkEmail($username);
+
        }elseif($this->validator->username($username)){
+
            //check username if exist return id
            $return = $this->users->checkUserName($username);
+
        }
        return $return;
    }

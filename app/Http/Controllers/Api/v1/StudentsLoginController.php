@@ -41,6 +41,7 @@ class StudentsLoginController extends StudentsController{
             } else {
 
                 //TODO: Get image password of student.
+
                 return $this->respondSuccess();
             }
 
@@ -52,10 +53,18 @@ class StudentsLoginController extends StudentsController{
      */
     public function password(){
         //check email and password matched
-            $input = Input::all();
-            //TODO: get username id, and image password matched, return success/fail (boolean).
+        $input = Input::get('id','image');
 
-            return $this->respondNotFound($input);
+        if(!$input){
+
+            return $this->respondNotFound();
+
+        } else {
+
+            //TODO: get username id, and image password matched, return success/fail (boolean).
+            return $this->respond($input);
+
+        }
 
     }
 

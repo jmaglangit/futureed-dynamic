@@ -10,6 +10,13 @@ class ApiController extends Controller {
 
 	private $statusCode = 200;
 
+    public function index(){
+        return [
+            'name' => 'FutureEd Api',
+            'version' => 1
+        ];
+    }
+
     /**
      * @return mixed
      */
@@ -48,6 +55,17 @@ class ApiController extends Controller {
             ]
         );
     }
+
+    public function respondWithNoData(){
+        return $this->respond(
+            [
+                'status' => $this->getStatusCode(),
+                'data' => 'No Data'
+            ]
+        );
+    }
+
+
 
 
 

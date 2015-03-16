@@ -3,10 +3,16 @@
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
+use FutureEd\Services\UserServices;
 use Illuminate\Http\Request;
 
-class UsersController extends Controller {
+class UserController extends ApiController{
 
+    public function __construct(UserServices $user){
+
+        $this->user = $user;
+
+    }
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -15,6 +21,8 @@ class UsersController extends Controller {
 	public function index()
 	{
 		//list all users table
+        return $this->user->getUsers();
+
 	}
 
 	/**
