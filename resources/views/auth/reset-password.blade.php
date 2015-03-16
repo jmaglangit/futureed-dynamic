@@ -10,7 +10,7 @@ footer{display: none;}
     <div class="col-md-4 col-md-offset-1" style="margin-top:80px;">
       <div class="form-style form-narrow">
         <div class="title">Reset Password</div>
-        <form action="">
+        {!! Form::open() !!}
           <!-- <span>Password</span> -->
           <div class="input pass">
             <div class="icon">
