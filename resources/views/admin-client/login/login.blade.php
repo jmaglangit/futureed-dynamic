@@ -10,24 +10,24 @@ footer{display: none;}
     <div class="col-md-4 col-md-offset-1" style="margin-top:80px;">
       <div class="form-style form-narrow">
         <div class="title">Login to your account</div>
-        <form action="">
+        {!! Form::open() !!}
           <!-- <span>Email or Username</span> -->
           <div class="input">
             <div class="icon">
               <i class="fa fa-user"></i>
             </div>
-            <input placeholder="Email or Username" type="email" name="" id="">
+            {!! Form::email('login', null, ['placeholder' => 'Email or Username']) !!}
           </div>
           <!-- <span>Password</span> -->
           <div class="input pass">
             <div class="icon">
               <i class="fa fa-lock"></i>
             </div>
-            <input placeholder="Password" type="password" name="" id="">
+            {!! Form::password('password', null, ['placeholder' => 'Password']) !!}
           </div>
           <div class="submit">LOGIN</div>
         </form>
-        <a class="login_bcg" href="forgot-password.shtml">Forgot your password?</a>
+        {!! link_to_route('login.forgot_password', 'Forgot your password?', array(), ['class' => 'login_bcg']) !!}
         <div class="fb">
           SIGN UP
         </div>

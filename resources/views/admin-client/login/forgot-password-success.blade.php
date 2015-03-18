@@ -9,7 +9,7 @@ footer{display: none;}
   <div class="container">
     <div class="col-md-4 col-md-offset-1" style="margin-top:80px;">
       <div class="form-style form-narrow">
-        <div class="title">Reset Password</div>
+        <div class="title">Forgot Password</div>
         <div class="form_content">
           <strong>Success!</strong> An email to reset your password has been sent to your email account. Please check your inbox or your spam folder for the email. Click on the password recovery link and follow the instructions on how to reset your password.
         </div>
