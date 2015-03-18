@@ -11,16 +11,10 @@
 |
 */
 
-//Routes::get('/', 'WelcomeController@index');
-//Routes::get('home', 'HomeController@index');
-//Route::controllers([
-//    'auth' => 'Auth\AuthController',
-//    'password' => 'Auth\PasswordController',
-//]);
-
 //TODO: Drill down routing into directory.
 
-Routes::get('/','DashboardController@index');
+include('Routes/Frontage/frontage.php');
+
 $router->resource('admin','AdminController');
 $router->resource('dashboard','DashboardController');
 $router->resource('student','StudentController');
@@ -43,7 +37,5 @@ Routes::group(['prefix' => 'api/v1'], function()
     //schools
     Routes::get('/schools','Api\v1\SchoolsController@schools');
     //
-
-
 
 });
