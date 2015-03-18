@@ -56,7 +56,7 @@ class StudentsLoginController extends StudentsController{
      */
     public function password(){
         //check email and password matched
-        $input = Input::only('id','image_name');
+        $input = Input::only('id','image_id');
 
         if(!$input){
 
@@ -66,7 +66,7 @@ class StudentsLoginController extends StudentsController{
 
             //TODO: get username id, and image password matched, return success/fail (boolean).
 
-            $response  = $this->student->checkAccess($input['id'],$input['image_name']);
+            $response  = $this->student->checkAccess($input['id'],$input['image_id']);
 
             return $this->respond($response);
 
