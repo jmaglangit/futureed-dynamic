@@ -3,12 +3,26 @@
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
+use FutureEd\Services\StudentServices;
+use FutureEd\Services\UserServices;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class ApiController extends Controller {
 
 	private $statusCode = 200;
+
+    public function __construct(UserServices $user, StudentServices $student){
+        $this->user = $user;
+        $this->student = $student;
+
+    }
+    public function index(){
+        return [
+            'name' => 'FutureEd API',
+            'version' => 1
+        ];
+    }
 
     /**
      * @return mixed
@@ -48,6 +62,17 @@ class ApiController extends Controller {
             ]
         );
     }
+
+    public function respondWithNoData(){
+        return $this->respond(
+            [
+                'status' => $this->getStatusCode(),
+                'data' => 'No Data'
+            ]
+        );
+    }
+
+
 
 
 

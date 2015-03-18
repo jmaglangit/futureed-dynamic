@@ -5,9 +5,9 @@
  * Date: 3/5/15
  * Time: 6:06 PM
  */
-namespace FutureEd\Models\Repository\Users;
+namespace FutureEd\Models\Repository\User;
 
-interface UsersRepositoryInterface {
+interface UserRepositoryInterface {
 
     public function getUsers();
 
@@ -22,6 +22,14 @@ interface UsersRepositoryInterface {
     public function checkUserName($username);
 
     public function checkEmail($email);
+
+    public function getLoginAttempts($id);
+
+    public function accountActivated($id);
+
+    public function accountLocked($id);
+
+    public function accountDeleted($id);
 
 
 }

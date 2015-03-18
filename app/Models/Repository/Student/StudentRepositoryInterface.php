@@ -19,4 +19,6 @@ interface StudentRepositoryInterface {
 
     public function deleteStudent($id);
 
+    public function getImagePassword($id);
+
 }

@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class Student extends Model {
+class Avatar extends Model {
 
 	//
 
