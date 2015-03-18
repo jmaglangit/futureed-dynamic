@@ -17,4 +17,16 @@ interface PasswordImageRepositoryInterface {
      */
     public function getImage($id);
 
+    /*
+     * @return image files
+     */
+    public function getImages();
+
+
+    /*
+     * @return image ids
+     */
+    public function getRandomImageId($count, $id);
+
+
 }
