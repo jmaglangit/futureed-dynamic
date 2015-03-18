@@ -56,16 +56,44 @@ class UserRepository implements UserRepositoryInterface{
     }
 
     public function checkUserName($username){
+
         //return user id
-        return User::select('id')
-            ->where('username','=',$username)->get();
+        return User::select('id')->where('username','=',$username)->get();
+
     }
 
     public function checkEmail($email){
-        //return user id
 
-        return User::select('id')
-            ->where('email','=',$email)->get();
+        //return user id
+        return User::select('id')->where('email','=',$email)->get();
+
     }
+
+    public function getLoginAttempts($id){
+
+        return User::select('login_attempt')->where('id','=',$id)->get();
+
+    }
+
+    public function accountActivated($id){
+
+        return User::select('is_account_activated')->where('id','=',$id)->get();
+
+    }
+
+    public function accountLocked($id){
+
+        return User::select('is_account_locked')->where('id','=',$id)->get();
+    }
+
+    public function accountDeleted($id){
+
+        return User::select('is_account_delete')->where('id','=',$id)->get();
+
+    }
+
+
+
+
 
 }

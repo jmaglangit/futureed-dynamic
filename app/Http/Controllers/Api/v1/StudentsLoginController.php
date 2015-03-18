@@ -10,6 +10,7 @@ class StudentsLoginController extends StudentsController{
 
     //check email or username if valid user
     public function login(){
+
             $input = Input::get('username');
 
             if(!$input){
@@ -17,8 +18,9 @@ class StudentsLoginController extends StudentsController{
                 return $this->respondNotFound();
 
             }else{
+
                 //check if email exist
-                $response = $this->users->checkLoginName($input);
+                $response = $this->user->checkLoginName($input);
 
                 return $this->respondSuccess($response);
 
@@ -32,18 +34,19 @@ class StudentsLoginController extends StudentsController{
      */
     public function imagePassword(){
 
-            $input = Input::get('id');
+        $input = Input::get('id');
 
-            if(!$input){
+        if(!$input){
 
-                return $this->respondNotFound();
+            return $this->respondNotFound();
 
-            } else {
+        } else {
 
-                //TODO: Get image password of student.
+            //TODO: Get image password of student.
+                $response = $this->student->getImagePassword($input);
 
-                return $this->respondSuccess();
-            }
+                return $this->respondSuccess($response);
+        }
 
     }
 
@@ -53,7 +56,7 @@ class StudentsLoginController extends StudentsController{
      */
     public function password(){
         //check email and password matched
-        $input = Input::get('id','image');
+        $input = Input::only('id','image_name');
 
         if(!$input){
 
@@ -62,7 +65,10 @@ class StudentsLoginController extends StudentsController{
         } else {
 
             //TODO: get username id, and image password matched, return success/fail (boolean).
-            return $this->respond($input);
+
+            $response  = $this->student->checkAccess($input['id'],$input['image_name']);
+
+            return $this->respond($response);
 
         }
 
@@ -74,21 +80,16 @@ class StudentsLoginController extends StudentsController{
      */
     public function resetPassword(){
 
-        try{
-            $input = Input::only('id','password');
-            //TODO: get user_id of student.
-            $status = 200;
-            $response = $input;
+        $input = Input::only('id','password');
+        if(!$input){
 
-        }catch(Exception $e){
-            $status = 400;
-            $response = $e->getMessage();
+            return $this->respondNotFound();
+
+        } else {
+
+            return $this->respond($input);
+
         }
-
-        return [
-            'status' => $status,
-            'response' => $response
-        ];
     }
 
     /*

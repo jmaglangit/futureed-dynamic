@@ -23,5 +23,7 @@ interface UserRepositoryInterface {
 
     public function checkEmail($email);
 
+    public function getLoginAttempts($id);
+
 
 }

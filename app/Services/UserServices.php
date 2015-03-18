@@ -43,7 +43,7 @@ class UserServices {
         return $this->users->deleteUser($id);
     }
 
-   public function checkLoginName($username){
+    public function checkLoginName($username){
 
        //filter if login is email or username
        if($this->validator->email($username)){
@@ -58,7 +58,24 @@ class UserServices {
 
        }
        return $return;
-   }
+    }
+
+    public function getLoginAttempts($id){
+
+        $attempts = $this->users->getLoginAttempts($id);
+
+        //Get login attempts of the account.
+        if($attempts >= 3){
+
+            return false;
+
+        } else {
+
+            return true;
+
+        }
+
+    }
 
 
 

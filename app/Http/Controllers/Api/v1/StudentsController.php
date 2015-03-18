@@ -3,14 +3,13 @@
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
-use FutureEd\Services\UserServices;
+use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
+use FutureEd\Services\StudentServices;
 use Illuminate\Http\Request;
 
 class StudentsController extends ApiController {
 
-    public function __construct(UserServices $users){
-        $this->users = $users;
-    }
+
 	/**
 	 * Display a listing of the resource.
 	 *

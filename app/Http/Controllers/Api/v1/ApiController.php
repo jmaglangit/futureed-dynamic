@@ -3,6 +3,8 @@
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
+use FutureEd\Services\StudentServices;
+use FutureEd\Services\UserServices;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -10,9 +12,14 @@ class ApiController extends Controller {
 
 	private $statusCode = 200;
 
+    public function __construct(UserServices $user, StudentServices $student){
+        $this->user = $user;
+        $this->student = $student;
+
+    }
     public function index(){
         return [
-            'name' => 'FutureEd Api',
+            'name' => 'FutureEd API',
             'version' => 1
         ];
     }

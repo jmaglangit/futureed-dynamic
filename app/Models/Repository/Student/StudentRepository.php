@@ -7,6 +7,8 @@
  */
 namespace FutureEd\Models\Repository\Student;
 
+use FutureEd\Models\Core\Student;
+
 class StudentRepository implements StudentRepositoryInterface{
 
     public function getStudents(){
@@ -28,4 +30,14 @@ class StudentRepository implements StudentRepositoryInterface{
     public function deleteStudent($id){
 
     }
+
+    public function getImagePassword($id){
+
+       $return =  Student::select('password_image_id')->where('user_id','=',$id)->get()->toArray();
+
+        return $return;
+
+    }
+
+
 }

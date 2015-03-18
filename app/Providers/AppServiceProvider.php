@@ -37,6 +37,19 @@ class AppServiceProvider extends ServiceProvider {
             'FutureEd\Models\Repository\Validator\ValidatorRepositoryInterface',
             'FutureEd\Models\Repository\Validator\ValidatorRepository'
         );
+        $this->app->bind(
+            'FutureEd\Models\Repository\PasswordImage\PasswordImageRepositoryInterface',
+            'FutureEd\Models\Repository\PasswordImage\PasswordImageRepository'
+        );
+        $this->app->bind(
+            'FutureEd\Models\Repository\Student\StudentRepositoryInterface',
+            'FutureEd\Models\Repository\Student\StudentRepository'
+        );
+        $this->app->bind(
+            'FutureEd\Models\Repository\Admin\AdminRepositoryInterface',
+            'FutureEd\Models\Repository\Admin\AdminRepository'
+        );
+
 
 	}
 
