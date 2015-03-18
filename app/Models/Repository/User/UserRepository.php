@@ -12,6 +12,8 @@ use FutureEd\Models\Core\User;
 
 class UserRepository implements UserRepositoryInterface{
 
+    //TODO: filter all query by user_type.
+
     public function getUsers(){
         return User::all();
     }
@@ -58,14 +60,14 @@ class UserRepository implements UserRepositoryInterface{
     public function checkUserName($username){
 
         //return user id
-        return User::select('id')->where('username','=',$username)->get();
+        return User::where('username','=',$username)->pluck('id');
 
     }
 
     public function checkEmail($email){
 
         //return user id
-        return User::select('id')->where('email','=',$email)->get();
+        return User::where('email','=',$email)->pluck('id');
 
     }
 
@@ -77,18 +79,18 @@ class UserRepository implements UserRepositoryInterface{
 
     public function accountActivated($id){
 
-        return User::select('is_account_activated')->where('id','=',$id)->get();
+        return User::where('id','=',$id)->pluck('is_account_activated');
 
     }
 
     public function accountLocked($id){
 
-        return User::select('is_account_locked')->where('id','=',$id)->get();
+        return User::where('id','=',$id)->pluck('is_account_locked');
     }
 
     public function accountDeleted($id){
 
-        return User::select('is_account_delete')->where('id','=',$id)->get();
+        return User::where('id','=',$id)->pluck('is_account_deleted');
 
     }
 

@@ -25,5 +25,11 @@ interface UserRepositoryInterface {
 
     public function getLoginAttempts($id);
 
+    public function accountActivated($id);
+
+    public function accountLocked($id);
+
+    public function accountDeleted($id);
+
 
 }

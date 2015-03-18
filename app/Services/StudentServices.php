@@ -58,11 +58,7 @@ class StudentServices {
         }
     }
 
-    public function checkLoginAttempts($id){
 
-        return true;
-
-    }
 
 
 }

@@ -29,8 +29,8 @@ class StudentsLoginController extends StudentsController{
 
     /*
      * image passwords
-     * param id
-     * response id, image password
+     * @param id
+     * @response id, image password
      */
     public function imagePassword(){
 

@@ -43,6 +43,7 @@ class UserServices {
         return $this->users->deleteUser($id);
     }
 
+    //@return user_id
     public function checkLoginName($username){
 
        //filter if login is email or username
@@ -51,13 +52,34 @@ class UserServices {
            //check email if exist return id
            $return = $this->users->checkEmail($username);
 
+            if(!is_null($return)){
+
+                return $this->checkUserEnabled($return);
+
+            } else {
+
+                return "Email does not exist";
+            }
+
        }elseif($this->validator->username($username)){
 
            //check username if exist return id
            $return = $this->users->checkUserName($username);
 
+           if(!is_null($return)){
+
+               return $this->checkUserEnabled($return);
+
+           } else {
+
+               return "Username does not exist";
+           }
+
+       } else{
+
+           return "Invalid";
+
        }
-       return $return;
     }
 
     public function getLoginAttempts($id){
@@ -74,6 +96,33 @@ class UserServices {
             return true;
 
         }
+
+    }
+
+    //check user if enable to login.
+    public function checkUserEnabled($id){
+
+        if($this->users->accountActivated($id) == 0 ){
+
+            //check if activated
+            return "Account DeActivated";
+
+        } elseif($this->users->accountLocked($id) == 1){
+
+            //check if locked
+            return "Account Locked";
+
+        } elseif($this->users->accountDeleted($id) == 1 ){
+
+            //check if delete
+            return "Account Deleted";
+
+        } else {
+
+            return true;
+        }
+
+
 
     }
 
