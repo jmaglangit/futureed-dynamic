@@ -1,5 +1,5 @@
 <?php
 /*
- * User Routes
+ * Users Routes
  *
  */
