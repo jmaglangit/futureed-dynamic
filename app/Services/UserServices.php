@@ -53,22 +53,34 @@ class UserServices {
            $return = $this->users->checkEmail($username);
 
             if(!is_null($return)){
+                $isDisabled = $this->checkUserDisabled($return);
 
-                return $this->checkUserEnabled($return);
+                if(!$isDisabled){
+                    return $return;
+                } else {
+                    return $isDisabled;
+                }
 
             } else {
 
                 return "Email does not exist";
             }
 
+
+
        }elseif($this->validator->username($username)){
 
            //check username if exist return id
            $return = $this->users->checkUserName($username);
 
-           if(!is_null($return)){
+           if(!is_null($return) ){
+               $isDisabled = $this->checkUserDisabled($return);
 
-               return $this->checkUserEnabled($return);
+               if(!$isDisabled){
+                    return $return;
+               } else {
+                   return $isDisabled;
+               }
 
            } else {
 
@@ -77,12 +89,24 @@ class UserServices {
 
        } else{
 
-           return "Invalid";
+           return "Invalid username";
 
        }
     }
 
-    public function getLoginAttempts($id){
+    public function addLoginAttempt($id){
+        $this->users->addLoginAttempt($id);
+    }
+
+    public function lockAccount($id){
+        $this->users->lockAccount($id);
+    }
+
+    public function resetLoginAttempt($id){
+        $this->users->resetLoginAttempt($id);
+    }
+
+    public function exceedLoginAttempts($id){
 
         $attempts = $this->users->getLoginAttempts($id);
 
@@ -96,16 +120,15 @@ class UserServices {
             return true;
 
         }
-
     }
 
     //check user if enable to login.
-    public function checkUserEnabled($id){
+    public function checkUserDisabled($id){
 
         if($this->users->accountActivated($id) == 0 ){
 
             //check if activated
-            return "Account DeActivated";
+            return "Account Inactive";
 
         } elseif($this->users->accountLocked($id) == 1){
 
@@ -119,7 +142,7 @@ class UserServices {
 
         } else {
 
-            return true;
+            return false;
         }
 
 
