@@ -20,7 +20,7 @@ body {/*background: radial-gradient(transparent 50%, rgba(0, 0, 0, 0.3) 100%), l
 .alert_top{margin: 0 20px;}
 
 /*----- FORM -----*/
-.form-narrow {/*margin: 30px auto;*/ width: 300px; height: 420px; background: #fff; padding: 0 30px; box-sizing: border-box; border-radius: 5px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); position: relative; overflow: hidden;}
+.form-narrow {/*margin: 30px auto;*/ width: 350px; height: 420px; background: #fff; padding: 0 30px; box-sizing: border-box; border-radius: 5px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); position: relative; overflow: hidden;}
 .form-wide {margin: 30px auto; width: 100%; background: #fff; padding: 0 30px; box-sizing: border-box; border-radius: 5px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); position: relative; overflow: hidden;}
 .form-style .title {padding-top: 40px; text-align: center; text-transform: uppercase; font-weight: 700; font-size: 18px; color: #8e8171;}
 .form-style form {margin-top: 30px; min-height: 255px;}
@@ -55,7 +55,7 @@ fieldset legend{color: #8e8171; font-size: 16px; text-transform: uppercase;}
 .block_bottom{background: #f8f3f0; box-shadow: 0 0 0 30px #f8f3f0; margin-top: 20px; display: inline-block; width: 100%;}
 
 /*----- REGISTRATION -----*/
-.register_users{margin-top: 30px; text-align: center;}
+.register_users{margin-top: 30px; margin-bottom: 30px; text-align: center;}
 .register_users img{cursor: pointer;}
 
 /*----- TABLE ----- */
