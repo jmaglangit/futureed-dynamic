@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration {
             $table->string('new_email',128);
             $table->string('password',128);
             $table->string('name',128);
-            $table->enum('user_type',['Admin','Client','Candidate']);
+            $table->enum('user_type',['Admin','Client','Student']);
             $table->tinyInteger('login_attempt');
             $table->tinyInteger('is_account_activated');
             $table->tinyInteger('is_account_locked');
