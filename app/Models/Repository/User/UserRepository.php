@@ -20,7 +20,13 @@ class UserRepository implements UserRepositoryInterface{
     }
 
     public function getUser($id){
-        return 0;
+        return User::where('id','=',$id)->get();
+    }
+
+    public function getUserByType($id,$type){
+        return User::where('id','=',$id)
+            ->where('user_type','=',$type)
+            ->get();
     }
 
     public function addUser($user){
@@ -132,6 +138,10 @@ class UserRepository implements UserRepositoryInterface{
         } catch (Exception $e){
             throw new Exception($e->getMessage());
         }
+    }
+
+    public function getEmail($id){
+        return User::where('id','=',$id)->pluck('email');
     }
 
 

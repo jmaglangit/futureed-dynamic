@@ -31,6 +31,11 @@ class UserServices {
         return $this->users->getUser($id);
     }
 
+    public function getUserByType($id,$type){
+        //get user by type.
+        return $this->users->getUserByType($id,$type);
+    }
+
     public function addUser($user){
         return $this->users->addUser($user);
     }
@@ -41,6 +46,10 @@ class UserServices {
 
     public function deleteUser($id){
         return $this->users->deleteUser($id);
+    }
+
+    public function getEmail($id){
+        return $this->users->getEmail($id);
     }
 
     //@return user_id
@@ -148,9 +157,8 @@ class UserServices {
             return false;
         }
 
-
-
     }
+
 
 
 

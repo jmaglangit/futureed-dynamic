@@ -13,6 +13,8 @@ interface UserRepositoryInterface {
 
     public function getUser($id);
 
+    public function getUserByType($id,$type);
+
     public function addUser($user);
 
     public function updateUser($user);
@@ -37,5 +39,6 @@ interface UserRepositoryInterface {
 
     public function lockAccount($id);
 
+    public function getEmail($id);
 
 }
