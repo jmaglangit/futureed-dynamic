@@ -25,6 +25,7 @@ class CreateTeachingContentsTable extends Migration {
             $table->string('content_url', 256);
             $table->bigInteger('media_type_code');
             $table->bigInteger('created_by');
+            $table->bigInteger('updated_by');
             $table->timestamp('deleted_at');
             $table->timestamps();
         });
