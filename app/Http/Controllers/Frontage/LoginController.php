@@ -46,7 +46,17 @@ class LoginController extends Controller {
 	{
 		return view('admin-client.login.registration');
 	}
-
+	
+	/**
+	 * Display registration success screen
+	 *
+	 * @return Response
+	 */
+	public function registration_success()
+	{
+		return view('admin-client.login.registration-success');
+	}
+	
 	/**
 	 * Display reset password screen
 	 *

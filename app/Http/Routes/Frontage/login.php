@@ -13,5 +13,6 @@
 	});
 	
 	Routes::get('/registration', 'Frontage\LoginController@registration');
+	Routes::get('/registration-success', 'Frontage\LoginController@registration_success');
 	
 ?>
