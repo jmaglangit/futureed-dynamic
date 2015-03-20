@@ -66,8 +66,6 @@ class UserServices {
                 return "Email does not exist";
             }
 
-
-
        }elseif($this->validator->username($username)){
 
            //check username if exist return id
@@ -92,6 +90,11 @@ class UserServices {
            return "Invalid username";
 
        }
+    }
+
+    public function forgotPassword($username){
+        $this->checkLoginName($username);
+
     }
 
     public function addLoginAttempt($id){
