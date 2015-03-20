@@ -19,8 +19,8 @@ class CreateAdminTable extends Migration {
             $table->string('last_name', 64);
             $table->enum('admin_role', ['Admin', 'Super Admin']);
             $table->enum('status', ['Enabled', 'Disabled']);
-            $table->bigInteger('created_by_id');
-            $table->bigInteger('updated_by_id');
+            $table->bigInteger('created_by');
+            $table->bigInteger('updated_by');
             $table->timestamp('deleted_at');
             $table->timestamps();
         });

@@ -8,6 +8,7 @@
 namespace FutureEd\Models\Repository\User;
 
 use FutureEd\Models\Core\User;
+use League\Flysystem\Exception;
 
 
 class UserRepository implements UserRepositoryInterface{
@@ -73,7 +74,7 @@ class UserRepository implements UserRepositoryInterface{
 
     public function getLoginAttempts($id){
 
-        return User::select('login_attempt')->where('id','=',$id)->get();
+        return User::where('id','=',$id)->pluck('login_attempt');
 
     }
 
@@ -94,6 +95,44 @@ class UserRepository implements UserRepositoryInterface{
 
     }
 
+    public function addLoginAttempt($id){
+        $attempt = $this->getLoginAttempts($id);
+
+        $attempt = $attempt + 1;
+        try{
+
+            $user = User::find($id);
+
+            $user->login_attempt = $attempt;
+
+            $user->save();
+
+        }catch (Exception $e){
+
+            throw new Exception ($e->getMessage());
+
+        }
+    }
+
+    public function resetLoginAttempt($id){
+        try{
+            $user = User::find($id);
+            $user->login_attempt = 0;
+            $user->save();
+        } catch (Exception $e){
+            throw new Exception ($e->getMessage());
+        }
+    }
+
+    public function lockAccount($id){
+        try{
+            $user = User::find($id);
+            $user->is_account_locked = 1;
+            $user->save();
+        } catch (Exception $e){
+            throw new Exception($e->getMessage());
+        }
+    }
 
 
 

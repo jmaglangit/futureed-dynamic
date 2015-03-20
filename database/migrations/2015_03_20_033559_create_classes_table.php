@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePasswordImagesTable extends Migration {
+class CreateClassesTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,10 +12,15 @@ class CreatePasswordImagesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('password_images', function(Blueprint $table) {
+		Schema::create('classes', function(Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 128);
-            $table->string('password_image_file', 256);
+            $table->bigInteger('order_no');
+            $table->bigInteger('name')->nullable();
+            $table->bigInteger('grade_code');
+            $table->bigInteger('client_id');
+            $table->smallInteger('seats_taken');
+            $table->smallInteger('seats_total');
+            $table->enum('status', ['Enabled', 'Disabled']);
             $table->bigInteger('created_by');
             $table->bigInteger('updated_by');
             $table->timestamp('deleted_at');
@@ -30,7 +35,7 @@ class CreatePasswordImagesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('password_images');
+		Schema::drop('classes');
 	}
 
 }

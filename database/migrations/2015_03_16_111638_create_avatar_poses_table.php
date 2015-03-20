@@ -15,13 +15,12 @@ class CreateAvatarPosesTable extends Migration {
 		Schema::create('avatar_poses', function(Blueprint $table) {
             $table->increments('id');
             $table->bigInteger('avatar_code');
-            $table->bigInteger('avatar_code');
             $table->bigInteger('code')->nullable();
             $table->string('name', 128)->nullable();
             $table->string('pose_image', 256);
             $table->string('description', 256);
-            $table->bigInteger('created_by_id');
-            $table->bigInteger('updated_by_id');
+            $table->bigInteger('created_by');
+            $table->bigInteger('updated_by');
             $table->timestamp('delete_at');
             $table->timestamps();
         });

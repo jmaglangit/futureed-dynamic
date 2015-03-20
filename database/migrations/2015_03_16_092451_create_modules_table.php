@@ -16,7 +16,7 @@ class CreateModulesTable extends Migration {
             $table->increments('id');
             $table->bigInteger('subject_code');
             $table->bigInteger('area_code');
-            $table->bigInteger('level_code');
+            $table->bigInteger('grade_code');
             $table->bigInteger('code')->nullable();
             $table->string('name', 128)->nullable();
             $table->string('description', 256);
@@ -25,8 +25,8 @@ class CreateModulesTable extends Migration {
             $table->integer('points_to_unlock');
             $table->integer('points_to_finish');
             $table->enum('status', ['Enabled', 'Disabled']);
-            $table->bogInteger('created_by_Id');
-            $table->bigInteger('updated_by_id');
+            $table->bigInteger('created_by');
+            $table->bigInteger('updated_by');
             $table->timestamp('deleted_at');
             $table->timestamps();
         });

@@ -19,8 +19,8 @@ class CreateAvatarsTable extends Migration {
             $table->string('avatar_image', 256);
             $table->integer('points_to_unlock');
             $table->string('description', 256);
-            $table->bigInteger('created_by_id');
-            $table->bigInteger('updated_by_id');
+            $table->bigInteger('created_by');
+            $table->bigInteger('updated_by');
             $table->timestamp('deleted_at');
             $table->timestamps();
         });

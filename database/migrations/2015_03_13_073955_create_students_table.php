@@ -22,13 +22,13 @@ class CreateStudentsTable extends Migration {
             $table->bigInteger('avatar_id');
             $table->tinyInteger('password_image_id');
             $table->bigInteger('school_code');
-            $table->bigInteger('level_code');
+            $table->bigInteger('grade_code');
             $table->integer('points');
             $table->bigInteger('point_level_id')->nullable();
             $table->bigInteger('learning_style_id');
             $table->enum('status', ['Enabled', 'Disabled']);
-            $table->bigInteger('created_by_id');
-            $table->bigInteger('updated_by_id');
+            $table->bigInteger('created_by');
+            $table->bigInteger('updated_by');
             $table->timestamp('deleted_at');
             $table->timestamps();
         });

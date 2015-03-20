@@ -16,7 +16,7 @@ class CreateTeachingContentsTable extends Migration {
             $table->increments('id');
             $table->bigInteger('module_code');
             $table->bigInteger('subject_code');
-            $table->bigInteger('level_code');
+            $table->bigInteger('grade_code');
             $table->bigInteger('area_code');
             $table->bigInteger('code')->nullable();
             $table->string('teaching_module', 64);
@@ -24,7 +24,8 @@ class CreateTeachingContentsTable extends Migration {
             $table->bigInteger('learning_style_code')->nullable();
             $table->string('content_url', 256);
             $table->bigInteger('media_type_code');
-            $table->bigInteger('created_by_id');
+            $table->bigInteger('created_by');
+            $table->bigInteger('updated_by');
             $table->timestamp('deleted_at');
             $table->timestamps();
         });

@@ -11,16 +11,17 @@ class StudentsLoginController extends StudentsController{
     //check email or username if valid user
     public function login(){
 
-            $input = Input::get('username');
+            $input = Input::only('username');
 
-            if(!$input){
+            if(!$input['username']){
 
                 return $this->respondNotFound();
 
             }else{
 
-                //check if email exist
-                $response = $this->user->checkLoginName($input);
+                //check if username exist, return id else nothing
+                $response = $this->user->checkLoginName($input['username']);
+
 
                 return $this->respondSuccess($response);
 
@@ -34,16 +35,16 @@ class StudentsLoginController extends StudentsController{
      */
     public function imagePassword(){
 
-        $input = Input::get('id');
+        $input = Input::only('id');
 
-        if(!$input){
+        if(!$input['id']){
 
             return $this->respondNotFound();
 
         } else {
 
             //TODO: Get image password of student.
-                $response = $this->student->getImagePassword($input);
+                $response = $this->student->getImagePassword($input['id']);
 
                 return $this->respondSuccess($response);
         }
@@ -58,15 +59,21 @@ class StudentsLoginController extends StudentsController{
         //check email and password matched
         $input = Input::only('id','image_id');
 
-        if(!$input){
+        if(!$input['id'] && !$input['image_id']){
 
             return $this->respondNotFound();
 
         } else {
 
-            //TODO: get username id, and image password matched, return success/fail (boolean).
+            // get username id, and image password matched, return success/fail (boolean).
+            // check login attempts
+            $isDisabled = $this->user->checkUserDisabled($input['id']);
+            if($isDisabled){
+                $response = $isDisabled;
+            } else {
+                $response  = $this->student->checkAccess($input['id'],$input['image_id']);
+            }
 
-            $response  = $this->student->checkAccess($input['id'],$input['image_id']);
 
             return $this->respond($response);
 
@@ -81,12 +88,12 @@ class StudentsLoginController extends StudentsController{
     public function resetPassword(){
 
         $input = Input::only('id','password');
-        if(!$input){
+        if(!$input['id'] && !$input['password']){
 
             return $this->respondNotFound();
 
         } else {
-
+//            dd($input);
             return $this->respond($input);
 
         }
@@ -97,9 +104,23 @@ class StudentsLoginController extends StudentsController{
      * response success/fail(doesn't exist)
      */
     public function forgotPassword(){
-        //TODO: check email, send email under student
+        //TODO: check username is exist, send email under student
         $input = Input::only('username');
-        return $input;
+
+        if(!$input['username']){
+
+            return $this->respondNotFound();
+
+        } else {
+
+            $response = $this->user->checkLoginName($input['username']);
+
+            //Email user with token.
+            //
+
+            return $this->respondSuccess($response);
+        }
+
     }
 
 

@@ -20,8 +20,8 @@ class CreateAvatarWikisTable extends Migration {
             $table->string('description', 256);
             $table->string('source', 256);
             $table->string('event', 128);
-            $table->bigInteger('created_by_id');
-            $table->bigInteger('updated_by_id');
+            $table->bigInteger('created_by');
+            $table->bigInteger('updated_by');
             $table->timestamp('deleted_at');
             $table->timestamps();
         });

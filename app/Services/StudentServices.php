@@ -11,12 +11,17 @@ namespace FutureEd\Services;
 
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use FutureEd\Models\Repository\PasswordImage\PasswordImageRepositoryInterface;
+use FutureEd\Models\Repository\User\UserRepositoryInterface;
 
 class StudentServices {
 
-    public function __construct(StudentRepositoryInterface $student, PasswordImageServices $password){
+    public function __construct(
+            StudentRepositoryInterface $student,
+            PasswordImageServices $password,
+            UserServices $user){
         $this->student = $student;
         $this->password = $password;
+        $this->user = $user;
     }
 
     public function getStudents(){
@@ -51,13 +56,26 @@ class StudentServices {
     }
 
     public function checkAccess($id,$image_id){
-        $password_image = $this->student->getImagePassword($id);
+        $isDisabled =  $this->user->checkUserDisabled($id);
+//        dd($isDisabled);
+        if(!$isDisabled){
+            $password_image = $this->student->getImagePassword($id);
 
-        if($image_id == $password_image){
-            return true;
+            if($image_id == $password_image){
+                $this->user->resetLoginAttempt($id);
+                return true;
+            } else {
+                $this->user->addLoginAttempt($id);
+                if(!$this->user->exceedLoginAttempts($id)){
+                    $this->user->lockAccount($id);
+                    return $this->user->checkUserDisabled($id);
+                }
+                return "does not match";
+            }
         } else {
-            return false;
+            return $isDisabled;
         }
+
     }
 
 }

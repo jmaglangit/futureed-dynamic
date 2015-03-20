@@ -19,9 +19,9 @@ class CreateAnswerExplanationsTable extends Migration {
             $table->bigInteger('answer_code');
             $table->bigInteger('learning_style_code')->nullable();
             $table->bigInteger('seq_no');
-            $table->text('answer_eplanation');
-            $table->bigInteger('created_by_id');
-            $table->bigInteger('updated_by_id');
+            $table->text('answer_explanation');
+            $table->bigInteger('created_by');
+            $table->bigInteger('updated_by');
             $table->timestamp('deleted_at');
             $table->timestamps();
         });

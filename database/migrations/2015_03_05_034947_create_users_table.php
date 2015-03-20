@@ -32,8 +32,8 @@ class CreateUsersTable extends Migration {
             $table->Timestamp('activated_at')->nullable();
             $table->string('timezone',64);
             $table->enum('status',['Enabled','Disabled']);
-            $table->bigInteger('created_by_id');
-            $table->bigInteger('updated_by_id');
+            $table->bigInteger('created_by');
+            $table->bigInteger('updated_by');
 			$table->timestamps();
             $table->softDeletes();
 		});

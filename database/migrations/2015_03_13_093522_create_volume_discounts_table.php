@@ -17,8 +17,8 @@ class CreateVolumeDiscountsTable extends Migration {
             $table->smallInteger('min_seats');
             $table->smallInteger('percentage');
             $table->enum('status', ['Enabled', 'Disabled']);
-            $table->bigInteger('created_by_id');
-            $table->bigInteger('updated_by_id');
+            $table->bigInteger('created_by');
+            $table->bigInteger('updated_by');
             $table->timestamp('deleted_at');
             $table->timestamps();
         });
