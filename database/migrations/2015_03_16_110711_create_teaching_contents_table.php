@@ -16,7 +16,7 @@ class CreateTeachingContentsTable extends Migration {
             $table->increments('id');
             $table->bigInteger('module_code');
             $table->bigInteger('subject_code');
-            $table->bigInteger('level_code');
+            $table->bigInteger('grade_code');
             $table->bigInteger('area_code');
             $table->bigInteger('code')->nullable();
             $table->string('teaching_module', 64);

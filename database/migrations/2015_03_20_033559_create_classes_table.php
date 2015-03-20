@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateModulesTable extends Migration {
+class CreateClassesTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,18 +12,14 @@ class CreateModulesTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('modules', function(Blueprint $table) {
+		Schema::create('classes', function(Blueprint $table) {
             $table->increments('id');
-            $table->bigInteger('subject_code');
-            $table->bigInteger('area_code');
+            $table->bigInteger('order_no');
+            $table->bigInteger('name')->nullable();
             $table->bigInteger('grade_code');
-            $table->bigInteger('code')->nullable();
-            $table->string('name', 128)->nullable();
-            $table->string('description', 256);
-            $table->string('common_core_area', 256);
-            $table->string('common_core_url', 256);
-            $table->integer('points_to_unlock');
-            $table->integer('points_to_finish');
+            $table->bigInteger('client_id');
+            $table->smallInteger('seats_taken');
+            $table->smallInteger('seats_total');
             $table->enum('status', ['Enabled', 'Disabled']);
             $table->bigInteger('created_by');
             $table->bigInteger('updated_by');
@@ -39,7 +35,7 @@ class CreateModulesTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('modules');
+		Schema::drop('classes');
 	}
 
 }

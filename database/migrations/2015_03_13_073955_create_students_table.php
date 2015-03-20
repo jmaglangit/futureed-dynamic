@@ -22,7 +22,7 @@ class CreateStudentsTable extends Migration {
             $table->bigInteger('avatar_id');
             $table->tinyInteger('password_image_id');
             $table->bigInteger('school_code');
-            $table->bigInteger('level_code');
+            $table->bigInteger('grade_code');
             $table->integer('points');
             $table->bigInteger('point_level_id')->nullable();
             $table->bigInteger('learning_style_id');
