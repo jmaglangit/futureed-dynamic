@@ -27,8 +27,8 @@ class CreateStudentsTable extends Migration {
             $table->bigInteger('point_level_id')->nullable();
             $table->bigInteger('learning_style_id');
             $table->enum('status', ['Enabled', 'Disabled']);
-            $table->bigInteger('created_by_id');
-            $table->bigInteger('updated_by_id');
+            $table->bigInteger('created_by');
+            $table->bigInteger('updated_by');
             $table->timestamp('deleted_at');
             $table->timestamps();
         });

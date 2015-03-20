@@ -25,8 +25,8 @@ class CreateModulesTable extends Migration {
             $table->integer('points_to_unlock');
             $table->integer('points_to_finish');
             $table->enum('status', ['Enabled', 'Disabled']);
-            $table->bigInteger('created_by_Id');
-            $table->bigInteger('updated_by_id');
+            $table->bigInteger('created_by');
+            $table->bigInteger('updated_by');
             $table->timestamp('deleted_at');
             $table->timestamps();
         });

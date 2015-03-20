@@ -16,8 +16,8 @@ class CreateStudentBadgesTable extends Migration {
             $table->increments('id');
             $table->bigInteger('student_id');
             $table->bigInteger('badge_id');
-            $table->bigInteger('created_by_id');
-            $table->bigInteger('updated_by_id');
+            $table->bigInteger('created_by');
+            $table->bigInteger('updated_by');
             $table->timestamp('delete_at');
             $table->timestamps();
         });

@@ -10,6 +10,7 @@ namespace FutureEd\Services;
 
 
 use Illuminate\Mail\Mailer;
+use League\Flysystem\Exception;
 
 class MailServices {
 
@@ -17,16 +18,17 @@ class MailServices {
         $this->mailer = $mailer;
     }
 
-    public function sendMail(
-        $recipient,
-        $subject,
-        $description,
-        $links
-    ){
+    //
+    public function sendMail($data){
+        try{
+
+        } catch(Exception $e){
+            throw new Exception ($e->getMessage());
+        }
 
     }
 
-    public function sendStudentMail(){
+    public function sendStudentMail($id){
 
     }
 

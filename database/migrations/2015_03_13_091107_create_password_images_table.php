@@ -16,8 +16,8 @@ class CreatePasswordImagesTable extends Migration {
             $table->increments('id');
             $table->string('name', 128);
             $table->string('password_image_file', 256);
-            $table->bigInteger('created_by_id');
-            $table->bigInteger('updated_by_id');
+            $table->bigInteger('created_by');
+            $table->bigInteger('updated_by');
             $table->timestamp('deleted_at');
             $table->timestamps();
         });

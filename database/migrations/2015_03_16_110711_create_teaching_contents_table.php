@@ -24,7 +24,7 @@ class CreateTeachingContentsTable extends Migration {
             $table->bigInteger('learning_style_code')->nullable();
             $table->string('content_url', 256);
             $table->bigInteger('media_type_code');
-            $table->bigInteger('created_by_id');
+            $table->bigInteger('created_by');
             $table->timestamp('deleted_at');
             $table->timestamps();
         });

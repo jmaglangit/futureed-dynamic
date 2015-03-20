@@ -27,8 +27,8 @@ class CreateCountriesTable extends Migration {
             $table->string('region_code', 4);
             $table->string('sub_region_code', 4);
             $table->tinyInteger('eea');
-            $table->bigInteger('created_by_id');
-            $table->bigInteger('updated_by_id');
+            $table->bigInteger('created_by');
+            $table->bigInteger('updated_by');
             $table->timestamps();
         });
 	}

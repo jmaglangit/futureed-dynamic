@@ -26,8 +26,8 @@ class CreateClientTable extends Migration {
             $table->integer('zip')->nullable();
             $table->tinyInteger('is_account_reviewed');
             $table->enum('status', ['Enabled', 'Disabled']);
-            $table->bigInteger('created_by_id');
-            $table->bigInteger('updated_by_id');
+            $table->bigInteger('created_by');
+            $table->bigInteger('updated_by');
             $table->timestamp('deleted_at');
             $table->timestamps();
         });

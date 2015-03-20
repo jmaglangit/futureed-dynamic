@@ -17,8 +17,8 @@ class CreateMediaTypesTable extends Migration {
             $table->bigInteger('code')->nullable();
             $table->string('name', 128)->nullable();
             $table->string('description', 256);
-            $table->bigInteger('created_by_id');
-            $table->bigInteger('updated_by_id');
+            $table->bigInteger('created_by');
+            $table->bigInteger('updated_by');
             $table->timestamp('deleted_at');
             $table->timestamps();
         });

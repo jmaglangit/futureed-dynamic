@@ -21,8 +21,8 @@ class CreateQuestionAnswersTable extends Migration {
             $table->string('answer_image', 256);
             $table->tinyInteger('correct_flag');
             $table->integer('point_equivalent');
-            $table->bigInteger('created_by_id');
-            $table->bigInteger('updated_by_id');
+            $table->bigInteger('created_by');
+            $table->bigInteger('updated_by');
             $table->timestamp('delete_at');
             $table->timestamps();
         });

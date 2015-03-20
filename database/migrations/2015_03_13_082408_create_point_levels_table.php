@@ -17,8 +17,8 @@ class CreatePointLevelsTable extends Migration {
             $table->string('name', 128);
             $table->integer('points_required');
             $table->string('description', 256);
-            $table->bigInteger('created_by_id');
-            $table->bigInteger('updated_by_id');
+            $table->bigInteger('created_by');
+            $table->bigInteger('updated_by');
             $table->timestamp('deleted_at');
             $table->timestamps();
         });

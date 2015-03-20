@@ -93,7 +93,7 @@ class StudentsLoginController extends StudentsController{
             return $this->respondNotFound();
 
         } else {
-            dd($input);
+//            dd($input);
             return $this->respond($input);
 
         }
