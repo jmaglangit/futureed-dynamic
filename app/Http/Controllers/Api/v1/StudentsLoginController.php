@@ -107,6 +107,8 @@ class StudentsLoginController extends StudentsController{
         //TODO: check username is exist, send email under student
         $input = Input::only('username');
 
+        $this->mail->sendMail();
+
         if(!$input['username']){
 
             return $this->respondNotFound();

@@ -1,6 +1,13 @@
-@section('content')
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+<h2>Password Reset</h2>
 
-    <div><a>Link here<a/></div>
-
-
-@stop
+<div>
+    <div>This is it pancit </div>
+</div>
+</body>
+</html>
