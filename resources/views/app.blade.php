@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en"><head>
+<html lang="en" ng-app="futureed">
+<head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,7 +16,7 @@
   <!--[if IE 6]><link rel="stylesheet" type="text/css" media="all" href="https://www.formstack.com/forms/css/3/ie6fixes.css" /><![endif]-->
 
   <!-- Bootstrap core CSS -->
-  <link href="/css/bootstrap.css" rel="stylesheet">
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
   <!-- Fonts -->
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
   <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
@@ -99,8 +100,12 @@
 
   <!-- START SCRIPTS -->
   <script src="/js/jquery.js"></script>
-  <script src="/js/angular.js"></script>
-  <script src="/js/bootstrap.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular-resource.min.js"></script>
+  <script src="/js/futureed.js"></script>
+  <script src="/js/futureed_controllers.js"></script>
+  <script src="/js/futureed_services.js"></script>
   <script src="/js/jquery.smooth-scroll.js"></script>
   <script>
     $('a').smoothScroll();  
