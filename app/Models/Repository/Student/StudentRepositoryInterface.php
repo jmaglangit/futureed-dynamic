@@ -21,4 +21,6 @@ interface StudentRepositoryInterface {
 
     public function getImagePassword($id);
 
+
+
 }

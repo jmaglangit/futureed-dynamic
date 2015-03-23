@@ -18,7 +18,7 @@ class CreatePasswordImagesTable extends Migration {
             $table->string('password_image_file', 256);
             $table->bigInteger('created_by');
             $table->bigInteger('updated_by');
-            $table->timestamp('deleted_at');
+            $table->softDeletes()->nullable();
             $table->timestamps();
         });
 	}

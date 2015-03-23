@@ -34,7 +34,13 @@ class StudentServices {
     }
 
     public function addStudent($student){
-        $this->student->addStudent($student);
+
+        //user login
+        //check user if exist else add as user.
+
+        //student details
+
+
     }
 
     public function updateStudent($student){
@@ -75,7 +81,8 @@ class StudentServices {
         } else {
             return $isDisabled;
         }
-
     }
+
+
 
 }

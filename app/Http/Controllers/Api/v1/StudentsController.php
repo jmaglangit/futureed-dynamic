@@ -28,6 +28,9 @@ class StudentsController extends ApiController {
 	public function create()
 	{
 		//
+        $input = \Inbox::get();
+
+        return $input;
 	}
 
 	/**
