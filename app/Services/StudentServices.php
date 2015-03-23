@@ -35,22 +35,11 @@ class StudentServices {
 
     public function addStudent($student){
 
-        //$this->student->addStudent($student);
-        //validate entries
-        ///username
-        ///email
-        ///password
-        //user_type
-        //user_id
-        //first_name
-        //last_name
-        //gender
-        //avatar_id
-        //password_image_id
-        //school_code
-        //grade_code
-        //learning_style_id
-        //status
+        //user login
+        //check user if exist else add as user.
+
+        //student details
+
 
     }
 

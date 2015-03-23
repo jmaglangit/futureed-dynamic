@@ -72,7 +72,10 @@ class UserServices {
 
             } else {
 
-                return "Email does not exist";
+                return [
+                    'status' => 204,
+                    'message' => 'Email does not Exist'
+                ];
             }
 
        }elseif($this->validator->username($username)){
@@ -91,13 +94,18 @@ class UserServices {
 
            } else {
 
-               return "Username does not exist";
+               return [
+                   'status' => 204,
+                   'message' => "Username does not exist"
+               ];
            }
 
        } else{
 
-           return "Invalid username";
-
+           return [
+               'status' => 204,
+               'message' => "Invalid Username"
+           ];
        }
     }
 

@@ -22,6 +22,19 @@ class StudentRepository implements StudentRepositoryInterface{
 
     public function addStudent($student){
         try {
+//            user_id
+//            first_name
+//            last_name
+//            gender
+//            birth_date
+//            avatar_id
+//            password_image_id
+//            school_code
+//            grade_code
+//            points
+//            point_level_id
+//            learning_style_id
+//            status
             \DB::table('students')->insert([
                 [
 
