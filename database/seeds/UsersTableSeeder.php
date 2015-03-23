@@ -11,7 +11,7 @@ class UsersTableSeeder extends Seeder {
 
     public function run()
     {
-        // TestDummy::times(20)->create('App\Post');
+
         \DB::table('users')->delete();
         \DB::table('users')->insert(
        [
