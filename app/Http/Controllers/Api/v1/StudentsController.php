@@ -30,8 +30,7 @@ class StudentsController extends ApiController {
 		//
         $input = \Inbox::get();
 
-        dd($input);
-
+        return $input;
 	}
 
 	/**
