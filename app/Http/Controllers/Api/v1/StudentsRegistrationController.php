@@ -48,9 +48,18 @@ class StudentsRegistrationController extends StudentsController {
      */
 
     public function add(){
-        $input = Input::all();
+        $input = Input::only(
+                'username',
+                'email',
+                'first_name',
+                'last_name',
+                'gender',
+                'birthday',
+                'school_code',
+                'grade_code');
 
-        //check validations on the inputted file.
+        //validate
+
 
 
 

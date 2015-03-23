@@ -140,6 +140,7 @@ return [
          * Added Providers
          */
         'Laracasts\Generators\GeneratorsServiceProvider',
+        'Way\Generators\GeneratorServiceProvider',
 
 		/*
 		 * Project Specific Service Providers...
