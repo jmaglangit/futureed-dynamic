@@ -11,6 +11,7 @@
 
 class ValidatorRepository implements ValidatorRepositoryInterface{
 
+    //email validations
     public function email($email){
         if(!filter_var($email,FILTER_VALIDATE_EMAIL)){
             return false;
@@ -20,8 +21,33 @@ class ValidatorRepository implements ValidatorRepositoryInterface{
     }
 
     public function username($username){
-        return 1;
+        return 0;
     }
+
+    public function firstName($firstName){
+
+    }
+
+    public function lastName($lastName){
+
+    }
+
+    public function gender($gender){
+
+    }
+
+    public function birthday($birthday){
+
+    }
+
+
+
+
+
+
+
+
+
 
 
 }

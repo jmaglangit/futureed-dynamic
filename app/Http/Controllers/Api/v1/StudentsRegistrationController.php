@@ -48,19 +48,22 @@ class StudentsRegistrationController extends StudentsController {
      */
 
     public function add(){
-        try{
-            $input = Input::all();
-            $status = 200;
-            $response = $input;
-        }catch(Exception $e){
-            $status = 200;
-            $response = $e->getMessage();
+        $input = Input::only(
+                'username',
+                'email',
+                'first_name',
+                'last_name',
+                'gender',
+                'birthday',
+                'school_code',
+                'grade_code');
 
-        }
-        return [
-            'status' => $status,
-            'response' => $response
-        ];
+        //validate
+
+
+
+
+        return $input;
     }
 
 }

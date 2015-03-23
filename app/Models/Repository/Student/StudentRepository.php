@@ -8,6 +8,7 @@
 namespace FutureEd\Models\Repository\Student;
 
 use FutureEd\Models\Core\Student;
+use League\Flysystem\Exception;
 
 class StudentRepository implements StudentRepositoryInterface{
 
@@ -20,6 +21,16 @@ class StudentRepository implements StudentRepositoryInterface{
     }
 
     public function addStudent($student){
+        try {
+            \DB::table('students')->insert([
+                [
+
+                ]
+            ]);
+
+        } catch (Exception $e){
+            throw new Exception ($e->getMessage());
+        }
 
     }
 

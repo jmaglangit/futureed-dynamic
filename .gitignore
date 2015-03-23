@@ -6,3 +6,4 @@
 .env.*.php
 .env.php
 .idea
+composer.lock
