@@ -2,13 +2,26 @@
 
 @section('content')
 <style>
-body {background: url("images/bcg_bookapple.jpg") no-repeat scroll right bottom / cover;}
+body {background: url("images/bcg_triangle.svg") no-repeat scroll right bottom / cover;}
 footer{display: none;}
 </style>
 
   <div class="container">
     <div class="col-md-4 col-md-offset-1" style="margin-top:80px;">
       <div class="form-style form-narrow">
+      	<!-- ERROR -->
+      	<div style="display:none;">
+	      	<div class="title">Account Locked</div>
+	        <div class="form_content">
+	          <div style="width:120px; margin:0 auto 30px;">
+	          <i class="fa fa-lock fa-5x img-rounded text-center" style="background:#e8e8e8; border-radius:200px; padding:20px; width:120px;"></i>
+	          </div>
+	
+	          <p>Your account has been locked due to maximum attempt of invalid login.</p>
+	          <p>Please <a href="#">click here</a> to redirect you to the steps to reset your password.</p>
+	        </div>
+      	</div>
+		<!--// ERROR -->
         <div class="title">Login to your account</div>
         {!! Form::open() !!}
           <!-- <span>Email or Username</span> -->
