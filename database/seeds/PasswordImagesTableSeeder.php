@@ -14,7 +14,7 @@ class PasswordImagesTableSeeder extends Seeder {
         \DB::table('password_images')->insert([
             [
                 'name' => 'icecream',
-                'password_image_file' => 'icecream,png',
+                'password_image_file' => 'icecream.png',
                 'created_by' => 1,
                 'updated_by' => 1,
                 'created_at' => date("Y-m-d H:i:s"),

@@ -32,5 +32,11 @@ class PasswordImageRepository implements PasswordImageRepositoryInterface{
                 ->where('id','<>', $id)->get()->random($count);
     }
 
+    public function getRandomImage($count = 1){
+
+        return PasswordImage::get()->random($count);
+
+    }
+
 
 }
