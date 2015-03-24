@@ -64,19 +64,19 @@ class UserRepository implements UserRepositoryInterface{
         return 0;
     }
 
-    public function checkUserName($username,$userType){
+    public function checkUserName($username,$user_type){
 
         //return user id
         return User::where('username','=',$username)
-            ->where('user_type','=',$userType)->pluck('id');
+            ->where('user_type','=',$user_type)->pluck('id');
 
     }
 
-    public function checkEmail($email,$userType){
+    public function checkEmail($email,$user_type){
 
         //return user id
         return User::where('email','=',$email)
-            ->where('user_type','=',$userType)->pluck('id');
+            ->where('user_type','=',$user_type)->pluck('id');
 
     }
 

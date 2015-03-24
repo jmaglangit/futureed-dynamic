@@ -25,8 +25,8 @@ class PasswordImageServices {
 
     public function getMixImage($id){
 
-        $dimension = \Config::get('futureed.imagePasswordCount');
-        $imageFolders = \Config::get('futureed.imagePasswordFolder');
+        $dimension = \Config::get('futureed.image_password_count');
+        $image_folders = \Config::get('futureed.image_password_folder');
 
         //get images
 
@@ -36,12 +36,12 @@ class PasswordImageServices {
 
         $password_image = $this->password->getImage($id)->toArray();
 
-        $password_image[0]['password_image_file'] = url() . '/' . $imageFolders . '/'
+        $password_image[0]['password_image_file'] = url() . '/' . $image_folders . '/'
             . $password_image[0]['password_image_file'];
 
         foreach($image_ids as $k => $r){
 
-            $r['password_image_file'] = url() . '/' . $imageFolders . '/' . $r['password_image_file'];
+            $r['password_image_file'] = url() . '/' . $image_folders . '/' . $r['password_image_file'];
         }
 
         $merged = array_merge($image_ids, $password_image);
@@ -55,21 +55,21 @@ class PasswordImageServices {
      */
     public function getNewPasswordImages(){
 
-        $dimension = \Config::get('futureed.imagePasswordCount');
-        $imageFolders = \Config::get('futureed.imagePasswordFolder');
+        $dimension = \Config::get('futureed.image_password_count');
+        $image_folders = \Config::get('futureed.image_password_folder');
 
         $dimension *= $dimension;
 
-        $passwordImages = $this->password->getRandomImage($dimension);
+        $password_images = $this->password->getRandomImage($dimension);
 
-        foreach($passwordImages as $k => $r){
+        foreach($password_images as $k => $r){
 
-            $r['password_image_file'] = url() . '/' . $imageFolders . '/' . $r['password_image_file'];
+            $r['password_image_file'] = url() . '/' . $image_folders . '/' . $r['password_image_file'];
         }
 
         return [
             'status' => 200,
-            'data' => $passwordImages
+            'data' => $password_images
         ];
 
     }
