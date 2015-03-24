@@ -26,11 +26,11 @@ class ValidatorRepository implements ValidatorRepositoryInterface{
        return 1;
     }
 
-    public function firstName($firstName){
+    public function firstName($first_name){
 
     }
 
-    public function lastName($lastName){
+    public function lastName($last_name){
 
     }
 

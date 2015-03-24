@@ -21,7 +21,7 @@ class CreateAvatarsTable extends Migration {
             $table->string('description', 256);
             $table->bigInteger('created_by');
             $table->bigInteger('updated_by');
-            $table->timestamp('deleted_at');
+            $table->softDeletes()->nullable();
             $table->timestamps();
         });
 	}

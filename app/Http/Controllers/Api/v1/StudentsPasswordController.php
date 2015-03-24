@@ -12,7 +12,7 @@ class StudentsPasswordController extends StudentsController {
     public function getPasswordImages(){
 
         //get images
-        $response = $this->passwordImage->getNewPasswordImages();
+        $response = $this->password_image->getNewPasswordImages();
         return $this->setStatusCode($response['status'])->respondWithData($response['data']);
     }
 

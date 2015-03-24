@@ -20,7 +20,7 @@ class CreateLevelsTable extends Migration {
             $table->enum('status', ['Enabled', 'Diabled']);
             $table->bigInteger('created_by');
             $table->bigInteger('updated_by');
-            $table->timestamp('deleted_at');
+            $table->softDeletes()->nullable();
             $table->timestamps();
         });
 	}

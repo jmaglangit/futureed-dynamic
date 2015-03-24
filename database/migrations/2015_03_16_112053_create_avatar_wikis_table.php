@@ -22,7 +22,7 @@ class CreateAvatarWikisTable extends Migration {
             $table->string('event', 128);
             $table->bigInteger('created_by');
             $table->bigInteger('updated_by');
-            $table->timestamp('deleted_at');
+            $table->softDeletes()->nullable();
             $table->timestamps();
         });
 	}

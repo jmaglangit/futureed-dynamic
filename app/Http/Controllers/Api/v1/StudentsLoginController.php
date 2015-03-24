@@ -43,7 +43,7 @@ class StudentsLoginController extends StudentsController{
         } else {
 
             //TODO: Get image password of student.
-//                $this->user->checkUserId($input['user_id']);
+
                 $response = $this->student->getImagePassword($input['user_id']);
 
                 return $this->setStatusCode($response['status'])->respondWithData($response['data']);
@@ -67,9 +67,9 @@ class StudentsLoginController extends StudentsController{
 
             // get username id, and image password matched, return success/fail (boolean).
             // check login attempts
-            $isDisabled = $this->user->checkUserDisabled($input['user_id']);
-            if($isDisabled){
-                $response = $isDisabled;
+            $is_Disabled = $this->user->checkUserDisabled($input['user_id']);
+            if($is_Disabled){
+                $response = $is_Disabled;
             } else {
                 $response  = $this->student->checkAccess($input['user_id'],$input['image_id']);
             }

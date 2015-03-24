@@ -12,17 +12,16 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ApiController extends Controller {
 
-	private $statusCode = 200;
 
     public function __construct(
             UserServices $user,
             StudentServices $student,
             MailServices $mail,
-            PasswordImageServices $passwordImage){
+            PasswordImageServices $password_image){
         $this->user = $user;
         $this->student = $student;
         $this->mail = $mail;
-        $this->passwordImage = $passwordImage;
+        $this->password_image = $password_image;
     }
     public function index(){
         return [
