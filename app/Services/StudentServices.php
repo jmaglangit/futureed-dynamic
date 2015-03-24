@@ -63,6 +63,7 @@ class StudentServices {
         //mix password id with selections
         $mix = $this->password->getMixImage($imgId);
 
+
         shuffle($mix);
 
         return [

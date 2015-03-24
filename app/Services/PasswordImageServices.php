@@ -26,6 +26,7 @@ class PasswordImageServices {
     public function getMixImage($id){
 
         $dimension = \Config::get('futureed.image_password_count');
+        $imageFolders = \Config::get('futureed.image_password_folder');
 
         //get images
 
@@ -33,7 +34,19 @@ class PasswordImageServices {
 
         $image_ids = $this->password->getRandomImageId($count, $id);
 
-        return array_merge($image_ids,$this->password->getImage($id)->toArray());
+        $password_image = $this->password->getImage($id)->toArray();
+
+        $password_image[0]['password_image_file'] = url() . '/' . $imageFolders . '/'
+            . $password_image[0]['password_image_file'];
+
+        foreach($image_ids as $k => $r){
+
+            $r['password_image_file'] = url() . '/' . $imageFolders . '/' . $r['password_image_file'];
+        }
+
+        $merged = array_merge($image_ids, $password_image);
+
+        return $merged;
 
     }
 

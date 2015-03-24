@@ -16,8 +16,7 @@ class PasswordImageRepository implements PasswordImageRepositoryInterface{
 
     public function getImage($id){
 
-        return PasswordImage::select('id','name','password_image_file')
-                ->where('id','=',$id)->get();
+        return PasswordImage::where('id','=',$id)->get();
 
     }
 
@@ -28,8 +27,7 @@ class PasswordImageRepository implements PasswordImageRepositoryInterface{
 
     public function getRandomImageId($count = 1, $id){
 
-        return PasswordImage::select('id','name','password_image_file')
-                ->where('id','<>', $id)->get()->random($count);
+        return PasswordImage::where('id','<>', $id)->get()->random($count);
     }
 
     public function getRandomImage($count = 1){

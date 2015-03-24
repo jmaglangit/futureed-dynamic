@@ -19,7 +19,7 @@ class CreateClientDiscountsTable extends Migration {
             $table->enum('status', ['Enabled', 'Disabled']);
             $table->bigInteger('created_by');
             $table->bigInteger('updated_by');
-            $table->timestamp('deleted_at');
+            $table->softDeletes()->nullable();
             $table->timestamps();
         });
 	}

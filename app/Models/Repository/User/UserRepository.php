@@ -143,7 +143,9 @@ class UserRepository implements UserRepositoryInterface{
     }
 
     public function getEmail($id){
+
         return User::where('id','=',$id)->pluck('email');
+
     }
 
 
