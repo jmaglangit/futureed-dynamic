@@ -21,9 +21,9 @@ interface UserRepositoryInterface {
 
     public function deleteUser($id);
 
-    public function checkUserName($username);
+    public function checkUserName($username,$userType);
 
-    public function checkEmail($email);
+    public function checkEmail($email,$userType);
 
     public function getLoginAttempts($id);
 

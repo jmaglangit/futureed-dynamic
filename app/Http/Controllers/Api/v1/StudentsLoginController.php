@@ -20,10 +20,9 @@ class StudentsLoginController extends StudentsController{
             }else{
 
                 //check if username exist, return id else nothing
-                $response = $this->user->checkLoginName($input['username']);
+                $response = $this->user->checkLoginName($input['username'], 'Student');
 
-
-                return $this->respondSuccess($response);
+                return $this->setStatusCode($response['status'])->respondWithData($response['data']);
 
             }
     }
@@ -35,18 +34,19 @@ class StudentsLoginController extends StudentsController{
      */
     public function imagePassword(){
 
-        $input = Input::only('id');
+        $input = Input::only('user_id');
 
-        if(!$input['id']){
+        if(!$input['user_id']){
 
             return $this->respondNotFound();
 
         } else {
 
             //TODO: Get image password of student.
-                $response = $this->student->getImagePassword($input['id']);
+//                $this->user->checkUserId($input['user_id']);
+                $response = $this->student->getImagePassword($input['user_id']);
 
-                return $this->respondSuccess($response);
+                return $this->setStatusCode($response['status'])->respondWithData($response['data']);
         }
 
     }
@@ -57,9 +57,9 @@ class StudentsLoginController extends StudentsController{
      */
     public function password(){
         //check email and password matched
-        $input = Input::only('id','image_id');
+        $input = Input::only('user_id','image_id');
 
-        if(!$input['id'] && !$input['image_id']){
+        if(!$input['user_id'] && !$input['image_id']){
 
             return $this->respondNotFound();
 
@@ -67,11 +67,11 @@ class StudentsLoginController extends StudentsController{
 
             // get username id, and image password matched, return success/fail (boolean).
             // check login attempts
-            $isDisabled = $this->user->checkUserDisabled($input['id']);
+            $isDisabled = $this->user->checkUserDisabled($input['user_id']);
             if($isDisabled){
                 $response = $isDisabled;
             } else {
-                $response  = $this->student->checkAccess($input['id'],$input['image_id']);
+                $response  = $this->student->checkAccess($input['user_id'],$input['image_id']);
             }
 
 

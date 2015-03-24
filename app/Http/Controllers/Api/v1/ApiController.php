@@ -54,8 +54,17 @@ class ApiController extends Controller {
         return $this->setStatusCode(200)->respondWithData($message);
     }
 
-    public function respondWithData($message){
+    public function respondWithData($data){
 
+        return $this->respond(
+            [
+                'status' => $this->getStatusCode(),
+                'data' => $data
+            ]
+        );
+    }
+
+    public function respondWithMessage($message){
         return $this->respond(
             [
                 'status' => $this->getStatusCode(),
@@ -64,14 +73,7 @@ class ApiController extends Controller {
         );
     }
 
-    public function respondWithNoData(){
-        return $this->respond(
-            [
-                'status' => $this->getStatusCode(),
-                'data' => 'No Data'
-            ]
-        );
-    }
+
 
 
 
