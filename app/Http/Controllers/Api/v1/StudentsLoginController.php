@@ -115,12 +115,11 @@ class StudentsLoginController extends StudentsController{
 
         } else {
 
-            $response = $this->user->checkLoginName($input['username']);
+            $response = $this->user->checkLoginName($input['username'], 'Student');
 
-            //Email user with token.
-            //
 
-            return $this->respondSuccess($response);
+
+            return $this->setStatusCode($response['status'])->respondWithData($response['data']);
         }
 
     }

@@ -37,5 +37,23 @@ class PasswordImageServices {
 
     }
 
+    /*
+     * @return returns images for new password set
+     */
+    public function getNewPasswordImages(){
+
+        $dimension = \Config::get('futureed.image_password_count');
+
+        $dimension *= $dimension;
+
+        $passwordImages = $this->password->getRandomImage($dimension);
+
+        return [
+            'status' => 200,
+            'data' => $passwordImages
+        ];
+
+    }
+
 
 }

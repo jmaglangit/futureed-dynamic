@@ -4,6 +4,7 @@ use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
 use FutureEd\Services\MailServices;
+use FutureEd\Services\PasswordImageServices;
 use FutureEd\Services\StudentServices;
 use FutureEd\Services\UserServices;
 use Illuminate\Http\Request;
@@ -13,10 +14,15 @@ class ApiController extends Controller {
 
 	private $statusCode = 200;
 
-    public function __construct(UserServices $user, StudentServices $student, MailServices $mail){
+    public function __construct(
+            UserServices $user,
+            StudentServices $student,
+            MailServices $mail,
+            PasswordImageServices $passwordImage){
         $this->user = $user;
         $this->student = $student;
         $this->mail = $mail;
+        $this->passwordImage = $passwordImage;
     }
     public function index(){
         return [
