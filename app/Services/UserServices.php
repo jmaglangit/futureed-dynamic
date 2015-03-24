@@ -52,65 +52,74 @@ class UserServices {
         return $this->users->getEmail($id);
     }
 
-    //@return user_id
-    public function checkLoginName($username){
+    //@return user_id add user type para meter
+    public function checkLoginName($username, $userType){
 
        //filter if login is email or username
        if($this->validator->email($username)){
 
            //check email if exist return id
-           $return = $this->users->checkEmail($username);
+           $return = $this->users->checkEmail($username, $userType);
 
             if(!is_null($return)){
                 $isDisabled = $this->checkUserDisabled($return);
 
                 if(!$isDisabled){
-                    return $return;
+                    return [
+                        'status' => 200,
+                        'data' => $return
+                    ];
                 } else {
-                    return $isDisabled;
+                    return [
+                        'status' => 202,
+                        'data' => $isDisabled
+                    ];
                 }
 
             } else {
-
                 return [
-                    'status' => 204,
-                    'message' => 'Email does not Exist'
+                    'status' => 202,
+                    'data' => "Email does not Exist"
                 ];
             }
 
        }elseif($this->validator->username($username)){
 
            //check username if exist return id
-           $return = $this->users->checkUserName($username);
+           $return = $this->users->checkUserName($username,$userType);
 
            if(!is_null($return) ){
                $isDisabled = $this->checkUserDisabled($return);
 
                if(!$isDisabled){
-                    return $return;
+                   return [
+                       'status' => 200,
+                       'data' => $return
+                   ];
                } else {
-                   return $isDisabled;
+                   return [
+                       'status' => 202,
+                       'data' => $isDisabled
+                   ];
                }
 
            } else {
-
                return [
-                   'status' => 204,
-                   'message' => "Username does not exist"
+                   'status' => 202,
+                   'data' => "Username does not exist"
                ];
            }
 
        } else{
-
            return [
-               'status' => 204,
-               'message' => "Invalid Username"
+               'status' => 202,
+               'data' => "Invalid Username"
            ];
        }
     }
 
-    public function forgotPassword($username){
-        $this->checkLoginName($username);
+    public function forgotPassword($username,$userType){
+        $this->checkLoginName($username,$userType);
 
     }
 
@@ -165,6 +174,15 @@ class UserServices {
             return false;
         }
 
+    }
+
+    //
+    public function checkUserId($id){
+        //check if user id exist
+        $user = $this->users->getUser($id);
+
+        dd(isset($user['id']));
+        //check user id if
     }
 
 

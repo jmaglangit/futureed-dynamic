@@ -10,7 +10,7 @@ class SchoolsTableSeeder extends Seeder {
     public function run()
     {
 
-       \DB::table('schools')->delete();
+       \DB::table('schools')->truncate();
         \DB::table('schools')->insert([
             [
                 'code' => 1,

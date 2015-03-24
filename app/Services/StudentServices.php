@@ -33,12 +33,16 @@ class StudentServices {
         return $this->student->getStudent($id);
     }
 
+    /*
+     * @desc Add new student
+     */
     public function addStudent($student){
 
-        //user login
-        //check user if exist else add as user.
+        //check if existing user
 
-        //student details
+        //if existing add student
+        // if not add user and add student
+
 
 
     }
@@ -52,13 +56,19 @@ class StudentServices {
     }
 
     public function getImagePassword($id){
+
         //TODO: get image password.
         $imgId= $this->student->getImagePassword($id);
 
         //mix password id with selections
         $mix = $this->password->getMixImage($imgId);
 
-        return $mix;
+        shuffle($mix);
+
+        return [
+            'status' => 200,
+            'data' => $mix
+        ];
     }
 
     public function checkAccess($id,$image_id){
