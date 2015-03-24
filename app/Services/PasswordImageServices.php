@@ -25,8 +25,8 @@ class PasswordImageServices {
 
     public function getMixImage($id){
 
-        $dimension = \Config::get('futureed.image_password_count');
-        $imageFolders = \Config::get('futureed.image_password_folder');
+        $dimension = \Config::get('futureed.imagePasswordCount');
+        $imageFolders = \Config::get('futureed.imagePasswordFolder');
 
         //get images
 
@@ -55,8 +55,8 @@ class PasswordImageServices {
      */
     public function getNewPasswordImages(){
 
-        $dimension = \Config::get('futureed.image_password_count');
-        $imageFolders = \Config::get('futureed.image_password_folder');
+        $dimension = \Config::get('futureed.imagePasswordCount');
+        $imageFolders = \Config::get('futureed.imagePasswordFolder');
 
         $dimension *= $dimension;
 
