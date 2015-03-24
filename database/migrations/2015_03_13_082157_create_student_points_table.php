@@ -16,8 +16,9 @@ class CreateStudentPointsTable extends Migration {
             $table->increments('id');
             $table->bigInteger('student_id');
             $table->integer('points_earned');
-            $table->string('event', 128);
+            $table->bigInteger('event_id');
             $table->string('description', 256);
+            $table->timestamp('earned_at');
             $table->bigInteger('created_by');
             $table->bigInteger('updated_by');
             $table->timestamp('deleted_at');

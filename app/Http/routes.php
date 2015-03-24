@@ -32,7 +32,7 @@ Routes::group(['prefix' => 'api/v1'], function()
     //student password
     Routes::post('/student/password/reset','Api\v1\StudentsLoginController@resetPassword');
     Routes::post('/student/password/forgot','Api\v1\StudentsLoginController@forgotPassword');
-    Routes::post('/student/password/image','Api\v1\StudentsLoginController@images');
+    Routes::post('/student/password/image','Api\v1\StudentsPasswordController@getPasswordImages');
     //student registration
     Routes::post('/student/registration/email','Api\v1\StudentsRegistrationController@checkEmail');
     Routes::post('/student/registration/username','Api\v1\StudentsRegistrationController@checkUserName');

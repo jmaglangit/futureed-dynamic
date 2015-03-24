@@ -1,4 +1,6 @@
 <?php namespace FutureEd\Models\Repository\Validator;
+use Illuminate\Support\Facades\Validator;
+
 /**
  * Created by PhpStorm.
  * User: Jason
@@ -21,7 +23,7 @@ class ValidatorRepository implements ValidatorRepositoryInterface{
     }
 
     public function username($username){
-        return 0;
+       return 1;
     }
 
     public function firstName($firstName){

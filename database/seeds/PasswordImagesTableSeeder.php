@@ -10,11 +10,11 @@ class PasswordImagesTableSeeder extends Seeder {
     public function run()
     {
 
-        \DB::table('password_images')->delete();
+        \DB::table('password_images')->truncate();
         \DB::table('password_images')->insert([
             [
                 'name' => 'icecream',
-                'password_image_file' => 'icecream,png',
+                'password_image_file' => 'icecream.png',
                 'created_by' => 1,
                 'updated_by' => 1,
                 'created_at' => date("Y-m-d H:i:s"),
@@ -79,6 +79,14 @@ class PasswordImagesTableSeeder extends Seeder {
             [
                 'name' => 'sun',
                 'password_image_file' => 'sun.png',
+                'created_by' => 1,
+                'updated_by' => 1,
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s")
+            ],
+            [
+                'name' => 'pan',
+                'password_image_file' => 'pan.png',
                 'created_by' => 1,
                 'updated_by' => 1,
                 'created_at' => date("Y-m-d H:i:s"),

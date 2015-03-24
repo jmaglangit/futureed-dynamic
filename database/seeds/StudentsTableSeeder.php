@@ -10,12 +10,12 @@ class StudentsTableSeeder extends Seeder {
     public function run()
     {
 
-        \DB::table('students')->delete();
+        \DB::table('students')->truncate();
         try {
             \DB::table('students')->insert(
                 [
                     [
-                        'user_id' => 1,
+                        'user_id' => 3,
                         'first_name' => 'Farrah',
                         'last_name' => 'Dy',
                         'gender' => 'Female',
