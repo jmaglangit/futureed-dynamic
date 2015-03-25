@@ -15,7 +15,7 @@ class StudentsLoginController extends StudentsController{
 
             if(!$input['username']){
 
-                return $this->respondNotFound();
+                return $this->setStatusCode(422)->respondWithError('Parameter validation failed');
 
             }else{
 
@@ -38,7 +38,7 @@ class StudentsLoginController extends StudentsController{
 
         if(!$input['user_id']){
 
-            return $this->respondNotFound();
+            return $this->setStatusCode(422)->respondWithError('Parameter validation failed');
 
         } else {
 
@@ -61,7 +61,7 @@ class StudentsLoginController extends StudentsController{
 
         if(!$input['user_id'] && !$input['image_id']){
 
-            return $this->respondNotFound();
+            return $this->setStatusCode(422)->respondWithError('Parameter validation failed');
 
         } else {
 

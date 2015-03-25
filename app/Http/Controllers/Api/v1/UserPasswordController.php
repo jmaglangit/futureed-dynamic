@@ -15,7 +15,7 @@ class UserPasswordController extends UserController {
 
         if(!$input['username']){
 
-            return $this->respondNotFound();
+            return $this->setStatusCode(422)->respondWithError('Parameter validation failed');
 
         } else {
 
