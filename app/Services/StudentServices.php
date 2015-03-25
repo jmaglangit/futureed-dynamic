@@ -73,24 +73,33 @@ class StudentServices {
     }
 
     public function checkAccess($id,$image_id){
-        $is_Disabled =  $this->user->checkUserDisabled($id);
+        $is_disabled =  $this->user->checkUserDisabled($id);
 
-        if(!$is_Disabled){
+        if(!$is_disabled){
             $password_image = $this->student->getImagePassword($id);
 
             if($image_id == $password_image){
                 $this->user->resetLoginAttempt($id);
-                return true;
+                return [
+                    'status' => 200,
+                    'data' => true
+                ];
             } else {
                 $this->user->addLoginAttempt($id);
                 if(!$this->user->exceedLoginAttempts($id)){
                     $this->user->lockAccount($id);
                     return $this->user->checkUserDisabled($id);
                 }
-                return "does not match";
+                return [
+                    'status' => 202,
+                    'data' => "does not match"
+                ];
             }
         } else {
-            return $is_Disabled;
+            return [
+                'status' => 202,
+                'data' => $is_disabled
+            ];
         }
     }
 

@@ -62,9 +62,9 @@ class UserServices {
            $return = $this->users->checkEmail($username, $user_Type);
 
             if(!is_null($return)){
-                $is_Disabled = $this->checkUserDisabled($return);
+                $is_disabled = $this->checkUserDisabled($return);
 
-                if(!$is_Disabled){
+                if(!$is_disabled){
                     return [
                         'status' => 200,
                         'data' => $return
@@ -72,7 +72,7 @@ class UserServices {
                 } else {
                     return [
                         'status' => 202,
-                        'data' => $is_Disabled
+                        'data' => $is_disabled
                     ];
                 }
 
@@ -89,9 +89,9 @@ class UserServices {
            $return = $this->users->checkUserName($username,$user_Type);
 
            if(!is_null($return) ){
-               $is_Disabled = $this->checkUserDisabled($return);
+               $is_disabled = $this->checkUserDisabled($return);
 
-               if(!$is_Disabled){
+               if(!$is_disabled){
                    return [
                        'status' => 200,
                        'data' => $return
@@ -99,7 +99,7 @@ class UserServices {
                } else {
                    return [
                        'status' => 202,
-                       'data' => $is_Disabled
+                       'data' => $is_disabled
                    ];
                }
 

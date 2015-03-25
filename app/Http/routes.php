@@ -15,9 +15,6 @@
 
 include('Routes/Frontage/frontage.php');
 
-$router->resource('admin','AdminController');
-$router->resource('dashboard','DashboardController');
-$router->resource('student','StudentController');
 
 
 Routes::group(['prefix' => 'api/v1'], function()
@@ -25,13 +22,14 @@ Routes::group(['prefix' => 'api/v1'], function()
     Routes::get('/','Api\v1\ApiController@index');
     //users
     Routes::get('/user','Api\v1\UserController@index');
+    Routes::post('/user/password/reset','Api\v1\UserPasswordController@passwordReset');
+    Routes::post('/user/password/forgot','Api\v1\UserPasswordController@passwordForgot');
+
     //student login
     Routes::post('/student/login/username','Api\v1\StudentsLoginController@login');
     Routes::post('/student/login/image','Api\v1\StudentsLoginController@imagePassword');
     Routes::post('/student/login/password','Api\v1\StudentsLoginController@password');
     //student password
-    Routes::post('/student/password/reset','Api\v1\StudentsLoginController@resetPassword');
-    Routes::post('/student/password/forgot','Api\v1\StudentsLoginController@forgotPassword');
     Routes::post('/student/password/image','Api\v1\StudentsPasswordController@getPasswordImages');
     //student registration
     Routes::post('/student/registration/email','Api\v1\StudentsRegistrationController@checkEmail');

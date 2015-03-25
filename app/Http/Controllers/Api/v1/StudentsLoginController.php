@@ -67,67 +67,23 @@ class StudentsLoginController extends StudentsController{
 
             // get username id, and image password matched, return success/fail (boolean).
             // check login attempts
-            $is_Disabled = $this->user->checkUserDisabled($input['user_id']);
-            if($is_Disabled){
-                $response = $is_Disabled;
+            $is_disabled = $this->user->checkUserDisabled($input['user_id']);
+            if($is_disabled){
+                $response = [
+                    'status' => 202,
+                    'data' => $is_disabled
+                ];
+
             } else {
                 $response  = $this->student->checkAccess($input['user_id'],$input['image_id']);
             }
 
 
-            return $this->respond($response);
-
-        }
-
-    }
-
-    /*
-     * param id, image password
-     * response success/fail
-     */
-    public function resetPassword(){
-
-        $input = Input::only('id','password');
-        if(!$input['id'] && !$input['password']){
-
-            return $this->respondNotFound();
-
-        } else {
-//            dd($input);
-            return $this->respond($input);
-
-        }
-    }
-
-    /*
-     * param username/email
-     * response success/fail(doesn't exist)
-     */
-    public function forgotPassword(){
-        //TODO: check username is exist, send email under student
-        $input = Input::only('username');
-
-        $this->mail->sendMail();
-
-        if(!$input['username']){
-
-            return $this->respondNotFound();
-
-        } else {
-
-            $response = $this->user->checkLoginName($input['username'], 'Student');
-
-
-
             return $this->setStatusCode($response['status'])->respondWithData($response['data']);
+
         }
 
     }
-
-
-
-
-
 
 
 }
