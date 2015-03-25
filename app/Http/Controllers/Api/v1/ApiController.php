@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ApiController extends Controller {
 
+    private $statusCode = 200;
 
     public function __construct(
             UserServices $user,
