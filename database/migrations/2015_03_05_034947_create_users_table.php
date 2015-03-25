@@ -29,7 +29,7 @@ class CreateUsersTable extends Migration {
             $table->tinyInteger('is_account_deleted')->nullable();
             $table->string('password_reset_token',256)->nullable();
             $table->string('registration_verification_token',256)->nullable();
-            $table->string('remember_token',256)->nullable();
+            $table->rememberToken();
             $table->string('change_email_token',256)->nullable();
             $table->Timestamp('activated_at')->nullable();
             $table->string('timezone',64)->nullable();
