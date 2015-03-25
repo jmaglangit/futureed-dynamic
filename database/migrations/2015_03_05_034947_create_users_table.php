@@ -21,6 +21,8 @@ class CreateUsersTable extends Migration {
             $table->string('password',128);
             $table->string('name',128);
             $table->enum('user_type',['Admin','Client','Student']);
+            $table->bigInteger('code')->nullable();
+            $table->timestamp('code_expiry')->nullable();
             $table->tinyInteger('login_attempt')->nullable();
             $table->tinyInteger('is_account_activated')->nullable();
             $table->tinyInteger('is_account_locked')->nullable();
