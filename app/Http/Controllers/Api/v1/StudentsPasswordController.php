@@ -16,4 +16,6 @@ class StudentsPasswordController extends StudentsController {
         return $this->setStatusCode($response['status'])->respondWithData($response['data']);
     }
 
+
+
 }

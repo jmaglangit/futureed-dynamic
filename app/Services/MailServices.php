@@ -23,7 +23,7 @@ class MailServices {
     //
     public function sendMail(){
         try{
-            dd(csrf_token());
+//            dd(csrf_token());
 
             Mail::send('emails.student.forget-password', array('key' => 'value'), function($message)
             {
@@ -41,6 +41,7 @@ class MailServices {
 
     public function sendStudentMailResetPassword($id){
         //TODO: Send email with code of password.
+        //
 
     }
 

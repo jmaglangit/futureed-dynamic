@@ -81,53 +81,5 @@ class StudentsLoginController extends StudentsController{
 
     }
 
-    /*
-     * param id, image password
-     * response success/fail
-     */
-    public function resetPassword(){
-
-        $input = Input::only('id','password');
-        if(!$input['id'] && !$input['password']){
-
-            return $this->respondNotFound();
-
-        } else {
-//            dd($input);
-            return $this->respond($input);
-
-        }
-    }
-
-    /*
-     * param username/email
-     * response success/fail(doesn't exist)
-     */
-    public function forgotPassword(){
-        //TODO: check username is exist, send email under student
-        $input = Input::only('username');
-
-        $this->mail->sendMail();
-
-        if(!$input['username']){
-
-            return $this->respondNotFound();
-
-        } else {
-
-            $response = $this->user->checkLoginName($input['username'], 'Student');
-
-
-
-            return $this->setStatusCode($response['status'])->respondWithData($response['data']);
-        }
-
-    }
-
-
-
-
-
-
 
 }
