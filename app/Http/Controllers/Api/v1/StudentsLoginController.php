@@ -69,13 +69,17 @@ class StudentsLoginController extends StudentsController{
             // check login attempts
             $is_Disabled = $this->user->checkUserDisabled($input['user_id']);
             if($is_Disabled){
-                $response = $is_Disabled;
+                $response = [
+                    'status' => 202,
+                    'data' => $is_Disabled
+                ];
+
             } else {
                 $response  = $this->student->checkAccess($input['user_id'],$input['image_id']);
             }
 
 
-            return $this->respond($response);
+            return $this->setStatusCode($response['status'])->respondWithData($response['data']);
 
         }
 
