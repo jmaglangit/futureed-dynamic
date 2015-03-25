@@ -73,9 +73,9 @@ class StudentServices {
     }
 
     public function checkAccess($id,$image_id){
-        $is_Disabled =  $this->user->checkUserDisabled($id);
+        $is_disabled =  $this->user->checkUserDisabled($id);
 
-        if(!$is_Disabled){
+        if(!$is_disabled){
             $password_image = $this->student->getImagePassword($id);
 
             if($image_id == $password_image){
@@ -98,7 +98,7 @@ class StudentServices {
         } else {
             return [
                 'status' => 202,
-                'data' => $is_Disabled
+                'data' => $is_disabled
             ];
         }
     }

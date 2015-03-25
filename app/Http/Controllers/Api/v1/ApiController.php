@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ApiController extends Controller {
 
-    private $statusCode = 200;
+    private $status_code = 200;
 
     public function __construct(
             UserServices $user,
@@ -36,15 +36,15 @@ class ApiController extends Controller {
      */
     public function getStatusCode()
     {
-        return $this->statusCode;
+        return $this->status_code;
     }
 
     /**
-     * @param mixed $statusCode
+     * @param mixed $status_code
      */
-    public function setStatusCode($statusCode)
+    public function setStatusCode($status_code)
     {
-        $this->statusCode = $statusCode;
+        $this->status_code = $status_code;
         return $this;
     }
 
