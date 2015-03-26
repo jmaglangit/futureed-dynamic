@@ -12,32 +12,32 @@ class StudentsRegistrationController extends StudentsController {
 	//
     public function checkEmail(){
         //check email if exist
-        try{
-            $input = Input::get('email');
-            $status = 200;
-            $response = $this->users->checkLoginName($input);;
+        $input = Input::only('email');
 
-        }catch (Exception $e){
-            $status = 400;
-            $response = $e->getMessage();
+        if(!$input['email']){
+
+            return $this->respondNotFound();
+
+        } else {
+
+            return $this->respond($input);
+
         }
-        return [
-            'status' => $status,
-            'response' => $response
-        ];
     }
 
     public function checkUserName(){
-        try{
-            //check username exist
-        }catch(Exception $e){
-            $status = 400;
-            $response = $e->getMessage();
+
+        $input = Input::only('username');
+        if(!$input['username']){
+
+            return $this->respondNotFound();
+
+        } else {
+//            dd($input);
+            return $this->respond($input);
+
         }
-        return [
-            'status' => $status,
-            'response' => $response
-        ];
+
     }
 
 
@@ -59,6 +59,7 @@ class StudentsRegistrationController extends StudentsController {
                 'grade_code');
 
         //validate
+
 
 
 

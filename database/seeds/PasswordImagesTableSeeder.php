@@ -13,8 +13,8 @@ class PasswordImagesTableSeeder extends Seeder {
         \DB::table('password_images')->truncate();
         \DB::table('password_images')->insert([
             [
-                'name' => 'icecream',
-                'password_image_file' => 'icecream.png',
+                'name' => 'Red Ice cream',
+                'password_image_file' => 'red_icecream.png',
                 'created_by' => 1,
                 'updated_by' => 1,
                 'created_at' => date("Y-m-d H:i:s"),
@@ -29,8 +29,8 @@ class PasswordImagesTableSeeder extends Seeder {
                 'updated_at' => date("Y-m-d H:i:s")
             ],
             [
-                'name' => 'scissor',
-                'password_image_file' => 'scissor.png',
+                'name' => 'scissors',
+                'password_image_file' => 'scissors.png',
                 'created_by' => 1,
                 'updated_by' => 1,
                 'created_at' => date("Y-m-d H:i:s"),
@@ -69,24 +69,40 @@ class PasswordImagesTableSeeder extends Seeder {
                 'updated_at' => date("Y-m-d H:i:s")
             ],
             [
-                'name' => 'chocolate icecream',
-                'password_image_file' => 'chocolate_icecream.png',
+                'name' => 'yellow icecream',
+                'password_image_file' => 'yellow_icecream.png',
                 'created_by' => 1,
                 'updated_by' => 1,
                 'created_at' => date("Y-m-d H:i:s"),
                 'updated_at' => date("Y-m-d H:i:s")
             ],
             [
-                'name' => 'sun',
-                'password_image_file' => 'sun.png',
+                'name' => 'sunny',
+                'password_image_file' => 'sunny.png',
                 'created_by' => 1,
                 'updated_by' => 1,
                 'created_at' => date("Y-m-d H:i:s"),
                 'updated_at' => date("Y-m-d H:i:s")
             ],
             [
-                'name' => 'pan',
-                'password_image_file' => 'pan.png',
+                'name' => 'parent',
+                'password_image_file' => 'user_parent.jpg',
+                'created_by' => 1,
+                'updated_by' => 1,
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s")
+            ],
+            [
+                'name' => 'principal',
+                'password_image_file' => 'user_principal.jpg',
+                'created_by' => 1,
+                'updated_by' => 1,
+                'created_at' => date("Y-m-d H:i:s"),
+                'updated_at' => date("Y-m-d H:i:s")
+            ],
+            [
+                'name' => 'teacher',
+                'password_image_file' => 'user_teacher.jpg',
                 'created_by' => 1,
                 'updated_by' => 1,
                 'created_at' => date("Y-m-d H:i:s"),

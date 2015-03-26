@@ -19,7 +19,7 @@ class CreateAnnouncementsTable extends Migration {
             $table->timestamp('date_end');
             $table->bigInteger('created_by');
             $table->bigInteger('updated_by');
-            $table->timestamp('deleted_at');
+            $table->softDeletes()->nullable();
             $table->timestamps();
         });
 	}

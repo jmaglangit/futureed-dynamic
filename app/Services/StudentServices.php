@@ -63,6 +63,7 @@ class StudentServices {
         //mix password id with selections
         $mix = $this->password->getMixImage($imgId);
 
+
         shuffle($mix);
 
         return [
@@ -72,24 +73,33 @@ class StudentServices {
     }
 
     public function checkAccess($id,$image_id){
-        $isDisabled =  $this->user->checkUserDisabled($id);
-//        dd($isDisabled);
-        if(!$isDisabled){
+        $is_disabled =  $this->user->checkUserDisabled($id);
+
+        if(!$is_disabled){
             $password_image = $this->student->getImagePassword($id);
 
             if($image_id == $password_image){
                 $this->user->resetLoginAttempt($id);
-                return true;
+                return [
+                    'status' => 200,
+                    'data' => true
+                ];
             } else {
                 $this->user->addLoginAttempt($id);
                 if(!$this->user->exceedLoginAttempts($id)){
                     $this->user->lockAccount($id);
                     return $this->user->checkUserDisabled($id);
                 }
-                return "does not match";
+                return [
+                    'status' => 202,
+                    'data' => "does not match"
+                ];
             }
         } else {
-            return $isDisabled;
+            return [
+                'status' => 202,
+                'data' => $is_disabled
+            ];
         }
     }
 

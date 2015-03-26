@@ -21,7 +21,7 @@ class CreateStudentPointsTable extends Migration {
             $table->timestamp('earned_at');
             $table->bigInteger('created_by');
             $table->bigInteger('updated_by');
-            $table->timestamp('deleted_at');
+            $table->softDeletes()->nullable();
             $table->timestamps();
         });
 	}

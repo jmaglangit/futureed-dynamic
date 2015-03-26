@@ -22,7 +22,7 @@ class CreateAnswerExplanationsTable extends Migration {
             $table->text('answer_explanation');
             $table->bigInteger('created_by');
             $table->bigInteger('updated_by');
-            $table->timestamp('deleted_at');
+            $table->softDeletes()->nullable();
             $table->timestamps();
         });
 	}

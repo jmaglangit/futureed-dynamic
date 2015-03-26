@@ -53,18 +53,18 @@ class UserServices {
     }
 
     //@return user_id add user type para meter
-    public function checkLoginName($username, $userType){
+    public function checkLoginName($username, $user_Type){
 
        //filter if login is email or username
        if($this->validator->email($username)){
 
            //check email if exist return id
-           $return = $this->users->checkEmail($username, $userType);
+           $return = $this->users->checkEmail($username, $user_Type);
 
             if(!is_null($return)){
-                $isDisabled = $this->checkUserDisabled($return);
+                $is_disabled = $this->checkUserDisabled($return);
 
-                if(!$isDisabled){
+                if(!$is_disabled){
                     return [
                         'status' => 200,
                         'data' => $return
@@ -72,7 +72,7 @@ class UserServices {
                 } else {
                     return [
                         'status' => 202,
-                        'data' => $isDisabled
+                        'data' => $is_disabled
                     ];
                 }
 
@@ -86,12 +86,12 @@ class UserServices {
        }elseif($this->validator->username($username)){
 
            //check username if exist return id
-           $return = $this->users->checkUserName($username,$userType);
+           $return = $this->users->checkUserName($username,$user_Type);
 
            if(!is_null($return) ){
-               $isDisabled = $this->checkUserDisabled($return);
+               $is_disabled = $this->checkUserDisabled($return);
 
-               if(!$isDisabled){
+               if(!$is_disabled){
                    return [
                        'status' => 200,
                        'data' => $return
@@ -99,7 +99,7 @@ class UserServices {
                } else {
                    return [
                        'status' => 202,
-                       'data' => $isDisabled
+                       'data' => $is_disabled
                    ];
                }
 
@@ -118,8 +118,8 @@ class UserServices {
        }
     }
 
-    public function forgotPassword($username,$userType){
-        $this->checkLoginName($username,$userType);
+    public function forgotPassword($username,$user_Type){
+        $this->checkLoginName($username,$user_Type);
 
     }
 
