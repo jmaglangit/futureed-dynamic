@@ -20,17 +20,10 @@ class StudentsLoginController extends StudentsController{
                 return $this->setStatusCode(422)->respondWithError('Parameter validation failed');
 
             }else{
+//                check if username exist, return id else nothing
+                $response = $this->user->checkLoginName($input['username'], 'Student');
 
-                $user = User::first();
-
-                $token = JWTAuth::encode($user);
-
-                return $token;
-
-                //check if username exist, return id else nothing
-//                $response = $this->user->checkLoginName($input['username'], 'Student');
-//
-//                return $this->setStatusCode($response['status'])->respondWithData($response['data']);
+                return $this->setStatusCode($response['status'])->respondWithData($response['data']);
 
             }
     }

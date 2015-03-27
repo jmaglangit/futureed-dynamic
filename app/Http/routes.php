@@ -19,6 +19,10 @@ include('Routes/Frontage/frontage.php');
 
 Routes::group(['prefix' => 'api/v1'], function()
 {
+    Routes::get('/token','Api\v1\TokenController@index');
+    Routes::post('/token/decode','Api\v1\TokenController@decode');
+
+
     Routes::get('/','Api\v1\ApiController@index');
     //users
     Routes::get('/user','Api\v1\UserController@index');
