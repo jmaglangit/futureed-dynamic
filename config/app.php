@@ -140,6 +140,7 @@ return [
          * Added Providers
          */
         'Laracasts\Generators\GeneratorsServiceProvider',
+        'Tymon\JWTAuth\Providers\JWTAuthServiceProvider',
 
 		/*
 		 * Project Specific Service Providers...
@@ -154,6 +155,7 @@ return [
 		'FutureEd\Providers\ConfigServiceProvider',
 		'FutureEd\Providers\EventServiceProvider',
 		'FutureEd\Providers\RouteServiceProvider',
+        'Barryvdh\Cors\CorsServiceProvider',
 
 	],
 
@@ -207,6 +209,8 @@ return [
 		 * Project Specific Service Providers...
 		 */
 		'Form'      => 'Illuminate\Html\FormFacade',
+        'JWTAuth' => 'Tymon\JWTAuth\Facades\JWTAuth',
+
 
 	],
 

@@ -2,9 +2,11 @@
 
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
+use FutureEd\Models\Core\User;
 use Illuminate\Support\Facades\Input;
 
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class StudentsLoginController extends StudentsController{
 
@@ -19,10 +21,16 @@ class StudentsLoginController extends StudentsController{
 
             }else{
 
-                //check if username exist, return id else nothing
-                $response = $this->user->checkLoginName($input['username'], 'Student');
+                $user = User::first();
 
-                return $this->setStatusCode($response['status'])->respondWithData($response['data']);
+                $token = JWTAuth::encode($user);
+
+                return $token;
+
+                //check if username exist, return id else nothing
+//                $response = $this->user->checkLoginName($input['username'], 'Student');
+//
+//                return $this->setStatusCode($response['status'])->respondWithData($response['data']);
 
             }
     }
