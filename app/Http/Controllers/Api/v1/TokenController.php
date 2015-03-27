@@ -18,6 +18,7 @@ class TokenController extends ApiController {
 	 */
 	public function index()
     {
+
         $header = [
             'typ' => 'JWT',
             'alg' => 'HS256'
