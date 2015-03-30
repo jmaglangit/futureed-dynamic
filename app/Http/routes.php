@@ -13,8 +13,7 @@
 
 //TODO: Drill down routing into directory.
 
-include('Routes/Frontage/frontage.php');
-
+include('Routes/FutureLesson/futurelesson.php');
 
 
 Routes::group(['prefix' => 'api/v1'], function()

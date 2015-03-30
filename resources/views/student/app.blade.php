@@ -16,17 +16,18 @@
   <!--[if IE 6]><link rel="stylesheet" type="text/css" media="all" href="https://www.formstack.com/forms/css/3/ie6fixes.css" /><![endif]-->
 
   <!-- Bootstrap core CSS -->
-  <link href="/css/bootstrap.css" rel="stylesheet">
+  <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet">
   <!-- Fonts -->
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
   <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
   <!-- Custom styles for this template -->
-  <link href="/css/admin.css" rel="stylesheet">
+  <link href="css/admin.css" rel="stylesheet">
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+  @yield('styles')
 </head>
 <body>
   <a id="top"></a>
@@ -91,19 +92,22 @@
 
 	@yield('content')
 
-
 	<footer class="footer">
 	  <div class="container text-center">
-	    <p class="text-muted">2015 &copy; All Rights Reserved. FutureEd Pte Ltd</p>
+	    <p class="text-muted">{{ date('Y') }} &copy; All Rights Reserved. FutureEd Pte Ltd</p>
 	  </div>
 	</footer>
 
   <!-- START SCRIPTS -->
   <script src="/js/jquery.js"></script>
-  <script src="/js/angular.js"></script>
+  <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular.min.js"></script>
+  <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular-resource.min.js"></script>
   <script src="/js/futureed.js"></script>
-  <script src="/js/bootstrap.js"></script>
+  <script src="/js/futureed_controllers.js"></script>
+  <script src="/js/futureed_services.js"></script>
   <script src="/js/jquery.smooth-scroll.js"></script>
+  @yield('scripts')
   <script>
     $('a').smoothScroll();  
   </script>

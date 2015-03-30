@@ -27,6 +27,7 @@
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
   <![endif]-->
+  @yield('styles')
 </head>
 <body>
   <a id="top"></a>
@@ -94,7 +95,7 @@
 
 	<footer class="footer">
 	  <div class="container text-center">
-	    <p class="text-muted">2015 &copy; All Rights Reserved. FutureEd Pte Ltd</p>
+	    <p class="text-muted">{{ date('Y') }} &copy; All Rights Reserved. FutureEd Pte Ltd</p>
 	  </div>
 	</footer>
 
@@ -107,6 +108,7 @@
   <script src="/js/futureed_controllers.js"></script>
   <script src="/js/futureed_services.js"></script>
   <script src="/js/jquery.smooth-scroll.js"></script>
+  @yield('scripts')
   <script>
     $('a').smoothScroll();  
   </script>

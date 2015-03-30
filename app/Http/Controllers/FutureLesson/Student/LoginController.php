@@ -1,4 +1,4 @@
-<?php namespace FutureEd\Http\Controllers\Frontage;
+<?php namespace FutureEd\Http\Controllers\FutureLesson\Student;
 
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
@@ -14,7 +14,7 @@ class LoginController extends Controller {
 	 */
 	public function index()
 	{
-		return view('admin-client.login.login');
+		return view('student.login.login');
 	}
 	
 	/**
@@ -24,7 +24,7 @@ class LoginController extends Controller {
 	 */
 	public function forgot_password()
 	{
-		return view('admin-client.login.forgot-password');
+		return view('client.login.forgot-password');
 	}
 
 	/**
@@ -34,7 +34,7 @@ class LoginController extends Controller {
 	 */
 	public function forgot_password_success()
 	{
-		return view('admin-client.login.forgot-password-success');
+		return view('client.login.forgot-password-success');
 	}
 
 	/**
@@ -44,7 +44,7 @@ class LoginController extends Controller {
 	 */
 	public function registration()
 	{
-		return view('admin-client.login.registration');
+		return view('client.login.registration');
 	}
 	
 	/**
@@ -54,7 +54,7 @@ class LoginController extends Controller {
 	 */
 	public function registration_success()
 	{
-		return view('admin-client.login.registration-success');
+		return view('client.login.registration-success');
 	}
 	
 	/**
@@ -64,7 +64,7 @@ class LoginController extends Controller {
 	 */
 	public function reset_password()
 	{
-		return view('admin-client.login.reset-password');
+		return view('client.login.reset-password');
 	}
 	
 	/**
@@ -74,7 +74,7 @@ class LoginController extends Controller {
 	 */
 	public function reset_password_success()
 	{
-		return view('admin-client.login.reset-password-success');
+		return view('client.login.reset-password-success');
 	}
 
 }
