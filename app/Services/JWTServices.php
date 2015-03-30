@@ -19,7 +19,7 @@ class JWTServices {
      *
      */
 
-    
+
     //iss: The issuer of the token
     private $iss;
 
