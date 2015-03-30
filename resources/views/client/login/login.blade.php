@@ -40,7 +40,7 @@ footer{display: none;}
           </div>
           <div class="submit">LOGIN</div>
         </form>
-        {!! link_to_route('login.forgot_password', 'Forgot your password?', array(), ['class' => 'login_bcg']) !!}
+        {!! link_to_route('client.login.forgot_password', 'Forgot your password?', array(), ['class' => 'login_bcg']) !!}
         <div class="fb">
           SIGN UP
         </div>
