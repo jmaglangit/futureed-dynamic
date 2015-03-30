@@ -207,6 +207,7 @@ return [
 		 * Project Specific Service Providers...
 		 */
 		'Form'      => 'Illuminate\Html\FormFacade',
+		'Html'      => 'Illuminate\Html\HtmlFacade',
 
 	],
 
