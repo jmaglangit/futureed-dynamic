@@ -29,7 +29,7 @@
   <![endif]-->
   @yield('styles')
 </head>
-<body>
+<body class="student">
   <a id="top"></a>
   <header>
     <nav class="navbar navbar-default">
