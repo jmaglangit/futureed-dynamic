@@ -1,8 +1,8 @@
-@extends('app')
+@extends('client.app')
 
 @section('content')
 <style>
-body {background: url("images/bcg_triangle.svg") no-repeat scroll right bottom / cover;}
+body {background: url("/images/bcg_triangle.svg") no-repeat scroll right bottom / cover;}
 footer{display: none;}
 </style>
 
@@ -40,7 +40,7 @@ footer{display: none;}
           </div>
           <div class="submit">LOGIN</div>
         </form>
-        {!! link_to_route('login.forgot_password', 'Forgot your password?', array(), ['class' => 'login_bcg']) !!}
+        {!! link_to_route('client.login.forgot_password', 'Forgot your password?', array(), ['class' => 'login_bcg']) !!}
         <div class="fb">
           SIGN UP
         </div>

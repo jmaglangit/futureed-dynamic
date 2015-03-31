@@ -1,4 +1,4 @@
-@extends('app')
+@extends('client.app')
 
 @section('content')
 <div class="container">
@@ -6,9 +6,9 @@
     <div class="title">Register as</div>
     <div class="row">
       <div class="col-md-12 register_users">
-        <div class="col-md-2 col-md-offset-3"><img id="user_principal" src="images/user_principal.jpg" alt=""><h4>Principal</h4></div>
-        <div class="col-md-2"><img id="user_teacher" src="images/user_teacher.jpg" alt=""><h4>Teacher</h4></div>
-        <div class="col-md-2"><img id="user_parent" src="images/user_parent.jpg" alt=""><h4>Parent</h4></div>
+        <div class="col-md-2 col-md-offset-3"><img id="user_principal" src="/images/user_principal.jpg" alt=""><h4>Principal</h4></div>
+        <div class="col-md-2"><img id="user_teacher" src="/images/user_teacher.jpg" alt=""><h4>Teacher</h4></div>
+        <div class="col-md-2"><img id="user_parent" src="/images/user_parent.jpg" alt=""><h4>Parent</h4></div>
       </div>
       <div class="col-md-12">
         <form class="form-horizontal">

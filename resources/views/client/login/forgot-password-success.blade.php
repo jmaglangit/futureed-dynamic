@@ -1,8 +1,8 @@
-@extends('app')
+@extends('client.app')
 
 @section('content')
 <style>
-body {background: url("images/bcg_bookapple.jpg") no-repeat scroll right bottom / cover;}
+body {background: url("/images/bcg_triangle.svg") no-repeat scroll right bottom / cover;}
 footer{display: none;}
 </style>
 
