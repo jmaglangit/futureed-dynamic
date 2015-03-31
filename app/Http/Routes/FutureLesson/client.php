@@ -15,8 +15,8 @@
 			
 		});
 		
-		Routes::get('/registration', ['as' => 'client.registration', 'users' => 'FutureLesson\Client\LoginController@registration']);
-		Routes::get('/registration-success', ['as' => 'client.registration-success', 'users' => 'FutureLesson\Client\LoginController@registration_success']);
+		Routes::get('/registration', ['as' => 'client.registration', 'uses' => 'FutureLesson\Client\LoginController@registration']);
+		Routes::get('/registration-success', ['as' => 'client.registration-success', 'uses' => 'FutureLesson\Client\LoginController@registration_success']);
 	});
 	
 ?>

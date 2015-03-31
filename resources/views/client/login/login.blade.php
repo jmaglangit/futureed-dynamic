@@ -1,5 +1,7 @@
 @extends('client.app')
 
+
+
 @section('content')
 <style>
 body {background: url("/images/bcg_triangle.svg") no-repeat scroll right bottom / cover;}
