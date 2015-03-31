@@ -2,7 +2,7 @@
 
 @section('content')
 
-  <div class="container login_client">
+  <div class="container login">
     <div class="col-md-4 col-md-offset-1">
       <div class="form-style form-narrow">
       	<!-- ERROR -->

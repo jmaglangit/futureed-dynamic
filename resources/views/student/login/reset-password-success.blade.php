@@ -1,13 +1,8 @@
 @extends('student.app')
 
 @section('content')
-<style>
-body {background: url("/images/bg-option-1.jpg") no-repeat scroll right bottom / cover;}
-footer{display: none;}
-</style>
-
-  <div class="container">
-    <div class="col-md-6 col-md-offset-3" style="margin-top:50px; ">
+  <div class="container login">
+    <div class="col-md-6 col-md-offset-3">
       <div class="form-style form-select-password clearfix" style="min-height:450px;">
         <div class="title">Success! You're password has been reset. </div>
         <div class="error" style="display: none;">
