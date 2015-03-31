@@ -1,13 +1,8 @@
 @extends('student.app')
 
 @section('content')
-<style>
-body {background: url("/images/bg-option-1.jpg") no-repeat scroll right bottom / cover;}
-footer{display: none;}
-</style>
-
-  <div class="container">
-    <div class="col-md-6 col-md-offset-3" style="margin-top:80px;">
+  <div class="container login">
+    <div class="col-md-6 col-md-offset-3">
       <div class="form-style form-select-password">
         <div class="title">Select a picture for your new password</div>
         <div class="error">
@@ -45,7 +40,6 @@ footer{display: none;}
             <p><a href="" class="btn btn-red">Save and Proceed</a></p>
           </ul>
         </div>
-
       </div>
     </div>
   </div>
