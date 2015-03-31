@@ -24,6 +24,11 @@ class CreateUsersTable extends Migration {
             $table->bigInteger('code')->nullable();
             $table->timestamp('code_expiry')->nullable();
             $table->tinyInteger('login_attempt')->nullable();
+            $table->bigInteger('confirmation_code')->nullable();
+            $table->timestamp('confirmation_code_expiry')->nullable();
+            $table->bigInteger('reset_code')->nullable();
+            $table->timestamp('reset_code_expiry')->nullable();
+            $table->tinyInteger('is_link_to_parent')->nullable();
             $table->tinyInteger('is_account_activated')->nullable();
             $table->tinyInteger('is_account_locked')->nullable();
             $table->tinyInteger('is_account_deleted')->nullable();
