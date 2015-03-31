@@ -49,8 +49,13 @@ class AppServiceProvider extends ServiceProvider {
             'FutureEd\Models\Repository\Admin\AdminRepositoryInterface',
             'FutureEd\Models\Repository\Admin\AdminRepository'
         );
+        $this->app->bind(
+            'FutureEd\Models\Repository\Token\TokenRepositoryInterface',
+            'FutureEd\Models\Repository\Token\TokenRepository'
+        );
 
 
-	}
+
+    }
 
 }

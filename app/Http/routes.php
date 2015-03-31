@@ -19,8 +19,12 @@ include('Routes/Frontage/frontage.php');
 
 Routes::group(['prefix' => 'api/v1'], function()
 {
+    //token routes to be remove after test
     Routes::get('/token','Api\v1\TokenController@index');
-    Routes::post('/token/decode','Api\v1\TokenController@decode');
+    Routes::post('/token/decode','Api\v1\TokenController@tokenDecode');
+    Routes::get('/token/test','Api\v1\TokenController@test');
+
+
 
 
     Routes::get('/','Api\v1\ApiController@index');

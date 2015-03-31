@@ -58,7 +58,8 @@ class StudentsLoginController extends StudentsController{
      */
     public function password(){
         //check email and password matched
-        $input = Input::only('user_id','image_id');
+        $input = Input::only('user_id','image_id','app');
+
 
         if(!$input['user_id'] && !$input['image_id']){
 
@@ -77,6 +78,13 @@ class StudentsLoginController extends StudentsController{
 
             } else {
                 $response  = $this->student->checkAccess($input['user_id'],$input['image_id']);
+                if($response['data'] == true){
+                    $response['data'] = $this->token->getToken(
+                        [
+                            'url' => Request::capture()->fullUrl(),
+                        ]
+                    );
+                }
             }
 
 

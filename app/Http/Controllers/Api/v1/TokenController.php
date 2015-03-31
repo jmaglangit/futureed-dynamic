@@ -1,16 +1,21 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
+use Carbon\Carbon;
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
+use FutureEd\Services\TokenServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
-use Tymon\JWTAuth\Facades\JWTAuth;
+
 
 class TokenController extends ApiController {
 
 
 
+    public function __construct( TokenServices $token){
+        $this->token = $token;
+    }
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -40,8 +45,19 @@ class TokenController extends ApiController {
 
 	}
 
+    public function test(){
+
+        $token_data = [
+            'url' => Request::capture()->fullUrl()
+        ];
+
+
+        return $this->token->getToken($token_data);
+    }
+
     public function decode(){
         $input = Input::only('jwt_token');
+
 
         if(!$input['jwt_token']){
 
@@ -53,6 +69,21 @@ class TokenController extends ApiController {
         $header = json_decode(base64_decode($decodeString[0]));
         $payload = json_decode(base64_decode($decodeString[1]));
 
+
+
+    }
+
+
+    public function tokenDecode(){
+        $input = Input::only('access_token');
+
+        if(!$input['access_token']){
+
+            return $this->setStatusCode(204)->respondWithError('No token detected.');
+
+        }
+
+        return $this->token->decodeToken($input['access_token']);
 
 
     }
