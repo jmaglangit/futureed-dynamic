@@ -104,5 +104,29 @@ class StudentServices {
     }
 
 
+    public function getStudentDetails($id){
+        $student = $this->getStudent($id);
+        $user = $this->user->getUser($id);
+
+//        dd($student,$user);
+
+        $return = [
+            'user_id' => $student->user_id,
+            'first_name' => $student->first_name,
+            'last_name' => $student->last_name,
+            'gender' => $student->gender,
+            'birth_date' => $student->birth_date,
+            'username' => $user->username,
+            'email' => $user->email,
+//            'avatar' => to be added url
+        ];
+
+        return $return;
+
+    }
+
+
+
+
 
 }

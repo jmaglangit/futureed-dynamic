@@ -186,6 +186,21 @@ class UserServices {
     }
 
 
+    //Add access token to user table
+    public function setAccessToken($access_token){
+        return 0;
+    }
+
+    //Get access token of the user
+    public function getAccessToken($user){
+        return 0;
+
+    }
+
+
+
+
+
 
 
 

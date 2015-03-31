@@ -79,14 +79,23 @@ class StudentsLoginController extends StudentsController{
             } else {
                 $response  = $this->student->checkAccess($input['user_id'],$input['image_id']);
                 if($response['data'] == true){
-                    $response['data'] = $this->token->getToken(
+
+                    //get student data
+                    $response['data'] = $this->student->getStudentDetails($input['user_id']);
+
+
+                    $token = $this->token->getToken(
                         [
                             'url' => Request::capture()->fullUrl(),
                         ]
                     );
+                    $response['data'] = array_merge($response['data'],$token);
+
+
+
+
                 }
             }
-
 
             return $this->setStatusCode($response['status'])->respondWithData($response['data']);
 

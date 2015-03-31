@@ -41,4 +41,8 @@ interface UserRepositoryInterface {
 
     public function getEmail($id);
 
+    public function setAccessToken($access_token);
+
+    public function getAccessToken($id);
+
 }

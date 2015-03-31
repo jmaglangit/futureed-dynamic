@@ -19,7 +19,7 @@ class CreateStudentsTable extends Migration {
             $table->string('last_name', 64);
             $table->enum('gender', ['Male', 'Female']);
             $table->datetime('birth_date');
-            $table->bigInteger('avatar_id');
+            $table->bigInteger('avatar_id')->nullable();
             $table->tinyInteger('password_image_id');
             $table->bigInteger('school_code');
             $table->bigInteger('grade_code');
