@@ -108,6 +108,7 @@
   <script src="/js/futureed_controllers.js"></script>
   <script src="/js/futureed_services.js"></script>
   <script src="/js/jquery.smooth-scroll.js"></script>
+  <script src="/js/jquery.smooth-scroll.js"></script>
   @yield('scripts')
   <script>
     $('a').smoothScroll();  

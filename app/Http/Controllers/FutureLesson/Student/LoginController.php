@@ -16,6 +16,16 @@ class LoginController extends Controller {
 	{
 		return view('student.login.login');
 	}
+
+	/**
+	 * Display enter password screen
+	 *
+	 * @return Response
+	 */
+	public function enter_password()
+	{
+		return view('student.login.enter-password');
+	}
 	
 	/**
 	 * Display forgot password screen
@@ -24,7 +34,7 @@ class LoginController extends Controller {
 	 */
 	public function forgot_password()
 	{
-		return view('client.login.forgot-password');
+		return view('student.login.forgot-password');
 	}
 
 	/**
@@ -34,7 +44,7 @@ class LoginController extends Controller {
 	 */
 	public function forgot_password_success()
 	{
-		return view('client.login.forgot-password-success');
+		return view('student.login.forgot-password-success');
 	}
 
 	/**
@@ -44,7 +54,7 @@ class LoginController extends Controller {
 	 */
 	public function registration()
 	{
-		return view('client.login.registration');
+		return view('student.login.registration');
 	}
 	
 	/**
@@ -54,7 +64,7 @@ class LoginController extends Controller {
 	 */
 	public function registration_success()
 	{
-		return view('client.login.registration-success');
+		return view('student.login.registration-success');
 	}
 	
 	/**
@@ -64,7 +74,17 @@ class LoginController extends Controller {
 	 */
 	public function reset_password()
 	{
-		return view('client.login.reset-password');
+		return view('student.login.reset-password');
+	}
+	
+	/**
+	 * Display reset confirm password screen
+	 *
+	 * @return Response
+	 */
+	public function reset_confirm_password()
+	{
+		return view('student.login.reset-confirm-password');
 	}
 	
 	/**
@@ -74,7 +94,7 @@ class LoginController extends Controller {
 	 */
 	public function reset_password_success()
 	{
-		return view('client.login.reset-password-success');
+		return view('student.login.reset-password-success');
 	}
 
 }

@@ -16,31 +16,31 @@ footer{display: none;}
         <div class="form_content">
           <ul class="form_password list-unstyled list-inline">
             <li class="item" id="">
-              <img src="images/password-01.png" alt="">
+              <img src="/images/password-01.png" alt="">
             </li>
             <li class="item" id="">
-              <img src="images/password-02.png" alt="">
+              <img src="/images/password-02.png" alt="">
             </li>            
             <li class="item" id="">
-              <img src="images/password-03.png" alt="">
+              <img src="/images/password-03.png" alt="">
             </li>
             <li class="item" id="">
-              <img src="images/password-04.png" alt="">
+              <img src="/images/password-04.png" alt="">
             </li>
             <li class="item" id=""> 
-              <img src="images/password-05.png" alt="">
+              <img src="/images/password-05.png" alt="">
             </li>            
             <li class="item" id="">
-              <img src="images/password-06.png" alt="">
+              <img src="/images/password-06.png" alt="">
             </li>
             <li class="item" id="">
-              <img src="images/password-07.png" alt="">
+              <img src="/images/password-07.png" alt="">
             </li>
             <li class="item" id=""> 
-              <img src="images/password-08.png" alt="">
+              <img src="/images/password-08.png" alt="">
             </li>            
             <li class="item" id="">
-              <img src="images/password-09.png" alt="">
+              <img src="/images/password-09.png" alt="">
             </li> 
             <p><a href="" class="btn btn-red">Submit</a></p>
           </ul>
