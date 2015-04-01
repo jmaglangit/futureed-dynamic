@@ -45,9 +45,11 @@
     </div>
   </div>
 
-  <!-- @include('components.footer') -->
-
 @stop
+
+@section('footer')
+  
+@overwrite
 
 @section('scripts')
   
