@@ -106,7 +106,8 @@ body {/*background: radial-gradient(transparent 50%, rgba(0, 0, 0, 0.3) 100%), l
 .form-style form { margin-top: 30px;}
 
 
-.form-select-password { padding-bottom: 30px; text-align:  center;}
+.form-select-password { padding-bottom: 30px; text-align: center; }
+.form-select-password.clearfix { min-height:450px; }
 .form-select-password .btn { width: 70%; margin-top: 30px; line-height: 30px; }
 .form-select-password .form_password .item { 
 	text-align: center; 
@@ -210,7 +211,7 @@ fieldset legend{color: #8e8171; font-size: 16px; text-transform: uppercase;}
 .student .login .form-style{padding-bottom: 70px;}
 .student .login .roundcon{
 	width:120px;
-	margin:0 auto 30px;
+	margin: 30px auto;
 }
 .student .login .roundcon i.fa{
 	background:#e8e8e8;

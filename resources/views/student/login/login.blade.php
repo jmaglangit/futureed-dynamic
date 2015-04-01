@@ -53,6 +53,6 @@
 
 @section('scripts')
   
-
+  {!! Html::script('/js/student/login.js') !!}
 
 @stop

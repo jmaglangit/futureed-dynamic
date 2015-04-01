@@ -1,6 +1,7 @@
 @extends('student.app')
 
 @section('content')
+
   <div class="container login">
     <div class="col-md-6 col-md-offset-3">
       <div class="form-style form-select-password">
@@ -18,4 +19,15 @@
       </div>
     </div>
   </div>
+
 @endsection
+
+@section('footer')
+  
+@overwrite
+
+@section('scripts')
+  
+  {!! Html::script('/js/student/login.js') !!}
+
+@stop
