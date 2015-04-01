@@ -21,7 +21,7 @@
   <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
   <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,400italic,500,500italic,700,700italic' rel='stylesheet' type='text/css'>
   <!-- Custom styles for this template -->
-  <link href="/css/admin.css" rel="stylesheet">
+  <link href="/css/general.css" rel="stylesheet">
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
   <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
@@ -89,14 +89,7 @@
     </nav>
   </header>
 
-
 	@yield('content')
-
-	<footer class="footer">
-	  <div class="container text-center">
-	    <p class="text-muted">{{ date('Y') }} &copy; All Rights Reserved. FutureEd Pte Ltd</p>
-	  </div>
-	</footer>
 
   <!-- START SCRIPTS -->
   <script src="/js/jquery.js"></script>
@@ -108,29 +101,6 @@
   <script src="/js/futureed_services.js"></script>
   <script src="/js/jquery.smooth-scroll.js"></script>
   @yield('scripts')
-  <script>
-    $('a').smoothScroll();  
-  </script>
-  <script>
-    $("#user_principal").click(function() {
-      $("#principal, #form_schoolname, #form_address, #form_address2, #form_postcode").show( "slow");
-      $("#parent").hide("slow");
-      $("#user_teacher, #user_parent").fadeTo("slow", 0.3);
-      $(this).fadeTo("slow", 1);
-    });
-    $("#user_teacher").click(function() {
-      $("#form_address, #form_address2, #form_postcode" ).hide( "slow");
-      $("#parent").hide("slow");
-      $("#principal, form_schoolname").show("slow");
-      $("#user_principal, #user_parent").fadeTo("slow", 0.3);
-      $(this).fadeTo("slow", 1);
-    });
-    $("#user_parent").click(function() {
-      $("#principal").hide("slow");
-      $("#parent").show("slow");
-      $("#user_principal, #user_teacher").fadeTo("slow", 0.3);
-      $(this).fadeTo("slow", 1);
-    });
-  </script>
+  <script src="/js/student/app.js"></script>
   <!-- END SCRIPTS -->
 </body></html>
