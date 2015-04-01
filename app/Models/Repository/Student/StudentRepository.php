@@ -8,6 +8,7 @@
 namespace FutureEd\Models\Repository\Student;
 
 use FutureEd\Models\Core\Student;
+use FutureEd\Models\Core\User;
 use League\Flysystem\Exception;
 
 class StudentRepository implements StudentRepositoryInterface{
@@ -16,7 +17,10 @@ class StudentRepository implements StudentRepositoryInterface{
 
     }
 
+    //get student details
     public function getStudent($id){
+
+        return Student::where('user_id',$id)->first();
 
     }
 
@@ -60,6 +64,7 @@ class StudentRepository implements StudentRepositoryInterface{
         return Student::where('user_id','=', $user_id)->pluck('password_image_id');
 
     }
+
 
 
 }

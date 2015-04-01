@@ -19,6 +19,7 @@ class CreateQuestionsTable extends Migration {
             $table->enum('question_type', ['MC', 'FIB', 'O', 'N']);
             $table->string('questions_text', 256);
             $table->string('questions_image', 256);
+            $table->string('answer')->nullable();
             $table->bigInteger('seq_no');
             $table->tinyInteger('difficulty');
             $table->integer('points_earned');

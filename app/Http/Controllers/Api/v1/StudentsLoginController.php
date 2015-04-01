@@ -2,9 +2,11 @@
 
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
+use FutureEd\Models\Core\User;
 use Illuminate\Support\Facades\Input;
 
 use Illuminate\Http\Request;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class StudentsLoginController extends StudentsController{
 
@@ -15,11 +17,10 @@ class StudentsLoginController extends StudentsController{
 
             if(!$input['username']){
 
-                return $this->respondNotFound();
+                return $this->setStatusCode(422)->respondWithError('Parameter validation failed');
 
             }else{
-
-                //check if username exist, return id else nothing
+//                check if username exist, return id else nothing
                 $response = $this->user->checkLoginName($input['username'], 'Student');
 
                 return $this->setStatusCode($response['status'])->respondWithData($response['data']);
@@ -38,7 +39,7 @@ class StudentsLoginController extends StudentsController{
 
         if(!$input['user_id']){
 
-            return $this->respondNotFound();
+            return $this->setStatusCode(422)->respondWithError('Parameter validation failed');
 
         } else {
 
@@ -57,11 +58,12 @@ class StudentsLoginController extends StudentsController{
      */
     public function password(){
         //check email and password matched
-        $input = Input::only('user_id','image_id');
+        $input = Input::only('user_id','image_id','app');
+
 
         if(!$input['user_id'] && !$input['image_id']){
 
-            return $this->respondNotFound();
+            return $this->setStatusCode(422)->respondWithError('Parameter validation failed');
 
         } else {
 
@@ -76,8 +78,24 @@ class StudentsLoginController extends StudentsController{
 
             } else {
                 $response  = $this->student->checkAccess($input['user_id'],$input['image_id']);
-            }
+                if($response['data'] == true){
 
+                    //get student data
+                    $response['data'] = $this->student->getStudentDetails($input['user_id']);
+
+
+                    $token = $this->token->getToken(
+                        [
+                            'url' => Request::capture()->fullUrl(),
+                        ]
+                    );
+                    $response['data'] = array_merge($response['data'],$token);
+
+
+
+
+                }
+            }
 
             return $this->setStatusCode($response['status'])->respondWithData($response['data']);
 

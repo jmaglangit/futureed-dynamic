@@ -16,7 +16,7 @@ class StudentsRegistrationController extends StudentsController {
 
         if(!$input['email']){
 
-            return $this->respondNotFound();
+            return $this->setStatusCode(422)->respondWithError('Parameter validation failed');
 
         } else {
 
@@ -30,7 +30,7 @@ class StudentsRegistrationController extends StudentsController {
         $input = Input::only('username');
         if(!$input['username']){
 
-            return $this->respondNotFound();
+            return $this->setStatusCode(422)->respondWithError('Parameter validation failed');
 
         } else {
 //            dd($input);

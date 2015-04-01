@@ -20,7 +20,7 @@ class UserRepository implements UserRepositoryInterface{
     }
 
     public function getUser($id){
-        return User::where('id','=',$id)->get();
+        return User::where('id','=',$id)->first();
     }
 
     public function getUserByType($id,$type){
@@ -147,6 +147,18 @@ class UserRepository implements UserRepositoryInterface{
         return User::where('id','=',$id)->pluck('email');
 
     }
+
+    //set access token of the user
+    public function setAccessToken($access_token){
+
+    }
+
+    //get access token of the user
+    public function getAccessToken($user){
+
+    }
+
+
 
 
 
