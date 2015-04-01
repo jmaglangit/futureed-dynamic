@@ -1,9 +1,10 @@
 @extends('student.app')
 
 @section('content')
+
   <div class="container login">
-    <div class="col-md-5 col-md-offset-1">
-      <div class="form-style form-narrow">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="form-style">
       	<!-- ERROR -->
       	<div style="display:none;">
 	        <div class="title">Account Locked</div>
@@ -20,32 +21,36 @@
 	        </div>
       	</div>
 		<!--// ERROR -->
-		<div class="title">Login to your account</div>
-        <form action="">
-          <!-- <span>Email or Username</span> -->
-          <div class="input">
-            <div class="icon">
-              <i class="fa fa-user"></i>
-            </div>
-            <input placeholder="Email or Username" type="email" name="" id="">
-          </div>
-          <!-- <span>Password</span> -->
-          <div class="input pass">
-            <div class="icon">
-              <i class="fa fa-lock"></i>
-            </div>
-            <input placeholder="Password" type="password" name="" id="">
-          </div>
-          <div class="btn-submit">LOGIN</div>
-        </form>
-        <a class="login_bcg" href="forgot-password.shtml">Forgot your password?</a>
-        <div class="fb">
-          SIGN UP
+		<div class="title">Enter Your Username or Email</div>
+      <div class="error">
+        <p>Email or Username should not be empty</p>
+      </div>
+      <form action="">
+        <div class="form-group">
+          <input class="form-control" type="email" name="" id="">              
         </div>
+        <div class="form-group">
+          <a href="login_step2.shtml.html" class="btn btn-red">Next</a>              
+        </div>
+      </form>
+      <div class="text-group">
+        <small>Not a Student?</small>
+        <small>Click <a href="#">here</a> for Parent / Teacher / School Site</small>     
+      </div>  
+      <div class="text-group">
+        <small><a href="forgot-password.shtml.html">Forgot yor password</a></small>
+        <p><a href="student-registration.shtml.html" class="btn btn-purple">Sign Up</a></p>      
+      </div>  
       </div>
     </div>
-    <div style="margin-top:170px; background:rgba(255,255,255,0.8); border-radius:5px; padding:20px; color:#000; font:normal 14px/20px Arial;" class="col-md-4">
-      <b>HEADS UP:</b><br><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc luctus libero ac enim faucibus pellentesque. Mauris eleifend tincidunt luctus. Suspendisse at nulla condimentum, rutrum leo at, molestie est. Sed leo arcu, posuere sed diam ac, pretium efficitur sem. Donec mattis eros metus, nec ultricies sapien interdum.
-    </div>
   </div>
-@endsection
+
+  <!-- @include('components.footer') -->
+
+@stop
+
+@section('scripts')
+  
+
+
+@stop
