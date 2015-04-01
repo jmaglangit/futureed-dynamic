@@ -49,7 +49,7 @@
 @stop
 
 @section('footer')
-  @parent
+
 @overwrite
 
 @section('scripts')

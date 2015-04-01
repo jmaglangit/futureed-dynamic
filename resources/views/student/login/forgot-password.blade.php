@@ -21,7 +21,7 @@
 @endsection
 
 @section('footer')
-  @parent
+
 @overwrite
 
 @section('scripts')
