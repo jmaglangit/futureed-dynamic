@@ -106,7 +106,8 @@ body {/*background: radial-gradient(transparent 50%, rgba(0, 0, 0, 0.3) 100%), l
 .form-style form { margin-top: 30px;}
 
 
-.form-select-password { padding-bottom: 30px; text-align:  center;}
+.form-select-password { padding-bottom: 30px; text-align: center; }
+.form-select-password.clearfix { min-height:450px; }
 .form-select-password .btn { width: 70%; margin-top: 30px; line-height: 30px; }
 .form-select-password .form_password .item { 
 	text-align: center; 
@@ -186,6 +187,7 @@ fieldset legend{color: #8e8171; font-size: 16px; text-transform: uppercase;}
 }
 .register_student {
 	text-align: left;
+	padding: 0 30px;
 }
 .register_student .form-header img {
 	border-radius: 100%;
@@ -207,10 +209,9 @@ fieldset legend{color: #8e8171; font-size: 16px; text-transform: uppercase;}
 .student .login > .col-md-6.col-md-offset-3{	
 	margin-top:80px;
 }
-.student .login .form-style{padding-bottom: 70px;}
 .student .login .roundcon{
 	width:120px;
-	margin:0 auto 30px;
+	margin: 30px auto;
 }
 .student .login .roundcon i.fa{
 	background:#e8e8e8;
@@ -234,7 +235,7 @@ footer{font:normal 12px/30px arial; }
   height: 30px;
   /*background-color: #f5f5f5;*/
 }
-
+.footer .text-muted{color:rgba(255,255,255,0.9); font-weight: 200; letter-spacing: 1px; margin-bottom: 20px;}
 /*----- MEDIA QUERIES -----*/
 @media(max-width: 767px){
 
