@@ -13,7 +13,7 @@ jti: JWT ID claim provides a unique identifier for the JWT
 Return [
 
 
-    'iss' => env('TOKEN_ISS','www.futureed.com'),
+    'iss' => env('TOKEN_ISS','futureed.com'),
     'sub' => env('TOKEN_SUB','access token'),
     'aud' => env('TOKEN_AUD','user'),
 
@@ -33,7 +33,7 @@ Return [
     /*
      * JWT deafault claims
      */
-    'site' => env('TOKEN_SITE',url()),
+    'site' => env('TOKEN_SITE','futureed.com'),
     'company' => env('TOKEN_COMPANY','Company'),
     'app' => env('TOKEN_APP','App'),
     'admin' => true,
