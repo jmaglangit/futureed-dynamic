@@ -1,13 +1,8 @@
 @extends('client.app')
 
 @section('content')
-<style>
-body {background: url("/images/bcg_triangle.svg") no-repeat scroll right bottom / cover;}
-footer{display: none;}
-</style>
-
-  <div class="container">
-    <div class="col-md-4 col-md-offset-1" style="margin-top:80px;">
+  <div class="container login">
+    <div class="col-md-4 col-md-offset-1">
       <div class="form-style form-narrow">
         <div class="title">Retrieve Password</div>
         <form action="">
