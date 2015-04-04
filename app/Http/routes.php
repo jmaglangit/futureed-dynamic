@@ -28,6 +28,7 @@ Routes::group(['prefix' => 'api/v1'], function()
     Routes::get('/user','Api\v1\UserController@index');
     Routes::post('/user/password/reset','Api\v1\UserPasswordController@passwordReset');
     Routes::post('/user/password/forgot','Api\v1\UserPasswordController@passwordForgot');
+    Routes::post('/user/email','Api\v1\EmailController@checkEmail');
 
     //student login
     Routes::post('/student/login/username','Api\v1\StudentsLoginController@login');
