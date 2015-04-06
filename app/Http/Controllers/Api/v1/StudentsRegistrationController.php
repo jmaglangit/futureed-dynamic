@@ -49,16 +49,23 @@ class StudentsRegistrationController extends StudentsController {
 
     public function add(){
         $input = Input::only(
-                'username',
-                'email',
-                'first_name',
-                'last_name',
-                'gender',
-                'birthday',
-                'school_code',
-                'grade_code');
+            'email',
+            'username',
+            'first_name',
+            'last_name',
+            'gender',
+            'birth_date',
+            'school',
+            'grade',
+            'country',
+            'state',
+            'city');
+
+
 
         //validate
+        //sends email for code
+
 
 
 

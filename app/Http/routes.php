@@ -37,11 +37,9 @@ Routes::group(['prefix' => 'api/v1'], function()
     //student password
     Routes::post('/student/password/image','Api\v1\StudentsPasswordController@getPasswordImages');
     //student registration
-    Routes::post('/student/registration/email','Api\v1\StudentsRegistrationController@checkEmail');
-    Routes::post('/student/registration/username','Api\v1\StudentsRegistrationController@checkUserName');
-    Routes::post('/student/registration/new','Api\v1\StudentsRegistrationController@add');
+    Routes::post('/student/register','Api\v1\StudentsRegistrationController@add');
     //schools
     Routes::get('/school','Api\v1\SchoolsController@schools');
-    //
+    //country
 
 });
