@@ -37,6 +37,7 @@ class UserServices {
     }
 
     public function addUser($user){
+
         return $this->users->addUser($user);
     }
 

@@ -32,11 +32,10 @@ class StudentsRegistrationController extends StudentsController {
             'city');
 
 
+        //validate
 
 
 
-
-       //validate
         // add user
         // add student
 
