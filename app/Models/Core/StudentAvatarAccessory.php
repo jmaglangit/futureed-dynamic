@@ -3,7 +3,7 @@
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class User extends Model {
+class StudentAvatarAccessory extends Model {
 
 	//
     use SoftDeletes;
