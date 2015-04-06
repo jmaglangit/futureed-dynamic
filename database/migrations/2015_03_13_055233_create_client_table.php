@@ -13,7 +13,7 @@ class CreateClientTable extends Migration {
 	public function up()
 	{
 		Schema::create('client', function(Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->bigInteger('user_id');
             $table->string('first_name', 64);
             $table->string('last_name', 64);

@@ -13,7 +13,7 @@ class CreatePasswordImagesTable extends Migration {
 	public function up()
 	{
 		Schema::create('password_images', function(Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('name', 128);
             $table->string('password_image_file', 256);
             $table->bigInteger('created_by');

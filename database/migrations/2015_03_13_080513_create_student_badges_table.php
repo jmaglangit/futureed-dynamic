@@ -13,7 +13,7 @@ class CreateStudentBadgesTable extends Migration {
 	public function up()
 	{
 		Schema::create('student_badges', function(Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->bigInteger('student_id');
             $table->bigInteger('badge_id');
             $table->bigInteger('created_by');

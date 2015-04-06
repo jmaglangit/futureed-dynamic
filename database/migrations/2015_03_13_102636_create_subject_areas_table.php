@@ -13,7 +13,7 @@ class CreateSubjectAreasTable extends Migration {
 	public function up()
 	{
 		Schema::create('subject_areas', function(Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->bigInteger('subject_code');
             $table->bigInteger('code')->nullable();
             $table->string('name', 128)->nullable();

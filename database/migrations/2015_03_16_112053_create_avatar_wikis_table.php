@@ -13,7 +13,7 @@ class CreateAvatarWikisTable extends Migration {
 	public function up()
 	{
 		Schema::create('avatar_wikis', function(Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->bigInteger('avatar_code');
             $table->bigInteger('code')->nullable();
             $table->string('name', 128)->nullable();

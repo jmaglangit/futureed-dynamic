@@ -13,7 +13,7 @@ class CreateVolumeDiscountsTable extends Migration {
 	public function up()
 	{
 		Schema::create('volume_discounts', function(Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->smallInteger('min_seats');
             $table->smallInteger('percentage');
             $table->enum('status', ['Enabled', 'Disabled']);

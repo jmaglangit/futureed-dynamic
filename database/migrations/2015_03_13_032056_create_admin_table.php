@@ -13,7 +13,7 @@ class CreateAdminTable extends Migration {
 	public function up()
 	{
 		Schema::create('admin', function(Blueprint $table) {
-            $table->bigInteger('id',20);
+            $table->bigIncrements('id');
             $table->bigInteger('user_id');
             $table->string('first_name', 64);
             $table->string('last_name', 64);

@@ -13,7 +13,7 @@ class CreateAvatarAccessoriesTable extends Migration {
 	public function up()
 	{
 		Schema::create('avatar_accessories', function(Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->bigInteger('code')->nullable();
             $table->bigInteger('avatar_code');
             $table->string('accessory_image', 256);

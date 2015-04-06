@@ -13,7 +13,7 @@ class CreatePointLevelsTable extends Migration {
 	public function up()
 	{
 		Schema::create('point_levels', function(Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('name', 128);
             $table->integer('points_required');
             $table->string('description', 256);
