@@ -13,16 +13,16 @@ jti: JWT ID claim provides a unique identifier for the JWT
 Return [
 
 
-    'iss' => 'www.futureed.com',
-    'sub' => 'access token',
-    'aud' => 'user',
+    'iss' => env('TOKEN_ISS','futureed.com'),
+    'sub' => env('TOKEN_SUB','access token'),
+    'aud' => env('TOKEN_AUD','user'),
 
     //set token time expiry
-    'exp' => 60,
+    'exp' => env('TOKEN_EXP',60),
 
     'nbf ' => time(),
     'iat' => time(),
-    'jti' => 'FutureEd',
+    'jti' => env('TOKEN_JTI','FutureEd'),
 
     /*
      * JWT default header
@@ -33,9 +33,9 @@ Return [
     /*
      * JWT deafault claims
      */
-    'site' => 'www.futureed.com',
-    'company' => 'FutureEd',
-    'app' => 'Future Lessons',
+    'site' => env('TOKEN_SITE','futureed.com'),
+    'company' => env('TOKEN_COMPANY','Company'),
+    'app' => env('TOKEN_APP','App'),
     'admin' => true,
 
 

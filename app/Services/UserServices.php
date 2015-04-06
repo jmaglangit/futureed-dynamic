@@ -151,6 +151,15 @@ class UserServices {
         }
     }
 
+    public function checkEmail($email,$user_type){
+        //check email if it exist
+        $return =  $this->users->checkEmail($email,$user_type);
+
+        return [
+            'user_id' => $return
+        ];
+    }
+
     //check user if enable to login.
     public function checkUserDisabled($id){
 
