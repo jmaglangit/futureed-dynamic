@@ -140,6 +140,7 @@ return [
          * Added Providers
          */
         'Laracasts\Generators\GeneratorsServiceProvider',
+        'Webpatser\Countries\CountriesServiceProvider',
 
 		/*
 		 * Project Specific Service Providers...
@@ -208,6 +209,7 @@ return [
 		 */
 		'Form'      => 'Illuminate\Html\FormFacade',
 		'Html'      => 'Illuminate\Html\HtmlFacade',
+        'Countries' => 'Webpatser\Countries\CountriesFacade',
 
 
 	],

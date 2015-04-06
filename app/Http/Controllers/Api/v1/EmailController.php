@@ -4,98 +4,33 @@ use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class EmailController extends ApiController {
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-		//
-	}
+	public function checkEmail(){
+        $input = Input::only('email','user_type');
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
+        //get email return user_id
+        //else error message not exist.
+        $email = $input['email'];
+        $user_type = $input['user_type'];
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
-	}
+        $return =  $this->user->checkEmail($email,$user_type);
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
-
-    /**
-     * Send email
-     * @param site
-     * @return success/fail send
-     */
-    public function mailSend(){
-        try{
-
-        }catch(Exception $e){
-            $status = 400;
-            $response = $e->getMessage();
+        if(is_null($return['user_id'])){
+            return [
+                'status' => 204,
+                'errors' => [
+                    'error_code' => 204,
+                    'message' => 'Email does not exist'
+                ]
+            ];
         }
+
         return [
-            'status' => $status,
-            'response' => $response
+            'status' => 200,
+            'data' => $return
         ];
     }
 
