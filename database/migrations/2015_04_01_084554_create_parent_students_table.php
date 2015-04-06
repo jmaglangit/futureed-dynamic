@@ -13,7 +13,7 @@ class CreateParentStudentsTable extends Migration {
 	public function up()
 	{
 		Schema::create('parent_students', function(Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->bigInteger('parent_user_id');
             $table->bigInteger('student_user_id');
             $table->bigInteger('created_by');

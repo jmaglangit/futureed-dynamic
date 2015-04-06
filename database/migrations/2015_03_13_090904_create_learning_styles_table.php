@@ -13,7 +13,7 @@ class CreateLearningStylesTable extends Migration {
 	public function up()
 	{
 		Schema::create('learning_styles', function(Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->bigInteger('code');
             $table->string('name', 128);
             $table->string('description', 256);

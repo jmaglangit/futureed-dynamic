@@ -14,7 +14,7 @@ class CreateStudentModulesTable extends Migration {
 	{
 		
 		Schema::create('student_modules', function(Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->bigInteger('class_id');
             $table->bigInteger('student_id');
             $table->bigInteger('module_code');

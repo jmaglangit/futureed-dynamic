@@ -13,7 +13,7 @@ class CreateStudentAvatarAccessoriesTable extends Migration {
 	public function up()
 	{
 		Schema::create('student_avatar_accessories', function(Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->bigInteger('user_id');
             $table->bigInteger('avatar_accessories_code');
             $table->timestamp('earned_at');

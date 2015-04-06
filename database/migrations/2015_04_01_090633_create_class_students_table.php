@@ -13,7 +13,7 @@ class CreateClassStudentsTable extends Migration {
 	public function up()
 	{
 		Schema::create('class_students', function(Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->bigInteger('user_id');
             $table->bigInteger('class_id');
             $table->enum('status',['Enabled','Disabled']);

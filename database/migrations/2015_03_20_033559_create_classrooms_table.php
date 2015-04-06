@@ -13,7 +13,7 @@ class CreateClassroomsTable extends Migration {
 	public function up()
 	{
 		Schema::create('classrooms', function(Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->bigInteger('order_no');
             $table->bigInteger('name')->nullable();
             $table->bigInteger('grade_code');

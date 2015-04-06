@@ -13,7 +13,7 @@ class CreateQuestionAnswersTable extends Migration {
 	public function up()
 	{
 		Schema::create('question_answers', function(Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->bigInteger('module_code');
             $table->bigInteger('question_code');
             $table->bigInteger('code')->nullable();

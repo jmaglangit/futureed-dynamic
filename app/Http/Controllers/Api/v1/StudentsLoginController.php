@@ -14,6 +14,7 @@ class StudentsLoginController extends StudentsController{
     public function login(){
 
             $input = Input::only('username');
+          
 
             if(!$input['username']){
 
