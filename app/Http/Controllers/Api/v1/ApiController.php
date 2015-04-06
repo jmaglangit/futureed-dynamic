@@ -63,7 +63,9 @@ class ApiController extends Controller {
         return $this->respond(
             [
                 'status' => $this->getStatusCode(),
-                'data' => $data
+                'data' => [$data
+                          ]  
+
             ]
         );
     }
@@ -91,7 +93,7 @@ class ApiController extends Controller {
         return $this->respond([
             'status' => $this->getStatusCode(),
             'errors' => [[
-                'error_code'=>$this->getStatusCode(),
+                'error_code'=>'00001',
                 'message' => $message
             ]]
         ]);

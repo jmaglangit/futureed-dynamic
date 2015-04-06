@@ -67,19 +67,27 @@ class UserServices {
                 if(!$is_disabled){
                     return [
                         'status' => 200,
-                        'data' => $return
+                        'data' => [
+                            'user_id'=>$return
+                        ]
                     ];
                 } else {
                     return [
                         'status' => 202,
-                        'data' => $is_disabled
+                        'data' => [
+                          'error_codes'=>'00001',
+                          'message'=>$is_disabled
+                        ]
                     ];
                 }
 
             } else {
                 return [
                     'status' => 202,
-                    'data' => "Email does not Exist"
+                     'data' => [
+                          'error_codes'=>'00001',
+                          'message' => 'Email does not Exist'
+                        ]
                 ];
             }
 
@@ -87,34 +95,44 @@ class UserServices {
 
            //check username if exist return id
            $return = $this->users->checkUserName($username,$user_Type);
-
            if(!is_null($return) ){
                $is_disabled = $this->checkUserDisabled($return);
-
                if(!$is_disabled){
-                   return [
-                       'status' => 200,
-                       'data' => $return
-                   ];
+                    return [
+                        'status' => 200,
+                        'data' => [
+                          'user_id'=>$return
+                        ]
+                    ];
                } else {
                    return [
-                       'status' => 202,
-                       'data' => $is_disabled
-                   ];
+                        'status' => 202,
+                        'data' => [
+                          'error_codes'=>'00001',
+                          'message'=>$is_disabled
+                        ]
+                    ];
                }
 
            } else {
                return [
-                   'status' => 202,
-                   'data' => "Username does not exist"
-               ];
+                    'status' => 202,
+                     'data' => [
+                          'error_codes'=>'00001',
+                          'message' => 'Username does not Exist'
+                        ]
+                ];
            }
 
        } else{
            return [
-               'status' => 202,
-               'data' => "Invalid Username"
-           ];
+                    'status' => 202,
+                     'data' => [
+                          'error_codes'=>'00001',
+                          'message' => 'Invalid Username'
+                        ]
+                ];
+           
        }
     }
 
@@ -162,6 +180,7 @@ class UserServices {
 
     //check user if enable to login.
     public function checkUserDisabled($id){
+
 
         if($this->users->accountActivated($id) == 0 ){
 
