@@ -88,12 +88,12 @@ class ApiController extends Controller {
 
     public function respondWithError($message = 'Not Found!'){
 
-        return $this->respond([
-            'error' => [
+        return $this->respond(
+             [
                 'status' => $this->getStatusCode(),
-                'message' => $message
+                'errors' => $message
             ]
-        ]);
+        );
 
     }
 

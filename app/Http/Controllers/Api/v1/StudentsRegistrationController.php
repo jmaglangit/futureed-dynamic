@@ -9,36 +9,6 @@ use League\Flysystem\Exception;
 
 class StudentsRegistrationController extends StudentsController {
 
-	//
-    public function checkEmail(){
-        //check email if exist
-        $input = Input::only('email');
-
-        if(!$input['email']){
-
-            return $this->setStatusCode(422)->respondWithError('Parameter validation failed');
-
-        } else {
-
-            return $this->respond($input);
-
-        }
-    }
-
-    public function checkUserName(){
-
-        $input = Input::only('username');
-        if(!$input['username']){
-
-            return $this->setStatusCode(422)->respondWithError('Parameter validation failed');
-
-        } else {
-//            dd($input);
-            return $this->respond($input);
-
-        }
-
-    }
 
 
     /*
@@ -47,31 +17,35 @@ class StudentsRegistrationController extends StudentsController {
      * response success/fail
      */
 
-    public function add(){
+    public function register(){
         $input = Input::only(
-            'email',
             'username',
+            'email',
             'first_name',
             'last_name',
             'gender',
-            'birth_date',
-            'school',
-            'grade',
+            'birthday',
+            'school_code',
+            'grade_code',
             'country',
             'state',
             'city');
 
 
 
-        //validate
-        //sends email for code
+
+
+
+       //validate
+        // add user
+        // add student
 
 
 
 
 
-
-        return $input;
+        return 'done';
     }
+
 
 }

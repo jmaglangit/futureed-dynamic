@@ -154,8 +154,28 @@ class UserServices {
     public function checkEmail($email,$user_type){
         //check email if it exist
         $return =  $this->users->checkEmail($email,$user_type);
-
+        if(is_null($return)){
+            return [
+                'error_code' => 204,
+                'message' => 'Email does not exist'
+            ];
+        }
         return [
+            'status' => 200,
+            'user_id' => $return
+        ];
+    }
+
+    public function checkUsername($username,$user_type){
+        $return = $this->users->checkUserName($username,$user_type);
+        if(is_null($return)){
+            return [
+                'error_code' => 204,
+                'message' => 'Username does not exist'
+            ];
+        }
+        return [
+            'status' => 200,
             'user_id' => $return
         ];
     }
