@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOrdersTable extends Migration {
+class CreateStudentModulesTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,18 +12,19 @@ class CreateOrdersTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('orders', function(Blueprint $table) {
+		
+		Schema::create('student_modules', function(Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('order_no');
-            $table->timestamp('order_date');
-            $table->bigInteger('client_id');
-            $table->bigInteger('subscription_id');
+            $table->bigInteger('class_id');
+            $table->bigInteger('student_id');
+            $table->bigInteger('module_code');
+            $table->tinyInteger	('progress');
             $table->timestamp('date_start');
             $table->timestamp('date_end');
-            $table->smallInteger('seats_total');
-            $table->smallInteger('seats_taken')->nullable();
-            $table->decimal('total_amount', 8, 2);
-            $table->enum('payment_status', ['Pending', 'Paid', 'Cancelled']);
+            $table->integer('total_time');
+            $table->smallInteger('no_of_mistakes');
+            $table->integer('total_points_lost');
+            $table->bigInteger('last_answered_question_id');
             $table->bigInteger('created_by');
             $table->bigInteger('updated_by');
             $table->softDeletes()->nullable();
@@ -38,7 +39,7 @@ class CreateOrdersTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('orders');
+		Schema::drop('student_modules');
 	}
 
 }

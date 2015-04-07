@@ -13,7 +13,7 @@ class CreateTeachingContentsTable extends Migration {
 	public function up()
 	{
 		Schema::create('teaching_contents', function(Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->bigInteger('module_code');
             $table->bigInteger('subject_code');
             $table->bigInteger('grade_code');

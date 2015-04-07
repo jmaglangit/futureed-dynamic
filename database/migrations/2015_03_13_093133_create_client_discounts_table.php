@@ -13,7 +13,7 @@ class CreateClientDiscountsTable extends Migration {
 	public function up()
 	{
 		Schema::create('client_discounts', function(Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->bigInteger('client_id');
             $table->smallInteger('percentage');
             $table->enum('status', ['Enabled', 'Disabled']);

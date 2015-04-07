@@ -13,7 +13,7 @@ class CreateMediaTypesTable extends Migration {
 	public function up()
 	{
 		Schema::create('media_types', function(Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->bigInteger('code')->nullable();
             $table->string('name', 128)->nullable();
             $table->string('description', 256);

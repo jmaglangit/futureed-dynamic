@@ -13,7 +13,7 @@ class CreateAvatarsTable extends Migration {
 	public function up()
 	{
 		Schema::create('avatars', function(Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->bigInteger('code')->nullable();
             $table->enum('gender', ['Male', 'Female']);
             $table->string('avatar_image', 256);

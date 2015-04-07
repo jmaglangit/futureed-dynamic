@@ -13,7 +13,7 @@ class CreateAnnouncementsTable extends Migration {
 	public function up()
 	{
 		Schema::create('announcements', function(Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->text('announcement')->nullable();
             $table->timestamp('date_start');
             $table->timestamp('date_end');

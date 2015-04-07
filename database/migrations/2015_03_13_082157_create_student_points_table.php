@@ -13,7 +13,7 @@ class CreateStudentPointsTable extends Migration {
 	public function up()
 	{
 		Schema::create('student_points', function(Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->bigInteger('student_id');
             $table->integer('points_earned');
             $table->bigInteger('event_id');

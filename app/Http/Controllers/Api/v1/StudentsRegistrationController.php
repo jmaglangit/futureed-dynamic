@@ -47,7 +47,7 @@ class StudentsRegistrationController extends StudentsController {
         foreach( $input as $k => $r){
 
             if(is_null($r)){
-                
+
             }
 
 

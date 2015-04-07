@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateLevelsTable extends Migration {
+class CreateClassStudentsTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -12,12 +12,11 @@ class CreateLevelsTable extends Migration {
 	 */
 	public function up()
 	{
-		Schema::create('levels', function(Blueprint $table) {
+		Schema::create('class_students', function(Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('code')->nullable();
-            $table->string('name', 128)->nullable();
-            $table->string('description', 256);
-            $table->enum('status', ['Enabled', 'Diabled']);
+            $table->bigInteger('user_id');
+            $table->bigInteger('class_id');
+            $table->enum('status',['Enabled','Disabled']);
             $table->bigInteger('created_by');
             $table->bigInteger('updated_by');
             $table->softDeletes()->nullable();
@@ -32,7 +31,7 @@ class CreateLevelsTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('levels');
+		Schema::drop('class_students');
 	}
 
 }
