@@ -35,14 +35,29 @@ class StudentServices {
 
     /*
      * @desc Add new student
+     *  'first_name',
+            'last_name',
+            'gender',
+            'birthday',
+            'school_code',
+            'grade_code',
+            'country',
+            'state',
+            'city'
      */
     public function addStudent($student){
 
-        //check if existing user
+        $return = [];
 
         //if existing add student
+        $this->student->addStudent($student);
+
         // if not add user and add student
 
+        return [
+            'status' => 200,
+            'message' => 'cool'
+        ];
 
 
     }

@@ -27,11 +27,58 @@ class UserServices {
         return $this->users->getUserByType($id,$type);
     }
 
-    //add username,email,user_type
+    //add  'username',
+    //'email',
+    //'first_name',
+    //'last_name'
     public function addUser($user){
+        $return= [];
 
-        dd($user);
-        return $this->users->addUser($user);
+        if(!$this->validator->email($user['email'])){
+            $return = array_merge($return, [
+                'error_code' => 400028,
+                'message' => 'Email not verified'
+            ]);
+        }
+
+        if(!$this->validator->username($user['username'])){
+            $return = array_merge($return, [
+                'error_code' => 400028,
+                'message' => 'Email not verified'
+            ]);
+        }
+
+        //check username and email doest not exist.
+        $check_mail = $this->users->checkEmail($user['email'],$user['user_type']);
+        if(!is_null($check_mail)){
+            $return = array_merge($return,[
+                'error_code' => 204,
+                'message' => 'Email already exist'
+            ]);
+        }
+
+        $check_username = $this->users->checkUserName($user['username'],$user['user_type']);
+        if(!is_null($check_username)){
+            $return = array_merge($return,[
+                'error_code' => 204,
+                'message' => 'Username already exist'
+            ]);
+        }
+
+        //if user validated
+        if(empty(array_filter($return))){
+            //add user
+            //get user id
+            $adduser_response = $this->users->addUser($user);
+
+            $return = [
+                'status' => 200,
+                'id' => 17
+            ];
+
+        }
+
+        return $return;
     }
     public function updateUser($user){
         return $this->users->updateUser($user);

@@ -30,19 +30,21 @@ class UserRepository implements UserRepositoryInterface{
     }
 
     public function addUser($user){
-        //
+
         try{
-            $user = new User();
-            $user->username = $user['username'];
-            $user->email = $user['email'];
-            $user->user_type = $user['user_type'];
-            $user->created_by = 1;
-            $user->update_by = 1;
-            $user->save();
+            User::insert([
+                'username' => $user['username'],
+                'email' => $user['email'],
+                'name' => $user['first_name'] .' '.$user['last_name'],
+                'user_type' => $user['user_type'],
+                'created_by' => 1,
+                'updated_by' => 1,
+            ]);
+
         }catch(Exception $e){
-            throw new Exception($e->getMessage());
+            return $e->getMessage();
         }
-        return 0;
+        return true;
     }
 
     public function updateUser($user){

@@ -22,8 +22,9 @@ class ValidatorRepository implements ValidatorRepositoryInterface{
         }
     }
 
+    //implement validation of the username
     public function username($username){
-       return 1;
+       return true;
     }
 
     public function firstName($first_name){
@@ -35,6 +36,13 @@ class ValidatorRepository implements ValidatorRepositoryInterface{
     }
 
     public function gender($gender){
+
+      if(in_array($gender, ['Male','Female'])){
+
+          return true;
+      }
+
+    return false;
 
     }
 

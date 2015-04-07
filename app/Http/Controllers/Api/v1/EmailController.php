@@ -20,7 +20,7 @@ class EmailController extends ApiController {
 
         if(isset($return['error_code'])){
 
-            return $this->setStatusCode(204)->respondWithError($return);
+            return $this->setStatusCode(201)->respondWithError($return);
 
         }
 
