@@ -12,16 +12,19 @@ namespace FutureEd\Services;
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use FutureEd\Models\Repository\PasswordImage\PasswordImageRepositoryInterface;
 use FutureEd\Models\Repository\User\UserRepositoryInterface;
+use FutureEd\Models\Repository\Validator\ValidatorRepository;
 
 class StudentServices {
 
     public function __construct(
             StudentRepositoryInterface $student,
             PasswordImageServices $password,
-            UserServices $user){
+            UserServices $user,
+            ValidatorRepository $validator){
         $this->student = $student;
         $this->password = $password;
         $this->user = $user;
+        $this->validator = $validator;
     }
 
     public function getStudents(){
@@ -45,21 +48,32 @@ class StudentServices {
             'state',
             'city'
      */
+    //TODO: Add more validations on the each data variables.
     public function addStudent($student){
 
         $return = [];
 
-        //if existing add student
-        $this->student->addStudent($student);
+        //validate datas
+        if($this->validator->gender($student['gender'])){
+            $return = array_merge($return,[
+                'error_code' => 400028,
+                'message' => 'Gender not verified'
+            ]);
+        }
 
-        // if not add user and add student
+        if(empty(array_filter($return))){
+            //if existing add student
+            $student_response = $this->student->addStudent($student);
 
-        return [
-            'status' => 200,
-            'message' => 'cool'
-        ];
+            // if not add user and add student
 
+            return [
+                'status' => 200,
+                'message' => $student_response
+            ];
+        }
 
+        return $return;
     }
 
     public function updateStudent($student){

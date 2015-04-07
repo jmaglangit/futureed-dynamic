@@ -70,8 +70,16 @@ class StudentsRegistrationController extends StudentsController {
 
         }
 
+        if(isset($student_response['status'])){
 
-        return $student_response;
+            return $this->respondWithData([
+                'id' => $user_response['id']
+            ]);
+        } else {
+            $return = array_merge($user_response,$student_response);
+            return $this->setStatusCode(200)->respondWithError($return);
+
+        }
 
 
 
