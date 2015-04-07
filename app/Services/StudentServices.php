@@ -107,22 +107,28 @@ class StudentServices {
     public function getStudentDetails($id){
         $student = $this->getStudent($id);
         $user = $this->user->getUser($id);
-
-//        dd($student,$user);
+        $age = $this->age($student->birth_date);
+    //dd($student,$user);
 
         $return = [
-            'user_id' => $student->user_id,
+            'id' => $student->user_id,
             'first_name' => $student->first_name,
             'last_name' => $student->last_name,
             'gender' => $student->gender,
             'birth_date' => $student->birth_date,
             'username' => $user->username,
             'email' => $user->email,
-//            'avatar' => to be added url
+            'learning_style'=>$student->learning_style_id,
+            'age'=>$age,
+            'avatar_id' => $student->avatar_id
         ];
 
         return $return;
 
+    }
+    public function age($birth_date){
+         $interval = date_diff(date_create(),date_create($birth_date));
+         return $interval->format("%Y");
     }
 
 

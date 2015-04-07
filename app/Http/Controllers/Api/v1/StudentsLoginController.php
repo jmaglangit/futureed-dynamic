@@ -28,7 +28,7 @@ class StudentsLoginController extends StudentsController{
                 $response = $this->user->checkLoginName($input['username'], 'Student');
                 if($response['status']==200){
                  return $this->setStatusCode($response['status'])
-                             ->respondWithData(['user_id'=>$response['data']]);
+                             ->respondWithData(['id'=>$response['data']]);
                 }
                 else{
                  return $this->setStatusCode($response['status'])
@@ -61,7 +61,6 @@ class StudentsLoginController extends StudentsController{
             //TODO: Get image password of student.
 
                 $response = $this->student->getImagePassword($input['user_id']);
-
                 return $this->setStatusCode($response['status'])->respondWithData($response['data']);
         }
 
