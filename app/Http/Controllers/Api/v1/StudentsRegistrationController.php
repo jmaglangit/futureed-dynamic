@@ -33,10 +33,35 @@ class StudentsRegistrationController extends StudentsController {
 
 
         //validate
+        $no_data = [];
+
+        if(!$input['username'] || !$input['email'] || !$input['first_name'] || !$input['last_name'] || !$input['gender']|| !$input['birthday']
+            || !$input['school_code'] || !$input['grade_code'] || !$input['country'] || !$input['state'] || !$input['city']){
+
+            return $this->setStatusCode(200)->respondWithError([
+                'error_code' => 204,
+                'message' => 'Invalid parameter'
+            ]);
+        }
+
+        foreach( $input as $k => $r){
+
+            if(is_null($r)){
+                
+            }
 
 
+        }
+
+
+        if(!is_null($no_data)){
+
+            return $no_data;
+
+        }
 
         // add user
+
         // add student
 
 

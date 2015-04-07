@@ -36,8 +36,10 @@ class UserServices {
         return $this->users->getUserByType($id,$type);
     }
 
+    //add username,email,user_type
     public function addUser($user){
 
+        dd($user);
         return $this->users->addUser($user);
     }
 

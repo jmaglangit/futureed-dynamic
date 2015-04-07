@@ -32,24 +32,13 @@ class UserRepository implements UserRepositoryInterface{
     public function addUser($user){
         //
         try{
-            \DB::table('students')->insert(
-                [
-                    'first_name' => '',
-                    'last_name' => '',
-                    'gender' =>'',
-                    'birth_date' => '',
-                    'avatar_id' => '',
-                    'password_image_id' => '',
-                    'school_code' =>'',
-                    'level_code' =>'',
-                    'points' =>'',
-                    'point_level_id' =>'',
-                    'learning_style_id' =>'',
-                    'status' => '',
-                    'created_by_id' => '',
-                    'created_at' => '',
-                ]
-            );
+            $user = new User();
+            $user->username = $user['username'];
+            $user->email = $user['email'];
+            $user->user_type = $user['user_type'];
+            $user->created_by = 1;
+            $user->update_by = 1;
+            $user->save();
         }catch(Exception $e){
             throw new Exception($e->getMessage());
         }
