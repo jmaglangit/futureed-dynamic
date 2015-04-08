@@ -35,19 +35,39 @@ class StudentRepository implements StudentRepositoryInterface{
 //            password_image_id
 //            school_code
 //            grade_code
-//            points
 //            point_level_id
 //            learning_style_id
 //            status
-            \DB::table('students')->insert([
-                [
 
-                ]
-            ]);
+//            'first_name',
+//            'last_name',
+//            'gender',
+//            'birthday',
+//            'school_code',
+//            'grade_code',
+//            'country',
+//            'state',
+//            'city'
+           Student::insert([
+               'user_id' => $student['user_id'],
+               'first_name' => $student['first_name'],
+               'last_name' => $student['last_name'],
+               'gender' => $student['gender'],
+               'birth_date' => $student['birthday'],
+               'country' => $student['country'],
+               'state' => $student['state'],
+               'city' => $student['city'],
+               'school_code' => $student['school_code'],
+               'grade_code' => $student['grade_code'],
+               'status' => 'Disabled',
+               'created_by' => 1,
+               'updated_by' => 1
+           ]);
 
         } catch (Exception $e){
             throw new Exception ($e->getMessage());
         }
+        return true;
 
     }
 

@@ -26,8 +26,60 @@ class UserServices {
         //get user by type.
         return $this->users->getUserByType($id,$type);
     }
+
+    //add  'username',
+    //'email',
+    //'first_name',
+    //'last_name'
     public function addUser($user){
-        return $this->users->addUser($user);
+        $return= [];
+
+        if(!$this->validator->email($user['email'])){
+            $return = array_merge($return, [
+                'error_code' => 400028,
+                'message' => 'Email not verified'
+            ]);
+        }
+
+        if(!$this->validator->username($user['username'])){
+            $return = array_merge($return, [
+                'error_code' => 400028,
+                'message' => 'Username not verified'
+            ]);
+        }
+
+        //check username and email doest not exist.
+        $check_mail = $this->users->checkEmail($user['email'],$user['user_type']);
+        if(!is_null($check_mail)){
+            $return = array_merge($return,[
+                'error_code' => 204,
+                'message' => 'Email already exist'
+            ]);
+        }
+
+        $check_username = $this->users->checkUserName($user['username'],$user['user_type']);
+        if(!is_null($check_username)){
+            $return = array_merge($return,[
+                'error_code' => 204,
+                'message' => 'Username already exist'
+            ]);
+        }
+
+        //if user validated
+        if(empty(array_filter($return))){
+            //add user
+            //get user id
+            $adduser_response = $this->users->addUser($user);
+
+            $return = [
+                'status' => 200,
+                'id' => 17,
+                'message' => $adduser_response
+            ];
+
+        }
+
+        return $return;
     }
     public function updateUser($user){
         return $this->users->updateUser($user);
@@ -116,7 +168,30 @@ class UserServices {
     public function checkEmail($email,$user_type){
         //check email if it exist
         $return =  $this->users->checkEmail($email,$user_type);
+
+        if(is_null($return)){
+            return [
+                'error_code' => 204,
+                'message' => 'Email does not exist'
+            ];
+        }
         return [
+            'status' => 200,
+            'user_id' => $return
+        ];
+    }
+
+    public function checkUsername($username,$user_type){
+        $return = $this->users->checkUserName($username,$user_type);
+        if(is_null($return)){
+            return [
+                'error_code' => 204,
+                'message' => 'Username does not exist'
+            ];
+        }
+
+        return [
+            'status' => 200,
             'user_id' => $return
         ];
     }

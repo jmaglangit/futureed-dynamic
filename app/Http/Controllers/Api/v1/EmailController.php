@@ -18,20 +18,13 @@ class EmailController extends ApiController {
 
         $return =  $this->user->checkEmail($email,$user_type);
 
-        if(is_null($return['user_id'])){
-            return [
-                'status' => 204,
-                'errors' => [
-                    'error_code' => 204,
-                    'message' => 'Email does not exist'
-                ]
-            ];
+        if(isset($return['error_code'])){
+
+            return $this->setStatusCode(201)->respondWithError($return);
+
         }
 
-        return [
-            'status' => 200,
-            'data' => $return
-        ];
+        return $this->respondWithData($return);
     }
 
 }
