@@ -39,6 +39,8 @@ class MailServices {
 
     }
 
+    //Send add 
+
     public function sendStudentMailResetPassword($id){
         //TODO: Send email with code of password.
         //
