@@ -18,12 +18,10 @@ class ApiController extends Controller {
     public function __construct(
             UserServices $user,
             StudentServices $student,
-            MailServices $mail,
             PasswordImageServices $password_image,
             TokenServices $token ){
         $this->user = $user;
         $this->student = $student;
-        $this->mail = $mail;
         $this->password_image = $password_image;
         $this->token = $token;
     }

@@ -20,18 +20,53 @@ class MailServices {
         $this->user = $user;
     }
 
-    //
-    public function sendMail(){
+    /*
+     * $contents
+     * view - views of the email
+     * data - data to be passed to view
+     * mail_sender - sender
+     * mail_sender_name - name of the sender
+     * mail_recipient - recipient
+     * mail_recipient_name - name of the recipient
+     * carbon_copy - emails to be cc'ed
+     * cabon_copy_name - name of the cc'ed
+     * blind_carbon_copy - emails to be bcc'ed
+     * blind_carbon_copy_name - name of the bcc'ed
+     * subject - subject of the email
+     */
+    public function sendMail($contents){
+
         try{
-//            dd(csrf_token());
 
-            Mail::send('emails.student.forget-password', array('key' => 'value'), function($message)
-            {
-                $message->from('do-not-reply@example.com', 'FutureEd');
-                $message->to('jmaglangit@nerubia.com', 'John Doe')->subject('Welcome!');
+            Mail::send($contents['view'],$contents['data'],function($message) use ($contents){
 
+
+                //mail sender
+                //TODO: set default to no-reply@company.com
+                $message->from($contents['mail_sender'],$contents['mail_sender_name']);
+
+                //mail recipient
+                $message->to($contents['mail_recipient'],$contents['mail_recipient_name']);
+
+                //if carbon copy is set.
+                if(isset($contents['carbon_copy'])){
+
+                    $message->cc($contents['carbon_copy'],$contents['carbon_copy_name']);
+
+                }
+
+                //if blind carbon copy is set.
+                if(isset($contents['blind_carbon_copy'])){
+
+                    $message->bcc($contents['blind_carbon_copy'],$contents['blind_carbon_copy_name']);
+
+                }
+
+                //mail subject
+                $message->subject($contents['subject']);
 
             });
+
 
         } catch(Exception $e){
             throw new Exception ($e->getMessage());
@@ -39,7 +74,28 @@ class MailServices {
 
     }
 
-    //Send add 
+    public function studentRegister($user, $code){
+        $content = [
+            'view' => 'emails.student.confirmation-code',
+            'data' => [
+                'name' => 'Jason',
+                'code' => 1234,
+                //TODO: determine where to get the url on the link of the email.
+                'link' => url() . '/api/v1',
+            ],
+            'mail_sender' => 'no-reply@futureed.com',
+            'mail_sender_name' => 'Future Lesson',
+            'mail_recipient' => 'jmaglangit@nerubia.com',
+            'mail_recipient_name' => 'Jason Maglangit',
+            'subject' => '[TEST] Student register with a code'
+        ];
+
+        $this->sendMail($content);
+
+    }
+
+
+
 
     public function sendStudentMailResetPassword($id){
         //TODO: Send email with code of password.

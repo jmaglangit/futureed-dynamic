@@ -22,6 +22,7 @@ Routes::group(['prefix' => 'api/v1'], function()
     Routes::get('/token','Api\v1\TokenController@index');
     Routes::post('/token/decode','Api\v1\TokenController@tokenDecode');
     Routes::get('/code','Api\v1\TokenController@getCode');
+    Routes::get('/sendmail','Api\v1\TokenController@sendMail');
 
 
     Routes::get('/','Api\v1\ApiController@index');
