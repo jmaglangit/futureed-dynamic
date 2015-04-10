@@ -117,7 +117,10 @@ class StudentServices {
                 $this->user->addLoginAttempt($id);
                 if(!$this->user->exceedLoginAttempts($id)){
                     $this->user->lockAccount($id);
-                    return $this->user->checkUserDisabled($id);
+                    return [
+                        'status' => 202,
+                        'data' => $this->user->checkUserDisabled($id)
+                    ];
                 }
                 return [
                     'status' => 202,
@@ -134,9 +137,11 @@ class StudentServices {
 
 
     public function getStudentDetails($id){
+        $user_student = config('futureed.student');
         $student = $this->getStudent($id);
-        $user = $this->user->getUser($id,'Student');
         $age = $this->age($student->birth_date);
+        $user = $this->user->getUser($id,$user_student);
+
         $return = [
             'id' => $student->user_id,
             'first_name' => $student->first_name,
