@@ -21,18 +21,22 @@
 	        </div>
       	</div>
 		<!--// ERROR -->
-		<div class="title">Enter Your Username or Email</div>
-      <div class="error">
-        <p>Email or Username should not be empty</p>
-      </div>
-      <form action="">
-        <div class="form-group">
-          <input class="form-control" type="email" name="" id="">              
+        <div ng-controller="loginController">
+          <form>
+            <div class="title">Enter Your Username or Email</div>
+              <div class="error" ng-if="error">
+                <p>$! error $!</p>
+              </div>
+
+            <div>
+            <div class="form-group">
+              <input type="email" class="form-control" name="email" ng-model="login.email" required>
+            </div>
+            <div class="form-group">
+              <button type="button" ng-click="validateUser()" class="btn btn-red">Next</button>              
+            </div>
+          </form>
         </div>
-        <div class="form-group">
-          <a href="login_step2.shtml.html" class="btn btn-red">Next</a>              
-        </div>
-      </form>
       <div class="text-group">
         <small>Not a Student?</small>
         <small>Click <a href="#">here</a> for Parent / Teacher / School Site</small>     
@@ -44,6 +48,7 @@
       </div>
     </div>
   </div>
+</div>
 
 @stop
 
@@ -53,6 +58,6 @@
 
 @section('scripts')
   
-  {!! Html::script('/js/student/login.js') !!}
+  <!-- {!! Html::script('/js/student/login.js') !!} -->
 
 @stop
