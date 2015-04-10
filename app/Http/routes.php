@@ -44,6 +44,7 @@ Routes::group(['prefix' => 'api/v1'], function()
     Routes::post('/student/invite','Api\v1\StudentsRegistrationController@invite');
     //schools
     Routes::get('/school','Api\v1\SchoolsController@schools');
-    //country
+    //Forgot Password
+    Routes::post('/user/password/code', 'Api\v1\UserPasswordController@confirmResetCode');
 
 });

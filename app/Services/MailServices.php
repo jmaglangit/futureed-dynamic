@@ -68,18 +68,18 @@ class MailServices {
         ];
         $this->sendMail($content);
     }
-    public function sendStudentMailResetPassword($email,$code){
+    public function sendStudentMailResetPassword($data,$code){
         $content = [
             'view' => 'emails.student.forget-password',
             'data' => [
-                'name' => 'Jayson',
+                'name' => $data['username'],
                 'code' => $code,
-                'link' => url() . '/api/v1',
+                'link' => url() . '/api/v1/user/password/code/'.$data['email'],
             ],
             'mail_sender' => 'no-reply@futureed.com',
             'mail_sender_name' => 'Future Lesson',
             'mail_recipient' => 'jsuizo@nerubia.com',
-            'mail_recipient_name' => 'Jayson Suizo',
+            'mail_recipient_name' =>$data['username'] ,
             'subject' => 'Forgot Password'
         ];
         $this->sendMail($content);

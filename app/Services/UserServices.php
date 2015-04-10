@@ -3,6 +3,7 @@
 use FutureEd\Models\Repository\User\UserRepositoryInterface;
 use FutureEd\Models\Repository\Validator\ValidatorRepositoryInterface;
 use FutureEd\Services\CodeGeneratorServices;
+use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 
 class UserServices {
     /**
@@ -11,10 +12,11 @@ class UserServices {
     public function __construct(
         UserRepositoryInterface $users,
         ValidatorRepositoryInterface $validator,
-        CodeGeneratorServices $code){
+        CodeGeneratorServices $code,StudentRepositoryInterface $student){
         $this->users = $users;
         $this->validator = $validator;
         $this->code = $code;
+        $this->student= $student;
     }
     public function getUsers(){
         return $this->users->getUsers();
@@ -240,4 +242,35 @@ class UserServices {
     public function setResetCode($id,$code){
         $this->users->updateResetCode($id,$code);
     }
+
+    //get all user Details
+    public function getUserDetail($id,$user_Type){
+        $return =$this->users->getUserDetail($id,$user_Type);
+        return $return;
+    }
+    //check if reset code expired
+    public function checkResetCodeExpiry($reset_code_expiry){
+        $date = date('Y-m-d H:i:s');
+        if($date>$reset_code_expiry){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    //format return for reset code
+    public function resetCodeResponse($user){
+        $return=['id'=>$user['id'],
+                 'user_type'=>$user['user_type'],
+                ];
+        return $return;
+    }
+    //udpate student_image_password
+    public function resetPasswordImage($data){
+        $this->student->UpdateImagePassword($data);
+        $return = ['status'=>200,
+                    'data' =>$data['user_id']];
+        return $return;
+    }
+
 }

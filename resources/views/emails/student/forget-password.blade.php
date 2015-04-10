@@ -7,8 +7,9 @@
 <h2>Hello {{ $name  }}</h2>
 
 <div>
+	<div>Link: {{ $link }}</div>
     <div>Code : {{ $code  }}</div>
-    <div>Link: {{ $link }}</div>
+    
 </div>
 </body>
 </html>
