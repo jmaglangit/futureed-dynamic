@@ -1,6 +1,8 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
+
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
+
 use FutureEd\Services\MailServices;
 use FutureEd\Services\PasswordImageServices;
 use FutureEd\Services\StudentServices;
@@ -8,8 +10,11 @@ use FutureEd\Services\UserServices;
 use FutureEd\Services\TokenServices;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
+
 class ApiController extends Controller {
+
     private $status_code = 200;
+
     public function __construct(
             UserServices $user,
             StudentServices $student,
@@ -26,6 +31,7 @@ class ApiController extends Controller {
             'version' => 1
         ];
     }
+
     /**
      * @return mixed
      */
@@ -33,6 +39,7 @@ class ApiController extends Controller {
     {
         return $this->status_code;
     }
+
     /**
      * @param mixed $status_code
      */
@@ -41,10 +48,16 @@ class ApiController extends Controller {
         $this->status_code = $status_code;
         return $this;
     }
+
+
+
     public function respondSuccess($message = 'Success!'){
         return $this->setStatusCode(Response::HTTP_ACCEPTED)->respondWithData($message);
+    
     }
+
     public function respondWithData($data){
+       
         return $this->respond(
             [
                 'status' => $this->getStatusCode(),
@@ -52,6 +65,7 @@ class ApiController extends Controller {
             ]
         );
     }
+
     public function respondWithMessage($message){
         return $this->respond(
             [
@@ -60,15 +74,25 @@ class ApiController extends Controller {
             ]
         );
     }
+
+
+
+
     public function respond($data, $headers = [] ){
+      
         return Response()->json($data,$this->getStatusCode(),$headers);
+
     }
+
     public function respondWithError($message = 'Not Found!'){
+       
         return $this->respond(
              [
                 'status' => $this->getStatusCode(),
                 'errors' => $message
             ]
         );
+
     }
+    
 }
