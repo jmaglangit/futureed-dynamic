@@ -4,17 +4,21 @@ use Carbon\Carbon;
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
+use FutureEd\Services\MailServices;
 use FutureEd\Services\TokenServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use FutureEd\Services\CodeGeneratorServices;
 
 
 class TokenController extends ApiController {
 
 
 
-    public function __construct( TokenServices $token){
+    public function __construct( TokenServices $token, CodeGeneratorServices $codeGen, MailServices $mail){
         $this->token = $token;
+        $this->codeGen = $codeGen;
+        $this->mail = $mail;
     }
 	/**
 	 * Display a listing of the resource.
@@ -41,6 +45,20 @@ class TokenController extends ApiController {
         }
 
         return $this->token->decodeToken($input['access_token']);
+
+
+    }
+
+
+    public function getCode(){
+
+        return $this->codeGen->getCodeExpiry();
+
+    }
+
+    public function sendMail(){
+
+        $this->mail->studentRegister();
 
 
     }

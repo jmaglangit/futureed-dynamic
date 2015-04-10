@@ -9,62 +9,116 @@ use League\Flysystem\Exception;
 
 class StudentsRegistrationController extends StudentsController {
 
-	//
-    public function checkEmail(){
-        //check email if exist
-        $input = Input::only('email');
-
-        if(!$input['email']){
-
-            return $this->setStatusCode(422)->respondWithError('Parameter validation failed');
-
-        } else {
-
-            return $this->respond($input);
-
-        }
-    }
-
-    public function checkUserName(){
-
-        $input = Input::only('username');
-        if(!$input['username']){
-
-            return $this->setStatusCode(422)->respondWithError('Parameter validation failed');
-
-        } else {
-//            dd($input);
-            return $this->respond($input);
-
-        }
-
-    }
 
 
     /*
      * Candidate users registration
-     * param firstname, lastname, gender, birthday, email, username, school id,grade
-     * response success/fail
      */
 
-    public function add(){
-        $input = Input::only(
-                'username',
-                'email',
-                'first_name',
-                'last_name',
-                'gender',
-                'birthday',
-                'school_code',
-                'grade_code');
+    public function register(){
+        $student = Input::only(
+            'first_name',
+            'last_name',
+            'gender',
+            'birthday',
+            'school_code',
+            'grade_code',
+            'country',
+            'state',
+            'city');
+
+        $user = Input::only(
+            'username',
+            'email',
+            'first_name',
+            'last_name');
 
         //validate
+        if(!$user['username'] || !$user['email'] || !$user['first_name'] || !$user['last_name'] || !$student['gender']|| !$student['birthday']
+            || !$student['school_code'] || !$student['grade_code'] || !$student['country'] || !$student['state'] || !$student['city']){
+
+            return $this->setStatusCode(200)->respondWithError([
+                'error_code' => 204,
+                'message' => 'Incomplete parameter requirements'
+            ]);
+        }
 
 
+        $user = array_merge($user,[
+            'user_type' => 'Student'
+        ]);
 
+        // add user, return status
+        $user_response = $this->user->addUser($user);
 
+        if(isset($user_response['status'])){
+            $student = array_merge($student,[
+                'user_id' => $user_response['id']
+            ]);
 
-        return $input;
+            //add student, resturn status
+            $student_response = $this->student->addStudent($student);
+
+        } else {
+
+            $return = $user_response;
+            return $this->respondWithError($return);
+
+        }
+
+        if(isset($student_response['status'])){
+
+            //send email to user.
+
+            //return success
+            return $this->respondWithData([
+                'id' => $user_response['id']
+            ]);
+        } else {
+
+            $return = array_merge($user_response,$student_response);
+
+            return $this->setStatusCode(200)->respondWithError($return);
+
+        }
+
     }
+
+    /*
+     * returns
+     * "user_id,
+email,
+username,
+first_name,
+last_name,
+gender,
+birth_date,
+school,
+grade,
+country,
+state,
+city"
+     */
+    public function invite(){
+        $input = Input::only('id');
+
+        //get student user
+        $user = $this->user->getUser($input['id'],'Student');
+
+        //get student
+        $student  = $this->student->getStudent($input['id']);
+
+
+        $detail = [
+            'id' => $user['id'],
+            'username' => $user['username'],
+            'first_name' => $user['']
+        ];
+        //TODO: return invite.
+
+
+        return $detail;
+    }
+
 
 }

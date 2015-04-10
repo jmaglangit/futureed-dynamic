@@ -1,5 +1,4 @@
-<?php 
-namespace FutureEd\Http\Controllers\Api\v1;
+<?php namespace FutureEd\Http\Controllers\Api\v1;
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 use FutureEd\Services\MailServices;
@@ -14,12 +13,10 @@ class ApiController extends Controller {
     public function __construct(
             UserServices $user,
             StudentServices $student,
-            MailServices $mail,
             PasswordImageServices $password_image,
             TokenServices $token ){
         $this->user = $user;
         $this->student = $student;
-        $this->mail = $mail;
         $this->password_image = $password_image;
         $this->token = $token;
     }

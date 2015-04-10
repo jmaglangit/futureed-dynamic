@@ -5,91 +5,40 @@ use FutureEd\Http\Controllers\Controller;
 
 use FutureEd\Services\UserServices;
 use FutureEd\Services\MailServices;
+use FutureEd\Services\CodeGeneratorServices;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class UserController extends ApiController{
 
-    public function __construct(UserServices $user,MailServices $mail){
+    public function __construct(UserServices $user,MailServices $mail,CodeGeneratorServices $code){
 
         $this->user = $user;
         $this->mail = $mail;
+        $this->code = $code;
 
     }
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-		//list all users table
-        return $this->user->getUsers();
 
-	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//created new user
-	}
+    //check user if exist
+    public function checkUser(){
+        $input = Input::only('username','user_type');
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
-	}
+        //get email return user_id
+        //else error message not exist.
+        $username = $input['username'];
+        $user_type = $input['user_type'];
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
+        $return =  $this->user->checkUsername($username,$user_type);
 
-	}
+        if(isset($return['error_code'])){
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
+            return $this->setStatusCode(204)->respondWithError($return);
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
+        }
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
+        return $this->respondWithData($return);
+
+    }
 
 }

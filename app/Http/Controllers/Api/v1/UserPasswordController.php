@@ -22,8 +22,10 @@ class UserPasswordController extends UserController {
             $return= $this->user->checkLoginName($input['username'],$input['user_type']);
             if($return['status']==200){
                 $return['data'] = $this->user->getUserDetails($return['data']);
+                 // get code
+                $code=$this->code->getCodeExpiry();
                  //sent email for reset password
-                $this->mail->sendStudentMailResetPassword($return['data']['email']);
+                $this->mail->sendStudentMailResetPassword($return['data']['email'],$code['confirmation_code']);
 
                 return $this->setStatusCode($return['status'])
                             ->respondWithData($return['data']);

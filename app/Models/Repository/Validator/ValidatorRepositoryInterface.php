@@ -12,4 +12,6 @@ interface ValidatorRepositoryInterface {
 
     public function username($username);
 
+    public function gender($gender);
+
 }

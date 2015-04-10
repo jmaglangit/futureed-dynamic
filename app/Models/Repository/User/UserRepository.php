@@ -19,41 +19,52 @@ class UserRepository implements UserRepositoryInterface{
         return User::all();
     }
 
-    public function getUser($id){
-        return User::where('id','=',$id)->first();
+    // get common information
+    public function getUser($id,$user_type = 'all'){
+        $user =  User::select(
+            'id'
+            ,'username'
+            ,'email'
+            ,'password'
+            ,'name'
+            ,'user_type'
+            ,'status');
+
+        $user->where('id','=',$id);
+
+        if($user_type <> 'all'){
+            $user->where('user_type','=',$user_type);
+        }
+
+        return $user->first();
     }
 
-    public function getUserByType($id,$type){
+    //get all details of the user
+    public function getUserDetail($id,$user_type){
         return User::where('id','=',$id)
-            ->where('user_type','=',$type)
-            ->get();
+            ->where('user_type','=',$user_type)
+            ->first();
     }
+
 
     public function addUser($user){
-        //
+
         try{
-            \DB::table('students')->insert(
-                [
-                    'first_name' => '',
-                    'last_name' => '',
-                    'gender' =>'',
-                    'birth_date' => '',
-                    'avatar_id' => '',
-                    'password_image_id' => '',
-                    'school_code' =>'',
-                    'level_code' =>'',
-                    'points' =>'',
-                    'point_level_id' =>'',
-                    'learning_style_id' =>'',
-                    'status' => '',
-                    'created_by_id' => '',
-                    'created_at' => '',
-                ]
-            );
+            User::insert([
+                'username' => $user['username'],
+                'email' => $user['email'],
+                'name' => $user['first_name'] .' '.$user['last_name'],
+                'user_type' => $user['user_type'],
+                'confirmation_code' => $user['confirmation_code'],
+                'confirmation_code_expiry' => $user['confirmation_code_expiry'],
+                'created_by' => 1,
+                'updated_by' => 1,
+            ]);
+
         }catch(Exception $e){
-            throw new Exception($e->getMessage());
+            return $e->getMessage();
         }
-        return 0;
+        return true;
     }
 
     public function updateUser($user){

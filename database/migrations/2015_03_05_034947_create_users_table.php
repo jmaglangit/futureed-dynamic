@@ -18,7 +18,7 @@ class CreateUsersTable extends Migration {
             $table->string('username',128);
             $table->string('email',128);
             $table->string('new_email',128)->nullable();
-            $table->string('password',128);
+            $table->string('password',128)->nullable();
             $table->string('name',128);
             $table->enum('user_type',['Admin','Client','Student']);
             $table->bigInteger('code')->nullable();
