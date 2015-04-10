@@ -28,7 +28,7 @@ class MailServices {
             Mail::send('emails.student.forget-password', array('key' => 'value'), function($message)
             {
                 $message->from('do-not-reply@example.com', 'FutureEd');
-                $message->to('jmaglangit@nerubia.com', 'John Doe')->subject('Welcome!');
+                $message->to('jsuizo@nerubia.com', 'John Doe')->subject('Welcome!');
 
 
             });

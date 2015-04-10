@@ -108,8 +108,6 @@ class StudentServices {
         $student = $this->getStudent($id);
         $user = $this->user->getUser($id);
         $age = $this->age($student->birth_date);
-    //dd($student,$user);
-
         $return = [
             'id' => $student->user_id,
             'first_name' => $student->first_name,
