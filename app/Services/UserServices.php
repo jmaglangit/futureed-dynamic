@@ -235,4 +235,9 @@ class UserServices {
                   'email'=>$user_details['email']];
         return $return;
     }
+
+    //update reset_code and reset_code_expiry
+    public function setResetCode($id,$code){
+        $this->users->updateResetCode($id,$code);
+    }
 }

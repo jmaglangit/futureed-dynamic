@@ -135,7 +135,7 @@ class StudentServices {
 
     public function getStudentDetails($id){
         $student = $this->getStudent($id);
-        $user = $this->user->getUser($id);
+        $user = $this->user->getUser($id,'Student');
         $age = $this->age($student->birth_date);
         $return = [
             'id' => $student->user_id,

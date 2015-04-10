@@ -31,7 +31,9 @@ class StudentRepository implements StudentRepositoryInterface{
             'city',
             'grade_code',
             'points',
-            'status'
+            'status',
+            'avatar_id',
+            'learning_style_id'
         )
             ->where('user_id',$id)->first();
 

@@ -20,10 +20,13 @@ class UserPasswordController extends UserController {
                                               ]);
         } else {
             $return= $this->user->checkLoginName($input['username'],$input['user_type']);
+            $user_id=$return['data'];
             if($return['status']==200){
                 $return['data'] = $this->user->getUserDetails($return['data']);
-                 // get code
+                // get code 
                 $code=$this->code->getCodeExpiry();
+                 //update reset_code and expiry to db
+                $this->user->setResetCode($user_id,$code);
                  //sent email for reset password
                 $this->mail->sendStudentMailResetPassword($return['data']['email'],$code['confirmation_code']);
 
