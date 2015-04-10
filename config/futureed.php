@@ -14,4 +14,9 @@ return [
     //Request code expiry in seconds
     'request_code_expiry' => 300,
 
+    //User types
+    'admin' => 'Admin',
+    'client' => 'Client',
+    'student' => 'Student',
+
 ];
