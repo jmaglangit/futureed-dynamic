@@ -80,7 +80,7 @@ class MailServices {
             'mail_sender_name' => 'Future Lesson',
             'mail_recipient' => 'jsuizo@nerubia.com',
             'mail_recipient_name' => 'Jayson Suizo',
-            'subject' => 'Forget Password'
+            'subject' => 'Forgot Password'
         ];
         $this->sendMail($content);
     }
