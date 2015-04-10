@@ -134,10 +134,9 @@ class StudentServices {
 
 
     public function getStudentDetails($id){
+        $user_type = config('futureed');
         $student = $this->getStudent($id);
-        $user = $this->user->getUser($id);
-
-//        dd($student,$user);
+        $user = $this->user->getUser($id,$user_type['student']);
 
         $return = [
             'user_id' => $student->user_id,
