@@ -13,6 +13,8 @@ interface StudentRepositoryInterface {
 
     public function getStudent($id);
 
+    public function getStudentDetail($id);
+
     public function addStudent($student);
 
     public function updateStudent($student);

@@ -11,9 +11,9 @@ interface UserRepositoryInterface {
 
     public function getUsers();
 
-    public function getUser($id);
+    public function getUser($id,$user_type);
 
-    public function getUserByType($id,$type);
+    public function getUserDetail($id,$user_type);
 
     public function addUser($user);
 

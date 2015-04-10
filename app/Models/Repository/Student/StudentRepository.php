@@ -17,8 +17,28 @@ class StudentRepository implements StudentRepositoryInterface{
 
     }
 
-    //get student details
+    //get student basic details
     public function getStudent($id){
+
+        return Student::select(
+            'user_id',
+            'first_name',
+            'last_name',
+            'gender',
+            'birth_date',
+            'country',
+            'state',
+            'city',
+            'grade_code',
+            'points',
+            'status'
+        )
+            ->where('user_id',$id)->first();
+
+    }
+
+    //get student details
+    public function getStudentDetail($id){
 
         return Student::where('user_id',$id)->first();
 
