@@ -117,7 +117,10 @@ class StudentServices {
                 $this->user->addLoginAttempt($id);
                 if(!$this->user->exceedLoginAttempts($id)){
                     $this->user->lockAccount($id);
-                    return $this->user->checkUserDisabled($id);
+                    return [
+                        'status' => 202,
+                        'data' => $this->user->checkUserDisabled($id)
+                    ];
                 }
                 return [
                     'status' => 202,

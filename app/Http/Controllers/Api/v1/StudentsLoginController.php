@@ -59,7 +59,7 @@ class StudentsLoginController extends StudentsController{
      */
     public function password(){
         //check email and password matched
-        $input = Input::only('user_id','image_id','app');
+        $input = Input::only('user_id','image_id');
 
 
         if(!$input['user_id'] && !$input['image_id']){
@@ -71,19 +71,21 @@ class StudentsLoginController extends StudentsController{
             // get username id, and image password matched, return success/fail (boolean).
             // check login attempts
             $is_disabled = $this->user->checkUserDisabled($input['user_id']);
+
             if($is_disabled){
                 $response = [
                     'status' => 202,
                     'data' => $is_disabled
                 ];
 
+
             } else {
                 $response  = $this->student->checkAccess($input['user_id'],$input['image_id']);
-                if($response['data'] == true){
+
+                if($response['status'] == 200){
 
                     //get student data
                     $response['data'] = $this->student->getStudentDetails($input['user_id']);
-
 
                     $token = $this->token->getToken(
                         [
