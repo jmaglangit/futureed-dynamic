@@ -58,7 +58,10 @@ class TokenController extends ApiController {
 
     public function sendMail(){
 
-        $this->mail->studentRegister();
+//        $url = action('Api\v1\ApiController@index', ['email' => 'jmaglangit@nerubia.com']);
+        $url = secure_url('student/email/confirm', ['email' => 'jmaglangit@nerubia.com']);
+
+        return $url;
 
 
     }

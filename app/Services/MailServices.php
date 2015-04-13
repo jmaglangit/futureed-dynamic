@@ -74,12 +74,21 @@ class MailServices {
 
     }
 
-    public function studentRegister($user, $code){
+    public function studentRegister($user_id, $code){
+        $user_type = config('futureed.student');
+
+
+        //get user information for the email
+        $user_detail = $this->user->getUser($user_id,$user_type);
+
+        dd($user_detail);
+
+
         $content = [
-            'view' => 'emails.student.confirmation-code',
+            'view' => 'emails.student.registration-email',
             'data' => [
-                'name' => 'Jason',
-                'code' => 1234,
+                'name' => $user_detail['name'],
+                'code' => $code,
                 //TODO: determine where to get the url on the link of the email.
                 'link' => url() . '/api/v1',
             ],

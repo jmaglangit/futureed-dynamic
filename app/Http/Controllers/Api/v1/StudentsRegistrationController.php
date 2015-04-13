@@ -16,6 +16,8 @@ class StudentsRegistrationController extends StudentsController {
      */
 
     public function register(){
+        $user_type = config('futureed');
+
         $student = Input::only(
             'first_name',
             'last_name',
@@ -69,6 +71,7 @@ class StudentsRegistrationController extends StudentsController {
         if(isset($student_response['status'])){
 
             //send email to user.
+            $this->mail->studentRegister($user_response['id'],$user_type['student']);
 
             //return success
             return $this->respondWithData([
@@ -101,9 +104,10 @@ city"
      */
     public function invite(){
         $input = Input::only('id');
+        $user_type = config('futureed');
 
         //get student user
-        $user = $this->user->getUser($input['id'],'Student');
+        $user = $this->user->getUser($input['id'],$user_type['student']);
 
         //get student
         $student  = $this->student->getStudent($input['id']);

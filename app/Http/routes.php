@@ -46,4 +46,8 @@ Routes::group(['prefix' => 'api/v1'], function()
     Routes::get('/school','Api\v1\SchoolsController@schools');
     //country
 
+
+
+
+
 });
