@@ -16,7 +16,6 @@ class StudentsRegistrationController extends StudentsController {
      */
 
     public function register(){
-        $user_type = config('futureed');
 
         $student = Input::only(
             'first_name',
@@ -106,10 +105,10 @@ city"
      */
     public function invite(){
         $input = Input::only('id');
-        $user_type = config('futureed');
+        $user_type = config('futureed.student');
 
         //get student user
-        $user = $this->user->getUser($input['id'],$user_type['student']);
+        $user = $this->user->getUser($input['id'],$user_type);
 
         //get student
         $student  = $this->student->getStudent($input['id']);
