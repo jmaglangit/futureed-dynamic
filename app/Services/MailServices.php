@@ -43,8 +43,8 @@ class MailServices {
 
 
                 //mail sender
-                //TODO: set default to no-reply@company.com
-                $message->from($contents['mail_sender'],$contents['mail_sender_name']);
+//                //TODO: set default to no-reply@company.com
+//                $message->from($contents['mail_sender'],$contents['mail_sender_name']);
 
                 //mail recipient
                 $message->to($contents['mail_recipient'],$contents['mail_recipient_name']);
@@ -84,21 +84,16 @@ class MailServices {
 
         $code = $this->user->getConfirmationCode($user_id);
 
-//        dd($code['confirmation_code_expiry']);
-
         $content = [
             'view' => 'emails.student.registration-email',
             'data' => [
                 'name' => $user_detail['name'],
                 'code' => $code['confirmation_code'],
-                //TODO: determine where to get the url on the link of the email.
                 'link' => url() . '/student/email/confirm?e=' . $user_detail['email']  ,
             ],
-            'mail_sender' => 'no-reply@futureed.com',
-            'mail_sender_name' => 'Future Lesson',
-            'mail_recipient' => 'jmaglangit@nerubia.com',
-            'mail_recipient_name' => 'Jason Maglangit',
-            'subject' => '[TEST] Student register with a code'
+            'mail_recipient' => $user_detail['email'],
+            'mail_recipient_name' => $user_detail['first_name' ] . $user_detail['last_name'],
+            'subject' => 'Welcome to Future Lesson!'
         ];
 
         $this->sendMail($content);

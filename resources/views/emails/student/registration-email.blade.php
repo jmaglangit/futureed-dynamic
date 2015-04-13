@@ -14,7 +14,7 @@
     <br>
     <div>Your confirmation code : {{ $code  }}</div>
     <br>
-    <div>Link to Future Lessons: <a href="{{ $link }}">Code Confirmation</a></div>
+    <div>Link to Future Lessons: <a href="{{ $link }}">Confirm Code</a></div>
 </div>
 </body>
 </html>
