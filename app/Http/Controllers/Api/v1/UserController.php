@@ -4,14 +4,18 @@ use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
 use FutureEd\Services\UserServices;
+use FutureEd\Services\MailServices;
+use FutureEd\Services\CodeGeneratorServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
 class UserController extends ApiController{
 
-    public function __construct(UserServices $user){
+    public function __construct(UserServices $user,MailServices $mail,CodeGeneratorServices $code){
 
         $this->user = $user;
+        $this->mail = $mail;
+        $this->code = $code;
 
     }
 

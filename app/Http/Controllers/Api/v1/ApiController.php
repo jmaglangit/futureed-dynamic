@@ -54,12 +54,12 @@ class ApiController extends Controller {
 
 
     public function respondSuccess($message = 'Success!'){
-
         return $this->setStatusCode(Response::HTTP_ACCEPTED)->respondWithData($message);
+    
     }
 
     public function respondWithData($data){
-
+       
         return $this->respond(
             [
                 'status' => $this->getStatusCode(),
@@ -81,13 +81,13 @@ class ApiController extends Controller {
 
 
     public function respond($data, $headers = [] ){
-
+      
         return Response()->json($data,$this->getStatusCode(),$headers);
 
     }
 
     public function respondWithError($message = 'Not Found!'){
-
+       
         return $this->respond(
              [
                 'status' => $this->getStatusCode(),
@@ -96,5 +96,5 @@ class ApiController extends Controller {
         );
 
     }
-
+    
 }

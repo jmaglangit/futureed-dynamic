@@ -31,7 +31,9 @@ class StudentRepository implements StudentRepositoryInterface{
             'city',
             'grade_code',
             'points',
-            'status'
+            'status',
+            'avatar_id',
+            'learning_style_id'
         )
             ->where('user_id',$id)->first();
 
@@ -103,6 +105,17 @@ class StudentRepository implements StudentRepositoryInterface{
 
         return Student::where('user_id','=', $user_id)->pluck('password_image_id');
 
+    }
+
+    //update student_image_password
+
+    public function UpdateImagePassword($data){
+       try{
+            Student::where('user_id',$data['user_id'])
+                     ->update(['password_image_id'=>$data['password_image_id']]);
+        } catch (Exception $e){
+            throw new Exception($e->getMessage());
+        }
     }
 
 

@@ -169,11 +169,22 @@ class UserRepository implements UserRepositoryInterface{
 
     }
 
-    public function getConfirmationCode($id){
+    public function getConfirmationCode($id)
+    {
 
-        return User::select('confirmation_code','confirmation_code_expiry')
-                ->where('id','=',$id)->first();
-
+        return User::select('confirmation_code', 'confirmation_code_expiry')
+            ->where('id', '=', $id)->first();
+    }
+    //update reset_code and reset_code_expiry
+    public function updateResetCode($id,$code){
+        try{
+            $user = User::find($id);
+            $user->reset_code =$code['confirmation_code'];
+            $user->reset_code_expiry=$code['confirmation_code_expiry'];
+            $user->save();
+        } catch (Exception $e){
+            throw new Exception($e->getMessage());
+        }
     }
 
 
