@@ -45,4 +45,6 @@ interface UserRepositoryInterface {
 
     public function getAccessToken($id);
 
+    public function updateResetCode($id,$code);
+
 }

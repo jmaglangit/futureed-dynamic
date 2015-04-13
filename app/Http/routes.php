@@ -38,12 +38,13 @@ Routes::group(['prefix' => 'api/v1'], function()
     Routes::post('/student/login/image','Api\v1\StudentsLoginController@imagePassword');
     Routes::post('/student/login/password','Api\v1\StudentsLoginController@password');
     //student password
-    Routes::post('/student/password/image','Api\v1\StudentsPasswordController@getPasswordImages');
+    Routes::get('/student/password/image','Api\v1\StudentsPasswordController@getPasswordImages');
     //student registration
     Routes::post('/student/register','Api\v1\StudentsRegistrationController@register');
     Routes::post('/student/invite','Api\v1\StudentsRegistrationController@invite');
     //schools
     Routes::get('/school','Api\v1\SchoolsController@schools');
-    //country
+    //Forgot Password
+    Routes::post('/user/password/code', 'Api\v1\UserPasswordController@confirmResetCode');
 
 });
