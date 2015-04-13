@@ -135,9 +135,14 @@ class UserRepository implements UserRepositoryInterface{
 
     public function resetLoginAttempt($id){
         try{
-            $user = User::find($id);
-            $user->login_attempt = 0;
-            $user->save();
+//            $user = User::find($id);
+//            $user->login_attempt = 0;
+//            $user->save();
+
+            User::where('id', '=',$id)->update([
+                'login_attempt' => 0
+            ]);
+
         } catch (Exception $e){
             throw new Exception ($e->getMessage());
         }
