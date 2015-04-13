@@ -80,7 +80,7 @@ class MailServices {
             'data' => [
                 'name' => $data['username'],
                 'code' => $code,
-                'link' => url() . '/api/v1/user/password/code/'.$data['email'],
+                'link' => url() . '/student/password/reset?e='.$data['email'],
             ],
             'mail_sender' => 'no-reply@futureed.com',
             'mail_sender_name' => 'Future Lesson',
