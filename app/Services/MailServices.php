@@ -9,6 +9,7 @@
 namespace FutureEd\Services;
 
 
+use FutureEd\Models\Repository\User\UserRepositoryInterface;
 use Illuminate\Mail\Mailer;
 use Illuminate\Support\Facades\Mail;
 use League\Flysystem\Exception;
@@ -74,23 +75,24 @@ class MailServices {
 
     }
 
-    public function studentRegister($user_id, $code){
+    public function sendStudentRegister($user_id){
         $user_type = config('futureed.student');
 
 
         //get user information for the email
         $user_detail = $this->user->getUser($user_id,$user_type);
 
-        dd($user_detail);
+        $code = $this->user->getConfirmationCode($user_id);
 
+//        dd($code['confirmation_code_expiry']);
 
         $content = [
             'view' => 'emails.student.registration-email',
             'data' => [
                 'name' => $user_detail['name'],
-                'code' => $code,
+                'code' => $code['confirmation_code'],
                 //TODO: determine where to get the url on the link of the email.
-                'link' => url() . '/api/v1',
+                'link' => url() . '/student/email/confirm?e=' . $user_detail['email']  ,
             ],
             'mail_sender' => 'no-reply@futureed.com',
             'mail_sender_name' => 'Future Lesson',

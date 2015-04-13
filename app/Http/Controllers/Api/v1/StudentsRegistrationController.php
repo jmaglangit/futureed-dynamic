@@ -70,8 +70,10 @@ class StudentsRegistrationController extends StudentsController {
 
         if(isset($student_response['status'])){
 
+
+
             //send email to user.
-            $this->mail->studentRegister($user_response['id'],$user_type['student']);
+            $this->mail->sendStudentRegister($user_response['id']);
 
             //return success
             return $this->respondWithData([

@@ -169,6 +169,13 @@ class UserRepository implements UserRepositoryInterface{
 
     }
 
+    public function getConfirmationCode($id){
+
+        return User::select('confirmation_code','confirmation_code_expiry')
+                ->where('id','=',$id)->first();
+
+    }
+
 
 
 

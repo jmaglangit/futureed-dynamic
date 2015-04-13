@@ -228,4 +228,9 @@ class UserServices {
     public function getAccessToken($user){
         return 0;
     }
+
+    //get user confirmation code
+    public function getConfirmationCode($id){
+        return $this->users->getConfirmationCode($id);
+    }
 }
