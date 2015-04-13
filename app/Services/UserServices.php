@@ -75,10 +75,12 @@ class UserServices {
             //get user id
             $adduser_response = $this->users->addUser($user);
 
+            $user_id = $this->users->checkEmail($user['email'],$user['user_type']);
+
             $return = [
                 'status' => 200,
-                'id' => 17,
-                'message' => $adduser_response
+                'id' => $user_id,
+                'message' => $adduser_response,
             ];
 
         }
@@ -227,6 +229,11 @@ class UserServices {
     //Get access token of the user
     public function getAccessToken($user){
         return 0;
+    }
+
+    //get user confirmation code
+    public function getConfirmationCode($id){
+        return $this->users->getConfirmationCode($id);
     }
 
     //get userDetail Response

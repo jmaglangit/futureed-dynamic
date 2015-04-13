@@ -19,11 +19,13 @@ class ApiController extends Controller {
             UserServices $user,
             StudentServices $student,
             PasswordImageServices $password_image,
-            TokenServices $token ){
+            TokenServices $token,
+            MailServices $mailServices){
         $this->user = $user;
         $this->student = $student;
         $this->password_image = $password_image;
         $this->token = $token;
+        $this->mail = $mailServices;
     }
     public function index(){
         return [
