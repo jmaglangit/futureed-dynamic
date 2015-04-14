@@ -2,6 +2,7 @@
 
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
 
 use Illuminate\Http\Request;
 
@@ -24,7 +25,24 @@ class LoginController extends Controller {
 	 */
 	public function enter_password()
 	{
-		return view('student.login.enter-password');
+		$input = Input::only('id');
+		$id = $input['id'];
+
+		if($id == null) {
+			return redirect()->route('student.login');
+		}
+
+		return view('student.login.enter-password', ['id' => $input['id']]);
+	}
+
+	/**
+	 * Process session
+	 *
+	 * @return Response
+	 */
+	public function process()
+	{
+		return redirect()->route('student.dashboard.index');
 	}
 	
 	/**
@@ -44,7 +62,7 @@ class LoginController extends Controller {
 	 */
 	public function forgot_password_success()
 	{
-		return view('student.login.forgot-password-success');
+		return view('student.login.forgot-password-success', ["email" => "asd@asd.com"]);
 	}
 
 	/**

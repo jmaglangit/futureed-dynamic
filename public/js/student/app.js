@@ -1,5 +1,4 @@
 //common
-
 $('a').smoothScroll();  
 
 $("#user_principal").click(function() {
