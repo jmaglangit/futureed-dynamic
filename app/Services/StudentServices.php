@@ -13,6 +13,7 @@ use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use FutureEd\Models\Repository\PasswordImage\PasswordImageRepositoryInterface;
 use FutureEd\Models\Repository\User\UserRepositoryInterface;
 use FutureEd\Models\Repository\Validator\ValidatorRepository;
+use FutureEd\Services\SchoolServices;
 
 class StudentServices {
 
@@ -20,11 +21,13 @@ class StudentServices {
             StudentRepositoryInterface $student,
             PasswordImageServices $password,
             UserServices $user,
-            ValidatorRepository $validator){
+            ValidatorRepository $validator,
+            SchoolServices $school){
         $this->student = $student;
         $this->password = $password;
         $this->user = $user;
         $this->validator = $validator;
+        $this->school = $school;
     }
 
     public function getStudents(){
@@ -141,18 +144,20 @@ class StudentServices {
         $student = $this->getStudent($id);
         $age = $this->age($student->birth_date);
         $user = $this->user->getUser($id,$user_student);
+        $password_image_url =$this->password->getUserPasswordImageUrl($student->avatar_id);
 
         $return = [
             'id' => $student->user_id,
             'first_name' => $student->first_name,
             'last_name' => $student->last_name,
             'gender' => $student->gender,
-            'birth_date' => $student->birth_date,
-            'username' => $user->username,
-            'email' => $user->email,
-            'learning_style'=>$student->learning_style_id,
+            'birthday' => $student->birth_date,
             'age'=>$age,
-            'avatar_id' => $student->avatar_id
+            'avatar(url)' => $password_image_url,
+            'email' => $user->email,
+            'username' => $user->username,
+            'grade' =>$student->grade_code
+            
         ];
 
         return $return;
@@ -162,6 +167,10 @@ class StudentServices {
          $interval = date_diff(date_create(),date_create($birth_date));
          return $interval->format("%Y");
     }
+    
+    
+    
+    
 
 
 
