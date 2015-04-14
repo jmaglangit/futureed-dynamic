@@ -42,6 +42,7 @@ Routes::group(['prefix' => 'api/v1'], function()
     Routes::get('/student/password/image','Api\v1\StudentsPasswordController@getPasswordImages');
     Routes::post('/student/password/reset','Api\v1\StudentsPasswordController@passwordReset');
     Routes::post('/student/password/code','Api\v1\StudentsPasswordController@confirmResetCode');
+    Routes::post('/student/password/new','Api\v1\StudentsPasswordController@confirmNewImagePassword');
     
     //student registration
     Routes::post('/student/register','Api\v1\StudentsRegistrationController@register');

@@ -76,6 +76,21 @@ class StudentsPasswordController extends StudentsController {
 
         }
     }
+    
+    
+    public function confirmNewImagePassword(){
+    	$input = Input::only('user_id','password_image_id');
+    	 if(!$input['user_id'] && !$input['password_image_id']){
+           return $this->setStatusCode(422)
+                        ->respondWithError(['error_code'=>422,
+                                            'message'=>'Parameter validation failed'
+                                              ]);
+        } else {
+        	$return = $this->student->resetPasswordImage($input); 
+              return $this->setStatusCode($return['status'])
+                          ->respondWithData(['id'=>$return['data']]);
+        }
+    }
 
 
 
