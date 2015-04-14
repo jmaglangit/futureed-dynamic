@@ -4,7 +4,6 @@
   <div class="container login">
     <div class="col-md-6 col-md-offset-3">
       <div class="form-style">
-      	<!-- ERROR -->
 
       	<div ng-if="locked">
 	        <div class="title">Account Locked</div>
@@ -20,7 +19,7 @@
 	          </p>
 	        </div>
       	</div>
-		<!--// ERROR -->
+
         <div ng-if="!locked">
           <form id="loginForm" name="loginForm" action="/student/login/enter-password" method="POST">
             <div class="title">Enter Your Username or Email</div>
@@ -59,6 +58,6 @@
 
 @section('scripts')
   
-  <!-- {!! Html::script('/js/student/login.js') !!} -->
+  {!! Html::script('/js/student/login.js') !!} 
 
 @stop

@@ -17,7 +17,6 @@
           </p>
           <div class="form-group">
           <small>Please check your inbox or your spam folder for the email. 
-            <!-- Click on the password recovery link and follow the instructions on how to reset your password -->
           The email contains a code that you need to input below.</small>
         </div>
           <div class="form-group">

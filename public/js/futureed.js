@@ -1,3 +1,5 @@
+'use strict';
+
 var futureed = angular.module('futureed', [
   'ngRoute',
 	'futureed.services',
@@ -45,24 +47,11 @@ var futureed = angular.module('futureed', [
       else if(value !== undefined && value !== null)
         query += encodeURIComponent(name) + '=' + encodeURIComponent(value) + '&';
     }
-
     return query.length ? query.substr(0, query.length - 1) : query;
   };
 
-  // Override $http service's default transformRequest
   $httpProvider.defaults.transformRequest = [function(data) {
     return angular.isObject(data) && String(data) !== '[object File]' ? param(data) : data;
   }];
 
-  // $locationProvider.html5Mode(true);
-
-  // $routeProvider.when('/login/enter-password', {
-  //     redirectTo: '/login/enter-password'
-  //   }).when('/login/forgot-password', {
-  //     redirectTo: '/login/forgot-passwords'
-  //   }).
-  //   otherwise({
-  //     redirectTo: '/'
-  //   });
 }]);
-'use strict';

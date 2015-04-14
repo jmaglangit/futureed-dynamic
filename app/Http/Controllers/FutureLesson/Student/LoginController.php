@@ -26,9 +26,11 @@ class LoginController extends Controller {
 	public function enter_password()
 	{
 		$input = Input::only('id');
-		// check existing id, go to index
+		$id = $input['id'];
 
-		// get image password: API call
+		if($id == null) {
+			return redirect()->route('student.login');
+		}
 
 		return view('student.login.enter-password', ['id' => $input['id']]);
 	}

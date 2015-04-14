@@ -2,7 +2,6 @@
 
 @section('content')
 
-  <div ng-init="getImagePassword()"></div>
   <div class="container login">
     <div class="col-md-6 col-md-offset-3">
       <div class="form-style form-select-password">
@@ -21,7 +20,7 @@
           </div>
         </div>
 
-        <div ng-if="!locked">
+        <div ng-if="!locked" ng-init="getImagePassword()">
           <div class="title">Please Select Your Password</div>
           <div class="error" ng-if="error">
             <p>{! error !}</p>
@@ -31,17 +30,16 @@
             <div class="form_content">
               <ul class="form_password list-unstyled list-inline">
                 <li class="item" ng-repeat="item in imagePass" ng-click="highlight($event)">
-                   <!-- {!! Html::image('{! item.password_image_file !}', false) !!} -->
                    <img ng-src="{! item.password_image_file !}" alt="{! item.name !}">
                    <input type="hidden" id="image_id" name="image_id" value="{! item.id !}">
                 </li>
                 <p><button type="button" class="btn btn-red" ng-click="validatePassword()">Submit</button></p>
               </ul>
             </div>
-            <input type="hidden" name="id" id="id" value="<?php echo $id; ?>">
-            <input type="hidden" id="response" name="response">
+            <input type="hidden" id="response" name="response" >
           </form>
         </div>
+        <input type="hidden" name="id" id="student_id" value="{!! $id !!}">
       </div>
     </div>
   </div>
