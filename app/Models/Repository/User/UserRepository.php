@@ -133,11 +133,17 @@ class UserRepository implements UserRepositoryInterface{
         }
     }
 
+    /**
+     * @param $id
+     * @throws Exception
+     */
     public function resetLoginAttempt($id){
         try{
+
             $user = User::find($id);
             $user->login_attempt = 0;
             $user->save();
+
         } catch (Exception $e){
             throw new Exception ($e->getMessage());
         }
@@ -145,9 +151,11 @@ class UserRepository implements UserRepositoryInterface{
 
     public function lockAccount($id){
         try{
+
             $user = User::find($id);
             $user->is_account_locked = 1;
             $user->save();
+            
         } catch (Exception $e){
             throw new Exception($e->getMessage());
         }
