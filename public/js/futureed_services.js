@@ -20,12 +20,13 @@ var services = angular.module('futureed.services', ['ngResource']);
 	services.factory('loginAPIService', function($http) {
 		
 		var loginAPI = {};
+		var futureedAPIUrl = '/api/v1/';
 
 		loginAPI.validateUser = function(username) {
 			return $http({
 				method 	: 'POST'
 				, data	: {username : username}
-				, url	: '/api/v1/student/login/username'
+				, url	: futureedAPIUrl + 'student/login/username'
 			});
 		}
 
@@ -33,7 +34,15 @@ var services = angular.module('futureed.services', ['ngResource']);
 			return $http({
 				method	: 'POST'
 				, data	: {user_id : user_id}
-				, url	: 'http://localhost:80/api/v1/student/login/image'
+				, url	: futureedAPIUrl + 'student/login/image'
+			});
+		}
+
+		loginAPI.validatePassword = function(id, image_id) {
+			return $http({
+				method	: 'POST'
+				, data	: {user_id : id, image_id : image_id}
+				, url	: futureedAPIUrl + 'student/login/password'
 			});
 		}
 
@@ -41,7 +50,7 @@ var services = angular.module('futureed.services', ['ngResource']);
 			return $http({
 				method 	: 'POST'
 				, data	: {username: username, user_type : "Student"}
-				, url	: 'http://localhost:80/api/v1/user/password/forgot'
+				, url	: futureedAPIUrl + 'user/password/forgot'
 			});
 		}
 
@@ -49,7 +58,7 @@ var services = angular.module('futureed.services', ['ngResource']);
 			return $http({
 				method	: 'POST'
 				, data 	: {email : email, reset_code : code}
-				, url	: 'http://localhost:80/api/v1/user/password/code'
+				, url	: futureedAPIUrl + 'user/password/code'
 			});
 		}
 

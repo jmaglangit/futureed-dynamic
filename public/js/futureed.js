@@ -54,7 +54,7 @@ var futureed = angular.module('futureed', [
     return angular.isObject(data) && String(data) !== '[object File]' ? param(data) : data;
   }];
 
-  $locationProvider.html5Mode(true);
+  // $locationProvider.html5Mode(true);
 
   // $routeProvider.when('/login/enter-password', {
   //     redirectTo: '/login/enter-password'

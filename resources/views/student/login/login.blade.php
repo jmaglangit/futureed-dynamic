@@ -5,7 +5,8 @@
     <div class="col-md-6 col-md-offset-3">
       <div class="form-style">
       	<!-- ERROR -->
-      	<div style="display:none;">
+
+      	<div ng-if="locked">
 	        <div class="title">Account Locked</div>
 	        <div class="form_content">
 	          <div style="width:120px; margin:0 auto 30px;">
@@ -20,7 +21,7 @@
 	        </div>
       	</div>
 		<!--// ERROR -->
-        <div>
+        <div ng-if="!locked">
           <form id="loginForm" name="loginForm" action="/student/login/enter-password" method="POST">
             <div class="title">Enter Your Username or Email</div>
               <div class="error" ng-if="error">
@@ -35,7 +36,7 @@
               <button type="button" ng-click="validateUser(username)" class="btn btn-red">Next</button>              
             </div>
           </form>
-        </div>
+       
       <div class="text-group">
         <small>Not a Student?</small>
         <small>Click <a href="#">here</a> for Parent / Teacher / School Site</small>     
@@ -44,6 +45,7 @@
         <small><a ng-click="redirect('/student/login/forgot-password')">Forgot your password?</a></small>
         <p><a ng-click="redirect('/student/registration')" class="btn btn-purple">Sign Up</a></p>      
       </div>  
+       </div>
       </div>
     </div>
   </div>
