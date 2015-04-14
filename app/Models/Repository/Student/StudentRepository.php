@@ -111,7 +111,7 @@ class StudentRepository implements StudentRepositoryInterface{
 
     public function UpdateImagePassword($data){
        try{
-            Student::where('user_id',$data['user_id'])
+            Student::where('user_id',$data['id'])
                      ->update(['password_image_id'=>$data['password_image_id']]);
         } catch (Exception $e){
             throw new Exception($e->getMessage());

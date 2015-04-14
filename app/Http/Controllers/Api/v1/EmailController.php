@@ -24,7 +24,7 @@ class EmailController extends ApiController {
 
         }
 
-        return $this->respondWithData($return);
+        return $this->respondWithData(['id'=>$return['user_id']]);
     }
 
 }
