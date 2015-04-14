@@ -19,7 +19,6 @@
                 </div>
             </div>
             <div class="form-content col-md-12" id="form_registration">
-                
                 <fieldset>
                     <legend>Personal Information</legend>
                     <div class="form-group">
@@ -37,10 +36,7 @@
                     <div class="form-group">
                         <label for="" class="col-md-2 control-label">Gender</label>
                         <div class="col-md-4">
-                            <select class="form-control" ng-model="reg.gender">
-                                <option value="male" selected="selected">Male</option>
-                                <option value="female">Female</option>
-                            </select>
+                            {!! Form::select('level', array('male' => 'Male', 'female' => 'Female'), 'male',array('class' => 'form-control', 'ng-model' => 'reg.gender')); !!}
                         </div>
                     </div>  
                     <div class="form-group">
@@ -74,45 +70,33 @@
                         </div>
                     </div>
                     <div class="form-group" id="form_address">
-                        <label for="" class="col-md-2 control-label">Grade</label>
+                        <label for="" class="col-md-2 control-label">School level</label>
 
                         <div class="col-md-4">
-                        <select name="" id="" class="form-control" ng-model="reg.grade">
-                            <option value="" selected="selected">K1</option>
-                            <option value="">K2</option>
-                            <option value="">Grade 1</option>
-                            <option value="">Grade 2</option>
-                            <option value="">Grade 3</option>
-                            <option value="">Grade 4</option>
-                            <option value="">Grade 5</option>
-                            <option value="">Grade 6</option>
-                            <option value="">Grade 7</option>
-                            <option value="">Grade 8</option>
-                        </select>
+                        {!! Form::select('level', array('K2' => 'K2', 'Grade 1' => 'Grade 1', 'Grade 2' => 'Grade 2', 'Grade 3' => 'Grade 3', 'Grade 4' => 'Grade 4', 'Grade 5' => 'Grade 5', 'Grade 6' => 'Grade 6', 'Grade 7' => 'Grade 7', 'Grade 8' => 'Grade 8'), 'K2',array('class' => 'form-control', 'ng-model' => 'reg.grade')); !!}
 
                         </div><br><br>
                     </div>    
+                </fieldset> 
+            </div>
+            <div class="block_bottom">
+                <fieldset>
+                    <div class="form-group">
+                        <div class="checkbox text-center">
+                            <label>
+                                <input type="checkbox" ng-model="reg.terms">
+                                I agree on the <a href="#">Terms and Conditions</a> and <a href="#">Data Privacy Policy</a>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-2 col-md-offset-5 col-sm-4 col-sm-offset-4">
+                            <div class="form-group">
+                                <a ng-click="validateRegistration(reg)" class="btn btn-red">REGISTER</a>
+                            </div>    
+                        </div>
+                    </div>
                 </fieldset>
-                <div class="block_bottom">
-                    <fieldset>
-                        <div class="form-group">
-                            <div class="checkbox text-center">
-                                <label>
-                                    <input type="checkbox" ng-model="reg.terms">
-                                    I agree on the <a href="#">Terms and Conditions</a>
-                                </label>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-2 col-md-offset-5 col-sm-4 col-sm-offset-4">
-                                <div class="form-group">
-                                    <a ng-click="validateRegistration(reg)" class="btn btn-red">REGISTER</a>
-                                </div>    
-                            </div>
-                        </div>
-                    </fieldset>
-                </div>
-                
             </div>
         </form>
     </div>
