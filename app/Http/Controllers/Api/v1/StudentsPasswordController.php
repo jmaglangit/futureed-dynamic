@@ -79,7 +79,8 @@ class StudentsPasswordController extends StudentsController {
     
     
     public function confirmNewImagePassword(){
-    	$input = Input::only('user_id','password_image_id');
+    	$input = Input::only('id','password_image_id');
+      $input['user_id']=$input['id'];
     	 if(!$input['user_id'] && !$input['password_image_id']){
            return $this->setStatusCode(422)
                         ->respondWithError(['error_code'=>422,
