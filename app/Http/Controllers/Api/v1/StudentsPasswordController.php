@@ -20,14 +20,14 @@ class StudentsPasswordController extends StudentsController {
     
     public function passwordReset(){
     	
-         $input = Input::only('user_id','reset_code','password_image_id');
-        if(!$input['user_id'] && !$input['reset_code'] && !$input['password_image_id']){
+         $input = Input::only('id','reset_code','password_image_id');
+        if(!$input['id'] && !$input['reset_code'] && !$input['password_image_id']){
            return $this->setStatusCode(422)
                         ->respondWithError(['error_code'=>422,
                                             'message'=>'Parameter validation failed'
                                           ]);
         } else {
-           $userdata= $this->user->getUserDetail($input['user_id'],'Student');
+           $userdata= $this->user->getUserDetail($input['id'],'Student');
            if($input['reset_code']==$userdata['reset_code']){
               $return = $this->student->resetPasswordImage($input); 
               return $this->setStatusCode($return['status'])
@@ -80,8 +80,7 @@ class StudentsPasswordController extends StudentsController {
     
     public function confirmNewImagePassword(){
     	$input = Input::only('id','password_image_id');
-      $input['user_id']=$input['id'];
-    	 if(!$input['user_id'] && !$input['password_image_id']){
+    	 if(!$input['id'] && !$input['password_image_id']){
            return $this->setStatusCode(422)
                         ->respondWithError(['error_code'=>422,
                                             'message'=>'Parameter validation failed'

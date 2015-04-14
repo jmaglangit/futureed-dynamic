@@ -153,7 +153,7 @@ class StudentServices {
             'gender' => $student->gender,
             'birthday' => $student->birth_date,
             'age'=>$age,
-            'avatar(url)' => $password_image_url,
+            'avatar' => $password_image_url,
             'email' => $user->email,
             'username' => $user->username,
             'grade' =>$student->grade_code
@@ -172,7 +172,7 @@ class StudentServices {
     public function resetPasswordImage($data){
         $this->student->UpdateImagePassword($data);
         $return = ['status'=>200,
-                    'data' =>$data['user_id']];
+                    'data' =>$data['id']];
         return $return;
     }
     
