@@ -36,14 +36,14 @@ class UserServices {
         if(!$this->validator->email($user['email'])){
             $return = array_merge($return, [
                 'error_code' => 400028,
-                'message' => 'Email not verified'
+                'message' => 'Email invalid'
             ]);
         }
 
         if(!$this->validator->username($user['username'])){
             $return = array_merge($return, [
                 'error_code' => 400028,
-                'message' => 'Username not verified'
+                'message' => 'Username invalid'
             ]);
         }
 
