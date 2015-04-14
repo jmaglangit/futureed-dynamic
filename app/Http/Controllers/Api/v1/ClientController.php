@@ -8,14 +8,6 @@ use Illuminate\Support\Facades\Input;
 
 class ClientController extends Controller {
 
-	public function getStudentList(){
-        $input = Input::only('id');
 
-        //get list of students of the parents.
-
-
-        return $input;
-
-    }
 
 }

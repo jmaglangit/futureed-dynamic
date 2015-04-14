@@ -25,5 +25,7 @@ interface StudentRepositoryInterface {
 
     public function UpdateImagePassword($data);
 
+    public function getStudentParent($parent_id);
+
 
 }

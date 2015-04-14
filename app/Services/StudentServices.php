@@ -175,7 +175,11 @@ class StudentServices {
                     'data' =>$data['id']];
         return $return;
     }
-    
+
+
+    public function getStudentByParent($parent_id){
+        return $this->student->getStudentParent($parent_id);
+    }
     
     
     

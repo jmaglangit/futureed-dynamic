@@ -118,6 +118,13 @@ class StudentRepository implements StudentRepositoryInterface{
         }
     }
 
+    //get student according to parent id.
+    public function getStudentParent($parent_id){
+
+        return Student::where('parent_id','=',$parent_id)->get()->toArray();
+
+    }
+
 
 
 }
