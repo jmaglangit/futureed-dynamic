@@ -1,11 +1,17 @@
 var futureed = angular.module('futureed', [
+  'ngRoute',
 	'futureed.services',
 	'futureed.controllers'
-], function($interpolateProvider){
-	$interpolateProvider.startSymbol('$!');
-	$interpolateProvider.endSymbol('$!');
-}).config(['$httpProvider', function($httpProvider) {
-	  // Use x-www-form-urlencoded Content-Type
+]).config(['$interpolateProvider'
+        , '$httpProvider'
+        , '$routeProvider'
+        , '$locationProvider'
+  , function($interpolateProvider, $httpProvider, $routeProvider, $locationProvider) {
+	
+  $interpolateProvider.startSymbol('{!');
+  $interpolateProvider.endSymbol('!}');
+
+  // Use x-www-form-urlencoded Content-Type
   $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
   /**
    * The workhorse; converts an object to x-www-form-urlencoded serialization.
@@ -47,5 +53,16 @@ var futureed = angular.module('futureed', [
   $httpProvider.defaults.transformRequest = [function(data) {
     return angular.isObject(data) && String(data) !== '[object File]' ? param(data) : data;
   }];
+
+  $locationProvider.html5Mode(true);
+
+  // $routeProvider.when('/login/enter-password', {
+  //     redirectTo: '/login/enter-password'
+  //   }).when('/login/forgot-password', {
+  //     redirectTo: '/login/forgot-passwords'
+  //   }).
+  //   otherwise({
+  //     redirectTo: '/'
+  //   });
 }]);
 'use strict';

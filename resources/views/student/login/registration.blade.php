@@ -16,34 +16,34 @@
                 </div>
             </div>
             <div class="form-content col-md-12" id="form_registration">
-                <form class="form-horizontal">
+                <form class="form-horizontal" name="registrationForm">
                     <fieldset>
                         <legend>Personal Information</legend>
                         <div class="form-group">
                             <label for="" class="col-md-2 control-label">First Name</label>
                             <div class="col-md-4">
-                                <input type="text" class="form-control" value="Maggie">
+                                <input type="text" class="form-control" ng-model="reg.firstName">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="" class="col-md-2 control-label">Last Name</label>
                             <div class="col-md-4">
-                                <input type="text" class="form-control" value="Simpson">
+                                <input type="text" class="form-control" ng-model="reg.lastName">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="" class="col-md-2 control-label">Gender</label>
                             <div class="col-md-4">
-                                <select class="form-control">
-                                    <option value="">Male</option>
-                                    <option value="" selected="selected">Female</option>
+                                <select class="form-control" ng-model="reg.gender">
+                                    <option value="male" selected="selected">Male</option>
+                                    <option value="female">Female</option>
                                 </select>
                             </div>
                         </div>  
                         <div class="form-group">
                             <label for="" class="col-md-2 control-label">Birthday</label>
                             <div class="col-md-4">
-                                <input type="date" class="form-control">
+                                <input type="date" class="form-control" ng-model="reg.birthdate">
                             </div>
                         </div> 
                     </fieldset>
@@ -52,13 +52,13 @@
                         <div class="form-group">
                             <label for="" class="col-md-2 control-label">Email</label>
                             <div class="col-md-4">
-                                <input type="text" class="form-control" value="maggie@simpsons.com">
+                                <input type="text" class="form-control" ng-model="reg.email">
                             </div>
                         </div>  
                         <div class="form-group">
                             <label for="" class="col-md-2 control-label">Username</label>
                             <div class="col-md-4">
-                                <input type="text" class="form-control" value="maggie9">
+                                <input type="text" class="form-control" ng-model="reg.username">
                             </div>
                         </div> 
                     </fieldset>
@@ -67,14 +67,14 @@
                         <div class="form-group" id="form_schoolname">
                             <label for="" class="col-md-2 control-label">School Name</label>
                             <div class="col-md-4">
-                                <input type="text" class="form-control" value="Spring Field Elementary">
+                                <input type="text" class="form-control" ng-model="reg.school">
                             </div>
                         </div>
                         <div class="form-group" id="form_address">
                             <label for="" class="col-md-2 control-label">Grade</label>
 
                             <div class="col-md-4">
-                            <select name="" id="" class="form-control">
+                            <select name="" id="" class="form-control" ng-model="reg.grade">
                                 <option value="" selected="selected">K1</option>
                                 <option value="">K2</option>
                                 <option value="">Grade 1</option>
@@ -95,7 +95,7 @@
                             <div class="form-group">
                                 <div class="checkbox text-center">
                                     <label>
-                                        <input type="checkbox" value="">
+                                        <input type="checkbox" ng-model="reg.terms">
                                         I agree on the <a href="#">Terms and Conditions</a>
                                     </label>
                                 </div>
@@ -103,7 +103,7 @@
                             <div class="row">
                                 <div class="col-md-2 col-md-offset-5 col-sm-4 col-sm-offset-4">
                                     <div class="form-group">
-                                        <a href="#" class="btn btn-red">REGISTER</a>
+                                        <a ng-click="validateRegistration(reg)" class="btn btn-red">REGISTER</a>
                                     </div>    
                                 </div>
                             </div>

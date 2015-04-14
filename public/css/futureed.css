@@ -240,3 +240,8 @@ footer{font:normal 12px/30px arial; }
 @media(max-width: 767px){
 
 }
+.selected {
+	text-align: center; 
+	margin-bottom: 15px;
+	transform: scale(1.1);
+}

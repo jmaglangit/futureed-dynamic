@@ -28,9 +28,9 @@
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     @yield('styles')
-
+    <base href="/student/">
   </head>
-  <body class="student">
+  <body class="student" ng-controller="futureedController" ng-cloak>
     <a id="top"></a>
     <header>
       <nav class="navbar navbar-default">
@@ -105,6 +105,7 @@
     {!! Html::script('//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js') !!}
     {!! Html::script('http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular.min.js') !!}
     {!! Html::script('http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular-resource.min.js') !!}
+    {!! Html::script('http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular-route.min.js') !!}
     {!! Html::script('/js/futureed.js') !!}
     {!! Html::script('/js/futureed_controllers.js') !!}
     {!! Html::script('/js/futureed_services.js') !!}

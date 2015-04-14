@@ -1,7 +1,6 @@
 @extends('student.app')
 
 @section('content')
-
   <div class="container login">
     <div class="col-md-6 col-md-offset-3">
       <div class="form-style">
@@ -21,19 +20,19 @@
 	        </div>
       	</div>
 		<!--// ERROR -->
-        <div ng-controller="loginController">
-          <form>
+        <div>
+          <form id="loginForm" name="loginForm" action="/student/login/enter-password" method="POST">
             <div class="title">Enter Your Username or Email</div>
               <div class="error" ng-if="error">
-                <p>$! error $!</p>
+                <p>{! error !}</p>
               </div>
 
-            <div>
             <div class="form-group">
-              <input type="email" class="form-control" name="email" ng-model="login.email" required>
+              <input type="text" class="form-control" name="username" ng-model="username" required>
+              <input type="hidden" name="id" ng-model="id" required>
             </div>
             <div class="form-group">
-              <button type="button" ng-click="validateUser()" class="btn btn-red">Next</button>              
+              <button type="button" ng-click="validateUser(username)" class="btn btn-red">Next</button>              
             </div>
           </form>
         </div>
@@ -42,8 +41,8 @@
         <small>Click <a href="#">here</a> for Parent / Teacher / School Site</small>     
       </div>  
       <div class="text-group">
-        <small><a href="forgot-password.shtml.html">Forgot yor password</a></small>
-        <p><a href="student-registration.shtml.html" class="btn btn-purple">Sign Up</a></p>      
+        <small><a ng-click="redirect('/student/login/forgot-password')">Forgot your password?</a></small>
+        <p><a ng-click="redirect('/student/registration')" class="btn btn-purple">Sign Up</a></p>      
       </div>  
       </div>
     </div>
