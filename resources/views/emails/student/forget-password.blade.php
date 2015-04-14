@@ -4,10 +4,12 @@
     <meta charset="utf-8">
 </head>
 <body>
-<h2>Password Reset</h2>
+<h2>Hello {{ $name  }}</h2>
 
 <div>
-    <div>This is it pancit </div>
+	<div>Link: {{ $link }}</div>
+    <div>Code : {{ $code  }}</div>
+    
 </div>
 </body>
 </html>

@@ -19,11 +19,13 @@ class ApiController extends Controller {
             UserServices $user,
             StudentServices $student,
             PasswordImageServices $password_image,
-            TokenServices $token ){
+            TokenServices $token,
+            MailServices $mailServices){
         $this->user = $user;
         $this->student = $student;
         $this->password_image = $password_image;
         $this->token = $token;
+        $this->mail = $mailServices;
     }
     public function index(){
         return [
@@ -52,12 +54,12 @@ class ApiController extends Controller {
 
 
     public function respondSuccess($message = 'Success!'){
-
         return $this->setStatusCode(Response::HTTP_ACCEPTED)->respondWithData($message);
+    
     }
 
     public function respondWithData($data){
-
+       
         return $this->respond(
             [
                 'status' => $this->getStatusCode(),
@@ -79,13 +81,13 @@ class ApiController extends Controller {
 
 
     public function respond($data, $headers = [] ){
-
+      
         return Response()->json($data,$this->getStatusCode(),$headers);
 
     }
 
     public function respondWithError($message = 'Not Found!'){
-
+       
         return $this->respond(
              [
                 'status' => $this->getStatusCode(),
@@ -94,5 +96,5 @@ class ApiController extends Controller {
         );
 
     }
-
+    
 }

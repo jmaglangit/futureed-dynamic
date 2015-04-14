@@ -18,13 +18,24 @@ class StudentsLoginController extends StudentsController{
 
             if(!$input['username']){
 
-                return $this->setStatusCode(422)->respondWithError('Parameter validation failed');
+                return $this->setStatusCode(422)
+                            ->respondWithError(['error_code'=>422,
+                                             'message'=>'Parameter validation failed'
+                                         ]);
 
             }else{
 //                check if username exist, return id else nothing
                 $response = $this->user->checkLoginName($input['username'], 'Student');
+                if($response['status']==200){
+                 return $this->setStatusCode($response['status'])
+                             ->respondWithData(['id'=>$response['data']]);
+                }
+                else{
+                 return $this->setStatusCode($response['status'])
+                             ->respondWithData(['error_code'=>$response['status'],'message'=>$response['data']]);
+                }
 
-                return $this->setStatusCode($response['status'])->respondWithData($response['data']);
+               // return $this->setStatusCode($response['status'])->respondWithData($response['data']);
 
             }
     }
@@ -40,14 +51,16 @@ class StudentsLoginController extends StudentsController{
 
         if(!$input['user_id']){
 
-            return $this->setStatusCode(422)->respondWithError('Parameter validation failed');
+            return $this->setStatusCode(422)
+                        ->respondWithError(['error_code'=>422,
+                                            'message'=>'Parameter validation failed'
+                                         ]);
 
         } else {
 
             //TODO: Get image password of student.
 
                 $response = $this->student->getImagePassword($input['user_id']);
-
                 return $this->setStatusCode($response['status'])->respondWithData($response['data']);
         }
 
@@ -64,7 +77,11 @@ class StudentsLoginController extends StudentsController{
 
         if(!$input['user_id'] && !$input['image_id']){
 
-            return $this->setStatusCode(422)->respondWithError('Parameter validation failed');
+            
+            return $this->setStatusCode(422)
+                        ->respondWithError(['error_code'=>422,
+                                             'message'=>'Parameter validation failed'
+                                         ]);
 
         } else {
 
@@ -100,7 +117,16 @@ class StudentsLoginController extends StudentsController{
                 }
             }
 
-            return $this->setStatusCode($response['status'])->respondWithData($response['data']);
+            if($response['status']==200){
+                return $this->setStatusCode($response['status'])->respondWithData($response['data']);
+            }
+            else{
+               return $this->setStatusCode($response['status'])
+                           ->respondWithData(['error_code'=>$response['status'],
+                                              'message'=>$response['data']]); 
+            }
+
+            
 
         }
 

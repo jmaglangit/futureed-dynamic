@@ -5,21 +5,16 @@
  * Date: 3/19/15
  * Time: 6:30 PM
  */
-
 namespace FutureEd\Services;
-
 
 use Illuminate\Mail\Mailer;
 use Illuminate\Support\Facades\Mail;
 use League\Flysystem\Exception;
-
 class MailServices {
-
     public function __construct(Mailer $mailer, UserServices $user){
         $this->mailer = $mailer;
         $this->user = $user;
     }
-
     /*
      * $contents
      * view - views of the email
@@ -35,72 +30,64 @@ class MailServices {
      * subject - subject of the email
      */
     public function sendMail($contents){
-
         try{
-
             Mail::send($contents['view'],$contents['data'],function($message) use ($contents){
-
-
-                //mail sender
-                //TODO: set default to no-reply@company.com
-                $message->from($contents['mail_sender'],$contents['mail_sender_name']);
 
                 //mail recipient
                 $message->to($contents['mail_recipient'],$contents['mail_recipient_name']);
-
                 //if carbon copy is set.
                 if(isset($contents['carbon_copy'])){
-
                     $message->cc($contents['carbon_copy'],$contents['carbon_copy_name']);
-
                 }
-
                 //if blind carbon copy is set.
                 if(isset($contents['blind_carbon_copy'])){
-
                     $message->bcc($contents['blind_carbon_copy'],$contents['blind_carbon_copy_name']);
-
                 }
-
                 //mail subject
                 $message->subject($contents['subject']);
-
             });
-
-
         } catch(Exception $e){
             throw new Exception ($e->getMessage());
         }
-
     }
 
-    public function studentRegister($user, $code){
+    public function sendStudentRegister($user_id){
+        $user_type = config('futureed.student');
+
+
+        //get user information for the email
+        $user_detail = $this->user->getUser($user_id,$user_type);
+
+        $code = $this->user->getConfirmationCode($user_id);
+
         $content = [
-            'view' => 'emails.student.confirmation-code',
+            'view' => 'emails.student.registration-email',
             'data' => [
-                'name' => 'Jason',
-                'code' => 1234,
-                //TODO: determine where to get the url on the link of the email.
-                'link' => url() . '/api/v1',
+                'name' => $user_detail['name'],
+                'code' => $code['confirmation_code'],
+                'link' => url() . '/student/email/confirm?e=' . $user_detail['email']  ,
+            ],
+            'mail_recipient' => $user_detail['email'],
+            'mail_recipient_name' => $user_detail['first_name' ] . $user_detail['last_name'],
+            'subject' => 'Welcome to Future Lesson!'
+        ];
+        $this->sendMail($content);
+    }
+
+    public function sendStudentMailResetPassword($data,$code){
+        $content = [
+            'view' => 'emails.student.forget-password',
+            'data' => [
+                'name' => $data['username'],
+                'code' => $code,
+                'link' => url() . '/student/password/reset?e='.$data['email'],
             ],
             'mail_sender' => 'no-reply@futureed.com',
             'mail_sender_name' => 'Future Lesson',
-            'mail_recipient' => 'jmaglangit@nerubia.com',
-            'mail_recipient_name' => 'Jason Maglangit',
-            'subject' => '[TEST] Student register with a code'
+            'mail_recipient' => $data['email'],
+            'mail_recipient_name' =>$data['username'] ,
+            'subject' => 'Forgot Password'
         ];
-
         $this->sendMail($content);
-
     }
-
-
-
-
-    public function sendStudentMailResetPassword($id){
-        //TODO: Send email with code of password.
-        //
-
-    }
-
 }
