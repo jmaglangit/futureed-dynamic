@@ -49,7 +49,7 @@ Routes::group(['prefix' => 'api/v1'], function()
     Routes::post('/student/invite','Api\v1\StudentsRegistrationController@invite');
 
     //student
-    Routes::get('/parent/student/list','Api\v1\StudentsController@getStudentParent');
+    Routes::post('/parent/student/list','Api\v1\StudentsController@getStudentParent');
     
 
     //schools
