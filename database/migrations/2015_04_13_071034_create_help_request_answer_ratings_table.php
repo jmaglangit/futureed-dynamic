@@ -16,8 +16,8 @@ class CreateHelpRequestAnswerRatingsTable extends Migration {
             $table->bigIncrements('id');
             $table->bigInteger('user_id');
             $table->bigInteger('help_request_answer_id');
-            $table->tinyInteger('rating');
-            $table->TEXT('comments');
+            $table->tinyInteger('rating')->nullable();
+            $table->TEXT('comments')->nullable();
             $table->bigInteger('created_by');
             $table->bigInteger('updated_by');
             $table->timestamps();

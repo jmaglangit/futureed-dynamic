@@ -21,7 +21,7 @@ class CreateHelpRequestsTable extends Migration {
             $table->bigInteger('module_code');
             $table->bigInteger('subject_code');
             $table->bigInteger('area_code');
-            $table->tinyInteger('is_verified');
+            $table->tinyInteger('is_verified')->nullable();
             $table->enum('status',['Enabled', 'Disabled']);
             $table->enum('question_status',['Open', 'Answered', 'Cancelled']);
             $table->timestamp('last_answered_at');
