@@ -13,7 +13,7 @@ var controllers = angular.module('futureed.controllers', []);
           if(response.status == 200) {
             $scope.id = response.data.id;
             $("input[name='id']").val($scope.id);
-            $("#loginForm").submit();
+            $("#login_form").submit();
           } else {
             var data = response.data;
             if(data.error_code == 202) {
@@ -55,7 +55,7 @@ var controllers = angular.module('futureed.controllers', []);
       loginAPIService.validatePassword($scope.id, $scope.image_id).success(function(response) {
         if(response.status == 200) {
           $("#response").val(response.data);
-          $("#passwordForm").submit();
+          $("#password_form").submit();
         } else if(response.status == 202) {
           if(response.data.message == "Account Locked") {
             $scope.locked = true;

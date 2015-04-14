@@ -21,7 +21,7 @@
       	</div>
 
         <div ng-if="!locked">
-          <form id="loginForm" name="loginForm" action="/student/login/enter-password" method="POST">
+          <form id="login_form" name="loginForm" action="/student/login/enter-password" method="POST">
             <div class="title">Enter Your Username or Email</div>
               <div class="error" ng-if="error">
                 <p>{! error !}</p>
@@ -41,8 +41,8 @@
         <small>Click <a href="#">here</a> for Parent / Teacher / School Site</small>     
       </div>  
       <div class="text-group">
-        <small><a ng-click="redirect('/student/login/forgot-password')">Forgot your password?</a></small>
-        <p><a ng-click="redirect('/student/registration')" class="btn btn-purple">Sign Up</a></p>      
+        <small><a href="{!! route('student.login.forgot_password') !!}">Forgot your password?</a></small>
+        <p><a href="{!! route('student.registration') !!}" class="btn btn-purple">Sign Up</a></p>      
       </div>  
        </div>
       </div>

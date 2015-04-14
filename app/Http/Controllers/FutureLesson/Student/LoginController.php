@@ -34,6 +34,16 @@ class LoginController extends Controller {
 
 		return view('student.login.enter-password', ['id' => $input['id']]);
 	}
+
+	/**
+	 * Process session
+	 *
+	 * @return Response
+	 */
+	public function process()
+	{
+		return redirect()->route('student.dashboard.index');
+	}
 	
 	/**
 	 * Display forgot password screen

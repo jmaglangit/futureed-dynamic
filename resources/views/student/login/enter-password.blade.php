@@ -26,7 +26,7 @@
             <p>{! error !}</p>
           </div>
 
-          <form id="passwordForm" action="/student/dashboard" name="passwordForm" method="POST">
+          <form id="password_form" action="{!! route('student.login.process') !!}" name="passwordForm" method="POST">
             <div class="form_content">
               <ul class="form_password list-unstyled list-inline">
                 <li class="item" ng-repeat="item in imagePass" ng-click="highlight($event)">
