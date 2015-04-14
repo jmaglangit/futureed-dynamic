@@ -84,7 +84,7 @@ class MailServices {
             ],
             'mail_sender' => 'no-reply@futureed.com',
             'mail_sender_name' => 'Future Lesson',
-            'mail_recipient' => 'jsuizo@nerubia.com',
+            'mail_recipient' => $data['email'],
             'mail_recipient_name' =>$data['username'] ,
             'subject' => 'Forgot Password'
         ];
