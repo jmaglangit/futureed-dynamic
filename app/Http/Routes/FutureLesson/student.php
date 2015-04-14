@@ -3,6 +3,7 @@
 	Routes::group(['prefix' => '/student'], function()
 	{
 		Routes::any('/', 'FutureLesson\Student\LoginController@index');
+		Routes::any('/dashboard', [ 'as' => 'student.dashboard.index', 'uses' => 'FutureLesson\Student\DashboardController@index']);
 	
 		Routes::group(['prefix' => '/login'], function()
 		{
