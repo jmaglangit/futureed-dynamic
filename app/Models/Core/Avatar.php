@@ -11,6 +11,6 @@ class Avatar extends Model {
 
     protected $dates = ['deleted_at'];
 
-    protected $hidden = ['created_by_id','updated_by_id','created_at','updated_at','deleted_at'];
+    protected $hidden = ['created_by','updated_by','created_at','updated_at','deleted_at'];
 
 }

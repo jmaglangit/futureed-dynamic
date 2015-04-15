@@ -3,8 +3,7 @@
 use FutureEd\Models\Core\Avatar;
 use Illuminate\Database\Seeder;
 
-// composer require laracasts/testdummy
-use Laracasts\TestDummy\Factory as TestDummy;
+
 
 class AvatarsTableSeeder extends Seeder {
 
