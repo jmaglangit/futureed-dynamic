@@ -156,7 +156,8 @@ class StudentServices {
             'avatar' => $password_image_url,
             'email' => $user->email,
             'username' => $user->username,
-            'grade' =>$student->grade_code
+            'grade' =>$student->grade_code,
+            'learning_style'=>$student->learning_style_id
             
         ];
 

@@ -61,6 +61,10 @@ class AppServiceProvider extends ServiceProvider {
             'FutureEd\Models\Repository\Client\ClientRepositoryInterface',
             'FutureEd\Models\Repository\Client\ClientRepository'
         );
+         $this->app->bind(
+            'FutureEd\Models\Repository\Avatar\AvatarRepositoryInterface',
+            'FutureEd\Models\Repository\Avatar\AvatarRepository'
+        );
 
 
 
