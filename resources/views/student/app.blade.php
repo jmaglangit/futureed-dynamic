@@ -33,6 +33,8 @@
   <body class="student" ng-controller="futureedController" ng-cloak>
     <a id="top"></a>
     
+    @yield('navbar')
+
   	@yield('content')
 
     @section('footer')
@@ -49,14 +51,16 @@
     {!! Html::script('http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular.min.js') !!}
     {!! Html::script('http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular-resource.min.js') !!}
     {!! Html::script('http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular-route.min.js') !!}
+    {!! Html::script('/js/jquery.smooth-scroll.js') !!}
+    
+    {!! Html::script('/js/student/app.js') !!}
+
     {!! Html::script('/js/futureed.js') !!}
     {!! Html::script('/js/futureed_controllers.js') !!}
     {!! Html::script('/js/futureed_services.js') !!}
-    {!! Html::script('/js/jquery.smooth-scroll.js') !!}
 
     @yield('scripts')
 
-    {!! Html::script('/js/student/app.js') !!}
     <!-- END SCRIPTS -->
 
   </body>
