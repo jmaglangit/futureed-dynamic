@@ -8,7 +8,7 @@ return [
     'deleted' => 0,
     'locked' => 0,
     'image_password_count' => 3,
-    'image_password_folder' => 'images',
+    'image_password_folder' => 'images/password',
 
 
     //Request code expiry in seconds

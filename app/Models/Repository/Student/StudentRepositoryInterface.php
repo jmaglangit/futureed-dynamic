@@ -27,6 +27,6 @@ interface StudentRepositoryInterface {
 
     public function getStudentParent($parent_id);
     
-    public function saveUserAvatar($data);
+    public function saveStudentAvatar($data);
 
 }

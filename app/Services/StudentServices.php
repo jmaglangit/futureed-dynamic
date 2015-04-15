@@ -182,6 +182,45 @@ class StudentServices {
         return $this->student->getStudentParent($parent_id);
     }
     
+    //save student avatar
+    public function saveStudentAvatar($input){
+        $this->student->saveStudentAvatar($input);
+        return $input['user_id'];
+    }
+    
+    
+    //get student information
+    public function getStudentInfo($user_id){
+        $user_student = config('futureed.student');
+        $student = $this->getStudent($user_id);
+        $age = $this->age($student->birth_date);
+        $user = $this->user->getUser($user_id,$user_student);
+        $password_image_url =$this->password->getUserPasswordImageUrl($user_id);
+        $school=$this->school->getSchool($student->school_code);
+         $return = [
+            'id' => $student->user_id,
+            'first_name' => $student->first_name,
+            'last_name' => $student->last_name,
+            'gender' => $student->gender,
+            'birthday' => $student->birth_date,
+            'age'=>$age,
+            'avatar' => $password_image_url,
+            'email' => $user->email,
+            'username' => $user->username,
+            'school' =>'',
+            'grade' =>$student->grade_code,
+            'country' =>$student->country,
+            'city' => $student->city,
+            'state' => $student->state,
+            'points' => $student->points,
+            'badges' => ''
+            
+        ];
+       
+       return $return;
+    
+    }
+    
     
     
 

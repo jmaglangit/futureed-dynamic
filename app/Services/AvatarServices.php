@@ -40,10 +40,7 @@ class AvatarServices {
         return $avatar;
     }
     
-    public function saveUserAvatar($input){
-        $this->student->saveUserAvatar($input);
-        return $input['user_id'];
-    }
+   
 
    
 }

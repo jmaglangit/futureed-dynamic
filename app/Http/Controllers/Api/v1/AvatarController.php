@@ -3,6 +3,7 @@
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 use FutureEd\Services\AvatarServices;
+use FutureEd\Services\StudentServices;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
@@ -10,9 +11,10 @@ use Illuminate\Support\Facades\Input;
 
 class AvatarController extends ApiController {
 
-	public function __construct(AvatarServices $avatar){
+	public function __construct(AvatarServices $avatar,StudentServices $student){
 
         $this->avatar = $avatar;
+        $this->student=$student;
 
     }
     
@@ -55,7 +57,7 @@ class AvatarController extends ApiController {
                                      ]);
         }else{
     
-           $return =  $this->avatar->saveUserAvatar($input);
+           $return =  $this->student->saveStudentAvatar($input);
            return $this->respondWithData(['id'=>$return]);
         }
         

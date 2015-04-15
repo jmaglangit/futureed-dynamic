@@ -3,6 +3,7 @@
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
+use FutureEd\Services\ClientServices;
 use FutureEd\Services\MailServices;
 use FutureEd\Services\PasswordImageServices;
 use FutureEd\Services\StudentServices;
@@ -20,12 +21,14 @@ class ApiController extends Controller {
             StudentServices $student,
             PasswordImageServices $password_image,
             TokenServices $token,
-            MailServices $mailServices){
+            MailServices $mailServices,
+            ClientServices $client){
         $this->user = $user;
         $this->student = $student;
         $this->password_image = $password_image;
         $this->token = $token;
         $this->mail = $mailServices;
+        $this->client = $client;
     }
     public function index(){
         return [
