@@ -158,6 +158,54 @@ class UsersTableSeeder extends Seeder {
                'updated_by' => 1,
                'created_at' => date("Y-m-d H:i:s"),
                'updated_at' => date("Y-m-d H:i:s")
+           ],
+           [
+               'username' => 'jolliemar',
+               'email' => 'jgutang@nerubia.com',
+               'password' => 'jolliemar',
+               'name' => 'Jason Maglangit',
+               'user_type' => 'Admin',
+               'login_attempt' => 0,
+               'is_account_activated' => 1,
+               'is_account_locked' => 0,
+               'is_account_deleted' => 0,
+               'status' => 'Enabled',
+               'created_by' => 1,
+               'updated_by' => 1,
+               'created_at' => date("Y-m-d H:i:s"),
+               'updated_at' => date("Y-m-d H:i:s")
+           ],
+           [
+               'username' => 'jolliemar',
+               'email' => 'jgutang@nerubia.com',
+               'password' => 'jolliemar',
+               'name' => 'Jason Maglangit',
+               'user_type' => 'Client',
+               'login_attempt' => 0,
+               'is_account_activated' => 1,
+               'is_account_locked' => 0,
+               'is_account_deleted' => 0,
+               'status' => 'Enabled',
+               'created_by' => 1,
+               'updated_by' => 1,
+               'created_at' => date("Y-m-d H:i:s"),
+               'updated_at' => date("Y-m-d H:i:s")
+           ],
+           [
+               'username' => 'jolliemar',
+               'email' => 'jgutang@nerubia.com',
+               'password' => 'jolliemar',
+               'name' => 'Jason Maglangit',
+               'user_type' => 'Student',
+               'login_attempt' => 0,
+               'is_account_activated' => 1,
+               'is_account_locked' => 0,
+               'is_account_deleted' => 0,
+               'status' => 'Enabled',
+               'created_by' => 1,
+               'updated_by' => 1,
+               'created_at' => date("Y-m-d H:i:s"),
+               'updated_at' => date("Y-m-d H:i:s")
            ]
 
         ]);
