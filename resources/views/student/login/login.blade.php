@@ -28,7 +28,7 @@
               </div>
 
             <div class="form-group">
-              <input type="text" class="form-control" name="username" ng-model="username" required>
+              <input type="text" class="form-control" name="username" ng-model="username" autocomplete="off" required>
               <input type="hidden" name="id" ng-model="id" required>
             </div>
             <div class="form-group">
