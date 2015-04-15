@@ -9,9 +9,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
 class StudentsController extends ApiController {
+    
+    public function __construct(
+            StudentServices $student
+            ){
+        $this->student = $student;
+ 
+    }
 
 
-	public function getStudentParent(){
+    public function getStudentParent(){
         $input = Input::only('parent_id');
 
         $students = $this->student->getStudentByParent($input['parent_id']);
@@ -19,6 +26,16 @@ class StudentsController extends ApiController {
             $students
         ]);
 
+    }
+    
+    
+    public function getStudentDetails(){
+        $input = Input::only('user_id');
+        
+        $students = $this->student->getStudentInfo($input['user_id']); 
+        return $this->respondWithData([
+            $students
+        ]);
     }
 
 
