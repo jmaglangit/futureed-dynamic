@@ -7,6 +7,7 @@ use FutureEd\Services\AvatarServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
+
 class AvatarController extends ApiController {
 
 	public function __construct(AvatarServices $avatar){
@@ -28,9 +29,16 @@ class AvatarController extends ApiController {
                                      ]);
 
         }else{
-        	
-			$avatar= $this->avatar->getAvatars($input['gender']);
-			return $this->respondWithData($avatar);
+            
+            if($this->avatar->genderCheck($input['gender'])===true){
+                    $avatar= $this->avatar->getAvatars($input['gender']);
+                    return $this->respondWithData($avatar);
+            }
+            else{
+                return $this->setStatusCode(202)
+                            ->respondWithData(['error_code'=>202,
+                                               'message'=>'invalid gender']);
+            }
         }
         
         
