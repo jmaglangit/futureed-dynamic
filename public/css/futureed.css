@@ -295,3 +295,7 @@ footer{font:normal 12px/30px arial; }
 [ng\:cloak], [ng-cloak], .ng-cloak {
   display: none !important;
 }
+
+.title {
+	margin-bottom: 10px;
+}
