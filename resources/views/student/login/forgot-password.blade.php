@@ -5,14 +5,14 @@
     <div class="col-md-6 col-md-offset-3">
       <div class="form-style">
         <div class="title">Retrieve Password</div>
-          <div class="error" ng-if="error">
-            <p>{! error !}</p>
-          </div>
-        <form id="redirect_form" action="{!! route('student.login.forgot_password_success') !!}" method="POST">
-          <input id="response" name="response" type="hidden" />
-        </form>
+        <div class="error" ng-if="error">
+          <p>{! error !}</p>
+        </div>
 
-        <form action="" name="forgot_pass_form" id="forgot_pass_form">
+        <form action="{!! route('student.login.forgot_password_success') !!}" 
+              name="forgot_pass_form" id="forgot_pass_form" method="POST">
+          <input id="email" name="email" type="hidden" />
+
           <div class="input">
             <div class="icon">
               <i class="fa fa-user"></i>

@@ -35,17 +35,6 @@ var controllers = angular.module('futureed.controllers', []);
         });
       }
 
-      $scope.getImagePassword = function() {
-        // $scope.id = $("input[name='id']").val();
-        $scope.id = "3";
-
-        loginAPIService.getImagePassword($scope.id).success(function (response) {
-          $scope.imagePass = response.data
-        }).error(function(response) {
-
-        });
-      }
-
       $scope.highlight = function($event) {
         $("ul.form_password li").removeClass('selected');
         $($event.currentTarget).addClass('selected');
@@ -75,8 +64,8 @@ var controllers = angular.module('futureed.controllers', []);
 
         loginAPIService.forgotPassword($scope.username).success(function(response) {
           if(response.status == 200) {
-            $("input[name='response']").val(response.data.email);
-            $("#redirect_form").submit();
+            $("input[name='email']").val(response.data.email);
+            $("#forgot_pass_form").submit();
           } else {
             $scope.error = response.data.message;
           }
@@ -87,7 +76,7 @@ var controllers = angular.module('futureed.controllers', []);
 
       $scope.setDisplay = function(email) {
         if(email != '') {
-          $scope.title = "Enter Reset Code";
+          $scope.title = "";
           return false;
         }
 
@@ -97,15 +86,17 @@ var controllers = angular.module('futureed.controllers', []);
 
       $scope.getImagePassword = function() {
         $scope.id = $("input[name='id']").val();
+        $scope.selected_image_id = $("input[name='selected_image_id']").val();
 
         loginAPIService.getImagePassword($scope.id).success(function (response) {
-          $scope.imagePass = response.data
+          $scope.image_pass = response.data
+          $scope.reset = true;
         }).error(function(response) {
 
         });
       }
 
-      $scope.highlight = function($event) {
+      $scope.highlight = function($event, array) {
         $("ul.form_password li").removeClass('selected');
         $($event.currentTarget).addClass('selected');
         $scope.image_id = $($event.currentTarget).find("#image_id").val();
@@ -133,7 +124,7 @@ var controllers = angular.module('futureed.controllers', []);
 
         loginAPIService.validateCode($scope.code, $scope.email).success(function(response) {
           if(response.status == 200) {
-            $("input[name='response']").val(response.data);
+            $("input[name='user_id']").val(response.data.id);
             $("#success_form").submit();
           } else {
             $scope.error = response.data.message;
@@ -143,9 +134,63 @@ var controllers = angular.module('futureed.controllers', []);
         });
       }
 
-      $scope.storeNewPassword = function() {
-        $("input[name='selected_image_id']").val($scope.image_id);
-        $("#reset_password_form").submit();
+      $scope.storeNewPassword = function(array) {
+        $scope.error = "";
+
+        if($scope.image_id) {
+          $("ul.form_password li").removeClass('selected');
+          $scope.new_password = $scope.image_id;
+          $("#title").html("Select a picture to confirm your new password");
+
+          $scope.image_pass = shuffle($scope.image_pass);
+          $scope.image_id = "";
+          $scope.confirm = true;
+          $scope.reset = false;
+        } else {
+          $scope.error = "Select a new password."
+        }
+      }
+
+      $scope.undoNewPassword = function() {
+        $("ul.form_password li").removeClass('selected');
+        $("#title").html("Select a picture to confirm your new password");
+        
+        $scope.image_id = "";
+        $scope.new_password = "";
+        $scope.image_pass = shuffle($scope.image_pass);
+        $scope.confirm = false;
+        $scope.reset = true;
+      }
+
+      function shuffle(array) {
+        var m = array.length, t, i;
+          // While there remain elements to shuffle
+          while (m) {
+            // Pick a remaining element…
+            i = Math.floor(Math.random() * m--);
+
+            // And swap it with the current element.
+            t = array[m];
+            array[m] = array[i];
+            array[i] = t;
+          }
+
+        return array;
+      }
+
+      $scope.validateNewPassword = function() {
+        $scope.error = "";
+
+        if($scope.new_password == $scope.image_id) {
+          var code = $("input[name='reset_code']").val();
+          loginAPIService.resetPassword($scope.id, code, $scope.new_password).success(function(response) {
+            $("#reset_password_form").submit();
+          }).error(function(response) {
+
+          });
+        } else {
+          $scope.error = "Password does not match.";
+        }
       }
 
       $scope.updateBirthdate = function(reg, birthday) {
@@ -176,7 +221,7 @@ var controllers = angular.module('futureed.controllers', []);
       }
 
       $scope.getUserDetails = function() {
-        var user = JSON.parse($('#userdata').val());
+        $scope.user = JSON.parse($('#userdata').val());
         $('#userdata').html('');
       }
     });

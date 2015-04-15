@@ -82,15 +82,31 @@ class LoginController extends Controller {
 	 */
 	public function forgot_password_success()
 	{
-		$input = Input::only('response', 'email');
-		$response = $input['response'];
+		$input = Input::only('email');
 		$email = $input['email'];
 
-		if($response == null && $email == null) {
+		if($email == null) {
 			return redirect()->route('student.login.forgot_password');
 		}
 
-		return view('student.login.forgot-password-success', ['response' => $response, 'email' => $email]);
+		return view('student.login.forgot-password-success', ['email' => $email, 'title' => 'Email Sent', 'show' => 1]);
+	}
+
+	/**
+	* Display enter reset code screen
+	*
+	* @return Response
+	*/
+	public function reset_code() 
+	{
+		$input = Input::only('email');
+		$email = $input['email'];
+
+		if($email == null) {
+			return redirect()->route('student.login.forgot_password');
+		}
+
+		return view('student.login.forgot-password-success', ['email' => $email, 'title' => 'Enter Reset Code', 'show' => 0]);
 	}
 
 	/**
@@ -120,15 +136,15 @@ class LoginController extends Controller {
 	 */
 	public function reset_password()
 	{
-		$input = Input::only('id', 'code');
-		$id = $input['id'];
-		$code = $input['code'];
+		$input = Input::only('user_id', 'reset_code');
+		$id = $input['user_id'];
+		$reset_code = $input['reset_code'];
 
-		// if($id == null || $code == null) {
-			// return redirect()->route('student.login.forgot_password');
-		// }
+		if($id == null || $reset_code == null) {
+			return redirect()->route('student.login.forgot_password');
+		}
 
-		return view('student.login.reset-password', ['id' => $id, 'code' => $code]);
+		return view('student.login.reset-password', ['id' => $id, 'reset_code' => $reset_code]);
 	}
 	
 	/**
@@ -138,8 +154,6 @@ class LoginController extends Controller {
 	 */
 	public function reset_confirm_password()
 	{
-		$input = Input::only('student_id', 'reset_code', 'selected_image_id');
-
 		return view('student.login.reset-confirm-password');
 	}
 	
