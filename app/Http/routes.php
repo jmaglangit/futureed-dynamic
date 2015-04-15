@@ -54,7 +54,7 @@ Routes::group(['prefix' => 'api/v1'], function()
     
     
     //avatars
-    Routes::post('user/avatar','Api\v1\AvatarController@selectAvatars');
+    Routes::post('/user/avatar','Api\v1\AvatarController@selectAvatars');
 
 
 });
