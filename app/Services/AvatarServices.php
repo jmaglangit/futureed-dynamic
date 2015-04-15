@@ -27,7 +27,7 @@ class AvatarServices {
         $avatar=array();
         foreach($image_avatar as $k => $r){
             $temp_avatar['avatar_id']=$r['id'];
-            $temp_avatar['avatar_urls']= url() . '/' . $image_avatar_folder . '/' . $r['avatar_image'];
+            $temp_avatar['avatar_url']= url() . '/' . $image_avatar_folder . '/' . $r['avatar_image'];
             $temp_avatar['avatar_name']=$r['avatar_image'];
             $avatar[]= $temp_avatar;
         }
