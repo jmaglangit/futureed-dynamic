@@ -195,6 +195,15 @@ class UserRepository implements UserRepositoryInterface{
         }
     }
 
+    //check id with password
+    public function checkPassword($id,$password){
+
+        return User::where('id',$id)
+            ->where('password',$password)
+            ->pluck('id');
+
+    }
+
 
 
 

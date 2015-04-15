@@ -1,14 +1,6 @@
 <?php namespace FutureEd\Models\Repository\Validator;
+
 use Illuminate\Support\Facades\Validator;
-
-/**
- * Created by PhpStorm.
- * User: Jason
- * Date: 3/11/15
- * Time: 2:38 PM
- */
-
-
 
 
 class ValidatorRepository implements ValidatorRepositoryInterface{
@@ -24,7 +16,17 @@ class ValidatorRepository implements ValidatorRepositoryInterface{
 
     //implement validation of the username
     public function username($username){
-       return true;
+
+        $validator = Validator::make(
+            ['value' => $username ],
+            ['value' => 'required|min:8|max:32|alpha_num']
+        );
+
+        if($validator->fails()){
+            return false;
+        }
+
+        return true;
     }
 
     public function firstName($first_name){

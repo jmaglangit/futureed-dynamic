@@ -156,7 +156,8 @@ class StudentServices {
             'avatar' => $password_image_url,
             'email' => $user->email,
             'username' => $user->username,
-            'grade' =>$student->grade_code
+            'grade' =>$student->grade_code,
+            'learning_style'=>$student->learning_style_id
             
         ];
 
@@ -170,12 +171,16 @@ class StudentServices {
     
     //udpate student_image_password
     public function resetPasswordImage($data){
-        $this->student->UpdateImagePassword($data);
+        $this->student->updateImagePassword($data);
         $return = ['status'=>200,
                     'data' =>$data['id']];
         return $return;
     }
-    
+
+
+    public function getStudentByParent($parent_id){
+        return $this->student->getStudentParent($parent_id);
+    }
     
     
     
