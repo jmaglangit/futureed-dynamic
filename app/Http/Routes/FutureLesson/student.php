@@ -25,7 +25,6 @@
 			Routes::get('/my-profile', [ 'as' => 'student.dashboard.my_profile', 'uses' => 'FutureLesson\Student\DashboardController@my_profile']);
 		});
 		
-		// Routes::get('/password/reset', [ 'as' => 'student.login.reset_password', 'uses' => 'FutureLesson\Student\LoginController@reset_password']);
 		Routes::get('/registration', ['as' => 'student.registration', 'uses' => 'FutureLesson\Student\LoginController@registration']);
 		Routes::get('/registration-success', ['as' => 'student.registration-success', 'uses' => 'FutureLesson\Student\LoginController@registration_success']);
 	});

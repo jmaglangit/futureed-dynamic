@@ -3,7 +3,7 @@ var services = angular.module('futureed.services', ['ngResource']);
 	services.factory('loginAPIService', function($http) {
 		
 		var loginAPI = {};
-		var futureedAPIUrl = '/api/v1/';
+		var futureedAPIUrl = 'http://dev.futureed.nerubia.com/api/v1/';
 
 		loginAPI.validateUser = function(username) {
 			return $http({
@@ -41,7 +41,15 @@ var services = angular.module('futureed.services', ['ngResource']);
 			return $http({
 				method	: 'POST'
 				, data 	: {email : email, reset_code : code}
-				, url	: futureedAPIUrl + 'user/password/code'
+				, url	: futureedAPIUrl + 'student/password/code'
+			});
+		}
+
+		loginAPI.validateRegistration = function(registration) {
+			return $http({
+				method	: 'POST'
+				, data	: registration
+				, url	: futureedAPIUrl + 'student/register'
 			});
 		}
 
