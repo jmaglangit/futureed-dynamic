@@ -5,15 +5,18 @@ use FutureEd\Http\Controllers\Controller;
 
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use FutureEd\Services\StudentServices;
+use FutureEd\Services\PasswordImageServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
 class StudentsController extends ApiController {
     
     public function __construct(
-            StudentServices $student
+            StudentServices $student,
+            PasswordImageServices $password_image
             ){
         $this->student = $student;
+        $this->password_image=$password_image;
  
     }
 
