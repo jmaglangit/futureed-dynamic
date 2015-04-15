@@ -260,6 +260,19 @@ fieldset legend{color: #8e8171; font-size: 16px; text-transform: uppercase;}
 	padding:20px; width:120px;
 }
 
+/*----- FOLLOW UP REGISTRATION ----- */
+.follow-up-reg .form-content h3 {
+    font-weight: 200;
+    text-align: center;
+}
+.follow-up-reg .form-content .btn {
+	width: auto;
+	padding: 6px 30px;
+    text-align: center;
+    display: block;
+    margin: 0 auto;
+}
+
 /*----- TABLE ----- */
 .panel-toolbar{margin: 20px 0;}
 .btn-full {color: #aaa; font-size: 20px; padding: 30px; width: 100%;}

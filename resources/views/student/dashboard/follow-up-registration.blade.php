@@ -11,9 +11,11 @@
                 </div>
             </div>
             <div class="form-content">
-            	<h3>Pick An Avatar for your Profile</h3>
+                <div class="lmtcontain">
+                	<h3>Pick An Avatar for your Profile</h3>
 
-            	<p><button type="button" class="btn btn-red" ng-click="validatePassword()">Save and Proceed</button></p>
+                	<p><button type="button" class="btn btn-red" ng-click="validatePassword()">Save and Proceed</button></p>
+                </div>
             </div>
 			<textarea id="userdata" name="hide" style="display:none;">{!! Session::get('user') !!}</textarea>
         </form>
