@@ -18,5 +18,9 @@ return [
     'admin' => 'Admin',
     'client' => 'Client',
     'student' => 'Student',
+    
+    //avatar folder 
+    'image_avatar_folder' => 'images/avatar',
+    'image_avatar_count' => 5,
 
 ];
