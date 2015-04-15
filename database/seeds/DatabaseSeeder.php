@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder {
         $this->call('SchoolsTableSeeder');
         $this->call('PasswordImagesTableSeeder');
         $this->call('CountriesSeeder');
+        $this->call('AvatarsTableSeeder');
         $this->command->info('Seeded the countries!');
         $this->call('ClientTableSeeder');
     }

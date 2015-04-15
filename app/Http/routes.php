@@ -53,6 +53,10 @@ Routes::group(['prefix' => 'api/v1'], function()
 
     //schools
     Routes::get('/school','Api\v1\SchoolsController@schools');
+    
+    
+    //avatars
+    Routes::post('/user/avatar','Api\v1\AvatarController@selectAvatars');
 
     //client
     Routes::post('/client/login','Api\v1\ClientLoginController@login');

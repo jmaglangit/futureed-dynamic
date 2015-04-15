@@ -61,15 +61,16 @@ class PasswordImageServices {
         $dimension *= $dimension;
 
         $password_images = $this->password->getRandomImage($dimension);
-
+        $return_images =array();
         foreach($password_images as $k => $r){
 
             $r['password_image_file'] = url() . '/' . $image_folders . '/' . $r['password_image_file'];
+            $return_images[]=$r;
         }
 
         return [
             'status' => 200,
-            'data' => $password_images
+            'data' => $return_images
         ];
 
     }
