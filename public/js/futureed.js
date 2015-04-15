@@ -15,6 +15,7 @@ var futureed = angular.module('futureed', [
 
   // Use x-www-form-urlencoded Content-Type
   $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+  delete $httpProvider.defaults.headers.common['X-Requested-With'];
   /**
    * The workhorse; converts an object to x-www-form-urlencoded serialization.
    * @param {Object} obj

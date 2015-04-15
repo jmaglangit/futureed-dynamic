@@ -50,6 +50,8 @@ Routes::group(['prefix' => 'api/v1'], function()
 
     //student
     Routes::post('/parent/student/list','Api\v1\StudentsController@getStudentParent');
+    Routes::post('/student/details','Api\v1\StudentsController@getStudentDetails');
+
 
     //grade
     Routes::get('/grade','Api\v1\GradeController@grade');
@@ -60,6 +62,7 @@ Routes::group(['prefix' => 'api/v1'], function()
     
     //avatars
     Routes::post('/user/avatar','Api\v1\AvatarController@selectAvatars');
+    Routes::post('/user/avatar/new','Api\v1\AvatarController@saveUserAvatar');
 
     //client
     Routes::post('/client/login','Api\v1\ClientLoginController@login');
