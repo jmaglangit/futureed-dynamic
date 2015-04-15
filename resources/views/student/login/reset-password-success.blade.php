@@ -9,7 +9,7 @@
             <i class="fa fa-check fa-5x img-rounded text-center"></i>
           </div>
           <strong>Success!</strong> You're password has been reset. You may now use your new password to login.
-          <a class="btn btn-red">Click here to Login</a>    
+          <a class="btn btn-red" href="{!! route('student.login') !!}">Click here to Login</a>    
       </div>
     </div>
   </div>

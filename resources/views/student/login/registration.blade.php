@@ -3,7 +3,7 @@
 @section('content')
 <div class="container login">
     <div class="form-style register_student form-wide"> 
-        <form class="form-horizontal" name="registrationForm">
+        <form class="form-horizontal simple-form" name="form_registration" id="form_registation">
             <div class="form-header">
                 <div class="media">
                     <div class="media-left">
@@ -18,19 +18,24 @@
                     </div>
                 </div>
             </div>
-            <div class="form-content col-md-12" id="form_registration">
+            
+            <div class="form-content col-md-12">
+                <div class="error" ng-if="error">
+                    <p>{! error !}</p>
+                </div>
+
                 <fieldset>
                     <legend>Personal Information</legend>
                     <div class="form-group">
                         <label for="" class="col-md-2 control-label">First Name</label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" ng-model="reg.firstName">
+                            <input type="text" class="form-control" ng-model="reg.first_name">
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="" class="col-md-2 control-label">Last Name</label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" ng-model="reg.lastName">
+                            <input type="text" class="form-control" ng-model="reg.last_name">
                         </div>
                     </div>
                     <div class="form-group">
@@ -42,9 +47,28 @@
                     <div class="form-group">
                         <label for="" class="col-md-2 control-label">Birthday</label>
                         <div class="col-md-4">
-                            <input type="date" class="form-control" ng-model="reg.birthdate">
+                            <input type="date" class="form-control" name="birthday" ng-model="birthday" ng-change="updateBirthdate(reg, birthday)">
+                            <input type="hidden" ng-model="reg.birthday">
                         </div>
                     </div> 
+                    <div class="form-group">
+                        <label for="" class="col-md-2 control-label">City</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" ng-model="reg.city">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="col-md-2 control-label">State</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" ng-model="reg.state">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="col-md-2 control-label">Country</label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" ng-model="reg.country">
+                        </div>
+                    </div>
                 </fieldset>
                 <fieldset>
                     <legend>User Credentials</legend>
@@ -66,14 +90,14 @@
                     <div class="form-group" id="form_schoolname">
                         <label for="" class="col-md-2 control-label">School Name</label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" ng-model="reg.school">
+                            <input type="text" class="form-control" ng-model="reg.school_code">
                         </div>
                     </div>
                     <div class="form-group" id="form_address">
                         <label for="" class="col-md-2 control-label">School level</label>
 
                         <div class="col-md-4">
-                        {!! Form::select('level', array('K2' => 'K2', 'Grade 1' => 'Grade 1', 'Grade 2' => 'Grade 2', 'Grade 3' => 'Grade 3', 'Grade 4' => 'Grade 4', 'Grade 5' => 'Grade 5', 'Grade 6' => 'Grade 6', 'Grade 7' => 'Grade 7', 'Grade 8' => 'Grade 8'), 'K2',array('class' => 'form-control', 'ng-model' => 'reg.grade')); !!}
+                        {!! Form::select('level', array('K2' => 'K2', 'Grade 1' => 'Grade 1', 'Grade 2' => 'Grade 2', 'Grade 3' => 'Grade 3', 'Grade 4' => 'Grade 4', 'Grade 5' => 'Grade 5', 'Grade 6' => 'Grade 6', 'Grade 7' => 'Grade 7', 'Grade 8' => 'Grade 8'), 'K2',array('class' => 'form-control', 'ng-model' => 'reg.grade_code')); !!}
 
                         </div><br><br>
                     </div>    
@@ -84,7 +108,7 @@
                     <div class="form-group">
                         <div class="checkbox text-center">
                             <label>
-                                <input type="checkbox" ng-model="reg.terms">
+                                <input type="checkbox" ng-model="terms">
                                 I agree on the <a href="#">Terms and Conditions</a> and <a href="#">Data Privacy Policy</a>
                             </label>
                         </div>
@@ -92,7 +116,7 @@
                     <div class="row">
                         <div class="col-md-2 col-md-offset-5 col-sm-4 col-sm-offset-4">
                             <div class="form-group">
-                                <a ng-click="validateRegistration(reg)" class="btn btn-red">REGISTER</a>
+                                <a ng-click="validateRegistration(reg, terms)" class="btn btn-red">REGISTER</a>
                             </div>    
                         </div>
                     </div>

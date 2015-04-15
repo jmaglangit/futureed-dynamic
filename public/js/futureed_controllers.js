@@ -5,85 +5,223 @@ var controllers = angular.module('futureed.controllers', []);
         window.location.href = url;
       }
 
-    $scope.validateUser = function(username) {
-      $scope.username = angular.copy(username);
-      $scope.error = "";
+      $scope.validateUser = function(username) {
+        $scope.username = angular.copy(username);
+        $scope.error = "";
 
-      loginAPIService.validateUser($scope.username).success(function (response) {
-          if(response.status == 200) {
-            $scope.id = response.data.id;
-            $("input[name='id']").val($scope.id);
-            $("#login_form").submit();
-          } else {
-            var data = response.data;
-            if(data.error_code == 202) {
-              if(data.message == "Account Locked") {
-                $scope.locked = true;
+        loginAPIService.validateUser($scope.username).success(function (response) {
+            if(response.status == 200) {
+              $scope.id = response.data.id;
+              $("input[name='id']").val($scope.id);
+              $("#login_form").submit();
+            } else {
+              var data = response.data;
+              if(data.error_code == 202) {
+                if(data.message == "Account Locked") {
+                  $scope.locked = true;
+                } else {
+                  $scope.error = data.message;
+                }
               } else {
                 $scope.error = data.message;
               }
+            }
+        }).error(function(response) {
+            if(response.status == 422) {
+              $scope.error = "Username should not be empty."
             } else {
-              $scope.error = data.message;
+              $scope.error = response.data;
+            }
+        });
+      }
+
+      $scope.highlight = function($event) {
+        $("ul.form_password li").removeClass('selected');
+        $($event.currentTarget).addClass('selected');
+        $scope.image_id = $($event.currentTarget).find("#image_id").val();
+      }
+
+      $scope.validatePassword = function () {
+        loginAPIService.validatePassword($scope.id, $scope.image_id).success(function(response) {
+          if(response.status == 200) {
+            $("#response").val(response.data);
+            $("#password_form").submit();
+          } else if(response.status == 202) {
+            if(response.data.message == "Account Locked") {
+              $scope.locked = true;
+            } else {
+              $scope.error = "Password does not match.";
+            } 
+          }
+        }).error(function(response) {
+          
+        });
+      }
+
+      $scope.forgotPassword = function(username) {
+        $scope.error = "";
+        $scope.username = angular.copy(username);
+
+        loginAPIService.forgotPassword($scope.username).success(function(response) {
+          if(response.status == 200) {
+            $("input[name='email']").val(response.data.email);
+            $("#forgot_pass_form").submit();
+          } else {
+            $scope.error = response.data.message;
+          }
+        }).error(function(response) {
+          $scope.error = response.data.message;
+        });
+      }
+
+      $scope.setDisplay = function(email) {
+        if(email != '') {
+          $scope.title = "";
+          return false;
+        }
+
+        $scope.title = "Email Sent";
+        return true;
+      }
+
+      $scope.getImagePassword = function() {
+        $scope.id = $("input[name='id']").val();
+        $scope.selected_image_id = $("input[name='selected_image_id']").val();
+
+        loginAPIService.getImagePassword($scope.id).success(function (response) {
+          $scope.image_pass = response.data
+          $scope.reset = true;
+        }).error(function(response) {
+
+        });
+      }
+
+      $scope.highlight = function($event, array) {
+        $("ul.form_password li").removeClass('selected');
+        $($event.currentTarget).addClass('selected');
+        $scope.image_id = $($event.currentTarget).find("#image_id").val();
+      }
+
+      $scope.validatePassword = function () {
+        loginAPIService.validatePassword($scope.id, $scope.image_id).success(function(response) {
+          if(response.status == 200) {
+            $("#response").val(JSON.stringify(response.data));
+            $("#password_form").submit();
+          } else if(response.status == 202) {
+            if(response.data.message == "Account Locked") {
+              $scope.locked = true;
+            } else {
+              $scope.error = "Password does not match.";
             }
           }
-      }).error(function(response) {
-          if(response.status == 422) {
-            $scope.error = "Username should not be empty."
+        });
+      } 
+
+      $scope.validateCode = function(code) {
+        $scope.error = "";
+        $scope.code = angular.copy(code);
+        $scope.email = $("input[name='email']").val();
+
+        loginAPIService.validateCode($scope.code, $scope.email).success(function(response) {
+          if(response.status == 200) {
+            $("input[name='user_id']").val(response.data.id);
+            $("#success_form").submit();
           } else {
-            $scope.error = response.data;
+            $scope.error = response.data.message;
           }
-      });
-    }
+        }).error(function(response) {
+          $scope.error = response.data.message;
+        });
+      }
 
-    $scope.getImagePassword = function() {
-      $scope.id = $("input[name='id']").val();
+      $scope.storeNewPassword = function(array) {
+        $scope.error = "";
 
-      loginAPIService.getImagePassword($scope.id).success(function (response) {
-        $scope.imagePass = response.data
-      }).error(function(response) {
+        if($scope.image_id) {
+          $("ul.form_password li").removeClass('selected');
+          $scope.new_password = $scope.image_id;
+          $("#title").html("Select a picture to confirm your new password");
 
-      });
-    }
-
-    $scope.highlight = function($event) {
-      $("ul.form_password li").removeClass('selected');
-      $($event.currentTarget).addClass('selected');
-      $scope.image_id = $($event.currentTarget).find("#image_id").val();
-    }
-
-    $scope.validatePassword = function () {
-      loginAPIService.validatePassword($scope.id, $scope.image_id).success(function(response) {
-        if(response.status == 200) {
-          $("#response").val(response.data);
-          $("#password_form").submit();
-        } else if(response.status == 202) {
-          if(response.data.message == "Account Locked") {
-            $scope.locked = true;
-          } else {
-            $scope.error = "Password does not match.";
-          } 
+          $scope.image_pass = shuffle($scope.image_pass);
+          $scope.image_id = "";
+          $scope.confirm = true;
+          $scope.reset = false;
+        } else {
+          $scope.error = "Select a new password."
         }
-      }).error(function(response) {
+      }
+
+      $scope.undoNewPassword = function() {
+        $("ul.form_password li").removeClass('selected');
+        $("#title").html("Select a picture to confirm your new password");
         
-      });
-    }
+        $scope.image_id = "";
+        $scope.new_password = "";
+        $scope.image_pass = shuffle($scope.image_pass);
+        $scope.confirm = false;
+        $scope.reset = true;
+      }
 
-    $scope.forgotPassword = function(username) {
-      $scope.username = angular.copy(username);
-      loginAPIService.forgotPassword($scope.username).success(function(response) {
+      function shuffle(array) {
+        var m = array.length, t, i;
+          // While there remain elements to shuffle
+          while (m) {
+            // Pick a remaining element…
+            i = Math.floor(Math.random() * m--);
 
-      }).error(function(response) {
+            // And swap it with the current element.
+            t = array[m];
+            array[m] = array[i];
+            array[i] = t;
+          }
 
-      });
-    }
+        return array;
+      }
 
-    $scope.validateCode = function(code, email) {
-      $scope.code = angular.copy(code);
-      $scope.email = angular.copy(email);
-    }
+      $scope.validateNewPassword = function() {
+        $scope.error = "";
 
-    $scope.validateRegistration = function(registration) {
+        if($scope.new_password == $scope.image_id) {
+          var code = $("input[name='reset_code']").val();
+          loginAPIService.resetPassword($scope.id, code, $scope.new_password).success(function(response) {
+            $("#reset_password_form").submit();
+          }).error(function(response) {
 
-    }
-});
-   
+          });
+        } else {
+          $scope.error = "Password does not match.";
+        }
+      }
+
+      $scope.updateBirthdate = function(reg, birthday) {
+        $scope.reg.birthday = $("input[name='birthday']").val();
+      }
+
+      $scope.validateRegistration = function(registration, terms) {
+        $scope.error = "";
+        $scope.terms = angular.copy(terms);
+        if($scope.terms) {
+          $scope.registration = angular.copy(registration);
+        
+          loginAPIService.validateRegistration($scope.registration).success(function(response) {
+            if(response.status == 200) {
+              if(response.errors) {
+                $scope.error = response.errors.message;
+              }
+            } else {
+              $scope.error = response.data.message;
+            }
+          }).error(function(response) {
+            $scope.error = response.data.message;
+          });
+        } else {
+          $scope.error = "Please accept the terms and conditions.";
+        }
+        
+      }
+
+      $scope.getUserDetails = function() {
+        $scope.user = JSON.parse($('#userdata').val());
+        $('#userdata').html('');
+      }
+    });
