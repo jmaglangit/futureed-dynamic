@@ -47,6 +47,9 @@ Routes::group(['prefix' => 'api/v1'], function()
     //student registration
     Routes::post('/student/register','Api\v1\StudentsRegistrationController@register');
     Routes::post('/student/invite','Api\v1\StudentsRegistrationController@invite');
+
+    //student
+    Routes::post('/parent/student/list','Api\v1\StudentsController@getStudentParent');
     
 
     //schools

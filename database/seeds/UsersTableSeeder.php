@@ -64,9 +64,9 @@ class UsersTableSeeder extends Seeder {
             'updated_at' => date("Y-m-d H:i:s")
             ],
            [
-               'username' => 'jijirey',
+               'username' => 'johnreyq',
                'email' => 'jquiros@nerubia.com',
-               'password' => 'jijirey',
+               'password' => 'johnreyq',
                'name' => 'John Rey',
                'user_type' => 'Admin',
                'login_attempt' => 0,
@@ -80,9 +80,9 @@ class UsersTableSeeder extends Seeder {
                'updated_at' => date("Y-m-d H:i:s")
            ],
             [
-               'username' => 'jijirey',
+               'username' => 'johnreyq',
                'email' => 'jquiros@nerubia.com',
-               'password' => 'jijirey',
+               'password' => 'johnreyq',
                'name' => 'John Rey',
                'user_type' => 'Client',
                'login_attempt' => 0,
@@ -96,9 +96,9 @@ class UsersTableSeeder extends Seeder {
                'updated_at' => date("Y-m-d H:i:s")
             ],
            [
-               'username' => 'jijirey',
+               'username' => 'johnreyq',
                'email' => 'jquiros@nerubia.com',
-               'password' => 'jijirey',
+               'password' => 'johnreyq',
                'name' => 'John Rey',
                'user_type' => 'Student',
                'login_attempt' => 0,

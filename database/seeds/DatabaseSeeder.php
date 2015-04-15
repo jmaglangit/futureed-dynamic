@@ -21,6 +21,7 @@ class DatabaseSeeder extends Seeder {
         $this->call('CountriesSeeder');
         $this->call('AvatarsTableSeeder');
         $this->command->info('Seeded the countries!');
+        $this->call('ClientTableSeeder');
     }
 
 }
