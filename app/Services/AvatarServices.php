@@ -11,12 +11,16 @@ namespace FutureEd\Services;
 
 use FutureEd\Models\Repository\Avatar\AvatarRepositoryInterface;
 use FutureEd\Models\Repository\Validator\ValidatorRepositoryInterface;
+use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 
 class AvatarServices {
 
-    public function __construct(AvatarRepositoryInterface $avatar,ValidatorRepositoryInterface $validator){
+    public function __construct(AvatarRepositoryInterface $avatar,
+        ValidatorRepositoryInterface $validator,
+        StudentRepositoryInterface $student){
         $this->avatar = $avatar;
         $this->validator=$validator;
+        $this->student = $student;
     }
 
     public function getAvatars($gender){
@@ -36,8 +40,9 @@ class AvatarServices {
         return $avatar;
     }
     
-    public function genderCheck($gender){
-        return $this->validator->gender($gender);
+    public function saveUserAvatar($input){
+        $this->student->saveUserAvatar($input);
+        return $input['user_id'];
     }
 
    

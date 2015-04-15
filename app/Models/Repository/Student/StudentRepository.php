@@ -130,6 +130,12 @@ class StudentRepository implements StudentRepositoryInterface{
             ->where('parent_id','=',$parent_id)->get()->toArray();
 
     }
+    
+    //save student avatar
+    public function saveUserAvatar($data){
+        Student::where('user_id',$data['user_id'])
+                ->update(['avatar_id'=>$data['avatar_id']]);
+    }
 
 
 
