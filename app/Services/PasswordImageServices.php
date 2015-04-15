@@ -73,6 +73,21 @@ class PasswordImageServices {
         ];
 
     }
+    
+    
+    //returns image_url of current user
+    
+    public function getUserPasswordImageUrl($image_id){
+        
+        $image_folders = \Config::get('futureed.image_password_folder');
+        
+        $password_image= $this->password->getImage($image_id);
+        
+        $password_image_url = url() . '/' . $image_folders . '/'
+            . $password_image[0]['password_image_file'];
+        
+        return $password_image_url;            
+    }
 
 
 }

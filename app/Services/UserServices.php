@@ -272,12 +272,6 @@ class UserServices {
                 ];
         return $return;
     }
-    //udpate student_image_password
-    public function resetPasswordImage($data){
-        $this->student->UpdateImagePassword($data);
-        $return = ['status'=>200,
-                    'data' =>$data['user_id']];
-        return $return;
-    }
+    
 
 }

@@ -95,6 +95,38 @@ var controllers = angular.module('futureed.controllers', []);
         return true;
       }
 
+
+      $scope.getImagePassword = function() {
+        $scope.id = $("input[name='id']").val();
+
+        loginAPIService.getImagePassword($scope.id).success(function (response) {
+          $scope.imagePass = response.data
+        }).error(function(response) {
+
+        });
+      }
+
+      $scope.highlight = function($event) {
+        $("ul.form_password li").removeClass('selected');
+        $($event.currentTarget).addClass('selected');
+        $scope.image_id = $($event.currentTarget).find("#image_id").val();
+      }
+
+      $scope.validatePassword = function () {
+        loginAPIService.validatePassword($scope.id, $scope.image_id).success(function(response) {
+          if(response.status == 200) {
+            $("#response").val(JSON.stringify(response.data));
+            $("#password_form").submit();
+          } else if(response.status == 202) {
+            if(response.data.message == "Account Locked") {
+              $scope.locked = true;
+            } else {
+              $scope.error = "Password does not match.";
+            }
+          }
+        });
+      } 
+
       $scope.validateCode = function(code) {
         $scope.error = "";
         $scope.code = angular.copy(code);
@@ -143,5 +175,11 @@ var controllers = angular.module('futureed.controllers', []);
         }
         
       }
+
+      $scope.getUserDetails = function() {
+        var user = JSON.parse($('#userdata').val());
+        $('#userdata').html('');
+      }
+    }
 });
    
