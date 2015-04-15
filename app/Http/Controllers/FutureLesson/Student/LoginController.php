@@ -3,6 +3,7 @@
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Session;
 
 use Illuminate\Http\Request;
 
@@ -42,7 +43,26 @@ class LoginController extends Controller {
 	 */
 	public function process()
 	{
-		return redirect()->route('student.dashboard.index');
+		$userdata = Input::only('response');
+
+		if($userdata){
+			Session::put('user', $userdata['response']);
+			// return redirect()->route('student.dashboard.index');
+			return redirect()->route('student.dashboard.follow_up_registration');
+		}else{
+			return redirect()->route('student.login');
+		}
+	}
+
+	/**
+	 * Logout
+	 *
+	 * @return Response
+	 */
+	public function logout()
+	{
+		Session::flush();
+		return redirect()->route('student.login');
 	}
 	
 	/**

@@ -54,7 +54,7 @@ var controllers = angular.module('futureed.controllers', []);
     $scope.validatePassword = function () {
       loginAPIService.validatePassword($scope.id, $scope.image_id).success(function(response) {
         if(response.status == 200) {
-          $("#response").val(response.data);
+          $("#response").val(JSON.stringify(response.data));
           $("#password_form").submit();
         } else if(response.status == 202) {
           if(response.data.message == "Account Locked") {
@@ -84,6 +84,13 @@ var controllers = angular.module('futureed.controllers', []);
 
     $scope.validateRegistration = function(registration) {
 
+    }
+
+    $scope.getUserDetails = function() {
+      var user = JSON.parse($('#userdata').val());
+      $('#userdata').html('');
+
+      
     }
 });
    

@@ -3,7 +3,7 @@
 	Routes::group(['prefix' => '/student'], function()
 	{
 		Routes::any('/', 'FutureLesson\Student\LoginController@index');
-		Routes::get('/dashboard', [ 'as' => 'student.dashboard.index', 'uses' => 'FutureLesson\Student\DashboardController@index']);
+		Routes::get('/logout', [ 'as' => 'student.logout', 'uses' => 'FutureLesson\Student\LoginController@logout']);
 	
 		Routes::group(['prefix' => '/login'], function()
 		{
@@ -16,6 +16,13 @@
 			Routes::get('/reset-password-success', [ 'as' => 'student.login.reset_password_success', 'uses' => 'FutureLesson\Student\LoginController@reset_password_success']);
 		
 			Routes::post('/process', [ 'as' => 'student.login.process', 'uses' => 'FutureLesson\Student\LoginController@process']);
+		});
+
+		Routes::group(['prefix' => '/dashboard'], function()
+		{
+			Routes::get('/', [ 'as' => 'student.dashboard.index', 'uses' => 'FutureLesson\Student\DashboardController@index']);
+			Routes::get('/follow-up-registration', [ 'as' => 'student.dashboard.follow_up_registration', 'uses' => 'FutureLesson\Student\DashboardController@follow_up_registration']);
+			Routes::get('/my-profile', [ 'as' => 'student.dashboard.my_profile', 'uses' => 'FutureLesson\Student\DashboardController@my_profile']);
 		});
 		
 		Routes::get('/password/reset', [ 'as' => 'student.login.reset_password', 'uses' => 'FutureLesson\Student\LoginController@reset_password']);
