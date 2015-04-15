@@ -51,6 +51,9 @@ Routes::group(['prefix' => 'api/v1'], function()
     //student
     Routes::post('/parent/student/list','Api\v1\StudentsController@getStudentParent');
 
+    //grade
+    Routes::get('/grade','Api\v1\GradeController@grade');
+
     //schools
     Routes::get('/school','Api\v1\SchoolsController@schools');
     
@@ -60,6 +63,8 @@ Routes::group(['prefix' => 'api/v1'], function()
 
     //client
     Routes::post('/client/login','Api\v1\ClientLoginController@login');
+
+
 
 
 });
