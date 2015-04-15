@@ -109,13 +109,26 @@ class StudentRepository implements StudentRepositoryInterface{
 
     //update student_image_password
 
-    public function UpdateImagePassword($data){
+    public function updateImagePassword($data){
        try{
             Student::where('user_id',$data['id'])
                      ->update(['password_image_id'=>$data['password_image_id']]);
         } catch (Exception $e){
             throw new Exception($e->getMessage());
         }
+    }
+
+    //get student according to parent id.
+    public function getStudentParent($parent_id){
+
+        //student_id,
+        //avatar_id,
+        //avatar_url,
+        //first_name,
+        //last_name
+        return Student::select('id','avatar_id','first_name','last_name')
+            ->where('parent_id','=',$parent_id)->get()->toArray();
+
     }
 
 

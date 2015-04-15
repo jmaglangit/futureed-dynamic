@@ -47,10 +47,19 @@ Routes::group(['prefix' => 'api/v1'], function()
     //student registration
     Routes::post('/student/register','Api\v1\StudentsRegistrationController@register');
     Routes::post('/student/invite','Api\v1\StudentsRegistrationController@invite');
-    
+
+    //student
+    Routes::post('/parent/student/list','Api\v1\StudentsController@getStudentParent');
 
     //schools
     Routes::get('/school','Api\v1\SchoolsController@schools');
+    
+    
+    //avatars
+    Routes::post('/user/avatar','Api\v1\AvatarController@selectAvatars');
+
+    //client
+    Routes::post('/client/login','Api\v1\ClientLoginController@login');
 
 
 });

@@ -36,14 +36,14 @@ class UserServices {
         if(!$this->validator->email($user['email'])){
             $return = array_merge($return, [
                 'error_code' => 400028,
-                'message' => 'Email not verified'
+                'message' => 'Email invalid'
             ]);
         }
 
         if(!$this->validator->username($user['username'])){
             $return = array_merge($return, [
                 'error_code' => 400028,
-                'message' => 'Username not verified'
+                'message' => 'Username invalid'
             ]);
         }
 
@@ -87,15 +87,19 @@ class UserServices {
 
         return $return;
     }
+
     public function updateUser($user){
         return $this->users->updateUser($user);
     }
+
     public function deleteUser($id){
         return $this->users->deleteUser($id);
     }
+
     public function getEmail($id){
         return $this->users->getEmail($id);
     }
+
     //@return user_id add user type para meter
     public function checkLoginName($username, $user_Type){
        //filter if login is email or username
@@ -150,18 +154,44 @@ class UserServices {
            ];
        }
     }
+
+    //match user with the password
+    public function checkPassword($id, $password){
+
+        //match password
+        $return = $this->users->checkPassword($id,$password);
+
+        if(is_null($return)){
+            return [
+                'error_code' => 204,
+                'message' => 'Invalid Password'
+            ];
+        }
+
+        return [
+            'status' => 200,
+            'id' => $return
+        ];
+
+
+    }
+
     public function forgotPassword($username,$user_Type){
         $this->checkLoginName($username,$user_Type);
     }
+
     public function addLoginAttempt($id){
         $this->users->addLoginAttempt($id);
     }
+
     public function lockAccount($id){
         $this->users->lockAccount($id);
     }
+
     public function resetLoginAttempt($id){
         $this->users->resetLoginAttempt($id);
     }
+
     public function exceedLoginAttempts($id){
         $attempts = $this->users->getLoginAttempts($id);
         //Get login attempts of the account.
@@ -171,6 +201,7 @@ class UserServices {
             return true;
         }
     }
+
     public function checkEmail($email,$user_type){
         //check email if it exist
         $return =  $this->users->checkEmail($email,$user_type);
@@ -272,6 +303,8 @@ class UserServices {
                 ];
         return $return;
     }
+
+
     
 
 }
