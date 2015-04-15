@@ -6,7 +6,7 @@ use FutureEd\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
-class ClientController extends Controller {
+class ClientController extends ApiController {
 
 
 

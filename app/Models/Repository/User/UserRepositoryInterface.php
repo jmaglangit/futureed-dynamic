@@ -49,4 +49,6 @@ interface UserRepositoryInterface {
 
     public function updateResetCode($id,$code);
 
+    public function checkPassword($id,$password);
+
 }
