@@ -40,6 +40,10 @@ class AvatarServices {
         return $avatar;
     }
     
+    public function genderCheck($input){
+        return $this->validator->gender($input);
+    }
+    
    
 
    
