@@ -109,7 +109,7 @@ class StudentRepository implements StudentRepositoryInterface{
 
     //update student_image_password
 
-    public function UpdateImagePassword($data){
+    public function updateImagePassword($data){
        try{
             Student::where('user_id',$data['id'])
                      ->update(['password_image_id'=>$data['password_image_id']]);
