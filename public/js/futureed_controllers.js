@@ -95,7 +95,6 @@ var controllers = angular.module('futureed.controllers', []);
         return true;
       }
 
-
       $scope.getImagePassword = function() {
         $scope.id = $("input[name='id']").val();
 
@@ -180,6 +179,4 @@ var controllers = angular.module('futureed.controllers', []);
         var user = JSON.parse($('#userdata').val());
         $('#userdata').html('');
       }
-    }
-});
-   
+    });
