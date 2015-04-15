@@ -170,12 +170,16 @@ class StudentServices {
     
     //udpate student_image_password
     public function resetPasswordImage($data){
-        $this->student->UpdateImagePassword($data);
+        $this->student->updateImagePassword($data);
         $return = ['status'=>200,
                     'data' =>$data['id']];
         return $return;
     }
-    
+
+
+    public function getStudentByParent($parent_id){
+        return $this->student->getStudentParent($parent_id);
+    }
     
     
     
