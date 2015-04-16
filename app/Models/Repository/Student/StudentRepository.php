@@ -138,6 +138,7 @@ class StudentRepository implements StudentRepositoryInterface{
     public function getReferences($id){
       
       return Student::select(
+            'user_id',
             'grade_code',
             'avatar_id',
             'school_code',
