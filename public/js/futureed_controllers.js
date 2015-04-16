@@ -64,7 +64,6 @@ var controllers = angular.module('futureed.controllers', []);
 
         loginAPIService.forgotPassword($scope.username).success(function(response) {
           if(response.status == 200) {
-            $("input[name='email']").val(response.data.email);
             $("#forgot_pass_form").submit();
           } else {
             $scope.error = response.data.message;
@@ -193,20 +192,32 @@ var controllers = angular.module('futureed.controllers', []);
         }
       }
 
-      $scope.updateBirthdate = function(reg, birthday) {
-        $scope.reg.birthday = $("input[name='birthday']").val();
+      $scope.updateBirthday = function(asd) {
+        console.log(typeof $scope.reg != undefined);
+        console.log(asd);
+
+        if(typeof $scope.reg != undefined) {
+          $scope.reg.birthday = asd;
+        } else {
+          $scope.reg = {
+            birthday : asd
+          }
+        }
       }
 
       $scope.validateRegistration = function(registration, terms) {
         $scope.error = "";
         $scope.terms = angular.copy(terms);
+        registration.birthday = 2015-01-01
+
         if($scope.terms) {
           $scope.registration = angular.copy(registration);
-        
           loginAPIService.validateRegistration($scope.registration).success(function(response) {
             if(response.status == 200) {
               if(response.errors) {
                 $scope.error = response.errors.message;
+              } else {
+                $scope.success = true;
               }
             } else {
               $scope.error = response.data.message;
@@ -217,7 +228,6 @@ var controllers = angular.module('futureed.controllers', []);
         } else {
           $scope.error = "Please accept the terms and conditions.";
         }
-        
       }
 
       $scope.getUserDetails = function() {

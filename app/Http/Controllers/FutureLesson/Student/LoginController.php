@@ -82,14 +82,14 @@ class LoginController extends Controller {
 	 */
 	public function forgot_password_success()
 	{
-		$input = Input::only('email');
-		$email = $input['email'];
+		$input = Input::only('username');
+		$username = $input['username'];
 
-		if($email == null) {
+		if($username == null) {
 			return redirect()->route('student.login.forgot_password');
 		}
 
-		return view('student.login.forgot-password-success', ['email' => $email, 'title' => 'Email Sent', 'show' => 1]);
+		return view('student.login.forgot-password-success', ['email' => $username, 'title' => 'Email Sent', 'show' => 1]);
 	}
 
 	/**
@@ -102,9 +102,9 @@ class LoginController extends Controller {
 		$input = Input::only('email');
 		$email = $input['email'];
 
-		if($email == null) {
-			return redirect()->route('student.login.forgot_password');
-		}
+		// if($email == null) {
+		// 	return redirect()->route('student.login.forgot_password');
+		// }
 
 		return view('student.login.forgot-password-success', ['email' => $email, 'title' => 'Enter Reset Code', 'show' => 0]);
 	}
