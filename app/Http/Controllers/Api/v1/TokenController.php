@@ -66,6 +66,15 @@ class TokenController extends ApiController {
 
     }
 
+    public function eatme(){
+        $input = Input::get('id');
+
+        if($input['id'] == 9 ){
+            return 'yes';
+        }
+        return $input;
+    }
+
 
 
 }

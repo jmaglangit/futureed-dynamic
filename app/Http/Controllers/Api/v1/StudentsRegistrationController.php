@@ -21,7 +21,7 @@ class StudentsRegistrationController extends StudentsController {
             'first_name',
             'last_name',
             'gender',
-            'birthday',
+            'birth_date',
             'school_code',
             'grade_code',
             'country',
@@ -35,7 +35,7 @@ class StudentsRegistrationController extends StudentsController {
             'last_name');
 
         //validate
-        if(!$user['username'] || !$user['email'] || !$user['first_name'] || !$user['last_name'] || !$student['gender']|| !$student['birthday']
+        if(!$user['username'] || !$user['email'] || !$user['first_name'] || !$user['last_name'] || !$student['gender']|| !$student['birth_date']
             || !$student['school_code'] || !$student['grade_code'] || !$student['country'] || !$student['state'] || !$student['city']){
 
             return $this->setStatusCode(200)->respondWithError([
