@@ -37,9 +37,15 @@ var controllers = angular.module('futureed.controllers', []);
       }
 
       $scope.highlight = function($event) {
-        $("ul.form_password li").removeClass('selected');
-        $($event.currentTarget).addClass('selected');
-        $scope.image_id = $($event.currentTarget).find("#image_id").val();
+        if($("ul.form_password li").length > 0) {
+          $("ul.form_password li").removeClass('selected');
+          $($event.currentTarget).addClass('selected');
+          $scope.image_id = $($event.currentTarget).find("#image_id").val();  
+        } else {
+          $("ul.avatar_list li").removeClass('selected');
+          $($event.currentTarget).addClass('selected');
+          $scope.avatar_id = $($event.currentTarget).find("#avatar_id").val();  
+        }
       }
 
       $scope.validatePassword = function () {
@@ -55,7 +61,7 @@ var controllers = angular.module('futureed.controllers', []);
             } 
           }
         }).error(function(response) {
-          
+          $scope.error = response.data.message;
         });
       }
 
@@ -74,31 +80,16 @@ var controllers = angular.module('futureed.controllers', []);
         });
       }
 
-      $scope.setDisplay = function(email) {
-        if(email != '') {
-          $scope.title = "";
-          return false;
-        }
-
-        $scope.title = "Email Sent";
-        return true;
-      }
-
       $scope.getImagePassword = function() {
+        $scope.id = $("input[name='id']").val();
         $scope.selected_image_id = $("input[name='selected_image_id']").val();
 
         loginAPIService.getImagePassword($scope.id).success(function (response) {
           $scope.image_pass = response.data
           $scope.reset = true;
         }).error(function(response) {
-
+          $scope.error = response.data.message;
         });
-      }
-
-      $scope.highlight = function($event, array) {
-        $("ul.form_password li").removeClass('selected');
-        $($event.currentTarget).addClass('selected');
-        $scope.image_id = $($event.currentTarget).find("#image_id").val();
       }
 
       $scope.validatePassword = function () {
@@ -117,9 +108,6 @@ var controllers = angular.module('futureed.controllers', []);
       } 
 
       $scope.validateCode = function(code) {
-        $("#success_form").submit();
-        return;
-
         $scope.error = "";
         $scope.code = angular.copy(code);
         $scope.email = ($scope.email) ? $scope.email : $("input[name='email']").val();
@@ -189,44 +177,27 @@ var controllers = angular.module('futureed.controllers', []);
         }
       }
 
-      $scope.updateBirthday = function(asd) {
-        console.log(typeof $scope.reg != undefined);
-        console.log(asd);
-
-        if(typeof $scope.reg != undefined) {
-          $scope.reg.birthday = asd;
-        } else {
-          $scope.reg = {
-            birthday : asd
-          }
-        }
-      }
-
-      $scope.alert = function(data, reg) {
-        $scope.reg.birthday = $scope.data.date;
-      }
-
       $scope.validateRegistration = function(registration, terms) {
         $scope.error = "";
         $scope.terms = angular.copy(terms);
 
         if($scope.terms) {
           $scope.registration = angular.copy(registration);
-          // $scope.registration.birthday = $("input[name='birthday']").val();
-          // loginAPIService.validateRegistration($scope.registration).success(function(response) {
-          //   if(response.status == 200) {
-          //     if(response.errors) {
-          //       $scope.error = response.errors.message;
-          //     } else {
+          $scope.registration.birthday = $("input[name='birthday']").val();
+          loginAPIService.validateRegistration($scope.registration).success(function(response) {
+            if(response.status == 200) {
+              if(response.errors) {
+                $scope.error = response.errors.message;
+              } else {
                 $scope.success = true;
-                   $scope.email = $scope.registration.email;
-              // }
-            // } else {
-              // $scope.error = response.data.message;
-            // }
-          // }).error(function(response) {
-          //   $scope.error = response.data.message;
-          // });
+                $scope.email = $scope.registration.email;
+              }
+            } else {
+              $scope.error = response.data.message;
+            }
+          }).error(function(response) {
+            $scope.error = response.data.message;
+          });
         } else {
           $scope.error = "Please accept the terms and conditions.";
         }
@@ -235,5 +206,52 @@ var controllers = angular.module('futureed.controllers', []);
       $scope.getUserDetails = function() {
         $scope.user = JSON.parse($('#userdata').val());
         $('#userdata').html('');
+        if(($scope.user.avatar != null || $scope.user.avatar != "") && $scope.has_style) {
+          $scope.done = true;
+        }
+      }
+
+      $scope.getAvatarImages = function() {
+        if($scope.user.avatar == null || $scope.user.avatar == "") {
+          loginAPIService.getAvatarImages($scope.user.gender).success(function(response) {
+            if(response.status == 200) {
+              $scope.avatars = response.data;
+            } else {
+              $scope.error = response.data.message;
+            }
+          }).error(function(response) {
+            $scope.error = response.data.message;
+          });
+        } else {
+          $scope.has_avatar = true;
+        }
+      }
+
+      $scope.stepOne = function() {
+        $scope.user.avatar = "";
+        $scope.has_avatar = false;
+      }
+
+      $scope.stepTwo = function() {
+        if($scope.user.avatar != null || $scope.user.avatar != "") {
+          $scope.has_avatar = true;
+        }
+      }
+
+      $scope.selectAvatar = function() {
+        loginAPIService.selectAvatar($scope.user.id, $scope.avatar_id).success(function(response) {
+          if(response.status == 200) {
+            $scope.has_avatar = true;
+            $scope.user.avatar = $scope.avatar_id;
+          } else {
+            $scope.error = response.data.message;
+          }
+        }).error(function(response) {
+          $scope.error = response.data.message;
+        });
+      }
+
+      $scope.close = function() {
+        $scope.done = true;
       }
     });

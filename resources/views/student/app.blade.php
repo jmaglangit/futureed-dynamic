@@ -21,6 +21,7 @@
     
     <!-- CSS -->
     {!! Html::style('//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css') !!}
+    {!! Html::style('/css/datetimepicker.css') !!}
     {!! Html::style('/css/futureed.css') !!}
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -47,6 +48,7 @@
 
     <!-- START SCRIPTS -->
     {!! Html::script('/js/jquery.js') !!}
+    {!! Html::script('https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js') !!}
     {!! Html::script('//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js') !!}
     {!! Html::script('http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular.min.js') !!}
     {!! Html::script('http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular-resource.min.js') !!}
@@ -54,10 +56,10 @@
     {!! Html::script('/js/jquery.smooth-scroll.js') !!}
     
     {!! Html::script('/js/student/app.js') !!}
-
     {!! Html::script('/js/futureed.js') !!}
     {!! Html::script('/js/futureed_controllers.js') !!}
     {!! Html::script('/js/futureed_services.js') !!}
+    {!! Html::script('/js/datetimepicker.js') !!}
 
     @yield('scripts')
 

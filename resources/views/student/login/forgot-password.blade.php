@@ -11,15 +11,13 @@
 
         <form action="{!! route('student.login.forgot_password_success') !!}" 
               name="forgot_pass_form" id="forgot_pass_form" method="POST">
-          <input id="email" name="email" type="hidden" />
-
           <div class="input">
             <div class="icon">
               <i class="fa fa-user"></i>
             </div>
-            <input placeholder="Email or Username" type="text" ng-model="username" name="username" autocomplete="off" required>
+            <input placeholder="Email or Username" type="text" ng-model="email" name="email" autocomplete="off" required>
           </div>
-          <div class="submit" ng-click="forgotPassword(username)">SEND</div>
+          <div class="submit" ng-click="forgotPassword(email)">SEND</div>
         </form>
       </div>
     </div>
