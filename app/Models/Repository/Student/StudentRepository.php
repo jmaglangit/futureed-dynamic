@@ -29,12 +29,8 @@ class StudentRepository implements StudentRepositoryInterface{
             'country',
             'state',
             'city',
-            'grade_code',
             'points',
-            'status',
-            'avatar_id',
-            'learning_style_id',
-            'school_code'
+            'status'
         )
             ->where('user_id',$id)->first();
 
@@ -136,6 +132,18 @@ class StudentRepository implements StudentRepositoryInterface{
     public function saveStudentAvatar($data){
         Student::where('user_id',$data['user_id'])
                 ->update(['avatar_id'=>$data['avatar_id']]);
+    }
+    
+    //get foreign key of student table grade_code,avatar_id,school_code,learning_style_id
+    public function getReferences($id){
+      
+      return Student::select(
+            'user_id',
+            'grade_code',
+            'avatar_id',
+            'school_code',
+            'learning_style_id'
+            )->where('user_id','=',$id )->first();
     }
 
 
