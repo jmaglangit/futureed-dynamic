@@ -51,7 +51,7 @@ class UserPasswordController extends UserController {
     public function passwordReset(){
          
     }
-    
+
     //confirmation of reset code
     public function confirmResetCode(){
       
