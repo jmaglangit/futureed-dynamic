@@ -4,19 +4,11 @@ use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
-use FutureEd\Services\StudentServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
 class StudentsController extends ApiController {
     
-    public function __construct(
-            StudentServices $student
-            ){
-        $this->student = $student;
- 
-    }
-
 
     public function getStudentParent(){
         $input = Input::only('parent_id');

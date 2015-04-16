@@ -10,13 +10,6 @@ use Illuminate\Support\Facades\Input;
 
 
 class AvatarController extends ApiController {
-
-	public function __construct(AvatarServices $avatar,StudentServices $student){
-
-        $this->avatar = $avatar;
-        $this->student=$student;
-
-    }
     
     public function selectAvatars(){
         

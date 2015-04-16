@@ -10,6 +10,7 @@ use FutureEd\Services\PasswordImageServices;
 use FutureEd\Services\StudentServices;
 use FutureEd\Services\UserServices;
 use FutureEd\Services\TokenServices;
+use FutureEd\Services\AvatarServices;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -24,7 +25,8 @@ class ApiController extends Controller {
             TokenServices $token,
             MailServices $mailServices,
             ClientServices $client,
-            GradeServices $grade){
+            GradeServices $grade,
+            AvatarServices $avatar){
         $this->user = $user;
         $this->student = $student;
         $this->password_image = $password_image;
@@ -32,6 +34,7 @@ class ApiController extends Controller {
         $this->mail = $mailServices;
         $this->client = $client;
         $this->grade = $grade;
+        $this->avatar = $avatar;
     }
     public function index(){
         return [
