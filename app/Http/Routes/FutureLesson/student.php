@@ -8,7 +8,6 @@
 		Routes::group(['prefix' => '/login'], function()
 		{
 			Routes::get('/', [ 'as' => 'student.login', 'uses' => 'FutureLesson\Student\LoginController@index']);
-			Routes::match(['get','post'],'/enter-password', [ 'as' => 'student.enter_password', 'uses' => 'FutureLesson\Student\LoginController@enter_password']);
 			
 			Routes::get('/forgot-password', [ 'as' => 'student.login.forgot_password', 'uses' => 'FutureLesson\Student\LoginController@forgot_password']);
 			Routes::get('/reset-code', ['as' => 'student.login.reset_code', 'uses' => 'FutureLesson\Student\LoginController@reset_code']);

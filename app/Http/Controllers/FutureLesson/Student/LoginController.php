@@ -20,23 +20,6 @@ class LoginController extends Controller {
 	}
 
 	/**
-	 * Display enter password screen
-	 *
-	 * @return Response
-	 */
-	public function enter_password()
-	{
-		$input = Input::only('id');
-		$id = $input['id'];
-
-		if($id == null) {
-			return redirect()->route('student.login');
-		}
-
-		return view('student.login.enter-password', ['id' => $input['id']]);
-	}
-
-	/**
 	 * Process session
 	 *
 	 * @return Response

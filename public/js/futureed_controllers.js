@@ -13,7 +13,8 @@ var controllers = angular.module('futureed.controllers', []);
             if(response.status == 200) {
               $scope.id = response.data.id;
               $("input[name='id']").val($scope.id);
-              $("#login_form").submit();
+              $scope.getImagePassword();
+              $scope.enter_pass = true;
             } else {
               var data = response.data;
               if(data.error_code == 202) {
@@ -85,7 +86,6 @@ var controllers = angular.module('futureed.controllers', []);
       }
 
       $scope.getImagePassword = function() {
-        $scope.id = $("input[name='id']").val();
         $scope.selected_image_id = $("input[name='selected_image_id']").val();
 
         loginAPIService.getImagePassword($scope.id).success(function (response) {
