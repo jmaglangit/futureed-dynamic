@@ -47,9 +47,9 @@ class StudentsLoginController extends StudentsController{
      */
     public function imagePassword(){
 
-        $input = Input::only('user_id');
+        $input = Input::only('id');
 
-        if(!$input['user_id']){
+        if(!$input['id']){
 
             return $this->setStatusCode(422)
                         ->respondWithError(['error_code'=>422,
@@ -60,7 +60,7 @@ class StudentsLoginController extends StudentsController{
 
             //TODO: Get image password of student.
 
-                $response = $this->student->getImagePassword($input['user_id']);
+                $response = $this->student->getImagePassword($input['id']);
                 return $this->setStatusCode($response['status'])->respondWithData($response['data']);
         }
 
