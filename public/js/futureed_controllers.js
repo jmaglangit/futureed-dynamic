@@ -117,9 +117,12 @@ var controllers = angular.module('futureed.controllers', []);
       } 
 
       $scope.validateCode = function(code) {
+        $("#success_form").submit();
+        return;
+
         $scope.error = "";
         $scope.code = angular.copy(code);
-        $scope.email = $("input[name='email']").val();
+        $scope.email = ($scope.email) ? $scope.email : $("input[name='email']").val();
 
         loginAPIService.validateCode($scope.code, $scope.email).success(function(response) {
           if(response.status == 200) {
@@ -139,12 +142,9 @@ var controllers = angular.module('futureed.controllers', []);
         if($scope.image_id) {
           $("ul.form_password li").removeClass('selected');
           $scope.new_password = $scope.image_id;
-          $("#title").html("Select a picture to confirm your new password");
-
           $scope.image_pass = shuffle($scope.image_pass);
           $scope.image_id = "";
           $scope.confirm = true;
-          $scope.reset = false;
         } else {
           $scope.error = "Select a new password."
         }
@@ -152,13 +152,10 @@ var controllers = angular.module('futureed.controllers', []);
 
       $scope.undoNewPassword = function() {
         $("ul.form_password li").removeClass('selected');
-        $("#title").html("Select a picture to confirm your new password");
-        
         $scope.image_id = "";
         $scope.new_password = "";
         $scope.image_pass = shuffle($scope.image_pass);
         $scope.confirm = false;
-        $scope.reset = true;
       }
 
       function shuffle(array) {
@@ -205,26 +202,31 @@ var controllers = angular.module('futureed.controllers', []);
         }
       }
 
+      $scope.alert = function(data, reg) {
+        $scope.reg.birthday = $scope.data.date;
+      }
+
       $scope.validateRegistration = function(registration, terms) {
         $scope.error = "";
         $scope.terms = angular.copy(terms);
-        registration.birthday = 2015-01-01
 
         if($scope.terms) {
           $scope.registration = angular.copy(registration);
-          loginAPIService.validateRegistration($scope.registration).success(function(response) {
-            if(response.status == 200) {
-              if(response.errors) {
-                $scope.error = response.errors.message;
-              } else {
+          // $scope.registration.birthday = $("input[name='birthday']").val();
+          // loginAPIService.validateRegistration($scope.registration).success(function(response) {
+          //   if(response.status == 200) {
+          //     if(response.errors) {
+          //       $scope.error = response.errors.message;
+          //     } else {
                 $scope.success = true;
-              }
-            } else {
-              $scope.error = response.data.message;
-            }
-          }).error(function(response) {
-            $scope.error = response.data.message;
-          });
+                   $scope.email = $scope.registration.email;
+              // }
+            // } else {
+              // $scope.error = response.data.message;
+            // }
+          // }).error(function(response) {
+          //   $scope.error = response.data.message;
+          // });
         } else {
           $scope.error = "Please accept the terms and conditions.";
         }
