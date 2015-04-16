@@ -203,6 +203,13 @@ class UserRepository implements UserRepositoryInterface{
             ->pluck('id');
 
     }
+    
+    //return only the username and the email
+    public function getUsernameEmail($id){
+       
+        return User::select('username','email')
+                    ->where('id','=',$id)->first();            
+    }
 
 
 

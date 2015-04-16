@@ -140,30 +140,37 @@ class StudentServices {
 
 
     public function getStudentDetails($id){
-        $user_student = config('futureed.student');
-        $student = $this->getStudent($id);
-        $age = $this->age($student->birth_date);
-        $user = $this->user->getUser($id,$user_student);
-        $password_image_url =$this->password->getUserPasswordImageUrl($student->avatar_id);
-
-        $return = [
-            'id' => $student->user_id,
-            'first_name' => $student->first_name,
-            'last_name' => $student->last_name,
-            'gender' => $student->gender,
-            'birthday' => $student->birth_date,
-            'age'=>$age,
-            'avatar' => $password_image_url,
-            'email' => $user->email,
-            'username' => $user->username,
-            'grade' =>$student->grade_code,
-            'learning_style'=>$student->learning_style_id
-            
-        ];
-
-        return $return;
+        
+        $student = $this->getStudent($id)->toArray();
+        $student_reference = $this->student->getReferences($id)->toArray();
+        
+        //get age
+        $age = $this->age($student['birth_date']);
+        
+        //get user username and email
+        $user = $this->user->getUsernameEmail($id)->toArray();
+        
+        //get avatar url
+        $password_image_url =$this->password->getUserPasswordImageUrl($id);
+        
+        //get school
+        $school=$this->school->getSchoolName($student_reference['school_code']);
+        $student = array_merge(array('id'=>$id),$student,$user,
+                               array('age'=>$age,
+                                     'avatar'=>$password_image_url,
+                                     'school'=>$school->name));
+        
+        
+        foreach ($student as $key => $value) {
+            if($key!='user_id'){
+               $studentdetails[$key]=$value; 
+            }
+        }
+        return $studentdetails;
 
     }
+    
+    //get age
     public function age($birth_date){
          $interval = date_diff(date_create(),date_create($birth_date));
          return $interval->format("%Y");
@@ -189,43 +196,4 @@ class StudentServices {
     }
     
     
-    //get student information
-    public function getStudentInfo($user_id){
-        $user_student = config('futureed.student');
-        $student = $this->getStudent($user_id);
-        $age = $this->age($student->birth_date);
-        $user = $this->user->getUser($user_id,$user_student);
-        $password_image_url =$this->password->getUserPasswordImageUrl($user_id);
-        $school=$this->school->getSchool($student->school_code);
-         $return = [
-            'id' => $student->user_id,
-            'first_name' => $student->first_name,
-            'last_name' => $student->last_name,
-            'gender' => $student->gender,
-            'birthday' => $student->birth_date,
-            'age'=>$age,
-            'avatar' => $password_image_url,
-            'email' => $user->email,
-            'username' => $user->username,
-            'school' =>'',
-            'grade' =>$student->grade_code,
-            'country' =>$student->country,
-            'city' => $student->city,
-            'state' => $student->state,
-            'points' => $student->points,
-            'badges' => ''
-            
-        ];
-       
-       return $return;
-    
-    }
-    
-    
-    
-
-
-
-
-
 }
