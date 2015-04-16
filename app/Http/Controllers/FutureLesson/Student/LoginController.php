@@ -20,23 +20,6 @@ class LoginController extends Controller {
 	}
 
 	/**
-	 * Display enter password screen
-	 *
-	 * @return Response
-	 */
-	public function enter_password()
-	{
-		$input = Input::only('id');
-		$id = $input['id'];
-
-		if($id == null) {
-			return redirect()->route('student.login');
-		}
-
-		return view('student.login.enter-password', ['id' => $input['id']]);
-	}
-
-	/**
 	 * Process session
 	 *
 	 * @return Response
@@ -47,7 +30,6 @@ class LoginController extends Controller {
 
 		if($userdata){
 			Session::put('user', $userdata['response']);
-			// return redirect()->route('student.dashboard.index');
 			return redirect()->route('student.dashboard.follow_up_registration');
 		}else{
 			return redirect()->route('student.login');
@@ -89,7 +71,7 @@ class LoginController extends Controller {
 			return redirect()->route('student.login.forgot_password');
 		}
 
-		return view('student.login.forgot-password-success', ['email' => $username, 'title' => 'Email Sent', 'show' => 1]);
+		return redirect()->route('student.login.reset_code')->with('email', $email);
 	}
 
 	/**
@@ -99,14 +81,20 @@ class LoginController extends Controller {
 	*/
 	public function reset_code() 
 	{
+		$email = Session::get('email');
 		$input = Input::only('email');
-		$email = $input['email'];
+		$show = 0;
 
-		// if($email == null) {
-		// 	return redirect()->route('student.login.forgot_password');
-		// }
+		if($input){	
+			$email = $input['email'];
+			$show = 1;
+		}
 
-		return view('student.login.forgot-password-success', ['email' => $email, 'title' => 'Enter Reset Code', 'show' => 0]);
+		if($email == null) {
+			return redirect()->route('student.login.forgot_password');
+		}
+
+		return view('student.login.enter-code', ['email' => $email, 'show' => $show]);
 	}
 
 	/**

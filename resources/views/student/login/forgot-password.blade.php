@@ -17,7 +17,7 @@
             <div class="icon">
               <i class="fa fa-user"></i>
             </div>
-            <input placeholder="Email or Username" type="text" ng-model="username" name="username" required>
+            <input placeholder="Email or Username" type="text" ng-model="username" name="username" autocomplete="off" required>
           </div>
           <div class="submit" ng-click="forgotPassword(username)">SEND</div>
         </form>
