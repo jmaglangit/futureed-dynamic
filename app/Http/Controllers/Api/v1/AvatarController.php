@@ -3,17 +3,13 @@
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 use FutureEd\Services\AvatarServices;
+use FutureEd\Services\StudentServices;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
+
 class AvatarController extends ApiController {
-
-	public function __construct(AvatarServices $avatar){
-
-        $this->avatar = $avatar;
-
-    }
     
     public function selectAvatars(){
         
@@ -28,11 +24,35 @@ class AvatarController extends ApiController {
                                      ]);
 
         }else{
-        	
-			$avatar= $this->avatar->getAvatars($input['gender']);
-			return $this->respondWithData($avatar);
+            
+            if($this->avatar->genderCheck($input['gender'])===true){
+                    $avatar= $this->avatar->getAvatars($input['gender']);
+                    return $this->respondWithData($avatar);
+            }
+            else{
+                return $this->setStatusCode(202)
+                            ->respondWithData(['error_code'=>202,
+                                               'message'=>'invalid gender']);
+            }
         }
         
+        
+    }
+    
+    public function saveUserAvatar(){
+        
+        $input = Input::only('avatar_id','user_id');
+        
+         if(!$input['avatar_id'] && !$input['user_id']){
+            return $this->setStatusCode(422)
+                        ->respondWithError(['error_code'=>422,
+                                         'message'=>'Parameter validation failed'
+                                     ]);
+        }else{
+    
+           $return =  $this->student->saveStudentAvatar($input);
+           return $this->respondWithData(['id'=>$return]);
+        }
         
     }
 

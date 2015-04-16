@@ -73,6 +73,26 @@ class StudentsTableSeeder extends Seeder {
                         'updated_by' => 1,
                         'created_at' => date("Y-m-d H:i:s"),
                         'updated_at' => date("Y-m-d H:i:s")
+                    ],
+                    [
+                        'user_id' => 12,
+                        'first_name' => 'Jollie Mar',
+                        'last_name' => 'Gutang',
+                        'gender' => 'Male',
+                        'birth_date' => date("Y-m-d H:i:s"),
+                        'avatar_id' => 4,
+                        'password_image_id' => 3,
+                        'parent_id' => 2,
+                        'school_code' => 3,
+                        'grade_code' => 3,
+                        'points' => 123,
+                        'point_level_id' => 4,
+                        'learning_style_id' => 1,
+                        'status' => 'Enabled',
+                        'created_by' => 1,
+                        'updated_by' => 1,
+                        'created_at' => date("Y-m-d H:i:s"),
+                        'updated_at' => date("Y-m-d H:i:s")
                     ]
                 ]);
         } catch(Exception $e){
