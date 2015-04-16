@@ -24,6 +24,12 @@ class VerifyCsrfToken extends BaseVerifier {
         {
             return $next($request);
         }
+        
+        if($request->method() == 'PUT')
+        {
+            return $next($request);
+        }
+        
         throw new TokenMismatchException;
 	}
 

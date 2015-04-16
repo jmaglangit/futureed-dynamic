@@ -195,5 +195,44 @@ class StudentServices {
         return $input['user_id'];
     }
     
+    //validation email/username/firstname/lastname/gender
+    public function validateStudentDetails($input){
+        
+        if(!$this->validator->gender($input['gender'])){
+            
+            return['status'=>202,
+                    'data'=>'invalid gender'];
+        }else{
+           
+            if(!$this->validator->email($input['email'])){
+               
+                return['status'=>202,
+                    'data'=>'invalid email'];
+            }else{
+               
+                if(!$this->validator->username($input['username'])){
+                     
+                     return['status'=>202,
+                    'data'=>'invalid username'];  
+                }else{
+                    
+                    return['status'=>200];
+                }
+                
+            }
+            
+        }
+    }
+    
+    public function updateStudentDetails($id,$input){
+        
+        $student_reference = $this->student->getReferences($id)->toArray();
+        
+        //update user username and email
+        $this->user->updateUsernameEmail($student_reference['user_id'],$input);
+        
+        //update Student details
+        $this->student->updateStudentDetails($id,$input);
+    }
     
 }

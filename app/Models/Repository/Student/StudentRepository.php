@@ -145,6 +145,20 @@ class StudentRepository implements StudentRepositoryInterface{
             'learning_style_id'
             )->where('user_id','=',$id )->first();
     }
+    
+    //update student details 
+    public function updateStudentDetails($id,$data){
+            Student::where('id','=',$id)
+                     ->update(['first_name'=>$data['first_name'],
+                               'last_name'=>$data['last_name'],
+                               'gender'=>$data['gender'],
+                               'birth_date'=>$data['birth_date'],
+                               'school_code'=>$data['school_code'],
+                               'grade_code'=>$data['grade_code'],
+                               'country'=>$data['country'],
+                               'city'=>$data['city'],
+                               'state'=>$data['state']]);
+    }
 
 
 

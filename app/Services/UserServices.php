@@ -310,6 +310,12 @@ class UserServices {
       
         return $this->users->getUsernameEmail($id);
     }
+    
+    //update user username and email
+    
+    public function updateUsernameEmail($id,$data){
+        $this->users->updateUsernameEmail($id,$data);
+    }
 
 
     
