@@ -17,6 +17,7 @@ class SchoolRepository implements SchoolRepositoryInterface{
 	public function getSchools(){}
 
 	public function getSchoolName($school_id){
-		return School::select('name')->where('code','=',$school_id)->first();
+		return School::where('code','=',$school_id)->pluck('name');
+		
 	}
 }

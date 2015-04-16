@@ -158,7 +158,7 @@ class StudentServices {
         $student = array_merge(array('id'=>$id),$student,$user,
                                array('age'=>$age,
                                      'avatar'=>$password_image_url,
-                                     'school'=>$school->name));
+                                     'school'=>$school));
         
         
         foreach ($student as $key => $value) {
