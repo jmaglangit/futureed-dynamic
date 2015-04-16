@@ -86,7 +86,7 @@ body {/*background: radial-gradient(transparent 50%, rgba(0, 0, 0, 0.3) 100%), l
 .form-wide {margin: 30px auto; width: 100%; background: #fff; padding: 0 30px; box-sizing: border-box; border-radius: 5px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); position: relative; overflow: hidden;}
 .form-style { 
 	text-align: center;
-	min-height: 280px;
+	min-height: 200px;
 	opacity: .98;
 	background: #fff; padding: 30px; box-sizing: border-box; border-radius: 5px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
 	margin-bottom: 40px;
@@ -177,7 +177,7 @@ body {/*background: radial-gradient(transparent 50%, rgba(0, 0, 0, 0.3) 100%), l
 .form-style .fb {height: 38px; width: 100%; left: 0; bottom: 0; position: absolute; text-align: center; background-color: #666; color: #fff; font-size: 14px; line-height: 38px; cursor: pointer;}
 .form-style .fb i.fa {font-size: 15px; vertical-align: middle;}
 
-.form_content{margin-top: 30px;}
+.form_content{margin-top: 0;}
 form label{font-weight: normal;}
 form fieldset{margin-bottom: 30px;}
 fieldset legend{color: #8e8171; font-size: 16px; text-transform: uppercase;}
