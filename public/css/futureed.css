@@ -380,6 +380,190 @@ li.active .rnd-identifier{
 	margin: 10px 0 30px 0;
 	width: 100%;
 }
+.dshbrd-con{
+	margin-top: 45px;
+	max-width: 1200px;
+}
+.dshbrd-con .wrapr{
+	background: #fff;
+	border-radius: 8px;
+	box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+	width: 100%;
+	min-height: 620px;
+	position: relative;
+	overflow: hidden;
+	margin-bottom: 40px;
+}
+.dshbrd-con .side-nav{
+	background: #F9F5F6;
+	position: absolute;
+	height: 100%;
+	left: 0;
+	width: 240px;
+}
+.dshbrd-con .content {
+	width: 100%;
+	padding-left: 240px;
+}
+.side-nav ul{
+	list-style: none;
+}
+.side-nav ul li a{
+	display: block;
+	padding: 10px 26px;
+	font-size: 13px;
+	border-bottom: 1px solid #fff;
+	color: #358F98;
+}
+.side-nav ul li a:hover, .side-nav ul li.active a{
+	background: #358F98;
+	color: #fff;
+}
+.side-nav a:hover{
+	text-decoration: none;
+}
+.dshbrd-con .content .hdr{
+	background: #358F98;
+	min-height: 240px;
+}
+.avtrcon, .detcon{
+	padding: 40px 0;
+	float: left;
+}
+.avtrcon{
+	width: 25%;
+}
+.detcon{
+	width: 75%;
+}
+.avtrcon img {
+    width: 130px;
+    height: 130px;
+    border-radius: 50%;
+    border: 5px solid #fff;
+    background: #fff;
+    display: block;
+    margin: 0 auto;
+}
+.detcon h1{
+    color: #fff;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-weight: 100;
+    letter-spacing: 3.2px;
+    margin: 0 0 10px;
+    text-transform: uppercase;
+    font-size: 40px;
+}
+.detcon p{
+	color: #fff;
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 13px;
+	font-weight: 100;
+	letter-spacing: 1.2px;
+	max-width: 330px;
+	line-height: 1.4em;
+}
+.rwrdscon{
+	float: right;
+	padding: 0 40px;
+}
+.rwrdscon h3{
+	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-weight: 100;
+	text-transform: uppercase;
+	padding: 12px 16px;
+	background: #FCD903;
+	font-size: 18px;
+	color: #358F98;
+	margin: 0;
+	letter-spacing: 0.5px;
+	position: relative;
+}
+.detcon h1 span, .rwrdscon h3 span{
+	font-weight: 300;
+}
+.points{
+	margin: 20px 0;
+	position: relative;
+}
+.points .pcon span{
+	color: #FFD800;
+}
+.points .pcon{
+	padding: 4px 16px;
+	background: #545158;
+	color: #fff;
+	border: 4px solid #5E676C;
+	border-radius: 20px;
+	text-align: right;
+	max-width: 140px;
+	display: block;
+	margin: 0 auto;
+	font-weight: 200;
+}
+.rbn-left, .rbn-right{
+	position: absolute;
+	left: -21px;
+	border-top: 22px solid #FFD800;
+	border-bottom: 21px solid #FFD800;
+	border-left: 21px solid transparent;
+	top: 0;
+}
+.rbn-right{
+	right: -21px;
+	left: auto;
+	border-left: none;
+	border-right: 21px solid transparent;
+}
+.points .star{
+	direction: rtl;
+	text-align: center;
+	unicode-bidi: bidi-override;
+	position: absolute;
+	color: #FCD903;
+	left: 10px;
+	top: -8px;
+	font-size: 40px;
+	background: #BEAF3E;
+	border-radius: 50%;
+	padding: 0px;
+	width: 54px;
+	height: 54px;
+	border: 4px solid #FCD903;
+}
+.points > span.star:before,
+.points > span.star ~ span:before {
+   content: "\2605";
+   position: absolute;
+}
+.points .lnk{
+	text-transform: uppercase;
+	color: #fff;
+	float: right;
+	font-size: 11px;
+	margin-top: 10px;
+	letter-spacing: 1px;
+	font-weight: lighter;
+	margin-right: 25px;
+}
+.dshbrd-con .form-content{
+	padding: 30px;
+	color: #887C70;
+}
+.dshbrd-con legend{
+	color: inherit;
+	font-size: 20px;
+}
+.btncon a.btn {
+  width: auto;
+  padding: 6px 30px;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  min-width: 240px;
+}
+.form-group:last-child{
+	margin-bottom: 0;
+}
 
 /*----- TABLE ----- */
 .panel-toolbar{margin: 20px 0;}

@@ -24,6 +24,7 @@
 			Routes::get('/', [ 'as' => 'student.dashboard.index', 'uses' => 'FutureLesson\Student\DashboardController@index']);
 			Routes::get('/follow-up-registration', [ 'as' => 'student.dashboard.follow_up_registration', 'uses' => 'FutureLesson\Student\DashboardController@follow_up_registration']);
 			Routes::get('/my-profile', [ 'as' => 'student.dashboard.my_profile', 'uses' => 'FutureLesson\Student\DashboardController@my_profile']);
+			Routes::get('/edit-profile', [ 'as' => 'student.dashboard.edit_profile', 'uses' => 'FutureLesson\Student\DashboardController@edit_profile']);
 		});
 	});
 ?>
