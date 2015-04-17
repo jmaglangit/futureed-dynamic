@@ -32,5 +32,7 @@ interface StudentRepositoryInterface {
     public function getReferences($id);
     
     public function updateStudentDetails($id,$data);
+    
+    public function getStudentId($user_id);
 
 }

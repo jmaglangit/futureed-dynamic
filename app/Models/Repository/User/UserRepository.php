@@ -219,6 +219,16 @@ class UserRepository implements UserRepositoryInterface{
                                'email'=>$data['email']
                               ]);
     }
+    
+    
+    //update username inactive || locked
+    public function updateInactiveLock($id){
+         User::where('id','=',$id)
+                     ->update(['is_account_activated'=>1,
+                               'is_account_locked'=>0
+                              ]);
+        
+    }
 
 
 
