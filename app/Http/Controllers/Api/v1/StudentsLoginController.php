@@ -26,9 +26,11 @@ class StudentsLoginController extends StudentsController{
             }else{
 //                check if username exist, return id else nothing
                 $response = $this->user->checkLoginName($input['username'], 'Student');
+                $student_id = $this->student->getStudentReferences($response['data']);
+
                 if($response['status']==200){
                  return $this->setStatusCode($response['status'])
-                             ->respondWithData(['id'=>$response['data']]);
+                             ->respondWithData(['id'=>$student_id]);
                 }
                 else{
                  return $this->setStatusCode($response['status'])
