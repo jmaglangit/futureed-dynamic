@@ -73,7 +73,7 @@ class UserController extends ApiController{
             ]);
         }
 
-        $code_expire = $this->user->checkResetCodeExpiry($user_detail['confirmation_code_expiry']);
+        $code_expire = $this->user->checkCodeExpiry($user_detail['confirmation_code_expiry']);
         if($code_expire){
 
             return $this->respondWithError([
