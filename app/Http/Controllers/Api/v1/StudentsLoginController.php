@@ -113,7 +113,8 @@ class StudentsLoginController extends StudentsController{
 
 
             } else {
-                $response  = $this->student->checkAccess($user_id['user_id'],$input['image_id']);
+
+                $response  = $this->student->checkAccess($input['id'],$input['image_id']);
 
                 if($response['status'] == 200){
 
@@ -127,9 +128,6 @@ class StudentsLoginController extends StudentsController{
                     );
                     $response['data'] = array_merge($response['data'],$token);
 
-                } else {
-
-                    $response['data'] = 'Picture Password is incorrect.';
                 }
             }
 
