@@ -3,6 +3,7 @@
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
+use FutureEd\Models\Repository\Validator\ValidatorRepositoryInterface;
 use FutureEd\Services\ClientServices;
 use FutureEd\Services\CodeGeneratorServices;
 use FutureEd\Services\GradeServices;
@@ -13,6 +14,8 @@ use FutureEd\Services\UserServices;
 use FutureEd\Services\TokenServices;
 use FutureEd\Services\AvatarServices;
 use Illuminate\Http\Request;
+use Illuminate\Routing\Matching\ValidatorInterface;
+use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
 
 class ApiController extends Controller {
@@ -28,7 +31,8 @@ class ApiController extends Controller {
             ClientServices $client,
             GradeServices $grade,
             AvatarServices $avatar,
-            CodeGeneratorServices $code){
+            CodeGeneratorServices $code,
+            ValidatorRepositoryInterface $validatorRepositoryInterface){
         $this->user = $user;
         $this->student = $student;
         $this->password_image = $password_image;
@@ -38,6 +42,7 @@ class ApiController extends Controller {
         $this->grade = $grade;
         $this->avatar = $avatar;
         $this->code = $code;
+        $this->valid = $validatorRepositoryInterface;
     }
     public function index(){
         return [

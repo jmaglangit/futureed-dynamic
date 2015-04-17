@@ -186,10 +186,16 @@ class UserRepository implements UserRepositoryInterface{
     //update reset_code and reset_code_expiry
     public function updateResetCode($id,$code){
         try{
-            $user = User::find($id);
-            $user->reset_code =$code['confirmation_code'];
-            $user->reset_code_expiry=$code['confirmation_code_expiry'];
-            $user->save();
+//            $user = User::find($id);
+//            $user->reset_code =$code['confirmation_code'];
+//            $user->reset_code_expiry=$code['confirmation_code_expiry'];
+//            $user->save();
+
+            User::where('id',$id)->update([
+                'reset_code' => $code['confirmation_code'],
+                'reset_code_expiry' => $code['confirmation_code_expiry']
+            ]);
+
         } catch (Exception $e){
             throw new Exception($e->getMessage());
         }
@@ -225,7 +231,8 @@ class UserRepository implements UserRepositoryInterface{
     public function updateInactiveLock($id){
          User::where('id','=',$id)
                      ->update(['is_account_activated'=>1,
-                               'is_account_locked'=>0
+                               'is_account_locked'=>0,
+                                'login_attempt' => 0,
                               ]);
         
     }

@@ -21,6 +21,7 @@ class StudentsPasswordController extends StudentsController {
     public function passwordReset(){
     	
          $input = Input::only('id','reset_code','password_image_id');
+
         if(!$input['id'] || !$input['reset_code'] || !$input['password_image_id']){
            return $this->setStatusCode(422)
                         ->respondWithError(['error_code'=>422,
@@ -31,7 +32,7 @@ class StudentsPasswordController extends StudentsController {
            $student_reference = $this->student->getStudentReferences($input['id']);
            
            $userdata=$this->user->getUserDetail($student_reference['user_id'],'Student');
-           
+
            if($input['reset_code']==$userdata['reset_code'] || $input['reset_code']==$userdata['confirmation_code'] ){
             
               $return = $this->student->resetPasswordImage($input);
