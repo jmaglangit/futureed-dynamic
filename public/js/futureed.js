@@ -3,7 +3,8 @@
 var futureed = angular.module('futureed', [
   'ngRoute',
 	'futureed.services',
-	'futureed.controllers'
+	'futureed.controllers',
+  'ui.bootstrap.datetimepicker'
 ]).config(['$interpolateProvider'
         , '$httpProvider'
         , '$routeProvider'
@@ -54,5 +55,4 @@ var futureed = angular.module('futureed', [
   $httpProvider.defaults.transformRequest = [function(data) {
     return angular.isObject(data) && String(data) !== '[object File]' ? param(data) : data;
   }];
-
 }]);
