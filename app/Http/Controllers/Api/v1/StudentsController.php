@@ -22,9 +22,9 @@ class StudentsController extends ApiController {
     
     
     public function getStudentDetails(){
-        $input = Input::only('user_id');
+        $input = Input::only('id');
         
-        $students = $this->student->getStudentInfo($input['user_id']); 
+        $students = $this->student->getStudentDetails($input['id']); 
         return $this->respondWithData([
             $students
         ]);

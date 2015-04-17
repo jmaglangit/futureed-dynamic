@@ -18,8 +18,8 @@ class SchoolServices {
     
     //get school details
     
-    public function getSchool($school_id){
-      $school_details = $this->school->getSchool($school_id);
+    public function getSchoolName($school_id){
+     return  $getSchoolName = $this->school->getSchoolName($school_id);
     }
    
 

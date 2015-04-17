@@ -303,6 +303,13 @@ class UserServices {
                 ];
         return $return;
     }
+    
+    
+    //get username and email
+    public function getUsernameEmail($id){
+      
+        return $this->users->getUsernameEmail($id);
+    }
 
 
     

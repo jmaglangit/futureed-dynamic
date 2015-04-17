@@ -28,5 +28,7 @@ interface StudentRepositoryInterface {
     public function getStudentParent($parent_id);
     
     public function saveStudentAvatar($data);
+    
+    public function getReferences($id);
 
 }

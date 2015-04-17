@@ -47,9 +47,9 @@ class StudentsLoginController extends StudentsController{
      */
     public function imagePassword(){
 
-        $input = Input::only('user_id');
+        $input = Input::only('id');
 
-        if(!$input['user_id']){
+        if(!$input['id']){
 
             return $this->setStatusCode(422)
                         ->respondWithError(['error_code'=>422,
@@ -60,7 +60,7 @@ class StudentsLoginController extends StudentsController{
 
             //TODO: Get image password of student.
 
-                $response = $this->student->getImagePassword($input['user_id']);
+                $response = $this->student->getImagePassword($input['id']);
                 return $this->setStatusCode($response['status'])->respondWithData($response['data']);
         }
 
@@ -72,10 +72,10 @@ class StudentsLoginController extends StudentsController{
      */
     public function password(){
         //check email and password matched
-        $input = Input::only('user_id','image_id');
+        $input = Input::only('id','image_id');
 
 
-        if(!$input['user_id'] && !$input['image_id']){
+        if(!$input['id'] || !$input['image_id']){
 
             
             return $this->setStatusCode(422)
@@ -87,7 +87,7 @@ class StudentsLoginController extends StudentsController{
 
             // get username id, and image password matched, return success/fail (boolean).
             // check login attempts
-            $is_disabled = $this->user->checkUserDisabled($input['user_id']);
+            $is_disabled = $this->user->checkUserDisabled($input['id']);
 
             if($is_disabled){
                 $response = [
@@ -97,12 +97,12 @@ class StudentsLoginController extends StudentsController{
 
 
             } else {
-                $response  = $this->student->checkAccess($input['user_id'],$input['image_id']);
+                $response  = $this->student->checkAccess($input['id'],$input['image_id']);
 
                 if($response['status'] == 200){
 
                     //get student data
-                    $response['data'] = $this->student->getStudentDetails($input['user_id']);
+                    $response['data'] = $this->student->getStudentDetails($input['id']);
 
                     $token = $this->token->getToken(
                         [

@@ -7,6 +7,6 @@ interface SchoolRepositoryInterface {
 	
 	public function getSchools();
 	
-    public function getSchool($school_id);
+    public function getSchoolName($school_id);
 
 }

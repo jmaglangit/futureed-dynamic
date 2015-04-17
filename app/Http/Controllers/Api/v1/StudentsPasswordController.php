@@ -21,7 +21,7 @@ class StudentsPasswordController extends StudentsController {
     public function passwordReset(){
     	
          $input = Input::only('id','reset_code','password_image_id');
-        if(!$input['id'] && !$input['reset_code'] && !$input['password_image_id']){
+        if(!$input['id'] || !$input['reset_code'] || !$input['password_image_id']){
            return $this->setStatusCode(422)
                         ->respondWithError(['error_code'=>422,
                                             'message'=>'Parameter validation failed'
@@ -45,7 +45,7 @@ class StudentsPasswordController extends StudentsController {
     //confirmation of reset code
     public function confirmResetCode(){
         $input = Input::only('email','reset_code');
-         if(!$input['email'] && !$input['reset_code']){
+         if(!$input['email'] || !$input['reset_code']){
            return $this->setStatusCode(422)
                         ->respondWithError(['error_code'=>422,
                                             'message'=>'Parameter validation failed'

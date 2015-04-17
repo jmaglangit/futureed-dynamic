@@ -93,6 +93,46 @@ class StudentsTableSeeder extends Seeder {
                         'updated_by' => 1,
                         'created_at' => date("Y-m-d H:i:s"),
                         'updated_at' => date("Y-m-d H:i:s")
+                    ],
+                    [
+                        'user_id' => 15,
+                        'first_name' => 'Brian',
+                        'last_name' => 'Monsales',
+                        'gender' => 'Male',
+                        'birth_date' => date("Y-m-d H:i:s"),
+                        'avatar_id' => 4,
+                        'password_image_id' => 3,
+                        'parent_id' => 2,
+                        'school_code' => 3,
+                        'grade_code' => 3,
+                        'points' => 456,
+                        'point_level_id' => 4,
+                        'learning_style_id' => 1,
+                        'status' => 'Enabled',
+                        'created_by' => 1,
+                        'updated_by' => 1,
+                        'created_at' => date("Y-m-d H:i:s"),
+                        'updated_at' => date("Y-m-d H:i:s")
+                    ],
+                    [
+                        'user_id' => 18,
+                        'first_name' => 'Vince',
+                        'last_name' => 'Gunday',
+                        'gender' => 'Male',
+                        'birth_date' => date("Y-m-d H:i:s"),
+                        'avatar_id' => 4,
+                        'password_image_id' => 3,
+                        'parent_id' => 2,
+                        'school_code' => 3,
+                        'grade_code' => 3,
+                        'points' => 789,
+                        'point_level_id' => 4,
+                        'learning_style_id' => 1,
+                        'status' => 'Enabled',
+                        'created_by' => 1,
+                        'updated_by' => 1,
+                        'created_at' => date("Y-m-d H:i:s"),
+                        'updated_at' => date("Y-m-d H:i:s")
                     ]
                 ]);
         } catch(Exception $e){
