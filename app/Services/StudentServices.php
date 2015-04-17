@@ -251,6 +251,13 @@ class StudentServices {
 
         return $this->student->getReferences($id);
     }
+
+
+    //get student id
+    public function getStudentId($user_id){
+
+        return $this->student->getStudentId($user_id);
+    }
     
     
 }
