@@ -80,8 +80,9 @@ class UserController extends ApiController{
             ]);
         }
 
+        $return = $this->student->getStudentId($user_detail['id']);
         return $this->respondWithData([
-            'id' => $user_detail['id']
+            'id' => $return
         ]);
 
     }
