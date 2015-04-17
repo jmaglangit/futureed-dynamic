@@ -74,9 +74,10 @@ class StudentsRegistrationController extends StudentsController {
             //send email to user.
             $this->mail->sendStudentRegister($user_response['id']);
 
+            $student_id = $this->student->getStudentId($user_response['id']);
             //return success
             return $this->respondWithData([
-                'id' => $user_response['id']
+                'id' => $student_id
             ]);
         } else {
 
