@@ -29,7 +29,7 @@ class StudentsLoginController extends StudentsController{
                 $student_id = $this->student->getStudentId($response['data']);
 
                 if($response['status']==200){
-                 return $this->setStatusCode($response['status'])
+                 return $this->setStatusCode($response['pstatus'])
                              ->respondWithData(['id'=> $student_id]);
                 }
                 else{
