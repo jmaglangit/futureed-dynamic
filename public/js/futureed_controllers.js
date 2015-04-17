@@ -30,7 +30,7 @@ var controllers = angular.module('futureed.controllers', []);
             if(response.status == 422) {
               $scope.error = "Username should not be empty."
             } else {
-              $scope.error = response.data.message;
+              $scope.error = response.errors.message;
             }
         });
       }
@@ -59,7 +59,7 @@ var controllers = angular.module('futureed.controllers', []);
             $scope.error = response.data.message;
           }
         }).error(function(response) {
-          $scope.error = response.data.message;
+          $scope.error = response.errors.message;
         });
       }
 
@@ -71,7 +71,7 @@ var controllers = angular.module('futureed.controllers', []);
           $scope.image_pass = response.data
           $scope.reset = true;
         }).error(function(response) {
-          $scope.error = response.data.message;
+          $scope.error = response.errors.message;
         });
       }
 
@@ -80,7 +80,7 @@ var controllers = angular.module('futureed.controllers', []);
           $scope.image_pass = response.data
           $scope.reset = true;
         }).error(function(response) {
-          $scope.error = response.data.message;
+          $scope.error = response.errors.message;
         });
       }
 
@@ -114,7 +114,7 @@ var controllers = angular.module('futureed.controllers', []);
             $scope.error = response.data.message;
           }
         }).error(function(response) {
-          $scope.error = response.data.message;
+          $scope.error = response.errors.message;
         });
       }
 
@@ -132,7 +132,7 @@ var controllers = angular.module('futureed.controllers', []);
             $scope.error = response.data.message;
           }
         }).error(function(response) {
-          $scope.error = response.data.message;
+          $scope.error = response.errors.message;
         });
       }
 
@@ -167,16 +167,11 @@ var controllers = angular.module('futureed.controllers', []);
           loginAPIService.resetPassword($scope.id, code, $scope.new_password).success(function(response) {
             $("#reset_password_form").submit();
           }).error(function(response) {
-
+            $scope.error = response.errors.message;
           });
         } else {
           $scope.error = "Password does not match.";
         }
-      }
-
-      // api not ready yet
-      $scope.getCountries = function() {
-        loginAPIService.getCountries().success(successCallback).error(errorCallback);
       }
 
       $scope.getGradeLevel = function() {
@@ -186,10 +181,11 @@ var controllers = angular.module('futureed.controllers', []);
           if(response.status == 200) {
             $scope.grades = response.data;
           } else {
-            $scope.error = reponse.data.message;
+            $scope.error = response.data.message;
           }
-          
-        }).error(errorCallback);
+        }).error(function(response) {
+          $scope.error = response.errors.message;
+        });
       }
 
       $scope.validateRegistration = function(registration, terms) {
@@ -198,7 +194,12 @@ var controllers = angular.module('futureed.controllers', []);
 
         if($scope.terms) {
           $scope.registration = angular.copy(registration);
-          $scope.registration.birth_date = $("input[name='birth_date']").val();
+          
+          if($scope.registration) {
+            $scope.registration.birth_date = $("input[name='birth_date']").val();
+          $scope.registration.school_code = "na";
+          }
+          
           loginAPIService.validateRegistration($scope.registration).success(function(response) {
             if(response.status == 200) {
               if(response.errors) {
@@ -211,7 +212,7 @@ var controllers = angular.module('futureed.controllers', []);
               $scope.error = response.data.message;
             }
           }).error(function(response) {
-            $scope.error = response.data.message;
+            $scope.error = response.errors.message;
           });
         } else {
           $scope.error = "Please accept the terms and conditions.";
@@ -228,7 +229,7 @@ var controllers = angular.module('futureed.controllers', []);
       }
 
       $scope.getAvatarImages = function() {
-        if($scope.user.avatar_id == null || $scope.user.avatar == "") {
+        if($scope.user.avatar_id == null || $scope.user.avatar_id == "") {
           loginAPIService.getAvatarImages($scope.user.gender).success(function(response) {
             if(response.status == 200) {
               $scope.avatars = response.data;
@@ -236,7 +237,7 @@ var controllers = angular.module('futureed.controllers', []);
               $scope.error = response.data.message;
             }
           }).error(function(response) {
-            $scope.error = response.data.message;
+            $scope.error = response.errors.message;
           });
         } else {
           $scope.has_avatar = true;
@@ -244,13 +245,13 @@ var controllers = angular.module('futureed.controllers', []);
       }
 
       $scope.stepOne = function() {
-        $scope.user.avatar = "";
+        $scope.user.avatar_id = "";
         $scope.has_avatar = false;
       }
 
       $scope.stepTwo = function() {
-        if($scope.user.avatar != null || $scope.user.avatar != "") {
-          $scope.has_avatar = true;
+        if($scope.user.avatar_id != null || $scope.user.avatar_id != "") {
+          $scope.has_avatar = false;
         }
       }
 
@@ -258,12 +259,12 @@ var controllers = angular.module('futureed.controllers', []);
         loginAPIService.selectAvatar($scope.user.id, $scope.avatar_id).success(function(response) {
           if(response.status == 200) {
             $scope.has_avatar = true;
-            $scope.user.avatar = $scope.avatar_id;
+            $scope.user.avatar_id = $scope.avatar_id;
           } else {
             $scope.error = response.data.message;
           }
         }).error(function(response) {
-          $scope.error = response.data.message;
+          $scope.error = "Please select an avatar";
         });
       }
 
@@ -286,12 +287,4 @@ function shuffle(array) {
     }
 
   return array;
-}
-
-function successCallback(response) {
-  console.log(response);
-}
-
-function errorCallback(response) {
-  console.log(response);
 }

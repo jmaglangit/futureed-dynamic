@@ -26,10 +26,11 @@
                 </div>
             </div>
             <div class="">
-                <div class="error" ng-if="error">
-                  <p>{! error !}</p>
-                </div>
                 <div class="lmtcontain form-group" ng-if="!has_avatar">
+                    <div class="error" ng-if="error">
+                      <p>{! error !}</p>
+                    </div>
+
                 	<h3>Pick an Avatar for your Profile</h3>
                     <div class="avatar-selection">
                         <div class="col-md-8 col-md-offset-2" ng-init="getAvatarImages()">

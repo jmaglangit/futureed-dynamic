@@ -77,9 +77,9 @@
                         <div class="col-md-4">
                             <select class="form-control" ng-model="reg.country">
                                 <option value="">-- Select Country --</option>
-                                <option value="Philippines" label="Philippines"></option>
-                                <option value="Singapore" label="Singapore"></option>
-                                <option value="United States" label="United States"></option>
+                                <option value="Philippines">Philippines</option>
+                                <option value="Singapore">Singapore</option>
+                                <option value="United States">United States</option>
                             </select>
                         </div>
                     </div>
@@ -104,7 +104,7 @@
                     <div class="form-group" id="form_schoolname">
                         <label for="" class="col-md-2 control-label">School Name</label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" ng-model="reg.school_code" required />
+                            <input type="text" class="form-control" ng-model="reg.school_code" disabled="disabled" value="N/A" required />
                         </div>
                     </div>
                     <div class="form-group" ng-init="getGradeLevel()">
