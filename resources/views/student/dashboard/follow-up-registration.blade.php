@@ -10,7 +10,6 @@
     	<form class="form-horizontal" name="followUpRegistrationForm">
             <div class="form-header">
                 <div class="lmtcontain">
-
                     <div class="steps two">
                         <ul class="items">
                             <li ng-class="{active : !has_avatar}">
@@ -46,14 +45,12 @@
                 	   <button type="button" class="btn btn-red" ng-click="selectAvatar()">Save and Proceed</button>
                     </div>
                 </div>
-
                 <div class="lmtcontain form-group" ng-if="has_avatar">
                     <h3>Learning Style Quiz</h3>
                     <div class="avatar-selection">
-                        <p><strong>This quiz aims to get what is your learning style so that you wll have a better understanding on how you learn.</strong> </p>
-
-                        
- 
+                        <p>
+                            <strong>This quiz aims to get what is your learning style so that you wll have a better understanding on how you learn.</strong>
+                        </p>
                         <br /> Are you ready? Click on the next button to start.
                     </div>
                     <div class="btmcon form-group">

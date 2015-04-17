@@ -19,6 +19,16 @@ class DashboardController extends Controller {
 	}
 
 	/**
+	 * Display my follow up registration screen
+	 *
+	 * @return Response
+	 */
+	public function follow_up_registration()
+	{
+		return view('student.dashboard.follow-up-registration');
+	}
+
+	/**
 	 * Display my profile screen
 	 *
 	 * @return Response
@@ -29,13 +39,14 @@ class DashboardController extends Controller {
 	}
 
 	/**
-	 * Display my follow up registration screen
+	 * Display edit profile screen
 	 *
 	 * @return Response
 	 */
-	public function follow_up_registration()
+	public function edit_profile()
 	{
-		return view('student.dashboard.follow-up-registration');
+		return view('student.dashboard.my-profile');
 	}
+
 
 }
