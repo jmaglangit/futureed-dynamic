@@ -10,6 +10,6 @@
 			<div class="error" ng-if="error">
 				<p>{! error !}</p>
 			</div>
-		    <a href="" ng-click="forgotPassword(username)" class="btn btn-red">Reset Password</a>
+		    <a href="{!! route('student.login.forgot_password') !!}" class="btn btn-red">Reset Password</a>
 		</div>
 	</div>

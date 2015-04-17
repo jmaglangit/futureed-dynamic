@@ -2,10 +2,11 @@
 
 @section('content')
   <div class="container login">
-    <div ng-class="{ 'col-md-8 col-md-offset-2': enter_pass, 'col-md-6 col-md-offset-3': !enter_pass || locked }" >
+    <div ng-class="{ 'col-md-8 col-md-offset-2': enter_pass && !locked, 'col-md-6 col-md-offset-3': !enter_pass || locked }" >
       <div class="form-style">
         @include('student.login.account-locked')
         @include('student.login.enter-password')
+
         <div ng-show="!locked && !enter_pass">
           <form id="login_form" name="loginForm" method="POST">
             <div class="title">Enter Your Username or Email</div>
