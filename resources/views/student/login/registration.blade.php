@@ -2,7 +2,9 @@
 
 @section('content')
 <div class="container login">
-    <div class="form-style register_student form-wide"> 
+     
+
+    <div class="form-style register_student form-wide" ng-init="success=false" ng-if="!success"> 
         <form class="form-horizontal simple-form" name="form_registration" id="form_registation">
             <div class="form-header">
                 <div class="media">
@@ -47,8 +49,17 @@
                     <div class="form-group">
                         <label for="" class="col-md-2 control-label">Birthday</label>
                         <div class="col-md-4">
-                            <input type="date" class="form-control" name="birthday" ng-model="birthday" ng-change="updateBirthdate(reg, birthday)">
-                            <input type="hidden" ng-model="reg.birthday">
+                            <div class="dropdown">
+                              <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
+                                <div class="input-group">
+                                    <input disabled="disabled" type="text" class="form-control" name="birthday" value="{! reg.birthday | date:'yyyy-MM-dd' !}">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                </div>
+                              </a>
+                              <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                <datetimepicker data-ng-model="reg.birthday" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', startView:'day', minView:'day' }"/>
+                              </ul>
+                            </div>
                         </div>
                     </div> 
                     <div class="form-group">
@@ -124,6 +135,8 @@
             </div>
         </form>
     </div>
+
+    @include('student.login.registration-success')
 </div>
 @stop
 

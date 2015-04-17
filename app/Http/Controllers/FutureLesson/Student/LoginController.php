@@ -30,7 +30,6 @@ class LoginController extends Controller {
 
 		if($userdata){
 			Session::put('user', $userdata['response']);
-			// return redirect()->route('student.dashboard.index');
 			return redirect()->route('student.dashboard.follow_up_registration');
 		}else{
 			return redirect()->route('student.login');
@@ -82,20 +81,20 @@ class LoginController extends Controller {
 	*/
 	public function reset_code() 
 	{
-		$email = Session::get('email');
 		$input = Input::only('email');
+		$email = $input['email'];		
 		$show = 0;
 
-		if($input){	
-			$email = $input['email'];
+		if($email == null){
+			$email = Session::get('email');
 			$show = 1;
 		}
 
 		if($email == null) {
 			return redirect()->route('student.login.forgot_password');
 		}
-
-		return view('student.login.enter-code', ['email' => $email, 'show' => $show]);
+		
+		return view('student.login.enter-code')->with(array('email' => $email, 'show' => $show));
 	}
 
 	/**
