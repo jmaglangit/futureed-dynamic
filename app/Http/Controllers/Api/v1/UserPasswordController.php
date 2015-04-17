@@ -22,11 +22,23 @@ class UserPasswordController extends UserController {
 
             $return= $this->user->checkLoginName($input['username'],$input['user_type']);
 
-            $user_id=$return['data'];
+            if($this->valid->email($input['username'])){
+                $return = $this->user->checkEmail($input['username'],$input['user_type']);
 
-            if($return['status']==200){
 
-                $return['data'] = $this->user->getUserDetails($return['data']);
+            }elseif($this->valid->username($input['username'])){
+                $return = $this->user->checkUserName($input['username'],$input['user_type']);
+
+            }
+
+
+            //TODO: Refactor codes 
+
+            $user_id=$return['user_id'];
+
+//            if($return['status'] == 200){
+
+                $return = $this->user->getUserDetails($return['user_id']);
 
                 // get code 
                 $code=$this->code->getCodeExpiry();
@@ -34,17 +46,17 @@ class UserPasswordController extends UserController {
                  //update reset_code and expiry to db
                 $this->user->setResetCode($user_id,$code);
 
+
                  //sent email for reset password
-                $this->mail->sendStudentMailResetPassword($return['data'],$code['confirmation_code']);
+                $this->mail->sendStudentMailResetPassword($return,$code['confirmation_code']);
 
-                return $this->setStatusCode($return['status'])
-                            ->respondWithData($return['data']);
-            }
-            else{
+                return $this->respondWithData($return);
+//            }
+//            else{
 
-                return $this->setStatusCode($return['status'])
-                            ->respondWithData(['error_code'=>$return['status'],'message'=>$return['data']]);
-            }
+//                return $this->setStatusCode($return['status'])
+//                            ->respondWithData(['error_code'=>$return['status'],'message'=>$return['data']]);
+//            }
         }
 
     }

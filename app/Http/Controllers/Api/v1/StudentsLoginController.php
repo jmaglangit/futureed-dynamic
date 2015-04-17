@@ -100,6 +100,7 @@ class StudentsLoginController extends StudentsController{
 
             }
 
+            $user_id = $this->student->getStudentReferences($input['id']);
             // check login attempts
             $is_disabled = $this->user->checkUserDisabled($student['user_id']);
 
@@ -112,7 +113,7 @@ class StudentsLoginController extends StudentsController{
 
 
             } else {
-                $response  = $this->student->checkAccess($input['id'],$input['image_id']);
+                $response  = $this->student->checkAccess($user_id['user_id'],$input['image_id']);
 
                 if($response['status'] == 200){
 
