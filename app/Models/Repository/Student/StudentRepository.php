@@ -143,7 +143,8 @@ class StudentRepository implements StudentRepositoryInterface{
             'grade_code',
             'avatar_id',
             'school_code',
-            'learning_style_id'
+            'learning_style_id',
+            'password_image_id'
             )->where('id','=',$id )->first();
     }
     

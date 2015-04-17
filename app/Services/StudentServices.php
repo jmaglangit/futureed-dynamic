@@ -146,12 +146,12 @@ class StudentServices {
         
         //get age
         $age = $this->age($student['birth_date']);
-        
+
         //get user username and email
-        $user = $this->user->getUsernameEmail($id)->toArray();
-        
+        $user = $this->user->getUsernameEmail($student['user_id'])->toArray();
+
         //get avatar url
-        $password_image_url =$this->password->getUserPasswordImageUrl($id);
+        $password_image_url =$this->password->getUserPasswordImageUrl($student_reference['password_image_id']);
         
         //get school
         $school=$this->school->getSchoolName($student_reference['school_code']);
