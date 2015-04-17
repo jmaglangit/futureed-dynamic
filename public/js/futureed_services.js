@@ -3,8 +3,7 @@ var services = angular.module('futureed.services', ['ngResource']);
 	services.factory('loginAPIService', function($http) {
 		
 		var loginAPI = {};
-		var futureedAPIUrl = 'http://dev.futureed.nerubia.com/api/v1/';
-		// var futureedAPIUrl = 'http://localhost:80/api/v1/';
+		var futureedAPIUrl = '/api/v1/';
 
 		loginAPI.validateUser = function(username) {
 			return $http({
@@ -14,10 +13,10 @@ var services = angular.module('futureed.services', ['ngResource']);
 			});
 		}
 
-		loginAPI.getImagePassword = function(user_id) {
+		loginAPI.getImagePassword = function(id) {
 			return $http({
 				method	: 'POST'
-				, data	: {user_id : user_id}
+				, data	: {id : id}
 				, url	: futureedAPIUrl + 'student/login/image'
 			});
 		}
@@ -25,7 +24,7 @@ var services = angular.module('futureed.services', ['ngResource']);
 		loginAPI.validatePassword = function(id, image_id) {
 			return $http({
 				method	: 'POST'
-				, data	: {user_id : id, image_id : image_id}
+				, data	: {id : id, image_id : image_id}
 				, url	: futureedAPIUrl + 'student/login/password'
 			});
 		}
@@ -49,7 +48,7 @@ var services = angular.module('futureed.services', ['ngResource']);
 		loginAPI.resetPassword = function (id, code, image_id) {
 			return $http({
 				method	: 'POST'
-				, data	: {user_id : id, reset_code : code, password_image_id : image_id}
+				, data	: {id : id, reset_code : code, password_image_id : image_id}
 				, url	: futureedAPIUrl + 'student/password/reset'
 			});
 		}
@@ -59,6 +58,22 @@ var services = angular.module('futureed.services', ['ngResource']);
 				method	: 'POST'
 				, data	: registration
 				, url	: futureedAPIUrl + 'student/register'
+			});
+		}
+
+		loginAPI.getAvatarImages = function(gender) {
+			return $http({
+				method	: 'POST'
+				, data	: {gender : gender}
+				, url	: futureedAPIUrl + 'user/avatar'
+			});
+		}
+
+		loginAPI.selectAvatar = function(id, avatar_id) {
+			return $http({
+				method	: 'POST'
+				, data	: {user_id : id, avatar_id : avatar_id}
+				, url	: futureedAPIUrl + 'user/avatar/new'
 			});
 		}
 
