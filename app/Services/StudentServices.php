@@ -235,4 +235,15 @@ class StudentServices {
         $this->student->updateStudentDetails($id,$input);
     }
     
+    
+     //format return for student reset code
+    public function resetCodeResponse($user_id){
+        $id = $this->student->getStudentId($user_id);
+        $return=['id'=>$id,
+                 'user_type'=>'Student',
+                ];
+        return $return;
+    }
+    
+    
 }
