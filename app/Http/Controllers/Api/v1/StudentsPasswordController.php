@@ -29,7 +29,7 @@ class StudentsPasswordController extends StudentsController {
         } else {
            $userdata= $this->user->getUserDetail($input['id'],'Student');
            if($input['reset_code']==$userdata['reset_code']){
-              $return = $this->student->resetPasswordImage($input); 
+              $return = $this->student->resetPasswordImage($input);
               return $this->setStatusCode($return['status'])
                           ->respondWithData(['id'=>$return['data']]);
            }else{
@@ -76,8 +76,8 @@ class StudentsPasswordController extends StudentsController {
 
         }
     }
-    
-    
+
+
     public function confirmNewImagePassword(){
     	$input = Input::only('id','password_image_id');
     	 if(!$input['id'] && !$input['password_image_id']){

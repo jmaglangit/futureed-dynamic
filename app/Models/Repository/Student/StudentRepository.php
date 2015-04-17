@@ -72,7 +72,7 @@ class StudentRepository implements StudentRepositoryInterface{
                'first_name' => $student['first_name'],
                'last_name' => $student['last_name'],
                'gender' => $student['gender'],
-               'birth_date' => $student['birthday'],
+               'birth_date' => $student['birth_date'],
                'country' => $student['country'],
                'state' => $student['state'],
                'city' => $student['city'],
