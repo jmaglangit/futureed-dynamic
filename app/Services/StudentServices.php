@@ -14,6 +14,7 @@ use FutureEd\Models\Repository\PasswordImage\PasswordImageRepositoryInterface;
 use FutureEd\Models\Repository\User\UserRepositoryInterface;
 use FutureEd\Models\Repository\Validator\ValidatorRepository;
 use FutureEd\Services\SchoolServices;
+use FutureEd\Services\AvatarServices;
 
 class StudentServices {
 
@@ -22,12 +23,14 @@ class StudentServices {
             PasswordImageServices $password,
             UserServices $user,
             ValidatorRepository $validator,
-            SchoolServices $school){
+            SchoolServices $school,
+            AvatarServices $avatar){
         $this->student = $student;
         $this->password = $password;
         $this->user = $user;
         $this->validator = $validator;
         $this->school = $school;
+        $this->avatar = $avatar;
     }
 
     public function getStudents(){
@@ -151,16 +154,17 @@ class StudentServices {
 
         //get user username and email
         $user = $this->user->getUsernameEmail($student['user_id'])->toArray();
-
-        //get avatar url
-        $password_image_url =$this->password->getUserPasswordImageUrl($student_reference['password_image_id']);
         
-        //get school
+        $avatar = $this->avatar->getAvatar($student_reference['avatar_id'])->toArray();
+        
+        $avatar_url = $this->avatar->getAvatarUrl($avatar['avatar_image']);
+        
         $school=$this->school->getSchoolName($student_reference['school_code']);
         $student = array_merge(array('id'=>$id),$student,$user,
                                array('age'=>$age,
-                                     'avatar'=>$password_image_url,
-                                     'school'=>$school));
+                                     'avatar'=>$avatar_url,
+                                     'school'=>$school,
+                                     'avatar_id'=>$student_reference['avatar_id']));
         
         
         foreach ($student as $key => $value) {

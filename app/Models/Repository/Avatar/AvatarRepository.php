@@ -16,5 +16,9 @@ class AvatarRepository implements AvatarRepositoryInterface{
     public function getAvatars($gender,$count){
     	return Avatar::where('gender','=', $gender)->get()->random($count);
     }
+    
+    public function getAvatar($avatar_id){
+    	return Avatar::where('id','=',$avatar_id)->get()->first();
+    }
 
 }
