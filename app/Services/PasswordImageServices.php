@@ -36,12 +36,12 @@ class PasswordImageServices {
 
         $password_image = $this->password->getImage($id)->toArray();
 
-        $password_image[0]['password_image_file'] = url() . '/' . $image_folders . '/'
-            . $password_image[0]['password_image_file'];
+        $password_image[0]['url'] = url() . '/' . $image_folders . '/'
+            . $password_image[0]['url'];
 
         foreach($image_ids as $k => $r){
 
-            $r['password_image_file'] = url() . '/' . $image_folders . '/' . $r['password_image_file'];
+            $r['url'] = url() . '/' . $image_folders . '/' . $r['url'];
         }
 
         $merged = array_merge($image_ids, $password_image);
@@ -64,7 +64,7 @@ class PasswordImageServices {
         $return_images =array();
         foreach($password_images as $k => $r){
 
-            $r['password_image_file'] = url() . '/' . $image_folders . '/' . $r['password_image_file'];
+            $r['url'] = url() . '/' . $image_folders . '/' . $r['url'];
             $return_images[]=$r;
         }
 
