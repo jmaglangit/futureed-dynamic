@@ -33,7 +33,7 @@ class StudentRepository implements StudentRepositoryInterface{
             'status',
             'learning_style_id'
         )
-            ->where('user_id',$id)->first();
+            ->where('id',$id)->first();
 
     }
 
@@ -166,6 +166,7 @@ class StudentRepository implements StudentRepositoryInterface{
     public function getStudentId($user_id){
        return  Student::where('user_id','=',$user_id)->pluck('id');
     }
+
 
 
 
