@@ -210,6 +210,25 @@ class UserRepository implements UserRepositoryInterface{
         return User::select('username','email')
                     ->where('id','=',$id)->first();            
     }
+    
+    //update username and email
+    
+    public function updateUsernameEmail($id,$data){
+        User::where('id','=',$id)
+                     ->update(['username'=>$data['username'],
+                               'email'=>$data['email']
+                              ]);
+    }
+    
+    
+    //update username inactive || locked
+    public function updateInactiveLock($id){
+         User::where('id','=',$id)
+                     ->update(['is_account_activated'=>1,
+                               'is_account_locked'=>0
+                              ]);
+        
+    }
 
 
 

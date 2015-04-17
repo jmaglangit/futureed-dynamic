@@ -264,11 +264,13 @@ class UserServices {
 
     //get user confirmation code
     public function getConfirmationCode($id){
+        
         return $this->users->getConfirmationCode($id);
     }
 
     //get userDetail Response
     public function getUserDetails($user_id){
+      
         $user_details = $this->users->getUser($user_id);
         $return =['username'=>$user_details['username'],
                   'user_type'=>$user_details['user_type'],
@@ -278,17 +280,22 @@ class UserServices {
 
     //update reset_code and reset_code_expiry
     public function setResetCode($id,$code){
+       
         $this->users->updateResetCode($id,$code);
     }
 
     //get all user Details
     public function getUserDetail($id,$user_Type){
+       
         $return =$this->users->getUserDetail($id,$user_Type);
         return $return;
     }
+    
     //check if reset code expired
-    public function checkResetCodeExpiry($reset_code_expiry){
+    public function checkCodeExpiry($reset_code_expiry){
+
         $date = date('Y-m-d H:i:s');
+        
         if($date>$reset_code_expiry){
             return true;
         }
@@ -296,19 +303,41 @@ class UserServices {
             return false;
         }
     }
-    //format return for reset code
-    public function resetCodeResponse($user){
-        $return=['id'=>$user['id'],
-                 'user_type'=>$user['user_type'],
-                ];
-        return $return;
-    }
     
     
     //get username and email
     public function getUsernameEmail($id){
       
         return $this->users->getUsernameEmail($id);
+    }
+    
+    //update user username and email
+    public function updateUsernameEmail($id,$data){
+       
+        $this->users->updateUsernameEmail($id,$data);
+    }
+    
+    //get Email
+    public function getIdByEmail($email,$user_type){
+        
+        $return = $this->users->checkEmail($email,$user_type);
+        if(is_null($return)){
+            return [
+                'status' => 202,
+                'data' => 'Email does not exist'
+            ];
+        }
+
+        return [
+            'status' => 200,
+            'data' => $return
+        ];
+    }
+    
+     //update user inactive and locked
+    public function updateInactiveLock($id){
+        
+        $this->users->updateInactiveLock($id);
     }
 
 
