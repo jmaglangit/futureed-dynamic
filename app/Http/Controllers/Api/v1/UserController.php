@@ -11,14 +11,6 @@ use Illuminate\Support\Facades\Input;
 
 class UserController extends ApiController{
 
-    public function __construct(UserServices $user,MailServices $mail,CodeGeneratorServices $code){
-
-        $this->user = $user;
-        $this->mail = $mail;
-        $this->code = $code;
-
-    }
-
 
     //check user if exist
     public function checkUser(){
@@ -30,6 +22,12 @@ class UserController extends ApiController{
         $user_type = $input['user_type'];
 
         $return =  $this->user->checkUsername($username,$user_type);
+
+        if($input['user_type'] == 'Student'){
+
+            $return['user_id'] = $this->student->getStudentId($return['user_id']);
+
+        }
 
         if(isset($return['error_code'])){
 

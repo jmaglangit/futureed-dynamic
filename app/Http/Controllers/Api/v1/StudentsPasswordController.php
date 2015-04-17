@@ -56,7 +56,6 @@ class StudentsPasswordController extends StudentsController {
         } else {
           
            $return=$this->user->getIdByEmail($input['email'],'Student');
-           
           
            if($return['status']==202){
               
@@ -66,7 +65,7 @@ class StudentsPasswordController extends StudentsController {
                                            ]);
                         
            }else{
-             
+
               $userdata = $this->user->getUserDetail($return['data'],'Student');
               
               if($userdata['reset_code']==$input['reset_code']){

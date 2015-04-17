@@ -21,6 +21,7 @@ class UserPasswordController extends UserController {
         } else {
 
             $return= $this->user->checkLoginName($input['username'],$input['user_type']);
+
             $user_id=$return['data'];
 
             if($return['status']==200){
