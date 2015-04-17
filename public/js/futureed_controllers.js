@@ -17,6 +17,7 @@ var controllers = angular.module('futureed.controllers', []);
               var data = response.data;
               if(data.error_code == 202) {
                 if(data.message == "Account Locked") {
+                  $scope.error = "";
                   $scope.locked = true;
                 } else {
                   $scope.error = data.message;
@@ -29,7 +30,7 @@ var controllers = angular.module('futureed.controllers', []);
             if(response.status == 422) {
               $scope.error = "Username should not be empty."
             } else {
-              $scope.error = response.data;
+              $scope.error = response.data.message;
             }
         });
       }
@@ -44,23 +45,6 @@ var controllers = angular.module('futureed.controllers', []);
           $($event.currentTarget).addClass('selected');
           $scope.avatar_id = $($event.currentTarget).find("#avatar_id").val();  
         }
-      }
-
-      $scope.validatePassword = function () {
-        loginAPIService.validatePassword($scope.id, $scope.image_id).success(function(response) {
-          if(response.status == 200) {
-            $("#response").val(response.data);
-            $("#password_form").submit();
-          } else if(response.status == 202) {
-            if(response.data.message == "Account Locked") {
-              $scope.locked = true;
-            } else {
-              $scope.error = "Password does not match.";
-            } 
-          }
-        }).error(function(response) {
-          $scope.error = response.data.message;
-        });
       }
 
       $scope.forgotPassword = function(username) {
@@ -101,6 +85,8 @@ var controllers = angular.module('futureed.controllers', []);
       }
 
       $scope.validatePassword = function () {
+        $scope.error = "";
+
         loginAPIService.validatePassword($scope.id, $scope.image_id).success(function(response) {
           if(response.status == 200) {
             $("#response").val(JSON.stringify(response.data));
