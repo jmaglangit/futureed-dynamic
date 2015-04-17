@@ -160,6 +160,12 @@ class StudentRepository implements StudentRepositoryInterface{
                                'city'=>$data['city'],
                                'state'=>$data['state']]);
     }
+    
+    
+    //return student id 
+    public function getStudentId($user_id){
+       return  Student::where('user_id','=',$user_id)->pluck('id');
+    }
 
 
 
