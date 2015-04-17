@@ -99,9 +99,9 @@ class StudentRepository implements StudentRepositoryInterface{
 
     }
 
-    public function getImagePassword($user_id){
+    public function getImagePassword($id){
 
-        return Student::where('user_id','=', $user_id)->pluck('password_image_id');
+        return Student::where('id','=', $id)->pluck('password_image_id');
 
     }
 
