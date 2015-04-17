@@ -2,7 +2,9 @@
 
 @section('content')
   <div class="container login">
-    <div class="col-md-6 col-md-offset-3">
+    @include('student.login.reset-confirm-password')
+
+    <div class="col-md-8 col-md-offset-2" ng-init="confirm=true" ng-if="!confirm">
       <form id="reset_password_form" action="{!! route('student.login.reset-password-success') !!}" name="reset_password_form" method="POST">
         <div class="form-style form-select-password" ng-init="getImagePassword()">
           <div id="title" class="title">Select a picture for your new password</div>
@@ -16,14 +18,7 @@
                  <input type="hidden" id="image_id" name="image_id" value="{! item.id !}">
               </li>
             </ul>
-            <div ng-if="reset">
-              <button type="button" class="btn btn-red" ng-click="storeNewPassword(image_pass)">Proceed</button>
-            </div>
-            <div class="row" ng-if="confirm">
-              <div class="col-sm-6"><button type="button" ng-click="undoNewPassword()" class="btn btn-red">Previous</button></div>
-              <div class="col-sm-6"><button type="button" class="btn btn-red" ng-click="validateNewPassword()">Reset</a></div>
-            </div>
-
+            <button type="button" class="btn btn-red" ng-click="storeNewPassword(image_pass)">Proceed</button>
           </div>
 
           <input type="hidden" name="reset_code" id="reset_code" value="{!! $reset_code !!}" />
