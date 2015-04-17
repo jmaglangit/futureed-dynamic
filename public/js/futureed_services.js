@@ -13,11 +13,18 @@ var services = angular.module('futureed.services', ['ngResource']);
 			});
 		}
 
-		loginAPI.getImagePassword = function(id) {
+		loginAPI.getLoginPassword = function(id) {
 			return $http({
 				method	: 'POST'
 				, data	: {id : id}
 				, url	: futureedAPIUrl + 'student/login/image'
+			});
+		}
+
+		loginAPI.getImagePassword = function() {
+			return $http({
+				method	: 'GET'
+				, url	: futureedAPIUrl + 'student/password/image'
 			});
 		}
 
@@ -40,8 +47,16 @@ var services = angular.module('futureed.services', ['ngResource']);
 		loginAPI.validateCode = function(code, email) {
 			return $http({
 				method	: 'POST'
-				, data 	: {email : email, reset_code : code}
+				, data 	: {email : email, user_type : "Student", reset_code : code}
 				, url	: futureedAPIUrl + 'student/password/code'
+			});
+		}
+
+		loginAPI.confirmCode = function(code, email) {
+			return $http({
+				method	: 'POST'
+				, data 	: {email : email, user_type : "Student", email_code : code}
+				, url	: futureedAPIUrl + 'user/email/code'
 			});
 		}
 
@@ -50,6 +65,28 @@ var services = angular.module('futureed.services', ['ngResource']);
 				method	: 'POST'
 				, data	: {id : id, reset_code : code, password_image_id : image_id}
 				, url	: futureedAPIUrl + 'student/password/reset'
+			});
+		}
+
+		loginAPI.setPassword = function (id, code, image_id) {
+			return $http({
+				method	: 'POST'
+				, data	: {id : id, email_code : code, password_image_id : image_id}
+				, url	: futureedAPIUrl + 'student/password'
+			});
+		}
+
+		loginAPI.getCountries = function() {
+			return $http({
+				method	: 'GET'
+				, url	: futureedAPIUrl + 'countries'
+			});
+		}
+
+		loginAPI.getGradeLevel =function() {
+			return $http({
+				method	: 'GET'
+				, url	: futureedAPIUrl + 'grade'
 			});
 		}
 
@@ -72,7 +109,7 @@ var services = angular.module('futureed.services', ['ngResource']);
 		loginAPI.selectAvatar = function(id, avatar_id) {
 			return $http({
 				method	: 'POST'
-				, data	: {user_id : id, avatar_id : avatar_id}
+				, data	: {id : id, avatar_id : avatar_id}
 				, url	: futureedAPIUrl + 'user/avatar/new'
 			});
 		}

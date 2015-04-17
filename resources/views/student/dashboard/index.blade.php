@@ -6,7 +6,7 @@
 
 @section('content')
 
-Heeeello {!! Session::get('user') !!}
+
   
 @stop
 
