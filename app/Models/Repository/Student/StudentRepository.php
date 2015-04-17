@@ -143,7 +143,7 @@ class StudentRepository implements StudentRepositoryInterface{
             'avatar_id',
             'school_code',
             'learning_style_id'
-            )->where('user_id','=',$id )->first();
+            )->where('id','=',$id )->first();
     }
     
     //update student details 
