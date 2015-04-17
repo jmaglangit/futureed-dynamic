@@ -86,8 +86,11 @@ class StudentsLoginController extends StudentsController{
         } else {
 
             // get username id, and image password matched, return success/fail (boolean).
+
+            //get user_id of student
+            $student = $this->student->getStudentReferences($input['id']);
             // check login attempts
-            $is_disabled = $this->user->checkUserDisabled($input['id']);
+            $is_disabled = $this->user->checkUserDisabled($student['user_id']);
 
             if($is_disabled){
                 $response = [

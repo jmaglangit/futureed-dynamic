@@ -33,7 +33,7 @@ class StudentRepository implements StudentRepositoryInterface{
             'status',
             'learning_style_id'
         )
-            ->where('user_id',$id)->first();
+            ->where('id',$id)->first();
 
     }
 
@@ -99,9 +99,9 @@ class StudentRepository implements StudentRepositoryInterface{
 
     }
 
-    public function getImagePassword($user_id){
+    public function getImagePassword($id){
 
-        return Student::where('user_id','=', $user_id)->pluck('password_image_id');
+        return Student::where('id','=', $id)->pluck('password_image_id');
 
     }
 
@@ -143,7 +143,8 @@ class StudentRepository implements StudentRepositoryInterface{
             'grade_code',
             'avatar_id',
             'school_code',
-            'learning_style_id'
+            'learning_style_id',
+            'password_image_id'
             )->where('id','=',$id )->first();
     }
     
@@ -166,6 +167,7 @@ class StudentRepository implements StudentRepositoryInterface{
     public function getStudentId($user_id){
        return  Student::where('user_id','=',$user_id)->pluck('id');
     }
+
 
 
 
