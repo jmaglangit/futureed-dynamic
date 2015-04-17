@@ -2,8 +2,6 @@
 
 @section('content')
 <div class="container login">
-     
-
     <div class="form-style register_student form-wide" ng-init="success=false" ng-if="!success"> 
         <form class="form-horizontal simple-form" name="form_registration" id="form_registation">
             <div class="form-header">
@@ -31,19 +29,19 @@
                     <div class="form-group">
                         <label for="" class="col-md-2 control-label">First Name</label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" ng-model="reg.first_name">
+                            <input type="text" class="form-control" ng-model="reg.first_name" placeholder="First Name" required />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="" class="col-md-2 control-label">Last Name</label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" ng-model="reg.last_name">
+                            <input type="text" class="form-control" ng-model="reg.last_name" placeholder="Last Name" required />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="" class="col-md-2 control-label">Gender</label>
                         <div class="col-md-4">
-                            {!! Form::select('level', array('male' => 'Male', 'female' => 'Female'), 'male',array('class' => 'form-control', 'ng-model' => 'reg.gender')); !!}
+                            {!! Form::select('', array('' => '-- Select Gender --', 'male' => 'Male', 'female' => 'Female'), 'male',array('class' => 'form-control', 'ng-model' => 'reg.gender')); !!}
                         </div>
                     </div>  
                     <div class="form-group">
@@ -52,12 +50,12 @@
                             <div class="dropdown">
                               <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
                                 <div class="input-group">
-                                    <input disabled="disabled" type="text" class="form-control" name="birthday" value="{! reg.birthday | date:'yyyy-MM-dd' !}">
+                                    <input disabled="disabled" type="text" class="form-control" name="birth_date" value="{! reg.birth_date | date:'yyyy-MM-dd' !}">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                                 </div>
                               </a>
                               <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                <datetimepicker data-ng-model="reg.birthday" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', startView:'day', minView:'day' }"/>
+                                <datetimepicker data-ng-model="reg.birth_date" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', startView:'day', minView:'day' }"/>
                               </ul>
                             </div>
                         </div>
@@ -65,19 +63,24 @@
                     <div class="form-group">
                         <label for="" class="col-md-2 control-label">City</label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" ng-model="reg.city">
+                            <input type="text" class="form-control" ng-model="reg.city" placeholder="City" required />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="" class="col-md-2 control-label">State</label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" ng-model="reg.state">
+                            <input type="text" class="form-control" ng-model="reg.state" placeholder="State" required />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="" class="col-md-2 control-label">Country</label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" ng-model="reg.country">
+                            <select class="form-control" ng-model="reg.country">
+                                <option value="">-- Select Country --</option>
+                                <option value="Philippines" label="Philippines"></option>
+                                <option value="Singapore" label="Singapore"></option>
+                                <option value="United States" label="United States"></option>
+                            </select>
                         </div>
                     </div>
                 </fieldset>
@@ -86,13 +89,13 @@
                     <div class="form-group">
                         <label for="" class="col-md-2 control-label">Email</label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" ng-model="reg.email">
+                            <input type="text" class="form-control" ng-model="reg.email" placeholder="Email Address" required />
                         </div>
                     </div>  
                     <div class="form-group">
                         <label for="" class="col-md-2 control-label">Username</label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" ng-model="reg.username">
+                            <input type="text" class="form-control" ng-model="reg.username" placeholder="Username" required />
                         </div>
                     </div> 
                 </fieldset>
@@ -101,15 +104,17 @@
                     <div class="form-group" id="form_schoolname">
                         <label for="" class="col-md-2 control-label">School Name</label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" ng-model="reg.school_code">
+                            <input type="text" class="form-control" ng-model="reg.school_code" required />
                         </div>
                     </div>
-                    <div class="form-group" id="form_address">
+                    <div class="form-group" ng-init="getGradeLevel()">
                         <label for="" class="col-md-2 control-label">School level</label>
 
-                        <div class="col-md-4">
-                        {!! Form::select('level', array('K2' => 'K2', 'Grade 1' => 'Grade 1', 'Grade 2' => 'Grade 2', 'Grade 3' => 'Grade 3', 'Grade 4' => 'Grade 4', 'Grade 5' => 'Grade 5', 'Grade 6' => 'Grade 6', 'Grade 7' => 'Grade 7', 'Grade 8' => 'Grade 8'), 'K2',array('class' => 'form-control', 'ng-model' => 'reg.grade_code')); !!}
-
+                        <div class="col-md-4 nullable">
+                            <select class="form-control" ng-model="reg.grade_code">
+                                <option value="">-- Select Level --</option>
+                                <option ng-repeat="grade in grades" value="{! grade.id !}" label="{! grade.name !}"></option>
+                            </select>
                         </div><br><br>
                     </div>    
                 </fieldset> 

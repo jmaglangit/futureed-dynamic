@@ -11,14 +11,14 @@
         	</p>
         	<small>Please check your inbox or your spam folder for the email. The email contains a code that you need to input below.</small>
 	        <form name="success_form" id="success_form" 
-            	  action="{!! route('student.login.reset_password') !!}" method="POST">
+            	  action="{!! route('student.login.set_password') !!}" method="POST">
 	          <div class="form-group">
-	          	  <label for="reset_code">Enter Code:</label>
-	              <input type="text" class="form-control" ng-model="reset_code" name="reset_code" placeholder="Verification Code" required />
+	          	  <label for="confirmation_code">Enter Code:</label>
+	              <input type="text" class="form-control" ng-model="confirmation_code" name="confirmation_code" placeholder="Verification Code" required />
 	              <input type="hidden" ng-model="email" name="email" required />
-	              <input type="hidden" ng-model="user_id" name="user_id" required />
+	              <input type="hidden" ng-model="id" name="id" required />
 	          </div>
-            <button type="button" class="btn btn-red" ng-click="validateCode(reset_code)">Confirm</button>
+            <button type="button" class="btn btn-red" ng-click="confirmCode(confirmation_code)">Confirm</button>
 	        </form>
 	    </div>
     </div>

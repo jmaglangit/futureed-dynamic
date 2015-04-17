@@ -124,15 +124,23 @@ class LoginController extends Controller {
 	 */
 	public function reset_password()
 	{
-		$input = Input::only('user_id', 'reset_code');
-		$id = $input['user_id'];
-		$reset_code = $input['reset_code'];
+		$input = Input::only('id', 'reset_code', 'confirmation_code', 'email');
+		$id = $input['id'];
+		$email = $input['email'];
+		$new = false;
 
-		if($id == null || $reset_code == null) {
+		if($input['reset_code'] != NULL) {
+			$code = $input['reset_code'];
+		} else {
+			$code = $input['confirmation_code'];
+			$new = true;
+		}
+
+		if($id == null || $code == null) {
 			return redirect()->route('student.login.forgot_password');
 		}
 
-		return view('student.login.reset-password', ['id' => $id, 'reset_code' => $reset_code]);
+		return view('student.login.reset-password', ['id' => $id, 'code' => $code, 'email' => $email, 'new' => $new]);
 	}
 	
 	/**

@@ -1,9 +1,7 @@
 var controllers = angular.module('futureed.controllers', []);
 
   controllers.controller('futureedController', function($scope, $location, loginAPIService) {
-      $scope.redirect = function(url) {
-        window.location.href = url;
-      }
+      $scope.error = "";
 
       $scope.validateUser = function(username) {
         $scope.username = angular.copy(username);
@@ -13,7 +11,7 @@ var controllers = angular.module('futureed.controllers', []);
             if(response.status == 200) {
               $scope.id = response.data.id;
               $("input[name='id']").val($scope.id);
-              $scope.getImagePassword();
+              $scope.getLoginPassword();
               $scope.enter_pass = true;
             } else {
               var data = response.data;
@@ -71,6 +69,7 @@ var controllers = angular.module('futureed.controllers', []);
 
         loginAPIService.forgotPassword($scope.username).success(function(response) {
           if(response.status == 200) {
+            $("input[name='email']").val(response.data.email);
             $("#forgot_pass_form").submit();
           } else {
             $scope.error = response.data.message;
@@ -80,11 +79,20 @@ var controllers = angular.module('futureed.controllers', []);
         });
       }
 
-      $scope.getImagePassword = function() {
+      $scope.getLoginPassword = function() {
         $scope.id = $("input[name='id']").val();
         $scope.selected_image_id = $("input[name='selected_image_id']").val();
 
-        loginAPIService.getImagePassword($scope.id).success(function (response) {
+        loginAPIService.getLoginPassword($scope.id).success(function (response) {
+          $scope.image_pass = response.data
+          $scope.reset = true;
+        }).error(function(response) {
+          $scope.error = response.data.message;
+        });
+      }
+
+      $scope.getImagePassword = function() {
+        loginAPIService.getImagePassword().success(function (response) {
           $scope.image_pass = response.data
           $scope.reset = true;
         }).error(function(response) {
@@ -114,7 +122,25 @@ var controllers = angular.module('futureed.controllers', []);
 
         loginAPIService.validateCode($scope.code, $scope.email).success(function(response) {
           if(response.status == 200) {
-            $("input[name='user_id']").val(response.data.id);
+            $("input[name='id']").val(response.data.id);
+            $("#success_form").submit();
+          } else {
+            $scope.error = response.data.message;
+          }
+        }).error(function(response) {
+          $scope.error = response.data.message;
+        });
+      }
+
+      $scope.confirmCode = function(code) {
+        $scope.error = "";
+        $scope.code = angular.copy(code);
+        $scope.email = ($scope.email) ? $scope.email : $("input[name='email']").val();
+
+        loginAPIService.confirmCode($scope.code, $scope.email).success(function(response) {
+          if(response.status == 200) {
+            $("input[name='id']").val(response.data.id);
+            $("input[name='email']").val($scope.email);
             $("#success_form").submit();
           } else {
             $scope.error = response.data.message;
@@ -146,27 +172,12 @@ var controllers = angular.module('futureed.controllers', []);
         $scope.confirm = false;
       }
 
-      function shuffle(array) {
-        var m = array.length, t, i;
-          // While there remain elements to shuffle
-          while (m) {
-            // Pick a remaining element…
-            i = Math.floor(Math.random() * m--);
-
-            // And swap it with the current element.
-            t = array[m];
-            array[m] = array[i];
-            array[i] = t;
-          }
-
-        return array;
-      }
-
-      $scope.validateNewPassword = function() {
+      $scope.validateNewPassword = function(reg) {
         $scope.error = "";
 
         if($scope.new_password == $scope.image_id) {
-          var code = $("input[name='reset_code']").val();
+          var code = $("input[name='code']").val();
+          $scope.id = $("input[name='id']").val();
           loginAPIService.resetPassword($scope.id, code, $scope.new_password).success(function(response) {
             $("#reset_password_form").submit();
           }).error(function(response) {
@@ -177,13 +188,31 @@ var controllers = angular.module('futureed.controllers', []);
         }
       }
 
+      // api not ready yet
+      $scope.getCountries = function() {
+        loginAPIService.getCountries().success(successCallback).error(errorCallback);
+      }
+
+      $scope.getGradeLevel = function() {
+        loginAPIService.getGradeLevel().success(function(response) {
+          console.log(response.data);
+
+          if(response.status == 200) {
+            $scope.grades = response.data;
+          } else {
+            $scope.error = reponse.data.message;
+          }
+          
+        }).error(errorCallback);
+      }
+
       $scope.validateRegistration = function(registration, terms) {
         $scope.error = "";
         $scope.terms = angular.copy(terms);
 
         if($scope.terms) {
           $scope.registration = angular.copy(registration);
-          $scope.registration.birthday = $("input[name='birthday']").val();
+          $scope.registration.birth_date = $("input[name='birth_date']").val();
           loginAPIService.validateRegistration($scope.registration).success(function(response) {
             if(response.status == 200) {
               if(response.errors) {
@@ -206,13 +235,14 @@ var controllers = angular.module('futureed.controllers', []);
       $scope.getUserDetails = function() {
         $scope.user = JSON.parse($('#userdata').val());
         $('#userdata').html('');
-        if(($scope.user.avatar != null || $scope.user.avatar != "") && $scope.has_style) {
+
+        if(($scope.user.avatar_id != null && $scope.user.avatar_id != "") && $scope.has_style) {
           $scope.done = true;
         }
       }
 
       $scope.getAvatarImages = function() {
-        if($scope.user.avatar == null || $scope.user.avatar == "") {
+        if($scope.user.avatar_id == null || $scope.user.avatar == "") {
           loginAPIService.getAvatarImages($scope.user.gender).success(function(response) {
             if(response.status == 200) {
               $scope.avatars = response.data;
@@ -255,3 +285,27 @@ var controllers = angular.module('futureed.controllers', []);
         $scope.done = true;
       }
     });
+
+function shuffle(array) {
+  var m = array.length, t, i;
+    // While there remain elements to shuffle
+    while (m) {
+      // Pick a remaining element…
+      i = Math.floor(Math.random() * m--);
+
+      // And swap it with the current element.
+      t = array[m];
+      array[m] = array[i];
+      array[i] = t;
+    }
+
+  return array;
+}
+
+function successCallback(response) {
+  console.log(response);
+}
+
+function errorCallback(response) {
+  console.log(response);
+}
