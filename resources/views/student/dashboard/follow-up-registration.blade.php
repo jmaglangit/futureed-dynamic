@@ -41,7 +41,7 @@
                             </ul>
                         </div>
                     </div>
-                    <div class="btmcon form-group">
+                    <div class="btmcon">
                 	   <button type="button" class="btn btn-red" ng-click="selectAvatar()">Save and Proceed</button>
                     </div>
                 </div>
@@ -53,7 +53,7 @@
                         </p>
                         <br /> Are you ready? Click on the next button to start.
                     </div>
-                    <div class="btmcon form-group">
+                    <div class="btmcon">
                        <button type="button" class="btn btn-red" ng-click="close()">NEXT</button>
                     </div>
                 </div>
