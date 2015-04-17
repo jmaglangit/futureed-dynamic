@@ -27,9 +27,18 @@ class StudentsPasswordController extends StudentsController {
                                             'message'=>'Parameter validation failed'
                                           ]);
         } else {
-           $userdata= $this->user->getUserDetail($input['id'],'Student');
-           if($input['reset_code']==$userdata['reset_code']){
+          
+           $student_reference = $this->student->getStudentReferences($input['id']);
+           
+           $userdata=$this->user->getUserDetail($student_reference['user_id'],'Student');
+           
+           if($input['reset_code']==$userdata['reset_code'] || $input['reset_code']==$userdata['confirmation_code'] ){
+            
               $return = $this->student->resetPasswordImage($input);
+              
+              $this->user->updateInactiveLock($student_reference['user_id']);
+              
+              
               return $this->setStatusCode($return['status'])
                           ->respondWithData(['id'=>$return['data']]);
            }else{

@@ -178,6 +178,7 @@ class StudentServices {
     
     //udpate student_image_password
     public function resetPasswordImage($data){
+        
         $this->student->updateImagePassword($data);
         $return = ['status'=>200,
                     'data' =>$data['id']];
@@ -192,7 +193,7 @@ class StudentServices {
     //save student avatar
     public function saveStudentAvatar($input){
         $this->student->saveStudentAvatar($input);
-        return $input['user_id'];
+        return $input['id'];
     }
     
     //validation email/username/firstname/lastname/gender
