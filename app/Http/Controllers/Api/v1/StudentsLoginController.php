@@ -76,10 +76,9 @@ class StudentsLoginController extends StudentsController{
         //check email and password matched
         $input = Input::only('id','image_id');
 
-
         if(!$input['id'] || !$input['image_id']){
 
-            
+
             return $this->setStatusCode(422)
                         ->respondWithError(['error_code'=>422,
                                              'message'=>'Parameter validation failed'
@@ -91,10 +90,21 @@ class StudentsLoginController extends StudentsController{
 
             //get user_id of student
             $student = $this->student->getStudentReferences($input['id']);
+
+            if(is_null($student)){
+
+                return $this->respondWithError([
+                    'error_code' => 204,
+                    'message' => 'Account does not exist.'
+                ]);
+
+            }
+
             // check login attempts
             $is_disabled = $this->user->checkUserDisabled($student['user_id']);
 
             if($is_disabled){
+
                 $response = [
                     'status' => 202,
                     'data' => $is_disabled
@@ -116,9 +126,9 @@ class StudentsLoginController extends StudentsController{
                     );
                     $response['data'] = array_merge($response['data'],$token);
 
+                } else {
 
-
-
+                    $response['data'] = 'Picture Password is incorrect.';
                 }
             }
 
