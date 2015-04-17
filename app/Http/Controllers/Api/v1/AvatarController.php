@@ -41,9 +41,9 @@ class AvatarController extends ApiController {
     
     public function saveUserAvatar(){
         
-        $input = Input::only('avatar_id','user_id');
+        $input = Input::only('avatar_id','id');
         
-         if(!$input['avatar_id'] && !$input['user_id']){
+         if(!$input['avatar_id'] || !$input['id']){
             return $this->setStatusCode(422)
                         ->respondWithError(['error_code'=>422,
                                          'message'=>'Parameter validation failed'

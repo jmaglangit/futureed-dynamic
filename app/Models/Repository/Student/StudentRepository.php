@@ -33,7 +33,7 @@ class StudentRepository implements StudentRepositoryInterface{
             'status',
             'learning_style_id'
         )
-            ->where('user_id',$id)->first();
+            ->where('id',$id)->first();
 
     }
 
@@ -131,7 +131,7 @@ class StudentRepository implements StudentRepositoryInterface{
     
     //save student avatar
     public function saveStudentAvatar($data){
-        Student::where('user_id',$data['user_id'])
+        Student::where('id',$data['id'])
                 ->update(['avatar_id'=>$data['avatar_id']]);
     }
     
