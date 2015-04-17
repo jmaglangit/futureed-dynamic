@@ -12,21 +12,27 @@ class UserPasswordController extends UserController {
     public function passwordForgot(){
         $input = Input::only('username','user_type');
 
-        if(!$input['username'] && !$input['user_type']){
+        if(!$input['username'] || !$input['user_type']){
 
            return $this->setStatusCode(422)
                             ->respondWithError(['error_code'=>422,
                                              'message'=>'Parameter validation failed'
                                               ]);
         } else {
+
             $return= $this->user->checkLoginName($input['username'],$input['user_type']);
             $user_id=$return['data'];
+
             if($return['status']==200){
+
                 $return['data'] = $this->user->getUserDetails($return['data']);
+
                 // get code 
                 $code=$this->code->getCodeExpiry();
+
                  //update reset_code and expiry to db
                 $this->user->setResetCode($user_id,$code);
+
                  //sent email for reset password
                 $this->mail->sendStudentMailResetPassword($return['data'],$code['confirmation_code']);
 
@@ -34,15 +40,18 @@ class UserPasswordController extends UserController {
                             ->respondWithData($return['data']);
             }
             else{
+
                 return $this->setStatusCode($return['status'])
                             ->respondWithData(['error_code'=>$return['status'],'message'=>$return['data']]);
             }
         }
 
     }
+
     public function passwordReset(){
          
     }
+
     //confirmation of reset code
     public function confirmResetCode(){
       
