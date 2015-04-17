@@ -278,7 +278,7 @@ class UserServices {
     //get userDetail Response
     public function getUserDetails($user_id){
       
-        $user_details = $this->users->getUser($user_id);
+        $user_details = $this->users->getUser($user_id,'all');
         $return =['username'=>$user_details['username'],
                   'user_type'=>$user_details['user_type'],
                   'email'=>$user_details['email']];
