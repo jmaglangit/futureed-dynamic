@@ -85,7 +85,7 @@ class PasswordImageServices {
         $password_image= $this->password->getImage($image_id);
         
         $password_image_url = url() . '/' . $image_folders . '/'
-            . $password_image[0]['password_image_file'];
+            . $password_image[0]['url'];
         
         return $password_image_url;            
     }
