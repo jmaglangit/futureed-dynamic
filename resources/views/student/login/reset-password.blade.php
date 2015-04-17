@@ -14,14 +14,14 @@
           <div class="form_content">
             <ul class="form_password list-unstyled list-inline">
               <li class="item" ng-repeat="item in image_pass" ng-click="highlight($event)">
-                 <img ng-src="{! item.password_image_file !}" alt="{! item.name !}">
+                 <img ng-src="{! item.url !}" alt="{! item.name !}">
                  <input type="hidden" id="image_id" name="image_id" value="{! item.id !}">
               </li>
             </ul>
             <button type="button" class="btn btn-red" ng-click="storeNewPassword(image_pass)">Proceed</button>
           </div>
 
-          <input type="hidden" name="reset_code" id="reset_code" value="{!! $reset_code !!}" />
+          <input type="hidden" name="code" id="code" value="{!! $code !!}" />
           <input type="hidden" name="id" id="id" value="{!! $id !!}" />
           <input type="hidden" name="selected_image_id" id="selected_image_id" />
           <input type="hidden" name="image_pass" />

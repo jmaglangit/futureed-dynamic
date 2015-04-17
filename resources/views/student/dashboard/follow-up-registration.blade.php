@@ -36,8 +36,8 @@
                         <div class="col-md-8 col-md-offset-2" ng-init="getAvatarImages()">
                             <ul class="avatar_list list-unstyled list-inline" >
                                 <li ng-repeat="avatar in avatars" ng-click="highlight($event)">
-                                    <img ng-src="{! avatar.avatar_url !}" alt="{! avatar.name !}" class="img-responsive">
-                                    <input type="hidden" id="avatar_id" name="avatar_id" value="{! avatar.avatar_id !}">
+                                    <img ng-src="{! avatar.url !}" alt="{! avatar.name !}" class="img-responsive">
+                                    <input type="hidden" id="avatar_id" name="avatar_id" value="{! avatar.id !}">
                                 </li>
                             </ul>
                         </div>
