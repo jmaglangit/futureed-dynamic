@@ -101,19 +101,21 @@ class UserServices {
     }
 
     //@return user_id add user type para meter
-    public function checkLoginName($username, $user_Type){
+    public function checkLoginName($username, $user_type){
        //filter if login is email or username
        if($this->validator->email($username)){
            //check email if exist return id
-           $return = $this->users->checkEmail($username, $user_Type);
+           $return = $this->users->checkEmail($username, $user_type);
+
 
             if(!is_null($return)){
+
                 $is_disabled = $this->checkUserDisabled($return);
                 if(!$is_disabled){
-                    $student = $this->student->getStudentId($return);
+
                     return [
                         'status' => 200,
-                        'data' => $student
+                        'data' => $return
                     ];
                 } else {
                     return [
@@ -129,14 +131,16 @@ class UserServices {
             }
        }elseif($this->validator->username($username)){
            //check username if exist return id
-           $return = $this->users->checkUserName($username,$user_Type);
+           $return = $this->users->checkUserName($username,$user_type);
+
+
            if(!is_null($return) ){
                $is_disabled = $this->checkUserDisabled($return);
                if(!$is_disabled){
-                   $student = $this->student->getStudentId($return);
+
                    return [
                        'status' => 200,
-                       'data' => $student
+                       'data' => $return
                    ];
                } else {
                    return [
