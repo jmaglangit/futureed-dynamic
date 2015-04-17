@@ -106,12 +106,14 @@ class UserServices {
        if($this->validator->email($username)){
            //check email if exist return id
            $return = $this->users->checkEmail($username, $user_Type);
+
             if(!is_null($return)){
                 $is_disabled = $this->checkUserDisabled($return);
                 if(!$is_disabled){
+                    $student = $this->student->getStudentId($return);
                     return [
                         'status' => 200,
-                        'data' => $return
+                        'data' => $student
                     ];
                 } else {
                     return [
@@ -131,9 +133,10 @@ class UserServices {
            if(!is_null($return) ){
                $is_disabled = $this->checkUserDisabled($return);
                if(!$is_disabled){
+                   $student = $this->student->getStudentId($return);
                    return [
                        'status' => 200,
-                       'data' => $return
+                       'data' => $student
                    ];
                } else {
                    return [
