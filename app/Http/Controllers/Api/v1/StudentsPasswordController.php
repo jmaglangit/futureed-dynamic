@@ -78,8 +78,6 @@ class StudentsPasswordController extends StudentsController {
     }
 
 
-
-
     public function confirmNewImagePassword(){
     	$input = Input::only('id','password_image_id');
     	 if(!$input['id'] && !$input['password_image_id']){
