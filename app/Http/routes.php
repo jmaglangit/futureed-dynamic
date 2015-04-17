@@ -52,6 +52,7 @@ Routes::group(['prefix' => 'api/v1'], function()
     //student
     Routes::post('/parent/student/list','Api\v1\StudentsController@getStudentParent');
     Routes::post('/student/details','Api\v1\StudentsController@getStudentDetails');
+    Routes::post('/student/{id}','Api\v1\StudentsController@editStudent');
 
 
     //grade
