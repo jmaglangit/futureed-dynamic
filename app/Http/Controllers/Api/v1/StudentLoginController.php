@@ -27,7 +27,7 @@ class StudentLoginController extends StudentController {
 			
 			//check if username exist, return id else nothing
 			$response = $this->user->checkLoginName($input['username'], config('futureed.student'));
-			dd()
+
 			$student_id = $this->student->getStudentId($response['data']);
 			
 			if($response['status'] == 200) {
