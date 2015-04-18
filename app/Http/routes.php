@@ -35,9 +35,9 @@ Routes::group(['prefix' => 'api/v1'], function()
     Routes::post('/user/email/code','Api\v1\UserController@confirmEmailCode');
 
     //student login
-    Routes::post('/student/login/username','Api\v1\StudentsLoginController@login');
-    Routes::post('/student/login/image','Api\v1\StudentsLoginController@imagePassword');
-    Routes::post('/student/login/password','Api\v1\StudentsLoginController@password');
+    Routes::post('/student/login/username','Api\v1\StudentLoginController@login');
+    Routes::post('/student/login/image','Api\v1\StudentLoginController@imagePassword');
+    Routes::post('/student/login/password','Api\v1\StudentLoginController@password');
 
     //student password
     Routes::get('/student/password/image','Api\v1\StudentsPasswordController@getPasswordImages');

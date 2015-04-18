@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
-class StudentsLoginController extends StudentController {
+class StudentLoginController extends StudentController {
 
     //check email or username if valid user
     public function login(){
