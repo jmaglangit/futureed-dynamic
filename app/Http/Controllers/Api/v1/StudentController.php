@@ -7,7 +7,7 @@ use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
-class StudentsController extends ApiController {
+class StudentController extends ApiController {
     
 
     public function getStudentParent(){
