@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use League\Flysystem\Exception;
 
-class StudentsRegistrationController extends StudentController {
+class StudentRegistrationController extends StudentController {
 
 
 

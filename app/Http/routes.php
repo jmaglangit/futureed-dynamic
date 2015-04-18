@@ -46,8 +46,8 @@ Routes::group(['prefix' => 'api/v1'], function()
     Routes::post('/student/password/new','Api\v1\StudentPasswordController@confirmNewImagePassword');
     
     //student registration
-    Routes::post('/student/register','Api\v1\StudentsRegistrationController@register');
-    Routes::post('/student/invite','Api\v1\StudentsRegistrationController@invite');
+    Routes::post('/student/register','Api\v1\StudentRegistrationController@register');
+    Routes::post('/student/invite','Api\v1\StudentRegistrationController@invite');
 
     //student
     Routes::post('/parent/student/list','Api\v1\StudentController@getStudentParent');
