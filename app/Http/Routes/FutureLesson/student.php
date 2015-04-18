@@ -2,7 +2,7 @@
 	
 	Routes::group(['prefix' => '/student'], function()
 	{
-		Routes::any('/', 'FutureLesson\Student\LoginController@index');
+		Routes::get('/', 'FutureLesson\Student\LoginController@index');
 		Routes::get('/registration', ['as' => 'student.registration', 'uses' => 'FutureLesson\Student\LoginController@registration']);
 		Routes::get('/confirm', ['as' => 'student.login.confirm', 'uses' => 'FutureLesson\Student\LoginController@reset_code']);
 		Routes::get('/logout', [ 'as' => 'student.logout', 'uses' => 'FutureLesson\Student\LoginController@logout']);
