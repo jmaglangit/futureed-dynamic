@@ -56,7 +56,8 @@ Routes::group(['prefix' => 'api/v1'], function()
     Routes::post('/student/{id}','Api\v1\StudentController@editStudent');
 */
 
-	Routes::resource('student', 'Api\v1\StudentController');
+	Routes::resource('student', 'Api\v1\StudentController',
+					['except' => ['create', 'edit']]);
 	
 
     //grade
