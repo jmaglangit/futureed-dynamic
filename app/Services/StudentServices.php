@@ -155,11 +155,19 @@ class StudentServices {
         //get user username and email
         $user = $this->user->getUsernameEmail($student['user_id'])->toArray();
         
-        $avatar = $this->avatar->getAvatar($student_reference['avatar_id'])->toArray();
+        $avatar_url = '';
         
-        $avatar_url = $this->avatar->getAvatarUrl($avatar['avatar_image']);
+        if($student_reference['avatar_id']) {
+        	$avatar = $this->avatar->getAvatar($student_reference['avatar_id'])->toArray();
+        	$avatar_url = $this->avatar->getAvatarUrl($avatar['avatar_image']);
+        }
         
-        $school=$this->school->getSchoolName($student_reference['school_code']);
+        $school = '';
+        
+        if($student_reference['school_code']) {
+        	$school = $this->school->getSchoolName($student_reference['school_code']);
+        }
+        
         $student = array_merge(array('id'=>$id),$student,$user,
                                array('age'=>$age,
                                      'avatar'=>$avatar_url,

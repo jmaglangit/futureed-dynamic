@@ -6,7 +6,7 @@ use FutureEd\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
-class StudentsPasswordController extends StudentsController {
+class StudentPasswordController extends StudentController {
 
 
     //get password images

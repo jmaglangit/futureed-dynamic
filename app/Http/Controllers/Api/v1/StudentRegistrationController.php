@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use League\Flysystem\Exception;
 
-class StudentsRegistrationController extends StudentsController {
+class StudentRegistrationController extends StudentController {
 
 
 
@@ -46,7 +46,7 @@ class StudentsRegistrationController extends StudentsController {
 
 
         $user = array_merge($user,[
-            'user_type' => 'Student'
+            'user_type' => config('futureed.student')
         ]);
 
         // add user, return status

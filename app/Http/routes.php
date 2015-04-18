@@ -35,25 +35,30 @@ Routes::group(['prefix' => 'api/v1'], function()
     Routes::post('/user/email/code','Api\v1\UserController@confirmEmailCode');
 
     //student login
-    Routes::post('/student/login/username','Api\v1\StudentsLoginController@login');
-    Routes::post('/student/login/image','Api\v1\StudentsLoginController@imagePassword');
-    Routes::post('/student/login/password','Api\v1\StudentsLoginController@password');
+    Routes::post('/student/login/username','Api\v1\StudentLoginController@login');
+    Routes::post('/student/login/image','Api\v1\StudentLoginController@imagePassword');
+    Routes::post('/student/login/password','Api\v1\StudentLoginController@password');
 
     //student password
-    Routes::get('/student/password/image','Api\v1\StudentsPasswordController@getPasswordImages');
-    Routes::post('/student/password/reset','Api\v1\StudentsPasswordController@passwordReset');
-    Routes::post('/student/password/code','Api\v1\StudentsPasswordController@confirmResetCode');
-    Routes::post('/student/password/new','Api\v1\StudentsPasswordController@confirmNewImagePassword');
+    Routes::get('/student/password/image','Api\v1\StudentPasswordController@getPasswordImages');
+    Routes::post('/student/password/reset','Api\v1\StudentPasswordController@passwordReset');
+    Routes::post('/student/password/code','Api\v1\StudentPasswordController@confirmResetCode');
+    Routes::post('/student/password/new','Api\v1\StudentPasswordController@confirmNewImagePassword');
     
     //student registration
-    Routes::post('/student/register','Api\v1\StudentsRegistrationController@register');
-    Routes::post('/student/invite','Api\v1\StudentsRegistrationController@invite');
+    Routes::post('/student/register','Api\v1\StudentRegistrationController@register');
+    Routes::post('/student/invite','Api\v1\StudentRegistrationController@invite');
 
     //student
-    Routes::post('/parent/student/list','Api\v1\StudentsController@getStudentParent');
-    Routes::post('/student/details','Api\v1\StudentsController@getStudentDetails');
-    Routes::post('/student/{id}','Api\v1\StudentsController@editStudent');
+/*
+    Routes::post('/parent/student/list','Api\v1\StudentController@getStudentParent');
+    Routes::post('/student/details','Api\v1\StudentController@getStudentDetails');
+    Routes::post('/student/{id}','Api\v1\StudentController@editStudent');
+*/
 
+	Routes::resource('student', 'Api\v1\StudentController',
+					['except' => ['create', 'edit']]);
+	
 
     //grade
     Routes::get('/grade','Api\v1\GradeController@grade');
