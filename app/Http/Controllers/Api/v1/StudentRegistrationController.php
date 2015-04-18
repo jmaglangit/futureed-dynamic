@@ -46,7 +46,7 @@ class StudentRegistrationController extends StudentController {
 
 
         $user = array_merge($user,[
-            'user_type' => 'Student'
+            'user_type' => config('futureed.student')
         ]);
 
         // add user, return status

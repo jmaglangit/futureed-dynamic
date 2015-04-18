@@ -13,33 +13,34 @@ class StudentLoginController extends StudentController {
     //check email or username if valid user
     public function login(){
 
-            $input = Input::only('username');
-          
-
-            if(!$input['username']){
-
-                return $this->setStatusCode(422)
-                            ->respondWithError(['error_code'=>422,
-                                             'message'=>'Parameter validation failed'
-                                         ]);
-
-            }else{
-//                check if username exist, return id else nothing
-                $response = $this->user->checkLoginName($input['username'], 'Student');
-                $student_id = $this->student->getStudentId($response['data']);
-
-                if($response['status']==200){
-                 return $this->setStatusCode($response['status'])
-                             ->respondWithData(['id'=> $student_id]);
-                }
-                else{
-                 return $this->setStatusCode($response['status'])
-                             ->respondWithData(['error_code'=>$response['status'],'message'=>$response['data']]);
-                }
-
-               // return $this->setStatusCode($response['status'])->respondWithData($response['data']);
-
-            }
+		$input = Input::only('username');
+		
+		
+		if(!$input['username']){
+		
+			return $this->setStatusCode(422)
+				->respondWithError(['error_code'=>422,
+				'message'=>'Parameter validation failed'
+			]);
+		
+		} else {
+			
+			//check if username exist, return id else nothing
+			$response = $this->user->checkLoginName($input['username'], config('futureed.student'));
+			dd()
+			$student_id = $this->student->getStudentId($response['data']);
+			
+			if($response['status'] == 200) {
+				return $this->setStatusCode($response['status'])
+				->respondWithData(['id'=> $student_id]);
+			} else{
+				return $this->setStatusCode($response['status'])
+				->respondWithData(['error_code'=>$response['status'],'message'=>$response['data']]);
+			}
+			
+			// return $this->setStatusCode($response['status'])->respondWithData($response['data']);
+		
+		}
     }
 
     /*

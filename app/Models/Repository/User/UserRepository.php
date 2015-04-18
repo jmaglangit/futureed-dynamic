@@ -11,7 +11,7 @@ use FutureEd\Models\Core\User;
 use League\Flysystem\Exception;
 
 
-class UserRepository implements UserRepositoryInterface{
+class UserRepository implements UserRepositoryInterface {
 
     //TODO: filter all query by user_type.
 
