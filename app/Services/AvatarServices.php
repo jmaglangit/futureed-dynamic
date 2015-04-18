@@ -44,6 +44,21 @@ class AvatarServices {
         return $this->validator->gender($input);
     }
     
+    public function getAvatar($avatar_id){
+        return $this->avatar->getAvatar($avatar_id);
+    }
+    
+    public function getAvatarUrl($avatar_image){
+        
+        $image_folders = \Config::get('futureed.image_avatar_folder');
+        
+        
+        $password_image_url = url() . '/' . $image_folders . '/'
+            . $avatar_image;
+        
+        return $password_image_url;            
+    }
+    
    
 
    

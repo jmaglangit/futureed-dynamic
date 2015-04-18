@@ -10,7 +10,8 @@ namespace FutureEd\Models\Repository\Avatar;
 interface AvatarRepositoryInterface {
 
     public function getAvatars($gender,$count);
-
+    
+    public function getAvatar($avatar_id);
    
 
 
