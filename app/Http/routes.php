@@ -50,10 +50,14 @@ Routes::group(['prefix' => 'api/v1'], function()
     Routes::post('/student/invite','Api\v1\StudentRegistrationController@invite');
 
     //student
+/*
     Routes::post('/parent/student/list','Api\v1\StudentController@getStudentParent');
     Routes::post('/student/details','Api\v1\StudentController@getStudentDetails');
     Routes::post('/student/{id}','Api\v1\StudentController@editStudent');
+*/
 
+	Routes::resource('student', 'Api\v1\StudentController');
+	
 
     //grade
     Routes::get('/grade','Api\v1\GradeController@grade');
