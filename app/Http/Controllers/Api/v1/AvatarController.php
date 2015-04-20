@@ -43,10 +43,17 @@ class AvatarController extends ApiController {
         
         $input = Input::only('avatar_id','id');
         
-         if(!$input['avatar_id'] || !$input['id']){
+         if( !$input['avatar_id'] ){
+          
             return $this->setStatusCode(422)
                         ->respondWithError(['error_code'=>422,
-                                         'message'=>'Parameter validation failed'
+                                         'message'=>'Empty avatar ID'
+                                     ]);
+        }else if( !$input['id'] ){
+          
+            return $this->setStatusCode(422)
+                        ->respondWithError(['error_code'=>422,
+                                         'message'=>'Empty student ID'
                                      ]);
         }else{
     
