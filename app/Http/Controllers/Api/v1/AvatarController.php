@@ -47,13 +47,13 @@ class AvatarController extends ApiController {
           
             return $this->setStatusCode(422)
                         ->respondWithError(['error_code'=>422,
-                                         'message'=>'Empty avatar ID'
+                                         'message'=>'Empty avatar_id'
                                      ]);
         }else if( !$input['id'] ){
           
             return $this->setStatusCode(422)
                         ->respondWithError(['error_code'=>422,
-                                         'message'=>'Empty student ID'
+                                         'message'=>'Empty id'
                                      ]);
         }else{
     

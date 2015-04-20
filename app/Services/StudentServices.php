@@ -15,6 +15,7 @@ use FutureEd\Models\Repository\User\UserRepositoryInterface;
 use FutureEd\Models\Repository\Validator\ValidatorRepository;
 use FutureEd\Services\SchoolServices;
 use FutureEd\Services\AvatarServices;
+use FutureEd\Services\TokenServices;
 
 class StudentServices {
 
@@ -24,13 +25,15 @@ class StudentServices {
             UserServices $user,
             ValidatorRepository $validator,
             SchoolServices $school,
-            AvatarServices $avatar){
+            AvatarServices $avatar,
+            TokenServices $token){
         $this->student = $student;
         $this->password = $password;
         $this->user = $user;
         $this->validator = $validator;
         $this->school = $school;
         $this->avatar = $avatar;
+        $this->token = $token;
     }
 
     public function getStudents(){
@@ -282,6 +285,21 @@ class StudentServices {
     public function getStudentId($user_id){
 
         return $this->student->getStudentId($user_id);
+    }
+    
+    
+    //validate access_token
+    public function  decodeToken($token){
+        
+        return $this->token->decodeToken($token);
+    }
+    
+    
+    //change password images
+    public function ChangPasswordImage($id,$password_image_id){
+        
+        $this->student->ChangPasswordImage($id,$password_image_id);
+        
     }
     
     

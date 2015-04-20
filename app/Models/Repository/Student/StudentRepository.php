@@ -168,8 +168,20 @@ class StudentRepository implements StudentRepositoryInterface{
     public function getStudentId($user_id){
        return  Student::where('user_id','=',$user_id)->pluck('id');
     }
+    
+    
+    //change password_image_id
+    public function ChangPasswordImage($id,$password_image_id){
 
-
-
+       try{
+            Student::where('id',$id)
+                     ->update(['password_image_id'=>$password_image_id]);
+        } catch (Exception $e){
+            throw new Exception($e->getMessage());
+        }
+        
+    }
+    
+    
 
 }

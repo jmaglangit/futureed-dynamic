@@ -34,5 +34,7 @@ interface StudentRepositoryInterface {
     public function updateStudentDetails($id,$data);
     
     public function getStudentId($user_id);
+    
+    public function ChangPasswordImage($id,$password_image_id);
 
 }
