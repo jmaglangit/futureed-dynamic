@@ -205,9 +205,19 @@ class StudentServices {
     }
     
     //save student avatar
-    public function saveStudentAvatar($input){
-        $this->student->saveStudentAvatar($input);
-        return $input['id'];
+    public function saveStudentAvatar($data){
+        
+        
+        $this->student->saveStudentAvatar($data);
+        
+        $avatar = $this->avatar->getAvatar($data['avatar_id']);
+        $avatar_url=$this->avatar->getAvatarUrl($avatar['avatar_image']);
+        
+        return['id'=> $data['id'],
+                'avatar_id' => $data['avatar_id'],
+                'avatar' =>$avatar_url
+              ];
+        
     }
     
     //validation email/username/firstname/lastname/gender

@@ -51,7 +51,7 @@ class AvatarController extends ApiController {
         }else{
     
            $return =  $this->student->saveStudentAvatar($input);
-           return $this->respondWithData(['id'=>$return]);
+           return $this->respondWithData($return);
         }
         
     }
