@@ -141,7 +141,7 @@ class StudentPasswordController extends StudentController {
                                               ]);
       }else{
         
-         $token = $this->student->decodeToken($input['access_token']);
+         $token = $this->token->decodeToken($input['access_token']);
     
          if($token['status']==true){
             
