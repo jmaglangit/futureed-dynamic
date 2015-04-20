@@ -58,7 +58,20 @@ class AvatarController extends ApiController {
         }else{
     
            $return =  $this->student->saveStudentAvatar($input);
-           return $this->respondWithData($return);
+        
+            if($return){
+                
+                $avatar = $this->avatar->getAvatar($input['avatar_id']);
+                $avatar_url=$this->avatar->getAvatarUrl($avatar['avatar_image']);
+                
+                $reponse = ['id'=> $avatar['id'],
+                            'name' => $avatar['avatar_image'],
+                            'url' =>$avatar_url
+                ];
+                
+                return $this->respondWithData($reponse);
+            }
+           
         }
         
     }

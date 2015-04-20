@@ -132,8 +132,23 @@ class StudentRepository implements StudentRepositoryInterface{
     
     //save student avatar
     public function saveStudentAvatar($data){
-        Student::where('id',$data['id'])
+        
+      try{
+            Student::where('id',$data['id'])
                 ->update(['avatar_id'=>$data['avatar_id']]);
+                
+            return true;     
+                
+        } catch (Exception $e){
+          
+            throw new Exception($e->getMessage());
+            
+        }
+   
+        
+       
+          
+        
     }
     
     //get foreign key of student table grade_code,avatar_id,school_code,learning_style_id
