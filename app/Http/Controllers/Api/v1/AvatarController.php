@@ -56,21 +56,35 @@ class AvatarController extends ApiController {
                                          'message'=>'Empty id'
                                      ]);
         }else{
-    
-           $return =  $this->student->saveStudentAvatar($input);
+            
+            $idExist = $this->student->checkIdExist($input['id']);
+            
+            if($idExist){
+                
+                $return =  $this->student->saveStudentAvatar($input);
         
-            if($return){
+                if($return){
+                    
+                    $avatar = $this->avatar->getAvatar($input['avatar_id']);
+                    $avatar_url=$this->avatar->getAvatarUrl($avatar['avatar_image']);
+                    
+                    $reponse = ['id'=> $avatar['id'],
+                                'name' => $avatar['avatar_image'],
+                                'url' =>$avatar_url
+                    ];
+                    
+                    return $this->respondWithData($reponse);
+                }
                 
-                $avatar = $this->avatar->getAvatar($input['avatar_id']);
-                $avatar_url=$this->avatar->getAvatarUrl($avatar['avatar_image']);
+            }else{
                 
-                $reponse = ['id'=> $avatar['id'],
-                            'name' => $avatar['avatar_image'],
-                            'url' =>$avatar_url
-                ];
-                
-                return $this->respondWithData($reponse);
+                return $this->setStatusCode(201)
+                        ->respondWithError(['error_code'=>201,
+                                         'message'=>"id doens't exist"
+                                          ]);
             }
+    
+         
            
         }
         

@@ -283,5 +283,11 @@ class StudentServices {
         
     }
     
+    //check if id exist
+    public function checkIdExist($id){
+        
+        return $this->student->checkIdExist($id);
+    }
+    
     
 }

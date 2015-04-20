@@ -197,6 +197,13 @@ class StudentRepository implements StudentRepositoryInterface{
         
     }
     
+    //check if id exist
+    public function checkIdExist($id){
+      
+            return Student::where('id',$id)
+                              ->pluck('id');
+    }
+    
     
 
 }
