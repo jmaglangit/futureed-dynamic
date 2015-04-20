@@ -61,26 +61,40 @@ class AvatarController extends ApiController {
             
             if($idExist){
                 
-                $return =  $this->student->saveStudentAvatar($input);
+                $avatarExist = $this->avatar->checkAvatarExist($input['avatar_id']);
+                
+                if($avatarExist){
+                    
+                    $return =  $this->student->saveStudentAvatar($input);
         
-                if($return){
+                    if($return){
+                        
+                        $avatar = $this->avatar->getAvatar($input['avatar_id']);
+                        $avatar_url=$this->avatar->getAvatarUrl($avatar['avatar_image']);
+                        
+                        $reponse = ['id'=> $avatar['id'],
+                                    'name' => $avatar['avatar_image'],
+                                    'url' =>$avatar_url
+                                   ];
+                        
+                        return $this->respondWithData($reponse);
+                    }
+                        
                     
-                    $avatar = $this->avatar->getAvatar($input['avatar_id']);
-                    $avatar_url=$this->avatar->getAvatarUrl($avatar['avatar_image']);
+                }else{
                     
-                    $reponse = ['id'=> $avatar['id'],
-                                'name' => $avatar['avatar_image'],
-                                'url' =>$avatar_url
-                    ];
-                    
-                    return $this->respondWithData($reponse);
+                    return $this->setStatusCode(201)
+                        ->respondWithError(['error_code'=>201,
+                                         'message'=>"avatar_id doesn't exist"
+                                          ]);
                 }
+                
                 
             }else{
                 
                 return $this->setStatusCode(201)
                         ->respondWithError(['error_code'=>201,
-                                         'message'=>"id doens't exist"
+                                         'message'=>"id doesn't exist"
                                           ]);
             }
     

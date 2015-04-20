@@ -59,6 +59,13 @@ class AvatarServices {
         return $password_image_url;            
     }
     
+    //check if avatar exist
+    public function checkAvatarExist($avatar_id){
+        
+        return $this->avatar->checkAvatarExist($avatar_id);
+        
+    }
+    
    
 
    

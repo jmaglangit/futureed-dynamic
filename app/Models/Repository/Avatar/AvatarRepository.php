@@ -20,5 +20,11 @@ class AvatarRepository implements AvatarRepositoryInterface{
     public function getAvatar($avatar_id){
     	return Avatar::where('id','=',$avatar_id)->get()->first();
     }
+    
+    public function checkAvatarExist($avatar_id){
+    	
+    	return Avatar::where('id','=',$avatar_id)->pluck('id');
+    	
+    }
 
 }
