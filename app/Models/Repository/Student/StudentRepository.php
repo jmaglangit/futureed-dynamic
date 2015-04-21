@@ -132,8 +132,23 @@ class StudentRepository implements StudentRepositoryInterface{
     
     //save student avatar
     public function saveStudentAvatar($data){
-        Student::where('id',$data['id'])
+        
+      try{
+            Student::where('id',$data['id'])
                 ->update(['avatar_id'=>$data['avatar_id']]);
+                
+            return true;     
+                
+        } catch (Exception $e){
+          
+            throw new Exception($e->getMessage());
+            
+        }
+   
+        
+       
+          
+        
     }
     
     //get foreign key of student table grade_code,avatar_id,school_code,learning_style_id
@@ -168,8 +183,27 @@ class StudentRepository implements StudentRepositoryInterface{
     public function getStudentId($user_id){
        return  Student::where('user_id','=',$user_id)->pluck('id');
     }
+    
+    
+    //change password_image_id
+    public function ChangPasswordImage($id,$password_image_id){
 
-
-
+       try{
+            Student::where('id',$id)
+                     ->update(['password_image_id'=>$password_image_id]);
+        } catch (Exception $e){
+            throw new Exception($e->getMessage());
+        }
+        
+    }
+    
+    //check if id exist
+    public function checkIdExist($id){
+      
+            return Student::where('id',$id)
+                              ->pluck('id');
+    }
+    
+    
 
 }
