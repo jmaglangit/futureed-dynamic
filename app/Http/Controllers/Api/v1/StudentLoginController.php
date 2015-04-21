@@ -39,7 +39,7 @@ class StudentLoginController extends StudentController {
 			} else{
 			
             	return $this->setStatusCode($response['status'])
-				            ->respondWithData(['error_code'=>$response['status'],
+				            ->respondWithData(['error_code' => $response['status'],
                                                'field' => 'username',
                                                'message' => 'invalid username/email']);
 			}
