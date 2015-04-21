@@ -191,7 +191,7 @@ trait apiValidator {
                     "$birth_date" => $input["$birth_date"],
                 ],
                 [
-                    "$birth_date" => 'required|date_format:Ymd|before:today'
+                    "$birth_date" => 'required|date_format:Ymd|after:today'
                 ]
             );
 
@@ -236,12 +236,133 @@ trait apiValidator {
                     ->setMessage($validator_msg["$first_name"][0])
                     ->errorMessage();
             }
+        }
+    }
 
+    //Validate last_name field
+    public function lastName($input,$last_name){
+
+        if(is_null($input["$last_name"]) || empty($input["$last_name"])){
+
+            return $this->parameterCheck($input,$last_name);
+        }
+
+        if(!is_null($input["$last_name"]) && !empty($input["$last_name"])){
+
+            $validator = Validator::make(
+                [
+                    "$last_name" => $input["$last_name"],
+                ],
+                [
+                    "$last_name" => 'required|alpha_num'
+                ]
+            );
+
+            if($validator->fails()){
+
+                $validator_msg = $validator->messages()->toArray();
+
+                return $this->setErrorCode(1005)
+                    ->setField($last_name)
+                    ->setMessage($validator_msg["$last_name"][0])
+                    ->errorMessage();
+            }
+        }
+    }
+
+    //Validate gender -- accepts any type of case
+    public function gender($input,$gender){
+
+
+        if(is_null($input["$gender"]) || empty($input["$gender"])){
+
+            return $this->parameterCheck($input,$gender);
+        }
+
+        if(!is_null($input["$gender"]) && !empty($input["$gender"])){
+
+            $validator = Validator::make(
+                [
+                    "$gender" => strtolower($input["$gender"]),
+                ],
+                [
+                    "$gender" => 'required|alpha|in:male,female'
+                ]
+            );
+
+            if($validator->fails()){
+
+                $validator_msg = $validator->messages()->toArray();
+
+                return $this->setErrorCode(1005)
+                    ->setField($gender)
+                    ->setMessage($validator_msg["$gender"][0])
+                    ->errorMessage();
+            }
+        }
+    }
+
+    //Validating ang field that is numeric. Can be used by any number field validation.
+    public function validateNumber($input,$field_name){
+
+        if(is_null($input["$field_name"]) || empty($input["$field_name"])){
+
+            return $this->parameterCheck($input,$field_name);
+        }
+
+        if(!is_null($input["$field_name"]) && !empty($input["$field_name"])){
+
+            $validator = Validator::make(
+                [
+                    "$field_name" => strtolower($input["$field_name"]),
+                ],
+                [
+                    "$field_name" => 'required|numeric'
+                ]
+            );
+
+            if($validator->fails()){
+
+                $validator_msg = $validator->messages()->toArray();
+
+                return $this->setErrorCode(1005)
+                    ->setField($field_name)
+                    ->setMessage($validator_msg["$field_name"][0])
+                    ->errorMessage();
+            }
         }
 
     }
 
-    //
+    public function validateString($input,$field_name){
+
+        if(is_null($input["$field_name"]) || empty($input["$field_name"])){
+
+            return $this->parameterCheck($input,$field_name);
+        }
+
+        if(!is_null($input["$field_name"]) && !empty($input["$field_name"])){
+
+            $validator = Validator::make(
+                [
+                    "$field_name" => strtolower($input["$field_name"]),
+                ],
+                [
+                    "$field_name" => 'required|string'
+                ]
+            );
+
+            if($validator->fails()){
+
+                $validator_msg = $validator->messages()->toArray();
+
+                return $this->setErrorCode(1005)
+                    ->setField($field_name)
+                    ->setMessage($validator_msg["$field_name"][0])
+                    ->errorMessage();
+            }
+        }
+    }
 
 
 
