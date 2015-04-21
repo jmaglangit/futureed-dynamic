@@ -119,6 +119,48 @@ class StudentPasswordController extends StudentController {
                           ->respondWithData(['id'=>$return['data']]);
         }
     }
+    
+    
+    
+    public function changeImagePassword($id){
+      
+      $input = Input::only('password_image_id','access_token');
+      
+      if(!$input['password_image_id']){
+        
+          return $this->setStatusCode(422)
+                        ->respondWithError(['error_code'=>422,
+                                            'message'=>'Empty password_image_id'
+                                              ]);
+        
+      }elseif(!$input['access_token']){
+          
+          return $this->setStatusCode(422)
+                        ->respondWithError(['error_code'=>422,
+                                            'message'=>'Empty access_token'
+                                              ]);
+      }else{
+        
+         $token = $this->token->decodeToken($input['access_token']);
+    
+         if($token['status']==true){
+            
+              $this->student->ChangPasswordImage($id,$input['password_image_id']); 
+              return $this->respondWithData(['id'=>$id,
+                                              'access_token'=>$input['access_token']
+                                            ]);
+            
+         }else{
+            
+            return $this->setStatusCode(201)
+                        ->respondWithError(['error_code'=>201,
+                                            'message'=>'access_token expired'
+                                              ]);
+          
+         }
+         
+      }
+    }
 
 
 

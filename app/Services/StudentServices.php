@@ -24,14 +24,15 @@ class StudentServices {
             UserServices $user,
             ValidatorRepository $validator,
             SchoolServices $school,
-            AvatarServices $avatar){
+            AvatarServices $avatar
+            ){
         $this->student = $student;
         $this->password = $password;
         $this->user = $user;
         $this->validator = $validator;
         $this->school = $school;
         $this->avatar = $avatar;
-    }
+        }
 
     public function getStudents(){
 
@@ -205,9 +206,10 @@ class StudentServices {
     }
     
     //save student avatar
-    public function saveStudentAvatar($input){
-        $this->student->saveStudentAvatar($input);
-        return $input['id'];
+    public function saveStudentAvatar($data){
+        
+        return $this->student->saveStudentAvatar($data);
+        
     }
     
     //validation email/username/firstname/lastname/gender
@@ -272,6 +274,19 @@ class StudentServices {
     public function getStudentId($user_id){
 
         return $this->student->getStudentId($user_id);
+    }
+    
+    //change password images
+    public function ChangPasswordImage($id,$password_image_id){
+        
+        $this->student->ChangPasswordImage($id,$password_image_id);
+        
+    }
+    
+    //check if id exist
+    public function checkIdExist($id){
+        
+        return $this->student->checkIdExist($id);
     }
     
     

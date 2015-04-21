@@ -12,6 +12,8 @@ interface AvatarRepositoryInterface {
     public function getAvatars($gender,$count);
     
     public function getAvatar($avatar_id);
+    
+    public function checkAvatarExist($avatar_id);
    
 
 
