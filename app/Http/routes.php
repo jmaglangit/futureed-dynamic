@@ -64,6 +64,14 @@ Routes::group(['prefix' => 'api/v1'], function()
                     ['except' => ['create','edit']]);
     Routes::post('/parent/student/list','Api\v1\StudentController@getStudentList');
 
+    //Principal
+    Routes::resource('client/principal','Api\v1\ClientPrincipalController',
+                    ['except' => ['create','edit']]);
+
+    //Teacher
+    Routes::resource('client/teacher','Api\v1\ClientTeacherController',
+        ['except' => ['create','edit']]);
+
     //grade
     Routes::get('/grade','Api\v1\GradeController@grade');
 
