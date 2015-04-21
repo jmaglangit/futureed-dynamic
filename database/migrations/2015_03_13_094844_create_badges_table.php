@@ -16,6 +16,7 @@ class CreateBadgesTable extends Migration {
             $table->bigIncrements('id');
             $table->bigInteger('code')->nullable();
             $table->string('name', 128)->nullable();
+            $table->enum('gender', ['Male', 'Female']);
             $table->string('badge_image', 256);
             $table->string('description', 256);
             $table->bigInteger('created_by');
