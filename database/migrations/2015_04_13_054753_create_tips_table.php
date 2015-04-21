@@ -21,6 +21,9 @@ class CreateTipsTable extends Migration {
             $table->bigInteger('module_code');
             $table->bigInteger('subject_code');
             $table->bigInteger('area_code');
+            $table->enum('link_type',['General', 'Content', 'Question']);
+            $table->bigInteger('link_id');
+            $table->bigInteger('seq_no');
             $table->tinyInteger('rating')->nullable();
             $table->tinyInteger('is_verified')->nullable();
             $table->enum('status',['Enabled', 'Disabled']);
