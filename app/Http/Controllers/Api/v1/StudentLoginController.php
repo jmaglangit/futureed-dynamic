@@ -6,7 +6,6 @@ use FutureEd\Models\Core\User;
 use Illuminate\Support\Facades\Input;
 
 use Illuminate\Http\Request;
-use Tymon\JWTAuth\Facades\JWTAuth;
 
 class StudentLoginController extends StudentController {
 

@@ -161,7 +161,7 @@ trait ApiValidatorTrait {
                     "$first_name" => $input["$first_name"],
                 ],
                 [
-                    "$first_name" => 'required|regex:/^([a-z\x20])+$/i'
+                    "$first_name" => 'required|regex:/^([a-z\x20])+$/i|max:64'
                 ]
             );
 

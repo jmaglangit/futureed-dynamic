@@ -51,13 +51,6 @@ Routes::group(['prefix' => 'api/v1'], function()
     Routes::post('/student/register','Api\v1\StudentRegistrationController@register');
     Routes::post('/student/invite','Api\v1\StudentRegistrationController@invite');
 
-    //student
-/*
-    Routes::post('/parent/student/list','Api\v1\StudentController@getStudentParent');
-    Routes::post('/student/details','Api\v1\StudentController@getStudentDetails');
-    Routes::post('/student/{id}','Api\v1\StudentController@editStudent');
-*/
-
     //Student
 	Routes::resource('student', 'Api\v1\StudentController',
 					['except' => ['create', 'edit']]);
@@ -65,7 +58,11 @@ Routes::group(['prefix' => 'api/v1'], function()
     //Client
     Routes::resource('client','Api\v1\ClientController',
                     ['except' => ['create','edit']]);
-	
+
+    //Parent
+    Routes::resource('client/parent','Api\v1\ClientParentController',
+                    ['except' => ['create','edit']]);
+    Routes::post('/parent/student/list','Api\v1\StudentController@getStudentList');
 
     //grade
     Routes::get('/grade','Api\v1\GradeController@grade');
