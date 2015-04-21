@@ -47,13 +47,15 @@ class AvatarController extends ApiController {
           
             return $this->setStatusCode(422)
                         ->respondWithError(['error_code'=>422,
-                                         'message'=>'Empty avatar_id'
+                                            'field'=>'avatar_id',
+                                            'message'=>'Empty avatar_id'
                                      ]);
         }else if( !$input['id'] ){
           
             return $this->setStatusCode(422)
                         ->respondWithError(['error_code'=>422,
-                                         'message'=>'Empty id'
+                                            'field'=>'id',
+                                            'message'=>'Empty id'
                                      ]);
         }else{
             
@@ -85,7 +87,8 @@ class AvatarController extends ApiController {
                     
                     return $this->setStatusCode(201)
                         ->respondWithError(['error_code'=>201,
-                                         'message'=>"avatar_id doesn't exist"
+                                            'field'=>'avatar_id',
+                                            'message'=>"avatar_id doesn't exist"
                                           ]);
                 }
                 
@@ -94,7 +97,8 @@ class AvatarController extends ApiController {
                 
                 return $this->setStatusCode(201)
                         ->respondWithError(['error_code'=>201,
-                                         'message'=>"id doesn't exist"
+                                            'field'=>'id',
+                                            'message'=>"id doesn't exist"
                                           ]);
             }
     
