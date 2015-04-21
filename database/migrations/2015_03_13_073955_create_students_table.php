@@ -18,7 +18,7 @@ class CreateStudentsTable extends Migration {
             $table->string('first_name', 64);
             $table->string('last_name', 64);
             $table->enum('gender', ['Male', 'Female']);
-            $table->datetime('birth_date');
+            $table->date('birth_date');
             $table->string('country', 128)->nullable();
             $table->string('state', 128)->nullable();
             $table->string('city', 128)->nullable();
