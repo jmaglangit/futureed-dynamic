@@ -1,7 +1,5 @@
 <?php namespace FutureEd\Http\Controllers\Api\Traits;
 
-use FutureEd\Http\Controllers\Api\v1\Traits\ErrorMessageTrait;
-
 
 trait ApiValidatorTrait {
 

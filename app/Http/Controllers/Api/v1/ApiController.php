@@ -17,8 +17,8 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Matching\ValidatorInterface;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
-use FutureEd\Http\Controllers\Api\v1\Traits\ErrorMessageTrait;
-use FutureEd\Http\Controllers\Api\v1\Traits\ApiValidatorTrait;
+use FutureEd\Http\Controllers\Api\Traits\ErrorMessageTrait;
+use FutureEd\Http\Controllers\Api\Traits\ApiValidatorTrait;
 
 
 
