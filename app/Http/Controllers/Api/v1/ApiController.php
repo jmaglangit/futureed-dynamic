@@ -17,10 +17,16 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Matching\ValidatorInterface;
 use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
+use FutureEd\Http\Controllers\Api\Traits\ErrorMessageTrait;
+use FutureEd\Http\Controllers\Api\Traits\ApiValidatorTrait;
+
+
+
 
 class ApiController extends Controller {
 
-    private $status_code = 200;
+    private $status_code = Response::HTTP_ACCEPTED;
+    private $header = [];
 
     public function __construct(
             UserServices $user,
@@ -68,10 +74,20 @@ class ApiController extends Controller {
         return $this;
     }
 
+    public function getHeader(){
+        return $this->header;
+    }
+    public function setHeader($header){
+
+        $this->header = $header;
+        return $this;
+
+    }
+
 
 
     public function respondSuccess($message = 'Success!'){
-        return $this->setStatusCode(Response::HTTP_ACCEPTED)->respondWithData($message);
+        return $this->setStatusCode($this->status_code)->respondWithData($message);
     
     }
 
@@ -97,9 +113,9 @@ class ApiController extends Controller {
 
 
 
-    public function respond($data, $headers = [] ){
-      
-        return Response()->json($data,$this->getStatusCode(),$headers);
+    public function respond($data ){
+
+        return Response()->json($data,$this->getStatusCode(),$this->getHeader());
 
     }
 
@@ -113,5 +129,8 @@ class ApiController extends Controller {
         );
 
     }
+
+
+
     
 }

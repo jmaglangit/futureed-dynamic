@@ -63,6 +63,18 @@ class TokenController extends ApiController {
 
         return $url;
 
+    }
+
+    public function input(){
+        $input = Input::only('name');
+
+        if(is_null($input['name'])){
+            return 'Missing valid API paremeter';
+        } elseif(empty($input['name'])){
+            return 'Input valid name';
+        }
+
+
 
     }
 
