@@ -1,7 +1,7 @@
 @extends('student.app')
 
 @section('content')
-  <div class="container login">
+  <div class="container login" ng-cloak>
     @include('student.login.reset-confirm-password')
 
     <div class="col-md-8 col-md-offset-2" ng-init="confirm=true" ng-if="!confirm">

@@ -5,7 +5,7 @@
 @stop
 
 @section('content')
-<div class="container login follow-up-reg" ng-init="getUserDetails()">
+<div class="container login follow-up-reg" ng-init="getUserDetails()" ng-cloak>
     <div class="form-style form-wide" ng-if="!done"> 
     	<form class="form-horizontal" name="followUpRegistrationForm">
             <div class="form-header">

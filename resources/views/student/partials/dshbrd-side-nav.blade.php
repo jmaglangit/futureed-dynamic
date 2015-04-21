@@ -1,7 +1,6 @@
-<ul>
-	<li class="active"><a href="{!! route('student.dashboard.my_profile') !!}">My Profile</a></li>
-	<li><a href="{!! route('student.dashboard.my_profile') !!}">Student Rewards</a></li>
-	<li><a href="{!! route('student.dashboard.edit_profile') !!}">Edit Profile</a></li>
-	<li><a href="{!! route('student.dashboard.my_profile') !!}">Change Avatar</a></li>
-	<li><a href="{!! route('student.dashboard.my_profile') !!}">Change Password</a></li>
+<ul ng-init="setActive('{!! $active !!}')">
+	<li ng-class="{ 'active' : active_index }"><a href="{!! route('student.profile.index') !!}">My Profile</a></li>
+	<li ng-class="{ 'active' : active_rewards }"><a href="{!! route('student.profile.rewards') !!}">Student Rewards</a></li>
+	<li ng-class="{ 'active' : active_avatar }"><a href="{!! route('student.profile.change_avatar') !!}">Change Avatar</a></li>
+	<li ng-class="{ 'active' : active_password }"><a href="{!! route('student.profile.change_password') !!}">Change Password</a></li>
 </ul>

@@ -5,7 +5,7 @@
 @stop
 
 @section('content')
-<div class="container dshbrd-con" ng-init="getUserDetails()">
+<div class="container dshbrd-con" ng-init="getUserDetails()" ng-cloak>
 	<div class="wrapr"> 
 		<div class="side-nav">
 			@include('student.partials.dshbrd-side-nav')
@@ -30,7 +30,9 @@
 							<a href="" class="lnk">See all points</a>
 						</div>
 					</div>
-					<h1>My <span>Profile</span></h1>
+					<h2>
+							<span class="thin">My</span> Profile
+					</h2>
 					<p>
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ut erat a erat vehicula pulvinar.
 						Vivamus vitae justo consectetur, molestie justo ut, suscipit nibh. Pellentesque accumsan elit.

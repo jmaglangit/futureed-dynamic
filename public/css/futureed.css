@@ -463,6 +463,16 @@ li.active .rnd-identifier{
 	max-width: 330px;
 	line-height: 1.4em;
 }
+.detcon h2{
+	font-size: 36px;
+ 	color:#fff;
+}
+.detcon p{
+
+}
+.detcon hr{
+	width: 90%;	
+}
 .rwrdscon{
 	float: right;
 	padding: 0 40px;
@@ -605,4 +615,12 @@ footer{font:normal 12px/30px arial; }
 
 .title {
 	margin-bottom: 10px;
+}
+
+.required {
+	color: red;
+}
+
+.required-field{
+	border: 3px solid #f7b9aa;
 }

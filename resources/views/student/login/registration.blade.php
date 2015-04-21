@@ -1,7 +1,7 @@
 @extends('student.app')
 
 @section('content')
-<div class="container login">
+<div class="container login" ng-cloak>
     <div class="form-style register_student form-wide" ng-init="success=false" ng-if="!success"> 
         <form class="form-horizontal simple-form" name="form_registration" id="form_registation">
             <div class="form-header">
@@ -15,6 +15,7 @@
                             <h4>For Student below 13 years old</h4>
                             <p>Parents should be the one to register, please <a href="#">Click here</a> to register.</p>
                         </div>
+                        <div style="margin: 7px 0px;">(<span class="required">*</span> ) Indicates a required field.</div>
                     </div>
                 </div>
             </div>
@@ -27,25 +28,25 @@
                 <fieldset>
                     <legend>Personal Information</legend>
                     <div class="form-group">
-                        <label for="" class="col-md-2 control-label">First Name</label>
+                        <label for="" class="col-md-2 control-label">First Name<span class="required">*</span></label>
                         <div class="col-md-4">
                             <input type="text" class="form-control" ng-model="reg.first_name" placeholder="First Name" required />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="" class="col-md-2 control-label">Last Name</label>
+                        <label for="" class="col-md-2 control-label">Last Name<span class="required">*</span></label>
                         <div class="col-md-4">
                             <input type="text" class="form-control" ng-model="reg.last_name" placeholder="Last Name" required />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="" class="col-md-2 control-label">Gender</label>
+                        <label for="" class="col-md-2 control-label">Gender<span class="required">*</span></label>
                         <div class="col-md-4">
                             {!! Form::select('', array('' => '-- Select Gender --', 'male' => 'Male', 'female' => 'Female'), 'male',array('class' => 'form-control', 'ng-model' => 'reg.gender')); !!}
                         </div>
                     </div>  
                     <div class="form-group">
-                        <label for="" class="col-md-2 control-label">Birthday</label>
+                        <label for="" class="col-md-2 control-label">Birthday<span class="required">*</span></label>
                         <div class="col-md-4">
                             <div class="dropdown">
                               <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
@@ -61,19 +62,19 @@
                         </div>
                     </div> 
                     <div class="form-group">
-                        <label for="" class="col-md-2 control-label">City</label>
+                        <label for="" class="col-md-2 control-label">City<span class="required">*</span></label>
                         <div class="col-md-4">
                             <input type="text" class="form-control" ng-model="reg.city" placeholder="City" required />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="" class="col-md-2 control-label">State</label>
+                        <label for="" class="col-md-2 control-label">State<span class="required">*</span></label>
                         <div class="col-md-4">
                             <input type="text" class="form-control" ng-model="reg.state" placeholder="State" required />
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="" class="col-md-2 control-label">Country</label>
+                        <label for="" class="col-md-2 control-label">Country<span class="required">*</span></label>
                         <div class="col-md-4">
                             <select class="form-control" ng-model="reg.country">
                                 <option value="">-- Select Country --</option>
@@ -87,13 +88,13 @@
                 <fieldset>
                     <legend>User Credentials</legend>
                     <div class="form-group">
-                        <label for="" class="col-md-2 control-label">Email</label>
+                        <label for="" class="col-md-2 control-label">Email<span class="required">*</span></label>
                         <div class="col-md-4">
                             <input type="text" class="form-control" ng-model="reg.email" placeholder="Email Address" required />
                         </div>
                     </div>  
                     <div class="form-group">
-                        <label for="" class="col-md-2 control-label">Username</label>
+                        <label for="" class="col-md-2 control-label">Username<span class="required">*</span></label>
                         <div class="col-md-4">
                             <input type="text" class="form-control" ng-model="reg.username" placeholder="Username" required />
                         </div>
@@ -101,19 +102,19 @@
                 </fieldset>
                 <fieldset>
                     <legend>School Information</legend>
-                    <div class="form-group" id="form_schoolname">
-                        <label for="" class="col-md-2 control-label">School Name</label>
+                    <div class="form-group" ng-if="invited">
+                        <label for="" class="col-md-2 control-label">School Name<span class="required">*</span></label>
                         <div class="col-md-4">
                             <input type="text" class="form-control" ng-model="reg.school_code" disabled="disabled" value="N/A" required />
                         </div>
                     </div>
                     <div class="form-group" ng-init="getGradeLevel()">
-                        <label for="" class="col-md-2 control-label">School level</label>
+                        <label for="" class="col-md-2 control-label">School level<span class="required">*</span></label>
 
                         <div class="col-md-4 nullable">
                             <select class="form-control" ng-model="reg.grade_code">
                                 <option value="">-- Select Level --</option>
-                                <option ng-repeat="grade in grades" value="{! grade.id !}" label="{! grade.name !}"></option>
+                                <option ng-repeat="grade in grades" value="{! grade.id !}">{! grade.name !}</option>
                             </select>
                         </div><br><br>
                     </div>    

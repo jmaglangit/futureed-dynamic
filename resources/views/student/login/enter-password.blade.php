@@ -12,7 +12,6 @@
                  <img ng-src="{! item.url !}" alt="{! item.name !}">
                  <input type="hidden" id="image_id" name="image_id" value="{! item.id !}">
               </li>
-              <p><button type="button" class="btn btn-red" ng-click="validatePassword()">Submit</button></p>
             </ul>
           </div>
           <input type="hidden" id="response" name="response" >
