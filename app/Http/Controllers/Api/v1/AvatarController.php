@@ -43,19 +43,32 @@ class AvatarController extends ApiController {
         
         $input = Input::only('avatar_id','id');
         
-         if( !$input['avatar_id'] ){
+         if(!$input['avatar_id'] && !$input['id']){
+           
+            return $this->setStatusCode(422)
+                        ->respondWithData(array(['error_code'=>422,
+                                           'field'=>'avatar_id',
+                                           'message'=>'missing required field avatar_id'
+                                                       
+                                         ],
+                                         ['error_code'=>422,
+                                           'field'=>'id',
+                                           'message'=>'missing required field id'
+                                         ]));
+                        
+         }elseif( !$input['avatar_id'] ){
           
             return $this->setStatusCode(422)
-                        ->respondWithError(['error_code'=>422,
+                        ->respondWithData(['error_code'=>422,
                                             'field'=>'avatar_id',
-                                            'message'=>'Empty avatar_id'
+                                            'message'=>'missing required field avatar_id'
                                      ]);
-        }else if( !$input['id'] ){
+        }elseif( !$input['id'] ){
           
             return $this->setStatusCode(422)
-                        ->respondWithError(['error_code'=>422,
+                        ->respondWithData(['error_code'=>422,
                                             'field'=>'id',
-                                            'message'=>'Empty id'
+                                            'message'=>'missing required field id'
                                      ]);
         }else{
             
@@ -86,7 +99,7 @@ class AvatarController extends ApiController {
                 }else{
                     
                     return $this->setStatusCode(201)
-                        ->respondWithError(['error_code'=>201,
+                        ->respondWithData(['error_code'=>201,
                                             'field'=>'avatar_id',
                                             'message'=>"avatar_id doesn't exist"
                                           ]);
@@ -96,8 +109,8 @@ class AvatarController extends ApiController {
             }else{
                 
                 return $this->setStatusCode(201)
-                        ->respondWithError(['error_code'=>201,
-                                            'field'=>'id',
+                        ->respondWithData(['error_code'=>201,
+                                            'field'=>'avatar_id',
                                             'message'=>"id doesn't exist"
                                           ]);
             }
