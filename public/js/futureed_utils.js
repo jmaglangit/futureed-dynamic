@@ -15,10 +15,12 @@ function shuffle(array) {
 }
 
 function highlight_empty(form_id) {
+    var has_empty = false;
     $("#"+form_id +" input").each(function() {
       var value = $(this).val();
       
       if(value == "") {
+        has_empty = true;
         $(this).addClass("required-field");
       } else {
         $(this).removeClass("required-field");
@@ -29,9 +31,12 @@ function highlight_empty(form_id) {
       var value = $(this).val();
 
       if(value == "") {
+        has_empty = true;
         $(this).addClass("required-field");
       } else {
         $(this).removeClass("required-field");
       }
     });
+
+    return has_empty;
 }

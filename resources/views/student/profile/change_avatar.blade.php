@@ -12,24 +12,37 @@
 			</div>
 			<div class="content">
 				<div class="hdr">
-					<div class="avtrcon">
-						{!! Html::image('images/password/img-pass-03.jpg') !!}
-					</div>
-					<div class="detcon">
-						<h2>
-							<span ng-if="!password_validated" class="thin">Change</span> Avatar</h2>
-						<hr />
-						<p>
-							Select your new avatar
-						</p>
-					</div>
+				<div class="avtrcon">
+					<img ng-src="{! user.avatar !}">
 				</div>
-				<div class="form-content col-md-12">
-					<div ng-if="password_validated && password_selected && password_confirmed">
-						<p>Your Picture Password has been saved.</p>
-						<p>You may now use this picture password in your suceeding login.</p>
+				<div class="detcon">
+					<div class="rwrdscon">
+						<h3>
+							<div class="rbn-left"></div>
+							<div class="rbn-right"></div>
+							Quick <span>Rewards</span>
+						</h3>
+						<div class="points">
+							<span class="star">☆</span>
+							<div class="pcon">
+								<span>20</span> points
+							</div>
+							<a href="" class="lnk">See all points</a>
+						</div>
 					</div>
-					<div class="col-md-8 col-md-offset-2" ng-if="!password_confirmed">
+					<h2>
+							<span class="thin">Change</span> Avatar</h2>
+						<hr />
+					<p>
+						Select your new avatar.
+					</p>
+				</div>
+			</div>
+				<div class="form-content">
+					<div ng-if="has_avatar">
+						You have successfully changed your avatar.
+					</div>
+					<div class="col-md-10 col-md-offset-1" ng-if="!has_avatar">
 				      <form id="reset_password_form">
 				        <div class="form-select-password">
 				          <div id="title" class="title"></div>
@@ -37,22 +50,14 @@
 				            <p>{! error !}</p>
 				          </div>
 				          <div class="form_content">
-				            <ul class="form_password list-unstyled list-inline">
-				              <li class="item" ng-repeat="item in image_pass" ng-click="highlight($event)">
-				                 <img ng-src="{! item.url !}" alt="{! item.name !}">
-				                 <input type="hidden" id="image_id" name="image_id" value="{! item.id !}">
+				            <ul class="form_password list-unstyled list-inline" ng-init="getAvatarImages('true')">
+				              <li class="item avtrcon" style="width:20%" ng-repeat="avatar in avatars" ng-click="highlightAvatar($event)">
+				                 <img ng-src="{! avatar.url !}" alt="{! avatar.name !}">
+				                 <input type="hidden" id="avatar_id" name="avatar_id" value="{! avatar.id !}">
 				              </li>
 				            </ul>
-							<button ng-if="!password_validated" type="button" class="btn btn-red" ng-click="validateCurrentPassword()">Proceed</button>
-							<button ng-if="password_validated && !password_selected" type="button" class="btn btn-red" ng-click="selectNewPassword()">Proceed</button>
-							<div class="row" ng-if="password_validated && password_selected && !password_confirmed">
-					          	<div class="col-sm-6"><button type="button" ng-click="undoNewPassword()" class="btn btn-red">Previous</button></div>
-					          	<div class="col-sm-6"><button type="button" class="btn btn-red" ng-click="confirmNewPassword()">Change</button></div>
-					        </div>
-							</div>
-
-				          <input type="hidden" name="selected_image_id" id="selected_image_id" />
-				          <input type="hidden" name="image_pass" />
+						  </div>
+				          <button type="button" class="btn btn-red" ng-click="selectAvatar()">Proceed</button>
 				        </div>
 				      </form>
 				    </div>

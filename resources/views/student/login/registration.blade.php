@@ -51,7 +51,8 @@
                             <div class="dropdown">
                               <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
                                 <div class="input-group">
-                                    <input disabled="disabled" type="text" class="form-control" name="birth_date" value="{! reg.birth_date | date:'yyyy-MM-dd' !}">
+                                    <input disabled="disabled" type="text" class="form-control" value="{! reg.birth_date | date:'yyyy-MM-dd' !}">
+                                    <input type="hidden" name="birth_date" value="{! reg.birth_date | date:'yyyyMMdd' !}">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                                 </div>
                               </a>
@@ -90,13 +91,17 @@
                     <div class="form-group">
                         <label for="" class="col-md-2 control-label">Email<span class="required">*</span></label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" ng-model="reg.email" placeholder="Email Address" required />
+                            <input type="text" class="form-control" ng-model="reg.email" name="email" placeholder="Email Address"
+                                ng-model-options="{debounce : {'default' : 1000}}" ng-change="checkAvailability(reg.email, 'email')" required />
+                            <span ng-if="e_error" class="error-msg-con"> Email Address is invalid or already exist</span>
                         </div>
                     </div>  
                     <div class="form-group">
                         <label for="" class="col-md-2 control-label">Username<span class="required">*</span></label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" ng-model="reg.username" placeholder="Username" required />
+                            <input type="text" class="form-control" ng-model="reg.username" name="username" placeholder="Username" 
+                            ng-model-options="{debounce : {'default' : 1000}}" ng-change="checkAvailability(reg.username, 'username')" required />
+                            <span ng-if="u_error" class="error-msg-con"> Username is invalid or already exist</span>
                         </div>
                     </div> 
                 </fieldset>

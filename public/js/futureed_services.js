@@ -90,6 +90,22 @@ var services = angular.module('futureed.services', ['ngResource']);
 			});
 		}
 
+		futureedAPI.validateUsername = function(username) {
+			return $http({
+				method 	: 'POST'
+				, data 	: {username : username, user_type : "Student"}
+				, url 	: futureedAPIUrl + 'user/username'
+			});
+		}
+
+		futureedAPI.validateEmail = function(email) {
+			return $http({
+				method	: 'POST'
+				, data 	: {email : email, user_type : "Student"}
+				, url	: futureedAPIUrl + 'user/email'
+			});
+		}
+
 		futureedAPI.validateRegistration = function(registration) {
 			return $http({
 				method	: 'POST'
@@ -119,9 +135,17 @@ var services = angular.module('futureed.services', ['ngResource']);
 		*/
 		futureedAPI.studentDetails = function(id, access_token) {
 			return $http({
-				method 	: 'POST'
-				, data 	: {id : id, access_token : access_token}
-				, url	: futureedAPIUrl + 'student/details'
+				method 	: 'GET'
+				, data 	: {access_token : access_token}
+				, url	: futureedAPIUrl + 'student/' + id
+			});
+		}
+
+		futureedAPI.changePassword = function(id, password_image_id, access_token) {
+			return $http({
+				method	: 'POST'
+				, data 	: {password_image_id : password_image_id, access_token : access_token}
+				, url 	: futureedAPIUrl + 'student/password/' + id
 			});
 		}
 
