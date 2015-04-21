@@ -1,4 +1,4 @@
-<?php namespace FutureEd\Http\Controllers\Api\v1\Traits;
+<?php namespace FutureEd\Http\Controllers\Api\Traits;
 
 
 trait ErrorMessageTrait {
