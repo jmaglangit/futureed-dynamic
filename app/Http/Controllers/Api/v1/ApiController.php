@@ -191,7 +191,7 @@ trait apiValidator {
                     "$birth_date" => $input["$birth_date"],
                 ],
                 [
-                    "$birth_date" => 'required|date_format:Ymd|after:today'
+                    "$birth_date" => 'required|date_format:Ymd|before:today'
                 ]
             );
 
