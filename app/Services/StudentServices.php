@@ -9,6 +9,7 @@
 namespace FutureEd\Services;
 
 
+use Carbon\Carbon;
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use FutureEd\Models\Repository\PasswordImage\PasswordImageRepositoryInterface;
 use FutureEd\Models\Repository\User\UserRepositoryInterface;
@@ -189,6 +190,17 @@ class StudentServices {
     public function age($birth_date){
          $interval = date_diff(date_create(),date_create($birth_date));
          return $interval->format("%Y");
+    }
+
+    //get student birth_date
+    public function getAge($id){
+
+        $student = $this->student->getStudent($id);
+
+        $age = Carbon::now();
+
+        return $age->diffInYears(Carbon::parse($student['birth_date']));
+
     }
     
     //udpate student_image_password
