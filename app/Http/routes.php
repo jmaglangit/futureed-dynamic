@@ -21,6 +21,7 @@ Routes::group(['prefix' => 'api/v1'], function()
     //token routes to be remove after test
     Routes::get('/code','Api\v1\TokenController@getCode');
     Routes::get('/sendmail','Api\v1\TokenController@sendMail');
+    Routes::post('/input','Api\v1\TokenController@input');
 
 
     Routes::get('/','Api\v1\ApiController@index');
@@ -57,8 +58,13 @@ Routes::group(['prefix' => 'api/v1'], function()
     Routes::post('/student/{id}','Api\v1\StudentController@editStudent');
 */
 
+    //Student
 	Routes::resource('student', 'Api\v1\StudentController',
 					['except' => ['create', 'edit']]);
+
+    //Client
+    Routes::resource('client','Api\v1\ClientController',
+                    ['except' => ['create','edit']]);
 	
 
     //grade
