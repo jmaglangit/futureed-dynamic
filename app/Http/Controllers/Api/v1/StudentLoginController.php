@@ -19,8 +19,9 @@ class StudentLoginController extends StudentController {
 		if(!$input['username']){
 		
 			return $this->setStatusCode(422)
-				->respondWithError(['error_code'=>422,
-				'message'=>'Parameter validation failed'
+        				->respondWithError(['error_code' => 422,
+                                            'field' => 'username',
+        				                    'message' => 'missing required field username'
 			]);
 		
 		} else {
@@ -31,14 +32,18 @@ class StudentLoginController extends StudentController {
 			$student_id = $this->student->getStudentId($response['data']);
 			
 			if($response['status'] == 200) {
-				return $this->setStatusCode($response['status'])
-				->respondWithData(['id'=> $student_id]);
+			
+            	return $this->setStatusCode($response['status'])
+				->respondWithData(['id' => $student_id]);
+                
 			} else{
-				return $this->setStatusCode($response['status'])
-				->respondWithData(['error_code'=>$response['status'],'message'=>$response['data']]);
+			
+            	return $this->setStatusCode($response['status'])
+				            ->respondWithData(['error_code'=>$response['status'],
+                                               'field' => 'username',
+                                               'message' => 'invalid username/email']);
 			}
 			
-			// return $this->setStatusCode($response['status'])->respondWithData($response['data']);
 		
 		}
     }
