@@ -1,5 +1,6 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
+use FutureEd\Http\Controllers\Api\Traits\ApiValidatorTrait;
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
@@ -9,6 +10,8 @@ use League\Flysystem\Exception;
 
 class StudentRegistrationController extends StudentController {
 
+
+    Use ApiValidatorTrait;
 
 
     /*
@@ -34,14 +37,35 @@ class StudentRegistrationController extends StudentController {
             'first_name',
             'last_name');
 
-        //validate
-        if(!$user['username'] || !$user['email'] || !$user['first_name'] || !$user['last_name'] || !$student['gender']|| !$student['birth_date']
-            || !$student['school_code'] || !$student['grade_code'] || !$student['country'] || !$student['state'] || !$student['city']){
 
-            return $this->setStatusCode(200)->respondWithError([
-                'error_code' => 204,
-                'message' => 'Incomplete parameter requirements'
-            ]);
+        //validate
+//        if(!$user['username'] || !$user['email'] || !$user['first_name'] || !$user['last_name'] || !$student['gender']|| !$student['birth_date']
+//            || !$student['school_code'] || !$student['grade_code'] || !$student['country'] || !$student['state'] || !$student['city']){
+//
+//            return $this->setStatusCode(200)->respondWithError([
+//                'error_code' => 204,
+//                'message' => 'Incomplete parameter requirements'
+//            ]);
+//        }
+
+        //Student fields validations
+        $this->addMessageBag($this->firstName($student,'first_name'));
+        $this->addMessageBag($this->lastName($student,'last_name'));
+        $this->addMessageBag($this->gender($student,'gender'));
+        $this->addMessageBag($this->birthDate($student,'birth_date'));
+        $this->addMessageBag($this->validateNumber($student,'school_code'));
+        $this->addMessageBag($this->validateString($student,'country'));
+        $this->addMessageBag($this->validateString($student,'state'));
+        $this->addMessageBag($this->validateString($student,'city'));
+
+        //User fields validations
+        $this->addMessageBag($this->email($user,'email'));
+        $this->addMessageBag($this->username($user, 'username'));
+
+        $msg_bag = $this->getMessageBag();
+        if(!empty($msg_bag)){
+
+            return $this->respondWithError($this->getMessageBag());
         }
 
 
