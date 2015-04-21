@@ -1,5 +1,6 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
+use FutureEd\Http\Controllers\Api\Traits\ApiValidatorTrait;
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 use FutureEd\Services;
@@ -8,41 +9,21 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
 class UserPasswordController extends UserController {
+  
+  
+    Use ApiValidatorTrait;
 
     public function passwordForgot(){
         $input = Input::only('username','user_type');
-
-        if(!$input['username'] && !$input['user_type']){
-
-           return $this->setStatusCode(422)
-                       ->respondWithError(array(['error_code' => 422,
-                                                  'field' => 'username',   
-                                                  'message' => 'missing required field username'
-                                                 ],
-                                                 ['error_code' => 422,
-                                                  'field' => 'user_type',   
-                                                  'message' => 'missing required field user_type'
-                                                ]));
-                       
-        }elseif(!$input['username']){
-            
-            return $this->setStatusCode(422)
-                        ->respondWithError(['error_code' => 422,
-                                            'field' => 'username',
-                                            'message' => 'missing required field username'
-                                          ]);
-                        
         
-        }elseif(!$input['user_type']){
-            
-            return $this->setStatusCode(422)
-                        ->respondWithError(['error_code' => 422,
-                                            'field' => 'user_type',
-                                            'message' => 'missing required field user_type'
-                                          ]);
-            
-            
-        } else {
+        $this->addMessageBag($this->username($input,'username'));
+        $this->addMessageBag($this->validateString($input,'user_type'));
+       
+       if($this->getMessageBag()){
+         
+         return $this->respondWithError($this->getMessageBag());
+          
+       }else {
 
             $return= $this->user->checkLoginName($input['username'],$input['user_type']);
 
@@ -58,7 +39,7 @@ class UserPasswordController extends UserController {
             }
             
 
-           if(array_key_exists("status",$return)){
+           if( array_key_exists("status",$return)){
             
                 $userDetails = $this->user->getUserDetails($return['user_id']);
                 
