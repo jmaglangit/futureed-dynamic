@@ -1,5 +1,6 @@
 <?php namespace FutureEd\Http\Controllers\Api\Traits;
 
+use Illuminate\Support\Facades\Validator;
 
 trait ApiValidatorTrait {
 
