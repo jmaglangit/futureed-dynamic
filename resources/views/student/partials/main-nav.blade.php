@@ -26,9 +26,9 @@
             <ul class="nav navbar-nav navbar-right">
               <!-- <li><a href="#">Link</a></li> -->
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Welcome, new_user <span class="caret"></span></a>
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Welcome, {! user.first_name !} <span class="caret"></span></a>
                 <ul class="dropdown-menu" role="menu">
-                  <li><a href="#">Profile</a></li>
+                  <li><a href="{!! route('student.profile.index') !!}">Profile</a></li>
                   <li><a href="#">Settings</a></li>
                   <li class="divider"></li>
                   <li><a href="{!! route('student.logout') !!}">Logout</a></li>

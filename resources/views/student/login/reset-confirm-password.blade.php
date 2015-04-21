@@ -1,4 +1,4 @@
-<div class="col-md-8 col-md-offset-2" ng-if="confirm">
+<div class="col-md-8 col-md-offset-2" ng-if="password_selected">
   <form id="reset_password_form" action="@if($new){!!route('student.login.set-password-success')!!}@else{!!route('student.login.reset-password-success')!!}@endif" name="reset_password_form" method="POST">
     <div class="form-style form-select-password">
       <div id="title" class="title">Select a picture to confirm your new password</div>

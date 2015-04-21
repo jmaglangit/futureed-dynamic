@@ -1,7 +1,7 @@
 @extends('student.app')
 
 @section('content')
-  <div class="container login">
+  <div class="container login" ng-cloak>
     <div class="col-md-6 col-md-offset-3">
       <div class="form-style form-select-password clearfix">
         <div class="title">Success!</div>

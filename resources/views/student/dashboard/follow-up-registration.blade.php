@@ -5,7 +5,7 @@
 @stop
 
 @section('content')
-<div class="container login follow-up-reg" ng-init="getUserDetails()">
+<div class="container login follow-up-reg" ng-init="getUserDetails()" ng-cloak>
     <div class="form-style form-wide" ng-if="!done"> 
     	<form class="form-horizontal" name="followUpRegistrationForm">
             <div class="form-header">
@@ -35,7 +35,7 @@
                     <div class="avatar-selection">
                         <div class="col-md-8 col-md-offset-2" ng-init="getAvatarImages()">
                             <ul class="avatar_list list-unstyled list-inline" >
-                                <li ng-repeat="avatar in avatars" ng-click="highlight($event)">
+                                <li ng-repeat="avatar in avatars" ng-click="highlightAvatar($event)">
                                     <img ng-src="{! avatar.url !}" alt="{! avatar.name !}" class="img-responsive">
                                     <input type="hidden" id="avatar_id" name="avatar_id" value="{! avatar.id !}">
                                 </li>
