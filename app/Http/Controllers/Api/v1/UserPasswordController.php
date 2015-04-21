@@ -12,51 +12,91 @@ class UserPasswordController extends UserController {
     public function passwordForgot(){
         $input = Input::only('username','user_type');
 
-        if(!$input['username'] || !$input['user_type']){
+        if(!$input['username'] && !$input['user_type']){
 
            return $this->setStatusCode(422)
-                            ->respondWithError(['error_code'=>422,
-                                             'message'=>'Parameter validation failed'
-                                              ]);
+                       ->respondWithError(array(['error_code' => 422,
+                                                  'field' => 'username',   
+                                                  'message' => 'missing required field username'
+                                                 ],
+                                                 ['error_code' => 422,
+                                                  'field' => 'user_type',   
+                                                  'message' => 'missing required field user_type'
+                                                ]));
+                       
+        }elseif(!$input['username']){
+            
+            return $this->setStatusCode(422)
+                        ->respondWithError(['error_code' => 422,
+                                            'field' => 'username',
+                                            'message' => 'missing required field username'
+                                          ]);
+                        
+        
+        }elseif(!$input['user_type']){
+            
+            return $this->setStatusCode(422)
+                        ->respondWithError(['error_code' => 422,
+                                            'field' => 'user_type',
+                                            'message' => 'missing required field user_type'
+                                          ]);
+            
+            
         } else {
 
             $return= $this->user->checkLoginName($input['username'],$input['user_type']);
 
             if($this->valid->email($input['username'])){
+               
                 $return = $this->user->checkEmail($input['username'],$input['user_type']);
 
 
             }elseif($this->valid->username($input['username'])){
+               
                 $return = $this->user->checkUserName($input['username'],$input['user_type']);
 
             }
+            
+
+           if(array_key_exists("status",$return)){
+            
+                $userDetails = $this->user->getUserDetails($return['user_id']);
+                
+                $isActivated = $this->user->isActivated($return['user_id']);
+                
+                if($isActivated==1){
+                    
+                    
+                    // get code 
+                    $code=$this->code->getCodeExpiry();
+
+                     //update reset_code and expiry to db
+                    $this->user->setResetCode($return['user_id'],$code);
 
 
-            //TODO: Refactor codes
+                     //sent email for reset password
+                    $this->mail->sendStudentMailResetPassword($userDetails,$code['confirmation_code']);
 
-            $user_id=$return['user_id'];
-
-//            if($return['status'] == 200){
-
-                $return = $this->user->getUserDetails($return['user_id']);
-
-                // get code 
-                $code=$this->code->getCodeExpiry();
-
-                 //update reset_code and expiry to db
-                $this->user->setResetCode($user_id,$code);
-
-
-                 //sent email for reset password
-                $this->mail->sendStudentMailResetPassword($return,$code['confirmation_code']);
-
-                return $this->respondWithData($return);
-//            }
-//            else{
-
-//                return $this->setStatusCode($return['status'])
-//                            ->respondWithData(['error_code'=>$return['status'],'message'=>$return['data']]);
-//            }
+                    return $this->respondWithData($userDetails);
+                    
+                }else{
+                    
+                    return $this->setStatusCode(201)
+                                ->respondWithData(['error_code' => 201,
+                                                    'field' => 'username',
+                                                    'message' => 'invalid username/email'
+                                                 ]);
+                         
+                }
+                
+          }else{
+            
+             return $this->setStatusCode(201)
+                         ->respondWithData(['error_code' => 201,
+                                            'field' => 'username',
+                                            'message'=>$return['message']
+                                          ]);
+          }
         }
 
     }

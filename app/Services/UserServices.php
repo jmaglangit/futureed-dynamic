@@ -346,6 +346,14 @@ class UserServices {
         
         $this->users->updateInactiveLock($id);
     }
+    
+    
+    //check if account activated
+    
+    public function isActivated($id){
+        
+        return $this->users->isActivated($id);
+    }
 
 
     
