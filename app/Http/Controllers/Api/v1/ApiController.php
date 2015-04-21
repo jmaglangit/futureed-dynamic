@@ -81,9 +81,9 @@ trait apiValidator {
 
     public function addMessageBag($message){
 
-        if(empty($this->messageBag)){
+        if(empty($this->messageBag) && !empty($message)){
             $this->setMessageBag([$message]);
-        } elseif(!empty($message)) {
+        } elseif(!empty($message) ) {
             $this->messageBag = array_merge(
                 $this->getMessageBag(),
                 [$message]
@@ -96,7 +96,7 @@ trait apiValidator {
 
         if(is_null($input["$paramName"])){
 
-            $return  = $this->setErrorCode(1001)
+            return $this->setErrorCode(1001)
                         ->setField($paramName)
                         ->setMessage("Required field not found.")
                         ->errorMessage();
@@ -104,21 +104,28 @@ trait apiValidator {
 
         } elseif(empty($input["$paramName"])){
 
-            $return = $this->setErrorCode(1002)
+            return  $this->setErrorCode(1002)
                         ->setField($paramName)
                         ->setMessage("Empty required field.")
                         ->errorMessage();
         }
-        return $return;
+
     }
 
     //Check email validations.
     public function email($input, $email){
 
+        if(is_null($input["$email"]) || empty($input["$email"])){
+
+            return $this->parameterCheck($input,$email);
+
+        }
+
         if(!is_null($input["$email"]) && !empty($input["$email"])){
+
             $validator = Validator::make(
                 [
-                    "$email" => $email,
+                    "$email" => $input["$email"],
                 ],
                 [
                     "$email" => 'required|email'
@@ -136,17 +143,23 @@ trait apiValidator {
 
             }
         }
-        return $this->parameterCheck($input,$email);
+
     }
 
     //Check username validations.
     public function username($input,$username){
 
+        if(is_null($input["$username"]) || empty($input["$username"])){
+
+            return $this->parameterCheck($input,$username);
+
+        }
+
         if(!is_null($input["$username"]) && !empty($input["$username"])){
 
             $validator = Validator::make(
                 [
-                    "$username" => $username
+                    "$username" => $input["$username"],
                 ],
                 [
                     "$username" => 'required|min:8|max:32|alpha_num'
@@ -159,12 +172,12 @@ trait apiValidator {
 
                     return $this->setErrorCode(1004)
                             ->setField($username)
-                            ->setMessage($validator_msg)
+                            ->setMessage($validator_msg["$username"][0])
                             ->errorMessage();
 
             }
         }
-        return $this->parameterCheck($input,$username);
+
     }
 
 
