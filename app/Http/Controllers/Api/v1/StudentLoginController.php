@@ -1,5 +1,6 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
+use FutureEd\Http\Controllers\Api\Traits\ApiValidatorTrait;
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 use FutureEd\Models\Core\User;
@@ -9,20 +10,20 @@ use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class StudentLoginController extends StudentController {
-
+    
+    Use ApiValidatorTrait;
+    
     //check email or username if valid user
     public function login(){
 
 		$input = Input::only('username');
+        
+        $this->addMessageBag($this->username($input,'username'));
 		
 		
-		if(!$input['username']){
+		if($this->getMessageBag()){
 		
-			return $this->setStatusCode(422)
-        				->respondWithError(['error_code' => 422,
-                                            'field' => 'username',
-        				                    'message' => 'missing required field username'
-			]);
+			 return $this->respondWithError($this->getMessageBag());
 		
 		} else {
 			
