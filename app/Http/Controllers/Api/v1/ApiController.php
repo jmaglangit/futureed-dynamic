@@ -118,7 +118,6 @@ trait apiValidator {
         if(is_null($input["$email"]) || empty($input["$email"])){
 
             return $this->parameterCheck($input,$email);
-
         }
 
         if(!is_null($input["$email"]) && !empty($input["$email"])){
@@ -143,16 +142,14 @@ trait apiValidator {
 
             }
         }
-
     }
 
-    //Check username validations.
+    //Validate username field.
     public function username($input,$username){
 
         if(is_null($input["$username"]) || empty($input["$username"])){
 
             return $this->parameterCheck($input,$username);
-
         }
 
         if(!is_null($input["$username"]) && !empty($input["$username"])){
@@ -174,11 +171,77 @@ trait apiValidator {
                             ->setField($username)
                             ->setMessage($validator_msg["$username"][0])
                             ->errorMessage();
+            }
+        }
+    }
 
+
+    //Validate birth_date field.
+    public function birthDate($input,$birth_date){
+
+        if(is_null($input["$birth_date"]) || empty($input["$birth_date"])){
+
+            return $this->parameterCheck($input,$birth_date);
+        }
+
+        if(!is_null($input["$birth_date"]) && !empty($input["$birth_date"])){
+
+            $validator = Validator::make(
+                [
+                    "$birth_date" => $input["$birth_date"],
+                ],
+                [
+                    "$birth_date" => 'required|date_format:Ymd|before:today'
+                ]
+            );
+
+            if($validator->fails()){
+
+                $validator_msg = $validator->messages()->toArray();
+
+                return $this->setErrorCode(1005)
+                    ->setField($birth_date)
+                    ->setMessage($validator_msg["$birth_date"][0])
+                    ->errorMessage();
             }
         }
 
     }
+
+    //Validate first_name with multiple names
+    public function firstName($input,$first_name){
+
+        if(is_null($input["$first_name"]) || empty($input["$first_name"])){
+
+            return $this->parameterCheck($input,$first_name);
+        }
+
+        if(!is_null($input["$first_name"]) && !empty($input["$first_name"])){
+
+            $validator = Validator::make(
+                [
+                    "$first_name" => $input["$first_name"],
+                ],
+                [
+                    "$first_name" => 'required|regex:/^([a-z\x20])+$/i'
+                ]
+            );
+
+            if($validator->fails()){
+
+                $validator_msg = $validator->messages()->toArray();
+
+                return $this->setErrorCode(1005)
+                    ->setField($first_name)
+                    ->setMessage($validator_msg["$first_name"][0])
+                    ->errorMessage();
+            }
+
+        }
+
+    }
+
+    //
 
 
 
