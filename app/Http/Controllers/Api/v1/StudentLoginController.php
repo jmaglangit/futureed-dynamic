@@ -19,12 +19,12 @@ class StudentLoginController extends StudentController {
 
         $parent_message = config('futureed-error.error_code');
 
-        $this->addMessageBag($this->username($input,'username'));
-
 		
-		if($this->getMessageBag()){
+		if(!$input['username']){
 		
-			 return $this->respondWithError($this->getMessageBag());
+			 return $this->respondWithError(['error_code' => 422,
+                                             'field' => 'username',
+                                             'message' =>  'Required field not found.']);
 		
 		} else {
 			
