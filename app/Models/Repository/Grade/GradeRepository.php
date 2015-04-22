@@ -12,5 +12,13 @@ class GradeRepository implements GradeRepositoryInterface{
 
     }
 
+    public function getGrade($code){
+
+        return Grade::where('code',$code)->first();
+
+    }
+
+
+
 
 }

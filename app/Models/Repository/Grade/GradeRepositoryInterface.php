@@ -5,4 +5,6 @@ interface GradeRepositoryInterface {
 
     public function getGrades();
 
+    public function getGrade($code);
+
 }

@@ -10,6 +10,7 @@ namespace FutureEd\Services;
 
 
 use Carbon\Carbon;
+use FutureEd\Models\Repository\Grade\GradeRepositoryInterface;
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use FutureEd\Models\Repository\PasswordImage\PasswordImageRepositoryInterface;
 use FutureEd\Models\Repository\User\UserRepositoryInterface;
@@ -25,7 +26,8 @@ class StudentServices {
             UserServices $user,
             ValidatorRepository $validator,
             SchoolServices $school,
-            AvatarServices $avatar
+            AvatarServices $avatar,
+            GradeRepositoryInterface $gradeRepositoryInterface
             ){
         $this->student = $student;
         $this->password = $password;
@@ -33,6 +35,7 @@ class StudentServices {
         $this->validator = $validator;
         $this->school = $school;
         $this->avatar = $avatar;
+        $this->grade = $gradeRepositoryInterface;
         }
 
     public function getStudents(){
@@ -169,11 +172,20 @@ class StudentServices {
         if($student_reference['school_code']) {
         	$school = $this->school->getSchoolName($student_reference['school_code']);
         }
-        
+
+        //get grade name
+        if($student_reference['grade_code']){
+
+            $grade = $this->grade->getGrade($student_reference['grade_code']);
+        }
+
+
+
         $student = array_merge(array('id'=>$id),$student,$user,
                                array('age'=>$age,
                                      'avatar'=>$avatar_url,
                                      'school'=>$school,
+                                      'grade' => isset($grade) ? $grade['name'] : null,
                                      'avatar_id'=>$student_reference['avatar_id']));
         
         
