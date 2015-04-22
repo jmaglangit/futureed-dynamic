@@ -83,8 +83,7 @@ class UserPasswordController extends UserController {
                     
                     return $this->setStatusCode(201)
                                 ->respondWithData(['error_code' => 201,
-                                                    'field' => 'username',
-                                                    'message' => 'user is inactive'
+                                                    'message' => 'invalid username/email'
                                                  ]);
                          
                 }
