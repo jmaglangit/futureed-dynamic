@@ -6,9 +6,9 @@ use FutureEd\Http\Controllers\Controller;
 
 use FutureEd\Services\MailServices;
 use FutureEd\Services\TokenServices;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use FutureEd\Services\CodeGeneratorServices;
+use Illuminate\Support\Facades\Request;
 
 
 class TokenController extends ApiController {
@@ -67,7 +67,9 @@ class TokenController extends ApiController {
 
     public function input(){
         $input = Input::only('name');
+        $header = Request::header('access_token');
 
+        return $header;
         if(is_null($input['name'])){
             return 'Missing valid API paremeter';
         } elseif(empty($input['name'])){
