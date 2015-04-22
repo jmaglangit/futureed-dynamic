@@ -4,27 +4,27 @@ var controllers = angular.module('futureed.controllers', []);
       $scope.error = "";
       $scope.view = "";
 
-      $scope.validateUser = function(username) {
-        $scope.username = angular.copy(username);
+      $scope.validateUser = function() {
         $scope.error = "";
 
         loginAPIService.validateUser($scope.username).success(function (response) {
             if(response.status == 200) {
-              $scope.id = response.data.id;
-              $scope.getLoginPassword();
-              $scope.enter_pass = true;
-            } else {
-              var data = response.data;
-              if(data.error_code == 202) {
-                if(data.message == "Account Locked") {
-                  $scope.error = "";
-                  $scope.locked = true;
-                } else {
-                  $scope.error = data.message;
-                }
-              } else {
-                $scope.error = data.message;
-              }
+              if(response.errors) {
+                var error_object = response.errors[0];
+
+                  if(response.errors.error_code == 1008) {
+                    $scope.error = "Invalid username or email";
+                  } else if(error_object.error_code == 1001) {
+                    $scope.error = error_object.message;
+                  } else if(error_object.error_code == 1004) {
+                    $scope.error = error_object.message;
+                  }
+                  
+              } else if(response.data){
+                $scope.id = response.data.id;
+                $scope.getLoginPassword();
+                $scope.enter_pass = true;
+              } 
             }
         }).error(function(response) {
             if(response.status == 422) {
@@ -47,20 +47,50 @@ var controllers = angular.module('futureed.controllers', []);
           $scope.validatePassword();
       }
 
-      $scope.forgotPassword = function(username) {
+      $scope.forgotPassword = function() {
         $scope.error = "";
-        $scope.username = angular.copy(username);
+        $scope.disabled = true;
+
+        loginAPIService.forgotPassword($scope.username).success(function(response) {
+          if(response.status == 201) {
+            $scope.error = "Invalid username or email";
+          } else if(response.status == 200) {
+            if(response.errors) {
+              var error_object = response.errors[0];
+
+              if(error_object.error_code == 1004) {
+                $scope.error = error_object.message;
+              } else if(error_object.error_code == 1001) {
+                $scope.error = error_object.message;
+              }
+            } else {
+              $("input[name='email']").val(response.data.email);
+              $("#forgot_pass_form").submit();
+            }
+          }
+          $scope.disabled = false;
+        }).error(function(response) {
+          $scope.disabled = false;
+          $scope.error = response.data.message;
+        });
+      }
+
+      $scope.resendCode = function() {
+        $scope.username = $("input[name='email']").val();
+        $scope.resent = false;
+        $scope.disabled = true;
 
         loginAPIService.forgotPassword($scope.username).success(function(response) {
           if(response.status == 200) {
-            $("input[name='email']").val(response.data.email);
-            $("#forgot_pass_form").submit();
+            $scope.resent = true;
           } else {
             $scope.error = response.data.message;
           }
         }).error(function(response) {
           $scope.error = response.data.message;
         });
+
+        $("html, body").animate({ scrollTop: 0 }, "slow");
       }
 
       $scope.getLoginPassword = function() {
@@ -164,7 +194,7 @@ var controllers = angular.module('futureed.controllers', []);
 
       $scope.checkAvailability = function(username, field) {
           loginAPIService.validateUser(username).success(function(response) {
-            if(response.status == 200 || response.data.message == "Invalid Username") {
+            if(response.status == 200 && !response.errors) {
               if(field == 'username') {
                 $scope.u_error = true;
               } else if(field == 'email') {
@@ -266,9 +296,15 @@ var controllers = angular.module('futureed.controllers', []);
       $scope.selectAvatar = function() {
         loginAPIService.selectAvatar($scope.user.id, $scope.avatar_id).success(function(response) {
           if(response.status == 200) {
-            $scope.has_avatar = true;
+            // $scope.has_avatar = true;
             $scope.user.avatar_id = response.data.id;
             $scope.user.avatar = response.data.url;
+            $scope.session_user = $scope.user;
+            loginAPIService.updateUserSession($scope.user).success(function(response) {
+              console.log(response);
+            }).error(function() {
+
+            });
           } else {
             $scope.error = response.data.message;
           }
@@ -297,6 +333,7 @@ var controllers = angular.module('futureed.controllers', []);
           default:
             $scope.studentDetails();
             $scope.active_index = 1;
+            $scope.edit = false;
             break;
         }
       }
@@ -306,30 +343,52 @@ var controllers = angular.module('futureed.controllers', []);
       * Profile related controllers
       */
       $scope.editProfile = function() {
+        console.log($scope.user);
         $scope.edit = true;
 
         $("html, body").animate({ scrollTop: 0 }, "slow");
       }
 
-      $scope.saveProfile = function() {
-        $scope.edit = false;
+      $scope.saveProfile = function(prof) {
+        $scope.prof.school_code = 1;
+        $scope.prof.grade_code = 1;
+        $scope.prof.birth_date = $("input[name='birth_date']").val();
+        loginAPIService.saveProfile($scope.prof).success(function(response) {
+          if(response.status == 200 && response.data) {
+            $scope.setActive('index');
+          } else {
+            $scope.error = response.errors.message;
+          }
+          
+        }).error(function() {
+
+        });
+
         $("html, body").animate({ scrollTop: 0 }, "slow"); 
       }
 
       $scope.validateCurrentPassword = function() {
         $scope.error = "";
 
-        loginAPIService.validatePassword($scope.id, $scope.image_id).success(function(response) {
+        loginAPIService.validatePassword($scope.user.id, $scope.image_id).success(function(response) {
           if(response.status == 200) {
-            $scope.password_validated = true;
             $scope.image_id = "";
+            $scope.password_validated = true;
+            
             $scope.getImagePassword();
+          } else if(response.status == 202) {
+            if(response.data.message == "Account Locked") {
+              $scope.locked = true;
+            } else {
+             $scope.error = response.data.message; 
+            }
+          } else {
+            $scope.error = response.errors.message;
           }
         }).error(function(response) {
-          $scope.error = response.errors.message;
+            console.log(response);
+          // $scope.error = response.errors.message;
         });
-
-        $("html, body").animate({ scrollTop: 0 }, "slow");
       }
 
       $scope.selectNewPassword = function() {
@@ -350,12 +409,15 @@ var controllers = angular.module('futureed.controllers', []);
       }
 
       $scope.undoNewPassword = function() {
+        $scope.error = "";
         $scope.image_pass = shuffle($scope.image_pass);
         $scope.password_selected = false;
         $scope.image_id = $scope.new_password;
 
         $("ul.form_password li").removeClass("selected");
-        $("input[value='"+ $scope.new_password+"']").closest("li").addClass("selected");
+        $("input[value='"+$scope.new_password+"']").closest("li").addClass("selected");
+
+        $("html, body").animate({ scrollTop: 0 }, "slow");
       }
 
       $scope.confirmNewPassword = function() {
@@ -363,22 +425,24 @@ var controllers = angular.module('futureed.controllers', []);
 
         if($scope.image_id == $scope.new_password) {
             loginAPIService.changePassword($scope.user.id, $scope.image_id, $scope.user.access_token).success(function(response) {
-              $scope.password_confirmed = true;
+              if(response.status == 200) {
+                $scope.password_confirmed = true;
+              }
             }).error(function(response) {
 
             });
         } else {
           $scope.error = "Password does not match"
+          $("html, body").animate({ scrollTop: 0 }, "slow");
         }
-
-        $("html, body").animate({ scrollTop: 0 }, "slow");
       }
 
       $scope.studentDetails = function() {
         loginAPIService.studentDetails($scope.user.id, $scope.user.access_token).success(function(response) {
           if(response.status == 200) {
-            $scope.user = response.data[0];
-            $scope.prof = $scope.user;
+            $scope.prof = response.data[0];
+            $scope.prof.access_token = $scope.user.access_token;
+            $scope.user = $scope.prof;
           }
         }).error(function(response) {
           $scope.error = response.errors.message;

@@ -8,7 +8,9 @@
       <form name="success_form" id="success_form" 
             action="{!! route('student.login.reset_password') !!}" method="POST">
         <div class="form_content">
-          <div class="title">@if($show) Email Sent @else Enter Reset Code @endif</div>
+          <div class="title" ng-if="!resent">@if($show) Email Sent @else Enter Reset Code @endif</div>
+          <div class="title" ng-if="resent">Code Resent</div>
+
           <div class="error" ng-if="error">
             <p>{! error !}</p>
           </div>
@@ -32,6 +34,7 @@
               <input type="hidden" ng-model="id" name="id" required />
             </div>
             <button type="button" class="btn btn-red" ng-click="validateCode(reset_code)">PROCEED</button>
+            <button type="button" ng-disabled="disabled" class="btn" ng-click="resendCode(email)">Resend Code</button>
           </div>
         </form>
       </div>

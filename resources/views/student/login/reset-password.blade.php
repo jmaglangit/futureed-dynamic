@@ -2,12 +2,11 @@
 
 @section('content')
   <div class="container login" ng-init="getImagePassword()" ng-cloak>
-    @include('student.login.reset-confirm-password')
-
-    <div class="col-md-8 col-md-offset-2" ng-if="!password_selected">
+    <div class="col-md-8 col-md-offset-2">
       <form id="reset_password_form" action="{!! route('student.login.reset-password-success') !!}" name="reset_password_form" method="POST">
         <div class="form-style form-select-password">
-          <div id="title" class="title">Select a picture for your new password</div>
+          <div ng-if="!password_selected" id="title" class="title">Select a picture for your new password</div>
+          <div ng-if="password_selected" id="title" class="title">Select a picture to confirm your new password</div>
           <div class="error" ng-if="error">
             <p>{! error !}</p>
           </div>
@@ -18,7 +17,11 @@
                  <input type="hidden" id="image_id" name="image_id" value="{! item.id !}">
               </li>
             </ul>
-            <button type="button" class="btn btn-red" ng-click="selectNewPassword()">Proceed</button>
+            <button type="button" ng-if="!password_selected" class="btn btn-red" ng-click="selectNewPassword()">Proceed</button>
+            <div class="row" ng-if="password_selected">
+              <div class="col-sm-6"><button type="button" ng-click="undoNewPassword()" class="btn btn-red">Previous</button></div>
+              <div class="col-sm-6"><button type="button" class="btn btn-red" ng-click="validateNewPassword('{!! $new !!}')">Save</a></div>
+            </div>
           </div>
 
           <input type="hidden" name="code" id="code" value="{!! $code !!}" />

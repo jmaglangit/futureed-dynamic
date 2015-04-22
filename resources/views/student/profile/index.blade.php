@@ -43,7 +43,26 @@
 				</div>
 			</div>
 			<div class="form-content col-md-12">
-				<form class="form-horizontal" name="form_profile" ng-init="view=true">
+				<form class="form-horizontal" name="form_profile">
+					<fieldset>
+						<legend>Credentials Information</legend>
+						<div class="form-group">
+	                        <label for="" class="col-md-2 control-label">Username</label>
+	                        <div class="col-md-4">
+                            <input ng-disabled="!edit" type="text" class="form-control" ng-model="prof.username" name="username" placeholder="Username" 
+                            ng-model-options="{debounce : {'default' : 1000}}" ng-change="checkAvailability(prof.username, 'username')" required />
+                            <span ng-if="u_error" class="error-msg-con"> Username is invalid or already exist</span>
+                        </div>
+	                    </div>
+						<div class="form-group">
+	                        <label for="" class="col-md-2 control-label">Email</label>
+	                        <div class="col-md-4">
+                            <input ng-disabled="!edit" type="text" class="form-control" ng-model="prof.email" name="email" placeholder="Email Address"
+                                ng-model-options="{debounce : {'default' : 1000}}" ng-change="checkAvailability(prof.email, 'email')" required />
+                            <span ng-if="e_error" class="error-msg-con"> Email Address is invalid or already exist</span>
+                        </div>
+	                    </div>
+					</fieldset>
 					<fieldset>
 						<legend>Personal Information</legend>
 						<div class="form-group">
@@ -102,47 +121,42 @@
 	                    <div class="form-group">
 	                        <label for="" class="col-md-2 control-label">Country</label>
 	                        <div class="col-md-5">
-	                            <input type="text" class="form-control" ng-model="prof.country" ng-disabled="!edit">
-	                        </div>
-	                    </div>
-					</fieldset>
-					<fieldset>
-						<legend>Credentials Information</legend>
-						<div class="form-group">
-	                        <label for="" class="col-md-2 control-label">Email</label>
-	                        <div class="col-md-5">
-	                            <input type="text" class="form-control" ng-model="prof.email" ng-disabled="!edit">
-	                        </div>
-	                    </div>
-						<div class="form-group">
-	                        <label for="" class="col-md-2 control-label">Username</label>
-	                        <div class="col-md-5">
-	                            <input type="text" class="form-control" ng-model="prof.username" ng-disabled="!edit">
+	                            <select class="form-control" ng-model="prof.country" ng-disabled="!edit">
+	                                <option value="">-- Select Country --</option>
+	                                <option value="Philippines">Philippines</option>
+	                                <option value="Singapore">Singapore</option>
+	                                <option value="United States">United States</option>
+	                            </select>
 	                        </div>
 	                    </div>
 					</fieldset>
 					<fieldset>
 						<legend>School Information</legend>
-						<div class="form-group">
+						<div class="form-group" ng-if="prof.school_name">
 	                        <label for="" class="col-md-2 control-label">School Name</label>
 	                        <div class="col-md-5">
 	                            <input type="text" class="form-control" ng-model="prof.school_name" ng-disabled="!edit">
 	                        </div>
 	                    </div>
-						<div class="form-group">
-	                        <label for="" class="col-md-2 control-label">School Level</label>
-	                        <div class="col-md-5">
-	                            <input type="text" class="form-control" ng-model="prof.last_name" ng-disabled="!edit">
-	                        </div>
-	                    </div>
+						<div class="form-group" ng-init="getGradeLevel()">
+                        <label for="" class="col-md-2 control-label">School level<span class="required">*</span></label>
+
+                        <div class="col-md-5 nullable">
+                            <select class="form-control" ng-model="prof.grade_code" ng-disabled="!edit">
+                                <option value="">-- Select Level --</option>
+                                <option ng-selected="prof.grade_code == {! grade.id !}" ng-repeat="grade in grades" value="{! grade.id !}">{! grade.name !}</option>
+                            </select>
+                        </div><br><br>
+                    </div>   
 					</fieldset>
 					<div class="form-group">
-						<div class="btncon col-md-10 col-md-offset-2" ng-if="!edit">
+						<div class="btncon col-md-9" style="text-align:center;" ng-if="!edit">
 							<a href="{!! route('student.profile.change_password')!!}" class="btn btn-red">Change Password</a>
 							<a class="btn btn-purple" ng-click="editProfile()">Edit Profile</a>
 						</div>
 						<div class="btncon col-md-9" style="text-align:center;" ng-if="edit">
-							<a class="btn btn-red" ng-click="saveProfile()">Save Changes</a>
+							<a class="btn btn-red" ng-click="saveProfile(prof)">Save Changes</a>
+							<a class="btn btn-purple" ng-click="setActive('index')">Cancel</a>
 						</div>
 					</div>
 				</form>

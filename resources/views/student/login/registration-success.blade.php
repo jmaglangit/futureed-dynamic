@@ -19,6 +19,7 @@
 	              <input type="hidden" ng-model="id" name="id" required />
 	          </div>
             <button type="button" class="btn btn-red" ng-click="confirmCode(confirmation_code)">Confirm</button>
+            <button type="button" class="btn btn-red" ng-click="confirmCode(confirmation_code)">Resend Code</button>
 	        </form>
 	    </div>
     </div>

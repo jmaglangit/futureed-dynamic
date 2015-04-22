@@ -19,7 +19,7 @@
               <input type="hidden" name="id" ng-model="id" required>
             </div>
             <div class="form-group">
-              <button type="button" ng-click="validateUser(username)" class="btn btn-red">Next</button>              
+              <button type="button" ng-click="validateUser()" class="btn btn-red">Next</button>              
             </div>
           </form>
           <div class="text-group">
