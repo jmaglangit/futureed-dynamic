@@ -12,10 +12,32 @@ class UserPasswordController extends UserController {
   
     public function passwordForgot(){
         $input = Input::only('username','user_type');
-        $this->addMessageBag($this->emptyUsername($input,'username'));
-        $this->addMessageBag($this->validateString($input,'user_type'));
+        $this->addMessageBag($this->userType($input,'user_type'));
         
-       
+        
+        $flag=0;
+        
+        if(!$this->email($input,'username')){
+            
+            $flag = 1;
+             
+        }
+        if(!$this->username($input,'username')){
+            
+            $flag = 0;
+        }
+        
+        
+        if($flag){
+
+            $this->addMessageBag($this->email($input,'username'));
+            
+        }else{
+          
+            $this->addMessageBag($this->username($input,'username'));
+            
+        }
+    
        if($this->getMessageBag()){
          
          return $this->respondWithError($this->getMessageBag());
@@ -61,7 +83,6 @@ class UserPasswordController extends UserController {
                     
                     return $this->setStatusCode(201)
                                 ->respondWithData(['error_code' => 201,
-                                                    'field' => 'username',
                                                     'message' => 'invalid username/email'
                                                  ]);
                          
@@ -71,8 +92,7 @@ class UserPasswordController extends UserController {
             
              return $this->setStatusCode(201)
                          ->respondWithData(['error_code' => 201,
-                                            'field' => 'username',
-                                            'message'=>$return['message']
+                                            'message'=>'user does not exist'
                                           ]);
           }
         }
