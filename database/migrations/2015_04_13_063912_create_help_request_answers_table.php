@@ -21,6 +21,7 @@ class CreateHelpRequestAnswersTable extends Migration {
             $table->bigInteger('subject_code');
             $table->bigInteger('area_code');
             $table->tinyInteger('rating')->nullable();
+            $table->bigInteger('seq_no');
             $table->tinyInteger('is_verified')->nullable();
             $table->enum('status',['Enabled','Disabled']);
             $table->Integer('points')->nullable();

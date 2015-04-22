@@ -10,8 +10,8 @@ class ClientTableSeeder extends Seeder {
     public function run()
     {
         // TestDummy::times(20)->create('App\Post');
-        \DB::table('client')->truncate();
-        \DB::table('client')->insert([
+        \DB::table('clients')->truncate();
+        \DB::table('clients')->insert([
             [
                 'user_id' => 2,
                 'first_name' => 'Farrah Faye',

@@ -8,18 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
 class StudentController extends ApiController {
-    
 
-    public function getStudentParent(){
-        $input = Input::only('parent_id');
-
-        $students = $this->student->getStudentByParent($input['parent_id']);
-        return $this->respondWithData([
-            $students
-        ]);
-
-    }
-    
 	/**
 	 * Display a listing of the resource.
 	 *

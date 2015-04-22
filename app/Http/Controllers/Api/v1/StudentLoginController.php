@@ -7,7 +7,6 @@ use FutureEd\Models\Core\User;
 use Illuminate\Support\Facades\Input;
 
 use Illuminate\Http\Request;
-use Tymon\JWTAuth\Facades\JWTAuth;
 
 class StudentLoginController extends StudentController {
     
@@ -17,9 +16,11 @@ class StudentLoginController extends StudentController {
     public function login(){
 
 		$input = Input::only('username');
-        
+
+        $parent_message = config('futureed-error.error_code');
+
         $this->addMessageBag($this->username($input,'username'));
-		
+
 		
 		if($this->getMessageBag()){
 		
@@ -31,7 +32,19 @@ class StudentLoginController extends StudentController {
 			$response = $this->user->checkLoginName($input['username'], config('futureed.student'));
 
 			$student_id = $this->student->getStudentId($response['data']);
-			
+
+
+            //get student age
+            if($this->student->getAge($student_id) < 13){
+
+                return $this->respondWithError([
+                    'error_code' => 1008,
+                    'message' => $parent_message['1008'],
+                ]);
+
+            }
+
+            //return error if age < 13
 			if($response['status'] == 200) {
 			
             	return $this->setStatusCode($response['status'])
