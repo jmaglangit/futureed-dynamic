@@ -1,6 +1,7 @@
 <?php namespace FutureEd\Http\Controllers\FutureLesson\Student;
 
 use FutureEd\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Session;
 
 
 class ProfileController extends Controller {
@@ -34,6 +35,6 @@ class ProfileController extends Controller {
 	}
 
 	public function getUserObject() {
-		return json_decode(\Session::get('user'));
+		return json_decode(Session::get('user'));
 	}
 }

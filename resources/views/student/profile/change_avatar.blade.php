@@ -43,7 +43,7 @@
 						You have successfully changed your avatar.
 					</div>
 					<div class="col-md-10 col-md-offset-1" ng-if="!has_avatar">
-				      <form id="reset_password_form">
+				      <form id="change_avatar_form">
 				        <div class="form-select-password">
 				          <div id="title" class="title"></div>
 				          <div class="error" ng-if="error">
@@ -59,6 +59,7 @@
 						  </div>
 				          <button type="button" class="btn btn-red" ng-click="selectAvatar()">Proceed</button>
 				        </div>
+				        <input type="hidden" ng-model="session_user" />
 				      </form>
 				    </div>
 				  </div>

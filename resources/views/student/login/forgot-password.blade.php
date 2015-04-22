@@ -15,10 +15,10 @@
             <div class="icon">
               <i class="fa fa-user"></i>
             </div>
-            <input placeholder="Email or Username" type="text" ng-model="username" name="username" autocomplete="off" required />
+            <input placeholder="Email or Username" type="text" ng-model="username" name="username" autocomplete="off" />
             <input type="hidden" name="email"/>
           </div>
-          <div class="submit" ng-click="forgotPassword(username)">SEND</div>
+          <button type="button" class="btn btn-red" ng-click="forgotPassword()" ng-disabled="disabled">SEND</button>
         </form>
       </div>
     </div>

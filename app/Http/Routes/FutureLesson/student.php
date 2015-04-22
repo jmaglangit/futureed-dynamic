@@ -7,7 +7,7 @@
 		Routes::get('/email/confirm', ['as' => 'student.login.confirm', 'uses' => 'FutureLesson\Student\LoginController@reset_code']);
 		Routes::get('/password/reset', ['as' => 'student.password.reset_code', 'uses' => 'FutureLesson\Student\LoginController@reset_code']);
 		Routes::get('/logout', [ 'as' => 'student.logout', 'uses' => 'FutureLesson\Student\LoginController@logout']);
-	
+		
 		Routes::group(['prefix' => '/login'], function()
 		{
 			Routes::get('/', [ 'as' => 'student.login', 'uses' => 'FutureLesson\Student\LoginController@index']);

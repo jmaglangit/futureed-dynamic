@@ -24,7 +24,25 @@
                 <div class="error" ng-if="error">
                     <p>{! error !}</p>
                 </div>
-
+                <fieldset>
+                    <legend>User Credentials</legend>
+                    <div class="form-group">
+                        <label for="" class="col-md-2 control-label">Username<span class="required">*</span></label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" ng-model="reg.username" name="username" placeholder="Username" 
+                            ng-model-options="{debounce : {'default' : 1000}}" ng-change="checkAvailability(reg.username, 'username')" required />
+                            <span ng-if="u_error" class="error-msg-con"> Username is invalid or already exist</span>
+                        </div>
+                    </div> 
+                    <div class="form-group">
+                        <label for="" class="col-md-2 control-label">Email<span class="required">*</span></label>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control" ng-model="reg.email" name="email" placeholder="Email Address"
+                                ng-model-options="{debounce : {'default' : 1000}}" ng-change="checkAvailability(reg.email, 'email')" required />
+                            <span ng-if="e_error" class="error-msg-con"> Email Address is invalid or already exist</span>
+                        </div>
+                    </div>
+                </fieldset>
                 <fieldset>
                     <legend>Personal Information</legend>
                     <div class="form-group">
@@ -85,25 +103,6 @@
                             </select>
                         </div>
                     </div>
-                </fieldset>
-                <fieldset>
-                    <legend>User Credentials</legend>
-                    <div class="form-group">
-                        <label for="" class="col-md-2 control-label">Email<span class="required">*</span></label>
-                        <div class="col-md-4">
-                            <input type="text" class="form-control" ng-model="reg.email" name="email" placeholder="Email Address"
-                                ng-model-options="{debounce : {'default' : 1000}}" ng-change="checkAvailability(reg.email, 'email')" required />
-                            <span ng-if="e_error" class="error-msg-con"> Email Address is invalid or already exist</span>
-                        </div>
-                    </div>  
-                    <div class="form-group">
-                        <label for="" class="col-md-2 control-label">Username<span class="required">*</span></label>
-                        <div class="col-md-4">
-                            <input type="text" class="form-control" ng-model="reg.username" name="username" placeholder="Username" 
-                            ng-model-options="{debounce : {'default' : 1000}}" ng-change="checkAvailability(reg.username, 'username')" required />
-                            <span ng-if="u_error" class="error-msg-con"> Username is invalid or already exist</span>
-                        </div>
-                    </div> 
                 </fieldset>
                 <fieldset>
                     <legend>School Information</legend>

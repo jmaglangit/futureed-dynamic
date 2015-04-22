@@ -13,7 +13,7 @@
 			<div class="content">
 				<div class="hdr">
 					<div class="avtrcon">
-						{!! Html::image('images/password/img-pass-03.jpg') !!}
+						<img ng-src="{! user.avatar !}">
 					</div>
 					<div class="detcon">
 						<h2>
@@ -38,7 +38,13 @@
 						<p>Your Picture Password has been saved.</p>
 						<p>You may now use this picture password in your suceeding login.</p>
 					</div>
-					<div class="col-md-8 col-md-offset-2" ng-if="!password_confirmed">
+					<div class="col-md-8 col-md-offset-2" ng-if="locked">
+						<div class="form-style">
+							@include('student.login.account-locked')
+						</div>
+					</div>
+
+					<div class="col-md-8 col-md-offset-2" ng-if="!password_confirmed && !locked">
 				      <form id="reset_password_form">
 				        <div class="form-select-password">
 				          <div id="title" class="title"></div>

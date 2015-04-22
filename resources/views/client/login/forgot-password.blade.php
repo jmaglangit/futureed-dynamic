@@ -6,7 +6,6 @@
       <div class="form-style form-narrow">
         <div class="title">Retrieve Password</div>
         <form action="">
-          <!-- <span>Email or Username</span> -->
           <div class="input">
             <div class="icon">
               <i class="fa fa-user"></i>

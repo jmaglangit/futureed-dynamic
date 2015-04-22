@@ -13,7 +13,7 @@
 			<div class="content">
 				<div class="hdr">
 				<div class="avtrcon">
-					{!! Html::image('images/password/img-pass-03.jpg') !!}
+					<img ng-src="{! user.avatar !}">
 				</div>
 				<div class="detcon">
 					<div class="rwrdscon">

@@ -5,10 +5,18 @@ var services = angular.module('futureed.services', ['ngResource']);
 		var futureedAPI = {};
 		var futureedAPIUrl = '/api/v1/';
 
+		futureedAPI.updateUserSession = function(user) {
+			return $http({
+				method	: 'POST',
+				data 	: user,
+				url		: '/student/update-user-session'
+			});
+		}
+
 		futureedAPI.validateUser = function(username) {
 			return $http({
 				method 	: 'POST'
-				, data	: {username : username}
+				, data	: { username : username } 
 				, url	: futureedAPIUrl + 'student/login/username'
 			});
 		}
@@ -141,6 +149,18 @@ var services = angular.module('futureed.services', ['ngResource']);
 			});
 		}
 
+		futureedAPI.saveProfile = function(data) {
+			return $http.put(futureedAPIUrl + 'student/' + data.id, data);
+		}
+
+		futureedAPI.validateCurrentPassword = function(id, password_image_id, access_token) {
+			return $http({
+				method 	: 'POST'
+				, data 	: {password_image_id : password_image_id, access_token : access_token}
+				, url 	: futureedAPIUrl + 'student/password/' + id
+			});
+		}
+
 		futureedAPI.changePassword = function(id, password_image_id, access_token) {
 			return $http({
 				method	: 'POST'
@@ -151,3 +171,21 @@ var services = angular.module('futureed.services', ['ngResource']);
 
 		return futureedAPI;
 	});
+
+	services.factory("httpInterceptor", function($q) {
+	    return {
+	      // optional method
+	      'response': function(response) {
+	        // do something on success
+	        $("html, body").animate({ scrollTop: 0 }, "slow");
+	        return response;
+	      },
+
+	      // optional method
+	     'responseError': function(rejection) {
+	        // do something on error
+	        $("html, body").animate({ scrollTop: 0 }, "slow");
+	        return $q.reject(rejection);
+	      }
+	    };
+	  });
