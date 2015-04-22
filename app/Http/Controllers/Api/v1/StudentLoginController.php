@@ -10,8 +10,6 @@ use Illuminate\Http\Request;
 
 class StudentLoginController extends StudentController {
     
-    Use ApiValidatorTrait;
-    
     //check email or username if valid user
     public function login(){
 

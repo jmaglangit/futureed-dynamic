@@ -10,10 +10,6 @@ use League\Flysystem\Exception;
 
 class StudentRegistrationController extends StudentController {
 
-
-    Use ApiValidatorTrait;
-
-
     /*
      * Candidate users registration
      */

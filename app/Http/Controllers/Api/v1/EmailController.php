@@ -9,8 +9,6 @@ use Illuminate\Support\Facades\Input;
 
 class EmailController extends ApiController {
 
-    use ApiValidatorTrait;
-
 	public function checkEmail(){
         $input = Input::only('email','user_type');
 

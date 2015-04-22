@@ -12,8 +12,6 @@ use Illuminate\Support\Facades\Input;
 
 class UserController extends ApiController{
 
-    use ApiValidatorTrait;
-
     //check user if exist
     public function checkUser(){
         $input = Input::only('username','user_type');
