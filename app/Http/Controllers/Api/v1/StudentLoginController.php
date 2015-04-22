@@ -18,16 +18,35 @@ class StudentLoginController extends StudentController {
 		$input = Input::only('username');
 
         $parent_message = config('futureed-error.error_code');
-        
         $this->addMessageBag($this->emptyUsername($input,'username'));
-
+        
+        $flag=0;
+        
+        if(!$this->email($input,'username')){
+            
+            $flag = 1;
+             
+        }
+        if(!$this->username($input,'username')){
+            
+            $flag = 0;
+        }
+        
+        if($flag){
+            
+            $this->addMessageBag($this->email($input,'username'));
+        }else{
+            
+            $this->addMessageBag($this->username($input,'username'));
+            
+        }
 		
 		if($this->getMessageBag()){
             
 		  return $this->respondWithError($this->getMessageBag());
         
-		} else {
-			
+		}else{
+             
 			//check if username exist, return id else nothing
 			$response = $this->user->checkLoginName($input['username'], config('futureed.student'));
             
@@ -58,12 +77,12 @@ class StudentLoginController extends StudentController {
 			
             	return $this->setStatusCode($response['status'])
 				            ->respondWithData(['error_code' => $response['status'],
-                                               'field' => 'username',
-                                               'message' => 'invalid username/email']);
+                                               'message' => 'user does not exist']);
 			}
+        }
 			
 		
-		}
+		
     }
 
     /*
