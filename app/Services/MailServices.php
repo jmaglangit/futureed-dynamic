@@ -65,7 +65,7 @@ class MailServices {
             'data' => [
                 'name' => $user_detail['name'],
                 'code' => $code['confirmation_code'],
-                'link' => url() . '/student/email/confirm?e=' . $user_detail['email']  ,
+                'link' => url() . '/student/email/confirm?email=' . $user_detail['email']  ,
             ],
             'mail_recipient' => $user_detail['email'],
             'mail_recipient_name' => $user_detail['first_name' ] . $user_detail['last_name'],
@@ -80,7 +80,7 @@ class MailServices {
             'data' => [
                 'name' => $data['username'],
                 'code' => $code,
-                'link' => url() . '/student/password/reset?e='.$data['email'],
+                'link' => url() . '/student/password/reset?email='.$data['email'],
             ],
             'mail_sender' => 'no-reply@futureed.com',
             'mail_sender_name' => 'Future Lesson',

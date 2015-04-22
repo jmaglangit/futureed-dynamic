@@ -10,9 +10,6 @@ use Illuminate\Support\Facades\Input;
 
 class UserPasswordController extends UserController {
   
-  
-    Use ApiValidatorTrait;
-
     public function passwordForgot(){
         $input = Input::only('username','user_type');
         $this->addMessageBag($this->emptyUsername($input,'username'));

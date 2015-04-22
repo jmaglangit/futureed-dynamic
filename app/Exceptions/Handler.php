@@ -36,18 +36,6 @@ class Handler extends ExceptionHandler {
 	 */
 	public function render($request, Exception $e)
 	{	
-		if($e) {
-			$status_code = $e->getStatusCode();
-
-			if($status_code == 405) {
-				return redirect()->route('error.405');
-			} else if($status_code == 404) {
-				return redirect()->route('error.404');
-			} else if($status_code == 500) {
-				return redirect()->route('error.500');
-			}
-		} 
-
 		return parent::render($request, $e);
 	}
 

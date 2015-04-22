@@ -10,10 +10,6 @@ use League\Flysystem\Exception;
 
 class StudentRegistrationController extends StudentController {
 
-
-    Use ApiValidatorTrait;
-
-
     /*
      * Candidate users registration
      */
@@ -54,6 +50,7 @@ class StudentRegistrationController extends StudentController {
         $this->addMessageBag($this->gender($student,'gender'));
         $this->addMessageBag($this->birthDate($student,'birth_date'));
         $this->addMessageBag($this->validateNumber($student,'school_code'));
+        $this->addMessageBag($this->validateNumber($student,'grade_code'));
         $this->addMessageBag($this->validateString($student,'country'));
         $this->addMessageBag($this->validateString($student,'state'));
         $this->addMessageBag($this->validateString($student,'city'));

@@ -14,10 +14,13 @@ use League\Flysystem\Exception;
 
 class SchoolRepository implements SchoolRepositoryInterface{
 	
-	public function getSchools(){}
+	public function getSchools(){
 
-	public function getSchoolName($school_id){
-		return School::where('code','=',$school_id)->pluck('name');
-		
+        return School::all();
+    }
+
+	public function getSchoolName($school_code){
+
+		return School::where('code','=',$school_code)->pluck('name');
 	}
 }

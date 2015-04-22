@@ -3,6 +3,7 @@
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
+use FutureEd\Models\Repository\School\SchoolRepositoryInterface;
 use FutureEd\Models\Repository\Validator\ValidatorRepositoryInterface;
 use FutureEd\Services\ClientServices;
 use FutureEd\Services\CodeGeneratorServices;
@@ -25,6 +26,8 @@ use FutureEd\Http\Controllers\Api\Traits\ApiValidatorTrait;
 
 class ApiController extends Controller {
 
+    use ApiValidatorTrait;
+
     private $status_code = Response::HTTP_OK;
     private $header = [];
 
@@ -38,7 +41,8 @@ class ApiController extends Controller {
             GradeServices $grade,
             AvatarServices $avatar,
             CodeGeneratorServices $code,
-            ValidatorRepositoryInterface $validatorRepositoryInterface){
+            ValidatorRepositoryInterface $validatorRepositoryInterface,
+            SchoolRepositoryInterface $schoolRepositoryInterface){
         $this->user = $user;
         $this->student = $student;
         $this->password_image = $password_image;
@@ -49,6 +53,7 @@ class ApiController extends Controller {
         $this->avatar = $avatar;
         $this->code = $code;
         $this->valid = $validatorRepositoryInterface;
+        $this->school = $schoolRepositoryInterface;
     }
     public function index(){
         return [
