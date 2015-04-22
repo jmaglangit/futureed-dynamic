@@ -12,9 +12,9 @@ class UserPasswordController extends UserController {
   
     public function passwordForgot(){
         $input = Input::only('username','user_type');
-        
-        $this->addMessageBag($this->username($input,'username'));
+        $this->addMessageBag($this->emptyUsername($input,'username'));
         $this->addMessageBag($this->validateString($input,'user_type'));
+        
        
        if($this->getMessageBag()){
          

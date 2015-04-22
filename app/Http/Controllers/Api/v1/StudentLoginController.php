@@ -16,48 +16,72 @@ class StudentLoginController extends StudentController {
 		$input = Input::only('username');
 
         $parent_message = config('futureed-error.error_code');
-
-        $this->addMessageBag($this->username($input,'username'));
-
+        //$this->addMessageBag($this->emptyUsername($input,'username'));
+        
+        $flag=0;
+        
+        if(!$this->email($input,'username')){
+            
+            $flag = 1;
+             
+        }
+        if(!$this->username($input,'username')){
+            
+            $flag = 0;
+        }
+        
+        if($flag){
+            
+            $this->addMessageBag($this->email($input,'username'));
+            
+        }else{
+            
+            $this->addMessageBag($this->username($input,'username'));
+            
+        }
 		
 		if($this->getMessageBag()){
-		
-			 return $this->respondWithError($this->getMessageBag());
-		
-		} else {
-			
+            
+		  return $this->respondWithError($this->getMessageBag());
+        
+		}else{
+             
 			//check if username exist, return id else nothing
 			$response = $this->user->checkLoginName($input['username'], config('futureed.student'));
+            
 
-			$student_id = $this->student->getStudentId($response['data']);
-
-
-            //get student age
-            if($this->student->getAge($student_id) < 13){
-
-                return $this->respondWithError([
-                    'error_code' => 1008,
-                    'message' => $parent_message['1008'],
-                ]);
-
-            }
-
-            //return error if age < 13
+           
 			if($response['status'] == 200) {
+                
+                $student_id = $this->student->getStudentId($response['data']);
+                
+                //get student age
+                if($this->student->getAge($student_id) < 13){
+                    
+                    
+                    return $this->respondWithError([
+                        'error_code' => 1008,
+                        'message' => $parent_message['1008'],
+                    ]);
+
+                }else{
 			
-            	return $this->setStatusCode($response['status'])
-				->respondWithData(['id' => $student_id]);
+                	return $this->setStatusCode($response['status'])
+    				->respondWithData(['id' => $student_id]);
+                
+                }
+                
                 
 			} else{
 			
             	return $this->setStatusCode($response['status'])
 				            ->respondWithData(['error_code' => $response['status'],
-                                               'field' => 'username',
-                                               'message' => 'invalid username/email']);
+                                               'message' => 'user does not exist']);
 			}
+        }
 			
 		
-		}
+		
     }
 
     /*
