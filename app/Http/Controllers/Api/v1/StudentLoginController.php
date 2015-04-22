@@ -32,14 +32,15 @@ class StudentLoginController extends StudentController {
 			$response = $this->user->checkLoginName($input['username'], config('futureed.student'));
             
 
-            //return error if age < 13
+           
 			if($response['status'] == 200) {
                 
                 $student_id = $this->student->getStudentId($response['data']);
                 
                 //get student age
                 if($this->student->getAge($student_id) < 13){
-
+                    
+                    
                     return $this->respondWithError([
                         'error_code' => 1008,
                         'message' => $parent_message['1008'],
