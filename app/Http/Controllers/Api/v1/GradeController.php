@@ -8,13 +8,9 @@ use Illuminate\Http\Request;
 class GradeController extends ApiController {
 
     //get list of grade levels
-	public function grade(){
+	public function index(){
 
-        $response = $this->grade->getGrades();
-
-        return $this->respondWithData($response);
-
-
+        return $this->respondWithData($this->grade->getGrades());
     }
 
 }

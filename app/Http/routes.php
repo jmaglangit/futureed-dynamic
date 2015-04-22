@@ -52,31 +52,33 @@ Routes::group(['prefix' => 'api/v1'], function()
     Routes::post('/student/invite','Api\v1\StudentRegistrationController@invite');
 
     //Student
-	Routes::resource('student', 'Api\v1\StudentController',
+	Routes::resource('/student', 'Api\v1\StudentController',
 					['except' => ['create', 'edit']]);
 
     //Client
-    Routes::resource('client','Api\v1\ClientController',
+    Routes::resource('/client','Api\v1\ClientController',
                     ['except' => ['create','edit']]);
 
     //Parent
-    Routes::resource('client/parent','Api\v1\ClientParentController',
+    Routes::resource('/client/parent','Api\v1\ClientParentController',
                     ['except' => ['create','edit']]);
     Routes::post('/parent/student/list','Api\v1\StudentController@getStudentList');
 
     //Principal
-    Routes::resource('client/principal','Api\v1\ClientPrincipalController',
+    Routes::resource('/client/principal','Api\v1\ClientPrincipalController',
                     ['except' => ['create','edit']]);
 
     //Teacher
-    Routes::resource('client/teacher','Api\v1\ClientTeacherController',
-        ['except' => ['create','edit']]);
+    Routes::resource('/client/teacher','Api\v1\ClientTeacherController',
+                    ['except' => ['create','edit']]);
 
     //grade
-    Routes::get('/grade','Api\v1\GradeController@grade');
+    Routes::resource('/grade','Api\v1\GradeController',
+                    ['except' => ['create','edit']]);
 
     //schools
-    Routes::get('/school','Api\v1\SchoolsController@schools');
+    Routes::resource('/school','Api\v1\SchoolController',
+                    ['except' => ['create','edit']]);
     
     
     //avatars
