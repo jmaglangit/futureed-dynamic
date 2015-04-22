@@ -25,6 +25,8 @@ use FutureEd\Http\Controllers\Api\Traits\ApiValidatorTrait;
 
 class ApiController extends Controller {
 
+    use ApiValidatorTrait;
+
     private $status_code = Response::HTTP_OK;
     private $header = [];
 

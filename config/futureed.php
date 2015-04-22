@@ -12,7 +12,7 @@ return [
 
 
     //Request code expiry in seconds
-    'request_code_expiry' => 300,
+    'request_code_expiry' => 3600,
 
     //User types
     'admin' => 'Admin',

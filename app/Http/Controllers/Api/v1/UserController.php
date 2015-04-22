@@ -1,5 +1,6 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
+use FutureEd\Http\Controllers\Api\Traits\ApiValidatorTrait;
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
@@ -11,7 +12,6 @@ use Illuminate\Support\Facades\Input;
 
 class UserController extends ApiController{
 
-
     //check user if exist
     public function checkUser(){
         $input = Input::only('username','user_type');
@@ -21,8 +21,18 @@ class UserController extends ApiController{
         $username = $input['username'];
         $user_type = $input['user_type'];
 
-        $return =  $this->user->checkUsername($username,$user_type);
+        $this->addMessageBag($this->username($input,'username'));
+        $this->addMessageBag($this->userType($input,'user_type'));
 
+        $msg_bag = $this->getMessageBag();
+
+        if(!empty($msg_bag)){
+
+            return $this->respondWithError($this->getMessageBag());
+        }
+
+        $return =  $this->user->checkUsername($username,$user_type);
+        
         if($input['user_type'] == 'Student'){
 
             $return['user_id'] = $this->student->getStudentId($return['user_id']);
