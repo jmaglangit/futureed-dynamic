@@ -26,8 +26,16 @@
 		{
 			Routes::get('/', [ 'as' => 'student.dashboard.index', 'uses' => 'FutureLesson\Student\DashboardController@index']);
 			Routes::get('/follow-up-registration', [ 'as' => 'student.dashboard.follow_up_registration', 'uses' => 'FutureLesson\Student\DashboardController@follow_up_registration']);
-			Routes::get('/my-profile', [ 'as' => 'student.dashboard.my_profile', 'uses' => 'FutureLesson\Student\DashboardController@my_profile']);
-			Routes::get('/edit-profile', [ 'as' => 'student.dashboard.edit_profile', 'uses' => 'FutureLesson\Student\DashboardController@edit_profile']);
+		});
+
+		Routes::group(['prefix' => 'profile'], function()
+		{
+			$base = 'FutureLesson\Student';
+
+			Routes::get('/', [ 'as' => 'student.profile.index', 'uses' => $base . '\ProfileController@index']);
+			Routes::get('/rewards', ['as' => 'student.profile.rewards', 'uses' => $base . '\ProfileController@rewards']);
+			Routes::get('/change-password', ['as' => 'student.profile.change_password', 'uses' => $base . '\ProfileController@change_password']);
+			Routes::get('/change-avatar', ['as' => 'student.profile.change_avatar', 'uses' => $base . '\ProfileController@change_avatar']);
 		});
 	});
 ?>

@@ -236,6 +236,13 @@ class UserRepository implements UserRepositoryInterface {
                               ]);
         
     }
+    
+    public function isActivated($id){
+        
+         return User::where('id','=',$id)
+                     ->pluck('is_account_activated');
+                     
+    }
 
 
 

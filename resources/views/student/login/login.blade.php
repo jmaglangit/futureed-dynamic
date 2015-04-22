@@ -1,7 +1,7 @@
 @extends('student.app')
 
 @section('content')
-  <div class="container login">
+  <div class="container login" ng-cloak>
     <div ng-class="{ 'col-md-8 col-md-offset-2': enter_pass && !locked, 'col-md-6 col-md-offset-3': !enter_pass || locked }" >
       <div class="form-style">
         @include('student.login.account-locked')

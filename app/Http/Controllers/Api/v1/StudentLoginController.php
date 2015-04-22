@@ -1,5 +1,6 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
+use FutureEd\Http\Controllers\Api\Traits\ApiValidatorTrait;
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 use FutureEd\Models\Core\User;
@@ -8,20 +9,22 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Http\Request;
 
 class StudentLoginController extends StudentController {
-
+    
+    Use ApiValidatorTrait;
+    
     //check email or username if valid user
     public function login(){
 
 		$input = Input::only('username');
+
         $parent_message = config('futureed-error.error_code');
+
+        $this->addMessageBag($this->username($input,'username'));
+
 		
+		if($this->getMessageBag()){
 		
-		if(!$input['username']){
-		
-			return $this->setStatusCode(422)
-				->respondWithError(['error_code'=>422,
-				'message'=>'Parameter validation failed'
-			]);
+			 return $this->respondWithError($this->getMessageBag());
 		
 		} else {
 			
@@ -43,14 +46,18 @@ class StudentLoginController extends StudentController {
 
             //return error if age < 13
 			if($response['status'] == 200) {
-				return $this->setStatusCode($response['status'])
-				->respondWithData(['id'=> $student_id]);
+			
+            	return $this->setStatusCode($response['status'])
+				->respondWithData(['id' => $student_id]);
+                
 			} else{
-				return $this->setStatusCode($response['status'])
-				->respondWithData(['error_code'=>$response['status'],'message'=>$response['data']]);
+			
+            	return $this->setStatusCode($response['status'])
+				            ->respondWithData(['error_code' => $response['status'],
+                                               'field' => 'username',
+                                               'message' => 'invalid username/email']);
 			}
 			
-			// return $this->setStatusCode($response['status'])->respondWithData($response['data']);
 		
 		}
     }

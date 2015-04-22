@@ -2,7 +2,7 @@
 
 @section('content')
 
-<div class="container login">
+<div class="container login" ng-cloak>
   <div class="col-md-6 col-md-offset-3">
     <div class="form-style form-select-password">
       <form name="success_form" id="success_form" 

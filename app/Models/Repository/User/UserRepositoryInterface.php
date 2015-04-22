@@ -56,5 +56,7 @@ interface UserRepositoryInterface {
     public function updateUsernameEmail($id,$data);
     
     public function updateInactiveLock($id);
+    
+    public function isActivated($id);
 
 }

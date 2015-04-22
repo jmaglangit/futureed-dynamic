@@ -31,7 +31,7 @@
     <![endif]-->
     @yield('styles')
   </head>
-  <body class="student" ng-controller="futureedController" ng-cloak>
+  <body class="student" ng-controller="futureedController">
     <a id="top"></a>
     
     @yield('navbar')
@@ -56,6 +56,7 @@
     {!! Html::script('/js/jquery.smooth-scroll.js') !!}
     
     {!! Html::script('/js/student/app.js') !!}
+    {!! Html::script('/js/futureed_utils.js') !!}
     {!! Html::script('/js/futureed.js') !!}
     {!! Html::script('/js/futureed_controllers.js') !!}
     {!! Html::script('/js/futureed_services.js') !!}
