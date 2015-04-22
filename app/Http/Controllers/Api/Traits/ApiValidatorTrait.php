@@ -301,7 +301,14 @@ trait ApiValidatorTrait {
             }
         }
     }
+    
+    public function emptyUsername($input,$field_name){
+        
+          if(is_null($input["$field_name"]) || empty($input["$field_name"])){
 
-
+            return $this->parameterCheck($input,$field_name);
+          }
+        
+    }
 
 }

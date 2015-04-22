@@ -18,14 +18,14 @@ class StudentLoginController extends StudentController {
 		$input = Input::only('username');
 
         $parent_message = config('futureed-error.error_code');
+        
+        $this->addMessageBag($this->emptyUsername($input,'username'));
 
 		
-		if(!$input['username']){
-		
-			 return $this->respondWithError(['error_code' => 422,
-                                             'field' => 'username',
-                                             'message' =>  'Required field not found.']);
-		
+		if($this->getMessageBag()){
+            
+		  return $this->respondWithError($this->getMessageBag());
+        
 		} else {
 			
 			//check if username exist, return id else nothing
