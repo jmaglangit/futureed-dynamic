@@ -30,25 +30,28 @@ class StudentLoginController extends StudentController {
 			
 			//check if username exist, return id else nothing
 			$response = $this->user->checkLoginName($input['username'], config('futureed.student'));
-
-			$student_id = $this->student->getStudentId($response['data']);
-
-
-            //get student age
-            if($this->student->getAge($student_id) < 13){
-
-                return $this->respondWithError([
-                    'error_code' => 1008,
-                    'message' => $parent_message['1008'],
-                ]);
-
-            }
+            
 
             //return error if age < 13
 			if($response['status'] == 200) {
+                
+                $student_id = $this->student->getStudentId($response['data']);
+                
+                //get student age
+                if($this->student->getAge($student_id) < 13){
+
+                    return $this->respondWithError([
+                        'error_code' => 1008,
+                        'message' => $parent_message['1008'],
+                    ]);
+
+                }else{
 			
-            	return $this->setStatusCode($response['status'])
-				->respondWithData(['id' => $student_id]);
+                	return $this->setStatusCode($response['status'])
+    				->respondWithData(['id' => $student_id]);
+                
+                }
+                
                 
 			} else{
 			
