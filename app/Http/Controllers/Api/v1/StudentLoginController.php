@@ -15,7 +15,7 @@ class StudentLoginController extends StudentController {
 
 		$input = Input::only('username');
 
-        $parent_message = config('futureed-error.error_code');
+        $parent_message = config('futureed-error.error_messages');
         //$this->addMessageBag($this->emptyUsername($input,'username'));
         
         $flag=0;
