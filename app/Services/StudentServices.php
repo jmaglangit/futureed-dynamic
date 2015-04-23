@@ -64,14 +64,6 @@ class StudentServices {
 
         $return = [];
 
-        //validate datas
-        if($this->validator->gender($student['gender'])){
-            $return = array_merge($return,[
-                'error_code' => 400028,
-                'message' => 'Gender not verified'
-            ]);
-        }
-
         if(empty(array_filter($return))){
             //if existing add student
             $student_response = $this->student->addStudent($student);
