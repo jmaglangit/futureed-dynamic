@@ -33,18 +33,18 @@ var controllers = angular.module('futureed.controllers', []);
         });
       }
 
-      $scope.highlight = function() {
-        var e = window.event || e;
+      $scope.highlight = function(e) {
+        var e = e || window.event;
         var targ = e.currentTarget || e.srcElement;
 
         $("ul.form_password li").removeClass('selected');
         $(targ).addClass('selected');
 
-        $scope.image_id = $(event.currentTarget).find("#image_id").val();
+        $scope.image_id = $(targ).find("#image_id").val();
       }
 
       $scope.selectPassword = function(event) {
-          $scope.highlight();
+          $scope.highlight(event);
           $scope.validatePassword();
       }
 
@@ -362,12 +362,12 @@ var controllers = angular.module('futureed.controllers', []);
       }
 
       $scope.highlightAvatar = function($event) {
-        var e = window.event || e;
+        var e = e || window.event;
         var targ = e.currentTarget || e.srcElement;
 
         $("ul.avatar_list li").removeClass('selected');
         $(targ).addClass('selected');
-        $scope.avatar_id = $($event.currentTarget).find("#avatar_id").val(); 
+        $scope.avatar_id = $(targ).find("#avatar_id").val(); 
       }
 
       $scope.selectAvatar = function() {
