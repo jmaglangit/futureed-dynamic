@@ -100,10 +100,14 @@ class StudentLoginController extends StudentController {
             return $this->respondWithError($this->getMessageBag());
         }
 
-            //TODO: Get image password of student.
+        $response = $this->student->getImagePassword($input['id']);
 
-                $response = $this->student->getImagePassword($input['id']);
-                return $this->setStatusCode($response['status'])->respondWithData($response['data']);
+        if(!$response){
+
+            return $this->respondErrorMessage(2001);
+        }
+
+        return $this->respondWithData($response['data']);
 
 
     }
