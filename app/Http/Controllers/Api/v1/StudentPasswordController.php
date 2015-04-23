@@ -37,25 +37,34 @@ class StudentPasswordController extends StudentController {
         
           if($this->student->checkIdExist($input['id'])){
             
-             $student_reference = $this->student->getStudentReferences($input['id']);
-           
-             $userdata=$this->user->getUserDetail($student_reference['user_id'],'Student');
-
-              if($input['reset_code']==$userdata['reset_code'] || $input['reset_code']==$userdata['confirmation_code'] ){
+            if($this->password_image->checkPasswordExist($input['password_image_id'])){
             
-                 $return = $this->student->resetPasswordImage($input);
+               $student_reference = $this->student->getStudentReferences($input['id']);
+             
+               $userdata=$this->user->getUserDetail($student_reference['user_id'],'Student');
+
+                if($input['reset_code']==$userdata['reset_code'] || $input['reset_code']==$userdata['confirmation_code'] ){
               
-                 $this->user->updateInactiveLock($student_reference['user_id']);
+                   $return = $this->student->resetPasswordImage($input);
+                
+                   $this->user->updateInactiveLock($student_reference['user_id']);
+                
+                
+                   return $this->setStatusCode($return['status'])
+                            ->respondWithData(['id'=>$return['data']]);
+                }else{
+                      
+                      return $this->respondWithData(['error_code' => 2100,
+                                                     'message' => $error[2100] 
+                                                   ]);
+                }
+            }else{
               
-              
-                 return $this->setStatusCode($return['status'])
-                          ->respondWithData(['id'=>$return['data']]);
-               }else{
-                    
-                    return $this->respondWithData(['error_code' => 2100,
-                                                   'message' => $error[2100] 
+                return $this->respondWithData(['error_code' => 2101,
+                                                   'message' => $error[2101] 
                                                  ]);
-               }
+              
+            }
             
           }else{
     
