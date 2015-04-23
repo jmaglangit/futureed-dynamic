@@ -150,7 +150,7 @@
                         <div class="col-md-5 nullable">
                             <select class="form-control" ng-model="prof.grade_code" ng-disabled="!edit">
                                 <option value="">-- Select Level --</option>
-                                <option ng-selected="{! prof.grade == grade.name !}" ng-repeat="grade in grades" value="{! grade.id !}">{! grade.name !}</option>
+                                <option ng-selected="{! prof.grade_code == grade.code !}" ng-repeat="grade in grades" value="{! grade.code !}">{! grade.name !}</option>
                             </select>
                         </div><br><br>
                     </div>   
