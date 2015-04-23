@@ -1,11 +1,8 @@
 <?php namespace FutureEd\Http\Controllers\Api\Traits;
 
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Support\Facades\Config;
-
 
 trait ApiValidatorTrait {
-
 
     use ErrorMessageTrait;
 
