@@ -43,12 +43,18 @@
 				</div>
 			</div>
 			<div class="form-content col-md-12">
+				<div class="alert alert-danger" ng-if="error">
+                    <p>{! error !}</p>
+                </div>
+                <div class="alert alert-success" ng-if="success">
+                	<p>{! success_msg !}</p>
+                </div>
 				<form class="form-horizontal" name="form_profile">
 					<fieldset>
 						<legend>Credentials Information</legend>
 						<div class="form-group">
 	                        <label for="" class="col-md-2 control-label">Username</label>
-	                        <div class="col-md-4">
+	                        <div class="col-md-5">
                             <input ng-disabled="!edit" type="text" class="form-control" ng-model="prof.username" name="username" placeholder="Username" 
                             ng-model-options="{debounce : {'default' : 1000}}" ng-change="checkAvailability(prof.username, 'username')" required />
                             <span ng-if="u_error" class="error-msg-con"> Username is invalid or already exist</span>
@@ -56,7 +62,7 @@
 	                    </div>
 						<div class="form-group">
 	                        <label for="" class="col-md-2 control-label">Email</label>
-	                        <div class="col-md-4">
+	                        <div class="col-md-5">
                             <input ng-disabled="!edit" type="text" class="form-control" ng-model="prof.email" name="email" placeholder="Email Address"
                                 ng-model-options="{debounce : {'default' : 1000}}" ng-change="checkAvailability(prof.email, 'email')" required />
                             <span ng-if="e_error" class="error-msg-con"> Email Address is invalid or already exist</span>

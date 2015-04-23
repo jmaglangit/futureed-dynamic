@@ -104,7 +104,14 @@ class LoginController extends Controller {
 	 */
 	public function registration()
 	{
-		return view('student.login.registration');
+		$input = Input::only('email');
+		$success = false;
+
+		if($input['email']) {
+			$success = true;
+		}
+
+		return view('student.login.registration', ['success' => $success, 'email' => $input['email']]);
 	}
 	
 	/**

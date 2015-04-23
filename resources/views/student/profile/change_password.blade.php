@@ -34,12 +34,12 @@
 					</div>
 				</div>
 				<div class="form-content col-md-12">
-					<div ng-if="password_validated && password_selected && password_confirmed">
+					<div class="alert alert-success" ng-if="password_validated && password_selected && password_confirmed">
 						<p>Your Picture Password has been saved.</p>
 						<p>You may now use this picture password in your suceeding login.</p>
 					</div>
 					<div class="col-md-8 col-md-offset-2" ng-if="locked">
-						<div class="form-style">
+						<div class="form-style" style="box-shadow: none;">
 							@include('student.login.account-locked')
 						</div>
 					</div>
@@ -48,7 +48,7 @@
 				      <form id="reset_password_form">
 				        <div class="form-select-password">
 				          <div id="title" class="title"></div>
-				          <div class="error" ng-if="error">
+				          <div class="alert alert-danger" ng-if="error">
 				            <p>{! error !}</p>
 				          </div>
 				          <div class="form_content">
