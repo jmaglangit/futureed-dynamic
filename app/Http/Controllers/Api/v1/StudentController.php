@@ -71,25 +71,15 @@ class StudentController extends ApiController {
         $this->addMessageBag($this->username($input, 'username'));
 
         $msg_bag = $this->getMessageBag();
+        
         if(!empty($msg_bag)){
 
             return $this->respondWithError($this->getMessageBag());
         }
 
+        $this->student->updateStudentDetails($id,$input);
 
-			$return = $this->student->validateStudentDetails($input);
-			
-			if($return['status']==200){
-				$this->student->updateStudentDetails($id,$input);
-				return $this->respondWithData(['id'=>$id]);
-			
-			} else {
-			
-				return $this->setStatusCode(202)
-				->respondWithData(['error_code'=>202,
-				'message'=>$return['data']]); 
-			
-			}
+        return $this->respondWithData(['id'=>$id]);
 
 	}
 
