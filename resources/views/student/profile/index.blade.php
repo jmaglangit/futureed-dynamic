@@ -43,10 +43,10 @@
 				</div>
 			</div>
 			<div class="form-content col-md-12">
-				<div class="error" ng-if="error">
+				<div class="alert alert-danger" ng-if="error">
                     <p>{! error !}</p>
                 </div>
-                <div class="success" ng-if="success">
+                <div class="alert alert-success" ng-if="success">
                 	<p>{! success_msg !}</p>
                 </div>
 				<form class="form-horizontal" name="form_profile">

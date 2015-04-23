@@ -73,6 +73,7 @@ var controllers = angular.module('futureed.controllers', []);
 
       $scope.resendCode = function() {
         $scope.resend = true;
+        $scope.email = ($scope.email) ? $scope.email : $("input[name='username']").val();        
         $scope.forgotPassword($scope.email);
       }
 
@@ -114,52 +115,88 @@ var controllers = angular.module('futureed.controllers', []);
 
       $scope.validateCode = function(code) {
         $scope.error = "";
+        $scope.disabled = true;
         $scope.code = code;
+        $scope.email = ($scope.email) ? $scope.email : $("input[name='username']").val();
 
         loginAPIService.validateCode($scope.code, $scope.email).success(function(response) {
           if(response.status == 200) {
-            $("input[name='id']").val(response.data.id);
-            $("#success_form").submit();
-          } else {
+            if(response.errors) {
+              $scope.errorHandler(response.errors);
+            } else if(response.data){
+              $("input[name='id']").val(response.data.id);
+              $("#success_form").submit();
+            } 
+          } else if(response.status == 201) {
+            $scope.error = response.data.message;
+          } else if(response.status == 202) {
             $scope.error = response.data.message;
           }
+
+          $scope.disabled = false;
         }).error(function(response) {
-          $scope.error = response.errors.message;
+          $scope.disabled = false;
+          $scope.internalError();
         });
       }
 
       $scope.confirmCode = function(code) {
         $scope.error = "";
+        $scope.disabled = true;
         $scope.code = angular.copy(code);
         $scope.email = ($scope.email) ? $scope.email : $("input[name='email']").val();
 
         loginAPIService.confirmCode($scope.code, $scope.email).success(function(response) {
           if(response.status == 200) {
-            $("input[name='id']").val(response.data.id);
-            $("input[name='email']").val($scope.email);
-            $("#success_form").submit();
-          } else {
+            if(response.errors) {
+              $scope.errorHandler(response.errors);
+            } else if(response.data){
+              $("input[name='id']").val(response.data.id);
+              $("input[name='email']").val($scope.email);
+              $("#success_form").submit();
+            } 
+          } else if(response.status == 201) {
+            $scope.error = response.data.message;
+          } else if(response.status == 202) {
             $scope.error = response.data.message;
           }
+
+          $scope.disabled = false;
         }).error(function(response) {
-          $scope.error = response.errors.message;
+          $scope.disabled = false;
+          $scope.internalError();
         });
       }
 
       $scope.validateNewPassword = function() {
         $scope.error = "";
+        $scope.disabled = true;
 
         if($scope.new_password == $scope.image_id) {
           var code = $("input[name='code']").val();
           var id = $("input[name='id']").val();
 
           loginAPIService.resetPassword(id, code, $scope.new_password).success(function(response) {
-            $("#reset_password_form").submit();
+            if(response.status == 200) {
+              if(response.errors) {
+                $scope.errorHandler(response.errors);
+              } else if(response.data){
+                $("#reset_password_form").submit();
+              } 
+            } else if(response.status == 201) {
+              $scope.error = response.data.message;
+            } else if(response.status == 202) {
+              $scope.error = response.data.message;
+            }
+
+            $scope.disabled = false;
           }).error(function(response) {
-            $scope.error = response.errors.message;
+            $scope.disabled = false;
+            $scope.internalError();
           });
         } else {
           $scope.error = "Password does not match.";
+          $scope.disabled = false;
         }
 
         $("html, body").animate({ scrollTop: 0 }, "slow");
@@ -330,10 +367,11 @@ var controllers = angular.module('futureed.controllers', []);
               $scope.user.avatar = response.data.url;
             
               $scope.session_user = $scope.user;
+              $scope.has_avatar = true;
               loginAPIService.updateUserSession($scope.user).success(function(response) {
-                
+                  $("ul.avatar_list li").removeClass('selected');
               }).error(function() {
-
+                $scope.internalError();
               });
             }
           } else if(response.status == 201) {
@@ -411,22 +449,19 @@ var controllers = angular.module('futureed.controllers', []);
 
         loginAPIService.validatePassword($scope.user.id, $scope.image_id).success(function(response) {
           if(response.status == 200) {
-            $scope.image_id = "";
-            $scope.password_validated = true;
-            
-            $scope.getImagePassword();
+            if(response.errors) {
+              $scope.errorHandler(response.errors);
+            } else if(response.data){
+              $scope.image_id = "";
+              $scope.password_validated = true;
+              
+              $scope.getImagePassword();
+            } 
           } else if(response.status == 202) {
-            if(response.data.message == "Account Locked") {
-              $scope.locked = true;
-            } else {
-             $scope.error = response.data.message; 
-            }
-          } else {
-            $scope.error = response.errors.message;
+            $scope.locked = true; 
           }
         }).error(function(response) {
-            console.log(response);
-          // $scope.error = response.errors.message;
+            $scope.internalError();
         });
       }
 

@@ -25,6 +25,13 @@ class ProfileController extends Controller {
 		return view('student.profile.change_avatar', ['active' => 'avatar']);
 	}
 
+	public function update_session() {
+		$user = \Input::all();
+
+		Session::forget('user');
+		Session::put('user', json_encode($user));
+	}
+
 	public function getId() {
 		$user = $this->getUserObject();
 		if(isset($user)) {
