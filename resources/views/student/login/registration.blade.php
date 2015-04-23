@@ -30,7 +30,7 @@
                         <label for="" class="col-md-2 control-label">Username<span class="required">*</span></label>
                         <div class="col-md-4">
                             <input type="text" class="form-control" ng-model="reg.username" name="username" placeholder="Username" 
-                            ng-model-options="{debounce : {'default' : 1000}}" ng-change="checkAvailability(reg.username, 'username')" required />
+                            ng-model-options="{debounce : {'default' : 1000}}" ng-change="checkAvailability(reg.username)" required />
                             <span ng-if="u_error" class="error-msg-con"> Username is invalid or already exist</span>
                         </div>
                     </div> 
@@ -38,7 +38,7 @@
                         <label for="" class="col-md-2 control-label">Email<span class="required">*</span></label>
                         <div class="col-md-4">
                             <input type="text" class="form-control" ng-model="reg.email" name="email" placeholder="Email Address"
-                                ng-model-options="{debounce : {'default' : 1000}}" ng-change="checkAvailability(reg.email, 'email')" required />
+                                ng-model-options="{debounce : {'default' : 1000}}" ng-change="checkEmailAvailability(reg.email)" required />
                             <span ng-if="e_error" class="error-msg-con"> Email Address is invalid or already exist</span>
                         </div>
                     </div>
@@ -137,7 +137,7 @@
                     <div class="row">
                         <div class="col-md-2 col-md-offset-5 col-sm-4 col-sm-offset-4">
                             <div class="form-group">
-                                <a ng-click="validateRegistration(reg, terms)" class="btn btn-red">REGISTER</a>
+                                <a ng-click="validateRegistration(reg, terms)" class="btn btn-red" ng-disabled="disabled">REGISTER</a>
                             </div>    
                         </div>
                     </div>

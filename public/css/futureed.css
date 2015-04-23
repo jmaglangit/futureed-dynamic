@@ -49,6 +49,20 @@ body {/*background: radial-gradient(transparent 50%, rgba(0, 0, 0, 0.3) 100%), l
 
 .error * { margin-bottom:  0;}
 
+.success {
+	margin: 10px 0;
+  	border: 1px solid green;
+  	background-color: lightgreen;
+  	min-height: 40px;
+  	border-radius: 3px;
+  	font-size: 15px;
+  	line-height: 40px;
+  	color: green;
+  	text-align: center;
+}
+
+.success * { margin-bottom:  0;}
+
 
 /*----- BUTTON -----*/
 .btn {
@@ -629,4 +643,8 @@ footer{font:normal 12px/30px arial; }
 	font-style: italic;
 	font-size: 12px;
 	color: red;
+}
+
+.error_1008 {
+	line-height: 30px;
 }

@@ -30,7 +30,7 @@
             </div>
             <div class="form-group">
               <input type="text" class="form-control" ng-model="reset_code" name="reset_code" placeholder="Reset Code" required />
-              <input type="hidden" ng-model="email" name="email" value="{!! $email !!}" required />
+              <input type="hidden" ng-model="username" name="username" value="{!! $email !!}" required />
               <input type="hidden" ng-model="id" name="id" required />
             </div>
             <button type="button" class="btn btn-red" ng-click="validateCode(reset_code)">PROCEED</button>
