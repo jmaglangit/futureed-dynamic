@@ -89,7 +89,12 @@ class UserController extends ApiController{
                 'message' => 'Code expired'
             ]);
         }
-
+        
+        if(isset($user_detail['id'])){
+         
+            $this->user->updateInactiveLock($user_detail['id']);
+            
+        }
         $return = $this->student->getStudentId($user_detail['id']);
         return $this->respondWithData([
             'id' => $return
