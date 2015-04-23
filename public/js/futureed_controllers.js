@@ -4,9 +4,9 @@ var controllers = angular.module('futureed.controllers', []);
       $scope.error = "";
 
       $scope.errorHandler = function(errors) {
-        var error_object = (typeof errors[0] != "undefined") ? errors[0] : errors;
-        $scope.error = error_object.message;
-        return error_object.error_code;
+        $scope.error_object = (typeof errors[0] != "undefined") ? errors[0] : errors;
+        $scope.error = $scope.error_object.message;
+        return $scope.error_object.error_code;
       }
 
       $scope.internalError = function() {
@@ -33,15 +33,18 @@ var controllers = angular.module('futureed.controllers', []);
         });
       }
 
-      $scope.highlight = function() {
-        $("ul.form_password li").removeClass('selected');
-        $(event.currentTarget).addClass('selected');
+      $scope.highlight = function(e) {
+        var e = e || window.event;
+        var targ = e.currentTarget || e.srcElement;
 
-        $scope.image_id = $(event.currentTarget).find("#image_id").val();
+        $("ul.form_password li").removeClass('selected');
+        $(targ).addClass('selected');
+
+        $scope.image_id = $(targ).find("#image_id").val();
       }
 
       $scope.selectPassword = function(event) {
-          $scope.highlight();
+          $scope.highlight(event);
           $scope.validatePassword();
       }
 
@@ -101,15 +104,17 @@ var controllers = angular.module('futureed.controllers', []);
 
         loginAPIService.validatePassword($scope.id, $scope.image_id).success(function(response) {
           if(response.status == 200) {
-            $("#response").val(JSON.stringify(response.data));
-            $("#password_form").submit();
+            if(response.errors) {
+              $scope.errorHandler(response.errors);
+            } else if(response.data){
+              $("#response").val(JSON.stringify(response.data));
+              $("#password_form").submit();
+            } 
           } else if(response.status == 202) {
-            if(response.data.message == "Account Locked") {
-              $scope.locked = true;
-            } else {
-              $scope.error = "Password does not match.";
-            }
+            $scope.error = response.data.message;
           }
+        }).error(function(response) {
+          $scope.internalError();
         });
       } 
 
@@ -228,7 +233,7 @@ var controllers = angular.module('futureed.controllers', []);
                 $scope.u_error = true;
               }
             } else if(response.data) {
-              if(response.data.id == $scope.user.id) {
+              if($scope.user && (response.data.id == $scope.user.id)) {
                 $scope.u_error = false;
               } else {
                 $scope.u_error = true;
@@ -255,8 +260,12 @@ var controllers = angular.module('futureed.controllers', []);
                 $scope.e_error = true;
               }
             } else if(response.data) {
-              $scope.e_error = true;
-              $scope.error = "Email already exist";
+              if($scope.user && (response.data.id == $scope.user.id)) {
+                $scope.e_error = false;
+              } else {
+                $scope.e_error = true;
+                $scope.error = "Email already exist";  
+              }
             }
           }
         }).error(function(response) {
@@ -264,7 +273,7 @@ var controllers = angular.module('futureed.controllers', []);
         });
       }
 
-      $scope.validateRegistration = function(registration, terms) {
+      $scope.validateRegistration = function(reg, terms) {
         $scope.error = "";
         $scope.terms = angular.copy(terms);
 
@@ -273,21 +282,22 @@ var controllers = angular.module('futureed.controllers', []);
           $scope.error = "Please fill the required fields"
         } else {
           if($scope.terms) {
-            $scope.registration = registration;
+            $scope.reg = reg;
             
-            if($scope.registration) {
-              $scope.registration.birth_date = $("input[name='birth_date']").val();
-              $scope.registration.school_code = -1;
+            if($scope.reg) {
+              $scope.reg.birth_date = $("input[name='birth_date']").val();
+              $scope.reg.school_code = -1;
             }
             
             $scope.disabled = true;
-            loginAPIService.validateRegistration($scope.registration).success(function(response) {
+            loginAPIService.validateRegistration($scope.reg).success(function(response) {
               if(response.status == 200) {
                 if(response.errors) {
                   $scope.errorHandler(response.errors);
+                  $("#" + $scope.error_object.field).addClass("required-field");
                 } else if(response.data){
                   $scope.success = true;
-                  $scope.email = $scope.registration.email;
+                  $scope.email = $scope.reg.email;
                 } 
               } else if(response.status == 201) {
                 $scope.error = response.data.message;
@@ -352,9 +362,12 @@ var controllers = angular.module('futureed.controllers', []);
       }
 
       $scope.highlightAvatar = function($event) {
+        var e = e || window.event;
+        var targ = e.currentTarget || e.srcElement;
+
         $("ul.avatar_list li").removeClass('selected');
-        $($event.currentTarget).addClass('selected');
-        $scope.avatar_id = $($event.currentTarget).find("#avatar_id").val(); 
+        $(targ).addClass('selected');
+        $scope.avatar_id = $(targ).find("#avatar_id").val(); 
       }
 
       $scope.selectAvatar = function() {
@@ -389,6 +402,8 @@ var controllers = angular.module('futureed.controllers', []);
       }
 
       $scope.setActive = function(active) {
+        $scope.error = "";
+
         switch(active) {
           case "rewards"  :
             $scope.active_rewards = 1;
@@ -422,26 +437,32 @@ var controllers = angular.module('futureed.controllers', []);
 
       $scope.saveProfile = function(prof) {
         $scope.error = "";
-        $scope.prof.school_code = 1;
-        $scope.prof.birth_date = $("input[name='birth_date']").val();
 
-        loginAPIService.saveProfile($scope.prof).success(function(response) {
-          if(response.status == 200) {
-            if(response.errors) {
-              $scope.errorHandler(response.errors);
-            } else if(response.data){
-              $scope.setActive('index');
-              $scope.success = true;
-              $scope.success_msg = "Successfully update profile";
+        var has_empty = highlight_empty('form_registation');
+        if (has_empty) {
+          $scope.error = "Please fill the required fields"
+        } else {
+          $scope.prof.school_code = 1;
+          $scope.prof.birth_date = $("input[name='birth_date']").val();
+
+          loginAPIService.saveProfile($scope.prof).success(function(response) {
+            if(response.status == 200) {
+              if(response.errors) {
+                $scope.errorHandler(response.errors);
+              } else if(response.data){
+                $scope.setActive('index');
+                $scope.success = true;
+                $scope.success_msg = "Successfully update profile";
+              }
+            } else if(response.status == 201) {
+              $scope.error = response.data.message;
+            } else if(response.status == 202) {
+              $scope.error = response.data.message;
             }
-          } else if(response.status == 201) {
-            $scope.error = response.data.message;
-          } else if(response.status == 202) {
-            $scope.error = response.data.message;
-          }
-        }).error(function(response) {
-          $scope.internalError();
-        });
+          }).error(function(response) {
+            $scope.internalError();
+          });
+        }
       }
 
       $scope.validateCurrentPassword = function() {
