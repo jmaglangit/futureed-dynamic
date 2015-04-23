@@ -521,10 +521,16 @@ var controllers = angular.module('futureed.controllers', []);
         if($scope.image_id == $scope.new_password) {
             loginAPIService.changePassword($scope.user.id, $scope.image_id, $scope.user.access_token).success(function(response) {
               if(response.status == 200) {
-                $scope.password_confirmed = true;
+                if(response.errors) {
+                  $scope.errorHandler(response.errors);
+                } else if(response.data){
+                  $scope.password_confirmed = true;
+                } 
+              } else if(response.status == 201) {
+                $scope.error = response.errors.message;
               }
             }).error(function(response) {
-
+              $scope.internalError();
             });
         } else {
           $scope.error = "Password does not match"
