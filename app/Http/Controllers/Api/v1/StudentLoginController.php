@@ -60,8 +60,8 @@ class StudentLoginController extends StudentController {
                     
 
                     return $this->respondWithError([
-                        'error_code' => 1008,
-                        'message' => $parent_message['1008'],
+                        'error_code' => 2008,
+                        'message' => $parent_message[2008],
                     ]);
 
                 }else{
