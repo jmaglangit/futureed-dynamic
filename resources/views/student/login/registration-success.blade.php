@@ -1,4 +1,4 @@
-<div class="col-md-6 col-md-offset-3" ng-if="success || {!! $success !!}">
+<div class="col-md-6 col-md-offset-3" ng-if="success">
 	<div class="form-style form-select-password">
 		<div class="title">Thank you for registering to Future Lesson!</div>
 		<div class="error" ng-if="error">{! error !}</div>

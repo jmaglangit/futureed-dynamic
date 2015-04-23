@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="container login" ng-cloak>
-    <div class="form-style register_student form-wide" ng-init="success=false" ng-if="!success && {!! !$success !!}"> 
+    <div class="form-style register_student form-wide" ng-init="success=false" ng-if="!success"> 
         <form class="form-horizontal simple-form" name="form_registration" id="form_registation">
             <div class="form-header">
                 <div class="media">
@@ -69,13 +69,13 @@
                             <div class="dropdown">
                               <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
                                 <div class="input-group">
-                                    <input disabled="disabled" type="text" class="form-control" value="{! reg.birth_date | date:'yyyy-MM-dd' !}">
-                                    <input type="hidden" name="birth_date" value="{! reg.birth_date | date:'yyyyMMdd' !}">
+                                    <input disabled="disabled" type="text" id="birth_date" class="form-control" value="{! reg.birth | date:'yyyy-MM-dd' !}">
+                                    <input type="hidden" name="birth_date" value="{! reg.birth | date:'yyyyMMdd' !}">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                                 </div>
                               </a>
                               <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                <datetimepicker data-ng-model="reg.birth_date" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', startView:'day', minView:'day' }"/>
+                                <datetimepicker data-ng-model="reg.birth" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', startView:'day', minView:'day' }"/>
                               </ul>
                             </div>
                         </div>
