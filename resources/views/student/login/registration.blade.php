@@ -118,7 +118,7 @@
                         <div class="col-md-4 nullable">
                             <select class="form-control" ng-model="reg.grade_code">
                                 <option value="">-- Select Level --</option>
-                                <option ng-repeat="grade in grades" value="{! grade.id !}">{! grade.name !}</option>
+                                <option ng-repeat="grade in grades" value="{! grade.code !}">{! grade.name !}</option>
                             </select>
                         </div><br><br>
                     </div>    
