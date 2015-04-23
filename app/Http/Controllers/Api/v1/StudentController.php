@@ -36,11 +36,23 @@ class StudentController extends ApiController {
 	 * @return Response
 	 */
 	public function show($id)
-	{        
-        $students = $this->student->getStudentDetails($id); 
-        return $this->respondWithData([
-            $students
-        ]);
+	{   
+		$error = config('futureed-error.error_messages');
+		
+		if($this->student->checkIdExist($id)){
+		     
+	        $students = $this->student->getStudentDetails($id); 
+	        return $this->respondWithData([
+	            $students
+	        ]);
+	        	
+	    }else{
+	    	
+	    	return $this->setStatusCode(202)
+						->respondWithData(['error_code' => 2001,
+										   'message' => $error[2001]
+										 ]); 
+	    }
 	}
 
 	/**
