@@ -226,11 +226,13 @@ class UserServices {
     }
 
     public function checkUsername($username,$user_type){
+        $error_msg = config('futureed-error.error_messages');
         $return = $this->users->checkUserName($username,$user_type);
+
         if(is_null($return)){
             return [
-                'error_code' => 204,
-                'message' => 'Username does not exist'
+                'error_code' => 2001,
+                'message' => $error_msg[2001]
             ];
         }
 

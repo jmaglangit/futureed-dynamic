@@ -33,15 +33,15 @@ class UserController extends ApiController{
 
         $return =  $this->user->checkUsername($username,$user_type);
         
-        if($input['user_type'] == 'Student'){
 
-            $return['user_id'] = $this->student->getStudentId($return['user_id']);
-
-        }
 
         if(isset($return['error_code'])){
 
-            return $this->setStatusCode(204)->respondWithError($return);
+            return $this->respondWithError($return);
+
+        }elseif($input['user_type'] == 'Student'){
+
+            $return['user_id'] = $this->student->getStudentId($return['user_id']);
 
         }
 
