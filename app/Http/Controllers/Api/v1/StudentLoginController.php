@@ -93,20 +93,18 @@ class StudentLoginController extends StudentController {
 
         $input = Input::only('id');
 
-        if(!$input['id']){
+        $this->addMessageBag($this->validateNumber($input,'id'));
 
-            return $this->setStatusCode(422)
-                        ->respondWithError(['error_code'=>422,
-                                            'message'=>'Parameter validation failed'
-                                         ]);
+        if($this->getMessageBag()){
 
-        } else {
+            return $this->respondWithError($this->getMessageBag());
+        }
 
             //TODO: Get image password of student.
 
                 $response = $this->student->getImagePassword($input['id']);
                 return $this->setStatusCode($response['status'])->respondWithData($response['data']);
-        }
+
 
     }
 
