@@ -210,13 +210,14 @@ class UserServices {
     }
 
     public function checkEmail($email,$user_type){
+        $error_msg = config('futureed-error.error_messages');
         //check email if it exist
         $return =  $this->users->checkEmail($email,$user_type);
 
         if(is_null($return)){
             return [
-                'error_code' => 204,
-                'message' => 'Email does not exist'
+                'error_code' => 2002,
+                'message' => $error_msg[2002]
             ];
         }
         return [
