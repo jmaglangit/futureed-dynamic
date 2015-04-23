@@ -20,33 +20,51 @@ class StudentPasswordController extends StudentController {
     
     public function passwordReset(){
     	
-         $input = Input::only('id','reset_code','password_image_id');
+       $input = Input::only('id','reset_code','password_image_id');
+       $error = config('futureed-error.error_messages');
 
-        if(!$input['id'] || !$input['reset_code'] || !$input['password_image_id']){
-           return $this->setStatusCode(422)
-                        ->respondWithError(['error_code'=>422,
-                                            'message'=>'Parameter validation failed'
-                                          ]);
-        } else {
-          
-           $student_reference = $this->student->getStudentReferences($input['id']);
-           
-           $userdata=$this->user->getUserDetail($student_reference['user_id'],'Student');
-
-           if($input['reset_code']==$userdata['reset_code'] || $input['reset_code']==$userdata['confirmation_code'] ){
+       $this->addMessageBag($this->validateNumber($input,'id'));
+       $this->addMessageBag($this->validateNumber($input,'reset_code'));
+       $this->addMessageBag($this->validateNumber($input,'password_image_id'));
+        
+       $msg_bag = $this->getMessageBag();
+         
+       if($msg_bag){
+        
+          return $this->respondWithError($this->getMessageBag());
+         
+       } else {
+        
+          if($this->student->checkIdExist($input['id'])){
             
-              $return = $this->student->resetPasswordImage($input);
-              
-              $this->user->updateInactiveLock($student_reference['user_id']);
-              
-              
-              return $this->setStatusCode($return['status'])
-                          ->respondWithData(['id'=>$return['data']]);
-           }else{
-                return $this->setStatusCode(202)
-                            ->respondWithData(['error_code'=>202,'message'=>'Invalid forgot password reset code']);
-           }
+             $student_reference = $this->student->getStudentReferences($input['id']);
            
+             $userdata=$this->user->getUserDetail($student_reference['user_id'],'Student');
+
+              if($input['reset_code']==$userdata['reset_code'] || $input['reset_code']==$userdata['confirmation_code'] ){
+            
+                 $return = $this->student->resetPasswordImage($input);
+              
+                 $this->user->updateInactiveLock($student_reference['user_id']);
+              
+              
+                 return $this->setStatusCode($return['status'])
+                          ->respondWithData(['id'=>$return['data']]);
+               }else{
+                    
+                    return $this->respondWithData(['error_code' => 2100,
+                                                   'message' => $error[2100] 
+                                                 ]);
+               }
+            
+          }else{
+    
+                return $this->respondWithData(['error_code' => 2001,
+                                                   'message' => $error[2001] 
+                                                 ]);
+             
+          }
+        
 
         }
          
