@@ -232,7 +232,7 @@ trait ApiValidatorTrait {
 
                 $validator_msg = $validator->messages()->toArray();
 
-                return $this->setErrorCode(1007)
+                return $this->setErrorCode(1008)
                     ->setField($gender)
                     ->setMessage($validator_msg["$gender"][0])
                     ->errorMessage();
