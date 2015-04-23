@@ -135,6 +135,21 @@ class ApiController extends Controller {
 
     }
 
+    public function respondErrorMessage($error_code){
+        $error_msg  = config('futureed-error.error_messages');
+
+        if(!is_null($error_code)){
+
+            return $this->respondWithError(
+                    [
+                        'error_code' => $error_code,
+                        'message' => $error_msg[$error_code]
+                    ]
+                );
+        }
+
+    }
+
 
 
     
