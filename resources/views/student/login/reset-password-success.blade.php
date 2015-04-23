@@ -8,7 +8,7 @@
           <div class="roundcon">
             <i class="fa fa-check fa-5x img-rounded text-center"></i>
           </div>
-           You're password has been set. <br /> You may now use your new password to login. <br />
+           Your password has been set. <br /> You may now use your new password to login. <br />
           <a class="btn btn-red" href="{!! route('student.login') !!}">Click here to Login</a>    
       </div>
     </div>

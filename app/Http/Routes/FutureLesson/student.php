@@ -4,9 +4,10 @@
 	{
 		Routes::get('/', 'FutureLesson\Student\LoginController@index');
 		Routes::get('/registration', ['as' => 'student.registration', 'uses' => 'FutureLesson\Student\LoginController@registration']);
-		Routes::get('/email/confirm', ['as' => 'student.login.confirm', 'uses' => 'FutureLesson\Student\LoginController@reset_code']);
+		Routes::get('/email/confirm', ['as' => 'student.login.confirm', 'uses' => 'FutureLesson\Student\LoginController@registration']);
 		Routes::get('/password/reset', ['as' => 'student.password.reset_code', 'uses' => 'FutureLesson\Student\LoginController@reset_code']);
 		Routes::get('/logout', [ 'as' => 'student.logout', 'uses' => 'FutureLesson\Student\LoginController@logout']);
+		Routes::post('/update-user-session', [ 'as' => 'student.update_user_session', 'uses' => 'FutureLesson\Student\ProfileController@update_session']);
 		
 		Routes::group(['prefix' => '/login'], function()
 		{
