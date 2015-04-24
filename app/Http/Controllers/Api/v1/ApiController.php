@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
 use FutureEd\Http\Controllers\Api\Traits\ErrorMessageTrait;
 use FutureEd\Http\Controllers\Api\Traits\ApiValidatorTrait;
+use FutureEd\Http\Controllers\Api\Traits\ClientValidatorTrait;
 
 
 
@@ -27,6 +28,7 @@ use FutureEd\Http\Controllers\Api\Traits\ApiValidatorTrait;
 class ApiController extends Controller {
 
     use ApiValidatorTrait;
+    // use ClientValidatorTrait;
 
     private $status_code = Response::HTTP_OK;
     private $header = [];
