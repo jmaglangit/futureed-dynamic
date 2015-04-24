@@ -8,8 +8,8 @@
       <form name="success_form" id="success_form" 
             action="{!! route('student.login.reset_password') !!}" method="POST">
         <div class="form_content">
-          <div class="title" ng-if="!resent">@if($show) Email Sent @else Enter Reset Code @endif</div>
-          <div class="title" ng-if="resent">Code Resent</div>
+          <div class="title" ng-if="!resend">@if($show) Email Sent @else Enter Code @endif</div>
+          <div class="title" ng-if="resend">Code Resent</div>
 
           <div class="error" ng-if="error">
             <p>{! error !}</p>
@@ -30,7 +30,7 @@
             </div>
             <div class="form-group">
               <input type="text" class="form-control" ng-model="reset_code" name="reset_code" placeholder="Reset Code" required />
-              <input type="hidden" ng-model="email" name="email" value="{!! $email !!}" required />
+              <input type="hidden" ng-model="username" name="username" value="{!! $email !!}" required />
               <input type="hidden" ng-model="id" name="id" required />
             </div>
             <button type="button" class="btn btn-red" ng-click="validateCode(reset_code)">PROCEED</button>

@@ -41,7 +41,7 @@
 				</div>
 			</div>
 				<div class="form-content col-md-12">
-					<div>
+					<div class="alert alert-info">
 						No Rewards yet.
 					</div>
 				</div>

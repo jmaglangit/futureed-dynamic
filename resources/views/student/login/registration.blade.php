@@ -30,7 +30,7 @@
                         <label for="" class="col-md-2 control-label">Username<span class="required">*</span></label>
                         <div class="col-md-4">
                             <input type="text" class="form-control" ng-model="reg.username" name="username" placeholder="Username" 
-                            ng-model-options="{debounce : {'default' : 1000}}" ng-change="checkAvailability(reg.username, 'username')" required />
+                            ng-model-options="{debounce : {'default' : 1000}}" ng-change="checkAvailability(reg.username)" required />
                             <span ng-if="u_error" class="error-msg-con"> Username is invalid or already exist</span>
                         </div>
                     </div> 
@@ -38,7 +38,7 @@
                         <label for="" class="col-md-2 control-label">Email<span class="required">*</span></label>
                         <div class="col-md-4">
                             <input type="text" class="form-control" ng-model="reg.email" name="email" placeholder="Email Address"
-                                ng-model-options="{debounce : {'default' : 1000}}" ng-change="checkAvailability(reg.email, 'email')" required />
+                                ng-model-options="{debounce : {'default' : 1000}}" ng-change="checkEmailAvailability(reg.email)" required />
                             <span ng-if="e_error" class="error-msg-con"> Email Address is invalid or already exist</span>
                         </div>
                     </div>
@@ -69,13 +69,13 @@
                             <div class="dropdown">
                               <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
                                 <div class="input-group">
-                                    <input disabled="disabled" type="text" class="form-control" value="{! reg.birth_date | date:'yyyy-MM-dd' !}">
-                                    <input type="hidden" name="birth_date" value="{! reg.birth_date | date:'yyyyMMdd' !}">
+                                    <input disabled="disabled" type="text" id="birth_date" class="form-control" value="{! reg.birth | date:'yyyy-MM-dd' !}">
+                                    <input type="hidden" name="birth_date" value="{! reg.birth | date:'yyyyMMdd' !}">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                                 </div>
                               </a>
                               <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                <datetimepicker data-ng-model="reg.birth_date" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', startView:'day', minView:'day' }"/>
+                                <datetimepicker data-ng-model="reg.birth" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', startView:'day', minView:'day' }"/>
                               </ul>
                             </div>
                         </div>
@@ -118,7 +118,7 @@
                         <div class="col-md-4 nullable">
                             <select class="form-control" ng-model="reg.grade_code">
                                 <option value="">-- Select Level --</option>
-                                <option ng-repeat="grade in grades" value="{! grade.id !}">{! grade.name !}</option>
+                                <option ng-repeat="grade in grades" value="{! grade.code !}">{! grade.name !}</option>
                             </select>
                         </div><br><br>
                     </div>    
@@ -137,7 +137,7 @@
                     <div class="row">
                         <div class="col-md-2 col-md-offset-5 col-sm-4 col-sm-offset-4">
                             <div class="form-group">
-                                <a ng-click="validateRegistration(reg, terms)" class="btn btn-red">REGISTER</a>
+                                <a ng-click="validateRegistration(reg, terms)" class="btn btn-red" ng-disabled="disabled">REGISTER</a>
                             </div>    
                         </div>
                     </div>

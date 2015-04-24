@@ -39,7 +39,7 @@
 				</div>
 			</div>
 				<div class="form-content">
-					<div ng-if="has_avatar">
+					<div class="alert alert-success" ng-if="has_avatar">
 						You have successfully changed your avatar.
 					</div>
 					<div class="col-md-10 col-md-offset-1" ng-if="!has_avatar">
@@ -50,7 +50,7 @@
 				            <p>{! error !}</p>
 				          </div>
 				          <div class="form_content">
-				            <ul class="form_password list-unstyled list-inline" ng-init="getAvatarImages('true')">
+				            <ul class="avatar_list list-unstyled list-inline" ng-init="getAvatarImages('true')">
 				              <li class="item avtrcon" style="width:20%" ng-repeat="avatar in avatars" ng-click="highlightAvatar($event)">
 				                 <img ng-src="{! avatar.url !}" alt="{! avatar.name !}">
 				                 <input type="hidden" id="avatar_id" name="avatar_id" value="{! avatar.id !}">

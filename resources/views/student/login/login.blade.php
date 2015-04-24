@@ -8,7 +8,7 @@
         @include('student.login.enter-password')
 
         <div ng-show="!locked && !enter_pass">
-          <form id="login_form" name="loginForm" method="POST">
+          <form id="login_form" name="login_form" method="POST">
             <div class="title">Enter Your Username or Email</div>
             <div class="error" ng-if="error">
               <p>{! error !}</p>

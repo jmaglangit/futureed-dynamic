@@ -43,22 +43,28 @@
 				</div>
 			</div>
 			<div class="form-content col-md-12">
+				<div class="alert alert-danger" ng-if="error">
+                    <p>{! error !}</p>
+                </div>
+                <div class="alert alert-success" ng-if="success">
+                	<p>{! success_msg !}</p>
+                </div>
 				<form class="form-horizontal" name="form_profile">
 					<fieldset>
 						<legend>Credentials Information</legend>
 						<div class="form-group">
-	                        <label for="" class="col-md-2 control-label">Username</label>
-	                        <div class="col-md-4">
+	                        <label for="" class="col-md-2 control-label">Username <span class="required">*</span></label>
+	                        <div class="col-md-5">
                             <input ng-disabled="!edit" type="text" class="form-control" ng-model="prof.username" name="username" placeholder="Username" 
-                            ng-model-options="{debounce : {'default' : 1000}}" ng-change="checkAvailability(prof.username, 'username')" required />
+                            ng-model-options="{debounce : {'default' : 1000}}" ng-change="checkAvailability(prof.username)" required />
                             <span ng-if="u_error" class="error-msg-con"> Username is invalid or already exist</span>
                         </div>
 	                    </div>
 						<div class="form-group">
-	                        <label for="" class="col-md-2 control-label">Email</label>
-	                        <div class="col-md-4">
+	                        <label for="" class="col-md-2 control-label">Email <span class="required">*</span></label>
+	                        <div class="col-md-5">
                             <input ng-disabled="!edit" type="text" class="form-control" ng-model="prof.email" name="email" placeholder="Email Address"
-                                ng-model-options="{debounce : {'default' : 1000}}" ng-change="checkAvailability(prof.email, 'email')" required />
+                                ng-model-options="{debounce : {'default' : 1000}}" ng-change="checkEmailAvailability(prof.email)" required />
                             <span ng-if="e_error" class="error-msg-con"> Email Address is invalid or already exist</span>
                         </div>
 	                    </div>
@@ -66,25 +72,25 @@
 					<fieldset>
 						<legend>Personal Information</legend>
 						<div class="form-group">
-	                        <label for="" class="col-md-2 control-label">First Name</label>
+	                        <label for="" class="col-md-2 control-label">First Name <span class="required">*</span></label>
 	                        <div class="col-md-5">
 	                            <input type="text" class="form-control" ng-disabled="!edit" ng-model="prof.first_name">
 	                        </div>
 	                    </div>
 						<div class="form-group">
-	                        <label for="" class="col-md-2 control-label">Last Name</label>
+	                        <label for="" class="col-md-2 control-label">Last Name <span class="required">*</span></label>
 	                        <div class="col-md-5">
 	                            <input type="text" class="form-control" ng-disabled="!edit" ng-model="prof.last_name">
 	                        </div>
 	                    </div>
 	                    <div class="form-group">
-	                        <label for="" class="col-md-2 control-label">Gender</label>
+	                        <label for="" class="col-md-2 control-label">Gender <span class="required">*</span></label>
 	                        <div class="col-md-5">
 	                            {!! Form::select('', array('Male' => 'Male', 'Female' => 'Female'), 'prof.gender',array('class' => 'form-control', 'ng-model' => 'prof.gender', 'ng-disabled' => '!edit')); !!}
 	                        </div>
 	                    </div>  
 	                    <div class="form-group">
-	                        <label for="" class="col-md-2 control-label">Birthday</label>
+	                        <label for="" class="col-md-2 control-label">Birthday <span class="required">*</span></label>
 	                        <div class="col-md-5">
 	                            <div class="dropdown">
 	                              <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
@@ -107,25 +113,25 @@
 	                        </div>
 	                    </div>
 	                    <div class="form-group">
-	                        <label for="" class="col-md-2 control-label">City</label>
+	                        <label for="" class="col-md-2 control-label">City <span class="required">*</span></label>
 	                        <div class="col-md-5">
 	                            <input type="text" class="form-control" ng-model="prof.city" ng-disabled="!edit">
 	                        </div>
 	                    </div>
 	                    <div class="form-group">
-	                        <label for="" class="col-md-2 control-label">State</label>
+	                        <label for="" class="col-md-2 control-label">State <span class="required">*</span></label>
 	                        <div class="col-md-5">
 	                            <input type="text" class="form-control" ng-model="prof.state" ng-disabled="!edit">
 	                        </div>
 	                    </div>
 	                    <div class="form-group">
-	                        <label for="" class="col-md-2 control-label">Country</label>
+	                        <label for="" class="col-md-2 control-label">Country <span class="required">*</span></label>
 	                        <div class="col-md-5">
 	                            <select class="form-control" ng-model="prof.country" ng-disabled="!edit">
-	                                <option value="">-- Select Country --</option>
-	                                <option value="Philippines">Philippines</option>
-	                                <option value="Singapore">Singapore</option>
-	                                <option value="United States">United States</option>
+	                                <option selected="selected" value="">-- Select Country --</option>
+	                                <option ng-selected="{! prof.country == 'Philippines' !}" value="Philippines">Philippines</option>
+	                                <option ng-selected="{! prof.country == 'Singapore' !}"value="Singapore">Singapore</option>
+	                                <option ng-selected="{! prof.country == 'United States' !}"value="United States">United States</option>
 	                            </select>
 	                        </div>
 	                    </div>
@@ -139,12 +145,12 @@
 	                        </div>
 	                    </div>
 						<div class="form-group" ng-init="getGradeLevel()">
-                        <label for="" class="col-md-2 control-label">School level<span class="required">*</span></label>
+                        <label for="" class="col-md-2 control-label">School level <span class="required">*</span></label>
 
                         <div class="col-md-5 nullable">
                             <select class="form-control" ng-model="prof.grade_code" ng-disabled="!edit">
                                 <option value="">-- Select Level --</option>
-                                <option ng-selected="prof.grade_code == {! grade.id !}" ng-repeat="grade in grades" value="{! grade.id !}">{! grade.name !}</option>
+                                <option ng-selected="{! prof.grade_code == grade.code !}" ng-repeat="grade in grades" value="{! grade.code !}">{! grade.name !}</option>
                             </select>
                         </div><br><br>
                     </div>   
