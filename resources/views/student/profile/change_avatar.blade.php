@@ -61,7 +61,7 @@
 				        <input type="hidden" ng-model="session_user" />
 				      </form>
 				    </div>
-				    <div class="btn-container">
+				    <div class="btn-container" ng-if="!has_avatar">
 				        <button type="button" class="btn btn-red" ng-click="selectAvatar()">Proceed</button>
 				        <a href="{!! route('student.profile.index') !!}" class="btn btn-purple">Cancel</a>
 			      	</div>
