@@ -15,7 +15,7 @@ class StudentLoginController extends StudentController {
 
 		$input = Input::only('username');
 
-        $parent_message = config('futureed-error.error_code');
+        $parent_message = config('futureed-error.error_messages');
         //$this->addMessageBag($this->emptyUsername($input,'username'));
         
         $flag=0;
@@ -93,20 +93,22 @@ class StudentLoginController extends StudentController {
 
         $input = Input::only('id');
 
-        if(!$input['id']){
+        $this->addMessageBag($this->validateNumber($input,'id'));
 
-            return $this->setStatusCode(422)
-                        ->respondWithError(['error_code'=>422,
-                                            'message'=>'Parameter validation failed'
-                                         ]);
+        if($this->getMessageBag()){
 
-        } else {
-
-            //TODO: Get image password of student.
-
-                $response = $this->student->getImagePassword($input['id']);
-                return $this->setStatusCode($response['status'])->respondWithData($response['data']);
+            return $this->respondWithError($this->getMessageBag());
         }
+
+        $response = $this->student->getImagePassword($input['id']);
+
+        if(!$response){
+
+            return $this->respondErrorMessage(2001);
+        }
+
+        return $this->respondWithData($response['data']);
+
 
     }
 
