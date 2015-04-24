@@ -69,6 +69,10 @@ class AppServiceProvider extends ServiceProvider {
             'FutureEd\Models\Repository\Grade\GradeRepositoryInterface',
             'FutureEd\Models\Repository\Grade\GradeRepository'
         );
+        $this->app->bind(
+            'FutureEd\Models\Repository\Country\CountryRepositoryInterface',
+            'FutureEd\Models\Repository\Country\CountryRepository'
+        );
 
 
 
