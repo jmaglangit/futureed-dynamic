@@ -16,6 +16,10 @@ class LoginController extends Controller {
 	 */
 	public function index()
 	{
+		if(Session::get('user')) {
+			return view('student.dashboard.index');
+		}
+
 		return view('student.login.login');
 	}
 

@@ -10,9 +10,20 @@ var controllers = angular.module('futureed.controllers', []);
       }
 
       $scope.internalError = function() {
-        $scope.error = "Internal Server Error.";
+        $scope.error = "Internal Server Error";
       }
 
+      $scope.highlight = function(e) {
+        var target = getTarget(e);
+
+        $("ul.form_password li").removeClass('selected');
+        $(target).addClass('selected');
+        $scope.image_id = $(target).find("#image_id").val();
+      }
+
+      /** 
+       * Login
+       */
       $scope.validateUser = function() {
         $scope.error = "";
 
@@ -33,21 +44,20 @@ var controllers = angular.module('futureed.controllers', []);
         });
       }
 
-      $scope.highlight = function(e) {
-        var e = e || window.event;
-        var targ = e.currentTarget || e.srcElement;
-
-        $("ul.form_password li").removeClass('selected');
-        $(targ).addClass('selected');
-
-        $scope.image_id = $(targ).find("#image_id").val();
-      }
-
-      $scope.selectPassword = function(event) {
-          $scope.highlight(event);
+      $scope.selectPassword = function(e) {
+          $scope.highlight(e);
           $scope.validatePassword();
       }
 
+      $scope.cancelLogin = function() {
+        $scope.enter_pass = false;
+        $scope.id = "";
+        $scope.username = "";
+      }
+
+      /** 
+       * Forgot Password 
+       */
       $scope.forgotPassword = function(username) {
         $scope.error = "";
         $scope.disabled = true;
@@ -221,20 +231,25 @@ var controllers = angular.module('futureed.controllers', []);
 
       $scope.checkAvailability = function(username) {
         $scope.error = "";
+        $scope.u_loading = true;
+        $scope.u_success = false;
+        $scope.u_error = false;
 
         loginAPIService.validateUsername(username).success(function(response) {
+          $scope.u_loading = false;
+
           if(response.status == 200) {
             if(response.errors) {
               var error_code = $scope.errorHandler(response.errors);
               if(error_code == 2001) {
                 $scope.error = "";
-                $scope.u_error = false;
+                $scope.u_success = true;
               } else {
                 $scope.u_error = true;
               }
             } else if(response.data) {
               if($scope.user && (response.data.id == $scope.user.id)) {
-                $scope.u_error = false;
+                $scope.u_success = true;
               } else {
                 $scope.u_error = true;
                 $scope.error = "Username already exist";  
@@ -242,26 +257,32 @@ var controllers = angular.module('futureed.controllers', []);
             }
           }
         }).error(function(response) {
+          $scope.u_loading = false;
           $scope.internalError();
         });
       }
 
       $scope.checkEmailAvailability = function(email) {
         $scope.error = "";
-        
+        $scope.e_loading = true;
+        $scope.e_success = false;
+        $scope.e_error = false;
+
         loginAPIService.validateEmail(email).success(function(response) {
+          $scope.e_loading = false;
+
           if(response.status == 200) {
             if(response.errors) {
               var error_code = $scope.errorHandler(response.errors);
               if(error_code == 2002) {
                 $scope.error = "";
-                $scope.e_error = false;
+                $scope.e_success = true;
               } else {
                 $scope.e_error = true;
               }
             } else if(response.data) {
               if($scope.user && (response.data.id == $scope.user.id)) {
-                $scope.e_error = false;
+                $scope.e_success = true;
               } else {
                 $scope.e_error = true;
                 $scope.error = "Email already exist";  
@@ -269,7 +290,21 @@ var controllers = angular.module('futureed.controllers', []);
             }
           }
         }).error(function(response) {
+          $scope.e_loading = false;
           $scope.internalError();
+        });
+      }
+
+      $scope.showModal = function(id) {
+        $scope.show_terms = (id == 'terms_modal') ? true : false;
+        $scope.show_policy = (id == 'policy_modal') ? true : false;
+        $scope.show = true;
+
+
+        $("#"+id).modal({
+            backdrop: 'static',
+            keyboard: false,
+            show    : true
         });
       }
 
@@ -278,7 +313,11 @@ var controllers = angular.module('futureed.controllers', []);
         $scope.terms = angular.copy(terms);
 
         var has_empty = highlight_empty('form_registation');
-        if (has_empty) {
+        if($scope.e_error || $scope.u_error) {
+          $scope.error = "";
+          $("html, body").animate({ scrollTop: 320 }, "slow");
+          return;
+        } else if (has_empty) {
           $scope.error = "Please fill the required fields"
         } else {
           if($scope.terms) {
@@ -319,12 +358,17 @@ var controllers = angular.module('futureed.controllers', []);
       }
 
       $scope.getUserDetails = function() {
-        $scope.user = JSON.parse($('#userdata').val());
-        $('#userdata').html('');
+        var user = $('#userdata').val();
 
-        if(($scope.user.avatar_id != null && $scope.user.avatar_id != "") && $scope.has_style) {
-          $scope.done = true;
+        if(angular.isString(user) && user.length > 0) {
+          $scope.user = JSON.parse(user);
+          $('#userdata').html('');
+
+          if(($scope.user.avatar_id != null && $scope.user.avatar_id != "") && $scope.has_style) {
+            $scope.done = true;
+          }
         }
+        
       }
 
       $scope.getAvatarImages = function(change) {
@@ -361,13 +405,12 @@ var controllers = angular.module('futureed.controllers', []);
         }
       }
 
-      $scope.highlightAvatar = function($event) {
-        var e = e || window.event;
-        var targ = e.currentTarget || e.srcElement;
+      $scope.highlightAvatar = function(e) {
+        var target = getTarget(e);
 
         $("ul.avatar_list li").removeClass('selected');
-        $(targ).addClass('selected');
-        $scope.avatar_id = $(targ).find("#avatar_id").val(); 
+        $(target).addClass('selected');
+        $scope.avatar_id = $(target).find("#avatar_id").val(); 
       }
 
       $scope.selectAvatar = function() {
@@ -437,9 +480,14 @@ var controllers = angular.module('futureed.controllers', []);
 
       $scope.saveProfile = function(prof) {
         $scope.error = "";
-
+        $scope.success_msg = "";
         var has_empty = highlight_empty('form_registation');
-        if (has_empty) {
+
+        if($scope.e_error || $scope.u_error) {
+          $scope.error = "";
+          $("html, body").animate({ scrollTop: 350 }, "slow");
+          return;
+        } else if (has_empty) {
           $scope.error = "Please fill the required fields"
         } else {
           $scope.prof.school_code = 1;
@@ -463,6 +511,8 @@ var controllers = angular.module('futureed.controllers', []);
             $scope.internalError();
           });
         }
+
+        $("html, body").animate({ scrollTop: 0 }, "slow");
       }
 
       $scope.validateCurrentPassword = function() {

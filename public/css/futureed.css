@@ -20,8 +20,9 @@ body.client{
 	background-attachment: fixed;
 }
 body.student{
-	background: url("../images/bg-option-1.jpg") no-repeat scroll right bottom / cover;
+	background: url("../images/student_page_bg.jpg") no-repeat scroll right bottom / cover;
 	background-attachment: fixed;
+	font-family : 'Schoolbell', cursive;
 }
 body {/*background: radial-gradient(transparent 50%, rgba(0, 0, 0, 0.3) 100%), linear-gradient(#d77a6b, #d2c09c 60%, #876d54);*/
   /*background: rgba(255,255,255,1); background: -moz-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 49%, rgba(242,242,242,1) 100%); background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(255,255,255,1)), color-stop(49%, rgba(255,255,255,1)), color-stop(100%, rgba(242,242,242,1))); background: -webkit-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 49%, rgba(242,242,242,1) 100%); background: -o-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 49%, rgba(242,242,242,1) 100%);adient(center, ellipse cover, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 49%, rgba(242,242,242,1) 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f2f2f2', GradientType=1 );  */
@@ -42,13 +43,25 @@ body {/*background: radial-gradient(transparent 50%, rgba(0, 0, 0, 0.3) 100%), l
 	min-height: 40px;
 	border-radius: 3px;
 	font-size: 15px;
-	line-height: 40px;
+	/*line-height: 40px;*/
+	padding:10px;
 	color: #e96e48; 
 	text-align: center;
 }
 
 .error * { margin-bottom:  0;}
 
+.error:first-letter {
+    text-transform: uppercase;
+}
+
+.error-color {
+	color: #a94442;
+}
+
+.success-color {
+	color: #3c763d;
+}
 
 /*----- BUTTON -----*/
 .btn {
@@ -59,6 +72,7 @@ body {/*background: radial-gradient(transparent 50%, rgba(0, 0, 0, 0.3) 100%), l
 	text-transform: uppercase;
 	letter-spacing: .02em;
 	border-radius: 2px;
+	margin-bottom: 10px;
 }
 .btn:hover { color: #ccc; }
 .btn-red {
@@ -633,4 +647,18 @@ footer{font:normal 12px/30px arial; }
 
 .error_1008 {
 	line-height: 30px;
+}
+
+.btn-medium {
+	width: 30%;
+}
+
+.btn-container {
+	text-align: center;
+}
+
+.btn-container > .btn {
+	width: 60%;
+	margin: 5px !important;
+  	padding: 10px !important;
 }

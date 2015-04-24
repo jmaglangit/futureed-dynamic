@@ -16,6 +16,10 @@
           </div>
           <input type="hidden" id="response" name="response" >
         </form>
+
+        <div class="btncon">
+            <button class="btn btn-purple" data-toggle="modal" ng-click="cancelLogin()">Cancel</button>
+        </div>
       </div>
   </div>
   
