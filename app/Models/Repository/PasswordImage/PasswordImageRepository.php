@@ -51,6 +51,12 @@ class PasswordImageRepository implements PasswordImageRepositoryInterface{
         )->get()->random($count);
 
     }
+    
+    public function checkPasswordExist($id){
+        
+         return PasswordImage::where('id',$id)->pluck('id');
+         
+    }
 
 
 }
