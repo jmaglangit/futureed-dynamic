@@ -15,29 +15,16 @@ class AvatarController extends ApiController {
         
         $input = Input::only('gender');
         
-        
-        if(!$input['gender']){
+        $this->addMessageBag($this->gender($input,'gender'));
 
-            return $this->setStatusCode(422)
-                        ->respondWithError(['error_code'=>422,
-                                         'message'=>'Parameter validation failed'
-                                     ]);
+        if($this->getMessageBag()){
 
-        }else{
-            
-            if($this->avatar->genderCheck($input['gender'])===true){
+            return $this->respondWithError($this->getMessageBag());
+        }
+
                     $avatar= $this->avatar->getAvatars($input['gender']);
                     return $this->respondWithData($avatar);
-            }
-            else{
-                return $this->setStatusCode(202)
-                            ->respondWithData(['error_code'=>202,
-                                               'message'=>'invalid gender']);
-            }
         }
-        
-        
-    }
     
     public function saveUserAvatar(){
         
