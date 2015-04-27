@@ -85,11 +85,6 @@ class UserController extends ApiController{
             return $this->respondErrorMessage(2007);
         }
         
-        if(isset($user_detail['id'])){
-         
-         $this->user->updateInactiveLock($user_detail['id']);
-            
-        }
         $return = $this->student->getStudentId($user_detail['id']);
         return $this->respondWithData([
             'id' => $return
