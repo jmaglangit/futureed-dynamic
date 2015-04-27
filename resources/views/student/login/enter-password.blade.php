@@ -5,7 +5,7 @@
         <div class="error" ng-if="error">
           <p>{! error !}</p>
         </div>
-        <form id="password_form" action="{!! route('student.login.process') !!}" name="passwordForm" method="POST">
+        <form id="password_form" action="{!! route('student.login.process') !!}" method="POST">
           <div class="form_content">
             <ul class="form_password list-unstyled list-inline">
               <li class="item" ng-repeat="item in image_pass" ng-click="selectPassword($event)">
@@ -14,11 +14,11 @@
               </li>
             </ul>
           </div>
-          <input type="hidden" id="response" name="response" >
+          <input type="hidden" name="user_data" >
         </form>
 
         <div class="btncon">
-            <button class="btn btn-purple" data-toggle="modal" ng-click="cancelLogin()">Cancel</button>
+            <button class="btn btn-purple" ng-click="cancelLogin()">Cancel</button>
         </div>
       </div>
   </div>

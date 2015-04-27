@@ -16,7 +16,6 @@
 
             <div class="form-group">
               <input type="text" class="form-control" name="username" ng-model="username" autocomplete="off" required>
-              <input type="hidden" name="id" ng-model="id" required>
             </div>
             <div class="form-group">
               <button type="button" ng-click="validateUser()" class="btn btn-red">Next</button>              
@@ -24,7 +23,7 @@
           </form>
           <div class="text-group">
             <small>Not a Student?</small>
-            <small>Click <a href="#">here</a> for Parent / Teacher / School Site</small>     
+            <small>Click <a href="{!! route('client.login') !!}">here</a> for Parent / Teacher / School Site</small>     
           </div>  
           <div class="text-group">
             <small><a href="{!! route('student.login.forgot_password') !!}">Forgot your password?</a></small>

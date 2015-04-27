@@ -1,8 +1,8 @@
 @extends('student.app')
 
 @section('content')
-<div class="container login" ng-cloak>
-    <div class="form-style register_student form-wide" ng-init="success=false" ng-if="!success"> 
+<div class="container login" ng-init="success={!! $success !!}" ng-cloak>
+    <div class="form-style register_student form-wide" ng-if="!success"> 
         <form class="form-horizontal simple-form" name="form_registration" id="form_registation">
             <div class="form-header">
                 <div class="media">
@@ -31,11 +31,11 @@
                         <div class="col-md-4">
                             <input type="text" class="form-control" ng-model="reg.username" name="username" placeholder="Username" 
                             ng-model-options="{debounce : {'default' : 1000}}" ng-change="checkAvailability(reg.username)" required />
-                            <span ng-if="u_error" class="error-msg-con"> Username is invalid or already exist</span>
                         </div>
                         <div style="margin-top: 7px;"> 
                             <i ng-if="u_loading" class="fa fa-refresh fa-spin"></i>
                             <i ng-if="u_success" class="fa fa-check success-color"></i>
+                            <span ng-if="u_error" class="error-msg-con"> Username is invalid or already exist</span>
                         </div>
                     </div> 
                     <div class="form-group">
@@ -43,11 +43,11 @@
                         <div class="col-md-4">
                             <input type="text" class="form-control" ng-model="reg.email" name="email" placeholder="Email Address"
                                 ng-model-options="{debounce : {'default' : 1000}}" ng-change="checkEmailAvailability(reg.email)" required />
-                            <span ng-if="e_error" class="error-msg-con"> Email Address is invalid or already exist</span>
                         </div>
                         <div style="margin-top: 7px;">
                             <i ng-if="e_loading" class="fa fa-refresh fa-spin"></i>
                             <i ng-if="e_success" class="fa fa-check success-color"></i>
+                            <span ng-if="e_error" class="error-msg-con"> Email Address is invalid or already exist</span>
                         </div>
                     </div>
                 </fieldset>

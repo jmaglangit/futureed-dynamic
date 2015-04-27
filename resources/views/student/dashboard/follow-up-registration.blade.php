@@ -1,9 +1,5 @@
 @extends('student.app')
 
-@section('navbar')
-    @include('student.partials.main-nav')
-@stop
-
 @section('content')
 <div class="container login follow-up-reg" ng-cloak>
     <div class="form-style form-wide" ng-if="!done"> 
@@ -13,11 +9,11 @@
                     <div class="steps two">
                         <ul class="items">
                             <li ng-class="{active : !has_avatar}">
-                                <div class="rnd-identifier" ng-click="stepOne()"></div>
+                                <div class="rnd-identifier"></div>
                                 <span>Step 1</span>
                             </li>
                             <li ng-class="{active : has_avatar}">
-                                <div class="rnd-identifier" ng-click="stepTwo()"></div>
+                                <div class="rnd-identifier"></div>
                                 <span>Step 2</span>
                                 <div class="pbar"></div>
                             </li>
@@ -60,7 +56,7 @@
                         <br /> Are you ready? Click on the next button to start.
                     </div>
                     <div class="btmcon">
-                       <button type="button" class="btn btn-red" ng-click="close()">NEXT</button>
+                       <a href="{!! route('student.dashboard.index') !!}" type="button" class="btn btn-red">NEXT</a>
                     </div>
                 </div>
             </div>

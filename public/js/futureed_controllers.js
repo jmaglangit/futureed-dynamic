@@ -1,602 +1,638 @@
-var controllers = angular.module('futureed.controllers', []);
+angular.module('futureed.controllers', [])
+  .controller('futureedController', FutureedController);
 
-  controllers.controller('futureedController', function($scope, $location, loginAPIService) {
+function FutureedController($scope, $location, apiService) {
+  $scope.error = "";
+  $scope.display_date = new Date();
+
+  $scope.errorHandler = errorHandler;
+  $scope.clientLogin = clientLogin;
+
+  /**
+  * With API calls
+  */
+  // LOGIN 
+  $scope.validateUser = validateUser;
+  $scope.validatePassword = validatePassword;
+
+  function clientLogin() {
+    $scope.error = "";
+
+    apiService.clientLogin($scope.username, $scope.password, $scope.role).success(function(response) {
+      if(response.status == 200) {
+        if(response.errors) {
+          $scope.errorHandler(response.errors);
+        } else if(response.data) {
+
+        }
+      } else {
+
+      }
+    }).error(function(response) {
+      $scope.internalError();
+    });
+  }
+
+
+  function errorHandler(errors) {
+    $scope.error_object = (typeof errors[0] != "undefined") ? errors[0] : errors;
+    $scope.error = $scope.error_object.message;
+
+    $("html, body").animate({ scrollTop: 0 }, "slow");
+    return $scope.error_object.error_code;
+  }
+
+  $scope.internalError = function() {
+    $scope.error = "Internal Server Error";
+  }
+
+  $scope.highlight = function(e) {
+    var target = getTarget(e);
+
+    $("ul.form_password li").removeClass('selected');
+    $(target).addClass('selected');
+    $scope.image_id = $(target).find("#image_id").val();
+  }
+
+  /** 
+   * Login
+   */
+  function validateUser() {
+    $scope.error = "";
+
+    apiService.validateUser($scope.username).success(function (response) {
+        if(response.status == 200) {
+          if(response.errors) {
+            $scope.errorHandler(response.errors);
+          } else if(response.data){
+            $scope.id = response.data.id;
+            $scope.getLoginPassword();
+            $scope.enter_pass = true;
+          } 
+        } else if(response.status == 202) {
+          $scope.error = response.data.message;
+        }
+    }).error(function(response) {
+        $scope.internalError();
+    });
+  }
+
+  function validatePassword() {
+    $scope.error = "";
+
+    apiService.validatePassword($scope.id, $scope.image_id).success(function(response) {
+      if(response.status == 200) {
+        if(response.errors) {
+          $scope.errorHandler(response.errors);
+        } else if(response.data){
+          $("input[name='user_data']").val(JSON.stringify(response.data));
+          $("#password_form").submit();
+        } 
+      } else if(response.status == 202) {
+        $scope.error = response.data.message;
+      }
+    }).error(function(response) {
+      $scope.internalError();
+    });
+  } 
+
+  $scope.selectPassword = function(e) {
+      $scope.highlight(e);
+      $scope.validatePassword();
+  }
+
+  $scope.cancelLogin = function() {
+    $scope.enter_pass = false;
+    $scope.error = "";
+    $scope.id = "";
+    $scope.username = "";
+  }
+
+  /** 
+   * Forgot Password 
+   */
+  $scope.forgotPassword = function(username) {
+    $scope.error = "";
+    $scope.disabled = true;
+    $scope.username = username;
+
+    apiService.forgotPassword($scope.username).success(function(response) {
+      if(response.status == 200) {
+        if(response.errors) {
+          $scope.errorHandler(response.errors);
+        } else if(response.data){
+          $scope.email = response.data.email;
+          $scope.sent = true;
+        } 
+      } else if(response.status == 201) {
+        $scope.error = response.data.message;
+      } else if(response.status == 202) {
+        $scope.error = response.data.message;
+      }
+
+      $scope.disabled = false;
+    }).error(function(response) {
+      $scope.disabled = false;
+      $scope.internalError();
+    });
+  }
+
+  $scope.resendCode = function() {
+    $scope.resend = true;
+    $scope.email = ($scope.email) ? $scope.email : $("input[name='username']").val();        
+    $scope.forgotPassword($scope.email);
+  }
+
+  $scope.getLoginPassword = function() {
+    $scope.id = ($scope.id) ? $scope.id : $scope.user.id;
+    apiService.getLoginPassword($scope.id).success(function (response) {
+      $scope.image_pass = response.data
+      $scope.reset = true;
+    }).error(function(response) {
+      $scope.error = response.errors.message;
+    });
+  }
+
+  $scope.getImagePassword = function() {
+    apiService.getImagePassword().success(function(response) {
+      $scope.image_pass = response.data
+      $scope.reset = true;
+    }).error(function(response) {
+      $scope.error = response.errors.message;
+    });
+  }
+
+  $scope.validateCode = function(code) {
+    $scope.error = "";
+    $scope.disabled = true;
+    $scope.code = code;
+    $scope.email = ($scope.email) ? $scope.email : $("input[name='username']").val();
+
+    apiService.validateCode($scope.code, $scope.email).success(function(response) {
+      if(response.status == 200) {
+        if(response.errors) {
+          $scope.errorHandler(response.errors);
+        } else if(response.data){
+          $("input[name='id']").val(response.data.id);
+          $("#success_form").submit();
+        } 
+      } else if(response.status == 201) {
+        $scope.error = response.data.message;
+      } else if(response.status == 202) {
+        $scope.error = response.data.message;
+      }
+
+      $scope.disabled = false;
+    }).error(function(response) {
+      $scope.disabled = false;
+      $scope.internalError();
+    });
+  }
+
+  $scope.confirmCode = function(code) {
+    $scope.error = "";
+    $scope.disabled = true;
+    $scope.code = angular.copy(code);
+    $scope.email = ($scope.email) ? $scope.email : $("input[name='email']").val();
+
+    apiService.confirmCode($scope.code, $scope.email).success(function(response) {
+      if(response.status == 200) {
+        if(response.errors) {
+          $scope.errorHandler(response.errors);
+        } else if(response.data){
+          $("input[name='id']").val(response.data.id);
+          $("input[name='email']").val($scope.email);
+          $("#success_form").submit();
+        } 
+      } else if(response.status == 201) {
+        $scope.error = response.data.message;
+      } else if(response.status == 202) {
+        $scope.error = response.data.message;
+      }
+
+      $scope.disabled = false;
+    }).error(function(response) {
+      $scope.disabled = false;
+      $scope.internalError();
+    });
+  }
+
+  $scope.validateNewPassword = function() {
+    $scope.error = "";
+    $scope.disabled = true;
+
+    if($scope.new_password == $scope.image_id) {
+      var code = $("input[name='code']").val();
+      var id = $("input[name='id']").val();
+
+      apiService.resetPassword(id, code, $scope.new_password).success(function(response) {
+        if(response.status == 200) {
+          if(response.errors) {
+            $scope.errorHandler(response.errors);
+          } else if(response.data){
+            $("#reset_password_form").submit();
+          } 
+        } else if(response.status == 201) {
+          $scope.error = response.data.message;
+        } else if(response.status == 202) {
+          $scope.error = response.data.message;
+        }
+
+        $scope.disabled = false;
+      }).error(function(response) {
+        $scope.disabled = false;
+        $scope.internalError();
+      });
+    } else {
+      $scope.error = "Password does not match.";
+      $scope.disabled = false;
+    }
+
+    $("html, body").animate({ scrollTop: 0 }, "slow");
+  }
+
+  $scope.getGradeLevel = function() {
+    apiService.getGradeLevel().success(function(response) {
+      if(response.status == 200) {
+        $scope.grades = response.data;
+      } else {
+        $scope.error = response.data.message;
+      }
+    }).error(function(response) {
+      $scope.error = response.errors.message;
+    });
+  }
+
+  $scope.checkAvailability = function(username) {
+    $scope.error = "";
+    $scope.u_loading = true;
+    $scope.u_success = false;
+    $scope.u_error = false;
+
+    apiService.validateUsername(username).success(function(response) {
+      $scope.u_loading = false;
+
+      if(response.status == 200) {
+        if(response.errors) {
+          var error_code = $scope.errorHandler(response.errors);
+          if(error_code == 2001) {
+            $scope.error = "";
+            $scope.u_success = true;
+          } else {
+            $scope.u_error = true;
+          }
+        } else if(response.data) {
+          if($scope.user && (response.data.id == $scope.user.id)) {
+            $scope.u_success = true;
+          } else {
+            $scope.u_error = true;
+            $scope.error = "Username already exist";  
+          }
+        }
+      }
+    }).error(function(response) {
+      $scope.u_loading = false;
+      $scope.internalError();
+    });
+  }
+
+  $scope.checkEmailAvailability = function(email) {
+    $scope.error = "";
+    $scope.e_loading = true;
+    $scope.e_success = false;
+    $scope.e_error = false;
+
+    apiService.validateEmail(email).success(function(response) {
+      $scope.e_loading = false;
+
+      if(response.status == 200) {
+        if(response.errors) {
+          var error_code = $scope.errorHandler(response.errors);
+          if(error_code == 2002) {
+            $scope.error = "";
+            $scope.e_success = true;
+          } else {
+            $scope.e_error = true;
+          }
+        } else if(response.data) {
+          if($scope.user && (response.data.id == $scope.user.id)) {
+            $scope.e_success = true;
+          } else {
+            $scope.e_error = true;
+            $scope.error = "Email already exist";  
+          }
+        }
+      }
+    }).error(function(response) {
+      $scope.e_loading = false;
+      $scope.internalError();
+    });
+  }
+
+  $scope.showModal = function(id) {
+    $scope.show_terms = (id == 'terms_modal') ? true : false;
+    $scope.show_policy = (id == 'policy_modal') ? true : false;
+    $scope.show = true;
+
+
+    $("#"+id).modal({
+        backdrop: 'static',
+        keyboard: false,
+        show    : true
+    });
+  }
+
+  $scope.validateRegistration = function(reg, terms) {
+    $scope.error = "";
+    $scope.terms = angular.copy(terms);
+
+    var has_empty = highlight_empty('form_registation');
+    if($scope.e_error || $scope.u_error) {
       $scope.error = "";
-
-      $scope.errorHandler = function(errors) {
-        $scope.error_object = (typeof errors[0] != "undefined") ? errors[0] : errors;
-        $scope.error = $scope.error_object.message;
-        return $scope.error_object.error_code;
-      }
-
-      $scope.internalError = function() {
-        $scope.error = "Internal Server Error";
-      }
-
-      $scope.highlight = function(e) {
-        var target = getTarget(e);
-
-        $("ul.form_password li").removeClass('selected');
-        $(target).addClass('selected');
-        $scope.image_id = $(target).find("#image_id").val();
-      }
-
-      /** 
-       * Login
-       */
-      $scope.validateUser = function() {
-        $scope.error = "";
-
-        loginAPIService.validateUser($scope.username).success(function (response) {
-            if(response.status == 200) {
-              if(response.errors) {
-                $scope.errorHandler(response.errors);
-              } else if(response.data){
-                $scope.id = response.data.id;
-                $scope.getLoginPassword();
-                $scope.enter_pass = true;
-              } 
-            } else if(response.status == 202) {
-              $scope.error = response.data.message;
-            }
-        }).error(function(response) {
-            $scope.internalError();
-        });
-      }
-
-      $scope.selectPassword = function(e) {
-          $scope.highlight(e);
-          $scope.validatePassword();
-      }
-
-      $scope.cancelLogin = function() {
-        $scope.enter_pass = false;
-        $scope.id = "";
-        $scope.username = "";
-      }
-
-      /** 
-       * Forgot Password 
-       */
-      $scope.forgotPassword = function(username) {
-        $scope.error = "";
-        $scope.disabled = true;
-        $scope.username = username;
-
-        loginAPIService.forgotPassword($scope.username).success(function(response) {
-          if(response.status == 200) {
-            if(response.errors) {
-              $scope.errorHandler(response.errors);
-            } else if(response.data){
-              $scope.email = response.data.email;
-              $scope.sent = true;
-            } 
-          } else if(response.status == 201) {
-            $scope.error = response.data.message;
-          } else if(response.status == 202) {
-            $scope.error = response.data.message;
-          }
-
-          $scope.disabled = false;
-        }).error(function(response) {
-          $scope.disabled = false;
-          $scope.internalError();
-        });
-      }
-
-      $scope.resendCode = function() {
-        $scope.resend = true;
-        $scope.email = ($scope.email) ? $scope.email : $("input[name='username']").val();        
-        $scope.forgotPassword($scope.email);
-      }
-
-      $scope.getLoginPassword = function() {
-        $scope.id = ($scope.id) ? $scope.id : $scope.user.id;
-        loginAPIService.getLoginPassword($scope.id).success(function (response) {
-          $scope.image_pass = response.data
-          $scope.reset = true;
-        }).error(function(response) {
-          $scope.error = response.errors.message;
-        });
-      }
-
-      $scope.getImagePassword = function() {
-        loginAPIService.getImagePassword().success(function (response) {
-          $scope.image_pass = response.data
-          $scope.reset = true;
-        }).error(function(response) {
-          $scope.error = response.errors.message;
-        });
-      }
-
-      $scope.validatePassword = function () {
-        $scope.error = "";
-
-        loginAPIService.validatePassword($scope.id, $scope.image_id).success(function(response) {
-          if(response.status == 200) {
-            if(response.errors) {
-              $scope.errorHandler(response.errors);
-            } else if(response.data){
-              $("#response").val(JSON.stringify(response.data));
-              $("#password_form").submit();
-            } 
-          } else if(response.status == 202) {
-            $scope.error = response.data.message;
-          }
-        }).error(function(response) {
-          $scope.internalError();
-        });
-      } 
-
-      $scope.validateCode = function(code) {
-        $scope.error = "";
-        $scope.disabled = true;
-        $scope.code = code;
-        $scope.email = ($scope.email) ? $scope.email : $("input[name='username']").val();
-
-        loginAPIService.validateCode($scope.code, $scope.email).success(function(response) {
-          if(response.status == 200) {
-            if(response.errors) {
-              $scope.errorHandler(response.errors);
-            } else if(response.data){
-              $("input[name='id']").val(response.data.id);
-              $("#success_form").submit();
-            } 
-          } else if(response.status == 201) {
-            $scope.error = response.data.message;
-          } else if(response.status == 202) {
-            $scope.error = response.data.message;
-          }
-
-          $scope.disabled = false;
-        }).error(function(response) {
-          $scope.disabled = false;
-          $scope.internalError();
-        });
-      }
-
-      $scope.confirmCode = function(code) {
-        $scope.error = "";
-        $scope.disabled = true;
-        $scope.code = angular.copy(code);
-        $scope.email = ($scope.email) ? $scope.email : $("input[name='email']").val();
-
-        loginAPIService.confirmCode($scope.code, $scope.email).success(function(response) {
-          if(response.status == 200) {
-            if(response.errors) {
-              $scope.errorHandler(response.errors);
-            } else if(response.data){
-              $("input[name='id']").val(response.data.id);
-              $("input[name='email']").val($scope.email);
-              $("#success_form").submit();
-            } 
-          } else if(response.status == 201) {
-            $scope.error = response.data.message;
-          } else if(response.status == 202) {
-            $scope.error = response.data.message;
-          }
-
-          $scope.disabled = false;
-        }).error(function(response) {
-          $scope.disabled = false;
-          $scope.internalError();
-        });
-      }
-
-      $scope.validateNewPassword = function() {
-        $scope.error = "";
-        $scope.disabled = true;
-
-        if($scope.new_password == $scope.image_id) {
-          var code = $("input[name='code']").val();
-          var id = $("input[name='id']").val();
-
-          loginAPIService.resetPassword(id, code, $scope.new_password).success(function(response) {
-            if(response.status == 200) {
-              if(response.errors) {
-                $scope.errorHandler(response.errors);
-              } else if(response.data){
-                $("#reset_password_form").submit();
-              } 
-            } else if(response.status == 201) {
-              $scope.error = response.data.message;
-            } else if(response.status == 202) {
-              $scope.error = response.data.message;
-            }
-
-            $scope.disabled = false;
-          }).error(function(response) {
-            $scope.disabled = false;
-            $scope.internalError();
-          });
-        } else {
-          $scope.error = "Password does not match.";
-          $scope.disabled = false;
-        }
-
-        $("html, body").animate({ scrollTop: 0 }, "slow");
-      }
-
-      $scope.getGradeLevel = function() {
-        loginAPIService.getGradeLevel().success(function(response) {
-          if(response.status == 200) {
-            $scope.grades = response.data;
-          } else {
-            $scope.error = response.data.message;
-          }
-        }).error(function(response) {
-          $scope.error = response.errors.message;
-        });
-      }
-
-      $scope.checkAvailability = function(username) {
-        $scope.error = "";
-        $scope.u_loading = true;
-        $scope.u_success = false;
-        $scope.u_error = false;
-
-        loginAPIService.validateUsername(username).success(function(response) {
-          $scope.u_loading = false;
-
-          if(response.status == 200) {
-            if(response.errors) {
-              var error_code = $scope.errorHandler(response.errors);
-              if(error_code == 2001) {
-                $scope.error = "";
-                $scope.u_success = true;
-              } else {
-                $scope.u_error = true;
-              }
-            } else if(response.data) {
-              if($scope.user && (response.data.id == $scope.user.id)) {
-                $scope.u_success = true;
-              } else {
-                $scope.u_error = true;
-                $scope.error = "Username already exist";  
-              }
-            }
-          }
-        }).error(function(response) {
-          $scope.u_loading = false;
-          $scope.internalError();
-        });
-      }
-
-      $scope.checkEmailAvailability = function(email) {
-        $scope.error = "";
-        $scope.e_loading = true;
-        $scope.e_success = false;
-        $scope.e_error = false;
-
-        loginAPIService.validateEmail(email).success(function(response) {
-          $scope.e_loading = false;
-
-          if(response.status == 200) {
-            if(response.errors) {
-              var error_code = $scope.errorHandler(response.errors);
-              if(error_code == 2002) {
-                $scope.error = "";
-                $scope.e_success = true;
-              } else {
-                $scope.e_error = true;
-              }
-            } else if(response.data) {
-              if($scope.user && (response.data.id == $scope.user.id)) {
-                $scope.e_success = true;
-              } else {
-                $scope.e_error = true;
-                $scope.error = "Email already exist";  
-              }
-            }
-          }
-        }).error(function(response) {
-          $scope.e_loading = false;
-          $scope.internalError();
-        });
-      }
-
-      $scope.showModal = function(id) {
-        $scope.show_terms = (id == 'terms_modal') ? true : false;
-        $scope.show_policy = (id == 'policy_modal') ? true : false;
-        $scope.show = true;
-
-
-        $("#"+id).modal({
-            backdrop: 'static',
-            keyboard: false,
-            show    : true
-        });
-      }
-
-      $scope.validateRegistration = function(reg, terms) {
-        $scope.error = "";
-        $scope.terms = angular.copy(terms);
-
-        var has_empty = highlight_empty('form_registation');
-        if($scope.e_error || $scope.u_error) {
-          $scope.error = "";
-          $("html, body").animate({ scrollTop: 320 }, "slow");
-          return;
-        } else if (has_empty) {
-          $scope.error = "Please fill the required fields"
-        } else {
-          if($scope.terms) {
-            $scope.reg = reg;
-            
-            if($scope.reg) {
-              $scope.reg.birth_date = $("input[name='birth_date']").val();
-              $scope.reg.school_code = -1;
-            }
-            
-            $scope.disabled = true;
-            loginAPIService.validateRegistration($scope.reg).success(function(response) {
-              if(response.status == 200) {
-                if(response.errors) {
-                  $scope.errorHandler(response.errors);
-                  $("#" + $scope.error_object.field).addClass("required-field");
-                } else if(response.data){
-                  $scope.success = true;
-                  $scope.email = $scope.reg.email;
-                } 
-              } else if(response.status == 201) {
-                $scope.error = response.data.message;
-              } else if(response.status == 202) {
-                $scope.error = response.data.message;
-              }
-
-              $scope.disabled = false;
-            }).error(function(response) {
-              $scope.disabled = false;
-              $scope.internalError();
-            });
-          } else {
-            $scope.error = "Please accept the terms and conditions";
-          }
-        }
-
-        $("html, body").animate({ scrollTop: 0 }, "slow");
-      }
-
-      $scope.getUserDetails = function() {
-        var user = $('#userdata').val();
-
-        if(angular.isString(user) && user.length > 0) {
-          $scope.user = JSON.parse(user);
-          $('#userdata').html('');
-
-          if(($scope.user.avatar_id != null && $scope.user.avatar_id != "") && $scope.has_style) {
-            $scope.done = true;
-          }
+      $("html, body").animate({ scrollTop: 320 }, "slow");
+      return;
+    } else if (has_empty) {
+      $scope.error = "Please fill the required fields"
+    } else {
+      if($scope.terms) {
+        $scope.reg = reg;
+        
+        if($scope.reg) {
+          $scope.reg.birth_date = $("input[name='birth_date']").val();
+          $scope.reg.school_code = -1;
         }
         
-      }
-
-      $scope.getAvatarImages = function(change) {
-        if(change || $scope.user.avatar_id == null || $scope.user.avatar_id == "") {
-          
-          loginAPIService.getAvatarImages($scope.user.gender).success(function(response) {
-            if(response.status == 200) {
-              if(response.errors) {
-                $scope.errorHandler(response.errors);
-              } else if(response.data){
-                $scope.avatars = response.data;
-              }
-            } else if(response.status == 201) {
-              $scope.error = response.data.message;
-            } else if(response.status == 202) {
-              $scope.error = response.data.message;
-            }
-          }).error(function(response) {
-            $scope.error = response.errors.message;
-          });
-        } else {
-          $scope.has_avatar = true;
-        }
-      }
-
-      $scope.stepOne = function() {
-        $scope.user.avatar_id = "";
-        $scope.has_avatar = false;
-      }
-
-      $scope.stepTwo = function() {
-        if($scope.user.avatar_id != null || $scope.user.avatar_id != "") {
-          $scope.has_avatar = false;
-        }
-      }
-
-      $scope.highlightAvatar = function(e) {
-        var target = getTarget(e);
-
-        $("ul.avatar_list li").removeClass('selected');
-        $(target).addClass('selected');
-        $scope.avatar_id = $(target).find("#avatar_id").val(); 
-      }
-
-      $scope.selectAvatar = function() {
-        loginAPIService.selectAvatar($scope.user.id, $scope.avatar_id).success(function(response) {
+        $scope.disabled = true;
+        apiService.validateRegistration($scope.reg).success(function(response) {
           if(response.status == 200) {
             if(response.errors) {
               $scope.errorHandler(response.errors);
+              $("#" + $scope.error_object.field).addClass("required-field");
             } else if(response.data){
-              $scope.user.avatar_id = response.data.id;
-              $scope.user.avatar = response.data.url;
-            
-              $scope.session_user = $scope.user;
-              $scope.has_avatar = true;
-              loginAPIService.updateUserSession($scope.user).success(function(response) {
-                  $("ul.avatar_list li").removeClass('selected');
-              }).error(function() {
-                $scope.internalError();
-              });
-            }
+              $scope.success = true;
+              $scope.email = $scope.reg.email;
+            } 
           } else if(response.status == 201) {
             $scope.error = response.data.message;
           } else if(response.status == 202) {
             $scope.error = response.data.message;
           }
+
+          $scope.disabled = false;
         }).error(function(response) {
+          $scope.disabled = false;
           $scope.internalError();
         });
+      } else {
+        $scope.error = "Please accept the terms and conditions";
       }
+    }
 
-      $scope.close = function() {
+    $("html, body").animate({ scrollTop: 0 }, "slow");
+  }
+
+  $scope.getUserDetails = function() {
+    var user = $('#userdata').val();
+
+    if(angular.isString(user) && user.length > 0) {
+      $scope.user = JSON.parse(user);
+      $('#userdata').html('');
+
+      if(($scope.user.avatar_id != null && $scope.user.avatar_id != "") && $scope.has_style) {
         $scope.done = true;
       }
+    }
+    
+  }
 
-      $scope.setActive = function(active) {
-        $scope.error = "";
-
-        switch(active) {
-          case "rewards"  :
-            $scope.active_rewards = 1;
-            break;
-          case "avatar"   :
-            $scope.active_avatar = 1;
-            break;
-          case "password" :
-            $scope.getLoginPassword();
-            $scope.active_password = 1;
-            break;
-          case "index"    :
-          default:
-            $scope.studentDetails();
-            $scope.active_index = 1;
-            $scope.edit = false;
-            break;
+  $scope.getAvatarImages = function(change) {
+    if(change || $scope.user.avatar_id == null || $scope.user.avatar_id == "") {
+      
+      apiService.getAvatarImages($scope.user.gender).success(function(response) {
+        if(response.status == 200) {
+          if(response.errors) {
+            $scope.errorHandler(response.errors);
+          } else if(response.data){
+            $scope.avatars = response.data;
+          }
+        } else if(response.status == 201) {
+          $scope.error = response.data.message;
+        } else if(response.status == 202) {
+          $scope.error = response.data.message;
         }
-      }
+      }).error(function(response) {
+        $scope.error = response.errors.message;
+      });
+    } else {
+      $scope.has_avatar = true;
+    }
+  }
 
+  $scope.stepOne = function() {
+    $scope.user.avatar_id = "";
+    $scope.has_avatar = false;
+  }
 
-      /**
-      * Profile related controllers
-      */
-      $scope.editProfile = function() {
-        $scope.studentDetails();
-        $scope.edit = true;
+  $scope.stepTwo = function() {
+    if($scope.user.avatar_id != null || $scope.user.avatar_id != "") {
+      $scope.has_avatar = false;
+    }
+  }
 
-        $("html, body").animate({ scrollTop: 0 }, "slow");
-      }
+  $scope.highlightAvatar = function(e) {
+    var target = getTarget(e);
 
-      $scope.saveProfile = function(prof) {
-        $scope.error = "";
-        $scope.success_msg = "";
-        var has_empty = highlight_empty('form_registation');
+    $("ul.avatar_list li").removeClass('selected');
+    $(target).addClass('selected');
+    $scope.avatar_id = $(target).find("#avatar_id").val(); 
+  }
 
-        if($scope.e_error || $scope.u_error) {
-          $scope.error = "";
-          $("html, body").animate({ scrollTop: 350 }, "slow");
-          return;
-        } else if (has_empty) {
-          $scope.error = "Please fill the required fields"
-        } else {
-          $scope.prof.school_code = 1;
-          $scope.prof.birth_date = $("input[name='birth_date']").val();
-
-          loginAPIService.saveProfile($scope.prof).success(function(response) {
-            if(response.status == 200) {
-              if(response.errors) {
-                $scope.errorHandler(response.errors);
-              } else if(response.data){
-                $scope.setActive('index');
-                $scope.success = true;
-                $scope.success_msg = "Successfully update profile";
-              }
-            } else if(response.status == 201) {
-              $scope.error = response.data.message;
-            } else if(response.status == 202) {
-              $scope.error = response.data.message;
-            }
-          }).error(function(response) {
+  $scope.selectAvatar = function() {
+    apiService.selectAvatar($scope.user.id, $scope.avatar_id).success(function(response) {
+      if(response.status == 200) {
+        if(response.errors) {
+          $scope.errorHandler(response.errors);
+        } else if(response.data){
+          $scope.user.avatar_id = response.data.id;
+          $scope.user.avatar = response.data.url;
+        
+          $scope.session_user = $scope.user;
+          $scope.has_avatar = true;
+          apiService.updateUserSession($scope.user).success(function(response) {
+              $("ul.avatar_list li").removeClass('selected');
+          }).error(function() {
             $scope.internalError();
           });
         }
-
-        $("html, body").animate({ scrollTop: 0 }, "slow");
+      } else if(response.status == 201) {
+        $scope.error = response.data.message;
+      } else if(response.status == 202) {
+        $scope.error = response.data.message;
       }
+    }).error(function(response) {
+      $scope.internalError();
+    });
+  }
 
-      $scope.validateCurrentPassword = function() {
-        $scope.error = "";
+  $scope.setActive = function(active) {
+    $scope.error = "";
+    $scope.success_msg = "";
+    $scope.e_error = false;
+    $scope.u_error = false;
+    $scope.e_success = false;
+    $scope.u_success = false;
 
-        loginAPIService.validatePassword($scope.user.id, $scope.image_id).success(function(response) {
+    switch(active) {
+      case "rewards"  :
+        $scope.active_rewards = 1;
+        break;
+      case "avatar"   :
+        $scope.active_avatar = 1;
+        break;
+      case "password" :
+        $scope.getLoginPassword();
+        $scope.active_password = 1;
+        break;
+      case "index"    :
+      default:
+        $scope.studentDetails();
+        $scope.active_index = 1;
+        $scope.edit = false;
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+        break;
+    }
+  }
+
+
+  /**
+  * Profile related controllers
+  */
+  $scope.editProfile = function() {
+    $scope.studentDetails();
+    $scope.edit = true;
+
+    $("html, body").animate({ scrollTop: 0 }, "slow");
+  }
+
+  $scope.saveProfile = function(prof) {
+    $scope.error = "";
+    $scope.success_msg = "";
+    var has_empty = highlight_empty('form_registation');
+
+    if($scope.e_error || $scope.u_error) {
+      $scope.error = "";
+      $("html, body").animate({ scrollTop: 350 }, "slow");
+      return;
+    } else if (has_empty) {
+      $scope.error = "Please fill the required fields"
+    } else {
+      $scope.prof.school_code = 1;
+      $scope.prof.birth_date = $("input[name='birth_date']").val();
+
+      apiService.saveProfile($scope.prof).success(function(response) {
+        if(response.status == 200) {
+          if(response.errors) {
+            $scope.errorHandler(response.errors);
+          } else if(response.data){
+            $scope.setActive('index');
+            $scope.success = true;
+            $scope.success_msg = "Successfully update profile";
+          }
+        } else if(response.status == 201) {
+          $scope.error = response.data.message;
+        } else if(response.status == 202) {
+          $scope.error = response.data.message;
+        }
+      }).error(function(response) {
+        $scope.internalError();
+      });
+    }
+
+    $("html, body").animate({ scrollTop: 0 }, "slow");
+  }
+
+  $scope.validateCurrentPassword = function() {
+    $scope.error = "";
+
+    apiService.validatePassword($scope.user.id, $scope.image_id).success(function(response) {
+      if(response.status == 200) {
+        if(response.errors) {
+          $scope.errorHandler(response.errors);
+        } else if(response.data){
+          $scope.image_id = "";
+          $scope.password_validated = true;
+          
+          $scope.getImagePassword();
+        } 
+      } else if(response.status == 202) {
+        $scope.locked = true; 
+      }
+    }).error(function(response) {
+        $scope.internalError();
+    });
+  }
+
+  $scope.selectNewPassword = function() {
+    $scope.password_selected = false;
+    $scope.error = "";
+
+    if($scope.image_id) {
+      $scope.password_selected = true;
+      $scope.new_password = $scope.image_id;
+      $scope.image_id = "";
+      $scope.image_pass = shuffle($scope.image_pass);
+      $("ul.form_password li").removeClass('selected');
+    } else {
+      $scope.error = "Please select a new picture password";
+    }
+
+    $("html, body").animate({ scrollTop: 0 }, "slow");
+  }
+
+  $scope.undoNewPassword = function() {
+    $scope.error = "";
+    $scope.image_pass = shuffle($scope.image_pass);
+    $scope.password_selected = false;
+    $scope.image_id = $scope.new_password;
+
+    $("ul.form_password li").removeClass("selected");
+    $("input[value='"+$scope.new_password+"']").closest("li").addClass("selected");
+
+    $("html, body").animate({ scrollTop: 0 }, "slow");
+  }
+
+  $scope.confirmNewPassword = function() {
+    $scope.error = "";
+
+    if($scope.image_id == $scope.new_password) {
+        apiService.changePassword($scope.user.id, $scope.image_id, $scope.user.access_token).success(function(response) {
           if(response.status == 200) {
             if(response.errors) {
               $scope.errorHandler(response.errors);
             } else if(response.data){
-              $scope.image_id = "";
-              $scope.password_validated = true;
-              
-              $scope.getImagePassword();
+              $scope.password_confirmed = true;
             } 
-          } else if(response.status == 202) {
-            $scope.locked = true; 
+          } else if(response.status == 201) {
+            $scope.error = response.errors.message;
           }
         }).error(function(response) {
-            $scope.internalError();
+          $scope.internalError();
         });
+    } else {
+      $scope.error = "Password does not match"
+      $("html, body").animate({ scrollTop: 0 }, "slow");
+    }
+  }
+
+  $scope.studentDetails = function() {
+    apiService.studentDetails($scope.user.id, $scope.user.access_token).success(function(response) {
+      if(response.status == 200) {
+        $scope.prof = response.data[0];
+        $scope.prof.access_token = $scope.user.access_token;
+        $scope.user = $scope.prof;
       }
-
-      $scope.selectNewPassword = function() {
-        $scope.password_selected = false;
-        $scope.error = "";
-
-        if($scope.image_id) {
-          $scope.password_selected = true;
-          $scope.new_password = $scope.image_id;
-          $scope.image_id = "";
-          $scope.image_pass = shuffle($scope.image_pass);
-          $("ul.form_password li").removeClass('selected');
-        } else {
-          $scope.error = "Please select a new picture password";
-        }
-
-        $("html, body").animate({ scrollTop: 0 }, "slow");
-      }
-
-      $scope.undoNewPassword = function() {
-        $scope.error = "";
-        $scope.image_pass = shuffle($scope.image_pass);
-        $scope.password_selected = false;
-        $scope.image_id = $scope.new_password;
-
-        $("ul.form_password li").removeClass("selected");
-        $("input[value='"+$scope.new_password+"']").closest("li").addClass("selected");
-
-        $("html, body").animate({ scrollTop: 0 }, "slow");
-      }
-
-      $scope.confirmNewPassword = function() {
-        $scope.error = "";
-
-        if($scope.image_id == $scope.new_password) {
-            loginAPIService.changePassword($scope.user.id, $scope.image_id, $scope.user.access_token).success(function(response) {
-              if(response.status == 200) {
-                if(response.errors) {
-                  $scope.errorHandler(response.errors);
-                } else if(response.data){
-                  $scope.password_confirmed = true;
-                } 
-              } else if(response.status == 201) {
-                $scope.error = response.errors.message;
-              }
-            }).error(function(response) {
-              $scope.internalError();
-            });
-        } else {
-          $scope.error = "Password does not match"
-          $("html, body").animate({ scrollTop: 0 }, "slow");
-        }
-      }
-
-      $scope.studentDetails = function() {
-        loginAPIService.studentDetails($scope.user.id, $scope.user.access_token).success(function(response) {
-          if(response.status == 200) {
-            $scope.prof = response.data[0];
-            $scope.prof.access_token = $scope.user.access_token;
-            $scope.user = $scope.prof;
-          }
-        }).error(function(response) {
-          $scope.error = response.errors.message;
-        });
-      }
+    }).error(function(response) {
+      $scope.error = response.errors.message;
     });
+  }
+};

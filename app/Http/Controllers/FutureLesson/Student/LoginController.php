@@ -30,10 +30,16 @@ class LoginController extends Controller {
 	 */
 	public function process()
 	{
-		$userdata = Input::only('response');
+		$user_data = Input::only('user_data');
+		$user_object = json_decode($user_data['user_data']);
 
-		if($userdata){
-			Session::put('user', $userdata['response']);
+		if($user_object->id){
+			Session::put('user', $user_data['user_data']);
+
+			if($user_object->avatar_id && $user_object->learning_style_id) {
+				return redirect()->route('student.dashboard.index');
+			}
+			
 			return redirect()->route('student.dashboard.follow_up_registration');
 		}else{
 			return redirect()->route('student.login');

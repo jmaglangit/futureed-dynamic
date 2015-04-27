@@ -1,9 +1,19 @@
 var services = angular.module('futureed.services', ['ngResource']);
 
-	services.factory('loginAPIService', function($http) {
+	services.factory('apiService', function($http) {
 		
 		var futureedAPI = {};
 		var futureedAPIUrl = '/api/v1/';
+
+		futureedAPI.clientLogin = clientLogin;
+
+		function clientLogin(username, password, role) {
+			return $http({
+				method	: 'POST'
+				, data 	: {username : username, password : password, role : role}
+				, url	: futureedAPIUrl + 'client/login'
+			});
+		}
 
 		futureedAPI.updateUserSession = function(user) {
 			return $http({
