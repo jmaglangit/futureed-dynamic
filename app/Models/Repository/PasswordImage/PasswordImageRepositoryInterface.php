@@ -32,5 +32,8 @@ interface PasswordImageRepositoryInterface {
      * @return image details
      */
     public function getRandomImage($count);
+    
+    
+    public function checkPasswordExist($id);
 
 }
