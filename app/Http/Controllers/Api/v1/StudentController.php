@@ -54,10 +54,7 @@ class StudentController extends ApiController {
 	        	
 	    }else{
 
-	    	return $this->setStatusCode(202)
-						->respondWithData(['error_code' => 2001,
-										   'message' => $error[2001]
-										 ]); 
+	    	return $this->respondErrorMessage(2001);
 	    }
 	}
 
