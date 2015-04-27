@@ -31,12 +31,13 @@ trait ApiValidatorTrait {
 
     //Check parameters of the fields.
     public function parameterCheck($input, $paramName){
+        $error_msg = config('futureed-error.error_messages');
 
         if(is_null($input["$paramName"])){
 
             return $this->setErrorCode(1001)
                 ->setField($paramName)
-                ->setMessage("Required field not found.")
+                ->setMessage($error_msg[1001])
                 ->errorMessage();
 
 
@@ -44,7 +45,7 @@ trait ApiValidatorTrait {
 
             return  $this->setErrorCode(1002)
                 ->setField($paramName)
-                ->setMessage("Empty required field.")
+                ->setMessage($error_msg[1002])
                 ->errorMessage();
         }
 

@@ -91,7 +91,10 @@ class StudentServices {
 
         //TODO: get image password.
         $imgId= $this->student->getImagePassword($id);
+        if(is_null($imgId)){
 
+            return false;
+        }
         //mix password id with selections
         $mix = $this->password->getMixImage($imgId);
 
