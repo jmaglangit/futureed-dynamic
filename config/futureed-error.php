@@ -15,5 +15,6 @@ return [
         
         2100 => 'Reset code invalid',
         2101 => 'Password image invalid',
+        2102 => 'Access token expire',
     ],
 ];

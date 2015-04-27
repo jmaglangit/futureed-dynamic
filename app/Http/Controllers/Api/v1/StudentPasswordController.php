@@ -54,13 +54,13 @@ class StudentPasswordController extends StudentController {
                             ->respondWithData(['id'=>$return['data']]);
                 }else{
                       
-                      return $this->respondWithData(['error_code' => 2100,
+                      return $this->respondWithError(['error_code' => 2100,
                                                      'message' => $error[2100] 
                                                    ]);
                 }
             }else{
               
-                return $this->respondWithData(['error_code' => 2101,
+                return $this->respondWithError(['error_code' => 2101,
                                                    'message' => $error[2101] 
                                                  ]);
               
@@ -68,7 +68,7 @@ class StudentPasswordController extends StudentController {
             
           }else{
     
-                return $this->respondWithData(['error_code' => 2001,
+                return $this->respondWithError(['error_code' => 2001,
                                                    'message' => $error[2001] 
                                                  ]);
              
@@ -83,22 +83,26 @@ class StudentPasswordController extends StudentController {
     public function confirmResetCode(){
        
         $input = Input::only('email','reset_code');
-        
-         if(!$input['email'] || !$input['reset_code']){
-          
-           return $this->setStatusCode(422)
-                        ->respondWithError(['error_code'=>422,
-                                            'message'=>'Parameter validation failed'
-                                              ]);
-        } else {
+        $error = config('futureed-error.error_messages');
+
+        $this->addMessageBag($this->email($input,'email'));
+        $this->addMessageBag($this->validateNumber($input,'reset_code'));
+
+
+         $msg_bag = $this->getMessageBag();
+
+         if($msg_bag){
+
+            return $this->respondWithError($this->getMessageBag());
+
+         } else {
           
            $return=$this->user->getIdByEmail($input['email'],'Student');
           
            if($return['status']==202){
               
-               return $this->setStatusCode($return['status'])
-                          ->respondWithData(['error_code'=>$return['status'],
-                                             'message'=>$return['data']
+               return $this->respondWithError(['error_code' => 2001,
+                                               'message' => $error[2001]
                                            ]);
                         
            }else{
@@ -111,19 +115,20 @@ class StudentPasswordController extends StudentController {
                  
                   if($expired==true){
 
-                     return $this->setStatusCode(202)
-                              ->respondWithData(['error_code'=>202,'message'=>'Reset code expired']);
+                     return $this->respondWithError(['error_code' => 2100,
+                                                     'message' => $error[2100]
+                                                   ]);
                   }else{
                         
-                      $this->user->updateInactiveLock($return['data']);
+                      
                       $studentdata = $this->student->resetCodeResponse($return['data']);
-                      return $this->setStatusCode($return['status'])
-                                  ->respondWithData($studentdata);
+                      return $this->respondWithData($studentdata);
                   }
               }else{
                  
-                  return $this->setStatusCode(202)
-                              ->respondWithData(['error_code'=>202,'message'=>'Invalid forgot password reset code']);
+                  return $this->respondWithError(['error_code' => 2100,
+                                                  'message' => $error[2100]
+                                                ]);
               }
                 
            }
@@ -135,15 +140,49 @@ class StudentPasswordController extends StudentController {
     public function confirmNewImagePassword(){
     	
       $input = Input::only('id','password_image_id');
-    	 if(!$input['id'] && !$input['password_image_id']){
-           return $this->setStatusCode(422)
-                        ->respondWithError(['error_code'=>422,
-                                            'message'=>'Parameter validation failed'
-                                              ]);
+      $error = config('futureed-error.error_messages');
+
+      $this->addMessageBag($this->validateNumber($input,'id'));
+      $this->addMessageBag($this->validateNumber($input,'password_image_id'));
+
+      $msg_bag =$this->getMessageBag();
+
+
+    	 if($msg_bag){
+
+          return $this->respondWithError($this->getMessageBag());
+           
         } else {
-        	$return = $this->student->resetPasswordImage($input); 
-              return $this->setStatusCode($return['status'])
-                          ->respondWithData(['id'=>$return['data']]);
+
+          if($this->student->checkIdExist($input['id'])){
+
+            if($this->password_image->checkPasswordExist($input['password_image_id'])){
+
+              $student_reference = $this->student->getStudentReferences($input['id']);
+              $this->user->updateInactiveLock($student_reference['user_id']);
+              $return = $this->student->resetPasswordImage($input); 
+              
+              return $this->respondWithData(['id'=>$return['data']]);
+
+            }else{
+
+              return $this->respondWithError(['error_code' => 2101,
+                                            'message' =>  $error[2101]
+                                          ]);
+            }
+
+            
+          }else{
+
+            return $this->respondWithError(['error_code' => 2001,
+                                            'message' =>  $error[2001]
+                                          ]);
+          }
+
+
+
+        	
+
         }
     }
     
@@ -152,39 +191,56 @@ class StudentPasswordController extends StudentController {
     public function changeImagePassword($id){
       
       $input = Input::only('password_image_id','access_token');
-      
-      if(!$input['password_image_id']){
-        
-          return $this->setStatusCode(422)
-                        ->respondWithError(['error_code'=>422,
-                                            'message'=>'Empty password_image_id'
-                                              ]);
-        
-      }elseif(!$input['access_token']){
-          
-          return $this->setStatusCode(422)
-                        ->respondWithError(['error_code'=>422,
-                                            'message'=>'Empty access_token'
-                                              ]);
+      $error = config('futureed-error.error_messages');
+
+      $this->addMessageBag($this->validateNumber($input,'password_image_id'));
+      $this->addMessageBag($this->validateString($input,'access_token'));
+
+      $msg_bag = $this->getMessageBag();
+
+      if($msg_bag){
+
+          return $this->respondWithError($this->getMessageBag());
+
       }else{
-        
-         $token = $this->token->decodeToken($input['access_token']);
+
+          if($this->student->checkIdExist($id)){
+              if($this->password_image->checkPasswordExist($input['password_image_id'])){
+
+                  $token = $this->token->decodeToken($input['access_token']);
     
-         if($token['status']==true){
-            
-              $this->student->ChangPasswordImage($id,$input['password_image_id']); 
-              return $this->respondWithData(['id'=>$id,
-                                              'access_token'=>$input['access_token']
-                                            ]);
-            
-         }else{
-            
-            return $this->setStatusCode(201)
-                        ->respondWithError(['error_code'=>201,
-                                            'message'=>'access_token expired'
+                   if($token['status']==true){
+                        
+                        $student_reference = $this->student->getStudentReferences($id);
+                        $this->user->updateInactiveLock($student_reference['user_id']);
+                        $this->student->ChangPasswordImage($id,$input['password_image_id']); 
+                        
+                        return $this->respondWithData(['id'=>$id,
+                                                        'access_token'=>$input['access_token']
+                                                      ]);
+                      
+                    }else{
+                      
+                      return $this->respondWithError(['error_code'=>2102,
+                                                      'message'=>$error[2102]
+                                                    ]);
+                    
+                    } 
+
+              }else{
+
+                return $this->respondWithError(['error_code' => 2101,
+                                                'message' =>  $error[2101]
                                               ]);
-          
-         }
+
+              }
+
+          }else{
+
+            return $this->respondWithError(['error_code' => 2001,
+                                            'message' =>  $error[2001]
+                                          ]);
+          }
          
       }
     }
