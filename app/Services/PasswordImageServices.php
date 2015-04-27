@@ -89,6 +89,11 @@ class PasswordImageServices {
         
         return $password_image_url;            
     }
+    
+    public function checkPasswordExist($id){
+        
+        return $this->password->checkPasswordExist($id);
+    }
 
 
 }
