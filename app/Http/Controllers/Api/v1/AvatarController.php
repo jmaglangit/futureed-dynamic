@@ -24,41 +24,21 @@ class AvatarController extends ApiController {
 
                     $avatar= $this->avatar->getAvatars($input['gender']);
                     return $this->respondWithData($avatar);
-        }
+    }
     
     public function saveUserAvatar(){
         
         $input = Input::only('avatar_id','id');
+
+        $this->addMessageBag($this->validateNumber($input,'avatar_id'));
+        $this->addMessageBag($this->validateNumber($input,'id'));
+
+        if($this->getMessageBag()){
+
+            return $this->respondWithError($this->getMessageBag());
+        }
         
-         if(!$input['avatar_id'] && !$input['id']){
-           
-            return $this->setStatusCode(422)
-                        ->respondWithData(array(['error_code'=>422,
-                                           'field'=>'avatar_id',
-                                           'message'=>'missing required field avatar_id'
-                                                       
-                                         ],
-                                         ['error_code'=>422,
-                                           'field'=>'id',
-                                           'message'=>'missing required field id'
-                                         ]));
-                        
-         }elseif( !$input['avatar_id'] ){
-          
-            return $this->setStatusCode(422)
-                        ->respondWithData(['error_code'=>422,
-                                            'field'=>'avatar_id',
-                                            'message'=>'missing required field avatar_id'
-                                     ]);
-        }elseif( !$input['id'] ){
-          
-            return $this->setStatusCode(422)
-                        ->respondWithData(['error_code'=>422,
-                                            'field'=>'id',
-                                            'message'=>'missing required field id'
-                                     ]);
-        }else{
-            
+
             $idExist = $this->student->checkIdExist($input['id']);
             
             if($idExist){
@@ -73,7 +53,7 @@ class AvatarController extends ApiController {
                         
                         $avatar = $this->avatar->getAvatar($input['avatar_id']);
                         $avatar_url=$this->avatar->getAvatarUrl($avatar['avatar_image']);
-                        
+
                         $reponse = ['id'=> $avatar['id'],
                                     'name' => $avatar['avatar_image'],
                                     'url' =>$avatar_url
@@ -81,31 +61,18 @@ class AvatarController extends ApiController {
                         
                         return $this->respondWithData($reponse);
                     }
-                        
-                    
                 }else{
                     
-                    return $this->setStatusCode(201)
-                        ->respondWithData(['error_code'=>201,
-                                            'field'=>'avatar_id',
-                                            'message'=>"avatar_id doesn't exist"
-                                          ]);
+                    return $this->respondErrorMessage(2009);
                 }
-                
-                
             }else{
                 
-                return $this->setStatusCode(201)
-                        ->respondWithData(['error_code'=>201,
-                                            'field'=>'avatar_id',
-                                            'message'=>"id doesn't exist"
-                                          ]);
+                return $this->respondErrorMessage(2001);
             }
     
          
            
-        }
-        
+
     }
     
     
