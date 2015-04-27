@@ -48,13 +48,14 @@ class UserRepository implements UserRepositoryInterface {
 
 
     public function addUser($user){
-
+        
         try{
             User::insert([
                 'username' => $user['username'],
                 'email' => $user['email'],
                 'name' => $user['first_name'] .' '.$user['last_name'],
                 'user_type' => $user['user_type'],
+                'password' => (isset($user['password'])) ? $user['password'] : null,
                 'confirmation_code' => $user['confirmation_code'],
                 'confirmation_code_expiry' => $user['confirmation_code_expiry'],
                 'created_by' => 1,

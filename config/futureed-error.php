@@ -17,5 +17,10 @@ return [
         //for student error message
         2004 => 'Username and picture password is incorrect',
         2008 => 'The email/username you entered is invalid Please try inputting again. If the account you are attempting to login is for a student less than 13 yrs old, please login via the parent site',
+
+        // Client Error messages
+        2200 => 'Email already exist',
+        2201 => 'Username already exist',
+        2202 => 'School Name already exist',
     ],
 ];

@@ -28,7 +28,6 @@ use FutureEd\Http\Controllers\Api\Traits\ClientValidatorTrait;
 class ApiController extends Controller {
 
     use ApiValidatorTrait;
-    // use ClientValidatorTrait;
 
     private $status_code = Response::HTTP_OK;
     private $header = [];

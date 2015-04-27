@@ -31,4 +31,11 @@ class ClientRepository implements ClientRepositoryInterface{
 
     }
 
+    public function checkClientEmail($input){
+        $email = $input['email'];
+        $client_role = $input['client_role'];
+
+        dd();
+    }
+
 }

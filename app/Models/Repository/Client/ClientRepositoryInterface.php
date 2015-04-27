@@ -7,5 +7,6 @@ interface ClientRepositoryInterface {
 
     public function checkClient($id,$role);
 
+    public function checkClientEmail($input);
 
 }
