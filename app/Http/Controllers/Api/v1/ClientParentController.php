@@ -9,11 +9,16 @@ class ClientParentController extends ApiController {
 
 	public function getStudentList($id){
 
+        $this->addMessageBag($this->validateVarNumber($id));
+
+        if($this->getMessageBag()){
+
+            return $this->respondWithError($this->getMessageBag());
+        }
+
         $students = $this->student->getStudentByParent($id);
 
-        return $this->respondWithData([
-            $students
-        ]);
+        return $this->respondWithData($students);
     }
 
 }
