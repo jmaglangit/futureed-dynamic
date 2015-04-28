@@ -18,6 +18,11 @@ return [
     'admin' => 'Admin',
     'client' => 'Client',
     'student' => 'Student',
+
+    //client types Parent, Principal, Teacher
+    'parent' => 'Parent',
+    'principal' => 'Principal',
+    'teacher' => 'Teacher',
     
     //avatar folder 
     'image_avatar_folder' => 'images/avatar',
