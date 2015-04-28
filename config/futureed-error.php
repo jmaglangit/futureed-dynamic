@@ -21,18 +21,15 @@ return [
         2006 => 'Confirmation code does not match.',
         2007 => 'Confirmation code has expired.',
         2008 => 'The email/username you entered is invalid Please try inputting again. If the account you are attempting to login is for a student less than 13 yrs old, please login via the parent site',
-<<<<<<< HEAD
 
         // Client Error messages
         2200 => 'Email already exist',
         2201 => 'Username already exist',
         2202 => 'School Name already exist',
-        
-=======
+
         2009 => 'Avatar does not exist',
         2010 => 'Parent does not exist',
 
->>>>>>> 279606cb04ade4caf77e5867f2daafdd3eddb7d6
         2100 => 'Reset code invalid',
         2101 => 'Password image invalid',
         2102 => 'Access token expire',

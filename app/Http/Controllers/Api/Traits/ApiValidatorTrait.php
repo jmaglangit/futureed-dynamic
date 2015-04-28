@@ -343,7 +343,6 @@ trait ApiValidatorTrait {
     }
     public function clientRole($input,$field_name){
 
-<<<<<<< HEAD
         if(is_null($input["$field_name"]) || empty($input["$field_name"])){
 
             return $this->parameterCheck($input,$field_name);
@@ -469,7 +468,7 @@ trait ApiValidatorTrait {
         ];
 
         $validator = Validator::make($input, $rules);
-=======
+
     public function validateVarNumber($id){
 
         $validator = Validator::make(
@@ -480,17 +479,14 @@ trait ApiValidatorTrait {
                 "$id" => 'required|numeric'
             ]
         );
->>>>>>> 279606cb04ade4caf77e5867f2daafdd3eddb7d6
 
         if($validator->fails()){
 
             $validator_msg = $validator->messages()->toArray();
 
-<<<<<<< HEAD
             return true;
         }
     }
-=======
             return $this->setErrorCode(1011)
                 ->setField("Parameter")
                 ->setMessage($validator_msg["$id"][0])
@@ -498,6 +494,5 @@ trait ApiValidatorTrait {
         }
     }
 
->>>>>>> 279606cb04ade4caf77e5867f2daafdd3eddb7d6
 
 }
