@@ -16,12 +16,13 @@ body {
 	background-attachment: fixed;
 }
 body.client{
-	background: url("../images/bcg_triangle.svg") no-repeat scroll right bottom / cover;
+	background: url("../images/client-page-bg.jpg") no-repeat scroll right bottom / cover;
 	background-attachment: fixed;
 }
 body.student{
-	background: url("../images/bg-option-1.jpg") no-repeat scroll right bottom / cover;
+	background: url("../images/student_page_bg.jpg") no-repeat scroll right bottom / cover;
 	background-attachment: fixed;
+	font-family : 'Schoolbell', cursive;
 }
 body {/*background: radial-gradient(transparent 50%, rgba(0, 0, 0, 0.3) 100%), linear-gradient(#d77a6b, #d2c09c 60%, #876d54);*/
   /*background: rgba(255,255,255,1); background: -moz-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 49%, rgba(242,242,242,1) 100%); background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(255,255,255,1)), color-stop(49%, rgba(255,255,255,1)), color-stop(100%, rgba(242,242,242,1))); background: -webkit-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 49%, rgba(242,242,242,1) 100%); background: -o-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 49%, rgba(242,242,242,1) 100%);adient(center, ellipse cover, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 49%, rgba(242,242,242,1) 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f2f2f2', GradientType=1 );  */
@@ -42,13 +43,25 @@ body {/*background: radial-gradient(transparent 50%, rgba(0, 0, 0, 0.3) 100%), l
 	min-height: 40px;
 	border-radius: 3px;
 	font-size: 15px;
-	line-height: 40px;
+	/*line-height: 40px;*/
+	padding:10px;
 	color: #e96e48; 
 	text-align: center;
 }
 
 .error * { margin-bottom:  0;}
 
+.error:first-letter {
+    text-transform: uppercase;
+}
+
+.error-color {
+	color: #a94442;
+}
+
+.success-color {
+	color: #3c763d;
+}
 
 /*----- BUTTON -----*/
 .btn {
@@ -59,7 +72,27 @@ body {/*background: radial-gradient(transparent 50%, rgba(0, 0, 0, 0.3) 100%), l
 	text-transform: uppercase;
 	letter-spacing: .02em;
 	border-radius: 2px;
+	margin-bottom: 10px;
 }
+
+.btn-small {
+	width: 20%;
+}
+
+.btn-medium {
+	width: 30%;
+}
+
+.btn-large {
+	width: 70%;
+}
+
+.btn-fit {
+	width: 100%;
+}
+
+
+
 .btn:hover { color: #ccc; }
 .btn-red {
 	border-top: 1px solid #f2a690; 
@@ -80,9 +113,29 @@ body {/*background: radial-gradient(transparent 50%, rgba(0, 0, 0, 0.3) 100%), l
 	color: #fff;
 }
 
+.btn-blue {
+	border-top: 1px solid #055A7F; 
+	box-shadow: 0 0 0 1px #055A7F, 0 3px 3px rgba(0, 0, 0, 0.3);
+	background-color: #055A7F;
+}å
+.btn-blue:active {
+	box-shadow: inset 0px 6px 21px 3px rgba(188,74,39,1);
+	color: #fff;
+}
+
+.btn-gold {
+	border-top: 1px solid #DFC010; 
+	box-shadow: 0 0 0 1px #DFC010, 0 3px 3px rgba(0, 0, 0, 0.3);
+	background-color: #DFC010;
+}å
+.btn-gold:active {
+	box-shadow: inset 0px 6px 21px 3px rgba(188,74,39,1);
+	color: #fff;
+}
+
 /*----- FORM -----*/
 .error * { margin-bottom:  0;}
-.form-narrow {/*margin: 30px auto;*/ width: 350px; height: 420px; background: #fff; padding: 0 30px; box-sizing: border-box; border-radius: 5px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); position: relative; overflow: hidden;}
+.form-narrow {background: #fff; padding: 0 30px; box-sizing: border-box; border-radius: 5px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); position: relative; overflow: hidden;}
 .form-wide {margin: 30px auto; width: 100%; background: #fff; padding: 0 30px; box-sizing: border-box; border-radius: 5px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); position: relative; overflow: hidden;}
 .form-style { 
 	text-align: center;
@@ -166,15 +219,17 @@ body {/*background: radial-gradient(transparent 50%, rgba(0, 0, 0, 0.3) 100%), l
 .form-style form span {margin-left: 5px;}
 .form-style form div.pass {margin-bottom: 40px;}
 .form-style form .input {border-radius: 5px; border: 1px solid #e5d4c2; height: 46px; overflow: hidden; margin-bottom: 20px;}
-.form-style form .input .icon {height: 46px; width: 46px; display: inline-block; background-color: #f9ece4; text-align: center;}
+.form-style form .input .icon {height: 46px; width: 46px; display: inline-block; background-color: #f9ece4; text-align: center;border-right: 1px solid #e5d4c2;}
 .form-style form .input .icon i.fa {font-size: 18px; vertical-align: middle; line-height: 44px; color: #dfc5ae;}
-.form-style form .input input {border: none; border-left: 1px solid #e5d4c2; height: 100%; outline: none; padding-left: 16px; float: right; width: calc(100% - 46px);}
+.form-style form .input input {border: none; height: 100%; outline: none; padding-left: 16px; float: right; width: calc(100% - 46px);}
+.form-style form .input select {border: none; height: 100%; outline: none; padding-left: 16px; float: right; width: calc(100% - 46px);}
+
 .form-style form .input input:focus {border-left: 1px solid #e86740;}
 .form-style form .input input:focus .input {border: 1px solid #e86740;}
 .form-style form .input input:focus .icon {background-color: #f9ece4;}
 .form-style form .input input:focus i.fa {color: #eda58f;}
 .form-style a.login_bcg {text-align: center; font-size: 14px; margin-top: -5.5px; width: 100%; display: inline-block; background: #f8f3f0; box-shadow: 0 0 0 83px #f8f3f0;}
-.form-style .fb {height: 38px; width: 100%; left: 0; bottom: 0; position: absolute; text-align: center; background-color: #666; color: #fff; font-size: 14px; line-height: 38px; cursor: pointer;}
+.form-style .fb {height: 38px; width: 100%; left: 0; bottom: 0; position: absolute; text-align: center; color: #fff; font-size: 14px; cursor: pointer;margin-bottom: 0px;}
 .form-style .fb i.fa {font-size: 15px; vertical-align: middle;}
 
 .form_content{margin-top: 0;}
@@ -633,4 +688,35 @@ footer{font:normal 12px/30px arial; }
 
 .error_1008 {
 	line-height: 30px;
+}
+
+.btn-container {
+	text-align: center;
+}
+
+.btn-container > .btn {
+	width: 60%;
+	margin: 5px !important;
+  	padding: 10px !important;
+}
+
+/*
+* Client css
+*/
+
+.client {
+
+}
+
+.client .login .title {
+	color: #055A7F;
+}
+
+.bulletin, .bulletin hr {
+	color: #B7BDBD;
+	border-color: #B7BDBD;
+}
+
+.client .footer .text-muted {
+	color: #B7BDBD;
 }

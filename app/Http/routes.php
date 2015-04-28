@@ -62,7 +62,7 @@ Routes::group(['prefix' => 'api/v1'], function()
     //Parent
     Routes::resource('/client/parent','Api\v1\ClientParentController',
                     ['except' => ['create','edit']]);
-    Routes::post('/parent/student/list','Api\v1\StudentController@getStudentList');
+    Routes::get('client/parent/student/list/{id}','Api\v1\ClientParentController@getStudentList');
 
     //Principal
     Routes::resource('/client/principal','Api\v1\ClientPrincipalController',
@@ -87,7 +87,16 @@ Routes::group(['prefix' => 'api/v1'], function()
 
     //client
     Routes::post('/client/login','Api\v1\ClientLoginController@login');
+<<<<<<< HEAD
     Routes::post('/client/register','Api\v1\ClientRegisterController@register');
+=======
+
+    //countries
+    Routes::resource('/countries','Api\v1\CountryController',
+        ['except' => ['create','edit']]);
+
+
+>>>>>>> 279606cb04ade4caf77e5867f2daafdd3eddb7d6
 
 
 

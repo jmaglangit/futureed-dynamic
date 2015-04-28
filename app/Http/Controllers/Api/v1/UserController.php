@@ -53,12 +53,13 @@ class UserController extends ApiController{
     public function confirmEmailCode(){
         $input = Input::only('email','email_code','user_type');
 
-        if(!$input['email'] || !$input['email_code'] || !$input['user_type']){
+        $this->addMessageBag($this->email($input,'email'));
+        $this->addMessageBag($this->validateNumber($input,'email_code'));
+        $this->addMessageBag($this->userType($input,'user_type'));
 
-            return $this->setStatusCode(422)
-                ->respondWithError(['error_code'=>422,
-                    'message'=>'Parameter validation failed'
-                ]);
+        if($this->getMessageBag()){
+
+            return $this->respondWithData($this->getMessageBag());
         }
 
         //confirm email code
@@ -75,26 +76,15 @@ class UserController extends ApiController{
 
         if($input['email_code'] <> $user_detail['confirmation_code']){
 
-            return $this->respondWithError([
-                'error_code' => 204,
-                'message' => 'Code does not match'
-            ]);
+            return $this->respondErrorMessage(2006);
         }
 
         $code_expire = $this->user->checkCodeExpiry($user_detail['confirmation_code_expiry']);
         if($code_expire){
 
-            return $this->respondWithError([
-                'error_code' => 204,
-                'message' => 'Code expired'
-            ]);
+            return $this->respondErrorMessage(2007);
         }
         
-        if(isset($user_detail['id'])){
-         
-         $this->user->updateInactiveLock($user_detail['id']);
-            
-        }
         $return = $this->student->getStudentId($user_detail['id']);
         
         return $this->respondWithData([
