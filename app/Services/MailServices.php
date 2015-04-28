@@ -90,7 +90,7 @@ class MailServices {
         $this->sendMail($content);
     }
 
-    public function resendClientRegister($data,$code,$subject){
+    public function sendClientRegister($data,$code,$subject){
 
         $content = [
             'view' => 'emails.client.registration-email',
