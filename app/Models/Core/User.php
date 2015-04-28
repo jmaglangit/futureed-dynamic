@@ -13,6 +13,9 @@ class User extends Model {
     protected $dates = ['deleted_at'];
 
     protected $hidden = ['created_by','updated_by','created_at','updated_at','deleted_at'];
+
+    protected $fillable = ['username', 'email', 'name', 'user_type', 'confirmation_code',
+        'confirmation_code_expiry', 'created_by', 'updated_by'];
     
 
 }
