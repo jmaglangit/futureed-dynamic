@@ -13,6 +13,8 @@ class UserPasswordController extends UserController {
     public function passwordForgot(){
         $input = Input::only('username','user_type');
         $this->addMessageBag($this->userType($input,'user_type'));
+        $subject = config('futureed.subject_forgot');
+
         
         
         $flag=0;
@@ -75,7 +77,7 @@ class UserPasswordController extends UserController {
 
 
                      //sent email for reset password
-                    $this->mail->sendStudentMailResetPassword($userDetails,$code['confirmation_code']);
+                    $this->mail->sendStudentMailResetPassword($userDetails,$code['confirmation_code'],$subject);
 
                     return $this->respondWithData($userDetails);
                     

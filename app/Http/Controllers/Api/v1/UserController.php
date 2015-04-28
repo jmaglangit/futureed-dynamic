@@ -92,4 +92,147 @@ class UserController extends ApiController{
 
     }
 
+
+    //resend reset email code 
+    public function resendResetEmailCode(){
+
+        $input = Input::only('email','user_type'); 
+        $error = config('futureed-error.error_messages');
+        $subject = config('futureed.subject_forgot_resend');
+
+        $this->addMessageBag($this->email($input,'email'));
+        $this->addMessageBag($this->userType($input,'user_type'));
+
+
+        $msg_bag = $this->getMessageBag();
+
+        if($msg_bag){
+
+            return $this->respondWithError($msg_bag);
+
+        }else{
+
+            $return = $this->user->checkEmail($input['email'],$input['user_type']);
+
+
+            if(array_key_exists('status',$return)){
+                
+                $userDetails = $this->user->getUserDetails($return['user_id']);
+
+                $code=$this->code->getCodeExpiry();
+
+                $this->user->setResetCode($return['user_id'],$code);
+
+                if(strtolower($input['user_type']) == 'student'){
+
+                    $student_id = $this->student->getStudentId($return['user_id']);
+
+                    $this->mail->sendStudentMailResetPassword($userDetails,$code['confirmation_code'],$subject);
+
+                    return $this->respondWithData(['id' => $student_id,
+                                                   'user_type' => $input['user_type'] 
+                                                 ]);
+
+                
+                }elseif(strtolower($input['user_type']) == 'client'){
+
+                    $client_id = $this->client->getClientId($return['user_id']);
+
+                    $this->mail->sendClientMailResetPassword($userDetails,$code['confirmation_code'],$subject);
+
+                    return $this->respondWithData(['id' => $client_id,
+                                                   'user_type' => $input['user_type'] 
+                                                 ]);
+                    
+               
+                }else{
+
+                    $admin_id = $this->admin->getAdminId($return['user_id']);
+
+                    $this->mail->sendAdminMailResetPassword($userDetails,$code['confirmation_code'],$subject);
+
+                    return $this->respondWithData(['id' => $admin_id,
+                                                   'user_type' => $input['user_type'] 
+                                                 ]);
+                }
+
+            }else{
+                
+                return $this->respondErrorMessage(2002);
+            }
+
+        }
+
+    }
+
+    //resend registration email code 
+
+    public function resendRegisterEmailCode(){
+
+        $input = Input::only('email','user_type');
+        $error = config('futureed-error.error_messages');
+        $subject = config('futureed.subject_reg_resend');
+
+        $this->addMessageBag($this->email($input,'email'));
+        $this->addMessageBag($this->userTypeClientStudent($input,'user_type'));
+
+
+        $msg_bag = $this->getMessageBag();
+
+        if($msg_bag){
+
+            return $this->respondWithError($msg_bag);
+
+        }else{
+
+            $return = $this->user->checkEmail($input['email'],$input['user_type']);
+
+            if(array_key_exists('status',$return)){
+
+                $userDetails = $this->user->getUser($return['user_id'],$input['user_type']);
+
+                $code=$this->code->getCodeExpiry();
+
+                $this->user->updateConfirmationCode($return['user_id'],$code);
+
+
+                if(strtolower($input['user_type']) == 'student'){
+
+                    $student_id = $this->student->getStudentId($return['user_id']);
+
+                    $this->mail->resendStudentRegister($userDetails,$code['confirmation_code'],$subject);
+
+                    return $this->respondWithData(['id' => $student_id,
+                                                   'user_type' => $input['user_type'] 
+                                                 ]);
+
+                
+                }else{
+
+                    $client_id = $this->client->getClientId($return['user_id']);
+
+                    $this->mail->sendClientRegister($userDetails,$code['confirmation_code'],$subject);
+
+                    return $this->respondWithData(['id' => $client_id,
+                                                   'user_type' => $input['user_type'] 
+                                                 ]);
+                    
+               
+                }
+
+            }else{
+
+                return $this->respondErrorMessage(2002);
+
+            }
+
+        }
+
+
+
+
+    }
+
+
+
 }
