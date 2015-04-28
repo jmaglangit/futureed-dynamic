@@ -16,7 +16,9 @@
             </div>
             <input type="text" class="form-control" name="username" ng-model="username" autocomplete="off" required>
           </div>
-          <button type="button" class="btn btn-red" ng-click="forgotPassword(username)" ng-disabled="disabled">SEND</button>
+
+            <button type="button" class="btn btn-red" ng-click="forgotPassword(username)" ng-disabled="disabled">SEND</button>
+            <a href="{!! route('student.login') !!}" class="btn btn-purple">Cancel</a>
         </form>
       </div>
 

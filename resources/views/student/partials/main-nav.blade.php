@@ -1,6 +1,6 @@
 
   <header>
-      <nav class="navbar navbar-default">
+      <nav class="navbar navbar-default" ng-cloak>
         <div class="navcon">
           <!-- Brand and toggle get grouped for better mobile display -->
           <div class="navbar-header">
@@ -10,7 +10,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#">FutureEd Logo Here</a>
+            <a href="#"><img ng-src="/images/logo-sm.png" /></a>
           </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->

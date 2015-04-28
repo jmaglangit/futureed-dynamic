@@ -40,3 +40,10 @@ function highlight_empty(form_id) {
 
     return has_empty;
 }
+
+function getTarget(e) {
+  var e = e || window.event;
+  var target = e.currentTarget || e.srcElement;
+
+  return target;
+}

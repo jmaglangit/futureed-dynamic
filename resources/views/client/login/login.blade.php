@@ -2,8 +2,8 @@
 
 @section('content')
 
-  <div class="container login">
-    <div class="col-md-4 col-md-offset-1">
+  <div class="container login" ng-cloak>
+    <div class="col-md-5 col-md-offset-1">
       <div class="form-style form-narrow">
       	<!-- ERROR -->
       	<div style="display:none;">
@@ -17,33 +17,51 @@
 	          <p>Please <a href="#">click here</a> to redirect you to the steps to reset your password.</p>
 	        </div>
       	</div>
-		<!--// ERROR -->
         <div class="title">Login to your account</div>
+          <div class="error" ng-if="error">
+            <p>{! error !}</p>
+          </div>
         {!! Form::open() !!}
           <!-- <span>Email or Username</span> -->
           <div class="input">
             <div class="icon">
               <i class="fa fa-user"></i>
             </div>
-            {!! Form::email('login', null, ['placeholder' => 'Email or Username']) !!}
+            {!! Form::text('login', null, ['placeholder' => 'Email or Username', 'ng-model' => 'username', 'autocomplete' => 'off']) !!}
           </div>
           <!-- <span>Password</span> -->
           <div class="input pass">
             <div class="icon">
               <i class="fa fa-lock"></i>
             </div>
-            {!! Form::password('password', null, ['placeholder' => 'Password']) !!}
+            {!! Form::password('password', ['placeholder' => 'Password', 'ng-model' => 'password']) !!}
           </div>
-          <div class="submit">LOGIN</div>
+
+          <div class="title">ROLE</div>
+          <div class="input">
+            <div class="icon">
+              <i class="fa fa-group"></i>
+            </div>
+            {!! Form::select('', array('' => '-- Select Role --', 'Parent' => 'Parent', 'Teacher' => 'Teacher', 'Principal' => 'Principal'), '', array('class' => 'form-control', 'ng-model' => 'role')); !!}
+          </div>
+          <button type="button" class="btn btn-blue" ng-click="clientLogin()">LOGIN</button>
+
+          <div class="text-group">
+            <small>Not a Parent / Teacher / School?</small>
+            <small>Click <a href="{!! route('student.login') !!}">here</a> for Student Site</small>     
+          </div>  
+          <div class="text-group">
+            <small><a href="{!! route('client.login.forgot_password') !!}">Forgot your password?</a></small>  
+          </div>
+          <p><a href="{!! route('client.registration') !!}" class="fb btn btn-gold">Sign Up</a></p>
         </form>
-        {!! link_to_route('client.login.forgot_password', 'Forgot your password?', array(), ['class' => 'login_bcg']) !!}
-        <div class="fb">
-          SIGN UP
-        </div>
+        
       </div>
     </div>
-    <div style="margin-top:170px; background:rgba(255,255,255,0.8); border-radius:5px; padding:20px; color:#000; font:normal 14px/20px Arial;" class="col-md-4">
-      <b>HEADS UP:</b><br><br>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc luctus libero ac enim faucibus pellentesque. Mauris eleifend tincidunt luctus. Suspendisse at nulla condimentum, rutrum leo at, molestie est. Sed leo arcu, posuere sed diam ac, pretium efficitur sem. Donec mattis eros metus, nec ultricies sapien interdum.
+    <div style="font:normal 14px/20px Arial;" class="col-md-6 bulletin">
+      <h2 class="title">Bulletin Board</h2>
+      <hr />
+      <h4><i class="fa fa-clock-o"></i> {! display_date | date:'MMMM dd, yyyy' !} </h4><br />Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc luctus libero ac enim faucibus pellentesque. Mauris eleifend tincidunt luctus. Suspendisse at nulla condimentum, rutrum leo at, molestie est. Sed leo arcu, posuere sed diam ac, pretium efficitur sem. Donec mattis eros metus, nec ultricies sapien interdum.
     </div>
   </div>
 @endsection
