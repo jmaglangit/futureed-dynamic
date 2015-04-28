@@ -74,9 +74,7 @@ class StudentLoginController extends StudentController {
                 
 			} else{
 			
-            	return $this->setStatusCode($response['status'])
-				            ->respondWithData(['error_code' => $response['status'],
-                                               'message' => 'user does not exist']);
+            	return $this->respondErrorMessage(2001);
 			}
         }
 			

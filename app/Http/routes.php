@@ -88,6 +88,11 @@ Routes::group(['prefix' => 'api/v1'], function()
     //client
     Routes::post('/client/login','Api\v1\ClientLoginController@login');
 
+    //countries
+    Routes::resource('/countries','Api\v1\CountryController',
+        ['except' => ['create','edit']]);
+
+
 
 
 

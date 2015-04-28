@@ -342,5 +342,27 @@ trait ApiValidatorTrait {
         }
     }
 
+    public function validateVarNumber($id){
+
+        $validator = Validator::make(
+            [
+                "$id" => $id
+            ],
+            [
+                "$id" => 'required|numeric'
+            ]
+        );
+
+        if($validator->fails()){
+
+            $validator_msg = $validator->messages()->toArray();
+
+            return $this->setErrorCode(1011)
+                ->setField("Parameter")
+                ->setMessage($validator_msg["$id"][0])
+                ->errorMessage();
+        }
+    }
+
 
 }
