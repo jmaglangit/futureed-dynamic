@@ -184,7 +184,6 @@ var services = angular.module('futureed.services', ['ngResource']);
 
 	services.factory("httpInterceptor", function($q) {
 	    return {
-	      // optional method
 	     'responseError': function(rejection) {
 	        $("html, body").animate({ scrollTop: 0 }, "slow");
 	        return $q.reject(rejection);

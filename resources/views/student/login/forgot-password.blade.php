@@ -3,7 +3,7 @@
 @section('content')
   <div class="container login" ng-cloak>
     <div class="col-md-6 col-md-offset-3">
-      <div class="form-style" ng-if="!sent">
+      <div class="form-style" ng-show="!sent">
         <div class="title">Retrieve Password</div>
         <div class="error" ng-if="error">
           <p>{! error !}</p>

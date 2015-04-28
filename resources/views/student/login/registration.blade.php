@@ -33,7 +33,7 @@
                             ng-model-options="{debounce : {'default' : 1000}}" ng-change="checkAvailability(reg.username)" required />
                         </div>
                         <div style="margin-top: 7px;"> 
-                            <i ng-if="u_loading" class="fa fa-refresh fa-spin"></i>
+                            <i ng-if="u_loading" class="fa fa-spinner fa-spin"></i>
                             <i ng-if="u_success" class="fa fa-check success-color"></i>
                             <span ng-if="u_error" class="error-msg-con"> Username is invalid or already exist</span>
                         </div>
@@ -45,7 +45,7 @@
                                 ng-model-options="{debounce : {'default' : 1000}}" ng-change="checkEmailAvailability(reg.email)" required />
                         </div>
                         <div style="margin-top: 7px;">
-                            <i ng-if="e_loading" class="fa fa-refresh fa-spin"></i>
+                            <i ng-if="e_loading" class="fa fa-spinner fa-spin"></i>
                             <i ng-if="e_success" class="fa fa-check success-color"></i>
                             <span ng-if="e_error" class="error-msg-con"> Email Address is invalid or already exist</span>
                         </div>

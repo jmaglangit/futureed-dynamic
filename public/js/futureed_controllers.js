@@ -6,14 +6,29 @@ function FutureedController($scope, $location, apiService) {
   $scope.display_date = new Date();
 
   $scope.errorHandler = errorHandler;
-  $scope.clientLogin = clientLogin;
+  /**
+  * Common API calls
+  */
+  $scope.forgotPassword = forgotPassword;
 
   /**
-  * With API calls
+  * Student Page with API calls
   */
-  // LOGIN 
+  // Login 
   $scope.validateUser = validateUser;
   $scope.validatePassword = validatePassword;
+
+  // Registration
+  $scope.validateRegistration = validateRegistration;
+
+  // Profile
+  $scope.saveProfile = saveProfile;
+
+  /**
+  * Client Page With API calls
+  */
+  $scope.clientLogin = clientLogin;
+  $scope.resetClientPassword = resetClientPassword;
 
   function clientLogin() {
     $scope.error = "";
@@ -32,6 +47,23 @@ function FutureedController($scope, $location, apiService) {
       $scope.internalError();
     });
   }
+
+  function resetClientPassword() {
+    $scope.error = "";
+
+    if(!($scope.new_password && $scope.confirm_password)) {
+      $scope.error = "Required field not found.";
+    } else if($scope.new_password && ($scope.new_password == $scope.confirm_password)) {
+      $scope.success = true;
+    } else {
+      $scope.error = "Password does not match";
+      $("html, body").animate({ scrollTop: 0 }, "slow");
+    }
+  }
+
+  /**
+  * End of Client Page Functions
+  */
 
 
   function errorHandler(errors) {
@@ -111,10 +143,9 @@ function FutureedController($scope, $location, apiService) {
   /** 
    * Forgot Password 
    */
-  $scope.forgotPassword = function(username) {
+  function forgotPassword() {
     $scope.error = "";
     $scope.disabled = true;
-    $scope.username = username;
 
     apiService.forgotPassword($scope.username).success(function(response) {
       if(response.status == 200) {
@@ -342,7 +373,7 @@ function FutureedController($scope, $location, apiService) {
     });
   }
 
-  $scope.validateRegistration = function(reg, terms) {
+  function validateRegistration(reg, terms) {
     $scope.error = "";
     $scope.terms = angular.copy(terms);
 
@@ -514,10 +545,10 @@ function FutureedController($scope, $location, apiService) {
     $("html, body").animate({ scrollTop: 0 }, "slow");
   }
 
-  $scope.saveProfile = function(prof) {
+  function saveProfile(prof) {
     $scope.error = "";
     $scope.success_msg = "";
-    var has_empty = highlight_empty('form_registation');
+    var has_empty = highlight_empty('form_profile');
 
     if($scope.e_error || $scope.u_error) {
       $scope.error = "";
@@ -533,6 +564,7 @@ function FutureedController($scope, $location, apiService) {
         if(response.status == 200) {
           if(response.errors) {
             $scope.errorHandler(response.errors);
+            $("#" + $scope.error_object.field).addClass("required-field");
           } else if(response.data){
             $scope.setActive('index');
             $scope.success = true;
@@ -630,6 +662,8 @@ function FutureedController($scope, $location, apiService) {
         $scope.prof = response.data[0];
         $scope.prof.access_token = $scope.user.access_token;
         $scope.user = $scope.prof;
+
+        $scope.prof.birth = $scope.prof.birth_date;
       }
     }).error(function(response) {
       $scope.error = response.errors.message;
