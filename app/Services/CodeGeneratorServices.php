@@ -48,5 +48,12 @@ class CodeGeneratorServices {
         ];
     }
 
+    public function codeGenerator(){
+
+        $code = Carbon::now()->timestamp;
+
+        return $code;
+    }
+
 
 }

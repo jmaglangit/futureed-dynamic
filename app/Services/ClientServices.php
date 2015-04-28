@@ -9,10 +9,10 @@ use FutureEd\Models\Core\School;
 class ClientServices {
 
     public function __construct(
-        ClientRepositoryInterface $client,
+        ClientRepositoryInterface $clients,
         ValidatorRepositoryInterface $validator,
         User $user, School $school){
-        $this->client = $client;
+        $this->clients = $clients;
         $this->validator = $validator;
         $this->user = $user;
         $this->school = $school;
@@ -74,5 +74,20 @@ class ClientServices {
         else{
             return false;
         }
+    }
+    public function addClient($client){
+        $return = [];
+
+        $addclient_response = $this->clients->addClient($client);
+
+        $client_id = $this->clients->getClientId($client['user_id']);
+
+        $return = [
+            'status'    => 200,
+            'id'        => $client_id,
+            'message'   => $addclient_response,
+        ];
+
+        return $return;
     }
 }

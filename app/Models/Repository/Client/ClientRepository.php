@@ -34,8 +34,32 @@ class ClientRepository implements ClientRepositoryInterface{
     public function checkClientEmail($input){
         $email = $input['email'];
         $client_role = $input['client_role'];
-
-        dd();
     }
 
+    public function addClient($client){
+        
+        try{
+            Client::insert([
+                    'user_id'           => $client['user_id'],
+                    'first_name'        => $client['first_name'],
+                    'last_name'         => $client['last_name'],
+                    'client_role'       => $client['client_role'],
+                    'school_code'       => $client['school_code'],
+                    'street_address'    => $client['street_address'],
+                    'city'              => $client['city'],
+                    'state'             => $client['state'],
+                    'country'           => $client['country'],
+                    'zip'               => $client['zip'],
+                    'created_by'        => 1,
+                    'updated_by'        => 1,
+                ]);
+        }catch(Exception $e){
+            return $e->getMessage();
+        }
+        return true;
+    }
+
+    public function getClientId($id){
+        return Client::where('user_id','=', $id)->pluck('id');
+    }
 }

@@ -3,7 +3,6 @@
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
-use FutureEd\Models\Repository\School\SchoolRepositoryInterface;
 use FutureEd\Models\Repository\Validator\ValidatorRepositoryInterface;
 use FutureEd\Services\ClientServices;
 use FutureEd\Services\CodeGeneratorServices;
@@ -11,6 +10,7 @@ use FutureEd\Services\GradeServices;
 use FutureEd\Services\MailServices;
 use FutureEd\Services\PasswordImageServices;
 use FutureEd\Services\StudentServices;
+use FutureEd\Services\SchoolServices;
 use FutureEd\Services\UserServices;
 use FutureEd\Services\TokenServices;
 use FutureEd\Services\AvatarServices;
@@ -35,6 +35,7 @@ class ApiController extends Controller {
     public function __construct(
             UserServices $user,
             StudentServices $student,
+            SchoolServices $school,
             PasswordImageServices $password_image,
             TokenServices $token,
             MailServices $mailServices,
@@ -42,10 +43,10 @@ class ApiController extends Controller {
             GradeServices $grade,
             AvatarServices $avatar,
             CodeGeneratorServices $code,
-            ValidatorRepositoryInterface $validatorRepositoryInterface,
-            SchoolRepositoryInterface $schoolRepositoryInterface){
+            ValidatorRepositoryInterface $validatorRepositoryInterface){
         $this->user = $user;
         $this->student = $student;
+        $this->school = $school;
         $this->password_image = $password_image;
         $this->token = $token;
         $this->mail = $mailServices;
@@ -54,7 +55,6 @@ class ApiController extends Controller {
         $this->avatar = $avatar;
         $this->code = $code;
         $this->valid = $validatorRepositoryInterface;
-        $this->school = $schoolRepositoryInterface;
     }
     public function index(){
         return [

@@ -9,4 +9,8 @@ interface ClientRepositoryInterface {
 
     public function checkClientEmail($input);
 
+    public function addClient($client);
+
+    public function getClientId($id);
+
 }

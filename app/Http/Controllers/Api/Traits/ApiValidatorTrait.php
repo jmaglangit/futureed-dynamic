@@ -414,7 +414,7 @@ trait ApiValidatorTrait {
                     "$field_name" => strtolower($input["$field_name"]),
                 ],
                 [
-                    "$field_name" => 'required|digits:5|integer'
+                    "$field_name" => 'required|min:8|max:32'
                 ]
             );
 
@@ -422,11 +422,58 @@ trait ApiValidatorTrait {
 
                 $validator_msg = $validator->messages()->toArray();
 
-                return $this->setErrorCode(1013)
+                return $this->setErrorCode(2230)
                     ->setField($field_name)
                     ->setMessage($validator_msg["$field_name"][0])
                     ->errorMessage();
             }
+        }
+    }
+    public function confirmPassword($input,$field_name){
+
+        if(is_null($input["$field_name"]) || empty($input["$field_name"])){
+
+            return $this->parameterCheck($input,$field_name);
+        }
+
+        if(!is_null($input["$field_name"]) && !empty($input["$field_name"])){
+
+            $validator = Validator::make(
+                [
+                    "$field_name" => strtolower($input["$field_name"]),
+                ],
+                [
+                    "$field_name" => 'required|min:8|max:32'
+                ]
+            );
+
+            if($validator->fails()){
+
+                $validator_msg = $validator->messages()->toArray();
+
+                return $this->setErrorCode(2231)
+                    ->setField($field_name)
+                    ->setMessage($validator_msg["$field_name"][0])
+                    ->errorMessage();
+            }
+        }
+    }
+    public function passwordSame($input){
+        $password = $input['password'];
+        $confirm_password = $input['confirm_password'];
+
+        $rules = [
+            'password'          => 'required',
+            'confirm_password'  => 'required|same:password'
+        ];
+
+        $validator = Validator::make($input, $rules);
+
+        if($validator->fails()){
+
+            $validator_msg = $validator->messages()->toArray();
+
+            return true;
         }
     }
 

@@ -5,10 +5,11 @@ use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 use FutureEd\Services\ClientServices;
 
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use League\Flysystem\Exception;
+
+use Carbon\Carbon;
 
 class ClientRegisterController extends ClientController {
 	
@@ -18,9 +19,9 @@ class ClientRegisterController extends ClientController {
 
 	        $client = Input::only('first_name', 'last_name', 'client_role', 'street_address', 'city', 'state', 'country', 'zip');
 
-	        $user = Input::only('username', 'email', 'first_name', 'last_name', 'password', 'confirm_password');
+	        $user = Input::only('username', 'email', 'first_name', 'last_name', 'password');
 
-	        $school = Input::only('school_name', 'school_address', 'school_state', 'school_country', 'school_zip');
+	        $school = Input::only('school_name', 'school_address', 'school_city', 'school_state', 'school_country', 'school_zip');
 
 	        $this->addMessageBag($this->firstName($client,'first_name'));
         	$this->addMessageBag($this->lastName($client,'last_name'));
@@ -32,6 +33,7 @@ class ClientRegisterController extends ClientController {
         	$this->addMessageBag($this->zipCode($client,'zip'));
         	$this->addMessageBag($this->email($user,'email'));
         	$this->addMessageBag($this->username($user,'username'));
+        	$this->addMessageBag($this->password($user,'password'));
 
         	if($client['client_role'] == 'Principal'){
         		$this->addMessageBag($this->schoolName($school,'school_name'));
@@ -62,7 +64,6 @@ class ClientRegisterController extends ClientController {
         	$username_check = $this->client->checkClientUsername($user);
 
         	if($username_check == false){
-
         		$user_err[] = [
         			"error_code" => 2201,
         			"field" => 'username',
@@ -77,13 +78,13 @@ class ClientRegisterController extends ClientController {
 
         	if($check_school_name == false){
 
-        		$user_err[] = [
+        		$school_err[] = [
         			"error_code" => 2202,
         			"field" => 'school_name',
         			"message" => $error_msg[2202]
         			];
 
-        		$msg_bag = array_merge($msg_bag, $user_err);
+        		$msg_bag = array_merge($msg_bag, $school_err);
 
         	}
 
@@ -100,14 +101,27 @@ class ClientRegisterController extends ClientController {
 
         	// add user, return status
         	$user_response = $this->user->addUser($user);
+        	
+        	if($client['client_role'] == 'Principal'){
+        		// add school, return status
+				$school = array_merge([
+        				'code' => $this->code->codeGenerator()
+        			], $school);
 
-        	if(isset($user_response['status'])){
-        		$client = array_merge($client, [
-        			'user_id' => $user_response['id']
-        			]);
-        		$client_response = $this->client->addClient($client);
+        	$school_response = $this->school->addSchool($school);
         	}
+        	
+        	if(isset($user_response['status']) && isset($school_response['status'])){
 
+        		$client = array_merge($client, [
+        			'user_id' 		=> $user_response['id'],
+        			'school_code'		=> (isset($school['code'])) ? $school['code'] : null;
+        			]);
+
+        		$client_response = $this->client->addClient($client);
+        		dd($client_response);
+
+        	}
 	    }
 	
 }
