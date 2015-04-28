@@ -50,7 +50,8 @@ class UserRepository implements UserRepositoryInterface {
     public function addUser($user){
 
         try{
-            User::insert([
+
+            User::create([
                 'username' => $user['username'],
                 'email' => $user['email'],
                 'name' => $user['first_name'] .' '.$user['last_name'],
