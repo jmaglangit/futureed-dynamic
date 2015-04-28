@@ -54,8 +54,6 @@ trait ApiValidatorTrait {
     //Check email validations.
     public function email($input, $email){
 
-
-
             $validator = Validator::make(
                 [
                     "$email" => $input["$email"],
@@ -73,7 +71,6 @@ trait ApiValidatorTrait {
                     ->setField($email)
                     ->setMessage($validator_msg["$email"][0])
                     ->errorMessage();
-
             }
     }
 
@@ -103,7 +100,6 @@ trait ApiValidatorTrait {
 
     //Validate birth_date field.
     public function birthDate($input,$birth_date){
-
 
             $validator = Validator::make(
                 [
@@ -173,7 +169,6 @@ trait ApiValidatorTrait {
 
     //Validate gender -- accepts any type of case
     public function gender($input,$gender){
-
 
             $validator = Validator::make(
                 [
@@ -247,7 +242,6 @@ trait ApiValidatorTrait {
 
             return $this->parameterCheck($input,$field_name);
           }
-        
     }
     
     public function userType($input,$field_name){
@@ -276,13 +270,6 @@ trait ApiValidatorTrait {
 
     public function userTypeClientStudent($input,$field_name){
 
-        if(is_null($input["$field_name"]) || empty($input["$field_name"])){
-
-            return $this->parameterCheck($input,$field_name);
-        }
-
-        if(!is_null($input["$field_name"]) && !empty($input["$field_name"])){
-
             $validator = Validator::make(
                 [
                     "$field_name" => strtolower($input["$field_name"]),
@@ -301,7 +288,6 @@ trait ApiValidatorTrait {
                     ->setMessage($validator_msg["$field_name"][0])
                     ->errorMessage();
             }
-        }
     }
 
     public function validateVarNumber($id){
