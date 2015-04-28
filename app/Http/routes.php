@@ -34,6 +34,8 @@ Routes::group(['prefix' => 'api/v1'], function()
     Routes::post('/user/email','Api\v1\EmailController@checkEmail');
     Routes::post('/user/username','Api\v1\UserController@checkUser');
     Routes::post('/user/email/code','Api\v1\UserController@confirmEmailCode');
+    Routes::post('/user/reset/code', 'Api\v1\UserController@resendResetEmailCode');
+    Routes::post('/user/confirmation/code', 'Api\v1\UserController@resendRegisterEmailCode');
 
     //student login
     Routes::post('/student/login/username','Api\v1\StudentLoginController@login');

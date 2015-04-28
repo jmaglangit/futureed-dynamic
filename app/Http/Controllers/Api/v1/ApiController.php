@@ -14,6 +14,7 @@ use FutureEd\Services\StudentServices;
 use FutureEd\Services\UserServices;
 use FutureEd\Services\TokenServices;
 use FutureEd\Services\AvatarServices;
+use FutureEd\Services\AdminServices;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Matching\ValidatorInterface;
 use Illuminate\Support\Facades\Validator;
@@ -41,6 +42,7 @@ class ApiController extends Controller {
             GradeServices $grade,
             AvatarServices $avatar,
             CodeGeneratorServices $code,
+            AdminServices $admin,
             ValidatorRepositoryInterface $validatorRepositoryInterface,
             SchoolRepositoryInterface $schoolRepositoryInterface){
         $this->user = $user;
@@ -52,6 +54,7 @@ class ApiController extends Controller {
         $this->grade = $grade;
         $this->avatar = $avatar;
         $this->code = $code;
+        $this->admin = $admin;
         $this->valid = $validatorRepositoryInterface;
         $this->school = $schoolRepositoryInterface;
     }
