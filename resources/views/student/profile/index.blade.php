@@ -5,7 +5,7 @@
 @stop
 
 @section('content')
-<div class="container dshbrd-con" ng-init="getUserDetails()" ng-cloak>
+<div class="container dshbrd-con" ng-cloak>
 	<div class="wrapr"> 
 		<div class="side-nav">
 			@include('student.partials.dshbrd-side-nav')
@@ -55,18 +55,26 @@
 						<div class="form-group">
 	                        <label for="" class="col-md-2 control-label">Username <span class="required">*</span></label>
 	                        <div class="col-md-5">
-                            <input ng-disabled="!edit" type="text" class="form-control" ng-model="prof.username" name="username" placeholder="Username" 
-                            ng-model-options="{debounce : {'default' : 1000}}" ng-change="checkAvailability(prof.username)" required />
-                            <span ng-if="u_error" class="error-msg-con"> Username is invalid or already exist</span>
-                        </div>
+	                            <input ng-disabled="!edit" type="text" class="form-control" ng-model="prof.username" name="username" placeholder="Username" 
+	                            ng-model-options="{debounce : {'default' : 1000}}" ng-change="checkAvailability(prof.username)" required />
+	                        </div>
+	                        <div style="margin-top: 7px;"> 
+	                            <i ng-if="u_loading" class="fa fa-refresh fa-spin"></i>
+	                            <i ng-if="u_success" class="fa fa-check success-color"></i>
+	                            <span ng-if="u_error" class="error-msg-con"> Username is invalid or already exist</span>
+	                        </div>
 	                    </div>
 						<div class="form-group">
 	                        <label for="" class="col-md-2 control-label">Email <span class="required">*</span></label>
 	                        <div class="col-md-5">
-                            <input ng-disabled="!edit" type="text" class="form-control" ng-model="prof.email" name="email" placeholder="Email Address"
-                                ng-model-options="{debounce : {'default' : 1000}}" ng-change="checkEmailAvailability(prof.email)" required />
-                            <span ng-if="e_error" class="error-msg-con"> Email Address is invalid or already exist</span>
-                        </div>
+	                            <input ng-disabled="!edit" type="text" class="form-control" ng-model="prof.email" name="email" placeholder="Email Address"
+	                                ng-model-options="{debounce : {'default' : 1000}}" ng-change="checkEmailAvailability(prof.email)" required />
+	                        </div>
+	                        <div style="margin-top: 7px;">
+	                            <i ng-if="e_loading" class="fa fa-refresh fa-spin"></i>
+	                            <i ng-if="e_success" class="fa fa-check success-color"></i>
+	                            <span ng-if="e_error" class="error-msg-con"> Email Address is invalid or already exist</span>
+	                        </div>
 	                    </div>
 					</fieldset>
 					<fieldset>
@@ -170,7 +178,7 @@
 		</div>
 	</div>
 
-	<textarea id="userdata" name="hide" style="display:none;">{!! Session::get('user') !!}</textarea>
+	
 </div>
 @stop
 

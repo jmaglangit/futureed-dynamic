@@ -3,6 +3,7 @@
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
+use FutureEd\Models\Repository\Country\CountryRepositoryInterface;
 use FutureEd\Models\Repository\School\SchoolRepositoryInterface;
 use FutureEd\Models\Repository\Validator\ValidatorRepositoryInterface;
 use FutureEd\Services\ClientServices;
@@ -44,7 +45,8 @@ class ApiController extends Controller {
             CodeGeneratorServices $code,
             AdminServices $admin,
             ValidatorRepositoryInterface $validatorRepositoryInterface,
-            SchoolRepositoryInterface $schoolRepositoryInterface){
+            SchoolRepositoryInterface $schoolRepositoryInterface,
+            CountryRepositoryInterface $countryRepositoryInterface){
         $this->user = $user;
         $this->student = $student;
         $this->password_image = $password_image;
@@ -57,6 +59,7 @@ class ApiController extends Controller {
         $this->admin = $admin;
         $this->valid = $validatorRepositoryInterface;
         $this->school = $schoolRepositoryInterface;
+        $this->country = $countryRepositoryInterface;
     }
     public function index(){
         return [

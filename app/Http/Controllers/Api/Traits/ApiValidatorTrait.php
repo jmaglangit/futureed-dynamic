@@ -342,6 +342,7 @@ trait ApiValidatorTrait {
         }
     }
 
+
     public function userTypeClientStudent($input,$field_name){
 
         if(is_null($input["$field_name"]) || empty($input["$field_name"])){
@@ -369,6 +370,28 @@ trait ApiValidatorTrait {
                     ->setMessage($validator_msg["$field_name"][0])
                     ->errorMessage();
             }
+        }
+    }
+
+    public function validateVarNumber($id){
+
+        $validator = Validator::make(
+            [
+                "$id" => $id
+            ],
+            [
+                "$id" => 'required|numeric'
+            ]
+        );
+
+        if($validator->fails()){
+
+            $validator_msg = $validator->messages()->toArray();
+
+            return $this->setErrorCode(1011)
+                ->setField("Parameter")
+                ->setMessage($validator_msg["$id"][0])
+                ->errorMessage();
         }
     }
 

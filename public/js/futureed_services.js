@@ -1,9 +1,19 @@
 var services = angular.module('futureed.services', ['ngResource']);
 
-	services.factory('loginAPIService', function($http) {
+	services.factory('apiService', function($http) {
 		
 		var futureedAPI = {};
 		var futureedAPIUrl = '/api/v1/';
+
+		futureedAPI.clientLogin = clientLogin;
+
+		function clientLogin(username, password, role) {
+			return $http({
+				method	: 'POST'
+				, data 	: {username : username, password : password, role : role}
+				, url	: futureedAPIUrl + 'client/login'
+			});
+		}
 
 		futureedAPI.updateUserSession = function(user) {
 			return $http({
@@ -175,15 +185,7 @@ var services = angular.module('futureed.services', ['ngResource']);
 	services.factory("httpInterceptor", function($q) {
 	    return {
 	      // optional method
-	      'response': function(response) {
-	        // do something on success
-	        $("html, body").animate({ scrollTop: 0 }, "slow");
-	        return response;
-	      },
-
-	      // optional method
 	     'responseError': function(rejection) {
-	        // do something on error
 	        $("html, body").animate({ scrollTop: 0 }, "slow");
 	        return $q.reject(rejection);
 	      }

@@ -14,7 +14,7 @@ class StudentPasswordController extends StudentController {
 
         //get images
         $response = $this->password_image->getNewPasswordImages();
-        return $this->setStatusCode($response['status'])->respondWithData($response['data']);
+        return $this->respondWithData($response['data']);
     }
     
     
@@ -50,27 +50,20 @@ class StudentPasswordController extends StudentController {
                    $this->user->updateInactiveLock($student_reference['user_id']);
                 
                 
-                   return $this->setStatusCode($return['status'])
-                            ->respondWithData(['id'=>$return['data']]);
+                   return $this->respondWithData(['id'=>$return['data']]);
                 }else{
                       
-                      return $this->respondWithError(['error_code' => 2100,
-                                                     'message' => $error[2100] 
-                                                   ]);
+                      return $this->respondErrorMessage(2100);
                 }
             }else{
               
-                return $this->respondWithError(['error_code' => 2101,
-                                                   'message' => $error[2101] 
-                                                 ]);
+                return $this->respondErrorMessage(2101);
               
             }
             
           }else{
     
-                return $this->respondWithError(['error_code' => 2001,
-                                                   'message' => $error[2001] 
-                                                 ]);
+                return $this->respondErrorMessage(2001);
              
           }
         
@@ -101,9 +94,7 @@ class StudentPasswordController extends StudentController {
           
            if($return['status']==202){
               
-               return $this->respondWithError(['error_code' => 2001,
-                                               'message' => $error[2001]
-                                           ]);
+               return $this->respondErrorMessage(2001);
                         
            }else{
 
@@ -115,9 +106,7 @@ class StudentPasswordController extends StudentController {
                  
                   if($expired==true){
 
-                     return $this->respondWithError(['error_code' => 2100,
-                                                     'message' => $error[2100]
-                                                   ]);
+                     return $this->respondErrorMessage(2100);
                   }else{
                         
                       
@@ -126,9 +115,7 @@ class StudentPasswordController extends StudentController {
                   }
               }else{
                  
-                  return $this->respondWithError(['error_code' => 2100,
-                                                  'message' => $error[2100]
-                                                ]);
+                  return $this->respondErrorMessage(2100);
               }
                 
            }
@@ -166,17 +153,13 @@ class StudentPasswordController extends StudentController {
 
             }else{
 
-              return $this->respondWithError(['error_code' => 2101,
-                                            'message' =>  $error[2101]
-                                          ]);
+              return $this->respondErrorMessage(2101);
             }
 
             
           }else{
 
-            return $this->respondWithError(['error_code' => 2001,
-                                            'message' =>  $error[2001]
-                                          ]);
+            return $this->respondErrorMessage(2001);
           }
 
 
@@ -221,25 +204,19 @@ class StudentPasswordController extends StudentController {
                       
                     }else{
                       
-                      return $this->respondWithError(['error_code'=>2102,
-                                                      'message'=>$error[2102]
-                                                    ]);
+                      return $this->respondErrorMessage(2102);
                     
                     } 
 
               }else{
 
-                return $this->respondWithError(['error_code' => 2101,
-                                                'message' =>  $error[2101]
-                                              ]);
+                return $this->respondErrorMessage(2101);
 
               }
 
           }else{
 
-            return $this->respondWithError(['error_code' => 2001,
-                                            'message' =>  $error[2001]
-                                          ]);
+            return $this->respondErrorMessage(2001);
           }
          
       }

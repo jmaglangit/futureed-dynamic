@@ -5,7 +5,7 @@
 	@stop
 
 	@section('content')
-	<div class="container dshbrd-con" ng-init="getUserDetails()" ng-cloak>
+	<div class="container dshbrd-con" ng-cloak>
 		<div class="wrapr"> 
 			<div class="side-nav">
 				@include('student.partials.dshbrd-side-nav')
@@ -47,8 +47,6 @@
 				</div>
 			</div>
 		</div>
-
-		<textarea id="userdata" name="hide" style="display:none;">{!! Session::get('user') !!}</textarea>
 	</div>
 	@stop
 

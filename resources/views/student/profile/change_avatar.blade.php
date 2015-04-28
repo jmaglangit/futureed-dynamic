@@ -5,7 +5,7 @@
 	@stop
 
 	@section('content')
-	<div class="container dshbrd-con" ng-init="getUserDetails()" ng-cloak>
+	<div class="container dshbrd-con" ng-cloak>
 		<div class="wrapr"> 
 			<div class="side-nav">
 				@include('student.partials.dshbrd-side-nav')
@@ -57,17 +57,17 @@
 				              </li>
 				            </ul>
 						  </div>
-				          <button type="button" class="btn btn-red" ng-click="selectAvatar()">Proceed</button>
 				        </div>
 				        <input type="hidden" ng-model="session_user" />
 				      </form>
 				    </div>
-				  </div>
+				    <div class="btn-container" ng-if="!has_avatar">
+				        <button type="button" class="btn btn-red" ng-click="selectAvatar()">Proceed</button>
+				        <a href="{!! route('student.profile.index') !!}" class="btn btn-purple">Cancel</a>
+			      	</div>
 				</div>
 			</div>
 		</div>
-
-		<textarea id="userdata" name="hide" style="display:none;">{!! Session::get('user') !!}</textarea>
 	</div>
 	@stop
 
