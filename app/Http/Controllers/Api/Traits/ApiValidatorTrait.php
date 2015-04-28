@@ -468,7 +468,7 @@ trait ApiValidatorTrait {
         ];
 
         $validator = Validator::make($input, $rules);
-
+    }
     public function validateVarNumber($id){
 
         $validator = Validator::make(
@@ -484,9 +484,6 @@ trait ApiValidatorTrait {
 
             $validator_msg = $validator->messages()->toArray();
 
-            return true;
-        }
-    }
             return $this->setErrorCode(1011)
                 ->setField("Parameter")
                 ->setMessage($validator_msg["$id"][0])

@@ -111,11 +111,11 @@ class ClientRegisterController extends ClientController {
         	$school_response = $this->school->addSchool($school);
         	}
         	
-        	if(isset($user_response['status']) && isset($school_response['status'])){
+        	if(isset($user_response['status']) || isset($school_response['status'])){
 
         		$client = array_merge($client, [
         			'user_id' 		=> $user_response['id'],
-        			'school_code'		=> (isset($school['code'])) ? $school['code'] : null;
+        			'school_code'		=> (isset($school['code'])) ? $school['code'] : null,
         			]);
 
         		$client_response = $this->client->addClient($client);
