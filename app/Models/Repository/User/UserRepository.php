@@ -245,6 +245,19 @@ class UserRepository implements UserRepositoryInterface {
                      
     }
 
+    public function updateConfirmationCode($id,$code){
+        try{
+
+            User::where('id',$id)->update([
+                'confirmation_code' => $code['confirmation_code'],
+                'confirmation_code_expiry' => $code['confirmation_code_expiry']
+            ]);
+
+        } catch (Exception $e){
+            throw new Exception($e->getMessage());
+        }
+    }
+
 
 
 
