@@ -119,9 +119,24 @@ class ClientRegisterController extends ClientController {
         			]);
 
         		$client_response = $this->client->addClient($client);
-        		dd($client_response);
 
         	}
+
+        	if(isset($client_response['status'])){
+
+        		// send email to user
+        		$this->mail->sendClientRegister($user_response['id']);
+
+        		return $this->respondWithData([
+        				'id'	=> $client_response['id'],
+        			]);
+        	}else {
+
+            $return = array_merge($user_response,$client_response);
+
+            return $this->setStatusCode(200)->respondWithError($return);
+
+        }
 	    }
 	
 }

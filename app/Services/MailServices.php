@@ -90,4 +90,26 @@ class MailServices {
         ];
         $this->sendMail($content);
     }
+    public function sendClientRegister($user_id){
+        $user_type = config('futureed.client');
+
+
+        //get user information for the email
+        $user_detail = $this->user->getUser($user_id,$user_type);
+
+        $code = $this->user->getConfirmationCode($user_id);
+
+        $content = [
+            'view' => 'emails.client.register-success-email',
+            'data' => [
+                'name' => $user_detail['name'],
+                'code' => $code['confirmation_code'],
+                'link' => url() . '/client/email/confirm?email=' . $user_detail['email']  ,
+            ],
+            'mail_recipient' => $user_detail['email'],
+            'mail_recipient_name' => $user_detail['first_name' ] . $user_detail['last_name'],
+            'subject' => 'Welcome to Future Lesson!'
+        ];
+        $this->sendMail($content);
+    }
 }
