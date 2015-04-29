@@ -90,4 +90,9 @@ class ClientServices {
 
         return $return;
     }
+    
+    public function getClientId($user_id){
+
+        return $this->client->getClientId($user_id);
+    }
 }

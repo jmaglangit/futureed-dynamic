@@ -26,6 +26,12 @@ return [
         2200 => 'Email already exist',
         2201 => 'Username already exist',
         2202 => 'School Name already exist',
+        
+        2100 => 'Invalid reset code',
+        2101 => 'Invalid password image',
+        2102 => 'Access token expired',
+        2103 => 'Invalid confirmation code',
+
 
         2009 => 'Avatar does not exist',
         2010 => 'Parent does not exist',
@@ -34,6 +40,5 @@ return [
         2101 => 'Password image invalid',
         2102 => 'Access token expire',
 
-        2232 => 'Password and Confirm password must match!',
     ],
 ];

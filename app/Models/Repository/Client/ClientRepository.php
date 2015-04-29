@@ -59,7 +59,8 @@ class ClientRepository implements ClientRepositoryInterface{
         return true;
     }
 
-    public function getClientId($id){
-        return Client::where('user_id','=', $id)->pluck('id');
+    public function getClientId($user_id){
+
+          return Client::where('user_id','=',$user_id)->pluck('id');
     }
 }
