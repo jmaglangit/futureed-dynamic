@@ -13,7 +13,7 @@ class ClientServices {
         ValidatorRepositoryInterface $validator,
         UserRepositoryInterface $user,
         SchoolRepositoryInterface $school){
-        $this->clients = $client;
+        $this->client = $client;
         $this->validator = $validator;
         $this->user = $user;
         $this->school = $school;
@@ -72,9 +72,9 @@ class ClientServices {
     public function addClient($client){
         $return = [];
 
-        $addclient_response = $this->clients->addClient($client);
+        $addclient_response = $this->client->addClient($client);
 
-        $client_id = $this->clients->getClientId($client['user_id']);
+        $client_id = $this->client->getClientId($client['user_id']);
 
         $return = [
             'status'    => 200,
