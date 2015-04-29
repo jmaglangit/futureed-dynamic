@@ -20,20 +20,14 @@ return [
         2005 => 'Country does not exist',
         2006 => 'Confirmation code does not match.',
         2007 => 'Confirmation code has expired.',
-        2008 => 'The email/username you entered is invalid Please try inputting again. If the account you are attempting to login is for a student less than 13 yrs old, please login via the parent site',
-
+        2008 => 'The email/username you entered is invalid. Please try inputting again. If the account you are attempting to login is for a student less than 13 yrs old, please login via the parent site',
+        2009 => 'Avatar does not exist',
+        2010 => 'Parent does not exist',
         
         2100 => 'Invalid reset code',
         2101 => 'Invalid password image',
         2102 => 'Access token expired',
         2103 => 'Invalid confirmation code',
-
-        2009 => 'Avatar does not exist',
-        2010 => 'Parent does not exist',
-
-        2100 => 'Reset code invalid',
-        2101 => 'Password image invalid',
-        2102 => 'Access token expire',
 
     ],
 ];
