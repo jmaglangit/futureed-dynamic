@@ -125,7 +125,7 @@ class UserServices {
                 }
             } else {
                 return [
-                    'status' => 202,
+                    'status' => 2002,
                     'data' => "Email does not Exist"
                 ];
             }

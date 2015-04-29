@@ -55,7 +55,7 @@ class UserRepository implements UserRepositoryInterface {
                 'email' => $user['email'],
                 'name' => $user['first_name'] .' '.$user['last_name'],
                 'user_type' => $user['user_type'],
-                'password' => (isset($user['password'])) ? Hash::make($user['password']) : null,
+                'password' => (isset($user['password'])) ? \Hash::make($user['password']) : null,
                 'confirmation_code' => $user['confirmation_code'],
                 'confirmation_code_expiry' => $user['confirmation_code_expiry'],
                 'created_by' => 1,

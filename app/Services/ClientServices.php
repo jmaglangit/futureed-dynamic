@@ -5,23 +5,18 @@ use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
 use FutureEd\Models\Repository\User\UserRepositoryInterface;
 use FutureEd\Models\Repository\School\SchoolRepositoryInterface;
 use FutureEd\Models\Repository\Validator\ValidatorRepositoryInterface;
-use FutureEd\Models\Core\User;
-use FutureEd\Models\Core\School;
 
 class ClientServices {
 
     public function __construct(
-        ClientRepositoryInterface $clients,
+        ClientRepositoryInterface $client,
         ValidatorRepositoryInterface $validator,
-        User $user, School $school,
-        UserRepositoryInterface $users,
-        SchoolRepositoryInterface $schools){
-        $this->clients = $clients;
+        UserRepositoryInterface $user,
+        SchoolRepositoryInterface $school){
+        $this->clients = $client;
         $this->validator = $validator;
         $this->user = $user;
-        $this->users = $users;
         $this->school = $school;
-        $this->schools = $schools;
 
     }
 
@@ -41,7 +36,7 @@ class ClientServices {
         $email = $input['email'];
         $client_role = 'Client';
 
-        $check = $this->users->checkEmail($email, $client_role);
+        $check = $this->user->checkEmail($email, $client_role);
 
         if(is_null($check)){
             return true;
@@ -54,7 +49,7 @@ class ClientServices {
         $username = $input['username'];
         $client_role = 'Client';
 
-        $check = $this->users->checkUserName($username, $client_role);
+        $check = $this->user->checkUserName($username, $client_role);
 
         if(is_null($check)){
             return true;
@@ -65,7 +60,7 @@ class ClientServices {
     }
     public function schoolNameCheck($input){
 
-        $check = $this->schools->checkSchoolName($input);
+        $check = $this->school->checkSchoolName($input);
 
         if(is_null($check)){
             return true;
