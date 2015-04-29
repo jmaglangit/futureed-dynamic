@@ -125,7 +125,7 @@ class UserServices {
                 }
             } else {
                 return [
-                    'status' => 2002,
+                    'status' => 202,
                     'data' => "Email does not Exist"
                 ];
             }
@@ -356,14 +356,6 @@ class UserServices {
     public function isActivated($id){
         
         return $this->users->isActivated($id);
-    }
-
-    //update cofirmation code and expiry
-
-
-    public function updateConfirmationCode($id,$code){
-
-        $this->users->updateConfirmationCode($id,$code);
     }
 
 
