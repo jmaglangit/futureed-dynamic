@@ -51,7 +51,6 @@ class ClientLoginController extends ClientController {
             return $this->respondErrorMessage(2001);
         }
 
-
         //get client basic detail
         $client_detail = $this->client->getClient($client_role,$input['role']);
 
