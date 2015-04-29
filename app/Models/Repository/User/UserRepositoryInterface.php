@@ -59,4 +59,6 @@ interface UserRepositoryInterface {
     
     public function isActivated($id);
 
+     public function updateConfirmationCode($id,$code);
+
 }
