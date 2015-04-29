@@ -258,6 +258,20 @@ class UserRepository implements UserRepositoryInterface {
         }
     }
 
+    public function updatePassword($id,$password){
+
+        try{
+
+            User::where('id',$id)->update([
+                'password' => $password
+            ]);
+
+        } catch (Exception $e){
+            throw new Exception($e->getMessage());
+        }
+
+    }
+
 
 
 

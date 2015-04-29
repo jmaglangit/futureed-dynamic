@@ -366,6 +366,11 @@ class UserServices {
         $this->users->updateConfirmationCode($id,$code);
     }
 
+    public function updatePassword($id,$password){
+
+        $this->users->updatePassword($id,$password);
+    }
+
 
     
 
