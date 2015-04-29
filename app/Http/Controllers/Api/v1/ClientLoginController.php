@@ -42,7 +42,7 @@ class ClientLoginController extends ClientController {
 
 
         //match username and password
-        $input['password'] = \Hash::make($input['password']);
+        $input['password'] = sha1($input['password']);
         $return  = $this->user->checkPassword($response['data'],$input['password']);
 
         if(isset($return['error_code'])){
