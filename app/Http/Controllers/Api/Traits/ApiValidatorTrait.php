@@ -291,13 +291,6 @@ trait ApiValidatorTrait {
     }
     public function clientRole($input,$field_name){
 
-        if(is_null($input["$field_name"]) || empty($input["$field_name"])){
-
-            return $this->parameterCheck($input,$field_name);
-        }
-
-        if(!is_null($input["$field_name"]) && !empty($input["$field_name"])){
-
             $validator = Validator::make(
                 [
                     "$field_name" => strtolower($input["$field_name"]),
@@ -316,17 +309,9 @@ trait ApiValidatorTrait {
                     ->setMessage($validator_msg["$field_name"][0])
                     ->errorMessage();
             }
-        }
     }
 
     public function zipCode($input,$field_name){
-
-        if(is_null($input["$field_name"]) || empty($input["$field_name"])){
-
-            return $this->parameterCheck($input,$field_name);
-        }
-
-        if(!is_null($input["$field_name"]) && !empty($input["$field_name"])){
 
             $validator = Validator::make(
                 [
@@ -346,23 +331,15 @@ trait ApiValidatorTrait {
                     ->setMessage($validator_msg["$field_name"][0])
                     ->errorMessage();
             }
-        }
     }
     public function checkPassword($input,$field_name){
-
-        if(is_null($input["$field_name"]) || empty($input["$field_name"])){
-
-            return $this->parameterCheck($input,$field_name);
-        }
-
-        if(!is_null($input["$field_name"]) && !empty($input["$field_name"])){
 
             $validator = Validator::make(
                 [
                     "$field_name" => strtolower($input["$field_name"]),
                 ],
                 [
-                    "$field_name" => 'required|min:8|max:32'
+                    "$field_name" => 'required|min:8|max:32|regex:/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/'
                 ]
             );
 
@@ -375,7 +352,6 @@ trait ApiValidatorTrait {
                     ->setMessage($validator_msg["$field_name"][0])
                     ->errorMessage();
             }
-        }
     }
 
     public function validateVarNumber($id){

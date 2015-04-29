@@ -128,7 +128,7 @@ class ClientRegisterController extends ClientController {
 
             $return = array_merge($user_response,$client_response);
 
-            return $this->setStatusCode(200)->respondWithError($return);
+            return $this->respondWithError($return);
 
         }
 	    }
