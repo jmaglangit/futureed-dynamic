@@ -7,7 +7,13 @@ interface ClientRepositoryInterface {
 
     public function checkClient($id,$role);
 
-    public function getClientId($user_id);
+    public function checkClientEmail($input);
+
+    public function addClient($client);
+
+    public function getClientId($id);
+
+    public function getRole($user_id);
 
     public function getRole($user_id);
 

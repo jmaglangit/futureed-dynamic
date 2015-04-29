@@ -18,7 +18,7 @@ class CreateClientsTable extends Migration {
             $table->string('first_name', 64);
             $table->string('last_name', 64);
             $table->enum('client_role', ['Parent', 'Principal', 'Teacher']);
-            $table->bigInteger('school_code');
+            $table->bigInteger('school_code')->nullable();
             $table->string('street_address', 128)->nullable();
             $table->string('city', 128)->nullable();
             $table->string('state', 128)->nullable();

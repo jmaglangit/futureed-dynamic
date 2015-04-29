@@ -33,8 +33,6 @@ return [
         2102 => 'Access token expired',
         2103 => 'Invalid confirmation code',
 
-        2009 => 'Avatar does not exist',
-        2010 => 'Parent does not exist',
 
        
 

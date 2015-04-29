@@ -12,6 +12,7 @@ use FutureEd\Services\GradeServices;
 use FutureEd\Services\MailServices;
 use FutureEd\Services\PasswordImageServices;
 use FutureEd\Services\StudentServices;
+use FutureEd\Services\SchoolServices;
 use FutureEd\Services\UserServices;
 use FutureEd\Services\TokenServices;
 use FutureEd\Services\AvatarServices;
@@ -22,6 +23,7 @@ use Illuminate\Support\Facades\Validator;
 use Symfony\Component\HttpFoundation\Response;
 use FutureEd\Http\Controllers\Api\Traits\ErrorMessageTrait;
 use FutureEd\Http\Controllers\Api\Traits\ApiValidatorTrait;
+use FutureEd\Http\Controllers\Api\Traits\ClientValidatorTrait;
 
 
 
@@ -36,6 +38,7 @@ class ApiController extends Controller {
     public function __construct(
             UserServices $user,
             StudentServices $student,
+            SchoolServices $school,
             PasswordImageServices $password_image,
             TokenServices $token,
             MailServices $mailServices,
@@ -49,6 +52,7 @@ class ApiController extends Controller {
             CountryRepositoryInterface $countryRepositoryInterface){
         $this->user = $user;
         $this->student = $student;
+        $this->school = $school;
         $this->password_image = $password_image;
         $this->token = $token;
         $this->mail = $mailServices;
