@@ -9,5 +9,7 @@ interface ClientRepositoryInterface {
 
     public function getClientId($user_id);
 
+    public function getRole($user_id);
+
 
 }

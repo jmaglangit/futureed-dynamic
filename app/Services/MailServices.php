@@ -11,9 +11,10 @@ use Illuminate\Mail\Mailer;
 use Illuminate\Support\Facades\Mail;
 use League\Flysystem\Exception;
 class MailServices {
-    public function __construct(Mailer $mailer, UserServices $user){
+    public function __construct(Mailer $mailer, UserServices $user, ClientServices $client){
         $this->mailer = $mailer;
         $this->user = $user;
+        $this->client = $client;
     }
     /*
      * $contents
@@ -90,16 +91,39 @@ class MailServices {
         $this->sendMail($content);
     }
 
-    public function sendClientRegister($data,$code,$subject){
+    public function sendClientRegister($data,$code,$send){
+
+        if($send === 1){
+
+            $subject = config('futureed.subject_reg_resend');
+            $template = 'emails.client.registration-email';
+
+        }else{
+
+            $subject = config('futureed.subject_register');
+            $role = $this->client->getrole($data['id']);
+
+            if($role == 'Parent'){
+
+                $template = 'emails.client.register-parent-email';
+
+            }else{
+
+                $template = 'emails.client.register-principal-email';
+
+            }
+        }
+
+        
 
         $content = [
-            'view' => 'emails.client.registration-email',
+            'view' => $template,
             'data' => [
                 'name' => $data['name'],
                 'code' => $code,
                 'link' => url() . '/client/email/confirm?email=' . $data['email']  ,
             ],
-            'mail_recipient' => $data['email'],
+            'mail_recipient' => 'jsuizo@nerubia.com',
             'mail_recipient_name' => $data['name' ],
             'subject' => $subject
         ];
