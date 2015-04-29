@@ -92,10 +92,6 @@ class ClientRegisterController extends ClientController {
         	if($client['client_role'] == config('futureed.principal')){
 
         		// add school, return status
-				$school = array_merge([
-        				'code' => $this->code->codeGenerator()
-        			], $school);
-
         	$school_response = $this->school->addSchool($school);
         	}
         	

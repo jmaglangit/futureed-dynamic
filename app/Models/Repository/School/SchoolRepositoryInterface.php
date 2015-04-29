@@ -12,4 +12,6 @@ interface SchoolRepositoryInterface {
     public function addSchool($school);
 
     public function getSchoolId($name);
+
+    public function checkSchoolName($input);
 }

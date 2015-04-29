@@ -2,6 +2,8 @@
 
 
 use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
+use FutureEd\Models\Repository\User\UserRepositoryInterface;
+use FutureEd\Models\Repository\School\SchoolRepositoryInterface;
 use FutureEd\Models\Repository\Validator\ValidatorRepositoryInterface;
 use FutureEd\Models\Core\User;
 use FutureEd\Models\Core\School;
@@ -11,11 +13,15 @@ class ClientServices {
     public function __construct(
         ClientRepositoryInterface $clients,
         ValidatorRepositoryInterface $validator,
-        User $user, School $school){
+        User $user, School $school,
+        UserRepositoryInterface $users,
+        SchoolRepositoryInterface $schools){
         $this->clients = $clients;
         $this->validator = $validator;
         $this->user = $user;
+        $this->users = $users;
         $this->school = $school;
+        $this->schools = $schools;
 
     }
 
@@ -35,8 +41,7 @@ class ClientServices {
         $email = $input['email'];
         $client_role = 'Client';
 
-        $check = User::where('email','=',$email)
-            ->where('user_type','=',$client_role)->pluck('id');
+        $check = $this->users->checkEmail($email, $client_role);
 
         if(is_null($check)){
             return true;
@@ -49,8 +54,7 @@ class ClientServices {
         $username = $input['username'];
         $client_role = 'Client';
 
-        $check = User::where('username','=',$username)
-            ->where('user_type','=',$client_role)->pluck('id');
+        $check = $this->users->checkUserName($username, $client_role);
 
         if(is_null($check)){
             return true;
@@ -60,13 +64,8 @@ class ClientServices {
         }
     }
     public function schoolNameCheck($input){
-        $school_name = $input['school_name'];
-        $school_address = $input['school_address'];
-        $school_state = $input['school_state'];
 
-        $check = School::where('name','=',$school_name)
-            ->where('street_address','=',$school_address)
-            ->where('state','=',$school_state)->pluck('id');
+        $check = $this->schools->checkSchoolName($input);
 
         if(is_null($check)){
             return true;
@@ -90,7 +89,7 @@ class ClientServices {
 
         return $return;
     }
-    
+
     public function getClientId($user_id){
 
         return $this->client->getClientId($user_id);
