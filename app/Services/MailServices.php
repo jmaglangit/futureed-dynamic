@@ -77,7 +77,7 @@ class MailServices {
     public function resendStudentRegister($data,$code,$subject){
 
         $content = [
-            'view' => 'emails.student.registration-email',
+            'view' => 'emails.student.resendregistration-email',
             'data' => [
                 'name' => $data['name'],
                 'code' => $code,

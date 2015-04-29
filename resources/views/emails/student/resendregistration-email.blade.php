@@ -7,8 +7,7 @@
 <div>Hi there {{ $name }},</div>
 <br>
 <div>
-    <div>Thanks for joining us at Future Lesson and congratulations on becoming part of the coolest community of learners on the web!  We look forward to taking this incredible learning adventure with you and your child.
-</div>
+    <div>You have opt to resend your confirmation code.</div>
     <br>
     <div>Your confirmation code : {{ $code  }}</div>
     <br>
