@@ -15,14 +15,6 @@ class ClientLoginController extends ClientController {
 	public function login(){
         $input = Input::only('username','password','role');
 
-        // if(!$input['username'] || !$input['password'] || !$input['role']){
-
-        //     return $this->setStatusCode(200)->respondWithError([
-        //         'error_code' => 204,
-        //         'message' => 'Incomplete parameter requirements'
-        //     ]);
-
-        // }
         $this->addMessageBag($this->validateLoginField($input,'username'));
         $this->addMessageBag($this->validateLoginField($input,'password'));
         $this->addMessageBag($this->clientRole($input,'role'));
@@ -33,6 +25,7 @@ class ClientLoginController extends ClientController {
                 return $this->setStatusCode(200)->respondWithError($msg_bag);
             } 
 
+        $err_msg = config('futureed-error.error_messages');
         //check username and password
         $response =$this->user->checkLoginName($input['username'], 'Client');
         if($response['status'] <> 200){
@@ -55,10 +48,7 @@ class ClientLoginController extends ClientController {
 
         if(is_null($client_role)){
 
-            return $this->respondWithError([
-                'error_code' => 204,
-                'message' => 'Client does not exist'
-            ]);
+            return $this->respondErrorMessage(2001);
         }
 
 
