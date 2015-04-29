@@ -123,7 +123,7 @@ class MailServices {
                 'code' => $code,
                 'link' => url() . '/client/email/confirm?email=' . $data['email']  ,
             ],
-            'mail_recipient' => 'jsuizo@nerubia.com',
+            'mail_recipient' => $data['email'],
             'mail_recipient_name' => $data['name' ],
             'subject' => $subject
         ];
