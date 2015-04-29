@@ -48,10 +48,7 @@ class ClientLoginController extends ClientController {
 
         if(is_null($client_role)){
 
-            return $this->respondWithError([
-                'error_code' => 2001,
-                'message' => $err_msg[2001]
-            ]);
+            return $this->respondErrorMessage(2001);
         }
 
 
