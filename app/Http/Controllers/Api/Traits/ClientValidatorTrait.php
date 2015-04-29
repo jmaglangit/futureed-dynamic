@@ -38,12 +38,6 @@ trait ClientValidatorTrait {
     }
     public function schoolAddress($input, $field_name){
 
-        if(is_null($input['school_address']) || empty($input['school_address'])){
-
-            return $this->parameterCheck($input,$schoolAddress);
-        }
-        if(!is_null($input["$field_name"]) && !empty($input["$field_name"])){
-
             $validator = Validator::make(
                 [
                     "$field_name" => strtolower($input["$field_name"]),
@@ -62,7 +56,6 @@ trait ClientValidatorTrait {
                     ->setMessage($validator_msg["$field_name"][0])
                     ->errorMessage();
             }
-        }
     }
     public function schoolState($input, $schoolState){
 

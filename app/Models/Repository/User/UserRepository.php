@@ -48,7 +48,6 @@ class UserRepository implements UserRepositoryInterface {
 
 
     public function addUser($user){
-        
         try{
 
             User::create([

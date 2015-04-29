@@ -90,24 +90,37 @@ class MailServices {
         $this->sendMail($content);
     }
 
-    public function sendClientRegister($data,$code,$subject){
+    public function sendClientRegister($data,$code,$resend = 0){
 
+        if($resend == 1){
+            $subject = config('futureed.subject_reg_resend');
+
+            $template = 'emails.client.registration-email';
+
+        }else{
+            $subject = config('futureed.subject_register');
+
+            $template = ($data['client_role'] == 'Parent') ? 'emails.client.register-parent-email' : 'emails.client.register-principal-email';
+        }
+        
         $content = [
-            'view' => 'emails.client.registration-email',
-            'data' => [
-                'name' => $data['name'],
-                'code' => $code,
-                'link' => url() . '/client/email/confirm?email=' . $data['email']  ,
-            ],
-            'mail_recipient' => $data['email'],
-            'mail_recipient_name' => $data['name' ],
-            'subject' => $subject
-        ];
+                'view' => $template,
+                'data' => [
+                    'name' => $data['name'],
+                    'code' => $code,
+                    'link' => url() . '/client/email/confirm?email=' . $data['email']  ,
+                ],
+                'mail_recipient' => $data['email'],
+                'mail_recipient_name' => $data['name' ],
+                'subject' => $subject
+            ];
+
         $this->sendMail($content);
     }
 
 
     public function sendStudentMailResetPassword($data,$code,$subject){
+
         $content = [
             'view' => 'emails.student.forget-password',
             'data' => [

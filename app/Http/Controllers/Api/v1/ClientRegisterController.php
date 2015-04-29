@@ -33,17 +33,15 @@ class ClientRegisterController extends ClientController {
         	$this->addMessageBag($this->zipCode($client,'zip'));
         	$this->addMessageBag($this->email($user,'email'));
         	$this->addMessageBag($this->username($user,'username'));
-        	$this->addMessageBag($this->password($user,'password'));
+        	$this->addMessageBag($this->checkPassword($user,'password'));
 
-        	if($client['client_role'] == 'Principal'){
+        	if($client['client_role'] == config('futureed.principal')){
         		$this->addMessageBag($this->schoolName($school,'school_name'));
         		$this->addMessageBag($this->schoolAddress($school,'school_address'));
-        		$this->addMessageBag($this->schoolState($school,'school_state'));
-        		$this->addMessageBag($this->schoolCountry($school,'school_country'));
+        		$this->addMessageBag($this->validateString($school,'school_state'));
+        		$this->addMessageBag($this->validateString($school,'school_country'));
         		$this->addMessageBag($this->zipCode($school,'school_zip'));
         	}
-
-        	$msg_bag = $this->getMessageBag();
 
         	$error_msg = config('futureed-error.error_messages');
 
@@ -51,26 +49,21 @@ class ClientRegisterController extends ClientController {
 
         	if($email_check == false){
 
-        		$email_err[] = [
-        			"error_code" => 2200,
-        			"field" => 'email',
-        			"message" => $error_msg[2200]
-        			];
-
-        		$msg_bag = array_merge($msg_bag, $email_err);
-
+        		$this->addMessageBag($this->setErrorCode(2200)
+                	->setField('email')
+                	->setMessage($error_msg[2200])
+                	->errorMessage());
+        		
         	}
 
         	$username_check = $this->client->checkClientUsername($user);
 
         	if($username_check == false){
-        		$user_err[] = [
-        			"error_code" => 2201,
-        			"field" => 'username',
-        			"message" => $error_msg[2201]
-        			];
 
-        		$msg_bag = array_merge($msg_bag, $user_err);
+        		$this->addMessageBag($this->setErrorCode(2201)
+                	->setField('username')
+                	->setMessage($error_msg[2201])
+                	->errorMessage());
 
         	}
 
@@ -78,31 +71,26 @@ class ClientRegisterController extends ClientController {
 
         	if($check_school_name == false){
 
-        		$school_err[] = [
-        			"error_code" => 2202,
-        			"field" => 'school_name',
-        			"message" => $error_msg[2202]
-        			];
-
-        		$msg_bag = array_merge($msg_bag, $school_err);
+        		$this->addMessageBag($this->setErrorCode(2202)
+                	->setField('school_name')
+                	->setMessage($error_msg[2202])
+                	->errorMessage());
 
         	}
 
+        	$msg_bag = $this->getMessageBag();
 
         	if(!empty($msg_bag)){
         		return $this->setStatusCode(200)->respondWithError($msg_bag);
         	}       	
 
-        	unset($user['confirm_password']);
-
-        	$user = array_merge($user,[
-            	'user_type' => config('futureed.client')
-        	]);
+        	$user['user_type'] = config('futureed.client');
 
         	// add user, return status
         	$user_response = $this->user->addUser($user);
         	
-        	if($client['client_role'] == 'Principal'){
+        	if($client['client_role'] == config('futureed.principal')){
+
         		// add school, return status
 				$school = array_merge([
         				'code' => $this->code->codeGenerator()
@@ -124,8 +112,14 @@ class ClientRegisterController extends ClientController {
 
         	if(isset($client_response['status'])){
 
+        		$data = $this->user->getUser($user_response['id'],'Client')->toArray();
+
+        		$code = $this->user->getConfirmationCode($user_response['id'])->toArray();
+
+        		$data['client_role'] = $client['client_role'];
+
         		// send email to user
-        		$this->mail->sendClientRegister($user_response['id']);
+        		$this->mail->sendClientRegister($data,$code['confirmation_code']);
 
         		return $this->respondWithData([
         				'id'	=> $client_response['id'],
