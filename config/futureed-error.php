@@ -40,6 +40,9 @@ return [
         2101 => 'Password image invalid',
         2102 => 'Access token expire',
 
+<<<<<<< HEAD
+>>>>>>> c5c8599f605b398698ff1325744d315f0bd02027
+=======
 >>>>>>> c5c8599f605b398698ff1325744d315f0bd02027
     ],
 ];

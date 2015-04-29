@@ -228,6 +228,10 @@ class UserServices {
 
     public function checkUsername($username,$user_type){
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+        $error_msg = config('futureed-error.error_messages');
+>>>>>>> c5c8599f605b398698ff1325744d315f0bd02027
 =======
         $error_msg = config('futureed-error.error_messages');
 >>>>>>> c5c8599f605b398698ff1325744d315f0bd02027
@@ -241,6 +245,9 @@ class UserServices {
 =======
                 'error_code' => 2001,
                 'message' => $error_msg[2001]
+<<<<<<< HEAD
+>>>>>>> c5c8599f605b398698ff1325744d315f0bd02027
+=======
 >>>>>>> c5c8599f605b398698ff1325744d315f0bd02027
             ];
         }

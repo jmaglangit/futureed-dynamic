@@ -43,6 +43,9 @@ class UserController extends ApiController{
         if(isset($return['error_code'])){
 
             return $this->respondWithError($return);
+<<<<<<< HEAD
+>>>>>>> c5c8599f605b398698ff1325744d315f0bd02027
+=======
 >>>>>>> c5c8599f605b398698ff1325744d315f0bd02027
 
         if(isset($return['error_code'])){
