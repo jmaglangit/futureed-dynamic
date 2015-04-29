@@ -59,7 +59,7 @@ class UserController extends ApiController{
 
         if($this->getMessageBag()){
 
-            return $this->respondWithData($this->getMessageBag());
+            return $this->respondWithError($this->getMessageBag());
         }
 
         //confirm email code
