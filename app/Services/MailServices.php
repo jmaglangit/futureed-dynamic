@@ -93,7 +93,7 @@ class MailServices {
 
     public function sendClientRegister($data,$code,$send = 0){
 
-        if($resend == 1){
+        if($send == 1){
             $subject = config('futureed.subject_reg_resend');
 
             $template = 'emails.client.registration-email';
@@ -105,16 +105,16 @@ class MailServices {
         }
         
         $content = [
-                'view' => $template,
-                'data' => [
-                    'name' => $data['name'],
-                    'code' => $code,
-                    'link' => url() . '/client/email/confirm?email=' . $data['email']  ,
-                ],
-                'mail_recipient' => $data['email'],
-                'mail_recipient_name' => $data['name' ],
-                'subject' => $subject
-            ];
+            'view' => $template,
+            'data' => [
+                'name' => $data['name'],
+                'code' => $code,
+                'link' => url() . '/client/email/confirm?email=' . $data['email']  ,
+            ],
+            'mail_recipient' => $data['email'],
+            'mail_recipient_name' => $data['name' ],
+            'subject' => $subject
+        ];
 
         $this->sendMail($content);
     }

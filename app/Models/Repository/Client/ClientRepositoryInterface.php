@@ -15,5 +15,7 @@ interface ClientRepositoryInterface {
 
     public function getRole($user_id);
 
+    public function getRole($user_id);
+
 
 }
