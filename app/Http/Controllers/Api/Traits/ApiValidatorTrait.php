@@ -289,6 +289,70 @@ trait ApiValidatorTrait {
                     ->errorMessage();
             }
     }
+    public function clientRole($input,$field_name){
+
+            $validator = Validator::make(
+                [
+                    "$field_name" => strtolower($input["$field_name"]),
+                ],
+                [
+                    "$field_name" => 'required|in:parent,principal,teacher'
+                ]
+            );
+
+            if($validator->fails()){
+
+                $validator_msg = $validator->messages()->toArray();
+
+                return $this->setErrorCode(1012)
+                    ->setField($field_name)
+                    ->setMessage($validator_msg["$field_name"][0])
+                    ->errorMessage();
+            }
+    }
+
+    public function zipCode($input,$field_name){
+
+            $validator = Validator::make(
+                [
+                    "$field_name" => strtolower($input["$field_name"]),
+                ],
+                [
+                    "$field_name" => 'required|digits:5|integer'
+                ]
+            );
+
+            if($validator->fails()){
+
+                $validator_msg = $validator->messages()->toArray();
+
+                return $this->setErrorCode(1013)
+                    ->setField($field_name)
+                    ->setMessage($validator_msg["$field_name"][0])
+                    ->errorMessage();
+            }
+    }
+    public function checkPassword($input,$field_name){
+
+            $validator = Validator::make(
+                [
+                    "$field_name" => strtolower($input["$field_name"]),
+                ],
+                [
+                    "$field_name" => 'required|min:8|max:32|regex:/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/'
+                ]
+            );
+
+            if($validator->fails()){
+
+                $validator_msg = $validator->messages()->toArray();
+
+                return $this->setErrorCode(2230)
+                    ->setField($field_name)
+                    ->setMessage($validator_msg["$field_name"][0])
+                    ->errorMessage();
+            }
+    }
 
     public function validateVarNumber($id){
 
@@ -311,6 +375,4 @@ trait ApiValidatorTrait {
                 ->errorMessage();
         }
     }
-
-
 }

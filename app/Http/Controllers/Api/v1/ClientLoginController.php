@@ -12,8 +12,6 @@ class ClientLoginController extends ClientController {
 	public function login(){
         $input = Input::only('username','password','role');
 
-
-
         if(!$input['username'] || !$input['password'] || !$input['role']){
 
             return $this->setStatusCode(200)->respondWithError([

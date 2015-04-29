@@ -3,11 +3,12 @@
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
+use FutureEd\Models\Repository\Student\ClientRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
 class ClientController extends ApiController {
-
-
-
+	public function checkClientEmail(){
+	        
+	    }
 }

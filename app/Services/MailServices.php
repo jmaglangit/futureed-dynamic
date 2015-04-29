@@ -91,31 +91,19 @@ class MailServices {
         $this->sendMail($content);
     }
 
-    public function sendClientRegister($data,$code,$send){
+    public function sendClientRegister($data,$code,$send = 0){
 
-        if($send === 1){
-
+        if($send == 1){
             $subject = config('futureed.subject_reg_resend');
+
             $template = 'emails.client.registration-email';
 
         }else{
-
             $subject = config('futureed.subject_register');
-            $role = $this->client->getrole($data['id']);
 
-            if($role == 'Parent'){
-
-                $template = 'emails.client.register-parent-email';
-
-            }else{
-
-                $template = 'emails.client.register-principal-email';
-
-            }
+            $template = ($data['client_role'] == 'Parent') ? 'emails.client.register-parent-email' : 'emails.client.register-principal-email';
         }
-
         
-
         $content = [
             'view' => $template,
             'data' => [
@@ -127,11 +115,13 @@ class MailServices {
             'mail_recipient_name' => $data['name' ],
             'subject' => $subject
         ];
+
         $this->sendMail($content);
     }
 
 
     public function sendStudentMailResetPassword($data,$code,$subject){
+
         $content = [
             'view' => 'emails.student.forget-password',
             'data' => [
@@ -181,5 +171,4 @@ class MailServices {
         ];
         $this->sendMail($content);
     }
-
 }
