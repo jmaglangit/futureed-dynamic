@@ -1,10 +1,10 @@
 <?php
-	
 	Routes::get('/', 'FutureLesson\Client\LoginController@index');
-	
-	
+
 	Routes::group(['prefix' => '/client'], function()
 	{
+		Routes::get('/', 'FutureLesson\Client\LoginController@index');
+
 		Routes::group(['prefix' => '/login'], function()
 		{
 			Routes::get('/', [ 'as' => 'client.login', 'uses' => 'FutureLesson\Client\LoginController@index']);

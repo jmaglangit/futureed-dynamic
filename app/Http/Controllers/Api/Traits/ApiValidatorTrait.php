@@ -31,12 +31,13 @@ trait ApiValidatorTrait {
 
     //Check parameters of the fields.
     public function parameterCheck($input, $paramName){
+        $error_msg = config('futureed-error.error_messages');
 
         if(is_null($input["$paramName"])){
 
             return $this->setErrorCode(1001)
                 ->setField($paramName)
-                ->setMessage("Required field not found.")
+                ->setMessage($error_msg[1001])
                 ->errorMessage();
 
 
@@ -44,7 +45,7 @@ trait ApiValidatorTrait {
 
             return  $this->setErrorCode(1002)
                 ->setField($paramName)
-                ->setMessage("Empty required field.")
+                ->setMessage($error_msg[1002])
                 ->errorMessage();
         }
 
@@ -52,13 +53,6 @@ trait ApiValidatorTrait {
 
     //Check email validations.
     public function email($input, $email){
-
-        if(is_null($input["$email"]) || empty($input["$email"])){
-
-            return $this->parameterCheck($input,$email);
-        }
-
-        if(!is_null($input["$email"]) && !empty($input["$email"])){
 
             $validator = Validator::make(
                 [
@@ -77,20 +71,11 @@ trait ApiValidatorTrait {
                     ->setField($email)
                     ->setMessage($validator_msg["$email"][0])
                     ->errorMessage();
-
             }
-        }
     }
 
     //Validate username field.
     public function username($input,$username){
-
-        if(is_null($input["$username"]) || empty($input["$username"])){
-
-            return $this->parameterCheck($input,$username);
-        }
-
-        if(!is_null($input["$username"]) && !empty($input["$username"])){
 
             $validator = Validator::make(
                 [
@@ -110,19 +95,11 @@ trait ApiValidatorTrait {
                     ->setMessage($validator_msg["$username"][0])
                     ->errorMessage();
             }
-        }
     }
 
 
     //Validate birth_date field.
     public function birthDate($input,$birth_date){
-
-        if(is_null($input["$birth_date"]) || empty($input["$birth_date"])){
-
-            return $this->parameterCheck($input,$birth_date);
-        }
-
-        if(!is_null($input["$birth_date"]) && !empty($input["$birth_date"])){
 
             $validator = Validator::make(
                 [
@@ -142,19 +119,10 @@ trait ApiValidatorTrait {
                     ->setMessage($validator_msg["$birth_date"][0])
                     ->errorMessage();
             }
-        }
-
     }
 
     //Validate first_name with multiple names
     public function firstName($input,$first_name){
-
-        if(is_null($input["$first_name"]) || empty($input["$first_name"])){
-
-            return $this->parameterCheck($input,$first_name);
-        }
-
-        if(!is_null($input["$first_name"]) && !empty($input["$first_name"])){
 
             $validator = Validator::make(
                 [
@@ -174,18 +142,10 @@ trait ApiValidatorTrait {
                     ->setMessage($validator_msg["$first_name"][0])
                     ->errorMessage();
             }
-        }
     }
 
     //Validate last_name field
     public function lastName($input,$last_name){
-
-        if(is_null($input["$last_name"]) || empty($input["$last_name"])){
-
-            return $this->parameterCheck($input,$last_name);
-        }
-
-        if(!is_null($input["$last_name"]) && !empty($input["$last_name"])){
 
             $validator = Validator::make(
                 [
@@ -205,19 +165,10 @@ trait ApiValidatorTrait {
                     ->setMessage($validator_msg["$last_name"][0])
                     ->errorMessage();
             }
-        }
     }
 
     //Validate gender -- accepts any type of case
     public function gender($input,$gender){
-
-
-        if(is_null($input["$gender"]) || empty($input["$gender"])){
-
-            return $this->parameterCheck($input,$gender);
-        }
-
-        if(!is_null($input["$gender"]) && !empty($input["$gender"])){
 
             $validator = Validator::make(
                 [
@@ -232,23 +183,16 @@ trait ApiValidatorTrait {
 
                 $validator_msg = $validator->messages()->toArray();
 
-                return $this->setErrorCode(1007)
+                return $this->setErrorCode(1008)
                     ->setField($gender)
                     ->setMessage($validator_msg["$gender"][0])
                     ->errorMessage();
             }
-        }
     }
 
     //Validating ang field that is numeric. Can be used by any number field validation.
     public function validateNumber($input,$field_name){
 
-        if(is_null($input["$field_name"]) || empty($input["$field_name"])){
-
-            return $this->parameterCheck($input,$field_name);
-        }
-
-        if(!is_null($input["$field_name"]) && !empty($input["$field_name"])){
 
             $validator = Validator::make(
                 [
@@ -268,18 +212,9 @@ trait ApiValidatorTrait {
                     ->setMessage($validator_msg["$field_name"][0])
                     ->errorMessage();
             }
-        }
-
     }
 
     public function validateString($input,$field_name){
-
-        if(is_null($input["$field_name"]) || empty($input["$field_name"])){
-
-            return $this->parameterCheck($input,$field_name);
-        }
-
-        if(!is_null($input["$field_name"]) && !empty($input["$field_name"])){
 
             $validator = Validator::make(
                 [
@@ -299,7 +234,6 @@ trait ApiValidatorTrait {
                     ->setMessage($validator_msg["$field_name"][0])
                     ->errorMessage();
             }
-        }
     }
     
     public function emptyUsername($input,$field_name){
@@ -308,17 +242,10 @@ trait ApiValidatorTrait {
 
             return $this->parameterCheck($input,$field_name);
           }
-        
     }
     
     public function userType($input,$field_name){
 
-        if(is_null($input["$field_name"]) || empty($input["$field_name"])){
-
-            return $this->parameterCheck($input,$field_name);
-        }
-
-        if(!is_null($input["$field_name"]) && !empty($input["$field_name"])){
 
             $validator = Validator::make(
                 [
@@ -338,6 +265,50 @@ trait ApiValidatorTrait {
                     ->setMessage($validator_msg["$field_name"][0])
                     ->errorMessage();
             }
+    }
+
+
+    public function userTypeClientStudent($input,$field_name){
+
+            $validator = Validator::make(
+                [
+                    "$field_name" => strtolower($input["$field_name"]),
+                ],
+                [
+                    "$field_name" => 'required|in:client,student'
+                ]
+            );
+
+            if($validator->fails()){
+
+                $validator_msg = $validator->messages()->toArray();
+
+                return $this->setErrorCode(1011)
+                    ->setField($field_name)
+                    ->setMessage($validator_msg["$field_name"][0])
+                    ->errorMessage();
+            }
+    }
+
+    public function validateVarNumber($id){
+
+        $validator = Validator::make(
+            [
+                "$id" => $id
+            ],
+            [
+                "$id" => 'required|numeric'
+            ]
+        );
+
+        if($validator->fails()){
+
+            $validator_msg = $validator->messages()->toArray();
+
+            return $this->setErrorCode(1011)
+                ->setField("Parameter")
+                ->setMessage($validator_msg["$id"][0])
+                ->errorMessage();
         }
     }
 

@@ -16,6 +16,10 @@ class LoginController extends Controller {
 	 */
 	public function index()
 	{
+		if(Session::get('user')) {
+			return view('student.dashboard.index');
+		}
+
 		return view('student.login.login');
 	}
 
@@ -26,10 +30,16 @@ class LoginController extends Controller {
 	 */
 	public function process()
 	{
-		$userdata = Input::only('response');
+		$user_data = Input::only('user_data');
+		$user_object = json_decode($user_data['user_data']);
 
-		if($userdata){
-			Session::put('user', $userdata['response']);
+		if($user_object->id){
+			Session::put('user', $user_data['user_data']);
+
+			if($user_object->avatar_id && $user_object->learning_style_id) {
+				return redirect()->route('student.dashboard.index');
+			}
+			
 			return redirect()->route('student.dashboard.follow_up_registration');
 		}else{
 			return redirect()->route('student.login');
@@ -104,7 +114,14 @@ class LoginController extends Controller {
 	 */
 	public function registration()
 	{
-		return view('student.login.registration');
+		$input = Input::only('email');
+		$success = false;
+
+		if($input['email']) {
+			$success = true;
+		}
+
+		return view('student.login.registration', ['success' => $success, 'email' => $input['email']]);
 	}
 	
 	/**

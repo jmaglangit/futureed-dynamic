@@ -3,6 +3,7 @@
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
+use FutureEd\Models\Repository\Country\CountryRepositoryInterface;
 use FutureEd\Models\Repository\School\SchoolRepositoryInterface;
 use FutureEd\Models\Repository\Validator\ValidatorRepositoryInterface;
 use FutureEd\Services\ClientServices;
@@ -14,6 +15,7 @@ use FutureEd\Services\StudentServices;
 use FutureEd\Services\UserServices;
 use FutureEd\Services\TokenServices;
 use FutureEd\Services\AvatarServices;
+use FutureEd\Services\AdminServices;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Matching\ValidatorInterface;
 use Illuminate\Support\Facades\Validator;
@@ -41,8 +43,10 @@ class ApiController extends Controller {
             GradeServices $grade,
             AvatarServices $avatar,
             CodeGeneratorServices $code,
+            AdminServices $admin,
             ValidatorRepositoryInterface $validatorRepositoryInterface,
-            SchoolRepositoryInterface $schoolRepositoryInterface){
+            SchoolRepositoryInterface $schoolRepositoryInterface,
+            CountryRepositoryInterface $countryRepositoryInterface){
         $this->user = $user;
         $this->student = $student;
         $this->password_image = $password_image;
@@ -52,8 +56,10 @@ class ApiController extends Controller {
         $this->grade = $grade;
         $this->avatar = $avatar;
         $this->code = $code;
+        $this->admin = $admin;
         $this->valid = $validatorRepositoryInterface;
         $this->school = $schoolRepositoryInterface;
+        $this->country = $countryRepositoryInterface;
     }
     public function index(){
         return [
@@ -132,6 +138,21 @@ class ApiController extends Controller {
                 'errors' => $message
             ]
         );
+
+    }
+
+    public function respondErrorMessage($error_code){
+        $error_msg  = config('futureed-error.error_messages');
+
+        if(!is_null($error_code)){
+
+            return $this->respondWithError(
+                    [
+                        'error_code' => $error_code,
+                        'message' => $error_msg[$error_code]
+                    ]
+                );
+        }
 
     }
 

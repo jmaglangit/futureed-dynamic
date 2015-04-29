@@ -5,7 +5,7 @@
 	@stop
 
 	@section('content')
-	<div class="container dshbrd-con" ng-init="getUserDetails()" ng-cloak>
+	<div class="container dshbrd-con" ng-cloak>
 		<div class="wrapr"> 
 			<div class="side-nav">
 				@include('student.partials.dshbrd-side-nav')
@@ -34,12 +34,12 @@
 					</div>
 				</div>
 				<div class="form-content col-md-12">
-					<div ng-if="password_validated && password_selected && password_confirmed">
+					<div class="alert alert-success" ng-if="password_validated && password_selected && password_confirmed">
 						<p>Your Picture Password has been saved.</p>
 						<p>You may now use this picture password in your suceeding login.</p>
 					</div>
 					<div class="col-md-8 col-md-offset-2" ng-if="locked">
-						<div class="form-style">
+						<div class="form-style" style="box-shadow: none;">
 							@include('student.login.account-locked')
 						</div>
 					</div>
@@ -48,7 +48,7 @@
 				      <form id="reset_password_form">
 				        <div class="form-select-password">
 				          <div id="title" class="title"></div>
-				          <div class="error" ng-if="error">
+				          <div class="alert alert-danger" ng-if="error">
 				            <p>{! error !}</p>
 				          </div>
 				          <div class="form_content">
@@ -58,25 +58,25 @@
 				                 <input type="hidden" id="image_id" name="image_id" value="{! item.id !}">
 				              </li>
 				            </ul>
-							<button ng-if="!password_validated" type="button" class="btn btn-red" ng-click="validateCurrentPassword()">Proceed</button>
-							<button ng-if="password_validated && !password_selected" type="button" class="btn btn-red" ng-click="selectNewPassword()">Proceed</button>
-							<div class="row" ng-if="password_validated && password_selected && !password_confirmed">
-					          	<div class="col-sm-6"><button type="button" ng-click="undoNewPassword()" class="btn btn-red">Previous</button></div>
-					          	<div class="col-sm-6"><button type="button" class="btn btn-red" ng-click="confirmNewPassword()">Change</button></div>
-					        </div>
-							</div>
+						  </div>
 
 				          <input type="hidden" name="selected_image_id" id="selected_image_id" />
 				          <input type="hidden" name="image_pass" />
 				        </div>
 				      </form>
 				    </div>
-				  </div>
+
+				    <div class="btn-container">
+					    <button ng-if="!password_validated" type="button" class="btn btn-red" ng-click="validateCurrentPassword()">Proceed</button>
+						<button ng-if="password_validated && !password_selected" type="button" class="btn btn-red" ng-click="selectNewPassword()">Proceed</button>
+						<a ng-if="!password_selected" href="{!! route('student.profile.index') !!}" class="btn btn-purple">Cancel</a>
+						
+						<button ng-if="password_validated && password_selected && !password_confirmed" type="button" class="btn btn-red" ng-click="confirmNewPassword()">Change</button>
+			          	<button ng-if="password_validated && password_selected && !password_confirmed" type="button" ng-click="undoNewPassword()" class="btn btn-purple">Previous</button>
+				    </div>
 				</div>
 			</div>
 		</div>
-
-		<textarea id="userdata" name="hide" style="display:none;">{!! Session::get('user') !!}</textarea>
 	</div>
 	@stop
 

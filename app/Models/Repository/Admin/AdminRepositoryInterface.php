@@ -19,4 +19,6 @@ interface AdminRepositoryInterface {
 
     public function deleteAdmin($id);
 
+     public function getAdminId($user_id);
+
 }

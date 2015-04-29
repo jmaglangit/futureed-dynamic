@@ -1,6 +1,6 @@
 'use strict';
 
-var futureed = angular.module('futureed', [
+angular.module('futureed', [
   'ngRoute',
 	'futureed.services',
 	'futureed.controllers',

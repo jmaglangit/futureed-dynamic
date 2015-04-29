@@ -210,13 +210,14 @@ class UserServices {
     }
 
     public function checkEmail($email,$user_type){
+        $error_msg = config('futureed-error.error_messages');
         //check email if it exist
         $return =  $this->users->checkEmail($email,$user_type);
 
         if(is_null($return)){
             return [
-                'error_code' => 204,
-                'message' => 'Email does not exist'
+                'error_code' => 2002,
+                'message' => $error_msg[2002]
             ];
         }
         return [
@@ -226,11 +227,21 @@ class UserServices {
     }
 
     public function checkUsername($username,$user_type){
+<<<<<<< HEAD
+=======
+        $error_msg = config('futureed-error.error_messages');
+>>>>>>> c5c8599f605b398698ff1325744d315f0bd02027
         $return = $this->users->checkUserName($username,$user_type);
+
         if(is_null($return)){
             return [
+<<<<<<< HEAD
                 'error_code' => 204,
                 'message' => 'Username does not exist'
+=======
+                'error_code' => 2001,
+                'message' => $error_msg[2001]
+>>>>>>> c5c8599f605b398698ff1325744d315f0bd02027
             ];
         }
 
@@ -353,6 +364,14 @@ class UserServices {
     public function isActivated($id){
         
         return $this->users->isActivated($id);
+    }
+
+    //update cofirmation code and expiry
+
+
+    public function updateConfirmationCode($id,$code){
+
+        $this->users->updateConfirmationCode($id,$code);
     }
 
 

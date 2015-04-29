@@ -31,4 +31,14 @@ class ClientRepository implements ClientRepositoryInterface{
 
     }
 
+    public function getClientId($user_id){
+
+          return Client::where('user_id','=',$user_id)->pluck('id');
+    }
+
+    public function getRole($user_id){
+
+          return Client::where('user_id','=',$user_id)->pluck('client_role');
+    }
+
 }

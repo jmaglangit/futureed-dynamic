@@ -11,9 +11,10 @@ use Illuminate\Mail\Mailer;
 use Illuminate\Support\Facades\Mail;
 use League\Flysystem\Exception;
 class MailServices {
-    public function __construct(Mailer $mailer, UserServices $user){
+    public function __construct(Mailer $mailer, UserServices $user, ClientServices $client){
         $this->mailer = $mailer;
         $this->user = $user;
+        $this->client = $client;
     }
     /*
      * $contents
@@ -74,7 +75,63 @@ class MailServices {
         $this->sendMail($content);
     }
 
-    public function sendStudentMailResetPassword($data,$code){
+    public function resendStudentRegister($data,$code,$subject){
+
+        $content = [
+            'view' => 'emails.student.resendregistration-email',
+            'data' => [
+                'name' => $data['name'],
+                'code' => $code,
+                'link' => url() . '/student/email/confirm?email=' . $data['email']  ,
+            ],
+            'mail_recipient' => $data['email'],
+            'mail_recipient_name' => $data['name' ],
+            'subject' => $subject
+        ];
+        $this->sendMail($content);
+    }
+
+    public function sendClientRegister($data,$code,$send){
+
+        if($send === 1){
+
+            $subject = config('futureed.subject_reg_resend');
+            $template = 'emails.client.registration-email';
+
+        }else{
+
+            $subject = config('futureed.subject_register');
+            $role = $this->client->getrole($data['id']);
+
+            if($role == 'Parent'){
+
+                $template = 'emails.client.register-parent-email';
+
+            }else{
+
+                $template = 'emails.client.register-principal-email';
+
+            }
+        }
+
+        
+
+        $content = [
+            'view' => $template,
+            'data' => [
+                'name' => $data['name'],
+                'code' => $code,
+                'link' => url() . '/client/email/confirm?email=' . $data['email']  ,
+            ],
+            'mail_recipient' => $data['email'],
+            'mail_recipient_name' => $data['name' ],
+            'subject' => $subject
+        ];
+        $this->sendMail($content);
+    }
+
+
+    public function sendStudentMailResetPassword($data,$code,$subject){
         $content = [
             'view' => 'emails.student.forget-password',
             'data' => [
@@ -86,8 +143,43 @@ class MailServices {
             'mail_sender_name' => 'Future Lesson',
             'mail_recipient' => $data['email'],
             'mail_recipient_name' =>$data['username'] ,
-            'subject' => 'Forgot Password'
+            'subject' => $subject
         ];
         $this->sendMail($content);
     }
+
+    public function sendClientMailResetPassword($data,$code,$subject){
+        $content = [
+            'view' => 'emails.client.forget-password',
+            'data' => [
+                'name' => $data['username'],
+                'code' => $code,
+                'link' => url() . '/client/password/reset?email='.$data['email'],
+            ],
+            'mail_sender' => 'no-reply@futureed.com',
+            'mail_sender_name' => 'Future Lesson',
+            'mail_recipient' => $data['email'],
+            'mail_recipient_name' =>$data['username'] ,
+            'subject' => $subject
+        ];
+        $this->sendMail($content);
+    }
+
+    public function sendAdminMailResetPassword($data,$code,$subject){
+        $content = [
+            'view' => 'emails.admin.forget-password',
+            'data' => [
+                'name' => $data['username'],
+                'code' => $code,
+                'link' => url() . '/admin/password/reset?email='.$data['email'],
+            ],
+            'mail_sender' => 'no-reply@futureed.com',
+            'mail_sender_name' => 'Future Lesson',
+            'mail_recipient' => $data['email'],
+            'mail_recipient_name' =>$data['username'] ,
+            'subject' => $subject
+        ];
+        $this->sendMail($content);
+    }
+
 }

@@ -50,7 +50,8 @@ class UserRepository implements UserRepositoryInterface {
     public function addUser($user){
 
         try{
-            User::insert([
+
+            User::create([
                 'username' => $user['username'],
                 'email' => $user['email'],
                 'name' => $user['first_name'] .' '.$user['last_name'],
@@ -242,6 +243,19 @@ class UserRepository implements UserRepositoryInterface {
          return User::where('id','=',$id)
                      ->pluck('is_account_activated');
                      
+    }
+
+    public function updateConfirmationCode($id,$code){
+        try{
+
+            User::where('id',$id)->update([
+                'confirmation_code' => $code['confirmation_code'],
+                'confirmation_code_expiry' => $code['confirmation_code_expiry']
+            ]);
+
+        } catch (Exception $e){
+            throw new Exception($e->getMessage());
+        }
     }
 
 

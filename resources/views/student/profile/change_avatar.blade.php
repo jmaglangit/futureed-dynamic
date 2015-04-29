@@ -5,7 +5,7 @@
 	@stop
 
 	@section('content')
-	<div class="container dshbrd-con" ng-init="getUserDetails()" ng-cloak>
+	<div class="container dshbrd-con" ng-cloak>
 		<div class="wrapr"> 
 			<div class="side-nav">
 				@include('student.partials.dshbrd-side-nav')
@@ -39,7 +39,7 @@
 				</div>
 			</div>
 				<div class="form-content">
-					<div ng-if="has_avatar">
+					<div class="alert alert-success" ng-if="has_avatar">
 						You have successfully changed your avatar.
 					</div>
 					<div class="col-md-10 col-md-offset-1" ng-if="!has_avatar">
@@ -50,24 +50,24 @@
 				            <p>{! error !}</p>
 				          </div>
 				          <div class="form_content">
-				            <ul class="form_password list-unstyled list-inline" ng-init="getAvatarImages('true')">
+				            <ul class="avatar_list list-unstyled list-inline" ng-init="getAvatarImages('true')">
 				              <li class="item avtrcon" style="width:20%" ng-repeat="avatar in avatars" ng-click="highlightAvatar($event)">
 				                 <img ng-src="{! avatar.url !}" alt="{! avatar.name !}">
 				                 <input type="hidden" id="avatar_id" name="avatar_id" value="{! avatar.id !}">
 				              </li>
 				            </ul>
 						  </div>
-				          <button type="button" class="btn btn-red" ng-click="selectAvatar()">Proceed</button>
 				        </div>
 				        <input type="hidden" ng-model="session_user" />
 				      </form>
 				    </div>
-				  </div>
+				    <div class="btn-container" ng-if="!has_avatar">
+				        <button type="button" class="btn btn-red" ng-click="selectAvatar()">Proceed</button>
+				        <a href="{!! route('student.profile.index') !!}" class="btn btn-purple">Cancel</a>
+			      	</div>
 				</div>
 			</div>
 		</div>
-
-		<textarea id="userdata" name="hide" style="display:none;">{!! Session::get('user') !!}</textarea>
 	</div>
 	@stop
 
