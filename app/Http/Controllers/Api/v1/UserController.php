@@ -212,7 +212,7 @@ class UserController extends ApiController{
 
                     $client_id = $this->client->getClientId($return['user_id']);
 
-                    $this->mail->sendClientRegister($userDetails,$code['confirmation_code'],$subject);
+                    $this->mail->sendClientRegister($userDetails,$code['confirmation_code'],1);
 
                     return $this->respondWithData(['id' => $client_id,
                                                    'user_type' => $input['user_type'] 

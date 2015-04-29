@@ -11,9 +11,10 @@ use Illuminate\Mail\Mailer;
 use Illuminate\Support\Facades\Mail;
 use League\Flysystem\Exception;
 class MailServices {
-    public function __construct(Mailer $mailer, UserServices $user){
+    public function __construct(Mailer $mailer, UserServices $user, ClientServices $client){
         $this->mailer = $mailer;
         $this->user = $user;
+        $this->client = $client;
     }
     /*
      * $contents
@@ -77,7 +78,7 @@ class MailServices {
     public function resendStudentRegister($data,$code,$subject){
 
         $content = [
-            'view' => 'emails.student.registration-email',
+            'view' => 'emails.student.resendregistration-email',
             'data' => [
                 'name' => $data['name'],
                 'code' => $code,
@@ -90,7 +91,7 @@ class MailServices {
         $this->sendMail($content);
     }
 
-    public function sendClientRegister($data,$code,$resend = 0){
+    public function sendClientRegister($data,$code,$send = 0){
 
         if($resend == 1){
             $subject = config('futureed.subject_reg_resend');
