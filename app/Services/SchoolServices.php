@@ -11,8 +11,8 @@ class SchoolServices {
      *
      */
     public function __construct(
-        SchoolRepositoryInterface $school){
-        $this->schools = $school;
+        SchoolRepositoryInterface $schools){
+        $this->schools = $schools;
        
     }
     
@@ -20,7 +20,7 @@ class SchoolServices {
     
     public function getSchoolName($school_id){
 
-     return  $getSchoolName = $this->school->getSchoolName($school_id);
+     return  $getSchoolName = $this->schools->getSchoolName($school_id);
     }
 
    public function addSchool($school){
