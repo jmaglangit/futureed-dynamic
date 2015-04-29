@@ -17,7 +17,7 @@ class ClientPasswordController extends ApiController{
         $input = input::only('reset_code','password');
         $client = config('futureed.client');
 
-
+        $this->addMessageBag($this->validateVarNumber($id));
         $this->addMessageBag($this->validateNumber($input,'reset_code'));
         $this->addMessageBag($this->checkPassword($input,'password'));
 
@@ -31,7 +31,7 @@ class ClientPasswordController extends ApiController{
 
         }else{
 
-            $return = $this->client->verifyClientId($id);
+            $return = $this->client->verifyClientId($id)->toArray();
 
             if($return){
 
@@ -46,7 +46,7 @@ class ClientPasswordController extends ApiController{
                        $this->user->updateInactiveLock($return['user_id']);
                        $this->user->updatePassword($return['user_id'],$password);
 
-                       return $this->respondWithData(['id'=>$id]);
+                       return $this->respondWithData(['id'=>$return['id']]);
 
                     }else{
 
