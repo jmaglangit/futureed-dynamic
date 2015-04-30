@@ -100,4 +100,75 @@ class ClientServices {
         return $this->client->verifyClientId($id);
     }
 
+    public function getclientDetails($id){
+
+        return $this->client->getclientDetails($id);
+    }
+
+    public function formResponse($user,$client){
+
+        foreach ($user as $key => $value) {
+            
+                if(in_array($key,['username','email','new_email'])){
+
+                    $userData[$key] = $value;
+
+                }
+        }
+
+        if($client['client_role'] == 'Parent'){
+
+            $clientOutput = ['id','first_name','last_name','street_address',
+                            'city','state','country','zip','client_role'];
+
+            foreach ($client as $key => $value) {
+            
+                if(in_array($key,$clientOutput)){
+
+                    $clientData[$key] = $value;
+                }
+            }
+
+            return array_merge($clientData,$userData);
+
+        }else{
+    
+             $school = $this->school->getSchoolDetails($client['school_code'])->toArray();
+
+             $clientOutput = ['id','first_name','last_name','street_address',
+                            'city','state','country','zip','client_role','school_code'];
+
+            if($client['client_role'] == 'Principal'){
+    
+                $schoolOutput = ['name','street_address','city',
+                                 'state','country','zip'];
+
+            }else{
+                
+                $schoolOutput = ['name'];
+            }
+
+            foreach ($client as $key => $value) {
+            
+                if(in_array($key,$clientOutput)){
+
+                    $clientData[$key] = $value;
+
+                }
+            }
+
+            foreach ($school as $key => $value) {
+            
+                if(in_array($key,$schoolOutput)){
+
+                    $schoolData['school_'.$key] = $value;
+
+                }
+             }
+
+             return array_merge($clientData,$userData,$schoolData);
+        }
+
+    }
+
 }

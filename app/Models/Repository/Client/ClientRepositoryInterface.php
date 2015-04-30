@@ -17,5 +17,7 @@ interface ClientRepositoryInterface {
 
     public function verifyClientId($id);
 
+    public function getclientDetails($id);
+
 
 }

@@ -39,4 +39,10 @@ class SchoolServices {
         return $return;
    }
 
+   public function getSchoolDetails($id){
+    
+        return $this->school->getSchoolDetails($id);
+
+   }
+
 }
