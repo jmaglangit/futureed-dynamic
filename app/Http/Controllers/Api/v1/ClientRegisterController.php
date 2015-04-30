@@ -17,23 +17,39 @@ class ClientRegisterController extends ClientController {
 
 	public function register(){
 
+        // cannot be use for teacher registration
+
 	        $client = Input::only('first_name', 'last_name', 'client_role', 'street_address', 'city', 'state', 'country', 'zip');
 
 	        $user = Input::only('username', 'email', 'first_name', 'last_name', 'password');
 
 	        $school = Input::only('school_name', 'school_address', 'school_city', 'school_state', 'school_country', 'school_zip');
 
+            $error_msg = config('futureed-error.error_messages');
+
+            if($client['client_role'] == config('futureed.teacher')){
+
+                $this->addMessageBag($this->setErrorCode(2234)
+                                ->setField('client_role')
+                                ->setMessage($error_msg[2234])
+                                ->errorMessage());
+            }
+
 	        $this->addMessageBag($this->firstName($client,'first_name'));
         	$this->addMessageBag($this->lastName($client,'last_name'));
-        	$this->addMessageBag($this->clientRole($client,'client_role'));
-        	$this->addMessageBag($this->validateString($client,'street_address'));
-        	$this->addMessageBag($this->validateString($client,'city'));
-        	$this->addMessageBag($this->validateString($client,'state'));
-        	$this->addMessageBag($this->validateString($client,'country'));
-        	$this->addMessageBag($this->zipCode($client,'zip'));
+        	$this->addMessageBag($this->clientRole($client,'client_role'));        	
         	$this->addMessageBag($this->email($user,'email'));
         	$this->addMessageBag($this->username($user,'username'));
         	$this->addMessageBag($this->checkPassword($user,'password'));
+
+
+            if($client['client_role'] == config('futureed.parent')){
+                $this->addMessageBag($this->validateString($client,'street_address'));
+                $this->addMessageBag($this->validateString($client,'city'));
+                $this->addMessageBag($this->validateString($client,'state'));
+                $this->addMessageBag($this->validateString($client,'country'));
+                $this->addMessageBag($this->zipCode($client,'zip'));
+            }
 
         	if($client['client_role'] == config('futureed.principal')){
         		$this->addMessageBag($this->schoolName($school,'school_name'));
@@ -41,13 +57,18 @@ class ClientRegisterController extends ClientController {
         		$this->addMessageBag($this->validateString($school,'school_state'));
         		$this->addMessageBag($this->validateString($school,'school_country'));
         		$this->addMessageBag($this->zipCode($school,'school_zip'));
+
+                $this->addMessageBag($this->validateStringOptional($client,'street_address'));
+                $this->addMessageBag($this->validateStringOptional($client,'city'));
+                $this->addMessageBag($this->validateStringOptional($client,'state'));
+                $this->addMessageBag($this->validateStringOptional($client,'country'));
+                $this->addMessageBag($this->zipCodeOptional($client,'zip'));
         	}
 
-        	$error_msg = config('futureed-error.error_messages');
-
+        	
         	$email_check = $this->client->checkClientEmail($user);
 
-        	if($email_check == false){
+        	if(!$email_check){
 
         		$this->addMessageBag($this->setErrorCode(2200)
                 	->setField('email')
@@ -58,7 +79,7 @@ class ClientRegisterController extends ClientController {
 
         	$username_check = $this->client->checkClientUsername($user);
 
-        	if($username_check == false){
+        	if(!$username_check){
 
         		$this->addMessageBag($this->setErrorCode(2201)
                 	->setField('username')
@@ -69,7 +90,7 @@ class ClientRegisterController extends ClientController {
 
         	$check_school_name = $this->client->schoolNameCheck($school);
 
-        	if($check_school_name == false){
+        	if(!$check_school_name){
 
         		$this->addMessageBag($this->setErrorCode(2202)
                 	->setField('school_name')
@@ -81,7 +102,7 @@ class ClientRegisterController extends ClientController {
         	$msg_bag = $this->getMessageBag();
 
         	if(!empty($msg_bag)){
-        		return $this->setStatusCode(200)->respondWithError($msg_bag);
+        		return $this->respondWithError($msg_bag);
         	}       	
 
         	$user['user_type'] = config('futureed.client');
