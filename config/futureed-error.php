@@ -38,12 +38,12 @@ return [
         2102 => 'Access token expire',
 
         //account status messages
-        2300 => 'Account Inactive',
-        2301 => 'Account Locked',
-        2302 => 'Account Deleted',
+        2230 => 'Account Inactive',
+        2231 => 'Account Locked',
+        2232 => 'Account Deleted',
 
         // login error messages
-        2303 => 'Invalid Password',
+        2233 => 'Invalid Password',
 
     ],
 ];

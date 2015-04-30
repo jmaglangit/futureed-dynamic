@@ -168,7 +168,7 @@ class UserServices {
 
         if(is_null($return)){
             return [
-                'error_code' => 2303,
+                'error_code' => 2233,
             ];
         }
 
@@ -244,14 +244,14 @@ class UserServices {
 
         if($this->users->accountActivated($id) == 0 ){
             //check if activated
-            return 2300;
+            return 2230;
 
         } elseif($this->users->accountLocked($id) == 1){
             //check if locked
-            return 2301;
+            return 2231;
         } elseif($this->users->accountDeleted($id) == 1 ){
             //check if delete
-            return 2302;
+            return 2232;
         } else {
             return false;
         }
