@@ -18,7 +18,7 @@ class UsersTableSeeder extends Seeder {
             [
             'username' => 'farrahdy',
             'email' => 'fdy@nerubia.com',
-            'password' => 'farrahdy',
+            'password' => sha1('farrahdy'),
             'name' => 'Farrah Dy',
             'user_type' => 'Admin',
             'login_attempt' => 0,
@@ -34,7 +34,7 @@ class UsersTableSeeder extends Seeder {
             [
             'username' => 'farrahdy',
             'email' => 'fdy@nerubia.com',
-            'password' => 'farrahdy',
+            'password' => sha1('farrahdy'),
             'name' => 'Farrah Dy',
             'user_type' => 'Client',
             'login_attempt' => 0,
@@ -50,7 +50,7 @@ class UsersTableSeeder extends Seeder {
             [
             'username' => 'farrahdy',
             'email' => 'fdy@nerubia.com',
-            'password' => 'farrahdy',
+            'password' => sha1('farrahdy'),
             'name' => 'Farrah Dy',
             'user_type' => 'Student',
             'login_attempt' => 0,
@@ -66,7 +66,7 @@ class UsersTableSeeder extends Seeder {
            [
                'username' => 'johnreyq',
                'email' => 'jquiros@nerubia.com',
-               'password' => 'johnreyq',
+               'password' => sha1('johnreyq'),
                'name' => 'John Rey',
                'user_type' => 'Admin',
                'login_attempt' => 0,
@@ -82,7 +82,7 @@ class UsersTableSeeder extends Seeder {
             [
                'username' => 'johnreyq',
                'email' => 'jquiros@nerubia.com',
-               'password' => 'johnreyq',
+               'password' => sha1('johnreyq'),
                'name' => 'John Rey',
                'user_type' => 'Client',
                'login_attempt' => 0,
@@ -98,7 +98,7 @@ class UsersTableSeeder extends Seeder {
            [
                'username' => 'johnreyq',
                'email' => 'jquiros@nerubia.com',
-               'password' => 'johnreyq',
+               'password' => sha1('johnreyq'),
                'name' => 'John Rey',
                'user_type' => 'Student',
                'login_attempt' => 0,
@@ -114,7 +114,7 @@ class UsersTableSeeder extends Seeder {
            [
                'username' => 'jasonmag',
                'email' => 'jmaglangit@nerubia.com',
-               'password' => 'jasonmag',
+               'password' => sha1('jasonmag'),
                'name' => 'Jason Maglangit',
                'user_type' => 'Admin',
                'login_attempt' => 0,
@@ -130,7 +130,7 @@ class UsersTableSeeder extends Seeder {
            [
                'username' => 'jasonmag',
                'email' => 'jmaglangit@nerubia.com',
-               'password' => 'jasonmag',
+               'password' => sha1('jasonmag'),
                'name' => 'Jason Maglangit',
                'user_type' => 'Client',
                'login_attempt' => 0,
@@ -146,7 +146,7 @@ class UsersTableSeeder extends Seeder {
            [
                'username' => 'jasonmag',
                'email' => 'jmaglangit@nerubia.com',
-               'password' => 'jasonmag',
+               'password' => sha1('jasonmag'),
                'name' => 'Jason Maglangit',
                'user_type' => 'Student',
                'login_attempt' => 0,
@@ -162,7 +162,7 @@ class UsersTableSeeder extends Seeder {
            [
                'username' => 'jolliemar',
                'email' => 'jgutang@nerubia.com',
-               'password' => 'jolliemar',
+               'password' => sha1('jolliemar'),
                'name' => 'Jason Maglangit',
                'user_type' => 'Admin',
                'login_attempt' => 0,
@@ -178,7 +178,7 @@ class UsersTableSeeder extends Seeder {
            [
                'username' => 'jolliemar',
                'email' => 'jgutang@nerubia.com',
-               'password' => 'jolliemar',
+               'password' => sha1('jolliemar'),
                'name' => 'Jason Maglangit',
                'user_type' => 'Client',
                'login_attempt' => 0,
@@ -194,7 +194,7 @@ class UsersTableSeeder extends Seeder {
            [
                'username' => 'jolliemar',
                'email' => 'jgutang@nerubia.com',
-               'password' => 'jolliemar',
+               'password' => sha1('jolliemar'),
                'name' => 'Jason Maglangit',
                'user_type' => 'Student',
                'login_attempt' => 0,
@@ -210,7 +210,7 @@ class UsersTableSeeder extends Seeder {
            [
                'username' => 'bmonsales',
                'email' => 'bmonsales@nerubia.com',
-               'password' => 'bmonsales',
+               'password' => sha1('bmonsales'),
                'name' => 'Brian Monsales',
                'user_type' => 'Admin',
                'login_attempt' => 0,
@@ -226,7 +226,7 @@ class UsersTableSeeder extends Seeder {
            [
                'username' => 'bmonsales',
                'email' => 'bmonsales@nerubia.com',
-               'password' => 'bmonsales',
+               'password' => sha1('bmonsales'),
                'name' => 'Brian Monsales',
                'user_type' => 'Client',
                'login_attempt' => 0,
@@ -242,7 +242,7 @@ class UsersTableSeeder extends Seeder {
            [
                'username' => 'bmonsales',
                'email' => 'bmonsales@nerubia.com',
-               'password' => 'bmonsales',
+               'password' => sha1('bmonsales'),
                'name' => 'Brian Monsales',
                'user_type' => 'Student',
                'login_attempt' => 0,
@@ -258,7 +258,7 @@ class UsersTableSeeder extends Seeder {
            [
                'username' => 'vgunday',
                'email' => 'vgunday@nerubia.com',
-               'password' => 'vgunday',
+               'password' => sha1('vgunday'),
                'name' => 'Vince Gunday',
                'user_type' => 'Admin',
                'login_attempt' => 0,
@@ -274,7 +274,7 @@ class UsersTableSeeder extends Seeder {
            [
                'username' => 'vgunday',
                'email' => 'vgunday@nerubia.com',
-               'password' => 'vgunday',
+               'password' => sha1('vgunday'),
                'name' => 'Vince Gunday',
                'user_type' => 'Client',
                'login_attempt' => 0,
@@ -290,7 +290,7 @@ class UsersTableSeeder extends Seeder {
            [
                'username' => 'vgunday',
                'email' => 'vgunday@nerubia.com',
-               'password' => 'vgunday',
+               'password' => sha1('vgunday'),
                'name' => 'Vince Gunday',
                'user_type' => 'Student',
                'login_attempt' => 0,
