@@ -69,4 +69,10 @@ class ClientRepository implements ClientRepositoryInterface{
 
           return Client::where('user_id','=',$user_id)->pluck('client_role');
     }
+
+    public function verifyClientId($id){
+
+         return Client::select('id','user_id')->where('id','=',$id)->first();
+
+    }
 }

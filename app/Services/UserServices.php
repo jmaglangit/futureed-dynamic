@@ -357,6 +357,18 @@ class UserServices {
         return $this->users->isActivated($id);
     }
 
+    //update cofirmation code and expiry
+
+
+    public function updateConfirmationCode($id,$code){
+
+        $this->users->updateConfirmationCode($id,$code);
+    }
+
+    public function updatePassword($id,$password){
+
+        $this->users->updatePassword($id,$password);
+    }
 
     
 

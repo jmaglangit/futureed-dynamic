@@ -95,4 +95,9 @@ class ClientServices {
         return $this->client->getRole($user_id);
     }
 
+    public function verifyClientId($id){
+
+        return $this->client->verifyClientId($id);
+    }
+
 }

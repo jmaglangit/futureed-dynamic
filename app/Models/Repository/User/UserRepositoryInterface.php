@@ -61,4 +61,6 @@ interface UserRepositoryInterface {
 
      public function updateConfirmationCode($id,$code);
 
+     public function updatePassword($id,$password);
+
 }
