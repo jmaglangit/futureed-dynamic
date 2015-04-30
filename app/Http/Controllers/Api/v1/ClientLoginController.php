@@ -22,7 +22,7 @@ class ClientLoginController extends ClientController {
         $msg_bag = $this->getMessageBag();
 
             if(!empty($msg_bag)){
-                return $this->setStatusCode(200)->respondWithError($msg_bag);
+                return $this->respondWithError($msg_bag);
             } 
 
         $err_msg = config('futureed-error.error_messages');
