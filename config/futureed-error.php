@@ -30,6 +30,11 @@ return [
         2102 => 'Access token expired',
         2103 => 'Invalid confirmation code',
 
+        // Client Error messages
+        2200 => 'Email already exist',
+        2201 => 'Username already exist',
+        2202 => 'School Name already exist',
+        
         //account status messages
         2230 => 'Account Inactive',
         2231 => 'Account Locked',

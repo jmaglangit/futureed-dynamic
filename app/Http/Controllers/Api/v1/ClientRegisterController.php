@@ -25,29 +25,16 @@ class ClientRegisterController extends ClientController {
 
 	        $this->addMessageBag($this->firstName($client,'first_name'));
         	$this->addMessageBag($this->lastName($client,'last_name'));
-        	$this->addMessageBag($this->clientRole($client,'client_role'));   	
+        	$this->addMessageBag($this->clientRole($client,'client_role'));        	
+        	$this->addMessageBag($this->email($user,'email'));
+        	$this->addMessageBag($this->username($user,'username'));
         	$this->addMessageBag($this->checkPassword($user,'password'));
-            $this->addMessageBag($this->email($user,'email'));
-            $this->addMessageBag($this->username($user,'username'));
 
-            if(!empty($client['street_address'])){
-
+            if($client['client_role'] == config('futureed.parent')){
                 $this->addMessageBag($this->validateString($client,'street_address'));
-
-            }elseif(!empty($client['city'])){
-
                 $this->addMessageBag($this->validateString($client,'city'));
-
-            }elseif(!empty($client['state'])){
-
                 $this->addMessageBag($this->validateString($client,'state'));
-
-            }elseif(!empty($client['country'])){
-
                 $this->addMessageBag($this->validateString($client,'country'));
-
-            }elseif(!empty($client['zip'])){
-
                 $this->addMessageBag($this->zipCode($client,'zip'));
             }
 
@@ -57,6 +44,12 @@ class ClientRegisterController extends ClientController {
         		$this->addMessageBag($this->validateString($school,'school_state'));
         		$this->addMessageBag($this->validateString($school,'school_country'));
         		$this->addMessageBag($this->zipCode($school,'school_zip'));
+
+                $this->addMessageBag($this->validateStringOptional($client,'street_address'));
+                $this->addMessageBag($this->validateStringOptional($client,'city'));
+                $this->addMessageBag($this->validateStringOptional($client,'state'));
+                $this->addMessageBag($this->validateStringOptional($client,'country'));
+                $this->addMessageBag($this->zipCodeOptional($client,'zip'));
         	}
 
         	$error_msg = config('futureed-error.error_messages');
