@@ -357,8 +357,15 @@ class UserServices {
         
         return $this->users->isActivated($id);
     }
+    public function updateConfirmationCode($id,$code){
 
+    $this->users->updateConfirmationCode($id,$code);
+    }
 
+    public function updatePassword($id,$password){
+
+    $this->users->updatePassword($id,$password);
+    }
     
 
 }

@@ -68,7 +68,7 @@ class ClientRegisterController extends ClientController {
         	
         	$email_check = $this->client->checkClientEmail($user);
 
-        	if($email_check == false){
+        	if(!$email_check){
 
         		$this->addMessageBag($this->setErrorCode(2200)
                 	->setField('email')
@@ -79,7 +79,7 @@ class ClientRegisterController extends ClientController {
 
         	$username_check = $this->client->checkClientUsername($user);
 
-        	if($username_check == false){
+        	if(!$username_check){
 
         		$this->addMessageBag($this->setErrorCode(2201)
                 	->setField('username')
@@ -90,7 +90,7 @@ class ClientRegisterController extends ClientController {
 
         	$check_school_name = $this->client->schoolNameCheck($school);
 
-        	if($check_school_name == false){
+        	if(!$check_school_name){
 
         		$this->addMessageBag($this->setErrorCode(2202)
                 	->setField('school_name')
@@ -102,7 +102,7 @@ class ClientRegisterController extends ClientController {
         	$msg_bag = $this->getMessageBag();
 
         	if(!empty($msg_bag)){
-        		return $this->setStatusCode(200)->respondWithError($msg_bag);
+        		return $this->respondWithError($msg_bag);
         	}       	
 
         	$user['user_type'] = config('futureed.client');
