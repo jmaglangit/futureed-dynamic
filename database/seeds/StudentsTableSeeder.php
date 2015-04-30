@@ -19,7 +19,7 @@ class StudentsTableSeeder extends Seeder {
                         'first_name' => 'Farrah',
                         'last_name' => 'Dy',
                         'gender' => 'Female',
-                        'birth_date' => \Carbon\Carbon::now()->subYears(10),
+                        'birth_date' => \Carbon\Carbon::now()->subYears(16),
                         'avatar_id' => 1,
                         'password_image_id' => 1,
                         'parent_id' => 1,
