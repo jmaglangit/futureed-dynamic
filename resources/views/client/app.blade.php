@@ -31,7 +31,8 @@
   <![endif]-->
   @yield('styles')
 </head>
-<body class="client" ng-controller="futureedController">
+<body class="client" ng-controller="futureedController" ng-init="getUserDetails()">
+  <textarea id="userdata" name="hide" style="display:none;">{!! Session::get('user') !!}</textarea>
   <a id="top"></a>
   
   @yield('navbar')

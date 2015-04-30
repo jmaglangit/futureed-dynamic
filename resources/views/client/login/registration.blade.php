@@ -26,7 +26,7 @@
               {! error !}
             </p>
           </div>
-          <form class="form-horizontal">
+          <form id="form_registation" class="form-horizontal">
             <fieldset>
               <legend>User Credentials</legend>
               <div class="form-group">

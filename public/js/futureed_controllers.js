@@ -392,10 +392,11 @@ function FutureedController($scope, $location, apiService) {
         if(response.errors) {
           $scope.errorHandler(response.errors);
         } else if(response.data) {
-
+          $("input[name='user_data']").val(JSON.stringify(response.data));
+          $("#login_form").submit();  
         }
-      } else {
-
+      } else if(response.status == 202) {
+        $scope.error = response.data.message;
       }
     }).error(function(response) {
       $scope.internalError();
@@ -508,39 +509,40 @@ function FutureedController($scope, $location, apiService) {
   }
 
   function registerClient(reg, term) {
-    $scope.error = "";
+    $scope.errors = false;
     $scope.reg = reg;
 
-    if($scope.reg) {
-      if($scope.reg.password != $scope.reg.confirm_password) {
-        $scope.errors = ["Password does not match."];
-        $("html, body").animate({ scrollTop: 0 }, "slow");
-      } else if(!term) {
-        $scope.errors = ["Please accept the terms and conditions."];
-        $("html, body").animate({ scrollTop: 0 }, "slow");
-      } else {
-        $scope.ui_block();
-        apiService.registerClient(reg).success(function(response) {
-          if(response.status == 200) {
-            if(response.errors) {
-              $scope.errors = [];
-              angular.forEach(response.errors, function(value, key) {
-                $scope.errors[key] = value.message;
-              });
-            } else if(response.data) {
-              $scope.registered = true; 
-              $scope.email = $scope.reg.email;
-            }
-          }
-          $scope.ui_unblock();
-        }).error(function(response) {
-          $scope.internalError();
-          $scope.ui_unblock();
-        });
-      }
-    } else {
-      $scope.errors = ["Please fill in required fields."];
+    var has_empty = highlight_empty('form_registation');
+    if($scope.e_error || $scope.u_error) {
+      $("html, body").animate({ scrollTop: 320 }, "slow");
+    } else if (has_empty) {
+      $scope.errors = ["Please fill in required fields"];
       $("html, body").animate({ scrollTop: 0 }, "slow");
+    } else if($scope.reg.password != $scope.reg.confirm_password) {
+      $scope.errors = ["Password does not match."];
+      $("html, body").animate({ scrollTop: 0 }, "slow");
+    } else if(!term) {
+      $scope.errors = ["Please accept the terms and conditions."];
+      $("html, body").animate({ scrollTop: 0 }, "slow");
+    } else {
+      $scope.ui_block();
+      apiService.registerClient(reg).success(function(response) {
+        if(response.status == 200) {
+          if(response.errors) {
+            $scope.errors = [];
+            angular.forEach(response.errors, function(value, key) {
+              $scope.errors[key] = value.message;
+            });
+          } else if(response.data) {
+            $scope.registered = true; 
+            $scope.email = $scope.reg.email;
+          }
+        }
+        $scope.ui_unblock();
+      }).error(function(response) {
+        $scope.internalError();
+        $scope.ui_unblock();
+      });
     }
   }
 

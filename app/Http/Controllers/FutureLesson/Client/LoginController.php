@@ -17,6 +17,35 @@ class LoginController extends Controller {
 	{
 		return view('client.login.login');
 	}
+
+	/**
+	 * Process session
+	 *
+	 * @return Response
+	 */
+	public function process()
+	{
+		$user_data = Input::only('user_data');
+		$user_object = json_decode($user_data['user_data']);
+
+		if($user_object->user_id){
+			\Session::put('user', $user_data['user_data']);
+			return redirect()->route('client.dashboard.index');
+		}
+
+		return redirect()->route('client.login');
+	}
+
+	/**
+	 * Logout
+	 *
+	 * @return Response
+	 */
+	public function logout()
+	{
+		\Session::flush();
+		return redirect()->route('client.login');
+	}
 	
 	/**
 	 * Display forgot password screen
@@ -44,10 +73,10 @@ class LoginController extends Controller {
 	public function registration()
 	{
 		$input = Input::only('email');
-		$registered = false;
+		$registered = "false";
 
 		if($input['email']) {
-			$registered = true;
+			$registered = "true";
 		}
 
 		return view('client.login.registration', ['registered' => $registered, 'email' => $input['email']]);

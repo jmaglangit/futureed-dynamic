@@ -8,6 +8,12 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller {
 
+	public function __construct() {
+		if(!Session::get('user')) {
+			return redirect()->route('student.login')->send();
+		}
+	}
+
 	/**
 	 * Display dashboard screen
 	 *
@@ -37,11 +43,8 @@ class DashboardController extends Controller {
 			if(is_numeric($user_object->avatar_id) && is_numeric($user_object->learning_style_id)) {
 				return redirect()->route('student.dashboard.index');
 			}
-		} else {
-			return redirect()->route('student.login');	
 		}
-
-	
+		
 		return view('student.dashboard.follow-up-registration');
 	}
 }

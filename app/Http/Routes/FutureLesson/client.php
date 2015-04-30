@@ -13,9 +13,14 @@
 			, 'uses' => 'FutureLesson\Client\LoginController@registration'
 		]);
 		Routes::get('/registration', [
-				'as' => 'client.registration'
-				, 'uses' => 'FutureLesson\Client\LoginController@registration'
-			]);
+			'as' => 'client.registration'
+			, 'uses' => 'FutureLesson\Client\LoginController@registration'
+		]);
+		Routes::get('/logout', [ 
+			'as' => 'client.logout'
+			, 'middleware' => 'client'
+			, 'uses' => 'FutureLesson\Client\LoginController@logout'
+		]);
 
 		Routes::group(['prefix' => '/login'], function()
 		{
@@ -31,13 +36,17 @@
 					'as' => 'client.login.reset_password'
 					, 'uses' => 'FutureLesson\Client\LoginController@reset_password'
 				]);
-			
+			Routes::post('/process', [ 
+				'as' => 'client.login.process'
+				, 'uses' => 'FutureLesson\Client\LoginController@process'
+			]);
 		});
 
 		Routes::group(['prefix' => '/dashboard'], function()
 		{
 			Routes::get('/', [ 
-					'as' => 'client.dashboard'
+					'as' => 'client.dashboard.index'
+					, 'middleware' => 'client'
 					, 'uses' => 'FutureLesson\Client\DashboardController@index'
 				]);
 			
