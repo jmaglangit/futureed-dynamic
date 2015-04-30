@@ -126,6 +126,7 @@ class UserPasswordController extends UserController {
          } else {
           
            $return=$this->user->getIdByEmail($input['email'],$input['user_type']);
+
           
            if($return['status']==202){
               
@@ -145,8 +146,9 @@ class UserPasswordController extends UserController {
                   }else{
                         
                       
-                      $studentdata = $this->student->resetCodeResponse($return['data']);
-                      return $this->respondWithData($studentdata);
+                      $id = $this->client->getClientId($return['data']);
+
+                      return $this->respondWithData(['id'=>$id]);
                   }
               }else{
                  
