@@ -102,13 +102,60 @@ class UserPasswordController extends UserController {
     }
 
     public function passwordReset(){
+
+
          
     }
 
     //confirmation of reset code
     public function confirmResetCode(){
       
+       $input = Input::only('email','reset_code','user_type');
+        $error = config('futureed-error.error_messages');
 
+        $this->addMessageBag($this->email($input,'email'));
+        $this->addMessageBag($this->validateNumber($input,'reset_code'));
+
+
+         $msg_bag = $this->getMessageBag();
+
+         if($msg_bag){
+
+            return $this->respondWithError($this->getMessageBag());
+
+         } else {
+          
+           $return=$this->user->getIdByEmail($input['email'],$input['user_type']);
+          
+           if($return['status']==202){
+              
+               return $this->respondErrorMessage(2001);
+                        
+           }else{
+
+              $userdata = $this->user->getUserDetail($return['data'],$input['user_type']);
+              
+              if($userdata['reset_code']==$input['reset_code']){
+                 
+                  $expired=$this->user->checkCodeExpiry($userdata['reset_code_expiry']);
+                 
+                  if($expired==true){
+
+                     return $this->respondErrorMessage(2100);
+                  }else{
+                        
+                      
+                      $studentdata = $this->student->resetCodeResponse($return['data']);
+                      return $this->respondWithData($studentdata);
+                  }
+              }else{
+                 
+                  return $this->respondErrorMessage(2100);
+              }
+                
+           }
+
+        }
     }
 
 
