@@ -67,12 +67,12 @@
 				    </div>
 
 				    <div class="btn-container">
-					    <button ng-if="!password_validated" type="button" class="btn btn-red" ng-click="validateCurrentPassword()">Proceed</button>
-						<button ng-if="password_validated && !password_selected" type="button" class="btn btn-red" ng-click="selectNewPassword()">Proceed</button>
-						<a ng-if="!password_selected" href="{!! route('student.profile.index') !!}" class="btn btn-purple">Cancel</a>
+					    <a ng-if="!password_validated" type="button" class="btn btn-red btn-medium" ng-click="validateCurrentPassword()">Proceed</a>
+						<a ng-if="password_validated && !password_selected" type="button" class="btn btn-red btn-medium" ng-click="selectNewPassword()">Proceed</a>
+						<a ng-if="!password_selected" href="{!! route('student.profile.index') !!}" class="btn btn-purple btn-medium">Cancel</a>
 						
-						<button ng-if="password_validated && password_selected && !password_confirmed" type="button" class="btn btn-red" ng-click="confirmNewPassword()">Change</button>
-			          	<button ng-if="password_validated && password_selected && !password_confirmed" type="button" ng-click="undoNewPassword()" class="btn btn-purple">Previous</button>
+						<a ng-if="password_validated && password_selected && !password_confirmed" type="button" ng-click="undoNewPassword()" class="btn btn-purple btn-medium">Previous</a>
+						<a ng-if="password_validated && password_selected && !password_confirmed" type="button" class="btn btn-red btn-medium" ng-click="confirmNewPassword()">Change</a>    	
 				    </div>
 				</div>
 			</div>

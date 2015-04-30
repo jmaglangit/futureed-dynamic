@@ -49,7 +49,7 @@
                 <div class="alert alert-success" ng-if="success">
                 	<p>{! success_msg !}</p>
                 </div>
-				<form class="form-horizontal" name="form_profile">
+				<form class="form-horizontal" name="form_profile" id="form_profile">
 					<fieldset>
 						<legend>Credentials Information</legend>
 						<div class="form-group">
@@ -59,7 +59,7 @@
 	                            ng-model-options="{debounce : {'default' : 1000}}" ng-change="checkAvailability(prof.username)" required />
 	                        </div>
 	                        <div style="margin-top: 7px;"> 
-	                            <i ng-if="u_loading" class="fa fa-refresh fa-spin"></i>
+	                            <i ng-if="u_loading" class="fa fa-spinner fa-spin"></i>
 	                            <i ng-if="u_success" class="fa fa-check success-color"></i>
 	                            <span ng-if="u_error" class="error-msg-con"> Username is invalid or already exist</span>
 	                        </div>
@@ -71,7 +71,7 @@
 	                                ng-model-options="{debounce : {'default' : 1000}}" ng-change="checkEmailAvailability(prof.email)" required />
 	                        </div>
 	                        <div style="margin-top: 7px;">
-	                            <i ng-if="e_loading" class="fa fa-refresh fa-spin"></i>
+	                            <i ng-if="e_loading" class="fa fa-spinner fa-spin"></i>
 	                            <i ng-if="e_success" class="fa fa-check success-color"></i>
 	                            <span ng-if="e_error" class="error-msg-con"> Email Address is invalid or already exist</span>
 	                        </div>
@@ -103,13 +103,13 @@
 	                            <div class="dropdown">
 	                              <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
 	                                <div class="input-group">
-	                                    <input disabled="disabled" type="text" class="form-control" value="{! prof.birth_date | date:'yyyy-MM-dd' !}">
-	                                    <input type="hidden" name="birth_date" value="{! prof.birth_date | date:'yyyyMMdd' !}">
+	                                    <input disabled="disabled" type="text" id="birth_date" class="form-control" value="{! prof.birth | date:'yyyy-MM-dd' !}">
+	                                    <input type="hidden" name="birth_date" value="{! prof.birth | date:'yyyyMMdd' !}">
 	                                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 	                                </div>
 	                              </a>
 	                              <ul ng-show="edit" class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-	                                <datetimepicker data-ng-model="prof.birth_date" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', startView:'day', minView:'day' }"/>
+	                                <datetimepicker data-ng-model="prof.birth" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', startView:'day', minView:'day' }"/>
 	                              </ul>
 	                            </div>
 	                        </div>
@@ -132,14 +132,13 @@
 	                            <input type="text" class="form-control" ng-model="prof.state" ng-disabled="!edit">
 	                        </div>
 	                    </div>
-	                    <div class="form-group">
+	                    <div class="form-group" ng-init="getCountries()">
 	                        <label for="" class="col-md-2 control-label">Country <span class="required">*</span></label>
 	                        <div class="col-md-5">
 	                            <select class="form-control" ng-model="prof.country" ng-disabled="!edit">
 	                                <option selected="selected" value="">-- Select Country --</option>
-	                                <option ng-selected="{! prof.country == 'Philippines' !}" value="Philippines">Philippines</option>
-	                                <option ng-selected="{! prof.country == 'Singapore' !}"value="Singapore">Singapore</option>
-	                                <option ng-selected="{! prof.country == 'United States' !}"value="United States">United States</option>
+	                                <option ng-repeat="country in countries" value="{! country.id !}" 
+	                                	ng-selected="{! prof.country == country.id !}">{! country.name !}</option>
 	                            </select>
 	                        </div>
 	                    </div>

@@ -1,8 +1,8 @@
 @extends('student.app')
 
 @section('content')
-<div class="container login" ng-init="success={!! $success !!}" ng-cloak>
-    <div class="form-style register_student form-wide" ng-if="!success"> 
+<div class="container login" ng-cloak>
+    <div class="form-style register_student form-wide" ng-init="success={!! $success !!}" ng-show="!success"> 
         <form class="form-horizontal simple-form" name="form_registration" id="form_registation">
             <div class="form-header">
                 <div class="media">
@@ -30,24 +30,24 @@
                         <label for="" class="col-md-2 control-label">Username<span class="required">*</span></label>
                         <div class="col-md-4">
                             <input type="text" class="form-control" ng-model="reg.username" name="username" placeholder="Username" 
-                            ng-model-options="{debounce : {'default' : 1000}}" ng-change="checkAvailability(reg.username)" required />
+                            ng-model-options="{debounce : {'default' : 1000}}" ng-change="checkAvailability(reg.username, 'Student')" required />
                         </div>
                         <div style="margin-top: 7px;"> 
-                            <i ng-if="u_loading" class="fa fa-refresh fa-spin"></i>
+                            <i ng-if="u_loading" class="fa fa-spinner fa-spin"></i>
                             <i ng-if="u_success" class="fa fa-check success-color"></i>
-                            <span ng-if="u_error" class="error-msg-con"> Username is invalid or already exist</span>
+                            <span ng-if="u_error" class="error-msg-con">{! u_error !}</span>
                         </div>
                     </div> 
                     <div class="form-group">
                         <label for="" class="col-md-2 control-label">Email<span class="required">*</span></label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" ng-model="reg.email" name="email" placeholder="Email Address"
-                                ng-model-options="{debounce : {'default' : 1000}}" ng-change="checkEmailAvailability(reg.email)" required />
+                            <input type="text" class="form-control" ng-model="reg.email" placeholder="Email Address"
+                                ng-model-options="{debounce : {'default' : 1000}}" ng-change="checkEmailAvailability(reg.email, 'Student')" required />
                         </div>
                         <div style="margin-top: 7px;">
-                            <i ng-if="e_loading" class="fa fa-refresh fa-spin"></i>
+                            <i ng-if="e_loading" class="fa fa-spinner fa-spin"></i>
                             <i ng-if="e_success" class="fa fa-check success-color"></i>
-                            <span ng-if="e_error" class="error-msg-con"> Email Address is invalid or already exist</span>
+                            <span ng-if="e_error" class="error-msg-con">{! e_error !}</span>
                         </div>
                     </div>
                 </fieldset>
@@ -100,14 +100,12 @@
                             <input type="text" class="form-control" ng-model="reg.state" placeholder="State" required />
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" ng-init="getCountries()">
                         <label for="" class="col-md-2 control-label">Country<span class="required">*</span></label>
                         <div class="col-md-4">
                             <select class="form-control" ng-model="reg.country">
                                 <option value="">-- Select Country --</option>
-                                <option value="Philippines">Philippines</option>
-                                <option value="Singapore">Singapore</option>
-                                <option value="United States">United States</option>
+                                <option ng-repeat="country in countries" value="{! country.id !}">{! country.name!}</option>
                             </select>
                         </div>
                     </div>
@@ -142,13 +140,9 @@
                             </label>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-sm-4 col-sm-offset-4">
-                            <div class="form-group">
-                                <a ng-click="validateRegistration(reg, terms)" class="btn btn-red" ng-disabled="disabled">REGISTER</a>
-                                <a href="{!! route('student.login') !!}" class="btn btn-purple">Cancel</a>
-                            </div>    
-                        </div>
+                    <div class="btn-container col-sm-6 col-sm-offset-3">
+                        <a ng-click="validateRegistration(reg, terms)" class="btn btn-red btn-medium">REGISTER</a>
+                        <a href="{!! route('student.login') !!}" class="btn btn-purple btn-medium">Cancel</a>
                     </div>
                 </fieldset>
             </div>

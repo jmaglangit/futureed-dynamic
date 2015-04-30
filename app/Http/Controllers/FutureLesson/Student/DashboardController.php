@@ -1,12 +1,18 @@
 <?php namespace FutureEd\Http\Controllers\FutureLesson\Student;
 
-use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Session;
+
 
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller {
+
+	public function __construct() {
+		if(!Session::get('user')) {
+			return redirect()->route('student.login')->send();
+		}
+	}
 
 	/**
 	 * Display dashboard screen
@@ -15,6 +21,12 @@ class DashboardController extends Controller {
 	 */
 	public function index()
 	{
+		$user_object = json_decode(Session::get('user'));
+
+		if(!is_numeric($user_object->avatar_id) || !is_numeric($user_object->learning_style_id)) {
+			return redirect()->route('student.dashboard.follow_up_registration');
+		}
+
 		return view('student.dashboard.index');
 	}
 
@@ -25,28 +37,14 @@ class DashboardController extends Controller {
 	 */
 	public function follow_up_registration()
 	{
+		$user_object = json_decode(Session::get('user'));
+
+		if($user_object) {
+			if(is_numeric($user_object->avatar_id) && is_numeric($user_object->learning_style_id)) {
+				return redirect()->route('student.dashboard.index');
+			}
+		}
+		
 		return view('student.dashboard.follow-up-registration');
 	}
-
-	/**
-	 * Display my profile screen
-	 *
-	 * @return Response
-	 */
-	public function my_profile()
-	{
-		return view('student.dashboard.my-profile');
-	}
-
-	/**
-	 * Display edit profile screen
-	 *
-	 * @return Response
-	 */
-	public function edit_profile()
-	{
-		return view('student.dashboard.my-profile');
-	}
-
-
 }

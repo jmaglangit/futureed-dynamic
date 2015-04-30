@@ -17,8 +17,8 @@
           <input type="hidden" name="user_data" >
         </form>
 
-        <div class="btncon">
-            <button class="btn btn-purple" ng-click="cancelLogin()">Cancel</button>
+        <div class="btn-container">
+            <button class="btn btn-purple btn-medium" ng-click="cancelLogin()">Cancel</button>
         </div>
       </div>
   </div>
