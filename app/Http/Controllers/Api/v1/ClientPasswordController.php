@@ -31,7 +31,7 @@ class ClientPasswordController extends ApiController{
 
         }else{
 
-            $return = $this->client->verifyClientId($id)->toArray();
+            $return = $this->client->verifyClientId($id);
 
             if($return){
 
