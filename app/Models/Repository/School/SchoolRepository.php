@@ -62,4 +62,10 @@ class SchoolRepository implements SchoolRepositoryInterface{
             ->where('street_address','=',$input['school_address'])
             ->where('state','=',$input['school_state'])->pluck('id');
 	}
+
+	public function getSchoolDetails($id){
+
+		return School::where('code','=',$id)->first();
+
+	}
 }
