@@ -34,7 +34,7 @@ return [
         2200 => 'Email already exist',
         2201 => 'Username already exist',
         2202 => 'School Name already exist',
-        
+
         //account status messages
         2230 => 'Account Inactive',
         2231 => 'Account Locked',
@@ -42,6 +42,8 @@ return [
 
         // login error messages
         2233 => 'Invalid Password',
+
+        2234 => 'Unauthorized Registration',
 
     ],
 ];
