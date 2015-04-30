@@ -22,17 +22,16 @@ class ClientLoginController extends ClientController {
         $msg_bag = $this->getMessageBag();
 
             if(!empty($msg_bag)){
-                return $this->setStatusCode(200)->respondWithError($msg_bag);
+                return $this->respondWithError($msg_bag);
             } 
 
         $err_msg = config('futureed-error.error_messages');
         //check username and password
         $response =$this->user->checkLoginName($input['username'], 'Client');
-        if($response['status'] <> 200){
-            return $this->setStatusCode($response['status'])
-                ->respondWithData(['error_code'=>$response['status'],'message'=>$response['data']]);
-        }
 
+        if($response['status'] <> 200){
+            return $this->respondErrorMessage(2001);
+        }
 
         //match username and password
         $input['password'] = sha1($input['password']);
@@ -51,7 +50,6 @@ class ClientLoginController extends ClientController {
             return $this->respondErrorMessage(2001);
         }
 
-
         //get client basic detail
         $client_detail = $this->client->getClient($client_role,$input['role']);
 
@@ -63,13 +61,10 @@ class ClientLoginController extends ClientController {
         );
 
         return $this->respondWithData([
-            'status' => 200,
-            'data' => [
                 'user_id' => $client_detail['user_id'],
                 'first_name' => $client_detail['first_name'],
                 'last_name' => $client_detail['last_name'],
                 'access_token' => $token['access_token']
-            ]
         ]);
     }
 
