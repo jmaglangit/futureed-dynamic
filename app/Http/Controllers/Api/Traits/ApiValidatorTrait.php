@@ -235,6 +235,27 @@ trait ApiValidatorTrait {
                     ->errorMessage();
             }
     }
+    public function validateStringOnly($input,$field_name){
+
+            $validator = Validator::make(
+                [
+                    "$field_name" => strtolower($input["$field_name"]),
+                ],
+                [
+                    "$field_name" => 'string'
+                ]
+            );
+
+            if($validator->fails()){
+
+                $validator_msg = $validator->messages()->toArray();
+
+                return $this->setErrorCode(1010)
+                    ->setField($field_name)
+                    ->setMessage($validator_msg["$field_name"][0])
+                    ->errorMessage();
+            }
+    }
     
     public function emptyUsername($input,$field_name){
         

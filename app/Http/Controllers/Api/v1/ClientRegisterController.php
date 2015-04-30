@@ -26,11 +26,11 @@ class ClientRegisterController extends ClientController {
 	        $this->addMessageBag($this->firstName($client,'first_name'));
         	$this->addMessageBag($this->lastName($client,'last_name'));
         	$this->addMessageBag($this->clientRole($client,'client_role'));
-        	$this->addMessageBag($this->validateString($client,'street_address'));
-        	$this->addMessageBag($this->validateString($client,'city'));
-        	$this->addMessageBag($this->validateString($client,'state'));
-        	$this->addMessageBag($this->validateString($client,'country'));
-        	$this->addMessageBag($this->zipCode($client,'zip'));
+        	$this->addMessageBag($this->validateStringOnly($client,'street_address'));
+        	$this->addMessageBag($this->validateStringOnly($client,'city'));
+        	$this->addMessageBag($this->validateStringOnly($client,'state'));
+        	$this->addMessageBag($this->validateStringOnly($client,'country'));
+        	$this->addMessageBag($this->clientZipCode($client,'zip'));
         	$this->addMessageBag($this->email($user,'email'));
         	$this->addMessageBag($this->username($user,'username'));
         	$this->addMessageBag($this->checkPassword($user,'password'));
