@@ -22,7 +22,7 @@
 		            <input type="hidden" ng-model="id" name="id" required />
 		        </div>
 		        <div class="btn-container">
-		        	<button type="button" class="btn btn-red btn-medium" ng-disabled="disabled" ng-click="confirmRegistration()">Confirm</button>
+		        	<button type="button" class="btn btn-red btn-medium" ng-disabled="disabled" ng-click="confirmStudentRegistration()">Confirm</button>
 	            	<button type="button" class="btn btn-purple btn-medium" ng-disabled="disabled" ng-click="resendStudentConfirmation()">Resend</button>
 		        </div>
 	        </form>

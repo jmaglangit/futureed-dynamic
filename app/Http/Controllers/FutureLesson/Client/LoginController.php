@@ -2,6 +2,7 @@
 
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
 
 use Illuminate\Http\Request;
 
@@ -24,17 +25,15 @@ class LoginController extends Controller {
 	 */
 	public function forgot_password()
 	{
-		return view('client.login.forgot-password');
-	}
+		$input = Input::only('email');
 
-	/**
-	 * Display forgot password success screen
-	 *
-	 * @return Response
-	 */
-	public function forgot_password_success()
-	{
-		return view('client.login.forgot-password-success');
+		$sent = false;
+
+		if($input['email']) {
+			$sent = true;
+		}
+
+		return view('client.login.forgot-password', ['email' => $input['email'], 'sent' => $sent]);
 	}
 
 	/**
@@ -44,19 +43,16 @@ class LoginController extends Controller {
 	 */
 	public function registration()
 	{
-		return view('client.login.registration');
+		$input = Input::only('email');
+		$registered = false;
+
+		if($input['email']) {
+			$registered = true;
+		}
+
+		return view('client.login.registration', ['registered' => $registered, 'email' => $input['email']]);
 	}
-	
-	/**
-	 * Display registration success screen
-	 *
-	 * @return Response
-	 */
-	public function registration_success()
-	{
-		return view('client.login.registration-success');
-	}
-	
+
 	/**
 	 * Display reset password screen
 	 *
@@ -64,17 +60,14 @@ class LoginController extends Controller {
 	 */
 	public function reset_password()
 	{
-		return view('client.login.reset-password');
-	}
-	
-	/**
-	 * Display reset password success screen
-	 *
-	 * @return Response
-	 */
-	public function reset_password_success()
-	{
-		return view('client.login.reset-password-success');
-	}
+		$input = Input::only('id', 'reset_code');
+		$id = $input['id'];
+		$reset_code = $input['reset_code'];
 
+		if($id == null || $reset_code == null) {
+			return redirect()->route('client.login.forgot_password');
+		}
+
+		return view('client.login.reset-password', ['id' => $id, 'reset_code' => $reset_code]);
+	}
 }

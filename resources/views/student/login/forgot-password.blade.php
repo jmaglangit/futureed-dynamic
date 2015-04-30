@@ -17,7 +17,7 @@
             <input placeholder="Username or Email" type="text" class="form-control" name="username" ng-model="username" autocomplete="off" />
           </div>
           <div class="btn-container">
-            <a type="button" class="btn btn-red btn-medium" ng-click="forgotPassword()">SEND</a>
+            <a type="button" class="btn btn-red btn-medium" ng-click="studentForgotPassword()">SEND</a>
             <a href="{!! route('student.login') !!}" class="btn btn-purple btn-medium">Cancel</a>
           </div>
         </form>
@@ -52,8 +52,8 @@
               <input type="hidden" ng-model="id" name="id" required />
             </div>
             <div class="btn-container">
-              <button type="button" ng-disabled="disabled" class="btn btn-red btn-medium" ng-click="validateCode(reset_code)">PROCEED</button>
-              <button type="button" ng-disabled="disabled" class="btn btn-purple btn-medium" ng-click="resendCode()">Resend Code</button>  
+              <button type="button" ng-disabled="disabled" class="btn btn-red btn-medium" ng-click="studentValidateCode(reset_code)">PROCEED</button>
+              <button type="button" ng-disabled="disabled" class="btn btn-purple btn-medium" ng-click="studentResendCode()">Resend Code</button>  
             </div>
             
           </div>

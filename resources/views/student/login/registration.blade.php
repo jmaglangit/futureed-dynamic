@@ -30,7 +30,7 @@
                         <label for="" class="col-md-2 control-label">Username<span class="required">*</span></label>
                         <div class="col-md-4">
                             <input type="text" class="form-control" ng-model="reg.username" name="username" placeholder="Username" 
-                            ng-model-options="{debounce : {'default' : 1000}}" ng-change="checkAvailability(reg.username)" required />
+                            ng-model-options="{debounce : {'default' : 1000}}" ng-change="checkAvailability(reg.username, 'Student')" required />
                         </div>
                         <div style="margin-top: 7px;"> 
                             <i ng-if="u_loading" class="fa fa-spinner fa-spin"></i>
@@ -42,7 +42,7 @@
                         <label for="" class="col-md-2 control-label">Email<span class="required">*</span></label>
                         <div class="col-md-4">
                             <input type="text" class="form-control" ng-model="reg.email" placeholder="Email Address"
-                                ng-model-options="{debounce : {'default' : 1000}}" ng-change="checkEmailAvailability(reg.email)" required />
+                                ng-model-options="{debounce : {'default' : 1000}}" ng-change="checkEmailAvailability(reg.email, 'Student')" required />
                         </div>
                         <div style="margin-top: 7px;">
                             <i ng-if="e_loading" class="fa fa-spinner fa-spin"></i>

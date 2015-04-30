@@ -2,7 +2,7 @@
 
 @section('content')
   <div class="container login" ng-cloak>
-    <div class="col-md-6 col-md-offset-1" ng-show="!sent">
+    <div class="col-md-6 col-md-offset-1" ng-init="sent={!! $sent !!}" ng-show="!sent">
       <div class="form-style form-narrow">
         <div class="title">Retrieve Password</div>
         <div class="error" ng-if="error">
@@ -18,7 +18,7 @@
             <input placeholder="Email or Username" type="text" ng-model="username" />
           </div>
           <div class="btn-container">
-            <a type="button" class="btn btn-blue btn-medium" ng-click="forgotPassword()"> SEND </a>
+            <a type="button" class="btn btn-blue btn-medium" ng-click="clientForgotPassword()"> SEND </a>
             <a type="button" class="btn btn-gold btn-medium" href="{!! route('client.login') !!}"> Cancel </a>
           </div>
         </form>
@@ -54,12 +54,14 @@
             </div>
             <div class="form-group">
               <input type="text" class="form-control" ng-model="reset_code" name="reset_code" placeholder="Reset Code" autocomplete="off" />
+              <input type="hidden" ng-model="username" name="username" value="{!! $email !!}" />
               <input type="hidden" ng-model="id" name="id" required />
             </div>
-            <button type="button" ng-disabled="disabled" class="btn btn-blue" ng-click="validateCode(reset_code)">PROCEED</button>
-            <button type="button" ng-disabled="disabled" class="btn btn-gold" ng-click="resendCode()">
-              <i ng-if="disabled" class="fa fa-spinner fa-spin"></i> Resend Code
-            </button>
+            <div class="btn-container">
+              <a type="button" ng-disabled="disabled" class="btn btn-blue btn-medium" ng-click="clientValidateCode(reset_code)">PROCEED</a>
+              <a type="button" ng-disabled="disabled" class="btn btn-gold btn-medium" ng-click="clientResendCode()"> Resend Code </a>
+            </div>
+            
           </div>
         </form>
       </div>

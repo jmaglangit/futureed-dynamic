@@ -4,6 +4,18 @@
 	Routes::group(['prefix' => '/client'], function()
 	{
 		Routes::get('/', 'FutureLesson\Client\LoginController@index');
+		Routes::get('/password/reset', [
+			'as' => 'client.password.reset'
+			, 'uses' =>'FutureLesson\Client\LoginController@forgot_password'
+			]);
+		Routes::get('/email/confirm', [
+			'as' => 'client.login.confirm'
+			, 'uses' => 'FutureLesson\Client\LoginController@registration'
+		]);
+		Routes::get('/registration', [
+				'as' => 'client.registration'
+				, 'uses' => 'FutureLesson\Client\LoginController@registration'
+			]);
 
 		Routes::group(['prefix' => '/login'], function()
 		{
@@ -25,16 +37,11 @@
 		Routes::group(['prefix' => '/dashboard'], function()
 		{
 			Routes::get('/', [ 
-					'as' => 'client.login'
+					'as' => 'client.dashboard'
 					, 'uses' => 'FutureLesson\Client\DashboardController@index'
 				]);
 			
 		});
-		
-		Routes::get('/registration', [
-				'as' => 'client.registration'
-				, 'uses' => 'FutureLesson\Client\LoginController@registration'
-			]);
 	});
 	
 ?>
