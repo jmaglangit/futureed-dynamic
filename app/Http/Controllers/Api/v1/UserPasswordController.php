@@ -115,6 +115,7 @@ class UserPasswordController extends UserController {
 
         $this->addMessageBag($this->email($input,'email'));
         $this->addMessageBag($this->validateNumber($input,'reset_code'));
+        $this->addMessageBag($this->userType($input,'user_type'));
 
 
          $msg_bag = $this->getMessageBag();
@@ -144,11 +145,17 @@ class UserPasswordController extends UserController {
 
                      return $this->respondErrorMessage(2100);
                   }else{
-                        
-                      
-                      $id = $this->client->getClientId($return['data']);
+                     
+                      if($input['user_type'] =='Student'){
 
-                      return $this->respondWithData(['id'=>$id]);
+                        $studentdata = $this->student->resetCodeResponse($return['data']);
+                        return $this->respondWithData($studentdata);
+
+                      }else{
+
+                        $id = $this->client->getClientId($return['data']);
+                        return $this->respondWithData(['id'=>$id]);
+                     }
                   }
               }else{
                  
