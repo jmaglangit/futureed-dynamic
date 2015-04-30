@@ -17,7 +17,13 @@ class LoginController extends Controller {
 	public function index()
 	{
 		if(Session::get('user')) {
-			return view('student.dashboard.index');
+			$user_object = json_decode(Session::get('user'));
+
+			if($user_object->avatar_id && $user_object->learning_style_id) {
+				return redirect()->route('student.dashboard.index');
+			}
+
+			return redirect()->route('student.dashboard.follow_up_registration');
 		}
 
 		return view('student.login.login');
@@ -68,23 +74,6 @@ class LoginController extends Controller {
 	}
 
 	/**
-	 * Display forgot password success screen
-	 *
-	 * @return Response
-	 */
-	public function forgot_password_success()
-	{
-		$input = Input::only('email');
-		$email = $input['email'];
-
-		if($email == null) {
-			return redirect()->route('student.login.forgot_password');
-		}
-
-		return redirect()->route('student.login.reset_code')->with('email', $email);
-	}
-
-	/**
 	* Display enter reset code screen
 	*
 	* @return Response
@@ -125,16 +114,6 @@ class LoginController extends Controller {
 	}
 	
 	/**
-	 * Display registration success screen
-	 *
-	 * @return Response
-	 */
-	public function registration_success()
-	{
-		return view('student.login.registration-success');
-	}
-	
-	/**
 	 * Display reset password screen
 	 *
 	 * @return Response
@@ -159,25 +138,4 @@ class LoginController extends Controller {
 
 		return view('student.login.reset-password', ['id' => $id, 'code' => $code, 'email' => $email, 'new' => $new]);
 	}
-	
-	/**
-	 * Display reset confirm password screen
-	 *
-	 * @return Response
-	 */
-	public function reset_confirm_password()
-	{
-		return view('student.login.reset-confirm-password');
-	}
-	
-	/**
-	 * Display reset password success screen
-	 *
-	 * @return Response
-	 */
-	public function reset_password_success()
-	{
-		return view('student.login.reset-password-success');
-	}
-
 }

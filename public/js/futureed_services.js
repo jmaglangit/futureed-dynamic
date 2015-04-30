@@ -15,6 +15,22 @@ var services = angular.module('futureed.services', ['ngResource']);
 			});
 		}
 
+
+
+		/**
+		* Student Services
+		*/
+
+		futureedAPI.resendConfirmation = resendConfirmation;
+
+		function resendConfirmation(email, user_type) {
+			return $http({
+				method	: 'POST'
+				, data 	: {email : email, user_type : user_type}
+				, url	: futureedAPIUrl + 'user/confirmation/code'
+			});
+		}
+
 		futureedAPI.updateUserSession = function(user) {
 			return $http({
 				method	: 'POST',
@@ -70,10 +86,10 @@ var services = angular.module('futureed.services', ['ngResource']);
 			});
 		}
 
-		futureedAPI.confirmCode = function(code, email) {
+		futureedAPI.confirmCode = function(email, email_code, user_type) {
 			return $http({
 				method	: 'POST'
-				, data 	: {email : email, user_type : "Student", email_code : code}
+				, data 	: {email : email, email_code : email_code, user_type : user_type}
 				, url	: futureedAPIUrl + 'user/email/code'
 			});
 		}

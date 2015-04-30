@@ -32,6 +32,10 @@ body {/*background: radial-gradient(transparent 50%, rgba(0, 0, 0, 0.3) 100%), l
 	min-height: 90%;
 }
 
+.logo-container {
+	padding: 5px 0px 25px 0px;
+}
+
 /*----- TYPOGRAPHY -----*/
 .thin { font-weight: 100; }
 .bold { font-weight: bold; }
@@ -79,23 +83,29 @@ body {/*background: radial-gradient(transparent 50%, rgba(0, 0, 0, 0.3) 100%), l
 	margin-bottom: 10px;
 }
 
+.btn-container {
+	text-align: center;
+}
+
+.btn-container .btn{
+	margin: 0px 10px;
+}
+
 .btn-small {
 	width: 20%;
 }
 
 .btn-medium {
-	width: 30%;
+	width: 40%;
 }
 
 .btn-large {
-	width: 70%;
+	width: 60%;
 }
 
 .btn-fit {
 	width: 100%;
 }
-
-
 
 .btn:hover { color: #ccc; }
 .btn-red {
@@ -165,7 +175,6 @@ body {/*background: radial-gradient(transparent 50%, rgba(0, 0, 0, 0.3) 100%), l
 
 .form-select-password { padding-bottom: 30px; text-align: center; }
 .form-select-password.clearfix { min-height:450px; }
-.form-select-password .btn { width: 70%; margin-top: 30px; line-height: 30px; }
 .form-select-password .form_password .item { 
 	text-align: center; 
 	margin-bottom: 15px;
@@ -694,19 +703,10 @@ footer{font:normal 12px/30px arial; }
 	line-height: 30px;
 }
 
-.btn-container {
-	text-align: center;
-}
-
-.btn-container > .btn {
-	width: 60%;
-	margin: 5px !important;
-  	padding: 10px !important;
-}
-
 /*
 * Client css
 */
+
 
 .client {
 
@@ -723,4 +723,15 @@ footer{font:normal 12px/30px arial; }
 
 .client .footer .text-muted {
 	color: #B7BDBD;
+}
+
+.role {
+	opacity: 0.3;
+	-webkit-transition: width 2s, height 4s; /* For Safari 3.1 to 6.0 */
+    transition: width 2s, height 4s;
+}
+
+.role-div {
+	-webkit-transition:all linear 0.5s;
+  	transition:all linear 0.5s;
 }

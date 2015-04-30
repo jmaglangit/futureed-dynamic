@@ -17,10 +17,10 @@
             </div>
             <input placeholder="Email or Username" type="text" ng-model="username" />
           </div>
-          <button type="button" class="btn btn-blue" ng-click="forgotPassword()" ng-disabled="disabled">
-            <i ng-if="disabled" class="fa fa-spinner fa-spin"></i> SEND 
-          </button>
-          <a href="{!! route('client.login') !!}" class="btn btn-gold" ng-disabled="disabled">Cancel</a>
+          <div class="btn-container">
+            <a type="button" class="btn btn-blue btn-medium" ng-click="forgotPassword()"> SEND </a>
+            <a type="button" class="btn btn-gold btn-medium" href="{!! route('client.login') !!}"> Cancel </a>
+          </div>
         </form>
       </div>
     </div>

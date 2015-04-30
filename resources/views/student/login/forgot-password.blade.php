@@ -14,15 +14,16 @@
             <div class="icon">
               <i class="fa fa-user"></i>
             </div>
-            <input type="text" class="form-control" name="username" ng-model="username" autocomplete="off" required>
+            <input placeholder="Username or Email" type="text" class="form-control" name="username" ng-model="username" autocomplete="off" />
           </div>
-
-            <button type="button" class="btn btn-red" ng-click="forgotPassword(username)" ng-disabled="disabled">SEND</button>
-            <a href="{!! route('student.login') !!}" class="btn btn-purple">Cancel</a>
+          <div class="btn-container">
+            <a type="button" class="btn btn-red btn-medium" ng-click="forgotPassword()">SEND</a>
+            <a href="{!! route('student.login') !!}" class="btn btn-purple btn-medium">Cancel</a>
+          </div>
         </form>
       </div>
 
-      <div class="form-style form-select-password" ng-if="sent">
+      <div class="form-style" ng-if="sent">
       <form name="success_form" id="success_form" 
             action="{!! route('student.login.reset_password') !!}" method="POST">
         <div class="form_content">
@@ -47,11 +48,14 @@
               </div>
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" ng-model="reset_code" name="reset_code" placeholder="Reset Code" required />
+              <input type="text" class="form-control" ng-model="reset_code" name="reset_code" placeholder="Reset Code" autocomplete="off" />
               <input type="hidden" ng-model="id" name="id" required />
             </div>
-            <button type="button" class="btn btn-red" ng-click="validateCode(reset_code)">PROCEED</button>
-            <button type="button" ng-disabled="disabled" class="btn" ng-click="resendCode()">Resend Code</button>
+            <div class="btn-container">
+              <button type="button" ng-disabled="disabled" class="btn btn-red btn-medium" ng-click="validateCode(reset_code)">PROCEED</button>
+              <button type="button" ng-disabled="disabled" class="btn btn-purple btn-medium" ng-click="resendCode()">Resend Code</button>  
+            </div>
+            
           </div>
         </form>
       </div>

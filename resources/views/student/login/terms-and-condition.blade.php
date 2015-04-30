@@ -9,7 +9,7 @@
         </div>
         <div class="modal-footer">
         	<div class="btncon col-md-8 col-md-offset-4 pull-left">
-            	<button data-dismiss="modal" class="btn btn-gold btn-medium">Close</button>
+            	<button data-dismiss="modal" class="btn btn-purple btn-medium">Close</button>
         	</div>
         </div>
     </div>

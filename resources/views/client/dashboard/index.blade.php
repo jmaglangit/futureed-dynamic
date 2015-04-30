@@ -1,7 +1,7 @@
-@extends('student.app')
+@extends('client.app')
 
 @section('navbar')
-    @include('student.partials.main-nav')
+    @include('client.partials.main-nav')
 @stop
 
 @section('content')
@@ -9,6 +9,8 @@
 
   
 @stop
+
+@section('footer')
 
 @overwrite
 

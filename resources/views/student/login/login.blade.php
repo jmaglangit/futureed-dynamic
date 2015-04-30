@@ -9,6 +9,9 @@
 
         <div ng-show="!locked && !enter_pass">
           <form id="login_form" name="login_form" method="POST">
+            <div class="logo-container">
+              <img src="/images/logo-md.png" />
+            </div>
             <div class="title">Enter Your Username or Email</div>
             <div class="error" ng-if="error">
               <p>{! error !}</p>

@@ -132,14 +132,13 @@
 	                            <input type="text" class="form-control" ng-model="prof.state" ng-disabled="!edit">
 	                        </div>
 	                    </div>
-	                    <div class="form-group">
+	                    <div class="form-group" ng-init="getCountries()">
 	                        <label for="" class="col-md-2 control-label">Country <span class="required">*</span></label>
 	                        <div class="col-md-5">
 	                            <select class="form-control" ng-model="prof.country" ng-disabled="!edit">
 	                                <option selected="selected" value="">-- Select Country --</option>
-	                                <option ng-selected="{! prof.country == 'Philippines' !}" value="Philippines">Philippines</option>
-	                                <option ng-selected="{! prof.country == 'Singapore' !}"value="Singapore">Singapore</option>
-	                                <option ng-selected="{! prof.country == 'United States' !}"value="United States">United States</option>
+	                                <option ng-repeat="country in countries" value="{! country.id !}" 
+	                                	ng-selected="{! prof.country == country.id !}">{! country.name !}</option>
 	                            </select>
 	                        </div>
 	                    </div>
