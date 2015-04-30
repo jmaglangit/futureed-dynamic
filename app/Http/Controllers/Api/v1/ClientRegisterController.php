@@ -27,7 +27,7 @@ class ClientRegisterController extends ClientController {
 
             $error_msg = config('futureed-error.error_messages');
 
-            if($client['client_role'] == config('futureed.teacher')){
+            if(strtolower($client['client_role']) == strtolower(config('futureed.teacher'))){
 
                 $this->addMessageBag($this->setErrorCode(2234)
                                 ->setField('client_role')
@@ -43,28 +43,25 @@ class ClientRegisterController extends ClientController {
         	$this->addMessageBag($this->checkPassword($user,'password'));
 
 
-            if($client['client_role'] == config('futureed.parent')){
+            if(strtolower($client['client_role']) == strtolower(config('futureed.parent'))){
                 $this->addMessageBag($this->validateString($client,'street_address'));
                 $this->addMessageBag($this->validateString($client,'city'));
                 $this->addMessageBag($this->validateString($client,'state'));
                 $this->addMessageBag($this->validateString($client,'country'));
                 $this->addMessageBag($this->zipCode($client,'zip'));
-            }
-
-        	if($client['client_role'] == config('futureed.principal')){
-        		$this->addMessageBag($this->schoolName($school,'school_name'));
-        		$this->addMessageBag($this->schoolAddress($school,'school_address'));
-        		$this->addMessageBag($this->validateString($school,'school_state'));
-        		$this->addMessageBag($this->validateString($school,'school_country'));
-        		$this->addMessageBag($this->zipCode($school,'school_zip'));
+            }else{
+                $this->addMessageBag($this->schoolName($school,'school_name'));
+                $this->addMessageBag($this->schoolAddress($school,'school_address'));
+                $this->addMessageBag($this->validateString($school,'school_state'));
+                $this->addMessageBag($this->validateString($school,'school_country'));
+                $this->addMessageBag($this->zipCode($school,'school_zip'));
 
                 $this->addMessageBag($this->validateStringOptional($client,'street_address'));
                 $this->addMessageBag($this->validateStringOptional($client,'city'));
                 $this->addMessageBag($this->validateStringOptional($client,'state'));
                 $this->addMessageBag($this->validateStringOptional($client,'country'));
                 $this->addMessageBag($this->zipCodeOptional($client,'zip'));
-        	}
-
+            }
         	
         	$email_check = $this->client->checkClientEmail($user);
 
