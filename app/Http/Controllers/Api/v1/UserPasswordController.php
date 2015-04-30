@@ -83,19 +83,13 @@ class UserPasswordController extends UserController {
                     
                 }else{
                     
-                    return $this->setStatusCode(201)
-                                ->respondWithData(['error_code' => 201,
-                                                    'message' => 'invalid username/email'
-                                                 ]);
+                    return $this->respondErrorMessage(2011);
                          
                 }
                 
           }else{
             
-             return $this->setStatusCode(201)
-                         ->respondWithData(['error_code' => 201,
-                                            'message'=>'user does not exist'
-                                          ]);
+             return $this->respondErrorMessage(2011);
           }
         }
 

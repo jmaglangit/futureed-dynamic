@@ -29,8 +29,7 @@ class SchoolRepository implements SchoolRepositoryInterface{
 		return School::where('code','=',$school_code)->pluck('name');
 	}
 
-	public function addSchool($school){
-
+	public function addSchool($school){		
 		$code = $code = Carbon::now()->timestamp;
 		try{
 			School::insert([
