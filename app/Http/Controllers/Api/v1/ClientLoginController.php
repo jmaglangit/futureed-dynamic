@@ -29,10 +29,9 @@ class ClientLoginController extends ClientController {
         //check username and password
         $response =$this->user->checkLoginName($input['username'], 'Client');
 
-        if($response['status'] <> true){
-
-            return $this->respondErrorMessage($response['data']);
-        }   
+        if($response['status'] <> 200){
+            return $this->respondErrorMessage(2001);
+        }
 
         //match username and password
         $input['password'] = sha1($input['password']);
@@ -40,7 +39,7 @@ class ClientLoginController extends ClientController {
 
         if(isset($return['error_code'])){
 
-            return $this->respondErrorMessage($return['error_code']);
+            return $this->respondWithError($return);
         }
 
         //check role of user if exist
@@ -66,7 +65,7 @@ class ClientLoginController extends ClientController {
                 'first_name' => $client_detail['first_name'],
                 'last_name' => $client_detail['last_name'],
                 'access_token' => $token['access_token']
-                ]);
+        ]);
     }
 
 }
