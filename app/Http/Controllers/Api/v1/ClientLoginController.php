@@ -28,11 +28,11 @@ class ClientLoginController extends ClientController {
         $err_msg = config('futureed-error.error_messages');
         //check username and password
         $response =$this->user->checkLoginName($input['username'], 'Client');
-        if($response['status'] <> 200){
-            return $this->setStatusCode($response['status'])
-                ->respondWithData(['error_code'=>$response['status'],'message'=>$response['data']]);
-        }
 
+        if($response['status'] <> true){
+
+            return $this->respondErrorMessage($response['data']);
+        }   
 
         //match username and password
         $input['password'] = sha1($input['password']);
@@ -40,7 +40,7 @@ class ClientLoginController extends ClientController {
 
         if(isset($return['error_code'])){
 
-            return $this->respondWithError($return);
+            return $this->respondErrorMessage($return['error_code']);
         }
 
         //check role of user if exist
@@ -62,14 +62,11 @@ class ClientLoginController extends ClientController {
         );
 
         return $this->respondWithData([
-            'status' => 200,
-            'data' => [
                 'user_id' => $client_detail['user_id'],
                 'first_name' => $client_detail['first_name'],
                 'last_name' => $client_detail['last_name'],
                 'access_token' => $token['access_token']
-            ]
-        ]);
+                ]);
     }
 
 }

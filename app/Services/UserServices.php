@@ -106,27 +106,25 @@ class UserServices {
        if($this->validator->email($username)){
            //check email if exist return id
            $return = $this->users->checkEmail($username, $user_type);
-
-
             if(!is_null($return)){
 
                 $is_disabled = $this->checkUserDisabled($return);
                 if(!$is_disabled){
 
                     return [
-                        'status' => 200,
+                        'status' => true,
                         'data' => $return
                     ];
                 } else {
                     return [
-                        'status' => 202,
+                        'status' => false,
                         'data' => $is_disabled
                     ];
                 }
             } else {
                 return [
-                    'status' => 202,
-                    'data' => "Email does not Exist"
+                    'status' => false,
+                    'data' => 2002
                 ];
             }
        }elseif($this->validator->username($username)){
@@ -139,25 +137,25 @@ class UserServices {
                if(!$is_disabled){
 
                    return [
-                       'status' => 200,
+                       'status' => true,
                        'data' => $return
                    ];
                } else {
                    return [
-                       'status' => 202,
+                       'status' => false,
                        'data' => $is_disabled
                    ];
                }
            } else {
                return [
-                   'status' => 202,
-                   'data' => "Username does not exist"
+                   'status' => false,
+                   'data' => 2001
                ];
            }
        } else{
            return [
-               'status' => 202,
-               'data' => "Invalid Username"
+               'status' => false,
+               'data' => 2003
            ];
        }
     }
@@ -170,8 +168,7 @@ class UserServices {
 
         if(is_null($return)){
             return [
-                'error_code' => 204,
-                'message' => 'Invalid Password'
+                'error_code' => 2303,
             ];
         }
 
@@ -244,15 +241,17 @@ class UserServices {
     }
     //check user if enable to login.
     public function checkUserDisabled($id){
+
         if($this->users->accountActivated($id) == 0 ){
             //check if activated
-            return "Account Inactive";
+            return 2300;
+
         } elseif($this->users->accountLocked($id) == 1){
             //check if locked
-            return "Account Locked";
+            return 2301;
         } elseif($this->users->accountDeleted($id) == 1 ){
             //check if delete
-            return "Account Deleted";
+            return 2302;
         } else {
             return false;
         }
