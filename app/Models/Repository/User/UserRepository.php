@@ -48,7 +48,6 @@ class UserRepository implements UserRepositoryInterface {
 
 
     public function addUser($user){
-
         try{
 
             User::create([
@@ -56,6 +55,7 @@ class UserRepository implements UserRepositoryInterface {
                 'email' => $user['email'],
                 'name' => $user['first_name'] .' '.$user['last_name'],
                 'user_type' => $user['user_type'],
+                'password' => (isset($user['password'])) ? sha1($user['password']) : null,
                 'confirmation_code' => $user['confirmation_code'],
                 'confirmation_code_expiry' => $user['confirmation_code_expiry'],
                 'created_by' => 1,
@@ -256,6 +256,20 @@ class UserRepository implements UserRepositoryInterface {
         } catch (Exception $e){
             throw new Exception($e->getMessage());
         }
+    }
+
+    public function updatePassword($id,$password){
+
+        try{
+
+            User::where('id',$id)->update([
+                'password' => $password
+            ]);
+
+        } catch (Exception $e){
+            throw new Exception($e->getMessage());
+        }
+
     }
 
 

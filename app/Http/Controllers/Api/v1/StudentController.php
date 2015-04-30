@@ -93,8 +93,9 @@ class StudentController extends ApiController {
         }
 
         $this->student->updateStudentDetails($id,$input);
+        $return = $this->student->getStudentDetails($id);
 
-        return $this->respondWithData(['id'=>$id]);
+        return $this->respondWithData($return);
 
 	}
 

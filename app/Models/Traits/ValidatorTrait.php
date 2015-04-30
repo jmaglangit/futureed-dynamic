@@ -11,4 +11,6 @@ namespace FutureEd\Models\Traits;
 
 trait ValidatorTrait {
 
+
+
 }

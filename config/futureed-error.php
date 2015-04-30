@@ -2,7 +2,8 @@
 
 
 return [
-    'error_messages' => [
+
+     'error_messages' => [
         //Field error codes
         1001 => "Required field not found.",
         1002 => "Required field empty.",
@@ -29,5 +30,11 @@ return [
         2102 => 'Access token expired',
         2103 => 'Invalid confirmation code',
 
-    ],
+
+        ]
+
+
+       
+
+
 ];

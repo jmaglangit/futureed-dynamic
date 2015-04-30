@@ -1,5 +1,6 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
+use FutureEd\Http\Controllers\Api\Traits\ClientValidatorTrait;
 use FutureEd\Http\Controllers\Api\v1\ClientController;
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
@@ -9,20 +10,22 @@ use Illuminate\Support\Facades\Input;
 
 class ClientLoginController extends ClientController {
 
+    use ClientValidatorTrait;
+
 	public function login(){
         $input = Input::only('username','password','role');
 
+        $this->addMessageBag($this->validateLoginField($input,'username'));
+        $this->addMessageBag($this->validateLoginField($input,'password'));
+        $this->addMessageBag($this->clientRole($input,'role'));
 
+        $msg_bag = $this->getMessageBag();
 
-        if(!$input['username'] || !$input['password'] || !$input['role']){
+            if(!empty($msg_bag)){
+                return $this->setStatusCode(200)->respondWithError($msg_bag);
+            } 
 
-            return $this->setStatusCode(200)->respondWithError([
-                'error_code' => 204,
-                'message' => 'Incomplete parameter requirements'
-            ]);
-
-        }
-
+        $err_msg = config('futureed-error.error_messages');
         //check username and password
         $response =$this->user->checkLoginName($input['username'], 'Client');
         if($response['status'] <> 200){
@@ -32,6 +35,7 @@ class ClientLoginController extends ClientController {
 
 
         //match username and password
+        $input['password'] = sha1($input['password']);
         $return  = $this->user->checkPassword($response['data'],$input['password']);
 
         if(isset($return['error_code'])){
@@ -44,10 +48,7 @@ class ClientLoginController extends ClientController {
 
         if(is_null($client_role)){
 
-            return $this->respondWithError([
-                'error_code' => 204,
-                'message' => 'Client does not exist'
-            ]);
+            return $this->respondErrorMessage(2001);
         }
 
 

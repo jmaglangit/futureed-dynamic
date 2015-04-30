@@ -125,7 +125,7 @@ class UserServices {
                 }
             } else {
                 return [
-                    'status' => 202,
+                    'status' => 2002,
                     'data' => "Email does not Exist"
                 ];
             }
@@ -364,6 +364,11 @@ class UserServices {
     public function updateConfirmationCode($id,$code){
 
         $this->users->updateConfirmationCode($id,$code);
+    }
+
+    public function updatePassword($id,$password){
+
+        $this->users->updatePassword($id,$password);
     }
 
 

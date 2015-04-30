@@ -89,6 +89,8 @@ Routes::group(['prefix' => 'api/v1'], function()
 
     //client
     Routes::post('/client/login','Api\v1\ClientLoginController@login');
+    Routes::post('/client/register','Api\v1\ClientRegisterController@register');
+    Routes::post('/client/password/{id}','Api\v1\ClientPasswordController@changePassword');
 
     //countries
     Routes::resource('/countries','Api\v1\CountryController',
