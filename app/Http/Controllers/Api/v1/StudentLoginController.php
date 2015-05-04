@@ -114,7 +114,7 @@ class StudentLoginController extends StudentController {
      * param id, image password
      * response success/fail
      */
-    public function password(){
+    public function loginPassword(){
 
         $error_msg = config('futureed-error.error_messages');
         //check email and password matched
