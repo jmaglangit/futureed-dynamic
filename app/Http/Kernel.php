@@ -26,7 +26,8 @@ class Kernel extends HttpKernel {
 	protected $routeMiddleware = [
 		'auth' => 'FutureEd\Http\Middleware\Authenticate',
 		'auth.basic' => 'Illuminate\Auth\Middleware\AuthenticateWithBasicAuth',
-		'guest' => 'FutureEd\Http\Middleware\RedirectIfAuthenticated',
+		'student' => 'FutureEd\Http\Middleware\StudentMiddleware',		
+		'client' => 'FutureEd\Http\Middleware\ClientMiddleware',		
 	];
 
 }

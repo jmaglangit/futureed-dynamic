@@ -62,8 +62,8 @@
 				      </form>
 				    </div>
 				    <div class="btn-container" ng-if="!has_avatar">
-				        <button type="button" class="btn btn-red" ng-click="selectAvatar()">Proceed</button>
-				        <a href="{!! route('student.profile.index') !!}" class="btn btn-purple">Cancel</a>
+				        <a type="button" class="btn btn-red btn-medium" ng-click="selectAvatar()">Proceed</a>
+				        <a href="{!! route('student.profile.index') !!}" class="btn btn-purple btn-medium">Cancel</a>
 			      	</div>
 				</div>
 			</div>

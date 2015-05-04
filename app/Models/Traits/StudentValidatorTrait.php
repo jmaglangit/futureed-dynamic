@@ -2,13 +2,13 @@
 /**
  * Created by PhpStorm.
  * User: jason
- * Date: 4/29/15
- * Time: 12:05 PM
+ * Date: 4/30/15
+ * Time: 1:52 PM
  */
 
 namespace FutureEd\Models\Traits;
 
 
-trait ErrorMessagsTrait {
+trait StudentValidatorTrait {
 
 }

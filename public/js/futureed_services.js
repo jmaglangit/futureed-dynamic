@@ -6,12 +6,45 @@ var services = angular.module('futureed.services', ['ngResource']);
 		var futureedAPIUrl = '/api/v1/';
 
 		futureedAPI.clientLogin = clientLogin;
+		futureedAPI.registerClient = registerClient;
+		futureedAPI.resetClientPassword = resetClientPassword;
 
 		function clientLogin(username, password, role) {
 			return $http({
 				method	: 'POST'
 				, data 	: {username : username, password : password, role : role}
 				, url	: futureedAPIUrl + 'client/login'
+			});
+		}
+
+		function registerClient(data) {
+			return $http({
+				method	: 'POST'
+				, data	: data
+				, url 	: futureedAPIUrl + 'client/register'
+			});
+		}
+
+		function resetClientPassword(id, reset_code, password) {
+			return $http({
+				method 	: 'POST'
+				, data 	: {reset_code : reset_code, password : password}
+				, url	: futureedAPIUrl + 'client/password/' + id
+			});
+		}
+
+
+		/**
+		* Student Services
+		*/
+
+		futureedAPI.resendConfirmation = resendConfirmation;
+
+		function resendConfirmation(email, user_type) {
+			return $http({
+				method	: 'POST'
+				, data 	: {email : email, user_type : user_type}
+				, url	: futureedAPIUrl + 'user/confirmation/code'
 			});
 		}
 
@@ -54,26 +87,27 @@ var services = angular.module('futureed.services', ['ngResource']);
 			});
 		}
 
-		futureedAPI.forgotPassword = function(username) {
+		futureedAPI.forgotPassword = function(username, user_type) {
 			return $http({
 				method 	: 'POST'
-				, data	: {username: username, user_type : "Student"}
+				, data	: {username: username, user_type : user_type}
 				, url	: futureedAPIUrl + 'user/password/forgot'
 			});
 		}
 
-		futureedAPI.validateCode = function(code, email) {
+		futureedAPI.validateCode = function(code, email, user_type) {
 			return $http({
 				method	: 'POST'
-				, data 	: {email : email, user_type : "Student", reset_code : code}
-				, url	: futureedAPIUrl + 'student/password/code'
+				, data 	: {email : email, user_type : user_type, reset_code : code}
+				, url	: futureedAPIUrl + 'user/password/code'
 			});
 		}
 
-		futureedAPI.confirmCode = function(code, email) {
+		// Student Please
+		futureedAPI.confirmCode = function(email, email_code, user_type) {
 			return $http({
 				method	: 'POST'
-				, data 	: {email : email, user_type : "Student", email_code : code}
+				, data 	: {email : email, email_code : email_code, user_type : user_type}
 				, url	: futureedAPIUrl + 'user/email/code'
 			});
 		}
@@ -108,18 +142,20 @@ var services = angular.module('futureed.services', ['ngResource']);
 			});
 		}
 
-		futureedAPI.validateUsername = function(username) {
+		// Student Please
+		futureedAPI.validateUsername = function(username, user_type) {
 			return $http({
 				method 	: 'POST'
-				, data 	: {username : username, user_type : "Student"}
+				, data 	: {username : username, user_type : user_type}
 				, url 	: futureedAPIUrl + 'user/username'
 			});
 		}
 
-		futureedAPI.validateEmail = function(email) {
+		// Student Please
+		futureedAPI.validateEmail = function(email, user_type) {
 			return $http({
 				method	: 'POST'
-				, data 	: {email : email, user_type : "Student"}
+				, data 	: {email : email, user_type : user_type}
 				, url	: futureedAPIUrl + 'user/email'
 			});
 		}
@@ -184,7 +220,6 @@ var services = angular.module('futureed.services', ['ngResource']);
 
 	services.factory("httpInterceptor", function($q) {
 	    return {
-	      // optional method
 	     'responseError': function(rejection) {
 	        $("html, body").animate({ scrollTop: 0 }, "slow");
 	        return $q.reject(rejection);

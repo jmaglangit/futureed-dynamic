@@ -21,7 +21,7 @@
           <div class="error" ng-if="error">
             <p>{! error !}</p>
           </div>
-        {!! Form::open() !!}
+          <form id="login_form" action="{!! route('client.login.process') !!}" method="POST" action>
           <!-- <span>Email or Username</span> -->
           <div class="input">
             <div class="icon">
@@ -44,6 +44,8 @@
             </div>
             {!! Form::select('', array('' => '-- Select Role --', 'Parent' => 'Parent', 'Teacher' => 'Teacher', 'Principal' => 'Principal'), '', array('class' => 'form-control', 'ng-model' => 'role')); !!}
           </div>
+
+          <input type="hidden" name="user_data" >
           <button type="button" class="btn btn-blue" ng-click="clientLogin()">LOGIN</button>
 
           <div class="text-group">

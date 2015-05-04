@@ -31,22 +31,25 @@
   <![endif]-->
   @yield('styles')
 </head>
-<body class="client" ng-controller="futureedController">
+<body class="client" ng-controller="futureedController" ng-init="getUserDetails()">
+  <textarea id="userdata" name="hide" style="display:none;">{!! Session::get('user') !!}</textarea>
   <a id="top"></a>
   
   @yield('navbar')
 
 	@yield('content')
 
-
-	<footer class="footer">
-	  <div class="container text-center">
-	    <p class="text-muted">{{ date('Y') }} &copy; All Rights Reserved. FutureEd Pte Ltd</p>
-	  </div>
-	</footer>
+  @section('footer')
+    <footer class="footer">
+      <div class="container text-center">
+        <p class="text-muted">{{ date('Y') }} &copy; All Rights Reserved. FutureEd Pte Ltd</p>
+      </div>
+    </footer>
+  @show
 
   <!-- START SCRIPTS -->
   {!! Html::script('/js/jquery.js') !!}
+  {!! Html::script('/js/ui-block.js') !!}
   {!! Html::script('//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js') !!}
   {!! Html::script('http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular.min.js') !!}
   {!! Html::script('http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular-resource.min.js') !!}
@@ -54,6 +57,7 @@
   {!! Html::script('/js/jquery.smooth-scroll.js') !!}
 
   {!! Html::script('/js/futureed.js') !!}
+  {!! Html::script('/js/futureed_utils.js') !!}
   {!! Html::script('/js/futureed_controllers.js') !!}
   {!! Html::script('/js/futureed_services.js') !!}
   {!! Html::script('/js/datetimepicker.js') !!}
@@ -62,27 +66,6 @@
   
   <script>
     $('a').smoothScroll();  
-  </script>
-  <script>
-    $("#user_principal").click(function() {
-      $("#principal, #form_schoolname, #form_address, #form_address2, #form_postcode").show( "slow");
-      $("#parent").hide("slow");
-      $("#user_teacher, #user_parent").fadeTo("slow", 0.3);
-      $(this).fadeTo("slow", 1);
-    });
-    $("#user_teacher").click(function() {
-      $("#form_address, #form_address2, #form_postcode" ).hide( "slow");
-      $("#parent").hide("slow");
-      $("#principal, form_schoolname").show("slow");
-      $("#user_principal, #user_parent").fadeTo("slow", 0.3);
-      $(this).fadeTo("slow", 1);
-    });
-    $("#user_parent").click(function() {
-      $("#principal").hide("slow");
-      $("#parent").show("slow");
-      $("#user_principal, #user_teacher").fadeTo("slow", 0.3);
-      $(this).fadeTo("slow", 1);
-    });
   </script>
   <!-- END SCRIPTS -->
 </body></html>

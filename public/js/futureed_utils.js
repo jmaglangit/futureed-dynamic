@@ -47,3 +47,11 @@ function getTarget(e) {
 
   return target;
 }
+
+function isStringNullorEmpty(string) {
+  if(string == null || string.trim().length == 0) {
+    return true;
+  }
+
+  return false;
+}
