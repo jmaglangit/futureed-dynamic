@@ -209,6 +209,7 @@ class ClientController extends ApiController {
 					$this->addMessageBag($this->validateStringNotReq($client,'country'));
 					$this->addMessageBag($this->validateStringNotReq($client,'state'));
 					$this->addMessageBag($this->zipCodeNotReq($client,'zip'));
+					
 					$this->addMessageBag($this->validateString($school,'school_name'));
 					$this->addMessageBag($this->validateString($school,'school_state'));
 					$this->addMessageBag($this->validateString($school,'school_country'));
