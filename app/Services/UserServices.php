@@ -228,10 +228,7 @@ class UserServices {
         $return = $this->users->checkUserName($username,$user_type);
 
         if(is_null($return)){
-            return [
-                'error_code' => 2001,
-                'message' => $error_msg[2001]
-            ];
+            return false;
         }
 
         return [

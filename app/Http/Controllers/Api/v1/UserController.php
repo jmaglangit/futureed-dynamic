@@ -32,12 +32,10 @@ class UserController extends ApiController{
         }
 
         $return =  $this->user->checkUsername($username,$user_type);
-        
 
+        if(!$return){
 
-        if(isset($return['error_code'])){
-
-            return $this->respondWithError($return);
+            return $this->respondErrorMessage(2001);
 
         }elseif($input['user_type'] == 'Student'){
 
