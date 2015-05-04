@@ -215,10 +215,7 @@ class UserServices {
         $return =  $this->users->checkEmail($email,$user_type);
 
         if(is_null($return)){
-            return [
-                'error_code' => 2002,
-                'message' => $error_msg[2002]
-            ];
+            return false;
         }
         return [
             'status' => 200,
