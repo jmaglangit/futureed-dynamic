@@ -25,6 +25,8 @@ return [
         2009 => 'Avatar does not exist',
         2010 => 'Parent does not exist',
         2011 => 'Username and password is incorrect',
+        2012 => 'Picture password is incorrect',
+        2013 => 'Username or Email is invalid',
         
         2100 => 'Invalid reset code',
         2101 => 'Invalid password image',

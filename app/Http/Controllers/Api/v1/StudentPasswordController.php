@@ -16,6 +16,58 @@ class StudentPasswordController extends StudentController {
         $response = $this->password_image->getNewPasswordImages();
         return $this->respondWithData($response['data']);
     }
+
+    //check password if correct
+    public function confirmPassword($id){
+
+        $input = Input::only('password_image_id');
+        $error_msg = config('futureed-error.error_messages');
+
+
+        $this->addMessageBag($this->validateNumber($input,'password_image_id'));
+        $this->addMessageBag($this->validateVarNumber($id));
+
+        if($this->getMessageBag()){
+
+            return $this->respondWithError($this->getMessageBag());
+        }
+
+        //check user if enabled.
+            //get user id
+        $user = $this->student->getStudentReferences($id);
+        $is_disabled = $this->user->checkUserDisabled($user['user_id']);
+
+        if($is_disabled){
+
+            return $this->respondErrorMessage(2012);
+        }
+
+        //check student id and password_image_id if matched.
+        $response = $this->student->checkAccess($id,$input['password_image_id']);
+
+        if($response['status'] == 200){
+
+            //get student data
+            $response['data'] = $this->student->getStudentDetails($id);
+
+            $token = $this->token->getToken(
+                [
+                    'url' => Request::capture()->fullUrl(),
+                ]
+            );
+            $response['data'] = array_merge($response['data'],$token);
+
+        }
+
+        if($response['status'] <> 200){
+
+            return $this->respondErrorMessage(2012);
+
+        }elseif($response['status']==200){
+
+            return $this->respondWithData($response['data']);
+        }
+    }
     
     
     public function passwordReset(){
