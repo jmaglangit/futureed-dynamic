@@ -377,7 +377,7 @@ trait ApiValidatorTrait {
     }
 
 
-    public function validateStringNotReq($input,$field_name){
+    public function validateStringOptional($input,$field_name){
 
             $validator = Validator::make(
                 [
@@ -398,8 +398,8 @@ trait ApiValidatorTrait {
                     ->errorMessage();
             }
     }
-
-    public function zipCodeNotReq($input,$field_name){
+    
+    public function zipCodeOptional($input,$field_name){
 
             $validator = Validator::make(
                 [
