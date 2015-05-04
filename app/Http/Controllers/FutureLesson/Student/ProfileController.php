@@ -26,6 +26,10 @@ class ProfileController extends Controller {
 		return view('student.profile.change_avatar', ['active' => 'avatar']);
 	}
 
+	public function edit_email(){
+		return view('student.profile.edit_email', ['active' => 'email']);
+	}
+
 	public function update_session() {
 		$user = Input::all();
 

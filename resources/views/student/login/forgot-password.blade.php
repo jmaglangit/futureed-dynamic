@@ -1,7 +1,7 @@
 @extends('student.app')
 
 @section('content')
-  <div class="container login" ng-cloak>
+  <div class="container login student-fnt" ng-cloak>
     <div class="col-md-6 col-md-offset-3">
       <div class="form-style" ng-show="!sent">
         <div class="title">Retrieve Password</div>
@@ -17,8 +17,8 @@
             <input placeholder="Username or Email" type="text" class="form-control" name="username" ng-model="username" autocomplete="off" />
           </div>
           <div class="btn-container">
-            <a type="button" class="btn btn-red btn-medium" ng-click="studentForgotPassword()">SEND</a>
-            <a href="{!! route('student.login') !!}" class="btn btn-purple btn-medium">Cancel</a>
+            <a type="button" class="btn btn-maroon btn-medium" ng-click="studentForgotPassword()">SEND</a>
+            <a href="{!! route('student.login') !!}" class="btn btn-gold btn-medium">Cancel</a>
           </div>
         </form>
       </div>

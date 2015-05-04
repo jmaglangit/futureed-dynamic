@@ -88,6 +88,11 @@
 					, 'middleware' => 'student'
 					, 'uses' => $base . '\ProfileController@change_avatar'
 				]);
+			Routes::get('/edit-email', [
+					'as' => 'student.profile.edit_email'
+					, 'middleware' => 'student'
+					, 'uses' => $base . '\ProfileController@edit_email'
+				]);
 		});
 	});
 ?>

@@ -1,7 +1,7 @@
 @extends('student.app')
 
 @section('content')
-<div class="container login" ng-cloak>
+<div class="container login student-fnt" ng-cloak>
     <div class="form-style register_student form-wide" ng-init="success={!! $success !!}" ng-show="!success"> 
         <form class="form-horizontal simple-form" name="form_registration" id="form_registation">
             <div class="form-header">

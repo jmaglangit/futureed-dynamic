@@ -917,4 +917,21 @@ function FutureedController($scope, $location, apiService) {
       $scope.error = response.errors.message;
     });
   }
+  $scope.saveEmail = saveEmail;
+
+
+  function saveEmail(email) {
+    $scope.error = "";
+    $scope.success_msg = "";
+
+    if($scope.e_error || $scope.u_error) {
+      $scope.error = "";
+      $("html, body").animate({ scrollTop: 350 }, "slow");
+
+    } else if ($scope.current_email == null || $scope.email_new == null || $scope.email_confirm == null) {
+      $scope.error = "Please fill the required fields"
+    }
+
+    $("html, body").animate({ scrollTop: 0 }, "slow");
+  }
 };
