@@ -51,7 +51,7 @@ class UserServices {
         $check_mail = $this->users->checkEmail($user['email'],$user['user_type']);
         if(!is_null($check_mail)){
             $return = array_merge($return,[
-                'error_code' => 204,
+                'error_code' => 2200,
                 'message' => 'Email already exist'
             ]);
         }
@@ -59,7 +59,7 @@ class UserServices {
         $check_username = $this->users->checkUserName($user['username'],$user['user_type']);
         if(!is_null($check_username)){
             $return = array_merge($return,[
-                'error_code' => 204,
+                'error_code' => 2201,
                 'message' => 'Username already exist'
             ]);
         }
