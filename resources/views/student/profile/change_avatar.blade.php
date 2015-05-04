@@ -46,8 +46,10 @@
 				      <form id="change_avatar_form">
 				        <div class="form-select-password">
 				          <div id="title" class="title"></div>
-				          <div class="error" ng-if="error">
-				            <p>{! error !}</p>
+				          <div class="alert alert-danger" ng-if="errors">
+				            <p ng-repeat="error in errors" > 
+				              {! error !}
+				            </p>
 				          </div>
 				          <div class="form_content">
 				            <ul class="avatar_list list-unstyled list-inline" ng-init="getAvatarImages('true')">

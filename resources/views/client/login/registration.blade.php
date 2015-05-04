@@ -32,7 +32,7 @@
               <div class="form-group">
                 <label for="" class="col-md-2 control-label">Email<span class="required">*</span></label>
                 <div class="col-md-4">
-                  <input type="text" class="form-control" ng-model="reg.email" placeholder="Email Address"
+                  <input type="text" id="email" class="form-control" ng-model="reg.email" placeholder="Email Address"
                     ng-model-options="{debounce : {'default' : 1000}}" ng-change="checkEmailAvailability(reg.email, 'Client')"/>
                   <span ng-if="e_error" class="error-msg-con">{! e_error !}</span>
                   <div> 
@@ -43,7 +43,7 @@
                 
                 <label for="" class="col-md-2 control-label">Username<span class="required">*</span></label>
                 <div class="col-md-4">
-                  <input type="text" class="form-control" ng-model="reg.username" placeholder="Username"
+                  <input type="text" id="username" class="form-control" ng-model="reg.username" placeholder="Username"
                     ng-model-options="{debounce : {'default' : 1000}}" ng-change="checkAvailability(reg.username, 'Client')"/>
                   <span ng-if="u_error" class="error-msg-con">{! u_error !}</span>
                   <div> 
@@ -55,7 +55,7 @@
               <div class="form-group">
                 <label for="" class="col-md-2 control-label">Password<span class="required">*</span></label>
                 <div class="col-md-4">
-                  <input type="password" class="form-control" ng-model="reg.password" placeholder="Password" />
+                  <input type="password" id="password" class="form-control" ng-model="reg.password" placeholder="Password" />
                 </div>
                 <label for="" class="col-md-2 control-label">Confirm Password<span class="required">*</span></label>
                 <div class="col-md-4">
@@ -68,37 +68,37 @@
               <div class="form-group">
                 <label for="" class="col-md-2 control-label">First Name<span class="required">*</span></label>
                 <div class="col-md-4">
-                  <input type="text" class="form-control" ng-model="reg.first_name" placeholder="First Name" />
+                  <input type="text"  id="first_name" class="form-control" ng-model="reg.first_name" placeholder="First Name" />
                 </div>
                 <label for="" class="col-md-2 control-label">Last Name<span class="required">*</span></label>
                 <div class="col-md-4">
-                  <input type="text" class="form-control" ng-model="reg.last_name" placeholder="Last Name" />
+                  <input type="text"  id="last_name" class="form-control" ng-model="reg.last_name" placeholder="Last Name" />
                 </div>
               </div>   
               <div class="form-group" id="form_address">
                 <label for="" class="col-md-2 control-label">Street Address<span class="required">*</span></label>
                 <div class="col-md-6">
-                  <input type="text" class="form-control" ng-model="reg.street_address" placeholder="Street Address" />
+                  <input type="text"  id="street_address" class="form-control" ng-model="reg.street_address" placeholder="Street Address" />
                 </div>
               </div>
               <div class="form-group" id="form_address2">
                 <label for="" class="col-md-2 control-label">City<span class="required">*</span></label>
                 <div class="col-md-4">
-                  <input type="text" class="form-control" ng-model="reg.city" placeholder="City" />
+                  <input type="text"  id="city" class="form-control" ng-model="reg.city" placeholder="City" />
                 </div>
                 <label for="" class="col-md-2 control-label">State<span class="required">*</span></label>
                 <div class="col-md-4">
-                  <input type="text" class="form-control" ng-model="reg.state" placeholder="State" />
+                  <input type="text"  id="state" class="form-control" ng-model="reg.state" placeholder="State" />
                 </div>
               </div>   
               <div class="form-group" id="form_postcode">
                 <label for="" class="col-md-2 control-label">Zip Code<span class="required">*</span></label>
                 <div class="col-md-4">
-                  <input type="text" class="form-control" ng-model="reg.zip" placeholder="Postal Code" />
+                  <input type="text"  id="zip" class="form-control" ng-model="reg.zip" placeholder="Postal Code" />
                 </div>
                 <label for="" class="col-md-2 control-label">Country<span class="required">*</span></label>
                 <div class="col-md-4" ng-init="getCountries()">
-                  <select class="form-control" ng-model="reg.country">
+                  <select  id="country" class="form-control" ng-model="reg.country">
                     <option value="">-- Select Country --</option>
                     <option ng-repeat="country in countries" value="{! country.id !}">{! country.name!}</option>
                   </select>
@@ -111,7 +111,7 @@
                 <div class="form-group" id="form_schoolname">
                   <label for="" class="col-md-2 control-label">School Name<span class="required">*</span></label>
                   <div class="col-md-6">
-                    <input type="text" class="form-control" ng-model="reg.school_name" placeholder="School Name" />
+                    <input type="text" id="school_name" class="form-control" ng-model="reg.school_name" placeholder="School Name" />
                   </div>
                 </div>   
               </fieldset>
@@ -122,33 +122,33 @@
                 <div class="form-group" id="form_schoolname">
                   <label for="" class="col-md-2 control-label">School Name<span class="required">*</span></label>
                   <div class="col-md-6">
-                    <input type="text" class="form-control" ng-model="reg.school_name" placeholder="School Name" />
+                    <input type="text" id="school_name" class="form-control" ng-model="reg.school_name" placeholder="School Name" />
                   </div>
                 </div>
                 <div class="form-group" id="form_address">
                 <label for="" class="col-md-2 control-label">School Address<span class="required">*</span></label>
                 <div class="col-md-6">
-                  <input type="text" class="form-control" ng-model="reg.school_address" placeholder="School Address" />
+                  <input type="text" id="school_address" class="form-control" ng-model="reg.school_address" placeholder="School Address" />
                 </div>
               </div>
               <div class="form-group" id="form_address2">
                 <label for="" class="col-md-2 control-label">City<span class="required">*</span></label>
                 <div class="col-md-4">
-                  <input type="text" class="form-control" ng-model="reg.school_city" placeholder="City" />
+                  <input type="text"  id="school_city" class="form-control" ng-model="reg.school_city" placeholder="City" />
                 </div>
                 <label for="" class="col-md-2 control-label">State<span class="required">*</span></label>
                 <div class="col-md-4">
-                  <input type="text" class="form-control" ng-model="reg.school_state" placeholder="State" />
+                  <input type="text"  id="school_state" class="form-control" ng-model="reg.school_state" placeholder="State" />
                 </div>
               </div>   
               <div class="form-group" id="form_postcode">
                 <label for="" class="col-md-2 control-label">Zip Code<span class="required">*</span></label>
                 <div class="col-md-4">
-                  <input type="text" class="form-control" ng-model="reg.school_zip" placeholder="Postal Code" />
+                  <input type="text"  id="school_zip" class="form-control" ng-model="reg.school_zip" placeholder="Postal Code" />
                 </div>
                 <label for="" class="col-md-2 control-label">Country<span class="required">*</span></label>
                 <div class="col-md-4" ng-init="getCountries()">
-                  <select class="form-control" ng-model="reg.school_country">
+                  <select  id="school_country" class="form-control" ng-model="reg.school_country">
                     <option value="">-- Select Country --</option>
                     <option ng-repeat="country in countries" value="{! country.id !}">{! country.name!}</option>
                   </select>

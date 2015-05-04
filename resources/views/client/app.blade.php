@@ -56,6 +56,7 @@
   {!! Html::script('http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular-route.min.js') !!}
   {!! Html::script('/js/jquery.smooth-scroll.js') !!}
 
+  {!! Html::script('/js/futureed_constants.js') !!}
   {!! Html::script('/js/futureed.js') !!}
   {!! Html::script('/js/futureed_utils.js') !!}
   {!! Html::script('/js/futureed_controllers.js') !!}

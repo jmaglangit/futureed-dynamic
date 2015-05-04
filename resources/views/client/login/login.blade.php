@@ -18,8 +18,10 @@
 	        </div>
       	</div>
         <div class="title">Login to your account</div>
-          <div class="error" ng-if="error">
-            <p>{! error !}</p>
+          <div class="alert alert-danger" ng-if="errors">
+            <p ng-repeat="error in errors" > 
+              {! error !}
+            </p>
           </div>
           <form id="login_form" action="{!! route('client.login.process') !!}" method="POST" action>
           <!-- <span>Email or Username</span> -->

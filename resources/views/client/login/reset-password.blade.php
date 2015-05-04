@@ -5,8 +5,8 @@
     <div class="col-md-6 col-md-offset-1" ng-show="!success">
       <div class="form-style form-narrow">
         <div class="title">Reset Password</div>
-          <div class="error" ng-if="error">
-            <p>
+          <div class="alert alert-danger" ng-if="errors">
+            <p ng-repeat="error in errors" > 
               {! error !}
             </p>
           </div>
