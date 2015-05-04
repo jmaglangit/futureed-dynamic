@@ -7,29 +7,6 @@ trait ApiValidatorTrait {
     use ErrorMessageTrait;
     use MessageBagTrait;
 
-//    public $messageBag = [];
-//
-//    public function setMessageBag($message){
-//        $this->messageBag = $message;
-//        return $this;
-//    }
-//
-//    public function getMessageBag(){
-//        return $this->messageBag;
-//    }
-//
-//    public function addMessageBag($message){
-//
-//        if(empty($this->messageBag) && !empty($message)){
-//            $this->setMessageBag([$message]);
-//        } elseif(!empty($message) ) {
-//            $this->messageBag = array_merge(
-//                $this->getMessageBag(),
-//                [$message]
-//            );
-//        }
-//    }
-
     //Check parameters of the fields.
     public function parameterCheck($input, $paramName){
         $error_msg = config('futureed-error.error_messages');
