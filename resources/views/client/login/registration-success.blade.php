@@ -1,6 +1,12 @@
 <div class="register_users form-style col-sm-6 col-sm-offset-3" ng-if="registered && !success"> 
 	<div class="title">Thank you for registering to Future Lesson!</div>
-	<div class="error" ng-if="error">{! error !}</div>
+	
+    <div class="alert alert-danger" ng-if="errors">
+      <p ng-repeat="error in errors" > 
+        {! error !}
+      </p>
+    </div>
+            
 	<div class="form_content">
 		<div class="roundcon">
     		<i class="fa fa-check fa-5x img-rounded text-center"></i>

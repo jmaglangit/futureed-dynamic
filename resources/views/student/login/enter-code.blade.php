@@ -11,8 +11,10 @@
           <div class="title" ng-if="!resend">@if($show) Email Sent @else Enter Code @endif</div>
           <div class="title" ng-if="resend">Code Resent</div>
 
-          <div class="error" ng-if="error">
-            <p>{! error !}</p>
+          <div class="alert alert-danger" ng-if="errors">
+            <p ng-repeat="error in errors" > 
+              {! error !}
+            </p>
           </div>
 
           <div ng-if="{!! $show !!}">
@@ -34,8 +36,8 @@
               <input type="hidden" ng-model="id" name="id" required />
             </div>
             <div class="btn-container">
-              <a type="button" class="btn btn-red btn-medium" ng-click="validateCode(reset_code)">PROCEED</a>
-              <a type="button" ng-disabled="disabled" class="btn btn-purple btn-medium" ng-click="resendCode()">Resend Code</a>
+              <a type="button" class="btn btn-red btn-medium" ng-click="studentValidateCode(reset_code)">PROCEED</a>
+              <a type="button" ng-disabled="disabled" class="btn btn-purple btn-medium" ng-click="studentResendCode()">Resend Code</a>
             </div>
           </div>
         </form>

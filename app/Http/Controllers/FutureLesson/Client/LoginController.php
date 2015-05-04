@@ -56,10 +56,10 @@ class LoginController extends Controller {
 	{
 		$input = Input::only('email');
 
-		$sent = false;
+		$sent = "false";
 
 		if($input['email']) {
-			$sent = true;
+			$sent = "true";
 		}
 
 		return view('client.login.forgot-password', ['email' => $input['email'], 'sent' => $sent]);

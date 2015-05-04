@@ -8,22 +8,25 @@
         @include('student.login.enter-password')
 
         <div ng-show="!locked && !enter_pass">
-          <form id="login_form" name="login_form" method="POST">
+          {!! Form::open(array('id' => 'login_form', 'method' => 'POST')) !!}
             <div class="logo-container">
-              <img src="/images/logo-md.png" />
+              {!! Html::image('images/logo-md.png') !!}
             </div>
             <div class="title">Enter Your Username or Email</div>
-            <div class="error" ng-if="error">
-              <p>{! error !}</p>
+
+            <div class="alert alert-danger" ng-if="errors">
+              <p ng-repeat="error in errors" > 
+                {! error !}
+              </p>
             </div>
 
             <div class="form-group">
-              <input type="text" class="form-control" name="username" ng-model="username" autocomplete="off" required>
+              <input type="text" class="form-control" name="username" ng-model="username" autocomplete="off" />
             </div>
             <div class="form-group">
               <button type="button" ng-click="validateUser()" class="btn btn-red">Next</button>              
             </div>
-          </form>
+          {!! Form::close() !!}
           <div class="text-group">
             <small>Not a Student?</small>
             <small>Click <a href="{!! route('client.login') !!}">here</a> for Parent / Teacher / School Site</small>     
