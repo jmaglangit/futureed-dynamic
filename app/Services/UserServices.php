@@ -371,6 +371,11 @@ class UserServices {
         $this->users->updatePassword($id,$password);
     }
 
+    public function updateUsername($id,$username){
+
+        $this->users->updateUsername($id,$username);
+    }
+
 
     
 

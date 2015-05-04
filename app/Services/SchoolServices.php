@@ -45,4 +45,16 @@ class SchoolServices {
 
    }
 
+
+   public function checkSchoolNameExist($input){
+
+        return $this->school->checkSchoolNameExist($input);
+   }
+
+   public function updateSchoolDetails($input){
+
+        $this->school->updateSchoolDetails($input);
+
+   }
+
 }
