@@ -11,4 +11,27 @@ namespace FutureEd\Http\Controllers\Api\Traits;
 
 trait MessageBagTrait {
 
+    public $messageBag = [];
+
+    public function setMessageBag($message){
+        $this->messageBag = $message;
+        return $this;
+    }
+
+    public function getMessageBag(){
+        return $this->messageBag;
+    }
+
+    public function addMessageBag($message){
+
+        if(empty($this->messageBag) && !empty($message)){
+            $this->setMessageBag([$message]);
+        } elseif(!empty($message) ) {
+            $this->messageBag = array_merge(
+                $this->getMessageBag(),
+                [$message]
+            );
+        }
+    }
+
 }
