@@ -44,4 +44,14 @@ trait ErrorMessageTrait {
         ];
     }
 
+    public function errorMessageCommon(){
+
+        return [
+            'error_code' => $this->error_code,
+            'message' => $this->message
+        ];
+    }
+
+
+
 }
