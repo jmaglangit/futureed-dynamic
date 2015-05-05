@@ -11,10 +11,6 @@
             <img id="user_principal" ng-class="{role : !principal}" src="/images/user_principal.jpg" />
             <h4>Principal</h4>
           </div>
-          <div class="col-md-2" ng-click="selectRole('user_teacher')">
-            <img id="user_teacher" ng-class="{role : !teacher}" src="/images/user_teacher.jpg" />
-            <h4>Teacher</h4>
-          </div>
           <div class="col-md-2" ng-click="selectRole('user_parent')">
             <img id="user_parent" ng-class="{role : !parent}" src="/images/user_parent.jpg">
             <h4>Parent</h4>
@@ -105,17 +101,6 @@
                 </div>
               </div>
             </fieldset>
-            <div id="teacher" ng-if="teacher" class="role-div">
-              <fieldset>
-                <legend>School Information</legend>
-                <div class="form-group" id="form_schoolname">
-                  <label for="" class="col-md-2 control-label">School Name<span class="required">*</span></label>
-                  <div class="col-md-6">
-                    <input type="text" id="school_name" class="form-control" ng-model="reg.school_name" placeholder="School Name" />
-                  </div>
-                </div>   
-              </fieldset>
-            </div>
             <div id="principal" ng-if="principal" class="role-div">
               <fieldset>
                 <legend>School Information</legend>

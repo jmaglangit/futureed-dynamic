@@ -21,7 +21,12 @@
             </div>
 
             <div class="form-group">
-              <input type="text" class="form-control" name="username" ng-model="username" autocomplete="off" />
+              {!! Form::text('username', ''
+                  , array(
+                      'class' => 'form-control'
+                      , 'autocomplete' => 'off'
+                      , 'ng-model' => 'username')
+              ) !!}
             </div>
             <div class="form-group">
               <button type="button" ng-click="validateUser()" class="btn btn-red">Next</button>              

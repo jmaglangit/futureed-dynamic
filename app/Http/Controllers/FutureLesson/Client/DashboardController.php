@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class DashboardController extends Controller {
 
 	public function __construct() {
-		if(!Session::get('user')) {
+		if(!Session::get('client')) {
 			return redirect()->route('client.login')->send();
 		}
 	}

@@ -17,7 +17,6 @@
 			]);
 		Routes::get('/logout', [ 
 				'as' => 'student.logout'
-				, 'middleware' => 'student'
 				, 'uses' => 'FutureLesson\Student\LoginController@logout'
 			]);
 		Routes::post('/update-user-session', [ 
@@ -25,7 +24,8 @@
 				, 'uses' => 'FutureLesson\Student\ProfileController@update_session'
 			]);
 		
-		Routes::group(['prefix' => '/login'], function()
+		Routes::group([
+			  'prefix' => '/login'], function()
 		{
 			Routes::get('/', [ 
 					'as' => 'student.login'
@@ -50,42 +50,40 @@
 				]);
 		});
 
-		Routes::group(['prefix' => '/dashboard'], function()
+		Routes::group([
+			  'prefix' => '/dashboard'
+			, 'middleware' => 'student'], function()
 		{
 			Routes::get('/', [ 
 					'as' => 'student.dashboard.index'
-					, 'middleware' => 'student'
 					, 'uses' => 'FutureLesson\Student\DashboardController@index'
 				]);
 			Routes::get('/follow-up-registration', [ 
 					'as' => 'student.dashboard.follow_up_registration'
-					, 'middleware' => 'student'
 					, 'uses' => 'FutureLesson\Student\DashboardController@follow_up_registration'
 				]);
 		});
 
-		Routes::group(['prefix' => 'profile'], function()
+		Routes::group([
+			  'prefix' => 'profile'
+			, 'middleware' => 'student'], function()
 		{
 			$base = 'FutureLesson\Student';
 
 			Routes::get('/', [ 
 					'as' => 'student.profile.index'
-					, 'middleware' => 'student'
 					, 'uses' => $base . '\ProfileController@index'
 				]);
 			Routes::get('/rewards', [
 					'as' => 'student.profile.rewards'
-					, 'middleware' => 'student'
 					, 'uses' => $base . '\ProfileController@rewards'
 				]);
 			Routes::get('/change-password', [
 					'as' => 'student.profile.change_password'
-					, 'middleware' => 'student'
 					, 'uses' => $base . '\ProfileController@change_password'
 				]);
 			Routes::get('/change-avatar', [
 					'as' => 'student.profile.change_avatar'
-					, 'middleware' => 'student'
 					, 'uses' => $base . '\ProfileController@change_avatar'
 				]);
 		});
