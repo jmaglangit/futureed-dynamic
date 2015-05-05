@@ -9,16 +9,19 @@ use FutureEd\Services\TokenServices;
 use Illuminate\Support\Facades\Input;
 use FutureEd\Services\CodeGeneratorServices;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\MessageBag;
 
 
 class TokenController extends ApiController {
 
 
 
-    public function __construct( TokenServices $token, CodeGeneratorServices $codeGen, MailServices $mail){
+    public function __construct( TokenServices $token, CodeGeneratorServices $codeGen, MailServices $mail, MessageBag $messageBag){
         $this->token = $token;
         $this->codeGen = $codeGen;
         $this->mail = $mail;
+        $this->messageBag = $messageBag;
     }
 	/**
 	 * Display a listing of the resource.
@@ -69,15 +72,25 @@ class TokenController extends ApiController {
         $input = Input::only('name');
         $header = Request::header('access_token');
 
-        return $header;
-        if(is_null($input['name'])){
-            return 'Missing valid API paremeter';
-        } elseif(empty($input['name'])){
-            return 'Input valid name';
-        }
+        $this->messageBag->add('errors',
+            [
+                'error_code' => 12344,
+                'field' => 'field',
+                'message' => 'is required'
+            ]
+        );
+
+        $this->messageBag->add('errors',
+            [
+                'error_code' => 123232344,
+                'field' => 'fields',
+                'message' => 'are required'
+            ]
+        );
 
 
-
+        $errors = $this->messageBag->getMessageBag()->toJson();
+        return $errors;
     }
 
 

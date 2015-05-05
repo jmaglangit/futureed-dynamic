@@ -1,7 +1,7 @@
 @extends('student.app')
 
 @section('content')
-  <div class="container login" ng-cloak>
+  <div class="container login student-fnt" ng-cloak>
     <div ng-class="{ 'col-md-8 col-md-offset-2': enter_pass && !locked, 'col-md-6 col-md-offset-3': !enter_pass || locked }" >
       <div class="form-style">
         @include('student.login.account-locked')
@@ -21,10 +21,15 @@
             </div>
 
             <div class="form-group">
-              <input type="text" class="form-control" name="username" ng-model="username" autocomplete="off" />
+              {!! Form::text('username', ''
+                  , array(
+                      'class' => 'form-control'
+                      , 'autocomplete' => 'off'
+                      , 'ng-model' => 'username')
+              ) !!}
             </div>
             <div class="form-group">
-              <button type="button" ng-click="validateUser()" class="btn btn-red">Next</button>              
+              <button type="button" ng-click="validateUser()" class="btn btn-maroon">Next</button>              
             </div>
           {!! Form::close() !!}
           <div class="text-group">
@@ -32,8 +37,8 @@
             <small>Click <a href="{!! route('client.login') !!}">here</a> for Parent / Teacher / School Site</small>     
           </div>  
           <div class="text-group">
-            <small><a href="{!! route('student.login.forgot_password') !!}">Forgot your password?</a></small>
-            <p><a href="{!! route('student.registration') !!}" class="btn btn-purple">Sign Up</a></p>      
+            <small><a href="{!! route('student.login.forgot_password') !!}" class="student-forgot">Forgot your password?</a></small>
+            <p><a href="{!! route('student.registration') !!}" class="btn btn-gold">Sign Up</a></p>      
           </div>
         </div>
       </div>

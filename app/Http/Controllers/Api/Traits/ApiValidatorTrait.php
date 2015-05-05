@@ -5,29 +5,7 @@ use Illuminate\Support\Facades\Validator;
 trait ApiValidatorTrait {
 
     use ErrorMessageTrait;
-
-    public $messageBag = [];
-
-    public function setMessageBag($message){
-        $this->messageBag = $message;
-        return $this;
-    }
-
-    public function getMessageBag(){
-        return $this->messageBag;
-    }
-
-    public function addMessageBag($message){
-
-        if(empty($this->messageBag) && !empty($message)){
-            $this->setMessageBag([$message]);
-        } elseif(!empty($message) ) {
-            $this->messageBag = array_merge(
-                $this->getMessageBag(),
-                [$message]
-            );
-        }
-    }
+    use MessageBagTrait;
 
     //Check parameters of the fields.
     public function parameterCheck($input, $paramName){
@@ -235,6 +213,33 @@ trait ApiValidatorTrait {
                     ->errorMessage();
             }
     }
+
+    public function emailCode($input,$field_name){
+        $error_msg = config('futureed-error.error_messages');
+
+        $validator = Validator::make(
+            [
+                "$field_name" => strtolower($input["$field_name"]),
+            ],
+            [
+                "$field_name" => 'required|numeric'
+            ],
+            [
+                'required' => $error_msg[2015],
+                'numeric' => $error_msg[2016]
+            ]
+        );
+
+        if($validator->fails()){
+
+            $validator_msg = $validator->messages()->toArray();
+
+            return $this->setErrorCode(1009)
+                ->setField($field_name)
+                ->setMessage($validator_msg["$field_name"][0])
+                ->errorMessage();
+        }
+    }
     
     public function emptyUsername($input,$field_name){
         
@@ -332,6 +337,8 @@ trait ApiValidatorTrait {
                     ->errorMessage();
             }
     }
+
+
     public function checkPassword($input,$field_name){
 
             $validator = Validator::make(

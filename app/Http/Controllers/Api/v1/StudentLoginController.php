@@ -59,10 +59,7 @@ class StudentLoginController extends StudentController {
                 if($this->student->getAge($student_id) < 13){
                     
 
-                    return $this->respondWithError([
-                        'error_code' => 2008,
-                        'message' => $parent_message[2008],
-                    ]);
+                    return $this->respondErrorMessage(2008);
 
                 }else{
 			
@@ -148,10 +145,8 @@ class StudentLoginController extends StudentController {
         if($is_disabled){
 
             $response = [
-                'status' => 202,
-                'data' => $is_disabled
+                'status' => $is_disabled,
             ];
-
 
         } else {
 
@@ -175,7 +170,7 @@ class StudentLoginController extends StudentController {
 
         if($response['status'] <> 200){
 
-            return $this->respondErrorMessage(2004);
+            return $this->respondErrorMessage($response['status']);
 
         }elseif($response['status']==200){
 

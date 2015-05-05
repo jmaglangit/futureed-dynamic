@@ -26,11 +26,15 @@ class ProfileController extends Controller {
 		return view('student.profile.change_avatar', ['active' => 'avatar']);
 	}
 
+	public function edit_email(){
+		return view('student.profile.edit_email', ['active' => 'email']);
+	}
+
 	public function update_session() {
 		$user = Input::all();
 
-		Session::forget('user');
-		Session::put('user', json_encode($user));
+		Session::forget('student');
+		Session::put('student', json_encode($user));
 	}
 
 	public function getId() {
@@ -43,6 +47,6 @@ class ProfileController extends Controller {
 	}
 
 	public function getUserObject() {
-		return json_decode(Session::get('user'));
+		return json_decode(Session::get('student'));
 	}
 }

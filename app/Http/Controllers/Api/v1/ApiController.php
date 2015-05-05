@@ -150,12 +150,20 @@ class ApiController extends Controller {
 
         if(!is_null($error_code)){
 
-            return $this->respondWithError(
-                    [
-                        'error_code' => $error_code,
-                        'message' => $error_msg[$error_code]
-                    ]
-                );
+            $return = $this->setErrorCode($error_code)
+                    ->setMessage($error_msg[$error_code])
+                    ->errorMessageCommon();
+
+
+            $this->addMessageBag($return);
+
+            return $this->respondWithError($this->getMessageBag());
+//            return $this->respondWithError(
+//                    [
+//                        'error_code' => $error_code,
+//                        'message' => $error_msg[$error_code]
+//                    ]
+//                );
         }
 
     }

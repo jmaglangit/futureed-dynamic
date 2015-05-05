@@ -23,7 +23,7 @@
               {! error !}
             </p>
           </div>
-          <form id="login_form" action="{!! route('client.login.process') !!}" method="POST" action>
+          {!! Form::open(array('id' => 'login_form', 'route' => 'client.login.process', 'method' => 'POST')) !!}
           <!-- <span>Email or Username</span> -->
           <div class="input">
             <div class="icon">
@@ -58,7 +58,7 @@
             <small><a href="{!! route('client.login.forgot_password') !!}">Forgot your password?</a></small>  
           </div>
           <p><a href="{!! route('client.registration') !!}" class="fb btn btn-gold">Sign Up</a></p>
-        </form>
+        {!! Form::close() !!}
         
       </div>
     </div>

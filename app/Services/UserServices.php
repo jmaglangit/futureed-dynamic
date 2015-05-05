@@ -51,7 +51,7 @@ class UserServices {
         $check_mail = $this->users->checkEmail($user['email'],$user['user_type']);
         if(!is_null($check_mail)){
             $return = array_merge($return,[
-                'error_code' => 204,
+                'error_code' => 2200,
                 'message' => 'Email already exist'
             ]);
         }
@@ -59,7 +59,7 @@ class UserServices {
         $check_username = $this->users->checkUserName($user['username'],$user['user_type']);
         if(!is_null($check_username)){
             $return = array_merge($return,[
-                'error_code' => 204,
+                'error_code' => 2201,
                 'message' => 'Username already exist'
             ]);
         }
@@ -169,10 +169,7 @@ class UserServices {
         $return = $this->users->checkPassword($id,$password);
 
         if(is_null($return)){
-            return [
-                'error_code' => 204,
-                'message' => 'Invalid Password'
-            ];
+            return false;
         }
 
         return [
@@ -215,10 +212,7 @@ class UserServices {
         $return =  $this->users->checkEmail($email,$user_type);
 
         if(is_null($return)){
-            return [
-                'error_code' => 2002,
-                'message' => $error_msg[2002]
-            ];
+            return false;
         }
         return [
             'status' => 200,
@@ -231,10 +225,7 @@ class UserServices {
         $return = $this->users->checkUserName($username,$user_type);
 
         if(is_null($return)){
-            return [
-                'error_code' => 2001,
-                'message' => $error_msg[2001]
-            ];
+            return false;
         }
 
         return [
@@ -246,10 +237,10 @@ class UserServices {
     public function checkUserDisabled($id){
         if($this->users->accountActivated($id) == 0 ){
             //check if activated
-            return "Account Inactive";
+            return 2014;
         } elseif($this->users->accountLocked($id) == 1){
             //check if locked
-            return "Account Locked";
+            return 2014;
         } elseif($this->users->accountDeleted($id) == 1 ){
             //check if delete
             return "Account Deleted";

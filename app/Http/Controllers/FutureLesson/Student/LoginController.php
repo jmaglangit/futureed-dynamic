@@ -16,14 +16,14 @@ class LoginController extends Controller {
 	 */
 	public function index()
 	{
-		if(Session::get('user')) {
-			$user_object = json_decode(Session::get('user'));
+		if(Session::get('student')) {
+			$user_object = json_decode(Session::get('student'));
 
-			if($user_object->avatar_id && $user_object->learning_style_id) {
-				return redirect()->route('student.dashboard.index');
+			if(!isset($user_object->avatar_id)) {
+				return redirect()->route('student.dashboard.follow_up_registration');
 			}
 
-			return redirect()->route('student.dashboard.follow_up_registration');
+			return redirect()->route('student.dashboard.index');
 		}
 
 		return view('student.login.login');
@@ -40,7 +40,8 @@ class LoginController extends Controller {
 		$user_object = json_decode($user_data['user_data']);
 
 		if($user_object->id){
-			Session::put('user', $user_data['user_data']);
+			Session::flush();
+			Session::put('student', $user_data['user_data']);
 
 			if($user_object->avatar_id) {
 				return redirect()->route('student.dashboard.index');

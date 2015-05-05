@@ -18,17 +18,25 @@
     		A new code has been sent to your email.
     	</p>
     	<small>Please check your inbox or your spam folder for the email. The email contains a code that you need to input below.</small>
-        <form>
+        {!! Form::open(array('id' => 'registration_success_form')) !!}
 	        <div class="form-group">
-	          	<label>Enter Code:</label>
-	            <input type="text" class="form-control" ng-model="confirmation_code" name="confirmation_code" placeholder="Confirmation Code" />
-	            <input type="hidden" name="email" value="{!! $email !!}" />
+                {!! Form::label('', 'Enter Code:')!!}
+                
+                {!! Form::text('confirmation_code', ''
+                        , array(
+                            'class' => 'form-control'
+                            , 'placeholder' => 'Confirmation Code'
+                            , 'ng-model' => 'confirmation_code'
+                        )
+                ) !!}
+	            
+                {!! Form::hidden('email', $email) !!}
             </div>
 	        <div class="btn-container">
 	        	<button type="button" class="btn btn-blue btn-medium" ng-disabled="disabled" ng-click="confirmClientRegistration()">Confirm</button>
             	<button type="button" class="btn btn-gold btn-medium" ng-disabled="disabled" ng-click="resendClientConfirmation()">Resend</button>
 	        </div>
-        </form>
+        {!! Form::close() !!}
     </div>
 </div>
 
