@@ -90,7 +90,7 @@ class StudentRegistrationController extends StudentController {
                 'id' => $student_id
             ]);
         } else {
-            
+
             //TODO: check if this is have been entered.
             $return = array_merge($user_response,$student_response);
 

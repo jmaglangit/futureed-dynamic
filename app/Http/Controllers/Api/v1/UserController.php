@@ -65,7 +65,7 @@ class UserController extends ApiController{
         $user_check = $this->user->checkEmail($input['email'],$input['user_type']);
         if(!$user_check){
 
-            return $this->respondWithError($user_check);
+            return $this->respondErrorMessage(2002);
         }
 
         //check code
