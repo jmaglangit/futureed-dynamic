@@ -45,9 +45,8 @@
 					</div>
 
 					<div class="col-md-8 col-md-offset-2" ng-if="!password_confirmed && !locked">
-				      <form id="reset_password_form">
+				      {!! Form::open(array('id' => 'change_password_form')) !!}
 				        <div class="form-select-password">
-				          <div id="title" class="title"></div>
 				          <div class="alert alert-danger" ng-if="errors">
 				            <p ng-repeat="error in errors" > 
 				              {! error !}
@@ -61,11 +60,8 @@
 				              </li>
 				            </ul>
 						  </div>
-
-				          <input type="hidden" name="selected_image_id" id="selected_image_id" />
-				          <input type="hidden" name="image_pass" />
 				        </div>
-				      </form>
+				      {!! Form::close() !!}
 				    </div>
 
 				    <div class="btn-container">

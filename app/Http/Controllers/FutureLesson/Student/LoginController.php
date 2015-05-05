@@ -19,7 +19,7 @@ class LoginController extends Controller {
 		if(Session::get('user')) {
 			$user_object = json_decode(Session::get('user'));
 
-			if($user_object->avatar_id && $user_object->learning_style_id) {
+			if($user_object->avatar_id) {
 				return redirect()->route('student.dashboard.index');
 			}
 

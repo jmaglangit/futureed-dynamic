@@ -699,9 +699,35 @@ footer{font:normal 12px/30px arial; }
 	color: red;
 }
 
-.error_1008 {
-	line-height: 30px;
+.error-response {
+	margin-top: 8%;
+	text-align: center;
 }
+/* Typography */
+.error-display {
+    margin-bottom: 20px;
+    font-size: 120px;
+    font-weight: 100;
+    color: #a92147;
+}
+.error-text {
+    padding: 2% 0px;
+    margin-bottom: 60px;
+    font-size: 16px;
+    font-weight: 100;
+}
+
+
+/* Buttons */
+.btn-light-blue {
+    background: #09aff9;
+}
+
+.btn--no-border {
+    border: 0;
+    border-radius: 0;
+} 
+
 
 /*
 * Client css

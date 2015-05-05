@@ -5,6 +5,7 @@
     <div class="col-md-6 col-md-offset-3">
       <div class="form-style" ng-show="!sent">
         <div class="title">Retrieve Password</div>
+
         <div class="alert alert-danger" ng-if="errors">
           <p ng-repeat="error in errors" > 
             {! error !}
@@ -16,7 +17,13 @@
             <div class="icon">
               <i class="fa fa-user"></i>
             </div>
-            <input placeholder="Username or Email" type="text" class="form-control" name="username" ng-model="username" autocomplete="off" />
+            {!! Form::text('username', ''
+                , array(
+                    'class' => 'form-control'
+                    , 'placeholder' => 'Username or Email'
+                    , 'autocomplete' => 'off'
+                    , 'ng-model' => 'username')
+            ) !!}
           </div>
           <div class="btn-container">
             <a type="button" class="btn btn-red btn-medium" ng-click="studentForgotPassword()">SEND</a>
@@ -26,7 +33,7 @@
       </div>
 
       <div class="form-style" ng-if="sent">
-      {!! Form::open(array('id' => 'success_form', 'method' => 'POST', 'route' => 'student.login.reset_password')) !!}
+      {!! Form::open(array('id' => 'forgot_success_form', 'method' => 'POST', 'route' => 'student.login.reset_password')) !!}
         <div class="form_content">
           <div class="title" ng-if="!resend && sent">Email Sent</div>
           <div class="title" ng-if="resend && sent">Code Resent</div>
@@ -49,8 +56,15 @@
               <br />The email contains a code that you need to input below.</small>
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" ng-model="reset_code" name="reset_code" placeholder="Reset Code" autocomplete="off" />
-              <input type="hidden" ng-model="id" name="id" required />
+              {!! Form::text('reset_code', ''
+                , array(
+                    'class' => 'form-control'
+                    , 'placeholder' => 'Reset Code'
+                    , 'autocomplete' => 'off'
+                    , 'ng-model' => 'reset_code')
+              ) !!}
+
+              {!! Form::hidden('id', '', array('ng-model' => 'id')) !!}
             </div>
             <div class="btn-container">
               <button type="button" class="btn btn-red btn-medium" ng-click="studentValidateCode(reset_code)">PROCEED</button>

@@ -3,7 +3,7 @@
 @section('content')
   <div class="container login" ng-cloak>
     <div class="col-md-8 col-md-offset-2" ng-show="!success">
-      <form id="reset_password_form">
+      {!! Form::open(array('id' => 'reset_password_form'))!!}
         <div class="form-style form-select-password">
           <div  id="title" class="title">
             <p ng-if="!password_selected">Select a picture for your new password</p>
@@ -33,9 +33,9 @@
           </div>
         </div>
 
-        <input type="hidden" name="code" ng-model="code" id="code" value="{!! $code !!}" />
-        <input type="hidden" name="id" ng-model="id" id="id" value="{!! $id !!}" />
-      </form>
+        {!! Form::hidden('code', $code, array('ng-model' => 'code')) !!}
+        {!! Form::hidden('id', $id, array('ng-model' => 'id')) !!}
+      {!! Form::close() !!}
     </div>
 
     <div class="col-md-6 col-md-offset-3" ng-if="success">

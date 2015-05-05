@@ -43,14 +43,15 @@
 						You have successfully changed your avatar.
 					</div>
 					<div class="col-md-10 col-md-offset-1" ng-if="!has_avatar">
-				      <form id="change_avatar_form">
+			      		{!! Form::open(array('id' => 'change_avatar_form')) !!}
 				        <div class="form-select-password">
-				          <div id="title" class="title"></div>
+
 				          <div class="alert alert-danger" ng-if="errors">
 				            <p ng-repeat="error in errors" > 
 				              {! error !}
 				            </p>
 				          </div>
+
 				          <div class="form_content">
 				            <ul class="avatar_list list-unstyled list-inline" ng-init="getAvatarImages('true')">
 				              <li class="item avtrcon" style="width:20%" ng-repeat="avatar in avatars" ng-click="highlightAvatar($event)">
@@ -60,8 +61,9 @@
 				            </ul>
 						  </div>
 				        </div>
+				        
 				        <input type="hidden" ng-model="session_user" />
-				      </form>
+				      {!! Form::close() !!}
 				    </div>
 				    <div class="btn-container" ng-if="!has_avatar">
 				        <a type="button" class="btn btn-red btn-medium" ng-click="selectAvatar()">Proceed</a>

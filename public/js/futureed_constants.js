@@ -7,4 +7,9 @@ var Constants = {
 
 	, STUDENT		: "Student"
 	, CLIENT		: "Client" 
+
+	, AVATAR		: "avatar"
+	, REWARDS		: "rewards"
+	, PASSWORD		: "password"
+	, INDEX			: "index"
 }
