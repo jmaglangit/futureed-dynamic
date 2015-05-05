@@ -17,7 +17,6 @@
 			]);
 		Routes::get('/logout', [ 
 				'as' => 'student.logout'
-				, 'middleware' => 'student'
 				, 'uses' => 'FutureLesson\Student\LoginController@logout'
 			]);
 		Routes::post('/update-user-session', [ 
@@ -25,7 +24,8 @@
 				, 'uses' => 'FutureLesson\Student\ProfileController@update_session'
 			]);
 		
-		Routes::group(['prefix' => '/login'], function()
+		Routes::group([
+			  'prefix' => '/login'], function()
 		{
 			Routes::get('/', [ 
 					'as' => 'student.login'

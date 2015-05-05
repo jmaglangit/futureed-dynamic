@@ -3,6 +3,7 @@
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Session;
 
 use Illuminate\Http\Request;
 
@@ -29,7 +30,8 @@ class LoginController extends Controller {
 		$user_object = json_decode($user_data['user_data']);
 
 		if($user_object->user_id){
-			\Session::put('user', $user_data['user_data']);
+			Session::flush();
+			Session::put('client', $user_data['user_data']);
 			return redirect()->route('client.dashboard.index');
 		}
 
@@ -43,7 +45,7 @@ class LoginController extends Controller {
 	 */
 	public function logout()
 	{
-		\Session::flush();
+		Session::flush();
 		return redirect()->route('client.login');
 	}
 	
