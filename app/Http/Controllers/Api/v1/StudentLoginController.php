@@ -59,10 +59,7 @@ class StudentLoginController extends StudentController {
                 if($this->student->getAge($student_id) < 13){
                     
 
-                    return $this->respondWithError([
-                        'error_code' => 2008,
-                        'message' => $parent_message[2008],
-                    ]);
+                    return $this->respondErrorMessage(2008);
 
                 }else{
 			

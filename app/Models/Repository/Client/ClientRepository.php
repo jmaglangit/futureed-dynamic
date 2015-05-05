@@ -24,9 +24,9 @@ class ClientRepository implements ClientRepositoryInterface{
 
     }
 
-    public function checkClient($user_id,$role){
+    public function checkClient($id,$role){
 
-         return Client::where('user_id','=',$user_id)
+         return Client::where('id','=',$id)
                 ->where('client_role','=',$role)->pluck('user_id');
 
     }
@@ -81,4 +81,29 @@ class ClientRepository implements ClientRepositoryInterface{
         return Client::where('id','=',$id)->first();
 
     }
+
+    public function updateClientDetails($id,$clientData){
+
+        foreach ($clientData as $key => $value) {
+            if($value != null){
+                
+                $update[$key]  = $value;
+
+            }else{
+
+                $update[$key] = null;
+
+            }
+        }
+
+        try{
+
+            Client::where('id',$id)->update($update);
+
+        } catch (Exception $e){
+            throw new Exception($e->getMessage());
+        }
+    }
+
+    
 }

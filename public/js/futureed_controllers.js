@@ -12,6 +12,7 @@ function FutureedController($scope, apiService) {
   $scope.ui_block = ui_block;
   $scope.ui_unblock = ui_unblock;
 
+  $scope.goHome = goHome;
   $scope.highlight = highlight;
   $scope.getCountries = getCountries;
   $scope.getGradeLevel = getGradeLevel;
@@ -46,6 +47,10 @@ function FutureedController($scope, apiService) {
 
   function ui_unblock() {
     $.unblockUI();
+  }
+
+  function goHome() {
+    
   }
 
   function highlight(e) {
@@ -780,6 +785,7 @@ function FutureedController($scope, apiService) {
     $("ul.avatar_list li").removeClass('selected');
     $(target).addClass('selected');
     $scope.avatar_id = $(target).find("#avatar_id").val(); 
+    $scope.enable = Constants.TRUE;
   }
 
   function selectAvatar() {

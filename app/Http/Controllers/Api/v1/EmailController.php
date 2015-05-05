@@ -29,9 +29,9 @@ class EmailController extends ApiController {
 
         $return =  $this->user->checkEmail($email,$user_type);
 
-        if(isset($return['error_code'])){
+        if(!$return){
 
-            return $this->respondWithError($return);
+            return $this->respondErrorMessage(2002);
 
         }elseif($input['user_type'] == 'Student'){
 

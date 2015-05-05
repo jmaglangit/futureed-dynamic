@@ -67,4 +67,43 @@ class SchoolRepository implements SchoolRepositoryInterface{
 		return School::where('code','=',$id)->first();
 
 	}
+
+	public function checkSchoolNameExist($input){
+
+		return School::where('name','=',$input['school_name'])
+            ->where('street_address','=',$input['school_street_address'])
+            ->where('state','=',$input['school_state'])->pluck('code');
+	}
+
+	public function updateSchoolDetails($input){
+
+
+		foreach ($input as $key => $value) {
+
+			if($value !=null ){
+
+		 		$update[substr($key,7)] = $value;
+
+		 	}else{ 
+
+		 		$update[substr($key,7)] = null;
+
+		 	}
+	
+		}
+
+		try{
+
+			School::where('code',$input['school_code'])->update($update);
+
+		}catch(Exception $e){
+			return $e->getMessage();
+		}
+
+
+	}
+
+
+
+
 }

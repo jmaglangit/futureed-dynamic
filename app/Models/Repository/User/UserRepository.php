@@ -272,6 +272,20 @@ class UserRepository implements UserRepositoryInterface {
 
     }
 
+    public function updateUsername($id,$username){
+
+         try{
+
+            User::where('id',$id)->update([
+                'username' => $username
+            ]);
+
+        } catch (Exception $e){
+            throw new Exception($e->getMessage());
+        }
+
+    }
+
 
 
 

@@ -3,13 +3,13 @@
 @section('content')
 
 <div class="error-response col-md-6 col-md-offset-3">
-    <h1 class="error-display">404</h1>
+    <h1 class="error-display">405</h1>
 
     <h2>
-    	<strong>Page Not Found</strong>
+    	<strong>Invalid Access</strong>
     </h2>
     <p class="error-text">
-	    Sorry, the page you are trying to access does not exist.
+	    Sorry, you do not have the permission to access this page.
     </p>
     
     
