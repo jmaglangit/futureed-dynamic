@@ -1,7 +1,7 @@
 @extends('student.app')
 
 @section('content')
-<div class="container login" ng-cloak>
+<div class="container login student-fnt" ng-cloak>
     <div class="form-style register_student form-wide" ng-init="success={!! $success !!}" ng-show="!success"> 
         {!! Form::open(array('id' => 'registration_form' , 'class' => 'form-horizontal simple-form')) !!}
             <div class="form-header">
@@ -190,8 +190,8 @@
                         </div>
                     </div>
                     <div class="btn-container col-sm-6 col-sm-offset-3">
-                        <a ng-click="validateRegistration(reg, terms)" class="btn btn-red btn-medium">REGISTER</a>
-                        <a href="{!! route('student.login') !!}" class="btn btn-purple btn-medium">Cancel</a>
+                        <a ng-click="validateRegistration(reg, terms)" class="btn btn-maroon btn-medium">REGISTER</a>
+                        <a href="{!! route('student.login') !!}" class="btn btn-gold btn-medium">Cancel</a>
                     </div>
                 </fieldset>
             </div>

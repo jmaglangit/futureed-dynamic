@@ -6,7 +6,7 @@
 .........................................Hive&Seek - bambi@hiveandseek.net......................................
 ..............................................................................................................*/
 
-
+@import url(http://fonts.googleapis.com/css?family=Roboto:400,100);
 /*----- GENERAL -----*/
 * {margin: 0; padding: 0;}
 html{height: 100%; position: relative;}
@@ -22,7 +22,8 @@ body.client{
 body.student{
 	background: url("../images/student_page_bg.jpg") no-repeat scroll right bottom / cover;
 	background-attachment: fixed;
-	font-family : 'Schoolbell', cursive;
+	font-family: 'Roboto', sans-serif;
+	background-size: 100% 100%;
 }
 body {/*background: radial-gradient(transparent 50%, rgba(0, 0, 0, 0.3) 100%), linear-gradient(#d77a6b, #d2c09c 60%, #876d54);*/
   /*background: rgba(255,255,255,1); background: -moz-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 49%, rgba(242,242,242,1) 100%); background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(255,255,255,1)), color-stop(49%, rgba(255,255,255,1)), color-stop(100%, rgba(242,242,242,1))); background: -webkit-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 49%, rgba(242,242,242,1) 100%); background: -o-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 49%, rgba(242,242,242,1) 100%);adient(center, ellipse cover, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 49%, rgba(242,242,242,1) 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f2f2f2', GradientType=1 );  */
@@ -131,22 +132,34 @@ body {/*background: radial-gradient(transparent 50%, rgba(0, 0, 0, 0.3) 100%), l
 	border-top: 1px solid #055A7F; 
 	box-shadow: 0 0 0 1px #055A7F, 0 3px 3px rgba(0, 0, 0, 0.3);
 	background-color: #055A7F;
-}å
+}
 .btn-blue:active {
 	box-shadow: inset 0px 6px 21px 3px rgba(188,74,39,1);
 	color: #fff;
 }
 
 .btn-gold {
-	border-top: 1px solid #DFC010; 
-	box-shadow: 0 0 0 1px #DFC010, 0 3px 3px rgba(0, 0, 0, 0.3);
+	border-top: 1px solid #F2D84F;
 	background-color: #DFC010;
-}å
-.btn-gold:active {
-	box-shadow: inset 0px 6px 21px 3px rgba(188,74,39,1);
-	color: #fff;
+	box-shadow: 0 0 0 1px #C0A516, 0 3px 3px rgba(0, 0, 0, 0.3);
 }
-
+.btn-gold:hover {
+	background-color: #DFC010;
+	box-shadow: 0 0 0 1px #C0A516, 0 3px 3px rgba(0, 0, 0, 0.3);
+	-webkit-box-shadow: inset 0 5px 8px rgba(0,0,0,.125);
+  	box-shadow: inset 0 5px 8px rgba(0,0,0,.125);
+}
+.btn-maroon{
+	border-top: 1px solid #D2476E;
+	background-color: #A92147;
+	box-shadow: 0 0 0 1px #941C3F, 0 3px 3px rgba(0, 0, 0, 0.3);
+}
+.btn-maroon:hover{
+	background-color: #A92147;
+	box-shadow: 0 0 0 1px #941C3F, 0 3px 3px rgba(0, 0, 0, 0.3);
+	-webkit-box-shadow: inset 0 5px 8px rgba(0,0,0,.125);
+  	box-shadow: inset 0 5px 8px rgba(0,0,0,.125);
+}
 /*----- FORM -----*/
 .error * { margin-bottom:  0;}
 .form-narrow {background: #fff; padding: 0 30px; box-sizing: border-box; border-radius: 5px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); position: relative; overflow: hidden;}
@@ -164,12 +177,14 @@ body {/*background: radial-gradient(transparent 50%, rgba(0, 0, 0, 0.3) 100%), l
 	line-height: 1.5;
 	display: inline-block;
 	padding: 0 50px;
+	color: #73477C;
 }
 .form-style .text-group {
 	padding-top: 20px;
 	text-align: center;
 }
-.form-style .title {padding-top: 10px; text-align: center; text-transform: uppercase; font-weight: 700; font-size: 18px; color: #8e8171;}
+.form-style .title {padding-top: 10px; text-align: center; font-size: 18px; color: #76437E;}
+.login-title {padding-top: 10px; text-align: center; font-weight: 700; font-size: 20px; color: #76437E;}
 .form-style form { margin-top: 30px;}
 
 
@@ -255,7 +270,7 @@ fieldset legend{color: #8e8171; font-size: 16px; text-transform: uppercase;}
 /*----- BOOTSTRAP -----*/
 .form-control {
 	height: 40px;
-	border: 1px solid #f7b9aa;
+	border: 1px solid #CCCCCC;
 }
 .navbar{
 	border-radius: 0px;
@@ -264,7 +279,7 @@ fieldset legend{color: #8e8171; font-size: 16px; text-transform: uppercase;}
 	margin-left: 0px;
 }
 .form-control:hover, .form-control:active , .form-control:focus {
-	border: 1px solid #E08F70;
+	border: 1px solid #CCCCCC;
 	box-shadow: none;
 }
 .dropdown-menu{
@@ -450,7 +465,7 @@ li.active .rnd-identifier{
 }
 .dshbrd-con{
 	margin-top: 45px;
-	max-width: 1200px;
+	min-width: 1200px;
 }
 .dshbrd-con .wrapr{
 	background: #fff;
@@ -484,14 +499,14 @@ li.active .rnd-identifier{
 	color: #358F98;
 }
 .side-nav ul li a:hover, .side-nav ul li.active a{
-	background: #358F98;
+	background: #065A7F;
 	color: #fff;
 }
 .side-nav a:hover{
 	text-decoration: none;
 }
 .dshbrd-con .content .hdr{
-	background: #358F98;
+	background: #065A7F;
 	min-height: 240px;
 }
 .avtrcon, .detcon{
@@ -550,9 +565,9 @@ li.active .rnd-identifier{
 	font-weight: 100;
 	text-transform: uppercase;
 	padding: 12px 16px;
-	background: #FCD903;
+	background: #DEC010;
 	font-size: 18px;
-	color: #358F98;
+	color: #065A7F;
 	margin: 0;
 	letter-spacing: 0.5px;
 	position: relative;
@@ -582,8 +597,8 @@ li.active .rnd-identifier{
 .rbn-left, .rbn-right{
 	position: absolute;
 	left: -21px;
-	border-top: 22px solid #FFD800;
-	border-bottom: 21px solid #FFD800;
+	border-top: 22px solid #DEC010;
+	border-bottom: 21px solid #DEC010;
 	border-left: 21px solid transparent;
 	top: 0;
 }
@@ -598,16 +613,16 @@ li.active .rnd-identifier{
 	text-align: center;
 	unicode-bidi: bidi-override;
 	position: absolute;
-	color: #FCD903;
+	color: #F4DB5A;
 	left: 10px;
 	top: -8px;
 	font-size: 40px;
-	background: #BEAF3E;
+	background: #DEC010;
 	border-radius: 50%;
 	padding: 0px;
 	width: 54px;
 	height: 54px;
-	border: 4px solid #FCD903;
+	border: 4px solid #F4DB5A;
 }
 .points > span.star:before,
 .points > span.star ~ span:before {
@@ -629,7 +644,7 @@ li.active .rnd-identifier{
 	color: #887C70;
 }
 .dshbrd-con legend{
-	color: inherit;
+	color: #065A7F;
 	font-size: 20px;
 }
 .btncon a.btn {
@@ -760,4 +775,67 @@ footer{font:normal 12px/30px arial; }
 .role-div {
 	-webkit-transition:all linear 0.5s;
   	transition:all linear 0.5s;
+}
+
+/*
+* Student css
+*/
+div .text-group > small > a{
+	color: #DDC527;
+}
+div .text-group > small > a:hover{
+	color: #D3BC1F;
+}
+
+.student-forgot{
+	color: #8C8B4A !important;
+}
+.student-forgot:hover{
+	color: #8C8B4A !important;
+}
+.rwrdscon > h3 > span {
+	font-weight: 700;
+}
+.student-fnt{
+	font-family: 'Schoolbell', cursive;
+}
+div > .btncon > a {
+	font-family: 'Schoolbell', cursive;
+}
+.edit-email{
+	position: relative;
+  	top: 10px;
+}
+.alert-message{
+	position: relative;
+	bottom: 10px;
+}
+.alert-message > .fa-spin{
+	margin-left: 10px;
+}
+.hdr > .detcon > h2 {
+	text-transform: uppercase;
+}
+.edit-mail{
+	margin-left: 10px !important;
+	position: relative;
+	top: 20px;
+}
+/*
+* Font Colors
+*/
+.blue {
+	color: #065A7F;
+}
+
+/*
+* Customized Alerts
+*/
+.alert-error{
+	color: #EA7058;
+  	background-color: #FBE6E1;
+  	border-color: #F8B9A7;
+  	font-size: 12px;
+  	margin-left: 60px;
+  	padding: 10px;
 }

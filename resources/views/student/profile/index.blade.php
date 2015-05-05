@@ -30,7 +30,7 @@
 							<a href="" class="lnk">See all points</a>
 						</div>
 					</div>
-					<h2>
+					<h2 class="student-font">
 							<span class="thin" ng-if="!edit">My</span>
 							<span class="thin" ng-if="edit">Edit</span>
 							Profile
@@ -42,8 +42,8 @@
 					</p>
 				</div>
 			</div>
-			<div class="form-content col-md-12">
-				<div class="alert alert-danger" ng-if="errors">
+			<div class="form-content col-xs-12">
+				<div class="alert alert-error" ng-if="errors">
 		            <p ng-repeat="error in errors" > 
 		              {! error !}
 		            </p>
@@ -70,7 +70,7 @@
 	                        <div style="margin-top: 7px;"> 
 	                            <i ng-if="u_loading" class="fa fa-spinner fa-spin"></i>
 	                            <i ng-if="u_success" class="fa fa-check success-color"></i>
-	                            <span ng-if="u_error" class="error-msg-con">{! u_error !}</span>
+	                            <span ng-if="u_error" class="alert alert-error">{! u_error !}</span>
 	                        </div>
 	                    </div>
 						<div class="form-group">
@@ -86,13 +86,16 @@
 	                                    , 'ng-change' => "checkEmailAvailability(prof.email, 'Student')")
 	                            ) !!}
 	                        </div>
-	                        <div style="margin-top: 7px;">
+	                        <div class="col-xs-2">
+	                        	<a href="{!! route('student.profile.edit_email')!!}" class="edit-email">Edit</a>
+	                        </div>	
+	                        <div class="col-xs-5 alert-message">
 	                            <i ng-if="e_loading" class="fa fa-spinner fa-spin"></i>
 	                            <i ng-if="e_success" class="fa fa-check success-color"></i>
-	                            <span ng-if="e_error" class="error-msg-con">{! e_error !}</span>
+	                            <span ng-if="e_error" class="alert alert-error">{! e_error !}</span>
 	                        </div>
 	                    </div>
-					</fieldset>
+					</fieldset>					
 					<fieldset>
 						<legend>Personal Information</legend>
 						<div class="form-group">
@@ -137,8 +140,8 @@
 	                        </div>
 	                    </div>  
 	                    <div class="form-group">
-	                        <label for="" class="col-md-2 control-label">Birthday <span class="required">*</span></label>
-	                        <div class="col-md-5">
+	                        <label for="" class="col-xs-2 control-label">Birthday <span class="required">*</span></label>
+	                        <div class="col-xs-5">
 	                            <div class="dropdown">
 	                              <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
 	                                <div class="input-group">
@@ -199,7 +202,7 @@
 	                            </select>
 	                        </div>
 	                    </div>
-					</fieldset>
+					</fieldset>					
 					<fieldset>
 						<legend>School Information</legend>
 						<div class="form-group" ng-if="prof.school_name">
@@ -215,7 +218,7 @@
 	                        </div>
 	                    </div>
 						<div class="form-group" ng-init="getGradeLevel()">
-                        <label for="" class="col-md-2 control-label">School level <span class="required">*</span></label>
+                        <label for="" class="col-xs-2 control-label">School level <span class="required">*</span></label>
 
                         <div class="col-md-5 nullable">
                             <select class="form-control" name="grade_code" ng-model="prof.grade_code" ng-disabled="!edit">
@@ -226,13 +229,13 @@
                     </div>   
 					</fieldset>
 					<div class="form-group">
-						<div class="btncon col-md-9" style="text-align:center;" ng-if="!edit">
-							<a href="{!! route('student.profile.change_password')!!}" class="btn btn-red">Change Password</a>
-							<a class="btn btn-purple" ng-click="editProfile()">Edit Profile</a>
+						<div class="btncon col-xs-9" style="text-align:center;" ng-if="!edit">
+							<a href="{!! route('student.profile.change_password')!!}" class="btn btn-gold">Change Password</a>
+							<a class="btn btn-gold" ng-click="editProfile()">Edit Profile</a>
 						</div>
-						<div class="btncon col-md-9" style="text-align:center;" ng-if="edit">
-							<a class="btn btn-red" ng-click="saveProfile(prof)">Save Changes</a>
-							<a class="btn btn-purple" ng-click="setActive('index')">Cancel</a>
+						<div class="btncon col-xs-9" style="text-align:center;" ng-if="edit">
+							<a class="btn btn-gold" ng-click="saveProfile(prof)">Save Changes</a>
+							<a class="btn btn-gold" ng-click="setActive('index')">Cancel</a>
 						</div>
 					</div>
 				{!! Form::close() !!}
