@@ -144,11 +144,9 @@ class StudentLoginController extends StudentController {
 
         if($is_disabled){
 
-
             $response = [
                 'status' => $is_disabled,
             ];
-
 
         } else {
 
