@@ -237,10 +237,10 @@ class UserServices {
     public function checkUserDisabled($id){
         if($this->users->accountActivated($id) == 0 ){
             //check if activated
-            return "Account Inactive";
+            return 2014;
         } elseif($this->users->accountLocked($id) == 1){
             //check if locked
-            return "Account Locked";
+            return 2014;
         } elseif($this->users->accountDeleted($id) == 1 ){
             //check if delete
             return "Account Deleted";
