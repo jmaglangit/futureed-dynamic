@@ -5,7 +5,7 @@ trait ErrorMessageTrait {
 
 
     private $error_code = 1000;
-    private $field = 'Empty field';
+    private $field = null;
     private $message = 'Empty message';
 
     public function setErrorCode($error_code){
@@ -48,6 +48,7 @@ trait ErrorMessageTrait {
 
         return [
             'error_code' => $this->error_code,
+            'field' => $this->field,
             'message' => $this->message
         ];
     }
