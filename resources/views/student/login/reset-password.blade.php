@@ -23,11 +23,11 @@
                  <input type="hidden" id="image_id" name="image_id" value="{! item.id !}">
               </li>
             </ul>
-            <button type="button" ng-if="!password_selected" class="btn btn-red btn-medium" ng-click="selectNewPassword()">Proceed</button>
+            <button type="button" ng-if="!password_selected" class="btn btn-maroon btn-medium" ng-click="selectNewPassword()">Proceed</button>
             <div ng-if="password_selected">
                 <div class="btn-container">
                     <a type="button" class="btn btn-maroon btn-medium" ng-click="undoNewPassword()">Previous</a>
-                    <a type="button" class="btn btn-yellow btn-medium" ng-click="saveNewPassword()">Save</a>
+                    <a type="button" class="btn btn-gold btn-medium" ng-click="saveNewPassword()">Save</a>
                 </div>  
             </div>
           </div>
@@ -47,7 +47,7 @@
            Your password has been set. <br /> 
            You may now use your new password to login. <br />
            <br />
-          <a class="btn btn-red" href="{!! route('student.login') !!}">Click here to Login</a> 
+          <a class="btn btn-maroon" href="{!! route('student.login') !!}">Click here to Login</a> 
       </div>
     </div>
   </div>

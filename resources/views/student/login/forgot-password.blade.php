@@ -68,7 +68,7 @@
             </div>
             <div class="btn-container">
               <button type="button" class="btn btn-maroon btn-medium" ng-click="studentValidateCode(reset_code)">PROCEED</button>
-              <button type="button" class="btn btn-yellow btn-medium" ng-click="studentResendCode()">Resend Code</button>  
+              <button type="button" class="btn btn-gold btn-medium" ng-click="studentResendCode()">Resend Code</button>  
             </div>
             
           </div>
