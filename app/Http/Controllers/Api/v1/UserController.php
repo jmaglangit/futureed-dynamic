@@ -52,7 +52,7 @@ class UserController extends ApiController{
         $input = Input::only('email','email_code','user_type');
 
         $this->addMessageBag($this->email($input,'email'));
-        $this->addMessageBag($this->validateNumber($input,'email_code'));
+        $this->addMessageBag($this->emailCode($input,'email_code'));
         $this->addMessageBag($this->userType($input,'user_type'));
 
         if($this->getMessageBag()){

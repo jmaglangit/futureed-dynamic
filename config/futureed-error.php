@@ -17,8 +17,8 @@ return [
 
 
         //for student error message
-        2004 => 'Username and picture password is incorrect',
-        2005 => 'Country does not exist',
+        2004 => 'Username and picture password is incorrect.',
+        2005 => 'Country does not exist.',
         2006 => 'Confirmation code does not match.',
         2007 => 'Confirmation code has expired.',
         2008 => 'The email/username you entered is invalid. Please try inputting again. If the account you are attempting to login is for a student less than 13 yrs old, please login via the parent site',
@@ -27,7 +27,10 @@ return [
         2011 => 'Username and password is incorrect',
         2012 => 'Picture password is incorrect',
         2013 => 'Username or Email is invalid',
-        
+        2014 => 'Username or Email is invalid. Have you confirmed your email? Please check your inbox for the email confirmation code. Cannot remember your password? Click forgot password to reset your password.',
+        2015 => 'Confirmation code is required.',
+        2016 => 'Confirmation code should be number only.',
+
         2100 => 'Invalid reset code',
         2101 => 'Invalid password image',
         2102 => 'Access token expired',
