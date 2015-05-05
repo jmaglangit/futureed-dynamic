@@ -34,6 +34,8 @@ return [
         2103 => 'Invalid confirmation code',
         2104 => 'Username already exist',
         2105 => "School Code doesn't exist",
+        2106 => 'Email does not match',
+        2107 => 'Your current email and new email are the same.',
 
         // Client Error messages
         2200 => 'Email already exist',

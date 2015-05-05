@@ -98,6 +98,11 @@ Routes::group(['prefix' => 'api/v1'], function()
     Routes::resource('/countries','Api\v1\CountryController',
         ['except' => ['create','edit']]);
 
+    //email
+    Routes::resource('/student/email/{id}','Api\v1\EmailController@updateStudentEmail');
+    Routes::resource('/student/resend/email','Api\v1\EmailController@resendChangeEmail');
+    Routes::resource('/student/confirmation/email','Api\v1\EmailController@confirmChangeEmail');
+
 
 
 

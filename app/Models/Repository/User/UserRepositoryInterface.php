@@ -65,4 +65,10 @@ interface UserRepositoryInterface {
 
       public function updateUsername($id,$username);
 
+    public function addNewEmail($id,$new_email);
+
+    public function checkNewEmailExist($new_email,$user_type);
+
+    public function updateToNewEmail($user_id,$new_email);
+
 }
