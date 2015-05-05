@@ -33,7 +33,7 @@ return [
         2102 => 'Access token expired',
         2103 => 'Invalid confirmation code',
         2104 => 'Username already exist',
-        2105 => 'School Name already exist',
+        2105 => "School Code doesn't exist",
 
         // Client Error messages
         2200 => 'Email already exist',

@@ -138,10 +138,15 @@ class ClientController extends ApiController {
 					}else{
 
 						$school_code = $this->school->checkSchoolNameExist($school);
+						$school_name = $this->school->getSchoolName($school['school_code']);
 
-						if(isset($school_code) && $school['school_code'] != $school_code){
-							
+						if(empty($school_name)){
+
 							return $this->respondErrorMessage(2105);
+
+						}else if(isset($school_code) && $school['school_code'] != $school_code){
+							
+							return $this->respondErrorMessage(2202);
 
 						}else{
 
