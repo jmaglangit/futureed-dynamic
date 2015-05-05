@@ -92,47 +92,5 @@ trait ClientValidatorTrait {
         }
     }
 
-    public function validateStringOptional($input,$field_name){
-
-            $validator = Validator::make(
-                [
-                    "$field_name" => strtolower($input["$field_name"]),
-                ],
-                [
-                    "$field_name" => 'string'
-                ]
-            );
-
-            if($validator->fails()){
-
-                $validator_msg = $validator->messages()->toArray();
-
-                return $this->setErrorCode(1010)
-                    ->setField($field_name)
-                    ->setMessage($validator_msg["$field_name"][0])
-                    ->errorMessage();
-            }
-    }
     
-    public function zipCodeOptional($input,$field_name){
-
-            $validator = Validator::make(
-                [
-                    "$field_name" => strtolower($input["$field_name"]),
-                ],
-                [
-                    "$field_name" => 'digits:5|integer'
-                ]
-            );
-
-            if($validator->fails()){
-
-                $validator_msg = $validator->messages()->toArray();
-
-                return $this->setErrorCode(1013)
-                    ->setField($field_name)
-                    ->setMessage($validator_msg["$field_name"][0])
-                    ->errorMessage();
-            }
-    }
 }

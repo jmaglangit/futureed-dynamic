@@ -171,4 +171,11 @@ class ClientServices {
 
     }
 
+    public function updateClientDetails($id,$clientData){
+
+        $this->client->updateClientDetails($id,$clientData);
+
+
+    }
+
 }

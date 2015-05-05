@@ -9,9 +9,13 @@
             <p ng-if="!password_selected">Select a picture for your new password</p>
             <p ng-if="password_selected">Select a picture to confirm your new password</p>
           </div>
-          <div class="error" ng-if="error">
-            <p>{! error !}</p>
+          
+          <div class="alert alert-danger" ng-if="errors">
+            <p ng-repeat="error in errors" > 
+              {! error !}
+            </p>
           </div>
+          
           <div class="form_content">
             <ul class="form_password list-unstyled list-inline" ng-init="getImagePassword()">
               <li class="item" ng-repeat="item in image_pass" ng-click="highlight($event)">
@@ -23,7 +27,7 @@
             <div ng-if="password_selected">
                 <div class="btn-container">
                     <a type="button" class="btn btn-purple btn-medium" ng-click="undoNewPassword()">Previous</a>
-                    <a type="button" class="btn btn-red btn-medium" ng-click="validateNewPassword()">Save</a>
+                    <a type="button" class="btn btn-red btn-medium" ng-click="saveNewPassword()">Save</a>
                 </div>  
             </div>
           </div>

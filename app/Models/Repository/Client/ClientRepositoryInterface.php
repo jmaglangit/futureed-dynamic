@@ -19,5 +19,7 @@ interface ClientRepositoryInterface {
 
     public function getclientDetails($id);
 
+    public function updateClientDetails($id,$clientData);
+
 
 }

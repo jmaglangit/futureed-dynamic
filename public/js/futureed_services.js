@@ -103,7 +103,6 @@ var services = angular.module('futureed.services', ['ngResource']);
 			});
 		}
 
-		// Student Please
 		futureedAPI.confirmCode = function(email, email_code, user_type) {
 			return $http({
 				method	: 'POST'
@@ -199,11 +198,11 @@ var services = angular.module('futureed.services', ['ngResource']);
 			return $http.put(futureedAPIUrl + 'student/' + data.id, data);
 		}
 
-		futureedAPI.validateCurrentPassword = function(id, password_image_id, access_token) {
+		futureedAPI.validateCurrentPassword = function(id, password_image_id) {
 			return $http({
 				method 	: 'POST'
-				, data 	: {password_image_id : password_image_id, access_token : access_token}
-				, url 	: futureedAPIUrl + 'student/password/' + id
+				, data 	: {password_image_id : password_image_id}
+				, url 	: futureedAPIUrl + 'student/password/confirm/' + id
 			});
 		}
 
