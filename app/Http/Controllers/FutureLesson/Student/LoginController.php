@@ -42,7 +42,7 @@ class LoginController extends Controller {
 		if($user_object->id){
 			Session::put('user', $user_data['user_data']);
 
-			if($user_object->avatar_id && $user_object->learning_style_id) {
+			if($user_object->avatar_id) {
 				return redirect()->route('student.dashboard.index');
 			}
 			

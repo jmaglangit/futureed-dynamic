@@ -28,6 +28,7 @@
 	                <div class="alert alert-success" ng-if="success">
 	                	<p>{! success_msg !}</p>
 	                </div>
+	                @include('student.login.enter-password')
 					<form class="form-horizontal" name="edit_email" id="edit_email">
 						<div class="form-group">
 							<label for="current_email" class="col-xs-2 control-label">
@@ -44,8 +45,13 @@
 								<span class="required">*</span>
 							</label>
 							<div class="col-xs-5">
-								<input type="text" class="form-control" id="new_email" name="new_email" placeholder="New Email" ng-model="email_new" required />
+								<input type="text" class="form-control" id="new_email" name="new_email" placeholder="New Email" ng-model="email_new" ng-blur="checkEmailAvailability(email_new, 'Student')" required />
 							</div>
+							<div class="col-xs-5 alert-message">
+	                            <i ng-if="e_loading" class="fa fa-spinner fa-spin"></i>
+	                            <i ng-if="e_success" class="fa fa-check success-color"></i>
+	                            <span ng-if="e_error" class="alert alert-error"> Email Address is invalid or already exist</span>
+	                        </div>
 						</div>						
 						<div class="form-group">
 							<label for="confirm_email" class="col-xs-2 control-label">

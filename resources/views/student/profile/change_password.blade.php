@@ -48,8 +48,10 @@
 				      <form id="reset_password_form">
 				        <div class="form-select-password">
 				          <div id="title" class="title"></div>
-				          <div class="alert alert-danger" ng-if="error">
-				            <p>{! error !}</p>
+				          <div class="alert alert-danger" ng-if="errors">
+				            <p ng-repeat="error in errors" > 
+				              {! error !}
+				            </p>
 				          </div>
 				          <div class="form_content">
 				            <ul class="form_password list-unstyled list-inline">
@@ -70,9 +72,9 @@
 					    <a ng-if="!password_validated" type="button" class="btn btn-gold btn-medium" ng-click="validateCurrentPassword()">Proceed</a>
 						<a ng-if="password_validated && !password_selected" type="button" class="btn btn-gold btn-medium" ng-click="selectNewPassword()">Proceed</a>
 						<a ng-if="!password_selected" href="{!! route('student.profile.index') !!}" class="btn btn-gold btn-medium">Cancel</a>
-						
+
 						<a ng-if="password_validated && password_selected && !password_confirmed" type="button" ng-click="undoNewPassword()" class="btn btn-gold btn-medium">Previous</a>
-						<a ng-if="password_validated && password_selected && !password_confirmed" type="button" class="btn btn-gold btn-medium" ng-click="confirmNewPassword()">Change</a>    	
+						<a ng-if="password_validated && password_selected && !password_confirmed" type="button" class="btn btn-gold btn-medium" ng-click="changePassword()">Change</a>    	
 				    </div>
 				</div>
 			</div>

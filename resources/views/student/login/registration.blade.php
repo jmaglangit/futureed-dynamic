@@ -21,15 +21,18 @@
             </div>
             
             <div class="form-content col-md-12">
-                <div class="error" ng-if="error">
-                    <p>{! error !}</p>
+                <div class="alert alert-danger" ng-if="errors">
+                  <p ng-repeat="error in errors" > 
+                    {! error !}
+                  </p>
                 </div>
+                
                 <fieldset>
                     <legend>User Credentials</legend>
                     <div class="form-group">
                         <label for="" class="col-md-2 control-label">Username<span class="required">*</span></label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" ng-model="reg.username" name="username" placeholder="Username" 
+                            <input type="text" class="form-control" id="username" ng-model="reg.username" name="username" placeholder="Username" 
                             ng-model-options="{debounce : {'default' : 1000}}" ng-change="checkAvailability(reg.username, 'Student')" required />
                         </div>
                         <div style="margin-top: 7px;"> 
@@ -41,7 +44,7 @@
                     <div class="form-group">
                         <label for="" class="col-md-2 control-label">Email<span class="required">*</span></label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" ng-model="reg.email" placeholder="Email Address"
+                            <input type="text" class="form-control" id="email" ng-model="reg.email" placeholder="Email Address"
                                 ng-model-options="{debounce : {'default' : 1000}}" ng-change="checkEmailAvailability(reg.email, 'Student')" required />
                         </div>
                         <div style="margin-top: 7px;">
@@ -56,19 +59,19 @@
                     <div class="form-group">
                         <label for="" class="col-md-2 control-label">First Name<span class="required">*</span></label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" ng-model="reg.first_name" placeholder="First Name" required />
+                            <input type="text" class="form-control" id="first_name" ng-model="reg.first_name" placeholder="First Name" required />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="" class="col-md-2 control-label">Last Name<span class="required">*</span></label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" ng-model="reg.last_name" placeholder="Last Name" required />
+                            <input type="text" class="form-control" id="last_name" ng-model="reg.last_name" placeholder="Last Name" required />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="" class="col-md-2 control-label">Gender<span class="required">*</span></label>
                         <div class="col-md-4">
-                            {!! Form::select('', array('' => '-- Select Gender --', 'male' => 'Male', 'female' => 'Female'), 'male',array('class' => 'form-control', 'ng-model' => 'reg.gender')); !!}
+                            {!! Form::select('', array('' => '-- Select Gender --', 'male' => 'Male', 'female' => 'Female'), 'male',array('id' => 'gender', 'class' => 'form-control', 'ng-model' => 'reg.gender')); !!}
                         </div>
                     </div>  
                     <div class="form-group">
@@ -91,19 +94,19 @@
                     <div class="form-group">
                         <label for="" class="col-md-2 control-label">City<span class="required">*</span></label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" ng-model="reg.city" placeholder="City" required />
+                            <input type="text" class="form-control" id="city" ng-model="reg.city" placeholder="City" required />
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="" class="col-md-2 control-label">State<span class="required">*</span></label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" ng-model="reg.state" placeholder="State" required />
+                            <input type="text" class="form-control" id="state" ng-model="reg.state" placeholder="State" required />
                         </div>
                     </div>
                     <div class="form-group" ng-init="getCountries()">
                         <label for="" class="col-md-2 control-label">Country<span class="required">*</span></label>
                         <div class="col-md-4">
-                            <select class="form-control" ng-model="reg.country">
+                            <select id="country" class="form-control" ng-model="reg.country">
                                 <option value="">-- Select Country --</option>
                                 <option ng-repeat="country in countries" value="{! country.id !}">{! country.name!}</option>
                             </select>
@@ -122,7 +125,7 @@
                         <label for="" class="col-md-2 control-label">School level<span class="required">*</span></label>
 
                         <div class="col-md-4 nullable">
-                            <select class="form-control" ng-model="reg.grade_code">
+                            <select id="grade_code" class="form-control" ng-model="reg.grade_code">
                                 <option value="">-- Select Level --</option>
                                 <option ng-repeat="grade in grades" value="{! grade.code !}">{! grade.name !}</option>
                             </select>

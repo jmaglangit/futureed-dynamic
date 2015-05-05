@@ -2,10 +2,14 @@
   <div class="enter-pass-con form-select-password" ng-if="enter_pass">
       <div ng-if="!locked">
         <div class="title">Please Select Your Password</div>
-        <div class="error" ng-if="error">
-          <p>{! error !}</p>
+        
+        <div class="alert alert-danger" ng-if="errors">
+          <p ng-repeat="error in errors" > 
+            {! error !}
+          </p>
         </div>
-        <form id="password_form" action="{!! route('student.login.process') !!}" method="POST">
+
+        {!! Form::open(array('id' => 'password_form', 'method' => 'POST', 'route' => 'student.login.process')) !!}
           <div class="form_content">
             <ul class="form_password list-unstyled list-inline">
               <li class="item" ng-repeat="item in image_pass" ng-click="selectPassword($event)">
@@ -15,7 +19,7 @@
             </ul>
           </div>
           <input type="hidden" name="user_data" >
-        </form>
+        {!! Form::close() !!}
 
         <div class="btn-container">
             <button class="btn btn-purple btn-medium" ng-click="cancelLogin()">Cancel</button>

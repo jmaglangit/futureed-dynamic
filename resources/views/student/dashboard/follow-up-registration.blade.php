@@ -23,11 +23,12 @@
             </div>
             <div class="">
                 <div class="lmtcontain form-group" ng-if="!has_avatar">
-                    <div class="error" ng-if="error">
-                      <p>{! error !}</p>
+                    <h3>Pick an Avatar for your Profile</h3>
+                    <div class="alert alert-danger" ng-if="errors">
+                        <p ng-repeat="error in errors" > 
+                          {! error !}
+                        </p>
                     </div>
-
-                	<h3>Pick an Avatar for your Profile</h3>
                     <div ng-if="!has_avatar">
                       <form id="change_avatar_form">
                         <div class="form-select-password">
