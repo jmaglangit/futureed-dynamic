@@ -144,9 +144,9 @@ class StudentLoginController extends StudentController {
 
         if($is_disabled){
 
+
             $response = [
-                'status' => 202,
-                'data' => $is_disabled
+                'status' => $is_disabled,
             ];
 
 
@@ -172,7 +172,7 @@ class StudentLoginController extends StudentController {
 
         if($response['status'] <> 200){
 
-            return $this->respondErrorMessage(2004);
+            return $this->respondErrorMessage($response['status']);
 
         }elseif($response['status']==200){
 
