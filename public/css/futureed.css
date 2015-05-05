@@ -69,7 +69,7 @@ body {/*background: radial-gradient(transparent 50%, rgba(0, 0, 0, 0.3) 100%), l
 }
 
 .success-color {
-	color: #3c763d;
+	color: #3c763d !important;
 }
 
 /*----- BUTTON -----*/
