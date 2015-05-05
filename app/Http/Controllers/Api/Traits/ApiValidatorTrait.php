@@ -5,29 +5,7 @@ use Illuminate\Support\Facades\Validator;
 trait ApiValidatorTrait {
 
     use ErrorMessageTrait;
-
-    public $messageBag = [];
-
-    public function setMessageBag($message){
-        $this->messageBag = $message;
-        return $this;
-    }
-
-    public function getMessageBag(){
-        return $this->messageBag;
-    }
-
-    public function addMessageBag($message){
-
-        if(empty($this->messageBag) && !empty($message)){
-            $this->setMessageBag([$message]);
-        } elseif(!empty($message) ) {
-            $this->messageBag = array_merge(
-                $this->getMessageBag(),
-                [$message]
-            );
-        }
-    }
+    use MessageBagTrait;
 
     //Check parameters of the fields.
     public function parameterCheck($input, $paramName){

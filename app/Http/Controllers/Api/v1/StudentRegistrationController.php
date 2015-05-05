@@ -33,17 +33,6 @@ class StudentRegistrationController extends StudentController {
             'first_name',
             'last_name');
 
-
-        //validate
-//        if(!$user['username'] || !$user['email'] || !$user['first_name'] || !$user['last_name'] || !$student['gender']|| !$student['birth_date']
-//            || !$student['school_code'] || !$student['grade_code'] || !$student['country'] || !$student['state'] || !$student['city']){
-//
-//            return $this->setStatusCode(200)->respondWithError([
-//                'error_code' => 204,
-//                'message' => 'Incomplete parameter requirements'
-//            ]);
-//        }
-
         //Student fields validations
         $this->addMessageBag($this->firstName($student,'first_name'));
         $this->addMessageBag($this->lastName($student,'last_name'));
@@ -84,7 +73,7 @@ class StudentRegistrationController extends StudentController {
         } else {
 
             $return = $user_response;
-            return $this->respondWithError($return);
+            return $this->respondErrorMessage($return['error_code']);
 
         }
 
@@ -102,9 +91,10 @@ class StudentRegistrationController extends StudentController {
             ]);
         } else {
 
+            //TODO: check if this is have been entered.
             $return = array_merge($user_response,$student_response);
 
-            return $this->setStatusCode(200)->respondWithError($return);
+            return $this->respondWithError($return);
 
         }
 
