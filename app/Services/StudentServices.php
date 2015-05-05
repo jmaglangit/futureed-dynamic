@@ -126,19 +126,16 @@ class StudentServices {
                 if(!$this->user->exceedLoginAttempts($user_id['user_id'])){
                     $this->user->lockAccount($user_id['user_id']);
                     return [
-                        'status' => 202,
-                        'data' => $this->user->checkUserDisabled($user_id['user_id'])
+                        'status' => $this->user->checkUserDisabled($user_id['user_id'])
                     ];
                 }
                 return [
-                    'status' => 202,
-                    'data' => 'Picture Password is incorrect.'
+                    'status' => 2004
                 ];
             }
         } else {
             return [
-                'status' => 202,
-                'data' => $is_disabled
+                'status' => $is_disabled
             ];
         }
     }
