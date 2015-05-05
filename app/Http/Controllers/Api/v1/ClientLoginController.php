@@ -37,9 +37,8 @@ class ClientLoginController extends ClientController {
         $input['password'] = sha1($input['password']);
         $return  = $this->user->checkPassword($response['data'],$input['password']);
 
-        if(isset($return['error_code'])){
-
-            return $this->respondWithError($return);
+        if(!$return){
+            return $this->respondErrorMessage(2233);
         }
 
         //check role of user if exist

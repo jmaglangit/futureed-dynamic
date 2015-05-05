@@ -169,10 +169,7 @@ class UserServices {
         $return = $this->users->checkPassword($id,$password);
 
         if(is_null($return)){
-            return [
-                'error_code' => 204,
-                'message' => 'Invalid Password'
-            ];
+            return false;
         }
 
         return [
