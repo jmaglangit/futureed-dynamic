@@ -162,7 +162,7 @@
 	                        	{!! Form::text('age', ''
 	                                , array(
 	                                    'class' => 'form-control'
-	                                    , 'ng-disabled' => '!edit'
+	                                    , 'ng-disabled' => 'true'
 	                                    , 'placeholder' => 'Age' 
 	                                    , 'ng-model' => 'prof.age')
 	                            ) !!}

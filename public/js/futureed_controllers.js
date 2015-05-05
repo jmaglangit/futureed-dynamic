@@ -2,6 +2,7 @@ angular.module('futureed.controllers', [])
   .controller('futureedController', FutureedController);
 
 function FutureedController($scope, apiService) {
+
   $scope.display_date = new Date();
   
   /**
@@ -163,7 +164,7 @@ function FutureedController($scope, apiService) {
 
     apiService.validateEmail(email, user_type).success(function(response) {
       $scope.n_loading = Constants.FALSE;
-      if(response.status == 200) {
+      if(response.status == Constants.STATUS_OK) {
         if(response.errors) {
           if(response.errors.error_code == 2002) {
             $scope.n_success = Constants.TRUE;
@@ -284,6 +285,8 @@ function FutureedController($scope, apiService) {
 
   function getLoginPassword() {
     $scope.id = ($scope.id) ? $scope.id : $scope.user.id;
+    var FC = this;
+    FC.asd = "asd1";
 
     apiService.getLoginPassword($scope.id).success(function (response) {
       if(response.status == Constants.STATUS_OK) {
@@ -374,6 +377,9 @@ function FutureedController($scope, apiService) {
         } else if(response.data){
           $scope.email = response.data.email;
           $scope.sent = Constants.TRUE;
+          if($scope.resend) {
+            $scope.resent = Constants.TRUE;
+          }
         } 
       }
 
@@ -390,9 +396,9 @@ function FutureedController($scope, apiService) {
   * Params: username - the specified username, or the email from link
   */
    function studentResendCode() {
-    $scope.resend = Constants.TRUE;
     $scope.username = (!isStringNullorEmpty($scope.username)) ? $scope.username : $("#forgot_success_form input[name='username']").val(); 
     $scope.studentForgotPassword();
+    $scope.resend = Constants.TRUE;
   }
 
   /**
@@ -565,7 +571,7 @@ function FutureedController($scope, apiService) {
         $scope.ui_unblock();
       });
     } else {
-      $scope.errors = [Constants.MSG_PW_NOT_MATCH];
+      $scope.errors = [Constants.MSG_PPW_NOT_MATCH];
       $("html, body").animate({ scrollTop: 0 }, "slow");
     }
   }
@@ -675,7 +681,7 @@ function FutureedController($scope, apiService) {
         $scope.internalError();
       });
     } else {
-      $scope.errors = [Constants.MSG_PW_INCORRECT];
+      $scope.errors = [Constants.MSG_PPW_INCORRECT];
     }
 
     $("html, body").animate({ scrollTop: 0 }, "slow");
@@ -695,7 +701,7 @@ function FutureedController($scope, apiService) {
       $scope.image_pass = shuffle($scope.image_pass);
       $("ul.form_password li").removeClass('selected');
     } else {
-      $scope.errors = [Constants.MSG_PW_SELECT_NEW];
+      $scope.errors = [Constants.MSG_PPW_SELECT_NEW];
     }
 
     $("html, body").animate({ scrollTop: 0 }, "slow");
@@ -739,7 +745,7 @@ function FutureedController($scope, apiService) {
           $scope.internalError();
         });
     } else {
-      $scope.errors = [Constants.MSG_PW_NOT_MATCH];
+      $scope.errors = [Constants.MSG_PPW_NOT_MATCH];
       $("html, body").animate({ scrollTop: 0 }, "slow");
     }
   }
@@ -765,7 +771,7 @@ function FutureedController($scope, apiService) {
   function getAvatarImages(change) {
     if(change || $scope.user.avatar_id == null || $scope.user.avatar_id == "") {
       apiService.getAvatarImages($scope.user.gender).success(function(response) {
-        if(response.status == 200) {
+        if(response.status == Constants.STATUS_OK) {
           if(response.errors) {
             $scope.errorHandler(response.errors);
           } else if(response.data){
@@ -901,7 +907,7 @@ function FutureedController($scope, apiService) {
 
     $scope.ui_block();
     apiService.validateCode($scope.code, $scope.email, $scope.user_type).success(function(response) {
-      if(response.status == 200) {
+      if(response.status == Constants.STATUS_OK) {
         if(response.errors) {
           $scope.errorHandler(response.errors);
         } else if(response.data){
