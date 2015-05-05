@@ -22,13 +22,14 @@
 					</div>					
 				</div>
 				<div class="form-content col-md-12">
+					@include('student.login.enter-password')
 					<div class="alert alert-danger" ng-if="error">
 	                    <p>{! error !}</p>
 	                </div>
 	                <div class="alert alert-success" ng-if="success">
 	                	<p>{! success_msg !}</p>
 	                </div>
-	                @include('student.login.enter-password')
+	                
 					<form class="form-horizontal" name="edit_email" id="edit_email">
 						<div class="form-group">
 							<label for="current_email" class="col-xs-2 control-label">
@@ -36,8 +37,20 @@
 								<span class="required">*</span>
 							</label>
 							<div class="col-xs-5">
-								<input type="text" class="form-control" id="current_email" name="current_email" placeholder="Current Email" ng-model="email_current" required />
+								{!! Form::text('email_current', ''
+									, array(
+										'class' => 'form-control'
+										, 'placeholder' => 'Current Email'
+										, 'ng-model' => 'email_current'
+										, 'ng-model-option' => "{debounce: {'default' : 10000}}"
+										, 'ng-blur' => "checkCurrentEmail(email_current)")
+								)!!}
 							</div>
+							<div class="col-xs-5 alert-message">
+	                            <i ng-if="c_loading" class="fa fa-spinner fa-spin"></i>
+	                            <i ng-if="c_success" class="fa fa-check success-color"></i>
+	                            <span ng-if="c_error" class="alert alert-error edit-mail">{! c_error !}</span>
+	                        </div>
 						</div>
 						<div class="form-group">
 							<label for="new_email" class="col-xs-2 control-label">
@@ -45,12 +58,19 @@
 								<span class="required">*</span>
 							</label>
 							<div class="col-xs-5">
-								<input type="text" class="form-control" id="new_email" name="new_email" placeholder="New Email" ng-model="email_new" ng-blur="checkEmailAvailability(email_new, 'Student')" required />
+								{!! Form::text('email_new', ''
+									, array(
+										'class' => 'form-control'
+										, 'placeholder' => 'New Email'
+										, 'ng-model' => 'email_new'
+										, 'ng-model-option' => "{debounce: {'default' : 10000}}"
+										, 'ng-blur' => "checkEmailChange(email_new, 'Student')")
+								)!!}
 							</div>
 							<div class="col-xs-5 alert-message">
-	                            <i ng-if="e_loading" class="fa fa-spinner fa-spin"></i>
-	                            <i ng-if="e_success" class="fa fa-check success-color"></i>
-	                            <span ng-if="e_error" class="alert alert-error"> Email Address is invalid or already exist</span>
+	                            <i ng-if="n_loading" class="fa fa-spinner fa-spin"></i>
+	                            <i ng-if="n_success" class="fa fa-check success-color"></i>
+	                            <span ng-if="n_error" class="alert alert-error edit-mail"> {! n_error !}</span>
 	                        </div>
 						</div>						
 						<div class="form-group">
@@ -59,8 +79,21 @@
 								<span class="required">*</span>
 							</label>
 							<div class="col-xs-5">
-								<input type="text" class="form-control" id="confirm_email" name="confirm_email" placeholder="Re-enter Email" ng-model="email_confirm" required />
+								{!! Form::text('email_new', ''
+									, array(
+										'class' => 'form-control'
+										, 'id' => 'email_confirm'
+										, 'placeholder' => 'Confirm Email'
+										, 'ng-model' => 'email_confirm'
+										, 'ng-model-option' => "{debounce: {'default' : 10000}}"
+										, 'ng-blur' => "checkEmailConfirm(email_confirm)")
+								)!!}
 							</div>
+							<div class="col-xs-5 alert-message">
+	                            <i ng-if="cf_loading" class="fa fa-spinner fa-spin"></i>
+	                            <i ng-if="cf_success" class="fa fa-check success-color"></i>
+	                            <span ng-if="cf_error" class="alert alert-error edit-mail"> {! cf_error !}</span>
+	                        </div>
 						</div>
 						<div class="form-group">
 							<div class="btncon col-xs-9" style="float:right;">

@@ -24,16 +24,22 @@
         		A new code has been sent to your email.
         	</p>
 
-        	{!! Form::open(array('id' => 'success_form', 'method' => 'POST', 'route' => 'student.login.set_password')) !!}
+        	{!! Form::open(array('id' => 'registration_success_form', 'method' => 'POST', 'route' => 'student.login.set_password')) !!}
 	            <div class="form-group">
 		          	<label>Enter Code:</label>
-		            <input type="text" class="form-control" ng-model="confirmation_code" name="confirmation_code" placeholder="Confirmation Code" required />
-		            <input type="hidden" ng-model="email" name="email" value="{!! $email !!}" />
-		            <input type="hidden" ng-model="id" name="id" />
+		            {!! Form::text('confirmation_code', $email, 
+		            	array(
+		            		'ng-model' => 'confirmation_code'
+		            		, 'placeholder' => 'Confirmation Code'
+		            		, 'class' => 'form-control')
+		            ) !!}
+
+		            {!! Form::hidden('email', $email, array('ng-model' => 'email')) !!}
+		            {!! Form::hidden('id', '', array('ng-model' => 'id')) !!}
 		        </div>
 		        <div class="btn-container">
-		        	<button type="button" class="btn btn-red btn-medium" ng-click="studentConfirmRegistration()">Confirm</button>
-	            	<button type="button" class="btn btn-purple btn-medium" ng-click="studentResendConfirmation()">Resend</button>
+		        	<button type="button" class="btn btn-maroon btn-medium" ng-click="studentConfirmRegistration()">Confirm</button>
+	            	<button type="button" class="btn btn-gold btn-medium" ng-click="studentResendConfirmation()">Resend</button>
 		        </div>
 	        {!! Form::close() !!}
 	    </div>

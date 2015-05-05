@@ -5,8 +5,7 @@
 <div class="container login" ng-cloak>
   <div class="col-md-6 col-md-offset-3">
     <div class="form-style form-select-password">
-      <form name="success_form" id="success_form" 
-            action="{!! route('student.login.reset_password') !!}" method="POST">
+      {!! Form::open(array('id' => 'forgot_success_form', 'route' => 'student.login.reset_password', 'method' => 'POST')) !!}
         <div class="form_content">
           <div class="title" ng-if="!resend">@if($show) Email Sent @else Enter Code @endif</div>
           <div class="title" ng-if="resend">Code Resent</div>
@@ -31,16 +30,23 @@
               </div>
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" ng-model="reset_code" name="reset_code" placeholder="Reset Code" autocomplete="off" />
-              <input type="hidden" ng-model="username" name="username" value="{!! $email !!}"/>
-              <input type="hidden" ng-model="id" name="id" required />
+              {!! Form::text('reset_code', ''
+                  , array(
+                      'class' => 'form-control'
+                      , 'placeholder' => 'Reset Code' 
+                      , 'ng-model' => 'reset_code'
+                      , 'autocomplete' => 'off')
+              ) !!}
+              
+              {!! Form::hidden('username', $email, array('ng-model' => 'username')) !!}
+              {!! Form::hidden('id', '', array('ng-model' => 'id')) !!}
             </div>
             <div class="btn-container">
-              <a type="button" class="btn btn-red btn-medium" ng-click="studentValidateCode(reset_code)">PROCEED</a>
-              <a type="button" ng-disabled="disabled" class="btn btn-purple btn-medium" ng-click="studentResendCode()">Resend Code</a>
+              <a type="button" class="btn btn-maroon btn-medium" ng-click="studentValidateCode(reset_code)">PROCEED</a>
+              <a type="button" ng-disabled="disabled" class="btn btn-gold btn-medium" ng-click="studentResendCode()">Resend Code</a>
             </div>
           </div>
-        </form>
+        {!! Form::close() !!}
       </div>
     </div>
   </div>

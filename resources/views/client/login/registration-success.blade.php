@@ -18,7 +18,7 @@
     		A new code has been sent to your email.
     	</p>
     	<small>Please check your inbox or your spam folder for the email. The email contains a code that you need to input below.</small>
-        <form>
+        {!! Form::open() !!}
 	        <div class="form-group">
 	          	<label>Enter Code:</label>
 	            <input type="text" class="form-control" ng-model="confirmation_code" name="confirmation_code" placeholder="Confirmation Code" />
@@ -28,7 +28,7 @@
 	        	<button type="button" class="btn btn-blue btn-medium" ng-disabled="disabled" ng-click="confirmClientRegistration()">Confirm</button>
             	<button type="button" class="btn btn-gold btn-medium" ng-disabled="disabled" ng-click="resendClientConfirmation()">Resend</button>
 	        </div>
-        </form>
+        {!! Form::close() !!}
     </div>
 </div>
 

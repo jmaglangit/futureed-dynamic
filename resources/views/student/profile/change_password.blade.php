@@ -45,9 +45,8 @@
 					</div>
 
 					<div class="col-md-8 col-md-offset-2" ng-if="!password_confirmed && !locked">
-				      <form id="reset_password_form">
+				      {!! Form::open(array('id' => 'change_password_form')) !!}
 				        <div class="form-select-password">
-				          <div id="title" class="title"></div>
 				          <div class="alert alert-danger" ng-if="errors">
 				            <p ng-repeat="error in errors" > 
 				              {! error !}
@@ -61,19 +60,16 @@
 				              </li>
 				            </ul>
 						  </div>
-
-				          <input type="hidden" name="selected_image_id" id="selected_image_id" />
-				          <input type="hidden" name="image_pass" />
 				        </div>
-				      </form>
+				      {!! Form::close() !!}
 				    </div>
 
 				    <div class="btn-container">
-					    <a ng-if="!password_validated" type="button" class="btn btn-gold btn-medium" ng-click="validateCurrentPassword()">Proceed</a>
-						<a ng-if="password_validated && !password_selected" type="button" class="btn btn-gold btn-medium" ng-click="selectNewPassword()">Proceed</a>
+					    <a ng-if="!password_validated" type="button" class="btn btn-maroon btn-medium" ng-click="validateCurrentPassword()">Proceed</a>
+						<a ng-if="password_validated && !password_selected" type="button" class="btn btn-maroon btn-medium" ng-click="selectNewPassword()">Proceed</a>
 						<a ng-if="!password_selected" href="{!! route('student.profile.index') !!}" class="btn btn-gold btn-medium">Cancel</a>
 
-						<a ng-if="password_validated && password_selected && !password_confirmed" type="button" ng-click="undoNewPassword()" class="btn btn-gold btn-medium">Previous</a>
+						<a ng-if="password_validated && password_selected && !password_confirmed" type="button" ng-click="undoNewPassword()" class="btn btn-maroon btn-medium">Previous</a>
 						<a ng-if="password_validated && password_selected && !password_confirmed" type="button" class="btn btn-gold btn-medium" ng-click="changePassword()">Change</a>    	
 				    </div>
 				</div>

@@ -132,7 +132,7 @@ body {/*background: radial-gradient(transparent 50%, rgba(0, 0, 0, 0.3) 100%), l
 	border-top: 1px solid #055A7F; 
 	box-shadow: 0 0 0 1px #055A7F, 0 3px 3px rgba(0, 0, 0, 0.3);
 	background-color: #055A7F;
-}å
+}
 .btn-blue:active {
 	box-shadow: inset 0px 6px 21px 3px rgba(188,74,39,1);
 	color: #fff;
@@ -714,9 +714,35 @@ footer{font:normal 12px/30px arial; }
 	color: red;
 }
 
-.error_1008 {
-	line-height: 30px;
+.error-response {
+	margin-top: 8%;
+	text-align: center;
 }
+/* Typography */
+.error-display {
+    margin-bottom: 20px;
+    font-size: 120px;
+    font-weight: 100;
+    color: #a92147;
+}
+.error-text {
+    padding: 2% 0px;
+    margin-bottom: 60px;
+    font-size: 16px;
+    font-weight: 100;
+}
+
+
+/* Buttons */
+.btn-light-blue {
+    background: #09aff9;
+}
+
+.btn--no-border {
+    border: 0;
+    border-radius: 0;
+} 
+
 
 /*
 * Client css
@@ -785,12 +811,16 @@ div > .btncon > a {
 	bottom: 10px;
 }
 .alert-message > .fa-spin{
-	margin-left: 60px;
+	margin-left: 10px;
 }
 .hdr > .detcon > h2 {
 	text-transform: uppercase;
 }
-
+.edit-mail{
+	margin-left: 10px !important;
+	position: relative;
+	top: 20px;
+}
 /*
 * Font Colors
 */
@@ -807,4 +837,5 @@ div > .btncon > a {
   	border-color: #F8B9A7;
   	font-size: 12px;
   	margin-left: 60px;
+  	padding: 10px;
 }

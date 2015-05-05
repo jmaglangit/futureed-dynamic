@@ -17,6 +17,9 @@ function FutureedController($scope, apiService) {
   $scope.getGradeLevel = getGradeLevel;
   $scope.checkAvailability = checkAvailability;
   $scope.checkEmailAvailability = checkEmailAvailability;
+  $scope.checkEmailChange = checkEmailChange;
+  $scope.checkEmailConfirm = checkEmailConfirm;
+  $scope.checkCurrentEmail = checkCurrentEmail;
 
   function errorHandler(errors) {
     $scope.errors = [];
@@ -146,8 +149,65 @@ function FutureedController($scope, apiService) {
       $scope.e_loading = Constants.FALSE;
       $scope.internalError();
     });
+  }  
+
+  function checkEmailChange(email, user_type) {
+    $scope.n_loading = Constants.TRUE;
+    $scope.n_success = Constants.FALSE;
+    $scope.n_error = Constants.FALSE;
+
+    apiService.validateEmail(email, user_type).success(function(response) {
+      $scope.n_loading = Constants.FALSE;
+      if(response.status == 200) {
+        if(response.errors) {
+          if(response.errors.error_code == 2002) {
+            $scope.n_success = Constants.TRUE;
+          } else {
+            $scope.n_error = response.errors[0].message;
+          }
+        } else if(response.data) {
+            $scope.n_error = "Email already exist.";  
+        }
+      }
+    }).error(function(response) {
+      $scope.e_loading = Constants.FALSE;
+      $scope.internalError();
+    });
   }
 
+  function checkCurrentEmail(email_current) {
+
+    $scope.c_loading = Constants.TRUE;
+    $scope.c_success = Constants.FALSE;
+    $scope.c_error = Constants.FALSE;
+    console.log(email_current);
+
+    if($scope.user.email != email_current ||   email_current == null){
+      $scope.c_loading = Constants.FALSE;
+      $scope.c_error = "Please Input your current email!";
+    }else{
+      $scope.c_loading = Constants.FALSE;
+      $scope.c_success = Constants.TRUE;
+    }
+  }
+  function checkEmailConfirm(email_confirm) {
+
+    $scope.cf_loading = Constants.TRUE;
+    $scope.cf_success = Constants.FALSE;
+    $scope.cf_error = Constants.FALSE;
+
+    console.log(email_confirm);
+    if($scope.email_confirm == null){
+      $scope.cf_loading = Constants.FALSE;
+      $scope.cf_error = "Confirm Email is required";
+    }else if($scope.email_new != $scope.email_confirm){
+      $scope.cf_loading = Constants.FALSE;
+      $scope.cf_error = "New password and Confirm password must match."
+    }else{
+      $scope.cf_loading = Constants.FALSE;
+      $scope.cf_success = Constants.TRUE;
+    }
+  }
   /**
   * End of Common Functions / API calls
   */
@@ -250,6 +310,7 @@ function FutureedController($scope, apiService) {
       if(response.status == Constants.STATUS_OK) {
         if(response.errors) {
           $scope.errorHandler(response.errors);
+          getLoginPassword();
         } else if(response.data){
           $("input[name='user_data']").val(JSON.stringify(response.data));
           $("#password_form").submit();
@@ -327,7 +388,7 @@ function FutureedController($scope, apiService) {
   */
    function studentResendCode() {
     $scope.resend = Constants.TRUE;
-    $scope.username = (!isStringNullorEmpty($scope.username)) ? $scope.username : $("input[name='username']").val(); 
+    $scope.username = (!isStringNullorEmpty($scope.username)) ? $scope.username : $("#forgot_success_form input[name='username']").val(); 
     $scope.studentForgotPassword();
   }
 
@@ -343,7 +404,7 @@ function FutureedController($scope, apiService) {
     $scope.errors = Constants.FALSE;
     $scope.user_type = Constants.STUDENT;
     $scope.code = code;
-    $scope.email = ($scope.email) ? $scope.email : $("input[name='username']").val();
+    $scope.email = ($scope.email) ? $scope.email : $("#forgot_success_form input[name='username']").val();
 
     $scope.ui_block();
     apiService.validateCode($scope.code, $scope.email, $scope.user_type).success(function(response) {
@@ -352,7 +413,7 @@ function FutureedController($scope, apiService) {
           $scope.errorHandler(response.errors);
         } else if(response.data){
           $("input[name='id']").val(response.data.id);
-          $("#success_form").submit();
+          $("#forgot_success_form").submit();
         } 
       }
 
@@ -364,21 +425,21 @@ function FutureedController($scope, apiService) {
   }
 
   function showModal(id) {
-    $scope.show_terms = (id == 'terms_modal') ? true : false;
-    $scope.show_policy = (id == 'policy_modal') ? true : false;
-    $scope.show = true;
+    $scope.show_terms = (id == 'terms_modal') ? Constants.TRUE : Constants.FALSE;
+    $scope.show_policy = (id == 'policy_modal') ? Constants.TRUE : Constants.FALSE;
+    $scope.show = Constants.TRUE;
 
 
     $("#"+id).modal({
         backdrop: 'static',
-        keyboard: false,
-        show    : true
+        keyboard: Constants.FALSE,
+        show    : Constants.TRUE
     });
   }
 
   function validateRegistration(reg, terms) {
     $scope.errors = Constants.FALSE;
-    $scope.terms = angular.copy(terms);
+    $scope.terms = terms;
 
     if($scope.e_error || $scope.u_error) {
       $("html, body").animate({ scrollTop: 320 }, "slow");
@@ -392,18 +453,22 @@ function FutureedController($scope, apiService) {
       $scope.reg = reg;
       
       if($scope.reg) {
-        $scope.reg.birth_date = $("input[name='birth_date']").val();
+        $scope.reg.birth_date = $("#registration_form input[name='hidden_date']").val();
         $scope.reg.school_code = -1;
       }
       
       $scope.ui_block();
+      $('#registration_form input').removeClass('required-field');
+      $('#registration_form select').removeClass('required-field');
+
       apiService.validateRegistration($scope.reg).success(function(response) {
         if(response.status == Constants.STATUS_OK) {
           if(response.errors) {
             $scope.errorHandler(response.errors);
 
             angular.forEach(response.errors, function(value, key) {
-              $("#" + value.field).addClass("required-field");
+              $("#registration_form input[name='" + value.field +"']").addClass("required-field");
+              $("#registration_form select[name='" + value.field +"']").addClass("required-field");
             });
           } else if(response.data){
             $scope.success = Constants.TRUE;
@@ -422,8 +487,8 @@ function FutureedController($scope, apiService) {
   function studentConfirmRegistration() {
     $scope.errors = Constants.FALSE;
     $scope.user_type = Constants.STUDENT;
-    $scope.email = (!isStringNullorEmpty($scope.email)) ? $scope.email : $("input[name='email']").val();
-    $scope.confirmation_code = $("input[name='confirmation_code']").val();
+    $scope.email = (!isStringNullorEmpty($scope.email)) ? $scope.email : $("#registration_success_form input[name='email']").val();
+    $scope.confirmation_code = $("#registration_success_form input[name='confirmation_code']").val();
 
     $scope.ui_block();
     apiService.confirmCode($scope.email, $scope.confirmation_code, $scope.user_type).success(function(response) {
@@ -431,8 +496,8 @@ function FutureedController($scope, apiService) {
         if(response.errors) {
           $scope.errorHandler(response.errors);
         } else if(response.data){
-          $("input[name='id']").val(response.data.id);
-          $("#success_form").submit();
+          $("#registration_success_form input[name='id']").val(response.data.id);
+          $("#registration_success_form").submit();
         } 
       }
 
@@ -453,7 +518,7 @@ function FutureedController($scope, apiService) {
   function studentResendConfirmation() {
     $scope.errors = Constants.FALSE;
     $scope.user_type = Constants.STUDENT;
-    $scope.email = (!isStringNullorEmpty($scope.email)) ? $scope.email : $("input[name='email']").val();
+    $scope.email = (!isStringNullorEmpty($scope.email)) ? $scope.email : $("#registration_success_form input[name='email']").val();
 
     $scope.ui_block();
     apiService.resendConfirmation($scope.email, $scope.user_type).success(function(response) {
@@ -511,21 +576,23 @@ function FutureedController($scope, apiService) {
     $scope.u_success = Constants.FALSE;
 
     switch(active) {
-      case "rewards"  :
+      case Constants.REWARDS  :
         $scope.active_rewards = 1;
         break;
-      case "avatar"   :
+      case Constants.AVATAR   :
         $scope.active_avatar = 1;
         break;
-      case "password" :
+      case Constants.PASSWORD :
         $scope.getLoginPassword();
         $scope.active_password = 1;
         break;
-      case "index"    :
+      case Constants.INDEX    :
       default:
         $scope.studentDetails();
         $scope.active_index = 1;
         $scope.edit = Constants.FALSE;
+        $('#profile_form input').removeClass('required-field');
+        $('#profile_form select').removeClass('required-field');
 
         $("html, body").animate({ scrollTop: 0 }, "slow");
         break;
@@ -534,6 +601,8 @@ function FutureedController($scope, apiService) {
 
   function editProfile() {
     $scope.studentDetails();
+    $scope.errors = Constants.FALSE;
+    $scope.success = Constants.FALSE;
     $scope.edit = Constants.TRUE;
 
     $("html, body").animate({ scrollTop: 0 }, "slow");
@@ -546,19 +615,22 @@ function FutureedController($scope, apiService) {
       $("html, body").animate({ scrollTop: 350 }, "slow");
     } else {
       $scope.prof.school_code = 1;
-      $scope.prof.birth_date = $("input[name='birth_date']").val();
+      $scope.prof.birth_date = $("input[name='hidden_date']").val();
 
       $scope.ui_block();
+      $('#profile_form input').removeClass('required-field');
+      $('#profile_form select').removeClass('required-field');
       apiService.saveProfile($scope.prof).success(function(response) {
         if(response.status == Constants.STATUS_OK) {
           if(response.errors) {
             $scope.errorHandler(response.errors);
 
             angular.forEach(response.errors, function(value, key) {
-              $("#" + value.field).addClass("required-field");
+              $("#profile_form input[name='" + value.field +"']").addClass("required-field");
+              $("#profile_form select[name='" + value.field +"']").addClass("required-field");
             });
           } else if(response.data){
-            $scope.setActive('index');
+            $scope.setActive(Constants.INDEX);
             $scope.success = Constants.TRUE;
           }
         } 
@@ -613,9 +685,9 @@ function FutureedController($scope, apiService) {
     $scope.errors = Constants.FALSE;
 
     if($scope.image_id) {
-      $scope.password_selected = true;
+      $scope.password_selected = Constants.TRUE;
       $scope.new_password = $scope.image_id;
-      $scope.image_id = "";
+      $scope.image_id = Constants.FALSE;
       $scope.image_pass = shuffle($scope.image_pass);
       $("ul.form_password li").removeClass('selected');
     } else {
@@ -670,7 +742,7 @@ function FutureedController($scope, apiService) {
 
   function studentDetails() {
     apiService.studentDetails($scope.user.id, $scope.user.access_token).success(function(response) {
-      if(response.status == 200) {
+      if(response.status == Constants.STATUS_OK) {
         if(response.errors) {
           $scope.errorHandler(response.errors);
         } else if(response.data) {
@@ -700,7 +772,7 @@ function FutureedController($scope, apiService) {
         $scope.internalError();
       });
     } else {
-      $scope.has_avatar = true;
+      $scope.has_avatar = Constants.TRUE;
     }
   }
 
@@ -714,7 +786,7 @@ function FutureedController($scope, apiService) {
 
   function selectAvatar() {
     apiService.selectAvatar($scope.user.id, $scope.avatar_id).success(function(response) {
-      if(response.status == 200) {
+      if(response.status == Constants.STATUS_OK) {
         if(response.errors) {
           $scope.errorHandler(response.errors);
         } else if(response.data){
@@ -722,7 +794,7 @@ function FutureedController($scope, apiService) {
           $scope.user.avatar = response.data.url;
         
           $scope.session_user = $scope.user;
-          $scope.has_avatar = true;
+          $scope.has_avatar = Constants.TRUE;
           apiService.updateUserSession($scope.user).success(function(response) {
               $("ul.avatar_list li").removeClass('selected');
           }).error(function() {
@@ -880,10 +952,6 @@ function FutureedController($scope, apiService) {
         $scope.principal = Constants.TRUE;
         $scope.reg.client_role = "Principal";
         break;
-      case "user_teacher"   :
-        $scope.teacher = Constants.TRUE;
-        $scope.reg.client_role = "Teacher";
-        break;
       case "user_parent" :
         $scope.parent = Constants.TRUE;
         $scope.reg.client_role = "Parent";
@@ -984,7 +1052,8 @@ function FutureedController($scope, apiService) {
     } else if ($scope.current_email == null || $scope.email_new == null || $scope.email_confirm == null) {
       $scope.error = "Please fill the required fields"
     }
-
+    $scope.enter_pass = true;
+    $scope.getLoginPassword();
     $("html, body").animate({ scrollTop: 0 }, "slow");
   }
 

@@ -21,7 +21,12 @@
             </div>
 
             <div class="form-group">
-              <input type="text" class="form-control" name="username" ng-model="username" autocomplete="off" />
+              {!! Form::text('username', ''
+                  , array(
+                      'class' => 'form-control'
+                      , 'autocomplete' => 'off'
+                      , 'ng-model' => 'username')
+              ) !!}
             </div>
             <div class="form-group">
               <button type="button" ng-click="validateUser()" class="btn btn-maroon">Next</button>              
@@ -33,7 +38,7 @@
           </div>  
           <div class="text-group">
             <small><a href="{!! route('student.login.forgot_password') !!}" class="student-forgot">Forgot your password?</a></small>
-            <p><a href="{!! route('student.registration') !!}" class="btn btn-yellow">Sign Up</a></p>      
+            <p><a href="{!! route('student.registration') !!}" class="btn btn-gold">Sign Up</a></p>      
           </div>
         </div>
       </div>

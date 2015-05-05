@@ -22,7 +22,7 @@
         {!! Form::close() !!}
 
         <div class="btn-container">
-            <button class="btn btn-purple btn-medium" ng-click="cancelLogin()">Cancel</button>
+            <button class="btn btn-gold btn-medium" ng-click="cancelLogin()">Cancel</button>
         </div>
       </div>
   </div>

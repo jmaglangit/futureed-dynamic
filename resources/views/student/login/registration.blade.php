@@ -3,7 +3,7 @@
 @section('content')
 <div class="container login student-fnt" ng-cloak>
     <div class="form-style register_student form-wide" ng-init="success={!! $success !!}" ng-show="!success"> 
-        <form class="form-horizontal simple-form" name="form_registration" id="form_registation">
+        {!! Form::open(array('id' => 'registration_form' , 'class' => 'form-horizontal simple-form')) !!}
             <div class="form-header">
                 <div class="media">
                     <div class="media-left">
@@ -32,8 +32,14 @@
                     <div class="form-group">
                         <label for="" class="col-md-2 control-label">Username<span class="required">*</span></label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" id="username" ng-model="reg.username" name="username" placeholder="Username" 
-                            ng-model-options="{debounce : {'default' : 1000}}" ng-change="checkAvailability(reg.username, 'Student')" required />
+                            {!! Form::text('username', ''
+                                , array(
+                                    'class' => 'form-control'
+                                    , 'placeholder' => 'Username' 
+                                    , 'ng-model' => 'reg.username'
+                                    , 'ng-model-options' => "{debounce : {'default' : 1000}}"
+                                    , 'ng-change' => "checkAvailability(reg.username, 'Student')")
+                            ) !!}
                         </div>
                         <div style="margin-top: 7px;"> 
                             <i ng-if="u_loading" class="fa fa-spinner fa-spin"></i>
@@ -44,8 +50,14 @@
                     <div class="form-group">
                         <label for="" class="col-md-2 control-label">Email<span class="required">*</span></label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" id="email" ng-model="reg.email" placeholder="Email Address"
-                                ng-model-options="{debounce : {'default' : 1000}}" ng-change="checkEmailAvailability(reg.email, 'Student')" required />
+                            {!! Form::text('email', ''
+                                , array(
+                                    'class' => 'form-control'
+                                    , 'placeholder' => 'Email Address' 
+                                    , 'ng-model' => 'reg.email'
+                                    , 'ng-model-options' => "{debounce : {'default' : 1000}}"
+                                    , 'ng-change' => "checkEmailAvailability(reg.email, 'Student')")
+                            ) !!}
                         </div>
                         <div style="margin-top: 7px;">
                             <i ng-if="e_loading" class="fa fa-spinner fa-spin"></i>
@@ -59,19 +71,38 @@
                     <div class="form-group">
                         <label for="" class="col-md-2 control-label">First Name<span class="required">*</span></label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" id="first_name" ng-model="reg.first_name" placeholder="First Name" required />
+                            {!! Form::text('first_name', ''
+                                , array(
+                                    'class' => 'form-control'
+                                    , 'placeholder' => 'First Name' 
+                                    , 'ng-model' => 'reg.first_name')
+                            ) !!}
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="" class="col-md-2 control-label">Last Name<span class="required">*</span></label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" id="last_name" ng-model="reg.last_name" placeholder="Last Name" required />
+                            {!! Form::text('last_name', ''
+                                , array(
+                                    'class' => 'form-control'
+                                    , 'placeholder' => 'Last Name' 
+                                    , 'ng-model' => 'reg.last_name')
+                            ) !!}
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="" class="col-md-2 control-label">Gender<span class="required">*</span></label>
                         <div class="col-md-4">
-                            {!! Form::select('', array('' => '-- Select Gender --', 'male' => 'Male', 'female' => 'Female'), 'male',array('id' => 'gender', 'class' => 'form-control', 'ng-model' => 'reg.gender')); !!}
+                            {!! Form::select('gender'
+                                , array(
+                                    '' => '-- Select Gender --'
+                                    , 'male' => 'Male'
+                                    , 'female' => 'Female')
+                                , ''
+                                , array(
+                                    'class' => 'form-control'
+                                    , 'ng-model' => 'reg.gender')
+                            ); !!}
                         </div>
                     </div>  
                     <div class="form-group">
@@ -80,8 +111,8 @@
                             <div class="dropdown">
                               <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
                                 <div class="input-group">
-                                    <input disabled="disabled" type="text" id="birth_date" class="form-control" value="{! reg.birth | date:'yyyy-MM-dd' !}">
-                                    <input type="hidden" name="birth_date" value="{! reg.birth | date:'yyyyMMdd' !}">
+                                    <input disabled="disabled" type="text" name="birth_date" placeholder="yyyy-MM-dd" class="form-control" value="{! reg.birth | date:'yyyy-MM-dd' !}">
+                                    <input type="hidden" name="hidden_date" value="{! reg.birth | date:'yyyyMMdd' !}">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                                 </div>
                               </a>
@@ -94,19 +125,29 @@
                     <div class="form-group">
                         <label for="" class="col-md-2 control-label">City<span class="required">*</span></label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" id="city" ng-model="reg.city" placeholder="City" required />
+                            {!! Form::text('city', ''
+                                , array(
+                                    'class' => 'form-control'
+                                    , 'placeholder' => 'City' 
+                                    , 'ng-model' => 'reg.city')
+                            ) !!}
                         </div>
                     </div>
                     <div class="form-group">
                         <label for="" class="col-md-2 control-label">State<span class="required">*</span></label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" id="state" ng-model="reg.state" placeholder="State" required />
+                            {!! Form::text('state', ''
+                                , array(
+                                    'class' => 'form-control'
+                                    , 'placeholder' => 'State' 
+                                    , 'ng-model' => 'reg.state')
+                            ) !!}
                         </div>
                     </div>
                     <div class="form-group" ng-init="getCountries()">
                         <label for="" class="col-md-2 control-label">Country<span class="required">*</span></label>
                         <div class="col-md-4">
-                            <select id="country" class="form-control" ng-model="reg.country">
+                            <select name="country" class="form-control" ng-model="reg.country">
                                 <option value="">-- Select Country --</option>
                                 <option ng-repeat="country in countries" value="{! country.id !}">{! country.name!}</option>
                             </select>
@@ -118,14 +159,19 @@
                     <div class="form-group" ng-if="invited">
                         <label for="" class="col-md-2 control-label">School Name<span class="required">*</span></label>
                         <div class="col-md-4">
-                            <input type="text" class="form-control" ng-model="reg.school_code" disabled="disabled" value="N/A" required />
+                            {!! Form::text('state', 'N/A'
+                                , array(
+                                    'class' => 'form-control'
+                                    , 'disabled' => 'disabled'
+                                    , 'ng-model' => 'reg.school_code')
+                            ) !!}
                         </div>
                     </div>
                     <div class="form-group" ng-init="getGradeLevel()">
                         <label for="" class="col-md-2 control-label">School level<span class="required">*</span></label>
 
                         <div class="col-md-4 nullable">
-                            <select id="grade_code" class="form-control" ng-model="reg.grade_code">
+                            <select name="grade_code" class="form-control" ng-model="reg.grade_code">
                                 <option value="">-- Select Level --</option>
                                 <option ng-repeat="grade in grades" value="{! grade.code !}">{! grade.name !}</option>
                             </select>
@@ -138,18 +184,18 @@
                     <div class="form-group">
                         <div class="checkbox text-center">
                             <label>
-                                <input type="checkbox" ng-model="terms">
+                                {!! Form::checkbox('terms', 1, null, array('ng-model' => 'terms')) !!}
                                 I agree on the <a href="#" data-toggle="modal" ng-click="showModal('terms_modal')">Terms and Conditions</a> and <a href="#" ng-click="showModal('policy_modal')">Data Privacy Policy</a>
                             </label>
                         </div>
                     </div>
                     <div class="btn-container col-sm-6 col-sm-offset-3">
-                        <a ng-click="validateRegistration(reg, terms)" class="btn btn-red btn-medium">REGISTER</a>
-                        <a href="{!! route('student.login') !!}" class="btn btn-purple btn-medium">Cancel</a>
+                        <a ng-click="validateRegistration(reg, terms)" class="btn btn-maroon btn-medium">REGISTER</a>
+                        <a href="{!! route('student.login') !!}" class="btn btn-gold btn-medium">Cancel</a>
                     </div>
                 </fieldset>
             </div>
-        </form>
+        {!! Form::close() !!}
     </div>
 
     @include('student.login.registration-success')
