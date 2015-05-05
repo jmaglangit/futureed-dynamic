@@ -63,4 +63,6 @@ interface UserRepositoryInterface {
 
      public function updatePassword($id,$password);
 
+      public function updateUsername($id,$username);
+
 }
