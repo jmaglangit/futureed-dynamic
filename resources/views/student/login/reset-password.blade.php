@@ -26,8 +26,8 @@
             <button type="button" ng-if="!password_selected" class="btn btn-red btn-medium" ng-click="selectNewPassword()">Proceed</button>
             <div ng-if="password_selected">
                 <div class="btn-container">
-                    <a type="button" class="btn btn-purple btn-medium" ng-click="undoNewPassword()">Previous</a>
-                    <a type="button" class="btn btn-red btn-medium" ng-click="saveNewPassword()">Save</a>
+                    <a type="button" class="btn btn-maroon btn-medium" ng-click="undoNewPassword()">Previous</a>
+                    <a type="button" class="btn btn-yellow btn-medium" ng-click="saveNewPassword()">Save</a>
                 </div>  
             </div>
           </div>

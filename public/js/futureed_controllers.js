@@ -18,6 +18,9 @@ function FutureedController($scope, apiService) {
   $scope.getGradeLevel = getGradeLevel;
   $scope.checkAvailability = checkAvailability;
   $scope.checkEmailAvailability = checkEmailAvailability;
+  $scope.checkEmailChange = checkEmailChange;
+  $scope.checkEmailConfirm = checkEmailConfirm;
+  $scope.checkCurrentEmail = checkCurrentEmail;
 
   function errorHandler(errors) {
     $scope.errors = [];
@@ -151,8 +154,63 @@ function FutureedController($scope, apiService) {
       $scope.e_loading = Constants.FALSE;
       $scope.internalError();
     });
+  }  
+
+  function checkEmailChange(email, user_type) {
+    $scope.n_loading = Constants.TRUE;
+    $scope.n_success = Constants.FALSE;
+    $scope.n_error = Constants.FALSE;
+
+    apiService.validateEmail(email, user_type).success(function(response) {
+      $scope.n_loading = Constants.FALSE;
+      if(response.status == 200) {
+        if(response.errors) {
+          if(response.errors.error_code == 2002) {
+            $scope.n_success = Constants.TRUE;
+          } else {
+            $scope.n_error = response.errors[0].message;
+          }
+        } else if(response.data) {
+            $scope.n_error = "Email already exist.";  
+        }
+      }
+    }).error(function(response) {
+      $scope.e_loading = Constants.FALSE;
+      $scope.internalError();
+    });
   }
 
+  function checkCurrentEmail(email_current) {
+
+    $scope.c_loading = Constants.TRUE;
+    $scope.c_success = Constants.FALSE;
+    $scope.c_error = Constants.FALSE;
+
+    if($scope.user.email != email_current ||   email_current == null){
+      $scope.c_loading = Constants.FALSE;
+      $scope.c_error = "Please Input your current email!";
+    }else{
+      $scope.c_loading = Constants.FALSE;
+      $scope.c_success = Constants.TRUE;
+    }
+  }
+  function checkEmailConfirm(email_confirm) {
+
+    $scope.cf_loading = Constants.TRUE;
+    $scope.cf_success = Constants.FALSE;
+    $scope.cf_error = Constants.FALSE;
+
+    if($scope.email_confirm == null){
+      $scope.cf_loading = Constants.FALSE;
+      $scope.cf_error = "Confirm Email is required";
+    }else if($scope.email_new != $scope.email_confirm){
+      $scope.cf_loading = Constants.FALSE;
+      $scope.cf_error = "New password and Confirm password must match."
+    }else{
+      $scope.cf_loading = Constants.FALSE;
+      $scope.cf_success = Constants.TRUE;
+    }
+  }
   /**
   * End of Common Functions / API calls
   */
@@ -984,6 +1042,20 @@ function FutureedController($scope, apiService) {
       $scope.ui_unblock();
     });
   }
+  $scope.saveEmail = saveEmail;
+
+
+  function saveEmail(email) {
+
+    $scope.error = "";
+    $scope.success_msg = "";
+
+    if($scope.c_error != false || $scope.n_error != false || $scope.cf_error != false){
+      $scope.error = "Please fill up required fields";
+    }
+    $("html, body").animate({ scrollTop: 0 }, "slow");
+  }
+
 
   /**
   * End of Client Page Functions

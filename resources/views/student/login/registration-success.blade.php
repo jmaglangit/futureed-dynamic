@@ -38,8 +38,8 @@
 		            {!! Form::hidden('id', '', array('ng-model' => 'id')) !!}
 		        </div>
 		        <div class="btn-container">
-		        	<button type="button" class="btn btn-red btn-medium" ng-click="studentConfirmRegistration()">Confirm</button>
-	            	<button type="button" class="btn btn-purple btn-medium" ng-click="studentResendConfirmation()">Resend</button>
+		        	<button type="button" class="btn btn-maroon btn-medium" ng-click="studentConfirmRegistration()">Confirm</button>
+	            	<button type="button" class="btn btn-gold btn-medium" ng-click="studentResendConfirmation()">Resend</button>
 		        </div>
 	        {!! Form::close() !!}
 	    </div>

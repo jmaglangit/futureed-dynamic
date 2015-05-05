@@ -1,7 +1,7 @@
 @extends('student.app')
 
 @section('content')
-  <div class="container login" ng-cloak>
+  <div class="container login student-fnt" ng-cloak>
     <div class="col-md-6 col-md-offset-3">
       <div class="form-style" ng-show="!sent">
         <div class="title">Retrieve Password</div>
@@ -26,8 +26,8 @@
             ) !!}
           </div>
           <div class="btn-container">
-            <a type="button" class="btn btn-red btn-medium" ng-click="studentForgotPassword()">SEND</a>
-            <a href="{!! route('student.login') !!}" class="btn btn-purple btn-medium">Cancel</a>
+            <a type="button" class="btn btn-maroon btn-medium" ng-click="studentForgotPassword()">SEND</a>
+            <a href="{!! route('student.login') !!}" class="btn btn-gold btn-medium">Cancel</a>
           </div>
         {!! Form::close() !!}
       </div>
@@ -67,8 +67,8 @@
               {!! Form::hidden('id', '', array('ng-model' => 'id')) !!}
             </div>
             <div class="btn-container">
-              <button type="button" class="btn btn-red btn-medium" ng-click="studentValidateCode(reset_code)">PROCEED</button>
-              <button type="button" class="btn btn-purple btn-medium" ng-click="studentResendCode()">Resend Code</button>  
+              <button type="button" class="btn btn-maroon btn-medium" ng-click="studentValidateCode(reset_code)">PROCEED</button>
+              <button type="button" class="btn btn-yellow btn-medium" ng-click="studentResendCode()">Resend Code</button>  
             </div>
             
           </div>

@@ -42,8 +42,8 @@
               {!! Form::hidden('id', '', array('ng-model' => 'id')) !!}
             </div>
             <div class="btn-container">
-              <a type="button" class="btn btn-red btn-medium" ng-click="studentValidateCode(reset_code)">PROCEED</a>
-              <a type="button" ng-disabled="disabled" class="btn btn-purple btn-medium" ng-click="studentResendCode()">Resend Code</a>
+              <a type="button" class="btn btn-maroon btn-medium" ng-click="studentValidateCode(reset_code)">PROCEED</a>
+              <a type="button" ng-disabled="disabled" class="btn btn-gold btn-medium" ng-click="studentResendCode()">Resend Code</a>
             </div>
           </div>
         {!! Form::close() !!}
