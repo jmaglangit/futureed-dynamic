@@ -16,4 +16,8 @@ interface SchoolRepositoryInterface {
     public function checkSchoolName($input);
 
     public function getSchoolDetails($id);
+
+    public function checkSchoolNameExist($input);
+
+    public function updateSchoolDetails($input);
 }
