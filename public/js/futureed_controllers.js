@@ -165,7 +165,7 @@ function FutureedController($scope, apiService) {
       $scope.n_loading = Constants.FALSE;
       if(response.status == 200) {
         if(response.errors) {
-          if(response.errors.error_code == 2002) {
+          if(response.errors[0].error_code == 2002) {
             $scope.n_success = Constants.TRUE;
           } else {
             $scope.n_error = response.errors[0].message;
@@ -1066,6 +1066,10 @@ function FutureedController($scope, apiService) {
 
     if($scope.c_error != false || $scope.n_error != false || $scope.cf_error != false){
       $scope.error = "Please fill up required fields";
+    }else{
+      $scope.getLoginPassword();
+      $scope.email_pass = Constants.TRUE;
+
     }
     $("html, body").animate({ scrollTop: 0 }, "slow");
   }

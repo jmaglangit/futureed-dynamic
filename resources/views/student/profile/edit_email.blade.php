@@ -21,8 +21,8 @@
 					</h2>
 					</div>					
 				</div>
-				@include('student.login.enter-password')
-				<div class="form-content col-md-12" ng-show="!enter_pass">
+				@include('student.profile.email_password_confirm')
+				<div class="form-content col-md-12" ng-show="!email_pass">
 
 					<div class="alert alert-danger" ng-if="error">
 	                    <p>{! error !}</p>
