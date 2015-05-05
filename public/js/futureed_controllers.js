@@ -180,7 +180,6 @@ function FutureedController($scope, apiService) {
     $scope.c_loading = Constants.TRUE;
     $scope.c_success = Constants.FALSE;
     $scope.c_error = Constants.FALSE;
-    console.log(email_current);
 
     if($scope.user.email != email_current ||   email_current == null){
       $scope.c_loading = Constants.FALSE;
@@ -196,7 +195,6 @@ function FutureedController($scope, apiService) {
     $scope.cf_success = Constants.FALSE;
     $scope.cf_error = Constants.FALSE;
 
-    console.log(email_confirm);
     if($scope.email_confirm == null){
       $scope.cf_loading = Constants.FALSE;
       $scope.cf_error = "Confirm Email is required";
@@ -1042,18 +1040,13 @@ function FutureedController($scope, apiService) {
 
 
   function saveEmail(email) {
+
     $scope.error = "";
     $scope.success_msg = "";
 
-    if($scope.e_error || $scope.u_error) {
-      $scope.error = "";
-      $("html, body").animate({ scrollTop: 350 }, "slow");
-
-    } else if ($scope.current_email == null || $scope.email_new == null || $scope.email_confirm == null) {
-      $scope.error = "Please fill the required fields"
+    if($scope.c_error != false || $scope.n_error != false || $scope.cf_error != false){
+      $scope.error = "Please fill up required fields";
     }
-    $scope.enter_pass = true;
-    $scope.getLoginPassword();
     $("html, body").animate({ scrollTop: 0 }, "slow");
   }
 
