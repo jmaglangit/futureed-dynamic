@@ -28,7 +28,8 @@ return [
         2012 => 'Picture password is incorrect',
         2013 => 'Username or Email is invalid',
         2014 => 'Username or Email is invalid. Have you confirmed your email? Please check your inbox for the email confirmation code. Cannot remember your password? Click forgot password to reset your password.',
-
+        2015 => 'Confirmation code is required.',
+        2016 => 'Confirmation code should be number only.',
 
         2100 => 'Invalid reset code',
         2101 => 'Invalid password image',
