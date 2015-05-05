@@ -35,7 +35,7 @@ function FutureedController($scope, apiService) {
   }
 
   function internalError() {
-    $scope.errors = ["Internal Server Error."];
+    $scope.errors = [Constants.MSG_INTERNAL_ERROR];
   }
 
   function ui_block() {
@@ -103,7 +103,7 @@ function FutureedController($scope, apiService) {
 
       if(response.status == Constants.STATUS_OK) {
         if(response.errors) {
-          if(response.errors.error_code == 2001) {
+          if(response.errors[0].error_code == 2001) {
             // In registration and Edit Profile
             $scope.u_success = Constants.TRUE;
           } else {
@@ -132,9 +132,9 @@ function FutureedController($scope, apiService) {
     apiService.validateEmail(email, user_type).success(function(response) {
       $scope.e_loading = Constants.FALSE;
 
-      if(response.status == 200) {
+      if(response.status == Constants.STATUS_OK) {
         if(response.errors) {
-          if(response.errors.error_code == 2002) {
+          if(response.errors[0].error_code == 2002) {
             $scope.e_success = Constants.TRUE;
           } else {
             $scope.e_error = response.errors[0].message;
@@ -507,7 +507,7 @@ function FutureedController($scope, apiService) {
         $scope.ui_unblock();
       });
     } else {
-      $scope.errors = ["Password does not match."];
+      $scope.errors = [Constants.MSG_PW_NOT_MATCH];
       $("html, body").animate({ scrollTop: 0 }, "slow");
     }
   }
@@ -565,6 +565,7 @@ function FutureedController($scope, apiService) {
       $scope.ui_block();
       $('#profile_form input').removeClass('required-field');
       $('#profile_form select').removeClass('required-field');
+
       apiService.saveProfile($scope.prof).success(function(response) {
         if(response.status == Constants.STATUS_OK) {
           if(response.errors) {
@@ -616,7 +617,7 @@ function FutureedController($scope, apiService) {
         $scope.internalError();
       });
     } else {
-      $scope.errors = ["Picture password is incorrect"];
+      $scope.errors = [Constants.MSG_PW_INCORRECT];
     }
 
     $("html, body").animate({ scrollTop: 0 }, "slow");
@@ -636,7 +637,7 @@ function FutureedController($scope, apiService) {
       $scope.image_pass = shuffle($scope.image_pass);
       $("ul.form_password li").removeClass('selected');
     } else {
-      $scope.errors = ["Please select a new picture password"];
+      $scope.errors = [Constants.MSG_PW_SELECT_NEW];
     }
 
     $("html, body").animate({ scrollTop: 0 }, "slow");
@@ -680,7 +681,7 @@ function FutureedController($scope, apiService) {
           $scope.internalError();
         });
     } else {
-      $scope.errors = ["Password does not match"];
+      $scope.errors = [Constants.MSG_PW_NOT_MATCH];
       $("html, body").animate({ scrollTop: 0 }, "slow");
     }
   }
@@ -830,7 +831,7 @@ function FutureedController($scope, apiService) {
 
   function clientResendCode() {
     $scope.resend = Constants.TRUE;
-    $scope.username = (!isStringNullorEmpty($scope.username)) ? $scope.username : $("input[name='username']").val(); 
+    $scope.username = (!isStringNullorEmpty($scope.username)) ? $scope.username : $("#forgot_success_form input[name='username']").val(); 
     $scope.clientForgotPassword();
   }
 
@@ -838,7 +839,7 @@ function FutureedController($scope, apiService) {
     $scope.errors = Constants.FALSE;
     $scope.code = code;
     $scope.user_type = Constants.CLIENT;
-    $scope.email = (!isStringNullorEmpty($scope.email)) ? $scope.email : $("input[name='username']").val();
+    $scope.email = (!isStringNullorEmpty($scope.email)) ? $scope.email : $("#forgot_success_form input[name='username']").val();
 
     $scope.ui_block();
     apiService.validateCode($scope.code, $scope.email, $scope.user_type).success(function(response) {
@@ -847,7 +848,7 @@ function FutureedController($scope, apiService) {
           $scope.errorHandler(response.errors);
         } else if(response.data){
           $("input[name='id']").val(response.data.id);
-          $("#success_form").submit();
+          $("#forgot_success_form").submit();
         } 
       }
 
@@ -881,7 +882,7 @@ function FutureedController($scope, apiService) {
         $scope.ui_unblock();
       });
     } else {
-      $scope.errors = ["Password does not match"];
+      $scope.errors = [Constants.Constants.MSG_PW_NOT_MATCH];
       $("html, body").animate({ scrollTop: 0 }, "slow");
     }
   }
@@ -894,22 +895,28 @@ function FutureedController($scope, apiService) {
     $scope.reg = ($scope.reg) ? $scope.reg: {} ;
 
     switch(role) {
-      case "user_principal"  :
+      case Constants.USER_PRINCIPAL :
         $scope.principal = Constants.TRUE;
-        $scope.reg.client_role = "Principal";
+        $scope.reg.client_role = Constants.PRINCIPAL;
         break;
-      case "user_parent" :
+
+      case Constants.USER_PARENT    :
         $scope.parent = Constants.TRUE;
-        $scope.reg.client_role = "Parent";
+        $scope.reg.client_role = Constants.PARENT;
         break;
+
       default:
         break;
     }
   }
 
   function registerClient(reg, term) {
-    $scope.errors = false;
+    $scope.errors = Constants.FALSE;
     $scope.reg = reg;
+
+
+    $("#registration_form input").removeClass("required-field");
+    $("#registration_form select").removeClass("required-field");
 
     if($scope.e_error || $scope.u_error) {
       $("html, body").animate({ scrollTop: 320 }, "slow");
@@ -917,10 +924,13 @@ function FutureedController($scope, apiService) {
       $scope.errors = ["Please accept the terms and conditions."];
       $("html, body").animate({ scrollTop: 0 }, "slow");
     } else if($scope.reg && ($scope.reg.password != $scope.reg.confirm_password)) {
-      $scope.errors = ["Password does not match."];
+      $("#registration_form input[name='password']").addClass("required-field");
+      $("#registration_form input[name='confirm_password']").addClass("required-field");
+      $scope.errors = [Constants.MSG_PW_NOT_MATCH];
       $("html, body").animate({ scrollTop: 0 }, "slow");
     } else {
       $scope.ui_block();
+
       apiService.registerClient(reg).success(function(response) {
         if(response.status == Constants.STATUS_OK) {
           if(response.errors) {
@@ -928,6 +938,10 @@ function FutureedController($scope, apiService) {
 
             angular.forEach(response.errors, function(value, key) {
               $("#" + value.field).addClass("required-field");
+            });
+            angular.forEach(response.errors, function(value, key) {
+              $("#registration_form input[name='" + value.field +"']").addClass("required-field");
+              $("#registration_form select[name='" + value.field +"']").addClass("required-field");
             });
           } else if(response.data) {
             $scope.registered = Constants.TRUE; 
@@ -964,7 +978,7 @@ function FutureedController($scope, apiService) {
   }
 
   function confirmClientRegistration() {
-    $scope.errors = FALSE;
+    $scope.errors = Constants.FALSE;
     $scope.user_type = Constants.CLIENT;
     $scope.confirmation_code = $("input[name='confirmation_code']").val();
 
