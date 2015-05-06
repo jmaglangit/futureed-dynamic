@@ -12,7 +12,6 @@
       {!! Form::close() !!}
 
       {!! Form::open(array('id' => 'forgot_success_form')) !!}
-
         <div class="form_content">
           <div class="title" ng-if="!resent">Enter Reset Code</div>
           <div class="title" ng-if="resent">Reset Code Resent</div>
@@ -60,8 +59,20 @@
           </div>
 
           <div class="btn-container">
-            <a id="validate_code_btn" type="button" class="btn btn-maroon btn-medium" ng-click="studentValidateCode(reset_code)">PROCEED</a>
-            <a type="button" ng-disabled="disabled" class="btn btn-gold btn-medium" ng-click="studentResendCode()">Resend Code</a>
+            {!! Form::button('Proceed'
+                , array(
+                  'id' => 'validate_code_btn'
+                  , 'class' => 'btn btn-maroon btn-medium'
+                  , 'ng-click' => 'studentValidateCode(reset_code)'
+                )
+            ) !!}
+
+            {!! Form::button('Resend Code'
+                , array(
+                    'class' => 'btn btn-gold btn-medium'
+                    , 'ng-click' => 'studentResendCode()'
+                )
+            ) !!}
           </div>
         {!! Form::close() !!}
       </div>

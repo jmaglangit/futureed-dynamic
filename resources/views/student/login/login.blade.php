@@ -41,13 +41,27 @@
               ) !!}
             </div>
           {!! Form::close() !!}
+          
           <div class="text-group">
             <small>Not a Student?</small>
-            <small>Click <a href="{!! route('client.login') !!}">here</a> for Parent / Teacher / School Site</small>     
+            <small>Click {!! Html::link(route('client.login'), 'here') !!} for Parent / Teacher / School Site</small>     
           </div>  
           <div class="text-group">
-            <small><a href="{!! route('student.login.forgot_password') !!}" class="student-forgot">Forgot your picture password?</a></small>
-            <p><a href="{!! route('student.registration') !!}" class="btn btn-gold">Sign Up</a></p>      
+            <small>
+              {!! Html::link(route('student.login.forgot_password'), 'Forgot your picture password?'
+                  , array(
+                    'class' => 'student-forgot'
+                  )
+              ) !!}
+            </small>
+
+            <p>
+              {!! Html::link(route('student.registration'), 'Sign Up'
+                  , array(
+                      'class' => 'btn btn-gold'
+                  )
+              ) !!}
+            </p>      
           </div>
         </div>
       </div>
