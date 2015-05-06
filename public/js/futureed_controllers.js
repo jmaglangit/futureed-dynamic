@@ -396,7 +396,7 @@ function FutureedController($scope, apiService) {
   * Params: username - the specified username, or the email from link
   */
    function studentResendCode() {
-    $scope.username = (!isStringNullorEmpty($scope.username)) ? $scope.username : $("#forgot_success_form input[name='username']").val(); 
+    $scope.username = (!isStringNullorEmpty($scope.username)) ? $scope.username : $("#redirect_form input[name='username']").val(); 
     $scope.studentForgotPassword();
     $scope.resend = Constants.TRUE;
   }
@@ -413,7 +413,7 @@ function FutureedController($scope, apiService) {
     $scope.errors = Constants.FALSE;
     $scope.user_type = Constants.STUDENT;
     $scope.code = code;
-    $scope.email = ($scope.email) ? $scope.email : $("#forgot_success_form input[name='username']").val();
+    $scope.email = ($scope.email) ? $scope.email : $("#redirect_form input[name='username']").val();
 
     $scope.ui_block();
     apiService.validateCode($scope.code, $scope.email, $scope.user_type).success(function(response) {
@@ -421,8 +421,9 @@ function FutureedController($scope, apiService) {
         if(response.errors) {
           $scope.errorHandler(response.errors);
         } else if(response.data){
-          $("input[name='id']").val(response.data.id);
-          $("#forgot_success_form").submit();
+          $("#redirect_form input[name='id']").val(response.data.id);
+          $("#redirect_form input[name='reset_code']").val($scope.code);
+          $("#redirect_form").submit();
         } 
       }
 
@@ -496,17 +497,20 @@ function FutureedController($scope, apiService) {
   function studentConfirmRegistration() {
     $scope.errors = Constants.FALSE;
     $scope.user_type = Constants.STUDENT;
-    $scope.email = (!isStringNullorEmpty($scope.email)) ? $scope.email : $("#registration_success_form input[name='email']").val();
+    $scope.email = (!isStringNullorEmpty($scope.email)) ? $scope.email : $("#redirect_form input[name='email']").val();
     $scope.confirmation_code = $("#registration_success_form input[name='confirmation_code']").val();
 
     $scope.ui_block();
     apiService.confirmCode($scope.email, $scope.confirmation_code, $scope.user_type).success(function(response) {
+      console.log(response);
+
       if(response.status == Constants.STATUS_OK) {
         if(response.errors) {
           $scope.errorHandler(response.errors);
         } else if(response.data){
-          $("#registration_success_form input[name='id']").val(response.data.id);
-          $("#registration_success_form").submit();
+          $("#redirect_form input[name='id']").val(response.data.id);
+          $("#redirect_form input[name='confirmation_code']").val($scope.confirmation_code);
+          $("#redirect_form").submit();
         } 
       }
 
@@ -527,7 +531,7 @@ function FutureedController($scope, apiService) {
   function studentResendConfirmation() {
     $scope.errors = Constants.FALSE;
     $scope.user_type = Constants.STUDENT;
-    $scope.email = (!isStringNullorEmpty($scope.email)) ? $scope.email : $("#registration_success_form input[name='email']").val();
+    $scope.email = (!isStringNullorEmpty($scope.email)) ? $scope.email : $("#redirect_form input[name='email']").val();
 
     $scope.ui_block();
     apiService.resendConfirmation($scope.email, $scope.user_type).success(function(response) {

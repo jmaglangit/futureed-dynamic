@@ -1,7 +1,7 @@
 
   <div class="enter-pass-con form-select-password" ng-if="enter_pass">
       <div ng-if="!locked">
-        <div class="title">Please Select Your Password</div>
+        <div class="title">Please Select Your Picture Password</div>
         
         <div class="alert alert-danger" ng-if="errors">
           <p ng-repeat="error in errors" > 

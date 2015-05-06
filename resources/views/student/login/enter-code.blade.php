@@ -2,14 +2,20 @@
 
 @section('content')
 
-<div class="container login" ng-init="show='{!! $show !!}'"ng-cloak>
+<div class="container login" ng-init="show='{!! $show !!}'" ng-cloak>
   <div class="col-md-6 col-md-offset-3">
     <div class="form-style form-select-password">
-      {!! Form::open(array('id' => 'forgot_success_form', 'route' => 'student.login.reset_password', 'method' => 'POST')) !!}
+      {!! Form::open(array('id' => 'redirect_form', 'method' => 'POST', 'route' => 'student.login.reset_password')) !!}
+        {!! Form::hidden('username', $email, array('ng-model' => 'username')) !!}
+        {!! Form::hidden('id', '', array('ng-model' => 'id')) !!}
+        {!! Form::hidden('reset_code', '') !!}
+      {!! Form::close() !!}
+
+      {!! Form::open(array('id' => 'forgot_success_form')) !!}
 
         <div class="form_content">
-          <div class="title" ng-if="!resent">Enter Code</div>
-          <div class="title" ng-if="resent">Code Resent</div>
+          <div class="title" ng-if="!resent">Enter Reset Code</div>
+          <div class="title" ng-if="resent">Reset Code Resent</div>
 
           <div class="alert alert-danger" ng-if="errors">
             <p ng-repeat="error in errors" > 
@@ -24,7 +30,7 @@
 
             <p class="text">
               <strong>Success!</strong>
-              <br /> An email to reset your picture password has been sent to your email account. 
+              <br /> Please enter the reset code to create your new picture password.
             </p>
           </div>
           
@@ -37,11 +43,11 @@
               <strong>Success!</strong>
               <br /> A new email to reset your picture password has been sent to your email account. 
             </p>
-          </div>
 
-          <div class="form-group">
-            <small>Please check your inbox or your spam folder for the email. 
-            <br />The email contains a code that you need to input below.</small>
+            <div class="form-group">
+              <small>Please check your inbox or your spam folder for the email. 
+              <br />The email contains a reset code that you need to input below.</small>
+            </div>
           </div>
 
           <div class="form-group">
@@ -52,13 +58,10 @@
                     , 'ng-model' => 'reset_code'
                     , 'autocomplete' => 'off')
             ) !!}
-            
-            {!! Form::hidden('username', $email, array('ng-model' => 'username')) !!}
-            {!! Form::hidden('id', '', array('ng-model' => 'id')) !!}
           </div>
 
           <div class="btn-container">
-            <a type="button" class="btn btn-maroon btn-medium" ng-click="studentValidateCode(reset_code)">PROCEED</a>
+            <a id="validate_code_btn" type="button" class="btn btn-maroon btn-medium" ng-click="studentValidateCode(reset_code)">PROCEED</a>
             <a type="button" ng-disabled="disabled" class="btn btn-gold btn-medium" ng-click="studentResendCode()">Resend Code</a>
           </div>
         </div>
@@ -75,5 +78,5 @@
 @overwrite
 
 @section('scripts')
-
+  {!! Html::script('/js/student/login.js') !!} 
 @stop
