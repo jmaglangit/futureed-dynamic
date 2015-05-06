@@ -43,7 +43,7 @@
                           </div>
                         </div>
                         <div class="btmcon">
-                            <button type="button" ng-if="enable" class="btn btn-red" ng-click="selectAvatar()">Proceed</button>
+                            <button type="button" ng-if="enable" class="btn btn-maroon" ng-click="selectAvatar()">Proceed</button>
                         </div>
                       </form>
                     </div>
@@ -57,7 +57,7 @@
                         <br /> Are you ready? Click on the next button to start.
                     </div>
                     <div class="btmcon">
-                       <a href="{!! route('student.dashboard.index') !!}" type="button" class="btn btn-red">NEXT</a>
+                       <a href="{!! route('student.dashboard.index') !!}" type="button" class="btn btn-maroon">NEXT</a>
                     </div>
                 </div>
             </div>
