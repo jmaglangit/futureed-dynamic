@@ -25,6 +25,7 @@ class UserRepository implements UserRepositoryInterface {
             'id'
             ,'username'
             ,'email'
+            ,'new_email'
             ,'password'
             ,'name'
             ,'user_type'
