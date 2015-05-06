@@ -33,10 +33,8 @@
 					<h2>
 							<span class="thin">Student</span> Rewards
 					</h2>
-					<hr />
 					<p>
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ut erat a erat vehicula pulvinar.
-						Vivamus vitae justo consectetur, molestie justo ut, suscipit nibh. Pellentesque accumsan elit.
 					</p>
 				</div>
 			</div>

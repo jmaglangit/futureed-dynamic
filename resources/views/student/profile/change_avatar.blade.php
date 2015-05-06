@@ -32,7 +32,6 @@
 					</div>
 					<h2>
 							<span class="thin">Change</span> Avatar</h2>
-						<hr />
 					<p>
 						Select your new avatar.
 					</p>

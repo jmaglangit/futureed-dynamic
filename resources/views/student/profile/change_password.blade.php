@@ -21,7 +21,6 @@
 							<span ng-if="password_validated && !password_selected" class="thin">New</span> 
 							<span ng-if="password_validated && password_selected && !password_confirmed" class="thin">Confirm</span> 
 						Picture Password <span ng-if="password_validated && password_selected && password_confirmed" class="thin">Successfully Changed</span> </h2>
-						<hr />
 						<p ng-if="!password_validated">
 							Select your current picture password
 						</p>

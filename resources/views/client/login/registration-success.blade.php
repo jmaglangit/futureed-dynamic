@@ -12,7 +12,7 @@
     		<i class="fa fa-check fa-5x img-rounded text-center"></i>
     	</div>
     	<p class="text" ng-if="!resent">
-    		An email to reset your picture password has been sent to your email account.
+    		An email to reset your password has been sent to your email account.
     	</p>
     	<p class="text" ng-if="resent">
     		A new code has been sent to your email.

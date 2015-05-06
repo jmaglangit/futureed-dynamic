@@ -6,8 +6,8 @@
       {!! Form::open(array('id' => 'reset_password_form'))!!}
         <div class="form-style form-select-password">
           <div  id="title" class="title">
-            <p ng-if="!password_selected">Select a picture for your new password</p>
-            <p ng-if="password_selected">Select a picture to confirm your new password</p>
+            <p ng-if="!password_selected">Select a picture for your new picture password</p>
+            <p ng-if="password_selected">Select a picture to confirm your new picture password</p>
           </div>
           
           <div class="alert alert-danger" ng-if="errors">
@@ -44,7 +44,7 @@
           <div class="roundcon">
             <i class="fa fa-check fa-5x img-rounded text-center"></i>
           </div>
-           Your password has been set. <br /> 
+           Your picture password has been set. <br /> 
            You may now use your new picture password to login. <br />
            <br />
           <a class="btn btn-maroon" href="{!! route('student.login') !!}">Click here to Login</a> 
