@@ -129,7 +129,7 @@ class EmailController extends ApiController {
 
             if(empty($user_id)){
 
-                return $this->respondErrorMessage(2002);
+                return $this->respondErrorMessage(2018);
 
             }else{
 
@@ -171,7 +171,7 @@ class EmailController extends ApiController {
 
             if(empty($user_id)){
 
-                return $this->respondErrorMessage(2002);
+                return $this->respondErrorMessage(2018);
             }else{
 
                 $user_details = $this->user->getUserDetail($user_id,$input['user_type']);
