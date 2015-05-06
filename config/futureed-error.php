@@ -31,6 +31,7 @@ return [
         2015 => 'Confirmation code is required.',
         2016 => 'Confirmation code should be number only.',
         2017 => 'Picture Password is required',
+        2019 => 'Username does not exist', //TODO: should be 2018 after line 45 is removed.
 
 
         2100 => 'Invalid reset code',
@@ -41,7 +42,7 @@ return [
         2105 => "School Code doesn't exist",
         2106 => 'Email does not match',
         2107 => 'Your current email and new email are the same.',
-        2018 => 'New Email does not exist',
+        2018 => 'New Email does not exist', //TODO: to be removed.
 
 
         // Client Error messages
