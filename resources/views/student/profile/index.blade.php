@@ -35,7 +35,6 @@
 							<span class="thin" ng-if="edit">Edit</span>
 							Profile
 					</h2>
-					<hr />
 					<p>
 						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ut erat a erat vehicula pulvinar.
 						Vivamus vitae justo consectetur, molestie justo ut, suscipit nibh. Pellentesque accumsan elit.
@@ -162,7 +161,7 @@
 	                        	{!! Form::text('age', ''
 	                                , array(
 	                                    'class' => 'form-control'
-	                                    , 'ng-disabled' => '!edit'
+	                                    , 'ng-disabled' => 'true'
 	                                    , 'placeholder' => 'Age' 
 	                                    , 'ng-model' => 'prof.age')
 	                            ) !!}
@@ -230,11 +229,11 @@
 					</fieldset>
 					<div class="form-group">
 						<div class="btncon col-xs-9" style="text-align:center;" ng-if="!edit">
-							<a href="{!! route('student.profile.change_password')!!}" class="btn btn-gold">Change Password</a>
+							<a href="{!! route('student.profile.change_password')!!}" class="btn btn-maroon">Change Picture Password</a>
 							<a class="btn btn-gold" ng-click="editProfile()">Edit Profile</a>
 						</div>
 						<div class="btncon col-xs-9" style="text-align:center;" ng-if="edit">
-							<a class="btn btn-gold" ng-click="saveProfile(prof)">Save Changes</a>
+							<a class="btn btn-maroon" ng-click="saveProfile(prof)">Save Changes</a>
 							<a class="btn btn-gold" ng-click="setActive('index')">Cancel</a>
 						</div>
 					</div>

@@ -34,7 +34,10 @@ class ProfileController extends Controller {
 		$user = Input::all();
 
 		Session::forget('student');
-		Session::put('student', json_encode($user));
+		
+		if(!empty($user)) {
+			Session::put('student', json_encode($user));
+		}
 	}
 
 	public function getId() {

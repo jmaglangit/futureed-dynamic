@@ -6,7 +6,6 @@
 .........................................Hive&Seek - bambi@hiveandseek.net......................................
 ..............................................................................................................*/
 
-@import url(http://fonts.googleapis.com/css?family=Roboto:400,100);
 /*----- GENERAL -----*/
 * {margin: 0; padding: 0;}
 html{height: 100%; position: relative;}
@@ -22,7 +21,7 @@ body.client{
 body.student{
 	background: url("../images/student_page_bg.jpg") no-repeat scroll right bottom / cover;
 	background-attachment: fixed;
-	font-family: 'Roboto', sans-serif;
+	font-family: 'Schoolbell', sans-serif;
 	background-size: 100% 100%;
 }
 body {/*background: radial-gradient(transparent 50%, rgba(0, 0, 0, 0.3) 100%), linear-gradient(#d77a6b, #d2c09c 60%, #876d54);*/
@@ -34,7 +33,7 @@ body {/*background: radial-gradient(transparent 50%, rgba(0, 0, 0, 0.3) 100%), l
 }
 
 .logo-container {
-	padding: 5px 0px 25px 0px;
+	padding: 5px 0px;
 }
 
 /*----- TYPOGRAPHY -----*/
@@ -385,7 +384,7 @@ fieldset legend{color: #8e8171; font-size: 16px; text-transform: uppercase;}
     font-weight: lighter;
     text-align: center;
     letter-spacing: 0.5px;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    /*font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;*/
 }
 .follow-up-reg .form-content .btn {
 	width: auto;
@@ -530,7 +529,6 @@ li.active .rnd-identifier{
 }
 .detcon h1{
     color: #fff;
-    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 100;
     letter-spacing: 3.2px;
     margin: 0 0 10px;
@@ -539,7 +537,6 @@ li.active .rnd-identifier{
 }
 .detcon p{
 	color: #fff;
-	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 	font-size: 13px;
 	font-weight: 100;
 	letter-spacing: 1.2px;
@@ -561,7 +558,6 @@ li.active .rnd-identifier{
 	padding: 0 40px;
 }
 .rwrdscon h3{
-	font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 	font-weight: 100;
 	text-transform: uppercase;
 	padding: 12px 16px;
@@ -820,6 +816,16 @@ div > .btncon > a {
 	margin-left: 10px !important;
 	position: relative;
 	top: 20px;
+}
+.title-student{
+	padding-top: 10px;
+	text-align: center;
+	font-size: 20px;
+	color: #76437E;
+	font-weight: 700;
+}
+.content > .enter-pass-con {
+	margin-top: 30px;
 }
 /*
 * Font Colors

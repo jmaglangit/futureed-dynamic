@@ -32,7 +32,6 @@
 					</div>
 					<h2>
 							<span class="thin">Change</span> Avatar</h2>
-						<hr />
 					<p>
 						Select your new avatar.
 					</p>
@@ -66,8 +65,19 @@
 				      {!! Form::close() !!}
 				    </div>
 				    <div class="btn-container" ng-if="!has_avatar">
-				        <a type="button" ng-if="enable" class="btn btn-maroon btn-medium" ng-click="selectAvatar()">Proceed</a>
-				        <a href="{!! route('student.profile.index') !!}" class="btn btn-gold btn-medium">Cancel</a>
+				    	{!! Form::button('Proceed'
+				    		, array(
+				    			'class' => 'btn btn-maroon btn-medium'
+				    			, 'ng-if' => 'enable'
+				    			, 'ng-click' => 'selectAvatar()'
+				    		)
+				    	) !!}
+
+				    	{!! Html::link(route('student.profile.index'), 'Cancel'
+				    		, array(
+				    			'class' => 'btn btn-gold btn-medium'
+				    		)	
+				    	) !!}
 			      	</div>
 				</div>
 			</div>

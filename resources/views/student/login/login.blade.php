@@ -8,10 +8,12 @@
         @include('student.login.enter-password')
 
         <div ng-show="!locked && !enter_pass">
-          {!! Form::open(array('id' => 'login_form', 'method' => 'POST')) !!}
+          {!! Form::open(array('id' => 'login_form')) !!}
             <div class="logo-container">
               {!! Html::image('images/logo-md.png') !!}
             </div>
+            
+            <div class="title-student">Student login</div>
             <div class="title">Enter Your Username or Email</div>
 
             <div class="alert alert-danger" ng-if="errors">
@@ -24,21 +26,42 @@
               {!! Form::text('username', ''
                   , array(
                       'class' => 'form-control'
+                      , 'placeholder' => ''
                       , 'autocomplete' => 'off'
                       , 'ng-model' => 'username')
               ) !!}
             </div>
             <div class="form-group">
-              <button type="button" ng-click="validateUser()" class="btn btn-maroon">Next</button>              
+              {!! Form::button('Next' 
+                  , array(
+                      'id' => 'validate_user_btn'
+                      , 'class' => 'btn btn-maroon'
+                      , 'ng-click' => 'validateUser()'
+                  )
+              ) !!}
             </div>
           {!! Form::close() !!}
+          
           <div class="text-group">
             <small>Not a Student?</small>
-            <small>Click <a href="{!! route('client.login') !!}">here</a> for Parent / Teacher / School Site</small>     
+            <small>Click {!! Html::link(route('client.login'), 'here') !!} for Parent / Teacher / School Site</small>     
           </div>  
           <div class="text-group">
-            <small><a href="{!! route('student.login.forgot_password') !!}" class="student-forgot">Forgot your password?</a></small>
-            <p><a href="{!! route('student.registration') !!}" class="btn btn-gold">Sign Up</a></p>      
+            <small>
+              {!! Html::link(route('student.login.forgot_password'), 'Forgot your picture password?'
+                  , array(
+                    'class' => 'student-forgot'
+                  )
+              ) !!}
+            </small>
+
+            <p>
+              {!! Html::link(route('student.registration'), 'Sign Up'
+                  , array(
+                      'class' => 'btn btn-gold'
+                  )
+              ) !!}
+            </p>      
           </div>
         </div>
       </div>

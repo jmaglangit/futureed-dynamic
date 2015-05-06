@@ -31,6 +31,7 @@ return [
         2015 => 'Confirmation code is required.',
         2016 => 'Confirmation code should be number only.',
         2017 => 'Picture Password is required',
+        2018 => 'Username does not exist', 
 
 
         2100 => 'Invalid reset code',

@@ -6,8 +6,8 @@
       {!! Form::open(array('id' => 'reset_password_form'))!!}
         <div class="form-style form-select-password">
           <div  id="title" class="title">
-            <p ng-if="!password_selected">Select a picture for your new password</p>
-            <p ng-if="password_selected">Select a picture to confirm your new password</p>
+            <p ng-if="!password_selected">Select a picture for your new picture password</p>
+            <p ng-if="password_selected">Select a picture to confirm your new picture password</p>
           </div>
           
           <div class="alert alert-danger" ng-if="errors">
@@ -23,11 +23,30 @@
                  <input type="hidden" id="image_id" name="image_id" value="{! item.id !}">
               </li>
             </ul>
-            <button type="button" ng-if="!password_selected" class="btn btn-maroon btn-medium" ng-click="selectNewPassword()">Proceed</button>
+
+            {!! Form::button('Proceed'
+                , array(
+                    'class' => 'btn btn-maroon btn-medium'
+                    , 'ng-click' => 'selectNewPassword()'
+                    , 'ng-if' => '!password_selected'
+                ) 
+            ) !!}
+
             <div ng-if="password_selected">
                 <div class="btn-container">
-                    <a type="button" class="btn btn-maroon btn-medium" ng-click="undoNewPassword()">Previous</a>
-                    <a type="button" class="btn btn-gold btn-medium" ng-click="saveNewPassword()">Save</a>
+                    {!! Form::button('Previous'
+                        , array(
+                            'class' => 'btn btn-maroon btn-medium'
+                            , 'ng-click' => 'undoNewPassword()'
+                        ) 
+                    ) !!}
+
+                    {!! Form::button('Save'
+                        , array(
+                            'class' => 'btn btn-gold btn-medium'
+                            , 'ng-click' => 'saveNewPassword()'
+                        ) 
+                    ) !!}
                 </div>  
             </div>
           </div>
@@ -35,19 +54,28 @@
 
         {!! Form::hidden('code', $code, array('ng-model' => 'code')) !!}
         {!! Form::hidden('id', $id, array('ng-model' => 'id')) !!}
+
       {!! Form::close() !!}
     </div>
 
     <div class="col-md-6 col-md-offset-3" ng-if="success">
       <div class="form-style form-select-password">
         <div class="title">Success!</div>
+
           <div class="roundcon">
             <i class="fa fa-check fa-5x img-rounded text-center"></i>
           </div>
-           Your password has been set. <br /> 
-           You may now use your new password to login. <br />
+          
+           Your picture password has been set. <br /> 
+           You may now use your new picture password to login. <br />
+
            <br />
-          <a class="btn btn-maroon" href="{!! route('student.login') !!}">Click here to Login</a> 
+
+           {!! Html::link(route('student.login') , 'Click here to Login'
+              , array(
+                  'class' => 'btn btn-maroon'
+              )
+           ) !!}
       </div>
     </div>
   </div>
