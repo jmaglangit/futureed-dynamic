@@ -83,13 +83,13 @@ class UserPasswordController extends UserController {
                     
                 }else{
                     
-                    return $this->respondErrorMessage(2019);
+                    return $this->respondErrorMessage(2018);
                          
                 }
                 
           }else{
             
-             return $this->respondErrorMessage(2019);
+             return $this->respondErrorMessage(2018);
           }
         }
 

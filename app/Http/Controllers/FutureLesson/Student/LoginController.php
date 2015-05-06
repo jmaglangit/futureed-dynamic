@@ -105,10 +105,10 @@ class LoginController extends Controller {
 	public function registration()
 	{
 		$input = Input::only('email');
-		$success = "false";
+		$success = 0;
 
 		if($input['email']) {
-			$success = "true";
+			$success = 1;
 		}
 
 		return view('student.login.registration', ['success' => $success, 'email' => $input['email']]);
