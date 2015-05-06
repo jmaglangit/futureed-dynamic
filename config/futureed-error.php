@@ -41,7 +41,7 @@ return [
         2105 => "School Code doesn't exist",
         2106 => 'Email does not match',
         2107 => 'Your current email and new email are the same.',
-        2018 => 'New Email does not exist',
+        2108 => 'New Email does not exist',
 
 
         // Client Error messages
