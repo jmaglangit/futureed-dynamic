@@ -27,11 +27,14 @@ return [
         2011 => 'Username and password is incorrect',
         2012 => 'Picture password is incorrect',
         2013 => 'Username or Email is invalid',
-        2014 => 'Username or Email is invalid. Have you confirmed your email? Please check your inbox for the email confirmation code. Cannot remember your password? Click forgot password to reset your password.',
+        2014 => 'Your account has been locked.',
         2015 => 'Confirmation code is required.',
         2016 => 'Confirmation code should be number only.',
         2017 => 'Picture Password is required',
-        2018 => 'Username does not exist', 
+        2018 => 'Username does not exist',
+        2019 => 'Username or Email is invalid or your account has been locked. Please click forgot password to reset your password.',
+        2020 => 'Account is deleted',
+        2021 => 'Username is invalid.',
 
 
         2100 => 'Invalid reset code',
@@ -51,7 +54,7 @@ return [
         2202 => 'School Name already exist',
 
         //account status messages
-        2230 => 'Account Inactive',
+        2230 => 'Account is inactive',
         2231 => 'Account Locked',
         2232 => 'Account Deleted',
 

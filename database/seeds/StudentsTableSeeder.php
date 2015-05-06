@@ -59,7 +59,7 @@ class StudentsTableSeeder extends Seeder {
                         'first_name' => 'Jason',
                         'last_name' => 'Maglangit',
                         'gender' => 'Male',
-                        'birth_date' => \Carbon\Carbon::now()->subYears(12),
+                        'birth_date' => \Carbon\Carbon::now()->subYears(14),
                         'avatar_id' => 3,
                         'password_image_id' => 3,
                         'parent_id' => 2,

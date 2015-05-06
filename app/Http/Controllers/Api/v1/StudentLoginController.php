@@ -70,6 +70,11 @@ class StudentLoginController extends StudentController {
                 
                 
 			} else{
+
+                if($response['data'] == 2014 ){
+
+                    return $this->respondErrorMessage(2019);
+                }
 			
             	return $this->respondErrorMessage(2001);
 			}

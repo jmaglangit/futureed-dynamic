@@ -126,7 +126,7 @@ class UserServices {
             } else {
                 return [
                     'status' => 202,
-                    'data' => "Email does not Exist"
+                    'data' => 2002
                 ];
             }
        }elseif($this->validator->username($username)){
@@ -151,7 +151,7 @@ class UserServices {
            } else {
                return [
                    'status' => 202,
-                   'data' => "Username does not exist"
+                   'data' => 2018
                ];
            }
        } else{
@@ -237,13 +237,13 @@ class UserServices {
     public function checkUserDisabled($id){
         if($this->users->accountActivated($id) == 0 ){
             //check if activated
-            return 2014;
+            return 2230;
         } elseif($this->users->accountLocked($id) == 1){
             //check if locked
             return 2014;
         } elseif($this->users->accountDeleted($id) == 1 ){
             //check if delete
-            return "Account Deleted";
+            return 2020;
         } else {
             return false;
         }
