@@ -60,7 +60,7 @@ class UserPasswordController extends UserController {
             }
             
 
-           if( array_key_exists("status",$return)){
+           if( !empty($return)){
             
                 $userDetails = $this->user->getUserDetails($return['user_id']);
                 
