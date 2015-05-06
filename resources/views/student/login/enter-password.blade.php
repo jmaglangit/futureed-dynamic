@@ -18,12 +18,17 @@
               </li>
             </ul>
           </div>
-          <input type="hidden" name="user_data" >
+          <input type="hidden" name="user_data" />
+        
+          <div class="btn-container">
+              {!! Form::button('Cancel'
+                  , array(
+                    'class' => 'btn btn-gold btn-medium'
+                    , 'ng-click' => 'cancelLogin()'
+                  )
+              ) !!}
+          </div>
         {!! Form::close() !!}
-
-        <div class="btn-container">
-            <button class="btn btn-gold btn-medium" ng-click="cancelLogin()">Cancel</button>
-        </div>
       </div>
   </div>
   

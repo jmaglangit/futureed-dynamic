@@ -229,11 +229,11 @@
 					</fieldset>
 					<div class="form-group">
 						<div class="btncon col-xs-9" style="text-align:center;" ng-if="!edit">
-							<a href="{!! route('student.profile.change_password')!!}" class="btn btn-gold">Change Picture Password</a>
+							<a href="{!! route('student.profile.change_password')!!}" class="btn btn-maroon">Change Picture Password</a>
 							<a class="btn btn-gold" ng-click="editProfile()">Edit Profile</a>
 						</div>
 						<div class="btncon col-xs-9" style="text-align:center;" ng-if="edit">
-							<a class="btn btn-gold" ng-click="saveProfile(prof)">Save Changes</a>
+							<a class="btn btn-maroon" ng-click="saveProfile(prof)">Save Changes</a>
 							<a class="btn btn-gold" ng-click="setActive('index')">Cancel</a>
 						</div>
 					</div>
