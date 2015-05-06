@@ -77,7 +77,7 @@ class StudentPasswordController extends StudentController {
 
        $this->addMessageBag($this->validateNumber($input,'id'));
        $this->addMessageBag($this->validateNumber($input,'reset_code'));
-       $this->addMessageBag($this->validateNumber($input,'password_image_id'));
+       $this->addMessageBag($this->validatePicturePassword($input,'password_image_id'));
         
        $msg_bag = $this->getMessageBag();
          

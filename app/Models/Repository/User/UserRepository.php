@@ -286,6 +286,46 @@ class UserRepository implements UserRepositoryInterface {
 
     }
 
+    public function addNewEmail($id,$new_email){
+
+        try{
+
+            User::where('id',$id)->update([
+                'new_email' => $new_email
+            ]);
+
+        } catch (Exception $e){
+            throw new Exception($e->getMessage());
+        }
+
+
+    }
+
+    public function checkNewEmailExist($new_email,$user_type){
+
+         return User::where('new_email','=',$new_email)
+            ->where('user_type','=',$user_type)->pluck('id');
+
+
+    }
+
+    public function updateToNewEmail($user_id,$new_email){
+
+
+         try{
+
+            User::where('id',$user_id)->update([
+                'new_email' => '',
+                'email' => $new_email
+            ]);
+
+        } catch (Exception $e){
+            throw new Exception($e->getMessage());
+        }
+
+
+    }
+
 
 
 

@@ -364,6 +364,22 @@ class UserServices {
         $this->users->updateUsername($id,$username);
     }
 
+    public function addNewEmail($id,$new_email){
+
+        $this->users->addNewEmail($id,$new_email);
+    }
+
+    public function checkNewEmailExist($new_email,$user_type){
+
+        return $this->users->checkNewEmailExist($new_email,$user_type);
+    }
+
+    public function updateToNewEmail($user_id,$new_email){
+
+        $this->users->updateToNewEmail($user_id,$new_email);
+
+    }
+
     
 
 }

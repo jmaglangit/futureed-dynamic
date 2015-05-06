@@ -427,4 +427,35 @@ trait ApiValidatorTrait {
                     ->errorMessage();
             }
     }
+
+
+    public function validatePicturePassword($input,$field_name){
+
+            $error_msg = config('futureed-error.error_messages');
+            
+            $validator = Validator::make(
+                [
+                    "$field_name" => strtolower($input["$field_name"]),
+                ],
+                [
+                    "$field_name" => 'required|numeric'
+                ],
+                [
+
+                    'required' => $error_msg[2017],
+                    'numeric' => $error_msg[2101]
+
+                ]
+            );
+
+            if($validator->fails()){
+
+                $validator_msg = $validator->messages()->toArray();
+
+                return $this->setErrorCode(1013)
+                    ->setField($field_name)
+                    ->setMessage($validator_msg["$field_name"][0])
+                    ->errorMessage();
+            }
+    }
 }
