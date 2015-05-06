@@ -5,6 +5,11 @@
             {! error !}
           </p>
         </div>
+        <div class="alert alert-danger" ng-if="sp_error">
+          <p> 
+            {! sp_error !}
+          </p>
+        </div>
 
         {!! Form::open(array('id' => 'password_form', 'method' => 'POST', 'route' => 'student.login.process')) !!}
           <div class="form_content">

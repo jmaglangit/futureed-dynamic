@@ -44,8 +44,8 @@
                     , 'autocomplete' => 'off')
             ) !!}
             
-            {!! Form::hidden('username', 'email', array('ng-model' => 'username')) !!}
-            {!! Form::hidden('id', '', array('ng-model' => 'id')) !!}
+            {!! Form::hidden('username', '{!user.email!}', array('ng-model' => 'username')) !!}
+            {!! Form::hidden('id', '{!user.id!}', array('ng-model' => 'id')) !!}
           </div>
 
           <div class="btn-container">

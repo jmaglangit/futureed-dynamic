@@ -24,6 +24,7 @@ function FutureedController($scope, apiService) {
   $scope.checkCurrentEmail = checkCurrentEmail;
   $scope.changeBack = changeBack;
   $scope.changeValidate = changeValidate;
+  $scope.emailResendCode = emailResendCode;
 
   function errorHandler(errors) {
     $scope.errors = [];
@@ -1086,13 +1087,26 @@ function FutureedController($scope, apiService) {
     }
     $("html, body").animate({ scrollTop: 0 }, "slow");
   }
+
   function changeValidate(){
-    $scope.email_pass = Constants.FALSE;
-    $scope.email_change = Constants.TRUE;
-    $scope.show = Constants.TRUE;
-    $("html, body").animate({ scrollTop: 0 }, "slow");
+
+    if($scope.image_id == null){
+
+      $scope.sp_error = "Please select your picture password.";
+      $("html, body").animate({ scrollTop: 0 }, "slow");
+
+      return false;
+
+    }else{
+      console.log($scope.user.id);
+      // apiService.changeValidate()
+    }    
+    
   }
 
+  function emailResendCode(){
+
+  }
 
   /**
   * End of Client Page Functions
