@@ -36,4 +36,9 @@ return [
     'subject_register' => 'Welcome to Future Lesson!',
     'subject_reg_resend' => 'Resending: Email Confirmation',
 
+    //new email
+
+    'subject_change_email' => 'Change Email',
+    'subject_email_resend' =>  'Resending: Change Email',
+
 ];

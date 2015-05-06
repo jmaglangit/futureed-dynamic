@@ -14,7 +14,9 @@ class CountryRepository implements CountryRepositoryInterface{
             'full_name',
             'capital',
             'country_code'
-        )->get()
+        )
+            ->orderBy('name','ASC')
+            ->get()
             ->toArray();
     }
 

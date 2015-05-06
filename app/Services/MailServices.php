@@ -139,6 +139,7 @@ class MailServices {
     }
 
     public function sendClientMailResetPassword($data,$code,$subject){
+
         $content = [
             'view' => 'emails.client.forget-password',
             'data' => [
@@ -171,4 +172,37 @@ class MailServices {
         ];
         $this->sendMail($content);
     }
+
+    public function sendMailChangeEmail($data,$code,$send = 0){
+
+        $template = 'emails.student.change-email';
+       
+        if($send == 0){
+            
+            $subject = config('futureed.subject_change_email');
+
+        }else{
+
+            $subject = config('futureed.subject_email_resend');
+
+
+        }
+        
+        $content = [
+            'view' => $template,
+            'data' => [
+                'name' => $data['name'],
+                'code' => $code,
+                'link' => url() .'/student/change/email/confirm?email=' . $data['new_email']  ,
+            ],
+            'mail_recipient' => $data['new_email'],
+            'mail_recipient_name' => $data['name' ],
+            'subject' => $subject
+        ];
+
+        $this->sendMail($content);
+    }
+
+
+
 }
