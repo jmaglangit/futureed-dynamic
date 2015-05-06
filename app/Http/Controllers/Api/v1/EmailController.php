@@ -48,7 +48,7 @@ class EmailController extends ApiController {
 
         $userType = config('futureed.student');
 
-        $input = Input::only('email','new_email','password_image_id');
+        $input = Input::only('new_email','password_image_id');
 
         $this->addMessageBag($this->validateVarNumber($id));
         $this->addMessageBag($this->email($input,'new_email')); 
