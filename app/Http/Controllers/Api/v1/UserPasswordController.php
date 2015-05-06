@@ -29,7 +29,7 @@ class UserPasswordController extends UserController {
             $flag = 0;
         }
         
-        
+
         if($flag){
 
             $this->addMessageBag($this->email($input,'username'));
@@ -48,19 +48,19 @@ class UserPasswordController extends UserController {
 
             $return= $this->user->checkLoginName($input['username'],$input['user_type']);
 
+
             if($this->valid->email($input['username'])){
                
                 $return = $this->user->checkEmail($input['username'],$input['user_type']);
 
 
-            }elseif($this->valid->username($input['username'])){
-               
-                $return = $this->user->checkUserName($input['username'],$input['user_type']);
+            }elseif($this->valid->username($input['username'])) {
+
+                $return = $this->user->checkUserName($input['username'], $input['user_type']);
 
             }
-            
 
-           if( array_key_exists("status",$return)){
+           if(isset($return['status'])){
             
                 $userDetails = $this->user->getUserDetails($return['user_id']);
                 
@@ -83,13 +83,13 @@ class UserPasswordController extends UserController {
                     
                 }else{
                     
-                    return $this->respondErrorMessage(2011);
+                    return $this->respondErrorMessage(2019);
                          
                 }
                 
           }else{
             
-             return $this->respondErrorMessage(2011);
+             return $this->respondErrorMessage(2019);
           }
         }
 
