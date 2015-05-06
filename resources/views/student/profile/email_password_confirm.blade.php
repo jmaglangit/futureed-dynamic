@@ -9,7 +9,7 @@
         {!! Form::open(array('id' => 'password_form', 'method' => 'POST', 'route' => 'student.login.process')) !!}
           <div class="form_content">
             <ul class="form_password list-unstyled list-inline">
-              <li class="item" ng-repeat="item in image_pass" ng-click="selectPassword($event)">
+              <li class="item" ng-repeat="item in image_pass" ng-click="highlight($event)">
                  <img ng-src="{! item.url !}" alt="{! item.name !}">
                  <input type="hidden" id="image_id" name="image_id" value="{! item.id !}">
               </li>
@@ -19,7 +19,8 @@
         {!! Form::close() !!}
 
         <div class="btn-container">
-            <button class="btn btn-gold btn-medium" ng-click="cancelLogin()">Cancel</button>
+            <button class="btn btn-maroon btn-medium" ng-click="changeBack()">Previous</button>
+            <button class="btn btn-gold btn-medium" ng-click="changeValidate()">Next</button>
         </div>
   </div>
   

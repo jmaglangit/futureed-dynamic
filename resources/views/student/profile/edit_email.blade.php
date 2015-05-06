@@ -15,10 +15,14 @@
 						<img ng-src="{! user.avatar !}">
 					</div>
 					<div class="detcon">
-						<h2>
-						<span class="thin">Edit</span>
-						Email
-					</h2>
+						<h2 ng-if="!email_pass">
+							<span class="thin">Edit</span>
+							Email
+						</h2>
+						<h2 ng-if="email_pass">
+							<span class="thin">Enter</span>
+							Password
+						</h2>
 					</div>					
 				</div>
 				@include('student.profile.email_password_confirm')
@@ -41,6 +45,7 @@
 								{!! Form::text('email_current', ''
 									, array(
 										'class' => 'form-control'
+										, 'id' => 'email_current'
 										, 'placeholder' => 'Current Email'
 										, 'ng-model' => 'email_current'
 										, 'ng-model-option' => "{debounce: {'default' : 10000}}"
@@ -62,6 +67,7 @@
 								{!! Form::text('email_new', ''
 									, array(
 										'class' => 'form-control'
+										, 'id' => 'email_new'
 										, 'placeholder' => 'New Email'
 										, 'ng-model' => 'email_new'
 										, 'ng-model-option' => "{debounce: {'default' : 10000}}"

@@ -21,6 +21,8 @@ function FutureedController($scope, apiService) {
   $scope.checkEmailChange = checkEmailChange;
   $scope.checkEmailConfirm = checkEmailConfirm;
   $scope.checkCurrentEmail = checkCurrentEmail;
+  $scope.changeBack = changeBack;
+  $scope.changeValidate = changeValidate;
 
   function errorHandler(errors) {
     $scope.errors = [];
@@ -54,7 +56,7 @@ function FutureedController($scope, apiService) {
   }
 
   function highlight(e) {
-    var target = getTarget(e);
+    var target = getTarget(e);    
 
     $("ul.form_password li").removeClass('selected');
     $(target).addClass('selected');
@@ -210,6 +212,11 @@ function FutureedController($scope, apiService) {
       $scope.cf_loading = Constants.FALSE;
       $scope.cf_success = Constants.TRUE;
     }
+  }
+  function changeBack(){
+    $scope.email_pass = Constants.FALSE;
+    $('#email_current').val($scope.email_current);
+    $("html, body").animate({ scrollTop: 0 }, "slow");
   }
   /**
   * End of Common Functions / API calls
@@ -1072,6 +1079,10 @@ function FutureedController($scope, apiService) {
 
     }
     $("html, body").animate({ scrollTop: 0 }, "slow");
+  }
+  function changeValidate(){
+    $scope.error = ""
+    
   }
 
 
