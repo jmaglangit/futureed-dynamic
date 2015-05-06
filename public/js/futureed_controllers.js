@@ -1087,9 +1087,9 @@ function FutureedController($scope, apiService) {
     $("html, body").animate({ scrollTop: 0 }, "slow");
   }
   function changeValidate(){
-    $scope.error = "gwapo ko"
     $scope.email_pass = Constants.FALSE;
     $scope.email_change = Constants.TRUE;
+    $scope.show = Constants.TRUE;
     $("html, body").animate({ scrollTop: 0 }, "slow");
   }
 

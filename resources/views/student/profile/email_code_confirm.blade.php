@@ -15,7 +15,7 @@
 
             <p class="text">
               <strong>Success!</strong>
-              <br /> An email to reset your picture password has been sent to your email account. 
+              <br /> You're almost done! You should be able to receive an email that contains the confirmation code in a few minutes.
             </p>
           </div>
           
@@ -29,7 +29,7 @@
               <br /> You're almost done! You should be able to receive an email that contains the confirmation code in a few minutes.  
             </p>
           </div>
-
+          <br/>
           <div class="form-group">
             <small>Please check your inbox or your spam folder for the email. 
             <br />The email contains a code that you need to input below.</small>
@@ -39,8 +39,8 @@
             {!! Form::text('reset_code', ''
                 , array(
                     'class' => 'form-control'
-                    , 'placeholder' => 'Reset Code' 
-                    , 'ng-model' => 'reset_code'
+                    , 'placeholder' => 'Confirmation Code' 
+                    , 'ng-model' => 'confirm_code'
                     , 'autocomplete' => 'off')
             ) !!}
             
@@ -49,8 +49,7 @@
           </div>
 
           <div class="btn-container">
-            <a type="button" class="btn btn-maroon btn-medium" ng-if="!email_change" ng-click="studentValidateCode(reset_code)">PROCEED</a>
-            <a type="button" class="btn btn-maroon btn-medium" ng-if="email_change" ng-click="studentValidateCode(reset_code)">PROCEED</a>
+            <a type="button" class="btn btn-maroon btn-medium" ng-click="studentValidateCode(reset_code)">PROCEED</a>
             <a type="button" ng-disabled="disabled" class="btn btn-gold btn-medium" ng-click="studentResendCode()">Resend Code</a>
           </div>
         </div>
