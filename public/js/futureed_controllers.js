@@ -1,7 +1,7 @@
 angular.module('futureed.controllers', [])
   .controller('futureedController', FutureedController);
 
-function FutureedController($scope, $location, apiService) {
+function FutureedController($scope, apiService) {
 
   $scope.display_date = new Date();
   
