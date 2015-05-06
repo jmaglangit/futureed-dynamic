@@ -99,9 +99,9 @@ Routes::group(['prefix' => 'api/v1'], function()
         ['except' => ['create','edit']]);
 
     //email
-    Routes::resource('/student/email/{id}','Api\v1\EmailController@updateStudentEmail');
-    Routes::resource('/student/resend/email','Api\v1\EmailController@resendChangeEmail');
-    Routes::resource('/student/confirmation/email','Api\v1\EmailController@confirmChangeEmail');
+    Routes::put('/student/email/{id}','Api\v1\EmailController@updateStudentEmail');
+    Routes::post('/student/resend/email','Api\v1\EmailController@resendChangeEmail');
+    Routes::post('/student/confirmation/email','Api\v1\EmailController@confirmChangeEmail');
 
 
 

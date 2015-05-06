@@ -51,7 +51,6 @@ class EmailController extends ApiController {
         $input = Input::only('email','new_email','password_image_id');
 
         $this->addMessageBag($this->validateVarNumber($id));
-        $this->addMessageBag($this->email($input,'email'));
         $this->addMessageBag($this->email($input,'new_email')); 
         $this->addMessageBag($this->validateNumber($input,'password_image_id'));
 
@@ -77,10 +76,6 @@ class EmailController extends ApiController {
 
                   return $this->respondErrorMessage(2012);
 
-                }else if($userDetails['email'] != $input['email']){
-
-                  return $this->respondErrorMessage(2106); 
-
                 }else if($userDetails['email'] == $input['new_email']){
 
                   return $this->respondErrorMessage(2107); 
@@ -98,7 +93,6 @@ class EmailController extends ApiController {
                     $this->mail->sendMailChangeEmail($new_user_details,$code['confirmation_code'],0);
                     $this->user->updateConfirmationCode($studentReferences['user_id'],$code);
                     
-
                     return $this->respondWithData(['id' => $id]);
 
                 }
