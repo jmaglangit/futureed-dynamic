@@ -20,7 +20,7 @@
 							<span ng-if="!password_validated" class="thin">Current</span> 
 							<span ng-if="password_validated && !password_selected" class="thin">New</span> 
 							<span ng-if="password_validated && password_selected && !password_confirmed" class="thin">Confirm</span> 
-						Password <span ng-if="password_validated && password_selected && password_confirmed" class="thin">Successfully Changed</span> </h2>
+						Picture Password <span ng-if="password_validated && password_selected && password_confirmed" class="thin">Successfully Changed</span> </h2>
 						<hr />
 						<p ng-if="!password_validated">
 							Select your current picture password
@@ -36,7 +36,7 @@
 				<div class="form-content col-md-12">
 					<div class="alert alert-success" ng-if="password_validated && password_selected && password_confirmed">
 						<p>Your Picture Password has been saved.</p>
-						<p>You may now use this picture password in your suceeding login.</p>
+						<p>You may now use this picture password in your succeeding login.</p>
 					</div>
 					<div class="col-md-8 col-md-offset-2" ng-if="locked">
 						<div class="form-style" style="box-shadow: none;">

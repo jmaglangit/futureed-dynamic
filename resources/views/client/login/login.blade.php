@@ -14,7 +14,7 @@
 	          </div>
 	
 	          <p>Your account has been locked due to maximum attempt of invalid login.</p>
-	          <p>Please <a href="#">click here</a> to redirect you to the steps to reset your password.</p>
+	          <p>Please <a href="#">click here</a> to redirect you to the steps to reset your picture password.</p>
 	        </div>
       	</div>
         <div class="title">Login to your account</div>
@@ -24,14 +24,12 @@
             </p>
           </div>
           {!! Form::open(array('id' => 'login_form', 'route' => 'client.login.process', 'method' => 'POST')) !!}
-          <!-- <span>Email or Username</span> -->
           <div class="input">
             <div class="icon">
               <i class="fa fa-user"></i>
             </div>
             {!! Form::text('login', null, ['placeholder' => 'Email or Username', 'ng-model' => 'username', 'autocomplete' => 'off']) !!}
           </div>
-          <!-- <span>Password</span> -->
           <div class="input pass">
             <div class="icon">
               <i class="fa fa-lock"></i>
