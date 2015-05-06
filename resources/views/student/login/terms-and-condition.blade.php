@@ -5,11 +5,17 @@
             Terms and Conditions
         </div>
         <div class="modal-body">
-            Lorem blah blahh...
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ut erat a erat vehicula pulvinar.
+            Vivamus vitae justo consectetur, molestie justo ut, suscipit nibh. Pellentesque accumsan elit.
         </div>
         <div class="modal-footer">
         	<div class="btncon col-md-8 col-md-offset-4 pull-left">
-            	<button data-dismiss="modal" class="btn btn-purple btn-medium">Close</button>
+                {!! Form::button('Close'
+                    , array(
+                        'class' => 'btn btn-gold btn-medium'
+                        , 'data-dismiss' => 'modal'
+                    )
+                ) !!}
         	</div>
         </div>
     </div>

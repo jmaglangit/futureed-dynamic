@@ -30,6 +30,17 @@ function FutureedController($scope, apiService) {
 
     if(angular.isArray(errors)) {
       angular.forEach(errors, function(value, key) {
+
+        if(value.error_code == 2102) {
+          $scope.user = null;
+
+          apiService.updateUserSession($scope.user).success(function(response) {
+            window.location.href = "/student/login";
+          }).error(function() {
+            $scope.internalError();
+          });
+        }
+
         $scope.errors[key] = value.message;
       });
     } else {

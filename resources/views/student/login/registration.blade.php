@@ -185,13 +185,40 @@
                         <div class="checkbox text-center">
                             <label>
                                 {!! Form::checkbox('terms', 1, null, array('ng-model' => 'terms')) !!}
-                                I agree on the <a href="#" data-toggle="modal" ng-click="showModal('terms_modal')">Terms and Conditions</a> and <a href="#" ng-click="showModal('policy_modal')">Data Privacy Policy</a>
+                                
+                                I agree on the 
+
+                                {!! Html::link('#', 'Terms and Conditions'
+                                    , array(
+                                        'ng-click' => "showModal('terms_modal')"
+                                        , 'data-toggle' => 'modal'
+                                    )
+                                ) !!}
+
+                                 and 
+
+                                {!! Html::link('#', 'Data Privacy Policy'
+                                    , array(
+                                        'ng-click' => "showModal('policy_modal')"
+                                        , 'data-toggle' => 'modal'
+                                    )
+                                ) !!}
                             </label>
                         </div>
                     </div>
                     <div class="btn-container col-sm-6 col-sm-offset-3">
-                        <a ng-click="validateRegistration(reg, terms)" class="btn btn-maroon btn-medium">REGISTER</a>
-                        <a href="{!! route('student.login') !!}" class="btn btn-gold btn-medium">Cancel</a>
+                        {!! Form::button('Register'
+                            , array(
+                                'class' => 'btn btn-maroon btn-medium'
+                                , 'ng-click' => 'validateRegistration(reg, terms)'
+                            )
+                        ) !!}
+
+                        {!! Html::link(route('student.login'), 'Cancel'
+                            , array(
+                                'class' => 'btn btn-gold btn-medium'
+                            )
+                        )!!}
                     </div>
                 </fieldset>
             </div>

@@ -99,8 +99,20 @@
               ) !!}
             </div>
             <div class="btn-container">
-              <button id="validate_code_btn" type="button" class="btn btn-maroon btn-medium" ng-click="studentValidateCode(reset_code)">PROCEED</button>
-              <button type="button" class="btn btn-gold btn-medium" ng-click="studentResendCode()">Resend Code</button>  
+              {!! Form::button('Proceed'
+                  , array(
+                      'id' => 'validate_code_btn'
+                      , 'class' => 'btn btn-maroon btn-medium'
+                      , 'ng-click' => 'studentValidateCode(reset_code)'
+                  )
+              ) !!}
+
+              {!! Form::button('Resend Code'
+                  , array(
+                        'class' => 'btn btn-gold btn-medium'
+                      , 'ng-click' => 'studentResendCode()'
+                  )
+              ) !!}
             </div>
             
           </div>
