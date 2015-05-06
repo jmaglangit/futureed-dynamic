@@ -15,18 +15,23 @@
 						<img ng-src="{! user.avatar !}">
 					</div>
 					<div class="detcon">
-						<h2 ng-if="!email_pass">
+						<h2 ng-if="!email_pass && !email_change">
 							<span class="thin">Edit</span>
 							Email
 						</h2>
-						<h2 ng-if="email_pass">
+						<h2 ng-if="email_pass && !email_change">
 							<span class="thin">Enter</span>
 							Password
+						</h2>
+						<h2 ng-if="!email_pass && email_change">
+							<span class="thin">Enter</span>
+							Code
 						</h2>
 					</div>					
 				</div>
 				@include('student.profile.email_password_confirm')
-				<div class="form-content col-md-12" ng-show="!email_pass">
+				@include('student.profile.email_code_confirm')
+				<div class="form-content col-md-12" ng-show="!email_pass && !email_change">
 
 					<div class="alert alert-danger" ng-if="error">
 	                    <p>{! error !}</p>
