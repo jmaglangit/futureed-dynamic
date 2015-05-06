@@ -8,7 +8,7 @@
         @include('student.login.enter-password')
 
         <div ng-show="!locked && !enter_pass">
-          {!! Form::open(array('id' => 'login_form', 'method' => 'POST')) !!}
+          <!-- {!! Form::open(array('id' => 'login_form', 'method' => 'POST')) !!} -->
             <div class="logo-container">
               {!! Html::image('images/logo-md.png') !!}
             </div>
@@ -32,7 +32,7 @@
             <div class="form-group">
               <button type="button" ng-click="validateUser()" class="btn btn-maroon">Next</button>              
             </div>
-          {!! Form::close() !!}
+          <!-- {!! Form::close() !!} -->
           <div class="text-group">
             <small>Not a Student?</small>
             <small>Click <a href="{!! route('client.login') !!}">here</a> for Parent / Teacher / School Site</small>     

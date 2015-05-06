@@ -45,7 +45,7 @@
             <i class="fa fa-check fa-5x img-rounded text-center"></i>
           </div>
            Your password has been set. <br /> 
-           You may now use your new password to login. <br />
+           You may now use your new picture password to login. <br />
            <br />
           <a class="btn btn-maroon" href="{!! route('student.login') !!}">Click here to Login</a> 
       </div>

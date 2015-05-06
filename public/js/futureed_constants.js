@@ -19,7 +19,9 @@ var Constants = {
 	, USER_PARENT 	: "user_parent"
 
 	, MSG_INTERNAL_ERROR	: "Internal Server Error."
+	, MSG_PPW_NOT_MATCH 	: "Picture Password does not match."
+	, MSG_PPW_INCORRECT		: "Picture password is incorrect."
+	, MSG_PPW_SELECT_NEW 	: "Please select a new picture password."
+
 	, MSG_PW_NOT_MATCH 		: "Password does not match."
-	, MSG_PW_INCORRECT		: "Picture password is incorrect."
-	, MSG_PW_SELECT_NEW 	: "Please select a new picture password."
 }

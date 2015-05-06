@@ -4,7 +4,7 @@
   <div class="container login student-fnt" ng-cloak>
     <div class="col-md-6 col-md-offset-3">
       <div class="form-style" ng-show="!sent">
-        <div class="title">Retrieve Password</div>
+        <div class="title">Retrieve Picture Password</div>
 
         <div class="alert alert-danger" ng-if="errors">
           <p ng-repeat="error in errors" > 
@@ -35,8 +35,8 @@
       <div class="form-style" ng-if="sent">
       {!! Form::open(array('id' => 'forgot_success_form', 'method' => 'POST', 'route' => 'student.login.reset_password')) !!}
         <div class="form_content">
-          <div class="title" ng-if="!resend && sent">Email Sent</div>
-          <div class="title" ng-if="resend && sent">Code Resent</div>
+          <div class="title" ng-if="!resent && sent">Email Sent</div>
+          <div class="title" ng-if="resent && sent">Code Resent</div>
 
           <div class="alert alert-danger" ng-if="errors">
             <p ng-repeat="error in errors" > 
@@ -44,17 +44,34 @@
             </p>
           </div>
 
+
+          <div ng-if="!resent && sent">
             <div class="roundcon">
               <i class="fa fa-check fa-5x img-rounded text-center"></i>
             </div>
+
             <p class="text">
               <strong>Success!</strong>
-              <br /> An email to reset your password has been sent to your email account. 
+              <br /> An email to reset your picture password has been sent to your email account. 
             </p>
-            <div class="form-group">
-              <small>Please check your inbox or your spam folder for the email. 
-              <br />The email contains a code that you need to input below.</small>
+          </div>
+
+          <div ng-if="resent">
+            <div class="roundcon">
+              <i class="fa fa-refresh fa-5x img-rounded text-center"></i>
             </div>
+
+            <p class="text">
+              <strong>Success!</strong>
+              <br /> A new email to reset your picture password has been sent to your email account. 
+            </p>
+          </div>
+
+          <div class="form-group">
+            <small>Please check your inbox or your spam folder for the email. 
+            <br />The email contains a code that you need to input below.</small>
+          </div>
+
             <div class="form-group">
               {!! Form::text('reset_code', ''
                 , array(
