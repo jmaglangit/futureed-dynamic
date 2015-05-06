@@ -37,6 +37,11 @@
               <small>Please check your inbox or your spam folder for the email. 
               <br />The email contains a reset code that you need to input below.</small>
             </div>
+          </div>
+
+          <div ng-if="!resent && show">
+            <div class="roundcon">
+              <i class="fa fa-check fa-5x img-rounded text-center"></i>
             </div>
 
             <p class="text">

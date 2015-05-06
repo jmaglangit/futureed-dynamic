@@ -24,6 +24,7 @@ function FutureedController($scope, apiService) {
   $scope.checkCurrentEmail = checkCurrentEmail;
   $scope.changeBack = changeBack;
   $scope.changeValidate = changeValidate;
+  $scope.emailValidateCode = emailValidateCode;
   $scope.emailResendCode = emailResendCode;
 
   function errorHandler(errors) {
@@ -510,7 +511,6 @@ function FutureedController($scope, apiService) {
 
     $scope.ui_block();
     apiService.confirmCode($scope.email, $scope.confirmation_code, $scope.user_type).success(function(response) {
-      console.log(response);
 
       if(response.status == Constants.STATUS_OK) {
         if(response.errors) {
@@ -1077,7 +1077,7 @@ function FutureedController($scope, apiService) {
   $scope.saveEmail = saveEmail;
 
 
-  function saveEmail(email) {
+  function saveEmail() {
 
     $scope.error = "";
     $scope.success_msg = "";
@@ -1093,22 +1093,85 @@ function FutureedController($scope, apiService) {
   }
 
   function changeValidate(){
-
+    $scope.error = "";
     if($scope.image_id == null){
-
       $scope.sp_error = "Please select your picture password.";
       $("html, body").animate({ scrollTop: 0 }, "slow");
 
       return false;
 
     }else{
-      console.log($scope.user.id);
-      // apiService.changeValidate()
+      $scope.ui_block();
+      apiService.changeValidate($scope.user.id, $scope.email_new, $scope.image_id).success(function(response){
+        if(response.status == Constants.STATUS_OK){
+          if(response.errors){
+            $scope.error = response.errors[0].message;
+          }else if(response.data){
+
+            $scope.email_change = Constants.TRUE;
+            $scope.show = Constants.TRUE;
+            $scope.email_pass = Constants.FALSE;
+          }
+        }
+        $scope.ui_unblock();
+      }).error(function(response){
+        $scope.internalError();
+        $scope.ui_unblock();
+      });
+      $("html, body").animate({ scrollTop: 0 }, "slow");
     }    
     
   }
 
+  function emailValidateCode(confirm_code){
+      $scope.errors = Constants.FALSE;
+      $scope.confirm_code = confirm_code;
+      $scope.user_type = Constants.STUDENT;
+      
+
+      if($scope.confirm_code == null){
+        $scope.ec_error = "Please input your confirmation code";
+        $("html, body").animate({ scrollTop: 0 }, "slow");
+      }else{
+
+        $scope.ui_block();
+        apiService.emailValidateCode($scope.email_new, $scope.user_type , $scope.confirm_code).success(function(response){
+          if(response.status == Constants.STATUS_OK){
+            if(response.errors){
+              $scope.errorHandler(response.errors);
+              $scope.ui_unblock();
+            }else if(response.data){
+              $scope.ui_unblock();
+              $scope.success = Constants.TRUE;
+            }
+          }
+        }).error(function(response){
+          $scope.internalError();
+          $scope.ui_unblock();
+        });
+      }      
+  }
+
   function emailResendCode(){
+      $scope.ec_error = Constants.FALSE;
+      $scope.user_type = Constants.STUDENT;
+
+      $scope.ui_block();
+      apiService.emailResendCode($scope.email_new, $scope.user_type).success(function(response) {
+      if(response.status == Constants.STATUS_OK) {
+        if(response.errors) {
+          $scope.errorHandler(response.errors);
+        } else if(response.data){
+            $scope.sent = Constants.FALSE;
+            $scope.resent = Constants.TRUE;
+        } 
+      }
+
+      $scope.ui_unblock();
+    }).error(function(response) {
+      $scope.internalError();
+      $scope.ui_unblock();
+    });
 
   }
 

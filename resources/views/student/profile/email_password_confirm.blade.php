@@ -1,11 +1,11 @@
 
   <div class="enter-pass-con form-select-password col-xs-8 col-xs-offset-2" ng-if="email_pass">        
-        <div class="alert alert-danger" ng-if="errors">
-          <p ng-repeat="error in errors" > 
+        <div class="alert alert-danger" ng-if="error && !sp_error">
+          <p> 
             {! error !}
           </p>
         </div>
-        <div class="alert alert-danger" ng-if="sp_error">
+        <div class="alert alert-danger" ng-if="sp_error && !error">
           <p> 
             {! sp_error !}
           </p>
@@ -24,7 +24,7 @@
         {!! Form::close() !!}
 
         <div class="btn-container">
-            <button class="btn btn-maroon btn-medium" ng-click="changeBack()">Previous</button>
+            <button class="btn btn-gold btn-medium" ng-click="changeBack()">Previous</button>
             <button class="btn btn-gold btn-medium" ng-click="changeValidate()">Next</button>
         </div>
   </div>
