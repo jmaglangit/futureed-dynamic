@@ -76,8 +76,15 @@ class UserPasswordController extends UserController {
                     $this->user->setResetCode($return['user_id'],$code);
 
 
-                     //sent email for reset password
-                    $this->mail->sendClientMailResetPassword($userDetails,$code['confirmation_code'],$subject);
+                    if(strcasecmp($input['user_type'],config('futureed.student')) == 0){
+
+                      $this->mail->sendStudentMailResetPassword($userDetails,$code['confirmation_code'],$subject);
+                      
+                    }else{
+
+                      $this->mail->sendClientMailResetPassword($userDetails,$code['confirmation_code'],$subject);
+
+                    }
 
                     return $this->respondWithData($userDetails);
                     
