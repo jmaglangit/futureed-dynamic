@@ -12,7 +12,7 @@
           </p>
         </div>
 
-        {!! Form::open() !!}
+        {!! Form::open(array('id' => 'forgot_password_form')) !!}
           <div class="input">
             <div class="icon">
               <i class="fa fa-user"></i>
@@ -26,17 +26,34 @@
             ) !!}
           </div>
           <div class="btn-container">
-            <a type="button" class="btn btn-maroon btn-medium" ng-click="studentForgotPassword()">SEND</a>
-            <a href="{!! route('student.login') !!}" class="btn btn-gold btn-medium">Cancel</a>
+            {!! Form::button('Send'
+                , array(
+                    'id' => 'forgot_password_btn'
+                    , 'class' => 'btn btn-maroon btn-medium'
+                    , 'ng-click' => 'studentForgotPassword()'
+                )
+            ) !!}
+
+            {!! Html::link(route('student.login'), 'Cancel'
+                , array(
+                    'class' => 'btn btn-gold btn-medium'
+                )
+                , ''
+            ) !!}
           </div>
         {!! Form::close() !!}
       </div>
 
       <div class="form-style" ng-if="sent">
-      {!! Form::open(array('id' => 'forgot_success_form', 'method' => 'POST', 'route' => 'student.login.reset_password')) !!}
+      {!! Form::open(array('id' => 'redirect_form', 'method' => 'POST', 'route' => 'student.login.reset_password')) !!}
+        {!! Form::hidden('id', '', array('ng-model' => 'id')) !!}
+        {!! Form::hidden('reset_code', '') !!}
+      {!! Form::close() !!}
+
+      {!! Form::open(array('id' => 'forgot_success_form')) !!}
         <div class="form_content">
           <div class="title" ng-if="!resent && sent">Email Sent</div>
-          <div class="title" ng-if="resent && sent">Code Resent</div>
+          <div class="title" ng-if="resent && sent">Reset Code Resent</div>
 
           <div class="alert alert-danger" ng-if="errors">
             <p ng-repeat="error in errors" > 
@@ -80,11 +97,9 @@
                     , 'autocomplete' => 'off'
                     , 'ng-model' => 'reset_code')
               ) !!}
-
-              {!! Form::hidden('id', '', array('ng-model' => 'id')) !!}
             </div>
             <div class="btn-container">
-              <button type="button" class="btn btn-maroon btn-medium" ng-click="studentValidateCode(reset_code)">PROCEED</button>
+              <button id="validate_code_btn" type="button" class="btn btn-maroon btn-medium" ng-click="studentValidateCode(reset_code)">PROCEED</button>
               <button type="button" class="btn btn-gold btn-medium" ng-click="studentResendCode()">Resend Code</button>  
             </div>
             
