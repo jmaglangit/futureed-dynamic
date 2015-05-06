@@ -75,7 +75,8 @@ class UserPasswordController extends UserController {
                      //update reset_code and expiry to db
                     $this->user->setResetCode($return['user_id'],$code);
 
-                    if($input['user_type'] == 'Student'){
+
+                    if($input['user_type'] == config('futureed.student')){
 
                       $this->mail->sendStudentMailResetPassword($userDetails,$code['confirmation_code'],$subject);
                       
