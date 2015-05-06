@@ -80,7 +80,7 @@ class EmailController extends ApiController {
 
                   return $this->respondErrorMessage(2107); 
 
-                }else if(array_key_exists('status',$checkEmailExist)){
+                }else if($checkEmailExist){
 
                   return $this->respondErrorMessage(2200);
 
