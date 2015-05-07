@@ -8,6 +8,7 @@ class ClientRepository implements ClientRepositoryInterface{
     public function getClient($user_id,$role){
 
         return Client::select(
+            'id',
             'user_id',
             'first_name',
             'last_name',
