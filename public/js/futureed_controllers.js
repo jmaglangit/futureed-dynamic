@@ -317,8 +317,6 @@ function FutureedController($scope, apiService) {
 
   function getLoginPassword() {
     $scope.id = ($scope.id) ? $scope.id : $scope.user.id;
-    var FC = this;
-    FC.asd = "asd1";
 
     apiService.getLoginPassword($scope.id).success(function (response) {
       if(response.status == Constants.STATUS_OK) {
