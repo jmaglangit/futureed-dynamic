@@ -111,6 +111,30 @@ var services = angular.module('futureed.services', ['ngResource']);
 			});
 		}
 
+		futureedAPI.changeValidate = function(id, email_new, image_id) {
+			return $http({
+				method	: 'PUT'
+				, data	: {new_email : email_new, password_image_id : image_id}
+				, url	: futureedAPIUrl + 'student/email/' + id
+			});
+		}
+
+		futureedAPI.emailValidateCode = function(new_email, user_type, confirmation_code) {
+			return $http({
+				method	: 'POST'
+				, data 	: {new_email : new_email, user_type : user_type, confirmation_code : confirmation_code}
+				, url	: futureedAPIUrl + 'student/confirmation/email'
+			});
+		}
+
+		futureedAPI.emailResendCode = function(new_email, user_type){
+			return $http({
+				method	: 'POST'
+				, data 	: {new_email : new_email, user_type : user_type}
+				, url 	: futureedAPIUrl + 'student/resend/email'
+			});
+		}
+
 		futureedAPI.confirmCode = function(email, email_code, user_type) {
 			return $http({
 				method	: 'POST'

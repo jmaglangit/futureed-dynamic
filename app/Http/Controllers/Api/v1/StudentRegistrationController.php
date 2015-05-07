@@ -21,7 +21,6 @@ class StudentRegistrationController extends StudentController {
             'last_name',
             'gender',
             'birth_date',
-            'school_code',
             'grade_code',
             'country',
             'state',
@@ -38,8 +37,7 @@ class StudentRegistrationController extends StudentController {
         $this->addMessageBag($this->lastName($student,'last_name'));
         $this->addMessageBag($this->gender($student,'gender'));
         $this->addMessageBag($this->birthDate($student,'birth_date'));
-        $this->addMessageBag($this->validateNumber($student,'school_code'));
-        $this->addMessageBag($this->validateNumber($student,'grade_code'));
+        $this->addMessageBag($this->validateGradeCode($student,'grade_code'));
         $this->addMessageBag($this->validateString($student,'country'));
         $this->addMessageBag($this->validateString($student,'state'));
         $this->addMessageBag($this->validateString($student,'city'));

@@ -168,6 +168,35 @@ trait ApiValidatorTrait {
             }
     }
 
+    //Validate school level field name grade_code
+    public function validateGradeCode($input,$field_name){
+
+        $error_msg = config('futureed-error.error_messages');
+
+        $validator = Validator::make(
+            [
+                "$field_name" => strtolower($input["$field_name"]),
+            ],
+            [
+                "$field_name" => 'required|numeric'
+            ],
+            [
+                "required" => $error_msg[2022],
+                "numeric" => $error_msg[2023]
+            ]
+        );
+
+        if($validator->fails()){
+
+            $validator_msg = $validator->messages()->toArray();
+
+            return $this->setErrorCode(1009)
+                ->setField($field_name)
+                ->setMessage($validator_msg["$field_name"][0])
+                ->errorMessage();
+        }
+    }
+
     //Validating ang field that is numeric. Can be used by any number field validation.
     public function validateNumber($input,$field_name){
 

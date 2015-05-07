@@ -130,7 +130,7 @@ class StudentServices {
                     ];
                 }
                 return [
-                    'status' => 2004
+                    'status' => 2012
                 ];
             }
         } else {

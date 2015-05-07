@@ -109,7 +109,7 @@
 						</div>
 						<div class="form-group">
 							<div class="btncon col-xs-9" style="float:right;">
-								<a type="button" class="btn btn-gold" ng-click="saveEmail(email)">Save</a>
+								<a type="button" class="btn btn-gold" ng-click="saveEmail()">Save</a>
 							</div>
 						</div>						
 					</form>
@@ -120,8 +120,6 @@
 @stop
 
 @section('footer')
-
-@overwrite
 
 @section('scripts')
 

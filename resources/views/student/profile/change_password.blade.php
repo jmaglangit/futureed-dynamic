@@ -64,11 +64,11 @@
 				    </div>
 
 				    <div class="btn-container">
-					    <a ng-if="!password_validated" type="button" class="btn btn-maroon btn-medium" ng-click="validateCurrentPassword()">Proceed</a>
-						<a ng-if="password_validated && !password_selected" type="button" class="btn btn-maroon btn-medium" ng-click="selectNewPassword()">Proceed</a>
+					    <a ng-if="!password_validated" type="button" class="btn btn-gold btn-medium" ng-click="validateCurrentPassword()">Proceed</a>
+						<a ng-if="password_validated && !password_selected" type="button" class="btn btn-gold btn-medium" ng-click="selectNewPassword()">Proceed</a>
 						<a ng-if="!password_selected" href="{!! route('student.profile.index') !!}" class="btn btn-gold btn-medium">Cancel</a>
 
-						<a ng-if="password_validated && password_selected && !password_confirmed" type="button" ng-click="undoNewPassword()" class="btn btn-maroon btn-medium">Previous</a>
+						<a ng-if="password_validated && password_selected && !password_confirmed" type="button" ng-click="undoNewPassword()" class="btn btn-gold btn-medium">Previous</a>
 						<a ng-if="password_validated && password_selected && !password_confirmed" type="button" class="btn btn-gold btn-medium" ng-click="changePassword()">Change</a>    	
 				    </div>
 				</div>
@@ -78,8 +78,6 @@
 	@stop
 
 	@section('footer')
-
-	@overwrite
 
 	@section('scripts')
 

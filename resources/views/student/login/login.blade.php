@@ -13,8 +13,7 @@
               {!! Html::image('images/logo-md.png') !!}
             </div>
             
-            <div class="title-student">Student login</div>
-            <div class="title">Enter Your Username or Email</div>
+            <div class="title title-student">Student login</div>
 
             <div class="alert alert-danger" ng-if="errors">
               <p ng-repeat="error in errors" > 
@@ -26,7 +25,7 @@
               {!! Form::text('username', ''
                   , array(
                       'class' => 'form-control'
-                      , 'placeholder' => ''
+                      , 'placeholder' => 'Enter Your Username or Email'
                       , 'autocomplete' => 'off'
                       , 'ng-model' => 'username')
               ) !!}
@@ -71,9 +70,8 @@
 
 @stop
 
-@section('footer')
 
-@overwrite
+@section('footer')
 
 @section('scripts')
   

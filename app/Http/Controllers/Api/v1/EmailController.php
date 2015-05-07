@@ -91,7 +91,7 @@ class EmailController extends ApiController {
 
                     $new_user_details = $this->user->getUserDetail($studentReferences['user_id'],$userType);
                     $this->mail->sendMailChangeEmail($new_user_details,$code['confirmation_code'],0);
-                    $this->user->updateConfirmationCode($studentReferences['user_id'],$code);
+                    $this->user->updateEmailCode($studentReferences['user_id'],$code);
                     
                     return $this->respondWithData(['id' => $id]);
 
@@ -135,15 +135,24 @@ class EmailController extends ApiController {
 
                 $userDetails = $this->user->getUserDetail($user_id,$input['user_type']);
 
-                $code=$this->code->getCodeExpiry();
+                if(empty($userDetails['email_code'])){
 
-                $this->user->updateConfirmationCode($user_id,$code);
+                    return $this->respondErrorMessage(2111);
 
-                $student_id = $this->student->getStudentId($user_id);
+                }else{
 
-                $this->mail->sendMailChangeEmail($userDetails,$code['confirmation_code'],1);
+                    $code=$this->code->getCodeExpiry();
 
-                return $this->respondWithData(['id' => $student_id]);
+                    $this->user->updateEmailCode($user_id,$code);
+
+                    $student_id = $this->student->getStudentId($user_id);
+
+                    $this->mail->sendMailChangeEmail($userDetails,$code['confirmation_code'],1);
+
+                    return $this->respondWithData(['id' => $student_id]);
+
+                }
+
 
             }
 
@@ -175,10 +184,10 @@ class EmailController extends ApiController {
             }else{
 
                 $user_details = $this->user->getUserDetail($user_id,$input['user_type']);
-                $code_expire = $this->user->checkCodeExpiry($user_details['confirmation_code_expiry']);
+                $code_expire = $this->user->checkCodeExpiry($user_details['email_code_expiry']);
 
 
-                if($user_details['confirmation_code'] != $input['confirmation_code']){
+                if($user_details['email_code'] != $input['confirmation_code']){
 
                     return $this->respondErrorMessage(2006);
 
