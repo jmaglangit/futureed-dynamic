@@ -125,8 +125,6 @@
 
 @section('footer')
 
-@overwrite
-
 @section('scripts')
   
   {!! Html::script('/js/student/login.js') !!}
