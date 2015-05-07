@@ -150,7 +150,7 @@
 	                                </div>
 	                              </a>
 	                              <ul ng-show="edit" class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-	                                <datetimepicker data-ng-model="prof.birth" data-before-render="beforeDateRender($dates)" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', startView:'day', minView:'day' }"/>
+	                                <datetimepicker data-ng-model="prof.birth" ng-change="updateAge()" data-before-render="beforeDateRender($dates)" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', startView:'day', minView:'day' }"/>
 	                              </ul>
 	                            </div>
 	                        </div>
@@ -217,7 +217,7 @@
 	                        </div>
 	                    </div>
 						<div class="form-group" ng-init="getGradeLevel()">
-                        <label for="" class="col-xs-2 control-label">School level ?<span class="required">*</span></label>
+                        <label for="" class="col-xs-2 control-label">School level <span class="required">*</span></label>
 
                         <div class="col-md-5 nullable">
                             <select class="form-control" name="grade_code" ng-model="prof.grade_code" ng-disabled="!edit">
