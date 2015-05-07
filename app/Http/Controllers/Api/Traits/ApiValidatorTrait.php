@@ -251,7 +251,7 @@ trait ApiValidatorTrait {
                 "$field_name" => strtolower($input["$field_name"]),
             ],
             [
-                "$field_name" => 'required|numeric'
+                "$field_name" => 'required|numeric|regex:/^[0-9]{4}(\-[0-9]{4})?$/'
             ],
             [
                 'required' => $error_msg[2015],
