@@ -25,7 +25,7 @@ class CreateStudentsTable extends Migration {
             $table->bigInteger('avatar_id')->nullable();
             $table->tinyInteger('password_image_id')->nullable();
             $table->tinyInteger('parent_id')->nullable();
-            $table->bigInteger('school_code');
+            $table->bigInteger('school_code')->nullable();
             $table->bigInteger('grade_code');
             $table->integer('points')->nullable();
             $table->bigInteger('point_level_id')->nullable();
