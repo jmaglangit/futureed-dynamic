@@ -111,13 +111,13 @@
                             <div class="dropdown">
                               <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
                                 <div class="input-group">
-                                    <input readonly="readonly"type="text" name="birth_date" placeholder="mm/dd/yyyy" class="form-control" value="{! reg.birth | date:'MM/dd/yyyy' !}">
+                                    <input readonly="readonly" type="text" name="birth_date" placeholder="mm/dd/yyyy" class="form-control" value="{! reg.birth | date:'MM/dd/yyyy' !}">
                                     <input type="hidden" name="hidden_date" value="{! reg.birth | date:'yyyyMMdd' !}">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                                 </div>
                               </a>
-                              <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                <datetimepicker data-ng-model="reg.birth" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', startView:'day', minView:'day' }"/>
+                              <ul class="dropdown-menu date-dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                <datetimepicker data-ng-model="reg.birth" data-before-render="beforeDateRender($dates)" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', startView:'day', minView:'day' }"/>
                               </ul>
                             </div>
                         </div>

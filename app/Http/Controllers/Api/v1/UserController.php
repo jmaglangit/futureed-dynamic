@@ -195,24 +195,24 @@ class UserController extends ApiController{
 
         }else{
 
-            $return = $this->user->checkEmail($input['email'],$input['user_type']);
+            $return = $this->user->checkEmail($input['email'], $input['user_type']);
 
             if(!empty($return)){
 
-                $userDetails = $this->user->getUserDetail($return['user_id'],$input['user_type']);
-
-                if(empty($userDetails['confirmation_code'])){
+                $userDetails = $this->user->getUserDetail($return['user_id'], $input['user_type']);
+                
+                if($userDetails['is_account_activated'] != config('futureed.activated')){
 
                    return $this->respondErrorMessage(2109);
 
-                }else{
+                } else {
 
                     $code=$this->code->getCodeExpiry();
 
                     $this->user->updateConfirmationCode($return['user_id'],$code);
 
 
-                    if(strtolower($input['user_type']) == 'student'){
+                    if(strtolower($input['user_type']) == 'student') {
 
                         $student_id = $this->student->getStudentId($return['user_id']);
 
@@ -223,7 +223,7 @@ class UserController extends ApiController{
                                                      ]);
 
                     
-                    }else{
+                    } else {
 
                         $client_id = $this->client->getClientId($return['user_id']);
 
@@ -233,7 +233,6 @@ class UserController extends ApiController{
                                                        'user_type' => $input['user_type'] 
                                                      ]);
                         
-                   
                     }
                     
 
