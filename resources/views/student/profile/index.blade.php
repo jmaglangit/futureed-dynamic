@@ -217,7 +217,7 @@
 	                        </div>
 	                    </div>
 						<div class="form-group" ng-init="getGradeLevel()">
-                        <label for="" class="col-xs-2 control-label">School level <span class="required">*</span></label>
+                        <label for="" class="col-xs-2 control-label">School level ?<span class="required">*</span></label>
 
                         <div class="col-md-5 nullable">
                             <select class="form-control" name="grade_code" ng-model="prof.grade_code" ng-disabled="!edit">
@@ -247,8 +247,6 @@
 @stop
 
 @section('footer')
-
-@overwrite
 
 @section('scripts')
 

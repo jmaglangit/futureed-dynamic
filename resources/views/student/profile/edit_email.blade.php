@@ -121,8 +121,6 @@
 
 @section('footer')
 
-@overwrite
-
 @section('scripts')
 
 @stop
