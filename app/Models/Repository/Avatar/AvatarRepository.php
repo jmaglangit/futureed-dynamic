@@ -14,7 +14,7 @@ use League\Flysystem\Exception;
 class AvatarRepository implements AvatarRepositoryInterface{
 
     public function getAvatars($gender,$count){
-    	return Avatar::where('gender','=', $gender)->get()->random($count);
+    	return Avatar::where('gender','=', $gender)->get();
     }
     
     public function getAvatar($avatar_id){
