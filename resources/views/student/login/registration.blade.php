@@ -111,7 +111,7 @@
                             <div class="dropdown">
                               <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
                                 <div class="input-group">
-                                    <input readonly="readonly" type="text" name="birth_date" placeholder="mm/dd/yyyy" class="form-control" value="{! reg.birth | date:'MM/dd/yyyy' !}">
+                                    <input readonly="readonly" type="text" name="birth_date" placeholder="DD/MM/YY" class="form-control" value="{! reg.birth | date:'dd/MM/yy' !}">
                                     <input type="hidden" name="hidden_date" value="{! reg.birth | date:'yyyyMMdd' !}">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                                 </div>

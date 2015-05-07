@@ -199,7 +199,7 @@ function FutureedController($scope, apiService) {
             $scope.n_error = response.errors[0].message;
           }
         } else if(response.data) {
-            $scope.n_error = "Email already exist.";  
+            $scope.n_error = "Email Address already exists.";  
         }
       }
     }).error(function(response) {
