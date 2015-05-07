@@ -27,7 +27,7 @@ return [
         2011 => 'Username and password is incorrect',
         2012 => 'Picture password is incorrect',
         2013 => 'Username or Email is invalid',
-        2014 => 'Your account has been locked.',
+        2014 => 'Your Account has been locked. Please go to the forgot password screen to reset your password.',
         2015 => 'Confirmation code is required.',
         2016 => 'Confirmation code should be number only.',
         2017 => 'Picture Password is required',
@@ -37,7 +37,10 @@ return [
         2021 => 'Username is invalid.',
         2022 => 'The school level field is required.',
         2023 => 'The school level field should be number only.',
-
+        2024 => 'Confirmation code is invalid.',
+        2025 => 'Reset code is required.',
+        2026 => 'Reset code should be number only.',
+        2027 => 'Reset code is invalid.',
 
         2100 => 'Invalid reset code',
         2101 => 'Invalid password image',
