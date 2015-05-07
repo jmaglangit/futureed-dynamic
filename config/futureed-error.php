@@ -46,6 +46,9 @@ return [
         2106 => 'Email does not match',
         2107 => 'Your current email and new email are the same.',
         2108 => 'New Email does not exist',
+        2109 => 'Your account has already been confirmed',
+        2110 => 'Your new password has already been confirmed',
+        2111 => 'Your new email has already been confirmed',
 
 
         // Client Error messages
