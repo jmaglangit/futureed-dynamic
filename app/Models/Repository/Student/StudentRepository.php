@@ -78,7 +78,6 @@ class StudentRepository implements StudentRepositoryInterface{
                'country' => $student['country'],
                'state' => $student['state'],
                'city' => $student['city'],
-               'school_code' => $student['school_code'],
                'grade_code' => $student['grade_code'],
                'status' => 'Disabled',
                'created_by' => 1,
