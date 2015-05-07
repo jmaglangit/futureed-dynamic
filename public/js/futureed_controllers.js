@@ -145,7 +145,7 @@ function FutureedController($scope, apiService) {
             // In Edit Profile
             $scope.u_success = Constants.TRUE;
           } else {
-            $scope.u_error = "Username already exist.";  
+            $scope.u_error = "Username already exists.";  
           }
         }
       }
@@ -174,7 +174,7 @@ function FutureedController($scope, apiService) {
           if($scope.user && (response.data.id == $scope.user.id)) {
             $scope.e_success = Constants.TRUE;
           } else {
-            $scope.e_error = "Email already exist.";  
+            $scope.e_error = "Email Address already exists.";  
           }
         }
       }
@@ -199,7 +199,7 @@ function FutureedController($scope, apiService) {
             $scope.n_error = response.errors[0].message;
           }
         } else if(response.data) {
-            $scope.n_error = "Email already exist.";  
+            $scope.n_error = "Email Address already exists.";  
         }
       }
     }).error(function(response) {
@@ -317,8 +317,6 @@ function FutureedController($scope, apiService) {
 
   function getLoginPassword() {
     $scope.id = ($scope.id) ? $scope.id : $scope.user.id;
-    var FC = this;
-    FC.asd = "asd1";
 
     apiService.getLoginPassword($scope.id).success(function (response) {
       if(response.status == Constants.STATUS_OK) {
