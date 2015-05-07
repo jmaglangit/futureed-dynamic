@@ -25,6 +25,18 @@ function FutureedController($scope, apiService) {
   $scope.changeBack = changeBack;
   $scope.changeValidate = changeValidate;
 
+  $scope.beforeDateRender = beforeDateRender;
+
+  function beforeDateRender($dates){
+    maxDate = new Date().setHours(0,0,0,0); // Set minimum date to whatever you want here
+
+    for(d in $dates){        
+        if($dates[d].utcDateValue > maxDate){
+            $dates[d].selectable = false;
+        }
+    }
+}
+
   function errorHandler(errors) {
     $scope.errors = [];
 
@@ -395,9 +407,6 @@ function FutureedController($scope, apiService) {
         } else if(response.data){
           $scope.email = response.data.email;
           $scope.sent = Constants.TRUE;
-          if($scope.resend) {
-            $scope.resent = Constants.TRUE;
-          }
         } 
       }
 
@@ -414,9 +423,25 @@ function FutureedController($scope, apiService) {
   * Params: username - the specified username, or the email from link
   */
    function studentResendCode() {
-    $scope.username = (!isStringNullorEmpty($scope.username)) ? $scope.username : $("#redirect_form input[name='username']").val(); 
-    $scope.studentForgotPassword();
-    $scope.resend = Constants.TRUE;
+    $scope.errors = Constants.FALSE;
+    $scope.user_type = Constants.STUDENT;
+    $scope.email = (!isStringNullorEmpty($scope.email)) ? $scope.email : $("#redirect_form input[name='email']").val(); 
+
+    $scope.ui_block();
+    apiService.resendResetCode($scope.email, $scope.user_type).success(function(response) {
+      if(response.status == Constants.STATUS_OK) {
+        if(response.errors) {
+          $scope.errorHandler(response.errors);
+        } else if(response.data){
+          $scope.resent = Constants.TRUE;
+        } 
+      }
+
+      $scope.ui_unblock();
+    }).error(function(response) {
+      $scope.internalError();
+      $scope.ui_unblock();
+    });
   }
 
   /**
@@ -431,7 +456,7 @@ function FutureedController($scope, apiService) {
     $scope.errors = Constants.FALSE;
     $scope.user_type = Constants.STUDENT;
     $scope.code = code;
-    $scope.email = ($scope.email) ? $scope.email : $("#redirect_form input[name='username']").val();
+    $scope.email = ($scope.email) ? $scope.email : $("#redirect_form input[name='email']").val();
 
     $scope.ui_block();
     apiService.validateCode($scope.code, $scope.email, $scope.user_type).success(function(response) {
@@ -520,8 +545,6 @@ function FutureedController($scope, apiService) {
 
     $scope.ui_block();
     apiService.confirmCode($scope.email, $scope.confirmation_code, $scope.user_type).success(function(response) {
-      console.log(response);
-
       if(response.status == Constants.STATUS_OK) {
         if(response.errors) {
           $scope.errorHandler(response.errors);

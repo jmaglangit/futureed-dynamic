@@ -6,7 +6,7 @@
   <div class="col-md-6 col-md-offset-3">
     <div class="form-style form-select-password">
       {!! Form::open(array('id' => 'redirect_form', 'method' => 'POST', 'route' => 'student.login.reset_password')) !!}
-        {!! Form::hidden('username', $email, array('ng-model' => 'username')) !!}
+        {!! Form::hidden('email', $email, array('ng-model' => 'email')) !!}
         {!! Form::hidden('id', '', array('ng-model' => 'id')) !!}
         {!! Form::hidden('reset_code', '') !!}
       {!! Form::close() !!}

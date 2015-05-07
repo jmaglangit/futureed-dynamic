@@ -285,6 +285,10 @@ fieldset legend{color: #8e8171; font-size: 16px; text-transform: uppercase;}
 	width: 100%;
 }
 
+.date-dropdown-menu{
+	width: 320px !important;
+}
+
 /*----- REGISTRATION -----*/
 .form-style form{
 	margin-top: 0;

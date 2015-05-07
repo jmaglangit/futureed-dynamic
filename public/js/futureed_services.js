@@ -95,6 +95,14 @@ var services = angular.module('futureed.services', ['ngResource']);
 			});
 		}
 
+		futureedAPI.resendResetCode = function(email, user_type) {
+			return $http({
+				method 	: 'POST'
+				, data	: {email: email, user_type : user_type}
+				, url	: futureedAPIUrl + 'user/reset/code'
+			});
+		}
+
 		futureedAPI.validateCode = function(code, email, user_type) {
 			return $http({
 				method	: 'POST'
