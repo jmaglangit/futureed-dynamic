@@ -145,7 +145,7 @@ function FutureedController($scope, apiService) {
             // In Edit Profile
             $scope.u_success = Constants.TRUE;
           } else {
-            $scope.u_error = "Username already exist.";  
+            $scope.u_error = "Username already exists.";  
           }
         }
       }
@@ -174,7 +174,7 @@ function FutureedController($scope, apiService) {
           if($scope.user && (response.data.id == $scope.user.id)) {
             $scope.e_success = Constants.TRUE;
           } else {
-            $scope.e_error = "Email already exist.";  
+            $scope.e_error = "Email Address already exists.";  
           }
         }
       }
@@ -199,7 +199,7 @@ function FutureedController($scope, apiService) {
             $scope.n_error = response.errors[0].message;
           }
         } else if(response.data) {
-            $scope.n_error = "Email already exist.";  
+            $scope.n_error = "Email Address already exists.";  
         }
       }
     }).error(function(response) {
@@ -275,6 +275,7 @@ function FutureedController($scope, apiService) {
   $scope.setActive = setActive;
 
   $scope.editProfile = editProfile;
+  $scope.updateAge = updateAge;
   $scope.saveProfile = saveProfile;
   $scope.validateCurrentPassword = validateCurrentPassword;
   $scope.getImagePassword = getImagePassword;
@@ -317,8 +318,6 @@ function FutureedController($scope, apiService) {
 
   function getLoginPassword() {
     $scope.id = ($scope.id) ? $scope.id : $scope.user.id;
-    var FC = this;
-    FC.asd = "asd1";
 
     apiService.getLoginPassword($scope.id).success(function (response) {
       if(response.status == Constants.STATUS_OK) {
@@ -664,6 +663,10 @@ function FutureedController($scope, apiService) {
     $("html, body").animate({ scrollTop: 0 }, "slow");
   }
 
+  function updateAge() {
+    
+  }
+
   function saveProfile(prof) {
     $scope.errors = Constants.FALSE;
 
@@ -687,8 +690,15 @@ function FutureedController($scope, apiService) {
               $("#profile_form select[name='" + value.field +"']").addClass("required-field");
             });
           } else if(response.data){
-            $scope.setActive(Constants.INDEX);
-            $scope.success = Constants.TRUE;
+            $scope.user = response.data;
+
+            apiService.updateUserSession(response.data).success(function(response) {
+              $scope.setActive(Constants.INDEX);
+              $scope.success = Constants.TRUE;
+            }).error(function() {
+              $scope.internalError();
+            });
+            
           }
         } 
 

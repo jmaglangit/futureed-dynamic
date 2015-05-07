@@ -10,7 +10,7 @@
   
 @stop
 
-@overwrite
+@section('footer')
 
 @section('scripts')
 
