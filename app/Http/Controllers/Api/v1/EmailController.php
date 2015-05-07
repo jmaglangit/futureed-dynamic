@@ -135,15 +135,24 @@ class EmailController extends ApiController {
 
                 $userDetails = $this->user->getUserDetail($user_id,$input['user_type']);
 
-                $code=$this->code->getCodeExpiry();
+                if(empty($userDetails['email_code'])){
 
-                $this->user->updateEmailCode($user_id,$code);
+                    return $this->respondErrorMessage(2111);
 
-                $student_id = $this->student->getStudentId($user_id);
+                }else{
 
-                $this->mail->sendMailChangeEmail($userDetails,$code['confirmation_code'],1);
+                    $code=$this->code->getCodeExpiry();
 
-                return $this->respondWithData(['id' => $student_id]);
+                    $this->user->updateEmailCode($user_id,$code);
+
+                    $student_id = $this->student->getStudentId($user_id);
+
+                    $this->mail->sendMailChangeEmail($userDetails,$code['confirmation_code'],1);
+
+                    return $this->respondWithData(['id' => $student_id]);
+
+                }
+
 
             }
 
