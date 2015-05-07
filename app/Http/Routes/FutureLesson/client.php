@@ -1,6 +1,4 @@
 <?php
-	Routes::get('/', 'FutureLesson\Client\LoginController@index');
-
 	Routes::group(['prefix' => '/client'], function()
 	{
 		Routes::get('/', 'FutureLesson\Client\LoginController@index');

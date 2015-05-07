@@ -64,9 +64,5 @@
   {!! Html::script('/js/datetimepicker.js') !!}
 
   @yield('scripts')
-  
-  <script>
-    $('a').smoothScroll();  
-  </script>
   <!-- END SCRIPTS -->
 </body></html>

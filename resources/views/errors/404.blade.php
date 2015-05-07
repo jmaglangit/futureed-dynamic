@@ -14,7 +14,7 @@
     
     
     <div class="btn-container">
-    	<a class="btn btn-light-blue btn-medium" href="{!! route('client.login') !!}">
+    	<a class="btn btn-light-blue btn-medium" href="{!! route('student.login') !!}">
 	        <i class="fa fa-home"></i>
 	        Take me home
 	    </a>
