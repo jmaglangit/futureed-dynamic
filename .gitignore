@@ -1,6 +1,9 @@
+.DS_Store
 /bootstrap/compiled.php
 /vendor
 /node_modules
 .env
 .env.*.php
 .env.php
+.idea
+composer.lock

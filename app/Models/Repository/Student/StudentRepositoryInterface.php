@@ -13,10 +13,30 @@ interface StudentRepositoryInterface {
 
     public function getStudent($id);
 
+    public function getStudentDetail($id);
+
     public function addStudent($student);
 
     public function updateStudent($student);
 
     public function deleteStudent($id);
+
+    public function getImagePassword($id);
+
+    public function updateImagePassword($data);
+
+    public function getStudentParent($parent_id);
+    
+    public function saveStudentAvatar($data);
+    
+    public function getReferences($id);
+    
+    public function updateStudentDetails($id,$data);
+    
+    public function getStudentId($user_id);
+    
+    public function ChangPasswordImage($id,$password_image_id);
+    
+    public function checkIdExist($id);
 
 }

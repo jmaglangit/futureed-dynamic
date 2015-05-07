@@ -7,6 +7,8 @@
  */
 namespace FutureEd\Models\Repository\Admin;
 
+use FutureEd\Models\Core\Admin;
+
 class AdminRepository implements  AdminRepositoryInterface {
 
     public function getAdmins(){
@@ -27,6 +29,11 @@ class AdminRepository implements  AdminRepositoryInterface {
 
     public function deleteAdmin($id){
 
+    }
+
+    public function getAdminId($user_id){
+
+        return Admin::where('user_id','=',$user_id)->pluck('id');
     }
 
 }

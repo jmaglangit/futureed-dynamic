@@ -15,7 +15,7 @@ class Kernel extends HttpKernel {
 		'Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse',
 		'Illuminate\Session\Middleware\StartSession',
 		'Illuminate\View\Middleware\ShareErrorsFromSession',
-//		'FutureEd\Http\Middleware\VerifyCsrfToken',
+		'FutureEd\Http\Middleware\VerifyCsrfToken',
 	];
 
 	/**
@@ -26,7 +26,8 @@ class Kernel extends HttpKernel {
 	protected $routeMiddleware = [
 		'auth' => 'FutureEd\Http\Middleware\Authenticate',
 		'auth.basic' => 'Illuminate\Auth\Middleware\AuthenticateWithBasicAuth',
-		'guest' => 'FutureEd\Http\Middleware\RedirectIfAuthenticated',
+		'student' => 'FutureEd\Http\Middleware\StudentMiddleware',		
+		'client' => 'FutureEd\Http\Middleware\ClientMiddleware',		
 	];
 
 }

@@ -9,7 +9,7 @@
 namespace FutureEd\Services;
 
 
-use FutureEd\Model\Repository\Admin\AdminRepositoryInterface;
+use FutureEd\Models\Repository\Admin\AdminRepositoryInterface;
 
 class AdminServices {
 
@@ -35,5 +35,10 @@ class AdminServices {
 
     public function deleteAdmin($id){
         $this->admin->deleteAdmin($id);
+    }
+
+    public function getAdminId($user_id){
+
+        return $this->admin->getAdminId($user_id);
     }
 }

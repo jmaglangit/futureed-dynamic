@@ -30,14 +30,52 @@ class AppServiceProvider extends ServiceProvider {
 			'FutureEd\Services\Registrar'
 		);
         $this->app->bind(
-            'FutureEd\Models\Repository\Users\UsersRepositoryInterface',
-            'FutureEd\Models\Repository\Users\UsersRepository'
+            'FutureEd\Models\Repository\User\UserRepositoryInterface',
+            'FutureEd\Models\Repository\User\UserRepository'
         );
         $this->app->bind(
             'FutureEd\Models\Repository\Validator\ValidatorRepositoryInterface',
             'FutureEd\Models\Repository\Validator\ValidatorRepository'
         );
+        $this->app->bind(
+            'FutureEd\Models\Repository\PasswordImage\PasswordImageRepositoryInterface',
+            'FutureEd\Models\Repository\PasswordImage\PasswordImageRepository'
+        );
+        $this->app->bind(
+            'FutureEd\Models\Repository\Student\StudentRepositoryInterface',
+            'FutureEd\Models\Repository\Student\StudentRepository'
+        );
+        $this->app->bind(
+            'FutureEd\Models\Repository\Admin\AdminRepositoryInterface',
+            'FutureEd\Models\Repository\Admin\AdminRepository'
+        );
+        $this->app->bind(
+            'FutureEd\Models\Repository\Token\TokenRepositoryInterface',
+            'FutureEd\Models\Repository\Token\TokenRepository'
+        );
+        $this->app->bind(
+            'FutureEd\Models\Repository\School\SchoolRepositoryInterface',
+            'FutureEd\Models\Repository\School\SchoolRepository'
+        );
+        $this->app->bind(
+            'FutureEd\Models\Repository\Client\ClientRepositoryInterface',
+            'FutureEd\Models\Repository\Client\ClientRepository'
+        );
+        $this->app->bind(
+            'FutureEd\Models\Repository\Avatar\AvatarRepositoryInterface',
+            'FutureEd\Models\Repository\Avatar\AvatarRepository'
+        );
+        $this->app->bind(
+            'FutureEd\Models\Repository\Grade\GradeRepositoryInterface',
+            'FutureEd\Models\Repository\Grade\GradeRepository'
+        );
+        $this->app->bind(
+            'FutureEd\Models\Repository\Country\CountryRepositoryInterface',
+            'FutureEd\Models\Repository\Country\CountryRepository'
+        );
 
-	}
+
+
+    }
 
 }
