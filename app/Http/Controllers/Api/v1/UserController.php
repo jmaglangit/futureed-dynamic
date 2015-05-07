@@ -193,15 +193,15 @@ class UserController extends ApiController{
 
             return $this->respondWithError($msg_bag);
 
-        }else{
+        } else {
 
             $return = $this->user->checkEmail($input['email'], $input['user_type']);
 
             if(!empty($return)){
 
                 $userDetails = $this->user->getUserDetail($return['user_id'], $input['user_type']);
-                
-                if($userDetails['is_account_activated'] != config('futureed.activated')){
+                                
+                if($userDetails['is_account_activated'] == config('futureed.activated')){
 
                    return $this->respondErrorMessage(2109);
 
@@ -238,7 +238,7 @@ class UserController extends ApiController{
 
                 }
 
-            }else{
+            } else {
 
                 return $this->respondErrorMessage(2002);
 
