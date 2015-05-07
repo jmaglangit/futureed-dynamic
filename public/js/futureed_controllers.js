@@ -275,6 +275,7 @@ function FutureedController($scope, apiService) {
   $scope.setActive = setActive;
 
   $scope.editProfile = editProfile;
+  $scope.updateAge = updateAge;
   $scope.saveProfile = saveProfile;
   $scope.validateCurrentPassword = validateCurrentPassword;
   $scope.getImagePassword = getImagePassword;
@@ -662,6 +663,10 @@ function FutureedController($scope, apiService) {
     $("html, body").animate({ scrollTop: 0 }, "slow");
   }
 
+  function updateAge() {
+    
+  }
+
   function saveProfile(prof) {
     $scope.errors = Constants.FALSE;
 
@@ -685,8 +690,15 @@ function FutureedController($scope, apiService) {
               $("#profile_form select[name='" + value.field +"']").addClass("required-field");
             });
           } else if(response.data){
-            $scope.setActive(Constants.INDEX);
-            $scope.success = Constants.TRUE;
+            $scope.user = response.data;
+
+            apiService.updateUserSession(response.data).success(function(response) {
+              $scope.setActive(Constants.INDEX);
+              $scope.success = Constants.TRUE;
+            }).error(function() {
+              $scope.internalError();
+            });
+            
           }
         } 
 
