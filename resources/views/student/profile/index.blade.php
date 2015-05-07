@@ -85,8 +85,8 @@
 	                                    , 'ng-change' => "checkEmailAvailability(prof.email, 'Student')")
 	                            ) !!}
 	                        </div>
-	                        <div class="col-xs-2">
-	                        	<a href="{!! route('student.profile.edit_email')!!}" class="edit-email">Edit</a>
+	                        <div class="col-xs-2" ng-if="change_email">
+	                        	<!-- <a href="{!! route('student.profile.edit_email')!!}" class="edit-email">Edit</a> -->
 	                        </div>	
 	                        <div class="col-xs-5 alert-message">
 	                            <i ng-if="e_loading" class="fa fa-spinner fa-spin"></i>
