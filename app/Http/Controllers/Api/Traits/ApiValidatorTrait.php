@@ -214,7 +214,7 @@ trait ApiValidatorTrait {
 
                 $validator_msg = $validator->messages()->toArray();
 
-                return $this->setErrorCode(1009)
+                return $this->setErrorCode(1010)
                     ->setField($field_name)
                     ->setMessage($validator_msg["$field_name"][0])
                     ->errorMessage();
@@ -236,39 +236,15 @@ trait ApiValidatorTrait {
 
                 $validator_msg = $validator->messages()->toArray();
 
-                return $this->setErrorCode(1010)
+                return $this->setErrorCode(1011)
                     ->setField($field_name)
                     ->setMessage($validator_msg["$field_name"][0])
                     ->errorMessage();
             }
     }
 
-    public function emailCode($input,$field_name){
-        $error_msg = config('futureed-error.error_messages');
 
-        $validator = Validator::make(
-            [
-                "$field_name" => strtolower($input["$field_name"]),
-            ],
-            [
-                "$field_name" => 'required|numeric|regex:/^[0-9]{4}(\-[0-9]{4})?$/'
-            ],
-            [
-                'required' => $error_msg[2015],
-                'numeric' => $error_msg[2016]
-            ]
-        );
 
-        if($validator->fails()){
-
-            $validator_msg = $validator->messages()->toArray();
-
-            return $this->setErrorCode(1009)
-                ->setField($field_name)
-                ->setMessage($validator_msg["$field_name"][0])
-                ->errorMessage();
-        }
-    }
     
     public function emptyUsername($input,$field_name){
         
@@ -294,7 +270,7 @@ trait ApiValidatorTrait {
 
                 $validator_msg = $validator->messages()->toArray();
 
-                return $this->setErrorCode(1011)
+                return $this->setErrorCode(1012)
                     ->setField($field_name)
                     ->setMessage($validator_msg["$field_name"][0])
                     ->errorMessage();
@@ -317,7 +293,7 @@ trait ApiValidatorTrait {
 
                 $validator_msg = $validator->messages()->toArray();
 
-                return $this->setErrorCode(1011)
+                return $this->setErrorCode(1013)
                     ->setField($field_name)
                     ->setMessage($validator_msg["$field_name"][0])
                     ->errorMessage();
@@ -338,7 +314,7 @@ trait ApiValidatorTrait {
 
                 $validator_msg = $validator->messages()->toArray();
 
-                return $this->setErrorCode(1012)
+                return $this->setErrorCode(1014)
                     ->setField($field_name)
                     ->setMessage($validator_msg["$field_name"][0])
                     ->errorMessage();
@@ -360,7 +336,7 @@ trait ApiValidatorTrait {
 
                 $validator_msg = $validator->messages()->toArray();
 
-                return $this->setErrorCode(1013)
+                return $this->setErrorCode(1015)
                     ->setField($field_name)
                     ->setMessage($validator_msg["$field_name"][0])
                     ->errorMessage();
@@ -383,7 +359,7 @@ trait ApiValidatorTrait {
 
                 $validator_msg = $validator->messages()->toArray();
 
-                return $this->setErrorCode(2230)
+                return $this->setErrorCode(1016)
                     ->setField($field_name)
                     ->setMessage($validator_msg["$field_name"][0])
                     ->errorMessage();
@@ -405,7 +381,7 @@ trait ApiValidatorTrait {
 
             $validator_msg = $validator->messages()->toArray();
 
-            return $this->setErrorCode(1011)
+            return $this->setErrorCode(1017)
                 ->setField("Parameter")
                 ->setMessage($validator_msg["$id"][0])
                 ->errorMessage();
@@ -428,7 +404,7 @@ trait ApiValidatorTrait {
 
                 $validator_msg = $validator->messages()->toArray();
 
-                return $this->setErrorCode(1010)
+                return $this->setErrorCode(1018)
                     ->setField($field_name)
                     ->setMessage($validator_msg["$field_name"][0])
                     ->errorMessage();
@@ -450,7 +426,7 @@ trait ApiValidatorTrait {
 
                 $validator_msg = $validator->messages()->toArray();
 
-                return $this->setErrorCode(1013)
+                return $this->setErrorCode(1019)
                     ->setField($field_name)
                     ->setMessage($validator_msg["$field_name"][0])
                     ->errorMessage();
@@ -481,10 +457,66 @@ trait ApiValidatorTrait {
 
                 $validator_msg = $validator->messages()->toArray();
 
-                return $this->setErrorCode(1013)
+                return $this->setErrorCode(1020)
                     ->setField($field_name)
                     ->setMessage($validator_msg["$field_name"][0])
                     ->errorMessage();
             }
+    }
+
+    public function emailCode($input,$field_name){
+        $error_msg = config('futureed-error.error_messages');
+
+        $validator = Validator::make(
+            [
+                "$field_name" => strtolower($input["$field_name"]),
+            ],
+            [
+                "$field_name" => 'required|numeric|regex:/^[0-9]{4}(\-[0-9]{4})?$/'
+            ],
+            [
+                'required' => $error_msg[2015],
+                'numeric' => $error_msg[2016],
+                'regex' => $error_msg[2024]
+            ]
+        );
+
+        if($validator->fails()){
+
+            $validator_msg = $validator->messages()->toArray();
+
+            return $this->setErrorCode(1021)
+                ->setField($field_name)
+                ->setMessage($validator_msg["$field_name"][0])
+                ->errorMessage();
+        }
+    }
+
+    public function resetCode($input,$field_name){
+        $error_msg = config('futureed-error.error_messages');
+
+        $validator = Validator::make(
+            [
+                "$field_name" => strtolower($input["$field_name"]),
+            ],
+            [
+                "$field_name" => 'required|numeric|regex:/^[0-9]{4}(\-[0-9]{4})?$/'
+            ],
+            [
+                'required' => $error_msg[2025],
+                'numeric' => $error_msg[2026],
+                'regex' => $error_msg[2027]
+            ]
+        );
+
+        if($validator->fails()){
+
+            $validator_msg = $validator->messages()->toArray();
+
+            return $this->setErrorCode(1022)
+                ->setField($field_name)
+                ->setMessage($validator_msg["$field_name"][0])
+                ->errorMessage();
+        }
     }
 }
