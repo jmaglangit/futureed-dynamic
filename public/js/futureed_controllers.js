@@ -145,7 +145,7 @@ function FutureedController($scope, apiService) {
             // In Edit Profile
             $scope.u_success = Constants.TRUE;
           } else {
-            $scope.u_error = "Username already exist.";  
+            $scope.u_error = "Username already exists.";  
           }
         }
       }
@@ -174,7 +174,7 @@ function FutureedController($scope, apiService) {
           if($scope.user && (response.data.id == $scope.user.id)) {
             $scope.e_success = Constants.TRUE;
           } else {
-            $scope.e_error = "Email already exist.";  
+            $scope.e_error = "Email Address already exists.";  
           }
         }
       }
