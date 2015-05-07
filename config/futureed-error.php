@@ -35,6 +35,8 @@ return [
         2019 => 'Username or Email is invalid or your account has been locked. Please click forgot password to reset your password.',
         2020 => 'Account is deleted',
         2021 => 'Username is invalid.',
+        2022 => 'The school level field is required.',
+        2023 => 'The school level field should be number only.',
 
 
         2100 => 'Invalid reset code',
