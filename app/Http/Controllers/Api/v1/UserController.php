@@ -114,7 +114,7 @@ class UserController extends ApiController{
             $return = $this->user->checkEmail($input['email'],$input['user_type']);
 
 
-            if(array_key_exists('status',$return)){
+            if(!empty($return)){
                 
                 $userDetails = $this->user->getUserDetails($return['user_id']);
 
@@ -186,7 +186,7 @@ class UserController extends ApiController{
 
             $return = $this->user->checkEmail($input['email'],$input['user_type']);
 
-            if(array_key_exists('status',$return)){
+            if(!empty($return)){
 
                 $userDetails = $this->user->getUser($return['user_id'],$input['user_type']);
 

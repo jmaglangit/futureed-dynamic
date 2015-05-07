@@ -71,4 +71,6 @@ interface UserRepositoryInterface {
 
     public function updateToNewEmail($user_id,$new_email);
 
+    public function updateEmailCode($id,$code);
+
 }

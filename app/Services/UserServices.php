@@ -275,7 +275,9 @@ class UserServices {
         $user_details = $this->users->getUser($user_id,'all');
         $return =['username'=>$user_details['username'],
                   'user_type'=>$user_details['user_type'],
-                  'email'=>$user_details['email']];
+                  'email'=>$user_details['email'],
+                  'new_email' => $user_details['new_email']];
+
         return $return;
     }
 
@@ -378,6 +380,11 @@ class UserServices {
 
         $this->users->updateToNewEmail($user_id,$new_email);
 
+    }
+
+    public function updateEmailCode($id,$code){
+
+        $this->users->updateEmailCode($id,$code);
     }
 
     

@@ -25,6 +25,7 @@ class UserRepository implements UserRepositoryInterface {
             'id'
             ,'username'
             ,'email'
+            ,'new_email'
             ,'password'
             ,'name'
             ,'user_type'
@@ -233,7 +234,11 @@ class UserRepository implements UserRepositoryInterface {
          User::where('id','=',$id)
                      ->update(['is_account_activated'=>1,
                                'is_account_locked'=>0,
-                                'login_attempt' => 0,
+                               'login_attempt' => 0,
+                               'confirmation_code' => null,
+                               'confirmation_code_expiry' => null,
+                               'reset_code' => null,
+                               'reset_code_expiry' => null
                               ]);
         
     }
@@ -316,7 +321,9 @@ class UserRepository implements UserRepositoryInterface {
 
             User::where('id',$user_id)->update([
                 'new_email' => '',
-                'email' => $new_email
+                'email' => $new_email,
+                'email_code' =>'',
+                'email_code_expiry' => ''
             ]);
 
         } catch (Exception $e){
@@ -324,6 +331,19 @@ class UserRepository implements UserRepositoryInterface {
         }
 
 
+    }
+
+    public function updateEmailCode($id,$code){
+        try{
+
+            User::where('id',$id)->update([
+                'email_code' => $code['confirmation_code'],
+                'email_code_expiry' => $code['confirmation_code_expiry']
+            ]);
+
+        } catch (Exception $e){
+            throw new Exception($e->getMessage());
+        }
     }
 
 
