@@ -82,9 +82,25 @@ class UserController extends ApiController{
 
             return $this->respondErrorMessage(2007);
         }
-        
-        $return = $this->student->getStudentId($user_detail['id']);
-        
+
+        $client = config('futureed.client');
+        $student = config('futureed.student');
+        $admin = config('futureed.admin');
+
+        if( strtolower($client) == strtolower($input['user_type'])) {
+          
+           $return = $this->client->getClientId($user_check['user_id']);
+
+        }elseif( strtolower($student) == strtolower($input['user_type'])){
+            
+           $return = $this->student->getStudentId($user_detail['id']);
+
+        }else{
+
+            //todo admin
+
+        }
+
         return $this->respondWithData([
             'id' => $return
         ]);

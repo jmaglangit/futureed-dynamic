@@ -370,12 +370,17 @@ trait ApiValidatorTrait {
 
     public function checkPassword($input,$field_name){
 
+             $error_msg = config('futureed-error.error_messages');
+
             $validator = Validator::make(
                 [
                     "$field_name" => strtolower($input["$field_name"]),
                 ],
                 [
                     "$field_name" => 'required|min:8|max:32|regex:/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/'
+                ],
+                [
+                    'regex' => $error_msg[2112]
                 ]
             );
 

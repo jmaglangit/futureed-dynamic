@@ -50,7 +50,7 @@ class ClientRegisterController extends ClientController {
                 $this->addMessageBag($this->validateString($client,'country'));
                 $this->addMessageBag($this->zipCode($client,'zip'));
             }else{
-                $this->addMessageBag($this->schoolName($school,'school_name'));
+                $this->addMessageBag($this->validateString($school,'school_name'));
                 $this->addMessageBag($this->schoolAddress($school,'school_address'));
                 $this->addMessageBag($this->validateString($school,'school_state'));
                 $this->addMessageBag($this->validateString($school,'school_country'));
