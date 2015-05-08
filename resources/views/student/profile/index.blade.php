@@ -85,8 +85,8 @@
 	                                    , 'ng-change' => "checkEmailAvailability(prof.email, 'Student')")
 	                            ) !!}
 	                        </div>
-	                        <div class="col-xs-2">
-	                        	<a href="{!! route('student.profile.edit_email')!!}" class="edit-email">Edit</a>
+	                        <div class="col-xs-2" ng-if="change_email">
+	                        	<!-- <a href="{!! route('student.profile.edit_email')!!}" class="edit-email">Edit</a> -->
 	                        </div>	
 	                        <div class="col-xs-5 alert-message">
 	                            <i ng-if="e_loading" class="fa fa-spinner fa-spin"></i>
@@ -144,13 +144,13 @@
 	                            <div class="dropdown">
 	                              <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
 	                                <div class="input-group">
-	                                    <input disabled="disabled" type="text" name="birth_date" class="form-control" value="{! prof.birth | date:'yyyy-MM-dd' !}">
+	                                    <input readonly="readonly" type="text" name="birth_date" placeholder="DD/MM/YY" class="form-control" value="{! prof.birth | date:'dd/MM/yy' !}">
 	                                    <input type="hidden" name="hidden_date" value="{! prof.birth | date:'yyyyMMdd' !}">
 	                                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 	                                </div>
 	                              </a>
 	                              <ul ng-show="edit" class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-	                                <datetimepicker data-ng-model="prof.birth" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', startView:'day', minView:'day' }"/>
+	                                <datetimepicker data-ng-model="prof.birth" ng-change="updateAge()" data-before-render="beforeDateRender($dates)" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', startView:'day', minView:'day' }"/>
 	                              </ul>
 	                            </div>
 	                        </div>
@@ -217,7 +217,7 @@
 	                        </div>
 	                    </div>
 						<div class="form-group" ng-init="getGradeLevel()">
-                        <label for="" class="col-xs-2 control-label">School level ?<span class="required">*</span></label>
+                        <label for="" class="col-xs-2 control-label">School level <span class="required">*</span></label>
 
                         <div class="col-md-5 nullable">
                             <select class="form-control" name="grade_code" ng-model="prof.grade_code" ng-disabled="!edit">

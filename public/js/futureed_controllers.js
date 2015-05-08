@@ -27,6 +27,18 @@ function FutureedController($scope, apiService) {
   $scope.emailValidateCode = emailValidateCode;
   $scope.emailResendCode = emailResendCode;
 
+  $scope.beforeDateRender = beforeDateRender;
+
+  function beforeDateRender($dates){
+    maxDate = new Date().setHours(0,0,0,0); // Set minimum date to whatever you want here
+
+    for(d in $dates){        
+        if($dates[d].utcDateValue > maxDate){
+            $dates[d].selectable = false;
+        }
+    }
+  }
+
   function errorHandler(errors) {
     $scope.errors = [];
 
@@ -133,7 +145,7 @@ function FutureedController($scope, apiService) {
             // In Edit Profile
             $scope.u_success = Constants.TRUE;
           } else {
-            $scope.u_error = "Username already exist.";  
+            $scope.u_error = "Username already exists.";  
           }
         }
       }
@@ -162,7 +174,7 @@ function FutureedController($scope, apiService) {
           if($scope.user && (response.data.id == $scope.user.id)) {
             $scope.e_success = Constants.TRUE;
           } else {
-            $scope.e_error = "Email already exist.";  
+            $scope.e_error = "Email Address already exists.";  
           }
         }
       }
@@ -187,7 +199,7 @@ function FutureedController($scope, apiService) {
             $scope.n_error = response.errors[0].message;
           }
         } else if(response.data) {
-            $scope.n_error = "Email already exist.";  
+            $scope.n_error = "Email Address already exists.";  
         }
       }
     }).error(function(response) {
@@ -263,6 +275,7 @@ function FutureedController($scope, apiService) {
   $scope.setActive = setActive;
 
   $scope.editProfile = editProfile;
+  $scope.updateAge = updateAge;
   $scope.saveProfile = saveProfile;
   $scope.validateCurrentPassword = validateCurrentPassword;
   $scope.getImagePassword = getImagePassword;
@@ -305,8 +318,6 @@ function FutureedController($scope, apiService) {
 
   function getLoginPassword() {
     $scope.id = ($scope.id) ? $scope.id : $scope.user.id;
-    var FC = this;
-    FC.asd = "asd1";
 
     apiService.getLoginPassword($scope.id).success(function (response) {
       if(response.status == Constants.STATUS_OK) {
@@ -397,9 +408,6 @@ function FutureedController($scope, apiService) {
         } else if(response.data){
           $scope.email = response.data.email;
           $scope.sent = Constants.TRUE;
-          if($scope.resend) {
-            $scope.resent = Constants.TRUE;
-          }
         } 
       }
 
@@ -416,9 +424,25 @@ function FutureedController($scope, apiService) {
   * Params: username - the specified username, or the email from link
   */
    function studentResendCode() {
-    $scope.username = (!isStringNullorEmpty($scope.username)) ? $scope.username : $("#redirect_form input[name='username']").val(); 
-    $scope.studentForgotPassword();
-    $scope.resend = Constants.TRUE;
+    $scope.errors = Constants.FALSE;
+    $scope.user_type = Constants.STUDENT;
+    $scope.email = (!isStringNullorEmpty($scope.email)) ? $scope.email : $("#redirect_form input[name='email']").val(); 
+
+    $scope.ui_block();
+    apiService.resendResetCode($scope.email, $scope.user_type).success(function(response) {
+      if(response.status == Constants.STATUS_OK) {
+        if(response.errors) {
+          $scope.errorHandler(response.errors);
+        } else if(response.data){
+          $scope.resent = Constants.TRUE;
+        } 
+      }
+
+      $scope.ui_unblock();
+    }).error(function(response) {
+      $scope.internalError();
+      $scope.ui_unblock();
+    });
   }
 
   /**
@@ -433,7 +457,7 @@ function FutureedController($scope, apiService) {
     $scope.errors = Constants.FALSE;
     $scope.user_type = Constants.STUDENT;
     $scope.code = code;
-    $scope.email = ($scope.email) ? $scope.email : $("#redirect_form input[name='username']").val();
+    $scope.email = ($scope.email) ? $scope.email : $("#redirect_form input[name='email']").val();
 
     $scope.ui_block();
     apiService.validateCode($scope.code, $scope.email, $scope.user_type).success(function(response) {
@@ -522,7 +546,6 @@ function FutureedController($scope, apiService) {
 
     $scope.ui_block();
     apiService.confirmCode($scope.email, $scope.confirmation_code, $scope.user_type).success(function(response) {
-
       if(response.status == Constants.STATUS_OK) {
         if(response.errors) {
           $scope.errorHandler(response.errors);
@@ -640,6 +663,10 @@ function FutureedController($scope, apiService) {
     $("html, body").animate({ scrollTop: 0 }, "slow");
   }
 
+  function updateAge() {
+    
+  }
+
   function saveProfile(prof) {
     $scope.errors = Constants.FALSE;
 
@@ -663,8 +690,15 @@ function FutureedController($scope, apiService) {
               $("#profile_form select[name='" + value.field +"']").addClass("required-field");
             });
           } else if(response.data){
-            $scope.setActive(Constants.INDEX);
-            $scope.success = Constants.TRUE;
+            $scope.user = response.data;
+
+            apiService.updateUserSession(response.data).success(function(response) {
+              $scope.setActive(Constants.INDEX);
+              $scope.success = Constants.TRUE;
+            }).error(function() {
+              $scope.internalError();
+            });
+            
           }
         } 
 

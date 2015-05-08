@@ -51,6 +51,16 @@
 				]);
 			
 		});
+
+		Routes::group(['prefix' => '/profile'], function()
+		{
+			Routes::get('/', [ 
+					'as' => 'client.profile.index'
+					, 'middleware' => 'client'
+					, 'uses' => 'FutureLesson\Client\ProfileController@index'
+				]);
+			
+		});
 	});
 	
 ?>

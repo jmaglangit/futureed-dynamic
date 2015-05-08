@@ -271,6 +271,7 @@
                     'past': monthMoment.isBefore(startOfMonth),
                     'future': monthMoment.isAfter(endOfMonth)
                   };
+
                   week.dates.push(new DateObject(dateValue));
                 }
                 result.weeks.push(week);

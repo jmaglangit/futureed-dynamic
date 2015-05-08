@@ -215,7 +215,7 @@ class UserRepository implements UserRepositoryInterface {
     //return only the username and the email
     public function getUsernameEmail($id){
        
-        return User::select('username','email')
+        return User::select('username','email','new_email')
                     ->where('id','=',$id)->first();            
     }
     

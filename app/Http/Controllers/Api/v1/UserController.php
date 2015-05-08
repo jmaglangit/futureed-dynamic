@@ -82,9 +82,28 @@ class UserController extends ApiController{
 
             return $this->respondErrorMessage(2007);
         }
-        
-        $return = $this->student->getStudentId($user_detail['id']);
-        
+
+        $client = config('futureed.client');
+        $student = config('futureed.student');
+        $admin = config('futureed.admin');
+
+        if( strtolower($client) == strtolower($input['user_type'])) {
+
+           //update is activate and is lock for client
+           $this->user->updateInactiveLock($user_check['user_id']);
+
+           $return = $this->client->getClientId($user_check['user_id']);
+
+        }elseif( strtolower($student) == strtolower($input['user_type'])){
+            
+           $return = $this->student->getStudentId($user_check['user_id']);
+
+        }else{
+
+            //todo admin confirmation for admin.methods not yet made since where not on admin side.//
+
+        }
+
         return $this->respondWithData([
             'id' => $return
         ]);
@@ -116,45 +135,56 @@ class UserController extends ApiController{
 
             if(!empty($return)){
                 
-                $userDetails = $this->user->getUserDetails($return['user_id']);
+                $userDetails = $this->user->getUserDetail($return['user_id'],$input['user_type']);
 
-                $code=$this->code->getCodeExpiry();
 
-                $this->user->setResetCode($return['user_id'],$code);
+                if(empty($userDetails['reset_code'])){
 
-                if(strtolower($input['user_type']) == 'student'){
+                    return $this->respondErrorMessage(2110);
 
-                    $student_id = $this->student->getStudentId($return['user_id']);
-
-                    $this->mail->sendStudentMailResetPassword($userDetails,$code['confirmation_code'],$subject);
-
-                    return $this->respondWithData(['id' => $student_id,
-                                                   'user_type' => $input['user_type'] 
-                                                 ]);
-
-                
-                }elseif(strtolower($input['user_type']) == 'client'){
-
-                    $client_id = $this->client->getClientId($return['user_id']);
-
-                    $this->mail->sendClientMailResetPassword($userDetails,$code['confirmation_code'],$subject);
-
-                    return $this->respondWithData(['id' => $client_id,
-                                                   'user_type' => $input['user_type'] 
-                                                 ]);
-                    
-               
                 }else{
 
-                    $admin_id = $this->admin->getAdminId($return['user_id']);
+                    $code=$this->code->getCodeExpiry();
 
-                    $this->mail->sendAdminMailResetPassword($userDetails,$code['confirmation_code'],$subject);
+                    $this->user->setResetCode($return['user_id'],$code);
 
-                    return $this->respondWithData(['id' => $admin_id,
-                                                   'user_type' => $input['user_type'] 
-                                                 ]);
+                    if(strtolower($input['user_type']) == 'student'){
+
+                        $student_id = $this->student->getStudentId($return['user_id']);
+
+                        $this->mail->sendStudentMailResetPassword($userDetails,$code['confirmation_code'],$subject);
+
+                        return $this->respondWithData(['id' => $student_id,
+                                                       'user_type' => $input['user_type'] 
+                                                     ]);
+
+                    
+                    }elseif(strtolower($input['user_type']) == 'client'){
+
+                        $client_id = $this->client->getClientId($return['user_id']);
+
+                        $this->mail->sendClientMailResetPassword($userDetails,$code['confirmation_code'],$subject);
+
+                        return $this->respondWithData(['id' => $client_id,
+                                                       'user_type' => $input['user_type'] 
+                                                     ]);
+                        
+                   
+                    }else{
+
+                        $admin_id = $this->admin->getAdminId($return['user_id']);
+
+                        $this->mail->sendAdminMailResetPassword($userDetails,$code['confirmation_code'],$subject);
+
+                        return $this->respondWithData(['id' => $admin_id,
+                                                       'user_type' => $input['user_type'] 
+                                                     ]);
+                    }
+
+
                 }
 
+               
             }else{
                 
                 return $this->respondErrorMessage(2002);
@@ -182,44 +212,52 @@ class UserController extends ApiController{
 
             return $this->respondWithError($msg_bag);
 
-        }else{
+        } else {
 
-            $return = $this->user->checkEmail($input['email'],$input['user_type']);
+            $return = $this->user->checkEmail($input['email'], $input['user_type']);
 
             if(!empty($return)){
 
-                $userDetails = $this->user->getUser($return['user_id'],$input['user_type']);
+                $userDetails = $this->user->getUserDetail($return['user_id'], $input['user_type']);
+                                
+                if($userDetails['is_account_activated'] == config('futureed.activated')){
 
-                $code=$this->code->getCodeExpiry();
+                   return $this->respondErrorMessage(2109);
 
-                $this->user->updateConfirmationCode($return['user_id'],$code);
+                } else {
+
+                    $code=$this->code->getCodeExpiry();
+
+                    $this->user->updateConfirmationCode($return['user_id'],$code);
 
 
-                if(strtolower($input['user_type']) == 'student'){
+                    if(strtolower($input['user_type']) == 'student') {
 
-                    $student_id = $this->student->getStudentId($return['user_id']);
+                        $student_id = $this->student->getStudentId($return['user_id']);
 
-                    $this->mail->resendStudentRegister($userDetails,$code['confirmation_code'],$subject);
+                        $this->mail->resendStudentRegister($userDetails,$code['confirmation_code'],$subject);
 
-                    return $this->respondWithData(['id' => $student_id,
-                                                   'user_type' => $input['user_type'] 
-                                                 ]);
+                        return $this->respondWithData(['id' => $student_id,
+                                                       'user_type' => $input['user_type'] 
+                                                     ]);
 
-                
-                }else{
-
-                    $client_id = $this->client->getClientId($return['user_id']);
-
-                    $this->mail->sendClientRegister($userDetails,$code['confirmation_code'],1);
-
-                    return $this->respondWithData(['id' => $client_id,
-                                                   'user_type' => $input['user_type'] 
-                                                 ]);
                     
-               
+                    } else {
+
+                        $client_id = $this->client->getClientId($return['user_id']);
+
+                        $this->mail->sendClientRegister($userDetails,$code['confirmation_code'],1);
+
+                        return $this->respondWithData(['id' => $client_id,
+                                                       'user_type' => $input['user_type'] 
+                                                     ]);
+                        
+                    }
+                    
+
                 }
 
-            }else{
+            } else {
 
                 return $this->respondErrorMessage(2002);
 
