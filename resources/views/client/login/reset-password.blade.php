@@ -12,15 +12,19 @@
             </p>
           </div>
 
-          <form>
-          {!! Form::open() !!}
+          {!! Form::open(
+              array(
+                  'id' => 'reset_password_form'
+                , 'ng-controller' => 'LoginController as forgot'
+              )
+          ) !!}
           <div class="input">
             <div class="icon">
               <i class="fa fa-unlock-alt"></i>
             </div>
-            {!! Form::password('new_password', ''
+            {!! Form::password('new_password'
                   , array(
-                      'ng-model' => 'new_password'
+                      'ng-model' => 'forgot.new_password'
                     , 'placeholder' => 'New Password'
                   )
             ) !!}
@@ -29,9 +33,9 @@
             <div class="icon">
               <i class="fa fa-lock"></i>
             </div>
-            {!! Form::password('confirm_password', ''
+            {!! Form::password('confirm_password'
                   , array(
-                      'ng-model' => 'confirm_password'
+                      'ng-model' => 'forgot.confirm_password'
                     , 'placeholder' => 'Confirm New Password'
                   )
             ) !!}
@@ -41,7 +45,12 @@
           {!! Form::hidden('id', $id) !!}
 
           <div class="btn-container">
-            <button type="button" class="btn btn-blue" ng-click="resetClientPassword()">Reset</button>
+            {!! Form::button('Reset'
+                , array(
+                  'class' => 'btn btn-blue'
+                  , 'ng-click' => 'forgot.resetClientPassword()'
+                )
+            ) !!}
           </div>
         {!! Form::close() !!}
       </div>
@@ -66,3 +75,8 @@
     </div>
   </div>
 @endsection
+
+@section('scripts')
+  {!! Html::script('/js/client/controllers/login_controller.js') !!}
+  {!! Html::script('/js/client/login.js') !!}
+@stop

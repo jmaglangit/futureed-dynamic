@@ -23,18 +23,36 @@
               {! error !}
             </p>
           </div>
-          {!! Form::open(array('id' => 'login_form', 'route' => 'client.login.process', 'method' => 'POST')) !!}
+          {!! Form::open(
+              array(
+                    'id' => 'login_form'
+                  , 'route' => 'client.login.process'
+                  , 'method' => 'POST'
+                  , 'ng-controller' => 'LoginController as login'
+              )
+          ) !!}
           <div class="input">
             <div class="icon">
               <i class="fa fa-user"></i>
             </div>
-            {!! Form::text('login', null, ['placeholder' => 'Email or Username', 'ng-model' => 'username', 'autocomplete' => 'off']) !!}
+            {!! Form::text('login', ''
+                , array(
+                    'placeholder' => 'Email or Username'
+                    , 'ng-model' => 'login.username'
+                    , 'autocomplete' => 'off'
+                )
+            ) !!}
           </div>
           <div class="input pass">
             <div class="icon">
               <i class="fa fa-lock"></i>
             </div>
-            {!! Form::password('password', ['placeholder' => 'Password', 'ng-model' => 'password']) !!}
+            {!! Form::password('password'
+                , array(
+                    'placeholder' => 'Password'
+                    , 'ng-model' => 'login.password'
+                )
+            ) !!}
           </div>
 
           <div class="title">ROLE</div>
@@ -42,28 +60,82 @@
             <div class="icon">
               <i class="fa fa-group"></i>
             </div>
-            {!! Form::select('', array('' => '-- Select Role --', 'Parent' => 'Parent', 'Teacher' => 'Teacher', 'Principal' => 'Principal'), '', array('class' => 'form-control', 'ng-model' => 'role')); !!}
+            {!! Form::select('role'
+                , array(
+                    '' => '-- Select Role --'
+                    , 'Parent' => 'Parent'
+                    , 'Teacher' => 'Teacher'
+                    , 'Principal' => 'Principal')
+                , ''
+                , array(
+                    'class' => 'form-control'
+                    , 'ng-model' => 'login.role'
+                )
+              ) !!}
           </div>
 
-          <input type="hidden" name="user_data" >
-          <button type="button" class="btn btn-blue" ng-click="clientLogin()">LOGIN</button>
+          {!! Form::hidden('user_data', ''
+              , array(
+                 'ng-model' => 'user_data'
+              )
+          ) !!}
 
+          {!! Form::button('Login'
+              , array(
+                  'class' => 'btn btn-blue'
+                  , 'ng-click' => 'login.clientLogin()'
+              )
+          ) !!}
+          
           <div class="text-group">
             <small>Not a Parent / Teacher / School?</small>
-            <small>Click <a href="{!! route('student.login') !!}">here</a> for Student Site</small>     
+            <small>Click 
+
+                {!! Html::link(
+                    route('student.login')
+                    , 'here') 
+                !!}
+
+                 for Student Site
+            </small>     
           </div>  
+
           <div class="text-group">
-            <small><a href="{!! route('client.login.forgot_password') !!}">Forgot your password?</a></small>  
+            <small>
+              {!! Html::link(route('client.login.forgot_password'), 'Forgot your password?') !!}
+            </small>  
           </div>
-          <p><a href="{!! route('client.registration') !!}" class="fb btn btn-gold">Sign Up</a></p>
+
+          <p>
+            {!! Html::link(route('client.registration'), 'Sign Up'
+                , array(
+                    'class' => 'btn btn-gold fb'
+                )
+            ) !!}
+          </p>
+
         {!! Form::close() !!}
-        
       </div>
     </div>
     <div style="font:normal 14px/20px Arial;" class="col-md-6 bulletin">
       <h2 class="title">Bulletin Board</h2>
       <hr />
-      <h4><i class="fa fa-clock-o"></i> {! display_date | date:'MMMM dd, yyyy' !} </h4><br />Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc luctus libero ac enim faucibus pellentesque. Mauris eleifend tincidunt luctus. Suspendisse at nulla condimentum, rutrum leo at, molestie est. Sed leo arcu, posuere sed diam ac, pretium efficitur sem. Donec mattis eros metus, nec ultricies sapien interdum.
+      <h4>
+          <i class="fa fa-clock-o"></i>
+          {! display_date | date:'MMMM dd, yyyy' !}
+      </h4>
+        <br />
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+        Nunc luctus libero ac enim faucibus pellentesque.
+        Mauris eleifend tincidunt luctus. Suspendisse at nulla condimentum, rutrum leo at, molestie est.
+        Sed leo arcu, posuere sed diam ac, pretium efficitur sem. 
+        Donec mattis eros metus, nec ultricies sapien interdum.
     </div>
   </div>
 @endsection
+
+@section('scripts')
+
+  {!! Html::script('/js/client/controllers/login_controller.js') !!}
+
+@stop

@@ -9,65 +9,18 @@
               'id' => 'redirect_form'
               , 'route' => 'client.login.reset_password'
               , 'method' => 'POST'
-          )
+          ) 
       ) !!}
 
-      {!! Form::hidden('id', '') !!}
-      {!! Form::hidden('reset_code', '') !!}
+          {!! Form::hidden('id', '') !!}
+          {!! Form::hidden('email', $email) !!}
+          {!! Form::hidden('reset_code', '') !!}
 
       {!! Form::close() !!}
-
-      <div class="form-content" ng-show="!sent">
-        <div class="title">Retrieve Password</div>
-
-          <div class="alert alert-danger" ng-if="errors">
-            <p ng-repeat="error in errors" > 
-              {! error !}
-            </p>
-          </div>
-          
-          {!! Form::open(
-              array(
-                      'id' => 'forgot_password_form'
-              )
-          ) !!}
-
-          <div class="input">
-            <div class="icon">
-              <i class="fa fa-user"></i>
-            </div>
-            {!! Form::text('username', ''
-                  , array(
-                      'class' => 'form-control'
-                    , 'ng-model' => 'forgot.username'
-                    , 'placeholder' => 'Email or Username'
-                    , 'autocomplete' => 'off'
-                  )
-            )!!}
-          </div>
-
-          <div class="btn-container">
-            {!! Form::button('Send'
-                , array(
-                      'id' => 'proceed_btn'
-                    , 'class' => 'btn btn-blue btn-medium'
-                    , 'ng-if' => '!sent'
-                    , 'ng-click' => 'forgot.clientForgotPassword()'
-                )
-            ) !!}
-
-            {!! Html::link(route('client.login'), 'Cancel'
-                , array(
-                  'class' => 'btn btn-gold btn-medium'
-                )
-            ) !!}
-          </div>
-          {!! Form::close() !!}
-      </div>
-
-      <div class="form_content" ng-show="sent">
+      
+      <div class="form_content">
         <div class="title" ng-if="!resent">Email Sent</div>
-        <div class="title" ng-if="resent">Reset Code Resent</div>
+        <div class="title" ng-if="resent">Code Resent</div>
 
         <div class="alert alert-danger" ng-if="errors">
           <p ng-repeat="error in errors" > 
@@ -93,13 +46,13 @@
             <br />
             <div class="form-group">
               <small>Please check your inbox or your spam folder for the email. 
-              <br />The email contains a reset code that you need to input below.</small>
+              <br />The email contains a code that you need to input below.</small>
             </div>
           </div>
         </div>
 
           <p ng-if="resent">
-            A new reset code has been sent to your email.
+            A new code has been sent to your email.
           </p>
           <div class="form-group">
             {!! Form::label(null, 'Enter Code:') !!}
@@ -119,7 +72,6 @@
                   , array(
                         'id' => 'proceed_btn'
                       , 'class' => 'btn btn-blue btn-medium'
-                      , 'ng-if' => 'sent'
                       , 'ng-click' => 'forgot.clientValidateCode(forgot.reset_code)'
                   )
               ) !!}
