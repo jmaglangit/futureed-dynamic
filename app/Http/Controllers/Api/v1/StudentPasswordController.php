@@ -42,8 +42,8 @@ class StudentPasswordController extends StudentController {
             return $this->respondErrorMessage(2012);
         }
 
-        //check student id and password_image_id if matched.
-        $response = $this->student->checkAccess($id,$input['password_image_id']);
+        //check student id and password_image_id if matched that won't lock account.
+        $response = $this->student->checkAccess($id,$input['password_image_id'],1);
 
         if($response['status'] == 200){
 

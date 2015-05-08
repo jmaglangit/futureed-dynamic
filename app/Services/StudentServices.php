@@ -107,7 +107,14 @@ class StudentServices {
         ];
     }
 
-    public function checkAccess($id,$image_id){
+    /*
+     * @param id
+     * @param image_id
+     * @param token
+     * @desc id is the student id, image_id is the image password, token is optional if it has a token.
+     * token is the indicator if it has login.
+     */
+    public function checkAccess($id,$image_id, $token = null){
 
         $user_id = $this->student->getReferences($id);
         $is_disabled =  $this->user->checkUserDisabled($user_id['user_id']);
@@ -122,7 +129,13 @@ class StudentServices {
                     'data' => true
                 ];
             } else {
-                $this->user->addLoginAttempt($user_id['user_id']);
+
+                //check if token has values.
+                if(!$token){
+
+                    $this->user->addLoginAttempt($user_id['user_id']);
+                }
+
                 if(!$this->user->exceedLoginAttempts($user_id['user_id'])){
                     $this->user->lockAccount($user_id['user_id']);
                     return [
