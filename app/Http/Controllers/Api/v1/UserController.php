@@ -88,7 +88,10 @@ class UserController extends ApiController{
         $admin = config('futureed.admin');
 
         if( strtolower($client) == strtolower($input['user_type'])) {
-          
+
+           //update is activate and is lock for client
+           $this->user->updateInactiveLock($user_check['user_id']);
+
            $return = $this->client->getClientId($user_check['user_id']);
 
         }elseif( strtolower($student) == strtolower($input['user_type'])){
