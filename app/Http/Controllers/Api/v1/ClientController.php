@@ -126,7 +126,7 @@ class ClientController extends ApiController {
 					$checkUsername = $this->user->checkUsername($user['username'],'Client');
 
 	
-				if(array_key_exists('error_code',$checkUsername) || $checkUsername['user_id'] == $clientDetails['user_id'] ){
+				if(!($checkUsername)  || $checkUsername['user_id'] == $clientDetails['user_id'] ){
 
 
 					if(strtolower($clientDetails['client_role']) == 'parent' || 

@@ -117,8 +117,8 @@ class ClientRegisterController extends ClientController {
 
         		$client = array_merge($client, [
         			'user_id' 		=> $user_response['id'],
-        			'school_code'		=> (isset($school['code'])) ? $school['code'] : null,
-        			]);
+        			'school_code'		=> (isset($school_response)) ? $school_response : null,
+        		      ]);
 
         		$client_response = $this->client->addClient($client);
 

@@ -47,7 +47,7 @@ class SchoolRepository implements SchoolRepositoryInterface{
 			return $e->getMessage();
 		}
 
-		return true;
+		return $code;
 	}
 
 	public function getSchoolId($name){
