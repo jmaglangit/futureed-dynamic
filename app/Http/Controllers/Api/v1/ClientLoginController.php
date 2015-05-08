@@ -54,6 +54,12 @@ class ClientLoginController extends ClientController {
         //get client basic detail
         $client_detail = $this->client->getClient($client_role,$input['role']);
 
+        if($client_detail['is_account_reviewed']==0){
+
+            return $this->respondErrorMessage(2113);
+        }
+        
+
         //generate token
         $token = $this->token->getToken(
             [

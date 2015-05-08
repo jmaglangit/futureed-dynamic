@@ -54,7 +54,8 @@ return [
         2109 => 'Your account has already been confirmed.',
         2110 => 'You have already setup the forgot password steps.',
         2111 => 'You have already setup the email confirmation steps.',
-
+        2112 => 'Password should be alpha numeric with lowercase letters, uppercase letters, numerical and special punctuation.',
+        2113 => 'Username and password is invalid.',
 
         // Client Error messages
         2200 => 'Email already exists.',

@@ -50,7 +50,7 @@ class ClientRegisterController extends ClientController {
                 $this->addMessageBag($this->validateString($client,'country'));
                 $this->addMessageBag($this->zipCode($client,'zip'));
             }else{
-                $this->addMessageBag($this->schoolName($school,'school_name'));
+                $this->addMessageBag($this->validateString($school,'school_name'));
                 $this->addMessageBag($this->schoolAddress($school,'school_address'));
                 $this->addMessageBag($this->validateString($school,'school_state'));
                 $this->addMessageBag($this->validateString($school,'school_country'));
@@ -117,8 +117,8 @@ class ClientRegisterController extends ClientController {
 
         		$client = array_merge($client, [
         			'user_id' 		=> $user_response['id'],
-        			'school_code'		=> (isset($school['code'])) ? $school['code'] : null,
-        			]);
+        			'school_code'		=> (isset($school_response)) ? $school_response : null,
+        		      ]);
 
         		$client_response = $this->client->addClient($client);
 

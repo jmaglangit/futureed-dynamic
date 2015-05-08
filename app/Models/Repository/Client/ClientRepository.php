@@ -18,7 +18,8 @@ class ClientRepository implements ClientRepositoryInterface{
             'state',
             'country',
             'zip',
-            'status'
+            'status',
+            'is_account_reviewed'   
         )
             ->where('user_id','=',$user_id)
             ->where('client_role','=',$role)->first();
