@@ -93,7 +93,7 @@ class UserController extends ApiController{
 
         }elseif( strtolower($student) == strtolower($input['user_type'])){
             
-           $return = $this->student->getStudentId($user_detail['id']);
+           $return = $this->student->getStudentId($user_check['user_id']);
 
         }else{
 
