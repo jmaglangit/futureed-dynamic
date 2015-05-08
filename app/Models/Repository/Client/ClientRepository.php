@@ -8,6 +8,7 @@ class ClientRepository implements ClientRepositoryInterface{
     public function getClient($user_id,$role){
 
         return Client::select(
+            'id',
             'user_id',
             'first_name',
             'last_name',
@@ -17,7 +18,8 @@ class ClientRepository implements ClientRepositoryInterface{
             'state',
             'country',
             'zip',
-            'status'
+            'status',
+            'is_account_reviewed'   
         )
             ->where('user_id','=',$user_id)
             ->where('client_role','=',$role)->first();
@@ -26,7 +28,7 @@ class ClientRepository implements ClientRepositoryInterface{
 
     public function checkClient($id,$role){
 
-         return Client::where('id','=',$id)
+         return Client::where('user_id','=',$id)
                 ->where('client_role','=',$role)->pluck('user_id');
 
     }

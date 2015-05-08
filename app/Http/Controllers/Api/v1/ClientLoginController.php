@@ -51,6 +51,7 @@ class ClientLoginController extends ClientController {
 
         //get client basic detail
         $client_detail = $this->client->getClient($client_role,$input['role']);
+        
 
         //generate token
         $token = $this->token->getToken(
@@ -60,7 +61,7 @@ class ClientLoginController extends ClientController {
         );
 
         return $this->respondWithData([
-                'user_id' => $client_detail['user_id'],
+                'id' => $client_detail['id'],
                 'first_name' => $client_detail['first_name'],
                 'last_name' => $client_detail['last_name'],
                 'access_token' => $token['access_token']
