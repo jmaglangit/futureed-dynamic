@@ -117,7 +117,7 @@ class UserPasswordController extends UserController {
         $error = config('futureed-error.error_messages');
 
         $this->addMessageBag($this->email($input,'email'));
-        $this->addMessageBag($this->validateNumber($input,'reset_code'));
+        $this->addMessageBag($this->resetCode($input,'reset_code'));
         $this->addMessageBag($this->userType($input,'user_type'));
 
 
