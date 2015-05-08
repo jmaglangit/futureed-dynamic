@@ -97,7 +97,7 @@ class UserController extends ApiController{
 
         }else{
 
-            //todo admin
+            //todo admin confirmation for admin.methods not yet made since where not on admin side.//
 
         }
 
