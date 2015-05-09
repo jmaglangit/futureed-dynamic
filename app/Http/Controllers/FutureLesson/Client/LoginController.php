@@ -27,6 +27,7 @@ class LoginController extends Controller {
 	public function process()
 	{
 		$user_data = Input::only('user_data');
+
 		$user_object = json_decode($user_data['user_data']);
 
 		if($user_object->user_id){
@@ -58,13 +59,11 @@ class LoginController extends Controller {
 	{
 		$input = Input::only('email');
 
-		$sent = "false";
-
 		if($input['email']) {
-			$sent = "true";
+			return view('client.login.enter-reset-code', ['email' => $input['email']]);
 		}
 
-		return view('client.login.forgot-password', ['email' => $input['email'], 'sent' => $sent]);
+		return view('client.login.forgot-password', ['email' => $input['email']]);
 	}
 
 	/**

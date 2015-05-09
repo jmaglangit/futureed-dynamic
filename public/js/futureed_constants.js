@@ -24,4 +24,6 @@ var Constants = {
 	, MSG_PPW_SELECT_NEW 	: "Please select a new picture password."
 
 	, MSG_PW_NOT_MATCH 		: "Password does not match."
+
+	, ATTR_SUBMIT			: "submit"
 }
