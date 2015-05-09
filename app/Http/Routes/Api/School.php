@@ -1,7 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jason
- * Date: 5/9/15
- * Time: 9:38 PM
- */
+
+//schools
+Routes::resource('/school','Api\v1\SchoolController',
+    ['except' => ['create','edit']]);
