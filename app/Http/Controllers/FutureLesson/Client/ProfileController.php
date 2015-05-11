@@ -17,10 +17,10 @@ class ProfileController extends Controller {
 	public function update_session() {
 		$user = Input::all();
 
-		Session::forget('student');
+		Session::forget('client');
 		
 		if(!empty($user)) {
-			Session::put('student', json_encode($user));
+			Session::put('client', json_encode($user));
 		}
 	}
 
@@ -34,6 +34,6 @@ class ProfileController extends Controller {
 	}
 
 	public function getUserObject() {
-		return json_decode(Session::get('student'));
+		return json_decode(Session::get('client'));
 	}
 }

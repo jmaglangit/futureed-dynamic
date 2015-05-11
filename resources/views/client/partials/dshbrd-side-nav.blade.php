@@ -1,6 +1,12 @@
 <div class="client-prof">
-	<div class="client-title">
+	<div class="client-title" ng-if="!teacher && !parent && principal">
 		Principal Dashboard
+	</div>
+	<div class="client-title" ng-if="teacher && !parent && !principal">
+		Teacher Dashboard
+	</div>
+	<div class="client-title" ng-if="!teacher && parent && !principal">
+		Parent Dashboard
 	</div>
 	<div class="client-name">
 		Welcome, {! user.first_name !}
