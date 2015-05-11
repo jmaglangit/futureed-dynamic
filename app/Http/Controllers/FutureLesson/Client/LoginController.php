@@ -30,7 +30,7 @@ class LoginController extends Controller {
 
 		$user_object = json_decode($user_data['user_data']);
 
-		if($user_object->user_id){
+		if($user_object->id){
 			Session::flush();
 			Session::put('client', $user_data['user_data']);
 			return redirect()->route('client.dashboard.index');

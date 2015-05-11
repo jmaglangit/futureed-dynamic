@@ -44,7 +44,6 @@ class ClientLoginController extends ClientController {
         $client_id = $this->client->getClientId($return['id']);
 
         //check role of user if exist
-
         $client_role = $this->client->checkClient($client_id,$input['role']);
 
         if(is_null($client_role)){
