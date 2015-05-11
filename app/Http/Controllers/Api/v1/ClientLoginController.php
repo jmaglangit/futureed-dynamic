@@ -38,6 +38,8 @@ class ClientLoginController extends ClientController {
         $return  = $this->user->checkPassword($response['data'],$input['password']);
 
         if(!$return){
+
+            $this->user->addLoginAttempt($response['data']);
             return $this->respondErrorMessage(2233);
         }
 

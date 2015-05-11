@@ -104,6 +104,11 @@ Routes::group(['prefix' => 'api/v1'], function()
     Routes::post('/student/confirmation/email','Api\v1\EmailController@confirmChangeEmail');
 
 
+    //admin 
+
+    Routes::post('/admin/login','Api\v1\AdminLoginController@login');
+
+
 
 
 

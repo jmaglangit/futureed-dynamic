@@ -17,6 +17,8 @@ class AdminRepository implements  AdminRepositoryInterface {
 
     public function getAdmin($id){
 
+        return Admin::where('id','=',$id)->first();
+
     }
 
     public function addAdmin($admin){
