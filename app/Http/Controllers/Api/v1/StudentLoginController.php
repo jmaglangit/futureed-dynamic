@@ -179,7 +179,7 @@ class StudentLoginController extends StudentController {
 
         }elseif($response['status']==200){
 
-            return $this->respondWithData($response['data']);
+            return $this->setHeader($token)->respondWithData($response['data']);
         }
     }
 
