@@ -16,7 +16,7 @@
             <h4>Parent</h4>
           </div>
         </div>
-        <div class="col-md-12">
+        <div class="col-md-12" ng-if="role_click">
           <div class="alert alert-danger" style="text-align:left;" ng-if="errors">
             <p ng-repeat="error in errors" > 
               {! error !}
@@ -112,7 +112,7 @@
               </div>
 
               <div class="form-group">
-                <label class="col-md-2 control-label">Street Address</label>
+                <label class="col-md-2 control-label">Street Address<span class="required" ng-if="required">*</span></label>
                 <div class="col-md-6">
                   {!! Form::text('street_address', ''
                         , array(
@@ -125,7 +125,7 @@
               </div>
 
               <div class="form-group">
-                <label class="col-md-2 control-label">City</label>
+                <label class="col-md-2 control-label">City<span class="required" ng-if="required">*</span></label>
                 <div class="col-md-4">
                   {!! Form::text('city', ''
                           , array(
@@ -135,7 +135,7 @@
                           )
                     ) !!}
                 </div>
-                <label class="col-md-2 control-label">State</label>
+                <label class="col-md-2 control-label">State<span class="required" ng-if="required">*</span></label>
                 <div class="col-md-4">
                   {!! Form::text('state', ''
                         , array(
@@ -147,7 +147,7 @@
                 </div>
               </div>   
               <div class="form-group">
-                <label class="col-md-2 control-label">Zip Code</label>
+                <label class="col-md-2 control-label">Zip Code<span class="required" ng-if="required">*</span></label>
                 <div class="col-md-4">
                   {!! Form::text('zip', ''
                         , array(
@@ -157,7 +157,7 @@
                         )
                   ) !!}
                 </div>
-                <label class="col-md-2 control-label">Country</label>
+                <label class="col-md-2 control-label">Country<span class="required" ng-if="required">*</span></label>
                 <div class="col-md-4" ng-init="getCountries()">
                   <select  name="country" class="form-control" ng-model="reg.country">
                     <option value="">-- Select Country --</option>

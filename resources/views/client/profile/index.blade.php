@@ -144,6 +144,52 @@
 	                </div>
 	                <div class="form-group">
 						<label for="" class="col-md-2 control-label">City <span class="required">*</span></label>
+	                    <div class="col-md-4">
+	                        {!! Form::text('city', ''
+	                            , array(
+	                                'class' => 'form-control'
+	                                , 'placeholder' => 'City'
+	                                , 'ng-disabled' => '!edit' 
+	                                , 'ng-model' => 'prof.city')
+	                        ) !!}
+	                    </div>
+	                    <label for="" class="col-md-2 control-label">State <span class="required">*</span></label>
+	                    <div class="col-md-4">
+	                        {!! Form::text('state', ''
+	                            , array(
+	                                'class' => 'form-control'
+	                                , 'placeholder' => 'City'
+	                                , 'ng-disabled' => '!edit' 
+	                                , 'ng-model' => 'prof.state')
+	                        ) !!}
+	                    </div>
+	                </div>
+	                <div class="form-group" ng-init="getCountries()">
+						<label for="" class="col-md-2 control-label">Postal Code <span class="required">*</span></label>
+	                    <div class="col-md-4">
+	                        {!! Form::text('postal_code', ''
+	                            , array(
+	                                'class' => 'form-control'
+	                                , 'placeholder' => 'Postal Code'
+	                                , 'ng-disabled' => '!edit' 
+	                                , 'ng-model' => 'prof.postal_code')
+	                        ) !!}
+	                    </div>
+	                    <label for="" class="col-md-2 control-label">Country <span class="required">*</span></label>
+	                    <div class="col-md-4">
+	                        <select name="country" class="form-control" ng-model="reg.country" ng-disabled="!edit">
+                                <option value="">-- Select Country --</option>
+                                <option ng-repeat="country in countries" value="{! country.id !}">{! country.name!}</option>
+                            </select>
+	                    </div>
+	                </div>
+				</fieldset>
+				<fieldset>
+					<legend class="client-legend">
+						Other Address Information(Optional)
+					</legend>
+					<div class="form-group">
+						<label for="" class="col-md-2 control-label">School Name <span class="required">*</span></label>
 	                    <div class="col-md-5">
 	                        {!! Form::text('school_name', ''
 	                            , array(
@@ -154,7 +200,69 @@
 	                        ) !!}
 	                    </div>
 	                </div>
+
+	                <div class="form-group">
+						<label for="" class="col-md-2 control-label">Address <span class="required">*</span></label>
+	                    <div class="col-md-5">
+	                        {!! Form::text('address', ''
+	                            , array(
+	                                'class' => 'form-control'
+	                                , 'placeholder' => 'Address'
+	                                , 'ng-disabled' => '!edit' 
+	                                , 'ng-model' => 'prof.address')
+	                        ) !!}
+	                    </div>
+	                </div>
+	                <div class="form-group">
+						<label for="" class="col-md-2 control-label">City <span class="required">*</span></label>
+	                    <div class="col-md-4">
+	                        {!! Form::text('city', ''
+	                            , array(
+	                                'class' => 'form-control'
+	                                , 'placeholder' => 'City'
+	                                , 'ng-disabled' => '!edit' 
+	                                , 'ng-model' => 'prof.city')
+	                        ) !!}
+	                    </div>
+	                    <label for="" class="col-md-2 control-label">State <span class="required">*</span></label>
+	                    <div class="col-md-4">
+	                        {!! Form::text('state', ''
+	                            , array(
+	                                'class' => 'form-control'
+	                                , 'placeholder' => 'City'
+	                                , 'ng-disabled' => '!edit' 
+	                                , 'ng-model' => 'prof.state')
+	                        ) !!}
+	                    </div>
+	                </div>
+	                <div class="form-group" ng-init="getCountries()">
+						<label for="" class="col-md-2 control-label">Postal Code <span class="required">*</span></label>
+	                    <div class="col-md-4">
+	                        {!! Form::text('postal_code', ''
+	                            , array(
+	                                'class' => 'form-control'
+	                                , 'placeholder' => 'Postal Code'
+	                                , 'ng-disabled' => '!edit' 
+	                                , 'ng-model' => 'prof.postal_code')
+	                        ) !!}
+	                    </div>
+	                    <label for="" class="col-md-2 control-label">Country <span class="required">*</span></label>
+	                    <div class="col-md-4">
+	                        <select name="country" class="form-control" ng-model="reg.country" ng-disabled="!edit">
+                                <option value="">-- Select Country --</option>
+                                <option ng-repeat="country in countries" value="{! country.id !}">{! country.name!}</option>
+                            </select>
+	                    </div>
+	                </div>
 				</fieldset>
+				<div class="form-group">
+					<div class="btncon-client col-xs-6" style="text-align:center;">
+						<a class="btn btn-blue" ng-click="editProfile()">Edit</a>
+					</div>
+					<div class="btncon-client col-xs-6" style="text-align:center;">
+						<a class="btn btn-gold" ng-click="setActive('index')">Cancel</a>
+					</div>	
+				</div>
 				</div>
 			</div>
 		</div>		

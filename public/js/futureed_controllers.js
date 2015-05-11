@@ -1017,11 +1017,15 @@ function FutureedController($scope, apiService) {
 
     switch(role) {
       case Constants.USER_PRINCIPAL :
+        $scope.required = Constants.FALSE;
+        $scope.role_click = Constants.TRUE;
         $scope.principal = Constants.TRUE;
         $scope.reg.client_role = Constants.PRINCIPAL;
         break;
 
       case Constants.USER_PARENT    :
+        $scope.required = Constants.TRUE;
+        $scope.role_click = Constants.TRUE;
         $scope.parent = Constants.TRUE;
         $scope.reg.client_role = Constants.PARENT;
         break;
@@ -1055,6 +1059,7 @@ function FutureedController($scope, apiService) {
       apiService.registerClient(reg).success(function(response) {
         if(response.status == Constants.STATUS_OK) {
           if(response.errors) {
+            console.log(response.errors);
             $scope.errorHandler(response.errors);
 
             angular.forEach(response.errors, function(value, key) {
