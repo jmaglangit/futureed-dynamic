@@ -383,7 +383,7 @@ function FutureedController($scope, apiService) {
   function getUserDetails() {
     var user = $('#userdata').val();
 
-    /*to jollie mar: erase this after creating client profile.*/
+    /*to jollie mar: erase this after creating client profile. line 386*/
     $scope.teacher = Constants.TRUE;
 
     if(angular.isString(user) && user.length > 0) {

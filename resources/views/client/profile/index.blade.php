@@ -246,10 +246,13 @@
 	                </div>
 				</fieldset>
 				<div class="form-group">
-					<div class="btncon-client col-xs-6" style="text-align:center;">
+					<div class="btncon-client col-xs-6" style="text-align:center;" ng-if="edit">
 						<a class="btn btn-blue" ng-click="editProfile()">Edit</a>
 					</div>
-					<div class="btncon-client col-xs-6" style="text-align:center;">
+					<div class="btncon-client col-xs-6 col-xs-offset-3" style="text-align:center;" ng-if="!edit">
+						<a class="btn btn-blue" ng-click="editProfile()">Edit</a>
+					</div>
+					<div class="btncon-client col-xs-6" style="text-align:center;" ng-if="edit">
 						<a class="btn btn-gold" ng-click="setActive('index')">Cancel</a>
 					</div>	
 				</div>
