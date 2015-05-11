@@ -12,7 +12,6 @@ class AdminLoginController extends AdminController {
 
 	public function login(){
 
-        //dd(sha1('Jay@jay25'));
         $error = config('futureed-error.error_messages');
         $input = Input::only('username','password');
 
@@ -39,7 +38,7 @@ class AdminLoginController extends AdminController {
             $return  = $this->user->checkPassword($response['data'],$input['password']);
 
             if(!$return){
-                
+
                 $this->user->addLoginAttempt($response['data']);
                 return $this->respondErrorMessage(2233);
             }
