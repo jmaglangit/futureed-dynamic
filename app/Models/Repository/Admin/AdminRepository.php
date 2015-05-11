@@ -17,7 +17,7 @@ class AdminRepository implements  AdminRepositoryInterface {
 
     public function getAdmin($id){
 
-        return Admin::where('id','=',$id)->first();
+        return Admin::find($id)->first();
 
     }
 
@@ -36,6 +36,12 @@ class AdminRepository implements  AdminRepositoryInterface {
     public function getAdminId($user_id){
 
         return Admin::where('user_id','=',$user_id)->pluck('id');
+    }
+
+    public function verifyAdminId($id){
+
+        return Admin::where('id','=',$id)->pluck('id');
+
     }
 
 }
