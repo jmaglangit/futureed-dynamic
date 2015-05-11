@@ -61,8 +61,8 @@ trait ClientValidatorTrait {
 
         if(is_null($input['school_state']) || empty($input['school_state'])){
 
-            // return $this->parameterCheck($input,$schoolState);
-            dd($this->parameterCheck($input,$schoolState));
+            return $this->parameterCheck($input,$schoolState);
+
         }
     }
     public function schoolCountry($input, $schoolCountry){

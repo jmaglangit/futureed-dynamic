@@ -954,7 +954,6 @@ function FutureedController($scope, apiService) {
       apiService.registerClient(reg).success(function(response) {
         if(response.status == Constants.STATUS_OK) {
           if(response.errors) {
-            console.log(response.errors);
             $scope.errorHandler(response.errors);
 
             angular.forEach(response.errors, function(value, key) {
