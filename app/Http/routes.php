@@ -22,7 +22,7 @@ Routes::group(['prefix' => 'api/v1'], function()
 
         include('Routes/Api/Client.php');
         include('Routes/Api/Countries.php');
-        include('routes/Api/Grade.php');
+        include('Routes/Api/Grade.php');
         include('Routes/Api/School.php');
         include('Routes/Api/Student.php');
         include('Routes/Api/User.php');
