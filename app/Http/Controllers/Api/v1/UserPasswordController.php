@@ -82,9 +82,13 @@ class UserPasswordController extends UserController {
 
                       $this->mail->sendStudentMailResetPassword($userDetails,$code['confirmation_code'],$subject);
                       
-                    }else{
+                    }elseif(strcasecmp($input['user_type'],config('futureed.client')) == 0){
 
                       $this->mail->sendClientMailResetPassword($userDetails,$code['confirmation_code'],$subject);
+
+                    }else{
+
+                      $this->mail->sendAdminMailResetPassword($userDetails,$code['confirmation_code'],$subject);
 
                     }
 
@@ -147,17 +151,24 @@ class UserPasswordController extends UserController {
                   if($expired==true){
 
                      return $this->respondErrorMessage(2100);
+                     
                   }else{
                      
-                      if($input['user_type'] =='Student'){
+                      if(strcasecmp($input['user_type'],config('futureed.student')) == 0){
 
                         $studentdata = $this->student->resetCodeResponse($return['data']);
                         return $this->respondWithData($studentdata);
 
-                      }else{
+                      }elseif(strcasecmp($input['user_type'],config('futureed.client')) == 0){
 
                         $id = $this->client->getClientId($return['data']);
                         return $this->respondWithData(['id'=>$id]);
+
+                     }else{
+
+                        $id = $this->admin->getAdminId($return['data']);
+                        return $this->respondWithData(['id'=>$id]);
+
                      }
                   }
               }else{
