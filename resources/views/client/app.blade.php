@@ -40,7 +40,7 @@
 	@yield('content')
 
   @section('footer')
-    <footer class="footer">
+    <footer class="footer" ng-cloak>
       <div class="container text-center">
         <p class="text-muted">{{ date('Y') }} &copy; All Rights Reserved. FutureEd Pte Ltd</p>
       </div>
@@ -53,7 +53,6 @@
   {!! Html::script('//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js') !!}
   {!! Html::script('http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular.min.js') !!}
   {!! Html::script('http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular-resource.min.js') !!}
-  {!! Html::script('http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular-route.min.js') !!}
   {!! Html::script('/js/jquery.smooth-scroll.js') !!}
 
   {!! Html::script('/js/futureed_constants.js') !!}

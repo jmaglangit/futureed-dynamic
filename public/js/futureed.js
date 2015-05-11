@@ -1,15 +1,13 @@
 'use strict';
 
 angular.module('futureed', [
-  'ngRoute',
 	'futureed.services',
 	'futureed.controllers',
   'ui.bootstrap.datetimepicker'
 ]).config(['$interpolateProvider'
         , '$httpProvider'
-        , '$routeProvider'
         , '$locationProvider'
-  , function($interpolateProvider, $httpProvider, $routeProvider, $locationProvider) {
+  , function($interpolateProvider, $httpProvider, $locationProvider) {
 	
   $interpolateProvider.startSymbol('{!');
   $interpolateProvider.endSymbol('!}');
