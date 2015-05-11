@@ -99,7 +99,6 @@ class ClientPasswordController extends ApiController{
 
                 if($password == $userDetails['password']){
 
-                    $this->user->updateInactiveLock($return['user_id']);
                     $this->user->updatePassword($return['user_id'],$new_password);
                     return $this->respondWithData(['id'=>$return['id']]);
 
