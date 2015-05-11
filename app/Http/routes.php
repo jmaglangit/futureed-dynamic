@@ -26,6 +26,7 @@ Routes::group(['prefix' => 'api/v1'], function()
         include('Routes/Api/School.php');
         include('Routes/Api/Student.php');
         include('Routes/Api/User.php');
+        include('Routes/Api/Admin.php');
 
 //    //users
 //    Routes::get('/user','Api\v1\UserController@index');
@@ -104,6 +105,10 @@ Routes::group(['prefix' => 'api/v1'], function()
 //    Routes::put('/student/email/{id}','Api\v1\EmailController@updateStudentEmail');
 //    Routes::post('/student/resend/email','Api\v1\EmailController@resendChangeEmail');
 //    Routes::post('/student/confirmation/email','Api\v1\EmailController@confirmChangeEmail');
+
+
+
+  
 
 
 
