@@ -73,16 +73,24 @@ class LoginController extends Controller {
 	 */
 	public function registration()
 	{
-		$input = Input::only('email');
-		$registered = "false";
-
-		if($input['email']) {
-			$registered = "true";
-		}
-
-		return view('client.login.registration', ['registered' => $registered, 'email' => $input['email']]);
+		return view('client.login.registration');
 	}
 
+	public function registration_form() {
+
+		return view('client.login.registration-form');
+	}
+
+	public function registration_success() {
+
+		return view('client.login.registration-success');
+	}
+
+	public function enter_confirmation() {
+		$input = Input::only('email');
+
+		return view('client.login.enter-confirmation-code', ['email' => $input['email']]);
+	}
 	/**
 	 * Display reset password screen
 	 *

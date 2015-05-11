@@ -7,13 +7,6 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller {
-
-	public function __construct() {
-		if(!Session::get('client')) {
-			return redirect()->route('client.login')->send();
-		}
-	}
-
 	/**
 	 * Display dashboard screen
 	 *
