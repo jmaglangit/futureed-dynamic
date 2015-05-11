@@ -29,7 +29,7 @@ class ClientLoginController extends ClientController {
         //check username and password
         $response =$this->user->checkLoginName($input['username'], 'Client');
  
-        if($response['status'] != 200){
+        if($response['status'] <> 200){
             return $this->respondErrorMessage(2001);
         }
 
