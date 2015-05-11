@@ -21,7 +21,7 @@ class AdminLoginController extends AdminController {
 
         $msg_bag = $this->getMessageBag();
 
-        if(!empty($msg_bag)){
+        if($msg_bag){
             return $this->respondWithError($msg_bag);
         }else{
 
