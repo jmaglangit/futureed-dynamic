@@ -109,13 +109,13 @@ class EmailController extends ApiController {
     }
 
 
-    public function resendChangeEmail(){
+    public function resendChangeEmail($id){
 
-        $input = Input::only('new_email','user_type','url');
+        $input = Input::only('user_type','url');
 
-        $this->addMessageBag($this->email($input,'new_email'));
         $this->addMessageBag($this->userTypeClientStudent($input,'user_type'));
         $this->addMessageBag($this->validateString($input,'url'));
+        $this->addMessageBag($this->validateVarNumber($id));
 
         $msg_bag = $this->getMessageBag();
 
@@ -125,16 +125,16 @@ class EmailController extends ApiController {
 
         }else{
 
-            $user_id = $this->user->checkNewEmailExist($input['new_email'],$input['user_type']);
+            $student_details = $this->student->getStudent($id);
 
 
-            if(empty($user_id)){
+            if(empty($student_details)){
 
                 return $this->respondErrorMessage(2108);
 
             }else{
 
-                $userDetails = $this->user->getUserDetail($user_id,$input['user_type']);
+                $userDetails = $this->user->getUserDetail($student_details['user_id'],$input['user_type']);
 
                 if(empty($userDetails['email_code'])){
 
@@ -144,13 +144,11 @@ class EmailController extends ApiController {
 
                     $code=$this->code->getCodeExpiry();
 
-                    $this->user->updateEmailCode($user_id,$code);
-
-                    $student_id = $this->student->getStudentId($user_id);
+                    $this->user->updateEmailCode($student_details['user_id'],$code);
 
                     $this->mail->sendMailChangeEmail($userDetails,$code['confirmation_code'],$input['url'],1);
 
-                    return $this->respondWithData(['id' => $student_id]);
+                    return $this->respondWithData(['id' => $id]);
 
                 }
 
