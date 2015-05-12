@@ -17,6 +17,7 @@ class TokenServices {
     //set claims
     //get signature
     //output token
+    //TODO: determine the user and its access. time expiry, type of user.
 
     /**
      * @desc set user
