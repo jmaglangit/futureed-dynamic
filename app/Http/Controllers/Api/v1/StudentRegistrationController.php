@@ -32,6 +32,8 @@ class StudentRegistrationController extends StudentController {
             'first_name',
             'last_name');
 
+        $input = Input::only('url');
+
         //Student fields validations
         $this->addMessageBag($this->firstName($student,'first_name'));
         $this->addMessageBag($this->lastName($student,'last_name'));
@@ -45,6 +47,8 @@ class StudentRegistrationController extends StudentController {
         //User fields validations
         $this->addMessageBag($this->email($user,'email'));
         $this->addMessageBag($this->username($user, 'username'));
+        $this->addMessageBag($this->validateString($input, 'url'));
+
 
         $msg_bag = $this->getMessageBag();
         if(!empty($msg_bag)){
@@ -80,7 +84,7 @@ class StudentRegistrationController extends StudentController {
 
 
             //send email to user.
-            $this->mail->sendStudentRegister($user_response['id']);
+            $this->mail->sendStudentRegister($user_response['id'],$input['url']);
 
             $student_id = $this->student->getStudentId($user_response['id']);
             //return success
