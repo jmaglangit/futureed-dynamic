@@ -4,7 +4,11 @@ use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 
 trait ProfileTrait{
-	public function update_session($user,$role){
+	public function update_session(){
+
+		$user = Input::all();
+
+		$role = config('futureed.client');
 
 		Session::forget($role);
 		

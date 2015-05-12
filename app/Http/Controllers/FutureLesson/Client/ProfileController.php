@@ -18,15 +18,6 @@ class ProfileController extends Controller {
 		return view('client.profile.index', ['active' => 'index', 'id' => $id]);
 	}
 
-	public function update_session() {
-
-		$user = Input::all();
-		$role = config('futureed.client');
-		
-		$this->update_session($user, $role);
-		
-	}
-
 	public function changePassword() {
 		$id = $this->getId();
 		return view('client.profile.change_password', ['active' => 'password']);
