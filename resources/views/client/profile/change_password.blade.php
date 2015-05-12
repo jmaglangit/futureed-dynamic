@@ -24,6 +24,10 @@
 				        <div class="alert alert-success" ng-if="success">
 		                	<p>Successfully update profile.</p>
 		                </div>
+		                {!! Form::open(array('id' => 'client_change_pass', 'class' => 'form-horizontal'))!!}
+		                	<div class="form-group">
+		                		<label class="col-md-2 control-label">Current Password <span class="required"></span></label>		
+		                	</div>
 					</div>
 				</div>
 			</div>			

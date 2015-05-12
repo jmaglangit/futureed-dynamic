@@ -16,11 +16,11 @@
 					</div>
 				</div>
 				<div class="form-content col-xs-12">
-					{{-- <div class="alert alert-error" ng-if="errors">
+					<div class="alert alert-error" ng-if="errors">
 			            <p ng-repeat="error in errors" > 
 			              {! error !}
 			            </p>
-			        </div> --}}
+			        </div>
 	                <div class="alert alert-success" ng-if="success">
 	                	<p>Successfully update profile.</p>
 	                </div>

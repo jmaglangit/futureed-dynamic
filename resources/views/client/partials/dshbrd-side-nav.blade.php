@@ -16,7 +16,7 @@
 	My Account
 </div>
 <ul ng-init="setActive('{!! $active !!}')">
-	<li ng-class="{ 'active' : active_index }"><a href="{!! route('student.profile.index') !!}"><span><i class="fa fa-book"></i></span>View Client Account Profile</a></li>
-	<li ng-class="{ 'active' : active_edit }"><a href="{!! route('student.profile.index') !!}"><span><i class="fa fa-edit"></i></span>Edit Client Account Profile</a></li>
-	<li ng-class="{ 'active' : active_rewards }"><a href="{!! route('student.profile.rewards') !!}"><span><i class="fa fa-lock"></i></span>Change Password</a></li>
+	<li ng-class="{ 'active' : active_index }"><a href="{!! route('client.profile.index') !!}"><span><i class="fa fa-book"></i></span>View Client Account Profile</a></li>
+	<li ng-class="{ 'active' : active_edit }"><a href="{!! route('client.profile.index') !!}"><span><i class="fa fa-edit"></i></span>Edit Client Account Profile</a></li>
+	<li ng-class="{ 'active' : active_password }"><a href="{!! route('client.profile.change_password') !!}"><span><i class="fa fa-lock"></i></span>Change Password</a></li>
 </ul>
