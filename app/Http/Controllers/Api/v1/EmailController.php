@@ -216,4 +216,68 @@ class EmailController extends ApiController {
 
     }
 
+
+     public function updateClientEmail($id){
+
+        $userType = config('futureed.client');
+
+        $input = Input::only('new_email','password','url');
+
+        $this->addMessageBag($this->validateVarNumber($id));
+        $this->addMessageBag($this->email($input,'new_email')); 
+        $this->addMessageBag($this->checkPassword($input,'password'));
+        $this->addMessageBag($this->validateString($input,'url'));
+
+        $msg_bag = $this->getMessageBag();
+
+        if($msg_bag){
+
+            return $this->respondWithError($msg_bag);
+
+        }else{
+
+            $idExist = $this->client->verifyClientId($id);
+
+            if($idExist){
+
+                $userDetails = $this->user->getUserDetail($idExist['user_id'],$userType);
+                $checkEmailExist = $this->user->checkEmail($input['new_email'],$userType);
+
+                $password = sha1($input['password']);
+
+                if($userDetails['password'] != $password){
+
+                  return $this->respondErrorMessage(2114);
+
+                }else if($userDetails['email'] == $input['new_email']){
+
+                  return $this->respondErrorMessage(2107); 
+
+                }else if($checkEmailExist){
+
+                  return $this->respondErrorMessage(2200);
+
+                }else{
+
+                    $code = $this->code->getCodeExpiry();
+                    $this->user->addNewEmail($idExist['user_id'],$input['new_email']);
+
+                    $new_user_details = $this->user->getUserDetail($idExist['user_id'],$userType);
+                    $this->mail->sendMailChangeEmail($new_user_details,$code['confirmation_code'],$input['url'],0);
+                    $this->user->updateEmailCode($studentReferences['user_id'],$code);
+                    
+                    return $this->respondWithData(['id' => $id]);
+
+                }
+
+            }else{
+
+                return $this->respondErrorMessage(2001);
+
+            }
+
+        }
+
+    }
+
 }

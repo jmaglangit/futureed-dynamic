@@ -23,6 +23,9 @@ Routes::group(['prefix' => '/client'], function()
     Routes::post('/reset-password/{id}','Api\v1\ClientPasswordController@resetPassword');
     Routes::post('/change-password/{id}','Api\v1\ClientPasswordController@changePassword');
 
+    //change email in client
+    Routes::post('/change-email/{id}','Api\v1\EmailController@updateClientEmail');
+
 
 });
 
