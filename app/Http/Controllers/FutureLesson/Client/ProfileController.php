@@ -18,9 +18,17 @@ class ProfileController extends Controller {
 		return view('client.profile.index', ['active' => 'index', 'id' => $id]);
 	}
 
+	public function index_form() {
+		return view('client.profile.index_form');
+	}
+
 	public function changePassword() {
 		$id = $this->getId();
 		return view('client.profile.change_password', ['active' => 'password']);
+	}
+
+	public function change_password_form() {
+		return view('client.profile.change_password_form');
 	}
 
 	public function getId() {
