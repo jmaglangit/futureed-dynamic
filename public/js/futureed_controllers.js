@@ -388,6 +388,9 @@ function FutureedController($scope, apiService) {
 
     if(angular.isString(user) && user.length > 0) {
       $scope.user = JSON.parse(user);
+      if($scope.user.new_email != null){
+        $scope.confirm_email = Constants.TRUE;
+      }
       $('#userdata').html('');
     }
   }
