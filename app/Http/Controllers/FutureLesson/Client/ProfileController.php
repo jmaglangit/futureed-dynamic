@@ -1,11 +1,15 @@
 <?php namespace FutureEd\Http\Controllers\FutureLesson\Client;
 
+use FutureEd\Http\Controllers\FutureLesson\Traits\ProfileTrait;
+
 use FutureEd\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 
 
 class ProfileController extends Controller {
+
+	use ProfileTrait;
 
 	public function index(){
 
@@ -14,14 +18,9 @@ class ProfileController extends Controller {
 		return view('client.profile.index', ['active' => 'index', 'id' => $id]);
 	}
 
-	public function update_session() {
-		$user = Input::all();
-
-		Session::forget('student');
-		
-		if(!empty($user)) {
-			Session::put('student', json_encode($user));
-		}
+	public function changePassword() {
+		$id = $this->getId();
+		return view('client.profile.change_password', ['active' => 'password']);
 	}
 
 	public function getId() {
@@ -33,7 +32,7 @@ class ProfileController extends Controller {
 		return null;
 	}
 
-	public function getUserObject() {
-		return json_decode(Session::get('student'));
+	public function getUserObject() {		
+		return json_decode(Session::get('client'));
 	}
 }

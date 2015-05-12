@@ -63,7 +63,11 @@
 					, 'middleware' => 'client'
 					, 'uses' => 'FutureLesson\Client\ProfileController@index'
 				]);
-			
+			Routes::get('/change-password', [ 
+					'as' => 'client.profile.change_password'
+					, 'middleware' => 'client'
+					, 'uses' => 'FutureLesson\Client\ProfileController@changePassword'
+				]);
 		});
 	});
 	

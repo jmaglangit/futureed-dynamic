@@ -1,7 +1,7 @@
 @extends('client.app')
 
 @section('navbar')
-    @include('student.partials.main-nav')
+    @include('client.partials.main-nav')
 @stop
 @section('content')
 	<div class="container dshbrd-con" ng-cloak>
@@ -16,11 +16,11 @@
 					</div>
 				</div>
 				<div class="form-content col-xs-12">
-					{{-- <div class="alert alert-error" ng-if="errors">
+					<div class="alert alert-error" ng-if="errors">
 			            <p ng-repeat="error in errors" > 
 			              {! error !}
 			            </p>
-			        </div> --}}
+			        </div>
 	                <div class="alert alert-success" ng-if="success">
 	                	<p>Successfully update profile.</p>
 	                </div>
@@ -62,7 +62,7 @@
 	                            ) !!}
 	                        </div>
 	                        <div class="col-xs-2">
-	                        	<a href="{!! route('student.profile.edit_email')!!}" class="edit-email">Edit</a>
+	                        	<a href="#" class="edit-email">Edit</a>
 	                        </div>	
 	                    </div>
 	                    {{-- show if there is a pending email --}}
@@ -80,7 +80,7 @@
 	                            ) !!}
 	                        </div>
 	                        <div class="col-xs-2">
-	                        	<a href="{!! route('student.profile.edit_email')!!}" class="edit-email">Confirm</a>
+	                        	<a href="#" class="edit-email">Confirm</a>
 	                        </div>	
 	                    </div>
 				</fieldset>
@@ -113,7 +113,7 @@
 	                        </div>
 	                    </div>
 				</fieldset>
-				<fieldset>
+				<fieldset ng-if="!parent">
 					<legend class="client-legend">
 						School Information
 					</legend>
@@ -130,7 +130,7 @@
 	                    </div>
 	                </div>
 
-	                <div class="form-group">
+	                <div class="form-group" ng-if="principal">
 						<label for="" class="col-md-2 control-label">Address <span class="required">*</span></label>
 	                    <div class="col-md-5">
 	                        {!! Form::text('address', ''
@@ -142,7 +142,7 @@
 	                        ) !!}
 	                    </div>
 	                </div>
-	                <div class="form-group">
+	                <div class="form-group" ng-if="principal">
 						<label for="" class="col-md-2 control-label">City <span class="required">*</span></label>
 	                    <div class="col-md-4">
 	                        {!! Form::text('city', ''
@@ -164,7 +164,7 @@
 	                        ) !!}
 	                    </div>
 	                </div>
-	                <div class="form-group" ng-init="getCountries()">
+	                <div class="form-group" ng-init="getCountries()" ng-if="principal">
 						<label for="" class="col-md-2 control-label">Postal Code <span class="required">*</span></label>
 	                    <div class="col-md-4">
 	                        {!! Form::text('postal_code', ''
@@ -185,22 +185,12 @@
 	                </div>
 				</fieldset>
 				<fieldset>
-					<legend class="client-legend">
+					<legend class="client-legend" ng-if="!parent">
 						Other Address Information(Optional)
 					</legend>
-					<div class="form-group">
-						<label for="" class="col-md-2 control-label">School Name <span class="required">*</span></label>
-	                    <div class="col-md-5">
-	                        {!! Form::text('school_name', ''
-	                            , array(
-	                                'class' => 'form-control'
-	                                , 'placeholder' => 'School Name'
-	                                , 'ng-disabled' => '!edit' 
-	                                , 'ng-model' => 'prof.school_name')
-	                        ) !!}
-	                    </div>
-	                </div>
-
+					<legend class="client-legend" ng-if="parent">
+						Address
+					</legend>
 	                <div class="form-group">
 						<label for="" class="col-md-2 control-label">Address <span class="required">*</span></label>
 	                    <div class="col-md-5">
@@ -256,10 +246,13 @@
 	                </div>
 				</fieldset>
 				<div class="form-group">
-					<div class="btncon-client col-xs-6" style="text-align:center;">
+					<div class="btncon-client col-xs-6" style="text-align:center;" ng-if="edit">
 						<a class="btn btn-blue" ng-click="editProfile()">Edit</a>
 					</div>
-					<div class="btncon-client col-xs-6" style="text-align:center;">
+					<div class="btncon-client col-xs-6 col-xs-offset-3" style="text-align:center;" ng-if="!edit">
+						<a class="btn btn-blue" ng-click="editProfile()">Edit</a>
+					</div>
+					<div class="btncon-client col-xs-6" style="text-align:center;" ng-if="edit">
 						<a class="btn btn-gold" ng-click="setActive('index')">Cancel</a>
 					</div>	
 				</div>
