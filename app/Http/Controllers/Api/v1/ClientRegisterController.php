@@ -25,6 +25,8 @@ class ClientRegisterController extends ClientController {
 
 	        $school = Input::only('school_name', 'school_address', 'school_city', 'school_state', 'school_country', 'school_zip');
 
+            $input = Input:: only('url');
+
             $error_msg = config('futureed-error.error_messages');
 
             if(strtolower($client['client_role']) == strtolower(config('futureed.teacher'))){
@@ -34,6 +36,8 @@ class ClientRegisterController extends ClientController {
                                 ->setMessage($error_msg[2234])
                                 ->errorMessage());
             }
+
+            $this->addMessageBag($this->validateString($input,'url'));
 
 	        $this->addMessageBag($this->firstName($client,'first_name'));
         	$this->addMessageBag($this->lastName($client,'last_name'));
@@ -133,7 +137,7 @@ class ClientRegisterController extends ClientController {
         		$data['client_role'] = $client['client_role'];
 
         		// send email to user
-        		$this->mail->sendClientRegister($data,$code['confirmation_code']);
+        		$this->mail->sendClientRegister($data,$code['confirmation_code'],$input['url']);
 
         		return $this->respondWithData([
         				'id'	=> $client_response['id'],

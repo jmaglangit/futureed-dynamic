@@ -11,8 +11,9 @@ use Illuminate\Support\Facades\Input;
 class UserPasswordController extends UserController {
   
     public function passwordForgot(){
-        $input = Input::only('username','user_type');
+        $input = Input::only('username','user_type','url');
         $this->addMessageBag($this->userType($input,'user_type'));
+        $this->addMessageBag($this->validateString($input,'url'));
         $subject = config('futureed.subject_forgot');
 
         
@@ -80,7 +81,7 @@ class UserPasswordController extends UserController {
 
                     if(strcasecmp($input['user_type'],config('futureed.student')) == 0){
 
-                      $this->mail->sendStudentMailResetPassword($userDetails,$code['confirmation_code'],$subject);
+                      $this->mail->sendStudentMailResetPassword($userDetails,$code['confirmation_code'],$input['url'],$subject);
                       
                     }elseif(strcasecmp($input['user_type'],config('futureed.client')) == 0){
 
