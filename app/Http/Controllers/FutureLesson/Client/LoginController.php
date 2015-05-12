@@ -16,6 +16,12 @@ class LoginController extends Controller {
 	 */
 	public function index()
 	{
+		$session = json_decode(Session::get('client'));
+
+		if($session && $session->id) {
+			return redirect()->route('client.dashboard.index');
+		}
+
 		return view('client.login.login');
 	}
 

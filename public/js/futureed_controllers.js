@@ -136,14 +136,14 @@ function FutureedController($scope, apiService) {
         if(response.errors) {
           if(response.errors[0].error_code == 2001) {
             // In registration and Edit Profile
-            $scope.u_success = Constants.TRUE;
+            $scope.u_success = "Username is available." ;
           } else {
             $scope.u_error = response.errors[0].message;
           }
         } else if(response.data) {
           if($scope.user && (response.data.id == $scope.user.id)) {
             // In Edit Profile
-            $scope.u_success = Constants.TRUE;
+            $scope.u_success = "Username is available." ;
           } else {
             $scope.u_error = "Username already exists.";  
           }

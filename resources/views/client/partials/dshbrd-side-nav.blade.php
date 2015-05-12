@@ -1,11 +1,11 @@
 <div class="client-prof">
-	<div class="client-title" ng-if="!teacher && !parent && principal">
+	<div class="client-title" ng-if="profile.is_principal">
 		Principal Dashboard
 	</div>
-	<div class="client-title" ng-if="teacher && !parent && !principal">
+	<div class="client-title" ng-if="profile.is_teacher">
 		Teacher Dashboard
 	</div>
-	<div class="client-title" ng-if="!teacher && parent && !principal">
+	<div class="client-title" ng-if="profile.is_parent">
 		Parent Dashboard
 	</div>
 	<div class="client-name">
