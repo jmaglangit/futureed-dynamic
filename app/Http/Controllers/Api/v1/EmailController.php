@@ -130,7 +130,7 @@ class EmailController extends ApiController {
 
             if(empty($student_details)){
 
-                return $this->respondErrorMessage(2108);
+                return $this->respondErrorMessage(2001);
 
             }else{
 
