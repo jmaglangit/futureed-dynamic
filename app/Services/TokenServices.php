@@ -10,6 +10,7 @@ namespace FutureEd\Services;
 
 
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class TokenServices {
 
@@ -60,7 +61,7 @@ class TokenServices {
 //        dd(Carbon::now()->addSeconds($this->token['exp'])->toDateTimeString());
         $payload = [
             //full url of the issuer or just the main url
-            'iss' => (isset($token['url'])) ? $token['url'] : url(),
+            'iss' => (isset($token['url'])) ? $token['url'] : Request::capture()->fullUrl(),
 
             //time expiry of the token in unix set or auto set
             'exp' => (isset($token['exp'])) ?
@@ -90,7 +91,7 @@ class TokenServices {
     /*
      * @desc generate token
      */
-    public function getToken($payload_data){
+    public function getToken($payload_data = []){
 
         $header = $this->setHeader();
         $payload = $this->setPayload($payload_data);
