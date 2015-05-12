@@ -164,7 +164,7 @@ class UserController extends ApiController{
 
                         $client_id = $this->client->getClientId($return['user_id']);
 
-                        $this->mail->sendClientMailResetPassword($userDetails,$code['confirmation_code'],$subject);
+                        $this->mail->sendClientMailResetPassword($userDetails,$code['confirmation_code'],$input['url'],$subject);
 
                         return $this->respondWithData(['id' => $client_id,
                                                        'user_type' => $input['user_type'] 
@@ -175,7 +175,7 @@ class UserController extends ApiController{
 
                         $admin_id = $this->admin->getAdminId($return['user_id']);
 
-                        $this->mail->sendAdminMailResetPassword($userDetails,$code['confirmation_code'],$subject);
+                        $this->mail->sendAdminMailResetPassword($userDetails,$code['confirmation_code'],$input['url'],$subject);
 
                         return $this->respondWithData(['id' => $admin_id,
                                                        'user_type' => $input['user_type'] 

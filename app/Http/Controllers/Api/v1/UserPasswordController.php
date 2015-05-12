@@ -85,11 +85,11 @@ class UserPasswordController extends UserController {
                       
                     }elseif(strcasecmp($input['user_type'],config('futureed.client')) == 0){
 
-                      $this->mail->sendClientMailResetPassword($userDetails,$code['confirmation_code'],$subject);
+                      $this->mail->sendClientMailResetPassword($userDetails,$code['confirmation_code'],$input['url'],$subject);
 
                     }else{
 
-                      $this->mail->sendAdminMailResetPassword($userDetails,$code['confirmation_code'],$subject);
+                      $this->mail->sendAdminMailResetPassword($userDetails,$code['confirmation_code'],$input['url'],$subject);
 
                     }
 
