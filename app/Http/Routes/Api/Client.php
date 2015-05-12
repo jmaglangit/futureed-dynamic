@@ -20,8 +20,9 @@ Routes::group(['prefix' => '/client'], function()
     //client
     Routes::post('/login','Api\v1\ClientLoginController@login');
     Routes::post('/register','Api\v1\ClientRegisterController@register');
-    Routes::post('/password/{id}','Api\v1\ClientPasswordController@changePassword');
-    Routes::post('/password/new/{id}','Api\v1\ClientController@changePasswordNew');
+    Routes::post('/password/{id}','Api\v1\ClientPasswordController@resetPassword');
+    Routes::post('/password/new/{id}','Api\v1\ClientPasswordController@changePassword');
+     Routes::post('/add','Api\v1\AddClientController@addClient');
 
 
 });
