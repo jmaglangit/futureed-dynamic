@@ -1,10 +1,9 @@
 @charset "UTF-8"; 
 
 body.admin{
-	background-color: #ededed !important;
+	background-color: #ededed;
 	background-image: none;
 	background-attachment: fixed;
-	font-family: 'Schoolbell', sans-serif;
 }
 
 .lock-logo{
@@ -16,4 +15,28 @@ body.admin{
 	border-radius:200px;
 	padding:20px;
 	width:120px;
+}
+body > .container > .col-md-4{
+	margin-top: 80px;
+}
+
+.col-md-4 > .form-style > form{
+	margin-top: 10px;
+}
+.adlogin-title{
+	text-transform: uppercase;
+	color: #055a7f;
+	font-weight: 700;
+	margin-top: 40px;
+	font-size: 1.1em;
+}
+.forgot-message{
+	font-weight: 100;
+	margin-top: 20px;
+}
+.title-code{
+	 text-transform: uppercase;
+  	color: #055A7F;
+  	font-size: 1.5em;
+  	margin: 20px 0 20px 0;
 }

@@ -32,7 +32,7 @@
     <![endif]-->
     @yield('styles')
   </head>
-  <body class="admin" ng-controller="futureedController" ng-init="getUserDetails()">
+  <body class="admin" ng-controller="futureedController" ng-init="getUserDetails()" ng-cloak>
     <textarea id="userdata" name="hide" style="display:none;">{!! Session::get('admin') !!}</textarea>
     
     @yield('navbar')
