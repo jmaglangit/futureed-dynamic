@@ -22,7 +22,7 @@ Routes::group(['prefix' => '/client'], function()
     Routes::post('/register','Api\v1\ClientRegisterController@register');
     Routes::post('/password/{id}','Api\v1\ClientPasswordController@resetPassword');
     Routes::post('/password/new/{id}','Api\v1\ClientPasswordController@changePassword');
-     Routes::post('/add','Api\v1\AddClientController@addClient');
+    Routes::post('/add','Api\v1\AddClientController@addClient');
 
 
 });
