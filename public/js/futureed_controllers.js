@@ -898,6 +898,7 @@ function FutureedController($scope, apiService) {
   /**
   * Client Page With API calls
   */
+<<<<<<< HEAD
   $scope.selectRole = selectRole;
   $scope.registerClient = registerClient;
   $scope.resendClientConfirmation = resendClientConfirmation;
@@ -1018,6 +1019,8 @@ function FutureedController($scope, apiService) {
       $scope.ui_unblock();
     });
   }
+=======
+>>>>>>> f384146c33452f09277d531163157dc7af0b6551
   $scope.saveEmail = saveEmail;
 
 

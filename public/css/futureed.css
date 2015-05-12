@@ -371,6 +371,16 @@ fieldset legend{color: #8e8171; font-size: 16px; text-transform: uppercase;}
 	padding:20px; width:120px;
 }
 
+.client .login .roundcon{
+	width:120px;
+	margin: 30px auto;
+}
+.client .login .roundcon i.fa{
+	background:#e8e8e8;
+	border-radius:200px;
+	padding:20px; width:120px;
+}
+
 /*----- FOLLOW UP REGISTRATION ----- */
 .follow-up-reg{
 	max-width: 880px;

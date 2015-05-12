@@ -41,6 +41,7 @@ return [
         2025 => 'Reset code is required.',
         2026 => 'Reset code should be number only.',
         2027 => 'Reset code is invalid.',
+        2028 => 'The Student has to be more than 13 years old to be able to register.',
 
         2100 => 'Reset code is invalid.',
         2101 => 'Password image is invalid.',

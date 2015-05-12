@@ -28,7 +28,11 @@ class ClientLoginController extends ClientController {
         $err_msg = config('futureed-error.error_messages');
         //check username and password
         $response =$this->user->checkLoginName($input['username'], 'Client');
+<<<<<<< HEAD
  
+=======
+
+>>>>>>> f384146c33452f09277d531163157dc7af0b6551
         if($response['status'] <> 200){
             return $this->respondErrorMessage(2001);
         }
@@ -38,6 +42,8 @@ class ClientLoginController extends ClientController {
         $return  = $this->user->checkPassword($response['data'],$input['password']);
 
         if(!$return){
+
+            $this->user->addLoginAttempt($response['data']);
             return $this->respondErrorMessage(2233);
         }
 

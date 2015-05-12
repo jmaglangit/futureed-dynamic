@@ -78,13 +78,17 @@ trait ApiValidatorTrait {
 
     //Validate birth_date field.
     public function birthDate($input,$birth_date){
+        $error_msg = config('futureed-error.error_messages');
 
             $validator = Validator::make(
                 [
                     "$birth_date" => $input["$birth_date"],
                 ],
                 [
-                    "$birth_date" => 'required|date_format:Ymd|before:today'
+                    "$birth_date" => 'required|date_format:Ymd|before:-13 year'
+                ],
+                [
+                    "before" => $error_msg[2028]
                 ]
             );
 

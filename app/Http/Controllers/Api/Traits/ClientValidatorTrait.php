@@ -62,7 +62,10 @@ trait ClientValidatorTrait {
         if(is_null($input['school_state']) || empty($input['school_state'])){
 
             return $this->parameterCheck($input,$schoolState);
+<<<<<<< HEAD
 
+=======
+>>>>>>> f384146c33452f09277d531163157dc7af0b6551
         }
     }
     public function schoolCountry($input, $schoolCountry){
