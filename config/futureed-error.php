@@ -57,6 +57,7 @@ return [
         2111 => 'You have already setup the email confirmation steps.',
         2112 => 'Password should be alpha numeric with lowercase letters, uppercase letters, numerical and special punctuation.',
         2113 => 'Username and password is invalid.',
+        2114 => 'Your password is incorrect.',
 
         // Client Error messages
         2200 => 'Email already exists.',
