@@ -177,5 +177,9 @@ class ClientServices {
 
 
     }
+    
+    public function getClients($criteria, $limit, $offset) {
+	   return $this->client->getClients($criteria, $limit, $offset);
+    }
 
 }

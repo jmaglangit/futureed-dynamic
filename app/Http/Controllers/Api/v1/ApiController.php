@@ -65,6 +65,7 @@ class ApiController extends Controller {
         $this->school = $schoolRepositoryInterface;
         $this->country = $countryRepositoryInterface;
     }
+    
     public function index(){
         return [
             'name' => 'FutureEd API',
