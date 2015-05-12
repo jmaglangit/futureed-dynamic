@@ -4,7 +4,7 @@
     @include('student.partials.main-nav')
 @stop
 @section('content')
-	<div class="container dshbrd-con" ng-cloak>
+	<div class="container dshbrd-con" ng-controller="ProfileController as profile" ng-cloak>
 		<div class="wrapr">
 			<div class="client-nav side-nav">
 				@include('client.partials.dshbrd-side-nav')				
@@ -16,11 +16,11 @@
 					</div>
 				</div>
 				<div class="form-content col-xs-12">
-					{{-- <div class="alert alert-error" ng-if="errors">
-			            <p ng-repeat="error in errors" > 
+					<div class="alert alert-error" ng-if="profile.errors">
+			            <p ng-repeat="error in profile.errors" > 
 			              {! error !}
 			            </p>
-			        </div> --}}
+			        </div>
 	                <div class="alert alert-success" ng-if="success">
 	                	<p>Successfully update profile.</p>
 	                </div>
@@ -36,8 +36,8 @@
 	                                , array(
 	                                    'class' => 'form-control'
 	                                    , 'placeholder' => 'Username' 
-	                                    , 'ng-disabled' => '!edit' 
-	                                    , 'ng-model' => 'prof.username'
+	                                    , 'ng-disabled' => '!profile.edit' 
+	                                    , 'ng-model' => 'profile.prof.username'
 	                                    , 'ng-model-options' => "{debounce : {'default' : 1000}}"
 	                                    , 'ng-change' => "checkAvailability(prof.username, 'Student')")
 	                            ) !!}
@@ -56,13 +56,12 @@
 	                                    'class' => 'form-control'
 	                                    , 'placeholder' => 'Email Address' 
 	                                    , 'ng-disabled' => 'true' 
-	                                    , 'ng-model' => 'prof.email'
-	                                    , 'ng-model-options' => "{debounce : {'default' : 1000}}"
-	                                    , 'ng-change' => "checkEmailAvailability(prof.email, 'Student')")
+	                                    , 'ng-model' => 'profile.prof.email'
+	                                )
 	                            ) !!}
 	                        </div>
 	                        <div class="col-xs-2">
-	                        	<a href="{!! route('student.profile.edit_email')!!}" class="edit-email">Edit</a>
+	                        	<!-- <a href="{!! route('student.profile.edit_email')!!}" class="edit-email">Edit</a> -->
 	                        </div>	
 	                    </div>
 	                    {{-- show if there is a pending email --}}
@@ -74,13 +73,12 @@
 	                                    'class' => 'form-control'
 	                                    , 'placeholder' => 'Email Address' 
 	                                    , 'ng-disabled' => 'true' 
-	                                    , 'ng-model' => 'prof.email'
-	                                    , 'ng-model-options' => "{debounce : {'default' : 1000}}"
-	                                    , 'ng-change' => "checkEmailAvailability(prof.email, 'Student')")
+	                                    , 'ng-model' => 'profile.prof.pending_email'
+	                                )
 	                            ) !!}
 	                        </div>
 	                        <div class="col-xs-2">
-	                        	<a href="{!! route('student.profile.edit_email')!!}" class="edit-email">Confirm</a>
+	                        	<!-- <a href="{!! route('student.profile.edit_email')!!}" class="edit-email">Confirm</a> -->
 	                        </div>	
 	                    </div>
 				</fieldset>
@@ -95,8 +93,8 @@
 	                                , array(
 	                                    'class' => 'form-control'
 	                                    , 'placeholder' => 'First Name'
-	                                    , 'ng-disabled' => '!edit' 
-	                                    , 'ng-model' => 'prof.first_name')
+	                                    , 'ng-disabled' => '!profile.edit' 
+	                                    , 'ng-model' => 'profile.prof.first_name')
 	                            ) !!}
 	                        </div>
 	                    </div>
@@ -107,13 +105,14 @@
 	                                , array(
 	                                    'class' => 'form-control'
 	                                    , 'placeholder' => 'Last Name'
-	                                    , 'ng-disabled' => '!edit' 
-	                                    , 'ng-model' => 'prof.last_name')
+	                                    , 'ng-disabled' => '!profile.edit' 
+	                                    , 'ng-model' => 'profile.prof.last_name')
 	                            ) !!}
 	                        </div>
 	                    </div>
 				</fieldset>
-				<fieldset>
+
+				<fieldset ng-if="profile.is_teacher">
 					<legend class="client-legend">
 						School Information
 					</legend>
@@ -124,69 +123,16 @@
 	                            , array(
 	                                'class' => 'form-control'
 	                                , 'placeholder' => 'School Name'
-	                                , 'ng-disabled' => '!edit' 
-	                                , 'ng-model' => 'prof.school_name')
+	                                , 'ng-disabled' => '!profile.edit' 
+	                                , 'ng-model' => 'profile.prof.school_name')
 	                        ) !!}
-	                    </div>
-	                </div>
-
-	                <div class="form-group">
-						<label for="" class="col-md-2 control-label">Address <span class="required">*</span></label>
-	                    <div class="col-md-5">
-	                        {!! Form::text('address', ''
-	                            , array(
-	                                'class' => 'form-control'
-	                                , 'placeholder' => 'Address'
-	                                , 'ng-disabled' => '!edit' 
-	                                , 'ng-model' => 'prof.address')
-	                        ) !!}
-	                    </div>
-	                </div>
-	                <div class="form-group">
-						<label for="" class="col-md-2 control-label">City <span class="required">*</span></label>
-	                    <div class="col-md-4">
-	                        {!! Form::text('city', ''
-	                            , array(
-	                                'class' => 'form-control'
-	                                , 'placeholder' => 'City'
-	                                , 'ng-disabled' => '!edit' 
-	                                , 'ng-model' => 'prof.city')
-	                        ) !!}
-	                    </div>
-	                    <label for="" class="col-md-2 control-label">State <span class="required">*</span></label>
-	                    <div class="col-md-4">
-	                        {!! Form::text('state', ''
-	                            , array(
-	                                'class' => 'form-control'
-	                                , 'placeholder' => 'City'
-	                                , 'ng-disabled' => '!edit' 
-	                                , 'ng-model' => 'prof.state')
-	                        ) !!}
-	                    </div>
-	                </div>
-	                <div class="form-group" ng-init="getCountries()">
-						<label for="" class="col-md-2 control-label">Postal Code <span class="required">*</span></label>
-	                    <div class="col-md-4">
-	                        {!! Form::text('postal_code', ''
-	                            , array(
-	                                'class' => 'form-control'
-	                                , 'placeholder' => 'Postal Code'
-	                                , 'ng-disabled' => '!edit' 
-	                                , 'ng-model' => 'prof.postal_code')
-	                        ) !!}
-	                    </div>
-	                    <label for="" class="col-md-2 control-label">Country <span class="required">*</span></label>
-	                    <div class="col-md-4">
-	                        <select name="country" class="form-control" ng-model="reg.country" ng-disabled="!edit">
-                                <option value="">-- Select Country --</option>
-                                <option ng-repeat="country in countries" value="{! country.id !}">{! country.name!}</option>
-                            </select>
 	                    </div>
 	                </div>
 				</fieldset>
-				<fieldset>
+
+				<fieldset ng-if="profile.is_principal">
 					<legend class="client-legend">
-						Other Address Information(Optional)
+						School Information
 					</legend>
 					<div class="form-group">
 						<label for="" class="col-md-2 control-label">School Name <span class="required">*</span></label>
@@ -195,21 +141,21 @@
 	                            , array(
 	                                'class' => 'form-control'
 	                                , 'placeholder' => 'School Name'
-	                                , 'ng-disabled' => '!edit' 
-	                                , 'ng-model' => 'prof.school_name')
+	                                , 'ng-disabled' => '!profile.edit' 
+	                                , 'ng-model' => 'profile.prof.school_name')
 	                        ) !!}
 	                    </div>
 	                </div>
 
 	                <div class="form-group">
-						<label for="" class="col-md-2 control-label">Address <span class="required">*</span></label>
+						<label for="" class="col-md-2 control-label">Street Address <span class="required">*</span></label>
 	                    <div class="col-md-5">
-	                        {!! Form::text('address', ''
+	                        {!! Form::text('street_address', ''
 	                            , array(
 	                                'class' => 'form-control'
 	                                , 'placeholder' => 'Address'
-	                                , 'ng-disabled' => '!edit' 
-	                                , 'ng-model' => 'prof.address')
+	                                , 'ng-disabled' => '!profile.edit' 
+	                                , 'ng-model' => 'profile.prof.school_street_address')
 	                        ) !!}
 	                    </div>
 	                </div>
@@ -220,8 +166,8 @@
 	                            , array(
 	                                'class' => 'form-control'
 	                                , 'placeholder' => 'City'
-	                                , 'ng-disabled' => '!edit' 
-	                                , 'ng-model' => 'prof.city')
+	                                , 'ng-disabled' => '!profile.edit' 
+	                                , 'ng-model' => 'profile.prof.school_city')
 	                        ) !!}
 	                    </div>
 	                    <label for="" class="col-md-2 control-label">State <span class="required">*</span></label>
@@ -230,8 +176,8 @@
 	                            , array(
 	                                'class' => 'form-control'
 	                                , 'placeholder' => 'City'
-	                                , 'ng-disabled' => '!edit' 
-	                                , 'ng-model' => 'prof.state')
+	                                , 'ng-disabled' => '!profile.edit' 
+	                                , 'ng-model' => 'profile.prof.school_state')
 	                        ) !!}
 	                    </div>
 	                </div>
@@ -242,26 +188,101 @@
 	                            , array(
 	                                'class' => 'form-control'
 	                                , 'placeholder' => 'Postal Code'
-	                                , 'ng-disabled' => '!edit' 
-	                                , 'ng-model' => 'prof.postal_code')
+	                                , 'ng-disabled' => '!profile.edit' 
+	                                , 'ng-model' => 'profile.prof.school_zip')
 	                        ) !!}
 	                    </div>
 	                    <label for="" class="col-md-2 control-label">Country <span class="required">*</span></label>
 	                    <div class="col-md-4">
-	                        <select name="country" class="form-control" ng-model="reg.country" ng-disabled="!edit">
-                                <option value="">-- Select Country --</option>
-                                <option ng-repeat="country in countries" value="{! country.id !}">{! country.name!}</option>
+	                        <select name="country" class="form-control" ng-model="profile.prof.school_country" ng-disabled="!profile.edit">
+                                <option selected="selected" value="">-- Select Country --</option>
+                                <option ng-selected="{! profile.prof.school_country == country.id !}" ng-repeat="country in countries" value="{! country.id !}">{! country.name!}</option>
                             </select>
 	                    </div>
 	                </div>
 				</fieldset>
-				<div class="form-group">
-					<div class="btncon-client col-xs-6" style="text-align:center;">
-						<a class="btn btn-blue" ng-click="editProfile()">Edit</a>
-					</div>
-					<div class="btncon-client col-xs-6" style="text-align:center;">
-						<a class="btn btn-gold" ng-click="setActive('index')">Cancel</a>
-					</div>	
+				<fieldset>
+					<legend class="client-legend">
+						Other Address Information(Optional)
+					</legend>
+	                <div class="form-group">
+						<label for="" class="col-md-2 control-label">Street Address <span class="required">*</span></label>
+	                    <div class="col-md-5">
+	                        {!! Form::text('street_address', ''
+	                            , array(
+	                                'class' => 'form-control'
+	                                , 'placeholder' => 'Address'
+	                                , 'ng-disabled' => '!profile.edit' 
+	                                , 'ng-model' => 'profile.prof.street_address')
+	                        ) !!}
+	                    </div>
+	                </div>
+	                <div class="form-group">
+						<label for="" class="col-md-2 control-label">City <span class="required" ng-if="profile.is_required">*</span></label>
+	                    <div class="col-md-4">
+	                        {!! Form::text('city', ''
+	                            , array(
+	                                'class' => 'form-control'
+	                                , 'placeholder' => 'City'
+	                                , 'ng-disabled' => '!profile.edit' 
+	                                , 'ng-model' => 'profile.prof.city')
+	                        ) !!}
+	                    </div>
+	                    <label for="" class="col-md-2 control-label">State <span class="required" ng-if="profile.is_required">*</span></label>
+	                    <div class="col-md-4">
+	                        {!! Form::text('state', ''
+	                            , array(
+	                                'class' => 'form-control'
+	                                , 'placeholder' => 'City'
+	                                , 'ng-disabled' => '!profile.edit' 
+	                                , 'ng-model' => 'profile.prof.state')
+	                        ) !!}
+	                    </div>
+	                </div>
+	                <div class="form-group" ng-init="getCountries()">
+						<label for="" class="col-md-2 control-label">Postal Code <span class="required" ng-if="profile.is_required">*</span></label>
+	                    <div class="col-md-4">
+	                        {!! Form::text('zip', ''
+	                            , array(
+	                                'class' => 'form-control'
+	                                , 'placeholder' => 'Postal Code'
+	                                , 'ng-disabled' => '!profile.edit' 
+	                                , 'ng-model' => 'profile.prof.zip')
+	                        ) !!}
+	                    </div>
+	                    <label for="" class="col-md-2 control-label">Country <span class="required" ng-if="profile.is_required">*</span></label>
+	                    <div class="col-md-4">
+	                        <select name="country" class="form-control" ng-model="profile.prof.country" ng-disabled="!profile.edit">
+                                <option selected="selected" value="">-- Select Country --</option>
+                                <option ng-selected="{! profile.prof.country == country.id !}" ng-repeat="country in countries" value="{! country.id !}">{! country.name!}</option>
+                            </select>
+	                    </div>
+	                </div>
+				</fieldset>
+				{!! Form::close() !!}
+				<div class="btn-container">
+					{!! Form::button('Edit'
+						, array(
+							'class' => 'btn btn-gold btn-medium'
+							, 'ng-click' => "profile.setClientProfileActive('edit')"
+							, 'ng-if' => '!profile.edit'
+						)
+					) !!}
+
+					{!! Form::button('Save'
+						, array(
+							'class' => 'btn btn-gold btn-medium'
+							, 'ng-click' => 'profile.saveClientProfile()'
+							, 'ng-if' => 'profile.edit'
+						)
+					) !!}
+
+					{!! Form::button('Cancel'
+						, array(
+							'class' => 'btn btn-blue btn-medium'
+							, 'ng-click' => "profile.setClientProfileActive('index')"
+						)
+					) !!}
 				</div>
 				</div>
 			</div>
@@ -272,5 +293,8 @@
 @section('footer')
 
 @section('scripts')
+	
+	{!! Html::script('/js/client/controllers/profile_controller.js') !!}
+	{!! Html::script('/js/client/services/profile_service.js') !!}
 
 @stop
