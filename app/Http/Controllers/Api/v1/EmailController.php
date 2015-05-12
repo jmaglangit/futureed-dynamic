@@ -111,7 +111,7 @@ class EmailController extends ApiController {
 
     public function resendChangeEmail(){
 
-        $input = Input::only('new_email','user_type','urldecode(str)');
+        $input = Input::only('new_email','user_type','url');
 
         $this->addMessageBag($this->email($input,'new_email'));
         $this->addMessageBag($this->userTypeClientStudent($input,'user_type'));
