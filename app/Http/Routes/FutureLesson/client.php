@@ -2,6 +2,7 @@
 	Routes::group(['prefix' => '/client'], function()
 	{
 		Routes::get('/', 'FutureLesson\Client\LoginController@index');
+		
 		Routes::get('/password/reset', [
 			'as' => 'client.password.reset'
 			, 'uses' =>'FutureLesson\Client\LoginController@forgot_password'
@@ -56,16 +57,26 @@
 			
 		});
 
-		Routes::group(['prefix' => '/profile'], function()
+		Routes::group(['prefix' => '/profile'
+					, 'middleware' => 'client'], function()
 		{
 			Routes::get('/', [ 
 					'as' => 'client.profile.index'
-					, 'middleware' => 'client'
 					, 'uses' => 'FutureLesson\Client\ProfileController@index'
 				]);
+			
+			Routes::get('/index_form', [
+					'as' => 'client.profile.index_form'
+					, 'uses' => 'FutureLesson\Client\ProfileController@index_form'
+				]);
+
+			Routes::get('/change_password_form', [
+					'as' => 'client.profile.change_password_form'
+					, 'uses' => 'FutureLesson\Client\ProfileController@change_password_form'
+				]);
+
 			Routes::get('/change-password', [ 
 					'as' => 'client.profile.change_password'
-					, 'middleware' => 'client'
 					, 'uses' => 'FutureLesson\Client\ProfileController@changePassword'
 				]);
 		});

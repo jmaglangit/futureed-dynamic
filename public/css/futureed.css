@@ -528,7 +528,7 @@ li.active .rnd-identifier{
 	background: #0E79A3;
 	color: #fff;
 }
-.side-nav a:hover{
+.side-nav a{
 	text-decoration: none;
 }
 .dshbrd-con .content .hdr{
@@ -931,6 +931,15 @@ div > .btncon > a {
 	color: #EA7058;
   	background-color: #FBE6E1;
   	border-color: #F8B9A7;
+  	font-size: 12px;
+  	margin-left: 60px;
+  	padding: 10px;
+}
+
+.alert-success{
+	color: #3c763d;
+  	background-color: #dff0d8;
+  	border-color: #d6e9c6;
   	font-size: 12px;
   	margin-left: 60px;
   	padding: 10px;
