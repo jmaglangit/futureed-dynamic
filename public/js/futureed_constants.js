@@ -9,11 +9,13 @@ var Constants = {
 	, CLIENT		: "Client" 
 	, PRINCIPAL		: "Principal"
 	, PARENT		: "Parent"
+	, TEACHER		: "Teacher"
 
 	, AVATAR		: "avatar"
 	, REWARDS		: "rewards"
 	, PASSWORD		: "password"
 	, INDEX			: "index"
+	, EDIT			: "edit"
 
 	, USER_PRINCIPAL: "user_principal"
 	, USER_PARENT 	: "user_parent"

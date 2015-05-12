@@ -26,6 +26,7 @@ body.student{
     background-repeat: no-repeat;
     background-position: 50% 50%;
 }
+
 body {/*background: radial-gradient(transparent 50%, rgba(0, 0, 0, 0.3) 100%), linear-gradient(#d77a6b, #d2c09c 60%, #876d54);*/
   /*background: rgba(255,255,255,1); background: -moz-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 49%, rgba(242,242,242,1) 100%); background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(255,255,255,1)), color-stop(49%, rgba(255,255,255,1)), color-stop(100%, rgba(242,242,242,1))); background: -webkit-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 49%, rgba(242,242,242,1) 100%); background: -o-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 49%, rgba(242,242,242,1) 100%);adient(center, ellipse cover, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 49%, rgba(242,242,242,1) 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f2f2f2', GradientType=1 );  */
   font: 16px 'Roboto', sans-serif; color: #8e8171; /*margin-bottom: 30px;*/}
@@ -527,7 +528,7 @@ li.active .rnd-identifier{
 	background: #0E79A3;
 	color: #fff;
 }
-.side-nav a:hover{
+.side-nav a{
 	text-decoration: none;
 }
 .dshbrd-con .content .hdr{
@@ -930,6 +931,15 @@ div > .btncon > a {
 	color: #EA7058;
   	background-color: #FBE6E1;
   	border-color: #F8B9A7;
+  	font-size: 12px;
+  	margin-left: 60px;
+  	padding: 10px;
+}
+
+.alert-success{
+	color: #3c763d;
+  	background-color: #dff0d8;
+  	border-color: #d6e9c6;
   	font-size: 12px;
   	margin-left: 60px;
   	padding: 10px;

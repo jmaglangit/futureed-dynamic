@@ -85,8 +85,30 @@
 	                                    , 'ng-change' => "checkEmailAvailability(prof.email, 'Student')")
 	                            ) !!}
 	                        </div>
-	                        <div class="col-xs-2" ng-if="change_email">
-	                        	<!-- <a href="{!! route('student.profile.edit_email')!!}" class="edit-email">Edit</a> -->
+	                        <div class="col-xs-2">
+	                        	<a href="{!! route('student.profile.edit_email')!!}" class="edit-email">Edit</a>
+	                        </div>	
+	                        <div class="col-xs-5 alert-message">
+	                            <i ng-if="e_loading" class="fa fa-spinner fa-spin"></i>
+	                            <i ng-if="e_success" class="fa fa-check success-color"></i>
+	                            <span ng-if="e_error" class="alert alert-error">{! e_error !}</span>
+	                        </div>
+	                    </div>
+	                    <div class="form-group" ng-if="confirm_email">
+	                        <label for="" class="col-md-2 control-label">Pending Email <span class="required">*</span></label>
+	                        <div class="col-md-5">
+	                        	{!! Form::text('email', ''
+	                                , array(
+	                                    'class' => 'form-control'
+	                                    , 'placeholder' => 'Email Address' 
+	                                    , 'ng-disabled' => 'true' 
+	                                    , 'ng-model' => 'prof.new_email'
+	                                    , 'ng-model-options' => "{debounce : {'default' : 1000}}"
+	                                    , 'ng-change' => "checkEmailAvailability(prof.email, 'Student')")
+	                            ) !!}
+	                        </div>
+	                        <div class="col-xs-2">
+	                        	<a href="{!! route('student.profile.edit_email')!!}" class="edit-email" ng-model>Confirm</a>
 	                        </div>	
 	                        <div class="col-xs-5 alert-message">
 	                            <i ng-if="e_loading" class="fa fa-spinner fa-spin"></i>

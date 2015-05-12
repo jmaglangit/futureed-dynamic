@@ -1,0 +1,19 @@
+@charset "UTF-8"; 
+
+body.admin{
+	background-color: #ededed !important;
+	background-image: none;
+	background-attachment: fixed;
+	font-family: 'Schoolbell', sans-serif;
+}
+
+.lock-logo{
+	width:120px;
+	margin:0 auto 30px;
+}
+.icon-lock{
+	background:#e8e8e8;
+	border-radius:200px;
+	padding:20px;
+	width:120px;
+}
