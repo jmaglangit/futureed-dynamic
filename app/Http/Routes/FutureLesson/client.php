@@ -8,11 +8,17 @@
 			]);
 		Routes::get('/email/confirm', [
 			'as' => 'client.login.confirm'
-			, 'uses' => 'FutureLesson\Client\LoginController@registration'
+			, 'uses' => 'FutureLesson\Client\LoginController@enter_confirmation'
 		]);
 		Routes::get('/registration', [
 			'as' => 'client.registration'
 			, 'uses' => 'FutureLesson\Client\LoginController@registration'
+		]);
+		Routes::get('/registration_form', [
+			'uses' => 'FutureLesson\Client\LoginController@registration_form' 
+		]);
+		Routes::get('/registration_success', [
+			'uses' => 'FutureLesson\Client\LoginController@registration_success' 
 		]);
 		Routes::get('/logout', [ 
 			'as' => 'client.logout'
@@ -46,6 +52,16 @@
 					'as' => 'client.dashboard.index'
 					, 'middleware' => 'client'
 					, 'uses' => 'FutureLesson\Client\DashboardController@index'
+				]);
+			
+		});
+
+		Routes::group(['prefix' => '/profile'], function()
+		{
+			Routes::get('/', [ 
+					'as' => 'client.profile.index'
+					, 'middleware' => 'client'
+					, 'uses' => 'FutureLesson\Client\ProfileController@index'
 				]);
 			
 		});

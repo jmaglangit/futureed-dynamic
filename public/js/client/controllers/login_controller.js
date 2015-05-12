@@ -1,12 +1,33 @@
 angular.module('futureed')
-	.controller('LoginController', LoginController);
+	.controller('LoginController', LoginController)
+	.directive('registrationForm', registrationForm)
+	.directive('registrationSuccess', registrationSuccess);
+
+function registrationForm() {
+	return {
+		templateUrl : '/client/registration_form'
+	}
+}
+
+function registrationSuccess() {
+	return {
+		templateUrl : '/client/registration_success'
+	}
+}
+
 
 function LoginController($scope, apiService) {
+	var vm = this;
 	this.clientLogin = clientLogin;
 	this.clientForgotPassword = clientForgotPassword;
 	this.clientValidateCode = clientValidateCode;
 	this.clientResendCode = clientResendCode;
 	this.resetClientPassword = resetClientPassword;
+
+	this.selectRole = selectRole;
+	this.registerClient = registerClient;
+	this.resendClientConfirmation = resendClientConfirmation;
+	this.confirmClientRegistration = confirmClientRegistration;
 
 	function clientLogin() {
 	    $scope.errors = Constants.FALSE;
@@ -126,6 +147,127 @@ function LoginController($scope, apiService) {
 	    }
 	}
 
+	function selectRole(role) {
+	    this.principal = Constants.FALSE;
+	    this.teacher = Constants.FALSE;
+	    this.parent = Constants.FALSE;
+	    this.reg = (this.reg) ? this.reg: {} ;
+
+	    switch(role) {
+	      case Constants.USER_PRINCIPAL :
+	        this.required = Constants.FALSE;
+	        this.role_click = Constants.TRUE;
+	        this.principal = Constants.TRUE;
+	        this.reg.client_role = Constants.PRINCIPAL;
+	        break;
+
+	      case Constants.USER_PARENT    :
+	        this.required = Constants.TRUE;
+	        this.role_click = Constants.TRUE;
+	        this.parent = Constants.TRUE;
+	        this.reg.client_role = Constants.PARENT;
+	        break;
+
+	      default:
+	        break;
+	    }
+	}
+
+	function registerClient() {
+	    $scope.$parent.errors = Constants.FALSE;
+
+	    $("#registration_form input").removeClass("required-field");
+	    $("#registration_form select").removeClass("required-field");
+	    
+	    if($scope.e_error || $scope.u_error) {
+	      $("html, body").animate({ scrollTop: 320 }, "slow");
+	    } else if(!this.term) {
+	      $scope.$parent.errors = ["Please accept the terms and conditions."];
+	      $("html, body").animate({ scrollTop: 0 }, "slow");
+	    } else if(this.reg.password != this.reg.confirm_password) {
+	      $("#registration_form input[name='password']").addClass("required-field");
+	      $("#registration_form input[name='confirm_password']").addClass("required-field");
+	      $scope.$parent.errors = [Constants.MSG_PW_NOT_MATCH];
+	      $("html, body").animate({ scrollTop: 0 }, "slow");
+	    } else {
+	      $scope.ui_block();
+	      this.email = this.reg.email;
+
+	      apiService.registerClient(this.reg).success(function(response) {
+	        if(response.status == Constants.STATUS_OK) {
+	          if(response.errors) {
+	            $scope.errorHandler(response.errors);
+
+	            angular.forEach(response.errors, function(value, key) {
+	              $("#registration_form input[name='" + value.field +"']").addClass("required-field");
+	              $("#registration_form select[name='" + value.field +"']").addClass("required-field");
+	            });
+	          } else if(response.data) {
+	            $scope.$parent.registered = Constants.TRUE;
+	          }
+	        }
+	        $scope.ui_unblock();
+	      }).error(function(response) {
+	        $scope.internalError();
+	        $scope.ui_unblock();
+	      });
+	    }
+	  }
+
+	function resendClientConfirmation() {
+	    $scope.$parent.errors = Constants.FALSE;
+
+	    var register = this;
+	    register.user_type = Constants.CLIENT;
+	    register.email = (!isStringNullorEmpty(register.email)) ? register.email : $("#registration_success_form input[name='email']").val();
+
+	    $scope.ui_block();
+	    apiService.resendConfirmation(register.email, register.user_type).success(function(response) {
+	      if(response.status == Constants.STATUS_OK) {
+	        if(response.errors) {
+	          $scope.errorHandler(response.errors);
+
+	          console.log($scope.errors);
+	          angular.forEach($scope.errors, function(value, key) {
+	          	if(angular.equals(value, Constants.MSG_ACC_CONFIRMED)) {
+	          		register.account_confirmed = Constants.TRUE;
+	          		console.log(register.account_confirmed);
+	          	}
+	          });
+	        } else if(response.data) {
+	          register.resent = Constants.TRUE;
+	        }
+	      }
+	      $scope.ui_unblock();
+	    }).error(function(response) {
+	      $scope.internalError();
+	      $scope.ui_unblock();
+	    });
+	}
+
+  	function confirmClientRegistration() {
+  		$scope.$parent.errors = Constants.FALSE;
+	    
+	    var register = this;
+	    register.user_type = Constants.CLIENT;
+	    register.email = (!isStringNullorEmpty(register.email)) ? register.email : $("#registration_success_form input[name='email']").val();
+
+	    $scope.ui_block();
+	    apiService.confirmCode(register.email, register.confirmation_code, register.user_type).success(function(response) {
+	      if(response.status == Constants.STATUS_OK) {
+	        if(response.errors) {
+	          $scope.errorHandler(response.errors);
+	        } else if(response.data){
+	          register.confirmed = Constants.TRUE;
+	        } 
+	      }
+
+	      $scope.ui_unblock();
+	    }).error(function(response) {
+	      $scope.internalError();
+	      $scope.ui_unblock();
+	    });
+	}
 }
 
 LoginController.$inject = ['$scope', 'apiService'];

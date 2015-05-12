@@ -134,9 +134,11 @@ body {/*background: radial-gradient(transparent 50%, rgba(0, 0, 0, 0.3) 100%), l
 	box-shadow: 0 0 0 1px #055A7F, 0 3px 3px rgba(0, 0, 0, 0.3);
 	background-color: #055A7F;
 }
-.btn-blue:active {
-	box-shadow: inset 0px 6px 21px 3px rgba(188,74,39,1);
-	color: #fff;
+.btn-blue:hover {
+	background-color: #055A7F;
+	box-shadow: 0 0 0 1px #055A7F, 0 3px 3px rgba(0, 0, 0, 0.3);
+	-webkit-box-shadow: inset 0 5px 8px rgba(0,0,0,.125);
+  	box-shadow: inset 0 5px 8px rgba(0,0,0,.125);
 }
 
 .btn-gold {
@@ -369,6 +371,16 @@ fieldset legend{color: #8e8171; font-size: 16px; text-transform: uppercase;}
 	padding:20px; width:120px;
 }
 
+.client .login .roundcon{
+	width:120px;
+	margin: 30px auto;
+}
+.client .login .roundcon i.fa{
+	background:#e8e8e8;
+	border-radius:200px;
+	padding:20px; width:120px;
+}
+
 /*----- FOLLOW UP REGISTRATION ----- */
 .follow-up-reg{
 	max-width: 880px;
@@ -499,11 +511,20 @@ li.active .rnd-identifier{
 	display: block;
 	padding: 10px 26px;
 	font-size: 13px;
-	border-bottom: 1px solid #fff;
 	color: #358F98;
+}
+.client-nav ul li a{
+	display: block;
+	padding: 10px 26px;
+	font-size: 13px;
+	color: #fff;
 }
 .side-nav ul li a:hover, .side-nav ul li.active a{
 	background: #065A7F;
+	color: #fff;
+}
+.client-nav ul li a:hover, .side-nav ul li.active a{
+	background: #0E79A3;
 	color: #fff;
 }
 .side-nav a:hover{
@@ -756,8 +777,8 @@ footer{font:normal 12px/30px arial; }
 */
 
 
-.client {
-
+.client-content{
+	margin:30px 0 0 240px;
 }
 
 .client .login .title {
@@ -782,6 +803,63 @@ footer{font:normal 12px/30px arial; }
 .role-div {
 	-webkit-transition:all linear 0.5s;
   	transition:all linear 0.5s;
+}
+.client-nav{
+	background-color: #03658A !important;
+}
+.client-title{
+	color: #fff;
+  	font-size: 1.2em;
+  	font-weight: 300;
+  	margin: 30px 0 0 30px;
+}	
+.title-row{
+	margin: 0 0 10px 20px;
+	color: #fff;
+	font-size: 1.1em;
+	position: relative;
+	top: 5px;
+}
+li > a > span > .fa{
+	margin: 0 10px 0 5px;
+}
+.client-prof{
+	height: 100px;
+	border-bottom: 1px solid #0F79A3;
+}
+.client-name{
+	color: #fff;
+  	font-style: italic;
+  	font-size: 14px;
+  	margin: 10px 0 0 30px;
+}
+.content-title{
+	border-bottom: 1px solid #DCDCDC;
+  	margin: 30px 25px 0 25px;
+  	height: 35px;
+}
+.title-main-content{
+	font-size: 1.5em;
+  	color: #03658A;
+}
+.sbtitle-main-content{
+	color: #03658A;
+  	font-size: 1.1em;
+}
+.client-legend{
+	text-transform: none;
+	font-family: inherit !important;
+	font-size: 18px !important;
+}
+.btncon-client{
+	font-style: inherit !important;
+}
+.btncon-client > a.btn{
+	width: auto;
+  	padding: 6px 30px;
+  	margin-right: 20px;
+  	margin-bottom: 20px;
+  	min-width: 240px;
 }
 
 /*
@@ -856,3 +934,4 @@ div > .btncon > a {
   	margin-left: 60px;
   	padding: 10px;
 }
+

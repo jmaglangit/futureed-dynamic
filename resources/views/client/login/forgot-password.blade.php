@@ -80,6 +80,7 @@
                   'id' => 'forgot_success_form'
             )
         ) !!} 
+
         <div ng-if="!resent">
           <div class="roundcon">
             <i class="fa fa-check fa-5x img-rounded text-center"></i>
@@ -98,11 +99,26 @@
           </div>
         </div>
 
-          <p ng-if="resent">
-            A new reset code has been sent to your email.
-          </p>
+        <div ng-if="resent">
+          <div class="roundcon">
+            <i class="fa fa-refresh fa-5x img-rounded text-center"></i>
+          </div>
+          <div>
+            <p class="text">
+              <strong>Success!</strong>
+              <br /> A new reset code has been sent to your email account.
+            </p>
+          
+            <br />
+            <div class="form-group">
+              <small>Please check your inbox or your spam folder for the email. 
+              <br />The email contains a reset code that you need to input below.</small>
+            </div>
+          </div>
+        </div>
+
           <div class="form-group">
-            {!! Form::label(null, 'Enter Code:') !!}
+            {!! Form::label(null, 'Enter Reset Code:') !!}
 
             {!! Form::text('reset_code', '',
                   array(
