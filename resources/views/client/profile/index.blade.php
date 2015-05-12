@@ -1,7 +1,7 @@
 @extends('client.app')
 
 @section('navbar')
-    @include('student.partials.main-nav')
+    @include('client.partials.main-nav')
 @stop
 @section('content')
 	<div class="container dshbrd-con" ng-controller="ProfileController as profile" ng-cloak>
@@ -61,7 +61,7 @@
 	                            ) !!}
 	                        </div>
 	                        <div class="col-xs-2">
-	                        	<!-- <a href="{!! route('student.profile.edit_email')!!}" class="edit-email">Edit</a> -->
+	                        	<!-- <a href="#" class="edit-email">Edit</a> -->
 	                        </div>	
 	                    </div>
 	                    {{-- show if there is a pending email --}}
@@ -78,7 +78,7 @@
 	                            ) !!}
 	                        </div>
 	                        <div class="col-xs-2">
-	                        	<!-- <a href="{!! route('student.profile.edit_email')!!}" class="edit-email">Confirm</a> -->
+	                        	<!-- <a href="#" class="edit-email">Confirm</a> -->
 	                        </div>	
 	                    </div>
 				</fieldset>
@@ -146,7 +146,6 @@
 	                        ) !!}
 	                    </div>
 	                </div>
-
 	                <div class="form-group">
 						<label for="" class="col-md-2 control-label">Street Address <span class="required">*</span></label>
 	                    <div class="col-md-5">
@@ -159,7 +158,7 @@
 	                        ) !!}
 	                    </div>
 	                </div>
-	                <div class="form-group">
+	                <div class="form-group" ng-if="principal">
 						<label for="" class="col-md-2 control-label">City <span class="required">*</span></label>
 	                    <div class="col-md-4">
 	                        {!! Form::text('city', ''
@@ -181,7 +180,7 @@
 	                        ) !!}
 	                    </div>
 	                </div>
-	                <div class="form-group" ng-init="getCountries()">
+	                <div class="form-group" ng-init="getCountries()" ng-if="principal">
 						<label for="" class="col-md-2 control-label">Postal Code <span class="required">*</span></label>
 	                    <div class="col-md-4">
 	                        {!! Form::text('postal_code', ''
@@ -202,8 +201,11 @@
 	                </div>
 				</fieldset>
 				<fieldset>
-					<legend class="client-legend">
+					<legend class="client-legend" ng-if="!profile.is_parent">
 						Other Address Information(Optional)
+					</legend>
+					<legend class="client-legend" ng-if="profile.is_parent">
+						Address Information
 					</legend>
 	                <div class="form-group">
 						<label for="" class="col-md-2 control-label">Street Address <span class="required">*</span></label>

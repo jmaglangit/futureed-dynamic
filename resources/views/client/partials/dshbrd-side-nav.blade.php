@@ -1,14 +1,22 @@
 <div class="client-prof">
-	<div class="client-title">
+	<div class="client-title" ng-if="!teacher && !parent && principal">
 		Principal Dashboard
+	</div>
+	<div class="client-title" ng-if="teacher && !parent && !principal">
+		Teacher Dashboard
+	</div>
+	<div class="client-title" ng-if="!teacher && parent && !principal">
+		Parent Dashboard
 	</div>
 	<div class="client-name">
 		Welcome, {! profile.prof.first_name !}
 	</div>
 </div>
+
 <div class="title-row">
 	My Account
 </div>
+
 <ul ng-init="profile.setClientProfileActive('{!! $active !!}')">
 	<li ng-class="{ 'active' : profile.active_index }">
 		<a href="" ng-click="profile.setClientProfileActive('index')"><span><i class="fa fa-book"></i></span>View Client Account Profile</a>

@@ -52,7 +52,7 @@ class AvatarsTableSeeder extends Seeder {
                 [
                     'code' => Carbon::now()->addMinute($i++)->timestamp,
                     'gender' => 'Male',
-                    'avatar_image' => 'doctor-male/doctor_male-02_main.png',
+                    'avatar_image' => 'doctor-male/doctor_male-2_main.png',
                     'points_to_unlock' => 50,
                     'description' => 'sample ',
                     'created_by' => 1,
@@ -75,6 +75,17 @@ class AvatarsTableSeeder extends Seeder {
                     'code' => Carbon::now()->addMinute($i++)->timestamp,
                     'gender' => 'Male',
                     'avatar_image' => 'engineer-male/engineer_male_9_main.png',
+                    'points_to_unlock' => 50,
+                    'description' => 'sample ',
+                    'created_by' => 1,
+                    'updated_by' => 1,
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ],
+                [
+                    'code' => Carbon::now()->addMinute($i++)->timestamp,
+                    'gender' => 'Female',
+                    'avatar_image' => 'entrepreneur-female/entrepreneur_female_8_main.png',
                     'points_to_unlock' => 50,
                     'description' => 'sample ',
                     'created_by' => 1,
@@ -151,6 +162,28 @@ class AvatarsTableSeeder extends Seeder {
                 [
                     'code' => Carbon::now()->addMinute($i++)->timestamp,
                     'gender' => 'Female',
+                    'avatar_image' => 'scientist-female/scientist_female_2_main.png',
+                    'points_to_unlock' => 50,
+                    'description' => 'sample ',
+                    'created_by' => 1,
+                    'updated_by' => 1,
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ],
+                [
+                    'code' => Carbon::now()->addMinute($i++)->timestamp,
+                    'gender' => 'Male',
+                    'avatar_image' => 'scientist-male/scientist_male_1_main.png',
+                    'points_to_unlock' => 50,
+                    'description' => 'sample ',
+                    'created_by' => 1,
+                    'updated_by' => 1,
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ],
+                [
+                    'code' => Carbon::now()->addMinute($i++)->timestamp,
+                    'gender' => 'Female',
                     'avatar_image' => 'teacher-female/teacher_female_7_main.png',
                     'points_to_unlock' => 50,
                     'description' => 'sample ',
@@ -159,6 +192,18 @@ class AvatarsTableSeeder extends Seeder {
                     'created_at' => Carbon::now(),
                     'updated_at' => Carbon::now()
                 ],
+                [
+                    'code' => Carbon::now()->addMinute($i++)->timestamp,
+                    'gender' => 'Male',
+                    'avatar_image' => 'teacher-male/teacher_male_6_main.png',
+                    'points_to_unlock' => 50,
+                    'description' => 'sample ',
+                    'created_by' => 1,
+                    'updated_by' => 1,
+                    'created_at' => Carbon::now(),
+                    'updated_at' => Carbon::now()
+                ],
+
 
             ]);
     }
