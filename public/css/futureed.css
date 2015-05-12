@@ -527,7 +527,7 @@ li.active .rnd-identifier{
 	background: #0E79A3;
 	color: #fff;
 }
-.side-nav a:hover{
+.side-nav a{
 	text-decoration: none;
 }
 .dshbrd-con .content .hdr{

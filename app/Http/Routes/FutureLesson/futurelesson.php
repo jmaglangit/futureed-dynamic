@@ -1,6 +1,6 @@
 <?php
 	
-	include('client.php');
-	include('student.php');
+	include('Client.php');
+	include('Student.php');
 	
 ?>
