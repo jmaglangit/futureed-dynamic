@@ -199,13 +199,13 @@ class UserController extends ApiController{
 
     public function resendRegisterEmailCode(){
 
-        $input = Input::only('email','user_type','url');
+        $input = Input::only('email','user_type','callback_uri');
         $error = config('futureed-error.error_messages');
         $subject = config('futureed.subject_reg_resend');
 
         $this->addMessageBag($this->email($input,'email'));
         $this->addMessageBag($this->userTypeClientStudent($input,'user_type'));
-        $this->addMessageBag($this->validateString($input,'url'));
+        $this->addMessageBag($this->validateString($input,'callback_uri'));
 
 
         $msg_bag = $this->getMessageBag();
@@ -237,7 +237,7 @@ class UserController extends ApiController{
 
                         $student_id = $this->student->getStudentId($return['user_id']);
 
-                        $this->mail->resendStudentRegister($userDetails,$code['confirmation_code'],$input['url'],$subject);
+                        $this->mail->resendStudentRegister($userDetails,$code['confirmation_code'],$input['callback_uri'],$subject);
 
                         return $this->respondWithData(['id' => $student_id,
                                                        'user_type' => $input['user_type'] 
@@ -248,7 +248,7 @@ class UserController extends ApiController{
 
                         $client_id = $this->client->getClientId($return['user_id']);
 
-                        $this->mail->sendClientRegister($userDetails,$code['confirmation_code'],$input['url'],1);
+                        $this->mail->sendClientRegister($userDetails,$code['confirmation_code'],$input['callback_uri'],1);
 
                         return $this->respondWithData(['id' => $client_id,
                                                        'user_type' => $input['user_type'] 
