@@ -528,4 +528,32 @@ trait ApiValidatorTrait {
                 ->errorMessage();
         }
     }
+
+
+    public function checkContactNumber($input,$field_name){
+        $error_msg = config('futureed-error.error_messages');
+
+        $validator = Validator::make(
+            [
+                "$field_name" => strtolower($input["$field_name"]),
+            ],
+            [
+                "$field_name" => 'required|regex:/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/'
+            ],
+            [
+                'required' => $error_msg[2025],
+                'regex' => $error_msg[2115]
+            ]
+        );
+
+        if($validator->fails()){
+
+            $validator_msg = $validator->messages()->toArray();
+
+            return $this->setErrorCode(1022)
+                ->setField($field_name)
+                ->setMessage($validator_msg["$field_name"][0])
+                ->errorMessage();
+        }
+    }
 }
