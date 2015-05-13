@@ -40,7 +40,7 @@
             </div>	
         </div>
         {{-- show if there is a pending email --}}
-        <div class="form-group">
+        <div class="form-group" ng-if='profile.prof.new_email'>
             <label for="" class="col-md-2 control-label" style="color:#7F7504">Pending Email <span class="required">*</span></label>
             <div class="col-md-5">
             	{!! Form::text('email', ''
