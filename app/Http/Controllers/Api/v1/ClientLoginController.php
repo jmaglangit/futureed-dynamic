@@ -61,15 +61,7 @@ class ClientLoginController extends ClientController {
             return $this->respondErrorMessage(2113);
         }
         
-
-        //generate token
-        $token = $this->token->getToken(
-            [
-                'url' => Request::capture()->fullUrl(),
-            ]
-        );
-
-        return $this->respondWithData([
+        return $this->setHeader($this->getToken())->respondWithData([
                 'id' => $client_detail['id'],
                 'first_name' => $client_detail['first_name'],
                 'last_name' => $client_detail['last_name']

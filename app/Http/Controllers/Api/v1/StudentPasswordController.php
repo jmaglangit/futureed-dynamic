@@ -17,8 +17,18 @@ class StudentPasswordController extends StudentController {
         return $this->respondWithData($response['data']);
     }
 
-    //check password if correct
+    //check password if correct while logged in.
     public function confirmPassword($id){
+
+        //Check token authentication if valid.
+        $access_token = \Request::header('authorization');
+
+        $this->validateToken($access_token);
+
+        if($this->getMessageBag()){
+
+            return $this->respondWithError($this->getMessageBag());
+        }
 
         $input = Input::only('password_image_id');
         $error_msg = config('futureed-error.error_messages');
@@ -49,23 +59,15 @@ class StudentPasswordController extends StudentController {
 
             //get student data
             $response['data'] = $this->student->getStudentDetails($id);
-
-            $token = $this->token->getToken(
-                [
-                    'url' => Request::capture()->fullUrl(),
-                ]
-            );
-            $response['data'] = array_merge($response['data'],$token);
-
         }
 
         if($response['status'] <> 200){
 
-            return $this->respondErrorMessage(2012);
+            return $this->setHeader($this->getToken())->respondErrorMessage(2012);
 
         }elseif($response['status']==200){
 
-            return $this->respondWithData($response['data']);
+            return $this->setHeader($this->getToken())->respondWithData($response['data']);
         }
     }
     

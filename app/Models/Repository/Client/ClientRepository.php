@@ -120,12 +120,15 @@ class ClientRepository implements ClientRepositoryInterface{
 	 */
 	public function getClients($criteria = array(), $limit = 0, $offset = 0) {
 		
-		if(count($criteria) < 0 && $limit == 0 && $offset == 0) {
+		$clients = new Client();
 		
-			return Client::all()->toArray();
+		$count = 0;
+		
+		if(count($criteria) <= 0 && $limit == 0 && $offset == 0) {
 			
+			$count = $clients->count();
+		
 		} else {
-			$clients = new Client();
 			
 			if(count($criteria) > 0) {
 				if(isset($criteria['name'])) {
@@ -149,12 +152,17 @@ class ClientRepository implements ClientRepositoryInterface{
 				}
 			}
 		
+			$count = $clients->count();
+		
 			if($limit > 0 && $offset >= 0) {
 				$clients = $clients->offset($offset)->limit($limit);;
 			}
 														
-			return $clients->with('user')->orderBy('created_at', 'desc')->get();
 		}
+		
+		$clients = $clients->with('user')->orderBy('created_at', 'desc');
+		
+		return ['total' => $count, 'records' => $clients->get()->toArray()];	
 	}
     
 }
