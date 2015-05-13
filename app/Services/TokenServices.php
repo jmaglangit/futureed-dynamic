@@ -10,6 +10,7 @@ namespace FutureEd\Services;
 
 
 use Carbon\Carbon;
+use Illuminate\Http\Request;
 
 class TokenServices {
 
@@ -60,7 +61,7 @@ class TokenServices {
 //        dd(Carbon::now()->addSeconds($this->token['exp'])->toDateTimeString());
         $payload = [
             //full url of the issuer or just the main url
-            'iss' => (isset($token['url'])) ? $token['url'] : url(),
+            'iss' => (isset($token['url'])) ? $token['url'] : Request::capture()->fullUrl(),
 
             //time expiry of the token in unix set or auto set
             'exp' => (isset($token['exp'])) ?
@@ -90,7 +91,7 @@ class TokenServices {
     /*
      * @desc generate token
      */
-    public function getToken($payload_data){
+    public function getToken($payload_data = []){
 
         $header = $this->setHeader();
         $payload = $this->setPayload($payload_data);
@@ -120,13 +121,10 @@ class TokenServices {
     /*
      * @desc decodes token
      */
-    public function decodeToken($token){
-
-        $return = [
-            'status' => true
-        ];
+    public function validateToken($token){
 
         $token_decoded = explode(".",$token);
+
 
         //check details for comparison
         $header = $this->decodeHeader($token_decoded[0]);
@@ -141,17 +139,17 @@ class TokenServices {
 
         if(Carbon::now()->timestamp >= $token_exp->timestamp){
 
-            $return['status'] = false;
-            $return = array_merge($return, ['session' => 'Token expired']);
+            return false;
         }
 
         if (!$this->validateSignature($token_decoded[2],$signature)){
 
-            $return['status'] = false;
-            $return = array_merge($return, ['signature' => 'Token Manipulated']);
+            return false;
         }
 
-        return $return;
+        return true;
+
+
     }
 
 
