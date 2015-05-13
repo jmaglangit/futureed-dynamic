@@ -11,9 +11,9 @@ use Illuminate\Support\Facades\Input;
 class UserPasswordController extends UserController {
   
     public function passwordForgot(){
-        $input = Input::only('username','user_type','url');
+        $input = Input::only('username','user_type','callback_uri');
         $this->addMessageBag($this->userType($input,'user_type'));
-        $this->addMessageBag($this->validateString($input,'url'));
+        $this->addMessageBag($this->validateString($input,'callback_uri'));
         $subject = config('futureed.subject_forgot');
 
         
@@ -81,15 +81,15 @@ class UserPasswordController extends UserController {
 
                     if(strcasecmp($input['user_type'],config('futureed.student')) == 0){
 
-                      $this->mail->sendStudentMailResetPassword($userDetails,$code['confirmation_code'],$input['url'],$subject);
+                      $this->mail->sendStudentMailResetPassword($userDetails,$code['confirmation_code'],$input['callback_uri'],$subject);
                       
                     }elseif(strcasecmp($input['user_type'],config('futureed.client')) == 0){
 
-                      $this->mail->sendClientMailResetPassword($userDetails,$code['confirmation_code'],$input['url'],$subject);
+                      $this->mail->sendClientMailResetPassword($userDetails,$code['confirmation_code'],$input['callback_uri'],$subject);
 
                     }else{
 
-                      $this->mail->sendAdminMailResetPassword($userDetails,$code['confirmation_code'],$input['url'],$subject);
+                      $this->mail->sendAdminMailResetPassword($userDetails,$code['confirmation_code'],$input['callback_uri'],$subject);
 
                     }
 
