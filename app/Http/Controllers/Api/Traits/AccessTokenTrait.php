@@ -30,10 +30,10 @@ trait AccessTokenTrait {
 
         $validator = Validator::make(
             [
-                'access_token' => $token
+                'authorization' => $token
             ],
             [
-                'access_token' => 'required|regex:/^[a-zA-Z0-9]*\=\.[a-zA-Z0-9]*\.[a-zA-Z0-9]*$/'
+                'authorization' => 'required'
             ],
             [
                 'required' => $error_msg[2030],
@@ -46,8 +46,8 @@ trait AccessTokenTrait {
             $validator_msg = $validator->messages()->toArray();
 
             $return = $this->setErrorCode(2030)
-                ->setField('access_token')
-                ->setMessage($validator_msg["access_token"][0])
+                ->setField('authorization')
+                ->setMessage($validator_msg["authorization"][0])
 //                ->setMessage($error_msg[2030])
                 ->errorMessage();
 
@@ -61,7 +61,7 @@ trait AccessTokenTrait {
         if(!$token_result){
 
             $return = $this->setErrorCode(2029)
-                ->setField('access_token')
+                ->setField('authorization')
                 ->setMessage($error_msg[2029])
                 ->errorMessage();
 
