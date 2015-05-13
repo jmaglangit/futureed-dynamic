@@ -193,6 +193,7 @@ class EmailController extends ApiController {
             }else{
 
                 $user_details = $this->user->getUserDetail($user_id,$input['user_type']);
+
                 $code_expire = $this->user->checkCodeExpiry($user_details['email_code_expiry']);
 
 
@@ -207,7 +208,18 @@ class EmailController extends ApiController {
                 }else{
 
                     $this->user->updateToNewEmail($user_id,$input['new_email']);
-                    $return = $this->student->getStudentId($user_details['id']);
+
+                    if(strcasecmp($input['user_type'],config('futureed.student')) == 0){
+                        
+                        $return = $this->student->getStudentId($user_details['id']);
+
+                    }
+
+                    if (strcasecmp($input['user_type'],config('futureed.client')) == 0){
+
+                        $return = $this->client->getClientId($user_details['id']);
+
+                    }
 
                     return $this->respondWithData(['id' => $return]);
                     
@@ -271,7 +283,7 @@ class EmailController extends ApiController {
 
                     $new_user_details = $this->user->getUserDetail($idExist['user_id'],$userType);
                     $this->mail->sendMailChangeEmail($new_user_details,$code['confirmation_code'],$input['callback_uri'],0);
-                    $this->user->updateEmailCode($studentReferences['user_id'],$code);
+                    $this->user->updateEmailCode($idExist['user_id'],$code);
                     
                     return $this->respondWithData(['id' => $id]);
 

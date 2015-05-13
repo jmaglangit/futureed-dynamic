@@ -24,8 +24,8 @@ Routes::group(['prefix' => '/client'], function()
 
     //change email in client
     Routes::post('/change-email/{id}','Api\v1\EmailController@updateClientEmail');
-    Routes::post('/resend/email/{id}','Api\v1\EmailController@resendChangeEmail');
-
+    Routes::post('/resend-email/{id}','Api\v1\EmailController@resendChangeEmail');
+    Routes::post('/update-email/{id}','Api\v1\EmailController@confirmChangeEmail');
 
 });
 
