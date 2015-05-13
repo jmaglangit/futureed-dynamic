@@ -110,11 +110,11 @@ class EmailController extends ApiController {
 
 
     public function resendChangeEmail($id){
-
-        $input = Input::only('user_type','url');
+       
+        $input = Input::only('user_type','callback_uri');
 
         $this->addMessageBag($this->userTypeClientStudent($input,'user_type'));
-        $this->addMessageBag($this->validateString($input,'url'));
+        $this->addMessageBag($this->validateString($input,'callback_uri'));
         $this->addMessageBag($this->validateVarNumber($id));
 
         $msg_bag = $this->getMessageBag();
@@ -125,16 +125,26 @@ class EmailController extends ApiController {
 
         }else{
 
-            $student_details = $this->student->getStudent($id);
+            if(strcasecmp($input['user_type'],config('futureed.student')) == 0){
+
+                $id_exist = $this->student->getStudent($id);
+
+            }
+
+            if(strcasecmp($input['user_type'],config('futureed.client')) == 0){
+
+                $id_exist = $this->client->verifyClientId($id);
+
+            }
 
 
-            if(empty($student_details)){
+            if(empty($id_exist)){
 
                 return $this->respondErrorMessage(2001);
 
             }else{
 
-                $userDetails = $this->user->getUserDetail($student_details['user_id'],$input['user_type']);
+                $userDetails = $this->user->getUserDetail($id_exist['user_id'],$input['user_type']);
 
                 if(empty($userDetails['email_code'])){
 
@@ -144,9 +154,9 @@ class EmailController extends ApiController {
 
                     $code=$this->code->getCodeExpiry();
 
-                    $this->user->updateEmailCode($student_details['user_id'],$code);
+                    $this->user->updateEmailCode($id_exist['user_id'],$code);
 
-                    $this->mail->sendMailChangeEmail($userDetails,$code['confirmation_code'],$input['url'],1);
+                    $this->mail->sendMailChangeEmail($userDetails,$code['confirmation_code'],$input['callback_uri'],1);
 
                     return $this->respondWithData(['id' => $id]);
 
@@ -208,9 +218,6 @@ class EmailController extends ApiController {
 
 
         }
-
-
-
 
 
 
