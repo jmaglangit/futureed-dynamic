@@ -12,6 +12,16 @@ use Illuminate\Support\Facades\Input;
 class AvatarController extends ApiController {
     
     public function selectAvatars(){
+
+        //Check token authentication if valid.
+        $access_token = \Request::header('access_token');
+
+        $this->validateToken($access_token);
+
+        if($this->getMessageBag()){
+
+            return $this->respondWithError($this->getMessageBag());
+        }
         
         $input = Input::only('gender');
         
@@ -22,11 +32,23 @@ class AvatarController extends ApiController {
             return $this->respondWithError($this->getMessageBag());
         }
 
-                    $avatar= $this->avatar->getAvatars($input['gender']);
-                    return $this->respondWithData($avatar);
+        $avatar= $this->avatar->getAvatars($input['gender']);
+
+        return $this->setHeader($this->getToken())->respondWithData($avatar);
     }
     
     public function saveUserAvatar(){
+
+        //Check token authentication if valid.
+        $access_token = \Request::header('access_token');
+
+        $this->validateToken($access_token);
+
+        if($this->getMessageBag()){
+
+            return $this->respondWithError($this->getMessageBag());
+        }
+
         
         $input = Input::only('avatar_id','id');
 
@@ -59,15 +81,15 @@ class AvatarController extends ApiController {
                                     'url' =>$avatar_url
                                    ];
                         
-                        return $this->respondWithData($reponse);
+                        return $this->setHeader($this->getToken())->respondWithData($reponse);
                     }
                 }else{
                     
-                    return $this->respondErrorMessage(2009);
+                    return $this->setHeader($this->getToken())->respondErrorMessage(2009);
                 }
             }else{
                 
-                return $this->respondErrorMessage(2001);
+                return $this->setHeader($this->getToken())->respondErrorMessage(2001);
             }
     
          
