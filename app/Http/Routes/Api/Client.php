@@ -1,6 +1,5 @@
 <?php
 
-
 Routes::group(['prefix' => '/client'], function()
 {
 
@@ -33,9 +32,3 @@ Routes::group(['prefix' => '/client'], function()
 //Client
 Routes::resource('/client','Api\v1\ClientController',
     ['except' => ['create','edit']]);
-
-
-
-
-
-

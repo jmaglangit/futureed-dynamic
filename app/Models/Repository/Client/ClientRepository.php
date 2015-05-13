@@ -107,5 +107,54 @@ class ClientRepository implements ClientRepositoryInterface{
         }
     }
 
+	
+
+	/**
+	 * Display a listing of clients.
+	 *
+	 * @param	array	$criteria
+	 * @param	int		$limit
+	 * @param	int		$offset
+	 *
+	 * @return array
+	 */
+	public function getClients($criteria = array(), $limit = 0, $offset = 0) {
+		
+		if(count($criteria) < 0 && $limit == 0 && $offset == 0) {
+		
+			return Client::all()->toArray();
+			
+		} else {
+			$clients = new Client();
+			
+			if(count($criteria) > 0) {
+				if(isset($criteria['name'])) {
+					$clients = $clients->name($criteria['name']);
+				}
+				
+				if(isset($criteria['email'])) {
+					$clients = $clients->email($criteria['email']);
+				}
+				
+				if(isset($criteria['client_role'])) {
+					$clients = $clients->role($criteria['client_role']);
+				}
+				
+				if(isset($criteria['status'])) {
+					$clients = $clients->status($criteria['status']);
+				}
+				
+				if(isset($criteria['school_code'])) {
+					$clients = $clients->school_code($criteria['school_code']);
+				}
+			}
+		
+			if($limit > 0 && $offset >= 0) {
+				$clients = $clients->offset($offset)->limit($limit);;
+			}
+														
+			return $clients->with('user')->orderBy('created_at', 'desc')->get();
+		}
+	}
     
 }
