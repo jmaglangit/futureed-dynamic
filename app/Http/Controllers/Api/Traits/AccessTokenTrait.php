@@ -38,6 +38,10 @@ trait AccessTokenTrait {
             ],
             [
                 'access_token' => 'required|regex:/^[a-zA-Z0-9]*\=\.[a-zA-Z0-9]*\.[a-zA-Z0-9]*$/'
+            ],
+            [
+                'required' => $error_msg[2030],
+                'regex' => $error_msg[2031]
             ]
         );
 
