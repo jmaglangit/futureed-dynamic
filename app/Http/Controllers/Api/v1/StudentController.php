@@ -76,6 +76,16 @@ class StudentController extends ApiController {
 	 */
 	public function update($id)
 	{
+        //Check token authentication if valid.
+        $access_token = \Request::header('access_token');
+
+        $this->validateToken($access_token);
+
+        if($this->getMessageBag()){
+
+            return $this->respondWithError($this->getMessageBag());
+        }
+
 		$input = Input::only('first_name','last_name','gender','birth_date',
 							'email','username','school_code','grade_code',
 							'country','city','state');
@@ -105,7 +115,7 @@ class StudentController extends ApiController {
         $this->student->updateStudentDetails($id,$input);
         $return = $this->student->getStudentDetails($id);
 
-        return $this->respondWithData($return);
+        return $this->setHeader($this->getToken())->respondWithData($return);
 
 	}
 
