@@ -38,7 +38,7 @@ class StudentController extends ApiController {
 	public function show($id)
 	{
         //Check token authentication if valid.
-        $access_token = \Request::header('access_token');
+        $access_token = \Request::header('authorization');
 
         $this->validateToken($access_token);
 
@@ -77,7 +77,7 @@ class StudentController extends ApiController {
 	public function update($id)
 	{
         //Check token authentication if valid.
-        $access_token = \Request::header('access_token');
+        $access_token = \Request::header('authorization');
 
         $this->validateToken($access_token);
 
