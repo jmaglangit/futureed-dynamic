@@ -1,6 +1,6 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
-use FutureEd\Http\Controllers\Api\Traits\ApiValidatorTrait;
+use FutureEd\Http\Controllers\Api\Traits\AccessTokenTrait;
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 use FutureEd\Services;
@@ -9,14 +9,25 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
 class UserPasswordController extends UserController {
-  
+
+    use AccessTokenTrait;
+
     public function passwordForgot(){
+
+        //Check token authentication if valid.
+        $access_token = \Request::header('access_token');
+
+        $this->validateToken($access_token);
+
+        if($this->getMessageBag()){
+
+            return $this->respondWithError($this->getMessageBag());
+        }
+
         $input = Input::only('username','user_type');
         $this->addMessageBag($this->userType($input,'user_type'));
         $subject = config('futureed.subject_forgot');
 
-        
-        
         $flag=0;
         
         if(!$this->email($input,'username')){
