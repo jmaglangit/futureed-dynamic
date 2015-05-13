@@ -52,9 +52,9 @@ class MailServices {
         }
     }
 
-    public function sendStudentRegister($user_id){
-        $user_type = config('futureed.student');
+    public function sendStudentRegister($user_id,$url){
 
+        $user_type = config('futureed.student');
 
         //get user information for the email
         $user_detail = $this->user->getUser($user_id,$user_type);
@@ -66,7 +66,7 @@ class MailServices {
             'data' => [
                 'name' => $user_detail['name'],
                 'code' => $code['confirmation_code'],
-                'link' => url() . '/student/email/confirm?email=' . $user_detail['email']  ,
+                'link' => $url,  
             ],
             'mail_recipient' => $user_detail['email'],
             'mail_recipient_name' => $user_detail['first_name' ] . $user_detail['last_name'],
@@ -75,14 +75,14 @@ class MailServices {
         $this->sendMail($content);
     }
 
-    public function resendStudentRegister($data,$code,$subject){
+    public function resendStudentRegister($data,$code,$url,$subject){
 
         $content = [
             'view' => 'emails.student.resendregistration-email',
             'data' => [
                 'name' => $data['name'],
                 'code' => $code,
-                'link' => url() . '/student/email/confirm?email=' . $data['email']  ,
+                'link' => $url,
             ],
             'mail_recipient' => $data['email'],
             'mail_recipient_name' => $data['name' ],
@@ -91,7 +91,7 @@ class MailServices {
         $this->sendMail($content);
     }
 
-    public function sendClientRegister($data,$code,$send = 0){
+    public function sendClientRegister($data,$code,$url,$send = 0){
 
         if($send == 1){
             $subject = config('futureed.subject_reg_resend');
@@ -109,7 +109,7 @@ class MailServices {
             'data' => [
                 'name' => $data['name'],
                 'code' => $code,
-                'link' => url() . '/client/email/confirm?email=' . $data['email']  ,
+                'link' => $url ,
             ],
             'mail_recipient' => $data['email'],
             'mail_recipient_name' => $data['name' ],
@@ -120,14 +120,14 @@ class MailServices {
     }
 
 
-    public function sendStudentMailResetPassword($data,$code,$subject){
+    public function sendStudentMailResetPassword($data,$code,$url,$subject){
 
         $content = [
             'view' => 'emails.student.forget-password',
             'data' => [
                 'name' => $data['username'],
                 'code' => $code,
-                'link' => url() . '/student/password/reset?email='.$data['email'],
+                'link' => $url,
             ],
             'mail_sender' => 'no-reply@futureed.com',
             'mail_sender_name' => 'Future Lesson',
@@ -138,14 +138,14 @@ class MailServices {
         $this->sendMail($content);
     }
 
-    public function sendClientMailResetPassword($data,$code,$subject){
+    public function sendClientMailResetPassword($data,$code,$url,$subject){
 
         $content = [
             'view' => 'emails.client.forget-password',
             'data' => [
                 'name' => $data['username'],
                 'code' => $code,
-                'link' => url() . '/client/password/reset?email='.$data['email'],
+                'link' => $url,
             ],
             'mail_sender' => 'no-reply@futureed.com',
             'mail_sender_name' => 'Future Lesson',
@@ -156,13 +156,13 @@ class MailServices {
         $this->sendMail($content);
     }
 
-    public function sendAdminMailResetPassword($data,$code,$subject){
+    public function sendAdminMailResetPassword($data,$code,$url,$subject){
         $content = [
             'view' => 'emails.admin.forget-password',
             'data' => [
                 'name' => $data['username'],
                 'code' => $code,
-                'link' => url() . '/admin/password/reset?email='.$data['email'],
+                'link' => $url ,
             ],
             'mail_sender' => 'no-reply@futureed.com',
             'mail_sender_name' => 'Future Lesson',
@@ -173,7 +173,7 @@ class MailServices {
         $this->sendMail($content);
     }
 
-    public function sendMailChangeEmail($data,$code,$send = 0){
+    public function sendMailChangeEmail($data,$code,$url,$send = 0){
 
         $template = 'emails.student.change-email';
        
@@ -193,7 +193,7 @@ class MailServices {
             'data' => [
                 'name' => $data['name'],
                 'code' => $code,
-                'link' => url() .'/student/email/confirm?email=' . $data['new_email']  ,
+                'link' => $url ,
             ],
             'mail_recipient' => $data['new_email'],
             'mail_recipient_name' => $data['name' ],

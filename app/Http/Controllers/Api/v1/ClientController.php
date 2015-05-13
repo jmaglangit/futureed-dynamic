@@ -8,12 +8,52 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
 class ClientController extends ApiController {
-	public function checkClientEmail(){
-	        
-	    }
 
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return Response
+	 */
+	public function index() {
+	
+		$criteria = array();
+		$limit = 0;
+		$offset = 0;
+			
+		if(Input::get('name')) {
+			$criteria['name'] = Input::get('name');
+		}
+		
+		if(Input::get('school_code')) {
+			$criteria['school_code'] = Input::get('school_code');
+		}
+		
+		if(Input::get('client_role')) {
+			$criteria['client_role'] = Input::get('client_role');
+		}
+		
+		if(Input::get('email')) {
+			$criteria['email'] = Input::get('email');
+		}
+		
+		if(Input::get('status')) {
+			$criteria['status'] = Input::get('status');
+		}
+		
+		if(Input::get('limit')) {
+			$limit = intval(Input::get('limit'));
+		}
+		
+		if(Input::get('offset')) {
+			$offset = intval(Input::get('offset'));
+		}
+			
+		$clients = $this->client->getClients($criteria, $limit, $offset);
 
-	public function show($id){
+		return $this->respondWithData($clients);
+	}
+
+	public function show($id) {
 
 		$client = config('futureed.client');
 
@@ -25,11 +65,11 @@ class ClientController extends ApiController {
 
             return $this->respondWithError($this->getMessageBag());
 
-        }else{
+        } else {
 
         	$return = $this->client->verifyClientId($id);
 
-        	if($return){
+        	if($return) {
 
         		$userDetails = $this->user->getUserDetail($return['user_id'],$client)->toArray();
         		$clienDetails = $this->client->getclientDetails($id)->toArray();
@@ -37,10 +77,9 @@ class ClientController extends ApiController {
 
         		return $this->respondWithData($formResponse);
 
-        	} else{
+        	} else {
 
         		return $this->respondErrorMessage(2001);
-
 
         	}
 

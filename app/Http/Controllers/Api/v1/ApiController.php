@@ -1,5 +1,6 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
+use FutureEd\Http\Controllers\Api\Traits\AccessTokenTrait;
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
@@ -31,6 +32,7 @@ use FutureEd\Http\Controllers\Api\Traits\ClientValidatorTrait;
 class ApiController extends Controller {
 
     use ApiValidatorTrait;
+    use AccessTokenTrait;
 
     private $status_code = Response::HTTP_OK;
     private $header = [];
@@ -65,6 +67,7 @@ class ApiController extends Controller {
         $this->school = $schoolRepositoryInterface;
         $this->country = $countryRepositoryInterface;
     }
+    
     public function index(){
         return [
             'name' => 'FutureEd API',

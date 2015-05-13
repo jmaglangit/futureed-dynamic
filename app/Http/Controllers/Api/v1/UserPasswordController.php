@@ -1,6 +1,6 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
-use FutureEd\Http\Controllers\Api\Traits\ApiValidatorTrait;
+use FutureEd\Http\Controllers\Api\Traits\AccessTokenTrait;
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 use FutureEd\Services;
@@ -9,14 +9,15 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
 class UserPasswordController extends UserController {
-  
+
+
     public function passwordForgot(){
-        $input = Input::only('username','user_type');
+
+        $input = Input::only('username','user_type','url');
         $this->addMessageBag($this->userType($input,'user_type'));
+        $this->addMessageBag($this->validateString($input,'url'));
         $subject = config('futureed.subject_forgot');
 
-        
-        
         $flag=0;
         
         if(!$this->email($input,'username')){
@@ -80,15 +81,15 @@ class UserPasswordController extends UserController {
 
                     if(strcasecmp($input['user_type'],config('futureed.student')) == 0){
 
-                      $this->mail->sendStudentMailResetPassword($userDetails,$code['confirmation_code'],$subject);
+                      $this->mail->sendStudentMailResetPassword($userDetails,$code['confirmation_code'],$input['url'],$subject);
                       
                     }elseif(strcasecmp($input['user_type'],config('futureed.client')) == 0){
 
-                      $this->mail->sendClientMailResetPassword($userDetails,$code['confirmation_code'],$subject);
+                      $this->mail->sendClientMailResetPassword($userDetails,$code['confirmation_code'],$input['url'],$subject);
 
                     }else{
 
-                      $this->mail->sendAdminMailResetPassword($userDetails,$code['confirmation_code'],$subject);
+                      $this->mail->sendAdminMailResetPassword($userDetails,$code['confirmation_code'],$input['url'],$subject);
 
                     }
 

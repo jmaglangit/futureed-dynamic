@@ -42,6 +42,9 @@ return [
         2026 => 'Reset code should be number only.',
         2027 => 'Reset code is invalid.',
         2028 => 'The Student has to be more than 13 years old to be able to register.',
+        2029 => 'Access authentication failure.',
+        2030 => 'Access authorization is required.',
+        2031 => 'Access authorization is invalid.',
 
         2100 => 'Reset code is invalid.',
         2101 => 'Password image is invalid.',

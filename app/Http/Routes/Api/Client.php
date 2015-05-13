@@ -1,6 +1,5 @@
 <?php
 
-
 Routes::group(['prefix' => '/client'], function()
 {
 
@@ -23,6 +22,10 @@ Routes::group(['prefix' => '/client'], function()
     Routes::post('/reset-password/{id}','Api\v1\ClientPasswordController@resetPassword');
     Routes::post('/change-password/{id}','Api\v1\ClientPasswordController@changePassword');
 
+    //change email in client
+    Routes::post('/change-email/{id}','Api\v1\EmailController@updateClientEmail');
+    Routes::post('/resend-email/{id}','Api\v1\EmailController@resendChangeEmail');
+    Routes::post('/update-email/{id}','Api\v1\EmailController@confirmChangeEmail');
 
 });
 
@@ -30,9 +33,3 @@ Routes::group(['prefix' => '/client'], function()
 //Client
 Routes::resource('/client','Api\v1\ClientController',
     ['except' => ['create','edit']]);
-
-
-
-
-
-

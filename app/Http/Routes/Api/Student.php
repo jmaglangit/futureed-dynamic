@@ -26,7 +26,7 @@ Routes::post('/invite','Api\v1\StudentRegistrationController@invite');
 
 //email
 Routes::put('/email/{id}','Api\v1\EmailController@updateStudentEmail');
-Routes::post('/resend/email','Api\v1\EmailController@resendChangeEmail');
+Routes::post('/resend/email/{id}','Api\v1\EmailController@resendChangeEmail');
 Routes::post('/confirmation/email','Api\v1\EmailController@confirmChangeEmail');
 
 
