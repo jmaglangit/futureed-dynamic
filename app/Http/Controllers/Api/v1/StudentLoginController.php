@@ -163,11 +163,7 @@ class StudentLoginController extends StudentController {
                 //get student data
                 $response['data'] = $this->student->getStudentDetails($input['id']);
 
-                $token = $this->token->getToken(
-                    [
-                        'url' => Request::capture()->fullUrl(),
-                    ]
-                );
+                $token = $this->token->getToken();
                 $response['data'] = array_merge($response['data'],$token);
 
             }
