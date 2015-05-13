@@ -12,6 +12,16 @@ use Illuminate\Support\Facades\Input;
 class AvatarController extends ApiController {
     
     public function selectAvatars(){
+
+        //Check token authentication if valid.
+        $access_token = \Request::header('access_token');
+
+        $this->validateToken($access_token);
+
+        if($this->getMessageBag()){
+
+            return $this->respondWithError($this->getMessageBag());
+        }
         
         $input = Input::only('gender');
         
@@ -19,11 +29,12 @@ class AvatarController extends ApiController {
 
         if($this->getMessageBag()){
 
-            return $this->respondWithError($this->getMessageBag());
+            return $this->setHeader($this->getToken())->respondWithError($this->getMessageBag());
         }
 
-                    $avatar= $this->avatar->getAvatars($input['gender']);
-                    return $this->respondWithData($avatar);
+        $avatar= $this->avatar->getAvatars($input['gender']);
+
+        return $this->setHeader($this->getToken())->respondWithData($avatar);
     }
     
     public function saveUserAvatar(){
