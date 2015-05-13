@@ -24,8 +24,9 @@ class UserPasswordController extends UserController {
             return $this->respondWithError($this->getMessageBag());
         }
 
-        $input = Input::only('username','user_type');
+        $input = Input::only('username','user_type','url');
         $this->addMessageBag($this->userType($input,'user_type'));
+        $this->addMessageBag($this->validateString($input,'url'));
         $subject = config('futureed.subject_forgot');
 
         $flag=0;
@@ -91,15 +92,15 @@ class UserPasswordController extends UserController {
 
                     if(strcasecmp($input['user_type'],config('futureed.student')) == 0){
 
-                      $this->mail->sendStudentMailResetPassword($userDetails,$code['confirmation_code'],$subject);
+                      $this->mail->sendStudentMailResetPassword($userDetails,$code['confirmation_code'],$input['url'],$subject);
                       
                     }elseif(strcasecmp($input['user_type'],config('futureed.client')) == 0){
 
-                      $this->mail->sendClientMailResetPassword($userDetails,$code['confirmation_code'],$subject);
+                      $this->mail->sendClientMailResetPassword($userDetails,$code['confirmation_code'],$input['url'],$subject);
 
                     }else{
 
-                      $this->mail->sendAdminMailResetPassword($userDetails,$code['confirmation_code'],$subject);
+                      $this->mail->sendAdminMailResetPassword($userDetails,$code['confirmation_code'],$input['url'],$subject);
 
                     }
 

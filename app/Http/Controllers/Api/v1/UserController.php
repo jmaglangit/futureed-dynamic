@@ -114,12 +114,13 @@ class UserController extends ApiController{
     //resend reset email code 
     public function resendResetEmailCode(){
 
-        $input = Input::only('email','user_type'); 
+        $input = Input::only('email','user_type','url'); 
         $error = config('futureed-error.error_messages');
         $subject = config('futureed.subject_forgot_resend');
 
         $this->addMessageBag($this->email($input,'email'));
         $this->addMessageBag($this->userType($input,'user_type'));
+        $this->addMessageBag($this->validateString($input,'url'));
 
 
         $msg_bag = $this->getMessageBag();
@@ -152,7 +153,7 @@ class UserController extends ApiController{
 
                         $student_id = $this->student->getStudentId($return['user_id']);
 
-                        $this->mail->sendStudentMailResetPassword($userDetails,$code['confirmation_code'],$subject);
+                        $this->mail->sendStudentMailResetPassword($userDetails,$code['confirmation_code'],$input['url'],$subject);
 
                         return $this->respondWithData(['id' => $student_id,
                                                        'user_type' => $input['user_type'] 
@@ -163,7 +164,7 @@ class UserController extends ApiController{
 
                         $client_id = $this->client->getClientId($return['user_id']);
 
-                        $this->mail->sendClientMailResetPassword($userDetails,$code['confirmation_code'],$subject);
+                        $this->mail->sendClientMailResetPassword($userDetails,$code['confirmation_code'],$input['url'],$subject);
 
                         return $this->respondWithData(['id' => $client_id,
                                                        'user_type' => $input['user_type'] 
@@ -174,7 +175,7 @@ class UserController extends ApiController{
 
                         $admin_id = $this->admin->getAdminId($return['user_id']);
 
-                        $this->mail->sendAdminMailResetPassword($userDetails,$code['confirmation_code'],$subject);
+                        $this->mail->sendAdminMailResetPassword($userDetails,$code['confirmation_code'],$input['url'],$subject);
 
                         return $this->respondWithData(['id' => $admin_id,
                                                        'user_type' => $input['user_type'] 
@@ -198,12 +199,13 @@ class UserController extends ApiController{
 
     public function resendRegisterEmailCode(){
 
-        $input = Input::only('email','user_type');
+        $input = Input::only('email','user_type','url');
         $error = config('futureed-error.error_messages');
         $subject = config('futureed.subject_reg_resend');
 
         $this->addMessageBag($this->email($input,'email'));
         $this->addMessageBag($this->userTypeClientStudent($input,'user_type'));
+        $this->addMessageBag($this->validateString($input,'url'));
 
 
         $msg_bag = $this->getMessageBag();
@@ -235,7 +237,7 @@ class UserController extends ApiController{
 
                         $student_id = $this->student->getStudentId($return['user_id']);
 
-                        $this->mail->resendStudentRegister($userDetails,$code['confirmation_code'],$subject);
+                        $this->mail->resendStudentRegister($userDetails,$code['confirmation_code'],$input['url'],$subject);
 
                         return $this->respondWithData(['id' => $student_id,
                                                        'user_type' => $input['user_type'] 
@@ -246,7 +248,7 @@ class UserController extends ApiController{
 
                         $client_id = $this->client->getClientId($return['user_id']);
 
-                        $this->mail->sendClientRegister($userDetails,$code['confirmation_code'],1);
+                        $this->mail->sendClientRegister($userDetails,$code['confirmation_code'],$input['url'],1);
 
                         return $this->respondWithData(['id' => $client_id,
                                                        'user_type' => $input['user_type'] 

@@ -121,13 +121,10 @@ class TokenServices {
     /*
      * @desc decodes token
      */
-    public function decodeToken($token){
-
-        $return = [
-            'status' => true
-        ];
+    public function validateToken($token){
 
         $token_decoded = explode(".",$token);
+
 
         //check details for comparison
         $header = $this->decodeHeader($token_decoded[0]);
@@ -142,17 +139,17 @@ class TokenServices {
 
         if(Carbon::now()->timestamp >= $token_exp->timestamp){
 
-            $return['status'] = false;
-            $return = array_merge($return, ['session' => 'Token expired']);
+            return false;
         }
 
         if (!$this->validateSignature($token_decoded[2],$signature)){
 
-            $return['status'] = false;
-            $return = array_merge($return, ['signature' => 'Token Manipulated']);
+            return false;
         }
 
-        return $return;
+        return true;
+
+
     }
 
 
