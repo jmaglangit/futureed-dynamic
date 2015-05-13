@@ -21,7 +21,7 @@ class StudentPasswordController extends StudentController {
     public function confirmPassword($id){
 
         //Check token authentication if valid.
-        $access_token = \Request::header('access_token');
+        $access_token = \Request::header('authorization');
 
         $this->validateToken($access_token);
 

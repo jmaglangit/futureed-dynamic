@@ -161,12 +161,6 @@ class ApiController extends Controller {
             $this->addMessageBag($return);
 
             return $this->respondWithError($this->getMessageBag());
-//            return $this->respondWithError(
-//                    [
-//                        'error_code' => $error_code,
-//                        'message' => $error_msg[$error_code]
-//                    ]
-//                );
         }
 
     }

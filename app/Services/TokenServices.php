@@ -98,7 +98,7 @@ class TokenServices {
         $signature = $this->setSignature($header,$payload);
 
         return [
-            'access_token' => $header . "." . $payload . "." . $signature
+            'authorization' => $header . "." . $payload . "." . $signature
         ];
     }
 

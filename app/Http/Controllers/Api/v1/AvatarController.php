@@ -14,7 +14,7 @@ class AvatarController extends ApiController {
     public function selectAvatars(){
 
         //Check token authentication if valid.
-        $access_token = \Request::header('access_token');
+        $access_token = \Request::header('authorization');
 
         $this->validateToken($access_token);
 
@@ -40,7 +40,7 @@ class AvatarController extends ApiController {
     public function saveUserAvatar(){
 
         //Check token authentication if valid.
-        $access_token = \Request::header('access_token');
+        $access_token = \Request::header('authorization');
 
         $this->validateToken($access_token);
 
