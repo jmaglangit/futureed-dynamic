@@ -16,15 +16,11 @@ trait AccessTokenTrait {
 //    use ErrorMessageTrait;
 //    use MessageBagTrait;
 
-    public function __construct(TokenServices $token_services){
-
-        $this->token_services = $token_services;
-    }
 
     //get token
     public function getToken(){
 
-        return $this->token_services->getToken();
+        return $this->token->getToken();
     }
 
     //validate token
@@ -60,7 +56,7 @@ trait AccessTokenTrait {
             return 0;
         }
 
-        $token_result = $this->token_services->validateToken($token);
+        $token_result = $this->token->validateToken($token);
 
         if(!$token_result){
 
