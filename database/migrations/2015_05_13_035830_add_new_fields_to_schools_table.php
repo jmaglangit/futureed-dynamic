@@ -28,8 +28,7 @@ class AddNewFieldsToSchoolsTable extends Migration {
 	{
 		Schema::table('schools', function(Blueprint $table)
 		{
-			$table->dropColumn('contact_name');
-			$table->dropColumn('contact_number');
+			$table->dropColumn(['contact_name', 'contact_number']);
 		});
 	}
 
