@@ -48,12 +48,12 @@ class EmailController extends ApiController {
 
         $userType = config('futureed.student');
 
-        $input = Input::only('new_email','password_image_id','url');
+        $input = Input::only('new_email','password_image_id','callback_uri');
 
         $this->addMessageBag($this->validateVarNumber($id));
         $this->addMessageBag($this->email($input,'new_email')); 
         $this->addMessageBag($this->validateNumber($input,'password_image_id'));
-        $this->addMessageBag($this->validateString($input,'url'));
+        $this->addMessageBag($this->validateString($input,'callback_uri'));
 
         $msg_bag = $this->getMessageBag();
 
@@ -91,7 +91,7 @@ class EmailController extends ApiController {
                     $this->user->addNewEmail($studentReferences['user_id'],$input['new_email']);
 
                     $new_user_details = $this->user->getUserDetail($studentReferences['user_id'],$userType);
-                    $this->mail->sendMailChangeEmail($new_user_details,$code['confirmation_code'],$input['url'],0);
+                    $this->mail->sendMailChangeEmail($new_user_details,$code['confirmation_code'],$input['callback_uri'],0);
                     $this->user->updateEmailCode($studentReferences['user_id'],$code);
                     
                     return $this->respondWithData(['id' => $id]);
@@ -213,6 +213,70 @@ class EmailController extends ApiController {
 
 
 
+
+    }
+
+
+     public function updateClientEmail($id){
+
+        $userType = config('futureed.client');
+
+        $input = Input::only('new_email','password','callback_uri');
+
+        $this->addMessageBag($this->validateVarNumber($id));
+        $this->addMessageBag($this->email($input,'new_email')); 
+        $this->addMessageBag($this->checkPassword($input,'password'));
+        $this->addMessageBag($this->validateString($input,'callback_uri'));
+
+        $msg_bag = $this->getMessageBag();
+
+        if($msg_bag){
+
+            return $this->respondWithError($msg_bag);
+
+        }else{
+
+            $idExist = $this->client->verifyClientId($id);
+
+            if($idExist){
+
+                $userDetails = $this->user->getUserDetail($idExist['user_id'],$userType);
+                $checkEmailExist = $this->user->checkEmail($input['new_email'],$userType);
+
+                $password = sha1($input['password']);
+
+                if($userDetails['password'] != $password){
+
+                  return $this->respondErrorMessage(2114);
+
+                }else if($userDetails['email'] == $input['new_email']){
+
+                  return $this->respondErrorMessage(2107); 
+
+                }else if($checkEmailExist){
+
+                  return $this->respondErrorMessage(2200);
+
+                }else{
+
+                    $code = $this->code->getCodeExpiry();
+                    $this->user->addNewEmail($idExist['user_id'],$input['new_email']);
+
+                    $new_user_details = $this->user->getUserDetail($idExist['user_id'],$userType);
+                    $this->mail->sendMailChangeEmail($new_user_details,$code['confirmation_code'],$input['callback_uri'],0);
+                    $this->user->updateEmailCode($studentReferences['user_id'],$code);
+                    
+                    return $this->respondWithData(['id' => $id]);
+
+                }
+
+            }else{
+
+                return $this->respondErrorMessage(2001);
+
+            }
+
+        }
 
     }
 
