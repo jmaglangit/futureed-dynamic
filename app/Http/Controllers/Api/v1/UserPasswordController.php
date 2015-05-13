@@ -13,16 +13,6 @@ class UserPasswordController extends UserController {
 
     public function passwordForgot(){
 
-        //Check token authentication if valid.
-        $access_token = \Request::header('access_token');
-
-        $this->validateToken($access_token);
-
-        if($this->getMessageBag()){
-
-            return $this->respondWithError($this->getMessageBag());
-        }
-
         $input = Input::only('username','user_type','url');
         $this->addMessageBag($this->userType($input,'user_type'));
         $this->addMessageBag($this->validateString($input,'url'));
@@ -103,17 +93,17 @@ class UserPasswordController extends UserController {
 
                     }
 
-                    return $this->setHeader($this->getToken())->respondWithData($userDetails);
+                    return $this->respondWithData($userDetails);
                     
                 }else{
                     
-                    return $this->setHeader($this->getToken())->respondErrorMessage(2018);
+                    return $this->respondErrorMessage(2018);
                          
                 }
                 
           }else{
             
-             return $this->setHeader($this->getToken())->respondErrorMessage(2018);
+             return $this->respondErrorMessage(2018);
           }
         }
 
