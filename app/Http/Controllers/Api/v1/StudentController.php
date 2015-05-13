@@ -36,7 +36,17 @@ class StudentController extends ApiController {
 	 * @return Response
 	 */
 	public function show($id)
-	{   
+	{
+        //Check token authentication if valid.
+        $access_token = \Request::header('access_token');
+
+        $this->validateToken($access_token);
+
+        if($this->getMessageBag()){
+
+            return $this->respondWithError($this->getMessageBag());
+        }
+
 		$error = config('futureed-error.error_messages');
 
         $this->addMessageBag($this->validateVarNumber($id));
@@ -48,13 +58,13 @@ class StudentController extends ApiController {
 		if($this->student->checkIdExist($id)){
 		     
 	        $students = $this->student->getStudentDetails($id); 
-	        return $this->respondWithData([
+	        return $this->setHeader($this->getToken())->respondWithData([
 	            $students
 	        ]);
 	        	
 	    }else{
 
-	    	return $this->respondErrorMessage(2001);
+	    	return $this->setHeader($this->getToken())->respondErrorMessage(2001);
 	    }
 	}
 
