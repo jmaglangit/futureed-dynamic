@@ -10,7 +10,6 @@ use Illuminate\Support\Facades\Input;
 
 class UserPasswordController extends UserController {
 
-    use AccessTokenTrait;
 
     public function passwordForgot(){
 
