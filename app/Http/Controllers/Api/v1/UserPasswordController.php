@@ -104,17 +104,17 @@ class UserPasswordController extends UserController {
 
                     }
 
-                    return $this->respondWithData($userDetails);
+                    return $this->setHeader($this->getToken())->respondWithData($userDetails);
                     
                 }else{
                     
-                    return $this->respondErrorMessage(2018);
+                    return $this->setHeader($this->getToken())->respondErrorMessage(2018);
                          
                 }
                 
           }else{
             
-             return $this->respondErrorMessage(2018);
+             return $this->setHeader($this->getToken())->respondErrorMessage(2018);
           }
         }
 
