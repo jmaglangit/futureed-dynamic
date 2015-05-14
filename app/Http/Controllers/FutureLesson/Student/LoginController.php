@@ -139,4 +139,13 @@ class LoginController extends Controller {
 
 		return view('student.login.reset-password', ['id' => $id, 'code' => $code, 'email' => $email, 'new' => $new]);
 	}
+
+	/**
+	* Partials for AngularJS Directive
+	*/
+
+	public function base_url() {
+
+		return view('student.partials.base-url');
+	}
 }

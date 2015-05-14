@@ -54,6 +54,7 @@
   {!! Html::script('//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js') !!}
   {!! Html::script('http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular.min.js') !!}
   {!! Html::script('http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular-resource.min.js') !!}
+
   {!! Html::script('/js/jquery.smooth-scroll.js') !!}
 
   {!! Html::script('/js/futureed_constants.js') !!}

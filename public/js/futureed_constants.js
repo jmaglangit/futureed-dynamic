@@ -3,6 +3,9 @@ var Constants = {
 	  FALSE			: 0
 	, TRUE			: 1
 
+	, METHOD_POST	: 'POST'
+	, METHOD_GET	: 'GET'
+
 	, STATUS_OK		: 200
 
 	, STUDENT		: "Student"
@@ -31,4 +34,16 @@ var Constants = {
 	, MSG_PW_NOT_MATCH 		: "Password does not match."
 
 	, ATTR_SUBMIT			: "submit"
+
+	, URL_FORGOT_PASSWORD	: function(user_type, email) {
+		return '/' + user_type + '/password/forgot?email=' + email;
+	}
+
+	, URL_REGISTRATION		: function(user_type, email) {
+		return '/' + user_type + '/register/confirm?email=' + email;
+	}
+
+	, URL_CHANGE_EMAIL		: function(user_type, email) {
+		return '/' + user_type + '/email/confirm?email=' + email;
+	}
 }

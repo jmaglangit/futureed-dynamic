@@ -5,6 +5,8 @@
 <div class="container login" ng-init="show='{!! $show !!}'" ng-cloak>
   <div class="col-md-6 col-md-offset-3">
     <div class="form-style form-select-password">
+      <div template-directive template-url="{!! route('student.partials.base_url') !!}"></div>
+      
       {!! Form::open(array('id' => 'redirect_form', 'method' => 'POST', 'route' => 'student.login.reset_password')) !!}
         {!! Form::hidden('email', $email, array('ng-model' => 'email')) !!}
         {!! Form::hidden('id', '', array('ng-model' => 'id')) !!}

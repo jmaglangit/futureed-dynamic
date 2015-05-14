@@ -4,15 +4,16 @@
 	Routes::group(['prefix' => '/student'], function()
 	{
 		Routes::get('/', 'FutureLesson\Student\LoginController@index');
+
 		Routes::get('/registration', [
 				'as' => 'student.registration'
 				, 'uses' => 'FutureLesson\Student\LoginController@registration'
 			]);
-		Routes::get('/email/confirm', [
+		Routes::get('/register/confirm', [
 				'as' => 'student.login.confirm'
 				, 'uses' => 'FutureLesson\Student\LoginController@registration'
 			]);
-		Routes::get('/password/reset', [
+		Routes::get('/password/forgot', [
 				'as' => 'student.password.reset_code'
 				, 'uses' => 'FutureLesson\Student\LoginController@reset_code'
 			]);
@@ -69,28 +70,33 @@
 			  'prefix' => 'profile'
 			, 'middleware' => 'student'], function()
 		{
-			$base = 'FutureLesson\Student';
-
 			Routes::get('/', [ 
 					'as' => 'student.profile.index'
-					, 'uses' => $base . '\ProfileController@index'
+					, 'uses' => 'FutureLesson\Student\ProfileController@index'
 				]);
 			Routes::get('/rewards', [
 					'as' => 'student.profile.rewards'
-					, 'uses' => $base . '\ProfileController@rewards'
+					, 'uses' => 'FutureLesson\Student\ProfileController@rewards'
 				]);
 			Routes::get('/change-password', [
 					'as' => 'student.profile.change_password'
-					, 'uses' => $base . '\ProfileController@change_password'
+					, 'uses' => 'FutureLesson\Student\ProfileController@change_password'
 				]);
 			Routes::get('/change-avatar', [
 					'as' => 'student.profile.change_avatar'
-					, 'uses' => $base . '\ProfileController@change_avatar'
+					, 'uses' => 'FutureLesson\Student\ProfileController@change_avatar'
 				]);
 			Routes::get('/change-email', [
 					'as' => 'student.profile.edit_email'
 					, 'middleware' => 'student'
-					, 'uses' => $base . '\ProfileController@edit_email'
+					, 'uses' => 'FutureLesson\Student\ProfileController@edit_email'
+				]);
+		});
+
+		Routes::group(['prefix' => 'partials'], function() {
+			Routes::get('/base_url', [
+					'as' => 'student.partials.base_url'
+					, 'uses' => 'FutureLesson\Student\LoginController@base_url'
 				]);
 		});
 	});

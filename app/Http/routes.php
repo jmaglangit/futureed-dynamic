@@ -20,13 +20,14 @@ Routes::group(['prefix' => 'api/v1'], function()
 {
     Routes::get('/','Api\v1\ApiController@index');
 
+		include('Routes/Api/Admin.php');
         include('Routes/Api/Client.php');
         include('Routes/Api/Countries.php');
         include('Routes/Api/Grade.php');
         include('Routes/Api/School.php');
         include('Routes/Api/Student.php');
+        include('Routes/Api/Subject.php');
         include('Routes/Api/User.php');
-        include('Routes/Api/Admin.php');
 
 //    //users
 //    Routes::get('/user','Api\v1\UserController@index');

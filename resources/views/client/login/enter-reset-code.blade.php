@@ -2,7 +2,8 @@
 
 @section('content')
   <div class="container login" ng-controller="LoginController as forgot" ng-cloak>
-  
+    <div template-directive template-url="{!! route('client.partials.base_url') !!}"></div>
+    
     <div class="col-md-6 col-md-offset-1 form-style">
       {!! Form::open(
           array(
@@ -107,5 +108,6 @@
 
 @section('scripts')
   {!! Html::script('/js/client/controllers/login_controller.js') !!}
+  {!! Html::script('/js/client/services/login_service.js') !!}
   {!! Html::script('/js/client/login.js') !!}
 @stop

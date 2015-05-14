@@ -26,9 +26,9 @@
 	                <div class="alert alert-success" ng-if="profile.success">
 	                	<p>Successfully update profile.</p>
 	                </div>
-	                <div index-form template-url="{!! route('client.profile.index_form') !!}"></div>
+	                <div template-directive template-url="{!! route('client.profile.index_form') !!}"></div>
 
-	                <div change-password-form template-url="{!! route('client.profile.change_password_form') !!}"></div>
+	                <div template-directive template-url="{!! route('client.profile.change_password_form') !!}"></div>
 				</div>
 			</div>
 		</div>		
