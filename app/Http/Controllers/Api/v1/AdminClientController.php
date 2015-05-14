@@ -20,7 +20,7 @@ class AdminClientController extends ClientController {
 
         $school = Input::only('school_name', 'school_address', 'school_city', 
                               'school_state', 'school_country', 'school_zip',
-                              'school_contact_name','school_contact_number');
+                              'contact_name','contact_number');
 
         $input = Input::only('callback_uri');
 
@@ -67,8 +67,8 @@ class AdminClientController extends ClientController {
 			$this->addMessageBag($this->validateString($school,'school_address'));
 			$this->addMessageBag($this->validateString($school,'school_city'));
 			$this->addMessageBag($this->zipCode($school,'school_zip'));
-            $this->addMessageBag($this->validateString($school,'school_contact_name'));
-            $this->addMessageBag($this->checkContactNumber($school,'school_contact_number'));
+            $this->addMessageBag($this->validateString($school,'contact_name'));
+            $this->addMessageBag($this->checkContactNumber($school,'contact_number'));
 
         }
 
