@@ -57,4 +57,10 @@ class SchoolServices {
 
    }
 
+   public function getSchoolCode($school_name){
+
+        return $this->school->getSchoolCode($school_name);
+
+   }
+
 }
