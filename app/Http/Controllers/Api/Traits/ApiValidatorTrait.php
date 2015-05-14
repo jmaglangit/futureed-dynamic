@@ -556,4 +556,51 @@ trait ApiValidatorTrait {
                 ->errorMessage();
         }
     }
+    
+    public function validateDate( $input,$date_field ){
+        $error_msg = config('futureed-error.error_messages');
+        $validator = Validator::make(
+            [
+                "$date_field" => $input["$date_field"]
+            ],
+            [
+                "$date_field" => "required|date_format:Ymd"
+            ]);
+        
+        if($validator->fails()){
+        
+            $validator_msg = $validator->messages()->toArray();
+            
+            return $this->setErrorCode(1005)
+                ->setField($date_field)
+                ->setMessage($validator_msg["$date_field"][0])
+                ->errorMessage();
+        }
+    }
+    
+    public function validateDateRange($input,$date_start,$date_end){
+        $error_msg = config('futureed-error.error_messages');
+        $validator = Validator::make(
+            [
+                "$date_start" => $input["$date_start"],
+                "$date_end" => $input["$date_end"]
+            ],
+            [
+                "$date_start" => "before:$date_end|after:today"
+            ],
+            [
+                "before" => $error_msg[2500],
+                "after" =>$error_msg[2500]
+            ]);
+        
+        if($validator->fails()){
+        
+            $validator_msg = $validator->messages()->toArray();
+            
+            return $this->setErrorCode(1005)
+                ->setField($date_start)
+                ->setMessage($validator_msg["$date_start"][0])
+                ->errorMessage();
+        }       
+    }
 }
