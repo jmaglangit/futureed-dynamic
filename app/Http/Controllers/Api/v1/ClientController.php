@@ -122,7 +122,7 @@ class ClientController extends ApiController {
 									  'city','country','zip','state');
 
 				$school = input::only('school_name','school_code','school_street_address','school_city',
-										  'school_state','school_country','school_zip');
+										  'school_state','school_country','school_zip','school_contact_name','school_contact_number');
 				
 				$this->addMessageBag($this->username($user,'username'));
 				$this->addMessageBag($this->firstName($client,'first_name'));
@@ -161,6 +161,8 @@ class ClientController extends ApiController {
 					$this->addMessageBag($this->validateStringOptional($school,'school_street_address'));
 					$this->addMessageBag($this->validateStringOptional($school,'school_city'));
 					$this->addMessageBag($this->zipCodeOptional($school,'school_zip'));
+					$this->addMessageBag($this->validateString($school,'school_contact_name'));
+					$this->addMessageBag($this->checkContactNumber($school,'school_contact_number'));
 
 				}
 
