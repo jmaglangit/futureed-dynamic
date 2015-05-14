@@ -79,8 +79,6 @@ class SchoolRepository implements SchoolRepositoryInterface{
 
 	public function updateSchoolDetails($input){
 
-		
-
 
 		foreach ($input as $key => $value) {
 
