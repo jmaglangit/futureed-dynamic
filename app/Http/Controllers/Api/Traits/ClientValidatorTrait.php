@@ -43,7 +43,8 @@ trait ClientValidatorTrait {
                     "$field_name" => strtolower($input["$field_name"]),
                 ],
                 [
-                    "$field_name" => 'required|regex:/^[A-Za-z0-9\-\\,.]+$/'
+                    "$field_name" => 'required|String'
+                    //regex:/^[A-Za-z0-9\-\\,.]+$/'
                 ]
             );
 
