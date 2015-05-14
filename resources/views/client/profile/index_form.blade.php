@@ -230,7 +230,7 @@
             </div>
             <label for="" class="col-md-2 control-label">Country <span class="required" ng-if="profile.is_required">*</span></label>
             <div class="col-md-4">
-                <select name="country" class="form-control" ng-model="profile.prof.country" ng-disabled="!profile.edit">
+                <select name="country" class="form-control" ng-model="profile.prof.country" ng-disabled="!profile.active_edit">
                     <option selected="selected" value="">-- Select Country --</option>
                     <option ng-selected="{! profile.prof.country == country.id !}" ng-repeat="country in countries" value="{! country.id !}">{! country.name!}</option>
                 </select>

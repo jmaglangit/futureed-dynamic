@@ -1,8 +1,7 @@
-angular.module('futureed')
+angular.module('futureed.controllers')
 	.controller('ProfileController', ProfileController);
 
-
-LoginController.$inject = ['$scope', 'apiService', 'clientProfileApiService'];
+ProfileController.$inject = ['$scope', 'apiService', 'clientProfileApiService'];
 
 function ProfileController($scope, apiService, clientProfileApiService) {
 	var self = this;
@@ -15,6 +14,7 @@ function ProfileController($scope, apiService, clientProfileApiService) {
 
 	function setClientProfileActive(active) {
 	    self.errors = Constants.FALSE;
+	    self.success = Constants.FALSE;
 	    $scope.$parent.u_error = Constants.FALSE;
 		$scope.$parent.u_success = Constants.FALSE;
 

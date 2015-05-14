@@ -24,7 +24,7 @@
 			            </p>
 			        </div>
 	                <div class="alert alert-success" ng-if="profile.success">
-	                	<p>Successfully update profile.</p>
+	                	<p>You have successfully updated your profile.</p>
 	                </div>
 	                <div template-directive template-url="{!! route('client.profile.index_form') !!}"></div>
 
