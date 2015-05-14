@@ -1,4 +1,4 @@
-angular.module('futureed.controllers', [])
+angular.module('futureed.controllers', ['datatables'])
   .controller('futureedController', FutureedController)
   .directive('templateDirective', TemplateDirective);
 

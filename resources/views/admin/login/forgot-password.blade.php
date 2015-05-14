@@ -22,7 +22,7 @@
 						{! error !}
 					</p>
 				</div>
-        <div class="title-code" ng-if="forgot">
+        <div class="title-mid" ng-if="forgot">
           Enter code
         </div>
 				{!! Form::open(

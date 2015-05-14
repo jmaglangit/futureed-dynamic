@@ -19,7 +19,7 @@
             {! error !}
           </p>
         </div>
-        <div class="title-code">
+        <div class="title-mid">
           Enter code
         </div>
         {!! Form::open(

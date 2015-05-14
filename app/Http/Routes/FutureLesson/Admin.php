@@ -24,5 +24,13 @@
 					, 'uses' => 'FutureLesson\Admin\LoginController@resetPass'
 				]);
 		});
+
+		Routes::group(['prefix' => '/dashboard'], function()
+		{
+			Routes::get('/', [
+					'as' => 'admin.dashboard.index'
+					, 'uses' => 'FutureLesson\Admin\DashboardController@index'
+				]);
+		});
 	});
 ?>

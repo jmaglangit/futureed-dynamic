@@ -34,9 +34,89 @@ body > .container > .col-md-4{
 	font-weight: 100;
 	margin-top: 20px;
 }
-.title-code{
+.title-mid{
 	 text-transform: uppercase;
   	color: #055A7F;
   	font-size: 1.5em;
   	margin: 20px 0 20px 0;
+}
+.navbar-collapse > .navbar-nav > li > p {
+	padding-top: 15px;
+}
+.row-admin{
+	border-top: 1px solid #0F799D;
+}
+div > .nav-list > li > a{
+	position: relative;
+  	font-size: 1.1em;
+  	padding: 15px 0 15px 30px
+}
+.nav-list{
+	margin-bottom: 0;
+}
+.col-xs-3 > .btn{
+	padding: 30px;
+}
+.client-content > .col-xs-12 > .title-mid{
+	margin: 0 0 0 15px;
+  	text-transform: none;
+}
+.form-search{
+	border: 1px solid #e1e1e1;
+  	border-radius: 5px;
+  	padding: 30px;
+  	background-color: #f6f4f5;
+}
+.search-container{
+	padding:15px 30px 30px 30px;
+	color: #887c70;
+}
+.form-group > .col-xs-5 > .form-control{
+	width: 100%;
+}
+.form-search > .form-inline > .form-group{
+	margin: auto;
+	display: flex;
+}
+
+
+/*Futureed Custom DataTable Design*/
+
+.dataTables_wrapper > .row > .col-sm-6 > .dataTables_filter{
+	display: none;
+}
+.dataTables_wrapper > .row > .col-sm-6{
+	float: right;
+}
+.dataTables_wrapper > .row > .col-sm-6 > .dataTables_length{
+	float: right;
+}
+.table-container{
+	padding: 0 30px 0 30px;
+	margin-top: -40px;
+	margin-bottom: 30px;
+}
+th, td {
+	text-align: center;
+	color: #055a7f;
+	vertical-align: middle !important;
+}
+thead{
+	background-color: #eeeeee;
+}
+.dataTables_wrapper > .row > .col-sm-12{
+	border: 1px solid;
+	border-color: #cccccc;
+  	border-radius: 5px;
+  	padding: 0;
+}
+table#client-list{
+	margin:0 !important;
+}
+.row > .col-sm-5{
+	display: none;
+}
+.row > .col-xs-3{
+	position: relative;
+	bottom: 10px;
 }
