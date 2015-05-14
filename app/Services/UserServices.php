@@ -31,7 +31,6 @@ class UserServices {
     //'first_name',
     //'last_name'
     public function addUser($user){
-        
         $return= [];
 
         if(!$this->validator->email($user['email'])){
