@@ -1,22 +1,9 @@
 angular.module('futureed')
-	.controller('LoginController', LoginController)
-	.directive('registrationForm', registrationForm)
-	.directive('registrationSuccess', registrationSuccess);
+	.controller('LoginController', LoginController);
 
-function registrationForm() {
-	return {
-		templateUrl : '/client/registration_form'
-	}
-}
+LoginController.$inject = ['$scope', 'apiService', 'clientLoginApiService'];
 
-function registrationSuccess() {
-	return {
-		templateUrl : '/client/registration_success'
-	}
-}
-
-
-function LoginController($scope, apiService) {
+function LoginController($scope, apiService, clientLoginApiService) {
 	var vm = this;
 	this.clientLogin = clientLogin;
 	this.clientForgotPassword = clientForgotPassword;
@@ -33,7 +20,7 @@ function LoginController($scope, apiService) {
 	    $scope.errors = Constants.FALSE;
 
 	    $scope.ui_block();
-	    apiService.clientLogin(this.username, this.password, this.role).success(function(response) {
+	    clientLoginApiService.clientLogin(this.username, this.password, this.role).success(function(response) {
 	      if(response.status == Constants.STATUS_OK) {
 	        if(response.errors) {
 	          $scope.errorHandler(response.errors);
@@ -53,9 +40,11 @@ function LoginController($scope, apiService) {
 	function clientForgotPassword() {
 		$scope.$parent.errors = Constants.FALSE;
 	    this.user_type = Constants.CLIENT;
+	    this.base_url = $("#base_url_form input[name='base_url']").val();
+	    this.forgot_password_url = this.base_url + Constants.URL_FORGOT_PASSWORD(angular.lowercase(this.user_type), this.username);
 
 	    $scope.ui_block();
-	    apiService.forgotPassword(this.username, this.user_type).success(function(response) {
+	    apiService.forgotPassword(this.username, this.user_type, this.forgot_password_url).success(function(response) {
 	      if(response.status == Constants.STATUS_OK) {
 	        if(response.errors) {
 	          $scope.errorHandler(response.errors);
@@ -100,10 +89,12 @@ function LoginController($scope, apiService) {
 	function clientResendCode() {
 	    $scope.$parent.errors = Constants.FALSE;
 	    this.user_type = Constants.CLIENT;
-	    $scope.email = (!isStringNullorEmpty($scope.email)) ? $scope.email : $("#redirect_form input[name='email']").val(); 
+	    $scope.email = (!isStringNullorEmpty($scope.email)) ? $scope.email : $("#redirect_form input[name='email']").val();
+	    this.base_url = $("#base_url_form input[name='base_url']").val();
+	    this.resend_code_url = this.base_url + Constants.URL_FORGOT_PASSWORD(angular.lowercase(this.user_type), $scope.email);
 
 	    $scope.ui_block();
-	    apiService.resendResetCode($scope.email, this.user_type).success(function(response) {
+	    apiService.resendResetCode($scope.email, this.user_type, this.resend_code_url).success(function(response) {
 	      if(response.status == Constants.STATUS_OK) {
 	        if(response.errors) {
 	          $scope.errorHandler(response.errors);
@@ -127,7 +118,7 @@ function LoginController($scope, apiService) {
 	      var id = $("input[name='id']").val();
 
 	      $scope.ui_block();
-	      apiService.resetClientPassword(id, reset_code, this.new_password).success(function(response) {
+	      clientLoginApiService.resetClientPassword(id, reset_code, this.new_password).success(function(response) {
 	        if(response.status == Constants.STATUS_OK) {
 	          if(response.errors) {
 	            $scope.errorHandler(response.errors);
@@ -192,8 +183,10 @@ function LoginController($scope, apiService) {
 	    } else {
 	      $scope.ui_block();
 	      this.email = this.reg.email;
+	      this.base_url = $("#base_url_form input[name='base_url']").val();
+	      this.reg.url = this.base_url + Constants.URL_REGISTRATION(angular.lowercase(Constants.CLIENT), this.email);
 
-	      apiService.registerClient(this.reg).success(function(response) {
+	      clientLoginApiService.registerClient(this.reg).success(function(response) {
 	        if(response.status == Constants.STATUS_OK) {
 	          if(response.errors) {
 	            $scope.errorHandler(response.errors);
@@ -220,14 +213,15 @@ function LoginController($scope, apiService) {
 	    var register = this;
 	    register.user_type = Constants.CLIENT;
 	    register.email = (!isStringNullorEmpty(register.email)) ? register.email : $("#registration_success_form input[name='email']").val();
+	    this.base_url = $("#base_url_form input[name='base_url']").val();
+	    this.resend_confirmation_url = this.base_url + Constants.URL_REGISTRATION(angular.lowercase(this.user_type), register.email);
 
 	    $scope.ui_block();
-	    apiService.resendConfirmation(register.email, register.user_type).success(function(response) {
+	    apiService.resendConfirmation(register.email, register.user_type, this.resend_confirmation_url).success(function(response) {
 	      if(response.status == Constants.STATUS_OK) {
 	        if(response.errors) {
 	          $scope.errorHandler(response.errors);
 
-	          console.log($scope.errors);
 	          angular.forEach($scope.errors, function(value, key) {
 	          	if(angular.equals(value, Constants.MSG_ACC_CONFIRMED)) {
 	          		register.account_confirmed = Constants.TRUE;
@@ -268,8 +262,4 @@ function LoginController($scope, apiService) {
 	      $scope.ui_unblock();
 	    });
 	}
-}
-
-LoginController.$inject = ['$scope', 'apiService'];
-
-	
+}	

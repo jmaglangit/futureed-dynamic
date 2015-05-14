@@ -3,11 +3,11 @@
 	{
 		Routes::get('/', 'FutureLesson\Client\LoginController@index');
 		
-		Routes::get('/password/reset', [
+		Routes::get('/password/forgot', [
 			'as' => 'client.password.reset'
 			, 'uses' =>'FutureLesson\Client\LoginController@forgot_password'
 			]);
-		Routes::get('/email/confirm', [
+		Routes::get('/register/confirm', [
 			'as' => 'client.login.confirm'
 			, 'uses' => 'FutureLesson\Client\LoginController@enter_confirmation'
 		]);
@@ -15,12 +15,7 @@
 			'as' => 'client.registration'
 			, 'uses' => 'FutureLesson\Client\LoginController@registration'
 		]);
-		Routes::get('/registration_form', [
-			'uses' => 'FutureLesson\Client\LoginController@registration_form' 
-		]);
-		Routes::get('/registration_success', [
-			'uses' => 'FutureLesson\Client\LoginController@registration_success' 
-		]);
+
 		Routes::get('/logout', [ 
 			'as' => 'client.logout'
 			, 'middleware' => 'client'
@@ -78,6 +73,21 @@
 			Routes::get('/change-password', [ 
 					'as' => 'client.profile.change_password'
 					, 'uses' => 'FutureLesson\Client\ProfileController@changePassword'
+				]);
+		});
+
+		Routes::group(['prefix' => 'partials'], function() {
+			Routes::get('/base_url', [
+					'as' => 'client.partials.base_url'
+					, 'uses' => 'FutureLesson\Client\LoginController@base_url'
+				]);
+			Routes::get('/registration_form', [
+					'as' => 'client.partials.registration_form'
+					, 'uses' => 'FutureLesson\Client\LoginController@registration_form' 
+				]);
+			Routes::get('/registration_success', [
+					'as' => 'client.partials.registration_success'
+					, 'uses' => 'FutureLesson\Client\LoginController@registration_success' 
 				]);
 		});
 	});

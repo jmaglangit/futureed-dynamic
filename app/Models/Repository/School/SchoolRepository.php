@@ -40,6 +40,8 @@ class SchoolRepository implements SchoolRepositoryInterface{
 					'state'				=> $school['school_state'],
 					'country'			=> $school['school_country'],
 					'zip'				=> $school['school_zip'],
+					'contact_name'		=> $school['contact_name'],
+					'contact_number'	=> $school['contact_number'],
 					'created_by'		=> 1,
 					'updated_by'		=> 1,
  				]);
