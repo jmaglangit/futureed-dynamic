@@ -23,7 +23,7 @@ class ClientRegisterController extends ClientController {
 
 	        $user = Input::only('username', 'email', 'first_name', 'last_name', 'password');
 
-	        $school = Input::only('school_name', 'school_address', 'school_city', 'school_state', 'school_country', 'school_zip');
+	        $school = Input::only('school_name', 'school_address', 'school_city', 'school_state', 'school_country', 'school_zip','contact_name','contact_number');
 
             $input = Input:: only('callback_uri');
 
@@ -59,6 +59,9 @@ class ClientRegisterController extends ClientController {
                 $this->addMessageBag($this->validateString($school,'school_state'));
                 $this->addMessageBag($this->validateString($school,'school_country'));
                 $this->addMessageBag($this->zipCode($school,'school_zip'));
+                $this->addMessageBag($this->validateString($school,'contact_name'));
+                $this->addMessageBag($this->checkContactNumber($school,'contact_number'));
+
 
                 $this->addMessageBag($this->validateStringOptional($client,'street_address'));
                 $this->addMessageBag($this->validateStringOptional($client,'city'));

@@ -141,7 +141,7 @@ class ClientServices {
             if($client['client_role'] == 'Principal'){
     
                 $schoolOutput = ['name','street_address','city',
-                                 'state','country','zip'];
+                                 'state','country','zip','contact_name','contact_number'];
 
             }else{
                 

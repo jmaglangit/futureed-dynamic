@@ -9,7 +9,7 @@
 		Parent Dashboard
 	</div>
 	<div class="client-name">
-		Welcome, {! profile.prof.first_name !}
+		Welcome, {! user.first_name !}
 	</div>
 </div>
 
