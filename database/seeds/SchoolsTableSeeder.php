@@ -21,6 +21,8 @@ class SchoolsTableSeeder extends Seeder {
                 'country' => 'Lilipot',
                 'zip' => 90210,
                 'status' => 'Enabled',
+                'contact_name' => 'Para Phe Dee',
+                'contact_number' => '0987654321-0-1',
                 'created_by' => 1,
                 'updated_by' => 1,
                 'created_at' => date("Y-m-d H:i:s"),

@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder {
         $this->command->info('Seeded the countries!');
         $this->call('ClientTableSeeder');
         $this->call('GradeTableSeeder');
+        $this->call('AdminTableSeeder');
     }
 
 }
