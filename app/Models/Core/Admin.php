@@ -8,7 +8,7 @@ class Admin extends Model {
 
     use SoftDeletes;
 
-    protected $table = 'Admins';
+    protected $table = 'admins';
 
     protected $dates = ['deleted_at'];
 
