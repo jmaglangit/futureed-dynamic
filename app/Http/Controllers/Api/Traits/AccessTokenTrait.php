@@ -33,7 +33,7 @@ trait AccessTokenTrait {
                 'authorization' => $token
             ],
             [
-                'authorization' => 'required'
+                'authorization' => 'required|regex:/^[a-zA-Z0-9]*\=\.[a-zA-Z0-9]*\.[a-zA-Z0-9]*$/'
             ],
             [
                 'required' => $error_msg[2030],

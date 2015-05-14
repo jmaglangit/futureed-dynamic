@@ -11,7 +11,16 @@ use FutureEd\Models\Core\Admin;
 
 class AdminRepository implements  AdminRepositoryInterface {
 
+    /**
+     * Get list of Administrators
+     *
+     * @return array
+     */
     public function getAdmins(){
+        //get list of administrators username, email, roles
+        $admin = new Admin();
+
+        return $admin->with('user')->get();
 
     }
 

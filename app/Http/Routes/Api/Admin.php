@@ -13,3 +13,6 @@ Routes::group(['prefix' => '/admin'], function()
     ['except' => ['create', 'edit']]);
 
 });
+
+Routes::resource('/admin','Api\v1\AdminController',
+    ['except' => ['create', 'edit']]);
