@@ -49,6 +49,7 @@ class UserRepository implements UserRepositoryInterface {
 
 
     public function addUser($user){
+
         try{
 
             User::create([
@@ -57,6 +58,7 @@ class UserRepository implements UserRepositoryInterface {
                 'name' => $user['first_name'] .' '.$user['last_name'],
                 'user_type' => $user['user_type'],
                 'password' => (isset($user['password'])) ? sha1($user['password']) : null,
+                'status' => (isset($user['status'])) ? ($user['status']) : 'Enabled',
                 'confirmation_code' => $user['confirmation_code'],
                 'confirmation_code_expiry' => $user['confirmation_code_expiry'],
                 'created_by' => 1,
