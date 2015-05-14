@@ -15,6 +15,6 @@ class User extends Model {
     protected $hidden = ['password', 'created_by','updated_by','created_at','updated_at','deleted_at'];
 
     protected $fillable = ['username', 'email', 'name', 'password', 'user_type', 'confirmation_code',
-        'confirmation_code_expiry', 'created_by', 'updated_by'];
+        'confirmation_code_expiry','status', 'created_by', 'updated_by'];
     
 }
