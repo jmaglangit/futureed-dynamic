@@ -2,6 +2,8 @@
 
 @section('content')
 <div class="container" ng-controller="LoginController as register" ng-cloak>
+  <div template-directive template-url="{!! route('client.partials.base_url') !!}"></div>
+  
   <div class="form-style form-wide" ng-show="!registered"> 
     <div class="title">Register as</div>
     <div class="row">
@@ -22,12 +24,13 @@
           </p>
         </div>
 
-        <div registration-form></div>
+        <div template-directive template-url="{!! route('client.partials.registration_form') !!}"></div>
       </div>
     </div>
   </div>
 
-  <div registration-success></div>
+  <div template-directive template-url="{!! route('client.partials.registration_success') !!}"></div>
+
   @include('student.login.terms-and-condition')
   @include('student.login.privacy-policy')
 
@@ -37,6 +40,7 @@
 @section('scripts')
 
   {!! Html::script('/js/client/controllers/login_controller.js') !!}
+  {!! Html::script('/js/client/services/login_service.js') !!}
   {!! Html::script('/js/client/login.js') !!}
 
 @stop

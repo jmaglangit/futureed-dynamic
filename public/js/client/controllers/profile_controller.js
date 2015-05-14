@@ -1,25 +1,10 @@
 angular.module('futureed')
-	.controller('ProfileController', ProfileController)
-	.directive('indexForm', indexForm)
-	.directive('changePasswordForm', changePasswordForm);
+	.controller('ProfileController', ProfileController);
 
-function indexForm() {
-	return {
-		templateUrl : function(scope, element, attrs) {
-			return element.templateUrl;
-		}
-	}
-}
 
-function changePasswordForm() {
-	return {
-		templateUrl : function(scope, element, attrs) {
-			return element.templateUrl;
-		}
-	}
-}
+LoginController.$inject = ['$scope', 'apiService', 'clientProfileApiService'];
 
-function ProfileController($scope, clientProfileApiService, apiService) {
+function ProfileController($scope, apiService, clientProfileApiService) {
 	var self = this;
 	this.change = {};
 

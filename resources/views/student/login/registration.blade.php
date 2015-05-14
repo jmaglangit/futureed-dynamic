@@ -2,6 +2,8 @@
 
 @section('content')
 <div class="container login student-fnt" ng-cloak>
+    <div template-directive template-url="{!! route('student.partials.base_url') !!}"></div>
+    
     <div class="form-style register_student form-wide" ng-init="success={!! $success !!}" ng-show="!success"> 
         {!! Form::open(array('id' => 'registration_form' , 'class' => 'form-horizontal simple-form')) !!}
             <div class="form-header">

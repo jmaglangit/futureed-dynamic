@@ -3,6 +3,8 @@
 @section('content')
   <div class="container login" ng-cloak>
       <div class="register_users form-style col-sm-6 col-sm-offset-3" ng-controller="LoginController as confirm"> 
+        <div template-directive template-url="{!! route('client.partials.base_url') !!}"></div>
+        
         <div ng-if="!confirm.confirmed">
           <div class="title">Thank you for registering to Future Lesson!</div>
       
@@ -97,5 +99,6 @@
 
 @section('scripts')
   {!! Html::script('/js/client/controllers/login_controller.js') !!}
+  {!! Html::script('/js/client/services/login_service.js') !!}
   {!! Html::script('/js/client/login.js') !!}
 @stop

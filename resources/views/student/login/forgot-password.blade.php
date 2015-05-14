@@ -12,6 +12,8 @@
           </p>
         </div>
 
+        <div template-directive template-url="{!! route('student.partials.base_url') !!}"></div>
+
         {!! Form::open(array('id' => 'forgot_password_form')) !!}
           <div class="input">
             <div class="icon">
