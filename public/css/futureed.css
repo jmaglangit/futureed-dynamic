@@ -847,7 +847,7 @@ li > a > span > .fa{
 	color: #03658A;
   	font-size: 1.1em;
 }
-.client-legend{
+.legend-name-mid{
 	text-transform: none;
 	font-family: inherit !important;
 	font-size: 18px !important;

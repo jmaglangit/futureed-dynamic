@@ -31,6 +31,13 @@
 					'as' => 'admin.dashboard.index'
 					, 'uses' => 'FutureLesson\Admin\DashboardController@index'
 				]);
+		});		
+		Routes::group(['prefix' => '/manage'], function()
+		{
+			Routes::get('/client/add-client', [
+					'as' => 'admin.manage.client.add_client'
+					, 'uses' => 'FutureLesson\Admin\ManageController@addclient'
+				]);
 		});
 	});
 ?>
