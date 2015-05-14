@@ -28,15 +28,15 @@ class AnnouncementController extends ApiController {
      *   @return announcement record.
      */
     
-    public function show(){
+    public function index(){
         return $this->respondWithData($this->announcement->getAnnouncement());
     }
     
     /**
-     *   update or create announcement.
+     *   store announcement.
      *   @return announcement record.
      */
-    public function update(){
+    public function store(){
         $input = Input::only('announcement','date_start','date_end');
         
         $this->addMessageBag($this->validateString($input,'announcement'));
