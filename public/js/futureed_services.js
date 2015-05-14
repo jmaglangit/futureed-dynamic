@@ -1,4 +1,4 @@
-var services = angular.module('futureed.services', ['ngResource']);
+var services = angular.module('futureed.services', []);
 
 	services.factory('apiService', function($http) {
 		var futureedAPI = {};
@@ -12,26 +12,26 @@ var services = angular.module('futureed.services', ['ngResource']);
 		futureedAPI.resendResetCode = resendResetCode;
 		futureedAPI.resendConfirmation = resendConfirmation;
 
-		function forgotPassword(username, user_type, url) {
+		function forgotPassword(username, user_type, callback_uri) {
 			return $http({
 				method 	: Constants.METHOD_POST
-				, data	: {username: username, user_type : user_type, url : url}
+				, data	: {username: username, user_type : user_type, callback_uri : callback_uri}
 				, url	: futureedAPIUrl + 'user/password/forgot'
 			});
 		}
 
-		function resendResetCode(email, user_type, url) {
+		function resendResetCode(email, user_type, callback_uri) {
 			return $http({
 				method 	: Constants.METHOD_POST
-				, data	: {email: email, user_type : user_type, url : url}
+				, data	: {email: email, user_type : user_type, callback_uri : callback_uri}
 				, url	: futureedAPIUrl + 'user/reset/code'
 			});
 		}
 
-		function resendConfirmation(email, user_type, url) {
+		function resendConfirmation(email, user_type, callback_uri) {
 			return $http({
 				method	: 'POST'
-				, data 	: {email : email, user_type : user_type, url : url}
+				, data 	: {email : email, user_type : user_type, callback_uri : callback_uri}
 				, url	: futureedAPIUrl + 'user/confirmation/code'
 			});
 		}
@@ -223,3 +223,26 @@ var services = angular.module('futureed.services', ['ngResource']);
 
 		return futureedAPI;
 	});
+
+	services.factory('futureedInterceptor', ['$q', '$cookies', function ($q, $cookies) {
+
+      return {
+          'request' : function(config) {
+            config.headers = config.headers || {};
+
+            if ($cookies.authorization) {
+              config.headers.authorization = $cookies.authorization;
+            }
+
+            return config;
+          } 
+
+          , 'response': function (response) {
+              if(response && response.headers("authorization")) {
+                $cookies.authorization = response.headers("authorization");
+              }
+
+              return response;
+          }
+      };
+  }]);

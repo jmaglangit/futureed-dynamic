@@ -91,7 +91,7 @@ class LoginController extends Controller {
 		}
 
 		if($email == null) {
-			return redirect()->route('student.login.forgot_password');
+			// return redirect()->route('student.login.forgot_password');
 		}
 		
 		return view('student.login.enter-code')->with(array('email' => $email, 'show' => $show));

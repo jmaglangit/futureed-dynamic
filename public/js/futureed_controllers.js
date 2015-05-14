@@ -415,7 +415,7 @@ function FutureedController($scope, apiService) {
     $scope.errors = Constants.FALSE;
     $scope.user_type = Constants.STUDENT;
     $scope.base_url = $("#base_url_form input[name='base_url']").val();
-    $scope.forgot_password_url = $scope.base_url + Constants.URL_FORGOT_PASSWORD(angular.lowercase($scope.user_type), $scope.username);
+    $scope.forgot_password_url = $scope.base_url + Constants.URL_FORGOT_PASSWORD(angular.lowercase($scope.user_type));
 
     $scope.ui_block();
     apiService.forgotPassword($scope.username, $scope.user_type, $scope.forgot_password_url).success(function(response) {
@@ -445,7 +445,7 @@ function FutureedController($scope, apiService) {
     $scope.user_type = Constants.STUDENT;
     $scope.email = (!isStringNullorEmpty($scope.email)) ? $scope.email : $("#redirect_form input[name='email']").val(); 
     $scope.base_url = $("#base_url_form input[name='base_url']").val();
-    $scope.resend_code_url = $scope.base_url + Constants.URL_FORGOT_PASSWORD(angular.lowercase($scope.user_type), $scope.email);
+    $scope.resend_code_url = $scope.base_url + Constants.URL_FORGOT_PASSWORD(angular.lowercase($scope.user_type));
 
     $scope.ui_block();
     apiService.resendResetCode($scope.email, $scope.user_type, $scope.resend_code_url).success(function(response) {
@@ -525,7 +525,7 @@ function FutureedController($scope, apiService) {
 
       $scope.reg = reg;
       $scope.base_url = $("#base_url_form input[name='base_url']").val();
-      $scope.registration_url = $scope.base_url + Constants.URL_REGISTRATION(angular.lowercase(Constants.STUDENT), $scope.reg.email);
+      $scope.reg.callback_uri = $scope.base_url + Constants.URL_REGISTRATION(angular.lowercase(Constants.STUDENT));
 
 
       if($scope.reg) {
@@ -597,13 +597,19 @@ function FutureedController($scope, apiService) {
     $scope.user_type = Constants.STUDENT;
     $scope.email = (!isStringNullorEmpty($scope.email)) ? $scope.email : $("#redirect_form input[name='email']").val();
     $scope.base_url = $("#base_url_form input[name='base_url']").val();
-    $scope.resend_confirmation_url = $scope.base_url + Constants.URL_REGISTRATION(angular.lowercase($scope.user_type), $scope.email);
+    $scope.resend_confirmation_url = $scope.base_url + Constants.URL_REGISTRATION(angular.lowercase($scope.user_type));
 
     $scope.ui_block();
     apiService.resendConfirmation($scope.email, $scope.user_type, $scope.resend_confirmation_url).success(function(response) {
       if(response.status == Constants.STATUS_OK) {
         if(response.errors) {
           $scope.errorHandler(response.errors);
+
+          angular.forEach($scope.errors, function(value, key) {
+            if(angular.equals(value, Constants.MSG_ACC_CONFIRMED)) {
+              $scope.account_confirmed = Constants.TRUE;
+            }
+          });
         } else if(response.data) {
           $scope.resent = Constants.TRUE;
         }
@@ -1018,8 +1024,4 @@ function FutureedController($scope, apiService) {
     });
 
   }
-
-  /**
-  * End of Client Page Functions
-  */
 };

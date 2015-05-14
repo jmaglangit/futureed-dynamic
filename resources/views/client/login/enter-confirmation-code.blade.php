@@ -70,7 +70,12 @@
                           )
                       )!!}
 
-                      <a href="{!! route('client.login') !!}" class="btn btn-gold btn-medium" ng-if="confirm.account_confirmed"> Home </a>
+                      {!! Html::link(route('client.login'), 'Home'
+                          , array(
+                              'class' => 'btn btn-gold btn-medium'
+                              , 'ng-if' => 'confirm.account_confirmed'
+                          )
+                      ) !!}
                   </div>
               {!! Form::close() !!}
           </div>
