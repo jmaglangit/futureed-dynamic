@@ -13,7 +13,7 @@ class AdminClientController extends ClientController {
 
         $user_type = config('futureed.client');
 
-        $client = Input::only('first_name', 'last_name', 'client_role', 
+        $client = Input::only('first_name', 'last_name', 'client_role', 'school_code',
                               'street_address', 'city', 'state', 'country', 'zip');
 
         $user = Input::only('username', 'email','status');
@@ -51,6 +51,7 @@ class AdminClientController extends ClientController {
 			$this->addMessageBag($this->validateStringOptional($client,'city'));
 			$this->addMessageBag($this->validateStringOptional($client,'country'));
 		    $this->addMessageBag($this->validateStringOptional($client,'state'));
+            $this->addMessageBag($this->validateNumber($client,'school_code'));
 		    $this->addMessageBag($this->zipCodeOptional($client,'zip'));
 
         }else{
@@ -118,13 +119,8 @@ class AdminClientController extends ClientController {
                 $user_response = $this->user->addUser($user,$client);
 
                 $client['user_id'] = $user_response['id'];
-                $client['school_code'] = null;
 
-                if(strcasecmp($client['client_role'],config('futureed.teacher')) == 0){
-
-                    $client['school_code'] = $check_school;
-
-                }else if(strcasecmp($client['client_role'],config('futureed.principal')) == 0){
+                if(strcasecmp($client['client_role'],config('futureed.principal')) == 0){
 
                     //add school to do do
                     $school_response = $this->school->addSchool($school);
