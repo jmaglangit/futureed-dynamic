@@ -253,21 +253,13 @@ class StudentPasswordController extends StudentController {
           if($this->student->checkIdExist($id)){
               if($this->password_image->checkPasswordExist($input['password_image_id'])){
 
-                  $token = $this->token->decodeToken($input['access_token']);
-    
-                   if($token['status']==true){
-                        
                         $student_reference = $this->student->getStudentReferences($id);
+
                         $this->user->updateInactiveLock($student_reference['user_id']);
+
                         $this->student->ChangPasswordImage($id,$input['password_image_id']); 
                         
                         return $this->setHeader($this->getToken())->respondWithData(['id' => $id ]);
-                      
-                    }else{
-                      
-                      return $this->setHeader($this->getToken())->respondErrorMessage(2102);
-                    
-                    } 
 
               }else{
 
