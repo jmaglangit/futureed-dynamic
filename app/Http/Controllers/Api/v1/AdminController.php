@@ -5,6 +5,7 @@ use FutureEd\Http\Controllers\Controller;
 
 use FutureEd\Models\Repository\Admin\AdminRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class AdminController extends ApiController {
 
@@ -29,7 +30,17 @@ class AdminController extends ApiController {
 	{
 		//get header token
 
-        return $this->admin->getAdmins();
+        $limit = Input::get('limit');
+
+        if(Input::get('limit')){
+            return $this->respondWithData($this->admin->getAdmins($limit));
+        }
+
+        return $this->respondWithData($this->admin->getAdmins());
+
+
+
+
 	}
 
 	/**
