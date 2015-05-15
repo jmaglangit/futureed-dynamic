@@ -1,4 +1,4 @@
-angular.module('futureed.controllers', ['datatables'])
+angular.module('futureed.controllers', ['datatables','ngResource'])
   .controller('futureedController', FutureedController)
   .directive('templateDirective', TemplateDirective);
 
