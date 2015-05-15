@@ -19,6 +19,8 @@ var Constants = {
 	, PASSWORD		: "password"
 	, INDEX			: "index"
 	, EDIT			: "edit"
+	, EDIT_EMAIL	: "edit_email"
+	, CONFIRM_EMAIL : "confirm_email"
 
 	, USER_PRINCIPAL: "user_principal"
 	, USER_PARENT 	: "user_parent"
@@ -35,15 +37,15 @@ var Constants = {
 
 	, ATTR_SUBMIT			: "submit"
 
-	, URL_FORGOT_PASSWORD	: function(user_type, email) {
-		return '/' + user_type + '/password/forgot?email=' + email;
+	, URL_FORGOT_PASSWORD	: function(user_type) {
+		return '/' + user_type + '/password/forgot';
 	}
 
-	, URL_REGISTRATION		: function(user_type, email) {
-		return '/' + user_type + '/register/confirm?email=' + email;
+	, URL_REGISTRATION		: function(user_type) {
+		return '/' + user_type + '/register/confirm';
 	}
 
-	, URL_CHANGE_EMAIL		: function(user_type, email) {
-		return '/' + user_type + '/email/confirm?email=' + email;
+	, URL_CHANGE_EMAIL		: function(user_type) {
+		return '/' + user_type + '/email/confirm';
 	}
 }

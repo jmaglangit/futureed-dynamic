@@ -13,17 +13,20 @@ class ProfileController extends Controller {
 		return view('student.profile.index', ['active' => 'index', 'id' => $id]);
 	}
 
-	public function rewards() {
-		return view('student.profile.rewards', ['active' => 'rewards']);
+	public function profile_form() {
+		return view('student.profile.index_form');
 	}
 
-	public function change_password() {
-		$id = $this->getId();
-		return view('student.profile.change_password', ['active' => 'password']);
+	public function rewards_form() {
+		return view('student.profile.rewards_form');
+	}
+
+	public function change_password_form() {
+		return view('student.profile.change_password_form');
 	}	
 
-	public function change_avatar() {
-		return view('student.profile.change_avatar', ['active' => 'avatar']);
+	public function avatar_form() {
+		return view('student.profile.avatar_form');
 	}
 
 	public function edit_email(){

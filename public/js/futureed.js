@@ -56,20 +56,25 @@ angular.module('futureed', [
     return angular.isObject(data) && String(data) !== '[object File]' ? param(data) : data;
   }];
 
-  $httpProvider.interceptors.push(['$q', '$cookieStore', function ($q, $cookieStore) {
+  $httpProvider.interceptors.push(['$q', '$cookies', '$cookieStore', function ($q, $cookies, $cookieStore) {
+      
+
       return {
           'request' : function(config) {
-            config.headers.authorization = $cookieStore.get('authorization');
+            if(sessionStorage.authorization) {
+              config.headers.authorization = sessionStorage.authorization;
+            }
+
             return config;
           } 
 
           , 'response': function (response) {
               if(response && response.headers("authorization")) {
-                $cookieStore.put('authorization', response.headers("authorization"));
+                sessionStorage.authorization = response.headers("authorization");
               }
 
-              return response || $q.when(response);
-          }  
+              return response;
+          }
       };
   }]);
 
