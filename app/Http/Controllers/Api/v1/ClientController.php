@@ -356,7 +356,7 @@ class ClientController extends ApiController {
 
                 if(strcasecmp($client['client_role'],config('futureed.principal')) == 0){
 
-                    //add school to do do
+                    //add school to db
                     $school_response = $this->school->addSchool($school);
 
                     $client['school_code'] = $school_response;
