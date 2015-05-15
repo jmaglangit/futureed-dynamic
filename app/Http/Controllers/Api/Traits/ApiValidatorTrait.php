@@ -541,7 +541,6 @@ trait ApiValidatorTrait {
                 "$field_name" => 'required|regex:/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/'
             ],
             [
-                'required' => $error_msg[2025],
                 'regex' => $error_msg[2115]
             ]
         );

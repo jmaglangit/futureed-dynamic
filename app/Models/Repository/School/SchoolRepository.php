@@ -111,6 +111,14 @@ class SchoolRepository implements SchoolRepositoryInterface{
 
 	}
 
+	public function searchSchool($school_name){
+
+		return School::select('name','code','city','state','street_address')
+						->where('name','Like',$school_name.'%')->get()->toArray();
+
+
+	}
+
 
 
 
