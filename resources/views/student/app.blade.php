@@ -70,6 +70,9 @@
     {!! Html::script('/js/futureed_controllers.js') !!}
     {!! Html::script('/js/futureed_services.js') !!}
     {!! Html::script('/js/datetimepicker.js') !!}
+    {!! Html::script('/js/angular-datatables.min.js') !!}
+    {!! Html::script('/js/jquery.dataTables.min.js') !!}
+    {!! Html::script('//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js') !!}
 
     @yield('scripts')
 

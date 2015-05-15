@@ -1,6 +1,6 @@
 {!! Form::open(array('id' => 'client_profile_form', 'class' => 'form-horizontal', 'ng-if' => 'profile.active_index || profile.active_edit')) !!}
     <fieldset>
-    	<legend class="client-legend">
+    	<legend class="legend-name-mid">
     		User Credentials
     	</legend>
     	<div class="form-group">
@@ -59,7 +59,7 @@
     </fieldset>
 
     <fieldset>
-    	<legend class="client-legend">
+    	<legend class="legend-name-mid">
     		Personal Information
     	</legend>
     	<div class="form-group">
@@ -89,7 +89,7 @@
     </fieldset>
 
     <fieldset ng-if="profile.is_teacher">
-    	<legend class="client-legend">
+    	<legend class="legend-name-mid">
     		School Information
     	</legend>
     	<div class="form-group">
@@ -107,7 +107,7 @@
     </fieldset>
 
     <fieldset ng-if="profile.is_principal">
-    	<legend class="client-legend">
+    	<legend class="legend-name-mid">
     		School Information
     	</legend>
     	<div class="form-group">
@@ -177,10 +177,10 @@
         </div>
     </fieldset>
     <fieldset>
-    	<legend class="client-legend" ng-if="!profile.is_parent">
+    	<legend class="legend-name-mid" ng-if="!profile.is_parent">
     		Other Address Information(Optional)
     	</legend>
-    	<legend class="client-legend" ng-if="profile.is_parent">
+    	<legend class="legend-name-mid" ng-if="profile.is_parent">
     		Address Information
     	</legend>
         <div class="form-group">
