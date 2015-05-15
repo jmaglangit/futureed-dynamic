@@ -86,10 +86,10 @@ var services = angular.module('futureed.services', []);
 			});
 		}
 
-		futureedAPI.changeValidate = function(id, email_new, image_id) {
+		futureedAPI.changeValidate = function(id, email_new, image_id, callback_uri) {
 			return $http({
 				method	: 'PUT'
-				, data	: {new_email : email_new, password_image_id : image_id}
+				, data	: {new_email : email_new, password_image_id : image_id, callback_uri : callback_uri}
 				, url	: futureedAPIUrl + 'student/email/' + id
 			});
 		}
@@ -102,11 +102,11 @@ var services = angular.module('futureed.services', []);
 			});
 		}
 
-		futureedAPI.emailResendCode = function(new_email, user_type){
+		futureedAPI.emailResendCode = function(id, new_email, user_type, callback_uri){
 			return $http({
 				method	: 'POST'
-				, data 	: {new_email : new_email, user_type : user_type}
-				, url 	: futureedAPIUrl + 'student/resend/email'
+				, data 	: {new_email : new_email, user_type : user_type, callback_uri : callback_uri}
+				, url 	: futureedAPIUrl + 'student/resend/email/' + id
 			});
 		}
 
@@ -193,10 +193,9 @@ var services = angular.module('futureed.services', []);
 		/**
 		* Profile related calls
 		*/
-		futureedAPI.studentDetails = function(id, access_token) {
+		futureedAPI.studentDetails = function(id) {
 			return $http({
 				method 	: 'GET'
-				, data 	: {access_token : access_token}
 				, url	: futureedAPIUrl + 'student/' + id
 			});
 		}
@@ -223,26 +222,3 @@ var services = angular.module('futureed.services', []);
 
 		return futureedAPI;
 	});
-
-	services.factory('futureedInterceptor', ['$q', '$cookies', function ($q, $cookies) {
-
-      return {
-          'request' : function(config) {
-            config.headers = config.headers || {};
-
-            if ($cookies.authorization) {
-              config.headers.authorization = $cookies.authorization;
-            }
-
-            return config;
-          } 
-
-          , 'response': function (response) {
-              if(response && response.headers("authorization")) {
-                $cookies.authorization = response.headers("authorization");
-              }
-
-              return response;
-          }
-      };
-  }]);

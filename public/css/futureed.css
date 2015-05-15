@@ -521,11 +521,11 @@ li.active .rnd-identifier{
 	color: #fff;
 }
 .side-nav ul li a:hover, .side-nav ul li.active a{
-	background: #065A7F;
+	background: #0E79A3;
 	color: #fff;
 }
 .client-nav ul li a:hover, .side-nav ul li.active a{
-	background: #0E79A3;
+	background: #065A7F;
 	color: #fff;
 }
 .side-nav a{
@@ -944,4 +944,3 @@ div > .btncon > a {
   	margin-left: 60px;
   	padding: 10px;
 }
-

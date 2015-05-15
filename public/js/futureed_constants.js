@@ -19,6 +19,8 @@ var Constants = {
 	, PASSWORD		: "password"
 	, INDEX			: "index"
 	, EDIT			: "edit"
+	, EDIT_EMAIL	: "edit_email"
+	, CONFIRM_EMAIL : "confirm_email"
 
 	, USER_PRINCIPAL: "user_principal"
 	, USER_PARENT 	: "user_parent"

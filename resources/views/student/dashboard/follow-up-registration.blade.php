@@ -43,7 +43,7 @@
                           </div>
                         </div>
                         <div class="btmcon">
-                            <button type="button" ng-if="enable" class="btn btn-maroon btn-medium" ng-click="selectAvatar()">Proceed</button>
+                            <button type="button" ng-if="enable" class="btn btn-maroon btn-medium" ng-click="$parent.selectAvatar()">Proceed</button>
                         </div>
                       </form>
                     </div>

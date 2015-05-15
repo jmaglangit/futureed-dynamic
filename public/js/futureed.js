@@ -56,6 +56,26 @@ angular.module('futureed', [
     return angular.isObject(data) && String(data) !== '[object File]' ? param(data) : data;
   }];
 
-  $httpProvider.interceptors.push('futureedInterceptor');
+  $httpProvider.interceptors.push(['$q', '$cookies', '$cookieStore', function ($q, $cookies, $cookieStore) {
+      
+
+      return {
+          'request' : function(config) {
+            if(sessionStorage.authorization) {
+              config.headers.authorization = sessionStorage.authorization;
+            }
+
+            return config;
+          } 
+
+          , 'response': function (response) {
+              if(response && response.headers("authorization")) {
+                sessionStorage.authorization = response.headers("authorization");
+              }
+
+              return response;
+          }
+      };
+  }]);
 
 }]);
