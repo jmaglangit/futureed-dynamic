@@ -18,6 +18,7 @@ class SchoolController extends ApiController {
         return  $this->respondWithData($this->school->getSchools());
 	}
 
+	
 
 
 }
