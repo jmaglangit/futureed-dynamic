@@ -22,7 +22,7 @@ class AdminController extends ApiController {
     }
 
 	/**
-	 * Display a listing of the resource.
+	 * Display a list of Admin users.
 	 *
 	 * @return Response
 	 */

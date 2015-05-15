@@ -14,6 +14,8 @@ class AdminRepository implements  AdminRepositoryInterface {
     /**
      * Get list of Administrators
      *
+     * @param int limit
+     *
      * @return array
      */
     public function getAdmins($limit = 3){
