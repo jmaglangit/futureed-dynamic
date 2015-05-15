@@ -77,6 +77,9 @@ return [
         2233 => 'Password is invalid.',
 
         2234 => 'Unauthorized Registration',
+        
+        //Announcement messages.
+        2500 => 'Date range should be between today and future dates.'
 
     ],
 ];

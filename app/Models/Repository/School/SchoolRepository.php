@@ -105,6 +105,12 @@ class SchoolRepository implements SchoolRepositoryInterface{
 
 	}
 
+	public function getSchoolCode($school_name){
+
+		return School::where('name','=',$school_name)->pluck('code');
+
+	}
+
 
 
 
