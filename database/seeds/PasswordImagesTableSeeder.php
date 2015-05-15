@@ -11,7 +11,7 @@ class PasswordImagesTableSeeder extends Seeder {
     {
         $password_images = [];
 
-        for($i=0;$i <= 64; $i++){
+        for($i=1;$i <= 64; $i++){
 
                 $password_images = array_merge($password_images, [[
                     'name' => "img-pass-$i",

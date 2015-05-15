@@ -3,9 +3,22 @@
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
+use FutureEd\Models\Repository\Admin\AdminRepositoryInterface;
 use Illuminate\Http\Request;
 
 class AdminController extends ApiController {
+
+    protected $admin;
+
+    /**
+     * Admin constructor
+     *
+     * @return void
+     */
+    public function __construct(AdminRepositoryInterface $admin){
+
+        $this->admin = $admin;
+    }
 
 	/**
 	 * Display a listing of the resource.
@@ -14,17 +27,9 @@ class AdminController extends ApiController {
 	 */
 	public function index()
 	{
-		//
-	}
+		//get header token
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
+        return $this->admin->getAdmins();
 	}
 
 	/**
@@ -46,17 +51,8 @@ class AdminController extends ApiController {
 	public function show($id)
 	{
 		//
-	}
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
+        return $this->admin->getAdmin($id);
 	}
 
 	/**

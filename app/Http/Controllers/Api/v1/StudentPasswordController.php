@@ -226,12 +226,21 @@ class StudentPasswordController extends StudentController {
     
     
     public function changeImagePassword($id){
+
+        //Check token authentication if valid.
+        $access_token = \Request::header('authorization');
+
+        $this->validateToken($access_token);
+
+        if($this->getMessageBag()){
+
+            return $this->respondWithError($this->getMessageBag());
+        }
       
-      $input = Input::only('password_image_id','access_token');
+      $input = Input::only('password_image_id');
       $error = config('futureed-error.error_messages');
 
       $this->addMessageBag($this->validateNumber($input,'password_image_id'));
-      $this->addMessageBag($this->validateString($input,'access_token'));
 
       $msg_bag = $this->getMessageBag();
 
@@ -252,25 +261,23 @@ class StudentPasswordController extends StudentController {
                         $this->user->updateInactiveLock($student_reference['user_id']);
                         $this->student->ChangPasswordImage($id,$input['password_image_id']); 
                         
-                        return $this->respondWithData(['id'=>$id,
-                                                        'access_token'=>$input['access_token']
-                                                      ]);
+                        return $this->setHeader($this->getToken())->respondWithData(['id' => $id ]);
                       
                     }else{
                       
-                      return $this->respondErrorMessage(2102);
+                      return $this->setHeader($this->getToken())->respondErrorMessage(2102);
                     
                     } 
 
               }else{
 
-                return $this->respondErrorMessage(2101);
+                return $this->setHeader($this->getToken())->respondErrorMessage(2101);
 
               }
 
           }else{
 
-            return $this->respondErrorMessage(2001);
+            return $this->setHeader($this->getToken())->respondErrorMessage(2001);
           }
          
       }
