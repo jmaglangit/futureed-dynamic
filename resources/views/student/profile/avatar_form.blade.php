@@ -9,7 +9,7 @@
 			    <div class="form-select-password">
 			      <div class="form_content">
 			        <ul class="avatar_list list-unstyled list-inline" ng-init="profile.getAvatarImages()">
-			          <li class="item avtrcon" ng-repeat="avatar in profile.avatars" ng-click="highlightAvatar($event)">
+			          <li class="item avtrcon" ng-repeat="avatar in profile.avatars" ng-click="profile.highlightAvatar($event)">
 			             <img ng-src="{! avatar.url !}" alt="{! avatar.name !}">
 			             <input type="hidden" id="avatar_id" name="avatar_id" value="{! avatar.id !}">
 			          </li>
@@ -23,7 +23,7 @@
 			{!! Form::button('Proceed'
 				, array(
 					'class' => 'btn btn-maroon btn-medium'
-					, 'ng-if' => 'enable'
+					, 'ng-if' => 'profile.enable'
 					, 'ng-click' => 'profile.selectAvatar()'
 				)
 			) !!}

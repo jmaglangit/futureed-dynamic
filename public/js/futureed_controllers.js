@@ -11,7 +11,6 @@ function TemplateDirective() {
 }
 
 function FutureedController($scope, apiService) {
-  $scope.asd = apiService.asd;
   $scope.display_date = new Date();
   
   /**
@@ -354,7 +353,7 @@ function FutureedController($scope, apiService) {
           $scope.errorHandler(response.errors);
           getLoginPassword();
         } else if(response.data){
-          sessionStorage.user = JSON.stringify(response.data);
+          $scope.user = JSON.stringify(response.data);
           $("input[name='user_data']").val(JSON.stringify(response.data));
           $("#password_form").submit();
         } 
@@ -388,7 +387,7 @@ function FutureedController($scope, apiService) {
 
   function getUserDetails() {
     var user = $("input[name='userdata']").val();
-
+    console.log(user);
     /*to jollie mar: erase this after creating client profile. line 386*/
     $scope.teacher = Constants.TRUE;
 
@@ -398,7 +397,7 @@ function FutureedController($scope, apiService) {
         $scope.confirm_email = Constants.TRUE;
       }
 
-      $("input[name='userdata']").val('');
+      $("input[name='userdata']").val();
     }
   }
 

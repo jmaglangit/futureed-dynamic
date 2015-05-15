@@ -45,7 +45,7 @@
                 <span ng-if="e_error" class="alert alert-error">{! e_error !}</span>
             </div>
         </div>
-        <div class="form-group" ng-if="confirm_email">
+        <div class="form-group" ng-if="profile.prof.new_email">
             <label for="" class="col-md-2 control-label">Pending Email <span class="required">*</span></label>
             <div class="col-md-5">
             	{!! Form::text('email', ''

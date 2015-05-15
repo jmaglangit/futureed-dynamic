@@ -6,13 +6,14 @@ ProfileController.$inject = ['$scope', 'apiService'];
 function ProfileController($scope, apiService) {
 	var self = this;
 
-	self.user = (sessionStorage.length) ? JSON.parse(sessionStorage.user) : {};
+	self.user = ($scope.user) ? $scope.user : {};
 	self.setStudentProfileActive = setStudentProfileActive;
 
 	self.studentDetails = studentDetails;
 	self.saveProfile = saveProfile;
 
 	self.getAvatarImages = getAvatarImages;
+	self.highlightAvatar = highlightAvatar;
 	self.selectAvatar = selectAvatar;
 
 	self.highlightPassword = highlightPassword;
@@ -79,7 +80,7 @@ function ProfileController($scope, apiService) {
 	  }
 
 	  function studentDetails() {
-	    apiService.studentDetails($scope.user.id).success(function(response) {
+	    apiService.studentDetails(self.user.id).success(function(response) {
 	      if(response.status == Constants.STATUS_OK) {
 	        if(response.errors) {
 	          self.errors = $scope.errorHandler(response.errors);
@@ -115,8 +116,8 @@ function ProfileController($scope, apiService) {
 	              $("#profile_form select[name='" + value.field +"']").addClass("required-field");
 	            });
 	          } else if(response.data){
-	            $scope.user = response.data;
-	            self.user = $scope.user;
+	            $scope.$parent.user = response.data;
+	            $scope.$parent.user;
 
 	            apiService.updateUserSession(response.data).success(function(response) {
 	              self.setStudentProfileActive(Constants.INDEX);
@@ -152,16 +153,28 @@ function ProfileController($scope, apiService) {
 	    });
 	  }
 
+	function highlightAvatar(e) {
+	    var target = getTarget(e);
+
+	    $("ul.avatar_list li").removeClass('selected');
+	    $(target).addClass('selected');
+	    self.avatar_id = $(target).find("#avatar_id").val(); 
+	    self.enable = Constants.TRUE;
+	}
+
 	function selectAvatar() {
-	    apiService.selectAvatar(self.user.id, $scope.avatar_id).success(function(response) {
+	    apiService.selectAvatar(self.user.id, self.avatar_id).success(function(response) {
 	      if(response.status == Constants.STATUS_OK) {
 	        if(response.errors) {
 	          self.errors = $scope.errorHandler(response.errors);
 	        } else if(response.data){
-	          $scope.user.avatar_id = response.data.id;
-	          $scope.user.avatar = response.data.url;
+	          self.user.avatar_id = response.data.id;
+	          self.user.avatar = response.data.url;
+	          $scope.$parent.user = self.user;
+
 	          self.success = Constants.TRUE;
-	          apiService.updateUserSession($scope.user).success(function(response) {
+
+	          apiService.updateUserSession(self.user).success(function(response) {
 	              $("ul.avatar_list li").removeClass('selected');
 	          }).error(function() {
 	            self.errors = $scope.internalError();

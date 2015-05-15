@@ -13,7 +13,7 @@
 		<div class="content">
 			<div class="hdr">
 				<div class="avtrcon">
-					<img ng-src="{! user.avatar !}">
+					<img ng-src="{! profile.user.avatar !}">
 				</div>
 				<div class="detcon">
 					<div class="rwrdscon">
