@@ -11,7 +11,7 @@ function TemplateDirective() {
 }
 
 function FutureedController($scope, apiService) {
-
+  $scope.asd = apiService.asd;
   $scope.display_date = new Date();
   
   /**
@@ -281,17 +281,10 @@ function FutureedController($scope, apiService) {
   $scope.saveNewPassword = saveNewPassword;
 
   // Profile
-  $scope.setActive = setActive;
-
-  $scope.editProfile = editProfile;
   $scope.updateAge = updateAge;
-  $scope.saveProfile = saveProfile;
-  $scope.validateCurrentPassword = validateCurrentPassword;
   $scope.getImagePassword = getImagePassword;
   $scope.selectNewPassword = selectNewPassword;
   $scope.undoNewPassword = undoNewPassword;
-  $scope.changePassword = changePassword;
-  $scope.studentDetails = studentDetails;
 
   $scope.getAvatarImages = getAvatarImages;
   $scope.highlightAvatar = highlightAvatar;
@@ -358,6 +351,7 @@ function FutureedController($scope, apiService) {
           $scope.errorHandler(response.errors);
           getLoginPassword();
         } else if(response.data){
+          sessionStorage.user = JSON.stringify(response.data);
           $("input[name='user_data']").val(JSON.stringify(response.data));
           $("#password_form").submit();
         } 
@@ -390,7 +384,7 @@ function FutureedController($scope, apiService) {
   }
 
   function getUserDetails() {
-    var user = $('#userdata').val();
+    var user = $("input[name='userdata']").val();
 
     /*to jollie mar: erase this after creating client profile. line 386*/
     $scope.teacher = Constants.TRUE;
@@ -400,7 +394,8 @@ function FutureedController($scope, apiService) {
       if($scope.user.new_email != null){
         $scope.confirm_email = Constants.TRUE;
       }
-      $('#userdata').html('');
+
+      $("input[name='userdata']").val('');
     }
   }
 
@@ -652,126 +647,8 @@ function FutureedController($scope, apiService) {
     }
   }
 
-  function setActive(active) {
-    $scope.errors = Constants.FALSE;
-    $scope.success_msg = Constants.FALSE;
-    $scope.e_error = Constants.FALSE;
-    $scope.u_error = Constants.FALSE;
-    $scope.e_success = Constants.FALSE;
-    $scope.u_success = Constants.FALSE;
-
-    switch(active) {
-      case Constants.REWARDS  :
-        $scope.active_rewards = 1;
-        break;
-      case Constants.AVATAR   :
-        $scope.active_avatar = 1;
-        break;
-      case Constants.PASSWORD :
-        $scope.getLoginPassword();
-        $scope.active_password = 1;
-        break;
-      case Constants.INDEX    :
-      default:
-        $scope.studentDetails();
-        $scope.active_index = 1;
-        $scope.edit = Constants.FALSE;
-        $('#profile_form input').removeClass('required-field');
-        $('#profile_form select').removeClass('required-field');
-
-        $("html, body").animate({ scrollTop: 0 }, "slow");
-        break;
-    }
-  }
-
-  function editProfile() {
-    $scope.studentDetails();
-    $scope.errors = Constants.FALSE;
-    $scope.success = Constants.FALSE;
-    $scope.edit = Constants.TRUE;
-
-    $("html, body").animate({ scrollTop: 0 }, "slow");
-  }
-
   function updateAge() {
     
-  }
-
-  function saveProfile(prof) {
-    $scope.errors = Constants.FALSE;
-
-    if($scope.e_error || $scope.u_error) {
-      $("html, body").animate({ scrollTop: 350 }, "slow");
-    } else {
-      $scope.prof.school_code = 1;
-      $scope.prof.birth_date = $("input[name='hidden_date']").val();
-
-      $scope.ui_block();
-      $('#profile_form input').removeClass('required-field');
-      $('#profile_form select').removeClass('required-field');
-
-      apiService.saveProfile($scope.prof).success(function(response) {
-        if(response.status == Constants.STATUS_OK) {
-          if(response.errors) {
-            $scope.errorHandler(response.errors);
-
-            angular.forEach(response.errors, function(value, key) {
-              $("#profile_form input[name='" + value.field +"']").addClass("required-field");
-              $("#profile_form select[name='" + value.field +"']").addClass("required-field");
-            });
-          } else if(response.data){
-            $scope.user = response.data;
-
-            apiService.updateUserSession(response.data).success(function(response) {
-              $scope.setActive(Constants.INDEX);
-              $scope.success = Constants.TRUE;
-            }).error(function() {
-              $scope.internalError();
-            });
-            
-          }
-        } 
-
-        $scope.ui_unblock();
-      }).error(function(response) {
-        $scope.ui_unblock();
-        $scope.internalError();
-      });
-    }
-
-    $("html, body").animate({ scrollTop: 0 }, "slow");
-  }
-
-  /**
-  * On change password, validates the selected current password.
-  */
-  function validateCurrentPassword() {
-    $scope.errors = Constants.FALSE;
-
-    if($scope.image_id) {
-      $scope.ui_block();
-      apiService.validateCurrentPassword($scope.user.id, $scope.image_id).success(function(response) {
-        if(response.status == Constants.STATUS_OK) {
-          if(response.errors) {
-            $scope.errorHandler(response.errors);
-          } else if(response.data){
-            $scope.image_id = Constants.FALSE;
-            $scope.password_validated = Constants.TRUE;
-            
-            $scope.getImagePassword();
-          } 
-        }
-
-        $scope.ui_unblock();
-      }).error(function(response) {
-        $scope.ui_unblock();
-        $scope.internalError();
-      });
-    } else {
-      $scope.errors = [Constants.MSG_PPW_INCORRECT];
-    }
-
-    $("html, body").animate({ scrollTop: 0 }, "slow");
   }
 
   /**
@@ -807,52 +684,6 @@ function FutureedController($scope, apiService) {
     $("input[value='"+$scope.new_password+"']").closest("li").addClass("selected");
 
     $("html, body").animate({ scrollTop: 0 }, "slow");
-  }
-
-  /**
-  * Used to change password
-  */
-  function changePassword() {
-    $scope.errors = Constants.FALSE;
-
-    if($scope.image_id == $scope.new_password) {
-        $scope.ui_block();
-        apiService.changePassword($scope.user.id, $scope.image_id, $scope.user.access_token).success(function(response) {
-          if(response.status == Constants.STATUS_OK) {
-            if(response.errors) {
-              $scope.errorHandler(response.errors);
-            } else if(response.data){
-              $scope.password_confirmed = Constants.TRUE;
-            } 
-          }
-
-          $scope.ui_unblock();
-        }).error(function(response) {
-          $scope.ui_unblock();
-          $scope.internalError();
-        });
-    } else {
-      $scope.errors = [Constants.MSG_PPW_NOT_MATCH];
-      $("html, body").animate({ scrollTop: 0 }, "slow");
-    }
-  }
-
-  function studentDetails() {
-    apiService.studentDetails($scope.user.id, $scope.user.access_token).success(function(response) {
-      if(response.status == Constants.STATUS_OK) {
-        if(response.errors) {
-          $scope.errorHandler(response.errors);
-        } else if(response.data) {
-          $scope.prof = response.data[0];
-          $scope.prof.access_token = $scope.user.access_token;
-          $scope.user = $scope.prof;
-
-          $scope.prof.birth = $scope.prof.birth_date;
-        } 
-      }
-    }).error(function(response) {
-      $scope.internalError();
-    });
   }
 
   function getAvatarImages(change) {
@@ -951,8 +782,11 @@ function FutureedController($scope, apiService) {
       return false;
 
     }else{
+      $scope.base_url = $("#base_url_form input[name='base_url']").val();
+      $scope.callback_uri = $scope.base_url + Constants.URL_CHANGE_EMAIL(angular.lowercase(Constants.STUDENT));
+
       $scope.ui_block();
-      apiService.changeValidate($scope.user.id, $scope.email_new, $scope.image_id).success(function(response){
+      apiService.changeValidate($scope.user.id, $scope.email_new, $scope.image_id, $scope.callback_uri).success(function(response){
         if(response.status == Constants.STATUS_OK){
           if(response.errors){
             $scope.error = response.errors[0].message;
@@ -1006,8 +840,11 @@ function FutureedController($scope, apiService) {
       $scope.ec_error = Constants.FALSE;
       $scope.user_type = Constants.STUDENT;
 
+      $scope.base_url = $("#base_url_form input[name='base_url']").val();
+      $scope.callback_uri = $scope.base_url + Constants.URL_CHANGE_EMAIL(angular.lowercase($scope.user_type));
+
       $scope.ui_block();
-      apiService.emailResendCode($scope.email_new, $scope.user_type).success(function(response) {
+      apiService.emailResendCode($scope.user.id, $scope.email_new, $scope.user_type, $scope.callback_uri).success(function(response) {
       if(response.status == Constants.STATUS_OK) {
         if(response.errors) {
           $scope.errorHandler(response.errors);
