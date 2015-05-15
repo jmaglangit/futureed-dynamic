@@ -51,15 +51,14 @@
             	{!! Form::text('email', ''
                     , array(
                         'class' => 'form-control'
-                        , 'placeholder' => 'Email Address' 
+                        , 'placeholder' => 'Pending Email Address' 
                         , 'ng-disabled' => 'true' 
-                        , 'ng-model' => 'prof.new_email'
-                        , 'ng-model-options' => "{debounce : {'default' : 1000}}"
-                        , 'ng-change' => "checkEmailAvailability(prof.email, 'Student')")
+                        , 'ng-model' => 'profile.prof.new_email'
+                    )
                 ) !!}
             </div>
             <div class="col-xs-2">
-            	<a href="{!! route('student.profile.edit_email')!!}" class="edit-email" ng-model>Confirm</a>
+            	<a href="{!! route('student.profile.edit_email') !!}" class="edit-email">Confirm</a>
             </div>	
             <div class="col-xs-5 alert-message">
                 <i ng-if="e_loading" class="fa fa-spinner fa-spin"></i>

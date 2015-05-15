@@ -210,6 +210,30 @@
         </select>
       </div>
     </div> 
+    <div class="form-group">
+        <label class="col-md-2 control-label">Contact Name<span class="required">*</span></label>
+        <div class="col-md-6">
+          {!! Form::text('contact_name', ''
+              , array(
+                'class' => 'form-control'
+                , 'placeholder' => 'Contact Name'
+                , 'ng-model' => 'register.reg.contact_name'
+              )
+          ) !!}
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label">Contact Number<span class="required">*</span></label>
+        <div class="col-md-6">
+          {!! Form::text('contact_number', ''
+              , array(
+                'class' => 'form-control'
+                , 'placeholder' => 'Contact Number'
+                , 'ng-model' => 'register.reg.contact_number'
+              )
+          ) !!}
+        </div>
+      </div>
     </fieldset>
   </div>
   <div class="block_bottom">

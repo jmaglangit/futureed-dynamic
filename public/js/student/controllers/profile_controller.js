@@ -6,7 +6,7 @@ ProfileController.$inject = ['$scope', 'apiService'];
 function ProfileController($scope, apiService) {
 	var self = this;
 
-	self.user = JSON.parse(sessionStorage.user);
+	self.user = (sessionStorage.length) ? JSON.parse(sessionStorage.user) : {};
 	self.setStudentProfileActive = setStudentProfileActive;
 
 	self.studentDetails = studentDetails;
@@ -29,44 +29,48 @@ function ProfileController($scope, apiService) {
 	    self.password_selected = Constants.FALSE;
 	    self.password_confirmed = Constants.FALSE;
 
+	    self.active_index = Constants.FALSE;
+	    self.active_email = Constants.FALSE;
+	    self.active_confirm = Constants.FALSE;
+	    self.active_edit = Constants.FALSE;
+	    self.active_avatar = Constants.FALSE;
+	    self.active_rewards = Constants.FALSE;
+	    self.active_password = Constants.FALSE;
+
 	    switch(active) {
-	      case Constants.REWARDS  :
+
+	      case Constants.REWARDS  		:
 	        self.active_rewards = Constants.TRUE;
-	        self.active_avatar = Constants.FALSE;
-	        self.active_password = Constants.FALSE;
-	        self.active_edit = Constants.FALSE;
-	        self.active_index = Constants.FALSE;
 	        break;
-	      case Constants.AVATAR   :
+
+	      case Constants.AVATAR   		:
 	        self.active_avatar = Constants.TRUE;
-	        self.active_rewards = Constants.FALSE;
-	        self.active_password = Constants.FALSE;
-	        self.active_edit = Constants.FALSE;
-	        self.active_index = Constants.FALSE;
 	        break;
-	      case Constants.PASSWORD :
+
+	      case Constants.PASSWORD 		:
 	        $scope.getLoginPassword();
 	        self.active_password = Constants.TRUE;
-	        self.active_rewards = Constants.FALSE;
-	        self.active_avatar = Constants.FALSE;
-	        self.active_edit = Constants.FALSE;
-	        self.active_index = Constants.FALSE;
 	        break;
-	      case Constants.EDIT    :
+
+	      case Constants.EDIT    		:
 	      	self.active_edit = Constants.TRUE;
-	      	self.active_rewards = Constants.FALSE;
-	        self.active_avatar = Constants.FALSE;
-	        self.active_password = Constants.FALSE;
-	        self.active_index = Constants.FALSE;
 	        break;
-	      case Constants.INDEX    :
+
+	      case Constants.EDIT_EMAIL 	:
+	      	self.active_index = Constants.TRUE;
+	      	self.active_edit_email = Constants.TRUE;
+	      	break;
+
+	      case Constants.CONFIRM_EMAIL  :
+	      	self.active_index = Constants.TRUE;
+	      	self.active_confirm_email = Constants.TRUE;
+	      	break;
+
+	      case Constants.INDEX    		:
+
 	      default:
-	        self.studentDetails();
-	        self.active_index = Constants.TRUE;
-	        self.active_rewards = Constants.FALSE;
-	        self.active_avatar = Constants.FALSE;
-	        self.active_password = Constants.FALSE;
-	        self.active_edit = Constants.FALSE;
+	      	self.studentDetails();
+	      	self.active_index = Constants.TRUE;
 	        break;
 	    }
 

@@ -76,6 +76,9 @@ function FutureedController($scope, apiService) {
 
   function internalError() {
     $scope.errors = [Constants.MSG_INTERNAL_ERROR];
+    $("html, body").animate({ scrollTop: 0 }, "slow");
+
+    return $scope.errors;
   }
 
   function ui_block() {
