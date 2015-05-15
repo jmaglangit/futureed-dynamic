@@ -26,6 +26,11 @@ class SubjectRequest extends ApiRequest {
         ];
 	}
 	
+	/**
+	 * Get the validation rules custom messages that apply to the request.
+	 *
+	 * @return array
+	 */
 	public function messages() {
 		return [
 			'integer' => 'The :attribute must be a number.' 
