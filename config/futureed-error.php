@@ -62,6 +62,7 @@ return [
         2113 => 'Username and password is invalid.',
         2114 => 'Your password is incorrect.',
         2115 => 'Your contact number is incorrect.',
+        2116 => 'School name is not available.',
 
         // Client Error messages
         2200 => 'Email already exists.',
