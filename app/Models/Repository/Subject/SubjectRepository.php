@@ -45,7 +45,27 @@ class SubjectRepository implements SubjectRepositoryInterface {
 		return ['total' => $count, 'records' => $subjects->get()->toArray()];	
 	}
 
-        
- 
+	/**
+	 * Add subject.
+	 *
+	 * @param	array	$subject
+	 *
+	 * @return boolean
+	 */
+	public function addSubject($subject) {
+		
+		try {
+		
+			$subject = Subject::create($subject);
+			
+		} catch(Exception $e) {
+		
+			return $e->getMessage();
+			
+		}
+		
+		return $subject;
+		
+	}
 
 }

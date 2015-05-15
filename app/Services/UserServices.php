@@ -276,7 +276,8 @@ class UserServices {
         $return =['username'=>$user_details['username'],
                   'user_type'=>$user_details['user_type'],
                   'email'=>$user_details['email'],
-                  'new_email' => $user_details['new_email']];
+                  'new_email' => $user_details['new_email'],
+                  'status' => $user_details['status']];
 
         return $return;
     }

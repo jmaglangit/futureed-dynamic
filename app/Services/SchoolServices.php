@@ -63,4 +63,9 @@ class SchoolServices {
 
    }
 
+   public function searchSchool($school_name){
+
+        return $this->school->searchSchool($school_name);
+   }
+
 }

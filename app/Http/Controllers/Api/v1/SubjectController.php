@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Input;
 
 use FutureEd\Models\Repository\Subject\SubjectRepositoryInterface as Subject;
 
+use FutureEd\Http\Requests\Api\SubjectRequest;
+
 class SubjectController extends ApiController {
 
 	//holds the subject repository
@@ -56,9 +58,13 @@ class SubjectController extends ApiController {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(SubjectRequest $request)
 	{
-		//
+		$data = $request->all();
+	
+		$subject = $this->subject->addSubject($data);
+		
+		return $this->respondWithData(['id' => $subject->id]);
 	}
 
 	/**
