@@ -109,7 +109,7 @@ class ClientServices {
 
         foreach ($user as $key => $value) {
             
-                if(in_array($key,['username','email','new_email'])){
+                if(in_array($key,['username','email','new_email','status'])){
 
                     $userData[$key] = $value;
 
