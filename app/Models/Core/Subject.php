@@ -11,7 +11,20 @@ class Subject extends Model {
 
     protected $dates = ['deleted_at'];
 
+	protected $fillable = ['code', 'name', 'description', 'status'];
+
     protected $hidden = ['created_by','updated_by','created_at','updated_at','deleted_at'];
+    
+	/**
+	* holds the validaton rules
+	*
+	* @return mixed
+	*/
+	public static $rules = array(
+		'code' => 'required|integer',
+		'name' => 'required',
+		'status' => 'required|in:Enabled,Disabled'
+	);
     
     //-------------scopes
 	public function scopeName($query, $name) {
