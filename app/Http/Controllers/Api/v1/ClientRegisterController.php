@@ -138,9 +138,8 @@ class ClientRegisterController extends ClientController {
         		$code = $this->user->getConfirmationCode($user_response['id']);
 
         		$data['client_role'] = $client['client_role'];
-
         		// send email to user
-        		$this->mail->sendClientRegister($data,$code['cofirmation_code'],$input['callback_uri']);
+        		$this->mail->sendClientRegister($data,$code['confirmation_code'],$input['callback_uri']);
 
         		return $this->respondWithData([
         				'id'	=> $client_response['id'],
