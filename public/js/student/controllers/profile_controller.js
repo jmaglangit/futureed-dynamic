@@ -7,10 +7,22 @@ function ProfileController($scope, apiService) {
 	var self = this;
 
 	self.user = ($scope.user) ? $scope.user : {};
+	self.user_type = Constants.STUDENT;
+
 	self.setStudentProfileActive = setStudentProfileActive;
 
 	self.studentDetails = studentDetails;
 	self.saveProfile = saveProfile;
+
+	self.validateStudentCurrentEmail = validateStudentCurrentEmail;
+	self.validateStudentNewEmail = validateStudentNewEmail;
+	self.confirmStudentNewEmail = confirmStudentNewEmail;
+	self.backToEditEmail = backToEditEmail;
+	self.selectPicturePassword = selectPicturePassword;
+	self.changeStudentEmail = changeStudentEmail;
+
+	self.confirmStudentEmailCode = confirmStudentEmailCode;
+	self.resendStudentEmailCode = resendStudentEmailCode;
 
 	self.getAvatarImages = getAvatarImages;
 	self.highlightAvatar = highlightAvatar;
@@ -31,9 +43,9 @@ function ProfileController($scope, apiService) {
 	    self.password_confirmed = Constants.FALSE;
 
 	    self.active_index = Constants.FALSE;
-	    self.active_email = Constants.FALSE;
-	    self.active_confirm = Constants.FALSE;
 	    self.active_edit = Constants.FALSE;
+	    self.active_confirm_email = Constants.FALSE;
+	    self.active_edit_email = Constants.FALSE;
 	    self.active_avatar = Constants.FALSE;
 	    self.active_rewards = Constants.FALSE;
 	    self.active_password = Constants.FALSE;
@@ -58,13 +70,14 @@ function ProfileController($scope, apiService) {
 	        break;
 
 	      case Constants.EDIT_EMAIL 	:
-	      	self.active_index = Constants.TRUE;
+	      	self.change = {};
 	      	self.active_edit_email = Constants.TRUE;
+	      	self.select_password = Constants.FALSE;
 	      	break;
 
 	      case Constants.CONFIRM_EMAIL  :
-	      	self.active_index = Constants.TRUE;
 	      	self.active_confirm_email = Constants.TRUE;
+	      	self.email_confirmed = Constants.FALSE
 	      	break;
 
 	      case Constants.INDEX    		:
@@ -137,6 +150,157 @@ function ProfileController($scope, apiService) {
 	    }
 
 	    $("html, body").animate({ scrollTop: 0 }, "slow");
+	  }
+
+	  function validateStudentCurrentEmail() {
+	  	self.errors = Constants.FALSE;
+	  	self.e_error = Constants.FALSE;
+	  	self.e_success = Constants.FALSE;
+	  	self.e_loading = Constants.TRUE;
+
+	  	apiService.validateEmail(self.change.current_email, self.user_type).success(function(response) {
+	  		self.e_loading = Constants.FALSE;
+
+	  		if(angular.equals(response.status, Constants.STATUS_OK)) {
+	  			if(response.errors) {
+	  				self.e_error = response.errors[0].message;
+	  			} else if(response.data) {
+	  				if(angular.equals(self.prof.email, self.change.current_email)) {
+	  					self.e_success = Constants.TRUE;
+	  				} else {
+	  					self.e_error = Constants.MSG_EA_CURR_NOTMATCH;
+	  				}
+	  			}
+	  		}
+	  	}).error(function(response) {
+	  		self.erros = $scope.internalError();
+	  		self.e_loading = Constants.FALSE;
+	  	});
+	  }
+
+	  function validateStudentNewEmail() {
+	  	self.errors = Constants.FALSE;
+	  	self.n_error = Constants.FALSE;
+	  	self.n_success = Constants.FALSE;
+		self.c_error = Constants.FALSE;
+		self.c_success = Constants.FALSE;
+
+	  	self.n_loading = Constants.TRUE;
+
+	  	apiService.validateEmail(self.change.new_email, self.user_type).success(function(response) {
+	  		self.n_loading = Constants.FALSE;
+
+	  		if(angular.equals(response.status, Constants.STATUS_OK)) {
+	  			if(response.errors) {
+	  				self.n_error = response.errors[0].message;
+		            if(angular.equals(self.n_error, Constants.MSG_EA_NOTEXIST)) {
+		            	self.n_error = Constants.FALSE;
+
+		            	if(!angular.equals(self.change.new_email, self.change.confirm_email)) {
+							self.c_error = Constants.MSG_EA_CONFIRM;
+							self.n_success = Constants.TRUE;
+						} else {
+							self.n_success = Constants.TRUE;
+							self.c_success = Constants.TRUE;
+						}
+		            }
+	  			} else if(response.data) {
+	  				self.n_error = Constants.MSG_EA_EXIST;
+	  			}
+	  		}
+	  	}).error(function(response) {
+	  		self.erros = $scope.internalError();
+	  		self.c_loading = Constants.FALSE;
+	  	});
+	  }
+
+	  function confirmStudentNewEmail() {
+	  	self.errors = Constants.FALSE;
+		self.c_error = Constants.FALSE;
+		self.c_success = Constants.FALSE;
+		
+		if(!angular.equals(self.change.new_email, self.change.confirm_email)) {
+			self.c_error = Constants.MSG_EA_NOT_MATCH;
+		} else {
+			self.c_success = Constants.TRUE;
+		}
+	  }
+
+	  function backToEditEmail() {
+	  	self.select_password = Constants.FALSE;
+	  }
+
+	  function selectPicturePassword() {
+	  	if(self.e_success && self.n_success && self.c_success) {
+	  		self.select_password = Constants.TRUE;
+	  		$scope.getLoginPassword();
+	  	} else {
+	  		self.errors = ["Error!"];
+	  	}
+	  }
+
+	  function changeStudentEmail() {
+	  	self.errors = Constants.FALSE;
+	  	self.base_url = $("#base_url_form input[name='base_url']").val();
+	    self.callback_uri = self.base_url + Constants.URL_CHANGE_EMAIL(angular.lowercase(Constants.STUDENT));
+
+	      $scope.ui_block();
+	      apiService.changeValidate(self.user.id, self.change.new_email, $scope.image_id, self.callback_uri).success(function(response){
+	        if(angular.equals(response.status, Constants.STATUS_OK)){
+	          if(response.errors){
+	            self.errors = $scope.errorHandler(response.errors);
+	          }else if(response.data){
+				self.setStudentProfileActive(Constants.CONFIRM_EMAIL);
+				self.prof.new_email = self.change.new_email;
+	          }
+	        }
+	        $scope.ui_unblock();
+	      }).error(function(response){
+	        self.errors = $scope.internalError();
+	        $scope.ui_unblock();
+	      });
+	  }
+
+	  function confirmStudentEmailCode() {
+			self.errors = Constants.FALSE;
+
+        	$scope.ui_block();
+        	apiService.emailValidateCode(self.prof.new_email, self.user_type , self.confirmation_code).success(function(response){
+          		if(angular.equals(response.status, Constants.STATUS_OK)) {
+            		if(response.errors){
+              			self.errors = $scope.errorHandler(response.errors);
+            		} else if(response.data) {
+              			self.email_confirmed = Constants.TRUE;
+            		}
+          		}
+
+          		$scope.ui_unblock();
+        	}).error(function(response){
+          		self.errors = $scope.internalError();
+          		$scope.ui_unblock();
+        	}); 
+	  }
+
+	  function resendStudentEmailCode() {
+	  		self.errors = Constants.FALSE;
+	      	self.base_url = $("#base_url_form input[name='base_url']").val();
+	      	self.callback_uri = self.base_url + Constants.URL_CHANGE_EMAIL(angular.lowercase(Constants.STUDENT));
+
+	      	$scope.ui_block();
+	      	apiService.emailResendCode(self.user.id, self.new_email, self.user_type, self.callback_uri).success(function(response) {
+	      		if(angular.equals(response.status, Constants.STATUS_OK)) {
+	        		if(response.errors) {
+	          			self.errors = $scope.errorHandler(response.errors);
+	        		} else if(response.data){
+	            		self.resent = Constants.TRUE;
+	        		} 
+	      		}
+
+	      		$scope.ui_unblock();
+	    	}).error(function(response) {
+	      		self.errors = $scope.internalError();
+	      		$scope.ui_unblock();
+	    	});
 	  }
 
 	  function getAvatarImages() {

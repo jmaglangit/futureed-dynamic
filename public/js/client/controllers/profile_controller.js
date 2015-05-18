@@ -221,8 +221,7 @@ function ProfileController($scope, apiService, clientProfileApiService) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
-					self.active_confirm_email = Constants.TRUE;
-					self.active_edit_email = Constants.FALSE;
+					self.setClientProfileActive(Constants.CONFIRM_EMAIL);
 					self.prof.new_email = self.change.new_email;
 				}
 			}

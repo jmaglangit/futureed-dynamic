@@ -63,10 +63,6 @@
 					'as' => 'client.profile.index'
 					, 'uses' => 'FutureLesson\Client\ProfileController@index'
 				]);
-			Routes::get('/change-password', [ 
-					'as' => 'client.profile.change_password'
-					, 'uses' => 'FutureLesson\Client\ProfileController@changePassword'
-				]);
 
 			Routes::group(['prefix' => '/partials'], function() {
 				Routes::get('/index_form', [
