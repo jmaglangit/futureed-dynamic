@@ -37,6 +37,12 @@ var Constants = {
 
 	, ATTR_SUBMIT			: "submit"
 
+	, MSG_EA_NOTEXIST		: "Email does not exist."
+	, MSG_EA_CONFIRM		: "Confirm your new email address."
+	, MSG_EA_EXIST 			: "Email address already exists."
+	, MSG_EA_CURR_NOTMATCH	: "Current email address does not match."
+	, MSG_EA_NOT_MATCH		: "Email Address does not match."
+
 	, URL_FORGOT_PASSWORD	: function(user_type) {
 		return '/' + user_type + '/password/forgot';
 	}
