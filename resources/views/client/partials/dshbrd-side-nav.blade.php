@@ -18,7 +18,7 @@
 </div>
 
 <ul ng-init="profile.setClientProfileActive('{!! $active !!}')">
-	<li ng-class="{ 'active' : profile.active_index }">
+	<li ng-class="{ 'active' : profile.active_index || profile.active_edit_email || profile.active_confirm_email }">
 		<a href="" ng-click="profile.setClientProfileActive('index')"><span><i class="fa fa-book"></i></span>View Client Account Profile</a>
 	</li>
 	<li ng-class="{ 'active' : profile.active_edit }">

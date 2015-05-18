@@ -22,9 +22,12 @@ class ProfileController extends Controller {
 		return view('client.profile.index_form');
 	}
 
-	public function changePassword() {
-		$id = $this->getId();
-		return view('client.profile.change_password', ['active' => 'password']);
+	public function edit_email_form() {
+		return view('client.profile.change_email_form');
+	}
+
+	public function confirm_email_form() {
+		return view('client.profile.confirm_email_form');
 	}
 
 	public function change_password_form() {
