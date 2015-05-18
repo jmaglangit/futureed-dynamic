@@ -1,9 +1,9 @@
 angular.module('futureed.controllers')
 	.controller('ProfileController', ProfileController);
 
-ProfileController.$inject = ['$scope', '$timeout', 'apiService', 'clientProfileApiService'];
+ProfileController.$inject = ['$scope', 'apiService', 'clientProfileApiService'];
 
-function ProfileController($scope, $timeout, apiService, clientProfileApiService) {
+function ProfileController($scope, apiService, clientProfileApiService) {
 	var self = this;
 	self.change = {};
 	self.confirm = {};
