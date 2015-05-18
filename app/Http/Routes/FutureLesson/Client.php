@@ -4,13 +4,17 @@
 		Routes::get('/', 'FutureLesson\Client\LoginController@index');
 		
 		Routes::get('/password/forgot', [
-			'as' => 'client.password.reset'
+			'as' => 'client.password.forgot'
 			, 'uses' =>'FutureLesson\Client\LoginController@forgot_password'
 			]);
 		Routes::get('/register/confirm', [
-			'as' => 'client.login.confirm'
+			'as' => 'client.register.confirm'
 			, 'uses' => 'FutureLesson\Client\LoginController@enter_confirmation'
 		]);
+		Routes::get('/email/confirm', [
+			'as' => 'client.email.confirm'
+			, 'uses' => 'FutureLesson\Client\ProfileController@enter_email_code'
+			]);
 		Routes::get('/registration', [
 			'as' => 'client.registration'
 			, 'uses' => 'FutureLesson\Client\LoginController@registration'

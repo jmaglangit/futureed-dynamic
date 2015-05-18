@@ -10,7 +10,6 @@ class ClientMiddleware {
     	$client = Session::get('client');
 
     	if(!$client) {
-    		Session::flush();
 			return redirect()->route('client.login')->send();
 		}
 
