@@ -27,7 +27,8 @@ class Kernel extends HttpKernel {
 		'auth' => 'FutureEd\Http\Middleware\Authenticate',
 		'auth.basic' => 'Illuminate\Auth\Middleware\AuthenticateWithBasicAuth',
 		'student' => 'FutureEd\Http\Middleware\StudentMiddleware',		
-		'client' => 'FutureEd\Http\Middleware\ClientMiddleware',		
+		'client' => 'FutureEd\Http\Middleware\ClientMiddleware',
+        'jwt' => 'FutureEd\Http\Middleware\JWTMiddleware'
 	];
 
 }
