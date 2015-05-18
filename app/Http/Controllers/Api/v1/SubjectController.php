@@ -84,9 +84,13 @@ class SubjectController extends ApiController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($id, SubjectRequest $request)
 	{
-		//
+		$data = $request->all();
+	
+		$subject = $this->subject->updateSubject($id, $data);
+		
+		return $this->respondWithData(['id' => $subject->id]);
 	}
 
 	/**
