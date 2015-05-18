@@ -64,7 +64,7 @@ class SubscriptionController extends ApiController {
 	
 		$subscription = $this->subscription->addSubscription($data);
 		
-		return $this->respondWithData(['id' => $subscription->id]);
+		return $this->respondWithData(['id' => $subscription["id"]]);
 	}
 
 	/**

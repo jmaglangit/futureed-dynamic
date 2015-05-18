@@ -53,7 +53,7 @@ class SubscriptionRepository implements SubscriptionRepositoryInterface {
 	 * @return object
 	 */
     public function getSubscription($id){
-        return Subscription::select('id','name','price','description','status')->where('id',$id)->first();
+        return Subscription::find($id);
     }
     
      /**
@@ -67,25 +67,20 @@ class SubscriptionRepository implements SubscriptionRepositoryInterface {
     public function updateSubscription($subscription){
     
         try{
-            $result = Subscription::where('id','=',$subscription["id"])
-                     ->update(['name'           =>$subscription['name'],
-                               'price'          =>$subscription['price'],
-                               'description'    =>$subscription['description'],
-                               'status'         =>$subscription['status']]);
+            $result = Subscription::find($subscription["id"]);
+            return !is_null($result) ? $result->update($subscription) : false;
         }catch(Exception $e){
             return $e->getMessage();
         }
-        return $result;
     }
     
     public function addSubscription($subscription){
     
         try{
-            $result = Subscription::create($subscription);
+            return Subscription::create($subscription)->toArray();
         }catch(Exception $e){
             return $e->getMessage();        
-        }   
-        return $result;
+        }
     }
      /**
 	 * Delete specific subscription.
@@ -97,10 +92,10 @@ class SubscriptionRepository implements SubscriptionRepositoryInterface {
     public function deleteSubscription($id){
         
         try{
-            $result = Subscription::where('id',$id)->delete();
+            $result = Subscription::find($id);
+            return !is_null($result) ? $result->delete() : false;
         }catch(Exception $e){
             return $e->getMessage();
         }
-        return $result;
     }
 }
