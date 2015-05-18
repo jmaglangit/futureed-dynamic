@@ -66,7 +66,7 @@ class MailServices {
             'data' => [
                 'name' => $user_detail['name'],
                 'code' => $code['confirmation_code'],
-                'link' => $url,  
+                'link' => $url . '?email=' . $user_detail['email'],
             ],
             'mail_recipient' => $user_detail['email'],
             'mail_recipient_name' => $user_detail['first_name' ] . $user_detail['last_name'],
@@ -82,7 +82,7 @@ class MailServices {
             'data' => [
                 'name' => $data['name'],
                 'code' => $code,
-                'link' => $url,
+                'link' => $url . '?email=' . $data['email'],
             ],
             'mail_recipient' => $data['email'],
             'mail_recipient_name' => $data['name' ],
@@ -109,7 +109,7 @@ class MailServices {
             'data' => [
                 'name' => $data['name'],
                 'code' => $code,
-                'link' => $url ,
+                'link' => $url . '?email=' . $data['email'],
             ],
             'mail_recipient' => $data['email'],
             'mail_recipient_name' => $data['name' ],
@@ -127,7 +127,7 @@ class MailServices {
             'data' => [
                 'name' => $data['username'],
                 'code' => $code,
-                'link' => $url,
+                'link' => $url . '?email=' . $data['email'],
             ],
             'mail_sender' => 'no-reply@futureed.com',
             'mail_sender_name' => 'Future Lesson',
@@ -145,7 +145,7 @@ class MailServices {
             'data' => [
                 'name' => $data['username'],
                 'code' => $code,
-                'link' => $url,
+                'link' => $url . '?email=' . $data['email'],
             ],
             'mail_sender' => 'no-reply@futureed.com',
             'mail_sender_name' => 'Future Lesson',
@@ -162,7 +162,7 @@ class MailServices {
             'data' => [
                 'name' => $data['username'],
                 'code' => $code,
-                'link' => $url ,
+                'link' => $url . '?email=' . $data['email'],
             ],
             'mail_sender' => 'no-reply@futureed.com',
             'mail_sender_name' => 'Future Lesson',
@@ -193,7 +193,7 @@ class MailServices {
             'data' => [
                 'name' => $data['name'],
                 'code' => $code,
-                'link' => $url ,
+                'link' => $url . '?email=' . $data['new_email'],
             ],
             'mail_recipient' => $data['new_email'],
             'mail_recipient_name' => $data['name' ],

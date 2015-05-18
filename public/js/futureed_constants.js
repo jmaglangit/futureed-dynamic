@@ -19,6 +19,8 @@ var Constants = {
 	, PASSWORD		: "password"
 	, INDEX			: "index"
 	, EDIT			: "edit"
+	, EDIT_EMAIL	: "edit_email"
+	, CONFIRM_EMAIL : "confirm_email"
 
 	, USER_PRINCIPAL: "user_principal"
 	, USER_PARENT 	: "user_parent"
@@ -35,15 +37,21 @@ var Constants = {
 
 	, ATTR_SUBMIT			: "submit"
 
-	, URL_FORGOT_PASSWORD	: function(user_type, email) {
-		return '/' + user_type + '/password/forgot?email=' + email;
+	, MSG_EA_NOTEXIST		: "Email does not exist."
+	, MSG_EA_CONFIRM		: "Confirm your new email address."
+	, MSG_EA_EXIST 			: "Email address already exists."
+	, MSG_EA_CURR_NOTMATCH	: "Current email address does not match."
+	, MSG_EA_NOT_MATCH		: "Email Address does not match."
+
+	, URL_FORGOT_PASSWORD	: function(user_type) {
+		return '/' + user_type + '/password/forgot';
 	}
 
-	, URL_REGISTRATION		: function(user_type, email) {
-		return '/' + user_type + '/register/confirm?email=' + email;
+	, URL_REGISTRATION		: function(user_type) {
+		return '/' + user_type + '/register/confirm';
 	}
 
-	, URL_CHANGE_EMAIL		: function(user_type, email) {
-		return '/' + user_type + '/email/confirm?email=' + email;
+	, URL_CHANGE_EMAIL		: function(user_type) {
+		return '/' + user_type + '/email/confirm';
 	}
 }

@@ -372,11 +372,11 @@ fieldset legend{color: #8e8171; font-size: 16px; text-transform: uppercase;}
 	padding:20px; width:120px;
 }
 
-.client .login .roundcon{
+.roundcon{
 	width:120px;
 	margin: 30px auto;
 }
-.client .login .roundcon i.fa{
+.roundcon i.fa{
 	background:#e8e8e8;
 	border-radius:200px;
 	padding:20px; width:120px;
@@ -521,11 +521,11 @@ li.active .rnd-identifier{
 	color: #fff;
 }
 .side-nav ul li a:hover, .side-nav ul li.active a{
-	background: #065A7F;
+	background: #0E79A3;
 	color: #fff;
 }
 .client-nav ul li a:hover, .side-nav ul li.active a{
-	background: #0E79A3;
+	background: #065A7F;
 	color: #fff;
 }
 .side-nav a{
@@ -847,7 +847,7 @@ li > a > span > .fa{
 	color: #03658A;
   	font-size: 1.1em;
 }
-.client-legend{
+.legend-name-mid{
 	text-transform: none;
 	font-family: inherit !important;
 	font-size: 18px !important;
@@ -944,4 +944,3 @@ div > .btncon > a {
   	margin-left: 60px;
   	padding: 10px;
 }
-

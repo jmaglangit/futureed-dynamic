@@ -17,7 +17,8 @@
         <div>
           <span ng-if="e_error" class="error-msg-con">{! e_error !}</span>
           <i ng-if="e_loading" class="fa fa-spinner fa-spin"></i>
-          <i ng-if="e_success" class="fa fa-check error-msg-con success-color"> Email address is available.</i>
+          <span ng-if="e_success" class="error-msg-con success-color">Email address is available.</span>
+
         </div>
       </div>
       
@@ -33,9 +34,9 @@
               )
         ) !!}
         <div> 
-          <i ng-if="u_loading" class="fa fa-spinner fa-spin"></i>
-          <i ng-if="u_success" class="fa fa-check error-msg-con success-color"> Username is available.</i>
           <span ng-if="u_error" class="error-msg-con">{! u_error !}</span>
+          <i ng-if="u_loading" class="fa fa-spinner fa-spin"></i>
+          <span ng-if="u_success" class="error-msg-con success-color">Username is available.</span>
         </div>
       </div>
     </div>
@@ -210,6 +211,31 @@
         </select>
       </div>
     </div> 
+    <legend>School Contact Information</legend>
+    <div class="form-group">
+        <label class="col-md-2 control-label">Contact Person<span class="required">*</span></label>
+        <div class="col-md-6">
+          {!! Form::text('contact_name', ''
+              , array(
+                'class' => 'form-control'
+                , 'placeholder' => 'Contact Person'
+                , 'ng-model' => 'register.reg.contact_name'
+              )
+          ) !!}
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-2 control-label">Contact Number<span class="required">*</span></label>
+        <div class="col-md-6">
+          {!! Form::text('contact_number', ''
+              , array(
+                'class' => 'form-control'
+                , 'placeholder' => 'Contact Number'
+                , 'ng-model' => 'register.reg.contact_number'
+              )
+          ) !!}
+        </div>
+      </div>
     </fieldset>
   </div>
   <div class="block_bottom">

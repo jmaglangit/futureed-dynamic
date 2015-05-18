@@ -24,6 +24,8 @@
     {!! Html::style('/css/datetimepicker.css') !!}
     {!! Html::style('/css/futureed.css') !!}
     {!! Html::style('/css/futureed-admin.css') !!}
+    {!! Html::style('/css/datatables.bootstrap.min.css') !!}
+    {!! Html::style('//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css') !!}
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -32,7 +34,7 @@
     <![endif]-->
     @yield('styles')
   </head>
-  <body class="admin" ng-controller="futureedController" ng-init="getUserDetails()">
+  <body class="admin" ng-controller="futureedController" ng-init="getUserDetails()" ng-cloak>
     <textarea id="userdata" name="hide" style="display:none;">{!! Session::get('admin') !!}</textarea>
     
     @yield('navbar')
@@ -50,20 +52,22 @@
     <!-- START SCRIPTS -->
     {!! Html::script('/js/jquery.js') !!}
     {!! Html::script('/js/ui-block.js') !!}
-    {!! Html::script('https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js') !!}
+    {!! Html::script('//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js') !!}
     {!! Html::script('//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js') !!}
-    {!! Html::script('http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular.min.js') !!}
-    {!! Html::script('http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular-resource.min.js') !!}
-    {!! Html::script('http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular-route.min.js') !!}
+    {!! Html::script('//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular.min.js') !!}
+    {!! Html::script('//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular-resource.min.js') !!}
+    {!! Html::script('//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-cookies.min.js') !!}
     {!! Html::script('/js/jquery.smooth-scroll.js') !!}
     
-    {!! Html::script('/js/student/app.js') !!}
     {!! Html::script('/js/futureed_constants.js') !!}
     {!! Html::script('/js/futureed_utils.js') !!}
     {!! Html::script('/js/futureed.js') !!}
     {!! Html::script('/js/futureed_controllers.js') !!}
     {!! Html::script('/js/futureed_services.js') !!}
     {!! Html::script('/js/datetimepicker.js') !!}
+    {!! Html::script('/js/angular-datatables.min.js') !!}
+    {!! Html::script('/js/jquery.dataTables.min.js') !!}
+    {!! Html::script('//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js') !!}
 
     @yield('scripts')
 

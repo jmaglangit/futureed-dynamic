@@ -1,6 +1,6 @@
 {!! Form::open(array('id' => 'client_profile_form', 'class' => 'form-horizontal', 'ng-if' => 'profile.active_index || profile.active_edit')) !!}
     <fieldset>
-    	<legend class="client-legend">
+    	<legend class="legend-name-mid">
     		User Credentials
     	</legend>
     	<div class="form-group">
@@ -36,10 +36,10 @@
                 ) !!}
             </div>
             <div class="col-xs-2">
-            	<!-- <a href="#" class="edit-email">Edit</a> -->
+            	<a href="" ng-click="profile.setClientProfileActive('edit_email')" class="edit-email">Edit</a>
             </div>	
         </div>
-        {{-- show if there is a pending email --}}
+        
         <div class="form-group" ng-if='profile.prof.new_email'>
             <label for="" class="col-md-2 control-label" style="color:#7F7504">Pending Email <span class="required">*</span></label>
             <div class="col-md-5">
@@ -53,13 +53,13 @@
                 ) !!}
             </div>
             <div class="col-xs-2">
-            	<!-- <a href="#" class="edit-email">Confirm</a> -->
+                <a href="" ng-click="profile.setClientProfileActive('confirm_email')" class="edit-email">Confirm</a>
             </div>	
         </div>
     </fieldset>
 
     <fieldset>
-    	<legend class="client-legend">
+    	<legend class="legend-name-mid">
     		Personal Information
     	</legend>
     	<div class="form-group">
@@ -89,7 +89,7 @@
     </fieldset>
 
     <fieldset ng-if="profile.is_teacher">
-    	<legend class="client-legend">
+    	<legend class="legend-name-mid">
     		School Information
     	</legend>
     	<div class="form-group">
@@ -107,7 +107,7 @@
     </fieldset>
 
     <fieldset ng-if="profile.is_principal">
-    	<legend class="client-legend">
+    	<legend class="legend-name-mid">
     		School Information
     	</legend>
     	<div class="form-group">
@@ -175,12 +175,42 @@
                 </select>
             </div>
         </div>
+        <legend class="legend-name-mid">
+            School Contact Information
+        </legend>
+        <div class="form-group">
+            <label class="col-md-3 control-label">Contact Person <span class="required">*</span></label>
+            <div class="col-md-6">
+              {!! Form::text('school_contact_name', ''
+                  , array(
+                    'class' => 'form-control'
+                    , 'placeholder' => 'Contact Person'
+                    , 'ng-disabled' => '!profile.active_edit' 
+                    , 'ng-model' => 'profile.prof.school_contact_name'
+                  )
+              ) !!}
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="col-md-3 control-label">Contact Number <span class="required">*</span></label>
+            <div class="col-md-6">
+              {!! Form::text('school_contact_number', ''
+                  , array(
+                    'class' => 'form-control'
+                    , 'placeholder' => 'Contact Number'
+                    , 'ng-disabled' => '!profile.active_edit' 
+                    , 'ng-model' => 'profile.prof.school_contact_number'
+                  )
+              ) !!}
+            </div>
+        </div>
     </fieldset>
     <fieldset>
-    	<legend class="client-legend" ng-if="!profile.is_parent">
+    	<legend class="legend-name-mid" ng-if="!profile.is_parent">
     		Other Address Information(Optional)
     	</legend>
-    	<legend class="client-legend" ng-if="profile.is_parent">
+    	<legend class="legend-name-mid" ng-if="profile.is_parent">
     		Address Information
     	</legend>
         <div class="form-group">
@@ -230,7 +260,7 @@
             </div>
             <label for="" class="col-md-2 control-label">Country <span class="required" ng-if="profile.is_required">*</span></label>
             <div class="col-md-4">
-                <select name="country" class="form-control" ng-model="profile.prof.country" ng-disabled="!profile.edit">
+                <select name="country" class="form-control" ng-model="profile.prof.country" ng-disabled="!profile.active_edit">
                     <option selected="selected" value="">-- Select Country --</option>
                     <option ng-selected="{! profile.prof.country == country.id !}" ng-repeat="country in countries" value="{! country.id !}">{! country.name!}</option>
                 </select>

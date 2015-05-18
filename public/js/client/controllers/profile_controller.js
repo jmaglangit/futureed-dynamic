@@ -1,42 +1,58 @@
-angular.module('futureed')
+angular.module('futureed.controllers')
 	.controller('ProfileController', ProfileController);
 
-
-LoginController.$inject = ['$scope', 'apiService', 'clientProfileApiService'];
+ProfileController.$inject = ['$scope', 'apiService', 'clientProfileApiService'];
 
 function ProfileController($scope, apiService, clientProfileApiService) {
 	var self = this;
-	this.change = {};
+	self.change = {};
+	self.confirm = {};
 
-	this.setClientProfileActive = setClientProfileActive;
-	this.getClientDetails = getClientDetails;
-	this.saveClientProfile = saveClientProfile;
-	this.changeClientPassword = changeClientPassword;
+	self.setClientProfileActive = setClientProfileActive;
+	self.getClientDetails = getClientDetails;
+	self.saveClientProfile = saveClientProfile;
+
+	self.validateCurrentClientEmail = validateCurrentClientEmail;
+	self.validateNewClientEmail = validateNewClientEmail;
+	self.confirmNewEmail = confirmNewEmail;
+	self.changeClientEmail = changeClientEmail;
+	self.confirmClientEmail = confirmClientEmail;
+	self.resendClientEmailCode = resendClientEmailCode;
+	
+	self.changeClientPassword = changeClientPassword;
 
 	function setClientProfileActive(active) {
 	    self.errors = Constants.FALSE;
+	    self.success = Constants.FALSE;
 	    $scope.$parent.u_error = Constants.FALSE;
 		$scope.$parent.u_success = Constants.FALSE;
 
+		self.active_index = Constants.FALSE;
+	    self.active_edit = Constants.FALSE;
+	    self.active_password = Constants.FALSE;
+	    self.active_edit_email = Constants.FALSE;
+	    self.active_confirm_email = Constants.FALSE;
+
 	    switch(active) {
-	      case Constants.PASSWORD :
+	      case Constants.PASSWORD 	:
 	      	self.active_password = Constants.TRUE;
-	      	self.password_changed = Constants.FALSE;
-	      	self.active_index = Constants.FALSE;
-	      	self.active_edit = Constants.FALSE;
 	        break;
 
-	      case Constants.EDIT:
+	      case Constants.EDIT 		:
 	      	self.getClientDetails();
-	      	self.active_index = Constants.FALSE;
-	      	self.active_password = Constants.FALSE;
 	      	self.active_edit = Constants.TRUE;
-	      	
-		    self.errors = Constants.FALSE;
-		    self.success = Constants.FALSE;
 	      	break;
 
-	      case Constants.INDEX    :
+	      case Constants.EDIT_EMAIL	:
+	      	self.active_edit_email = Constants.TRUE;
+	      	break;
+
+	      case Constants.CONFIRM_EMAIL :
+	      	self.active_confirm_email = Constants.TRUE;
+	      	self.resent = Constants.FALSE;
+	        break;
+
+	      case Constants.INDEX    	:
 	      default:
 	        self.getClientDetails();
 	        self.active_index = Constants.TRUE;
@@ -112,6 +128,155 @@ function ProfileController($scope, apiService, clientProfileApiService) {
 		}
 	}
 
+	function validateCurrentClientEmail() {
+		self.errors = Constants.FALSE;
+		self.e_error = Constants.FALSE;
+		self.e_success = Constants.FALSE;
+		self.e_loading = Constants.TRUE;
+
+		self.user_type = Constants.CLIENT;
+		apiService.validateEmail(self.change.current_email, self.user_type).success(function(response) {
+			self.e_loading = Constants.FALSE;
+
+		    if(angular.equals(response.status, Constants.STATUS_OK)) {
+		        if(response.errors) {
+		            self.e_error = response.errors[0].message;
+		        } else if(response.data) {
+		        	if(angular.equals(self.prof.email, self.change.current_email)) {
+		        		self.e_error = Constants.FALSE;
+		          		self.e_success = Constants.TRUE;
+		        	} else {
+		        		self.e_error = Constants.MSG_EA_CURR_NOTMATCH;
+		        	}
+		        }
+		    }
+
+		}).error(function(response) {
+			self.e_loading = Constants.FALSE;
+			self.errors = $scope.internalError();
+		});
+	}
+
+	function validateNewClientEmail() {
+		self.errors = Constants.FALSE;
+		self.n_error = Constants.FALSE;
+		self.c_error = Constants.FALSE;
+		self.n_success = Constants.FALSE;
+		self.c_success = Constants.FALSE;
+
+		self.n_loading = Constants.TRUE;
+		self.user_type = Constants.CLIENT;
+
+		apiService.validateEmail(self.change.new_email, self.user_type).success(function(response) {
+			self.n_loading = Constants.FALSE;
+
+		    if(angular.equals(response.status, Constants.STATUS_OK)) {
+		        if(response.errors) {
+		            self.n_error = response.errors[0].message;
+		            if(angular.equals(self.n_error, Constants.MSG_EA_NOTEXIST)) {
+		            	self.n_error = Constants.FALSE;
+
+		            	if(!angular.equals(self.change.new_email, self.change.confirm_email)) {
+							self.c_error = Constants.MSG_EA_CONFIRM;
+							self.c_success = Constants.FALSE;
+							self.n_success = Constants.TRUE;
+						} else {
+							self.n_error = Constants.FALSE;
+							self.n_success = Constants.TRUE;
+							self.c_success = Constants.TRUE;
+						}
+		            }
+		        } else if(response.data) {
+		        	self.n_error = Constants.MSG_EA_EXIST;
+		        }
+		    }
+
+		}).error(function(response) {
+			self.n_loading = Constants.FALSE;
+			self.errors = $scope.internalError();
+		});
+	}
+
+	function confirmNewEmail() {
+		self.errors = Constants.FALSE;
+		self.c_error = Constants.FALSE;
+		self.c_success = Constants.FALSE;
+		
+		if(!angular.equals(self.change.new_email, self.change.confirm_email)) {
+			self.c_error = Constants.MSG_EA_NOT_MATCH;
+		} else {
+			self.c_success = Constants.TRUE;
+		}
+	}
+
+	function changeClientEmail() {
+		self.errors = Constants.FALSE;
+		self.base_url = $("#base_url_form input[name='base_url']").val();
+	    self.callback_uri = self.base_url + Constants.URL_CHANGE_EMAIL(angular.lowercase(Constants.CLIENT));
+
+		$scope.ui_block();
+		clientProfileApiService.changeClientEmail($scope.user.id, self.change, self.callback_uri).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.active_confirm_email = Constants.TRUE;
+					self.active_edit_email = Constants.FALSE;
+					self.prof.new_email = self.change.new_email;
+				}
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	function confirmClientEmail() {
+		self.errors = Constants.FALSE;
+		self.user_type = Constants.CLIENT;
+
+		$scope.ui_block();
+		clientProfileApiService.confirmClientEmail($scope.user.id, self.user_type, self.confirmation_code, self.prof.new_email).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.email_confirmed = Constants.TRUE;
+				}
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	function resendClientEmailCode() {
+		self.errors = Constants.FALSE;
+		self.user_type = Constants.CLIENT;
+		self.base_url = $("#base_url_form input[name='base_url']").val();
+	    self.callback_uri = self.base_url + Constants.URL_CHANGE_EMAIL(angular.lowercase(Constants.CLIENT));
+
+	    $scope.ui_block();
+		clientProfileApiService.resendClientEmailCode($scope.user.id, self.user_type, self.callback_uri).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.resent = Constants.TRUE;
+				}
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
 	function changeClientPassword() {
 		self.errors = Constants.FALSE;
 		$("#client_change_pass_form input").removeClass("required-field");
@@ -126,7 +291,6 @@ function ProfileController($scope, apiService, clientProfileApiService) {
 						angular.forEach(response.errors, function(value, key) {
 			              $("#client_change_pass_form input[name='" + value.field +"']").addClass("required-field");
 			            });
-						client_change_pass_form
 					} else if(response.data) {
 						self.password_changed = Constants.TRUE;
 						self.change = {};

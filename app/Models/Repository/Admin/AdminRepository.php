@@ -14,13 +14,32 @@ class AdminRepository implements  AdminRepositoryInterface {
     /**
      * Get list of Administrators
      *
+     * @param int limit
+     *
      * @return array
      */
-    public function getAdmins(){
+    public function getAdmins($limit = 3){
+
         //get list of administrators username, email, roles
         $admin = new Admin();
 
-        return $admin->with('user')->get();
+        $admin = $admin->with('user')->paginate($limit);
+
+        $paginator = [
+            'currentPage' => $admin->currentPage(),
+            'lastPage' => $admin->lastPage(),
+            'perPage' => $admin->perPage(),
+            'hasMorePages' => $admin->hasMorePages(),
+            'nextPageUrl' => $admin->nextPageUrl(),
+            'previousPageUrl' => $admin->previousPageUrl(),
+            'total' => $admin->total(),
+            'count' => $admin->count()
+        ];
+
+        return [
+            'paginator' => $paginator,
+            'records' => $admin->items()
+        ];
 
     }
 

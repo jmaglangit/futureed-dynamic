@@ -32,8 +32,14 @@
     @yield('styles')
   </head>
   <body class="student" ng-controller="futureedController" ng-init="getUserDetails()">
-    <textarea id="userdata" name="hide" style="display:none;">{!! Session::get('student') !!}</textarea>
-    
+    {!! Form::hidden('userdata', Session::get('student')) !!}
+
+    {!! Form::hidden('_authorization', Session::get('client')
+        , array(
+            'id' => 'userdata'
+        )
+    ) !!}
+
     @yield('navbar')
 
   	@yield('content')
@@ -54,6 +60,7 @@
     {!! Html::script('http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular.min.js') !!}
     {!! Html::script('http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular-resource.min.js') !!}
     {!! Html::script('https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-cookies.min.js') !!}
+    
     {!! Html::script('/js/jquery.smooth-scroll.js') !!}
     
     {!! Html::script('/js/student/app.js') !!}
@@ -63,6 +70,9 @@
     {!! Html::script('/js/futureed_controllers.js') !!}
     {!! Html::script('/js/futureed_services.js') !!}
     {!! Html::script('/js/datetimepicker.js') !!}
+    {!! Html::script('/js/angular-datatables.min.js') !!}
+    {!! Html::script('/js/jquery.dataTables.min.js') !!}
+    {!! Html::script('//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js') !!}
 
     @yield('scripts')
 

@@ -357,7 +357,7 @@ trait ApiValidatorTrait {
                     "$field_name" => strtolower($input["$field_name"]),
                 ],
                 [
-                    "$field_name" => 'required|min:8|max:32|regex:/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/'
+                    "$field_name" => 'required|min:8|max:32|regex:/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%^(){}<>*#?&])[A-Za-z\d$@$!%^(){}<>*#?&]{8,}$/'
                 ],
                 [
                     'regex' => $error_msg[2112]
@@ -541,7 +541,6 @@ trait ApiValidatorTrait {
                 "$field_name" => 'required|regex:/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/'
             ],
             [
-                'required' => $error_msg[2025],
                 'regex' => $error_msg[2115]
             ]
         );

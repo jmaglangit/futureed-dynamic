@@ -5,6 +5,8 @@
 @stop
 @section('content')
 	<div class="container dshbrd-con" ng-cloak>
+		<div template-directive template-url="{!! route('student.partials.base_url') !!}"></div>
+		
 		<div class="wrapr">
 			<div class="side-nav">
 				@include('student.partials.dshbrd-side-nav')

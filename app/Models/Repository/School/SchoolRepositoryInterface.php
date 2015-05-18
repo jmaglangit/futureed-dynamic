@@ -22,4 +22,6 @@ interface SchoolRepositoryInterface {
     public function updateSchoolDetails($input);
 
     public function getSchoolCode($school_name);
+
+    public function searchSchool($school_name);
 }

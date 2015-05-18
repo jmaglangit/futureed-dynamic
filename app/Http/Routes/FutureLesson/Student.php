@@ -98,6 +98,22 @@
 					'as' => 'student.partials.base_url'
 					, 'uses' => 'FutureLesson\Student\LoginController@base_url'
 				]);
+			Routes::get('/profile_form', [
+					'as' => 'student.partials.profile_form'
+					, 'uses' => 'FutureLesson\Student\ProfileController@profile_form'
+				]);
+			Routes::get('/rewards_form', [
+					'as' => 'student.partials.rewards_form'
+					, 'uses' => 'FutureLesson\Student\ProfileController@rewards_form'
+				]);
+			Routes::get('/avatar_form', [
+					'as' => 'student.partials.avatar_form'
+					, 'uses' => 'FutureLesson\Student\ProfileController@avatar_form'
+				]);
+			Routes::get('/change_password_form', [
+					'as' => 'student.partials.change_password_form'
+					, 'uses' => 'FutureLesson\Student\ProfileController@change_password_form'
+				]);
 		});
 	});
 ?>
