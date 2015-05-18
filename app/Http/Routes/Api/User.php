@@ -15,7 +15,7 @@ Routes::group(['prefix' => '/user'], function() {
 
 
 //avatars
-    Routes::post('/avatar', 'Api\v1\AvatarController@selectAvatars');
+    Routes::post('/avatar', ['middleware' => 'jwt','uses' => 'Api\v1\AvatarController@selectAvatars']);
     Routes::post('/avatar/new', 'Api\v1\AvatarController@saveUserAvatar');
 
 
