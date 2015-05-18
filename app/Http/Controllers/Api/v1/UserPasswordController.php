@@ -86,6 +86,16 @@ class UserPasswordController extends UserController {
                       
                     }elseif(strcasecmp($input['user_type'],config('futureed.client')) == 0){
 
+                      $client_id = $this->client->getClientId($return['user_id']);
+                      $client = $this->client->getclientDetails($client_id);
+
+                      if($client['is_account_reviewed'] == 0){
+
+                        return $this->respondErrorMessage(2001);
+
+
+                      }
+
                       $this->mail->sendClientMailResetPassword($userDetails,$code['confirmation_code'],$input['callback_uri'],$subject);
 
                     }else{
