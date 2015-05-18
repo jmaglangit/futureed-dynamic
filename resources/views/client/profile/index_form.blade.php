@@ -175,6 +175,36 @@
                 </select>
             </div>
         </div>
+        <legend class="legend-name-mid">
+            School Contact Information
+        </legend>
+        <div class="form-group">
+            <label class="col-md-3 control-label">Contact Person <span class="required">*</span></label>
+            <div class="col-md-6">
+              {!! Form::text('school_contact_name', ''
+                  , array(
+                    'class' => 'form-control'
+                    , 'placeholder' => 'Contact Person'
+                    , 'ng-disabled' => '!profile.active_edit' 
+                    , 'ng-model' => 'profile.prof.school_contact_name'
+                  )
+              ) !!}
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="col-md-3 control-label">Contact Number <span class="required">*</span></label>
+            <div class="col-md-6">
+              {!! Form::text('school_contact_number', ''
+                  , array(
+                    'class' => 'form-control'
+                    , 'placeholder' => 'Contact Number'
+                    , 'ng-disabled' => '!profile.active_edit' 
+                    , 'ng-model' => 'profile.prof.school_contact_number'
+                  )
+              ) !!}
+            </div>
+        </div>
     </fieldset>
     <fieldset>
     	<legend class="legend-name-mid" ng-if="!profile.is_parent">
