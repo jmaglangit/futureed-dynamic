@@ -7,7 +7,13 @@ function clientProfileApiService($http) {
 
 	clientProfileApi.getClientDetails = getClientDetails;
 	clientProfileApi.saveClientProfile = saveClientProfile;
+
+	clientProfileApi.changeClientEmail = changeClientEmail;
+	clientProfileApi.confirmClientEmail = confirmClientEmail;
+	clientProfileApi.resendClientEmailCode = resendClientEmailCode;
+
 	clientProfileApi.changeClientPassword = changeClientPassword;
+	
 
 	function getClientDetails(id) {
 		return $http({
@@ -21,6 +27,30 @@ function clientProfileApiService($http) {
 			method	: 'PUT'
 			, data	: data
 			, url 	: clientProfileApiUrl + 'client/' + data.id
+		});
+	}
+
+	function changeClientEmail(id, object, callback_uri) {
+		return $http({
+			method 	: 'POST'
+			, data 	: {new_email: object.new_email, password : object.password, callback_uri : callback_uri}
+			, url 	: clientProfileApiUrl + 'client/change-email/' + id
+		});
+	}
+
+	function confirmClientEmail(id, user_type, confirmation_code, new_email) {
+		return $http({
+			method	: 'POST'
+			, data	: {new_email : new_email, confirmation_code : confirmation_code, user_type : user_type}
+			, url 	: clientProfileApiUrl + 'client/update-email/' + id
+		});
+	}
+
+	function resendClientEmailCode(id, user_type, callback_uri) {
+		return $http({
+			method	: 'POST'
+			, data 	: {user_type : user_type, callback_uri : callback_uri}
+			, url 	: clientProfileApiUrl + 'client/resend-email/' + id
 		});
 	}
 

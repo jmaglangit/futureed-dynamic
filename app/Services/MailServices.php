@@ -193,7 +193,7 @@ class MailServices {
             'data' => [
                 'name' => $data['name'],
                 'code' => $code,
-                'link' => $url . '?email=' . $data['email'],
+                'link' => $url . '?email=' . $data['new_email'],
             ],
             'mail_recipient' => $data['new_email'],
             'mail_recipient_name' => $data['name' ],

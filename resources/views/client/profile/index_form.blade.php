@@ -36,10 +36,10 @@
                 ) !!}
             </div>
             <div class="col-xs-2">
-            	<!-- <a href="#" class="edit-email">Edit</a> -->
+            	<a href="" ng-click="profile.setClientProfileActive('edit_email')" class="edit-email">Edit</a>
             </div>	
         </div>
-        {{-- show if there is a pending email --}}
+        
         <div class="form-group" ng-if='profile.prof.new_email'>
             <label for="" class="col-md-2 control-label" style="color:#7F7504">Pending Email <span class="required">*</span></label>
             <div class="col-md-5">
@@ -53,7 +53,7 @@
                 ) !!}
             </div>
             <div class="col-xs-2">
-            	<!-- <a href="#" class="edit-email">Confirm</a> -->
+                <a href="" ng-click="profile.setClientProfileActive('confirm_email')" class="edit-email">Confirm</a>
             </div>	
         </div>
     </fieldset>
@@ -173,6 +173,36 @@
                     <option selected="selected" value="">-- Select Country --</option>
                     <option ng-selected="{! profile.prof.school_country == country.id !}" ng-repeat="country in countries" value="{! country.id !}">{! country.name!}</option>
                 </select>
+            </div>
+        </div>
+        <legend class="legend-name-mid">
+            School Contact Information
+        </legend>
+        <div class="form-group">
+            <label class="col-md-3 control-label">Contact Person <span class="required">*</span></label>
+            <div class="col-md-6">
+              {!! Form::text('school_contact_name', ''
+                  , array(
+                    'class' => 'form-control'
+                    , 'placeholder' => 'Contact Person'
+                    , 'ng-disabled' => '!profile.active_edit' 
+                    , 'ng-model' => 'profile.prof.school_contact_name'
+                  )
+              ) !!}
+            </div>
+        </div>
+        
+        <div class="form-group">
+            <label class="col-md-3 control-label">Contact Number <span class="required">*</span></label>
+            <div class="col-md-6">
+              {!! Form::text('school_contact_number', ''
+                  , array(
+                    'class' => 'form-control'
+                    , 'placeholder' => 'Contact Number'
+                    , 'ng-disabled' => '!profile.active_edit' 
+                    , 'ng-model' => 'profile.prof.school_contact_number'
+                  )
+              ) !!}
             </div>
         </div>
     </fieldset>
