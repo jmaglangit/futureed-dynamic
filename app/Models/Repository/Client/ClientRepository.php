@@ -51,7 +51,7 @@ class ClientRepository implements ClientRepositoryInterface{
                     'state'             => $client['state'],
                     'country'           => $client['country'],
                     'zip'               => $client['zip'],
-                    'is_account_reviewed'=> 0,
+                    'is_account_reviewed'=> (isset($client['is_account_reviewed'])) ? $client['is_account_reviewed'] : 0,
                     'created_by'        => 1,
                     'updated_by'        => 1,
                 ]);

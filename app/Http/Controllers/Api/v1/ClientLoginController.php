@@ -40,6 +40,16 @@ class ClientLoginController extends ClientController {
         if(!$return){
 
             $this->user->addLoginAttempt($response['data']);
+
+            $user = $this->user->getUserDetail($response['data'],'Client');
+
+            if($user['login_attempt'] >=3){
+
+                $this->user->lockAccount($response['data']);
+
+            }
+
+
             return $this->respondErrorMessage(2233);
         }
 
