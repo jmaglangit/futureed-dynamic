@@ -73,15 +73,25 @@
     </div>
 
     <div ng-if="register.confirmed">
-        <div class="title">Success!</div>
+        <div class="title">
+          <h3>Success!</h3>
+        </div>
+
         <div class="form_content">
             <div class="roundcon">
                 <i class="fa fa-check fa-5x img-rounded text-center"></i>
             </div>
 
-            <p class="text">
-                Your email account has been successfully confirmed.
+            <p>
+              Your email account has been successfully confirmed.
             </p>
+
+            <h4 class="title">
+                You will be receiving an email shortly by our Admin if your registration has been approved or not.
+            </h4>
+            <small> 
+                If you have not yet receive the email, please check your inbox or your spam folder.
+            </small>
             {!! Html::link(route('client.login'), 'Click here to Login'
                 , array(
                     'class' => 'btn btn-blue'
