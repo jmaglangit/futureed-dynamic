@@ -47,7 +47,7 @@
           <div class="btn-container">
             {!! Form::button('Reset'
                 , array(
-                  'class' => 'btn btn-blue'
+                  'class' => 'btn btn-blue btn-large'
                   , 'ng-click' => 'forgot.resetClientPassword()'
                 )
             ) !!}
@@ -56,7 +56,7 @@
       </div>
     </div>
 
-    <div class="col-md-6 col-md-offset-1" ng-if="!success">
+    <div class="col-md-6 col-md-offset-1" ng-if="success">
       <div class="form-style form-select-password">
         <div class="title">Success!</div>
 
@@ -70,7 +70,7 @@
         <br />
 
         <div class="btn-container">
-          <a class="btn btn-blue" href="{!! route('client.login') !!}">Click here to Login</a>
+          <a class="btn btn-blue btn-large" href="{!! route('client.login') !!}">Click here to Login</a>
         </div>
       </div>
     </div>
