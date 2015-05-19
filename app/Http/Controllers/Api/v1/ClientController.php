@@ -175,6 +175,7 @@ class ClientController extends ApiController {
 				}else{
 
 					$checkUsername = $this->user->checkUsername($user['username'],'Client');
+					$user['name'] = $client['first_name'].$client['last_name'];
 
 	
 				if(!($checkUsername)  || $checkUsername['user_id'] == $clientDetails['user_id'] ){
@@ -183,7 +184,7 @@ class ClientController extends ApiController {
 					if(strtolower($clientDetails['client_role']) == 'parent' || 
 					   strtolower($clientDetails['client_role']) == 'teacher'){
 
-						$this->user->updateUsername($return['user_id'],$user['username']);
+						$this->user->updateUsername($return['user_id'],$user);
 						$this->client->updateClientDetails($return['id'],$client);
 
 					}else{
@@ -201,7 +202,7 @@ class ClientController extends ApiController {
 
 						}else{
 
-						    $this->user->updateUsername($return['user_id'],$user['username']);
+						    $this->user->updateUsername($return['user_id'],$user);
 							$this->client->updateClientDetails($return['id'],$client);
 							$this->school->updateSchoolDetails($school);
 

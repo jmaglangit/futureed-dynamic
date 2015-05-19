@@ -388,6 +388,11 @@ class UserServices {
         $this->users->updateEmailCode($id,$code);
     }
 
+    public function updateStatus($id,$status){
+
+        $this->users->updateStatus($id,$status);
+    }
+
     
 
 }
