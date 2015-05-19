@@ -21,13 +21,21 @@ class ProfileController extends Controller {
 		return view('client.profile.index_form');
 	}
 
-	public function changePassword() {
-		$id = $this->getId();
-		return view('client.profile.change_password', ['active' => 'password']);
+	public function edit_email_form() {
+		return view('client.profile.change_email_form');
+	}
+
+	public function confirm_email_form() {
+		return view('client.profile.confirm_email_form');
 	}
 
 	public function change_password_form() {
 		return view('client.profile.change_password_form');
+	}
+
+	public function enter_email_code() {
+		$input = Input::only('email');
+		return view('client.login.enter-email-code', array('email' => $input['email']));
 	}
 
 	public function getId() {

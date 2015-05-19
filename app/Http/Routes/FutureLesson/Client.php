@@ -4,13 +4,17 @@
 		Routes::get('/', 'FutureLesson\Client\LoginController@index');
 		
 		Routes::get('/password/forgot', [
-			'as' => 'client.password.reset'
+			'as' => 'client.password.forgot'
 			, 'uses' =>'FutureLesson\Client\LoginController@forgot_password'
 			]);
 		Routes::get('/register/confirm', [
-			'as' => 'client.login.confirm'
+			'as' => 'client.register.confirm'
 			, 'uses' => 'FutureLesson\Client\LoginController@enter_confirmation'
 		]);
+		Routes::get('/email/confirm', [
+			'as' => 'client.email.confirm'
+			, 'uses' => 'FutureLesson\Client\ProfileController@enter_email_code'
+			]);
 		Routes::get('/registration', [
 			'as' => 'client.registration'
 			, 'uses' => 'FutureLesson\Client\LoginController@registration'
@@ -59,21 +63,25 @@
 					'as' => 'client.profile.index'
 					, 'uses' => 'FutureLesson\Client\ProfileController@index'
 				]);
-			
-			Routes::get('/index_form', [
-					'as' => 'client.profile.index_form'
+
+			Routes::group(['prefix' => '/partials'], function() {
+				Routes::get('/index_form', [
+					'as' => 'client.profile.partial.index_form'
 					, 'uses' => 'FutureLesson\Client\ProfileController@index_form'
 				]);
-
-			Routes::get('/change_password_form', [
-					'as' => 'client.profile.change_password_form'
+				Routes::get('/edit_email_form', [
+					'as' => 'client.profile.partial.edit_email_form'
+					, 'uses' => 'FutureLesson\Client\ProfileController@edit_email_form'
+					]);
+				Routes::get('/confirm_email_form', [
+					'as' => 'client.profile.partial.confirm_email_form'
+					, 'uses' => 'FutureLesson\Client\ProfileController@confirm_email_form'
+					]);
+				Routes::get('/change_password_form', [
+					'as' => 'client.profile.partial.change_password_form'
 					, 'uses' => 'FutureLesson\Client\ProfileController@change_password_form'
 				]);
-
-			Routes::get('/change-password', [ 
-					'as' => 'client.profile.change_password'
-					, 'uses' => 'FutureLesson\Client\ProfileController@changePassword'
-				]);
+			});
 		});
 
 		Routes::group(['prefix' => 'partials'], function() {
