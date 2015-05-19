@@ -204,5 +204,48 @@ class MailServices {
     }
 
 
+    public function sendClientVerification($data,$url){
+
+        $template = 'emails.client.verify-client';
+
+        $content = [
+            'view' => $template,
+            'data' => [
+                'name' => $data['name'],
+                'link' => $url
+            ],
+            'mail_recipient' => $data['email'],
+            'mail_recipient_name' => $data['name' ],
+            'subject' => 'Your Future Lesson Account has been verified'
+        ];
+
+        $this->sendMail($content);
+
+
+    }
+
+
+    public function sendClientRejection($data,$url){
+
+        $template = 'emails.client.reject-client';
+
+        $content = [
+            'view' => $template,
+            'data' => [
+                'name' => $data['name'],
+                'link' => $url
+            ],
+            'mail_recipient' => $data['email'],
+            'mail_recipient_name' => $data['name' ],
+            'subject' => 'Your Future Lesson Account has been rejected'
+        ];
+
+        $this->sendMail($content);
+
+
+    }
+
+
+
 
 }
