@@ -13,7 +13,7 @@ class UsersTableSeeder extends Seeder {
     {
 
         \DB::table('users')->truncate();
-        \DB::table('users')->insert(
+       \DB::table('users')->insert(
        [
             [
             'username' => 'farrahdy',
@@ -303,7 +303,6 @@ class UsersTableSeeder extends Seeder {
                'created_at' => date("Y-m-d H:i:s"),
                'updated_at' => date("Y-m-d H:i:s")
            ]
-
         ]);
 
 

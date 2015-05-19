@@ -65,6 +65,7 @@ class ClientTableSeeder extends Seeder {
             ]
         ]);
 
+
     }
 
 }

@@ -15,7 +15,5 @@ trait ProfileTrait{
 		if(!empty($user)) {
 			Session::put($role, json_encode($user));
 		}
-
-		return true;
 	}
 }

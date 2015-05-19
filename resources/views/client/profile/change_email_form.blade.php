@@ -18,9 +18,9 @@
         		)!!}
         </div>	
         <div style="margin-top: 7px;"> 
-            <i ng-if="profile.e_loading" class="fa fa-spinner fa-spin"></i>
-            <i ng-if="profile.e_success" class="fa fa-check success-color"></i>
-            <span ng-if="profile.e_error" class="error-msg-con">{! profile.e_error !}</span>
+            <i ng-if="profile.validation.e_loading" class="fa fa-spinner fa-spin"></i>
+            <i ng-if="profile.validation.e_success" class="fa fa-check success-color"></i>
+            <span ng-if="profile.validation.e_error" class="error-msg-con">{! profile.validation.e_error !}</span>
         </div>		
 	</div>
 	<div class="form-group">
@@ -36,9 +36,9 @@
         		)!!}
         </div>		
         <div style="margin-top: 7px;"> 
-            <i ng-if="profile.n_loading" class="fa fa-spinner fa-spin"></i>
-            <i ng-if="profile.n_success" class="fa fa-check success-color"></i>
-            <span ng-if="profile.n_error" class="error-msg-con">{! profile.n_error !}</span>
+            <i ng-if="profile.validation.n_loading" class="fa fa-spinner fa-spin"></i>
+            <i ng-if="profile.validation.n_success" class="fa fa-check success-color"></i>
+            <span ng-if="profile.validation.n_error" class="error-msg-con">{! profile.validation.n_error !}</span>
         </div>	
 	</div>
 	<div class="form-group">
@@ -54,8 +54,8 @@
         		)!!}
         </div>
         <div style="margin-top: 7px;"> 
-            <i ng-if="profile.c_success" class="fa fa-check success-color"></i>
-            <span ng-if="profile.c_error" class="error-msg-con">{! profile.c_error !}</span>
+            <i ng-if="profile.validation.c_success" class="fa fa-check success-color"></i>
+            <span ng-if="profile.validation.c_error" class="error-msg-con">{! profile.validation.c_error !}</span>
         </div>	
 	</div>
 	<div class="form-group">

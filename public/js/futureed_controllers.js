@@ -319,7 +319,6 @@ function FutureedController($scope, apiService) {
 
   function getUserDetails() {
     var user = $("input[name='userdata']").val();
-    console.log(user);
     /*to jollie mar: erase this after creating client profile. line 386*/
     $scope.teacher = Constants.TRUE;
 
@@ -452,7 +451,7 @@ function FutureedController($scope, apiService) {
         return;
       }
 
-      $scope.reg = reg;
+      $scope.reg = (reg) ? reg : {};
       $scope.base_url = $("#base_url_form input[name='base_url']").val();
       $scope.reg.callback_uri = $scope.base_url + Constants.URL_REGISTRATION(angular.lowercase(Constants.STUDENT));
 

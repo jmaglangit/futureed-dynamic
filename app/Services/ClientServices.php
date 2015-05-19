@@ -100,9 +100,9 @@ class ClientServices {
         return $this->client->verifyClientId($id);
     }
 
-    public function getclientDetails($id){
+    public function getClientDetails($id){
 
-        return $this->client->getclientDetails($id);
+        return $this->client->getClientDetails($id);
     }
 
     public function formResponse($user,$client){

@@ -299,4 +299,96 @@ class EmailController extends ApiController {
 
     }
 
+    //it sents an email if the client is reviewed by admin 
+    public function verifyClient($id){
+
+        $userType = config('futureed.client');
+        $input = Input::only('is_account_reviewed');
+        $url = Input::only('callback_uri');
+
+
+
+        $this->addMessageBag($this->validateVarNumber($id));
+        $this->addMessageBag($this->isAccountReviewed($input,'is_account_reviewed'));
+        $this->addMessageBag($this->validateString($url,'callback_uri'));
+
+
+        $msg_bag = $this->getMessageBag();
+
+        if($msg_bag){
+
+            return $this->respondWithError($msg_bag);
+
+        }else{
+
+            $verify_client = $this->client->verifyClientId($id);
+
+            if(!$verify_client){
+
+                return $this->respondErrorMessage(2001);
+
+            }else{
+
+                $user_details = $this->user->getUserDetail($verify_client['user_id'],$userType);
+
+                //this sends an email to if verify
+                $this->mail->sendClientVerification($user_details,$url['callback_uri']);
+                $this->client->updateClientDetails($id,$input);
+
+                return $this->respondWithData(['id' => $id
+                                             ]);
+            }
+
+        }
+
+
+    }
+
+
+     public function rejectClient($id){
+
+        $userType = config('futureed.client');
+        $input = Input::only('is_account_reviewed');
+        $url = Input::only('callback_uri');
+
+
+
+        $this->addMessageBag($this->validateVarNumber($id));
+        $this->addMessageBag($this->isAccountReviewed($input,'is_account_reviewed'));
+        $this->addMessageBag($this->validateString($url,'callback_uri'));
+
+
+        $msg_bag = $this->getMessageBag();
+
+        if($msg_bag){
+
+            return $this->respondWithError($msg_bag);
+
+        }else{
+
+            $verify_client = $this->client->verifyClientId($id);
+
+            if(!$verify_client){
+
+                return $this->respondErrorMessage(2001);
+
+            }else{
+
+                $user_details = $this->user->getUserDetail($verify_client['user_id'],$userType);
+
+                //this sends an email to if verify
+                $this->mail->sendClientRejection($user_details,$url['callback_uri']);
+                $this->client->updateClientDetails($id,$input);
+
+                return $this->respondWithData(['id' => $id
+                                             ]);
+            }
+
+        }
+
+
+    }
+
 }
+
+

@@ -15,7 +15,7 @@
                         , 'ng-disabled' => '!profile.active_edit' 
                         , 'ng-model' => 'profile.prof.username'
                         , 'ng-model-options' => "{debounce : {'default' : 1000} }"
-                        , 'ng-change' => "checkAvailability(prof.username, 'Student')")
+                        , 'ng-change' => "checkAvailability(profile.prof.username, 'Student')")
                 ) !!}
             </div>
             <div style="margin-top: 7px;"> 

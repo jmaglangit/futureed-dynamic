@@ -28,6 +28,12 @@ Routes::group(['middleware' => 'api_client','prefix' => '/client'], function()
     Routes::post('/resend-email/{id}','Api\v1\EmailController@resendChangeEmail');
     Routes::post('/update-email/{id}','Api\v1\EmailController@confirmChangeEmail');
 
+    //for verification via admin
+    Routes::post('/verify-client/{id}','Api\v1\EmailController@verifyClient');
+
+    //reject client 
+     Routes::post('/reject-client/{id}','Api\v1\EmailController@rejectClient');
+
 });
 
 
