@@ -77,9 +77,9 @@ class ClientRepository implements ClientRepositoryInterface{
 
     }
 
-    public function getclientDetails($id){
+    public function getClientDetails($id){
 
-        return Client::where('id','=',$id)->first();
+        return Client::find($id);
 
     }
 

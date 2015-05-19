@@ -34,6 +34,11 @@ class ProfileController extends Controller {
 		return view('client.profile.change_password_form');
 	}
 
+	public function enter_email_code() {
+		$input = Input::only('email');
+		return view('client.login.enter-email-code', array('email' => $input['email']));
+	}
+
 	public function getId() {
 		$user = $this->getUserObject();
 		if(isset($user)) {
