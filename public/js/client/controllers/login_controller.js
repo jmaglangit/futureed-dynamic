@@ -4,26 +4,28 @@ angular.module('futureed.controllers')
 LoginController.$inject = ['$scope', 'apiService', 'clientLoginApiService'];
 
 function LoginController($scope, apiService, clientLoginApiService) {
-	var vm = this;
-	this.clientLogin = clientLogin;
-	this.clientForgotPassword = clientForgotPassword;
-	this.clientValidateCode = clientValidateCode;
-	this.clientResendCode = clientResendCode;
-	this.resetClientPassword = resetClientPassword;
+	var self = this;
 
-	this.selectRole = selectRole;
-	this.registerClient = registerClient;
-	this.resendClientConfirmation = resendClientConfirmation;
-	this.confirmClientRegistration = confirmClientRegistration;
+	self.clientLogin = clientLogin;
+	self.clientForgotPassword = clientForgotPassword;
+	self.clientValidateCode = clientValidateCode;
+	self.clientResendCode = clientResendCode;
+	self.resetClientPassword = resetClientPassword;
+
+	self.selectRole = selectRole;
+	self.registerClient = registerClient;
+	self.resendClientConfirmation = resendClientConfirmation;
+	self.confirmClientRegistration = confirmClientRegistration;
 
 	function clientLogin() {
 	    $scope.errors = Constants.FALSE;
 
 	    $scope.ui_block();
-	    clientLoginApiService.clientLogin(this.username, this.password, this.role).success(function(response) {
+	    clientLoginApiService.clientLogin(self.username, self.password, self.role).success(function(response) {
 	      if(response.status == Constants.STATUS_OK) {
 	        if(response.errors) {
 	          $scope.errorHandler(response.errors);
+	          self.password = Constants.EMPTY_STR;
 	        } else if(response.data) {
 	          $("#login_form input[name='user_data']").val(angular.toJson(response.data));
 	          $("#login_form").trigger(Constants.ATTR_SUBMIT);
@@ -34,6 +36,9 @@ function LoginController($scope, apiService, clientLoginApiService) {
 	    }).error(function(response) {
 	      $scope.ui_unblock();
 	      $scope.internalError();
+	      self.username = Constants.EMPTY_STR;
+	      self.password = Constants.EMPTY_STR;
+	      self.role = Constants.EMPTY_STR;
 	    });
 	}
 

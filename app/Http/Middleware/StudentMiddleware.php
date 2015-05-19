@@ -10,7 +10,6 @@ class StudentMiddleware {
     	$student = Session::get('student');
 
     	if(!$student) {
-    		Session::flush();
 			return redirect()->route('student.login')->send();
 		}
 

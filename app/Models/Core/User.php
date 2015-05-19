@@ -42,5 +42,9 @@ class User extends Model {
     protected $fillable = ['username', 'email', 'name', 'password', 'user_type', 'confirmation_code',
         'confirmation_code_expiry','status', 'created_by', 'updated_by'];
     
+	//-------------relationships
+	public function client() {
+		return $this->hasOne('FutureEd\Models\Core\Client');
+	}
 
 }
