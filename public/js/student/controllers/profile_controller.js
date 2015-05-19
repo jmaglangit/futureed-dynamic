@@ -5,11 +5,9 @@ ProfileController.$inject = ['$scope', 'apiService'];
 
 function ProfileController($scope, apiService) {
 	var self = this;
-
-	self.user = ($scope.user) ? $scope.user : {};
-	self.user_type = Constants.STUDENT;
 	self.prof = {};
-
+	self.user_type = Constants.STUDENT;
+	
 	self.setStudentProfileActive = setStudentProfileActive;
 
 	self.studentDetails = studentDetails;
@@ -39,6 +37,10 @@ function ProfileController($scope, apiService) {
 	function setStudentProfileActive(active) {
 	    self.errors = Constants.FALSE;
 	    self.success = Constants.FALSE;
+
+	    $scope.$parent.u_error = Constants.FALSE;
+		$scope.$parent.u_success = Constants.FALSE;
+	    
 	    self.password_validated = Constants.FALSE;
 	    self.password_selected = Constants.FALSE;
 	    self.password_confirmed = Constants.FALSE;
@@ -50,6 +52,10 @@ function ProfileController($scope, apiService) {
 	    self.active_avatar = Constants.FALSE;
 	    self.active_rewards = Constants.FALSE;
 	    self.active_password = Constants.FALSE;
+
+	    self.validation = {};
+	    self.select_password = Constants.FALSE;
+	    self.email_confirmed = Constants.FALSE;
 
 	    switch(active) {
 
@@ -72,17 +78,15 @@ function ProfileController($scope, apiService) {
 
 	      case Constants.EDIT_EMAIL 	:
 	      	self.change = {};
+	      	self.studentDetails();
 	      	self.active_edit_email = Constants.TRUE;
-	      	self.select_password = Constants.FALSE;
 	      	break;
 
 	      case Constants.CONFIRM_EMAIL  :
 	      	self.active_confirm_email = Constants.TRUE;
-	      	self.email_confirmed = Constants.FALSE
 	      	break;
 
 	      case Constants.INDEX    		:
-
 	      default:
 	      	self.studentDetails();
 	      	self.active_index = Constants.TRUE;
@@ -94,7 +98,7 @@ function ProfileController($scope, apiService) {
 	  }
 
 	  function studentDetails() {
-	    apiService.studentDetails(self.user.id).success(function(response) {
+	    apiService.studentDetails($scope.user.id).success(function(response) {
 	      if(response.status == Constants.STATUS_OK) {
 	        if(response.errors) {
 	          self.errors = $scope.errorHandler(response.errors);
@@ -155,75 +159,76 @@ function ProfileController($scope, apiService) {
 
 	  function validateStudentCurrentEmail() {
 	  	self.errors = Constants.FALSE;
-	  	self.e_error = Constants.FALSE;
-	  	self.e_success = Constants.FALSE;
-	  	self.e_loading = Constants.TRUE;
+	  	self.validation.e_error = Constants.FALSE;
+	  	self.validation.e_success = Constants.FALSE;
+	  	self.validation.e_loading = Constants.TRUE;
 
 	  	apiService.validateEmail(self.change.current_email, self.user_type).success(function(response) {
-	  		self.e_loading = Constants.FALSE;
+	  		self.validation.e_loading = Constants.FALSE;
 
 	  		if(angular.equals(response.status, Constants.STATUS_OK)) {
 	  			if(response.errors) {
-	  				self.e_error = response.errors[0].message;
+	  				self.validation.e_error = response.errors[0].message;
 	  			} else if(response.data) {
 	  				if(angular.equals(self.prof.email, self.change.current_email)) {
-	  					self.e_success = Constants.TRUE;
+	  					self.validation.e_success = Constants.TRUE;
 	  				} else {
-	  					self.e_error = Constants.MSG_EA_CURR_NOTMATCH;
+	  					self.validation.e_error = Constants.MSG_EA_CURR_NOTMATCH;
 	  				}
 	  			}
 	  		}
 	  	}).error(function(response) {
 	  		self.erros = $scope.internalError();
-	  		self.e_loading = Constants.FALSE;
+	  		self.validation.e_loading = Constants.FALSE;
 	  	});
 	  }
 
 	  function validateStudentNewEmail() {
 	  	self.errors = Constants.FALSE;
-	  	self.n_error = Constants.FALSE;
-	  	self.n_success = Constants.FALSE;
-		self.c_error = Constants.FALSE;
-		self.c_success = Constants.FALSE;
+	  	self.validation.n_error = Constants.FALSE;
+	  	self.validation.n_success = Constants.FALSE;
 
-	  	self.n_loading = Constants.TRUE;
+		self.validation.c_error = Constants.FALSE;
+		self.validation.c_success = Constants.FALSE;
+
+	  	self.validation.n_loading = Constants.TRUE;
 
 	  	apiService.validateEmail(self.change.new_email, self.user_type).success(function(response) {
-	  		self.n_loading = Constants.FALSE;
+	  		self.validation.n_loading = Constants.FALSE;
 
 	  		if(angular.equals(response.status, Constants.STATUS_OK)) {
 	  			if(response.errors) {
-	  				self.n_error = response.errors[0].message;
-		            if(angular.equals(self.n_error, Constants.MSG_EA_NOTEXIST)) {
-		            	self.n_error = Constants.FALSE;
+	  				self.validation.n_error = response.errors[0].message;
+		            if(angular.equals(self.validation.n_error, Constants.MSG_EA_NOTEXIST)) {
+		            	self.validation.n_error = Constants.FALSE;
 
 		            	if(!angular.equals(self.change.new_email, self.change.confirm_email)) {
-							self.c_error = Constants.MSG_EA_CONFIRM;
-							self.n_success = Constants.TRUE;
+							self.validation.c_error = Constants.MSG_EA_CONFIRM;
+							self.validation.n_success = Constants.TRUE;
 						} else {
-							self.n_success = Constants.TRUE;
-							self.c_success = Constants.TRUE;
+							self.validation.n_success = Constants.TRUE;
+							self.validation.c_success = Constants.TRUE;
 						}
 		            }
 	  			} else if(response.data) {
-	  				self.n_error = Constants.MSG_EA_EXIST;
+	  				self.validation.n_error = Constants.MSG_EA_EXIST;
 	  			}
 	  		}
 	  	}).error(function(response) {
 	  		self.erros = $scope.internalError();
-	  		self.c_loading = Constants.FALSE;
+	  		self.validation.n_loading = Constants.FALSE;
 	  	});
 	  }
 
 	  function confirmStudentNewEmail() {
 	  	self.errors = Constants.FALSE;
-		self.c_error = Constants.FALSE;
-		self.c_success = Constants.FALSE;
+		self.validation.c_error = Constants.FALSE;
+		self.validation.c_success = Constants.FALSE;
 		
 		if(!angular.equals(self.change.new_email, self.change.confirm_email)) {
-			self.c_error = Constants.MSG_EA_NOT_MATCH;
+			self.validation.c_error = Constants.MSG_EA_NOT_MATCH;
 		} else {
-			self.c_success = Constants.TRUE;
+			self.validation.c_success = Constants.TRUE;
 		}
 	  }
 
@@ -232,11 +237,11 @@ function ProfileController($scope, apiService) {
 	  }
 
 	  function selectPicturePassword() {
-	  	if(self.e_success && self.n_success && self.c_success) {
+	  	if(self.validation.e_success && self.validation.n_success && self.validation.c_success) {
 	  		self.select_password = Constants.TRUE;
 	  		$scope.getLoginPassword();
 	  	} else {
-	  		self.errors = ["Error!"];
+	    	$("html, body").animate({ scrollTop: 0 }, "slow");
 	  	}
 	  }
 
@@ -246,7 +251,7 @@ function ProfileController($scope, apiService) {
 	    self.callback_uri = self.base_url + Constants.URL_CHANGE_EMAIL(angular.lowercase(Constants.STUDENT));
 
 	      $scope.ui_block();
-	      apiService.changeValidate(self.user.id, self.change.new_email, $scope.image_id, self.callback_uri).success(function(response){
+	      apiService.changeValidate(self.prof.id, self.change.new_email, $scope.image_id, self.callback_uri).success(function(response){
 	        if(angular.equals(response.status, Constants.STATUS_OK)){
 	          if(response.errors){
 	            self.errors = $scope.errorHandler(response.errors);
@@ -289,7 +294,7 @@ function ProfileController($scope, apiService) {
 	      	self.callback_uri = self.base_url + Constants.URL_CHANGE_EMAIL(angular.lowercase(Constants.STUDENT));
 
 	      	$scope.ui_block();
-	      	apiService.emailResendCode(self.user.id, self.new_email, self.user_type, self.callback_uri).success(function(response) {
+	      	apiService.emailResendCode(self.prof.id, self.new_email, self.user_type, self.callback_uri).success(function(response) {
 	      		if(angular.equals(response.status, Constants.STATUS_OK)) {
 	        		if(response.errors) {
 	          			self.errors = $scope.errorHandler(response.errors);
@@ -306,7 +311,7 @@ function ProfileController($scope, apiService) {
 	  }
 
 	  function getAvatarImages() {
-	    apiService.getAvatarImages(self.user.gender).success(function(response) {
+	    apiService.getAvatarImages(self.prof.gender).success(function(response) {
 	        if(response.status == Constants.STATUS_OK) {
 	          if(response.errors) {
 	            self.errors = $scope.errorHandler(response.errors);
@@ -329,18 +334,18 @@ function ProfileController($scope, apiService) {
 	}
 
 	function selectAvatar() {
-	    apiService.selectAvatar(self.user.id, self.avatar_id).success(function(response) {
+	    apiService.selectAvatar(self.prof.id, self.avatar_id).success(function(response) {
 	      if(response.status == Constants.STATUS_OK) {
 	        if(response.errors) {
 	          self.errors = $scope.errorHandler(response.errors);
 	        } else if(response.data){
-	          self.user.avatar_id = response.data.id;
-	          self.user.avatar = response.data.url;
-	          $scope.$parent.user = self.user;
+	          self.prof.avatar_id = response.data.id;
+	          self.prof.avatar = response.data.url;
+	          $scope.$parent.user = self.prof;
 
 	          self.success = Constants.TRUE;
 
-	          apiService.updateUserSession(self.user).success(function(response) {
+	          apiService.updateUserSession(self.prof).success(function(response) {
 	              $("ul.avatar_list li").removeClass('selected');
 	          }).error(function() {
 	            self.errors = $scope.internalError();
@@ -366,7 +371,7 @@ function ProfileController($scope, apiService) {
 
 	    if(self.image_id) {
 	      $scope.ui_block();
-	      apiService.validateCurrentPassword(self.user.id, self.image_id).success(function(response) {
+	      apiService.validateCurrentPassword(self.prof.id, self.image_id).success(function(response) {
 	        if(response.status == Constants.STATUS_OK) {
 	          if(response.errors) {
 	            self.errors = $scope.errorHandler(response.errors);
@@ -427,7 +432,7 @@ function ProfileController($scope, apiService) {
 
 	    if(self.image_id == self.new_password) {
 	        $scope.ui_block();
-	        apiService.changePassword(self.user.id, self.new_password).success(function(response) {
+	        apiService.changePassword(self.prof.id, self.new_password).success(function(response) {
 	          if(response.status == Constants.STATUS_OK) {
 	            if(response.errors) {
 	              self.errors = $scope.errorHandler(response.errors);

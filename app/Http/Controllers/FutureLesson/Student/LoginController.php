@@ -18,7 +18,7 @@ class LoginController extends Controller {
 	{
 		if(Session::get('student')) {
 			$user_object = json_decode(Session::get('student'));
-
+			
 			if(!isset($user_object->avatar_id)) {
 				return redirect()->route('student.dashboard.follow_up_registration');
 			}

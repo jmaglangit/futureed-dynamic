@@ -1,82 +1,46 @@
 @extends('client.app')
 
 @section('content')
-  <div class="container login" ng-cloak>
-    <div class="col-md-6 col-md-offset-1" ng-show="!success">
-      <div class="form-style form-narrow">
-        <div class="title">Reset Password</div>
-
-          <div class="alert alert-danger" ng-if="errors">
-            <p ng-repeat="error in errors" > 
-              {! error !}
-            </p>
-          </div>
-
-          {!! Form::open(
-              array(
-                  'id' => 'reset_password_form'
-                , 'ng-controller' => 'LoginController as forgot'
-              )
-          ) !!}
-          <div class="input">
-            <div class="icon">
-              <i class="fa fa-unlock-alt"></i>
-            </div>
-            {!! Form::password('new_password'
-                  , array(
-                      'ng-model' => 'forgot.new_password'
-                    , 'placeholder' => 'New Password'
-                  )
-            ) !!}
-          </div>
-          <div class="input">
-            <div class="icon">
-              <i class="fa fa-lock"></i>
-            </div>
-            {!! Form::password('confirm_password'
-                  , array(
-                      'ng-model' => 'forgot.confirm_password'
-                    , 'placeholder' => 'Confirm New Password'
-                  )
-            ) !!}
-          </div>
-
-          {!! Form::hidden('reset_code', $reset_code) !!}
-          {!! Form::hidden('id', $id) !!}
-
-          <div class="btn-container">
-            {!! Form::button('Reset'
-                , array(
-                  'class' => 'btn btn-blue'
-                  , 'ng-click' => 'forgot.resetClientPassword()'
-                )
-            ) !!}
-          </div>
-        {!! Form::close() !!}
+<div class="container" ng-controller="LoginController as register" ng-cloak>
+  <div template-directive template-url="{!! route('client.partials.base_url') !!}"></div>
+  
+  <div class="form-style form-wide" ng-show="!registered"> 
+    <div class="title">Register as</div>
+    <div class="row">
+      <div class="col-md-12 register_users">
+        <div class="col-md-3 col-md-offset-3" ng-click="register.selectRole('user_principal')">
+          <img id="user_principal" ng-class="{role : !register.principal}" src="/images/user_principal.jpg" />
+          <h4>Principal</h4>
+        </div>
+        <div class="col-md-3" ng-click="register.selectRole('user_parent')">
+          <img id="user_parent" ng-class="{role : !register.parent}" src="/images/user_parent.jpg">
+          <h4>Parent</h4>
+        </div>
       </div>
-    </div>
+      <div class="col-md-12" ng-if="register.role_click">
+        <div class="alert alert-danger" style="text-align:left;" ng-if="errors">
+          <p ng-repeat="error in errors"> 
+            {! error !}
+          </p>
+        </div>
 
-    <div class="col-md-6 col-md-offset-1" ng-if="success">
-      <div class="form-style form-select-password">
-        <div class="title">Success!</div>
-          <div class="roundcon">
-            <i class="fa fa-check fa-5x img-rounded text-center"></i>
-          </div>
-
-            <p>Your password has been set.</p>
-            <p> You may now use your new password to login.</p>
-          
-          <br />
-
-          <div class="btn-container">
-            <a class="btn btn-blue" href="{!! route('client.login') !!}">Click here to Login</a>    
-          </div>
+        <div template-directive template-url="{!! route('client.partials.registration_form') !!}"></div>
       </div>
     </div>
   </div>
+
+  <div template-directive template-url="{!! route('client.partials.registration_success') !!}"></div>
+
+  @include('student.login.terms-and-condition')
+  @include('student.login.privacy-policy')
+
+</div>
 @endsection
 
 @section('scripts')
+
   {!! Html::script('/js/client/controllers/login_controller.js') !!}
+  {!! Html::script('/js/client/services/login_service.js') !!}
   {!! Html::script('/js/client/login.js') !!}
+
 @stop
