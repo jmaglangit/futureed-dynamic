@@ -1,6 +1,6 @@
 <?php
 
-Routes::group(['prefix' => '/client'], function()
+Routes::group(['middleware' => 'api_client','prefix' => '/client'], function()
 {
 
     //Parent
@@ -32,5 +32,7 @@ Routes::group(['prefix' => '/client'], function()
 
 
 //Client
-Routes::resource('/client','Api\v1\ClientController',
-    ['except' => ['create','edit']]);
+Routes::group(['middleware' => 'api_client'],function(){
+    Routes::resource('/client','Api\v1\ClientController',
+        ['except' => ['create','edit']]);
+});
