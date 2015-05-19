@@ -67,10 +67,10 @@ class ClientDiscountRepository implements ClientDiscountRepositoryInterface {
 	 * @return object
 	 */
 	 
-    public function updateClientDiscount($clientDiscount){
+    public function updateClientDiscount($id,$clientDiscount){
     
         try{
-            $result = ClientDiscount::find($clientDiscount["id"]);
+            $result = ClientDiscount::find($id);
             return !is_null($result) ? $result->update($clientDiscount) : false;
         }catch(Exception $e){
             return $e->getMessage();

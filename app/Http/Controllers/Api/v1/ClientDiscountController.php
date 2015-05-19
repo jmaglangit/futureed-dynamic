@@ -95,8 +95,7 @@ class ClientDiscountController extends ApiController {
 	    if(!is_null($id)){
 	    
     	    $data = $request->all();
-            $data['id'] = $id;
-    		return $this->respondWithData($this->client_discount->updateClientDiscount($data));
+            return $this->respondWithData($this->client_discount->updateClientDiscount($id,$data));
 	    }		
 	}
 
