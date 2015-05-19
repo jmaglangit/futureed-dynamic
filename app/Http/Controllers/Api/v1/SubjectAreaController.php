@@ -6,27 +6,24 @@ use FutureEd\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
-use FutureEd\Models\Repository\Subject\SubjectRepositoryInterface as Subject;
 use FutureEd\Models\Repository\SubjectArea\SubjectAreaRepositoryInterface as SubjectArea;
 
 use FutureEd\Services\ErrorServices as Errors;
 
-use FutureEd\Http\Requests\Api\SubjectRequest;
+use FutureEd\Http\Requests\Api\SubjectAreaRequest;
 
-class SubjectController extends ApiController {
+class SubjectAreaController extends ApiController {
 
-	//holds the subject repository
-	protected $subject;
+	//holds the subject arearepository
 	protected $subject_area;
 
 	/**
-	 * Subject Controller constructor
+	 * Subject Area Controller constructor
 	 *
 	 * @return void
 	 */
-	public function __construct(Subject $subject, SubjectArea $subject_area) 
+	public function __construct(SubjectArea $subject_area) 
 	{
-		$this->subject = $subject;
 		$this->subject_area = $subject_area;
 	}
 
@@ -53,7 +50,7 @@ class SubjectController extends ApiController {
 			$offset = intval(Input::get('offset'));
 		}
 			
-		$subjects = $this->subject->getSubjects($criteria, $limit, $offset);
+		$subjects = $this->subject_area->getSubjectAreas($criteria, $limit, $offset);
 
 		return $this->respondWithData($subjects);
 	}
@@ -63,13 +60,13 @@ class SubjectController extends ApiController {
 	 *
 	 * @return Response
 	 */
-	public function store(SubjectRequest $request)
+	public function store(SubjectAreaRequest $request)
 	{
 		$data = $request->all();
 	
-		$subject = $this->subject->addSubject($data);
+		$subject_area = $this->subject_area->addSubjectArea($data);
 		
-		return $this->respondWithData(['id' => $subject->id]);
+		return $this->respondWithData(['id' => $subject_area->id]);
 	}
 
 	/**
@@ -80,7 +77,7 @@ class SubjectController extends ApiController {
 	 */
 	public function show($id)
 	{
-		return $this->respondWithData($this->subject->getSubject($id));
+		return $this->respondWithData($this->subject_area->getSubjectArea($id));
 	}
 
 	/**
@@ -89,13 +86,13 @@ class SubjectController extends ApiController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id, SubjectRequest $request)
+	public function update($id, SubjectAreaRequest $request)
 	{
 		$data = $request->all();
 	
-		$subject = $this->subject->updateSubject($id, $data);
+		$subject_area = $this->subject_area->updateSubjectArea($id, $data);
 		
-		return $this->respondWithData(['id' => $subject->id]);
+		return $this->respondWithData(['id' => $subject_area->id]);
 	}
 
 	/**
@@ -106,16 +103,7 @@ class SubjectController extends ApiController {
 	 */
 	public function destroy($id)
 	{
-		$subject_areas = $this->subject_area->getAreasBySubjectId($id);
-		
-		if($subject_areas->count() > 0) {
-			
-			return $this->respondErrorMessage(2600);
-			
-		} else {
-			return $this->respondWithData($this->subject->deleteSubject($id));
-		}
-	
+		return $this->respondWithData($this->subject_area->deleteSubjectArea($id));
 	}
 
 }

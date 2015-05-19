@@ -67,7 +67,20 @@ class SubjectRepository implements SubjectRepositoryInterface {
 		return $subject;
 		
 	}
-
+	
+	/**
+	 * Get subject.
+	 *
+	 * @param	int	$id
+	 *
+	 * @return Resource
+	 */
+	public function getSubject($id) {
+				
+		return Subject::find($id);
+		
+	}
+	
 	/**
 	 * Update subject.
 	 *
