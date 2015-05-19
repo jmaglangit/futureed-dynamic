@@ -1,6 +1,6 @@
 <?php 
 
-Routes::group(['prefix' => '/admin'], function()
+Routes::group(['middleware' => 'api_admin','prefix' => '/admin'], function()
 {
 
 	Routes::post('/login','Api\v1\AdminLoginController@login');
