@@ -22,7 +22,7 @@ class ClientTableSeeder extends Seeder {
                 'city' => '',
                 'state' => '',
                 'country' => '',
-                'zip' => 1234,
+                'zip' => 12345,
                 'is_account_reviewed' => 1,
                 'created_by' => 1,
                 'updated_by' => 1,
@@ -30,16 +30,16 @@ class ClientTableSeeder extends Seeder {
                 'updated_at' => date("Y-m-d H:i:s")
             ],
             [
-                'user_id' => 2,
-                'first_name' => 'Farrah Faye',
-                'last_name' => 'Dy',
+                'user_id' => 5,
+                'first_name' => 'John Rey',
+                'last_name' => 'Quiros',
                 'client_role' => 'Principal',
                 'school_code' => 1,
                 'street_address' => '',
                 'city' => '',
                 'state' => '',
                 'country' => '',
-                'zip' => 5678,
+                'zip' => 56789,
                 'is_account_reviewed' => 1,
                 'created_by' => 1,
                 'updated_by' => 1,
@@ -47,9 +47,9 @@ class ClientTableSeeder extends Seeder {
                 'updated_at' => date("Y-m-d H:i:s")
             ],
             [
-                'user_id' => 2,
-                'first_name' => 'Farrah Faye',
-                'last_name' => 'Dy',
+                'user_id' => 8,
+                'first_name' => 'Jason',
+                'last_name' => 'McHeaven',
                 'client_role' => 'Teacher',
                 'school_code' => 1,
                 'street_address' => '',
@@ -64,6 +64,7 @@ class ClientTableSeeder extends Seeder {
                 'updated_at' => date("Y-m-d H:i:s")
             ]
         ]);
+
 
     }
 
