@@ -21,10 +21,17 @@ class Subject extends Model {
 	* @return mixed
 	*/
 	public static $rules = array(
-		'code' => 'required|integer',
+		'code' => 'required|integer|unique:subjects',
 		'name' => 'required',
 		'status' => 'required|in:Enabled,Disabled'
 	);
+    
+	//-------------relationships
+	public function areas() {
+	
+		return $this->hasMany('FutureEd\Models\Core\SubjectArea');
+		
+	}
     
     //-------------scopes
 	public function scopeName($query, $name) {

@@ -68,4 +68,56 @@ class SubjectRepository implements SubjectRepositoryInterface {
 		
 	}
 
+	/**
+	 * Update subject.
+	 *
+	 * @param	int	$id
+	 * @param	array	$subject
+	 *
+	 * @return boolean
+	 */
+	public function updateSubject($id, $data) {
+		
+		try {
+		
+			$subject = Subject::find($id);
+			
+			unset($data['code']);
+			
+			$subject->update($data);
+			
+		} catch(Exception $e) {
+		
+			return $e->getMessage();
+			
+		}
+		
+		return $subject;
+		
+	}
+	
+	/**
+	 * Delete subject.
+	 *
+	 * @param	int	$id
+	 * @param	array	$subject
+	 *
+	 * @return boolean
+	 */
+	public function deleteSubject($id) {
+		
+		try {
+		
+			$subject = Subject::find($id);
+						
+			return !is_null($subject) ? $subject->delete() : false;
+			
+		} catch(Exception $e) {
+		
+			return $e->getMessage();
+			
+		}
+				
+	}
+
 }
