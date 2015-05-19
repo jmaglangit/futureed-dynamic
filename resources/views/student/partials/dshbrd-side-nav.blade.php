@@ -1,5 +1,5 @@
 <ul ng-init="profile.setStudentProfileActive()">
-	<li ng-class="{ 'active' : profile.active_index }">
+	<li ng-class="{ 'active' : profile.active_index || profile.active_edit_email || profile.active_confirm_email}">
 		<a href="" ng-click="profile.setStudentProfileActive('index')">My Profile</a>
 	</li>
 

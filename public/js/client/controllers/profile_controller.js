@@ -5,6 +5,7 @@ ProfileController.$inject = ['$scope', 'apiService', 'clientProfileApiService'];
 
 function ProfileController($scope, apiService, clientProfileApiService) {
 	var self = this;
+	self.prof = {};
 	self.change = {};
 	self.confirm = {};
 
@@ -220,8 +221,7 @@ function ProfileController($scope, apiService, clientProfileApiService) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
-					self.active_confirm_email = Constants.TRUE;
-					self.active_edit_email = Constants.FALSE;
+					self.setClientProfileActive(Constants.CONFIRM_EMAIL);
 					self.prof.new_email = self.change.new_email;
 				}
 			}
@@ -236,6 +236,7 @@ function ProfileController($scope, apiService, clientProfileApiService) {
 	function confirmClientEmail() {
 		self.errors = Constants.FALSE;
 		self.user_type = Constants.CLIENT;
+		self.prof.new_email = (self.prof.new_email) ? self.prof.new_email : $("#confirm_email_form input[name='new_email']").val();
 
 		$scope.ui_block();
 		clientProfileApiService.confirmClientEmail($scope.user.id, self.user_type, self.confirmation_code, self.prof.new_email).success(function(response) {

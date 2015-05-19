@@ -28,6 +28,7 @@ Routes::group(['prefix' => 'api/v1'], function()
         include('Routes/Api/School.php');
         include('Routes/Api/Student.php');
         include('Routes/Api/Subject.php');
+        include('Routes/Api/Subscription.php');
         include('Routes/Api/User.php');
 
 });

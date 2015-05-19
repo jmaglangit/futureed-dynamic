@@ -7,6 +7,9 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
 use FutureEd\Models\Repository\Subject\SubjectRepositoryInterface as Subject;
+use FutureEd\Models\Repository\SubjectArea\SubjectAreaRepositoryInterface as SubjectArea;
+
+use FutureEd\Services\ErrorServices as Errors;
 
 use FutureEd\Http\Requests\Api\SubjectRequest;
 
@@ -14,15 +17,17 @@ class SubjectController extends ApiController {
 
 	//holds the subject repository
 	protected $subject;
+	protected $subject_area;
 
 	/**
 	 * Subject Controller constructor
 	 *
 	 * @return void
 	 */
-	public function __construct(Subject $subject) 
+	public function __construct(Subject $subject, SubjectArea $subject_area) 
 	{
 		$this->subject = $subject;
+		$this->subject_area = $subject_area;
 	}
 
 	/**
@@ -84,9 +89,13 @@ class SubjectController extends ApiController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($id, SubjectRequest $request)
 	{
-		//
+		$data = $request->all();
+	
+		$subject = $this->subject->updateSubject($id, $data);
+		
+		return $this->respondWithData(['id' => $subject->id]);
 	}
 
 	/**
@@ -97,7 +106,16 @@ class SubjectController extends ApiController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$subject_areas = $this->subject_area->getAreasBySubjectId($id);
+		
+		if($subject_areas->count() > 0) {
+			
+			return $this->respondErrorMessage(2600);
+			
+		} else {
+			return $this->respondWithData($this->subject->deleteSubject($id));
+		}
+	
 	}
 
 }

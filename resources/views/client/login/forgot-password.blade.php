@@ -149,6 +149,8 @@
                   )
               ) !!}
           </div>
+          <br />
+          <a href="{!! route('client.login') !!}"><i class="fa fa-home"></i> Home</a>
           {!! Form::close() !!}
         </div>
       </div>

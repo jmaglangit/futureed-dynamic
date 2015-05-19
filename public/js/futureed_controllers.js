@@ -27,13 +27,6 @@ function FutureedController($scope, apiService) {
   $scope.getGradeLevel = getGradeLevel;
   $scope.checkAvailability = checkAvailability;
   $scope.checkEmailAvailability = checkEmailAvailability;
-  $scope.checkEmailChange = checkEmailChange;
-  $scope.checkEmailConfirm = checkEmailConfirm;
-  $scope.checkCurrentEmail = checkCurrentEmail;
-  $scope.changeBack = changeBack;
-  $scope.changeValidate = changeValidate;
-  $scope.emailValidateCode = emailValidateCode;
-  $scope.emailResendCode = emailResendCode;
 
   $scope.beforeDateRender = beforeDateRender;
 
@@ -194,67 +187,6 @@ function FutureedController($scope, apiService) {
       $scope.internalError();
     });
   }  
-
-  function checkEmailChange(email, user_type) {
-    $scope.n_loading = Constants.TRUE;
-    $scope.n_success = Constants.FALSE;
-    $scope.n_error = Constants.FALSE;
-
-    apiService.validateEmail(email, user_type).success(function(response) {
-      $scope.n_loading = Constants.FALSE;
-      if(response.status == Constants.STATUS_OK) {
-        if(response.errors) {
-          if(response.errors[0].error_code == 2002) {
-            $scope.n_success = Constants.TRUE;
-          } else {
-            $scope.n_error = response.errors[0].message;
-          }
-        } else if(response.data) {
-            $scope.n_error = "Email Address already exists.";  
-        }
-      }
-    }).error(function(response) {
-      $scope.e_loading = Constants.FALSE;
-      $scope.internalError();
-    });
-  }
-
-  function checkCurrentEmail(email_current) {
-
-    $scope.c_loading = Constants.TRUE;
-    $scope.c_success = Constants.FALSE;
-    $scope.c_error = Constants.FALSE;
-
-    if($scope.user.email != email_current ||   email_current == null){
-      $scope.c_loading = Constants.FALSE;
-      $scope.c_error = "Please Input your current email!";
-    }else{
-      $scope.c_loading = Constants.FALSE;
-      $scope.c_success = Constants.TRUE;
-    }
-  }
-  function checkEmailConfirm(email_confirm) {
-
-    $scope.cf_loading = Constants.TRUE;
-    $scope.cf_success = Constants.FALSE;
-    $scope.cf_error = Constants.FALSE;
-
-    if($scope.email_confirm == null){
-      $scope.cf_loading = Constants.FALSE;
-      $scope.cf_error = "Confirm Email is required";
-    }else if($scope.email_new != $scope.email_confirm){
-      $scope.cf_loading = Constants.FALSE;
-      $scope.cf_error = "New password and Confirm password must match."
-    }else{
-      $scope.cf_loading = Constants.FALSE;
-      $scope.cf_success = Constants.TRUE;
-    }
-  }
-  function changeBack(){
-    $scope.email_pass = Constants.FALSE;
-    $('#email_current').val($scope.email_current);
-    $("html, body").animate({ scrollTop: 0 }, "slow");
-  }
   /**
   * End of Common Functions / API calls
   */
@@ -773,94 +705,5 @@ function FutureedController($scope, apiService) {
 
     }
     $("html, body").animate({ scrollTop: 0 }, "slow");
-  }
-
-  function changeValidate(){
-    $scope.error = "";
-    if($scope.image_id == null){
-      $scope.sp_error = "Please select your picture password.";
-      $("html, body").animate({ scrollTop: 0 }, "slow");
-
-      return false;
-
-    }else{
-      $scope.base_url = $("#base_url_form input[name='base_url']").val();
-      $scope.callback_uri = $scope.base_url + Constants.URL_CHANGE_EMAIL(angular.lowercase(Constants.STUDENT));
-
-      $scope.ui_block();
-      apiService.changeValidate($scope.user.id, $scope.email_new, $scope.image_id, $scope.callback_uri).success(function(response){
-        if(response.status == Constants.STATUS_OK){
-          if(response.errors){
-            $scope.error = response.errors[0].message;
-          }else if(response.data){
-
-            $scope.email_change = Constants.TRUE;
-            $scope.show = Constants.TRUE;
-            $scope.email_pass = Constants.FALSE;
-          }
-        }
-        $scope.ui_unblock();
-      }).error(function(response){
-        $scope.internalError();
-        $scope.ui_unblock();
-      });
-      $("html, body").animate({ scrollTop: 0 }, "slow");
-    }    
-    
-  }
-
-  function emailValidateCode(confirm_code){
-      $scope.errors = Constants.FALSE;
-      $scope.confirm_code = confirm_code;
-      $scope.user_type = Constants.STUDENT;
-      
-
-      if($scope.confirm_code == null){
-        $scope.ec_error = "Please input your confirmation code";
-        $("html, body").animate({ scrollTop: 0 }, "slow");
-      }else{
-
-        $scope.ui_block();
-        apiService.emailValidateCode($scope.email_new, $scope.user_type , $scope.confirm_code).success(function(response){
-          if(response.status == Constants.STATUS_OK){
-            if(response.errors){
-              $scope.errorHandler(response.errors);
-              $scope.ui_unblock();
-            }else if(response.data){
-              $scope.ui_unblock();
-              $scope.success = Constants.TRUE;
-            }
-          }
-        }).error(function(response){
-          $scope.internalError();
-          $scope.ui_unblock();
-        });
-      }      
-  }
-
-  function emailResendCode(){
-      $scope.ec_error = Constants.FALSE;
-      $scope.user_type = Constants.STUDENT;
-
-      $scope.base_url = $("#base_url_form input[name='base_url']").val();
-      $scope.callback_uri = $scope.base_url + Constants.URL_CHANGE_EMAIL(angular.lowercase($scope.user_type));
-
-      $scope.ui_block();
-      apiService.emailResendCode($scope.user.id, $scope.email_new, $scope.user_type, $scope.callback_uri).success(function(response) {
-      if(response.status == Constants.STATUS_OK) {
-        if(response.errors) {
-          $scope.errorHandler(response.errors);
-        } else if(response.data){
-            $scope.sent = Constants.FALSE;
-            $scope.resent = Constants.TRUE;
-        } 
-      }
-
-      $scope.ui_unblock();
-    }).error(function(response) {
-      $scope.internalError();
-      $scope.ui_unblock();
-    });
-
   }
 };

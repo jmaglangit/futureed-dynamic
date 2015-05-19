@@ -2,7 +2,7 @@
 
 use FutureEd\Http\Requests\Api\ApiRequest;
 
-class SubjectRequest extends ApiRequest {
+class SubscriptionRequest extends ApiRequest {
 	
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -19,24 +19,12 @@ class SubjectRequest extends ApiRequest {
 	 * @return array
 	 */
 	public function rules() {
-				
-		switch($this->method) {
-			case 'PUT':
-				return [
-					'name' => 'required',
-					'status' => 'required|in:Enabled,Disabled'
-				];
-				break;
-			case 'POST':
-			default:
-				return [
-					'code' => 'required|integer|unique:subjects',
-					'name' => 'required',
-					'status' => 'required|in:Enabled,Disabled'
-				];				
-	        	break;
-		}
-		
+        return [
+            'name'          => 'required',
+			'price'         => 'required|numeric',
+			'description'   => 'required',
+			'status'        => 'required|in:Enabled,Disabled'
+        ];
 	}
 	
 	/**
@@ -46,7 +34,7 @@ class SubjectRequest extends ApiRequest {
 	 */
 	public function messages() {
 		return [
-			'integer' => 'The :attribute must be a number.' 
+			'decimal' => 'The :attribute must be a number.' 
 		];
 	}
 }

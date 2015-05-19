@@ -4,11 +4,20 @@ use FutureEd\Http\Controllers\Api\Traits\ClientValidatorTrait;
 use FutureEd\Http\Controllers\Api\v1\ClientController;
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
+use FutureEd\Services\UserServices;
+use FutureEd\Services\AdminServices;
+
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
-class AdminLoginController extends AdminController {
+class AdminLoginController extends ApiController {
+
+    public function __construct(UserServices $user,AdminServices $admin){
+
+        $this->admin = $admin;
+        $this->user  = $user;   
+    }
 
 	public function login(){
 
@@ -40,6 +49,15 @@ class AdminLoginController extends AdminController {
             if(!$return){
 
                 $this->user->addLoginAttempt($response['data']);
+                $user = $this->user->getUserDetail($response['data'],config('futureed.admin'));
+
+                if($user['login_attempt'] >=3){
+
+                    $this->user->lockAccount($response['data']);
+
+                }
+
+
                 return $this->respondErrorMessage(2233);
             }
 

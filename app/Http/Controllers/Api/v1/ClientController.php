@@ -72,7 +72,7 @@ class ClientController extends ApiController {
         	if($return) {
 
         		$userDetails = $this->user->getUserDetail($return['user_id'],$client)->toArray();
-        		$clienDetails = $this->client->getclientDetails($id)->toArray();
+        		$clienDetails = $this->client->getClientDetails($id)->toArray();
         		$formResponse = $this->client->formResponse($userDetails,$clienDetails);
 
         		return $this->respondWithData($formResponse);
@@ -113,7 +113,7 @@ class ClientController extends ApiController {
 
 			if($return){
 
-				$clientDetails = $this->client->getclientDetails($id)->toArray();
+				$clientDetails = $this->client->getClientDetails($id)->toArray();
 				$userDetails = $this->user->getUserDetail($return['user_id'],'Client')->toArray();
 
 				$user = input::only('username');
@@ -209,7 +209,7 @@ class ClientController extends ApiController {
 
 					}
 
-					$clientDetails = $this->client->getclientDetails($id)->toArray();
+					$clientDetails = $this->client->getClientDetails($id)->toArray();
 					$userDetails = $this->user->getUserDetail($return['user_id'],'Client')->toArray();
 
 					$response = $this->client->formResponse($userDetails,$clientDetails);
@@ -348,6 +348,7 @@ class ClientController extends ApiController {
                 $user['first_name'] = $client['first_name'];
                 $user['last_name'] = $client['last_name'];
                 $user['user_type']  = $user_type;
+                $client['is_account_reviewed'] = 1;
 
                 //add user to db
                 $user_response = $this->user->addUser($user,$client);
