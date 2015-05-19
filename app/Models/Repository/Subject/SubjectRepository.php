@@ -82,6 +82,8 @@ class SubjectRepository implements SubjectRepositoryInterface {
 		
 			$subject = Subject::find($id);
 			
+			unset($data['code']);
+			
 			$subject->update($data);
 			
 		} catch(Exception $e) {
@@ -92,6 +94,30 @@ class SubjectRepository implements SubjectRepositoryInterface {
 		
 		return $subject;
 		
+	}
+	
+	/**
+	 * Delete subject.
+	 *
+	 * @param	int	$id
+	 * @param	array	$subject
+	 *
+	 * @return boolean
+	 */
+	public function deleteSubject($id) {
+		
+		try {
+		
+			$subject = Subject::find($id);
+						
+			return !is_null($subject) ? $subject->delete() : false;
+			
+		} catch(Exception $e) {
+		
+			return $e->getMessage();
+			
+		}
+				
 	}
 
 }

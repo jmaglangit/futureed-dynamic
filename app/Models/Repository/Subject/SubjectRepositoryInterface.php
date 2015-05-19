@@ -8,5 +8,7 @@ interface SubjectRepositoryInterface {
     public function addSubject($subject);
     
     public function updateSubject($id, $subject);
+    
+    public function deleteSubject($id);
 
 }

@@ -19,11 +19,24 @@ class SubjectRequest extends ApiRequest {
 	 * @return array
 	 */
 	public function rules() {
-        return [
-            'code' => 'required|integer',
-			'name' => 'required',
-			'status' => 'required|in:Enabled,Disabled'
-        ];
+				
+		switch($this->method) {
+			case 'PUT':
+				return [
+					'name' => 'required',
+					'status' => 'required|in:Enabled,Disabled'
+				];
+				break;
+			case 'POST':
+			default:
+				return [
+					'code' => 'required|integer|unique:subjects',
+					'name' => 'required',
+					'status' => 'required|in:Enabled,Disabled'
+				];				
+	        	break;
+		}
+		
 	}
 	
 	/**
