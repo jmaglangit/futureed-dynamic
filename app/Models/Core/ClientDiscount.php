@@ -21,5 +21,19 @@ class ClientDiscount extends Model {
 	{
 		return $this->belongsTo('FutureEd\Models\Core\Client');
 	}
+	
+	//------------scopes
+	
+	public function scopeName($query, $name){
+    	return $query->whereHas('client', function($query) use ($name) {	
+			$query->where('first_name', 'like', '%'.$name.'%')->orWhere('last_name', 'like', '%'.$name.'%')->orderBy('last_name', 'asc');;
+		});
+	}
+	
+	public function scopeRole($query, $role) {
+	    return $query->whereHas('client', function($query) use ($role) {	
+			$query->whereClientRole($role);
+		});		
+	}
 
 }
