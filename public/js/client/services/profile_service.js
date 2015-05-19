@@ -13,6 +13,8 @@ function clientProfileApiService($http) {
 	clientProfileApi.resendClientEmailCode = resendClientEmailCode;
 
 	clientProfileApi.changeClientPassword = changeClientPassword;
+
+	clientProfileApi.updateUserSession = updateUserSession;
 	
 
 	function getClientDetails(id) {
@@ -59,6 +61,14 @@ function clientProfileApiService($http) {
 			method	: 'POST'
 			, data 	: {password : object.password, new_password : object.new_password}
 			, url 	: clientProfileApiUrl + 'client/change-password/' + id
+		});
+	}
+
+	function updateUserSession(user) {
+		return $http({
+			method	: 'POST',
+			data 	: user,
+			url		: '/client/update-user-session'
 		});
 	}
 

@@ -18,7 +18,7 @@ class LoginController extends Controller {
 	{
 		if(Session::get('student')) {
 			$user_object = json_decode(Session::get('student'));
-
+			
 			if(!isset($user_object->avatar_id)) {
 				return redirect()->route('student.dashboard.follow_up_registration');
 			}
@@ -94,7 +94,7 @@ class LoginController extends Controller {
 			return redirect()->route('student.login.forgot_password');
 		}
 		
-		return view('student.login.enter-code')->with(array('email' => $email, 'show' => $show));
+		return view('student.login.enter-reset-code')->with(array('email' => $email, 'show' => $show));
 	}
 
 	/**

@@ -29,7 +29,7 @@ function clientLoginApiService($http) {
 		return $http({
 			method 	: Constants.METHOD_POST
 			, data 	: {reset_code : reset_code, password : password}
-			, url	: futureedAPIUrl + 'client/reset-password/' + id
+			, url	: clientLoginApiUrl + 'client/reset-password/' + id
 		});
 	}
 

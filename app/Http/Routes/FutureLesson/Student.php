@@ -10,11 +10,15 @@
 				, 'uses' => 'FutureLesson\Student\LoginController@registration'
 			]);
 		Routes::get('/register/confirm', [
-				'as' => 'student.login.confirm'
+				'as' => 'student.register.confirm'
 				, 'uses' => 'FutureLesson\Student\LoginController@registration'
 			]);
+		Routes::get('/email/confirm', [
+			'as' => 'student.email.confirm'
+			, 'uses' => 'FutureLesson\Student\ProfileController@enter_email_code'
+			]);
 		Routes::get('/password/forgot', [
-				'as' => 'student.password.reset_code'
+				'as' => 'student.password.forgot'
 				, 'uses' => 'FutureLesson\Student\LoginController@reset_code'
 			]);
 		Routes::get('/logout', [ 

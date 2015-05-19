@@ -138,7 +138,7 @@ function LoginController($scope, apiService, clientLoginApiService) {
 	        $scope.ui_unblock();
 	      });
 	    } else {
-	      $scope.$parent.errors = [Constants.Constants.MSG_PW_NOT_MATCH];
+	      $scope.$parent.errors = [Constants.MSG_PW_NOT_MATCH];
 	      $("html, body").animate({ scrollTop: 0 }, "slow");
 	    }
 	}

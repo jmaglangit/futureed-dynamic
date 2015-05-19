@@ -37,6 +37,12 @@ class ProfileController extends Controller {
 		return view('student.profile.confirm_email_form');
 	}
 
+	public function enter_email_code() {
+		$input = Input::only('email');
+
+		return view('student.login.enter-email-code', array('email' => $input['email']));
+	}
+
 	public function update_session() {
 		$user = Input::all();
 

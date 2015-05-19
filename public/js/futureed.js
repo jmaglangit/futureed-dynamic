@@ -57,12 +57,10 @@ angular.module('futureed', [
   }];
 
   $httpProvider.interceptors.push(['$q', '$cookies', '$cookieStore', function ($q, $cookies, $cookieStore) {
-      
-
       return {
           'request' : function(config) {
-            if(sessionStorage.authorization) {
-              config.headers.authorization = sessionStorage.authorization;
+            if(localStorage.authorization) {
+              config.headers.authorization = localStorage.authorization;
             }
 
             return config;
@@ -70,7 +68,7 @@ angular.module('futureed', [
 
           , 'response': function (response) {
               if(response && response.headers("authorization")) {
-                sessionStorage.authorization = response.headers("authorization");
+                localStorage.authorization = response.headers("authorization");
               }
 
               return response;
