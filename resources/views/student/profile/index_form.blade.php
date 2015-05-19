@@ -31,19 +31,14 @@
                     , array(
                         'class' => 'form-control'
                         , 'placeholder' => 'Email Address' 
-                        , 'ng-disabled' => 'true' 
+                        , 'readonly' => 'readonly'
                         , 'ng-model' => 'profile.prof.email'
                     )
                 ) !!}
             </div>
             <div class="col-xs-2">
-            	<a href="{!! route('student.profile.edit_email')!!}" class="edit-email">Edit</a>
+                <a href="" ng-click="profile.setStudentProfileActive('edit_email')" class="edit-email">Edit</a>
             </div>	
-            <div class="col-xs-5 alert-message">
-                <i ng-if="e_loading" class="fa fa-spinner fa-spin"></i>
-                <i ng-if="e_success" class="fa fa-check success-color"></i>
-                <span ng-if="e_error" class="alert alert-error">{! e_error !}</span>
-            </div>
         </div>
         <div class="form-group" ng-if="profile.prof.new_email">
             <label for="" class="col-md-2 control-label">Pending Email <span class="required">*</span></label>
@@ -52,19 +47,14 @@
                     , array(
                         'class' => 'form-control'
                         , 'placeholder' => 'Pending Email Address' 
-                        , 'ng-disabled' => 'true' 
+                        , 'readonly' => 'readonly' 
                         , 'ng-model' => 'profile.prof.new_email'
                     )
                 ) !!}
             </div>
             <div class="col-xs-2">
-            	<a href="{!! route('student.profile.edit_email') !!}" class="edit-email">Confirm</a>
+                <a href="" ng-click="profile.setStudentProfileActive('confirm_email')" class="edit-email">Confirm</a>
             </div>	
-            <div class="col-xs-5 alert-message">
-                <i ng-if="e_loading" class="fa fa-spinner fa-spin"></i>
-                <i ng-if="e_success" class="fa fa-check success-color"></i>
-                <span ng-if="e_error" class="alert alert-error">{! e_error !}</span>
-            </div>
         </div>
 	</fieldset>					
 	<fieldset>

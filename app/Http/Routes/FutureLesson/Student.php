@@ -74,45 +74,39 @@
 					'as' => 'student.profile.index'
 					, 'uses' => 'FutureLesson\Student\ProfileController@index'
 				]);
-			Routes::get('/rewards', [
-					'as' => 'student.profile.rewards'
-					, 'uses' => 'FutureLesson\Student\ProfileController@rewards'
-				]);
-			Routes::get('/change-password', [
-					'as' => 'student.profile.change_password'
-					, 'uses' => 'FutureLesson\Student\ProfileController@change_password'
-				]);
-			Routes::get('/change-avatar', [
-					'as' => 'student.profile.change_avatar'
-					, 'uses' => 'FutureLesson\Student\ProfileController@change_avatar'
-				]);
-			Routes::get('/change-email', [
-					'as' => 'student.profile.edit_email'
-					, 'middleware' => 'student'
-					, 'uses' => 'FutureLesson\Student\ProfileController@edit_email'
-				]);
+
+			Routes::group(['prefix' => 'partials'], function() {
+				Routes::get('/profile_form', [
+						'as' => 'student.partials.profile_form'
+						, 'uses' => 'FutureLesson\Student\ProfileController@profile_form'
+					]);
+				Routes::get('/edit_email_form', [
+						'as' => 'student.partials.edit_email_form'
+						, 'uses' => 'FutureLesson\Student\ProfileController@edit_email_form'
+					]);
+				Routes::get('/confirm_email_form', [
+						'as' => 'student.partials.confirm_email_form'
+						, 'uses' => 'FutureLesson\Student\ProfileController@confirm_email_form'
+					]);
+				Routes::get('/rewards_form', [
+						'as' => 'student.partials.rewards_form'
+						, 'uses' => 'FutureLesson\Student\ProfileController@rewards_form'
+					]);
+				Routes::get('/avatar_form', [
+						'as' => 'student.partials.avatar_form'
+						, 'uses' => 'FutureLesson\Student\ProfileController@avatar_form'
+					]);
+				Routes::get('/change_password_form', [
+						'as' => 'student.partials.change_password_form'
+						, 'uses' => 'FutureLesson\Student\ProfileController@change_password_form'
+					]);
+			});
 		});
 
 		Routes::group(['prefix' => 'partials'], function() {
 			Routes::get('/base_url', [
 					'as' => 'student.partials.base_url'
 					, 'uses' => 'FutureLesson\Student\LoginController@base_url'
-				]);
-			Routes::get('/profile_form', [
-					'as' => 'student.partials.profile_form'
-					, 'uses' => 'FutureLesson\Student\ProfileController@profile_form'
-				]);
-			Routes::get('/rewards_form', [
-					'as' => 'student.partials.rewards_form'
-					, 'uses' => 'FutureLesson\Student\ProfileController@rewards_form'
-				]);
-			Routes::get('/avatar_form', [
-					'as' => 'student.partials.avatar_form'
-					, 'uses' => 'FutureLesson\Student\ProfileController@avatar_form'
-				]);
-			Routes::get('/change_password_form', [
-					'as' => 'student.partials.change_password_form'
-					, 'uses' => 'FutureLesson\Student\ProfileController@change_password_form'
 				]);
 		});
 	});

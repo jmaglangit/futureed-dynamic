@@ -29,8 +29,12 @@ class ProfileController extends Controller {
 		return view('student.profile.avatar_form');
 	}
 
-	public function edit_email(){
-		return view('student.profile.edit_email', ['active' => 'email']);
+	public function edit_email_form(){
+		return view('student.profile.edit_email_form');
+	}
+
+	public function confirm_email_form() {
+		return view('student.profile.confirm_email_form');
 	}
 
 	public function update_session() {

@@ -37,7 +37,7 @@ class LoginController extends Controller {
 		$user_object = json_decode($user_data['user_data']);
 
 		if($user_object->id){
-			Session::flush();
+			Session::forget('client');
 			Session::put('client', $user_data['user_data']);
 			return redirect()->route('client.dashboard.index');
 		}
@@ -52,7 +52,7 @@ class LoginController extends Controller {
 	 */
 	public function logout()
 	{
-		Session::flush();
+		Session::forget('client');
 		return redirect()->route('client.login');
 	}
 	

@@ -6,6 +6,9 @@
 
 @section('content')
 <div class="container dshbrd-con" ng-controller="ProfileController as profile" ng-cloak>
+
+  	<div template-directive template-url="{!! route('client.partials.base_url') !!}"></div>
+
 	<div class="wrapr"> 
 		<div class="side-nav">
 			@include('student.partials.dshbrd-side-nav')
@@ -33,6 +36,8 @@
 					<h2 class="student-font">
 							<span class="thin" ng-if="profile.active_index">My Profile</span>
 							<span class="thin" ng-if="profile.active_edit">Edit Profile</span>
+							<span class="thin" ng-if="profile.active_edit_email">Edit Email Address</span>
+							<span class="thin" ng-if="profile.active_confirm_email">Confirm Email Address</span>
 							<span class="thin" ng-if="profile.active_rewards">Student Rewards</span>
 							<span class="thin" ng-if="profile.active_avatar">Change Avatar</span>
 							<div ng-if="profile.active_password">
@@ -85,6 +90,10 @@
                 
 				<div template-directive template-url="{!! route('student.partials.profile_form') !!}"></div>
 
+				<div template-directive template-url="{!! route('student.partials.edit_email_form') !!}"></div>
+
+				<div template-directive template-url="{!! route('student.partials.confirm_email_form') !!}"></div>
+
 				<div template-directive template-url="{!! route('student.partials.rewards_form') !!}"></div>
 
 				<div template-directive template-url="{!! route('student.partials.avatar_form') !!}"></div>
@@ -103,4 +112,5 @@
 @section('scripts')
 	{!! Html::script('/js/student/controllers/profile_controller.js') !!}
 	{!! Html::script('/js/student/services/profile_service.js') !!}
+	{!! Html::script('/js/student/profile.js') !!}
 @stop

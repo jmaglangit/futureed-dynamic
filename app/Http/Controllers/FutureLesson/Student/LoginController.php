@@ -40,7 +40,7 @@ class LoginController extends Controller {
 		$user_object = json_decode($user_data['user_data']);
 
 		if($user_object->id){
-			Session::flush();
+			Session::forget('student');
 			Session::put('student', $user_data['user_data']);
 
 			if($user_object->avatar_id) {
@@ -60,7 +60,7 @@ class LoginController extends Controller {
 	 */
 	public function logout()
 	{
-		Session::flush();
+		Session::forget('student');
 		return redirect()->route('student.login');
 	}
 	
