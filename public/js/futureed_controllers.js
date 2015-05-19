@@ -451,7 +451,7 @@ function FutureedController($scope, apiService) {
         return;
       }
 
-      $scope.reg = reg;
+      $scope.reg = (reg) ? reg : {};
       $scope.base_url = $("#base_url_form input[name='base_url']").val();
       $scope.reg.callback_uri = $scope.base_url + Constants.URL_REGISTRATION(angular.lowercase(Constants.STUDENT));
 
