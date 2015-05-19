@@ -80,7 +80,9 @@ return [
         2234 => 'Unauthorized Registration',
         
         //Announcement messages.
-        2500 => 'Date range should be between today and future dates.'
+        2500 => 'Date range should be between today and future dates.',
+        
+        2600 => 'Cannot delete subject. Subject has subject areas.'
 
     ],
 ];
