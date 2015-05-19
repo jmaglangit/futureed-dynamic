@@ -387,7 +387,6 @@ function FutureedController($scope, apiService) {
 
   function getUserDetails() {
     var user = $("input[name='userdata']").val();
-    console.log(user);
     /*to jollie mar: erase this after creating client profile. line 386*/
     $scope.teacher = Constants.TRUE;
 

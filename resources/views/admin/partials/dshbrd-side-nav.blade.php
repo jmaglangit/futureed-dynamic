@@ -8,9 +8,12 @@
 </div>
 
 <div>
-	<ul class="nav-list">
-		<li>
-			<a href="#" class="nav-link">Client</a>
+	<ul class="nav-list" ng-init="admincon.setActiveAdmin('{!! $active !!}')">
+		<li ng-class="{ 'active' : admincon.active_client}">
+			<a href="#" class="nav-link" ng-click="admincon.setActiveAdmin('client')">Client</a>
+		</li>
+		<li ng-class="{'active' : admincon.active_student}">
+			<a href="#" class="nav-link" ng-click="admincon.setActiveAdmin('student')">Student</a>
 		</li>
 	</ul>
 </div>

@@ -13,6 +13,7 @@ var Constants = {
 	, PRINCIPAL		: "Principal"
 	, PARENT		: "Parent"
 	, TEACHER		: "Teacher"
+	, ADMIN			: "Admin"
 
 	, AVATAR		: "avatar"
 	, REWARDS		: "rewards"
@@ -24,6 +25,9 @@ var Constants = {
 
 	, USER_PRINCIPAL: "user_principal"
 	, USER_PARENT 	: "user_parent"
+
+	, ADD_CLIENT 	: "add_client"
+	, ADD_STUDENT	: "add_student"
 
 	, MSG_INTERNAL_ERROR	: "Internal Server Error."
 	, MSG_PPW_NOT_MATCH 	: "Picture Password does not match."

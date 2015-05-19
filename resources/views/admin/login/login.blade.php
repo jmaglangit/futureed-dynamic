@@ -28,9 +28,9 @@
 				{!! Form::open(
               array(
                     'id' => 'login_form'
-                  , 'route' => 'client.login.process'
+                  , 'route' => 'admin.login.process'
                   , 'method' => 'POST'
-                  , 'ng-controller' => 'LoginController as login'
+                  , 'ng-controller' => 'AdminLoginController as adminlogin'
               )
           ) !!}
           <div class="input">
@@ -40,7 +40,7 @@
             {!! Form::text('login', ''
                 , array(
                     'placeholder' => 'Email or Username'
-                    , 'ng-model' => 'login.username'
+                    , 'ng-model' => 'adminlogin.username'
                     , 'autocomplete' => 'off'
                 )
             ) !!}
@@ -52,21 +52,22 @@
             {!! Form::password('password'
                 , array(
                     'placeholder' => 'Password'
-                    , 'ng-model' => 'login.password'
+                    , 'ng-model' => 'adminlogin.password'
                 )
             ) !!}
           </div>
 
           {!! Form::hidden('user_data', ''
               , array(
-                 'ng-model' => 'user_data'
+                 'ng-model' => 'user_data',
+                 'id' => 'user_data'
               )
           ) !!}
 
           {!! Form::button('Login'
               , array(
                   'class' => 'btn btn-blue'
-                  , 'ng-click' => 'login.clientLogin()'
+                  , 'ng-click' => 'adminlogin.adminDoLogin()'
               )
           ) !!}
           	<div class="form-group">
@@ -75,3 +76,14 @@
 			</div>
 		</div>
 	</div>
+
+@stop
+
+@section('footer')
+
+@overwrite
+  
+@section('scripts')
+  {!! Html::script('/js/admin/controllers/login_controller.js')!!}
+  {!! Html::script('/js/admin/services/login_service.js')!!}
+@stop

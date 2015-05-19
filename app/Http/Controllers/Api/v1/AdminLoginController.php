@@ -8,7 +8,7 @@ use FutureEd\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
-class AdminLoginController extends AdminController {
+class AdminLoginController extends ApiController {
 
 	public function login(){
 

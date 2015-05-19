@@ -18,7 +18,7 @@ class UsersTableSeeder extends Seeder {
             [
             'username' => 'farrahdy',
             'email' => 'fdy@nerubia.com',
-            'password' => sha1('farrahdy'),
+            'password' => sha1('Farrahdy1!'),
             'name' => 'Farrah Dy',
             'user_type' => 'Admin',
             'login_attempt' => 0,
