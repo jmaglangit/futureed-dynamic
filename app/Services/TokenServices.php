@@ -37,11 +37,30 @@ class TokenServices {
 
     protected $user;
 
+    protected $payload;
+
+
+
     public function __construct(UserRepositoryInterface $userRepositoryInterface){
         $this->token_config = config('token');
         $this->user = $userRepositoryInterface;
     }
 
+    /**
+     * set payload
+     *
+     * @return mixed
+     */
+    public function getPayload()
+    {
+        return $this->payload;
+    }
+
+
+    /**
+     * setting up header
+     * @return string
+     */
     public function setHeader(){
         $header = [
             //set algorithm of the token
@@ -53,6 +72,12 @@ class TokenServices {
         return base64_encode(json_encode($header));
     }
 
+    /**
+     * setting up payload
+     *
+     * @param $token
+     * @return string
+     */
     public function setPayload($token){
 
         //get full url of the requester
@@ -82,14 +107,21 @@ class TokenServices {
             //set user id of the user
             'id' => (isset($token['id'])) ?
                         $token['id']
-                        : 'Guest',
+                        : 0,
 
             //set user type of the user
             'type' => (isset($token['type'])) ?
                         $token['type']
                         : 'Guest',
 
+            //set user role
+            'role' => (isset($token['role'])) ?
+                        $token['role']
+                        : false
+
         ];
+
+        $this->payload = $payload;
 
         return base64_encode(json_encode($payload));
     }
@@ -143,6 +175,8 @@ class TokenServices {
         if(!$this->validateTokenUser($payload_decoded['id'],$payload_decoded['type'])){
             return false;
         }
+
+        $this->setPayload($payload_decoded);
 
         return $payload_decoded;
     }
