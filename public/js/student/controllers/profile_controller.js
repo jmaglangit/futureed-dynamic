@@ -8,6 +8,7 @@ function ProfileController($scope, apiService) {
 
 	self.user = ($scope.user) ? $scope.user : {};
 	self.user_type = Constants.STUDENT;
+	self.prof = {};
 
 	self.setStudentProfileActive = setStudentProfileActive;
 
@@ -263,6 +264,7 @@ function ProfileController($scope, apiService) {
 
 	  function confirmStudentEmailCode() {
 			self.errors = Constants.FALSE;
+			self.prof.new_email = (self.prof.new_email) ? self.prof.new_email : $("#confirm_email_form input[name='new_email']").val();
 
         	$scope.ui_block();
         	apiService.emailValidateCode(self.prof.new_email, self.user_type , self.confirmation_code).success(function(response){

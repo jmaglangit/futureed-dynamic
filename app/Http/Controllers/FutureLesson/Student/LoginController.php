@@ -94,7 +94,7 @@ class LoginController extends Controller {
 			return redirect()->route('student.login.forgot_password');
 		}
 		
-		return view('student.login.enter-code')->with(array('email' => $email, 'show' => $show));
+		return view('student.login.enter-reset-code')->with(array('email' => $email, 'show' => $show));
 	}
 
 	/**
