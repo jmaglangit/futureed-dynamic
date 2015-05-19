@@ -125,6 +125,50 @@ class ClientPasswordController extends ApiController{
    }
 
 
+   public function setPassword($id){
+
+        $input = input::only('password');
+        $client = config('futureed.client');
+
+        $this->addMessageBag($this->validateVarNumber($id));
+        $this->addMessageBag($this->checkPassword($input,'password'));
+
+        $password = sha1($input['password']);
+        
+        $msg_bag = $this->getMessageBag();
+
+        if($msg_bag){
+
+            return $this->respondWithError($msg_bag);
+
+        }else{
+
+            $return = $this->client->verifyClientId($id);
+
+            if($return){
+
+                $userDetails = $this->user->getUserDetail($return['user_id'],$client);
+
+                    $this->user->updatePassword($return['user_id'],$password);
+                    return $this->respondWithData(['id'=>$return['id']]);
+
+
+            }else{
+
+                return $this->respondErrorMessage(2001);
+
+            }
+
+
+        }
+
+
+
+
+   }
+
+
+
    
     
 
