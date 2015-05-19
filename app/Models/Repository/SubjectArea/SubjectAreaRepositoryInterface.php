@@ -9,7 +9,7 @@ interface SubjectAreaRepositoryInterface {
     
     public function addSubjectArea($subject_area);
     
-    public function getSubjectArea($subject_area);
+    public function getSubjectArea($id);
     
     public function updateSubjectArea($id, $subject_area);
     
