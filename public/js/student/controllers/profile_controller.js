@@ -64,6 +64,7 @@ function ProfileController($scope, apiService) {
 	        break;
 
 	      case Constants.AVATAR   		:
+	      	self.enable = Constants.FALSE;
 	        self.active_avatar = Constants.TRUE;
 	        break;
 
@@ -344,7 +345,7 @@ function ProfileController($scope, apiService) {
 	          $scope.$parent.user = self.prof;
 
 	          self.success = Constants.TRUE;
-
+	    	  
 	          apiService.updateUserSession(self.prof).success(function(response) {
 	              $("ul.avatar_list li").removeClass('selected');
 	          }).error(function() {

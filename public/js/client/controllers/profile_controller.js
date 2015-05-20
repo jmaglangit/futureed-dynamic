@@ -30,6 +30,7 @@ function ProfileController($scope, apiService, clientProfileApiService) {
 	    self.change = {};
 	    self.validation = {};
 	    self.password_changed = Constants.FALSE;
+	    self.email_confirmed = Constants.FALSE;
 
 	    $scope.$parent.u_error = Constants.FALSE;
 		$scope.$parent.u_success = Constants.FALSE;
@@ -240,8 +241,8 @@ function ProfileController($scope, apiService, clientProfileApiService) {
 					if(response.errors) {
 						self.errors = $scope.errorHandler(response.errors);
 					} else if(response.data) {
-						self.setClientProfileActive(Constants.CONFIRM_EMAIL);
 						self.prof.new_email = self.change.new_email;
+						self.setClientProfileActive(Constants.CONFIRM_EMAIL);
 					}
 				}
 

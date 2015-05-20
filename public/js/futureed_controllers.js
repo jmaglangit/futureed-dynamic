@@ -328,7 +328,7 @@ function FutureedController($scope, apiService) {
         $scope.confirm_email = Constants.TRUE;
       }
 
-      $("input[name='userdata']").val();
+      $("input[name='userdata']").val('');
     }
   }
 
