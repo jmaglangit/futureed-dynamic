@@ -37,15 +37,6 @@ class StudentController extends ApiController {
 	 */
 	public function show($id)
 	{
-        //Check token authentication if valid.
-        $access_token = \Request::header('authorization');
-
-        $this->validateToken($access_token);
-
-        if($this->getMessageBag()){
-
-            return $this->respondWithError($this->getMessageBag());
-        }
 
 		$error = config('futureed-error.error_messages');
 
@@ -76,15 +67,6 @@ class StudentController extends ApiController {
 	 */
 	public function update($id)
 	{
-        //Check token authentication if valid.
-        $access_token = \Request::header('authorization');
-
-        $this->validateToken($access_token);
-
-        if($this->getMessageBag()){
-
-            return $this->respondWithError($this->getMessageBag());
-        }
 
 		$input = Input::only('first_name','last_name','gender','birth_date',
 							'email','username','grade_code',
