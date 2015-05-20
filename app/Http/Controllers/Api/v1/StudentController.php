@@ -49,13 +49,13 @@ class StudentController extends ApiController {
 		if($this->student->checkIdExist($id)){
 		     
 	        $students = $this->student->getStudentDetails($id); 
-	        return $this->setHeader($this->getToken())->respondWithData([
+	        return $this->respondWithData([
 	            $students
 	        ]);
 	        	
 	    }else{
 
-	    	return $this->setHeader($this->getToken())->respondErrorMessage(2001);
+	    	return $this->respondErrorMessage(2001);
 	    }
 	}
 
@@ -96,7 +96,7 @@ class StudentController extends ApiController {
         $this->student->updateStudentDetails($id,$input);
         $return = $this->student->getStudentDetails($id);
 
-        return $this->setHeader($this->getToken())->respondWithData($return);
+        return $this->respondWithData($return);
 
 	}
 

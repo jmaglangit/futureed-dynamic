@@ -1,9 +1,8 @@
 <?php namespace FutureEd\Http\Middleware\Api;
 
 use Closure;
-use Symfony\Component\HttpFoundation\JsonResponse;
 
-class AfterMiddleware {
+class AfterMiddleware extends JWTMiddleware{
 
 	/**
 	 * Handle an incoming request.
@@ -14,14 +13,40 @@ class AfterMiddleware {
 	 */
 	public function handle($request, Closure $next)
 	{
-        $response =  $next($request);
 
-//        $input = $request->header();
-//        $request->merge(['authorization' => 'qwertykeys']);
+//        $authorization  = $request->header('authorization');
 //
+//        $this->validateToken($authorization);
 //
-////        dd($response);
+//        if($this->getMessageBag()){
+//
+//            return $this->respondWithError($this->getMessageBag());
+//        }
+
+//        dd($this->getPayload());
+
+
+
+
+        $response =  $next($request);
+//        dd($response);
+//        $collection = $response->headers;
+//        $collection->set('authodrization','dasfdasf');
+////        dd($collection);
+//        $response->headers = $collection;
+
+//        dd($response);
+//        if($response->headers->get('content-type') == 'application/json')
+//        {
+//            $collection = $response->original;
+//            $collection->put('timestamp',Carbon::now()->timestamp);
+//            $response->setContent($collection);
+//        }
+
         return $response;
 	}
+
+
+
 
 }
