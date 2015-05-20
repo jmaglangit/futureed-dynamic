@@ -20,16 +20,6 @@ class StudentPasswordController extends StudentController {
     //check password if correct while logged in.
     public function confirmPassword($id){
 
-        //Check token authentication if valid.
-        $access_token = \Request::header('authorization');
-
-        $this->validateToken($access_token);
-
-        if($this->getMessageBag()){
-
-            return $this->respondWithError($this->getMessageBag());
-        }
-
         $input = Input::only('password_image_id');
         $error_msg = config('futureed-error.error_messages');
 
@@ -227,16 +217,6 @@ class StudentPasswordController extends StudentController {
     
     public function changeImagePassword($id){
 
-        //Check token authentication if valid.
-        $access_token = \Request::header('authorization');
-
-        $this->validateToken($access_token);
-
-        if($this->getMessageBag()){
-
-            return $this->respondWithError($this->getMessageBag());
-        }
-      
       $input = Input::only('password_image_id');
       $error = config('futureed-error.error_messages');
 
