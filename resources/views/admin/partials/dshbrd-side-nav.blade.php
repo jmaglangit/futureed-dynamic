@@ -30,3 +30,13 @@
 		</li>
 	</ul>
 </div>
+<div>
+	<div class="admin-setting">
+		Master Settings
+	</div>
+	<ul class="nav-list">
+		<li ng-class="{'active' : admincon.active_announcement}" class="announce">
+			<a href="#" ng-click="admincon.setActiveAdmin('announcement')"><span><i class="fa fa-bullhorn"></i>Announcement</span></a>
+		</li>
+	</ul>
+</div>

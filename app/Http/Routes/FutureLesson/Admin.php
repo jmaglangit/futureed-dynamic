@@ -53,6 +53,10 @@
 					'as' => 'admin.dashboard.add_client'
 					, 'uses' => 'FutureLesson\Admin\DashboardController@add_client'
 				]);
+			Routes::get('/announcement', [
+					'as' => 'admin.dashboard.announcement'
+					, 'uses' => 'FutureLesson\Admin\DashboardController@announcement'
+				]);
 		});
 	});
 ?>

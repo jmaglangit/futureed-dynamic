@@ -48,6 +48,8 @@ function AdminDashboardController($scope){
 			case Constants.STUDENT:
 				self.active_student = Constants.TRUE;
 				self.active_client = Constants.FALSE;
+				self.announcement = Constants.FALSE;
+				self.active_announcement = Constants.FALSE;
 				break;
 
 			case Constants.ADD_CLIENT:
@@ -56,6 +58,18 @@ function AdminDashboardController($scope){
 				self.active_add_client = Constants.TRUE;
 				self.add_client = Constants.TRUE;
 				self.client_list = Constants.FALSE;
+				self.announcement = Constants.FALSE;
+				self.active_announcement = Constants.FALSE;
+				break;
+
+			case Constants.ANNOUNCEMENT:
+				self.announcement = Constants.TRUE;
+				self.active_client = Constants.FALSE;
+				self.active_student = Constants.FALSE;
+				self.active_add_client = Constants.TRUE;
+				self.add_client = Constants.FALSE;
+				self.client_list = Constants.FALSE;
+				self.active_announcement = Constants.TRUE;
 				break;
 
 			case Constants.CLIENT:
@@ -64,6 +78,8 @@ function AdminDashboardController($scope){
 				self.active_student = Constants.FALSE;
 				self.client_list = Constants.TRUE;
 				self.add_client = Constants.FALSE;
+				self.active_announcement = Constants.FALSE;
+				self.announcement = Constants.FALSE;
 				break;
 		}
 

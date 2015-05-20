@@ -19,4 +19,8 @@ class DashboardController extends Controller{
 	public function client_list(){
 		return view('admin.dashboard.client_list');
 	}
+
+	public function announcement(){
+		return view('admin.manage.announcement');
+	}
 }

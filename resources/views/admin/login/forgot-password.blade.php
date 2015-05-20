@@ -16,8 +16,19 @@
         <div class="adlogin-title" ng-if="sent">
           Password Reset
         </div>
-        <div class="forgot-message" ng-if="sent">
+        <div class="roundcon" ng-if="sent && !resent">
+            <i class="fa fa-check fa-5x img-rounded text-center"></i>
+        </div>
+
+        <div class="roundcon" ng-if="resent">
+            <i class="fa fa-refresh fa-5x img-rounded text-center"></i>
+          </div>
+        <div class="forgot-message" ng-if="sent && !resent">
           <p>An email to reset your password has been sent to your email account.Please check your inbox or your spam folder for email.</p><br/>
+          <p>The email contains a code that you need to input below.</p>
+        </div>
+        <div class="forgot-message" ng-if="resent">
+          <p> A new reset code has been sent to your email account.Please check your inbox or your spam folder for email.</p><br/>
           <p>The email contains a code that you need to input below.</p>
         </div>
 				<div class="alert alert-danger" ng-if="errors">
@@ -30,15 +41,22 @@
         </div>
 				{!! Form::open(
               array(
-                    'id' => 'forgot_pass_form'
+                    'id' => 'redirect_form'
                   , 'route' => 'admin.login.reset_password'
                   , 'method' => 'POST'
               )
           ) !!}
           {!! Form::hidden('id', '') !!}
           {!! Form::hidden('reset_code', '') !!}
+          {!!Form::close() !!}
           
-          <div class="input" ng-if="!sent">
+
+            {!! Form::open([
+              'id' => 'forgot_password_form'
+              ])
+            !!}
+
+            <div class="input" ng-if="!sent">
             <div class="icon">
               <i class="fa fa-user"></i>
             </div>
@@ -47,6 +65,7 @@
                     'placeholder' => 'Email or Username'
                     , 'ng-model' => 'forgot.username'
                     , 'autocomplete' => 'off'
+                    , 'id'  => 'username'
                 )
             ) !!}
           </div>
@@ -65,7 +84,8 @@
           <div class="btn-container" ng-if="!sent">
             {!! Form::button('Send'
                 , array(
-                    'class' => 'btn btn-blue btn-medium'
+                    'id' => 'btn-send'
+                    ,'class' => 'btn btn-blue btn-medium'
                     , 'ng-click' => 'forgot.adminForgotPass()'
                 )
             ) !!}

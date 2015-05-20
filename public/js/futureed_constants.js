@@ -30,6 +30,7 @@ var Constants = {
 
 	, ADD_CLIENT 	: "add_client"
 	, ADD_STUDENT	: "add_student"
+	, ANNOUNCEMENT 	: "announcement"
 
 	, MSG_INTERNAL_ERROR	: "Internal Server Error."
 	, MSG_PPW_NOT_MATCH 	: "Picture Password does not match."
@@ -48,6 +49,7 @@ var Constants = {
 	, MSG_EA_EXIST 			: "Email address already exists."
 	, MSG_EA_CURR_NOTMATCH	: "Current email address does not match."
 	, MSG_EA_NOT_MATCH		: "Email Address does not match."
+	, ANNOUNCE_SUCCESS		: "Success You've created Site Maintainance Announcement."
 
 	, URL_FORGOT_PASSWORD	: function(user_type) {
 		return '/' + user_type + '/password/forgot';

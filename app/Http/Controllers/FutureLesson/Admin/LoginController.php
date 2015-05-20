@@ -9,6 +9,10 @@ use Illuminate\Http\Request;
 
 class LoginController extends Controller{
 	public function index(){
+		
+		if(Session::get('admin')){
+			return redirect()->route('admin.dashboard.index');
+		}
 		return view('admin.login.login');
 	}
 

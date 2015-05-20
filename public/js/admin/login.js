@@ -1,5 +1,4 @@
-$(document).on('submit', '#forgot_password_form, #forgot_success_form', function() {
-	$('#proceed_btn').trigger('click');
+$(document).on('submit','#forgot_password_form', function() {
+	$('#btn-send').trigger('click');
 	return false;
 });
-
