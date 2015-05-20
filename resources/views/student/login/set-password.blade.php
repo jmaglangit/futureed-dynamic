@@ -3,7 +3,7 @@
 @section('content')
   <div class="container login" ng-cloak>
     <div class="col-md-8 col-md-offset-2" ng-show="!success">
-      {!! Form::open(array('id' => 'reset_password_form'))!!}
+      {!! Form::open(array('id' => 'set_password_form'))!!}
         <div class="form-style form-select-password">
           <div  id="title" class="title">
             <p ng-if="!password_selected">Select a picture for your new picture password</p>
@@ -44,7 +44,7 @@
                     {!! Form::button('Save'
                         , array(
                             'class' => 'btn btn-gold btn-medium'
-                            , 'ng-click' => 'studentResetPassword()'
+                            , 'ng-click' => 'saveNewPassword()'
                         ) 
                     ) !!}
                 </div>  
@@ -66,7 +66,7 @@
             <i class="fa fa-check fa-5x img-rounded text-center"></i>
           </div>
           
-           Your picture password has been reset. <br /> 
+           Your picture password has been set. <br /> 
            You may now use your new picture password to login. <br />
 
            <br />
