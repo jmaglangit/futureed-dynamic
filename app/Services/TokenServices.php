@@ -80,11 +80,10 @@ class TokenServices {
      */
     public function setPayload($token){
 
-        //get full url of the requester
-        //get time expiration of the token
-        //get default company
-        //get app name
-        //get if admin
+        //check if id exist then get user id details
+        //check if client the
+
+
 
 
 //        dd(Carbon::now()->addSeconds($this->token['exp'])->toDateTimeString());
@@ -182,8 +181,9 @@ class TokenServices {
     }
 
 
-    /*
-     * @desc decodes token
+    /**
+     * @param $token
+     * @return bool
      */
     public function validateToken($token){
 

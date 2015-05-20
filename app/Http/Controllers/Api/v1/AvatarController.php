@@ -25,7 +25,7 @@ class AvatarController extends ApiController {
 
         $avatar= $this->avatar->getAvatars($input['gender']);
 
-        return $this->setHeader($this->getToken())->respondWithData($avatar);
+        return $this->respondWithData($avatar);
     }
     
     public function saveUserAvatar(){
@@ -63,15 +63,15 @@ class AvatarController extends ApiController {
                                     'url' =>$avatar_url
                                    ];
                         
-                        return $this->setHeader($this->getToken())->respondWithData($reponse);
+                        return $this->respondWithData($reponse);
                     }
                 }else{
                     
-                    return $this->setHeader($this->getToken())->respondErrorMessage(2009);
+                    return $this->respondErrorMessage(2009);
                 }
             }else{
                 
-                return $this->setHeader($this->getToken())->respondErrorMessage(2001);
+                return $this->respondErrorMessage(2001);
             }
     
          

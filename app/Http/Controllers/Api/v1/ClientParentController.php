@@ -23,12 +23,12 @@ class ClientParentController extends ApiController {
 
         if(is_null($stud_list)){
 
-            return $this->setHeader($this->getToken())->respondErrorMessage(2010);
+            return $this->respondErrorMessage(2010);
         }
 
         $students = $this->student->getStudentByParent($id);
 
-        return $this->setHeader($this->getToken())->respondWithData($students);
+        return $this->respondWithData($students);
     }
 
 }

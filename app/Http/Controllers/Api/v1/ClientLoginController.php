@@ -72,7 +72,7 @@ class ClientLoginController extends ClientController {
             return $this->respondErrorMessage(2113);
         }
         
-        return $this->setHeader($this->getToken())->respondWithData([
+        return $this->respondWithData([
                 'id' => $client_detail['id'],
                 'first_name' => $client_detail['first_name'],
                 'last_name' => $client_detail['last_name']
