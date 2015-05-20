@@ -108,9 +108,4 @@ class VolumeDiscountController extends ApiController {
     		return $this->respondWithData($this->volume_discount->deleteVolumeDiscount($id));
 		}
 	}
-    
-    public function updateStatus($id,StatusRequest $request){
-        $data = $request->all();
-        return $this->respondWithData($this->volume_discount->updateVolumeDiscount($id,$data));
-    }
 }
