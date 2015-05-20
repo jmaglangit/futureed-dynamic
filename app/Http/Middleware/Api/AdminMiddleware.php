@@ -32,7 +32,7 @@ class AdminMiddleware extends JWTMiddleware{
             return $next($request);
         }
 
-		return $this->errorMessage(2032);
+		return $this->respondErrorMessage(2032);
 	}
 
 }
