@@ -108,9 +108,4 @@ class SubscriptionController extends ApiController {
     		return $this->respondWithData($this->subscription->deleteSubscription($id));
 		}
 	}
-    
-    public function updateStatus($id,StatusRequest $request){
-        $data = $request->all();
-        return $this->respondWithData($this->subscription->updateSubscription($id,$data));
-    }
 }
