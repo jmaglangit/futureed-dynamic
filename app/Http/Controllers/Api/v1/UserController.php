@@ -39,11 +39,14 @@ class UserController extends ApiController{
 
         }elseif($input['user_type'] == 'Student'){
 
-            $return['user_id'] = $this->student->getStudentId($return['user_id']);
+            $return['id'] = $this->student->getStudentId($return['user_id']);
 
+        }elseif($input['user_type'] == 'Client'){
+
+            $return['id'] = $this->client->getClientId($return['user_id']);
         }
 
-        return $this->respondWithData(['id'=>$return['user_id']]);
+        return $this->respondWithData(['id'=>$return['id']]);
 
     }
 
