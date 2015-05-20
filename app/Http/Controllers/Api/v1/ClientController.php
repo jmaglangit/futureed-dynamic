@@ -89,15 +89,6 @@ class ClientController extends ApiController {
 
 	public function update($id){
 
-        //Check token authentication if valid.
-        $access_token = \Request::header('authorization');
-
-        $this->validateToken($access_token);
-
-        if($this->getMessageBag()){
-
-            return $this->respondWithError($this->getMessageBag());
-        }
 
 		$this->addMessageBag($this->validateVarNumber($id));
 
