@@ -52,7 +52,7 @@
 			
 			Routes::post('/set-password', [ 
 					'as' => 'student.login.set_password'
-					, 'uses' => 'FutureLesson\Student\LoginController@reset_password'
+					, 'uses' => 'FutureLesson\Student\LoginController@set_password'
 				]);
 		});
 
