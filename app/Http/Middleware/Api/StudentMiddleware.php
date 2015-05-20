@@ -13,7 +13,7 @@ class StudentMiddleware extends JWTMiddleware{
 	 */
 	public function handle($request, Closure $next)
 	{
-
+        dd($request->route()->getAction());
         $authorization = $request->header('authorization');
 
         $this->validateToken($authorization);
@@ -29,18 +29,6 @@ class StudentMiddleware extends JWTMiddleware{
 
         //check type if student
         if($student_payload['type'] == config('futureed.student')){
-
-            return $next($request);
-        }
-
-        //check type if admin
-        if($student_payload['type'] == config('futureed.admin')){
-
-            return $next($request);
-        }
-
-        //check type if parent
-        if($student_payload['type'] == config('futureed.client')){
 
             return $next($request);
         }
