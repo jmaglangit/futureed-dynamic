@@ -14,7 +14,7 @@ class CreateGradesTable extends Migration {
 	{
 		Schema::create('grades', function(Blueprint $table) {
             $table->increments('id');
-            $table->bigInteger('code')->nullable();
+            $table->bigInteger('country_id')->nullable();
             $table->string('name', 128)->nullable();
             $table->string('description', 256);
             $table->enum('status', ['Enabled', 'Disabled']);
