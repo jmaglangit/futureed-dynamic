@@ -281,7 +281,8 @@ class UserRepository implements UserRepositoryInterface {
          try{
 
             User::where('id',$id)->update([
-                'username' => $username
+                'username' => $username['username'],
+                'name' => $username['name']
             ]);
 
         } catch (Exception $e){
@@ -338,6 +339,20 @@ class UserRepository implements UserRepositoryInterface {
             User::where('id',$id)->update([
                 'email_code' => $code['confirmation_code'],
                 'email_code_expiry' => $code['confirmation_code_expiry']
+            ]);
+
+        } catch (Exception $e){
+            throw new Exception($e->getMessage());
+        }
+    }
+
+
+    public function updateStatus($id,$status){
+        
+        try{
+
+            User::where('id',$id)->update([
+                'status' => $status,
             ]);
 
         } catch (Exception $e){

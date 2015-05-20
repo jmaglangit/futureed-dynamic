@@ -9,16 +9,6 @@ class ClientParentController extends ApiController {
 
 	public function getStudentList($id){
 
-        //Check token authentication if valid.
-        $access_token = \Request::header('authorization');
-
-        $this->validateToken($access_token);
-
-        if($this->getMessageBag()){
-
-            return $this->respondWithError($this->getMessageBag());
-        }
-
         $parent_role = config('futureed.parent');
 
         $this->addMessageBag($this->validateVarNumber($id));
@@ -33,12 +23,12 @@ class ClientParentController extends ApiController {
 
         if(is_null($stud_list)){
 
-            return $this->setHeader($this->getToken())->respondErrorMessage(2010);
+            return $this->respondErrorMessage(2010);
         }
 
         $students = $this->student->getStudentByParent($id);
 
-        return $this->setHeader($this->getToken())->respondWithData($students);
+        return $this->respondWithData($students);
     }
 
 }

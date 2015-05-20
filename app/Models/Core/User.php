@@ -46,5 +46,9 @@ class User extends Model {
 	public function client() {
 		return $this->hasOne('FutureEd\Models\Core\Client');
 	}
+	
+	public function admin() {
+		return $this->hasOne('FutureEd\Models\Core\Admin');
+	}
 
 }

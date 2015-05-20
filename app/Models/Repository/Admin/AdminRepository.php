@@ -18,7 +18,7 @@ class AdminRepository implements  AdminRepositoryInterface {
      *
      * @return array
      */
-    public function getAdmins($limit = 3){
+    public function getAdmins($category = [],$limit = 3){
 
         //get list of administrators username, email, roles
         $admin = new Admin();
@@ -45,7 +45,7 @@ class AdminRepository implements  AdminRepositoryInterface {
 
     public function getAdmin($id){
 
-        return Admin::find($id);
+        return Admin::find($id)->with('user')->get();
 
     }
 
@@ -68,7 +68,7 @@ class AdminRepository implements  AdminRepositoryInterface {
 
     public function verifyAdminId($id){
 
-        return Admin::select('id','user_id')->where('id','=',$id)->get();
+        return Admin::select('id','user_id')->where('id','=',$id)->first();
 
     }
 

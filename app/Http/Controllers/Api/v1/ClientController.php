@@ -89,15 +89,6 @@ class ClientController extends ApiController {
 
 	public function update($id){
 
-        //Check token authentication if valid.
-        $access_token = \Request::header('authorization');
-
-        $this->validateToken($access_token);
-
-        if($this->getMessageBag()){
-
-            return $this->respondWithError($this->getMessageBag());
-        }
 
 		$this->addMessageBag($this->validateVarNumber($id));
 
@@ -175,6 +166,7 @@ class ClientController extends ApiController {
 				}else{
 
 					$checkUsername = $this->user->checkUsername($user['username'],'Client');
+					$user['name'] = $client['first_name'].$client['last_name'];
 
 	
 				if(!($checkUsername)  || $checkUsername['user_id'] == $clientDetails['user_id'] ){
@@ -183,7 +175,7 @@ class ClientController extends ApiController {
 					if(strtolower($clientDetails['client_role']) == 'parent' || 
 					   strtolower($clientDetails['client_role']) == 'teacher'){
 
-						$this->user->updateUsername($return['user_id'],$user['username']);
+						$this->user->updateUsername($return['user_id'],$user);
 						$this->client->updateClientDetails($return['id'],$client);
 
 					}else{
@@ -193,15 +185,15 @@ class ClientController extends ApiController {
 
 						if(empty($school_name)){
 
-							return $this->setHeader($this->getToken())->respondErrorMessage(2105);
+							return $this->respondErrorMessage(2105);
 
 						}else if(isset($school_code) && $school['school_code'] != $school_code){
 							
-							return $this->setHeader($this->getToken())->respondErrorMessage(2202);
+							return $this->respondErrorMessage(2202);
 
 						}else{
 
-						    $this->user->updateUsername($return['user_id'],$user['username']);
+						    $this->user->updateUsername($return['user_id'],$user);
 							$this->client->updateClientDetails($return['id'],$client);
 							$this->school->updateSchoolDetails($school);
 
@@ -214,11 +206,11 @@ class ClientController extends ApiController {
 
 					$response = $this->client->formResponse($userDetails,$clientDetails);
 
-					return $this->setHeader($this->getToken())->respondWithData($response);
+					return $this->respondWithData($response);
 
 				}else{
 
-					return $this->setHeader($this->getToken())->respondErrorMessage(2104);
+					return $this->respondErrorMessage(2104);
 
 				}
 
@@ -227,7 +219,7 @@ class ClientController extends ApiController {
 
 			}else{
 
-				return $this->setHeader($this->getToken())->respondErrorMessage(2001);
+				return $this->respondErrorMessage(2001);
 			}
 
 

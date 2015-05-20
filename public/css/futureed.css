@@ -443,6 +443,7 @@ fieldset legend{color: #8e8171; font-size: 16px; text-transform: uppercase;}
   float: left;
   padding: 10px 0;
   position: relative;
+  list-style: none;
 }
 .rnd-identifier{
 	background: #D2DCE5;

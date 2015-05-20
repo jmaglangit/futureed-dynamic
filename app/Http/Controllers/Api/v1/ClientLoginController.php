@@ -30,7 +30,8 @@ class ClientLoginController extends ClientController {
         $response =$this->user->checkLoginName($input['username'], 'Client');
 
         if($response['status'] <> 200){
-            return $this->respondErrorMessage(2001);
+
+            return $this->respondErrorMessage($response['data']);
         }
 
         //match username and password
@@ -50,7 +51,7 @@ class ClientLoginController extends ClientController {
             }
 
 
-            return $this->respondErrorMessage(2233);
+            return $this->respondErrorMessage(2019);
         }
 
         $client_id = $this->client->getClientId($return['id']);
@@ -71,7 +72,7 @@ class ClientLoginController extends ClientController {
             return $this->respondErrorMessage(2113);
         }
         
-        return $this->setHeader($this->getToken())->respondWithData([
+        return $this->respondWithData([
                 'id' => $client_detail['id'],
                 'first_name' => $client_detail['first_name'],
                 'last_name' => $client_detail['last_name']

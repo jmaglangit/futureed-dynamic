@@ -73,4 +73,6 @@ interface UserRepositoryInterface {
 
     public function updateEmailCode($id,$code);
 
+    public function updateStatus($id,$status);
+
 }

@@ -64,6 +64,7 @@ function ProfileController($scope, apiService) {
 	        break;
 
 	      case Constants.AVATAR   		:
+	      	self.enable = Constants.FALSE;
 	        self.active_avatar = Constants.TRUE;
 	        break;
 
@@ -83,6 +84,8 @@ function ProfileController($scope, apiService) {
 	      	break;
 
 	      case Constants.CONFIRM_EMAIL  :
+	      	self.resent = Constants.FALSE;
+	      	self.confirmation_code = Constants.EMPTY_STR;
 	      	self.active_confirm_email = Constants.TRUE;
 	      	break;
 
@@ -278,6 +281,8 @@ function ProfileController($scope, apiService) {
               			self.errors = $scope.errorHandler(response.errors);
             		} else if(response.data) {
               			self.email_confirmed = Constants.TRUE;
+              			self.prof.email = self.prof.new_email;
+              			self.prof.new_email = Constants.EMPTY_STR;
             		}
           		}
 
@@ -344,7 +349,7 @@ function ProfileController($scope, apiService) {
 	          $scope.$parent.user = self.prof;
 
 	          self.success = Constants.TRUE;
-
+	    	  
 	          apiService.updateUserSession(self.prof).success(function(response) {
 	              $("ul.avatar_list li").removeClass('selected');
 	          }).error(function() {
