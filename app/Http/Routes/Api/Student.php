@@ -2,6 +2,8 @@
 
 Routes::group(['prefix' => '/student'], function()
 {
+    //student password
+    Routes::post('/password/new','Api\v1\StudentPasswordController@confirmNewImagePassword');
 
     //authenticated student routes
     Routes::group(['middleware' => 'api_user'],function(){
@@ -24,10 +26,13 @@ Routes::group(['prefix' => '/student'], function()
     //student login
     Routes::post('/login/username','Api\v1\StudentLoginController@login');
     Routes::post('/login/image','Api\v1\StudentLoginController@imagePassword');
-    Routes::post('/login/password','Api\v1\StudentLoginController@loginPassword');
+    Routes::post('/login/password',[
+        'uses' => 'Api\v1\StudentLoginController@loginPassword',
+        'as' => 'api.v1.student.login.password',
+        'middleware' => 'api_after',
+    ]);
 
-    //student password
-    Routes::post('/password/new','Api\v1\StudentPasswordController@confirmNewImagePassword');
+
 
     //student registration
     Routes::post('/register','Api\v1\StudentRegistrationController@register');
