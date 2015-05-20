@@ -68,7 +68,7 @@ class AdminRepository implements  AdminRepositoryInterface {
 
     public function verifyAdminId($id){
 
-        return Admin::select('id','user_id')->where('id','=',$id)->get();
+        return Admin::select('id','user_id')->where('id','=',$id)->first();
 
     }
 
