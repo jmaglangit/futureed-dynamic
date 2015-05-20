@@ -91,7 +91,7 @@ class UserPasswordController extends UserController {
 
                       if($client['is_account_reviewed'] == 0){
 
-                        return $this->respondErrorMessage(2001);
+                        return $this->respondErrorMessage(2013);
 
 
                       }
