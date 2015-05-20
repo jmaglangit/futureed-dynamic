@@ -45,6 +45,9 @@ var Constants = {
 	, MSG_EA_CURR_NOTMATCH	: "Current email address does not match."
 	, MSG_EA_NOT_MATCH		: "Email Address does not match."
 
+	, MSG_U_NOTEXIST		: "User does not exist."
+	, MSG_U_EXIST 			: "Username already exists."
+
 	, URL_FORGOT_PASSWORD	: function(user_type) {
 		return '/' + user_type + '/password/forgot';
 	}
