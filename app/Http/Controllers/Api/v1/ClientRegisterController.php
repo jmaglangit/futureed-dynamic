@@ -34,13 +34,20 @@ class ClientRegisterController extends ClientController {
 
             if(!$check_password){
 
-
                 $this->addMessageBag($this->setErrorCode(2234)
                                 ->setField('password')
                                 ->setMessage($error_msg[2112])
                                 ->errorMessage());
 
             }
+            
+            $this->addMessageBag($this->validateString($input,'callback_uri'));
+
+	        $this->addMessageBag($this->firstName($client,'first_name'));
+        	$this->addMessageBag($this->lastName($client,'last_name'));
+        	$this->addMessageBag($this->clientRole($client,'client_role'));        	
+        	$this->addMessageBag($this->email($user,'email'));
+        	$this->addMessageBag($this->username($user,'username'));
 
             if(strtolower($client['client_role']) == strtolower(config('futureed.teacher'))){
 
@@ -49,14 +56,6 @@ class ClientRegisterController extends ClientController {
                                 ->setMessage($error_msg[2234])
                                 ->errorMessage());
             }
-
-            $this->addMessageBag($this->validateString($input,'callback_uri'));
-
-	        $this->addMessageBag($this->firstName($client,'first_name'));
-        	$this->addMessageBag($this->lastName($client,'last_name'));
-        	$this->addMessageBag($this->clientRole($client,'client_role'));        	
-        	$this->addMessageBag($this->email($user,'email'));
-        	$this->addMessageBag($this->username($user,'username'));
 
 
             if(strtolower($client['client_role']) == strtolower(config('futureed.parent'))){
