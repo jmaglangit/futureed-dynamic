@@ -185,11 +185,11 @@ class ClientController extends ApiController {
 
 						if(empty($school_name)){
 
-							return $this->setHeader($this->getToken())->respondErrorMessage(2105);
+							return $this->respondErrorMessage(2105);
 
 						}else if(isset($school_code) && $school['school_code'] != $school_code){
 							
-							return $this->setHeader($this->getToken())->respondErrorMessage(2202);
+							return $this->respondErrorMessage(2202);
 
 						}else{
 
@@ -206,11 +206,11 @@ class ClientController extends ApiController {
 
 					$response = $this->client->formResponse($userDetails,$clientDetails);
 
-					return $this->setHeader($this->getToken())->respondWithData($response);
+					return $this->respondWithData($response);
 
 				}else{
 
-					return $this->setHeader($this->getToken())->respondErrorMessage(2104);
+					return $this->respondErrorMessage(2104);
 
 				}
 
@@ -219,7 +219,7 @@ class ClientController extends ApiController {
 
 			}else{
 
-				return $this->setHeader($this->getToken())->respondErrorMessage(2001);
+				return $this->respondErrorMessage(2001);
 			}
 
 
