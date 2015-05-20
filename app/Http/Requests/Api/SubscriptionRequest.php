@@ -21,7 +21,7 @@ class SubscriptionRequest extends ApiRequest {
 	public function rules() {
         return [
             'name'          => 'required',
-			'price'         => 'required|numeric',
+			'price'         => 'required|numeric|min:0.01|max:999999.99',
 			'description'   => 'required',
 			'status'        => 'required|in:Enabled,Disabled'
         ];
@@ -34,7 +34,7 @@ class SubscriptionRequest extends ApiRequest {
 	 */
 	public function messages() {
 		return [
-			'decimal' => 'The :attribute must be a number.' 
+			'numeric' => 'The :attribute must be a number.' 
 		];
 	}
 }
