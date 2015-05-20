@@ -63,7 +63,7 @@ class AdminController extends ApiController {
 	{
 		//
 
-        return $this->admin->getAdmin($id);
+        return $this->respondWithData($this->admin->getAdmin($id));
 	}
 
 	/**
