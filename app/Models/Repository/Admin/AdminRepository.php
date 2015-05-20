@@ -45,7 +45,7 @@ class AdminRepository implements  AdminRepositoryInterface {
 
     public function getAdmin($id){
 
-        return Admin::find($id);
+        return Admin::find($id)->with('user')->get();
 
     }
 
