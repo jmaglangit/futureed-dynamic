@@ -13,15 +13,6 @@ class AvatarController extends ApiController {
     
     public function selectAvatars(){
 
-//        //Check token authentication if valid.
-//        $access_token = \Request::header('authorization');
-//
-//        $this->validateToken($access_token);
-//
-//        if($this->getMessageBag()){
-//
-//            return $this->respondWithError($this->getMessageBag());
-//        }
 
         $input = Input::only('gender');
         
@@ -39,15 +30,6 @@ class AvatarController extends ApiController {
     
     public function saveUserAvatar(){
 
-        //Check token authentication if valid.
-        $access_token = \Request::header('authorization');
-
-        $this->validateToken($access_token);
-
-        if($this->getMessageBag()){
-
-            return $this->respondWithError($this->getMessageBag());
-        }
 
         
         $input = Input::only('avatar_id','id');
