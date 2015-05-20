@@ -283,7 +283,7 @@ function FutureedController($scope, apiService) {
       if(response.status == Constants.STATUS_OK) {
         if(response.errors) {
           $scope.errorHandler(response.errors);
-          getLoginPassword();
+          $scope.image_pass = shuffle($scope.image_pass);
         } else if(response.data){
           $scope.user = JSON.stringify(response.data);
           $("input[name='user_data']").val(JSON.stringify(response.data));
