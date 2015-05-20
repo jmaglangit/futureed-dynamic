@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Input;
 use FutureEd\Models\Repository\Subscription\SubscriptionRepositoryInterface as Subscription;
 
 use FutureEd\Http\Requests\Api\SubscriptionRequest;
+use FutureEd\Http\Requests\Api\StatusRequest;
 
 class SubscriptionController extends ApiController {
 
@@ -91,8 +92,7 @@ class SubscriptionController extends ApiController {
 	    if(!is_null($id)){
 	    
     	    $data = $request->all();
-            $data['id'] = $id;
-    		return $this->respondWithData($this->subscription->updateSubscription($data));
+            return $this->respondWithData($this->subscription->updateSubscription($id,$data));
 	    }		
 	}
 
@@ -108,5 +108,9 @@ class SubscriptionController extends ApiController {
     		return $this->respondWithData($this->subscription->deleteSubscription($id));
 		}
 	}
-
+    
+    public function updateStatus($id,StatusRequest $request){
+        $data = $request->all();
+        return $this->respondWithData($this->subscription->updateSubscription($id,$data));
+    }
 }

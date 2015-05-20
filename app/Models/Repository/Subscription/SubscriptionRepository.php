@@ -64,10 +64,10 @@ class SubscriptionRepository implements SubscriptionRepositoryInterface {
 	 * @return object
 	 */
 	 
-    public function updateSubscription($subscription){
+    public function updateSubscription($id,$subscription){
     
         try{
-            $result = Subscription::find($subscription["id"]);
+            $result = Subscription::find($id);
             return !is_null($result) ? $result->update($subscription) : false;
         }catch(Exception $e){
             return $e->getMessage();
