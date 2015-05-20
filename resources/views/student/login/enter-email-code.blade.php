@@ -4,7 +4,7 @@
   <div class="container login" ng-controller="ProfileController as profile" ng-cloak>
     <div template-directive template-url="{!! route('student.partials.base_url') !!}"></div>
 
-    <div class="col-md-6 col-md-offset-1 form-style">
+    <div class="col-md-6 col-md-offset-3 form-style">
       {!! Form::open(
           array(
             'id' => 'confirm_email_form'

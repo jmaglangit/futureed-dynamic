@@ -57,8 +57,9 @@ function ProfileController($scope, apiService, clientProfileApiService) {
 	      	break;
 
 	      case Constants.CONFIRM_EMAIL :
-	      	self.active_confirm_email = Constants.TRUE;
 	      	self.resent = Constants.FALSE;
+	      	self.confirmation_code = Constants.EMPTY_STR;
+	      	self.active_confirm_email = Constants.TRUE;
 	        break;
 
 	      case Constants.INDEX    	:
