@@ -25,7 +25,6 @@
     {!! Html::style('/css/futureed.css') !!}
     {!! Html::style('/css/futureed-admin.css') !!}
     {!! Html::style('/css/datatables.bootstrap.min.css') !!}
-    {!! Html::style('//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.css') !!}
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>

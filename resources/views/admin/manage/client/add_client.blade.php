@@ -1,22 +1,10 @@
-@extends('admin.app')
-
-@section('navbar')
-	@include('admin.partials.main-nav')
-@stop
-
-@section('content')
-	<div class="container dshbrd-con" ng-cloak>
-		<div class="wrapr">
-			<div class="client-nav side-nav">
-				@include('admin.partials.dshbrd-side-nav')
-			</div>
-			<div class="client-content">
-				<div class="content-title">
+<div ng-if="admincon.add_client">
+<div class="content-title">
 					<div class="title-main-content">
 						<span>Add New Client</span>
 					</div>
 				</div>
-				<div class="form-content col-xs-12" ng-controller="ManageController as manage">
+				<div class="form-content col-xs-12">
 					<div class="alert alert-error" ng-if="errors">
 			            <p ng-repeat="error in profile.errors track by $index" > 
 			              	{! error !}
@@ -56,7 +44,7 @@
 	                	</div>
 	                	<div class="form-group">
 	                		<label class="col-xs-2 control-label" id="first_name">Role</label>
-	                		<div class="col-xs-5">
+	                		<div class="col-xs-5" ng-init="admincon.changeField('Principal')">
 	                			{!! Form::select('role', 
 	                				[	'' => '-- Select Role --',
 		                				'Principal' => 'Principal', 
@@ -65,8 +53,8 @@
 		                			],null,
 	                				[	  
 	                				'class' => 'form-control',
-	                				'ng-model' => 'role',
-	                				'ng-change'=> 'manage.changeField()'
+	                				'ng-model' => 'admincon.role',
+	                				'ng-change'=> 'admincon.changeField(admincon.role)'
 	                				]	
 	                			) !!}
 	                		</div>
@@ -116,7 +104,7 @@
 	                		</div>
 	                	</div>
 	                </fieldset>
-	                <fieldset ng-if="principal || teacher || role_select">
+	                <fieldset ng-if="admincon.principal || admincon.teacher || admincon.role_select">
 	                	<legend class="legend-name-mid">
 	                		School Information
 	                	</legend>
@@ -132,7 +120,7 @@
 	                			) !!}
 	                		</div>
 	                	</div>
-	                	<div class="form-group" ng-if="!teacher || role_select">
+	                	<div class="form-group" ng-if="!admincon.teacher || admincon.role_select">
 	                		<label class="col-xs-2 control-label" id="school_address">School Address</label>
 	                		<div class="col-xs-5">
 	                			{!! Form::text('school_address',''
@@ -144,7 +132,7 @@
 	                			) !!}
 	                		</div>
 	                	</div>
-	                	<div class="form-group" ng-if="!teacher || role_select">
+	                	<div class="form-group" ng-if="!admincon.teacher || admincon.role_select">
 	                		<label class="col-xs-2 control-label" id="school_city">City</label>
 	                		<div class="col-xs-4">
 	                			{!! Form::text('school_city',''
@@ -166,7 +154,7 @@
 	                			) !!}
 	                		</div>
 	                	</div>
-	                	<div class="form-group" ng-if="!teacher || role_select">
+	                	<div class="form-group" ng-if="!admincon.teacher || admincon.role_select">
 	                		<label class="col-xs-2 control-label" id="school_postal">Postal Code</label>
 	                		<div class="col-xs-4">
 	                			{!! Form::text('school_postal',''
@@ -185,7 +173,7 @@
 						        </select>
 						      </div>
 	                	</div>
-	                	<div class="form-group" ng-if="!teacher || role_select">
+	                	<div class="form-group" ng-if="!admincon.teacher || admincon.role_select">
 	                		<label class="col-xs-2 control-label" id="contact_person">Contact Person</label>
 	                		<div class="col-xs-4">
 	                			{!! Form::text('contact_person',''
@@ -208,11 +196,11 @@
 	                		</div>
 	                	</div>
 	                </fieldset>
-	                <fieldset ng-if="teacher || principal || parent">
-	                	<legend class="legend-name-mid" ng-if="!parent">
+	                <fieldset ng-if="admincon.teacher || admincon.principal || admincon.parent">
+	                	<legend class="legend-name-mid" ng-if="!admincon.parent">
 	                		Other Address Information(Optional)
 	                	</legend>
-	                	<legend class="legend-name-mid" ng-if="parent">
+	                	<legend class="legend-name-mid" ng-if="admincon.parent">
 	                		Address
 	                	</legend>
 	                	<div class="form-group">
@@ -286,13 +274,4 @@
 				        <a href="#" type="button" class="btn btn-gold btn-medium">Cancel</a>
 				     </div>
 				</div>
-			</div>
-		</div>
-	</div>
-@stop
-
-@section('footer')
-	
-@section('scripts')
-	{!! Html::script('/js/admin/controllers/manage_controller.js') !!}
-@stop
+</div>

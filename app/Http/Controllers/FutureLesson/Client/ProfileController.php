@@ -6,7 +6,6 @@ use FutureEd\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 
-
 class ProfileController extends Controller {
 
 	use ProfileTrait;
