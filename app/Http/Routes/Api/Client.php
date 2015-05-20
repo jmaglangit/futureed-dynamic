@@ -34,6 +34,9 @@ Routes::group(['middleware' => 'api_user','prefix' => '/client'], function()
     //reject client 
      Routes::post('/reject-client/{id}','Api\v1\EmailController@rejectClient');
 
+     //set status for client
+     Routes::post('/change-status/{id}','Api\v1\AdminClientController@setClientStatus');
+
 });
 
 
