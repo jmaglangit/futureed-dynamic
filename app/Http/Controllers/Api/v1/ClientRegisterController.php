@@ -57,7 +57,6 @@ class ClientRegisterController extends ClientController {
         	$this->addMessageBag($this->clientRole($client,'client_role'));        	
         	$this->addMessageBag($this->email($user,'email'));
         	$this->addMessageBag($this->username($user,'username'));
-        	//$this->addMessageBag($this->checkPassword($user,'password'));
 
 
             if(strtolower($client['client_role']) == strtolower(config('futureed.parent'))){
