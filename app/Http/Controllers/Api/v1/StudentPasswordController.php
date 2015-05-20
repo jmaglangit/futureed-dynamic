@@ -53,11 +53,11 @@ class StudentPasswordController extends StudentController {
 
         if($response['status'] <> 200){
 
-            return $this->setHeader($this->getToken())->respondErrorMessage(2012);
+            return $this->respondErrorMessage(2012);
 
         }elseif($response['status']==200){
 
-            return $this->setHeader($this->getToken())->respondWithData($response['data']);
+            return $this->respondWithData($response['data']);
         }
     }
     
@@ -239,17 +239,17 @@ class StudentPasswordController extends StudentController {
 
                         $this->student->ChangPasswordImage($id,$input['password_image_id']); 
                         
-                        return $this->setHeader($this->getToken())->respondWithData(['id' => $id ]);
+                        return $this->respondWithData(['id' => $id ]);
 
               }else{
 
-                return $this->setHeader($this->getToken())->respondErrorMessage(2101);
+                return $this->respondErrorMessage(2101);
 
               }
 
           }else{
 
-            return $this->setHeader($this->getToken())->respondErrorMessage(2001);
+            return $this->respondErrorMessage(2001);
           }
          
       }

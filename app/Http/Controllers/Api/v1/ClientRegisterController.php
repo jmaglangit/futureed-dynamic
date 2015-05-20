@@ -29,14 +29,18 @@ class ClientRegisterController extends ClientController {
 
             $error_msg = config('futureed-error.error_messages');
 
-            if(strtolower($client['client_role']) == strtolower(config('futureed.teacher'))){
+
+            $check_password = $this->password->checkPassword($user['password']);
+
+            if(!$check_password){
 
                 $this->addMessageBag($this->setErrorCode(2234)
-                                ->setField('client_role')
-                                ->setMessage($error_msg[2234])
+                                ->setField('password')
+                                ->setMessage($error_msg[2112])
                                 ->errorMessage());
-            }
 
+            }
+            
             $this->addMessageBag($this->validateString($input,'callback_uri'));
 
 	        $this->addMessageBag($this->firstName($client,'first_name'));
@@ -44,7 +48,14 @@ class ClientRegisterController extends ClientController {
         	$this->addMessageBag($this->clientRole($client,'client_role'));        	
         	$this->addMessageBag($this->email($user,'email'));
         	$this->addMessageBag($this->username($user,'username'));
-        	$this->addMessageBag($this->checkPassword($user,'password'));
+
+            if(strtolower($client['client_role']) == strtolower(config('futureed.teacher'))){
+
+                $this->addMessageBag($this->setErrorCode(2234)
+                                ->setField('client_role')
+                                ->setMessage($error_msg[2234])
+                                ->errorMessage());
+            }
 
 
             if(strtolower($client['client_role']) == strtolower(config('futureed.parent'))){
@@ -92,16 +103,19 @@ class ClientRegisterController extends ClientController {
 
         	}
 
-        	$check_school_name = $this->client->schoolNameCheck($school);
 
-        	if(!$check_school_name){
+          if(strtolower($client['client_role']) == strtolower(config('futureed.principal'))){
+            	$check_school_name = $this->client->schoolNameCheck($school);
 
-        		$this->addMessageBag($this->setErrorCode(2202)
-                	->setField('school_name')
-                	->setMessage($error_msg[2202])
-                	->errorMessage());
+            	if(!$check_school_name){
 
-        	}
+            		$this->addMessageBag($this->setErrorCode(2202)
+                    	->setField('school_name')
+                    	->setMessage($error_msg[2202])
+                    	->errorMessage());
+
+            	}
+          }
 
         	$msg_bag = $this->getMessageBag();
 
