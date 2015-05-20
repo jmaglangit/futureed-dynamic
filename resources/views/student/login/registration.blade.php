@@ -9,7 +9,7 @@
             <div class="form-header">
                 <div class="media">
                     <div class="media-left">
-                        {!! Html::image('images/user_parent.jpg') !!}
+                        {!! Html::image('images/user_student.png') !!}
                     </div>
                     <div class="media-body">
                         <h2 class="box-title"><span class="thin">Student</span> Registration</h2>
