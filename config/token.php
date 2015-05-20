@@ -35,7 +35,7 @@ Return [
      */
     'site' => env('TOKEN_SITE','futureed.com'),
     'company' => env('TOKEN_COMPANY','Company'),
-    'app' => env('TOKEN_APP','App'),
+    'app' => env('TOKEN_APP','FutureEd'),
     'admin' => true,
 
 

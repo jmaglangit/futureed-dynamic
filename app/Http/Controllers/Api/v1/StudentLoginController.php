@@ -163,8 +163,10 @@ class StudentLoginController extends StudentController {
                 //get student data
                 $response['data'] = $this->student->getStudentDetails($input['id']);
 
-                $token = $this->token->getToken();
-                $response['data'] = array_merge($response['data'],$token);
+                $token = $this->token->getToken([
+                    'id' => $response['data']['id'],
+                    'type' => config('futureed.student')
+                ]);
 
             }
         }

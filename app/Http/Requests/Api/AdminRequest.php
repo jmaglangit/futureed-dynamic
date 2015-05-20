@@ -9,6 +9,8 @@
 namespace FutureEd\Http\Requests\Api;
 
 
-class AdminRequest {
+class AdminRequest extends ApiRequest {
+
+
 
 }

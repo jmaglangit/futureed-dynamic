@@ -18,7 +18,7 @@ class AdminRepository implements  AdminRepositoryInterface {
      *
      * @return array
      */
-    public function getAdmins($limit = 3){
+    public function getAdmins($category = [],$limit = 3){
 
         //get list of administrators username, email, roles
         $admin = new Admin();

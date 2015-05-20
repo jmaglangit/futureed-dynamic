@@ -13,10 +13,6 @@ use Illuminate\Support\Facades\Validator;
 
 trait AccessTokenTrait {
 
-//    use ErrorMessageTrait;
-//    use MessageBagTrait;
-
-
     //get token
     public function getToken(){
 
