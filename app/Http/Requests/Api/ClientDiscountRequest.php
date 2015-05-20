@@ -21,7 +21,7 @@ class ClientDiscountRequest extends ApiRequest {
 	public function rules() {
         return [
             'client_id'     => 'required|numeric',
-			'percentage'    => 'required|numeric|max:100',
+			'percentage'    => 'required|numeric|min:1|max:100',
 			'status'        => 'required|in:Enabled,Disabled'
         ];
 	}
