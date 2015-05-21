@@ -77,14 +77,14 @@ class StudentController extends ApiController {
 	public function update($id)
 	{
         //Check token authentication if valid.
-        // $access_token = \Request::header('authorization');
+        $access_token = \Request::header('authorization');
 
-        // $this->validateToken($access_token);
+        $this->validateToken($access_token);
 
-        // if($this->getMessageBag()){
+        if($this->getMessageBag()){
 
-        //     return $this->respondWithError($this->getMessageBag());
-        // }
+            return $this->respondWithError($this->getMessageBag());
+        }
 
 		$input = Input::only('first_name','last_name','gender','birth_date',
 							'email','username','school_code','grade_code',
@@ -96,7 +96,7 @@ class StudentController extends ApiController {
         $this->addMessageBag($this->gender($input,'gender'));
         $this->addMessageBag($this->editBirthDate($input,'birth_date'));
         $this->addMessageBag($this->validateNumber($input,'school_code'));
-        //$this->addMessageBag($this->validateNumber($input,'grade_code'));
+        $this->addMessageBag($this->validateNumber($input,'grade_code'));
         $this->addMessageBag($this->validateString($input,'country'));
         $this->addMessageBag($this->validateString($input,'state'));
         $this->addMessageBag($this->validateString($input,'city'));
