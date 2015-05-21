@@ -72,6 +72,18 @@ function AdminDashboardController($scope){
 				self.active_announcement = Constants.TRUE;
 				break;
 
+			case Constants.PRICE:
+				self.price = Constants.TRUE;
+				self.active_price = Constants.TRUE;
+				self.announcement = Constants.FALSE;
+				self.active_client = Constants.FALSE;
+				self.active_student = Constants.FALSE;
+				self.active_add_client = Constants.FALSE;
+				self.add_client = Constants.FALSE;
+				self.client_list = Constants.FALSE;
+				self.active_announcement = Constants.FALSE;
+				break;
+
 			case Constants.CLIENT:
 			default:
 				self.active_client = Constants.TRUE;

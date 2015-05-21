@@ -88,7 +88,36 @@
 					]);
 				});
 			});
+
+			/**
+			* admin/manage/price
+			*/
+			Routes::group(['prefix' => '/price'], function()
+				{
+					$price_controller = 'FutureLesson\Admin\PriceController';
+					Routes::get('/', 
+						[
+							'as' => 'admin.manage.price.index'
+							,'middleware' => 'admin'
+							,'uses' => $price_controller. '@index'
+						]);
+				});
+
+			/**
+			* admin/manage/announcement
+			*/
+			Routes::group(['prefix' => '/announcement'], function()
+				{
+					$announce_controler = 'FutureLesson\Admin\AnnouncementController';
+					Routes::get('/',
+						[
+							'as' => 'admin.manage.announce.index'
+							, 'middleware' => 'admin'
+							, 'uses' => $announce_controler. '@index'
+						]);
+				});
 		});
+			
 
 		Routes::group(['prefix' => '/dashboard'], function()
 		{

@@ -11,7 +11,7 @@
 
     <ul id="menu-content" class="nav-list" ng-init="admincon.setActiveAdmin('{!! $active !!}')">
         <li ng-class="{ 'active' : admincon.active_client}" class="side-nav-li">
-			<a href="#" class="nav-link" ng-click="admincon.setActiveAdmin('client')">Client</a>
+			<a href="{!! route('admin.dashboard.index') !!}" class="nav-link" ng-click="admincon.setActiveAdmin('client')">Client</a>
 		</li>
         <li  data-toggle="collapse" data-target="#students" class="collapsed side-nav-li" ng-class="{ 'active' : admincon.active_student}">
           <a class="nav-link" ng-click="admincon.setActiveAdmin('student')" href="#">
@@ -35,7 +35,7 @@
         </li>  
         <ul class="sub-menu collapse" id="price">
           <li ng-class="{'active' : admincon.active_price}" class="side-nav-li">
-          	<a href="#" ng-click="admincon.setActiveAdmin('price')"><span><i class="fa fa-dollar"></i>Price Settings</span></a>
+          	<a href="{!! route('admin.manage.price.index') !!}" ng-click="admincon.setActiveAdmin('price')"><span><i class="fa fa-dollar"></i>Price Settings</span></a>
           </li>
         </ul>
          <li data-toggle="collapse" data-target="#master" class="collapsed side-nav-li" ng-class="{'active' : admincon.active_announcement}">
@@ -43,7 +43,7 @@
         </li>  
         <ul class="sub-menu collapse" id="master">
           <li ng-class="{'active' : admincon.active_announcement}" class="side-nav-li">
-          	<a href="#" ng-click="admincon.setActiveAdmin('announcement')"><span><i class="fa fa-bullhorn"></i>announcement</span></a>
+          	<a href="{!! route('admin.manage.announce.index') !!}" ng-click="admincon.setActiveAdmin('announcement')"><span><i class="fa fa-bullhorn"></i>announcement</span></a>
           </li>
         </ul>                 
     </ul>
