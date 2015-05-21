@@ -6,6 +6,7 @@ use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 use FutureEd\Services\UserServices;
 use FutureEd\Services\AdminServices;
+use FutureEd\Services\PasswordServices;
 
 
 use Illuminate\Http\Request;
@@ -13,10 +14,11 @@ use Illuminate\Support\Facades\Input;
 
 class AdminLoginController extends ApiController {
 
-    public function __construct(UserServices $user,AdminServices $admin){
+    public function __construct(UserServices $user,AdminServices $admin, PasswordServices $password){
 
         $this->admin = $admin;
         $this->user  = $user;   
+        $this->password = $password;
     }
 
 	public function login(){
