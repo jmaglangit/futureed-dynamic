@@ -18,7 +18,7 @@
 	        </div>
       	</div>
         <div class="title">Login to your account</div>
-          <div class="alert alert-danger" ng-if="errors">
+          <div class="alert alert-danger" style="text-align:left;" ng-if="errors">
             <p ng-repeat="error in errors" > 
               {! error !}
             </p>
