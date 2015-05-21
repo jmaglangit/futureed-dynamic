@@ -163,8 +163,7 @@ class StudentLoginController extends StudentController {
                 //get student data
                 $response['data'] = $this->student->getStudentDetails($input['id']);
 
-                $token = $this->token->getToken();
-                $response['data'] = array_merge($response['data'],$token);
+
 
             }
         }
@@ -175,7 +174,7 @@ class StudentLoginController extends StudentController {
 
         }elseif($response['status']==200){
 
-            return $this->setHeader($token)->respondWithData($response['data']);
+            return $this->respondWithData($response['data']);
         }
     }
 

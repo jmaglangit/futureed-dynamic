@@ -91,6 +91,12 @@
               <p class="text">
                   Your email account has been successfully confirmed.
               </p>
+              <h4 class="title">
+                  You will be receiving an email shortly by our Admin if your registration has been approved or not.
+              </h4>
+              <small> 
+                  If you have not yet receive the email, please check your inbox or your spam folder.
+              </small>
               {!! Html::link(route('client.login'), 'Click here to Login'
                   , array(
                       'class' => 'btn btn-blue'

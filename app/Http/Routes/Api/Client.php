@@ -1,6 +1,6 @@
 <?php
 
-Routes::group(['prefix' => '/client'], function()
+Routes::group(['middleware' => 'api_user','prefix' => '/client'], function()
 {
 
     //Parent
@@ -34,9 +34,14 @@ Routes::group(['prefix' => '/client'], function()
     //reject client 
      Routes::post('/reject-client/{id}','Api\v1\EmailController@rejectClient');
 
+     //set status for client
+     Routes::post('/change-status/{id}','Api\v1\AdminClientController@setClientStatus');
+
 });
 
 
 //Client
-Routes::resource('/client','Api\v1\ClientController',
-    ['except' => ['create','edit']]);
+Routes::group(['middleware' => 'api_user'],function(){
+    Routes::resource('/client','Api\v1\ClientController',
+        ['except' => ['create','edit']]);
+});

@@ -12,6 +12,7 @@ function ProfileController($scope, apiService, clientProfileApiService) {
 
 	self.setClientProfileActive = setClientProfileActive;
 	self.getClientDetails = getClientDetails;
+	self.checkAvailability = checkAvailability;
 	self.saveClientProfile = saveClientProfile;
 
 	self.validateCurrentClientEmail = validateCurrentClientEmail;
@@ -30,6 +31,7 @@ function ProfileController($scope, apiService, clientProfileApiService) {
 	    self.change = {};
 	    self.validation = {};
 	    self.password_changed = Constants.FALSE;
+	    self.email_confirmed = Constants.FALSE;
 
 	    $scope.$parent.u_error = Constants.FALSE;
 		$scope.$parent.u_success = Constants.FALSE;
@@ -56,8 +58,9 @@ function ProfileController($scope, apiService, clientProfileApiService) {
 	      	break;
 
 	      case Constants.CONFIRM_EMAIL :
-	      	self.active_confirm_email = Constants.TRUE;
 	      	self.resent = Constants.FALSE;
+	      	self.confirmation_code = Constants.EMPTY_STR;
+	      	self.active_confirm_email = Constants.TRUE;
 	        break;
 
 	      case Constants.INDEX    	:
@@ -96,10 +99,40 @@ function ProfileController($scope, apiService, clientProfileApiService) {
 		});
 	}
 
+	function checkAvailability() {
+	    self.validation.u_loading = Constants.TRUE;
+	    self.validation.u_success = Constants.FALSE;
+	    self.validation.u_error = Constants.FALSE;
+
+	    apiService.validateUsername(self.prof.username, self.user_type).success(function(response) {
+	      self.validation.u_loading = Constants.FALSE;
+
+	      if(angular.equals(response.status, Constants.STATUS_OK)) {
+	        if(response.errors) {
+	          self.validation.u_error = response.errors[0].message;
+
+	          if(angular.equals(self.validation.u_error, Constants.MSG_U_NOTEXIST)) {
+	          	self.validation.u_error = Constants.FALSE;
+	            self.validation.u_success = Constants.TRUE;
+	          }
+	        } else if(response.data) {
+	          if(response.data.id == self.prof.id) {
+	            self.validation.u_success = Constants.TRUE ;
+	          } else {
+	            self.validation.u_error = Constants.MSG_U_EXIST;  
+	          }
+	        }
+	      }
+	    }).error(function(response) {
+	      self.validation.u_loading = Constants.FALSE;
+	      self.errors = $scope.internalError();
+	    });
+	}
+
 	function saveClientProfile() {
 		self.errors = Constants.FALSE;
 
-		if($scope.u_error) {
+		if(self.validation.u_error) {
 			$("html, body").animate({ scrollTop: 0 }, "slow");
 		} else {
 			$scope.$parent.u_error = Constants.FALSE;
@@ -240,8 +273,8 @@ function ProfileController($scope, apiService, clientProfileApiService) {
 					if(response.errors) {
 						self.errors = $scope.errorHandler(response.errors);
 					} else if(response.data) {
-						self.setClientProfileActive(Constants.CONFIRM_EMAIL);
 						self.prof.new_email = self.change.new_email;
+						self.setClientProfileActive(Constants.CONFIRM_EMAIL);
 					}
 				}
 

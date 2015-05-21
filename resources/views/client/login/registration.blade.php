@@ -9,11 +9,21 @@
     <div class="row">
       <div class="col-md-12 register_users">
         <div class="col-md-3 col-md-offset-3" ng-click="register.selectRole('user_principal')">
-          <img id="user_principal" ng-class="{role : !register.principal}" src="/images/user_principal.jpg" />
+          {!! Html::image('/images/user_principal.png', 'Principal'
+            , array(
+              'id' => 'user_principal'
+              , 'ng-class' => '{role : !register.principal}'
+            )
+          ) !!}
           <h4>Principal</h4>
         </div>
         <div class="col-md-3" ng-click="register.selectRole('user_parent')">
-          <img id="user_parent" ng-class="{role : !register.parent}" src="/images/user_parent.jpg">
+          {!! Html::image('/images/user_parent.png', 'Parent'
+            , array(
+              'id' => 'user_parent'
+              , 'ng-class' => '{role : !register.parent}'
+            )
+          ) !!}
           <h4>Parent</h4>
         </div>
       </div>

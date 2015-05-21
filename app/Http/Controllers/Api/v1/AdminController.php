@@ -32,6 +32,15 @@ class AdminController extends ApiController {
 
         $limit = Input::get('limit');
 
+        //get the parameters and get outputs based on the parameters.
+        if(Input::get('email')){
+
+        }
+
+        if(Input::get('username')){
+
+        }
+
         if(Input::get('limit')){
             return $this->respondWithData($this->admin->getAdmins($limit));
         }

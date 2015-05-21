@@ -234,7 +234,7 @@ class UserServices {
         ];
     }
     //check user if enable to login.
-    public function checkUserDisabled($id){
+    public function     checkUserDisabled($id){
         if($this->users->accountActivated($id) == 0 ){
             //check if activated
             return 2230;
@@ -386,6 +386,11 @@ class UserServices {
     public function updateEmailCode($id,$code){
 
         $this->users->updateEmailCode($id,$code);
+    }
+
+    public function updateStatus($id,$status){
+
+        $this->users->updateStatus($id,$status);
     }
 
     

@@ -1,6 +1,6 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
-use FutureEd\Http\Controllers\Api\Traits\ClientValidatorTrait;
+
 use FutureEd\Http\Controllers\Api\v1\ClientController;
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
@@ -10,14 +10,23 @@ use Illuminate\Support\Facades\Input;
 
 class ClientLoginController extends ClientController {
 
-    use ClientValidatorTrait;
-
 	public function login(){
         $input = Input::only('username','password','role');
 
-        $this->addMessageBag($this->validateLoginField($input,'username'));
-        $this->addMessageBag($this->validateLoginField($input,'password'));
+        $error_msg = config('futureed-error.error_messages');
+
+        $this->addMessageBag($this->username($input,'username'));
+        $check_password = $this->password->checkPassword($input['password']);
         $this->addMessageBag($this->clientRole($input,'role'));
+
+        if(!$check_password){
+
+                $this->addMessageBag($this->setErrorCode(2234)
+                                ->setField('password')
+                                ->setMessage($error_msg[2112])
+                                ->errorMessage());
+
+        }
 
         $msg_bag = $this->getMessageBag();
 
@@ -25,12 +34,13 @@ class ClientLoginController extends ClientController {
                 return $this->respondWithError($msg_bag);
             } 
 
-        $err_msg = config('futureed-error.error_messages');
+        
         //check username and password
         $response =$this->user->checkLoginName($input['username'], 'Client');
 
         if($response['status'] <> 200){
-            return $this->respondErrorMessage(2001);
+
+            return $this->respondErrorMessage($response['data']);
         }
 
         //match username and password
@@ -50,7 +60,7 @@ class ClientLoginController extends ClientController {
             }
 
 
-            return $this->respondErrorMessage(2233);
+            return $this->respondErrorMessage(2019);
         }
 
         $client_id = $this->client->getClientId($return['id']);
@@ -71,7 +81,7 @@ class ClientLoginController extends ClientController {
             return $this->respondErrorMessage(2113);
         }
         
-        return $this->setHeader($this->getToken())->respondWithData([
+        return $this->respondWithData([
                 'id' => $client_detail['id'],
                 'first_name' => $client_detail['first_name'],
                 'last_name' => $client_detail['last_name']
