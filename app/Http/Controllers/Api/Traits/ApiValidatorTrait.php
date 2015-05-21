@@ -650,4 +650,32 @@ trait ApiValidatorTrait {
         }
 
     }
+
+     //Validate birth_date field.
+    public function editBirthDate($input,$birth_date){
+        $error_msg = config('futureed-error.error_messages');
+
+            $validator = Validator::make(
+                [
+                    "$birth_date" => $input["$birth_date"],
+                ],
+                [
+                    "$birth_date" => 'required|date_format:Ymd|before:-13 year'
+                ],
+                [
+                    "before" => $error_msg[2117]
+                ]
+            );
+
+            if($validator->fails()){
+
+                $validator_msg = $validator->messages()->toArray();
+
+                return $this->setErrorCode(1005)
+                    ->setField($birth_date)
+                    ->setMessage($validator_msg["$birth_date"][0])
+                    ->errorMessage();
+            }
+    }
+
 }

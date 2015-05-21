@@ -56,7 +56,7 @@ class ClientRegisterController extends ClientController {
                                 ->setMessage($error_msg[2234])
                                 ->errorMessage());
             }
-
+            
 
             if(strtolower($client['client_role']) == strtolower(config('futureed.parent'))){
                 $this->addMessageBag($this->validateString($client,'street_address'));
