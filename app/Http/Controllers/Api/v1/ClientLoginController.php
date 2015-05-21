@@ -16,17 +16,8 @@ class ClientLoginController extends ClientController {
         $error_msg = config('futureed-error.error_messages');
 
         $this->addMessageBag($this->username($input,'username'));
-        $check_password = $this->password->checkPassword($input['password']);
+        $this->addMessageBag($this->checkPassword($input,'password'));
         $this->addMessageBag($this->clientRole($input,'role'));
-
-        if(!$check_password){
-
-                $this->addMessageBag($this->setErrorCode(2234)
-                                ->setField('password')
-                                ->setMessage($error_msg[2112])
-                                ->errorMessage());
-
-        }
 
         $msg_bag = $this->getMessageBag();
 
@@ -43,7 +34,26 @@ class ClientLoginController extends ClientController {
             return $this->respondErrorMessage($response['data']);
         }
 
-        //match username and password
+        $client_id = $this->client->getClientId($response['data']);
+
+        //check role of user if exist
+        $client_role = $this->client->checkClient($client_id,$input['role']);
+
+        if(is_null($client_role)){
+
+            return $this->respondErrorMessage(2001);
+        }
+
+        //get client basic detail
+        $client_detail = $this->client->getClient($client_role,$input['role']);
+
+        if($client_detail['is_account_reviewed']==0){
+
+            return $this->respondErrorMessage(2118);
+        }
+
+
+         //match username and password
         $input['password'] = sha1($input['password']);
         $return  = $this->user->checkPassword($response['data'],$input['password']);
 
@@ -63,23 +73,6 @@ class ClientLoginController extends ClientController {
             return $this->respondErrorMessage(2019);
         }
 
-        $client_id = $this->client->getClientId($return['id']);
-
-        //check role of user if exist
-        $client_role = $this->client->checkClient($client_id,$input['role']);
-
-        if(is_null($client_role)){
-
-            return $this->respondErrorMessage(2001);
-        }
-
-        //get client basic detail
-        $client_detail = $this->client->getClient($client_role,$input['role']);
-
-        if($client_detail['is_account_reviewed']==0){
-
-            return $this->respondErrorMessage(2113);
-        }
         
         return $this->respondWithData([
                 'id' => $client_detail['id'],

@@ -64,6 +64,8 @@ return [
         2114 => 'Your password is incorrect.',
         2115 => 'Your contact number must be this format +00 (000) 000-0000.',
         2116 => 'School name is not available.',
+        2117 => 'The Student has to be 13 years old or above.',
+        2118 => 'Your account is being reviewed or contact administrator for assistance.',
 
         // Client Error messages
         2200 => 'Email already exists.',

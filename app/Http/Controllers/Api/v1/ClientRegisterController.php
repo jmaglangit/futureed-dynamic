@@ -30,17 +30,10 @@ class ClientRegisterController extends ClientController {
             $error_msg = config('futureed-error.error_messages');
 
 
-            $check_password = $this->password->checkPassword($user['password']);
+           
 
-            if(!$check_password){
 
-                $this->addMessageBag($this->setErrorCode(2234)
-                                ->setField('password')
-                                ->setMessage($error_msg[2112])
-                                ->errorMessage());
-
-            }
-            
+            $this->addMessageBag($this->checkPassword($user,'password'));
             $this->addMessageBag($this->validateString($input,'callback_uri'));
 
 	        $this->addMessageBag($this->firstName($client,'first_name'));
@@ -49,14 +42,14 @@ class ClientRegisterController extends ClientController {
         	$this->addMessageBag($this->email($user,'email'));
         	$this->addMessageBag($this->username($user,'username'));
 
+
             if(strtolower($client['client_role']) == strtolower(config('futureed.teacher'))){
 
                 $this->addMessageBag($this->setErrorCode(2234)
                                 ->setField('client_role')
                                 ->setMessage($error_msg[2234])
                                 ->errorMessage());
-            }
-
+            }    
 
             if(strtolower($client['client_role']) == strtolower(config('futureed.parent'))){
                 $this->addMessageBag($this->validateString($client,'street_address'));
