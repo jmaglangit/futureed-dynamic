@@ -46,6 +46,8 @@ return [
         2030 => 'Access authorization is required.',
         2031 => 'Access authorization is invalid.',
         2032 => 'Unauthorized access.',
+        2033 => 'Username/Email or password is invalid',
+        2034 => 'Username/Email or password is invalid. Have you verified your email? Please check your inbox. Your account may have been locked, please click on forgot password to reset your password.',
 
         2100 => 'Reset code is invalid.',
         2101 => 'Password image is invalid.',
