@@ -68,7 +68,7 @@ class JWTMiddleware implements Middleware{
 
     public function getPayload(){
 
-        return $this->token->getPayload();
+        return $this->token->getPayloadData();
     }
 
 
