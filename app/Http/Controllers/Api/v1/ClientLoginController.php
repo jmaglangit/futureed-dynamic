@@ -14,27 +14,16 @@ class ClientLoginController extends ClientController {
         $input = Input::only('username','password','role');
 
         $error_msg = config('futureed-error.error_messages');
-
-         $flag=0;
         
         if(!$this->email($input,'username')){
             
-            $flag = 1;
+            $this->addMessageBag($this->email($input,'username'));
              
-        }
-        if(!$this->username($input,'username')){
-            
-            $flag = 0;
+        }else{
+
+             $this->addMessageBag($this->username($input,'username'));
         }
         
-        if($flag){
-            
-            $this->addMessageBag($this->email($input,'username'));
-            
-        }else{
-            
-            $this->addMessageBag($this->username($input,'username'));
-        }
 
         $this->addMessageBag($this->checkPassword($input,'password'));
         $this->addMessageBag($this->clientRole($input,'role'));
