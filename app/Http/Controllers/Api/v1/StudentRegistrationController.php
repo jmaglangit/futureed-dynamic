@@ -56,6 +56,25 @@ class StudentRegistrationController extends StudentController {
             return $this->respondWithError($this->getMessageBag());
         }
 
+        //check if username exist
+        $check_username = $this->user->checkUsername($user['username'],config('futureed.student'));
+
+        //check if email exist
+        $check_email = $this->user->checkEmail($user['email'],config('futureed.student'));
+
+
+        if($check_username){
+
+            return $this->respondErrorMessage(2201);
+
+        }
+
+        if($check_email){
+
+            return $this->respondErrorMessage(2200);
+        }
+
+
 
         $user = array_merge($user,[
             'user_type' => config('futureed.student')

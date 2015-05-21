@@ -77,7 +77,6 @@ class StudentController extends ApiController {
         $this->addMessageBag($this->lastName($input,'last_name'));
         $this->addMessageBag($this->gender($input,'gender'));
         $this->addMessageBag($this->editBirthDate($input,'birth_date'));
-        $this->addMessageBag($this->validateNumber($input,'school_code'));
         $this->addMessageBag($this->validateNumber($input,'grade_code'));
         $this->addMessageBag($this->validateString($input,'country'));
         $this->addMessageBag($this->validateString($input,'state'));
@@ -92,6 +91,20 @@ class StudentController extends ApiController {
         if(!empty($msg_bag)){
 
             return $this->respondWithError($this->getMessageBag());
+        }
+
+        //check if username exist
+        $check_username = $this->user->checkUsername($input['username'],config('futureed.student'));
+
+        if( $check_username ){
+
+        	$student_id = $this->student->getStudentId($check_username['user_id']);
+
+        	if( $student_id != $id){
+
+            	return $this->respondErrorMessage(2201);
+            }
+
         }
 
         $this->student->updateStudentDetails($id,$input);
