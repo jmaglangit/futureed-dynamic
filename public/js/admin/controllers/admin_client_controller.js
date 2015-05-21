@@ -1,18 +1,16 @@
 angular.module('futureed.controllers')
 	.controller('AdminClientController', AdminClientController);
 
-AdminClientController.$inject = ['$scope'];
+AdminClientController.$inject = ['$scope', 'adminClientService'];
 
-function AdminClientController($scope) {
+function AdminClientController($scope, adminClientService) {
 	var self = this;
 
 	self.create = {};
+	self.role = {};
 	self.setManageClientActive = setManageClientActive;
+	self.setClientRole = setClientRole;
 	self.createNewClient = createNewClient;
-
-	$scope.$watch(self.create.role, function(asd) {
-		console.log(asd);
-	});
 
 	function setManageClientActive(active) {
 		self.errors = Constants.FALSE;
@@ -38,12 +36,41 @@ function AdminClientController($scope) {
 	}
 
 	function setClientRole() {
-		// self.client.role = 
+		self.role = {};
+
+		if(angular.equals(self.create.client_role, Constants.PRINCIPAL)) {
+			self.role.principal = Constants.TRUE;
+		} else if(angular.equals(self.create.client_role, Constants.PARENT)) {
+			self.role.parent = Constants.TRUE;
+		} else if(angular.equals(self.create.client_role, Constants.TEACHER)) {
+			self.role.teacher = Constants.TRUE;
+		}
 	}
 
 	function createNewClient() {
 		self.errors = Constants.FALSE;
+		self.base_url = $("#base_url_form input[name='base_url']").val();
+		self.create.callback_uri = self.base_url + Constants.URL_REGISTRATION(angular.lowercase(self.create.client_role));
 
-		console.log(self.create);
+		$("input, select").removeClass("required-field");
+		$scope.ui_block();
+		adminClientService.createNewClient(self.create).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+
+					angular.forEach(response.errors, function(value, a) {
+						$("input[name='" + value.field + "'], select[name='" + value.field + "']").addClass("required-field");
+					});
+				} else if(response.data) {
+					console.log(response.data);
+				}
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
 	}
 }

@@ -110,5 +110,12 @@
 					, 'uses' => 'FutureLesson\Admin\DashboardController@announcement'
 				]);
 		});
+
+		Routes::group(['prefix' => 'partials'], function() {
+			Routes::get('/base_url', [
+					'as' => 'admin.partials.base_url'
+					, 'uses' => 'FutureLesson\Admin\LoginController@base_url'
+				]);
+		});
 	});
 ?>
