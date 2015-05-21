@@ -84,7 +84,7 @@ class ClientLoginController extends ClientController {
             return $this->respondErrorMessage(2033);
         }
 
-        
+        $this->user->resetLoginAttempt($return['id']);
         return $this->respondWithData([
                 'id' => $client_detail['id'],
                 'first_name' => $client_detail['first_name'],
