@@ -3,7 +3,7 @@
 Routes::group(['prefix' => '/user'], function() {
 
     //authenticated student access
-    Routes::group(['middleware' => 'api_user'],function(){
+    Routes::group(['middleware' => ['api_user','api_after']],function(){
 
         //avatars
         Routes::post('/avatar', [
