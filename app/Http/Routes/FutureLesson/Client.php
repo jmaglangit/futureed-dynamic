@@ -20,6 +20,11 @@
 			, 'uses' => 'FutureLesson\Client\LoginController@registration'
 		]);
 
+		Routes::post('/update-user-session', [ 
+				'as' => 'client.update_user_session'
+				, 'uses' => 'FutureLesson\Client\ProfileController@update_session'
+			]);
+
 		Routes::get('/logout', [ 
 			'as' => 'client.logout'
 			, 'middleware' => 'client'

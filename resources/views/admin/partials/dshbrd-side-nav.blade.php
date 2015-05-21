@@ -8,9 +8,12 @@
 </div>
 
 <div>
-	<ul class="nav-list">
-		<li>
-			<a href="#" class="nav-link">Client</a>
+	<ul class="nav-list" ng-init="admincon.setActiveAdmin('{!! $active !!}')">
+		<li ng-class="{ 'active' : admincon.active_client}">
+			<a href="#" class="nav-link" ng-click="admincon.setActiveAdmin('client')">Client</a>
+		</li>
+		<li ng-class="{'active' : admincon.active_student}">
+			<a href="#" class="nav-link" ng-click="admincon.setActiveAdmin('student')">Student</a>
 		</li>
 	</ul>
 </div>
@@ -24,6 +27,16 @@
 		</li>
 		<li ng-class="{ 'active' : profile.active_password }">
 			<a href="" ng-click="profile.setClientProfileActive('password')"><span><i class="fa fa-trophy"></i></span>Student Rewards</a>
+		</li>
+	</ul>
+</div>
+<div>
+	<div class="admin-setting">
+		Master Settings
+	</div>
+	<ul class="nav-list">
+		<li ng-class="{'active' : admincon.active_announcement}" class="announce">
+			<a href="#" ng-click="admincon.setActiveAdmin('announcement')"><span><i class="fa fa-bullhorn"></i>Announcement</span></a>
 		</li>
 	</ul>
 </div>

@@ -126,11 +126,11 @@ var services = angular.module('futureed.services', []);
 			});
 		}
 
-		futureedAPI.setPassword = function (id, code, image_id) {
+		futureedAPI.setPassword = function (id, image_id) {
 			return $http({
 				method	: 'POST'
-				, data	: {id : id, email_code : code, password_image_id : image_id}
-				, url	: futureedAPIUrl + 'student/password'
+				, data	: {id : id, password_image_id : image_id}
+				, url	: futureedAPIUrl + 'student/password/new'
 			});
 		}
 

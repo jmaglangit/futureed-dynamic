@@ -8,9 +8,7 @@ use Illuminate\Support\Facades\Session;
 class ProfileController extends Controller {
 
 	public function index() {
-		$id = $this->getId();
-
-		return view('student.profile.index', ['active' => 'index', 'id' => $id]);
+		return view('student.profile.index');
 	}
 
 	public function profile_form() {
@@ -35,6 +33,17 @@ class ProfileController extends Controller {
 
 	public function confirm_email_form() {
 		return view('student.profile.confirm_email_form');
+	}
+
+	public function enter_email_code() {
+		$input = Input::only('email');
+		$student_session = Session::get('student');
+
+		if(isset($student_session)) {
+			return redirect()->route('student.profile.index');
+		}
+
+		return view('student.login.enter-email-code');
 	}
 
 	public function update_session() {

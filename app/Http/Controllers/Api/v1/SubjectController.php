@@ -80,7 +80,7 @@ class SubjectController extends ApiController {
 	 */
 	public function show($id)
 	{
-		//
+		return $this->respondWithData($this->subject->getSubject($id));
 	}
 
 	/**

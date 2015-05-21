@@ -112,7 +112,7 @@ class LoginController extends Controller {
 			return redirect()->route('client.login.forgot_password');
 		}
 
-		return view('client.login.reset-password', ['id' => $id, 'reset_code' => $reset_code]);
+		return view('client.login.reset-password', array('id' => $id, 'reset_code' => $reset_code));
 	}
 
 	/**

@@ -6,16 +6,12 @@ use FutureEd\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 
-
 class ProfileController extends Controller {
 
 	use ProfileTrait;
 
 	public function index(){
-
-		$id = $this->getId();
-
-		return view('client.profile.index', ['active' => 'index', 'id' => $id]);
+		return view('client.profile.index');
 	}
 
 	public function index_form() {
@@ -36,7 +32,13 @@ class ProfileController extends Controller {
 
 	public function enter_email_code() {
 		$input = Input::only('email');
-		return view('client.login.enter-email-code', array('email' => $input['email']));
+		$client_session = Session::get('client');
+
+		if(isset($client_session)) {
+			return redirect()->route('client.profile.index');
+		}
+
+		return view('client.login.enter-email-code');
 	}
 
 	public function getId() {

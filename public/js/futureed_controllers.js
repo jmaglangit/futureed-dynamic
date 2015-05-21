@@ -206,6 +206,7 @@ function FutureedController($scope, apiService) {
   $scope.studentForgotPassword = studentForgotPassword;
   $scope.studentResendCode = studentResendCode;
   $scope.studentValidateCode = studentValidateCode;
+  $scope.studentResetPassword = studentResetPassword;
 
   // Registration
   $scope.showModal = showModal;
@@ -283,7 +284,7 @@ function FutureedController($scope, apiService) {
       if(response.status == Constants.STATUS_OK) {
         if(response.errors) {
           $scope.errorHandler(response.errors);
-          getLoginPassword();
+          $scope.image_pass = shuffle($scope.image_pass);
         } else if(response.data){
           $scope.user = JSON.stringify(response.data);
           $("input[name='user_data']").val(JSON.stringify(response.data));
@@ -319,7 +320,6 @@ function FutureedController($scope, apiService) {
 
   function getUserDetails() {
     var user = $("input[name='userdata']").val();
-    console.log(user);
     /*to jollie mar: erase this after creating client profile. line 386*/
     $scope.teacher = Constants.TRUE;
 
@@ -329,7 +329,7 @@ function FutureedController($scope, apiService) {
         $scope.confirm_email = Constants.TRUE;
       }
 
-      $("input[name='userdata']").val();
+      $("input[name='userdata']").val('');
     }
   }
 
@@ -426,6 +426,34 @@ function FutureedController($scope, apiService) {
     });
   }
 
+  function studentResetPassword() {
+    $scope.errors = Constants.FALSE;
+
+    if($scope.new_password == $scope.image_id) {
+      var id = $("input[name='id']").val();
+      var code = $("input[name='code']").val();
+
+      $scope.ui_block();
+      apiService.resetPassword(id, code, $scope.new_password).success(function(response) {
+        if(response.status == Constants.STATUS_OK) {
+          if(response.errors) {
+            $scope.errorHandler(response.errors);
+          } else if(response.data){
+            $scope.success = Constants.TRUE;
+          } 
+        }
+
+        $scope.ui_unblock();
+      }).error(function(response) {
+        $scope.internalError();
+        $scope.ui_unblock();
+      });
+    } else {
+      $scope.errors = [Constants.MSG_PPW_NOT_MATCH];
+      $("html, body").animate({ scrollTop: 0 }, "slow");
+    }
+  }
+
   function showModal(id) {
     $scope.show_terms = (id == 'terms_modal') ? Constants.TRUE : Constants.FALSE;
     $scope.show_policy = (id == 'policy_modal') ? Constants.TRUE : Constants.FALSE;
@@ -452,7 +480,7 @@ function FutureedController($scope, apiService) {
         return;
       }
 
-      $scope.reg = reg;
+      $scope.reg = (reg) ? reg : {};
       $scope.base_url = $("#base_url_form input[name='base_url']").val();
       $scope.reg.callback_uri = $scope.base_url + Constants.URL_REGISTRATION(angular.lowercase(Constants.STUDENT));
 
@@ -557,11 +585,10 @@ function FutureedController($scope, apiService) {
     $scope.errors = Constants.FALSE;
 
     if($scope.new_password == $scope.image_id) {
-      var code = $("input[name='code']").val();
       var id = $("input[name='id']").val();
 
       $scope.ui_block();
-      apiService.resetPassword(id, code, $scope.new_password).success(function(response) {
+      apiService.setPassword(id, $scope.new_password).success(function(response) {
         if(response.status == Constants.STATUS_OK) {
           if(response.errors) {
             $scope.errorHandler(response.errors);

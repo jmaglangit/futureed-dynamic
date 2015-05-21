@@ -37,7 +37,7 @@
                 <p>Welcome, Seymour</p>
               </li>
               <li>
-                <a href="#">Logout</a>
+                <a href="{!! route('admin.logout') !!}">Logout</a>
               </li>
             </ul>
           </div><!-- /.navbar-collapse -->

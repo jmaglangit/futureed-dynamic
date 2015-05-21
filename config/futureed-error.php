@@ -45,6 +45,7 @@ return [
         2029 => 'Access authentication failure.',
         2030 => 'Access authorization is required.',
         2031 => 'Access authorization is invalid.',
+        2032 => 'Unauthorized access.',
 
         2100 => 'Reset code is invalid.',
         2101 => 'Password image is invalid.',

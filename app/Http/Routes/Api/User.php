@@ -2,7 +2,24 @@
 
 Routes::group(['prefix' => '/user'], function() {
 
-//users
+    //authenticated student access
+    Routes::group(['middleware' => 'api_user'],function(){
+
+        //avatars
+        Routes::post('/avatar', [
+            'uses' => 'Api\v1\AvatarController@selectAvatars',
+            'as' => 'api.v1.user.avatar',
+            'permission' => ['admin','client','student'],
+            'role' => ['principal','teacher','parent']
+        ]);
+
+
+
+
+        Routes::post('/avatar/new', 'Api\v1\AvatarController@saveUserAvatar');
+    });
+
+    //users
     Routes::get('/', 'Api\v1\UserController@index');
     Routes::post('/password/reset', 'Api\v1\UserPasswordController@passwordReset');
     Routes::post('/password/forgot', 'Api\v1\UserPasswordController@passwordForgot');
@@ -14,9 +31,7 @@ Routes::group(['prefix' => '/user'], function() {
     Routes::post('/confirmation/code', 'Api\v1\UserController@resendRegisterEmailCode');
 
 
-//avatars
-    Routes::post('/avatar', 'Api\v1\AvatarController@selectAvatars');
-    Routes::post('/avatar/new', 'Api\v1\AvatarController@saveUserAvatar');
+
 
 
 });

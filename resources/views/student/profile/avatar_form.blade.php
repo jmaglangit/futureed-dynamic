@@ -9,7 +9,8 @@
 			    <div class="form-select-password">
 			      <div class="form_content">
 			        <ul class="avatar_list list-unstyled list-inline" ng-init="profile.getAvatarImages()">
-			          <li class="item avtrcon" ng-repeat="avatar in profile.avatars" ng-click="profile.highlightAvatar($event)">
+			          <li class="item avtrcon" ng-class="{selected : avatar.id == profile.prof.avatar_id }" 
+			          	ng-repeat="avatar in profile.avatars" ng-click="profile.highlightAvatar($event)">
 			             <img ng-src="{! avatar.url !}" alt="{! avatar.name !}">
 			             <input type="hidden" id="avatar_id" name="avatar_id" value="{! avatar.id !}">
 			          </li>

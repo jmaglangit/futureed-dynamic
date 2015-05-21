@@ -12,15 +12,16 @@
                         , 'placeholder' => 'Username' 
                         , 'ng-disabled' => '!profile.active_edit' 
                         , 'ng-model' => 'profile.prof.username'
-                        , 'ng-model' => 'profile.prof.username'
                         , 'ng-model-options' => "{debounce : {'default' : 1000} }"
-                        , 'ng-change' => "checkAvailability(profile.prof.username, 'Student')")
+                        , 'ng-change' => 'profile.checkAvailability()'
+                    )
                 ) !!}
     		</div>
     		<div style="margin-top: 7px;"> 
-                <i ng-if="u_loading" class="fa fa-spinner fa-spin"></i>
-                <span ng-if="u_success" class="alert alert-success">{! u_success !}</span>
-                <span ng-if="u_error" class="alert alert-error">{! u_error !}</span>
+                <i ng-if="profile.validation.u_loading" class="fa fa-spinner fa-spin"></i>
+                <i ng-if="profile.validation.u_success" class="fa fa-check success-color"></i>
+                <span ng-if="profile.validation.u_error" class="error-msg-con">{! profile.validation.u_error !}</span>
+
             </div>		
     	</div>
     	<div class="form-group">

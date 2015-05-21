@@ -13,16 +13,7 @@ class AvatarController extends ApiController {
     
     public function selectAvatars(){
 
-        //Check token authentication if valid.
-        $access_token = \Request::header('authorization');
 
-        $this->validateToken($access_token);
-
-        if($this->getMessageBag()){
-
-            return $this->respondWithError($this->getMessageBag());
-        }
-        
         $input = Input::only('gender');
         
         $this->addMessageBag($this->gender($input,'gender'));
@@ -34,20 +25,11 @@ class AvatarController extends ApiController {
 
         $avatar= $this->avatar->getAvatars($input['gender']);
 
-        return $this->setHeader($this->getToken())->respondWithData($avatar);
+        return $this->respondWithData($avatar);
     }
     
     public function saveUserAvatar(){
 
-        //Check token authentication if valid.
-        $access_token = \Request::header('authorization');
-
-        $this->validateToken($access_token);
-
-        if($this->getMessageBag()){
-
-            return $this->respondWithError($this->getMessageBag());
-        }
 
         
         $input = Input::only('avatar_id','id');
@@ -81,15 +63,15 @@ class AvatarController extends ApiController {
                                     'url' =>$avatar_url
                                    ];
                         
-                        return $this->setHeader($this->getToken())->respondWithData($reponse);
+                        return $this->respondWithData($reponse);
                     }
                 }else{
                     
-                    return $this->setHeader($this->getToken())->respondErrorMessage(2009);
+                    return $this->respondErrorMessage(2009);
                 }
             }else{
                 
-                return $this->setHeader($this->getToken())->respondErrorMessage(2001);
+                return $this->respondErrorMessage(2001);
             }
     
          

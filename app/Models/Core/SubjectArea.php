@@ -28,5 +28,11 @@ class SubjectArea extends Model {
 		return $query->whereSubjectId($subject_id);
 				
 	}
+	
+	public function scopeName($query, $name) {
+		
+		return $query->where('name', 'like', '%'.$name.'%');
+				
+	}
 
 }
