@@ -1,7 +1,6 @@
 <?php namespace FutureEd\Http\Controllers\Api\Traits;
 
 use Illuminate\Support\Facades\Validator;
-use FutureEd\Services\PasswordServices;
 
 trait ApiValidatorTrait {
 
@@ -9,11 +8,6 @@ trait ApiValidatorTrait {
     use MessageBagTrait;
 
 
-    public function __construct(PasswordServices $password){
-
-        $this->password = $password;
-
-    }
 
     //Check parameters of the fields.
     public function parameterCheck($input, $paramName){
