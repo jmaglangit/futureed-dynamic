@@ -13,35 +13,34 @@ class AfterMiddleware extends JWTMiddleware{
 	 */
 	public function handle($request, Closure $next)
 	{
-
-//        $authorization  = $request->header('authorization');
-//
-//        $this->validateToken($authorization);
-//
-//        if($this->getMessageBag()){
-//
-//            return $this->respondWithError($this->getMessageBag());
-//        }
-
-//        dd($this->getPayload());
-
-
-
-
         $response =  $next($request);
-//        dd($response);
-//        $collection = $response->headers;
-//        $collection->set('authodrization','dasfdasf');
-////        dd($collection);
-//        $response->headers = $collection;
+//        return $response;
 
-//        dd($response);
-//        if($response->headers->get('content-type') == 'application/json')
-//        {
-//            $collection = $response->original;
-//            $collection->put('timestamp',Carbon::now()->timestamp);
-//            $response->setContent($collection);
-//        }
+        $authorization  = $request->header('authorization');
+
+
+        //if authorization exist then extract id, type, and role
+        if($authorization){
+            $this->token->parseToken($authorization);
+
+            $payload_data = $this->getPayload();
+
+            $token = $this->getToken([
+                'id' => $payload_data['id'],
+                'type' => $payload_data['type'],
+                'role' => $payload_data['role'],
+            ]);
+            //parse payload data ang extract id, type, and role and insert to getToken()
+
+
+            $collection = $response->headers;
+
+            $collection->set('authorization',$token);
+
+            $response->headers = $collection;
+
+        }
+
 
         return $response;
 	}
