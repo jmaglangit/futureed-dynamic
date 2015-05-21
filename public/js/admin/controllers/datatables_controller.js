@@ -3,7 +3,7 @@ angular.module('futureed.controllers')
 
 function DatatableController($scope, $resource) {
     var vm = this;
-    $resource('../js/admin/controllers/data.json').query().$promise.then(function(persons) {
+    $resource('/js/admin/controllers/data.json').query().$promise.then(function(persons) {
         vm.persons = persons;
     });
 }

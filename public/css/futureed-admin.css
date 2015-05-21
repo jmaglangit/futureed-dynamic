@@ -110,6 +110,16 @@ div > .nav-list > li > a{
 .row > .announce-label{
 	margin-top: 20px;
 }
+
+.manage-container{
+	border-top: 1px solid #0F799D;
+	border-bottom: 1px solid #0F799D;
+}
+
+.side-nav-li{
+	border-bottom: 1px solid #0F79A3;
+}
+
 /*Futureed Custom DataTable Design*/
 
 .dataTables_wrapper > .row > .col-sm-6 > .dataTables_filter{
