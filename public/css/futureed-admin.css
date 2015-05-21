@@ -16,7 +16,7 @@ body.admin{
 	padding:20px;
 	width:120px;
 }
-body > .container > .col-md-4{
+body > .container > .col-md-4, .col-md-6{
 	margin-top: 80px;
 }
 
@@ -78,8 +78,38 @@ div > .nav-list > li > a{
 	margin: auto;
 	display: flex;
 }
+.admin-setting{
+	font-size: 1.1em;
+  	color:	 white;
+  	padding: 15px 0 15px 30px;
+}
+.announce{
+	font-size: 13px;
+}
+.subtitle-content{
+	font-size: 1.4em;
+  	color: #03658A;
+  	border-bottom: 1px solid #dcdcdc;
+}
+.legend-announce{
+	border:none !important;
+}
+.col-xs-10{
+	margin-top: 10px;
+}
+.announce-label{
+	color: #857a0d;
+	text-transform: uppercase;
+	font-weight: 500; 
+}
 
+.col-xs-10 > .btn-container{
+	margin-top: 30px;
+}
 
+.row > .announce-label{
+	margin-top: 20px;
+}
 /*Futureed Custom DataTable Design*/
 
 .dataTables_wrapper > .row > .col-sm-6 > .dataTables_filter{

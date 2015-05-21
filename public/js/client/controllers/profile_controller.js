@@ -12,6 +12,7 @@ function ProfileController($scope, apiService, clientProfileApiService) {
 
 	self.setClientProfileActive = setClientProfileActive;
 	self.getClientDetails = getClientDetails;
+	self.checkAvailability = checkAvailability;
 	self.saveClientProfile = saveClientProfile;
 
 	self.validateCurrentClientEmail = validateCurrentClientEmail;
@@ -98,10 +99,40 @@ function ProfileController($scope, apiService, clientProfileApiService) {
 		});
 	}
 
+	function checkAvailability() {
+	    self.validation.u_loading = Constants.TRUE;
+	    self.validation.u_success = Constants.FALSE;
+	    self.validation.u_error = Constants.FALSE;
+
+	    apiService.validateUsername(self.prof.username, self.user_type).success(function(response) {
+	      self.validation.u_loading = Constants.FALSE;
+
+	      if(angular.equals(response.status, Constants.STATUS_OK)) {
+	        if(response.errors) {
+	          self.validation.u_error = response.errors[0].message;
+
+	          if(angular.equals(self.validation.u_error, Constants.MSG_U_NOTEXIST)) {
+	          	self.validation.u_error = Constants.FALSE;
+	            self.validation.u_success = Constants.TRUE;
+	          }
+	        } else if(response.data) {
+	          if(response.data.id == self.prof.id) {
+	            self.validation.u_success = Constants.TRUE ;
+	          } else {
+	            self.validation.u_error = Constants.MSG_U_EXIST;  
+	          }
+	        }
+	      }
+	    }).error(function(response) {
+	      self.validation.u_loading = Constants.FALSE;
+	      self.errors = $scope.internalError();
+	    });
+	}
+
 	function saveClientProfile() {
 		self.errors = Constants.FALSE;
 
-		if($scope.u_error) {
+		if(self.validation.u_error) {
 			$("html, body").animate({ scrollTop: 0 }, "slow");
 		} else {
 			$scope.$parent.u_error = Constants.FALSE;

@@ -9,6 +9,6 @@ use Illuminate\Http\Request;
 
 class ManageController extends Controller{
 	public function addClient(){
-		return view('admin.manage.client.add-client');
+		return view('admin.dashboard.client.add-client');
 	}
 }
