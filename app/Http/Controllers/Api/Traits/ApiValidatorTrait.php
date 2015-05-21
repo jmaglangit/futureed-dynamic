@@ -7,8 +7,6 @@ trait ApiValidatorTrait {
     use ErrorMessageTrait;
     use MessageBagTrait;
 
-
-
     //Check parameters of the fields.
     public function parameterCheck($input, $paramName){
         $error_msg = config('futureed-error.error_messages');

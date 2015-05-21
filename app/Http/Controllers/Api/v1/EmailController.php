@@ -197,7 +197,7 @@ class EmailController extends ApiController {
                 $code_expire = $this->user->checkCodeExpiry($user_details['email_code_expiry']);
 
 
-                if($user_details['email_code'] != $input['confirmation_code']){
+                if($user_details['email_code'] !== $input['confirmation_code']){
 
                     return $this->respondErrorMessage(2006);
 
