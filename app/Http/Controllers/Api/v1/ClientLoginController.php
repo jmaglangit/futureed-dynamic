@@ -16,17 +16,8 @@ class ClientLoginController extends ClientController {
         $error_msg = config('futureed-error.error_messages');
 
         $this->addMessageBag($this->username($input,'username'));
-        $check_password = $this->password->checkPassword($input['password']);
+        $this->addMessageBag($this->checkPassword($input,'password'));
         $this->addMessageBag($this->clientRole($input,'role'));
-
-        if(!$check_password){
-
-                $this->addMessageBag($this->setErrorCode(2234)
-                                ->setField('password')
-                                ->setMessage($error_msg[2112])
-                                ->errorMessage());
-
-        }
 
         $msg_bag = $this->getMessageBag();
 
