@@ -38,14 +38,14 @@ class StudentController extends ApiController {
 	public function show($id)
 	{
         //Check token authentication if valid.
-        // $access_token = \Request::header('authorization');
+        $access_token = \Request::header('authorization');
 
-        // $this->validateToken($access_token);
+        $this->validateToken($access_token);
 
-        // if($this->getMessageBag()){
+        if($this->getMessageBag()){
 
-        //     return $this->respondWithError($this->getMessageBag());
-        // }
+            return $this->respondWithError($this->getMessageBag());
+        }
 
 		$error = config('futureed-error.error_messages');
 
