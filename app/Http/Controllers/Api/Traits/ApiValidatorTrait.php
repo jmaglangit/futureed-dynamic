@@ -1,11 +1,19 @@
 <?php namespace FutureEd\Http\Controllers\Api\Traits;
 
 use Illuminate\Support\Facades\Validator;
+use FutureEd\Services\PasswordServices;
 
 trait ApiValidatorTrait {
 
     use ErrorMessageTrait;
     use MessageBagTrait;
+
+
+    public function __construct(PasswordServices $password){
+
+        $this->password = $password;
+
+    }
 
     //Check parameters of the fields.
     public function parameterCheck($input, $paramName){
@@ -357,12 +365,11 @@ trait ApiValidatorTrait {
                     "$field_name" => strtolower($input["$field_name"]),
                 ],
                 [
-                    "$field_name" => 'required|min:8|max:32|regex:/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%^(){}<>*#?&])[A-Za-z\d$@$!%^(){}<>*#?&]{8,}$/'
-                ],
-                [
-                    'regex' => $error_msg[2112]
+                    "$field_name" => 'required|min:8|max:32'
                 ]
             );
+
+            $check_password = $this->password->checkPassword($input[$field_name]);
 
             if($validator->fails()){
 
@@ -371,6 +378,14 @@ trait ApiValidatorTrait {
                 return $this->setErrorCode(1016)
                     ->setField($field_name)
                     ->setMessage($validator_msg["$field_name"][0])
+                    ->errorMessage();
+            }
+
+            if(!$check_password){
+
+                return $this->setErrorCode(1016)
+                    ->setField($field_name)
+                    ->setMessage($error_msg[2112])
                     ->errorMessage();
             }
     }
