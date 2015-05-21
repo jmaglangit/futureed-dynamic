@@ -28,6 +28,9 @@ return [
     'image_avatar_folder' => 'images/avatar',
     'image_avatar_count' => 5,
 
+    //thumbnial folder
+    'thumbnail' =>'images/thumbnail',
+
     //mail forgot password
     'subject_forgot'   =>  'Forgot Password',
     'subject_forgot_resend' => 'Resending: Forgot Password',

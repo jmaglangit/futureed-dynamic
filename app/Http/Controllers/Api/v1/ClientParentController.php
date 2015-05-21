@@ -28,6 +28,21 @@ class ClientParentController extends ApiController {
 
         $students = $this->student->getStudentByParent($id);
 
+        foreach ($students as $key => $value) {
+
+            $avatar[] = $this->avatar->getAvatar($value['avatar_id']);
+
+        }
+
+        foreach ($avatar as $key => $value) {
+
+           $url = $this->avatar->getAvatarThumbnailUrl($value['avatar_image']);
+
+           $students[$key]['url'] = $url;
+
+
+        }      
+
         return $this->respondWithData($students);
     }
 
