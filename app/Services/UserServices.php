@@ -110,7 +110,17 @@ class UserServices {
 
             if(!is_null($return)){
 
-                $is_disabled = $this->checkUserDisabled($return);
+                //create condition if user_type is client
+                if($user_type == config('futureed.client')){
+
+                    $is_disabled = $this->checkClientDisabled($return);
+                } else {
+
+                    //default user student message
+                    $is_disabled = $this->checkUserDisabled($return);
+                }
+
+
                 if(!$is_disabled){
 
                     return [
@@ -135,7 +145,17 @@ class UserServices {
 
 
            if(!is_null($return) ){
-               $is_disabled = $this->checkUserDisabled($return);
+
+               //create condition if user_type is client
+               if($user_type == config('futureed.client')){
+
+                   $is_disabled = $this->checkClientDisabled($return);
+               } else {
+
+                   //default user student message
+                   $is_disabled = $this->checkUserDisabled($return);
+               }
+
                if(!$is_disabled){
 
                    return [
@@ -233,14 +253,41 @@ class UserServices {
             'user_id' => $return
         ];
     }
-    //check user if enable to login.
-    public function     checkUserDisabled($id){
+
+    /**
+     * Check user student if disabled.
+     *
+     * @param $id
+     * @return bool|int
+     */
+    public function checkUserDisabled($id){
         if($this->users->accountActivated($id) == 0 ){
             //check if activated
             return 2230;
         } elseif($this->users->accountLocked($id) == 1){
             //check if locked
             return 2014;
+        } elseif($this->users->accountDeleted($id) == 1 ){
+            //check if delete
+            return 2020;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * check user client if disabled. Specified by messages
+     * @param $id
+     * @return bool|int
+     */
+    public function checkClientDisabled($id){
+
+        if($this->users->accountActivated($id) == 0 ){
+            //check if activated
+            return 2230;
+        } elseif($this->users->accountLocked($id) == 1){
+            //check if locked
+            return 2034;
         } elseif($this->users->accountDeleted($id) == 1 ){
             //check if delete
             return 2020;
