@@ -45,6 +45,7 @@ class AvatarServices {
     }
     
     public function getAvatar($avatar_id){
+
         return $this->avatar->getAvatar($avatar_id);
     }
     
@@ -54,6 +55,17 @@ class AvatarServices {
         
         
         $password_image_url = url() . '/' . $image_folders . '/'
+            . $avatar_image;
+        
+        return $password_image_url;            
+    }
+
+    public function getAvatarThumbnailUrl($avatar_image){
+        
+        $thumbnail = \Config::get('futureed.thumbnail');
+        
+        
+        $password_image_url = url() . '/' . $thumbnail . '/'
             . $avatar_image;
         
         return $password_image_url;            
