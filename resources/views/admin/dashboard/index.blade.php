@@ -13,6 +13,7 @@
 			<div class="client-content" template-directive template-url="{!! route('admin.dashboard.client_list') !!}"></div>
 
 			<div class="client-content" template-directive template-url="{!! route('admin.dashboard.add_client') !!}"></div>
+			
 			<div class="client-content" template-directive template-url="{!! route('admin.dashboard.announcement') !!}"></div>
 		</div>		
 	</div>

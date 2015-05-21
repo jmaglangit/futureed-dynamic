@@ -9,25 +9,32 @@
 
 <div class="nav-menu">
 
-    <ul id="menu-content" class="nav-list" ng-init="admincon.setActiveAdmin('{!! $active !!}')">
-        <li ng-class="{ 'active' : admincon.active_client}" class="side-nav-li">
-			<a href="#" class="nav-link" ng-click="admincon.setActiveAdmin('client')">Client</a>
+    <ul id="menu-content" class="nav-list" ng-init="client.setManageClientActive()">
+        <li id="client_nav_head" data-target="client" ng-class="{ 'active' : admincon.active_client}" class="side-nav-li">
+			<a href="" class="nav-link">Client</a>
 		</li>
+		<ul class="sub-menu collapse" id="client">
+        	<li ng-class="{ 'active' : client.active_index }">
+				<a href="" ng-click="client.setManageClientActive('add_client')"><span><i class="fa fa-plus-square"></i></span>Add Client</a>
+			</li>
+			<li ng-class="{ 'active' : client.active_edit }">
+				<a href="" ng-click="client.setManageClientActive()"><span><i class="fa fa-list-alt"></i></span>View Client List</a>
+			</li>
+        </ul>
         <li  data-toggle="collapse" data-target="#students" class="collapsed side-nav-li" ng-class="{ 'active' : admincon.active_student}">
-          <a class="nav-link" ng-click="admincon.setActiveAdmin('student')" href="#">
+          <a class="nav-link" ng-click="admincon.setActiveAdmin('student')" href="">
                     Student
-                    <span class="caret"></span>
-        </a>
+        	</a>
         </li>
         <ul class="sub-menu collapse" id="students">
-        	<li ng-class="{ 'active' : profile.active_index }" class="side-nav-li">
-				<a href="" ng-click="profile.setClientProfileActive('index')"><span><i class="fa fa-plus-square"></i></span>Add Student</a>
+        	<li>
+				<a href="">
+					<span><i class="fa fa-plus-square"></i></span>
+					Add Student
+				</a>
 			</li>
-			<li ng-class="{ 'active' : profile.active_edit }" class="side-nav-li">
-				<a href="" ng-click="profile.setClientProfileActive('edit')"><span><i class="fa fa-list-alt"></i></span>View Student List</a>
-			</li>
-			<li ng-class="{ 'active' : profile.active_password }" class="side-nav-li">
-				<a href="" ng-click="profile.setClientProfileActive('password')"><span><i class="fa fa-trophy"></i></span>Student Rewards</a>
+			<li>
+				<a href=""><span><i class="fa fa-list-alt"></i></span>View Student List</a>
 			</li>
         </ul>
         <li data-toggle="collapse" data-target="#price" class="collapsed side-nav-li" ng-class="{'active' : admincon.active_price}">

@@ -38,6 +38,58 @@
 				]);
 		});
 
+		Routes::group(['prefix' => '/manage'] , function() {
+			Routes::get('/', [
+				'as' => 'admin.manage.index'
+				, 'middleware' => 'admin'
+				, 'uses' => 'FutureLesson\Admin\DashboardController@index'
+			]);
+
+			Routes::group(['prefix' => '/client'], function() {
+				$client_controller = 'FutureLesson\Admin\ClientController';
+
+				Routes::get('/', [
+					  'as' => 'admin.manage.client.index'
+					, 'middleware' => 'admin'
+					, 'uses' => $client_controller . '@index'
+				]);
+
+				Routes::group(['prefix' => 'partials'], function() {
+					$client_controller = 'FutureLesson\Admin\ClientController';
+
+					Routes::get('/side_nav', [
+						  'as' => 'admin.manage.client.partials.side_nav'
+						, 'middleware' => 'admin'
+						, 'uses' => $client_controller . '@side_nav'
+					]);
+
+					Routes::get('/list_client_form', [
+						  'as' => 'admin.manage.client.partials.list_client_form'
+						, 'middleware' => 'admin'
+						, 'uses' => $client_controller . '@list_client_form'
+					]);
+
+					Routes::get('/add_client_form', [
+						  'as' => 'admin.manage.client.partials.add_client_form'
+						, 'middleware' => 'admin'
+						, 'uses' => $client_controller . '@add_client_form'
+					]);
+
+					Routes::get('/edit_email_form', [
+						  'as' => 'admin.manage.client.partials.edit_email_form'
+						, 'middleware' => 'admin'
+						, 'uses' => $client_controller . '@edit_email_form'
+					]);
+
+					Routes::get('/confirm_email_form', [
+						  'as' => 'admin.manage.client.partials.confirm_email_form'
+						, 'middleware' => 'admin'
+						, 'uses' => $client_controller . '@confirm_email_form'
+					]);
+				});
+			});
+		});
+
 		Routes::group(['prefix' => '/dashboard'], function()
 		{
 			Routes::get('/', [
