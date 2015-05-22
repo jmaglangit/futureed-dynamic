@@ -7,6 +7,7 @@ var Constants = {
 
 	, METHOD_POST	: 'POST'
 	, METHOD_GET	: 'GET'
+	, METHOD_PUT	: 'PUT'
 
 	, STATUS_OK		: 200
 
