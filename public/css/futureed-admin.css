@@ -120,6 +120,11 @@ div > .nav-list > li > a{
 	border-bottom: 1px solid #0F79A3;
 }
 
+.add-price , .price-form, .price-list{
+	margin-top: 30px;
+}
+
+
 /*Futureed Custom DataTable Design*/
 
 .dataTables_wrapper > .row > .col-sm-6 > .dataTables_filter{

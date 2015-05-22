@@ -95,40 +95,40 @@
 			Client List
 		</div>
 	</div>
-
-	<div class="col-xs-12 table-container">
-		<div class="list-container" ng-controller="DatatableController as datatable" ng-cloak>
-			<table id="client-list" datatable="ng"class="table table-striped table-hover dt-responsive" style="width:100%">
-				<thead>
-	        <tr>
-	            <th>Name</th>
-	            <th>Email</th>
-	            <th>Role</th>
-	            <th>Action</th>
-	        </tr>
+	 
+	<div class="col-xs-12 table-container" ng-init="client.getClientList()">
+		<div class="list-container" ng-cloak>
+			<table id="client-list" datatable="ng" class="table table-striped table-hover dt-responsive">
+			<thead>
+		        <tr>
+		            <th>Name</th>
+		            <th>Email</th>
+		            <th>Role</th>
+		            <th>Action</th>
+		        </tr>
 	        </thead>
 	        <tbody>
-	        <tr ng-repeat="person in ::datatable.persons" data-id>
-	            <td>{! person.id !}</td>
-	            <td>{! person.firstName !}</td>
-	            <td>{! person.lastName !}</td>
-	            <td>
-	            	<div class="row">
-	            		<div class="col-xs-3">
-	            			<a href="#" id="{! person.id !}"><span><i class="fa fa-eye"></i></span></a>
-	            		</div>
-	            		<div class="col-xs-3">
-	            			<span><i class="fa fa-pencil"></i></span>
-	            		</div>
-	            		<div class="col-xs-3">
-	            			<span><i class="fa fa-ban"></i></span>
-	            		</div>
-	            		<div class="col-xs-3">
-	            			<span><i class="fa fa-trash	"></i></span>
-	            		</div>	
-	            	</div>
-	            </td>
-	        </tr>
+		        <tr ng-repeat="a in client.clients">
+		            <td>{! a.first_name !} {! a.last_name !}</td>
+		            <td>{! a.user.email !}</td>
+		            <td>{! a.client_role !}</td>
+		            <td>
+		            	<div class="row">
+		            		<div class="col-xs-3">
+		            			<a href="" ng-click="client.setManageClientActive('view_client',a.id)"><span><i class="fa fa-eye"></i></span></a>
+		            		</div>
+		            		<div class="col-xs-3">
+		            			<a href="" ng-click="client.setManageClientActive('edit_client', a.id)"><span><i class="fa fa-pencil"></i></span></a>
+		            		</div>
+		            		<div class="col-xs-3">
+		            			<span><i class="fa fa-ban"></i></span>
+		            		</div>
+		            		<div class="col-xs-3">
+		            			<span><i class="fa fa-trash	"></i></span>
+		            		</div>	
+		            	</div>
+		            </td>
+		        </tr>
 	        </tbody>
 
 			</table>

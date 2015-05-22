@@ -4,7 +4,6 @@ use FutureEd\Http\Controllers\Api\Traits\ClientValidatorTrait;
 use FutureEd\Http\Controllers\Api\v1\ClientController;
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
-use FutureEd\Services\PasswordServices;
 use FutureEd\Services\UserServices;
 use FutureEd\Services\AdminServices;
 use FutureEd\Services\PasswordServices;
@@ -15,11 +14,11 @@ use Illuminate\Support\Facades\Input;
 
 class AdminLoginController extends ApiController {
 
-    public function __construct(UserServices $user,AdminServices $admin, PasswordServices $password){
+    public function __construct(UserServices $user,AdminServices $admin,PasswordServices $password){
 
         $this->admin = $admin;
         $this->user  = $user;   
-        $this->password = $password;
+        $this->password  = $password;
     }
 
 	public function login(){

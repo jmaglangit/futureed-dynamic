@@ -24,7 +24,6 @@
 @overwrite
 	
 @section('scripts')
-	{!! Html::script('/js/admin/controllers/datatables_controller.js')!!}
 	{!! Html::script('/js/admin/controllers/dashboard_controller.js')!!}
 	{!! Html::script('//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js')!!}
 	{!! Html::script('/js/admin/controllers/announcement_controller.js')!!}

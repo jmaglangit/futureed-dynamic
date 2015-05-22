@@ -1,7 +1,7 @@
-<div ng-if="client.active_add_client">
+<div ng-if="client.active_view_client || client.active_edit_client">
 	<div class="content-title">
 		<div class="title-main-content">
-			<span>Add New Client</span>
+			<span>View Client Details</span>
 		</div>
 	</div>
 
@@ -26,7 +26,8 @@
 	        			{!! Form::text('email',''
 	        				, array(
 	        					'placeHolder' => 'Email'
-	        					, 'ng-model' => 'client.create.email'
+	        					, 'ng-model' => 'client.details.email'
+	        					, 'ng-disabled' => 'client.active_view_client'
 	        					, 'class' => 'form-control'
 	        				)
 	        			) !!}
@@ -38,7 +39,8 @@
 	        			{!! Form::text('username',''
 	        				, array(
 	        					'placeHolder' => 'Username'
-	        					, 'ng-model' => 'client.create.username'
+	        					, 'ng-model' => 'client.details.username'
+	        					, 'ng-disabled' => 'client.active_view_client'
 	        					, 'class' => 'form-control'
 	        				)
 	        			) !!}
@@ -46,7 +48,7 @@
 	        	</div>
 	        	<div class="form-group">
 	        		<label class="col-xs-2 control-label" id="status">Status <span class="required">*</span></label>
-	        		<div class="col-xs-5">
+	        		<div class="col-xs-5" ng-if="client.active_edit_client">
 	        			<div class="col-xs-6 checkbox">	                				
 	        				<label>
 	        					{!! Form::radio('status'
@@ -54,7 +56,7 @@
 	        						, false
 	        						, array(
 	        							'class' => 'field'
-	        							, 'ng-model' => 'client.create.status'
+	        							, 'ng-model' => 'client.details.status'
 	        						) 
 	        					) !!}
 	        				<span class="lbl padding-8">Enabled</span>
@@ -67,13 +69,15 @@
 	        						, false
 	        						, array(
 	        							'class' => 'field'
-	        							, 'ng-model' => 'client.create.status'
+	        							, 'ng-model' => 'client.details.status'
 	        						)
 	        					) !!}
 	        				<span class="lbl padding-8">Disabled</span>
 	        				</label>
 	        			</div>
 	        		</div>
+	        		<label class="col-xs-1 control-label" ng-if="client.active_view_client">{! client.details.status !}</label>
+	        				
 	        	</div>
 	        </fieldset>
 
@@ -87,7 +91,8 @@
 	        			{!! Form::text('first_name',''
 	        				, array(
 	        					'placeHolder' => 'Firstname'
-	        					, 'ng-model' => 'client.create.first_name'
+	        					, 'ng-model' => 'client.details.first_name'
+	        					, 'ng-disabled' => 'client.active_view_client'
 	        					, 'class' => 'form-control'
 	        				)
 	        			) !!}
@@ -99,7 +104,8 @@
 	        			{!! Form::text('last_name',''
 	        				, array(
 	        					'placeHolder' => 'Lastname'
-	        					, 'ng-model' => 'client.create.last_name'
+	        					, 'ng-model' => 'client.details.last_name'
+	        					, 'ng-disabled' => 'client.active_view_client'
 	        					, 'class' => 'form-control'
 	        				)
 	        			) !!}
@@ -117,9 +123,10 @@
 	            			  ]
 	            			, '' 
 	            			, [	  
-		        				'class' => 'form-control',
-		        				'ng-model' => 'client.create.client_role',
-		        				'ng-change'=> 'client.setClientRole()'
+		        				'class' => 'form-control'
+		        				, 'ng-model' => 'client.details.client_role'
+		        				, 'ng-disabled' => 'client.active_view_client'
+		        				, 'ng-change'=> 'client.setClientRole()'
 		        			  ]	
 	        			) !!}
 	        		</div>
@@ -135,7 +142,8 @@
 	        			{!! Form::text('school_name',''
 	        				, array(
 	        					'placeHolder' => 'School Name'
-	        					, 'ng-model' => 'client.create.school_name'
+	        					, 'ng-disabled' => 'client.active_view_client'
+	        					, 'ng-model' => 'client.details.school_name'
 	        					, 'ng-change' => 'client.searchSchool()'
                         		, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
 	        					, 'class' => 'form-control'
@@ -154,7 +162,8 @@
 	        			{!! Form::text('school_name',''
 	        				, array(
 	        					'placeHolder' => 'School Name'
-	        					, 'ng-model' => 'client.create.school_name'
+	        					, 'ng-model' => 'client.details.school_name'
+	        					, 'ng-disabled' => 'client.active_view_client'
 	        					, 'class' => 'form-control'
 	        				)
 	        			) !!}
@@ -166,7 +175,8 @@
 	        			{!! Form::text('school_address',''
 	        				, array(
 	        					'placeHolder' => 'School Address'
-	        					, 'ng-model' => 'client.create.school_address'
+	        					, 'ng-model' => 'client.details.school_address'
+	        					, 'ng-disabled' => 'client.active_view_client'
 	        					, 'class' => 'form-control'
 	        				)
 	        			) !!}
@@ -178,7 +188,8 @@
 	        			{!! Form::text('school_city',''
 	        				, array(
 	        					'placeHolder' => 'School City'
-	        					, 'ng-model' => 'client.create.school_city'
+	        					, 'ng-model' => 'client.details.school_city'
+	        					, 'ng-disabled' => 'client.active_view_client'
 	        					, 'class' => 'form-control'
 	        				)
 	        			) !!}
@@ -188,7 +199,8 @@
 	        			{!! Form::text('school_state',''
 	        				, array(
 	        					'placeHolder' => 'School State'
-	        					, 'ng-model' => 'client.create.school_state'
+	        					, 'ng-model' => 'client.details.school_state'
+	        					, 'ng-disabled' => 'client.active_view_client'
 	        					, 'class' => 'form-control'
 	        				)
 	        			) !!}
@@ -200,14 +212,15 @@
 	        			{!! Form::text('school_zip',''
 	        				, array(
 	        					'placeHolder' => 'Postal Code'
-	        					, 'ng-model' => 'client.create.school_zip'
+	        					, 'ng-model' => 'client.details.school_zip'
+	        					, 'ng-disabled' => 'client.active_view_client'
 	        					, 'class' => 'form-control'
 	        				)
 	        			) !!}
 	        		</div>
 	        		<label class="col-md-2 control-label">Country <span class="required">*</span></label>
 				      <div class="col-md-4" ng-init="getCountries()">
-				        <select  name="school_country" class="form-control" ng-model="client.create.school_country">
+				        <select  name="school_country" class="form-control" ng-disabled="client.active_view_client" ng-model="client.details.school_country">
 				          <option value="">-- Select Country --</option>
 				          <option ng-repeat="country in countries" value="{! country.id !}">{! country.name!}</option>
 				        </select>
@@ -224,7 +237,8 @@
 	        			{!! Form::text('contact_name',''
 	        				, array(
 	        					'placeHolder' => 'Contact Person'
-	        					, 'ng-model' => 'client.create.contact_name'
+	        					, 'ng-model' => 'client.details.contact_name'
+	        					, 'ng-disabled' => 'client.active_view_client'
 	        					, 'class' => 'form-control'
 	        				)
 	        			) !!}
@@ -236,14 +250,15 @@
 	        			{!! Form::text('contact_number',''
 	        				, array(
 	        					'placeHolder' => 'Contact Number'
-	        					, 'ng-model' => 'client.create.contact_number'
+	        					, 'ng-model' => 'client.details.contact_number'
+	        					, 'ng-disabled' => 'client.active_view_client'
 	        					, 'class' => 'form-control'
 	        				)
 	        			) !!}
 	        		</div>
 	        	</div>
 	        </fieldset>
-	        <fieldset ng-if="client.create.client_role">
+	        <fieldset ng-if="client.details.client_role">
 	        	<legend class="legend-name-mid" ng-if="!client.role.parent">
 	        		Other Address Information (Optional)
 	        	</legend>
@@ -256,7 +271,8 @@
 	        			{!! Form::text('street_address',''
 	        				, array(
 	        					'placeHolder' => 'Street Address'
-	        					, 'ng-model' => 'client.create.street_address'
+	        					, 'ng-model' => 'client.details.street_address'
+	        					, 'ng-disabled' => 'client.active_view_client'
 	        					, 'class' => 'form-control'
 	        				)
 	        			) !!}
@@ -268,7 +284,8 @@
 	        			{!! Form::text('city',''
 	        				, array(
 	        					'placeHolder' => 'City'
-	        					, 'ng-model' => 'client.create.city'
+	        					, 'ng-model' => 'client.details.city'
+	        					, 'ng-disabled' => 'client.active_view_client'
 	        					, 'class' => 'form-control'
 	        				)
 	        			) !!}
@@ -278,7 +295,8 @@
 	        			{!! Form::text('state',''
 	        				, array(
 	        					'placeHolder' => 'State'
-	        					, 'ng-model' => 'client.create.state'
+	        					, 'ng-model' => 'client.details.state'
+	        					, 'ng-disabled' => 'client.active_view_client'
 	        					, 'class' => 'form-control'
 	        				)
 	        			) !!}
@@ -290,23 +308,53 @@
 	        			{!! Form::text('zip',''
 	        				, array(
 	        					'placeHolder' => 'Postal Code'
-	        					, 'ng-model' => 'client.create.zip'
+	        					, 'ng-model' => 'client.details.zip'
+	        					, 'ng-disabled' => 'client.active_view_client'
 	        					, 'class' => 'form-control'
 	        				)
 	        			) !!}
 	        		</div>
 	        		<label class="col-md-2 control-label">Country <span class="required" ng-if="client.role.parent">*</span></label>
 				      <div class="col-md-4" ng-init="getCountries()">
-				        <select  name="country" class="form-control" ng-model="client.create.country">
+				        <select  name="country" class="form-control" ng-disabled="client.active_view_client" ng-model="client.details.country">
 				          <option value="">-- Select Country --</option>
 				          <option ng-repeat="country in countries" value="{! country.id !}">{! country.name!}</option>
 				        </select>
 				      </div>
 	        	</div>
 	        </fieldset>
-	        <div class="btn-container col-sm-6 col-sm-offset-3">
-		        <a href="" type="button" class="btn btn-blue btn-medium" ng-click="client.createNewClient()">Save</a>
-		        <a href="" type="button" class="btn btn-gold btn-medium" ng-click="client.setManageClientActive()">Cancel</a>
+	        <div class="btn-container">
+	        	<div ng-if="client.active_view_client">
+	        		{!! Form::button('Edit'
+		        		, array(
+		        			'class' => 'btn btn-blue btn-medium'
+		        			, 'ng-click' => "client.setManageClientActive('edit_client')"
+		        		)
+		        	) !!}
+
+		        	{!! Form::button('Cancel'
+		        		, array(
+		        			'class' => 'btn btn-gold btn-medium'
+		        			, 'ng-click' => 'client.setManageClientActive()'
+		        		)
+		        	) !!}
+	        	</div>
+
+	        	<div ng-if="client.active_edit_client">
+	        		{!! Form::button('Save'
+		        		, array(
+		        			'class' => 'btn btn-blue btn-medium'
+		        			, 'ng-click' => 'client.updateClientDetails()'
+		        		)
+		        	) !!}
+
+		        	{!! Form::button('Cancel'
+		        		, array(
+		        			'class' => 'btn btn-gold btn-medium'
+		        			, 'ng-click' => "client.setManageClientActive('view_client')"
+		        		)
+		        	) !!}
+	        	</div>
 		     </div>
 		</div>
 	{!! Form::close() !!}

@@ -39,52 +39,60 @@
 		});
 
 		Routes::group(['prefix' => '/manage'] , function() {
+			$manage_admin_controller = 'FutureLesson\Admin\ManageAdminController';
+
 			Routes::get('/', [
-				'as' => 'admin.manage.index'
+				  'as' => 'admin.manage.admin.index'
 				, 'middleware' => 'admin'
-				, 'uses' => 'FutureLesson\Admin\DashboardController@index'
+				, 'uses' => $manage_admin_controller . '@index'
 			]);
 
 			Routes::group(['prefix' => '/client'], function() {
-				$client_controller = 'FutureLesson\Admin\ClientController';
+				$manage_client_controller = 'FutureLesson\Admin\ManageClientController';
 
 				Routes::get('/', [
 					  'as' => 'admin.manage.client.index'
 					, 'middleware' => 'admin'
-					, 'uses' => $client_controller . '@index'
+					, 'uses' => $manage_client_controller . '@index'
 				]);
 
 				Routes::group(['prefix' => 'partials'], function() {
-					$client_controller = 'FutureLesson\Admin\ClientController';
+					$manage_client_controller = 'FutureLesson\Admin\ManageClientController';
 
 					Routes::get('/side_nav', [
 						  'as' => 'admin.manage.client.partials.side_nav'
 						, 'middleware' => 'admin'
-						, 'uses' => $client_controller . '@side_nav'
+						, 'uses' => $manage_client_controller . '@side_nav'
 					]);
 
 					Routes::get('/list_client_form', [
 						  'as' => 'admin.manage.client.partials.list_client_form'
 						, 'middleware' => 'admin'
-						, 'uses' => $client_controller . '@list_client_form'
+						, 'uses' => $manage_client_controller . '@list_client_form'
 					]);
 
 					Routes::get('/add_client_form', [
 						  'as' => 'admin.manage.client.partials.add_client_form'
 						, 'middleware' => 'admin'
-						, 'uses' => $client_controller . '@add_client_form'
+						, 'uses' => $manage_client_controller . '@add_client_form'
+					]);
+
+					Routes::get('/client_details_form', [
+						  'as' => 'admin.manage.client.partials.client_details_form'
+						, 'middleware' => 'admin'
+						, 'uses' => $manage_client_controller . '@client_details_form'
 					]);
 
 					Routes::get('/edit_email_form', [
 						  'as' => 'admin.manage.client.partials.edit_email_form'
 						, 'middleware' => 'admin'
-						, 'uses' => $client_controller . '@edit_email_form'
+						, 'uses' => $manage_client_controller . '@edit_email_form'
 					]);
 
 					Routes::get('/confirm_email_form', [
 						  'as' => 'admin.manage.client.partials.confirm_email_form'
 						, 'middleware' => 'admin'
-						, 'uses' => $client_controller . '@confirm_email_form'
+						, 'uses' => $manage_client_controller . '@confirm_email_form'
 					]);
 				});
 			});

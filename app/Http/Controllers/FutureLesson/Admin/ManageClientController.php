@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Session;
 
 use Illuminate\Http\Request;
 
-class ClientController extends Controller{
+class ManageClientController extends Controller{
 
 	/**
 	* Manage Client Index
@@ -35,6 +35,13 @@ class ClientController extends Controller{
 	*/
 	public function add_client_form() {
 		return view('admin.manage.client.partials.add_client_form');
+	}
+
+	/**
+	*
+	*/
+	public function client_details_form() {
+		return view('admin.manage.client.partials.client_details_form');
 	}
 
 	/**

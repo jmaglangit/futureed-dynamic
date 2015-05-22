@@ -35,7 +35,7 @@
         </li>  
         <ul class="sub-menu collapse" id="price">
           <li ng-class="{'active' : admincon.active_price}" class="side-nav-li">
-          	<a href="{!! route('admin.manage.price.index') !!}" ng-click="admincon.setActiveAdmin('price')"><span><i class="fa fa-dollar"></i>Price & Discounts</span></a>
+          	<a href="{!! route('admin.manage.price.index') !!}" ng-click="admincon.setActiveAdmin('price')"><span><i class="fa fa-dollar"></i>Price Settings</span></a>
           </li>
         </ul>
          <li data-toggle="collapse" data-target="#master" class="collapsed side-nav-li" ng-class="{'active' : admincon.active_announcement}">
