@@ -43,11 +43,18 @@ class UserMiddleware extends JWTMiddleware{
 
         //get role
         // if payload type is client get role
-        if($payload['type'] == $futureed['client'] && in_array(strtolower($payload['role']),$action['role'])){
-
-
-        }
         // compare payload role if exist in route role else respond unauthorized.
+        if($payload['type'] == $futureed['client'] && !in_array(strtolower($payload['role']),$action['role'])){
+
+            return $this->respondErrorMessage(2032);
+        }
+
+        //if payload type is admin get role
+        if($payload['type'] == $futureed['admin'] && !in_array(strtolower($payload['role']),$action['role'])){
+
+            return $this->respondErrorMessage(2032);
+        }
+
 
         return $next($request);
 
