@@ -4,6 +4,7 @@ use FutureEd\Http\Controllers\Api\Traits\ClientValidatorTrait;
 use FutureEd\Http\Controllers\Api\v1\ClientController;
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
+use FutureEd\Services\TokenServices;
 use FutureEd\Services\UserServices;
 use FutureEd\Services\AdminServices;
 use FutureEd\Services\PasswordServices;
@@ -14,11 +15,12 @@ use Illuminate\Support\Facades\Input;
 
 class AdminLoginController extends ApiController {
 
-    public function __construct(UserServices $user,AdminServices $admin, PasswordServices $password){
+    public function __construct(UserServices $user,AdminServices $admin, PasswordServices $password, TokenServices $tokenServices){
 
         $this->admin = $admin;
         $this->user  = $user;   
         $this->password = $password;
+        $this->token = $tokenServices;
     }
 
 	public function login(){
@@ -66,7 +68,14 @@ class AdminLoginController extends ApiController {
            $admin_id= $this->admin->getAdminId($return['id']);
            $admin_detail = $this->admin->getAdmin($admin_id);
 
-           return $this->respondWithData([
+            $token = $this->token->getToken([
+                'id' => $admin_detail['id'],
+                'type' => config('futureed.admin'),
+                'role' => $admin_detail['admin_role']
+            ]);
+
+
+           return $this->setHeader($token)->respondWithData([
                 'id' => $admin_detail['id'],
                 'first_name' => $admin_detail['first_name'],
                 'last_name' => $admin_detail['last_name']
