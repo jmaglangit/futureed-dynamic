@@ -68,6 +68,7 @@ return [
         2116 => 'School name is not available.',
         2117 => 'The Student has to be 13 years old or above.',
         2118 => 'Your account is being reviewed or contact administrator for assistance.',
+        2119 => 'This record is being used.',
 
         // Client Error messages
         2200 => 'Email already exists.',
