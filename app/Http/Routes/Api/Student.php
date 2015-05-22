@@ -3,11 +3,6 @@
 Routes::group(['prefix' => '/student'], function()
 {
     /**
-     * Student new password.
-     */
-    Routes::post('/password/new','Api\v1\StudentPasswordController@confirmNewImagePassword');
-
-    /**
      * Authenticated student routes
      */
     Routes::group([
@@ -19,32 +14,14 @@ Routes::group(['prefix' => '/student'], function()
         /**
          * Student password
          */
-        Routes::get('/password/image',[
-            'uses' => 'Api\v1\StudentPasswordController@getPasswordImages',
-            'as' => 'api.v1.student.password.image'
-        ]);
-
-        Routes::post('/password/reset',[
-            'uses' => 'Api\v1\StudentPasswordController@passwordReset',
-            'as' => 'api.v1.student.password.reset'
-        ]);
-
-        Routes::post('/password/code',[
-            'uses' => 'Api\v1\StudentPasswordController@confirmResetCode',
-            'as' => 'api.v1.student.password.code'
-        ]);
-
-        Routes::post('/password/{id}',[
-            'uses' => 'Api\v1\StudentPasswordController@changeImagePassword',
-            'as' => 'api.v1.student.password'
-        ]);
-
         Routes::post('/password/confirm/{id}',[
             'uses' => 'Api\v1\StudentPasswordController@confirmPassword',
             'as' => 'api.v1.student.password.confirm'
         ]);
 
-        //email
+        /**
+         * Student email
+         */
         Routes::put('/email/{id}',[
             'uses' => 'Api\v1\EmailController@updateStudentEmail',
             'as' => 'api.v1.student.email'
@@ -54,9 +31,39 @@ Routes::group(['prefix' => '/student'], function()
             'uses' => 'Api\v1\EmailController@confirmChangeEmail',
             'as' => 'api.v1.student.confirmation.email'
         ]);
-
     });
 
+
+    /**
+     * Student new password.
+     */
+    Routes::post('/password/new',[
+        'uses' => 'Api\v1\StudentPasswordController@confirmNewImagePassword',
+        'as' => 'api.v1.student.password.new'
+    ]);
+
+    /**
+     * Student password image
+     */
+    Routes::get('/password/image',[
+        'uses' => 'Api\v1\StudentPasswordController@getPasswordImages',
+        'as' => 'api.v1.student.password.image'
+    ]);
+
+    Routes::post('/password/reset',[
+        'uses' => 'Api\v1\StudentPasswordController@passwordReset',
+        'as' => 'api.v1.student.password.reset'
+    ]);
+
+    Routes::post('/password/code',[
+        'uses' => 'Api\v1\StudentPasswordController@confirmResetCode',
+        'as' => 'api.v1.student.password.code'
+    ]);
+
+    Routes::post('/password/{id}',[
+        'uses' => 'Api\v1\StudentPasswordController@changeImagePassword',
+        'as' => 'api.v1.student.password'
+    ]);
 
     /**
      * Student login
@@ -71,6 +78,9 @@ Routes::group(['prefix' => '/student'], function()
         'as' => 'api.v1.student.login.image'
     ]);
 
+    /**
+     * Returns token if login confirm.
+     */
     Routes::post('/login/password',[
         'uses' => 'Api\v1\StudentLoginController@loginPassword',
         'as' => 'api.v1.student.login.password',
