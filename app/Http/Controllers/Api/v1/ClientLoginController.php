@@ -85,7 +85,15 @@ class ClientLoginController extends ClientController {
         }
 
         $this->user->resetLoginAttempt($return['id']);
-        return $this->respondWithData([
+
+        //adding auth token
+        $token = $this->token->getToken([
+            'id' => $client_detail['id'],
+            'type' => config('futureed.client'),
+            'role' => $client_detail['client_role']
+        ]);
+
+        return $this->setHeader($token)->respondWithData([
                 'id' => $client_detail['id'],
                 'first_name' => $client_detail['first_name'],
                 'last_name' => $client_detail['last_name']
