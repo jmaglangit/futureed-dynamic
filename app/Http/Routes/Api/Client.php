@@ -51,14 +51,36 @@ Routes::group(['prefix' => '/client'], function()
     });
 
 
-    //client
-    Routes::post('/login','Api\v1\ClientLoginController@login');
-    Routes::post('/register','Api\v1\ClientRegisterController@register');
-    Routes::post('/reset-password/{id}','Api\v1\ClientPasswordController@resetPassword');
+    /**
+     * Client login
+     */
+    Routes::post('/login',[
+        'uses' => 'Api\v1\ClientLoginController@login',
+        'as' => 'api.v1.client.login'
+    ]);
 
-    //change email in client
-    Routes::post('/resend-email/{id}','Api\v1\EmailController@resendChangeEmail');
-    Routes::post('/update-email/{id}','Api\v1\EmailController@confirmChangeEmail');
+    Routes::post('/register',[
+        'uses' => 'Api\v1\ClientRegisterController@register',
+        'as' => 'api.v1.client.register'
+    ]);
+
+    Routes::post('/reset-password/{id}',[
+        'uses' => 'Api\v1\ClientPasswordController@resetPassword',
+        'as' => 'api.v1.client.reset-password'
+    ]);
+
+    /**
+     * Change client email
+     */
+    Routes::post('/resend-email/{id}',[
+        'uses' => 'Api\v1\EmailController@resendChangeEmail',
+        'as' => 'api.v1.client.resend-email'
+    ]);
+
+    Routes::post('/update-email/{id}',[
+        'uses' => 'Api\v1\EmailController@confirmChangeEmail',
+        'as' => 'api.v1.client.update-email'
+    ]);
 
     /**
      * Authenticated routes of the client for admin access only.
