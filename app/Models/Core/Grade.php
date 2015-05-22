@@ -27,4 +27,19 @@ class Grade extends Model {
         return $this->hasMany('FutureEd\Models\Core\Student','grade_code','code');
     }
 
+    public function scopeName($query, $name) {
+
+        return $query->where('name', 'like' , '%'.$name.'%');
+
+    }
+
+    public function scopeCountryId($query,$country_id){
+
+        return $query->where('country_id', '=', $country_id);
+
+
+    }
+
+
+
 }

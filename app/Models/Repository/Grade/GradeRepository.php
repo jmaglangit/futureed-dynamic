@@ -6,9 +6,56 @@ use FutureEd\Models\Core\Grade;
 class GradeRepository implements GradeRepositoryInterface{
 
 
-    public function getGrades(){
+    public function getGrades($category = [],$limit = 0){
 
-      return Grade:: all();
+        $grade = new Grade();
+        $append=[];
+
+        if(isset($category['country_id'])){
+
+            $grade = $grade->countryid($category['country_id']);
+
+            $append['country_id'] = $category['country_id'];
+
+
+        }
+
+        if(isset($category['name'])){
+
+            $grade = $grade->name($category['name']);
+
+            $append['name'] = $category['name'];
+
+        }
+
+        if(isset($limit)){
+
+            $grade = $grade->paginate($limit);
+
+            $append['limit'] = $limit;
+        }
+
+
+
+        $grade->appends($append);
+
+        $paginator = [
+            'currentPage' => $grade->currentPage(),
+            'lastPage' => $grade->lastPage(),
+            'perPage' => $grade->perPage(),
+            'hasMorePages' => $grade->hasMorePages(),
+            'nextPageUrl' => $grade->nextPageUrl(),
+            'previousPageUrl' => $grade->previousPageUrl(),
+            'total' => $grade->total(),
+            'count' => $grade->count()
+        ];
+
+        return [
+            'paginator' => $paginator,
+            'records' => $grade->items()
+        ];
+
+
 
     }
 
