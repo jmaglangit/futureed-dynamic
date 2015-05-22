@@ -7,6 +7,7 @@ use FutureEd\Http\Controllers\Controller;
 use FutureEd\Services\PasswordServices;
 use FutureEd\Services\UserServices;
 use FutureEd\Services\AdminServices;
+use FutureEd\Services\PasswordServices;
 
 
 use Illuminate\Http\Request;
