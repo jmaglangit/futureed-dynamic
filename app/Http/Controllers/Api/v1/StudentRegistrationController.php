@@ -121,20 +121,10 @@ class StudentRegistrationController extends StudentController {
 
     }
 
-    /*
-     * returns
-     * "user_id,
-email,
-username,
-first_name,
-last_name,
-gender,
-birth_date,
-school,
-grade,
-country,
-state,
-city"
+    /**
+     * Student invited on the class.
+     *
+     * @return array
      */
     public function invite(){
         $input = Input::only('id');
