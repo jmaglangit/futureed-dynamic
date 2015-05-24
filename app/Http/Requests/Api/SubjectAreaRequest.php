@@ -51,7 +51,7 @@ class SubjectAreaRequest extends ApiRequest {
 			'integer' => 'The :attribute must be a number.',
 			'subject_id.required' =>'The subject is required.',
 			'subject_id.integer' =>'The subject is required.',
-			'subject_id.exists' =>'The subject is invalid.'
+			'subject_id.in' =>'The subject is invalid.'
 		];
 	}
 }

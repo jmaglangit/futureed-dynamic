@@ -18,10 +18,11 @@ class AdminRepository implements  AdminRepositoryInterface {
      *
      * @return array
      */
-    public function getAdmins($category = [],$limit = 3){
+    public function getAdmins($criteria = array(), $limit = 0, $offset = 0) {
 
         //get list of administrators username, email, roles
-        $admin = new Admin();
+        /*
+$admin = new Admin();
 
         $admin = $admin->with('user')->paginate($limit);
 
@@ -40,6 +41,43 @@ class AdminRepository implements  AdminRepositoryInterface {
             'paginator' => $paginator,
             'records' => $admin->items()
         ];
+*/
+
+		$admins = new Admin();
+		
+		$count = 0;
+		
+		if(count($criteria) <= 0 && $limit == 0 && $offset == 0) {
+			
+			$count = $admins->count();
+		
+		} else {
+			
+			if(count($criteria) > 0) {
+				if(isset($criteria['email'])) {
+					$admins = $admins->email($criteria['email']);
+				}
+				
+				if(isset($criteria['username'])) {
+					$admins = $admins->username($criteria['username']);
+				}
+				
+				if(isset($criteria['role'])) {
+					$admins = $admins->role($criteria['role']);
+				}				
+			}
+			
+			$count = $admins->count();
+		
+			if($limit > 0 && $offset >= 0) {
+				$admins = $admins->offset($offset)->limit($limit);;
+			}
+														
+		}
+		
+		$admins = $admins->orderBy('first_name', 'asc');
+		
+		return ['total' => $count, 'records' => $admins->with('user')->get()->toArray()];
 
     }
 

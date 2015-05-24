@@ -3,7 +3,7 @@
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
-use FutureEd\Models\Repository\Admin\AdminRepositoryInterface;
+use FutureEd\Models\Repository\Admin\AdminRepositoryInterface as Admin;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
@@ -16,7 +16,7 @@ class AdminController extends ApiController {
      *
      * @return void
      */
-    public function __construct(AdminRepositoryInterface $admin){
+    public function __construct(Admin $admin){
 
         $this->admin = $admin;
     }
@@ -28,27 +28,42 @@ class AdminController extends ApiController {
 	 */
 	public function index()
 	{
-		//get header token
-
-        $limit = Input::get('limit');
+		$criteria = array();
+		$limit = 0;
+		$offset = 0;
 
         //get the parameters and get outputs based on the parameters.
         if(Input::get('email')){
-
+			$criteria['email'] = Input::get('email');
         }
 
         if(Input::get('username')){
-
+			$criteria['username'] = Input::get('username');
+        }
+        
+        if(Input::get('role')){
+			$criteria['role'] = Input::get('role');
         }
 
-        if(Input::get('limit')){
+		if(Input::get('limit')) {
+			$limit = intval(Input::get('limit'));
+		}
+		
+		if(Input::get('offset')) {
+			$offset = intval(Input::get('offset'));
+		}
+
+		$admins = $this->admin->getAdmins($criteria, $limit, $offset);
+
+		return $this->respondWithData($admins);
+
+        /*
+if(Input::get('limit')){
             return $this->respondWithData($this->admin->getAdmins($limit));
         }
 
         return $this->respondWithData($this->admin->getAdmins());
-
-
-
+*/
 
 	}
 

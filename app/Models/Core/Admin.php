@@ -25,6 +25,28 @@ class Admin extends Model {
         return $this->belongsTo('FutureEd\Models\Core\User');
     }
 
+	//-------------scopes
+	public function scopeUsername($query, $username) {
+		
+		return $query->whereHas('user', function($query) use ($username) {	
+			$query->where('username', 'like', '%'.$username.'%');
+		});
+				
+	}
+	
+	public function scopeEmail($query, $email) {
+	
+		return $query->whereHas('user', function($query) use ($email) {	
+			$query->where('email', 'like', '%'.$email.'%');
+		});
+		
+	}
+	
+	public function scopeRole($query, $role) {
+		
+		return $query->whereAdminRole($role);
+				
+	}
 
 
 }

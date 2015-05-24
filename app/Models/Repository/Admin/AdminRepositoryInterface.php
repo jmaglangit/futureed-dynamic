@@ -9,7 +9,7 @@ namespace FutureEd\Models\Repository\Admin;
 
 interface AdminRepositoryInterface {
 
-    public function getAdmins();
+    public function getAdmins($criteria = array(), $limit = 0, $offset = 0);
 
     public function getAdmin($id);
 
