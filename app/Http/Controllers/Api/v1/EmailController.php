@@ -389,6 +389,64 @@ class EmailController extends ApiController {
 
     }
 
+
+    public function adminChangeEmail($id){
+
+        $user_type = config('futureed.admin');
+
+        $input = Input::only('new_email');
+        $url = Input::only('callback_uri');
+
+        $this->addMessageBag($this->validateVarNumber($id));
+        $this->addMessageBag($this->email($input,'new_email'));
+        $this->addMessageBag($this->validateString($url,'callback_uri'));
+
+        $msg_bag = $this->getMessageBag();
+
+        if($msg_bag){
+
+            return $this->respondWithError($msg_bag);
+
+        }else{
+
+            $admin_check = $this->admin->verifyAdminId($id);
+
+            if(!$admin_check){
+
+                return $this->respondErrorMessage(2001);
+            }
+
+            // get user details for users table
+            $user_details = $this->user->getUserDetail($admin_check['user_id'],$user_type);
+
+
+
+            if($user_details['email'] === $input['new_email']){
+
+                return $this->respondErrorMessage(2107);
+
+            }
+
+            //add new email to admin
+            $this->user->addNewEmail($admin_check['user_id'],$input['new_email']);
+
+            //send email
+            $this->mail->sendAdminChangeEmail($user_details,$url['callback_uri']);
+
+            //update email to new email
+            $this->user->updateToNewEmail($admin_check['user_id'],$input['new_email']);
+
+
+            return $this->respondWithData([
+                                            'id'=>$admin_check['id']
+                                         ]);
+
+
+        }
+
+
+    }
+
 }
 
 
