@@ -93,5 +93,9 @@ class AppServiceProvider extends ServiceProvider {
             'FutureEd\Models\Repository\SubjectArea\SubjectAreaRepositoryInterface',
             'FutureEd\Models\Repository\SubjectArea\SubjectAreaRepository'
         );
+        $this->app->bind(
+            'FutureEd\Models\Repository\VolumeDiscount\VolumeDiscountRepositoryInterface',
+            'FutureEd\Models\Repository\VolumeDiscount\VolumeDiscountRepository'
+        );
 	}
 }
