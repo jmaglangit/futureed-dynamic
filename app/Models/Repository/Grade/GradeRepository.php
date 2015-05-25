@@ -13,7 +13,7 @@ class GradeRepository implements GradeRepositoryInterface{
 
         if(isset($category['country_id'])){
 
-            $grade = $grade->countryid($category['country_id']);
+            $grade = $grade->with('country')->countryid($category['country_id']);
 
             $append['country_id'] = $category['country_id'];
 
@@ -22,7 +22,7 @@ class GradeRepository implements GradeRepositoryInterface{
 
         if(isset($category['name'])){
 
-            $grade = $grade->name($category['name']);
+            $grade = $grade->with('country')->name($category['name']);
 
             $append['name'] = $category['name'];
 
@@ -30,7 +30,7 @@ class GradeRepository implements GradeRepositoryInterface{
 
         if(isset($limit)){
 
-            $grade = $grade->paginate($limit);
+            $grade = $grade->with('country')->  paginate($limit);
 
             $append['limit'] = $limit;
         }
