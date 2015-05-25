@@ -21,12 +21,15 @@ class SubscriptionRequest extends ApiRequest {
 	public function rules() {
 	    switch($this->method){
     	    case 'POST':
+
         	    return ['name'          => 'required',
             			'price'         => 'required|numeric|min:0.01|max:999999.99',
             			'description'   => 'required',
             			'status'        => 'required|in:Enabled,Disabled'];
     	    break;
+
     	    case 'PATCH':
+
                 switch($this->route()->getName()){
                     case 'subscription.update.status':
                         return ['status' => 'required|in:Enabled,Disabled'];    
@@ -37,7 +40,19 @@ class SubscriptionRequest extends ApiRequest {
                 			'description'   => 'required',
                 			'status'        => 'required|in:Enabled,Disabled'];
                 }
+
             break;
+
+            case 'PUT':
+
+                return [
+                    'name'          => 'required',
+                    'price'         => 'required|numeric|min:0.01|max:999999.99',
+                    'description'   => 'required',
+                    'status'        => 'required|in:Enabled,Disabled'
+                ];
+
+                break;
 	    }
 	
 	
