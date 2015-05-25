@@ -87,12 +87,22 @@ $admin = new Admin();
 
     }
 
-    public function addAdmin($admin){
-
+    public function addAdmin($data){
+		try {
+		
+			$admin = Admin::create($data);
+						
+		} catch(Exception $e) {
+		
+			return $e->getMessage();
+			
+		}
+		
+		return $admin;
     }
 
     public function updateAdmin($admin){
-
+		
     }
 
     public function deleteAdmin($id){

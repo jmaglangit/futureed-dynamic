@@ -4,21 +4,26 @@ use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
 use FutureEd\Models\Repository\Admin\AdminRepositoryInterface as Admin;
+use FutureEd\Models\Repository\User\UserRepositoryInterface as User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+
+use FutureEd\Http\Requests\Api\AdminRequest;
 
 class AdminController extends ApiController {
 
     protected $admin;
+    protected $user;
 
     /**
      * Admin constructor
      *
      * @return void
      */
-    public function __construct(Admin $admin){
+    public function __construct(Admin $admin, User $user){
 
         $this->admin = $admin;
+        $this->user = $user;
     }
 
 	/**
@@ -72,9 +77,27 @@ if(Input::get('limit')){
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(AdminRequest $request)
 	{
-		//
+		$data = $request->all();
+	
+		$data['user_type'] = config('futureed.admin');
+	
+		$user = $this->user->addUser($data);
+		
+		if($user) {
+			$user_id = $this->user->checkEmail($data['email'], $data['user_type']);
+			
+			$data['user_id'] = $user_id;
+			
+			$admin = $this->admin->addAdmin($data);	
+			
+			return $this->respondWithData(['id' => $admin->id]);
+		} else {
+			return $this->respondWithData(['id' => NULL]);
+		}
+		
+		
 	}
 
 	/**
