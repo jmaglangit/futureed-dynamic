@@ -55,6 +55,7 @@
 					{!! Form::button('Search'
 						,array(
 							'class' => 'btn btn-gold'
+							, 'ng-click' => 'client.getClientList()'
 							)
 					)!!}
 				</div>
@@ -89,7 +90,7 @@
 					{!! Form::button('clear'
 						,array(
 							'class' => 'btn'
-							, 'ng-click' => ''
+							, 'ng-click' => 'client.clearSearchForm()'
 							)
 					)!!}
 				</div>

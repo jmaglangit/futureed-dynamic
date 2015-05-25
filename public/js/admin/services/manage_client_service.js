@@ -14,10 +14,13 @@ function manageClientService($http) {
 	manageClientApi.createNewClient = createNewClient;
 	manageClientApi.searchSchool = searchSchool;
 
-	function getClientList() {
+	function getClientList(search_name, search_email, search_school, search_client_role) {
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url 	: manageClientApiUrl + 'client'
+			, url 	: manageClientApiUrl + 'client?name=' + search_name
+				+ "&email=" + search_email
+				+ "&school_code=" + search_school
+				+ "&client_role=" + search_client_role
 		});
 	}
 

@@ -125,8 +125,6 @@
   </div>
 @endsection
 
-@section('footer')
-
 @section('scripts')
   
   {!! Html::script('/js/student/login.js') !!}

@@ -105,6 +105,59 @@
 			});
 
 			/**
+			* CRUD Subject Routes
+			*/
+			Routes::group(['prefix' => '/subject'], function() {
+				
+				$subject_controller = 'FutureLesson\Admin\ManageSubjectController';
+				
+				Routes::get('/',
+					[
+						'as' => 'admin.manage.subject.index'
+						, 'middleware' => 'admin'
+						, 'uses' => $subject_controller . '@index'
+					]);
+
+				Routes::group(['prefix' => '/partial'], function() {
+					$subject_controller = 'FutureLesson\Admin\ManageSubjectController';
+
+					Routes::get('/subject_list_form',
+						[
+							'as' => 'admin.manage.subject.partials.subject_list_form'
+							, 'middleware' => 'admin'
+							, 'uses' => $subject_controller . '@subject_list_form'
+						]);
+
+					Routes::get('/add_subject_form',
+						[
+							'as' => 'admin.manage.subject.partials.add_subject_form'
+							, 'middleware' => 'admin'
+							, 'uses' => $subject_controller . '@add_subject_form'
+						]);
+
+					Routes::get('/subject_details_form',
+						[
+							'as' => 'admin.manage.subject.partials.subject_details_form'
+							, 'middleware' => 'admin'
+							, 'uses' => $subject_controller . '@subject_details_form'
+						]);
+
+					Routes::get('/delete_subject_form',
+						[
+							'as' => 'admin.manage.subject.partials.delete_subject_form'
+							, 'middleware' => 'admin'
+							, 'uses' => $subject_controller . '@delete_subject_form'
+						]);
+					Routes::get('/subject_side_nav',
+						[
+							'as' => 'admin.manage.subject.partials.subject_side_nav'
+							, 'middleware' => 'admin'
+							, 'uses' => $subject_controller . '@subject_side_nav'
+						]);
+				});
+			});
+
+			/**
 			* admin/manage/price
 			*/
 			Routes::group(['prefix' => '/price'], function()
