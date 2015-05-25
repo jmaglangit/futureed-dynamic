@@ -47,8 +47,10 @@ class GradeController extends ApiController {
             $criteria['country_id'] = Input::get('country_id');
         }
 
+        $grade = $this->grade->getGrades($criteria,$limit);
 
-        return $this->grade->getGrades($criteria,$limit);
+
+        return $this->respondWithData($grade);
         
     }
 
@@ -76,7 +78,7 @@ class GradeController extends ApiController {
 
     	$grade = $this->grade->updateGrade($id,$data);
 
-    	return $this->respondWithData(['id' => $grade->id]);
+    	return $this->respondWithData([$grade]);
 
     }
 
