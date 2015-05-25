@@ -30,7 +30,7 @@ class SubjectRequest extends ApiRequest {
 			case 'POST':
 			default:
 				return [
-					'code' => 'required|numeric|digits:19|unique:subjects',
+					'code' => 'required|numeric|digits_between:1,19|unique:subjects',
 					'name' => 'required',
 					'status' => 'required|in:Enabled,Disabled'
 				];				
@@ -46,7 +46,7 @@ class SubjectRequest extends ApiRequest {
 	 */
 	public function messages() {
 		return [
-			'integer' => 'The :attribute must be a number.' 
+			'integer' => 'The :attribute must be a number.'
 		];
 	}
 }
