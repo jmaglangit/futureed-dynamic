@@ -163,5 +163,26 @@ class ClientRepository implements ClientRepositoryInterface{
 		
 		return ['total' => $count, 'records' => $clients->get()->toArray()];	
 	}
+
+    public function getClientCustomDetails( $criteria ){
+
+        $clients = new Client();
+
+        if(isset($criteria['name'])) {
+
+            $clients = $clients->name($criteria['name']);
+
+        }
+
+        $clients = $clients->with('user')->orderBy('created_at', 'desc');
+
+        return $clients->get()->toArray();
+
+
+
+
+
+
+    }
     
 }
