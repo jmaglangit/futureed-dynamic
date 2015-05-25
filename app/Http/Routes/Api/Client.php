@@ -44,4 +44,6 @@ Routes::group(['middleware' => 'api_user','prefix' => '/client'], function()
 Routes::group(['middleware' => 'api_user'],function(){
     Routes::resource('/client','Api\v1\ClientController',
         ['except' => ['create','edit']]);
+
+    Routes::get('client/custom/view-details/','Api\v1\ClientCustomController@getClient');
 });
