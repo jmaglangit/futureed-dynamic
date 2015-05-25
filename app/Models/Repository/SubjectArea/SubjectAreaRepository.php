@@ -60,7 +60,7 @@ class SubjectAreaRepository implements SubjectAreaRepositoryInterface {
 			}
 														
 		}
-		
+		$subject_areas =  $subject_areas->with('subject')->orderBy('name','desc');
 		$subject_areas = $subject_areas->orderBy('name', 'asc');
 		
 		return ['total' => $count, 'records' => $subject_areas->get()->toArray()];	
