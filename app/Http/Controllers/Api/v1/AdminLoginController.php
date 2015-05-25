@@ -14,11 +14,11 @@ use Illuminate\Support\Facades\Input;
 
 class AdminLoginController extends ApiController {
 
-    public function __construct(UserServices $user,AdminServices $admin,PasswordServices $password){
+    public function __construct(UserServices $user,AdminServices $admin, PasswordServices $password){
 
         $this->admin = $admin;
         $this->user  = $user;   
-        $this->password  = $password;   
+        $this->password = $password;
     }
 
 	public function login(){
