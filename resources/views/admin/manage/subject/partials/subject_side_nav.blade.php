@@ -27,4 +27,10 @@
 			</li>
         </ul>                 
     </ul>
+
+    <ul id="menu-content" class="nav-list">
+        <li id="client_nav_head" data-target="client" class="side-nav-li">
+			<a href="{!! route('admin.manage.grades.index')!!}" class="nav-link">Grades</a>
+		</li>               
+    </ul>
 </div>
