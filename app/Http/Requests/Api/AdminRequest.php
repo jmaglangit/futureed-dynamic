@@ -2,6 +2,8 @@
 
 use FutureEd\Http\Requests\Api\ApiRequest;
 
+use FutureEd\Models\Core\Admin;
+
 class AdminRequest extends ApiRequest {
 
 	/**
@@ -19,16 +21,26 @@ class AdminRequest extends ApiRequest {
 	 * @return array
 	 */
 	public function rules() {
+		
+		$admin_id = $this->__get('admin');
+				
+		$admin = Admin::find($admin_id);
+		
+		$admin_user_id = NULL;
+		
+		if($admin) {
+			$admin_user_id = $admin->user_id;
+		}
 				
 		switch($this->method) {
 			case 'PUT':
-				/*
-return [
-					'subject_id' => 'required|integer|exists:subjects,id',
-					'name' => 'required',
-					'status' => 'required|in:Enabled,Disabled'
+				return [
+					'username' => 'required|min:8|max:32|alpha_num|unique:users,username,'.$admin_user_id.',id,user_type,'.config('futureed.admin'),
+					'admin_role' => 'required|in:Admin,Super Admin',
+					'status' => 'required|in:Enabled,Disabled',
+					'first_name' => 'required|regex:/^([a-z\x20])+$/i|max:64',
+					'last_name' => 'required|regex:/^([a-z\x20])+$/i|max:64'
 				];
-*/
 				break;
 			case 'POST':
 			default:
@@ -52,12 +64,6 @@ return [
 	 */
 	public function messages() {
 		return [
-			/*
-'integer' => 'The :attribute must be a number.',
-			'subject_id.required' =>'The subject is required.',
-			'subject_id.integer' =>'The subject is required.',
-			'subject_id.in' =>'The subject is invalid.'
-*/
 		];
 	}
 }

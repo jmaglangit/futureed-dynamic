@@ -81,13 +81,13 @@ $admin = new Admin();
 
     }
 
-    public function getAdmin($id){
+    public function getAdmin($id) {
 
         return Admin::find($id);
 
     }
 
-    public function addAdmin($data){
+    public function addAdmin($data) {
 		try {
 		
 			$admin = Admin::create($data);
@@ -101,8 +101,20 @@ $admin = new Admin();
 		return $admin;
     }
 
-    public function updateAdmin($admin){
+    public function updateAdmin($id, $data) {
+		try {
 		
+			$admin = Admin::find($id);
+			
+			$admin->update($data);
+			
+		} catch(Exception $e) {
+		
+			return $e->getMessage();
+			
+		}
+		
+		return $admin;
     }
 
     public function deleteAdmin($id){

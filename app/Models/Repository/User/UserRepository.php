@@ -71,8 +71,20 @@ class UserRepository implements UserRepositoryInterface {
         return true;
     }
 
-    public function updateUser($user){
-        return 0;
+    public function updateUser($id, $data) {
+        try {
+		
+			$user = User::find($id);
+			
+			$user->update($data);
+			
+		} catch(Exception $e) {
+		
+			return $e->getMessage();
+			
+		}
+		
+		return $user;
     }
 
     public function deleteUser($id){

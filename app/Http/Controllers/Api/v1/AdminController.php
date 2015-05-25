@@ -108,8 +108,6 @@ if(Input::get('limit')){
 	 */
 	public function show($id)
 	{
-		//
-
         return $this->respondWithData($this->admin->getAdmin($id));
 	}
 
@@ -119,9 +117,21 @@ if(Input::get('limit')){
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($id, AdminRequest $request)
 	{
-		//
+		$data = $request->all();
+	
+		unset($data['code']);
+		
+		$admin = $this->admin->updateAdmin($id, $data);
+		
+		if($admin) {
+			$user = $this->user->updateUser($admin->user_id, $data);
+			
+			return $this->respondWithData(['id' => $admin->id]);
+		} else {
+			return $this->respondWithData(['id' => NULL]);
+		}
 	}
 
 	/**

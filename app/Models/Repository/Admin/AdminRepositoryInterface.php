@@ -15,7 +15,7 @@ interface AdminRepositoryInterface {
 
     public function addAdmin($data);
 
-    public function updateAdmin($admin);
+    public function updateAdmin($id, $data);
 
     public function deleteAdmin($id);
 
