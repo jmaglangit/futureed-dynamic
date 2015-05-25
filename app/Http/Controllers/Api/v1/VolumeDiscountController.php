@@ -6,24 +6,24 @@ use FutureEd\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
-use FutureEd\Models\Repository\Subscription\SubscriptionRepositoryInterface as Subscription;
+use FutureEd\Models\Repository\volumeDiscount\VolumeDiscountRepositoryInterface as VolumeDiscount;
 
-use FutureEd\Http\Requests\Api\SubscriptionRequest;
+use FutureEd\Http\Requests\Api\VolumeDiscountRequest;
 use FutureEd\Http\Requests\Api\StatusRequest;
 
-class SubscriptionController extends ApiController {
+class VolumeDiscountController extends ApiController {
 
-	//holds the subscription repository
-	protected $subscription;
+	//holds the volumeDiscount repository
+	protected $volume_discount;
 
 	/**
-	 * Subscription Controller constructor
+	 * volumeDiscount Controller constructor
 	 *
 	 * @return void
 	 */
-	public function __construct(Subscription $subscription) 
+	public function __construct(VolumeDiscount $volumeDiscount) 
 	{
-		$this->subscription = $subscription;
+		$this->volume_discount = $volumeDiscount;
 	}
 
 	/**
@@ -37,8 +37,8 @@ class SubscriptionController extends ApiController {
 		$limit = 0;
 		$offset = 0;
 			
-		if(Input::get('name')) {
-			$criteria['name'] = Input::get('name');
+		if(Input::get('min_seats')) {
+			$criteria['min_seats'] = Input::get('min_seats');
 		}
 				
 		if(Input::get('limit')) {
@@ -49,9 +49,9 @@ class SubscriptionController extends ApiController {
 			$offset = intval(Input::get('offset'));
 		}
 			
-		$subscription = $this->subscription->getSubscriptions($criteria, $limit, $offset);
+		$volumeDiscount = $this->volume_discount->getVolumeDiscounts($criteria, $limit, $offset);
 
-		return $this->respondWithData($subscription);
+		return $this->respondWithData($volumeDiscount);
 	}
 
 	/**
@@ -59,13 +59,13 @@ class SubscriptionController extends ApiController {
 	 *
 	 * @return Response
 	 */
-	public function store(SubscriptionRequest $request)
+	public function store(VolumeDiscountRequest $request)
 	{
 		$data = $request->all();
 	
-		$subscription = $this->subscription->addSubscription($data);
+		$volumeDiscount = $this->volume_discount->addVolumeDiscount($data);
 		
-		return $this->respondWithData(['id' => $subscription["id"]]);
+		return $this->respondWithData(['id' => $volumeDiscount["id"]]);
 	}
 
 	/**
@@ -77,7 +77,7 @@ class SubscriptionController extends ApiController {
 	public function show($id)
 	{
 		if(!is_null($id)){
-    		return $this->respondWithData($this->subscription->getSubscription($id));
+    		return $this->respondWithData($this->volume_discount->getVolumeDiscount($id));
 		}
 	}
 
@@ -87,12 +87,12 @@ class SubscriptionController extends ApiController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id,SubscriptionRequest $request)
+	public function update($id,VolumeDiscountRequest $request)
 	{
 	    if(!is_null($id)){
 	    
     	    $data = $request->all();
-            return $this->respondWithData($this->subscription->updateSubscription($id,$data));
+            return $this->respondWithData($this->volume_discount->updateVolumeDiscount($id,$data));
 	    }		
 	}
 
@@ -105,7 +105,7 @@ class SubscriptionController extends ApiController {
 	public function destroy($id)
 	{
 		if(!is_null($id)){
-    		return $this->respondWithData($this->subscription->deleteSubscription($id));
+    		return $this->respondWithData($this->volume_discount->deleteVolumeDiscount($id));
 		}
 	}
 }
