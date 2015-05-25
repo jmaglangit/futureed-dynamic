@@ -22,10 +22,20 @@ class Grade extends Model {
 	);
 
 
+    //Relationships
+
     public function students() {
 
         return $this->hasMany('FutureEd\Models\Core\Student','grade_code','code');
     }
+
+    public function country(){
+
+        return $this->belongsTo('Webpatser\Countries\Countries');
+    }
+
+
+    //Scopes
 
     public function scopeName($query, $name) {
 
@@ -36,9 +46,9 @@ class Grade extends Model {
     public function scopeCountryId($query,$country_id){
 
         return $query->where('country_id', '=', $country_id);
-
-
     }
+
+
 
 
 
