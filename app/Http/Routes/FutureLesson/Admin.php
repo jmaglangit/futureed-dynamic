@@ -94,6 +94,13 @@
 						, 'middleware' => 'admin'
 						, 'uses' => $manage_client_controller . '@confirm_email_form'
 					]);
+
+					Routes::get('/type_ahead_form', [
+						  'as' => 'admin.manage.client.partials.type_ahead_form'
+						, 'middleware' => 'admin'
+						, 'uses' => $manage_client_controller . '@type_ahead_form'
+					]);
+					
 				});
 			});
 

@@ -27,10 +27,17 @@
 	        				, array(
 	        					'placeHolder' => 'Email'
 	        					, 'ng-model' => 'client.create.email'
+	        					, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
+	        					, 'ng-change' => 'client.checkEmailAvailability()'
 	        					, 'class' => 'form-control'
 	        				)
 	        			) !!}
 	        		</div>
+	        		<div class="margin-top-8"> 
+		                <i ng-if="client.validation.e_loading" class="fa fa-spinner fa-spin"></i>
+		                <i ng-if="client.validation.e_success" class="fa fa-check success-color"></i>
+		                <span ng-if="client.validation.e_error" class="error-msg-con">{! client.validation.e_error !}</span>
+		            </div>	
 	        	</div>
 	        	<div class="form-group">
 	        		<label class="col-xs-2 control-label" id="username">Username <span class="required">*</span></label>
@@ -39,10 +46,17 @@
 	        				, array(
 	        					'placeHolder' => 'Username'
 	        					, 'ng-model' => 'client.create.username'
+	        					, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
+	        					, 'ng-change' => 'client.checkUsernameAvailability()'
 	        					, 'class' => 'form-control'
 	        				)
 	        			) !!}
 	        		</div>
+	        		<div class="margin-top-8"> 
+		                <i ng-if="client.validation.u_loading" class="fa fa-spinner fa-spin"></i>
+		                <i ng-if="client.validation.u_success" class="fa fa-check success-color"></i>
+		                <span ng-if="client.validation.u_error" class="error-msg-con">{! client.validation.u_error !}</span>
+		            </div>
 	        	</div>
 	        	<div class="form-group">
 	        		<label class="col-xs-2 control-label" id="status">Status <span class="required">*</span></label>
@@ -137,7 +151,6 @@
 	        					'placeHolder' => 'School Name'
 	        					, 'ng-model' => 'client.create.school_name'
 	        					, 'ng-change' => 'client.searchSchool()'
-                        		, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
 	        					, 'class' => 'form-control'
 	        				)
 	        			) !!}

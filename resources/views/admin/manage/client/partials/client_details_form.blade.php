@@ -28,10 +28,17 @@
 	        					'placeHolder' => 'Email'
 	        					, 'ng-model' => 'client.details.email'
 	        					, 'ng-disabled' => 'client.active_view_client'
+	        					, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
+	        					, 'ng-change' => 'client.checkEmailAvailability()'
 	        					, 'class' => 'form-control'
 	        				)
 	        			) !!}
 	        		</div>
+	        		<div class="margin-top-8"> 
+		                <i ng-if="client.validation.e_loading" class="fa fa-spinner fa-spin"></i>
+		                <i ng-if="client.validation.e_success" class="fa fa-check success-color"></i>
+		                <span ng-if="client.validation.e_error" class="error-msg-con">{! client.validation.e_error !}</span>
+		            </div>	
 	        	</div>
 	        	<div class="form-group">
 	        		<label class="col-xs-2 control-label" id="username">Username <span class="required">*</span></label>
@@ -41,10 +48,17 @@
 	        					'placeHolder' => 'Username'
 	        					, 'ng-model' => 'client.details.username'
 	        					, 'ng-disabled' => 'client.active_view_client'
+	        					, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
+	        					, 'ng-change' => 'client.checkUsernameAvailability()'
 	        					, 'class' => 'form-control'
 	        				)
 	        			) !!}
 	        		</div>
+	        		<div class="margin-top-8"> 
+		                <i ng-if="client.validation.u_loading" class="fa fa-spinner fa-spin"></i>
+		                <i ng-if="client.validation.u_success" class="fa fa-check success-color"></i>
+		                <span ng-if="client.validation.u_error" class="error-msg-con">{! client.validation.u_error !}</span>
+		            </div>	
 	        	</div>
 	        	<div class="form-group">
 	        		<label class="col-xs-2 control-label" id="status">Status <span class="required">*</span></label>
@@ -57,6 +71,7 @@
 	        						, array(
 	        							'class' => 'field'
 	        							, 'ng-model' => 'client.details.status'
+	        							, 'ng-click' => 'client.clientChangeStatus()'
 	        						) 
 	        					) !!}
 	        				<span class="lbl padding-8">Enabled</span>
@@ -70,13 +85,27 @@
 	        						, array(
 	        							'class' => 'field'
 	        							, 'ng-model' => 'client.details.status'
+	        							, 'ng-click' => 'client.clientChangeStatus()'
 	        						)
 	        					) !!}
 	        				<span class="lbl padding-8">Disabled</span>
 	        				</label>
 	        			</div>
 	        		</div>
-	        		<label class="col-xs-1 control-label" ng-if="client.active_view_client">{! client.details.status !}</label>
+
+	        		<div ng-if="client.active_view_client">
+	        		<label class="col-xs-5" ng-if="client.details.status == 'Enabled'">
+	        			<b class="success-icon">
+	        				<i class="margin-top-8 fa fa-check-circle-o"></i> {! client.details.status !}
+	        			</b>
+	        		</label>
+
+	        		<label class="col-xs-5" ng-if="client.details.status == 'Disabled'">
+	        			<b class="error-icon">
+	        				<i class="margin-top-8 fa fa-ban"></i> {! client.details.status !}
+	        			</b>
+	        		</label>
+	        		</div>
 	        				
 	        	</div>
 	        </fieldset>
@@ -149,6 +178,13 @@
 	        					, 'class' => 'form-control'
 	        				)
 	        			) !!}
+	        			<div class="angucomplete-holder" ng-if="client.schools">
+							<ul class="col-xs-5 angucomplete-dropdown">
+								<li class="angucomplete-row" ng-repeat="school in client.schools" ng-click="client.selectSchool(school)">
+									{! school.name !}
+								</li>
+							</ul>
+						</div>
 	        		</div>
 	        	</div>
 	        </fieldset>
@@ -222,7 +258,7 @@
 				      <div class="col-md-4" ng-init="getCountries()">
 				        <select  name="school_country" class="form-control" ng-disabled="client.active_view_client" ng-model="client.details.school_country">
 				          <option value="">-- Select Country --</option>
-				          <option ng-repeat="country in countries" value="{! country.id !}">{! country.name!}</option>
+				          <option ng-selected="{! client.details.school_country == country.id !}" ng-repeat="country in countries" value="{! country.id !}">{! country.name!}</option>
 				        </select>
 				      </div>
 	        	</div>
@@ -318,7 +354,7 @@
 				      <div class="col-md-4" ng-init="getCountries()">
 				        <select  name="country" class="form-control" ng-disabled="client.active_view_client" ng-model="client.details.country">
 				          <option value="">-- Select Country --</option>
-				          <option ng-repeat="country in countries" value="{! country.id !}">{! country.name!}</option>
+				          <option ng-selected="{! client.details.country == country.id !}" ng-repeat="country in countries" value="{! country.id !}">{! country.name!}</option>
 				        </select>
 				      </div>
 	        	</div>

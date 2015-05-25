@@ -37,7 +37,7 @@
 					{!! Form::text('search_name', ''
 						,array(
 							'placeholder' => 'Name'
-							, 'ng-model' => 'search_name'
+							, 'ng-model' => 'client.search.name'
 							, 'class' => 'form-control'
 							)
 					)!!}
@@ -46,7 +46,7 @@
 					{!! Form::text('search_email', ''
 						,array(
 							'placeholder' => 'Email Address'
-							, 'ng-model' => 'search_name'
+							, 'ng-model' => 'client.search.email'
 							, 'class' => 'form-control'
 							)
 					)!!}
@@ -64,25 +64,32 @@
 					{!! Form::text('search_school', ''
 						,array(
 							'placeholder' => 'School'
-							, 'ng-model' => 'search_name'
+							, 'ng-model' => 'client.search.school'
 							, 'class' => 'form-control'
 							)
 					)!!}
 				</div>
 				<div class="col-xs-5">
-					{!! Form::select('search_role', array('Teacher' => 'teacher', 'Principal' => 'principal')
+					{!! Form::select('search_role'
+						, array(
+							'' => '-- Select Role --'
+							, 'Parent' => 'Parent'
+							, 'Teacher' => 'Teacher'
+							, 'Principal' => 'Principal'
+						)
 						, null
-						,array(
+						, array(
 							'placeholder' => 'Email Address'
-							, 'ng-model' => 'search_name'
+							, 'ng-model' => 'client.search.client_role'
 							, 'class' => 'form-control'
-							)
+						)
 					)!!}
 				</div>
 				<div class="col-xs-2">
 					{!! Form::button('clear'
 						,array(
-							'class' => 'btn btn-white'
+							'class' => 'btn'
+							, 'ng-click' => ''
 							)
 					)!!}
 				</div>
