@@ -44,8 +44,14 @@ class SubjectAreaRepository implements SubjectAreaRepositoryInterface {
 			if(count($criteria) > 0) {
 				if(isset($criteria['name'])) {
 					$subject_areas = $subject_areas->name($criteria['name']);
-				}				
-			}
+				}
+
+                if(isset($criteria['subject_id'])) {
+                    $subject_areas = $subject_areas->subjectid($criteria['subject_id']);
+                }
+
+
+            }
 		
 			$count = $subject_areas->count();
 		
