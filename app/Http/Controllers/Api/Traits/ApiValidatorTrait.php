@@ -592,7 +592,7 @@ trait ApiValidatorTrait {
                 "$date_end" => $input["$date_end"]
             ],
             [
-                "$date_start" => "before:$date_end|after:today"
+                "$date_start" => "before:$date_end|after:-1 day"
             ],
             [
                 "before" => $error_msg[2500],

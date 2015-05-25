@@ -19,12 +19,30 @@ class SubscriptionRequest extends ApiRequest {
 	 * @return array
 	 */
 	public function rules() {
-        return [
-            'name'          => 'required',
-			'price'         => 'required|numeric',
-			'description'   => 'required',
-			'status'        => 'required|in:Enabled,Disabled'
-        ];
+	    switch($this->method){
+    	    case 'POST':
+        	    return ['name'          => 'required',
+            			'price'         => 'required|numeric|min:0.01|max:999999.99',
+            			'description'   => 'required',
+            			'status'        => 'required|in:Enabled,Disabled'];
+    	    break;
+    	    case 'PATCH':
+                switch($this->route()->getName()){
+                    case 'subscription.update.status':
+                        return ['status' => 'required|in:Enabled,Disabled'];    
+                    break;
+                    default:
+                    return ['name'          => 'required',
+                			'price'         => 'required|numeric|min:0.01|max:999999.99',
+                			'description'   => 'required',
+                			'status'        => 'required|in:Enabled,Disabled'];
+                }
+            break;
+	    }
+	
+	
+	
+        
 	}
 	
 	/**
@@ -34,7 +52,7 @@ class SubscriptionRequest extends ApiRequest {
 	 */
 	public function messages() {
 		return [
-			'decimal' => 'The :attribute must be a number.' 
+			'numeric' => 'The :attribute must be a number.' 
 		];
 	}
 }
