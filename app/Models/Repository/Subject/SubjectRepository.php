@@ -28,19 +28,19 @@ class SubjectRepository implements SubjectRepositoryInterface {
 			
 			if(count($criteria) > 0) {
 				if(isset($criteria['name'])) {
-					$subjects = $subjects->name($criteria['name']);
+					$subjects = $subjects->with('areas')->name($criteria['name']);
 				}				
 			}
 		
 			$count = $subjects->count();
 		
 			if($limit > 0 && $offset >= 0) {
-				$subjects = $subjects->offset($offset)->limit($limit);;
+				$subjects = $subjects->with('areas')->offset($offset)->limit($limit);;
 			}
 														
 		}
 		
-		$subjects = $subjects->orderBy('name', 'asc');
+		$subjects = $subjects->with('areas')->orderBy('name', 'asc');
 		
 		return ['total' => $count, 'records' => $subjects->get()->toArray()];	
 	}
