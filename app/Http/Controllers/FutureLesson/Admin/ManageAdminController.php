@@ -7,10 +7,9 @@ use Illuminate\Support\Facades\Session;
 
 use Illuminate\Http\Request;
 
-class ManageController extends Controller{
+class ManageAdminController extends Controller{
 
-	public function addClient(){
-		return view('admin.dashboard.client.add-client');
+	public function index() {
+		return view('admin.manage.admin.index');
 	}
-	
 }
