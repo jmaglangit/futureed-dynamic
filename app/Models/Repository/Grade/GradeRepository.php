@@ -30,7 +30,7 @@ class GradeRepository implements GradeRepositoryInterface{
 
         if(isset($limit)){
 
-            $grade = $grade->with('country')->  paginate($limit);
+            $grade = $grade->with('country')->paginate($limit);
 
             $append['limit'] = $limit;
         }
