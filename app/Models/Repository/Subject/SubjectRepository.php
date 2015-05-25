@@ -93,11 +93,19 @@ class SubjectRepository implements SubjectRepositoryInterface {
 		
 		try {
 		
-			$subject = Subject::find($id);
-			
+			$subject = Subject::with('areas')->find($id);
+
 			unset($data['code']);
-			
+
+            //update related status.
+            $subject->areas[0]->status = $data['status'];
+
 			$subject->update($data);
+
+            //update related table.
+            $subject->push();
+
+
 			
 		} catch(Exception $e) {
 		

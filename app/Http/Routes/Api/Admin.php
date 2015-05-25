@@ -9,6 +9,7 @@ Routes::group(['middleware' => 'api_user','prefix' => '/admin'], function()
 
 	Routes::post('/forgot-password/{id}','Api\v1\AdminPasswordController@forgotPassword');
 
+    Routes::post('change-password/{id}','Api\v1\AdminPasswordController@changePassword');
 
 
 });
