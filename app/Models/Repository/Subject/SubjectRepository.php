@@ -77,7 +77,7 @@ class SubjectRepository implements SubjectRepositoryInterface {
 	 */
 	public function getSubject($id) {
 				
-		return Subject::find($id);
+		return Subject::with('areas')->find($id);
 		
 	}
 	
