@@ -14,8 +14,7 @@ class Admin extends Model {
 
     protected $hidden = ['user_id','created_by','updated_by','created_at','updated_at','deleted_at'];
 
-    protected $fillable = ['user_id','first_name','admin_role'];
-
+    protected $fillable = ['user_id', 'first_name', 'last_name', 'admin_role'];
 
     /**
      * Inverse relation
@@ -25,6 +24,28 @@ class Admin extends Model {
         return $this->belongsTo('FutureEd\Models\Core\User');
     }
 
+	//-------------scopes
+	public function scopeUsername($query, $username) {
+		
+		return $query->whereHas('user', function($query) use ($username) {	
+			$query->where('username', 'like', '%'.$username.'%');
+		});
+				
+	}
+	
+	public function scopeEmail($query, $email) {
+	
+		return $query->whereHas('user', function($query) use ($email) {	
+			$query->where('email', 'like', '%'.$email.'%');
+		});
+		
+	}
+	
+	public function scopeRole($query, $role) {
+		
+		return $query->whereAdminRole($role);
+				
+	}
 
 
 }
