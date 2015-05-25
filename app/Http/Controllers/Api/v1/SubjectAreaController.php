@@ -49,6 +49,11 @@ class SubjectAreaController extends ApiController {
 		if(Input::get('offset')) {
 			$offset = intval(Input::get('offset'));
 		}
+
+        if(Input::get('subject_id')) {
+            $criteria['subject_id'] = Input::get('subject_id');
+        }
+
 			
 		$subjects = $this->subject_area->getSubjectAreas($criteria, $limit, $offset);
 
