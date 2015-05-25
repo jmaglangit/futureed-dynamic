@@ -2,7 +2,7 @@
 
 use FutureEd\Http\Requests\Api\ApiRequest;
 
-class ClientDiscountRequest extends ApiRequest {
+class VolumeDiscountRequest extends ApiRequest {
 	
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -20,7 +20,7 @@ class ClientDiscountRequest extends ApiRequest {
 	 */
 	public function rules() {
         return [
-            'client_id'     => 'required|numeric',
+            'min_seats'     => 'required|numeric|min:1|max:30000',
 			'percentage'    => 'required|numeric|min:1|max:100',
 			'status'        => 'required|in:Enabled,Disabled'
         ];

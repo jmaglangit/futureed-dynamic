@@ -151,7 +151,7 @@
                         <div class="col-md-4">
                             <select name="country" class="form-control" ng-model="reg.country">
                                 <option value="">-- Select Country --</option>
-                                <option ng-repeat="country in countries" value="{! country.id !}">{! country.name!}</option>
+                                <option ng-repeat="country in countries" value="{! country.name !}">{! country.name!}</option>
                             </select>
                         </div>
                     </div>

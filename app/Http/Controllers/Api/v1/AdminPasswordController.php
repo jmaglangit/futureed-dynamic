@@ -10,8 +10,13 @@ use Illuminate\Support\Facades\Input;
 
 class AdminPasswordController extends ApiController {
 
-
-     public function changePassword($id){
+    /**
+     * Admin forgot password.
+     *
+     * @param $id
+     * @return mixed
+     */
+     public function forgotPassword($id){
 
         $input = input::only('reset_code','password');
         $admin = config('futureed.admin');
@@ -64,12 +69,7 @@ class AdminPasswordController extends ApiController {
                 return $this->respondErrorMessage(2001);
 
             }
-
-
         }
-
-
-
    }
 
 

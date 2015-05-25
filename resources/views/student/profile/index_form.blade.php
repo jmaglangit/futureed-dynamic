@@ -158,8 +158,8 @@
             <div class="col-md-5">
                 <select class="form-control" name="country" ng-model="profile.prof.country" ng-disabled="!profile.active_edit">
                     <option selected="selected" value="">-- Select Country --</option>
-                    <option ng-repeat="country in countries" value="{! country.id !}" 
-                    	ng-selected="{! profile.prof.country == country.id !}">{! country.name !}</option>
+                    <option ng-repeat="country in countries" value="{! country.name !}" 
+                    	ng-selected="{! profile.prof.country == country.name !}">{! country.name !}</option>
                 </select>
             </div>
         </div>
