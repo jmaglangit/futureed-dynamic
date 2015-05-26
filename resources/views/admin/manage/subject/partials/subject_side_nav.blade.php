@@ -18,7 +18,7 @@
         <li id="subject_nav_head" data-target="subject" class="active side-nav-li">
 			<a href="" class="nav-link">Subject</a>
 		</li>
-		<ul class="sub-menu collapse" id="subject">
+		<ul class="sub-menu" id="subject">
         	<li ng-class="{ 'active' : subject.active_add_subject }">
 				<a href="" ng-click="subject.setManageSubjectActive('add_subject')"><span><i class="fa fa-plus-square"></i></span>Add Subject</a>
 			</li>

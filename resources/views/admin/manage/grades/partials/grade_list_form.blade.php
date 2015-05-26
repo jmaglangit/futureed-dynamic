@@ -4,14 +4,12 @@
 			<span>Grade Management</span>
 		</div>
 	</div>
-			
-	<div class="form-content" ng-if="grade.delete.success">		
-		<div class="alert alert-success">
-	    	<p>Successfully deleted the selected grade.</p>
-	    </div>
-	</div>
 
 	<div class="form-content col-xs-12">
+		<div class="alert alert-success" ng-if="grade.delete.success">
+	    	<p>Successfully deleted the selected grade.</p>
+	    </div>
+
 	    <div class="col-xs-3" style="padding:0;">
 			<div class="btn btn-gold" ng-click="grade.setManageGradeActive('add_grade')">
 				<div class="row">

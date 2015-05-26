@@ -3,7 +3,7 @@
 		Admin Dashboard
 	</div>
 	<div class="client-name">
-		Welcome, Seymour
+		Welcome, {! user.first_name !}
 	</div>
 </div>
 

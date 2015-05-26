@@ -151,9 +151,17 @@
 	        					'placeHolder' => 'School Name'
 	        					, 'ng-model' => 'client.create.school_name'
 	        					, 'ng-change' => 'client.searchSchool()'
+                        		, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
 	        					, 'class' => 'form-control'
 	        				)
 	        			) !!}
+	        			<div class="angucomplete-holder" ng-if="client.schools">
+							<ul class="col-xs-5 angucomplete-dropdown">
+								<li class="angucomplete-row" ng-repeat="school in client.schools" ng-click="client.selectSchool(school)">
+									{! school.name !}
+								</li>
+							</ul>
+						</div>
 	        		</div>
 	        	</div>
 	        </fieldset>

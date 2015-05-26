@@ -77,9 +77,9 @@ class LoginController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function registration()
+	public function registration($id = null)
 	{
-		return view('client.login.registration');
+		return view('client.login.registration', array('id' => $id));
 	}
 
 	public function registration_form() {

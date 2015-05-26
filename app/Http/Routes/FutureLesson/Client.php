@@ -15,6 +15,7 @@
 			'as' => 'client.email.confirm'
 			, 'uses' => 'FutureLesson\Client\ProfileController@enter_email_code'
 			]);
+	
 		Routes::get('/registration', [
 			'as' => 'client.registration'
 			, 'uses' => 'FutureLesson\Client\LoginController@registration'
