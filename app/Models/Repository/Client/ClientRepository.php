@@ -18,7 +18,7 @@ class ClientRepository implements ClientRepositoryInterface{
             'state',
             'country',
             'zip',
-            'is_account_reviewed'   
+            'account_status'   
         )
             ->where('user_id','=',$user_id)
             ->where('client_role','=',$role)->first();
@@ -51,7 +51,7 @@ class ClientRepository implements ClientRepositoryInterface{
                     'state'             => $client['state'],
                     'country'           => $client['country'],
                     'zip'               => $client['zip'],
-                    'is_account_reviewed'=> (isset($client['is_account_reviewed'])) ? $client['is_account_reviewed'] : 0,
+                    'account_status' 	=> (isset($client['account_status'])) ? $client['account_status'] : config('futureed.client_account_status_pending'),
                     'created_by'        => 1,
                     'updated_by'        => 1,
                 ]);
