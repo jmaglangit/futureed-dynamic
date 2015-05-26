@@ -12,6 +12,8 @@ class AppServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
+		#TODO: Find a cleaner way for this
+	
 		Validator::extend('custom_password', function($attribute, $value, $parameters) {
 			$valid = true;
 			
