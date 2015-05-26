@@ -281,7 +281,7 @@ class ClientController extends ApiController {
             $this->addMessageBag($this->validateNumber($client,'school_code'));
 		    $this->addMessageBag($this->zipCodeOptional($client,'zip'));
 
-        }else{
+        }else if(strcasecmp($client['client_role'],config('futureed.principal')) == 0){
 
         	$this->addMessageBag($this->validateStringOptional($client,'street_address'));
 			$this->addMessageBag($this->validateStringOptional($client,'city'));
