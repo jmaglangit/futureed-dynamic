@@ -22,22 +22,39 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 	this.editAdmin = editAdmin;
 	this.setActive = setActive;
 	this.resetPass = resetPass;
+	this.clearSearch = clearSearch;
 
 	self.validateNewAdminEmail = validateNewAdminEmail;
 	self.confirmNewEmail = confirmNewEmail;
 	self.changeAdminEmail = changeAdminEmail;
 
 	function getAdminList(){
+		var search_user = (self.search_user) ? self.search_user : Constants.EMPTY_STR;
+		var search_email = (self.search_email) ? self.search_email : Constants.EMPTY_STR;
+		var search_role = (self.search_role) ? self.search_role : Constants.EMPTY_STR;
 
-		manageAdminService.getAdminList().success(function(response){
+		$scope.ui_block();
+		manageAdminService.getAdminList(search_user, search_email, search_role).success(function(response){
 			if(angular.equals(response.status, Constants.STATUS_OK)){
+				if(response.errors){
+					self.errors = $scope.errorHandler(response.errors);
+				}
 				if(response.data){
 					self.data = response.data.records;
 				}
 			}
+			$scope.ui_unblock();
 		}).error(function(response) {
 			this.internalError();
 		});
+	}
+
+	function clearSearch(){
+		self.search_user = Constants.EMPTY_STR;
+		self.search_email = Constants.EMPTY_STR;
+		self.search_role = Constants.EMPTY_STR;
+
+		self.getAdminList();
 	}
 
 	function addAdmin(){

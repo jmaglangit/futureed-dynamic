@@ -13,10 +13,11 @@ function manageAdminService($http) {
 	manageAdminApi.resetPass = resetPass;
 	manageAdminApi.changeAdminEmail = changeAdminEmail;
 
-	function getAdminList(){
+	function getAdminList(user, email, role){
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url 	: adminApiUrl + 'admin'
+			, url 	: adminApiUrl + 'admin?username=' + user
+				+ '&email=' + email + '&role=' + role
 		});
 	}
 

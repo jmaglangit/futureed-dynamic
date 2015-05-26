@@ -22,13 +22,13 @@
 			<div class="form-group">
 				<label class="col-xs-2 control-label">Username <span class="required">*</span></label>
 				<div class="col-xs-5">
-					{!! Form::text('search_name', '',['class' => 'form-control', 'ng-model' => 'search_user', 'placeholder' => 'Username']) !!}
+					{!! Form::text('search_name', '',['class' => 'form-control', 'ng-model' => 'admin.search_user', 'placeholder' => 'Username']) !!}
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-xs-2 control-label">Email <span class="required">*</span></label>
 				<div class="col-xs-5">
-					{!! Form::text('search_email', '',['class' => 'form-control', 'ng-model' => 'search_email', 'placeholder' => 'Email']) !!}
+					{!! Form::text('search_email', '',['class' => 'form-control', 'ng-model' => 'admin.search_email', 'placeholder' => 'Email']) !!}
 				</div>
 			</div>
 			<div class="form-group">
@@ -39,12 +39,12 @@
 							'Admin' => 'Admin', 
 							'Super Admin' => 'Super Admin'), 
 							null, 
-							['ng-model' => 'search_role' , 'class' => 'form-control']
+							['ng-model' => 'admin.search_role' , 'class' => 'form-control']
 					) !!}
 				</div>
 				<div class="btn-container col-xs-5">
-					<button class="btn btn-blue btn-medium">Search</button>
-					<button class="btn btn-gold btn-medium">Clear</button>
+					<button class="btn btn-blue btn-medium" type="button" ng-click="admin.getAdminList()">Search</button>
+					<button class="btn btn-gold btn-medium" type="button" ng-click="admin.clearSearch()">Clear</button>
 				</div>
 			</div>
 		</div>
