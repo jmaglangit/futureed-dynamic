@@ -20,14 +20,10 @@
 			
 			<div class="client-content" template-directive template-url="{!! route('admin.manage.client.partials.client_details_form') !!}"></div>
 			
-			<div class="client-content" template-directive template-url="{!! route('admin.manage.client.partials.edit_email_form') !!}"></div>
-				
-			<!-- <div class="client-content" template-directive template-url="{!! route('admin.manage.client.partials.confirm_email_form') !!}"></div> -->
+			<div class="client-content" template-directive template-url="{!! route('admin.manage.client.partials.edit_email_form') !!}"></div>	
 		</div>		
 	</div>
 @stop
-
-@section('footer')	
 	
 @section('scripts')
 	{!! Html::script('/js/admin/constants/manage_client_constants.js')!!}

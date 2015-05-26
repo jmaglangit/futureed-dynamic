@@ -6,6 +6,7 @@ ManageClientController.$inject = ['$scope', 'apiService','manageClientService'];
 function ManageClientController($scope, apiService, manageClientService) {
 	var self = this;
 	
+	self.search = {};
 	self.clients = [{}];
 	self.create = {};
 	self.role = {};
@@ -14,6 +15,7 @@ function ManageClientController($scope, apiService, manageClientService) {
 	self.schools = Constants.FALSE;
 
 	self.getClientList = getClientList;
+	self.clearSearchForm = clearSearchForm;
 
 	self.getClientDetails = getClientDetails;
 	self.clientChangeStatus = clientChangeStatus;
@@ -33,14 +35,18 @@ function ManageClientController($scope, apiService, manageClientService) {
 	*/
 
 	function getClientList() {
+		var search_name = (self.search.name) ? self.search.name: Constants.EMPTY_STR;
+		var search_email = (self.search.email) ? self.search.email: Constants.EMPTY_STR;
+		var search_school = (self.search.school) ? self.search.school: Constants.EMPTY_STR;
+		var search_client_role = (self.search.client_role) ? self.search.client_role: Constants.EMPTY_STR;
 
 		$scope.ui_block();
-		manageClientService.getClientList().success(function(response) {
+		manageClientService.getClientList(search_name, search_email, search_school, search_client_role).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
-					self.clients = response.data.records;
+					self.clients = (response.data.records) ? response.data.records : Constants.FALSE;
 				}
 			}
 
@@ -49,6 +55,12 @@ function ManageClientController($scope, apiService, manageClientService) {
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
+	}
+
+	function clearSearchForm() {
+		self.errors = Constants.FALSE;
+		self.search = {};
+		self.getClientList();
 	}
 
 	/**
@@ -238,7 +250,10 @@ function ManageClientController($scope, apiService, manageClientService) {
 						$("input[name='" + value.field + "'], select[name='" + value.field + "']").addClass("required-field");
 					});
 				} else if(response.data) {
-					console.log(response.data);
+					self.create = {};
+					self.validation = {};
+					self.create.success = Constants.TRUE;
+	    			$("html, body").animate({ scrollTop: 0 }, "slow");
 				}
 			}
 
@@ -285,6 +300,7 @@ function ManageClientController($scope, apiService, manageClientService) {
 
 			case "client_list"	:
 			default:
+				self.getClientList();
 				self.active_client_list = Constants.TRUE;
 				break
 		}

@@ -78,10 +78,6 @@
 	</div>
 
 @stop
-
-@section('footer')
-
-@overwrite
   
 @section('scripts')
   {!! Html::script('/js/admin/controllers/login_controller.js')!!}

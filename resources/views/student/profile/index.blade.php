@@ -107,8 +107,6 @@
 </div>
 @stop
 
-@section('footer')
-
 @section('scripts')
 	{!! Html::script('/js/student/controllers/profile_controller.js') !!}
 	{!! Html::script('/js/student/services/profile_service.js') !!}

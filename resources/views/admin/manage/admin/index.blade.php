@@ -18,8 +18,6 @@
 		</div>		
 	</div>
 @stop
-
-@section('footer')	
 	
 @section('scripts')
 	{!! Html::script('/js/admin/constants/manage_admin_constants.js')!!}

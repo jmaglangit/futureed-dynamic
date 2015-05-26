@@ -26,6 +26,12 @@
           <!-- <li>
             <a href="#"> Student </a>
           </li> -->
-        </ul>              
+        </ul>   
+
+        <li  data-toggle="collapse" data-target="#students" class="collapsed side-nav-li" ng-class="{ 'active' : admincon.active_student}">
+            <a class="nav-link" href="{!! route('admin.manage.subject.index') !!}">
+              Manage Subjects
+            </a>
+        </li>           
     </ul>
 </div>
