@@ -31,30 +31,31 @@ class AdminRequest extends ApiRequest {
 		if($admin) {
 			$admin_user_id = $admin->user_id;
 		}
-				
+		
+		$validation_rules = [
+					'username' => 'required|min:'.config('futureed.username_min').'|max:'.config('futureed.username_max').'|alpha_num|unique:users,username,NULL,id,user_type,'.config('futureed.admin'),
+					'admin_role' => 'required|in:Admin,Super Admin',
+					'status' => 'required|in:Enabled,Disabled',
+					'first_name' => 'required|regex:/^([a-z\x20])+$/i|max:'.config('futureed.first_name_max'),
+					'last_name' => 'required|regex:/^([a-z\x20])+$/i|max:'.config('futureed.last_name_max')
+				];
+		
 		switch($this->method) {
 			case 'PUT':
-				return [
-					'username' => 'required|min:8|max:32|alpha_num|unique:users,username,'.$admin_user_id.',id,user_type,'.config('futureed.admin'),
-					'admin_role' => 'required|in:Admin,Super Admin',
-					'status' => 'required|in:Enabled,Disabled',
-					'first_name' => 'required|regex:/^([a-z\x20])+$/i|max:64',
-					'last_name' => 'required|regex:/^([a-z\x20])+$/i|max:64'
-				];
+				
+				$validation_rules['username'] = 'required|min:'.config('futureed.username_min').'|max:'.config('futureed.username_max').'|alpha_num|unique:users,username,'.$admin_user_id.',id,user_type,'.config('futureed.admin');
 				break;
+			
 			case 'POST':
 			default:
-				return [
-					'username' => 'required|min:8|max:32|alpha_num|unique:users,username,NULL,id,user_type,'.config('futureed.admin'),
-					'email' => 'required|email|unique:users,email,NULL,id,user_type,'.config('futureed.admin'),
-					'admin_role' => 'required|in:Admin,Super Admin',
-					'status' => 'required|in:Enabled,Disabled',
-					'first_name' => 'required|regex:/^([a-z\x20])+$/i|max:64',
-					'last_name' => 'required|regex:/^([a-z\x20])+$/i|max:64'
-				];				
+				
+				$validation_rules['password'] = 'required|min:'.config('futureed.password_min').'|max:'.config('futureed.password_max').'|custom_password';
+				$validation_rules['email'] = 'required|email|unique:users,email,NULL,id,user_type,'.config('futureed.admin');
+						
 	        	break;
 		}
 		
+		return $validation_rules;
 	}
 	
 	/**
@@ -64,6 +65,7 @@ class AdminRequest extends ApiRequest {
 	 */
 	public function messages() {
 		return [
+			'custom_password' => 'The password is invalid.'
 		];
 	}
 }

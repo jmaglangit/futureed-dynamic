@@ -3,9 +3,11 @@
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
+use Illuminate\Http\Request;
+
 use FutureEd\Models\Repository\Admin\AdminRepositoryInterface as Admin;
 use FutureEd\Models\Repository\User\UserRepositoryInterface as User;
-use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Input;
 
 use FutureEd\Http\Requests\Api\AdminRequest;
@@ -79,7 +81,7 @@ if(Input::get('limit')){
 	 */
 	public function store(AdminRequest $request)
 	{
-		$data = $request->all();
+		$data = $request->only(['username', 'password', 'email', 'admin_role', 'status', 'first_name', 'last_name']);
 	
 		$data['user_type'] = config('futureed.admin');
 	
@@ -119,10 +121,10 @@ if(Input::get('limit')){
 	 */
 	public function update($id, AdminRequest $request)
 	{
-		$data = $request->all();
+		#TODO: If admin role is Admin, it cannot edit Super Admin account. If admin role is Super Admin, then it can edit Admin and Super Admin account
 	
-		unset($data['code']);
-		
+		$data = $request->only(['username', 'password', 'admin_role', 'status', 'first_name', 'last_name']);
+			
 		$admin = $this->admin->updateAdmin($id, $data);
 		
 		if($admin) {
@@ -142,7 +144,26 @@ if(Input::get('limit')){
 	 */
 	public function destroy($id)
 	{
-		//
+		#TODO: Admin cannot delete a Super Admin account but Super admin can delete admin account and other super admin account.
+		
+		if($this->admin->canDelete()) {
+			$admin = $this->admin->deleteAdmin($id);
+			
+			if($admin) {
+			
+				$user = $this->user->deleteUser($admin->user_id);
+				
+				return $this->respondWithData(TRUE);
+				
+			} else {
+				
+				return $this->respondWithData(FALSE);
+				
+			}
+			
+		} else {
+			return $this->respondErrorMessage(2601);
+		}
 	}
 
 }
