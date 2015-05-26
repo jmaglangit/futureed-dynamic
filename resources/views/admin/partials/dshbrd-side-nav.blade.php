@@ -17,7 +17,7 @@
         </li>
         <ul class="sub-menu collapse" id="students">
             <li>
-				        <a href=""><span><i class="fa fa-user"></i></span>Manage Admin</a>
+				        <a href="{!! route('admin.manage.admin.index') !!}" ng-init="client.setManageClientActive()"><span><i class="fa fa-user"></i></span>Manage Admin</a>
             </li>
 
             <li>
