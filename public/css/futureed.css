@@ -224,8 +224,8 @@ body {/*background: radial-gradient(transparent 50%, rgba(0, 0, 0, 0.3) 100%), l
 	cursor: pointer;
 }
 .selected {
-	text-align: center; 
-	transform: scale(1.1);
+	/*text-align: center; */
+	/*transform: scale(1.1);*/
 }
 .form-select-password .list-inline li.selected img{
 	border: 5px solid rgba(0,0,0,0.13);
@@ -944,4 +944,16 @@ div > .btncon > a {
   	font-size: 12px;
   	margin-left: 60px;
   	padding: 10px;
+}
+
+.margin-top-8 {
+	margin-top: 8px;
+}
+
+.success-icon {
+	color: #008000;
+}
+
+.error-icon {
+	color: #be0e14;
 }

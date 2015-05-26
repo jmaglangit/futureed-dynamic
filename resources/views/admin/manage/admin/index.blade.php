@@ -11,10 +11,11 @@
 
 		<div class="wrapr">
 			<div class="client-nav side-nav">
-				<div template-directive template-url="{!! route('admin.manage.client.partials.side_nav') !!}"></div>
+				<div template-directive template-url="{!! route('admin.manage.admin.partials.side_nav') !!}"></div>
 			</div>	        
 
-			<!-- <div class="client-content" template-directive template-url="{!! route('admin.manage.client.partials.list_client_form') !!}"></div> -->
+			<div class="client-content" template-directive template-url="{!! route('admin.manage.client.partials.list_admin_form') !!}"></div>
+			<div class="client-content" template-directive template-url="{!! route('admin.manage.client.partials.add_admin') !!}"></div>
 		</div>		
 	</div>
 @stop

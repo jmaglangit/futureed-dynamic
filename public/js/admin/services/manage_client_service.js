@@ -10,6 +10,7 @@ function manageClientService($http) {
 	manageClientApi.getClientList = getClientList;
 	manageClientApi.getClientDetails = getClientDetails;
 	manageClientApi.updateClientDetails = updateClientDetails;
+	manageClientApi.clientChangeStatus = clientChangeStatus;
 	manageClientApi.createNewClient = createNewClient;
 	manageClientApi.searchSchool = searchSchool;
 
@@ -32,6 +33,14 @@ function manageClientService($http) {
 			method 	: Constants.METHOD_PUT
 			, data	: data
 			, url 	: manageClientApiUrl + 'client/' + data.id
+		});
+	}
+
+	function clientChangeStatus(id, status) {
+		return $http({
+			method 	: Constants.METHOD_POST
+			, data	: {status : status}
+			, url 	: manageClientApiUrl + 'client/change-status/' + id
 		});
 	}
 

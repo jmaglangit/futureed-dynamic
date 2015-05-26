@@ -270,6 +270,30 @@ class MailServices {
     }
 
 
+    public function sendAdminChangePassword($data,$new_password){
+
+        $template = 'emails.admin.change-password';
+
+        $content = [
+            'view' => $template,
+            'data' => [
+                'name' => $data['name'],
+                'new_password' => $new_password
+            ],
+            'mail_recipient' => $data['email'],
+            'mail_recipient_name' => $data['name' ],
+            'subject' => 'Change Password'
+        ];
+
+        $this->sendMail($content);
+
+
+
+    }
+
+
+
+
 
 
 }

@@ -64,5 +64,9 @@ class ManageClientController extends Controller{
 	public function detail_form() {
 		return view('admin.manage.client.partials.detail_form');
 	}
+
+	public function type_ahead_form() {
+		return view('admin.manage.client.partials.type_ahead_form');
+	}
 	
 }

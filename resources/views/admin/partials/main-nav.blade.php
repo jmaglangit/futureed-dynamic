@@ -25,9 +25,10 @@
              -->
              <ul class="nav navbar-nav">
                <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Users <span class="caret"></span></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Manage <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><a href="#">Action</a></li>
+                <li>{!! Html::link(route('admin.manage.admin.index'), 'Admin') !!}</li>
+                <li>{!! Html::link(route('admin.manage.client.index'), 'Client') !!}</li>
               </ul>
             </li>
              </ul>
