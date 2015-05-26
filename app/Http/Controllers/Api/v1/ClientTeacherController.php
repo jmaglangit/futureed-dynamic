@@ -147,16 +147,7 @@ class ClientTeacherController extends ApiController {
         return $this->respondWithData($teacher);
 	}
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
+
 
 	/**
 	 * Update the specified resource in storage.
@@ -166,7 +157,9 @@ class ClientTeacherController extends ApiController {
 	 */
 	public function update($id)
 	{
-		//
+
+
+
 	}
 
 	/**
@@ -177,7 +170,21 @@ class ClientTeacherController extends ApiController {
 	 */
 	public function destroy($id)
 	{
-		//
+        //check if this record is related to student before deleting
+        $client_details = $this->client->getClientDetails($id);
+        $client_to_classroom = $this->client->getClientToClassroom($id);
+
+        if(empty($client_details)){
+
+            return $this->respondErrorMessage(2001);
+        }
+
+        if($client_to_classroom['classroom']->toArray()){
+
+            return $this->respondErrorMessage(2119);
+        }
+
+        return $this->respondWithData($this->client->deleteClient($id));
 	}
 
 }
