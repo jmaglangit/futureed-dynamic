@@ -16,6 +16,8 @@
 
 			<div class="client-content" template-directive template-url="{!! route('admin.manage.client.partials.list_admin_form') !!}"></div>
 			<div class="client-content" template-directive template-url="{!! route('admin.manage.client.partials.add_admin') !!}"></div>
+			<div class="client-content" template-directive template-url="{!! route('admin.manage.client.partials.view_admin') !!}"></div>
+			<div class="client-content" template-directive template-url="{!! route('admin.manage.client.partials.reset_pass') !!}"></div>
 		</div>		
 	</div>
 @stop
