@@ -27,4 +27,6 @@ interface ClientRepositoryInterface {
 
     public function getTeacherDetails($criteria,$limit);
 
+    public function getClientByUserId($id);
+
 }
