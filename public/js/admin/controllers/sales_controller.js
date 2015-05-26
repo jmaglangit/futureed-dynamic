@@ -28,8 +28,6 @@ function SalesController($scope, salesService) {
 		self.errors = Constants.FALSE;
 
 		this.status = $('input[name=status]:checked', '#price_form').val();
-
-		console.log(this.status);
 		$scope.ui_block();
 
 		salesService.addPrice(this.name, this.description, this.add_price, this.status).success(function(response){
