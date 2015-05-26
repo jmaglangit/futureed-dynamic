@@ -60,7 +60,7 @@ function manageClientService($http) {
 	function rejectClient(id, callback_uri) {
 		return $http({
 			method 	: Constants.METHOD_POST
-			, data	: {is_account_reviewed : -1, callback_uri : callback_uri}
+			, data	: {account_status : "Rejected", callback_uri : callback_uri}
 			, url 	: manageClientApiUrl + 'client/reject-client/' + id
 		});
 	}
@@ -75,7 +75,7 @@ function manageClientService($http) {
 	function verifyClient(id, callback_uri) {
 		return $http({
 			method 	: Constants.METHOD_POST
-			, data	: {is_account_reviewed : Constants.TRUE, callback_uri : callback_uri}
+			, data	: {account_status : "Accepted", callback_uri : callback_uri}
 			, url 	: manageClientApiUrl + 'client/verify-client/' + id
 		});
 	}
