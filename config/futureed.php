@@ -53,5 +53,10 @@ return [
 	'password_max' => 32,
 	'first_name_max' => 64,
 	'last_name_max' => 64,
+	
+	#client account status 
+	'client_account_status_pending' => 'Pending',
+	'client_account_status_accepted' => 'Accepted',
+	'client_account_status_rejected' => 'Rejected',
 
 ];
