@@ -30,8 +30,6 @@
   
 @stop
 
-@section('footer')
-
 @section('scripts')
 
 @stop

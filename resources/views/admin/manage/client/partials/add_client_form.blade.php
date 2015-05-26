@@ -13,8 +13,8 @@
 	            </p>
 	        </div>
 
-	        <div class="alert alert-success" ng-if="success">
-	        	<p>Successfully update profile.</p>
+	        <div class="alert alert-success" ng-if="client.create.success">
+	        	<p>Successfully added new client user.</p>
 	        </div>
 	        <fieldset>
 	        	<legend class="legend-name-mid">
