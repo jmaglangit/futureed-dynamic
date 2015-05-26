@@ -1,5 +1,6 @@
 <?php namespace FutureEd\Providers;
 
+use Validator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider {
@@ -11,7 +12,38 @@ class AppServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		//
+		#TODO: Find a cleaner way for this
+	
+		Validator::extend('custom_password', function($attribute, $value, $parameters) {
+			$valid = true;
+			
+			if (!preg_match("#[0-9]+#", $value)){
+			
+				$valid = false;
+			
+			}
+			
+			if(!preg_match("#[a-z]+#", $value)){
+			
+				$valid = false;
+			
+			}
+			
+			if(!preg_match("#[A-Z]+#", $value)){
+			
+				$valid = false;
+				
+			}
+			
+			if(!preg_match("#[\W ]+#", $value)){
+			
+				$valid = false;
+				
+			}
+			
+			return $valid;
+		
+		});
 	}
 
 	/**
