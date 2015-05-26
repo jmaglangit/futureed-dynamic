@@ -8,12 +8,16 @@
 			, 'uses' =>'FutureLesson\Client\LoginController@forgot_password'
 			]);
 		Routes::get('/register/confirm', [
-			'as' => 'client.register.confirm'
-			, 'uses' => 'FutureLesson\Client\LoginController@enter_confirmation'
-		]);
+				'as' => 'client.register.confirm'
+				, 'uses' => 'FutureLesson\Client\LoginController@enter_confirmation'
+			]);
 		Routes::get('/email/confirm', [
 			'as' => 'client.email.confirm'
 			, 'uses' => 'FutureLesson\Client\ProfileController@enter_email_code'
+			]);
+		Routes::get('/user/confirm', [
+			'as' => 'client.user.confirm'
+			, 'uses' => 'FutureLesson\Client\LoginController@user_confirm'
 			]);
 	
 		Routes::get('/registration', [
