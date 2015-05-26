@@ -8,6 +8,7 @@ var Constants = {
 	, METHOD_POST	: 'POST'
 	, METHOD_GET	: 'GET'
 	, METHOD_PUT	: 'PUT'
+	, METHOD_DELETE	: 'DELETE'
 
 	, STATUS_OK		: 200
 
@@ -34,6 +35,14 @@ var Constants = {
 	, ANNOUNCEMENT 	: "announcement"
 	, PRICE 		: "price"
 
+	, DELETE_ERROR 		: "Error deleting."
+	, DELETE_SUCCESS	: "successfully deleted."
+	, EDIT_SUCCESS 		: "successfully edited."
+	, ADD_SUCCESS_MSG 	: "successfully added."
+
+	, STATUS_TRUE 	: "true"
+	, STATUS_FALSE 	: "false"
+
 	, MSG_INTERNAL_ERROR	: "Internal Server Error."
 	, MSG_PPW_NOT_MATCH 	: "Picture Password does not match."
 	, MSG_PPW_INCORRECT		: "Picture password is incorrect."
@@ -52,6 +61,8 @@ var Constants = {
 	, MSG_EA_CURR_NOTMATCH	: "Current email address does not match."
 	, MSG_EA_NOT_MATCH		: "Email Address does not match."
 	, ANNOUNCE_SUCCESS		: "Success You've created Site Maintainance Announcement."
+
+	, PRICE_SUCCESS 		: "You have successfully created a subscription."
 
 	, MSG_U_NOTEXIST		: "User does not exist."
 	, MSG_U_EXIST 			: "Username already exists."

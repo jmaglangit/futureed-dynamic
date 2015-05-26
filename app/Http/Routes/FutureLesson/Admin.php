@@ -27,7 +27,6 @@
 					'as' => 'admin.login.forgot_password'
 					, 'uses' => 'FutureLesson\Admin\LoginController@forgotPass'
 				]);
-			/*change this to post (for template viewing only)*/
 			Routes::post('/reset-password', [
 					'as' => 'admin.login.reset_password'
 					, 'uses' => 'FutureLesson\Admin\LoginController@resetPass'
@@ -47,6 +46,41 @@
 				, 'uses' => $manage_admin_controller . '@index'
 			]);
 
+			/**
+			* admin/manage/admin
+			*/
+			Routes::group(['prefix' => '/admin'], function() {
+				$manage_admin_controller = 'FutureLesson\Admin\ManageAdminController';
+
+				Routes::get('/', [
+						'as' => 'admin.manage.admin.index'
+						, 'middleware' => 'admin'
+						, 'uses' => $manage_admin_controller . '@index'
+					]);
+				
+				Routes::group(['prefix' => '/partials'], function(){
+					$manage_admin_controller = 'FutureLesson\Admin\ManageAdminController';
+
+					Routes::get('/side_nav', [
+						'as' => 'admin.manage.admin.partials.side_nav'
+						, 'middleware' => 'admin'
+						, 'uses' => $manage_admin_controller . '@side_nav'
+					]);
+
+					Routes::get('/list_admin_form', [
+						  'as' => 'admin.manage.client.partials.list_admin_form'
+						, 'middleware' => 'admin'
+						, 'uses' => $manage_admin_controller . '@list_admin_form'
+					]);
+
+					Routes::get('/add_admin', [
+						  'as' => 'admin.manage.client.partials.add_admin'
+						, 'middleware' => 'admin'
+						, 'uses' => $manage_admin_controller . '@add_admin'
+					]);
+				});
+			});
+
 			Routes::group(['prefix' => '/client'], function() {
 				$manage_client_controller = 'FutureLesson\Admin\ManageClientController';
 
@@ -64,6 +98,7 @@
 						, 'middleware' => 'admin'
 						, 'uses' => $manage_client_controller . '@side_nav'
 					]);
+
 
 					Routes::get('/list_client_form', [
 						  'as' => 'admin.manage.client.partials.list_client_form'
@@ -94,13 +129,108 @@
 						, 'middleware' => 'admin'
 						, 'uses' => $manage_client_controller . '@confirm_email_form'
 					]);
+				});
+			});
 
-					Routes::get('/type_ahead_form', [
-						  'as' => 'admin.manage.client.partials.type_ahead_form'
+			/**
+			* CRUD Subject Routes
+			*/
+			Routes::group(['prefix' => '/subject'], function() {
+				
+				$subject_controller = 'FutureLesson\Admin\ManageSubjectController';
+				
+				Routes::get('/',
+					[
+						'as' => 'admin.manage.subject.index'
 						, 'middleware' => 'admin'
-						, 'uses' => $manage_client_controller . '@type_ahead_form'
+						, 'uses' => $subject_controller . '@index'
 					]);
-					
+
+				Routes::group(['prefix' => '/partial'], function() {
+					$subject_controller = 'FutureLesson\Admin\ManageSubjectController';
+
+					Routes::get('/subject_list_form',
+						[
+							'as' => 'admin.manage.subject.partials.subject_list_form'
+							, 'middleware' => 'admin'
+							, 'uses' => $subject_controller . '@subject_list_form'
+						]);
+
+					Routes::get('/add_subject_form',
+						[
+							'as' => 'admin.manage.subject.partials.add_subject_form'
+							, 'middleware' => 'admin'
+							, 'uses' => $subject_controller . '@add_subject_form'
+						]);
+
+					Routes::get('/subject_details_form',
+						[
+							'as' => 'admin.manage.subject.partials.subject_details_form'
+							, 'middleware' => 'admin'
+							, 'uses' => $subject_controller . '@subject_details_form'
+						]);
+
+					Routes::get('/delete_subject_form',
+						[
+							'as' => 'admin.manage.subject.partials.delete_subject_form'
+							, 'middleware' => 'admin'
+							, 'uses' => $subject_controller . '@delete_subject_form'
+						]);
+					Routes::get('/subject_side_nav',
+						[
+							'as' => 'admin.manage.subject.partials.subject_side_nav'
+							, 'middleware' => 'admin'
+							, 'uses' => $subject_controller . '@subject_side_nav'
+						]);
+				});
+			});
+
+			Routes::group(['prefix' => 'grades'], function() {
+				$grade_controller = 'FutureLesson\Admin\ManageGradeController';
+
+				Routes::get('/',
+					[
+						'as' => 'admin.manage.grades.index'
+						, 'middleware' => 'admin'
+						, 'uses' => $grade_controller . '@index'
+					]);
+
+				Routes::group(['prefix' => 'partial'], function() {
+					$grade_controller = 'FutureLesson\Admin\ManageGradeController';
+
+					Routes::get('/grade_list_form',
+						[
+							'as' => 'admin.manage.grades.partials.grade_list_form'
+							, 'middleware' => 'admin'
+							, 'uses' => $grade_controller . '@grade_list_form'
+						]);
+
+					Routes::get('/add_grade_form',
+						[
+							'as' => 'admin.manage.grades.partials.add_grade_form'
+							, 'middleware' => 'admin'
+							, 'uses' => $grade_controller . '@add_grade_form'
+						]);
+
+					Routes::get('/grade_details_form',
+						[
+							'as' => 'admin.manage.grades.partials.grade_details_form'
+							, 'middleware' => 'admin'
+							, 'uses' => $grade_controller . '@grade_details_form'
+						]);
+
+					Routes::get('/delete_grade_form',
+						[
+							'as' => 'admin.manage.grades.partials.delete_grade_form'
+							, 'middleware' => 'admin'
+							, 'uses' => $grade_controller . '@delete_grade_form'
+						]);
+					Routes::get('/grade_side_nav',
+						[
+							'as' => 'admin.manage.grades.partials.grade_side_nav'
+							, 'middleware' => 'admin'
+							, 'uses' => $grade_controller . '@grade_side_nav'
+						]);
 				});
 			});
 
@@ -116,6 +246,43 @@
 							,'middleware' => 'admin'
 							,'uses' => $price_controller. '@index'
 						]);
+					/**
+					* admin/manage/price/partials
+					*/
+					Routes::group(['prefix' => '/partials'], function()
+						{
+							$price_controller = 'FutureLesson\Admin\PriceController';
+							Routes::get('price_settings',
+								[
+									'as' => 'admin.manage.price.partials.price_settings'
+									, 'middleware' => 'admin'
+									, 'uses' => $price_controller . '@price_settings'
+								]);
+							Routes::get('client_discount',
+								[
+									'as' => 'admin.manage.price.partials.client_discount'
+									, 'middleware' => 'admin'
+									, 'uses' => $price_controller . '@client_discount'
+								]);
+							Routes::get('edit_price',
+								[
+									'as' => 'admin.manage.price.partials.edit_price'
+									, 'middleware' => 'admin'
+									, 'uses' => $price_controller . '@edit_price'
+								]);
+							Routes::get('bulk_discount',
+								[
+									'as' => 'admin.manage.price.partials.bulk_discount'
+									, 'middleware' => 'admin'
+									, 'uses' => $price_controller . '@bulk_discount'
+								]);
+							Routes::get('bulk_edit',
+								[
+									'as' => 'admin.manage.price.partials.bulk_edit'
+									, 'middleware' => 'admin'
+									, 'uses' => $price_controller . '@bulk_edit'
+								]);
+						});
 				});
 
 			/**

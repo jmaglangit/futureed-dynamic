@@ -83,7 +83,6 @@ body {/*background: radial-gradient(transparent 50%, rgba(0, 0, 0, 0.3) 100%), l
 	text-transform: uppercase;
 	letter-spacing: .02em;
 	border-radius: 2px;
-	margin-bottom: 10px;
 }
 
 .btn-container {
@@ -107,7 +106,7 @@ body {/*background: radial-gradient(transparent 50%, rgba(0, 0, 0, 0.3) 100%), l
 }
 
 .btn-fit {
-	width: 100%;
+	width: 100% !important;
 }
 
 .btn:hover { color: #ccc; }
