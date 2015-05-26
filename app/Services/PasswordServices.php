@@ -31,11 +31,14 @@ class PasswordServices {
                 $valid = false;
          }
 
+
+        //to do put min to config
          if(strlen($password) <8){
 
          		$valid = false;
          }
 
+        //to do put max to config
          if(strlen($password) >32){
 
          		$valid = false;
