@@ -306,13 +306,9 @@ class EmailController extends ApiController {
     public function verifyClient($id){
 
         $userType = config('futureed.client');
-        $input = Input::only('is_account_reviewed');
         $url = Input::only('callback_uri');
 
-
-
         $this->addMessageBag($this->validateVarNumber($id));
-        $this->addMessageBag($this->isAccountReviewed($input,'is_account_reviewed'));
         $this->addMessageBag($this->validateString($url,'callback_uri'));
 
 
@@ -336,7 +332,7 @@ class EmailController extends ApiController {
 
                 //this sends an email to if verify
                 $this->mail->sendClientVerification($user_details,$url['callback_uri']);
-                $this->client->updateClientDetails($id,$input);
+                $this->client->updateClientDetails($id, ['account_status' => config('futureed.client_account_status_accepted')]);
 
                 return $this->respondWithData(['id' => $id
                                              ]);
@@ -351,13 +347,11 @@ class EmailController extends ApiController {
      public function rejectClient($id){
 
         $userType = config('futureed.client');
-        $input = Input::only('is_account_reviewed');
         $url = Input::only('callback_uri');
 
 
 
         $this->addMessageBag($this->validateVarNumber($id));
-        $this->addMessageBag($this->isAccountReviewed($input,'is_account_reviewed'));
         $this->addMessageBag($this->validateString($url,'callback_uri'));
 
 
@@ -381,7 +375,7 @@ class EmailController extends ApiController {
 
                 //this sends an email to if verify
                 $this->mail->sendClientRejection($user_details,$url['callback_uri']);
-                $this->client->updateClientDetails($id,$input);
+                $this->client->updateClientDetails($id, ['account_status' => config('futureed.client_account_status_rejected')]);
 
                 return $this->respondWithData(['id' => $id
                                              ]);

@@ -89,7 +89,7 @@ class UserPasswordController extends UserController {
                       $client_id = $this->client->getClientId($return['user_id']);
                       $client = $this->client->getClientDetails($client_id);
 
-                      if($client['is_account_reviewed'] == 0){
+                      if($client['account_status'] != config('futureed.client_account_status_accepted')){
 
                         return $this->respondErrorMessage(2013);
 
