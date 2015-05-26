@@ -197,7 +197,6 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 			$("html, body").animate({ scrollTop: 0 }, "slow");
 		}else{
 			$scope.ui_block();
-			console.log(self.password)
 			manageAdminService.resetPass(self.password, self.admininfo.id).success(function(response){
 				if(angular.equals(response.status, Constants.STATUS_OK)){
 					if(response.errors){

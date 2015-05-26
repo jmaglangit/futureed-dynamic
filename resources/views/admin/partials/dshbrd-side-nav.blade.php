@@ -55,30 +55,9 @@
             <a class="dropdown-toggle nav-link">Master Settings <i class="fa fa-caret-down"></i></a>
         </li>  
         <ul class="sub-menu collapse" id="master">
-<<<<<<< HEAD
-          <li ng-class="{'active' : admincon.active_announcement}" class="side-nav-li">
-          	<a href="{!! route('admin.manage.announce.index') !!}" ng-click="admincon.setActiveAdmin('announcement')"><span><i class="fa fa-bullhorn"></i>announcement</span></a>
-        	<!-- <li>
-				    <a href="#"> Admin </a>
-	        </li> -->
-          <li>
-            <a href="{!! route('admin.manage.client.index') !!}"> Client </a>
-          </li>
-          <!-- <li>
-            <a href="#"> Student </a>
-          </li> -->
-        </ul>   
-
-        {{-- <li  data-toggle="collapse" data-target="#students" class="collapsed side-nav-li" ng-class="{ 'active' : admincon.active_student}">
-            <a class="nav-link" href="{!! route('admin.manage.subject.index') !!}">
-              Manage Subjects
-            </a>
-        </li> --}}           
-=======
             <li>
                 <a href="{!! route('admin.manage.announce.index') !!}"><span><i class="fa fa-bullhorn"></i>Announcement</span></a>
             </li>
-        </ul>             
->>>>>>> f9003a6901bd37797017cde61231ba65460efb0d
+        </ul>
     </ul>
 </div>
