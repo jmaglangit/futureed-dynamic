@@ -147,6 +147,37 @@
 							, 'middleware' => 'admin'
 							, 'uses' => $subject_controller . '@subject_side_nav'
 						]);
+
+					/**
+					* CRUD Subject Areas
+					*/
+					Routes::get('/subject_area_list_form',
+						[
+							'as' => 'admin.manage.subject.partials.subject_area_list_form'
+							, 'middleware' => 'admin'
+							, 'uses' => $subject_controller . '@subject_area_list_form'
+						]);
+
+					Routes::get('/subject_area_delete_form',
+						[
+							'as' => 'admin.manage.subject.partials.subject_area_delete_form'
+							, 'middleware' => 'admin'
+							, 'uses' => $subject_controller . '@subject_area_delete_form'
+						]);
+
+					Routes::get('/subject_area_details_form',
+						[
+							'as' => 'admin.manage.subject.partials.subject_area_details_form'
+							, 'middleware' => 'admin'
+							, 'uses' => $subject_controller . '@subject_area_details_form'
+						]);
+
+					Routes::get('/subject_area_add_form',
+						[
+							'as' => 'admin.manage.subject.partials.subject_area_add_form'
+							, 'middleware' => 'admin'
+							, 'uses' => $subject_controller . '@subject_area_add_form'
+						]);
 				});
 			});
 
