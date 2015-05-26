@@ -9,13 +9,13 @@ namespace FutureEd\Models\Repository\Admin;
 
 interface AdminRepositoryInterface {
 
-    public function getAdmins();
+    public function getAdmins($criteria = array(), $limit = 0, $offset = 0);
 
     public function getAdmin($id);
 
-    public function addAdmin($admin);
+    public function addAdmin($data);
 
-    public function updateAdmin($admin);
+    public function updateAdmin($id, $data);
 
     public function deleteAdmin($id);
 

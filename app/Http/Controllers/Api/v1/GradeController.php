@@ -54,6 +54,20 @@ class GradeController extends ApiController {
         
     }
 
+    public function show($id){
+
+        $grade = $this->grade->getGradeById($id);
+
+        if(empty($grade)){
+
+            return $this->respondErrorMessage(2120);
+
+        }
+
+        return $this->respondWithData($grade);
+
+    }
+
     public function store(GradeRequest $request){
 
     	$data = $request->all();

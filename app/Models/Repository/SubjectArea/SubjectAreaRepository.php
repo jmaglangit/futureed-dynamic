@@ -44,8 +44,14 @@ class SubjectAreaRepository implements SubjectAreaRepositoryInterface {
 			if(count($criteria) > 0) {
 				if(isset($criteria['name'])) {
 					$subject_areas = $subject_areas->name($criteria['name']);
-				}				
-			}
+				}
+
+                if(isset($criteria['subject_id'])) {
+                    $subject_areas = $subject_areas->subjectid($criteria['subject_id']);
+                }
+
+
+            }
 		
 			$count = $subject_areas->count();
 		
@@ -54,7 +60,7 @@ class SubjectAreaRepository implements SubjectAreaRepositoryInterface {
 			}
 														
 		}
-		
+		$subject_areas =  $subject_areas->with('subject')->orderBy('name','desc');
 		$subject_areas = $subject_areas->orderBy('name', 'asc');
 		
 		return ['total' => $count, 'records' => $subject_areas->get()->toArray()];	
