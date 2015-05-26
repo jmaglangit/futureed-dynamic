@@ -42,7 +42,6 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 
 		self.reg.status = $('input[name=status]:checked', '#add_admin_form').val();
 
-		if(self.val.a_error == Constants.FALSE && self.val.b_errors == Constants.FALSE){
 			if(self.reg.password != self.reg.password_c){
 				self.p_error = Constants.MSG_PW_NOT_MATCH;
 			}else{
@@ -69,7 +68,6 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 					self.errors = $scope.internalError();
 				});
 			}
-		}
 		$("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 
@@ -160,8 +158,8 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 		self.admininfo.username = self.admininfo.user.username;
 
 		self.admininfo.status = $('input[name=status]:checked', '#add_admin_form').val();
-		if(self.val.a_error == Constants.FALSE && self.val.b_errors == Constants.FALSE){
-			$scope.ui_block();
+
+				$scope.ui_block();
 				manageAdminService.editAdmin(self.admininfo).success(function(response){
 					if(angular.equals(response.status, Constants.STATUS_OK)){
 						if(response.errors){
@@ -184,7 +182,6 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 					$scope.ui_unblock();
 					self.errors = $scope.internalError();
 				});
-		}
 
 	}
 
