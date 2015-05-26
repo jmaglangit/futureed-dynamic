@@ -37,6 +37,9 @@ class EmailController extends ApiController {
 
             $return['user_id'] = $this->student->getStudentId($return['user_id']);
 
+        }elseif($input['user_type'] == 'Client'){
+
+            $return['user_id'] = $this->client->getClientId($return['user_id']);
         }
 
         return $this->respondWithData(['id'=>$return['user_id']]);
