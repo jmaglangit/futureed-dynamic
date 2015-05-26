@@ -36,6 +36,7 @@ class Grade extends Model {
     }
 
 
+
     //Scopes
 
     public function scopeName($query, $name) {
