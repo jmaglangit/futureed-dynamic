@@ -90,7 +90,7 @@ body {/*background: radial-gradient(transparent 50%, rgba(0, 0, 0, 0.3) 100%), l
 }
 
 .btn-container .btn{
-	margin: 0px 10px;
+	margin: 10px;
 }
 
 .btn-small {
@@ -777,18 +777,26 @@ footer{font:normal 12px/30px arial; }
 * Client css
 */
 
-
+.container > .bulletin{
+	background-color: rgba(245, 249, 252, 0.6);
+	padding-bottom: 30px;
+}
 .client-content, .announce-content, .price-content{
 	margin:30px 0 0 240px;
 }
-
+.announce-title{
+	color: #bda793;
+}
+.bulletin > p{
+	color: #3c3c3c;
+}
 .client .login .title {
 	color: #055A7F;
 }
 
 .bulletin, .bulletin hr {
 	color: #B7BDBD;
-	border-color: #B7BDBD;
+	border-color: #e5e6e6;
 }
 
 .client .footer .text-muted {
@@ -955,4 +963,8 @@ div > .btncon > a {
 
 .error-icon {
 	color: #be0e14;
+}
+
+.dataTables_wrapper .row {
+  margin: 10px 0px !important;
 }

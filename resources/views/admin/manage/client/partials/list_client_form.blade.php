@@ -104,7 +104,7 @@
 		</div>
 	</div>
 	 
-	<div class="col-xs-12 table-container" ng-init="client.getClientList()">
+	<div class="col-xs-12 table-container">
 		<div class="list-container" ng-cloak>
 			<table id="client-list" datatable="ng" class="table table-striped table-hover dt-responsive">
 			<thead>
@@ -122,18 +122,18 @@
 		            <td>{! a.client_role !}</td>
 		            <td>
 		            	<div class="row">
-		            		<div class="col-xs-3">
+		            		<div class="col-xs-6">
 		            			<a href="" ng-click="client.setManageClientActive('view_client',a.id)"><span><i class="fa fa-eye"></i></span></a>
 		            		</div>
-		            		<div class="col-xs-3">
+		            		<div class="col-xs-6">
 		            			<a href="" ng-click="client.setManageClientActive('edit_client', a.id)"><span><i class="fa fa-pencil"></i></span></a>
 		            		</div>
-		            		<div class="col-xs-3">
+		            		<!-- <div class="col-xs-3">
 		            			<span><i class="fa fa-ban"></i></span>
 		            		</div>
 		            		<div class="col-xs-3">
 		            			<span><i class="fa fa-trash	"></i></span>
-		            		</div>	
+		            		</div>	 -->
 		            	</div>
 		            </td>
 		        </tr>

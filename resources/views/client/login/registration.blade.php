@@ -8,7 +8,7 @@
     <div class="title">Register as</div>
     <div class="row">
       <div class="col-md-12 register_users">
-        <div class="col-md-3 col-md-offset-3" ng-click="register.selectRole('user_principal')">
+        <div class="col-md-3 col-md-offset-3" ng-click="register.selectRole('Principal')">
           {!! Html::image('/images/user_principal.png', 'Principal'
             , array(
               'id' => 'user_principal'
@@ -17,7 +17,7 @@
           ) !!}
           <h4>Principal</h4>
         </div>
-        <div class="col-md-3" ng-click="register.selectRole('user_parent')">
+        <div class="col-md-3" ng-click="register.selectRole('Parent')">
           {!! Html::image('/images/user_parent.png', 'Parent'
             , array(
               'id' => 'user_parent'
@@ -51,6 +51,7 @@
 
   {!! Html::script('/js/client/controllers/login_controller.js') !!}
   {!! Html::script('/js/client/services/login_service.js') !!}
+  {!! Html::script('/js/client/services/profile_service.js') !!}
   {!! Html::script('/js/client/login.js') !!}
 
 @stop

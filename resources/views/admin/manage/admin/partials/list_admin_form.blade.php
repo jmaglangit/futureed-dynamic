@@ -1,4 +1,4 @@
-<div ng-if="!admin.add_admin">
+<div ng-if="!admin.add_admin && !admin.view_admin && !admin.active_edit_email">
 	<div class="content-title">
 		<div class="title-main-content">
 			<span>Admin Management</span>
@@ -22,13 +22,13 @@
 			<div class="form-group">
 				<label class="col-xs-2 control-label">Username <span class="required">*</span></label>
 				<div class="col-xs-5">
-					{!! Form::text('search_name', '',['class' => 'form-control', 'ng-model' => 'search_user', 'placeholder' => 'Username']) !!}
+					{!! Form::text('search_name', '',['class' => 'form-control', 'ng-model' => 'admin.search_user', 'placeholder' => 'Username']) !!}
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-xs-2 control-label">Email <span class="required">*</span></label>
 				<div class="col-xs-5">
-					{!! Form::text('search_email', '',['class' => 'form-control', 'ng-model' => 'search_email', 'placeholder' => 'Email']) !!}
+					{!! Form::text('search_email', '',['class' => 'form-control', 'ng-model' => 'admin.search_email', 'placeholder' => 'Email']) !!}
 				</div>
 			</div>
 			<div class="form-group">
@@ -39,12 +39,12 @@
 							'Admin' => 'Admin', 
 							'Super Admin' => 'Super Admin'), 
 							null, 
-							['ng-model' => 'search_role' , 'class' => 'form-control']
+							['ng-model' => 'admin.search_role' , 'class' => 'form-control']
 					) !!}
 				</div>
 				<div class="btn-container col-xs-5">
-					<button class="btn btn-blue btn-medium">Search</button>
-					<button class="btn btn-gold btn-medium">Clear</button>
+					<button class="btn btn-blue btn-medium" type="button" ng-click="admin.getAdminList()">Search</button>
+					<button class="btn btn-gold btn-medium" type="button" ng-click="admin.clearSearch()">Clear</button>
 				</div>
 			</div>
 		</div>
@@ -73,19 +73,19 @@
 				            	<div class="col-xs-12">
 				            		<div class="row price-action">
 					            		<div class="col-action" ng-hide="a.admin_role == 'Super Admin'">
-					            			<a href="#" id="{! a.id !}">Disable</a>
+					            			<a href="" id="{! a.id !}">Disable</a>
 					            		</div>
 					            		<span class="separator" ng-hide="a.admin_role == 'Super Admin'">|</span>
 					            		<div class="col-action">
-					            			<a href="#" ng-click="sale.viewAdmin(a.id)">View</a>
+					            			<a href="" ng-click="admin.viewAdmin(a.id)">View</a>
 					            		</div>
 					            		<span class="separator">|</span>
 					            		<div class="col-action">
-					            			<a href="#" ng-click="sale.editAdmin(a.id)">Edit</a>
+					            			<a href="" ng-click="admin.editAdmin(a.id)">Edit</a>
 					            		</div>
 					            		<span class="separator">|</span>
 					            		<div class="col-action">
-					            			<a href="#" ng-click="sale.deletePrice(p.id)">Remove</a>
+					            			<a href="" ng-click="sale.deletePrice(p.id)">Remove</a>
 					            		</div>
 				            	</div>
 						        </div>

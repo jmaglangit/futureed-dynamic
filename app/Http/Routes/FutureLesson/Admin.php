@@ -68,16 +68,32 @@
 					]);
 
 					Routes::get('/list_admin_form', [
-						  'as' => 'admin.manage.client.partials.list_admin_form'
+						  'as' => 'admin.manage.admin.partials.list_admin_form'
 						, 'middleware' => 'admin'
 						, 'uses' => $manage_admin_controller . '@list_admin_form'
 					]);
 
 					Routes::get('/add_admin', [
-						  'as' => 'admin.manage.client.partials.add_admin'
+						  'as' => 'admin.manage.admin.partials.add_admin'
 						, 'middleware' => 'admin'
 						, 'uses' => $manage_admin_controller . '@add_admin'
 					]);
+					Routes::get('/view_admin', [
+						  'as' => 'admin.manage.admin.partials.view_admin'
+						, 'middleware' => 'admin'
+						, 'uses' => $manage_admin_controller . '@view_admin'
+					]);
+					Routes::get('/reset_pass', [
+						  'as' => 'admin.manage.admin.partials.reset_pass'
+						, 'middleware' => 'admin'
+						, 'uses' => $manage_admin_controller . '@reset_pass'
+					]);
+					Routes::get('/edit_email_form', [
+						  'as' => 'admin.manage.admin.partials.edit_email_form'
+						, 'middleware' => 'admin'
+						, 'uses' => $manage_admin_controller . '@edit_email_form'
+					]);
+					
 				});
 			});
 
@@ -181,6 +197,37 @@
 							'as' => 'admin.manage.subject.partials.subject_side_nav'
 							, 'middleware' => 'admin'
 							, 'uses' => $subject_controller . '@subject_side_nav'
+						]);
+
+					/**
+					* CRUD Subject Areas
+					*/
+					Routes::get('/subject_area_list_form',
+						[
+							'as' => 'admin.manage.subject.partials.subject_area_list_form'
+							, 'middleware' => 'admin'
+							, 'uses' => $subject_controller . '@subject_area_list_form'
+						]);
+
+					Routes::get('/subject_area_delete_form',
+						[
+							'as' => 'admin.manage.subject.partials.subject_area_delete_form'
+							, 'middleware' => 'admin'
+							, 'uses' => $subject_controller . '@subject_area_delete_form'
+						]);
+
+					Routes::get('/subject_area_details_form',
+						[
+							'as' => 'admin.manage.subject.partials.subject_area_details_form'
+							, 'middleware' => 'admin'
+							, 'uses' => $subject_controller . '@subject_area_details_form'
+						]);
+
+					Routes::get('/subject_area_add_form',
+						[
+							'as' => 'admin.manage.subject.partials.subject_area_add_form'
+							, 'middleware' => 'admin'
+							, 'uses' => $subject_controller . '@subject_area_add_form'
 						]);
 				});
 			});

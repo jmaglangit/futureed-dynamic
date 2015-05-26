@@ -4,14 +4,12 @@
 			<span>Subject Management</span>
 		</div>
 	</div>
-			
-	<div class="form-content" ng-if="subject.delete.success">		
-		<div class="alert alert-success">
-	    	<p>Successfully deleted the selected subject.</p>
-	    </div>
-	</div>
 
 	<div class="form-content col-xs-12">
+		<div class="alert alert-success" ng-if="subject.delete.success">
+	    	<p>Successfully deleted the selected subject.</p>
+	    </div>
+
 	    <div class="col-xs-3" style="padding:0;">
 			<div class="btn btn-gold" ng-click="subject.setManageSubjectActive('add_subject')">
 				<div class="row">
@@ -71,7 +69,7 @@
 
 	<div class="col-xs-12">
 		<div class="title-mid">
-			Client List
+			Subject List
 		</div>
 	</div>
 	 
@@ -94,10 +92,11 @@
 		            <td>
 		            	<div class="row">
 		            		<div class="col-xs-4">
-		            			{! a.status !}
+		            			<i ng-if="a.status == 'Disabled'" title="Enable" class="fa success-icon fa-check-circle-o"></i>
+		            			<i ng-if="a.status == 'Enabled'" title="Disable" class="fa error-icon fa-ban"></i>
 		            		</div>
 		            		<div class="col-xs-4">
-		            			<a href="" ng-click=""><span><i class="fa fa-plus"></i></span> Add Area</a>
+		            			<a href="" ng-click="subject.getSubjectAreaList(a.id, a.name)"><span><i class="fa fa-plus"></i></span> Area</a>
 		            		</div>
 		            		<div class="col-xs-2">
 		            			<a href="" ng-click="subject.getSubjectDetails(a.id)"><span><i class="fa fa-pencil"></i></span></a>

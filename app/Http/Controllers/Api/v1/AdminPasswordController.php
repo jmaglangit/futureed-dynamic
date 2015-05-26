@@ -98,15 +98,14 @@ class AdminPasswordController extends ApiController {
        }
 
        //update the password of admin user
-       $this->user->updatePassword($id,$new_password);
-
-       $user_details = $this->user->getUserDetail($id,$user_type);
+       $this->user->updatePassword($return->user_id,$new_password);
+       $user_details = $this->user->getUserDetail($return->user_id,$user_type);
 
        //send email to admin user
        $this->mail->sendAdminChangePassword($user_details,$input['new_password']);
 
        return $this->respondWithData([
-                                       'id' => $return['id']
+                                       'id' => $return['user_id']
                                     ]);
 
 
