@@ -116,9 +116,25 @@ $admin = new Admin();
 		
 		return $admin;
     }
-
-    public function deleteAdmin($id){
-
+    
+    public function deleteAdmin($id) {
+		try {
+		
+			$admin = Admin::find($id);
+			
+			if($admin) {
+				$is_deleted = $admin->delete();
+				
+				return $is_deleted ? $admin : FALSE;
+			} else {
+				return FALSE;
+			}
+			
+		} catch(Exception $e) {
+		
+			return $e->getMessage();
+			
+		}
     }
 
     public function getAdminId($user_id){
@@ -131,7 +147,11 @@ $admin = new Admin();
         return Admin::select('id','user_id')->where('id','=',$id)->first();
 
     }
-
-
+    
+    public function canDelete() {
+	    $admins = Admin::all();
+	    
+	    return $admins->count() > config('futureed.admin_delete_threshold');
+	}
 
 }

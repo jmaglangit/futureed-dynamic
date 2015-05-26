@@ -43,5 +43,15 @@ return [
 
     'subject_change_email' => 'Change Email',
     'subject_email_resend' =>  'Resending: Change Email',
+    
+    'admin_delete_threshold' => 3,
+    
+	#min and max values
+	'username_min' => 8,
+	'username_max' => 32,
+	'password_min' => 8,
+	'password_max' => 32,
+	'first_name_max' => 64,
+	'last_name_max' => 64,
 
 ];

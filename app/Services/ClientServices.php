@@ -105,6 +105,7 @@ class ClientServices {
         return $this->client->getClientDetails($id);
     }
 
+
     public function formResponse($user,$client){
 
         foreach ($user as $key => $value) {
@@ -119,7 +120,7 @@ class ClientServices {
         if($client['client_role'] == 'Parent'){
 
             $clientOutput = ['id','first_name','last_name','street_address',
-                            'city','state','country','zip','client_role'];
+                            'city','state','country','zip','client_role','is_account_reviewed'];
 
             foreach ($client as $key => $value) {
             
