@@ -71,6 +71,7 @@ class ClientController extends ApiController {
 
         	if($return) {
 
+                //TODO: make use of relationships.
         		$userDetails = $this->user->getUserDetail($return['user_id'],$client)->toArray();
         		$clienDetails = $this->client->getClientDetails($id)->toArray();
         		$formResponse = $this->client->formResponse($userDetails,$clienDetails);
