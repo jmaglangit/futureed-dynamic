@@ -3,9 +3,17 @@
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
+use FutureEd\Models\Repository\Classroom\ClassroomRepositoryInterface;
 use Illuminate\Http\Request;
 
-class ClassController extends Controller {
+class ClassroomController extends ApiController {
+
+    protected $classroom;
+
+    public function __construct(ClassroomRepositoryInterface $classroomRepositoryInterface){
+
+        $this->classroom = $classroomRepositoryInterface;
+    }
 
 	/**
 	 * Display a listing of the resource.
