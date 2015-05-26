@@ -30,24 +30,30 @@ class GradeController extends ApiController {
         $criteria = array();
         $limit = 0;
 
-        if(Input::get('limit')){
+        $criteria = array();
+        $limit = 0;
+        $offset = 0;
 
-           $limit =  Input::get('limit');
-
-        }
-
-        if(Input::get('name')){
-
+        if(Input::get('name')) {
             $criteria['name'] = Input::get('name');
-
         }
 
-        if(Input::get('country_id')){
 
-            $criteria['country_id'] = Input::get('country_id');
+        if(Input::get('country_id')) {
+            $criteria['coutnry_id'] = Input::get('country_id');
         }
 
-        $grade = $this->grade->getGrades($criteria,$limit);
+
+
+        if(Input::get('limit')) {
+            $limit = intval(Input::get('limit'));
+        }
+
+        if(Input::get('offset')) {
+            $offset = intval(Input::get('offset'));
+        }
+
+        $grade = $this->grade->getGrades($criteria,$limit,$offset);
 
 
         return $this->respondWithData($grade);
