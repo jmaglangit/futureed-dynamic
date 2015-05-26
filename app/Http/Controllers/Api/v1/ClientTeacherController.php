@@ -73,12 +73,9 @@ class ClientTeacherController extends ApiController {
 	 *
 	 * @return Response
 	 */
-	public function store(ClientTeacherRequest $request){
+	public function store(){
 
-        $data = $request    
-
-
-
+            
 	}
 
 	/**
