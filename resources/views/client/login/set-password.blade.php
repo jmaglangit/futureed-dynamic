@@ -81,28 +81,69 @@
           </div>
         </div>
 
-        <div ng-if="confirm.confirmed">
-          <div class="title">Success!</div>
-          <div class="form_content">
-              <div class="roundcon">
-                  <i class="fa fa-check fa-5x img-rounded text-center"></i>
+        <div ng-if="confirm.confirmed && !confirm.set.success">
+            <div class="title">Set New Password</div>
+
+              <div class="alert alert-danger" ng-if="errors">
+                <p ng-repeat="error in errors" > 
+                  {! error !}
+                </p>
+              </div>
+              {!! Form::open(
+                  array(
+                      'id' => 'reset_password_form'
+                  )
+              ) !!}
+
+              <div class="input">
+                <div class="icon">
+                  <i class="fa fa-unlock-alt"></i>
+                </div>
+                {!! Form::password('new_password'
+                      , array(
+                          'ng-model' => 'confirm.set.new_password'
+                        , 'placeholder' => 'New Password'
+                      )
+                ) !!}
+              </div>
+              <div class="input">
+                <div class="icon">
+                  <i class="fa fa-lock"></i>
+                </div>
+                {!! Form::password('confirm_password'
+                      , array(
+                          'ng-model' => 'confirm.set.confirm_password'
+                        , 'placeholder' => 'Confirm New Password'
+                      )
+                ) !!}
               </div>
 
-              <p class="text">
-                  Your email account has been successfully confirmed.
-              </p>
-              <h4 class="title">
-                  You will be receiving an email shortly by our Admin if your registration has been approved or not.
-              </h4>
-              <small> 
-                  If you have not yet receive the email, please check your inbox or your spam folder.
-              </small>
-              {!! Html::link(route('client.login'), 'Click here to Login'
-                  , array(
-                      'class' => 'btn btn-blue'
-                  ) 
-              ) !!}
-          </div> 
+              <div class="btn-container">
+                {!! Form::button('Set Password'
+                    , array(
+                      'class' => 'btn btn-blue btn-large'
+                      , 'ng-click' => 'confirm.setNewClientPassword()'
+                    )
+                ) !!}
+             </div>
+            {!! Form::close() !!}
+        </div>
+
+        <div ng-if="confirm.set.success">
+            <div class="title">Success!</div>
+
+            <div class="roundcon">
+              <i class="fa fa-check fa-5x img-rounded text-center"></i>
+            </div>
+
+            <p>Your password has been set.</p>
+            <p> You may now use your new password to login.</p>
+
+            <br />
+
+            <div class="btn-container">
+              <a class="btn btn-blue btn-large" href="{!! route('client.login') !!}">Click here to Login</a>
+            </div>
         </div>
     </div>
   </div>

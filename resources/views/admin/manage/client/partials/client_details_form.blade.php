@@ -14,8 +14,17 @@
 	        </div>
 
 	        <div class="alert alert-success" ng-if="success">
-	        	<p>Successfully update profile.</p>
+	        	<p>Successfully updated this profile.</p>
 	        </div>
+
+	        <div class="alert alert-success" ng-if="client.details.verified">
+	        	<p>Successfully verified this profile.</p>
+	        </div>
+
+	        <div class="alert alert-success" ng-if="client.details.rejected">
+	        	<p>Successfully rejected this profile.</p>
+	        </div>
+
 	        <fieldset>
 	        	<legend class="legend-name-mid">
 	        		User Credentials
@@ -361,7 +370,23 @@
 	        </fieldset>
 	        <div class="btn-container">
 	        	<div ng-if="client.active_view_client">
-	        		{!! Form::button('Edit'
+	        		<div ng-if="client.details.account_status == 'Pending'">
+		        		{!! Form::button('Verify'
+			        		, array(
+			        			'class' => 'btn btn-blue btn-medium'
+			        			, 'ng-click' => "client.verifyClient()"
+			        		)
+			        	) !!}
+
+			        	{!! Form::button('Reject'
+			        		, array(
+			        			'class' => 'btn btn-gold btn-medium'
+			        			, 'ng-click' => "client.rejectClient()"
+			        		)
+			        	) !!}
+		        	</div>
+
+		        	{!! Form::button('Edit'
 		        		, array(
 		        			'class' => 'btn btn-blue btn-medium'
 		        			, 'ng-click' => "client.setManageClientActive('edit_client')"

@@ -1,16 +1,19 @@
 angular.module('futureed.controllers')
 	.controller('LoginController', LoginController);
 
-LoginController.$inject = ['$scope', 'apiService', 'clientLoginApiService'];
+LoginController.$inject = ['$scope', 'apiService', 'clientLoginApiService', 'clientProfileApiService'];
 
-function LoginController($scope, apiService, clientLoginApiService) {
+function LoginController($scope, apiService, clientLoginApiService, clientProfileApiService) {
 	var self = this;
+
+	self.set = {};
 
 	self.clientLogin = clientLogin;
 	self.clientForgotPassword = clientForgotPassword;
 	self.clientValidateCode = clientValidateCode;
 	self.clientResendCode = clientResendCode;
 	self.resetClientPassword = resetClientPassword;
+	self.setNewClientPassword = setNewClientPassword;
 
 	self.selectRole = selectRole;
 	self.registerClient = registerClient;
@@ -143,6 +146,31 @@ function LoginController($scope, apiService, clientLoginApiService) {
 	    }
 	}
 
+	function setNewClientPassword() {
+	    $scope.$parent.errors = Constants.FALSE;
+
+	    if(self.set.new_password == self.set.confirm_password) {
+		    $scope.ui_block();
+			clientLoginApiService.setClientPassword(self.set.id, self.set.new_password).success(function(response) {
+				if(response.status == Constants.STATUS_OK) {
+		          	if(response.errors) {
+		            	$scope.errorHandler(response.errors);
+		          	} else if(response.data) {
+		            	self.set.success = Constants.TRUE;
+		          	}
+		        }
+
+		        $scope.ui_unblock();
+			}).error(function(response) {
+				$scope.internalError();
+		        $scope.ui_unblock();
+			});
+		} else {
+			$scope.$parent.errors = [Constants.MSG_PW_NOT_MATCH];
+	      	$("html, body").animate({ scrollTop: 0 }, "slow");
+		}
+	}
+
 	function selectRole(role) {
 	    this.principal = Constants.FALSE;
 	    this.teacher = Constants.FALSE;
@@ -150,21 +178,22 @@ function LoginController($scope, apiService, clientLoginApiService) {
 	    this.reg = (this.reg) ? this.reg: {} ;
 
 	    switch(role) {
-	      case Constants.USER_PRINCIPAL :
+	      case Constants.PRINCIPAL :
 	        this.required = Constants.FALSE;
 	        this.role_click = Constants.TRUE;
 	        this.principal = Constants.TRUE;
 	        this.reg.client_role = Constants.PRINCIPAL;
 	        break;
 
-	      case Constants.USER_PARENT    :
-	        this.required = Constants.TRUE;
+	      case Constants.PARENT    :
+	      	this.required = Constants.TRUE;
 	        this.role_click = Constants.TRUE;
 	        this.parent = Constants.TRUE;
 	        this.reg.client_role = Constants.PARENT;
 	        break;
 
 	      default:
+	      	this.reg = {};
 	        break;
 	    }
 	}
@@ -215,25 +244,24 @@ function LoginController($scope, apiService, clientLoginApiService) {
 	function resendClientConfirmation() {
 	    $scope.$parent.errors = Constants.FALSE;
 
-	    var register = this;
-	    register.user_type = Constants.CLIENT;
-	    register.email = (!isStringNullorEmpty(register.email)) ? register.email : $("#registration_success_form input[name='email']").val();
+	    self.user_type = Constants.CLIENT;
+	    self.email = (!isStringNullorEmpty(self.email)) ? self.email : $("#registration_success_form input[name='email']").val();
 	    this.base_url = $("#base_url_form input[name='base_url']").val();
 	    this.resend_confirmation_url = this.base_url + Constants.URL_REGISTRATION(angular.lowercase(this.user_type));
 
 	    $scope.ui_block();
-	    apiService.resendConfirmation(register.email, register.user_type, this.resend_confirmation_url).success(function(response) {
+	    apiService.resendConfirmation(self.email, self.user_type, this.resend_confirmation_url).success(function(response) {
 	      if(response.status == Constants.STATUS_OK) {
 	        if(response.errors) {
 	          $scope.errorHandler(response.errors);
 
 	          angular.forEach($scope.errors, function(value, key) {
 	          	if(angular.equals(value, Constants.MSG_ACC_CONFIRMED)) {
-	          		register.account_confirmed = Constants.TRUE;
+	          		self.account_confirmed = Constants.TRUE;
 	          	}
 	          });
 	        } else if(response.data) {
-	          register.resent = Constants.TRUE;
+	          self.resent = Constants.TRUE;
 	        }
 	      }
 	      $scope.ui_unblock();
@@ -246,17 +274,18 @@ function LoginController($scope, apiService, clientLoginApiService) {
   	function confirmClientRegistration() {
   		$scope.$parent.errors = Constants.FALSE;
 	    
-	    var register = this;
-	    register.user_type = Constants.CLIENT;
-	    register.email = (!isStringNullorEmpty(register.email)) ? register.email : $("#registration_success_form input[name='email']").val();
+	    self.user_type = Constants.CLIENT;
+	    self.email = (!isStringNullorEmpty(self.email)) ? self.email : $("#registration_success_form input[name='email']").val();
 
 	    $scope.ui_block();
-	    apiService.confirmCode(register.email, register.confirmation_code, register.user_type).success(function(response) {
+	    apiService.confirmCode(self.email, self.confirmation_code, self.user_type).success(function(response) {
 	      if(response.status == Constants.STATUS_OK) {
 	        if(response.errors) {
 	          $scope.errorHandler(response.errors);
 	        } else if(response.data){
-	          register.confirmed = Constants.TRUE;
+	          self.confirmed = Constants.TRUE;
+	          self.set.id = response.data.id;
+	          console.log(self.set);
 	        } 
 	      }
 

@@ -8,6 +8,7 @@ function clientLoginApiService($http) {
 	clientLoginApi.clientLogin = clientLogin;
 	clientLoginApi.registerClient = registerClient;
 	clientLoginApi.resetClientPassword = resetClientPassword;
+	clientLoginApi.setClientPassword = setClientPassword;
 
 	function clientLogin(username, password, role) {
 		return $http({
@@ -30,6 +31,14 @@ function clientLoginApiService($http) {
 			method 	: Constants.METHOD_POST
 			, data 	: {reset_code : reset_code, password : password}
 			, url	: clientLoginApiUrl + 'client/reset-password/' + id
+		});
+	}
+
+	function setClientPassword(id, password) {
+		return $http({
+			method 	: Constants.METHOD_POST
+			, data 	: {password : password}
+			, url	: clientLoginApiUrl + 'client/new-password/' + id
 		});
 	}
 

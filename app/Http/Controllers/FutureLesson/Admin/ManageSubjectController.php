@@ -32,4 +32,20 @@ class ManageSubjectController extends Controller{
 	public function subject_side_nav() {
 		return view('admin.manage.subject.partials.subject_side_nav');
 	}
+
+	public function subject_area_list_form() {
+		return view('admin.manage.subject.partials.subject_area_list_form');
+	}
+
+	public function subject_area_delete_form() {
+		return view('admin.manage.subject.partials.subject_area_delete_form');
+	}
+
+	public function subject_area_details_form() {
+		return view('admin.manage.subject.partials.subject_area_details_form');
+	}
+
+	public function subject_area_add_form() {
+		return view('admin.manage.subject.partials.subject_area_add_form');
+	}
 }

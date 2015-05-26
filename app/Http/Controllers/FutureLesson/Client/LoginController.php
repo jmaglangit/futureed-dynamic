@@ -77,9 +77,9 @@ class LoginController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function registration()
+	public function registration($id = null)
 	{
-		return view('client.login.registration');
+		return view('client.login.registration', array('id' => $id));
 	}
 
 	public function registration_form() {
@@ -113,6 +113,12 @@ class LoginController extends Controller {
 		}
 
 		return view('client.login.reset-password', array('id' => $id, 'reset_code' => $reset_code));
+	}
+
+	public function user_confirm() {
+		$input = Input::only('email');
+
+		return view('client.login.set-password', array('email' => $input['email']));
 	}
 
 	/**
