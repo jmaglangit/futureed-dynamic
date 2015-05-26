@@ -11,7 +11,7 @@
 
     <ul id="menu-content" class="nav-list">
         <li  data-toggle="collapse" data-target="#students" class="collapsed side-nav-li" ng-class="{ 'active' : admincon.active_student}">
-            <a class="nav-link">
+            <a href="" class="nav-link">
               User Management <i class="fa fa-caret-down"></i>
             </a>
         </li>
@@ -30,7 +30,7 @@
         </ul>
 
         <li data-toggle="collapse" data-target="#module" class="collapsed side-nav-li">
-            <a class="dropdown-toggle nav-link">Module Management <i class="fa fa-caret-down"></i></a>
+            <a href="" class="nav-link">Module Management <i class="fa fa-caret-down"></i></a>
         </li>
         <ul class="sub-menu collapse" id="module">
             <li>
@@ -43,7 +43,7 @@
         </ul> 
 
         <li data-toggle="collapse" data-target="#price" class="collapsed side-nav-li" ng-class="{'active' : admincon.active_price}">
-            <a class="dropdown-toggle nav-link">Price Management <i class="fa fa-caret-down"></i></a>
+            <a href="" class="nav-link">Price Management <i class="fa fa-caret-down"></i></a>
         </li>  
         <ul class="sub-menu collapse" id="price">
             <li>
@@ -52,7 +52,7 @@
         </ul>
 
         <li data-toggle="collapse" data-target="#master" class="collapsed side-nav-li" ng-class="{'active' : admincon.active_announcement}">
-            <a class="dropdown-toggle nav-link">Master Settings <i class="fa fa-caret-down"></i></a>
+            <a href="" class="nav-link">Master Settings <i class="fa fa-caret-down"></i></a>
         </li>  
         <ul class="sub-menu collapse" id="master">
             <li>
