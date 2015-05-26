@@ -3,6 +3,8 @@
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
+use FutureEd\Services\MailServices as Mail;
+
 
 use FutureEd\Services\ErrorServices as Errors;
 
@@ -10,15 +12,21 @@ use FutureEd\Http\Requests\Api\ClientTeacherRequest;
 
 use FutureEd\Models\Repository\Client\ClientRepositoryInterface as Client;
 
+use FutureEd\Models\Repository\User\UserRepositoryInterface as User;
+
+
 use Illuminate\Support\Facades\Input;
 
 class ClientTeacherController extends ApiController {
 
     protected $client;
+    protected $user;
 
-    public function __construct(Client  $client){
+    public function __construct(Client  $client, User $user, Mail $mail){
 
         $this->client = $client;
+        $this->user = $user;
+        $this->mail = $mail;
 
     }
 
@@ -73,9 +81,49 @@ class ClientTeacherController extends ApiController {
 	 *
 	 * @return Response
 	 */
-	public function store(){
+	public function store(ClientTeacherRequest $request){
 
-            
+        $user = $request->only(['email','username']);
+        $client = $request->only(['first_name','last_name','current_user']);
+        $url = $request->only('callback_uri');
+
+        $client['client_role'] = config('futureed.teacher');
+        $user['user_type'] = config('futureed.client');
+        $user['name'] = $client['first_name']." ".$client['last_name'];
+
+        $client['street_address'] = null;
+        $client['city'] = null;
+        $client['state'] = null;
+        $client['country'] = null;
+        $client['zip'] = null;
+
+        //get current user details
+        $current_user_details = $this->client->getClientDetails($client['current_user']);
+
+        //get school_code of current user
+        $client['school_code'] = $current_user_details['school_code'];
+
+        //return newly added user details
+         $this->user->addUserEloquent($user);
+
+        //get user id
+        $user_id = $this->user->checkUserName($user['username'],$user['user_type']);
+
+        //assign user id to client
+        $client['user_id'] = $user_id;
+
+        $this->client->addClient($client);
+
+        //send email to invited teacher
+        $this->mail->sendMailInviteTeacher($user,$current_user_details,$url);
+
+        $client_id = $this->client->getClientId($user_id);
+
+        return $this->respondWithData(['id' => $client_id
+                                     ]);
+
+
+
 	}
 
 	/**
