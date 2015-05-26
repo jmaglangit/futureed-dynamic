@@ -86,7 +86,17 @@ class ClientTeacherController extends ApiController {
 	 */
 	public function show($id)
 	{
-		//
+		$verify_client = $this->client->verifyClientId($id);
+
+        if(!$verify_client){
+
+            return $this->respondErrorMessage(2001);
+
+        }
+
+        $teacher = $this->client->getClientByUserId($verify_client['user_id']);
+
+        return $this->respondWithData($teacher);
 	}
 
 	/**

@@ -17,5 +17,7 @@ interface GradeRepositoryInterface {
 
     public function getStudentByCode($id);
 
+    public function getClientByUserId($user_id);
+
 
 }

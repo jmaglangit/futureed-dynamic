@@ -231,5 +231,16 @@ class ClientRepository implements ClientRepositoryInterface{
 
 
     }
+
+    public function getClientByUserId($user_id){
+
+        $clients = new Client();
+
+        $clients = $clients->where('user_id','=',$user_id);
+
+        $clients = $clients->with('user')->get();
+
+        return $clients;
+    }
     
 }
