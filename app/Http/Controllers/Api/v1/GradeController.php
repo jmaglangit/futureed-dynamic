@@ -47,9 +47,25 @@ class GradeController extends ApiController {
             $criteria['country_id'] = Input::get('country_id');
         }
 
+        $grade = $this->grade->getGrades($criteria,$limit);
 
-        return $this->grade->getGrades($criteria,$limit);
+
+        return $this->respondWithData($grade);
         
+    }
+
+    public function show($id){
+
+        $grade = $this->grade->getGradeById($id);
+
+        if(empty($grade)){
+
+            return $this->respondErrorMessage(2120);
+
+        }
+
+        return $this->respondWithData($grade);
+
     }
 
     public function store(GradeRequest $request){
@@ -76,7 +92,7 @@ class GradeController extends ApiController {
 
     	$grade = $this->grade->updateGrade($id,$data);
 
-    	return $this->respondWithData(['id' => $grade->id]);
+    	return $this->respondWithData([$grade]);
 
     }
 

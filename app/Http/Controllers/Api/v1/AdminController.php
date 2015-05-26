@@ -3,22 +3,27 @@
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
-use FutureEd\Models\Repository\Admin\AdminRepositoryInterface;
+use FutureEd\Models\Repository\Admin\AdminRepositoryInterface as Admin;
+use FutureEd\Models\Repository\User\UserRepositoryInterface as User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+
+use FutureEd\Http\Requests\Api\AdminRequest;
 
 class AdminController extends ApiController {
 
     protected $admin;
+    protected $user;
 
     /**
      * Admin constructor
      *
      * @return void
      */
-    public function __construct(AdminRepositoryInterface $admin){
+    public function __construct(Admin $admin, User $user){
 
         $this->admin = $admin;
+        $this->user = $user;
     }
 
 	/**
@@ -28,27 +33,42 @@ class AdminController extends ApiController {
 	 */
 	public function index()
 	{
-		//get header token
-
-        $limit = Input::get('limit');
+		$criteria = array();
+		$limit = 0;
+		$offset = 0;
 
         //get the parameters and get outputs based on the parameters.
         if(Input::get('email')){
-
+			$criteria['email'] = Input::get('email');
         }
 
         if(Input::get('username')){
-
+			$criteria['username'] = Input::get('username');
+        }
+        
+        if(Input::get('role')){
+			$criteria['role'] = Input::get('role');
         }
 
-        if(Input::get('limit')){
+		if(Input::get('limit')) {
+			$limit = intval(Input::get('limit'));
+		}
+		
+		if(Input::get('offset')) {
+			$offset = intval(Input::get('offset'));
+		}
+
+		$admins = $this->admin->getAdmins($criteria, $limit, $offset);
+
+		return $this->respondWithData($admins);
+
+        /*
+if(Input::get('limit')){
             return $this->respondWithData($this->admin->getAdmins($limit));
         }
 
         return $this->respondWithData($this->admin->getAdmins());
-
-
-
+*/
 
 	}
 
@@ -57,9 +77,27 @@ class AdminController extends ApiController {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(AdminRequest $request)
 	{
-		//
+		$data = $request->all();
+	
+		$data['user_type'] = config('futureed.admin');
+	
+		$user = $this->user->addUser($data);
+		
+		if($user) {
+			$user_id = $this->user->checkEmail($data['email'], $data['user_type']);
+			
+			$data['user_id'] = $user_id;
+			
+			$admin = $this->admin->addAdmin($data);	
+			
+			return $this->respondWithData(['id' => $admin->id]);
+		} else {
+			return $this->respondWithData(['id' => NULL]);
+		}
+		
+		
 	}
 
 	/**
@@ -70,8 +108,6 @@ class AdminController extends ApiController {
 	 */
 	public function show($id)
 	{
-		//
-
         return $this->respondWithData($this->admin->getAdmin($id));
 	}
 
@@ -81,9 +117,21 @@ class AdminController extends ApiController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($id, AdminRequest $request)
 	{
-		//
+		$data = $request->all();
+	
+		unset($data['code']);
+		
+		$admin = $this->admin->updateAdmin($id, $data);
+		
+		if($admin) {
+			$user = $this->user->updateUser($admin->user_id, $data);
+			
+			return $this->respondWithData(['id' => $admin->id]);
+		} else {
+			return $this->respondWithData(['id' => NULL]);
+		}
 	}
 
 	/**

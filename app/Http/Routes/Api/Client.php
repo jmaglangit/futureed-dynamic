@@ -130,4 +130,6 @@ Routes::group([
 
     Routes::resource('/client','Api\v1\ClientController',
         ['except' => ['create','edit']]);
+
+    Routes::get('client/custom/view-details/','Api\v1\ClientCustomController@getClient');
 });

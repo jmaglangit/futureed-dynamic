@@ -29,7 +29,15 @@ class AdminLoginController extends ApiController {
         $input = Input::only('username','password');
 
 
-        $this->addMessageBag($this->username($input,'username'));
+        if(!$this->email($input,'username')){
+
+            $this->addMessageBag($this->email($input,'username'));
+
+        }else{
+
+            $this->addMessageBag($this->username($input,'username'));
+        }
+
         $this->addMessageBag($this->checkPassword($input,'password'));
 
         $msg_bag = $this->getMessageBag();
@@ -65,6 +73,7 @@ class AdminLoginController extends ApiController {
                 return $this->respondErrorMessage(2233);
             }
 
+           $this->user->resetLoginAttempt($return['id']);
            $admin_id= $this->admin->getAdminId($return['id']);
            $admin_detail = $this->admin->getAdmin($admin_id);
 

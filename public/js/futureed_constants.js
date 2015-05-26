@@ -7,6 +7,7 @@ var Constants = {
 
 	, METHOD_POST	: 'POST'
 	, METHOD_GET	: 'GET'
+	, METHOD_PUT	: 'PUT'
 
 	, STATUS_OK		: 200
 
@@ -31,6 +32,7 @@ var Constants = {
 	, ADD_CLIENT 	: "add_client"
 	, ADD_STUDENT	: "add_student"
 	, ANNOUNCEMENT 	: "announcement"
+	, PRICE 		: "price"
 
 	, MSG_INTERNAL_ERROR	: "Internal Server Error."
 	, MSG_PPW_NOT_MATCH 	: "Picture Password does not match."

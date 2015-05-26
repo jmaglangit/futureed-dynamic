@@ -10,8 +10,13 @@ use Illuminate\Support\Facades\Input;
 
 class AdminPasswordController extends ApiController {
 
-
-     public function changePassword($id){
+    /**
+     * Admin forgot password.
+     *
+     * @param $id
+     * @return mixed
+     */
+     public function forgotPassword($id){
 
         $input = input::only('reset_code','password');
         $admin = config('futureed.admin');
@@ -64,10 +69,45 @@ class AdminPasswordController extends ApiController {
                 return $this->respondErrorMessage(2001);
 
             }
-
-
         }
+   }
 
+   public function changePassword($id){
+
+       $input = input::only('new_password');
+       $user_type = config('futureed.admin');
+
+       $this->addMessageBag($this->validateVarNumber($id));
+       $this->addMessageBag($this->checkPassword($input,'new_password'));
+
+       $new_password = sha1($input['new_password']);
+
+       $msg_bag = $this->getMessageBag();
+
+       if($msg_bag){
+
+           return $this->respondWithError($msg_bag);
+
+       }
+
+       $return = $this->admin->verifyAdminId($id);
+
+       if(!$return){
+
+           return $this->respondErrorMessage(2001);
+       }
+
+       //update the password of admin user
+       $this->user->updatePassword($id,$new_password);
+
+       $user_details = $this->user->getUserDetail($id,$user_type);
+
+       //send email to admin user
+       $this->mail->sendAdminChangePassword($user_details,$input['new_password']);
+
+       return $this->respondWithData([
+                                       'id' => $return['id']
+                                    ]);
 
 
    }

@@ -246,6 +246,54 @@ class MailServices {
     }
 
 
+    public function sendAdminChangeEmail($data,$url){
+
+        $template = 'emails.admin.change-email';
+
+        $content = [
+            'view' => $template,
+            'data' => [
+                'name' => $data['name'],
+                'link' => $url,
+                'email' => $data['email'],
+                'new_email' => $data['new_email']
+            ],
+            'mail_recipient' => $data['email'],
+            'mail_recipient_name' => $data['name' ],
+            'subject' => 'Change Email'
+        ];
+
+        $this->sendMail($content);
+
+
+
+    }
+
+
+    public function sendAdminChangePassword($data,$new_password){
+
+        $template = 'emails.admin.change-password';
+
+        $content = [
+            'view' => $template,
+            'data' => [
+                'name' => $data['name'],
+                'new_password' => $new_password
+            ],
+            'mail_recipient' => $data['email'],
+            'mail_recipient_name' => $data['name' ],
+            'subject' => 'Change Password'
+        ];
+
+        $this->sendMail($content);
+
+
+
+    }
+
+
+
+
 
 
 }

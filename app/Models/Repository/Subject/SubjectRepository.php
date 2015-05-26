@@ -28,19 +28,19 @@ class SubjectRepository implements SubjectRepositoryInterface {
 			
 			if(count($criteria) > 0) {
 				if(isset($criteria['name'])) {
-					$subjects = $subjects->name($criteria['name']);
+					$subjects = $subjects->with('areas')->name($criteria['name']);
 				}				
 			}
 		
 			$count = $subjects->count();
 		
 			if($limit > 0 && $offset >= 0) {
-				$subjects = $subjects->offset($offset)->limit($limit);;
+				$subjects = $subjects->with('areas')->offset($offset)->limit($limit);;
 			}
 														
 		}
 		
-		$subjects = $subjects->orderBy('name', 'asc');
+		$subjects = $subjects->with('areas')->orderBy('name', 'asc');
 		
 		return ['total' => $count, 'records' => $subjects->get()->toArray()];	
 	}
@@ -77,7 +77,7 @@ class SubjectRepository implements SubjectRepositoryInterface {
 	 */
 	public function getSubject($id) {
 				
-		return Subject::find($id);
+		return Subject::with('areas')->find($id);
 		
 	}
 	
@@ -93,11 +93,19 @@ class SubjectRepository implements SubjectRepositoryInterface {
 		
 		try {
 		
-			$subject = Subject::find($id);
-			
+			$subject = Subject::with('areas')->find($id);
+
 			unset($data['code']);
-			
+
+            //update related status.
+            $subject->areas[0]->status = $data['status'];
+
 			$subject->update($data);
+
+            //update related table.
+            $subject->push();
+
+
 			
 		} catch(Exception $e) {
 		

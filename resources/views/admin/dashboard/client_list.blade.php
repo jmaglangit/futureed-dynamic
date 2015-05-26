@@ -92,7 +92,7 @@
 					</div>
 				</div>
 				<div class="col-xs-12 table-container">
-					<div class="list-container" ng-controller="DatatableController as datatable" ng-cloak>
+					<div class="list-container" ng-cloak>
 						<table id="client-list" datatable="ng"class="table table-striped table-hover dt-responsive" style="width:100%">
 							<thead>
 				        <tr>
@@ -103,7 +103,7 @@
 				        </tr>
 				        </thead>
 				        <tbody>
-				        <tr ng-repeat="person in ::datatable.persons" data-id>
+				        <tr ng-repeat="person in ::persons" data-id>
 				            <td>{! person.id !}</td>
 				            <td>{! person.firstName !}</td>
 				            <td>{! person.lastName !}</td>
