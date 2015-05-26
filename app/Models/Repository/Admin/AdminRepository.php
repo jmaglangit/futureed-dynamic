@@ -83,7 +83,11 @@ $admin = new Admin();
 
     public function getAdmin($id) {
 
-        return Admin::find($id);
+		$admin = Admin::with('user')->find($id);
+				
+		#$admin = $admin->find($id)->with('user')->get();
+
+        return $admin;
 
     }
 

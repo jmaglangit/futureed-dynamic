@@ -179,8 +179,55 @@ class ClientRepository implements ClientRepositoryInterface{
         return $clients->get()->toArray();
 
 
+    }
+
+    public function getTeacherDetails($criteria,$limit){
+
+        $clients = new Client();
+        $append=[];
+
+        $clients = $clients->where('client_role','=','Teacher');
+
+        if(isset($criteria['name'])){
+
+            $clients = $clients->name($criteria['name']);
+            $append['name'] = $criteria['name'];
+
+        }
+
+        if(isset($criteria['email'])){
 
 
+            $clients = $clients->email($criteria['email']);
+            $append['email'] = $criteria['email'];
+
+        }
+
+        if(isset($limit)){
+
+            $clients = $clients->with('user')->paginate($limit);
+
+            $append['limit'] = $limit;
+        }
+
+
+        $clients->appends($append);
+
+        $paginator = [
+            'currentPage' => $clients->currentPage(),
+            'lastPage' => $clients->lastPage(),
+            'perPage' => $clients->perPage(),
+            'hasMorePages' => $clients->hasMorePages(),
+            'nextPageUrl' => $clients->nextPageUrl(),
+            'previousPageUrl' => $clients->previousPageUrl(),
+            'total' => $clients->total(),
+            'count' => $clients->count()
+        ];
+
+        return [
+            'paginator' => $paginator,
+            'records' => $clients->items()
+        ];
 
 
     }
