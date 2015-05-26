@@ -56,7 +56,7 @@ class ClientLoginController extends ClientController {
         //get client basic detail
         $client_detail = $this->client->getClient($client_role,$input['role']);
 
-        if($client_detail['is_account_reviewed']==0){
+        if($client_detail['account_status'] != config('futureed.client_account_status_accepted')){
 
             return $this->respondErrorMessage(2118);
         }

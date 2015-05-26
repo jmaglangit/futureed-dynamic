@@ -120,7 +120,7 @@ class ClientServices {
         if($client['client_role'] == 'Parent'){
 
             $clientOutput = ['id','first_name','last_name','street_address',
-                            'city','state','country','zip','client_role','is_account_reviewed'];
+                            'city','state','country','zip','client_role','account_status'];
 
             foreach ($client as $key => $value) {
             
@@ -137,12 +137,12 @@ class ClientServices {
              $school = $this->school->getSchoolDetails($client['school_code'])->toArray();
 
              $clientOutput = ['id','first_name','last_name','street_address',
-                            'city','state','country','zip','client_role','school_code'];
+                            'city','state','country','zip','client_role','school_code','account_status'];
 
             if($client['client_role'] == 'Principal'){
     
                 $schoolOutput = ['name','street_address','city',
-                                 'state','country','zip','contact_name','contact_number','is_account_reviewed'];
+                                 'state','country','zip','contact_name','contact_number','account_status'];
 
             }else{
                 
