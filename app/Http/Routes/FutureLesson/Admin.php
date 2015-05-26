@@ -78,6 +78,16 @@
 						, 'middleware' => 'admin'
 						, 'uses' => $manage_admin_controller . '@add_admin'
 					]);
+					Routes::get('/view_admin', [
+						  'as' => 'admin.manage.client.partials.view_admin'
+						, 'middleware' => 'admin'
+						, 'uses' => $manage_admin_controller . '@view_admin'
+					]);
+					Routes::get('/reset_pass', [
+						  'as' => 'admin.manage.client.partials.reset_pass'
+						, 'middleware' => 'admin'
+						, 'uses' => $manage_admin_controller . '@reset_pass'
+					]);
 				});
 			});
 

@@ -11,12 +11,16 @@
 		]) 
 	!!}
 	<div class="form-content col-xs-12">
-		<div class="alert alert-error" ng-if="admin.errors">
+		<div class="alert alert-danger" ng-if="admin.errors">
 			<p ng-repeat="error in admin.errors track by $index">
 				{! error !}
 			</p>
 		</div>
-
+		<div class="alert alert-danger" ng-if="admin.p_error">
+			<p>
+				{! admin.p_error !}
+			</p>
+		</div>
 		<div class="alert alert-success" ng-if="admin.is_success">
 			<p>
 				{! admin.is_success !}
@@ -32,27 +36,28 @@
 					{!! Form::text('username', '',
 						[
 							'placeholder' => 'Username',
-							'ng-model' => 'admin.username',
+							'ng-model' => 'admin.reg.username',
 							'ng-model-options' => "{ debounce : {'default' : 1000} }",
-							'ng-blur' => 'admin.checkUserAvailable()',
+							'ng-change' => 'admin.checkUsernameAvailability()',
 							'class' => 'form-control'
 						]
 					) !!}
-				</div>
-				<div>
-					<span class="error-msg-con" ng-if="admin.a_error">{! admin.a_error !}</span>
+
+					<div>
+					<span class="error-msg-con" ng-if="admin.val.a_error">{! admin.val.a_error !}</span>
 					<i class="fa fa-spinner fa-spin" ng-if="admin.a_loading"></i>
-					<span class="error-msg-con"></span>
+					<span ng-if="admin.a_success" class="error-msg-con success-color">Username is available.</span>
+				</div>
 				</div>
 				<label class="col-xs-2 control-label" id="role">Role <span class="required">*</span></label>
 				<div class="col-xs-4">
-					{!! Form::select('role',
+					{!! Form::select('admin_role',
 						[
 							'' => '-- Select Role --',
 							'Admin' => 'Admin',
 							'Super Admin' => 'Super Admin'
 						], null,
-						['ng-model' => 'admin.role', 'class' => 'form-control']
+						['ng-model' => 'admin.reg.admin_role', 'class' => 'form-control']
 					)!!}
 				</div>
 			</div>
@@ -62,17 +67,18 @@
 					{!! Form::text('email', '',
 						[
 							'placeholder' => 'Email',
-							'ng-model' => 'admin.email',
+							'ng-model' => 'admin.reg.email',
 							'ng-model-options' => "{ debounce : {'default' : 1000} }",
-							'ng-blur' => 'admin.checkEmailAvailable()',
+							'ng-change' => 'admin.checkEmailAvailability()',
 							'class' => 'form-control'
 						]
 					) !!}
+
+					<div>
+					<span class="error-msg-con" ng-if="admin.val.b_errors">{! admin.val.b_errors !}</span>
+					<i class="fa fa-spinner fa-spin" ng-if="admin.b_loading"></i>
+					<span ng-if="admin.b_success" class="error-msg-con success-color">Email is available.</span>
 				</div>
-				<div>
-					<span class="error-msg-con" ng-if="admin.a_error">{! admin.a_error !}</span>
-					<i class="fa fa-spinner fa-spin" ng-if="admin.a_loading"></i>
-					<span class="error-msg-con"></span>
 				</div>
 				<label class="col-xs-2 control-label" id="status">Status <span class="required">*</span></label>
 	                <div class="col-xs-4">
@@ -98,7 +104,7 @@
 					{!! Form::password('password',
 						[
 							'class' => 'form-control',
-							'ng-model' => 'admin.password',
+							'ng-model' => 'admin.reg.password',
 							'placeholder' => 'Password'
 						]) 
 					!!}
@@ -108,7 +114,7 @@
 					{!! Form::password('password_c',
 						[
 							'class' => 'form-control',
-							'ng-model' => 'admin.password_c',
+							'ng-model' => 'admin.reg.password_c',
 							'placeholder' => 'Confirm Password'
 						]) 
 					!!}
@@ -122,27 +128,27 @@
 			<div class="form-group">
 				<label class="col-xs-2 control-label">First Name <span class="required">*</span></label>
 				<div class="col-xs-4">
-					{!! Form::text('firstname','',
+					{!! Form::text('first_name','',
 						[
 							'class' => 'form-control',
-							'ng-model' => 'admin.firstname',
+							'ng-model' => 'admin.reg.first_name',
 							'placeholder' => 'First Name'
 						]
 					) !!}
 				</div>
 				<label class="col-xs-2 control-label">Last Name <span class="required">*</span></label>
 				<div class="col-xs-4">
-					{!! Form::text('lastname','',
+					{!! Form::text('last_name','',
 						[
 							'class' => 'form-control',
-							'ng-model' => 'admin.firstname',
+							'ng-model' => 'admin.reg.last_name',
 							'placeholder' => 'Last Name'
 						]
 					) !!}
 				</div>
 			</div>
 			<div class="btn-container col-xs-6 col-xs-offset-3">
-				<button class="btn btn-blue btn-medium" ng-click="admin.saveAdmin()">Save</button>
+				<button class="btn btn-blue btn-medium" id="proceed-btn" type="button" ng-click="admin.saveAdmin()">Save</button>
 				<button class="btn btn-gold btn-medium" ng-click="admin.cancelAdd()">Cancel</button>
 			</div>
 		</fieldset>
