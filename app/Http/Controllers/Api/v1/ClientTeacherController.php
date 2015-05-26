@@ -3,9 +3,26 @@
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
-use Illuminate\Http\Request;
 
-class ClientTeacherController extends Controller {
+use FutureEd\Services\ErrorServices as Errors;
+
+use FutureEd\Http\Requests\Api\ClientTeacherRequest;
+
+use FutureEd\Models\Repository\Client\ClientRepositoryInterface as Client;
+
+use Illuminate\Support\Facades\Input;
+
+class ClientTeacherController extends ApiController {
+
+    protected $client;
+
+    public function __construct(Client  $client){
+
+        $this->client = $client;
+
+    }
+
+
 
 	/**
 	 * Display a listing of the resource.
@@ -14,7 +31,31 @@ class ClientTeacherController extends Controller {
 	 */
 	public function index()
 	{
-		//
+        $criteria = array();
+        $limit = 0;
+
+        if(Input::get('limit')){
+
+            $limit =  Input::get('limit');
+
+        }
+
+        if(Input::get('name')){
+
+            $criteria['name'] = Input::get('name');
+
+        }
+
+        if(Input::get('email')){
+
+            $criteria['email'] = Input::get('email');
+        }
+
+        $teacher = $this->client->getTeacherDetails($criteria,$limit);
+
+        return $this->respondWithData($teacher);
+
+
 	}
 
 	/**
