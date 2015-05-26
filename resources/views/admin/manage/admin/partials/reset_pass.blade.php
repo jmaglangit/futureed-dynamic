@@ -55,6 +55,16 @@
 		</div>
 	</div>
 	<div class="col-xs-6 col-xs-offset-3" ng-if="admin.reset_success">
-		div.
+		<div class="form-style form-narrow">
+			<div class="logo-container">
+				<div class="roundcon">					
+					<span><i class="fa fa-check-circle-o" style="font-size:5em;"></i></span>
+				</div>
+			</div>
+			<p class="text">
+				<strong>Success!</strong>
+				<br/>An email has been sent to {! admin.admininfo.user.email !} with the password that you have set.
+			</p>
+		</div>
 	</div>
 </div>
