@@ -111,5 +111,6 @@
 @section('scripts')
   {!! Html::script('/js/client/controllers/login_controller.js') !!}
   {!! Html::script('/js/client/services/login_service.js') !!}
+  {!! Html::script('/js/client/services/profile_service.js') !!}
   {!! Html::script('/js/client/login.js') !!}
 @stop
