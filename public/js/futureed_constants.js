@@ -75,4 +75,8 @@ var Constants = {
 	, URL_CHANGE_EMAIL		: function(user_type) {
 		return '/' + user_type + '/email/confirm';
 	}
+
+	, URL_USER_CREATION		: function(user_type) {
+		return '/' + user_type + '/user/confirm';
+	}
 }

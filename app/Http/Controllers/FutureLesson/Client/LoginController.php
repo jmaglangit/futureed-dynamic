@@ -115,6 +115,12 @@ class LoginController extends Controller {
 		return view('client.login.reset-password', array('id' => $id, 'reset_code' => $reset_code));
 	}
 
+	public function user_confirm() {
+		$input = Input::only('email');
+
+		return view('client.login.set-password', array('email' => $input['email']));
+	}
+
 	/**
 	* Partials for AngularJS Directive
 	*/

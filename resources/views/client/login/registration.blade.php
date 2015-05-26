@@ -4,7 +4,7 @@
 <div class="container" ng-controller="LoginController as register" ng-cloak>
   <div template-directive template-url="{!! route('client.partials.base_url') !!}"></div>
   
-  <div class="form-style form-wide" ng-init="register.getRejectedClient('{!! $id !!}')" ng-show="!registered"> 
+  <div class="form-style form-wide" ng-show="!registered"> 
     <div class="title">Register as</div>
     <div class="row">
       <div class="col-md-12 register_users">

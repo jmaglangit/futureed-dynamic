@@ -300,8 +300,10 @@ function ManageClientController($scope, apiService, manageClientService) {
 
 	function createNewClient() {
 		self.errors = Constants.FALSE;
+		self.create.success = Constants.FALSE;
+
 		self.base_url = $("#base_url_form input[name='base_url']").val();
-		self.create.callback_uri = self.base_url + Constants.URL_REGISTRATION(angular.lowercase(Constants.CLIENT));
+		self.create.callback_uri = self.base_url + Constants.URL_USER_CREATION(angular.lowercase(Constants.CLIENT));
 
 		$("input, select").removeClass("required-field");
 		$scope.ui_block();
