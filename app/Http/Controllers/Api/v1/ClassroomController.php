@@ -5,6 +5,7 @@ use FutureEd\Http\Controllers\Controller;
 
 use FutureEd\Models\Repository\Classroom\ClassroomRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class ClassroomController extends ApiController {
 
@@ -22,7 +23,22 @@ class ClassroomController extends ApiController {
 	 */
 	public function index()
 	{
-		//
+        $criteria = [];
+        $limit = (Input::get('limit')) ? Input::get('limit') : 3;
+
+        //get class name
+        if(Input::get('name')){
+
+            $criteria['email'] = Input::get('name');
+        }
+
+        $limit = (Input::get('limit')) ? Input::get('limit') : 0;
+
+        $offset = (Input::get('offset')) ? Input::get('offset') : 0;
+
+
+
+        return $this->respondWithData($this->classroom->getClassrooms($criteria,$limit,$offset));
 	}
 
 	/**
