@@ -137,7 +137,7 @@ class ClientServices {
              $school = $this->school->getSchoolDetails($client['school_code'])->toArray();
 
              $clientOutput = ['id','first_name','last_name','street_address',
-                            'city','state','country','zip','client_role','school_code'];
+                            'city','state','country','zip','client_role','school_code','is_account_reviewed'];
 
             if($client['client_role'] == 'Principal'){
     
