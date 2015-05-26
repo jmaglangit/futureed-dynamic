@@ -11,6 +11,7 @@ function manageAdminService($http) {
 	manageAdminApi.viewAdmin = viewAdmin;
 	manageAdminApi.editAdmin = editAdmin;
 	manageAdminApi.resetPass = resetPass;
+	manageAdminApi.changeAdminEmail = changeAdminEmail;
 
 	function getAdminList(){
 		return $http({
@@ -55,6 +56,15 @@ function manageAdminService($http) {
 			method 	: Constants.METHOD_POST
 			, data 	: {new_password : password}
 			, url 	: adminApiUrl + 'admin/change-password/' + id
+
+		});
+	}
+
+	function changeAdminEmail(id, new_email, callback_uri) {
+		return $http({
+			method 	: Constants.METHOD_POST
+			, data 	: {new_email : new_email, callback_uri : callback_uri}
+			, url 	: adminApiUrl + 'admin/change-email/' + id
 
 		});
 	}

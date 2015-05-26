@@ -14,10 +14,15 @@
 				<div template-directive template-url="{!! route('admin.manage.admin.partials.side_nav') !!}"></div>
 			</div>	        
 
-			<div class="client-content" template-directive template-url="{!! route('admin.manage.client.partials.list_admin_form') !!}"></div>
-			<div class="client-content" template-directive template-url="{!! route('admin.manage.client.partials.add_admin') !!}"></div>
-			<div class="client-content" template-directive template-url="{!! route('admin.manage.client.partials.view_admin') !!}"></div>
-			<div class="client-content" template-directive template-url="{!! route('admin.manage.client.partials.reset_pass') !!}"></div>
+			<div class="client-content" template-directive template-url="{!! route('admin.manage.admin.partials.list_admin_form') !!}"></div>
+			
+			<div class="client-content" template-directive template-url="{!! route('admin.manage.admin.partials.add_admin') !!}"></div>
+			
+			<div class="client-content" template-directive template-url="{!! route('admin.manage.admin.partials.view_admin') !!}"></div>
+			
+			<div class="client-content" template-directive template-url="{!! route('admin.manage.admin.partials.reset_pass') !!}"></div>
+
+			<div class="client-content" template-directive template-url="{!! route('admin.manage.admin.partials.edit_email_form') !!}"></div>
 		</div>		
 	</div>
 @stop

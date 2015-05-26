@@ -74,7 +74,7 @@
 
 	<div class="col-xs-12">
 		<div class="title-mid">
-			Client List
+			Grade List
 		</div>
 	</div>
 	 
@@ -99,7 +99,8 @@
 		            <td>
 		            	<div class="row">
 		            		<div class="col-xs-4">
-		            			{! a.status !}
+		            			<i ng-if="a.status == 'Disabled'" title="Enable" class="fa success-icon fa-check-circle-o"></i>
+		            			<i ng-if="a.status == 'Enabled'" title="Disable" class="fa error-icon fa-ban"></i>
 		            		</div>
 		            		<div class="col-xs-4">
 		            			<a href="" ng-click="grade.getGradeDetails(a.id)"><span><i class="fa fa-pencil"></i></span></a>

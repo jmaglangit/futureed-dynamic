@@ -964,3 +964,7 @@ div > .btncon > a {
 .error-icon {
 	color: #be0e14;
 }
+
+.dataTables_wrapper .row {
+  margin: 10px 0px !important;
+}

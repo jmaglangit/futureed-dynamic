@@ -69,7 +69,7 @@
 
 	<div class="col-xs-12">
 		<div class="title-mid">
-			Client List
+			Subject List
 		</div>
 	</div>
 	 
@@ -92,10 +92,11 @@
 		            <td>
 		            	<div class="row">
 		            		<div class="col-xs-4">
-		            			{! a.status !}
+		            			<i ng-if="a.status == 'Disabled'" title="Enable" class="fa success-icon fa-check-circle-o"></i>
+		            			<i ng-if="a.status == 'Enabled'" title="Disable" class="fa error-icon fa-ban"></i>
 		            		</div>
 		            		<div class="col-xs-4">
-		            			<a href="" ng-click="subject.getSubjectAreaList(a.id, a.name)"><span><i class="fa fa-plus"></i></span> Add Area</a>
+		            			<a href="" ng-click="subject.getSubjectAreaList(a.id, a.name)"><span><i class="fa fa-plus"></i></span> Area</a>
 		            		</div>
 		            		<div class="col-xs-2">
 		            			<a href="" ng-click="subject.getSubjectDetails(a.id)"><span><i class="fa fa-pencil"></i></span></a>
