@@ -32,4 +32,8 @@ class ManageAdminController extends Controller{
 	public function reset_pass() {
 		return view('admin.manage.admin.partials.reset_pass');
 	}
+
+	public function edit_email_form() {
+		return view('admin.manage.admin.partials.edit_email_form');
+	}
 }

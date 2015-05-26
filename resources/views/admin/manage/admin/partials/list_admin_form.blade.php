@@ -1,4 +1,4 @@
-<div ng-if="!admin.add_admin && !admin.view_admin">
+<div ng-if="!admin.add_admin && !admin.view_admin && !admin.active_edit_email">
 	<div class="content-title">
 		<div class="title-main-content">
 			<span>Admin Management</span>
@@ -73,19 +73,19 @@
 				            	<div class="col-xs-12">
 				            		<div class="row price-action">
 					            		<div class="col-action" ng-hide="a.admin_role == 'Super Admin'">
-					            			<a href="#" id="{! a.id !}">Disable</a>
+					            			<a href="" id="{! a.id !}">Disable</a>
 					            		</div>
 					            		<span class="separator" ng-hide="a.admin_role == 'Super Admin'">|</span>
 					            		<div class="col-action">
-					            			<a href="#" ng-click="admin.viewAdmin(a.id)">View</a>
+					            			<a href="" ng-click="admin.viewAdmin(a.id)">View</a>
 					            		</div>
 					            		<span class="separator">|</span>
 					            		<div class="col-action">
-					            			<a href="#" ng-click="admin.editAdmin(a.id)">Edit</a>
+					            			<a href="" ng-click="admin.editAdmin(a.id)">Edit</a>
 					            		</div>
 					            		<span class="separator">|</span>
 					            		<div class="col-action">
-					            			<a href="#" ng-click="sale.deletePrice(p.id)">Remove</a>
+					            			<a href="" ng-click="sale.deletePrice(p.id)">Remove</a>
 					            		</div>
 				            	</div>
 						        </div>

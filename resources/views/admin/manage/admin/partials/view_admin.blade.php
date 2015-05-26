@@ -1,4 +1,4 @@
-<div ng-if="admin.view_admin && !admin.reset_pass">
+<div ng-if="admin.view_admin && !admin.reset_pass && !admin.active_edit_email">
 	<div class="content-title">
 		<div class="title-main-content" ng-if="!admin.edit_admin">
 			<span>View Admin User</span>
@@ -82,7 +82,7 @@
 						<i class="fa fa-spinner fa-spin" ng-if="admin.b_loading"></i>
 						<span ng-if="admin.b_success" class="error-msg-con success-color">Email is available.</span>
 					</div>
-					<a href="#" class="admin-edit">Edit Email</a>	
+					<a href="" ng-click="admin.setActive('edit_email')" class="admin-edit">Edit Email</a>	
 				</div>
 
 				<label class="col-xs-2 control-label" id="status">Status <span class="required">*</span></label>
@@ -156,20 +156,25 @@
 				</div>
 			</div>
 			<div class="btn-container col-xs-12">
-				<div class="row">
-					<div class="col-xs-4" ng-if="admin.edit" >
+				<div class="row" ng-if="admin.edit">
+					<div class="col-xs-4">
 						<button class="btn btn-success" type="button" ng-click="admin.setActive('pass')">reset password</button>
-					</div>
-					<div class="col-xs-4"  ng-if="!admin.edit" >
-						<button class="btn btn-blue" ng-click="admin.setActive('edit')">edit</button>
-					</div>				
-					<div class="col-xs-4"  ng-if="admin.edit" >
+					</div>			
+					<div class="col-xs-4"   >
 						<button class="btn btn-blue" ng-click="admin.editAdmin()">Save</button>	
 					</div>
 					<div class="col-xs-4">
 						<button class="btn btn-gold" ng-click="admin.setActive('view')">Cancel</button>
 					</div>
-				</div>				
+				</div>		
+				<div class="row" ng-if="!admin.edit">
+					<div class="col-xs-4"  ng-if="!admin.edit" >
+						<button class="btn btn-blue" ng-click="admin.setActive('edit')">edit</button>
+					</div>
+					<div class="col-xs-4">
+						<button class="btn btn-gold" ng-click="admin.setActive()">Cancel</button>
+					</div>
+				</div>			
 			</div>
 		</fieldset>
 	</div>

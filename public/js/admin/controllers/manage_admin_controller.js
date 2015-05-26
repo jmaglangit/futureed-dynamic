@@ -7,8 +7,11 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 	
 	var self = this;
 
+	self.user_type = Constants.ADMIN;
 	this.reg = {};
 	this.val = {};
+	self.validation = {};
+	self.change = {};
 
 	this.getAdminList = getAdminList;
 	this.addAdmin = addAdmin;
@@ -19,6 +22,10 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 	this.editAdmin = editAdmin;
 	this.setActive = setActive;
 	this.resetPass = resetPass;
+
+	self.validateNewAdminEmail = validateNewAdminEmail;
+	self.confirmNewEmail = confirmNewEmail;
+	self.changeAdminEmail = changeAdminEmail;
 
 	function getAdminList(){
 
@@ -82,6 +89,7 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 			if(angular.equals(response.status,Constants.STATUS_OK)){
 				if(response.data){
 					self.admininfo = response.data;
+					self.setActive('view');
 				}
 			}
 		}).error(function(response) {
@@ -215,6 +223,11 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 
 	function setActive(name){
 		
+		self.validation = {};
+		self.change = {};
+
+		self.active_edit_email = Constants.FALSE;
+
 		switch(name){
 			case 'pass' :
 				self.reset_pass = Constants.TRUE;
@@ -226,10 +239,97 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 				self.edit = Constants.TRUE;
 				break;
 
+			case 'edit_email' :
+				self.active_edit_email = Constants.TRUE;
+				break;
+
 			case 'view' :
 			default:
 				self.edit = Constants.FALSE;
 				break;
 		} 
+
+		$("html, body").animate({ scrollTop: 0 }, "slow");
+	}
+
+	function validateNewAdminEmail() {
+		self.errors = Constants.FALSE;
+		// Clear error messages in new email field
+		self.validation.n_error = Constants.FALSE;
+		self.validation.n_success = Constants.FALSE;
+		self.validation.n_loading = Constants.TRUE;
+
+		// Clear error messages in confirm email field
+		self.validation.c_error = Constants.FALSE;
+		self.validation.c_success = Constants.FALSE;
+
+		apiService.validateEmail(self.change.new_email, self.user_type).success(function(response) {
+			self.validation.n_loading = Constants.FALSE;
+
+		    if(angular.equals(response.status, Constants.STATUS_OK)) {
+		        if(response.errors) {
+		            self.validation.n_error = response.errors[0].message;
+		            if(angular.equals(self.validation.n_error, Constants.MSG_EA_NOTEXIST)) {
+		            	self.validation.n_error = Constants.FALSE;
+
+		            	if(!angular.equals(self.change.new_email, self.change.confirm_email)) {
+							self.validation.n_success = Constants.TRUE;
+
+							self.validation.c_error = Constants.MSG_EA_CONFIRM;
+						} else {
+							self.validation.n_success = Constants.TRUE;
+							self.validation.c_success = Constants.TRUE;
+						}
+		            }
+		        } else if(response.data) {
+		        	self.validation.n_error = Constants.MSG_EA_EXIST;
+		        }
+		    }
+
+		}).error(function(response) {
+			self.validation.n_loading = Constants.FALSE;
+			self.errors = $scope.internalError();
+		});
+	}
+
+	function confirmNewEmail() {
+		self.errors = Constants.FALSE;
+		self.validation.c_error = Constants.FALSE;
+		self.validation.c_success = Constants.FALSE;
+		
+		if(!angular.equals(self.change.new_email, self.change.confirm_email)) {
+			self.validation.c_error = Constants.MSG_EA_NOT_MATCH;
+		} else {
+			self.validation.c_success = Constants.TRUE;
+		}
+	}
+
+	function changeAdminEmail() {
+		self.errors = Constants.FALSE;
+
+		if(self.validation.n_success && self.validation.c_success) {
+			self.base_url = $("#base_url_form input[name='base_url']").val();
+		    var callback_uri = self.base_url + "/" + angular.lowercase(Constants.ADMIN);
+
+			$scope.ui_block();
+			manageAdminService.changeAdminEmail(self.admininfo.id, self.change.new_email, callback_uri).success(function(response) {
+				if(angular.equals(response.status, Constants.STATUS_OK)) {
+					if(response.errors) {
+						self.errors = $scope.errorHandler(response.errors);
+					} else if(response.data) {
+						self.admininfo.user.email = self.change.new_email;
+						self.change.success = Constants.TRUE;
+						self.setActive('view');
+					}
+				}
+
+				$scope.ui_unblock();
+			}).error(function(response) {
+				self.errors = $scope.internalError();
+				$scope.ui_unblock();
+			});
+		} else {
+	    	$("html, body").animate({ scrollTop: 0 }, "slow");
+		}
 	}
 }
