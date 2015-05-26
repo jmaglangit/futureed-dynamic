@@ -14,13 +14,13 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 	self.change = {};
 
 	this.getAdminList = getAdminList;
-	this.addAdmin = addAdmin;
 	this.viewAdmin = viewAdmin;
+	self.editModeAdmin = editModeAdmin;
 	this.saveAdmin = saveAdmin;
 	this.checkUsernameAvailability = checkUsernameAvailability;
 	this.checkEmailAvailability = checkEmailAvailability;
 	this.editAdmin = editAdmin;
-	this.setActive = setActive;
+	this.setManageAdminActive = setManageAdminActive;
 	this.resetPass = resetPass;
 
 	self.validateNewAdminEmail = validateNewAdminEmail;
@@ -38,10 +38,6 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 		}).error(function(response) {
 			this.internalError();
 		});
-	}
-
-	function addAdmin(){
-		self.add_admin = Constants.TRUE;
 	}
 
 	function saveAdmin(){
@@ -83,13 +79,28 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 	function viewAdmin(id){
 		self.is_success = Constants.FALSE;
 		self.errors = Constants.FALSE;
-		self.view_admin = Constants.TRUE;
 
 		manageAdminService.viewAdmin(id).success(function(response){
 			if(angular.equals(response.status,Constants.STATUS_OK)){
 				if(response.data){
 					self.admininfo = response.data;
-					self.setActive('view');
+					self.setManageAdminActive('view');
+				}
+			}
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+		});
+	}
+
+	function editModeAdmin(id){
+		self.is_success = Constants.FALSE;
+		self.errors = Constants.FALSE;
+
+		manageAdminService.viewAdmin(id).success(function(response){
+			if(angular.equals(response.status,Constants.STATUS_OK)){
+				if(response.data){
+					self.admininfo = response.data;
+					self.setManageAdminActive('edit');
 				}
 			}
 		}).error(function(response) {
@@ -162,7 +173,7 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 		});
 	}
 
-	function editAdmin(){
+	function editAdmin() {
 		self.errors = Constants.FALSE;
 		self.admininfo.email = self.admininfo.user.email;
 		self.admininfo.username = self.admininfo.user.username;
@@ -221,31 +232,43 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 		}
 	}
 
-	function setActive(name){
-		
+	function setManageAdminActive(active){
+		self.errors = Constants.FALSE;
 		self.validation = {};
 		self.change = {};
 
+		self.active_list_admin = Constants.FALSE;
+		self.active_add_admin  = Constants.FALSE
+		self.active_view_admin = Constants.FALSE;
+		self.active_edit_admin = Constants.FALSE;
 		self.active_edit_email = Constants.FALSE;
+		self.active_edit_pass  = Constants.FALSE;
 
-		switch(name){
+		switch(active){
 			case 'pass' :
-				self.reset_pass = Constants.TRUE;
-				self.veiw_admin = Constants.FALSE;
-				self.add_admin  = Constants.FALSE;
+				self.active_edit_pass = Constants.TRUE;
+				break;
+
+			case 'add' :
+				self.active_add_admin = Constants.TRUE;
+				break;
+
+			case 'view' :
+				self.active_view_admin = Constants.TRUE;
 				break;
 
 			case 'edit' :
-				self.edit = Constants.TRUE;
+				self.active_edit_admin = Constants.TRUE;
 				break;
 
 			case 'edit_email' :
 				self.active_edit_email = Constants.TRUE;
 				break;
 
-			case 'view' :
+			case 'list' :
 			default:
-				self.edit = Constants.FALSE;
+				self.getAdminList();
+				self.active_list_admin = Constants.TRUE;
 				break;
 		} 
 
@@ -307,29 +330,25 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 	function changeAdminEmail() {
 		self.errors = Constants.FALSE;
 
-		if(self.validation.n_success && self.validation.c_success) {
-			self.base_url = $("#base_url_form input[name='base_url']").val();
-		    var callback_uri = self.base_url + "/" + angular.lowercase(Constants.ADMIN);
+		self.base_url = $("#base_url_form input[name='base_url']").val();
+	    var callback_uri = self.base_url + "/" + angular.lowercase(Constants.ADMIN);
 
-			$scope.ui_block();
-			manageAdminService.changeAdminEmail(self.admininfo.id, self.change.new_email, callback_uri).success(function(response) {
-				if(angular.equals(response.status, Constants.STATUS_OK)) {
-					if(response.errors) {
-						self.errors = $scope.errorHandler(response.errors);
-					} else if(response.data) {
-						self.admininfo.user.email = self.change.new_email;
-						self.change.success = Constants.TRUE;
-						self.setActive('view');
-					}
+		$scope.ui_block();
+		manageAdminService.changeAdminEmail(self.admininfo.id, self.change.new_email, callback_uri).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.admininfo.user.email = self.change.new_email;
+					self.change.success = Constants.TRUE;
+					self.setManageAdminActive('view');
 				}
+			}
 
-				$scope.ui_unblock();
-			}).error(function(response) {
-				self.errors = $scope.internalError();
-				$scope.ui_unblock();
-			});
-		} else {
-	    	$("html, body").animate({ scrollTop: 0 }, "slow");
-		}
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
 	}
 }
