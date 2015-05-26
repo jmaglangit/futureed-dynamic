@@ -17,7 +17,6 @@
         </li>
 
         <ul class="sub-menu collapse" id="students">
-<<<<<<< HEAD
         	<li ng-class="{ 'active' : profile.active_index }" class="side-nav-li">
 				<a href="" ng-click="profile.setClientProfileActive('index')"><span><i class="fa fa-plus-square"></i></span>Add Student</a>
 			</li>
@@ -50,18 +49,11 @@
         <ul class="sub-menu collapse" id="master">
           <li ng-class="{'active' : admincon.active_announcement}" class="side-nav-li">
           	<a href="{!! route('admin.manage.announce.index') !!}" ng-click="admincon.setActiveAdmin('announcement')"><span><i class="fa fa-bullhorn"></i>announcement</span></a>
-=======
-=======
->>>>>>> 78a73f09c6c73308cfa612d02ff4210fcfe1ddb8
         	<!-- <li>
 				    <a href="#"> Admin </a>
 	        </li> -->
           <li>
             <a href="{!! route('admin.manage.client.index') !!}"> Client </a>
-<<<<<<< HEAD
->>>>>>> 3d97bbfc79e6862bef7a050999542c5bbb00fb1d
-=======
->>>>>>> 78a73f09c6c73308cfa612d02ff4210fcfe1ddb8
           </li>
           <!-- <li>
             <a href="#"> Student </a>
