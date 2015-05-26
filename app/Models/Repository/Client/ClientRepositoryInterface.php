@@ -25,4 +25,6 @@ interface ClientRepositoryInterface {
 
     public function getClientCustomDetails($criteria);
 
+    public function getTeacherDetails($criteria,$limit);
+
 }
