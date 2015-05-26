@@ -27,7 +27,6 @@
 					'as' => 'admin.login.forgot_password'
 					, 'uses' => 'FutureLesson\Admin\LoginController@forgotPass'
 				]);
-			/*change this to post (for template viewing only)*/
 			Routes::post('/reset-password', [
 					'as' => 'admin.login.reset_password'
 					, 'uses' => 'FutureLesson\Admin\LoginController@resetPass'
@@ -47,6 +46,41 @@
 				, 'uses' => $manage_admin_controller . '@index'
 			]);
 
+			/**
+			* admin/manage/admin
+			*/
+			Routes::group(['prefix' => '/admin'], function() {
+				$manage_admin_controller = 'FutureLesson\Admin\ManageAdminController';
+
+				Routes::get('/', [
+						'as' => 'admin.manage.admin.index'
+						, 'middleware' => 'admin'
+						, 'uses' => $manage_admin_controller . '@index'
+					]);
+				
+				Routes::group(['prefix' => '/partials'], function(){
+					$manage_admin_controller = 'FutureLesson\Admin\ManageAdminController';
+
+					Routes::get('/side_nav', [
+						'as' => 'admin.manage.admin.partials.side_nav'
+						, 'middleware' => 'admin'
+						, 'uses' => $manage_admin_controller . '@side_nav'
+					]);
+
+					Routes::get('/list_admin_form', [
+						  'as' => 'admin.manage.client.partials.list_admin_form'
+						, 'middleware' => 'admin'
+						, 'uses' => $manage_admin_controller . '@list_admin_form'
+					]);
+
+					Routes::get('/add_admin', [
+						  'as' => 'admin.manage.client.partials.add_admin'
+						, 'middleware' => 'admin'
+						, 'uses' => $manage_admin_controller . '@add_admin'
+					]);
+				});
+			});
+
 			Routes::group(['prefix' => '/client'], function() {
 				$manage_client_controller = 'FutureLesson\Admin\ManageClientController';
 
@@ -64,6 +98,7 @@
 						, 'middleware' => 'admin'
 						, 'uses' => $manage_client_controller . '@side_nav'
 					]);
+
 
 					Routes::get('/list_client_form', [
 						  'as' => 'admin.manage.client.partials.list_client_form'
@@ -211,6 +246,43 @@
 							,'middleware' => 'admin'
 							,'uses' => $price_controller. '@index'
 						]);
+					/**
+					* admin/manage/price/partials
+					*/
+					Routes::group(['prefix' => '/partials'], function()
+						{
+							$price_controller = 'FutureLesson\Admin\PriceController';
+							Routes::get('price_settings',
+								[
+									'as' => 'admin.manage.price.partials.price_settings'
+									, 'middleware' => 'admin'
+									, 'uses' => $price_controller . '@price_settings'
+								]);
+							Routes::get('client_discount',
+								[
+									'as' => 'admin.manage.price.partials.client_discount'
+									, 'middleware' => 'admin'
+									, 'uses' => $price_controller . '@client_discount'
+								]);
+							Routes::get('edit_price',
+								[
+									'as' => 'admin.manage.price.partials.edit_price'
+									, 'middleware' => 'admin'
+									, 'uses' => $price_controller . '@edit_price'
+								]);
+							Routes::get('bulk_discount',
+								[
+									'as' => 'admin.manage.price.partials.bulk_discount'
+									, 'middleware' => 'admin'
+									, 'uses' => $price_controller . '@bulk_discount'
+								]);
+							Routes::get('bulk_edit',
+								[
+									'as' => 'admin.manage.price.partials.bulk_edit'
+									, 'middleware' => 'admin'
+									, 'uses' => $price_controller . '@bulk_edit'
+								]);
+						});
 				});
 
 			/**

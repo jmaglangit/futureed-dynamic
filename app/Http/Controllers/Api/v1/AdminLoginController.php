@@ -17,7 +17,7 @@ class AdminLoginController extends ApiController {
     public function __construct(UserServices $user,AdminServices $admin, PasswordServices $password){
 
         $this->admin = $admin;
-        $this->user  = $user;   
+        $this->user  = $user; 
         $this->password = $password;
     }
 
