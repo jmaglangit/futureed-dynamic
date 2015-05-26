@@ -140,6 +140,13 @@ div > .nav-list > li > a{
 	float: left;
 }
 
+.admin-edit{
+	position: relative;
+  	bottom: 33px;
+  	left: 280px;
+  	z-index: 9999;
+}
+
 /*Futureed Custom DataTable Design*/
 .price-action{
 	position: relative;

@@ -27,6 +27,7 @@ function FutureedController($scope, apiService) {
   $scope.getGradeLevel = getGradeLevel;
   $scope.checkAvailability = checkAvailability;
   $scope.checkEmailAvailability = checkEmailAvailability;
+  $scope.getAnnouncement = getAnnouncement;
 
   $scope.beforeDateRender = beforeDateRender;
 
@@ -732,5 +733,20 @@ function FutureedController($scope, apiService) {
 
     }
     $("html, body").animate({ scrollTop: 0 }, "slow");
+  }
+
+  /**
+  * Get announcement
+  */
+  function getAnnouncement(){
+    apiService.getAnnouncement().success(function(response){
+        if(angular.equals(response.status, Constants.STATUS_OK)){
+          if(!isDataEmpty(response.data)){
+            $scope.announce = response.data;
+          }
+        }
+    }).error(function(response){
+        $scope.internalError();
+    });
   }
 };

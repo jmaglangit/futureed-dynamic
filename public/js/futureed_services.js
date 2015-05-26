@@ -220,5 +220,11 @@ var services = angular.module('futureed.services', []);
 			});
 		}
 
+		futureedAPI.getAnnouncement = function(){
+			return $http({
+				method 	: Constants.METHOD_GET
+				, url 	: futureedAPIUrl + 'announcement'
+			});
+		}
 		return futureedAPI;
 	});

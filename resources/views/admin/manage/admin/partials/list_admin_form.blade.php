@@ -1,4 +1,4 @@
-<div ng-if="!admin.add_admin">
+<div ng-if="!admin.add_admin && !admin.view_admin">
 	<div class="content-title">
 		<div class="title-main-content">
 			<span>Admin Management</span>
@@ -77,11 +77,11 @@
 					            		</div>
 					            		<span class="separator" ng-hide="a.admin_role == 'Super Admin'">|</span>
 					            		<div class="col-action">
-					            			<a href="#" ng-click="sale.viewAdmin(a.id)">View</a>
+					            			<a href="#" ng-click="admin.viewAdmin(a.id)">View</a>
 					            		</div>
 					            		<span class="separator">|</span>
 					            		<div class="col-action">
-					            			<a href="#" ng-click="sale.editAdmin(a.id)">Edit</a>
+					            			<a href="#" ng-click="admin.editAdmin(a.id)">Edit</a>
 					            		</div>
 					            		<span class="separator">|</span>
 					            		<div class="col-action">

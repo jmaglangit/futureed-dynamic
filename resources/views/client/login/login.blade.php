@@ -117,19 +117,15 @@
         {!! Form::close() !!}
       </div>
     </div>
-    <div style="font:normal 14px/20px Arial;" class="col-md-6 bulletin">
+    <div style="font:normal 14px/20px Arial;" class="col-md-6 bulletin" ng-init="getAnnouncement()">
       <h2 class="title">Bulletin Board</h2>
       <hr />
-      <h4>
+      <h4 class="announce-title">
           <i class="fa fa-clock-o"></i>
           {! display_date | date:'MMMM dd, yyyy' !}
       </h4>
         <br />
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-        Nunc luctus libero ac enim faucibus pellentesque.
-        Mauris eleifend tincidunt luctus. Suspendisse at nulla condimentum, rutrum leo at, molestie est.
-        Sed leo arcu, posuere sed diam ac, pretium efficitur sem. 
-        Donec mattis eros metus, nec ultricies sapien interdum.
+        <p ng-if="announce">{! announce.announcement !}</p>
     </div>
   </div>
 @endsection

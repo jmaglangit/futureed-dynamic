@@ -151,7 +151,6 @@ function ManageClientController($scope, apiService, manageClientService) {
 					}
 				} else if(response.data) {
 					if(response.data.id) {
-						console.log(self.details.id);
 						if(self.details.id != response.data.id) {
 							self.validation.e_error = Constants.MSG_EA_EXIST;
 						} else {
