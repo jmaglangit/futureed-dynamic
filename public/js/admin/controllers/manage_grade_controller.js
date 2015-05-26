@@ -173,6 +173,7 @@ function ManageGradeController($scope, apiService, manageGradeService) {
 				} else if(response.data) {
 					self.delete.success = Constants.TRUE;
 					self.getGradeList();
+					$("html, body").animate({ scrollTop: 0 }, "slow");
 				}
 			}
 			

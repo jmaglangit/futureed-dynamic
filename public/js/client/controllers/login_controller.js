@@ -1,9 +1,9 @@
 angular.module('futureed.controllers')
 	.controller('LoginController', LoginController);
 
-LoginController.$inject = ['$scope', 'apiService', 'clientLoginApiService'];
+LoginController.$inject = ['$scope', 'apiService', 'clientLoginApiService', 'clientProfileApiService'];
 
-function LoginController($scope, apiService, clientLoginApiService) {
+function LoginController($scope, apiService, clientLoginApiService, clientProfileApiService) {
 	var self = this;
 
 	self.clientLogin = clientLogin;
@@ -13,6 +13,7 @@ function LoginController($scope, apiService, clientLoginApiService) {
 	self.resetClientPassword = resetClientPassword;
 
 	self.selectRole = selectRole;
+	self.getRejectedClient = getRejectedClient;
 	self.registerClient = registerClient;
 	self.resendClientConfirmation = resendClientConfirmation;
 	self.confirmClientRegistration = confirmClientRegistration;
@@ -150,23 +151,43 @@ function LoginController($scope, apiService, clientLoginApiService) {
 	    this.reg = (this.reg) ? this.reg: {} ;
 
 	    switch(role) {
-	      case Constants.USER_PRINCIPAL :
+	      case Constants.PRINCIPAL :
 	        this.required = Constants.FALSE;
 	        this.role_click = Constants.TRUE;
 	        this.principal = Constants.TRUE;
 	        this.reg.client_role = Constants.PRINCIPAL;
 	        break;
 
-	      case Constants.USER_PARENT    :
-	        this.required = Constants.TRUE;
+	      case Constants.PARENT    :
+	      	this.required = Constants.TRUE;
 	        this.role_click = Constants.TRUE;
 	        this.parent = Constants.TRUE;
 	        this.reg.client_role = Constants.PARENT;
 	        break;
 
 	      default:
+	      	this.reg = {};
 	        break;
 	    }
+	}
+
+	function getRejectedClient(id) {
+		self.reg = {};
+
+		if(id) {
+			clientProfileApiService.getClientDetails(id).success(function(response) {
+				if(angular.equals(response.status, Constants.STATUS_OK)) {
+					if(response.errors) {
+						$scope.errorHandler(response.errors);
+					} else if(response.data) {
+						self.reg = response.data;
+						self.selectRole(self.reg.client_role);
+					}
+				}
+			}).error(function(response) {
+
+			});
+		}
 	}
 
 	function registerClient() {

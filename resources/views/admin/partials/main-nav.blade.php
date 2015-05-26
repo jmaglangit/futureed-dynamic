@@ -35,7 +35,7 @@
             <ul class="nav navbar-nav navbar-right">
               <!-- <li><a href="#">Link</a></li> -->
               <li>
-                <p>Welcome, Seymour</p>
+                <p>Welcome, {! user.first_name !}</p>
               </li>
               <li>
                 <a href="{!! route('admin.logout') !!}">Logout</a>
