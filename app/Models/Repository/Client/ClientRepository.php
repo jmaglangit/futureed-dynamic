@@ -232,13 +232,13 @@ class ClientRepository implements ClientRepositoryInterface{
 
     }
 
-    public function getClientByUserId($user_id){
+    public function getClientByUserId($id){
 
         $clients = new Client();
 
-        $clients = $clients->where('user_id','=',$user_id);
+        $clients = $clients->where('id','=',$id);
 
-        $clients = $clients->with('user')->get();
+        $clients = $clients->with('user')->first();
 
         return $clients;
     }
