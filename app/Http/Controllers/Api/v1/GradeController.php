@@ -29,9 +29,6 @@ class GradeController extends ApiController {
 
         $criteria = array();
         $limit = 0;
-
-        $criteria = array();
-        $limit = 0;
         $offset = 0;
 
         if(Input::get('name')) {

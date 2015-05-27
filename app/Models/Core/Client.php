@@ -42,6 +42,10 @@ class Client extends Model {
 		
 	}
 	
+	public function scopeTeacher($query) {
+		return $query->whereClientRole(config('futureed.teacher'));
+	}
+	
 	public function scopeStatus($query, $status) {
 	
 		return $query->whereHas('user', function($query) use ($status) {	
