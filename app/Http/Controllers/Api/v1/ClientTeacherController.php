@@ -205,7 +205,7 @@ class ClientTeacherController extends ApiController {
 
         return $this->respondWithData($teacher);
 
-        //recheck this one
+        
 
 
 	}
