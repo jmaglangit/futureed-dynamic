@@ -242,5 +242,36 @@ class ClientRepository implements ClientRepositoryInterface{
 
         return $clients;
     }
+
+    public function deleteClient($id){
+
+        try {
+
+            $client = Client::find($id);
+
+            return !is_null($client) ? $client->delete() : false;
+
+        } catch(Exception $e) {
+
+            return $e->getMessage();
+
+        }
+
+        return $client;
+    }
+
+
+    public function getClientToClassroom($id){
+
+        $clients = new Client();
+
+        $clients = $clients->with('classroom')->orderBy('created_at', 'desc');
+
+        $clients = $clients->where('id','=', $id)->first();
+
+        return $clients;
+
+
+    }
     
 }
