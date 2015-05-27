@@ -27,9 +27,6 @@ var Constants = {
 	, EDIT_EMAIL	: "edit_email"
 	, CONFIRM_EMAIL : "confirm_email"
 
-	, USER_PRINCIPAL: "user_principal"
-	, USER_PARENT 	: "user_parent"
-
 	, ADD_CLIENT 	: "add_client"
 	, ADD_STUDENT	: "add_student"
 	, ANNOUNCEMENT 	: "announcement"
@@ -77,5 +74,9 @@ var Constants = {
 
 	, URL_CHANGE_EMAIL		: function(user_type) {
 		return '/' + user_type + '/email/confirm';
+	}
+
+	, URL_USER_CREATION		: function(user_type) {
+		return '/' + user_type + '/user/confirm';
 	}
 }

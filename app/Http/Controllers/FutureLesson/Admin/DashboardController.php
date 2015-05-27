@@ -21,6 +21,6 @@ class DashboardController extends Controller{
 	}
 
 	public function announcement(){
-		return view('admin.manage.announcement');
+		return view('admin.manage.announcement.index');
 	}
 }

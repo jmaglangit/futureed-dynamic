@@ -10,7 +10,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a href="#"><img ng-src="/images/logo-sm.png" /></a>
+            <a href="{!! route('admin.dashboard.index') !!}"><img ng-src="/images/logo-sm.png" /></a>
           </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->
@@ -23,19 +23,11 @@
               <button type="submit" class="btn btn-default">Submit</button>
             </form>
              -->
-             <ul class="nav navbar-nav">
-               <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Manage <span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">
-                <li>{!! Html::link(route('admin.manage.admin.index'), 'Admin') !!}</li>
-                <li>{!! Html::link(route('admin.manage.client.index'), 'Client') !!}</li>
-              </ul>
-            </li>
-             </ul>
+             
             <ul class="nav navbar-nav navbar-right">
               <!-- <li><a href="#">Link</a></li> -->
               <li>
-                <p>Welcome, Seymour</p>
+                <p>Welcome, {! user.first_name !}</p>
               </li>
               <li>
                 <a href="{!! route('admin.logout') !!}">Logout</a>

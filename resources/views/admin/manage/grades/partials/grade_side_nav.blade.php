@@ -24,7 +24,7 @@
         <li id="grade_nav_head" data-target="grade" class="active side-nav-li">
 			<a href="" class="nav-link">Grades</a>
 		</li>
-		<ul class="sub-menu collapse" id="grade">
+		<ul class="sub-menu" id="grade">
         	<li ng-class="{ 'active' : grade.active_add_grade }">
 				<a href="" ng-click="grade.setManageGradeActive('add_grade')"><span><i class="fa fa-plus-square"></i></span>Add Grade</a>
 			</li>
