@@ -14,7 +14,7 @@ class GradeTableSeeder extends Seeder {
             [
                 'name' => 'K1',
                 'description' => 'K One',
-                'country_id' => '4',
+                'country_id' => config('futureed.home_country'),
                 'code' =>101,
                 'status' => 'Enabled',
                 'created_by' => 1,
@@ -26,7 +26,7 @@ class GradeTableSeeder extends Seeder {
             [
                 'name' => 'K2',
                 'description' => 'K Two',
-                'country_id' => '4',
+                'country_id' => config('futureed.home_country'),
                 'code' =>102,
                 'status' => 'Enabled',
                 'created_by' => 1,
@@ -38,7 +38,7 @@ class GradeTableSeeder extends Seeder {
             [
                 'name' => 'Grade 1',
                 'description' => 'Grade One',
-                'country_id' => '4',
+                'country_id' => config('futureed.home_country'),
                 'code' =>103,
                 'status' => 'Enabled',
                 'created_by' => 1,
@@ -50,7 +50,7 @@ class GradeTableSeeder extends Seeder {
             [
                 'name' => 'Grade 2',
                 'description' => 'Grade Two',
-                'country_id' => '4',
+                'country_id' => config('futureed.home_country'),
                 'code' =>104,
                 'status' => 'Enabled',
                 'created_by' => 1,
@@ -62,7 +62,7 @@ class GradeTableSeeder extends Seeder {
             [
                 'name' => 'Grade 3',
                 'description' => 'Grade Three',
-                'country_id' => '4',
+                'country_id' => config('futureed.home_country'),
                 'code' =>105,
                 'status' => 'Enabled',
                 'created_by' => 1,
@@ -74,7 +74,7 @@ class GradeTableSeeder extends Seeder {
             [
                 'name' => 'Grade 4',
                 'description' => 'Grade Four',
-                'country_id' => '4',
+                'country_id' => config('futureed.home_country'),
                 'code' =>106,
                 'status' => 'Enabled',
                 'created_by' => 1,
@@ -86,7 +86,7 @@ class GradeTableSeeder extends Seeder {
             [
                 'name' => 'Grade 5',
                 'description' => 'Grade Five',
-                'country_id' => '4',
+                'country_id' => config('futureed.home_country'),
                 'code' =>107,
                 'status' => 'Enabled',
                 'created_by' => 1,
@@ -98,7 +98,7 @@ class GradeTableSeeder extends Seeder {
             [
                 'name' => 'Grade 6',
                 'description' => 'Grade Six',
-                'country_id' => '4',
+                'country_id' => config('futureed.home_country'),
                 'code' =>108,
                 'status' => 'Enabled',
                 'created_by' => 1,
@@ -110,7 +110,7 @@ class GradeTableSeeder extends Seeder {
             [
                 'name' => 'Grade 7',
                 'description' => 'Grade Seven',
-                'country_id' => '4',
+                'country_id' => config('futureed.home_country'),
                 'code' =>109,
                 'status' => 'Enabled',
                 'created_by' => 1,
@@ -122,7 +122,7 @@ class GradeTableSeeder extends Seeder {
             [
                 'name' => 'Grade 8',
                 'description' => 'Grade Eight',
-                'country_id' => '4',
+                'country_id' => config('futureed.home_country'),
                 'code' =>110,
                 'status' => 'Enabled',
                 'created_by' => 1,
