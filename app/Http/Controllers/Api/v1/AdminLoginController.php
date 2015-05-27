@@ -48,7 +48,7 @@ class AdminLoginController extends ApiController {
             $response =$this->user->checkLoginName($input['username'],config('futureed.admin'));
 
             if($response['status'] <> 200){
-                return $this->respondErrorMessage(2001);
+                return $this->respondErrorMessage($response['data']);
             }
 
             //check password
@@ -64,6 +64,8 @@ class AdminLoginController extends ApiController {
                 if($user['login_attempt'] >=3){
 
                     $this->user->lockAccount($response['data']);
+
+                    return $this->respondErrorMessage(2035);
 
                 }
 
