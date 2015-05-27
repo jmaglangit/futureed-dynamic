@@ -19,6 +19,7 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 	this.saveAdmin = saveAdmin;
 	this.checkUsernameAvailability = checkUsernameAvailability;
 	this.checkEmailAvailability = checkEmailAvailability;
+
 	this.editAdmin = editAdmin;
 	this.setManageAdminActive = setManageAdminActive;
 	this.resetPass = resetPass;
@@ -143,7 +144,12 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 						self.validation.u_success = Constants.TRUE;
 					}
 				}else if(response.data){
-					self.validation.u_error = Constants.MSG_U_EXIST;
+					// in profile
+					if(response.data.id == self.admininfo.id) {
+						self.validation.u_success = Constants.TRUE;
+					} else {
+						self.validation.u_error = Constants.MSG_U_EXIST;
+					}
 				}
 			}
 		}).error(function(response) {
@@ -199,7 +205,7 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 
 						}else if(response.data){
 							self.errors = Constants.FALSE;
-							self.admininfo.success = 'User ' + Constants.EDIT_SUCCESS;
+							self.update_success = Constants.TRUE;
 							self.viewAdmin(response.data.id);
 						}
 					}
@@ -238,6 +244,7 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 
 	function setManageAdminActive(active){
 		self.errors = Constants.FALSE;
+		self.update_success = Constants.FALSE;
 		self.validation = {};
 		self.change = {};
 		self.reg = {};
