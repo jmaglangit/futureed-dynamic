@@ -161,28 +161,35 @@ function ManageClientController($scope, apiService, manageClientService) {
 		self.errors = Constants.FALSE;
 		self.schools = Constants.FALSE;
 
-		$("input, select").removeClass("required-field");
-		$scope.ui_block();
-		manageClientService.updateClientDetails(self.details).success(function(response) {
-			if(angular.equals(response.status, Constants.STATUS_OK)) {
-				if(response.errors) {
-					self.errors = $scope.errorHandler(response.errors);
+		if(!self.validation.s_error) {
+			$("input, select").removeClass("required-field");
 
-					angular.forEach(response.errors, function(value) {
-						$("input[name='" + value.field + "']").addClass("required-field");
-						$("select[name='" + value.field + "']").addClass("required-field");
-					});
-				} else if(response.data) {
-					self.details = response.data;
-					self.setManageClientActive('view_client');
+			$scope.ui_block();
+			manageClientService.updateClientDetails(self.details).success(function(response) {
+				if(angular.equals(response.status, Constants.STATUS_OK)) {
+					if(response.errors) {
+						self.errors = $scope.errorHandler(response.errors);
+
+						angular.forEach(response.errors, function(value) {
+							$("input[name='" + value.field + "']").addClass("required-field");
+							$("select[name='" + value.field + "']").addClass("required-field");
+						});
+					} else if(response.data) {
+						self.details = {};
+						self.details = response.data;
+						self.setManageClientActive('view_client');
+					}
 				}
-			}
 
-			$scope.ui_unblock();
-		}).error(function(response) {
-			self.errors = $scope.internalError();
-			$scope.ui_unblock();
-		});
+				$scope.ui_unblock();
+			}).error(function(response) {
+				self.errors = $scope.internalError();
+				$scope.ui_unblock();
+			});
+		} else {
+			$("input[name='school_name']").addClass("required-field");
+			$("html, body").animate({ scrollTop: 500 }, "slow");
+		}
 	}
 
 	function checkEmailAvailability() {
@@ -265,12 +272,25 @@ function ManageClientController($scope, apiService, manageClientService) {
 
 	function searchSchool() {
 		self.schools = Constants.FALSE;
+
+		if(self.create) {
+			self.create.school_code = Constants.EMPTY_STR;
+			self.create.school_name = Constants.EMPTY_STR;
+		} else if(self.details) {
+			self.details.school_code = Constants.EMPTY_STR;
+			self.details.school_name = Constants.EMPTY_STR;
+		}
+
+		self.validation.s_loading = Constants.TRUE;
+		self.validation.s_error = Constants.FALSE;
 		var school_name = self.details.school_name;
 
 		manageClientService.searchSchool(school_name).success(function(response) {
+			self.validation.s_loading = Constants.FALSE;
+
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
-					self.errors = $scope.errorHandler(response.errors);
+					self.validation.s_error = response.errors[0].message;
 				} else if(response.data) {
 					self.schools = [];
 
@@ -281,6 +301,7 @@ function ManageClientController($scope, apiService, manageClientService) {
 			} 
 		}).error(function(response) {
 			self.errors = $scope.internalError();
+			self.validation.s_loading = Constants.FALSE;
 		});
 	}
 
@@ -288,9 +309,7 @@ function ManageClientController($scope, apiService, manageClientService) {
 		if(self.create) {
 			self.create.school_code = school.code;
 			self.create.school_name = school.name;
-		}
-
-		if(self.details) {
+		} else if(self.details) {
 			self.details.school_code = school.code;
 			self.details.school_name = school.name;
 		}
