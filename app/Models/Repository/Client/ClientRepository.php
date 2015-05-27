@@ -181,53 +181,42 @@ class ClientRepository implements ClientRepositoryInterface{
 
     }
 
-    public function getTeacherDetails($criteria,$limit){
+    public function getTeacherDetails($criteria = [],$limit = 0,$offset = 0){
 
         $clients = new Client();
-        $append=[];
 
-        $clients = $clients->where('client_role','=','Teacher');
+        $count = 0;
 
-        if(isset($criteria['name'])){
+        $clients = $clients->where('client_role' ,'=' ,'Teacher');
 
-            $clients = $clients->name($criteria['name']);
-            $append['name'] = $criteria['name'];
+        if(count($criteria) <= 0 && $limit == 0 && $offset == 0) {
+
+            $count = $clients->count();
+
+        } else {
+
+            if(count($criteria) > 0) {
+                if(isset($criteria['name'])) {
+                    $clients = $clients->name($criteria['name']);
+                }
+
+                if(isset($criteria['email'])) {
+                    $clients = $clients->email($criteria['email']);
+                }
+
+            }
+
+            $count = $clients->count();
+
+            if($limit > 0 && $offset >= 0) {
+                $clients = $clients->offset($offset)->limit($limit);;
+            }
 
         }
 
-        if(isset($criteria['email'])){
+        $clients = $clients->with('user')->orderBy('created_at', 'desc');
 
-
-            $clients = $clients->email($criteria['email']);
-            $append['email'] = $criteria['email'];
-
-        }
-
-        if(isset($limit)){
-
-            $clients = $clients->with('user')->paginate($limit);
-
-            $append['limit'] = $limit;
-        }
-
-
-        $clients->appends($append);
-
-        $paginator = [
-            'currentPage' => $clients->currentPage(),
-            'lastPage' => $clients->lastPage(),
-            'perPage' => $clients->perPage(),
-            'hasMorePages' => $clients->hasMorePages(),
-            'nextPageUrl' => $clients->nextPageUrl(),
-            'previousPageUrl' => $clients->previousPageUrl(),
-            'total' => $clients->total(),
-            'count' => $clients->count()
-        ];
-
-        return [
-            'paginator' => $paginator,
-            'records' => $clients->items()
-        ];
+        return ['total' => $count, 'records' => $clients->get()->toArray()];
 
 
     }
@@ -273,5 +262,7 @@ class ClientRepository implements ClientRepositoryInterface{
 
 
     }
+
+
     
 }

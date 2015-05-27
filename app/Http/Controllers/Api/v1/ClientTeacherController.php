@@ -41,10 +41,17 @@ class ClientTeacherController extends ApiController {
 	{
         $criteria = array();
         $limit = 0;
+        $offset = 0;
 
         if(Input::get('limit')){
 
             $limit =  Input::get('limit');
+
+        }
+
+        if(Input::get('offset')){
+
+            $offset =  Input::get('offset');
 
         }
 
@@ -59,7 +66,7 @@ class ClientTeacherController extends ApiController {
             $criteria['email'] = Input::get('email');
         }
 
-        $teacher = $this->client->getTeacherDetails($criteria,$limit);
+        $teacher = $this->client->getTeacherDetails($criteria,$limit,$offset);
 
         return $this->respondWithData($teacher);
 
@@ -136,13 +143,12 @@ class ClientTeacherController extends ApiController {
 	{
         $teacher = $this->client->getClientByUserId($id);
 
+
         if(!$teacher){
 
             return $this->respondErrorMessage(2001);
 
         }
-
-
 
         return $this->respondWithData($teacher);
 	}
@@ -155,9 +161,51 @@ class ClientTeacherController extends ApiController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($id, ClientTeacherRequest $request)
 	{
+        $user_type = config('futureed.client');
+        $user = $request->only('username','email');
+        $client = $request->only('first_name','last_name','state','city','zip','country');
+        $user['name'] = $client['first_name']." ".$client['last_name'];
 
+
+        $client_details = $this->client->getClientDetails($id);
+
+        $check_username = $this->user->checkUserName($user['username'],$user_type);
+        $check_email = $this->user->checkEmail($user['email'],$user_type);
+
+
+
+        if($check_username && $check_username != $client_details['user_id']){
+
+            return $this->respondErrorMessage(2104);
+        }
+
+        if($check_email && $check_email != $client_details['user_id']){
+
+            return $this->respondErrorMessage(2200);
+        }
+
+
+        if(!$client_details){
+
+            return $this->respondErrorMessage(2001);
+
+        }
+
+
+        $user['id'] = $client_details['user_id'];
+
+        $this->user->updateUserEloquent($user);
+
+        $this->client->updateClientDetails($id,$client);
+
+        $teacher = $this->client->getClientByUserId($id);
+
+
+        return $this->respondWithData($teacher);
+
+        //recheck this one
 
 
 	}
