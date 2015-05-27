@@ -70,9 +70,12 @@
                   , 'ng-click' => 'adminlogin.adminDoLogin()'
               )
           ) !!}
-          	<div class="form-group">
-          		<a href="{!! route('admin.login.forgot_password') !!}" style="color:#055A7F;">Forgot your Password?</a>
-          	</div>
+
+          {!! Form::close() !!}
+          <br />
+        	<div class="form-group">
+        		<a href="{!! route('admin.login.forgot_password') !!}" style="color:#055A7F;">Forgot your Password?</a>
+        	</div>
 			</div>
 		</div>
 	</div>

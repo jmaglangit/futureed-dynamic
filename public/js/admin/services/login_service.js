@@ -16,10 +16,10 @@ function adminLoginApiService($http) {
 		});
 	}
 
-	function adminResetPass(id, reset_code, password){
+	function adminResetPass(id, reset_code, new_password){
 		return $http({
 			method 	: Constants.METHOD_POST
-			, data 	: {reset_code : reset_code, password : password}
+			, data 	: {reset_code : reset_code, new_password : new_password}
 			, url 	: adminLoginApiUrl + 'admin/change-password/' + id
 		});
 	}

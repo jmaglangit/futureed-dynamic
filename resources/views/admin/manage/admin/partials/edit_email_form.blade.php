@@ -53,17 +53,17 @@
                 <span ng-if="admin.validation.c_error" class="error-msg-con">{! admin.validation.c_error !}</span>
             </div>	
     	</div>
-    	<div class="btn-container">
+    	<div class="btn-container col-xs-7 col-xs-offset-2">
     		{!! Form::button('Save'
                 , array(
-                    'class' => 'btn btn-gold btn-medium'
+                    'class' => 'btn btn-blue btn-medium'
                     , 'ng-click' => "admin.changeAdminEmail()"
                 )
             ) !!}
 
             {!! Form::button('Cancel'
                 , array(
-                    'class' => 'btn btn-blue btn-medium'
+                    'class' => 'btn btn-gold btn-medium'
                     , 'ng-click' => "admin.viewAdmin(admin.admininfo.id)"
                 )
             ) !!}
