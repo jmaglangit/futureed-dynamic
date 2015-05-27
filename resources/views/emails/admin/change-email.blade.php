@@ -7,11 +7,9 @@
 <h2>Hi {{ $name  }}</h2>
 
 <div>
-    <div>"Hi User,
+    <div>Your email has been changed from {{$email}} to {{$new_email}} You can now use this email in your <a href="{{ $link }}">login </a>.</div>
 
-        Your email has been changed from {{$email}} to {{$new_email}} You can now use this email in your <a href="{{ $link }}">login </a>.</div>
-
-        <div>If you did not ask for this change, please contact the administrator right away."</div>
+        <div>If you did not ask for this change, please contact the administrator right away.</div>
 
 </div>
 </body>
