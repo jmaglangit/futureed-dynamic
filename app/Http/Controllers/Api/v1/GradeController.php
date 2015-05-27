@@ -40,7 +40,7 @@ class GradeController extends ApiController {
 
 
         if(Input::get('country_id')) {
-            $criteria['coutnry_id'] = Input::get('country_id');
+            $criteria['country_id'] = Input::get('country_id');
         }
 
 

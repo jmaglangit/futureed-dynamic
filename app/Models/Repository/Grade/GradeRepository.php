@@ -28,7 +28,7 @@ class GradeRepository implements GradeRepositoryInterface{
 
                 if(isset($criteria['country_id'])){
 
-                    $grade = $grade->with('country')->id($criteria['name']);
+                    $grade = $grade->with('country')->countryid($criteria['country_id']);
 
                 }
             }
