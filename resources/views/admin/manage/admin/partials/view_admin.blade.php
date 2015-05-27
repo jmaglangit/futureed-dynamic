@@ -1,9 +1,9 @@
-<div ng-if="admin.active_view_admin || admin.active_edit_admin">
+<div ng-if="admin.view_admin && !admin.reset_pass && !admin.active_edit_email">
 	<div class="content-title">
-		<div class="title-main-content" ng-if="admin.active_view_admin">
+		<div class="title-main-content" ng-if="!admin.edit_admin">
 			<span>View Admin User</span>
 		</div>
-		<div class="title-main-content" ng-if="admin.active_edit_admin">
+		<div class="title-main-content" ng-if="admin.edit_admin">
 			<span>Edit Admin User</span>
 		</div>
 	</div>
@@ -26,7 +26,7 @@
 		</div>
 		<div class="alert alert-success" ng-if="admin.is_success">
 			<p>
-				{! admin.admininfo.success !}
+				{! admin.is_success !}
 			</p>
 		</div>
 		<fieldset>
@@ -39,7 +39,7 @@
 					{!! Form::text('username', '',
 						[
 							'placeholder' => 'Username',
-							'ng-disabled' => 'admin.active_view_admin',
+							'ng-disabled' => '!admin.edit',
 							'ng-model' => 'admin.admininfo.user.username',
 							'ng-model-options' => "{ debounce : {'default' : 1000} }",
 							'ng-change' => 'admin.checkUsernameAvailability()',
@@ -60,7 +60,7 @@
 							'Admin' => 'Admin',
 							'Super Admin' => 'Super Admin'
 						],'{! admin.admininfo.admin_role !}',
-						['ng-model' => 'admin.admininfo.admin_role', 'class' => 'form-control', 'ng-disabled' => 'admin.active_view_admin']
+						['ng-model' => 'admin.admininfo.admin_role', 'class' => 'form-control', 'ng-disabled' => '!admin.edit']
 					)!!}
 				</div>
 			</div>
@@ -82,11 +82,11 @@
 						<i class="fa fa-spinner fa-spin" ng-if="admin.b_loading"></i>
 						<span ng-if="admin.b_success" class="error-msg-con success-color">Email is available.</span>
 					</div>
-					<a href="" ng-click="admin.setManageAdminActive('edit_email')" class="admin-edit">Edit Email</a>	
+					<a href="" ng-click="admin.setActive('edit_email')" class="admin-edit">Edit Email</a>	
 				</div>
 
 				<label class="col-xs-2 control-label" id="status">Status <span class="required">*</span></label>
-	                <div class="col-xs-4" ng-if="admin.active_edit_admin">
+	                <div class="col-xs-4" ng-if="admin.edit">
 	                	<div class="col-xs-6 checkbox">	                				
 	                		<label>
 	                		{!! Form::radio('status','Enabled', true) 
@@ -102,7 +102,7 @@
 	                		</label>
 	                	</div>
 	                </div>
-	                <div class="col-xs-4" ng-if="admin.active_view_admin">
+	                <div class="col-xs-4" ng-if="!admin.edit">
 	                	<div ng-show="admin.admininfo.user.status == 'Enabled'">
 	                		<span style="color:green;"><b><i class="fa fa-check-circle-o"></i> {! admin.admininfo.user.status !}</b></span>
 	                	</div>
@@ -120,6 +120,7 @@
 							'ng-model' => 'admin.admininfo.user.new_email',
 							'ng-disabled' => 'true',
 							'ng-model-options' => "{ debounce : {'default' : 1000} }",
+							'ng-change' => 'admin.checkEmailAvailability()',
 							'class' => 'form-control'
 						]
 					) !!}
@@ -136,7 +137,7 @@
 					{!! Form::text('firstname','',
 						[
 							'class' => 'form-control',
-							'ng-disabled' => 'admin.active_view_admin',
+							'ng-disabled' => '!admin.edit',
 							'ng-model' => 'admin.admininfo.first_name',
 							'placeholder' => 'First Name'
 						]
@@ -147,57 +148,34 @@
 					{!! Form::text('lastname','',
 						[
 							'class' => 'form-control',
-							'ng-disabled' => 'admin.active_view_admin',
+							'ng-disabled' => '!admin.edit',
 							'ng-model' => 'admin.admininfo.last_name',
 							'placeholder' => 'Last Name'
 						]
 					) !!}
 				</div>
 			</div>
-			<div class="btn-container">
-				<div class="row" ng-if="admin.active_edit_admin">
+			<div class="btn-container col-xs-12">
+				<div class="row" ng-if="admin.edit">
 					<div class="col-xs-4">
-						{!! Form::button('Reset Password'
-							, array(
-								'class' => 'btn btn-success'
-								, 'ng-click' => "admin.setManageAdminActive('pass')"
-							)
-						) !!}
+						<button class="btn btn-success" type="button" ng-click="admin.setActive('pass')">reset password</button>
 					</div>			
 					<div class="col-xs-4"   >
-						{!! Form::button('Save'
-							, array(
-								'class' => 'btn btn-blue'
-								, 'ng-click' => "admin.editAdmin()"
-							)
-						) !!}
+						<button class="btn btn-blue" ng-click="admin.editAdmin()">Save</button>	
 					</div>
 					<div class="col-xs-4">
-						{!! Form::button('Cancel'
-							, array(
-								'class' => 'btn btn-gold'
-								, 'ng-click' => "admin.setManageAdminActive('view')"
-							)
-						) !!}
+						<button class="btn btn-gold" ng-click="admin.setActive('view')">Cancel</button>
 					</div>
 				</div>		
-				<div ng-if="admin.active_view_admin">
-					{!! Form::button('Edit'
-						, array(
-							'class' => 'btn btn-blue btn-medium'
-							, 'ng-click' => "admin.setManageAdminActive('edit')"
-						)
-					) !!}
-
-					{!! Form::button('Cancel'
-						, array(
-							'class' => 'btn btn-gold btn-medium'
-							, 'ng-click' => "admin.setManageAdminActive()"
-						)
-					) !!}
+				<div class="row" ng-if="!admin.edit">
+					<div class="col-xs-4"  ng-if="!admin.edit" >
+						<button class="btn btn-blue" ng-click="admin.setActive('edit')">edit</button>
+					</div>
+					<div class="col-xs-4">
+						<button class="btn btn-gold" ng-click="admin.setActive()">Cancel</button>
+					</div>
 				</div>			
 			</div>
 		</fieldset>
 	</div>
-	{!! Form::close() !!}
 </div>

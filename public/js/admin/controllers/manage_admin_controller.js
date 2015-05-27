@@ -207,8 +207,10 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 
 						}else if(response.data){
 							self.errors = Constants.FALSE;
-							self.admininfo.success = 'User ' + Constants.EDIT_SUCCESS;
-							self.viewAdmin(response.data.id);
+							self.is_success = 'User ' + Constants.EDIT_SUCCESS;
+							self.add_admin = Constants.FALSE;
+							self.edit = Constants.FALSE;
+
 						}
 					}
 					$scope.ui_unblock();

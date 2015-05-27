@@ -1,4 +1,4 @@
-<div ng-if="admin.active_edit_pass">
+<div ng-if="admin.reset_pass">
 	<div class="content-title">
 		<div class="title-main-content">
 			<span>Reset Password</span>
@@ -50,19 +50,8 @@
 			</div>
 		</div>
 		<div class="btn-container">
-			{!! Form::button('Reset'
-				, array(
-					'class' => 'btn btn-blue btn-medium'
-					, 'ng-click' => "admin.resetPass()"
-				)
-			) !!}
-
-			{!! Form::button('Cancel'
-				, array(
-					'class' => 'btn btn-gold btn-medium'
-					, 'ng-click' => "admin.setManageAdminActive('view')"
-				)
-			) !!}
+			<button class="btn btn-blue btn-medium" type="button" ng-click="admin.resetPass()">Reset</button>
+			<button class="btn btn-gold btn-medium" type="button" ng-click="admin.setActive('view')">Cancel</button>
 		</div>
 	</div>
 	<div class="col-xs-6 col-xs-offset-3" ng-if="admin.reset_success">

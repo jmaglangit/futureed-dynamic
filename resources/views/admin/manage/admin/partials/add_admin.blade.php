@@ -1,4 +1,4 @@
-<div ng-if="admin.active_add_admin">
+<div ng-if="admin.add_admin">
 	<div class="content-title">
 		<div class="title-main-content">
 			<span>Add Admin User</span>
@@ -149,12 +149,7 @@
 			</div>
 			<div class="btn-container col-xs-6 col-xs-offset-3">
 				<button class="btn btn-blue btn-medium" id="proceed-btn" type="button" ng-click="admin.saveAdmin()">Save</button>
-				{!! Form::button('Cancel'
-						, array(
-							'class' => 'btn btn-gold btn-medium'
-							, 'ng-click' => "admin.setManageAdminActive()"
-						)
-					) !!}
+				<button class="btn btn-gold btn-medium" ng-click="admin.cancelAdd()">Cancel</button>
 			</div>
 		</fieldset>
 	</div>

@@ -11,7 +11,7 @@
 
 		<div class="wrapr">
 			<div class="client-nav side-nav">
-				@include('admin.partials.dshbrd-side-nav')
+				<div template-directive template-url="{!! route('admin.manage.admin.partials.side_nav') !!}"></div>
 			</div>	        
 
 			<div class="client-content" template-directive template-url="{!! route('admin.manage.admin.partials.list_admin_form') !!}"></div>
