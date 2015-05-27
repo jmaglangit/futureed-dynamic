@@ -6,54 +6,45 @@ use FutureEd\Models\Core\Grade;
 class GradeRepository implements GradeRepositoryInterface{
 
 
-    public function getGrades($category = [],$limit = 0){
+    public function getGrades($criteria = [],$limit = 0, $offset = 0){
 
         $grade = new Grade();
-        $append=[];
 
-        if(isset($category['country_id'])){
 
-            $grade = $grade->with('country')->countryid($category['country_id']);
+        $count = 0;
 
-            $append['country_id'] = $category['country_id'];
+        if(count($criteria) <= 0 && $limit == 0 && $offset == 0) {
 
+            $count = $grade->count();
+
+        } else {
+
+            if(count($criteria) > 0) {
+                if(isset($criteria['name'])) {
+
+                    $grade = $grade->with('country')->name($criteria['name']);
+
+                }
+
+                if(isset($criteria['country_id'])){
+
+                    $grade = $grade->with('country')->countryid($criteria['country_id']);
+
+                }
+            }
+
+            $count = $grade->count();
+
+            if($limit > 0 && $offset >= 0) {
+                $grade = $grade->with('country')->offset($offset)->limit($limit);
+            }
 
         }
 
-        if(isset($category['name'])){
+        $grade = $grade->with('country')->orderBy('name', 'asc');
 
-            $grade = $grade->with('country')->name($category['name']);
+        return ['total' => $count, 'records' => $grade->get()->toArray()];
 
-            $append['name'] = $category['name'];
-
-        }
-
-        if(isset($limit)){
-
-            $grade = $grade->with('country')->paginate($limit);
-
-            $append['limit'] = $limit;
-        }
-
-
-
-        $grade->appends($append);
-
-        $paginator = [
-            'currentPage' => $grade->currentPage(),
-            'lastPage' => $grade->lastPage(),
-            'perPage' => $grade->perPage(),
-            'hasMorePages' => $grade->hasMorePages(),
-            'nextPageUrl' => $grade->nextPageUrl(),
-            'previousPageUrl' => $grade->previousPageUrl(),
-            'total' => $grade->total(),
-            'count' => $grade->count()
-        ];
-
-        return [
-            'paginator' => $paginator,
-            'records' => $grade->items()
-        ];
 
 
 
