@@ -24,18 +24,23 @@ class ClassroomController extends ApiController {
 	public function index()
 	{
         $criteria = [];
-        $limit = (Input::get('limit')) ? Input::get('limit') : 3;
 
         //get class name
         if(Input::get('name')){
 
-            $criteria['email'] = Input::get('name');
+            $criteria['name'] = Input::get('name');
         }
 
-        $limit = (Input::get('limit')) ? Input::get('limit') : 0;
+        //get class grade
+        if(Input::get('grade')){
+
+            $criteria['grade_id'] = Input::get('grade_id');
+        }
+
+
+        $limit = (Input::get('limit')) ? Input::get('limit') : 3;
 
         $offset = (Input::get('offset')) ? Input::get('offset') : 0;
-
 
 
         return $this->respondWithData($this->classroom->getClassrooms($criteria,$limit,$offset));
