@@ -213,10 +213,9 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 
 	function resetPass(){
 		self.errors = Constants.FALSE;
-		self.r_error = Constants.FALSE;
 
 		if(self.password != self.password_c){
-			self.r_error = Constants.MSG_PW_NOT_MATCH;
+			self.errors = [Constants.MSG_PW_NOT_MATCH];
 			$("html, body").animate({ scrollTop: 0 }, "slow");
 		}else{
 			$scope.ui_block();
@@ -228,16 +227,18 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 						self.reset_success = Constants.TRUE;
 					}
 				}
+				
 				$scope.ui_unblock();
-			}).error(function(response){
-				$scope.ui_unblock();
+			}).error(function(response) {
 				self.errors = $scope.internalError();
+				$scope.ui_unblock();
 			})
 		}
 	}
 
 	function setManageAdminActive(active){
 		self.errors = Constants.FALSE;
+		self.reset_success = Constants.FALSE;
 		self.validation = {};
 		self.change = {};
 		self.reg = {};
@@ -251,6 +252,9 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 
 		switch(active){
 			case 'pass' :
+				// TODO: create an object for this
+				self.password = Constants.EMPTY_STR;
+				self.password_c = Constants.EMPTY_STR;
 				self.active_edit_pass = Constants.TRUE;
 				break;
 
