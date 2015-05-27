@@ -157,7 +157,7 @@
             <label for="" class="col-md-2 control-label">Country <span class="required">*</span></label>
             <div class="col-md-5">
                 <select class="form-control" name="country" ng-model="profile.prof.country" ng-disabled="!profile.active_edit">
-                    <option selected="selected" value="">-- Select Country --</option>
+                    <option ng-selected="true" value="">-- Select Country --</option>
                     <option ng-repeat="country in countries" value="{! country.name !}" 
                     	ng-selected="{! profile.prof.country == country.name !}">{! country.name !}</option>
                 </select>
@@ -183,7 +183,7 @@
 
         <div class="col-md-5 nullable">
             <select class="form-control" name="grade_code" ng-model="profile.prof.grade_code" ng-disabled="!profile.active_edit">
-                <option value="">-- Select Level --</option>
+                <option ng-selected="true" value="">-- Select Level --</option>
                 <option ng-selected="{! profile.prof.grade_code == grade.code !}" ng-repeat="grade in grades" value="{! grade.code !}">{! grade.name !}</option>
             </select>
         </div><br><br>

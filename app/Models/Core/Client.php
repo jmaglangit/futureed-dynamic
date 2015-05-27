@@ -18,6 +18,16 @@ class Client extends Model {
 	public function user() {
 		return $this->belongsTo('FutureEd\Models\Core\User');
 	}
+
+    //-------------relationships classroom
+    public function classroom() {
+        return $this->hasMany('FutureEd\Models\Core\Classroom');
+    }
+
+    public function school(){
+
+        return $this->belongsTo('FutureEd\Models\Core\School','school_code','code');
+    }
 	
 	//-------------scopes
 	public function scopeName($query, $name) {
@@ -54,14 +64,13 @@ class Client extends Model {
 		
 	}
 	
-	public function scopeSchool_Code($query, $school_code) {
-	
-		return $query->whereSchoolCode($school_code);
+	public function scopeSchool_Name($query, $school_name) {
+
+        return $query->whereHas('school', function($query) use ($school_name){
+           $query->where('name', 'like' , "%$school_name%");
+        });
 		
 	}
 
-    //-------------relationships classroom
-    public function classroom() {
-        return $this->hasMany('FutureEd\Models\Core\Classroom');
-    }
+
 }

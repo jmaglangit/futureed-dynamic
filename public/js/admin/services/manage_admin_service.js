@@ -12,6 +12,7 @@ function manageAdminService($http) {
 	manageAdminApi.editAdmin = editAdmin;
 	manageAdminApi.resetPass = resetPass;
 	manageAdminApi.changeAdminEmail = changeAdminEmail;
+	manageAdminApi.checkAdminEmail = checkAdminEmail;
 
 	function getAdminList(user, email, role){
 		return $http({
@@ -69,5 +70,15 @@ function manageAdminService($http) {
 
 		});
 	}
+	
+	function checkAdminEmail(id, email) {
+		return $http({
+			method 	: Constants.METHOD_POST
+			, data 	: {email : email}
+			, url 	: adminApiUrl + 'admin/check-email/' + id
+
+		});
+	}
+	
 	return manageAdminApi;
 }
