@@ -15,13 +15,18 @@ class ClassroomRepository implements ClassroomRepositoryInterface{
 
     public function getClassrooms($criteria,$limit,$offset){
 
+        $classroom = new Classroom();
         if(isset($criteria['name'])){
 
-            $classroom = Classroom::with('client','grade','order')->name($criteria['name']);
-        } else {
-
-            $classroom =  Classroom::with('client','grade','order');
+            $classroom = $classroom->name($criteria['name']);
         }
+
+        if(isset($criteria['grade_id'])){
+
+            $classroom = $classroom->grade_id($criteria['grade_id']);
+        }
+
+        $classroom = $classroom->with('order','grade','client');
 
         $count = $classroom->count();
 
