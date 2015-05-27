@@ -55,4 +55,9 @@ class Client extends Model {
 		return $query->whereSchoolCode($school_code);
 		
 	}
+
+    //-------------relationships classroom
+    public function classroom() {
+        return $this->hasMany('FutureEd\Models\Core\Classroom');
+    }
 }

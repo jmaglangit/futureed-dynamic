@@ -75,4 +75,5 @@ interface UserRepositoryInterface {
 
     public function updateStatus($id,$status);
 
+    public function addUserEloquent($user);
 }

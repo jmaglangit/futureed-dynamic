@@ -30,10 +30,13 @@ class ClientTeacherRequest extends ApiRequest {
             case 'POST':
             default:
                 return [
-                    'subject_id' => 'required|integer|exists:subjects,id',
-                    'code' => 'required|integer|unique:subject_areas',
-                    'name' => 'required',
-                    'status' => 'required|in:Enabled,Disabled'
+                    'user_name' => 'require|string',
+                    'email' => 'required|email|unique:users',
+                    'first_name' => 'required|string',
+                    'last_name' => 'required|string',
+                    'current_user' => 'required|numeric',
+                    'username' => 'required|string|max:32|min:8',
+                    'callback_uri' => 'required|string'
                 ];
                 break;
         }
