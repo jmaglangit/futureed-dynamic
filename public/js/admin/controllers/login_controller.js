@@ -16,10 +16,11 @@ function AdminLoginController($scope, apiService, adminLoginApiService){
 		$scope.errors = Constants.FALSE;
 
 		$scope.ui_block();
-		adminLoginApiService.adminDoLogin(this.username, this.password).success(function(response){
+		adminLoginApiService.adminDoLogin(self.username, self.password).success(function(response){
 			if(response.status == Constants.STATUS_OK){
 				if(response.errors) {
 					$scope.errorHandler(response.errors);
+	          		self.password = Constants.EMPTY_STR;
 				}else if(response.data){
 					$("#login_form input[name='user_data']").val(angular.toJson(response.data));
 					$("#login_form").trigger(Constants.ATTR_SUBMIT);
