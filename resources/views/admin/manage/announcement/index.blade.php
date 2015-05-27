@@ -22,17 +22,18 @@
 							{! error !}
 						</p>
 					</div>
-					<div class="alert alert-info" ng-if="announce.is_success">
-						<p>
-							{! announce.is_success !}
-						</p>
-					</div>
+
+					 <div class="alert alert-success" ng-if="announce.data.success">
+			        	<p>Successfully created this announcement.</p>
+			        </div>
+
 					<div class="subtitle-content">
 						<span><i class="fa fa-plus-square"></i> Create Client Announcement</span>
 					</div>
 					{!! Form::open([
 						'id' => 'announcement_form'
 						, 'class' => 'form-horizontal'
+						, 'ng-init' => 'announce.getAnnouncement()'
 						]) !!}
 						<fieldset>
 							<legend class="legend-name-mid legend-announce"></legend>
@@ -44,13 +45,13 @@
 									            <div class="dropdown">
 			                              <a class="dropdown-toggle" id="dropdown1" role="button" data-toggle="dropdown" data-target="#" href="#">
 			                                <div class="input-group">
-			                                    <input readonly="readonly" type="text" name="date_start" placeholder="DD/MM/YY" class="form-control" value="{! announce.date_start | date:'dd/MM/yy' !}">
-			                                    <input type="hidden" name="hidden_start" ng-model="announce.date_start" value="{! announce.date_start | date:'yyyyMMdd' !}">
+			                                    <input readonly="readonly" type="text" name="date_start" placeholder="DD/MM/YY" class="form-control" value="{! announce.data.date_start | date:'dd/MM/yy' !}">
+			                                    <input type="hidden" name="hidden_start" value="{! announce.data.date_start | date:'yyyyMMdd' !}">
 			                                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 			                                </div>
 			                              </a>
 			                              <ul class="dropdown-menu date-dropdown-menu" role="menu" aria-labelledby="dLabel">
-			                                <datetimepicker data-ng-model="announce.date_start" data-before-render="announce.beforeDate($dates)" data-datetimepicker-config="{ dropdownSelector: '#dropdown1', startView:'day', minView:'day' }"/>
+			                                <datetimepicker data-ng-model="announce.data.date_start" data-before-render="announce.beforeDate($dates)" data-datetimepicker-config="{ dropdownSelector: '#dropdown1', startView:'day', minView:'day' }"/>
 			                              </ul>
 			                            </div>
 								            </div>
@@ -59,13 +60,13 @@
 									            <div class="dropdown">
 			                              <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
 			                                <div class="input-group">
-			                                    <input readonly="readonly" type="text" name="date_end" placeholder="DD/MM/YY" class="form-control" value="{! announce.date_end | date:'dd/MM/yy' !}">
-			                                    <input type="hidden" name="hidden_end" ng-model="announce.date_end" value="{! announce.date_end | date:'yyyyMMdd' !}">
+			                                    <input readonly="readonly" type="text" name="date_end" placeholder="DD/MM/YY" class="form-control" value="{! announce.data.date_end | date:'dd/MM/yy' !}">
+			                                    <input type="hidden" name="hidden_end" value="{! announce.data.date_end | date:'yyyyMMdd' !}">
 			                                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 			                                </div>
 			                              </a>
-			                              <ul class="dropdown-menu date-dropdown-menu" role="menu" aria-labelledby="dLabel">
-			                                <datetimepicker data-ng-if="announce.date_start" data-ng-model="announce.date_end" data-before-render="announce.afterDateStart($dates)" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', startView:'day', minView:'day' }"/>
+			                              <ul class="dropdown-menu date-dropdown-menu" role="menu" aria-labelledby="dLabel" ng-if="announce.data.date_start">
+			                                <datetimepicker data-ng-if="announce.data.date_start" data-ng-model="announce.data.date_end" data-before-render="announce.afterDateStart($dates)" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', startView:'day', minView:'day' }"/>
 			                              </ul>
 			                            </div>
 								            </div>
@@ -79,12 +80,12 @@
 								   				'class' => 'form-control'
 								   				,'rows' => '10'
 								   				, 'style' => 'resize:vertical;'
-								   				, 'ng-model' => 'announce.announce_message'
+								   				, 'ng-model' => 'announce.data.announcement'
 								   			]) !!}
 								   </div>
 								   <div class="btn-container">
 								   		<button class="btn btn-blue btn-medium" ng-click="announce.saveAnnounce()" type="button">Save</button>
-								   		<button class="btn btn-gold btn-medium" type="button">Clear</button>
+								   		<button class="btn btn-gold btn-medium" ng-click="announce.clearAnnouncementForm()" type="button">Clear</button>
 								   </div>					
 								</div>				
 						</fieldset>	
@@ -100,7 +101,6 @@
 @overwrite
 	
 @section('scripts')
-	{!! Html::script('/js/admin/controllers/datatables_controller.js')!!}
 	{!! Html::script('/js/admin/controllers/dashboard_controller.js')!!}
 	{!! Html::script('//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js')!!}
 	{!! Html::script('/js/admin/controllers/announcement_controller.js')!!}
