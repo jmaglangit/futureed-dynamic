@@ -283,7 +283,7 @@
 	        	<div class="form-group">
 	        		<label class="col-xs-3 control-label" id="contact_person">Contact Person <span class="required">*</span></label>
 	        		<div class="col-xs-6">
-	        			{!! Form::text('contact_name',''
+	        			{!! Form::text('school_contact_name',''
 	        				, array(
 	        					'placeHolder' => 'Contact Person'
 	        					, 'ng-model' => 'client.details.school_contact_name'
@@ -296,7 +296,7 @@
 	        	<div class="form-group">
 	        		<label class="col-xs-3 control-label" id="contact_number">Contact Number <span class="required">*</span></label>
 	        		<div class="col-xs-6">
-	        			{!! Form::text('contact_number',''
+	        			{!! Form::text('school_contact_number',''
 	        				, array(
 	        					'placeHolder' => 'Contact Number'
 	        					, 'ng-model' => 'client.details.school_contact_number'
