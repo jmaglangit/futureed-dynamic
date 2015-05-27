@@ -42,6 +42,11 @@ class Classroom extends Model {
         return $query->where('name','like','%'.$name.'%');
     }
 
+    public function scopeGrade_Id($query,$grade_id){
+
+        return $query->where('grade_id',$grade_id);
+    }
+
 
 
 
