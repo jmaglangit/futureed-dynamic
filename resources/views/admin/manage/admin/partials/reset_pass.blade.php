@@ -15,19 +15,9 @@
 				{! error !}
 			</p>
 		</div>
-		<div class="alert alert-danger" ng-if="admin.r_error">
-			<p>
-				{! admin.r_error !}
-			</p>
-		</div>
-		<div class="alert alert-success" ng-if="admin.is_success">
-			<p>
-				{! admin.is_success !}
-			</p>
-		</div>
 		<div class="form-group">
-			<label class="col-xs-2 control-label">Password <span class="required">*</span></label>
-			<div class="col-xs-4">
+			<label class="col-xs-3 control-label">Password <span class="required">*</span></label>
+			<div class="col-xs-5">
 				{!! Form::password('password',
 						[
 							'placeholder' => 'Password',
@@ -38,8 +28,8 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-xs-2 control-label">Confirm Password <span class="required">*</span></label>
-			<div class="col-xs-4">
+			<label class="col-xs-3 control-label">Confirm Password <span class="required">*</span></label>
+			<div class="col-xs-5">
 				{!! Form::password('password',
 						[
 							'placeholder' => 'Password',
@@ -49,7 +39,7 @@
 					) !!}
 			</div>
 		</div>
-		<div class="btn-container">
+		<div class="btn-container col-xs-7 col-xs-offset-2">
 			{!! Form::button('Reset'
 				, array(
 					'class' => 'btn btn-blue btn-medium'
