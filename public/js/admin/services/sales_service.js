@@ -20,10 +20,16 @@ function salesService($http){
 	* Add Price API
 	* @return ID
 	*/
-	function addPrice(name, description, price, status){
+	function addPrice(data){
 		return $http({
 			method 	: Constants.METHOD_POST
-			, data 	: {name : name, price : price, description : description, status : status}
+			, data 	: 
+				{
+					  name 			: data.name
+					, price 		: data.price
+					, description 	: data.description
+					, status 		: data.status
+				}
 			, url 	: salesApiUrl + 'subscription'
 		});
 	}

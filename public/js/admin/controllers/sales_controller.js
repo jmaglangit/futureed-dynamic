@@ -7,19 +7,20 @@ function SalesController($scope, salesService) {
 
 	var self 			= this;
 
-	this.price 			= [{}];
+	self.price 			= [{}];
+	self.data			= {};
 
-	this.addPrice 		= addPrice;
-	this.getPriceList 	= getPriceList;
-	this.deletePrice 	= deletePrice;
-	this.editPrice 		= editPrice;
-	this.getPrice 		= getPrice;
-	this.cancelEdit		= cancelEdit;
-	this.addBulk		= addBulk;
-	this.getBulkList	= getBulkList;
-	this.getBulk 		= getBulk;
-	this.editBulk 		= editBulk;
-	this.deleteBulk 	= deleteBulk;
+	self.addPrice 		= addPrice;
+	self.getPriceList 	= getPriceList;
+	self.deletePrice 	= deletePrice;
+	self.editPrice 		= editPrice;
+	self.getPrice 		= getPrice;
+	self.cancelEdit		= cancelEdit;
+	self.addBulk		= addBulk;
+	self.getBulkList	= getBulkList;
+	self.getBulk 		= getBulk;
+	self.editBulk 		= editBulk;
+	self.deleteBulk 	= deleteBulk;
 
 	/**
 	* Add price
@@ -27,19 +28,21 @@ function SalesController($scope, salesService) {
 	function addPrice(){
 		self.errors = Constants.FALSE;
 
-		this.status = $('input[name=status]:checked', '#price_form').val();
-		$scope.ui_block();
+		$("input, textarea").removeClass("required-field");
 
-		salesService.addPrice(this.name, this.description, this.add_price, this.status).success(function(response){
+		$scope.ui_block();
+		salesService.addPrice(self.data).success(function(response){
 			if(response.status == Constants.STATUS_OK){
 				if(response.errors){
 					self.errors = $scope.errorHandler(response.errors);
 
 					angular.forEach(response.errors, function(value, key){
 						$("#price_form input[name='" + value.field +"']" ).addClass("required-field");
+						$("#price_form textarea[name='" + value.field +"']" ).addClass("required-field");
 					});
 				}else if(response.data){
 					self.is_success = Constants.PRICE_SUCCESS;
+					self.data = {};
 					self.getPriceList();
 				}
 			}
@@ -54,7 +57,8 @@ function SalesController($scope, salesService) {
 	* Get Price List
 	*/
 	function getPriceList(){
-		
+		self.data = {};
+
 		salesService.getPriceList().success(function(response){
 			if(angular.equals(response.status, Constants.STATUS_OK)){
 				if(response.errors){
