@@ -19,9 +19,9 @@
 				{! error !}
 			</p>
 		</div>
-		<div class="alert alert-success" ng-if="admin.is_success">
+		<div class="alert alert-success" ng-if="admin.update_success">
 			<p>
-				{! admin.admininfo.success !}
+				Successfully updated this profile.
 			</p>
 		</div>
 		<fieldset>
@@ -37,16 +37,16 @@
 							'ng-disabled' => 'admin.active_view_admin',
 							'ng-model' => 'admin.admininfo.user.username',
 							'ng-model-options' => "{ debounce : {'default' : 1000} }",
-							'ng-change' => 'admin.checkUsernameAvailability()',
+							'ng-change' => 'admin.checkUsernameAvailability(admin.admininfo.user.username)',
 							'class' => 'form-control'
 						]
 					) !!}
-					<div>
-						<span class="error-msg-con" ng-if="admin.val.a_error">{! admin.val.a_error !}</span>
-						<i class="fa fa-spinner fa-spin" ng-if="admin.a_loading"></i>
-						<span ng-if="admin.a_success" class="error-msg-con success-color">Username is available.</span>
-					</div>
-				</div>				
+				</div>	
+				<div class="margin-top-8"> 
+	                <i ng-if="admin.validation.u_loading" class="fa fa-spinner fa-spin"></i>
+	                <i ng-if="admin.validation.u_success" class="fa fa-check success-color"></i>
+	                <span ng-if="admin.validation.u_error" class="error-msg-con">{! admin.validation.u_error !}</span>
+	            </div>			
 			</div>
 			<div class="form-group">
 				<label class="col-xs-3 control-label" id="email">Email <span class="required">*</span></label>
@@ -82,26 +82,43 @@
 	                <div class="col-xs-4" ng-if="admin.active_edit_admin">
 	                	<div class="col-xs-6 checkbox">	                				
 	                		<label>
-	                		{!! Form::radio('status','Enabled', true) 
-	                				!!}
+	                		{!! Form::radio('status'
+	                			,'Enabled'
+	                			, false
+	                			, array(
+	                				'ng-model' => 'admin.admininfo.user.status'
+	                				, 'ng-click' => 'admin.adminChangeStatus()'
+	                			)
+	                		) !!}
 	                		<span class="lbl padding-8">Enabled</span>
 	                		</label>
 	                	</div>
 	                	<div class="col-xs-6 checkbox">
 	                		<label>
-	                		{!! Form::radio('status', 'Disabled', false) 
-	                		!!}
+	                		{!! Form::radio('status'
+	                			,'Disabled'
+	                			, false
+	                			, array(
+	                				'ng-model' => 'admin.admininfo.user.status'
+	                				, 'ng-click' => 'admin.adminChangeStatus()'
+	                			)
+	                		) !!}
 	                		<span class="lbl padding-8">Disabled</span>
 	                		</label>
 	                	</div>
 	                </div>
 	                <div class="col-xs-3" ng-if="admin.active_view_admin">
-	                	<div ng-show="admin.admininfo.user.status == 'Enabled'">
-	                		<span style="color:green;"><b><i class="fa fa-check-circle-o"></i> {! admin.admininfo.user.status !}</b></span>
-	                	</div>
-	                	<div ng-show="admin.admininfo.user.status == 'Disabled'">
-	                		<span style="color:green;"><b><i class="fa fa-ban"></i> {! admin.admininfo.user.status !}</b></span>
-	                	</div>
+	                	<label ng-if="admin.admininfo.user.status == 'Enabled'">
+	                		<b class="success-icon">
+	                			<i class="margin-top-8 fa fa-check-circle-o"></i> {! admin.admininfo.user.status !}
+	                		</b>
+	                	</label>
+
+	                	<label ng-if="admin.admininfo.user.status == 'Disabled'">
+	                		<b class="error-icon">
+	                			<i class="margin-top-8 fa fa-ban"></i> {! admin.admininfo.user.status !}
+	                		</b>
+	                	</label>
 	                </div>
 			</div>
 		</fieldset>
