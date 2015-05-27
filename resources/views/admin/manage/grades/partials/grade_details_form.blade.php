@@ -52,7 +52,7 @@
 	        		<label class="col-md-2 control-label">Country <span class="required">*</span></label>
 		      		<div class="col-md-5" ng-init="getCountries()">
 		        		<select  name="country_id" class="form-control" ng-model="grade.details.country_id">
-			          		<option value="">-- Select Country --</option>
+			          		<option ng-selected="true" value="">-- Select Country --</option>
 			          		<option ng-selected="{! country.id == grade.details.country_id !}" ng-repeat="country in countries" value="{! country.id !}">{! country.name!}</option>
 		        		</select>
 		      		</div>
