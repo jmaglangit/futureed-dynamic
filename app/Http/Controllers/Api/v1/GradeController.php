@@ -36,11 +36,9 @@ class GradeController extends ApiController {
         }
 
 
-        if(Input::get('country_id')) {
-            $criteria['country_id'] = Input::get('country_id');
-        }
 
-
+        $criteria['country_id'] = (Input::get('country_id'))
+                ?  Input::get('country_id') : config('futureed.default_country');
 
         if(Input::get('limit')) {
             $limit = intval(Input::get('limit'));
