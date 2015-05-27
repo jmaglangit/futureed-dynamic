@@ -60,6 +60,6 @@ return [
 	'client_account_status_rejected' => 'Rejected',
 
     //Default country
-    'home_country' => 840, //United States
+    'default_country' => 840, //United States
 
 ];
