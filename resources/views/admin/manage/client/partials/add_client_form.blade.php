@@ -230,7 +230,7 @@
 				      <div class="col-md-4" ng-init="getCountries()">
 				        <select  name="school_country" class="form-control" ng-model="client.create.school_country">
 				          <option value="">-- Select Country --</option>
-				          <option ng-repeat="country in countries" value="{! country.id !}">{! country.name!}</option>
+				          <option ng-repeat="country in countries" value="{! country.name !}">{! country.name!}</option>
 				        </select>
 				      </div>
 	        	</div>
@@ -320,7 +320,7 @@
 				      <div class="col-md-4" ng-init="getCountries()">
 				        <select  name="country" class="form-control" ng-model="client.create.country">
 				          <option value="">-- Select Country --</option>
-				          <option ng-repeat="country in countries" value="{! country.id !}">{! country.name!}</option>
+				          <option ng-repeat="country in countries" value="{! country.name !}">{! country.name!}</option>
 				        </select>
 				      </div>
 	        	</div>
