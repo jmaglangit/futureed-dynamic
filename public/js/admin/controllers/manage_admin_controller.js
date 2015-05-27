@@ -291,33 +291,24 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 		self.validation.c_error = Constants.FALSE;
 		self.validation.c_success = Constants.FALSE;
 
-		apiService.validateEmail(self.change.new_email, self.user_type).success(function(response) {
+		manageAdminService.checkAdminEmail(self.admininfo.id, self.change.new_email).success(function(response) {
+			
 			self.validation.n_loading = Constants.FALSE;
-
-		    if(angular.equals(response.status, Constants.STATUS_OK)) {
+			
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
 		        if(response.errors) {
 		            self.validation.n_error = response.errors[0].message;
-		            if(angular.equals(self.validation.n_error, Constants.MSG_EA_NOTEXIST)) {
-		            	self.validation.n_error = Constants.FALSE;
-
-		            	if(!angular.equals(self.change.new_email, self.change.confirm_email)) {
-							self.validation.n_success = Constants.TRUE;
-
-							self.validation.c_error = Constants.MSG_EA_CONFIRM;
-						} else {
-							self.validation.n_success = Constants.TRUE;
-							self.validation.c_success = Constants.TRUE;
-						}
-		            }
 		        } else if(response.data) {
-		        	self.validation.n_error = Constants.MSG_EA_EXIST;
+		        	self.validation.n_success = Constants.TRUE;
+		        	self.validation.c_error = Constants.MSG_EA_CONFIRM;
 		        }
 		    }
-
+			
 		}).error(function(response) {
 			self.validation.n_loading = Constants.FALSE;
 			self.errors = $scope.internalError();
 		});
+
 	}
 
 	function confirmNewEmail() {
