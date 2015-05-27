@@ -41,12 +41,7 @@ class ClientTeacherController extends ApiController {
 	{
         $criteria = array();
         $limit = 0;
-
-        if(Input::get('limit')){
-
-            $limit =  Input::get('limit');
-
-        }
+        $offset = 0;
 
         if(Input::get('name')){
 
@@ -59,7 +54,16 @@ class ClientTeacherController extends ApiController {
             $criteria['email'] = Input::get('email');
         }
 
-        $teacher = $this->client->getTeacherDetails($criteria,$limit);
+		if(Input::get('limit')) {
+			$limit = intval(Input::get('limit'));
+		}
+		
+		if(Input::get('offset')) {
+			$offset = intval(Input::get('offset'));
+		}
+
+
+        $teacher = $this->client->getTeacherDetails($criteria, $limit, $offset);
 
         return $this->respondWithData($teacher);
 
