@@ -267,7 +267,7 @@
 				      <div class="col-md-4" ng-init="getCountries()">
 				        <select  name="school_country" class="form-control" ng-disabled="client.active_view_client" ng-model="client.details.school_country">
 				          <option value="">-- Select Country --</option>
-				          <option ng-selected="{! client.details.school_country == country.id !}" ng-repeat="country in countries" value="{! country.id !}">{! country.name!}</option>
+				          <option ng-selected="{! client.details.school_country == country.name !}" ng-repeat="country in countries" value="{! country.name !}">{! country.name!}</option>
 				        </select>
 				      </div>
 	        	</div>
@@ -282,7 +282,7 @@
 	        			{!! Form::text('contact_name',''
 	        				, array(
 	        					'placeHolder' => 'Contact Person'
-	        					, 'ng-model' => 'client.details.contact_name'
+	        					, 'ng-model' => 'client.details.school_contact_name'
 	        					, 'ng-disabled' => 'client.active_view_client'
 	        					, 'class' => 'form-control'
 	        				)
@@ -295,7 +295,7 @@
 	        			{!! Form::text('contact_number',''
 	        				, array(
 	        					'placeHolder' => 'Contact Number'
-	        					, 'ng-model' => 'client.details.contact_number'
+	        					, 'ng-model' => 'client.details.school_contact_number'
 	        					, 'ng-disabled' => 'client.active_view_client'
 	        					, 'class' => 'form-control'
 	        				)
@@ -363,7 +363,7 @@
 				      <div class="col-md-4" ng-init="getCountries()">
 				        <select  name="country" class="form-control" ng-disabled="client.active_view_client" ng-model="client.details.country">
 				          <option value="">-- Select Country --</option>
-				          <option ng-selected="{! client.details.country == country.id !}" ng-repeat="country in countries" value="{! country.id !}">{! country.name!}</option>
+				          <option ng-selected="{! client.details.country == country.name !}" ng-repeat="country in countries" value="{! country.name !}">{! country.name!}</option>
 				        </select>
 				      </div>
 	        	</div>

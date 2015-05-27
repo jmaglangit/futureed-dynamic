@@ -181,43 +181,47 @@ class ClientRepository implements ClientRepositoryInterface{
 
     }
 
-    public function getTeacherDetails($criteria = [],$limit = 0,$offset = 0){
+    public function getTeacherDetails($criteria = array(), $limit = 0, $offset = 0) {
 
-        $clients = new Client();
 
-        $count = 0;
-
-        $clients = $clients->where('client_role' ,'=' ,'Teacher');
-
-        if(count($criteria) <= 0 && $limit == 0 && $offset == 0) {
-
-            $count = $clients->count();
-
-        } else {
-
-            if(count($criteria) > 0) {
-                if(isset($criteria['name'])) {
-                    $clients = $clients->name($criteria['name']);
-                }
-
-                if(isset($criteria['email'])) {
-                    $clients = $clients->email($criteria['email']);
-                }
-
-            }
-
-            $count = $clients->count();
-
-            if($limit > 0 && $offset >= 0) {
-                $clients = $clients->offset($offset)->limit($limit);;
-            }
-
-        }
-
-        $clients = $clients->with('user')->orderBy('created_at', 'desc');
-
-        return ['total' => $count, 'records' => $clients->get()->toArray()];
-
+		$clients = new Client();
+		
+		$clients = $clients->teacher();
+		
+		$count = 0;
+		
+		if(count($criteria) <= 0 && $limit == 0 && $offset == 0) {
+			
+			$count = $clients->count();
+		
+		} else {
+			
+			if(count($criteria) > 0) {
+				
+				if(isset($criteria['name'])){
+				
+					$clients = $clients->name($criteria['name']);
+				
+				}
+				
+				if(isset($criteria['email'])){
+				
+					$clients = $clients->email($criteria['email']);
+				
+				}				
+			}
+		
+			$count = $clients->count();
+		
+			if($limit > 0 && $offset >= 0) {
+				$clients = $clients->offset($offset)->limit($limit);;
+			}
+														
+		}
+		
+		$clients = $clients->with('user')->orderBy('first_name', 'asc');
+		
+		return ['total' => $count, 'records' => $clients->get()->toArray()];
 
     }
 

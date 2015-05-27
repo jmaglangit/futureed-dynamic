@@ -1,6 +1,6 @@
 <div ng-if="admin.active_edit_email">
     <div class="content-title">
-        <div class="title-main-content" ng-if="!admin.edit_admin">
+        <div class="title-main-content">
             <span>Edit Email Address</span>
         </div>
     </div>
@@ -12,6 +12,12 @@
     	)
     ) !!}
     <div class="form-content col-xs-12">
+        <div class="alert alert-error" ng-if="admin.errors">
+            <p ng-repeat="error in admin.errors track by $index" > 
+                {! error !}
+            </p>
+        </div>
+
     	<div class="form-group">
     		<label class="col-xs-3 control-label">New Email Address <span class="required">*</span></label>
     		<div class="col-xs-5">
