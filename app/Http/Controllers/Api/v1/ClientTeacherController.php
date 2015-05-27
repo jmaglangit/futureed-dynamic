@@ -98,6 +98,8 @@ class ClientTeacherController extends ApiController {
 
         $client['client_role'] = config('futureed.teacher');
         $user['user_type'] = config('futureed.client');
+        $user['first_name'] = $client['first_name'];
+        $user['last_name'] = $client['last_name'];
         $user['name'] = $client['first_name']." ".$client['last_name'];
 
         $client['street_address'] = null;
@@ -113,7 +115,7 @@ class ClientTeacherController extends ApiController {
         $client['school_code'] = $current_user_details['school_code'];
 
         //return newly added user details
-         $this->user->addUserEloquent($user);
+         $this->user->addUser($user);
 
         //get user id
         $user_id = $this->user->checkUserName($user['username'],$user['user_type']);
@@ -198,7 +200,7 @@ class ClientTeacherController extends ApiController {
 
         $user['id'] = $client_details['user_id'];
 
-        $this->user->updateUserEloquent($user);
+        $this->user->updateUser($user['id'],$user);
 
         $this->client->updateClientDetails($id,$client);
 

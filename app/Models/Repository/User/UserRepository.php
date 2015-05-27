@@ -373,48 +373,9 @@ class UserRepository implements UserRepositoryInterface {
     }
 
 
-    public function addUserEloquent($user){
-
-        $user['created_by'] = 1;
-        $user['updated_by'] = 1;
-
-        $data['created_by'] = 1;
-        $data['updated_by'] = 1;
-
-        try {
-
-            $grade = User::create($user);
-
-        } catch(Exception $e) {
-
-            return $e->getMessage();
-
-        }
-
-        return $user;
-
-    }
-
-    public function updateUserEloquent($user_details){
-
-        $user['created_by'] = 1;
-        $user['updated_by'] = 1;
 
 
-        try {
 
-            $user = User::find($user_details['id']);
-
-            $user->update($user_details);
-
-        } catch (Exception $e) {
-
-            return $e->getMessage();
-
-        }
-
-
-    }
 
 
 
