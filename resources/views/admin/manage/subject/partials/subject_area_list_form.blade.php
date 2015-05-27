@@ -1,7 +1,7 @@
 <div ng-if="subject.subject_area_list">
 	<div class="content-title">
 		<div class="title-main-content">
-			<span>Subject Management</span>
+			<span>Subject Area Management</span>
 		</div>
 	</div>
 
@@ -22,13 +22,13 @@
 		<div template-directive template-url="{!! route('admin.manage.subject.partials.subject_area_details_form') !!}"></div>
 	</div>
 
-	<div class="col-xs-12">
+	<div class="col-xs-12 padding-0-30">
 		<div class="title-mid">
 			Search
 		</div>
 	</div>
 
-	<div class="col-xs-12">
+	<div class="col-xs-12 search-container">
 		<div class="form-search">
 			{!! Form::open(
 				array('id' => 'search_form'
@@ -67,7 +67,7 @@
 		</div>
 	</div>
 
-	<div class="col-xs-12">
+	<div class="col-xs-12 padding-0-30">
 		<div class="title-mid">
 			Subject Area List
 		</div>

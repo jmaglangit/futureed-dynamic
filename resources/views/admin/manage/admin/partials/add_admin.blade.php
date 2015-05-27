@@ -11,27 +11,18 @@
 		]) 
 	!!}
 	<div class="form-content col-xs-12">
-		<div class="alert alert-danger" ng-if="admin.errors">
+		<div class="alert alert-error" ng-if="admin.errors">
 			<p ng-repeat="error in admin.errors track by $index">
 				{! error !}
 			</p>
 		</div>
-		<div class="alert alert-danger" ng-if="admin.p_error">
-			<p>
-				{! admin.p_error !}
-			</p>
-		</div>
-		<div class="alert alert-success" ng-if="admin.is_success">
-			<p>
-				{! admin.is_success !}
-			</p>
-		</div>
+
 		<fieldset>
 			<legend class="legend-name-mid">
 				User Credentials
 			</legend>
 			<div class="form-group">
-				<label class="col-xs-2 control-label" id="username">Username <span class="required">*</span></label>
+				<label class="col-xs-3 control-label" id="username">Username <span class="required">*</span></label>
 				<div class="col-xs-4">
 					{!! Form::text('username', '',
 						[
@@ -44,25 +35,14 @@
 					) !!}
 
 					<div>
-					<span class="error-msg-con" ng-if="admin.val.a_error">{! admin.val.a_error !}</span>
-					<i class="fa fa-spinner fa-spin" ng-if="admin.a_loading"></i>
-					<span ng-if="admin.a_success" class="error-msg-con success-color">Username is available.</span>
-				</div>
-				</div>
-				<label class="col-xs-2 control-label" id="role">Role <span class="required">*</span></label>
-				<div class="col-xs-4">
-					{!! Form::select('admin_role',
-						[
-							'' => '-- Select Role --',
-							'Admin' => 'Admin',
-							'Super Admin' => 'Super Admin'
-						], null,
-						['ng-model' => 'admin.reg.admin_role', 'class' => 'form-control']
-					)!!}
+						<span ng-if="admin.val.a_error" class="error-msg-con">{! admin.val.a_error !}</span>
+						<i class="fa fa-spinner fa-spin" ng-if="admin.a_loading"></i>
+						<span ng-if="admin.a_success" class="error-msg-con success-color">Username is available.</span>
+					</div>
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-xs-2 control-label" id="email">Email <span class="required">*</span></label>
+				<label class="col-xs-3 control-label" id="email">Email <span class="required">*</span></label>
 				<div class="col-xs-4">
 					{!! Form::text('email', '',
 						[
@@ -75,12 +55,27 @@
 					) !!}
 
 					<div>
-					<span class="error-msg-con" ng-if="admin.val.b_errors">{! admin.val.b_errors !}</span>
-					<i class="fa fa-spinner fa-spin" ng-if="admin.b_loading"></i>
-					<span ng-if="admin.b_success" class="error-msg-con success-color">Email is available.</span>
+						<span class="error-msg-con" ng-if="admin.val.b_errors">{! admin.val.b_errors !}</span>
+						<i class="fa fa-spinner fa-spin" ng-if="admin.b_loading"></i>
+						<span ng-if="admin.b_success" class="error-msg-con success-color">Email is available.</span>
+					</div>
 				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-xs-3 control-label" id="role">Role <span class="required">*</span></label>
+				<div class="col-xs-4">
+					{!! Form::select('admin_role',
+						[
+							'' => '-- Select Role --',
+							'Admin' => 'Admin',
+							'Super Admin' => 'Super Admin'
+						], null,
+						['ng-model' => 'admin.reg.admin_role', 'class' => 'form-control']
+					)!!}
 				</div>
-				<label class="col-xs-2 control-label" id="status">Status <span class="required">*</span></label>
+			</div>
+			<div class="form-group">
+				<label class="col-xs-3 control-label" id="status">Status <span class="required">*</span></label>
 	                <div class="col-xs-4">
 	                	<div class="col-xs-6 checkbox">	                				
 	                		<label>
@@ -99,7 +94,7 @@
 	                </div>
 			</div>
 			<div class="form-group">
-				<label class="col-xs-2 control-label">Password <span class="required">*</span></label>
+				<label class="col-xs-3 control-label">Password <span class="required">*</span></label>
 				<div class="col-xs-4">
 					{!! Form::password('password',
 						[
@@ -109,7 +104,9 @@
 						]) 
 					!!}
 				</div>
-				<label class="col-xs-2 control-label">Confirm Password <span class="required">*</span></label>
+			</div>
+			<div class="form-group">
+				<label class="col-xs-3 control-label">Confirm Password <span class="required">*</span></label>
 				<div class="col-xs-4">
 					{!! Form::password('password_c',
 						[
@@ -126,7 +123,7 @@
 				Personal Information
 			</legend>
 			<div class="form-group">
-				<label class="col-xs-2 control-label">First Name <span class="required">*</span></label>
+				<label class="col-xs-3 control-label">First Name <span class="required">*</span></label>
 				<div class="col-xs-4">
 					{!! Form::text('first_name','',
 						[
@@ -136,7 +133,9 @@
 						]
 					) !!}
 				</div>
-				<label class="col-xs-2 control-label">Last Name <span class="required">*</span></label>
+			</div>
+			<div class="form-group">
+				<label class="col-xs-3 control-label">Last Name <span class="required">*</span></label>
 				<div class="col-xs-4">
 					{!! Form::text('last_name','',
 						[
@@ -147,14 +146,20 @@
 					) !!}
 				</div>
 			</div>
-			<div class="btn-container col-xs-6 col-xs-offset-3">
-				<button class="btn btn-blue btn-medium" id="proceed-btn" type="button" ng-click="admin.saveAdmin()">Save</button>
+			<div class="btn-container col-xs-8 col-xs-offset-1">
+				{!! Form::button('Save'
+					, array(
+						'class' => 'btn btn-blue btn-medium'
+						, 'ng-click' => "admin.saveAdmin()"
+					)
+				) !!}
+
 				{!! Form::button('Cancel'
-						, array(
-							'class' => 'btn btn-gold btn-medium'
-							, 'ng-click' => "admin.setManageAdminActive()"
-						)
-					) !!}
+					, array(
+						'class' => 'btn btn-gold btn-medium'
+						, 'ng-click' => "admin.setManageAdminActive()"
+					)
+				) !!}
 			</div>
 		</fieldset>
 	</div>

@@ -73,6 +73,7 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 
 							angular.forEach(response.errors, function(value, key){
 								$("#add_admin_form input[name='" + value.field +"']" ).addClass("required-field");
+								$("#add_admin_form select[name='" + value.field +"']" ).addClass("required-field");
 							});
 
 						}else if(response.data){
