@@ -32,7 +32,7 @@ class ClassroomController extends ApiController {
         }
 
         //get class grade
-        if(Input::get('grade')){
+        if(Input::get('grade_id')){
 
             $criteria['grade_id'] = Input::get('grade_id');
         }
