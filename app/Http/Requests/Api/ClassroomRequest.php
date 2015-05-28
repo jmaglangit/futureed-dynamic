@@ -1,8 +1,8 @@
 <?php namespace FutureEd\Http\Requests\Api;
 
-use FutureEd\Http\Requests\Request;
+use FutureEd\Http\Requests\Api\ApiRequest;
 
-class ClassroomRequest extends Request {
+class ClassroomRequest extends ApiRequest {
 
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -11,7 +11,7 @@ class ClassroomRequest extends Request {
 	 */
 	public function authorize()
 	{
-		return false;
+		return true;
 	}
 
 	/**
@@ -21,11 +21,46 @@ class ClassroomRequest extends Request {
 	 */
 	public function rules()
 	{
-		return [
+        switch($this->method){
 
-		];
+            case 'PUT':
+
+                return [
+                    'order_no' => 'required|numeric',
+                    'name' => 'required',
+                    'grade_id' => 'required|numeric',
+                    'client_id' => 'required|numeric',
+                    'seats_taken' => 'required|numeric',
+                    'seats_total' => 'required|numeric',
+                    'status' => 'required|in:Enabled,Disabled'
+                ];
+                break;
+
+            case 'PATCH':
+                break;
+
+            case 'POST':
+            default:
+                return [
+                    'order_no' => 'required|numeric',
+                    'name' => 'required',
+                    'grade_id' => 'required|numeric',
+                    'client_id' => 'required|numeric',
+                    'seats_taken' => 'required|numeric',
+                    'seats_total' => 'required|numeric',
+                    'status' => 'required|in:Enabled,Disabled'
+                ];
+                break;
+        }
 	}
 
+    //        order_no
+    //name
+    //grade_id
+    //client_id
+    //seats_taken
+    //seats_total
+    //status
 
 
 }
