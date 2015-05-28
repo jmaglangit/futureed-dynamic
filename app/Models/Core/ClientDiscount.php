@@ -19,7 +19,7 @@ class ClientDiscount extends Model {
     //-------------relationships
 	public function client()
 	{
-		return $this->belongsTo('FutureEd\Models\Core\Client');
+		return $this->belongsTo('FutureEd\Models\Core\Client')->with('user');
 	}
 	
 	//------------scopes

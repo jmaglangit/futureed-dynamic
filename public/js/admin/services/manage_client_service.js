@@ -7,17 +7,6 @@ function manageClientService($http) {
 	var manageClientApi = {};
 	var manageClientApiUrl = '/api/v1/';
 
-	manageClientApi.getClientList = getClientList;
-
-	manageClientApi.getClientDetails = getClientDetails;
-	manageClientApi.rejectClient = rejectClient;
-	manageClientApi.verifyClient = verifyClient;
-	manageClientApi.updateClientDetails = updateClientDetails;
-	manageClientApi.clientChangeStatus = clientChangeStatus;
-
-	manageClientApi.createNewClient = createNewClient;
-	manageClientApi.searchSchool = searchSchool;
-
 	/**
 	* Get Client List 
 	*
@@ -27,7 +16,7 @@ function manageClientService($http) {
 	*		search_school		- [Optional] the school code
 	*		search_client_role 	- [Optional] the client role
 	*/
-	function getClientList(search_name, search_email, search_school, search_client_role) {
+	manageClientApi.getClientList = function(search_name, search_email, search_school, search_client_role) {
 		return $http({
 			method 	: Constants.METHOD_GET
 			, url 	: manageClientApiUrl + 'client?name=' + search_name
@@ -43,7 +32,7 @@ function manageClientService($http) {
 	* @Param
 	*		id 	- [Required] the client id
 	*/
-	function getClientDetails(id) {
+	manageClientApi.getClientDetails = function(id) {
 		return $http({
 			method 	: Constants.METHOD_GET
 			, url 	: manageClientApiUrl + 'client/' + id
@@ -57,7 +46,7 @@ function manageClientService($http) {
 	*		id 				- [Required] the client id
 	*		callback_uri 	- [Required] the callback uri, link to register
 	*/
-	function rejectClient(id, callback_uri) {
+	manageClientApi.rejectClient = function(id, callback_uri) {
 		return $http({
 			method 	: Constants.METHOD_POST
 			, data	: {account_status : "Rejected", callback_uri : callback_uri}
@@ -72,7 +61,7 @@ function manageClientService($http) {
 	*		id 				- [Required] the client id
 	*		callback_uri 	- [Required] the callback uri, link to login
 	*/
-	function verifyClient(id, callback_uri) {
+	manageClientApi.verifyClient = function(id, callback_uri) {
 		return $http({
 			method 	: Constants.METHOD_POST
 			, data	: {account_status : "Accepted", callback_uri : callback_uri}
@@ -86,7 +75,7 @@ function manageClientService($http) {
 	* @Param
 	*		data 			- [Required] the updated client data
 	*/
-	function updateClientDetails(data) {
+	manageClientApi.updateClientDetails = function(data) {
 		return $http({
 			method 	: Constants.METHOD_PUT
 			, data	: data
@@ -101,7 +90,7 @@ function manageClientService($http) {
 	*		id 				- [Required] the client id
 	* 		status 			- [Required] the client status, Enable / Disable
 	*/
-	function clientChangeStatus(id, status) {
+	manageClientApi.clientChangeStatus = function(id, status) {
 		return $http({
 			method 	: Constants.METHOD_POST
 			, data	: {status : status}
@@ -115,7 +104,7 @@ function manageClientService($http) {
 	* @Param
 	*		data 			- [Required] the client data
 	*/
-	function createNewClient(data) {
+	manageClientApi.createNewClient = function(data) {
 		return $http({
 			method 	: Constants.METHOD_POST
 			, data	: data
@@ -129,7 +118,7 @@ function manageClientService($http) {
 	* @Param
 	*		school_name		- [Optiona] the school name
 	*/
-	function searchSchool(school_name) {
+	manageClientApi.searchSchool = function(school_name) {
 		return $http({
 			method 	: Constants.METHOD_POST
 			, data	: {school_name : school_name}

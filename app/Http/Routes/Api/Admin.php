@@ -11,6 +11,7 @@ Routes::group(['middleware' => 'api_user','prefix' => '/admin'], function()
 
     Routes::post('change-password/{id}','Api\v1\AdminPasswordController@changePassword');
 
+	Routes::post('/check-email/{id}','Api\v1\AdminEmailController@checkEmail');
 
 });
 

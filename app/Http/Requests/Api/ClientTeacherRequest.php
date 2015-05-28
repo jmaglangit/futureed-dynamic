@@ -29,9 +29,10 @@ class ClientTeacherRequest extends ApiRequest {
                 break;
             case 'POST':
             default:
+                $client = config('futureed.client');
                 return [
                     'user_name' => 'require|string',
-                    'email' => 'required|email|unique:users',
+                    'email' => "required|email|unique:users,email,NULL,id,user_type,$client",
                     'first_name' => 'required|string',
                     'last_name' => 'required|string',
                     'current_user' => 'required|numeric',

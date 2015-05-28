@@ -10,7 +10,7 @@
 		]) 
 	!!}
 	<div class="form-content col-xs-12" ng-if="!admin.reset_success">
-		<div class="alert alert-danger" ng-if="admin.errors">
+		<div class="alert alert-error" ng-if="admin.errors">
 			<p ng-repeat="error in admin.errors track by $index">
 				{! error !}
 			</p>
@@ -59,13 +59,22 @@
 		<div class="form-style form-narrow">
 			<div class="logo-container">
 				<div class="roundcon">					
-					<span><i class="fa fa-check-circle-o" style="font-size:5em;"></i></span>
+					<span><i class="fa fa-5x fa-check"></i></span>
 				</div>
 			</div>
 			<p class="text">
 				<strong>Success!</strong>
 				<br/>An email has been sent to {! admin.admininfo.user.email !} with the password that you have set.
 			</p>
+
+			<div class="btn-container">
+				{!! Form::button('View Profile',
+					array(
+						'class' => 'btn btn-blue'
+						, 'ng-click' => 'admin.viewAdmin(admin.admininfo.id)'
+					)
+				) !!}
+			</div>
 		</div>
 	</div>
 </div>

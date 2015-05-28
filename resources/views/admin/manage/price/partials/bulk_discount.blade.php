@@ -1,11 +1,31 @@
-<div class="col-xs-12" ng-if="!sale.bulk_edit">
-	<div class="row">
-		<div class="col-xs-4 add-bulk">
-			<button class="btn btn-success" data-toggle="collapse" data-target="#add-bulk-form" aria-expanded="false" aria-controls="add-bulk-form"><span><i class="fa fa-plus-square"></i></span> Add Bulk</button>
+<div ng-if="sale.active_bulk_settings_list">
+	<div class="row" ng-if = "!sale.active_bulk_settings_add && !sale.active_bulk_settings_edit">
+	    <div class="col-xs-4 add-price">
+	      	<button class="btn btn-blue" 
+	      		ng-click="sale.setDiscountsActive('bulk_settings_add')">
+	      		<span><i class="fa fa-plus-square"></i></span> Add Bulk
+	      	</button>
+	    </div>
+  	</div>
+
+  	<div class="row" ng-if="sale.active_bulk_settings_add">
+	    <div class="col-xs-12">
+			<div class="title-mid">
+				Add Bulk
+			</div>
 		</div>
-	</div>
-	<div class="row">
-		<div class="collapse" id="add-bulk-form">
+  	</div>
+
+  	<div class="row" ng-if="sale.active_bulk_settings_edit">
+	    <div class="col-xs-12">
+			<div class="title-mid">
+				Edit Bulk
+			</div>
+		</div>
+  	</div>
+
+	<div class="row" ng-if="sale.active_bulk_settings_add || sale.active_bulk_settings_edit">
+		<div id="add-bulk-form">
 			<div class="add-bulk">
 				{!! Form::open([
 					'id' => 'bulk-form'
@@ -18,7 +38,7 @@
 						{!! Form::text('min_seats', '',
 							[
 								'class' => 'form-control',
-								'ng-model' => 'sale.min_seats',
+								'ng-model' => 'sale.data.min_seats',
 								'placeholder' => 'Bulk Number'
 							]) 
 						!!}
@@ -30,7 +50,7 @@
 						{!! Form::text('percentage', '',
 							[
 								'class' => 'form-control',
-								'ng-model' => 'sale.percentage',
+								'ng-model' => 'sale.data.percentage',
 								'placeholder' => 'Discount'
 							]) 
 						!!}
@@ -41,59 +61,101 @@
 	                <div class="col-xs-5">
 	                	<div class="col-xs-6 checkbox">	                				
 	                		<label>
-	                		{!! Form::radio('b_status','Enabled', true) 
-	                				!!}
+	                		{!! Form::radio('status'
+            					, 'Enabled'
+            					, true
+            					, array(
+        							'class' => 'field'
+        							, 'ng-model' => 'sale.data.status'
+    							) 
+    						) !!}
 	                		<span class="lbl padding-8">Enabled</span>
 	                		</label>
 	                	</div>
 	                	<div class="col-xs-6 checkbox">
 	                		<label>
-	                		{!! Form::radio('b_status', 'Disabled', false) 
-	                		!!}
+	                		{!! Form::radio('status'
+            					, 'Disabled'
+            					, false
+            					, array(
+        							'class' => 'field'
+        							, 'ng-model' => 'sale.data.status'
+    							) 
+            				) !!}
 	                		<span class="lbl padding-8">Disabled</span>
 	                		</label>
 	                	</div>
 	                </div>
 	            </div>
-	            <div class="col-xs-7">
-	                <div class="btn-container">
-	                	<button class="btn btn-blue btn-medium" type="button" ng-click="sale.addBulk()">Add</button>
-	                </div>
-	            </div>
+
+	            <div class="col-xs-7 col-xs-offset-1">
+                		<div class="btn-container">
+                			{!! Form::button('Edit'
+                				, array(
+                					'class' => 'btn btn-blue btn-medium'
+                					, 'ng-click' => "sale.editBulk()"
+                					, 'ng-if' => 'sale.active_bulk_settings_edit'
+                				)
+                			) !!}
+
+                			{!! Form::button('Add'
+                				, array(
+                					'class' => 'btn btn-blue btn-medium'
+                					, 'ng-click' => "sale.addBulk()"
+                					, 'ng-if' => 'sale.active_bulk_settings_add'
+                				)
+                			) !!}
+
+                			{!! Form::button('Cancel'
+                				, array(
+                					'class' => 'btn btn-gold btn-medium'
+                					, 'ng-click' => "sale.setDiscountsActive('bulk_settings_list')"
+                				)
+                			) !!}
+                		</div>
+                	</div>
 			</div>
 		</div>
 	</div>
-	<div class="col-xs-12 price-list" ng-init="sale.getBulkList()">
-					<div class="list-container" ng-cloak>
-						<table id="client-list" datatable="ng"class="table table-striped table-hover dt-responsive" style="width:100%">
-							<thead>
-				        <tr>
-				            <th>Bulk Number</th>
-				            <th>Discount</th>
-				            <th width="200px;">Action</th>
-				        </tr>
-				        </thead>
-				        <tbody>
-				        <tr ng-repeat="b in sale.bulk">
-				            <td>{! b.min_seats !}</td>
-				            <td>{! b.percentage !}</td>
-				            <td width="200px;">
-				            	<div class="col-xs-12">
-				            		<div class="row price-action">
-					            		<div class="col-action">
-					            			<a href="#" ng-click="sale.getBulk(b.id)">Edit</a>
-					            		</div>
-					            		<span class="separator">|</span>
-					            		<div class="col-action">
-					            			<a href="#" ng-click="sale.deleteBulk(b.id)">Delete</a>
-					            		</div>
-				            	</div>
-				            	</div>
-				            </td>
-				        </tr>
-				        </tbody>
 
-						</table>
-					</div>
-				</div>
+	<div class="row">
+		<div class="col-xs-12">
+			<div class="title-mid">
+				Bulk List
+			</div>
+		</div>
+	</div>
+
+	<div class="list-container" ng-cloak>
+		<table id="client-list" datatable="ng" class="table table-striped table-hover dt-responsive">
+			<thead>
+        <tr>
+            <th>Bulk Number</th>
+            <th>Discount</th>
+            <th>Action</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="b in sale.bulk">
+            <td>{! b.min_seats !}</td>
+            <td>{! b.percentage !}</td>
+            <td>
+            	<div class="row">
+            		<div class="col-xs-4">
+            			<i ng-if="b.status == 'Disabled'" title="Enable" class="fa success-icon fa-check-circle-o"></i>
+        				<i ng-if="b.status == 'Enabled'" title="Disable" class="fa error-icon fa-ban"></i>
+            		</div>
+            		<div class="col-xs-4">
+            			<a href="" ng-click="sale.getBulk(b.id)"><span><i class="fa fa-pencil"></i></span></a>
+            		</div>
+            		<div class="col-xs-4">
+            			<a href="" ng-click="sale.deleteBulk(b.id)"><span><i class="fa fa-trash"></i></span></a>
+            		</div>
+            	</div>
+            </td>
+        </tr>
+        </tbody>
+
+		</table>
+	</div>
 </div>

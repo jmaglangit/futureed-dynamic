@@ -47,7 +47,7 @@
         </li>  
         <ul class="sub-menu collapse" id="price">
             <li>
-                <a href="{!! route('admin.manage.price.index') !!}"><span><i class="fa fa-dollar"></i>Price & Discounts</span></a>
+                <a href="{!! route('admin.manage.price.index') !!}" ng-init="sale.setDiscountsActive()"><span><i class="fa fa-dollar"></i>Price & Discounts</span></a>
             </li>
         </ul>
 

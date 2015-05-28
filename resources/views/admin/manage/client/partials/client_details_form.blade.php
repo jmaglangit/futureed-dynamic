@@ -43,7 +43,7 @@
 	        				)
 	        			) !!}
 	        		</div>
-	        		<div class="margin-top-8"> 
+	        		<div class="margin-top-8" ng-if="client.active_edit_client"> 
 		                <i ng-if="client.validation.e_loading" class="fa fa-spinner fa-spin"></i>
 		                <i ng-if="client.validation.e_success" class="fa fa-check success-color"></i>
 		                <span ng-if="client.validation.e_error" class="error-msg-con">{! client.validation.e_error !}</span>
@@ -63,7 +63,7 @@
 	        				)
 	        			) !!}
 	        		</div>
-	        		<div class="margin-top-8"> 
+	        		<div class="margin-top-8" ng-if="client.active_edit_client"> 
 		                <i ng-if="client.validation.u_loading" class="fa fa-spinner fa-spin"></i>
 		                <i ng-if="client.validation.u_success" class="fa fa-check success-color"></i>
 		                <span ng-if="client.validation.u_error" class="error-msg-con">{! client.validation.u_error !}</span>
@@ -183,7 +183,7 @@
 	        					, 'ng-disabled' => 'client.active_view_client'
 	        					, 'ng-model' => 'client.details.school_name'
 	        					, 'ng-change' => 'client.searchSchool()'
-                        		, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
+                        		, 'ng-model-options' => "{ debounce : {'default' : 500} }"
 	        					, 'class' => 'form-control'
 	        				)
 	        			) !!}
@@ -195,6 +195,10 @@
 							</ul>
 						</div>
 	        		</div>
+	        		<div class="margin-top-8" ng-if="client.active_edit_client"> 
+		                <i ng-if="client.validation.s_loading" class="fa fa-spinner fa-spin"></i>
+		                <span ng-if="client.validation.s_error" class="error-msg-con">{! client.validation.s_error !}</span>
+		            </div>
 	        	</div>
 	        </fieldset>
 	        <fieldset ng-if="client.role.principal">
@@ -220,7 +224,7 @@
 	        			{!! Form::text('school_address',''
 	        				, array(
 	        					'placeHolder' => 'School Address'
-	        					, 'ng-model' => 'client.details.school_address'
+	        					, 'ng-model' => 'client.details.school_street_address'
 	        					, 'ng-disabled' => 'client.active_view_client'
 	        					, 'class' => 'form-control'
 	        				)
@@ -266,7 +270,7 @@
 	        		<label class="col-md-2 control-label">Country <span class="required">*</span></label>
 				      <div class="col-md-4" ng-init="getCountries()">
 				        <select  name="school_country" class="form-control" ng-disabled="client.active_view_client" ng-model="client.details.school_country">
-				          <option value="">-- Select Country --</option>
+				          <option ng-selected="true" value="">-- Select Country --</option>
 				          <option ng-selected="{! client.details.school_country == country.name !}" ng-repeat="country in countries" value="{! country.name !}">{! country.name!}</option>
 				        </select>
 				      </div>
@@ -279,7 +283,7 @@
 	        	<div class="form-group">
 	        		<label class="col-xs-3 control-label" id="contact_person">Contact Person <span class="required">*</span></label>
 	        		<div class="col-xs-6">
-	        			{!! Form::text('contact_name',''
+	        			{!! Form::text('school_contact_name',''
 	        				, array(
 	        					'placeHolder' => 'Contact Person'
 	        					, 'ng-model' => 'client.details.school_contact_name'
@@ -292,7 +296,7 @@
 	        	<div class="form-group">
 	        		<label class="col-xs-3 control-label" id="contact_number">Contact Number <span class="required">*</span></label>
 	        		<div class="col-xs-6">
-	        			{!! Form::text('contact_number',''
+	        			{!! Form::text('school_contact_number',''
 	        				, array(
 	        					'placeHolder' => 'Contact Number'
 	        					, 'ng-model' => 'client.details.school_contact_number'
@@ -362,7 +366,7 @@
 	        		<label class="col-md-2 control-label">Country <span class="required" ng-if="client.role.parent">*</span></label>
 				      <div class="col-md-4" ng-init="getCountries()">
 				        <select  name="country" class="form-control" ng-disabled="client.active_view_client" ng-model="client.details.country">
-				          <option value="">-- Select Country --</option>
+				          <option ng-selected="true" value="">-- Select Country --</option>
 				          <option ng-selected="{! client.details.country == country.name !}" ng-repeat="country in countries" value="{! country.name !}">{! country.name!}</option>
 				        </select>
 				      </div>

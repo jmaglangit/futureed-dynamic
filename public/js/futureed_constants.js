@@ -59,7 +59,17 @@ var Constants = {
 	, MSG_EA_NOT_MATCH		: "Email Address does not match."
 	, ANNOUNCE_SUCCESS		: "Success You've created Site Maintainance Announcement."
 
-	, PRICE_SUCCESS 		: "You have successfully created a subscription."
+	, ADD_PRICE_SUCCESS 		: "You have successfully created a subscription."
+	, EDIT_PRICE_SUCCESS 		: "You have successfully updated this subscription."
+	, DELETE_PRICE_SUCCESS 		: "You have successfully deleted this subscription."
+
+	, ADD_BULK_SUCCESS 			: "You have successfully created a bulk."
+	, EDIT_BULK_SUCCESS 		: "You have successfully updated this bulk."
+	, DELETE_BULK_SUCCESS 		: "You have successfully deleted this bulk."
+
+	, ADD_DISCOUNT_SUCCESS 			: "You have successfully create a client discount."
+	, EDIT_DISCOUNT_SUCCESS 		: "You have successfully updated a client discount."
+	, DELETE_DISCOUNT_SUCCESS 		: "You have successfully deleted a client discount."
 
 	, MSG_U_NOTEXIST		: "User does not exist."
 	, MSG_U_EXIST 			: "Username already exists."
