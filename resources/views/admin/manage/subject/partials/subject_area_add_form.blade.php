@@ -5,7 +5,6 @@
               	{! error !}
             </p>
         </div>
-
         <fieldset>
         	<div class="form-group">
         		<label class="col-xs-3 control-label">Subject Code <span class="required">*</span></label>
