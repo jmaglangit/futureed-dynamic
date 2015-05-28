@@ -111,8 +111,6 @@ class GradeRepository implements GradeRepositoryInterface{
 			return $e->getMessage();
 
 		}
-
-		return $grade;
     }
 
     //get grade record by id
@@ -132,6 +130,21 @@ class GradeRepository implements GradeRepositoryInterface{
 
         return $grade_class->first();
 
+    }
+
+    /**
+     * Get countries of Grades
+     *
+     * @param $country_id
+     */
+    public function getCountry(){
+
+        return Grade::select('country_id')->distinct()->with('country')->get();
+    }
+
+    public function checkCountry($country_id){
+
+        return Grade::select('country_id')->distinct()->with('country')->countryid($country_id)->get();
     }
 
 
