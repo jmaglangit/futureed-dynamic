@@ -19,7 +19,7 @@ class ClientDiscount extends Model {
     //-------------relationships
 	public function client()
 	{
-		return $this->belongsTo('FutureEd\Models\Core\Client');
+		return $this->belongsTo('FutureEd\Models\Core\Client')->with('user');
 	}
 	
 	//------------scopes
@@ -34,6 +34,10 @@ class ClientDiscount extends Model {
 	    return $query->whereHas('client', function($query) use ($role) {	
 			$query->whereClientRole($role);
 		});		
+	}
+	
+	public function scopeClient($query){
+    	return $query->with('client')->with('user')->get('email');
 	}
 
 }
