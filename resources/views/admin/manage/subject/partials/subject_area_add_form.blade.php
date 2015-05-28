@@ -5,6 +5,7 @@
               	{! error !}
             </p>
         </div>
+
         <fieldset>
         	<div class="form-group">
         		<label class="col-xs-3 control-label">Subject Code <span class="required">*</span></label>
@@ -56,6 +57,18 @@
         			) !!}
         		</div>
         	</div>
+            <div class="form-group">
+                <label class="col-xs-3 control-label">Description <span class="required">*</span></label>
+                <div class="col-xs-5">
+                    {!! Form::textarea('description','',
+                    [
+                        'id'=> 'description',
+                        'class' => 'form-control',
+                        'ng-model' => 'subject.create_area.description',
+                        'rows' => '5'
+                    ]) !!}
+                </div>
+            </div>
         	<div class="form-group">
         		<label class="col-xs-3 control-label">Status <span class="required">*</span></label>
         		<div class="col-xs-5">
