@@ -120,9 +120,8 @@ function manageClientService($http) {
 	*/
 	manageClientApi.searchSchool = function(school_name) {
 		return $http({
-			method 	: Constants.METHOD_POST
-			, data	: {school_name : school_name}
-			, url 	: manageClientApiUrl + 'school/search'
+			method 	: Constants.METHOD_GET
+			, url 	: manageClientApiUrl + 'school/search?school_name=' + school_name
 		});
 	}
 

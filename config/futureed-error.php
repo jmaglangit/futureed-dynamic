@@ -92,7 +92,8 @@ return [
         2500 => 'Date range should be between today and future dates.',
         
         2600 => 'Cannot delete subject. Subject has subject areas.',
-        2601 => 'Cannot delete admin.'
+        2601 => 'Cannot delete admin.',
+        2602 => 'The school is invalid.'
 
     ],
 ];
