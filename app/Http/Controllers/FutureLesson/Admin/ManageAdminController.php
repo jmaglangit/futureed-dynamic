@@ -12,4 +12,28 @@ class ManageAdminController extends Controller{
 	public function index() {
 		return view('admin.manage.admin.index');
 	}
+
+	public function side_nav() {
+		return view('admin.manage.admin.partials.side_nav',['active' => 'admin']);
+	}
+
+	public function list_admin_form() {
+		return view('admin.manage.admin.partials.list_admin_form');
+	}
+
+	public function add_admin() {
+		return view('admin.manage.admin.partials.add_admin');
+	}
+
+	public function view_admin() {
+		return view('admin.manage.admin.partials.view_admin');
+	}
+
+	public function reset_pass() {
+		return view('admin.manage.admin.partials.reset_pass');
+	}
+
+	public function edit_email_form() {
+		return view('admin.manage.admin.partials.edit_email_form');
+	}
 }

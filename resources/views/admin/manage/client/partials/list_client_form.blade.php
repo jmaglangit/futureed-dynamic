@@ -4,21 +4,8 @@
 			<span>Client Management</span>
 		</div>
 	</div>
-					
-	<div class="form-content col-xs-12">
-	    <div class="col-xs-3" style="padding:0;">
-			<div class="btn btn-gold" ng-click="client.setManageClientActive('add_client')">
-				<div class="row">
-					<i class="fa fa-plus-square"></i>
-				</div>
-				<div class="row">
-					Add User
-				</div>
-			</div>
-		</div>
-	</div>
 
-	<div class="col-xs-12">
+	<div class="col-xs-12 padding-0-30">
 		<div class="title-mid">
 			Search
 		</div>
@@ -54,7 +41,8 @@
 				<div class="col-xs-2">
 					{!! Form::button('Search'
 						,array(
-							'class' => 'btn btn-gold'
+							'class' => 'btn btn-blue'
+							, 'ng-click' => 'client.getClientList()'
 							)
 					)!!}
 				</div>
@@ -88,8 +76,8 @@
 				<div class="col-xs-2">
 					{!! Form::button('clear'
 						,array(
-							'class' => 'btn'
-							, 'ng-click' => ''
+							'class' => 'btn btn-gold'
+							, 'ng-click' => 'client.clearSearchForm()'
 							)
 					)!!}
 				</div>
@@ -97,13 +85,17 @@
 		</div>
 	</div>
 
-	<div class="col-xs-12">
+	<button class="btn btn-blue btn-small margin-0-30" ng-click="client.setManageClientActive('add_client')">
+		<i class="fa fa-plus-square"></i> Add 
+	</button>
+
+	<div class="col-xs-12 padding-0-30">
 		<div class="title-mid">
 			Client List
 		</div>
 	</div>
 	 
-	<div class="col-xs-12 table-container" ng-init="client.getClientList()">
+	<div class="col-xs-12 table-container">
 		<div class="list-container" ng-cloak>
 			<table id="client-list" datatable="ng" class="table table-striped table-hover dt-responsive">
 			<thead>
@@ -121,18 +113,18 @@
 		            <td>{! a.client_role !}</td>
 		            <td>
 		            	<div class="row">
-		            		<div class="col-xs-3">
+		            		<div class="col-xs-6">
 		            			<a href="" ng-click="client.setManageClientActive('view_client',a.id)"><span><i class="fa fa-eye"></i></span></a>
 		            		</div>
-		            		<div class="col-xs-3">
+		            		<div class="col-xs-6">
 		            			<a href="" ng-click="client.setManageClientActive('edit_client', a.id)"><span><i class="fa fa-pencil"></i></span></a>
 		            		</div>
-		            		<div class="col-xs-3">
+		            		<!-- <div class="col-xs-3">
 		            			<span><i class="fa fa-ban"></i></span>
 		            		</div>
 		            		<div class="col-xs-3">
 		            			<span><i class="fa fa-trash	"></i></span>
-		            		</div>	
+		            		</div>	 -->
 		            	</div>
 		            </td>
 		        </tr>

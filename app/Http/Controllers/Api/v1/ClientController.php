@@ -24,8 +24,8 @@ class ClientController extends ApiController {
 			$criteria['name'] = Input::get('name');
 		}
 		
-		if(Input::get('school_code')) {
-			$criteria['school_code'] = Input::get('school_code');
+		if(Input::get('school')) {
+			$criteria['school'] = Input::get('school');
 		}
 		
 		if(Input::get('client_role')) {
@@ -71,6 +71,7 @@ class ClientController extends ApiController {
 
         	if($return) {
 
+                //TODO: make use of relationships.
         		$userDetails = $this->user->getUserDetail($return['user_id'],$client)->toArray();
         		$clienDetails = $this->client->getClientDetails($id)->toArray();
         		$formResponse = $this->client->formResponse($userDetails,$clienDetails);
@@ -280,7 +281,7 @@ class ClientController extends ApiController {
             $this->addMessageBag($this->validateNumber($client,'school_code'));
 		    $this->addMessageBag($this->zipCodeOptional($client,'zip'));
 
-        }else{
+        }else if(strcasecmp($client['client_role'],config('futureed.principal')) == 0){
 
         	$this->addMessageBag($this->validateStringOptional($client,'street_address'));
 			$this->addMessageBag($this->validateStringOptional($client,'city'));
@@ -340,7 +341,7 @@ class ClientController extends ApiController {
                 $user['first_name'] = $client['first_name'];
                 $user['last_name'] = $client['last_name'];
                 $user['user_type']  = $user_type;
-                $client['is_account_reviewed'] = 1;
+                $client['account_status'] = config('futureed.client_account_status_accepted');
 
                 //add user to db
                 $user_response = $this->user->addUser($user,$client);

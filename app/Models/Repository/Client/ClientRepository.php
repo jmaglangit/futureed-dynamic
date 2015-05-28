@@ -18,7 +18,7 @@ class ClientRepository implements ClientRepositoryInterface{
             'state',
             'country',
             'zip',
-            'is_account_reviewed'   
+            'account_status'   
         )
             ->where('user_id','=',$user_id)
             ->where('client_role','=',$role)->first();
@@ -51,7 +51,7 @@ class ClientRepository implements ClientRepositoryInterface{
                     'state'             => $client['state'],
                     'country'           => $client['country'],
                     'zip'               => $client['zip'],
-                    'is_account_reviewed'=> (isset($client['is_account_reviewed'])) ? $client['is_account_reviewed'] : 0,
+                    'account_status' 	=> (isset($client['account_status'])) ? $client['account_status'] : config('futureed.client_account_status_pending'),
                     'created_by'        => 1,
                     'updated_by'        => 1,
                 ]);
@@ -146,8 +146,8 @@ class ClientRepository implements ClientRepositoryInterface{
 					$clients = $clients->status($criteria['status']);
 				}
 				
-				if(isset($criteria['school_code'])) {
-					$clients = $clients->school_code($criteria['school_code']);
+				if(isset($criteria['school'])) {
+					$clients = $clients->school_name($criteria['school']);
 				}
 			}
 		
@@ -159,7 +159,7 @@ class ClientRepository implements ClientRepositoryInterface{
 														
 		}
 		
-		$clients = $clients->with('user')->orderBy('created_at', 'desc');
+		$clients = $clients->with('user','school')->orderBy('created_at', 'desc');
 		
 		return ['total' => $count, 'records' => $clients->get()->toArray()];	
 	}
@@ -179,8 +179,89 @@ class ClientRepository implements ClientRepositoryInterface{
         return $clients->get()->toArray();
 
 
+    }
+
+    public function getTeacherDetails($criteria = array(), $limit = 0, $offset = 0) {
+
+		$clients = new Client();
+		
+		$clients = $clients->teacher();
+		
+		$count = 0;
+		
+		if(count($criteria) <= 0 && $limit == 0 && $offset == 0) {
+			
+			$count = $clients->count();
+		
+		} else {
+			
+			if(count($criteria) > 0) {
+				
+				if(isset($criteria['name'])){
+				
+					$clients = $clients->name($criteria['name']);
+				
+				}
+				
+				if(isset($criteria['email'])){
+				
+					$clients = $clients->email($criteria['email']);
+				
+				}				
+			}
+		
+			$count = $clients->count();
+		
+			if($limit > 0 && $offset >= 0) {
+				$clients = $clients->offset($offset)->limit($limit);;
+			}
+														
+		}
+		
+		$clients = $clients->with('user')->orderBy('first_name', 'asc');
+		
+		return ['total' => $count, 'records' => $clients->get()->toArray()];
+
+    }
+
+    public function getClientByUserId($id){
+
+        $clients = new Client();
+
+        $clients = $clients->where('id','=',$id);
+
+        $clients = $clients->with('user')->first();
+
+        return $clients;
+    }
+
+    public function deleteClient($id){
+
+        try {
+
+            $client = Client::find($id);
+
+            return !is_null($client) ? $client->delete() : false;
+
+        } catch(Exception $e) {
+
+            return $e->getMessage();
+
+        }
+
+        return $client;
+    }
 
 
+    public function getClientToClassroom($id){
+
+        $clients = new Client();
+
+        $clients = $clients->with('classroom')->orderBy('created_at', 'desc');
+
+        $clients = $clients->where('id','=', $id)->first();
+
+        return $clients;
 
 
     }

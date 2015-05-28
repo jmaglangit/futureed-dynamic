@@ -25,4 +25,12 @@ interface ClientRepositoryInterface {
 
     public function getClientCustomDetails($criteria);
 
+    public function getTeacherDetails($criteria = array(), $limit = 0, $offset = 0);
+
+    public function getClientByUserId($id);
+
+    public function deleteClient($id);
+
+    public function getClientToClassroom($id);
+
 }

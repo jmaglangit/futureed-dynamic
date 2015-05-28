@@ -44,8 +44,6 @@
 	</div>
 @stop
 
-@section('footer')
-
 @section('scripts')
 	
 	{!! Html::script('/js/client/controllers/profile_controller.js') !!}

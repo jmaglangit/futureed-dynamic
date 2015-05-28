@@ -13,8 +13,8 @@
 	            </p>
 	        </div>
 
-	        <div class="alert alert-success" ng-if="success">
-	        	<p>Successfully update profile.</p>
+	        <div class="alert alert-success" ng-if="client.create.success">
+	        	<p>Successfully added new client user.</p>
 	        </div>
 	        <fieldset>
 	        	<legend class="legend-name-mid">
@@ -151,9 +151,17 @@
 	        					'placeHolder' => 'School Name'
 	        					, 'ng-model' => 'client.create.school_name'
 	        					, 'ng-change' => 'client.searchSchool()'
+                        		, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
 	        					, 'class' => 'form-control'
 	        				)
 	        			) !!}
+	        			<div class="angucomplete-holder" ng-if="client.schools">
+							<ul class="col-xs-5 angucomplete-dropdown">
+								<li class="angucomplete-row" ng-repeat="school in client.schools" ng-click="client.selectSchool(school)">
+									{! school.name !}
+								</li>
+							</ul>
+						</div>
 	        		</div>
 	        	</div>
 	        </fieldset>
@@ -222,7 +230,7 @@
 				      <div class="col-md-4" ng-init="getCountries()">
 				        <select  name="school_country" class="form-control" ng-model="client.create.school_country">
 				          <option value="">-- Select Country --</option>
-				          <option ng-repeat="country in countries" value="{! country.id !}">{! country.name!}</option>
+				          <option ng-repeat="country in countries" value="{! country.name !}">{! country.name!}</option>
 				        </select>
 				      </div>
 	        	</div>
@@ -312,12 +320,12 @@
 				      <div class="col-md-4" ng-init="getCountries()">
 				        <select  name="country" class="form-control" ng-model="client.create.country">
 				          <option value="">-- Select Country --</option>
-				          <option ng-repeat="country in countries" value="{! country.id !}">{! country.name!}</option>
+				          <option ng-repeat="country in countries" value="{! country.name !}">{! country.name!}</option>
 				        </select>
 				      </div>
 	        	</div>
 	        </fieldset>
-	        <div class="btn-container col-sm-6 col-sm-offset-3">
+	        <div class="btn-container col-sm-7 col-sm-offset-1">
 		        <a href="" type="button" class="btn btn-blue btn-medium" ng-click="client.createNewClient()">Save</a>
 		        <a href="" type="button" class="btn btn-gold btn-medium" ng-click="client.setManageClientActive()">Cancel</a>
 		     </div>

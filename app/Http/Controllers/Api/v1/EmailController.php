@@ -37,6 +37,9 @@ class EmailController extends ApiController {
 
             $return['user_id'] = $this->student->getStudentId($return['user_id']);
 
+        }elseif($input['user_type'] == 'Client'){
+
+            $return['user_id'] = $this->client->getClientId($return['user_id']);
         }
 
         return $this->respondWithData(['id'=>$return['user_id']]);
@@ -303,13 +306,9 @@ class EmailController extends ApiController {
     public function verifyClient($id){
 
         $userType = config('futureed.client');
-        $input = Input::only('is_account_reviewed');
         $url = Input::only('callback_uri');
 
-
-
         $this->addMessageBag($this->validateVarNumber($id));
-        $this->addMessageBag($this->isAccountReviewed($input,'is_account_reviewed'));
         $this->addMessageBag($this->validateString($url,'callback_uri'));
 
 
@@ -333,7 +332,7 @@ class EmailController extends ApiController {
 
                 //this sends an email to if verify
                 $this->mail->sendClientVerification($user_details,$url['callback_uri']);
-                $this->client->updateClientDetails($id,$input);
+                $this->client->updateClientDetails($id, ['account_status' => config('futureed.client_account_status_accepted')]);
 
                 return $this->respondWithData(['id' => $id
                                              ]);
@@ -348,13 +347,11 @@ class EmailController extends ApiController {
      public function rejectClient($id){
 
         $userType = config('futureed.client');
-        $input = Input::only('is_account_reviewed');
         $url = Input::only('callback_uri');
 
 
 
         $this->addMessageBag($this->validateVarNumber($id));
-        $this->addMessageBag($this->isAccountReviewed($input,'is_account_reviewed'));
         $this->addMessageBag($this->validateString($url,'callback_uri'));
 
 
@@ -378,7 +375,7 @@ class EmailController extends ApiController {
 
                 //this sends an email to if verify
                 $this->mail->sendClientRejection($user_details,$url['callback_uri']);
-                $this->client->updateClientDetails($id,$input);
+                $this->client->updateClientDetails($id, ['account_status' => config('futureed.client_account_status_rejected')]);
 
                 return $this->respondWithData(['id' => $id
                                              ]);
@@ -429,7 +426,9 @@ class EmailController extends ApiController {
 
             //add new email to admin
             $this->user->addNewEmail($admin_check['user_id'],$input['new_email']);
-
+			
+			$user_details['new_email'] = $input['new_email'];
+			
             //send email
             $this->mail->sendAdminChangeEmail($user_details,$url['callback_uri']);
 

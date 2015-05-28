@@ -37,13 +37,17 @@ class UserController extends ApiController{
 
             return $this->respondErrorMessage(2001);
 
-        }elseif($input['user_type'] == 'Student'){
+        }elseif(strcasecmp($input['user_type'], config('futureed.student')) == 0){
 
             $return['id'] = $this->student->getStudentId($return['user_id']);
 
-        }elseif($input['user_type'] == 'Client'){
+        }elseif(strcasecmp($input['user_type'], config('futureed.client')) == 0){
 
             $return['id'] = $this->client->getClientId($return['user_id']);
+            
+        }elseif(strcasecmp($input['user_type'], config('futureed.admin')) == 0){
+
+            $return['id'] = $this->admin->getAdminId($return['user_id']);
         }
 
         return $this->respondWithData(['id'=>$return['id']]);

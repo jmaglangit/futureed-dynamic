@@ -291,6 +291,31 @@ class MailServices {
 
     }
 
+    public function sendMailInviteTeacher($user,$current,$url){
+
+
+
+        $template = 'emails.client.invite-teacher';
+
+        $content = [
+            'view' => $template,
+            'data' => [
+                'name' => $user['name'],
+                'current_user' => $current['first_name']." ".$current['last_name'],
+                'link' => $url['callback_uri']
+            ],
+            'mail_recipient' => $user['email'],
+            'mail_recipient_name' => $user['name' ],
+            'subject' => 'You have been invited to join Future Lesson!'
+        ];
+
+        $this->sendMail($content);
+
+
+
+    }
+
+
 
 
 

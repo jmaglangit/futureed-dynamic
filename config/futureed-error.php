@@ -48,6 +48,7 @@ return [
         2032 => 'Unauthorized access.',
         2033 => 'Username/Email or password is invalid',
         2034 => 'Username/Email or password is invalid. Have you verified your email? Please check your inbox. Your account may have been locked, please click on forgot password to reset your password.',
+        2035 => 'Please click on forgot password to reset your password.',
 
         2100 => 'Reset code is invalid.',
         2101 => 'Password image is invalid.',
@@ -90,7 +91,8 @@ return [
         //Announcement messages.
         2500 => 'Date range should be between today and future dates.',
         
-        2600 => 'Cannot delete subject. Subject has subject areas.'
+        2600 => 'Cannot delete subject. Subject has subject areas.',
+        2601 => 'Cannot delete admin.'
 
     ],
 ];
