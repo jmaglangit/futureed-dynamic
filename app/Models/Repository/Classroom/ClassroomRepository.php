@@ -48,18 +48,18 @@ class ClassroomRepository implements ClassroomRepositoryInterface{
         return Classroom::with('order','grade','client')->find($id);
     }
 
-    public function addClassroom($data){
+    public function addClassroom($classroom){
 
         try{
 
-//            Classroom::create();
+            $classroom = Classroom::create($classroom);
 
         }catch(Exception $e){
 
             return $e->getMessage();
         }
 
-        return true;
+        return $classroom;
     }
 
     public function updateClassroom($id){
