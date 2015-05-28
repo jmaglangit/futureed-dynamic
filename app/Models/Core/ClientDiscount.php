@@ -35,9 +35,5 @@ class ClientDiscount extends Model {
 			$query->whereClientRole($role);
 		});		
 	}
-	
-	public function scopeClient($query){
-    	return $query->with('client')->with('user')->get('email');
-	}
 
 }
