@@ -3,6 +3,13 @@
 
 use FutureEd\Models\Core\Client;
 
+use FutureEd\Models\Core\Grade;
+
+
+
+
+
+
 class ClientRepository implements ClientRepositoryInterface{
 
     public function getClient($user_id,$role){
@@ -258,11 +265,34 @@ class ClientRepository implements ClientRepositoryInterface{
 
         $clients = new Client();
 
+        $grades = new Grade();
+
+
+        $grades = $grades->with('classroom')->orderBy('created_at', 'desc');
+
         $clients = $clients->with('classroom')->orderBy('created_at', 'desc');
+
+
 
         $clients = $clients->where('id','=', $id)->first();
 
-        return $clients;
+
+        foreach($clients['classroom'] as $k => $v){
+
+            $grade[] = $v['grade_id'];
+
+        }
+
+        $grades = $grades->whereIn('id',$grade)->get();
+
+        return array($clients,'grade'=>$grades);
+
+
+
+
+
+
+
 
 
     }
