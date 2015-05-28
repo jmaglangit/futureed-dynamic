@@ -157,7 +157,7 @@ class ClientTeacherController extends ApiController {
 
         }
 
-        return $this->respondWithData(array_merge([$client_to_classroom,'user'=>[$teacher['user']]]));
+        return $this->respondWithData(array_merge([$teacher,$client_to_classroom]));
 	}
 
 
