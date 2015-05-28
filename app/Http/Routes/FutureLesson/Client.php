@@ -36,6 +36,37 @@
 			, 'uses' => 'FutureLesson\Client\LoginController@logout'
 		]);
 
+		Routes::group(['prefix' => 'teacher'], function(){
+					$manage_teacher_controller = 'FutureLesson\Client\ManageTeacherController';
+
+					Routes::get('/', [
+							'as' => 'client.teacher.index',
+							'middleware' => 'client',
+							'uses' => $manage_teacher_controller . '@index'
+						]);
+
+					Routes::group(['prefix' => 'partials'], function(){
+					$manage_teacher_controller = 'FutureLesson\Client\ManageTeacherController';
+
+						Routes::get('list_teacher_form', [
+								'as' => 'client.teacher.partials.list_teacher_form',
+								'middleware' => 'client',
+								'uses' => $manage_teacher_controller . '@list_teacher_form'
+							]);
+						Routes::get('add_teacher_form', [
+								'as' => 'client.teacher.partials.add_teacher_form',
+								'middleware' => 'client',
+								'uses' => $manage_teacher_controller . '@add_teacher_form'
+							]);
+
+						Routes::get('view_teacher_form', [
+								'as' => 'client.teacher.partials.view_teacher_form',
+								'middleware' => 'client',
+								'uses' => $manage_teacher_controller . '@view_teacher_form'
+							]);
+					});
+				});
+
 		Routes::group(['prefix' => '/login'], function()
 		{
 			Routes::get('/', [ 
