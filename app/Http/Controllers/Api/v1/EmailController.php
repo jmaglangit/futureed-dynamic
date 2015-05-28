@@ -426,7 +426,9 @@ class EmailController extends ApiController {
 
             //add new email to admin
             $this->user->addNewEmail($admin_check['user_id'],$input['new_email']);
-
+			
+			$user_details['new_email'] = $input['new_email'];
+			
             //send email
             $this->mail->sendAdminChangeEmail($user_details,$url['callback_uri']);
 

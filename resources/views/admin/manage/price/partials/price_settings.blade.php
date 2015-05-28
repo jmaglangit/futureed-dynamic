@@ -33,7 +33,7 @@
 	      			]) 
 	      		!!}
 	      		<div class="form-group">
-	      			<label class="col-xs-2 control-label">Name <span class="required">*</span></label>
+	      			<label class="col-xs-3 control-label">Subscription Name <span class="required">*</span></label>
 	      			<div class="col-xs-5">
 	      				{!! Form::text('name', '', 
 		      				[
@@ -45,7 +45,7 @@
 	      			</div>
 	      		</div>
 	      		<div class="form-group">
-	      			<label class="col-xs-2 control-label">Description <span class="required">*</span></label>
+	      			<label class="col-xs-3 control-label">Description <span class="required">*</span></label>
 	      			<div class="col-xs-5">
 	      				{!! Form::textarea('description', '', 
 		      				[
@@ -59,7 +59,7 @@
 	      			</div>
 	      		</div>
 	      		<div class="form-group">
-	      			<label class="col-xs-2 control-label">Price <span class="required">*</span></label>
+	      			<label class="col-xs-3 control-label">Price <span class="required">*</span></label>
 	      			<div class="col-xs-5">
 	      				{!! Form::text('price','',
 	      					[
@@ -71,7 +71,7 @@
 	      			</div>
 	      		</div>
 	      		<div class="form-group">
-                		<label class="col-xs-2 control-label" id="status">Status <span class="required">*</span></label>
+                		<label class="col-xs-3 control-label" id="status">Status <span class="required">*</span></label>
                 		<div class="col-xs-5">
                 			<div class="col-xs-6 checkbox">	                				
                 				<label>
@@ -101,7 +101,7 @@
                 			</div>
                 		</div>
                 	</div>
-                	<div class="col-xs-7 col-xs-offset-1">
+                	<div class="col-xs-7 col-xs-offset-2">
                 		<div class="btn-container">
                 			{!! Form::button('Edit'
                 				, array(

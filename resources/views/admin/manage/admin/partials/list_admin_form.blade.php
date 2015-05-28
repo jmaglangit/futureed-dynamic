@@ -20,19 +20,34 @@
 					]
 			) !!}
 			<div class="form-group">
-				<label class="col-xs-2 control-label">Username <span class="required">*</span></label>
 				<div class="col-xs-5">
-					{!! Form::text('search_name', '',['class' => 'form-control', 'ng-model' => 'admin.search_user', 'placeholder' => 'Username']) !!}
+					{!! Form::text('search_name', ''
+						, [
+							'class' => 'form-control'
+							, 'ng-model' => 'admin.search_user'
+							, 'placeholder' => 'Username'
+						]
+					) !!}
+				</div>
+				<div class="col-xs-5">
+					{!! Form::text('search_email', ''
+						, [
+							'class' => 'form-control'
+							, 'ng-model' => 'admin.search_email'
+							, 'placeholder' => 'Email'
+						]
+					) !!}
+				</div>
+				<div class="col-xs-2">
+					{!! Form::button('Search'
+						,array(
+							'class' => 'btn btn-blue'
+							, 'ng-click' => 'admin.getAdminList()'
+							)
+					)!!}
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-xs-2 control-label">Email <span class="required">*</span></label>
-				<div class="col-xs-5">
-					{!! Form::text('search_email', '',['class' => 'form-control', 'ng-model' => 'admin.search_email', 'placeholder' => 'Email']) !!}
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-xs-2 control-label">Role <span class="required">*</span></label>
 				<div class="col-xs-5">
 					{!! Form::select('role', 
 						array('' => '-- Select Role --' ,
@@ -42,9 +57,14 @@
 							['ng-model' => 'admin.search_role' , 'class' => 'form-control']
 					) !!}
 				</div>
-				<div class="btn-container col-xs-5">
-					<button class="btn btn-blue btn-medium" type="button" ng-click="admin.getAdminList()">Search</button>
-					<button class="btn btn-gold btn-medium" type="button" ng-click="admin.clearSearch()">Clear</button>
+				<div class="col-xs-5"></div>
+				<div class="col-xs-2">
+					{!! Form::button('clear'
+						,array(
+							'class' => 'btn btn-gold'
+							, 'ng-click' => 'admin.clearSearch()'
+							)
+					)!!}
 				</div>
 			</div>
 		</div>

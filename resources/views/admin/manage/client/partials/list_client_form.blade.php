@@ -41,7 +41,7 @@
 				<div class="col-xs-2">
 					{!! Form::button('Search'
 						,array(
-							'class' => 'btn btn-gold'
+							'class' => 'btn btn-blue'
 							, 'ng-click' => 'client.getClientList()'
 							)
 					)!!}
@@ -76,7 +76,7 @@
 				<div class="col-xs-2">
 					{!! Form::button('clear'
 						,array(
-							'class' => 'btn'
+							'class' => 'btn btn-gold'
 							, 'ng-click' => 'client.clearSearchForm()'
 							)
 					)!!}

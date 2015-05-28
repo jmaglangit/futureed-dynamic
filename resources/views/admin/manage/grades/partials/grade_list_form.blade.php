@@ -36,15 +36,17 @@
 					)!!}
 				</div>
 
-        		<select ng-init="getCountries()" name="country_id" class="form-control col-xs-3" ng-model="grade.search.country">
-	          		<option value="">-- Select Country --</option>
-	          		<option ng-repeat="country in countries" value="{! country.id !}">{! country.name!}</option>
-        		</select>
+				<div class="col-xs-5">
+	        		<select ng-init="getCountries()" name="country_id" class="form-control" ng-model="grade.search.country">
+		          		<option value="">-- Select Country --</option>
+		          		<option ng-repeat="country in countries" value="{! country.id !}">{! country.name!}</option>
+	        		</select>
+	        	</div>
 				
 				<div class="col-xs-2">
 					{!! Form::button('Search'
 						,array(
-							'class' => 'btn btn-gold'
+							'class' => 'btn btn-blue'
 							, 'ng-click' => 'grade.getGradeList()'
 						)
 					)!!}
@@ -52,7 +54,7 @@
 				<div class="col-xs-2">
 					{!! Form::button('Clear'
 						,array(
-							'class' => 'btn'
+							'class' => 'btn btn-gold'
 							, 'ng-click' => 'grade.clearSearchForm()'
 						)
 					)!!}
