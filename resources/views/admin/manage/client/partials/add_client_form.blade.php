@@ -163,6 +163,10 @@
 							</ul>
 						</div>
 	        		</div>
+	        		<div class="margin-top-8"> 
+		                <i ng-if="client.validation.s_loading" class="fa fa-spinner fa-spin"></i>
+		                <span ng-if="client.validation.s_error" class="error-msg-con">{! client.validation.s_error !}</span>
+		            </div>
 	        	</div>
 	        </fieldset>
 	        <fieldset ng-if="client.role.principal">

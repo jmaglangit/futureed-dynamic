@@ -204,6 +204,7 @@ trait ApiValidatorTrait {
     //Validating ang field that is numeric. Can be used by any number field validation.
     public function validateNumber($input,$field_name){
 
+			$error_msg = config('futureed-error.error_messages');
 
             $validator = Validator::make(
                 [
@@ -211,6 +212,10 @@ trait ApiValidatorTrait {
                 ],
                 [
                     "$field_name" => 'required|numeric'
+                ],
+                [
+                    "school_code.required" => $error_msg[2602],
+                    "school_code.numeric" => $error_msg[2602]
                 ]
             );
 
