@@ -8,11 +8,7 @@ var services = angular.module('futureed.services', []);
 		* Common API Calls
 		*/
 
-		futureedAPI.forgotPassword = forgotPassword;
-		futureedAPI.resendResetCode = resendResetCode;
-		futureedAPI.resendConfirmation = resendConfirmation;
-
-		function forgotPassword(username, user_type, callback_uri) {
+		futureedAPI.forgotPassword = function(username, user_type, callback_uri) {
 			return $http({
 				method 	: Constants.METHOD_POST
 				, data	: {username: username, user_type : user_type, callback_uri : callback_uri}
@@ -20,7 +16,7 @@ var services = angular.module('futureed.services', []);
 			});
 		}
 
-		function resendResetCode(email, user_type, callback_uri) {
+		futureedAPI.resendResetCode = function(email, user_type, callback_uri) {
 			return $http({
 				method 	: Constants.METHOD_POST
 				, data	: {email: email, user_type : user_type, callback_uri : callback_uri}
@@ -28,7 +24,7 @@ var services = angular.module('futureed.services', []);
 			});
 		}
 
-		function resendConfirmation(email, user_type, callback_uri) {
+		futureedAPI.resendConfirmation = function(email, user_type, callback_uri) {
 			return $http({
 				method	: 'POST'
 				, data 	: {email : email, user_type : user_type, callback_uri : callback_uri}
@@ -226,5 +222,6 @@ var services = angular.module('futureed.services', []);
 				, url 	: futureedAPIUrl + 'announcement'
 			});
 		}
+		
 		return futureedAPI;
 	});
