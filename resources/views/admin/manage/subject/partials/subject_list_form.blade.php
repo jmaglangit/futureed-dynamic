@@ -39,7 +39,7 @@
 				<div class="col-xs-2">
 					{!! Form::button('Search'
 						,array(
-							'class' => 'btn btn-gold'
+							'class' => 'btn btn-blue'
 							, 'ng-click' => 'subject.getSubjectList()'
 						)
 					)!!}
@@ -47,7 +47,7 @@
 				<div class="col-xs-2">
 					{!! Form::button('Clear'
 						,array(
-							'class' => 'btn'
+							'class' => 'btn btn-gold'
 							, 'ng-click' => 'subject.clearSearchForm()'
 						)
 					)!!}
