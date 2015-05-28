@@ -5,30 +5,10 @@ function salesService($http){
 	var salesAPI = {}
 	var salesApiUrl = '/api/v1/';
 
-	salesAPI.addPrice = addPrice;
-	salesAPI.getPriceList = getPriceList;
-	salesAPI.deletePrice = deletePrice;
-	salesAPI.getPrice = getPrice;
-	salesAPI.editPrice = editPrice;
-
-	salesAPI.getDiscountList = getDiscountList;
-	salesAPI.addClientDiscount = addClientDiscount;
-	salesAPI.getDiscountDetails = getDiscountDetails;
-	salesAPI.updateClientDiscount = updateClientDiscount
-	salesAPI.deleteClientDiscount = deleteClientDiscount;
-	salesAPI.suggestClient = suggestClient;
-
-	salesAPI.addBulk = addBulk;
-	salesAPI.getBulkList = getBulkList;
-	salesAPI.getBulk = getBulk;
-	salesAPI.editBulk = editBulk;
-	salesAPI.deleteBulk = deleteBulk;
-
 	/**
-	* Add Price API
-	* @return ID
+	* Price Settings
 	*/
-	function addPrice(data){
+	salesAPI.addPrice = function(data){
 		return $http({
 			method 	: Constants.METHOD_POST
 			, data 	: 
@@ -42,28 +22,28 @@ function salesService($http){
 		});
 	}
 
-	function getPriceList(){
+	salesAPI.getPriceList = function(){
 		return $http({
 			method 	: Constants.METHOD_GET
 			, url 	: salesApiUrl + 'subscription'
 		});
 	}
 
-	function deletePrice(id){
+	salesAPI.deletePrice = function(id){
 		return $http({
 			method 	: Constants.METHOD_DELETE
 			, url 	: salesApiUrl + 'subscription/' + id
 		});
 	}
 
-	function getPrice(id){
+	salesAPI.getPrice = function(id){
 		return $http({
 			method 	: Constants.METHOD_GET
 			, url 	: salesApiUrl + 'subscription/' + id
 		});
 	}
 
-	function editPrice(data){
+	salesAPI.editPrice = function(data){
 		return $http({
 			method 	: Constants.METHOD_PUT
 			, data 	: data
@@ -71,7 +51,7 @@ function salesService($http){
 		});
 	}
 
-	function addBulk(seats,percentage,status){
+	salesAPI.addBulk = function(seats,percentage,status){
 		return $http({
 			method 	: Constants.METHOD_POST
 			, data  : {min_seats : seats, percentage : percentage, status : status}
@@ -82,14 +62,14 @@ function salesService($http){
 	/**
 	* Client Discounts
 	*/
-	function getDiscountList(data) {
+	salesAPI.getDiscountList = function(data) {
 		return $http({
 			method 	: Constants.METHOD_GET
 			, url 	: salesApiUrl + 'client-discount'
 		});
 	}
 
-	function addClientDiscount(data) {
+	salesAPI.addClientDiscount = function(data) {
 		return $http({
 			method 	: Constants.METHOD_POST
 			, data  : data
@@ -97,14 +77,14 @@ function salesService($http){
 		});
 	}
 
-	function getDiscountDetails(id) {
+	salesAPI.getDiscountDetails = function(id) {
 		return $http({
 			method 	: Constants.METHOD_GET
 			, url 	: salesApiUrl + 'client-discount/' + id
 		});
 	}
 
-	function updateClientDiscount(data) {
+	salesAPI.updateClientDiscount = function(data) {
 		return $http({
 			method 	: Constants.METHOD_PUT
 			, data 	: data
@@ -112,14 +92,14 @@ function salesService($http){
 		});
 	}
 
-	function deleteClientDiscount(id) {
+	salesAPI.deleteClientDiscount = function(id) {
 		return $http({
 			method 	: Constants.METHOD_DELETE
 			, url 	: salesApiUrl + 'client-discount/' + id
 		});
 	}
 
-	function suggestClient(name) {
+	salesAPI.suggestClient = function(name) {
 		return $http({
 			method 	: Constants.METHOD_GET
 			, url 	: salesApiUrl + 'client/custom/view-details?name=' + name
@@ -129,21 +109,21 @@ function salesService($http){
 	/**
 	* Bulk Settings
 	*/
-	function getBulkList(){
+	salesAPI.getBulkList = function(){
 		return $http({
 			method 	: Constants.METHOD_GET
 			, url 	: salesApiUrl + 'volume-discount'
 		})
 	}
 
-	function getBulk(id){
+	salesAPI.getBulk = function(id){
 		return $http({
 			method 	: Constants.METHOD_GET
 			, url 	: salesApiUrl + 'volume-discount/' + id
 		});
 	}
 
-	function editBulk(data){
+	salesAPI.editBulk = function(data){
 		return $http({
 			method 	: Constants.METHOD_PUT
 			, data 	: data 
@@ -151,11 +131,12 @@ function salesService($http){
 		})
 	}
 
-	function deleteBulk(id){
+	salesAPI.deleteBulk = function(id){
 		return $http({
 			method 	: Constants.METHOD_DELETE
 			, url 	: salesApiUrl + 'volume-discount/' + id
 		});
 	}
+	
 	return salesAPI;
 }
