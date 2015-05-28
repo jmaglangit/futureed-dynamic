@@ -90,7 +90,7 @@ function manageClientService($http) {
 	*		id 				- [Required] the client id
 	* 		status 			- [Required] the client status, Enable / Disable
 	*/
-	function clientChangeStatus = function(id, status) {
+	manageClientApi.clientChangeStatus = function(id, status) {
 		return $http({
 			method 	: Constants.METHOD_POST
 			, data	: {status : status}

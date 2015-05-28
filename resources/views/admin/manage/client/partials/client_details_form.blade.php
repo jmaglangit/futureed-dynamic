@@ -224,7 +224,7 @@
 	        			{!! Form::text('school_address',''
 	        				, array(
 	        					'placeHolder' => 'School Address'
-	        					, 'ng-model' => 'client.details.school_address'
+	        					, 'ng-model' => 'client.details.school_street_address'
 	        					, 'ng-disabled' => 'client.active_view_client'
 	        					, 'class' => 'form-control'
 	        				)
