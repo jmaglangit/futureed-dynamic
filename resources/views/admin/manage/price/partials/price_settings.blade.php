@@ -139,7 +139,7 @@
 		</div>
 	</div>
 
-	<div class="list-container" ng-init="sale.getPriceList()"ng-cloak>
+	<div class="list-container" ng-cloak>
 		<table id="client-list" datatable="ng" class="table table-striped table-hover dt-responsive">
 			<thead>
 	        <tr>

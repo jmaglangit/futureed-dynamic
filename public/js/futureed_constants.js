@@ -67,6 +67,10 @@ var Constants = {
 	, EDIT_BULK_SUCCESS 		: "You have successfully updated this bulk."
 	, DELETE_BULK_SUCCESS 		: "You have successfully deleted this bulk."
 
+	, ADD_DISCOUNT_SUCCESS 			: "You have successfully create a client discount."
+	, EDIT_DISCOUNT_SUCCESS 		: "You have successfully updated a client discount."
+	, DELETE_DISCOUNT_SUCCESS 		: "You have successfully deleted a client discount."
+
 	, MSG_U_NOTEXIST		: "User does not exist."
 	, MSG_U_EXIST 			: "Username already exists."
 

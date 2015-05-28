@@ -10,6 +10,14 @@ function salesService($http){
 	salesAPI.deletePrice = deletePrice;
 	salesAPI.getPrice = getPrice;
 	salesAPI.editPrice = editPrice;
+
+	salesAPI.getDiscountList = getDiscountList;
+	salesAPI.addClientDiscount = addClientDiscount;
+	salesAPI.getDiscountDetails = getDiscountDetails;
+	salesAPI.updateClientDiscount = updateClientDiscount
+	salesAPI.deleteClientDiscount = deleteClientDiscount;
+	salesAPI.suggestClient = suggestClient;
+
 	salesAPI.addBulk = addBulk;
 	salesAPI.getBulkList = getBulkList;
 	salesAPI.getBulk = getBulk;
@@ -71,6 +79,56 @@ function salesService($http){
 		});
 	}
 
+	/**
+	* Client Discounts
+	*/
+	function getDiscountList(data) {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url 	: salesApiUrl + 'client-discount'
+		});
+	}
+
+	function addClientDiscount(data) {
+		return $http({
+			method 	: Constants.METHOD_POST
+			, data  : data
+			, url 	: salesApiUrl + 'client-discount'
+		});
+	}
+
+	function getDiscountDetails(id) {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url 	: salesApiUrl + 'client-discount/' + id
+		});
+	}
+
+	function updateClientDiscount(data) {
+		return $http({
+			method 	: Constants.METHOD_PUT
+			, data 	: data
+			, url 	: salesApiUrl + 'client-discount/' + data.id
+		});
+	}
+
+	function deleteClientDiscount(id) {
+		return $http({
+			method 	: Constants.METHOD_DELETE
+			, url 	: salesApiUrl + 'client-discount/' + id
+		});
+	}
+
+	function suggestClient(name) {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url 	: salesApiUrl + 'client/custom/view-details?name=' + name
+		});
+	}
+
+	/**
+	* Bulk Settings
+	*/
 	function getBulkList(){
 		return $http({
 			method 	: Constants.METHOD_GET
