@@ -538,16 +538,17 @@ trait ApiValidatorTrait {
 
 
     public function checkContactNumber($input,$field_name){
-
-        $phone_format = "/^(\+)?(\d)(\d[\s-]?)?[\(\[\s-]{0,2}?\d{3}[\)\]\s-]{0,2}?\d{3}[\s-]?\d{4}$/i";
-
+        $error_msg = config('futureed-error.error_messages');
 
         $validator = Validator::make(
             [
                 "$field_name" => strtolower($input["$field_name"]),
             ],
             [
-                "$field_name" => "required"
+                "$field_name" => 'required|regex:/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/'
+            ],
+            [
+                'regex' => $error_msg[2115]
             ]
         );
 
@@ -560,17 +561,7 @@ trait ApiValidatorTrait {
                 ->setMessage($validator_msg["$field_name"][0])
                 ->errorMessage();
         }
-
-        if(!preg_match($phone_format,$input["$field_name"])){
-
-            return $this->setErrorCode(2115)
-                ->setField($field_name)
-                ->setMessage(config('futureed-error.error_messages.2115'))
-                ->errorMessage();
-        }
     }
-
-
     
     public function validateDate( $input,$date_field ){
         $error_msg = config('futureed-error.error_messages');
