@@ -6,8 +6,7 @@ function salesService($http){
 	var salesApiUrl = '/api/v1/';
 
 	/**
-	* Add Price API
-	* @return ID
+	* Price Settings
 	*/
 	salesAPI.addPrice = function(data){
 		return $http({
@@ -60,6 +59,56 @@ function salesService($http){
 		});
 	}
 
+	/**
+	* Client Discounts
+	*/
+	salesAPI.getDiscountList = function(data) {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url 	: salesApiUrl + 'client-discount'
+		});
+	}
+
+	salesAPI.addClientDiscount = function(data) {
+		return $http({
+			method 	: Constants.METHOD_POST
+			, data  : data
+			, url 	: salesApiUrl + 'client-discount'
+		});
+	}
+
+	salesAPI.getDiscountDetails = function(id) {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url 	: salesApiUrl + 'client-discount/' + id
+		});
+	}
+
+	salesAPI.updateClientDiscount = function(data) {
+		return $http({
+			method 	: Constants.METHOD_PUT
+			, data 	: data
+			, url 	: salesApiUrl + 'client-discount/' + data.id
+		});
+	}
+
+	salesAPI.deleteClientDiscount = function(id) {
+		return $http({
+			method 	: Constants.METHOD_DELETE
+			, url 	: salesApiUrl + 'client-discount/' + id
+		});
+	}
+
+	salesAPI.suggestClient = function(name) {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url 	: salesApiUrl + 'client/custom/view-details?name=' + name
+		});
+	}
+
+	/**
+	* Bulk Settings
+	*/
 	salesAPI.getBulkList = function(){
 		return $http({
 			method 	: Constants.METHOD_GET
