@@ -145,7 +145,7 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 					}
 				}else if(response.data){
 					// in profile
-					if(response.data.id == self.admininfo.id) {
+					if(self.admininfo && response.data.id == self.admininfo.id) {
 						self.validation.u_success = Constants.TRUE;
 					} else {
 						self.validation.u_error = Constants.MSG_U_EXIST;

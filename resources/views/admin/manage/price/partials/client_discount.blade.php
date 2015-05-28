@@ -168,8 +168,8 @@
 	        </thead>
 	        <tbody>
 	        <tr ng-repeat="p in sale.discounts">
-	            <td>{! p.client.first_name !} {! p.client.last_name!}</td>
-	            <td>{! p.client.email !}</td>
+	            <td>{! p.client.user.name !}</td>
+	            <td>{! p.client.user.email !}</td>
 	            <td>{! p.client.client_role !}</td>
 	            <td>{! p.percentage !}</td>
 	            <td>
