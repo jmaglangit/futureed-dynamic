@@ -968,3 +968,11 @@ div > .btncon > a {
 .dataTables_wrapper .row {
   margin: 10px 0px !important;
 }
+
+.padding-0-30 {
+	padding: 0px 30px;
+}
+
+.margin-0-30 {
+	margin: 0px 30px;
+}

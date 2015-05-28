@@ -24,8 +24,8 @@ class ClientController extends ApiController {
 			$criteria['name'] = Input::get('name');
 		}
 		
-		if(Input::get('school_code')) {
-			$criteria['school_code'] = Input::get('school_code');
+		if(Input::get('school')) {
+			$criteria['school'] = Input::get('school');
 		}
 		
 		if(Input::get('client_role')) {

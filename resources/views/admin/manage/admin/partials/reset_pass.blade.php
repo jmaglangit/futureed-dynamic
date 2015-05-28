@@ -10,24 +10,14 @@
 		]) 
 	!!}
 	<div class="form-content col-xs-12" ng-if="!admin.reset_success">
-		<div class="alert alert-danger" ng-if="admin.errors">
+		<div class="alert alert-error" ng-if="admin.errors">
 			<p ng-repeat="error in admin.errors track by $index">
 				{! error !}
 			</p>
 		</div>
-		<div class="alert alert-danger" ng-if="admin.r_error">
-			<p>
-				{! admin.r_error !}
-			</p>
-		</div>
-		<div class="alert alert-success" ng-if="admin.is_success">
-			<p>
-				{! admin.is_success !}
-			</p>
-		</div>
 		<div class="form-group">
-			<label class="col-xs-2 control-label">Password <span class="required">*</span></label>
-			<div class="col-xs-4">
+			<label class="col-xs-3 control-label">Password <span class="required">*</span></label>
+			<div class="col-xs-5">
 				{!! Form::password('password',
 						[
 							'placeholder' => 'Password',
@@ -38,8 +28,8 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="col-xs-2 control-label">Confirm Password <span class="required">*</span></label>
-			<div class="col-xs-4">
+			<label class="col-xs-3 control-label">Confirm Password <span class="required">*</span></label>
+			<div class="col-xs-5">
 				{!! Form::password('password',
 						[
 							'placeholder' => 'Password',
@@ -49,7 +39,7 @@
 					) !!}
 			</div>
 		</div>
-		<div class="btn-container">
+		<div class="btn-container col-xs-7 col-xs-offset-2">
 			{!! Form::button('Reset'
 				, array(
 					'class' => 'btn btn-blue btn-medium'
@@ -69,13 +59,22 @@
 		<div class="form-style form-narrow">
 			<div class="logo-container">
 				<div class="roundcon">					
-					<span><i class="fa fa-check-circle-o" style="font-size:5em;"></i></span>
+					<span><i class="fa fa-5x fa-check"></i></span>
 				</div>
 			</div>
 			<p class="text">
 				<strong>Success!</strong>
 				<br/>An email has been sent to {! admin.admininfo.user.email !} with the password that you have set.
 			</p>
+
+			<div class="btn-container">
+				{!! Form::button('View Profile',
+					array(
+						'class' => 'btn btn-blue'
+						, 'ng-click' => 'admin.viewAdmin(admin.admininfo.id)'
+					)
+				) !!}
+			</div>
 		</div>
 	</div>
 </div>

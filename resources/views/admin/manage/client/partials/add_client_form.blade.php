@@ -325,7 +325,7 @@
 				      </div>
 	        	</div>
 	        </fieldset>
-	        <div class="btn-container col-sm-6 col-sm-offset-3">
+	        <div class="btn-container col-sm-7 col-sm-offset-1">
 		        <a href="" type="button" class="btn btn-blue btn-medium" ng-click="client.createNewClient()">Save</a>
 		        <a href="" type="button" class="btn btn-gold btn-medium" ng-click="client.setManageClientActive()">Cancel</a>
 		     </div>

@@ -4,21 +4,8 @@
 			<span>Client Management</span>
 		</div>
 	</div>
-					
-	<div class="form-content col-xs-12">
-	    <div class="col-xs-3" style="padding:0;">
-			<div class="btn btn-gold" ng-click="client.setManageClientActive('add_client')">
-				<div class="row">
-					<i class="fa fa-plus-square"></i>
-				</div>
-				<div class="row">
-					Add User
-				</div>
-			</div>
-		</div>
-	</div>
 
-	<div class="col-xs-12">
+	<div class="col-xs-12 padding-0-30">
 		<div class="title-mid">
 			Search
 		</div>
@@ -98,7 +85,11 @@
 		</div>
 	</div>
 
-	<div class="col-xs-12">
+	<button class="btn btn-blue btn-small margin-0-30" ng-click="client.setManageClientActive('add_client')">
+		<i class="fa fa-plus-square"></i> Add 
+	</button>
+
+	<div class="col-xs-12 padding-0-30">
 		<div class="title-mid">
 			Client List
 		</div>

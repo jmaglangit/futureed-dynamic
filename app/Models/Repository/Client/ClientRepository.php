@@ -146,8 +146,8 @@ class ClientRepository implements ClientRepositoryInterface{
 					$clients = $clients->status($criteria['status']);
 				}
 				
-				if(isset($criteria['school_code'])) {
-					$clients = $clients->school_code($criteria['school_code']);
+				if(isset($criteria['school'])) {
+					$clients = $clients->school_name($criteria['school']);
 				}
 			}
 		
@@ -159,7 +159,7 @@ class ClientRepository implements ClientRepositoryInterface{
 														
 		}
 		
-		$clients = $clients->with('user')->orderBy('created_at', 'desc');
+		$clients = $clients->with('user','school')->orderBy('created_at', 'desc');
 		
 		return ['total' => $count, 'records' => $clients->get()->toArray()];	
 	}
