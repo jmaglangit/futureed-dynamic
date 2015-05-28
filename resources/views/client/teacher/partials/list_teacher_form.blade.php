@@ -43,7 +43,7 @@
 		</div>
 	</div>
 	<div class="col-xs-4 add-admin mid-container">
-			<button class="btn btn-success btn-medium" ng-click="teacher.setActive('add')"><span><i class="fa fa-plus-square"></i></span> Add </button>
+			<button class="btn btn-blue btn-medium" ng-click="teacher.setActive('add')"><span><i class="fa fa-plus-square"></i></span> Add </button>
 		</div> 
 	<div class="col-xs-12 table-container" ng-init="teacher.getTeacherList()">
 		<div class="list-container" ng-cloak>
