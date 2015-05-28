@@ -6,6 +6,7 @@ use FutureEd\Http\Controllers\Controller;
 use FutureEd\Models\Repository\Classroom\ClassroomRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use FutureEd\Http\Requests\Api\ClassroomRequest;
 
 class ClassroomController extends ApiController {
 
@@ -46,24 +47,27 @@ class ClassroomController extends ApiController {
         return $this->respondWithData($this->classroom->getClassrooms($criteria,$limit,$offset));
 	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
 
 	/**
 	 * Store a newly created resource in storage.
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(ClassroomRequest $request)
 	{
-		//
+        $classroom = $request->only([
+            'order_no',
+            'name',
+            'grade_id',
+            'client_id',
+            'seats_taken',
+            'seats_total',
+            'status'
+        ]);
+
+        $classroom = $this->classroom->addClassroom($classroom);
+
+        return $this->respondWithData($classroom);
 	}
 
 	/**
@@ -73,17 +77,6 @@ class ClassroomController extends ApiController {
 	 * @return Response
 	 */
 	public function show($id)
-	{
-		//
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
 	{
 		//
 	}
