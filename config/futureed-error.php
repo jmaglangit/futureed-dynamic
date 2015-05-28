@@ -65,7 +65,7 @@ return [
         2112 => 'Password should be alpha numeric with lowercase letters, uppercase letters, numerical and special punctuation.',
         2113 => 'Username and password is invalid.',
         2114 => 'Your password is incorrect.',
-        2115 => 'Your contact number must be this format +00 (000) 000-0000.',
+        2115 => 'Your contact number must have the correct format.',
         2116 => 'School name is not available.',
         2117 => 'The Student has to be 13 years old or above.',
         2118 => 'Your account is being reviewed or contact administrator for assistance.',
