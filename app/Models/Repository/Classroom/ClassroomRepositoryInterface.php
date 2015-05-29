@@ -17,7 +17,7 @@ interface ClassroomRepositoryInterface {
 
     public function addClassroom($data);
 
-    public function updateClassroom($id);
+    public function updateClassroom($id,$data);
 
     public function deleteClassroom($id);
 
