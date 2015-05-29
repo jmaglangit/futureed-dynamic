@@ -45,6 +45,42 @@
 							'uses' => $manage_teacher_controller . '@index'
 						]);
 
+					Routes::group(['prefix' => 'class'], function(){
+					$manage_class_controller = 'FutureLesson\Client\ManageClassController';
+
+						Routes::get('/', [
+								'as' => 'client.teacher.class.index',
+								'middleware' => 'client',
+								'uses' => $manage_class_controller . '@index'
+						]);
+
+						Routes::group(['prefix' => 'partials'], function(){
+						$manage_class_controller = 'FutureLesson\Client\ManageClassController';
+
+							Routes::get('list_class_form', [
+									'as' => 'client.teacher.class.partials.list_class_form',
+									'middleware' => 'client',
+									'uses' => $manage_class_controller . '@list_class_form'
+							]);
+							Routes::get('view_class_form', [
+									'as' => 'client.teacher.class.partials.view_class_form',
+									'middleware' => 'client',
+									'uses' => $manage_class_controller . '@view_class_form'
+							]);
+							Routes::get('edit_class_form', [
+									'as' => 'client.teacher.class.partials.edit_class_form',
+									'middleware' => 'client',
+									'uses' => $manage_class_controller . '@edit_class_form'
+							]);
+
+							Routes::get('add_student_form', [
+									'as' => 'client.teacher.class.partials.add_student_form',
+									'middleware' => 'client',
+									'uses' => $manage_class_controller . '@add_student_form'
+							]);
+						});
+					});
+
 					Routes::group(['prefix' => 'partials'], function(){
 					$manage_teacher_controller = 'FutureLesson\Client\ManageTeacherController';
 
