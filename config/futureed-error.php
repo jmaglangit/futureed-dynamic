@@ -71,7 +71,9 @@ return [
         2118 => 'Your account is being reviewed or contact administrator for assistance.',
         2119 => 'This record is being used.',
         2120 => 'This record is invalid.',
-
+        2121 => 'Unable to Delete. Principal is associated to a school.',
+        2122 => 'Unable to Delete. Teacher is associate to a class.',
+        2123 => 'Unable to Delete. Parent is associated to a student.',
 
         // Client Error messages
         2200 => 'Email already exists.',

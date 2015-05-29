@@ -72,5 +72,15 @@ class Client extends Model {
 		
 	}
 
+    public function student(){
+
+
+        return $this->hasMany('FutureEd\Models\Core\ParentStudent','parent_user_id','id');
+    }
+
+
+
+
+
 
 }
