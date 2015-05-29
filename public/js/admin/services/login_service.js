@@ -17,7 +17,7 @@ function adminLoginApiService($http) {
 		return $http({
 			method 	: Constants.METHOD_POST
 			, data 	: {reset_code : reset_code, password : new_password}
-			, url 	: adminLoginApiUrl + '/change-password/' + id
+			, url 	: adminLoginApiUrl + '/forgot-password/' + id
 		});
 	}
 
