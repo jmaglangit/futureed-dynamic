@@ -26,13 +26,7 @@ class ClassroomRequest extends ApiRequest {
             case 'PUT':
 
                 return [
-                    'order_no' => 'required|numeric',
                     'name' => 'required',
-                    'grade_id' => 'required|numeric',
-                    'client_id' => 'required|numeric',
-                    'seats_taken' => 'required|numeric',
-                    'seats_total' => 'required|numeric',
-                    'status' => 'required|in:Enabled,Disabled'
                 ];
                 break;
 
