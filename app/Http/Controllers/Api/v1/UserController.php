@@ -44,7 +44,7 @@ class UserController extends ApiController{
         }elseif(strcasecmp($input['user_type'], config('futureed.client')) == 0){
 
             $return['id'] = $this->client->getClientId($return['user_id']);
-            
+
         }elseif(strcasecmp($input['user_type'], config('futureed.admin')) == 0){
 
             $return['id'] = $this->admin->getAdminId($return['user_id']);
