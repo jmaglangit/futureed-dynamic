@@ -2,7 +2,7 @@
 
 use FutureEd\Http\Requests;
 
-use FutureEd\Models\Repository\Classroom\ClassroomRepositoryInterface;
+use FutureEd\Models\Repository\ClassStudents\ClassStudentsRepositoryInterface;
 use Illuminate\Http\Request;
 
 class ClassroomStudentController extends ApiController {
@@ -10,14 +10,15 @@ class ClassroomStudentController extends ApiController {
     /**
      * @var classrom protected
      */
-    protected $classroom;
+    protected $class_students;
+
 
     /**
-     * @param ClassroomRepositoryInterface $classroomRepositoryInterface
+     * @param ClassStudentsRepositoryInterface $classStudentsRepositoryInterface
      */
-    public function __construct(ClassroomRepositoryInterface $classroomRepositoryInterface){
+    public function __construct(ClassStudentsRepositoryInterface $classStudentsRepositoryInterface){
 
-        $this->classroom = $classroomRepositoryInterface;
+        $this->class_students = $classStudentsRepositoryInterface;
     }
 
 	/**
@@ -26,9 +27,7 @@ class ClassroomStudentController extends ApiController {
 	 * @return Response
 	 */
 	public function index()
-	{
-
-
+    {
 
 
 	}
@@ -51,7 +50,9 @@ class ClassroomStudentController extends ApiController {
 	 */
 	public function show($id)
 	{
-		//
+		return $this->respondWithData(
+            $this->class_students->getClassroomStudents($id)
+        );
 	}
 
 
