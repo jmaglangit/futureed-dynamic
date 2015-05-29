@@ -21,4 +21,6 @@ interface ClassroomRepositoryInterface {
 
     public function deleteClassroom($id);
 
+    public function getClassroomStudents($id);
+
 }
