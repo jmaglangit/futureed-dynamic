@@ -6,7 +6,7 @@ use FutureEd\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
-use FutureEd\Models\Repository\volumeDiscount\VolumeDiscountRepositoryInterface as VolumeDiscount;
+use FutureEd\Models\Repository\VolumeDiscount\VolumeDiscountRepositoryInterface as VolumeDiscount;
 
 use FutureEd\Http\Requests\Api\VolumeDiscountRequest;
 use FutureEd\Http\Requests\Api\StatusRequest;

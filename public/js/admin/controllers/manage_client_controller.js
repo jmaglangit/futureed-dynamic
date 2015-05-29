@@ -296,18 +296,19 @@ function ManageClientController($scope, apiService, manageClientService) {
 
 	function searchSchool() {
 		self.schools = Constants.FALSE;
-
+		
+		var school_name = '';
+		
 		if(self.create) {
+			school_name = self.create.school_name;
 			self.create.school_code = Constants.EMPTY_STR;
-			self.create.school_name = Constants.EMPTY_STR;
 		} else if(self.details) {
+			school_name = self.details.school_name;
 			self.details.school_code = Constants.EMPTY_STR;
-			self.details.school_name = Constants.EMPTY_STR;
 		}
 
 		self.validation.s_loading = Constants.TRUE;
-		self.validation.s_error = Constants.FALSE;
-		var school_name = self.details.school_name;
+		self.validation.s_error = Constants.FALSE;		
 
 		manageClientService.searchSchool(school_name).success(function(response) {
 			self.validation.s_loading = Constants.FALSE;
