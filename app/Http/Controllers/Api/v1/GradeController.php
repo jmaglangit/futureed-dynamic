@@ -35,8 +35,11 @@ class GradeController extends ApiController {
             $criteria['name'] = Input::get('name');
         }
 
+
+        $country_exist = $this->grade->checkCountry(Input::get('country_id'));
+
         $criteria['country_id'] = (Input::get('country_id'))
-                ?  (is_null($this->grade->checkCountry(Input::get('country_id'))))
+                ?  (!empty($country_exist))
 
                     ? Input::get('country_id') : config('futureed.default_country')
 
