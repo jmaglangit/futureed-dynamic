@@ -70,6 +70,13 @@ function manageAdminService($http) {
 
 		});
 	}
+
+	manageAdminApi.deleteModeAdmin = function(id){
+		return $http({
+			method 	: Constants.METHOD_DELETE
+			, url 	: adminApiUrl + 'admin/' + id
+		})
+	}
 	
 	return manageAdminApi;
 }

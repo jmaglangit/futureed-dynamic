@@ -93,6 +93,11 @@
 						, 'middleware' => 'admin'
 						, 'uses' => $manage_admin_controller . '@edit_email_form'
 					]);
+					Routes::get('/delete_admin_form', [
+						  'as' => 'admin.manage.admin.partials.delete_admin_form'
+						, 'middleware' => 'admin'
+						, 'uses' => $manage_admin_controller . '@delete_admin_form'
+					]);
 					
 				});
 			});
