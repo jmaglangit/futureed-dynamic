@@ -34,6 +34,11 @@ class Classroom extends Model {
         return $this->belongsTo('FutureEd\Models\Core\Grade');
     }
 
+    public function students(){
+
+        return $this->belongsTo('FutureEd\Models\Core\ClassStudent');
+    }
+
 
     //Scopes
 
@@ -47,6 +52,10 @@ class Classroom extends Model {
         return $query->where('grade_id',$grade_id);
     }
 
+    public function scopeId($query, $id){
+
+        return $query->where('id',$id);
+    }
 
 
 
