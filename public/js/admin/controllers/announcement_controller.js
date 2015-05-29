@@ -28,9 +28,10 @@ function AnnouncementController($scope, announcementApiService){
 
   function beforeDate($dates){
     var maxDate = new Date(); // Set minimum date to whatever you want here
-
+    maxDate = Date.parse(maxDate);
+    maxDate = maxDate - 86400000;
     for(d in $dates){        
-        if($dates[d].utcDateValue < maxDate){
+        if($dates[d].utcDateValue <= maxDate){
             $dates[d].selectable = false;
         }
     }
