@@ -36,4 +36,8 @@ class ManageAdminController extends Controller{
 	public function edit_email_form() {
 		return view('admin.manage.admin.partials.edit_email_form');
 	}
+
+	public function delete_admin_form() {
+		return view('admin.manage.admin.partials.delete_admin_form');
+	}
 }

@@ -12,6 +12,16 @@
 	</div>
 
 	<div class="col-xs-12 search-container">
+		<div class="alert alert-error" ng-if="admin.errors">
+            <p ng-repeat="error in admin.errors track by $index" > 
+                {! error !}
+            </p>
+        </div>
+        <div class="alert alert-success" ng-if="admin.validation.c_success">
+            <p> 
+                {! admin.validation.c_success !}
+            </p>
+        </div>
 		<div class="form-search">
 			{!! Form::open(
 					[
@@ -98,11 +108,14 @@
 	            <td>{! a.admin_role !}</td>
 	            <td>
 	            	<div class="row">
-	            		<div class="col-xs-6">
+	            		<div class="col-xs-4">
     						<a href="" ng-click="admin.viewAdmin(a.id)"><span><i class="fa fa-eye"></i></span></a>
     					</div>
-        				<div class="col-xs-6">
+        				<div class="col-xs-4">
         					<a href="" ng-click="admin.editModeAdmin(a.id)"><span><i class="fa fa-pencil"></i></span></a>
+        				</div>
+        				<div class="col-xs-4">
+        					<a href="" ng-click="admin.confirmDelete(a.id)"><span><i class="fa fa-trash"></i></span></a>
         				</div>
 	            	</div>
 	            </td>
