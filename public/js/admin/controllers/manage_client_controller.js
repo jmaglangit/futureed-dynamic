@@ -7,9 +7,11 @@ function ManageClientController($scope, apiService, manageClientService) {
 	var self = this;
 	
 	self.search = {};
+
+	// pagination object
 	self.table = {};
 	self.table.size = 10;
-	self.table.offset = 0;
+	self.table.page = 1;
 
 	self.clients = [{}];
 	self.create = {};
@@ -44,39 +46,30 @@ function ManageClientController($scope, apiService, manageClientService) {
 		var search_school = (self.search.school) ? self.search.school: Constants.EMPTY_STR;
 		var search_client_role = (self.search.client_role) ? self.search.client_role: Constants.EMPTY_STR;
 		self.clients = Constants.FALSE;
+		self.table.loading = Constants.TRUE;
 
 		$scope.ui_block();
 		manageClientService.getClientList(search_name, search_email, search_school, search_client_role, self.table).success(function(response) {
+			self.table.loading = Constants.FALSE;
+
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					self.clients = response.data.records;
+					self.table.total_items = response.data.total;
 
-					// Set size
-					var size = self.table.size;
-
-					if(size < 0 || size > 100) {
-						self.table.size = 10;
-					}
-
-
+					// Set Page Count
 					var page_count = response.data.total / self.table.size;
-						page_count = (page_count < 1) ? 1 : parseInt(page_count);
-
-					self.table.pages = [];
-
-					for(var i = 0; i < page_count; i++) {
-						self.table.pages.push(i + 1);
-					} 
-
-					console.log(self.table.pages);
+						page_count = (page_count < 1) ? 1 : Math.ceil(page_count);
+					self.table.page_count = page_count;
 				}
 			}
 
 			$scope.ui_unblock();
 		}).error(function(response) {
 			self.errors = $scope.internalError();
+			self.table.loading = Constants.FALSE;
 			$scope.ui_unblock();
 		});
 	}
@@ -420,10 +413,17 @@ function ManageClientController($scope, apiService, manageClientService) {
 	}
 
 	self.paginateBySize = function() {
+		self.table.page = 1;
+		self.table.offset = (self.table.page - 1) * self.table.size;
 		self.getClientList();
 	}
 
 	self.paginateByPage = function() {
+		var page = self.table.page;
+		
+		self.table.page = (page < 1) ? 1 : page;
+		self.table.offset = (page - 1) * self.table.size;
+
 		self.getClientList();
 	}
 }
