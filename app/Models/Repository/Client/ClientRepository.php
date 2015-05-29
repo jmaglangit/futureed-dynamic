@@ -1,7 +1,8 @@
 <?php namespace FutureEd\Models\Repository\Client;
 
-
 use FutureEd\Models\Core\Client;
+use FutureEd\Models\Core\Grade;
+use FutureEd\Models\Core\ParentStudent;
 
 class ClientRepository implements ClientRepositoryInterface{
 
@@ -251,6 +252,46 @@ class ClientRepository implements ClientRepositoryInterface{
 
         return $client;
     }
+    //check relation of teacher to classroom
+
+    public function getClassroom($id){
+
+        $clients = new Client();
+
+        $clients =  $clients->with('classroom')->where('id',$id)->orderBy('created_at', 'desc')->first();
+
+        return $clients;
+    }
+
+    public function getStudent($id){
+
+        $clients = new Client();
+
+        $clients = $clients->with('student')->where('id',$id)->orderBy('created_at', 'desc')->first();
+
+        return $clients;
+
+
+    }
+
+    public function delete($id){
+
+        try {
+
+            $clients = Client::find($id);
+
+            return !is_null($clients) ? $clients->delete() : false;
+
+        } catch(Exception $e) {
+
+            return $e->getMessage();
+
+        }
+
+        return $clients;
+
+
+    }
 
 
     public function getClientToClassroom($id){
@@ -265,5 +306,6 @@ class ClientRepository implements ClientRepositoryInterface{
 
 
     }
+
     
 }

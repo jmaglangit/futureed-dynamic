@@ -183,4 +183,22 @@ class ClientServices {
 	   return $this->client->getClients($criteria, $limit, $offset);
     }
 
+    public function getClassroom($id){
+
+       return $this->client-> getClassroom($id);
+
+    }
+
+    public function getStudent($id){
+
+        return $this->client->getStudent($id);
+
+    }
+
+    public function delete($id){
+
+        return $this->client->delete($id);
+
+    }
+
 }
