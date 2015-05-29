@@ -35,8 +35,6 @@ interface ClientRepositoryInterface {
 
     public function getStudent($id);
 
-    public function delete($id);
-
     public function getClientToClassroom($id);
 
 }

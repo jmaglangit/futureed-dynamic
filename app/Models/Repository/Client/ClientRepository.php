@@ -274,25 +274,6 @@ class ClientRepository implements ClientRepositoryInterface{
 
     }
 
-    public function delete($id){
-
-        try {
-
-            $clients = Client::find($id);
-
-            return !is_null($clients) ? $clients->delete() : false;
-
-        } catch(Exception $e) {
-
-            return $e->getMessage();
-
-        }
-
-        return $clients;
-
-
-    }
-
 
     public function getClientToClassroom($id){
 

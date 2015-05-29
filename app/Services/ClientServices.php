@@ -195,9 +195,9 @@ class ClientServices {
 
     }
 
-    public function delete($id){
+    public function deleteClient($id){
 
-        return $this->client->delete($id);
+        return $this->client->deleteClient($id);
 
     }
 

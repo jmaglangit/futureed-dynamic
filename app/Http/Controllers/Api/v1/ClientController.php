@@ -422,7 +422,7 @@ class ClientController extends ApiController {
 
         }
 
-        return $this->respondWithData([$this->client->delete($id)]);
+        return $this->respondWithData([$this->client->deleteClient($id)]);
 
 
 
