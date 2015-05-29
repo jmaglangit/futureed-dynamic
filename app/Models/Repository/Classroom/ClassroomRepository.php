@@ -10,6 +10,8 @@ namespace FutureEd\Models\Repository\Classroom;
 
 
 use FutureEd\Models\Core\Classroom;
+use Illuminate\Support\Facades\DB;
+use League\Flysystem\Exception;
 
 class ClassroomRepository implements ClassroomRepositoryInterface{
 
@@ -45,7 +47,9 @@ class ClassroomRepository implements ClassroomRepositoryInterface{
 
     public function getClassroom($id){
 
-        return Classroom::with('order','grade','client')->find($id);
+        $return = Classroom::with('order','grade','client')->find($id);
+
+        return $return;
     }
 
     public function addClassroom($classroom){
@@ -62,7 +66,19 @@ class ClassroomRepository implements ClassroomRepositoryInterface{
         return $classroom;
     }
 
-    public function updateClassroom($id){
+
+    public function updateClassroom($id,$data){
+
+        try{
+
+            Classroom::id($id)->update($data);
+
+            return $this->getClassroom($id);
+
+        }catch (Exception $e){
+
+            return $e->getMessage();
+        }
 
     }
 
