@@ -143,8 +143,8 @@ class GradeRepository implements GradeRepositoryInterface{
     }
 
     public function checkCountry($country_id){
-
-        return Grade::select('country_id')->distinct()->with('country')->countryid($country_id)->get();
+//            dd($country_id);
+        return Grade::countryid($country_id)->get()->toArray();
     }
 
 
