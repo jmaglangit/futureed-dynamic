@@ -7,6 +7,10 @@ function ManageClientController($scope, apiService, manageClientService) {
 	var self = this;
 	
 	self.search = {};
+	self.table = {};
+	self.table.size = 10;
+	self.table.offset = 0;
+
 	self.clients = [{}];
 	self.create = {};
 	self.role = {};
@@ -39,14 +43,34 @@ function ManageClientController($scope, apiService, manageClientService) {
 		var search_email = (self.search.email) ? self.search.email: Constants.EMPTY_STR;
 		var search_school = (self.search.school) ? self.search.school: Constants.EMPTY_STR;
 		var search_client_role = (self.search.client_role) ? self.search.client_role: Constants.EMPTY_STR;
+		self.clients = Constants.FALSE;
 
 		$scope.ui_block();
-		manageClientService.getClientList(search_name, search_email, search_school, search_client_role).success(function(response) {
+		manageClientService.getClientList(search_name, search_email, search_school, search_client_role, self.table).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
-					self.clients = (response.data.records) ? response.data.records : Constants.FALSE;
+					self.clients = response.data.records;
+
+					// Set size
+					var size = self.table.size;
+
+					if(size < 0 || size > 100) {
+						self.table.size = 10;
+					}
+
+
+					var page_count = response.data.total / self.table.size;
+						page_count = (page_count < 1) ? 1 : parseInt(page_count);
+
+					self.table.pages = [];
+
+					for(var i = 0; i < page_count; i++) {
+						self.table.pages.push(i + 1);
+					} 
+
+					console.log(self.table.pages);
 				}
 			}
 
@@ -392,5 +416,13 @@ function ManageClientController($scope, apiService, manageClientService) {
 
 		$('input, select').removeClass('required-field');
 	    $("html, body").animate({ scrollTop: 0 }, "slow");
+	}
+
+	self.paginateBySize = function() {
+		self.getClientList();
+	}
+
+	self.paginateByPage = function() {
+		self.getClientList();
 	}
 }
