@@ -116,9 +116,11 @@ function FutureedController($scope, apiService) {
 
   /**
   * Retrieves list of Grades by country
+  * function for get grade by country
+  * To be Implemented
   */
   function getGrades(id){
-    console.log(id);
+    
   }
   
   function getGradeLevel() {
