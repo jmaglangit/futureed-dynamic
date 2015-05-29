@@ -94,7 +94,7 @@ class ClassroomController extends ApiController {
         $input['name'] = $request->get('name');
 
 
-        return $this->classroom->updateClassroom($id,$input);
+        return $this->respondWithData($this->classroom->updateClassroom($id,$input));
 	}
 
 	/**
