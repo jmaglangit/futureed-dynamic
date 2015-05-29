@@ -3,6 +3,7 @@
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
+use FutureEd\Models\Core\Classroom;
 use FutureEd\Models\Repository\Classroom\ClassroomRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
@@ -78,7 +79,7 @@ class ClassroomController extends ApiController {
 	 */
 	public function show($id)
 	{
-		//
+		return $this->respondWithData($this->classroom->getClassroom($id));
 	}
 
 	/**
@@ -87,9 +88,13 @@ class ClassroomController extends ApiController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($id, ClassroomRequest $request)
 	{
-		//
+        //can only update the name
+        $input['name'] = $request->get('name');
+
+
+        return $this->classroom->updateClassroom($id,$input);
 	}
 
 	/**
