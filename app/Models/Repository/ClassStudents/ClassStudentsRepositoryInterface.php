@@ -6,6 +6,10 @@
  * Time: 11:39 AM
  */
 
+namespace FutureEd\Models\Repository\ClassStudents;
+
 interface ClassStudentsRepositoryInterface {
+
+    public function getClassroomStudents($class_id);
 
 }
