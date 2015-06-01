@@ -19,6 +19,7 @@
 				<div class="col-xs-2">
 					<a href="#" ng-click="class.setActive('edit')" class="edit-class">Edit Class</a>
 				</div>
+				
 			</div>
 			<div class="form-group">
 				<label class="col-xs-2 control-label">Grade</label>

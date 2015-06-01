@@ -62,11 +62,13 @@
 									'middleware' => 'client',
 									'uses' => $manage_class_controller . '@list_class_form'
 							]);
+
 							Routes::get('view_class_form', [
 									'as' => 'client.teacher.class.partials.view_class_form',
 									'middleware' => 'client',
 									'uses' => $manage_class_controller . '@view_class_form'
 							]);
+							
 							Routes::get('edit_class_form', [
 									'as' => 'client.teacher.class.partials.edit_class_form',
 									'middleware' => 'client',

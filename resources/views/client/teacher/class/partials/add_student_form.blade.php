@@ -5,12 +5,14 @@
 		</div>
 	</div>
 	<div class="col-xs-12 search-container">
+
 		{!! Form::open(
 			[
 				'id' => 'add_student',
 				'class' => 'form-horizontal'
 			]
 		) !!}
+		
 		<div class="form-group">
 				<div class="col-xs-2">
 					<input type="checkbox" ng-click="class.exist">

@@ -150,6 +150,12 @@
 						, 'middleware' => 'admin'
 						, 'uses' => $manage_client_controller . '@confirm_email_form'
 					]);
+
+					Routes::get('/delete_client_form', [
+						  'as' => 'admin.manage.client.partials.delete_client_form'
+						, 'middleware' => 'admin'
+						, 'uses' => $manage_client_controller . '@delete_client_form'
+					]);
 				});
 			});
 

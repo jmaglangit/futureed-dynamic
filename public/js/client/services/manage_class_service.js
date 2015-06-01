@@ -4,6 +4,7 @@ angular.module('futureed.services')
 function manageClassService($http){
 	var classApiUrl = '/api/v1/';
 	var manageClassApi = {};
+	
 
 
 	return manageClassApi;

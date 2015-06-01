@@ -22,6 +22,7 @@
 				<div class="col-xs-5">
 					{!! Form::text('search_name', '',['class' => 'form-control', 'ng-model' => 'teacher.search_name', 'placeholder' => 'Name']) !!}
 				</div>
+				
 			</div>
 			<div class="form-group">
 				<label class="col-xs-2 control-label">Grade <span class="required">*</span></label>

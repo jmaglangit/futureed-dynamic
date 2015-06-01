@@ -43,6 +43,7 @@ class ManageClassController extends Controller{
 	/**
 	*@return add student 
 	*/
+	
 	public function add_student_form()
 	{
 		return view('client.teacher.class.partials.add_student_form');

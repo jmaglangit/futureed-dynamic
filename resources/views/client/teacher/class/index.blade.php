@@ -10,9 +10,13 @@
 
 		<div class="wrapr">
 			<div template-directive template-url="{!! route('client.teacher.class.partials.list_class_form') !!}"></div>
+
 			<div template-directive template-url="{!! route('client.teacher.class.partials.view_class_form') !!}"></div>
+
 			<div template-directive template-url="{!! route('client.teacher.class.partials.edit_class_form') !!}"></div>
+
 			<div template-directive template-url="{!! route('client.teacher.class.partials.add_student_form') !!}"></div>
+			
 		</div>
 	</div>
 @stop

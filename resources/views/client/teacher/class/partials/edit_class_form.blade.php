@@ -4,6 +4,7 @@
 			<span>Edit Class</span>
 		</div>
 	</div>
+	
 	{!! Form::open(
 		[
 			'id' => 'class_edit',
