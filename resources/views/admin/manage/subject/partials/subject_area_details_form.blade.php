@@ -58,6 +58,12 @@
         			) !!}
         		</div>
         	</div>
+            <div class="form-group">
+                    <label class="col-xs-3 control-label">Description </label>
+                    <div class="col-xs-5">
+                        <textarea name="description" ng-model="subject.area_details.description" class="form-control" cols="50" rows="10"></textarea>
+                    </div>
+                </div>
         	<div class="form-group">
         		<label class="col-xs-3 control-label">Status <span class="required">*</span></label>
         		<div class="col-xs-5">
