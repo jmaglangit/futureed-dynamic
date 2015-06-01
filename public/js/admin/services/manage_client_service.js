@@ -127,5 +127,16 @@ function manageClientService($http) {
 		});
 	}
 
+	/**
+	* @Param
+	*	id - client id to be deleted
+	*/
+	manageClientApi.deleteModeClient = function(id) {
+		return $http({
+			method 	: Constants.METHOD_DELETE
+			, url 	: manageClientApiUrl + 'client/' + id
+		});
+	}
+
 	return manageClientApi;
 }
