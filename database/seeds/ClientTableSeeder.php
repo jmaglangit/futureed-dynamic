@@ -17,7 +17,7 @@ class ClientTableSeeder extends Seeder {
                 'first_name' => 'Farrah Faye',
                 'last_name' => 'Dy',
                 'client_role' => 'Parent',
-                'school_code' => 1,
+                'school_code' => null,
                 'street_address' => '',
                 'city' => '',
                 'state' => '',
