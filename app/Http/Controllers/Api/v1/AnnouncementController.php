@@ -1,5 +1,6 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
+use Carbon\Carbon;
 use FutureEd\Http\Controllers\Controller;
 use FutureEd\Http\Requests;
 
@@ -29,7 +30,18 @@ class AnnouncementController extends ApiController {
      */
     
     public function index(){
-        return $this->respondWithData($this->announcement->getAnnouncement());
+        $announcement =  $this->announcement->getAnnouncement();
+
+        $date_start = Carbon::parse($announcement['date_start']);
+        $date_end = Carbon::parse($announcement['date_end']);
+
+        //Determine if the announcement is between current date.
+        if(!Carbon::now()->between($date_start,$date_end)){
+
+            return $this->respondWithData([]);
+        }
+
+        return $this->respondWithData($announcement);
     }
     
     /**

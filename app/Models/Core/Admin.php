@@ -24,6 +24,15 @@ class Admin extends Model {
         return $this->belongsTo('FutureEd\Models\Core\User');
     }
 
+    public static function boot(){
+
+        parent::boot();
+
+        Admin::deleting(function($admin){
+            $admin->user->delete();
+        });
+    }
+
 	//-------------scopes
 	public function scopeUsername($query, $username) {
 		

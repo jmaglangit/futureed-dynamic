@@ -93,6 +93,11 @@
 						, 'middleware' => 'admin'
 						, 'uses' => $manage_admin_controller . '@edit_email_form'
 					]);
+					Routes::get('/delete_admin_form', [
+						  'as' => 'admin.manage.admin.partials.delete_admin_form'
+						, 'middleware' => 'admin'
+						, 'uses' => $manage_admin_controller . '@delete_admin_form'
+					]);
 					
 				});
 			});
@@ -144,6 +149,12 @@
 						  'as' => 'admin.manage.client.partials.confirm_email_form'
 						, 'middleware' => 'admin'
 						, 'uses' => $manage_client_controller . '@confirm_email_form'
+					]);
+
+					Routes::get('/delete_client_form', [
+						  'as' => 'admin.manage.client.partials.delete_client_form'
+						, 'middleware' => 'admin'
+						, 'uses' => $manage_client_controller . '@delete_client_form'
 					]);
 				});
 			});

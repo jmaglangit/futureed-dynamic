@@ -182,7 +182,7 @@
 	        					'placeHolder' => 'School Name'
 	        					, 'ng-disabled' => 'client.active_view_client'
 	        					, 'ng-model' => 'client.details.school_name'
-	        					, 'ng-change' => 'client.searchSchool()'
+	        					, 'ng-change' => "client.searchSchool('edit')"
                         		, 'ng-model-options' => "{ debounce : {'default' : 500} }"
 	        					, 'class' => 'form-control'
 	        				)

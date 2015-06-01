@@ -19,11 +19,9 @@ class VolumeDiscountRequest extends ApiRequest {
 	 * @return array
 	 */
 	public function rules() {
-        return [
-            'min_seats'     => 'required|numeric|min:1|max:30000',
-			'percentage'    => 'required|numeric|min:1|max:100',
-			'status'        => 'required|in:Enabled,Disabled'
-        ];
+        return ['min_seats'     => 'required|numeric|min:1|max:30000|unique:volume_discounts,min_seats,NULL,id,deleted_at,NULL',
+    			'percentage'    => 'required|numeric|min:1|max:100',
+    			'status'        => 'required|in:Enabled,Disabled'];
 	}
 	
 	/**
@@ -33,7 +31,8 @@ class VolumeDiscountRequest extends ApiRequest {
 	 */
 	public function messages() {
 		return [
-			'numeric' => 'The :attribute must be a number.' 
+			'numeric' => 'The :attribute must be a number.',
+			'unique'  => 'Bulk Number already exists.' 
 		];
 	}
 }
