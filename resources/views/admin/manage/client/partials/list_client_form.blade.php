@@ -119,7 +119,7 @@
 					, array(
 						'ng-model' => 'client.table.size'
 						, 'ng-change' => 'client.paginateBySize()'
-						, 'ng-if' => "client.clients.length != '0'"
+						, 'ng-if' => "client.clients.length"
 						, 'class' => 'form-control paginate-size pull-right'
 					)
 				) !!}
@@ -141,24 +141,24 @@
 			            <td>{! a.client_role !}</td>
 			            <td>
 			            	<div class="row">
-			            		<div class="col-xs-4">
+			            		<div class="col-xs-3">
+			            			{! a.user.status !}
+			            		</div>
+			            		<div class="col-xs-3">
 			            			<a href="" ng-click="client.setManageClientActive('view_client',a.id)"><span><i class="fa fa-eye"></i></span></a>
 			            		</div>
-			            		<div class="col-xs-4">
+			            		<div class="col-xs-3">
 			            			<a href="" ng-click="client.setManageClientActive('edit_client', a.id)"><span><i class="fa fa-pencil"></i></span></a>
 			            		</div>
-			            		{{-- <div class="col-xs-3">
-			            			<span><i class="fa fa-ban"></i></span>
-			            		</div> --}}
-			            		<div class="col-xs-4">
+			            		<div class="col-xs-3">
 			            			<a href="" ng-click="client.confirmDelete(a.id)"><span><i class="fa fa-trash	"></i></span></a>
-			            		</div>	
+			            		</div>
 			            	</div>
 			            </td>
 			        </tr>
-			        <tr class="odd" ng-if="client.clients.length == '0'">
+			        <tr class="odd" ng-if="!client.clients.length && !client.table.loading">
 			        	<td valign="top" colspan="4" class="dataTables_empty">
-			        		No data available in table
+			        		No records found
 			        	</td>
 			        </tr>
 			        <tr class="odd" ng-if="client.table.loading">
@@ -169,7 +169,7 @@
 		        </tbody>
 			</table>
 
-			<div class="pull-right" ng-if="client.table.page_count > 1">
+			<div class="pull-right" ng-if="client.clients.length">
 				<pagination 
 					total-items="client.table.total_items" 
 					ng-model="client.table.page"
