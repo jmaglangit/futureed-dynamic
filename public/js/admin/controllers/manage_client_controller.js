@@ -165,7 +165,6 @@ function ManageClientController($scope, apiService, manageClientService) {
 			$("input, select").removeClass("required-field");
 			$scope.ui_block();
 			manageClientService.updateClientDetails(self.details).success(function(response) {
-				console.log(self.details);
 				if(angular.equals(response.status, Constants.STATUS_OK)) {
 					if(response.errors) {
 						self.errors = $scope.errorHandler(response.errors);
