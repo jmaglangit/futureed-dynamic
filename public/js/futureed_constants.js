@@ -74,6 +74,10 @@ var Constants = {
 	, EDIT_DISCOUNT_SUCCESS 		: "You have successfully updated a client discount."
 	, DELETE_DISCOUNT_SUCCESS 		: "You have successfully deleted a client discount."
 
+	, ADD_AREA_SUCCESS 			: "You have successfully added a new subject area."
+	, EDIT_AREA_SUCCESS 		: "You have successfully updated a subject area."
+	, DELETE_AREA_SUCCESS 		: "You have successfully deleted a subject area."
+
 	, MSG_U_NOTEXIST		: "User does not exist."
 	, MSG_U_EXIST 			: "Username already exists."
 

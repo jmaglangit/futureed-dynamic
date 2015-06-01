@@ -40,7 +40,7 @@
 					{!! Form::button('Search'
 						,array(
 							'class' => 'btn btn-blue'
-							, 'ng-click' => 'subject.getSubjectList()'
+							, 'ng-click' => 'subject.list()'
 						)
 					)!!}
 				</div>
@@ -106,7 +106,7 @@
 			            			{! a.status !}
 			            		</div>
 			            		<div class="col-xs-4">
-			            			<a href="" ng-click="subject.getSubjectAreaList(a.id, a.name)"><span><i class="fa fa-plus"></i></span> Area</a>
+			            			<a href="" ng-click="subject.setSubjectAreaDetails(a.id, a.name)"><span><i class="fa fa-plus"></i></span> Area</a>
 			            		</div>
 			            		<div class="col-xs-2">
 			            			<a href="" ng-click="subject.getSubjectDetails(a.id)"><span><i class="fa fa-pencil"></i></span></a>
