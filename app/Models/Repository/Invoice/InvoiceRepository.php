@@ -59,6 +59,6 @@ class InvoiceRepository implements InvoiceRepositoryInterface{
 
     }
 
-    
+
 
 }
