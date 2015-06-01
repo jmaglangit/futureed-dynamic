@@ -443,8 +443,9 @@ function ManageClientController($scope, apiService, manageClientService) {
 		var page_count = data.total / self.table.size;
 			page_count = (page_count < Constants.DEFAULT_PAGE) ? Constants.DEFAULT_PAGE : Math.ceil(page_count);
 		self.table.page_count = page_count;
-
-	function confirmDelete(id){
+	}
+	
+	function confirmDelete(id) {
 		self.errors = Constants.FALSE;
 		self.delete.id = id;
 		self.delete.confirm = Constants.TRUE;
@@ -455,7 +456,7 @@ function ManageClientController($scope, apiService, manageClientService) {
 	    });
 	}
 
-	function deleteModeClient(){
+	function deleteModeClient() {
 		self.errors = Constants.FALSE;
 		self.validate.c_error = Constants.FALSE;
 		self.validate.c_success = Constants.FALSE;
@@ -475,6 +476,7 @@ function ManageClientController($scope, apiService, manageClientService) {
 			$scope.ui_unblock();
 			self.errors = $scope.internalError();
 		});
+
 		$("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 }

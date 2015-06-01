@@ -141,19 +141,16 @@
 			            <td>{! a.client_role !}</td>
 			            <td>
 			            	<div class="row">
-			            		<div class="col-xs-4">
+			            		<div class="col-xs-3">
 			            			{! a.user.status !}
 			            		</div>
-			            		<div class="col-xs-4">
+			            		<div class="col-xs-3">
 			            			<a href="" ng-click="client.setManageClientActive('view_client',a.id)"><span><i class="fa fa-eye"></i></span></a>
 			            		</div>
-			            		<div class="col-xs-4">
+			            		<div class="col-xs-3">
 			            			<a href="" ng-click="client.setManageClientActive('edit_client', a.id)"><span><i class="fa fa-pencil"></i></span></a>
 			            		</div>
-			            		{{-- <div class="col-xs-3">
-			            			<span><i class="fa fa-ban"></i></span>
-			            		</div> --}}
-			            		<div class="col-xs-4">
+			            		<div class="col-xs-3">
 			            			<a href="" ng-click="client.confirmDelete(a.id)"><span><i class="fa fa-trash	"></i></span></a>
 			            		</div>
 			            	</div>
