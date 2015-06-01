@@ -19,6 +19,8 @@ function ManageClientController($scope, apiService, manageClientService) {
 	self.details = {};
 	self.user_type = Constants.CLIENT;
 	self.schools = Constants.FALSE;
+	self.delete = {};
+	self.validate = {};
 
 	self.getClientList = getClientList;
 	self.clearSearchForm = clearSearchForm;
@@ -39,6 +41,8 @@ function ManageClientController($scope, apiService, manageClientService) {
 	self.createNewClient = createNewClient;
 
 	self.setManageClientActive = setManageClientActive;
+	self.confirmDelete = confirmDelete;
+	self.deleteModeClient = deleteModeClient;
 	
 	function getClientList() {
 		var search_name = (self.search.name) ? self.search.name: Constants.EMPTY_STR;
@@ -439,5 +443,38 @@ function ManageClientController($scope, apiService, manageClientService) {
 		var page_count = data.total / self.table.size;
 			page_count = (page_count < Constants.DEFAULT_PAGE) ? Constants.DEFAULT_PAGE : Math.ceil(page_count);
 		self.table.page_count = page_count;
+
+	function confirmDelete(id){
+		self.errors = Constants.FALSE;
+		self.delete.id = id;
+		self.delete.confirm = Constants.TRUE;
+		$("#delete_client_modal").modal({
+	        backdrop: 'static',
+	        keyboard: Constants.FALSE,
+	        show    : Constants.TRUE
+	    });
+	}
+
+	function deleteModeClient(){
+		self.errors = Constants.FALSE;
+		self.validate.c_error = Constants.FALSE;
+		self.validate.c_success = Constants.FALSE;
+
+		$scope.ui_block();
+		manageClientService.deleteModeClient(self.delete.id).success(function(response){
+			if(angular.equals(response.status, Constants.STATUS_OK)){
+				if(response.errors){
+					self.errors = $scope.errorHandler(response.errors);
+				}else if(response.data){
+					self.validate.c_success = Constants.CLIENT + ' ' +  Constants.DELETE_SUCCESS;
+					self.getClientList();
+				}
+			}
+		$scope.ui_unblock();
+		}).error(function(response) {
+			$scope.ui_unblock();
+			self.errors = $scope.internalError();
+		});
+		$("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 }
