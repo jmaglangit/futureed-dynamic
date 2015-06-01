@@ -3,6 +3,9 @@ var Constants = {
 	  FALSE			: 0
 	, TRUE			: 1
 
+	, DEFAULT_SIZE	: 10
+	, DEFAULT_PAGE	: 1
+
 	, EMPTY_STR		: ''
 
 	, METHOD_POST	: 'POST'

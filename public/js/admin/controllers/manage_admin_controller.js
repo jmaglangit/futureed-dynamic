@@ -4,8 +4,11 @@ angular.module('futureed.controllers')
 ManageAdminController.$inject = ['$scope', 'manageAdminService', 'apiService'];
 
 function ManageAdminController($scope, manageAdminService, apiService) {
-	
 	var self = this;
+
+	self.table = {};
+	self.table.size = Constants.DEFAULT_SIZE;
+	self.table.page = Constants.DEFAULT_PAGE;
 
 	self.user_type = Constants.ADMIN;
 	this.reg = {};
@@ -36,20 +39,26 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 		var search_user = (self.search_user) ? self.search_user : Constants.EMPTY_STR;
 		var search_email = (self.search_email) ? self.search_email : Constants.EMPTY_STR;
 		var search_role = (self.search_role) ? self.search_role : Constants.EMPTY_STR;
+		self.table.loading = Constants.TRUE;
 
 		$scope.ui_block();
-		manageAdminService.getAdminList(search_user, search_email, search_role).success(function(response){
+		manageAdminService.getAdminList(search_user, search_email, search_role, self.table).success(function(response){
+			self.table.loading = Constants.FALSE;
+
 			if(angular.equals(response.status, Constants.STATUS_OK)){
 				if(response.errors){
 					self.errors = $scope.errorHandler(response.errors);
-				}
-				if(response.data){
+				} else if(response.data){
 					self.data = response.data.records;
+					self.updateTable(response.data);
 				}
 			}
+
 			$scope.ui_unblock();
 		}).error(function(response) {
-			this.internalError();
+			self.table.loading = Constants.FALSE;
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
 		});
 	}
 
@@ -393,5 +402,29 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
+	}
+
+	self.paginateBySize = function() {
+		self.table.page = 1;
+		self.table.offset = (self.table.page - 1) * self.table.size;
+		self.getAdminList();
+	}
+
+	self.paginateByPage = function() {
+		var page = self.table.page;
+		
+		self.table.page = (page < 1) ? 1 : page;
+		self.table.offset = (page - 1) * self.table.size;
+
+		self.getAdminList();
+	}
+
+	self.updateTable = function(data) {
+		self.table.total_items = data.total;
+
+		// Set Page Count
+		var page_count = data.total / self.table.size;
+			page_count = (page_count < Constants.DEFAULT_PAGE) ? Constants.DEFAULT_PAGE : Math.ceil(page_count);
+		self.table.page_count = page_count;
 	}
 }

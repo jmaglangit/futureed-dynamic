@@ -13,12 +13,15 @@ function manageSubjectService($http) {
 	* @Param
 	*		name - [Optional] the subject name
 	*/
-	manageSubjectApi.getSubjectList = function(subject_name) {
+	manageSubjectApi.getSubjectList = function(subject_name, table) {
 		subject_name = (subject_name) ? subject_name : '';
 
 		return $http({
 			  method : Constants.METHOD_GET
-			, url 	 : manageSubjectApiUrl + 'subject?name=' + subject_name
+			, url 	 : manageSubjectApiUrl 
+				+ 'subject?name=' + subject_name
+				+ '&limit=' + table.size
+				+ '&offset=' + table.offset
 		});
 	}
 
@@ -83,12 +86,14 @@ function manageSubjectService($http) {
 	*		id 		- [Required] the subject id
 	*		name 	- [Optional] the area name
 	*/
-	manageSubjectApi.getSubjectAreaList = function(id, area_name) {
-		area_name = (area_name) ? area_name : '';
-
+	manageSubjectApi.getSubjectAreaList = function(id, area_name, table) {
 		return $http({
 			  method : Constants.METHOD_GET
-			, url 	 : manageSubjectApiUrl + 'subject-area?subject_id=' + id + '&name=' + area_name
+			, url 	 : manageSubjectApiUrl 
+				+ 'subject-area?subject_id=' + id 
+				+ '&name=' + area_name
+				+ '&limit=' + table.size
+				+ '&offset=' +table.offset 
 		}); 
 	}
 

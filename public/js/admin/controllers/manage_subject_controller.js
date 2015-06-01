@@ -6,6 +6,10 @@ ManageSubjectController.$inject = ['$scope', 'apiService','manageSubjectService'
 function ManageSubjectController($scope, apiService, manageSubjectService) {
 	var self = this;
 
+	self.table = {};
+	self.table.size = Constants.DEFAULT_SIZE;
+	self.table.page = Constants.DEFAULT_PAGE;
+
 	self.search = {};
 	self.create = {};
 	self.delete = {};
@@ -50,6 +54,10 @@ function ManageSubjectController($scope, apiService, manageSubjectService) {
 
 	function setManageSubjectActive(active) {
 		self.errors = Constants.FALSE;
+
+		self.table = {};
+		self.table.size = Constants.DEFAULT_SIZE;
+		self.table.page = Constants.DEFAULT_PAGE;
 
 		self.search = {};
 		self.create = {};
@@ -107,22 +115,28 @@ function ManageSubjectController($scope, apiService, manageSubjectService) {
 
 	function getSubjectList() {
 		self.errors = Constants.FALSE;
+		self.subjects = {};
+		self.table.loading = Constants.TRUE;
 		var subject_name = self.search.name;
 
 		$scope.ui_block();
-		manageSubjectService.getSubjectList(subject_name).success(function(response) {
+		manageSubjectService.getSubjectList(subject_name, self.table).success(function(response) {
+			self.table.loading = Constants.FALSE;
+
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					self.subjects = response.data.records;
+					self.updateTable(response.data);
 				}
 			}
 
 			$scope.ui_unblock();
 		}).error(function(response) {
-			$scope.ui_unblock();
+			self.table.loading = Constants.FALSE;
 			self.errors = $scope.internalError();
+			$scope.ui_unblock();
 		});
 	}
 
@@ -296,10 +310,13 @@ function ManageSubjectController($scope, apiService, manageSubjectService) {
 
 	function getSubjectAreaList(id, name) {
 		self.errors = Constants.FALSE;
-		var area_name = self.search_area.name;
+		self.table.loading = Constants.TRUE;
+		var area_name = (self.search_area.name) ? self.search_area.name : Constants.EMPTY_STR;
 
 		$scope.ui_block();
-		manageSubjectService.getSubjectAreaList(id, area_name).success(function(response) {
+		manageSubjectService.getSubjectAreaList(id, area_name, self.table).success(function(response) {
+			self.table.loading = Constants.FALSE;
+
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
@@ -313,32 +330,43 @@ function ManageSubjectController($scope, apiService, manageSubjectService) {
 					self.create_area.subject_id = self.subject_id;
 					self.create_area.subject_name = self.subject_name;
 
+					self.updateTable(response.data);
 					self.setManageSubjectActive('subject_area_list');
 				}
 			}
 
 			$scope.ui_unblock();
 		}).error(function(response) {
-			$scope.ui_unblock();
+			self.table.loading = Constants.FALSE;
 			self.errors = $scope.internalError();
+			$scope.ui_unblock();
 		});
 	}
 
 	function updateSubjectAreaList() {
-		manageSubjectService.getSubjectAreaList(self.subject_id).success(function(response) {
+		self.errors = Constants.FALSE;
+		self.subject_areas = {};
+		self.table.loading = Constants.TRUE;
+		var area_name = (self.search_area.name) ? self.search_area.name : Constants.EMPTY_STR;
+
+		manageSubjectService.getSubjectAreaList(self.subject_id, area_name, self.table).success(function(response) {
+			self.table.loading = Constants.FALSE;
+
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					self.subject_areas = response.data.records;
+					self.updateTable(response.data);
 	    			$("html, body").animate({ scrollTop: 0 }, "slow");
 				}
 			}
 
 			$scope.ui_unblock();
 		}).error(function(response) {
-			$scope.ui_unblock();
+			self.table.loading = Constants.FALSE;
 			self.errors = $scope.internalError();
+			$scope.ui_unblock();
 		});
 	}
 
@@ -404,5 +432,38 @@ function ManageSubjectController($scope, apiService, manageSubjectService) {
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
+	}
+
+	self.paginateBySize = function() {
+		self.table.page = 1;
+		self.table.offset = (self.table.page - 1) * self.table.size;
+
+		if(self.subject_area_list) {
+			self.updateSubjectAreaList();
+		} else if(self.active_list_subject) {
+			self.getSubjectList();
+		}
+	}
+
+	self.paginateByPage = function() {
+		var page = self.table.page;
+		
+		self.table.page = (page < 1) ? 1 : page;
+		self.table.offset = (page - 1) * self.table.size;
+
+		if(self.subject_area_list) {
+			self.updateSubjectAreaList();
+		} else if(self.active_list_subject) {
+			self.getSubjectList();
+		}
+	}
+
+	self.updateTable = function(data) {
+		self.table.total_items = data.total;
+
+		// Set Page Count
+		var page_count = data.total / self.table.size;
+			page_count = (page_count < Constants.DEFAUL_PAGE) ? Constants.DEFAUL_PAGE : Math.ceil(page_count);
+		self.table.page_count = page_count;
 	}
 }

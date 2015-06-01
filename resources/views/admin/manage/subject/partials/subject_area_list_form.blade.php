@@ -75,38 +75,79 @@
 	 
 	<div class="col-xs-12 table-container">
 		<div class="list-container" ng-cloak>
-			<table id="client-list" datatable="ng" class="table table-striped table-hover dt-responsive">
-			<thead>
-		        <tr>
-		            <th>Area Code</th>
-		            <th>Area</th>
-		            <th>Description</th>
-		            <th>Action</th>
-		        </tr>
-	        </thead>
-	        <tbody>
-		        <tr ng-repeat="a in subject.subject_areas">
-		            <td>{! a.code !}</td>
-		            <td>{! a.name !}</td>
-		            <td>{! a.description !}</td>
-		            <td>
-		            	<div class="row">
-		            		<div class="col-xs-4">
-		            			{! a.status !}
-		            		</div>
-		            		<div class="col-xs-4">
-		            			<a href="" ng-click="subject.getSubjectAreaDetails(a.id)"><span><i class="fa fa-pencil"></i></span></a>
-		            		</div>
-		            		
-		            		<div class="col-xs-4">
-		            			<a href="" ng-click="subject.confirmDeleteSubjectArea(a.id)"><span><i class="fa fa-trash"></i></span></a>
-		            		</div>	
-		            	</div>
-		            </td>
-		        </tr>
-	        </tbody>
+			<div class="size-container">
+				{!! Form::select('size'
+					, array(
+						  '10' => '10'
+						, '20' => '20'
+						, '50' => '50'
+						, '100' => '100'
+					)
+					, '10'
+					, array(
+						'ng-model' => 'subject.table.size'
+						, 'ng-change' => 'subject.paginateBySize()'
+						, 'ng-if' => "subject.subject_areas.length"
+						, 'class' => 'form-control paginate-size pull-right'
+					)
+				) !!}
+			</div>
 
+			<table class="table table-striped table-bordered">
+				<thead>
+			        <tr>
+			            <th>Area Code</th>
+			            <th>Area</th>
+			            <th>Description</th>
+			            <th>Action</th>
+			        </tr>
+		        </thead>
+		        <tbody>
+			        <tr ng-repeat="a in subject.subject_areas">
+			            <td>{! a.code !}</td>
+			            <td>{! a.name !}</td>
+			            <td>{! a.description !}</td>
+			            <td>
+			            	<div class="row">
+			            		<div class="col-xs-4">
+			            			{! a.status !}
+			            		</div>
+			            		<div class="col-xs-4">
+			            			<a href="" ng-click="subject.getSubjectAreaDetails(a.id)"><span><i class="fa fa-pencil"></i></span></a>
+			            		</div>
+			            		
+			            		<div class="col-xs-4">
+			            			<a href="" ng-click="subject.confirmDeleteSubjectArea(a.id)"><span><i class="fa fa-trash"></i></span></a>
+			            		</div>	
+			            	</div>
+			            </td>
+			        </tr>
+			        <tr class="odd" ng-if="!subject.subject_areas.length && !subject.table.loading">
+			        	<td valign="top" colspan="4" class="dataTables_empty">
+			        		No records found
+			        	</td>
+			        </tr>
+			        <tr class="odd" ng-if="subject.table.loading">
+			        	<td valign="top" colspan="4" class="dataTables_empty">
+			        		Loading...
+			        	</td>
+			        </tr>
+		        </tbody>
 			</table>
+
+			<div class="pull-right" ng-if="subject.subjects.length">
+				<pagination 
+					total-items="subject.table.total_items" 
+					ng-model="subject.table.page"
+					max-size="3"
+					items-per-page="subject.table.size" 
+					previous-text = "&lt;"
+					next-text="&gt;"
+					class="pagination" 
+					boundary-links="true"
+					ng-change="subject.paginateByPage()">
+				</pagination>
+			</div>
 		</div>
 	</div>
 </div>

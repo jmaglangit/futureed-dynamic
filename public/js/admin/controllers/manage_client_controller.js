@@ -10,8 +10,8 @@ function ManageClientController($scope, apiService, manageClientService) {
 
 	// pagination object
 	self.table = {};
-	self.table.size = 10;
-	self.table.page = 1;
+	self.table.size = Constants.DEFAULT_SIZE;
+	self.table.page = Constants.DEFAULT_PAGE;
 
 	self.clients = [{}];
 	self.create = {};
@@ -57,12 +57,7 @@ function ManageClientController($scope, apiService, manageClientService) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					self.clients = response.data.records;
-					self.table.total_items = response.data.total;
-
-					// Set Page Count
-					var page_count = response.data.total / self.table.size;
-						page_count = (page_count < 1) ? 1 : Math.ceil(page_count);
-					self.table.page_count = page_count;
+					self.updateTable(response.data);
 				}
 			}
 
@@ -425,5 +420,14 @@ function ManageClientController($scope, apiService, manageClientService) {
 		self.table.offset = (page - 1) * self.table.size;
 
 		self.getClientList();
+	}
+
+	self.updateTable = function(data) {
+		self.table.total_items = data.total;
+
+		// Set Page Count
+		var page_count = data.total / self.table.size;
+			page_count = (page_count < Constants.DEFAULT_PAGE) ? Constants.DEFAULT_PAGE : Math.ceil(page_count);
+		self.table.page_count = page_count;
 	}
 }
