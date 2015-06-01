@@ -5,7 +5,7 @@ use FutureEd\Http\Requests\Api\ApiRequest;
 class ClientDiscountRequest extends ApiRequest {
 	
 	/**
-	 * Determine if the user is authorized to make this request.  client_discounts,client_id,NULL,id,deleted_at,NULL
+	 * Determine if the user is authorized to make this request.
 	 *
 	 * @return bool
 	 */
