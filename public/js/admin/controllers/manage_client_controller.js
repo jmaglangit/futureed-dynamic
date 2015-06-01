@@ -275,12 +275,25 @@ function ManageClientController($scope, apiService, manageClientService) {
 
 	function setClientRole() {
 		self.role = {};
-
+		
 		if(angular.equals(self.create.client_role, Constants.PRINCIPAL)) {
 			self.role.principal = Constants.TRUE;
 		} else if(angular.equals(self.create.client_role, Constants.PARENT)) {
 			self.role.parent = Constants.TRUE;
 		} else if(angular.equals(self.create.client_role, Constants.TEACHER)) {
+			self.role.teacher = Constants.TRUE;
+		}
+	}
+
+	self.updateClientRole = function() {
+		self.role = {};
+		
+		if(angular.equals(self.details.client_role, Constants.PRINCIPAL)) {
+			self.role.principal = Constants.TRUE;
+			console.log(self.role.principal);
+		} else if(angular.equals(self.details.client_role, Constants.PARENT)) {
+			self.role.parent = Constants.TRUE;
+		} else if(angular.equals(self.details.client_role, Constants.TEACHER)) {
 			self.role.teacher = Constants.TRUE;
 		}
 	}
