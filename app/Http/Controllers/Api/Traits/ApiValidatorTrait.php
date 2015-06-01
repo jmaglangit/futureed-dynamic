@@ -690,4 +690,27 @@ trait ApiValidatorTrait {
             }
     }
 
+    public function schoolCode($input, $school_code){
+
+        $validator = Validator::make(
+            [
+                "$school_code" => $input["$school_code"],
+            ],
+            [
+                "$school_code" => 'required|numeric|exist:schools,code'
+            ],
+            [
+                "exist" => config('futureed-error.error_messages.2602')
+            ]
+        );
+
+        if($validator->fails()){
+
+            return $this->setErrorCode(2602)
+                ->setField($school_code)
+                ->setMessage(2602)
+                ->errorMessage();
+        }
+    }
+
 }
