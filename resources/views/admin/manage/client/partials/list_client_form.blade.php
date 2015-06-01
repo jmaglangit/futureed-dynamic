@@ -12,6 +12,16 @@
 	</div>
 
 	<div class="col-xs-12 search-container">
+		<div class="alert alert-error" ng-if="client.errors">
+            <p ng-repeat="error in client.errors track by $index" > 
+                {! error !}
+            </p>
+        </div>
+        <div class="alert alert-success" ng-if="client.validate.c_success">
+            <p> 
+                {! client.validate.c_success !}
+            </p>
+        </div>
 		<div class="form-search">
 			{!! Form::open(
 				array('id' => 'search_form'
@@ -131,18 +141,18 @@
 			            <td>{! a.client_role !}</td>
 			            <td>
 			            	<div class="row">
-			            		<div class="col-xs-6">
+			            		<div class="col-xs-4">
 			            			<a href="" ng-click="client.setManageClientActive('view_client',a.id)"><span><i class="fa fa-eye"></i></span></a>
 			            		</div>
-			            		<div class="col-xs-6">
+			            		<div class="col-xs-4">
 			            			<a href="" ng-click="client.setManageClientActive('edit_client', a.id)"><span><i class="fa fa-pencil"></i></span></a>
 			            		</div>
-			            		<!-- <div class="col-xs-3">
+			            		{{-- <div class="col-xs-3">
 			            			<span><i class="fa fa-ban"></i></span>
-			            		</div>
-			            		<div class="col-xs-3">
-			            			<span><i class="fa fa-trash	"></i></span>
-			            		</div>	 -->
+			            		</div> --}}
+			            		<div class="col-xs-4">
+			            			<a href="" ng-click="client.confirmDelete(a.id)"><span><i class="fa fa-trash	"></i></span></a>
+			            		</div>	
 			            	</div>
 			            </td>
 			        </tr>
