@@ -109,10 +109,10 @@
 	            <td>
 	            	<div class="row">
 	            		<div class="col-xs-4">
-    						<a href="" ng-click="admin.viewAdmin(a.id)"><span><i class="fa fa-eye"></i></span></a>
+    						<a href="#" ng-click="admin.viewAdmin(a.id)"><span><i class="fa fa-eye"></i></span></a>
     					</div>
         				<div class="col-xs-4">
-        					<a href="" ng-click="admin.editModeAdmin(a.id)"><span><i class="fa fa-pencil"></i></span></a>
+        					<a href="#" ng-click="admin.editModeAdmin(a.id)"><span><i class="fa fa-pencil"></i></span></a>
         				</div>
         				<div class="col-xs-4">
         					<a href="" ng-click="admin.confirmDelete(a.id)"><span><i class="fa fa-trash"></i></span></a>
