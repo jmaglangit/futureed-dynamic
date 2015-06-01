@@ -150,7 +150,7 @@
 	        				, array(
 	        					'placeHolder' => 'School Name'
 	        					, 'ng-model' => 'client.create.school_name'
-	        					, 'ng-change' => 'client.searchSchool()'
+	        					, 'ng-change' => "client.searchSchool('create')"
                         		, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
 	        					, 'class' => 'form-control'
 	        				)

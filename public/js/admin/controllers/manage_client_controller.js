@@ -175,7 +175,6 @@ function ManageClientController($scope, apiService, manageClientService) {
 
 		if(!self.validation.s_error) {
 			$("input, select").removeClass("required-field");
-
 			$scope.ui_block();
 			manageClientService.updateClientDetails(self.details).success(function(response) {
 				if(angular.equals(response.status, Constants.STATUS_OK)) {
@@ -282,22 +281,27 @@ function ManageClientController($scope, apiService, manageClientService) {
 		}
 	}
 
-	function searchSchool() {
+	function searchSchool(method) {
 		self.schools = Constants.FALSE;
-		
+		self.method = method;
 		var school_name = '';
-		
-		if(self.create) {
-			school_name = self.create.school_name;
-			self.create.school_code = Constants.EMPTY_STR;
-		} else if(self.details) {
-			school_name = self.details.school_name;
-			self.details.school_code = Constants.EMPTY_STR;
+
+		switch(method){
+
+			case 'edit':
+				school_name = self.details.school_name;
+				self.details.school_code = Constants.EMPTY_STR;
+				break;
+
+			case 'create':
+			default:
+				school_name = self.create.school_name;
+				self.create.school_code = Constants.EMPTY_STR;
+				break;
 		}
 
 		self.validation.s_loading = Constants.TRUE;
-		self.validation.s_error = Constants.FALSE;		
-
+		self.validation.s_error = Constants.FALSE;
 		manageClientService.searchSchool(school_name).success(function(response) {
 			self.validation.s_loading = Constants.FALSE;
 
@@ -319,12 +323,18 @@ function ManageClientController($scope, apiService, manageClientService) {
 	}
 
 	function selectSchool(school) {
-		if(self.create) {
-			self.create.school_code = school.code;
-			self.create.school_name = school.name;
-		} else if(self.details) {
-			self.details.school_code = school.code;
-			self.details.school_name = school.name;
+		var method = self.method;
+		switch(method){
+			case 'edit':
+				self.details.school_code = school.code;
+				self.details.school_name = school.name;
+				break;
+
+			case 'create':
+			default:
+				self.create.school_code = school.code;
+				self.create.school_name = school.name;
+				break;
 		}
 
 		self.schools = Constants.FALSE;

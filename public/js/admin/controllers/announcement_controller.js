@@ -28,9 +28,9 @@ function AnnouncementController($scope, announcementApiService){
 
   function beforeDate($dates){
     var maxDate = new Date().setHours(0); // Set minimum date to whatever you want here
-
+    
     for(d in $dates){        
-        if($dates[d].utcDateValue < maxDate){
+        if($dates[d].utcDateValue <= maxDate){
             $dates[d].selectable = false;
         }
     }
