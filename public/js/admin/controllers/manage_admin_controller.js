@@ -12,10 +12,12 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 	this.val = {};
 	self.validation = {};
 	self.change = {};
+	self.delete = {};
 
 	this.getAdminList = getAdminList;
 	this.viewAdmin = viewAdmin;
 	self.editModeAdmin = editModeAdmin;
+	self.deleteModeAdmin = deleteModeAdmin;
 	this.saveAdmin = saveAdmin;
 	this.checkUsernameAvailability = checkUsernameAvailability;
 	this.checkEmailAvailability = checkEmailAvailability;
@@ -28,6 +30,7 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 	self.validateNewAdminEmail = validateNewAdminEmail;
 	self.confirmNewEmail = confirmNewEmail;
 	self.changeAdminEmail = changeAdminEmail;
+	self.confirmDelete = confirmDelete;
 
 	function getAdminList(){
 		var search_user = (self.search_user) ? self.search_user : Constants.EMPTY_STR;
@@ -145,7 +148,7 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 					}
 				}else if(response.data){
 					// in profile
-					if(response.data.id == self.admininfo.id) {
+					if(self.admininfo && response.data.id == self.admininfo.id) {
 						self.validation.u_success = Constants.TRUE;
 					} else {
 						self.validation.u_error = Constants.MSG_U_EXIST;
@@ -332,6 +335,39 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 		} else {
 			self.validation.c_success = Constants.TRUE;
 		}
+	}
+	function confirmDelete(id){
+		self.errors = Constants.FALSE;
+		self.delete.id = id;
+		self.delete.confirm = Constants.TRUE;
+		$("#delete_admin_modal").modal({
+	        backdrop: 'static',
+	        keyboard: Constants.FALSE,
+	        show    : Constants.TRUE
+	    });
+	}
+
+	function deleteModeAdmin(){
+		self.errors = Constants.FALSE;
+		self.validation.c_error = Constants.FALSE;
+		self.validation.c_success = Constants.FALSE;
+
+		$scope.ui_block();
+		manageAdminService.deleteModeAdmin(self.delete.id).success(function(response){
+			if(angular.equals(response.status,Constants.STATUS_OK)){
+				if(response.errors){
+					self.errors = $scope.errorHandler(response.errors);
+				}else if(response.data){
+					self.validation.c_success = 'User ' + Constants.DELETE_SUCCESS;
+					self.getAdminList();
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+		$("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 
 	function changeAdminEmail() {

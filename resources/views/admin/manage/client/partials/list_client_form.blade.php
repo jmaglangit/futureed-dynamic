@@ -41,7 +41,7 @@
 				<div class="col-xs-2">
 					{!! Form::button('Search'
 						,array(
-							'class' => 'btn btn-gold'
+							'class' => 'btn btn-blue'
 							, 'ng-click' => 'client.getClientList()'
 							)
 					)!!}
@@ -76,7 +76,7 @@
 				<div class="col-xs-2">
 					{!! Form::button('clear'
 						,array(
-							'class' => 'btn'
+							'class' => 'btn btn-gold'
 							, 'ng-click' => 'client.clearSearchForm()'
 							)
 					)!!}
@@ -97,40 +97,81 @@
 	 
 	<div class="col-xs-12 table-container">
 		<div class="list-container" ng-cloak>
-			<table id="client-list" datatable="ng" class="table table-striped table-hover dt-responsive">
-			<thead>
-		        <tr>
-		            <th>Name</th>
-		            <th>Email</th>
-		            <th>Role</th>
-		            <th>Action</th>
-		        </tr>
-	        </thead>
-	        <tbody>
-		        <tr ng-repeat="a in client.clients">
-		            <td>{! a.first_name !} {! a.last_name !}</td>
-		            <td>{! a.user.email !}</td>
-		            <td>{! a.client_role !}</td>
-		            <td>
-		            	<div class="row">
-		            		<div class="col-xs-6">
-		            			<a href="" ng-click="client.setManageClientActive('view_client',a.id)"><span><i class="fa fa-eye"></i></span></a>
-		            		</div>
-		            		<div class="col-xs-6">
-		            			<a href="" ng-click="client.setManageClientActive('edit_client', a.id)"><span><i class="fa fa-pencil"></i></span></a>
-		            		</div>
-		            		<!-- <div class="col-xs-3">
-		            			<span><i class="fa fa-ban"></i></span>
-		            		</div>
-		            		<div class="col-xs-3">
-		            			<span><i class="fa fa-trash	"></i></span>
-		            		</div>	 -->
-		            	</div>
-		            </td>
-		        </tr>
-	        </tbody>
+			<div class="size-container">
+				{!! Form::select('size'
+					, array(
+						  '10' => '10'
+						, '20' => '20'
+						, '50' => '50'
+						, '100' => '100'
+					)
+					, '10'
+					, array(
+						'ng-model' => 'client.table.size'
+						, 'ng-change' => 'client.paginateBySize()'
+						, 'ng-if' => "client.clients.length != '0'"
+						, 'class' => 'form-control paginate-size pull-right'
+					)
+				) !!}
+			</div>
 
+			<table class="table table-striped table-bordered" >
+				<thead>
+			        <tr>
+			            <th>Name</th>
+			            <th>Email</th>
+			            <th>Role</th>
+			            <th>Action</th>
+			        </tr>
+		        </thead>
+		         <tbody>
+			        <tr ng-repeat="a in client.clients">
+			            <td>{! a.first_name !} {! a.last_name !}</td>
+			            <td>{! a.user.email !}</td>
+			            <td>{! a.client_role !}</td>
+			            <td>
+			            	<div class="row">
+			            		<div class="col-xs-6">
+			            			<a href="" ng-click="client.setManageClientActive('view_client',a.id)"><span><i class="fa fa-eye"></i></span></a>
+			            		</div>
+			            		<div class="col-xs-6">
+			            			<a href="" ng-click="client.setManageClientActive('edit_client', a.id)"><span><i class="fa fa-pencil"></i></span></a>
+			            		</div>
+			            		<!-- <div class="col-xs-3">
+			            			<span><i class="fa fa-ban"></i></span>
+			            		</div>
+			            		<div class="col-xs-3">
+			            			<span><i class="fa fa-trash	"></i></span>
+			            		</div>	 -->
+			            	</div>
+			            </td>
+			        </tr>
+			        <tr class="odd" ng-if="client.clients.length == '0'">
+			        	<td valign="top" colspan="4" class="dataTables_empty">
+			        		No data available in table
+			        	</td>
+			        </tr>
+			        <tr class="odd" ng-if="client.table.loading">
+			        	<td valign="top" colspan="4" class="dataTables_empty">
+			        		Loading...
+			        	</td>
+			        </tr>
+		        </tbody>
 			</table>
+
+			<div class="pull-right" ng-if="client.table.page_count > 1">
+				<pagination 
+					total-items="client.table.total_items" 
+					ng-model="client.table.page"
+					max-size="3"
+					items-per-page="client.table.size" 
+					previous-text = "&lt;"
+					next-text="&gt;"
+					class="pagination" 
+					boundary-links="true"
+					ng-change="client.paginateByPage()">
+				</pagination>
+			</div>
 		</div>
 	</div>
 </div>

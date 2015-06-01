@@ -321,7 +321,13 @@ function SalesController($scope, salesService) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler();
 				} else if(response.data) {
-					self.data = response.data;
+					self.data.id 			= response.data.id;
+					self.data.client_id 	= response.data.client_id;
+					self.data.name 			= response.data.client.user.name;
+					self.data.email 		= response.data.client.user.email;
+					self.data.percentage 	= response.data.percentage;
+					self.data.status 		= response.data.status;
+
 					self.setDiscountsActive('client_discount_edit');
 				}
 			}

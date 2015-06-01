@@ -16,13 +16,15 @@ function manageClientService($http) {
 	*		search_school		- [Optional] the school code
 	*		search_client_role 	- [Optional] the client role
 	*/
-	manageClientApi.getClientList = function(search_name, search_email, search_school, search_client_role) {
+	manageClientApi.getClientList = function(search_name, search_email, search_school, search_client_role, table) {
 		return $http({
 			method 	: Constants.METHOD_GET
 			, url 	: manageClientApiUrl + 'client?name=' + search_name
 				+ "&email=" + search_email
 				+ "&school_code=" + search_school
 				+ "&client_role=" + search_client_role
+				+ "&limit=" + table.size
+				+ "&offset=" + table.offset
 		});
 	}
 
@@ -120,9 +122,8 @@ function manageClientService($http) {
 	*/
 	manageClientApi.searchSchool = function(school_name) {
 		return $http({
-			method 	: Constants.METHOD_POST
-			, data	: {school_name : school_name}
-			, url 	: manageClientApiUrl + 'school/search'
+			method 	: Constants.METHOD_GET
+			, url 	: manageClientApiUrl + 'school/search?school_name=' + school_name
 		});
 	}
 

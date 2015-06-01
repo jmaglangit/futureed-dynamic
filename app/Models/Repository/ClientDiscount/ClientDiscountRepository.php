@@ -56,7 +56,7 @@ class ClientDiscountRepository implements ClientDiscountRepositoryInterface {
 	 * @return object
 	 */
     public function getClientDiscount($id){
-        return ClientDiscount::find($id);
+        return ClientDiscount::with('client')->find($id);
     }
     
      /**

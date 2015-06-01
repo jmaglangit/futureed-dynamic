@@ -12,6 +12,16 @@
 	</div>
 
 	<div class="col-xs-12 search-container">
+		<div class="alert alert-error" ng-if="admin.errors">
+            <p ng-repeat="error in admin.errors track by $index" > 
+                {! error !}
+            </p>
+        </div>
+        <div class="alert alert-success" ng-if="admin.validation.c_success">
+            <p> 
+                {! admin.validation.c_success !}
+            </p>
+        </div>
 		<div class="form-search">
 			{!! Form::open(
 					[
@@ -20,19 +30,34 @@
 					]
 			) !!}
 			<div class="form-group">
-				<label class="col-xs-2 control-label">Username <span class="required">*</span></label>
 				<div class="col-xs-5">
-					{!! Form::text('search_name', '',['class' => 'form-control', 'ng-model' => 'admin.search_user', 'placeholder' => 'Username']) !!}
+					{!! Form::text('search_name', ''
+						, [
+							'class' => 'form-control'
+							, 'ng-model' => 'admin.search_user'
+							, 'placeholder' => 'Username'
+						]
+					) !!}
+				</div>
+				<div class="col-xs-5">
+					{!! Form::text('search_email', ''
+						, [
+							'class' => 'form-control'
+							, 'ng-model' => 'admin.search_email'
+							, 'placeholder' => 'Email'
+						]
+					) !!}
+				</div>
+				<div class="col-xs-2">
+					{!! Form::button('Search'
+						,array(
+							'class' => 'btn btn-blue'
+							, 'ng-click' => 'admin.getAdminList()'
+							)
+					)!!}
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-xs-2 control-label">Email <span class="required">*</span></label>
-				<div class="col-xs-5">
-					{!! Form::text('search_email', '',['class' => 'form-control', 'ng-model' => 'admin.search_email', 'placeholder' => 'Email']) !!}
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-xs-2 control-label">Role <span class="required">*</span></label>
 				<div class="col-xs-5">
 					{!! Form::select('role', 
 						array('' => '-- Select Role --' ,
@@ -42,9 +67,14 @@
 							['ng-model' => 'admin.search_role' , 'class' => 'form-control']
 					) !!}
 				</div>
-				<div class="btn-container col-xs-5">
-					<button class="btn btn-blue btn-medium" type="button" ng-click="admin.getAdminList()">Search</button>
-					<button class="btn btn-gold btn-medium" type="button" ng-click="admin.clearSearch()">Clear</button>
+				<div class="col-xs-5"></div>
+				<div class="col-xs-2">
+					{!! Form::button('clear'
+						,array(
+							'class' => 'btn btn-gold'
+							, 'ng-click' => 'admin.clearSearch()'
+							)
+					)!!}
 				</div>
 			</div>
 		</div>
@@ -78,11 +108,14 @@
 	            <td>{! a.admin_role !}</td>
 	            <td>
 	            	<div class="row">
-	            		<div class="col-xs-6">
+	            		<div class="col-xs-4">
     						<a href="" ng-click="admin.viewAdmin(a.id)"><span><i class="fa fa-eye"></i></span></a>
     					</div>
-        				<div class="col-xs-6">
+        				<div class="col-xs-4">
         					<a href="" ng-click="admin.editModeAdmin(a.id)"><span><i class="fa fa-pencil"></i></span></a>
+        				</div>
+        				<div class="col-xs-4">
+        					<a href="" ng-click="admin.confirmDelete(a.id)"><span><i class="fa fa-trash"></i></span></a>
         				</div>
 	            	</div>
 	            </td>

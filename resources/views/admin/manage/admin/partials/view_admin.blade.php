@@ -140,13 +140,13 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-xs-3 control-label">First Name <span class="required">*</span></label>
+				<label class="col-xs-3 control-label">Last Name <span class="required">*</span></label>
 				<div class="col-xs-4">
-					{!! Form::text('firstname','',
+					{!! Form::text('lastname','',
 						[
 							'class' => 'form-control',
 							'ng-disabled' => 'admin.active_view_admin',
-							'ng-model' => 'admin.admininfo.first_name',
+							'ng-model' => 'admin.admininfo.last_name',
 							'placeholder' => 'First Name'
 						]
 					) !!}

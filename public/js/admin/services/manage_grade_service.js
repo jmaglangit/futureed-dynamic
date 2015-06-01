@@ -46,7 +46,7 @@ function manageGradeService($http) {
 		});
 	}
 
-	fmanageGradeApi.deleteGrade = function(id) {
+	manageGradeApi.deleteGrade = function(id) {
 		return $http({
 			  method : 'DELETE'
 			, url 	 : manageGradeApiUrl + 'grade/' + id
