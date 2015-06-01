@@ -129,5 +129,12 @@ class AppServiceProvider extends ServiceProvider {
             'FutureEd\Models\Repository\VolumeDiscount\VolumeDiscountRepositoryInterface',
             'FutureEd\Models\Repository\VolumeDiscount\VolumeDiscountRepository'
         );
+
+        $this->app->bind(
+            'FutureEd\Models\Repository\Invoice\InvoiceRepositoryInterface',
+            'FutureEd\Models\Repository\Invoice\InvoiceRepository'
+        );
+
+       
 	}
 }
