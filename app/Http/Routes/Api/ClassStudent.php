@@ -8,4 +8,3 @@ Routes::group(['prefix' => '/class-student'], function()
     'uses' => 'Api\v1\ClassStudentController@addNewStudent',
     'as' => 'class-student.add.new.student']);
 });
-Routes::resource('/class-student','Api\v1\ClientDiscountController', ['except' => ['edit']]);
