@@ -33,7 +33,7 @@ class AdminRequest extends ApiRequest {
 		}
 		
 		$validation_rules = [
-					'username' => 'required|min:'.config('futureed.username_min').'|max:'.config('futureed.username_max').'|alpha_num|unique:users,username,NULL,id,user_type,'.config('futureed.admin'),
+					'username' => 'required|min:'.config('futureed.username_min').'|max:'.config('futureed.username_max').'|alpha_num|unique:users,username,NULL,id,user_type,'.config('futureed.admin').',deleted_at,NULL',
 					'admin_role' => 'required|in:Admin,Super Admin',
 					'status' => 'required|in:Enabled,Disabled',
 					'first_name' => 'required|regex:/^([a-z\x20])+$/i|max:'.config('futureed.first_name_max'),
@@ -50,7 +50,7 @@ class AdminRequest extends ApiRequest {
 			default:
 				
 				$validation_rules['password'] = 'required|min:'.config('futureed.password_min').'|max:'.config('futureed.password_max').'|custom_password';
-				$validation_rules['email'] = 'required|email|unique:users,email,NULL,id,user_type,'.config('futureed.admin');
+				$validation_rules['email'] = 'required|email|unique:users,email,NULL,id,user_type,'.config('futureed.admin').',deleted_at,NULL';
 						
 	        	break;
 		}
