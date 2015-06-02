@@ -25,6 +25,7 @@ class SubscriptionRequest extends ApiRequest {
         	    return ['name'          => 'required',
             			'price'         => 'required|numeric|min:0.01|max:999999.99',
             			'description'   => 'required',
+                        'days'          => 'required|Integer',
             			'status'        => 'required|in:Enabled,Disabled'];
     	    break;
 
@@ -49,6 +50,7 @@ class SubscriptionRequest extends ApiRequest {
                     'name'          => 'required',
                     'price'         => 'required|numeric|min:0.01|max:999999.99',
                     'description'   => 'required',
+                    'days'          => 'required|Integer',
                     'status'        => 'required|in:Enabled,Disabled'
                 ];
 
