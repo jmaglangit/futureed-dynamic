@@ -54,15 +54,23 @@ class AnnouncementController extends ApiController {
         $this->addMessageBag($this->validateString($input,'announcement'));
         $this->addMessageBag($this->validateDate($input,'date_start'));
         $this->addMessageBag($this->validateDate($input,'date_end'));
-        $this->addMessageBag($this->validateDateRange($input,'date_start','date_end'));
-        
+
         $msg_bag = $this->getMessageBag();
         
         if(!empty($msg_bag)){
             return $this->respondWithError($this->getMessageBag());
         }
-        
-        $result = $this->announcement->updateAnnouncement($input);
-        return $this->respondWithData($result);
+
+        $date_start = Carbon::parse($input['date_start'])->toDateTimeString();
+        $date_end = Carbon::parse($input['date_end'])->toDateTimeString();
+
+        if($date_start <= $date_end && $date_end >= $date_start && $date_start >= Carbon::today()){
+
+            $result = $this->announcement->updateAnnouncement($input);
+            return $this->respondWithData($result);
+        } else {
+
+            return $this->respondErrorMessage(2500);
+        }
     }
 }

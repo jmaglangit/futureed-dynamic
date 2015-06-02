@@ -5,11 +5,14 @@ function manageAdminService($http) {
 	var adminApiUrl = '/api/v1/';
 	var manageAdminApi = {};
 
-	manageAdminApi.getAdminList = function(user, email, role){
+	manageAdminApi.getAdminList = function(user, email, role, table){
 		return $http({
 			method 	: Constants.METHOD_GET
 			, url 	: adminApiUrl + 'admin?username=' + user
-				+ '&email=' + email + '&role=' + role
+				+ '&email=' + email 
+				+ '&role=' + role
+				+ '&limit=' + table.size
+				+ '&offset=' + table.offset
 		});
 	}
 

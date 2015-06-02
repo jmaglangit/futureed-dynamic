@@ -2,6 +2,7 @@
 
 angular.module('futureed', [
   'ngCookies',
+  'ui.bootstrap',
 	'futureed.services',
 	'futureed.controllers',
   'ui.bootstrap.datetimepicker'
