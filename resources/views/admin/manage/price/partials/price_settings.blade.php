@@ -140,7 +140,25 @@
 	</div>
 
 	<div class="list-container" ng-cloak>
-		<table id="client-list" datatable="ng" class="table table-striped table-hover dt-responsive">
+		<div class="size-container">
+			{!! Form::select('size'
+				, array(
+					  '10' => '10'
+					, '20' => '20'
+					, '50' => '50'
+					, '100' => '100'
+				)
+				, '10'
+				, array(
+					'ng-model' => 'sale.table.size'
+					, 'ng-change' => 'sale.paginateBySize()'
+					, 'ng-if' => "sale.price.length"
+					, 'class' => 'form-control paginate-size pull-right'
+				)
+			) !!}
+		</div>
+
+		<table id="price-list" class="table table-striped table-bordered">
 			<thead>
 	        <tr>
 	            <th>Subscription Name</th>
@@ -157,8 +175,7 @@
 	            <td>
 	            	<div class="row">
 	            		<div class="col-xs-4">
-	            			<i ng-if="p.status == 'Disabled'" title="Enable" class="fa success-icon fa-check-circle-o"></i>
-            				<i ng-if="p.status == 'Enabled'" title="Disable" class="fa error-icon fa-ban"></i>
+	            			{! p.status !}
 	            		</div>
 	            		<div class="col-xs-4">
 	            			<a href="" ng-click="sale.getPrice(p.id)"><span><i class="fa fa-pencil"></i></span></a>
@@ -169,8 +186,26 @@
 	            	</div>
 	            </td>
 	        </tr>
+	        <tr class="odd" ng-if="!sale.price.length">
+	        	<td valign="top" colspan="4" class="dataTables_empty">
+	        		No records found
+	        	</td>
+	        </tr>
 	        </tbody>
-
 		</table>
+
+		<div class="pull-right" ng-if="sale.price.length">
+			<pagination 
+				total-items="sale.table.total_items" 
+				ng-model="sale.table.page"
+				max-size="3"
+				items-per-page="sale.table.size" 
+				previous-text = "&lt;"
+				next-text="&gt;"
+				class="pagination" 
+				boundary-links="true"
+				ng-change="sale.paginateByPage()">
+			</pagination>
+		</div>
 	</div>
 </div>
