@@ -163,7 +163,7 @@
 	            			, [	  
 		        				'class' => 'form-control'
 		        				, 'ng-model' => 'client.details.client_role'
-		        				, 'ng-disabled' => 'client.active_view_client'
+		        				, 'ng-disabled' => 'true'
 		        				, 'ng-change'=> 'client.updateClientRole()'
 		        			  ]	
 	        			) !!}
