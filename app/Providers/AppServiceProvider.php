@@ -129,18 +129,6 @@ class AppServiceProvider extends ServiceProvider {
             'FutureEd\Models\Repository\VolumeDiscount\VolumeDiscountRepositoryInterface',
             'FutureEd\Models\Repository\VolumeDiscount\VolumeDiscountRepository'
         );
-<<<<<<< Updated upstream
-=======
 
-        $this->app->bind(
-            'FutureEd\Models\Repository\Invoice\InvoiceRepositoryInterface',
-            'FutureEd\Models\Repository\Invoice\InvoiceRepository'
-        );
-
-        $this->app->bind(
-            'FutureEd\Models\Repository\InvoiceDetail\InvoiceDetailRepositoryInterface',
-            'FutureEd\Models\Repository\InvoiceDetail\InvoiceDetailRepository'
-        );
->>>>>>> Stashed changes
 	}
 }
