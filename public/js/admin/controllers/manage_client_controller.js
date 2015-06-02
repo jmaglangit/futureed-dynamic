@@ -10,8 +10,8 @@ function ManageClientController($scope, apiService, manageClientService) {
 
 	// pagination object
 	self.table = {};
-	self.table.size = 10;
-	self.table.page = 1;
+	self.table.size = Constants.DEFAULT_SIZE;
+	self.table.page = Constants.DEFAULT_PAGE;
 
 	self.clients = [{}];
 	self.create = {};
@@ -61,12 +61,7 @@ function ManageClientController($scope, apiService, manageClientService) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					self.clients = response.data.records;
-					self.table.total_items = response.data.total;
-
-					// Set Page Count
-					var page_count = response.data.total / self.table.size;
-						page_count = (page_count < 1) ? 1 : Math.ceil(page_count);
-					self.table.page_count = page_count;
+					self.updateTable(response.data);
 				}
 			}
 
@@ -280,12 +275,25 @@ function ManageClientController($scope, apiService, manageClientService) {
 
 	function setClientRole() {
 		self.role = {};
-
+		
 		if(angular.equals(self.create.client_role, Constants.PRINCIPAL)) {
 			self.role.principal = Constants.TRUE;
 		} else if(angular.equals(self.create.client_role, Constants.PARENT)) {
 			self.role.parent = Constants.TRUE;
 		} else if(angular.equals(self.create.client_role, Constants.TEACHER)) {
+			self.role.teacher = Constants.TRUE;
+		}
+	}
+
+	self.updateClientRole = function() {
+		self.role = {};
+		
+		if(angular.equals(self.details.client_role, Constants.PRINCIPAL)) {
+			self.role.principal = Constants.TRUE;
+			console.log(self.role.principal);
+		} else if(angular.equals(self.details.client_role, Constants.PARENT)) {
+			self.role.parent = Constants.TRUE;
+		} else if(angular.equals(self.details.client_role, Constants.TEACHER)) {
 			self.role.teacher = Constants.TRUE;
 		}
 	}
@@ -441,7 +449,16 @@ function ManageClientController($scope, apiService, manageClientService) {
 		self.getClientList();
 	}
 
-	function confirmDelete(id){
+	self.updateTable = function(data) {
+		self.table.total_items = data.total;
+
+		// Set Page Count
+		var page_count = data.total / self.table.size;
+			page_count = (page_count < Constants.DEFAULT_PAGE) ? Constants.DEFAULT_PAGE : Math.ceil(page_count);
+		self.table.page_count = page_count;
+	}
+	
+	function confirmDelete(id) {
 		self.errors = Constants.FALSE;
 		self.delete.id = id;
 		self.delete.confirm = Constants.TRUE;
@@ -452,7 +469,7 @@ function ManageClientController($scope, apiService, manageClientService) {
 	    });
 	}
 
-	function deleteModeClient(){
+	function deleteModeClient() {
 		self.errors = Constants.FALSE;
 		self.validate.c_error = Constants.FALSE;
 		self.validate.c_success = Constants.FALSE;
@@ -472,6 +489,7 @@ function ManageClientController($scope, apiService, manageClientService) {
 			$scope.ui_unblock();
 			self.errors = $scope.internalError();
 		});
+
 		$("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 }
