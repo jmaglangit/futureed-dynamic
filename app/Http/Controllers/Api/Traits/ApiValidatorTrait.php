@@ -590,7 +590,6 @@ trait ApiValidatorTrait {
     }
     
     public function validateDateRange($input,$date_start,$date_end){
-
         $error_msg = config('futureed-error.error_messages');
         $validator = Validator::make(
             [
@@ -604,9 +603,7 @@ trait ApiValidatorTrait {
                 "before" => $error_msg[2500],
                 "after" =>$error_msg[2500]
             ]);
-
         if($validator->fails()){
-
             $validator_msg = $validator->messages()->toArray();
 
             return $this->setErrorCode(1005)
