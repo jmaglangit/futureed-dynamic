@@ -1,4 +1,4 @@
-<div ng-if="!teacher.client_list && teacher.view_form">
+<div ng-if="teacher.active_view || teacher.active_edit">
 	<div class="content-title">
 		<div class="title-main-content">
 			<span ng-show="teacher.view">View Teacher</span>

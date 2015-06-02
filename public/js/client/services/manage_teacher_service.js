@@ -1,31 +1,30 @@
 angular.module('futureed.services')
 	.factory('manageTeacherService', manageTeacherService);
 
+manageTeacherService.$inject = ['$http'];
+
 function manageTeacherService($http){
-
-	var teacherApiUrl = '/api/v1/';
 	var manageTeacherApi = {};
+	var teacherApiUrl = '/api/v1/';
 
-	manageTeacherApi.getTeacherList = getTeacherList;
-	manageTeacherApi.viewTeacher = viewTeacher;
-	manageTeacherApi.saveTeacher = saveTeacher;
-
-	function getTeacherList(name, email){
+	manageTeacherApi.list = function(search, table){
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url 	: teacherApiUrl + 'client/teacher?name=' + name
-				+ '&email=' + email
+			, url 	: teacherApiUrl + 'client/teacher?name=' + search.name
+				+ '&email=' + search.email
+				+ '&limit=' + table.size
+				+ '&offset=' + table.offset
 		});
 	}
 
-	function viewTeacher(id){
+	manageTeacherApi.details = function(id){
 		return $http({
 			method 	: Constants.METHOD_GET
 			, url 	: teacherApiUrl + 'client/teacher/'+ id
 		});
 	}
 
-	function saveTeacher(data){
+	manageTeacherApi.save = function(data){
 		return $http({
 			method 	: Constants.METHOD_POST
 			, data 	: data 

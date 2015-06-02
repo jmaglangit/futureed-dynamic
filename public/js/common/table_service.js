@@ -11,6 +11,7 @@ function TableService($http) {
 	    		scope.table = {};
 	    		scope.table.size = Constants.DEFAULT_SIZE;
 				scope.table.page = Constants.DEFAULT_PAGE;
+				scope.table.offset = (scope.table.page - 1) * scope.table.size;
 	    	}
 
 			, paginateByPage: function() {
