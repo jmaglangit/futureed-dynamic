@@ -1,11 +1,14 @@
 angular.module('futureed.controllers')
 	.controller('SalesController', SalesController);
 
-SalesController.$inject = ['$scope','salesService'];
+SalesController.$inject = ['$scope','salesService', 'TableService'];
 
-function SalesController($scope, salesService) {
+function SalesController($scope, salesService, TableService) {
 
 	var self 			= this;
+
+	TableService(self);
+	self.tableDefaults();
 
 	self.price 			= [{}];
 	self.data			= {};
@@ -42,15 +45,18 @@ function SalesController($scope, salesService) {
 
 		switch(active) {
 			case	'client_discount_list' :
+				self.tableDefaults();
 				self.setDiscountsActive('client_discount_list');
 				break;
 
 			case	'bulk_settings_list' :
+				self.tableDefaults();
 				self.setDiscountsActive('bulk_settings_list');
 				break;
 					
 			case	'price_settings_list' :
 			default	:
+				self.tableDefaults();
 				self.setDiscountsActive('price_settings_list');
 				break;
 		}
@@ -130,17 +136,35 @@ function SalesController($scope, salesService) {
 	/**
 	* Get Price List
 	*/
+
+	self.list = function() {
+		if(self.active_price_settings_list) {
+			self.getPriceList();
+		} else if(self.active_client_discount_list) {
+			self.getDiscountList();
+		} else if(self.active_bulk_settings_list) {
+			self.getBulkList();
+		}
+	}
+
 	function getPriceList(){
-		salesService.getPriceList().success(function(response){
+		self.errors = Constants.FALSE;
+
+		$scope.ui_block();
+		salesService.getPriceList(self.table).success(function(response){
 			if(angular.equals(response.status, Constants.STATUS_OK)){
 				if(response.errors){
 					self.errors = $scope.errorHandler(response.errors);
 				}else if(response.data){
 					self.price = response.data.records
+					self.updatePageCount(response.data);
 				}
 			}
+
+			$scope.ui_unblock();
 		}).error(function(response){
 			self.errors = $scope.internalError();
+			$scope.ui_unblock();
 		});
 	}
 
@@ -258,16 +282,17 @@ function SalesController($scope, salesService) {
 	/**
 	* Client Discounts
 	*/
-	function getDiscountList(data) {
+	function getDiscountList() {
 		self.errors = Constants.FALSE;
 
 		$scope.ui_block();
-		salesService.getDiscountList().success(function(response) {
+		salesService.getDiscountList(self.table).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if (response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					self.discounts = response.data.records;
+					self.updatePageCount(response.data);
 				}
 			}
 
@@ -474,12 +499,13 @@ function SalesController($scope, salesService) {
 		self.errors = Constants.FALSE;
 
 		$scope.ui_block();
-		salesService.getBulkList().success(function(response){
+		salesService.getBulkList(self.table).success(function(response){
 			if(angular.equals(response.status,Constants.STATUS_OK)){
 				if(response.errors){
 					self.errors = $scope.errorHandler(response.errors);
 				}else if(response.data){
 					self.bulk = response.data.records;
+					self.updatePageCount(response.data);
 				}
 			}
 

@@ -5,6 +5,12 @@
 		</div>
 	</div>
 
+	<div class="col-xs-12 success-container" ng-if="area.delete_area.success">
+            <div class="alert alert-success">
+                <p>{! area.delete_area.success !}</p>
+            </div>
+    </div>
+
 	<div class="col-xs-12 padding-0-30">
 		<div class="title-mid">
 			Search
@@ -34,7 +40,7 @@
 					{!! Form::button('Search'
 						,array(
 							'class' => 'btn btn-blue'
-							, 'ng-click' => 'area.list()'
+							, 'ng-click' => 'area.searchFnc()'
 						)
 					)!!}
 				</div>

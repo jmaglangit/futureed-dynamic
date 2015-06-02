@@ -17,13 +17,13 @@ function TableService($http) {
 			, paginateByPage: function() {
 				var page = scope.table.page;
 		
-				scope.table.page = (page < 1) ? 1 : page;
+				scope.table.page = (page < Constants.DEFAULT_PAGE) ? Constants.DEFAULT_PAGE : page;
 				scope.table.offset = (page - 1) * scope.table.size;
 				scope.list();
 			}
 
 			, paginateBySize: function() {
-				scope.table.page = 1;
+				scope.table.page = Constants.DEFAULT_PAGE;
 				scope.table.offset = (scope.table.page - 1) * scope.table.size;
 				scope.list();
 			}
