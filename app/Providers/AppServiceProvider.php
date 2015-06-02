@@ -129,6 +129,5 @@ class AppServiceProvider extends ServiceProvider {
             'FutureEd\Models\Repository\VolumeDiscount\VolumeDiscountRepositoryInterface',
             'FutureEd\Models\Repository\VolumeDiscount\VolumeDiscountRepository'
         );
-
 	}
 }
