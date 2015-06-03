@@ -12,6 +12,12 @@
 			</p>
 		</div>
 
+		<div class="alert alert-success" ng-if="teacher.record.success">
+			<p>
+				{! teacher.record.success !}
+			</p>
+		</div>
+
 			{!! Form::open([
 					'id' => 'add_teacher_form',
 					'class' => 'form-horizontal'
@@ -30,6 +36,7 @@
 							'ng-model' => 'teacher.record.email',
 							'ng-model-options' => "{ debounce : {'default' : 1000} }",
 							'ng-change' => 'teacher.checkEmailAvailability()',
+							'autocomplete' => 'off',
 							'class' => 'form-control'
 						)
 					) !!}
@@ -46,17 +53,18 @@
 					{!! Form::text('username', ''
 						, array(
 							'placeholder' => 'Username',
-							'ng-model' => 'teacher.reg.username',
+							'ng-model' => 'teacher.record.username',
 							'ng-model-options' => "{ debounce : {'default' : 1000} }",
 							'ng-change' => 'teacher.checkUsernameAvailability()',
+							'autocomplete' => 'off',
 							'class' => 'form-control'
 						)
 					) !!}
 				</div>
-				<div>
-					<span class="error-msg-con" ng-if="teacher.val.a_error">{! teacher.val.a_error !}</span>
-					<i class="fa fa-spinner fa-spin" ng-if="teacher.a_loading"></i>
-					<span ng-if="teacher.a_success" class="error-msg-con success-color">Username is available.</span>
+				<div class="margin-top-8">
+					<span class="error-msg-con" ng-if="teacher.validation.u_error">{! teacher.validation.u_error !}</span>
+					<i class="fa fa-spinner fa-spin" ng-if="teacher.validation.u_loading"></i>
+					<span ng-if="teacher.validation.u_success" class="error-msg-con success-color">Username is available.</span>
 				</div>
 			</div>
 		</fieldset>
@@ -70,7 +78,7 @@
 					{!! Form::text('first_name','',
 						[
 							'class' => 'form-control',
-							'ng-model' => 'teacher.reg.first_name',
+							'ng-model' => 'teacher.record.first_name',
 							'placeholder' => 'First Name'
 						]
 					) !!}
@@ -82,7 +90,7 @@
 					{!! Form::text('last_name','',
 						[
 							'class' => 'form-control',
-							'ng-model' => 'teacher.reg.last_name',
+							'ng-model' => 'teacher.record.last_name',
 							'placeholder' => 'Last Name'
 						]
 					) !!}

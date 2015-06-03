@@ -16,6 +16,8 @@
 			<div template-directive template-url="{!! route('client.teacher.partials.add_teacher_form') !!}"></div>
 
 			<div template-directive template-url="{!! route('client.teacher.partials.view_teacher_form') !!}"></div>
+			
+			<div template-directive template-url="{!! route('client.teacher.partials.delete_teacher_form') !!}"></div>
 		</div>
 	</div>
 
@@ -27,4 +29,5 @@
 	{!! Html::script('/js/client/services/manage_teacher_service.js')!!}
 	{!! Html::script('/js/common/table_service.js')!!}
 	{!! Html::script('/js/common/search_service.js')!!}
+	{!! Html::script('/js/client/constants/teacher_constants.js')!!}
 @stop

@@ -4,6 +4,13 @@
 			<span>Teacher Management</span>
 		</div>
 	</div>
+
+	<div class="col-xs-12 success-container" ng-if="teacher.delete_teacher.success">
+            <div class="alert alert-success">
+                <p>{! teacher.delete_teacher.success !}</p>
+            </div>
+    </div>
+
 	<div class="col-xs-12">
 		<div class="title-mid mid-container">
 			Search
@@ -41,7 +48,7 @@
 					{!! Form::button('Search', 
 						array(
 							'class' => 'btn btn-blue'
-							, 'ng-click' => 'teacher.list()'
+							, 'ng-click' => 'teacher.searchFnc()'
 						)
 					) !!}
 				</div>
@@ -106,13 +113,13 @@
 			            			{! t.user.status !}
 			            		</div>
 			            		<div class="col-xs-3">
-			            			<a href="" ng-click="teacher.view(t.id)"><span><i class="fa fa-eye"></i></span></a>
+			            			<a href="" ng-click="teacher.setActive('view', t.id)"><span><i class="fa fa-eye"></i></span></a>
 			            		</div>
 			            		<div class="col-xs-3">
-			            			<a href="" ng-click="teacher.edit(t.id)"><span><i class="fa fa-pencil"></i></span></a>
+			            			<a href="" ng-click="teacher.setActive('edit', t.id)"><span><i class="fa fa-pencil"></i></span></a>
 			            		</div>
 			            		<div class="col-xs-3">
-			            			<a href="" ng-click="client.confirmDelete(t.id)"><span><i class="fa fa-trash	"></i></span></a>
+			            			<a href="" ng-click="teacher.confirmDelete(t.id)"><span><i class="fa fa-trash	"></i></span></a>
 			            		</div>
 			            	</div>
 						</td>

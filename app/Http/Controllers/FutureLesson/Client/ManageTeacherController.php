@@ -40,4 +40,12 @@ class ManageTeacherController extends Controller{
 	{
 		return view('client.teacher.partials.view_teacher_form');
 	}
+
+	/**
+	* @return partial teacher delete view
+	*/
+	public function delete_teacher_form() 
+	{
+		return view('client.teacher.partials.delete_teacher_form');
+	}
 }

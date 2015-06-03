@@ -7,7 +7,7 @@ function manageTeacherService($http){
 	var manageTeacherApi = {};
 	var teacherApiUrl = '/api/v1/';
 
-	manageTeacherApi.list = function(search, table){
+	manageTeacherApi.list = function(search, table) {
 		return $http({
 			method 	: Constants.METHOD_GET
 			, url 	: teacherApiUrl + 'client/teacher?name=' + search.name
@@ -17,20 +17,35 @@ function manageTeacherService($http){
 		});
 	}
 
-	manageTeacherApi.details = function(id){
+	manageTeacherApi.details = function(id) {
 		return $http({
 			method 	: Constants.METHOD_GET
 			, url 	: teacherApiUrl + 'client/teacher/'+ id
 		});
 	}
 
-	manageTeacherApi.save = function(data){
+	manageTeacherApi.update = function(data) {
+		return $http({
+			method 	: Constants.METHOD_PUT
+			, data	: data
+			, url 	: teacherApiUrl + 'client/teacher/'+ data.id
+		});
+	}
+
+	manageTeacherApi.save = function(data) {
 		return $http({
 			method 	: Constants.METHOD_POST
 			, data 	: data 
 			, url 	: teacherApiUrl + 'client/teacher'
 		});
 	}	
+
+	manageTeacherApi.delete = function(id) {
+		return $http({
+			method 	: Constants.METHOD_DELETE
+			, url 	: teacherApiUrl + 'client/teacher/' + id
+		});
+	}
 
 
 	return manageTeacherApi;
