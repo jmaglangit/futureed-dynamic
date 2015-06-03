@@ -7,16 +7,6 @@ use FutureEd\Models\Repository\User\UserRepository;
 
 class ClassStudentRepository implements ClassStudentRepositoryInterface{
     
-    public function checkUserIfExist($email,$user_type){
-        $user = UserRepository::checkEmail($email,$user_type);
-        
-        if(!is_null($user)){
-            
-        }else{
-            
-        }
-    }
-    
     public function getClassStudents($criteria = array(), $limit = 0, $offset = 0){
        
     }
