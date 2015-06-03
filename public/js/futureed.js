@@ -1,16 +1,15 @@
 'use strict';
 
 angular.module('futureed', [
-  'ngRoute',
+  'ngCookies',
+  'ui.bootstrap',
 	'futureed.services',
 	'futureed.controllers',
   'ui.bootstrap.datetimepicker'
 ]).config(['$interpolateProvider'
         , '$httpProvider'
-        , '$routeProvider'
-        , '$locationProvider'
-  , function($interpolateProvider, $httpProvider, $routeProvider, $locationProvider) {
-	
+  , function($interpolateProvider, $httpProvider) {
+
   $interpolateProvider.startSymbol('{!');
   $interpolateProvider.endSymbol('!}');
 
@@ -58,6 +57,24 @@ angular.module('futureed', [
     return angular.isObject(data) && String(data) !== '[object File]' ? param(data) : data;
   }];
 
-  $httpProvider.interceptors.push('httpInterceptor');
+  $httpProvider.interceptors.push(['$q', '$cookies', '$cookieStore', function ($q, $cookies, $cookieStore) {
+      return {
+          'request' : function(config) {
+            if(localStorage.authorization) {
+              config.headers.authorization = localStorage.authorization;
+            }
+
+            return config;
+          } 
+
+          , 'response': function (response) {
+              if(response && response.headers("authorization")) {
+                localStorage.authorization = response.headers("authorization");
+              }
+
+              return response;
+          }
+      };
+  }]);
 
 }]);

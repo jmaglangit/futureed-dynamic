@@ -2,12 +2,14 @@
 
 @section('content')
 <div class="container login student-fnt" ng-cloak>
+    <div template-directive template-url="{!! route('student.partials.base_url') !!}"></div>
+    
     <div class="form-style register_student form-wide" ng-init="success={!! $success !!}" ng-show="!success"> 
         {!! Form::open(array('id' => 'registration_form' , 'class' => 'form-horizontal simple-form')) !!}
             <div class="form-header">
                 <div class="media">
                     <div class="media-left">
-                        {!! Html::image('images/user_parent.jpg') !!}
+                        {!! Html::image('/images/user_student.png') !!}
                     </div>
                     <div class="media-body">
                         <h2 class="box-title"><span class="thin">Student</span> Registration</h2>
@@ -147,9 +149,9 @@
                     <div class="form-group" ng-init="getCountries()">
                         <label for="" class="col-md-2 control-label">Country<span class="required">*</span></label>
                         <div class="col-md-4">
-                            <select name="country" class="form-control" ng-model="reg.country">
+                            <select name="country" class="form-control" ng-model="reg.country" ng-change="getGrades(reg.country)">
                                 <option value="">-- Select Country --</option>
-                                <option ng-repeat="country in countries" value="{! country.id !}">{! country.name!}</option>
+                                <option ng-repeat="country in countries" value="{! country.name !}">{! country.name!}</option>
                             </select>
                         </div>
                     </div>
@@ -230,8 +232,6 @@
     @include('student.login.privacy-policy')
 </div>
 @stop
-
-@section('footer')
 
 @section('scripts')
   

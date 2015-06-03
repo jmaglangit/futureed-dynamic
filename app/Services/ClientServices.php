@@ -100,16 +100,17 @@ class ClientServices {
         return $this->client->verifyClientId($id);
     }
 
-    public function getclientDetails($id){
+    public function getClientDetails($id){
 
-        return $this->client->getclientDetails($id);
+        return $this->client->getClientDetails($id);
     }
+
 
     public function formResponse($user,$client){
 
         foreach ($user as $key => $value) {
             
-                if(in_array($key,['username','email','new_email'])){
+                if(in_array($key,['username','email','new_email','status'])){
 
                     $userData[$key] = $value;
 
@@ -119,7 +120,7 @@ class ClientServices {
         if($client['client_role'] == 'Parent'){
 
             $clientOutput = ['id','first_name','last_name','street_address',
-                            'city','state','country','zip','client_role'];
+                            'city','state','country','zip','client_role','account_status'];
 
             foreach ($client as $key => $value) {
             
@@ -136,12 +137,12 @@ class ClientServices {
              $school = $this->school->getSchoolDetails($client['school_code'])->toArray();
 
              $clientOutput = ['id','first_name','last_name','street_address',
-                            'city','state','country','zip','client_role','school_code'];
+                            'city','state','country','zip','client_role','school_code','account_status'];
 
             if($client['client_role'] == 'Principal'){
     
                 $schoolOutput = ['name','street_address','city',
-                                 'state','country','zip'];
+                                 'state','country','zip','contact_name','contact_number','account_status'];
 
             }else{
                 
@@ -175,6 +176,28 @@ class ClientServices {
 
         $this->client->updateClientDetails($id,$clientData);
 
+
+    }
+    
+    public function getClients($criteria, $limit, $offset) {
+	   return $this->client->getClients($criteria, $limit, $offset);
+    }
+
+    public function getClassroom($id){
+
+       return $this->client-> getClassroom($id);
+
+    }
+
+    public function getStudent($id){
+
+        return $this->client->getStudent($id);
+
+    }
+
+    public function deleteClient($id){
+
+        return $this->client->deleteClient($id);
 
     }
 

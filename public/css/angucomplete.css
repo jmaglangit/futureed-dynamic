@@ -1,0 +1,30 @@
+.angucomplete-holder {
+    position: relative;
+}
+
+.angucomplete-dropdown {
+    border-color: #ececec;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 0px 0px 7px 7px;
+    width: 100%;
+    padding: 6px;
+    cursor: pointer;
+    position: absolute;
+    z-index: 9999;
+    margin-top: -6px;
+    background-color: #ffffff;
+    max-height: 250px;
+    overflow: scroll;
+}
+
+.angucomplete-row {
+    padding: 5px;
+    margin-bottom: 4px;
+    list-style: none;
+}
+
+.angucomplete-selected-row, .angucomplete-row:hover {
+    background-color: lightblue;
+    color: #ffffff;
+}

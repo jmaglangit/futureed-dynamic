@@ -1,53 +1,40 @@
-var services = angular.module('futureed.services', ['ngResource']);
+var services = angular.module('futureed.services', []);
 
 	services.factory('apiService', function($http) {
-		
 		var futureedAPI = {};
 		var futureedAPIUrl = '/api/v1/';
 
-		futureedAPI.clientLogin = clientLogin;
-		futureedAPI.registerClient = registerClient;
-		futureedAPI.resetClientPassword = resetClientPassword;
-
-		function clientLogin(username, password, role) {
-			return $http({
-				method	: 'POST'
-				, data 	: {username : username, password : password, role : role}
-				, url	: futureedAPIUrl + 'client/login'
-			});
-		}
-
-		function registerClient(data) {
-			return $http({
-				method	: 'POST'
-				, data	: data
-				, url 	: futureedAPIUrl + 'client/register'
-			});
-		}
-
-		function resetClientPassword(id, reset_code, password) {
-			return $http({
-				method 	: 'POST'
-				, data 	: {reset_code : reset_code, password : password}
-				, url	: futureedAPIUrl + 'client/password/' + id
-			});
-		}
-
-
 		/**
-		* Student Services
+		* Common API Calls
 		*/
 
-		futureedAPI.resendConfirmation = resendConfirmation;
+		futureedAPI.forgotPassword = function(username, user_type, callback_uri) {
+			return $http({
+				method 	: Constants.METHOD_POST
+				, data	: {username: username, user_type : user_type, callback_uri : callback_uri}
+				, url	: futureedAPIUrl + 'user/password/forgot'
+			});
+		}
 
-		function resendConfirmation(email, user_type) {
+		futureedAPI.resendResetCode = function(email, user_type, callback_uri) {
+			return $http({
+				method 	: Constants.METHOD_POST
+				, data	: {email: email, user_type : user_type, callback_uri : callback_uri}
+				, url	: futureedAPIUrl + 'user/reset/code'
+			});
+		}
+
+		futureedAPI.resendConfirmation = function(email, user_type, callback_uri) {
 			return $http({
 				method	: 'POST'
-				, data 	: {email : email, user_type : user_type}
+				, data 	: {email : email, user_type : user_type, callback_uri : callback_uri}
 				, url	: futureedAPIUrl + 'user/confirmation/code'
 			});
 		}
 
+		/**
+		* Student Services
+		*/
 		futureedAPI.updateUserSession = function(user) {
 			return $http({
 				method	: 'POST',
@@ -87,22 +74,6 @@ var services = angular.module('futureed.services', ['ngResource']);
 			});
 		}
 
-		futureedAPI.forgotPassword = function(username, user_type) {
-			return $http({
-				method 	: 'POST'
-				, data	: {username: username, user_type : user_type}
-				, url	: futureedAPIUrl + 'user/password/forgot'
-			});
-		}
-
-		futureedAPI.resendResetCode = function(email, user_type) {
-			return $http({
-				method 	: 'POST'
-				, data	: {email: email, user_type : user_type}
-				, url	: futureedAPIUrl + 'user/reset/code'
-			});
-		}
-
 		futureedAPI.validateCode = function(code, email, user_type) {
 			return $http({
 				method	: 'POST'
@@ -111,10 +82,10 @@ var services = angular.module('futureed.services', ['ngResource']);
 			});
 		}
 
-		futureedAPI.changeValidate = function(id, email_new, image_id) {
+		futureedAPI.changeValidate = function(id, email_new, image_id, callback_uri) {
 			return $http({
 				method	: 'PUT'
-				, data	: {new_email : email_new, password_image_id : image_id}
+				, data	: {new_email : email_new, password_image_id : image_id, callback_uri : callback_uri}
 				, url	: futureedAPIUrl + 'student/email/' + id
 			});
 		}
@@ -127,11 +98,11 @@ var services = angular.module('futureed.services', ['ngResource']);
 			});
 		}
 
-		futureedAPI.emailResendCode = function(new_email, user_type){
+		futureedAPI.emailResendCode = function(id, new_email, user_type, callback_uri){
 			return $http({
 				method	: 'POST'
-				, data 	: {new_email : new_email, user_type : user_type}
-				, url 	: futureedAPIUrl + 'student/resend/email'
+				, data 	: {new_email : new_email, user_type : user_type, callback_uri : callback_uri}
+				, url 	: futureedAPIUrl + 'student/resend/email/' + id
 			});
 		}
 
@@ -151,11 +122,11 @@ var services = angular.module('futureed.services', ['ngResource']);
 			});
 		}
 
-		futureedAPI.setPassword = function (id, code, image_id) {
+		futureedAPI.setPassword = function (id, image_id) {
 			return $http({
 				method	: 'POST'
-				, data	: {id : id, email_code : code, password_image_id : image_id}
-				, url	: futureedAPIUrl + 'student/password'
+				, data	: {id : id, password_image_id : image_id}
+				, url	: futureedAPIUrl + 'student/password/new'
 			});
 		}
 
@@ -218,10 +189,9 @@ var services = angular.module('futureed.services', ['ngResource']);
 		/**
 		* Profile related calls
 		*/
-		futureedAPI.studentDetails = function(id, access_token) {
+		futureedAPI.studentDetails = function(id) {
 			return $http({
 				method 	: 'GET'
-				, data 	: {access_token : access_token}
 				, url	: futureedAPIUrl + 'student/' + id
 			});
 		}
@@ -246,14 +216,12 @@ var services = angular.module('futureed.services', ['ngResource']);
 			});
 		}
 
+		futureedAPI.getAnnouncement = function(){
+			return $http({
+				method 	: Constants.METHOD_GET
+				, url 	: futureedAPIUrl + 'announcement'
+			});
+		}
+		
 		return futureedAPI;
 	});
-
-	services.factory("httpInterceptor", function($q) {
-	    return {
-	     'responseError': function(rejection) {
-	        $("html, body").animate({ scrollTop: 0 }, "slow");
-	        return $q.reject(rejection);
-	      }
-	    };
-	  });

@@ -8,26 +8,42 @@ use Illuminate\Support\Facades\Session;
 class ProfileController extends Controller {
 
 	public function index() {
-		$id = $this->getId();
-
-		return view('student.profile.index', ['active' => 'index', 'id' => $id]);
+		return view('student.profile.index');
 	}
 
-	public function rewards() {
-		return view('student.profile.rewards', ['active' => 'rewards']);
+	public function profile_form() {
+		return view('student.profile.index_form');
 	}
 
-	public function change_password() {
-		$id = $this->getId();
-		return view('student.profile.change_password', ['active' => 'password']);
+	public function rewards_form() {
+		return view('student.profile.rewards_form');
+	}
+
+	public function change_password_form() {
+		return view('student.profile.change_password_form');
 	}	
 
-	public function change_avatar() {
-		return view('student.profile.change_avatar', ['active' => 'avatar']);
+	public function avatar_form() {
+		return view('student.profile.avatar_form');
 	}
 
-	public function edit_email(){
-		return view('student.profile.edit_email', ['active' => 'email']);
+	public function edit_email_form(){
+		return view('student.profile.edit_email_form');
+	}
+
+	public function confirm_email_form() {
+		return view('student.profile.confirm_email_form');
+	}
+
+	public function enter_email_code() {
+		$input = Input::only('email');
+		$student_session = Session::get('student');
+
+		if(isset($student_session)) {
+			return redirect()->route('student.profile.index');
+		}
+
+		return view('student.login.enter-email-code');
 	}
 
 	public function update_session() {

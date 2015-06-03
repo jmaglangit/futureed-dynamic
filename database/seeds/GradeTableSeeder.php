@@ -12,9 +12,10 @@ class GradeTableSeeder extends Seeder {
         \DB::table('grades')->truncate();
         \DB::table('grades')->insert([
             [
-                'code' => 101,
                 'name' => 'K1',
                 'description' => 'K One',
+                'country_id' => config('futureed.default_country'),
+                'code' =>101,
                 'status' => 'Enabled',
                 'created_by' => 1,
                 'updated_by' => 1,
@@ -23,9 +24,10 @@ class GradeTableSeeder extends Seeder {
 
             ],
             [
-                'code' => 102,
                 'name' => 'K2',
                 'description' => 'K Two',
+                'country_id' => config('futureed.default_country'),
+                'code' =>102,
                 'status' => 'Enabled',
                 'created_by' => 1,
                 'updated_by' => 1,
@@ -34,9 +36,10 @@ class GradeTableSeeder extends Seeder {
 
             ],
             [
-                'code' => 103,
                 'name' => 'Grade 1',
                 'description' => 'Grade One',
+                'country_id' => config('futureed.default_country'),
+                'code' =>103,
                 'status' => 'Enabled',
                 'created_by' => 1,
                 'updated_by' => 1,
@@ -45,9 +48,10 @@ class GradeTableSeeder extends Seeder {
 
             ],
             [
-                'code' => 104,
                 'name' => 'Grade 2',
                 'description' => 'Grade Two',
+                'country_id' => config('futureed.default_country'),
+                'code' =>104,
                 'status' => 'Enabled',
                 'created_by' => 1,
                 'updated_by' => 1,
@@ -56,9 +60,10 @@ class GradeTableSeeder extends Seeder {
 
             ],
             [
-                'code' => 105,
                 'name' => 'Grade 3',
                 'description' => 'Grade Three',
+                'country_id' => config('futureed.default_country'),
+                'code' =>105,
                 'status' => 'Enabled',
                 'created_by' => 1,
                 'updated_by' => 1,
@@ -67,9 +72,10 @@ class GradeTableSeeder extends Seeder {
 
             ],
             [
-                'code' => 106,
                 'name' => 'Grade 4',
                 'description' => 'Grade Four',
+                'country_id' => config('futureed.default_country'),
+                'code' =>106,
                 'status' => 'Enabled',
                 'created_by' => 1,
                 'updated_by' => 1,
@@ -78,9 +84,10 @@ class GradeTableSeeder extends Seeder {
 
             ],
             [
-                'code' => 107,
                 'name' => 'Grade 5',
                 'description' => 'Grade Five',
+                'country_id' => config('futureed.default_country'),
+                'code' =>107,
                 'status' => 'Enabled',
                 'created_by' => 1,
                 'updated_by' => 1,
@@ -89,9 +96,10 @@ class GradeTableSeeder extends Seeder {
 
             ],
             [
-                'code' => 108,
                 'name' => 'Grade 6',
                 'description' => 'Grade Six',
+                'country_id' => config('futureed.default_country'),
+                'code' =>108,
                 'status' => 'Enabled',
                 'created_by' => 1,
                 'updated_by' => 1,
@@ -100,9 +108,10 @@ class GradeTableSeeder extends Seeder {
 
             ],
             [
-                'code' => 109,
                 'name' => 'Grade 7',
                 'description' => 'Grade Seven',
+                'country_id' => config('futureed.default_country'),
+                'code' =>109,
                 'status' => 'Enabled',
                 'created_by' => 1,
                 'updated_by' => 1,
@@ -111,9 +120,10 @@ class GradeTableSeeder extends Seeder {
 
             ],
             [
-                'code' => 110,
                 'name' => 'Grade 8',
                 'description' => 'Grade Eight',
+                'country_id' => config('futureed.default_country'),
+                'code' =>110,
                 'status' => 'Enabled',
                 'created_by' => 1,
                 'updated_by' => 1,

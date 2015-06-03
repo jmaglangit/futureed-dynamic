@@ -7,4 +7,19 @@ interface GradeRepositoryInterface {
 
     public function getGrade($code);
 
+    public function addGrade($grade);
+
+    public function updateGrade($id,$data);
+
+    public function deleteGrade($id);
+
+    public function getGradeById($id);
+
+    public function getStudentByCode($id);
+
+    public function getCountry();
+
+    public function checkCountry($country_id);
+
+
 }

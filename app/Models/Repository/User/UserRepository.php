@@ -49,6 +49,7 @@ class UserRepository implements UserRepositoryInterface {
 
 
     public function addUser($user){
+
         try{
 
             User::create([
@@ -57,8 +58,10 @@ class UserRepository implements UserRepositoryInterface {
                 'name' => $user['first_name'] .' '.$user['last_name'],
                 'user_type' => $user['user_type'],
                 'password' => (isset($user['password'])) ? sha1($user['password']) : null,
-                'confirmation_code' => $user['confirmation_code'],
-                'confirmation_code_expiry' => $user['confirmation_code_expiry'],
+                'status' => (isset($user['status'])) ? ($user['status']) : 'Enabled',
+                'is_account_activated' => (isset($user['is_account_activated'])) ? $user['is_account_activated'] : NULL,
+                'confirmation_code' => (isset($user['confirmation_code'])) ? $user['confirmation_code'] : NULL,
+                'confirmation_code_expiry' => (isset($user['confirmation_code_expiry'])) ? $user['confirmation_code_expiry'] : NULL,
                 'created_by' => 1,
                 'updated_by' => 1,
             ]);
@@ -69,8 +72,20 @@ class UserRepository implements UserRepositoryInterface {
         return true;
     }
 
-    public function updateUser($user){
-        return 0;
+    public function updateUser($id, $data) {
+        try {
+		
+			$user = User::find($id);
+			
+			$user->update($data);
+			
+		} catch(Exception $e) {
+		
+			return $e->getMessage();
+			
+		}
+		
+		return $user;
     }
 
     public function deleteUser($id){
@@ -185,13 +200,10 @@ class UserRepository implements UserRepositoryInterface {
         return User::select('confirmation_code', 'confirmation_code_expiry')
             ->where('id', '=', $id)->first();
     }
+
     //update reset_code and reset_code_expiry
     public function updateResetCode($id,$code){
         try{
-//            $user = User::find($id);
-//            $user->reset_code =$code['confirmation_code'];
-//            $user->reset_code_expiry=$code['confirmation_code_expiry'];
-//            $user->save();
 
             User::where('id',$id)->update([
                 'reset_code' => $code['confirmation_code'],
@@ -282,7 +294,8 @@ class UserRepository implements UserRepositoryInterface {
          try{
 
             User::where('id',$id)->update([
-                'username' => $username
+                'username' => $username['username'],
+                'name' => $username['name']
             ]);
 
         } catch (Exception $e){
@@ -345,6 +358,49 @@ class UserRepository implements UserRepositoryInterface {
             throw new Exception($e->getMessage());
         }
     }
+
+
+    public function updateStatus($id,$status){
+        
+        try{
+
+            User::where('id',$id)->update([
+                'status' => $status,
+            ]);
+
+        } catch (Exception $e){
+            throw new Exception($e->getMessage());
+        }
+    }
+
+
+    public function addUserEloquent($user){
+
+        $user['created_by'] = 1;
+        $user['updated_by'] = 1;
+
+        $data['created_by'] = 1;
+        $data['updated_by'] = 1;
+
+        try {
+
+            $grade = User::create($user);
+
+        } catch(Exception $e) {
+
+            return $e->getMessage();
+
+        }
+
+        return $user;
+
+
+
+
+
+    }
+
+
 
 
 

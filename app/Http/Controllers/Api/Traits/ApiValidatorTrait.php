@@ -78,13 +78,17 @@ trait ApiValidatorTrait {
 
     //Validate birth_date field.
     public function birthDate($input,$birth_date){
+        $error_msg = config('futureed-error.error_messages');
 
             $validator = Validator::make(
                 [
                     "$birth_date" => $input["$birth_date"],
                 ],
                 [
-                    "$birth_date" => 'required|date_format:Ymd|before:today'
+                    "$birth_date" => 'required|date_format:Ymd|before:-13 year'
+                ],
+                [
+                    "before" => $error_msg[2028]
                 ]
             );
 
@@ -200,6 +204,7 @@ trait ApiValidatorTrait {
     //Validating ang field that is numeric. Can be used by any number field validation.
     public function validateNumber($input,$field_name){
 
+			$error_msg = config('futureed-error.error_messages');
 
             $validator = Validator::make(
                 [
@@ -207,6 +212,10 @@ trait ApiValidatorTrait {
                 ],
                 [
                     "$field_name" => 'required|numeric'
+                ],
+                [
+                    "school_code.required" => $error_msg[2602],
+                    "school_code.numeric" => $error_msg[2602]
                 ]
             );
 
@@ -214,7 +223,7 @@ trait ApiValidatorTrait {
 
                 $validator_msg = $validator->messages()->toArray();
 
-                return $this->setErrorCode(1009)
+                return $this->setErrorCode(1010)
                     ->setField($field_name)
                     ->setMessage($validator_msg["$field_name"][0])
                     ->errorMessage();
@@ -236,39 +245,15 @@ trait ApiValidatorTrait {
 
                 $validator_msg = $validator->messages()->toArray();
 
-                return $this->setErrorCode(1010)
+                return $this->setErrorCode(1011)
                     ->setField($field_name)
                     ->setMessage($validator_msg["$field_name"][0])
                     ->errorMessage();
             }
     }
 
-    public function emailCode($input,$field_name){
-        $error_msg = config('futureed-error.error_messages');
 
-        $validator = Validator::make(
-            [
-                "$field_name" => strtolower($input["$field_name"]),
-            ],
-            [
-                "$field_name" => 'required|numeric|regex:/^[0-9]{4}(\-[0-9]{4})?$/'
-            ],
-            [
-                'required' => $error_msg[2015],
-                'numeric' => $error_msg[2016]
-            ]
-        );
 
-        if($validator->fails()){
-
-            $validator_msg = $validator->messages()->toArray();
-
-            return $this->setErrorCode(1009)
-                ->setField($field_name)
-                ->setMessage($validator_msg["$field_name"][0])
-                ->errorMessage();
-        }
-    }
     
     public function emptyUsername($input,$field_name){
         
@@ -294,7 +279,7 @@ trait ApiValidatorTrait {
 
                 $validator_msg = $validator->messages()->toArray();
 
-                return $this->setErrorCode(1011)
+                return $this->setErrorCode(1012)
                     ->setField($field_name)
                     ->setMessage($validator_msg["$field_name"][0])
                     ->errorMessage();
@@ -317,7 +302,7 @@ trait ApiValidatorTrait {
 
                 $validator_msg = $validator->messages()->toArray();
 
-                return $this->setErrorCode(1011)
+                return $this->setErrorCode(1013)
                     ->setField($field_name)
                     ->setMessage($validator_msg["$field_name"][0])
                     ->errorMessage();
@@ -338,7 +323,7 @@ trait ApiValidatorTrait {
 
                 $validator_msg = $validator->messages()->toArray();
 
-                return $this->setErrorCode(1012)
+                return $this->setErrorCode(1014)
                     ->setField($field_name)
                     ->setMessage($validator_msg["$field_name"][0])
                     ->errorMessage();
@@ -360,7 +345,7 @@ trait ApiValidatorTrait {
 
                 $validator_msg = $validator->messages()->toArray();
 
-                return $this->setErrorCode(1013)
+                return $this->setErrorCode(1015)
                     ->setField($field_name)
                     ->setMessage($validator_msg["$field_name"][0])
                     ->errorMessage();
@@ -370,22 +355,34 @@ trait ApiValidatorTrait {
 
     public function checkPassword($input,$field_name){
 
+             $error_msg = config('futureed-error.error_messages');
+
             $validator = Validator::make(
                 [
                     "$field_name" => strtolower($input["$field_name"]),
                 ],
                 [
-                    "$field_name" => 'required|min:8|max:32|regex:/^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]{8,}$/'
+                    "$field_name" => 'required|min:8|max:32'
                 ]
             );
+
+            $check_password = $this->password->checkPassword($input[$field_name]);
 
             if($validator->fails()){
 
                 $validator_msg = $validator->messages()->toArray();
 
-                return $this->setErrorCode(2230)
+                return $this->setErrorCode(1016)
                     ->setField($field_name)
                     ->setMessage($validator_msg["$field_name"][0])
+                    ->errorMessage();
+            }
+
+            if(!$check_password){
+
+                return $this->setErrorCode(1016)
+                    ->setField($field_name)
+                    ->setMessage($error_msg[2112])
                     ->errorMessage();
             }
     }
@@ -405,7 +402,7 @@ trait ApiValidatorTrait {
 
             $validator_msg = $validator->messages()->toArray();
 
-            return $this->setErrorCode(1011)
+            return $this->setErrorCode(1017)
                 ->setField("Parameter")
                 ->setMessage($validator_msg["$id"][0])
                 ->errorMessage();
@@ -428,7 +425,7 @@ trait ApiValidatorTrait {
 
                 $validator_msg = $validator->messages()->toArray();
 
-                return $this->setErrorCode(1010)
+                return $this->setErrorCode(1018)
                     ->setField($field_name)
                     ->setMessage($validator_msg["$field_name"][0])
                     ->errorMessage();
@@ -450,7 +447,7 @@ trait ApiValidatorTrait {
 
                 $validator_msg = $validator->messages()->toArray();
 
-                return $this->setErrorCode(1013)
+                return $this->setErrorCode(1019)
                     ->setField($field_name)
                     ->setMessage($validator_msg["$field_name"][0])
                     ->errorMessage();
@@ -481,10 +478,270 @@ trait ApiValidatorTrait {
 
                 $validator_msg = $validator->messages()->toArray();
 
-                return $this->setErrorCode(1013)
+                return $this->setErrorCode(1020)
                     ->setField($field_name)
                     ->setMessage($validator_msg["$field_name"][0])
                     ->errorMessage();
             }
     }
+
+    public function emailCode($input,$field_name){
+        $error_msg = config('futureed-error.error_messages');
+
+        $validator = Validator::make(
+            [
+                "$field_name" => strtolower($input["$field_name"]),
+            ],
+            [
+                "$field_name" => 'required|numeric|regex:/^[0-9]{4}(\-[0-9]{4})?$/'
+            ],
+            [
+                'required' => $error_msg[2015],
+                'numeric' => $error_msg[2016],
+                'regex' => $error_msg[2024]
+            ]
+        );
+
+        if($validator->fails()){
+
+            $validator_msg = $validator->messages()->toArray();
+
+            return $this->setErrorCode(1021)
+                ->setField($field_name)
+                ->setMessage($validator_msg["$field_name"][0])
+                ->errorMessage();
+        }
+    }
+
+    public function resetCode($input,$field_name){
+        $error_msg = config('futureed-error.error_messages');
+
+        $validator = Validator::make(
+            [
+                "$field_name" => strtolower($input["$field_name"]),
+            ],
+            [
+                "$field_name" => 'required|numeric|regex:/^[0-9]{4}(\-[0-9]{4})?$/'
+            ],
+            [
+                'required' => $error_msg[2025],
+                'numeric' => $error_msg[2026],
+                'regex' => $error_msg[2027]
+            ]
+        );
+
+        if($validator->fails()){
+
+            $validator_msg = $validator->messages()->toArray();
+
+            return $this->setErrorCode(1022)
+                ->setField($field_name)
+                ->setMessage($validator_msg["$field_name"][0])
+                ->errorMessage();
+        }
+    }
+
+
+    public function checkContactNumber($input,$field_name){
+        $phone_format = "/^((\+|\(|\)|\-)+\s?)?([0-9]+)?((\+|\(|\)|\-)+\s?)?([0-9]+)?((\+|\(|\)|\-)+\s?)?([0-9]+)?((\+|\(|\)|\-)+\s?)?([0-9]+)?$/";
+
+        $validator = Validator::make(
+            [
+                "$field_name" => strtolower($input["$field_name"]),
+            ],
+            [
+                "$field_name" => "required"
+            ]
+        );
+
+        if($validator->fails()){
+
+            $validator_msg = $validator->messages()->toArray();
+
+            return $this->setErrorCode(1022)
+                ->setField($field_name)
+                ->setMessage($validator_msg["$field_name"][0])
+                ->errorMessage();
+        }
+
+        if(!preg_match($phone_format,$input["$field_name"])){
+
+            return $this->setErrorCode(2115)
+                ->setField($field_name)
+                ->setMessage(config('futureed-error.error_messages.2115'))
+                ->errorMessage();
+        }
+    }
+    
+    public function validateDate( $input,$date_field ){
+        $error_msg = config('futureed-error.error_messages');
+        $validator = Validator::make(
+            [
+                "$date_field" => $input["$date_field"]
+            ],
+            [
+                "$date_field" => "required|date_format:Ymd"
+            ]);
+        
+        if($validator->fails()){
+        
+            $validator_msg = $validator->messages()->toArray();
+            
+            return $this->setErrorCode(1005)
+                ->setField($date_field)
+                ->setMessage($validator_msg["$date_field"][0])
+                ->errorMessage();
+        }
+    }
+    
+    public function validateDateRange($input,$date_start,$date_end){
+        $error_msg = config('futureed-error.error_messages');
+        $validator = Validator::make(
+            [
+                "$date_start" => $input["$date_start"],
+                "$date_end" => $input["$date_end"]
+            ],
+            [
+                "$date_start" => "before:$date_end|after:-1 day"
+            ],
+            [
+                "before" => $error_msg[2500],
+                "after" =>$error_msg[2500]
+            ]);
+        
+        if($validator->fails()){
+        
+            $validator_msg = $validator->messages()->toArray();
+            
+            return $this->setErrorCode(1005)
+                ->setField($date_start)
+                ->setMessage($validator_msg["$date_start"][0])
+                ->errorMessage();
+        }       
+    }
+
+    public function validateStatus($input,$field_name){
+        $error_msg = config('futureed-error.error_messages');
+
+        $validator = Validator::make(
+            [
+                "$field_name" => strtolower($input["$field_name"]),
+            ],
+            [
+                "$field_name" => 'required|in:enabled,disabled'
+            ]
+        );
+
+        if($validator->fails()){
+
+            $validator_msg = $validator->messages()->toArray();
+
+            return $this->setErrorCode(1022)
+                ->setField($field_name)
+                ->setMessage($validator_msg["$field_name"][0])
+                ->errorMessage();
+        }
+    }
+
+    public function isAccountReviewed($input,$field_name){
+
+        $error_msg = config('futureed-error.error_messages');
+
+        $validator = Validator::make(
+            [
+                "$field_name" => strtolower($input["$field_name"]),
+            ],
+            [
+                "$field_name" => 'required|in:1,-1'
+            ]
+        );
+
+        if($validator->fails()){
+
+            $validator_msg = $validator->messages()->toArray();
+
+            return $this->setErrorCode(1022)
+                ->setField($field_name)
+                ->setMessage($validator_msg["$field_name"][0])
+                ->errorMessage();
+        }
+
+    }
+
+     //Validate birth_date field.
+    public function editBirthDate($input,$birth_date){
+        $error_msg = config('futureed-error.error_messages');
+
+            $validator = Validator::make(
+                [
+                    "$birth_date" => $input["$birth_date"],
+                ],
+                [
+                    "$birth_date" => 'required|date_format:Ymd|before:-13 year'
+                ],
+                [
+                    "before" => $error_msg[2117]
+                ]
+            );
+
+            if($validator->fails()){
+
+                $validator_msg = $validator->messages()->toArray();
+
+                return $this->setErrorCode(1005)
+                    ->setField($birth_date)
+                    ->setMessage($validator_msg["$birth_date"][0])
+                    ->errorMessage();
+            }
+    }
+
+    public function schoolCode($input, $school_code){
+
+        $validator = Validator::make(
+            [
+                "$school_code" => $input["$school_code"],
+            ],
+            [
+                "$school_code" => 'required|numeric|exists:schools,code'
+            ],
+            [
+                "exist" => config('futureed-error.error_messages.2602')
+            ]
+        );
+
+        if($validator->fails()){
+
+            return $this->setErrorCode(2602)
+                ->setField($school_code)
+                ->setMessage(2602)
+                ->errorMessage();
+        }
+    }
+
+    public function validateDateNow($input,$date_now){
+
+        $validator = Validator::make(
+            [
+                "$date_now" => $input["$date_now"],
+            ],
+            [
+                "$date_now" => 'required|date:today'
+            ],
+            [
+                'date' => config('futureed-error.error_messages.2500')
+            ]
+        );
+
+        if($validator->fails()){
+
+            $validator_msg = $validator->messages()->toArray();
+
+            return $this->setErrorCode(2500)
+                ->setField($date_now)
+                ->setMessage($validator_msg["$date_now"][0])
+                ->errorMessage();
+        }
+
+    }
+
 }

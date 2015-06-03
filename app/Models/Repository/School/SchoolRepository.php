@@ -40,6 +40,8 @@ class SchoolRepository implements SchoolRepositoryInterface{
 					'state'				=> $school['school_state'],
 					'country'			=> $school['school_country'],
 					'zip'				=> $school['school_zip'],
+					'contact_name'		=> $school['contact_name'],
+					'contact_number'	=> $school['contact_number'],
 					'created_by'		=> 1,
 					'updated_by'		=> 1,
  				]);
@@ -47,7 +49,7 @@ class SchoolRepository implements SchoolRepositoryInterface{
 			return $e->getMessage();
 		}
 
-		return true;
+		return $code;
 	}
 
 	public function getSchoolId($name){
@@ -99,6 +101,20 @@ class SchoolRepository implements SchoolRepositoryInterface{
 		}catch(Exception $e){
 			return $e->getMessage();
 		}
+
+
+	}
+
+	public function getSchoolCode($school_name){
+
+		return School::where('name','=',$school_name)->pluck('code');
+
+	}
+
+	public function searchSchool($school_name){
+
+		return School::select('name','code','city','state','street_address')
+						->where('name','Like',$school_name.'%')->get()->toArray();
 
 
 	}

@@ -41,4 +41,9 @@ class AdminServices {
 
         return $this->admin->getAdminId($user_id);
     }
+
+    public function verifyAdminId($id){
+
+        return $this->admin->verifyAdminId($id);
+    }
 }

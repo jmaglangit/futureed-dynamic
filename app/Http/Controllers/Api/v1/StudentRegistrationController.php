@@ -32,6 +32,8 @@ class StudentRegistrationController extends StudentController {
             'first_name',
             'last_name');
 
+        $input = Input::only('callback_uri');
+
         //Student fields validations
         $this->addMessageBag($this->firstName($student,'first_name'));
         $this->addMessageBag($this->lastName($student,'last_name'));
@@ -45,12 +47,33 @@ class StudentRegistrationController extends StudentController {
         //User fields validations
         $this->addMessageBag($this->email($user,'email'));
         $this->addMessageBag($this->username($user, 'username'));
+        $this->addMessageBag($this->validateString($input, 'callback_uri'));
+
 
         $msg_bag = $this->getMessageBag();
         if(!empty($msg_bag)){
 
             return $this->respondWithError($this->getMessageBag());
         }
+
+        //check if username exist
+        $check_username = $this->user->checkUsername($user['username'],config('futureed.student'));
+
+        //check if email exist
+        $check_email = $this->user->checkEmail($user['email'],config('futureed.student'));
+
+
+        if($check_username){
+
+            return $this->respondErrorMessage(2201);
+
+        }
+
+        if($check_email){
+
+            return $this->respondErrorMessage(2200);
+        }
+
 
 
         $user = array_merge($user,[
@@ -80,7 +103,7 @@ class StudentRegistrationController extends StudentController {
 
 
             //send email to user.
-            $this->mail->sendStudentRegister($user_response['id']);
+            $this->mail->sendStudentRegister($user_response['id'],$input['callback_uri']);
 
             $student_id = $this->student->getStudentId($user_response['id']);
             //return success

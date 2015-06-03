@@ -110,7 +110,20 @@ class UserServices {
 
             if(!is_null($return)){
 
-                $is_disabled = $this->checkUserDisabled($return);
+                //create condition if user_type is client
+                if(strcasecmp($user_type,config('futureed.client')) == 0){
+
+                    $is_disabled = $this->checkClientDisabled($return);
+                } elseif(strcasecmp($user_type,config('futureed.admin')) == 0 ){
+
+                    $is_disabled = $this->checkAdminDisabled($return);
+                }else {
+
+                    //default user student message
+                    $is_disabled = $this->checkUserDisabled($return);
+                }
+
+
                 if(!$is_disabled){
 
                     return [
@@ -135,7 +148,20 @@ class UserServices {
 
 
            if(!is_null($return) ){
-               $is_disabled = $this->checkUserDisabled($return);
+
+               //create condition if user_type is client
+               if($user_type == config('futureed.client')){
+
+                   $is_disabled = $this->checkClientDisabled($return);
+               } elseif(strcasecmp($user_type,config('futureed.admin')) == 0 ){
+
+                   $is_disabled = $this->checkAdminDisabled($return);
+               }else {
+
+                   //default user student message
+                   $is_disabled = $this->checkUserDisabled($return);
+               }
+
                if(!$is_disabled){
 
                    return [
@@ -233,7 +259,13 @@ class UserServices {
             'user_id' => $return
         ];
     }
-    //check user if enable to login.
+
+    /**
+     * Check user student if disabled.
+     *
+     * @param $id
+     * @return bool|int
+     */
     public function checkUserDisabled($id){
         if($this->users->accountActivated($id) == 0 ){
             //check if activated
@@ -248,6 +280,48 @@ class UserServices {
             return false;
         }
     }
+
+    /**
+     * check user client if disabled. Specified by messages
+     * @param $id
+     * @return bool|int
+     */
+    public function checkClientDisabled($id){
+
+        if($this->users->accountActivated($id) == 0 ){
+            //check if activated
+            return 2230;
+        } elseif($this->users->accountLocked($id) == 1){
+            //check if locked
+            return 2034;
+        } elseif($this->users->accountDeleted($id) == 1 ){
+            //check if delete
+            return 2020;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Check user admin if disabled. Specified by messages
+     * @param $id
+     */
+    public function checkAdminDisabled($id){
+
+        if($this->users->accountActivated($id) == 0 ){
+            //check if activated
+            return 2230;
+        } elseif($this->users->accountLocked($id) == 1){
+            //check if locked
+            return 2035;
+        } elseif($this->users->accountDeleted($id) == 1 ){
+            //check if delete
+            return 2020;
+        } else {
+            return false;
+        }
+    }
+
     //
     public function checkUserId($id){
         //check if user id exist
@@ -276,7 +350,8 @@ class UserServices {
         $return =['username'=>$user_details['username'],
                   'user_type'=>$user_details['user_type'],
                   'email'=>$user_details['email'],
-                  'new_email' => $user_details['new_email']];
+                  'new_email' => $user_details['new_email'],
+                  'status' => $user_details['status']];
 
         return $return;
     }
@@ -385,6 +460,11 @@ class UserServices {
     public function updateEmailCode($id,$code){
 
         $this->users->updateEmailCode($id,$code);
+    }
+
+    public function updateStatus($id,$status){
+
+        $this->users->updateStatus($id,$status);
     }
 
     

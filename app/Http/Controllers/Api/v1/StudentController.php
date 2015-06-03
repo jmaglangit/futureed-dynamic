@@ -36,7 +36,8 @@ class StudentController extends ApiController {
 	 * @return Response
 	 */
 	public function show($id)
-	{   
+	{
+
 		$error = config('futureed-error.error_messages');
 
         $this->addMessageBag($this->validateVarNumber($id));
@@ -66,16 +67,16 @@ class StudentController extends ApiController {
 	 */
 	public function update($id)
 	{
+
 		$input = Input::only('first_name','last_name','gender','birth_date',
-							'email','username','school_code','grade_code',
+							'email','username','grade_code',
 							'country','city','state');
 
         //Student fields validations
         $this->addMessageBag($this->firstName($input,'first_name'));
         $this->addMessageBag($this->lastName($input,'last_name'));
         $this->addMessageBag($this->gender($input,'gender'));
-        $this->addMessageBag($this->birthDate($input,'birth_date'));
-        $this->addMessageBag($this->validateNumber($input,'school_code'));
+        $this->addMessageBag($this->editBirthDate($input,'birth_date'));
         $this->addMessageBag($this->validateNumber($input,'grade_code'));
         $this->addMessageBag($this->validateString($input,'country'));
         $this->addMessageBag($this->validateString($input,'state'));
@@ -90,6 +91,20 @@ class StudentController extends ApiController {
         if(!empty($msg_bag)){
 
             return $this->respondWithError($this->getMessageBag());
+        }
+
+        //check if username exist
+        $check_username = $this->user->checkUsername($input['username'],config('futureed.student'));
+
+        if( $check_username ){
+
+        	$student_id = $this->student->getStudentId($check_username['user_id']);
+
+        	if( $student_id != $id){
+
+            	return $this->respondErrorMessage(2201);
+            }
+
         }
 
         $this->student->updateStudentDetails($id,$input);

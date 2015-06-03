@@ -1,19 +1,39 @@
 @extends('client.app')
 
 @section('content')
-  <div class="container login" ng-cloak>
+  <div class="container login" ng-controller="LoginController as forgot" ng-cloak>
+  
+  <div template-directive template-url="{!! route('client.partials.base_url') !!}"></div>
 
-    <div class="col-md-6 col-md-offset-1" ng-init="sent={!! $sent !!}" ng-show="!sent">
-      <div class="form-style form-narrow">
+    <div class="col-md-6 col-md-offset-1 form-style">
+      {!! Form::open(
+          array(
+              'id' => 'redirect_form'
+              , 'route' => 'client.login.reset_password'
+              , 'method' => 'POST'
+          )
+      ) !!}
+
+      {!! Form::hidden('id', '') !!}
+      {!! Form::hidden('reset_code', '') !!}
+
+      {!! Form::close() !!}
+
+      <div class="form-content" ng-show="!sent">
         <div class="title">Retrieve Password</div>
 
-        <div class="alert alert-danger" ng-if="errors">
-          <p ng-repeat="error in errors" > 
-            {! error !}
-          </p>
-        </div>
+          <div class="alert alert-danger" ng-if="errors">
+            <p ng-repeat="error in errors" > 
+              {! error !}
+            </p>
+          </div>
+          
+          {!! Form::open(
+              array(
+                      'id' => 'forgot_password_form'
+              )
+          ) !!}
 
-        {!! Form::open() !!}
           <div class="input">
             <div class="icon">
               <i class="fa fa-user"></i>
@@ -21,7 +41,7 @@
             {!! Form::text('username', ''
                   , array(
                       'class' => 'form-control'
-                    , 'ng-model' => 'username'
+                    , 'ng-model' => 'forgot.username'
                     , 'placeholder' => 'Email or Username'
                     , 'autocomplete' => 'off'
                   )
@@ -29,78 +49,118 @@
           </div>
 
           <div class="btn-container">
-            <a type="button" class="btn btn-blue btn-medium" ng-click="clientForgotPassword()"> SEND </a>
-            <a type="button" class="btn btn-gold btn-medium" href="{!! route('client.login') !!}"> Cancel </a>
+            {!! Form::button('Send'
+                , array(
+                      'id' => 'proceed_btn'
+                    , 'class' => 'btn btn-blue btn-medium'
+                    , 'ng-if' => '!sent'
+                    , 'ng-click' => 'forgot.clientForgotPassword()'
+                )
+            ) !!}
+
+            {!! Html::link(route('client.login'), 'Cancel'
+                , array(
+                  'class' => 'btn btn-gold btn-medium'
+                )
+            ) !!}
           </div>
-        {!! Form::close() !!}
+          {!! Form::close() !!}
       </div>
-    </div>
 
-    <div class="col-md-6 col-md-offset-1 form-style" ng-if="sent">
-      {!! Form::open(array('id' => 'forgot_success_form', 'route' => 'client.login.reset_password', 'method' => 'POST')) !!}
-        <div class="form_content">
-          <div class="title" ng-if="!resend && sent">Email Sent</div>
-          <div class="title" ng-if="resend && sent">Code Resent</div>
+      <div class="form_content" ng-show="sent">
+        <div class="title" ng-if="!resent">Email Sent</div>
+        <div class="title" ng-if="resent">Reset Code Resent</div>
 
-          <div class="alert alert-danger" ng-if="errors">
-            <p ng-repeat="error in errors" > 
-              {! error !}
+        <div class="alert alert-danger" ng-if="errors">
+          <p ng-repeat="error in errors" > 
+            {! error !}
+          </p>
+        </div>
+
+        {!! Form::open(
+            array(
+                  'id' => 'forgot_success_form'
+            )
+        ) !!} 
+
+        <div ng-if="!resent">
+          <div class="roundcon">
+            <i class="fa fa-check fa-5x img-rounded text-center"></i>
+          </div>
+          <div>
+            <p class="text">
+              <strong>Success!</strong>
+              <br /> An email to reset your password has been sent to your email account.
             </p>
+          
+            <br />
+            <div class="form-group">
+              <small>Please check your inbox or your spam folder for the email. 
+              <br />The email contains a reset code that you need to input below.</small>
+            </div>
+          </div>
+        </div>
+
+        <div ng-if="resent">
+          <div class="roundcon">
+            <i class="fa fa-refresh fa-5x img-rounded text-center"></i>
+          </div>
+          <div>
+            <p class="text">
+              <strong>Success!</strong>
+              <br /> A new reset code has been sent to your email account.
+            </p>
+          
+            <br />
+            <div class="form-group">
+              <small>Please check your inbox or your spam folder for the email. 
+              <br />The email contains a reset code that you need to input below.</small>
+            </div>
+          </div>
+        </div>
+
+          <div class="form-group">
+            {!! Form::label(null, 'Enter Reset Code:') !!}
+
+            {!! Form::text('reset_code', '',
+                  array(
+                      'class' => 'form-control'
+                    , 'ng-model' => 'forgot.reset_code'
+                    , 'placeholder' => 'Reset Code'
+                    , 'autocomplete' => 'off'
+                  )
+            ) !!}
           </div>
 
-          <div ng-if="!resend && !'{!! $email !!}'">
-            <div class="roundcon">
-              <i class="fa fa-check fa-5x img-rounded text-center"></i>
-            </div>
-            <div>
-              <p class="text" ng-if="sent">
-                <strong>Success!</strong>
-                <br /> An email to reset your password has been sent to your email account.
-              </p>
-            
-              <br />
-              <div class="form-group">
-                <small>Please check your inbox or your spam folder for the email. 
-                <br />The email contains a code that you need to input below.</small>
-                </div>
-              </div>
-            </div>
-            <p ng-if="resend">
-              A new code has been sent to your email.
-            </p>
-            <div class="form-group">
-              {!! Form::label(null, 'Enter Code:') !!}
-
-              {!! Form::text('reset_code', '',
-                    array(
-                        'class' => 'form-control'
-                      , 'ng-model' => 'reset_code'
-                      , 'placeholder' => 'Reset Code'
-                      , 'autocomplete' => 'off'
-                    )
-              ) !!}
-
-              {!! Form::hidden('username', $email
-                    , array(
-                        'ng-model' => 'username'
-                    )
-              ) !!}
-
-              {!! Form::hidden('id', ''
+          <div class="btn-container">
+              {!! Form::button('Proceed'
                   , array(
-                      'ng-model' => 'id'
+                        'id' => 'proceed_btn'
+                      , 'class' => 'btn btn-blue btn-medium'
+                      , 'ng-if' => 'sent'
+                      , 'ng-click' => 'forgot.clientValidateCode(forgot.reset_code)'
                   )
               ) !!}
-            </div>
-            <div class="btn-container">
-              <a type="button" ng-disabled="disabled" class="btn btn-blue btn-medium" ng-click="clientValidateCode(reset_code)">PROCEED</a>
-              <a type="button" ng-disabled="disabled" class="btn btn-gold btn-medium" ng-click="clientResendCode()"> Resend Code </a>
-            </div>
-            
+
+              {!! Form::button('Resend Code'
+                  , array(
+                        'class' => 'btn btn-gold btn-medium'
+                      , 'ng-click' => 'forgot.clientResendCode()'
+                  )
+              ) !!}
           </div>
-        {!! Form::close() !!}
+          <br />
+          <a href="{!! route('client.login') !!}"><i class="fa fa-home"></i> Home</a>
+          {!! Form::close() !!}
+        </div>
       </div>
-
-
+    </div>
   </div>
 @endsection
+
+@section('scripts')
+  {!! Html::script('/js/client/controllers/login_controller.js') !!}
+  {!! Html::script('/js/client/services/login_service.js') !!}
+  {!! Html::script('/js/client/services/profile_service.js') !!}
+  {!! Html::script('/js/client/login.js') !!}
+@stop

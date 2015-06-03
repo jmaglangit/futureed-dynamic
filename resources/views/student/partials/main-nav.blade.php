@@ -10,7 +10,7 @@
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-            <a href="#"><img ng-src="/images/logo-sm.png" /></a>
+            <a href="#">{!! Html::image('/images/logo-sm.png') !!}</a>
           </div>
 
           <!-- Collect the nav links, forms, and other content for toggling -->

@@ -17,7 +17,7 @@ interface UserRepositoryInterface {
 
     public function addUser($user);
 
-    public function updateUser($user);
+    public function updateUser($id, $data);
 
     public function deleteUser($id);
 
@@ -73,4 +73,7 @@ interface UserRepositoryInterface {
 
     public function updateEmailCode($id,$code);
 
+    public function updateStatus($id,$status);
+
+    public function addUserEloquent($user);
 }

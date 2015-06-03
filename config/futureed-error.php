@@ -27,7 +27,7 @@ return [
         2011 => 'Username and password is incorrect.',
         2012 => 'Picture password is incorrect.',
         2013 => 'Username or Email is invalid.',
-        2014 => 'Your account has been locked.',
+        2014 => 'Your Account has been locked. Please go to the forgot password screen to reset your password.',
         2015 => 'Confirmation code is required.',
         2016 => 'Confirmation code should be number only.',
         2017 => 'Picture Password is required.',
@@ -37,7 +37,18 @@ return [
         2021 => 'Username is invalid.',
         2022 => 'The school level field is required.',
         2023 => 'The school level field should be number only.',
-
+        2024 => 'Confirmation code is invalid.',
+        2025 => 'Reset code is required.',
+        2026 => 'Reset code should be number only.',
+        2027 => 'Reset code is invalid.',
+        2028 => 'The Student has to be 13 years old or above to be able to register.',
+        2029 => 'Access authentication failure.',
+        2030 => 'Access authorization is required.',
+        2031 => 'Access authorization is invalid.',
+        2032 => 'Unauthorized access.',
+        2033 => 'Username/Email or password is invalid',
+        2034 => 'Username/Email or password is invalid. Have you verified your email? Please check your inbox. Your account may have been locked, please click on forgot password to reset your password.',
+        2035 => 'Account has been locked. Please click on forgot password to reset your password.',
 
         2100 => 'Reset code is invalid.',
         2101 => 'Password image is invalid.',
@@ -51,7 +62,18 @@ return [
         2109 => 'Your account has already been confirmed.',
         2110 => 'You have already setup the forgot password steps.',
         2111 => 'You have already setup the email confirmation steps.',
-
+        2112 => 'Password should be alpha numeric with lowercase letters, uppercase letters, numerical and special punctuation.',
+        2113 => 'Username and password is invalid.',
+        2114 => 'Your password is incorrect.',
+        2115 => 'Your contact number must be this format +00 (000) 000-0000.',
+        2116 => 'School name is not available.',
+        2117 => 'The Student has to be 13 years old or above.',
+        2118 => 'Your account is being reviewed or contact administrator for assistance.',
+        2119 => 'This record is being used.',
+        2120 => 'This record is invalid.',
+        2121 => 'Unable to Delete. Principal is associated to a school.',
+        2122 => 'Unable to Delete. Teacher is associate to a class.',
+        2123 => 'Unable to Delete. Parent is associated to a student.',
 
         // Client Error messages
         2200 => 'Email already exists.',
@@ -67,6 +89,13 @@ return [
         2233 => 'Password is invalid.',
 
         2234 => 'Unauthorized Registration',
+        
+        //Announcement messages.
+        2500 => 'Date range should be between today and future dates.',
+        
+        2600 => 'Cannot delete subject. Subject has subject areas.',
+        2601 => 'Cannot delete admin.',
+        2602 => 'The school is invalid.'
 
     ],
 ];

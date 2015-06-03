@@ -16,6 +16,12 @@ class LoginController extends Controller {
 	 */
 	public function index()
 	{
+		$session = json_decode(Session::get('client'));
+
+		if($session && $session->id) {
+			return redirect()->route('client.dashboard.index');
+		}
+
 		return view('client.login.login');
 	}
 
@@ -27,10 +33,11 @@ class LoginController extends Controller {
 	public function process()
 	{
 		$user_data = Input::only('user_data');
+
 		$user_object = json_decode($user_data['user_data']);
 
-		if($user_object->user_id){
-			Session::flush();
+		if($user_object->id){
+			Session::forget('client');
 			Session::put('client', $user_data['user_data']);
 			return redirect()->route('client.dashboard.index');
 		}
@@ -45,7 +52,7 @@ class LoginController extends Controller {
 	 */
 	public function logout()
 	{
-		Session::flush();
+		Session::forget('client');
 		return redirect()->route('client.login');
 	}
 	
@@ -58,13 +65,11 @@ class LoginController extends Controller {
 	{
 		$input = Input::only('email');
 
-		$sent = "false";
-
 		if($input['email']) {
-			$sent = "true";
+			return view('client.login.enter-reset-code', ['email' => $input['email']]);
 		}
 
-		return view('client.login.forgot-password', ['email' => $input['email'], 'sent' => $sent]);
+		return view('client.login.forgot-password', ['email' => $input['email']]);
 	}
 
 	/**
@@ -72,18 +77,26 @@ class LoginController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function registration()
+	public function registration($id = null)
 	{
-		$input = Input::only('email');
-		$registered = "false";
-
-		if($input['email']) {
-			$registered = "true";
-		}
-
-		return view('client.login.registration', ['registered' => $registered, 'email' => $input['email']]);
+		return view('client.login.registration', array('id' => $id));
 	}
 
+	public function registration_form() {
+
+		return view('client.login.registration-form');
+	}
+
+	public function registration_success() {
+
+		return view('client.login.registration-success');
+	}
+
+	public function enter_confirmation() {
+		$input = Input::only('email');
+
+		return view('client.login.enter-confirmation-code', ['email' => $input['email']]);
+	}
 	/**
 	 * Display reset password screen
 	 *
@@ -99,6 +112,21 @@ class LoginController extends Controller {
 			return redirect()->route('client.login.forgot_password');
 		}
 
-		return view('client.login.reset-password', ['id' => $id, 'reset_code' => $reset_code]);
+		return view('client.login.reset-password', array('id' => $id, 'reset_code' => $reset_code));
+	}
+
+	public function user_confirm() {
+		$input = Input::only('email');
+
+		return view('client.login.set-password', array('email' => $input['email']));
+	}
+
+	/**
+	* Partials for AngularJS Directive
+	*/
+
+	public function base_url() {
+
+		return view('client.partials.base-url');
 	}
 }

@@ -1,5 +1,6 @@
 <?php namespace FutureEd\Providers;
 
+use Validator;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider {
@@ -11,7 +12,38 @@ class AppServiceProvider extends ServiceProvider {
 	 */
 	public function boot()
 	{
-		//
+		#TODO: Find a cleaner way for this
+	
+		Validator::extend('custom_password', function($attribute, $value, $parameters) {
+			$valid = true;
+			
+			if (!preg_match("#[0-9]+#", $value)){
+			
+				$valid = false;
+			
+			}
+			
+			if(!preg_match("#[a-z]+#", $value)){
+			
+				$valid = false;
+			
+			}
+			
+			if(!preg_match("#[A-Z]+#", $value)){
+			
+				$valid = false;
+				
+			}
+			
+			if(!preg_match("#[\W ]+#", $value)){
+			
+				$valid = false;
+				
+			}
+			
+			return $valid;
+		
+		});
 	}
 
 	/**
@@ -73,9 +105,29 @@ class AppServiceProvider extends ServiceProvider {
             'FutureEd\Models\Repository\Country\CountryRepositoryInterface',
             'FutureEd\Models\Repository\Country\CountryRepository'
         );
-
-
-
-    }
-
+        $this->app->bind(
+            'FutureEd\Models\Repository\Subject\SubjectRepositoryInterface',
+            'FutureEd\Models\Repository\Subject\SubjectRepository'
+        );
+        $this->app->bind(
+            'FutureEd\Models\Repository\Announcement\AnnouncementRepositoryInterface',
+            'FutureEd\Models\Repository\Announcement\AnnouncementRepository'
+        );
+        $this->app->bind(
+            'FutureEd\Models\Repository\Subscription\SubscriptionRepositoryInterface',
+            'FutureEd\Models\Repository\Subscription\SubscriptionRepository'
+        );
+        $this->app->bind(
+            'FutureEd\Models\Repository\ClientDiscount\ClientDiscountRepositoryInterface',
+            'FutureEd\Models\Repository\ClientDiscount\ClientDiscountRepository'
+        );
+        $this->app->bind(
+            'FutureEd\Models\Repository\SubjectArea\SubjectAreaRepositoryInterface',
+            'FutureEd\Models\Repository\SubjectArea\SubjectAreaRepository'
+        );
+        $this->app->bind(
+            'FutureEd\Models\Repository\VolumeDiscount\VolumeDiscountRepositoryInterface',
+            'FutureEd\Models\Repository\VolumeDiscount\VolumeDiscountRepository'
+        );
+	}
 }

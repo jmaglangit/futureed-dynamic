@@ -1,6 +1,6 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
-use FutureEd\Http\Controllers\Api\Traits\ApiValidatorTrait;
+use FutureEd\Http\Controllers\Api\Traits\AccessTokenTrait;
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 use FutureEd\Services;
@@ -9,14 +9,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
 class UserPasswordController extends UserController {
-  
+
+
     public function passwordForgot(){
-        $input = Input::only('username','user_type');
+
+        $input = Input::only('username','user_type','callback_uri');
+
         $this->addMessageBag($this->userType($input,'user_type'));
+        $this->addMessageBag($this->validateString($input,'callback_uri'));
         $subject = config('futureed.subject_forgot');
 
-        
-        
         $flag=0;
         
         if(!$this->email($input,'username')){
@@ -80,11 +82,25 @@ class UserPasswordController extends UserController {
 
                     if(strcasecmp($input['user_type'],config('futureed.student')) == 0){
 
-                      $this->mail->sendStudentMailResetPassword($userDetails,$code['confirmation_code'],$subject);
+                      $this->mail->sendStudentMailResetPassword($userDetails,$code['confirmation_code'],$input['callback_uri'],$subject);
                       
+                    }elseif(strcasecmp($input['user_type'],config('futureed.client')) == 0){
+
+                      $client_id = $this->client->getClientId($return['user_id']);
+                      $client = $this->client->getClientDetails($client_id);
+
+                      if($client['account_status'] != config('futureed.client_account_status_accepted')){
+
+                        return $this->respondErrorMessage(2013);
+
+
+                      }
+
+                      $this->mail->sendClientMailResetPassword($userDetails,$code['confirmation_code'],$input['callback_uri'],$subject);
+
                     }else{
 
-                      $this->mail->sendClientMailResetPassword($userDetails,$code['confirmation_code'],$subject);
+                      $this->mail->sendAdminMailResetPassword($userDetails,$code['confirmation_code'],$input['callback_uri'],$subject);
 
                     }
 
@@ -117,7 +133,7 @@ class UserPasswordController extends UserController {
         $error = config('futureed-error.error_messages');
 
         $this->addMessageBag($this->email($input,'email'));
-        $this->addMessageBag($this->validateNumber($input,'reset_code'));
+        $this->addMessageBag($this->resetCode($input,'reset_code'));
         $this->addMessageBag($this->userType($input,'user_type'));
 
 
@@ -147,17 +163,24 @@ class UserPasswordController extends UserController {
                   if($expired==true){
 
                      return $this->respondErrorMessage(2100);
+                     
                   }else{
                      
-                      if($input['user_type'] =='Student'){
+                      if(strcasecmp($input['user_type'],config('futureed.student')) == 0){
 
                         $studentdata = $this->student->resetCodeResponse($return['data']);
                         return $this->respondWithData($studentdata);
 
-                      }else{
+                      }elseif(strcasecmp($input['user_type'],config('futureed.client')) == 0){
 
                         $id = $this->client->getClientId($return['data']);
                         return $this->respondWithData(['id'=>$id]);
+
+                     }else{
+
+                        $id = $this->admin->getAdminId($return['data']);
+                        return $this->respondWithData(['id'=>$id]);
+
                      }
                   }
               }else{

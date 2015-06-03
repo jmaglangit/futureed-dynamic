@@ -44,7 +44,7 @@
                     {!! Form::button('Save'
                         , array(
                             'class' => 'btn btn-gold btn-medium'
-                            , 'ng-click' => 'saveNewPassword()'
+                            , 'ng-click' => 'studentResetPassword()'
                         ) 
                     ) !!}
                 </div>  
@@ -66,7 +66,7 @@
             <i class="fa fa-check fa-5x img-rounded text-center"></i>
           </div>
           
-           Your picture password has been set. <br /> 
+           Your picture password has been reset. <br /> 
            You may now use your new picture password to login. <br />
 
            <br />
@@ -80,8 +80,6 @@
     </div>
   </div>
 @endsection
-
-@section('footer')
 
 @section('scripts')
   

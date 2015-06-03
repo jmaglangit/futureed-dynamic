@@ -10,7 +10,7 @@
         <div ng-show="!locked && !enter_pass">
           {!! Form::open(array('id' => 'login_form')) !!}
             <div class="logo-container">
-              {!! Html::image('images/logo-md.png') !!}
+              {!! Html::image('/images/logo-md.png') !!}
             </div>
             
             <div class="title title-student">Student login</div>
@@ -69,9 +69,6 @@
 </div>
 
 @stop
-
-
-@section('footer')
 
 @section('scripts')
   

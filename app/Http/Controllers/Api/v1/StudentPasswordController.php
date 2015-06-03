@@ -17,7 +17,7 @@ class StudentPasswordController extends StudentController {
         return $this->respondWithData($response['data']);
     }
 
-    //check password if correct
+    //check password if correct while logged in.
     public function confirmPassword($id){
 
         $input = Input::only('password_image_id');
@@ -42,21 +42,13 @@ class StudentPasswordController extends StudentController {
             return $this->respondErrorMessage(2012);
         }
 
-        //check student id and password_image_id if matched.
-        $response = $this->student->checkAccess($id,$input['password_image_id']);
+        //check student id and password_image_id if matched that won't lock account.
+        $response = $this->student->checkAccess($id,$input['password_image_id'],1);
 
         if($response['status'] == 200){
 
             //get student data
             $response['data'] = $this->student->getStudentDetails($id);
-
-            $token = $this->token->getToken(
-                [
-                    'url' => Request::capture()->fullUrl(),
-                ]
-            );
-            $response['data'] = array_merge($response['data'],$token);
-
         }
 
         if($response['status'] <> 200){
@@ -224,12 +216,11 @@ class StudentPasswordController extends StudentController {
     
     
     public function changeImagePassword($id){
-      
-      $input = Input::only('password_image_id','access_token');
+
+      $input = Input::only('password_image_id');
       $error = config('futureed-error.error_messages');
 
       $this->addMessageBag($this->validateNumber($input,'password_image_id'));
-      $this->addMessageBag($this->validateString($input,'access_token'));
 
       $msg_bag = $this->getMessageBag();
 
@@ -242,23 +233,13 @@ class StudentPasswordController extends StudentController {
           if($this->student->checkIdExist($id)){
               if($this->password_image->checkPasswordExist($input['password_image_id'])){
 
-                  $token = $this->token->decodeToken($input['access_token']);
-    
-                   if($token['status']==true){
-                        
                         $student_reference = $this->student->getStudentReferences($id);
+
                         $this->user->updateInactiveLock($student_reference['user_id']);
+
                         $this->student->ChangPasswordImage($id,$input['password_image_id']); 
                         
-                        return $this->respondWithData(['id'=>$id,
-                                                        'access_token'=>$input['access_token']
-                                                      ]);
-                      
-                    }else{
-                      
-                      return $this->respondErrorMessage(2102);
-                    
-                    } 
+                        return $this->respondWithData(['id' => $id ]);
 
               }else{
 

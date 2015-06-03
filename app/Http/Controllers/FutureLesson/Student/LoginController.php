@@ -18,7 +18,7 @@ class LoginController extends Controller {
 	{
 		if(Session::get('student')) {
 			$user_object = json_decode(Session::get('student'));
-
+			
 			if(!isset($user_object->avatar_id)) {
 				return redirect()->route('student.dashboard.follow_up_registration');
 			}
@@ -40,7 +40,7 @@ class LoginController extends Controller {
 		$user_object = json_decode($user_data['user_data']);
 
 		if($user_object->id){
-			Session::flush();
+			Session::forget('student');
 			Session::put('student', $user_data['user_data']);
 
 			if($user_object->avatar_id) {
@@ -60,7 +60,7 @@ class LoginController extends Controller {
 	 */
 	public function logout()
 	{
-		Session::flush();
+		Session::forget('student');
 		return redirect()->route('student.login');
 	}
 	
@@ -94,7 +94,7 @@ class LoginController extends Controller {
 			return redirect()->route('student.login.forgot_password');
 		}
 		
-		return view('student.login.enter-code')->with(array('email' => $email, 'show' => $show));
+		return view('student.login.enter-reset-code')->with(array('email' => $email, 'show' => $show));
 	}
 
 	/**
@@ -121,22 +121,37 @@ class LoginController extends Controller {
 	 */
 	public function reset_password()
 	{
-		$input = Input::only('id', 'reset_code', 'confirmation_code', 'email');
+		$input = Input::only('id', 'reset_code', 'email');
 		$id = $input['id'];
 		$email = $input['email'];
-		$new = false;
-
-		if($input['reset_code'] != NULL) {
-			$code = $input['reset_code'];
-		} else {
-			$code = $input['confirmation_code'];
-			$new = true;
-		}
+		$code = $input['reset_code'];
 
 		if($id == null || $code == null) {
 			return redirect()->route('student.login.forgot_password');
 		}
 
-		return view('student.login.reset-password', ['id' => $id, 'code' => $code, 'email' => $email, 'new' => $new]);
+		return view('student.login.reset-password', ['id' => $id, 'code' => $code, 'email' => $email]);
+	}
+
+	public function set_password() {
+		$input = Input::only('id', 'confirmation_code', 'email');
+		$id = $input['id'];
+		$email = $input['email'];
+		$code = $input['confirmation_code'];
+
+		if($id == null || $code == null) {
+			return redirect()->route('student.registration');
+		}
+
+		return view('student.login.set-password', ['id' => $id, 'code' => $code, 'email' => $email]);
+	}
+
+	/**
+	* Partials for AngularJS Directive
+	*/
+
+	public function base_url() {
+
+		return view('student.partials.base-url');
 	}
 }

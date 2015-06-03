@@ -1,7 +1,21 @@
-<ul ng-init="setActive('{!! $active !!}')">
-	<li ng-if="!edit" ng-class="{ 'active' : active_index }"><a href="{!! route('student.profile.index') !!}">My Profile</a></li>
-	<li ng-if="edit" ng-class="{ 'active' : active_index }"><a href="{!! route('student.profile.index') !!}">Edit Profile</a></li>
-	<li ng-class="{ 'active' : active_rewards }"><a href="{!! route('student.profile.rewards') !!}">Student Rewards</a></li>
-	<li ng-class="{ 'active' : active_avatar }"><a href="{!! route('student.profile.change_avatar') !!}">Change Avatar</a></li>
-	<li ng-class="{ 'active' : active_password }"><a href="{!! route('student.profile.change_password') !!}">Change Picture Password</a></li>
+<ul ng-init="profile.setStudentProfileActive()">
+	<li ng-class="{ 'active' : profile.active_index || profile.active_edit_email || profile.active_confirm_email}">
+		<a href="" ng-click="profile.setStudentProfileActive('index')">My Profile</a>
+	</li>
+
+	<li ng-class="{ 'active' : profile.active_edit }">
+		<a href="" ng-click="profile.setStudentProfileActive('edit')">Edit Profile</a>
+	</li>
+
+	<li ng-class="{ 'active' : profile.active_rewards }">
+		<a href="" ng-click="profile.setStudentProfileActive('rewards')">Student Rewards</a>
+	</li>
+
+	<li ng-class="{ 'active' : profile.active_avatar }">
+		<a href="" ng-click="profile.setStudentProfileActive('avatar')">Change Avatar</a>
+	</li>
+
+	<li ng-class="{ 'active' : profile.active_password }">
+		<a href="" ng-click="profile.setStudentProfileActive('password')">Change Picture Password</a>
+	</li>
 </ul>

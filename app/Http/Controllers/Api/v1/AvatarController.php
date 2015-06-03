@@ -12,7 +12,8 @@ use Illuminate\Support\Facades\Input;
 class AvatarController extends ApiController {
     
     public function selectAvatars(){
-        
+
+
         $input = Input::only('gender');
         
         $this->addMessageBag($this->gender($input,'gender'));
@@ -22,11 +23,14 @@ class AvatarController extends ApiController {
             return $this->respondWithError($this->getMessageBag());
         }
 
-                    $avatar= $this->avatar->getAvatars($input['gender']);
-                    return $this->respondWithData($avatar);
+        $avatar= $this->avatar->getAvatars($input['gender']);
+
+        return $this->respondWithData($avatar);
     }
     
     public function saveUserAvatar(){
+
+
         
         $input = Input::only('avatar_id','id');
 
