@@ -22,7 +22,6 @@ function LoginController($scope, apiService, clientLoginApiService, clientProfil
 
 	function clientLogin() {
 	    $scope.errors = Constants.FALSE;
-
 	    $scope.ui_block();
 	    clientLoginApiService.clientLogin(self.username, self.password, self.role).success(function(response) {
 	      if(response.status == Constants.STATUS_OK) {

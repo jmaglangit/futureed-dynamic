@@ -109,7 +109,7 @@
 					  'as' => 'admin.manage.client.index'
 					, 'middleware' => 'admin'
 					, 'uses' => $manage_client_controller . '@index'
-				]);
+				]);				
 
 				Routes::group(['prefix' => 'partials'], function() {
 					$manage_client_controller = 'FutureLesson\Admin\ManageClientController';
