@@ -102,6 +102,11 @@
 								'middleware' => 'client',
 								'uses' => $manage_teacher_controller . '@view_teacher_form'
 							]);
+						Routes::get('delete_teacher_form', [
+								'as' => 'client.teacher.partials.delete_teacher_form',
+								'middleware' => 'client',
+								'uses' => $manage_teacher_controller . '@delete_teacher_form'
+							]);
 					});
 				});
 
