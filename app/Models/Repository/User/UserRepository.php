@@ -59,6 +59,7 @@ class UserRepository implements UserRepositoryInterface {
                 'user_type' => $user['user_type'],
                 'password' => (isset($user['password'])) ? sha1($user['password']) : null,
                 'status' => (isset($user['status'])) ? ($user['status']) : 'Enabled',
+                'is_account_activated' => (isset($user['is_account_activated'])) ? $user['is_account_activated'] : NULL,
                 'confirmation_code' => (isset($user['confirmation_code'])) ? $user['confirmation_code'] : NULL,
                 'confirmation_code_expiry' => (isset($user['confirmation_code_expiry'])) ? $user['confirmation_code_expiry'] : NULL,
                 'created_by' => 1,

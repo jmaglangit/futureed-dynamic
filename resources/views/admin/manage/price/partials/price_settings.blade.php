@@ -33,7 +33,7 @@
 	      			]) 
 	      		!!}
 	      		<div class="form-group">
-	      			<label class="col-xs-2 control-label">Name <span class="required">*</span></label>
+	      			<label class="col-xs-3 control-label">Subscription Name <span class="required">*</span></label>
 	      			<div class="col-xs-5">
 	      				{!! Form::text('name', '', 
 		      				[
@@ -45,7 +45,7 @@
 	      			</div>
 	      		</div>
 	      		<div class="form-group">
-	      			<label class="col-xs-2 control-label">Description <span class="required">*</span></label>
+	      			<label class="col-xs-3 control-label">Description <span class="required">*</span></label>
 	      			<div class="col-xs-5">
 	      				{!! Form::textarea('description', '', 
 		      				[
@@ -59,7 +59,7 @@
 	      			</div>
 	      		</div>
 	      		<div class="form-group">
-	      			<label class="col-xs-2 control-label">Price <span class="required">*</span></label>
+	      			<label class="col-xs-3 control-label">Price <span class="required">*</span></label>
 	      			<div class="col-xs-5">
 	      				{!! Form::text('price','',
 	      					[
@@ -71,7 +71,7 @@
 	      			</div>
 	      		</div>
 	      		<div class="form-group">
-                		<label class="col-xs-2 control-label" id="status">Status <span class="required">*</span></label>
+                		<label class="col-xs-3 control-label" id="status">Status <span class="required">*</span></label>
                 		<div class="col-xs-5">
                 			<div class="col-xs-6 checkbox">	                				
                 				<label>
@@ -101,7 +101,7 @@
                 			</div>
                 		</div>
                 	</div>
-                	<div class="col-xs-7 col-xs-offset-1">
+                	<div class="col-xs-7 col-xs-offset-2">
                 		<div class="btn-container">
                 			{!! Form::button('Edit'
                 				, array(
@@ -139,8 +139,26 @@
 		</div>
 	</div>
 
-	<div class="list-container" ng-init="sale.getPriceList()"ng-cloak>
-		<table id="client-list" datatable="ng" class="table table-striped table-hover dt-responsive">
+	<div class="list-container" ng-cloak>
+		<div class="size-container">
+			{!! Form::select('size'
+				, array(
+					  '10' => '10'
+					, '20' => '20'
+					, '50' => '50'
+					, '100' => '100'
+				)
+				, '10'
+				, array(
+					'ng-model' => 'sale.table.size'
+					, 'ng-change' => 'sale.paginateBySize()'
+					, 'ng-if' => "sale.price.length"
+					, 'class' => 'form-control paginate-size pull-right'
+				)
+			) !!}
+		</div>
+
+		<table id="price-list" class="table table-striped table-bordered">
 			<thead>
 	        <tr>
 	            <th>Subscription Name</th>
@@ -157,8 +175,7 @@
 	            <td>
 	            	<div class="row">
 	            		<div class="col-xs-4">
-	            			<i ng-if="p.status == 'Disabled'" title="Enable" class="fa success-icon fa-check-circle-o"></i>
-            				<i ng-if="p.status == 'Enabled'" title="Disable" class="fa error-icon fa-ban"></i>
+	            			{! p.status !}
 	            		</div>
 	            		<div class="col-xs-4">
 	            			<a href="" ng-click="sale.getPrice(p.id)"><span><i class="fa fa-pencil"></i></span></a>
@@ -169,8 +186,26 @@
 	            	</div>
 	            </td>
 	        </tr>
+	        <tr class="odd" ng-if="!sale.price.length">
+	        	<td valign="top" colspan="4" class="dataTables_empty">
+	        		No records found
+	        	</td>
+	        </tr>
 	        </tbody>
-
 		</table>
+
+		<div class="pull-right" ng-if="sale.price.length">
+			<pagination 
+				total-items="sale.table.total_items" 
+				ng-model="sale.table.page"
+				max-size="3"
+				items-per-page="sale.table.size" 
+				previous-text = "&lt;"
+				next-text="&gt;"
+				class="pagination" 
+				boundary-links="true"
+				ng-change="sale.paginateByPage()">
+			</pagination>
+		</div>
 	</div>
 </div>

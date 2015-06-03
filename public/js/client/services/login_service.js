@@ -3,42 +3,37 @@ angular.module('futureed.services')
 
 function clientLoginApiService($http) {
 	var clientLoginApi = {};
-	var clientLoginApiUrl = '/api/v1/';
+	var clientLoginApiUrl = '/api/v1/client';
 
-	clientLoginApi.clientLogin = clientLogin;
-	clientLoginApi.registerClient = registerClient;
-	clientLoginApi.resetClientPassword = resetClientPassword;
-	clientLoginApi.setClientPassword = setClientPassword;
-
-	function clientLogin(username, password, role) {
+	clientLoginApi.clientLogin = function(username, password, role) {
 		return $http({
 			method	: Constants.METHOD_POST
 			, data 	: {username : username, password : password, role : role}
-			, url	: clientLoginApiUrl + 'client/login'
+			, url	: clientLoginApiUrl + '/login'
 		});
 	}
 
-	function registerClient(data) {
+	clientLoginApi.registerClient = function(data) {
 		return $http({
 			method	: Constants.METHOD_POST
 			, data	: data
-			, url 	: clientLoginApiUrl + 'client/register'
+			, url 	: clientLoginApiUrl + '/register'
 		});
 	}
 
-	function resetClientPassword(id, reset_code, password) {
+	clientLoginApi.resetClientPassword = function(id, reset_code, password) {
 		return $http({
 			method 	: Constants.METHOD_POST
 			, data 	: {reset_code : reset_code, password : password}
-			, url	: clientLoginApiUrl + 'client/reset-password/' + id
+			, url	: clientLoginApiUrl + '/reset-password/' + id
 		});
 	}
 
-	function setClientPassword(id, password) {
+	clientLoginApi.setClientPassword = function(id, password) {
 		return $http({
 			method 	: Constants.METHOD_POST
 			, data 	: {password : password}
-			, url	: clientLoginApiUrl + 'client/new-password/' + id
+			, url	: clientLoginApiUrl + '/new-password/' + id
 		});
 	}
 

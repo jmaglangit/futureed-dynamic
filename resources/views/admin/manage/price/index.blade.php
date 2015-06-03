@@ -13,8 +13,7 @@
 			<div class="price-content">
 				<div class="content-title">
 					<div class="title-main-content">
-						<span ng-if="!sale.edit_price"><i class="fa fa-gear"></i> Price & Discounts</span>
-						<span ng-if="sale.edit_price"><i class="fa fa-gear"></i> Edit Price</span>
+						<span><i class="fa fa-gear"></i> Price & Discounts</span>
 					</div>
 				</div>
 				<div class="form-content col-xs-12">
@@ -59,5 +58,6 @@
 	{!! Html::script('/js/admin/controllers/sales_controller.js')!!}
 	{!! Html::script('/js/admin/services/sales_service.js')!!}
 	{!! Html::script('/js/admin/manage_sales.js')!!}
+	{!! Html::script('/js/common/table_service.js')!!}
 
 @stop

@@ -17,7 +17,7 @@ function AnnouncementController($scope, announcementApiService){
   self.saveAnnounce = saveAnnounce;
 
  function afterDateStart($dates){
-    var maxDate = new Date(self.data.date_start).setHours(0,0,0,0); // Set minimum date to whatever you want here
+    var maxDate = new Date(self.data.date_start).setHours(0); // Set minimum date to whatever you want here
 
     for(d in $dates){        
         if($dates[d].utcDateValue < maxDate){
@@ -27,10 +27,10 @@ function AnnouncementController($scope, announcementApiService){
   }
 
   function beforeDate($dates){
-    var maxDate = new Date().setHours(0,0,0,0); // Set minimum date to whatever you want here
-
+    var maxDate = new Date().setHours(0); // Set minimum date to whatever you want here
+    
     for(d in $dates){        
-        if($dates[d].utcDateValue < maxDate){
+        if($dates[d].utcDateValue <= maxDate){
             $dates[d].selectable = false;
         }
     }
@@ -46,8 +46,21 @@ function AnnouncementController($scope, announcementApiService){
           self.errors = $scope.errorHandler(response.errors);
         } else if(response.data) {
           self.data = response.data;
-          self.data.date_start = new Date(self.data.date_start).setHours(0,0,0,0);
-          self.data.date_end = new Date(self.data.date_end).setHours(0,0,0,0);
+
+          var start = [];
+          var end = [];
+
+
+          if(self.data && self.data.date_start) {
+            start = self.data.date_start.split(" ");
+            end = self.data.date_end.split(" ");
+
+            self.data.date_start = new Date(start[0]);
+            self.data.date_end = new Date(end[0]);
+          } else {
+            self.data.date_start = Constants.EMPTY_STR;
+            self.data.date_end = Constants.EMPTY_STR;
+          }
         }
       }
 
@@ -81,6 +94,7 @@ function AnnouncementController($scope, announcementApiService){
           self.errors = $scope.errorHandler(response.errors);
         }else if(response.data){
           self.data.success = Constants.TRUE;
+          $("html, body").animate({ scrollTop: 0 }, "slow");
         }
       }
 

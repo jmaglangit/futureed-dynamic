@@ -3,24 +3,21 @@ angular.module('futureed.services')
 
 function adminLoginApiService($http) {
 	var adminLoginApi = {};
-	var adminLoginApiUrl = '/api/v1/';
+	var adminLoginApiUrl = '/api/v1/admin';
 
-	adminLoginApi.adminDoLogin = adminDoLogin;
-	adminLoginApi.adminResetPass = adminResetPass;
-
-	function adminDoLogin(username, password){
+	adminLoginApi.adminDoLogin = function(username, password){
 		return $http({
 			method	: Constants.METHOD_POST
 			, data 	: {username : username, password : password}
-			, url 	: adminLoginApiUrl + 'admin/login'
+			, url 	: adminLoginApiUrl + '/login'
 		});
 	}
 
-	function adminResetPass(id, reset_code, new_password){
+	adminLoginApi.adminResetPass = function(id, reset_code, new_password){
 		return $http({
 			method 	: Constants.METHOD_POST
-			, data 	: {reset_code : reset_code, new_password : new_password}
-			, url 	: adminLoginApiUrl + 'admin/change-password/' + id
+			, data 	: {reset_code : reset_code, password : new_password}
+			, url 	: adminLoginApiUrl + '/forgot-password/' + id
 		});
 	}
 

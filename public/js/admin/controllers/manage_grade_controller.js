@@ -6,6 +6,10 @@ ManageGradeController.$inject = ['$scope', 'apiService', 'manageGradeService'];
 function ManageGradeController($scope, apiService, manageGradeService) {
 	var self = this;
 
+	self.table = {};
+	self.table.size = Constants.DEFAULT_SIZE;
+	self.table.page = Constants.DEFAULT_PAGE;
+
 	self.search = {};
 	self.create = {};
 	self.delete = {};
@@ -56,21 +60,26 @@ function ManageGradeController($scope, apiService, manageGradeService) {
 		self.errors = Constants.FALSE;
 		var grade = (self.search.grade) ? self.search.grade : Constants.EMPTY_STR;
 		var country = (self.search.country) ? self.search.country : Constants.EMPTY_STR;
+		self.table.loading = Constants.TRUE;
 
 		$scope.ui_block();
-		manageGradeService.getGradeList(grade, country).success(function(response) {
+		manageGradeService.getGradeList(grade, country, self.table).success(function(response) {
+			self.table.loading = Constants.FALSE;
+
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					self.grades = response.data.records;
+					self.updateTable(response.data);
 				}
 			}
 
 			$scope.ui_unblock();
 		}).error(function(response) {
-			$scope.ui_unblock();
+			self.table.loading = Constants.FALSE;
 			self.errors = $scope.internalError();
+			$scope.ui_unblock();
 		});
 	}
 
@@ -182,6 +191,29 @@ function ManageGradeController($scope, apiService, manageGradeService) {
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
+	}
 
+	self.paginateBySize = function() {
+		self.table.page = 1;
+		self.table.offset = (self.table.page - 1) * self.table.size;
+		self.getGradeList();
+	}
+
+	self.paginateByPage = function() {
+		var page = self.table.page;
+		
+		self.table.page = (page < 1) ? 1 : page;
+		self.table.offset = (page - 1) * self.table.size;
+
+		self.getGradeList();
+	}
+
+	self.updateTable = function(data) {
+		self.table.total_items = data.total;
+
+		// Set Page Count
+		var page_count = data.total / self.table.size;
+			page_count = (page_count < Constants.DEFAULT_PAGE) ? Constants.DEFAULT_PAGE : Math.ceil(page_count);
+		self.table.page_count = page_count;
 	}
 }

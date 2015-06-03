@@ -25,7 +25,6 @@
     {!! Html::style('/css/futureed.css') !!}
     {!! Html::style('/css/futureed-admin.css') !!}
     {!! Html::style('/css/angucomplete.css') !!}
-    {!! Html::style('/css/datatables.bootstrap.min.css') !!}
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -57,13 +56,16 @@
     {!! Html::script('//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular.min.js') !!}
     {!! Html::script('//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular-resource.min.js') !!}
     {!! Html::script('//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-cookies.min.js') !!}
+    {!! Html::script('/js/ui-bootstrap-tpls-0.13.0.min.js') !!}
     {!! Html::script('/js/jquery.smooth-scroll.js') !!}
+   
     
     {!! Html::script('/js/futureed_constants.js') !!}
     {!! Html::script('/js/futureed_utils.js') !!}
     {!! Html::script('/js/futureed.js') !!}
     {!! Html::script('/js/futureed_controllers.js') !!}
     {!! Html::script('/js/futureed_services.js') !!}
+    {!! Html::script('/js/common/table_service.js') !!}
     {!! Html::script('/js/datetimepicker.js') !!}
     {!! Html::script('/js/angular-datatables.min.js') !!}
     {!! Html::script('/js/jquery.dataTables.min.js') !!}

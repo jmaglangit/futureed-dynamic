@@ -1,5 +1,6 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
+use Carbon\Carbon;
 use FutureEd\Http\Controllers\Controller;
 use FutureEd\Http\Requests;
 
@@ -29,7 +30,19 @@ class AnnouncementController extends ApiController {
      */
     
     public function index(){
-        return $this->respondWithData($this->announcement->getAnnouncement());
+        $announcement =  $this->announcement->getAnnouncement();
+
+        $date_start = Carbon::parse($announcement['date_start']);
+        $date_end = Carbon::parse($announcement['date_end']);
+
+        //Determine if the announcement is between current date.
+        if(Carbon::today() >= $date_start && Carbon::today() <= $date_end){
+
+            return $this->respondWithData($announcement);
+        }
+
+        return $this->respondWithData([]);
+
     }
     
     /**
@@ -42,15 +55,23 @@ class AnnouncementController extends ApiController {
         $this->addMessageBag($this->validateString($input,'announcement'));
         $this->addMessageBag($this->validateDate($input,'date_start'));
         $this->addMessageBag($this->validateDate($input,'date_end'));
-        $this->addMessageBag($this->validateDateRange($input,'date_start','date_end'));
-        
+
         $msg_bag = $this->getMessageBag();
         
         if(!empty($msg_bag)){
             return $this->respondWithError($this->getMessageBag());
         }
-        
-        $result = $this->announcement->updateAnnouncement($input);
-        return $this->respondWithData($result);
+
+        $date_start = Carbon::parse($input['date_start'])->toDateTimeString();
+        $date_end = Carbon::parse($input['date_end'])->toDateTimeString();
+
+        if($date_start <= $date_end && $date_end >= $date_start && $date_start >= Carbon::today()){
+
+            $result = $this->announcement->updateAnnouncement($input);
+            return $this->respondWithData($result);
+        } else {
+
+            return $this->respondErrorMessage(2500);
+        }
     }
 }

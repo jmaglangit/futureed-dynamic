@@ -8,31 +8,24 @@ function manageGradeService($http) {
 	var manageGradeApi = {};
 	var manageGradeApiUrl = '/api/v1/';
 
-	manageGradeApi.getGradeList = getGradeList;
-	manageGradeApi.getCountryName = getCountryName;
-	manageGradeApi.addNewGrade = addNewGrade;
-
-	manageGradeApi.getGradeDetails = getGradeDetails;
-	manageGradeApi.updateGradeDetails = updateGradeDetails;
-
-	manageGradeApi.deleteGrade = deleteGrade;
-
-	function getGradeList(grade, country) {
+	manageGradeApi.getGradeList = function(grade, country, table) {
 		return $http({
 			method	: Constants.METHOD_GET
 			, url 	: manageGradeApiUrl + "grade?name=" + grade
 				+ "&country_id=" + country
+				+ "&limit=" + table.size
+				+ "&offset=" + table.offset
 		});
 	}
 
-	function getCountryName(id) {
+	manageGradeApi.getCountryName = function(id) {
 		return $http({
 			method	: Constants.METHOD_GET
 			, url 	: manageGradeApiUrl + "countries/" + id
 		});
 	}
 
-	function addNewGrade(data) {
+	manageGradeApi.addNewGrade = function(data) {
 		return $http({
 			method 	: Constants.METHOD_POST
 			, data	: data
@@ -40,14 +33,14 @@ function manageGradeService($http) {
 		});
 	}
 
-	function getGradeDetails(id) {
+	manageGradeApi.getGradeDetails = function(id) {
 		return $http({
 			  method : Constants.METHOD_GET
 			, url 	 : manageGradeApiUrl + 'grade/' + id
 		});
 	}
 
-	function updateGradeDetails(data) {
+	manageGradeApi.updateGradeDetails = function(data) {
 		return $http({
 			  method : Constants.METHOD_PUT
 			, data	 : data
@@ -55,7 +48,7 @@ function manageGradeService($http) {
 		});
 	}
 
-	function deleteGrade(id) {
+	manageGradeApi.deleteGrade = function(id) {
 		return $http({
 			  method : 'DELETE'
 			, url 	 : manageGradeApiUrl + 'grade/' + id

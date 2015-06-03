@@ -149,7 +149,7 @@
                     <div class="form-group" ng-init="getCountries()">
                         <label for="" class="col-md-2 control-label">Country<span class="required">*</span></label>
                         <div class="col-md-4">
-                            <select name="country" class="form-control" ng-model="reg.country">
+                            <select name="country" class="form-control" ng-model="reg.country" ng-change="getGrades(reg.country)">
                                 <option value="">-- Select Country --</option>
                                 <option ng-repeat="country in countries" value="{! country.name !}">{! country.name!}</option>
                             </select>

@@ -3,6 +3,9 @@ var Constants = {
 	  FALSE			: 0
 	, TRUE			: 1
 
+	, DEFAULT_SIZE	: 10
+	, DEFAULT_PAGE	: 1
+
 	, EMPTY_STR		: ''
 
 	, METHOD_POST	: 'POST'
@@ -66,6 +69,14 @@ var Constants = {
 	, ADD_BULK_SUCCESS 			: "You have successfully created a bulk."
 	, EDIT_BULK_SUCCESS 		: "You have successfully updated this bulk."
 	, DELETE_BULK_SUCCESS 		: "You have successfully deleted this bulk."
+
+	, ADD_DISCOUNT_SUCCESS 			: "You have successfully create a client discount."
+	, EDIT_DISCOUNT_SUCCESS 		: "You have successfully updated a client discount."
+	, DELETE_DISCOUNT_SUCCESS 		: "You have successfully deleted a client discount."
+
+	, ADD_AREA_SUCCESS 			: "You have successfully added a new subject area."
+	, EDIT_AREA_SUCCESS 		: "You have successfully updated a subject area."
+	, DELETE_AREA_SUCCESS 		: "You have successfully deleted a subject area."
 
 	, MSG_U_NOTEXIST		: "User does not exist."
 	, MSG_U_EXIST 			: "Username already exists."

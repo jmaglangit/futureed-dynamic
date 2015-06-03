@@ -63,6 +63,7 @@
     
     {!! Html::script('/js/jquery.smooth-scroll.js') !!}
     
+    {!! Html::script('/js/ui-bootstrap-tpls-0.13.0.min.js') !!}
     {!! Html::script('/js/student/app.js') !!}
     {!! Html::script('/js/futureed_constants.js') !!}
     {!! Html::script('/js/futureed_utils.js') !!}

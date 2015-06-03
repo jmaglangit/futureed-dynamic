@@ -5,24 +5,18 @@ function manageAdminService($http) {
 	var adminApiUrl = '/api/v1/';
 	var manageAdminApi = {};
 
-	manageAdminApi.getAdminList = getAdminList;
-	manageAdminApi.checkUserAvailable = checkUserAvailable;
-	manageAdminApi.saveAdmin = saveAdmin;
-	manageAdminApi.viewAdmin = viewAdmin;
-	manageAdminApi.editAdmin = editAdmin;
-	manageAdminApi.resetPass = resetPass;
-	manageAdminApi.changeAdminEmail = changeAdminEmail;
-	manageAdminApi.checkAdminEmail = checkAdminEmail;
-
-	function getAdminList(user, email, role){
+	manageAdminApi.getAdminList = function(user, email, role, table){
 		return $http({
 			method 	: Constants.METHOD_GET
 			, url 	: adminApiUrl + 'admin?username=' + user
-				+ '&email=' + email + '&role=' + role
+				+ '&email=' + email 
+				+ '&role=' + role
+				+ '&limit=' + table.size
+				+ '&offset=' + table.offset
 		});
 	}
 
-	function checkUserAvailable(username, user_type){
+	manageAdminApi.checkUserAvailable = function(username, user_type){
 		return $http({
 			method 	: Constants.METHOD_POST
 			, data 	: {username : username, user_type : user_type}
@@ -30,7 +24,7 @@ function manageAdminService($http) {
 		});
 	}
 
-	function saveAdmin(data){
+	manageAdminApi.saveAdmin = function(data){
 		return $http({
 			method 	: Constants.METHOD_POST
 			, data 	: data
@@ -38,14 +32,14 @@ function manageAdminService($http) {
 		});
 	}
 
-	function viewAdmin(id){
+	manageAdminApi.viewAdmin = function(id){
 		return $http({
 			method 	: Constants.METHOD_GET
 			, url 	: adminApiUrl + 'admin/' + id
 		})
 	}
 
-	function editAdmin(data){
+	manageAdminApi.editAdmin = function(data){
 		return $http({
 			method 	: Constants.METHOD_PUT
 			, data 	: data 
@@ -53,7 +47,7 @@ function manageAdminService($http) {
 		})
 	}
 
-	function resetPass(password, id){
+	manageAdminApi.resetPass = function(password, id){
 		return $http({
 			method 	: Constants.METHOD_POST
 			, data 	: {new_password : password}
@@ -62,7 +56,7 @@ function manageAdminService($http) {
 		});
 	}
 
-	function changeAdminEmail(id, new_email, callback_uri) {
+	manageAdminApi.changeAdminEmail = function(id, new_email, callback_uri) {
 		return $http({
 			method 	: Constants.METHOD_POST
 			, data 	: {new_email : new_email, callback_uri : callback_uri}
@@ -71,13 +65,20 @@ function manageAdminService($http) {
 		});
 	}
 	
-	function checkAdminEmail(id, email) {
+	manageAdminApi.checkAdminEmail = function(id, email) {
 		return $http({
 			method 	: Constants.METHOD_POST
 			, data 	: {email : email}
 			, url 	: adminApiUrl + 'admin/check-email/' + id
 
 		});
+	}
+
+	manageAdminApi.deleteModeAdmin = function(id){
+		return $http({
+			method 	: Constants.METHOD_DELETE
+			, url 	: adminApiUrl + 'admin/' + id
+		})
 	}
 	
 	return manageAdminApi;
