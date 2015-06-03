@@ -4,10 +4,12 @@ use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
-
+use FutureEd\Http\Controllers\FutureLesson\Traits\ProfileTrait;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller {
+
+	use ProfileTrait;
 
 	/**
 	 * Display login screen
@@ -79,6 +81,11 @@ class LoginController extends Controller {
 	 */
 	public function registration($id = null)
 	{
+		$email = Input::only('email');
+
+		if($this->validate_email($email)){
+			return view('client.login.registration-invite-form');
+		}
 		return view('client.login.registration', array('id' => $id));
 	}
 

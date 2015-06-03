@@ -17,10 +17,10 @@ function AnnouncementController($scope, announcementApiService){
   self.saveAnnounce = saveAnnounce;
 
  function afterDateStart($dates){
-    var maxDate = new Date(self.data.date_start).setHours(23); // Set minimum date to whatever you want here
+    var maxDate = new Date(self.data.date_start).setHours(0); // Set minimum date to whatever you want here
 
     for(d in $dates){        
-        if($dates[d].utcDateValue <= maxDate){
+        if($dates[d].utcDateValue < maxDate){
             $dates[d].selectable = false;
         }
     }

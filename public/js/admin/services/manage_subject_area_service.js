@@ -72,7 +72,7 @@ function manageSubjectAreaService($http) {
 	* @Param
 	*		id 	- [Required] the area id
 	*/
-	api.delete = function(id) {
+	api.delete_area = function(id) {
 		return $http({
 			  method : Constants.METHOD_DELETE
 			, url 	 : url + 'subject-area/' + id

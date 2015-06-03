@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Validator;
 
 trait ProfileTrait{
 	public function update_session(){
@@ -14,6 +15,27 @@ trait ProfileTrait{
 		
 		if(!empty($user)) {
 			Session::put($role, json_encode($user));
+		}
+	}
+
+	public function validate_email($email){
+
+		$validator = Validator::make(
+			[
+				"email" => $email['email']
+			],
+			[
+				"email" => "email"
+			]
+		);
+
+		if($validator->fails()){
+
+			return false;
+		}
+		else
+		{
+			return true;
 		}
 	}
 }
