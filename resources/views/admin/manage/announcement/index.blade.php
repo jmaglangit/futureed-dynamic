@@ -66,7 +66,7 @@
 			                                </div>
 			                              </a>
 			                              <ul class="dropdown-menu date-dropdown-menu" role="menu" aria-labelledby="dLabel" ng-if="announce.data.date_start">
-			                                <datetimepicker data-ng-if="announce.data.date_start" data-ng-model="announce.data.date_end" data-before-render="announce.afterDateStart($dates)" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', startView:'day', minView:'day' }"/>
+			                                <datetimepicker data-ng-if="announce.data.date_start" data-ng-model="announce.data.date_end" data-before-render="announce.beforeDate($dates)" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', startView:'day', minView:'day' }"/>
 			                              </ul>
 			                            </div>
 								            </div>
