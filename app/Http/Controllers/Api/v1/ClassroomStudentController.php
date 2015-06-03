@@ -4,6 +4,7 @@ use FutureEd\Http\Requests;
 
 use FutureEd\Models\Repository\ClassStudents\ClassStudentsRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class ClassroomStudentController extends ApiController {
 
@@ -30,6 +31,7 @@ class ClassroomStudentController extends ApiController {
     {
 
 
+
 	}
 
 	/**
@@ -50,8 +52,35 @@ class ClassroomStudentController extends ApiController {
 	 */
 	public function show($id)
 	{
+
+        $category = [];
+
+        if(Input::get('name')){
+
+            $category['name'] = Input::get('name');
+        }
+
+        if(Input::get('email')){
+
+            $category['email'] = Input::get('email');
+        }
+
+        if(Input::get('offset')){
+
+            $category['offset'] = Input::get('offset');
+        }
+
+        if(Input::get('limit')){
+
+            $category['limit'] = Input::get('limit');
+        }
+
+        $offset = (Input::get('offset')) ? Input::get('offset') : 0;
+
+        $limit = (Input::get('limit')) ? Input::get('limit') : 0 ;
+
 		return $this->respondWithData(
-            $this->class_students->getClassroomStudents($id)
+            $this->class_students->getClassroomStudents($id,$category,$offset,$limit)
         );
 	}
 
