@@ -10,6 +10,6 @@ namespace FutureEd\Models\Repository\ClassStudents;
 
 interface ClassStudentsRepositoryInterface {
 
-    public function getClassroomStudents($class_id);
+    public function getClassroomStudents($class_id,$category,$offset,$limit);
 
 }
