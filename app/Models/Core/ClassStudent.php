@@ -21,11 +21,35 @@ class ClassStudent extends Model {
         return $this->hasMany('FutureEd\Models\Core\User');
     }
 
+    public function student(){
+
+        return $this->hasMany(('FutureEd\Models\Core\Student'));
+    }
+
     //Scopes
 
     public function scopeClassroom($query, $classroom){
 
         return $query->where('class_id',$classroom);
+    }
+
+
+    public function scopeUsername($query, $username) {
+
+        return $query->whereHas('user', function($query) use ($username) {
+            $query->where('username', 'like', '%'.$username.'%');
+        });
+
+    }
+
+
+    //-------------scopes
+    public function scopeEmail($query, $email) {
+
+        return $query->whereHas('user', function($query) use ($email) {
+            $query->where('email', 'like', '%'.$email.'%');
+        });
+
     }
     
 
