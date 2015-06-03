@@ -23,7 +23,7 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface{
             return $e->getMessage();        
         }
     }
-    public function upateClassStudent($id,$class_student){
+    public function updateClassStudent($id,$class_student){
         
     }
     public function deleteClassStudent($id){
