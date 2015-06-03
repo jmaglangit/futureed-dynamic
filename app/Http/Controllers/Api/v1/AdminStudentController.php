@@ -2,10 +2,18 @@
 
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
-
+use FutureEd\Http\Requests\Api\AdminStudentRequest;
+use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
+use FutureEd\Models\Repository\User\UserRepositoryInterface;
 use Illuminate\Http\Request;
 
-class AdminStudentController extends Controller {
+class AdminStudentController extends ApiController {
+
+    public function __construct(UserRepositoryInterface $user, StudentRepositoryInterface $student ){
+
+        $this->user = $user;
+        $this->student = $student;
+    }
 
 	/**
 	 * Display a listing of the resource.
@@ -32,9 +40,27 @@ class AdminStudentController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(AdminStudentRequest $request)
 	{
-		//
+        $user = $request->only('username','email');
+
+        $student = $request->only('first_name','last_name','gender','birth_date','country','state','city','school_code','grade_code');
+
+        $user['first_name'] = $student['first_name'];
+        $user['last_name'] = $student['last_name'];
+        $user['user_type'] = config('futureed.student');
+
+        $this->user->addUser($user);
+        $user_id = $this->user->checkUserName($user['username'],$user['user_type']);
+
+        $student['user_id'] = $user_id;
+
+        $this->student->addStudent($student);
+
+        $student_id = $this->student->getStudentId($user_id);
+
+        return $this->respondWithData(['id' => $student_id]);
+
 	}
 
 	/**
@@ -44,17 +70,6 @@ class AdminStudentController extends Controller {
 	 * @return Response
 	 */
 	public function show($id)
-	{
-		//
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
 	{
 		//
 	}
