@@ -276,7 +276,6 @@ class ClientRepository implements ClientRepositoryInterface{
 
         $clients = $clients->where('id','=', $id)->first();
 
-        $grade = [];
 
         foreach($clients['classroom'] as $k => $v){
 
@@ -286,9 +285,7 @@ class ClientRepository implements ClientRepositoryInterface{
 
         $grades = $grades->whereIn('id',$grade)->get();
 
-        $clients['grades'] = $grades;
-
-        return $clients;
+        return array($clients,'grade'=>$grades);
 
 
 
