@@ -36,12 +36,13 @@ class AnnouncementController extends ApiController {
         $date_end = Carbon::parse($announcement['date_end']);
 
         //Determine if the announcement is between current date.
-        if(!Carbon::now()->between($date_start,$date_end)){
+        if(Carbon::today() >= $date_start && Carbon::today() <= $date_end){
 
-            return $this->respondWithData([]);
+            return $this->respondWithData($announcement);
         }
 
-        return $this->respondWithData($announcement);
+        return $this->respondWithData([]);
+
     }
     
     /**
