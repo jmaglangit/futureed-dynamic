@@ -13,8 +13,8 @@
                 </p>
             </div>
 
-            <div class="alert alert-success" ng-if="area.success">
-                <p>{! area.success !}</p>
+            <div class="alert alert-success" ng-if="area.record.success">
+                <p>{! area.record.success !}</p>
             </div>
 
             <fieldset>
