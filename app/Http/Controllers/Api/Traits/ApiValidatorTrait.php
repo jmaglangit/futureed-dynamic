@@ -608,16 +608,16 @@ trait ApiValidatorTrait {
                 "before" => $error_msg[2500],
                 "after" =>$error_msg[2500]
             ]);
-        
+
         if($validator->fails()){
-        
+
             $validator_msg = $validator->messages()->toArray();
             
             return $this->setErrorCode(1005)
                 ->setField($date_start)
                 ->setMessage($validator_msg["$date_start"][0])
                 ->errorMessage();
-        }       
+        }
     }
 
     public function validateStatus($input,$field_name){
