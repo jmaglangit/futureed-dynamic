@@ -52,6 +52,6 @@ Routes::group(['middleware' => 'api_user','permission' => ['admin','user','stude
     Routes::resource('/student', 'Api\v1\StudentController',
         ['except' => ['create', 'edit']]);
 
-    Routes::resource('/admin/student', 'Api\v1\AdminStudentController',
+    Routes::resource('/admin/manage/student', 'Api\v1\AdminStudentController',
         ['except' => ['create', 'edit']]);
 });

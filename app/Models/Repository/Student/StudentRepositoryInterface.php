@@ -39,4 +39,6 @@ interface StudentRepositoryInterface {
     
     public function checkIdExist($id);
 
+    public function getStudentList($criteria = [],$limit = 0, $offset = 0);
+
 }

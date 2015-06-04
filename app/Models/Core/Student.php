@@ -14,4 +14,27 @@ class Student extends Model {
 
     protected $hidden = ['created_by','updated_by','created_at','updated_at','deleted_at'];
 
+
+    //-------------relationships
+    public function user() {
+        return $this->belongsTo('FutureEd\Models\Core\User');
+    }
+
+    //-------------scopes
+    public function scopeName($query, $name) {
+
+        return $query->where(function($query) use ($name) {
+            $query->where('first_name', 'like', '%'.$name.'%')->orWhere('last_name', 'like', '%'.$name.'%');
+        });
+
+    }
+
+    public function scopeEmail($query, $email) {
+
+        return $query->whereHas('user', function($query) use ($email) {
+            $query->whereEmail($email);
+        });
+
+    }
+
 }

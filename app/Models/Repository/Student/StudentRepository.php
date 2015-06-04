@@ -202,7 +202,50 @@ class StudentRepository implements StudentRepositoryInterface{
             return Student::where('id',$id)
                               ->pluck('id');
     }
-    
+
+    public function getStudentList($criteria = [],$limit = 0, $offset = 0){
+
+
+        $student = new Student();
+        $count = 0;
+
+        if(count($criteria) <= 0 && $limit == 0 && $offset == 0) {
+
+            $count = $student->count();
+
+        } else {
+
+            if(count($criteria) > 0) {
+                if(isset($criteria['name'])) {
+
+                    $student = $student->with('user')->name($criteria['name']);
+
+                }
+                if(isset($criteria['email'])) {
+
+                    $student = $student->with('user')->email($criteria['email']);
+
+                }
+
+            }
+
+            $count = $student->count();
+
+            if($limit > 0 && $offset >= 0) {
+                $student = $student->with('user')->offset($offset)->limit($limit);
+            }
+
+        }
+
+        $student = $student->with('user')->orderBy('last_name', 'asc');
+
+        return ['total' => $count, 'records' => $student->get()->toArray()];
+
+
+
+
+    }
+
     
 
 }

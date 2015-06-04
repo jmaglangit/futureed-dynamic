@@ -9,6 +9,8 @@ use Illuminate\Http\Request;
 use FutureEd\Services\CodeGeneratorServices;
 use FutureEd\Services\MailServices;
 
+use Illuminate\Support\Facades\Input;
+
 class AdminStudentController extends ApiController {
 
     public function __construct(UserRepositoryInterface $user, StudentRepositoryInterface $student,
@@ -27,7 +29,35 @@ class AdminStudentController extends ApiController {
 	 */
 	public function index()
 	{
-		//
+
+        $criteria = array();
+        $limit = 0;
+        $offset = 0;
+
+        if(Input::get('name')) {
+            $criteria['name'] = Input::get('name');
+        }
+
+        if(Input::get('email')){
+
+            $criteria['email'] = Input::get('email');
+        }
+
+        if(Input::get('limit')){
+
+            $limit = Input::get('limit');
+        }
+
+        if(Input::get('offset')){
+
+            $offset = Input::get('offset');
+        }
+
+        $student = $this->student->getStudentList($criteria,$limit,$offset);
+
+        return $this->respondWithData($student);
+
+
 	}
 
 	/**
@@ -89,7 +119,7 @@ class AdminStudentController extends ApiController {
 	 */
 	public function show($id)
 	{
-
+        return 1;
 	}
 
 	/**
