@@ -1,85 +1,139 @@
-<div ng-if="class.list">
+<div ng-if="class.active_list">
 	<div class="content-title">
 		<div class="title-main-content">
 			<span>Class Management</span>
 		</div>
 	</div>
-	<div class="col-xs-12">
-		<div class="title-mid mid-container">
+
+	<div class="col-xs-12 search-container">
+		<div class="title-mid">
 			Search
 		</div>
-	</div>
-	<div class="col-xs-12 search-container">
+
 		<div class="form-search">
 			{!! Form::open(
-					[
-						'id' => 'teacher_search',
+					array(
+						'id' => 'search_form',
 						'class' => 'form-horizontal'
-					]
+					)
 			) !!}
 			<div class="form-group">
-				<label class="col-xs-2 control-label">Class Name</label>
-				<div class="col-xs-5">
-					{!! Form::text('search_name', '',['class' => 'form-control', 'ng-model' => 'teacher.search_name', 'placeholder' => 'Name']) !!}
+				<div class="col-xs-4">
+					{!! Form::text('name', ''
+						, array(
+							'class' => 'form-control'
+							, 'ng-model' => 'class.search.name'
+							, 'placeholder' => 'Class Name'
+						)
+					) !!}
 				</div>
-				
+				<div class="col-md-4" ng-init="getGradeLevel()">
+                    <select name="grade_id" class="form-control" ng-model="class.search.grade_id">
+                        <option value="">-- Select Level --</option>
+                        <option ng-repeat="grade in grades" value="{! grade.code !}">{! grade.name !}</option>
+                    </select>
+                </div>
+				<div class="col-xs-2">
+					{!! Form::button('Search', 
+						array(
+							'class' => 'btn btn-blue'
+							, 'ng-click' => 'class.searchFnc()'
+						)
+					) !!}
+				</div>
+				<div class="col-xs-2">
+					{!! Form::button('Clear', 
+						array(
+							'class' => 'btn btn-gold'
+							, 'ng-click' => 'class.clear()'
+						)
+					) !!}
+				</div>
 			</div>
-			<div class="form-group">
-				<label class="col-xs-2 control-label">Grade <span class="required">*</span></label>
-				<div class="col-xs-5">
-					{!! Form::select('search_status',[''=>'-- Select Status --','Pending'=>'Pending','Paid'=>'Paid','Cancelled'=> 'Cancelled'],null,['class' => 'form-control', 'ng-model' => 'teacher.search_email', 'placeholder' => 'Email']) !!}
-				</div>
-				<div class="btn-container col-xs-5">
-					<button class="btn btn-blue btn-medium" type="button" ng-click="teacher.getTeacherList()">Search</button>
-					<button class="btn btn-gold btn-medium" type="button" ng-click="teacher.clearSearch()">Clear</button>
-				</div>
-			</div>
+			{!! Form::close() !!}
 		</div>
 	</div>
-	<div class="col-xs-12 mid-container">
-		<div class="title-mid">
-			Class List
-		</div>
-	</div>
-	<div class="col-xs-12 table-container" ng-init="teacher.getTeacherList()">
-		<div class="list-container" ng-cloak>
-			<table id="client-list" datatable="ng" class="table table-striped table-hover dt-responsive">
+
+	<div class="col-xs-12 table-container">
+		<div class="list-container" ng-init="class.list()" ng-cloak>
+			<div class="title-mid">
+				Class List
+			</div>
+
+			<div class="size-container">
+				{!! Form::select('size'
+					, array(
+						  '10' => '10'
+						, '20' => '20'
+						, '50' => '50'
+						, '100' => '100'
+					)
+					, '10'
+					, array(
+						'ng-model' => 'class.table.size'
+						, 'ng-change' => 'class.paginateBySize()'
+						, 'ng-if' => "class.records.length"
+						, 'class' => 'form-control paginate-size pull-right'
+					)
+				) !!}
+			</div>
+
+			<table id="class-list" class="table table-striped table-bordered">
 			<thead>
 		        <tr>
 		            <th>Grade</th>
 		            <th>Class Name</th>
-		            <th># of Seats Taken</th>
-		            <th># of seats Enrolled</th>
-		            <th>Action</th>
+		            <th>No. of Seats Taken</th>
+		            <th>No. of seats Enrolled</th>
+		            <th ng-if="class.records.length">Action</th>
 		        </tr>
 	        </thead>
 	        <tbody>
-		        <tr ng-repeat="t in teacher.teacherinfo">
-		            <td>{! t.first_name !} {! t.last_name !}</td>
-		            <td>{! t.user.email !}</td>
-		            <td>{! t.user.email !}</td>
-		            <td>{! t.user.email !}</td>
-		            <td width="250px">
-				            	<div class="col-xs-12">
-				            		<div class="row price-action">
-					            		<div class="col-action">
-					            			<a href="" ng-click="teacher.viewTeacher(t.id)">View</a>
-					            		</div>
-					            		<span class="separator">|</span>
-					            		<div class="col-action">
-					            			<a href="" ng-click="admin.editAdmin(a.id)">Edit</a>
-					            		</div>
-					            		<span class="separator">|</span>
-					            		<div class="col-action">
-					            			<a href="" ng-click="sale.deletePrice(p.id)">Remove</a>
-					            		</div>
-				            	</div>
-						        </div>
-				            </td>
-		        		</tr>
+		        <tr ng-repeat="classInfo in class.records">
+		            <td>{! classInfo.grade.name !}</td>
+		            <td>{! classInfo.name !}</td>
+		            <td>{! classInfo.seats_taken !}</td>
+		            <td>{! classInfo.seats_total !}</td>
+		            <td ng-if="class.records.length">
+		            	<div class="row">
+		            		<div class="col-xs-4">
+		            			{! classInfo.status !}
+		            		</div>
+		            		<div class="col-xs-4">
+		            			<a href="" ng-click="class.setActive('view',classInfo.id)"><span><i class="fa fa-eye"></i></span></a>
+		            		</div>
+		            		<div class="col-xs-4">
+		            			<a href="" ng-click="class.setActive('edit', classInfo.id)"><span><i class="fa fa-pencil"></i></span></a>
+		            		</div>
+		            	</div>
+		            </td>
+        		</tr>
+        		<tr class="odd" ng-if="!class.records.length && !class.table.loading">
+		        	<td valign="top" colspan="4">
+		        		No records found
+		        	</td>
+		        </tr>
+		        <tr class="odd" ng-if="class.table.loading">
+		        	<td valign="top" colspan="4">
+		        		Loading...
+		        	</td>
+		        </tr>
 	        	</tbody>
-
 			</table>
+
+			<div class="pull-right" ng-if="class.records.length">
+				<pagination 
+					total-items="class.table.total_items" 
+					ng-model="class.table.page"
+					max-size="3"
+					items-per-page="class.table.size" 
+					previous-text = "&lt;"
+					next-text="&gt;"
+					class="pagination" 
+					boundary-links="true"
+					ng-change="class.paginateByPage()">
+				</pagination>
+			</div>
 		</div>
 	</div>
 </div>

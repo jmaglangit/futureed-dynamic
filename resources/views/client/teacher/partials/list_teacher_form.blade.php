@@ -11,13 +11,11 @@
             </div>
     </div>
 
-	<div class="col-xs-12">
-		<div class="title-mid mid-container">
+	<div class="col-xs-12 search-container">
+		<div class="title-mid">
 			Search
 		</div>
-	</div>
 
-	<div class="col-xs-12 search-container">
 		<div class="form-search">
 			{!! Form::open(
 					array(
@@ -68,15 +66,13 @@
 	<button class="btn btn-blue btn-small margin-0-30" ng-click="teacher.setActive('add')">
 		<i class="fa fa-plus-square"></i> Add 
 	</button>
-
-	<div class="col-xs-12 mid-container">
-		<div class="title-mid">
-			Teacher List
-		</div>
-	</div>
 	
 	<div class="col-xs-12 table-container" ng-init="teacher.list()">
 		<div class="list-container" ng-cloak>
+			<div class="title-mid">
+				Teacher List
+			</div>
+
 			<div class="size-container">
 				{!! Form::select('size'
 					, array(
@@ -98,8 +94,8 @@
 			<table id="teacher-list" class="table table-striped table-bordered">
 				<thead>
 					<tr>
-						<th>Name</th>
-						<th>Email</th>
+						<th class="width-small">Name</th>
+						<th class="width-small">Email</th>
 						<th>Action</th>
 					</tr>
 				</thead>

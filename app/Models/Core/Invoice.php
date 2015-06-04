@@ -30,11 +30,25 @@ class Invoice extends Model {
     }
 
     //------------scopes    
-    public function scopeOrderNo($query,$order_no){
-        return $query->where('order_no','like','%'.$order_no.'%');
+    public function scopeOrder($query, $order_no) {
+
+        return $query->where('order_no', '=' , $order_no);
+
     }
-    
-    public function scopeSubscriptionId($query,$subscription_id){
-        return $query->where('subscription_id',$subscription_id);
+
+    public function scopeSubscription($query, $sub_id) {
+
+        return $query->where('subscription_id', '=' , $sub_id);
+
+    }
+
+    public function scopePayment($query, $payment_status) {
+
+        return $query->where('payment_status', '=' , $payment_status);
+
+   }
+
+    public function subscription() {
+        return $this->belongsTo('FutureEd\Models\Core\Subscription');
     }
 }
