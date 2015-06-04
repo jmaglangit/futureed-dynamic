@@ -30,8 +30,10 @@ function LoginController($scope, apiService, clientLoginApiService, clientProfil
 	          $scope.errorHandler(response.errors);
 	          self.password = Constants.EMPTY_STR;
 	        } else if(response.data) {
-	          $("#login_form input[name='user_data']").val(angular.toJson(response.data));
-	          $("#login_form").trigger(Constants.ATTR_SUBMIT);
+	          	var data = response.data;
+	          	  	data.role = self.role;
+	        	$("#login_form input[name='user_data']").val(angular.toJson(response.data));
+	          	$("#login_form").trigger(Constants.ATTR_SUBMIT);
 	        }
 	      }
 
