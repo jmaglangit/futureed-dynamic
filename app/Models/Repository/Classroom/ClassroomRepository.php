@@ -15,6 +15,13 @@ use League\Flysystem\Exception;
 
 class ClassroomRepository implements ClassroomRepositoryInterface{
 
+    /**
+     * Get list of classroom based with optional pagination.
+     * @param $criteria
+     * @param $limit
+     * @param $offset
+     * @return array
+     */
     public function getClassrooms($criteria,$limit,$offset){
 
         $classroom = new Classroom();
@@ -50,6 +57,11 @@ class ClassroomRepository implements ClassroomRepositoryInterface{
         ];
     }
 
+    /**
+     * Get classroom information.
+     * @param $id
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|\Illuminate\Support\Collection|null|static
+     */
     public function getClassroom($id){
 
         $return = Classroom::with('order','grade','client')->find($id);
@@ -57,6 +69,11 @@ class ClassroomRepository implements ClassroomRepositoryInterface{
         return $return;
     }
 
+    /**
+     * Add new classroom.
+     * @param $classroom
+     * @return string|static
+     */
     public function addClassroom($classroom){
 
         try{
@@ -72,11 +89,17 @@ class ClassroomRepository implements ClassroomRepositoryInterface{
     }
 
 
+    /**
+     * Update new classroom based on the data needed.
+     * @param $id
+     * @param $data
+     * @return ClassroomRepository|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|\Illuminate\Support\Collection|null|string|static
+     */
     public function updateClassroom($id,$data){
 
         try{
 
-            Classroom::id($id)->update($data);
+            Classroom::find($id)->update($data);
 
             return $this->getClassroom($id);
 
@@ -87,7 +110,19 @@ class ClassroomRepository implements ClassroomRepositoryInterface{
 
     }
 
+    /**
+     * Delete Classroom
+     * @param $id
+     */
     public function deleteClassroom($id){
+
+        try{
+
+            return Classroom::find($id)->delete();
+        }catch (Exception $e){
+
+            return $e->getMessage();
+        }
 
     }
 
