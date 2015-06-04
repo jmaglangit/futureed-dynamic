@@ -25,8 +25,16 @@ class Invoice extends Model {
         return $this->morphToMany('FutureEd\Models\Core\ClientDiscount','FutureEd\Models\Core\ClientDiscount');
     }
     
-    public function subscription(){
-        return $this->hasOne('FutureEd\Models\Core\Subscription');
+    public function subscription() {
+        return $this->belongsTo('FutureEd\Models\Core\Subscription');
+    }
+    
+    public function order(){
+        return $this->hasOne('FutureEd\Models\Core\Order');
+    }
+    
+    public function invoiceDetail(){
+        return $this->hasOne('FutureEd\Models\Core\InvoiceDetail');
     }
 
     //------------scopes    
@@ -48,7 +56,5 @@ class Invoice extends Model {
 
    }
 
-    public function subscription() {
-        return $this->belongsTo('FutureEd\Models\Core\Subscription');
-    }
+    
 }
