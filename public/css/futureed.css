@@ -1008,3 +1008,7 @@ div > .btncon > a {
 .width-xsmall {
 	width: 20%;
 }
+
+.module-container {
+	margin: 30px;
+}

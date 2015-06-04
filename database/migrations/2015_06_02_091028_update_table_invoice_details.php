@@ -26,7 +26,7 @@ class UpdateTableInvoiceDetails extends Migration {
      */
     public function down()
     {
-        Schema::table('clients', function(Blueprint $table)
+        Schema::table('invoice_details', function(Blueprint $table)
         {
             $table->string('class_name',128);
             $table->smallInteger('seats_total');

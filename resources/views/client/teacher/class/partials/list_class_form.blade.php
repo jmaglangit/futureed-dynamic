@@ -89,21 +89,21 @@
 		        </tr>
 	        </thead>
 	        <tbody>
-		        <tr ng-repeat="c in class.records">
-		            <td>{! c.grade.name !}</td>
-		            <td>{! c.name !}</td>
-		            <td>{! c.seats_taken !}</td>
-		            <td>{! c.seats_total !}</td>
+		        <tr ng-repeat="classInfo in class.records">
+		            <td>{! classInfo.grade.name !}</td>
+		            <td>{! classInfo.name !}</td>
+		            <td>{! classInfo.seats_taken !}</td>
+		            <td>{! classInfo.seats_total !}</td>
 		            <td ng-if="class.records.length">
 		            	<div class="row">
 		            		<div class="col-xs-4">
-		            			{! c.status !}
+		            			{! classInfo.status !}
 		            		</div>
 		            		<div class="col-xs-4">
-		            			<a href="" ng-click="client.setManageClientActive('view_client',a.id)"><span><i class="fa fa-eye"></i></span></a>
+		            			<a href="" ng-click="class.setActive('view',classInfo.id)"><span><i class="fa fa-eye"></i></span></a>
 		            		</div>
 		            		<div class="col-xs-4">
-		            			<a href="" ng-click="client.setManageClientActive('edit_client', a.id)"><span><i class="fa fa-pencil"></i></span></a>
+		            			<a href="" ng-click="class.setActive('edit', classInfo.id)"><span><i class="fa fa-pencil"></i></span></a>
 		            		</div>
 		            	</div>
 		            </td>
