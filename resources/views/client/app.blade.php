@@ -23,6 +23,7 @@
   <!-- Custom styles for this template -->
   {!! Html::style('/css/datetimepicker.css') !!}
   {!! Html::style('/css/futureed.css'); !!}
+  {!! Html::style('/css/futureed-client.css'); !!}
   
   {!! Html::style('/css/angucomplete.css') !!}
   {!! Html::style('/css/datatables.bootstrap.min.css') !!}
