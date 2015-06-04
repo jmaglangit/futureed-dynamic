@@ -12,6 +12,22 @@ class Student extends Model {
 
     protected $dates = ['deleted_at'];
 
-    protected $hidden = ['created_by','updated_by','created_at','updated_at','deleted_at'];
+    protected $hidden = [
+        'password_image_id',
+        'point_level_id',
+        'learning_style_id',
+        'user_id',
+        'created_by',
+        'updated_by',
+        'created_at',
+        'updated_at',
+        'deleted_at'];
 
+
+    //Relationships
+
+    public function user(){
+
+        return $this->belongsTo('FutureEd\Models\Core\User');
+    }
 }
