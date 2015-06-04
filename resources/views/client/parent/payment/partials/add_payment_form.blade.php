@@ -1,4 +1,4 @@
-<div>
+<div ng-if="payment.add">
 	<div class="content-title">
 		<div class="title-main-content">
 			<span>Add Payment</span>
@@ -17,57 +17,45 @@
 	        </div>
 	        <fieldset>
 	        	<div class="form-group">
-	        		<label class="col-xs-2 control-label" id="email">Number of Seats <span class="required">*</span></label>
+	        		<label class="col-xs-2 control-label" id="email">Email<span class="required">*</span></label>
 	        		<div class="col-xs-5">
-	        			{!! Form::text('code',''
+	        			{!! Form::text('Email',''
 	        				, array(
-	        					'placeHolder' => 'Number of Seats'
+	        					'placeHolder' => 'Email'
 	        					, 'ng-model' => 'subject.create.code'
 	        					, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
 	        					, 'class' => 'form-control'
 	        				)
 	        			) !!}
 	        		</div>
-	        	</div>
-	        	<div class="form-group" ng-init="getGradeLevel()">
-	        		<label class="col-xs-2 control-label">Grade <span class="required">*</span></label>
-	        		<div class="col-xs-5">
-	        			<select name="grade_code" class="form-control" ng-model="reg.grade_code">
-                            <option value="">-- Select Level --</option>
-                            <option ng-repeat="grade in grades" value="{! grade.code !}">{! grade.name !}</option>
-                        </select>
-	        		</div>		
-	        	</div>
-	        	<div class="form-group">
-	        		<label class="col-xs-2 control-label" id="email">Teacher <span class="required">*</span></label>
-	        		<div class="col-xs-5">
-	        			{!! Form::text('teacher',''
-	        				, array(
-	        					'placeHolder' => 'Teacher'
-	        					, 'ng-model' => 'subject.create.code'
-	        					, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
-	        					, 'class' => 'form-control'
-	        				)
-	        			) !!}
+	        		<div class="col-xs-3">
+	        			<div class="btn-container">
+	        				<button class="btn btn-blue btn-medium margin-0-top"><span><i class="fa fa-plus-square"></i></span> Add</button>
+	        			</div>
 	        		</div>
 	        	</div>
 	        	<div class="form-group">
-	        		<label class="col-xs-2 control-label" id="email">Grade <span class="required">*</span></label>
+	        		<div class="col-xs-8">
+	        			<center><b>OR</b></center>
+	        		</div>
+	        	</div>
+	        	<div class="form-group">
+	        		<label class="col-xs-2 control-label" id="name">Name<span class="required">*</span></label>
 	        		<div class="col-xs-5">
-	        			{!! Form::text('grade',''
+	        			{!! Form::text('name',''
 	        				, array(
-	        					'placeHolder' => 'Grade'
-	        					, 'ng-model' => 'subject.create.code'
+	        					'placeHolder' => 'Name'
+	        					, 'ng-model' => 'payment.name'
 	        					, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
 	        					, 'class' => 'form-control'
 	        				)
 	        			) !!}
 	        		</div>
-	        	</div>
-	        	<div class="btn-container col-xs-offset-2 col-xs-5">
-	        		<button class="btn btn-blue btn-medium" type="button"><span><i class="fa fa-plus-square"></i></span> Add</button>
-	        		<button class="btn btn-gold btn-medium" type="button">Cancel</button>
-
+	        		<div class="col-xs-3">
+	        			<div class="btn-container">
+	        				<button class="btn btn-blue btn-medium margin-0-top"><span><i class="fa fa-plus-square"></i></span> Add</button>
+	        			</div>
+	        		</div>
 	        	</div>
 	        </fieldset>
 	</div>
@@ -101,28 +89,21 @@
 				<table class="table table-bordered">
 					<thead>
 						<tr>
-							<td>Number of Seats</td>
-							<td>Grade</td>
-							<td>Teacher</td>
-							<td>Class</td>
+							<td>Name</td>
+							<td>Email</td>
 							<td>Price</td>
-<<<<<<< HEAD
-							<td>Actions</td>
-=======
->>>>>>> d59cf0f... KH#470,471and472[Client/Parent] payment ang invoice management
+							<td>Action</td>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
-							<td>200</td>
-							<td>K1</td>
-							<td>Edna Krabappel</td>
-							<td>Edna-K1</td>
-							<td>15</td>
-<<<<<<< HEAD
-							<td><a href="#">Remove</a></td>
-=======
->>>>>>> d59cf0f... KH#470,471and472[Client/Parent] payment ang invoice management
+						{{-- Sample Data --}}
+							<td>Bart Simpson</td>
+							<td>bart.simspon@springfield.com</td>
+							<td>5</td>
+							<td>
+								<a href="#">Remove</a>
+							</td>
 						</tr>
 					</tbody>
 				</table>
@@ -157,11 +138,7 @@
 		<div class="col-xs-5 div-right">
 			<div class="btn-container">
 				<button class="btn btn-blue btn-semi-large">Pay Subscription</button>
-<<<<<<< HEAD
-				<button class="btn btn-gold btn-medium">Cancel</button>
-=======
 				<button class="btn btn-gold btn-medium" ng-click="payment.setActive('list')">Cancel</button>
->>>>>>> d59cf0f... KH#470,471and472[Client/Parent] payment ang invoice management
 			</div>
 		</div>
 	</div>
