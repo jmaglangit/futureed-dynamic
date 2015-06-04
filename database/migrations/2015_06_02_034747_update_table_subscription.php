@@ -29,7 +29,7 @@ class UpdateTableSubscription extends Migration {
 	{
         Schema::table('subscription', function(Blueprint $table)
         {
-            $table->bigInteger('days')->after('description');
+            $table->drop('days');
 
         });
 	}
