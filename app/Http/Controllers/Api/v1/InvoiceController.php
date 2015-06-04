@@ -7,17 +7,24 @@ use FutureEd\Http\Requests\Api\InvoiceRequest;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
-use FutureEd\Models\Repository\Invoice\InvoiceRepositoryInterface as Invoice;
+
+use FutureEd\Models\Repository\Invoice\InvoiceRepositoryInterface;
+use FutureEd\Models\Repository\InvoiceDetail\InvoiceDetailRepositoryInterface;
+use FutureEd\Models\Repository\Classroom\ClassroomRepositoryInterface;
 
 class InvoiceController extends ApiController {
 
+    protected $classrooms;
     protected $invoice;
-
-    public function __construct(Invoice $invoice){
-
+    protected $invoiceDetail;
+    
+    public function __construct(ClassroomRepositoryInterface $classroom, 
+                                InvoiceRepositoryInterface $invoice,
+                                InvoiceDetailRepositoryInterface $invoiceDetail){
+        $this->classrooms = $classroom;
         $this->invoice = $invoice;
+        $this->invoiceDetail = $invoiceDetail;
     }
-
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -76,10 +83,37 @@ class InvoiceController extends ApiController {
 	 *
 	 * @return Response
 	 */
-	public function store()
-	{
-
-	}
+	/**
+	 * Store a newly created resource in storage.
+	 *
+	 * @return Response
+	 */
+    public function store(InvoiceRequest $request)
+    {    
+        $input = $request->all();
+        
+        $invoice = $this->invoice->addInvoice($input);        
+        
+        //get classrooms to create invoice details.
+        $criteria['order_no'] = $input['order_no'];
+        $classrooms = $this->classrooms->getClassrooms($criteria,0,0);
+        
+        //add invoice details.
+        if($classrooms['total'] > 0)
+        {
+            $class_records = $classrooms['record']->toArray();
+            for($i = 0; $i < $classrooms['total']; $i++)
+            {
+                $order_detail['invoice_no'] = $input['invoice_no'];
+                $order_detail['class_id'] = $class_records[$i]['id'];
+                $order_detail['grade_code'] = $class_records[$i]['grade']['code'];
+                
+                $result = $this->invoiceDetail->addInvoiceDetail($order_detail);
+            }     
+        }
+        
+        return $this->respondWithData($invoice);
+    }
 
 	/**
 	 * Display the specified resource.
