@@ -13,7 +13,7 @@
               {! error !}
             </p>
           </div>
-              
+                        
           <div class="form_content">
             <div ng-if="!confirm.resent">
               <div class="roundcon">

@@ -36,6 +36,7 @@ class Grade extends Model {
     }
 
 
+
     //Scopes
 
     public function scopeName($query, $name) {
@@ -47,6 +48,12 @@ class Grade extends Model {
     public function scopeCountryId($query,$country_id){
 
         return $query->where('country_id', '=', $country_id);
+    }
+
+
+    //-------------relationships classroom
+    public function classroom() {
+        return $this->hasMany('FutureEd\Models\Core\Classroom');
     }
 
 
