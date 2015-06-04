@@ -79,6 +79,7 @@ class StudentRepository implements StudentRepositoryInterface{
                'state' => $student['state'],
                'city' => $student['city'],
                'grade_code' => $student['grade_code'],
+               'school_code' => (isset($student['school_code'])) ? $student['school_code'] : NULL,
                'status' => 'Disabled',
                'created_by' => 1,
                'updated_by' => 1
@@ -172,6 +173,7 @@ class StudentRepository implements StudentRepositoryInterface{
                                'gender'=>$data['gender'],
                                'birth_date'=>$data['birth_date'],
                                'grade_code'=>$data['grade_code'],
+                               'school_code' => (isset($data['school_code'])) ? $data['school_code'] : NULL,
                                'country'=>$data['country'],
                                'city'=>$data['city'],
                                'state'=>$data['state']]);
@@ -251,7 +253,7 @@ class StudentRepository implements StudentRepositoryInterface{
 
         $student = new Student();
 
-        $student = $student->with('school','grade')->where('id',$id)->orderBy('created_at', 'desc');
+        $student = $student->with('user','school','grade')->where('id',$id)->orderBy('created_at', 'desc');
 
         $student = $student->first();
 

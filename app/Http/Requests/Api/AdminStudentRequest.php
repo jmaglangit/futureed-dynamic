@@ -38,6 +38,21 @@ class AdminStudentRequest extends ApiRequest {
                     'callback_uri' => 'required|string',
                 ];
                 break;
+            case 'PUT':
+                $student = config('futureed.student');
+                return [
+                    'username' => "required|string|min:8|max:32",
+                    'email' => "required|email",
+                    'first_name' => 'required|string',
+                    'last_name' => 'required|string',
+                    'gender'   => 'required|in:Male,Female',
+                    'birth_date' => 'required|date_format:Ymd|before:-13 year',
+                    'city' => 'required|string',
+                    'state' => 'required|string',
+                    'country' => 'required|string',
+                    'school_code' => 'required|integer',
+                    'grade_code' => 'required|integer'];
+                break;
 
         }
 

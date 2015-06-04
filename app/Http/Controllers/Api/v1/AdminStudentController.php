@@ -136,9 +136,47 @@ class AdminStudentController extends ApiController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($id,AdminStudentRequest $request)
 	{
-		//
+        $data = $request->only('first_name','last_name','gender','birth_date','country','state','city','school_code','grade_code');
+        $user = $request->only('username','email');
+        $user_type = config('futureed.student');
+
+        $user['name'] = $data['first_name'].$data['last_name'];
+
+        $student = $this->student->viewStudent($id);
+
+        //check username
+        $username = $this->user->checkUserName($user['username'],$user_type);
+
+        //check email
+        $email = $this->user->checkEmail($user['email'],$user_type);
+
+        if($username && $username != $student['user_id']){
+
+            return $this->respondErrorMessage(2201);
+        }
+
+        if($email && $email != $student['user_id']){
+
+            return $this->respondErrorMessage(2200);
+        }
+
+        if(!$student){
+
+            return $this->respondErrorMessage(2001);
+        }
+
+        //update user
+        $this->user->updateUser($student['user_id'], $user);
+
+        //update student
+        $this->student->updateStudentDetails($id, $data);
+
+        $return = $this->student->viewStudent($id);
+
+        return $this->respondWithData($return);
+        
 	}
 
 	/**
