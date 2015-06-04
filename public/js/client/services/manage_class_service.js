@@ -17,5 +17,20 @@ function manageClassService($http){
 		});
 	}
 
+	manageClassApi.details = function(id) {
+		return $http({
+			method : Constants.METHOD_GET
+			, url  : classApiUrl + 'classroom/' + id
+		});
+	}
+
+	manageClassApi.update = function(data) {
+		return $http({
+			method : Constants.METHOD_PUT
+			, data : {name : data.name}
+			, url  : classApiUrl + 'classroom/' + data.id
+		});
+	}
+
 	return manageClassApi;
 }
