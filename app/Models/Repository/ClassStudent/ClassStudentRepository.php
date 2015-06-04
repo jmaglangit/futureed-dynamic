@@ -15,23 +15,29 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface{
      */
     public function getClassStudents($criteria = [], $limit = 0, $offset = 0){
 
+
         $class_student = new ClassStudent();
 
         $class_student = $class_student->with('user');
 
-        if(isset($category['username'])){
+        if(isset($criteria['class_id'])){
 
-            $class_student = $class_student->username($category['username']);
+            $class_student = $class_student->classroom($criteria['class_id']);
         }
 
-        if(isset($category['email'])){
+        if(isset($criteria['name'])){
 
-            $class_student = $class_student->email($category['email']);
+            $class_student = $class_student->username($criteria['name']);
+        }
+
+        if(isset($criteria['email'])){
+
+            $class_student = $class_student->email($criteria['email']);
         }
 
         if($offset > 0 && $limit > 0 ){
 
-            $class_student = $class_student->with('user')->skip($offset)->take($limit);
+            $class_student = $class_student->skip($offset)->take($limit);
         }
 
         $records = $class_student->get();
