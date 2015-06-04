@@ -16,8 +16,30 @@
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li ng-if="user.role == 'Principal'">
+            <li class="">
               <a href="{!! route('client.teacher.index') !!}">Teacher</a>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Principal <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li class="">
+                  <a href="{!! route('client.principal.payment.index') !!}">Payment</a>
+                </li>
+                <li class="">
+                  <a href="{!! route('client.principal.invoice.index') !!}">Invoice</a>
+                </li>
+              </ul>
+            </li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Parent <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li class="">
+                  <a href="{!! route('client.parent.payment.index') !!}">Payment</a>
+                </li>
+                <li class="">
+                  <a href="{!! route('client.parent.invoice.index') !!}">Invoice</a>
+                </li>
+              </ul>
             </li>
           </ul>
             <!-- 
