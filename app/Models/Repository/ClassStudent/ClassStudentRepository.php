@@ -18,8 +18,8 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface{
 
         $class_student = new ClassStudent();
 
-        $class_student = $class_student->with('user');
-
+        $class_student = $class_student->with('student');
+//        dd($class_student->get()->toArray());
         if(isset($criteria['class_id'])){
 
             $class_student = $class_student->classroom($criteria['class_id']);
