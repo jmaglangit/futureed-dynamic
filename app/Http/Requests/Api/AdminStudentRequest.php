@@ -22,10 +22,10 @@ class AdminStudentRequest extends ApiRequest {
 
         switch($this->method) {
             case 'POST':
-                $client = config('futureed.client');
+                $student = config('futureed.student');
                 return [
-                    'username' => "required|string|min:8|max:32|unique:users,username,NULL,id,user_type,$client",
-                    'email' => "required|email|unique:users,email,NULL,id,user_type,$client",
+                    'username' => "required|string|min:8|max:32|unique:users,username,NULL,id,user_type,$student",
+                    'email' => "required|email|unique:users,email,NULL,id,user_type,$student",
                     'first_name' => 'required|string',
                     'last_name' => 'required|string',
                     'gender'   => 'required|in:Male,Female',
@@ -34,7 +34,8 @@ class AdminStudentRequest extends ApiRequest {
                     'state' => 'required|string',
                     'country' => 'required|string',
                     'school_code' => 'required|integer',
-                    'grade_code' => 'required|integer'
+                    'grade_code' => 'required|integer',
+                    'callback_uri' => 'required|string',
                 ];
                 break;
 
@@ -50,7 +51,8 @@ class AdminStudentRequest extends ApiRequest {
     public function messages() {
         return [
             'school_code.required' => 'School Name is required.',
-            'grade_code.required' => 'Grade is required.'
+            'grade_code.required' => 'Grade is required.',
+
         ];
     }
 }
