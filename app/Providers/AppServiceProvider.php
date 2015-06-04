@@ -133,5 +133,9 @@ class AppServiceProvider extends ServiceProvider {
             'FutureEd\Models\Repository\ClassStudent\ClassStudentRepositoryInterface',
             'FutureEd\Models\Repository\ClassStudent\ClassStudentRepository'
         );
+        $this->app->bind(
+            'FutureEd\Models\Repository\Invoice\InvoiceRepositoryInterface',
+            'FutureEd\Models\Repository\Invoice\InvoiceRepository'
+        );
 	}
 }
