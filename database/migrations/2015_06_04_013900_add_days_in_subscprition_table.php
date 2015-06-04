@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateTableSubscription extends Migration {
+class AddDaysInSubscpritionTable extends Migration {
 
 	/**
 	 * Run the migrations.
@@ -18,7 +18,7 @@ class UpdateTableSubscription extends Migration {
 
         });
 
-	}
+    }
 
 	/**
 	 * Reverse the migrations.
@@ -29,8 +29,7 @@ class UpdateTableSubscription extends Migration {
 	{
         Schema::table('subscription', function(Blueprint $table)
         {
-            $table->drop('days');
-
+            $table->dropColumn('days');
         });
 	}
 
