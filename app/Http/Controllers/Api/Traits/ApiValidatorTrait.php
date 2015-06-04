@@ -702,7 +702,7 @@ trait ApiValidatorTrait {
                 "$school_code" => $input["$school_code"],
             ],
             [
-                "$school_code" => 'required|numeric|exist:schools,code'
+                "$school_code" => 'required|numeric|exists:schools,code'
             ],
             [
                 "exist" => config('futureed-error.error_messages.2602')
@@ -716,6 +716,32 @@ trait ApiValidatorTrait {
                 ->setMessage(2602)
                 ->errorMessage();
         }
+    }
+
+    public function validateDateNow($input,$date_now){
+
+        $validator = Validator::make(
+            [
+                "$date_now" => $input["$date_now"],
+            ],
+            [
+                "$date_now" => 'required|date:today'
+            ],
+            [
+                'date' => config('futureed-error.error_messages.2500')
+            ]
+        );
+
+        if($validator->fails()){
+
+            $validator_msg = $validator->messages()->toArray();
+
+            return $this->setErrorCode(2500)
+                ->setField($date_now)
+                ->setMessage($validator_msg["$date_now"][0])
+                ->errorMessage();
+        }
+
     }
 
 }

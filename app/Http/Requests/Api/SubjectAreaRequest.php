@@ -32,7 +32,7 @@ class SubjectAreaRequest extends ApiRequest {
 			default:
 				return [
 					'subject_id' => 'required|integer|exists:subjects,id',
-					'code' => 'required|integer|unique:subject_areas',
+					'code' => 'required|integer|unique:subject_areas,code,NULL,id,deleted_at,NULL',
 					'name' => 'required',
 					'status' => 'required|in:Enabled,Disabled'
 				];				

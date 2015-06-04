@@ -16,6 +16,11 @@ class Admin extends Model {
 
     protected $fillable = ['user_id', 'first_name', 'last_name', 'admin_role'];
 
+    protected $attributes = [
+        'created_by' => 1,
+        'updated_by' => 1
+    ];
+
     /**
      * Inverse relation
      */
