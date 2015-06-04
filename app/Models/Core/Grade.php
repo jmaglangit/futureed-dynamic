@@ -51,6 +51,12 @@ class Grade extends Model {
     }
 
 
+    //-------------relationships classroom
+    public function classroom() {
+        return $this->hasMany('FutureEd\Models\Core\Classroom');
+    }
+
+
 
 
 
