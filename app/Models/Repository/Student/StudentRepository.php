@@ -246,6 +246,20 @@ class StudentRepository implements StudentRepositoryInterface{
 
     }
 
+    //get student with relation to classroom and grade tables
+    public function viewStudent($id){
+
+        $student = new Student();
+
+        $student = $student->with('school','grade')->where('id',$id)->orderBy('created_at', 'desc');
+
+        $student = $student->first();
+
+        return $student;
+
+        
+    }
+
     
 
 }

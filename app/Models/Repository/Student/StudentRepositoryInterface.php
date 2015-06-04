@@ -41,4 +41,6 @@ interface StudentRepositoryInterface {
 
     public function getStudentList($criteria = [],$limit = 0, $offset = 0);
 
+    public function viewStudent($id);
+
 }

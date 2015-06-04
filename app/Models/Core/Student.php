@@ -20,6 +20,16 @@ class Student extends Model {
         return $this->belongsTo('FutureEd\Models\Core\User');
     }
 
+    public function school(){
+
+        return $this->belongsTo('FutureEd\Models\Core\School','school_code','code');
+    }
+
+    public function grade(){
+
+        return $this->belongsTo('FutureEd\Models\Core\Grade','grade_code','code');
+    }
+
     //-------------scopes
     public function scopeName($query, $name) {
 

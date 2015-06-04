@@ -119,7 +119,15 @@ class AdminStudentController extends ApiController {
 	 */
 	public function show($id)
 	{
-        return 1;
+        $student = $this->student->viewStudent($id);
+
+        if(!$student){
+
+            return $this->respondErrorMessage(2001);
+        }
+
+        return $this->respondWithData($student);
+
 	}
 
 	/**
