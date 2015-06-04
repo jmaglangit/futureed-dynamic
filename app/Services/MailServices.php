@@ -315,10 +315,49 @@ class MailServices {
 
     }
 
+    public function sendExistingStudentRegister($data)
+    {
+        $user_type = config('futureed.student');
 
+        //get user information for the email
+        $user_detail = $this->user->getUser($data['user_id'],$user_type);
+        
+        $content = [
+            'view' => 'emails.student.existing-student-registration-email',
+            'data' => [ 'name'         => $user_detail['name'],
+                        'code'         => $data['verification_code'],
+                        'class_name'   => $data['class_name'],
+                        'teacher_name' => $data['teacher_name']
+            ],
+            'mail_recipient' => $user_detail['email'],
+            'mail_recipient_name' => $user_detail['first_name' ] . $user_detail['last_name'],
+            'subject' => 'You have been invited to join Future Lesson!'
+        ];
+        $this->sendMail($content);
+    }
 
+    public function sendMailInviteStudent($data)
+    {
+        $user_type = config('futureed.student');
 
+        //get user information for the email
+        $user_detail = $this->user->getUser($data['user_id'],$user_type);
+        
+        $content = [
+            'view' => 'emails.student.invite-student',
+            'data' => [
+                'student_name' => $user_detail['name'],
+                'teacher_name' => $data['teacher_name'],
+                'code' => $data['verification_code'],
+                'link' => $data['url']
+            ],
+            'mail_recipient' => $user_detail['email'],
+            'mail_recipient_name' => $user_detail['name' ],
+            'subject' => 'You have been invited to join Future Lesson!'
+        ];
 
+        $this->sendMail($content);
+    }
 
 
 }

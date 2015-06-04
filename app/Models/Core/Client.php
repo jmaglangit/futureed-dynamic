@@ -13,7 +13,17 @@ class Client extends Model {
     protected $dates = ['deleted_at'];
 
     protected $hidden = ['created_by','updated_by','created_at','updated_at','deleted_at'];
-	
+
+
+    public static function boot(){
+
+        parent::boot();
+
+        Client::deleting(function($admin){
+            $admin->user->delete();
+        });
+    }
+
 	//-------------relationships
 	public function user() {
 		return $this->belongsTo('FutureEd\Models\Core\User');
@@ -71,6 +81,16 @@ class Client extends Model {
         });
 		
 	}
+
+    public function student(){
+
+
+        return $this->hasMany('FutureEd\Models\Core\ParentStudent','parent_user_id','id');
+    }
+
+
+
+
 
 
 }

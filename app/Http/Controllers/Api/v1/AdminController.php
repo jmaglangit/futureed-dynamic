@@ -84,7 +84,9 @@ if(Input::get('limit')){
 		$data = $request->only(['username', 'password', 'email', 'admin_role', 'status', 'first_name', 'last_name']);
 	
 		$data['user_type'] = config('futureed.admin');
-	
+
+        $data['is_account_activated'] = config('futureed.activated');
+
 		$user = $this->user->addUser($data);
 		
 		if($user) {

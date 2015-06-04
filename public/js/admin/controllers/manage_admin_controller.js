@@ -4,18 +4,23 @@ angular.module('futureed.controllers')
 ManageAdminController.$inject = ['$scope', 'manageAdminService', 'apiService'];
 
 function ManageAdminController($scope, manageAdminService, apiService) {
-	
 	var self = this;
+
+	self.table = {};
+	self.table.size = Constants.DEFAULT_SIZE;
+	self.table.page = Constants.DEFAULT_PAGE;
 
 	self.user_type = Constants.ADMIN;
 	this.reg = {};
 	this.val = {};
 	self.validation = {};
 	self.change = {};
+	self.delete = {};
 
 	this.getAdminList = getAdminList;
 	this.viewAdmin = viewAdmin;
 	self.editModeAdmin = editModeAdmin;
+	self.deleteModeAdmin = deleteModeAdmin;
 	this.saveAdmin = saveAdmin;
 	this.checkUsernameAvailability = checkUsernameAvailability;
 	this.checkEmailAvailability = checkEmailAvailability;
@@ -28,25 +33,32 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 	self.validateNewAdminEmail = validateNewAdminEmail;
 	self.confirmNewEmail = confirmNewEmail;
 	self.changeAdminEmail = changeAdminEmail;
+	self.confirmDelete = confirmDelete;
 
 	function getAdminList(){
 		var search_user = (self.search_user) ? self.search_user : Constants.EMPTY_STR;
 		var search_email = (self.search_email) ? self.search_email : Constants.EMPTY_STR;
 		var search_role = (self.search_role) ? self.search_role : Constants.EMPTY_STR;
+		self.table.loading = Constants.TRUE;
 
 		$scope.ui_block();
-		manageAdminService.getAdminList(search_user, search_email, search_role).success(function(response){
+		manageAdminService.getAdminList(search_user, search_email, search_role, self.table).success(function(response){
+			self.table.loading = Constants.FALSE;
+
 			if(angular.equals(response.status, Constants.STATUS_OK)){
 				if(response.errors){
 					self.errors = $scope.errorHandler(response.errors);
-				}
-				if(response.data){
+				} else if(response.data){
 					self.data = response.data.records;
+					self.updateTable(response.data);
 				}
 			}
+
 			$scope.ui_unblock();
 		}).error(function(response) {
-			this.internalError();
+			self.table.loading = Constants.FALSE;
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
 		});
 	}
 
@@ -333,6 +345,39 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 			self.validation.c_success = Constants.TRUE;
 		}
 	}
+	function confirmDelete(id){
+		self.errors = Constants.FALSE;
+		self.delete.id = id;
+		self.delete.confirm = Constants.TRUE;
+		$("#delete_admin_modal").modal({
+	        backdrop: 'static',
+	        keyboard: Constants.FALSE,
+	        show    : Constants.TRUE
+	    });
+	}
+
+	function deleteModeAdmin(){
+		self.errors = Constants.FALSE;
+		self.validation.c_error = Constants.FALSE;
+		self.validation.c_success = Constants.FALSE;
+
+		$scope.ui_block();
+		manageAdminService.deleteModeAdmin(self.delete.id).success(function(response){
+			if(angular.equals(response.status,Constants.STATUS_OK)){
+				if(response.errors){
+					self.errors = $scope.errorHandler(response.errors);
+				}else if(response.data){
+					self.validation.c_success = 'User ' + Constants.DELETE_SUCCESS;
+					self.getAdminList();
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+		$("html, body").animate({ scrollTop: 0 }, "slow");
+	}
 
 	function changeAdminEmail() {
 		self.errors = Constants.FALSE;
@@ -357,5 +402,29 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
+	}
+
+	self.paginateBySize = function() {
+		self.table.page = 1;
+		self.table.offset = (self.table.page - 1) * self.table.size;
+		self.getAdminList();
+	}
+
+	self.paginateByPage = function() {
+		var page = self.table.page;
+		
+		self.table.page = (page < 1) ? 1 : page;
+		self.table.offset = (page - 1) * self.table.size;
+
+		self.getAdminList();
+	}
+
+	self.updateTable = function(data) {
+		self.table.total_items = data.total;
+
+		// Set Page Count
+		var page_count = data.total / self.table.size;
+			page_count = (page_count < Constants.DEFAULT_PAGE) ? Constants.DEFAULT_PAGE : Math.ceil(page_count);
+		self.table.page_count = page_count;
 	}
 }

@@ -59,6 +59,13 @@ class ManageClientController extends Controller{
 	}
 
 	/**
+	* Confirm delete Client Email
+	*/
+	public function delete_client_form() {
+		return view('admin.manage.client.partials.delete_client_form');
+	}
+
+	/**
 	* View / Edit Client Profile
 	*/
 	public function detail_form() {
