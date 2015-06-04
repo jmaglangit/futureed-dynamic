@@ -118,3 +118,25 @@ table#client-list{
 .btn-semi-large{
 	width: 50%;
 }
+.margin-30-left{
+	margin-left: 30px;
+}
+.margin-60-left{
+	margin-left: 60px;
+}
+.margin-30-top{
+	margin-top: 30px;
+}
+.margin-30-top{
+	margin-top: 30px;
+}
+.margin-30-left{
+	margin-left: 30px;
+}
+
+.margin-60-left{
+	margin-left: 60px;
+}
+.margin-0-top{
+	margin-top: 0 !important;
+}

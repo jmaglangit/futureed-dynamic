@@ -5,7 +5,7 @@
 @stop
 
 @section('content')
-	<div class="container dshbrd-con" ng-controller="ManagePaymentController as payment" ng-cloak>
+	<div class="container dshbrd-con" ng-controller="ManagePrincipalPaymentController as payment" ng-cloak>
 		<div template-directive template-url="{!! route('client.partials.base_url') !!}"></div>
 
 		<div class="wrapr" ng-init="teacher.setActive('list')" >
@@ -19,6 +19,6 @@
 @stop
 	
 @section('scripts')
-	{!! Html::script('/js/client/controllers/manage_payment_controller.js')!!}
-	{!! Html::script('/js/client/services/manage_payment_service.js')!!}
+	{!! Html::script('/js/client/controllers/manage_principal_payment_controller.js')!!}
+	{!! Html::script('/js/client/services/manage_principal_payment_service.js')!!}
 @stop
