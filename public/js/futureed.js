@@ -1,7 +1,6 @@
 'use strict';
 
 angular.module('futureed', [
-  'ngCookies',
   'ui.bootstrap',
 	'futureed.services',
 	'futureed.controllers',
@@ -57,7 +56,7 @@ angular.module('futureed', [
     return angular.isObject(data) && String(data) !== '[object File]' ? param(data) : data;
   }];
 
-  $httpProvider.interceptors.push(['$q', '$cookies', '$cookieStore', function ($q, $cookies, $cookieStore) {
+  $httpProvider.interceptors.push(['$q', function ($q) {
       return {
           'request' : function(config) {
             if(localStorage.authorization) {

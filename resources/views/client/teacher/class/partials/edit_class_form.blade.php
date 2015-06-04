@@ -1,4 +1,4 @@
-<div ng-if="class.edit_form">
+<div ng-if="class.active_edit">
 	<div class="content-title">
 		<div class="title-main-content">
 			<span>Edit Class</span>
