@@ -59,6 +59,15 @@ class InvoiceRepository implements InvoiceRepositoryInterface{
 
     }
 
+    public function addInvoice($data)
+    {
+        try{
+            return Invoice::create($data)->toArray();
+            
+        }catch(Exception $e){
+            return $e->getMessage();        
+        }
+    }
 
 
 }

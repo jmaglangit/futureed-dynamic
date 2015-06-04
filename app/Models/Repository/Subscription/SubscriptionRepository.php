@@ -75,6 +75,9 @@ class SubscriptionRepository implements SubscriptionRepositoryInterface {
     }
     
     public function addSubscription($subscription){
+
+        $subscription['created_by'] = 1;
+        $subscription['updated_by'] = 1;
     
         try{
             return Subscription::create($subscription)->toArray();
