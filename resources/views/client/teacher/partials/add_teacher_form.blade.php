@@ -1,4 +1,4 @@
-<div ng-if="teacher.add_form && !teacher.client_list && !teacher.view_form">
+<div ng-if="teacher.active_add">
 	<div class="content-title">
 		<div class="title-main-content">
 			<span>Add Teacher</span>
@@ -11,14 +11,10 @@
 				{! error !}
 			</p>
 		</div>
-		<div class="alert alert-danger" ng-if="teacher.p_error">
+
+		<div class="alert alert-success" ng-if="teacher.record.success">
 			<p>
-				{! teacher.p_error !}
-			</p>
-		</div>
-		<div class="alert alert-success" ng-if="admin.is_success">
-			<p>
-				{! teacher.is_success !}
+				{! teacher.record.success !}
 			</p>
 		</div>
 
@@ -32,41 +28,43 @@
 				User Credentials
 			</legend>
 			<div class="form-group">				
-				<label class="col-xs-2 control-label" id="email">Email <span class="required">*</span></label>
+				<label class="col-xs-3 control-label" id="email">Email <span class="required">*</span></label>
 				<div class="col-xs-4">
-					{!! Form::text('email', '',
-						[
+					{!! Form::text('email', ''
+						, array(
 							'placeholder' => 'Email',
-							'ng-model' => 'teacher.reg.email',
+							'ng-model' => 'teacher.record.email',
 							'ng-model-options' => "{ debounce : {'default' : 1000} }",
 							'ng-change' => 'teacher.checkEmailAvailability()',
+							'autocomplete' => 'off',
 							'class' => 'form-control'
-						]
+						)
 					) !!}
-
-					<div>
-					<span class="error-msg-con" ng-if="teacher.val.b_errors">{! teacher.val.b_errors !}</span>
-					<i class="fa fa-spinner fa-spin" ng-if="teacher.b_loading"></i>
-					<span ng-if="teacher.b_success" class="error-msg-con success-color">Email is available.</span>
 				</div>
+				<div class="margin-top-8">
+					<span class="error-msg-con" ng-if="teacher.validation.e_error">{! teacher.validation.e_error !}</span>
+					<i class="fa fa-spinner fa-spin" ng-if="teacher.validation.e_loading"></i>
+					<span ng-if="teacher.validation.e_success" class="error-msg-con success-color">Email is available.</span>
 				</div>
-				<label class="col-xs-2 control-label" id="username">Username <span class="required">*</span></label>
+			</div>
+			<div class="form-group">
+				<label class="col-xs-3 control-label" id="username">Username <span class="required">*</span></label>
 				<div class="col-xs-4">
-					{!! Form::text('username', '',
-						[
+					{!! Form::text('username', ''
+						, array(
 							'placeholder' => 'Username',
-							'ng-model' => 'teacher.reg.username',
+							'ng-model' => 'teacher.record.username',
 							'ng-model-options' => "{ debounce : {'default' : 1000} }",
 							'ng-change' => 'teacher.checkUsernameAvailability()',
+							'autocomplete' => 'off',
 							'class' => 'form-control'
-						]
+						)
 					) !!}
-
-					<div>
-					<span class="error-msg-con" ng-if="teacher.val.a_error">{! teacher.val.a_error !}</span>
-					<i class="fa fa-spinner fa-spin" ng-if="teacher.a_loading"></i>
-					<span ng-if="teacher.a_success" class="error-msg-con success-color">Username is available.</span>
 				</div>
+				<div class="margin-top-8">
+					<span class="error-msg-con" ng-if="teacher.validation.u_error">{! teacher.validation.u_error !}</span>
+					<i class="fa fa-spinner fa-spin" ng-if="teacher.validation.u_loading"></i>
+					<span ng-if="teacher.validation.u_success" class="error-msg-con success-color">Username is available.</span>
 				</div>
 			</div>
 		</fieldset>
@@ -75,30 +73,42 @@
 				Personal Information
 			</legend>
 			<div class="form-group">
-				<label class="col-xs-2 control-label">First Name <span class="required">*</span></label>
+				<label class="col-xs-3 control-label">First Name <span class="required">*</span></label>
 				<div class="col-xs-4">
 					{!! Form::text('first_name','',
 						[
 							'class' => 'form-control',
-							'ng-model' => 'teacher.reg.first_name',
+							'ng-model' => 'teacher.record.first_name',
 							'placeholder' => 'First Name'
 						]
 					) !!}
 				</div>
-				<label class="col-xs-2 control-label">Last Name <span class="required">*</span></label>
+			</div>
+			<div class="form-group">
+				<label class="col-xs-3 control-label">Last Name <span class="required">*</span></label>
 				<div class="col-xs-4">
 					{!! Form::text('last_name','',
 						[
 							'class' => 'form-control',
-							'ng-model' => 'teacher.reg.last_name',
+							'ng-model' => 'teacher.record.last_name',
 							'placeholder' => 'Last Name'
 						]
 					) !!}
 				</div>
 			</div>
-			<div class="btn-container col-xs-6 col-xs-offset-3">
-				<button class="btn btn-blue btn-medium" id="proceed-btn" type="button" ng-click="teacher.saveTeacher()">Save</button>
-				<button class="btn btn-gold btn-medium" type="button" ng-click="teacher.setActive(list)">Cancel</button>
+			<div class="btn-container col-xs-6 col-xs-offset-2">
+				{!! Form::button('Save'
+					, array(
+						'class' => 'btn btn-blue btn-medium'
+						, 'ng-click' => 'teacher.save()'
+					)
+				) !!}
+				{!! Form::button('Cancel'
+					, array(
+						'class' => 'btn btn-gold btn-medium'
+						, 'ng-click' => 'teacher.setActive()'
+					)
+				) !!}
 			</div>
 		</fieldset>
 	</div>
