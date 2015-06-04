@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use FutureEd\Models\Repository\Invoice\InvoiceRepositoryInterface as Invoice;
 
-class InvoiceCOntroller extends ApiController {
+class InvoiceController extends ApiController {
 
     protected $invoice;
 
