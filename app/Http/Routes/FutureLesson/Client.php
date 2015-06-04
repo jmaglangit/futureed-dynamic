@@ -36,6 +36,38 @@
 			, 'uses' => 'FutureLesson\Client\LoginController@logout'
 		]);
 
+		Routes::group(['prefix' => 'principal'], function(){
+			$manage_principal_controller = 'FutureLesson\Client\ManagePrincipalController';
+					Routes::get('/', [
+								'as' => 'client.principal.index',
+								'middleware' => 'client',
+								'uses' => $manage_principal_controller . '@index'
+							]);
+
+
+					Routes::group(['prefix' => 'payment'], function(){
+						$manage_payment_controller = 'FutureLesson\Client\ManagePrincipalPaymentController';
+
+						Routes::get('/', [
+								'as' => 'client.principal.payment.index',
+								'middleware' => 'client',
+								'uses' => $manage_payment_controller . '@index'
+							]);
+
+						Routes::get('payment_form', [
+								'as' => 'client.principal.payment.partials.payment_form',
+								'middleware' => 'client',
+								'uses' => $manage_payment_controller . '@payment_form'
+							]);
+
+						Routes::get('add_payment_form', [
+								'as' => 'client.principal.payment.partials.add_payment_form',
+								'middleware' => 'client',
+								'uses' => $manage_payment_controller . '@add_payment_form'
+							]);
+					});
+		});
+
 		Routes::group(['prefix' => 'teacher'], function(){
 					$manage_teacher_controller = 'FutureLesson\Client\ManageTeacherController';
 
@@ -109,7 +141,6 @@
 							]);
 					});
 				});
-
 		Routes::group(['prefix' => '/login'], function()
 		{
 			Routes::get('/', [ 
