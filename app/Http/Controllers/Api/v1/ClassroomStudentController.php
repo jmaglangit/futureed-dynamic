@@ -26,7 +26,7 @@ class ClassroomStudentController extends ApiController {
 
 
 	/**
-	 * Display the specified resource.
+	 * student list under class
 	 *
 	 * @param  int  $id
 	 * @return Response
@@ -35,6 +35,7 @@ class ClassroomStudentController extends ApiController {
 	{
 
         $category = [];
+
 
         if(Input::get('name')){
 
