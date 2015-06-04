@@ -36,7 +36,7 @@ class ClassroomStudentController extends ApiController {
 
         $category = [];
 
-
+        $category['class_id'] = $id;
         if(Input::get('name')){
 
             $category['name'] = Input::get('name');
@@ -62,7 +62,7 @@ class ClassroomStudentController extends ApiController {
         $limit = (Input::get('limit')) ? Input::get('limit') : 0 ;
 
 		return $this->respondWithData(
-            $this->class_students->getClassStudents($id,$category,$offset,$limit)
+            $this->class_students->getClassStudents($category,$offset,$limit)
         );
 	}
 
