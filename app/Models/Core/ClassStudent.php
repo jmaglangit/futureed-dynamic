@@ -16,13 +16,18 @@ class ClassStudent extends Model {
     
     protected $fillable = ['student_id', 'class_id', 'status', 'verification_code'];
 
-    protected $hidden = ['created_by','updated_by','created_at','updated_at','deleted_at'];
+    protected $hidden = ['class_id','student_id','verification_code','created_by','updated_by','created_at','updated_at','deleted_at'];
 
     //Relationships
 
     public function user(){
 
         return $this->belongsToMany('FutureEd\Models\Core\User','students','id','user_id');
+    }
+
+    public function student(){
+
+        return $this->belongsTo('FutureEd\Models\Core\Student')->with('user');
     }
 
 
