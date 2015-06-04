@@ -23,10 +23,14 @@
   <!-- Custom styles for this template -->
   {!! Html::style('/css/datetimepicker.css') !!}
   {!! Html::style('/css/futureed.css'); !!}
+<<<<<<< HEAD
   {!! Html::style('/css/futureed-client.css'); !!}
+=======
   
-  {!! Html::style('/css/angucomplete.css') !!}
-  {!! Html::style('/css/datatables.bootstrap.min.css') !!}
+>>>>>>> 14acbf5... principal payment
+    {!! Html::style('/css/futureed-client.css') !!}
+    {!! Html::style('/css/angucomplete.css') !!}
+    {!! Html::style('/css/datatables.bootstrap.min.css') !!}
   
 
   <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
@@ -55,6 +59,7 @@
   {!! Html::script('/js/jquery.js') !!}
   {!! Html::script('/js/ui-block.js') !!}
   {!! Html::script('//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js') !!}
+  {!! Html::script('https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js') !!}
   {!! Html::script('http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular.min.js') !!}
 
   {!! Html::script('/js/futureed_constants.js') !!}

@@ -38,7 +38,17 @@ table#client-list{
 .row > .col-sm-5{
 	display: none;
 }
+.row > .col-xs-3{
+	position: relative;
+	bottom: 10px;
+}
 
+.title-mid{
+	 text-transform: uppercase;
+  	color: #055A7F;
+  	font-size: 1.5em;
+  	margin: 20px 0 20px 0;
+}
 .col-action{
 	padding-right: 5px;
 	padding-left : 5px;
@@ -56,6 +66,7 @@ table#client-list{
 	margin-left:15px;
 	margin-right: 15px;
 }
+<<<<<<< HEAD
 
 .title-mid {
 	text-transform: uppercase;
@@ -69,12 +80,15 @@ table#client-list{
 	color: #887c70;
 }
 
-.form-search {
+=======
+>>>>>>> 14acbf5... principal payment
+.form-search,.table-form{
 	border: 1px solid #e1e1e1;
   	border-radius: 5px;
   	padding: 30px;
   	background-color: #f6f4f5;
 }
+<<<<<<< HEAD
 
 .table-container{
 	padding: 0 30px 0 30px;
@@ -85,4 +99,32 @@ table#client-list{
 	padding: 30px 30px 0px 30px;
 }
 
+=======
+>>>>>>> 14acbf5... principal payment
+.margin-side{
+	margin: 0 30px 0 30px;
+}
 
+.padding-30{
+	padding: 30px;
+}
+.margin-top-60{
+	margin-top: 60px;
+}
+
+.div-right{
+	float:right;
+}
+.margin-10-bot{
+	margin-bottom: 10px;
+}
+.margin-30-bot{
+	margin-bottom: 30px;
+}
+.btn-semi-large{
+	width: 50%;
+<<<<<<< HEAD
+}
+=======
+}
+>>>>>>> 14acbf5... principal payment
