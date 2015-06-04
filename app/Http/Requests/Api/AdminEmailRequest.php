@@ -23,7 +23,7 @@ class AdminEmailRequest extends ApiRequest {
 	 */
 	public function rules() {
 		
-		return ['email' => 'required|email|unique:users,email,NULL,id,user_type,'.config('futureed.admin')];
+		return ['email' => 'required|email|unique:users,email,NULL,id,user_type,'.config('futureed.admin').',deleted_at,NULL'];
 		
 	}
 	
