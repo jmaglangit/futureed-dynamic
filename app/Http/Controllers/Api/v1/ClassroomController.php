@@ -40,7 +40,7 @@ class ClassroomController extends ApiController {
         }
 
 
-        $limit = (Input::get('limit')) ? Input::get('limit') : 3;
+        $limit = (Input::get('limit')) ? Input::get('limit') : 0;
 
         $offset = (Input::get('offset')) ? Input::get('offset') : 0;
 
