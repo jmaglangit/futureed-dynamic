@@ -23,11 +23,6 @@
   <!-- Custom styles for this template -->
   {!! Html::style('/css/datetimepicker.css') !!}
   {!! Html::style('/css/futureed.css'); !!}
-<<<<<<< HEAD
-  {!! Html::style('/css/futureed-client.css'); !!}
-=======
-  
->>>>>>> 14acbf5... principal payment
     {!! Html::style('/css/futureed-client.css') !!}
     {!! Html::style('/css/angucomplete.css') !!}
     {!! Html::style('/css/datatables.bootstrap.min.css') !!}
