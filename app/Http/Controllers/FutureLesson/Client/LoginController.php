@@ -83,7 +83,7 @@ class LoginController extends Controller {
 	{
 		$email = Input::only('email');
 
-		if($this->validate_email($email)){
+		if($this->validate_email($email) && $email['email']){
 			return view('client.login.registration-invite-form');
 		}
 		return view('client.login.registration', array('id' => $id));

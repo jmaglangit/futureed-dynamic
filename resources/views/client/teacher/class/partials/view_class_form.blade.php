@@ -1,4 +1,4 @@
-<div ng-if="class.view_form">
+<div ng-if="class.active_view">
 	<div class="content-title">
 		<div class="title-main-content">
 			<span>View Class</span>

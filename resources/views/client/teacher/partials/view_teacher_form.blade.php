@@ -1,8 +1,8 @@
-<div ng-if="!teacher.client_list && teacher.view_form">
+<div ng-if="teacher.active_view || teacher.active_edit">
 	<div class="content-title">
 		<div class="title-main-content">
-			<span ng-show="teacher.view">View Teacher</span>
-			<span ng-show="teacher.edit">Edit Teacher</span>
+			<span ng-show="teacher.active_view">View Teacher</span>
+			<span ng-show="teacher.active_edit">Edit Teacher</span>
 		</div>
 	</div>
 
@@ -23,11 +23,11 @@
 	        	</legend>
 	        	<div class="form-group">
 	        		<label class="col-xs-2 control-label" id="email">Email <span class="required">*</span></label>
-	        		<div class="col-xs-5">
+	        		<div class="col-xs-4">
 	        			{!! Form::text('email',''
 	        				, array(
 	        					'placeHolder' => 'Email'
-	        					, 'ng-model' => 'teacher.teacherdata.user.email'
+	        					, 'ng-model' => 'teacher.record.user.email'
 	        					, 'ng-disabled' => 'true'
 	        					, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
 	        					, 'ng-change' => 'client.checkEmailAvailability()'
@@ -35,19 +35,14 @@
 	        				)
 	        			) !!}
 	        		</div>
-	        		<div class="margin-top-8"> 
-		                <i ng-if="client.validation.e_loading" class="fa fa-spinner fa-spin"></i>
-		                <i ng-if="client.validation.e_success" class="fa fa-check success-color"></i>
-		                <span ng-if="client.validation.e_error" class="error-msg-con">{! client.validation.e_error !}</span>
-		            </div>	
 	        	</div>
 	        	<div class="form-group">
 	        		<label class="col-xs-2 control-label" id="username">Username <span class="required">*</span></label>
-	        		<div class="col-xs-5">
+	        		<div class="col-xs-4">
 	        			{!! Form::text('username',''
 	        				, array(
 	        					'placeHolder' => 'Username'
-	        					, 'ng-model' => 'teacher.teacherdata.user.username'
+	        					, 'ng-model' => 'teacher.record.user.username'
 	        					, 'ng-disabled' => 'true'
 	        					, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
 	        					, 'ng-change' => 'client.checkUsernameAvailability()'
@@ -55,11 +50,6 @@
 	        				)
 	        			) !!}
 	        		</div>
-	        		<div class="margin-top-8"> 
-		                <i ng-if="client.validation.u_loading" class="fa fa-spinner fa-spin"></i>
-		                <i ng-if="client.validation.u_success" class="fa fa-check success-color"></i>
-		                <span ng-if="client.validation.u_error" class="error-msg-con">{! client.validation.u_error !}</span>
-		            </div>
 	        	</div>
 	        </fieldset>
 
@@ -68,25 +58,25 @@
 	        		Personal Information
 	        	</legend>
 	        	<div class="form-group">
-	        		<label class="col-xs-2 control-label" id="first_name">Firstname <span class="required">*</span></label>
+	        		<label class="col-xs-2 control-label" id="first_name">First Name <span class="required">*</span></label>
 	        		<div class="col-xs-4">
 	        			{!! Form::text('first_name',''
 	        				, array(
 	        					'placeHolder' => 'Firstname'
-	        					, 'ng-disabled' => '!teacher.edit'
-	        					, 'ng-model' => 'teacher.teacherdata.first_name'
+	        					, 'ng-disabled' => 'teacher.active_view'
+	        					, 'ng-model' => 'teacher.record.first_name'
 	        					, 'class' => 'form-control'
 	        				)
 	        			) !!}
 	        		</div>
 
-	        		<label class="col-xs-2 control-label" id="last_name">Lastname <span class="required">*</span></label>
+	        		<label class="col-xs-2 control-label" id="last_name">Last Name <span class="required">*</span></label>
 	        		<div class="col-xs-4">
 	        			{!! Form::text('last_name',''
 	        				, array(
 	        					'placeHolder' => 'Lastname'
-	        					, 'ng-disabled' => '!teacher.edit'
-	        					, 'ng-model' => 'teacher.teacherdata.last_name'
+	        					, 'ng-disabled' => 'teacher.active_view'
+	        					, 'ng-model' => 'teacher.record.last_name'
 	        					, 'class' => 'form-control'
 	        				)
 	        			) !!}
@@ -99,12 +89,12 @@
 	        	</legend>
 	        	<div class="form-group">
 	        		<label class="col-xs-2 control-label" id="school_address">Street Address <span class="required" ng-if="client.role.parent">*</span></label>
-	        		<div class="col-xs-10">
+	        		<div class="col-xs-6">
 	        			{!! Form::text('street_address',''
 	        				, array(
 	        					'placeHolder' => 'Street Address'
-	        					, 'ng-disabled' => '!teacher.edit'
-	        					, 'ng-model' => 'teacher.teacherdata.street_address'
+	        					, 'ng-disabled' => 'teacher.active_view'
+	        					, 'ng-model' => 'teacher.record.street_address'
 	        					, 'class' => 'form-control'
 	        				)
 	        			) !!}
@@ -116,8 +106,8 @@
 	        			{!! Form::text('city',''
 	        				, array(
 	        					'placeHolder' => 'City'
-	        					, 'ng-disabled' => '!teacher.edit'
-	        					, 'ng-model' => 'teacher.teacherdata.city'
+	        					, 'ng-disabled' => 'teacher.active_view'
+	        					, 'ng-model' => 'teacher.record.city'
 	        					, 'class' => 'form-control'
 	        				)
 	        			) !!}
@@ -127,8 +117,8 @@
 	        			{!! Form::text('state',''
 	        				, array(
 	        					'placeHolder' => 'State'
-	        					, 'ng-disabled' => '!teacher.edit'
-	        					, 'ng-model' => 'teacher.teacherdata.state'
+	        					, 'ng-disabled' => 'teacher.active_view'
+	        					, 'ng-model' => 'teacher.record.state'
 	        					, 'class' => 'form-control'
 	        				)
 	        			) !!}
@@ -140,15 +130,15 @@
 	        			{!! Form::text('zip',''
 	        				, array(
 	        					'placeHolder' => 'Postal Code'
-	        					, 'ng-disabled' => '!teacher.edit'
-	        					, 'ng-model' => 'teacher.teacherdata.zip'
+	        					, 'ng-disabled' => 'teacher.active_view'
+	        					, 'ng-model' => 'teacher.record.zip'
 	        					, 'class' => 'form-control'
 	        				)
 	        			) !!}
 	        		</div>
 	        		<label class="col-md-2 control-label">Country <span class="required">*</span></label>
 				      <div class="col-md-4" ng-init="getCountries()">
-				        <select  name="country" class="form-control" ng-model="teacher.teacherdata.country" ng-disabled="!teacher.edit">
+				        <select  name="country" class="form-control" ng-model="teacher.record.country" ng-disabled="teacher.active_view">
 				          <option value="">-- Select Country --</option>
 				          <option ng-repeat="country in countries" value="{! country.name !}">{! country.name!}</option>
 				        </select>
@@ -156,31 +146,95 @@
 	        	</div>
 	        </fieldset>
 	        <div class="btn-container col-sm-6 col-sm-offset-3">
-		        <a href="" type="button" class="btn btn-blue btn-medium" ng-if="!teacher.teacher_save" ng-click="teacher.setActive('edit')">Edit</a>
-		        <a href="" type="button" class="btn btn-blue btn-medium" ng-if="teacher.teacher_save" ng-click="client.createNewClient()">Save</a>
-		        <a href="" type="button" class="btn btn-gold btn-medium" ng-click="teacher.setActive('list')">Cancel</a>
+	        	<div ng-if="teacher.active_view">
+	        		{!! Form::button('Edit'
+	        			, array(
+	        				'class' => 'btn btn-blue btn-medium'
+	        				, 'ng-click' => "teacher.setActive('edit', teacher.record.id)"
+	        			)
+	        		) !!}
+
+	        		{!! Form::button('Cancel'
+	        			, array(
+	        				'class' => 'btn btn-gold btn-medium'
+	        				, 'ng-click' => "teacher.setActive('list')"
+	        			)
+	        		) !!}
+	        	</div>
+	        	<div ng-if="teacher.active_edit">
+	        		{!! Form::button('Save'
+	        			, array(
+	        				'class' => 'btn btn-blue btn-medium'
+	        				, 'ng-click' => "teacher.update()"
+	        			)
+	        		) !!}
+
+	        		{!! Form::button('Cancel'
+	        			, array(
+	        				'class' => 'btn btn-gold btn-medium'
+	        				, 'ng-click' => "teacher.setActive('view', teacher.record.id)"
+	        			)
+	        		) !!}
+	        	</div>
 		     </div>
 		</div>
 	{!! Form::close() !!}
-	<div class="col-xs-12 table-container.top-margin" ng-show="teacher.view">
+	
+	<div class="col-xs-12 table-container" ng-if="teacher.active_view">
 		<div class="list-container" ng-cloak>
-			<table id="client-list" datatable="ng" class="table table-striped table-hover dt-responsive">
-			<thead>
-		        <tr>
-		            <th>Class Handled</th>
-		            <th># of Students</th>
-		            <th>Grade</th>
-		        </tr>
-	        </thead>
-	        <tbody>
-		        <tr ng-repeat="a in client.clients">
-		            <td>{! a.first_name !} {! a.last_name !}</td>
-		            <td>{! a.user.email !}</td>
-		            <td>{! a.client_role !}</td>
-		        </tr>
-	        </tbody>
+			<div class="size-container">
+				{!! Form::select('size'
+					, array(
+						  '10' => '10'
+						, '20' => '20'
+						, '50' => '50'
+						, '100' => '100'
+					)
+					, '10'
+					, array(
+						'ng-model' => 'teacher.table.size'
+						, 'ng-change' => 'teacher.paginateBySize()'
+						, 'ng-if' => "teacher.records.length"
+						, 'class' => 'form-control paginate-size pull-right'
+					)
+				) !!}
+			</div>
 
+			<table id="class-list" class="table table-striped table-bordered">
+				<thead>
+			        <tr>
+			            <th class="column-medium">Class Handled</th>
+			            <th>Number of Students</th>
+			            <th>Grade</th>
+			        </tr>
+		        </thead>
+		        <tbody>
+			        <tr ng-repeat="a in teacher.clients">
+			            <td>{! a.first_name !} {! a.last_name !}</td>
+			            <td>{! a.user.email !}</td>
+			            <td>{! a.client_role !}</td>
+			        </tr>
+			        <tr class="odd" ng-if="!teacher.records.length && !teacher.table.loading">
+			        	<td valign="top" colspan="4" class="dataTables_empty">
+			        		No records found
+			        	</td>
+			        </tr>
+		        </tbody>
 			</table>
+
+			<div class="pull-right" ng-if="teacher.records.length">
+				<pagination 
+					total-items="teacher.table.total_items" 
+					ng-model="teacher.table.page"
+					max-size="3"
+					items-per-page="teacher.table.size" 
+					previous-text = "&lt;"
+					next-text="&gt;"
+					class="pagination" 
+					boundary-links="true"
+					ng-change="teacher.paginateByPage()">
+				</pagination>
+			</div>
 		</div>
 	</div>
 </div>

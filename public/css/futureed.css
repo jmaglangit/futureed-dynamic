@@ -988,3 +988,27 @@ div > .btncon > a {
 .table > tbody > tr > td {
 	padding: 15px;
 }
+
+.width-fit {
+	width: 100%;
+}
+
+.width-large {
+	width: 75%;
+}
+
+.width-medium {
+	width: 50%;
+}
+
+.width-small {
+	width: 35%;
+}
+
+.width-xsmall {
+	width: 20%;
+}
+
+.module-container {
+	margin: 30px;
+}

@@ -12,7 +12,8 @@
             <p ng-repeat="error in errors" > 
               {! error !}
             </p>
-          </div>              
+          </div>
+                        
           <div class="form_content">
             <div ng-if="!confirm.resent">
               <div class="roundcon">

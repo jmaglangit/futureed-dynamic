@@ -30,6 +30,14 @@ var Constants = {
 	, EDIT_EMAIL	: "edit_email"
 	, CONFIRM_EMAIL : "confirm_email"
 
+	/**
+	* Active Screens
+	*/
+	, ACTIVE_LIST	: "list"
+	, ACTIVE_VIEW	: "view"
+	, ACTIVE_EDIT	: "edit"
+	, ACTIVE_ADD	: "add"
+
 	, ADD_CLIENT 	: "add_client"
 	, ADD_STUDENT	: "add_student"
 	, ANNOUNCEMENT 	: "announcement"

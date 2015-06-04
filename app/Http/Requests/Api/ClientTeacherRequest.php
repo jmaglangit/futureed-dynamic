@@ -21,22 +21,27 @@ class ClientTeacherRequest extends ApiRequest {
     public function rules() {
         switch($this->method) {
             case 'PUT':
+                $client = config('futureed.client');
                 return [
-                    'subject_id' => 'required|integer|exists:subjects,id',
-                    'name' => 'required',
-                    'status' => 'required|in:Enabled,Disabled'
+                    'first_name' => 'required|string',
+                    'last_name' => 'required|string',
+                    'street_address' => 'string',
+                    'city' => 'string',
+                    'state' => 'string',
+                    'zip' => 'numeric|regex:/^[0-9]{5}(\-[0-9]{4})?$/',
+                    'country' => 'string'
                 ];
                 break;
             case 'POST':
             default:
                 $client = config('futureed.client');
                 return [
-                    'user_name' => 'require|string',
+                    'username' => "required|string|min:8|max:32|unique:users,username,NULL,id,user_type,$client",
                     'email' => "required|email|unique:users,email,NULL,id,user_type,$client",
+
                     'first_name' => 'required|string',
                     'last_name' => 'required|string',
                     'current_user' => 'required|numeric',
-                    'username' => 'required|string|max:32|min:8',
                     'callback_uri' => 'required|string'
                 ];
                 break;
