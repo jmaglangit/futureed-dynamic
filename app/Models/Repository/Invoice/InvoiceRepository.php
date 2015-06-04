@@ -47,7 +47,7 @@ class InvoiceRepository implements InvoiceRepositoryInterface{
             $count = $invoice->count();
 
             if($limit > 0 && $offset >= 0) {
-                $invoice = $invoice->offset($offset)->limit($limit);
+                $invoice = $invoice->with('subscription')->offset($offset)->limit($limit);
             }
 
         }
