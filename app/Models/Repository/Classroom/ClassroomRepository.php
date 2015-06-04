@@ -34,7 +34,12 @@ class ClassroomRepository implements ClassroomRepositoryInterface{
 
             $classroom = $classroom->grade_id($criteria['grade_id']);
         }
+        
+        if(isset($criteria['order_no'])){
 
+            $classroom = $classroom->order_no($criteria['order_no']);
+        }
+        
         $classroom = $classroom->with('order','grade','client');
 
 
