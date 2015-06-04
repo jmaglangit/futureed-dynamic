@@ -4,6 +4,8 @@ use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
 use FutureEd\Models\Repository\Student\ClientRepositoryInterface;
+
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
@@ -146,7 +148,7 @@ class ClientController extends ApiController {
 					$this->addMessageBag($this->validateStringOptional($client,'state'));
 					$this->addMessageBag($this->zipCodeOptional($client,'zip'));
 					
-					$this->addMessageBag($this->validateNumber($school,'school_code'));
+					$this->addMessageBag($this->schoolCode($school,'school_code'));
 					$this->addMessageBag($this->validateString($school,'school_name'));
 					$this->addMessageBag($this->validateString($school,'school_state'));
 					$this->addMessageBag($this->validateString($school,'school_country'));
@@ -374,4 +376,55 @@ class ClientController extends ApiController {
 		}
 
 	}
+
+    public function destroy($id){
+
+        $user_type = config('futureed.client');
+
+
+        $this->addMessageBag($this->validateVarNumber($id));
+
+        $msg_bag = $this->getMessageBag();
+
+        if($msg_bag){
+
+            return $this->respondWithError($msg_bag);
+
+        }
+
+        $return = $this->client->getClientDetails($id);
+
+        if(!$return){
+
+            return $this->respondErrorMessage(2001);
+        }
+
+        //check principal if assign to school
+        if($return['school_code'] && $return['client_role']=== config('futureed.principal')){
+
+            return $this->respondErrorMessage(2121);
+
+        }
+        //check relation of teacher to classroom
+        $teacher_classroom = $this->client->getClassroom($id);
+
+        if( $teacher_classroom['classroom']->toArray() && $return['client_role']=== config('futureed.teacher')){
+
+            return $this->respondErrorMessage(2122);
+        }
+
+        //check parent to student
+        $parent_student = $this->client->getStudent($id);
+
+        if($parent_student['student']->toArray() && $return['client_role']=== config('futureed.parent')){
+
+            return $this->respondErrorMessage(2123);
+
+        }
+
+        return $this->respondWithData([$this->client->deleteClient($id)]);
+
+
+
+    }
 }

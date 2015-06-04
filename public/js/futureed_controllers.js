@@ -1,4 +1,4 @@
-angular.module('futureed.controllers', ['datatables','ngResource'])
+angular.module('futureed.controllers', [])
   .controller('futureedController', FutureedController)
   .directive('templateDirective', TemplateDirective);
 
@@ -28,6 +28,7 @@ function FutureedController($scope, apiService) {
   $scope.checkAvailability = checkAvailability;
   $scope.checkEmailAvailability = checkEmailAvailability;
   $scope.getAnnouncement = getAnnouncement;
+  $scope.getGrades = getGrades;
 
   $scope.beforeDateRender = beforeDateRender;
 
@@ -113,6 +114,15 @@ function FutureedController($scope, apiService) {
     });
   }
 
+  /**
+  * Retrieves list of Grades by country
+  * function for get grade by country
+  * To be Implemented
+  */
+  function getGrades(id){
+    
+  }
+  
   function getGradeLevel() {
     $scope.grades = Constants.FALSE;
 
@@ -121,7 +131,7 @@ function FutureedController($scope, apiService) {
         if(response.errors) {
           $scope.errorHandler(response.errors);
         } else if(response.data) {
-          $scope.grades = response.data;
+          $scope.grades = response.data.records;
         }
       }
     }).error(function(response) {

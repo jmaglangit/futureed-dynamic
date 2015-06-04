@@ -43,6 +43,20 @@ class ClientTeacherController extends ApiController {
         $limit = 0;
         $offset = 0;
 
+
+        if(Input::get('limit')){
+
+            $limit =  Input::get('limit');
+
+        }
+
+
+        if(Input::get('offset')){
+
+            $offset =  Input::get('offset');
+
+        }
+
         if(Input::get('name')){
 
             $criteria['name'] = Input::get('name');
@@ -53,15 +67,6 @@ class ClientTeacherController extends ApiController {
 
             $criteria['email'] = Input::get('email');
         }
-
-		if(Input::get('limit')) {
-			$limit = intval(Input::get('limit'));
-		}
-		
-		if(Input::get('offset')) {
-			$offset = intval(Input::get('offset'));
-		}
-
 
         $teacher = $this->client->getTeacherDetails($criteria, $limit, $offset);
 
@@ -93,6 +98,8 @@ class ClientTeacherController extends ApiController {
 
         $client['client_role'] = config('futureed.teacher');
         $user['user_type'] = config('futureed.client');
+        $user['first_name'] = $client['first_name'];
+        $user['last_name'] = $client['last_name'];
         $user['name'] = $client['first_name']." ".$client['last_name'];
 
         $client['street_address'] = null;
@@ -108,7 +115,7 @@ class ClientTeacherController extends ApiController {
         $client['school_code'] = $current_user_details['school_code'];
 
         //return newly added user details
-         $this->user->addUserEloquent($user);
+         $this->user->addUser($user);
 
         //get user id
         $user_id = $this->user->checkUserName($user['username'],$user['user_type']);
@@ -140,15 +147,17 @@ class ClientTeacherController extends ApiController {
 	{
         $teacher = $this->client->getClientByUserId($id);
 
+        $client_to_classroom = $this->client->getClientToClassroom($id);
+
+
+
         if(!$teacher){
 
             return $this->respondErrorMessage(2001);
 
         }
 
-
-
-        return $this->respondWithData($teacher);
+        return $this->respondWithData(array_merge([$client_to_classroom,'user'=>[$teacher['user']]]));
 	}
 
 
@@ -159,10 +168,25 @@ class ClientTeacherController extends ApiController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($id, ClientTeacherRequest $request)
 	{
+        $user_type = config('futureed.client');
+        $client = $request->only('first_name','last_name','state','city','zip','country');
+        $user['name'] = $client['first_name'].$client['last_name'];
 
 
+        $client_details = $this->client->getClientDetails($id);
+
+        $user['id'] = $client_details['user_id'];
+
+        $this->user->updateUser($user['id'],$user);
+
+        $this->client->updateClientDetails($id,$client);
+
+        $teacher = $this->client->getClientByUserId($id);
+
+
+        return $this->respondWithData($teacher);
 
 	}
 
@@ -174,9 +198,11 @@ class ClientTeacherController extends ApiController {
 	 */
 	public function destroy($id)
 	{
-        //check if this record is related to student before deleting
+        //check if this record is related to user before deleting
         $client_details = $this->client->getClientDetails($id);
         $client_to_classroom = $this->client->getClientToClassroom($id);
+
+
 
         if(empty($client_details)){
 

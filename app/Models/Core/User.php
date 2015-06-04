@@ -24,6 +24,7 @@ class User extends Model {
         'is_account_deleted',
         'password_reset_token',
         'registration_verification_token',
+        'new_email',
         'email_code',
         'email_code_expiry',
         'remember_token',
@@ -40,7 +41,7 @@ class User extends Model {
 
 
     protected $fillable = ['username', 'email', 'name', 'password', 'user_type', 'confirmation_code',
-        'confirmation_code_expiry','status', 'created_by', 'updated_by'];
+        'confirmation_code_expiry','status', 'is_account_activated','created_by', 'updated_by'];
     
 	//-------------relationships
 	public function client() {
