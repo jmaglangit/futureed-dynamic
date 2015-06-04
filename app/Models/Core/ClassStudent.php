@@ -2,6 +2,8 @@
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use FutureEd\Models\Core\User;
+use FutureEd\Models\Core\Student;
 
 class ClassStudent extends Model {
 
@@ -12,7 +14,7 @@ class ClassStudent extends Model {
 
     protected $dates = ['deleted_at'];
     
-    protected $fillable = ['user_id', 'class_id', 'status', 'verification_code'];
+    protected $fillable = ['student_id', 'class_id', 'status', 'verification_code'];
 
     protected $hidden = ['created_by','updated_by','created_at','updated_at','deleted_at'];
 
@@ -20,13 +22,9 @@ class ClassStudent extends Model {
 
     public function user(){
 
-        return $this->hasMany('FutureEd\Models\Core\User');
+        return $this->belongsToMany('FutureEd\Models\Core\User','students','id','user_id');
     }
 
-    public function student(){
-
-        return $this->hasMany(('FutureEd\Models\Core\Student'));
-    }
 
     //Scopes
 
@@ -39,7 +37,8 @@ class ClassStudent extends Model {
     public function scopeUsername($query, $username) {
 
         return $query->whereHas('user', function($query) use ($username) {
-            $query->where('username', 'like', '%'.$username.'%');
+
+                $query->where('username', 'like', '%'.$username.'%');
         });
 
     }
