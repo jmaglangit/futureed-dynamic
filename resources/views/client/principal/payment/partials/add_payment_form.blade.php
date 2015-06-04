@@ -106,10 +106,6 @@
 							<td>Teacher</td>
 							<td>Class</td>
 							<td>Price</td>
-<<<<<<< HEAD
-							<td>Actions</td>
-=======
->>>>>>> d59cf0f... KH#470,471and472[Client/Parent] payment ang invoice management
 						</tr>
 					</thead>
 					<tbody>
@@ -119,10 +115,6 @@
 							<td>Edna Krabappel</td>
 							<td>Edna-K1</td>
 							<td>15</td>
-<<<<<<< HEAD
-							<td><a href="#">Remove</a></td>
-=======
->>>>>>> d59cf0f... KH#470,471and472[Client/Parent] payment ang invoice management
 						</tr>
 					</tbody>
 				</table>
@@ -157,11 +149,7 @@
 		<div class="col-xs-5 div-right">
 			<div class="btn-container">
 				<button class="btn btn-blue btn-semi-large">Pay Subscription</button>
-<<<<<<< HEAD
-				<button class="btn btn-gold btn-medium">Cancel</button>
-=======
 				<button class="btn btn-gold btn-medium" ng-click="payment.setActive('list')">Cancel</button>
->>>>>>> d59cf0f... KH#470,471and472[Client/Parent] payment ang invoice management
 			</div>
 		</div>
 	</div>
