@@ -61,5 +61,9 @@ return [
 
     //Default country
     'default_country' => 840, //United States
+    
+    #Add Student via Teacher.
+    'new' => 'New',
+    'existing' => 'Existing'
 
 ];

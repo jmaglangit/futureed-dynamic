@@ -74,7 +74,8 @@ return [
         2121 => 'Unable to Delete. Principal is associated to a school.',
         2122 => 'Unable to Delete. Teacher is associate to a class.',
         2123 => 'Unable to Delete. Parent is associated to a student.',
-
+        2124 => 'Student does not exist.',
+        2125 => 'Student is already in the class.',
         // Client Error messages
         2200 => 'Email already exists.',
         2201 => 'Username already exists.',

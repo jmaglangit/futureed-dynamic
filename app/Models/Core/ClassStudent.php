@@ -11,6 +11,8 @@ class ClassStudent extends Model {
     protected $table = 'class_students';
 
     protected $dates = ['deleted_at'];
+    
+    protected $fillable = ['user_id', 'class_id', 'status', 'verification_code'];
 
     protected $hidden = ['created_by','updated_by','created_at','updated_at','deleted_at'];
 
@@ -52,5 +54,9 @@ class ClassStudent extends Model {
 
     }
     
-
+    //-------------relationships
+	public function classroom()
+	{
+		return $this->belongsTo('FutureEd\Models\Core\Classroom');
+	}
 }

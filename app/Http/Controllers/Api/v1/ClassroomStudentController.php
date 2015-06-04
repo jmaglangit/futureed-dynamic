@@ -2,7 +2,9 @@
 
 use FutureEd\Http\Requests;
 
-use FutureEd\Models\Repository\ClassStudents\ClassStudentsRepositoryInterface;
+
+use FutureEd\Models\Core\ClassStudent;
+use FutureEd\Models\Repository\ClassStudent\ClassStudentRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
@@ -17,32 +19,11 @@ class ClassroomStudentController extends ApiController {
     /**
      * @param ClassStudentsRepositoryInterface $classStudentsRepositoryInterface
      */
-    public function __construct(ClassStudentsRepositoryInterface $classStudentsRepositoryInterface){
+    public function __construct(ClassStudentRepositoryInterface $classStudentRepositoryInterface){
 
-        $this->class_students = $classStudentsRepositoryInterface;
+        $this->class_students = $classStudentRepositoryInterface;
     }
 
-	/**
-	 * Display list of students on the class.
-	 *
-	 * @return Response
-	 */
-	public function index()
-    {
-
-
-
-	}
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
-	}
 
 	/**
 	 * Display the specified resource.
@@ -80,31 +61,10 @@ class ClassroomStudentController extends ApiController {
         $limit = (Input::get('limit')) ? Input::get('limit') : 0 ;
 
 		return $this->respondWithData(
-            $this->class_students->getClassroomStudents($id,$category,$offset,$limit)
+            $this->class_students->getClassStudents($id,$category,$offset,$limit)
         );
 	}
 
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
 
 }
