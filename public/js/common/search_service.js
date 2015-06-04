@@ -9,6 +9,7 @@ function SearchService() {
 	    		scope.search = {};
 	    		scope.search.name = Constants.EMPTY_STR;
 				scope.search.email = Constants.EMPTY_STR;
+				scope.search.grade_id = Constants.EMPTY_STR;
 	    	}
 	    });
 	};
