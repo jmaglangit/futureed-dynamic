@@ -30,7 +30,7 @@ class SubjectRequest extends ApiRequest {
 			case 'POST':
 			default:
 				return [
-					'code' => 'required|numeric|digits_between:1,19|unique:subjects',
+					'code' => 'required|numeric|digits_between:1,19|unique:subjects,code,NULL,id,deleted_at,NULL',
 					'name' => 'required',
 					'status' => 'required|in:Enabled,Disabled'
 				];				
