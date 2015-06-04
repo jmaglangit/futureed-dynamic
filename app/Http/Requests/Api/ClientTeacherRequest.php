@@ -21,9 +21,8 @@ class ClientTeacherRequest extends ApiRequest {
     public function rules() {
         switch($this->method) {
             case 'PUT':
+                $client = config('futureed.client');
                 return [
-                    'username' => 'required|string|min:8|max:32',
-                    'email' => 'required|email',
                     'first_name' => 'required|string',
                     'last_name' => 'required|string',
                     'street_address' => 'string',

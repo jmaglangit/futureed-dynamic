@@ -14,7 +14,7 @@ class AddNameToClassroom extends Migration {
 	{
         Schema::table('classrooms', function (Blueprint $table) {
 
-            $table->string('name')->nullable()->after('order_no');
+            $table->string('name', 128)->nullable()->after('order_no');
 
         });
 	}

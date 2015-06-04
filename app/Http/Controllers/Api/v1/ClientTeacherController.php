@@ -171,35 +171,11 @@ class ClientTeacherController extends ApiController {
 	public function update($id, ClientTeacherRequest $request)
 	{
         $user_type = config('futureed.client');
-        $user = $request->only('username','email');
         $client = $request->only('first_name','last_name','state','city','zip','country');
-        $user['name'] = $client['first_name']." ".$client['last_name'];
+        $user['name'] = $client['first_name'].$client['last_name'];
 
 
         $client_details = $this->client->getClientDetails($id);
-
-        $check_username = $this->user->checkUserName($user['username'],$user_type);
-        $check_email = $this->user->checkEmail($user['email'],$user_type);
-
-
-
-        if($check_username && $check_username != $client_details['user_id']){
-
-            return $this->respondErrorMessage(2104);
-        }
-
-        if($check_email && $check_email != $client_details['user_id']){
-
-            return $this->respondErrorMessage(2200);
-        }
-
-
-        if(!$client_details){
-
-            return $this->respondErrorMessage(2001);
-
-        }
-
 
         $user['id'] = $client_details['user_id'];
 
@@ -211,9 +187,6 @@ class ClientTeacherController extends ApiController {
 
 
         return $this->respondWithData($teacher);
-
-        
-
 
 	}
 
