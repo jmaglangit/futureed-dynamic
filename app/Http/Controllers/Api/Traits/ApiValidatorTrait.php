@@ -702,7 +702,7 @@ trait ApiValidatorTrait {
                 "$school_code" => $input["$school_code"],
             ],
             [
-                "$school_code" => 'required|numeric|exists:schools,code'
+                "$school_code" => 'required|numeric|exists:schools,code,NULL,id,deleted_at,NULL'
             ],
             [
                 "exist" => config('futureed-error.error_messages.2602')

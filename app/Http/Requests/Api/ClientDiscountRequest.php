@@ -26,7 +26,7 @@ class ClientDiscountRequest extends ApiRequest {
             			'status'        => 'required|in:Enabled,Disabled'];
 	        break;
 	        case 'PUT':
-	            return ['client_id'     => 'required|numeric|unique:client_discounts,client_id,'.$this->client_id.',client_id',
+	            return ['client_id'     => 'required|numeric|unique:client_discounts,client_id,'.$this->client_id.',client_id,deleted_at,NULL',
             			'percentage'    => 'required|numeric|min:1|max:100',
             			'status'        => 'required|in:Enabled,Disabled'];
 	        break;
