@@ -4,5 +4,8 @@
 interface InvoiceDetailRepositoryInterface {
     
     public function getInvoiceDetails($criteria = array(), $limit = 0, $offset = 0);
+
     public function addInvoiceDetail($data);
+
+    public function getDetails($invoice_no);
 }
