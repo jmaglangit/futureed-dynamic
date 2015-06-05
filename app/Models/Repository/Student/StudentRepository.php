@@ -174,6 +174,7 @@ class StudentRepository implements StudentRepositoryInterface{
                                'gender'=>$data['gender'],
                                'birth_date'=>$data['birth_date'],
                                'grade_code'=>$data['grade_code'],
+                                'country_id' => $data['country_id'],
                                'country'=>$data['country'],
                                'city'=>$data['city'],
                                'state'=>$data['state']]);
