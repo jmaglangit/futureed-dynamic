@@ -1,64 +1,123 @@
-<div ng-if="class.active_view">
+<div ng-if="class.active_view || class.active_edit">
 	<div class="content-title">
 		<div class="title-main-content">
-			<span>View Class</span>
+			<span>View Class Details</span>
 		</div>		
 	</div>
-	{!! Form::open(
-					[
-						'id' => 'teacher_search',
-						'class' => 'form-horizontal'
-					]
-			) !!}
-		<div class="mid-container top-margin">
+
+	<div class="col-xs-12 success-container" ng-if="class.errors || class.success">
+		<div class="alert alert-error" ng-if="class.errors">
+            <p ng-repeat="error in class.errors track by $index" > 
+              	{! error !}
+            </p>
+        </div>
+
+        <div class="alert alert-success" ng-if="class.success">
+            <p>{! class.success !}</p>
+        </div>
+    </div>
+
+	<div class="module-container">
+		{!! Form::open(
+			array(
+				'id' => 'class_detail_form'
+				, 'class' => 'form-horizontal'
+			)
+		) !!}
 			<div class="form-group">
 				<label class="col-xs-2 control-label">Class</label>
 				<div class="col-xs-5">
-					{!! Form::text('search_name', '',['ng-disabled'=>'true','class' => 'form-control', 'ng-model' => 'teacher.search_name', 'placeholder' => 'Name']) !!}
+					{!! Form::text('class_name', ''
+						, array(
+							'ng-disabled'=>'class.active_view'
+							, 'class' => 'form-control'
+							, 'ng-model' => 'class.record.name'
+							, 'placeholder' => 'Class Name'
+						)
+					) !!}
 				</div>
-				<div class="col-xs-2">
-					<a href="#" ng-click="class.setActive('edit')" class="edit-class">Edit Class</a>
+				<div class="col-xs-2 margin-top-8">
+					<a href="" ng-if="class.active_view" ng-click="class.setActive('edit', class.record.id)" class="edit-class">Edit Class</a>
 				</div>
-				
 			</div>
+
 			<div class="form-group">
 				<label class="col-xs-2 control-label">Grade</label>
 				<div class="col-xs-5">
-					{!! Form::text('search_name', '',['ng-disabled'=>'true',	'class' => 'form-control', 'ng-model' => 'teacher.search_name', 'placeholder' => 'Name']) !!}
+					{!! Form::text('search_name', ''
+						, array(
+							'ng-disabled'=>'true'
+							, 'class' => 'form-control'
+							, 'ng-model' => 'class.record.grade.name'
+							, 'placeholder' => 'Grade'
+						)
+					) !!}
 				</div>
 			</div>
-		</div>
-		<div class="col-xs-12 mid-container">
-			<div class="title-mid">
-				Student List
-			</div>
-		</div>
-		<div class="col-xs-12 search-container">
-		<div class="form-search">
-			{!! Form::open(
-					[
-						'id' => 'class_search',
-						'class' => 'form-horizontal'
-					]
+		{!! Form::close() !!}
+
+		<div class="btn-container col-xs-5 col-xs-offset-2" ng-if="class.active_view">
+			{!! Form::button('View List'
+				, array(
+					'class' => 'btn btn-gold btn-large'
+					, 'ng-click' => "class.setActive('list')"
+				)
 			) !!}
-			<div class="form-group">
-				<label class="col-xs-2 control-label">Name</label>
-				<div class="col-xs-5">
-					{!! Form::text('search_name', '',['class' => 'form-control', 'ng-model' => 'class.search_name', 'placeholder' => 'Name']) !!}
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-xs-2 control-label">Email <span class="required">*</span></label>
-				<div class="col-xs-5">
-					{!! Form::text('search_email', '',['class' => 'form-control', 'ng-model' => 'class.search_email', 'placeholder' => 'Email']) !!}
-				</div>
-				<div class="btn-container col-xs-5">
-					<button class="btn btn-blue btn-medium" type="button" ng-click="class.getClassList()">Search</button>
-					<button class="btn btn-gold btn-medium" type="button" ng-click="class.clearSearch()">Clear</button>
-				</div>
-			</div>
+		</div>
+
+		<div class="btn-container col-xs-5 col-xs-offset-2" ng-if="class.active_edit">
+			{!! Form::button('Save'
+				, array(
+					'class' => 'btn btn-blue btn-medium'
+					, 'ng-click' => 'class.update()'
+				)
+			) !!}
+
+			{!! Form::button('Cancel'
+				, array(
+					'class' => 'btn btn-gold btn-medium'
+					, 'ng-click' => "class.setActive('view')"
+				)
+			) !!}
 		</div>
 	</div>
+
+	<div ng-if="false">
+	<div class="col-xs-12 mid-container">
+		<div class="title-mid">
+			Student List
+		</div>
+	</div>
+
+	<div class="col-xs-12 search-container">
+		<div class="form-search">
+			{!! Form::open(
+			[
+			'id' => 'class_search',
+			'class' => 'form-horizontal'
+			]
+			) !!}
+				<div class="form-group">
+					<label class="col-xs-2 control-label">Name</label>
+					<div class="col-xs-5">
+						{!! Form::text('search_name', '',['class' => 'form-control', 'ng-model' => 'class.search_name', 'placeholder' => 'Name']) !!}
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-xs-2 control-label">Email <span class="required">*</span></label>
+					<div class="col-xs-5">
+						{!! Form::text('search_email', '',['class' => 'form-control', 'ng-model' => 'class.search_email', 'placeholder' => 'Email']) !!}
+					</div>
+					<div class="btn-container col-xs-5">
+						<button class="btn btn-blue btn-medium" type="button" ng-click="class.getClassList()">Search</button>
+						<button class="btn btn-gold btn-medium" type="button" ng-click="class.clearSearch()">Clear</button>
+					</div>
+				</div>
+			{!! Form::close() !!}
+		</div>
+	</div>
+
 	<button class="btn btn-blue btn-small margin-0-30" type="button" ng-click="class.setActive('add')">
 		<i class="fa fa-plus-square"></i> Add 
 	</button>
@@ -234,5 +293,6 @@
 
 			</table>
 		</div>
+	</div>
 	</div>
 </div>
