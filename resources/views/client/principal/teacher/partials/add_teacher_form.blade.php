@@ -12,9 +12,9 @@
 			</p>
 		</div>
 
-		<div class="alert alert-success" ng-if="teacher.record.success">
+		<div class="alert alert-success" ng-if="teacher.success">
 			<p>
-				{! teacher.record.success !}
+				{! teacher.success !}
 			</p>
 		</div>
 
