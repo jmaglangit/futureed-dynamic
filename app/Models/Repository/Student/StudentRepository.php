@@ -26,6 +26,7 @@ class StudentRepository implements StudentRepositoryInterface{
             'last_name',
             'gender',
             'birth_date',
+            'country_id',
             'country',
             'state',
             'city',
@@ -75,6 +76,7 @@ class StudentRepository implements StudentRepositoryInterface{
                'last_name' => $student['last_name'],
                'gender' => $student['gender'],
                'birth_date' => $student['birth_date'],
+               'country_id' => $student['country_id'],
                'country' => $student['country'],
                'state' => $student['state'],
                'city' => $student['city'],
@@ -169,6 +171,7 @@ class StudentRepository implements StudentRepositoryInterface{
     public function updateStudentDetails($id,$data){
             Student::where('id','=',$id)
                      ->update(['first_name'=>$data['first_name'],
+
                                'last_name'=>$data['last_name'],
                                'gender'=>$data['gender'],
                                'birth_date'=>$data['birth_date'],

@@ -16,7 +16,7 @@ class Student extends Model {
         'password_image_id',
         'point_level_id',
         'learning_style_id',
-        'user_id',
+//        'user_id',
         'created_by',
         'updated_by',
         'created_at',
