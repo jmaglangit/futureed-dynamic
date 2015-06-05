@@ -6,46 +6,45 @@
 		</div>
 	</div>
 
-	{!! Form::open(array('id'=> 'add_client_form', 'class' => 'form-horizontal')) !!}
-		<div class="form-content col-xs-12">
-			<div class="alert alert-error" ng-if="client.errors">
-	            <p ng-repeat="error in client.errors track by $index" > 
-	              	{! error !}
-	            </p>
-	        </div>
+	<div class="col-xs-12 success-container" ng-if="teacher.errors || teacher.success">
+		<div class="alert alert-error" ng-if="teacher.errors">
+			<p ng-repeat="error in teacher.errors track by $index">
+				{! error !}
+			</p>
+		</div>
 
-	        <div class="alert alert-success" ng-if="client.create.success">
-	        	<p>Successfully added new client user.</p>
-	        </div>
+        <div class="alert alert-success" ng-if="teacher.success">
+            <p>{! teacher.success !}</p>
+        </div>
+    </div>
+
+	{!! Form::open(array('id'=> 'update_teacher_form', 'class' => 'form-horizontal')) !!}
+		<div class="form-content col-xs-12">
 	        <fieldset>
 	        	<legend class="legend-name-mid">
 	        		User Credentials
 	        	</legend>
 	        	<div class="form-group">
-	        		<label class="col-xs-2 control-label" id="email">Email <span class="required">*</span></label>
+	        		<label class="col-xs-2 control-label">Email <span class="required">*</span></label>
 	        		<div class="col-xs-4">
 	        			{!! Form::text('email',''
 	        				, array(
 	        					'placeHolder' => 'Email'
 	        					, 'ng-model' => 'teacher.record.user.email'
 	        					, 'ng-disabled' => 'true'
-	        					, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
-	        					, 'ng-change' => 'client.checkEmailAvailability()'
 	        					, 'class' => 'form-control'
 	        				)
 	        			) !!}
 	        		</div>
 	        	</div>
 	        	<div class="form-group">
-	        		<label class="col-xs-2 control-label" id="username">Username <span class="required">*</span></label>
+	        		<label class="col-xs-2 control-label">Username <span class="required">*</span></label>
 	        		<div class="col-xs-4">
 	        			{!! Form::text('username',''
 	        				, array(
 	        					'placeHolder' => 'Username'
 	        					, 'ng-model' => 'teacher.record.user.username'
 	        					, 'ng-disabled' => 'true'
-	        					, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
-	        					, 'ng-change' => 'client.checkUsernameAvailability()'
 	        					, 'class' => 'form-control'
 	        				)
 	        			) !!}
@@ -88,7 +87,7 @@
 	        		Other Address Information (Optional)
 	        	</legend>
 	        	<div class="form-group">
-	        		<label class="col-xs-2 control-label" id="school_address">Street Address <span class="required" ng-if="client.role.parent">*</span></label>
+	        		<label class="col-xs-2 control-label" id="school_address">Street Address</label>
 	        		<div class="col-xs-6">
 	        			{!! Form::text('street_address',''
 	        				, array(
@@ -101,7 +100,7 @@
 	        		</div>
 	        	</div>
 	        	<div class="form-group">
-	        		<label class="col-xs-2 control-label" id="school_city">City <span class="required">*</span></label>
+	        		<label class="col-xs-2 control-label" id="school_city">City</label>
 	        		<div class="col-xs-4">
 	        			{!! Form::text('city',''
 	        				, array(
@@ -112,7 +111,7 @@
 	        				)
 	        			) !!}
 	        		</div>
-	        		<label class="col-xs-2 control-label" id="school_state">State <span class="required" >*</span></label>
+	        		<label class="col-xs-2 control-label" id="school_state">State</label>
 	        		<div class="col-xs-4">
 	        			{!! Form::text('state',''
 	        				, array(
@@ -125,7 +124,7 @@
 	        		</div>
 	        	</div>
 	        	<div class="form-group">
-	        		<label class="col-xs-2 control-label" id="school_postal">Postal Code <span class="required">*</span></label>
+	        		<label class="col-xs-2 control-label" id="school_postal">Postal Code</label>
 	        		<div class="col-xs-4">
 	        			{!! Form::text('zip',''
 	        				, array(
@@ -136,11 +135,12 @@
 	        				)
 	        			) !!}
 	        		</div>
-	        		<label class="col-md-2 control-label">Country <span class="required">*</span></label>
+	        		<label class="col-md-2 control-label">Country</label>
 				      <div class="col-md-4" ng-init="getCountries()">
 				        <select  name="country" class="form-control" ng-model="teacher.record.country" ng-disabled="teacher.active_view">
-				          <option value="">-- Select Country --</option>
-				          <option ng-repeat="country in countries" value="{! country.name !}">{! country.name!}</option>
+				          <option ng-selected="null == teacher.record.country" value="null">-- Select Country --</option>
+				          <option ng-selected="country.name == teacher.record.country" 
+				          			ng-repeat="country in countries" value="{! country.name !}">{! country.name!}</option>
 				        </select>
 				      </div>
 	        	</div>

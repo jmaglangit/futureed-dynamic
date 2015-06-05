@@ -158,7 +158,7 @@ class StudentServices {
         
         $student = $this->getStudent($id)->toArray();
         $student_reference = $this->student->getReferences($id)->toArray();
-        
+
         //get age
         $age = $this->age($student['birth_date']);
 

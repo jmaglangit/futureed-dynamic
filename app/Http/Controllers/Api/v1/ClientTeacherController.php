@@ -147,17 +147,13 @@ class ClientTeacherController extends ApiController {
 	{
         $teacher = $this->client->getClientByUserId($id);
 
-        $client_to_classroom = $this->client->getClientToClassroom($id);
-
-
-
         if(!$teacher){
 
             return $this->respondErrorMessage(2001);
 
         }
 
-        return $this->respondWithData(array_merge([$client_to_classroom,'user'=>[$teacher['user']]]));
+        return $this->respondWithData($teacher);
 	}
 
 
