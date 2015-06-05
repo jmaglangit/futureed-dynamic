@@ -356,6 +356,34 @@
 							, 'uses' => $announce_controler. '@index'
 						]);
 				});
+
+			Routes::group(['prefix' => '/invoice'], function() {
+
+				$manage_invoice_controller = 'FutureLesson\Admin\ManageInvoiceController';
+
+				Routes::get('/', [
+							'as' => 'admin.manage.invoice.index',
+							'middleware' => 'admin',
+							'uses' => $manage_invoice_controller . '@index'
+						]);
+
+				Routes::group(['prefix' => '/partials'], function() {
+
+					$manage_invoice_controller = 'FutureLesson\Admin\ManageInvoiceController';
+
+					Routes::get('/invoice_list', [
+						'as' => 'admin.manage.invoice.partials.invoice_list',
+						'middleware' => 'admin',
+						'uses' => $manage_invoice_controller . '@invoice_list'
+					]);
+
+					Routes::get('/view_invoice', [
+						'as' => 'admin.manage.invoice.partials.view_invoice',
+						'middleware' => 'admin',
+						'uses' => $manage_invoice_controller . '@view_invoice'
+					]);
+				});
+			});
 		});
 			
 
