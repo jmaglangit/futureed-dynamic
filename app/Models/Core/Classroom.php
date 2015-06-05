@@ -58,8 +58,14 @@ class Classroom extends Model {
     }
 
     public function scopeOrder_No($query,$order_no){
+
         return $query->where('order_no',$order_no);
     }
+
+	public function scopeClient_Id($query, $client_id){
+
+		return $query->where('client_id',$client_id);
+	}
 
 
 
