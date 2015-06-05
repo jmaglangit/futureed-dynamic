@@ -178,6 +178,7 @@ class StudentRepository implements StudentRepositoryInterface{
                                'grade_code'=>$data['grade_code'],
                                'school_code' => (isset($data['school_code'])) ? $data['school_code'] : NULL,
                                'country'=>$data['country'],
+						       'country_id' => $data['country_id'],
                                'city'=>$data['city'],
                                'state'=>$data['state']]);
     }
