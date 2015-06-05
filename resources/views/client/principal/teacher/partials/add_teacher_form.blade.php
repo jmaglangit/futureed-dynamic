@@ -6,15 +6,15 @@
 	</div>
 
 	<div class="form-content col-xs-12">
-		<div class="alert alert-error" ng-if="teacher.errors">
+		<div class="alert alert-danger" ng-if="teacher.errors">
 			<p ng-repeat="error in teacher.errors track by $index">
 				{! error !}
 			</p>
 		</div>
 
-		<div class="alert alert-success" ng-if="teacher.success">
+		<div class="alert alert-success" ng-if="teacher.record.success">
 			<p>
-				{! teacher.success !}
+				{! teacher.record.success !}
 			</p>
 		</div>
 

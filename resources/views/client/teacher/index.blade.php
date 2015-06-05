@@ -14,15 +14,6 @@
 				@include('client.partials.dshbrd-side-nav')				
 			</div>
 
-			<div class="client-content">
-				<div template-directive template-url="{!! route('client.teacher.partials.list_teacher_form') !!}"></div>
-
-				<div template-directive template-url="{!! route('client.teacher.partials.add_teacher_form') !!}"></div>
-
-				<div template-directive template-url="{!! route('client.teacher.partials.view_teacher_form') !!}"></div>
-				
-				<div template-directive template-url="{!! route('client.teacher.partials.delete_teacher_form') !!}"></div>
-			</div>
 		</div>
 	</div>
 

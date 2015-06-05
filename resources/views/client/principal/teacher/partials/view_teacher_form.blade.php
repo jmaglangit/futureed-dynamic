@@ -6,20 +6,17 @@
 		</div>
 	</div>
 
-	<div class="col-xs-12 success-container" ng-if="teacher.errors || teacher.success">
-		<div class="alert alert-error" ng-if="teacher.errors">
-			<p ng-repeat="error in teacher.errors track by $index">
-				{! error !}
-			</p>
-		</div>
-
-        <div class="alert alert-success" ng-if="teacher.success">
-            <p>{! teacher.success !}</p>
-        </div>
-    </div>
-
 	{!! Form::open(array('id'=> 'add_client_form', 'class' => 'form-horizontal')) !!}
 		<div class="form-content col-xs-12">
+			<div class="alert alert-error" ng-if="client.errors">
+	            <p ng-repeat="error in client.errors track by $index" > 
+	              	{! error !}
+	            </p>
+	        </div>
+
+	        <div class="alert alert-success" ng-if="client.create.success">
+	        	<p>Successfully added new client user.</p>
+	        </div>
 	        <fieldset>
 	        	<legend class="legend-name-mid">
 	        		User Credentials
