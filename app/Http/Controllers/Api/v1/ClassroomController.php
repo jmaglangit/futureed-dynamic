@@ -25,7 +25,7 @@ class ClassroomController extends ApiController {
 	 */
 	public function index()
 	{
-        $criteria = [];
+		$criteria = [];
 
 		//get client id -- teacher
 		if(Input::get('client_id')){
@@ -33,30 +33,30 @@ class ClassroomController extends ApiController {
 			$criteria['client_id'] = Input::get('client_id');
 		}
 
-        //get class name
-        if(Input::get('name')){
+		//get class name
+		if(Input::get('name')){
 
-            $criteria['name'] = Input::get('name');
-        }
+			$criteria['name'] = Input::get('name');
+		}
 
-        //get class grade
-        if(Input::get('grade_id')){
+		//get class grade
+		if(Input::get('grade_id')){
 
-            $criteria['grade_id'] = Input::get('grade_id');
-        }
+			$criteria['grade_id'] = Input::get('grade_id');
+		}
 
-        //get order no.
-        if(Input::get('order_no')){
+		//get order no.
+		if(Input::get('order_no')){
 
-            $criteria['order_no'] = Input::get('order_no');
-        }
-        
-        $limit = (Input::get('limit')) ? Input::get('limit') : 0;
+			$criteria['order_no'] = Input::get('order_no');
+		}
 
-        $offset = (Input::get('offset')) ? Input::get('offset') : 0;
+		$limit = (Input::get('limit')) ? Input::get('limit') : 0;
+
+		$offset = (Input::get('offset')) ? Input::get('offset') : 0;
 
 
-        return $this->respondWithData($this->classroom->getClassrooms($criteria,$limit,$offset));
+		return $this->respondWithData($this->classroom->getClassrooms($criteria,$limit,$offset));
 	}
 
 
