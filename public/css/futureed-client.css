@@ -115,17 +115,14 @@ table#client-list{
 .margin-30-bot{
 	margin-bottom: 30px;
 }
+.margin-40-bot{
+	margin-bottom: 40px;
+}
 .btn-semi-large{
 	width: 50%;
 }
 .margin-30-left{
 	margin-left: 30px;
-}
-.margin-60-left{
-	margin-left: 60px;
-}
-.margin-30-top{
-	margin-top: 30px;
 }
 .margin-30-top{
 	margin-top: 30px;
@@ -139,4 +136,14 @@ table#client-list{
 }
 .margin-0-top{
 	margin-top: 0 !important;
+}
+.top-10{
+	position: relative;
+	top: 10px;
+}
+.text-red{
+	color: red;
+}
+.margin-60-top{
+	margin-top: 60px;
 }
