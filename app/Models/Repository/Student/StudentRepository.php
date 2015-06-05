@@ -26,6 +26,7 @@ class StudentRepository implements StudentRepositoryInterface{
             'last_name',
             'gender',
             'birth_date',
+            'country_id',
             'country',
             'state',
             'city',
