@@ -13,12 +13,20 @@ function ManageClassController($scope, manageClassService, apiService, TableServ
 	self.searchDefaults();
 
 	self.setActive = function(active, id) {
+		self.errors = Constants.FALSE;
 
 		self.active_list = Constants.FALSE;
+		self.active_view = Constants.FALSE;
 		self.active_edit = Constants.FALSE;
 
 		switch(active) {
+			case Constants.ACTIVE_VIEW	:
+				self.details(id);
+				self.active_view = Constants.TRUE;
+				break;
+
 			case Constants.ACTIVE_EDIT	:
+				self.success = Constants.FALSE;
 				self.details(id);
 				self.active_edit = Constants.TRUE;
 				break;
@@ -92,8 +100,7 @@ function ManageClassController($scope, manageClassService, apiService, TableServ
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					self.success = TeacherConstant.UPDATE_CLASSNAME_SUCCESS;
-					console.log(self.success);
-					$("html, body").animate({ scrollTop: 0 }, "slow");
+					self.setActive(Constants.ACTIVE_VIEW, self.record.id);
 				}
 			}
 
