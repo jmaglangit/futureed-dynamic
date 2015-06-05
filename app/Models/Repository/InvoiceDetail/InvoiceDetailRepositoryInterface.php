@@ -7,5 +7,8 @@ interface InvoiceDetailRepositoryInterface {
 
     public function addInvoiceDetail($data);
 
+    public function checkInvoiceIfExist($invoice_no);
+
     public function getDetails($invoice_no);
+
 }

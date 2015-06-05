@@ -21,7 +21,7 @@ class InvoiceDetailRepository implements InvoiceDetailRepositoryInterface{
         }
     }
 
-    //get invoice details with relation to classroom grade and invoice
+    //get invoice details with relation to classroom grade and invoice and subscription
 
     public function getDetails($invoice_no){
 
@@ -29,7 +29,7 @@ class InvoiceDetailRepository implements InvoiceDetailRepositoryInterface{
         $sub_invoice = new Invoice();
 
         $invoice = $invoice->with('classroom','invoice','grade')->where('invoice_no',"=",$invoice_no)->get()->toArray();
-        
+
         $invoice_details = [];
         $subscription_id = null;
         $subtotal = 0;
@@ -64,6 +64,16 @@ class InvoiceDetailRepository implements InvoiceDetailRepositoryInterface{
         return $invoice;
     }
 
+    public function checkInvoiceIfExist($invoice_no){
+
+        $invoice =  new InvoiceDetail();
+
+        $invoice = $invoice->where('invoice_no',"=",$invoice_no)->first();
+
+        return $invoice;
+
+    }
+
     public function updateInvoice($invoice_no, $data){
      
      $invoice = new Invoice();
@@ -77,7 +87,7 @@ class InvoiceDetailRepository implements InvoiceDetailRepositoryInterface{
        }
      
        return true;
-  }
+     }
 
 
 }

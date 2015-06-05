@@ -38,7 +38,7 @@ class InvoiceDetailController extends ApiController {
         $data = $request->only('invoice_no','payment_status');
 
         $invoice = $data['invoice_no'];
-        $return = $this->detail->getDetails($invoice);
+        $return = $this->detail->checkInvoiceIfExist($invoice);
 
         if(!$return){
 
