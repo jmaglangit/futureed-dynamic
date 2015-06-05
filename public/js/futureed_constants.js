@@ -51,7 +51,7 @@ var Constants = {
 	, STATUS_TRUE 	: "true"
 	, STATUS_FALSE 	: "false"
 
-	, MSG_INTERNAL_ERROR	: "Internal Server Error."
+	, MSG_INTERNAL_ERROR	: "Hmm, something went wrong. Please contact the system administrator."
 	, MSG_PPW_NOT_MATCH 	: "Picture Password does not match."
 	, MSG_PPW_INCORRECT		: "Picture password is incorrect."
 	, MSG_PPW_SELECT_NEW 	: "Please select a new picture password."
@@ -88,6 +88,8 @@ var Constants = {
 
 	, MSG_U_NOTEXIST		: "User does not exist."
 	, MSG_U_EXIST 			: "Username already exists."
+
+	, MSG_NO_RECORD			: "No record found."
 
 	, URL_FORGOT_PASSWORD	: function(user_type) {
 		return '/' + user_type + '/password/forgot';

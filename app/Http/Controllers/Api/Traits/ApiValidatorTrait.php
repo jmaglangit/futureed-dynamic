@@ -608,16 +608,16 @@ trait ApiValidatorTrait {
                 "before" => $error_msg[2500],
                 "after" =>$error_msg[2500]
             ]);
-        
+
         if($validator->fails()){
-        
+
             $validator_msg = $validator->messages()->toArray();
             
             return $this->setErrorCode(1005)
                 ->setField($date_start)
                 ->setMessage($validator_msg["$date_start"][0])
                 ->errorMessage();
-        }       
+        }
     }
 
     public function validateStatus($input,$field_name){
@@ -702,7 +702,7 @@ trait ApiValidatorTrait {
                 "$school_code" => $input["$school_code"],
             ],
             [
-                "$school_code" => 'required|numeric|exists:schools,code'
+                "$school_code" => 'required|numeric|exists:schools,code,NULL,id,deleted_at,NULL'
             ],
             [
                 "exist" => config('futureed-error.error_messages.2602')

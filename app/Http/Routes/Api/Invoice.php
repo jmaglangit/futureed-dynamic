@@ -1,5 +1,5 @@
-<?php
 
+<?php
 
 
 Routes::resource('/invoice','Api\v1\InvoiceController',
@@ -19,3 +19,4 @@ Routes::group(['middleware' => 'api_user','prefix' => '/sales-invoice'], functio
         'uses' => 'Api\v1\InvoiceDetailController@editInvoiceDetails',
         'as' =>'api.v1.sales.edit' ]);
 });
+

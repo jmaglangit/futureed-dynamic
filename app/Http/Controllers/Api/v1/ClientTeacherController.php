@@ -147,17 +147,13 @@ class ClientTeacherController extends ApiController {
 	{
         $teacher = $this->client->getClientByUserId($id);
 
-        $client_to_classroom = $this->client->getClientToClassroom($id);
-
-
-
         if(!$teacher){
 
             return $this->respondErrorMessage(2001);
 
         }
 
-        return $this->respondWithData(array_merge([$client_to_classroom,'user'=>[$teacher['user']]]));
+        return $this->respondWithData($teacher);
 	}
 
 
@@ -200,7 +196,7 @@ class ClientTeacherController extends ApiController {
 	{
         //check if this record is related to user before deleting
         $client_details = $this->client->getClientDetails($id);
-        $client_to_classroom = $this->client->getClientToClassroom($id);
+
 
 
 
@@ -208,6 +204,8 @@ class ClientTeacherController extends ApiController {
 
             return $this->respondErrorMessage(2001);
         }
+
+        $client_to_classroom = $this->client->getClientToClassroom($id);
 
         if($client_to_classroom['classroom']->toArray()){
 

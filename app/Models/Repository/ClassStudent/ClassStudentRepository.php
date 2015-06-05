@@ -6,9 +6,47 @@ use FutureEd\Models\Core\Classroom;
 use FutureEd\Models\Repository\User\UserRepository;
 
 class ClassStudentRepository implements ClassStudentRepositoryInterface{
-    
-    public function getClassStudents($criteria = array(), $limit = 0, $offset = 0){
-       
+
+    /**
+     * @param array $criteria
+     * @param int $limit
+     * @param int $offset
+     * @return array
+     */
+    public function getClassStudents($criteria = [], $limit = 0, $offset = 0){
+
+
+        $class_student = new ClassStudent();
+
+        $class_student = $class_student->with('student');
+//        dd($class_student->get()->toArray());
+        if(isset($criteria['class_id'])){
+
+            $class_student = $class_student->classroom($criteria['class_id']);
+        }
+
+        if(isset($criteria['name'])){
+
+            $class_student = $class_student->username($criteria['name']);
+        }
+
+        if(isset($criteria['email'])){
+
+            $class_student = $class_student->email($criteria['email']);
+        }
+
+        if($offset > 0 && $limit > 0 ){
+
+            $class_student = $class_student->skip($offset)->take($limit);
+        }
+
+        $records = $class_student->get();
+        $count = $class_student->get()->count();
+
+        return [
+            'total' => $count,
+            'record' => $records
+        ];
     }
     
     public function getClassStudent($user_id){
