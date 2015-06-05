@@ -7,12 +7,12 @@ use Illuminate\Support\Facades\Session;
 
 use Illuminate\Http\Request;
 
-class ManagePrincipalInvoinceController extends Controller{
+class ManageParentStudentController extends Controller{
 	/**
-	*@return Invoice view
+	*@return Student View
 	*/
 	public function index()
 	{
-		return view('client.principal.invoice.index');
+		return view('client.parent.student.index');
 	}
 }

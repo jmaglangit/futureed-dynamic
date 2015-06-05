@@ -105,7 +105,7 @@
 					});
 
 					Routes::group(['prefix' => 'invoice'], function(){
-						$manage_invoice_controller = 'FutureLesson\Client\ManagePrincipalInvoinceController';
+						$manage_invoice_controller = 'FutureLesson\Client\ManagePrincipalInvoiceController';
 
 						Routes::get('/', [
 								'as' => 'client.principal.invoice.index',
