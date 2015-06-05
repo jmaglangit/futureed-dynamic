@@ -27,6 +27,12 @@ class ClassroomController extends ApiController {
 	{
         $criteria = [];
 
+		//get client id -- teacher
+		if(Input::get('client_id')){
+
+			$criteria['client_id'] = Input::get('client_id');
+		}
+
         //get class name
         if(Input::get('name')){
 
