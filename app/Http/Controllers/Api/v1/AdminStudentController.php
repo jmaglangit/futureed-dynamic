@@ -13,14 +13,16 @@ use Illuminate\Support\Facades\Input;
 
 class AdminStudentController extends ApiController {
 
-    public function __construct(UserRepositoryInterface $user, StudentRepositoryInterface $student,
-                                CodeGeneratorServices $code, MailServices $mail ){
+	public function __construct(UserRepositoryInterface $user,
+								StudentRepositoryInterface $student,
+								CodeGeneratorServices $code,
+								MailServices $mail ){
 
-        $this->user = $user;
-        $this->student = $student;
-        $this->code = $code;
-        $this->mail = $mail;
-    }
+		$this->user = $user;
+		$this->student = $student;
+		$this->code = $code;
+		$this->mail = $mail;
+	}
 
 	/**
 	 * Display a listing of the resource.
