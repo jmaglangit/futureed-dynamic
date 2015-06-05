@@ -7,7 +7,12 @@ use Illuminate\Support\Facades\Session;
 
 use Illuminate\Http\Request;
 
-class ManageTeacherController extends Controller{
-
-	
+class ManageParentController extends Controller{
+	/**
+	*@return Parent View
+	*/
+	public function index()
+	{
+		return view('client.parent.index');
+	}
 }
