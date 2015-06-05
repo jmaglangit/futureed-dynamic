@@ -187,7 +187,38 @@ class AdminStudentController extends ApiController {
 	 */
 	public function destroy($id)
 	{
-		//
+		$student = $this->student->viewStudentClassBadge($id);
+
+		if(!$student){
+
+			return $this->respondErrorMessage(2001);
+
+		}
+
+		if($student['parent_id']){
+
+			return $this->respondErrorMessage(2126);
+		}
+
+		if($student['points']){
+
+			return $this->respondErrorMessage(2127);
+		}
+
+		if($student['badge']){
+
+			return $this->respondErrorMessage(2128);
+		}
+
+		if($student['classroom']){
+
+			return $this->respondErrorMessage(2129);
+
+		}
+
+		return $this->respondWithData($this->student->deleteStudent($id));
+
+
 	}
 
 }

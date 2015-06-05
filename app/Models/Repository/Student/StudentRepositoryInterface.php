@@ -43,4 +43,6 @@ interface StudentRepositoryInterface {
 
     public function viewStudent($id);
 
+	public function viewStudentClassBadge($id);
+
 }

@@ -40,6 +40,16 @@ class Student extends Model {
         return $this->belongsTo('FutureEd\Models\Core\Grade','grade_code','code');
     }
 
+	public function badge(){
+
+		return $this->belongsTo('FutureEd\Models\Core\StudentBadge','id','student_id');
+	}
+
+	public function classroom(){
+
+		return $this->belongsTo('FutureEd\Models\Core\ClassStudent','id','student_id');
+	}
+
     //-------------scopes
     public function scopeName($query, $name) {
 
@@ -56,6 +66,7 @@ class Student extends Model {
         });
 
     }
+
 
 
 }
