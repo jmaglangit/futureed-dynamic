@@ -25,6 +25,13 @@ class ClassroomRepository implements ClassroomRepositoryInterface{
     public function getClassrooms($criteria,$limit,$offset){
 
         $classroom = new Classroom();
+
+		//get client id -- teacher
+		if(isset($criteria['client_id'])){
+
+			$classroom = $classroom->client_id($criteria['client_id']);
+		}
+
         if(isset($criteria['name'])){
 
             $classroom = $classroom->name($criteria['name']);
