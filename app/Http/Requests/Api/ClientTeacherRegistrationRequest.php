@@ -1,8 +1,7 @@
 <?php namespace FutureEd\Http\Requests\Api;
 
-use FutureEd\Http\Requests\Request;
 
-class ClientTeacherRegistrationRequest extends Request {
+class ClientTeacherRegistrationRequest extends ApiRequest {
 
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -21,8 +20,17 @@ class ClientTeacherRegistrationRequest extends Request {
 	 */
 	public function rules()
 	{
-
+		$id = $this->__get('id');
+		dd($id);
 		switch($this->method){
+			case 'GET':
+
+				//For registration token validation
+				return [
+					'registration_token' => "required:exists:users,registration_token,deleted_at,null",
+
+				];
+				break;
 
 			case 'POST':
 			default:
@@ -33,6 +41,8 @@ class ClientTeacherRegistrationRequest extends Request {
 					'first_name' => 'required',
 					'last_name' => 'required',
 					'role' => 'required',
+					'address' => 'required',
+					'city' => 'required',
 					''
 				];
 
