@@ -16,6 +16,11 @@ Routes::group(['middleware' => 'api_user','prefix' => '/client'], function()
     Routes::resource('/teacher','Api\v1\ClientTeacherController',
         ['except' => ['create','edit']]);
 
+	Routes::get('/teacher/information/{id}',[
+		'as' => 'api.v1.client.teacher.information',
+		'uses' => 'Api\v1\ClientTeacherRegistrationController@getTeacherInformation'
+	]);
+
     //client
     Routes::post('/login','Api\v1\ClientLoginController@login');
     Routes::post('/register','Api\v1\ClientRegisterController@register');
