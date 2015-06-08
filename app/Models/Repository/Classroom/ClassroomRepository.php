@@ -52,6 +52,7 @@ class ClassroomRepository implements ClassroomRepositoryInterface{
         $count = $classroom->get()->count();
 
 		if($offset >= 0 && $limit > 0){
+
 			$classroom = $classroom->skip($offset)->take($limit);
 		}
 
