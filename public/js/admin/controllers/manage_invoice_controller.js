@@ -50,7 +50,6 @@ function ManageInvoiceController($scope, manageInvoiceService, apiService, Table
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					self.records = response.data.records;
-
 					self.updatePageCount(response.data);
 				}
 			}
