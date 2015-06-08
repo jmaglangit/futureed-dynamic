@@ -25,7 +25,7 @@ class ClientTeacherRegistrationRequest extends ApiRequest {
 
 				//For registration token validation
 				return [
-					'registration_token' => "required|exists:users,registration_token,deleted_at,null",
+					'registration_token' => "required|exists:users,registration_token,deleted_at,NULL",
 
 				];
 				break;
