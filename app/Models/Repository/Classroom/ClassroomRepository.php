@@ -49,14 +49,13 @@ class ClassroomRepository implements ClassroomRepositoryInterface{
         
         $classroom = $classroom->with('order','grade','client');
 
-
-
-        if($offset > 0 && $limit > 0){
-            $classroom = $classroom->skip($offset)->take($limit);
-        }
-
-        $records = $classroom->get();
         $count = $classroom->get()->count();
+
+		if($offset >= 0 && $limit > 0){
+			$classroom = $classroom->skip($offset)->take($limit);
+		}
+
+		$records = $classroom->get();
 
         Return [
             'total' => $count,
