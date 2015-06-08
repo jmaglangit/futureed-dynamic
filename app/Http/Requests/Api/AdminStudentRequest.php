@@ -43,7 +43,6 @@ class AdminStudentRequest extends ApiRequest {
                 $student = config('futureed.student');
                 return [
                     'username' => "required|string|min:8|max:32",
-                    'email' => "required|email",
                     'first_name' => 'required|string',
                     'last_name' => 'required|string',
                     'gender'   => 'required|in:Male,Female',

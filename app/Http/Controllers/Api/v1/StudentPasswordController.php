@@ -237,7 +237,7 @@ class StudentPasswordController extends StudentController {
 
                         $this->user->updateInactiveLock($student_reference['user_id']);
 
-                        $this->student->ChangPasswordImage($id,$input['password_image_id']); 
+                        $this->student->ChangePasswordImage($id,$input['password_image_id']); 
                         
                         return $this->respondWithData(['id' => $id ]);
 
