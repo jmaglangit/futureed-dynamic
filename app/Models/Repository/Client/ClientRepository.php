@@ -44,7 +44,7 @@ class ClientRepository implements ClientRepositoryInterface
 		return $client->with('user')
 			->id($id)
 			->role(config('futureed.teacher'))
-			->registration_token($registration_token)
+			->registrationtoken($registration_token)
 			->get();
 
 	}
