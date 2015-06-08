@@ -2,6 +2,8 @@
 
 use FutureEd\Http\Requests\Api\ApiRequest;
 
+use FutureEd\Models\Core\Student;
+
 class AdminStudentRequest extends ApiRequest {
 
     /**
@@ -20,12 +22,22 @@ class AdminStudentRequest extends ApiRequest {
      */
     public function rules() {
 
+		$student_id = $this->__get('student');
+
+		$student = Student::find($student_id);
+
+		$student_user_id = NULL;
+
+		if($student) {
+			$student_user_id = $student->user_id;
+		}
+
         switch($this->method) {
             case 'POST':
                 $student = config('futureed.student');
                 return [
-                    'username' => "required|string|min:8|max:32|unique:users,username,NULL,id,user_type,$student",
-                    'email' => "required|email|unique:users,email,NULL,id,user_type,$student",
+                    'username' => "required|string|min:8|max:32|unique:users,username,NULL,id,user_type,$student,deleted_at,NULL",
+                    'email' => "required|email|unique:users,email,NULL,id,user_type,$student,deleted_at,NULL",
                     'first_name' => 'required|string',
                     'last_name' => 'required|string',
                     'gender'   => 'required|in:Male,Female',
@@ -42,7 +54,7 @@ class AdminStudentRequest extends ApiRequest {
             case 'PUT':
                 $student = config('futureed.student');
                 return [
-                    'username' => "required|string|min:8|max:32",
+                    'username' => "required|string|min:8|max:32|unique:users,username,".$student_user_id.",id,user_type,$student,deleted_at,NULL",
                     'first_name' => 'required|string',
                     'last_name' => 'required|string',
                     'gender'   => 'required|in:Male,Female',

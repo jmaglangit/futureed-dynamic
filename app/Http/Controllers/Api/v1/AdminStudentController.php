@@ -149,14 +149,6 @@ class AdminStudentController extends ApiController {
 
 			$student = $this->student->viewStudent($id);
 
-			//check username
-			$username = $this->user->checkUserName($user['username'],$user_type);
-
-			if($username && $username != $student['user_id']){
-
-				return $this->respondErrorMessage(2201);
-			}
-
 			if(!$student){
 
 				return $this->respondErrorMessage(2001);
