@@ -66,6 +66,7 @@
     {!! Html::script('/js/futureed_controllers.js') !!}
     {!! Html::script('/js/futureed_services.js') !!}
     {!! Html::script('/js/common/table_service.js') !!}
+    {!! Html::script('/js/filters/date_filter.js') !!}
     {!! Html::script('/js/datetimepicker.js') !!}
     {!! Html::script('/js/angular-datatables.min.js') !!}
     {!! Html::script('/js/jquery.dataTables.min.js') !!}
