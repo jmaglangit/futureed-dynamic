@@ -32,17 +32,20 @@ class ClientRepository implements ClientRepositoryInterface
     }
 
 	/**
-	 * This can be getClient but there's an existing method that needs to be refactored.
-	 * @param $id  -- client id
-	 * @param $role -- client role
+	 * Gets teacher information for registration.
+	 * @param $id
+	 * @param $registration_token
+	 * @return mixed
 	 */
-	public function getTeacher($id, $role){
+	public function getTeacher($id, $registration_token){
 
 		$client = new Client();
 
 		return $client->with('user')
 			->id($id)
-			->role($role);
+			->role(config('futureed.teacher'))
+			->registration_token($registration_token)
+			->get();
 
 	}
 
