@@ -51,6 +51,7 @@ function ManageClassController($scope, manageClassService, apiService, TableServ
 
 	self.list = function() {
 		self.errors = Constants.FALSE;
+		self.search.client_id = $scope.user.id;
 
 		$scope.ui_block();
 		manageClassService.list(self.search, self.table).success(function(response) {

@@ -30,7 +30,7 @@
 				<div class="col-md-4" ng-init="getGradeLevel()">
                     <select name="grade_id" class="form-control" ng-model="class.search.grade_id">
                         <option value="">-- Select Level --</option>
-                        <option ng-repeat="grade in grades" value="{! grade.code !}">{! grade.name !}</option>
+                        <option ng-repeat="grade in grades" value="{! grade.id !}">{! grade.name !}</option>
                     </select>
                 </div>
 				<div class="col-xs-2">
@@ -54,8 +54,8 @@
 		</div>
 	</div>
 
-	<div class="col-xs-12 table-container">
-		<div class="list-container" ng-init="class.list()" ng-cloak>
+	<div class="col-xs-12 table-container" ng-init="class.list()">
+		<div class="list-container" ng-cloak>
 			<div class="title-mid">
 				Class List
 			</div>
