@@ -22,7 +22,7 @@
 								[
 									'class' => 'form-control',
 									'ng-model' => 'student.username',
-									'ng-disabled' => '!student.edit',
+									'ng-disabled' => '!student.disabled',
 									'placeHolder' => 'Username'
 								])
 						!!}
@@ -36,7 +36,7 @@
 								[
 									'class' => 'form-control',
 									'ng-model' => 'student.email',
-									'ng-disabled' => '!student.edit',
+									'ng-disabled' => 'true',
 									'placeHolder' => 'Email'
 								])
 						!!}
@@ -53,7 +53,7 @@
 								[
 									'class' => 'form-control',
 									'ng-model' => 'student.email',
-									'ng-disabled' => '!student.edit',
+									'ng-disabled' => 'true',
 									'placeHolder' => 'Email'
 								])
 						!!}
@@ -72,7 +72,7 @@
 								[
 									'class' => 'form-control',
 									'ng-model' => 'student.firstname',
-									'ng-disabled' => '!student.edit',
+									'ng-disabled' => '!student.disabled',
 									'placeHolder' => 'Firstname'
 								])
 						!!}
@@ -84,7 +84,7 @@
 								[
 									'class' => 'form-control',
 									'ng-model' => 'student.lastname',
-									'ng-disabled' => '!student.edit',
+									'ng-disabled' => '!student.disabled',
 									'placeHolder' => 'Lastname'
 								])
 						!!}
@@ -98,7 +98,7 @@
 								[
 									'class' => 'form-control',
 									'ng-model' => 'student.city',
-									'ng-disabled' => '!student.edit',
+									'ng-disabled' => '!student.disabled',
 									'placeHolder' => 'City'
 								])
 						!!}
@@ -110,7 +110,7 @@
 								[
 									'class' => 'form-control',
 									'ng-model' => 'student.city',
-									'ng-disabled' => '!student.edit',
+									'ng-disabled' => '!student.disabled',
 									'placeHolder' => 'City'
 								])
 						!!}
@@ -124,7 +124,7 @@
 								[
 									'class' => 'form-control',
 									'ng-model' => 'student.state',
-									'ng-disabled' => '!student.edit',
+									'ng-disabled' => '!student.disabled',
 									'placeHolder' => 'State'
 								])
 						!!}
@@ -155,36 +155,11 @@
                         </div>
 				</div>
 			</fieldset>
-			<fieldset>
-				<legend class="legend-name-mid">School Information</legend>
-				<div class="form-group">
-					<label class="control-label col-xs-2">School Name <span class="required">*</span></label>
-					<div class="col-xs-4">
-						{!!
-							Form::text('school_name','',
-								[
-									'class' => 'form-control',
-									'ng-model' => 'student.school_name',
-									'ng-disabled' => '!student.edit',
-									'placeHolder' => 'School Name'
-								])
-						!!}
-					</div>
-				</div>
-				<div class="form-group" ng-init="getGradeLevel()">
-					<label class="control-label col-xs-2">Grade <span class="required">*</span></label>
-					<div class="col-xs-4 nullable">
-                            <select ng-disabled="!student.disabled" name="grade_code" class="form-control" ng-model="reg.grade_code">
-                                <option value="">-- Select Level --</option>
-                                <option ng-repeat="grade in grades.records" value="{! grade.code !}">{! grade.name !}</option>
-                            </select>
-                        </div><br><br>
-				</div>
-			</fieldset>
 			<div class="col-xs-12">
-				<div class="row margin-40-bot">
+				<div class="row margin-150-bot">
 					<div class="col-md-6 col-md-offset-3 btn-container">
-						<button class="btn btn-blue btn-medium">Edit</button>
+						<button class="btn btn-blue btn-medium" ng-click="student.setActive('edit')" ng-show="!student.edit_form" type="button">Edit</button>
+						<button class="btn btn-blue btn-medium" ng-if="student.edit_form">Save</button>
 						<button class="btn btn-gold btn-medium">Back</button>
 					</div>
 				</div>

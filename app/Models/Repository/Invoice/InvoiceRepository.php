@@ -40,6 +40,10 @@ class InvoiceRepository implements InvoiceRepositoryInterface{
                     $invoice  = $invoice->with('subscription')->payment($criteria['payment_status']);
 
                 }
+                
+                if(isset($criteria['client_id'])){
+	                $invoice  = $invoice->with('subscription')->clientId($criteria['client_id']);
+                }
             }
 
 
@@ -67,6 +71,11 @@ class InvoiceRepository implements InvoiceRepositoryInterface{
         }catch(Exception $e){
             return $e->getMessage();        
         }
+    }
+    
+    public function getInvoice($id)
+    {
+	    return Invoice::with('subscription')->find($id);
     }
 
 

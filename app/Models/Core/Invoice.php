@@ -20,10 +20,6 @@ class Invoice extends Model {
 	public function client() {
 		return $this->belongsTo('FutureEd\Models\Core\Client');
 	}
-
-    public function discount(){
-        return $this->morphToMany('FutureEd\Models\Core\ClientDiscount','FutureEd\Models\Core\ClientDiscount');
-    }
     
     public function subscription() {
         return $this->belongsTo('FutureEd\Models\Core\Subscription');
@@ -54,6 +50,10 @@ class Invoice extends Model {
 
         return $query->where('payment_status', '=' , $payment_status);
 
+   }
+   
+   public function scopeClientId($query,$client_id){
+	   return $query->where('client_id', $client_id);
    }
 
     
