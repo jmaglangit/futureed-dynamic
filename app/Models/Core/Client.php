@@ -93,6 +93,13 @@ class Client extends Model {
 		
 	}
 
+	public function scopeRegistrationToken($query,$registration_token){
+
+		return $query->whereHas('user',function($query) use ($registration_token){
+			$query->where('registration_token',$registration_token);
+		});
+	}
+
 
 
 
