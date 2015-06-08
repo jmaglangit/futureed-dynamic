@@ -14,7 +14,8 @@ class ChangeRegistrationVerificationTokenIntoRegistrationTokenOnUserTable extend
 	{
 		Schema::table('users',function(Blueprint $table){
 
-			$table->renameColumn('registration_verification_token','registration_token');
+			$table->dropColumn('registration_verification_token');
+			$table->string('registration_token',256)->nullable()->after('password_reset_token');
 		});
 	}
 
@@ -27,7 +28,8 @@ class ChangeRegistrationVerificationTokenIntoRegistrationTokenOnUserTable extend
 	{
 		Schema::table('users',function(Blueprint $table){
 
-			$table->renameColumn('registration_token','registration_verification_token');
+			$table->dropColumn('registration_token');
+			$table->string('registration_verification_token',256)->nullable()->after('password_reset_token');
 		});
 	}
 
