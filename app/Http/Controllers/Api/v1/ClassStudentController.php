@@ -104,7 +104,7 @@ class ClassStudentController extends ApiController {
                 
                 //add class student.                
                 $confirmation_code = $this->code->getCodeExpiry();
-        	    $class_student['user_id'] = $user_response['id'];
+        	    $class_student['student_id'] = $student_id;
         	    $class_student['verification_code'] = $confirmation_code['confirmation_code'];
             	
             	$this->class_student->addClassStudent($class_student);
@@ -143,7 +143,9 @@ class ClassStudentController extends ApiController {
         	return $this->respondErrorMessage(2124);// Student does not exist.
     	}
     	
-    	$class_student = $this->class_student->getClassStudent($check_email['user_id']);
+    	$student_id = $this->student->getStudentId($check_email['user_id']);
+    	
+    	$class_student = $this->class_student->getClassStudent($student_id);
     	
     	if(!is_null($class_student)){
             return $this->respondErrorMessage(2125);// Student is already in the class.
@@ -151,7 +153,7 @@ class ClassStudentController extends ApiController {
     	
     	//add to class student table.
     	$confirmation_code = $this->code->getCodeExpiry();
-	    $data['user_id'] = $check_email['user_id'];
+	    $data['student_id'] = $student_id;
 	    $data['verification_code'] = $confirmation_code['confirmation_code'];
     	$this->class_student->addClassStudent($data);
     	
@@ -162,6 +164,7 @@ class ClassStudentController extends ApiController {
     	$client_user_id = $this->client->checkClient($data['client_id'],config('futureed.teacher'));    	
     	$teacher = $this->user->getUser($client_user_id,config('futureed.client'));
     	
+    	$data['user_id'] = $check_email['user_id'];
     	$data['class_name'] = $classroom ? $classroom['name'] : "";
     	$data['teacher_name'] = !is_null($teacher) ? $teacher['name'] : "";
     	            	
