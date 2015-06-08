@@ -13,7 +13,8 @@ use Illuminate\Support\Facades\Input;
 
 class AdminStudentController extends ApiController {
 
-	public function __construct(UserRepositoryInterface $user,
+	public function __construct(
+								UserRepositoryInterface $user,
 								StudentRepositoryInterface $student,
 								CodeGeneratorServices $code,
 								MailServices $mail ){
@@ -178,7 +179,7 @@ class AdminStudentController extends ApiController {
         $return = $this->student->viewStudent($id);
 
         return $this->respondWithData($return);
-        
+
 	}
 
 	/**
