@@ -38,8 +38,19 @@ class Client extends Model {
 
         return $this->belongsTo('FutureEd\Models\Core\School','school_code','code');
     }
+
+	public function student(){
+
+
+		return $this->hasMany('FutureEd\Models\Core\ParentStudent','parent_user_id','id');
+	}
 	
 	//-------------scopes
+	public function scopeId($query,$id){
+
+		return $query->where('id',$id);
+	}
+
 	public function scopeName($query, $name) {
 		
 		return $query->where(function($query) use ($name) {
@@ -82,11 +93,7 @@ class Client extends Model {
 		
 	}
 
-    public function student(){
 
-
-        return $this->hasMany('FutureEd\Models\Core\ParentStudent','parent_user_id','id');
-    }
 
 
 
