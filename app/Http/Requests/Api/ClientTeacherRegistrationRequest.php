@@ -20,8 +20,6 @@ class ClientTeacherRegistrationRequest extends ApiRequest {
 	 */
 	public function rules()
 	{
-		$id = $this->__get('id');
-		dd($id);
 		switch($this->method){
 			case 'GET':
 
