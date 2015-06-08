@@ -12,7 +12,10 @@ class ChangeRegistrationVerificationTokenIntoRegistrationTokenOnUserTable extend
 	 */
 	public function up()
 	{
-		//
+		Schema::table('users',function(Blueprint $table){
+
+			$table->renameColumn('registration_verification_token','registration_token');
+		});
 	}
 
 	/**
@@ -22,7 +25,10 @@ class ChangeRegistrationVerificationTokenIntoRegistrationTokenOnUserTable extend
 	 */
 	public function down()
 	{
-		//
+		Schema::table('users',function(Blueprint $table){
+
+			$table->renameColumn('registration_token','registration_verification_token');
+		});
 	}
 
 }
