@@ -52,6 +52,11 @@ class InvoiceController extends ApiController {
             $criteria['payment_status'] = Input::get('payment_status');
 
         }
+        if(Input::get('client_id')){
+
+            $criteria['client_id'] = Input::get('client_id');
+
+        }
 
         if(Input::get('limit')) {
             $limit = intval(Input::get('limit'));
@@ -123,7 +128,8 @@ class InvoiceController extends ApiController {
 	 */
 	public function show($id)
 	{
-		//
+		$invoice = $this->invoice->getInvoice($id);
+		return $this->respondWithData($invoice);		
 	}
 
 	/**

@@ -43,7 +43,7 @@
           
           <div class="text-group">
             <small>Not a Student?</small>
-            <small>Click {!! Html::link(route('client.login'), 'here') !!} for Parent / Teacher / School Site</small>     
+            <small>Click {!! Html::link(route('client.registration'), 'here') !!} for Parent / Teacher / School Site</small>     
           </div>  
           <div class="text-group">
             <small>

@@ -35,6 +35,9 @@
 			</div>
 		</div>
 	</div>
+	<button class="btn btn-blue btn-small margin-0-30" ng-click="payment.setActive('add')">
+		<i class="fa fa-plus-square"></i> Add 
+	</button>
 	<div class="col-xs-12 padding-0-30">
 		<div class="title-mid">
 			Student List
@@ -76,10 +79,13 @@
 		            <td>bart.simpson@simpson.com</td>
 		            <td>
 		            	<div class="row">
-		            		<div class="col-xs-6">
+		            		<div class="col-xs-4">
+	    						<a href="" ng-click="admin.viewAdmin(a.id)"><span><i class="fa fa-play"></i></span></a>
+	    					</div>
+		            		<div class="col-xs-4">
 	    						<a href="" ng-click="admin.viewAdmin(a.id)"><span><i class="fa fa-eye"></i></span></a>
 	    					</div>
-	    					<div class="col-xs-6">
+	    					<div class="col-xs-4">
 	    						<a href="" ng-click="admin.viewAdmin(a.id)"><span><i class="fa fa-pencil"></i></span></a>
 	    					</div>
 		            	</div>

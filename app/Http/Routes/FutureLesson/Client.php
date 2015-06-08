@@ -145,9 +145,19 @@
 					$manage_parent_student_controller = 'FutureLesson\Client\ManageParentStudentController';
 
 						Routes::get('list_student_form', [
-								'as' => 'client.parent.student.parent.list_student_form',
+								'as' => 'client.parent.student.partials.list_student_form',
 								'middleware' => 'client',
 								'uses' => $manage_parent_student_controller . '@list_student_form'
+							]);
+						Routes::get('add_student_form', [
+								'as' => 'client.parent.student.partials.add_student_form',
+								'middleware' => 'client',
+								'uses' => $manage_parent_student_controller . '@add_student_form'
+							]);
+						Routes::get('view_student_form', [
+								'as' => 'client.parent.student.partials.view_student_form',
+								'middleware' => 'client',
+								'uses' => $manage_parent_student_controller . '@view_student_form'
 							]);
 					});
 				});				

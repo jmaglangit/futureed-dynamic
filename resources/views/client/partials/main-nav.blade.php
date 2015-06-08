@@ -45,6 +45,9 @@
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Parent <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 <li class="">
+                  <a href="{!! route('client.parent.student.index') !!}">Student</a>
+                </li>
+                <li class="">
                   <a href="{!! route('client.parent.payment.index') !!}">Payment</a>
                 </li>
                 <li class="">
