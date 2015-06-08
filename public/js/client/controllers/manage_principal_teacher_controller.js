@@ -24,6 +24,14 @@ function ManagePrincipalTeacherController($scope, managePrincipalTeacherService,
 	* Return Teacher List
 	*/
 	self.list = function() {
+		if(self.active_list) {
+			self.listRecords();
+		} else if(self.active_view) {
+			self.classDetails($scope.user.id);
+		}
+	}
+
+	self.listRecords = function() {
 		self.errors = Constants.FALSE;
 		self.records = {};
 		self.table.loading = Constants.TRUE;
@@ -177,6 +185,27 @@ function ManagePrincipalTeacherController($scope, managePrincipalTeacherService,
 		});
 	}
 
+	self.classDetails = function(id) {
+		self.errors = Constants.FALSE;
+
+		$scope.ui_block();
+		managePrincipalTeacherService.classDetails(id, self.table).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.classes = response.data.record;
+					self.updatePageCount(response.data);
+				}
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
 	self.update = function() {
 		self.errors = Constants.FALSE;
 		$("#update_teacher_form input").removeClass("required-field");
@@ -249,6 +278,9 @@ function ManagePrincipalTeacherController($scope, managePrincipalTeacherService,
 	self.setActive = function(page, id) {
 		self.records = {};
 
+		self.tableDefaults();
+		self.searchDefaults();
+
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
 
@@ -267,6 +299,7 @@ function ManagePrincipalTeacherController($scope, managePrincipalTeacherService,
 
 			case 'view'	:
 				self.details(id);
+				self.classDetails(id);
 				self.active_view = Constants.TRUE;
 				break;
 
