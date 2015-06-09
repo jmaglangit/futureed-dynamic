@@ -17,6 +17,14 @@ function manageClassService($http){
 		});
 	}
 
+	manageClassApi.studentList = function(search) {
+		return $http({
+			method : Constants.METHOD_GET
+			, url  : classApiUrl + 'classroom/' + search.id + '/students?name=' + search.name
+				+ '&email=' + search.email
+		});
+	}
+
 	manageClassApi.details = function(id) {
 		return $http({
 			method : Constants.METHOD_GET

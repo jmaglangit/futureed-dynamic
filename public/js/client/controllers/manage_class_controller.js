@@ -15,6 +15,8 @@ function ManageClassController($scope, manageClassService, apiService, TableServ
 	self.setActive = function(active, id) {
 		self.errors = Constants.FALSE;
 
+		self.searchDefaults();
+
 		self.active_list = Constants.FALSE;
 		self.active_view = Constants.FALSE;
 		self.active_edit = Constants.FALSE;
@@ -22,6 +24,7 @@ function ManageClassController($scope, manageClassService, apiService, TableServ
 		switch(active) {
 			case Constants.ACTIVE_VIEW	:
 				self.details(id);
+				self.studentList(id);
 				self.active_view = Constants.TRUE;
 				break;
 
@@ -50,6 +53,15 @@ function ManageClassController($scope, manageClassService, apiService, TableServ
 	}
 
 	self.list = function() {
+		if(self.active_list) {
+			self.classList();
+		} else if(self.active_view) {
+			console.log(self.record.id);
+			self.studentList(self.record.id);
+		}
+	}
+
+	self.classList = function() {
 		self.errors = Constants.FALSE;
 
 		$scope.ui_block();
@@ -59,6 +71,29 @@ function ManageClassController($scope, manageClassService, apiService, TableServ
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					self.records = response.data.record;
+					self.updatePageCount(response.data);
+				}
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.studentList = function(id) {
+		self.errors = Constants.FALSE;
+		self.search.id = id;
+
+		$scope.ui_block();
+		manageClassService.studentList(self.search).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.students = response.data.record;
+					console.log(self.students);
 					self.updatePageCount(response.data);
 				}
 			}
