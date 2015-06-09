@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 use FutureEd\Http\Requests\Api\ClientTeacherRegistrationRequest;
 use Illuminate\Support\Facades\Input;
 
-class ClientTeacherRegistrationController extends Controller {
+class ClientTeacherRegistrationController extends ApiController {
 
 	/**
 	 * @var ClientRepositoryInterface
@@ -24,10 +24,42 @@ class ClientTeacherRegistrationController extends Controller {
 
 	}
 
+	/**
+	 * Get teacher initial information
+	 * @param $id
+	 * @param ClientTeacherRegistrationRequest $request
+	 * @return mixed
+	 */
 	public function getTeacherInformation($id,ClientTeacherRegistrationRequest $request){
 
 		//return  teacher information
-		return $this->client->getTeacher($id,Input::get('registration_token'));
+		$data = $this->client->getTeacher($id,Input::get('registration_token'));
+
+		return $this->respondWithData($data);
 	}
+
+	public function updateTeacherInformation($id,ClientTeacherRegistrationRequest $request){
+
+		$input = $request->only([
+			'email',
+			'username',
+			'password',
+			'first_name',
+			'last_name',
+			'address',
+			'city',
+			'state',
+			'country',
+			'country_id',
+
+		]);
+		//update teacher information
+		$data = $this->client->updateClient($id,$input);
+
+		return $this->respondWithData($data);
+
+	}
+
+
 
 }
