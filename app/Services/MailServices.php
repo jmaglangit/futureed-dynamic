@@ -359,5 +359,29 @@ class MailServices {
         $this->sendMail($content);
     }
 
+	/**
+	 * Send email teacher registration confirmation.
+	 * @param $data
+	 */
+	public function sendTeacherRegistration($data){
+
+		$code = $this->user->getConfirmationCode($data->user->id);
+
+		$contents = [
+			'view' => 'emails.client.register-teacher-email',
+			'data' => [
+				'name' => $data->user->username,
+				'code' => $code->confirmation_code,
+				'link' => $data['callback_uri'],
+			],
+			'mail_recipient' => $data->user->email,
+			'mail_recipient_name' => $data->user->username,
+			'subject' => 'Welcome to Future Lesson!'
+
+		];
+
+		$this->sendMail($contents);
+	}
+
 
 }
