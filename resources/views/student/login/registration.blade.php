@@ -149,9 +149,9 @@
                     <div class="form-group" ng-init="getCountries()">
                         <label for="" class="col-md-2 control-label">Country<span class="required">*</span></label>
                         <div class="col-md-4">
-                            <select name="country" class="form-control" ng-model="reg.country" ng-change="getGrades(reg.country)">
+                            <select name="country" id="country" class="form-control" ng-model="reg.country" ng-change="getCountryId()">
                                 <option value="">-- Select Country --</option>
-                                <option ng-repeat="country in countries" value="{! country.name !}">{! country.name!}</option>
+                                <option ng-repeat="country in countries" data-id="{! country.id !}" value="{! country.name !}">{! country.name!}</option>
                             </select>
                         </div>
                     </div>
@@ -169,7 +169,7 @@
                             ) !!}
                         </div>
                     </div>
-                    <div class="form-group" ng-init="getGradeLevel()">
+                    <div class="form-group">
                         <label for="" class="col-md-2 control-label">School level<span class="required">*</span></label>
 
                         <div class="col-md-4 nullable">
