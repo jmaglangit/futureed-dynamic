@@ -23,6 +23,8 @@ interface ClientRepositoryInterface {
 
     public function updateClientDetails($id,$clientData);
 
+	public function updateClient($id,$data);
+
 	public function getClients($criteria = array(), $limit = 0, $offset = 0);
 
     public function getClientCustomDetails($criteria);
