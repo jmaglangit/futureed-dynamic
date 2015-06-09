@@ -14,17 +14,17 @@ class ClientRepository implements ClientRepositoryInterface
     {
 
         return Client::select(
-            'id',
-            'user_id',
-            'first_name',
-            'last_name',
-            'client_role',
-            'street_address',
-            'city',
-            'state',
-            'country',
-            'zip',
-            'account_status',
+			'id',
+			'user_id',
+			'first_name',
+			'last_name',
+			'client_role',
+			'street_address',
+			'city',
+			'state',
+			'country',
+			'zip',
+			'account_status',
 			'country_id'
         )
             ->where('user_id', '=', $user_id)
