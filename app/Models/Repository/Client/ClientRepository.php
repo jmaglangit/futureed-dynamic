@@ -3,7 +3,8 @@
 use FutureEd\Models\Core\Client;
 use FutureEd\Models\Core\Grade;
 use FutureEd\Models\Core\ParentStudent;
-
+use FutureEd\Models\Core\User;
+use League\Flysystem\Exception;
 
 
 class ClientRepository implements ClientRepositoryInterface
@@ -37,7 +38,7 @@ class ClientRepository implements ClientRepositoryInterface
 	 * @param $registration_token
 	 * @return mixed
 	 */
-	public function getTeacher($id, $registration_token){
+	public function  getTeacher($id, $registration_token){
 
 		$client = new Client();
 
@@ -139,6 +140,36 @@ class ClientRepository implements ClientRepositoryInterface
             throw new Exception($e->getMessage());
         }
     }
+
+	/**
+	 * Updates client and it's relationships.
+	 * @param $id
+	 * @param $data
+	 * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|\Illuminate\Support\Collection|null|string|static
+	 */
+	public function updateClient($id,$data){
+
+		try{
+
+			$client = Client::find($id);
+
+			//TODO: to be updated through relationships.
+			$user = User::find($client->user_id)->update($data);
+
+			$client = Client::find($id)->update($data);
+
+			if($user && $client){
+
+				return Client::with('user')->find($id);
+			}
+
+
+		}catch (Exception $e){
+
+			return $e->getMessage();
+		}
+
+	}
 
 
     /**
