@@ -28,7 +28,12 @@ class ClientTeacherRegistrationRequest extends ApiRequest {
 
 		$client = config('futureed.client');
 
-//		dd($client);
+		$user_id = NULL;
+
+		if($user){
+
+			$user_id = $user->user_id;
+		}
 
 		switch($this->method){
 			case 'GET':
@@ -44,8 +49,9 @@ class ClientTeacherRegistrationRequest extends ApiRequest {
 
 				//update teacher on registration
 				return [
+
 					'email' => 'required|email',
-					'username' => "required|min:8|max:32|alpha_num|unique:users,username,$user->user_id,id,user_type,$client,deleted_at,NULL",
+					'username' => "required|min:8|max:32|alpha_num|unique:users,username,$user_id,id,user_type,$client,deleted_at,NULL",
 					'password' => 'required|custom_password',
 					'first_name' => 'required|regex:/^([a-z\x20])+$/i|max:64',
 					'last_name' => 'required|regex:/^([a-z\x20])+$/i|max:64',
