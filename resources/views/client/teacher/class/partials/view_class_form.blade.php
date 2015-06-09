@@ -134,11 +134,11 @@
 		</div>
 	</div>
 
-	<button class="btn btn-blue btn-small margin-0-30" type="button" ng-click="class.setActive('add')">
-		<i class="fa fa-plus-square"></i> Add 
-	</button>
-
 	<div class="col-xs-12 table-container">
+		<button class="btn btn-blue btn-small" type="button" ng-click="class.setActive('add_student')">
+			<i class="fa fa-plus-square"></i> Add 
+		</button>
+
 		<div class="title-mid">
 			Student List
 		</div>
@@ -175,8 +175,8 @@
 			            <td>{! student.student.user.email !}</td>
 			        </tr>
 			        <tr class="odd" ng-if="!class.students.length">
-			        	<td valign="top" colspan="7">
-			        		No records found
+			        	<td valign="top" colspan="2">
+			        		No records found.
 			        	</td>
 			        </tr>
 		        </tbody>

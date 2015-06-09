@@ -40,5 +40,21 @@ function manageClassService($http){
 		});
 	}
 
+	manageClassApi.addExistingStudent = function(data) {
+		return $http({
+			method : Constants.METHOD_POST
+			, data : data
+			, url  : classApiUrl + 'class-student/add-existing-student'
+		});
+	}
+
+	manageClassApi.addNewStudent = function(data) {
+		return $http({
+			method : Constants.METHOD_POST
+			, data : data
+			, url  : classApiUrl + 'class-student/add-new-student'
+		});
+	}
+
 	return manageClassApi;
 }
