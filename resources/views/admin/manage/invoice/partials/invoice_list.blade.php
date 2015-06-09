@@ -60,10 +60,10 @@
 				</div>
 				<div class="form-group">
 					<div class="col-xs-5">
-						{!! Form::text('subscription_id', ''
+						{!! Form::text('subscription_name', ''
 							, array(
 								'class' => 'form-control'
-								, 'ng-model' => 'invoice.search.subscription_id'
+								, 'ng-model' => 'invoice.search.subscription_name'
 								, 'placeholder' => 'Subscription Name'
 							)
 						) !!}
@@ -120,8 +120,8 @@
 			        <tr ng-repeat="invoiceInfo in invoice.records">
 			            <td>{! invoiceInfo.order_no !}</td>
 			            <td>{! invoiceInfo.subscription.name !}</td>
-			            <td>{! invoiceInfo.date_start | date:'dd/MM/yyyy' !}</td>
-			            <td>{! invoiceInfo.date_end | date:'dd/MM/yyyy'!}</td>
+			            <td>{! invoiceInfo.date_start | ddMMyyyy !}</td>
+			            <td>{! invoiceInfo.date_end | ddMMyyyy !}</td>
 			            <td>{! invoiceInfo.seats_total !}</td>
 			            <td>{! invoiceInfo.total_amount !}</td>
 			            <td>{! invoiceInfo.payment_status !}</td>
