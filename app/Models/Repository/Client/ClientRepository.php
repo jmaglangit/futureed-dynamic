@@ -24,7 +24,8 @@ class ClientRepository implements ClientRepositoryInterface
             'state',
             'country',
             'zip',
-            'account_status'
+            'account_status',
+			'country_id'
         )
             ->where('user_id', '=', $user_id)
             ->where('client_role', '=', $role)->first();

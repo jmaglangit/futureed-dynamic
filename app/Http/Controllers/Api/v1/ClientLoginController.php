@@ -88,7 +88,8 @@ class ClientLoginController extends ClientController {
         return $this->respondWithData([
                 'id' => $client_detail['id'],
                 'first_name' => $client_detail['first_name'],
-                'last_name' => $client_detail['last_name']
+                'last_name' => $client_detail['last_name'],
+				'country_id' => $client_detail['country_id'],
         ]);
     }
 
