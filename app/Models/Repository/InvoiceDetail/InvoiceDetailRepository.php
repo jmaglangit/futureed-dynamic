@@ -25,42 +25,38 @@ class InvoiceDetailRepository implements InvoiceDetailRepositoryInterface{
 
     public function getDetails($invoice_no){
 
-        $invoice = new InvoiceDetail();
-        $sub_invoice = new Invoice();
+        $invoice_list = new InvoiceDetail();
+        $invoice = new Invoice();
+       
+        $invoice = $invoice->select('invoice_no','payment_status','date_start','date_end','subscription_id','discount')
+                           ->with('subscription')->where('invoice_no','=',$invoice_no)->get();
 
-        $invoice = $invoice->with('classroom','invoice','grade')->where('invoice_no',"=",$invoice_no)->get()->toArray();
-
-        $invoice_details = [];
-        $subscription_id = null;
-        $subtotal = 0;
-        $discount = 0;
-        $total_discount =0;
-        $total = 0;
-
-
-        if($invoice){
-
-             $invoice_details = $invoice[0]['invoice'];
-
-               foreach ($invoice_details as $k => $v) {
-
-                       $subtotal +=  $v['total_amount'];
-                     $subscription_id = $v['subscription_id'];
-                     $discount = $v['discount'];
-               }
-
-               $sub_invoice = $sub_invoice->with('subscription')->subscription($subscription_id)->first()->toArray();
-               $sub_invoice = $sub_invoice['subscription'];
-               $invoice['subscription'] = $sub_invoice;
-
+        if(empty($invoice->toArray())) {
+            
+            return $invoice;
         }
 
-        $total_discount = $subtotal * ($discount/100);
-        $total = $subtotal - $total_discount;
-        $invoice['subtotal'] = $subtotal;
-        $invoice['discount'] = $discount;
-        $invoice['price_discount'] = $total_discount;
-        $invoice['total'] = $total;
+        $invoice_list = $invoice_list->with('grade','classroom')->where('invoice_no',"=",$invoice_no)->get();
+
+        if($invoice_list) {
+           $invoice = (object) $invoice[0];
+           $invoice->invoices = $invoice_list->toArray();
+        }
+
+        $subtotal = 0;
+
+        if($invoice->toArray()){
+
+               foreach ($invoice->invoices as $k => $v) {
+
+                       $subtotal +=  $v['price'];
+               }
+        }
+
+        $invoice->price_discount = $subtotal * ($invoice->discount/100);
+        $invoice->total = $subtotal - $invoice->price_discount;
+        $invoice->subtotal = $subtotal; 
+
         return $invoice;
     }
 
