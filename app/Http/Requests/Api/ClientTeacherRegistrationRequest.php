@@ -54,6 +54,7 @@ class ClientTeacherRegistrationRequest extends ApiRequest {
 					'state' => 'required|string',
 					'country' => 'exists:countries,name',
 					'country_id' => 'required|exists:countries,id',
+					'callback_uri'  => 'required|string',
 				];
 				break;
 
