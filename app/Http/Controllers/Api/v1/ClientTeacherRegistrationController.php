@@ -53,8 +53,14 @@ class ClientTeacherRegistrationController extends ApiController {
 			'country_id',
 
 		]);
+
 		//update teacher information
 		$data = $this->client->updateClient($id,$input);
+
+
+		//send email to teacher
+		dd($data->toArray());
+
 
 		return $this->respondWithData($data);
 
