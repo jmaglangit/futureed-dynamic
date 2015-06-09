@@ -5,6 +5,8 @@ interface ClientRepositoryInterface {
 
     public function getClient($user_id,$role);
 
+	public function getTeacher($id, $role);
+
     public function checkClient($id,$role);
 
     public function checkClientEmail($input);

@@ -9,6 +9,7 @@ use FutureEd\Models\Core\ParentStudent;
 class ClientRepository implements ClientRepositoryInterface
 {
 
+	//TODO: Need to refactor /improve
     public function getClient($user_id, $role)
     {
 
@@ -29,6 +30,26 @@ class ClientRepository implements ClientRepositoryInterface
             ->where('client_role', '=', $role)->first();
 
     }
+
+	/**
+	 * Gets teacher information for registration.
+	 * @param $id
+	 * @param $registration_token
+	 * @return mixed
+	 */
+	public function getTeacher($id, $registration_token){
+
+		$client = new Client();
+
+		return $client->with('user')
+			->id($id)
+			->role(config('futureed.teacher'))
+			->registrationtoken($registration_token)
+			->get();
+
+	}
+
+
 
     public function checkClient($id, $role)
     {
