@@ -96,7 +96,11 @@ return [
         
         2600 => 'Cannot delete subject. Subject has subject areas.',
         2601 => 'Cannot delete admin.',
-        2602 => 'The school is invalid.'
+        2602 => 'The school is invalid.',
+
+        // Custom country messages.
+        2603 => 'The country field is required.',
+        2604 => 'The country is invalid'
 
     ],
 ];
