@@ -14,6 +14,22 @@ class Client extends Model {
 
     protected $hidden = ['created_by','updated_by','created_at','updated_at','deleted_at'];
 
+	protected $fillable = [
+		'first_name',
+		'last_name',
+		'street_address',
+		'city',
+		'state',
+		'country',
+		'country_id',
+		'zip',
+	];
+
+	protected $attributes = [
+		'created_by' => 1,
+		'updated_by' => 1
+	];
+
 
     public static function boot(){
 
