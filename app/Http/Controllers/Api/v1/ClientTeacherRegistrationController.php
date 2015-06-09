@@ -59,7 +59,7 @@ class ClientTeacherRegistrationController extends ApiController {
 
 
 		//send email to teacher
-		dd($data->toArray());
+
 
 
 		return $this->respondWithData($data);
