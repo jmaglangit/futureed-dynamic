@@ -76,6 +76,11 @@ return [
         2123 => 'Unable to Delete. Parent is associated to a student.',
         2124 => 'Student does not exist.',
         2125 => 'Student is already in the class.',
+	    2126 => 'Unable to Delete. Student is associated to a Parent.',
+	    2127 => 'Unable to Delete. Student has Points.',
+	    2128 => 'Unable to Delete. Student has Badge.',
+	    2129 => 'Unable to Delete. Student has Class.',
+
         // Client Error messages
         2200 => 'Email already exists.',
         2201 => 'Username already exists.',
@@ -96,7 +101,11 @@ return [
         
         2600 => 'Cannot delete subject. Subject has subject areas.',
         2601 => 'Cannot delete admin.',
-        2602 => 'The school is invalid.'
+        2602 => 'The school is invalid.',
+
+        // Custom country messages.
+        2603 => 'The country field is required.',
+        2604 => 'The country is invalid'
 
     ],
 ];
