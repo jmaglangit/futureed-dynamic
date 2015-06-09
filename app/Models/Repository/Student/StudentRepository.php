@@ -213,7 +213,7 @@ class StudentRepository implements StudentRepositoryInterface
 
 
 	//change password_image_id
-	public function ChangePasswordImage($id, $password_image_id)
+	public function changePasswordImage($id, $password_image_id)
 	{
 
 		try {

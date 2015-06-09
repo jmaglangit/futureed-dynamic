@@ -35,7 +35,7 @@ interface StudentRepositoryInterface {
     
     public function getStudentId($user_id);
     
-    public function ChangePasswordImage($id, $password_image_id);
+    public function changePasswordImage($id, $password_image_id);
     
     public function checkIdExist($id);
 
