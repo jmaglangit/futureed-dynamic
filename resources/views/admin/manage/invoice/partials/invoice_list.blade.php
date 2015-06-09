@@ -128,10 +128,10 @@
 			            <td ng-if="invoice.records.length">
 			            	<div class="row">
 			            		<div class="col-xs-6">
-			            			<a href="" ng-click="invoice.setActive('view', invoiceInfo.id)"><span><i class="fa fa-eye"></i></span></a>
+			            			<a href="" ng-click="invoice.setActive('view', invoiceInfo.invoice_no)"><span><i class="fa fa-eye"></i></span></a>
 			            		</div>
 			            		<div class="col-xs-6">
-			            			<a href="" ng-click="invoice.setActive('edit', invoiceInfo.id)"><span><i class="fa fa-pencil"></i></span></a>
+			            			<a href="" ng-click="invoice.setActive('edit', invoiceInfo.invoice_no)"><span><i class="fa fa-pencil"></i></span></a>
 			            		</div>
 			            	</div>
 			            </td>

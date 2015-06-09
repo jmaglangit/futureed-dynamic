@@ -16,5 +16,12 @@ function manageInvoiceService($http) {
 		});
 	}
 
+	invoiceAPI.details = function(invoice_no) {
+		return $http({
+			method : Constants.METHOD_GET
+			, url  : invoiceURL + 'sales-invoice/details?invoice_no=' + invoice_no
+		});
+	}
+
 	return invoiceAPI
 }
