@@ -215,7 +215,9 @@ trait ApiValidatorTrait {
                 ],
                 [
                     "school_code.required" => $error_msg[2602],
-                    "school_code.numeric" => $error_msg[2602]
+                    "school_code.numeric" => $error_msg[2602],
+                    "country_id.required" => $error_msg[2603],
+                    "country_id.numeric" => $error_msg[2604]
                 ]
             );
 
@@ -742,6 +744,31 @@ trait ApiValidatorTrait {
                 ->errorMessage();
         }
 
+    }
+
+    // validation for state and city
+    // accepts spaces,alphabet characters and dash
+    public function validateAlphaSpace($input, $field_name){
+
+        $error_msg = config('futureed-error.error_messages');
+
+            $validator = Validator::make(
+                [
+                    "$field_name" => strtolower($input["$field_name"]),
+                ],
+                [
+                    "$field_name" => 'required|regex:/^[-\pL\s]+$/u'
+                ]
+            );
+            if($validator->fails()){
+
+            $validator_msg = $validator->messages()->toArray();
+
+            return $this->setErrorCode(1023)
+                ->setField($field_name)
+                ->setMessage($validator_msg["$field_name"][0])
+                ->errorMessage();
+        }
     }
 
 }
