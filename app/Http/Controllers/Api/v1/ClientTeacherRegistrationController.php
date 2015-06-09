@@ -3,12 +3,17 @@
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
+use FutureEd\Models\Core\User;
 use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
+use FutureEd\Models\Repository\User\UserRepositoryInterface;
+use FutureEd\Services\CodeGeneratorServices;
+use FutureEd\Services\MailServices;
 use Illuminate\Http\Request;
 use FutureEd\Http\Requests\Api\ClientTeacherRegistrationRequest;
 use Illuminate\Support\Facades\Input;
 
-class ClientTeacherRegistrationController extends ApiController {
+class ClientTeacherRegistrationController extends ApiController
+{
 
 	/**
 	 * @var ClientRepositoryInterface
@@ -16,11 +21,36 @@ class ClientTeacherRegistrationController extends ApiController {
 	protected $client;
 
 	/**
+	 * @var MailServices
+	 */
+	protected $mail;
+
+	/**
+	 * @var CodeGeneratorServices
+	 */
+	protected $code;
+
+	/**
+	 * @var
+	 */
+	protected $user;
+
+	/**
 	 * @param ClientRepositoryInterface $clientRepositoryInterface
 	 */
-	public function __construct(ClientRepositoryInterface $clientRepositoryInterface){
+	public function __construct(
+		ClientRepositoryInterface $clientRepositoryInterface,
+		UserRepositoryInterface $userRepositoryInterface,
+		MailServices $mailServices,
+		CodeGeneratorServices $codeGeneratorServices
+
+	)
+	{
 
 		$this->client = $clientRepositoryInterface;
+		$this->mail = $mailServices;
+		$this->code = $codeGeneratorServices;
+		$this->user = $userRepositoryInterface;
 
 	}
 
@@ -30,15 +60,17 @@ class ClientTeacherRegistrationController extends ApiController {
 	 * @param ClientTeacherRegistrationRequest $request
 	 * @return mixed
 	 */
-	public function getTeacherInformation($id,ClientTeacherRegistrationRequest $request){
+	public function getTeacherInformation($id, ClientTeacherRegistrationRequest $request)
+	{
 
 		//return  teacher information
-		$data = $this->client->getTeacher($id,Input::get('registration_token'));
+		$data = $this->client->getTeacher($id, Input::get('registration_token'));
 
 		return $this->respondWithData($data);
 	}
 
-	public function updateTeacherInformation($id,ClientTeacherRegistrationRequest $request){
+	public function updateTeacherInformation($id, ClientTeacherRegistrationRequest $request)
+	{
 
 		$input = $request->only([
 			'email',
@@ -54,18 +86,25 @@ class ClientTeacherRegistrationController extends ApiController {
 
 		]);
 
+		//apply code
+		$input = array_merge($input, $this->code->getCodeExpiry());
+
 		//update teacher information
-		$data = $this->client->updateClient($id,$input);
+		$data = $this->client->updateClient($id, $input);
 
 
-		//send email to teacher
+		if (empty($data)) {
 
+			return $this->respondWithData($data);
+		} else {
 
+			//send email to teacher
+			$this->mail->sendTeacherRegistration($data);
 
-		return $this->respondWithData($data);
+			return $this->respondWithData($data);
 
+		}
 	}
-
 
 
 }
