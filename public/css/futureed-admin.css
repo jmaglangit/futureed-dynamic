@@ -195,6 +195,11 @@ table#client-list{
 	position: relative;
 	bottom: 10px;
 }
+.table-fix{
+	word-wrap:break-word;
+	max-width: 270px;
+}
+
 
 input[type="checkbox"],
 input[type="radio"] {
