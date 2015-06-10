@@ -69,6 +69,12 @@ class ClientTeacherRegistrationController extends ApiController
 		return $this->respondWithData($data);
 	}
 
+	/**
+	 * Update teacher information -- registration process
+	 * @param $id
+	 * @param ClientTeacherRegistrationRequest $request
+	 * @return mixed
+	 */
 	public function updateTeacherInformation($id, ClientTeacherRegistrationRequest $request)
 	{
 
@@ -83,6 +89,7 @@ class ClientTeacherRegistrationController extends ApiController
 			'state',
 			'country',
 			'country_id',
+			'callback_uri'
 
 		]);
 
@@ -97,6 +104,8 @@ class ClientTeacherRegistrationController extends ApiController
 
 			return $this->respondWithData($data);
 		} else {
+
+			$data->callback_uri = $input['callback_uri'];
 
 			//send email to teacher
 			$this->mail->sendTeacherRegistration($data);
