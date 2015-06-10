@@ -26,9 +26,14 @@ class GradeRepository implements GradeRepositoryInterface{
 
                 }
 
-                if(isset($criteria['country_id'])){
+                if(isset($criteria['country_id']) && $criteria['country_id'] <> 'all'){
 
                     $grade = $grade->with('country')->countryid($criteria['country_id']);
+                }
+
+                if($criteria['country_id'] == 'all'){
+
+                    $grade = $grade->with('country');
 
                 }
             }
