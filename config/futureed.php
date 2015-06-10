@@ -69,6 +69,10 @@ return [
     #Payment status
     'pending' => 'Pending',
     'paid' => 'Paid',
-    'cancelled' => 'Cancelled'
+    'cancelled' => 'Cancelled',
+
+	//user Status
+
+	'user_disabled' => 'Disabled'
 
 ];
