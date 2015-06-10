@@ -28,6 +28,7 @@ class ClientParentController extends ApiController {
 
         $students = $this->student->getStudentByParent($id);
 
+		//check if parent has student
 		if(!$students){
 
 			return $this->respondErrorMessage(2130);
