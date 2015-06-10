@@ -372,7 +372,7 @@ class MailServices {
 			'data' => [
 				'name' => $data->user->username,
 				'code' => $code->confirmation_code,
-				'link' => $data['callback_uri'],
+				'link' => $data->callback_uri,
 			],
 			'mail_recipient' => $data->user->email,
 			'mail_recipient_name' => $data->user->username,
