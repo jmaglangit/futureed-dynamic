@@ -70,7 +70,7 @@ class ClientTeacherRegistrationRequest extends ApiRequest {
 					'email' => 'required',
 					'username' => 'required',
 					'password' => 'required',
-					'first_name' => 'required',
+						'first_name' => 'required',
 					'last_name' => 'required',
 					'role' => 'required',
 					'address' => 'required',
