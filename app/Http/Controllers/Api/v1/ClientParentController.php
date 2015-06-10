@@ -18,7 +18,7 @@ class ClientParentController extends ApiController {
             return $this->respondWithError($this->getMessageBag());
         }
 
-        //TODO: check client if exist
+
         $stud_list = $this->client->checkClient($id,$parent_role);
 
         if(is_null($stud_list)){
@@ -27,6 +27,11 @@ class ClientParentController extends ApiController {
         }
 
         $students = $this->student->getStudentByParent($id);
+
+		if(!$students){
+
+			return $this->respondErrorMessage(2130);
+		}
 
         foreach ($students as $key => $value) {
 

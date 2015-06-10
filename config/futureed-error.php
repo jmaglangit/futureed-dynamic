@@ -80,6 +80,8 @@ return [
 	    2127 => 'Unable to Delete. Student has Points.',
 	    2128 => 'Unable to Delete. Student has Badge.',
 	    2129 => 'Unable to Delete. Student has Class.',
+        2130 => 'Parent does not have Student.',
+		 
 
         // Client Error messages
         2200 => 'Email already exists.',
