@@ -31,8 +31,8 @@ class ClientParentController extends ApiController {
 		//check if parent has student
 		if(!$students){
 
-			return $this->respondErrorMessage(2130);
-		}
+	      return $this->respondErrorMessage(2130);
+        }
 
         foreach ($students as $key => $value) {
 
