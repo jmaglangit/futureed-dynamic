@@ -85,52 +85,53 @@
 					)
 				) !!}
 			</div>
-
-			<table id="grade-list" class="table table-striped table-bordered">
-				<thead>
-			        <tr>
-			            <th>Subject Code</th>
-			            <th>Subject Name</th>
-			            <th>Description</th>
-			            <th>Action</th>
-			        </tr>
-		        </thead>
-		        <tbody>
-			        <tr ng-repeat="a in subject.subjects">
-			            <td>{! a.code !}</td>
-			            <td>{! a.name !}</td>
-			            <td>{! a.description !}</td>
-			            <td>
-			            	<div class="row">
-			            		<div class="col-xs-4">
-			            			{! a.status !}
-			            		</div>
-			            		<div class="col-xs-4">
-			            			<a href="" ng-click="subject.setSubjectAreaDetails(a.id, a.name)"><span><i class="fa fa-plus"></i></span> Area</a>
-			            		</div>
-			            		<div class="col-xs-2">
-			            			<a href="" ng-click="subject.getSubjectDetails(a.id)"><span><i class="fa fa-pencil"></i></span></a>
-			            		</div>
-			            		
-			            		<div class="col-xs-2">
-			            			<a href="" ng-click="subject.confirmDeleteSubject(a.id)"><span><i class="fa fa-trash"></i></span></a>
-			            		</div>	
-			            	</div>
-			            </td>
-			        </tr>
-			        <tr class="odd" ng-if="!subject.subjects.length && !subject.table.loading">
-			        	<td valign="top" colspan="4" class="dataTables_empty">
-			        		No data available in table
-			        	</td>
-			        </tr>
-			        <tr class="odd" ng-if="subject.table.loading">
-			        	<td valign="top" colspan="4" class="dataTables_empty">
-			        		Loading...
-			        	</td>
-			        </tr>
-		        </tbody>
-			</table>
-
+			<div class="clearfix"></div>
+			<div class="table-responsive">
+				<table id="grade-list" class="table table-striped table-bordered">
+					<thead>
+				        <tr>
+				            <th>Subject Code</th>
+				            <th>Subject Name</th>
+				            <th>Description</th>
+				            <th>Action</th>
+				        </tr>
+			        </thead>
+			        <tbody>
+				        <tr ng-repeat="a in subject.subjects">
+				            <td>{! a.code !}</td>
+				            <td class="td-fix">{! a.name !}</td>
+				            <td class="td-fix">{! a.description !}</td>
+				            <td class="table-action">
+				            	<div class="row">
+				            		<div class="col-xs-4">
+				            			{! a.status !}
+				            		</div>
+				            		<div class="col-xs-4">
+				            			<a href="" ng-click="subject.setSubjectAreaDetails(a.id, a.name)"><span><i class="fa fa-plus"></i></span> Area</a>
+				            		</div>
+				            		<div class="col-xs-2">
+				            			<a href="" ng-click="subject.getSubjectDetails(a.id)"><span><i class="fa fa-pencil"></i></span></a>
+				            		</div>
+				            		
+				            		<div class="col-xs-2">
+				            			<a href="" ng-click="subject.confirmDeleteSubject(a.id)"><span><i class="fa fa-trash"></i></span></a>
+				            		</div>	
+				            	</div>
+				            </td>
+				        </tr>
+				        <tr class="odd" ng-if="!subject.subjects.length && !subject.table.loading">
+				        	<td valign="top" colspan="4" class="dataTables_empty">
+				        		No data available in table
+				        	</td>
+				        </tr>
+				        <tr class="odd" ng-if="subject.table.loading">
+				        	<td valign="top" colspan="4" class="dataTables_empty">
+				        		Loading...
+				        	</td>
+				        </tr>
+			        </tbody>
+				</table>
+			</div>
 			<div class="pull-right" ng-if="subject.subjects.length">
 				<pagination 
 					total-items="subject.table.total_items" 
