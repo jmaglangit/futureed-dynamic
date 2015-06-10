@@ -71,8 +71,7 @@ return [
     'paid' => 'Paid',
     'cancelled' => 'Cancelled',
 
-	//user Status
-
-	'user_disabled' => 'Disabled'
+    //user Status
+    'user_disabled' => 'Disabled'
 
 ];
