@@ -180,7 +180,7 @@
 	        			{!! Form::text('school_name',''
 	        				, array(
 	        					'placeHolder' => 'School Name'
-	        					, 'ng-disabled' => 'client.active_view_client'
+	        					, 'ng-disabled' => 'true'
 	        					, 'ng-model' => 'client.details.school_name'
 	        					, 'ng-change' => "client.searchSchool('edit')"
                         		, 'ng-model-options' => "{ debounce : {'default' : 500} }"

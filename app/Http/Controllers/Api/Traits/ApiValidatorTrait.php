@@ -704,7 +704,7 @@ trait ApiValidatorTrait {
                 "$school_code" => $input["$school_code"],
             ],
             [
-                "$school_code" => 'required|numeric|exists:schools,code,NULL,id,deleted_at,NULL'
+                "$school_code" => 'required|numeric|exists:schools,code,deleted_at,NULL'
             ],
             [
                 "exist" => config('futureed-error.error_messages.2602')
@@ -715,7 +715,7 @@ trait ApiValidatorTrait {
 
             return $this->setErrorCode(2602)
                 ->setField($school_code)
-                ->setMessage(2602)
+                ->setMessage(config('futureed-error.error_messages.2602'))
                 ->errorMessage();
         }
     }
