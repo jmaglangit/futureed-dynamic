@@ -76,7 +76,6 @@ class ClientTeacherRegistrationRequest extends ApiRequest
 					'role' => 'required',
 					'address' => 'required',
 					'city' => 'required',
-					''
 				];
 
 		}
