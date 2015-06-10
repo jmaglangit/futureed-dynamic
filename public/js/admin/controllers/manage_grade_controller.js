@@ -59,7 +59,7 @@ function ManageGradeController($scope, apiService, manageGradeService) {
 	function getGradeList() {
 		self.errors = Constants.FALSE;
 		var grade = (self.search.grade) ? self.search.grade : Constants.EMPTY_STR;
-		var country = (self.search.country) ? self.search.country : Constants.EMPTY_STR;
+		var country = (self.search.country) ? self.search.country : Constants.ALL;
 		self.table.loading = Constants.TRUE;
 
 		$scope.ui_block();
