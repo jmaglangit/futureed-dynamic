@@ -87,7 +87,7 @@ class ClientLoginController extends ClientController {
 		//get user details
 		$user_details = $this->user->getUserDetail($response['data'],config('futureed.client'));
 
-		//check if user is Disabled/Enabled
+		//check if user is Disabled
 		if($user_details['status'] === config('futureed.user_disabled')){
 
 			return $this->respondErrorMessage(2013);
