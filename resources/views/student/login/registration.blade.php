@@ -136,7 +136,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="" class="col-md-2 control-label">State<span class="required">*</span></label>
+                        <label for="" class="col-md-2 control-label">State</label>
                         <div class="col-md-4">
                             {!! Form::text('state', ''
                                 , array(
@@ -149,7 +149,7 @@
                     <div class="form-group" ng-init="getCountries()">
                         <label for="" class="col-md-2 control-label">Country<span class="required">*</span></label>
                         <div class="col-md-4">
-                            <select name="country" id="country" class="form-control" ng-model="reg.country" ng-change="getCountryId()">
+                            <select name="country_id" id="country" class="form-control" ng-model="reg.country" ng-change="getCountryId()">
                                 <option value="">-- Select Country --</option>
                                 <option ng-repeat="country in countries" data-id="{! country.id !}" value="{! country.name !}">{! country.name!}</option>
                             </select>
