@@ -5,14 +5,13 @@ use Illuminate\Database\Seeder;
 // composer require laracasts/testdummy
 use Laracasts\TestDummy\Factory as TestDummy;
 
-class ClientTableSeeder extends Seeder
-{
+class ClientTableSeeder extends Seeder {
 
-	public function run()
-	{
-		// TestDummy::times(20)->create('App\Post');
-		\DB::table('clients')->truncate();
-		\DB::table('clients')->insert([
+    public function run()
+    {
+        // TestDummy::times(20)->create('App\Post');
+        \DB::table('clients')->truncate();
+        \DB::table('clients')->insert([
 			[
 				'user_id' => 2,
 				'first_name' => 'Farrah Faye',
@@ -22,9 +21,9 @@ class ClientTableSeeder extends Seeder
 				'street_address' => '',
 				'city' => '',
 				'state' => '',
-				'country_id' => 804,
 				'country' => '',
 				'zip' => 12345,
+				'country_id' => 4,
 				'account_status' => 'Accepted',
 				'created_by' => 1,
 				'updated_by' => 1,
@@ -40,8 +39,8 @@ class ClientTableSeeder extends Seeder
 				'street_address' => '',
 				'city' => '',
 				'state' => '',
-				'country_id' => 804,
 				'country' => '',
+				'country_id' => 4,
 				'zip' => 56789,
 				'account_status' => 'Accepted',
 				'created_by' => 1,
@@ -58,8 +57,8 @@ class ClientTableSeeder extends Seeder
 				'street_address' => '',
 				'city' => '',
 				'state' => '',
-				'country_id' => 804,
 				'country' => '',
+				'country_id' => 4,
 				'zip' => 9012,
 				'account_status' => 'Accepted',
 				'created_by' => 1,
@@ -67,9 +66,9 @@ class ClientTableSeeder extends Seeder
 				'created_at' => date("Y-m-d H:i:s"),
 				'updated_at' => date("Y-m-d H:i:s")
 			]
-		]);
+        ]);
 
 
-	}
+    }
 
 }
