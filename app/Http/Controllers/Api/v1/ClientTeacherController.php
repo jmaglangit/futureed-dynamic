@@ -76,16 +76,6 @@ class ClientTeacherController extends ApiController {
 	}
 
 	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
-
-	/**
 	 * Store a newly created resource in storage.
 	 *
 	 * @return Response
@@ -105,6 +95,7 @@ class ClientTeacherController extends ApiController {
         $client['street_address'] = null;
         $client['city'] = null;
         $client['state'] = null;
+		$client['country_id'] = null;
         $client['country'] = null;
         $client['zip'] = null;
 
