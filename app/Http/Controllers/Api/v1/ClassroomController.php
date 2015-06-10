@@ -116,7 +116,7 @@ class ClassroomController extends ApiController {
 	 */
 	public function destroy($id)
 	{
-		//
+		return $this->respondWithData($this->classroom->deleteClassroom($id));
 	}
 
 }
