@@ -76,65 +76,53 @@ class ClientTeacherController extends ApiController {
 	}
 
 	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
-
-	/**
 	 * Store a newly created resource in storage.
 	 *
 	 * @return Response
 	 */
-	public function store(ClientTeacherRequest $request){
+	public function store(ClientTeacherRequest $request)
+	{
 
-        $user = $request->only(['email','username']);
-        $client = $request->only(['first_name','last_name','current_user']);
-        $url = $request->only('callback_uri');
+		$user = $request->only(['email', 'username']);
+		$client = $request->only(['first_name', 'last_name', 'current_user']);
+		$url = $request->only('callback_uri');
 
-        $client['client_role'] = config('futureed.teacher');
-        $user['user_type'] = config('futureed.client');
-        $user['first_name'] = $client['first_name'];
-        $user['last_name'] = $client['last_name'];
-        $user['name'] = $client['first_name']." ".$client['last_name'];
+		$client['client_role'] = config('futureed.teacher');
+		$user['user_type'] = config('futureed.client');
+		$user['first_name'] = $client['first_name'];
+		$user['last_name'] = $client['last_name'];
+		$user['name'] = $client['first_name'] . " " . $client['last_name'];
 
-        $client['street_address'] = null;
-        $client['city'] = null;
-        $client['state'] = null;
-        $client['country'] = null;
-        $client['zip'] = null;
+		$client['street_address'] = null;
+		$client['city'] = null;
+		$client['state'] = null;
+		$client['country_id'] = null;
+		$client['country'] = null;
+		$client['zip'] = null;
 
-        //get current user details
-        $current_user_details = $this->client->getClientDetails($client['current_user']);
+		//get current user details
+		$current_user_details = $this->client->getClientDetails($client['current_user']);
 
-        //get school_code of current user
-        $client['school_code'] = $current_user_details['school_code'];
+		//get school_code of current user
+		$client['school_code'] = $current_user_details['school_code'];
 
-        //return newly added user details
-         $this->user->addUser($user);
+		//return newly added user details
+		$this->user->addUser($user);
 
-        //get user id
-        $user_id = $this->user->checkUserName($user['username'],$user['user_type']);
+		//get user id
+		$user_id = $this->user->checkUserName($user['username'], $user['user_type']);
 
-        //assign user id to client
-        $client['user_id'] = $user_id;
+		//assign user id to client
+		$client['user_id'] = $user_id;
 
-        $this->client->addClient($client);
+		$this->client->addClient($client);
 
-        //send email to invited teacher
-        $this->mail->sendMailInviteTeacher($user,$current_user_details,$url);
+		//send email to invited teacher
+		$this->mail->sendMailInviteTeacher($user, $current_user_details, $url);
 
-        $client_id = $this->client->getClientId($user_id);
+		$client_id = $this->client->getClientId($user_id);
 
-        return $this->respondWithData(['id' => $client_id
-                                     ]);
-
-
-
+		return $this->respondWithData(['id' => $client_id]);
 	}
 
 	/**
