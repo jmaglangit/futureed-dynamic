@@ -55,7 +55,8 @@ class ClientTeacherRequest extends ApiRequest {
      */
     public function messages() {
         return [
-            'numeric' => 'The :attribute must be a number.'
+            'numeric' => 'The :attribute must be a number.',
+			'unique' => 'Teacher already exist.',
         ];
     }
 }
