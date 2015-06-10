@@ -42,9 +42,9 @@ class InvoiceController extends ApiController {
 
         }
 
-        if(Input::get('subscription_id')){
+        if(Input::get('subscription_name')){
 
-            $criteria['subscription_id'] = Input::get('subscription_id');
+            $criteria['subscription_name'] = Input::get('subscription_name');
         }
 
         if(Input::get('payment_status')){

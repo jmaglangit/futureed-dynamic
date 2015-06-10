@@ -73,7 +73,7 @@
 		<i class="fa fa-plus-square"></i> Add 
 	</button>
 	
-	<div class="col-xs-12 table-container" ng-init="teacher.list()">
+	<div class="col-xs-12 table-container" ng-init="teacher.listRecords()">
 		<div class="list-container" ng-cloak>
 			<div class="title-mid">
 				Teacher List

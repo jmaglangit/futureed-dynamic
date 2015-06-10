@@ -3,12 +3,14 @@
 use FutureEd\Models\Core\Client;
 use FutureEd\Models\Core\Grade;
 use FutureEd\Models\Core\ParentStudent;
-
+use FutureEd\Models\Core\User;
+use League\Flysystem\Exception;
 
 
 class ClientRepository implements ClientRepositoryInterface
 {
 
+	//TODO: Need to refactor /improve
     public function getClient($user_id, $role)
     {
 
@@ -29,6 +31,26 @@ class ClientRepository implements ClientRepositoryInterface
             ->where('client_role', '=', $role)->first();
 
     }
+
+	/**
+	 * Gets teacher information for registration.
+	 * @param $id
+	 * @param $registration_token
+	 * @return mixed
+	 */
+	public function  getTeacher($id, $registration_token){
+
+		$client = new Client();
+
+		return $client->with('user')
+			->id($id)
+			->role(config('futureed.teacher'))
+			->registrationtoken($registration_token)
+			->get();
+
+	}
+
+
 
     public function checkClient($id, $role)
     {
@@ -118,6 +140,37 @@ class ClientRepository implements ClientRepositoryInterface
             throw new Exception($e->getMessage());
         }
     }
+
+	/**
+	 * Updates client and it's relationships.
+	 * @param $id
+	 * @param $data
+	 * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|\Illuminate\Support\Collection|null|string|static
+	 */
+	public function updateClient($id,$data){
+
+		try{
+
+			$client = Client::find($id);
+
+			$data['password'] =  (isset($data['password'])) ? sha1($data['password']): '';
+			//TODO: to be updated through relationships.
+			$user = User::find($client->user_id)->update($data);
+
+			$client = Client::find($id)->update($data);
+
+			if($user && $client){
+
+				return Client::with('user')->find($id);
+			}
+
+
+		}catch (Exception $e){
+
+			return $e->getMessage();
+		}
+
+	}
 
 
     /**

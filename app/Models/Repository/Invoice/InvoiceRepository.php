@@ -29,9 +29,9 @@ class InvoiceRepository implements InvoiceRepositoryInterface{
 
                 }
 
-                if(isset($criteria['subscription_id'])){
+                if(isset($criteria['subscription_name'])){
 
-                    $invoice  = $invoice ->with('subscription')->subscription($criteria['subscription_id']);
+                    $invoice  = $invoice ->with('subscription')->subscription($criteria['subscription_name']);
 
                 }
 

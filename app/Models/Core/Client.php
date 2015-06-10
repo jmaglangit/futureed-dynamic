@@ -14,6 +14,22 @@ class Client extends Model {
 
     protected $hidden = ['created_by','updated_by','created_at','updated_at','deleted_at'];
 
+	protected $fillable = [
+		'first_name',
+		'last_name',
+		'street_address',
+		'city',
+		'state',
+		'country',
+		'country_id',
+		'zip',
+	];
+
+	protected $attributes = [
+		'created_by' => 1,
+		'updated_by' => 1
+	];
+
 
     public static function boot(){
 
@@ -38,8 +54,19 @@ class Client extends Model {
 
         return $this->belongsTo('FutureEd\Models\Core\School','school_code','code');
     }
+
+	public function student(){
+
+
+		return $this->hasMany('FutureEd\Models\Core\ParentStudent','parent_user_id','id');
+	}
 	
 	//-------------scopes
+	public function scopeId($query,$id){
+
+		return $query->where('id',$id);
+	}
+
 	public function scopeName($query, $name) {
 		
 		return $query->where(function($query) use ($name) {
@@ -82,11 +109,14 @@ class Client extends Model {
 		
 	}
 
-    public function student(){
+	public function scopeRegistrationToken($query,$registration_token){
+
+		return $query->whereHas('user',function($query) use ($registration_token){
+			$query->where('registration_token',$registration_token);
+		});
+	}
 
 
-        return $this->hasMany('FutureEd\Models\Core\ParentStudent','parent_user_id','id');
-    }
 
 
 

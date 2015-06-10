@@ -23,7 +23,6 @@ class User extends Model {
         'is_account_locked',
         'is_account_deleted',
         'password_reset_token',
-        'registration_verification_token',
         'new_email',
         'email_code',
         'email_code_expiry',

@@ -24,6 +24,15 @@ function managePrincipalTeacherService($http){
 		});
 	}
 
+	manageTeacherApi.classDetails = function(id, table) {
+		return $http({
+			method  : Constants.METHOD_GET
+			, url 	: teacherApiUrl + 'classroom?client_id=' + id
+				+ '&limit=' + table.size
+				+ '&offset=' + table.offset
+		});
+	}
+
 	manageTeacherApi.update = function(data) {
 		return $http({
 			method 	: Constants.METHOD_PUT
