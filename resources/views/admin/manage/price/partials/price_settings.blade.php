@@ -71,6 +71,18 @@
 	      			</div>
 	      		</div>
 	      		<div class="form-group">
+	      			<label class="col-xs-3 control-label">Days <span class="required">*</span></label>
+	      			<div class="col-xs-5">
+	      				{!! Form::text('days','',
+	      					[
+	      						'class' => 'form-control',
+	      						'placeholder' => 'Days',
+	      						'ng-model' => 'sale.data.days'
+	      					]) 
+	      				!!}
+	      			</div>
+	      		</div>
+	      		<div class="form-group">
                 		<label class="col-xs-3 control-label" id="status">Status <span class="required">*</span></label>
                 		<div class="col-xs-5">
                 			<div class="col-xs-6 checkbox">	                				

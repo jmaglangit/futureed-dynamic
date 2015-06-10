@@ -175,6 +175,7 @@ function SalesController($scope, salesService, TableService) {
 		self.errors = Constants.FALSE;
 
 		$("input, textarea").removeClass("required-field");
+		self.data.days = Math.abs(self.data.days);
 
 		$scope.ui_block();
 		salesService.addPrice(self.data).success(function(response){
@@ -228,9 +229,9 @@ function SalesController($scope, salesService, TableService) {
 	function editPrice(){
 		this.errors = Constants.FALSE;
 		$('input, select').removeClass('required-field');
+		self.data.days = Math.abs(self.data.days);
 
 		$scope.ui_block();
-
 		salesService.editPrice(this.data).success(function(response){
 			if(angular.equals(response.status, Constants.STATUS_OK)){
 				if(response.errors){
