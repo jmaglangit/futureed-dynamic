@@ -43,7 +43,7 @@ class LoginController extends Controller{
 
 	public function logout(){
 		Session::flush();
-		return redirect()->route('admin.login');
+		return redirect(\URL::previous());
 	}
 	/*POST method*/
 	public function resetPass(){
