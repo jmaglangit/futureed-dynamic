@@ -97,9 +97,9 @@
 		        </thead>
 		        <tbody>
 			        <tr ng-repeat="a in subject.subjects">
-			            <td class="table-fix">{! a.code !}</td>
-			            <td class="table-fix">{! a.name !}</td>
-			            <td class="table-fix">{! a.description !}</td>
+			            <td>{! a.code !}</td>
+			            <td>{! a.name !}</td>
+			            <td>{! a.description !}</td>
 			            <td>
 			            	<div class="row">
 			            		<div class="col-xs-4">
