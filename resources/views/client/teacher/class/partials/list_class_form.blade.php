@@ -55,7 +55,7 @@
 	</div>
 
 	<div class="col-xs-12 table-container">
-		<div class="list-container" ng-init="class.list()" ng-cloak>
+		<div class="list-container" ng-init="class.classList()" ng-cloak>
 			<div class="title-mid">
 				Class List
 			</div>

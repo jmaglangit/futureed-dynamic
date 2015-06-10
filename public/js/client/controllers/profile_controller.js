@@ -77,6 +77,9 @@ function ProfileController($scope, apiService, clientProfileApiService) {
 	}
 
 	function getClientDetails() {
+		self.errors = Constants.FALSE;
+
+		$scope.ui_block();
 		clientProfileApiService.getClientDetails($scope.user.id).success(function(response) {
 			if(response.status == Constants.STATUS_OK) {
 				if(response.errors) {
@@ -94,8 +97,11 @@ function ProfileController($scope, apiService, clientProfileApiService) {
 					}
 				}
 			}
+
+			$scope.ui_unblock();
 		}).error(function(response) {
-			$scope.internalError();
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
 		});
 	}
 
@@ -163,7 +169,7 @@ function ProfileController($scope, apiService, clientProfileApiService) {
 
 				$scope.ui_unblock();
 			}).error(function(response) {
-				$scope.internalError();
+				self.errors = $scope.internalError();
 				$scope.ui_unblock();
 			});
 		}
