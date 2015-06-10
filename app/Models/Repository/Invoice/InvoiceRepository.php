@@ -77,6 +77,15 @@ class InvoiceRepository implements InvoiceRepositoryInterface{
     {
 	    return Invoice::with('subscription')->find($id);
     }
+    
+    public function updateInvoice($id, $data){
+	     try{
+            $result = Invoice::find($id);
+            return !is_null($result) ? $result->update($data) : false;
+        }catch(Exception $e){
+            return $e->getMessage();
+        }
+    }
 
 
 }

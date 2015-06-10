@@ -14,22 +14,13 @@ class ClientRepository implements ClientRepositoryInterface
     public function getClient($user_id, $role)
     {
 
-        return Client::select(
-            'id',
-            'user_id',
-            'first_name',
-            'last_name',
-            'client_role',
-            'street_address',
-            'city',
-            'state',
-            'country',
-            'zip',
-            'account_status'
-        )
-            ->where('user_id', '=', $user_id)
-            ->where('client_role', '=', $role)->first();
+		$client =  new Client();
 
+		$client = $client->where('user_id',$user_id);
+		$client = $client->where('client_role',$role)->first();
+
+		return $client;
+		
     }
 
 	/**
