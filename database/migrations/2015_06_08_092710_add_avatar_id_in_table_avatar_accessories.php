@@ -31,7 +31,7 @@ class AddAvatarIdInTableAvatarAccessories extends Migration {
 	{
 		Schema::table('avatar_accessories', function(Blueprint $table) {
 
-			$table->dropColumn('avatar_id','name');
+			$table->dropColumn(['avatar_id','name']);
 
 			$table->bigInteger('avatar_code');
 

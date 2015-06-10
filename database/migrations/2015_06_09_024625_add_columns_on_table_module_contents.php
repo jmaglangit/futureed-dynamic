@@ -20,7 +20,7 @@ class AddColumnsOnTableModuleContents extends Migration {
 			$table->bigInteger('area_id')->after('grade_id');
 			$table->bigInteger('content_id')->after('area_id');
 
-			$table->dropColumn('module_code','subject_code','area_code','grade_code','content_code');
+			$table->dropColumn(['module_code','subject_code','area_code','grade_code','content_code']);
 
 		});
 	}
@@ -40,7 +40,7 @@ class AddColumnsOnTableModuleContents extends Migration {
 			$table->bigInteger('area_code');
 			$table->bigInteger('content_code');
 
-			$table->dropColumn('module_id','subject_id','area_id','grade_id','content_id');
+			$table->dropColumn(['module_id','subject_id','area_id','grade_id','content_id']);
 
 		});
 	}

@@ -21,8 +21,8 @@ class AddColumnOnTableTeachingContents extends Migration {
 			$table->bigInteger('learning_style_id')->after('description');
 			$table->bigInteger('media_type_id')->after('content_url');
 
-			$table->dropColumn('module_code','subject_code','grade_code','area_code',
-				               'learning_style_code','media_type_code');
+			$table->dropColumn(['module_code','subject_code','grade_code','area_code',
+				               'learning_style_code','media_type_code']);
 
 		});
 	}
@@ -36,8 +36,8 @@ class AddColumnOnTableTeachingContents extends Migration {
 	{
 		Schema::table('teaching_contents', function(Blueprint $table) {
 
-			$table->dropColumn('module_id','subject_id','grade_id','area_id',
-							   'learning_style_id','media_type_id');
+			$table->dropColumn(['module_id','subject_id','grade_id','area_id',
+							   'learning_style_id','media_type_id']);
 
 			$table->bigInteger('module_code');
 			$table->bigInteger('subject_code');

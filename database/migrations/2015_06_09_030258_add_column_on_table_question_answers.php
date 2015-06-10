@@ -17,7 +17,7 @@ class AddColumnOnTableQuestionAnswers extends Migration {
 			$table->bigInteger('module_id')->after('id');
 			$table->bigInteger('question_id')->after('module_id');
 
-			$table->dropColumn('module_code','question_code');
+			$table->dropColumn(['module_code','question_code']);
 
 		});
 	}
@@ -31,7 +31,7 @@ class AddColumnOnTableQuestionAnswers extends Migration {
 	{
 		Schema::table('question_answers', function(Blueprint $table) {
 
-			$table->dropColumn('module_id','question_id');
+			$table->dropColumn(['module_id','question_id']);
 
 			$table->bigInteger('module_code');
 			$table->bigInteger('question_code');
