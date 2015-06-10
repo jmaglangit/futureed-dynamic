@@ -1,29 +1,29 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
-	use FutureEd\Http\Controllers\Controller;
-	use FutureEd\Http\Requests;
-	use FutureEd\Http\Requests\Api\PaymentRequest;
-	
-	use FutureEd\Models\Repository\Invoice\InvoiceRepositoryInterface;
-	
-	use Illuminate\Http\Request;
-	use Illuminate\Support\Facades\Input;
-	use Illuminate\Support\Facades\URL;
-	use Illuminate\Support\Facades\Session;
-	use Illuminate\Support\Facades\Redirect;
-	
-	use PayPal\Rest\ApiContext;
-	use PayPal\Auth\OAuthTokenCredential;
-	use PayPal\Api\Amount;
-	use PayPal\Api\Details;
-	use PayPal\Api\Item;
-	use PayPal\Api\ItemList;
-	use PayPal\Api\Payer;
-	use PayPal\Api\Payment;
-	use PayPal\Api\RedirectUrls;
-	use PayPal\Api\ExecutePayment;
-	use PayPal\Api\PaymentExecution;
-	use PayPal\Api\Transaction;
+use FutureEd\Http\Controllers\Controller;
+use FutureEd\Http\Requests;
+use FutureEd\Http\Requests\Api\PaymentRequest;
+
+use FutureEd\Models\Repository\Invoice\InvoiceRepositoryInterface;
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Redirect;
+
+use PayPal\Rest\ApiContext;
+use PayPal\Auth\OAuthTokenCredential;
+use PayPal\Api\Amount;
+use PayPal\Api\Details;
+use PayPal\Api\Item;
+use PayPal\Api\ItemList;
+use PayPal\Api\Payer;
+use PayPal\Api\Payment;
+use PayPal\Api\RedirectUrls;
+use PayPal\Api\ExecutePayment;
+use PayPal\Api\PaymentExecution;
+use PayPal\Api\Transaction;
 
 class PaymentController extends ApiController
 {
@@ -36,7 +36,6 @@ class PaymentController extends ApiController
 		$paypal_conf = config('paypal');
 		$this->_api_context = new ApiContext(new OAuthTokenCredential($paypal_conf['client_id'], $paypal_conf['secret']));
 		$this->_api_context->setConfig($paypal_conf['settings']);
-		
 		$this->invoice = $invoice;
 	}
 	/**
@@ -45,17 +44,14 @@ class PaymentController extends ApiController
 	*	@return callback_uri
 	*/
 	public function postPayment(PaymentRequest $request)
-	{
+	{	
 		$data = $request->all();
 		
 		$payer = new Payer();
 		$payer->setPaymentMethod('paypal');
 
 		$item_1 = new Item();
-		$item_1->setName('Payment for Future Lesson Seats') // item name
-		 	->setCurrency('USD')
-		 	->setQuantity($data['quantity'])
-		 	->setPrice($data['total_amount']);
+		$item_1->setName('Payment for Future Lesson Seats')->setCurrency('USD')->setQuantity($data['quantity'])->setPrice($data['total_amount']);
 
 		 	// add item to list
 		$item_list = new ItemList();
@@ -81,7 +77,7 @@ class PaymentController extends ApiController
 				 $err_data = json_decode($ex->getData(), true);
 				 exit;
 			} else {
-			 die('Some error occur, sorry for inconvenient');
+			 	die('Some error occur, sorry for inconvenient');
 			}
 		}
 
@@ -89,7 +85,7 @@ class PaymentController extends ApiController
 		 	if($link->getRel() == 'approval_url') {
 				 $redirect_url = $link->getHref();
 				 break;
-			 }
+			}
 		}
 
 		// add payment ID to session
@@ -103,7 +99,7 @@ class PaymentController extends ApiController
 		 	return $this->respondWithData([
 				'status' => 'succcess',
 				'url' => $redirect_url]);
-		 }
+		}
 
 		/*
 		return Redirect::route('original.route')
@@ -181,9 +177,9 @@ class PaymentController extends ApiController
 					   ->with('error', 'Payment failed');	
 		*/
 	
-		 	return $this->respondWithData([
-					 'status' => 'error',
-					 'data' => 'Payment failed'
-				 ]);
+	 	return $this->respondWithData([
+				 'status' => 'error',
+				 'data' => 'Payment failed'
+			 ]);
 	}
 }

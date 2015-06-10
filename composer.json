@@ -10,7 +10,7 @@
 		"fzaninotto/faker": "~1.4",
 		"webpatser/laravel-countries": "~1.4",
 		"ext-curl": "*",
-	    "ext-json": "*",
+		"ext-json": "*",
 		"paypal/rest-api-sdk-php" : "*"
 	},
 	"require-dev": {

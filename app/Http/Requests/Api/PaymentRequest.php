@@ -21,21 +21,20 @@ class PaymentRequest extends ApiRequest {
      */
 	public function rules()
 	{
-	    switch($this->method)
-	    {
+		switch($this->method)
+		{
 			case 'PUT':
-			
+
 			break;
 			case 'PATCH':
-			
+
 			break;
 			case 'POST':
 			default:
-				 return [
-	                'invoice_id' => 'required|numeric',
-	                'quantity' => 'required|numeric',
-	                'total_amount' => 'required|numeric'];
-			
-	    }
+			return [
+			'invoice_id' => 'required|numeric',
+			'quantity' => 'required|numeric',
+			'total_amount' => 'required|numeric'];
+		}
 	}
 }
