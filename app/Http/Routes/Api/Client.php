@@ -16,9 +16,15 @@ Routes::group(['middleware' => 'api_user','prefix' => '/client'], function()
     Routes::resource('/teacher','Api\v1\ClientTeacherController',
         ['except' => ['create','edit']]);
 
+	//teacher-information is for registration purposes, no auth token needed.
 	Routes::get('/teacher-information/{id}',[
 		'as' => 'api.v1.client.teacher.information',
 		'uses' => 'Api\v1\ClientTeacherRegistrationController@getTeacherInformation'
+	]);
+
+	Routes::put('/teacher-information/{id}',[
+		'as' => 'api.v1.client.teacher.information.update',
+		'uses' => 'Api\v1\ClientTeacherRegistrationController@updateTeacherInformation'
 	]);
 
     //client

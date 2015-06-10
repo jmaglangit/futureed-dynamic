@@ -749,7 +749,6 @@ trait ApiValidatorTrait {
     // validation for state and city
     // accepts spaces,alphabet characters and dash
     public function validateAlphaSpace($input, $field_name){
-
         $error_msg = config('futureed-error.error_messages');
 
             $validator = Validator::make(
@@ -757,7 +756,7 @@ trait ApiValidatorTrait {
                     "$field_name" => strtolower($input["$field_name"]),
                 ],
                 [
-                    "$field_name" => 'required|regex:/^[-\pL\s]+$/u'
+                    "$field_name" => ($field_name == 'state')? 'regex:/^[-\pL\s]+$/u' : 'required|regex:/^[-\pL\s]+$/u'
                 ]
             );
             if($validator->fails()){
