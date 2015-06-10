@@ -151,11 +151,18 @@ class ClientRepository implements ClientRepositoryInterface
 
 		try{
 
-			$client = Client::find($id);
+			$client = Client::id($id)->role(config('futureed.teacher'))->pluck('user_id');
 
-			$data['password'] =  (isset($data['password'])) ? sha1($data['password']): '';
+			//return if no record found.
+			if(!$client){
+
+				return false;
+			}
+
+			$data['password'] =  (!isset($data['password'])) ?: sha1($data['password']);
+
 			//TODO: to be updated through relationships.
-			$user = User::find($client->user_id)->update($data);
+			$user = User::find($client)->update($data);
 
 			$client = Client::find($id)->update($data);
 

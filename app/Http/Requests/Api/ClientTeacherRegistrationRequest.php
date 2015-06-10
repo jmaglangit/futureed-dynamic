@@ -3,7 +3,8 @@
 
 use FutureEd\Models\Core\Client;
 
-class ClientTeacherRegistrationRequest extends ApiRequest {
+class ClientTeacherRegistrationRequest extends ApiRequest
+{
 
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -28,9 +29,14 @@ class ClientTeacherRegistrationRequest extends ApiRequest {
 
 		$client = config('futureed.client');
 
-//		dd($client);
+		$user_id = NULL;
 
-		switch($this->method){
+		if ($user) {
+
+			$user_id = $user->user_id;
+		}
+
+		switch ($this->method) {
 			case 'GET':
 
 				//For registration token validation
@@ -44,8 +50,9 @@ class ClientTeacherRegistrationRequest extends ApiRequest {
 
 				//update teacher on registration
 				return [
+
 					'email' => 'required|email',
-					'username' => "required|min:8|max:32|alpha_num|unique:users,username,$user->user_id,id,user_type,$client,deleted_at,NULL",
+					'username' => "required|min:8|max:32|alpha_num|unique:users,username,$user_id,id,user_type,$client,deleted_at,NULL",
 					'password' => 'required|custom_password',
 					'first_name' => 'required|regex:/^([a-z\x20])+$/i|max:64',
 					'last_name' => 'required|regex:/^([a-z\x20])+$/i|max:64',
@@ -54,6 +61,7 @@ class ClientTeacherRegistrationRequest extends ApiRequest {
 					'state' => 'required|string',
 					'country' => 'exists:countries,name',
 					'country_id' => 'required|exists:countries,id',
+					'callback_uri' => 'required|string',
 				];
 				break;
 
@@ -68,13 +76,13 @@ class ClientTeacherRegistrationRequest extends ApiRequest {
 					'role' => 'required',
 					'address' => 'required',
 					'city' => 'required',
-					''
 				];
 
 		}
 	}
 
-	public function messages(){
+	public function messages()
+	{
 
 		return [
 			'custom_password' => config('futureed-error.error_messages.2112')
