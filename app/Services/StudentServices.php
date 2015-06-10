@@ -306,9 +306,9 @@ class StudentServices {
     }
     
     //change password images
-    public function ChangPasswordImage($id,$password_image_id){
+    public function changePasswordImage($id,$password_image_id){
         
-        $this->student->ChangPasswordImage($id,$password_image_id);
+        $this->student->changePasswordImage($id,$password_image_id);
         
     }
     
