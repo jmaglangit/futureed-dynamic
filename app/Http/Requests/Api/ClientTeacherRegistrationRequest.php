@@ -3,7 +3,8 @@
 
 use FutureEd\Models\Core\Client;
 
-class ClientTeacherRegistrationRequest extends ApiRequest {
+class ClientTeacherRegistrationRequest extends ApiRequest
+{
 
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -30,12 +31,12 @@ class ClientTeacherRegistrationRequest extends ApiRequest {
 
 		$user_id = NULL;
 
-		if($user){
+		if ($user) {
 
 			$user_id = $user->user_id;
 		}
 
-		switch($this->method){
+		switch ($this->method) {
 			case 'GET':
 
 				//For registration token validation
@@ -60,7 +61,7 @@ class ClientTeacherRegistrationRequest extends ApiRequest {
 					'state' => 'required|string',
 					'country' => 'exists:countries,name',
 					'country_id' => 'required|exists:countries,id',
-					'callback_uri'  => 'required|string',
+					'callback_uri' => 'required|string',
 				];
 				break;
 
@@ -70,7 +71,7 @@ class ClientTeacherRegistrationRequest extends ApiRequest {
 					'email' => 'required',
 					'username' => 'required',
 					'password' => 'required',
-						'first_name' => 'required',
+					'first_name' => 'required',
 					'last_name' => 'required',
 					'role' => 'required',
 					'address' => 'required',
@@ -81,7 +82,8 @@ class ClientTeacherRegistrationRequest extends ApiRequest {
 		}
 	}
 
-	public function messages(){
+	public function messages()
+	{
 
 		return [
 			'custom_password' => config('futureed-error.error_messages.2112')
