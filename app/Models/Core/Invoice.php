@@ -40,9 +40,11 @@ class Invoice extends Model {
 
     }
 
-    public function scopeSubscription($query, $sub_id) {
+    public function scopeSubscription($query, $name) {
 
-        return $query->where('subscription_id', '=' , $sub_id);
+		return $query->whereHas('subscription', function($query) use ($name) {
+			$query->where('name', 'like', '%'.$name.'%');
+		});
 
     }
 
