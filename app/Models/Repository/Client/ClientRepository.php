@@ -79,6 +79,7 @@ class ClientRepository implements ClientRepositoryInterface
                 'street_address' => $client['street_address'],
                 'city' => $client['city'],
                 'state' => $client['state'],
+				'country_id' => ((isset($client['country_id'])) ? $client['country_id'] : 0),
                 'country' => $client['country'],
                 'zip' => $client['zip'],
                 'account_status' => (isset($client['account_status'])) ? $client['account_status'] : config('futureed.client_account_status_pending'),
