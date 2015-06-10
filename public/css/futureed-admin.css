@@ -195,11 +195,14 @@ table#client-list{
 	position: relative;
 	bottom: 10px;
 }
-td.ng-binding{
-	word-wrap:break-word;
-	max-width: 220px;
-}
 
+.td-fix{
+	word-wrap:break-word;
+	max-width: 200px;
+}
+.table-action{
+	min-width: 250px;
+}
 
 input[type="checkbox"],
 input[type="radio"] {
