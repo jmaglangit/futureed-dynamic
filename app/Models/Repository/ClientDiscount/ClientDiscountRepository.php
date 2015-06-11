@@ -1,6 +1,7 @@
 <?php
 namespace FutureEd\Models\Repository\ClientDiscount;
 
+use FutureEd\Models\Core\Client;
 use FutureEd\Models\Core\ClientDiscount;
 
 class ClientDiscountRepository implements ClientDiscountRepositoryInterface {
@@ -109,4 +110,9 @@ class ClientDiscountRepository implements ClientDiscountRepositoryInterface {
             return $e->getMessage();
         }
     }
+
+	public function checkClient($client_id){
+
+		return ClientDiscount::clientid($client_id)->pluck('id');
+	}
 }
