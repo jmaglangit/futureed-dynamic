@@ -110,7 +110,7 @@
                 <div class="dropdown">
                   <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
                     <div class="input-group">
-                        <input readonly="readonly" type="text" , ng-class="{ 'required-field' : profile.fields['birth_date']}" name="birth_date" placeholder="DD/MM/YY" class="form-control" value="{! profile.prof.birth | date:'dd/MM/yy' !}">
+                        <input readonly="readonly" type="text" ng-class="{ 'required-field' : profile.fields['birth_date']}" name="birth_date" placeholder="DD/MM/YY" class="form-control" value="{! profile.prof.birth | date:'dd/MM/yy' !}">
                         <input type="hidden" name="hidden_date" value="{! profile.prof.birth | date:'yyyyMMdd' !}">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                     </div>
