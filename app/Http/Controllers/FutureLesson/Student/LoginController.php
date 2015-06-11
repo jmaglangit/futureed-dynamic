@@ -61,7 +61,7 @@ class LoginController extends Controller {
 	public function logout()
 	{
 		Session::forget('student');
-		return redirect(\URL::previous());
+		return redirect()->route('student.login');
 	}
 	
 	/**
