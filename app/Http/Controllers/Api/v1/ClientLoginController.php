@@ -84,11 +84,21 @@ class ClientLoginController extends ClientController {
             return $this->respondErrorMessage(2033);
         }
 
+		//get user details
+		$user_details = $this->user->getUserDetail($response['data'],config('futureed.client'));
+
+		//check if user is Disabled
+		if($user_details['status'] === config('futureed.user_disabled')){
+
+			return $this->respondErrorMessage(2013);
+		}
+
         $this->user->resetLoginAttempt($return['id']);
         return $this->respondWithData([
-                'id' => $client_detail['id'],
-                'first_name' => $client_detail['first_name'],
-                'last_name' => $client_detail['last_name']
+			'id' => $client_detail['id'],
+			'first_name' => $client_detail['first_name'],
+			'last_name' => $client_detail['last_name'],
+			'country_id' => $client_detail['country_id'],
         ]);
     }
 

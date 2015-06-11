@@ -24,10 +24,49 @@ class Student extends Model {
         'deleted_at'];
 
 
-    //Relationships
 
-    public function user(){
-
+    //-------------relationships
+    public function user() {
         return $this->belongsTo('FutureEd\Models\Core\User');
     }
+
+    public function school(){
+
+        return $this->belongsTo('FutureEd\Models\Core\School','school_code','code');
+    }
+
+    public function grade(){
+
+        return $this->belongsTo('FutureEd\Models\Core\Grade','grade_code','code');
+    }
+
+	public function badge(){
+
+		return $this->belongsTo('FutureEd\Models\Core\StudentBadge','id','student_id');
+	}
+
+	public function classroom(){
+
+		return $this->belongsTo('FutureEd\Models\Core\ClassStudent','id','student_id');
+	}
+
+    //-------------scopes
+    public function scopeName($query, $name) {
+
+        return $query->where(function($query) use ($name) {
+            $query->where('first_name', 'like', '%'.$name.'%')->orWhere('last_name', 'like', '%'.$name.'%');
+        });
+
+    }
+
+    public function scopeEmail($query, $email) {
+
+        return $query->whereHas('user', function($query) use ($email) {
+            $query->whereEmail($email);
+        });
+
+    }
+
+
+
 }

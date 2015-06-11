@@ -25,7 +25,7 @@
 			)
 		) !!}
 			<div class="form-group">
-				<label class="col-xs-2 control-label">Class</label>
+				<label class="col-xs-3 control-label">Class</label>
 				<div class="col-xs-5">
 					{!! Form::text('class_name', ''
 						, array(
@@ -42,7 +42,7 @@
 			</div>
 
 			<div class="form-group">
-				<label class="col-xs-2 control-label">Grade</label>
+				<label class="col-xs-3 control-label">Grade</label>
 				<div class="col-xs-5">
 					{!! Form::text('search_name', ''
 						, array(
@@ -56,7 +56,7 @@
 			</div>
 		{!! Form::close() !!}
 
-		<div class="btn-container col-xs-5 col-xs-offset-2" ng-if="class.active_view">
+		<div class="btn-container col-xs-5 col-xs-offset-3" ng-if="class.active_view">
 			{!! Form::button('View List'
 				, array(
 					'class' => 'btn btn-gold btn-large'
@@ -65,7 +65,7 @@
 			) !!}
 		</div>
 
-		<div class="btn-container col-xs-5 col-xs-offset-2" ng-if="class.active_edit">
+		<div class="btn-container col-xs-5 col-xs-offset-3" ng-if="class.active_edit">
 			{!! Form::button('Save'
 				, array(
 					'class' => 'btn btn-blue btn-medium'
@@ -82,64 +82,123 @@
 		</div>
 	</div>
 
-	<div ng-if="false">
-	<div class="col-xs-12 mid-container">
-		<div class="title-mid">
-			Student List
-		</div>
-	</div>
-
 	<div class="col-xs-12 search-container">
+		<div class="title-mid">
+			Search
+		</div>
+
 		<div class="form-search">
 			{!! Form::open(
 			[
-			'id' => 'class_search',
+			'id' => 'search_form',
 			'class' => 'form-horizontal'
 			]
 			) !!}
 				<div class="form-group">
-					<label class="col-xs-2 control-label">Name</label>
-					<div class="col-xs-5">
-						{!! Form::text('search_name', '',['class' => 'form-control', 'ng-model' => 'class.search_name', 'placeholder' => 'Name']) !!}
+					<div class="col-xs-4">
+						{!! Form::text('name', ''
+							, array(
+								'class' => 'form-control'
+								, 'ng-model' => 'class.search.name'
+								, 'placeholder' => 'Name'
+							)
+						) !!}
 					</div>
-				</div>
-
-				<div class="form-group">
-					<label class="col-xs-2 control-label">Email <span class="required">*</span></label>
-					<div class="col-xs-5">
-						{!! Form::text('search_email', '',['class' => 'form-control', 'ng-model' => 'class.search_email', 'placeholder' => 'Email']) !!}
+					<div class="col-xs-4">
+						{!! Form::text('email', ''
+							, array(
+								'class' => 'form-control'
+								, 'ng-model' => 'class.search.email'
+								, 'placeholder' => 'Email'
+							)
+						) !!}
 					</div>
-					<div class="btn-container col-xs-5">
-						<button class="btn btn-blue btn-medium" type="button" ng-click="class.getClassList()">Search</button>
-						<button class="btn btn-gold btn-medium" type="button" ng-click="class.clearSearch()">Clear</button>
+					<div class="col-xs-2">
+						{!! Form::button('Search'
+							, array(
+								'class' => 'btn btn-blue'
+								, 'ng-click' => 'class.searchFnc()'
+							)
+						) !!}
+					</div>
+					<div class="col-xs-2">
+						{!! Form::button('Clear'
+							, array(
+								'class' => 'btn btn-gold'
+								, 'ng-click' => 'class.clear()'
+							)
+						) !!}
 					</div>
 				</div>
 			{!! Form::close() !!}
 		</div>
 	</div>
 
-	<button class="btn btn-blue btn-small margin-0-30" type="button" ng-click="class.setActive('add')">
-		<i class="fa fa-plus-square"></i> Add 
-	</button>
-	<div class="col-xs-12 table-container" ng-init="teacher.getTeacherList()">
-		<div class="list-container" ng-cloak>
-			<table id="client-list" datatable="ng" class="table table-striped table-hover dt-responsive">
-			<thead>
-		        <tr>
-		            <th>Student's Name</th>
-		            <th>Email</th>
-		        </tr>
-	        </thead>
-	        <tbody>
-		        <tr ng-repeat="t in teacher.teacherinfo">
-		            <td>{! t.first_name !} {! t.last_name !}</td>
-		            <td>{! t.user.email !}</td>
-		        </tr>
-	        	</tbody>
+	<div class="col-xs-12 table-container">
+		<button class="btn btn-blue btn-small" type="button" ng-click="class.setActive('add_student')">
+			<i class="fa fa-plus-square"></i> Add 
+		</button>
 
+		<div class="title-mid">
+			Student List
+		</div>
+
+		<div class="size-container">
+			{!! Form::select('size'
+				, array(
+					  '10' => '10'
+					, '20' => '20'
+					, '50' => '50'
+					, '100' => '100'
+				)
+				, '10'
+				, array(
+					'ng-model' => 'class.table.size'
+					, 'ng-change' => 'class.paginateBySize()'
+					, 'ng-if' => "class.students.length"
+					, 'class' => 'form-control paginate-size pull-right'
+				)
+			) !!}
+		</div>
+
+		<div class="list-container" ng-cloak>
+			<table id="student-list" class="table table-striped table-bordered">
+				<thead>
+			        <tr>
+			            <th>Student's Name</th>
+			            <th class="width-medium">Email</th>
+			        </tr>
+		        </thead>
+		        <tbody>
+			        <tr ng-repeat="student in class.students">
+			            <td>{! student.student.user.name !}</td>
+			            <td>{! student.student.user.email !}</td>
+			        </tr>
+			        <tr class="odd" ng-if="!class.students.length">
+			        	<td valign="top" colspan="2">
+			        		No records found.
+			        	</td>
+			        </tr>
+		        </tbody>
 			</table>
+
+			<div class="pull-right" ng-if="class.students.length">
+				<pagination 
+					total-items="class.table.total_items" 
+					ng-model="class.table.page"
+					max-size="3"
+					items-per-page="class.table.size" 
+					previous-text = "&lt;"
+					next-text="&gt;"
+					class="pagination" 
+					boundary-links="true"
+					ng-change="class.paginateByPage()">
+				</pagination>
+			</div>
 		</div>
 	</div>
+
+	<div ng-if="false">
 	<div class="col-xs-12 mid-container">
 			<div class="title-mid">
 				Tips

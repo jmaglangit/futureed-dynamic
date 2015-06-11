@@ -64,6 +64,14 @@ return [
     
     #Add Student via Teacher.
     'new' => 'New',
-    'existing' => 'Existing'
+    'existing' => 'Existing',
+    
+    #Payment status
+    'pending' => 'Pending',
+    'paid' => 'Paid',
+    'cancelled' => 'Cancelled',
+
+    //user Status
+    'user_disabled' => 'Disabled'
 
 ];

@@ -182,6 +182,10 @@
 	
 	<div class="col-xs-12 table-container" ng-if="teacher.active_view">
 		<div class="list-container" ng-cloak>
+			<div class="title-mid">
+				Class List
+			</div>
+
 			<div class="size-container">
 				{!! Form::select('size'
 					, array(
@@ -194,7 +198,7 @@
 					, array(
 						'ng-model' => 'teacher.table.size'
 						, 'ng-change' => 'teacher.paginateBySize()'
-						, 'ng-if' => "teacher.records.length"
+						, 'ng-if' => "teacher.classes.length"
 						, 'class' => 'form-control paginate-size pull-right'
 					)
 				) !!}
@@ -203,18 +207,18 @@
 			<table id="class-list" class="table table-striped table-bordered">
 				<thead>
 			        <tr>
-			            <th class="column-medium">Class Handled</th>
-			            <th>Number of Students</th>
+			            <th>Class Handled</th>
+			            <th class="width-small">Number of Students</th>
 			            <th>Grade</th>
 			        </tr>
 		        </thead>
 		        <tbody>
-			        <tr ng-repeat="a in teacher.clients">
-			            <td>{! a.first_name !} {! a.last_name !}</td>
-			            <td>{! a.user.email !}</td>
-			            <td>{! a.client_role !}</td>
+			        <tr ng-repeat="class in teacher.classes">
+			            <td>{! class.name !}</td>
+			            <td>{! class.seats_taken !}</td>
+			            <td>{! class.grade.name !}</td>
 			        </tr>
-			        <tr class="odd" ng-if="!teacher.records.length && !teacher.table.loading">
+			        <tr class="odd" ng-if="!teacher.classes.length && !teacher.table.loading">
 			        	<td valign="top" colspan="4" class="dataTables_empty">
 			        		No records found
 			        	</td>
@@ -222,7 +226,7 @@
 		        </tbody>
 			</table>
 
-			<div class="pull-right" ng-if="teacher.records.length">
+			<div class="pull-right" ng-if="teacher.classes.length">
 				<pagination 
 					total-items="teacher.table.total_items" 
 					ng-model="teacher.table.page"

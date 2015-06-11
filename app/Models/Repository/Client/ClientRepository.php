@@ -3,32 +3,45 @@
 use FutureEd\Models\Core\Client;
 use FutureEd\Models\Core\Grade;
 use FutureEd\Models\Core\ParentStudent;
-
+use FutureEd\Models\Core\User;
+use League\Flysystem\Exception;
 
 
 class ClientRepository implements ClientRepositoryInterface
 {
 
+	//TODO: Need to refactor /improve
     public function getClient($user_id, $role)
     {
 
-        return Client::select(
-            'id',
-            'user_id',
-            'first_name',
-            'last_name',
-            'client_role',
-            'street_address',
-            'city',
-            'state',
-            'country',
-            'zip',
-            'account_status'
-        )
-            ->where('user_id', '=', $user_id)
-            ->where('client_role', '=', $role)->first();
+		$client =  new Client();
 
+		$client = $client->where('user_id',$user_id);
+		$client = $client->where('client_role',$role)->first();
+
+		return $client;
+		
     }
+
+	/**
+	 * Gets teacher information for registration.
+	 * @param $id
+	 * @param $registration_token
+	 * @return mixed
+	 */
+	public function  getTeacher($id, $registration_token){
+
+		$client = new Client();
+
+		return $client->with('user')
+			->id($id)
+			->role(config('futureed.teacher'))
+			->registrationtoken($registration_token)
+			->get();
+
+	}
+
+
 
     public function checkClient($id, $role)
     {
@@ -44,30 +57,31 @@ class ClientRepository implements ClientRepositoryInterface
         $client_role = $input['client_role'];
     }
 
-    public function addClient($client)
-    {
+	public function addClient($client)
+	{
 
-        try {
-            Client::insert([
-                'user_id' => $client['user_id'],
-                'first_name' => $client['first_name'],
-                'last_name' => $client['last_name'],
-                'client_role' => $client['client_role'],
-                'school_code' => $client['school_code'],
-                'street_address' => $client['street_address'],
-                'city' => $client['city'],
-                'state' => $client['state'],
-                'country' => $client['country'],
-                'zip' => $client['zip'],
-                'account_status' => (isset($client['account_status'])) ? $client['account_status'] : config('futureed.client_account_status_pending'),
-                'created_by' => 1,
-                'updated_by' => 1,
-            ]);
-        } catch (Exception $e) {
-            return $e->getMessage();
-        }
-        return true;
-    }
+		try {
+			Client::insert([
+				'user_id' => $client['user_id'],
+				'first_name' => $client['first_name'],
+				'last_name' => $client['last_name'],
+				'client_role' => $client['client_role'],
+				'school_code' => $client['school_code'],
+				'street_address' => $client['street_address'],
+				'city' => $client['city'],
+				'state' => $client['state'],
+				'country_id' => ((isset($client['country_id'])) ? $client['country_id'] : 0),
+				'country' => $client['country'],
+				'zip' => $client['zip'],
+				'account_status' => (isset($client['account_status'])) ? $client['account_status'] : config('futureed.client_account_status_pending'),
+				'created_by' => 1,
+				'updated_by' => 1,
+			]);
+		} catch (Exception $e) {
+			return $e->getMessage();
+		}
+		return true;
+	}
 
     public function getClientId($user_id)
     {
@@ -118,6 +132,44 @@ class ClientRepository implements ClientRepositoryInterface
             throw new Exception($e->getMessage());
         }
     }
+
+	/**
+	 * Updates client and it's relationships.
+	 * @param $id
+	 * @param $data
+	 * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|\Illuminate\Support\Collection|null|string|static
+	 */
+	public function updateClient($id,$data){
+
+		try{
+
+			$client = Client::id($id)->role(config('futureed.teacher'))->pluck('user_id');
+
+			//return if no record found.
+			if(!$client){
+
+				return false;
+			}
+
+			$data['password'] =  (!isset($data['password'])) ?: sha1($data['password']);
+
+			//TODO: to be updated through relationships.
+			$user = User::find($client)->update($data);
+
+			$client = Client::find($id)->update($data);
+
+			if($user && $client){
+
+				return Client::with('user')->find($id);
+			}
+
+
+		}catch (Exception $e){
+
+			return $e->getMessage();
+		}
+
+	}
 
 
     /**

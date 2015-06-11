@@ -215,7 +215,9 @@ trait ApiValidatorTrait {
                 ],
                 [
                     "school_code.required" => $error_msg[2602],
-                    "school_code.numeric" => $error_msg[2602]
+                    "school_code.numeric" => $error_msg[2602],
+                    "country_id.required" => $error_msg[2603],
+                    "country_id.numeric" => $error_msg[2604]
                 ]
             );
 
@@ -702,7 +704,7 @@ trait ApiValidatorTrait {
                 "$school_code" => $input["$school_code"],
             ],
             [
-                "$school_code" => 'required|numeric|exists:schools,code,NULL,id,deleted_at,NULL'
+                "$school_code" => 'required|numeric|exists:schools,code,deleted_at,NULL'
             ],
             [
                 "exist" => config('futureed-error.error_messages.2602')
@@ -713,7 +715,7 @@ trait ApiValidatorTrait {
 
             return $this->setErrorCode(2602)
                 ->setField($school_code)
-                ->setMessage(2602)
+                ->setMessage(config('futureed-error.error_messages.2602'))
                 ->errorMessage();
         }
     }
@@ -742,6 +744,30 @@ trait ApiValidatorTrait {
                 ->errorMessage();
         }
 
+    }
+
+    // validation for state and city
+    // accepts spaces,alphabet characters and dash
+    public function validateAlphaSpace($input, $field_name){
+        $error_msg = config('futureed-error.error_messages');
+
+            $validator = Validator::make(
+                [
+                    "$field_name" => strtolower($input["$field_name"]),
+                ],
+                [
+                    "$field_name" => ($field_name == 'state')? 'regex:/^[-\pL\s]+$/u' : 'required|regex:/^[-\pL\s]+$/u'
+                ]
+            );
+            if($validator->fails()){
+
+            $validator_msg = $validator->messages()->toArray();
+
+            return $this->setErrorCode(1023)
+                ->setField($field_name)
+                ->setMessage($validator_msg["$field_name"][0])
+                ->errorMessage();
+        }
     }
 
 }

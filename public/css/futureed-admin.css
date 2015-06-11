@@ -196,6 +196,14 @@ table#client-list{
 	bottom: 10px;
 }
 
+.td-fix{
+	word-wrap:break-word;
+	max-width: 200px;
+}
+.table-action{
+	min-width: 250px;
+}
+
 input[type="checkbox"],
 input[type="radio"] {
   box-sizing: border-box; /* 1 */

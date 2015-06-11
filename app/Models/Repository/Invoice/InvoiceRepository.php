@@ -29,9 +29,9 @@ class InvoiceRepository implements InvoiceRepositoryInterface{
 
                 }
 
-                if(isset($criteria['subscription_id'])){
+                if(isset($criteria['subscription_name'])){
 
-                    $invoice  = $invoice ->with('subscription')->subscription($criteria['subscription_id']);
+                    $invoice  = $invoice ->with('subscription')->subscription($criteria['subscription_name']);
 
                 }
 
@@ -76,6 +76,15 @@ class InvoiceRepository implements InvoiceRepositoryInterface{
     public function getInvoice($id)
     {
 	    return Invoice::with('subscription')->find($id);
+    }
+    
+    public function updateInvoice($id, $data){
+	     try{
+            $result = Invoice::find($id);
+            return !is_null($result) ? $result->update($data) : false;
+        }catch(Exception $e){
+            return $e->getMessage();
+        }
     }
 
 

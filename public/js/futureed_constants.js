@@ -7,6 +7,7 @@ var Constants = {
 	, DEFAULT_PAGE	: 1
 
 	, EMPTY_STR		: ''
+	, ALL			: 'all'
 
 	, METHOD_POST	: 'POST'
 	, METHOD_GET	: 'GET'

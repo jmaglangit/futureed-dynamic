@@ -16,7 +16,7 @@
 
 			<div class="client-content" template-directive template-url="{!! route('admin.manage.invoice.partials.invoice_list') !!}"></div>
 			
-			<!-- <div class="client-content" template-directive template-url="{!! route('admin.manage.invoice.partials.view_invoice') !!}"></div> -->
+			<div class="client-content" template-directive template-url="{!! route('admin.manage.invoice.partials.view_invoice') !!}"></div>
 		
 		</div>
 	</div>
