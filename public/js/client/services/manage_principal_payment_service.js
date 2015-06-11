@@ -10,8 +10,16 @@ function managePrincipalPaymentService($http){
 			method : Constants.METHOD_GET
 			, url  : paymentApiUrl + 'invoice?client_id=' + search.client_id
 				+ '&order_no=' + search.order_no
+				+ '&subscription_id=' + search.subscription_id
 				+ '&limit=' + table.size
 				+ '&offset=' + table.offset
+		});
+	}
+
+	managePaymentApi.listSubscription =function() {
+		return $http({
+			method : Constants.METHOD_GET
+			, url  : paymentApiUrl + 'subscription'
 		});
 	}
 
