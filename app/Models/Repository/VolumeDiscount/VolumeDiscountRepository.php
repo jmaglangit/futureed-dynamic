@@ -5,67 +5,67 @@ use FutureEd\Models\Core\VolumeDiscount;
 
 class VolumeDiscountRepository implements VolumeDiscountRepositoryInterface {
 
-	/**
-	 * Display a listing of VolumeDiscounts.
-	 *
-	 * @param	array	$criteria
-	 * @param	int		$limit
-	 * @param	int		$offset
-	 *
-	 * @return array
-	 */
+    /**
+     * Display a listing of VolumeDiscounts.
+     *
+     * @param	array	$criteria
+     * @param	int		$limit
+     * @param	int		$offset
+     *
+     * @return array
+     */
     public function getVolumeDiscounts($criteria = array(), $limit = 0, $offset = 0) {
-		
-		$volumeDiscounts = new VolumeDiscount();
-		
-		$count = 0;
-		
-		if(count($criteria) <= 0 && $limit == 0 && $offset == 0) {
-			
-			$count = $volumeDiscounts->count();
-		
-		} else {
-			
-			if(count($criteria) > 0) {
-				if(isset($criteria['min_seats'])) {
-					$volumeDiscounts = $volumeDiscounts->minSeats($criteria['min_seats']);
-				}				
-			}
-		
-			$count = $volumeDiscounts->count();
-		
-			if($limit > 0 && $offset >= 0) {
-				$volumeDiscounts = $volumeDiscounts->offset($offset)->limit($limit);
-			}
-														
-		}
-		
-		$volumeDiscounts = $volumeDiscounts->orderBy('min_seats', 'asc');
-		
-		return ['total' => $count, 'records' => $volumeDiscounts->get()->toArray()];	
-	}
+
+        $volumeDiscounts = new VolumeDiscount();
+
+        $count = 0;
+
+        if(count($criteria) <= 0 && $limit == 0 && $offset == 0) {
+
+            $count = $volumeDiscounts->count();
+
+        } else {
+
+            if(count($criteria) > 0) {
+                if(isset($criteria['min_seats'])) {
+                    $volumeDiscounts = $volumeDiscounts->minSeats($criteria['min_seats']);
+                }
+            }
+
+            $count = $volumeDiscounts->count();
+
+            if($limit > 0 && $offset >= 0) {
+                $volumeDiscounts = $volumeDiscounts->offset($offset)->limit($limit);
+            }
+
+        }
+
+        $volumeDiscounts = $volumeDiscounts->orderBy('min_seats', 'asc');
+
+        return ['total' => $count, 'records' => $volumeDiscounts->get()->toArray()];
+    }
 
     /**
-	 * Display specific VolumeDiscount by id.
-	 *
-	 * @param	int	$id
-	 *
-	 * @return object
-	 */
+     * Display specific VolumeDiscount by id.
+     *
+     * @param	int	$id
+     *
+     * @return object
+     */
     public function getVolumeDiscount($id){
         return VolumeDiscount::find($id);
     }
-    
-     /**
-	 * Update specific VolumeDiscount.
-	 *
-	 * @param  array	$volumeDiscount
-	 *
-	 * @return object
-	 */
-	 
+
+    /**
+     * Update specific VolumeDiscount.
+     *
+     * @param  array	$volumeDiscount
+     *
+     * @return object
+     */
+
     public function updateVolumeDiscount($id,$volumeDiscount){
-    
+
         try{
             $result = VolumeDiscount::find($id);
             return !is_null($result) ? $result->update($volumeDiscount) : false;
@@ -73,24 +73,24 @@ class VolumeDiscountRepository implements VolumeDiscountRepositoryInterface {
             return $e->getMessage();
         }
     }
-    
+
     public function addVolumeDiscount($volumeDiscount){
-    
+
         try{
             return VolumeDiscount::create($volumeDiscount)->toArray();
         }catch(Exception $e){
-            return $e->getMessage();        
+            return $e->getMessage();
         }
     }
-     /**
-	 * Delete specific VolumeDiscount.
-	 *
-	 * @param  id	$volumeDiscount
-	 *
-	 * @return boolean
-	 */
+    /**
+     * Delete specific VolumeDiscount.
+     *
+     * @param  id	$volumeDiscount
+     *
+     * @return boolean
+     */
     public function deleteVolumeDiscount($id){
-        
+
         try{
             $result = VolumeDiscount::find($id);
             return !is_null($result) ? $result->delete() : false;
