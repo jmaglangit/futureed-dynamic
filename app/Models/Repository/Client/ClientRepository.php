@@ -240,7 +240,14 @@ class ClientRepository implements ClientRepositoryInterface
 
         }
 
-        $clients = $clients->with('user')->orderBy('created_at', 'desc');
+		if(isset($criteria['role'])){
+
+			$clients = $clients->role($criteria['role']);
+		}
+
+        $clients = $clients->with('user')
+			->accountstatus(config('futureed.client_account_status_accepted'))
+			->orderBy('created_at', 'desc');
 
         return $clients->get()->toArray();
 
