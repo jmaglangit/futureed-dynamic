@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Input;
 
 class ClientController extends ApiController {
 
+	//TODO: create __construct function.
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -421,6 +423,17 @@ class ClientController extends ApiController {
             return $this->respondErrorMessage(2123);
 
         }
+
+		//check client has discount
+		$client_discount = $this->client_discount->checkClient($id);
+
+
+		if($client_discount){
+
+			return $this->respondErrorMessage(2036);
+		}
+
+
 
         return $this->respondWithData([$this->client->deleteClient($id)]);
 
