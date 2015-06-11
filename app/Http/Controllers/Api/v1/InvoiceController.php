@@ -165,6 +165,11 @@ class InvoiceController extends ApiController {
 		//
 	}
 
+    /**
+     *  Get client discount to be used when adding invoice.
+     *  @param $client_id int
+     * @return object
+     */
     public function getClientInvoiceDiscount($client_id){
         return $this->respondWithData($this->invoice->getClientInvoiceDiscount($client_id));
     }

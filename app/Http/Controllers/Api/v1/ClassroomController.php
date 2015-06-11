@@ -119,6 +119,12 @@ class ClassroomController extends ApiController {
 		return $this->respondWithData($this->classroom->deleteClassroom($id));
 	}
 
+    /**
+     *  Delete classrooms by order no.
+     *  @param $order_no
+     *  @return boolean
+     */
+
     public function deleteClassroomByOrderNo($order_no){
         return $this->respondWithData($this->classroom->deleteClassroomByOrderNo($order_no));
     }

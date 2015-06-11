@@ -108,7 +108,11 @@ class VolumeDiscountController extends ApiController {
     		return $this->respondWithData($this->volume_discount->deleteVolumeDiscount($id));
 		}
 	}
-
+    /**
+     *  Get rounded off discount to be used in invoice discount.
+     *  @param $min_seats int
+     *  @return object
+     */
     public function getRoundedOffDiscount($min_seats){
         return $this->respondWithData($this->volume_discount->getRoundedOffDiscount($min_seats));
     }
