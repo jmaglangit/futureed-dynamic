@@ -151,5 +151,9 @@ class AppServiceProvider extends ServiceProvider {
             'FutureEd\Models\Repository\Order\OrderRepositoryInterface',
             'FutureEd\Models\Repository\Order\OrderRepository'
         );
+		$this->app->bind(
+			'FutureEd\Models\Repository\ParentStudent\ParentStudentRepositoryInterface',
+			'FutureEd\Models\Repository\ParentStudent\ParentStudentRepository'
+		);
 	}
 }
