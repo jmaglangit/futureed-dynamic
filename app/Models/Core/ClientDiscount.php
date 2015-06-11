@@ -36,4 +36,9 @@ class ClientDiscount extends Model {
 		});		
 	}
 
+	public function scopeClientId($query, $client_id){
+
+		return $query->where('client_id', $client_id);
+	}
+
 }
