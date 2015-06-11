@@ -27,9 +27,9 @@
 					) !!}
 				</div>
 				<div class="col-xs-4">
-					<select ng-model="payment.search.subscription_id" ng-disabled="!payment.subscriptions.length" ng-init="payment.listSubscription()" class="form-control">
+					<select ng-model="payment.search.subscription_name" ng-disabled="!payment.subscriptions.length" ng-init="payment.listSubscription()" class="form-control">
 						<option value="">-- Select Subscription --</option>
-						<option ng-repeat="subscription in payment.subscriptions" value="{! subscription.id !}">{! subscription.name !}</option>
+						<option ng-repeat="subscription in payment.subscriptions" value="{! subscription.name !}">{! subscription.name !}</option>
 					</select>
 				</div>
 				<div class="col-xs-2">
