@@ -232,24 +232,24 @@ class ClientRepository implements ClientRepositoryInterface
     public function getClientCustomDetails($criteria)
     {
 
-        $clients = new Client();
+		$clients = new Client();
 
-        if (isset($criteria['name'])) {
+		if (isset($criteria['name'])) {
 
-            $clients = $clients->name($criteria['name']);
+			$clients = $clients->name($criteria['name']);
 
-        }
+		}
 
-		if(isset($criteria['role'])){
+		if (isset($criteria['role'])) {
 
 			$clients = $clients->role($criteria['role']);
 		}
 
-        $clients = $clients->with('user')
+		$clients = $clients->with('user')
 			->accountstatus(config('futureed.client_account_status_accepted'))
 			->orderBy('created_at', 'desc');
 
-        return $clients->get()->toArray();
+		return $clients->get()->toArray();
 
 
     }
