@@ -4,6 +4,7 @@ use FutureEd\Http\Controllers\Api\Traits\AccessTokenTrait;
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
+use FutureEd\Models\Repository\ClientDiscount\ClientDiscountRepositoryInterface;
 use FutureEd\Models\Repository\Country\CountryRepositoryInterface;
 use FutureEd\Models\Repository\School\SchoolRepositoryInterface;
 use FutureEd\Models\Repository\Validator\ValidatorRepositoryInterface;
@@ -53,7 +54,8 @@ class ApiController extends Controller {
             PasswordServices $password,
             ValidatorRepositoryInterface $validatorRepositoryInterface,
             SchoolRepositoryInterface $schoolRepositoryInterface,
-            CountryRepositoryInterface $countryRepositoryInterface){
+            CountryRepositoryInterface $countryRepositoryInterface,
+			ClientDiscountRepositoryInterface $clientDiscountRepositoryInterface){
         $this->user = $user;
         $this->student = $student;
         $this->school = $school;
@@ -69,6 +71,7 @@ class ApiController extends Controller {
         $this->valid = $validatorRepositoryInterface;
         $this->school = $schoolRepositoryInterface;
         $this->country = $countryRepositoryInterface;
+		$this->client_discount = $clientDiscountRepositoryInterface;
     }
     
     public function index(){
