@@ -11,19 +11,28 @@ use Illuminate\Support\Facades\Input;
 use FutureEd\Models\Repository\Invoice\InvoiceRepositoryInterface;
 use FutureEd\Models\Repository\InvoiceDetail\InvoiceDetailRepositoryInterface;
 use FutureEd\Models\Repository\Classroom\ClassroomRepositoryInterface;
+use FutureEd\Models\Repository\Order\OrderRepositoryInterface;
+
+use FutureEd\Services\InvoiceServices;
 
 class InvoiceController extends ApiController {
 
     protected $classrooms;
     protected $invoice;
-    protected $invoiceDetail;
+    protected $invoice_detail;
+    protected $invoice_service;
+    protected $order;
 
     public function __construct(ClassroomRepositoryInterface $classroom,
                                 InvoiceRepositoryInterface $invoice,
-                                InvoiceDetailRepositoryInterface $invoiceDetail){
+                                InvoiceDetailRepositoryInterface $invoice_detail,
+                                InvoiceServices $invoice_service,
+                                OrderRepositoryInterface $order){
         $this->classrooms = $classroom;
         $this->invoice = $invoice;
-        $this->invoiceDetail = $invoiceDetail;
+        $this->invoiceDetail = $invoice_detail;
+        $this->invoice_service = $invoice_service;
+        $this->order = $order;
     }
     /**
      * Display a listing of the resource.
@@ -95,9 +104,15 @@ class InvoiceController extends ApiController {
      */
     public function store(InvoiceRequest $request)
     {
+        // insert invoice here.
         $input = $request->all();
-
         $invoice = $this->invoice->addInvoice($input);
+
+        //insert order here.
+        $order_input = $request->only('order_no','client_id','subscription_id','date_start','date_end','seats_total','total_amount','payment_status');
+        $order_input['order_date'] = $input['invoice_date'];
+        $order_input['seats_taken'] = 0;
+        $order = $this->order->addOrder($order_input);
 
         //get classrooms to create invoice details.
         $criteria['order_no'] = $input['order_no'];
@@ -113,7 +128,7 @@ class InvoiceController extends ApiController {
                 $order_detail['class_id'] = $class_records[$i]['id'];
                 $order_detail['grade_code'] = $class_records[$i]['grade']['code'];
 
-                $result = $this->invoiceDetail->addInvoiceDetail($order_detail);
+                $result = $this->invoice_detail->addInvoiceDetail($order_detail);
             }
         }
 
@@ -172,5 +187,12 @@ class InvoiceController extends ApiController {
      */
     public function getClientInvoiceDiscount($client_id){
         return $this->respondWithData($this->invoice->getClientInvoiceDiscount($client_id));
+    }
+
+    public function getNextInvoiceNo($client_id)
+    {
+        $invoice_no = $this->invoice->getNextInvoiceNo();
+        $new_invoice_no = $invoice_no['id'] + 1;
+        return $this->respondWithData($this->invoice_service->createInvoiceNo($new_invoice_no));
     }
 }

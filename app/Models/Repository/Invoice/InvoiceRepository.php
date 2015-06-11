@@ -99,4 +99,8 @@ class InvoiceRepository implements InvoiceRepositoryInterface{
     {
         return ClientDiscount::clientId($client_id)->get();
     }
+
+    public function getNextInvoiceNo(){
+        return Invoice::orderBy('id','desc')->first()->toArray();
+    }
 }

@@ -19,4 +19,8 @@ class OrderRepository implements OrderRepositoryInterface{
             return $e->getMessage();        
         }
     }
+
+    public function getNextOrderNo(){
+        return Order::orderBy('id','desc')->first()->toArray();
+    }
 }

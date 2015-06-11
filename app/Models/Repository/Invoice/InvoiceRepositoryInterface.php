@@ -7,4 +7,5 @@ interface InvoiceRepositoryInterface {
     public function addInvoice($data);
     public function getInvoice($id);
     public function getClientInvoiceDiscount($client_id);
+    public function getNextInvoiceNo();
 }
