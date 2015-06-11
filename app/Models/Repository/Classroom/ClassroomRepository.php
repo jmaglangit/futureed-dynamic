@@ -130,7 +130,20 @@ class ClassroomRepository implements ClassroomRepositoryInterface{
 
             return $e->getMessage();
         }
+    }
 
+    /**
+     *  Delete classrooms by order no.
+     *  @param $order_no
+     *  @return boolean
+     */
+
+    public function deleteClassroomByOrderNo($order_no){
+        try{
+            return Classroom::where('order_no',$order_no)->delete();
+        } catch( Exception $e ){
+            return $e->getMessage();
+        }
     }
 
 

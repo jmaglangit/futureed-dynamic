@@ -26,7 +26,7 @@ class ClientDiscount extends Model {
 	
 	public function scopeName($query, $name){
     	return $query->whereHas('client', function($query) use ($name) {	
-			$query->where('first_name', 'like', '%'.$name.'%')->orWhere('last_name', 'like', '%'.$name.'%')->orderBy('last_name', 'asc');;
+			$query->where('first_name', 'like', '%'.$name.'%')->orWhere('last_name', 'like', '%'.$name.'%')->orderBy('last_name', 'asc');
 		});
 	}
 	
@@ -35,5 +35,9 @@ class ClientDiscount extends Model {
 			$query->whereClientRole($role);
 		});		
 	}
+
+    public function scopeClientId($query,$client_id){
+        return $query->where('client_id',$client_id);
+    }
 
 }

@@ -165,4 +165,7 @@ class InvoiceController extends ApiController {
 		//
 	}
 
+    public function getClientInvoiceDiscount($client_id){
+        return $this->respondWithData($this->invoice->getClientInvoiceDiscount($client_id));
+    }
 }

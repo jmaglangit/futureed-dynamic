@@ -17,8 +17,10 @@ class VolumeDiscount extends Model {
     
     //-------------scopes
 	public function scopeMinSeats($query, $min_seats) {
-		
 		return $query->where('min_seats', 'like', '%'.$min_seats.'%');
-				
 	}
+
+    public function scopeFloorMinSeats($query, $min_seats){
+        return $query->where('min_seats', '<=', $min_seats);
+    }
 }

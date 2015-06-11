@@ -98,4 +98,14 @@ class VolumeDiscountRepository implements VolumeDiscountRepositoryInterface {
             return $e->getMessage();
         }
     }
+
+    /**
+     *  Get rounded off discount to be used in invoice discount.
+     *  @param $min_seats int
+     *  @return object
+     */
+
+    public function getRoundedOffDiscount($min_seats){
+        return VolumeDiscount::floorMinSeats($min_seats)->orderBy('id', 'desc')->first();
+    }
 }

@@ -2,6 +2,8 @@
 
 
 use FutureEd\Models\Core\Invoice;
+use FutureEd\Models\Core\ClientDiscount;
+
 
 class InvoiceRepository implements InvoiceRepositoryInterface{
 
@@ -87,5 +89,14 @@ class InvoiceRepository implements InvoiceRepositoryInterface{
         }
     }
 
+    /**
+     *  Get client discount to be used when adding invoice.
+     *  @param $client_id int
+     * @return object
+     */
 
+    public function getClientInvoiceDiscount($client_id)
+    {
+        return ClientDiscount::clientId($client_id)->get();
+    }
 }

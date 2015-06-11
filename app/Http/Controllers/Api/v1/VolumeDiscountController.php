@@ -108,4 +108,8 @@ class VolumeDiscountController extends ApiController {
     		return $this->respondWithData($this->volume_discount->deleteVolumeDiscount($id));
 		}
 	}
+
+    public function getRoundedOffDiscount($min_seats){
+        return $this->respondWithData($this->volume_discount->getRoundedOffDiscount($min_seats));
+    }
 }

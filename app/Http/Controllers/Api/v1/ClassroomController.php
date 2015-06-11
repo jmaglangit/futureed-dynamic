@@ -119,4 +119,8 @@ class ClassroomController extends ApiController {
 		return $this->respondWithData($this->classroom->deleteClassroom($id));
 	}
 
+    public function deleteClassroomByOrderNo($order_no){
+        return $this->respondWithData($this->classroom->deleteClassroomByOrderNo($order_no));
+    }
+
 }
