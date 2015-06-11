@@ -122,6 +122,23 @@ function ManageClassController($scope, manageClassService, apiService, TableServ
 		});
 	}
 
+	self.getGradeLevel = function() {
+		self.grades = Constants.FALSE;
+		var country_id = $scope.user.country_id;
+
+		apiService.getGradeLevel(country_id).success(function(response) {
+			if(response.status == Constants.STATUS_OK) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.grades = response.data.records;
+				}
+			}
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+		});
+	}
+
 	self.details = function(id) {
 		self.errors = Constants.FALSE;
 
