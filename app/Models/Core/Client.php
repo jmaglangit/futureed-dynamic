@@ -84,8 +84,10 @@ class Client extends Model {
 	}
 	
 	public function scopeRole($query, $role) {
-	
-		return $query->whereClientRole($role);
+
+		$roles = (array) $role;
+
+		return $query->whereIn('client_role', $roles);
 		
 	}
 	
@@ -114,6 +116,11 @@ class Client extends Model {
 		return $query->whereHas('user',function($query) use ($registration_token){
 			$query->where('registration_token',$registration_token);
 		});
+	}
+
+	public function scopeAccountStatus($query, $account_status){
+
+		return $query->where('account_status',$account_status);
 	}
 
 
