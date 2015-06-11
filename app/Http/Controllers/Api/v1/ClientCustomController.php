@@ -30,6 +30,12 @@ class ClientCustomController extends ApiController {
 
         }
 
+		if(Input::get('role')){
+
+			$criteria['role'] = explode(",",Input::get('role'));
+
+		}
+
         $client_details = $this->client->getClientCustomDetails($criteria);
         $client = array();
 
