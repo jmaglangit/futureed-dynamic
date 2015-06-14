@@ -2,6 +2,8 @@
 
 
 use FutureEd\Models\Core\Invoice;
+use FutureEd\Models\Core\ClientDiscount;
+
 
 class InvoiceRepository implements InvoiceRepositoryInterface{
 
@@ -40,9 +42,9 @@ class InvoiceRepository implements InvoiceRepositoryInterface{
                     $invoice  = $invoice->with('subscription')->payment($criteria['payment_status']);
 
                 }
-                
+
                 if(isset($criteria['client_id'])){
-	                $invoice  = $invoice->with('subscription')->clientId($criteria['client_id']);
+                    $invoice  = $invoice->with('subscription')->clientId($criteria['client_id']);
                 }
             }
 
@@ -67,19 +69,19 @@ class InvoiceRepository implements InvoiceRepositoryInterface{
     {
         try{
             return Invoice::create($data)->toArray();
-            
+
         }catch(Exception $e){
-            return $e->getMessage();        
+            return $e->getMessage();
         }
     }
-    
+
     public function getInvoice($id)
     {
-	    return Invoice::with('subscription')->find($id);
+        return Invoice::with('subscription')->find($id);
     }
-    
+
     public function updateInvoice($id, $data){
-	     try{
+        try{
             $result = Invoice::find($id);
             return !is_null($result) ? $result->update($data) : false;
         }catch(Exception $e){
@@ -87,5 +89,18 @@ class InvoiceRepository implements InvoiceRepositoryInterface{
         }
     }
 
+    /**
+     *  Get client discount to be used when adding invoice.
+     *  @param $client_id int
+     * @return object
+     */
 
+    public function getClientInvoiceDiscount($client_id)
+    {
+        return ClientDiscount::clientId($client_id)->get();
+    }
+
+    public function getNextInvoiceNo(){
+        return Invoice::orderBy('id','desc')->first()->toArray();
+    }
 }
