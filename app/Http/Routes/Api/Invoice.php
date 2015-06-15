@@ -12,7 +12,7 @@ Routes::group(['middleware' => 'api_user','prefix' => '/sales-invoice'], functio
 {
 
     Routes::get('/details',[
-        'uses' => 'Api\v1\InvoiceDetailController@invoiceDetails',
+        'uses' => 'Api\v1\InvoiceDetailController@viewInvoiceDetail',
         'as' =>'api.v1.sales.invoice' ]);
 
      Routes::post('/edit',[

@@ -390,7 +390,7 @@ class MailServices {
 		$contents = [
 			'view' => 'emails.student.parent-added-student',
 			'data' => [
-				'name' => $data['username'],
+				'name' => $data['name'],
 				'code' => $code,
 				'parent_name' => $client_details['first_name'].' '.$client_details['last_name'],
 			],

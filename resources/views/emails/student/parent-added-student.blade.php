@@ -9,8 +9,12 @@
 <div>
     <div>Parent: {{$parent_name}}</div>
     <br/>
-    <div>Your invitation code : {{ $code }}.</div>
+    <div>has requested to add you in his/her dashboard.</div>
     <br/>
+    <div> Please give this invitation code so that you will be added in his/her student list.</div>
+    <div>Invitation code : {{ $code }}</div>
+    <br/>
+    <div>Regards, Admin</div>
 </div>
 </body>
 </html>
