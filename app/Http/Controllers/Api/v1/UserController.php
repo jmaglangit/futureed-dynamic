@@ -160,6 +160,9 @@ class UserController extends ApiController{
 
                         $student_id = $this->student->getStudentId($return['user_id']);
 
+
+						$subject = str_replace('{user}',config('futureed.student'),$subject);
+
                         $this->mail->sendStudentMailResetPassword($userDetails,$code['confirmation_code'],$input['callback_uri'],$subject);
 
                         return $this->respondWithData(['id' => $student_id,
@@ -169,7 +172,15 @@ class UserController extends ApiController{
                     
                     }elseif(strtolower($input['user_type']) == 'client'){
 
+
+
                         $client_id = $this->client->getClientId($return['user_id']);
+
+						//get client role
+						$client_role = $this->client->getRole($return['user_id']);
+
+						//change subject
+						$subject = str_replace('{user}',$client_role,$subject);
 
                         $this->mail->sendClientMailResetPassword($userDetails,$code['confirmation_code'],$input['callback_uri'],$subject);
 
@@ -181,6 +192,10 @@ class UserController extends ApiController{
                     }else{
 
                         $admin_id = $this->admin->getAdminId($return['user_id']);
+
+						$admin_detail = $this->admin->getAdmin($admin_id);
+
+						$subject = str_replace('{user}',$admin_detail->admin_role,$subject);
 
                         $this->mail->sendAdminMailResetPassword($userDetails,$code['confirmation_code'],$input['callback_uri'],$subject);
 
@@ -243,6 +258,8 @@ class UserController extends ApiController{
                     if(strtolower($input['user_type']) == 'student') {
 
                         $student_id = $this->student->getStudentId($return['user_id']);
+
+						$subject = str_replace('{user}',config('futureed.student'),$subject);
 
                         $this->mail->resendStudentRegister($userDetails,$code['confirmation_code'],$input['callback_uri'],$subject);
 
