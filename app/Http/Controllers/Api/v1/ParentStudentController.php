@@ -23,19 +23,20 @@ class ParentStudentController extends ApiController {
 	protected $user;
 	protected $parent_student;
 
-	public function __construct(StudentRepositoryInterface $student,
-								ClientRepositoryInterface $client,
-								UserRepositoryInterface $user,
-								CodeGeneratorServices $code,
-								MailServices $mail,
-								ParentStudentRepositoryInterface $parent_student){
+	public function __construct(
+							StudentRepositoryInterface $student,
+							ClientRepositoryInterface $client,
+							UserRepositoryInterface $user,
+							CodeGeneratorServices $code,
+							MailServices $mail,
+							ParentStudentRepositoryInterface $parent_student){
 
-		$this->student = $student;
-		$this->client = $client;
-		$this->user = $user;
-		$this->code = $code;
-		$this->mail = $mail;
-		$this->parent_student = $parent_student;
+			$this->student = $student;
+			$this->client = $client;
+			$this->user = $user;
+			$this->code = $code;
+			$this->mail = $mail;
+			$this->parent_student = $parent_student;
 
 	}
 
