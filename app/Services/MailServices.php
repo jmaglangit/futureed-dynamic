@@ -247,24 +247,24 @@ class MailServices {
 
     public function sendAdminChangeEmail($data,$url){
 
-        $template = 'emails.admin.change-email';
+		$template = 'emails.admin.change-email';
 
-		$subject = str_replace('{user}',config('futureed.admin'),config('futureed.subject_change_email'));
+		$subject = str_replace('{user}', config('futureed.admin'), config('futureed.subject_change_email'));
 
-        $content = [
-            'view' => $template,
-            'data' => [
-                'name' => $data['name'],
-                'link' => $url,
-                'email' => $data['email'],
-                'new_email' => $data['new_email']
-            ],
-            'mail_recipient' => $data['email'],
-            'mail_recipient_name' => $data['name' ],
-            'subject' => $subject
-        ];
+		$content = [
+			'view' => $template,
+			'data' => [
+				'name' => $data['name'],
+				'link' => $url,
+				'email' => $data['email'],
+				'new_email' => $data['new_email']
+			],
+			'mail_recipient' => $data['email'],
+			'mail_recipient_name' => $data['name'],
+			'subject' => $subject
+		];
 
-        $this->sendMail($content);
+		$this->sendMail($content);
 
 
 
@@ -273,22 +273,22 @@ class MailServices {
 
     public function sendAdminChangePassword($data,$new_password){
 
-        $template = 'emails.admin.change-password';
+		$template = 'emails.admin.change-password';
 
-		$subject = str_replace('{user}',$data->admin_role,config('futureed.subject_change_password'));
+		$subject = str_replace('{user}', $data->admin_role, config('futureed.subject_change_password'));
 
-        $content = [
-            'view' => $template,
-            'data' => [
-                'name' => $data->user->name,
-                'new_password' => $new_password
-            ],
-            'mail_recipient' => $data->user->email,
-            'mail_recipient_name' =>$data->user->name,
-            'subject' => $subject
-        ];
+		$content = [
+			'view' => $template,
+			'data' => [
+				'name' => $data->user->name,
+				'new_password' => $new_password
+			],
+			'mail_recipient' => $data->user->email,
+			'mail_recipient_name' => $data->user->name,
+			'subject' => $subject
+		];
 
-        $this->sendMail($content);
+		$this->sendMail($content);
 
 
 
