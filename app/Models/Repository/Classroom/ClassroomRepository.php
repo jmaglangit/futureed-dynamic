@@ -24,44 +24,44 @@ class ClassroomRepository implements ClassroomRepositoryInterface{
      */
     public function getClassrooms($criteria,$limit,$offset){
 
-		$classroom = new Classroom();
+        $classroom = new Classroom();
 
-		//get client id -- teacher
-		if (isset($criteria['client_id'])) {
+        //get client id -- teacher
+        if (isset($criteria['client_id'])) {
 
-			$classroom = $classroom->client_id($criteria['client_id']);
-		}
+            $classroom = $classroom->client_id($criteria['client_id']);
+        }
 
-		if (isset($criteria['name'])) {
+        if (isset($criteria['name'])) {
 
-			$classroom = $classroom->name($criteria['name']);
-		}
+            $classroom = $classroom->name($criteria['name']);
+        }
 
-		if (isset($criteria['grade_id'])) {
+        if (isset($criteria['grade_id'])) {
 
-			$classroom = $classroom->grade_id($criteria['grade_id']);
-		}
+            $classroom = $classroom->grade_id($criteria['grade_id']);
+        }
 
-		if (isset($criteria['order_no'])) {
+        if (isset($criteria['order_no'])) {
 
-			$classroom = $classroom->order_no($criteria['order_no']);
-		}
+            $classroom = $classroom->order_no($criteria['order_no']);
+        }
 
-		$classroom = $classroom->with('order', 'grade', 'client');
+        $classroom = $classroom->with('order', 'grade', 'client');
 
-		$count = $classroom->get()->count();
+        $count = $classroom->get()->count();
 
-		if ($offset >= 0 && $limit > 0) {
+        if ($offset >= 0 && $limit > 0) {
 
-			$classroom = $classroom->skip($offset)->take($limit);
-		}
+            $classroom = $classroom->skip($offset)->take($limit);
+        }
 
-		$records = $classroom->get();
+        $records = $classroom->get();
 
-		Return [
-			'total' => $count,
-			'record' => $records
-		];
+        Return [
+            'total' => $count,
+            'record' => $records
+        ];
     }
 
     /**
@@ -130,7 +130,20 @@ class ClassroomRepository implements ClassroomRepositoryInterface{
 
             return $e->getMessage();
         }
+    }
 
+    /**
+     *  Delete classrooms by order no.
+     *  @param $order_no
+     *  @return boolean
+     */
+
+    public function deleteClassroomByOrderNo($order_no){
+        try{
+            return Classroom::order_no($order_no)->delete();
+        } catch( Exception $e ){
+            return $e->getMessage();
+        }
     }
 
 

@@ -11,51 +11,47 @@
 		</div>
 
 		<div class="form-search">
-			{!! Form::open(
-					array(
-						'id' => 'search_form',
-						'class' => 'form-horizontal'
-					)
-			) !!}
-			<div class="form-group">
-				<div class="col-xs-4">
-					{!! Form::text('name', ''
-						, array(
-							'class' => 'form-control'
-							, 'ng-model' => 'class.search.name'
-							, 'placeholder' => 'Class Name'
-						)
-					) !!}
+			<form ng-submit="class.searchFnc($event)" class="form-horizontal">
+				<div class="form-group">
+					<div class="col-xs-4">
+						{!! Form::text('name', ''
+							, array(
+								'class' => 'form-control'
+								, 'ng-model' => 'class.search.name'
+								, 'placeholder' => 'Class Name'
+								, 'autocomplete' => 'off'
+							)
+						) !!}
+					</div>
+					<div class="col-md-4" ng-init="class.getGradeLevel()">
+	                    <select name="grade_id" class="form-control" ng-disabled="class.grades.length <= 0" ng-model="class.search.grade_id">
+	                        <option value="">-- Select Level --</option>
+	                        <option ng-repeat="grade in class.grades" value="{! grade.id !}">{! grade.name !}</option>
+	                    </select>
+	                </div>
+					<div class="col-xs-2">
+						{!! Form::button('Search', 
+							array(
+								'class' => 'btn btn-blue'
+								, 'ng-click' => 'class.searchFnc()'
+							)
+						) !!}
+					</div>
+					<div class="col-xs-2">
+						{!! Form::button('Clear', 
+							array(
+								'class' => 'btn btn-gold'
+								, 'ng-click' => 'class.clear()'
+							)
+						) !!}
+					</div>
 				</div>
-				<div class="col-md-4" ng-init="getGradeLevel()">
-                    <select name="grade_id" class="form-control" ng-model="class.search.grade_id">
-                        <option value="">-- Select Level --</option>
-                        <option ng-repeat="grade in grades" value="{! grade.code !}">{! grade.name !}</option>
-                    </select>
-                </div>
-				<div class="col-xs-2">
-					{!! Form::button('Search', 
-						array(
-							'class' => 'btn btn-blue'
-							, 'ng-click' => 'class.searchFnc()'
-						)
-					) !!}
-				</div>
-				<div class="col-xs-2">
-					{!! Form::button('Clear', 
-						array(
-							'class' => 'btn btn-gold'
-							, 'ng-click' => 'class.clear()'
-						)
-					) !!}
-				</div>
-			</div>
 			{!! Form::close() !!}
 		</div>
 	</div>
 
-	<div class="col-xs-12 table-container">
-		<div class="list-container" ng-init="class.classList()" ng-cloak>
+	<div class="col-xs-12 table-container" ng-init="class.list()">
+		<div class="list-container" ng-cloak>
 			<div class="title-mid">
 				Class List
 			</div>

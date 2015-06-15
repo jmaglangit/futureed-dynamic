@@ -72,6 +72,11 @@ return [
     'cancelled' => 'Cancelled',
 
     //user Status
-    'user_disabled' => 'Disabled'
+    'user_disabled' => 'Disabled',
+
+    //order no. zero fill constants
+    'client_id_zero_fill' => 4,
+    'order_id_zero_fill' => 6,
+    'invoice_id_zero_fill' => 10
 
 ];

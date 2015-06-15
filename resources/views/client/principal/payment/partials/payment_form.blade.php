@@ -27,15 +27,10 @@
 					) !!}
 				</div>
 				<div class="col-xs-4">
-					{!! Form::select('subscription',
-						[
-							'' => '-- Select Subscription --',
-							'3 months' => '3 months',
-							'6 months' => '6 months',
-							'12 months' => '12 months'
-						], null,
-						['ng-model' => 'payment.search.subscription', 'class' => 'form-control']
-					)!!}
+					<select ng-model="payment.search.subscription_name" ng-disabled="!payment.subscriptions.length" ng-init="payment.listSubscription()" class="form-control">
+						<option value="">-- Select Subscription --</option>
+						<option ng-repeat="subscription in payment.subscriptions" value="{! subscription.name !}">{! subscription.name !}</option>
+					</select>
 				</div>
 				<div class="col-xs-2">
 					{!! Form::button('Search'

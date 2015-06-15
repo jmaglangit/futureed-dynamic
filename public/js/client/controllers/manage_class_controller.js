@@ -80,6 +80,7 @@ function ManageClassController($scope, manageClassService, apiService, TableServ
 
 	self.classList = function() {
 		self.errors = Constants.FALSE;
+		self.search.client_id = $scope.user.id;
 
 		$scope.ui_block();
 		manageClassService.list(self.search, self.table).success(function(response) {
@@ -118,6 +119,23 @@ function ManageClassController($scope, manageClassService, apiService, TableServ
 		}).error(function(response) {
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
+		});
+	}
+
+	self.getGradeLevel = function() {
+		self.grades = Constants.FALSE;
+		var country_id = $scope.user.country_id;
+
+		apiService.getGradeLevel(country_id).success(function(response) {
+			if(response.status == Constants.STATUS_OK) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.grades = response.data.records;
+				}
+			}
+		}).error(function(response) {
+			self.errors = $scope.internalError();
 		});
 	}
 

@@ -20,3 +20,10 @@ Routes::group(['middleware' => 'api_user'],function(){
 
 
 });
+
+Routes::group(['prefix' => '/classroom'], function()
+{
+    Routes::delete('/delete-classroom-by-order-no/{order_no}', [
+        'uses' => 'Api\v1\ClassroomController@deleteClassroomByOrderNo',
+        'as' => 'classroom.delete.delete-classroom-by-order-no']);
+});
