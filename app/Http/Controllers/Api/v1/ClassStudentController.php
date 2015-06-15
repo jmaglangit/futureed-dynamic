@@ -47,6 +47,7 @@ class ClassStudentController extends ApiController {
                 'birth_date',
                 'grade_code',
                 'country',
+                'country_id',
                 'state',
                 'city');
     
