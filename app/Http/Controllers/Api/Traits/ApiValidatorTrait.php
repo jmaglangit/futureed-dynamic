@@ -770,7 +770,7 @@ trait ApiValidatorTrait {
         }
     }
 
-	public function validateAlphaDash($input,$date_now){
+	public function validateAlpha($input,$date_now){
 
 		$validator = Validator::make(
 			[
@@ -793,7 +793,7 @@ trait ApiValidatorTrait {
 
 	}
 
-	public function validateAlphaDashOptional($input,$date_now){
+	public function validateAlphaOptional($input,$date_now){
 
 		$validator = Validator::make(
 			[
