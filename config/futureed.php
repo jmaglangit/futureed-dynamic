@@ -31,18 +31,23 @@ return [
     //thumbnial folder
     'thumbnail' =>'images/thumbnail',
 
+	//mail change password
+	'subject_change_password' => '{user} Change Password',
+	'subject_resend_change_password' => 'Resending: {user} Change Password',
+
     //mail forgot password
-    'subject_forgot'   =>  'Forgot Password',
-    'subject_forgot_resend' => 'Resending: Forgot Password',
+    'subject_forgot'   =>  '{user} Forgot Password',
+    'subject_forgot_resend' => 'Resending: {user} Forgot Password',
+
 
     //mail register
     'subject_register' => 'Welcome to Future Lesson!',
-    'subject_reg_resend' => 'Resending: Email Confirmation',
+    'subject_reg_resend' => 'Resending: {user} Email Confirmation',
 
     //new email
 
-    'subject_change_email' => 'Change Email',
-    'subject_email_resend' =>  'Resending: Change Email',
+    'subject_change_email' => '{user} Change Email',
+    'subject_email_resend' =>  'Resending: {user} Change Email',
     
     'admin_delete_threshold' => 3,
     
