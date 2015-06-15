@@ -382,5 +382,29 @@ class MailServices {
 		$this->sendMail($contents);
 	}
 
+	/**
+	 * Send email student with invitation code.
+	 * @param $data
+	 */
+
+	public function sendParentAddStudent($data,$client_details,$code){
+
+
+		$contents = [
+			'view' => 'emails.student.parent-added-student',
+			'data' => [
+				'name' => $data['name'],
+				'code' => $code,
+				'parent_name' => $client_details['first_name'].' '.$client_details['last_name'],
+			],
+			'mail_recipient' => $data['email'],
+			'mail_recipient_name' => $data['username'],
+			'subject' => 'Welcome to Future Lesson!'
+
+		];
+
+		$this->sendMail($contents);
+	}
+
 
 }

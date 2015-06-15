@@ -158,6 +158,30 @@
 					]);
 				});
 			});
+			
+			/**
+			*STUDENT Routes
+			*/
+			Routes::group(['prefix' => '/student'], function(){
+				$manage_student_controller = 'FutureLesson\Admin\ManageStudentController';
+
+				Routes::get('/',
+					[
+						'as' => 'admin.manage.student.index'
+						, 'middleware' => 'admin'
+						, 'uses' => $manage_student_controller . '@index'
+					]);
+				Routes::group(['prefix' => '/partials'], function(){
+					$manage_student_controller = 'FutureLesson\Admin\ManageStudentController';
+
+					Routes::get('/list_student_form',
+						[
+							'as' => 'admin.manage.student.partials.list_student_form'
+							, 'middleware' => 'admin'
+							, 'uses' => $manage_student_controller . '@list_student_form'
+						]);
+				});
+			});
 
 			/**
 			* CRUD Subject Routes
