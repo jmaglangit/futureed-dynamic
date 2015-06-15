@@ -6,13 +6,15 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class ParentStudent extends Model {
 
 	//
-    use SoftDeletes;
+	use SoftDeletes;
 
-    protected $table = 'parent_students';
+	protected $table = 'parent_students';
 
-    protected $dates = ['deleted_at'];
+	protected $dates = ['deleted_at'];
 
-    protected $hidden = ['created_by','updated_by','created_at','updated_at','deleted_at'];
+	protected $hidden = ['created_by','updated_by','created_at','updated_at','deleted_at'];
+
+	protected $fillable = ['parent_user_id','student_user_id','invitation_code','status','created_by','updated_by'];
     
 
 }
