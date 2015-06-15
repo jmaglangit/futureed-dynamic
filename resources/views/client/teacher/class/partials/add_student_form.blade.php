@@ -17,72 +17,73 @@
         </div>
     </div>
 
-	<div class="col-xs-12 module-container">
-		<div class="col-xs-4 col-xs-offset-3">
-			{!! Form::radio('add'
-				, '1'
-				, true
-				, array(
-					'id' => 'existing_student'
-					, 'ng-model' => 'class.add_existing_student'
-					, 'ng-click' => 'class.display()'
-				)
-			) !!}
-			<span class="lbl padding-8" for="existing_student">Existing Student</span>
-		</div>
-
-		<div class="col-xs-3">
-			{!! Form::radio('add'
-				, '0'
-				, false
-				, array(
-					  'id' => 'new_student'
-					, 'ng-model' => 'class.add_existing_student'
-					, 'ng-click' => 'class.display()'
-				)	
-			) !!}
-			<span class="lbl padding-8" for="new_student">New Student</span>
-		</div>
+	<div class="module-container">
+        <div class="col-xs-6  col-xs-offset-2"> 
+            <label class="cursor-pointer">
+            {!! Form::radio('status'
+                , false
+                , false
+                , array(
+                    'ng-model' => 'class.add_existing_student'
+                )
+            ) !!}
+            <span class="lbl padding-8">New Student</span>
+            </label>
+        </div>
+        <div>
+            <label class="cursor-pointer">
+            {!! Form::radio('status'
+                , true
+                , true
+                , array(
+                    'ng-model' => 'class.add_existing_student'
+                )
+            ) !!}
+            <span class="lbl padding-8">Existing Student</span>
+            </label>
+        </div>
 	</div>
 
-	<div class="col-xs-12 module-container" ng-if="class.add_existing_student">
+	<div class="col-xs-12" ng-if="class.add_existing_student">
 		{!! Form::open(
 			[
 				'id' => 'add_existing_student',
 				'class' => 'form-horizontal'
 			]
 		) !!}
-		
-		<div class="form-group">
-				<div class="col-xs-2">
-					<label class="control-label">Email Address </label>
-				</div>
-				<div class="col-xs-5">
-					{!! Form::text('email', ''
-						, array(
-							'class' => 'form-control'
-							, 'ng-model' => 'class.record.email'
-							, 'placeholder' => 'Email Address'
-							, 'autocomplete' => 'off'
-						)
-					) !!}
-				</div>
-		</div>
-		<div class="btn-container col-xs-5 col-xs-offset-2">
-			{!! Form::button('Add'
-				, array(
-					'class' => 'btn btn-blue btn-medium'
-					, 'ng-click' => 'class.addExistingStudent()'
-				)
-			) !!}
+            <fieldset>
+                <legend>User Credential</legend>
+                <div class="form-group">
+                    <label for="" class="col-md-3 control-label">Email Address <span class="required">*</span></label>
+                    <div class="col-xs-4">
+                        {!! Form::text('email', ''
+                            , array(
+                                'class' => 'form-control'
+                                , 'ng-model' => 'class.record.email'
+                                , 'placeholder' => 'Email Address'
+                                , 'autocomplete' => 'off'
+                            )
+                        ) !!}
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <div class="btn-container col-xs-5 col-xs-offset-2">
+                    {!! Form::button('Add'
+                        , array(
+                            'class' => 'btn btn-blue btn-medium'
+                            , 'ng-click' => 'class.addExistingStudent()'
+                        )
+                    ) !!}
 
-			{!! Form::button('Cancel'
-				, array(
-					'class' => 'btn btn-gold btn-medium'
-					, 'ng-click' => "class.setActive('view', class.record.id)"
-				)
-			) !!}
-		</div>
+                    {!! Form::button('Cancel'
+                        , array(
+                            'class' => 'btn btn-gold btn-medium'
+                            , 'ng-click' => "class.setActive('view', class.record.id)"
+                        )
+                    ) !!}
+                </div>
+            </fieldset> 
 		{!! Form::close() !!}
 	</div>
 

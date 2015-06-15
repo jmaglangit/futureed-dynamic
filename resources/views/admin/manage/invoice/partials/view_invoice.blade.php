@@ -64,11 +64,11 @@
 			<div class="form-group">
 				<label class="col-xs-2 control-label">Date Started</label>
 				<div class="col-xs-4">
-					<input type="text" ng-disabled="true" class="form-control" ng-model="invoice.record.date_start" value="{! invoice.record.date_start | ddMMyyyy !}"/>
+					<input type="text" ng-disabled="true" class="form-control" value="{! invoice.record.date_start | ddMMyyyy !}"/>
 				</div>
 				<label class="col-xs-2 control-label">Date End</label>
 				<div class="col-xs-4">
-					<input type="text" ng-disabled="true" class="form-control" ng-model="invoice.record.date_end" value="{! invoice.record.date_end | ddMMyyyy !}"/>
+					<input type="text" ng-disabled="true" class="form-control" value="{! invoice.record.date_end | ddMMyyyy !}"/>
 				</div>
 			</div>
 			<div class="col-xs-12 tab-right">
