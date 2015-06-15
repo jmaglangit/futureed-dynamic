@@ -34,6 +34,7 @@
 						, array(
 							'placeholder' => 'Email',
 							'ng-model' => 'teacher.record.email',
+							'ng-class' => "{ 'required-field' : teacher.fields['email']}", 
 							'ng-model-options' => "{ debounce : {'default' : 1000} }",
 							'ng-change' => 'teacher.checkEmailAvailability()',
 							'autocomplete' => 'off',
@@ -53,6 +54,7 @@
 					{!! Form::text('username', ''
 						, array(
 							'placeholder' => 'Username',
+							'ng-class' => "{ 'required-field' : teacher.fields['username']}", 
 							'ng-model' => 'teacher.record.username',
 							'ng-model-options' => "{ debounce : {'default' : 1000} }",
 							'ng-change' => 'teacher.checkUsernameAvailability()',
@@ -78,6 +80,7 @@
 					{!! Form::text('first_name','',
 						[
 							'class' => 'form-control',
+							'ng-class' => "{ 'required-field' : teacher.fields['first_name']}", 
 							'ng-model' => 'teacher.record.first_name',
 							'placeholder' => 'First Name'
 						]
@@ -90,6 +93,7 @@
 					{!! Form::text('last_name','',
 						[
 							'class' => 'form-control',
+							'ng-class' => "{ 'required-field' : teacher.fields['last_name']}", 
 							'ng-model' => 'teacher.record.last_name',
 							'placeholder' => 'Last Name'
 						]

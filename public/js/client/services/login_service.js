@@ -37,5 +37,14 @@ function clientLoginApiService($http) {
 		});
 	}
 
+	clientLoginApi.getTeacherDetails = function(registration_token) {
+		return $http({
+			method 	: Constants.METHOD_POST
+			, data 	: {password : password}
+			, url	: clientLoginApiUrl + '/teacher-information/' + id
+				+ '?registration_token=' + registration_token
+		});
+	}
+
 	return clientLoginApi;
 }

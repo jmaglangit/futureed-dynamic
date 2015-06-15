@@ -135,12 +135,11 @@ function ManagePrincipalTeacherController($scope, managePrincipalTeacherService,
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
 		self.validation = {};
+		self.fields = [];
 
 		var base_url = $('input[name="base_url"]').val();
-		self.record.callback_uri = base_url + '/client/register?email=' + self.record.email;
+		self.record.callback_uri = base_url + '/client/registration';
 		self.record.current_user = $scope.user.id;
-
-		$("#add_teacher_form input").removeClass("required-field");
 
 		$scope.ui_block();
 		managePrincipalTeacherService.save(self.record).success(function(response){
@@ -149,7 +148,7 @@ function ManagePrincipalTeacherController($scope, managePrincipalTeacherService,
 					self.errors = $scope.errorHandler(response.errors);
 
 					angular.forEach(response.errors, function(value, key){
-						$("#add_teacher_form input[name='" + value.field +"']" ).addClass("required-field");
+						self.fields[value.field] = Constants.TRUE;
 					});
 				} else if(response.data) {
 					self.record = {};
@@ -293,7 +292,8 @@ function ManagePrincipalTeacherController($scope, managePrincipalTeacherService,
 		switch(page) {
 
 			case 'add'	:
-				self.record = Constants.FALSE;
+				self.record = {};
+				self.fields = [];
 				self.active_add = Constants.TRUE;
 				break;
 

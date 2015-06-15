@@ -297,4 +297,8 @@ function LoginController($scope, apiService, clientLoginApiService, clientProfil
 	      $scope.ui_unblock();
 	    });
 	}
+
+	self.getTeacherDetails = function() {
+		console.log("asd");
+	}
 }	
