@@ -26,6 +26,7 @@ Routes::group(['prefix' => 'api/v1'], function()
 		include('Routes/Api/ClassStudent.php');
 		include('Routes/Api/Client.php');
 		include('Routes/Api/ClientDiscount.php');
+		include('Routes/Api/ClientStudent.php');
 		include('Routes/Api/Countries.php');
 		include('Routes/Api/Grade.php');
 		include('Routes/Api/Invoice.php');
@@ -38,8 +39,6 @@ Routes::group(['prefix' => 'api/v1'], function()
 		include('Routes/Api/Subscription.php');
 		include('Routes/Api/User.php');
 		include('Routes/Api/VolumeDiscount.php');
-		include('Routes/Api/Invoice.php');
-		include('Routes/Api/ClientStudent.php');
 
 
 });
