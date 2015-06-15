@@ -18,6 +18,7 @@ class SchoolsTableSeeder extends Seeder {
                 'street_address' => 'Left Street, Cor. Right One',
                 'city' => 'Alpha City',
                 'state' => 'Tasteless',
+				'country_id' => 840,
                 'country' => 'Lilipot',
                 'zip' => 90210,
                 'status' => 'Enabled',
