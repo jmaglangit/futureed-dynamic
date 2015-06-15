@@ -116,6 +116,11 @@ class Client extends Model {
         });
     }
 
+    public function scopeUserId($query, $user_id){
+
+		return $query->where('user_id',$user_id);
+	}
+
     public function scopeSchoolCode($query,$school_code){
         return $query->where('school_code',$school_code);
     }
