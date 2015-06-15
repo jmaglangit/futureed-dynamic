@@ -10,16 +10,12 @@ use League\Flysystem\Exception;
 class ClientRepository implements ClientRepositoryInterface
 {
 
-    //TODO: Need to refactor /improve
     public function getClient($user_id, $role)
     {
 
-        $client =  new Client();
-
-        $client = $client->where('user_id',$user_id);
-        $client = $client->where('client_role',$role)->first();
-
-        return $client;
+		return Client::with('school')
+			->userid($user_id)
+			->role($role)->first();
 
     }
 
@@ -238,17 +234,18 @@ class ClientRepository implements ClientRepositoryInterface
         if (isset($criteria['school_code'])) {
             $clients = $clients->schoolCode($criteria['school_code']);
         }
+
         //accepts comma separated value. e.g client_role=Parent,Teacher
         if (isset($criteria['client_role'])) {
+
             $client_role = explode(',',$criteria['client_role'] );
-            $clients = $clients->clientRoleIn($client_role);
+
+            $clients = $clients->clientRole($client_role);
         }
 
         if (isset($criteria['name'])) {
             $clients = $clients->name($criteria['name']);
         }
-
-
 
         $clients = $clients->with('user')->orderBy('created_at', 'desc');
 
