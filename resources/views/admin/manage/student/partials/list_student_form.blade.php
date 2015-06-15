@@ -84,20 +84,20 @@
 			    </thead>
 
 		        <tbody>
-		        <tr ng-repeat="s in student.students">
-		            <td>{! s.first_name !} {! s.last_name !}</td>
-		            <td>{! s.user.email !}</td>
-		            <td>{! s.points !}</td>
+		        <tr ng-repeat="student in student.students">
+		            <td>{! student.first_name !} {! student.last_name !}</td>
+		            <td>{! student.user.email !}</td>
+		            <td>{! student.points !}</td>
 		            <td>
 		            	<div class="row">
 		            		<div class="col-xs-4">
-	    						<a href="" ng-click="admin.viewAdmin(a.id)"><span><i class="fa fa-eye"></i></span></a>
+	    						<a href="" ng-click="admin.viewAdmin(student.id)"><span><i class="fa fa-eye"></i></span></a>
 	    					</div>
 	    					<div class="col-xs-4">
-	    						<a href="" ng-click="admin.viewAdmin(a.id)"><span><i class="fa fa-pencil"></i></span></a>
+	    						<a href="" ng-click="admin.viewAdmin(student.id)"><span><i class="fa fa-pencil"></i></span></a>
 	    					</div>
 	    					<div class="col-xs-4">
-	    						<a href="" ng-click="admin.viewAdmin(a.id)"><span><i class="fa fa-trash"></i></span></a>
+	    						<a href="" ng-click="admin.viewAdmin(student.id)"><span><i class="fa fa-trash"></i></span></a>
 	    					</div>
 		            	</div>
 		            </td>
