@@ -25,7 +25,7 @@
             </li>
 
             <li>
-                <a href=""><span><i class="fa fa-user"></i></span>Manage Student</a>
+                <a href="{!! route('admin.manage.student.index') !!}"><span><i class="fa fa-user"></i></span>Manage Student</a>
             </li>
         </ul>
 
