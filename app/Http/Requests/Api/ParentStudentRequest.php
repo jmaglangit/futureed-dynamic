@@ -27,8 +27,12 @@ class ParentStudentRequest extends ApiRequest {
 				switch($this->route()->getName()){
 
 					case 'parent-student.add.existing.student':
-						return ['email'        =>   'required|email',
+						return ['email'    =>   'required|email',
 							'client_id'    =>   'required|integer'];
+						break;
+					case 'parent-student.confirm.student':
+						return ['client_id'        =>   'required|integer',
+							    'invitation_code'  =>   'required|integer'];
 						break;
 				}
 		}

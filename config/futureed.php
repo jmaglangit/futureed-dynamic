@@ -72,6 +72,7 @@ return [
     'cancelled' => 'Cancelled',
 
     //user Status
-    'user_disabled' => 'Disabled'
+    'user_disabled' => 'Disabled',
+	'user_enabled' => 'Enabled'
 
 ];

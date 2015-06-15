@@ -38,4 +38,35 @@ class ParentStudentRepository implements ParentStudentRepositoryInterface{
 
 	}
 
+	public function checkInvitationCode($invitation_code,$parent_user_id){
+
+		$parent_student = new ParentStudent();
+
+		$parent_student = $parent_student->where('invitation_code',$invitation_code);
+		$parent_student = $parent_student->where('parent_user_id',$parent_user_id)->first();
+
+		return $parent_student;
+	}
+
+	public function updateParentStudent($id,$data){
+
+		$data['created_by'] = 1;
+		$data['updated_by'] = 1;
+
+		try {
+
+			$parent_student = ParentStudent::find($id);
+
+			$parent_student->update($data);
+
+		} catch (Exception $e) {
+
+			return $e->getMessage();
+
+		}
+
+		return $parent_student;
+
+	}
+
 }

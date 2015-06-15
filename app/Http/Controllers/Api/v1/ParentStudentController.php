@@ -43,16 +43,16 @@ class ParentStudentController extends ApiController {
 
 		$data = $request->only('client_id','email');
 
-		$client_details = $this->client->getClientDetails($data['client_id']);
+		$client_detail = $this->client->getClientDetails($data['client_id']);
 
 		//check if client_details is not empty
-		if(!$client_details){
+		if(!$client_detail){
 
 			return $this->respondErrorMessage(2001);
 		}
 
 		//check if client_role is not Parent
-		if($client_details['client_role'] != config('futureed.parent')){
+		if($client_detail['client_role'] != config('futureed.parent')){
 
 			return $this->respondErrorMessage(2032);
 		}
@@ -70,7 +70,7 @@ class ParentStudentController extends ApiController {
 		$student_id = $this->student->getStudentId($check_email);
 
 		//get user details
-		$user_details = $this->user->getUserDetail($check_email,config('futureed.student'));
+		$user_detail = $this->user->getUserDetail($check_email,config('futureed.student'));
 
 		$parent_student_id = $this->parent_student->checkParentStudent($data['client_id'],$student_id);
 
@@ -89,13 +89,43 @@ class ParentStudentController extends ApiController {
 		$details['invitation_code'] = $invitation_code;
 		$details['status'] = config('futureed.user_disabled');
 
-		//add data for parent_students table
+		//add data to parent_students table
 		$return = $this->parent_student->addParentStudent($details);
 
 		//send email to student
-		$this->mail->sendParentAddStudent($user_details,$client_details,$invitation_code);
+		$this->mail->sendParentAddStudent($user_detail,$client_detail,$invitation_code);
 
 		return $this->respondWithData(['id'=>$return['id']]);
+	}
+
+	public function parentConfirmStudent(ParentStudentRequest $request){
+
+		$data = $request->only('client_id','invitation_code');
+
+		$client_detail = $this->client->getClientDetails($data['client_id']);
+
+		//check if client_details is not empty
+		if(!$client_detail){
+
+			return $this->respondErrorMessage(2001);
+		}
+
+		$parent_student_detail = $this->parent_student->checkInvitationCode($data['invitation_code'],$data['client_id']);
+
+		//check if parent_student_detail is empty
+		if(!$parent_student_detail){
+
+			return $this->respondErrorMessage(2132);
+		}
+
+		$parent_student['status'] = config('futureed.user_enabled');
+		$parent_student['invitation_code'] = NULL;
+
+		//if client_id and invitation_code is correct update parent_student table
+		$return = $this->parent_student->updateParentStudent($parent_student_detail['id'],$parent_student);
+
+		return $this->respondWithData($return);
+
 	}
 
 
