@@ -10,12 +10,17 @@ use FutureEd\Models\Repository\Order\OrderRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
+use FutureEd\Services\InvoiceServices;
+
 class OrderController extends ApiController {
-    
+
+    protected $invoice_service;
     protected $order;
-    
-    public function __construct(OrderRepositoryInterface $order){
+
+    public function __construct(OrderRepositoryInterface $order,
+                                InvoiceServices $invoice_service){
         $this->order = $order;
+        $this->invoice_service = $invoice_service;
     }
     
     /**
@@ -40,5 +45,12 @@ class OrderController extends ApiController {
         
         $order = $this->order->addOrder($input);
         return $this->respondWithData($order);
+    }
+
+    public function getNextOrderNo($client_id)
+    {
+        $order_no = $this->order->getNextOrderNo();
+        $new_order_no = $order_no['id'] + 1;
+        return $this->respondWithData($this->invoice_service->createOrderNo($client_id,$new_order_no));
     }
 }
