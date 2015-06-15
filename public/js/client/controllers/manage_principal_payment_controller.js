@@ -61,4 +61,20 @@ function ManagePrincipalPaymentController($scope, managePrincipalPaymentService,
 			$scope.ui_unblock();
 		});
 	}
+
+	self.listSubscription = function() {
+		self.subscriptions = [];
+
+		managePrincipalPaymentService.listSubscription().success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.subscriptions = response.data.records;
+				}
+			}
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+		});
+	}
 }
