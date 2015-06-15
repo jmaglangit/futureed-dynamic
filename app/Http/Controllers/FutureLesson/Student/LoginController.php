@@ -24,6 +24,9 @@ class LoginController extends Controller {
 			}
 
 			return redirect()->route('student.dashboard.index');
+		} else if(Session::get('client')) {
+
+			return redirect()->route('client.dashboard.index');
 		}
 
 		return view('student.login.login');
