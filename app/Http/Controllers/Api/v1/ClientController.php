@@ -11,418 +11,418 @@ use Illuminate\Support\Facades\Input;
 
 class ClientController extends ApiController {
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
-    public function index() {
+	/**
+	 * Display a listing of the resource.
+	 *
+	 * @return Response
+	 */
+	public function index() {
+	
+		$criteria = array();
+		$limit = 0;
+		$offset = 0;
+			
+		if(Input::get('name')) {
+			$criteria['name'] = Input::get('name');
+		}
+		
+		if(Input::get('school')) {
+			$criteria['school'] = Input::get('school');
+		}
+		
+		if(Input::get('client_role')) {
+			$criteria['client_role'] = Input::get('client_role');
+		}
+		
+		if(Input::get('email')) {
+			$criteria['email'] = Input::get('email');
+		}
+		
+		if(Input::get('status')) {
+			$criteria['status'] = Input::get('status');
+		}
+		
+		if(Input::get('limit')) {
+			$limit = intval(Input::get('limit'));
+		}
+		
+		if(Input::get('offset')) {
+			$offset = intval(Input::get('offset'));
+		}
+			
+		$clients = $this->client->getClients($criteria, $limit, $offset);
 
-        $criteria = array();
-        $limit = 0;
-        $offset = 0;
+		return $this->respondWithData($clients);
+	}
 
-        if(Input::get('name')) {
-            $criteria['name'] = Input::get('name');
-        }
+	public function show($id) {
 
-        if(Input::get('school')) {
-            $criteria['school'] = Input::get('school');
-        }
+		$client = config('futureed.client');
 
-        if(Input::get('client_role')) {
-            $criteria['client_role'] = Input::get('client_role');
-        }
+		$this->addMessageBag($this->validateVarNumber($id));
 
-        if(Input::get('email')) {
-            $criteria['email'] = Input::get('email');
-        }
+		$msg_bag = $this->getMessageBag();
 
-        if(Input::get('status')) {
-            $criteria['status'] = Input::get('status');
-        }
+		if (!empty($msg_bag)) {
 
-        if(Input::get('limit')) {
-            $limit = intval(Input::get('limit'));
-        }
+			return $this->respondWithError($this->getMessageBag());
 
-        if(Input::get('offset')) {
-            $offset = intval(Input::get('offset'));
-        }
+		} else {
 
-        $clients = $this->client->getClients($criteria, $limit, $offset);
+			$return = $this->client->verifyClientId($id);
 
-        return $this->respondWithData($clients);
-    }
+			if ($return) {
 
-    public function show($id) {
+				//TODO: make use of relationships.
+				$userDetails = $this->user->getUserDetail($return['user_id'], $client)->toArray();
+				$clienDetails = $this->client->getClientDetails($id)->toArray();
+				$formResponse = $this->client->formResponse($userDetails, $clienDetails);
 
-        $client = config('futureed.client');
+				return $this->respondWithData($formResponse);
 
-        $this->addMessageBag($this->validateVarNumber($id));
+			} else {
 
-        $msg_bag = $this->getMessageBag();
+				return $this->respondErrorMessage(2001);
 
-        if(!empty($msg_bag)){
+			}
 
-            return $this->respondWithError($this->getMessageBag());
+		}
 
-        } else {
+	}
 
-            $return = $this->client->verifyClientId($id);
+	public function update($id){
 
-            if($return) {
 
-                //TODO: make use of relationships.
-                $userDetails = $this->user->getUserDetail($return['user_id'],$client)->toArray();
-                $clientDetails = $this->client->getClientDetails($id)->toArray();
-                $formResponse = $this->client->formResponse($userDetails,$clientDetails);
+		$this->addMessageBag($this->validateVarNumber($id));
 
-                return $this->respondWithData($formResponse);
+		$msg_bag = $this->getMessageBag();
 
-            } else {
+		if($msg_bag){
 
-                return $this->respondErrorMessage(2001);
+			return $this->respondWithError($msg_bag);
 
-            }
+		}else{
 
-        }
+			$return = $this->client->verifyClientId($id);
 
-    }
+			if($return){
 
-    public function update($id){
+				$clientDetails = $this->client->getClientDetails($id)->toArray();
+				$userDetails = $this->user->getUserDetail($return['user_id'],'Client')->toArray();
 
+				$user = input::only('username');
 
-        $this->addMessageBag($this->validateVarNumber($id));
+				$client = input::only('first_name','last_name','street_address',
+									  'city','country','zip','state');
 
-        $msg_bag = $this->getMessageBag();
+				$school = input::only('school_name','school_code','school_street_address','school_city',
+										  'school_state','school_country','school_zip','school_contact_name','school_contact_number');
+				
+				$this->addMessageBag($this->username($user,'username'));
+				$this->addMessageBag($this->firstName($client,'first_name'));
+				$this->addMessageBag($this->lastName($client,'last_name'));
+				
 
-        if($msg_bag){
+				if(strtolower($clientDetails['client_role']) == 'parent'){
 
-            return $this->respondWithError($msg_bag);
+					$this->addMessageBag($this->validateString($client,'street_address'));
+					$this->addMessageBag($this->validateString($client,'city'));
+					$this->addMessageBag($this->validateString($client,'country'));
+					$this->addMessageBag($this->validateString($client,'state'));
+					$this->addMessageBag($this->zipCode($client,'zip'));
 
-        }else{
+				}else if(strtolower($clientDetails['client_role']) == 'teacher'){
 
-            $return = $this->client->verifyClientId($id);
+					$this->addMessageBag($this->validateStringOptional($client,'street_address'));
+					$this->addMessageBag($this->validateStringOptional($client,'city'));
+					$this->addMessageBag($this->validateStringOptional($client,'country'));
+					$this->addMessageBag($this->validateStringOptional($client,'state'));
+					$this->addMessageBag($this->zipCodeOptional($client,'zip'));
 
-            if($return){
 
-                $clientDetails = $this->client->getClientDetails($id)->toArray();
-                $userDetails = $this->user->getUserDetail($return['user_id'],'Client')->toArray();
+				}else{
 
-                $user = input::only('username');
+					$this->addMessageBag($this->validateStringOptional($client,'street_address'));
+					$this->addMessageBag($this->validateStringOptional($client,'city'));
+					$this->addMessageBag($this->validateStringOptional($client,'country'));
+					$this->addMessageBag($this->validateStringOptional($client,'state'));
+					$this->addMessageBag($this->zipCodeOptional($client,'zip'));
+					
+					$this->addMessageBag($this->schoolCode($school,'school_code'));
+					$this->addMessageBag($this->validateString($school,'school_name'));
+					$this->addMessageBag($this->validateString($school,'school_state'));
+					$this->addMessageBag($this->validateString($school,'school_country'));
+					$this->addMessageBag($this->validateStringOptional($school,'school_street_address'));
+					$this->addMessageBag($this->validateStringOptional($school,'school_city'));
+					$this->addMessageBag($this->zipCodeOptional($school,'school_zip'));
+					$this->addMessageBag($this->validateString($school,'school_contact_name'));
+					$this->addMessageBag($this->checkContactNumber($school,'school_contact_number'));
 
-                $client = input::only('first_name','last_name','street_address',
-                    'city','country','zip','state');
+				}
 
-                $school = input::only('school_name','school_code','school_street_address','school_city',
-                    'school_state','school_country','school_zip','school_contact_name','school_contact_number');
+				$msg_bag = $this->getMessageBag();
 
-                $this->addMessageBag($this->username($user,'username'));
-                $this->addMessageBag($this->firstName($client,'first_name'));
-                $this->addMessageBag($this->lastName($client,'last_name'));
+				if($msg_bag){
 
+					return $this->respondWithError($msg_bag);
 
-                if(strtolower($clientDetails['client_role']) == 'parent'){
+				}else{
 
-                    $this->addMessageBag($this->validateString($client,'street_address'));
-                    $this->addMessageBag($this->validateString($client,'city'));
-                    $this->addMessageBag($this->validateString($client,'country'));
-                    $this->addMessageBag($this->validateString($client,'state'));
-                    $this->addMessageBag($this->zipCode($client,'zip'));
+					$checkUsername = $this->user->checkUsername($user['username'],'Client');
+					$user['name'] = $client['first_name'].$client['last_name'];
 
-                }else if(strtolower($clientDetails['client_role']) == 'teacher'){
+	
+				if(!($checkUsername)  || $checkUsername['user_id'] == $clientDetails['user_id'] ){
 
-                    $this->addMessageBag($this->validateStringOptional($client,'street_address'));
-                    $this->addMessageBag($this->validateStringOptional($client,'city'));
-                    $this->addMessageBag($this->validateStringOptional($client,'country'));
-                    $this->addMessageBag($this->validateStringOptional($client,'state'));
-                    $this->addMessageBag($this->zipCodeOptional($client,'zip'));
 
+					if(strtolower($clientDetails['client_role']) == 'parent' || 
+					   strtolower($clientDetails['client_role']) == 'teacher'){
 
-                }else{
+						$this->user->updateUsername($return['user_id'],$user);
+						$this->client->updateClientDetails($return['id'],$client);
 
-                    $this->addMessageBag($this->validateStringOptional($client,'street_address'));
-                    $this->addMessageBag($this->validateStringOptional($client,'city'));
-                    $this->addMessageBag($this->validateStringOptional($client,'country'));
-                    $this->addMessageBag($this->validateStringOptional($client,'state'));
-                    $this->addMessageBag($this->zipCodeOptional($client,'zip'));
+					}else{
 
-                    $this->addMessageBag($this->schoolCode($school,'school_code'));
-                    $this->addMessageBag($this->validateString($school,'school_name'));
-                    $this->addMessageBag($this->validateString($school,'school_state'));
-                    $this->addMessageBag($this->validateString($school,'school_country'));
-                    $this->addMessageBag($this->validateStringOptional($school,'school_street_address'));
-                    $this->addMessageBag($this->validateStringOptional($school,'school_city'));
-                    $this->addMessageBag($this->zipCodeOptional($school,'school_zip'));
-                    $this->addMessageBag($this->validateString($school,'school_contact_name'));
-                    $this->addMessageBag($this->checkContactNumber($school,'school_contact_number'));
+						$school_code = $this->school->checkSchoolNameExist($school);
+						$school_name = $this->school->getSchoolName($school['school_code']);
 
-                }
+						if(empty($school_name)){
 
-                $msg_bag = $this->getMessageBag();
+							return $this->respondErrorMessage(2105);
 
-                if($msg_bag){
+						}else if(isset($school_code) && $school['school_code'] != $school_code){
+							
+							return $this->respondErrorMessage(2202);
 
-                    return $this->respondWithError($msg_bag);
+						}else{
 
-                }else{
+						    $this->user->updateUsername($return['user_id'],$user);
+							$this->client->updateClientDetails($return['id'],$client);
+							$this->school->updateSchoolDetails($school);
 
-                    $checkUsername = $this->user->checkUsername($user['username'],'Client');
-                    $user['name'] = $client['first_name'].$client['last_name'];
+						}
 
+					}
 
-                    if(!($checkUsername)  || $checkUsername['user_id'] == $clientDetails['user_id'] ){
+					$clientDetails = $this->client->getClientDetails($id)->toArray();
+					$userDetails = $this->user->getUserDetail($return['user_id'],'Client')->toArray();
 
+					$response = $this->client->formResponse($userDetails,$clientDetails);
 
-                        if(strtolower($clientDetails['client_role']) == 'parent' ||
-                            strtolower($clientDetails['client_role']) == 'teacher'){
+					return $this->respondWithData($response);
 
-                            $this->user->updateUsername($return['user_id'],$user);
-                            $this->client->updateClientDetails($return['id'],$client);
+				}else{
 
-                        }else{
+					return $this->respondErrorMessage(2104);
 
-                            $school_code = $this->school->checkSchoolNameExist($school);
-                            $school_name = $this->school->getSchoolName($school['school_code']);
+				}
 
-                            if(empty($school_name)){
 
-                                return $this->respondErrorMessage(2105);
+				}
 
-                            }else if(isset($school_code) && $school['school_code'] != $school_code){
+			}else{
 
-                                return $this->respondErrorMessage(2202);
+				return $this->respondErrorMessage(2001);
+			}
 
-                            }else{
 
-                                $this->user->updateUsername($return['user_id'],$user);
-                                $this->client->updateClientDetails($return['id'],$client);
-                                $this->school->updateSchoolDetails($school);
 
-                            }
+			
+		}
 
-                        }
 
-                        $clientDetails = $this->client->getClientDetails($id)->toArray();
-                        $userDetails = $this->user->getUserDetail($return['user_id'],'Client')->toArray();
 
-                        $response = $this->client->formResponse($userDetails,$clientDetails);
 
-                        return $this->respondWithData($response);
+	}
 
-                    }else{
 
-                        return $this->respondErrorMessage(2104);
 
-                    }
+	public function store(){
 
 
-                }
+		$user_type = config('futureed.client');
 
-            }else{
+		$client = Input::only('first_name', 'last_name', 'client_role', 'school_code',
+			'street_address', 'city', 'state', 'country', 'zip');
 
-                return $this->respondErrorMessage(2001);
-            }
+		$user = Input::only('username', 'email', 'status');
 
+		$school = Input::only('school_name', 'school_address', 'school_city',
+			'school_state', 'school_country', 'school_zip',
+			'contact_name', 'contact_number');
 
+		$input = Input::only('callback_uri');
 
+		$error_msg = config('futureed-error.error_messages');
 
-        }
+		$this->addMessageBag($this->clientRole($client, 'client_role'));
+		$this->addMessageBag($this->firstName($client, 'first_name'));
+		$this->addMessageBag($this->lastName($client, 'last_name'));
+		$this->addMessageBag($this->email($user, 'email'));
+		$this->addMessageBag($this->username($user, 'username'));
+		$this->addMessageBag($this->validateString($input, 'callback_uri'));
+		$this->addMessageBag($this->validateStatus($user, 'status'));
 
 
+		if (strcasecmp($client['client_role'], config('futureed.parent')) == 0) {
 
+			$this->addMessageBag($this->validateString($client, 'street_address'));
+			$this->addMessageBag($this->validateString($client, 'city'));
+			$this->addMessageBag($this->validateString($client, 'state'));
+			$this->addMessageBag($this->validateString($client, 'country'));
+			$this->addMessageBag($this->zipCode($client, 'zip'));
 
-    }
 
+		} else if (strcasecmp($client['client_role'], config('futureed.teacher')) == 0) {
 
+			$this->addMessageBag($this->validateString($school, 'school_name'));
+			$this->addMessageBag($this->validateStringOptional($client, 'street_address'));
+			$this->addMessageBag($this->validateStringOptional($client, 'city'));
+			$this->addMessageBag($this->validateStringOptional($client, 'country'));
+			$this->addMessageBag($this->validateStringOptional($client, 'state'));
+			$this->addMessageBag($this->validateNumber($client, 'school_code'));
+			$this->addMessageBag($this->zipCodeOptional($client, 'zip'));
 
-    public function store(){
+		} else if (strcasecmp($client['client_role'], config('futureed.principal')) == 0) {
 
+			$this->addMessageBag($this->validateStringOptional($client, 'street_address'));
+			$this->addMessageBag($this->validateStringOptional($client, 'city'));
+			$this->addMessageBag($this->validateStringOptional($client, 'country'));
+			$this->addMessageBag($this->validateStringOptional($client, 'state'));
+			$this->addMessageBag($this->zipCodeOptional($client, 'zip'));
 
-        $user_type = config('futureed.client');
+			$this->addMessageBag($this->validateString($school, 'school_name'));
+			$this->addMessageBag($this->validateString($school, 'school_state'));
+			$this->addMessageBag($this->validateString($school, 'school_country'));
+			$this->addMessageBag($this->validateString($school, 'school_address'));
+			$this->addMessageBag($this->validateString($school, 'school_city'));
+			$this->addMessageBag($this->zipCode($school, 'school_zip'));
+			$this->addMessageBag($this->validateString($school, 'contact_name'));
+			$this->addMessageBag($this->checkContactNumber($school, 'contact_number'));
 
-        $client = Input::only('first_name', 'last_name', 'client_role', 'school_code',
-            'street_address', 'city', 'state', 'country', 'zip');
+		}
 
-        $user = Input::only('username', 'email','status');
 
-        $school = Input::only('school_name', 'school_address', 'school_city',
-            'school_state', 'school_country', 'school_zip',
-            'contact_name','contact_number');
+		$msg_bag = $this->getMessageBag();
 
-        $input = Input::only('callback_uri');
+		if ($msg_bag) {
 
-        $error_msg = config('futureed-error.error_messages');
+			return $this->respondWithError($msg_bag);
 
-        $this->addMessageBag($this->clientRole($client ,'client_role'));
-        $this->addMessageBag($this->firstName($client,'first_name'));
-        $this->addMessageBag($this->lastName($client,'last_name'));
-        $this->addMessageBag($this->email($user,'email'));
-        $this->addMessageBag($this->username($user,'username'));
-        $this->addMessageBag($this->validateString($input,'callback_uri'));
-        $this->addMessageBag($this->validateStatus($user,'status'));
+		} else {
 
+			$check_username = $this->user->checkUsername($user['username'], $user_type);
+			$check_email = $this->user->checkEmail($user['email'], $user_type);
+			$school['school_street_address'] = $school['school_address'];
 
-        if(strcasecmp($client['client_role'],config('futureed.parent')) == 0){
+			//for teacher get school_code via school name if exist
+			$check_school = $this->school->getSchoolCode($school['school_name']);
 
-            $this->addMessageBag($this->validateString($client,'street_address'));
-            $this->addMessageBag($this->validateString($client,'city'));
-            $this->addMessageBag($this->validateString($client,'state'));
-            $this->addMessageBag($this->validateString($client,'country'));
-            $this->addMessageBag($this->zipCode($client,'zip'));
+			//for principal check if school is unique
+			$school_exist = $this->school->checkSchoolNameExist($school);
 
 
-        }else if(strcasecmp($client['client_role'],config('futureed.teacher')) == 0){
+			if ($check_username) {
 
-            $this->addMessageBag($this->validateString($school,'school_name'));
-            $this->addMessageBag($this->validateStringOptional($client,'street_address'));
-            $this->addMessageBag($this->validateStringOptional($client,'city'));
-            $this->addMessageBag($this->validateStringOptional($client,'country'));
-            $this->addMessageBag($this->validateStringOptional($client,'state'));
-            $this->addMessageBag($this->validateNumber($client,'school_code'));
-            $this->addMessageBag($this->zipCodeOptional($client,'zip'));
+				return $this->respondErrorMessage(2104);
 
-        }else if(strcasecmp($client['client_role'],config('futureed.principal')) == 0){
+			} else if ($check_email) {
 
-            $this->addMessageBag($this->validateStringOptional($client,'street_address'));
-            $this->addMessageBag($this->validateStringOptional($client,'city'));
-            $this->addMessageBag($this->validateStringOptional($client,'country'));
-            $this->addMessageBag($this->validateStringOptional($client,'state'));
-            $this->addMessageBag($this->zipCodeOptional($client,'zip'));
+				return $this->respondErrorMessage(2200);
 
-            $this->addMessageBag($this->validateString($school,'school_name'));
-            $this->addMessageBag($this->validateString($school,'school_state'));
-            $this->addMessageBag($this->validateString($school,'school_country'));
-            $this->addMessageBag($this->validateString($school,'school_address'));
-            $this->addMessageBag($this->validateString($school,'school_city'));
-            $this->addMessageBag($this->zipCode($school,'school_zip'));
-            $this->addMessageBag($this->validateString($school,'contact_name'));
-            $this->addMessageBag($this->checkContactNumber($school,'contact_number'));
+			} else if (strcasecmp($client['client_role'], config('futureed.teacher')) == 0 && !($check_school)) {
 
-        }
+				return $this->respondErrorMessage(2105);
 
+			} else if (strcasecmp($client['client_role'], config('futureed.principal')) == 0 && $school_exist) {
 
-        $msg_bag = $this->getMessageBag();
+				return $this->respondErrorMessage(2202);
 
-        if($msg_bag){
+			} else {
 
-            return $this->respondWithError($msg_bag);
+				$user['first_name'] = $client['first_name'];
+				$user['last_name'] = $client['last_name'];
+				$user['user_type'] = $user_type;
+				$client['account_status'] = config('futureed.client_account_status_accepted');
 
-        }else{
+				//add user to db
+				$user_response = $this->user->addUser($user, $client);
 
-            $check_username = $this->user->checkUsername($user['username'],$user_type);
-            $check_email = $this->user->checkEmail($user['email'],$user_type);
-            $school['school_street_address'] = $school['school_address'];
+				$client['user_id'] = $user_response['id'];
 
-            //for teacher get school_code via school name if exist 
-            $check_school = $this->school->getSchoolCode($school['school_name']);
+				if (strcasecmp($client['client_role'], config('futureed.principal')) == 0) {
 
-            //for principal check if school is unique
-            $school_exist = $this->school->checkSchoolNameExist($school);
+					//add school to db
+					$school_response = $this->school->addSchool($school);
 
+					$client['school_code'] = $school_response;
 
-            if($check_username){
+				}
 
-                return $this->respondErrorMessage(2104);
+				$client_response = $this->client->addClient($client);
+				$data = $this->user->getUser($user_response['id'], 'Client');
+				$code = $this->user->getConfirmationCode($user_response['id']);
+				$data['client_role'] = $client['client_role'];
 
-            }else if( $check_email ){
+				// send email to user
+				$this->mail->sendClientRegister($data, $code['confirmation_code'], $input['callback_uri']);
 
-                return $this->respondErrorMessage(2200);
+				return $this->respondWithData(['id' => $client_response['id']
+				]);
 
-            }else if(strcasecmp($client['client_role'],config('futureed.teacher')) == 0  && !($check_school)){
 
-                return $this->respondErrorMessage(2105);
+			}
 
-            }else if(strcasecmp($client['client_role'],config('futureed.principal')) == 0 && $school_exist){
+		}
 
-                return $this->respondErrorMessage(2202);
-
-            }else{
-
-                $user['first_name'] = $client['first_name'];
-                $user['last_name'] = $client['last_name'];
-                $user['user_type']  = $user_type;
-                $client['account_status'] = config('futureed.client_account_status_accepted');
-
-                //add user to db
-                $user_response = $this->user->addUser($user,$client);
-
-                $client['user_id'] = $user_response['id'];
-
-                if(strcasecmp($client['client_role'],config('futureed.principal')) == 0){
-
-                    //add school to db
-                    $school_response = $this->school->addSchool($school);
-
-                    $client['school_code'] = $school_response;
-
-                }
-
-                $client_response = $this->client->addClient($client);
-                $data = $this->user->getUser($user_response['id'],'Client');
-                $code = $this->user->getConfirmationCode($user_response['id']);
-                $data['client_role'] = $client['client_role'];
-
-                // send email to user
-                $this->mail->sendClientRegister($data,$code['confirmation_code'],$input['callback_uri']);
-
-                return $this->respondWithData(['id' => $client_response['id']
-                ]);
-
-
-            }
-
-        }
-
-    }
+	}
 
     public function destroy($id){
 
-        $user_type = config('futureed.client');
+		$user_type = config('futureed.client');
 
 
-        $this->addMessageBag($this->validateVarNumber($id));
+		$this->addMessageBag($this->validateVarNumber($id));
 
-        $msg_bag = $this->getMessageBag();
+		$msg_bag = $this->getMessageBag();
 
-        if($msg_bag){
+		if ($msg_bag) {
 
-            return $this->respondWithError($msg_bag);
+			return $this->respondWithError($msg_bag);
 
-        }
+		}
 
-        $return = $this->client->getClientDetails($id);
+		$return = $this->client->getClientDetails($id);
 
-        if(!$return){
+		if (!$return) {
 
-            return $this->respondErrorMessage(2001);
-        }
+			return $this->respondErrorMessage(2001);
+		}
 
-        //check principal if assign to school
-        if($return['school_code'] && $return['client_role']=== config('futureed.principal')){
+		//check principal if assign to school
+		if ($return['school_code'] && $return['client_role'] === config('futureed.principal')) {
 
-            return $this->respondErrorMessage(2121);
+			return $this->respondErrorMessage(2121);
 
-        }
-        //check relation of teacher to classroom
-        $teacher_classroom = $this->client->getClassroom($id);
+		}
+		//check relation of teacher to classroom
+		$teacher_classroom = $this->client->getClassroom($id);
 
-        if( $teacher_classroom['classroom']->toArray() && $return['client_role']=== config('futureed.teacher')){
+		if ($teacher_classroom['classroom']->toArray() && $return['client_role'] === config('futureed.teacher')) {
 
-            return $this->respondErrorMessage(2122);
-        }
+			return $this->respondErrorMessage(2122);
+		}
 
-        //check parent to student
-        $parent_student = $this->client->getStudent($id);
+		//check parent to student
+		$parent_student = $this->client->getStudent($id);
 
-        if($parent_student['student']->toArray() && $return['client_role']=== config('futureed.parent')){
+		if ($parent_student['student']->toArray() && $return['client_role'] === config('futureed.parent')) {
 
-            return $this->respondErrorMessage(2123);
+			return $this->respondErrorMessage(2123);
 
-        }
+		}
 
-        return $this->respondWithData([$this->client->deleteClient($id)]);
+		return $this->respondWithData([$this->client->deleteClient($id)]);
 
 
 

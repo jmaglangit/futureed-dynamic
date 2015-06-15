@@ -40,4 +40,9 @@ class ClientDiscount extends Model {
         return $query->where('client_id',$client_id);
     }
 
+	public function scopeClientId($query, $client_id){
+
+		return $query->where('client_id', $client_id);
+	}
+
 }

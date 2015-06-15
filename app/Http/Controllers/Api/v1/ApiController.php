@@ -4,6 +4,7 @@ use FutureEd\Http\Controllers\Api\Traits\AccessTokenTrait;
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
+use FutureEd\Models\Repository\ClientDiscount\ClientDiscountRepositoryInterface;
 use FutureEd\Models\Repository\Country\CountryRepositoryInterface;
 use FutureEd\Models\Repository\School\SchoolRepositoryInterface;
 use FutureEd\Models\Repository\Validator\ValidatorRepositoryInterface;
@@ -38,38 +39,41 @@ class ApiController extends Controller {
     private $status_code = Response::HTTP_OK;
     private $header = [];
 
-    public function __construct(
-            UserServices $user,
-            StudentServices $student,
-            SchoolServices $school,
-            PasswordImageServices $password_image,
-            TokenServices $token,
-            MailServices $mailServices,
-            ClientServices $client,
-            GradeServices $grade,
-            AvatarServices $avatar,
-            CodeGeneratorServices $code,
-            AdminServices $admin,
-            PasswordServices $password,
-            ValidatorRepositoryInterface $validatorRepositoryInterface,
-            SchoolRepositoryInterface $schoolRepositoryInterface,
-            CountryRepositoryInterface $countryRepositoryInterface){
-        $this->user = $user;
-        $this->student = $student;
-        $this->school = $school;
-        $this->password_image = $password_image;
-        $this->token = $token;
-        $this->mail = $mailServices;
-        $this->client = $client;
-        $this->grade = $grade;
-        $this->avatar = $avatar;
-        $this->code = $code;
-        $this->admin = $admin;
-        $this->password = $password;
-        $this->valid = $validatorRepositoryInterface;
-        $this->school = $schoolRepositoryInterface;
-        $this->country = $countryRepositoryInterface;
-    }
+	public function __construct(
+		UserServices $user,
+		StudentServices $student,
+		SchoolServices $school,
+		PasswordImageServices $password_image,
+		TokenServices $token,
+		MailServices $mailServices,
+		ClientServices $client,
+		GradeServices $grade,
+		AvatarServices $avatar,
+		CodeGeneratorServices $code,
+		AdminServices $admin,
+		PasswordServices $password,
+		ValidatorRepositoryInterface $validatorRepositoryInterface,
+		SchoolRepositoryInterface $schoolRepositoryInterface,
+		CountryRepositoryInterface $countryRepositoryInterface,
+		ClientDiscountRepositoryInterface $clientDiscountRepositoryInterface)
+	{
+		$this->user = $user;
+		$this->student = $student;
+		$this->school = $school;
+		$this->password_image = $password_image;
+		$this->token = $token;
+		$this->mail = $mailServices;
+		$this->client = $client;
+		$this->grade = $grade;
+		$this->avatar = $avatar;
+		$this->code = $code;
+		$this->admin = $admin;
+		$this->password = $password;
+		$this->valid = $validatorRepositoryInterface;
+		$this->school = $schoolRepositoryInterface;
+		$this->country = $countryRepositoryInterface;
+		$this->client_discount = $clientDiscountRepositoryInterface;
+	}
     
     public function index(){
         return [
