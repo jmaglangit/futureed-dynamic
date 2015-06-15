@@ -48,6 +48,7 @@ return [
 		2033 => 'Username/Email or password is invalid',
 		2034 => 'Username/Email or password is invalid. Have you verified your email? Please check your inbox. Your account may have been locked, please click on forgot password to reset your password.',
 		2035 => 'Account has been locked. Please click on forgot password to reset your password.',
+		2036 => 'Client has active transaction.',
 
 		2100 => 'Reset code is invalid.',
 		2101 => 'Password image is invalid.',

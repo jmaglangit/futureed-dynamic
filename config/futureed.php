@@ -59,6 +59,7 @@ return [
 	'client_account_status_accepted' => 'Accepted',
 	'client_account_status_rejected' => 'Rejected',
 
+
 	//Default country
 	'default_country' => 840, //United States
 
@@ -73,6 +74,12 @@ return [
 
 	//user Status
 	'user_disabled' => 'Disabled',
-	'user_enabled' => 'Enabled'
+	'user_enabled' => 'Enabled',
+
+    //order no. zero fill constants
+    'client_id_zero_fill' => 4,
+    'order_id_zero_fill' => 6,
+    'invoice_id_zero_fill' => 10
+
 
 ];

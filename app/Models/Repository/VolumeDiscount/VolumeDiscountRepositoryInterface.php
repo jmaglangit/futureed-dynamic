@@ -8,4 +8,5 @@ interface VolumeDiscountRepositoryInterface {
     public function updateVolumeDiscount($id,$VolumeDiscount);
     public function addVolumeDiscount($VolumeDiscount);
     public function deleteVolumeDiscount($id);
+    public function getRoundedOffDiscount($min_seats);
 }

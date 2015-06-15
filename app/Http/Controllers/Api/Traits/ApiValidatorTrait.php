@@ -770,4 +770,50 @@ trait ApiValidatorTrait {
         }
     }
 
+	public function validateAlpha($input,$date_now){
+
+		$validator = Validator::make(
+			[
+				"$date_now" => $input["$date_now"],
+			],
+			[
+				"$date_now" => 'required|alpha'
+			]
+		);
+
+		if($validator->fails()){
+
+			$validator_msg = $validator->messages()->toArray();
+
+			return $this->setErrorCode(1023)
+				->setField($date_now)
+				->setMessage($validator_msg["$date_now"][0])
+				->errorMessage();
+		}
+
+	}
+
+	public function validateAlphaOptional($input,$date_now){
+
+		$validator = Validator::make(
+			[
+				"$date_now" => $input["$date_now"],
+			],
+			[
+				"$date_now" => 'alpha'
+			]
+		);
+
+		if($validator->fails()){
+
+			$validator_msg = $validator->messages()->toArray();
+
+			return $this->setErrorCode(1023)
+				->setField($date_now)
+				->setMessage($validator_msg["$date_now"][0])
+				->errorMessage();
+		}
+
+	}
+
 }
