@@ -234,17 +234,18 @@ class ClientRepository implements ClientRepositoryInterface
         if (isset($criteria['school_code'])) {
             $clients = $clients->schoolCode($criteria['school_code']);
         }
+
         //accepts comma separated value. e.g client_role=Parent,Teacher
         if (isset($criteria['client_role'])) {
+
             $client_role = explode(',',$criteria['client_role'] );
-            $clients = $clients->clientRoleIn($client_role);
+
+            $clients = $clients->clientRole($client_role);
         }
 
         if (isset($criteria['name'])) {
             $clients = $clients->name($criteria['name']);
         }
-
-
 
         $clients = $clients->with('user')->orderBy('created_at', 'desc');
 

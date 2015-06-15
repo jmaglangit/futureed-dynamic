@@ -85,7 +85,9 @@ class Client extends Model {
 
     public function scopeRole($query, $role) {
 
-        return $query->whereClientRole($role);
+		$roles = (array)$role;
+
+		return $query->whereIn('client_role', $roles);
 
     }
 
@@ -116,9 +118,9 @@ class Client extends Model {
         });
     }
 
-    public function scopeUserId($query, $user_id){
-
-		return $query->where('user_id',$user_id);
+	public function scopeUserId($query, $user_id)
+	{
+		return $query->where('user_id', $user_id);
 	}
 
     public function scopeSchoolCode($query,$school_code){
