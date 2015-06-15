@@ -49,9 +49,9 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface{
         ];
     }
     
-    public function getClassStudent($user_id){
+    public function getClassStudent($student_id){
         
-        return ClassStudent::where('user_id',$user_id)->pluck('user_id');
+        return ClassStudent::where('student_id',$student_id)->pluck('student_id');
     }
     
     public function addClassStudent($class_student){

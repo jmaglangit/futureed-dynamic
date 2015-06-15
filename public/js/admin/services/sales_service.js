@@ -11,13 +11,7 @@ function salesService($http){
 	salesAPI.addPrice = function(data){
 		return $http({
 			method 	: Constants.METHOD_POST
-			, data 	: 
-				{
-					  name 			: data.name
-					, price 		: data.price
-					, description 	: data.description
-					, status 		: data.status
-				}
+			, data 	: data
 			, url 	: salesApiUrl + 'subscription'
 		});
 	}

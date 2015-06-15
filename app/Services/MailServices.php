@@ -291,29 +291,25 @@ class MailServices {
 
     }
 
-    public function sendMailInviteTeacher($user,$current,$url){
+	public function sendMailInviteTeacher($user, $current, $url)
+	{
 
+		$template = 'emails.client.invite-teacher';
 
+		$content = [
+			'view' => $template,
+			'data' => [
+				'name' => $user['name'],
+				'current_user' => $current['first_name'] . " " . $current['last_name'],
+				'link' => $url['callback_uri'] . '/' . $current['id'],
+			],
+			'mail_recipient' => $user['email'],
+			'mail_recipient_name' => $user['name'],
+			'subject' => 'You have been invited to join Future Lesson!'
+		];
 
-        $template = 'emails.client.invite-teacher';
-
-        $content = [
-            'view' => $template,
-            'data' => [
-                'name' => $user['name'],
-                'current_user' => $current['first_name']." ".$current['last_name'],
-                'link' => $url['callback_uri']
-            ],
-            'mail_recipient' => $user['email'],
-            'mail_recipient_name' => $user['name' ],
-            'subject' => 'You have been invited to join Future Lesson!'
-        ];
-
-        $this->sendMail($content);
-
-
-
-    }
+		$this->sendMail($content);
+	}
 
     public function sendExistingStudentRegister($data)
     {
@@ -358,6 +354,54 @@ class MailServices {
 
         $this->sendMail($content);
     }
+
+	/**
+	 * Send email teacher registration confirmation.
+	 * @param $data
+	 */
+	public function sendTeacherRegistration($data){
+
+		$code = $this->user->getConfirmationCode($data->user->id);
+
+		$contents = [
+			'view' => 'emails.client.register-teacher-email',
+			'data' => [
+				'name' => $data->user->username,
+				'code' => $code->confirmation_code,
+				'link' => $data->callback_uri,
+			],
+			'mail_recipient' => $data->user->email,
+			'mail_recipient_name' => $data->user->username,
+			'subject' => 'Welcome to Future Lesson!'
+
+		];
+
+		$this->sendMail($contents);
+	}
+
+	/**
+	 * Send email student with invitation code.
+	 * @param $data
+	 */
+
+	public function sendParentAddStudent($data,$client_details,$code){
+
+
+		$contents = [
+			'view' => 'emails.student.parent-added-student',
+			'data' => [
+				'name' => $data['name'],
+				'code' => $code,
+				'parent_name' => $client_details['first_name'].' '.$client_details['last_name'],
+			],
+			'mail_recipient' => $data['email'],
+			'mail_recipient_name' => $data['username'],
+			'subject' => 'Welcome to Future Lesson!'
+
+		];
+
+		$this->sendMail($contents);
+	}
 
 
 }

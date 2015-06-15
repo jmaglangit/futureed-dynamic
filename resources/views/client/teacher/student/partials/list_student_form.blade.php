@@ -24,7 +24,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-xs-2 control-label">email</label>
+				<label class="col-xs-2 control-label">Email</label>
 				<div class="col-xs-5">
 					{!! Form::text('search_order', '',['class' => 'form-control', 'ng-model' => 'payment.search_order', 'placeholder' => 'Email']) !!}
 				</div>

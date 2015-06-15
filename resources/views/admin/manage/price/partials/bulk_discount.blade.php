@@ -90,7 +90,7 @@
 
 	            <div class="col-xs-7 col-xs-offset-1">
                 		<div class="btn-container">
-                			{!! Form::button('Edit'
+                			{!! Form::button('Save'
                 				, array(
                 					'class' => 'btn btn-blue btn-medium'
                 					, 'ng-click' => "sale.editBulk()"

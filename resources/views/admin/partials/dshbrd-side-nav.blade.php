@@ -49,6 +49,9 @@
             <li>
                 <a href="{!! route('admin.manage.price.index') !!}" ng-init="sale.setDiscountsActive()"><span><i class="fa fa-dollar"></i>Price & Discounts</span></a>
             </li>
+            <li>
+                <a href="{!! route('admin.manage.invoice.index') !!}" ng-init="sale.setActive()"><span><i class="fa fa-file-text-o"></i>Invoice</span></a>
+            </li>
         </ul>
 
         <li data-toggle="collapse" data-target="#master" class="collapsed side-nav-li" ng-class="{'active' : admincon.active_announcement}">

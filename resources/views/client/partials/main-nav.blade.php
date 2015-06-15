@@ -16,7 +16,7 @@
           <!-- Collect the nav links, forms, and other content for toggling -->
           <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
-            <li class="dropdown">
+            <li class="dropdown" ng-if="user.role == 'Teacher'">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Teacher <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 <li class="">
@@ -27,7 +27,7 @@
                 </li>
               </ul>
             </li>
-            <li class="dropdown">
+            <li class="dropdown" ng-if="user.role == 'Principal'">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Principal <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 <li class="">
@@ -41,9 +41,12 @@
                 </li>
               </ul>
             </li>
-            <li class="dropdown">
+            <li class="dropdown" ng-if="user.role == 'Parent'">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Parent <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
+                <li class="">
+                  <a href="{!! route('client.parent.student.index') !!}">Student</a>
+                </li>
                 <li class="">
                   <a href="{!! route('client.parent.payment.index') !!}">Payment</a>
                 </li>

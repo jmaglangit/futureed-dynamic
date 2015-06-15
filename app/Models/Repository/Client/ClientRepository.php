@@ -3,7 +3,8 @@
 use FutureEd\Models\Core\Client;
 use FutureEd\Models\Core\Grade;
 use FutureEd\Models\Core\ParentStudent;
-
+use FutureEd\Models\Core\User;
+use League\Flysystem\Exception;
 
 
 class ClientRepository implements ClientRepositoryInterface
@@ -12,23 +13,31 @@ class ClientRepository implements ClientRepositoryInterface
     public function getClient($user_id, $role)
     {
 
-        return Client::select(
-            'id',
-            'user_id',
-            'first_name',
-            'last_name',
-            'client_role',
-            'street_address',
-            'city',
-            'state',
-            'country',
-            'zip',
-            'account_status'
-        )
-            ->where('user_id', '=', $user_id)
-            ->where('client_role', '=', $role)->first();
+		return Client::with('school')
+			->userid($user_id)
+			->role($role)->first();
 
     }
+
+    /**
+     * Gets teacher information for registration.
+     * @param $id
+     * @param $registration_token
+     * @return mixed
+     */
+    public function  getTeacher($id, $registration_token){
+
+        $client = new Client();
+
+        return $client->with('user')
+            ->id($id)
+            ->role(config('futureed.teacher'))
+            ->registrationtoken($registration_token)
+            ->get();
+
+    }
+
+
 
     public function checkClient($id, $role)
     {
@@ -57,6 +66,7 @@ class ClientRepository implements ClientRepositoryInterface
                 'street_address' => $client['street_address'],
                 'city' => $client['city'],
                 'state' => $client['state'],
+                'country_id' => ((isset($client['country_id'])) ? $client['country_id'] : 0),
                 'country' => $client['country'],
                 'zip' => $client['zip'],
                 'account_status' => (isset($client['account_status'])) ? $client['account_status'] : config('futureed.client_account_status_pending'),
@@ -117,6 +127,44 @@ class ClientRepository implements ClientRepositoryInterface
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
+    }
+
+    /**
+     * Updates client and it's relationships.
+     * @param $id
+     * @param $data
+     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|\Illuminate\Support\Collection|null|string|static
+     */
+    public function updateClient($id,$data){
+
+        try{
+
+            $client = Client::id($id)->role(config('futureed.teacher'))->pluck('user_id');
+
+            //return if no record found.
+            if(!$client){
+
+                return false;
+            }
+
+            $data['password'] =  (!isset($data['password'])) ?: sha1($data['password']);
+
+            //TODO: to be updated through relationships.
+            $user = User::find($client)->update($data);
+
+            $client = Client::find($id)->update($data);
+
+            if($user && $client){
+
+                return Client::with('user')->find($id);
+            }
+
+
+        }catch (Exception $e){
+
+            return $e->getMessage();
+        }
+
     }
 
 
@@ -182,10 +230,21 @@ class ClientRepository implements ClientRepositoryInterface
 
         $clients = new Client();
 
+
+        if (isset($criteria['school_code'])) {
+            $clients = $clients->schoolCode($criteria['school_code']);
+        }
+
+        //accepts comma separated value. e.g client_role=Parent,Teacher
+        if (isset($criteria['client_role'])) {
+
+            $client_role = explode(',',$criteria['client_role'] );
+
+            $clients = $clients->clientRole($client_role);
+        }
+
         if (isset($criteria['name'])) {
-
             $clients = $clients->name($criteria['name']);
-
         }
 
         $clients = $clients->with('user')->orderBy('created_at', 'desc');
@@ -326,7 +385,5 @@ class ClientRepository implements ClientRepositoryInterface
         }
 
         return $clients;
-
-
     }
 }

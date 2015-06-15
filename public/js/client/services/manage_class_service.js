@@ -11,9 +11,18 @@ function manageClassService($http){
 		return $http({
 			method : Constants.METHOD_GET
 			, url  : classApiUrl + 'classroom?name=' + search.name
+				+ '&client_id=' + search.client_id
 				+ '&grade_id=' + search.grade_id
 				+ '&limit=' + table.size
 				+ '&offset=' + table.offset
+		});
+	}
+
+	manageClassApi.studentList = function(search) {
+		return $http({
+			method : Constants.METHOD_GET
+			, url  : classApiUrl + 'classroom/' + search.id + '/students?name=' + search.name
+				+ '&email=' + search.email
 		});
 	}
 
@@ -29,6 +38,22 @@ function manageClassService($http){
 			method : Constants.METHOD_PUT
 			, data : {name : data.name}
 			, url  : classApiUrl + 'classroom/' + data.id
+		});
+	}
+
+	manageClassApi.addExistingStudent = function(data) {
+		return $http({
+			method : Constants.METHOD_POST
+			, data : data
+			, url  : classApiUrl + 'class-student/add-existing-student'
+		});
+	}
+
+	manageClassApi.addNewStudent = function(data) {
+		return $http({
+			method : Constants.METHOD_POST
+			, data : data
+			, url  : classApiUrl + 'class-student/add-new-student'
 		});
 	}
 

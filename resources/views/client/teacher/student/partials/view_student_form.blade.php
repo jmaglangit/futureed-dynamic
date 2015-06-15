@@ -1,4 +1,4 @@
-<div ng-if="student.view">
+<div>
 	<div class="content-title">
 		<div class="title-main-content" ng-if="!student.edit">
 			<span>View Student</span>
@@ -9,7 +9,7 @@
 	</div>
 	{!! Form::open(['class' => 'form-horizontal', 'id' => 'student_form']) !!}
 	<div class="container">
-		<div class="col-xs-12 margin-30-top">
+		<div class="col-xs-10 col-xs-offset-1 margin-30-top">
 			<fieldset>
 				<legend class="legend-name-mid">
 					User Credentials

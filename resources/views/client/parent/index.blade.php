@@ -16,6 +16,5 @@
 @stop
 	
 @section('scripts')
-	{!! Html::script('/js/client/controllers/manage_teacher_controller.js')!!}
-	{!! Html::script('/js/client/services/manage_teacher_service.js')!!}
+
 @stop
