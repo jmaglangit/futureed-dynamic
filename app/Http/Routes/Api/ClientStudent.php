@@ -10,3 +10,11 @@
 				'as' => 'parent-student.confirm.student']);
 
 		});
+
+		Routes::group(['prefix' => '/client/manage'], function()
+		{
+			Routes::resource('/student','Api\v1\ClientStudentController',
+				['except' => ['create','edit']]);
+
+		});
+
