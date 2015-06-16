@@ -56,6 +56,7 @@ class MailServices {
 
         $user_type = config('futureed.student');
 
+
         //get user information for the email
         $user_detail = $this->user->getUser($user_id,$user_type);
 
@@ -70,7 +71,7 @@ class MailServices {
             ],
             'mail_recipient' => $user_detail['email'],
             'mail_recipient_name' => $user_detail['first_name' ] . $user_detail['last_name'],
-            'subject' => 'Welcome to Future Lesson!'
+            'subject' => config('futureed.subject_register')
         ];
         $this->sendMail($content);
     }
@@ -94,12 +95,12 @@ class MailServices {
     public function sendClientRegister($data,$code,$url,$send = 0){
 
         if($send == 1){
-            $subject = config('futureed.subject_reg_resend');
+            $subject = str_replace('{user}',$data->client_role,config('futureed.subject_reg_resend'));
 
             $template = 'emails.client.registration-email';
 
         }else{
-            $subject = config('futureed.subject_register');
+            $subject = str_replace('{user}',$data->client_role,config('futureed.subject_register'));
 
             $template = ($data['client_role'] == 'Parent') ? 'emails.client.register-parent-email' : 'emails.client.register-principal-email';
         }
@@ -125,7 +126,7 @@ class MailServices {
         $content = [
             'view' => 'emails.student.forget-password',
             'data' => [
-                'name' => $data['username'],
+                'name' => $data['name'],
                 'code' => $code,
                 'link' => $url . '?email=' . $data['email'],
             ],
@@ -143,7 +144,7 @@ class MailServices {
         $content = [
             'view' => 'emails.client.forget-password',
             'data' => [
-                'name' => $data['username'],
+                'name' => $data['name'],
                 'code' => $code,
                 'link' => $url . '?email=' . $data['email'],
             ],
@@ -160,7 +161,7 @@ class MailServices {
         $content = [
             'view' => 'emails.admin.forget-password',
             'data' => [
-                'name' => $data['username'],
+                'name' => $data['name'],
                 'code' => $code,
                 'link' => $url . '?email=' . $data['email'],
             ],
@@ -179,13 +180,11 @@ class MailServices {
        
         if($send == 0){
             
-            $subject = config('futureed.subject_change_email');
+            $subject = str_replace('{user}',config('futureed.student'),config('futureed.subject_change_email'));
 
         }else{
 
-            $subject = config('futureed.subject_email_resend');
-
-
+            $subject = str_replace('{user}',config('futureed.student'),config('futureed.subject_email_resend'));
         }
         
         $content = [
@@ -248,22 +247,24 @@ class MailServices {
 
     public function sendAdminChangeEmail($data,$url){
 
-        $template = 'emails.admin.change-email';
+		$template = 'emails.admin.change-email';
 
-        $content = [
-            'view' => $template,
-            'data' => [
-                'name' => $data['name'],
-                'link' => $url,
-                'email' => $data['email'],
-                'new_email' => $data['new_email']
-            ],
-            'mail_recipient' => $data['email'],
-            'mail_recipient_name' => $data['name' ],
-            'subject' => 'Change Email'
-        ];
+		$subject = str_replace('{user}', config('futureed.admin'), config('futureed.subject_change_email'));
 
-        $this->sendMail($content);
+		$content = [
+			'view' => $template,
+			'data' => [
+				'name' => $data['name'],
+				'link' => $url,
+				'email' => $data['email'],
+				'new_email' => $data['new_email']
+			],
+			'mail_recipient' => $data['email'],
+			'mail_recipient_name' => $data['name'],
+			'subject' => $subject
+		];
+
+		$this->sendMail($content);
 
 
 
@@ -272,20 +273,22 @@ class MailServices {
 
     public function sendAdminChangePassword($data,$new_password){
 
-        $template = 'emails.admin.change-password';
+		$template = 'emails.admin.change-password';
 
-        $content = [
-            'view' => $template,
-            'data' => [
-                'name' => $data['name'],
-                'new_password' => $new_password
-            ],
-            'mail_recipient' => $data['email'],
-            'mail_recipient_name' => $data['name' ],
-            'subject' => 'Change Password'
-        ];
+		$subject = str_replace('{user}', $data->admin_role, config('futureed.subject_change_password'));
 
-        $this->sendMail($content);
+		$content = [
+			'view' => $template,
+			'data' => [
+				'name' => $data->user->name,
+				'new_password' => $new_password
+			],
+			'mail_recipient' => $data->user->email,
+			'mail_recipient_name' => $data->user->name,
+			'subject' => $subject
+		];
+
+		$this->sendMail($content);
 
 
 
@@ -366,12 +369,12 @@ class MailServices {
 		$contents = [
 			'view' => 'emails.client.register-teacher-email',
 			'data' => [
-				'name' => $data->user->username,
+				'name' => $data->user->name,
 				'code' => $code->confirmation_code,
 				'link' => $data->callback_uri,
 			],
 			'mail_recipient' => $data->user->email,
-			'mail_recipient_name' => $data->user->username,
+			'mail_recipient_name' => $data->user->name,
 			'subject' => 'Welcome to Future Lesson!'
 
 		];

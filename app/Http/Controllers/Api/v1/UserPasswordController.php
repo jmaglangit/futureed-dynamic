@@ -86,19 +86,28 @@ class UserPasswordController extends UserController {
                       
                     }elseif(strcasecmp($input['user_type'],config('futureed.client')) == 0){
 
-                      $client_id = $this->client->getClientId($return['user_id']);
-                      $client = $this->client->getClientDetails($client_id);
-
-                      if($client['account_status'] != config('futureed.client_account_status_accepted')){
-
-                        return $this->respondErrorMessage(2013);
+						$client_id = $this->client->getClientId($return['user_id']);
+						$client = $this->client->getClientDetails($client_id);
 
 
-                      }
+						if ($client['account_status'] != config('futureed.client_account_status_accepted')) {
 
-                      $this->mail->sendClientMailResetPassword($userDetails,$code['confirmation_code'],$input['callback_uri'],$subject);
+							return $this->respondErrorMessage(2013);
+						}
+
+						//update subject
+						$subject = str_replace('{user}',$client->client_role,$subject);
+
+						$this->mail->sendClientMailResetPassword($userDetails, $code['confirmation_code'], $input['callback_uri'], $subject);
 
                     }else{
+
+						$admin_id = $this->admin->getAdminId($return['user_id']);
+
+						$admin = $this->admin->getAdmin($admin_id);
+
+						//update subject
+						$subject = str_replace('{user}',$admin->admin_role,$subject);
 
                       $this->mail->sendAdminMailResetPassword($userDetails,$code['confirmation_code'],$input['callback_uri'],$subject);
 
