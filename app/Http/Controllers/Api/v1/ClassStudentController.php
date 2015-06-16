@@ -35,6 +35,12 @@ class ClassStudentController extends ApiController {
         $this->user = $userServices;
     }
 
+    /**
+     * Add new student via teacher inputting the details.
+     * @param ClassStudentRequest $request
+     * @return mixed
+     *
+     */
     public function addNewStudent(ClassStudentRequest $request)
     {
         $student = $request->only(
@@ -129,6 +135,12 @@ class ClassStudentController extends ApiController {
 
     }
 
+    /**
+     * Add existing student in a class via email.
+     * @param ClassStudentRequest $request
+     * @return mixed
+     *
+     */
     public function addExistingStudent(ClassStudentRequest $request)
     {
         $data = $request->all();
