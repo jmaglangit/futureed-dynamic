@@ -11,10 +11,24 @@ use Illuminate\Mail\Mailer;
 use Illuminate\Support\Facades\Mail;
 use League\Flysystem\Exception;
 class MailServices {
-    public function __construct(Mailer $mailer, UserServices $user, ClientServices $client){
-        $this->mailer = $mailer;
-        $this->user = $user;
-        $this->client = $client;
+
+	/**
+	 * @param Mailer $mailer
+	 * @param UserServices $user
+	 * @param ClientServices $client
+	 */
+    public function __construct(
+		Mailer $mailer,
+		UserServices $user,
+		ClientServices $client,
+		RegistrationTokenServices $registrationTokenServices
+
+	)
+	{
+		$this->mailer = $mailer;
+		$this->user = $user;
+		$this->client = $client;
+		$this->reg_token = $registrationTokenServices;
     }
     /*
      * $contents
@@ -299,12 +313,20 @@ class MailServices {
 
 		$template = 'emails.client.invite-teacher';
 
+		//generate registration_token
+		$token = $this->reg_token->getRegistrationToken($user['email']);
+
+
+		//add token to user
+		$this->user->addRegistrationToken($user['user_id'],$token);
+
+
 		$content = [
 			'view' => $template,
 			'data' => [
 				'name' => $user['name'],
 				'current_user' => $current['first_name'] . " " . $current['last_name'],
-				'link' => $url['callback_uri'] . '/' . $current['id'],
+				'link' => $url['callback_uri'] . '/' . $current['id']. '?registration_token='. $token,
 			],
 			'mail_recipient' => $user['email'],
 			'mail_recipient_name' => $user['name'],
