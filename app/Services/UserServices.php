@@ -467,6 +467,11 @@ class UserServices {
         $this->users->updateStatus($id,$status);
     }
 
+	public function addRegistrationToken($id,$registration_token){
+
+		$this->users->addRegistrationToken($id,$registration_token);
+	}
+
     
 
 }
