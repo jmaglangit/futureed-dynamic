@@ -111,6 +111,7 @@ class ClientTeacherController extends ApiController {
 
 		//get user id
 		$user_id = $this->user->checkUserName($user['username'], $user['user_type']);
+		$user['user_id'] = $user_id;
 
 		//assign user id to client
 		$client['user_id'] = $user_id;
