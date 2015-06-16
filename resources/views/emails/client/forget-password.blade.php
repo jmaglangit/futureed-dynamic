@@ -4,11 +4,14 @@
     <meta charset="utf-8">
 </head>
 <body>
-<h2>Hello {{ $name  }}</h2>
+<div>Hello {{ $name  }},</div><br/>
 
 <div>
 	<div>Link to Future Lessons: <a href="{{ $link }}">Confirm Code</a></div>
-    <div>Code : {{ $code  }}</div>
+    <div>Code : {{ $code  }}</div><br/>
+
+    <div>Regards,</div><br/>
+    <div>Admin</div>
     
 </div>
 </body>
