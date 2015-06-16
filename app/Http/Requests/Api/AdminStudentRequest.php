@@ -44,7 +44,7 @@ class AdminStudentRequest extends ApiRequest {
                     'birth_date' => 'required|date_format:Ymd|before:-13 year',
                     'city' => 'required|string',
                     'state' => 'required|string',
-                    'country' => 'required|string',
+                    'country' => 'string',
 					'country_id'=> 'required|integer',
                     'school_code' => 'required|integer',
                     'grade_code' => 'required|integer',
@@ -61,7 +61,7 @@ class AdminStudentRequest extends ApiRequest {
                     'birth_date' => 'required|date_format:Ymd|before:-13 year',
                     'city' => 'required|string',
                     'state' => 'required|string',
-                    'country' => 'required|string',
+                    'country' => 'string',
 					'country_id'=> 'required|integer',
                     'school_code' => 'required|integer',
                     'grade_code' => 'required|integer'];
