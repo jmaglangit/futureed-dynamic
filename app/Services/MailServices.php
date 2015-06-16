@@ -324,7 +324,6 @@ class MailServices {
         $content = [
             'view' => 'emails.student.existing-student-registration-email',
             'data' => [ 'name'         => $user_detail['name'],
-                        'code'         => $data['verification_code'],
                         'class_name'   => $data['class_name'],
                         'teacher_name' => $data['teacher_name']
             ],
@@ -347,7 +346,6 @@ class MailServices {
             'data' => [
                 'student_name' => $user_detail['name'],
                 'teacher_name' => $data['teacher_name'],
-                'code' => $data['verification_code'],
                 'link' => $data['url']
             ],
             'mail_recipient' => $user_detail['email'],
