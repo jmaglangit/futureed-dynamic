@@ -31,8 +31,10 @@ function ManagePrincipalPaymentController($scope, managePrincipalPaymentService,
 		}
 	}
 
-	self.searchFnc = function() {
+	self.searchFnc = function(event) {
 		self.listPayments();
+		event = getEvent(event);
+		event.preventDefault();
 	}
 
 	self.clear = function() {

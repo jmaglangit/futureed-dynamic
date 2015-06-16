@@ -27,6 +27,7 @@
 					[
 						'id' => 'admin_search',
 						'class' => 'form-horizontal'
+						, 'ng-submit' => 'admin.getAdminList()'
 					]
 			) !!}
 			<div class="form-group">

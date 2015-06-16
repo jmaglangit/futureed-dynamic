@@ -985,7 +985,7 @@ div > .btncon > a {
 }
 
 .width-fit {
-	width: 100%;
+	width: 100% !important;
 }
 
 .width-large {

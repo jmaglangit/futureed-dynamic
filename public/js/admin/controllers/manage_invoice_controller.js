@@ -33,10 +33,12 @@ function ManageInvoiceController($scope, manageInvoiceService, apiService, Table
 		}
 	}
 
-	self.searchFnc = function() {
+	self.searchFnc = function(event) {
 		self.errors = Constants.FALSE;
-
 		self.list();
+		
+		event = getEvent(event);
+		event.preventDefault();
 	}
 
 	self.clear = function() {

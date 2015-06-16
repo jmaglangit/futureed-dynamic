@@ -1,22 +1,19 @@
 angular.module('futureed.controllers')
 	.controller('ManageGradeController', ManageGradeController);
 
-ManageGradeController.$inject = ['$scope', 'apiService', 'manageGradeService'];
+ManageGradeController.$inject = ['$scope', 'apiService', 'manageGradeService', 'TableService'];
 
-function ManageGradeController($scope, apiService, manageGradeService) {
+function ManageGradeController($scope, apiService, manageGradeService, TableService) {
 	var self = this;
 
-	self.table = {};
-	self.table.size = Constants.DEFAULT_SIZE;
-	self.table.page = Constants.DEFAULT_PAGE;
+	TableService(self);
+	self.tableDefaults();
 
 	self.search = {};
 	self.create = {};
 	self.delete = {};
 
 	self.setManageGradeActive = setManageGradeActive;
-	self.getGradeList = getGradeList;
-	self.clearSearchForm = clearSearchForm;
 
 	self.addNewGrade = addNewGrade;
 	self.getGradeDetails = getGradeDetails;
@@ -56,10 +53,23 @@ function ManageGradeController($scope, apiService, manageGradeService) {
 	    $("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 
-	function getGradeList() {
+	self.searchFnc = function(event) {
+		self.tableDefaults();
+		self.getGradeList();
+
+		event = getEvent(event);
+		event.preventDefault();
+	}
+
+	self.list = function() {
+		self.getGradeList();
+	}
+
+	self.getGradeList = function() {
 		self.errors = Constants.FALSE;
 		var grade = (self.search.grade) ? self.search.grade : Constants.EMPTY_STR;
 		var country = (self.search.country) ? self.search.country : Constants.ALL;
+		self.grades = {};
 		self.table.loading = Constants.TRUE;
 
 		$scope.ui_block();
@@ -71,7 +81,7 @@ function ManageGradeController($scope, apiService, manageGradeService) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					self.grades = response.data.records;
-					self.updateTable(response.data);
+					self.updatePageCount(response.data);
 				}
 			}
 
@@ -83,9 +93,11 @@ function ManageGradeController($scope, apiService, manageGradeService) {
 		});
 	}
 
-	function clearSearchForm() {
+	self.clear = function() {
 		self.errors = Constants.FALSE;
 		self.search = {};
+
+		self.tableDefaults();
 		self.getGradeList();
 	}
 
@@ -191,29 +203,5 @@ function ManageGradeController($scope, apiService, manageGradeService) {
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
-	}
-
-	self.paginateBySize = function() {
-		self.table.page = 1;
-		self.table.offset = (self.table.page - 1) * self.table.size;
-		self.getGradeList();
-	}
-
-	self.paginateByPage = function() {
-		var page = self.table.page;
-		
-		self.table.page = (page < 1) ? 1 : page;
-		self.table.offset = (page - 1) * self.table.size;
-
-		self.getGradeList();
-	}
-
-	self.updateTable = function(data) {
-		self.table.total_items = data.total;
-
-		// Set Page Count
-		var page_count = data.total / self.table.size;
-			page_count = (page_count < Constants.DEFAULT_PAGE) ? Constants.DEFAULT_PAGE : Math.ceil(page_count);
-		self.table.page_count = page_count;
 	}
 }

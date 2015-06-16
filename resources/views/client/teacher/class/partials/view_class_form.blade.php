@@ -89,10 +89,11 @@
 
 		<div class="form-search">
 			{!! Form::open(
-			[
-			'id' => 'search_form',
-			'class' => 'form-horizontal'
-			]
+				array(
+					  'id' => 'search_form'
+					, 'class' => 'form-horizontal'
+					, 'ng-submit' => 'class.searchFnc($event)'
+				)
 			) !!}
 				<div class="form-group">
 					<div class="col-xs-4">
@@ -117,7 +118,7 @@
 						{!! Form::button('Search'
 							, array(
 								'class' => 'btn btn-blue'
-								, 'ng-click' => 'class.searchFnc()'
+								, 'ng-click' => 'class.searchFnc($event)'
 							)
 						) !!}
 					</div>
