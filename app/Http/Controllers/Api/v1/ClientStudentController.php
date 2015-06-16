@@ -27,9 +27,7 @@ class ClientStudentController extends ApiController {
 							ClientRepositoryInterface $client,
 							CodeGeneratorServices $code,
 							ParentStudentRepositoryInterface $parent_student,
-							MailServices $mail
-
-								){
+							MailServices $mail ){
 
 			$this->student = $student;
 			$this->user = $user;
