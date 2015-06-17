@@ -37,12 +37,19 @@ function clientLoginApiService($http) {
 		});
 	}
 
-	clientLoginApi.getTeacherDetails = function(registration_token) {
+	clientLoginApi.getTeacherDetails = function(id, registration_token) {
 		return $http({
-			method 	: Constants.METHOD_POST
-			, data 	: {password : password}
+			method 	: Constants.METHOD_GET
 			, url	: clientLoginApiUrl + '/teacher-information/' + id
 				+ '?registration_token=' + registration_token
+		});
+	}
+
+	clientLoginApi.updateClientRegistration = function(data) {
+		return $http({
+			method : Constants.METHOD_PUT
+			, data : data
+			, url  : clientLoginApiUrl + '/teacher-information/' + data.id 
 		});
 	}
 

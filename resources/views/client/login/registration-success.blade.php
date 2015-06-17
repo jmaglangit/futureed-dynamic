@@ -1,10 +1,10 @@
-<div class="register_users login form-style col-sm-6 col-sm-offset-3" ng-if="registered"> 
+<div class="register_users login form-style col-sm-6 col-sm-offset-3" ng-if="register.registered"> 
     <div ng-if="!register.confirmed">
         <div class="title">Thank you for registering to Future Lesson!</div>
 
         <div class="form_content">
-            <div class="alert alert-danger" ng-if="errors">
-              <p ng-repeat="error in errors" > 
+            <div class="alert alert-danger" ng-if="register.errors">
+              <p ng-repeat="error in register.errors" > 
                 {! error !}
               </p>
             </div>

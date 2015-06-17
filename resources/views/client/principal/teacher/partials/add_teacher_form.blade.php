@@ -45,7 +45,7 @@
 				<div class="margin-top-8">
 					<span class="error-msg-con" ng-if="teacher.validation.e_error">{! teacher.validation.e_error !}</span>
 					<i class="fa fa-spinner fa-spin" ng-if="teacher.validation.e_loading"></i>
-					<span ng-if="teacher.validation.e_success" class="error-msg-con success-color">Email is available.</span>
+					<i ng-if="teacher.validation.e_success" class="fa fa-check success-color"></i>
 				</div>
 			</div>
 			<div class="form-group">
@@ -66,7 +66,7 @@
 				<div class="margin-top-8">
 					<span class="error-msg-con" ng-if="teacher.validation.u_error">{! teacher.validation.u_error !}</span>
 					<i class="fa fa-spinner fa-spin" ng-if="teacher.validation.u_loading"></i>
-					<span ng-if="teacher.validation.u_success" class="error-msg-con success-color">Username is available.</span>
+					<i ng-if="teacher.validation.u_success" class="fa fa-check success-color"></i>
 				</div>
 			</div>
 		</fieldset>

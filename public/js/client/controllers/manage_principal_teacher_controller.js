@@ -86,13 +86,16 @@ function ManagePrincipalTeacherController($scope, managePrincipalTeacherService,
 		apiService.validateUsername(self.record.username, self.user_type).success(function(response) {
 			self.validation.u_loading = Constants.FALSE;
 
-			if(angular.equals(response.status, Constants.STATUS_OK)){
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				self.fields['username'] = Constants.TRUE;
+
 				if(response.errors){
 					self.validation.u_error = response.errors[0].message;
 
 					if(angular.equals(self.validation.u_error, Constants.MSG_U_NOTEXIST)){
 						self.validation.u_error = Constants.FALSE;
 						self.validation.u_success = Constants.TRUE;
+						self.fields['username'] = Constants.FALSE;
 					}
 				}else if(response.data){
 					self.validation.u_error = Constants.MSG_U_EXIST;
@@ -116,12 +119,15 @@ function ManagePrincipalTeacherController($scope, managePrincipalTeacherService,
 			self.validation.e_loading = Constants.FALSE;
 
 			if(angular.equals(response.status, Constants.STATUS_OK)){
+				self.fields['email'] = Constants.TRUE;
+
 				if(response.errors){
 					self.validation.e_error = response.errors[0].message;
 
 					if(angular.equals(self.validation.e_error, Constants.MSG_EA_NOTEXIST)){
 						self.validation.e_error = Constants.FALSE;
 						self.validation.e_success = Constants.TRUE;
+						self.fields['email'] = Constants.FALSE;
 					}
 				}else if(response.data){
 					self.validation.e_error = Constants.MSG_EA_EXIST;
