@@ -131,6 +131,7 @@
 			            <th>Name</th>
 			            <th>Email</th>
 			            <th>Role</th>
+			            <th>Status</th>
 			            <th>Action</th>
 			        </tr>
 		        </thead>
@@ -139,6 +140,7 @@
 			            <td>{! a.first_name !} {! a.last_name !}</td>
 			            <td>{! a.user.email !}</td>
 			            <td>{! a.client_role !}</td>
+			            <td>{! a.account_status !}</td>
 			            <td>
 			            	<div class="row">
 			            		<div class="col-xs-3">
@@ -157,12 +159,12 @@
 			            </td>
 			        </tr>
 			        <tr class="odd" ng-if="!client.clients.length && !client.table.loading">
-			        	<td valign="top" colspan="4" class="dataTables_empty">
+			        	<td valign="top" colspan="5">
 			        		No records found
 			        	</td>
 			        </tr>
 			        <tr class="odd" ng-if="client.table.loading">
-			        	<td valign="top" colspan="4" class="dataTables_empty">
+			        	<td valign="top" colspan="5">
 			        		Loading...
 			        	</td>
 			        </tr>
