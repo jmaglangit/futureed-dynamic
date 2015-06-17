@@ -29,12 +29,12 @@ class UserRepository implements UserRepositoryInterface {
             ,'password'
             ,'name'
             ,'user_type'
-            ,'status');
+            ,'status')->where('id',$id);
 
-        $user->where('id','=',$id);
+
 
         if($user_type <> 'all'){
-            $user->where('user_type','=',$user_type);
+            $user->where('user_type',$user_type);
         }
 
         return $user->first();

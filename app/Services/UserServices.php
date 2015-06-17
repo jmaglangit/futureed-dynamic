@@ -355,14 +355,8 @@ class UserServices {
     //get userDetail Response
     public function getUserDetails($user_id){
       
-        $user_details = $this->users->getUser($user_id,'all');
-        $return =['username'=>$user_details['username'],
-                  'user_type'=>$user_details['user_type'],
-                  'email'=>$user_details['email'],
-                  'new_email' => $user_details['new_email'],
-                  'status' => $user_details['status']];
+        return $this->users->getUser($user_id,'all');
 
-        return $return;
     }
 
     //update reset_code and reset_code_expiry
