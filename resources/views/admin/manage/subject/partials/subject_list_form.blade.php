@@ -5,11 +5,17 @@
 		</div>
 	</div>
 
-	<div class="form-content col-xs-12" ng-if="subject.delete.success">
-		<div class="alert alert-success">
-	    	<p>Successfully deleted the selected subject.</p>
-	    </div>
-	</div>
+	<div class="col-xs-12 success-container" ng-if="subject.errors || subject.success">
+		<div class="alert alert-error" ng-if="subject.errors">
+			<p ng-repeat="error in subject.errors track by $index">
+				{! error !}
+			</p>
+		</div>
+
+        <div class="alert alert-success" ng-if="subject.success">
+            <p>{! subject.success !}</p>
+        </div>
+    </div>
 
 	<div class="col-xs-12 padding-0-30">
 		<div class="title-mid">
@@ -21,10 +27,10 @@
 		<div class="form-search">
 			{!! Form::open(
 				array('id' => 'search_form'
-					, 'method' => 'POST'
 					, 'class' => 'form-inline'
-					)
-				)!!}
+					, 'ng-submit' => 'subject.searchFnc($event)'
+				)
+			)!!}
 			<div class="form-group">
 				<div class="col-xs-8">
 					{!! Form::text('search_subject', ''
@@ -40,7 +46,7 @@
 					{!! Form::button('Search'
 						,array(
 							'class' => 'btn btn-blue'
-							, 'ng-click' => 'subject.list()'
+							, 'ng-click' => 'subject.searchFnc($event)'
 						)
 					)!!}
 				</div>
@@ -48,7 +54,7 @@
 					{!! Form::button('Clear'
 						,array(
 							'class' => 'btn btn-gold'
-							, 'ng-click' => 'subject.clearSearchForm()'
+							, 'ng-click' => 'subject.clear()'
 						)
 					)!!}
 				</div>

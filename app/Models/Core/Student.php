@@ -23,6 +23,15 @@ class Student extends Model {
         'updated_at',
         'deleted_at'];
 
+	protected $fillable =['user_id','first_name','last_name','gender','birth_date','country_id','country','state','city','avatar_id','password_image_id',
+	                     'parent_id','school_code','grade_code','points','point_level_id','learning_style_id','status','created_by','updated_by'];
+
+	protected $attributes = [
+		'created_by' => 1,
+		'updated_by' => 1,
+
+	];
+
 
 
     //-------------relationships

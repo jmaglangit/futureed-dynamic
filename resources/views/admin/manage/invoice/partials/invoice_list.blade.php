@@ -27,6 +27,7 @@
 					[
 						'id' => 'search_form',
 						'class' => 'form-horizontal'
+						, 'ng-submit' => 'invoice.searchFnc($event)'
 					]
 			) !!}
 				<div class="form-group">
@@ -55,7 +56,7 @@
 						) !!}
 					</div>
 					<div class="col-xs-2">
-						<button class="btn btn-blue" type="button" ng-click="invoice.searchFnc()">Search</button>
+						<button class="btn btn-blue" type="button" ng-click="invoice.searchFnc($event)">Search</button>
 					</div>
 				</div>
 				<div class="form-group">

@@ -18,11 +18,13 @@ function manageClassService($http){
 		});
 	}
 
-	manageClassApi.studentList = function(search) {
+	manageClassApi.studentList = function(search, table) {
 		return $http({
 			method : Constants.METHOD_GET
 			, url  : classApiUrl + 'classroom/' + search.id + '/students?name=' + search.name
 				+ '&email=' + search.email
+				+ '&limit=' + table.size
+				+ '&offset=' + table.offset
 		});
 	}
 
@@ -54,6 +56,13 @@ function manageClassService($http){
 			method : Constants.METHOD_POST
 			, data : data
 			, url  : classApiUrl + 'class-student/add-new-student'
+		});
+	}
+
+	manageClassApi.getSchoolDetails = function(code) {
+		return $http({
+			method : Constants.METHOD_GET
+			, url  : classApiUrl + 'school/' + code
 		});
 	}
 

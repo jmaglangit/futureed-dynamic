@@ -5,7 +5,7 @@
 </head>
 <body>
 <div>Hi there {{ $name }},</div>
-<br>
+<br/>
 <div>
     <div>Thanks for joining us at Future Lesson and congratulations on becoming part of the coolest community
         of learners on the web!  We look forward to taking this incredible learning adventure with you and your
@@ -15,7 +15,11 @@
     <br>
     <div>Your confirmation code : {{ $code  }}</div>
     <br>
-    <div>Link to Future Lessons: <a href="{{ $link }}">Confirm Code</a></div>
+    <div>Link to Future Lessons: <a href="{{ $link }}">Confirm Code</a></div><br/>
+
+    <div>Regards,</div><br/>
+    <div>Admin</div>
+
 </div>
 </body>
 </html>

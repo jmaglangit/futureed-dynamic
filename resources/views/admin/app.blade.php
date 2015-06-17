@@ -68,9 +68,6 @@
     {!! Html::script('/js/common/table_service.js') !!}
     {!! Html::script('/js/filters/date_filter.js') !!}
     {!! Html::script('/js/datetimepicker.js') !!}
-    {!! Html::script('/js/angular-datatables.min.js') !!}
-    {!! Html::script('/js/jquery.dataTables.min.js') !!}
-    {!! Html::script('//cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js') !!}
 
     @yield('scripts')
 

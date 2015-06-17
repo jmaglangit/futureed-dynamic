@@ -52,50 +52,17 @@ class StudentRepository implements StudentRepositoryInterface
 
 	public function addStudent($student)
 	{
-		try {
-//            user_id
-//            first_name
-//            last_name
-//            gender
-//            birth_date
-//            avatar_id
-//            password_image_id
-//            school_code
-//            grade_code
-//            point_level_id
-//            learning_style_id
-//            status
+			try {
 
-//            'first_name',
-//            'last_name',
-//            'gender',
-//            'birthday',
-//            'school_code',
-//            'grade_code',
-//            'country',
-//            'state',
-//            'city'
-			Student::insert([
-				'user_id' => $student['user_id'],
-				'first_name' => $student['first_name'],
-				'last_name' => $student['last_name'],
-				'gender' => $student['gender'],
-				'birth_date' => $student['birth_date'],
-				'country_id' => $student['country_id'],
-				'country' => $student['country'],
-				'state' => $student['state'],
-				'city' => $student['city'],
-				'grade_code' => $student['grade_code'],
-				'school_code' => (isset($student['school_code'])) ? $student['school_code'] : NULL,
-				'status' => 'Disabled',
-				'created_by' => 1,
-				'updated_by' => 1
-			]);
+				 Student::create($student);
 
-		} catch (Exception $e) {
-			throw new Exception ($e->getMessage());
-		}
-		return true;
+			} catch(Exception $e) {
+
+				return $e->getMessage();
+
+			}
+
+			return true;
 
 	}
 

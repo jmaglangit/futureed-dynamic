@@ -267,18 +267,21 @@ class UserServices {
      * @return bool|int
      */
     public function checkUserDisabled($id){
-        if($this->users->accountActivated($id) == 0 ){
-            //check if activated
-            return 2230;
-        } elseif($this->users->accountLocked($id) == 1){
-            //check if locked
-            return 2014;
-        } elseif($this->users->accountDeleted($id) == 1 ){
-            //check if delete
-            return 2020;
-        } else {
-            return false;
-        }
+		if ($this->users->accountActivated($id) == 0) {
+			//check if activated
+			return 2230;
+		} elseif ($this->users->accountLocked($id) == 1) {
+			//check if locked
+			return 2014;
+		} elseif ($this->users->accountDeleted($id) == 1) {
+			//check if delete
+			return 2020;
+		} elseif ($this->users->accountStatus($id) == config('futureed.user_disabled')) {
+			//check if disabled
+			return 2033;
+		} else {
+			return false;
+		}
     }
 
     /**
@@ -288,18 +291,21 @@ class UserServices {
      */
     public function checkClientDisabled($id){
 
-        if($this->users->accountActivated($id) == 0 ){
-            //check if activated
-            return 2230;
-        } elseif($this->users->accountLocked($id) == 1){
-            //check if locked
-            return 2034;
-        } elseif($this->users->accountDeleted($id) == 1 ){
-            //check if delete
-            return 2020;
-        } else {
-            return false;
-        }
+		if ($this->users->accountActivated($id) == 0) {
+			//check if activated
+			return 2230;
+		} elseif ($this->users->accountLocked($id) == 1) {
+			//check if locked
+			return 2034;
+		} elseif ($this->users->accountDeleted($id) == 1) {
+			//check if delete
+			return 2020;
+		} elseif ($this->users->accountStatus($id) == config('futureed.user_disabled')) {
+			//check if disabled
+			return 2033;
+		} else {
+			return false;
+		}
     }
 
     /**
@@ -308,18 +314,21 @@ class UserServices {
      */
     public function checkAdminDisabled($id){
 
-        if($this->users->accountActivated($id) == 0 ){
-            //check if activated
-            return 2230;
-        } elseif($this->users->accountLocked($id) == 1){
-            //check if locked
-            return 2035;
-        } elseif($this->users->accountDeleted($id) == 1 ){
-            //check if delete
-            return 2020;
-        } else {
-            return false;
-        }
+		if ($this->users->accountActivated($id) == 0) {
+			//check if activated
+			return 2230;
+		} elseif ($this->users->accountLocked($id) == 1) {
+			//check if locked
+			return 2035;
+		} elseif ($this->users->accountDeleted($id) == 1) {
+			//check if delete
+			return 2020;
+		} elseif ($this->users->accountStatus($id) == config('futureed.user_disabled')) {
+			//check if disabled
+			return 2033;
+		} else {
+			return false;
+		}
     }
 
     //
@@ -466,6 +475,11 @@ class UserServices {
 
         $this->users->updateStatus($id,$status);
     }
+
+	public function addRegistrationToken($id,$registration_token){
+
+		$this->users->addRegistrationToken($id,$registration_token);
+	}
 
     
 

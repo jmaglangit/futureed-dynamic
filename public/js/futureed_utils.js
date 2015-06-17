@@ -48,6 +48,11 @@ function getTarget(e) {
   return target;
 }
 
+function getEvent(e) {
+  var e = e || window.event;
+  return e;
+}
+
 function isStringNullorEmpty(string) {
   if(string == null || string.trim().length == 0) {
     return true;

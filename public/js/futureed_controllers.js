@@ -1,6 +1,7 @@
 angular.module('futureed.controllers', [])
 	.controller('futureedController', FutureedController)
-	.directive('templateDirective', TemplateDirective);
+	.directive('templateDirective', TemplateDirective)
+	.constant("futureed", Constants);
 
 function TemplateDirective() {
 	return {
@@ -10,7 +11,8 @@ function TemplateDirective() {
 	}
 }
 
-function FutureedController($scope, apiService) {
+function FutureedController($scope, apiService, futureed) {
+	$scope.futureed = futureed;
 	$scope.display_date = new Date();
 	
 	/**
@@ -32,7 +34,6 @@ function FutureedController($scope, apiService) {
 	$scope.getCountryId = getCountryId;
 
 	$scope.beforeDateRender = beforeDateRender;
-
 	function beforeDateRender($dates){
 		maxDate = new Date().setHours(0,0,0,0); // Set minimum date to whatever you want here
 

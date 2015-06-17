@@ -1,14 +1,17 @@
 angular.module('futureed.controllers')
 	.controller('ManageSubjectController', ManageSubjectController);
 
-ManageSubjectController.$inject = ['$scope', 'apiService','manageSubjectService', 'TableService'];
+ManageSubjectController.$inject = ['$scope', 'apiService','manageSubjectService', 'TableService', 'SearchService'];
 
-function ManageSubjectController($scope, apiService, manageSubjectService, TableService) {
+function ManageSubjectController($scope, apiService, manageSubjectService, TableService, SearchService) {
 	var self = this;
 
 	//Table Services
 	TableService(self);
 	self.tableDefaults();
+
+	SearchService(self);
+	self.searchDefaults();
 
 	self.search = {};
 	self.create = {};
@@ -26,8 +29,6 @@ function ManageSubjectController($scope, apiService, manageSubjectService, Table
 	/**
 	* Subject Function Calls
 	*/
-	self.clearSearchForm = clearSearchForm;
-
 	self.addNewSubject = addNewSubject;
 
 	self.getSubjectDetails = getSubjectDetails;
@@ -39,11 +40,9 @@ function ManageSubjectController($scope, apiService, manageSubjectService, Table
 	function setManageSubjectActive(active) {
 		self.errors = Constants.FALSE;
 
-		self.table = {};
-		self.table.size = Constants.DEFAULT_SIZE;
-		self.table.page = Constants.DEFAULT_PAGE;
-
-		self.search = {};
+		self.tableDefaults();
+		self.searchDefaults();
+	
 		self.create = {};
 		self.delete = {};
 
@@ -75,14 +74,23 @@ function ManageSubjectController($scope, apiService, manageSubjectService, Table
 	    $("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 
+	self.searchFnc = function(event) {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+		self.tableDefaults();
+		self.list();
+
+		event = getEvent(event);
+		event.preventDefault();
+	}
+
 	self.list = function() {
 		self.errors = Constants.FALSE;
 		self.subjects = {};
 		self.table.loading = Constants.TRUE;
-		var subject_name = self.search.name;
 
 		$scope.ui_block();
-		manageSubjectService.getSubjectList(subject_name, self.table).success(function(response) {
+		manageSubjectService.getSubjectList(self.search, self.table).success(function(response) {
 			self.table.loading = Constants.FALSE;
 
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
@@ -102,9 +110,11 @@ function ManageSubjectController($scope, apiService, manageSubjectService, Table
 		});
 	}
 
-	function clearSearchForm() {
+	self.clear = function() {
 		self.errors = Constants.FALSE;
-		self.search = {};
+		self.searchDefaults();
+		self.tableDefaults();
+
 		self.list();
 	}
 
@@ -199,8 +209,9 @@ function ManageSubjectController($scope, apiService, manageSubjectService, Table
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
-					self.delete.success = Constants.TRUE;
+					self.success = ManageSubjectConstants.DELETE_SUBJECT_SUCCESS;
 					self.list();
+
 					$("html, body").animate({ scrollTop: 0 }, "slow");
 				}
 			}

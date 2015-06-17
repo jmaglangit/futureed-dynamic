@@ -67,11 +67,13 @@ function ManagePrincipalTeacherController($scope, managePrincipalTeacherService,
 		self.list();
 	}
 
-	self.searchFnc = function() {
+	self.searchFnc = function(event) {
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
 
 		self.list();
+		event = getEvent(event);
+		event.preventDefault();
 	}
 
 	self.checkUsernameAvailability = function() {

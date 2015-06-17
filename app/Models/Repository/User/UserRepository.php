@@ -131,6 +131,12 @@ class UserRepository implements UserRepositoryInterface {
 
     }
 
+	public function accountStatus($id){
+
+		return User::where('id','=',$id)->pluck('status');
+
+	}
+
     public function addLoginAttempt($id){
         $attempt = $this->getLoginAttempts($id);
 
@@ -372,6 +378,37 @@ class UserRepository implements UserRepositoryInterface {
             throw new Exception($e->getMessage());
         }
     }
+
+	/**
+	 * Add Registration Token.
+	 * @param $id
+	 * @param $registration_token
+	 * @throws Exception
+	 */
+	public function addRegistrationToken($id,$registration_token){
+
+		try{
+
+			User::where('id',$id)->update([
+				'registration_token' => $registration_token
+			]);
+
+		} catch (Exception $e){
+
+			throw new Exception($e->getMessage());
+		}
+	}
+
+	/**
+	 * Get Registration Token
+	 * @param $id
+	 * @return mixed
+	 */
+	public function getRegistrationToken($id){
+
+		return User::select('registration_token')
+			->where('id',$id);
+	}
 
 
 

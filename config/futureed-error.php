@@ -81,7 +81,8 @@ return [
 		2128 => 'Unable to Delete. Student has Badge.',
 		2129 => 'Unable to Delete. Student has Class.',
 		2130 => 'Parent does not have Student.',
-
+		2131 => 'Student is already added.',
+		2132 => 'Invitation code is invalid.',
 
 		// Client Error messages
 		2200 => 'Email already exists.',

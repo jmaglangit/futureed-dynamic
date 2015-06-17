@@ -21,8 +21,8 @@
 		<div class="form-search">
 			{!! Form::open(
 				array('id' => 'search_form'
-					, 'method' => 'POST'
 					, 'class' => 'form-inline'
+					, 'ng-submit' => 'grade.searchFnc($event)'
 					)
 				)!!}
 			<div class="form-group">
@@ -32,6 +32,7 @@
 							'placeholder' => 'Grade'
 							, 'ng-model' => 'grade.search.grade'
 							, 'class' => 'form-control btn-fit'
+							, 'autocomplete' => 'off'
 						)
 					)!!}
 				</div>
@@ -47,7 +48,7 @@
 					{!! Form::button('Search'
 						,array(
 							'class' => 'btn btn-blue'
-							, 'ng-click' => 'grade.getGradeList()'
+							, 'ng-click' => 'grade.searchFnc()'
 						)
 					)!!}
 				</div>
@@ -55,7 +56,7 @@
 					{!! Form::button('Clear'
 						,array(
 							'class' => 'btn btn-gold'
-							, 'ng-click' => 'grade.clearSearchForm()'
+							, 'ng-click' => 'grade.clear()'
 						)
 					)!!}
 				</div>
