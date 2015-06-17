@@ -11,6 +11,7 @@ use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
 use FutureEd\Services\CodeGeneratorServices;
 use FutureEd\Models\Repository\ParentStudent\ParentStudentRepositoryInterface;
 use FutureEd\Services\MailServices;
+use Illuminate\Support\Facades\Input;
 
 class ClientStudentController extends ApiController {
 
@@ -44,7 +45,56 @@ class ClientStudentController extends ApiController {
 	 */
 	public function index()
 	{
-		//
+		$criteria = array();
+		$limit = 0;
+		$offset = 0;
+
+		//get the parameters and get outputs based on the parameters.
+		if(Input::get('email')){
+			$criteria['email'] = Input::get('email');
+		}
+
+		if(Input::get('name')){
+			$criteria['name'] = Input::get('name');
+		}
+
+		if(Input::get('client_id')){
+
+			$criteria['client_id'] = Input::get('client_id');
+
+			//get client_details
+			$client_detail = $this->client->getClientDetails($criteria['client_id']);
+
+			//check if client is principal
+			if($client_detail['client_role'] === config('futureed.principal')){
+
+				return $this->respondErrorMessage(2234);
+			}
+
+			//check what is the client_role and assign to criteria['client_role']
+			if($client_detail['client_role'] === config('futureed.parent')){
+
+				$criteria['client_role'] = $client_detail['client_role'];
+			}
+
+			if($client_detail['client_role'] === config('futureed.teacher')){
+
+				$criteria['client_role'] = $client_detail['client_role'];
+			}
+		}
+
+		if(Input::get('limit')) {
+			$limit = intval(Input::get('limit'));
+		}
+
+		if(Input::get('offset')) {
+			$offset = intval(Input::get('offset'));
+		}
+
+		$student = $this->student->getStudentListByClient($criteria,$limit,$offset);
+
+		return $this->respondWithData($student);
+
 	}
 
 	/**

@@ -270,5 +270,63 @@ class StudentRepository implements StudentRepositoryInterface
 
 	}
 
+	//get student who belong to a parent if client_role is parent
+	// and get student who belong to a teacher if client role is teacher
+	public function getStudentListByClient($criteria = [], $limit = 0, $offset = 0){
+
+		$student = new Student();
+		$count = 0;
+
+		if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
+
+			$count = $student->count();
+
+		} else {
+
+			if (count($criteria) > 0) {
+				if (isset($criteria['name'])) {
+
+					$student = $student->with('user')->name($criteria['name']);
+
+				}
+				if (isset($criteria['email'])) {
+
+					$student = $student->with('user')->email($criteria['email']);
+
+				}
+
+				if(isset($criteria['client_id'])){
+
+					//check if client_role is a Parent
+					if($criteria['client_role'] === config('futureed.parent')){
+
+						$student = $student->with('parent')->parent($criteria['client_id']);
+					}
+
+					//check if client_role is a Teacher
+					if($criteria['client_role'] === config('futureed.teacher')){
+
+						$student = $student->with('studentclassroom')->teacher($criteria['client_id']);
+					}
+
+
+				}
+
+			}
+
+			$count = $student->count();
+
+			if ($limit > 0 && $offset >= 0) {
+				$student = $student->with('user')->offset($offset)->limit($limit);
+			}
+
+		}
+
+		$student = $student->with('user')->orderBy('last_name', 'asc');
+
+		return ['total' => $count, 'records' => $student->get()->toArray()];
+
+	}
+
 
 }

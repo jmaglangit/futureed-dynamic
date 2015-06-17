@@ -45,4 +45,6 @@ interface StudentRepositoryInterface {
 
 	public function viewStudentClassBadge($id);
 
+	public function getStudentListByClient($criteria = [], $limit = 0, $offset = 0);
+
 }
