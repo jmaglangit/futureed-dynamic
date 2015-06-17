@@ -131,6 +131,12 @@ class UserRepository implements UserRepositoryInterface {
 
     }
 
+	public function accountStatus($id){
+
+		return User::where('id','=',$id)->pluck('status');
+
+	}
+
     public function addLoginAttempt($id){
         $attempt = $this->getLoginAttempts($id);
 

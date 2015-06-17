@@ -33,6 +33,8 @@ interface UserRepositoryInterface {
 
 	public function accountDeleted($id);
 
+	public function accountStatus($id);
+
 	public function addLoginAttempt($id);
 
 	public function resetLoginAttempt($id);

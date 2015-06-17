@@ -78,6 +78,7 @@ return [
 
 	//user Status
 	'user_disabled' => 'Disabled',
+	'user_enabled' => 'Enabled',
 
 	//order no. zero fill constants
 	'client_id_zero_fill' => 4,
