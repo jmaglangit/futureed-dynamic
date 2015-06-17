@@ -13,13 +13,11 @@ function manageSubjectService($http) {
 	* @Param
 	*		name - [Optional] the subject name
 	*/
-	manageSubjectApi.getSubjectList = function(subject_name, table) {
-		subject_name = (subject_name) ? subject_name : '';
-
+	manageSubjectApi.getSubjectList = function(search, table) {
 		return $http({
 			  method : Constants.METHOD_GET
 			, url 	 : manageSubjectApiUrl 
-				+ 'subject?name=' + subject_name
+				+ 'subject?name=' + search.name
 				+ '&limit=' + table.size
 				+ '&offset=' + table.offset
 		});
@@ -74,7 +72,7 @@ function manageSubjectService($http) {
 	*/
 	manageSubjectApi.deleteSubject = function(id) {
 		return $http({
-			  method : 'DELETE'
+			  method : Constants.METHOD_DELETE
 			, url 	 : manageSubjectApiUrl + 'subject/' + id
 		});
 	}

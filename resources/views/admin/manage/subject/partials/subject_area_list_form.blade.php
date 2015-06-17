@@ -21,15 +21,15 @@
 		<div class="form-search">
 			{!! Form::open(
 				array('id' => 'search_form'
-					, 'method' => 'POST'
 					, 'class' => 'form-inline'
-					)
-				)!!}
+					, 'ng-submit' => 'area.searchFnc($event)'
+				)
+			) !!}
 			<div class="form-group">
 				<div class="col-xs-8">
 					{!! Form::text('search_subject', ''
 						,array(
-							'placeholder' => 'Name'
+							'placeholder' => 'Area'
 							, 'ng-model' => 'area.search.name'
 							, 'class' => 'form-control btn-fit'
 						)
@@ -40,7 +40,7 @@
 					{!! Form::button('Search'
 						,array(
 							'class' => 'btn btn-blue'
-							, 'ng-click' => 'area.searchFnc()'
+							, 'ng-click' => 'area.searchFnc($event)'
 						)
 					)!!}
 				</div>

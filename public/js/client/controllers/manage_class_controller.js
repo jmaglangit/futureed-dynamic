@@ -61,12 +61,18 @@ function ManageClassController($scope, manageClassService, apiService, TableServ
 		$("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 
-	self.searchFnc = function() {
+	self.searchFnc = function(event) {
 		self.list();
+		self.tableDefaults();
+
+		event = getEvent(event);
+		event.preventDefault();
 	}
 
 	self.clear = function() {
 		self.searchDefaults();
+		self.tableDefaults();
+		
 		self.list();
 	}
 
