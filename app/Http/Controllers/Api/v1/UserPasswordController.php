@@ -67,7 +67,7 @@ class UserPasswordController extends UserController {
             
             
                 $userDetails = $this->user->getUserDetails($return['user_id']);
-                
+
                 $isActivated = $this->user->isActivated($return['user_id']);
                 
                 if($isActivated==1){
@@ -113,7 +113,7 @@ class UserPasswordController extends UserController {
 
                     }
 
-                    return $this->respondWithData($userDetails);
+                    return $this->respondWithData($userDetails->toArray());
                     
                 }else{
                     
