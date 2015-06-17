@@ -38,9 +38,32 @@ class ClientStudentRequest extends ApiRequest {
 					'client_id'     => 'required|integer'
 				];
 				break;
+
+			case 'PUT':
+
+				return[
+					'first_name'    => 'required|regex:/^([a-z\x20])+$/i|max:64',
+					'last_name'     => 'required|regex:/^([a-z\x20])+$/i|max:64',
+					'gender'        => 'required|alpha|in:Male,Female',
+					'birth_date'    => 'required|date_format:Ymd',
+					'country_id'    => 'required|integer',
+					'state'         => 'required|string',
+					'city'          => 'required|string',
+					'grade_code' 	=> 'required|integer'
+				];
+
 		}
 
 
+	}
+
+
+	public function messages()
+	{
+		return [
+			'country_id.required' => 'country name is required.',
+			'grade_code.required' => 'grade name is required.'
+		];
 	}
 
 }
