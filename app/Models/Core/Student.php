@@ -59,6 +59,18 @@ class Student extends Model {
 		return $this->belongsTo('FutureEd\Models\Core\ClassStudent','id','student_id');
 	}
 
+	public function parent(){
+
+		return $this->belongsTo('FutureEd\Models\Core\ParentStudent','id','student_user_id');
+	}
+
+	//get student with relation to ClassStudent with relation to classroom
+	public function studentclassroom(){
+
+		return $this->belongsTo('FutureEd\Models\Core\ClassStudent','id','student_id')->with('classroom');
+	}
+
+
     //-------------scopes
     public function scopeName($query, $name) {
 
@@ -75,6 +87,32 @@ class Student extends Model {
         });
 
     }
+
+	public function scopeParent($query, $parent_user_id){
+
+		return $query->whereHas('parent',function($query) use ($parent_user_id) {
+			$query->where('parent_user_id', '=', $parent_user_id);
+		});
+	}
+
+
+	public function scopeTeacher($query, $client_id){
+
+		//check if has ClassStudent relation
+		return $query->whereHas('studentclassroom',function($query) use ($client_id){
+
+					//check if ClassStudent has Classroom relation
+					$query->whereHas('classroom',function($query) use ($client_id){
+
+						$query->where('client_id', '=', $client_id );
+					});
+		});
+
+
+	}
+
+
+
 
 
 
