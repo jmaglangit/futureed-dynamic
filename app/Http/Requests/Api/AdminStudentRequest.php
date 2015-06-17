@@ -12,7 +12,7 @@ class AdminStudentRequest extends ApiRequest {
      * @return bool
      */
     public function authorize() {
-        return true;
+		return true;
     }
 
     /**
@@ -28,46 +28,46 @@ class AdminStudentRequest extends ApiRequest {
 
 		$student_user_id = NULL;
 
-		if($student) {
+		if ($student) {
 			$student_user_id = $student->user_id;
 		}
 
-        switch($this->method) {
-            case 'POST':
-                $student = config('futureed.student');
-                return [
-                    'username' => "required|string|min:8|max:32|unique:users,username,NULL,id,user_type,$student,deleted_at,NULL",
-                    'email' => "required|email|unique:users,email,NULL,id,user_type,$student,deleted_at,NULL",
-                    'first_name' => 'required|string',
-                    'last_name' => 'required|string',
-                    'gender'   => 'required|in:Male,Female',
-                    'birth_date' => 'required|date_format:Ymd|before:-13 year',
-                    'city' => 'required|string',
-                    'state' => 'required|string',
-                    'country' => 'string',
-					'country_id'=> 'required|integer',
-                    'school_code' => 'required|integer',
-                    'grade_code' => 'required|integer',
-                    'callback_uri' => 'required|string',
-                ];
-                break;
-            case 'PUT':
-                $student = config('futureed.student');
-                return [
-                    'username' => "required|string|min:8|max:32|unique:users,username,".$student_user_id.",id,user_type,$student,deleted_at,NULL",
-                    'first_name' => 'required|string',
-                    'last_name' => 'required|string',
-                    'gender'   => 'required|in:Male,Female',
-                    'birth_date' => 'required|date_format:Ymd|before:-13 year',
-                    'city' => 'required|string',
-                    'state' => 'required|string',
-                    'country' => 'string',
-					'country_id'=> 'required|integer',
-                    'school_code' => 'required|integer',
-                    'grade_code' => 'required|integer'];
-                break;
+		switch ($this->method) {
+			case 'POST':
+				$student = config('futureed.student');
+				return [
+					'username' => "required|string|min:8|max:32|unique:users,username,NULL,id,user_type,$student,deleted_at,NULL",
+					'email' => "required|email|unique:users,email,NULL,id,user_type,$student,deleted_at,NULL",
+					'first_name' => 'required|string',
+					'last_name' => 'required|string',
+					'gender' => 'required|in:Male,Female',
+					'birth_date' => 'required|date_format:Ymd|before:-13 year',
+					'city' => 'required|string',
+					'state' => 'required|string',
+					'country' => 'string',
+					'country_id' => 'required|integer',
+					'school_code' => 'required|integer',
+					'grade_code' => 'required|integer',
+					'callback_uri' => 'required|string',
+				];
+				break;
+			case 'PUT':
+				$student = config('futureed.student');
+				return [
+					'username' => "required|string|min:8|max:32|unique:users,username," . $student_user_id . ",id,user_type,$student,deleted_at,NULL",
+					'first_name' => 'required|string',
+					'last_name' => 'required|string',
+					'gender' => 'required|in:Male,Female',
+					'birth_date' => 'required|date_format:Ymd|before:-13 year',
+					'city' => 'required|string',
+					'state' => 'required|string',
+					'country' => 'string',
+					'country_id' => 'required|integer',
+					'school_code' => 'required|integer',
+					'grade_code' => 'required|integer'];
+				break;
 
-        }
+		}
 
     }
 
@@ -77,10 +77,10 @@ class AdminStudentRequest extends ApiRequest {
      * @return array
      */
     public function messages() {
-        return [
-            'school_code.required' => 'School Name is required.',
-            'grade_code.required' => 'Grade is required.',
+		return [
+			'school_code.required' => 'School Name is required.',
+			'grade_code.required' => 'Grade is required.',
 
-        ];
+		];
     }
 }
