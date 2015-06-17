@@ -82,7 +82,7 @@ class UserPasswordController extends UserController {
 
 					if (strcasecmp($input['user_type'], config('futureed.student')) == 0) {
 
-						$subject = str_replace('{user}', config('futureed.Student'), $subject);
+						$subject = str_replace('{user}', config('futureed.student'), $subject);
 
 						$this->mail->sendStudentMailResetPassword($userDetails, $code['confirmation_code'], $input['callback_uri'], $subject);
 
