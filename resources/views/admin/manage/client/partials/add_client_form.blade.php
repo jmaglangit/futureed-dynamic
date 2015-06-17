@@ -29,6 +29,7 @@
 	        					, 'ng-model' => 'client.create.email'
 	        					, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
 	        					, 'ng-change' => 'client.checkEmailAvailability()'
+	        					, 'autocomplete' => 'off'
 	        					, 'class' => 'form-control'
 	        				)
 	        			) !!}

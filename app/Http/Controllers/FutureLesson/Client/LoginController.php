@@ -91,10 +91,18 @@ class LoginController extends Controller {
 	 */
 	public function registration($id = null)
 	{
-		if($id) {
-			return view('client.login.registration-invite-form', array('id' => $id));
-		}
 		return view('client.login.registration');
+	}
+
+	public function registration_invite($id = null)
+	{
+		$input = Input::only('registration_token');
+
+		if($id && $input['registration_token']) {
+			return view('client.login.registration-invite-form', array('id' => $id, 'registration_token' => $input['registration_token']));
+		}
+
+		return redirect()->route('client.registration');
 	}
 
 	public function registration_form() {
