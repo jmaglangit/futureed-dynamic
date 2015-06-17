@@ -140,14 +140,14 @@ class MailServices {
         $content = [
             'view' => 'emails.student.forget-password',
             'data' => [
-                'name' => $data['name'],
+                'name' => $data->name,
                 'code' => $code,
-                'link' => $url . '?email=' . $data['email'],
+                'link' => $url . '?email=' . $data->email,
             ],
             'mail_sender' => 'no-reply@futureed.com',
             'mail_sender_name' => 'Future Lesson',
-            'mail_recipient' => $data['email'],
-            'mail_recipient_name' =>$data['username'] ,
+            'mail_recipient' => $data->email,
+            'mail_recipient_name' => $data->name,
             'subject' => $subject
         ];
         $this->sendMail($content);
@@ -158,14 +158,14 @@ class MailServices {
         $content = [
             'view' => 'emails.client.forget-password',
             'data' => [
-                'name' => $data['name'],
+                'name' => $data->name,
                 'code' => $code,
-                'link' => $url . '?email=' . $data['email'],
+                'link' => $url . '?email=' .$data->email,
             ],
             'mail_sender' => 'no-reply@futureed.com',
             'mail_sender_name' => 'Future Lesson',
-            'mail_recipient' => $data['email'],
-            'mail_recipient_name' =>$data['username'] ,
+            'mail_recipient' => $data->email,
+            'mail_recipient_name' => $data->name ,
             'subject' => $subject
         ];
         $this->sendMail($content);
@@ -175,14 +175,14 @@ class MailServices {
         $content = [
             'view' => 'emails.admin.forget-password',
             'data' => [
-                'name' => $data['name'],
+                'name' => $data->name,
                 'code' => $code,
-                'link' => $url . '?email=' . $data['email'],
+                'link' => $url . '?email=' . $data->email,
             ],
             'mail_sender' => 'no-reply@futureed.com',
             'mail_sender_name' => 'Future Lesson',
-            'mail_recipient' => $data['email'],
-            'mail_recipient_name' =>$data['username'] ,
+            'mail_recipient' => $data->email,
+            'mail_recipient_name' => $data->name ,
             'subject' => $subject
         ];
         $this->sendMail($content);

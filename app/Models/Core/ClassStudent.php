@@ -61,6 +61,6 @@ class ClassStudent extends Model {
     //-------------relationships
 	public function classroom()
 	{
-		return $this->belongsTo('FutureEd\Models\Core\Classroom');
+		return $this->belongsTo('FutureEd\Models\Core\Classroom','class_id','id');
 	}
 }
