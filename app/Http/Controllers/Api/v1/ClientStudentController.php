@@ -65,6 +65,11 @@ class ClientStudentController extends ApiController {
 			//get client_details
 			$client_detail = $this->client->getClientDetails($criteria['client_id']);
 
+			if(!$client_detail){
+
+				return $this->respondErrorMessage(2001);
+			}
+
 			//check if client is principal
 			if($client_detail['client_role'] === config('futureed.principal')){
 
