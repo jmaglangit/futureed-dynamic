@@ -31,7 +31,7 @@ class SubjectRequest extends ApiRequest {
 			default:
 				return [
 					'code' => 'required|numeric|digits_between:1,19|unique:subjects,code,NULL,id,deleted_at,NULL',
-					'name' => 'required',
+					'name' => 'required|regex:'. config('regex.name'),
 					'status' => 'required|in:Enabled,Disabled'
 				];				
 	        	break;
