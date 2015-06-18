@@ -285,6 +285,8 @@ function ManageStudentController($scope, manageStudentService, apiService, Table
 
 	self.searchFnc = function() {
 		self.list();
+		event = getEvent(event);
+		event.preventDefault();
 	}
 
 	self.list = function() {
