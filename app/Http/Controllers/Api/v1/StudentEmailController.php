@@ -20,11 +20,11 @@ class StudentEmailController extends ApiController {
 	protected $mail;
 
 	public function __construct(
-								StudentRepositoryInterface $student,
-								ClientRepositoryInterface $client,
-								UserRepositoryInterface $user,
-								CodeGeneratorServices $code,
-								MailServices $mail
+									StudentRepositoryInterface $student,
+									ClientRepositoryInterface $client,
+									UserRepositoryInterface $user,
+									CodeGeneratorServices $code,
+									MailServices $mail
 								){
 
 			$this->student = $student;
