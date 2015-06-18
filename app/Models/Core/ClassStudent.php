@@ -18,6 +18,12 @@ class ClassStudent extends Model {
 
     protected $hidden = ['class_id','student_id','verification_code','created_by','updated_by','created_at','updated_at','deleted_at'];
 
+
+	protected $attributes = [
+		'created_by' => 1,
+		'updated_by' => 1,
+
+	];
     //Relationships
 
     public function user(){

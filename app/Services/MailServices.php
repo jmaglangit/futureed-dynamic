@@ -359,13 +359,19 @@ class MailServices {
 
         //get user information for the email
         $user_detail = $this->user->getUser($data['user_id'],$user_type);
+
+		//generate registration_token
+		$token = $this->reg_token->getRegistrationToken($user_detail['email']);
+
+		//add token to user
+		$this->user->addRegistrationToken($user_detail['id'],$token);
         
         $content = [
             'view' => 'emails.student.invite-student',
             'data' => [
                 'student_name' => $user_detail['name'],
                 'teacher_name' => $data['teacher_name'],
-                'link' => $data['url']
+                'link' => $data['url']. '/' . $data['student_id'] . '?registration_token='. $token,
             ],
             'mail_recipient' => $user_detail['email'],
             'mail_recipient_name' => $user_detail['name' ],
