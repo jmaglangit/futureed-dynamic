@@ -15,6 +15,7 @@ class Client extends Model {
     protected $hidden = ['created_by','updated_by','created_at','updated_at','deleted_at'];
 
     protected $fillable = [
+		'user_id',
         'first_name',
         'last_name',
         'street_address',
@@ -23,11 +24,16 @@ class Client extends Model {
         'country',
         'country_id',
         'zip',
+		'school_code',
+		'account_status',
+		'client_role'
     ];
 
     protected $attributes = [
         'created_by' => 1,
-        'updated_by' => 1
+        'updated_by' => 1,
+		'country_id' => 0,
+		'account_status' => 'Pending'
     ];
 
 
