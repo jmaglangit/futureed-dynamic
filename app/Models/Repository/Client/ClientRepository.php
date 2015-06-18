@@ -57,26 +57,17 @@ class ClientRepository implements ClientRepositoryInterface
     {
 
         try {
-            Client::insert([
-                'user_id' => $client['user_id'],
-                'first_name' => $client['first_name'],
-                'last_name' => $client['last_name'],
-                'client_role' => $client['client_role'],
-                'school_code' => $client['school_code'],
-                'street_address' => $client['street_address'],
-                'city' => $client['city'],
-                'state' => $client['state'],
-                'country_id' => ((isset($client['country_id'])) ? $client['country_id'] : 0),
-                'country' => $client['country'],
-                'zip' => $client['zip'],
-                'account_status' => (isset($client['account_status'])) ? $client['account_status'] : config('futureed.client_account_status_pending'),
-                'created_by' => 1,
-                'updated_by' => 1,
-            ]);
+
+			$client =  Client::create($client);
+
+
+			return $client;
+
+
         } catch (Exception $e) {
             return $e->getMessage();
         }
-        return true;
+
     }
 
     public function getClientId($user_id)
