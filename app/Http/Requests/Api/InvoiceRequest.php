@@ -33,9 +33,9 @@ class InvoiceRequest extends ApiRequest {
             case 'POST':
             default:
                 return [
-                    'order_no' => 'required|numeric',
+                    'order_no' => 'required',
                     'invoice_date' => 'required|date_format:Ymd',
-                    'invoice_no' => 'required|numeric',
+                    'invoice_no' => 'required',
                     'client_id' => 'required|numeric',
                     'client_name' => 'required',
                     'date_start' => 'required|date_format:Ymd',
