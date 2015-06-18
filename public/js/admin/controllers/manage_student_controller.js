@@ -273,7 +273,6 @@ function ManageStudentController($scope, manageStudentService, apiService, Table
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					self.detail = response.data;
-					console.log(self.detail);
 				}
 			}
 			$scope.ui_unblock();
