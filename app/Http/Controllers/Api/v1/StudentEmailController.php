@@ -20,18 +20,19 @@ class StudentEmailController extends ApiController {
 	protected $mail;
 
 	public function __construct(
-									StudentRepositoryInterface $student,
-									ClientRepositoryInterface $client,
-									UserRepositoryInterface $user,
-									CodeGeneratorServices $code,
-									MailServices $mail
-								){
+		StudentRepositoryInterface $student,
+		ClientRepositoryInterface $client,
+		UserRepositoryInterface $user,
+		CodeGeneratorServices $code,
+		MailServices $mail
+	)
+	{
 
-			$this->student = $student;
-			$this->client = $client;
-			$this->user = $user;
-			$this->code = $code;
-			$this->mail = $mail;
+		$this->student = $student;
+		$this->client = $client;
+		$this->user = $user;
+		$this->code = $code;
+		$this->mail = $mail;
 
 	}
 
