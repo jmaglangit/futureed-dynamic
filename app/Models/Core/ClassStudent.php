@@ -25,7 +25,7 @@ class ClassStudent extends Model {
 
 	];
 
-//Relationships
+	//Relationships
 
 	public function user()
 	{
@@ -40,7 +40,7 @@ class ClassStudent extends Model {
 	}
 
 
-//Scopes
+	//Scopes
 
 	public function scopeClassroom($query, $classroom)
 	{
@@ -60,7 +60,7 @@ class ClassStudent extends Model {
 	}
 
 
-//-------------scopes
+	//-------------scopes
 	public function scopeEmail($query, $email)
 	{
 
@@ -70,7 +70,7 @@ class ClassStudent extends Model {
 
 	}
 
-//-------------relationships
+	//-------------relationships
 	public function classroom()
 	{
 		return $this->belongsTo('FutureEd\Models\Core\Classroom', 'class_id', 'id');
