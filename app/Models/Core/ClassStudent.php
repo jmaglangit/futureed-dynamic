@@ -8,15 +8,15 @@ use FutureEd\Models\Core\Student;
 class ClassStudent extends Model {
 
 	//
-    use SoftDeletes;
+	use SoftDeletes;
 
-    protected $table = 'class_students';
+	protected $table = 'class_students';
 
-    protected $dates = ['deleted_at'];
-    
-    protected $fillable = ['student_id', 'class_id', 'status', 'verification_code'];
+	protected $dates = ['deleted_at'];
 
-    protected $hidden = ['class_id','student_id','verification_code','created_by','updated_by','created_at','updated_at','deleted_at'];
+	protected $fillable = ['student_id', 'class_id', 'status', 'verification_code'];
+
+	protected $hidden = ['class_id', 'student_id', 'verification_code', 'created_by', 'updated_by', 'created_at', 'updated_at', 'deleted_at'];
 
 
 	protected $attributes = [
@@ -24,49 +24,55 @@ class ClassStudent extends Model {
 		'updated_by' => 1,
 
 	];
-    //Relationships
 
-    public function user(){
+//Relationships
 
-        return $this->belongsToMany('FutureEd\Models\Core\User','students','id','user_id');
-    }
+	public function user()
+	{
 
-    public function student(){
+		return $this->belongsToMany('FutureEd\Models\Core\User', 'students', 'id', 'user_id');
+	}
 
-        return $this->belongsTo('FutureEd\Models\Core\Student')->with('user');
-    }
+	public function student()
+	{
 
-
-    //Scopes
-
-    public function scopeClassroom($query, $classroom){
-
-        return $query->where('class_id',$classroom);
-    }
+		return $this->belongsTo('FutureEd\Models\Core\Student')->with('user');
+	}
 
 
-    public function scopeUsername($query, $username) {
+//Scopes
 
-        return $query->whereHas('user', function($query) use ($username) {
+	public function scopeClassroom($query, $classroom)
+	{
 
-                $query->where('username', 'like', '%'.$username.'%');
-        });
-
-    }
+		return $query->where('class_id', $classroom);
+	}
 
 
-    //-------------scopes
-    public function scopeEmail($query, $email) {
+	public function scopeUsername($query, $username)
+	{
 
-        return $query->whereHas('user', function($query) use ($email) {
-            $query->where('email', 'like', '%'.$email.'%');
-        });
+		return $query->whereHas('user', function ($query) use ($username) {
 
-    }
-    
-    //-------------relationships
+			$query->where('username', 'like', '%' . $username . '%');
+		});
+
+	}
+
+
+//-------------scopes
+	public function scopeEmail($query, $email)
+	{
+
+		return $query->whereHas('user', function ($query) use ($email) {
+			$query->where('email', 'like', '%' . $email . '%');
+		});
+
+	}
+
+//-------------relationships
 	public function classroom()
 	{
-		return $this->belongsTo('FutureEd\Models\Core\Classroom','class_id','id');
+		return $this->belongsTo('FutureEd\Models\Core\Classroom', 'class_id', 'id');
 	}
 }
