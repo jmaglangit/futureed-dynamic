@@ -156,7 +156,10 @@ div > .nav-list > li > a{
 .margin-30-top{
 	margin-top: 30px;
 }
-
+.top-10 {
+	position: relative;
+	top: 10px;
+}
 /*Futureed Custom DataTable Design*/
 .price-action{
 	position: relative;

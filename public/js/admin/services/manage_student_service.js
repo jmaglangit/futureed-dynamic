@@ -42,5 +42,13 @@ function manageStudentService($http) {
 			, url 	: adminApiUrl + 'admin/manage/student/' + id
 		});
 	}
+
+	manageStudentApi.saveEdit = function(data) {
+		return $http({
+			method 	: Constants.METHOD_PUT
+			, data 	: data
+			, url 	: adminApiUrl + 'admin/manage/student/' + data.id
+		})
+	}
 	return manageStudentApi
 }
