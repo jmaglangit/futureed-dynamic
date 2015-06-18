@@ -38,8 +38,8 @@ class TeacherStudentRequest extends ApiRequest {
 				return[
 					'username' => 'required|min:'.config('futureed.username_min').'|max:'.config('futureed.username_max').'|alpha_num|unique:users,username,'.$student_user_id.',id,user_type,'.$student.',deleted_at,NULL',
 					'email' => 'required|email|unique:users,email,'.$student_user_id.',id,user_type,'.$student.',deleted_at,NULL',
-					'first_name'    => 'required|regex:/^([a-z\x20])+$/i|max:64',
-					'last_name'     => 'required|regex:/^([a-z\x20])+$/i|max:64',
+					'first_name'    => 'required|regex:'. config('regex.name') .'|string',
+					'last_name'     => 'required|regex:'. config('regex.name') .'|string',
 					'gender'        => 'required|alpha|in:Male,Female',
 					'birth_date'    => 'required|date_format:Ymd',
 					'country_id'    => 'required|integer',
