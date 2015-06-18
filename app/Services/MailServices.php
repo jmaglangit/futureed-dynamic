@@ -308,28 +308,25 @@ class MailServices {
 
     }
 
-	public function sendMailInviteTeacher($user, $current, $url)
+	public function sendMailInviteTeacher($user,$client, $current, $url)
 	{
 
-		$template = 'emails.client.invite-teacher';
-
 		//generate registration_token
-		$token = $this->reg_token->getRegistrationToken($user['email']);
-
+		$token = $this->reg_token->getRegistrationToken($user->email);
 
 		//add token to user
-		$this->user->addRegistrationToken($user['user_id'],$token);
+		$this->user->addRegistrationToken($user->id,$token);
 
 
 		$content = [
-			'view' => $template,
+			'view' => 'emails.client.invite-teacher',
 			'data' => [
-				'name' => $user['name'],
+				'name' => $user->name,
 				'current_user' => $current['first_name'] . " " . $current['last_name'],
-				'link' => $url['callback_uri'] . '/' . $current['id']. '?registration_token='. $token,
+				'link' => $url['callback_uri'] . '/' . $client->id . '?registration_token='. $token,
 			],
-			'mail_recipient' => $user['email'],
-			'mail_recipient_name' => $user['name'],
+			'mail_recipient' => $user->email,
+			'mail_recipient_name' => $user->name,
 			'subject' => 'You have been invited to join Future Lesson!'
 		];
 

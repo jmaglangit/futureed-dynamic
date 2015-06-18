@@ -37,7 +37,7 @@ class InvoiceRequest extends ApiRequest {
                     'invoice_date' => 'required|date_format:Ymd',
                     'invoice_no' => 'required',
                     'client_id' => 'required|numeric',
-                    'client_name' => 'required',
+                    'client_name' => 'required|regex:'. config('regex.name'),
                     'date_start' => 'required|date_format:Ymd',
                     'date_end' => 'required|date_format:Ymd',
                     'seats_total' => 'required|numeric|between:1,999999',
