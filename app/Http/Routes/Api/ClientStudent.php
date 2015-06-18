@@ -29,5 +29,10 @@
 				'uses' => 'Api\v1\TeacherStudentController@viewStudentDetailsByToken',
 				'as' => 'client-manage.update.student']);
 
+			Routes::put('/email/student/{id}', [
+				'uses' => 'Api\v1\StudentEmailController@updateStudentEmail',
+				'as' => 'parent-student.email.student']);
+
+
 		});
 

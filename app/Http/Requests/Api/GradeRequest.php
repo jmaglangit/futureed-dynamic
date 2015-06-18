@@ -32,7 +32,7 @@ class GradeRequest extends ApiRequest {
 			default:
 				return [
                     'code' => 'required|Integer|Unique:grades',
-					'name' => 'required|string',
+					'name' => 'required|regex:'. config('regex.name_numeric'),
 					'status' => 'required|in:Enabled,Disabled',
 					'country_id' => 'required|Integer'
 				];				

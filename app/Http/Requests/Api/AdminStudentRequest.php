@@ -38,8 +38,8 @@ class AdminStudentRequest extends ApiRequest {
 				return [
 					'username' => "required|string|min:8|max:32|unique:users,username,NULL,id,user_type,$student,deleted_at,NULL",
 					'email' => "required|email|unique:users,email,NULL,id,user_type,$student,deleted_at,NULL",
-					'first_name' => 'required|string',
-					'last_name' => 'required|string',
+					'first_name' => 'required|regex:'. config('regex.name') .'|string',
+					'last_name' => 'required|regex:'. config('regex.name') .'|string',
 					'gender' => 'required|in:Male,Female',
 					'birth_date' => 'required|date_format:Ymd|before:-13 year',
 					'city' => 'required|string',
@@ -55,8 +55,8 @@ class AdminStudentRequest extends ApiRequest {
 				$student = config('futureed.student');
 				return [
 					'username' => "required|string|min:8|max:32|unique:users,username," . $student_user_id . ",id,user_type,$student,deleted_at,NULL",
-					'first_name' => 'required|string',
-					'last_name' => 'required|string',
+					'first_name' => 'required|regex:'. config('regex.name') .'|string',
+					'last_name' => 'required|regex:'. config('regex.name') .'|string',
 					'gender' => 'required|in:Male,Female',
 					'birth_date' => 'required|date_format:Ymd|before:-13 year',
 					'city' => 'required|string',
