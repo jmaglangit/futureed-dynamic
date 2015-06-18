@@ -195,10 +195,6 @@ table#client-list{
 .row > .col-sm-5{
 	display: none;
 }
-.row > .col-xs-3{
-	position: relative;
-	bottom: 10px;
-}
 
 .td-fix{
 	word-wrap:break-word;

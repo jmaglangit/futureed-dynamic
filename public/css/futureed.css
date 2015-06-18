@@ -937,6 +937,7 @@ div > .btncon > a {
   	font-size: 15px;
   	margin-left: 60px;
   	padding: 10px;
+  	text-align: left;
 }
 
 .alert-success{
@@ -946,6 +947,7 @@ div > .btncon > a {
   	font-size: 15px;
   	margin-left: 60px;
   	padding: 10px;
+  	text-align: left;
 }
 
 .margin-top-8 {

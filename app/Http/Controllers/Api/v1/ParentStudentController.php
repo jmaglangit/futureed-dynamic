@@ -129,6 +129,31 @@ class ParentStudentController extends ApiController {
 
 	}
 
+	public function parentUpdateStudent($id,ParentStudentRequest $request){
+
+		$student = $request->only('first_name','last_name','birth_date','gender','country_id','state','city');
+
+		$user = $request->only('username');
+		$user['name'] = $student['first_name'] .' '. $student['last_name'];
+
+		//get student details
+		$student_detail = $this->student->viewStudent($id);
+
+		//check if student is empty
+		if(!$student_detail){
+
+			return $this->respondErrorMessage(2001);
+		}
+
+		//update username and name to user's table
+		$this->user->updateUser($student_detail['user_id'],$user);
+
+		$this->student->updateStudentDetails($id,$student);
+
+		//get the updated student details
+		return $this->respondWithData($this->student->viewStudent($id));
+	}
+
 
 
 }

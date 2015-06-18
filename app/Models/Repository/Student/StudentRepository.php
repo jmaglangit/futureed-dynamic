@@ -157,18 +157,18 @@ class StudentRepository implements StudentRepositoryInterface
 	//update student details
 	public function updateStudentDetails($id, $data)
 	{
-		Student::where('id', '=', $id)
-			->update(['first_name' => $data['first_name'],
+		try {
 
-				'last_name' => $data['last_name'],
-				'gender' => $data['gender'],
-				'birth_date' => $data['birth_date'],
-				'grade_code' => $data['grade_code'],
-				'school_code' => (isset($data['school_code'])) ? $data['school_code'] : NULL,
-				'country' => $data['country'],
-				'country_id' => $data['country_id'],
-				'city' => $data['city'],
-				'state' => $data['state']]);
+			$student = Student::find($id);
+
+			$student->update($data);
+
+		} catch(Exception $e) {
+
+			return $e->getMessage();
+
+		}
+		return $student;
 	}
 
 
