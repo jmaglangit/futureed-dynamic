@@ -37,7 +37,7 @@ class ClassroomRequest extends ApiRequest {
             default:
                 return [
                     'order_no' => 'required|numeric',
-                    'name' => 'required',
+                    'name' => 'required|regex:'. config('regex.name'),
                     'grade_id' => 'required|numeric',
                     'client_id' => 'required|numeric',
                     'seats_taken' => 'required|numeric',
