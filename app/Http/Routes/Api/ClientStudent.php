@@ -20,5 +20,9 @@
 			Routes::resource('/student','Api\v1\ClientStudentController',
 				['except' => ['create','edit']]);
 
+			Routes::put('/email/student/{id}', [
+				'uses' => 'Api\v1\StudentEmailController@updateStudentEmail',
+				'as' => 'parent-student.email.student']);
+
 		});
 
