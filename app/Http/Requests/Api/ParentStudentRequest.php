@@ -50,8 +50,8 @@ class ParentStudentRequest extends ApiRequest {
 				$student = config('futureed.student');
 				return[
 					'username' => 'required|min:'.config('futureed.username_min').'|max:'.config('futureed.username_max').'|alpha_num|unique:users,username,'.$student_user_id.',id,user_type,'.config('futureed.student').',deleted_at,NULL',
-					'first_name'    => 'required|regex:/^([a-z\x20])+$/i|max:64',
-					'last_name'     => 'required|regex:/^([a-z\x20])+$/i|max:64',
+					'first_name'    => 'required|regex:'.config('regex.name').'|max:64',
+					'last_name'     => 'required|regex:'.config('regex.name').'|max:64',
 					'gender'        => 'required|alpha|in:Male,Female',
 					'birth_date'    => 'required|date_format:Ymd',
 					'country_id'    => 'required|integer',
