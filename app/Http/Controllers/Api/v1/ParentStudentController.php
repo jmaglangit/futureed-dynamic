@@ -4,8 +4,6 @@ use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
 use FutureEd\Http\Requests\Api\ParentStudentRequest;
-use FutureEd\Http\Requests\Api\InvoiceRequest;
-use FutureEd\Models\Repository\Classroom\ClassroomRepositoryInterface;
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use FutureEd\Models\Repository\User\UserRepositoryInterface;
 use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
@@ -17,7 +15,7 @@ use FutureEd\Services\MailServices;
 
 class ParentStudentController extends ApiController {
 
-    protected $classroom;
+
     protected $client;
     protected $code;
     protected $mail;
@@ -31,8 +29,7 @@ class ParentStudentController extends ApiController {
         UserRepositoryInterface $user,
         CodeGeneratorServices $code,
         MailServices $mail,
-        ParentStudentRepositoryInterface $parent_student,
-        ClassroomRepositoryInterface $classroom){
+        ParentStudentRepositoryInterface $parent_student){
 
         $this->student = $student;
         $this->client = $client;
@@ -40,7 +37,6 @@ class ParentStudentController extends ApiController {
         $this->code = $code;
         $this->mail = $mail;
         $this->parent_student = $parent_student;
-        $this->classroom = $classroom;
 
     }
 
@@ -132,66 +128,29 @@ class ParentStudentController extends ApiController {
         return $this->respondWithData($return);
 
     }
-	public function parentUpdateStudent($id,ParentStudentRequest $request){
 
-		$student = $request->only('first_name','last_name','birth_date','gender','country_id','state','city');
+    public function parentUpdateStudent($id,ParentStudentRequest $request){
 
-		$user = $request->only('username');
-		$user['name'] = $student['first_name'] .' '. $student['last_name'];
+        $student = $request->only('first_name','last_name','birth_date','gender','country_id','state','city');
 
-		//get student details
-		$student_detail = $this->student->viewStudent($id);
+        $user = $request->only('username');
+        $user['name'] = $student['first_name'] .' '. $student['last_name'];
 
-		//check if student is empty
-		if(!$student_detail){
+        //get student details
+        $student_detail = $this->student->viewStudent($id);
 
-			return $this->respondErrorMessage(2001);
-		}
+        //check if student is empty
+        if(!$student_detail){
 
-		//update username and name to user's table
-		$this->user->updateUser($student_detail['user_id'],$user);
-
-		$this->student->updateStudentDetails($id,$student);
-
-		//get the updated student details
-		return $this->respondWithData($this->student->viewStudent($id));
-	}
-
-    public function paySubscription(InvoiceRequest $request)
-    {
-        $parent = $request->only('parent_user_id');
-        $students = $this->parent_student->getParenStudents($parent);
-        if($students->count() == 0){
             return $this->respondErrorMessage(2001);
         }
 
-        /**
-         * TODO:
-         * 1. Insert Classroom.
-         * 2. Insert Class Student.
-         * 3. Insert Order.
-         * 4. Insert Invoice.
-         * 5. Insert Invoice Details.
-         */
+        //update username and name to user's table
+        $this->user->updateUser($student_detail['user_id'],$user);
 
-        $next_order_no =
+        $this->student->updateStudentDetails($id,$student);
 
-
-        $classroom = $request->only('client_id');
-        $classroom['order_no'] = 1;
-        $classroom['name'] = 'NONE';
-        $classroom['grade_id'] = 1;
+        //get the updated student details
+        return $this->respondWithData($this->student->viewStudent($id));
     }
-
-    public function getStudents(){
-        $criteria['parent_user_id'] = 2;
-
-        $count = $this->parent_student->getParenStudents($criteria);
-
-        //dd($count->count());
-
-        return $this->respondWithData($this->parent_student->getParenStudents($criteria));
-    }
-
-
 }
