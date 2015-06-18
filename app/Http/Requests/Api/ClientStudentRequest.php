@@ -27,8 +27,8 @@ class ClientStudentRequest extends ApiRequest {
 				return[
 					'username' => "required|string|min:8|max:32|unique:users,username,NULL,id,user_type,$student,deleted_at,NULL",
 					'email' => "required|email|unique:users,email,NULL,id,user_type,$student,deleted_at,NULL",
-					'first_name'    => 'required|regex:/^([a-z\x20])+$/i|max:64',
-					'last_name'     => 'required|regex:/^([a-z\x20])+$/i|max:64',
+					'first_name'    => 'required|regex:'. config('regex.name') .'|max:64',
+					'last_name'     => 'required|regex:'. config('regex.name') .'|max:64',
 					'gender'        => 'required|alpha|in:Male,Female',
 					'birth_date'    => 'required|date_format:Ymd',
 					'country_id'    => 'required|integer',
@@ -42,8 +42,8 @@ class ClientStudentRequest extends ApiRequest {
 			case 'PUT':
 
 				return[
-					'first_name'    => 'required|regex:/^([a-z\x20])+$/i|max:64',
-					'last_name'     => 'required|regex:/^([a-z\x20])+$/i|max:64',
+					'first_name'    => 'required|regex:'. config('regex.name') .'|max:64',
+					'last_name'     => 'required|regex:'. config('regex.name') .'|max:64',
 					'gender'        => 'required|alpha|in:Male,Female',
 					'birth_date'    => 'required|date_format:Ymd',
 					'country_id'    => 'required|integer',
