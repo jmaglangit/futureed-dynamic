@@ -52,7 +52,7 @@ class UserRepository implements UserRepositoryInterface {
 
         try{
 
-            User::create([
+            return User::create([
                 'username' => $user['username'],
                 'email' => $user['email'],
                 'name' => $user['first_name'] .' '.$user['last_name'],
@@ -69,7 +69,7 @@ class UserRepository implements UserRepositoryInterface {
         }catch(Exception $e){
             return $e->getMessage();
         }
-        return true;
+
     }
 
     public function updateUser($id, $data) {

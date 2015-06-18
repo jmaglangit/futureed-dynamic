@@ -9,6 +9,10 @@
 				'uses' => 'Api\v1\ParentStudentController@parentConfirmStudent',
 				'as' => 'parent-student.confirm.student']);
 
+			Routes::put('/update-student/{id}', [
+				'uses' => 'Api\v1\ParentStudentController@parentUpdateStudent',
+				'as' => 'parent-student.update.student']);
+
 		});
 
 		Routes::group(['prefix' => '/client/manage'], function()

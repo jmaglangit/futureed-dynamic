@@ -7,6 +7,7 @@ function LoginController($scope, apiService, clientLoginApiService, clientProfil
 	var self = this;
 
 	self.set = {};
+	self.validation = {};
 
 	self.clientLogin = clientLogin;
 	self.clientForgotPassword = clientForgotPassword;
@@ -203,8 +204,7 @@ function LoginController($scope, apiService, clientLoginApiService, clientProfil
 	function registerClient() {
 	    $scope.$parent.errors = Constants.FALSE;
 
-	    $("#registration_form input").removeClass("required-field");
-	    $("#registration_form select").removeClass("required-field");
+	    $("#registration_form input, #registration_form select").removeClass("required-field");
 	    
 	    if($scope.e_error || $scope.u_error) {
 	      $("html, body").animate({ scrollTop: 320 }, "slow");
@@ -232,7 +232,7 @@ function LoginController($scope, apiService, clientLoginApiService, clientProfil
 	              $("#registration_form select[name='" + value.field +"']").addClass("required-field");
 	            });
 	          } else if(response.data) {
-	            $scope.$parent.registered = Constants.TRUE;
+					self.registered = Constants.TRUE;
 	          }
 	        }
 	        $scope.ui_unblock();
@@ -244,7 +244,7 @@ function LoginController($scope, apiService, clientLoginApiService, clientProfil
 	  }
 
 	function resendClientConfirmation() {
-	    $scope.$parent.errors = Constants.FALSE;
+	    self.errors = Constants.FALSE;
 
 	    self.user_type = Constants.CLIENT;
 	    self.email = (!isStringNullorEmpty(self.email)) ? self.email : $("#registration_success_form input[name='email']").val();
@@ -253,48 +253,180 @@ function LoginController($scope, apiService, clientLoginApiService, clientProfil
 
 	    $scope.ui_block();
 	    apiService.resendConfirmation(self.email, self.user_type, this.resend_confirmation_url).success(function(response) {
-	      if(response.status == Constants.STATUS_OK) {
-	        if(response.errors) {
-	          $scope.errorHandler(response.errors);
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
 
-	          angular.forEach($scope.errors, function(value, key) {
-	          	if(angular.equals(value, Constants.MSG_ACC_CONFIRMED)) {
-	          		self.account_confirmed = Constants.TRUE;
-	          	}
-	          });
-	        } else if(response.data) {
-	          self.resent = Constants.TRUE;
-	        }
-	      }
-	      $scope.ui_unblock();
+					angular.forEach($scope.errors, function(value, key) {
+						if(angular.equals(value, Constants.MSG_ACC_CONFIRMED)) {
+							self.account_confirmed = Constants.TRUE;
+						}
+					});
+				} else if(response.data) {
+					self.resent = Constants.TRUE;
+				}
+			}
+
+			$scope.ui_unblock();
 	    }).error(function(response) {
-	      $scope.internalError();
-	      $scope.ui_unblock();
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
 	    });
 	}
 
   	function confirmClientRegistration() {
-  		$scope.$parent.errors = Constants.FALSE;
+  		self.errors = Constants.FALSE;
 	    
 	    self.user_type = Constants.CLIENT;
 	    self.email = (!isStringNullorEmpty(self.email)) ? self.email : $("#registration_success_form input[name='email']").val();
 
 	    $scope.ui_block();
 	    apiService.confirmCode(self.email, self.confirmation_code, self.user_type).success(function(response) {
-	      if(response.status == Constants.STATUS_OK) {
-	        if(response.errors) {
-	          $scope.errorHandler(response.errors);
-	        } else if(response.data){
-	          self.confirmed = Constants.TRUE;
-	          self.set.id = response.data.id;
-	          console.log(self.set);
-	        } 
-	      }
+			if(response.status == Constants.STATUS_OK) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data){
+					self.confirmed = Constants.TRUE;
+					self.set.id = response.data.id;
+				} 
+			}
 
-	      $scope.ui_unblock();
+			$scope.ui_unblock();
 	    }).error(function(response) {
-	      $scope.internalError();
-	      $scope.ui_unblock();
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
 	    });
 	}
+
+	self.getTeacherDetails = function(id, token) {
+		self.fields = [];
+		self.errors = Constants.FALSE;
+
+		$scope.ui_block();
+		clientLoginApiService.getTeacherDetails(id, token).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					if(!response.data[0]) {
+						self.errors = [Constants.MSG_NO_RECORD];
+					} else {
+						self.record = {};
+						var data = response.data[0];
+
+						self.record.id = data.id;
+						self.record.email = data.user.email;
+						self.record.username = data.user.username;
+						self.record.first_name = data.first_name;
+						self.record.last_name = data.last_name;
+						self.record.school_code = data.school_code;
+					}
+				}
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.updateClientRegistration = function() {
+		self.errors = Constants.FALSE;
+		self.validation = {};
+		self.fields = [];
+		
+		if(!angular.equals(self.record.password, self.record.confirm_password)) {
+			self.fields['password'] = Constants.TRUE;
+			self.errors = [Constants.MSG_PW_NOT_MATCH];
+		} else if(!self.term) {
+	      self.errors = ["Please accept the terms and conditions."];
+	    } else {
+			var base_url = $("#base_url_form input[name='base_url']").val();
+			self.record.callback_uri = base_url + Constants.URL_REGISTRATION(angular.lowercase(Constants.CLIENT));
+
+			$scope.ui_block();
+			clientLoginApiService.updateClientRegistration(self.record).success(function(response) {
+				if(angular.equals(response.status, Constants.STATUS_OK)) {
+					if(response.errors) {
+						self.errors = $scope.errorHandler(response.errors);
+
+						angular.forEach(response.errors, function(value, key) {
+							self.fields[value.field] = Constants.TRUE;
+			            });
+					} else if(response.data) {
+						self.registered = Constants.TRUE;
+						self.email = self.record.email;
+					}
+				}
+
+				$scope.ui_unblock();
+			}).error(function(response) {
+				self.errors = $scope.internalError();
+				$scope.ui_unblock();
+			});
+		}
+
+		$("html, body").animate({ scrollTop: 0 }, "slow");
+	}
+
+	self.checkAvailability = function(username, user_type) {
+		self.validation.u_loading = Constants.TRUE;
+		self.validation.u_success = Constants.FALSE;
+		self.validation.u_error = Constants.FALSE;
+
+		apiService.validateUsername(username, user_type).success(function(response) {
+			self.validation.u_loading = Constants.FALSE;
+
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.validation.u_error = response.errors[0].message;
+
+					if(angular.equals(self.validation.u_error, Constants.MSG_U_NOTEXIST)) {
+						self.validation.u_error = Constants.FALSE;
+						self.validation.u_success = Constants.MSG_U_AVAILABLE;
+					}
+				} else if(response.data) {
+					if(angular.equals(response.data.id, self.record.id)) {
+						self.validation.u_success = Constants.MSG_U_AVAILABLE;
+					} else {
+						self.validation.u_error = Constants.MSG_U_EXIST;  
+					}
+				}
+			}
+		}).error(function(response) {
+			self.validation.u_loading = Constants.FALSE;
+			self.errors = $scope.internalError();
+		});
+	}
+
+	self.checkEmailAvailability = function(email, user_type) {
+		self.validation.e_loading = Constants.TRUE;
+		self.validation.e_success = Constants.FALSE;
+		self.validation.e_error = Constants.FALSE;
+
+		apiService.validateEmail(email, user_type).success(function(response) {
+			self.validation.e_loading = Constants.FALSE;
+
+			if(response.status == Constants.STATUS_OK) {
+				if(response.errors) {
+					self.validation.e_error = response.errors[0].message;
+
+					if(angular.equals(self.validation.e_error, Constants.MSG_EA_NOTEXIST)) {
+						self.validation.e_error = Constants.FALSE;
+						self.validation.e_success = Constants.MSG_EA_AVAILABLE;
+					}
+				} else if(response.data) {
+					if(angular.equals(response.data.id, self.record.id)) {
+						self.validation.e_success = Constants.MSG_EA_AVAILABLE;
+					} else {
+						self.validation.e_error =Constants.MSG_EA_EXIST;  
+					}
+				}
+			}
+		}).error(function(response) {
+			self.validation.e_loading = Constants.FALSE;
+			self.errors = $scope.internalError();
+		});
+	}  
 }	

@@ -5,6 +5,20 @@
 		</div>
 	</div>
 
+	<div class="col-xs-12 success-container" ng-if="client.errors || client.validate.c_success">
+		<div class="alert alert-error" ng-if="client.errors">
+            <p ng-repeat="error in client.errors track by $index" > 
+              	{! error !}
+            </p>
+        </div>
+
+        <div class="alert alert-success" ng-if="client.validate.c_success">
+            <p> 
+                {! client.validate.c_success !}
+            </p>
+        </div>
+    </div>
+
 	<div class="col-xs-12 padding-0-30">
 		<div class="title-mid">
 			Search
@@ -12,16 +26,6 @@
 	</div>
 
 	<div class="col-xs-12 search-container">
-		<div class="alert alert-error" ng-if="client.errors">
-            <p ng-repeat="error in client.errors track by $index" > 
-                {! error !}
-            </p>
-        </div>
-        <div class="alert alert-success" ng-if="client.validate.c_success">
-            <p> 
-                {! client.validate.c_success !}
-            </p>
-        </div>
 		<div class="form-search">
 			{!! Form::open(
 				array('id' => 'search_form'
@@ -131,6 +135,7 @@
 			            <th>Name</th>
 			            <th>Email</th>
 			            <th>Role</th>
+			            <th>Status</th>
 			            <th>Action</th>
 			        </tr>
 		        </thead>
@@ -139,6 +144,7 @@
 			            <td>{! a.first_name !} {! a.last_name !}</td>
 			            <td>{! a.user.email !}</td>
 			            <td>{! a.client_role !}</td>
+			            <td>{! a.account_status !}</td>
 			            <td>
 			            	<div class="row">
 			            		<div class="col-xs-3">
@@ -157,12 +163,12 @@
 			            </td>
 			        </tr>
 			        <tr class="odd" ng-if="!client.clients.length && !client.table.loading">
-			        	<td valign="top" colspan="4" class="dataTables_empty">
+			        	<td valign="top" colspan="5">
 			        		No records found
 			        	</td>
 			        </tr>
 			        <tr class="odd" ng-if="client.table.loading">
-			        	<td valign="top" colspan="4" class="dataTables_empty">
+			        	<td valign="top" colspan="5">
 			        		Loading...
 			        	</td>
 			        </tr>

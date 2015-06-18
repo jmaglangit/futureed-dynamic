@@ -26,8 +26,8 @@ class ClientTeacherRequest extends ApiRequest
 			case 'PUT':
 				$client = config('futureed.client');
 				return [
-					'first_name' => 'required|string',
-					'last_name' => 'required|string',
+					'first_name' => 'required|regex:'. config('regex.name') ,
+					'last_name' => 'required|regex:'. config('regex.name'),
 					'street_address' => 'string',
 					'city' => 'string',
 					'state' => 'string',
@@ -42,8 +42,8 @@ class ClientTeacherRequest extends ApiRequest
 					'username' => "required|string|min:8|max:32|unique:users,username,NULL,id,user_type,$client,deleted_at,NULL",
 					'email' => "required|email|unique:users,email,NULL,id,user_type,$client,deleted_at,NULL",
 
-					'first_name' => 'required|string',
-					'last_name' => 'required|string',
+					'first_name' => 'required|regex:'. config('regex.name'),
+					'last_name' => 'required|regex:'. config('regex.name') ,
 					'current_user' => 'required|numeric',
 					'callback_uri' => 'required|string'
 				];
