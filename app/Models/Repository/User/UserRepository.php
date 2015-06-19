@@ -400,7 +400,7 @@ class UserRepository implements UserRepositoryInterface {
 	}
 
 	/**
-	 * Get Registration Token
+	 * Get Registration Token.
 	 * @param $id
 	 * @return mixed
 	 */
@@ -408,6 +408,18 @@ class UserRepository implements UserRepositoryInterface {
 
 		return User::select('registration_token')
 			->where('id',$id);
+	}
+
+	/**
+	 * Remove registration token.
+	 * @param $id
+	 * @return mixed
+	 */
+	public function deleteRegistrationToken($id){
+
+		return User::where('id',$id)->update([
+			'registration_token' => NULL
+		]);
 	}
 
 
