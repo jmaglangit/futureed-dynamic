@@ -140,7 +140,7 @@ class ClientRegisterController extends ClientController {
 
         	if(isset($client_response['status'])){
 
-        		$data = $this->user->getUser($user_response['id'],'Client')->toArray();
+        		$data = $this->user->getUser($user_response['id'],'Client');
 
         		$code = $this->user->getConfirmationCode($user_response['id']);
 
