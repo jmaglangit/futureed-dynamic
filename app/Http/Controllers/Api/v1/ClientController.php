@@ -113,7 +113,7 @@ class ClientController extends ApiController {
 				$user = input::only('username');
 
 				$client = input::only('first_name','last_name','street_address',
-									  'city','country','zip','state');
+									  'city','country','zip','state','country_id');
 
 				$school = input::only('school_name','school_code','school_street_address','school_city',
 										  'school_state','school_country','school_zip','school_contact_name','school_contact_number');
@@ -243,7 +243,7 @@ class ClientController extends ApiController {
 		$user_type = config('futureed.client');
 
 		$client = Input::only('first_name', 'last_name', 'client_role', 'school_code',
-			'street_address', 'city', 'state', 'country', 'zip');
+			'street_address', 'city', 'state', 'country', 'zip','country_id');
 
 		$user = Input::only('username', 'email', 'status');
 
