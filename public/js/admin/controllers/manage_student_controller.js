@@ -16,19 +16,30 @@ function ManageStudentController($scope, manageStudentService, apiService, Table
 	self.getStudentlist = getStudentlist;
 	self.user_type = Constants.STUDENT;
 
-	self.setActive = function(active) {
+	self.setActive = function(active, id, fromEdit) {
 		self.errors = Constants.FALSE;
 		self.searchDefaults();
 		self.validation = {};
 		self.reg = {};
 
+		self.fromEdit = (fromEdit) ? fromEdit:0;
 		self.active_list = Constants.FALSE;
 
 		switch(active) {
+			case Constants.ACTIVE_EDIT:
+				self.active_view = Constants.TRUE;
+				self.edit = Constants.TRUE;
+				self.success = Constants.FALSE;
+				self.errors = Constants.FALSE;
+				self.edit = Constants.TRUE;
+				self.viewStudent(id,self.fromEdit);
+				break;
 			case Constants.ACTIVE_VIEW:
 				self.active_list = Constants.FALSE;
 				self.active_add = Constants.FALSE;
 				self.active_view = Constants.TRUE;
+				self.edit = Constants.FALSE;
+				self.viewStudent(id,self.fromEdit);
 				break;
 			case Constants.ACTIVE_ADD:
 				self.active_add = Constants.TRUE;
@@ -75,7 +86,11 @@ function ManageStudentController($scope, manageStudentService, apiService, Table
 		self.validation.u_error = Constants.FALSE;
 		self.validation.u_success = Constants.FALSE;
 
-		var username = (self.reg.username) ? self.reg.username : self.EMPTY_STR;
+		if(self.detail) {
+			var username = (self.detail.username) ? self.detail.username : self.EMPTY_STR;
+		} else {
+			var username = (self.reg.username) ? self.reg.username : self.EMPTY_STR;
+		}
 
 		apiService.validateUsername(username, self.user_type).success(function(response) {
 			self.validation.u_loading = Constants.FALSE;
@@ -86,13 +101,23 @@ function ManageStudentController($scope, manageStudentService, apiService, Table
 
 					if(angular.equals(self.validation.u_error, Constants.MSG_U_NOTEXIST)) {
 						self.validation.u_error = Constants.FALSE;
-						self.validation.u_success = Constants.TRUE;
+
+						if(self.detail){
+							self.validation.u_success = Constants.MSG_U_AVAILABLE;
+						}else {
+							self.validation.u_success = Constants.MSG_U_AVAILABLE;
+						}
 					}
 				} else if(response.data) {
 					if(self.reg.id != response.data.id) {
 						self.validation.u_error = Constants.MSG_U_EXIST;
 					} else {
-						self.validation.u_success = Constants.TRUE;
+						if(self.reg){
+							self.validation.u_success = Constants.TRUE;
+						}else {
+							self.validation.u_success = Constants.MSG_U_AVAILABLE;
+						}
+						
 					}
 				}
 			}
@@ -143,8 +168,8 @@ function ManageStudentController($scope, manageStudentService, apiService, Table
 		switch(method){
 
 			case 'edit':
-				school_name = self.details.school_name;
-				self.details.school_code = Constants.EMPTY_STR;
+				school_name = self.detail.school;
+				self.detail.school_code = Constants.EMPTY_STR;
 				break;
 
 			case 'create':
@@ -180,8 +205,8 @@ function ManageStudentController($scope, manageStudentService, apiService, Table
 		var method = self.method;
 		switch(method){
 			case 'edit':
-				self.details.school_code = school.code;
-				self.details.school_name = school.name;
+				self.detail.school_code = school.code;
+				self.detail.school_name = school.name;
 				break;
 
 			case 'create':
@@ -210,7 +235,12 @@ function ManageStudentController($scope, manageStudentService, apiService, Table
 
 	self.getGradeLevel = function() {
 		self.grades = Constants.FALSE;
-		self.countryid = (self.reg.country_id != null) ? self.reg.country_id : 840;
+		
+		if(self.detail){
+			self.countryid = (self.detail.country_id != null) ? self.detail.country_id : 840;
+		}else {	
+			self.countryid = (self.reg.country_id != null) ? self.reg.country_id : 840;
+		}
 		apiService.getGradeLevel(self.countryid).success(function(response) {
 			if(response.status == Constants.STATUS_OK) {
 				if(response.errors) {
@@ -258,11 +288,12 @@ function ManageStudentController($scope, manageStudentService, apiService, Table
 		$("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 
-	self.viewStudent = function(id){
-		self.setActive('view');
+	self.viewStudent = function(id, fromEdit){
 		self.errors = Constants.FALSE;
-		self.success = Constants.FALSE;
-
+		self.validation = Constants.FALSE;
+		if(fromEdit == 0){
+			self.success = Constants.FALSE;
+		}
 		self.detail = {};
 
 		$scope.ui_block();
@@ -272,7 +303,13 @@ function ManageStudentController($scope, manageStudentService, apiService, Table
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
+					var data = response.data;
 					self.detail = response.data;
+					self.detail.email = data.user.email;
+					self.detail.username = data.user.username;
+					self.detail.new_email = data.user.new_email;
+					self.detail.school = data.school.name;
+					self.getGradeLevel();
 				}
 			}
 			$scope.ui_unblock();
@@ -299,5 +336,37 @@ function ManageStudentController($scope, manageStudentService, apiService, Table
 	self.clear = function() {
 		self.searchDefaults();
 		self.list();
+	}
+
+	/**
+	*@return id
+	*/
+	self.saveEdit = function() {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+		self.validation = Constants.FALSE;
+
+		self.detail.birth_date = $("#view_student_form input[name='hidden_date']").val();
+
+		$scope.ui_block();
+		manageStudentService.saveEdit(self.detail).success(function(response){
+			if(angular.equals(response.status,Constants.STATUS_OK)){
+				if(response.errors){
+					self.errors = $scope.errorHandler(response.errors);
+
+					angular.forEach(response.errors, function(value, key) {
+						$("#add_student_form input[name='" + value.field +"']").addClass("required-field");
+						$("#add_student_form select[name='" + value.field +"']").addClass("required-field");
+		            });
+				} else if(response.data) {
+					self.success = Constants.TRUE;
+					self.setActive('view', self.detail.id,1);
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(response){
+			$scope.internalError();
+			$scope.ui_unblock();
+		})
 	}
 }
