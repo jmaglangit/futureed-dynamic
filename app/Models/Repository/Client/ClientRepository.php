@@ -29,11 +29,11 @@ class ClientRepository implements ClientRepositoryInterface
 
         $client = new Client();
 
-        return $client->with('user')
+        return $client->with('user','school')
             ->id($id)
             ->role(config('futureed.teacher'))
             ->registrationtoken($registration_token)
-            ->get();
+            ->first();
 
     }
 
@@ -147,7 +147,7 @@ class ClientRepository implements ClientRepositoryInterface
 
             if($user && $client){
 
-                return Client::with('user')->find($id);
+                return Client::with('user','school')->find($id);
             }
 
 
