@@ -116,8 +116,9 @@ class ClassStudentController extends ApiController {
             $teacher = $this->user->getUser($client_user_id,config('futureed.client'));
 
             $email['user_id'] = $user_response['id'];
+			$email['student_id'] = $student_id;
             $email['teacher_name'] = !is_null($teacher) ? $teacher['name'] : "";
-            $email['url'] = $callback_uri['callback_uri'].'?email='.$user['email'];
+            $email['url'] = $callback_uri['callback_uri'];
 
             $this->mail->sendMailInviteStudent($email);
 

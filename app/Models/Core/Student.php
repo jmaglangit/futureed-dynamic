@@ -15,8 +15,6 @@ class Student extends Model {
     protected $hidden = [
         'password_image_id',
         'point_level_id',
-        'learning_style_id',
-//        'user_id',
         'created_by',
         'updated_by',
         'created_at',
@@ -109,6 +107,20 @@ class Student extends Model {
 		});
 
 
+	}
+
+	public function scopeToken($query,$reg_token){
+
+		return $query->whereHas('user',function($query) use ($reg_token){
+			$query->where('registration_token','=', $reg_token);
+
+		});
+
+	}
+
+	public function scopeId($query, $id)
+	{
+		return $query->where('id', $id);
 	}
 
 

@@ -8,6 +8,7 @@ var Constants = {
 
 	, EMPTY_STR		: ''
 	, ALL			: 'all'
+	, UNDEFINED		: 'undefined'
 
 	, METHOD_POST	: 'POST'
 	, METHOD_GET	: 'GET'

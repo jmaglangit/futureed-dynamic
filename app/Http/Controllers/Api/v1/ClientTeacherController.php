@@ -93,12 +93,6 @@ class ClientTeacherController extends ApiController {
 		$user['last_name'] = $client['last_name'];
 		$user['name'] = $client['first_name'] . " " . $client['last_name'];
 
-		$client['street_address'] = null;
-		$client['city'] = null;
-		$client['state'] = null;
-		$client['country_id'] = null;
-		$client['country'] = null;
-		$client['zip'] = null;
 
 		//get current user details
 		$current_user_details = $this->client->getClientDetails($client['current_user']);
@@ -107,23 +101,21 @@ class ClientTeacherController extends ApiController {
 		$client['school_code'] = $current_user_details['school_code'];
 
 		//return newly added user details
-		$this->user->addUser($user);
+		$user = $this->user->addUser($user);
 
-		//get user id
-		$user_id = $this->user->checkUserName($user['username'], $user['user_type']);
-		$user['user_id'] = $user_id;
+		$client['user_id'] = $user->id;
 
-		//assign user id to client
-		$client['user_id'] = $user_id;
+		//add new client
+		$client = $this->client->addClient($client);
 
-		$this->client->addClient($client);
+		//get user information
+		$user = $this->user->getUser($client->user_id,'all');
 
+		//TODO: merge user details on addClient return data.
 		//send email to invited teacher
-		$this->mail->sendMailInviteTeacher($user, $current_user_details, $url);
+		$this->mail->sendMailInviteTeacher($user,$client, $current_user_details, $url);
 
-		$client_id = $this->client->getClientId($user_id);
-
-		return $this->respondWithData(['id' => $client_id]);
+		return $this->respondWithData(['id' => $client->id]);
 	}
 
 	/**

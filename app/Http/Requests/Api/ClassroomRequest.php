@@ -36,8 +36,8 @@ class ClassroomRequest extends ApiRequest {
             case 'POST':
             default:
                 return [
-                    'order_no' => 'required|string',
-                    'name' => 'required',
+                    'order_no' => 'required',
+                    'name' => 'required|regex:'. config('regex.name'),
                     'grade_id' => 'required|numeric',
                     'client_id' => 'required|numeric',
                     'seats_taken' => 'required|numeric',

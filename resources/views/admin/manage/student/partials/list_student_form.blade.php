@@ -10,6 +10,16 @@
 		</div>
 	</div>
 	<div class="col-xs-12 search-container">
+		<div class="alert alert-error" ng-if="student.errors">
+            <p ng-repeat="error in student.errors track by $index" > 
+                {! error !}
+            </p>
+        </div>
+        <div class="alert alert-success" ng-if="student.validation.success">
+            <p> 
+                {! student.validation.success !}
+            </p>
+        </div>
 		<div class="form-search">
 			{!! Form::open(
 					[
@@ -84,20 +94,20 @@
 			    </thead>
 
 		        <tbody>
-		        <tr ng-repeat="student in student.students">
-		            <td>{! student.first_name !} {! student.last_name !}</td>
-		            <td>{! student.user.email !}</td>
-		            <td>{! student.points !}</td>
+		        <tr ng-repeat="key in student.students">
+		            <td>{! key.first_name !} {! student.last_name !}</td>
+		            <td>{! key.user.email !}</td>
+		            <td>{! key.points !}</td>
 		            <td>
 		            	<div class="row">
 		            		<div class="col-xs-4">
-	    						<a href="" ng-click="admin.viewAdmin(student.id)"><span><i class="fa fa-eye"></i></span></a>
+	    						<a href="" ng-click="student.setActive('view', key.id)"><span><i class="fa fa-eye"></i></span></a>
 	    					</div>
 	    					<div class="col-xs-4">
-	    						<a href="" ng-click="admin.viewAdmin(student.id)"><span><i class="fa fa-pencil"></i></span></a>
+	    						<a href="" ng-click="student.setActive('edit', key.id)"><span><i class="fa fa-pencil"></i></span></a>
 	    					</div>
 	    					<div class="col-xs-4">
-	    						<a href="" ng-click="admin.viewAdmin(student.id)"><span><i class="fa fa-trash"></i></span></a>
+	    						<a href="" ng-click="student.confirmDelete(key.id)"><span><i class="fa fa-trash"></i></span></a>
 	    					</div>
 		            	</div>
 		            </td>

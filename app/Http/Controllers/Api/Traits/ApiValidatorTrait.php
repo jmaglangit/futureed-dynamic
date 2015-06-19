@@ -106,12 +106,13 @@ trait ApiValidatorTrait {
     //Validate first_name with multiple names
     public function firstName($input,$first_name){
 
+
             $validator = Validator::make(
                 [
                     "$first_name" => $input["$first_name"],
                 ],
                 [
-                    "$first_name" => 'required|regex:/^([a-z\x20])+$/i|max:64'
+                    "$first_name" => 'required|regex:'. config('regex.name_numeric') .'|max:64'
                 ]
             );
 
@@ -134,7 +135,7 @@ trait ApiValidatorTrait {
                     "$last_name" => $input["$last_name"],
                 ],
                 [
-                    "$last_name" => 'required|regex:/^([a-z\x20])+$/i|max:64'
+                    "$last_name" => 'required|regex:'. config('regex.name') .'|max:64'
                 ]
             );
 
@@ -339,7 +340,7 @@ trait ApiValidatorTrait {
                     "$field_name" => strtolower($input["$field_name"]),
                 ],
                 [
-                    "$field_name" => 'required|regex:/^[0-9]{5}(\-[0-9]{4})?$/'
+                    "$field_name" => 'required|regex:/^[0-9]{4,6}(\-[0-9]{4})?$/'
                 ]
             );
 
@@ -441,7 +442,7 @@ trait ApiValidatorTrait {
                     "$field_name" => strtolower($input["$field_name"]),
                 ],
                 [
-                    "$field_name" => 'digits:5|integer'
+                    "$field_name" => 'regex:/^[0-9]{4,6}(\-[0-9]{4})?$/'
                 ]
             );
 

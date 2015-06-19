@@ -23,4 +23,28 @@ class ManageStudentController extends Controller{
 	{
 		return view('admin.manage.student.partials.list_student_form');
 	}
+
+	/**
+	*@return List Student Form
+	*/
+	public function add_student_form()
+	{
+		return view('admin.manage.student.partials.add_student_form');
+	}
+
+	/**
+	*@return List Student Form
+	*/
+	public function view_student_form()
+	{
+		return view('admin.manage.student.partials.view_student_form');
+	}
+
+	/**
+	*@return Delete Student Form
+	*/
+	public function delete_student_form()
+	{
+		return view('admin.manage.student.partials.delete_student_form');
+	}
 }

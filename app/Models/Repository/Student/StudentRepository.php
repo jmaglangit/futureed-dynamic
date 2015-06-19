@@ -328,5 +328,16 @@ class StudentRepository implements StudentRepositoryInterface
 
 	}
 
+	//get student details with registration token
+	public function viewStudentByToken($id,$reg_token){
+
+		$student = new Student();
+
+		$student = $student->with('user','school','grade')->token($reg_token)->id($id);
+
+		return $student->get();
+
+	}
+
 
 }

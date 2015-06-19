@@ -52,7 +52,7 @@ class UserRepository implements UserRepositoryInterface {
 
         try{
 
-            User::create([
+            return User::create([
                 'username' => $user['username'],
                 'email' => $user['email'],
                 'name' => $user['first_name'] .' '.$user['last_name'],
@@ -69,7 +69,7 @@ class UserRepository implements UserRepositoryInterface {
         }catch(Exception $e){
             return $e->getMessage();
         }
-        return true;
+
     }
 
     public function updateUser($id, $data) {
@@ -400,7 +400,7 @@ class UserRepository implements UserRepositoryInterface {
 	}
 
 	/**
-	 * Get Registration Token
+	 * Get Registration Token.
 	 * @param $id
 	 * @return mixed
 	 */
@@ -408,6 +408,18 @@ class UserRepository implements UserRepositoryInterface {
 
 		return User::select('registration_token')
 			->where('id',$id);
+	}
+
+	/**
+	 * Remove registration token.
+	 * @param $id
+	 * @return mixed
+	 */
+	public function deleteRegistrationToken($id){
+
+		return User::where('id',$id)->update([
+			'registration_token' => NULL
+		]);
 	}
 
 

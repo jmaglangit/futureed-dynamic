@@ -22,7 +22,7 @@ class SubscriptionRequest extends ApiRequest {
 	    switch($this->method){
     	    case 'POST':
 
-        	    return ['name'          => 'required',
+        	    return ['name'          => 'required|regex:'. config('regex.name_numeric'),
             			'price'         => 'required|numeric|min:0.01|max:999999.99',
             			'description'   => 'required',
                         'days'          => 'required|integer',
@@ -36,7 +36,7 @@ class SubscriptionRequest extends ApiRequest {
                         return ['status' => 'required|in:Enabled,Disabled'];    
                     break;
                     default:
-                    return ['name'          => 'required',
+                    return ['name'          => 'requiredregex:'.config('regex.name_numeric'),
                 			'price'         => 'required|numeric|min:0.01|max:999999.99',
                 			'description'   => 'required',
                 			'status'        => 'required|in:Enabled,Disabled'];
@@ -47,7 +47,7 @@ class SubscriptionRequest extends ApiRequest {
             case 'PUT':
 
                 return [
-                    'name'          => 'required',
+                    'name'          => 'required|regex:'. config('regex.name_numeric'),
                     'price'         => 'required|numeric|min:0.01|max:999999.99',
                     'description'   => 'required',
                     'days'          => 'required|integer',

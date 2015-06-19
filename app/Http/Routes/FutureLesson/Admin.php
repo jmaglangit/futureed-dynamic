@@ -180,6 +180,24 @@
 							, 'middleware' => 'admin'
 							, 'uses' => $manage_student_controller . '@list_student_form'
 						]);
+					Routes::get('/add_student_form',
+						[
+							'as' => 'admin.manage.student.partials.add_student_form'
+							, 'middleware' => 'admin'
+							, 'uses' => $manage_student_controller . '@add_student_form'
+						]);
+					Routes::get('/view_student_form',
+						[
+							'as' => 'admin.manage.student.partials.view_student_form'
+							, 'middleware' => 'admin'
+							, 'uses' => $manage_student_controller . '@view_student_form'
+						]);
+					Routes::get('/delete_student_form',
+						[
+							'as' => 'admin.manage.student.partials.delete_student_form'
+							, 'middleware' => 'admin'
+							, 'uses' => $manage_student_controller . '@delete_student_form'
+						]);
 				});
 			});
 

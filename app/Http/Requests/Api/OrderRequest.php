@@ -33,7 +33,7 @@ class OrderRequest extends ApiRequest {
             case 'POST':
             default:
                 return [
-                    'order_no' => 'required|numeric',
+                    'order_no' => 'required',
                     'order_date' => 'required|date_format:Ymd',
                     'client_id' => 'required|numeric',
                     'subscription_id' => 'required|numeric',
