@@ -48,7 +48,14 @@ function manageStudentService($http) {
 			method 	: Constants.METHOD_PUT
 			, data 	: data
 			, url 	: adminApiUrl + 'admin/manage/student/' + data.id
-		})
+		});
+	}
+
+	manageStudentApi.deleteStudent = function(id) {
+		return $http({
+			method 	: Constants.METHOD_DELETE
+			, url 	: adminApiUrl + 'admin/manage/student/' + id
+		});
 	}
 	return manageStudentApi
 }

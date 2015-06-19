@@ -12,8 +12,7 @@ function ManageStudentController($scope, manageStudentService, apiService, Table
 
 	SearchService(self);
 	self.searchDefaults();
-
-	self.getStudentlist = getStudentlist;
+	self.delete = {};
 	self.user_type = Constants.STUDENT;
 
 	self.setActive = function(active, id, fromEdit) {
@@ -45,6 +44,8 @@ function ManageStudentController($scope, manageStudentService, apiService, Table
 				self.active_add = Constants.TRUE;
 				self.active_list = Constants.FALSE;
 				self.active_view = Constants.FALSE;
+				self.success = Constants.FALSE;
+				self.errors = Constants.FALSE;
 				break;
 			case Constants.ACTIVE_LIST:
 			default:
@@ -56,7 +57,7 @@ function ManageStudentController($scope, manageStudentService, apiService, Table
 		$("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 
-	function getStudentlist() {
+	self.getStudentlist = function() {
 		self.errors = Constants.FALSE;
 		self.students = Constants.FALSE;
 		self.table.loading = Constants.TRUE;
@@ -91,17 +92,14 @@ function ManageStudentController($scope, manageStudentService, apiService, Table
 		} else {
 			var username = (self.reg.username) ? self.reg.username : self.EMPTY_STR;
 		}
-
 		apiService.validateUsername(username, self.user_type).success(function(response) {
 			self.validation.u_loading = Constants.FALSE;
 
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.validation.u_error = response.errors[0].message;
-
 					if(angular.equals(self.validation.u_error, Constants.MSG_U_NOTEXIST)) {
 						self.validation.u_error = Constants.FALSE;
-
 						if(self.detail){
 							self.validation.u_success = Constants.MSG_U_AVAILABLE;
 						}else {
@@ -254,6 +252,7 @@ function ManageStudentController($scope, manageStudentService, apiService, Table
 			$scope.internalError();
 		});
 	}
+	
 	self.save = function() {
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
@@ -368,5 +367,39 @@ function ManageStudentController($scope, manageStudentService, apiService, Table
 			$scope.internalError();
 			$scope.ui_unblock();
 		})
+	}
+
+	self.confirmDelete = function(id){
+		self.errors = Constants.FALSE;
+		self.delete.id = id;
+		self.delete.confirm = Constants.TRUE;
+		$("#delete_student_modal").modal({
+	        backdrop: 'static',
+	        keyboard: Constants.FALSE,
+	        show    : Constants.TRUE
+	    });
+	}
+
+	self.deleteStudent = function(){
+		self.errors = Constants.FALSE;
+		self.validation.c_error = Constants.FALSE;
+		self.validation.c_success = Constants.FALSE;
+
+		$scope.ui_block();
+		manageStudentService.deleteStudent(self.delete.id).success(function(response){
+			if(angular.equals(response.status,Constants.STATUS_OK)){
+				if(response.errors){
+					self.errors = $scope.errorHandler(response.errors);
+				}else if(response.data){
+					self.validation.success = 'Student ' + Constants.DELETE_SUCCESS;
+					self.getStudentlist();
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+		$("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 }
