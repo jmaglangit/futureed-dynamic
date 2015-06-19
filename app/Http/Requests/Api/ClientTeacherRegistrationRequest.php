@@ -62,6 +62,7 @@ class ClientTeacherRegistrationRequest extends ApiRequest
 					'country' => 'exists:countries,name',
 					'country_id' => 'required|exists:countries,id',
 					'callback_uri' => 'required|string',
+					'registration_token' => "required|exists:users,registration_token,deleted_at,NULL"
 				];
 				break;
 
