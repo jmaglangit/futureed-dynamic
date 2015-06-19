@@ -120,6 +120,11 @@ class Student extends Model {
 
 	}
 
+	public function scopeId($query, $id)
+	{
+		return $query->where('id', $id);
+	}
+
 
 
 

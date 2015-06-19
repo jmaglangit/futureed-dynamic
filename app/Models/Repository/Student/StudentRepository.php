@@ -331,11 +331,11 @@ class StudentRepository implements StudentRepositoryInterface
 	//get student details with registration token
 	public function viewStudentByToken($id,$reg_token){
 
-		$student = Student::find($id);
+		$student = new Student();
 
-		$student = $student->with('user','school','grade')->token($reg_token)->first();
+		$student = $student->with('user','school','grade')->token($reg_token)->id($id);
 
-		return $student;
+		return $student->get();
 
 	}
 
