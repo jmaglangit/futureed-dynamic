@@ -30,10 +30,9 @@ class ClientRepository implements ClientRepositoryInterface
         $client = new Client();
 
         return $client->with('user','school')
-            ->id($id)
             ->role(config('futureed.teacher'))
             ->registrationtoken($registration_token)
-            ->first();
+            ->find($id);
 
     }
 
