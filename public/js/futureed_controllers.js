@@ -25,12 +25,9 @@ function FutureedController($scope, apiService, futureed) {
 
 	$scope.goHome = goHome;
 	$scope.highlight = highlight;
-	$scope.getCountries = getCountries;
-	$scope.getGradeLevel = getGradeLevel;
 	$scope.checkAvailability = checkAvailability;
 	$scope.checkEmailAvailability = checkEmailAvailability;
 	$scope.getAnnouncement = getAnnouncement;
-	$scope.getGrades = getGrades;
 	$scope.getCountryId = getCountryId;
 
 	$scope.beforeDateRender = beforeDateRender;
@@ -100,7 +97,7 @@ function FutureedController($scope, apiService, futureed) {
 	/**
 	* Retrieves a list of countries
 	*/
-	function getCountries() {
+	$scope.getCountries = function() {
 		$scope.countries = Constants.FALSE;
 
 		apiService.getCountries().success(function(response) {
@@ -115,20 +112,11 @@ function FutureedController($scope, apiService, futureed) {
 			$scope.internalError();
 		});
 	}
-
-	/**
-	* Retrieves list of Grades by country
-	* function for get grade by country
-	* To be Implemented
-	*/
-	function getGrades(id){
-		
-	}
 	
-	function getGradeLevel() {
+	$scope.getGradeLevel = function(country_id) {
 		$scope.grades = Constants.FALSE;
-		$scope.countryid = ($scope.reg.country_id != null) ? $scope.reg.country_id : 840;
-		apiService.getGradeLevel($scope.countryid).success(function(response) {
+
+		apiService.getGradeLevel(country_id).success(function(response) {
 			if(response.status == Constants.STATUS_OK) {
 				if(response.errors) {
 					$scope.errorHandler(response.errors);
