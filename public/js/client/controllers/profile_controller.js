@@ -156,8 +156,8 @@ function ProfileController($scope, apiService, clientProfileApiService) {
 			              $("#client_profile_form select[name='" + value.field +"']").addClass("required-field");
 			            });
 					} else if(response.data) {
+						self.prof = {};
 						$scope.$parent.user = response.data;
-
 						clientProfileApiService.updateUserSession(response.data).success(function(response) {
 			              self.setClientProfileActive(Constants.INDEX);
 			              self.success = Constants.TRUE;
