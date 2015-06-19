@@ -240,7 +240,7 @@ class ClientRepository implements ClientRepositoryInterface
 
             $client_role = explode(',',$criteria['client_role'] );
 
-            $clients = $clients->clientRole($client_role);
+            $clients = $clients->role($client_role);
         }
 
         if (isset($criteria['name'])) {
