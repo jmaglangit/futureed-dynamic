@@ -1,4 +1,4 @@
-<div>
+<div ng-if="teacher.active_view">
 	<div class="content-title">
 		<div class="title-main-content" ng-if="!student.edit">
 			<span>View Student</span>
