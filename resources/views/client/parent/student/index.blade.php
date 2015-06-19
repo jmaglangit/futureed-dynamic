@@ -6,13 +6,16 @@
 
 @section('content')
 	<div class="container dshbrd-con" ng-controller="ManageParentStudentController as student" ng-cloak>
+		
 		<div template-directive template-url="{!! route('client.partials.base_url') !!}"></div>
 
-		<div class="wrapr" ng-init="student.setActive('list')" >
+		<div class="wrapr" ng-init="student.setActive()" >
 
-			<div template-directive template-url="{!! route('client.parent.student.partials.list_student_form') !!}"></div>		
-			<div template-directive template-url="{!! route('client.parent.student.partials.add_student_form') !!}"></div>		
-			<div template-directive template-url="{!! route('client.parent.student.partials.view_student_form') !!}"></div>		
+			<div template-directive template-url="{!! route('client.parent.student.partials.list_student_form') !!}"></div>
+
+			<div template-directive template-url="{!! route('client.parent.student.partials.add_student_form') !!}"></div>
+
+			<div template-directive template-url="{!! route('client.parent.student.partials.view_student_form') !!}"></div>
 		</div>
 	</div>
 
