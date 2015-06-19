@@ -69,4 +69,19 @@ class ParentStudentRepository implements ParentStudentRepositoryInterface{
 
 	}
 
+    public function getParenStudents($criteria)
+    {
+        $parentStudent = new ParentStudent();
+
+        if(isset($criteria['parent_user_id'])){
+            $parentStudent = $parentStudent->parent($criteria['parent_user_id']);
+        }
+
+        $parentStudent = $parentStudent->with('student_user','parent_user');
+
+        return $parentStudent->get();
+    }
+
+
+
 }

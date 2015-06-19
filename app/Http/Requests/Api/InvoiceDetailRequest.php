@@ -22,7 +22,7 @@ class InvoiceDetailRequest extends ApiRequest {
         switch($this->method) {
             case 'POST':
                 return [
-                    'invoice_no' => 'required|numeric',
+                    'invoice_no' => 'required',
                     'payment_status' => 'required|in:Pending,Paid,Cancelled',
                 ];
         }
