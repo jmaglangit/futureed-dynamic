@@ -89,6 +89,7 @@ class ClientTeacherRegistrationController extends ApiController
 			'state',
 			'country',
 			'country_id',
+			'zip',
 			'callback_uri'
 
 		]);
