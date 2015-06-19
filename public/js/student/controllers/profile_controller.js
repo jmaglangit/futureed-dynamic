@@ -180,6 +180,7 @@ function ProfileController($scope, apiService, profileService) {
 	            	self.fields[value.field] = Constants.TRUE;
 	            });
 	          } else if(response.data){
+	          	self.prof = {};
 	            $scope.$parent.user = response.data;
 
 	            apiService.updateUserSession(response.data).success(function(response) {
