@@ -36,7 +36,7 @@
 			<div class="form-group">
 				<label class="col-xs-2 control-label">Email</label>
 				<div class="col-xs-5">
-					{!! Form::text('search_order', '',['class' => 'form-control', 'ng-model' => 'student.search.email', 'placeholder' => 'Email']) !!}
+					{!! Form::text('search_email', '',['class' => 'form-control', 'ng-model' => 'student.search.email', 'placeholder' => 'Email']) !!}
 				</div>
 				<div class="btn-container col-xs-5">
 					{!! Form::button('Search', 

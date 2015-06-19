@@ -1,4 +1,4 @@
-<div ng-if="student.list">
+<div ng-if="student.active_list">
 	<div class="content-title">
 		<div class="title-main-content">
 			<span>Student Management</span>
@@ -20,17 +20,27 @@
 			<div class="form-group">
 				<label class="col-xs-2 control-label">Name</label>
 				<div class="col-xs-5">
-					{!! Form::text('search_name', '',['class' => 'form-control', 'ng-model' => 'payment.search_order', 'placeholder' => 'Name']) !!}
+					{!! Form::text('search_name', '',['class' => 'form-control', 'ng-model' => 'student.search.name', 'placeholder' => 'Name']) !!}
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-xs-2 control-label">Email</label>
 				<div class="col-xs-5">
-					{!! Form::text('search_order', '',['class' => 'form-control', 'ng-model' => 'payment.search_order', 'placeholder' => 'Email']) !!}
+					{!! Form::text('search_email', '',['class' => 'form-control', 'ng-model' => 'student.search.email', 'placeholder' => 'Email']) !!}
 				</div>
 				<div class="btn-container col-xs-5">
-					<button class="btn btn-blue btn-medium" type="button" ng-click="teacher.getTeacherList()">Search</button>
-					<button class="btn btn-gold btn-medium" type="button" ng-click="teacher.clearSearch()">Clear</button>
+					{!! Form::button('Search', 
+						array(
+							'class' => 'btn btn-blue btn-medium'
+							, 'ng-click' => 'student.getStudentlist()'
+						)
+					) !!}
+					{!! Form::button('Clear', 
+						array(
+							'class' => 'btn btn-gold btn-medium'
+							, 'ng-click' => 'student.clear()'
+						)
+					) !!}
 				</div>
 			</div>
 		</div>
@@ -40,7 +50,7 @@
 			Student List
 		</div>
 	</div>
-	<div class="col-xs-12 table-container">
+	<div class="col-xs-12 table-container" ng-init="student.list()">
 		<div class="list-container" ng-cloak>
 			<div class="size-container">
 				{!! Form::select('size'
@@ -52,9 +62,9 @@
 					)
 					, '10'
 					, array(
-						'ng-model' => 'admin.table.size'
-						, 'ng-change' => 'admin.paginateBySize()'
-						, 'ng-if' => "admin.data.length"
+						'ng-model' => 'student.table.size'
+						, 'ng-change' => 'student.paginateBySize()'
+						, 'ng-if' => "student.students.length"
 						, 'class' => 'form-control paginate-size pull-right'
 					)
 				) !!}
@@ -70,10 +80,9 @@
 			    </thead>
 
 		        <tbody>
-		        {{-- added sample data --}}
-		        <tr>
-		            <td>Bart Simpson</td>
-		            <td>bart.simpson@simpson.com</td>
+		        <tr ng-repeat="key in student.students">
+		            <td>{! key.first_name !} {! key.last_name !}</td>
+		            <td>{! key.user.email !}</td>
 		            <td>
 		            	<div class="row">
 		            		<div class="col-xs-6">
@@ -85,12 +94,12 @@
 		            	</div>
 		            </td>
 		        </tr>
-		        <tr class="odd" ng-if="!admin.data.length && !admin.table.loading">
+		        <tr class="odd" ng-if="!student.students.length && !student.table.loading">
 		        	<td valign="top" colspan="7" class="dataTables_empty">
 		        		No records found
 		        	</td>
 		        </tr>
-		        <tr class="odd" ng-if="admin.table.loading">
+		        <tr class="odd" ng-if="student.table.loading">
 		        	<td valign="top" colspan="7" class="dataTables_empty">
 		        		Loading...
 		        	</td>
@@ -98,7 +107,7 @@
 		        </tbody>
 			</table>
 
-			<div class="pull-right" ng-if="admin.data.length">
+			<div class="pull-right" ng-if="student.students.length">
 				<pagination 
 					total-items="admin.table.total_items" 
 					ng-model="admin.table.page"
