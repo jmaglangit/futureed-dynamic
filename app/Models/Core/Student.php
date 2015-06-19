@@ -111,6 +111,20 @@ class Student extends Model {
 
 	}
 
+	public function scopeToken($query,$reg_token){
+
+		return $query->whereHas('user',function($query) use ($reg_token){
+			$query->where('registration_token','=', $reg_token);
+
+		});
+
+	}
+
+	public function scopeId($query, $id)
+	{
+		return $query->where('id', $id);
+	}
+
 
 
 
