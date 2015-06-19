@@ -27,9 +27,12 @@ function ManageStudentController($scope, manageStudentService, apiService, Table
 
 		switch(active) {
 			case Constants.ACTIVE_EDIT:
+				self.active_view = Constants.TRUE;
 				self.edit = Constants.TRUE;
 				self.success = Constants.FALSE;
 				self.errors = Constants.FALSE;
+				self.edit = Constants.TRUE;
+				self.viewStudent(id,self.fromEdit);
 				break;
 			case Constants.ACTIVE_VIEW:
 				self.active_list = Constants.FALSE;
