@@ -81,6 +81,8 @@ interface UserRepositoryInterface {
 
 	public function getRegistrationToken($id);
 
+	public function deleteRegistrationToken($id);
+
 
 
 }
