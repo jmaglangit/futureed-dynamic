@@ -4,6 +4,18 @@
 			<span>Student Management</span>
 		</div>
 	</div>
+	<div class="alert-container col-xs-12">
+		<div class="alert alert-error" ng-if="student.errors">
+            <p ng-repeat="error in student.errors track by $index" > 
+                {! error !}
+            </p>
+        </div>
+        <div class="alert alert-success" ng-if="student.success">
+            <p> 
+                {! student.success !}
+            </p>
+        </div>
+	</div>
 	<div class="col-xs-12">
 		<div class="title-mid mid-container">
 			Search
@@ -35,7 +47,7 @@
 			</div>
 		</div>
 	</div>
-	<button class="btn btn-blue btn-small margin-0-30" ng-click="payment.setActive('add')">
+	<button class="btn btn-blue btn-small margin-0-30" ng-click="student.setActive('add')">
 		<i class="fa fa-plus-square"></i> Add 
 	</button>
 	<div class="col-xs-12 padding-0-30">
