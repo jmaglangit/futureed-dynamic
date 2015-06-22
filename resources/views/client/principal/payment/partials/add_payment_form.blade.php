@@ -1,155 +1,238 @@
-<div ng-if="false">
+<div ng-if="payment.active_add" ng-init="payment.getOrderNo()">
 	<div class="content-title">
 		<div class="title-main-content">
 			<span>Add Payment</span>
 		</div>
 	</div>
+
 	{!! Form::open(array('id'=> 'add_payment_form', 'class' => 'form-horizontal')) !!}
-	<div class="form-content col-xs-12">
-		<div class="alert alert-error" ng-if="subject.errors">
-	            <p ng-repeat="error in subject.errors track by $index" > 
+		<div class="form-content col-xs-12" ng-init="payment.getSchoolCode()">
+			<div class="alert alert-error" ng-if="payment.errors">
+	            <p ng-repeat="error in payment.errors track by $index" > 
 	              	{! error !}
 	            </p>
 	        </div>
 
-	        <div class="alert alert-success" ng-if="subject.create.success">
-	        	<p>Successfully added new subject.</p>
+	        <div class="alert alert-success" ng-if="payment.success">
+	        	<p>{! payment.success !}</p>
 	        </div>
 	        <fieldset>
 	        	<div class="form-group">
-	        		<label class="col-xs-2 control-label" id="email">Number of Seats <span class="required">*</span></label>
-	        		<div class="col-xs-5">
-	        			{!! Form::text('code',''
+	        		<label class="col-xs-4 control-label" id="email">Number of Seats <span class="required">*</span></label>
+	        		<div class="col-xs-4">
+	        			{!! Form::text('seats_total',''
 	        				, array(
 	        					'placeHolder' => 'Number of Seats'
-	        					, 'ng-model' => 'subject.create.code'
-	        					, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
+	        					, 'ng-model' => 'payment.classroom.seats_total'
+	        					, 'ng-class' => "{ 'required-field' : payment.fields['seats_total'] }"
 	        					, 'class' => 'form-control'
 	        				)
 	        			) !!}
 	        		</div>
 	        	</div>
-	        	<div class="form-group" ng-init="getGradeLevel()">
-	        		<label class="col-xs-2 control-label">Grade <span class="required">*</span></label>
-	        		<div class="col-xs-5">
-	        			<select name="grade_code" class="form-control" ng-model="reg.grade_code">
+	        	<div class="form-group" ng-init="getGradeLevel(user.country_id)">
+	        		<label class="col-xs-4 control-label">Grade <span class="required">*</span></label>
+	        		<div class="col-xs-4">
+	        			<select name="grade_id" ng-class="{ 'required-field' : payment.fields['grade_id'] }" class="form-control" ng-model="payment.classroom.grade_id">
                             <option value="">-- Select Level --</option>
-                            <option ng-repeat="grade in grades" value="{! grade.code !}">{! grade.name !}</option>
+                            <option ng-repeat="grade in grades" value="{! grade.id !}">{! grade.name !}</option>
                         </select>
 	        		</div>		
 	        	</div>
 	        	<div class="form-group">
-	        		<label class="col-xs-2 control-label" id="email">Teacher <span class="required">*</span></label>
-	        		<div class="col-xs-5">
+	        		<label class="col-xs-4 control-label" id="email">Teacher <span class="required">*</span></label>
+	        		<div class="col-xs-4">
 	        			{!! Form::text('teacher',''
 	        				, array(
 	        					'placeHolder' => 'Teacher'
-	        					, 'ng-model' => 'subject.create.code'
+	        					, 'ng-model' => 'payment.classroom.client_name'
 	        					, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
+	        					, 'ng-class' => "{ 'required-field' : payment.fields['client_id'] }"
+	        					, 'ng-change' => "payment.suggestTeacher()"
 	        					, 'class' => 'form-control'
 	        				)
 	        			) !!}
+
+	        			<div class="angucomplete-holder" ng-if="payment.teachers.length">
+							<ul class="col-xs-5 angucomplete-dropdown">
+								<li class="angucomplete-row" ng-repeat="teacher in payment.teachers" ng-click="payment.selectTeacher(teacher)">
+									{! teacher.first_name !} {! teacher.last_name !}
+								</li>
+							</ul>
+						</div>
 	        		</div>
 	        	</div>
 	        	<div class="form-group">
-	        		<label class="col-xs-2 control-label" id="email">Grade <span class="required">*</span></label>
-	        		<div class="col-xs-5">
-	        			{!! Form::text('grade',''
+	        		<label class="col-xs-4 control-label">Class <span class="required">*</span></label>
+	        		<div class="col-xs-4">
+	        			{!! Form::text('name',''
 	        				, array(
-	        					'placeHolder' => 'Grade'
-	        					, 'ng-model' => 'subject.create.code'
-	        					, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
+	        					'placeHolder' => 'Class'
+	        					, 'ng-model' => 'payment.classroom.name'
+	        					, 'ng-class' => "{ 'required-field' : payment.fields['name'] }"
 	        					, 'class' => 'form-control'
 	        				)
 	        			) !!}
 	        		</div>
 	        	</div>
-	        	<div class="btn-container col-xs-offset-2 col-xs-5">
-	        		<button class="btn btn-blue btn-medium" type="button"><span><i class="fa fa-plus-square"></i></span> Add</button>
-	        		<button class="btn btn-gold btn-medium" type="button">Cancel</button>
+	        	<div class="btn-container col-xs-offset-2 col-xs-7">
+	        		{!! Form::button('Add'
+	        			, array(
+	        				'class' => 'btn btn-blue btn-medium'
+	        				, 'ng-click' => 'payment.addClassroom()'
+	        			)
+	        		) !!}
 
+	        		{!! Form::button('Clear'
+	        			, array(
+	        				'class' => 'btn btn-gold btn-medium'
+	        				, 'ng-click' => 'payment.clearClassroom()'
+	        			)
+	        		) !!}
 	        	</div>
 	        </fieldset>
-	</div>
+		</div>
 	{!! Form::close() !!}
-	<div class="col-xs-12">
-		<div class="table-form">
+
+	<div class="col-xs-12 search-container">
+		<div class="form-search">
+			{!! Form::open(
+					[
+						'id' => 'search_form',
+						'class' => 'form-horizontal'
+						, 'ng-submit' => 'payment.searchFnc($event)'
+					]
+			) !!}
 			<div class="form-group">
-				<div class="col-xs-3">
-					<div class="col-xs-6">
-						<b>Item</b>
-					</div>
-					<div class="col-xs-6">
-						Subscription
-					</div>	
-				</div>
-				<div class="col-xs-3">
-					{!! Form::select('subscription',[''=>'-- Select Subscription --','120 days'=>'120 days','240 days'=>'240 days','480 days'=> '480 days'],null,['class' => 'form-control', 'ng-model' => 'teacher.search_email', 'placeholder' => 'Email']) !!}
+				<label class="col-xs-2 control-label">Subscription</label>
+				<div class="col-xs-4">
+					<select ng-model="payment.invoice.subscription_id" 
+						ng-disabled="!payment.subscriptions.length" 
+						ng-init="payment.listSubscription()"
+						ng-change="payment.setPrice()" class="form-control">
+
+						<option value="">-- Select Subscription --</option>
+						<option ng-repeat="subscription in payment.subscriptions" ng-value="{! subscription.id !}">{! subscription.name !}</option>
+					</select>
 				</div>
 				<div class="col-xs-6">
 					<label class="col-xs-2 control-label">Starting</label>
 					<div class="col-xs-4">
-						{!! Form::text('search_name', '',['class' => 'form-control', 'ng-model' => 'teacher.search_name', 'placeholder' => 'Name']) !!}
+						<input name="dis_date_start" class="form-control" ng-disabled="true" value="{! payment.invoice.dis_date_start | date : 'dd/MM/yyyy' !}" placeholder="DD/MM/YYYY" />
 					</div>
 					<label class="col-xs-2 control-label">To</label>
 					<div class="col-xs-4">
-						{!! Form::text('search_name', '',['class' => 'form-control', 'ng-model' => 'teacher.search_name', 'placeholder' => 'Name']) !!}
-					</div>
-				</div>
-			</div>
-			<div class="form-group margin-top-60">
-				<table class="table table-bordered">
-					<thead>
-						<tr>
-							<td>Number of Seats</td>
-							<td>Grade</td>
-							<td>Teacher</td>
-							<td>Class</td>
-							<td>Price</td>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>200</td>
-							<td>K1</td>
-							<td>Edna Krabappel</td>
-							<td>Edna-K1</td>
-							<td>15</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			<div class="row margin-10-bot">
-				<div class="col-xs-4 div-right">
-					<label class="col-xs-4 control-label">Sub Total</label>
-					<div class="col-xs-8">
-						{!! Form::text('subtotal','',['disabled' => 'disabled','class' => 'form-control']) !!}
-					</div>
-				</div>
-			</div>
-			<div class="row margin-10-bot">
-				<div class="col-xs-4 div-right">
-					<label class="col-xs-4 control-label">Discount</label>
-					<div class="col-xs-8">
-						{!! Form::text('discount','',['disabled' => 'disabled','class' => 'form-control']) !!}
-					</div>
-				</div>
-			</div>
-			<div class="row margin-10-bot">
-				<div class="col-xs-4 div-right">
-					<label class="col-xs-4 control-label">Total</label>
-					<div class="col-xs-8">
-						{!! Form::text('total','',['disabled' => 'disabled','class' => 'form-control']) !!}
+						<input name="dis_date_end" class="form-control" ng-disabled="true" value="{! payment.invoice.dis_date_end | date : 'dd/MM/yyyy' !}" placeholder="DD/MM/YYYY" />
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="col-xs-12 margin-30-bot">
-		<div class="col-xs-5 div-right">
-			<div class="btn-container">
-				<button class="btn btn-blue btn-semi-large">Pay Subscription</button>
-				<button class="btn btn-gold btn-medium" ng-click="payment.setActive('list')">Cancel</button>
+
+	<div class="col-xs-12 table-container" ng-init="payment.getInvoiceNo()">
+		<div class="list-container" ng-cloak>
+			<table class="table table-striped table-bordered">
+				<thead>
+			        <tr>
+			            <th>Number of Seats</th>
+			            <th>Grade</th>
+			            <th>Teacher</th>
+			            <th>Class</th>
+			            <th>Price</th>
+			            <th>Action</th>
+			        </tr>
+			    </thead>
+
+		        <tbody>
+		        <tr ng-repeat="room in payment.classrooms">
+		            <td>{! room.seats_total !}</td>
+		            <td>{! room.grade.name !}</td>
+		            <td>{! room.client.first_name !} {! room.client.last_name !}</td>
+		            <td>{! room.name !}</td>
+		            <td>{! room.price !}</td>
+		            <td>
+		            	<div class="row">
+		            		<div class="col-xs-12">
+	    						<a href="" ng-click="payment.confirmRemove(room.id)"><span><i class="fa fa-trash"></i></span></a>
+	    					</div>
+		            	</div>
+		            </td>
+		        </tr>
+		        <tr class="odd" ng-if="!payment.classrooms.length && !payment.table.loading">
+		        	<td valign="top" colspan="7" class="dataTables_empty">
+		        		No records found
+		        	</td>
+		        </tr>
+		        <tr class="odd" ng-if="payment.table.loading">
+		        	<td valign="top" colspan="7" class="dataTables_empty">
+		        		Loading...
+		        	</td>
+		        </tr>
+		        </tbody>
+			</table>
+		</div>
+	</div>
+
+	<div class="col-xs-12">
+		<div class="row margin-10-bot">
+			<div class="col-xs-4 div-right">
+				<label class="col-xs-4 control-label">Sub Total</label>
+				<div class="col-xs-8">
+					{!! Form::text('sub_total',''
+						, [
+							'ng-disabled' => true
+							, 'class' => 'form-control'
+							, 'ng-model' => 'payment.invoice.sub_total'
+						]
+					) !!}
+				</div>
+			</div>
+		</div>
+		<div class="row margin-10-bot">
+			<div class="col-xs-4 div-right">
+				<label class="col-xs-4 control-label">Discount</label>
+				<div class="col-xs-8">
+					{!! Form::text('discount',''
+						, [
+							'ng-disabled' => true
+							, 'class' => 'form-control'
+							, 'ng-model' => 'payment.invoice.discount'
+						]
+					) !!}
+				</div>
+			</div>
+		</div>
+		<div class="row margin-10-bot">
+			<div class="col-xs-4 div-right">
+				<label class="col-xs-4 control-label">Total</label>
+				<div class="col-xs-8">
+					{!! Form::text('total_amount',''
+						, [
+							'ng-disabled' => true
+							, 'class' => 'form-control'
+							, 'ng-model' => 'payment.invoice.total_amount'
+						]
+					) !!}
+				</div>
+			</div>
+		</div>
+		<div class="col-xs-12 margin-30-bot">
+			<div class="col-xs-6 div-right">
+				<div class="btn-container">
+					{!! Form::button('Add Payment'
+	        			, array(
+	        				'class' => 'btn btn-blue btn-medium'
+	        				, 'ng-click' => 'payment.addPayment()'
+	        			)
+	        		) !!}
+
+	        		{!! Form::button('Cancel'
+	        			, array(
+	        				'class' => 'btn btn-gold btn-medium'
+	        				, 'ng-click' => 'payment.setActive()'
+	        			)
+	        		) !!}
+				</div>
 			</div>
 		</div>
 	</div>

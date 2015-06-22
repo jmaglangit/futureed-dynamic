@@ -3,7 +3,7 @@ angular.module('futureed.services')
 
 ManageTeacherStudentService.$inject = ['$http'];
 
-function ManageTeacherStudentService($http){
+function ManageTeacherStudentService($http) {
 	var api = {};
 	var apiUrl = '/api/v1/';
 
@@ -17,7 +17,6 @@ function ManageTeacherStudentService($http){
 				+ '&offset=' + table.offset
 		});
 	}
-	
 	
 	return api;
 }
