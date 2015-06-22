@@ -1,4 +1,4 @@
-<div ng-if="student.add">
+<div ng-if="student.active_add">
 	<div class="content-title">
 		<div class="title-main-content">
 			<span>Add Student</span>
