@@ -39,6 +39,7 @@ var Constants = {
 	, ACTIVE_VIEW	: "view"
 	, ACTIVE_EDIT	: "edit"
 	, ACTIVE_ADD	: "add"
+	, ACTIVE_EMAIL	: "email"
 
 	, ADD_CLIENT 	: "add_client"
 	, ADD_STUDENT	: "add_student"
