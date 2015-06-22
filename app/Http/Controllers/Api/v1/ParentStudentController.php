@@ -1,27 +1,37 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
 use FutureEd\Http\Requests;
-use FutureEd\Http\Controllers\Controller;
-
+use FutureEd\Http\Requests\Api\InvoiceRequest;
 use FutureEd\Http\Requests\Api\ParentStudentRequest;
+use FutureEd\Models\Repository\Classroom\ClassroomRepositoryInterface;
+use FutureEd\Models\Repository\ClassStudent\ClassStudentRepositoryInterface;
+use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
+use FutureEd\Models\Repository\Invoice\InvoiceRepositoryInterface;
+use FutureEd\Models\Repository\InvoiceDetail\InvoiceDetailRepositoryInterface;
+use FutureEd\Models\Repository\Order\OrderRepositoryInterface;
+use FutureEd\Models\Repository\ParentStudent\ParentStudentRepositoryInterface;
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use FutureEd\Models\Repository\User\UserRepositoryInterface;
-use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
-use FutureEd\Models\Repository\ParentStudent\ParentStudentRepositoryInterface;
 use FutureEd\Services\CodeGeneratorServices;
 use FutureEd\Services\MailServices;
-
+use FutureEd\Services\InvoiceServices;
 
 
 class ParentStudentController extends ApiController {
 
 
+    protected $class_student;
+    protected $classroom;
     protected $client;
     protected $code;
+    protected $invoice;
+    protected $invoice_detail;
     protected $mail;
     protected $student;
     protected $user;
+    protected $order;
     protected $parent_student;
+    protected $invoice_service;
 
     public function __construct(
         StudentRepositoryInterface $student,
@@ -29,7 +39,13 @@ class ParentStudentController extends ApiController {
         UserRepositoryInterface $user,
         CodeGeneratorServices $code,
         MailServices $mail,
-        ParentStudentRepositoryInterface $parent_student){
+        ParentStudentRepositoryInterface $parent_student,
+        ClassroomRepositoryInterface $classroom,
+        OrderRepositoryInterface $order,
+        ClassStudentRepositoryInterface $class_student,
+        InvoiceRepositoryInterface $invoice,
+        InvoiceDetailRepositoryInterface $invoice_detail,
+        InvoiceServices $invoice_service){
 
         $this->student = $student;
         $this->client = $client;
@@ -37,7 +53,12 @@ class ParentStudentController extends ApiController {
         $this->code = $code;
         $this->mail = $mail;
         $this->parent_student = $parent_student;
-
+        $this->classroom = $classroom;
+        $this->order = $order;
+        $this->class_student = $class_student;
+        $this->invoice = $invoice;
+        $this->invoice_detail = $invoice_detail;
+        $this->invoice_service = $invoice_service;
     }
 
     public function addExistingStudent(ParentStudentRequest $request){
@@ -153,4 +174,143 @@ class ParentStudentController extends ApiController {
         //get the updated student details
         return $this->respondWithData($this->student->viewStudent($id));
     }
+
+    /**
+     * Add payment by parent.
+     *
+     * @param InvoiceRequest $request
+     * @return mixed
+     */
+    public function paySubscription(ParentStudentRequest $request)
+    {
+        $parent = $request->only('parent_user_id');
+        $students = $this->parent_student->getParenStudents($parent);
+
+        $count_ctr = $students->count();
+
+        if($count_ctr == 0){
+            return $this->respondErrorMessage(2001);
+        }
+
+        /**
+         * TODO:
+         * 1. Insert Classroom.
+         * 2. Insert Class Student.
+         * 3. Insert Order.
+         * 4. Insert Invoice.
+         * 5. Insert Invoice Details.
+         */
+
+        $parent_student_data = $request->all();
+
+        //1. Insert Classroom.
+
+        $client_id = $this->client->getClientId($parent['parent_user_id']);
+
+        $next_order_no = $this->order->getNextOrderNo();
+        $next_order_no = $next_order_no['id'] + 1;
+        $next_order_no = $this->invoice_service->createOrderNo($client_id,$next_order_no);
+
+        $classroom['order_no'] = $next_order_no;
+        $classroom['name'] = 'NONE';
+        $classroom['grade_id'] = 1;
+        $classroom['client_id'] = $client_id;
+        $classroom['seats_taken'] = $count_ctr;
+        $classroom['seats_total'] = $count_ctr;
+        $classroom['status'] = 'Enabled';
+
+        //dd($classroom);
+        $add_classroom_result = $this->classroom->addClassroom($classroom);
+
+        //2. Insert Class Student.
+        foreach($students as $stud){
+            $class_student['student_id'] = $stud->student->id;
+            $class_student['class_id'] = $add_classroom_result->id;
+            $class_student['status'] = 'Enabled';
+
+            $this->class_student->addClassStudent($class_student);
+            unset($class_student);
+        }
+
+        //3. Insert Order.
+        $order['order_no'] = $next_order_no;
+        $order['order_date'] = $parent_student_data['order_date'];
+        $order['client_id'] = $client_id;
+        $order['subscription_id'] = $parent_student_data['subscription_id'];
+        $order['date_start'] = $parent_student_data['date_start'];
+        $order['date_end'] = $parent_student_data['date_end'];
+        $order['seats_total'] = $count_ctr;
+        $order['seats_taken'] = $count_ctr;
+        $order['total_amount'] = $parent_student_data['total_amount'];
+        $order['payment_status'] = 'Pending';
+
+        //dd($order);
+        $this->order->addOrder($order);
+
+        //4. Insert Invoice.
+
+        $invoice_no = $this->invoice->getNextInvoiceNo();
+        $new_invoice_no = $invoice_no['id'] + 1;
+        $new_invoice_no = $this->invoice_service->createInvoiceNo($new_invoice_no);
+        $client_details = $this->client->getClientDetails($client_id);
+
+        $invoice['order_no'] = $next_order_no;
+        $invoice['invoice_date'] = $parent_student_data['order_date'];
+        $invoice['invoice_no'] = $new_invoice_no;
+        $invoice['client_id'] = $client_id;
+        $invoice['client_name'] = $client_details->first_name .' '.$client_details->last_name;
+        $invoice['date_start'] = $parent_student_data['date_start'];
+        $invoice['date_end'] = $parent_student_data['date_end'];
+        $invoice['seats_total'] = $count_ctr;
+        $invoice['discount_type'] = $parent_student_data['discount_type'];
+        $invoice['discount_id'] = $parent_student_data['discount_id'];
+        $invoice['discount'] = $parent_student_data['discount'];
+        $invoice['total_amount'] = $parent_student_data['total_amount'];
+        $invoice['subscription_id'] = $parent_student_data['subscription_id'];
+        $invoice['payment_status'] = 'Pending';
+
+        $invoice_result = $this->invoice->addInvoice($invoice);
+
+
+        //5. insert Invoice Detail.
+        $order_detail['invoice_no'] = $invoice_result['invoice_no'];
+        $order_detail['class_id'] = $add_classroom_result->id;
+        $order_detail['grade_id'] = $add_classroom_result->grade_id;
+        $order_detail['price'] = $parent_student_data['total_amount'];
+
+        $this->invoice_detail->addInvoiceDetail($order_detail);
+
+        return $this->respondWithData($this->invoice_detail->addInvoiceDetail($order_detail));
+    }
+
+    /**
+     * get list by parent user id
+     *
+     * @param $parent_user_id
+     * @return mixed
+     */
+    public function getStudents($parent_user_id){
+        $criteria['parent_user_id'] = $parent_user_id;
+        return $this->respondWithData($this->parent_student->getParenStudents($criteria));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function destroy($id){
+        return $this->respondWithData($this->parent_student->deleteParentStudent($id));
+    }
+
+    /**
+     * Remove resource from storage by parent user id
+     * @param $parent_user_id
+     * @return Response
+     */
+    public function deleteStudentByParentId($parent_user_id){
+        return $this->respondWithData($this->parent_student->deleteParentStudentByParentId($parent_user_id));
+    }
+
 }
