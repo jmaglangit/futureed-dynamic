@@ -5,6 +5,18 @@
 		</div>
 	</div>
 
+	<div class="col-xs-12 success-container" ng-if="teacher.errors || teacher.success">
+		<div class="alert alert-error" ng-if="teacher.errors">
+			<p ng-repeat="error in teacher.errors track by $index">
+				{! error !}
+			</p>
+		</div>
+
+        <div class="alert alert-success" ng-if="teacher.success">
+            <p>{! teacher.success !}</p>
+        </div>
+    </div>
+
 	<div class="col-xs-12 search-container">
 		<div class="title-mid">
 			Search

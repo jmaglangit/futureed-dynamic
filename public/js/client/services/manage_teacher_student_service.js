@@ -24,6 +24,14 @@ function ManageTeacherStudentService($http) {
 			, url  : apiUrl + 'client/manage/student/' + id 
 		});
 	}
+
+	api.updateDetails = function(data) {
+		return $http({
+			method : Constants.METHOD_PUT
+			, data : data
+			, url  : apiUrl + 'client/manage/student/' + data.id 
+		});
+	}
 	
 	return api;
 }
