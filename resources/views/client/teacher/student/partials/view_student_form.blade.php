@@ -8,9 +8,21 @@
 		</div>
 	</div>
 
+	<div class="col-xs-12 success-container">
+		<div class="alert alert-error" ng-if="teacher.errors">
+			<p ng-repeat="error in teacher.errors track by $index">
+				{! error !}
+			</p>
+		</div>
+
+        <div class="alert alert-success" ng-if="teacher.success">
+            <p>{! teacher.success !}</p>
+        </div>
+    </div>
+
 	{!! Form::open(['class' => 'form-horizontal', 'id' => 'student_form']) !!}
 	<div class="container">
-		<div class="col-xs-10 col-xs-offset-1 margin-30-top">
+		<div class="col-xs-12">
 			<fieldset>
 				<legend class="legend-name-mid">
 					User Credentials
@@ -21,10 +33,10 @@
 						{!!
 							Form::text('username','',
 								[
-									'class' => 'form-control',
-									'ng-model' => 'teacher.record.username',
-									'ng-disabled' => 'teacher.active_view',
-									'placeHolder' => 'Username'
+									'class' => 'form-control'
+									, 'ng-model' => 'teacher.record.username'
+									, 'ng-disabled' => 'true'
+									, 'placeHolder' => 'Username'
 								])
 						!!}
 					</div>
@@ -35,10 +47,10 @@
 						{!!
 							Form::text('email','',
 								[
-									'class' => 'form-control',
-									'ng-model' => 'teacher.record.email',
-									'ng-readonly' => 'true',
-									'placeHolder' => 'Email'
+									'class' => 'form-control'
+									, 'ng-model' => 'teacher.record.email'
+									, 'ng-disabled' => 'true'
+									, 'placeHolder' => 'Email'
 								])
 						!!}
 					</div>
@@ -71,10 +83,11 @@
 						{!!
 							Form::text('first_name','',
 								[
-									'class' => 'form-control',
-									'ng-model' => 'teacher.record.first_name',
-									'ng-disabled' => 'teacher.active_view',
-									'placeHolder' => 'Firstname'
+									'class' => 'form-control'
+									, 'ng-model' => 'teacher.record.first_name'
+									, 'ng-disabled' => 'teacher.active_view'
+									, 'ng-class' => "{ 'required-field' : teacher.fields['first_name'] }"
+									, 'placeHolder' => 'First Name'
 								])
 						!!}
 					</div>
@@ -83,10 +96,11 @@
 						{!!
 							Form::text('last_name','',
 								[
-									'class' => 'form-control',
-									'ng-model' => 'teacher.record.last_name',
-									'ng-disabled' => 'teacher.active_view',
-									'placeHolder' => 'Lastname'
+									'class' => 'form-control'
+									, 'ng-model' => 'teacher.record.last_name'
+									, 'ng-disabled' => 'teacher.active_view'
+									, 'ng-class' => "{ 'required-field' : teacher.fields['last_name'] }"
+									, 'placeHolder' => 'Last Name'
 								])
 						!!}
 					</div>
@@ -97,23 +111,29 @@
 						{!!
 							Form::text('city','',
 								[
-									'class' => 'form-control',
-									'ng-model' => 'teacher.record.city',
-									'ng-disabled' => 'teacher.active_view',
-									'placeHolder' => 'City'
+									'class' => 'form-control'
+									, 'ng-model' => 'teacher.record.city'
+									, 'ng-disabled' => 'teacher.active_view'
+									, 'ng-class' => "{ 'required-field' : teacher.fields['city'] }"
+									, 'placeHolder' => 'City'
 								])
 						!!}
 					</div>
 					<label class="control-label col-xs-2">Gender <span class="required">*</span></label>
 					<div class="col-xs-4">
-						{!!
-							Form::select('gender',['' => '-- Select Gender --', 'Male' => 'Male', 'Female' => 'Female'],null,
-								[
-									'class' => 'form-control',
-									'ng-model' => 'teacher.record.gender',
-									'ng-disabled' => 'teacher.active_view'
-								])
-						!!}
+						{!! Form::select('gender'
+								, array(
+									'' => '-- Select Gender --'
+									, 'Male' => 'Male'
+									, 'Female' => 'Female')
+								, null
+								, array(
+									'class' => 'form-control'
+									, 'ng-model' => 'teacher.record.gender'
+									, 'ng-disabled' => 'teacher.active_view'
+									, 'ng-class' => "{ 'required-field' : teacher.fields['gender'] }"
+								)
+							) !!}
 					</div>
 				</div>
 				<div class="form-group">
@@ -122,10 +142,11 @@
 						{!!
 							Form::text('state','',
 								[
-									'class' => 'form-control',
-									'ng-model' => 'teacher.record.state',
-									'ng-disabled' => 'teacher.active_view',
-									'placeHolder' => 'State'
+									'class' => 'form-control'
+									, 'ng-model' => 'teacher.record.state'
+									, 'ng-disabled' => 'teacher.active_view'
+									, 'ng-class' => "{ 'required-field' : teacher.fields['state'] }"
+									, 'placeHolder' => 'State'
 								])
 						!!}
 					</div>
@@ -134,7 +155,7 @@
                             <div class="dropdown">
                               <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
                                 <div class="input-group">
-                                    <input readonly="readonly" type="text" name="birth_date" placeholder="DD/MM/YY" class="form-control" value="{! teacher.record.birth | date:'dd/MM/yy' !}">
+                                    <input readonly="readonly" ng-class="{ 'required-field' : teacher.fields['birth_date'] }" type="text" name="birth_date" placeholder="DD/MM/YY" class="form-control" value="{! teacher.record.birth | date:'dd/MM/yy' !}">
                                     <input type="hidden" name="hidden_date" value="{! teacher.record.birth | date:'yyyyMMdd' !}">
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                                 </div>
@@ -201,7 +222,7 @@
 						{!! Form::button('Save'
 							, array(
 								'class' => 'btn btn-blue btn-medium'
-								, 'ng-click' => "teacher.setActive('edit')"
+								, 'ng-click' => "teacher.updateDetails()"
 							)
 						) !!}
 						{!! Form::button('Cancel'
