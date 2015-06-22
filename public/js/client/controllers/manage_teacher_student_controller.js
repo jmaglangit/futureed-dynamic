@@ -17,6 +17,7 @@ function ManageTeacherStudentController($scope, manageTeacherStudentService, api
 
 	self.setActive = function(active) {
 		self.errors = Constants.FALSE;
+		self.fields = [];
 		
 		self.active_list = Constants.FALSE;
 		self.active_view = Constants.FALSE;
