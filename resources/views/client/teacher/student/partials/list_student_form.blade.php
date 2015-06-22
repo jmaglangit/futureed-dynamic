@@ -1,15 +1,15 @@
-<div ng-if="student.active_list">
+<div ng-if="teacher.active_list">
 	<div class="content-title">
 		<div class="title-main-content">
 			<span>Student Management</span>
 		</div>
 	</div>
-	<div class="col-xs-12">
-		<div class="title-mid mid-container">
+
+	<div class="col-xs-12 search-container">
+		<div class="title-mid">
 			Search
 		</div>
-	</div>
-	<div class="col-xs-12 search-container">
+
 		<div class="form-search">
 			{!! Form::open(
 					[
@@ -18,39 +18,49 @@
 					]
 			) !!}
 			<div class="form-group">
-				<label class="col-xs-2 control-label">Name</label>
-				<div class="col-xs-5">
-					{!! Form::text('search_name', '',['class' => 'form-control', 'ng-model' => 'student.search.name', 'placeholder' => 'Name']) !!}
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-xs-2 control-label">Email</label>
-				<div class="col-xs-5">
-					{!! Form::text('search_email', '',['class' => 'form-control', 'ng-model' => 'student.search.email', 'placeholder' => 'Email']) !!}
-				</div>
-				<div class="btn-container col-xs-5">
-					{!! Form::button('Search', 
-						array(
-							'class' => 'btn btn-blue btn-medium'
-							, 'ng-click' => 'student.getStudentlist()'
+				<div class="col-xs-4">
+					{!! Form::text('name', ''
+						, array(
+							'class' => 'form-control'
+							, 'ng-model' => 'teacher.search.name'
+							, 'placeholder' => 'Name'
 						)
 					) !!}
-					{!! Form::button('Clear', 
-						array(
-							'class' => 'btn btn-gold btn-medium'
-							, 'ng-click' => 'student.clear()'
+				</div>
+				<div class="col-xs-4">
+					{!! Form::text('email', ''
+						, array(
+							'class' => 'form-control'
+							, 'ng-model' => 'teacher.search.email'
+							, 'placeholder' => 'Email'
+						)
+					) !!}
+				</div>
+				<div class="col-xs-2">
+					{!! Form::button('Search'
+						, array(
+							'class' => 'btn btn-blue'
+							, 'ng-click' => 'teacher.searchFnc()'
+						)
+					) !!}
+				</div>
+				<div class="col-xs-2">
+					{!! Form::button('Clear'
+						, array(
+							'class' => 'btn btn-gold'
+							, 'ng-click' => 'teacher.clearSearch()'
 						)
 					) !!}
 				</div>
 			</div>
 		</div>
 	</div>
-	<div class="col-xs-12 padding-0-30">
+
+	<div class="col-xs-12 table-container" ng-init="teacher.listStudent()">
 		<div class="title-mid">
 			Student List
 		</div>
-	</div>
-	<div class="col-xs-12 table-container" ng-init="student.list()">
+
 		<div class="list-container" ng-cloak>
 			<div class="size-container">
 				{!! Form::select('size'
@@ -62,9 +72,9 @@
 					)
 					, '10'
 					, array(
-						'ng-model' => 'student.table.size'
-						, 'ng-change' => 'student.paginateBySize()'
-						, 'ng-if' => "student.students.length"
+						'ng-model' => 'teacher.table.size'
+						, 'ng-change' => 'teacher.paginateBySize()'
+						, 'ng-if' => "teacher.records.length"
 						, 'class' => 'form-control paginate-size pull-right'
 					)
 				) !!}
@@ -78,46 +88,45 @@
 			            <th>Actions</th>
 			        </tr>
 			    </thead>
-
 		        <tbody>
-		        <tr ng-repeat="key in student.students">
-		            <td>{! key.first_name !} {! key.last_name !}</td>
-		            <td>{! key.user.email !}</td>
-		            <td>
-		            	<div class="row">
-		            		<div class="col-xs-6">
-	    						<a href="" ng-click="admin.viewAdmin(a.id)"><span><i class="fa fa-eye"></i></span></a>
-	    					</div>
-	    					<div class="col-xs-6">
-	    						<a href="" ng-click="admin.viewAdmin(a.id)"><span><i class="fa fa-pencil"></i></span></a>
-	    					</div>
-		            	</div>
-		            </td>
-		        </tr>
-		        <tr class="odd" ng-if="!student.students.length && !student.table.loading">
-		        	<td valign="top" colspan="7" class="dataTables_empty">
-		        		No records found
-		        	</td>
-		        </tr>
-		        <tr class="odd" ng-if="student.table.loading">
-		        	<td valign="top" colspan="7" class="dataTables_empty">
-		        		Loading...
-		        	</td>
-		        </tr>
+			        <tr ng-repeat="student in teacher.records">
+			        	<td>{! student.user.name!}</td>
+			            <td>{! student.user.email !}</td>
+			            <td>
+			            	<div class="row">
+			            		<div class="col-xs-6">
+		    						<a href="" ng-click="teacher.studentDetails(student.id, futureed.ACTIVE_VIEW)"><span><i class="fa fa-eye"></i></span></a>
+		    					</div>
+		    					<div class="col-xs-6">
+		    						<a href="" ng-click="teacher.studentDetails(student.id, futureed.ACTIVE_EDIT)"><span><i class="fa fa-pencil"></i></span></a>
+		    					</div>
+			            	</div>
+			            </td>
+			        </tr>
+			        <tr class="odd" ng-if="!teacher.records.length && !teacher.table.loading">
+			        	<td valign="top" colspan="7">
+			        		No records found
+			        	</td>
+			        </tr>
+			        <tr class="odd" ng-if="teacher.table.loading">
+			        	<td valign="top" colspan="7">
+			        		Loading...
+			        	</td>
+			        </tr>
 		        </tbody>
 			</table>
 
-			<div class="pull-right" ng-if="student.students.length">
+			<div class="pull-right" ng-if="teacher.records.length">
 				<pagination 
-					total-items="admin.table.total_items" 
-					ng-model="admin.table.page"
-					max-size="admin.table.paging_size"
-					items-per-page="admin.table.size" 
+					total-items="teacher.table.total_items" 
+					ng-model="teacher.table.page"
+					max-size="teacher.table.paging_size"
+					items-per-page="teacher.table.size" 
 					previous-text = "&lt;"
 					next-text="&gt;"
 					class="pagination" 
 					boundary-links="true"
-					ng-change="admin.paginateByPage()">
+					ng-change="teacher.paginateByPage()">
 				</pagination>
 			</div>
 		</div>

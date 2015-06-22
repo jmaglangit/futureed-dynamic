@@ -25,12 +25,12 @@ class ParentStudent extends Model {
         return $this->belongsTo('FutureEd\Models\Core\User','student_user_id','id');
     }
 
-
+    public function student(){
+        return $this->belongsTo('FutureEd\Models\Core\Student','student_user_id','user_id');
+    }
     //-------------scopes
 
     public function scopeParent($query,$parent_user_id){
         return $query->where('parent_user_id',$parent_user_id);
     }
-
-
 }
