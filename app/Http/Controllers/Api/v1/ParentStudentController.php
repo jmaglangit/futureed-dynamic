@@ -249,14 +249,11 @@ class ParentStudentController extends ApiController {
 
         //4. Insert Invoice.
 
-        $invoice_no = $this->invoice->getNextInvoiceNo();
-        $new_invoice_no = $invoice_no['id'] + 1;
-        $new_invoice_no = $this->invoice_service->createInvoiceNo($new_invoice_no);
         $client_details = $this->client->getClientDetails($client_id);
 
+        $invoice_id = $parent_student_data['invoice_id'];
         $invoice['order_no'] = $next_order_no;
         $invoice['invoice_date'] = $parent_student_data['order_date'];
-        $invoice['invoice_no'] = $new_invoice_no;
         $invoice['client_id'] = $client_id;
         $invoice['client_name'] = $client_details->first_name .' '.$client_details->last_name;
         $invoice['date_start'] = $parent_student_data['date_start'];
@@ -269,11 +266,10 @@ class ParentStudentController extends ApiController {
         $invoice['subscription_id'] = $parent_student_data['subscription_id'];
         $invoice['payment_status'] = 'Pending';
 
-        $invoice_result = $this->invoice->addInvoice($invoice);
-
+        $invoice_result = $this->invoice->updateInvoice($invoice_id,$invoice);
 
         //5. insert Invoice Detail.
-        $order_detail['invoice_no'] = $invoice_result['invoice_no'];
+        $order_detail['invoice_id'] = $invoice_id;
         $order_detail['class_id'] = $add_classroom_result->id;
         $order_detail['grade_id'] = $add_classroom_result->grade_id;
         $order_detail['price'] = $parent_student_data['total_amount'];

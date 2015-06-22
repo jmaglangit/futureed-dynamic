@@ -44,7 +44,8 @@ class ParentStudentRequest extends ApiRequest {
                             'total_amount'  =>   'required|numeric',
                             'discount_type'  =>   'required|string',
                             'discount_id'  =>   'required|integer',
-                            'discount' => 'required|numeric'];
+                            'discount' => 'required|numeric',
+                            'invoice_id' => 'required|integer'];
                         break;
                 }
 
