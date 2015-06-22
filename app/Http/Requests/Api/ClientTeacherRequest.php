@@ -31,7 +31,7 @@ class ClientTeacherRequest extends ApiRequest
 					'street_address' => 'string',
 					'city' => 'string',
 					'state' => 'string',
-					'zip' => 'numeric|regex:/^[0-9]{4,6}(\-[0-9]{4})?$/',
+					'zip' => 'numeric|regex:'.config('regex.zip_code'),
 					'country' => 'string'
 				];
 				break;
