@@ -1,4 +1,4 @@
-<div ng-if="student.email">
+<div ng-if="teacher.email">
 	<div class="content-title">
 		<div class="title-main-content">
 			<span>Change Email</span>
