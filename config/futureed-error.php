@@ -62,7 +62,7 @@ return [
 		2109 => 'Your account has already been confirmed.',
 		2110 => 'You have already setup the forgot password steps.',
 		2111 => 'You have already setup the email confirmation steps.',
-		2112 => 'Password should be alpha numeric with lowercase letters, uppercase letters, numerical and special punctuation.',
+		2112 => 'Password must be at least 8 characters and with at least 1 number.',
 		2113 => 'Username and password is invalid.',
 		2114 => 'Your password is incorrect.',
 		2115 => 'Your contact number must be this format +00 (000) 000-0000.',

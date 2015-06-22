@@ -15,22 +15,11 @@ class PasswordServices {
                 $valid = false;
          }
 
-         if(!preg_match("#[a-z]+#", $password)){
+         if(!preg_match("#[a-zA-Z]+#", $password)){
 
                 $valid = false;
 
          }
-
-         if(!preg_match("#[A-Z]+#", $password)){
-
-                $valid = false;
-         }
-
-         if(!preg_match("#[\W ]+#", $password)){
-
-                $valid = false;
-         }
-
 
         //to do put min to config
          if(strlen($password) <8){
