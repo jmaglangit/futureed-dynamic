@@ -24,18 +24,9 @@ class InvoiceRequest extends ApiRequest {
         switch($this->method){
 
             case 'PUT':
-
-                break;
-
-            case 'PATCH':
-                break;
-
-            case 'POST':
-            default:
                 return [
                     'order_no' => 'required',
                     'invoice_date' => 'required|date_format:Ymd',
-                    'invoice_no' => 'required',
                     'client_id' => 'required|numeric',
                     'client_name' => 'required|regex:'. config('regex.name'),
                     'date_start' => 'required|date_format:Ymd',
@@ -48,6 +39,17 @@ class InvoiceRequest extends ApiRequest {
                     'subscription_id' => 'required|numeric',
                     'payment_status' => 'required|in:Pending,Paid,Cancelled',
                 ];
+                break;
+
+            case 'PATCH':
+                break;
+
+            case 'POST':
+                return ['client_id' => 'required|numeric',
+                        'client_name' => 'required|regex:'. config('regex.name'),
+                        'payment_status' => 'required|in:Pending,Paid,Cancelled'];
+            default:
+
                 break;
         }
     }
