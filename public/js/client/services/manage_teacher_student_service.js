@@ -17,6 +17,13 @@ function ManageTeacherStudentService($http) {
 				+ '&offset=' + table.offset
 		});
 	}
+
+	api.studentDetails = function(id) {
+		return $http({
+			method : Constants.METHOD_GET
+			, url  : apiUrl + 'client/manage/student/' + id 
+		});
+	}
 	
 	return api;
 }
