@@ -156,7 +156,7 @@ class ClassStudentController extends ApiController {
 		//Get current school if exist.
 		$classroom = $this->class_student->getStudentCurrentClassroom($student_id);
 
-        if(is_null($classroom)){
+        if($classroom){
             return $this->respondErrorMessage(2125);// Student is already in the class.
         }
 
@@ -172,6 +172,12 @@ class ClassStudentController extends ApiController {
         $client_user_id = $this->client->checkClient($data['client_id'],config('futureed.teacher'));
         $teacher = $this->user->getUser($client_user_id,config('futureed.client'));
 
+		//update school code of student.
+		$client_school_code = $this->client->getSchoolCode($data['client_id']);
+
+		$this->student->updateSchool($student_id,$client_school_code);
+
+
         $data['user_id'] = $check_email['user_id'];
         $data['class_name'] = $classroom ? $classroom['name'] : "";
         $data['teacher_name'] = !is_null($teacher) ? $teacher['name'] : "";
@@ -179,7 +185,7 @@ class ClassStudentController extends ApiController {
         $this->mail->sendExistingStudentRegister($data);
 
         //return success
-        return $this->respondWithData(['id' => $check_email['user_id']]);
+        return $this->respondWithData(['id' => $student_id]);
 
     }
 
