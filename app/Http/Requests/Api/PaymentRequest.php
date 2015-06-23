@@ -9,32 +9,32 @@ class PaymentRequest extends ApiRequest {
      *
      * @return bool
      */
-	public function authorize()
-	{
-	    return true;
-	}
+    public function authorize()
+    {
+        return true;
+    }
 
     /**
      * Get the validation rules that apply to the request.
      *
      * @return array
      */
-	public function rules()
-	{
-		switch($this->method)
-		{
-			case 'PUT':
+    public function rules()
+    {
+        switch($this->method)
+        {
+            case 'PUT':
 
-			break;
-			case 'PATCH':
+                break;
+            case 'PATCH':
 
-			break;
-			case 'POST':
-			default:
-			return [
-			'invoice_id' => 'required|numeric',
-			'quantity' => 'required|numeric',
-			'total_amount' => 'required|numeric'];
-		}
-	}
+                break;
+            case 'POST':
+            default:
+                return [
+                    'invoice_id' => 'required|numeric',
+                    'quantity' => 'required|numeric',
+                    'price' => 'required|numeric'];
+        }
+    }
 }
