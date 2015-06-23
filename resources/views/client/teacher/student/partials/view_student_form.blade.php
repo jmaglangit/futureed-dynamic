@@ -21,7 +21,7 @@
     </div>
 
 	{!! Form::open(['class' => 'form-horizontal', 'id' => 'student_form']) !!}
-		<div class="container">
+		<div class="module-container">
 			<div class="col-xs-12">
 				<fieldset>
 					<legend class="legend-name-mid">
