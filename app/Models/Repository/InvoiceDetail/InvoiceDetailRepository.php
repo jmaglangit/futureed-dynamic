@@ -1,7 +1,6 @@
 <?php namespace FutureEd\Models\Repository\InvoiceDetail;
 
 use FutureEd\Models\Core\InvoiceDetail;
-use FutureEd\Models\Core\Invoice;
 
 
 class InvoiceDetailRepository implements InvoiceDetailRepositoryInterface{
@@ -21,9 +20,12 @@ class InvoiceDetailRepository implements InvoiceDetailRepositoryInterface{
         }
     }
 
-
-
-
-
-
+    public function getInvoiceDetailByInvoiceIdAndClassId($invoice_id,$class_id){
+        try{
+            $result = InvoiceDetail::invoiceId($invoice_id)->classId($class_id)->first();
+            return !is_null($result) ? $result->toArray():null;
+        }catch(Exception $e){
+            return $e->getMessage();
+        }
+    }
 }

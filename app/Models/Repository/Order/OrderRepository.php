@@ -20,7 +20,20 @@ class OrderRepository implements OrderRepositoryInterface{
         }
     }
 
+    public function updateOrder($id,$data){
+        try{
+            $result = Order::find($id);
+            return !is_null($result) ? $result->update($data) : false;
+        }catch(Exception $e){
+            return $e->getMessage();
+        }
+    }
     public function getNextOrderNo(){
         return Order::orderBy('id','desc')->first()->toArray();
+    }
+
+    public function getOrderByOrderNo($order_no){
+        $result = Order::orderNo($order_no)->first();
+        return !is_null($result) ? $result->toArray(): null;
     }
 }
