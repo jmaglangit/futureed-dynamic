@@ -27,4 +27,15 @@ class InvoiceDetailRequest extends ApiRequest {
                 ];
         }
     }
+
+	/**
+	 * Get the validation rules custom messages that apply to the request.
+	 *
+	 * @return array
+	 */
+	public function messages() {
+		return [
+			'id.required' => 'Invoice is required.'
+		];
+	}
 }
