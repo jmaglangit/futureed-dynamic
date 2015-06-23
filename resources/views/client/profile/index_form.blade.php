@@ -249,7 +249,7 @@
             </div>
         </div>
         <div class="form-group" ng-init="getCountries()">
-    		<label for="" class="col-md-2 control-label">Postal Code <span class="required" ng-if="profile.is_required">*</span></label>
+    		<label for="" class="col-md-2 control-label">Postal Code </label>
             <div class="col-md-4">
                 {!! Form::text('zip', ''
                     , array(
