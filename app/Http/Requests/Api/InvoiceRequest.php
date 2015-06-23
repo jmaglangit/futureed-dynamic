@@ -47,6 +47,7 @@ class InvoiceRequest extends ApiRequest {
             case 'POST':
                 return ['client_id' => 'required|integer',
                     'client_name' => 'required|regex:'. config('regex.name'),
+                    'order_no' => 'required',
                     'payment_status' => 'required|in:Pending,Paid,Cancelled'];
             default:
 
