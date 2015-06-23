@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Carbon\Carbon;
 
 class Student extends Model {
 
@@ -27,7 +28,6 @@ class Student extends Model {
 	protected $attributes = [
 		'created_by' => 1,
 		'updated_by' => 1,
-
 	];
 
 
@@ -121,6 +121,31 @@ class Student extends Model {
 	public function scopeId($query, $id)
 	{
 		return $query->where('id', $id);
+	}
+
+	public function scopeSubscription($query){
+
+		//check if has ClassStudent relation
+		return $query->whereHas('studentclassroom',function($query) {
+
+			//check if ClassStudent has Classroom relation
+			 $query->whereHas('classroom',function($query) {
+
+				//check relation invoice_details
+				$query->whereHas('invoiceDetails', function($query){
+
+					//check relation to invoice
+					$query->whereHas('invoice', function($query){
+
+						$query->where('date_end','>=', Carbon::now());
+
+					});
+
+				});
+
+			});
+		});
+
 	}
 
 

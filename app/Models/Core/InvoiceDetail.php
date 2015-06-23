@@ -22,7 +22,8 @@ class InvoiceDetail extends Model {
 
     public function invoice(){
 
-        return $this->hasOne('FutureEd\Models\Core\Invoice','invoice_id','id');
+        return $this->BelongsTo('FutureEd\Models\Core\Invoice','invoice_id','id');
+
 
     }
 

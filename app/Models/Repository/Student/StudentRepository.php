@@ -339,6 +339,18 @@ class StudentRepository implements StudentRepositoryInterface
 
 	}
 
+
+	//get subscription
+	public function subscriptionExpired($id)
+	{
+
+		$student = new Student();
+
+		$student = $student->with('studentclassroom')->subscription()->id($id);
+
+		return $student->get()->toArray();
+	}
+
 	public function updateSchool($id,$school_code){
 
 		try{
@@ -352,6 +364,7 @@ class StudentRepository implements StudentRepositoryInterface
 
 			throw new Exception($e->getMessage());
 		}
+
 	}
 
 

@@ -49,6 +49,9 @@ interface StudentRepositoryInterface {
 
 	public function viewStudentByToken($id,$reg_token);
 
+	public function subscriptionExpired($id);
+
 	public function updateSchool($id,$school_code);
+
 
 }
