@@ -1,5 +1,5 @@
 <?php 
-	Routes::group(['prefix' => '/admin'], function()
+	Routes::group(['prefix' => '/peaches'], function()
 	{
 		Routes::get('/', 'FutureLesson\Admin\LoginController@index');
 		Routes::get('/password/forgot',[
