@@ -12,14 +12,6 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 	SearchService(self);
 	self.searchDefaults();
 
-	$window.addEventListener('beforeunload', function(event) {
-		ManageParentPaymentService.cancelPayment(self.search.order_no).success(function(response) {
-			console.log(response);
-		}).error(function(response) {
-			self.errors = $scope.internalError();
-		});
-    });
-
 	self.setActive = function(active, id)
 	{
 		self.errors = Constants.FALSE;
