@@ -17,7 +17,7 @@
         			, 'ng-change' => 'profile.validateCurrentClientEmail()')
         		)!!}
         </div>	
-        <div style="margin-top: 7px;"> 
+        <div class="margin-top-8"> 
             <i ng-if="profile.validation.e_loading" class="fa fa-spinner fa-spin"></i>
             <i ng-if="profile.validation.e_success" class="fa fa-check success-color"></i>
             <span ng-if="profile.validation.e_error" class="error-msg-con">{! profile.validation.e_error !}</span>
@@ -35,7 +35,7 @@
         			, 'ng-change' => 'profile.validateNewClientEmail()') 
         		)!!}
         </div>		
-        <div style="margin-top: 7px;"> 
+        <div class="margin-top-8"> 
             <i ng-if="profile.validation.n_loading" class="fa fa-spinner fa-spin"></i>
             <i ng-if="profile.validation.n_success" class="fa fa-check success-color"></i>
             <span ng-if="profile.validation.n_error" class="error-msg-con">{! profile.validation.n_error !}</span>
@@ -53,7 +53,7 @@
         			, 'ng-change' => 'profile.confirmNewEmail()') 
         		)!!}
         </div>
-        <div style="margin-top: 7px;"> 
+        <div class="margin-top-8"> 
             <i ng-if="profile.validation.c_success" class="fa fa-check success-color"></i>
             <span ng-if="profile.validation.c_error" class="error-msg-con">{! profile.validation.c_error !}</span>
         </div>	

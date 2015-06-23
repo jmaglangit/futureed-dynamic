@@ -5,6 +5,18 @@
 		</div>
 	</div>
 
+	<div class="col-xs-12 success-container" ng-if="teacher.errors || teacher.success">
+		<div class="alert alert-error" ng-if="teacher.errors">
+			<p ng-repeat="error in teacher.errors track by $index">
+				{! error !}
+			</p>
+		</div>
+
+        <div class="alert alert-success" ng-if="teacher.success">
+            <p>{! teacher.success !}</p>
+        </div>
+    </div>
+
 	<div class="col-xs-12 search-container">
 		<div class="title-mid">
 			Search
@@ -95,10 +107,10 @@
 			            <td>
 			            	<div class="row">
 			            		<div class="col-xs-6">
-		    						<a href="" ng-click="teacher.viewAdmin(a.id)"><span><i class="fa fa-eye"></i></span></a>
+		    						<a href="" ng-click="teacher.studentDetails(student.id, futureed.ACTIVE_VIEW)"><span><i class="fa fa-eye"></i></span></a>
 		    					</div>
 		    					<div class="col-xs-6">
-		    						<a href="" ng-click="teacher.viewAdmin(a.id)"><span><i class="fa fa-pencil"></i></span></a>
+		    						<a href="" ng-click="teacher.studentDetails(student.id, futureed.ACTIVE_EDIT)"><span><i class="fa fa-pencil"></i></span></a>
 		    					</div>
 			            	</div>
 			            </td>

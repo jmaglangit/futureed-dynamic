@@ -129,7 +129,7 @@ class ClientController extends ApiController {
 					$this->addMessageBag($this->validateString($client,'city'));
 					$this->addMessageBag($this->validateString($client,'country'));
 					$this->addMessageBag($this->validateString($client,'state'));
-					$this->addMessageBag($this->zipCode($client,'zip'));
+					$this->addMessageBag($this->zipCodeOptional($client,'zip'));
 
 				}else if(strtolower($clientDetails['client_role']) == 'teacher'){
 
@@ -270,7 +270,7 @@ class ClientController extends ApiController {
 			$this->addMessageBag($this->validateString($client, 'city'));
 			$this->addMessageBag($this->validateString($client, 'state'));
 			$this->addMessageBag($this->validateString($client, 'country'));
-			$this->addMessageBag($this->zipCode($client, 'zip'));
+			$this->addMessageBag($this->zipCodeOptional($client, 'zip'));
 
 
 		} else if (strcasecmp($client['client_role'], config('futureed.teacher')) == 0) {
@@ -296,7 +296,7 @@ class ClientController extends ApiController {
 			$this->addMessageBag($this->validateString($school, 'school_country'));
 			$this->addMessageBag($this->validateString($school, 'school_address'));
 			$this->addMessageBag($this->validateString($school, 'school_city'));
-			$this->addMessageBag($this->zipCode($school, 'school_zip'));
+			$this->addMessageBag($this->zipCodeOptional($school, 'school_zip'));
 			$this->addMessageBag($this->validateString($school, 'contact_name'));
 			$this->addMessageBag($this->checkContactNumber($school, 'contact_number'));
 

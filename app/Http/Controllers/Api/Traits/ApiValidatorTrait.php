@@ -333,28 +333,6 @@ trait ApiValidatorTrait {
             }
     }
 
-    public function zipCode($input,$field_name){
-
-            $validator = Validator::make(
-                [
-                    "$field_name" => strtolower($input["$field_name"]),
-                ],
-                [
-                    "$field_name" => 'required|regex:/^[0-9]{4,6}(\-[0-9]{4})?$/'
-                ]
-            );
-
-            if($validator->fails()){
-
-                $validator_msg = $validator->messages()->toArray();
-
-                return $this->setErrorCode(1015)
-                    ->setField($field_name)
-                    ->setMessage($validator_msg["$field_name"][0])
-                    ->errorMessage();
-            }
-    }
-
 
     public function checkPassword($input,$field_name){
 
@@ -442,7 +420,7 @@ trait ApiValidatorTrait {
                     "$field_name" => strtolower($input["$field_name"]),
                 ],
                 [
-                    "$field_name" => 'regex:/^[0-9]{4,6}(\-[0-9]{4})?$/'
+                    "$field_name" => 'max:10|regex:'. config('regex.zip_code')
                 ]
             );
 

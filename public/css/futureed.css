@@ -1,11 +1,5 @@
 @charset "UTF-8"; 
 
-/*..............................................................................................................
-...............................................CSS Document coded by............................................
-...............................................Engr. Bambi Corro III............................................
-.........................................Hive&Seek - bambi@hiveandseek.net......................................
-..............................................................................................................*/
-
 /*----- GENERAL -----*/
 * {margin: 0; padding: 0;}
 html{height: 100%; position: relative;}
@@ -346,7 +340,11 @@ fieldset legend{color: #8e8171; font-size: 16px; text-transform: uppercase;}
 	padding-bottom: 10px;
 	font-size: 23px;
 }
-
+form p.help-block {
+	font-size: 12px;
+	font-style: italic;
+	text-align: left;
+}
 /*----- LOGIN ----- */
 .client .login > [class*="col-md-"],
 .student .login > [class*="col-md-"],
