@@ -21,7 +21,8 @@
         			, 'ng-model' => 'profile.change.new_password'
         			, 'ng-model-option' => "{debounce: {'default' : 10000} }") 
         		)!!}
-        </div>		
+        	<p class="help-block">Password must be at least 8 characters and with at least 1 number.</p>
+        </div>
 	</div>
 	<div class="form-group">
 		<label class="col-xs-3 control-label">Confirm Password <span class="required">*</span></label>
