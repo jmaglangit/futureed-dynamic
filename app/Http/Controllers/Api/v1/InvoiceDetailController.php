@@ -9,42 +9,43 @@ use Illuminate\Support\Facades\Input;
 
 class InvoiceDetailController extends ApiController {
 
-    protected $detail;
+	protected $detail;
 	protected $invoice;
 
-    public function __construct(InvoiceDetail $detail, InvoiceRepositoryInterface $invoice){
+	public function __construct(InvoiceDetail $detail, InvoiceRepositoryInterface $invoice)
+	{
 
 		$this->detail = $detail;
 		$this->invoice = $invoice;
-    }
+	}
 
 
 	public function viewInvoiceDetail()
 	{
 
-        $id = null;
+		$id = null;
 
-		if(Input::get('id')) {
+		if (Input::get('id')) {
 
 			$id = Input::get('id');
 		}
 
 		$return = $this->invoice->getInvoice($id);
 
-		if(!$return){
+		if (!$return) {
 
 			return $this->respondErrorMessage(2120);
 		}
 
-        $detail = $this->invoice->getDetails($id);
+		$detail = $this->invoice->getDetails($id);
 
-        return $this->respondWithData($detail);
+		return $this->respondWithData($detail);
 
 	}
 
 
-    public function editInvoiceDetails(InvoiceDetailRequest $request)
-    {
+	public function editInvoiceDetails(InvoiceDetailRequest $request)
+	{
 
 		$data = $request->only('id', 'payment_status');
 
@@ -64,7 +65,7 @@ class InvoiceDetailController extends ApiController {
 
 		return $this->respondWithData($return);
 
-    }
+	}
 
 
 }
