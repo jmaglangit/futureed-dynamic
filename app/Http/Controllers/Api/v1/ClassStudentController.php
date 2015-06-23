@@ -144,42 +144,47 @@ class ClassStudentController extends ApiController {
      */
     public function addExistingStudent(ClassStudentRequest $request)
     {
-        $data = $request->all();
-        $check_email = $this->user->checkEmail($data['email'],config('futureed.student'));
+		$data = $request->all();
+		$check_email = $this->user->checkEmail($data['email'], config('futureed.student'));
 
-        if(!$check_email){
-            return $this->respondErrorMessage(2124);// Student does not exist.
-        }
+		if (!$check_email) {
+			return $this->respondErrorMessage(2124);// Student does not exist.
+		}
 
-        $student_id = $this->student->getStudentId($check_email['user_id']);
+		$student_id = $this->student->getStudentId($check_email['user_id']);
 
 		//Get current school if exist.
 		$classroom = $this->class_student->getStudentCurrentClassroom($student_id);
 
-        if(is_null($classroom)){
-            return $this->respondErrorMessage(2125);// Student is already in the class.
-        }
+		if ($classroom) {
+			return $this->respondErrorMessage(2125);// Student is already in the class.
+		}
 
-        //add to class student table.
-        $data['student_id'] = $student_id;
-        $data['status'] = 'Enabled';
-        $this->class_student->addClassStudent($data);
+		//add to class student table.
+		$data['student_id'] = $student_id;
+		$data['status'] = 'Enabled';
+		$this->class_student->addClassStudent($data);
 
 
+		//send email to student.
+		$classroom = $this->class_student->getClassroom($data['class_id']);
+		$client_user_id = $this->client->checkClient($data['client_id'], config('futureed.teacher'));
+		$teacher = $this->user->getUser($client_user_id, config('futureed.client'));
 
-        //send email to student.
-        $classroom = $this->class_student->getClassroom($data['class_id']);
-        $client_user_id = $this->client->checkClient($data['client_id'],config('futureed.teacher'));
-        $teacher = $this->user->getUser($client_user_id,config('futureed.client'));
+		//update school code of student.
+		$client_school_code = $this->client->getSchoolCode($data['client_id']);
 
-        $data['user_id'] = $check_email['user_id'];
-        $data['class_name'] = $classroom ? $classroom['name'] : "";
-        $data['teacher_name'] = !is_null($teacher) ? $teacher['name'] : "";
+		$this->student->updateSchool($student_id, $client_school_code);
 
-        $this->mail->sendExistingStudentRegister($data);
 
-        //return success
-        return $this->respondWithData(['id' => $check_email['user_id']]);
+		$data['user_id'] = $check_email['user_id'];
+		$data['class_name'] = $classroom ? $classroom['name'] : "";
+		$data['teacher_name'] = !is_null($teacher) ? $teacher['name'] : "";
+
+		$this->mail->sendExistingStudentRegister($data);
+
+		//return success
+		return $this->respondWithData(['id' => $student_id]);
 
     }
 
