@@ -35,9 +35,11 @@ class OrderController extends ApiController {
     {
         $input['client_id'] = $client_id;
         $input['payment_status'] = 'Pending';
-        $input['order_no'] = '';
         $order = $this->order->addOrder($input);
+
         $order['order_no'] = $this->invoice_service->createOrderNo($client_id,$order['id']);
+        $order = $this->order->updateOrder($order['id'],$order);
+
         return $this->respondWithData($order);
     }
 }
