@@ -91,7 +91,7 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface{
 
 		return ClassStudent::with('classroom')
 			->studentid($student_id)
-			->currentdate(Carbon::now())
+			->currdate(Carbon::now())
 			->first();
 	}
 }
