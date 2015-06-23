@@ -38,6 +38,11 @@
 					'as' => 'client.parent.student.partials.view_student_form',
 					'uses' => $manage_parent_student_controller . '@view_student_form'
 				]);
+
+				Routes::get('invitation_code_form', [
+					'as' => 'client.parent.student.partials.invitation_code_form',
+					'uses' => $manage_parent_student_controller . '@invitation_code_form'
+				]);
 			});
 		});				
 

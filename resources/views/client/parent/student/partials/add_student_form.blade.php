@@ -4,7 +4,15 @@
 			<span>Add Student</span>
 		</div>
 	</div>
-	<div class="container">
+	<div class="container form-content">
+		<div class="alert alert-error" ng-if="student.errors">
+            <p ng-repeat="error in student.errors track by $index" > 
+                {! error !}
+            </p>
+        </div>
+        <div class="alert alert-success" ng-if="student.success">
+        	<p>Successfully added new student user.</p>
+        </div>
 		{!! Form::open(['class' => 'form-horizontal', 'id' => 'add_student_form']) !!}
 		<div class="col-xs-10 col-xs-offset-1 margin-top-60">
 			<div class="form-group" ng-init="student.existActive('old')">
@@ -21,10 +29,10 @@
 				</div>
 				<label class="control-label col-xs-2">Email <span class="required">*</span></label>
 				<div class="col-xs-4">
-					{!! Form::text('email', '',
+					{!! Form::text('email_exist', '',
 						[
 							'class' => 'form-control',
-							'ng-model' => 'student.email',
+							'ng-model' => 'student.reg.email_exist',
 							'placeHolder' => 'Email',
 							'ng-disabled' => 'student.exist'
 						]
@@ -32,26 +40,28 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-xs-offset-3 col-xs-2 control-label">Invitation Code <span class="required">*</span></label>
-				<div class="col-xs-4">
-					{!! Form::text('code', '',
-						[
-							'class' => 'form-control',
-							'ng-model' => 'student.code',
-							'placeHolder' => 'Invitaion Code',
-							'ng-disabled' => 'student.exist'
-						]
+				<div class="col-xs-6 col-xs-offset-3 btn-container">
+					{!! Form::button('Add'
+						, array(
+							'class' => 'btn btn-blue btn-medium bottom-5'
+							, 'ng-disabled' => 'student.exist'
+							, 'ng-click' => 'student.addExist()'
+						)
 					) !!}
-				</div>
-				<div class="col-xs-3 btn-container">
-					<button class="btn btn-blue btn-medium bottom-5"><span><i class="fa fa-plus-square"></i></span> Add</button>
+					{!! Form::button('Cancel'
+						, array(
+							'class' => 'btn btn-gold btn-medium bottom-5'
+							, 'ng-disabled' => 'student.exist'
+							, 'ng-click' => "student.setActive('list')"
+						)
+					) !!}
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="col-xs-3">
 					{!! Form::radio('status'
 						,'not-exist'
-						, true
+						, false
 						, array(
 							'ng-model' => 'student.is_exist',
 							'ng-click' => "student.existActive('new')"
@@ -69,26 +79,40 @@
 							<div class="col-xs-5">
 								{!! Form::text('username', '',
 									[
-										'class' => 'form-control',
-										'ng-model' => 'student.code',
-										'placeHolder' => 'Username',
-										'ng-disabled' => '!student.exist'
+										'class' => 'form-control'
+										, 'ng-model' => 'student.reg.username'
+										, 'placeHolder' => 'Username'
+										, 'ng-disabled' => '!student.exist'
+										, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
+        								, 'ng-change' => 'student.checkUsernameAvailability()'
 									]
 								) !!}
 							</div>
+							<div class="margin-top-8"> 
+				                <i ng-if="student.validation.u_loading" class="fa fa-spinner fa-spin"></i>
+				                <i ng-if="student.validation.u_success" class="fa fa-check success-color"></i>
+				                <span ng-if="student.validation.u_error" class="error-msg-con">{! student.validation.u_error !}</span>
+				            </div>
 						</div>
 						<div class="form-group">
 							<label class="col-xs-2 control-label">Email <span class="required">*</span></label>
 							<div class="col-xs-5">
 								{!! Form::text('email', '',
 									[
-										'class' => 'form-control',
-										'ng-model' => 'student.email',
-										'placeHolder' => 'Email',
-										'ng-disabled' => '!student.exist'
+										'class' => 'form-control'
+										, 'ng-model' => 'student.reg.email'
+										, 'placeHolder' => 'Email'
+										, 'ng-disabled' => '!student.exist'
+										, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
+        								, 'ng-change' => 'student.checkEmailAvailability()'
 									]
 								) !!}
 							</div>
+							<div class="margin-top-8"> 
+				                <i ng-if="student.validation.e_loading" class="fa fa-spinner fa-spin"></i>
+				                <i ng-if="student.validation.e_success" class="fa fa-check success-color"></i>
+				                <span ng-if="student.validation.e_error" class="error-msg-con">{! student.validation.e_error !}</span>
+				            </div>	
 						</div>
 					</fieldset>
 					<fieldset>
@@ -96,10 +120,10 @@
 						<div class="form-group">
 							<label class="col-xs-2 control-label">Firstname <span class="required">*</span></label>
 							<div class="col-xs-4">
-								{!! Form::text('firstname', '',
+								{!! Form::text('first_name', '',
 									[
 										'class' => 'form-control',
-										'ng-model' => 'student.email',
+										'ng-model' => 'student.reg.first_name',
 										'placeHolder' => 'Firstname',
 										'ng-disabled' => '!student.exist'
 									]
@@ -107,10 +131,10 @@
 							</div>
 							<label class="col-xs-2 control-label">Lastname <span class="required">*</span></label>
 							<div class="col-xs-4">
-								{!! Form::text('lastname', '',
+								{!! Form::text('last_name', '',
 									[
 										'class' => 'form-control',
-										'ng-model' => 'student.email',
+										'ng-model' => 'student.reg.last_name',
 										'placeHolder' => 'Lastname',
 										'ng-disabled' => '!student.exist'
 									]
@@ -122,8 +146,8 @@
 							<div class="col-xs-4">
 								{!! Form::select('gender',
 									['' => '-- Select Gender --',
-									'male'=> 'Male', 
-									'female' => 'female']
+									'Male'=> 'Male', 
+									'Female' => 'Female']
 									,null,
 									['class' => 'form-control', 
 									'ng-model' => 'student.reg.gender',
@@ -137,13 +161,13 @@
 	                            <div class="dropdown">
 	                              	<a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
 		                                <div class="input-group">
-	                                    <input readonly="readonly" type="text" name="birth_date" placeholder="DD/MM/YY" class="form-control" value="{! reg.birth | date:'dd/MM/yy' !}">
-		                                    <input type="hidden" name="hidden_date" value="{! reg.birth | date:'yyyyMMdd' !}">
+	                                    <input readonly="readonly" type="text" name="birth_date" placeholder="DD/MM/YY" class="form-control" value="{! student.reg.birth | date:'dd/MM/yy' !}">
+		                                    <input type="hidden" name="hidden_date" value="{! student.reg.birth | date:'yyyyMMdd' !}">
 		                                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 		                                </div>
 		                            </a>
 		                            <ul class="dropdown-menu date-dropdown-menu" role="menu" aria-labelledby="dLabel">
-		                                <datetimepicker data-ng-model="reg.birth" data-before-render="beforeDateRender($dates)" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', startView:'day', minView:'day' }"/>
+		                                <datetimepicker data-ng-model="student.reg.birth" data-before-render="beforeDateRender($dates)" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', startView:'day', minView:'day' }"/>
 		                            </ul>
 		                        </div>
 		                    </div>
@@ -154,7 +178,7 @@
 								{!! Form::text('city', '',
 									[
 										'class' => 'form-control',
-										'ng-model' => 'student.email',
+										'ng-model' => 'student.reg.city',
 										'placeHolder' => 'City',
 										'ng-disabled' => '!student.exist'
 									]
@@ -162,12 +186,12 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-xs-2">City <span class="required">*</span></label>
+							<label class="control-label col-xs-2">State <span class="required">*</span></label>
 							<div class="col-xs-4">
 								{!! Form::text('state', '',
 									[
 										'class' => 'form-control',
-										'ng-model' => 'student.email',
+										'ng-model' => 'student.reg.state',
 										'placeHolder' => 'State',
 										'ng-disabled' => '!student.exist'
 									]
@@ -175,21 +199,36 @@
 							</div>
 						</div>
 						<div class="form-group" ng-init="getCountries()">
-							<label class="control-label col-xs-2">Contry <span class="required">*</span></label>
+							<label class="control-label col-xs-2">Country <span class="required">*</span></label>
 							<div class="col-md-4">
-                            	<select ng-disabled="!student.disabled" name="country" class="form-control" ng-model="reg.country" ng-change="getGrades(reg.country)">
+                            	<select ng-disabled="!student.exist" name="country_id" class="form-control" ng-model="student.reg.country_id">
                                 	<option value="">-- Select Country --</option>
-                                	<option ng-repeat="country in countries" value="{! country.name !}">{! country.name!}</option>
+                                	<option ng-repeat="country in countries" value="{! country.id !}">{! country.name!}</option>
                             	</select>
                         	</div>
 						</div>
 					</fieldset>
-					<div class="btn-container">
-						<div class="col-xs-4 div-right margin-40-bot">
-							<button class="btn btn-blue btn-medium"><span><i class="fa fa-plus-square"></i></span> Add</button>
+				</div>
+			</div>
+			<div class="col-xs-6 col-xs-offset-3">
+				<div class="btn-container">
+						<div class="margin-40-bot">
+							{!! Form::button('Add'
+								, array(
+									'class' => 'btn btn-blue btn-medium'
+									, 'ng-click' => 'student.addStudent()'
+									, 'ng-disabled' => '!student.exist'
+								)
+							) !!}
+							{!! Form::button('Cancel'
+								, array(
+									'class' => 'btn btn-gold btn-medium'
+									, 'ng-click' => "student.setActive('list')"
+									, 'ng-disabled' => '!student.exist'
+								)
+							) !!}
 						</div>
 					</div>
-				</div>
 			</div>
 		</div>
 	</div>

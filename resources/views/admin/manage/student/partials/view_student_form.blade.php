@@ -56,6 +56,18 @@
 	        		</div>
         			<a href="#" style="float:left" class="top-10">Edit Email</a>
         		</div>
+                <div class="form-group" ng-if="student.detail.new_email">
+                    <label class="col-xs-4 control-label text-red" id="email">Pending Email <span class="required">*</span></label>
+                    <div class="col-xs-6">
+                        {!! Form::text('email',''
+                            , array(
+                                'placeHolder' => 'Email'
+                                , 'ng-disabled' => 'true'
+                                , 'class' => 'form-control'
+                            )
+                        ) !!}
+                    </div>
+                </div>
         	</div>
         	<div class="col-xs-6">
         		<legend class="legend-name-mid">

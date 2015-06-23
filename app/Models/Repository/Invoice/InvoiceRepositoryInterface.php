@@ -14,4 +14,7 @@ interface InvoiceRepositoryInterface {
 	public function getNextInvoiceNo();
 
 	public function getDetails($id);
+
+	public function updateInvoice($id, $data);
+
 }

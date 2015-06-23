@@ -16,6 +16,8 @@
 			<div template-directive template-url="{!! route('client.parent.student.partials.add_student_form') !!}"></div>
 
 			<div template-directive template-url="{!! route('client.parent.student.partials.view_student_form') !!}"></div>
+
+			<div template-directive template-url="{!! route('client.parent.student.partials.invitation_code_form') !!}"></div>
 		</div>
 	</div>
 
