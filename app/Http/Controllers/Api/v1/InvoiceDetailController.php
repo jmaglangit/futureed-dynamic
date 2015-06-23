@@ -4,28 +4,39 @@ use FutureEd\Http\Requests;
 use FutureEd\Http\Requests\Api\InvoiceDetailRequest;
 
 use FutureEd\Models\Repository\InvoiceDetail\InvoiceDetailRepositoryInterface as InvoiceDetail;
+use FutureEd\Models\Repository\Invoice\InvoiceRepositoryInterface;
 use Illuminate\Support\Facades\Input;
 
 class InvoiceDetailController extends ApiController {
 
     protected $detail;
+	protected $invoice;
 
-    public function __construct(InvoiceDetail $detail){
+    public function __construct(InvoiceDetail $detail, InvoiceRepositoryInterface $invoice){
 
             $this->detail = $detail;
+			$this->invoice = $invoice;
     }
 
 
 	public function viewInvoiceDetail()
 	{
-        $invoice_no = null;
 
-              if(Input::get('invoice_no')) {
+        $id = null;
 
-                  $invoice_no = Input::get('invoice_no');
-               }
+		if(Input::get('id')) {
 
-        $detail = $this->detail->getDetails($invoice_no);
+			$id = Input::get('id');
+		}
+
+		$return = $this->invoice->getInvoice($id);
+
+		if(!$return){
+
+			return $this->respondErrorMessage(2120);
+		}
+
+        $detail = $this->invoice->getDetails($id);
 
         return $this->respondWithData($detail);
 
@@ -35,18 +46,23 @@ class InvoiceDetailController extends ApiController {
     public function editInvoiceDetails(InvoiceDetailRequest $request)
     {
 
-        $data = $request->only('invoice_no','payment_status');
+        $data = $request->only('id','payment_status');
 
-        $invoice = $data['invoice_no'];
-        $return = $this->detail->checkInvoiceIfExist($invoice);
+        $id = $data['id'];
+        $return = $this->invoice->getInvoice($id);
 
         if(!$return){
 
             return $this->respondErrorMessage(2120);
         }
 
-        $update = $this->detail->updateInvoice($invoice, $data);
-        return $this->respondWithData($update);
+		//update invoice
+        $this->invoice->updateInvoice($id, $data);
+
+		//get updated invoice
+		$return = $this->invoice->getInvoice($id);
+
+        return $this->respondWithData($return);
 
     }
 

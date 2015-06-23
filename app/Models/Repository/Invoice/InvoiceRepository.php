@@ -103,4 +103,43 @@ class InvoiceRepository implements InvoiceRepositoryInterface{
     public function getNextInvoiceNo(){
         return Invoice::orderBy('id','desc')->first()->toArray();
     }
+
+
+	//get invoice with relation to subscription and invoice_detail which related to classroom and client
+	public function getDetails($id)
+	{
+
+		$invoice = new Invoice();
+
+		//query relation to subscription and invoice_detail
+		$invoice = $invoice->select('id', 'payment_status', 'date_start', 'date_end', 'subscription_id', 'discount')
+			->with('subscription')->with('InvoiceDetail')->id($id);
+
+		$invoice = $invoice->get();
+
+		$subtotal = 0;
+		$discount = 0;
+
+		foreach ($invoice as $k => $v) {
+
+			$discount = $v->discount;
+
+			foreach ($v->InvoiceDetail as $key => $value) {
+
+				$subtotal += $value->price;
+
+			}
+		}
+
+
+		$invoice['price_discount'] = $subtotal * ($discount / 100);
+		$invoice['total'] = $subtotal - $invoice['price_discount'];
+		$invoice['subtotal'] = $subtotal;
+
+		return $invoice;
+	}
+
+
+
+
 }

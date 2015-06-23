@@ -30,7 +30,7 @@ class Invoice extends Model {
     }
     
     public function invoiceDetail(){
-        return $this->hasOne('FutureEd\Models\Core\InvoiceDetail');
+        return $this->hasMany('FutureEd\Models\Core\InvoiceDetail')->with('classroom','grade');
     }
 
     //------------scopes    
@@ -56,6 +56,12 @@ class Invoice extends Model {
    
    public function scopeClientId($query,$client_id){
 	   return $query->where('client_id', $client_id);
+   }
+
+   public function scopeId($query,$id){
+
+	   return $query->where('id', $id);
+
    }
 
     

@@ -8,4 +8,5 @@ interface InvoiceRepositoryInterface {
     public function getInvoice($id);
     public function getClientInvoiceDiscount($client_id);
     public function getNextInvoiceNo();
+	public function getDetails($id);
 }
