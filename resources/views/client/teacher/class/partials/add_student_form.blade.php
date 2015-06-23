@@ -17,71 +17,74 @@
         </div>
     </div>
 
-	<div class="col-xs-12 module-container">
-        <div class="col-xs-10 col-xs-offset-2">
-            <div class="col-xs-6">                                 
-                <label class="pointer">
-                {!! Form::radio('example', false, false, 
-                    [
-                        'class' => 'field'
-                        , 'ng-model' => 'class.add_existing_student'
-                        , 'ng-change' => 'class.updateStudentStatus()'
-                    ]) 
-                !!}
-                <span class="lbl padding-8">New Student</span>
-                </label>
-            </div>
-            <div class="col-xs-6">
-                <label class="pointer">
-                {!! Form::radio('example', true, true, 
-                    [
-                        'class' => 'field', 
-                        'ng-model'=> 'class.add_existing_student'
-                        , 'ng-change' => 'class.updateStudentStatus()'
-                    ]) 
-                !!}
-                <span class="lbl padding-8">Existing Student</span>
-                </label>
-            </div>
+	<div class="module-container">
+        <div class="col-xs-6  col-xs-offset-2"> 
+            <label class="cursor-pointer">
+            {!! Form::radio('status'
+                , false
+                , false
+                , array(
+                    'ng-model' => 'class.add_existing_student'
+                )
+            ) !!}
+            <span class="lbl padding-8">New Student</span>
+            </label>
+        </div>
+        <div>
+            <label class="cursor-pointer">
+            {!! Form::radio('status'
+                , true
+                , true
+                , array(
+                    'ng-model' => 'class.add_existing_student'
+                )
+            ) !!}
+            <span class="lbl padding-8">Existing Student</span>
+            </label>
         </div>
 	</div>
 
 	<div class="col-xs-12" ng-if="class.add_existing_student">
-        <form ng-submit="class.addExistingStudent()">
-		<fieldset>
-            <legend>User Credential</legend>
-    		<div class="form-group">
-    				<label class="col-md-3 control-label">Email Address <span class="required">*</span></label>
-    				<div class="col-md-4">
-    					{!! Form::text('email', ''
-    						, array(
-    							'class' => 'form-control'
+		{!! Form::open(
+			[
+				'id' => 'add_existing_student',
+				'class' => 'form-horizontal'
+			]
+		) !!}
+            <fieldset>
+                <legend>User Credential</legend>
+                <div class="form-group">
+                    <label for="" class="col-md-3 control-label">Email Address <span class="required">*</span></label>
+                    <div class="col-xs-4">
+                        {!! Form::text('email', ''
+                            , array(
+                                'class' => 'form-control'
                                 , 'ng-model' => 'class.record.email'
-    							, 'ng-class' => "{ 'required-field' : class.fields['email']}"
-    							, 'placeholder' => 'Email Address'
-    							, 'autocomplete' => 'off'
-    						)
-    					) !!}
-    				</div>
-    		</div>
-        </fieldset>
+                                , 'placeholder' => 'Email Address'
+                                , 'autocomplete' => 'off'
+                            )
+                        ) !!}
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <div class="btn-container col-xs-5 col-xs-offset-2">
+                    {!! Form::button('Add'
+                        , array(
+                            'class' => 'btn btn-blue btn-medium'
+                            , 'ng-click' => 'class.addExistingStudent()'
+                        )
+                    ) !!}
 
-        <div class="btn-container col-xs-6 col-xs-offset-2">
-            {!! Form::button('Add'
-                , array(
-                    'class' => 'btn btn-blue btn-medium'
-                    , 'ng-click' => 'class.addExistingStudent()'
-                )
-            ) !!}
-
-            {!! Form::button('Cancel'
-                , array(
-                    'class' => 'btn btn-gold btn-medium'
-                    , 'ng-click' => "class.setActive('view', class.record.id)"
-                )
-            ) !!}
-        </div>
-        {!! Form::close() !!}
+                    {!! Form::button('Cancel'
+                        , array(
+                            'class' => 'btn btn-gold btn-medium'
+                            , 'ng-click' => "class.setActive('view', class.record.id)"
+                        )
+                    ) !!}
+                </div>
+            </fieldset> 
+		{!! Form::close() !!}
 	</div>
 
 	<div class="col-xs-12" ng-if="!class.add_existing_student">

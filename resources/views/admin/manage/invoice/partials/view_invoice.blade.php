@@ -6,13 +6,7 @@
 	</div>
 
 	<div class="module-container">
-		{!! Form::open(
-						[
-							'id' => 'invoice',
-							'class' => 'form-horizontal'
-						]
-				) !!}
-		<div class="pull-right width-xsmall top-margin">
+		<div class="pull-right width-small table-container">
 			{!! Form::select('search_status'
 				, array(
 					  ''=>'-- Select Status --'
@@ -30,49 +24,77 @@
 			) !!}
 		</div>
 
-		<div class="col-xs-12">
-			<div class="form-group">
-				<label class="col-xs-2 control-label">Invoice No.</label>
-				<div class="col-xs-4">
-					{!! Form::text('invoice_no', ''
+		<div class="col-xs-12 search-container">
+			<div class="form-search">
+				{!! Form::open(
+						array(
+							'id' => 'search_form',
+							'class' => 'form-horizontal'
+						)
+				) !!}
+					<div class="form-group">
+						<label class="col-xs-2 control-label">Invoice No.</label>
+						<div class="col-xs-4">
+							{!! Form::text('invoice_no', ''
+								, array(
+									  'ng-disabled' => 'true'
+									, 'class' => 'form-control'
+									, 'ng-model' => 'invoice.record.invoice_no'
+									, 'placeholder' => 'Invoice No.'
+								)
+							) !!}
+						</div>
+						<label class="col-xs-2 control-label">Subscription</label>
+						<div class="col-xs-4">
+							{!! Form::text('subscription_name', ''
+								, array(
+									  'ng-disabled' => 'true'
+									, 'class' => 'form-control'
+									, 'ng-model' => 'invoice.record.subscription.name'
+									, 'placeholder' => 'Subscription'
+								)
+							) !!}
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-xs-2 control-label">Date Started</label>
+						<div class="col-xs-4">
+							<input type="text" ng-disabled="true" class="form-control" value="{! invoice.record.date_start | ddMMyyyy !}"/>
+						</div>
+						<label class="col-xs-2 control-label">Date End</label>
+						<div class="col-xs-4">
+							<input type="text" ng-disabled="true" class="form-control" value="{! invoice.record.date_end | ddMMyyyy !}"/>
+						</div>
+					</div>
+				{!! Form::close() !!}
+			</div>
+		</div>
+
+		<div class="col-xs-12 table-container" ng-init="class.list()">
+			<div class="list-container" ng-cloak>
+				<div class="title-mid">
+					Order List
+				</div>
+
+				<div class="size-container">
+					{!! Form::select('size'
 						, array(
-							  'ng-disabled' => 'true'
-							, 'class' => 'form-control'
-							, 'ng-model' => 'invoice.record.invoice_no'
-							, 'placeholder' => 'Invoice No.'
+							  '10' => '10'
+							, '20' => '20'
+							, '50' => '50'
+							, '100' => '100'
+						)
+						, '10'
+						, array(
+							'ng-model' => 'class.table.size'
+							, 'ng-change' => 'class.paginateBySize()'
+							, 'ng-if' => "class.records.length"
+							, 'class' => 'form-control paginate-size pull-right'
 						)
 					) !!}
 				</div>
-				<label class="col-xs-2 control-label">Subscription</label>
-				<div class="col-xs-4">
-					{!! Form::select('subscription'
-						, array(
-							''=>'-- Select Status --'
-							, '3 months'=>'3 months'
-							, '6 months'=>'6 months'
-							, '12 months'=> '12 months'
-						)
-						, null 
-						, array(
-							'ng-disabled' => 'true'
-							, 'class' => 'form-control'
-							, 'ng-model' => 'invoice.record.subscription.name'
-						)
-					) !!}
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-xs-2 control-label">Date Started</label>
-				<div class="col-xs-4">
-					<input type="text" ng-disabled="true" class="form-control" ng-model="invoice.record.date_start" value="{! invoice.record.date_start | ddMMyyyy !}"/>
-				</div>
-				<label class="col-xs-2 control-label">Date End</label>
-				<div class="col-xs-4">
-					<input type="text" ng-disabled="true" class="form-control" ng-model="invoice.record.date_end" value="{! invoice.record.date_end | ddMMyyyy !}"/>
-				</div>
-			</div>
-			<div class="col-xs-12 tab-right">
-				<table class="table table-bordered">
+
+				<table id="class-list" class="table table-striped table-bordered">
 					<thead>
 						<tr>
 							<td>Number of Seats</td>
@@ -83,44 +105,108 @@
 							<td>Price</td>
 						</tr>
 					</thead>
-					<tbody>
+		        	<tbody>
 						<tr ng-repeat="detail in invoice.record.invoices">
 							<td>{! detail.classroom.seats_total !}</td>
 							<td>{! detail.classroom.seats_taken !}</td>
-							<td>{! detail.grade !}</td>
+							<td>{! detail.grade.name !}</td>
 							<td>{! detail.classroom.client.first_name !} {! detail.classroom.client.last_name !}</td>
-							<td>{! detail.class_name !}</td>
+							<td>{! detail.classroom.name !}</td>
 							<td>{! detail.price !}</td>
+						</tr>
+						<tr class="odd" ng-if="!invoice.record.invoices.length">
+							<td valign="top" colspan="6" >
+								No records found
+							</td>
 						</tr>
 					</tbody>
 				</table>
-			</div>
-			<div class="pull-right top-margin">
-				<div class="form-group">
-					<label class="col-xs-2 control-label">Subtotal</label>
-					<div class="col-xs-4">
-						{!! Form::text('subtotal', '',['ng-disabled' => 'true','class' => 'form-control', 'ng-model' => 'invoice.record.subtotal', 'placeholder' => 'Sub Total']) !!}
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-xs-2 control-label">Discount</label>
-					<div class="col-xs-4">
-						{!! Form::text('subtotal', '',['ng-disabled' => '!invoice.edit','class' => 'form-control', 'ng-model' => 'invoice.record.discount', 'placeholder' => 'Sub Total']) !!}
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-xs-2 control-label">Total</label>
-					<div class="col-xs-4">
-						{!! Form::text('subtotal', '',['ng-disabled' => 'true','class' => 'form-control', 'ng-model' => 'invoice.record.total', 'placeholder' => 'Sub Total']) !!}
-					</div>
+
+				<div class="pull-right" ng-if="class.records.length">
+					<pagination 
+						total-items="class.table.total_items" 
+						ng-model="class.table.page"
+						max-size="3"
+						items-per-page="class.table.size" 
+						previous-text = "&lt;"
+						next-text="&gt;"
+						class="pagination" 
+						boundary-links="true"
+						ng-change="class.paginateByPage()">
+					</pagination>
 				</div>
 			</div>
-			<div class="col-xs-6 col-xs-offset-3 top-margin right-div">
-					<div class="btn-container">
-						<button class="btn btn-blue btn-medium" type="button" ng-show="!invoice.edit_form" ng-click="invoice.setActive('edit')">Edit</button>
-						<button class="btn btn-blue btn-medium" type="button" ng-show="invoice.edit_form">Save</button>
-						<button class="btn btn-gold btn-medium" type="button" ng-click="invoice.setActive('cancel')">Cancel</button>
+		</div>
+
+		<div class="col-xs-12 search-container">
+			<div class="">
+				{!! Form::open(
+						array(
+							'id' => 'search_form',
+							'class' => 'form-horizontal'
+						)
+				) !!}
+					<div class="form-group">
+						<div class="col-xs-6"></div>
+						<label class="col-xs-2 control-label">Sub-total</label>
+						<div class="col-xs-4">
+							{!! Form::text('subtotal', ''
+								, array(
+									  'ng-disabled' => 'true'
+									, 'class' => 'form-control'
+									, 'ng-model' => 'invoice.record.subtotal'
+									, 'placeholder' => 'Sub Total'
+								)
+							) !!}
+						</div>
 					</div>
+					<div class="form-group">
+						<div class="col-xs-6"></div>
+						<label class="col-xs-2 control-label">Discount</label>
+						<div class="col-xs-4">
+							{!! Form::text('discount', ''
+								, array(
+									  'ng-disabled' => 'true'
+									, 'class' => 'form-control'
+									, 'ng-model' => 'invoice.record.discount'
+									, 'placeholder' => 'Sub Total'
+								)
+							) !!}
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-xs-6"></div>
+						<label class="col-xs-2 control-label">Total</label>
+						<div class="col-xs-4">
+							{!! Form::text('total', ''
+								, array(
+									  'ng-disabled' => 'true'
+									, 'class' => 'form-control'
+									, 'ng-model' => 'invoice.record.total'
+									, 'placeholder' => 'Sub Total'
+								)
+							) !!}
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-xs-6"></div>
+						<div class="col-xs-6 btn-container">
+							{!! Form::button('Edit Status'
+			        			, array(
+			        				'class' => 'btn btn-blue btn-medium'
+			        				, 'ng-click' => "invoice.setActive('edit')"
+			        			)
+			        		) !!}
+
+			        		{!! Form::button('Cancel'
+			        			, array(
+			        				'class' => 'btn btn-gold btn-medium'
+			        				, 'ng-click' => "invoice.setActive()"
+			        			)
+			        		) !!}
+						</div>
+					</div>
+				{!! Form::close() !!}
 			</div>
 		</div>
 	</div>
