@@ -45,7 +45,7 @@ class InvoiceRequest extends ApiRequest {
                 break;
 
             case 'POST':
-                return ['client_id' => 'required|numeric',
+                return ['client_id' => 'required|integer',
                     'client_name' => 'required|regex:'. config('regex.name'),
                     'payment_status' => 'required|in:Pending,Paid,Cancelled'];
             default:
@@ -57,8 +57,10 @@ class InvoiceRequest extends ApiRequest {
     public function messages()
     {
         return [
-            'client_id.required' => 'client field is required.',
-            'subscription_id.required' => 'subscription field is required.'
+            'client_id.required' => 'Client field is required.',
+            'client_id.integer' => 'Client field must be a number.',
+            'subscription_id.required' => 'Subscription field is required.',
+            'subscription_id.integer' => 'Subscription field must be a number.'
         ];
     }
 }
