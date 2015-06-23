@@ -227,7 +227,8 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
-					self.invoice.order_no = response.data;
+					self.invoice.order_no = response.data.order_no;
+					self.addInvoice();
 					self.listClassroom(self.invoice.order_no);
 				}
 			}
@@ -449,6 +450,16 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 		}).error(function(response) {
 			self.errors = $scope.internalError();
 		});
+	}
+
+	self.confirmCancel = function() {
+		self.errors = Constants.FALSE;
+		self.confirm_delete = Constants.TRUE;
+		$("#cancel_subscription_modal").modal({
+	        backdrop: 'static',
+	        keyboard: Constants.FALSE,
+	        show    : Constants.TRUE
+	    });
 	}
 
 	self.paymentDetails = function(id, active) {

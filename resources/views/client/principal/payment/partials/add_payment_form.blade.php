@@ -135,7 +135,7 @@
 		</div>
 	</div>
 
-	<div class="col-xs-12 table-container" ng-init="payment.addInvoice()">
+	<div class="col-xs-12 table-container">
 		<div class="list-container" ng-cloak>
 			<table class="table table-striped table-bordered">
 				<thead>
@@ -235,11 +235,42 @@
 	        		{!! Form::button('Cancel'
 	        			, array(
 	        				'class' => 'btn btn-gold btn-medium'
-	        				, 'ng-click' => 'payment.setActive()'
+	        				, 'ng-click' => 'payment.confirmCancel()'
 	        			)
 	        		) !!}
 				</div>
 			</div>
 		</div>
 	</div>
+</div>
+
+<div id="cancel_subscription_modal" ng-show="payment.confirm_delete" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            Cancel Subscription
+        </div>
+        <div class="modal-body">
+            Your changes will be saved. Are you sure you want to cancel this subscription?
+        </div>
+        <div class="modal-footer">
+        	<div class="btncon col-md-8 col-md-offset-4 pull-left">
+                {!! Form::button('Yes'
+                    , array(
+                        'class' => 'btn btn-blue btn-medium'
+                        , 'ng-click' => 'payment.setActive()'
+                        , 'data-dismiss' => 'modal'
+                    )
+                ) !!}
+
+                {!! Form::button('No'
+                    , array(
+                        'class' => 'btn btn-gold btn-medium'
+                        , 'data-dismiss' => 'modal'
+                    )
+                ) !!}
+        	</div>
+        </div>
+    </div>
+  </div>
 </div>
