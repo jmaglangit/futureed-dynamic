@@ -339,5 +339,20 @@ class StudentRepository implements StudentRepositoryInterface
 
 	}
 
+	public function updateSchool($id,$school_code){
+
+		try{
+
+			return Student::find($id)
+				->update([
+					'school_code' => $school_code
+				]);
+
+		} catch (Exception $e) {
+
+			throw new Exception($e->getMessage());
+		}
+	}
+
 
 }
