@@ -38,9 +38,9 @@ class StudentServices {
         $this->grade = $gradeRepositoryInterface;
         }
 
-    public function getStudents(){
+    public function getStudents($criteria , $limit , $offset ){
 
-        return $this->student->getStudents();
+        return $this->student->getStudents($criteria , $limit , $offset);
     }
 
     public function getStudent($id){
