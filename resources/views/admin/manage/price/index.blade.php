@@ -58,5 +58,7 @@
 	{!! Html::script('/js/admin/controllers/sales_controller.js')!!}
 	{!! Html::script('/js/admin/services/sales_service.js')!!}
 	{!! Html::script('/js/admin/manage_sales.js')!!}
+	{!! Html::script('/js/common/table_service.js')!!}
+	{!! Html::script('/js/common/search_service.js')!!}
 
 @stop

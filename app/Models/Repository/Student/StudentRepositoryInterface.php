@@ -35,8 +35,18 @@ interface StudentRepositoryInterface {
     
     public function getStudentId($user_id);
     
-    public function ChangPasswordImage($id,$password_image_id);
+    public function changePasswordImage($id, $password_image_id);
     
     public function checkIdExist($id);
+
+    public function getStudentList($criteria = [],$limit = 0, $offset = 0);
+
+    public function viewStudent($id);
+
+	public function viewStudentClassBadge($id);
+
+	public function getStudentListByClient($criteria = [], $limit = 0, $offset = 0);
+
+	public function viewStudentByToken($id,$reg_token);
 
 }

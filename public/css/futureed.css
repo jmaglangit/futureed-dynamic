@@ -41,10 +41,6 @@ body {/*background: radial-gradient(transparent 50%, rgba(0, 0, 0, 0.3) 100%), l
 
 /*----- TYPOGRAPHY -----*/
 .thin { font-weight: 100; }
-.bold { font-weight: bold; }
-
-/*----- ALERTS -----*/
-.alert_top{margin: 0 20px;}
 
 /*----- WARNINGS -----*/
 .error {
@@ -64,10 +60,6 @@ body {/*background: radial-gradient(transparent 50%, rgba(0, 0, 0, 0.3) 100%), l
 
 .error:first-letter {
     text-transform: uppercase;
-}
-
-.error-color {
-	color: #a94442;
 }
 
 .success-color {
@@ -729,12 +721,19 @@ footer{font:normal 12px/30px arial; }
 	margin-bottom: 10px;
 }
 
+/**
+* Require indications
+*/
 .required {
 	color: red;
 }
 
-.required-field{
-	border: 3px solid #f7b9aa;
+.required-field
+, .required-field:hover
+, .required-field:active
+, .required-field:focus {
+	border: 1px solid #f7b9aa;
+	box-shadow: none;
 }
 
 .error-msg-con{
@@ -743,11 +742,14 @@ footer{font:normal 12px/30px arial; }
 	color: red;
 }
 
+/**
+* 404, 405 blades
+*/
 .error-response {
 	margin-top: 8%;
 	text-align: center;
 }
-/* Typography */
+
 .error-display {
     margin-bottom: 20px;
     font-size: 120px;
@@ -761,16 +763,9 @@ footer{font:normal 12px/30px arial; }
     font-weight: 100;
 }
 
-
-/* Buttons */
 .btn-light-blue {
     background: #09aff9;
 }
-
-.btn--no-border {
-    border: 0;
-    border-radius: 0;
-} 
 
 
 /*
@@ -936,21 +931,23 @@ div > .btncon > a {
 * Customized Alerts
 */
 .alert-error{
-	color: #EA7058;
-  	background-color: #FBE6E1;
-  	border-color: #F8B9A7;
-  	font-size: 12px;
+	color: #a94442;
+  	background-color: #f2dede;
+  	border-color: #ebccd1;
+  	font-size: 15px;
   	margin-left: 60px;
   	padding: 10px;
+  	text-align: left;
 }
 
 .alert-success{
 	color: #3c763d;
   	background-color: #dff0d8;
   	border-color: #d6e9c6;
-  	font-size: 12px;
+  	font-size: 15px;
   	margin-left: 60px;
   	padding: 10px;
+  	text-align: left;
 }
 
 .margin-top-8 {
@@ -975,4 +972,44 @@ div > .btncon > a {
 
 .margin-0-30 {
 	margin: 0px 30px;
+}
+
+.paginate-size {
+	margin: 10px 0px;
+	width: 7%;
+	font-size: 14px;
+	text-align: center;
+	height: 35px;
+}
+
+.table > tbody > tr > td {
+	padding: 15px;
+}
+
+.width-fit {
+	width: 100% !important;
+}
+
+.width-large {
+	width: 75%;
+}
+
+.width-medium {
+	width: 50%;
+}
+
+.width-small {
+	width: 35%;
+}
+
+.width-xsmall {
+	width: 20%;
+}
+
+.module-container {
+	margin: 30px;
+}
+
+.pointer {
+	cursor: pointer;
 }

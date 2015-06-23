@@ -11,21 +11,16 @@ function salesService($http){
 	salesAPI.addPrice = function(data){
 		return $http({
 			method 	: Constants.METHOD_POST
-			, data 	: 
-				{
-					  name 			: data.name
-					, price 		: data.price
-					, description 	: data.description
-					, status 		: data.status
-				}
+			, data 	: data
 			, url 	: salesApiUrl + 'subscription'
 		});
 	}
 
-	salesAPI.getPriceList = function(){
+	salesAPI.getPriceList = function(table){
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url 	: salesApiUrl + 'subscription'
+			, url 	: salesApiUrl + 'subscription?limit=' + table.size
+				+ '&offset=' + table.offset
 		});
 	}
 
@@ -62,10 +57,11 @@ function salesService($http){
 	/**
 	* Client Discounts
 	*/
-	salesAPI.getDiscountList = function(data) {
+	salesAPI.getDiscountList = function(table) {
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url 	: salesApiUrl + 'client-discount'
+			, url 	: salesApiUrl + 'client-discount?limit=' + table.size
+				+ '&offset=' + table.offset
 		});
 	}
 
@@ -109,10 +105,11 @@ function salesService($http){
 	/**
 	* Bulk Settings
 	*/
-	salesAPI.getBulkList = function(){
+	salesAPI.getBulkList = function(table){
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url 	: salesApiUrl + 'volume-discount'
+			, url 	: salesApiUrl + 'volume-discount?limit=' + table.size
+				+ '&offset=' + table.offset
 		})
 	}
 

@@ -158,7 +158,7 @@ class StudentServices {
         
         $student = $this->getStudent($id)->toArray();
         $student_reference = $this->student->getReferences($id)->toArray();
-        
+
         //get age
         $age = $this->age($student['birth_date']);
 
@@ -306,9 +306,9 @@ class StudentServices {
     }
     
     //change password images
-    public function ChangPasswordImage($id,$password_image_id){
+    public function changePasswordImage($id,$password_image_id){
         
-        $this->student->ChangPasswordImage($id,$password_image_id);
+        $this->student->changePasswordImage($id,$password_image_id);
         
     }
     

@@ -126,4 +126,7 @@ Routes::group([
 
     Routes::resource('/student', 'Api\v1\StudentController',
         ['except' => ['create', 'edit']]);
+
+    Routes::resource('/admin/manage/student', 'Api\v1\AdminStudentController',
+        ['except' => ['create', 'edit']]);
 });

@@ -22,16 +22,23 @@ Routes::group(['prefix' => 'api/v1'], function()
 
 		include('Routes/Api/Admin.php');
 		include('Routes/Api/Announcement.php');
-        include('Routes/Api/Client.php');
-        include('Routes/Api/ClientDiscount.php');
-        include('Routes/Api/Countries.php');
-        include('Routes/Api/Grade.php');
-        include('Routes/Api/School.php');
-        include('Routes/Api/Student.php');
-        include('Routes/Api/Subject.php');
-        include('Routes/Api/SubjectArea.php');
-        include('Routes/Api/Subscription.php');
-        include('Routes/Api/User.php');
-        include('Routes/Api/VolumeDiscount.php');
+		include('Routes/Api/Classroom.php');
+		include('Routes/Api/ClassStudent.php');
+		include('Routes/Api/Client.php');
+		include('Routes/Api/ClientDiscount.php');
+		include('Routes/Api/ClientStudent.php');
+		include('Routes/Api/Countries.php');
+		include('Routes/Api/Grade.php');
+		include('Routes/Api/Invoice.php');
+		include('Routes/Api/Order.php');
+		include('Routes/Api/Payment.php');
+		include('Routes/Api/School.php');
+		include('Routes/Api/Student.php');
+		include('Routes/Api/Subject.php');
+		include('Routes/Api/SubjectArea.php');
+		include('Routes/Api/Subscription.php');
+		include('Routes/Api/User.php');
+		include('Routes/Api/VolumeDiscount.php');
+
 
 });

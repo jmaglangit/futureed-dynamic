@@ -53,23 +53,23 @@ class ClientRegisterController extends ClientController {
 
             if(strtolower($client['client_role']) == strtolower(config('futureed.parent'))){
                 $this->addMessageBag($this->validateString($client,'street_address'));
-                $this->addMessageBag($this->validateString($client,'city'));
-                $this->addMessageBag($this->validateString($client,'state'));
+                $this->addMessageBag($this->validateAlpha($client,'city'));
+                $this->addMessageBag($this->validateAlpha($client,'state'));
                 $this->addMessageBag($this->validateString($client,'country'));
                 $this->addMessageBag($this->zipCode($client,'zip'));
             }else{
                 $this->addMessageBag($this->validateString($school,'school_name'));
                 $this->addMessageBag($this->schoolAddress($school,'school_address'));
-                $this->addMessageBag($this->validateString($school,'school_state'));
+                $this->addMessageBag($this->validateAlpha($school,'school_state'));
                 $this->addMessageBag($this->validateString($school,'school_country'));
                 $this->addMessageBag($this->zipCode($school,'school_zip'));
-                $this->addMessageBag($this->validateString($school,'contact_name'));
+                $this->addMessageBag($this->validateAlphaSpace($school,'contact_name'));
                 $this->addMessageBag($this->checkContactNumber($school,'contact_number'));
 
 
                 $this->addMessageBag($this->validateStringOptional($client,'street_address'));
-                $this->addMessageBag($this->validateStringOptional($client,'city'));
-                $this->addMessageBag($this->validateStringOptional($client,'state'));
+                $this->addMessageBag($this->validateAlphaOptional($client,'city'));
+                $this->addMessageBag($this->validateAlphaOptional($client,'state'));
                 $this->addMessageBag($this->validateStringOptional($client,'country'));
                 $this->addMessageBag($this->zipCodeOptional($client,'zip'));
             }
@@ -140,7 +140,7 @@ class ClientRegisterController extends ClientController {
 
         	if(isset($client_response['status'])){
 
-        		$data = $this->user->getUser($user_response['id'],'Client')->toArray();
+        		$data = $this->user->getUser($user_response['id'],'Client');
 
         		$code = $this->user->getConfirmationCode($user_response['id']);
 

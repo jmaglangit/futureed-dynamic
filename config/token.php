@@ -38,5 +38,9 @@ Return [
     'app' => env('TOKEN_APP','FutureEd'),
     'admin' => true,
 
+	/*
+	 * JWT KEY
+	 */
+	'key' => env('JWT_SECRET','futureed'),
 
 ];

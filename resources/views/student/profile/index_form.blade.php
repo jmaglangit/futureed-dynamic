@@ -14,6 +14,7 @@
                         , 'placeholder' => 'Username' 
                         , 'ng-disabled' => '!profile.active_edit' 
                         , 'ng-model' => 'profile.prof.username'
+                        , 'ng-class' => "{ 'required-field' : profile.fields['username']}"
                         , 'ng-model-options' => "{debounce : {'default' : 1000} }"
                         , 'ng-change' => "checkAvailability(profile.prof.username, 'Student')")
                 ) !!}
@@ -67,6 +68,7 @@
                         'class' => 'form-control'
                         , 'placeholder' => 'First Name'
                         , 'ng-disabled' => '!profile.active_edit' 
+                        , 'ng-class' => "{ 'required-field' : profile.fields['first_name']}"
                         , 'ng-model' => 'profile.prof.first_name')
                 ) !!}
             </div>
@@ -79,6 +81,7 @@
                         'class' => 'form-control'
                         , 'placeholder' => 'Last Name'
                         , 'ng-disabled' => '!profile.active_edit' 
+                        , 'ng-class' => "{ 'required-field' : profile.fields['last_name']}"
                         , 'ng-model' => 'profile.prof.last_name')
                 ) !!}
             </div>
@@ -96,6 +99,7 @@
                 	, array(
                 		'class' => 'form-control'
                 		, 'ng-model' => 'profile.prof.gender'
+                        , 'ng-class' => "{ 'required-field' : profile.fields['gender']}"
                 		, 'ng-disabled' => '!profile.active_edit')
                 ) !!}
             </div>
@@ -106,7 +110,7 @@
                 <div class="dropdown">
                   <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
                     <div class="input-group">
-                        <input readonly="readonly" type="text" name="birth_date" placeholder="DD/MM/YY" class="form-control" value="{! profile.prof.birth | date:'dd/MM/yy' !}">
+                        <input readonly="readonly" type="text" ng-class="{ 'required-field' : profile.fields['birth_date']}" name="birth_date" placeholder="DD/MM/YY" class="form-control" value="{! profile.prof.birth | date:'dd/MM/yy' !}">
                         <input type="hidden" name="hidden_date" value="{! profile.prof.birth | date:'yyyyMMdd' !}">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                     </div>
@@ -137,18 +141,20 @@
                         'class' => 'form-control'
                         , 'ng-disabled' => '!profile.active_edit'
                         , 'placeholder' => 'City' 
+                        , 'ng-class' => "{ 'required-field' : profile.fields['city']}"
                         , 'ng-model' => 'profile.prof.city')
                 ) !!}
             </div>
         </div>
         <div class="form-group">
-            <label for="" class="col-md-2 control-label">State <span class="required">*</span></label>
+            <label for="" class="col-md-2 control-label">State</span></label>
             <div class="col-md-5">
             	{!! Form::text('state', ''
                     , array(
                         'class' => 'form-control'
                         , 'ng-disabled' => '!profile.active_edit'
                         , 'placeholder' => 'State' 
+                        , 'ng-class' => "{ 'required-field' : profile.fields['state']}"
                         , 'ng-model' => 'profile.prof.state')
                 ) !!}
             </div>
@@ -156,10 +162,13 @@
         <div class="form-group" ng-init="getCountries()">
             <label for="" class="col-md-2 control-label">Country <span class="required">*</span></label>
             <div class="col-md-5">
-                <select class="form-control" name="country" ng-model="profile.prof.country" ng-disabled="!profile.active_edit">
-                    <option ng-selected="true" value="">-- Select Country --</option>
-                    <option ng-repeat="country in countries" value="{! country.name !}" 
-                    	ng-selected="{! profile.prof.country == country.name !}">{! country.name !}</option>
+                <select class="form-control" name="country_id"
+                    ng-model="profile.prof.country_id" 
+                    ng-change="profile.setCountryGrade()" 
+                    ng-disabled="!profile.active_edit"
+                    ng-class="{ 'required-field' : profile.fields['country_id'] || profile.fields['country']}">
+                    <option value="">-- Select Country --</option>
+                    <option ng-repeat="country in countries" ng-selected="profile.prof.country_id == country.id" value="{! country.id !}">{! country.name !}</option>
                 </select>
             </div>
         </div>
@@ -174,17 +183,21 @@
                         'class' => 'form-control'
                         , 'ng-disabled' => '!profile.active_edit'
                         , 'placeholder' => 'School Name' 
+                        , 'ng-class' => "{ 'required-field' : profile.fields['first_name']}"
                         , 'ng-model' => 'prof.school_name')
                 ) !!}
             </div>
         </div>
-		<div class="form-group" ng-init="getGradeLevel()">
+		<div class="form-group">
         <label for="" class="col-xs-2 control-label">School level <span class="required">*</span></label>
 
         <div class="col-md-5 nullable">
-            <select class="form-control" name="grade_code" ng-model="profile.prof.grade_code" ng-disabled="!profile.active_edit">
-                <option ng-selected="true" value="">-- Select Level --</option>
-                <option ng-selected="{! profile.prof.grade_code == grade.code !}" ng-repeat="grade in grades" value="{! grade.code !}">{! grade.name !}</option>
+            <select class="form-control" name="grade_code" 
+                ng-model="profile.prof.grade_code" 
+                ng-disabled="!profile.active_edit || profile.grades.length <= 0"
+                ng-class="{ 'required-field' : profile.fields['grade_code']}">
+                <option value="">-- Select Level --</option>
+                <option ng-selected="profile.prof.grade_code == grade.code" ng-repeat="grade in profile.grades" value="{! grade.code !}">{! grade.name !}</option>
             </select>
         </div><br><br>
     </div>   

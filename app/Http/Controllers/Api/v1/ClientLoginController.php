@@ -84,19 +84,32 @@ class ClientLoginController extends ClientController {
             return $this->respondErrorMessage(2033);
         }
 
+		//get user details
+		$user_details = $this->user->getUserDetail($response['data'],config('futureed.client'));
+
+		//check if user is Disabled
+		if($user_details['status'] === config('futureed.user_disabled')){
+
+			return $this->respondErrorMessage(2013);
+		}
+
+		// Determine return country id  by teacher and principal or parent
+		if(strcasecmp($client_detail['client_role'],config('futureed.teacher')) == 0
+			|| strcasecmp($client_detail['client_role'],config('futureed.principal')) == 0){
+
+			$country = $client_detail->school['country_id'];
+		} else {
+
+			$country =$client_detail['country_id'];
+		}
+
         $this->user->resetLoginAttempt($return['id']);
 
-        //adding auth token
-        $token = $this->token->getToken([
-            'id' => $client_detail['id'],
-            'type' => config('futureed.client'),
-            'role' => $client_detail['client_role']
-        ]);
-
-        return $this->setHeader($token)->respondWithData([
-                'id' => $client_detail['id'],
-                'first_name' => $client_detail['first_name'],
-                'last_name' => $client_detail['last_name']
+        return $this->respondWithData([
+			'id' => $client_detail['id'],
+			'first_name' => $client_detail['first_name'],
+			'last_name' => $client_detail['last_name'],
+			'country_id' => $country,
         ]);
     }
 

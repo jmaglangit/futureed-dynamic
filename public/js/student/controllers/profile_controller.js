@@ -1,9 +1,9 @@
 angular.module('futureed.controllers')
 	.controller('ProfileController', ProfileController);
 
-ProfileController.$inject = ['$scope', 'apiService'];
+ProfileController.$inject = ['$scope', 'apiService', 'profileService'];
 
-function ProfileController($scope, apiService) {
+function ProfileController($scope, apiService, profileService) {
 	var self = this;
 	self.prof = {};
 	self.user_type = Constants.STUDENT;
@@ -101,22 +101,68 @@ function ProfileController($scope, apiService) {
 	  }
 
 	  function studentDetails() {
+	  	self.errors = Constants.FALSE;
+
+	  	$scope.ui_block();
 	    apiService.studentDetails($scope.user.id).success(function(response) {
-	      if(response.status == Constants.STATUS_OK) {
-	        if(response.errors) {
-	          self.errors = $scope.errorHandler(response.errors);
-	        } else if(response.data) {
-	          self.prof = response.data[0];
-	          self.prof.birth = self.prof.birth_date;
-	        } 
-	      }
+			if(response.status == Constants.STATUS_OK) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.prof = response.data[0];
+					self.prof.birth = self.prof.birth_date;
+					self.getGradeLevel();
+				} 
+			}
+
+			$scope.ui_unblock();
 	    }).error(function(response) {
 	      self.errors = $scope.internalError();
+	      $scope.ui_unblock();
 	    });
+	  }
+
+	  self.setCountryGrade = function() {
+	  	// Set Grade Code to empty string
+	  	self.prof.grade_code = Constants.EMPTY_STR;
+	  	self.getGradeLevel();
+
+	  	// Get Country details, set country name
+	  	self.prof.country = Constants.EMPTY_STR;
+		profileService.getCountryDetails(self.prof.country_id).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					if(response.data.length) {
+						self.prof.country = response.data[0].name;
+					}
+				}
+			}
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+		});
+	  }
+
+	  self.getGradeLevel = function() {
+	  	self.grades = Constants.FALSE;
+
+		apiService.getGradeLevel(self.prof.country_id).success(function(response) {
+			if(response.status == Constants.STATUS_OK) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.grades = response.data.records;
+				}
+			}
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+		});
 	  }
 
 	  function saveProfile() {
 	    self.errors = Constants.FALSE;
+	    self.fields = [];
 
 	    if($scope.e_error || $scope.u_error) {
 	      $("html, body").animate({ scrollTop: 350 }, "slow");
@@ -125,20 +171,17 @@ function ProfileController($scope, apiService) {
 	      self.prof.birth_date = $("input[name='hidden_date']").val();
 
 	      $scope.ui_block();
-	      $('input select').removeClass('required-field');
-
 	      apiService.saveProfile(self.prof).success(function(response) {
 	        if(response.status == Constants.STATUS_OK) {
 	          if(response.errors) {
 	            self.errors = $scope.errorHandler(response.errors);
 
 	            angular.forEach(response.errors, function(value, key) {
-	              $("#profile_form input[name='" + value.field +"']").addClass("required-field");
-	              $("#profile_form select[name='" + value.field +"']").addClass("required-field");
+	            	self.fields[value.field] = Constants.TRUE;
 	            });
 	          } else if(response.data){
+	          	self.prof = {};
 	            $scope.$parent.user = response.data;
-	            $scope.$parent.user;
 
 	            apiService.updateUserSession(response.data).success(function(response) {
 	              self.setStudentProfileActive(Constants.INDEX);
@@ -156,8 +199,6 @@ function ProfileController($scope, apiService) {
 	        self.errors = $scope.internalError();
 	      });
 	    }
-
-	    $("html, body").animate({ scrollTop: 0 }, "slow");
 	  }
 
 	  function validateStudentCurrentEmail() {

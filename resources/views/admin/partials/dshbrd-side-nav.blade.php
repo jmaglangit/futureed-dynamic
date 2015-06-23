@@ -25,7 +25,7 @@
             </li>
 
             <li>
-                <a href=""><span><i class="fa fa-user"></i></span>Manage Student</a>
+                <a href="{!! route('admin.manage.student.index') !!}"><span><i class="fa fa-user"></i></span>Manage Student</a>
             </li>
         </ul>
 
@@ -48,6 +48,9 @@
         <ul class="sub-menu collapse" id="price">
             <li>
                 <a href="{!! route('admin.manage.price.index') !!}" ng-init="sale.setDiscountsActive()"><span><i class="fa fa-dollar"></i>Price & Discounts</span></a>
+            </li>
+            <li>
+                <a href="{!! route('admin.manage.invoice.index') !!}" ng-init="sale.setActive()"><span><i class="fa fa-file-text-o"></i>Invoice</span></a>
             </li>
         </ul>
 

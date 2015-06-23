@@ -16,12 +16,26 @@ class Admin extends Model {
 
     protected $fillable = ['user_id', 'first_name', 'last_name', 'admin_role'];
 
+    protected $attributes = [
+        'created_by' => 1,
+        'updated_by' => 1
+    ];
+
     /**
      * Inverse relation
      */
     public function user(){
 
         return $this->belongsTo('FutureEd\Models\Core\User');
+    }
+
+    public static function boot(){
+
+        parent::boot();
+
+        Admin::deleting(function($admin){
+            $admin->user->delete();
+        });
     }
 
 	//-------------scopes

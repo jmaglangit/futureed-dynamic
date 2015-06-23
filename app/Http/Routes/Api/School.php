@@ -3,6 +3,7 @@
 Routes::group(['prefix' => '/school'], function()
 {
 
+
     /**
      * Authenticated school routes
      */
@@ -21,6 +22,8 @@ Routes::group(['prefix' => '/school'], function()
         ]);
 
     });
+	//search school
+	Routes::get('/search','Api\v1\SchoolSearchController@schoolSearch');
 
 });
 

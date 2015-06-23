@@ -4,10 +4,12 @@ use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
-
+use FutureEd\Http\Controllers\FutureLesson\Traits\ProfileTrait;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller {
+
+	use ProfileTrait;
 
 	/**
 	 * Display login screen
@@ -38,7 +40,11 @@ class LoginController extends Controller {
 
 		if($user_object->id){
 			Session::forget('client');
+			Session::forget($user_object->role);
+
 			Session::put('client', $user_data['user_data']);
+			Session::put($user_object->role, $user_data['user_data']);
+
 			return redirect()->route('client.dashboard.index');
 		}
 
@@ -52,7 +58,13 @@ class LoginController extends Controller {
 	 */
 	public function logout()
 	{
+		$user_object = json_decode(Session::get('client'));
+
 		Session::forget('client');
+		Session::forget($user_object->role);
+
+		unset($user_object);
+
 		return redirect()->route('client.login');
 	}
 	
@@ -79,7 +91,18 @@ class LoginController extends Controller {
 	 */
 	public function registration($id = null)
 	{
-		return view('client.login.registration', array('id' => $id));
+		return view('client.login.registration');
+	}
+
+	public function registration_invite($id = null)
+	{
+		$input = Input::only('registration_token');
+
+		if($id && $input['registration_token']) {
+			return view('client.login.registration-invite-form', array('id' => $id, 'registration_token' => $input['registration_token']));
+		}
+
+		return redirect()->route('client.registration');
 	}
 
 	public function registration_form() {

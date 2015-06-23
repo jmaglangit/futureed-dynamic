@@ -4,7 +4,7 @@
 <div class="container" ng-controller="LoginController as register" ng-cloak>
   <div template-directive template-url="{!! route('client.partials.base_url') !!}"></div>
   
-  <div class="form-style form-wide" ng-show="!registered"> 
+  <div class="form-style form-wide" ng-show="!register.registered"> 
     <div class="title">Register as</div>
     <div class="row">
       <div class="col-md-12 register_users">
@@ -28,7 +28,7 @@
         </div>
       </div>
       <div class="col-md-12" ng-if="register.role_click">
-        <div class="alert alert-danger" style="text-align:left;" ng-if="errors">
+        <div class="alert alert-error" ng-if="errors">
           <p ng-repeat="error in errors"> 
             {! error !}
           </p>

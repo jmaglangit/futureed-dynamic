@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <meta charset="utf-8">
+</head>
+<body>
+<div>Hi there {{ $student_name  }},</div><br/>
+
+<div>
+    <div>{{$teacher_name}} would like you to join us on the Future Lesson platform.  Please go to <a href="{{$link}}"> Registration Page </a> and create your profile to join this community.</div>
+    <br/>
+    <div>We look forward to taking this incredible learning adventure with you and your students.</div><br/>
+    <div>Regards,</div><br/>
+    <div>Admin</div>
+</div>
+</body>
+</html>

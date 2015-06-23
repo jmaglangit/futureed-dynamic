@@ -26,9 +26,14 @@ class GradeRepository implements GradeRepositoryInterface{
 
                 }
 
-                if(isset($criteria['country_id'])){
+                if(isset($criteria['country_id']) && $criteria['country_id'] <> 'all'){
 
                     $grade = $grade->with('country')->countryid($criteria['country_id']);
+                }
+
+                if($criteria['country_id'] == 'all'){
+
+                    $grade = $grade->with('country');
 
                 }
             }
@@ -111,8 +116,6 @@ class GradeRepository implements GradeRepositoryInterface{
 			return $e->getMessage();
 
 		}
-
-		return $grade;
     }
 
     //get grade record by id
@@ -132,6 +135,21 @@ class GradeRepository implements GradeRepositoryInterface{
 
         return $grade_class->first();
 
+    }
+
+    /**
+     * Get countries of Grades
+     *
+     * @param $country_id
+     */
+    public function getCountry(){
+
+        return Grade::select('country_id')->distinct()->with('country')->get();
+    }
+
+    public function checkCountry($country_id){
+
+        return Grade::countryid($country_id)->get()->toArray();
     }
 
 

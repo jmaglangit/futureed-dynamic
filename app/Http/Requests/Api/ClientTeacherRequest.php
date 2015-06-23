@@ -2,55 +2,65 @@
 
 use FutureEd\Http\Requests\Api\ApiRequest;
 
-class ClientTeacherRequest extends ApiRequest {
+class ClientTeacherRequest extends ApiRequest
+{
 
-    /**
-     * Determine if the user is authorized to make this request.
-     *
-     * @return bool
-     */
-    public function authorize() {
-        return true;
-    }
+	/**
+	 * Determine if the user is authorized to make this request.
+	 *
+	 * @return bool
+	 */
+	public function authorize()
+	{
+		return true;
+	}
 
-    /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array
-     */
-    public function rules() {
-        switch($this->method) {
-            case 'PUT':
-                return [
-                    'subject_id' => 'required|integer|exists:subjects,id',
-                    'name' => 'required',
-                    'status' => 'required|in:Enabled,Disabled'
-                ];
-                break;
-            case 'POST':
-            default:
-                $client = config('futureed.client');
-                return [
-                    'user_name' => 'require|string',
-                    'email' => "required|email|unique:users,email,NULL,id,user_type,$client",
-                    'first_name' => 'required|string',
-                    'last_name' => 'required|string',
-                    'current_user' => 'required|numeric',
-                    'username' => 'required|string|max:32|min:8',
-                    'callback_uri' => 'required|string'
-                ];
-                break;
-        }
-    }
+	/**
+	 * Get the validation rules that apply to the request.
+	 *
+	 * @return array
+	 */
+	public function rules()
+	{
+		switch ($this->method) {
+			case 'PUT':
+				$client = config('futureed.client');
+				return [
+					'first_name' => 'required|regex:'. config('regex.name') ,
+					'last_name' => 'required|regex:'. config('regex.name'),
+					'street_address' => 'string',
+					'city' => 'string',
+					'state' => 'string',
+					'zip' => 'numeric|regex:/^[0-9]{4,6}(\-[0-9]{4})?$/',
+					'country' => 'string'
+				];
+				break;
+			case 'POST':
+			default:
+				$client = config('futureed.client');
+				return [
+					'username' => "required|string|min:8|max:32|unique:users,username,NULL,id,user_type,$client,deleted_at,NULL",
+					'email' => "required|email|unique:users,email,NULL,id,user_type,$client,deleted_at,NULL",
 
-    /**
-     * Get the validation rules custom messages that apply to the request.
-     *
-     * @return array
-     */
-    public function messages() {
-        return [
-            'numeric' => 'The :attribute must be a number.'
-        ];
-    }
+					'first_name' => 'required|regex:'. config('regex.name'),
+					'last_name' => 'required|regex:'. config('regex.name') ,
+					'current_user' => 'required|numeric',
+					'callback_uri' => 'required|string'
+				];
+				break;
+		}
+	}
+
+	/**
+	 * Get the validation rules custom messages that apply to the request.
+	 *
+	 * @return array
+	 */
+	public function messages()
+	{
+		return [
+			'numeric' => 'The :attribute must be a number.',
+			'unique' => 'Teacher already exist.',
+		];
+	}
 }

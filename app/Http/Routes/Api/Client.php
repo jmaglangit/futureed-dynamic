@@ -51,6 +51,24 @@ Routes::group(['prefix' => '/client'], function()
     });
 
 
+	//teacher-information is for registration purposes, no auth token needed.
+	Routes::get('/teacher-information/{id}',[
+		'as' => 'api.v1.client.teacher.information',
+		'uses' => 'Api\v1\ClientTeacherRegistrationController@getTeacherInformation'
+	]);
+
+	Routes::put('/teacher-information/{id}',[
+		'as' => 'api.v1.client.teacher.information.update',
+		'uses' => 'Api\v1\ClientTeacherRegistrationController@updateTeacherInformation'
+	]);
+
+    //client
+    Routes::post('/login','Api\v1\ClientLoginController@login');
+    Routes::post('/register','Api\v1\ClientRegisterController@register');
+    Routes::post('/reset-password/{id}','Api\v1\ClientPasswordController@resetPassword');
+    Routes::post('/change-password/{id}','Api\v1\ClientPasswordController@changePassword');
+    Routes::post('/new-password/{id}','Api\v1\ClientPasswordController@setPassword');
+
     /**
      * Client login
      */

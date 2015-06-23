@@ -32,8 +32,8 @@ class SubjectAreaRequest extends ApiRequest {
 			default:
 				return [
 					'subject_id' => 'required|integer|exists:subjects,id',
-					'code' => 'required|integer|unique:subject_areas',
-					'name' => 'required',
+					'code' => 'required|integer|unique:subject_areas,code,NULL,id,deleted_at,NULL',
+					'name' => 'required|regex:'. config('regex.name'),
 					'status' => 'required|in:Enabled,Disabled'
 				];				
 	        	break;

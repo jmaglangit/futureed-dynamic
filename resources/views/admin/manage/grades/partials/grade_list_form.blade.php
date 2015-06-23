@@ -21,8 +21,8 @@
 		<div class="form-search">
 			{!! Form::open(
 				array('id' => 'search_form'
-					, 'method' => 'POST'
 					, 'class' => 'form-inline'
+					, 'ng-submit' => 'grade.searchFnc($event)'
 					)
 				)!!}
 			<div class="form-group">
@@ -32,6 +32,7 @@
 							'placeholder' => 'Grade'
 							, 'ng-model' => 'grade.search.grade'
 							, 'class' => 'form-control btn-fit'
+							, 'autocomplete' => 'off'
 						)
 					)!!}
 				</div>
@@ -47,7 +48,7 @@
 					{!! Form::button('Search'
 						,array(
 							'class' => 'btn btn-blue'
-							, 'ng-click' => 'grade.getGradeList()'
+							, 'ng-click' => 'grade.searchFnc()'
 						)
 					)!!}
 				</div>
@@ -55,7 +56,7 @@
 					{!! Form::button('Clear'
 						,array(
 							'class' => 'btn btn-gold'
-							, 'ng-click' => 'grade.clearSearchForm()'
+							, 'ng-click' => 'grade.clear()'
 						)
 					)!!}
 				</div>
@@ -75,7 +76,25 @@
 	 
 	<div class="col-xs-12 table-container">
 		<div class="list-container" ng-cloak>
-			<table id="client-list" datatable="ng" class="table table-striped table-hover dt-responsive">
+			<div class="size-container">
+				{!! Form::select('size'
+					, array(
+						  '10' => '10'
+						, '20' => '20'
+						, '50' => '50'
+						, '100' => '100'
+					)
+					, '10'
+					, array(
+						'ng-model' => 'grade.table.size'
+						, 'ng-change' => 'grade.paginateBySize()'
+						, 'ng-if' => "grade.grades.length"
+						, 'class' => 'form-control paginate-size pull-right'
+					)
+				) !!}
+			</div>
+
+			<table id="grade-list" class="table table-striped table-bordered">
 			<thead>
 		        <tr>
 		            <th>Grade Code</th>
@@ -94,8 +113,7 @@
 		            <td>
 		            	<div class="row">
 		            		<div class="col-xs-4">
-		            			<i ng-if="a.status == 'Disabled'" title="Enable" class="fa success-icon fa-check-circle-o"></i>
-		            			<i ng-if="a.status == 'Enabled'" title="Disable" class="fa error-icon fa-ban"></i>
+		            			{! a.status !}
 		            		</div>
 		            		<div class="col-xs-4">
 		            			<a href="" ng-click="grade.getGradeDetails(a.id)"><span><i class="fa fa-pencil"></i></span></a>
@@ -107,9 +125,33 @@
 		            	</div>
 		            </td>
 		        </tr>
+		        <tr class="odd" ng-if="!grade.grades.length && !grade.table.loading">
+			        	<td valign="top" colspan="5" class="dataTables_empty">
+			        		No records found
+			        	</td>
+			        </tr>
+			        <tr class="odd" ng-if="grade.table.loading">
+			        	<td valign="top" colspan="5" class="dataTables_empty">
+			        		Loading...
+			        	</td>
+			        </tr>
 	        </tbody>
 
 			</table>
+
+			<div class="pull-right" ng-if="grade.grades.length">
+				<pagination 
+					total-items="grade.table.total_items" 
+					ng-model="grade.table.page"
+					max-size="3"
+					items-per-page="grade.table.size" 
+					previous-text = "&lt;"
+					next-text="&gt;"
+					class="pagination" 
+					boundary-links="true"
+					ng-change="grade.paginateByPage()">
+				</pagination>
+			</div>
 		</div>
 	</div>
 </div>

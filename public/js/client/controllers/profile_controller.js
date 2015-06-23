@@ -77,6 +77,9 @@ function ProfileController($scope, apiService, clientProfileApiService) {
 	}
 
 	function getClientDetails() {
+		self.errors = Constants.FALSE;
+
+		$scope.ui_block();
 		clientProfileApiService.getClientDetails($scope.user.id).success(function(response) {
 			if(response.status == Constants.STATUS_OK) {
 				if(response.errors) {
@@ -94,8 +97,11 @@ function ProfileController($scope, apiService, clientProfileApiService) {
 					}
 				}
 			}
+
+			$scope.ui_unblock();
 		}).error(function(response) {
-			$scope.internalError();
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
 		});
 	}
 
@@ -150,8 +156,8 @@ function ProfileController($scope, apiService, clientProfileApiService) {
 			              $("#client_profile_form select[name='" + value.field +"']").addClass("required-field");
 			            });
 					} else if(response.data) {
+						self.prof = {};
 						$scope.$parent.user = response.data;
-
 						clientProfileApiService.updateUserSession(response.data).success(function(response) {
 			              self.setClientProfileActive(Constants.INDEX);
 			              self.success = Constants.TRUE;
@@ -163,7 +169,7 @@ function ProfileController($scope, apiService, clientProfileApiService) {
 
 				$scope.ui_unblock();
 			}).error(function(response) {
-				$scope.internalError();
+				self.errors = $scope.internalError();
 				$scope.ui_unblock();
 			});
 		}

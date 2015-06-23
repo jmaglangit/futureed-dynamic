@@ -19,11 +19,20 @@ class ClientDiscountRequest extends ApiRequest {
 	 * @return array
 	 */
 	public function rules() {
-        return [
-            'client_id'     => 'required|numeric',
-			'percentage'    => 'required|numeric|min:1|max:100',
-			'status'        => 'required|in:Enabled,Disabled'
-        ];
+	    switch($this->method){
+	        case 'POST':
+	            return ['client_id'     => 'required|numeric|unique:client_discounts,client_id,NULL,id,deleted_at,NULL',
+            			'percentage'    => 'required|numeric|min:1|max:100',
+            			'status'        => 'required|in:Enabled,Disabled'];
+	        break;
+	        case 'PUT':
+	            return ['client_id'     => 'required|numeric|unique:client_discounts,client_id,'.$this->client_id.',client_id,deleted_at,NULL',
+            			'percentage'    => 'required|numeric|min:1|max:100',
+            			'status'        => 'required|in:Enabled,Disabled'];
+	        break;
+	    }
+	    
+        
 	}
 	
 	/**
@@ -33,7 +42,8 @@ class ClientDiscountRequest extends ApiRequest {
 	 */
 	public function messages() {
 		return [
-			'numeric' => 'The :attribute must be a number.' 
+			'numeric' => 'The :attribute must be a number.',
+			'unique' => 'Client Name already exists.' 
 		];
 	}
 }

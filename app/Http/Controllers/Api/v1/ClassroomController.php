@@ -3,8 +3,11 @@
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
+use FutureEd\Models\Core\Classroom;
 use FutureEd\Models\Repository\Classroom\ClassroomRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
+use FutureEd\Http\Requests\Api\ClassroomRequest;
 
 class ClassroomController extends ApiController {
 
@@ -15,78 +18,115 @@ class ClassroomController extends ApiController {
         $this->classroom = $classroomRepositoryInterface;
     }
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
-		//
-	}
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function index()
+    {
+        $criteria = [];
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
+        //get client id -- teacher
+        if(Input::get('client_id')){
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
-	}
+            $criteria['client_id'] = Input::get('client_id');
+        }
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
+        //get class name
+        if(Input::get('name')){
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
+            $criteria['name'] = Input::get('name');
+        }
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
+        //get class grade
+        if(Input::get('grade_id')){
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
+            $criteria['grade_id'] = Input::get('grade_id');
+        }
+
+        //get order no.
+        if(Input::get('order_no')){
+
+            $criteria['order_no'] = Input::get('order_no');
+        }
+
+        $limit = (Input::get('limit')) ? Input::get('limit') : 0;
+
+        $offset = (Input::get('offset')) ? Input::get('offset') : 0;
+
+
+        return $this->respondWithData($this->classroom->getClassrooms($criteria,$limit,$offset));
+    }
+
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @return Response
+     */
+    public function store(ClassroomRequest $request)
+    {
+        $classroom = $request->only([
+            'order_no',
+            'name',
+            'grade_id',
+            'client_id',
+            'seats_taken',
+            'seats_total',
+            'status'
+        ]);
+
+        $classroom = $this->classroom->addClassroom($classroom);
+
+        return $this->respondWithData($classroom);
+    }
+
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function show($id)
+    {
+        return $this->respondWithData($this->classroom->getClassroom($id));
+    }
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function update($id, ClassroomRequest $request)
+    {
+        //can only update the name
+        $input['name'] = $request->get('name');
+
+
+        return $this->respondWithData($this->classroom->updateClassroom($id,$input));
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function destroy($id)
+    {
+        return $this->respondWithData($this->classroom->deleteClassroom($id));
+    }
+
+    /**
+     *  Delete classrooms by order no.
+     *  @param $order_no
+     *  @return boolean
+     */
+
+    public function deleteClassroomByOrderNo($order_no){
+        return $this->respondWithData($this->classroom->deleteClassroomByOrderNo($order_no));
+    }
 
 }

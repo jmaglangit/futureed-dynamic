@@ -29,12 +29,12 @@ class UserRepository implements UserRepositoryInterface {
             ,'password'
             ,'name'
             ,'user_type'
-            ,'status');
+            ,'status')->where('id',$id);
 
-        $user->where('id','=',$id);
+
 
         if($user_type <> 'all'){
-            $user->where('user_type','=',$user_type);
+            $user->where('user_type',$user_type);
         }
 
         return $user->first();
@@ -52,13 +52,14 @@ class UserRepository implements UserRepositoryInterface {
 
         try{
 
-            User::create([
+            return User::create([
                 'username' => $user['username'],
                 'email' => $user['email'],
                 'name' => $user['first_name'] .' '.$user['last_name'],
                 'user_type' => $user['user_type'],
                 'password' => (isset($user['password'])) ? sha1($user['password']) : null,
                 'status' => (isset($user['status'])) ? ($user['status']) : 'Enabled',
+                'is_account_activated' => (isset($user['is_account_activated'])) ? $user['is_account_activated'] : NULL,
                 'confirmation_code' => (isset($user['confirmation_code'])) ? $user['confirmation_code'] : NULL,
                 'confirmation_code_expiry' => (isset($user['confirmation_code_expiry'])) ? $user['confirmation_code_expiry'] : NULL,
                 'created_by' => 1,
@@ -68,7 +69,7 @@ class UserRepository implements UserRepositoryInterface {
         }catch(Exception $e){
             return $e->getMessage();
         }
-        return true;
+
     }
 
     public function updateUser($id, $data) {
@@ -129,6 +130,12 @@ class UserRepository implements UserRepositoryInterface {
         return User::where('id','=',$id)->pluck('is_account_deleted');
 
     }
+
+	public function accountStatus($id){
+
+		return User::where('id','=',$id)->pluck('status');
+
+	}
 
     public function addLoginAttempt($id){
         $attempt = $this->getLoginAttempts($id);
@@ -372,32 +379,53 @@ class UserRepository implements UserRepositoryInterface {
         }
     }
 
+	/**
+	 * Add Registration Token.
+	 * @param $id
+	 * @param $registration_token
+	 * @throws Exception
+	 */
+	public function addRegistrationToken($id,$registration_token){
 
-    public function addUserEloquent($user){
+		try{
 
-        $user['created_by'] = 1;
-        $user['updated_by'] = 1;
+			User::where('id',$id)->update([
+				'registration_token' => $registration_token
+			]);
 
-        $data['created_by'] = 1;
-        $data['updated_by'] = 1;
+		} catch (Exception $e){
 
-        try {
+			throw new Exception($e->getMessage());
+		}
+	}
 
-            $grade = User::create($user);
+	/**
+	 * Get Registration Token.
+	 * @param $id
+	 * @return mixed
+	 */
+	public function getRegistrationToken($id){
 
-        } catch(Exception $e) {
+		return User::select('registration_token')
+			->where('id',$id);
+	}
 
-            return $e->getMessage();
+	/**
+	 * Remove registration token.
+	 * @param $id
+	 * @return mixed
+	 */
+	public function deleteRegistrationToken($id){
 
-        }
-
-        return $user;
-
-
-
+		return User::where('id',$id)->update([
+			'registration_token' => NULL
+		]);
+	}
 
 
-    }
+
+
+
 
 
 

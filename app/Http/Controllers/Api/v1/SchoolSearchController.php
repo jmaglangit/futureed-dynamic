@@ -17,7 +17,7 @@ class SchoolSearchController extends SchoolController {
 
 	public function schoolSearch(){
 		
-		$input = Input::only('school_name','password');
+		$input = Input::only('school_name');
 		
 		//returns all school details if available
 		$return = $this->school->searchSchool($input['school_name']);

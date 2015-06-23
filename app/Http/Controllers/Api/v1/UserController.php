@@ -44,7 +44,7 @@ class UserController extends ApiController{
         }elseif(strcasecmp($input['user_type'], config('futureed.client')) == 0){
 
             $return['id'] = $this->client->getClientId($return['user_id']);
-            
+
         }elseif(strcasecmp($input['user_type'], config('futureed.admin')) == 0){
 
             $return['id'] = $this->admin->getAdminId($return['user_id']);
@@ -158,35 +158,49 @@ class UserController extends ApiController{
 
                     if(strtolower($input['user_type']) == 'student'){
 
-                        $student_id = $this->student->getStudentId($return['user_id']);
+						$student_id = $this->student->getStudentId($return['user_id']);
 
-                        $this->mail->sendStudentMailResetPassword($userDetails,$code['confirmation_code'],$input['callback_uri'],$subject);
 
-                        return $this->respondWithData(['id' => $student_id,
-                                                       'user_type' => $input['user_type'] 
-                                                     ]);
+						$subject = str_replace('{user}', config('futureed.student'), $subject);
+
+						$this->mail->sendStudentMailResetPassword($userDetails, $code['confirmation_code'], $input['callback_uri'], $subject);
+
+						return $this->respondWithData(['id' => $student_id,
+							'user_type' => $input['user_type']
+						]);
 
                     
                     }elseif(strtolower($input['user_type']) == 'client'){
 
-                        $client_id = $this->client->getClientId($return['user_id']);
 
-                        $this->mail->sendClientMailResetPassword($userDetails,$code['confirmation_code'],$input['callback_uri'],$subject);
+						$client_id = $this->client->getClientId($return['user_id']);
 
-                        return $this->respondWithData(['id' => $client_id,
-                                                       'user_type' => $input['user_type'] 
-                                                     ]);
+						//get client role
+						$client_role = $this->client->getRole($return['user_id']);
+
+						//change subject
+						$subject = str_replace('{user}', $client_role, $subject);
+
+						$this->mail->sendClientMailResetPassword($userDetails, $code['confirmation_code'], $input['callback_uri'], $subject);
+
+						return $this->respondWithData(['id' => $client_id,
+							'user_type' => $input['user_type']
+						]);
                         
                    
                     }else{
 
-                        $admin_id = $this->admin->getAdminId($return['user_id']);
+						$admin_id = $this->admin->getAdminId($return['user_id']);
 
-                        $this->mail->sendAdminMailResetPassword($userDetails,$code['confirmation_code'],$input['callback_uri'],$subject);
+						$admin_detail = $this->admin->getAdmin($admin_id);
 
-                        return $this->respondWithData(['id' => $admin_id,
-                                                       'user_type' => $input['user_type'] 
-                                                     ]);
+						$subject = str_replace('{user}', $admin_detail->admin_role, $subject);
+
+						$this->mail->sendAdminMailResetPassword($userDetails, $code['confirmation_code'], $input['callback_uri'], $subject);
+
+						return $this->respondWithData(['id' => $admin_id,
+							'user_type' => $input['user_type']
+						]);
                     }
 
 
@@ -242,13 +256,15 @@ class UserController extends ApiController{
 
                     if(strtolower($input['user_type']) == 'student') {
 
-                        $student_id = $this->student->getStudentId($return['user_id']);
+						$student_id = $this->student->getStudentId($return['user_id']);
 
-                        $this->mail->resendStudentRegister($userDetails,$code['confirmation_code'],$input['callback_uri'],$subject);
+						$subject = str_replace('{user}', config('futureed.student'), $subject);
 
-                        return $this->respondWithData(['id' => $student_id,
-                                                       'user_type' => $input['user_type'] 
-                                                     ]);
+						$this->mail->resendStudentRegister($userDetails, $code['confirmation_code'], $input['callback_uri'], $subject);
+
+						return $this->respondWithData(['id' => $student_id,
+							'user_type' => $input['user_type']
+						]);
 
                     
                     } else {

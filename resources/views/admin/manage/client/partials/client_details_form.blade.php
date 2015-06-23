@@ -163,8 +163,8 @@
 	            			, [	  
 		        				'class' => 'form-control'
 		        				, 'ng-model' => 'client.details.client_role'
-		        				, 'ng-disabled' => 'client.active_view_client'
-		        				, 'ng-change'=> 'client.setClientRole()'
+		        				, 'ng-disabled' => 'true'
+		        				, 'ng-change'=> 'client.updateClientRole()'
 		        			  ]	
 	        			) !!}
 	        		</div>
@@ -180,9 +180,9 @@
 	        			{!! Form::text('school_name',''
 	        				, array(
 	        					'placeHolder' => 'School Name'
-	        					, 'ng-disabled' => 'client.active_view_client'
+	        					, 'ng-disabled' => 'true'
 	        					, 'ng-model' => 'client.details.school_name'
-	        					, 'ng-change' => 'client.searchSchool()'
+	        					, 'ng-change' => "client.searchSchool('edit')"
                         		, 'ng-model-options' => "{ debounce : {'default' : 500} }"
 	        					, 'class' => 'form-control'
 	        				)

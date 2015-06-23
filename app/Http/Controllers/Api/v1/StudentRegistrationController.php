@@ -22,6 +22,7 @@ class StudentRegistrationController extends StudentController {
             'gender',
             'birth_date',
             'grade_code',
+            'country_id',
             'country',
             'state',
             'city');
@@ -40,9 +41,9 @@ class StudentRegistrationController extends StudentController {
         $this->addMessageBag($this->gender($student,'gender'));
         $this->addMessageBag($this->birthDate($student,'birth_date'));
         $this->addMessageBag($this->validateGradeCode($student,'grade_code'));
-        $this->addMessageBag($this->validateString($student,'country'));
-        $this->addMessageBag($this->validateString($student,'state'));
-        $this->addMessageBag($this->validateString($student,'city'));
+        $this->addMessageBag($this->validateNumber($student,'country_id')); // removed country name as required and changed it to country_id
+        $this->addMessageBag($this->validateAlphaSpaceOptional($student,'state'));
+        $this->addMessageBag($this->validateAlphaSpace($student,'city'));
 
         //User fields validations
         $this->addMessageBag($this->email($user,'email'));

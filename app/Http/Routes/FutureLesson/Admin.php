@@ -93,6 +93,11 @@
 						, 'middleware' => 'admin'
 						, 'uses' => $manage_admin_controller . '@edit_email_form'
 					]);
+					Routes::get('/delete_admin_form', [
+						  'as' => 'admin.manage.admin.partials.delete_admin_form'
+						, 'middleware' => 'admin'
+						, 'uses' => $manage_admin_controller . '@delete_admin_form'
+					]);
 					
 				});
 			});
@@ -145,6 +150,54 @@
 						, 'middleware' => 'admin'
 						, 'uses' => $manage_client_controller . '@confirm_email_form'
 					]);
+
+					Routes::get('/delete_client_form', [
+						  'as' => 'admin.manage.client.partials.delete_client_form'
+						, 'middleware' => 'admin'
+						, 'uses' => $manage_client_controller . '@delete_client_form'
+					]);
+				});
+			});
+			
+			/**
+			*STUDENT Routes
+			*/
+			Routes::group(['prefix' => '/student'], function(){
+				$manage_student_controller = 'FutureLesson\Admin\ManageStudentController';
+
+				Routes::get('/',
+					[
+						'as' => 'admin.manage.student.index'
+						, 'middleware' => 'admin'
+						, 'uses' => $manage_student_controller . '@index'
+					]);
+				Routes::group(['prefix' => '/partials'], function(){
+					$manage_student_controller = 'FutureLesson\Admin\ManageStudentController';
+
+					Routes::get('/list_student_form',
+						[
+							'as' => 'admin.manage.student.partials.list_student_form'
+							, 'middleware' => 'admin'
+							, 'uses' => $manage_student_controller . '@list_student_form'
+						]);
+					Routes::get('/add_student_form',
+						[
+							'as' => 'admin.manage.student.partials.add_student_form'
+							, 'middleware' => 'admin'
+							, 'uses' => $manage_student_controller . '@add_student_form'
+						]);
+					Routes::get('/view_student_form',
+						[
+							'as' => 'admin.manage.student.partials.view_student_form'
+							, 'middleware' => 'admin'
+							, 'uses' => $manage_student_controller . '@view_student_form'
+						]);
+					Routes::get('/delete_student_form',
+						[
+							'as' => 'admin.manage.student.partials.delete_student_form'
+							, 'middleware' => 'admin'
+							, 'uses' => $manage_student_controller . '@delete_student_form'
+						]);
 				});
 			});
 
@@ -345,6 +398,34 @@
 							, 'uses' => $announce_controler. '@index'
 						]);
 				});
+
+			Routes::group(['prefix' => '/invoice'], function() {
+
+				$manage_invoice_controller = 'FutureLesson\Admin\ManageInvoiceController';
+
+				Routes::get('/', [
+							'as' => 'admin.manage.invoice.index',
+							'middleware' => 'admin',
+							'uses' => $manage_invoice_controller . '@index'
+						]);
+
+				Routes::group(['prefix' => '/partials'], function() {
+
+					$manage_invoice_controller = 'FutureLesson\Admin\ManageInvoiceController';
+
+					Routes::get('/invoice_list', [
+						'as' => 'admin.manage.invoice.partials.invoice_list',
+						'middleware' => 'admin',
+						'uses' => $manage_invoice_controller . '@invoice_list'
+					]);
+
+					Routes::get('/view_invoice', [
+						'as' => 'admin.manage.invoice.partials.view_invoice',
+						'middleware' => 'admin',
+						'uses' => $manage_invoice_controller . '@view_invoice'
+					]);
+				});
+			});
 		});
 			
 

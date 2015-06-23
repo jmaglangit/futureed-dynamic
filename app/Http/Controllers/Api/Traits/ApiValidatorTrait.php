@@ -106,12 +106,13 @@ trait ApiValidatorTrait {
     //Validate first_name with multiple names
     public function firstName($input,$first_name){
 
+
             $validator = Validator::make(
                 [
                     "$first_name" => $input["$first_name"],
                 ],
                 [
-                    "$first_name" => 'required|regex:/^([a-z\x20])+$/i|max:64'
+                    "$first_name" => 'required|regex:'. config('regex.name_numeric') .'|max:64'
                 ]
             );
 
@@ -134,7 +135,7 @@ trait ApiValidatorTrait {
                     "$last_name" => $input["$last_name"],
                 ],
                 [
-                    "$last_name" => 'required|regex:/^([a-z\x20])+$/i|max:64'
+                    "$last_name" => 'required|regex:'. config('regex.name') .'|max:64'
                 ]
             );
 
@@ -204,6 +205,7 @@ trait ApiValidatorTrait {
     //Validating ang field that is numeric. Can be used by any number field validation.
     public function validateNumber($input,$field_name){
 
+			$error_msg = config('futureed-error.error_messages');
 
             $validator = Validator::make(
                 [
@@ -211,6 +213,12 @@ trait ApiValidatorTrait {
                 ],
                 [
                     "$field_name" => 'required|numeric'
+                ],
+                [
+                    "school_code.required" => $error_msg[2602],
+                    "school_code.numeric" => $error_msg[2602],
+                    "country_id.required" => $error_msg[2603],
+                    "country_id.numeric" => $error_msg[2604]
                 ]
             );
 
@@ -332,7 +340,7 @@ trait ApiValidatorTrait {
                     "$field_name" => strtolower($input["$field_name"]),
                 ],
                 [
-                    "$field_name" => 'required|regex:/^[0-9]{5}(\-[0-9]{4})?$/'
+                    "$field_name" => 'required|regex:/^[0-9]{4,6}(\-[0-9]{4})?$/'
                 ]
             );
 
@@ -434,7 +442,7 @@ trait ApiValidatorTrait {
                     "$field_name" => strtolower($input["$field_name"]),
                 ],
                 [
-                    "$field_name" => 'digits:5|integer'
+                    "$field_name" => 'regex:/^[0-9]{4,6}(\-[0-9]{4})?$/'
                 ]
             );
 
@@ -538,17 +546,14 @@ trait ApiValidatorTrait {
 
 
     public function checkContactNumber($input,$field_name){
-        $error_msg = config('futureed-error.error_messages');
+        $phone_format = "/^((\+|\(|\)|\-)+\s?)?([0-9]+)?((\+|\(|\)|\-)+\s?)?([0-9]+)?((\+|\(|\)|\-)+\s?)?([0-9]+)?((\+|\(|\)|\-)+\s?)?([0-9]+)?$/";
 
         $validator = Validator::make(
             [
                 "$field_name" => strtolower($input["$field_name"]),
             ],
             [
-                "$field_name" => 'required|regex:/^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$/'
-            ],
-            [
-                'regex' => $error_msg[2115]
+                "$field_name" => "required"
             ]
         );
 
@@ -559,6 +564,14 @@ trait ApiValidatorTrait {
             return $this->setErrorCode(1022)
                 ->setField($field_name)
                 ->setMessage($validator_msg["$field_name"][0])
+                ->errorMessage();
+        }
+
+        if(!preg_match($phone_format,$input["$field_name"])){
+
+            return $this->setErrorCode(2115)
+                ->setField($field_name)
+                ->setMessage(config('futureed-error.error_messages.2115'))
                 ->errorMessage();
         }
     }
@@ -598,16 +611,16 @@ trait ApiValidatorTrait {
                 "before" => $error_msg[2500],
                 "after" =>$error_msg[2500]
             ]);
-        
+
         if($validator->fails()){
-        
+
             $validator_msg = $validator->messages()->toArray();
             
             return $this->setErrorCode(1005)
                 ->setField($date_start)
                 ->setMessage($validator_msg["$date_start"][0])
                 ->errorMessage();
-        }       
+        }
     }
 
     public function validateStatus($input,$field_name){
@@ -684,5 +697,146 @@ trait ApiValidatorTrait {
                     ->errorMessage();
             }
     }
+
+    public function schoolCode($input, $school_code){
+
+        $validator = Validator::make(
+            [
+                "$school_code" => $input["$school_code"],
+            ],
+            [
+                "$school_code" => 'required|numeric|exists:schools,code,deleted_at,NULL'
+            ],
+            [
+                "exist" => config('futureed-error.error_messages.2602')
+            ]
+        );
+
+        if($validator->fails()){
+
+            return $this->setErrorCode(2602)
+                ->setField($school_code)
+                ->setMessage(config('futureed-error.error_messages.2602'))
+                ->errorMessage();
+        }
+    }
+
+    public function validateDateNow($input,$date_now){
+
+        $validator = Validator::make(
+            [
+                "$date_now" => $input["$date_now"],
+            ],
+            [
+                "$date_now" => 'required|date:today'
+            ],
+            [
+                'date' => config('futureed-error.error_messages.2500')
+            ]
+        );
+
+        if($validator->fails()){
+
+            $validator_msg = $validator->messages()->toArray();
+
+            return $this->setErrorCode(2500)
+                ->setField($date_now)
+                ->setMessage($validator_msg["$date_now"][0])
+                ->errorMessage();
+        }
+
+    }
+
+    // validation for state and city
+    // accepts spaces,alphabet characters and dash
+    public function validateAlphaSpace($input, $field_name){
+        $error_msg = config('futureed-error.error_messages');
+
+            $validator = Validator::make(
+                [
+                    "$field_name" => strtolower($input["$field_name"]),
+                ],
+                [
+                    "$field_name" => ($field_name == 'state')? 'regex:/^[-\pL\s]+$/u' : 'required|regex:/^[-\pL\s]+$/u'
+                ]
+            );
+            if($validator->fails()){
+
+            $validator_msg = $validator->messages()->toArray();
+
+            return $this->setErrorCode(1023)
+                ->setField($field_name)
+                ->setMessage($validator_msg["$field_name"][0])
+                ->errorMessage();
+        }
+    }
+
+	public function validateAlphaSpaceOptional($input, $field_name){
+		$error_msg = config('futureed-error.error_messages');
+
+		$validator = Validator::make(
+			[
+				"$field_name" => strtolower($input["$field_name"]),
+			],
+			[
+				"$field_name" => ($field_name == 'state')? 'regex:/^[-\pL\s]+$/u' : 'regex:/^[-\pL\s]+$/u'
+			]
+		);
+		if($validator->fails()){
+
+			$validator_msg = $validator->messages()->toArray();
+
+			return $this->setErrorCode(1023)
+				->setField($field_name)
+				->setMessage($validator_msg["$field_name"][0])
+				->errorMessage();
+		}
+	}
+
+	public function validateAlpha($input,$date_now){
+
+		$validator = Validator::make(
+			[
+				"$date_now" => $input["$date_now"],
+			],
+			[
+				"$date_now" => 'required|alpha'
+			]
+		);
+
+		if($validator->fails()){
+
+			$validator_msg = $validator->messages()->toArray();
+
+			return $this->setErrorCode(1023)
+				->setField($date_now)
+				->setMessage($validator_msg["$date_now"][0])
+				->errorMessage();
+		}
+
+	}
+
+	public function validateAlphaOptional($input,$date_now){
+
+		$validator = Validator::make(
+			[
+				"$date_now" => $input["$date_now"],
+			],
+			[
+				"$date_now" => 'alpha'
+			]
+		);
+
+		if($validator->fails()){
+
+			$validator_msg = $validator->messages()->toArray();
+
+			return $this->setErrorCode(1023)
+				->setField($date_now)
+				->setMessage($validator_msg["$date_now"][0])
+				->errorMessage();
+		}
+
+	}
 
 }
