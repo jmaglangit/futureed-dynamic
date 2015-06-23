@@ -170,7 +170,7 @@ class InvoiceController extends ApiController {
             {
                 $result = $this->invoice_detail->getInvoiceDetailByInvoiceIdAndClassId($id,$class_records[$i]['id']);
                 if(is_null($result)) {
-                    $order_detail['invoice_id'] = $invoice['id'];
+                    $order_detail['invoice_id'] = $id;
                     $order_detail['class_id'] = $class_records[$i]['id'];
                     $order_detail['grade_id'] = $class_records[$i]['grade_id'];
                     $order_detail['price'] = $order_input['total_amount'];
