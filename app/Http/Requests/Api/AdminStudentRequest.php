@@ -78,8 +78,8 @@ class AdminStudentRequest extends ApiRequest {
      */
     public function messages() {
 		return [
-			'school_code.required' => 'School Name is required.',
 			'grade_code.required' => 'Grade is required.',
+			'integer' => 'The :attribute must be a number.',
 
 		];
     }
