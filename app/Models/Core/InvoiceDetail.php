@@ -22,7 +22,7 @@ class InvoiceDetail extends Model {
 
     public function invoice(){
 
-        return $this->hasMany('FutureEd\Models\Core\Invoice','invoice_no','invoice_no');
+        return $this->hasOne('FutureEd\Models\Core\Invoice','invoice_id','id');
 
     }
 
@@ -30,6 +30,14 @@ class InvoiceDetail extends Model {
 
         return $this->belongsTo('FutureEd\Models\Core\Grade');
 
+    }
+
+    public function scopeInvoiceId($query,$invoice_id){
+        return $query->where('invoice_id',$invoice_id);
+    }
+
+    public function scopeClassId($query,$class_id){
+        return $query->where('class_id',$class_id);
     }
     
 }

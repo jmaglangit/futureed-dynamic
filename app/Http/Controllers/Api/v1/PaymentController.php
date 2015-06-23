@@ -120,16 +120,10 @@ class PaymentController extends ApiController
         Session::forget('paypal_payment_invoice_id');
 
         if (empty(Input::get('PayerID')) || empty(Input::get('token'))) {
-
-            //Update invoice status to paid.
-            $data['payment_status'] = config('futureed.cancelled');
-            $this->invoice->updateInvoice($invoice_id,$data);
-
             /*
            return Redirect::route('original.route')
                            ->with('error', 'Payment failed');
            */
-
             return $this->respondWithData([
                 'status' => 'error',
                 'data' => 'Payment failed'
