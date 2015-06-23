@@ -78,7 +78,7 @@ class ClassStudent extends Model {
 		return $query->where('student_id',$student_id);
 	}
 
-	public function scopeCurrentDate($query,$current_date){
+	public function scopeCurrDate($query,$current_date){
 
 		return $query->whereHas('classroom', function ($query) use ($current_date) {
 
