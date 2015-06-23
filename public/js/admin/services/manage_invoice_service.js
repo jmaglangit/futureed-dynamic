@@ -23,5 +23,13 @@ function manageInvoiceService($http) {
 		});
 	}
 
+	invoiceAPI.updateStatus = function(data) {
+		return $http({
+			method : Constants.METHOD_POST
+			, data : data
+			, url  : invoiceURL + 'sales-invoice/edit'
+		});
+	}
+
 	return invoiceAPI
 }
