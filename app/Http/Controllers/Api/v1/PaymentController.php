@@ -39,12 +39,13 @@ class PaymentController extends ApiController
     public function postPayment(PaymentRequest $request)
     {
         $data = $request->all();
-
+        //default currency to USD.
+        $currency = "USD";
         $payer = new Payer();
         $payer->setPaymentMethod('paypal');
 
         $item_1 = new Item();
-        $item_1->setName('Payment for Future Lesson Seats')->setCurrency('USD')->setQuantity($data['quantity'])->setPrice($data['price']);
+        $item_1->setName('Payment for Future Lesson Seats')->setCurrency($currency)->setQuantity($data['quantity'])->setPrice($data['price']);
 
         // add item to list
         $item_list = new ItemList();
@@ -52,7 +53,7 @@ class PaymentController extends ApiController
 
         $amount = new Amount();
         $total_amount = $data['quantity'] * $data['price'];
-        $amount->setCurrency('USD')->setTotal($total_amount);
+        $amount->setCurrency($currency)->setTotal($total_amount);
 
         $transaction = new Transaction();
         $transaction->setAmount($amount)->setItemList($item_list)->setDescription('FutureEd Classes');
@@ -66,13 +67,10 @@ class PaymentController extends ApiController
         try {
             $payment->create($this->_api_context);
         } catch (\PayPal\Exception\PPConnectionException $ex) {
-            if (\Config::get('app.debug')) {
-                echo "Exception: " . $ex->getMessage() . PHP_EOL;
-                $err_data = json_decode($ex->getData(), true);
-                exit;
-            } else {
-                die('Some error occur, sorry for inconvenient');
-            }
+
+            return $this->respondWithData([
+                'status' => 'error',
+                'data' => $ex->getMessage()]);
         }
 
         foreach($payment->getLinks() as $link) {
