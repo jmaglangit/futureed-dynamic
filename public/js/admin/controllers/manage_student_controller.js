@@ -33,6 +33,7 @@ function ManageStudentController($scope, manageStudentService, apiService, Table
 				self.edit = Constants.TRUE;
 				self.viewStudent(id,self.fromEdit);
 				break;
+
 			case Constants.ACTIVE_VIEW:
 				self.active_list = Constants.FALSE;
 				self.active_add = Constants.FALSE;
@@ -40,6 +41,7 @@ function ManageStudentController($scope, manageStudentService, apiService, Table
 				self.edit = Constants.FALSE;
 				self.viewStudent(id,self.fromEdit);
 				break;
+				
 			case Constants.ACTIVE_ADD:
 				self.active_add = Constants.TRUE;
 				self.active_list = Constants.FALSE;
