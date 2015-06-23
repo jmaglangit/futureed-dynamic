@@ -30,7 +30,7 @@ class InvoiceController extends ApiController {
                                 OrderRepositoryInterface $order){
         $this->classrooms = $classroom;
         $this->invoice = $invoice;
-        $this->invoiceDetail = $invoice_detail;
+        $this->invoice_detail = $invoice_detail;
         $this->invoice_service = $invoice_service;
         $this->order = $order;
     }
@@ -149,7 +149,14 @@ class InvoiceController extends ApiController {
         $order_input = $request->only('order_no','client_id','subscription_id','date_start','date_end','seats_total','total_amount','payment_status');
         $order_input['order_date'] = $input['invoice_date'];
         $order_input['seats_taken'] = 0;
-        $order = $this->order->addOrder($order_input);
+
+        $order = $this->order->getOrderByOrderNo($order_input['order_no']);
+
+        if( !is_null($order) ){
+            $this->order->updateOrder($order['id'],$order_input);
+        }else{
+            $this->order->addOrder($order_input);
+        }
 
         //get classrooms to create invoice details.
         $criteria['order_no'] = $input['order_no'];
@@ -161,12 +168,15 @@ class InvoiceController extends ApiController {
             $class_records = $classrooms['record']->toArray();
             for($i = 0; $i < $classrooms['total']; $i++)
             {
-                $order_detail['invoice_id'] = $invoice['id'];
-                $order_detail['class_id'] = $class_records[$i]['id'];
-                $order_detail['grade_id'] = $class_records[$i]['grade_id'];
-                $order_detail['price'] = $order_input['total_amount'];
+                $result = $this->invoice_detail->getInvoiceDetailByInvoiceIdAndClassId($id,$class_records[$i]['id']);
+                if(is_null($result)) {
+                    $order_detail['invoice_id'] = $id;
+                    $order_detail['class_id'] = $class_records[$i]['id'];
+                    $order_detail['grade_id'] = $class_records[$i]['grade_id'];
+                    $order_detail['price'] = $order_input['total_amount'];
 
-                $result = $this->invoice_detail->addInvoiceDetail($order_detail);
+                    $this->invoice_detail->addInvoiceDetail($order_detail);
+                }
             }
         }
 

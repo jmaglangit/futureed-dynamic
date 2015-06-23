@@ -137,7 +137,7 @@ class Student extends Model {
 					//check relation to invoice
 					$query->whereHas('invoice', function($query){
 
-						$query->where('date_end','>', Carbon::now());
+						$query->where('date_end','>=', Carbon::now());
 
 					});
 

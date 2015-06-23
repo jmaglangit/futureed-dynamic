@@ -7,4 +7,6 @@ interface InvoiceDetailRepositoryInterface {
 
     public function addInvoiceDetail($data);
 
+    public function getInvoiceDetailByInvoiceIdAndClassId($invoice_id,$class_id);
+
 }

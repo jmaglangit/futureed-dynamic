@@ -153,9 +153,10 @@ class ClassStudentController extends ApiController {
 
         $student_id = $this->student->getStudentId($check_email['user_id']);
 
-        $class_student = $this->class_student->getClassStudent($student_id);
+		//Get current school if exist.
+		$classroom = $this->class_student->getStudentCurrentClassroom($student_id);
 
-        if(!is_null($class_student)){
+        if(is_null($classroom)){
             return $this->respondErrorMessage(2125);// Student is already in the class.
         }
 

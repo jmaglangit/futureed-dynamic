@@ -43,6 +43,11 @@
 					'as' => 'client.parent.student.partials.invitation_code_form',
 					'uses' => $manage_parent_student_controller . '@invitation_code_form'
 				]);
+
+				Routes::get('change_email_form', [
+					'as' => 'client.parent.student.partials.change_email_form',
+					'uses' => $manage_parent_student_controller . '@change_email_form'
+				]);
 			});
 		});				
 

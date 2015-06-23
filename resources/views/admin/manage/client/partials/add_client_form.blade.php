@@ -311,7 +311,7 @@
 	        		</div>
 	        	</div>
 	        	<div class="form-group">
-	        		<label class="col-xs-2 control-label" id="school_postal">Postal Code <span class="required" ng-if="client.role.parent">*</span></label>
+	        		<label class="col-xs-2 control-label" id="school_postal">Postal Code</label>
 	        		<div class="col-xs-4">
 	        			{!! Form::text('zip',''
 	        				, array(
