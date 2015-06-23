@@ -336,6 +336,8 @@ function ManageStudentController($scope, manageStudentService, apiService, Table
 
 	self.clear = function() {
 		self.searchDefaults();
+		self.tableDefaults();
+		
 		self.list();
 	}
 
