@@ -60,7 +60,8 @@ class InvoiceRequest extends ApiRequest {
             'client_id.required' => 'Client field is required.',
             'client_id.integer' => 'Client field must be a number.',
             'subscription_id.required' => 'Subscription field is required.',
-            'subscription_id.integer' => 'Subscription field must be a number.'
+            'subscription_id.integer' => 'Subscription field must be a number.',
+            'discount_id.integer' => 'Discount field must be a number.'
         ];
     }
 }
