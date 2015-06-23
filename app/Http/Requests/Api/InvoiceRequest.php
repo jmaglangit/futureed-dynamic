@@ -57,11 +57,11 @@ class InvoiceRequest extends ApiRequest {
     public function messages()
     {
         return [
-            'client_id.required' => 'Client field is required.',
-            'client_id.integer' => 'Client field must be a number.',
-            'subscription_id.required' => 'Subscription field is required.',
-            'subscription_id.integer' => 'Subscription field must be a number.',
-            'discount_id.integer' => 'Discount field must be a number.'
+            'client_id.required' => 'Client is required.',
+            'client_id.integer' => 'Client must be a number.',
+            'subscription_id.required' => 'Subscription is required.',
+            'subscription_id.integer' => 'Subscription must be a number.',
+            'discount_id.integer' => 'Discount must be a number.'
         ];
     }
 }
