@@ -52,50 +52,17 @@ class StudentRepository implements StudentRepositoryInterface
 
 	public function addStudent($student)
 	{
-		try {
-//            user_id
-//            first_name
-//            last_name
-//            gender
-//            birth_date
-//            avatar_id
-//            password_image_id
-//            school_code
-//            grade_code
-//            point_level_id
-//            learning_style_id
-//            status
+			try {
 
-//            'first_name',
-//            'last_name',
-//            'gender',
-//            'birthday',
-//            'school_code',
-//            'grade_code',
-//            'country',
-//            'state',
-//            'city'
-			Student::insert([
-				'user_id' => $student['user_id'],
-				'first_name' => $student['first_name'],
-				'last_name' => $student['last_name'],
-				'gender' => $student['gender'],
-				'birth_date' => $student['birth_date'],
-				'country_id' => $student['country_id'],
-				'country' => $student['country'],
-				'state' => $student['state'],
-				'city' => $student['city'],
-				'grade_code' => $student['grade_code'],
-				'school_code' => (isset($student['school_code'])) ? $student['school_code'] : NULL,
-				'status' => 'Disabled',
-				'created_by' => 1,
-				'updated_by' => 1
-			]);
+				 Student::create($student);
 
-		} catch (Exception $e) {
-			throw new Exception ($e->getMessage());
-		}
-		return true;
+			} catch(Exception $e) {
+
+				return $e->getMessage();
+
+			}
+
+			return true;
 
 	}
 
@@ -190,18 +157,18 @@ class StudentRepository implements StudentRepositoryInterface
 	//update student details
 	public function updateStudentDetails($id, $data)
 	{
-		Student::where('id', '=', $id)
-			->update(['first_name' => $data['first_name'],
+		try {
 
-				'last_name' => $data['last_name'],
-				'gender' => $data['gender'],
-				'birth_date' => $data['birth_date'],
-				'grade_code' => $data['grade_code'],
-				'school_code' => (isset($data['school_code'])) ? $data['school_code'] : NULL,
-				'country' => $data['country'],
-				'country_id' => $data['country_id'],
-				'city' => $data['city'],
-				'state' => $data['state']]);
+			$student = Student::find($id);
+
+			$student->update($data);
+
+		} catch(Exception $e) {
+
+			return $e->getMessage();
+
+		}
+		return $student;
 	}
 
 
@@ -300,6 +267,75 @@ class StudentRepository implements StudentRepositoryInterface
 
 		return $student;
 
+
+	}
+
+	//get student who belong to a parent if client_role is parent
+	// and get student who belong to a teacher if client role is teacher
+	public function getStudentListByClient($criteria = [], $limit = 0, $offset = 0){
+
+		$student = new Student();
+		$count = 0;
+
+		if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
+
+			$count = $student->count();
+
+		} else {
+
+			if (count($criteria) > 0) {
+				if (isset($criteria['name'])) {
+
+					$student = $student->with('user')->name($criteria['name']);
+
+				}
+				if (isset($criteria['email'])) {
+
+					$student = $student->with('user')->email($criteria['email']);
+
+				}
+
+				if(isset($criteria['client_id'])){
+
+					//check if client_role is a Parent
+					if($criteria['client_role'] === config('futureed.parent')){
+
+						$student = $student->with('parent')->parent($criteria['client_id']);
+					}
+
+					//check if client_role is a Teacher
+					if($criteria['client_role'] === config('futureed.teacher')){
+
+						$student = $student->with('studentclassroom')->teacher($criteria['client_id']);
+					}
+
+
+				}
+
+			}
+
+			$count = $student->count();
+
+			if ($limit > 0 && $offset >= 0) {
+				$student = $student->with('user')->offset($offset)->limit($limit);
+			}
+
+		}
+
+		$student = $student->with('user')->orderBy('last_name', 'asc');
+
+		return ['total' => $count, 'records' => $student->get()->toArray()];
+
+	}
+
+	//get student details with registration token
+	public function viewStudentByToken($id,$reg_token){
+
+		$student = new Student();
+
+		$student = $student->with('user','school','grade')->token($reg_token)->id($id);
+
+		return $student->get();
 
 	}
 

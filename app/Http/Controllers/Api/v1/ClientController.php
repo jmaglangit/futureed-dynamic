@@ -113,7 +113,7 @@ class ClientController extends ApiController {
 				$user = input::only('username');
 
 				$client = input::only('first_name','last_name','street_address',
-									  'city','country','zip','state');
+									  'city','country','zip','state','country_id');
 
 				$school = input::only('school_name','school_code','school_street_address','school_city',
 										  'school_state','school_country','school_zip','school_contact_name','school_contact_number');
@@ -129,7 +129,7 @@ class ClientController extends ApiController {
 					$this->addMessageBag($this->validateString($client,'city'));
 					$this->addMessageBag($this->validateString($client,'country'));
 					$this->addMessageBag($this->validateString($client,'state'));
-					$this->addMessageBag($this->zipCode($client,'zip'));
+					$this->addMessageBag($this->zipCodeOptional($client,'zip'));
 
 				}else if(strtolower($clientDetails['client_role']) == 'teacher'){
 
@@ -243,7 +243,7 @@ class ClientController extends ApiController {
 		$user_type = config('futureed.client');
 
 		$client = Input::only('first_name', 'last_name', 'client_role', 'school_code',
-			'street_address', 'city', 'state', 'country', 'zip');
+			'street_address', 'city', 'state', 'country', 'zip','country_id');
 
 		$user = Input::only('username', 'email', 'status');
 
@@ -270,7 +270,7 @@ class ClientController extends ApiController {
 			$this->addMessageBag($this->validateString($client, 'city'));
 			$this->addMessageBag($this->validateString($client, 'state'));
 			$this->addMessageBag($this->validateString($client, 'country'));
-			$this->addMessageBag($this->zipCode($client, 'zip'));
+			$this->addMessageBag($this->zipCodeOptional($client, 'zip'));
 
 
 		} else if (strcasecmp($client['client_role'], config('futureed.teacher')) == 0) {
@@ -296,7 +296,7 @@ class ClientController extends ApiController {
 			$this->addMessageBag($this->validateString($school, 'school_country'));
 			$this->addMessageBag($this->validateString($school, 'school_address'));
 			$this->addMessageBag($this->validateString($school, 'school_city'));
-			$this->addMessageBag($this->zipCode($school, 'school_zip'));
+			$this->addMessageBag($this->zipCodeOptional($school, 'school_zip'));
 			$this->addMessageBag($this->validateString($school, 'contact_name'));
 			$this->addMessageBag($this->checkContactNumber($school, 'contact_number'));
 

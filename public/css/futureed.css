@@ -937,6 +937,7 @@ div > .btncon > a {
   	font-size: 15px;
   	margin-left: 60px;
   	padding: 10px;
+  	text-align: left;
 }
 
 .alert-success{
@@ -946,6 +947,7 @@ div > .btncon > a {
   	font-size: 15px;
   	margin-left: 60px;
   	padding: 10px;
+  	text-align: left;
 }
 
 .margin-top-8 {
@@ -985,7 +987,7 @@ div > .btncon > a {
 }
 
 .width-fit {
-	width: 100%;
+	width: 100% !important;
 }
 
 .width-large {
@@ -1010,4 +1012,4 @@ div > .btncon > a {
 
 .cursor-pointer {
 	cursor: pointer;
- }
+}

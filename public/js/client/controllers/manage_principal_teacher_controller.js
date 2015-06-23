@@ -67,11 +67,13 @@ function ManagePrincipalTeacherController($scope, managePrincipalTeacherService,
 		self.list();
 	}
 
-	self.searchFnc = function() {
+	self.searchFnc = function(event) {
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
 
 		self.list();
+		event = getEvent(event);
+		event.preventDefault();
 	}
 
 	self.checkUsernameAvailability = function() {
@@ -84,13 +86,16 @@ function ManagePrincipalTeacherController($scope, managePrincipalTeacherService,
 		apiService.validateUsername(self.record.username, self.user_type).success(function(response) {
 			self.validation.u_loading = Constants.FALSE;
 
-			if(angular.equals(response.status, Constants.STATUS_OK)){
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				self.fields['username'] = Constants.TRUE;
+
 				if(response.errors){
 					self.validation.u_error = response.errors[0].message;
 
 					if(angular.equals(self.validation.u_error, Constants.MSG_U_NOTEXIST)){
 						self.validation.u_error = Constants.FALSE;
 						self.validation.u_success = Constants.TRUE;
+						self.fields['username'] = Constants.FALSE;
 					}
 				}else if(response.data){
 					self.validation.u_error = Constants.MSG_U_EXIST;
@@ -114,12 +119,15 @@ function ManagePrincipalTeacherController($scope, managePrincipalTeacherService,
 			self.validation.e_loading = Constants.FALSE;
 
 			if(angular.equals(response.status, Constants.STATUS_OK)){
+				self.fields['email'] = Constants.TRUE;
+
 				if(response.errors){
 					self.validation.e_error = response.errors[0].message;
 
 					if(angular.equals(self.validation.e_error, Constants.MSG_EA_NOTEXIST)){
 						self.validation.e_error = Constants.FALSE;
 						self.validation.e_success = Constants.TRUE;
+						self.fields['email'] = Constants.FALSE;
 					}
 				}else if(response.data){
 					self.validation.e_error = Constants.MSG_EA_EXIST;
@@ -135,12 +143,11 @@ function ManagePrincipalTeacherController($scope, managePrincipalTeacherService,
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
 		self.validation = {};
+		self.fields = [];
 
 		var base_url = $('input[name="base_url"]').val();
-		self.record.callback_uri = base_url + '/client/register?email=' + self.record.email;
+		self.record.callback_uri = base_url + '/client/registration';
 		self.record.current_user = $scope.user.id;
-
-		$("#add_teacher_form input").removeClass("required-field");
 
 		$scope.ui_block();
 		managePrincipalTeacherService.save(self.record).success(function(response){
@@ -149,7 +156,7 @@ function ManagePrincipalTeacherController($scope, managePrincipalTeacherService,
 					self.errors = $scope.errorHandler(response.errors);
 
 					angular.forEach(response.errors, function(value, key){
-						$("#add_teacher_form input[name='" + value.field +"']" ).addClass("required-field");
+						self.fields[value.field] = Constants.TRUE;
 					});
 				} else if(response.data) {
 					self.record = {};
@@ -293,7 +300,8 @@ function ManagePrincipalTeacherController($scope, managePrincipalTeacherService,
 		switch(page) {
 
 			case 'add'	:
-				self.record = Constants.FALSE;
+				self.record = {};
+				self.fields = [];
 				self.active_add = Constants.TRUE;
 				break;
 

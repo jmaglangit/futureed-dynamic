@@ -89,6 +89,7 @@ class ClientTeacherRegistrationController extends ApiController
 			'state',
 			'country',
 			'country_id',
+			'zip',
 			'callback_uri'
 
 		]);
@@ -109,6 +110,9 @@ class ClientTeacherRegistrationController extends ApiController
 
 			//send email to teacher
 			$this->mail->sendTeacherRegistration($data);
+
+			//removed registration token.
+			$this->user->deleteRegistrationToken($data->user->id);
 
 			return $this->respondWithData($data);
 

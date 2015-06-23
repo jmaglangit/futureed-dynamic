@@ -15,6 +15,7 @@
 					[
 						'id' => 'search_form',
 						'class' => 'form-horizontal'
+						, 'ng-submit' => 'payment.searchFnc($event)'
 					]
 			) !!}
 			<div class="form-group">
@@ -22,7 +23,9 @@
 					{!! Form::text('order_no', ''
 						, array(
 							'class' => 'form-control'
-							, 'ng-model' => 'payment.search.order_no', 'placeholder' => 'Order Number'
+							, 'ng-model' => 'payment.search.order_no'
+							, 'placeholder' => 'Order Number'
+							, 'autocomplete' => 'off'
 						)
 					) !!}
 				</div>
@@ -36,7 +39,7 @@
 					{!! Form::button('Search'
 						, array(
 							'class' => 'btn btn-blue'
-							, 'ng-click' => 'payment.searchFnc()'
+							, 'ng-click' => 'payment.searchFnc($event)'
 						)
 					) !!}
 				</div>
@@ -53,7 +56,7 @@
 	</div>
 
 	<div class="col-xs-12 table-container" ng-init="payment.listPayments()">
-		<button class="btn btn-blue btn-small" ng-click="admin.setActive('add')">
+		<button class="btn btn-blue btn-small" ng-click="payment.setActive('add')">
 			<i class="fa fa-plus-square"></i> Add 
 		</button>
 

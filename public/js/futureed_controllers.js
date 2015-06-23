@@ -1,6 +1,7 @@
 angular.module('futureed.controllers', [])
 	.controller('futureedController', FutureedController)
-	.directive('templateDirective', TemplateDirective);
+	.directive('templateDirective', TemplateDirective)
+	.constant("futureed", Constants);
 
 function TemplateDirective() {
 	return {
@@ -10,7 +11,8 @@ function TemplateDirective() {
 	}
 }
 
-function FutureedController($scope, apiService) {
+function FutureedController($scope, apiService, futureed) {
+	$scope.futureed = futureed;
 	$scope.display_date = new Date();
 	
 	/**
@@ -23,16 +25,12 @@ function FutureedController($scope, apiService) {
 
 	$scope.goHome = goHome;
 	$scope.highlight = highlight;
-	$scope.getCountries = getCountries;
-	$scope.getGradeLevel = getGradeLevel;
 	$scope.checkAvailability = checkAvailability;
 	$scope.checkEmailAvailability = checkEmailAvailability;
 	$scope.getAnnouncement = getAnnouncement;
-	$scope.getGrades = getGrades;
 	$scope.getCountryId = getCountryId;
 
 	$scope.beforeDateRender = beforeDateRender;
-
 	function beforeDateRender($dates){
 		maxDate = new Date().setHours(0,0,0,0); // Set minimum date to whatever you want here
 
@@ -99,7 +97,7 @@ function FutureedController($scope, apiService) {
 	/**
 	* Retrieves a list of countries
 	*/
-	function getCountries() {
+	$scope.getCountries = function() {
 		$scope.countries = Constants.FALSE;
 
 		apiService.getCountries().success(function(response) {
@@ -114,20 +112,11 @@ function FutureedController($scope, apiService) {
 			$scope.internalError();
 		});
 	}
-
-	/**
-	* Retrieves list of Grades by country
-	* function for get grade by country
-	* To be Implemented
-	*/
-	function getGrades(id){
-		
-	}
 	
-	function getGradeLevel() {
+	$scope.getGradeLevel = function(country_id) {
 		$scope.grades = Constants.FALSE;
-		$scope.countryid = ($scope.reg.country_id != null) ? $scope.reg.country_id : 840;
-		apiService.getGradeLevel($scope.countryid).success(function(response) {
+
+		apiService.getGradeLevel(country_id).success(function(response) {
 			if(response.status == Constants.STATUS_OK) {
 				if(response.errors) {
 					$scope.errorHandler(response.errors);

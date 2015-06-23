@@ -36,8 +36,8 @@ class AdminRequest extends ApiRequest {
 					'username' => 'required|min:'.config('futureed.username_min').'|max:'.config('futureed.username_max').'|alpha_num|unique:users,username,NULL,id,user_type,'.config('futureed.admin').',deleted_at,NULL',
 					'admin_role' => 'required|in:Admin,Super Admin',
 					'status' => 'required|in:Enabled,Disabled',
-					'first_name' => 'required|regex:/^([a-z\x20])+$/i|max:'.config('futureed.first_name_max'),
-					'last_name' => 'required|regex:/^([a-z\x20])+$/i|max:'.config('futureed.last_name_max')
+					'first_name' => 'required|regex:'. config('regex.name') .'|max:'.config('futureed.first_name_max'),
+					'last_name' => 'required|regex:'. config('regex.name') .'|max:'.config('futureed.last_name_max')
 				];
 		
 		switch($this->method) {

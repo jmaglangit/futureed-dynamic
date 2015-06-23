@@ -8,6 +8,7 @@ var Constants = {
 
 	, EMPTY_STR		: ''
 	, ALL			: 'all'
+	, UNDEFINED		: 'undefined'
 
 	, METHOD_POST	: 'POST'
 	, METHOD_GET	: 'GET'
@@ -38,6 +39,7 @@ var Constants = {
 	, ACTIVE_VIEW	: "view"
 	, ACTIVE_EDIT	: "edit"
 	, ACTIVE_ADD	: "add"
+	, ACTIVE_EMAIL	: "email"
 
 	, ADD_CLIENT 	: "add_client"
 	, ADD_STUDENT	: "add_student"
@@ -67,6 +69,7 @@ var Constants = {
 	, MSG_EA_NOTEXIST		: "Email does not exist."
 	, MSG_EA_CONFIRM		: "Confirm your new email address."
 	, MSG_EA_EXIST 			: "Email address already exists."
+	, MSG_EA_AVAILABLE 		: "Email address is available."
 	, MSG_EA_CURR_NOTMATCH	: "Current email address does not match."
 	, MSG_EA_NOT_MATCH		: "Email Address does not match."
 	, ANNOUNCE_SUCCESS		: "Success You've created Site Maintainance Announcement."
@@ -89,6 +92,7 @@ var Constants = {
 
 	, MSG_U_NOTEXIST		: "User does not exist."
 	, MSG_U_EXIST 			: "Username already exists."
+	, MSG_U_AVAILABLE		: "Username is available."
 
 	, MSG_NO_RECORD			: "No record found."
 

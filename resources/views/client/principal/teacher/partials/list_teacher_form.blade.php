@@ -27,6 +27,7 @@
 					array(
 						'id' => 'search_form',
 						'class' => 'form-horizontal'
+						, 'ng-submit' => 'teacher.searchFnc($event)'
 					)
 			) !!}
 			<div class="form-group">
@@ -52,7 +53,7 @@
 					{!! Form::button('Search', 
 						array(
 							'class' => 'btn btn-blue'
-							, 'ng-click' => 'teacher.searchFnc()'
+							, 'ng-click' => 'teacher.searchFnc($event)'
 						)
 					) !!}
 				</div>

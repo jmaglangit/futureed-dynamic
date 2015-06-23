@@ -193,7 +193,7 @@
                         </div>
                       </a>
                       <ul class="dropdown-menu date-dropdown-menu" role="menu" aria-labelledby="dLabel">
-                        <datetimepicker data-ng-model="class.add.birth" data-ng-change="class.updateBirthday()" data-before-render="beforeDateRender($dates)" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', startView:'day', minView:'day' }"/>
+                        <datetimepicker data-ng-model="class.add.birth" data-before-render="beforeDateRender($dates)" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', startView:'day', minView:'day' }"/>
                       </ul>
                     </div>
                 </div>
@@ -227,9 +227,9 @@
             <div class="form-group" ng-init="getCountries()">
                 <label for="" class="col-md-3 control-label">Country <span class="required">*</span></label>
                 <div class="col-md-4">
-                    <select name="country" class="form-control" ng-class="{ 'required-field' : class.fields['country'] }" ng-model="class.add.country" ng-change="getGrades(reg.country)">
+                    <select name="country" class="form-control" ng-disabled="true" ng-class="{ 'required-field' : class.fields['country'] }" ng-model="class.add.country" ng-change="getGrades(reg.country)">
                         <option value="">-- Select Country --</option>
-                        <option ng-repeat="country in countries" value="{! country.name !}">{! country.name!}</option>
+                        <option ng-selected="class.add.country_id == country.id" ng-repeat="country in countries" value="{! country.name !}">{! country.name!}</option>
                     </select>
                 </div>
             </div>
@@ -239,23 +239,23 @@
             <div class="form-group">
                 <label for="" class="col-md-3 control-label">School Name <span class="required">*</span></label>
                 <div class="col-md-4">
-                    {!! Form::text('school_code', ''
+                    {!! Form::text('school_name', ''
                         , array(
                             'class' => 'form-control'
                             , 'ng-disabled'=>'true'
-                            , 'ng-model' => 'class.add.school_code'
-                            , 'ng-class' => "{ 'required-field' : class.fields['school_code'] }"
+                            , 'ng-model' => 'class.add.school_name'
+                            , 'ng-class' => "{ 'required-field' : class.fields['school_name'] || class.fields['school_code'] }"
                         )
                     ) !!}
                 </div>
             </div>
-            <div class="form-group" ng-init="getGradeLevel()">
+            <div class="form-group">
                 <label for="" class="col-md-3 control-label">School level <span class="required">*</span></label>
 
-                <div class="col-md-4 nullable">
+                <div class="col-md-4 nullable" ng-init="class.getGradeLevel(class.add.country_id)">
                     <select name="grade_code" class="form-control" ng-disabled="true" ng-class="{ 'required-field' : class.fields['grade_code'] }" ng-model="class.add.grade_codse">
                         <option value="">-- Select Level --</option>
-                        <option ng-selected="class.add.grade_code == grade.code" ng-repeat="grade in grades" value="{! grade.code !}">{! grade.name !}</option>
+                        <option ng-selected="class.add.grade_code == grade.code" ng-repeat="grade in class.grades" value="{! grade.code !}">{! grade.name !}</option>
                     </select>
                 </div>
             </div>    

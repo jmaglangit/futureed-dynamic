@@ -153,6 +153,13 @@ div > .nav-list > li > a{
   	z-index: 9999;
 }
 
+.margin-30-top{
+	margin-top: 30px;
+}
+.top-10 {
+	position: relative;
+	top: 10px;
+}
 /*Futureed Custom DataTable Design*/
 .price-action{
 	position: relative;
@@ -190,10 +197,6 @@ table#client-list{
 }
 .row > .col-sm-5{
 	display: none;
-}
-.row > .col-xs-3{
-	position: relative;
-	bottom: 10px;
 }
 
 .td-fix{

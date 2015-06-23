@@ -22,34 +22,39 @@ class ClientCustomController extends ApiController {
      */
     public function getClient(){
 
-        $criteria = array();
+		$criteria = array();
 
-        if(Input::get('name')) {
-            $criteria['name'] = Input::get('name');
-        }
+		if (Input::get('name')) {
 
-        if(Input::get('school_code')) {
-            $criteria['school_code'] = Input::get('school_code');
-        }
+			$criteria['name'] = Input::get('name');
+		}
 
-        if(Input::get('client_role')) {
-            $criteria['client_role'] = Input::get('client_role');
-        }
+		if (Input::get('school_code')) {
 
-        $client_details = $this->client->getClientCustomDetails($criteria);
-        $client = array();
+			$criteria['school_code'] = Input::get('school_code');
+		}
 
-        foreach($client_details as  $key => $value){
+		if (Input::get('client_role')) {
 
-            $client[$key]['id'] = $value['id'];
-            $client[$key]['first_name'] = $value['first_name'];
-            $client[$key]['last_name'] = $value['last_name'];
-            $client[$key]['email'] = $value['user']['email'];
-
-        }
+			$criteria['client_role'] = Input::get('client_role');
+		}
 
 
-        return $this->respondWithData( $client);
+		$client_details = $this->client->getClientCustomDetails($criteria);
+
+		$client = array();
+
+		foreach ($client_details as $key => $value) {
+
+			$client[$key]['id'] = $value['id'];
+			$client[$key]['first_name'] = $value['first_name'];
+			$client[$key]['last_name'] = $value['last_name'];
+			$client[$key]['email'] = $value['user']['email'];
+
+		}
+
+
+		return $this->respondWithData($client);
 
 
     }

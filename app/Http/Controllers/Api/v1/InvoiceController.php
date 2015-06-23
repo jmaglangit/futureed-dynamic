@@ -104,33 +104,8 @@ class InvoiceController extends ApiController {
      */
     public function store(InvoiceRequest $request)
     {
-        // insert invoice here.
         $input = $request->all();
         $invoice = $this->invoice->addInvoice($input);
-
-        //insert order here.
-        $order_input = $request->only('order_no','client_id','subscription_id','date_start','date_end','seats_total','total_amount','payment_status');
-        $order_input['order_date'] = $input['invoice_date'];
-        $order_input['seats_taken'] = 0;
-        $order = $this->order->addOrder($order_input);
-
-        //get classrooms to create invoice details.
-        $criteria['order_no'] = $input['order_no'];
-        $classrooms = $this->classrooms->getClassrooms($criteria,0,0);
-
-        //add invoice details.
-        if($classrooms['total'] > 0)
-        {
-            $class_records = $classrooms['record']->toArray();
-            for($i = 0; $i < $classrooms['total']; $i++)
-            {
-                $order_detail['invoice_no'] = $input['invoice_no'];
-                $order_detail['class_id'] = $class_records[$i]['id'];
-                $order_detail['grade_code'] = $class_records[$i]['grade']['code'];
-
-                $result = $this->invoice_detail->addInvoiceDetail($order_detail);
-            }
-        }
 
         return $this->respondWithData($invoice);
     }
@@ -164,9 +139,38 @@ class InvoiceController extends ApiController {
      * @param  int  $id
      * @return Response
      */
-    public function update($id)
+    public function update($id,InvoiceRequest $request)
     {
-        //
+        // insert invoice here.
+        $input = $request->all();
+        $invoice = $this->invoice->updateInvoice($id,$input);
+
+        //insert order here.
+        $order_input = $request->only('order_no','client_id','subscription_id','date_start','date_end','seats_total','total_amount','payment_status');
+        $order_input['order_date'] = $input['invoice_date'];
+        $order_input['seats_taken'] = 0;
+        $order = $this->order->addOrder($order_input);
+
+        //get classrooms to create invoice details.
+        $criteria['order_no'] = $input['order_no'];
+        $classrooms = $this->classrooms->getClassrooms($criteria,0,0);
+
+        //add invoice details.
+        if($classrooms['total'] > 0)
+        {
+            $class_records = $classrooms['record']->toArray();
+            for($i = 0; $i < $classrooms['total']; $i++)
+            {
+                $order_detail['invoice_id'] = $invoice['id'];
+                $order_detail['class_id'] = $class_records[$i]['id'];
+                $order_detail['grade_id'] = $class_records[$i]['grade_id'];
+                $order_detail['price'] = $order_input['total_amount'];
+
+                $result = $this->invoice_detail->addInvoiceDetail($order_detail);
+            }
+        }
+
+        return $this->respondWithData($invoice);
     }
 
     /**

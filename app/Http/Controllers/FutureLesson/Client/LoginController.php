@@ -40,7 +40,11 @@ class LoginController extends Controller {
 
 		if($user_object->id){
 			Session::forget('client');
+			Session::forget($user_object->role);
+
 			Session::put('client', $user_data['user_data']);
+			Session::put($user_object->role, $user_data['user_data']);
+
 			return redirect()->route('client.dashboard.index');
 		}
 
@@ -54,7 +58,13 @@ class LoginController extends Controller {
 	 */
 	public function logout()
 	{
+		$user_object = json_decode(Session::get('client'));
+
 		Session::forget('client');
+		Session::forget($user_object->role);
+
+		unset($user_object);
+
 		return redirect()->route('client.login');
 	}
 	
@@ -81,12 +91,18 @@ class LoginController extends Controller {
 	 */
 	public function registration($id = null)
 	{
-		$email = Input::only('email');
+		return view('client.login.registration');
+	}
 
-		if($this->validate_email($email) && $email['email']){
-			return view('client.login.registration-invite-form');
+	public function registration_invite($id = null)
+	{
+		$input = Input::only('registration_token');
+
+		if($id && $input['registration_token']) {
+			return view('client.login.registration-invite-form', array('id' => $id, 'registration_token' => $input['registration_token']));
 		}
-		return view('client.login.registration', array('id' => $id));
+
+		return redirect()->route('client.registration');
 	}
 
 	public function registration_form() {
