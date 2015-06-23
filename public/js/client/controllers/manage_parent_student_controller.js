@@ -13,8 +13,8 @@ function ManageParentStudentController($scope, ManageParentStudentService, apiSe
 	SearchService(self);
 	self.searchDefaults();
 
-	self.reg = {};
 	self.validation = {};
+	self.reg = {};
 	self.user_type = Constants.STUDENT;
 
 	self.existActive = function(req) {
@@ -34,24 +34,30 @@ function ManageParentStudentController($scope, ManageParentStudentService, apiSe
 		$("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 
-	self.setActive = function(active, is_invite) {
+	self.setActive = function(active, id, cond) {
 		self.errors = Constants.FALSE;
-		self.is_invite = (is_invite) ? 1:0;
+		self.cond = (cond) ? 1:0;
 		
-		if(self.is_invite == 0){
+		if(self.cond == 0){
 			self.success = Constants.FALSE;
 		}
-
 		switch(active) {
 			case Constants.ACTIVE_EDIT:
+				self.active_list = Constants.FALSE;
 				self.edit_form = Constants.TRUE;
-				self.disabled = Constants.TRUE;
+				self.active_view = Constants.TRUE;
+				self.edit = Constants.TRUE;
+				self.success = Constants.FALSE;
+				self.errors = Constants.FALSE;
+				self.viewStudent(id, self.cond);
 				break;
+
 			case Constants.ACTIVE_ADD:
 				self.active_list = Constants.FALSE;
 				self.active_view = Constants.FALSE;
 				self.active_add = Constants.TRUE;
 				self.active_invite = Constants.FALSE;
+				self.exist = Constants.TRUE;
 				break;
 
 			case 'invite':
@@ -61,7 +67,17 @@ function ManageParentStudentController($scope, ManageParentStudentService, apiSe
 				self.active_invite = Constants.TRUE;
 				break;
 
+			case Constants.ACTIVE_VIEW:
+				self.active_list = Constants.FALSE;
+				self.active_add = Constants.FALSE;
+				self.active_view = Constants.TRUE;
+				self.edit_form = Constants.FALSE;
+				self.edit = Constants.FALSE;
+				self.viewStudent(id,self.cond);
+				break;
+
 			case Constants.ACTIVE_LIST:
+				self.exist = Constants.FALSE;
 				self.active_list = Constants.TRUE;
 				self.active_view = Constants.FALSE;
 				self.active_add = Constants.FALSE;
@@ -190,11 +206,15 @@ function ManageParentStudentController($scope, ManageParentStudentService, apiSe
 	}
 
 	self.checkUsernameAvailability = function() {
+		if(self.edit == 1) {
+
+			self.validation = {};
+
+		}
 		self.errors = Constants.FALSE;
 		self.validation.u_loading = Constants.TRUE;
 		self.validation.u_error = Constants.FALSE;
 		self.validation.u_success = Constants.FALSE;
-
 		if(self.detail) {
 			var username = (self.detail.username) ? self.detail.username : self.EMPTY_STR;
 		} else {
@@ -202,7 +222,6 @@ function ManageParentStudentController($scope, ManageParentStudentService, apiSe
 		}
 		apiService.validateUsername(username, self.user_type).success(function(response) {
 			self.validation.u_loading = Constants.FALSE;
-
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.validation.u_error = response.errors[0].message;
@@ -264,5 +283,63 @@ function ManageParentStudentController($scope, ManageParentStudentService, apiSe
 			self.validation.e_loading = Constants.FALSE;
 			self.errors = $scope.internalError();
 		});
+	}
+
+	self.viewStudent = function(id , cond) {
+		self.errors = Constants.FALSE;
+		self.validation = Constants.FALSE;
+		if(cond == 0){
+			self.success = Constants.FALSE;
+		}
+		self.detail = {};
+
+		$scope.ui_block();
+
+		ManageParentStudentService.viewStudent(id).success(function(response){
+			if(angular.equals(response.status,Constants.STATUS_OK)){
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					var data = response.data;
+					self.detail = response.data;
+					self.detail.email = data.user.email;
+					self.detail.username = data.user.username;
+					self.detail.new_email = data.user.new_email;
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(response){
+			$scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.saveStudent = function() {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+		self.validation = Constants.FALSE;
+
+		self.detail.birth_date = $("#student_form input[name='hidden_date']").val();
+		$scope.ui_block();
+		ManageParentStudentService.saveStudent(self.detail).success(function(response){
+			if(angular.equals(response.status, Constants.STATUS_OK)){
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+
+					angular.forEach(response.errors, function(value, key) {
+						$("#student_form input[name='" + value.field +"']").addClass("required-field");
+						$("#student_form select[name='" + value.field +"']").addClass("required-field");
+		            });
+				}else if(response.data) {
+					self.success = Constants.TRUE;
+					self.setActive('view', self.detail.id, 1);
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(response){
+			$scope.internalError();
+			$scope.ui_unblock();
+		});
+
 	}
 }

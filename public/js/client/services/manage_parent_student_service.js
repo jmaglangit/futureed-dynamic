@@ -38,5 +38,20 @@ function ManageParentStudentService($http){
 			, url 	: studentApiUrl + 'client/manage/student'
 		});
 	}
+
+	manageStudentApi.viewStudent = function(id) {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url 	: studentApiUrl + 'client/manage/student/' + id
+		});
+	}
+
+	manageStudentApi.saveStudent = function(data) {
+		return $http({
+			method 	: Constants.METHOD_PUT
+			, data 	: data
+			, url 	: studentApiUrl + 'parent-student/update-student/' + data.id
+		});
+	}
 	return manageStudentApi;
 }

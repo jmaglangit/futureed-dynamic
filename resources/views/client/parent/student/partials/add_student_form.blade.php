@@ -38,13 +38,21 @@
 						]
 					) !!}
 				</div>
-
-				<div class="col-xs-3 btn-container">
+			</div>
+			<div class="form-group">
+				<div class="col-xs-6 col-xs-offset-3 btn-container">
 					{!! Form::button('Add'
 						, array(
-							'class' => 'btn btn-blue btn-medium'
+							'class' => 'btn btn-blue btn-medium bottom-5'
 							, 'ng-disabled' => 'student.exist'
 							, 'ng-click' => 'student.addExist()'
+						)
+					) !!}
+					{!! Form::button('Cancel'
+						, array(
+							'class' => 'btn btn-gold btn-medium bottom-5'
+							, 'ng-disabled' => 'student.exist'
+							, 'ng-click' => "student.setActive('list')"
 						)
 					) !!}
 				</div>
@@ -53,7 +61,7 @@
 				<div class="col-xs-3">
 					{!! Form::radio('status'
 						,'not-exist'
-						, true
+						, false
 						, array(
 							'ng-model' => 'student.is_exist',
 							'ng-click' => "student.existActive('new')"
@@ -200,8 +208,11 @@
                         	</div>
 						</div>
 					</fieldset>
-					<div class="btn-container">
-						<div class="col-xs-4 div-right margin-40-bot">
+				</div>
+			</div>
+			<div class="col-xs-6 col-xs-offset-3">
+				<div class="btn-container">
+						<div class="margin-40-bot">
 							{!! Form::button('Add'
 								, array(
 									'class' => 'btn btn-blue btn-medium'
@@ -209,9 +220,15 @@
 									, 'ng-disabled' => '!student.exist'
 								)
 							) !!}
+							{!! Form::button('Cancel'
+								, array(
+									'class' => 'btn btn-gold btn-medium'
+									, 'ng-click' => "student.setActive('list')"
+									, 'ng-disabled' => '!student.exist'
+								)
+							) !!}
 						</div>
 					</div>
-				</div>
 			</div>
 		</div>
 	</div>
