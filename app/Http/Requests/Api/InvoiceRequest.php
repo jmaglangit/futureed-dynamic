@@ -27,16 +27,16 @@ class InvoiceRequest extends ApiRequest {
                 return [
                     'order_no' => 'required',
                     'invoice_date' => 'required|date_format:Ymd',
-                    'client_id' => 'required|numeric',
+                    'client_id' => 'required|integer',
                     'client_name' => 'required|regex:'. config('regex.name'),
                     'date_start' => 'required|date_format:Ymd',
                     'date_end' => 'required|date_format:Ymd',
                     'seats_total' => 'required|numeric|between:1,999999',
-                    'discount_type' => 'required|in:Volume,Client',
-                    'discount_id' => 'required|numeric',
+                    'discount_type' => 'in:Volume,Client',
+                    'discount_id' => 'integer',
                     'discount' => 'numeric|between:1,999.99',
                     'total_amount' => 'required|numeric|between:1,999999.99',
-                    'subscription_id' => 'required|numeric',
+                    'subscription_id' => 'required|integer',
                     'payment_status' => 'required|in:Pending,Paid,Cancelled',
                 ];
                 break;
@@ -45,12 +45,23 @@ class InvoiceRequest extends ApiRequest {
                 break;
 
             case 'POST':
-                return ['client_id' => 'required|numeric',
-                        'client_name' => 'required|regex:'. config('regex.name'),
-                        'payment_status' => 'required|in:Pending,Paid,Cancelled'];
+                return ['client_id' => 'required|integer',
+                    'client_name' => 'required|regex:'. config('regex.name'),
+                    'payment_status' => 'required|in:Pending,Paid,Cancelled'];
             default:
 
                 break;
         }
+    }
+
+    public function messages()
+    {
+        return [
+            'client_id.required' => 'Client is required.',
+            'client_id.integer' => 'Client must be a number.',
+            'subscription_id.required' => 'Subscription is required.',
+            'subscription_id.integer' => 'Subscription must be a number.',
+            'discount_id.integer' => 'Discount must be a number.'
+        ];
     }
 }
