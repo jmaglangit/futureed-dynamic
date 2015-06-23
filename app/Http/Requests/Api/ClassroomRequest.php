@@ -63,8 +63,10 @@ class ClassroomRequest extends ApiRequest {
     public function messages()
     {
         return [
-            'grade_id.required' => 'grade field is required.',
-            'client_id.required' => 'client field is required.'
+            'grade_id.required' => 'Grade is required.',
+            'grade_id.integer' =>'Grade must be a number.',
+            'client_id.required' => 'Client is required.',
+            'client_id.integer' => 'Client must be a number.'
         ];
     }
 

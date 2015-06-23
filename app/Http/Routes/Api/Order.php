@@ -9,5 +9,5 @@ Routes::group(['prefix' => '/order'], function()
 
     Routes::get('/get-order-by-order-no/{order_no}', [
         'uses' => 'Api\v1\OrderController@getOrderByOrderNo',
-        'as' => 'order.get.next-order-no']);
+        'as' => 'order.get.order-by-order-no']);
 });
