@@ -14,8 +14,8 @@ class InvoiceDetailController extends ApiController {
 
     public function __construct(InvoiceDetail $detail, InvoiceRepositoryInterface $invoice){
 
-            $this->detail = $detail;
-			$this->invoice = $invoice;
+		$this->detail = $detail;
+		$this->invoice = $invoice;
     }
 
 
@@ -46,23 +46,23 @@ class InvoiceDetailController extends ApiController {
     public function editInvoiceDetails(InvoiceDetailRequest $request)
     {
 
-        $data = $request->only('id','payment_status');
+		$data = $request->only('id', 'payment_status');
 
-        $id = $data['id'];
-        $return = $this->invoice->getInvoice($id);
+		$id = $data['id'];
+		$return = $this->invoice->getInvoice($id);
 
-        if(!$return){
+		if (!$return) {
 
-            return $this->respondErrorMessage(2120);
-        }
+			return $this->respondErrorMessage(2120);
+		}
 
 		//update invoice
-        $this->invoice->updateInvoice($id, $data);
+		$this->invoice->updateInvoice($id, $data);
 
 		//get updated invoice
 		$return = $this->invoice->getInvoice($id);
 
-        return $this->respondWithData($return);
+		return $this->respondWithData($return);
 
     }
 
