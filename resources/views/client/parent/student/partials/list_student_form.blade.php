@@ -95,10 +95,10 @@
 	    						<a href="" ng-click="student.play(key.id)"><span><i class="fa fa-play"></i></span></a>
 	    					</div>
 		            		<div class="col-xs-4">
-	    						<a href="" ng-click="student.viewStudent(key.id)"><span><i class="fa fa-eye"></i></span></a>
+	    						<a href="" ng-click="student.setActive('view', key.id)"><span><i class="fa fa-eye"></i></span></a>
 	    					</div>
 	    					<div class="col-xs-4">
-	    						<a href="" ng-click="student.editStudent(key.id)"><span><i class="fa fa-pencil"></i></span></a>
+	    						<a href="" ng-click="student.setActive('edit', key.id)"><span><i class="fa fa-pencil"></i></span></a>
 	    					</div>
 		            	</div>
 		            </td>
