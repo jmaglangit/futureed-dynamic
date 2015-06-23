@@ -37,11 +37,19 @@ function managePrincipalPaymentService($http){
 		});
 	}
 
-	managePaymentApi.addPayment = function(data) {
+	managePaymentApi.updatePayment = function(data) {
+		return $http({
+			method : Constants.METHOD_PUT
+			, data : data
+			, url  : paymentApiUrl + 'invoice/' + data.id
+		});
+	}
+
+	managePaymentApi.getPaymentUri = function(data) {
 		return $http({
 			method : Constants.METHOD_POST
 			, data : data
-			, url  : paymentApiUrl + 'invoice'
+			, url  : paymentApiUrl + 'payment'
 		});
 	}
 
@@ -53,10 +61,11 @@ function managePrincipalPaymentService($http){
 		});
 	}
 
-	managePaymentApi.getInvoiceNo = function(id) {
+	managePaymentApi.addInvoice = function(data) {
 		return $http({
-			method : Constants.METHOD_GET
-			, url  : paymentApiUrl + 'invoice/get-next-invoice-no/' + id
+			method : Constants.METHOD_POST
+			, data : data
+			, url  : paymentApiUrl + 'invoice'
 		});
 	}
 
@@ -95,6 +104,27 @@ function managePrincipalPaymentService($http){
 		return $http({
 			method : Constants.METHOD_DELETE
 			, url  : paymentApiUrl + 'classroom/delete-classroom-by-order-no/' + order_no
+		});
+	}
+
+	managePaymentApi.removeClassroom = function(id) {
+		return $http({
+			method : Constants.METHOD_DELETE
+			, url  : paymentApiUrl + 'classroom/' + id
+		});
+	}
+
+	managePaymentApi.paymentDetails = function(id) {
+		return $http({
+			method : Constants.METHOD_GET
+			, url  : paymentApiUrl + 'invoice/' + id
+		});
+	}
+
+	managePaymentApi.invoiceDetails = function(invoice_no) {
+		return $http({
+			method : Constants.METHOD_GET
+			, url  : paymentApiUrl + 'sales-invoice/details?invoice_no=' + invoice_no
 		});
 	}
 

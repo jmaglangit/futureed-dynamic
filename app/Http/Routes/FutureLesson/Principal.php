@@ -72,6 +72,11 @@
 					'as' => 'client.principal.payment.partials.add_payment_form',
 					'uses' => $manage_payment_controller . '@add_payment_form'
 				]);
+
+			Routes::get('view_payment_form', [
+					'as' => 'client.principal.payment.partials.view_payment_form',
+					'uses' => $manage_payment_controller . '@view_payment_form'
+				]);
 		});
 
 		/**
