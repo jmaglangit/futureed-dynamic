@@ -125,7 +125,7 @@
       </div>
     </div>   
     <div class="form-group">
-      <label class="col-md-2 control-label">Zip Code<span class="required" ng-if="register.required">*</span></label>
+      <label class="col-md-2 control-label">Zip Code</label>
       <div class="col-md-4">
         {!! Form::text('zip', ''
               , array(
