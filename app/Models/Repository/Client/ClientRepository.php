@@ -376,4 +376,9 @@ class ClientRepository implements ClientRepositoryInterface
 
         return $clients;
     }
+
+	public function getSchoolCode($id){
+
+		return Client::id($id)->pluck('school_code');
+	}
 }

@@ -339,14 +339,32 @@ class StudentRepository implements StudentRepositoryInterface
 
 	}
 
+
 	//get subscription
-	public function viewSubscription($id){
+	public function subscriptionExpired($id)
+	{
 
 		$student = new Student();
 
 		$student = $student->with('studentclassroom')->subscription()->id($id);
 
 		return $student->get()->toArray();
+	}
+
+	public function updateSchool($id,$school_code){
+
+		try{
+
+			return Student::find($id)
+				->update([
+					'school_code' => $school_code
+				]);
+
+		} catch (Exception $e) {
+
+			throw new Exception($e->getMessage());
+		}
+
 	}
 
 

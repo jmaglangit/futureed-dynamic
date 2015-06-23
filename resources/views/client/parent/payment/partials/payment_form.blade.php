@@ -1,4 +1,4 @@
-<div ng-if="payment.list">
+<div ng-if="payment.active_list">
 	<div class="content-title">
 		<div class="title-main-content">
 			<span>Payment Management</span>
@@ -20,7 +20,7 @@
 			<div class="form-group">
 				<label class="col-xs-2 control-label">Order # <span class="required">*</span></label>
 				<div class="col-xs-5">
-					{!! Form::text('search_order', '',['class' => 'form-control', 'ng-model' => 'payment.search_order', 'placeholder' => 'Name']) !!}
+					{!! Form::text('search_order', '',['class' => 'form-control', 'ng-model' => 'payment.search.order_no', 'placeholder' => 'Name']) !!}
 				</div>
 			</div>
 			<div class="form-group">
@@ -33,12 +33,22 @@
 							'6 months' => '6 months',
 							'12 months' => '12 months'
 						], null,
-						['ng-model' => 'payment.search_subscription', 'class' => 'form-control']
+						['ng-model' => 'payment.search.subscription', 'class' => 'form-control']
 					)!!}
 				</div>
 				<div class="btn-container col-xs-5">
-					<button class="btn btn-blue btn-medium" type="button" ng-click="teacher.getTeacherList()">Search</button>
-					<button class="btn btn-gold btn-medium" type="button" ng-click="teacher.clearSearch()">Clear</button>
+					{!! Form::button('Search'
+						, array(
+							'class' => 'btn btn-blue btn-medium'
+							, 'ng-click' => 'payment.searchFnc()'
+						)
+					) !!}
+					{!! Form::button('Clear'
+						, array(
+							'class' => 'btn btn-gold btn-medium'
+							, 'ng-click' => 'payment.clear()'
+						)
+					) !!}
 				</div>
 			</div>
 		</div>
@@ -51,7 +61,7 @@
 			Payment List
 		</div>
 	</div>
-	<div class="col-xs-12 table-container">
+	<div class="col-xs-12 table-container" ng-init="payment.list()">
 		<div class="list-container" ng-cloak>
 			<div class="size-container">
 				{!! Form::select('size'
@@ -63,9 +73,9 @@
 					)
 					, '10'
 					, array(
-						'ng-model' => 'admin.table.size'
-						, 'ng-change' => 'admin.paginateBySize()'
-						, 'ng-if' => "admin.data.length"
+						'ng-model' => 'payment.table.size'
+						, 'ng-change' => 'payment.paginateBySize()'
+						, 'ng-if' => "payment.records.length"
 						, 'class' => 'form-control paginate-size pull-right'
 					)
 				) !!}
@@ -85,7 +95,7 @@
 			    </thead>
 
 		        <tbody>
-		        <tr ng-repeat="a in admin.data">
+		        <tr ng-repeat="a in payment.records">
 		            <td>{! a.user.username !}</td>
 		            <td>{! a.user.email !}</td>
 		            <td>{! a.admin_role !}</td>
@@ -95,17 +105,17 @@
 		            <td>
 		            	<div class="row">
 		            		<div class="col-xs-3">
-	    						<a href="" ng-click="admin.viewAdmin(a.id)"><span><i class="fa fa-eye"></i></span></a>
+	    						<a href="" ng-click="payment.viewAdmin(a.id)"><span><i class="fa fa-eye"></i></span></a>
 	    					</div>
 		            	</div>
 		            </td>
 		        </tr>
-		        <tr class="odd" ng-if="!admin.data.length && !admin.table.loading">
+		        <tr class="odd" ng-if="!payment.records.length && !payment.table.loading">
 		        	<td valign="top" colspan="7" class="dataTables_empty">
 		        		No records found
 		        	</td>
 		        </tr>
-		        <tr class="odd" ng-if="admin.table.loading">
+		        <tr class="odd" ng-if="payment.table.loading">
 		        	<td valign="top" colspan="7" class="dataTables_empty">
 		        		Loading...
 		        	</td>
@@ -113,17 +123,17 @@
 		        </tbody>
 			</table>
 
-			<div class="pull-right" ng-if="admin.data.length">
+			<div class="pull-right" ng-if="payment.records.length">
 				<pagination 
-					total-items="admin.table.total_items" 
-					ng-model="admin.table.page"
-					max-size="admin.table.paging_size"
-					items-per-page="admin.table.size" 
+					total-items="payment.table.total_items" 
+					ng-model="payment.table.page"
+					max-size="payment.table.paging_size"
+					items-per-page="payment.table.size" 
 					previous-text = "&lt;"
 					next-text="&gt;"
 					class="pagination" 
 					boundary-links="true"
-					ng-change="admin.paginateByPage()">
+					ng-change="payment.paginateByPage()">
 				</pagination>
 			</div>
 		</div>

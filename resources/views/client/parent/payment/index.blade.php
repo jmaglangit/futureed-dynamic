@@ -21,4 +21,6 @@
 @section('scripts')
 	{!! Html::script('/js/client/controllers/manage_parent_payment_controller.js')!!}
 	{!! Html::script('/js/client/services/manage_parent_payment_service.js')!!}
+	{!! Html::script('/js/common/table_service.js')!!}
+	{!! Html::script('/js/common/search_service.js')!!}
 @stop

@@ -42,4 +42,6 @@ interface ClientRepositoryInterface
 
 	public function getClientToClassroom($id);
 
+	public function getSchoolCode($id);
+
 }

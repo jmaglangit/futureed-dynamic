@@ -317,6 +317,11 @@ class StudentServices {
         
         return $this->student->checkIdExist($id);
     }
+
+	public function updateSchool($id,$school_code){
+
+		return $this->student->updateSchool($id,$school_code);
+	}
     
     
 }

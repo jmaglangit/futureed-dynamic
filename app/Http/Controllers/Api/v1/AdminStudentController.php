@@ -160,7 +160,8 @@ class AdminStudentController extends ApiController {
 				return $this->respondErrorMessage(2001);
 			}
 
-			$subscription = $this->student->viewSubscription($id);
+			//check if subscription is expired or not, if not it returns a data
+			$subscription = $this->student->subscriptionExpired($id);
 
 			//for home based student
 			if($data['school_code'] == NULL){
