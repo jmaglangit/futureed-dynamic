@@ -17,7 +17,7 @@
         </div>
     </div>
 
-	<div class="container">
+	<div class="module-container">
 		{!! Form::open(['class' => 'form-horizontal', 'id' => 'change_email_form']) !!}
 		<div class="col-xs-8 col-xs-offset-2 margin-60-top">
 			<div class="form-group">
