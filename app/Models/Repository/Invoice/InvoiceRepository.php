@@ -114,26 +114,21 @@ class InvoiceRepository implements InvoiceRepositoryInterface{
 		$invoice = $invoice->select('id', 'payment_status', 'date_start', 'date_end', 'subscription_id', 'discount')
 			->with('subscription')->with('InvoiceDetail')->id($id);
 
-		$invoice = $invoice->get();
 
 		$subtotal = 0;
-		$discount = 0;
 
-		foreach ($invoice as $k => $v) {
+		$invoice = $invoice->first();
 
-			$discount = $v->discount;
+			foreach ($invoice['InvoiceDetail'] as $key => $value) {
 
-			foreach ($v->InvoiceDetail as $key => $value) {
-
-				$subtotal += $value->price;
+				$subtotal += $value['price'];
 
 			}
-		}
 
+		$invoice->price_discount= $subtotal * ($invoice['discount'] / 100);
+		$invoice->total = $subtotal - $invoice['price_discount'];
+		$invoice->subtotal =$subtotal;
 
-		$invoice['price_discount'] = $subtotal * ($discount / 100);
-		$invoice['total'] = $subtotal - $invoice['price_discount'];
-		$invoice['subtotal'] = $subtotal;
 
 		return $invoice;
 	}
