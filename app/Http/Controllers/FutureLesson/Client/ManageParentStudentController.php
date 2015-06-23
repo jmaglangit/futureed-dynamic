@@ -47,4 +47,12 @@ class ManageParentStudentController extends Controller{
 	{
 		return view('client.parent.student.partials.invitation_code_form');
 	}
+
+	/**
+	*@return Student Change Email Page
+	*/
+	public function change_email_form()
+	{
+		return view('client.parent.student.partials.change_email_form');
+	}
 }

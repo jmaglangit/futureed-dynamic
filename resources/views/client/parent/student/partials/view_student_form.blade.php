@@ -18,6 +18,9 @@
         <div class="alert alert-success" ng-if="student.success">
         	<p>Successfully edited student.</p>
         </div>
+        <div class="alert alert-success" ng-if="student.e_success">
+        	<p>{! student.e_success !}</p>
+        </div>
 		<div class="col-xs-10 col-xs-offset-1 margin-30-top">
 			<fieldset>
 				<legend class="legend-name-mid">
@@ -58,7 +61,7 @@
 						!!}
 					</div>
 					<div>
-						<a href="#" class="top-10">Edit Student's Email</a>
+						<a href="#" class="top-10" ng-click="student.setActive('change')">Edit Student's Email</a>
 					</div>
 				</div>
 				<div class="form-group" ng-if="student.detail.new_email">
