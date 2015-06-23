@@ -53,5 +53,13 @@ function ManageParentStudentService($http){
 			, url 	: studentApiUrl + 'parent-student/update-student/' + data.id
 		});
 	}
+
+	manageStudentApi.changeEmail = function(data) {
+		return $http({
+			method 	: Constants.METHOD_PUT
+			, data 	: data
+			, url 	: studentApiUrl + 'client/manage/email/student/' + data.id
+		});
+	}
 	return manageStudentApi;
 }

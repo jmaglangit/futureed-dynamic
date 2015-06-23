@@ -18,6 +18,8 @@
 			<div template-directive template-url="{!! route('client.parent.student.partials.view_student_form') !!}"></div>
 
 			<div template-directive template-url="{!! route('client.parent.student.partials.invitation_code_form') !!}"></div>
+			
+			<div template-directive template-url="{!! route('client.parent.student.partials.change_email_form') !!}"></div>
 		</div>
 	</div>
 
@@ -28,4 +30,6 @@
 	{!! Html::script('/js/client/services/manage_parent_student_service.js')!!}
 	{!! Html::script('/js/common/table_service.js')!!}
 	{!! Html::script('/js/common/search_service.js')!!}
+	{!! Html::script('/js/common/validation_service.js')!!}
+	{!! Html::script('/js/client/constants/parent_constants.js')!!}
 @stop

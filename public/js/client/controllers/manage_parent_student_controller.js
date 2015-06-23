@@ -1,9 +1,9 @@
 angular.module('futureed.controllers')
 	.controller('ManageParentStudentController', ManageParentStudentController);
 
-ManageParentStudentController.$inject = ['$scope', 'ManageParentStudentService', 'apiService', 'TableService', 'SearchService'];
+ManageParentStudentController.$inject = ['$scope', 'ManageParentStudentService', 'apiService', 'TableService', 'SearchService', 'ValidationService'];
 
-function ManageParentStudentController($scope, ManageParentStudentService, apiService, TableService, SearchService) {
+function ManageParentStudentController($scope, ManageParentStudentService, apiService, TableService, SearchService, ValidationService) {
 	var self = this;
 
 	self.students = [{}];
@@ -13,8 +13,12 @@ function ManageParentStudentController($scope, ManageParentStudentService, apiSe
 	SearchService(self);
 	self.searchDefaults();
 
+	ValidationService(self);
+	self.default();
+
 	self.validation = {};
 	self.reg = {};
+	self.change = {};
 	self.user_type = Constants.STUDENT;
 
 	self.existActive = function(req) {
@@ -35,6 +39,7 @@ function ManageParentStudentController($scope, ManageParentStudentService, apiSe
 	}
 
 	self.setActive = function(active, id, cond) {
+		self.fields = [];
 		self.errors = Constants.FALSE;
 		self.cond = (cond) ? 1:0;
 		
@@ -49,7 +54,18 @@ function ManageParentStudentController($scope, ManageParentStudentService, apiSe
 				self.edit = Constants.TRUE;
 				self.success = Constants.FALSE;
 				self.errors = Constants.FALSE;
+				self.active_change = Constants.FALSE;
 				self.viewStudent(id, self.cond);
+				break;
+
+			case 'change':
+				self.validation = {};
+				self.active_list = Constants.FALSE;
+				self.active_view = Constants.FALSE;
+				self.active_add = Constants.FALSE;
+				self.active_invite = Constants.FALSE;
+				self.exist = Constants.FALSE;
+				self.active_change = Constants.TRUE;
 				break;
 
 			case Constants.ACTIVE_ADD:
@@ -58,6 +74,7 @@ function ManageParentStudentController($scope, ManageParentStudentService, apiSe
 				self.active_add = Constants.TRUE;
 				self.active_invite = Constants.FALSE;
 				self.exist = Constants.TRUE;
+				self.active_change = Constants.FALSE;
 				break;
 
 			case 'invite':
@@ -65,6 +82,7 @@ function ManageParentStudentController($scope, ManageParentStudentService, apiSe
 				self.active_view = Constants.FALSE;
 				self.active_add = Constants.FALSE;
 				self.active_invite = Constants.TRUE;
+				self.active_change = Constants.FALSE;
 				break;
 
 			case Constants.ACTIVE_VIEW:
@@ -73,6 +91,7 @@ function ManageParentStudentController($scope, ManageParentStudentService, apiSe
 				self.active_view = Constants.TRUE;
 				self.edit_form = Constants.FALSE;
 				self.edit = Constants.FALSE;
+				self.active_change = Constants.FALSE;
 				self.viewStudent(id,self.cond);
 				break;
 
@@ -82,6 +101,7 @@ function ManageParentStudentController($scope, ManageParentStudentService, apiSe
 				self.active_view = Constants.FALSE;
 				self.active_add = Constants.FALSE;
 				self.active_invite = Constants.FALSE;
+				self.active_change = Constants.FALSE;
 				break;
 		}
 		$('input, select').removeClass('required-field');
@@ -253,12 +273,19 @@ function ManageParentStudentController($scope, ManageParentStudentService, apiSe
 	}
 
 	self.checkEmailAvailability = function() {
+		if(self.active_change == 1){
+			self.validation = {};
+		}
 		self.errors = Constants.FALSE;
 		self.validation.e_loading = Constants.TRUE;
 		self.validation.e_error = Constants.FALSE;
 		self.validation.e_success = Constants.FALSE;
 
-		var email = (self.reg.email) ? self.reg.email : Constants.EMPTY_STR;
+		if(self.change) {
+			var email = (self.change.new_email) ? self.change.new_email : self.EMPTY_STR;
+		} else {
+			var email = (self.detail.email) ? self.detail.email : self.EMPTY_STR;
+		}
 
 		apiService.validateEmail(email, self.user_type).success(function(response) {
 			self.validation.e_loading = Constants.FALSE;
@@ -341,5 +368,31 @@ function ManageParentStudentController($scope, ManageParentStudentService, apiSe
 			$scope.ui_unblock();
 		});
 
+	}
+	self.changeEmail = function() {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		$scope.ui_block();
+		self.change.id = self.detail.id;
+		self.change.client_id = $scope.user.id;
+		self.change.email = self.change.current_email;
+		var base_url = $("#base_url_form input[name='base_url']").val();
+		self.change.callback_uri = base_url + Constants.URL_CHANGE_EMAIL(angular.lowercase(Constants.STUDENT));
+
+		ManageParentStudentService.changeEmail(self.change).success(function(response){
+			if(angular.equals(response.status, Constants.STATUS_OK)){
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.e_success = ParentConstant.UPDATE_STUDENT_EMAIL_SUCCESS;
+					self.setActive('view', self.detail.id, 1);
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(response){
+			$scope.internalError();
+			$scope.ui_unblock();
+		});
 	}
 }
