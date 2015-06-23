@@ -32,4 +32,12 @@ class ManagePrincipalPaymentController extends Controller{
 	{
 		return view('client.principal.payment.partials.add_payment_form');
 	}
+
+	/**
+	* @return Principal View Partial Payment Form
+	*/
+	public function view_payment_form() 
+	{
+		return view('client.principal.payment.partials.view_payment_details');
+	}
 }

@@ -22,40 +22,44 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 	self.classroom = {};
 	self.invoice = {};
 
-	$window.addEventListener('beforeunload', function(event) {
-		managePrincipalPaymentService.cancelPayment(self.search.order_no).success(function(response) {
-			console.log(response);
-		}).error(function(response) {
-			self.errors = $scope.internalError();
-		});
-    });
-
 	self.setActive = function(active, id) {
 		self.errors = Constants.FALSE;
+		self.records = [];
+		self.validation = {};
 
 		self.active_list = Constants.FALSE;
 		self.active_add = Constants.FALSE;
+		self.active_view = Constants.FALSE;
+		self.active_edit = Constants.FALSE;
 
 		self.tableDefaults();
 		self.searchDefaults();
 
 		switch(active) {
+			case Constants.ACTIVE_VIEW:
+				self.active_view = Constants.TRUE;
+				break;
+
+			case Constants.ACTIVE_EDIT:
+				self.active_edit = Constants.TRUE;
+				break;
+
 			case Constants.ACTIVE_ADD :
 				self.fields = [];
 				self.classroom = {};
+				self.invoice = {};
 
 				self.invoice.discount = Constants.FALSE;
 				self.invoice.seats_total = Constants.FALSE;
 				self.invoice.sub_total = Constants.FALSE;
 				self.invoice.total_amount = Constants.FALSE;
 
-
-
 				self.active_add = Constants.TRUE;
 				break;
 
 			case Constants.ACTIVE_LIST:
 			default:
+				self.success = Constants.FALSE;
 				self.active_list = Constants.TRUE;
 				break;
 		}
@@ -120,9 +124,9 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 		});
 	}
 
-	self.listClassroom = function() {
+	self.listClassroom = function(order_no) {
 		self.classrooms = [];
-		self.search.order_no = self.invoice.order_no;
+		self.search.order_no = order_no;
 
 		$scope.ui_block();
 		managePrincipalPaymentService.listClassrooms(self.search, self.table).success(function(response) {
@@ -146,26 +150,68 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 		});
 	}
 
-	self.addPayment = function() {
-		self.errors = Constants.FALSE;
-		self.success = Constants.FALSE;
-
-		self.invoice.payment_status = "Pending";
-		self.invoice.invoice_date = $filter('date')(new Date(), 'yyyyMMdd');
-		self.invoice.client_id = $scope.user.id;
-		self.invoice.client_name = $scope.user.first_name + " " + $scope.user.last_name;
+	self.listInvoiceDetails = function(invoice_no) {
+		self.records = [];
 
 		$scope.ui_block();
-		managePrincipalPaymentService.addPayment(self.invoice).success(function(response) {
+		managePrincipalPaymentService.invoiceDetails(invoice_no).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
-					console.log(response.data);
+					self.records = response.data.record;
+					angular.forEach(self.classrooms, function(value, key) {
+						value.price = Constants.FALSE;
+					});
+
+					self.updatePageCount(response.data);
 				}
 			}
 
 			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.addPayment = function() {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+		self.invoice.invoice_date = $filter('date')(new Date(), 'yyyyMMdd');
+		self.invoice.invoice_id = self.invoice.id;
+
+		$scope.ui_block();
+		managePrincipalPaymentService.updatePayment(self.invoice).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+					$scope.ui_unblock();
+				} else if(response.data) {
+					self.getPaymentUri();
+				}
+			}
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.getPaymentUri = function() {
+		self.payment = {};
+		self.payment.invoice_id = self.invoice.id;
+		self.payment.quantity = Constants.TRUE;
+		self.payment.price = self.invoice.total_amount;
+
+		managePrincipalPaymentService.getPaymentUri(self.payment).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+					$scope.ui_unblock();
+				} else if(response.data) {
+					$window.location.href = response.data.url;
+				}
+			}
 		}).error(function(response) {
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
@@ -175,14 +221,14 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 	/**
 	* Get unique order number.
 	*/
-	self.getOrderNo = function(callback) {
+	self.getOrderNo = function() {
 		managePrincipalPaymentService.getOrderNo($scope.user.id).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					self.invoice.order_no = response.data;
-					self.listClassroom()
+					self.listClassroom(self.invoice.order_no);
 				}
 			}
 		}).error(function(response) {
@@ -190,19 +236,20 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 		});
 	}
 
-	/**
-	* Get Unique invoice number
-	*/
-	self.getInvoiceNo = function() {
-		managePrincipalPaymentService.getInvoiceNo($scope.user.id).success(function(response) {
+	self.addInvoice = function() {
+		self.invoice.client_id = $scope.user.id;
+		self.invoice.client_name = $scope.user.first_name + " " + $scope.user.last_name;
+		self.invoice.payment_status = "Pending";
+
+		managePrincipalPaymentService.addInvoice(self.invoice).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
-					self.invoice.invoice_no = response.data;
+					self.invoice.id = response.data.id;
 				}
 			}
-		}).error(function(response) {
+		}).error(function() {
 			self.errors = $scope.internalError();
 		});
 	}
@@ -212,7 +259,7 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 			if(response.errors) {
 				self.errors = $scope.errorHandler(response.errors);
 			} else if(response.data) {
-				self.classroom.school_code = response.data.school_code;
+				self.invoice.school_code = response.data.school_code;
 			}
 		}).error(function(response) {
 			self.errors = $scope.internalError();
@@ -221,26 +268,29 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 
 	self.suggestTeacher = function() {
 		self.errors = Constants.FALSE;
-
+		self.teachers = {};
+		self.validation = {};
+		self.validation.c_loading = Constants.TRUE;
 		self.classroom.client_role = Constants.TEACHER;
+		self.classroom.school_code = self.invoice.school_code;
 
 		managePrincipalPaymentService.getTeacherDetails(self.classroom).success(function(response) {
-			// self.validation.c_loading = Constants.FALSE;
+			self.validation.c_loading = Constants.FALSE;
 			
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if (response.errors) {
-					// self.validation.c_error = response.errors[0].message;
+					self.validation.c_error = response.errors[0].message;
 				} else if(response.data) {
 					if(response.data.length) {
 						self.teachers = response.data;
 					} else {
-						// self.validation.c_error = "Client does not exist.";
+						self.validation.c_error = Constants.MSG_U_NOTEXIST;
 					}
 				}
 			}
 		}).error(function(response) {
 			self.errors = $scope.internalError();
-			// self.validation.c_loading = Constants.FALSE;
+			self.validation.c_loading = Constants.FALSE;
 		});
 	}
 
@@ -256,6 +306,7 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 
 		self.fields = [];
 		self.classroom = {};
+		self.validation = {};
 
 		$("html, body").animate({ scrollTop: 0 }, "slow");
 	}
@@ -282,7 +333,7 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 					self.classroom = {};
 					self.search = {};
 					self.success = "Successfully added a new classroom.";
-					self.getOrderNo();
+					self.listClassroom(self.invoice.order_no);
 
 					$("html, body").animate({ scrollTop: 0 }, "slow");
 				}
@@ -295,8 +346,30 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 		});
 	}
 
+	self.removeClassroom = function(id) {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		$scope.ui_block();
+		managePrincipalPaymentService.removeClassroom(id).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.listClassroom(self.invoice.order_no);
+				}
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
 	self.setPrice = function(subscription) {
 		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
 		self.invoice.seats_total = Constants.FALSE;
 
 		$scope.ui_block();
@@ -376,5 +449,24 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 		}).error(function(response) {
 			self.errors = $scope.internalError();
 		});
+	}
+
+	self.paymentDetails = function(id, active) {
+		self.errors = Constants.FALSE;
+
+		$scope.ui_block();
+		managePrincipalPaymentService.paymentDetails(id).success(function(response) {
+			if(response.errors) {
+				self.errors = $scope.errorHandler(response.errors);
+			} else if(response.data) {
+				self.record = response.data;
+				self.setActive(active);
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});;
 	}
 }

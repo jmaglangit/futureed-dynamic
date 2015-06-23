@@ -97,17 +97,21 @@
 			    </thead>
 
 		        <tbody>
-		        <tr ng-repeat="payment in payment.records">
-		            <td>{! payment.order_no !}</td>
-		            <td>{! payment.subscription !}</td>
-		            <td>{! payment.date_start | ddMMyyyy !}</td>
-		            <td>{! payment.date_end | ddMMyyyy !}</td>
-		            <td>{! payment.seats_total !}</td>
-		            <td>{! payment.total_amount !}</td>
+		        <tr ng-repeat="record in payment.records">
+		            <td>{! record.order_no !}</td>
+		            <td>{! record.subscription.name !}</td>
+		            <td>{! record.date_start | ddMMyyyy !}</td>
+		            <td>{! record.date_end | ddMMyyyy !}</td>
+		            <td>{! record.seats_total !}</td>
+		            <td>{! record.total_amount !}</td>
 		            <td>
 		            	<div class="row">
-		            		<div class="col-xs-12">
-	    						<a href="" ng-click="admin.viewAdmin(a.id)"><span><i class="fa fa-eye"></i></span></a>
+		            		<div class="col-xs-6">
+	    						<a href="" ng-click="payment.paymentDetails(record.id, futureed.ACTIVE_VIEW)"><span><i class="fa fa-eye"></i></span></a>
+	    					</div>
+
+	    					<div class="col-xs-6">
+	    						<a href="" ng-click="payment.paymentDetails(record.id, futureed.ACTIVE_EDIT)"><span><i class="fa fa-pencil"></i></span></a>
 	    					</div>
 		            	</div>
 		            </td>

@@ -61,6 +61,11 @@
 							</ul>
 						</div>
 	        		</div>
+
+	        		<div class="margin-top-8" ng-if="payment.validation.c_loading || payment.validation.c_error"> 
+		                <i ng-if="payment.validation.c_loading" class="fa fa-spinner fa-spin"></i>
+		                <span ng-if="payment.validation.c_error" class="error-msg-con">{! payment.validation.c_error !}</span>
+		            </div>
 	        	</div>
 	        	<div class="form-group">
 	        		<label class="col-xs-4 control-label">Class <span class="required">*</span></label>
@@ -70,6 +75,7 @@
 	        					'placeHolder' => 'Class'
 	        					, 'ng-model' => 'payment.classroom.name'
 	        					, 'ng-class' => "{ 'required-field' : payment.fields['name'] }"
+	        					, 'autocomplete' => 'off'
 	        					, 'class' => 'form-control'
 	        				)
 	        			) !!}
@@ -129,7 +135,7 @@
 		</div>
 	</div>
 
-	<div class="col-xs-12 table-container" ng-init="payment.getInvoiceNo()">
+	<div class="col-xs-12 table-container" ng-init="payment.addInvoice()">
 		<div class="list-container" ng-cloak>
 			<table class="table table-striped table-bordered">
 				<thead>
@@ -153,7 +159,7 @@
 		            <td>
 		            	<div class="row">
 		            		<div class="col-xs-12">
-	    						<a href="" ng-click="payment.confirmRemove(room.id)"><span><i class="fa fa-trash"></i></span></a>
+	    						<a href="" ng-click="payment.removeClassroom(room.id)"><span><i class="fa fa-trash"></i></span></a>
 	    					</div>
 		            	</div>
 		            </td>
@@ -219,7 +225,7 @@
 		<div class="col-xs-12 margin-30-bot">
 			<div class="col-xs-6 div-right">
 				<div class="btn-container">
-					{!! Form::button('Add Payment'
+					{!! Form::button('Pay Subscription'
 	        			, array(
 	        				'class' => 'btn btn-blue btn-medium'
 	        				, 'ng-click' => 'payment.addPayment()'
