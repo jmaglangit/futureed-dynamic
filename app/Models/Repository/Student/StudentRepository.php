@@ -339,5 +339,15 @@ class StudentRepository implements StudentRepositoryInterface
 
 	}
 
+	//get subscription
+	public function viewSubscription($id){
+
+		$student = new Student();
+
+		$student = $student->with('studentclassroom')->subscription()->id($id);
+
+		return $student->get()->toArray();
+	}
+
 
 }

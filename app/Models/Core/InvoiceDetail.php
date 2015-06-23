@@ -22,7 +22,7 @@ class InvoiceDetail extends Model {
 
     public function invoice(){
 
-        return $this->hasMany('FutureEd\Models\Core\Invoice','invoice_no','invoice_no');
+        return $this->hasMany('FutureEd\Models\Core\Invoice','id','invoice_id');
 
     }
 

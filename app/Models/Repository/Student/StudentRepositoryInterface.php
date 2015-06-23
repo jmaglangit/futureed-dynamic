@@ -49,4 +49,6 @@ interface StudentRepositoryInterface {
 
 	public function viewStudentByToken($id,$reg_token);
 
+	public function viewSubscription($id);
+
 }

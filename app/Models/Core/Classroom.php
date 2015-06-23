@@ -39,6 +39,12 @@ class Classroom extends Model {
         return $this->belongsTo('FutureEd\Models\Core\ClassStudent');
     }
 
+	public function invoiceDetails(){
+
+		return $this->belongsTo('FutureEd\Models\Core\InvoiceDetail', 'id','class_id');
+
+	}
+
 
     //Scopes
 

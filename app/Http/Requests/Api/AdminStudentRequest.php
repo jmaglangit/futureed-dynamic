@@ -46,7 +46,7 @@ class AdminStudentRequest extends ApiRequest {
 					'state' => 'required|string',
 					'country' => 'string',
 					'country_id' => 'required|integer',
-					'school_code' => 'required|integer',
+					'school_code' => 'integer',
 					'grade_code' => 'required|integer',
 					'callback_uri' => 'required|string',
 				];
@@ -63,7 +63,7 @@ class AdminStudentRequest extends ApiRequest {
 					'state' => 'required|string',
 					'country' => 'string',
 					'country_id' => 'required|integer',
-					'school_code' => 'required|integer',
+					'school_code' => 'integer',
 					'grade_code' => 'required|integer'];
 				break;
 
