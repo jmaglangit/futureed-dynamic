@@ -14,8 +14,33 @@ use League\Flysystem\Exception;
 class StudentRepository implements StudentRepositoryInterface
 {
 
-	public function getStudents()
+	public function getStudents($criteria = array(), $limit = 0, $offset = 0)
 	{
+
+		$student = new Student();
+
+		if(isset($criteria['name'])){
+
+			$student = $student->name($criteria['name']);
+		}
+
+		$student = $student->with('user');
+
+		$count = $student->get()->count();
+
+		if ($offset >= 0 && $limit > 0) {
+
+			$student = $student->skip($offset)->take($limit);
+		}
+
+		$records = $student->get();
+
+
+		Return [
+			'total' => $count,
+			'record' => $records
+		];
+
 
 	}
 

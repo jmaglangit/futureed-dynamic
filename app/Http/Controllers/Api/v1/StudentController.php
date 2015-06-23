@@ -16,7 +16,21 @@ class StudentController extends ApiController {
 	 */
 	public function index()
 	{
-		//
+		$criteria = [];
+
+		//get name
+		if(Input::get('name')){
+
+			$criteria['name'] = Input::get('name');
+		}
+
+		$limit = (Input::get('limit')) ? Input::get('limit') : 0;
+
+		$offset = (Input::get('offset')) ? Input::get('offset') : 0;
+
+
+		return $this->student->getStudents($criteria , $limit, $offset );
+
 	}
 
 	/**
