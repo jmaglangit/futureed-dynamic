@@ -39,6 +39,11 @@ class ClassStudent extends Model {
 		return $this->belongsTo('FutureEd\Models\Core\Student')->with('user');
 	}
 
+	public function classroom()
+	{
+		return $this->belongsTo('FutureEd\Models\Core\Classroom', 'class_id', 'id')->with('order');
+	}
+
 
 	//Scopes
 
@@ -59,8 +64,6 @@ class ClassStudent extends Model {
 
 	}
 
-
-	//-------------scopes
 	public function scopeEmail($query, $email)
 	{
 
@@ -70,9 +73,23 @@ class ClassStudent extends Model {
 
 	}
 
-	//-------------relationships
-	public function classroom()
-	{
-		return $this->belongsTo('FutureEd\Models\Core\Classroom', 'class_id', 'id');
+	public function scopeStudentId($query,$student_id){
+
+		return $query->where('student_id',$student_id);
 	}
+
+	public function scopeCurrentDate($query,$current_date){
+
+		return $query->whereHas('classroom', function ($query) use ($current_date) {
+
+			$query->whereHas('order', function ($query) use ($current_date) {
+
+				$query->where('date_start', '<=', $current_date)
+
+					->where('date_end', '>=', $current_date);
+			});
+		});
+	}
+
+
 }
