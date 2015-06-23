@@ -64,12 +64,12 @@
         		Personal Information
         	</legend>
         	<div class="form-group">
-        		<label class="control-label col-xs-2">Firstname <span class="required">*</span></label>
+        		<label class="control-label col-xs-2">First Name <span class="required">*</span></label>
         		<div class="col-xs-4">
         			{!! Form::text('first_name','',
         				array('class' => 'form-control'
         					 	, 'ng-model' => 'student.reg.first_name'
-        					 	, 'placeHolder' => 'Firstname'
+        					 	, 'placeHolder' => 'First Name'
         					 )
         				)!!}
         		</div>
@@ -84,12 +84,12 @@
         		</div>
         	</div>
         	<div class="form-group">
-        		<label class="control-label col-xs-2">Lastname <span class="required">*</span></label>
+        		<label class="control-label col-xs-2">Last Name <span class="required">*</span></label>
         		<div class="col-xs-4">
         			{!! Form::text('last_name','',
         				array('class' => 'form-control'
         					 	, 'ng-model' => 'student.reg.last_name'
-        					 	, 'placeHolder' => 'Lastname'
+        					 	, 'placeHolder' => 'Last Name'
         					 )
         				)!!}
         		</div>
@@ -143,32 +143,6 @@
         </fieldset>
         <fieldset>
         	<legend class="legend-name-mid">School Information</legend>
-        	<div class="form-group">
-        		<label class="control-label col-xs-2">School Name <span class="required">*</span></label>
-        		<div class="col-xs-5">
-        			{!! Form::text('school_code',''
-	        				, array(
-	        					'placeHolder' => 'School Name'
-	        					, 'id' => 'school_code'
-	        					, 'ng-model' => 'student.reg.school_name'
-	        					, 'ng-change' => "student.searchSchool('create')"
-                        		, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
-	        					, 'class' => 'form-control'
-	        				)
-	        			) !!}
-        			<div class="angucomplete-holder" ng-if="student.schools">
-						<ul class="col-xs-5 angucomplete-dropdown">
-							<li class="angucomplete-row" ng-repeat="school in student.schools" ng-click="student.selectSchool(school)">
-								{! school.name !}
-							</li>
-						</ul>
-					</div>
-        		</div>
-        		<div class="margin-top-8"> 
-		                <i ng-if="student.validation.s_loading" class="fa fa-spinner fa-spin"></i>
-		                <span ng-if="student.validation.s_error" class="error-msg-con">{! student.validation.s_error !}</span>
-		            </div>
-        	</div>
         	<div class="form-group" ng-init="student.getGrades()">
         		<label class="control-label col-xs-2">Grade <span class="required">*</span></label>
         		<div class="col-xs-5">
