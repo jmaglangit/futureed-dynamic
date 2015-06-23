@@ -53,9 +53,4 @@ class OrderController extends ApiController {
         $new_order_no = $order_no['id'] + 1;
         return $this->respondWithData($this->invoice_service->createOrderNo($client_id,$new_order_no));
     }
-
-    public function getOrderByOrderNo($order_no){
-        dd($this->order->getOrderByOrderNo($order_no));
-        return $this->respondWithData($this->order->getOrderByOrderNo($order_no));
-    }
 }
