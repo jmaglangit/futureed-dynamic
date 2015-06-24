@@ -26,15 +26,12 @@
 			<div class="form-group">
 				<label class="col-xs-2 control-label">Subscription Name <span class="required">*</span></label>
 				<div class="col-xs-5">
-					{!! Form::select('gender',
-						[
-							'' => '-- Select Subscription --',
-							'3 months' => '3 months',
-							'6 months' => '6 months',
-							'12 months' => '12 months'
-						], null,
-						['ng-model' => 'payment.search.subscription', 'class' => 'form-control']
-					)!!}
+					<select name="subscription" ng-model="payment.search.subscription_name" ng-disabled="!payment.subscriptions.length" ng-init="payment.getSubscriptionList()"
+									id="subscription" 
+									class="form-control">
+		                        <option value="">-- Select Subscription --</option>
+		                        <option ng-repeat="subscription in payment.subscriptions" value="{! subscription.name !}">{! subscription.name!}</option>
+		                    </select>
 				</div>
 				<div class="btn-container col-xs-5">
 					{!! Form::button('Search'
@@ -95,17 +92,17 @@
 			    </thead>
 
 		        <tbody>
-		        <tr ng-repeat="a in payment.records">
-		            <td>{! a.user.username !}</td>
-		            <td>{! a.user.email !}</td>
-		            <td>{! a.admin_role !}</td>
-		            <td>{! a.admin_role !}</td>
-		            <td>{! a.admin_role !}</td>
-		            <td>{! a.admin_role !}</td>
+		        <tr ng-repeat="key in payment.records">
+		            <td>{! key.order_no !}</td>
+		            <td>{! key.subscription.name !}</td>
+		            <td>{! key.date_start !}</td>
+		            <td>{! key.date_end !}</td>
+		            <td>{! key.seats_total !}</td>
+		            <td>{! key.total_amount !}</td>
 		            <td>
 		            	<div class="row">
-		            		<div class="col-xs-3">
-	    						<a href="" ng-click="payment.viewAdmin(a.id)"><span><i class="fa fa-eye"></i></span></a>
+		            		<div>
+	    						<a href="" ng-click="payment.setActive('view', key.id)"><span><i class="fa fa-eye"></i></span></a>
 	    					</div>
 		            	</div>
 		            </td>
