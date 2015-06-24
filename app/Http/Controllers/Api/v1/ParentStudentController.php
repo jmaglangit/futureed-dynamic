@@ -362,7 +362,8 @@ class ParentStudentController extends ApiController {
             return $this->respondErrorMessage(2037);
         }
 
-        $check_order_detail = $this->order_details->getOrderDetailByStudentId($student_id);
+        $order_id = $request->only('order_id');
+        $check_order_detail = $this->order_details->getOrderDetailByOrderIdAndStudentId($order_id['order_id'],$student_id);
         if(!is_null($check_order_detail)){
             return $this->respondErrorMessage(2040);
         }
@@ -408,7 +409,8 @@ class ParentStudentController extends ApiController {
             return $this->respondErrorMessage(2037);
         }
 
-        $check_order_detail = $this->order_details->getOrderDetailByStudentId($student_id);
+        $order_id = $request->only('order_id');
+        $check_order_detail = $this->order_details->getOrderDetailByOrderIdAndStudentId($order_id['order_id'],$student_id);
         if(!is_null($check_order_detail)){
             return $this->respondErrorMessage(2040);
         }
