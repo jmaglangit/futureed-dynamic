@@ -13,36 +13,36 @@ class AppServiceProvider extends ServiceProvider {
 	public function boot()
 	{
 		#TODO: Find a cleaner way for this
-	
-		Validator::extend('custom_password', function($attribute, $value, $parameters) {
+
+		Validator::extend('custom_password', function ($attribute, $value, $parameters) {
 			$valid = true;
-			
-			if (!preg_match("#[0-9]+#", $value)){
-			
+
+			if (!preg_match("#[0-9]+#", $value)) {
+
 				$valid = false;
-			
+
 			}
-			
-			if(!preg_match("#[a-z]+#", $value)){
-			
+
+			if (!preg_match("#[a-zA-Z]+#", $value)) {
+
 				$valid = false;
-			
+
 			}
-			
-			if(!preg_match("#[A-Z]+#", $value)){
-			
+
+			//to do put min to config
+			if (strlen($value) < 8) {
+
 				$valid = false;
-				
 			}
-			
-			if(!preg_match("#[\W ]+#", $value)){
-			
+
+			//to do put max to config
+			if (strlen($value) > 32) {
+
 				$valid = false;
-				
 			}
-			
+
 			return $valid;
-		
+
 		});
 	}
 

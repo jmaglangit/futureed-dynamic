@@ -28,4 +28,12 @@ class InvoiceDetailRepository implements InvoiceDetailRepositoryInterface{
             return $e->getMessage();
         }
     }
+
+    public function deleteInvoiceDetailByInvoiceId($invoice_id){
+        try{
+            return InvoiceDetail::invoiceId($invoice_id)->delete();
+        }catch (\Exception $e){
+            return $e->getMessage();
+        }
+    }
 }
