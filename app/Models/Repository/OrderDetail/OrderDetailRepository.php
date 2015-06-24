@@ -29,13 +29,22 @@ class OrderDetailRepository implements OrderDetailRepositoryInterface{
     }
 
     /**
-     * Get order details by student id
+     * Get order details by student id and order_id
      * @param $order_id
      * @return object
      */
     public function getOrderDetailByStudentId($student_id){
         try{
             $result = OrderDetail::studentId($student_id)->first();
+            return is_null($result) ? null : $result->toArray();
+        }catch (\Exception $e){
+            return $e->getMessage();
+        }
+    }
+
+    public function getOrderDetailByOrderIdAndStudentId($order_id,$student_id){
+        try{
+            $result = OrderDetail::studentId($student_id)->orderId($order_id)->first();
             return is_null($result) ? null : $result->toArray();
         }catch (\Exception $e){
             return $e->getMessage();
