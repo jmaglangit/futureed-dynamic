@@ -271,7 +271,7 @@
 				      <div class="col-md-4" ng-init="getCountries()">
 				        <select  name="school_country" class="form-control" ng-disabled="client.active_view_client" ng-model="client.details.school_country">
 				          <option ng-selected="true" value="">-- Select Country --</option>
-				          <option ng-selected="{! client.details.school_country == country.name !}" ng-repeat="country in countries" value="{! country.name !}">{! country.name!}</option>
+				          <option ng-selected="{! client.details.school_country == country.id !}" ng-repeat="country in countries" ng-value="{! country.id !}">{! country.name!}</option>
 				        </select>
 				      </div>
 	        	</div>
@@ -367,7 +367,7 @@
 				      <div class="col-md-4" ng-init="getCountries()">
 				        <select  name="country" class="form-control" ng-disabled="client.active_view_client" ng-model="client.details.country">
 				          <option ng-selected="true" value="">-- Select Country --</option>
-				          <option ng-selected="{! client.details.country == country.name !}" ng-repeat="country in countries" value="{! country.name !}">{! country.name!}</option>
+				          <option ng-selected="{! client.details.country == country.id !}" ng-repeat="country in countries" ng-value="{! country.id !}">{! country.name!}</option>
 				        </select>
 				      </div>
 	        	</div>
