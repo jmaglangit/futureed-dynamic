@@ -121,7 +121,7 @@ class ClientServices {
         if($client['client_role'] == 'Parent'){
 
             $clientOutput = ['id','first_name','last_name','street_address',
-                            'city','state','country','zip','client_role','account_status','country_id'];
+                            'city','state','country','zip','client_role','account_status','country_id','user_id'];
 
             foreach ($client as $key => $value) {
             
