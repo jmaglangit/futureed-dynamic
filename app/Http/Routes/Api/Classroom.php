@@ -30,4 +30,9 @@ Routes::group(['prefix' => '/classroom'], function()
     Routes::put('/update-invoice-classroom/{id}', [
         'uses' => 'Api\v1\ClassroomController@update',
         'as' => 'classroom.update.invoice-classroom']);
+
+    Routes::get('/get-classroom-by-order-no/{order_no}', [
+        'uses' => 'Api\v1\ClassroomController@getClassroomByOrderNo',
+        'as' => 'classroom.update.invoice-classroom']);
+
 });
