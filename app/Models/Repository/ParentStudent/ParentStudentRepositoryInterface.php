@@ -14,4 +14,6 @@ interface ParentStudentRepositoryInterface {
     public function deleteParentStudent($id);
 
     public function deleteParentStudentByParentId($parent_id);
+
+    public function getParentStudents($criteria);
 }
