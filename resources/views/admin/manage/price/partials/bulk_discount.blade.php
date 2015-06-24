@@ -11,7 +11,7 @@
   	<div class="row" ng-if="sale.active_bulk_settings_add">
 	    <div class="col-xs-12">
 			<div class="title-mid">
-				Add Bulk
+				Add Bulk Discount
 			</div>
 		</div>
   	</div>
@@ -19,7 +19,7 @@
   	<div class="row" ng-if="sale.active_bulk_settings_edit">
 	    <div class="col-xs-12">
 			<div class="title-mid">
-				Edit Bulk
+				Edit Bulk Discount
 			</div>
 		</div>
   	</div>
@@ -148,7 +148,7 @@
 		<table id="bulk-list" class="table table-striped table-bordered">
 			<thead>
 		        <tr>
-		            <th>Bulk Number</th>
+		            <th>Minimum Seats</th>
 		            <th>Discount</th>
 		            <th>Action</th>
 		        </tr>
