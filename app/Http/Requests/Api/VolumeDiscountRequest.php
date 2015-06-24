@@ -19,9 +19,30 @@ class VolumeDiscountRequest extends ApiRequest {
 	 * @return array
 	 */
 	public function rules() {
-        return ['min_seats'     => 'required|numeric|min:1|max:30000|unique:volume_discounts,min_seats,NULL,id,deleted_at,NULL',
-    			'percentage'    => 'required|numeric|min:1|max:100',
-    			'status'        => 'required|in:Enabled,Disabled'];
+		Switch ($this->method()) {
+
+			case 'POST':
+
+				return [
+					'min_seats' => 'required|numeric|min:1|max:30000|unique:volume_discounts,min_seats,NULL,id,deleted_at,NULL',
+					'percentage' => 'required|numeric|min:1|max:100',
+					'status' => 'required|in:Enabled,Disabled'
+				];
+
+				break;
+
+			case 'PUT':
+
+				return [
+					'min_seats' => 'required|numeric|min:1|max:30000',
+					'percentage' => 'required|numeric|min:1|max:100',
+					'status' => 'required|in:Enabled,Disabled'
+				];
+
+				break;
+
+		}
+
 	}
 	
 	/**
