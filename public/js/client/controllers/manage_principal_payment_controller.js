@@ -40,10 +40,6 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 				self.active_view = Constants.TRUE;
 				break;
 
-			case Constants.ACTIVE_EDIT:
-				self.active_edit = Constants.TRUE;
-				break;
-
 			case Constants.ACTIVE_ADD :
 				self.fields = [];
 				self.classroom = {};
@@ -143,7 +139,7 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 					if(self.invoice.subscription) {
 						self.setPrice(self.invoice.subscription);
 					}
-
+					
 					self.updatePageCount(response.data);
 				}
 			}
@@ -360,14 +356,11 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 		self.invoice.seats_total = Constants.FALSE;
 		self.invoice.sub_total = Constants.FALSE;
 		self.invoice.total_amount = Constants.FALSE;
-		self.invoice.discount = Constants.FALSE;
-		self.invoice.discount_id = Constants.EMPTY_STR;
-		self.invoice.discount_type = Constants.EMPTY_STR;
 
 		if(!subscription) {
-			self.invoice.seats_total = Constants.FALSE;
 			self.invoice.dis_date_start = Constants.EMPTY_STR;
 			self.invoice.date_start = Constants.EMPTY_STR;
+
 			self.invoice.dis_date_end = Constants.EMPTY_STR;
 			self.invoice.date_end = Constants.EMPTY_STR;
 		}
@@ -378,8 +371,10 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 				self.errors = $scope.errorHandler(response.errors);
 			} else if(response.data) {
 				var subscription = response.data;
+				self.invoice.subscription = subscription;
+				
 				var price = Constants.FALSE;
-
+				
 				if(!angular.equals(self.invoice.payment_status, Constants.PENDING)) {
 					self.invoice.dis_date_start = $filter('date')(new Date(self.invoice.date_start), 'dd/MM/yyyy');
 					self.invoice.dis_date_end = $filter('date')(new Date(self.invoice.date_end), 'dd/MM/yyyy');
@@ -388,7 +383,12 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 					});
 
 					self.invoice.sub_total = subscription.price * self.invoice.seats_total;
+					self.invoice.total_amount = self.invoice.sub_total - ( self.invoice.sub_total * (self.invoice.discount / 100) );
 				} else {
+					self.invoice.discount = Constants.FALSE;
+					self.invoice.discount_id = Constants.EMPTY_STR;
+					self.invoice.discount_type = Constants.EMPTY_STR;
+
 					if(subscription.price) {
 						var date = new Date();
 							self.invoice.date_start = $filter('date')(date, 'yyyyMMdd');
@@ -409,10 +409,10 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 							value.price = Constants.FALSE;
 						});
 					}
-				}
 
-				if(self.invoice.sub_total) {
-					self.getDiscount();
+					if(self.invoice.sub_total) {
+						self.getDiscount();
+					}
 				}
 			}
 
@@ -441,7 +441,7 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 					self.invoice.discount_type = "Client";
 					self.invoice.total_amount = self.invoice.sub_total - ( self.invoice.sub_total * (self.invoice.discount / 100) );
 				} else {
-					self.getBulkDiscount(self.invoice.total_seats);
+					self.getBulkDiscount(self.invoice.seats_total);
 				}
 			}
 		});

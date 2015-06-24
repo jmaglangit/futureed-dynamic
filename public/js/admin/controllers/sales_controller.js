@@ -488,7 +488,7 @@ function SalesController($scope, salesService, TableService) {
 			}
 			$scope.ui_unblock();
 		}).error(function(response){
-			self.internalError();
+			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
 	}
