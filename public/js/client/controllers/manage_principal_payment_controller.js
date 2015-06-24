@@ -182,6 +182,12 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 		self.payment.invoice_id = self.invoice.id;
 		self.payment.quantity = Constants.TRUE;
 		self.payment.price = self.invoice.total_amount;
+		self.payment.client_id = self.invoice.client_id;
+		self.payment.order_no = self.invoice.order_no;
+
+		var base_url = $("#base_url_form input[name='base_url']").val();
+		self.payment.success_callback_uri = base_url + "/" + angular.lowercase(Constants.CLIENT) + "/principal/payment/success"
+		self.payment.fail_callback_uri = base_url + "/" + angular.lowercase(Constants.CLIENT) + "/principal/payment/fail"
 
 		managePrincipalPaymentService.getPaymentUri(self.payment).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
