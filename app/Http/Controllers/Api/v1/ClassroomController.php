@@ -135,4 +135,19 @@ class ClassroomController extends ApiController {
         return $this->respondWithData($this->classroom->deleteClassroomByOrderNo($order_no));
     }
 
+    public function getClassroomByOrderNo($order_no){
+
+        $result = $this->classroom->getClassroomByOrderNo($order_no);
+
+        if(count($result) > 0 ){
+            foreach($result as $res){
+                $data['class_name'] = $res->name;
+                $data['email'] = $res->client->user->email;
+                $data['username'] = $res->client->user->username;
+            }
+        }
+
+
+        //return $this->respondWithData($this->classroom->getClassroomByOrderNo($order_no));
+    }
 }

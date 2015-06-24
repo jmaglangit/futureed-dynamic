@@ -32,9 +32,14 @@ class PaymentRequest extends ApiRequest {
             case 'POST':
             default:
                 return [
-                    'invoice_id' => 'required|numeric',
+                    'client_id' => 'integer',
+                    'invoice_id' => 'required|integer',
+                    'order_no' => 'required',
                     'quantity' => 'required|numeric',
-                    'price' => 'required|numeric'];
+                    'price' => 'required|numeric',
+                    'success_callback_uri'=>'string',
+                    'fail_callback_uri'=>'string',
+                ];
         }
     }
 }
