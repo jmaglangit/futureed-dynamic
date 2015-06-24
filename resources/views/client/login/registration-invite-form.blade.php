@@ -202,7 +202,6 @@
                     </div>
                 </div>
             </fieldset>
-
             <div class="role-div">
                 <fieldset>
                     <legend>School Information</legend>
@@ -215,7 +214,7 @@
                                     , 'placeholder' => 'School Name'
                                     , 'ng-disabled' => 'true'
                                     , 'ng-class' => "{ 'required-field' : register.fields['school_id'] }" 
-                                    , 'ng-model' => 'register.record.school_name'
+                                    , 'ng-model' => 'register.record.school.name'
                                 )
                             ) !!}
                         </div>
