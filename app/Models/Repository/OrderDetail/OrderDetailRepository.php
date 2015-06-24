@@ -51,5 +51,13 @@ class OrderDetailRepository implements OrderDetailRepositoryInterface{
         }
     }
 
+    public function deleteOrderDetailByOrderId($order_id){
+        try{
+            return OrderDetail::orderId($order_id)->delete();
+        }catch (\Exception $e){
+            return $e->getMessage();
+        }
+    }
+
 
 }

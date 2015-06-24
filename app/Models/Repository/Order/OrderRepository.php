@@ -36,4 +36,21 @@ class OrderRepository implements OrderRepositoryInterface{
         $result = Order::orderNo($order_no)->first();
         return !is_null($result) ? $result->toArray(): null;
     }
+
+    public function deleteOrder($id){
+        try{
+            $result = Order::find($id);
+            return is_null($result) ? null : $result->delete();
+        }catch (\Exception $e){
+            return $e->getMessage();
+        }
+    }
+
+    public function getOrder($id){
+        try{
+            return Order::find($id);
+        }catch (\Exception $e){
+            return $e->getMessage();
+        }
+    }
 }
