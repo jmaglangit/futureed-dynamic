@@ -11,7 +11,7 @@
   	<div class="row" ng-if="sale.active_bulk_settings_add">
 	    <div class="col-xs-12">
 			<div class="title-mid">
-				Add Bulk
+				Add Bulk Discount
 			</div>
 		</div>
   	</div>
@@ -19,7 +19,7 @@
   	<div class="row" ng-if="sale.active_bulk_settings_edit">
 	    <div class="col-xs-12">
 			<div class="title-mid">
-				Edit Bulk
+				Edit Bulk Discount
 			</div>
 		</div>
   	</div>
@@ -33,13 +33,13 @@
 					]) 
 				!!}
 				<div class="form-group">
-					<label class="col-xs-2 control-label">Bulk Number <span class="required">*</span></label>
+					<label class="col-xs-2 control-label">Minimum Seats <span class="required">*</span></label>
 					<div class="col-xs-5">
 						{!! Form::text('min_seats', '',
 							[
 								'class' => 'form-control',
 								'ng-model' => 'sale.data.min_seats',
-								'placeholder' => 'Bulk Number'
+								'placeholder' => 'Minimum Seats'
 							]) 
 						!!}
 					</div>
@@ -148,7 +148,7 @@
 		<table id="bulk-list" class="table table-striped table-bordered">
 			<thead>
 		        <tr>
-		            <th>Bulk Number</th>
+		            <th>Minimum Seats</th>
 		            <th>Discount</th>
 		            <th>Action</th>
 		        </tr>

@@ -13,9 +13,6 @@ Routes::group(['prefix' => '/parent-student'], function()
         'uses' => 'Api\v1\ParentStudentController@parentUpdateStudent',
         'as' => 'parent-student.update.student']);
 
-    Routes::get('/get-students/{id}', [
-        'uses' => 'Api\v1\ParentStudentController@getStudents',
-        'as' => 'parent-student.get.student']);
     Routes::put('/pay-subscription/{id}', [
         'uses' => 'Api\v1\ParentStudentController@paySubscription',
         'as' => 'parent-student.pay.subscription']);

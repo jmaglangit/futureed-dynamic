@@ -25,7 +25,7 @@ class OrderDetailRepository implements OrderDetailRepositoryInterface{
      * @return object
      */
     public function getOrderDetailsByOrderId($order_id){
-        return OrderDetail::orderId($order_id)->get();
+        return OrderDetail::orderId($order_id)->with('student')->get();
     }
 
     /**
@@ -41,4 +41,6 @@ class OrderDetailRepository implements OrderDetailRepositoryInterface{
             return $e->getMessage();
         }
     }
+
+
 }

@@ -108,6 +108,7 @@ class ClientServices {
 
     public function formResponse($user,$client){
 
+		//TODO: refactor this function including the controller use relationships
         foreach ($user as $key => $value) {
             
                 if(in_array($key,['username','email','new_email','status'])){
@@ -120,7 +121,7 @@ class ClientServices {
         if($client['client_role'] == 'Parent'){
 
             $clientOutput = ['id','first_name','last_name','street_address',
-                            'city','state','country','zip','client_role','account_status'];
+                            'city','state','country','zip','client_role','account_status','country_id','user_id'];
 
             foreach ($client as $key => $value) {
             
@@ -137,7 +138,7 @@ class ClientServices {
              $school = $this->school->getSchoolDetails($client['school_code'])->toArray();
 
              $clientOutput = ['id','first_name','last_name','street_address',
-                            'city','state','country','zip','client_role','school_code','account_status'];
+                            'city','state','country','zip','client_role','school_code','account_status','country_id'];
 
             if($client['client_role'] == 'Principal'){
     

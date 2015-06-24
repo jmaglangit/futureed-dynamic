@@ -752,8 +752,8 @@ function FutureedController($scope, apiService, futureed) {
 	* Get Country ID
 	*/
 	function getCountryId(){
-		$scope.reg.countryid = '';
-		$scope.reg.country_id = $('#country').find(':selected').data('id');
+		$scope.reg.country_id = '';
+		$scope.reg.country_id = $('#country_id').find(':selected').data('id');
 		$scope.getGradeLevel();
 
 	}
