@@ -389,7 +389,7 @@ class ParentStudentController extends ApiController {
         $student_user_id = $this->user->checkUserName($user_name,config('futureed.student'));
 
         if(is_null($student_user_id)){
-            return $this->respondErrorMessage(2002);
+            return $this->respondErrorMessage(2018);
         }
 
         $parent_user_id = $request->only('parent_user_id');
