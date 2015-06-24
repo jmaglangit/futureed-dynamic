@@ -87,7 +87,8 @@ class ClientTeacherRegistrationRequest extends ApiRequest
 	{
 
 		return [
-			'custom_password' => config('futureed-error.error_messages.2112')
+			'custom_password' => config('futureed-error.error_messages.2112'),
+			'country_id.required' => config('futureed-error.error_messages.2041')
 		];
 	}
 
