@@ -19,11 +19,11 @@ class ClientRegisterController extends ClientController {
 
         // cannot be use for teacher registration
 
-	        $client = Input::only('first_name', 'last_name', 'client_role', 'street_address', 'city', 'state', 'country', 'zip');
+	        $client = Input::only('first_name', 'last_name', 'client_role', 'street_address', 'city', 'state', 'country', 'zip','country_id');
 
 	        $user = Input::only('username', 'email', 'first_name', 'last_name', 'password');
 
-	        $school = Input::only('school_name', 'school_address', 'school_city', 'school_state', 'school_country', 'school_zip','contact_name','contact_number');
+	        $school = Input::only('school_name', 'school_address', 'school_city', 'school_state', 'school_country', 'school_zip','contact_name','contact_number','school_country_id');
 
             $input = Input:: only('callback_uri');
 
@@ -49,15 +49,29 @@ class ClientRegisterController extends ClientController {
                                 ->setField('client_role')
                                 ->setMessage($error_msg[2234])
                                 ->errorMessage());
-            }    
+            }
+
+			//set default value to country_id
+			if(!$client['country_id']){
+
+				$client['country_id'] = 0;
+			}
 
             if(strtolower($client['client_role']) == strtolower(config('futureed.parent'))){
+
                 $this->addMessageBag($this->validateString($client,'street_address'));
                 $this->addMessageBag($this->validateAlpha($client,'city'));
                 $this->addMessageBag($this->validateAlpha($client,'state'));
                 $this->addMessageBag($this->validateString($client,'country'));
                 $this->addMessageBag($this->zipCodeOptional($client,'zip'));
             }else{
+
+				//set default value to school_country_id
+				if(!$school['school_country_id']){
+
+					$school['school_country_id'] = 0;
+				}
+
                 $this->addMessageBag($this->validateString($school,'school_name'));
                 $this->addMessageBag($this->schoolAddress($school,'school_address'));
                 $this->addMessageBag($this->validateAlpha($school,'school_state'));
