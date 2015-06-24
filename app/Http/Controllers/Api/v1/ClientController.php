@@ -116,7 +116,7 @@ class ClientController extends ApiController {
 									  'city','country','zip','state','country_id');
 
 				$school = input::only('school_name','school_code','school_street_address','school_city',
-										  'school_state','school_country','school_zip','school_contact_name','school_contact_number');
+										  'school_state','school_country','school_country_id','school_zip','school_contact_name','school_contact_number');
 				
 				$this->addMessageBag($this->username($user,'username'));
 				$this->addMessageBag($this->firstName($client,'first_name'));
@@ -125,38 +125,45 @@ class ClientController extends ApiController {
 
 				if(strtolower($clientDetails['client_role']) == 'parent'){
 
-					$this->addMessageBag($this->validateString($client,'street_address'));
-					$this->addMessageBag($this->validateString($client,'city'));
-					$this->addMessageBag($this->validateString($client,'country'));
-					$this->addMessageBag($this->validateString($client,'state'));
-					$this->addMessageBag($this->zipCodeOptional($client,'zip'));
+					$this->addMessageBag($this->validateString($client, 'street_address'));
+					$this->addMessageBag($this->validateString($client, 'city'));
+					$this->addMessageBag($this->validateStringOptional($client, 'country'));
+					$this->addMessageBag($this->validateString($client, 'country_id'));
+					$this->addMessageBag($this->validateString($client, 'state'));
+					$this->addMessageBag($this->zipCodeOptional($client, 'zip'));
 
 				}else if(strtolower($clientDetails['client_role']) == 'teacher'){
 
-					$this->addMessageBag($this->validateStringOptional($client,'street_address'));
-					$this->addMessageBag($this->validateStringOptional($client,'city'));
-					$this->addMessageBag($this->validateStringOptional($client,'country'));
-					$this->addMessageBag($this->validateStringOptional($client,'state'));
-					$this->addMessageBag($this->zipCodeOptional($client,'zip'));
+					$this->addMessageBag($this->validateStringOptional($client, 'street_address'));
+					$this->addMessageBag($this->validateStringOptional($client, 'city'));
+					$this->addMessageBag($this->validateStringOptional($client, 'country'));
+					$this->addMessageBag($this->validateNumberOptional($client, 'country_id'));
+					$this->addMessageBag($this->validateStringOptional($client, 'state'));
+					$this->addMessageBag($this->zipCodeOptional($client, 'zip'));
+
 
 
 				}else{
 
-					$this->addMessageBag($this->validateStringOptional($client,'street_address'));
-					$this->addMessageBag($this->validateStringOptional($client,'city'));
-					$this->addMessageBag($this->validateStringOptional($client,'country'));
-					$this->addMessageBag($this->validateStringOptional($client,'state'));
-					$this->addMessageBag($this->zipCodeOptional($client,'zip'));
+					$this->addMessageBag($this->validateStringOptional($client, 'street_address'));
+					$this->addMessageBag($this->validateStringOptional($client, 'city'));
+					$this->addMessageBag($this->validateStringOptional($client, 'country'));
+					$this->addMessageBag($this->validateNumberOptional($client, 'country_id'));
+					$this->addMessageBag($this->validateStringOptional($client, 'state'));
+					$this->addMessageBag($this->zipCodeOptional($client, 'zip'));
 					
-					$this->addMessageBag($this->schoolCode($school,'school_code'));
-					$this->addMessageBag($this->validateString($school,'school_name'));
-					$this->addMessageBag($this->validateString($school,'school_state'));
-					$this->addMessageBag($this->validateString($school,'school_country'));
-					$this->addMessageBag($this->validateStringOptional($school,'school_street_address'));
-					$this->addMessageBag($this->validateStringOptional($school,'school_city'));
-					$this->addMessageBag($this->zipCodeOptional($school,'school_zip'));
-					$this->addMessageBag($this->validateString($school,'school_contact_name'));
-					$this->addMessageBag($this->checkContactNumber($school,'school_contact_number'));
+					$this->addMessageBag($this->schoolCode($school, 'school_code'));
+					$this->addMessageBag($this->validateString($school, 'school_name'));
+					$this->addMessageBag($this->validateString($school, 'school_state'));
+					$this->addMessageBag($this->validateStringOptional($school, 'school_country'));
+					$this->addMessageBag($this->validateString($school, 'school_country_id'));
+					$this->addMessageBag($this->validateStringOptional($school, 'school_street_address'));
+					$this->addMessageBag($this->validateStringOptional($school, 'school_city'));
+					$this->addMessageBag($this->zipCodeOptional($school, 'school_zip'));
+					$this->addMessageBag($this->validateString($school, 'school_contact_name'));
+					$this->addMessageBag($this->checkContactNumber($school, 'school_contact_number'));
+
+
 
 				}
 
@@ -248,7 +255,7 @@ class ClientController extends ApiController {
 		$user = Input::only('username', 'email', 'status');
 
 		$school = Input::only('school_name', 'school_address', 'school_city',
-			'school_state', 'school_country', 'school_zip',
+			'school_state', 'school_country','school_country_id', 'school_zip',
 			'contact_name', 'contact_number');
 
 		$input = Input::only('callback_uri');
@@ -280,7 +287,7 @@ class ClientController extends ApiController {
 			$this->addMessageBag($this->validateStringOptional($client, 'street_address'));
 			$this->addMessageBag($this->validateStringOptional($client, 'city'));
 			$this->addMessageBag($this->validateStringOptional($client, 'country'));
-			$this->addMessageBag($this->validateNumber($client, 'country_id'));
+			$this->addMessageBag($this->validateNumberOptional($client, 'country_id'));
 			$this->addMessageBag($this->validateStringOptional($client, 'state'));
 			$this->addMessageBag($this->validateNumber($client, 'school_code'));
 			$this->addMessageBag($this->zipCodeOptional($client, 'zip'));
@@ -290,7 +297,7 @@ class ClientController extends ApiController {
 			$this->addMessageBag($this->validateStringOptional($client, 'street_address'));
 			$this->addMessageBag($this->validateStringOptional($client, 'city'));
 			$this->addMessageBag($this->validateStringOptional($client, 'country'));
-			$this->addMessageBag($this->validateNumber($client, 'country_id'));
+			$this->addMessageBag($this->validateNumberOptional($client, 'country_id'));
 			$this->addMessageBag($this->validateStringOptional($client, 'state'));
 			$this->addMessageBag($this->zipCodeOptional($client, 'zip'));
 

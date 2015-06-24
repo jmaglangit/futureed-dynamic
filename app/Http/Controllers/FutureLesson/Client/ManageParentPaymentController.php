@@ -32,6 +32,14 @@ class ManageParentPaymentController extends Controller{
 		return view('client.parent.payment.partials.payment_form');
 	}
 
+	/**
+	*@return View Payment form
+	*/
+	public function view_payment_form()
+	{
+		return view('client.parent.payment.partials.view_payment_form');
+	}
+
 	public function payment_success() 
 	{
 		$input = Input::only('token', 'paymentId');
