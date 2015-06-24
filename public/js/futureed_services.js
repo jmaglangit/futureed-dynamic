@@ -137,10 +137,10 @@ var services = angular.module('futureed.services', []);
 			});
 		}
 
-		futureedAPI.getGradeLevel =function(countryid) {
+		futureedAPI.getGradeLevel =function(country_id) {
 			return $http({
 				method	: 'GET'
-				, url	: futureedAPIUrl + 'grade?country_id=' + countryid
+				, url	: futureedAPIUrl + 'grade?country_id=' + country_id
 			});
 		}
 

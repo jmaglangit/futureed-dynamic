@@ -170,9 +170,9 @@
             </div>
             <label for="" class="col-md-2 control-label">Country <span class="required">*</span></label>
             <div class="col-md-4">
-                <select name="school_country" class="form-control" ng-model="profile.prof.school_country" ng-disabled="!profile.active_edit">
+                <select name="school_country_id" class="form-control" ng-model="profile.prof.school_country_id" ng-disabled="!profile.active_edit">
                     <option ng-selected="true" value="">-- Select Country --</option>
-                    <option ng-selected="{! profile.prof.school_country == country.name !}" ng-repeat="country in countries" value="{! country.name !}">{! country.name!}</option>
+                    <option ng-selected="{! profile.prof.school_country_id == country.id !}" ng-repeat="country in countries" value="{! country.id !}">{! country.name!}</option>
                 </select>
             </div>
         </div>
@@ -261,9 +261,9 @@
             </div>
             <label for="" class="col-md-2 control-label">Country <span class="required" ng-if="profile.is_required">*</span></label>
             <div class="col-md-4">
-                <select name="country" class="form-control" ng-model="profile.prof.country" ng-disabled="!profile.active_edit">
+                <select name="country" class="form-control" ng-model="profile.prof.country_id" ng-disabled="!profile.active_edit">
                     <option ng-selected="true" value="">-- Select Country --</option>
-                    <option ng-selected="{! profile.prof.country == country.name !}" ng-repeat="country in countries" value="{! country.name !}">{! country.name!}</option>
+                    <option ng-selected="{! profile.prof.country_id == country.id !}" ng-repeat="country in countries" value="{! country.id !}">{! country.name!}</option>
                 </select>
             </div>
         </div>
