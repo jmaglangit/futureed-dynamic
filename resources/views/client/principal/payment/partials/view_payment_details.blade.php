@@ -1,7 +1,7 @@
 <div ng-if="payment.active_view || payment.active_edit">
 	<div class="content-title">
 		<div class="title-main-content">
-			<span>Add Payment</span>
+			<span>View Payment Details</span>
 		</div>
 	</div>
 
