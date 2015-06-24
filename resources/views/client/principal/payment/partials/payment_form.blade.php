@@ -92,7 +92,7 @@
 			            <th>Date End</th>
 			            <th>Total # of Seats</th>
 			            <th>Total Price</th>
-			            <th>Actions</th>
+			            <th>Action</th>
 			        </tr>
 			    </thead>
 
@@ -106,23 +106,19 @@
 		            <td>{! record.total_amount !}</td>
 		            <td>
 		            	<div class="row">
-		            		<div class="col-xs-6">
+		            		<div class="col-xs-12">
 	    						<a href="" ng-click="payment.paymentDetails(record.id, futureed.ACTIVE_VIEW)"><span><i class="fa fa-eye"></i></span></a>
-	    					</div>
-
-	    					<div class="col-xs-6">
-	    						<a href="" ng-click="payment.paymentDetails(record.id, futureed.ACTIVE_EDIT)"><span><i class="fa fa-pencil"></i></span></a>
 	    					</div>
 		            	</div>
 		            </td>
 		        </tr>
 		        <tr class="odd" ng-if="!payment.records.length && !payment.table.loading">
-		        	<td valign="top" colspan="7" class="dataTables_empty">
+		        	<td valign="top" colspan="7">
 		        		No records found
 		        	</td>
 		        </tr>
 		        <tr class="odd" ng-if="payment.table.loading">
-		        	<td valign="top" colspan="7" class="dataTables_empty">
+		        	<td valign="top" colspan="7">
 		        		Loading...
 		        	</td>
 		        </tr>

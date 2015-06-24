@@ -121,12 +121,5 @@ function managePrincipalPaymentService($http){
 		});
 	}
 
-	managePaymentApi.invoiceDetails = function(invoice_no) {
-		return $http({
-			method : Constants.METHOD_GET
-			, url  : paymentApiUrl + 'sales-invoice/details?invoice_no=' + invoice_no
-		});
-	}
-
 	return managePaymentApi;
 }

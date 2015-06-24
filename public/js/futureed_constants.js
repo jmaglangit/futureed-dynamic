@@ -24,6 +24,10 @@ var Constants = {
 	, TEACHER		: "Teacher"
 	, ADMIN			: "Admin"
 
+	, PENDING		: "Pending"
+	, PAID			: "Paid"
+	, CANCELLED		: "Cancelled"
+
 	, AVATAR		: "avatar"
 	, REWARDS		: "rewards"
 	, PASSWORD		: "password"
