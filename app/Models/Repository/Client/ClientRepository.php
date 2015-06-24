@@ -245,50 +245,56 @@ class ClientRepository implements ClientRepositoryInterface
 
     }
 
-    public function getTeacherDetails($criteria = array(), $limit = 0, $offset = 0)
-    {
+	public function getTeacherDetails($criteria = array(), $limit = 0, $offset = 0)
+	{
 
 
-        $clients = new Client();
+		$clients = new Client();
 
-        $clients = $clients->teacher();
+		$clients = $clients->teacher();
 
-        $count = 0;
+		$count = 0;
 
-        if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
+		if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
 
-            $count = $clients->count();
+			$count = $clients->count();
 
-        } else {
+		} else {
 
-            if (count($criteria) > 0) {
+			if (count($criteria) > 0) {
 
-                if (isset($criteria['name'])) {
+				if (isset($criteria['name'])) {
 
-                    $clients = $clients->name($criteria['name']);
+					$clients = $clients->name($criteria['name']);
 
-                }
+				}
 
-                if (isset($criteria['email'])) {
+				if (isset($criteria['email'])) {
 
-                    $clients = $clients->email($criteria['email']);
+					$clients = $clients->email($criteria['email']);
 
-                }
-            }
+				}
 
-            $count = $clients->count();
+				if (isset($criteria['school_code'])) {
 
-            if ($limit > 0 && $offset >= 0) {
-                $clients = $clients->offset($offset)->limit($limit);;
-            }
+					$clients = $clients->schoolcode($criteria['school_code']);
 
-        }
+				}
+			}
 
-        $clients = $clients->with('user')->orderBy('first_name', 'asc');
+			$count = $clients->count();
 
-        return ['total' => $count, 'records' => $clients->get()->toArray()];
+			if ($limit > 0 && $offset >= 0) {
+				$clients = $clients->offset($offset)->limit($limit);;
+			}
 
-    }
+		}
+
+		$clients = $clients->with('user')->orderBy('first_name', 'asc');
+
+		return ['total' => $count, 'records' => $clients->get()->toArray()];
+
+	}
 
     public function getClientByUserId($id)
     {

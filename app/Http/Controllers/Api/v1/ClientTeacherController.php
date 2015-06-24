@@ -63,6 +63,12 @@ class ClientTeacherController extends ApiController {
 
         }
 
+		if(Input::get('school_code')){
+
+			$criteria['school_code'] = Input::get('school_code');
+
+		}
+
         if(Input::get('email')){
 
             $criteria['email'] = Input::get('email');
