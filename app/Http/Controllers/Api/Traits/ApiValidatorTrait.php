@@ -235,6 +235,36 @@ trait ApiValidatorTrait {
 		}
     }
 
+	public function validateNumberOptional($input,$field_name){
+
+		$error_msg = config('futureed-error.error_messages');
+
+		$validator = Validator::make(
+			[
+				"$field_name" => strtolower($input["$field_name"]),
+			],
+			[
+				"$field_name" => 'numeric'
+			],
+			[
+
+				"school_code.numeric" => $error_msg[2602],
+				"country_id.numeric" => $error_msg[2604],
+				"school_country_id.numeric" => $error_msg[2604]
+			]
+		);
+
+		if ($validator->fails()) {
+
+			$validator_msg = $validator->messages()->toArray();
+
+			return $this->setErrorCode(1010)
+				->setField($field_name)
+				->setMessage($validator_msg["$field_name"][0])
+				->errorMessage();
+		}
+	}
+
     public function validateString($input,$field_name){
 
             $validator = Validator::make(
