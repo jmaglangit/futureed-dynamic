@@ -29,7 +29,7 @@ class StudentController extends ApiController {
 		$offset = (Input::get('offset')) ? Input::get('offset') : 0;
 
 
-		return $this->student->getStudents($criteria , $limit, $offset );
+		return $this->respondWithData($this->student->getStudents($criteria , $limit, $offset ));
 
 	}
 
