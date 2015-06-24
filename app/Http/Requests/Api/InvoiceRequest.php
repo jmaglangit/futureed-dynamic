@@ -34,7 +34,7 @@ class InvoiceRequest extends ApiRequest {
                     'seats_total' => 'required|numeric|between:1,999999',
                     'discount_type' => 'in:Volume,Client',
                     'discount_id' => 'integer',
-                    'discount' => 'numeric|between:1,999.99',
+                    'discount' => 'numeric|between:0,999.99',
                     'total_amount' => 'required|numeric|between:1,999999.99',
                     'subscription_id' => 'required|integer',
                     'payment_status' => 'required|in:Pending,Paid,Cancelled',
