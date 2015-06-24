@@ -39,7 +39,7 @@ class SchoolRepository implements SchoolRepositoryInterface{
 				'city' => $school['school_city'],
 				'state' => $school['school_state'],
 				'country' => isset($school['school_country']) ? $school['school_country'] : 0,
-				'country_id' => $school['school_country_id'],
+				'country_id' => isset($school['school_country_id']) ? $school['school_country_id'] : 0,
 				'zip' => $school['school_zip'],
 				'contact_name' => $school['contact_name'],
 				'contact_number' => $school['contact_number'],
