@@ -135,34 +135,14 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					self.classrooms = response.data.record;
+
 					angular.forEach(self.classrooms, function(value, key) {
-						value.price = Constants.FALSE;
+						value.price = (self.invoice.subscription) ? value.seats_total * self.invoice.subscription.price : Constants.FALSE;
 					});
 
-					self.updatePageCount(response.data);
-				}
-			}
-
-			$scope.ui_unblock();
-		}).error(function(response) {
-			self.errors = $scope.internalError();
-			$scope.ui_unblock();
-		});
-	}
-
-	self.listInvoiceDetails = function(invoice_no) {
-		self.records = [];
-
-		$scope.ui_block();
-		managePrincipalPaymentService.invoiceDetails(invoice_no).success(function(response) {
-			if(angular.equals(response.status, Constants.STATUS_OK)) {
-				if(response.errors) {
-					self.errors = $scope.errorHandler(response.errors);
-				} else if(response.data) {
-					self.records = response.data.record;
-					angular.forEach(self.classrooms, function(value, key) {
-						value.price = Constants.FALSE;
-					});
+					if(self.invoice.subscription) {
+						self.setPrice(self.invoice.subscription);
+					}
 
 					self.updatePageCount(response.data);
 				}
@@ -370,8 +350,21 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 
 	self.setPrice = function(subscription) {
 		self.errors = Constants.FALSE;
-		self.success = Constants.FALSE;
+
 		self.invoice.seats_total = Constants.FALSE;
+		self.invoice.sub_total = Constants.FALSE;
+		self.invoice.total_amount = Constants.FALSE;
+		self.invoice.discount = Constants.FALSE;
+		self.invoice.discount_id = Constants.EMPTY_STR;
+		self.invoice.discount_type = Constants.EMPTY_STR;
+
+		if(!subscription) {
+			self.invoice.seats_total = Constants.FALSE;
+			self.invoice.dis_date_start = Constants.EMPTY_STR;
+			self.invoice.date_start = Constants.EMPTY_STR;
+			self.invoice.dis_date_end = Constants.EMPTY_STR;
+			self.invoice.date_end = Constants.EMPTY_STR;
+		}
 
 		$scope.ui_block();
 		managePrincipalPaymentService.subscriptionDetails(self.invoice.subscription_id).success(function(response) {
@@ -379,30 +372,41 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 				self.errors = $scope.errorHandler(response.errors);
 			} else if(response.data) {
 				var subscription = response.data;
+				var price = Constants.FALSE;
 
-				if(subscription.price) {
-					var date = moment();
-					self.invoice.date_start = new Date(date).setHours(0);
-					self.invoice.dis_date_start = self.invoice.date_start;
-					self.invoice.date_start = $filter('date')(self.invoice.date_start, 'yyyyMMdd');
-
-						date.add(subscription.days, 'days');
-
-					self.invoice.date_end = new Date(date).setHours(0);
-					self.invoice.dis_date_end = self.invoice.date_end;
-					self.invoice.date_end = $filter('date')(self.invoice.date_end, 'yyyyMMdd');
-
+				if(!angular.equals(self.invoice.payment_status, Constants.PENDING)) {
+					self.invoice.dis_date_start = $filter('date')(new Date(self.invoice.date_start), 'dd/MM/yyyy');
+					self.invoice.dis_date_end = $filter('date')(new Date(self.invoice.date_end), 'dd/MM/yyyy');
 					angular.forEach(self.classrooms, function(value, key) {
-						value.price = subscription.price * value.seats_total;
-						self.invoice.sub_total += value.price;
 						self.invoice.seats_total += value.seats_total;
 					});
 
-					self.getDiscount();
+					self.invoice.sub_total = subscription.price * self.invoice.seats_total;
 				} else {
-					angular.forEach(self.classrooms, function(value, key) {
-						value.price = Constants.FALSE;
-					});
+					if(subscription.price) {
+						var date = new Date();
+							self.invoice.date_start = $filter('date')(date, 'yyyyMMdd');
+							self.invoice.dis_date_start = $filter('date')(date, 'dd/MM/yyyy');
+							
+							date.setDate(date.getDate() + subscription.days);
+							self.invoice.date_end = $filter('date')(date, 'yyyyMMdd');
+							self.invoice.dis_date_end = $filter('date')(date, 'dd/MM/yyyy');
+
+						angular.forEach(self.classrooms, function(value, key) {
+							value.price = subscription.price * value.seats_total;
+							self.invoice.seats_total += value.seats_total;
+						});
+
+						self.invoice.sub_total = subscription.price * self.invoice.seats_total;
+					} else {
+						angular.forEach(self.classrooms, function(value, key) {
+							value.price = Constants.FALSE;
+						});
+					}
+				}
+
+				if(self.invoice.sub_total) {
+					self.getDiscount();
 				}
 			}
 
@@ -470,7 +474,8 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 			if(response.errors) {
 				self.errors = $scope.errorHandler(response.errors);
 			} else if(response.data) {
-				self.record = response.data;
+				self.invoice = response.data;
+				self.listClassroom(self.invoice.order_no);
 				self.setActive(active);
 			}
 

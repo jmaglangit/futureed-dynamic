@@ -40,4 +40,20 @@ class ManagePrincipalPaymentController extends Controller{
 	{
 		return view('client.principal.payment.partials.view_payment_details');
 	}
+
+	public function payment_success() 
+	{
+		$input = Input::only('token');
+
+		if($input['token']) {
+			// redirect to payment list
+		}
+
+		return view('client.principal.payment.success');
+	}
+
+	public function payment_fail() 
+	{
+		return view('client.principal.payment.fail');
+	}
 }
