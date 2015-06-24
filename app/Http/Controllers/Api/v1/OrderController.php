@@ -31,6 +31,11 @@ class OrderController extends ApiController {
         return $this->respondWithData($order);
     }
 
+    /**
+     * Create stub record for order.
+     * @param $client_id
+     * @return newly created order record.
+     */
     public function getNextOrderNo($client_id)
     {
         $input['client_id'] = $client_id;
@@ -38,7 +43,7 @@ class OrderController extends ApiController {
         $order = $this->order->addOrder($input);
 
         $order['order_no'] = $this->invoice_service->createOrderNo($client_id,$order['id']);
-        $order = $this->order->updateOrder($order['id'],$order);
+        $this->order->updateOrder($order['id'],$order);
 
         return $this->respondWithData($order);
     }

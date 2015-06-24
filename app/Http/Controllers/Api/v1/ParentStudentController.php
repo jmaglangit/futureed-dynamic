@@ -9,13 +9,13 @@ use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
 use FutureEd\Models\Repository\Invoice\InvoiceRepositoryInterface;
 use FutureEd\Models\Repository\InvoiceDetail\InvoiceDetailRepositoryInterface;
 use FutureEd\Models\Repository\Order\OrderRepositoryInterface;
+use FutureEd\Models\Repository\OrderDetail\OrderDetailRepositoryInterface;
 use FutureEd\Models\Repository\ParentStudent\ParentStudentRepositoryInterface;
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use FutureEd\Models\Repository\User\UserRepositoryInterface;
 use FutureEd\Services\CodeGeneratorServices;
 use FutureEd\Services\MailServices;
 use FutureEd\Services\InvoiceServices;
-
 
 class ParentStudentController extends ApiController {
 
@@ -32,6 +32,7 @@ class ParentStudentController extends ApiController {
     protected $order;
     protected $parent_student;
     protected $invoice_service;
+    protected $order_details;
 
     public function __construct(
         StudentRepositoryInterface $student,
@@ -45,7 +46,8 @@ class ParentStudentController extends ApiController {
         ClassStudentRepositoryInterface $class_student,
         InvoiceRepositoryInterface $invoice,
         InvoiceDetailRepositoryInterface $invoice_detail,
-        InvoiceServices $invoice_service){
+        InvoiceServices $invoice_service,
+        OrderDetailRepositoryInterface $order_details){
 
         $this->student = $student;
         $this->client = $client;
@@ -59,6 +61,7 @@ class ParentStudentController extends ApiController {
         $this->invoice = $invoice;
         $this->invoice_detail = $invoice_detail;
         $this->invoice_service = $invoice_service;
+        $this->order_details = $order_details;
     }
 
     public function addExistingStudent(ParentStudentRequest $request){
@@ -181,15 +184,16 @@ class ParentStudentController extends ApiController {
      * @param InvoiceRequest $request
      * @return mixed
      */
-    public function paySubscription(ParentStudentRequest $request)
+    public function paySubscription($id,ParentStudentRequest $request)
     {
-        $parent = $request->only('parent_user_id');
-        $students = $this->parent_student->getParenStudents($parent);
+        $order_data = $request->only('order_no');
+        $order_no = $this->order->getOrderByOrderNo($order_data['order_no']);
 
-        $count_ctr = $students->count();
+        $order_details = $this->order_details->getOrderDetailsByOrderId($order_no['id']);
 
-        if($count_ctr == 0){
-            return $this->respondErrorMessage(2001);
+        $order_details_ctr = $order_details->count();
+        if($order_details_ctr == 0){
+            return $this->respondErrorMessage(2038);
         }
 
         /**
@@ -205,60 +209,73 @@ class ParentStudentController extends ApiController {
 
         //1. Insert Classroom.
 
-        $client_id = $this->client->getClientId($parent['parent_user_id']);
+        $client_id = $this->client->getClientId($parent_student_data['parent_user_id']);
 
-        $next_order_no = $this->order->getNextOrderNo();
-        $next_order_no = $next_order_no['id'] + 1;
-        $next_order_no = $this->invoice_service->createOrderNo($client_id,$next_order_no);
+        $order_no = $order_no['order_no'];
 
-        $classroom['order_no'] = $next_order_no;
+        $check_classroom = $this->classroom->getClassroomByOrderNo($order_no);
+
+        $classroom['order_no'] = $order_no;
         $classroom['name'] = 'NONE';
         $classroom['grade_id'] = 1;
         $classroom['client_id'] = $client_id;
-        $classroom['seats_taken'] = $count_ctr;
-        $classroom['seats_total'] = $count_ctr;
+        $classroom['seats_taken'] = $order_details_ctr;
+        $classroom['seats_total'] = $order_details_ctr;
         $classroom['status'] = 'Enabled';
 
-        //dd($classroom);
-        $add_classroom_result = $this->classroom->addClassroom($classroom);
+        if(is_null($check_classroom)){
+            $classroom_result = $this->classroom->addClassroom($classroom);
+        }else{
+            $classroom_result = $this->classroom->updateClassroom($check_classroom['id'],$classroom);
+        }
 
         //2. Insert Class Student.
-        foreach($students as $stud){
-            $class_student['student_id'] = $stud->student->id;
-            $class_student['class_id'] = $add_classroom_result->id;
-            $class_student['status'] = 'Enabled';
+        foreach($order_details as $stud){
 
-            $this->class_student->addClassStudent($class_student);
-            unset($class_student);
+            $check_class_student = $this->class_student->getClassStudent($stud->student->id);
+            if(is_null($check_class_student)){
+                $class_student['student_id'] = $stud->student->id;
+                $class_student['class_id'] = $classroom_result->id;
+                $class_student['status'] = 'Enabled';
+
+                $this->class_student->addClassStudent($class_student);
+                unset($class_student);
+            }
         }
 
         //3. Insert Order.
-        $order['order_no'] = $next_order_no;
+        $order['order_no'] = $order_no;
         $order['order_date'] = $parent_student_data['order_date'];
         $order['client_id'] = $client_id;
         $order['subscription_id'] = $parent_student_data['subscription_id'];
         $order['date_start'] = $parent_student_data['date_start'];
         $order['date_end'] = $parent_student_data['date_end'];
-        $order['seats_total'] = $count_ctr;
-        $order['seats_taken'] = $count_ctr;
+        $order['seats_total'] = $order_details_ctr;
+        $order['seats_taken'] = $order_details_ctr;
         $order['total_amount'] = $parent_student_data['total_amount'];
         $order['payment_status'] = 'Pending';
 
         //dd($order);
-        $this->order->addOrder($order);
+        $check_order = $this->order->getOrderByOrderNo($order_no);
+
+        if( !is_null($check_order) ){
+            $this->order->updateOrder($check_order['id'],$order);
+        }else{
+            $this->order->addOrder($order);
+        }
 
         //4. Insert Invoice.
 
         $client_details = $this->client->getClientDetails($client_id);
 
-        $invoice_id = $parent_student_data['invoice_id'];
-        $invoice['order_no'] = $next_order_no;
+        $invoice_id = $id;
+        $invoice['order_no'] = $order_no;
         $invoice['invoice_date'] = $parent_student_data['order_date'];
         $invoice['client_id'] = $client_id;
         $invoice['client_name'] = $client_details->first_name .' '.$client_details->last_name;
         $invoice['date_start'] = $parent_student_data['date_start'];
         $invoice['date_end'] = $parent_student_data['date_end'];
-        $invoice['seats_total'] = $count_ctr;
+        $invoice['seats_total'] = $order_details_ctr;
         $invoice['discount_type'] = $parent_student_data['discount_type'];
         $invoice['discount_id'] = $parent_student_data['discount_id'];
         $invoice['discount'] = $parent_student_data['discount'];
@@ -269,14 +286,18 @@ class ParentStudentController extends ApiController {
         $invoice_result = $this->invoice->updateInvoice($invoice_id,$invoice);
 
         //5. insert Invoice Detail.
-        $order_detail['invoice_id'] = $invoice_id;
-        $order_detail['class_id'] = $add_classroom_result->id;
-        $order_detail['grade_id'] = $add_classroom_result->grade_id;
-        $order_detail['price'] = $parent_student_data['total_amount'];
+        $check_invoice_detail = $this->invoice_detail->getInvoiceDetailByInvoiceIdAndClassId($id,$classroom_result->id);
+        if(is_null($check_invoice_detail)) {
+            $order_detail['invoice_id'] = $invoice_id;
+            $order_detail['class_id'] = $classroom_result->id;
+            $order_detail['grade_id'] = $classroom_result->grade_id;
+            $order_detail['price'] = $parent_student_data['total_amount'];
 
-        $this->invoice_detail->addInvoiceDetail($order_detail);
+            $this->invoice_detail->addInvoiceDetail($order_detail);
+        }
 
-        return $this->respondWithData($this->invoice_detail->addInvoiceDetail($order_detail));
+
+        return $this->respondWithData($invoice_result);
     }
 
     /**
@@ -287,7 +308,7 @@ class ParentStudentController extends ApiController {
      */
     public function getStudents($parent_user_id){
         $criteria['parent_user_id'] = $parent_user_id;
-        return $this->respondWithData($this->parent_student->getParenStudents($criteria));
+        return $this->respondWithData($this->parent_student->getParentStudents($criteria));
     }
 
     /**
@@ -309,4 +330,94 @@ class ParentStudentController extends ApiController {
         return $this->respondWithData($this->parent_student->deleteParentStudentByParentId($parent_user_id));
     }
 
+    /**
+     * Add student to invoice by email. check if the student is associated to the parent and it has no current subscription.
+     * @param ParentStudentRequest $request
+     * @return Student Record
+     *
+     */
+    public function addStudentByEmail(ParentStudentRequest $request){
+        $email = $request->only('email');
+
+        $student_user_id = $this->user->checkEmail($email,config('futureed.student'));
+
+        if(is_null($student_user_id)){
+            return $this->respondErrorMessage(2002);
+        }
+
+        $parent_user_id = $request->only('parent_user_id');
+
+        //check if user is associated to the parent.
+        $check_parent_student = $this->parent_student->checkParentStudent($parent_user_id,$student_user_id);
+
+        if(is_null($check_parent_student)){
+            return $this->respondErrorMessage(2039);
+        }
+
+        $student_id = $this->student->getStudentId($student_user_id);
+
+        // check if student has existing subscription
+        $check_class_student = $this->class_student->getClassStudent($student_id);
+        if(!is_null($check_class_student)){
+            return $this->respondErrorMessage(2037);
+        }
+
+        $check_order_detail = $this->order_details->getOrderDetailByStudentId($student_id);
+        if(!is_null($check_order_detail)){
+            return $this->respondErrorMessage(2040);
+        }
+
+        // Add order details
+        $order_details = $request->all();
+        $order_details['student_id'] = $student_id;
+        $this->order_details->addOrderDetail($order_details);
+
+        return $this->respondWithData($this->user->getUserDetail($student_user_id,config('futureed.student')));
+    }
+
+    /**
+     * Add student to invoice by name. check if the student is associated to the parent and it has no current subscription.
+     * @param ParentStudentRequest $request
+     * @return Student Record
+     *
+     */
+    public function addStudentByName(ParentStudentRequest $request){
+
+        $user_name = $request->only('username');
+
+        $student_user_id = $this->user->checkUserName($user_name,config('futureed.student'));
+
+        if(is_null($student_user_id)){
+            return $this->respondErrorMessage(2002);
+        }
+
+        $parent_user_id = $request->only('parent_user_id');
+
+        //check if user is associated to the parent.
+        $check_parent_student = $this->parent_student->checkParentStudent($parent_user_id,$student_user_id);
+
+        if(is_null($check_parent_student)){
+            return $this->respondErrorMessage(2039);
+        }
+
+        $student_id = $this->student->getStudentId($student_user_id);
+
+        // check if student has existing subscription
+        $check_class_student = $this->class_student->getClassStudent($student_id);
+        if(!is_null($check_class_student)){
+            return $this->respondErrorMessage(2037);
+        }
+
+        $check_order_detail = $this->order_details->getOrderDetailByStudentId($student_id);
+        if(!is_null($check_order_detail)){
+            return $this->respondErrorMessage(2040);
+        }
+
+        // Add order details
+        $order_details = $request->all();
+        $order_details['student_id'] = $student_id;
+        $this->order_details->addOrderDetail($order_details);
+
+        return $this->respondWithData($this->user->getUserDetail($student_user_id,config('futureed.student')));
+    }
 }

@@ -54,6 +54,7 @@ class ClientRepository implements ClientRepositoryInterface
 
     public function addClient($client)
     {
+		$client['country_id'] = isset($client['country_id']) ? $client['country_id'] : 0;
 
         try {
 
