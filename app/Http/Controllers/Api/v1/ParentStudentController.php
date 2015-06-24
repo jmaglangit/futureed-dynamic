@@ -306,8 +306,9 @@ class ParentStudentController extends ApiController {
      * @param $parent_user_id
      * @return mixed
      */
-    public function getStudents($order_id){
-        return $this->respondWithData($this->order_details->getOrderDetailsByOrderId($order_id));
+    public function getStudents($order_no){
+        $order = $this->order->getOrderByOrderNo($order_no);
+        return $this->respondWithData($this->order_details->getOrderDetailsByOrderId($order['id']));
     }
 
     /**
