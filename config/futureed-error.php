@@ -53,6 +53,7 @@ return [
         2038 => 'No student added.',
         2039 => 'Student is not associated to the parent.',
         2040 => 'Student already exist.',
+		2041 => 'Country is required',
 
 		2100 => 'Reset code is invalid.',
 		2101 => 'Password image is invalid.',
