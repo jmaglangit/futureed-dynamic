@@ -15,6 +15,11 @@ class VolumeDiscount extends Model {
 
     protected $hidden = ['created_by','updated_by','created_at','updated_at','deleted_at'];
 
+	protected $attributes = [
+		'created_by' => 1,
+		'updated_by' => 1
+	];
+
     //-------------scopes
     public function scopeMinSeats($query, $min_seats) {
         return $query->where('min_seats', 'like', '%'.$min_seats.'%');
