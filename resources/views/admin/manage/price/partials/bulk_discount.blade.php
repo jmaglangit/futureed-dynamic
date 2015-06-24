@@ -33,13 +33,13 @@
 					]) 
 				!!}
 				<div class="form-group">
-					<label class="col-xs-2 control-label">Bulk Number <span class="required">*</span></label>
+					<label class="col-xs-2 control-label">Minimum Seats <span class="required">*</span></label>
 					<div class="col-xs-5">
 						{!! Form::text('min_seats', '',
 							[
 								'class' => 'form-control',
 								'ng-model' => 'sale.data.min_seats',
-								'placeholder' => 'Bulk Number'
+								'placeholder' => 'Minimum Seats'
 							]) 
 						!!}
 					</div>
