@@ -17,7 +17,6 @@ function ManageParentStudentController($scope, ManageParentStudentService, apiSe
 	self.default();
 
 	self.validation = {};
-	self.reg = {};
 	self.change = {};
 	self.user_type = Constants.STUDENT;
 
@@ -69,6 +68,7 @@ function ManageParentStudentController($scope, ManageParentStudentService, apiSe
 				break;
 
 			case Constants.ACTIVE_ADD:
+				self.reg = {};
 				self.active_list = Constants.FALSE;
 				self.active_view = Constants.FALSE;
 				self.active_add = Constants.TRUE;
@@ -281,10 +281,10 @@ function ManageParentStudentController($scope, ManageParentStudentService, apiSe
 		self.validation.e_error = Constants.FALSE;
 		self.validation.e_success = Constants.FALSE;
 
-		if(self.change) {
+		if(self.change == 1) {
 			var email = (self.change.new_email) ? self.change.new_email : self.EMPTY_STR;
 		} else {
-			var email = (self.detail.email) ? self.detail.email : self.EMPTY_STR;
+			var email = (self.reg.email) ? self.reg.email : self.EMPTY_STR;
 		}
 
 		apiService.validateEmail(email, self.user_type).success(function(response) {
