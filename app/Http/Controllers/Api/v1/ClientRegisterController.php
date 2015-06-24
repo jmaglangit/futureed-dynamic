@@ -170,6 +170,7 @@ class ClientRegisterController extends ClientController {
 			return $this->respondWithError($return);
 
 		}
+		
 	}
 
 }
