@@ -19,7 +19,7 @@ class VolumeDiscountRequest extends ApiRequest {
 	 * @return array
 	 */
 	public function rules() {
-		Switch ($this->method()) {
+		switch ($this->method()) {
 
 			case 'POST':
 
