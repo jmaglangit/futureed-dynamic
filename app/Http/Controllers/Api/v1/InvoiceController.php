@@ -197,18 +197,23 @@ class InvoiceController extends ApiController {
     {
         $invoice = $this->invoice->getInvoice($id);
 
-        //delete invoice
-        $this->invoice->deleteInvoice($id);
+        if(!is_null($invoice)){
+            //delete invoice
+            $this->invoice->deleteInvoice($id);
 
-        //delete order.
-        $order = $this->order->getOrderByOrderNo($invoice->order_no);
-        $this->order->deleteOrder($order['id']);
+            //delete order.
+            $order = $this->order->getOrderByOrderNo($invoice->order_no);
+            $this->order->deleteOrder($order['id']);
 
-        //delete class.
-        $this->classrooms->deleteClassroomByOrderNo($invoice->order_no);
+            //delete class.
+            $this->classrooms->deleteClassroomByOrderNo($invoice->order_no);
 
-        //delete order detail.
-        $this->order_detail->deleteOrderDetailByOrderId($order['id']);
+            //delete invoice details
+            $this->invoice_detail->deleteInvoiceDetailByInvoiceId($id);
+
+            //delete order detail.
+            $this->order_detail->deleteOrderDetailByOrderId($order['id']);
+        }
 
         return $this->respondWithData($invoice);
     }
