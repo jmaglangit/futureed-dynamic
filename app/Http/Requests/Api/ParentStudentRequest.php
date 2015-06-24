@@ -41,7 +41,7 @@ class ParentStudentRequest extends ApiRequest {
                             'order_id' => 'required',
                             'price' => 'required|numeric'];
                         break;
-                    case 'parent-student.add.student.by.name':
+                    case 'parent-student.add.student.by.username':
                         return ['username'    =>   'required',
                             'parent_user_id'  =>   'required|integer',
                             'order_id' => 'required',
