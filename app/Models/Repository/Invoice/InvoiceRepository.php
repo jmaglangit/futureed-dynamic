@@ -133,6 +133,15 @@ class InvoiceRepository implements InvoiceRepositoryInterface{
 		return $invoice;
 	}
 
+    public function deleteInvoice($id){
+        try{
+            $result = Invoice::find($id);
+            return is_null($result) ? null : $result->delete();
+        }catch (\Exception $e){
+            return $e->getMessage();
+        }
+    }
+
 
 
 

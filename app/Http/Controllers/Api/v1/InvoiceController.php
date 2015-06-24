@@ -5,6 +5,7 @@ use FutureEd\Http\Controllers\Controller;
 
 use FutureEd\Http\Requests\Api\InvoiceRequest;
 
+use FutureEd\Models\Repository\OrderDetail\OrderDetailRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
@@ -22,17 +23,20 @@ class InvoiceController extends ApiController {
     protected $invoice_detail;
     protected $invoice_service;
     protected $order;
+    protected $order_detail;
 
     public function __construct(ClassroomRepositoryInterface $classroom,
                                 InvoiceRepositoryInterface $invoice,
                                 InvoiceDetailRepositoryInterface $invoice_detail,
                                 InvoiceServices $invoice_service,
-                                OrderRepositoryInterface $order){
+                                OrderRepositoryInterface $order,
+                                OrderDetailRepositoryInterface $order_detail){
         $this->classrooms = $classroom;
         $this->invoice = $invoice;
         $this->invoice_detail = $invoice_detail;
         $this->invoice_service = $invoice_service;
         $this->order = $order;
+        $this->order_detail = $order_detail;
     }
     /**
      * Display a listing of the resource.
@@ -191,7 +195,22 @@ class InvoiceController extends ApiController {
      */
     public function destroy($id)
     {
-        //
+        $invoice = $this->invoice->getInvoice($id);
+
+        //delete invoice
+        $this->invoice->deleteInvoice($id);
+
+        //delete order.
+        $order = $this->order->getOrderByOrderNo($invoice->order_no);
+        $this->order->deleteOrder($order['id']);
+
+        //delete class.
+        $this->classrooms->deleteClassroomByOrderNo($invoice->order_no);
+
+        //delete order detail.
+        $this->order_detail->deleteOrderDetailByOrderId($order['id']);
+
+        return $this->respondWithData($invoice);
     }
 
     /**
