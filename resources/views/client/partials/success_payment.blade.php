@@ -18,16 +18,25 @@
 				{!! Html::image('images/logo-md.png') !!}
 			</div>
 
-			<div class="forgot-message">
-				<p>You have successfully paid.</p>
+			<div class="module-container">
+				<p class="alert alert-success">You have successfully completed the payment process.</p>
 			</div>
 		
 			<div class="btn-container">
-			{!! Html::link(route('client.dashboard.index'), 'View Dashboard'
+			{!! Html::link(route('client.principal.payment.index'), 'View Payment List'
 				, array(
 					'class' => 'btn btn-blue btn-medium'
+					, 'ng-if' => "user.role == 'Principal'"
 				)
 			) !!}
+
+			{!! Html::link(route('client.parent.payment.index'), 'View Payment List'
+				, array(
+					'class' => 'btn btn-blue btn-medium'
+					, 'ng-if' => "user.role == 'Parent'"
+				)
+			) !!}
+
 			</div>
 		</div>
 	</div>

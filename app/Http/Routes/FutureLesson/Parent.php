@@ -77,6 +77,16 @@
 					'uses' => $manage_parent_payment_controller . '@view_payment_form'
 				]);
 			});
+
+			Routes::get('/success', [
+					'as' => 'client.parent.payment.success',
+					'uses' => $manage_parent_payment_controller . '@payment_success'
+				]);
+
+			Routes::get('/fail', [
+					'as' => 'client.parent.payment.fail',
+					'uses' => $manage_parent_payment_controller . '@payment_fail'
+				]);
 		});
 
 		Routes::group(['prefix' => 'invoice'], function() {

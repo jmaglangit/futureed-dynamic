@@ -43,17 +43,23 @@ class ManagePrincipalPaymentController extends Controller{
 
 	public function payment_success() 
 	{
-		$input = Input::only('token');
+		$input = Input::only('token', 'paymentId');
 
-		if($input['token']) {
-			// redirect to payment list
+		if(!($input['token'] || $input['paymentId'])) {
+			return redirect()->route('client.principal.payment.index');
 		}
 
-		return view('client.principal.payment.success');
+		return view('client.partials.success_payment');
 	}
 
 	public function payment_fail() 
 	{
-		return view('client.principal.payment.fail');
+		$input = Input::only('token');
+
+		if(!$input['token']) {
+			return redirect()->route('client.principal.payment.index');
+		}
+
+		return view('client.partials.fail_payment');
 	}
 }
