@@ -218,7 +218,9 @@ trait ApiValidatorTrait {
                     "school_code.required" => $error_msg[2602],
                     "school_code.numeric" => $error_msg[2602],
                     "country_id.required" => $error_msg[2603],
-                    "country_id.numeric" => $error_msg[2604]
+                    "country_id.numeric" => $error_msg[2604],
+					"school_country_id.required" => $error_msg[2603],
+					"school_country_id.numeric" => $error_msg[2604]
                 ]
             );
 
