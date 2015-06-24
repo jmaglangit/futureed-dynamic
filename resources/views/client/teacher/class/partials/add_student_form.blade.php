@@ -227,9 +227,9 @@
             <div class="form-group" ng-init="getCountries()">
                 <label for="" class="col-md-3 control-label">Country <span class="required">*</span></label>
                 <div class="col-md-4">
-                    <select name="country" class="form-control" ng-disabled="true" ng-class="{ 'required-field' : class.fields['country'] }" ng-model="class.add.country" ng-change="getGrades(reg.country)">
+                    <select name="country_id" class="form-control" ng-disabled="true" ng-class="{ 'required-field' : class.fields['country'] }" ng-model="class.add.country_id" ng-change="getGrades(reg.country_id">
                         <option value="">-- Select Country --</option>
-                        <option ng-selected="class.add.country_id == country.id" ng-repeat="country in countries" value="{! country.name !}">{! country.name!}</option>
+                        <option ng-selected="class.add.country_id == country.id" ng-repeat="country in countries" value="{! country.id !}">{! country.name!}</option>
                     </select>
                 </div>
             </div>

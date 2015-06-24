@@ -216,6 +216,7 @@ function ManagePrincipalTeacherController($scope, managePrincipalTeacherService,
 	self.update = function() {
 		self.errors = Constants.FALSE;
 		$("#update_teacher_form input").removeClass("required-field");
+		delete self.record.user;
 
 		$scope.ui_block();
 		managePrincipalTeacherService.update(self.record).success(function(response) {

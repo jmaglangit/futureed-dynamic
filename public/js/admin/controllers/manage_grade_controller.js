@@ -68,12 +68,12 @@ function ManageGradeController($scope, apiService, manageGradeService, TableServ
 	self.getGradeList = function() {
 		self.errors = Constants.FALSE;
 		var grade = (self.search.grade) ? self.search.grade : Constants.EMPTY_STR;
-		var country = (self.search.country) ? self.search.country : Constants.ALL;
+		var country_id = (self.search.country_id) ? self.search.country_id : Constants.ALL;
 		self.grades = {};
 		self.table.loading = Constants.TRUE;
 
 		$scope.ui_block();
-		manageGradeService.getGradeList(grade, country, self.table).success(function(response) {
+		manageGradeService.getGradeList(grade, country_id, self.table).success(function(response) {
 			self.table.loading = Constants.FALSE;
 
 			if(angular.equals(response.status, Constants.STATUS_OK)) {

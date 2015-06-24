@@ -29,7 +29,6 @@
 @stop
 	
 @section('scripts')
-	{!! Html::script('/js/client/manage_teacher.js')!!}
 	{!! Html::script('/js/client/controllers/manage_principal_teacher_controller.js')!!}
 	{!! Html::script('/js/client/services/manage_principal_teacher_service.js')!!}
 	{!! Html::script('/js/common/table_service.js')!!}

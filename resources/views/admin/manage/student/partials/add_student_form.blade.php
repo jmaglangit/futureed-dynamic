@@ -146,7 +146,7 @@
         	<div class="form-group" ng-init="student.getGrades()">
         		<label class="control-label col-xs-2">Grade <span class="required">*</span></label>
         		<div class="col-xs-5">
-                    <select name="grade_code" ng-disabled="!student.country" class="form-control" ng-model="student.reg.grade_code">
+                    <select name="grade_code" ng-disabled="!student.reg.country_id" class="form-control" ng-model="student.reg.grade_code">
                         <option value="">-- Select Level --</option>
                         <option ng-repeat="grade in student.grades" value="{! grade.code !}">{! grade.name !}</option>
                     </select><br><br>
