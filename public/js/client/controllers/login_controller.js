@@ -312,7 +312,7 @@ function LoginController($scope, apiService, clientLoginApiService, clientProfil
 						self.errors = [Constants.MSG_NO_RECORD];
 					} else {
 						self.record = {};
-						var data = response.data[0];
+						var data = response.data;
 
 						self.record.id = data.id;
 						self.record.email = data.user.email;

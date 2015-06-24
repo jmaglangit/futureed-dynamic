@@ -205,7 +205,7 @@
 			            </td>
 			        </tr>
 			        <tr class="odd" ng-if="!sale.discounts.length">
-			        	<td valign="top" colspan="4" class="dataTables_empty">
+			        	<td valign="top" colspan="5">
 			        		No records found
 			        	</td>
 			        </tr>
