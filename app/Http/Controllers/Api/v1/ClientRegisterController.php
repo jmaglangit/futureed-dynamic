@@ -17,7 +17,7 @@ class ClientRegisterController extends ClientController {
 
 	public function register()
 	{
-
+		//TODO: for refactoring 
 		// cannot be use for teacher registration
 
 		$client = Input::only('first_name', 'last_name', 'client_role', 'street_address', 'city', 'state', 'country', 'zip', 'country_id');
@@ -170,7 +170,7 @@ class ClientRegisterController extends ClientController {
 			return $this->respondWithError($return);
 
 		}
-		
+
 	}
 
 }
