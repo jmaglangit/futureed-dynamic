@@ -248,7 +248,7 @@ class ClientController extends ApiController {
 		$user = Input::only('username', 'email', 'status');
 
 		$school = Input::only('school_name', 'school_address', 'school_city',
-			'school_state', 'school_country', 'school_zip',
+			'school_state', 'school_country','school_country_id', 'school_zip',
 			'contact_name', 'contact_number');
 
 		$input = Input::only('callback_uri');
