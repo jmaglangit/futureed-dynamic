@@ -148,8 +148,8 @@ class ClientTeacherController extends ApiController {
 	public function update($id, ClientTeacherRequest $request)
 	{
         $user_type = config('futureed.client');
-        $client = $request->only('first_name','last_name','state','city','zip','country');
-        $user['name'] = $client['first_name'].$client['last_name'];
+        $client = $request->only('first_name','last_name','street_address','state','city','zip','country');
+        $user['name'] = $client['first_name'].' '.$client['last_name'];
 
 
         $client_details = $this->client->getClientDetails($id);
