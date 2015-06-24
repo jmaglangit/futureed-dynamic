@@ -14,9 +14,11 @@ class CreateTableOrderDetails extends Migration {
 	{
 		Schema::create('order_details',function(Blueprint $table){
 
+
 			$table->bigIncrements('id');
-			$table->bigInteger('parent_id');
+			$table->bigInteger('order_id');
 			$table->bigInteger('student_id');
+			$table->decimal('price',5,2);
 			$table->bigInteger('created_by');
 			$table->bigInteger('updated_by');
 			$table->softDeletes()->nullable();
