@@ -307,19 +307,19 @@ function LoginController($scope, apiService, clientLoginApiService, clientProfil
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
-				} else if(response.data) {
-					if(!response.data[0]) {
+				} else {
+					if(!response.data) {
 						self.errors = [Constants.MSG_NO_RECORD];
 					} else {
+						var data = response.data;
 						self.record = {};
-						var data = response.data[0];
-
 						self.record.id = data.id;
 						self.record.email = data.user.email;
 						self.record.username = data.user.username;
 						self.record.first_name = data.first_name;
 						self.record.last_name = data.last_name;
-						self.record.school_code = data.school_code;
+						self.record.school = data.school;
+						self.record.registration_token = data.user.registration_token;
 					}
 				}
 			}

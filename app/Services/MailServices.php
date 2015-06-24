@@ -429,5 +429,23 @@ class MailServices {
 		$this->sendMail($contents);
 	}
 
+    public function sendTeacherAddClass($data){
+        $contents = [
+            'view' => 'emails.client.invite-teacher-to-teach-class',
+            'data' => [
+                'name' => $data['name'],
+                'school_name' => $data['school_name'],
+                'class_name' => $data['class_name'],
+                'login_link' => $data['login_link']
+            ],
+            'mail_recipient' => $data['email'],
+            'mail_recipient_name' => $data['username'],
+            'subject' => 'Welcome to Future Lesson!'
+
+        ];
+
+        $this->sendMail($contents);
+    }
+
 
 }
