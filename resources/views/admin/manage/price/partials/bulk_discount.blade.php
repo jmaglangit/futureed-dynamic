@@ -47,13 +47,16 @@
 				<div class="form-group">
 					<label class="col-xs-2 control-label">Discount <span class="required">*</span></label>
 					<div class="col-xs-5">
-						{!! Form::text('percentage', '',
-							[
-								'class' => 'form-control',
-								'ng-model' => 'sale.data.percentage',
-								'placeholder' => 'Discount'
-							]) 
-						!!}
+						<div class="input-group">
+							{!! Form::text('percentage', '',
+								[
+									'class' => 'form-control',
+									'ng-model' => 'sale.data.percentage',
+									'placeholder' => 'Discount'
+								]) 
+							!!}
+		      				<span class="input-group-addon" id="basic-addon1">%</span>
+						</div>
 					</div>
 				</div>
 				<div class="form-group">
@@ -156,7 +159,7 @@
 	        <tbody>
 		        <tr ng-repeat="b in sale.bulk">
 		            <td>{! b.min_seats !}</td>
-		            <td>{! b.percentage !}</td>
+		            <td>{! b.percentage | percent !}</td>
 		            <td>
 		            	<div class="row">
 		            		<div class="col-xs-4">

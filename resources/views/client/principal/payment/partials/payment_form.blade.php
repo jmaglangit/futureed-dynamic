@@ -100,10 +100,10 @@
 		        <tr ng-repeat="record in payment.records">
 		            <td>{! record.order_no !}</td>
 		            <td>{! record.subscription.name !}</td>
-		            <td>{! record.date_start | ddMMyyyy !}</td>
-		            <td>{! record.date_end | ddMMyyyy !}</td>
+		            <td>{! record.date_start | ddMMyy !}</td>
+		            <td>{! record.date_end | ddMMyy !}</td>
 		            <td>{! record.seats_total !}</td>
-		            <td>{! record.total_amount !}</td>
+		            <td>{! record.total_amount | currency : "USD$ " : 2 !}</td>
 		            <td>
 		            	<div class="row">
 		            		<div class="col-xs-12">

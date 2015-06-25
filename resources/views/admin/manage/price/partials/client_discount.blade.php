@@ -81,13 +81,16 @@
 		      		<div class="form-group">
 		      			<label class="col-xs-2 control-label">Percentage <span class="required">*</span></label>
 		      			<div class="col-xs-5">
-		      				{!! Form::text('percentage', '', 
-			      				[	
-			      					'class' => 'form-control' 
-			      					, 'placeholder' => 'Discount Percentage'
-			      					, 'ng-model' => 'sale.data.percentage'
-			      				]) 
-			      			!!}
+			      			<div class="input-group">
+								{!! Form::text('percentage', '', 
+				      				[	
+				      					'class' => 'form-control' 
+				      					, 'placeholder' => 'Discount Percentage'
+				      					, 'ng-model' => 'sale.data.percentage'
+				      				]) 
+			      				!!}
+			      				<span class="input-group-addon" id="basic-addon1">%</span>
+							</div>
 		      			</div>
 		      		</div>
 		      		<div class="form-group">
@@ -189,7 +192,7 @@
 			            <td>{! p.client.user.name !}</td>
 			            <td>{! p.client.user.email !}</td>
 			            <td>{! p.client.client_role !}</td>
-			            <td>{! p.percentage !}</td>
+			            <td>{! p.percentage | percent !}</td>
 			            <td>
 			            	<div class="row">
 			            		<div class="col-xs-4">

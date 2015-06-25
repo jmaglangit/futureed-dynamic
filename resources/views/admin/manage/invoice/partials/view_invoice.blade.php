@@ -54,7 +54,7 @@
 							, array(
 								  'ng-disabled' => 'true'
 								, 'class' => 'form-control'
-								, 'ng-model' => 'invoice.record.invoice_no'
+								, 'ng-model' => 'invoice.record.id'
 								, 'placeholder' => 'Invoice No.'
 							)
 						) !!}
@@ -74,39 +74,21 @@
 				<div class="form-group">
 					<label class="col-xs-2 control-label">Date Started</label>
 					<div class="col-xs-4">
-						<input type="text" ng-disabled="true" class="form-control" value="{! invoice.record.date_start | ddMMyyyy !}"/>
+						<input type="text" ng-disabled="true" class="form-control" value="{! invoice.record.date_start | ddMMyy !}"/>
 					</div>
 					<label class="col-xs-2 control-label">Date End</label>
 					<div class="col-xs-4">
-						<input type="text" ng-disabled="true" class="form-control" value="{! invoice.record.date_end | ddMMyyyy !}"/>
+						<input type="text" ng-disabled="true" class="form-control" value="{! invoice.record.date_end | ddMMyy !}"/>
 					</div>
 				</div>
 			{!! Form::close() !!}
 		</div>
 	</div>
 
-	<div class="col-xs-12 table-container" ng-init="class.list()">
+	<div class="col-xs-12 table-container">
 		<div class="list-container" ng-cloak>
 			<div class="title-mid">
 				Order List
-			</div>
-
-			<div class="size-container">
-				{!! Form::select('size'
-					, array(
-						  '10' => '10'
-						, '20' => '20'
-						, '50' => '50'
-						, '100' => '100'
-					)
-					, '10'
-					, array(
-						'ng-model' => 'class.table.size'
-						, 'ng-change' => 'class.paginateBySize()'
-						, 'ng-if' => "class.records.length"
-						, 'class' => 'form-control paginate-size pull-right'
-					)
-				) !!}
 			</div>
 
 			<table id="class-list" class="table table-striped table-bordered">
@@ -121,35 +103,21 @@
 					</tr>
 				</thead>
 	        	<tbody>
-					<tr ng-repeat="detail in invoice.record.invoices">
+					<tr ng-repeat="detail in invoice.record.invoice_detail">
 						<td>{! detail.classroom.seats_total !}</td>
 						<td>{! detail.classroom.seats_taken !}</td>
 						<td>{! detail.grade.name !}</td>
 						<td>{! detail.classroom.client.first_name !} {! detail.classroom.client.last_name !}</td>
 						<td>{! detail.classroom.name !}</td>
-						<td>{! detail.price !}</td>
+						<td>{! detail.price | currency : "USD$ " : 2 !}</td>
 					</tr>
-					<tr class="odd" ng-if="!invoice.record.invoices.length">
+					<tr class="odd" ng-if="!invoice.record.invoice_detail.length">
 						<td valign="top" colspan="6" >
 							No records found
 						</td>
 					</tr>
 				</tbody>
 			</table>
-
-			<div class="pull-right" ng-if="class.records.length">
-				<pagination 
-					total-items="class.table.total_items" 
-					ng-model="class.table.page"
-					max-size="3"
-					items-per-page="class.table.size" 
-					previous-text = "&lt;"
-					next-text="&gt;"
-					class="pagination" 
-					boundary-links="true"
-					ng-change="class.paginateByPage()">
-				</pagination>
-			</div>
 		</div>
 	</div>
 
@@ -163,44 +131,53 @@
 			) !!}
 				<div class="form-group">
 					<div class="col-xs-6"></div>
-					<label class="col-xs-2 control-label">Sub-total</label>
+					<label class="col-xs-2 control-label">Sub Total</label>
 					<div class="col-xs-4">
-						{!! Form::text('subtotal', ''
-							, array(
-								  'ng-disabled' => 'true'
-								, 'class' => 'form-control'
-								, 'ng-model' => 'invoice.record.subtotal'
-								, 'placeholder' => 'Sub Total'
-							)
-						) !!}
+						<div class="input-group">
+							<span class="input-group-addon" id="basic-addon1">USD$</span>
+							{!! Form::text('subtotal',''
+								, [
+									'ng-disabled' => true
+									, 'class' => 'form-control'
+									, 'ng-model' => 'invoice.record.subtotal'
+									, 'placeholder' => 'Sub Total'
+								]
+							) !!}
+						</div>
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-xs-6"></div>
 					<label class="col-xs-2 control-label">Discount</label>
 					<div class="col-xs-4">
-						{!! Form::text('discount', ''
-							, array(
-								  'ng-disabled' => 'true'
-								, 'class' => 'form-control'
-								, 'ng-model' => 'invoice.record.discount'
-								, 'placeholder' => 'Sub Total'
-							)
-						) !!}
+						<div class="input-group">
+							{!! Form::text('discount',''
+								, [
+									'ng-disabled' => true
+									, 'class' => 'form-control'
+									, 'ng-model' => 'invoice.record.discount'
+									, 'placeholder' => 'Discount'
+								]
+							) !!}
+							<span class="input-group-addon" id="basic-addon1">%</span>
+						</div>
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-xs-6"></div>
-					<label class="col-xs-2 control-label">Total</label>
+					<label class="col-xs-2 control-label">Total Amount</label>
 					<div class="col-xs-4">
-						{!! Form::text('total', ''
-							, array(
-								  'ng-disabled' => 'true'
-								, 'class' => 'form-control'
-								, 'ng-model' => 'invoice.record.total'
-								, 'placeholder' => 'Sub Total'
-							)
-						) !!}
+						<div class="input-group">
+							  <span class="input-group-addon" id="basic-addon1">USD$</span>
+							  {!! Form::text('total',''
+								, [
+									'ng-disabled' => true
+									, 'class' => 'form-control'
+									, 'ng-model' => 'invoice.record.total'
+									, 'placeholder' => 'Total Amount'
+								]
+							) !!}
+						</div>
 					</div>
 				</div>
 				<div class="form-group">
@@ -235,7 +212,7 @@
 		        		{!! Form::button('Cancel'
 		        			, array(
 		        				'class' => 'btn btn-gold btn-medium'
-		        				, 'ng-click' => "invoice.details(invoice.record.invoice_no, 'view')"
+		        				, 'ng-click' => "invoice.details(invoice.record.id, 'view')"
 		        			)
 		        		) !!}
 					</div>
