@@ -62,7 +62,7 @@ class ClientTeacherRequest extends ApiRequest
 		return [
 			'numeric' => 'The :attribute must be a number.',
 			'unique' => 'Teacher already exists.',
-			'country_id.integer' => 'Country is invalid',
+			'country_id.integer' => 'Country is invalid.',
 		];
 	}
 }
