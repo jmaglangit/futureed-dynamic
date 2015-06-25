@@ -94,7 +94,8 @@ var Constants = {
 	, EDIT_AREA_SUCCESS 		: "You have successfully updated a subject area."
 	, DELETE_AREA_SUCCESS 		: "You have successfully deleted a subject area."
 
-	, UPDATE_PAYMENY_STATUS_SUCCESS 	: "You have successfully updated the payment status."
+	, UPDATE_PAYMENT_STATUS_SUCCESS 	: "You have successfully updated the payment status."
+	, DELETE_INVOICE_SUCCESS : "You have successfully delete the selected invoice."
 
 	, MSG_U_NOTEXIST		: "User does not exist."
 	, MSG_U_EXIST 			: "Username already exists."

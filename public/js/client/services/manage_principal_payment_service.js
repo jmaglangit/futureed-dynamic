@@ -121,5 +121,34 @@ function managePrincipalPaymentService($http){
 		});
 	}
 
+	managePaymentApi.deleteInvoice = function(id) {
+		return $http({
+			method : Constants.METHOD_DELETE
+			, url  : paymentApiUrl + 'invoice/' + id
+		});
+	}
+
+	managePaymentApi.cancelInvoice = function(id) {
+		return $http({
+			method : Constants.METHOD_PUT
+			, url  : paymentApiUrl + 'invoice/cancel-invoice/' + id
+		});
+	}
+
+	managePaymentApi.getClassroom = function(id) {
+		return $http({
+			method : Constants.METHOD_GET
+			, url  : paymentApiUrl + 'classroom/' + id
+		});
+	}
+
+	managePaymentApi.updateClassroom = function(data) {
+		return $http({
+			method : Constants.METHOD_PUT
+			, data : data
+			, url  : paymentApiUrl + 'classroom/update-invoice-classroom/' + data.id
+		});
+	}
+
 	return managePaymentApi;
 }
