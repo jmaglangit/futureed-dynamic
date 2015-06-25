@@ -36,7 +36,7 @@ class ClassStudentRequest extends ApiRequest {
 							'birth_date' => 'required|date_format:Ymd|before:-13 year',
 							'grade_code' => 'required|numeric',
 							'country_id' => 'required|integer',
-							'state' => 'required|string',
+							'state' => 'string',
 							'city' => 'required|string',
 							'email' => 'required|email',
 							'username' => 'required|min:8|max:32|alpha_num',
