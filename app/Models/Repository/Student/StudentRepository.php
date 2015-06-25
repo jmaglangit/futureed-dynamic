@@ -360,7 +360,7 @@ class StudentRepository implements StudentRepositoryInterface
 
 		$student = $student->with('user','school','grade')->token($reg_token)->id($id);
 
-		return $student->get();
+		return $student->get()->toArray();
 
 	}
 

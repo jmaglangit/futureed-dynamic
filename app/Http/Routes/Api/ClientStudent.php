@@ -42,7 +42,7 @@ Routes::group(['prefix' => '/client/manage'], function()
         'uses' => 'Api\v1\TeacherStudentController@studentRegistrationAfterInvitation',
         'as' => 'client-manage.update.student']);
 
-    Routes::post('/view-student/{id}', [
+    Routes::get('/view-student/{id}', [
         'uses' => 'Api\v1\TeacherStudentController@viewStudentDetailsByToken',
         'as' => 'client-manage.update.student']);
 
