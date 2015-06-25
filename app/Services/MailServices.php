@@ -440,7 +440,7 @@ class MailServices {
             ],
             'mail_recipient' => $data['email'],
             'mail_recipient_name' => $data['username'],
-            'subject' => 'Welcome to Future Lesson!'
+            'subject' => 'You have been assigned to a Class!'
 
         ];
 
