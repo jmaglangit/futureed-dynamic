@@ -5,6 +5,18 @@
 		</div>
 	</div>
 
+	<div class="col-xs-12 success-container" ng-if="payment.errors || payment.success">
+		<div class="alert alert-error" ng-if="payment.errors">
+			<p ng-repeat="error in payment.errors track by $index">
+				{! error !}
+			</p>
+		</div>
+
+        <div class="alert alert-success" ng-if="payment.success">
+            <p>{! payment.success !}</p>
+        </div>
+    </div>
+
 	<div class="col-xs-12 search-container">
 		<div class="title-mid">
 			Search
@@ -92,6 +104,7 @@
 			            <th>Date End</th>
 			            <th>Total # of Seats</th>
 			            <th>Total Price</th>
+			            <th>Payment Status</th>
 			            <th>Action</th>
 			        </tr>
 			    </thead>
@@ -104,21 +117,28 @@
 		            <td>{! record.date_end | ddMMyy !}</td>
 		            <td>{! record.seats_total !}</td>
 		            <td>{! record.total_amount | currency : "USD$ " : 2 !}</td>
+		            <td>{! record.payment_status !}</td>
 		            <td>
 		            	<div class="row">
-		            		<div class="col-xs-12">
+		            		<div class="col-xs-4" title="View">
 	    						<a href="" ng-click="payment.paymentDetails(record.id, futureed.ACTIVE_VIEW)"><span><i class="fa fa-eye"></i></span></a>
+	    					</div>
+	    					<div class="col-xs-4" title="Cancel">
+	    						<a href="" ng-if="record.payment_status == futureed.PENDING" ng-click="payment.confirmCancel(record.id)"><span><i class="fa fa-ban"></i></span></a>
+	    					</div>
+	    					<div class="col-xs-4" title="Delete">
+	    						<a href="" ng-click="payment.confirmDelete(record.id)"><span><i class="fa fa-trash"></i></span></a>
 	    					</div>
 		            	</div>
 		            </td>
 		        </tr>
 		        <tr class="odd" ng-if="!payment.records.length && !payment.table.loading">
-		        	<td valign="top" colspan="7">
+		        	<td valign="top" colspan="8">
 		        		No records found
 		        	</td>
 		        </tr>
 		        <tr class="odd" ng-if="payment.table.loading">
-		        	<td valign="top" colspan="7">
+		        	<td valign="top" colspan="8">
 		        		Loading...
 		        	</td>
 		        </tr>
@@ -140,4 +160,66 @@
 			</div>
 		</div>
 	</div>
+
+	<div id="delete_invoice_modal" ng-show="payment.delete_invoice.confirm" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+			    <div class="modal-header">
+			        Delete Invoice
+			    </div>
+			    <div class="modal-body">
+			        Are you sure you want to delete this invoice?
+			    </div>
+			    <div class="modal-footer">
+			    	<div class="btncon col-md-8 col-md-offset-4 pull-left">
+			            {!! Form::button('Yes'
+			                , array(
+			                    'class' => 'btn btn-blue btn-medium'
+			                    , 'ng-click' => 'payment.deleteInvoice(payment.delete_invoice.id)'
+			                    , 'data-dismiss' => 'modal'
+			                )
+			            ) !!}
+
+			            {!! Form::button('No'
+			                , array(
+			                    'class' => 'btn btn-gold btn-medium'
+			                    , 'data-dismiss' => 'modal'
+			                )
+			            ) !!}
+			    	</div>
+			    </div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="cancel_subscription_modal" ng-show="payment.cancel_invoice.confirm" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  	<div class="modal-dialog modal-lg">
+	    <div class="modal-content">
+	        <div class="modal-header">
+	            Cancel Subscription
+	        </div>
+	        <div class="modal-body">
+	            Are you sure you want to cancel this subscription?
+	        </div>
+	        <div class="modal-footer">
+	        	<div class="btncon col-md-8 col-md-offset-4 pull-left">
+	                {!! Form::button('Yes'
+	                    , array(
+	                        'class' => 'btn btn-blue btn-medium'
+	                        , 'ng-click' => 'payment.cancelInvoice(payment.cancel_invoice.id)'
+	                        , 'data-dismiss' => 'modal'
+	                    )
+	                ) !!}
+
+	                {!! Form::button('No'
+	                    , array(
+	                        'class' => 'btn btn-gold btn-medium'
+	                        , 'data-dismiss' => 'modal'
+	                    )
+	                ) !!}
+	        	</div>
+	        </div>
+	    </div>
+  	</div>
 </div>

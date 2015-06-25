@@ -84,10 +84,19 @@
 		        		</div>
 		        	</div>
 		        	<div class="btn-container col-xs-offset-2 col-xs-7">
+		        		{!! Form::button('Update'
+		        			, array(
+		        				'class' => 'btn btn-blue btn-medium'
+		        				, 'ng-click' => 'payment.updateClassroom()'
+		        				, 'ng-if' => 'payment.classroom.update'
+		        			)
+		        		) !!}
+
 		        		{!! Form::button('Add'
 		        			, array(
 		        				'class' => 'btn btn-blue btn-medium'
 		        				, 'ng-click' => 'payment.addClassroom()'
+		        				, 'ng-if' => '!payment.classroom.update'
 		        			)
 		        		) !!}
 
@@ -167,7 +176,7 @@
 					<select ng-model="payment.invoice.subscription_id" 
 						ng-disabled="!payment.subscriptions.length || payment.invoice.payment_status !== futureed.PENDING" 
 						ng-init="payment.listSubscription()"
-						ng-change="payment.setPrice()" class="form-control">
+						ng-change="payment.selectSubscription()" class="form-control">
 
 						<option value="">-- Select Subscription --</option>
 						<option ng-selected="payment.invoice.subscription_id == subscription.id" ng-repeat="subscription in payment.subscriptions" ng-value="{! subscription.id !}">{! subscription.name !}</option>
@@ -210,7 +219,10 @@
 		            <td>{! room.price | currency : "USD$ " : 2 !}</td>
 		            <td ng-if="payment.invoice.payment_status == futureed.PENDING">
 		            	<div class="row">
-		            		<div class="col-xs-12">
+		            		<div class="col-xs-6">
+	    						<a href="" ng-click="payment.getClassroom(room.id)"><span><i class="fa fa-pencil"></i></span></a>
+	    					</div>
+		            		<div class="col-xs-6">
 	    						<a href="" ng-click="payment.removeClassroom(room.id)"><span><i class="fa fa-trash"></i></span></a>
 	    					</div>
 		            	</div>
@@ -290,23 +302,30 @@
 		</div>
 
 		<div class="col-xs-12 margin-30-bot">
-			<div class="btn-container" ng-if="payment.invoice.payment_status == 'Pending'">
-				{!! Form::button('Cancel'
+			<div class="btn-container" ng-if="payment.invoice.payment_status == futureed.PENDING">
+        		{!! Form::button('Delete Subscription'
         			, array(
         				'class' => 'btn btn-gold btn-small div-right'
-        				, 'ng-click' => 'payment.confirmCancel()'
+        				, 'ng-click' => 'payment.deleteInvoice(payment.invoice.id)'
         			)
         		) !!}
 
-				{!! Form::button('Pay Subscription'
+        		{!! Form::button('Save Subscription'
+        			, array(
+        				'class' => 'btn btn-blue btn-small div-right'
+        				, 'ng-click' => 'payment.setActive()'
+        			)
+        		) !!}
+
+        		{!! Form::button('Pay Subscription'
         			, array(
         				'class' => 'btn btn-blue btn-small div-right'
         				, 'ng-click' => 'payment.addPayment()'
         			)
         		) !!}
 			</div>
-			<div class="btn-container" ng-if="payment.invoice.payment_status !== 'Pending'">
-				{!! Form::button('Cancel'
+			<div class="btn-container" ng-if="payment.invoice.payment_status !== futureed.PENDING">
+				{!! Form::button('View List'
         			, array(
         				'class' => 'btn btn-gold btn-small div-right'
         				, 'ng-click' => 'payment.setActive()'
@@ -318,40 +337,10 @@
         				'class' => 'btn btn-blue btn-small div-right'
         				, 'ng-disabled' => 'true'
         				, 'ng-click' => 'payment.addPayment()'
+        				, 'ng-if' => "payment.invoice.payment_status == 'Paid'"
         			)
         		) !!}
 			</div>
 		</div>
 	</div>
-</div>
-
-<div id="cancel_subscription_modal" ng-show="payment.confirm_delete" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-        <div class="modal-header">
-            Cancel Subscription
-        </div>
-        <div class="modal-body">
-            Your changes will be saved. Are you sure you want to cancel this subscription?
-        </div>
-        <div class="modal-footer">
-        	<div class="btncon col-md-8 col-md-offset-4 pull-left">
-                {!! Form::button('Yes'
-                    , array(
-                        'class' => 'btn btn-blue btn-medium'
-                        , 'ng-click' => 'payment.setActive()'
-                        , 'data-dismiss' => 'modal'
-                    )
-                ) !!}
-
-                {!! Form::button('No'
-                    , array(
-                        'class' => 'btn btn-gold btn-medium'
-                        , 'data-dismiss' => 'modal'
-                    )
-                ) !!}
-        	</div>
-        </div>
-    </div>
-  </div>
 </div>

@@ -114,7 +114,7 @@ function ManageInvoiceController($scope, manageInvoiceService, apiService, Table
 						self.fields[value.field] = Constants.TRUE;
 					});
 				} else if(response.data) {
-					self.success = Constants.UPDATE_PAYMENY_STATUS_SUCCESS;
+					self.success = Constants.UPDATE_PAYMENT_STATUS_SUCCESS;
 					self.setActive(Constants.ACTIVE_VIEW);
 				}
 			}
