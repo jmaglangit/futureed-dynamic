@@ -32,7 +32,7 @@ class ClientStudentRequest extends ApiRequest {
 					'gender'        => 'required|alpha|in:Male,Female',
 					'birth_date'    => 'required|date_format:Ymd',
 					'country_id'    => 'required|integer',
-					'state'         => 'required|string',
+					'state'         => 'string',
 					'city'          => 'required|string',
 					'callback_uri'  => 'required|string',
 					'client_id'     => 'required|integer'
@@ -47,7 +47,7 @@ class ClientStudentRequest extends ApiRequest {
 					'gender'        => 'required|alpha|in:Male,Female',
 					'birth_date'    => 'required|date_format:Ymd',
 					'country_id'    => 'required|integer',
-					'state'         => 'required|string',
+					'state'         => 'string',
 					'city'          => 'required|string',
 					'grade_code' 	=> 'required|integer'
 				];
