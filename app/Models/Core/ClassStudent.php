@@ -58,8 +58,9 @@ class ClassStudent extends Model {
 	{
 
 		return $query->whereHas('student', function ($query) use ($name) {
-
-			$query->where('first_name', 'like', '%' . $name . '%')->orWhere('last_name', 'like', '%' . $name . '%');
+			$query->where(function($query) use ($name) {
+				$query->where('first_name', 'like', '%' . $name . '%')->orWhere('last_name', 'like', '%' . $name . '%');
+			});
 		});
 
 	}
