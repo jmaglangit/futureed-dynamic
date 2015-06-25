@@ -13,7 +13,7 @@ class InvoiceDetail extends Model {
 
     protected $hidden = ['created_by','updated_by','created_at','updated_at','deleted_at'];
     
-    protected $fillable = ['invoice_id', 'class_id', 'grade_code'];
+    protected $fillable = ['invoice_id', 'class_id', 'grade_id'];
 
     public function classroom() {
 
