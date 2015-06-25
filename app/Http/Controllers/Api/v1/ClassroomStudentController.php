@@ -47,6 +47,11 @@ class ClassroomStudentController extends ApiController {
             $category['email'] = Input::get('email');
         }
 
+		if(Input::get('class_id')){
+
+			$category['class_id'] = Input::get('class_id');
+		}
+
         if(Input::get('offset')){
 
             $category['offset'] = Input::get('offset');

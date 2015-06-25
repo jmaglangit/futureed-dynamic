@@ -72,6 +72,7 @@ function ManageTeacherStudentController($scope, manageTeacherStudentService, api
 	self.listStudent = function() {
 		self.records = [];
 		self.search.client_role = Constants.TEACHER;
+		self.search.client_id = $scope.user.id;
 
 		$scope.ui_block();
 		manageTeacherStudentService.listStudent(self.search, self.table).success(function(response) {
