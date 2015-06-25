@@ -180,7 +180,7 @@ class ClientStudentController extends ApiController {
 		$this->parent_student->addParentStudent($parent_student);
 
 		//form data needed for email (user_id,url)
-		$this->mail->sendStudentRegister($user_id,$url['callback_uri']);
+		$this->mail->sendParentInviteStudent($user_id,$url['callback_uri']);
 
 		return $this->respondWithData(['id' => $student_id]);
 
