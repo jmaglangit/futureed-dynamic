@@ -212,7 +212,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="" class="col-md-3 control-label">State <span class="required">*</span></label>
+                <label for="" class="col-md-3 control-label">State</label>
                 <div class="col-md-4">
                     {!! Form::text('state', ''
                         , array(
