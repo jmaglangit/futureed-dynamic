@@ -295,7 +295,7 @@
 	        	</legend>
 	        	<div class="form-group">
 	        		<label class="col-md-3 control-label" id="school_address">Street Address <span class="required" ng-if="client.create.client_role == futureed.PARENT">*</span></label>
-	        		<div class="col-md-5">
+	        		<div class="col-md-6">
 	        			{!! Form::text('street_address',''
 	        				, array(
 	        					'placeHolder' => 'Street Address'

@@ -91,13 +91,6 @@ function ManageClientController($scope, apiService, manageClientService) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					self.details = response.data;
-					if(angular.equals(self.details.client_role, Constants.PRINCIPAL)) {
-						self.role.principal = Constants.TRUE;
-					} else if(angular.equals(self.details.client_role, Constants.PARENT)) {
-						self.role.parent = Constants.TRUE;
-					} else if(angular.equals(self.details.client_role, Constants.TEACHER)) {
-						self.role.teacher = Constants.TRUE;
-					}
 				}
 			}
 

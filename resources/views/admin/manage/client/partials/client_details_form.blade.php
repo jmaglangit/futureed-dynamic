@@ -173,13 +173,13 @@
 	        		</div>
 	        	</div>
 	        </fieldset>
-	        <fieldset ng-if="client.role.teacher">
+	        <fieldset ng-if="client.details.client_role == futureed.TEACHER">
 	        	<legend class="legend-name-mid">
 	        		School Information
 	        	</legend>
 	        	<div class="form-group">
 	        		<label class="col-md-3 control-label">School Name <span class="required">*</span></label>
-	        		<div class="col-md-5">
+	        		<div class="col-md-6">
 	        			{!! Form::text('school_name',''
 	        				, array(
 	        					'placeHolder' => 'School Name'
@@ -192,7 +192,7 @@
 	        				)
 	        			) !!}
 	        			<div class="angucomplete-holder" ng-if="client.schools">
-							<ul class="col-md-5 angucomplete-dropdown">
+							<ul class="col-md-6 angucomplete-dropdown">
 								<li class="angucomplete-row" ng-repeat="school in client.schools" ng-click="client.selectSchool(school)">
 									{! school.name !}
 								</li>
@@ -205,13 +205,13 @@
 		            </div>
 	        	</div>
 	        </fieldset>
-	        <fieldset ng-if="client.role.principal">
+	        <fieldset ng-if="client.details.client_role == futureed.PRINCIPAL">
 	        	<legend class="legend-name-mid">
 	        		School Information
 	        	</legend>
 	        	<div class="form-group">
 	        		<label class="col-md-3 control-label" id="school_name">School Name <span class="required">*</span></label>
-	        		<div class="col-md-5">
+	        		<div class="col-md-6">
 	        			{!! Form::text('school_name',''
 	        				, array(
 	        					'placeHolder' => 'School Name'
@@ -225,7 +225,7 @@
 	        	</div>
 	        	<div class="form-group">
 	        		<label class="col-md-3 control-label" id="school_address">School Address <span class="required">*</span></label>
-	        		<div class="col-md-5">
+	        		<div class="col-md-6">
 	        			{!! Form::text('school_address',''
 	        				, array(
 	        					'placeHolder' => 'School Address'
@@ -289,7 +289,7 @@
 				      </div>
 	        	</div>
 	        </fieldset>
-	        <fieldset ng-if="client.role.principal">
+	        <fieldset ng-if="client.details.client_role == futureed.PRINCIPAL">
 	        	<legend class="legend-name-mid">
 	        		School Contact Information
 	        	</legend>
@@ -323,15 +323,15 @@
 	        	</div>
 	        </fieldset>
 	        <fieldset ng-if="client.details.client_role">
-	        	<legend class="legend-name-mid" ng-if="!client.role.parent">
+	        	<legend class="legend-name-mid" ng-if="client.details.client_role !== futureed.PARENT">
 	        		Other Address Information (Optional)
 	        	</legend>
-	        	<legend class="legend-name-mid" ng-if="client.role.parent">
+	        	<legend class="legend-name-mid" ng-if="client.details.client_role == futureed.PARENT">
 	        		Address Information
 	        	</legend>
 	        	<div class="form-group">
-	        		<label class="col-md-3 control-label" id="school_address">Street Address <span class="required" ng-if="client.role.parent">*</span></label>
-	        		<div class="col-md-5">
+	        		<label class="col-md-3 control-label" id="school_address">Street Address <span class="required" ng-if="client.details.client_role == futureed.PARENT">*</span></label>
+	        		<div class="col-md-6">
 	        			{!! Form::text('street_address',''
 	        				, array(
 	        					'placeHolder' => 'Street Address'
@@ -344,7 +344,7 @@
 	        		</div>
 	        	</div>
 	        	<div class="form-group">
-	        		<label class="col-md-3 control-label" id="school_city">City <span class="required" ng-if="client.role.parent">*</span></label>
+	        		<label class="col-md-3 control-label" id="school_city">City <span class="required" ng-if="client.details.client_role == futureed.PARENT">*</span></label>
 	        		<div class="col-md-5">
 	        			{!! Form::text('city',''
 	        				, array(
@@ -358,7 +358,7 @@
 	        		</div>
 	        	</div>
 	        	<div class="form-group">
-	        		<label class="col-md-3 control-label" id="school_state">State <span class="required" ng-if="client.role.parent">*</span></label>
+	        		<label class="col-md-3 control-label" id="school_state">State <span class="required" ng-if="client.details.client_role == futureed.PARENT">*</span></label>
 	        		<div class="col-md-5">
 	        			{!! Form::text('state',''
 	        				, array(
@@ -386,7 +386,7 @@
 	        		</div>
 	        	</div>
 	        	<div class="form-group">
-	        		<label class="col-md-3 control-label">Country <span class="required" ng-if="client.role.parent">*</span></label>
+	        		<label class="col-md-3 control-label">Country <span class="required" ng-if="client.details.client_role == futureed.PARENT">*</span></label>
 				      <div class="col-md-5" ng-init="getCountries()">
 				        <select  name="country_id" class="form-control" ng-class="{ 'required-field' : client.fields['country_id'] }" ng-disabled="client.active_view_client" ng-model="client.details.country_id">
 				          <option ng-selected="true" value="">-- Select Country --</option>
