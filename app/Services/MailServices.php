@@ -371,7 +371,7 @@ class MailServices {
 			'data' => [
 				'student_name' => $user_detail['name'],
 				'teacher_name' => $data['teacher_name'],
-				'link' => $data['url'] . '/' . $data['student_id'] . '?registration_token=' . $token,
+				'link' => $data['url'] . '?id=' . $data['student_id'] . '&registration_token=' . $token,
 			],
 			'mail_recipient' => $user_detail['email'],
 			'mail_recipient_name' => $user_detail['name'],
