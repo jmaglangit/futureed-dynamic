@@ -5,6 +5,7 @@ use FutureEd\Http\Requests\Api\PaymentRequest;
 use FutureEd\Models\Repository\Classroom\ClassroomRepositoryInterface;
 use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
 use FutureEd\Models\Repository\Invoice\InvoiceRepositoryInterface;
+use FutureEd\Models\Repository\Order\OrderRepositoryInterface;
 use FutureEd\Services\MailServices;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
@@ -31,11 +32,13 @@ class PaymentController extends ApiController
     protected $email;
     protected $classroom;
     protected $client;
+    protected $order;
 
     public function __construct(InvoiceRepositoryInterface $invoice,
                                 MailServices $email,
                                 ClientRepositoryInterface $client,
-                                ClassroomRepositoryInterface $classroom)
+                                ClassroomRepositoryInterface $classroom,
+                                OrderRepositoryInterface $order)
     {
         $paypal_conf = config('paypal');
         $this->_api_context = new ApiContext(new OAuthTokenCredential($paypal_conf['client_id'], $paypal_conf['secret']));
@@ -45,6 +48,7 @@ class PaymentController extends ApiController
         $this->invoice = $invoice;
         $this->classroom = $classroom;
         $this->client = $client;
+        $this->order = $order;
     }
     /**
      * 	Post payment to Paypal portal
@@ -136,6 +140,10 @@ class PaymentController extends ApiController
         // Get the payment ID before session clear
         $payment_id = Session::get('paypal_payment_id');
         $invoice_id = Session::get('paypal_payment_invoice_id');
+        $order_no = Session::get('paypal_payment_order_no');
+
+        $order_id = $this->order->getOrderByOrderNo($order_no);
+        $order_id = $order_id['id'];
 
         // clear the session payment ID
         Session::forget('paypal_payment_id');
@@ -164,11 +172,11 @@ class PaymentController extends ApiController
             //Update invoice status to paid.
             $data['payment_status'] = config('futureed.paid');
             $this->invoice->updateInvoice($invoice_id,$data);
+            $this->order->updateOrder($order_id,$data);
 
             //send email
             if(Session::has('paypal_payment_client_id')){
                 $client_id = Session::get('paypal_payment_client_id');
-                $order_no = Session::get('paypal_payment_order_no');
 
                 Session::forget('paypal_payment_client_id');
                 Session::forget('paypal_payment_order_no');

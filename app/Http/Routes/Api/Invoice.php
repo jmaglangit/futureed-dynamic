@@ -29,4 +29,8 @@ Routes::group(['prefix' => '/invoice'], function()
     Routes::get('/get-next-invoice-no/{client_id}', [
         'uses' => 'Api\v1\InvoiceController@getNextInvoiceNo',
         'as' => 'invoice.get.next-invoice-no']);
+
+    Routes::put('/cancel-invoice/{id}', [
+        'uses' => 'Api\v1\InvoiceController@cancelInvoice',
+        'as' => 'invoice.put.cancel-invoice']);
 });

@@ -233,4 +233,18 @@ class InvoiceController extends ApiController {
         $new_invoice_no = $invoice_no['id'] + 1;
         return $this->respondWithData($this->invoice_service->createInvoiceNo($new_invoice_no));
     }
+
+    public function cancelInvoice($id){
+        $invoice = $this->invoice->getInvoice($id);
+        if(!is_null($invoice)){
+
+            $data['payment_status'] = config('futureed.cancelled');
+            $this->invoice->updateInvoice($id,$data);
+
+            $order_id = $this->order->getOrderByOrderNo($invoice->order_no);
+            $order_id = $order_id['id'];
+            $this->order->updateOrder($order_id,$data);
+        }
+        return $this->respondWithData($invoice);
+    }
 }
