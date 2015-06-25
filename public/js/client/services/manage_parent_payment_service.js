@@ -108,5 +108,28 @@ function ManageParentPaymentService($http){
 				+ '&price=' + data.price
 		})
 	}
+
+	managePaymentApi.updatePayment = function(data) {
+		return $http({
+			method : Constants.METHOD_PUT
+			, data : data
+			, url  : paymentApiUrl + 'invoice/' + data.id
+		});
+	}
+
+	managePaymentApi.getPaymentUri = function(data) {
+		return $http({
+			method : Constants.METHOD_POST
+			, data : data
+			, url  : paymentApiUrl + 'payment'
+		});
+	}
+
+	managePaymentApi.removeStudent = function(id) {
+		return $http({
+			method : Constants.METHOD_DELETE
+			, url  : paymentApiUrl + 'order-detail/' + id
+		});
+	}
 	return managePaymentApi;
 }

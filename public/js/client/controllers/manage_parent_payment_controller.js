@@ -13,7 +13,6 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 	self.searchDefaults();
 
 	self.students = {};
-	self.invoice = {};
 	self.create = {};
 	self.search_name = {};
 	self.validation = {};
@@ -34,6 +33,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 			case Constants.ACTIVE_ADD:
 				self.date = {};
 				self.add = {};
+				self.invoice = {};
 				self.active_add = Constants.TRUE;
 				self.active_list = Constants.FALSE;
 				self.active_view = Constants.FALSE;
@@ -44,6 +44,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 			case Constants.ACTIVE_VIEW:
 				self.date = {};
 				self.add = {};
+				self.invoice = {};
 				self.active_add = Constants.FALSE;
 				self.active_list = Constants.FALSE;
 				self.active_view = Constants.TRUE;
@@ -122,7 +123,6 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					self.invoice = response.data;
-
 					if(self.invoice.subscription){
 						var subscription_id = self.invoice.subscription.id;
 						self.getSubscription(subscription_id);
@@ -137,8 +137,15 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 					}
 
 					self.invoice.subtotal = self.subtotal;
-					self.invoice.subscription_enable = (self.invoice.payment_status == Constants.PENDING) ? Constants.TRUE:Constants.FALSE;
+					self.invoice.h_date_start = self.invoice.date_start;
+					self.invoice.h_date_end = self.invoice.date_end;
+
+					var date = new Date();
+					self.invoice.date_start = (parseInt(self.invoice.date_start) != 0) ? $filter('date')(new Date(self.invoice.date_start), 'dd/MM/yyyy'):null;
 					
+					self.invoice.date_end = (parseInt(self.invoice.date_end) != 0) ? $filter('date')(new Date(self.invoice.date_end), 'dd/MM/yyyy'):null;
+					
+					self.invoice.subscription_enable = (self.invoice.payment_status == Constants.PENDING) ? Constants.TRUE:Constants.FALSE;
 				}
 			}
 			$scope.ui_unblock();
@@ -237,8 +244,9 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				}else if(response.data){
+
 					self.subscription = response.data;
-					self.getStudents();
+					self.getStudents(self.invoice.order_no);
 				}
 			}
 		}).error(function(response){
@@ -264,21 +272,24 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 			self.errors = $scope.internalError();
 		});
 	}
-	self.setDate = function() {
+	self.setDate = function(flag) {
 		var date = new Date();
 		if(self.no_days) {
-			self.payment_total.s_price = ($('#subscription').find(':selected').data('id') != null) ? $('#subscription').find(':selected').data('id'):0;
+			self.invoice.h_date_start = null;
+			self.invoice.h_date_end = null;
+
+			self.payment_total.s_price = ($('#subscription').find(':selected').data('price') != null) ? $('#subscription').find(':selected').data('price'):0;
 			self.students.price = (self.payment_total.s_price) ? self.payment_total.s_price: self.students.price;
-			self.date.dis_start_date = $filter('date')(date, 'yyyyMMdd');
-			self.date.start_date = $filter('date')(date, 'dd/MM/yyyy');
+			self.invoice.dis_start_date = $filter('date')(date, 'yyyyMMdd');
+			
+			self.invoice.date_start = $filter('date')(date, 'dd/MM/yyyy');
 
 			date.setDate(date.getDate() + parseInt(self.no_days));
 
-			self.date.dis_end_date = $filter('date')(date, 'yyyyMMdd');
-			self.date.end_date = $filter('date')(date, 'dd/MM/yyyy');
+			self.invoice.dis_end_date = $filter('date')(date, 'yyyyMMdd');
+
+			self.invoice.date_end = $filter('date')(date, 'dd/MM/yyyy');
 			self.computation(1);
-		} else {
-			self.date = {};
 		}
 	}
 
@@ -326,10 +337,11 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 	self.addStudentOrderByEmail = function() {
 		self.errors = Constants.FALSE;
 		self.add.success = Constants.FALSE;
+		self.success = Constants.FALSE;
 
 		self.add.parent_user_id = self.client.user_id;
 		self.add.order_id = (self.invoice_detail) ? self.invoice_detail.id : self.invoice.id;
-		self.add.price = ($('#subscription').find(':selected').data('id') != null) ? $('#subscription').find(':selected').data('id'):0;
+		self.add.price = ($('#subscription').find(':selected').data('price') != null) ? $('#subscription').find(':selected').data('price'):0;
 		self.add.email = (self.add.email == null) ? Constants.EMPTY_STR : self.add.email;
 
 		$scope.ui_block();
@@ -341,7 +353,11 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 					self.student_detail = response.data;
 					self.add.success = Constants.TRUE;
 					self.getSubscriptionList();
-					self.getStudents(self.invoice_detail.order_no, 1);
+					if(self.invoice){
+						self.getStudents(self.invoice.order_no, 1);
+					}else{
+						self.getStudents(self.invoice_detail.order_no, 1);
+					}
 				}
 			}
 			$scope.ui_unblock();
@@ -381,10 +397,11 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 	self.addStudentOrderByUsername = function() {
 		self.errors = Constants.FALSE;
 		self.add.success = Constants.FALSE;
+		self.success = Constants.FALSE;
 
 		self.add.parent_user_id = self.client.user_id;
 		self.add.order_id = (self.invoice_detail) ? self.invoice_detail.id : self.invoice.id;
-		self.add.price = ($('#subscription').find(':selected').data('id') != null) ? $('#subscription').find(':selected').data('id'):0;
+		self.add.price = ($('#subscription').find(':selected').data('price') != null) ? $('#subscription').find(':selected').data('price'):0;
 		
 		$scope.ui_block();
 		ManageParentPaymentService.addStudentOrderByUsername(self.add).success(function(response){
@@ -394,7 +411,12 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 				}else if(response.data){
 					self.student_detail = response.data;
 					self.add.success = Constants.TRUE;
-					self.getStudents(self.invoice_detail.order_no, 1);
+					self.getSubscriptionList();
+					if(self.invoice){
+						self.getStudents(self.invoice.order_no, 1);
+					}else{
+						self.getStudents(self.invoice_detail.order_no, 1);
+					}
 				}
 			}
 			$scope.ui_unblock();
@@ -422,5 +444,124 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
+	}
+
+	self.addPayment = function(flag) {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+		self.add.success = Constants.FALSE;
+
+		self.invoice.invoice_date = $filter('date')(new Date(), 'yyyyMMdd');
+		self.invoice.id = (flag == 'add') ? self.invoice_detail.id: self.invoice.id;
+		self.invoice.order_no = (flag == 'add') ? self.invoice_detail.order_no : self.invoice.order_no;
+		self.invoice.client_id = (flag == 'add') ? self.invoice_detail.client_id:self.invoice.client_id;
+		self.invoice.client_name = (flag == 'add') ? self.invoice_detail.client_name:self.invoice.client_name;
+		self.invoice.date_start = (self.invoice.h_date_start != null) ? $filter('date')(new Date(self.invoice.h_date_start), 'yyyyMMdd'): self.invoice.dis_start_date;
+		self.invoice.date_end = (self.invoice.h_date_end != null) ? $filter('date')(new Date(self.invoice.h_date_end), 'yyyyMMdd') : self.invoice.dis_end_date;
+		self.invoice.seats_total = self.students.length;
+		self.invoice.total_amount = self.payment_total.total;
+		self.invoice.subscription_id = $('#subscription').find(':selected').data('id');
+		self.invoice.payment_status = Constants.PENDING;
+		$scope.ui_block();
+		ManageParentPaymentService.updatePayment(self.invoice).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+					$scope.ui_unblock();
+				} else if(response.data) {
+					self.getPaymentUri();
+				}
+			}
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.getPaymentUri = function() {
+		self.payment = {};
+		self.payment.invoice_id = self.invoice.id;
+		self.payment.quantity = Constants.TRUE;
+		self.payment.price = self.invoice.total_amount;
+		self.payment.client_id = self.invoice.client_id;
+		self.payment.order_no = self.invoice.order_no;
+
+		var base_url = $("#base_url_form input[name='base_url']").val();
+		self.payment.success_callback_uri = base_url + "/" + angular.lowercase(Constants.CLIENT) + "/parent/payment/success"
+		self.payment.fail_callback_uri = base_url + "/" + angular.lowercase(Constants.CLIENT) + "/parent/payment/fail"
+
+		ManageParentPaymentService.getPaymentUri(self.payment).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+					$scope.ui_unblock();
+				} else if(response.data) {
+					$window.location.href = response.data.url;
+				}
+			}
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.removeStudent = function(flag) {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+		self.add.success = Constants.FALSE;
+
+		ManageParentPaymentService.removeStudent(self.remove_student_id).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.success = Constants.TRUE;
+					if(flag == 'add'){
+						self.getStudents(self.invoice_detail.id);
+					}else{
+						self.getStudents(self.invoice.id);
+					}
+					
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+
+	}
+	self.confirmCancelAdd = function(id) {
+		self.remove_student_id = id;
+		self.errors = Constants.FALSE;
+		self.confirm_delete = Constants.TRUE;
+		$("#remove_subscription_modal_add").modal({
+	        backdrop: 'static',
+	        keyboard: Constants.FALSE,
+	        show    : Constants.TRUE
+	    });
+	}
+
+	self.confirmCancelView = function(id) {
+		self.remove_student_id = id;
+		self.errors = Constants.FALSE;
+		self.confirm_delete = Constants.TRUE;
+		$("#remove_subscription_modal_view").modal({
+	        backdrop: 'static',
+	        keyboard: Constants.FALSE,
+	        show    : Constants.TRUE
+	    });
+	}
+
+	self.confirmCancel = function(id) {
+		self.remove = {};
+		self.remove.id = id;
+		self.errors = Constants.FALSE;
+		self.confirm_delete = Constants.TRUE;
+		$("#cancel_subscription_modal").modal({
+	        backdrop: 'static',
+	        keyboard: Constants.FALSE,
+	        show    : Constants.TRUE
+	    });
 	}
 }
