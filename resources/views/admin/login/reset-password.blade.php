@@ -2,7 +2,7 @@
 
 @section('content')
 	<div class="container login" ng-controller="AdminLoginController as forgot" ng-cloak>
-		<div class="col-md-6 col-md-offset-3">
+		<div class="login-container col-md-6 col-md-offset-3">
 			<div class="form-style form-narrow">
 				<div class="logo-container">
 					{!! Html::image('images/logo-md.png') !!}

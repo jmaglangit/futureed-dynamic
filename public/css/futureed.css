@@ -272,6 +272,7 @@ fieldset legend{color: #8e8171; font-size: 16px; text-transform: uppercase;}
 }
 .dropdown-menu{
 	width: 100%;
+	min-width: 320px;
 }
 
 .datetimepicker {
