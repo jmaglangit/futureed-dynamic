@@ -2,7 +2,7 @@
 	, 'class' => 'form-horizontal', 'ng-if' => 'profile.active_password && !profile.password_changed'))!!}
 	<div class="form-group">
 		<label class="col-xs-3 control-label">Current Password <span class="required">*</span></label>
-		<div class="col-xs-5">
+		<div class="col-xs-6">
     		{!! Form::password('password'
     			, array(
         			'class' => 'form-control'
@@ -13,7 +13,7 @@
 	</div>
 	<div class="form-group">
 		<label class="col-xs-3 control-label">New Password <span class="required">*</span></label>
-		<div class="col-xs-5">
+		<div class="col-xs-6">
     		{!! Form::password('new_password'
     			, array(
         			'class' => 'form-control'
@@ -26,7 +26,7 @@
 	</div>
 	<div class="form-group">
 		<label class="col-xs-3 control-label">Confirm Password <span class="required">*</span></label>
-		<div class="col-xs-5">
+		<div class="col-xs-6">
     		{!! Form::password('confirm_password'
     			, array(
         			'class' => 'form-control'
