@@ -88,6 +88,13 @@ class ClassStudentController extends ApiController {
             return $this->respondErrorMessage(2200);
         }
 
+        //check seats availability.
+        $classroom = $this->classroom->getClassroom($class_student['class_id']);
+
+        if( $classroom->seats_taken >= $classroom->seats_total ){
+            return $this->respondErrorMessage(2135);
+        }
+
         $user = array_merge($user,[
             'user_type' => config('futureed.student')
         ]);
@@ -122,11 +129,8 @@ class ClassStudentController extends ApiController {
             $this->class_student->addClassStudent($class_student);
 
             //increment seats_taken
-            $classroom = $this->classroom->getClassroom($class_student['class_id']);
-            if(!is_null($classroom)){
-                $classroom_data['seats_taken'] = $classroom->seats_taken + 1;
-                $this->classroom->updateClassroom($classroom->id,$classroom_data);
-            }
+            $classroom_data['seats_taken'] = $classroom->seats_taken + 1;
+            $this->classroom->updateClassroom($classroom->id,$classroom_data);
 
             //send email to student.
             $client_user_id = $this->client->checkClient($class_student['client_id'],config('futureed.teacher'));
@@ -177,17 +181,21 @@ class ClassStudentController extends ApiController {
 			return $this->respondErrorMessage(2125);// Student is already in the class.
 		}
 
+        //check seats availability.
+        $classroom = $this->classroom->getClassroom($data['class_id']);
+
+        if( $classroom->seats_taken >= $classroom->seats_total ){
+            return $this->respondErrorMessage(2135);
+        }
+
 		//add to class student table.
 		$data['student_id'] = $student_id;
 		$data['status'] = 'Enabled';
 		$this->class_student->addClassStudent($data);
 
         //increment seats_taken
-        $classroom = $this->classroom->getClassroom($data['class_id']);
-        if(!is_null($classroom)){
-            $classroom_data['seats_taken'] = $classroom->seats_taken + 1;
-            $this->classroom->updateClassroom($classroom->id,$classroom_data);
-        }
+        $classroom_data['seats_taken'] = $classroom->seats_taken + 1;
+        $this->classroom->updateClassroom($classroom->id,$classroom_data);
 
 		//send email to student.
 		$classroom = $this->class_student->getClassroom($data['class_id']);
