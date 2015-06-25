@@ -4,7 +4,18 @@
 			<span>Payment Management</span>
 		</div>
 	</div>
-	<div class="col-xs-12">
+	<div class="col-xs-12 form-container">
+		<div class="alert-container">
+			<div class="alert alert-error" ng-if="payment.errors">
+	            <p ng-repeat="error in payment.errors track by $index" > 
+	              	{! error !}
+	            </p>
+	        </div>
+
+	        <div class="alert alert-success" ng-if="payment.success">
+	        	<p>Successfully deleted Invoice</p>
+	        </div>
+		</div>
 		<div class="title-mid mid-container">
 			Search
 		</div>
@@ -86,6 +97,7 @@
 			            <th>Date Started</th>
 			            <th>Date End</th>
 			            <th>Total # of Seats</th>
+			            <th>Status</th>
 			            <th>Total Price</th>
 			            <th>Actions</th>
 			        </tr>
@@ -95,14 +107,21 @@
 		        <tr ng-repeat="key in payment.records">
 		            <td>{! key.order_no !}</td>
 		            <td>{! key.subscription.name !}</td>
-		            <td>{! key.date_start !}</td>
-		            <td>{! key.date_end !}</td>
+		            <td>{! key.date_start | ddMMyyyy !}</td>
+		            <td>{! key.date_end | ddMMyyyy !}</td>
 		            <td>{! key.seats_total !}</td>
+		            <td>{! key.payment_status !}</td>
 		            <td>{! key.total_amount !}</td>
 		            <td>
 		            	<div class="row">
-		            		<div>
-	    						<a href="" ng-click="payment.setActive('view', key.id)"><span><i class="fa fa-eye"></i></span></a>
+		            		<div class="col-xs-4">
+	    						<a href="" ng-click="payment.setActive('view', key.id)" title="view"><span><i class="fa fa-eye"></i></span></a>
+	    					</div>
+	    					<div class="col-xs-4">
+	    						<a href="" ng-click="payment.setActive('view', key.id)" title="cancel"><span><i class="fa fa-ban"></i></span></a>
+	    					</div>
+	    					<div class="col-xs-4">
+	    						<a href="" ng-click="payment.deleteInvoice(key.id)" title="delete"><span><i class="fa fa-trash"></i></span></a>
 	    					</div>
 		            	</div>
 		            </td>

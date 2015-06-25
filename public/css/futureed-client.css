@@ -86,7 +86,9 @@ table#client-list{
 	padding: 0 30px 0 30px;
 	margin-bottom: 30px;
 }
-
+.alert-container {
+	margin-top: 30px;
+}
 .success-container {
 	padding: 30px 30px 0px 30px;
 }
