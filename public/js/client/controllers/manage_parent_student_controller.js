@@ -133,7 +133,6 @@ function ManageParentStudentController($scope, ManageParentStudentService, apiSe
 		self.table.loading = Constants.TRUE;
 		$scope.ui_block();
 		var client_id = $scope.user.id;
-		console.log(client_id);
 		ManageParentStudentService.getStudentlist(client_id, self.search, self.table).success(function(response){
 
 			if(angular.equals(response.status,Constants.STATUS_OK)){
