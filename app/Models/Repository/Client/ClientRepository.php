@@ -141,6 +141,7 @@ class ClientRepository implements ClientRepositoryInterface
             $data['password'] =  (!isset($data['password'])) ?: sha1($data['password']);
 
             //TODO: to be updated through relationships.
+
             $user = User::find($client)->update($data);
 
             $client = Client::find($id)->update($data);

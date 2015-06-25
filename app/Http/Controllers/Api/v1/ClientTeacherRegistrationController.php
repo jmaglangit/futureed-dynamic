@@ -94,6 +94,10 @@ class ClientTeacherRegistrationController extends ApiController
 
 		]);
 
+        //apply name on user table.
+        $name = ['name' => $input['first_name'].' '.$input['last_name']];
+        $input = array_merge($input, $name);
+
 		//apply code
 		$input = array_merge($input, $this->code->getCodeExpiry());
 

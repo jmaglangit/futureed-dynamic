@@ -81,11 +81,15 @@ class TeacherStudentController extends ApiController {
 
 	}
 
-	public function viewStudentDetailsByToken($id, TeacherStudentRequest $request){
+	public function viewStudentDetailsByToken($id){
 
-		$data = $request->only('registration_token');
+		$registration_token = NULL;
 
-		$student = $this->student->viewStudentByToken($id, $data['registration_token']);
+		if(Input::get('registration_token')){
+			$registration_token = Input::get('registration_token');
+		}
+
+		$student = $this->student->viewStudentByToken($id, $registration_token);
 
 		if(!$student){
 

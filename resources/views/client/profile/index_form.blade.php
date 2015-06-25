@@ -272,7 +272,7 @@
     <div class="btn-container">
         {!! Form::button('Edit'
             , array(
-                'class' => 'btn btn-gold btn-medium'
+                'class' => 'btn btn-blue btn-medium'
                 , 'ng-click' => "profile.setClientProfileActive('edit')"
                 , 'ng-if' => '!profile.active_edit'
             )
@@ -280,7 +280,7 @@
 
         {!! Form::button('Save'
             , array(
-                'class' => 'btn btn-gold btn-medium'
+                'class' => 'btn btn-blue btn-medium'
                 , 'ng-click' => 'profile.saveClientProfile()'
                 , 'ng-if' => 'profile.active_edit'
             )
@@ -288,7 +288,7 @@
 
         {!! Form::button('Cancel'
             , array(
-                'class' => 'btn btn-blue btn-medium'
+                'class' => 'btn btn-gold btn-medium'
                 , 'ng-click' => "profile.setClientProfileActive('index')"
                 , 'ng-if' => 'profile.active_edit'
             )

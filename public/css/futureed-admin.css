@@ -16,9 +16,6 @@ body.admin{
 	padding:20px;
 	width:120px;
 }
-body > .container > .col-md-4, .col-md-6{
-	margin-top: 80px;
-}
 
 .col-md-4 > .form-style > form{
 	margin-top: 10px;
