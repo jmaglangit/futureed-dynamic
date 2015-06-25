@@ -19,10 +19,10 @@
 
 	<div class="module-container">
 		{!! Form::open(['class' => 'form-horizontal', 'id' => 'change_email_form']) !!}
-		<div class="col-xs-8 col-xs-offset-2 margin-60-top">
+		<div class="col-md-offset-1">
 			<div class="form-group">
 				<label class="control-label col-xs-3">Current Email <span class="required">*</span></label>
-				<div class="col-xs-5">
+				<div class="col-xs-4">
 					{!! Form::text('current_email', ''
 		    			, array(
 		        			'class' => 'form-control'
@@ -42,7 +42,7 @@
 			</div>
 			<div class="form-group">
 				<label class="control-label col-xs-3">New Email <span class="required">*</span></label>
-				<div class="col-xs-5">
+				<div class="col-xs-4">
 		    		{!! Form::text('new_email', ''
 		    			, array(
 		        			'class' => 'form-control'
@@ -62,7 +62,7 @@
 			</div>
 			<div class="form-group">
 				<label class="control-label col-xs-3">Confirm Email <span class="required">*</span></label>
-				<div class="col-xs-5">
+				<div class="col-xs-4">
 		    		{!! Form::text('confirm_email', ''
 		    			, array(
 		        			'class' => 'form-control'
@@ -80,7 +80,7 @@
 			</div>
 			<div class="form-group">
 				<label class="control-label col-xs-3">Enter your Password <span class="required">*</span></label>
-				<div class="col-xs-5">
+				<div class="col-xs-4">
 					{!! 
 						Form::password('password', 
 							[
@@ -92,7 +92,7 @@
 					!!}
 				</div>
 			</div>
-			<div class="col-xs-9 col-xs-offset-1">
+			<div class="col-xs-8 col-xs-offset-1">
 				<div class="btn-container">
 					{!! Form::button('Save'
 							, array(
