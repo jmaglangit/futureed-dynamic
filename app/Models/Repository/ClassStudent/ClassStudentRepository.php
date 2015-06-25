@@ -29,7 +29,7 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface{
 
 		if (isset($criteria['name'])) {
 
-			$class_student = $class_student->username($criteria['name']);
+			$class_student = $class_student->name($criteria['name']);
 		}
 
 		if (isset($criteria['email'])) {
