@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Input;
 class StudentController extends ApiController {
 
 	/**
-	 * Display a listing of the resource.
+	 * Display all student.
 	 *
 	 * @return Response
 	 */

@@ -39,7 +39,7 @@ class ClientStudentController extends ApiController {
 	}
 
 	/**
-	 * Display a listing of the resource.
+	 * Display student under client through client_role.
 	 *
 	 * @return Response
 	 */
