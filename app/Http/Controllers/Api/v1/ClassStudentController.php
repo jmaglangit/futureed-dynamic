@@ -69,6 +69,12 @@ class ClassStudentController extends ApiController {
         //check if email exist
         $check_email = $this->user->checkEmail($user['email'],config('futureed.student'));
 
+		//get client details
+		$client = $this->client->getClientDetails($class_student['client_id']);
+
+		//assign to student the school of teacher
+		$student['school_code'] = $client['school_code'];
+
 
         if($check_username){
             return $this->respondErrorMessage(2201);
