@@ -80,7 +80,7 @@ return [
 		2122 => 'Unable to Delete. Teacher is associate to a class.',
 		2123 => 'Unable to Delete. Parent is associated to a student.',
 		2124 => 'Student does not exist.',
-		2125 => 'Student is already in the class.',
+		2125 => 'Student is already in a class.',
 		2126 => 'Unable to Delete. Student is associated to a Parent.',
 		2127 => 'Unable to Delete. Student has Points.',
 		2128 => 'Unable to Delete. Student has Badge.',

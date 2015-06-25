@@ -59,12 +59,16 @@ function ManageStudentController($scope, manageStudentService, apiService, Table
 		$("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 
-	self.getStudentlist = function() {
+	self.getStudentlist = function(search) {
 		self.errors = Constants.FALSE;
 		self.students = Constants.FALSE;
 		self.table.loading = Constants.TRUE;
 		$scope.ui_block();
-
+		
+		if(search){
+			self.table.offset = Constants.EMPTY_STR;
+			self.table.limit = Constants.EMPTY_STR;
+		}
 		manageStudentService.getStudentlist(self.search, self.table).success(function(response){
 
 			if(angular.equals(response.status,Constants.STATUS_OK)){

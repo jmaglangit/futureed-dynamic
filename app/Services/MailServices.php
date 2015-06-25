@@ -371,7 +371,7 @@ class MailServices {
 			'data' => [
 				'student_name' => $user_detail['name'],
 				'teacher_name' => $data['teacher_name'],
-				'link' => $data['url'] . '/' . $data['student_id'] . '?registration_token=' . $token,
+				'link' => $data['url'] . '?id=' . $data['student_id'] . '&registration_token=' . $token,
 			],
 			'mail_recipient' => $user_detail['email'],
 			'mail_recipient_name' => $user_detail['name'],
@@ -446,6 +446,32 @@ class MailServices {
 
         $this->sendMail($contents);
     }
+
+	//
+
+	public function sendParentInviteStudent($user_id,$url){
+
+		$user_type = config('futureed.student');
+
+
+		//get user information for the email
+		$user_detail = $this->user->getUser($user_id,$user_type);
+
+		$code = $this->user->getConfirmationCode($user_id);
+
+		$content = [
+			'view' => 'emails.student.registration-email',
+			'data' => [
+				'name' => $user_detail['name'],
+				'code' => $code['confirmation_code'],
+				'link' => $url . '?email=' . $user_detail['email'],
+			],
+			'mail_recipient' => $user_detail['email'],
+			'mail_recipient_name' => $user_detail['first_name' ] . $user_detail['last_name'],
+			'subject' => config('futureed.invite_student')
+		];
+		$this->sendMail($content);
+	}
 
 
 }

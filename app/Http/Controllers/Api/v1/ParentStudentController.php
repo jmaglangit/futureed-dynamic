@@ -345,16 +345,16 @@ class ParentStudentController extends ApiController {
             return $this->respondErrorMessage(2002);
         }
 
-        $parent_user_id = $request->only('parent_user_id');
+        $student_id = $this->student->getStudentId($student_user_id);
+
+        $parent_id = $request->only('parent_user_id');//this is a client id
 
         //check if user is associated to the parent.
-        $check_parent_student = $this->parent_student->checkParentStudent($parent_user_id,$student_user_id);
+        $check_parent_student = $this->parent_student->checkParentStudent($parent_id,$student_id);
 
         if(is_null($check_parent_student)){
             return $this->respondErrorMessage(2039);
         }
-
-        $student_id = $this->student->getStudentId($student_user_id);
 
         // check if student has existing subscription
         $check_class_student = $this->class_student->getClassStudent($student_id);
@@ -392,16 +392,16 @@ class ParentStudentController extends ApiController {
             return $this->respondErrorMessage(2018);
         }
 
-        $parent_user_id = $request->only('parent_user_id');
+        $student_id = $this->student->getStudentId($student_user_id);
+
+        $parent_id = $request->only('parent_user_id');
 
         //check if user is associated to the parent.
-        $check_parent_student = $this->parent_student->checkParentStudent($parent_user_id,$student_user_id);
+        $check_parent_student = $this->parent_student->checkParentStudent($parent_id,$student_id);
 
         if(is_null($check_parent_student)){
             return $this->respondErrorMessage(2039);
         }
-
-        $student_id = $this->student->getStudentId($student_user_id);
 
         // check if student has existing subscription
         $check_class_student = $this->class_student->getClassStudent($student_id);

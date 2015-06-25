@@ -339,7 +339,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 		self.add.success = Constants.FALSE;
 		self.success = Constants.FALSE;
 
-		self.add.parent_user_id = self.client.user_id;
+		self.add.parent_user_id = self.client.id;
 		self.add.order_id = (self.invoice_detail) ? self.invoice_detail.id : self.invoice.id;
 		self.add.price = ($('#subscription').find(':selected').data('price') != null) ? $('#subscription').find(':selected').data('price'):0;
 		self.add.email = (self.add.email == null) ? Constants.EMPTY_STR : self.add.email;
@@ -399,7 +399,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 		self.add.success = Constants.FALSE;
 		self.success = Constants.FALSE;
 
-		self.add.parent_user_id = self.client.user_id;
+		self.add.parent_user_id = self.client.id;
 		self.add.order_id = (self.invoice_detail) ? self.invoice_detail.id : self.invoice.id;
 		self.add.price = ($('#subscription').find(':selected').data('price') != null) ? $('#subscription').find(':selected').data('price'):0;
 		

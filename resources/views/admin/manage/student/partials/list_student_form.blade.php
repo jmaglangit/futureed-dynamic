@@ -50,7 +50,7 @@
 					{!! Form::button('Search', 
 						array(
 							'class' => 'btn btn-blue'
-							, 'ng-click' => 'student.getStudentlist()'
+							, 'ng-click' => "student.getStudentlist('search')"
 						)
 					) !!}
 				</div>

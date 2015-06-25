@@ -83,6 +83,10 @@ return [
 	//order no. zero fill constants
 	'client_id_zero_fill' => 4,
 	'order_id_zero_fill' => 6,
-	'invoice_id_zero_fill' => 10
+	'invoice_id_zero_fill' => 10,
+
+	//Parent invite student subject
+	'invite_student' => 'You have been invited by a Parent!',
+
 
 ];
