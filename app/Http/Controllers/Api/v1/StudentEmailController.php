@@ -56,6 +56,12 @@ class StudentEmailController extends ApiController {
 			return $this->respondErrorMessage(2106);
 		}
 
+		//check if new_email and email is the same
+		if($data['email'] === $data['new_email']){
+
+			return $this->respondErrorMessage(2107);
+		}
+
 		$client_detail = $this->client->getClientDetails($data['client_id']);
 
 		//check if client detail is empty
