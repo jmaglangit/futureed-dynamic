@@ -188,12 +188,13 @@ class PaymentController extends ApiController
 
                 if(count($classrooms) > 0 ){
                     foreach($classrooms as $res){
+                        //classroom / teacher
+                        $data['name'] = $res['client']['first_name'].' '.$res['client']['last_name'];
                         $data['class_name'] = $res['name'];
                         $data['email'] = $res['client']['user']['email'];
                         $data['username'] = $res['client']['user']['username'];
 
                         //client
-                        $data['name'] = $client['first_name'].' '.$client['last_name'];
                         $data['school_name'] = $client['school']['name'];
                         $data['login_link'] = URL::to('/client/login');
                         $this->email->sendTeacherAddClass($data);
