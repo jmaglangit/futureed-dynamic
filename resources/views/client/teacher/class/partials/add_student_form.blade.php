@@ -141,7 +141,7 @@
         <fieldset>
             <legend>Personal Information</legend>
             <div class="form-group">
-                <label for="" class="col-md-3 control-label">First Name <span ng-class="required">*</span></label>
+                <label for="" class="col-md-3 control-label">First Name <span class="required">*</span></label>
                 <div class="col-md-4">
                     {!! Form::text('first_name', ''
                         , array(
