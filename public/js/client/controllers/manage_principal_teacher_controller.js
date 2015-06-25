@@ -1,10 +1,10 @@
 angular.module('futureed.controllers')
 	.controller('ManagePrincipalTeacherController', ManagePrincipalTeacherController);
 
-ManagePrincipalTeacherController.$inject = ['$scope', 'managePrincipalTeacherService', 'apiService'
+ManagePrincipalTeacherController.$inject = ['$scope', 'managePrincipalTeacherService', 'clientProfileApiService', 'apiService'
 	, 'TableService', 'SearchService'];
 
-function ManagePrincipalTeacherController($scope, managePrincipalTeacherService, apiService, TableService, SearchService){
+function ManagePrincipalTeacherController($scope, managePrincipalTeacherService, clientProfileApiService, apiService, TableService, SearchService){
 
 	var self = this;
 
@@ -37,19 +37,36 @@ function ManagePrincipalTeacherController($scope, managePrincipalTeacherService,
 		self.table.loading = Constants.TRUE;
 
 		$scope.ui_block();
-		managePrincipalTeacherService.list(self.search, self.table).success(function(response){
+		clientProfileApiService.getClientDetails($scope.user.id).success(function(response){
 			self.table.loading = Constants.FALSE;
 
 			if(angular.equals(response.status, Constants.STATUS_OK)){
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
+					$scope.ui_unblock();
 				} else if(response.data) {
-					self.records = response.data.records;
-					self.updatePageCount(response.data);
+					self.search.school_code = response.data.school_code;
+
+					managePrincipalTeacherService.list(self.search, self.table).success(function(response){
+						self.table.loading = Constants.FALSE;
+
+						if(angular.equals(response.status, Constants.STATUS_OK)){
+							if(response.errors) {
+								self.errors = $scope.errorHandler(response.errors);
+							} else if(response.data) {
+								self.records = response.data.records;
+								self.updatePageCount(response.data);
+							}
+						}
+
+						$scope.ui_unblock();
+					}).error(function(response){
+						self.table.loading = Constants.FALSE;
+						self.errors = $scope.internalError();
+						$scope.ui_unblock();
+					})
 				}
 			}
-
-			$scope.ui_unblock();
 		}).error(function(response){
 			self.table.loading = Constants.FALSE;
 			self.errors = $scope.internalError();
