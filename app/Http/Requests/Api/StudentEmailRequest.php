@@ -28,7 +28,7 @@ class StudentEmailRequest extends ApiRequest {
 				return [
 						'email' => 'required|email',
 						'new_email' => 'required|email',
-						'password' => 'required|custom_password',
+						'password' => 'required',
 						'client_id' => 'required|integer',
 						'callback_uri' => 'required|string'
 				];
