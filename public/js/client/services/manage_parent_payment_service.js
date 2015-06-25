@@ -47,7 +47,7 @@ function ManageParentPaymentService($http){
 	managePaymentApi.getStudents = function(id) {
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url 	: paymentApiUrl + 'parent-student/get-students/' + id
+			, url 	: paymentApiUrl + 'order-detail/get-students/' + id
 		})
 	}
 
@@ -55,6 +55,57 @@ function ManageParentPaymentService($http){
 		return $http({
 			method 	: Constants.METHOD_GET
 			, url 	: paymentApiUrl + 'invoice/client-invoice-discount/' + id
+		})
+	}
+
+	managePaymentApi.getOrderNo = function(id) {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url 	: paymentApiUrl + 'order/get-next-order-no/' + id
+		})
+	}
+
+	managePaymentApi.saveOrder = function(data) {
+		return $http({
+			method 	: Constants.METHOD_POST
+			, url 	: paymentApiUrl + 'invoice?client_id=' + data.client_id
+				+ '&client_name=' + data.client_name
+				+ '&order_no=' + data.order_no
+				+ '&payment_status=' + data.payment_status
+		})
+	}
+
+	managePaymentApi.addStudentOrderByEmail = function(data) {
+		return $http({
+			method 	: Constants.METHOD_POST
+			, url 	: paymentApiUrl + 'parent-student/add-students-by-email?email=' + data.email
+				+ '&parent_user_id=' + data.parent_user_id
+				+ '&order_id=' + data.order_id
+				+ '&price=' + data.price
+		})
+	}
+
+	managePaymentApi.searchName = function(name) {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url 	: paymentApiUrl + 'student?name=' + name
+		});
+	}
+
+	managePaymentApi.deleteInvoice = function(id) {
+		return $http({
+			method 	: Constants.METHOD_DELETE
+			, url 	: paymentApiUrl + 'invoice/' + id
+		});
+	}
+
+	managePaymentApi.addStudentOrderByUsername = function(data) {
+		return $http({
+			method 	: Constants.METHOD_POST
+			, url 	: paymentApiUrl + 'parent-student/add-students-by-username?username=' + data.username
+				+ '&parent_user_id=' + data.parent_user_id
+				+ '&order_id=' + data.order_id
+				+ '&price=' + data.price
 		})
 	}
 	return managePaymentApi;
