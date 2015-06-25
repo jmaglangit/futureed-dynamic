@@ -156,7 +156,7 @@ class ClientController extends ApiController {
 					$this->addMessageBag($this->validateString($school, 'school_name'));
 					$this->addMessageBag($this->validateString($school, 'school_state'));
 					$this->addMessageBag($this->validateStringOptional($school, 'school_country'));
-					$this->addMessageBag($this->validateString($school, 'school_country_id'));
+					$this->addMessageBag($this->validateNumber($school, 'school_country_id'));
 					$this->addMessageBag($this->validateStringOptional($school, 'school_street_address'));
 					$this->addMessageBag($this->validateStringOptional($school, 'school_city'));
 					$this->addMessageBag($this->zipCodeOptional($school, 'school_zip'));
@@ -178,6 +178,12 @@ class ClientController extends ApiController {
 					$checkUsername = $this->user->checkUsername($user['username'],'Client');
 					$user['name'] = $client['first_name'].$client['last_name'];
 
+					//add default value for country_id
+					if(!$client['country_id']){
+
+						$client['country_id'] =0;
+
+					}
 	
 				if(!($checkUsername)  || $checkUsername['user_id'] == $clientDetails['user_id'] ){
 
