@@ -274,8 +274,8 @@ fieldset legend{color: #8e8171; font-size: 16px; text-transform: uppercase;}
 	width: 100%;
 }
 
-.date-dropdown-menu{
-	width: 320px !important;
+.datetimepicker {
+	width: 100%;
 }
 
 /*----- REGISTRATION -----*/
