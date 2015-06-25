@@ -180,7 +180,7 @@
 			</fieldset>
 			<div class="col-xs-12">
 				<div class="row margin-150-bot">
-					<div class="login-container col-md-6 col-md-offset-3 btn-container">
+					<div class="col-md-6 col-md-offset-3 btn-container">
 						{!! Form::button('Edit'
 							, array(
 								'class' => 'btn btn-blue btn-medium'
