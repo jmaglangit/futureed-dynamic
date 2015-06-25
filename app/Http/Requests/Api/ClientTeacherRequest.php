@@ -32,7 +32,7 @@ class ClientTeacherRequest extends ApiRequest
 					'city' => 'string',
 					'state' => 'string',
 					'zip' => 'numeric|regex:'.config('regex.zip_code'),
-					'country_id' => 'numeric'
+					'country_id' => 'integer'
 				];
 				break;
 			case 'POST':
@@ -46,7 +46,7 @@ class ClientTeacherRequest extends ApiRequest
 					'last_name' => 'required|regex:'. config('regex.name') ,
 					'current_user' => 'required|numeric',
 					'callback_uri' => 'required|string',
-					'country_id' => 'numeric'
+					'country_id' => 'integer'
 				];
 				break;
 		}
@@ -61,8 +61,8 @@ class ClientTeacherRequest extends ApiRequest
 	{
 		return [
 			'numeric' => 'The :attribute must be a number.',
-			'unique' => 'Teacher already exist.',
-			'country_id.numeric' => 'Country is invalid',
+			'unique' => 'Teacher already exists.',
+			'country_id.integer' => 'Country is invalid',
 		];
 	}
 }
