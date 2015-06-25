@@ -4,6 +4,7 @@ use FutureEd\Http\Controllers\Controller;
 use FutureEd\Http\Requests;
 use FutureEd\Http\Requests\Api\ClassStudentRequest;
 
+use FutureEd\Models\Repository\Classroom\ClassroomRepositoryInterface;
 use FutureEd\Models\Repository\ClassStudent\ClassStudentRepositoryInterface;
 use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
 
@@ -21,18 +22,21 @@ class ClassStudentController extends ApiController {
     protected $mail;
     protected $student;
     protected $user;
+    protected $classroom;
 
     public function __construct(ClassStudentRepositoryInterface $classStudentRepositoryInterface,
                                 ClientRepositoryInterface $clientRepositoryInterface,
                                 UserServices $userServices,
                                 MailServices $mailServices,
-                                StudentServices $studentRepositoryInterface)
+                                StudentServices $studentRepositoryInterface,
+                                ClassroomRepositoryInterface $classroom)
     {
         $this->class_student = $classStudentRepositoryInterface;
         $this->client = $clientRepositoryInterface;
         $this->mail = $mailServices;
         $this->student = $studentRepositoryInterface;
         $this->user = $userServices;
+        $this->classroom = $classroom;
     }
 
     /**
@@ -117,6 +121,13 @@ class ClassStudentController extends ApiController {
 
             $this->class_student->addClassStudent($class_student);
 
+            //increment seats_taken
+            $classroom = $this->classroom->getClassroom($class_student['class_id']);
+            if(!is_null($classroom)){
+                $classroom_data['seats_taken'] = $classroom->seats_taken + 1;
+                $this->classroom->updateClassroom($classroom->id,$classroom_data);
+            }
+
             //send email to student.
             $client_user_id = $this->client->checkClient($class_student['client_id'],config('futureed.teacher'));
             $teacher = $this->user->getUser($client_user_id,config('futureed.client'));
@@ -171,6 +182,12 @@ class ClassStudentController extends ApiController {
 		$data['status'] = 'Enabled';
 		$this->class_student->addClassStudent($data);
 
+        //increment seats_taken
+        $classroom = $this->classroom->getClassroom($data['class_id']);
+        if(!is_null($classroom)){
+            $classroom_data['seats_taken'] = $classroom->seats_taken + 1;
+            $this->classroom->updateClassroom($classroom->id,$classroom_data);
+        }
 
 		//send email to student.
 		$classroom = $this->class_student->getClassroom($data['class_id']);
