@@ -178,6 +178,12 @@ class ClientController extends ApiController {
 					$checkUsername = $this->user->checkUsername($user['username'],'Client');
 					$user['name'] = $client['first_name'].$client['last_name'];
 
+					//add default value for country_id
+					if(!$client['country_id']){
+
+						$client['country_id'] =0;
+
+					}
 	
 				if(!($checkUsername)  || $checkUsername['user_id'] == $clientDetails['user_id'] ){
 

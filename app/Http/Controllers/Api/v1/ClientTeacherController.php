@@ -153,20 +153,25 @@ class ClientTeacherController extends ApiController {
 	 */
 	public function update($id, ClientTeacherRequest $request)
 	{
-        $user_type = config('futureed.client');
-        $client = $request->only('first_name','last_name','street_address','state','city','zip','country');
-        $user['name'] = $client['first_name'].' '.$client['last_name'];
+		$user_type = config('futureed.client');
+		$client = $request->only('first_name', 'last_name', 'street_address', 'state', 'city', 'zip', 'country','country_id');
+		$user['name'] = $client['first_name'] . ' ' . $client['last_name'];
 
+		//add default value for country_id
+		if (!$client['country_id']) {
 
-        $client_details = $this->client->getClientDetails($id);
+			$client['country_id'] = 0;
+		}
 
-        $user['id'] = $client_details['user_id'];
+		$client_details = $this->client->getClientDetails($id);
 
-        $this->user->updateUser($user['id'],$user);
+		$user['id'] = $client_details['user_id'];
 
-        $this->client->updateClientDetails($id,$client);
+		$this->user->updateUser($user['id'], $user);
 
-        $teacher = $this->client->getClientByUserId($id);
+		$this->client->updateClientDetails($id, $client);
+
+		$teacher = $this->client->getClientByUserId($id);
 
 
         return $this->respondWithData($teacher);

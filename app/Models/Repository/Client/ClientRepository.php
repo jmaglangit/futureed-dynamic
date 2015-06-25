@@ -96,24 +96,12 @@ class ClientRepository implements ClientRepositoryInterface
 
     }
 
-    public function updateClientDetails($id, $clientData)
+    public function updateClientDetails($id, $client)
     {
-
-        foreach ($clientData as $key => $value) {
-            if ($value != null) {
-
-                $update[$key] = $value;
-
-            } else {
-
-                $update[$key] = null;
-
-            }
-        }
 
         try {
 
-            Client::where('id', $id)->update($update);
+            Client::where('id', $id)->update($client);
 
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
