@@ -347,13 +347,11 @@ class ParentStudentController extends ApiController {
 
         $student_id = $this->student->getStudentId($student_user_id);
 
-        //dd($student_id);
         $parent_id = $request->only('parent_user_id');//this is a client id
 
         //check if user is associated to the parent.
         $check_parent_student = $this->parent_student->checkParentStudent($parent_id,$student_id);
 
-        //dd($check_parent_student);
         if(is_null($check_parent_student)){
             return $this->respondErrorMessage(2039);
         }
