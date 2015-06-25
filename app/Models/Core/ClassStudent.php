@@ -54,12 +54,12 @@ class ClassStudent extends Model {
 	}
 
 
-	public function scopeUsername($query, $username)
+	public function scopeName($query, $name)
 	{
 
-		return $query->whereHas('user', function ($query) use ($username) {
+		return $query->whereHas('user', function ($query) use ($name) {
 
-			$query->where('username', 'like', '%' . $username . '%');
+			$query->where('name', 'like', '%' . $name . '%');
 		});
 
 	}
