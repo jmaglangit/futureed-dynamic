@@ -266,7 +266,7 @@
 	        		</div>
 	        	</div>
 	        	<div class="form-group">
-	        		<label class="col-md-3 control-label" id="school_postal">Postal Code <span class="required">*</span></label>
+	        		<label class="col-md-3 control-label" id="school_postal">Postal Code</label>
 	        		<div class="col-md-5">
 	        			{!! Form::text('school_zip',''
 	        				, array(
