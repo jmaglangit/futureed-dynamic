@@ -107,8 +107,8 @@
 		        <tr ng-repeat="key in payment.records">
 		            <td>{! key.order_no !}</td>
 		            <td>{! key.subscription.name !}</td>
-		            <td>{! key.date_start | ddMMyyyy !}</td>
-		            <td>{! key.date_end | ddMMyyyy !}</td>
+		            <td>{! key.date_start | ddMMyy !}</td>
+		            <td>{! key.date_end | ddMMyy !}</td>
 		            <td>{! key.seats_total !}</td>
 		            <td>{! key.payment_status !}</td>
 		            <td>{! key.total_amount !}</td>
