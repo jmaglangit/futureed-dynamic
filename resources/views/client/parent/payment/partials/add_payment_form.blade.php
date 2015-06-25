@@ -15,6 +15,9 @@
         <div class="alert alert-success" ng-if="payment.add.success">
         	<p>Successfully added Student</p>
         </div>
+        <div class="alert alert-success" ng-if="payment.success">
+        	<p>Successfully removed Student</p>
+        </div>
         <fieldset>
         	<div class="form-group">
         		<label class="col-xs-2 control-label" id="email">Email<span class="required">*</span></label>
@@ -57,11 +60,11 @@
 							</li>
 						</ul>
 					</div>
+					<div> 
+		                <i ng-if="payment.validation.s_loading" class="fa fa-spinner fa-spin"></i>
+		                <span ng-if="payment.validation.s_error" class="error-msg-con">{! payment.validation.s_error !}</span>
+		            </div>
         		</div>
-        		<div class="margin-top-8"> 
-	                <i ng-if="payment.validation.s_loading" class="fa fa-spinner fa-spin"></i>
-	                <span ng-if="payment.validation.s_error" class="error-msg-con">{! payment.validation.s_error !}</span>
-	            </div>
         		<div class="col-xs-3">
         			<div class="btn-container">
         				<button class="btn btn-blue btn-medium margin-0-top" ng-click="payment.addStudentOrderByUsername()" type="button"><span><i class="fa fa-plus-square"></i></span> Add</button>
@@ -86,10 +89,10 @@
 					<select name="subscription" ng-disabled="!payment.subscriptions.length"
 							id="subscription" 
 							class="form-control"
-							ng-change="payment.setDate()"
+							ng-change="payment.setDate(1)"
 							ng-model="payment.no_days">
                         <option value="">-- Select Subscription --</option>
-                        <option ng-repeat="subscription in payment.subscriptions" data-id="{! subscription.price !}" value="{! subscription.days !}">{! subscription.name!}</option>
+                        <option ng-repeat="subscription in payment.subscriptions" data-id="{! subscription.id !}" data-price="{! subscription.price !}" value="{! subscription.days !}">{! subscription.name!}</option>
                     </select>
 				</div>
 				<div class="col-xs-6">
@@ -97,7 +100,7 @@
 					<div class="col-xs-4">
 						{!! Form::text('start_date', '',
 							['class' => 'form-control'
-								, 'ng-model' => 'payment.date.start_date'
+								, 'ng-model' => 'payment.invoice.date_start'
 								, 'placeholder' => 'Start Date'
 								, 'ng-disabled' => 'true'
 							]) 
@@ -107,7 +110,7 @@
 					<div class="col-xs-4">
 						{!! Form::text('end_date', '',
 							['class' => 'form-control'
-								, 'ng-model' => 'payment.date.end_date'
+								, 'ng-model' => 'payment.invoice.date_end'
 								, 'placeholder' => 'End Date'
 								, 'ng-disabled' => 'true'
 							]) 
@@ -132,7 +135,7 @@
 							<td>{! key.student.user.email !}</td>
 							<td>{! payment.students.price | number: 2 !}</td>
 							<td>
-								<a href="#">Remove</a>
+								<a href="#" ng-click="payment.confirmCancelAdd(key.id)"><span><i class="fa fa-trash"></i></span></a>
 							</td>
 						</tr>
 						<tr class="odd" ng-if="!payment.students.length && !payment.table.loading">
@@ -184,9 +187,76 @@
 	<div class="col-xs-12 margin-30-bot">
 		<div class="col-xs-5 div-right">
 			<div class="btn-container">
-				<button class="btn btn-blue btn-semi-large">Pay Subscription</button>
-				<button class="btn btn-gold btn-medium" ng-click="payment.setActive('list')">Cancel</button>
+				{!! Form::button('Pay Subscription'
+                    , array(
+                        'class' => 'btn btn-blue btn-semi-large'
+                        , 'ng-click' => "payment.addPayment('add')"
+                    )
+                ) !!}
+				<button class="btn btn-gold btn-medium" ng-click="payment.confirmCancel()">Cancel</button>
 			</div>
 		</div>
 	</div>
+</div>
+
+<div id="cancel_subscription_modal" ng-show="payment.confirm_delete" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            Cancel Subscription
+        </div>
+        <div class="modal-body">
+            Your changes will be saved. Are you sure you want to cancel this subscription?
+        </div>
+        <div class="modal-footer">
+        	<div class="btncon col-md-8 col-md-offset-4 pull-left">
+                {!! Form::button('Yes'
+                    , array(
+                        'class' => 'btn btn-blue btn-medium'
+                        , 'ng-click' => "payment.setActive('list')"
+                        , 'data-dismiss' => 'modal'
+                    )
+                ) !!}
+
+                {!! Form::button('No'
+                    , array(
+                        'class' => 'btn btn-gold btn-medium'
+                        , 'data-dismiss' => 'modal'
+                    )
+                ) !!}
+        	</div>
+        </div>
+    </div>
+  </div>
+</div>
+
+<div id="remove_subscription_modal_add" ng-show="payment.confirm_delete" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            Remove Student
+        </div>
+        <div class="modal-body">
+            Are you sure you want to remove this student?
+        </div>
+        <div class="modal-footer">
+        	<div class="btncon col-md-8 col-md-offset-4 pull-left">
+                {!! Form::button('Yes'
+                    , array(
+                        'class' => 'btn btn-blue btn-medium'
+                        , 'ng-click' => "payment.removeStudent('add')"
+                        , 'data-dismiss' => 'modal'
+                    )
+                ) !!}
+
+                {!! Form::button('No'
+                    , array(
+                        'class' => 'btn btn-gold btn-medium'
+                        , 'data-dismiss' => 'modal'
+                    )
+                ) !!}
+        	</div>
+        </div>
+    </div>
+  </div>
 </div>

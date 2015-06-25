@@ -112,35 +112,25 @@
 					<label class="control-label col-xs-2">Subscription</label>
 					<div class="col-xs-4">
 						<select ng-disabled="!payment.invoice.subscription_enable" name="subscription"
-								ng-change="payment.setDate()"
+								ng-change="payment.setDate(1)"
 								ng-model="payment.no_days"
 								id="subscription" 
 								class="form-control">
 	                        <option value="">-- Select Subscription --</option>
-	                        <option ng-repeat="subscription in payment.subscriptions" ng-selected="payment.invoice.subscription.name == subscription.name" data-id="{! subscription.price !}" value="{! subscription.days !}">{! subscription.name!}</option>
+	                        <option ng-repeat="subscription in payment.subscriptions" ng-selected="payment.invoice.subscription.name == subscription.name" data-id="{! subscription.id !}" data-price="{! subscription.price !}" value="{! subscription.days !}">{! subscription.name!}</option>
 	                    </select>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-xs-2">Date Started</label>
 					<div class="col-xs-4">
-						{!! Form::text('start_date', '',
-							['class' => 'form-control'
-								, 'ng-model' => 'payment.date.start_date'
-								, 'placeholder' => 'Start Date'
-								, 'ng-disabled' => 'true'
-							]) 
-						!!}
+						<input type="text" name="start_date" ng-model="payment.invoice.date_start" placeHolder="Start Date" ng-disabled="true" class="form-control">
+						<input type="hidden" name="start_date" value="{! payment.invoice.h_date_start !}">
 					</div>
 					<label class="control-label col-xs-2">Date End</label>
 					<div class="col-xs-4">
-						{!! Form::text('end_date', '',
-							['class' => 'form-control'
-								, 'ng-model' => 'payment.date.end_date'
-								, 'placeholder' => 'End Date'
-								, 'ng-disabled' => 'true'
-							]) 
-						!!}
+						<input type="text" name="start_date" ng-model="payment.invoice.date_end" placeHolder="End Date" ng-disabled="true" class="form-control">
+						<input type="hidden" name="end_date" value="{! payment.invoice.h_date_end !}">
 					</div>
 				</div>
 				<div class="form-group">
@@ -178,7 +168,8 @@
 			            <td>
 			            	<div class="row">
 			            		<div>
-		    						<a href="" ng-click="payment.setActive('view', key.id)"><span><i class="fa fa-trash"></i></span></a>
+			            			<p ng-if="payment.invoice.payment_status == 'Paid'"><span><i class="fa fa-trash"></i></span></p>
+		    						<a ng-if="!payment.invoice.payment_status == 'Paid'" href="#" ng-click="payment.confirmCancelView(key.id)"><span><i class="fa fa-trash"></i></span></a>
 		    					</div>
 			            	</div>
 			            </td>
@@ -237,7 +228,7 @@
 				{!! Form::button('Pay Subscription'
 					, array(
 						'class' => 'btn btn-blue btn-semi-large'
-						, 'ng-click' => 'payment.renew()'
+						, 'ng-click' => "payment.addPayment('view')"
 						, 'ng-if' => "payment.invoice.payment_status == 'Pending'"
 					)
 				) !!}
@@ -258,4 +249,34 @@
 			</div>
 		</div>
 	</div>
+</div>
+<div id="remove_subscription_modal_view" ng-show="payment.confirm_delete" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            Remove Student
+        </div>
+        <div class="modal-body">
+            Are you sure you want to remove this student?
+        </div>
+        <div class="modal-footer">
+        	<div class="btncon col-md-8 col-md-offset-4 pull-left">
+                {!! Form::button('Yes'
+                    , array(
+                        'class' => 'btn btn-blue btn-medium'
+                        , 'ng-click' => "payment.removeStudent('view')"
+                        , 'data-dismiss' => 'modal'
+                    )
+                ) !!}
+
+                {!! Form::button('No'
+                    , array(
+                        'class' => 'btn btn-gold btn-medium'
+                        , 'data-dismiss' => 'modal'
+                    )
+                ) !!}
+        	</div>
+        </div>
+    </div>
+  </div>
 </div>
