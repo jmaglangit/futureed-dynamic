@@ -1,7 +1,7 @@
 <div ng-if="payment.active_view || payment.active_edit">
 	<div class="content-title">
 		<div class="title-main-content">
-			<span>View Payment Details</span>
+			<span>View Sales Invoice</span>
 		</div>
 	</div>
 
@@ -17,6 +17,7 @@
 		        <div class="alert alert-success" ng-if="payment.success">
 		        	<p>{! payment.success !}</p>
 		        </div>
+
 		        <fieldset>
 		        	<div class="form-group">
 		        		<label class="col-xs-4 control-label" id="email">Number of Seats <span class="required">*</span></label>
@@ -100,6 +101,41 @@
 		        </fieldset>
 			</div>
 		{!! Form::close() !!}
+	</div>
+
+	<div class="col-xs-7 search-container">
+		<div class="form-search" ng-init="payment.getSchoolCode()">
+			{!! Form::open(
+					[
+						'id' => 'search_form',
+						'class' => 'form-horizontal'
+					]
+			) !!}
+			<div class="form-group">
+				<label class="col-xs-12">
+					<h3>{! payment.school.school_name !}</h3>
+				</label>
+			</div>
+			<div class="form-group">
+				<label class="col-xs-4 control-label">Contact name : </label>
+				<p class="col-xs-8 control-label pull-left">
+					{! payment.school.school_contact_name !}
+				</p>
+			</div>
+			<div class="form-group">
+				<label class="col-xs-4 control-label">Contact Number : </label>
+				<p class="col-xs-8 control-label pull-left">
+					{! payment.school.school_contact_number !}
+				</p>
+			</div>
+			<div class="form-group">
+				<label class="col-xs-4 control-label">School Address : </label>
+				<p class="col-xs-8 control-label pull-left">
+					{! payment.school.school_street_address !}
+				</p>
+			</div>
+			{!! Form::close() !!}
+		</div>
 	</div>
 
 	<div class="col-xs-12 search-container">
