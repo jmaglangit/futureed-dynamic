@@ -63,9 +63,12 @@ class ClassStudentRequest extends ApiRequest {
      * @return array
      */
     public function messages() {
-        return [
-            'country_id.integer'  => 'The :attribute must be a number.',
-            'country_id.required' => 'The country field is required.'
-        ];
+		return [
+			'country_id.integer' => 'country is invalid.',
+			'country_id.required' => 'The country field is required.',
+			'grade_code.required' => 'The grade field is required.',
+			'grade_code.numeric' => 'grade is invalid.',
+			'class_id.required' => 'The class field is required.',
+		];
     }
 }
