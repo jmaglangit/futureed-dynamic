@@ -142,9 +142,7 @@ class ClientRepository implements ClientRepositoryInterface
 
             //TODO: to be updated through relationships.
 
-            //Only name is needed to be updated in the user table.
-            $user_data['name'] = $data['first_name'].' '.$data['last_name'];
-            $user = User::find($client)->update($user_data);
+            $user = User::find($client)->update($data);
 
             $client = Client::find($id)->update($data);
 
