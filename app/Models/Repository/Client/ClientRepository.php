@@ -204,6 +204,10 @@ class ClientRepository implements ClientRepositoryInterface
                 if (isset($criteria['school'])) {
                     $clients = $clients->school_name($criteria['school']);
                 }
+
+				if (isset($criteria['school_code'])) {
+					$clients = $clients->schoolcode($criteria['school_code']);
+				}
             }
 
             $count = $clients->count();
