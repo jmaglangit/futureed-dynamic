@@ -1,4 +1,4 @@
-<div ng-if="!payment.active_view || payment.active_edit">
+<div ng-if="payment.active_view || payment.active_edit">
 	<div class="content-title">
 		<div class="title-main-content">
 			<span>View Sales Invoice</span>

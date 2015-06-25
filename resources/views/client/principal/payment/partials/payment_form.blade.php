@@ -1,4 +1,4 @@
-<div ng-if="!payment.active_list">
+<div ng-if="payment.active_list">
 	<div class="content-title">
 		<div class="title-main-content">
 			<span>Payment Management</span>
