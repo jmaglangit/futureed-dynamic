@@ -12,6 +12,7 @@ function SearchService() {
 				scope.search.grade_id = Constants.EMPTY_STR;
 				scope.search.client_id = Constants.EMPTY_STR;
 				scope.search.order_no = Constants.EMPTY_STR;
+				scope.search.school_code = Constants.EMPTY_STR;
 				scope.search.subscription = Constants.EMPTY_STR;
 				scope.search.subscription_id = Constants.EMPTY_STR;
 				scope.search.subscription_name = Constants.EMPTY_STR;
