@@ -25,6 +25,7 @@
                 , false
                 , array(
                     'ng-model' => 'class.add_existing_student'
+                    , 'ng-change' => 'class.clearData()'
                 )
             ) !!}
             <span class="lbl padding-8">New Student</span>
@@ -37,6 +38,7 @@
                 , true
                 , array(
                     'ng-model' => 'class.add_existing_student'
+                    , 'ng-change' => 'class.clearData()'
                 )
             ) !!}
             <span class="lbl padding-8">Existing Student</span>
@@ -61,6 +63,7 @@
                                 'class' => 'form-control'
                                 , 'ng-model' => 'class.record.email'
                                 , 'placeholder' => 'Email Address'
+                                , 'ng-class' => "{ 'required-field' : class.fields['email'] }"
                                 , 'autocomplete' => 'off'
                             )
                         ) !!}
@@ -108,6 +111,7 @@
                             , 'ng-model-options' => "{ debounce : { 'default' : 1000 } }"
                             , 'ng-class' => "{ 'required-field' : class.fields['username'] }"
                             , 'ng-change' => "class.validateUsername()"
+                            , 'autocomplete' => 'off'
                         )
                     ) !!}
                 </div>
@@ -118,7 +122,7 @@
                 </div>
             </div> 
             <div class="form-group">
-                <label for="" class="col-md-3 control-label">Email <span class="required">*</span></label>
+                <label for="" class="col-md-3 control-label">Email Address <span class="required">*</span></label>
                 <div class="col-md-4">
                     {!! Form::text('email', ''
                         , array(
@@ -128,6 +132,7 @@
                             , 'ng-model-options' => "{ debounce : { 'default' : 1000 } }"
                             , 'ng-class' => "{ 'required-field' : class.fields['email'] }"
                             , 'ng-change' => "class.validateEmail()"
+                            , 'autocomplete' => 'off'
                         )
                     ) !!}
                 </div>
@@ -148,7 +153,9 @@
                             'class' => 'form-control'
                             , 'ng-class' => "{ 'required-field' : class.fields['first_name'] }"
                             , 'placeholder' => 'First Name' 
-                            , 'ng-model' => 'class.add.first_name')
+                            , 'ng-model' => 'class.add.first_name'
+                            , 'autocomplete' => 'off'
+                        )
                     ) !!}
                 </div>
             </div>
@@ -160,7 +167,9 @@
                             'class' => 'form-control'
                             , 'ng-class' => "{ 'required-field' : class.fields['last_name'] }"
                             , 'placeholder' => 'Last Name' 
-                            , 'ng-model' => 'class.add.last_name')
+                            , 'ng-model' => 'class.add.last_name'
+                            , 'autocomplete' => 'off'
+                        )
                     ) !!}
                 </div>
             </div>

@@ -318,6 +318,15 @@ function ManageClassController($scope, manageClassService, apiService, TableServ
 		});
 	}
 
+	self.clearData = function() {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+		self.fields = [];
+
+		self.record.email = Constants.EMPTY_STR;
+		self.add = {};
+	}
+
 	self.getSchoolDetails = function(school_code) {
 		manageClassService.getSchoolDetails(school_code).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
