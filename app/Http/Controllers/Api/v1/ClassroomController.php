@@ -101,8 +101,6 @@ class ClassroomController extends ApiController {
      */
     public function update($id, ClassroomRequest $request)
     {
-        //dd($request->route()->getName());
-
         //KH# 603: User can edit classroom in an invoice.
         switch($request->route()->getName()){
             case "api.v1.classroom.update":
@@ -133,21 +131,5 @@ class ClassroomController extends ApiController {
 
     public function deleteClassroomByOrderNo($order_no){
         return $this->respondWithData($this->classroom->deleteClassroomByOrderNo($order_no));
-    }
-
-    public function getClassroomByOrderNo($order_no){
-
-        $result = $this->classroom->getClassroomByOrderNo($order_no);
-
-        if(count($result) > 0 ){
-            foreach($result as $res){
-                $data['class_name'] = $res->name;
-                $data['email'] = $res->client->user->email;
-                $data['username'] = $res->client->user->username;
-            }
-        }
-
-
-        //return $this->respondWithData($this->classroom->getClassroomByOrderNo($order_no));
     }
 }
