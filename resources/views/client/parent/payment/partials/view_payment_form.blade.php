@@ -169,7 +169,7 @@
 			            	<div class="row">
 			            		<div>
 			            			<p ng-if="payment.invoice.payment_status == 'Paid'"><span><i class="fa fa-trash"></i></span></p>
-		    						<a ng-if="!payment.invoice.payment_status == 'Paid'" href="#" ng-click="payment.confirmCancelView(key.id)"><span><i class="fa fa-trash"></i></span></a>
+		    						<a ng-if="payment.invoice.payment_status == 'Paid' || payment.invoice.payment_status == 'Pending'" href="#" ng-click="payment.confirmCancelView(key.id)"><span><i class="fa fa-trash"></i></span></a>
 		    					</div>
 			            	</div>
 			            </td>
