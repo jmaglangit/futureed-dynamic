@@ -242,6 +242,7 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 			if(response.errors) {
 				self.errors = $scope.errorHandler(response.errors);
 			} else if(response.data) {
+				self.school = response.data;
 				self.invoice.school_code = response.data.school_code;
 			}
 		}).error(function(response) {
