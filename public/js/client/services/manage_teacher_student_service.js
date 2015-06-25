@@ -11,6 +11,7 @@ function ManageTeacherStudentService($http) {
 		return $http({
 			method : Constants.METHOD_GET
 			, url  : apiUrl + 'client/manage/student?client_role=' + search.client_role
+				+ '&client_id=' + search.client_id
 				+ '&name=' + search.name
 				+ '&email=' + search.email
 				+ '&limit=' + table.size
