@@ -122,7 +122,7 @@
 			) !!}
 			<div class="form-group">
 				<label class="col-xs-12">
-					<h3>{! payment.school.school_name !}</h3>
+					<p class="title-main-content">{! payment.school.school_name !}</p>
 				</label>
 			</div>
 			<div class="form-group">
@@ -313,7 +313,7 @@
         		{!! Form::button('Save Subscription'
         			, array(
         				'class' => 'btn btn-blue btn-small div-right'
-        				, 'ng-click' => 'payment.setActive()'
+        				, 'ng-click' => 'payment.savePayment()'
         			)
         		) !!}
 

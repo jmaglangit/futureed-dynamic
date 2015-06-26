@@ -153,7 +153,12 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 		});
 	}
 
-	self.addPayment = function() {
+	self.savePayment = function() {
+		self.addPayment(Constants.TRUE);
+	}
+
+	self.addPayment = function(save) {
+		self.paying = Constants.TRUE;
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
 		self.invoice.invoice_date = $filter('date')(new Date(), 'yyyyMMdd');
@@ -166,7 +171,13 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 					self.errors = $scope.errorHandler(response.errors);
 					$scope.ui_unblock();
 				} else if(response.data) {
-					self.getPaymentUri();
+					if(save) {
+						self.setActive();
+						$scope.ui_unblock();
+					} else {
+						console.log("Mar!");
+						self.getPaymentUri();
+					}
 				}
 			}
 		}).error(function(response) {
@@ -174,6 +185,12 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 			$scope.ui_unblock();
 		});
 	}
+
+	$window.addEventListener('beforeunload', function() {
+		if(!self.paying && self.active_add) {
+			self.deleteInvoice(self.invoice.id);	
+		}
+	});
 
 	self.getPaymentUri = function() {
 		self.payment = {};
@@ -396,8 +413,8 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 					self.invoice.total_amount = self.invoice.sub_total - ( self.invoice.sub_total * (self.invoice.discount / 100) );
 				} else {
 					self.invoice.discount = Constants.FALSE;
-					self.invoice.discount_id = Constants.EMPTY_STR;
-					self.invoice.discount_type = Constants.EMPTY_STR;
+					self.invoice.discount_id = null;
+					self.invoice.discount_type = null;
 
 					if(subscription.price) {
 						var date = new Date();
