@@ -36,7 +36,7 @@ class AdminStudentRequest extends ApiRequest {
 			case 'POST':
 				$student = config('futureed.student');
 				return [
-					'username' => "required|string|min:8|max:32|unique:users,username,NULL,id,user_type,$student,deleted_at,NULL",
+					'username' => "required|alpha_num|string|min:8|max:32|unique:users,username,NULL,id,user_type,$student,deleted_at,NULL",
 					'email' => "required|email|unique:users,email,NULL,id,user_type,$student,deleted_at,NULL",
 					'first_name' => 'required|regex:'. config('regex.name') .'|string',
 					'last_name' => 'required|regex:'. config('regex.name') .'|string',
@@ -54,7 +54,7 @@ class AdminStudentRequest extends ApiRequest {
 			case 'PUT':
 				$student = config('futureed.student');
 				return [
-					'username' => "required|string|min:8|max:32|unique:users,username," . $student_user_id . ",id,user_type,$student,deleted_at,NULL",
+					'username' => "required|alpha_num|string|min:8|max:32|unique:users,username," . $student_user_id . ",id,user_type,$student,deleted_at,NULL",
 					'first_name' => 'required|regex:'. config('regex.name') .'|string',
 					'last_name' => 'required|regex:'. config('regex.name') .'|string',
 					'gender' => 'required|in:Male,Female',
