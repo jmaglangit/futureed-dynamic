@@ -180,7 +180,7 @@ class ClientController extends ApiController {
 				}else{
 
 					$checkUsername = $this->user->checkUsername($user['username'],'Client');
-					$user['name'] = $client['first_name'].$client['last_name'];
+					$user['name'] = $client['first_name'].' '.$client['last_name'];
 
 					//add default value for country_id
 					if(!$client['country_id']){
