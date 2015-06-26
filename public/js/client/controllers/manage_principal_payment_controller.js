@@ -175,7 +175,6 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 						self.setActive();
 						$scope.ui_unblock();
 					} else {
-						console.log("Mar!");
 						self.getPaymentUri();
 					}
 				}
