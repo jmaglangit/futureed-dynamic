@@ -260,7 +260,7 @@
         		{!! Form::button('Save Subscription'
         			, array(
         				'class' => 'btn btn-blue btn-small div-right'
-        				, 'ng-click' => 'payment.setActive()'
+        				, 'ng-click' => 'payment.savePayment()'
         			)
         		) !!}
 
