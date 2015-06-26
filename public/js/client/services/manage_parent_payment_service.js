@@ -85,10 +85,11 @@ function ManageParentPaymentService($http){
 		})
 	}
 
-	managePaymentApi.searchName = function(name) {
+	managePaymentApi.searchName = function(name, id) {
 		return $http({
 			method 	: Constants.METHOD_GET
 			, url 	: paymentApiUrl + 'student?name=' + name
+					+ '&client_id=' + id
 		});
 	}
 

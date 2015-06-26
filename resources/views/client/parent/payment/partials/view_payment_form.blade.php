@@ -236,7 +236,7 @@
 				, array(
 					'class' => 'btn btn-gold btn-small div-right'
 					, 'ng-click' => "payment.setActive('list')"
-					, 'ng-if' => "payment.invoice.payment_status == 'Paid'"
+					, 'ng-if' => "payment.invoice.payment_status != 'Pending'"
 				)
 			) !!}
 			{!! Form::button('Renew Subscription'
