@@ -105,8 +105,8 @@
 
 		        <tbody>
 		        <tr ng-repeat="key in payment.records">
-		            <td>{! key.order_no !}</td>
-		            <td>{! key.subscription.name !}</td>
+		            <td class="width-200">{! key.order_no !}</td>
+		            <td class="width-200">{! key.subscription.name !}</td>
 		            <td>{! key.date_start | ddMMyy !}</td>
 		            <td>{! key.date_end | ddMMyy !}</td>
 		            <td>{! key.seats_total !}</td>
@@ -121,7 +121,7 @@
 	    						<a href="" ng-if="key.payment_status == 'Pending'" ng-click="payment.confirmCancelInvoice(key.id)" title="cancel"><span><i class="fa fa-ban"></i></span></a>
 	    					</div>
 	    					<div class="col-xs-4">
-	    						<a href="" ng-if="key.payment_status == 'Pending' || key.payment_status == 'Cancelled'" ng-click="payment.confirmRemoveInvoice(key.id)" title="delete"><span><i class="fa fa-trash"></i></span></a>
+	    						<a href="" ng-if="key.payment_status == 'Pending' || key.payment_status == 'Cancelled'" ng-click="payment.confirmRemoveInvoice(key.id, 'list')" title="delete"><span><i class="fa fa-trash"></i></span></a>
 	    					</div>
 		            	</div>
 		            </td>
