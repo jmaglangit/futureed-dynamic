@@ -11,7 +11,7 @@ function TemplateDirective() {
 	}
 }
 
-function FutureedController($scope, $http, $location, apiService, futureed) {
+function FutureedController($scope, apiService, futureed) {
 	$scope.futureed = futureed;
 	$scope.display_date = new Date();
 	
