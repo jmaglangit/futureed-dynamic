@@ -194,7 +194,7 @@
 	<div class="col-xs-12">
 		<div class="row margin-10-bot">
 			<div class="col-xs-4 div-right">
-				<label class="col-xs-4 control-label">Sub Total</label>
+				<label class="col-xs-4 control-label top-10">Sub Total</label>
 				<div class="col-xs-8">
 					<div class="input-group">
 						<span class="input-group-addon" id="basic-addon1">USD$</span>
@@ -212,7 +212,7 @@
 		</div>
 		<div class="row margin-10-bot">
 			<div class="col-xs-4 div-right">
-				<label class="col-xs-4 control-label">Discount</label>
+				<label class="col-xs-4 control-label top-10">Discount</label>
 				<div class="col-xs-8">
 					<div class="input-group">
 						{!! Form::text('discount',''
@@ -231,7 +231,7 @@
 
 		<div class="row margin-10-bot">
 			<div class="col-xs-4 div-right">
-				<label class="col-xs-4 control-label">Total</label>
+				<label class="col-xs-4 control-label top-10">Total</label>
 				<div class="col-xs-8">
 					<div class="input-group">
 						  <span class="input-group-addon" id="basic-addon1">USD$</span>

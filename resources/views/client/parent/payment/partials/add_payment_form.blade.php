@@ -185,17 +185,28 @@
 		</div>
 	</div>
 	<div class="col-xs-12 margin-30-bot">
-		<div class="col-xs-5 div-right">
-			<div class="btn-container">
-				{!! Form::button('Pay Subscription'
-                    , array(
-                        'class' => 'btn btn-blue btn-semi-large'
-                        , 'ng-click' => "payment.addPayment('add')"
-                    )
-                ) !!}
-				<button class="btn btn-gold btn-medium" ng-click="payment.confirmCancel()">Cancel</button>
-			</div>
+		<div class="container">
+		<div class="btn-container margin-30-top">
+			{!! Form::button('Delete Subscription'
+				, array(
+					'class' => 'btn btn-gold btn-small div-right'
+					, 'ng-click' => "payment.deleteInvoice(payment.invoice_detail.id)"
+				)
+			) !!}
+			{!! Form::button('Save Subscription'
+				, array(
+					'class' => 'btn btn-blue btn-small div-right'
+					, 'ng-click' => "payment.setActive('list')"
+				)
+			) !!}
+			{!! Form::button('Pay Subscription'
+				, array(
+					'class' => 'btn btn-blue btn-small div-right'
+					, 'ng-click' => "payment.addPayment('view')"
+				)
+			) !!}
 		</div>
+	</div>
 	</div>
 </div>
 
