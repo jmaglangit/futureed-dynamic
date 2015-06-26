@@ -15,7 +15,7 @@
                         <h2 class="box-title"><span class="thin">Student</span> Registration</h2>
                         <div class="info-box rd col-md-6">
                             <h4>For Student below 13 years old</h4>
-                            <p>Parents should be the one to register, please <a href="#">Click here</a> to register.</p>
+                            <p>Parents should be the one to register, please click {!! Html::link(route('client.registration'), 'here') !!} to register.</p>
                         </div>
                         <div style="margin: 7px 0px;">(<span class="required">*</span> ) Indicates a required field.</div>
                     </div>
@@ -149,9 +149,9 @@
                     <div class="form-group" ng-init="getCountries()">
                         <label for="" class="col-md-2 control-label">Country<span class="required">*</span></label>
                         <div class="col-md-4">
-                            <select name="country_id" id="country" class="form-control" ng-model="reg.country_id" ng-change="getCountryId()">
+                            <select name="country_id" id="country" class="form-control" ng-model="reg.country_id" ng-change="getGradeLevel(reg.country_id)">
                                 <option value="">-- Select Country --</option>
-                                <option ng-repeat="country in countries" data-id="{! country.id !}" value="{! country.id !}">{! country.name!}</option>
+                                <option ng-repeat="country in countries" ng-value="{! country.id !}">{! country.name!}</option>
                             </select>
                         </div>
                     </div>
@@ -171,11 +171,10 @@
                     </div>
                     <div class="form-group">
                         <label for="" class="col-md-2 control-label">School level<span class="required">*</span></label>
-
-                        <div class="col-md-4 nullable">
-                            <select name="grade_code" class="form-control" ng-model="reg.grade_code">
+                        <div class="col-md-4">
+                            <select name="grade_code" ng-disabled="!grades.length" class="form-control" ng-model="reg.grade_code">
                                 <option value="">-- Select Level --</option>
-                                <option ng-repeat="grade in grades" value="{! grade.code !}">{! grade.name !}</option>
+                                <option ng-repeat="grade in grades" ng-value="grade.code">{! grade.name !}</option>
                             </select>
                         </div><br><br>
                     </div>    

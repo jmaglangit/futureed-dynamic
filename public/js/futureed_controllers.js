@@ -28,7 +28,6 @@ function FutureedController($scope, apiService, futureed) {
 	$scope.checkAvailability = checkAvailability;
 	$scope.checkEmailAvailability = checkEmailAvailability;
 	$scope.getAnnouncement = getAnnouncement;
-	$scope.getCountryId = getCountryId;
 
 	$scope.beforeDateRender = beforeDateRender;
 	function beforeDateRender($dates){
@@ -746,15 +745,5 @@ function FutureedController($scope, apiService, futureed) {
 		}).error(function(response){
 				$scope.internalError();
 		});
-	}
-
-	/**
-	* Get Country ID
-	*/
-	function getCountryId(){
-		$scope.reg.country_id = '';
-		$scope.reg.country_id = $('#country_id').find(':selected').data('id');
-		$scope.getGradeLevel();
-
 	}
 };
