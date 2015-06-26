@@ -132,8 +132,8 @@
 			<table class="table table-striped table-bordered" >
 				<thead>
 			        <tr>
-			            <th width="200px">Name</th>
-			            <th width="200px">Email</th>
+			            <th class="width-200">Name</th>
+			            <th class="width-200">Email</th>
 			            <th>Role</th>
 			            <th>Status</th>
 			            <th>Action</th>
