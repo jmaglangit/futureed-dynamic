@@ -378,7 +378,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 		var name = self.add.name;
 		self.validation.s_loading = Constants.TRUE;
 		self.validation.s_error = Constants.FALSE;
-		ManageParentPaymentService.searchName(name).success(function(response){
+		ManageParentPaymentService.searchName(name, $scope.user.id).success(function(response){
 			self.validation.s_loading = Constants.FALSE;
 			if(angular.equals(response.status,Constants.STATUS_OK)){
 				if(response.errors) {
