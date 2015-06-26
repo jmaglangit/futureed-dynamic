@@ -25,7 +25,7 @@ class ClientStudentRequest extends ApiRequest {
 			default:
 				$student = config('futureed.student');
 				return[
-					'username' => "required|string|min:8|max:32|unique:users,username,NULL,id,user_type,$student,deleted_at,NULL",
+					'username' => "required|alpha_num|string|min:8|max:32|unique:users,username,NULL,id,user_type,$student,deleted_at,NULL",
 					'email' => "required|email|unique:users,email,NULL,id,user_type,$student,deleted_at,NULL",
 					'first_name'    => 'required|regex:'. config('regex.name') .'|max:64',
 					'last_name'     => 'required|regex:'. config('regex.name') .'|max:64',

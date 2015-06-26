@@ -70,8 +70,8 @@ class ClientTeacherRegistrationRequest extends ApiRequest
 			case 'POST':
 			default:
 				return [
-					'email' => 'required',
-					'username' => 'required',
+					'email' => 'required|email',
+					'username' => 'required|alpha_num',
 					'password' => 'required',
 					'first_name' => 'required|regex:'. config('regex.name'),
 					'last_name' => 'required|regex:'. config('regex.name') ,
