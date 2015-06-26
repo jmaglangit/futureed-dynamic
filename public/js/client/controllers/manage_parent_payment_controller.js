@@ -103,8 +103,6 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 					self.table.loading = Constants.FALSE;
 					self.records = response.data.records;
 					self.updatePageCount(response.data);
-					console.log(self.records);
-				}
 			}
 
 			$scope.ui_unblock();
