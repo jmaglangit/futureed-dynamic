@@ -24,6 +24,12 @@ class StudentController extends ApiController {
 			$criteria['name'] = Input::get('name');
 		}
 
+		//get client_id/ parent_id
+		if(Input::get('client_id')){
+
+			$criteria['client_id'] = Input::get('client_id');
+		}
+
 		$limit = (Input::get('limit')) ? Input::get('limit') : 0;
 
 		$offset = (Input::get('offset')) ? Input::get('offset') : 0;

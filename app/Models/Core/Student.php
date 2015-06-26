@@ -93,6 +93,11 @@ class Student extends Model {
 		});
 	}
 
+	public function scopeClientId($query, $parent_id){
+
+		return $query->where('parent_id',$parent_id);
+	}
+
 
 	public function scopeTeacher($query, $client_id){
 
