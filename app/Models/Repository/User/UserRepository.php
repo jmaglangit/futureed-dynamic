@@ -301,7 +301,8 @@ class UserRepository implements UserRepositoryInterface {
 
             User::where('id',$id)->update([
                 'username' => $username['username'],
-                'name' => $username['name']
+                'name' => $username['name'],
+                'email'=>$username['email']
             ]);
 
         } catch (Exception $e){

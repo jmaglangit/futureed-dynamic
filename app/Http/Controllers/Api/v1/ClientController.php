@@ -114,7 +114,7 @@ class ClientController extends ApiController {
 				$clientDetails = $this->client->getClientDetails($id)->toArray();
 				$userDetails = $this->user->getUserDetail($return['user_id'],'Client')->toArray();
 
-				$user = input::only('username');
+				$user = input::only('username','email');
 
 				$client = input::only('first_name','last_name','street_address',
 									  'city','country','zip','state','country_id');
@@ -123,6 +123,7 @@ class ClientController extends ApiController {
 										  'school_state','school_country','school_country_id','school_zip','school_contact_name','school_contact_number');
 				
 				$this->addMessageBag($this->username($user,'username'));
+				$this->addMessageBag($this->email($user,'email'));
 				$this->addMessageBag($this->firstName($client,'first_name'));
 				$this->addMessageBag($this->lastName($client,'last_name'));
 				
