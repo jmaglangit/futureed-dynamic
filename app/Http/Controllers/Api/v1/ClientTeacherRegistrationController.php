@@ -84,7 +84,7 @@ class ClientTeacherRegistrationController extends ApiController
 			'password',
 			'first_name',
 			'last_name',
-			'address',
+			'street_address',
 			'city',
 			'state',
 			'country',
