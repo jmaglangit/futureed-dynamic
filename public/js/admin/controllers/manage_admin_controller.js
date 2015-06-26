@@ -109,8 +109,10 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 	function viewAdmin(id){
 		self.is_success = Constants.FALSE;
 		self.errors = Constants.FALSE;
+		self.view_id = id;
 
-		manageAdminService.viewAdmin(id).success(function(response){
+		$('input, select').removeClass('required-field');
+		manageAdminService.viewAdmin(self.view_id).success(function(response){
 			if(angular.equals(response.status,Constants.STATUS_OK)){
 				if(response.data){
 					self.admininfo = response.data;
