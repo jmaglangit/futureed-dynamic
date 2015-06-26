@@ -161,10 +161,11 @@ function ManageTeacherStudentController($scope, manageTeacherStudentService, api
 		self.errors = Constants.FALSE;
 
 		self.data = {};
+		self.data.student_id = self.record.id;
 		self.data.email = self.record.email;
 		self.data.new_email = self.change.new_email;
 		self.data.password = self.change.password;
-		self.data.client_id = self.record.id;
+		self.data.client_id = $scope.user.id;
 
 		var base_url = $("#base_url_form input[name='base_url']").val();
 		self.data.callback_uri = base_url + Constants.URL_CHANGE_EMAIL(angular.lowercase(Constants.STUDENT));

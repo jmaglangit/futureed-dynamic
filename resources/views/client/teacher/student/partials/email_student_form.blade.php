@@ -29,7 +29,7 @@
 		        			, 'placeholder' => 'Current Email Address'
 		        			, 'ng-model' => 'teacher.change.current_email'
 		        			, 'ng-model-options' => "{ debounce: {'default' : 1000} }"
-		        			, 'ng-class' => "{ 'required-field' : teacher.fields['current_email'] }"
+		        			, 'ng-class' => "{ 'required-field' : teacher.fields['current_email'] || teacher.fields['email'] }"
 		        			, 'ng-change' => 'teacher.validateCurrentEmail(teacher.record.email, teacher.change.current_email, futureed.STUDENT)'
 		        		)
 	        		)!!}

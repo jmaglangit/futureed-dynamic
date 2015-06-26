@@ -38,7 +38,7 @@ function ManageTeacherStudentService($http) {
 		return $http({
 			method : Constants.METHOD_PUT
 			, data : data
-			, url  : apiUrl + 'client/manage/email/student/' + data.client_id 
+			, url  : apiUrl + 'client/manage/email/student/' + data.student_id 
 		});
 	}
 	
