@@ -320,7 +320,7 @@ function LoginController($scope, apiService, clientLoginApiService, clientProfil
 						self.record.username = data.user.username;
 						self.record.first_name = data.first_name;
 						self.record.last_name = data.last_name;
-						self.record.school = data.school;
+						self.record.school_name = data.school.name;
 						self.record.registration_token = data.user.registration_token;
 					}
 				}
