@@ -1,11 +1,11 @@
 @extends('student.app')
 
 @section('content')
-<div class="container login student-fnt" ng-cloak>
+<div class="container login student-fnt" ng-init="checkRegistration('{!! $id !!}', '{!! $registration_token !!}')">
     <div template-directive template-url="{!! route('student.partials.base_url') !!}"></div>
-    
-    <div class="form-style register_student form-wide" ng-init="success={!! $success !!}" ng-show="!success"> 
+    <div class="form-style register_student form-wide" ng-init="success={!! $success !!}" ng-show="!success" ng-cloak> 
         {!! Form::open(array('id' => 'registration_form' , 'class' => 'form-horizontal simple-form')) !!}
+
             <div class="form-header">
                 <div class="media">
                     <div class="media-left">
@@ -98,8 +98,8 @@
                             {!! Form::select('gender'
                                 , array(
                                     '' => '-- Select Gender --'
-                                    , 'male' => 'Male'
-                                    , 'female' => 'Female')
+                                    , 'Male' => 'Male'
+                                    , 'Female' => 'Female')
                                 , ''
                                 , array(
                                     'class' => 'form-control'
@@ -149,9 +149,9 @@
                     <div class="form-group" ng-init="getCountries()">
                         <label for="" class="col-md-2 control-label">Country<span class="required">*</span></label>
                         <div class="col-md-4">
-                            <select name="country_id" id="country" class="form-control" ng-model="reg.country_id" ng-change="getCountryId()">
+                            <select name="country_id" id="country" class="form-control" ng-model="reg.country_id" ng-change="setCountryGrade()">
                                 <option value="">-- Select Country --</option>
-                                <option ng-repeat="country in countries" data-id="{! country.id !}" value="{! country.id !}">{! country.name!}</option>
+                                <option ng-repeat="country in countries" ng-selected ="reg.country_id == country.id" data-id="{! country.id !}" value="{! country.id !}">{! country.name!}</option>
                             </select>
                         </div>
                     </div>
@@ -165,7 +165,7 @@
                                 , array(
                                     'class' => 'form-control'
                                     , 'disabled' => 'disabled'
-                                    , 'ng-model' => 'reg.school_code')
+                                    , 'ng-model' => 'reg.school_name')
                             ) !!}
                         </div>
                     </div>
@@ -175,7 +175,7 @@
                         <div class="col-md-4 nullable">
                             <select name="grade_code" class="form-control" ng-model="reg.grade_code">
                                 <option value="">-- Select Level --</option>
-                                <option ng-repeat="grade in grades" value="{! grade.code !}">{! grade.name !}</option>
+                                <option ng-repeat="grade in grades" ng-selected="reg.grade_code == grade.code" value="{! grade.code !}">{! grade.name !}</option>
                             </select>
                         </div><br><br>
                     </div>    
@@ -212,7 +212,16 @@
                         {!! Form::button('Register'
                             , array(
                                 'class' => 'btn btn-maroon btn-medium'
-                                , 'ng-click' => 'validateRegistration(reg, terms)'
+                                , 'ng-click' => "validateRegistration(reg, terms, 'add')"
+                                , 'ng-show' => '!edit_registration'
+                            )
+                        ) !!}
+
+                         {!! Form::button('Edit Registration'
+                            , array(
+                                'class' => 'btn btn-maroon btn-medium'
+                                , 'ng-click' => "validateRegistration(reg, terms, 'edit')"
+                                , 'ng-show' => 'edit_registration'
                             )
                         ) !!}
 
