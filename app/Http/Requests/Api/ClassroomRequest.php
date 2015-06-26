@@ -29,7 +29,7 @@ class ClassroomRequest extends ApiRequest {
                         return [
                             'name' => 'required|regex:'. config('regex.name'),
                             'grade_id' => 'required|integer',
-                            'seats_total' => 'required|numeric',
+                            'seats_total' => 'required|numeric|max:999999',
                             'client_id' => 'required|integer',
                         ];
                         break;
@@ -47,8 +47,8 @@ class ClassroomRequest extends ApiRequest {
                     'name' => 'required|regex:'. config('regex.name'),
                     'grade_id' => 'required|integer',
                     'client_id' => 'required|integer',
-                    'seats_taken' => 'required|numeric',
-                    'seats_total' => 'required|numeric',
+                    'seats_taken' => 'required|numeric|max:999999',
+                    'seats_total' => 'required|numeric|max:999999',
                     'status' => 'required|in:Enabled,Disabled'
                 ];
                 break;
