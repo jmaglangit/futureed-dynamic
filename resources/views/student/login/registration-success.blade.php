@@ -1,4 +1,4 @@
-<div class="col-md-6 col-md-offset-3" ng-init="linked={!! $success !!}" ng-if="success">
+<div class="col-md-6 col-md-offset-3" ng-init="linked={!! $success !!}" ng-if="success" ng-cloak>
 	<div class="form-style form-select-password">
 		<div class="title">Thank you for registering to Future Lesson!</div>
 		
