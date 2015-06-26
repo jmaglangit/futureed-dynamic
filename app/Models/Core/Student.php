@@ -86,10 +86,18 @@ class Student extends Model {
 
     }
 
+	//TODO: This should be changed...whenever it is called.. parent() in relationship is called.
 	public function scopeParent($query, $parent_user_id){
 
 		return $query->whereHas('parent',function($query) use ($parent_user_id) {
 			$query->where('parent_user_id', '=', $parent_user_id);
+		});
+	}
+
+	public function scopeParentId($query, $parent_id){
+
+		return $query->whereHas('parent',function($query) use ($parent_id) {
+			$query->where('parent_user_id', '=', $parent_id);
 		});
 	}
 
