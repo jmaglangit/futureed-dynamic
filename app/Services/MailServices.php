@@ -193,12 +193,14 @@ class MailServices {
         $template = 'emails.student.change-email';
        
         if($send == 0){
-            
-            $subject = str_replace('{user}',config('futureed.student'),config('futureed.subject_change_email'));
+		//TODO: should specify if student,parent,teacher,principal,admin,superadmin
+		//$subject = str_replace('{user}',config('futureed.student'),config('futureed.subject_change_email'));
+		$subject = "Change Email";
 
         }else{
-
-            $subject = str_replace('{user}',config('futureed.student'),config('futureed.subject_email_resend'));
+		//TODO: should specify if student,parent,teacher,principal,admin,superadmin
+		//$subject = str_replace('{user}',config('futureed.student'),config('futureed.subject_email_resend'));
+		$subject = "Resend Change Email";
         }
         
         $content = [
@@ -212,7 +214,6 @@ class MailServices {
             'mail_recipient_name' => $data['name' ],
             'subject' => $subject
         ];
-
         $this->sendMail($content);
     }
 
