@@ -54,7 +54,7 @@
 		      		<div class="col-md-5" ng-init="getCountries()">
 		        		<select  name="country_id" class="form-control" ng-model="grade.create.country_id">
 			          		<option value="">-- Select Country --</option>
-			          		<option ng-repeat="country in countries" ng-value="{! country.id !}">{! country.name!}</option>
+			          		<option ng-repeat="country in countries" ng-value="country.id">{! country.name!}</option>
 		        		</select>
 		      		</div>
 		      	</div>

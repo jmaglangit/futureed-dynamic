@@ -117,7 +117,7 @@
 								id="subscription" 
 								class="form-control">
 	                        <option value="">-- Select Subscription --</option>
-	                        <option ng-repeat="subscription in payment.subscriptions" ng-selected="payment.invoice.subscription.name == subscription.name" data-id="{! subscription.id !}" data-price="{! subscription.price !}" value="{! subscription.days !}">{! subscription.name!}</option>
+	                        <option ng-repeat="subscription in payment.subscriptions" ng-selected="payment.invoice.subscription.name == subscription.name" data-id="{! subscription.id !}" data-price="{! subscription.price !}" ng-value="subscription.days">{! subscription.name!}</option>
 	                    </select>
 					</div>
 				</div>
