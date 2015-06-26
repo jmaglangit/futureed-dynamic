@@ -131,5 +131,12 @@ function ManageParentPaymentService($http){
 			, url  : paymentApiUrl + 'order-detail/' + id
 		});
 	}
+
+	managePaymentApi.cancelInvoice = function(id) {
+		return $http({
+			method : Constants.METHOD_PUT
+			, url  : paymentApiUrl + 'invoice/cancel-invoice/' + id
+		});
+	}
 	return managePaymentApi;
 }

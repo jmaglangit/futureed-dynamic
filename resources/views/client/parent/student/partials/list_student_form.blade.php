@@ -91,13 +91,10 @@
 		            <td>{! key.user.email !}</td>
 		            <td>
 		            	<div class="row">
-		            		<div class="col-xs-4">
-	    						<a href="" ng-click="student.play(key.id)"><span><i class="fa fa-play"></i></span></a>
-	    					</div>
-		            		<div class="col-xs-4">
+		            		<div class="col-xs-6">
 	    						<a href="" ng-click="student.setActive('view', key.id)"><span><i class="fa fa-eye"></i></span></a>
 	    					</div>
-	    					<div class="col-xs-4">
+	    					<div class="col-xs-6">
 	    						<a href="" ng-click="student.setActive('edit', key.id)"><span><i class="fa fa-pencil"></i></span></a>
 	    					</div>
 		            	</div>

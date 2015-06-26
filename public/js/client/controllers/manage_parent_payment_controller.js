@@ -55,9 +55,10 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 
 			case Constants.ACTIVE_LIST:
 			default:
+			self.add = {};
 			self.active_list = Constants.TRUE;
 			self.active_add = Constants.FALSE;
-			self.active_view = Constants.FALSE
+			self.active_view = Constants.FALSE;
 			break;
 		}
 
@@ -65,11 +66,10 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 	
 	}
 
-	self.list = function() {
-		if(self.active_list) {
-			self.listPayments();
-		} else if(self.active_add) {
-			self.listClassroom();
+	self.list = function(cond) {
+		var cond = (cond) ? cond:0;
+		if(self.active_list || self.active_view) {
+			self.listPayments(cond);
 		}
 	}
 
@@ -89,7 +89,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 		self.search.client_id = $scope.user.id;
 		self.table.loading = Constants.TRUE;
 
-		if(frmdelete != 1) {
+		if(self.cond != 1) {
 			self.success = Constants.FALSE;
 		}
 		$scope.ui_block();
@@ -103,7 +103,6 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 					self.table.loading = Constants.FALSE;
 					self.records = response.data.records;
 					self.updatePageCount(response.data);
-				}
 			}
 
 			$scope.ui_unblock();
@@ -426,9 +425,9 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 		});
 	}
 	self.deleteInvoice = function(id) {
+		var id = (id) ? id:self.remove_invoice_id
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
-
 		$scope.ui_block();
 		ManageParentPaymentService.deleteInvoice(id).success(function(response){
 			if(angular.equals(response.status,Constants.STATUS_OK)){
@@ -436,7 +435,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 					self.errors = $scope.errorHandler(response.errors);
 				}else if(response.data){
 					self.success = Constants.TRUE;
-					self.listPayments(1);
+					self.setActive('list', '', 1);
 				}
 			}
 			$scope.ui_unblock();
@@ -542,6 +541,16 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 	    });
 	}
 
+	self.confirmRemoveInvoice = function(id) {
+		self.remove_invoice_id = id;
+		self.errors = Constants.FALSE;
+		self.confirm_delete = Constants.TRUE;
+		$("#remove_subscription_modal_invoice").modal({
+	        backdrop: 'static',
+	        keyboard: Constants.FALSE,
+	        show    : Constants.TRUE
+	    });
+	}
 	self.confirmCancelView = function(id) {
 		self.remove_student_id = id;
 		self.errors = Constants.FALSE;
@@ -563,5 +572,36 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 	        keyboard: Constants.FALSE,
 	        show    : Constants.TRUE
 	    });
+	}
+
+	self.confirmCancelInvoice = function(id) {
+		self.cancel_invoice_id = id;
+		self.errors = Constants.FALSE;
+		self.confirm_delete = Constants.TRUE;
+		$("#cancel_subscription_modal_invoice").modal({
+	        backdrop: 'static',
+	        keyboard: Constants.FALSE,
+	        show    : Constants.TRUE
+	    });
+	}
+
+	self.cancelInvoice = function() {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		ManageParentPaymentService.cancelInvoice(self.cancel_invoice_id).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.listPayments();
+					self.setActive('list', '', 1);				
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
 	}
 }

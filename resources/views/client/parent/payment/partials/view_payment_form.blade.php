@@ -224,29 +224,46 @@
 				</div>
 			</div>
 			<div class="clearfix"></div>
-			<div class="btn-container margin-30-top">
-				{!! Form::button('Pay Subscription'
-					, array(
-						'class' => 'btn btn-blue btn-semi-large'
-						, 'ng-click' => "payment.addPayment('view')"
-						, 'ng-if' => "payment.invoice.payment_status == 'Pending'"
-					)
-				) !!}
-				{!! Form::button('Renew Subscription'
-					, array(
-						'class' => 'btn btn-blue btn-semi-large'
-						, 'ng-click' => 'payment.renew()'
-						, 'ng-if' => "payment.invoice.payment_status == 'Paid'"
-						, 'ng-disabled' => 'true'
-					)
-				) !!}
-				{!! Form::button('Cancel'
-					, array(
-						'class' => 'btn btn-gold btn-medium'
-						, 'ng-click' => "payment.setActive('list')"
-					)
-				) !!}
-			</div>
+		</div>
+	</div>
+	<div class="container margin-30-bot">
+		<div class="btn-container margin-30-top">
+			{!! Form::button('Delete Subscription'
+				, array(
+					'class' => 'btn btn-gold btn-small div-right'
+					, 'ng-click' => "payment.deleteInvoice(payment.invoice.id)"
+					, 'ng-if' => "payment.invoice.payment_status == 'Pending'"
+				)
+			) !!}
+			{!! Form::button('View List'
+				, array(
+					'class' => 'btn btn-gold btn-small div-right'
+					, 'ng-click' => "payment.setActive('list')"
+					, 'ng-if' => "payment.invoice.payment_status == 'Paid'"
+				)
+			) !!}
+			{!! Form::button('Renew Subscription'
+				, array(
+					'class' => 'btn btn-blue btn-small div-right'
+					, 'ng-click' => 'payment.renew()'
+					, 'ng-if' => "payment.invoice.payment_status == 'Paid'"
+					, 'ng-disabled' => 'true'
+				)
+			) !!}
+			{!! Form::button('Save Subscription'
+				, array(
+					'class' => 'btn btn-blue btn-small div-right'
+					, 'ng-click' => "payment.setActive('list')"
+					, 'ng-if' => "payment.invoice.payment_status == 'Pending'"
+				)
+			) !!}
+			{!! Form::button('Pay Subscription'
+				, array(
+					'class' => 'btn btn-blue btn-small div-right'
+					, 'ng-click' => "payment.addPayment('view')"
+					, 'ng-if' => "payment.invoice.payment_status == 'Pending'"
+				)
+			) !!}
 		</div>
 	</div>
 </div>
