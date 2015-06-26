@@ -89,8 +89,7 @@ class StudentController extends ApiController {
 	{
 
 		$input = Input::only('first_name','last_name','gender','birth_date',
-							'email','username','grade_code','country_id',
-							'country','city','state');
+							'email','username','grade_code','country_id','city','state');
 
         //Student fields validations
         $this->addMessageBag($this->firstName($input,'first_name'));
@@ -99,7 +98,6 @@ class StudentController extends ApiController {
         $this->addMessageBag($this->editBirthDate($input,'birth_date'));
         $this->addMessageBag($this->validateNumber($input,'grade_code'));
         $this->addMessageBag($this->validateNumber($input,'country_id'));
-        $this->addMessageBag($this->validateString($input,'country'));
         $this->addMessageBag($this->validateString($input,'city'));
 		$this->addMessageBag($this->validateStringOptional($input,'state'));
 
