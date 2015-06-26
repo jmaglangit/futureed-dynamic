@@ -186,7 +186,7 @@
 							</div>
 						</div>
 						<div class="form-group">
-							<label class="control-label col-xs-2">State <span class="required">*</span></label>
+							<label class="control-label col-xs-2">State</label>
 							<div class="col-xs-4">
 								{!! Form::text('state', '',
 									[
