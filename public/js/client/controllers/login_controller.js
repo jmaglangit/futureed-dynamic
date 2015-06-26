@@ -151,6 +151,7 @@ function LoginController($scope, apiService, clientLoginApiService, clientProfil
 
 	function setNewClientPassword() {
 	    $scope.$parent.errors = Constants.FALSE;
+	    self.errors = Constants.FALSE;
 
 	    if(self.set.new_password == self.set.confirm_password) {
 		    $scope.ui_block();
@@ -286,6 +287,7 @@ function LoginController($scope, apiService, clientLoginApiService, clientProfil
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data){
+					$scope.$parent.errors = Constants.FALSE;
 					self.confirmed = Constants.TRUE;
 					self.set.id = response.data.id;
 				} 
