@@ -24,6 +24,11 @@ class StudentRepository implements StudentRepositoryInterface
 			$student = $student->name($criteria['name']);
 		}
 
+		if(isset($criteria['client_id'])){
+
+			$student = $student->clientid($criteria['client_id']);
+		}
+
 		$student = $student->with('user');
 
 		$count = $student->get()->count();
@@ -225,7 +230,7 @@ class StudentRepository implements StudentRepositoryInterface
 			->pluck('id');
 	}
 
-	public function getStudentList($criteria = [], $limit = 0, $offset = 0)
+	public function 	getStudentList($criteria = [], $limit = 0, $offset = 0)
 	{
 
 
