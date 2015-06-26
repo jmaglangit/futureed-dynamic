@@ -31,7 +31,7 @@ class ClientTeacherRequest extends ApiRequest
 					'street_address' => 'string',
 					'city' => 'string',
 					'state' => 'string',
-					'zip' => 'numeric|regex:'.config('regex.zip_code'),
+					'zip' => 'max:10|regex:'.config('regex.zip_code'),
 					'country_id' => 'integer'
 				];
 				break;
