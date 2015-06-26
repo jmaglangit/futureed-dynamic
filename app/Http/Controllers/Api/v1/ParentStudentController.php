@@ -357,8 +357,9 @@ class ParentStudentController extends ApiController {
         }
 
         // check if student has existing subscription
-        $check_class_student = $this->class_student->getClassStudent($student_id);
-        if(!is_null($check_class_student)){
+        $check_class_student = $this->student->subscriptionExpired($student_id);
+
+        if($check_class_student){
             return $this->respondErrorMessage(2037);
         }
 
@@ -397,15 +398,15 @@ class ParentStudentController extends ApiController {
         $parent_id = $request->only('parent_user_id');
 
         //check if user is associated to the parent.
-        $check_parent_student = $this->parent_student->checkParentStudent($parent_id,$student_id);
+       $check_parent_student = $this->parent_student->checkParentStudent($parent_id,$student_id);
 
         if(is_null($check_parent_student)){
             return $this->respondErrorMessage(2039);
         }
 
         // check if student has existing subscription
-        $check_class_student = $this->class_student->getClassStudent($student_id);
-        if(!is_null($check_class_student)){
+        $check_class_student = $this->student->subscriptionExpired($student_id);
+        if($check_class_student){
             return $this->respondErrorMessage(2037);
         }
 
