@@ -176,8 +176,8 @@
 		<table id="price-list" class="table table-striped table-bordered">
 			<thead>
 	        <tr>
-	            <th>Subscription Name</th>
-	            <th>Description</th>
+	            <th class="width-200">Subscription Name</th>
+	            <th class="width-200">Description</th>
 	            <th>Price</th>
 	            <th>Action</th>
 	        </tr>
