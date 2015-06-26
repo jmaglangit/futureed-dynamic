@@ -61,7 +61,7 @@
                         {!! Form::text('email', ''
                             , array(
                                 'class' => 'form-control'
-                                , 'ng-model' => 'class.record.email'
+                                , 'ng-model' => 'class.add.email'
                                 , 'placeholder' => 'Email Address'
                                 , 'ng-class' => "{ 'required-field' : class.fields['email'] }"
                                 , 'autocomplete' => 'off'
