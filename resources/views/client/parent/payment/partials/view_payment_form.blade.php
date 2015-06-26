@@ -70,7 +70,7 @@
         	</div>
         </fieldset>
 		<div class="col-xs-12">
-			<div class="col-xs-3 pull-right">
+			<div class="col-xs-3 pull-right" ng-if="payment.print">
 				{!! Form::button('Print'
 					, array(
 						'class' => 'btn btn-blue btn-medium pull-right'
@@ -117,20 +117,18 @@
 								id="subscription" 
 								class="form-control">
 	                        <option value="">-- Select Subscription --</option>
-	                        <option ng-repeat="subscription in payment.subscriptions" ng-selected="payment.invoice.subscription.name == subscription.name" data-id="{! subscription.id !}" data-price="{! subscription.price !}" ng-value="subscription.days">{! subscription.name!}</option>
+	                        <option ng-repeat="subscription in payment.subscriptions" ng-selected="payment.invoice.subscription.name == subscription.name" data-id="{! subscription.id !}" data-price="{! subscription.price !}" data-name="{! subscription.name!}" value="{! subscription.days !}">{! subscription.name!}</option>
 	                    </select>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-xs-2">Date Started</label>
 					<div class="col-xs-4">
-						<input type="text" name="start_date" ng-model="payment.invoice.date_start" placeHolder="Start Date" ng-disabled="true" class="form-control">
-						<input type="hidden" name="start_date" value="{! payment.invoice.h_date_start !}">
+						<input type="text" name="start_date" placeHolder="Start Date" ng-disabled="true" class="form-control" value="{! payment.invoice.dis_date_start | ddMMyy !}">
 					</div>
 					<label class="control-label col-xs-2">Date End</label>
 					<div class="col-xs-4">
-						<input type="text" name="start_date" ng-model="payment.invoice.date_end" placeHolder="End Date" ng-disabled="true" class="form-control">
-						<input type="hidden" name="end_date" value="{! payment.invoice.h_date_end !}">
+						<input type="text" name="start_date" placeHolder="End Date" ng-disabled="true" class="form-control" value="{! payment.invoice.dis_date_end | ddMMyy !}">
 					</div>
 				</div>
 				<div class="form-group">
@@ -164,12 +162,11 @@
 			        <tr ng-repeat="key in payment.students">
 			            <td>{! key.student.user.name !}</td>
 			            <td>{! key.student.user.email !}</td>
-			            <td>{! payment.students.price | number: 2 !}</td>
+			            <td>{! payment.invoice.price | number: 2 !}</td>
 			            <td>
 			            	<div class="row">
 			            		<div>
-			            			<p ng-if="payment.invoice.payment_status == 'Paid'"><span><i class="fa fa-trash"></i></span></p>
-		    						<a ng-if="payment.invoice.payment_status == 'Paid' || payment.invoice.payment_status == 'Pending'" href="#" ng-click="payment.confirmCancelView(key.id)"><span><i class="fa fa-trash"></i></span></a>
+		    						<a ng-if="payment.invoice.payment_status != 'Paid'" href="#" ng-click="payment.confirmCancelView(key.id)"><span><i class="fa fa-trash"></i></span></a>
 		    					</div>
 			            	</div>
 			            </td>
@@ -200,7 +197,7 @@
 				<div class="form-group">
 					<label class="control-label col-xs-4">Subtotal</label>
 					<div class="col-xs-8">
-						<input type="text" class="form-control" placeHolder="Subtotal" value="{! payment.payment_total.subtotal | number:2 !}" ng-disabled="true">
+						<input type="text" class="form-control" placeHolder="Subtotal" value="{! payment.invoice.subtotal | number:2 !}" ng-disabled="true">
 					</div>	
 				</div>
 				<div class="form-group">
@@ -219,7 +216,7 @@
 				<div class="form-group">
 					<label class="control-label col-xs-4">Total</label>
 					<div class="col-xs-8">
-						<input type="text" class="form-control" placeHolder="Total" value="{! payment.payment_total.total | number:2 !}" ng-disabled="true">
+						<input type="text" class="form-control" placeHolder="Total" value="{! payment.invoice.total_amount | number:2 !}" ng-disabled="true">
 					</div>	
 				</div>
 			</div>
@@ -253,7 +250,7 @@
 			{!! Form::button('Save Subscription'
 				, array(
 					'class' => 'btn btn-blue btn-small div-right'
-					, 'ng-click' => "payment.setActive('list')"
+					, 'ng-click' => "payment.savePayment('view')"
 					, 'ng-if' => "payment.invoice.payment_status == 'Pending'"
 				)
 			) !!}

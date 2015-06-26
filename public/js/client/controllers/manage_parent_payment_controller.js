@@ -67,6 +67,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 	}
 
 	self.list = function(cond) {
+		
 		var cond = (cond) ? cond:0;
 		if(self.active_list || self.active_view) {
 			self.listPayments(cond);
@@ -89,6 +90,9 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 		self.search.client_id = $scope.user.id;
 		self.table.loading = Constants.TRUE;
 
+		if(self.remove_cond == 'list'){
+			self.cond = 1;
+		}
 		if(self.cond != 1) {
 			self.success = Constants.FALSE;
 		}
@@ -129,21 +133,20 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 					}else{
 						self.getStudents(self.invoice.order_no);
 					}
-
-					if(self.discount != null) {
+					if(self.invoice.discount != '0.00') {
 						self.invoice.discount = self.discount.percentage;
 					}else{
 						self.invoice.discount = 0;
 					}
 
 					self.invoice.subtotal = self.subtotal;
-					self.invoice.h_date_start = self.invoice.date_start;
-					self.invoice.h_date_end = self.invoice.date_end;
+					self.invoice.dis_date_start = self.invoice.date_start;
+					self.invoice.dis_date_end = self.invoice.date_end;
 
 					var date = new Date();
-					self.invoice.date_start = (parseInt(self.invoice.date_start) != 0) ? $filter('date')(new Date(self.invoice.date_start), 'dd/MM/yyyy'):null;
+					self.invoice.date_start = $filter('date')(new Date(self.invoice.date_start), 'yyyyMMdd');
 					
-					self.invoice.date_end = (parseInt(self.invoice.date_end) != 0) ? $filter('date')(new Date(self.invoice.date_end), 'dd/MM/yyyy'):null;
+					self.invoice.date_end = $filter('date')(new Date(self.invoice.date_end), 'yyyyMMdd');
 					
 					self.invoice.subscription_enable = (self.invoice.payment_status == Constants.PENDING) ? Constants.TRUE:Constants.FALSE;
 				}
@@ -225,15 +228,14 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 	}
 
 	self.computation = function(add) {
-		self.payment_total.subtotal = 0.00;
+		self.invoice.subtotal = 0.00;
 		for(var i = 0; i < self.students.length; i++){
-			self.payment_total.price = (add == 1) ? self.payment_total.s_price : self.students.price;
-
-	        self.payment_total.subtotal = self.payment_total.subtotal + parseInt(self.payment_total.price);
+			self.invoice.price = (add == 1) ? self.invoice.s_price : self.students.price;
+	        self.invoice.subtotal = self.invoice.subtotal + parseInt(self.invoice.price);
 	    }
 
-	    self.payment_total.subtotal = self.payment_total.subtotal + '.00';
-	    self.payment_total.total = (self.discount.percentage != 0) ? (parseInt(self.payment_total.subtotal) * (parseInt(self.discount.percentage)/100)) : self.payment_total.subtotal;
+	    self.invoice.subtotal = self.invoice.subtotal + '.00';
+	    self.invoice.total_amount = (self.discount.percentage != '0.00') ? (parseInt(self.invoice.subtotal) * (parseInt(self.discount.percentage)/100)) : self.invoice.subtotal;
 	}
 
 	self.getSubscription = function(id) {
@@ -263,9 +265,13 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 					self.errors = $scope.errorHandler(response.errors);
 				}else if(response.data){
 					self.discount = {};
+
 					angular.forEach(response.data, function(value, key){
 						self.discount = value;
 					});
+					if(self.discount.length == null){
+						self.discount.percentage = 0;
+					}
 				}
 			}
 		}).error(function(response){
@@ -279,16 +285,16 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 			self.invoice.h_date_end = null;
 
 			self.payment_total.s_price = ($('#subscription').find(':selected').data('price') != null) ? $('#subscription').find(':selected').data('price'):0;
-			self.students.price = (self.payment_total.s_price) ? self.payment_total.s_price: self.students.price;
-			self.invoice.dis_start_date = $filter('date')(date, 'yyyyMMdd');
+			self.invoice.s_price = ($('#subscription').find(':selected').data('price') != null) ? $('#subscription').find(':selected').data('price'):0;
+			self.invoice.price = (self.payment_total.s_price) ? self.payment_total.s_price: self.students.price;
 			
-			self.invoice.date_start = $filter('date')(date, 'dd/MM/yyyy');
+			self.invoice.date_start = $filter('date')(date, 'yyyyMMdd');
+			self.invoice.dis_date_start = date.getTime();
 
 			date.setDate(date.getDate() + parseInt(self.no_days));
 
-			self.invoice.dis_end_date = $filter('date')(date, 'yyyyMMdd');
-
-			self.invoice.date_end = $filter('date')(date, 'dd/MM/yyyy');
+			self.invoice.date_end = $filter('date')(date, 'yyyyMMdd');
+			self.invoice.dis_date_end = date.getTime();
 			self.computation(1);
 		}
 	}
@@ -296,7 +302,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 	self.getOrderNo = function() {
 		self.errors = Constants.FALSE;
 		self.order = {};
-
+		self.invoice = {};
 		ManageParentPaymentService.getOrderNo(self.user_id).success(function(response){
 			if(angular.equals(response.status,Constants.STATUS_OK)){
 				if(response.errors) {
@@ -436,6 +442,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 					self.errors = $scope.errorHandler(response.errors);
 				}else if(response.data){
 					self.success = Constants.TRUE;
+					self.list();
 					self.setActive('list', '', 1);
 				}
 			}
@@ -446,23 +453,56 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 		});
 	}
 
-	self.addPayment = function(flag) {
+	self.savePayment = function(flag){
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
 		self.add.success = Constants.FALSE;
 
 		self.invoice.invoice_date = $filter('date')(new Date(), 'yyyyMMdd');
+		self.invoice.order_no = (flag == 'add') ? self.invoice_detail.order_no : self.invoice.order_no;
+		self.invoice.client_id = (flag == 'add') ? parseInt(self.invoice_detail.client_id):self.invoice.client_id;
+		self.invoice.client_name = (flag == 'add') ? self.invoice_detail.client_name:self.invoice.client_name;
+		self.invoice.dis_date_start = (self.invoice.h_date_start != null) ? $filter('date')(new Date(self.invoice.h_date_start), 'yyyyMMdd'): self.invoice.dis_start_date;
+		self.invoice.dis_date_end = (self.invoice.h_date_end != null) ? $filter('date')(new Date(self.invoice.h_date_end), 'yyyyMMdd') : self.invoice.dis_end_date;
+		self.invoice.seats_total = self.students.length;
+		self.invoice.subscription = $('#subscription').find(':selected').data('name');
+		self.invoice.subscription_id = $('#subscription').find(':selected').data('id');
+		self.invoice.payment_status = Constants.PENDING;
+		self.invoice.discount_type = null;
+		self.invoice.discount_id = 0;
+		self.invoice.id = (flag == 'add') ? self.invoice_detail.id:self.invoice.id;
+		$scope.ui_block();
+		ManageParentPaymentService.updatePayment(self.invoice).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.setActive('list');
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.addPayment = function(flag) {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+		self.add.success = Constants.FALSE;
+		self.paying = Constants.TRUE;
+		self.invoice.invoice_date = $filter('date')(new Date(), 'yyyyMMdd');
 		self.invoice.id = (flag == 'add') ? self.invoice_detail.id: self.invoice.id;
 		self.invoice.order_no = (flag == 'add') ? self.invoice_detail.order_no : self.invoice.order_no;
 		self.invoice.client_id = (flag == 'add') ? self.invoice_detail.client_id:self.invoice.client_id;
 		self.invoice.client_name = (flag == 'add') ? self.invoice_detail.client_name:self.invoice.client_name;
-		self.invoice.date_start = (self.invoice.h_date_start != null) ? $filter('date')(new Date(self.invoice.h_date_start), 'yyyyMMdd'): self.invoice.dis_start_date;
-		self.invoice.date_end = (self.invoice.h_date_end != null) ? $filter('date')(new Date(self.invoice.h_date_end), 'yyyyMMdd') : self.invoice.dis_end_date;
 		self.invoice.seats_total = self.students.length;
-		self.invoice.total_amount = self.payment_total.total;
+		self.invoice.total_amount = self.invoice.total_amount;
 		self.invoice.subscription_id = $('#subscription').find(':selected').data('id');
 		self.invoice.payment_status = Constants.PENDING;
 		$scope.ui_block();
+
 		ManageParentPaymentService.updatePayment(self.invoice).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
@@ -477,6 +517,12 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 			$scope.ui_unblock();
 		});
 	}
+
+	$window.addEventListener('beforeunload', function() {
+		if(!self.paying && self.active_add) {
+			self.deleteInvoice(self.invoice_detail.id);	
+		}
+	});
 
 	self.getPaymentUri = function() {
 		self.payment = {};
@@ -542,8 +588,9 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 	    });
 	}
 
-	self.confirmRemoveInvoice = function(id) {
+	self.confirmRemoveInvoice = function(id, cond) {
 		self.remove_invoice_id = id;
+		self.remove_cond = cond;
 		self.errors = Constants.FALSE;
 		self.confirm_delete = Constants.TRUE;
 		$("#remove_subscription_modal_invoice").modal({
