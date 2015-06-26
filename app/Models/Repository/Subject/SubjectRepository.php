@@ -97,8 +97,14 @@ class SubjectRepository implements SubjectRepositoryInterface {
 
 			unset($data['code']);
 
-            //update related status.
-            $subject->areas[0]->status = $data['status'];
+            //update related areas status.
+			if($subject->areas->count() > 0 ){
+
+				foreach($subject->areas as $areas => $area){
+
+					$area->status = $data['status'];
+				}
+			}
 
 			$subject->update($data);
 
