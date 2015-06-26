@@ -120,14 +120,11 @@
 		            <td>{! record.payment_status !}</td>
 		            <td>
 		            	<div class="row">
-		            		<div class="col-xs-4" title="View">
+		            		<div class="col-xs-6" title="View">
 	    						<a href="" ng-click="payment.paymentDetails(record.id, futureed.ACTIVE_VIEW)"><span><i class="fa fa-eye"></i></span></a>
 	    					</div>
-	    					<div class="col-xs-4" title="Cancel">
-	    						<a href="" ng-if="record.payment_status == futureed.PENDING" ng-click="payment.confirmCancel(record.id)"><span><i class="fa fa-ban"></i></span></a>
-	    					</div>
-	    					<div class="col-xs-4" title="Delete">
-	    						<a href="" ng-click="payment.confirmDelete(record.id)"><span><i class="fa fa-trash"></i></span></a>
+	    					<div class="col-xs-6" title="Delete">
+	    						<a href="" ng-if="record.payment_status == futureed.PENDING" ng-click="payment.confirmDelete(record.id)"><span><i class="fa fa-trash"></i></span></a>
 	    					</div>
 		            	</div>
 		            </td>

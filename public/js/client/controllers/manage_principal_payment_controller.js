@@ -256,6 +256,7 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 		self.errors = Constants.FALSE;
 		self.teachers = {};
 		self.validation = {};
+		self.classroom.client_id = Constants.EMPTY_STR;
 		self.validation.c_loading = Constants.TRUE;
 		self.classroom.client_role = Constants.TEACHER;
 		self.classroom.school_code = self.invoice.school_code;
