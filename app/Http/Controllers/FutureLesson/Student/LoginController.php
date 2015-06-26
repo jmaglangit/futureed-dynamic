@@ -117,7 +117,6 @@ class LoginController extends Controller {
 			return view('student.login.registration', ['success' => $success, 'email' => $input['email'], 'id' => $invitation['id'], 'registration_token' => $invitation['registration_token']]);
 		}
 		else{
-			$invite = 0;
 			if($input['email']) {
 				$success = 1;
 			}

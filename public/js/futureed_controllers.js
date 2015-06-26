@@ -28,7 +28,6 @@ function FutureedController($scope, apiService, futureed) {
 	$scope.checkAvailability = checkAvailability;
 	$scope.checkEmailAvailability = checkEmailAvailability;
 	$scope.getAnnouncement = getAnnouncement;
-	$scope.getCountryId = getCountryId;
 
 	$scope.beforeDateRender = beforeDateRender;
 
