@@ -47,7 +47,7 @@ class ClassroomRequest extends ApiRequest {
                     'name' => 'required|regex:'. config('regex.name'),
                     'grade_id' => 'required|integer',
                     'client_id' => 'required|integer',
-                    'seats_taken' => 'required|integer|min:1|max:999999',
+                    'seats_taken' => 'required|integer|max:999999',
                     'seats_total' => 'required|integer|min:1|max:999999',
                     'status' => 'required|in:Enabled,Disabled'
                 ];
