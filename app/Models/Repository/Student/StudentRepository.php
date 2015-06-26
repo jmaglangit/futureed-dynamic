@@ -230,7 +230,7 @@ class StudentRepository implements StudentRepositoryInterface
 			->pluck('id');
 	}
 
-	public function 	getStudentList($criteria = [], $limit = 0, $offset = 0)
+	public function getStudentList($criteria = [], $limit = 0, $offset = 0)
 	{
 
 
