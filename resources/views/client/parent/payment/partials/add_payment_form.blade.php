@@ -92,7 +92,7 @@
 							ng-change="payment.setDate(1)"
 							ng-model="payment.no_days">
                         <option value="">-- Select Subscription --</option>
-                        <option ng-repeat="subscription in payment.subscriptions" data-id="{! subscription.id !}" data-price="{! subscription.price !}" value="{! subscription.days !}">{! subscription.name!}</option>
+                        <option ng-repeat="subscription in payment.subscriptions" data-id="{! subscription.id !}" data-price="{! subscription.price !}" ng-value="subscription.days">{! subscription.name!}</option>
                     </select>
 				</div>
 				<div class="col-xs-6">

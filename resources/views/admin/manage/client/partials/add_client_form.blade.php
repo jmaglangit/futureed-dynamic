@@ -249,8 +249,8 @@
 	        		<label class="col-md-3 control-label">Country <span class="required">*</span></label>
 				      <div class="col-md-5" ng-init="getCountries()">
 				        <select  name="school_country_id" class="form-control" ng-class="{ 'required-field' : client.fields['school_country_id'] }" ng-model="client.create.school_country_id">
-				          <option value="">-- Select Country --</option>
-				          <option ng-selected="client.create.school_country_id == country.id" ng-repeat="country in countries" ng-value="{! country.id !}">{! country.name!}</option>
+				          <option ng-selected="client.create.school_country_id == futureed.FALSE" value="">-- Select Country --</option>
+				          <option ng-selected="client.create.school_country_id == country.id" ng-repeat="country in countries" ng-value="country.id">{! country.name!}</option>
 				        </select>
 				      </div>
 	        	</div>
@@ -349,8 +349,8 @@
 	        		<label class="col-md-3 control-label">Country <span class="required" ng-if="client.create.client_role == futureed.PARENT">*</span></label>
 				      <div class="col-md-5" ng-init="getCountries()">
 				        <select  name="country_id" class="form-control" ng-class="{ 'required-field' : client.fields['country_id'] }" ng-model="client.create.country_id">
-				          <option value="">-- Select Country --</option>
-				          <option ng-selected="client.create.country_id == country.id" ng-repeat="country in countries" ng-value="{! country.id !}">{! country.name!}</option>
+				          <option ng-selected="client.create.country_id == futureed.FALSE" value="">-- Select Country --</option>
+				          <option ng-selected="client.create.country_id == country.id" ng-repeat="country in countries" ng-value="country.id">{! country.name!}</option>
 				        </select>
 				      </div>
 	        	</div>

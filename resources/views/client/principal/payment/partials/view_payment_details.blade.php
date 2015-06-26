@@ -37,7 +37,7 @@
 		        		<div class="col-xs-4">
 		        			<select name="grade_id" ng-class="{ 'required-field' : payment.fields['grade_id'] }" class="form-control" ng-model="payment.classroom.grade_id">
 	                            <option value="">-- Select Level --</option>
-	                            <option ng-repeat="grade in grades" value="{! grade.id !}">{! grade.name !}</option>
+	                            <option ng-repeat="grade in grades" ng-value="grade.id">{! grade.name !}</option>
 	                        </select>
 		        		</div>		
 		        	</div>
@@ -179,7 +179,7 @@
 						ng-change="payment.selectSubscription()" class="form-control">
 
 						<option value="">-- Select Subscription --</option>
-						<option ng-selected="payment.invoice.subscription_id == subscription.id" ng-repeat="subscription in payment.subscriptions" ng-value="{! subscription.id !}">{! subscription.name !}</option>
+						<option ng-selected="payment.invoice.subscription_id == subscription.id" ng-repeat="subscription in payment.subscriptions" ng-value="subscription.id">{! subscription.name !}</option>
 					</select>
 				</div>
 				<div class="col-xs-6">

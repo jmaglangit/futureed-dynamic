@@ -170,8 +170,8 @@
 						<label class="control-label col-xs-2">Country <span class="required">*</span></label>
 						<div class="col-md-4">
 		                        <select ng-disabled="true" name="country" class="form-control" ng-model="teacher.record.country_id">
-		                            <option value="">-- Select Country --</option>
-		                            <option ng-selected="teacher.record.country_id == country.id" ng-repeat="country in countries" ng-value="{! country.id !}">{! country.name!}</option>
+		                            <option ng-selected="teacher.record.country_id == futureed.FALSE" value="">-- Select Country --</option>
+		                            <option ng-selected="teacher.record.country_id == country.id" ng-repeat="country in countries" ng-value="country.id">{! country.name!}</option>
 		                        </select>
 		                    </div>
 					</div>
@@ -197,7 +197,7 @@
 						<div class="col-xs-5 nullable">
 		                    <select ng-disabled="true" name="grade_code" class="form-control" ng-model="teacher.record.grade_code">
 		                        <option value="">-- Select Level --</option>
-		                        <option ng-selected="teacher.record.grade_code == grade.code" ng-repeat="grade in grades" ng-value="{! grade.code !}">{! grade.name !}</option>
+		                        <option ng-selected="teacher.record.grade_code == grade.code" ng-repeat="grade in grades" ng-value="grade.code">{! grade.name !}</option>
 		                    </select>
 		                </div>
 					</div>

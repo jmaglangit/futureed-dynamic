@@ -138,9 +138,9 @@
 	        		<label class="col-md-2 control-label">Country</label>
 				      <div class="col-md-4" ng-init="getCountries()">
 				        <select  name="country" class="form-control" ng-model="teacher.record.country_id" ng-disabled="teacher.active_view">
-				          <option ng-selected="null == teacher.record.country_id" value="null">-- Select Country --</option>
+				          <option ng-selected="futureed.FALSE == teacher.record.country_id" value="">-- Select Country --</option>
 				          <option ng-selected="country.id == teacher.record.country_id" 
-				          			ng-repeat="country in countries" value="{! country.id !}">{! country.name!}</option>
+				          			ng-repeat="country in countries" ng-value="country.id">{! country.name!}</option>
 				        </select>
 				      </div>
 	        	</div>

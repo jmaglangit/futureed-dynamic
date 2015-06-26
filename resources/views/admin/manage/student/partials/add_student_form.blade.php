@@ -119,7 +119,7 @@
 				<div class="col-md-4" ng-init="getCountries()">
 					<select name="country_id" id="country" class="form-control" ng-model="student.reg.country_id" ng-change="student.getGradeLevel()">
                         <option value="">-- Select Country --</option>
-                        <option ng-repeat="country in countries"value="{! country.id !}">{! country.name!}</option>
+                        <option ng-repeat="country in countries" ng-value="country.id">{! country.name!}</option>
                     </select>
 				</div>
         	</div>
@@ -148,7 +148,7 @@
         		<div class="col-xs-5">
                     <select name="grade_code" ng-disabled="!student.reg.country_id" class="form-control" ng-model="student.reg.grade_code">
                         <option value="">-- Select Level --</option>
-                        <option ng-repeat="grade in student.grades" value="{! grade.code !}">{! grade.name !}</option>
+                        <option ng-repeat="grade in student.grades" ng-value="grade.code">{! grade.name !}</option>
                     </select><br><br>
                 </div>
         	</div>

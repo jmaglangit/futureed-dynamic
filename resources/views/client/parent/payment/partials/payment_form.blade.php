@@ -41,7 +41,7 @@
 									id="subscription" 
 									class="form-control">
 		                        <option value="">-- Select Subscription --</option>
-		                        <option ng-repeat="subscription in payment.subscriptions" value="{! subscription.name !}">{! subscription.name!}</option>
+		                        <option ng-repeat="subscription in payment.subscriptions" ng-value="subscription.name">{! subscription.name!}</option>
 		                    </select>
 				</div>
 				<div class="btn-container col-xs-5">

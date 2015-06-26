@@ -151,8 +151,8 @@
                         <label for="" class="col-md-2 control-label">Country<span class="required">*</span></label>
                         <div class="col-md-4">
                             <select name="country_id" id="country" class="form-control" ng-model="reg.country_id" ng-change="getGradeLevel(reg.country_id)">
-                                <option value="">-- Select Country --</option>
-                                <option ng-repeat="country in countries" ng-selected ="reg.country_id == country.id" ng-value="country.id">{! country.name !}</option>
+                                <option ng-selected ="reg.country_id == futureed.FALSE" value="">-- Select Country --</option>
+                                <option ng-selected ="reg.country_id == country.id" ng-repeat="country in countries" ng-value="country.id">{! country.name !}</option>
                             </select>
                         </div>
                     </div>
