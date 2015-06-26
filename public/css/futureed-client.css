@@ -150,9 +150,9 @@ table#client-list{
 	bottom: 5px;
 }
 
-.bottom-5{
+.bottom-10{
 	position: relative;
-	bottom: 5px;
+	bottom: 10px;
 }
 .text-red{
 	color: red;
