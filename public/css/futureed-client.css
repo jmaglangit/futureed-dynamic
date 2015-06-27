@@ -38,7 +38,9 @@ table#client-list{
 .row > .col-sm-5{
 	display: none;
 }
-
+.width-200{
+	width: 200px;
+}
 .title-mid{
 	text-transform: uppercase;
   	color: #055A7F;
@@ -150,9 +152,9 @@ table#client-list{
 	bottom: 5px;
 }
 
-.bottom-5{
+.bottom-10{
 	position: relative;
-	bottom: 5px;
+	bottom: 10px;
 }
 .text-red{
 	color: red;

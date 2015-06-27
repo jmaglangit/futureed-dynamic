@@ -24,7 +24,12 @@ class StudentRepository implements StudentRepositoryInterface
 			$student = $student->name($criteria['name']);
 		}
 
-		$student = $student->with('user');
+		if(isset($criteria['client_id'])){
+
+			$student = $student->parentid($criteria['client_id']);
+		}
+
+		$student = $student->with('user','parent');
 
 		$count = $student->get()->count();
 

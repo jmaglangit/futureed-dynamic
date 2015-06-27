@@ -86,11 +86,24 @@ class Student extends Model {
 
     }
 
+	//TODO: This should be changed...whenever it is called.. parent() in relationship is called.
 	public function scopeParent($query, $parent_user_id){
 
 		return $query->whereHas('parent',function($query) use ($parent_user_id) {
 			$query->where('parent_user_id', '=', $parent_user_id);
 		});
+	}
+
+	public function scopeParentId($query, $parent_id){
+
+		return $query->whereHas('parent',function($query) use ($parent_id) {
+			$query->where('parent_user_id', '=', $parent_id);
+		});
+	}
+
+	public function scopeClientId($query, $parent_id){
+
+		return $query->where('parent_id',$parent_id);
 	}
 
 
@@ -137,7 +150,8 @@ class Student extends Model {
 					//check relation to invoice
 					$query->whereHas('invoice', function($query){
 
-						$query->where('date_end','>=', Carbon::now());
+						$query->where('date_end','>=', Carbon::now())
+						      ->Where('payment_status', '!=', 'Cancelled');
 
 					});
 
@@ -147,6 +161,7 @@ class Student extends Model {
 		});
 
 	}
+
 
 
 

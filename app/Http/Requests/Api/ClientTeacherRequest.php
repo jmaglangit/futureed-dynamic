@@ -31,7 +31,7 @@ class ClientTeacherRequest extends ApiRequest
 					'street_address' => 'string',
 					'city' => 'string',
 					'state' => 'string',
-					'zip' => 'numeric|regex:'.config('regex.zip_code'),
+					'zip' => 'max:10|regex:'.config('regex.zip_code'),
 					'country_id' => 'integer'
 				];
 				break;
@@ -39,7 +39,7 @@ class ClientTeacherRequest extends ApiRequest
 			default:
 				$client = config('futureed.client');
 				return [
-					'username' => "required|string|min:8|max:32|unique:users,username,NULL,id,user_type,$client,deleted_at,NULL",
+					'username' => "required|alpha_num|string|min:8|max:32|unique:users,username,NULL,id,user_type,$client,deleted_at,NULL",
 					'email' => "required|email|unique:users,email,NULL,id,user_type,$client,deleted_at,NULL",
 
 					'first_name' => 'required|regex:'. config('regex.name'),

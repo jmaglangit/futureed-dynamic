@@ -79,7 +79,7 @@
 	        			{!! Form::text('points',''
 	        				, array(
 	        					'placeHolder' => 'Points'
-	        					, 'ng-disabled' => '!student.edit'
+	        					, 'ng-disabled' => 'true'
 	        					, 'ng-model' => 'student.detail.points'
 	        					, 'class' => 'form-control'
 	        				)
@@ -92,14 +92,14 @@
         				{!! Form::text('badges',''
 	        				, array(
 	        					'placeHolder' => 'Badges'
-	        					, 'ng-disabled' => '!student.edit'
+	        					, 'ng-disabled' => 'true'
 	        					, 'ng-model' => 'student.detail.badges'
 	        					, 'class' => 'form-control'
 	        				)
 	        			) !!}
         			</div>
         		</div>
-        		<div class="btn-container">
+        		<div class="btn-container" ng-if="false">
         			{!! Form::button('Edit Reward'
 					, array(
 						'class' => 'btn btn-blue btn-medium pull-right'
@@ -114,13 +114,13 @@
         		Personal Information
         	</legend>
         	<div class="form-group">
-        		<label class="control-label col-xs-2">Firstname <span class="required">*</span></label>
+        		<label class="control-label col-xs-2">First Name <span class="required">*</span></label>
         		<div class="col-xs-4">
         			{!! Form::text('first_name','',
         				array('class' => 'form-control'
         						, 'ng-disabled' => '!student.edit'
         					 	, 'ng-model' => 'student.detail.first_name'
-        					 	, 'placeHolder' => 'Firstname'
+        					 	, 'placeHolder' => 'First Name'
         					 )
         				)!!}
         		</div>
@@ -136,13 +136,13 @@
         		</div>
         	</div>
         	<div class="form-group">
-        		<label class="control-label col-xs-2">Lastname <span class="required">*</span></label>
+        		<label class="control-label col-xs-2">Last Name <span class="required">*</span></label>
         		<div class="col-xs-4">
         			{!! Form::text('last_name','',
         				array('class' => 'form-control'
         						, 'ng-disabled' => '!student.edit'
         					 	, 'ng-model' => 'student.detail.last_name'
-        					 	, 'placeHolder' => 'Lastname'
+        					 	, 'placeHolder' => 'Last Name'
         					 )
         				)!!}
         		</div>
@@ -177,8 +177,8 @@
 							class="form-control" 
 							ng-model="student.detail.country_id" 
 							ng-change="student.getCountryId()">
-                        <option value="">-- Select Country --</option>
-                        <option ng-repeat="country in countries" ng-selected="student.detail.country_id == country.id" value="{! country.id !}">{! country.name!}</option>
+                        <option ng-selected="student.detail.country_id == futureed.FALSE" value="">-- Select Country --</option>
+                        <option ng-selected="student.detail.country_id == country.id" ng-repeat="country in countries" ng-value="country.id">{! country.name!}</option>
                     </select>
 				</div>
         	</div>
@@ -193,7 +193,7 @@
 									<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 							</div>
 						</a>
-						<ul class="dropdown-menu date-dropdown-menu" role="menu" aria-labelledby="dLabel">
+						<ul class="dropdown-menu date-dropdown-menu" role="menu" aria-labelledby="dLabel" ng-if="student.edit">
 							<datetimepicker data-ng-model="student.detail.birth_date" data-before-render="beforeDateRender($dates)" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', startView:'day', minView:'day' }"/>
 						</ul>
 					</div>
@@ -234,7 +234,7 @@
         		<div class="col-xs-5">
                     <select ng-disabled="!student.edit" name="grade_code" class="form-control" ng-model="student.detail.grade_code">
                         <option value="">-- Select Level --</option>
-                        <option ng-repeat="grade in student.grades" ng-selected="student.detail.grade_code == grade.code" value="{! grade.code !}">{! grade.name !}</option>
+                        <option ng-repeat="grade in student.grades" ng-selected="student.detail.grade_code == grade.code" ng-value="grade.code">{! grade.name !}</option>
                     </select><br><br>
                 </div>
         	</div>

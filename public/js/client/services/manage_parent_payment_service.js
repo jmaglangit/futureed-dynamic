@@ -85,10 +85,11 @@ function ManageParentPaymentService($http){
 		})
 	}
 
-	managePaymentApi.searchName = function(name) {
+	managePaymentApi.searchName = function(name, id) {
 		return $http({
 			method 	: Constants.METHOD_GET
 			, url 	: paymentApiUrl + 'student?name=' + name
+					+ '&client_id=' + id
 		});
 	}
 
@@ -129,6 +130,13 @@ function ManageParentPaymentService($http){
 		return $http({
 			method : Constants.METHOD_DELETE
 			, url  : paymentApiUrl + 'order-detail/' + id
+		});
+	}
+
+	managePaymentApi.cancelInvoice = function(id) {
+		return $http({
+			method : Constants.METHOD_PUT
+			, url  : paymentApiUrl + 'invoice/cancel-invoice/' + id
 		});
 	}
 	return managePaymentApi;

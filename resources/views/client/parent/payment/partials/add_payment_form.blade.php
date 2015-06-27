@@ -92,29 +92,17 @@
 							ng-change="payment.setDate(1)"
 							ng-model="payment.no_days">
                         <option value="">-- Select Subscription --</option>
-                        <option ng-repeat="subscription in payment.subscriptions" data-id="{! subscription.id !}" data-price="{! subscription.price !}" value="{! subscription.days !}">{! subscription.name!}</option>
+                        <option ng-repeat="subscription in payment.subscriptions" data-id="{! subscription.id !}" data-price="{! subscription.price !}" data-name="{! subscription.name !}" value="{! subscription.days !}">{! subscription.name!}</option>
                     </select>
 				</div>
 				<div class="col-xs-6">
 					<label class="col-xs-2 control-label">Starting</label>
 					<div class="col-xs-4">
-						{!! Form::text('start_date', '',
-							['class' => 'form-control'
-								, 'ng-model' => 'payment.invoice.date_start'
-								, 'placeholder' => 'Start Date'
-								, 'ng-disabled' => 'true'
-							]) 
-						!!}
+						<input type="text" name="start_date" placeHolder="Start Date" ng-disabled="true" class="form-control" value="{! payment.invoice.dis_date_start | ddMMyy !}">
 					</div>
 					<label class="col-xs-2 control-label">To</label>
 					<div class="col-xs-4">
-						{!! Form::text('end_date', '',
-							['class' => 'form-control'
-								, 'ng-model' => 'payment.invoice.date_end'
-								, 'placeholder' => 'End Date'
-								, 'ng-disabled' => 'true'
-							]) 
-						!!}
+						<input type="text" name="start_date" placeHolder="End Date" ng-disabled="true" class="form-control" value="{! payment.invoice.dis_date_end | ddMMyy !}">
 					</div>
 				</div>
 			</div>
@@ -133,7 +121,7 @@
 						{{-- Sample Data --}}
 							<td>{! key.student.user.name !}</td>
 							<td>{! key.student.user.email !}</td>
-							<td>{! payment.students.price | number: 2 !}</td>
+							<td>{! payment.invoice.price | number: 2 !}</td>
 							<td>
 								<a href="#" ng-click="payment.confirmCancelAdd(key.id)"><span><i class="fa fa-trash"></i></span></a>
 							</td>
@@ -155,7 +143,7 @@
 				<div class="col-xs-4 div-right">
 					<label class="col-xs-4 control-label">Sub Total</label>
 					<div class="col-xs-8">
-						<input type="text" class="form-control" placeHolder="Subtotal" value="{! payment.payment_total.subtotal | number:2 !}" ng-disabled="true">
+						<input type="text" class="form-control" placeHolder="Subtotal" value="{! payment.invoice.subtotal | number:2 !}" ng-disabled="true">
 					</div>
 				</div>
 			</div>
@@ -178,24 +166,35 @@
 				<div class="col-xs-4 div-right">
 					<label class="col-xs-4 control-label">Total</label>
 					<div class="col-xs-8">
-						<input type="text" class="form-control" placeHolder="Total" value="{! payment.payment_total.total | number:2 !}" ng-disabled="true">
+						<input type="text" class="form-control" placeHolder="Total" value="{! payment.invoice.total_amount | number:2 !}" ng-disabled="true">
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	<div class="col-xs-12 margin-30-bot">
-		<div class="col-xs-5 div-right">
-			<div class="btn-container">
-				{!! Form::button('Pay Subscription'
-                    , array(
-                        'class' => 'btn btn-blue btn-semi-large'
-                        , 'ng-click' => "payment.addPayment('add')"
-                    )
-                ) !!}
-				<button class="btn btn-gold btn-medium" ng-click="payment.confirmCancel()">Cancel</button>
-			</div>
+		<div class="container">
+		<div class="btn-container margin-30-top">
+			{!! Form::button('Delete Subscription'
+				, array(
+					'class' => 'btn btn-gold btn-small div-right'
+					, 'ng-click' => "payment.deleteInvoice(payment.invoice_detail.id)"
+				)
+			) !!}
+			{!! Form::button('Save Subscription'
+				, array(
+					'class' => 'btn btn-blue btn-small div-right'
+					, 'ng-click' => "payment.savePayment('add')"
+				)
+			) !!}
+			{!! Form::button('Pay Subscription'
+				, array(
+					'class' => 'btn btn-blue btn-small div-right'
+					, 'ng-click' => "payment.addPayment('add')"
+				)
+			) !!}
 		</div>
+	</div>
 	</div>
 </div>
 

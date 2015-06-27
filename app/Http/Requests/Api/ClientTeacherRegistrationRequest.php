@@ -61,7 +61,7 @@ class ClientTeacherRegistrationRequest extends ApiRequest
 					'state' => 'required|string',
 					'country' => 'exists:countries,name',
 					'country_id' => 'required|exists:countries,id',
-					'zip' => 'numeric|regex:'. config('regex.zip_code'),
+					'zip' => 'max:10|regex:'. config('regex.zip_code'),
 					'callback_uri' => 'required|string',
 					'registration_token' => "required|exists:users,registration_token,deleted_at,NULL"
 				];
@@ -70,8 +70,8 @@ class ClientTeacherRegistrationRequest extends ApiRequest
 			case 'POST':
 			default:
 				return [
-					'email' => 'required',
-					'username' => 'required',
+					'email' => 'required|email',
+					'username' => 'required|alpha_num',
 					'password' => 'required',
 					'first_name' => 'required|regex:'. config('regex.name'),
 					'last_name' => 'required|regex:'. config('regex.name') ,

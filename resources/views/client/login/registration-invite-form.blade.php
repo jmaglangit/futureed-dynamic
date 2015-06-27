@@ -96,6 +96,7 @@
                                     , 'ng-model' => 'register.record.password'
                                 )
                             ) !!}
+                            <p class="help-block">Password must be at least 8 characters and with at least 1 number.</p>
                         </div>
                         <label class="col-md-2 control-label">Confirm Password<span class="required">*</span></label>
                         <div class="col-md-4">
@@ -197,7 +198,7 @@
                         <select  name="country_id" ng-class="{ 'required-field' : register.fields['country_id'] }" 
                                 class="form-control" ng-model="register.record.country_id">
                             <option value="">-- Select Country --</option>
-                            <option ng-repeat="country in countries" value="{! country.id !}">{! country.name!}</option>
+                            <option ng-repeat="country in countries" ng-value="country.id">{! country.name!}</option>
                         </select>
                     </div>
                 </div>
@@ -214,7 +215,7 @@
                                     , 'placeholder' => 'School Name'
                                     , 'ng-disabled' => 'true'
                                     , 'ng-class' => "{ 'required-field' : register.fields['school_id'] }" 
-                                    , 'ng-model' => 'register.record.school.name'
+                                    , 'ng-model' => 'register.record.school_name'
                                 )
                             ) !!}
                         </div>

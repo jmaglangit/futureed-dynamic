@@ -90,6 +90,7 @@ return [
 		2132 => 'Invitation code is invalid.',
 		2133 => 'Registration token is invalid.',
 		2134 => "Can't change School: Student has active Subscription.",
+        2135 => "The class is already full.",
 
 		// Client Error messages
 		2200 => 'Email already exists.',

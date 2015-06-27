@@ -61,7 +61,7 @@
                         {!! Form::text('email', ''
                             , array(
                                 'class' => 'form-control'
-                                , 'ng-model' => 'class.record.email'
+                                , 'ng-model' => 'class.add.email'
                                 , 'placeholder' => 'Email Address'
                                 , 'ng-class' => "{ 'required-field' : class.fields['email'] }"
                                 , 'autocomplete' => 'off'
@@ -237,8 +237,8 @@
                 <label for="" class="col-md-3 control-label">Country <span class="required">*</span></label>
                 <div class="col-md-4">
                     <select name="country_id" class="form-control" ng-disabled="true" ng-class="{ 'required-field' : class.fields['country'] }" ng-model="class.add.country_id" ng-change="getGrades(reg.country_id">
-                        <option value="">-- Select Country --</option>
-                        <option ng-selected="class.add.country_id == country.id" ng-repeat="country in countries" value="{! country.id !}">{! country.name!}</option>
+                        <option ng-selected="class.add.country_id == futureed.FALSE" value="">-- Select Country --</option>
+                        <option ng-selected="class.add.country_id == country.id" ng-repeat="country in countries" ng-value="country.id">{! country.name!}</option>
                     </select>
                 </div>
             </div>
@@ -264,7 +264,7 @@
                 <div class="col-md-4 nullable" ng-init="class.getGradeLevel(class.add.country_id)">
                     <select name="grade_code" class="form-control" ng-disabled="true" ng-class="{ 'required-field' : class.fields['grade_code'] }" ng-model="class.add.grade_codse">
                         <option value="">-- Select Level --</option>
-                        <option ng-selected="class.add.grade_code == grade.code" ng-repeat="grade in class.grades" value="{! grade.code !}">{! grade.name !}</option>
+                        <option ng-selected="class.add.grade_code == grade.code" ng-repeat="grade in class.grades" ng-value="grade.code">{! grade.name !}</option>
                     </select>
                 </div>
             </div>    

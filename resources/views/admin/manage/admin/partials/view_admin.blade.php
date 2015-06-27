@@ -129,7 +129,7 @@
 			<div class="form-group">
 				<label class="col-xs-3 control-label">First Name <span class="required">*</span></label>
 				<div class="col-xs-4">
-					{!! Form::text('firstname','',
+					{!! Form::text('first_name','',
 						[
 							'class' => 'form-control',
 							'ng-disabled' => 'admin.active_view_admin',
@@ -142,7 +142,7 @@
 			<div class="form-group">
 				<label class="col-xs-3 control-label">Last Name <span class="required">*</span></label>
 				<div class="col-xs-4">
-					{!! Form::text('lastname','',
+					{!! Form::text('last_name','',
 						[
 							'class' => 'form-control',
 							'ng-disabled' => 'admin.active_view_admin',
@@ -166,7 +166,7 @@
 						{!! Form::button('Cancel'
 							, array(
 								'class' => 'btn btn-gold'
-								, 'ng-click' => "admin.setManageAdminActive('view')"
+								, 'ng-click' => "admin.viewAdmin(admin.admininfo.id)"
 							)
 						) !!}
 					</div>

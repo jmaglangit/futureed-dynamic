@@ -37,10 +37,12 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 
 		switch(active) {
 			case Constants.ACTIVE_VIEW:
+				self.success = Constants.FALSE;
 				self.active_view = Constants.TRUE;
 				break;
 
 			case Constants.ACTIVE_ADD :
+				self.success = Constants.FALSE;
 				self.fields = [];
 				self.classroom = {};
 				self.invoice = {};
@@ -151,7 +153,12 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 		});
 	}
 
-	self.addPayment = function() {
+	self.savePayment = function() {
+		self.addPayment(Constants.TRUE);
+	}
+
+	self.addPayment = function(save) {
+		self.paying = Constants.TRUE;
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
 		self.invoice.invoice_date = $filter('date')(new Date(), 'yyyyMMdd');
@@ -164,7 +171,12 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 					self.errors = $scope.errorHandler(response.errors);
 					$scope.ui_unblock();
 				} else if(response.data) {
-					self.getPaymentUri();
+					if(save) {
+						self.setActive();
+						$scope.ui_unblock();
+					} else {
+						self.getPaymentUri();
+					}
 				}
 			}
 		}).error(function(response) {
@@ -172,6 +184,12 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 			$scope.ui_unblock();
 		});
 	}
+
+	$window.addEventListener('beforeunload', function() {
+		if(!self.paying && self.active_add) {
+			self.deleteInvoice(self.invoice.id);	
+		}
+	});
 
 	self.getPaymentUri = function() {
 		self.payment = {};
@@ -254,6 +272,7 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 		self.errors = Constants.FALSE;
 		self.teachers = {};
 		self.validation = {};
+		self.classroom.client_id = Constants.EMPTY_STR;
 		self.validation.c_loading = Constants.TRUE;
 		self.classroom.client_role = Constants.TEACHER;
 		self.classroom.school_code = self.invoice.school_code;
@@ -351,9 +370,14 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 		});
 	}
 
-	self.setPrice = function(subscription) {
+	self.selectSubscription = function() {
 		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
 
+		self.setPrice();
+	}
+
+	self.setPrice = function(subscription) {
 		self.invoice.seats_total = Constants.FALSE;
 		self.invoice.sub_total = Constants.FALSE;
 		self.invoice.total_amount = Constants.FALSE;
@@ -388,8 +412,8 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 					self.invoice.total_amount = self.invoice.sub_total - ( self.invoice.sub_total * (self.invoice.discount / 100) );
 				} else {
 					self.invoice.discount = Constants.FALSE;
-					self.invoice.discount_id = Constants.EMPTY_STR;
-					self.invoice.discount_type = Constants.EMPTY_STR;
+					self.invoice.discount_id = null;
+					self.invoice.discount_type = null;
 
 					if(subscription.price) {
 						var date = new Date();
@@ -465,9 +489,12 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 		});
 	}
 
-	self.confirmCancel = function() {
+	self.confirmCancel = function(id) {
 		self.errors = Constants.FALSE;
-		self.confirm_delete = Constants.TRUE;
+		
+		self.cancel_invoice = {};
+		self.cancel_invoice.id = id;
+		self.cancel_invoice.confirm = Constants.TRUE;
 		$("#cancel_subscription_modal").modal({
 	        backdrop: 'static',
 	        keyboard: Constants.FALSE,
@@ -493,5 +520,126 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});;
+	}
+
+	self.confirmDelete = function(id) {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		self.delete_invoice = {};
+		self.delete_invoice.id = id;
+		self.delete_invoice.confirm = Constants.TRUE;
+		$("#delete_invoice_modal").modal({
+	        backdrop: 'static',
+	        keyboard: Constants.FALSE,
+	        show    : Constants.TRUE
+	    });
+	}
+
+	self.cancelInvoice = function(id) {
+		self.errors = Constants.FALSE;
+
+		$scope.ui_block();
+		managePrincipalPaymentService.cancelInvoice(id).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.listPayments();
+					self.setActive();
+				}
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.getClassroom = function(id) {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		$scope.ui_block();
+		managePrincipalPaymentService.getClassroom(id).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					var data = response.data;
+
+					self.classroom = {};
+					self.classroom.id = data.id;
+					self.classroom.name = data.name;
+					self.classroom.grade_id = data.grade_id;
+					self.classroom.client_name = data.client.user.name;
+					self.classroom.client_id = data.client_id;
+					self.classroom.seats_total = data.seats_total;
+					self.classroom.update = Constants.TRUE;
+
+					$("html, body").animate({ scrollTop: 0 }, "slow");
+				}
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.updateClassroom = function() {
+		self.errors = Constants.FALSE;
+		self.fields = [];
+
+		$scope.ui_block();
+		managePrincipalPaymentService.updateClassroom(self.classroom).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+
+					angular.forEach(response.errors, function(value, key) {
+						self.fields[value.field] = Constants.TRUE;
+					});
+				} else if(response.data) {
+					self.classroom = {};
+					self.success = "You have successfully updated a class.";
+					self.listClassroom(self.invoice.order_no);
+					$("html, body").animate({ scrollTop: 0 }, "slow");
+				}
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.deleteInvoice = function(id) {
+		$scope.ui_block();
+		managePrincipalPaymentService.deleteInvoice(id).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.searchDefaults();
+
+					self.success = Constants.DELETE_INVOICE_SUCCESS;
+					self.active_add = Constants.FALSE;
+					self.active_view = Constants.FALSE;
+					self.active_list = Constants.TRUE;
+					self.listPayments();
+				}
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+
+		$("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 }
