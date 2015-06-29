@@ -28,22 +28,26 @@ class ParentStudentRequest extends ApiRequest {
                 switch($this->route()->getName()){
 
                     case 'parent-student.add.existing.student':
-                        return ['email'    =>   'required|email',
+                        return [
+							'email'    =>   'required|email',
                             'client_id'    =>   'required|integer'];
                         break;
                     case 'parent-student.confirm.student':
-                        return ['client_id'        =>   'required|integer',
+                        return [
+							'client_id'        =>   'required|integer',
                             'invitation_code'  =>   'required|integer'];
                         break;
                     case 'parent-student.add.student.by.email':
-                        return ['email'    =>   'required|email',
-                            'parent_user_id'    =>   'required|integer',
+                        return [
+							'email'    =>   'required|email',
+                            'parent_id'    =>   'required|integer',
                             'order_id' => 'required',
                             'price' => 'required|numeric'];
                         break;
                     case 'parent-student.add.student.by.username':
-                        return ['username'    =>   'required',
-                            'parent_user_id'  =>   'required|integer',
+                        return [
+							'username'    =>   'required',
+                            'parent_id'  =>   'required|integer',
                             'order_id' => 'required',
                             'price' => 'required|numeric'];
                         break;
@@ -52,7 +56,8 @@ class ParentStudentRequest extends ApiRequest {
             case 'PUT':
                 switch($this->route()->getName()){
                     case 'parent-student.pay.subscription':
-                        return ['parent_user_id' =>   'required|integer',
+                        return [
+							'parent_id' =>   'required|integer',
                             'order_date'  =>   'required|date_format:Ymd',
                             'subscription_id'  =>   'required|integer',
                             'date_start'  =>   'required|date_format:Ymd',
@@ -100,8 +105,8 @@ class ParentStudentRequest extends ApiRequest {
             'country_id.required' => 'Country is required.',
             'subscription_id.required' => 'Subscription is required.',
             'subscription_id.integer' => 'Subscription must be a number.',
-            'parent_user_id.required' => 'Parent is required.',
-            'parent_user_id.integer' => 'Parent must be a number.',
+            'parent_id.required' => 'Parent is required.',
+            'parent_id.integer' => 'Parent must be a number.',
             'order_id.required' => 'Order is required.',
             'order_id.integer' => 'Order must be a number.'
         ];
