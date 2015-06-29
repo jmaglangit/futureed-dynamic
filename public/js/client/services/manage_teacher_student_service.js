@@ -11,6 +11,7 @@ function ManageTeacherStudentService($http) {
 		return $http({
 			method : Constants.METHOD_GET
 			, url  : apiUrl + 'client/manage/student?client_role=' + search.client_role
+				+ '&client_id=' + search.client_id
 				+ '&name=' + search.name
 				+ '&email=' + search.email
 				+ '&limit=' + table.size
@@ -22,6 +23,22 @@ function ManageTeacherStudentService($http) {
 		return $http({
 			method : Constants.METHOD_GET
 			, url  : apiUrl + 'client/manage/student/' + id 
+		});
+	}
+
+	api.updateDetails = function(data) {
+		return $http({
+			method : Constants.METHOD_PUT
+			, data : data
+			, url  : apiUrl + 'client/manage/student/' + data.id 
+		});
+	}
+
+	api.updateEmail = function(data) {
+		return $http({
+			method : Constants.METHOD_PUT
+			, data : data
+			, url  : apiUrl + 'client/manage/email/student/' + data.student_id 
 		});
 	}
 	

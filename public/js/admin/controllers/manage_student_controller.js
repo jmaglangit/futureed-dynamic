@@ -33,6 +33,7 @@ function ManageStudentController($scope, manageStudentService, apiService, Table
 				self.edit = Constants.TRUE;
 				self.viewStudent(id,self.fromEdit);
 				break;
+
 			case Constants.ACTIVE_VIEW:
 				self.active_list = Constants.FALSE;
 				self.active_add = Constants.FALSE;
@@ -40,6 +41,7 @@ function ManageStudentController($scope, manageStudentService, apiService, Table
 				self.edit = Constants.FALSE;
 				self.viewStudent(id,self.fromEdit);
 				break;
+				
 			case Constants.ACTIVE_ADD:
 				self.active_add = Constants.TRUE;
 				self.active_list = Constants.FALSE;
@@ -57,12 +59,16 @@ function ManageStudentController($scope, manageStudentService, apiService, Table
 		$("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 
-	self.getStudentlist = function() {
+	self.getStudentlist = function(search) {
 		self.errors = Constants.FALSE;
 		self.students = Constants.FALSE;
 		self.table.loading = Constants.TRUE;
 		$scope.ui_block();
-
+		
+		if(search){
+			self.table.offset = Constants.EMPTY_STR;
+			self.table.limit = Constants.EMPTY_STR;
+		}
 		manageStudentService.getStudentlist(self.search, self.table).success(function(response){
 
 			if(angular.equals(response.status,Constants.STATUS_OK)){
@@ -334,6 +340,8 @@ function ManageStudentController($scope, manageStudentService, apiService, Table
 
 	self.clear = function() {
 		self.searchDefaults();
+		self.tableDefaults();
+		
 		self.list();
 	}
 

@@ -137,10 +137,10 @@
 	        		</div>
 	        		<label class="col-md-2 control-label">Country</label>
 				      <div class="col-md-4" ng-init="getCountries()">
-				        <select  name="country" class="form-control" ng-model="teacher.record.country" ng-disabled="teacher.active_view">
-				          <option ng-selected="null == teacher.record.country" value="null">-- Select Country --</option>
-				          <option ng-selected="country.name == teacher.record.country" 
-				          			ng-repeat="country in countries" value="{! country.name !}">{! country.name!}</option>
+				        <select  name="country" class="form-control" ng-model="teacher.record.country_id" ng-disabled="teacher.active_view">
+				          <option ng-selected="futureed.FALSE == teacher.record.country_id" value="">-- Select Country --</option>
+				          <option ng-selected="country.id == teacher.record.country_id" 
+				          			ng-repeat="country in countries" ng-value="country.id">{! country.name!}</option>
 				        </select>
 				      </div>
 	        	</div>

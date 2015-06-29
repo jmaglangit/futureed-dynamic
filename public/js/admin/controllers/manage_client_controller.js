@@ -34,7 +34,6 @@ function ManageClientController($scope, apiService, manageClientService) {
 
 	self.checkEmailAvailability = checkEmailAvailability;
 	self.checkUsernameAvailability = checkUsernameAvailability;
-	self.setClientRole = setClientRole;
 	self.searchSchool = searchSchool;
 	self.selectSchool = selectSchool;
 
@@ -92,13 +91,6 @@ function ManageClientController($scope, apiService, manageClientService) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					self.details = response.data;
-					if(angular.equals(self.details.client_role, Constants.PRINCIPAL)) {
-						self.role.principal = Constants.TRUE;
-					} else if(angular.equals(self.details.client_role, Constants.PARENT)) {
-						self.role.parent = Constants.TRUE;
-					} else if(angular.equals(self.details.client_role, Constants.TEACHER)) {
-						self.role.teacher = Constants.TRUE;
-					}
 				}
 			}
 
@@ -176,9 +168,9 @@ function ManageClientController($scope, apiService, manageClientService) {
 	function updateClientDetails() {
 		self.errors = Constants.FALSE;
 		self.schools = Constants.FALSE;
+		self.fields = [];
 
 		if(!self.validation.s_error) {
-			$("input, select").removeClass("required-field");
 			$scope.ui_block();
 			manageClientService.updateClientDetails(self.details).success(function(response) {
 				if(angular.equals(response.status, Constants.STATUS_OK)) {
@@ -186,12 +178,10 @@ function ManageClientController($scope, apiService, manageClientService) {
 						self.errors = $scope.errorHandler(response.errors);
 
 						angular.forEach(response.errors, function(value) {
-							$("input[name='" + value.field + "']").addClass("required-field");
-							$("select[name='" + value.field + "']").addClass("required-field");
+							self.fields[value.field] = Constants.TRUE;
 						});
 					} else if(response.data) {
-						self.details = {};
-						self.details = response.data;
+						self.success = Constants.TRUE;
 						self.setManageClientActive('view_client');
 					}
 				}
@@ -202,7 +192,7 @@ function ManageClientController($scope, apiService, manageClientService) {
 				$scope.ui_unblock();
 			});
 		} else {
-			$("input[name='school_name']").addClass("required-field");
+			self.fields['school_name'] = Constants.TRUE;
 			$("html, body").animate({ scrollTop: 500 }, "slow");
 		}
 	}
@@ -273,29 +263,12 @@ function ManageClientController($scope, apiService, manageClientService) {
 		});
 	}
 
-	function setClientRole() {
-		self.role = {};
-		
-		if(angular.equals(self.create.client_role, Constants.PRINCIPAL)) {
-			self.role.principal = Constants.TRUE;
-		} else if(angular.equals(self.create.client_role, Constants.PARENT)) {
-			self.role.parent = Constants.TRUE;
-		} else if(angular.equals(self.create.client_role, Constants.TEACHER)) {
-			self.role.teacher = Constants.TRUE;
-		}
-	}
+	self.roleChange = function() {
+		self.errors = Constants.FALSE;
+		self.create.success = Constants.FALSE;
+		self.fields = [];
 
-	self.updateClientRole = function() {
-		self.role = {};
-		
-		if(angular.equals(self.details.client_role, Constants.PRINCIPAL)) {
-			self.role.principal = Constants.TRUE;
-			console.log(self.role.principal);
-		} else if(angular.equals(self.details.client_role, Constants.PARENT)) {
-			self.role.parent = Constants.TRUE;
-		} else if(angular.equals(self.details.client_role, Constants.TEACHER)) {
-			self.role.teacher = Constants.TRUE;
-		}
+		$("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 
 	function searchSchool(method) {
@@ -359,12 +332,13 @@ function ManageClientController($scope, apiService, manageClientService) {
 
 	function createNewClient() {
 		self.errors = Constants.FALSE;
+		self.fields = [];
 		self.create.success = Constants.FALSE;
+		self.schools = Constants.FALSE;
 
 		self.base_url = $("#base_url_form input[name='base_url']").val();
 		self.create.callback_uri = self.base_url + Constants.URL_USER_CREATION(angular.lowercase(Constants.CLIENT));
 
-		$("input, select").removeClass("required-field");
 		$scope.ui_block();
 		manageClientService.createNewClient(self.create).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
@@ -372,7 +346,7 @@ function ManageClientController($scope, apiService, manageClientService) {
 					self.errors = $scope.errorHandler(response.errors);
 
 					angular.forEach(response.errors, function(value, a) {
-						$("input[name='" + value.field + "'], select[name='" + value.field + "']").addClass("required-field");
+						self.fields[value.field] = Constants.TRUE;
 					});
 				} else if(response.data) {
 					self.create = {};
@@ -402,6 +376,7 @@ function ManageClientController($scope, apiService, manageClientService) {
 	
 		self.schools = Constants.FALSE;
 
+		self.fields = [];
 		self.active_add_client = Constants.FALSE;
 		self.active_view_client = Constants.FALSE;
 		self.active_edit_client = Constants.FALSE;
@@ -419,12 +394,14 @@ function ManageClientController($scope, apiService, manageClientService) {
 				break;
 
 			case "edit_client"	:
+				self.success = Constants.FALSE;
 				self.getClientDetails(id);
 				self.active_edit_client = Constants.TRUE;
 				break;
 
 			case "client_list"	:
 			default:
+				self.success = Constants.FALSE;
 				self.getClientList();
 				self.active_client_list = Constants.TRUE;
 				break

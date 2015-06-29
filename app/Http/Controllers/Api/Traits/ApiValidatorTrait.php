@@ -205,33 +205,65 @@ trait ApiValidatorTrait {
     //Validating ang field that is numeric. Can be used by any number field validation.
     public function validateNumber($input,$field_name){
 
-			$error_msg = config('futureed-error.error_messages');
+		$error_msg = config('futureed-error.error_messages');
 
-            $validator = Validator::make(
-                [
-                    "$field_name" => strtolower($input["$field_name"]),
-                ],
-                [
-                    "$field_name" => 'required|numeric'
-                ],
-                [
-                    "school_code.required" => $error_msg[2602],
-                    "school_code.numeric" => $error_msg[2602],
-                    "country_id.required" => $error_msg[2603],
-                    "country_id.numeric" => $error_msg[2604]
-                ]
-            );
+		$validator = Validator::make(
+			[
+				"$field_name" => strtolower($input["$field_name"]),
+			],
+			[
+				"$field_name" => 'required|numeric'
+			],
+			[
+				"school_code.required" => $error_msg[2602],
+				"school_code.numeric" => $error_msg[2602],
+				"country_id.required" => $error_msg[2603],
+				"country_id.numeric" => $error_msg[2604],
+				"school_country_id.required" => $error_msg[2603],
+				"school_country_id.numeric" => $error_msg[2604]
+			]
+		);
 
-            if($validator->fails()){
+		if ($validator->fails()) {
 
-                $validator_msg = $validator->messages()->toArray();
+			$validator_msg = $validator->messages()->toArray();
 
-                return $this->setErrorCode(1010)
-                    ->setField($field_name)
-                    ->setMessage($validator_msg["$field_name"][0])
-                    ->errorMessage();
-            }
+			return $this->setErrorCode(1010)
+				->setField($field_name)
+				->setMessage($validator_msg["$field_name"][0])
+				->errorMessage();
+		}
     }
+
+	public function validateNumberOptional($input,$field_name){
+
+		$error_msg = config('futureed-error.error_messages');
+
+		$validator = Validator::make(
+			[
+				"$field_name" => strtolower($input["$field_name"]),
+			],
+			[
+				"$field_name" => 'numeric'
+			],
+			[
+
+				"school_code.numeric" => $error_msg[2602],
+				"country_id.numeric" => $error_msg[2604],
+				"school_country_id.numeric" => $error_msg[2604]
+			]
+		);
+
+		if ($validator->fails()) {
+
+			$validator_msg = $validator->messages()->toArray();
+
+			return $this->setErrorCode(1010)
+				->setField($field_name)
+				->setMessage($validator_msg["$field_name"][0])
+				->errorMessage();
+		}
+	}
 
     public function validateString($input,$field_name){
 
@@ -333,28 +365,6 @@ trait ApiValidatorTrait {
             }
     }
 
-    public function zipCode($input,$field_name){
-
-            $validator = Validator::make(
-                [
-                    "$field_name" => strtolower($input["$field_name"]),
-                ],
-                [
-                    "$field_name" => 'required|regex:/^[0-9]{4,6}(\-[0-9]{4})?$/'
-                ]
-            );
-
-            if($validator->fails()){
-
-                $validator_msg = $validator->messages()->toArray();
-
-                return $this->setErrorCode(1015)
-                    ->setField($field_name)
-                    ->setMessage($validator_msg["$field_name"][0])
-                    ->errorMessage();
-            }
-    }
-
 
     public function checkPassword($input,$field_name){
 
@@ -442,7 +452,7 @@ trait ApiValidatorTrait {
                     "$field_name" => strtolower($input["$field_name"]),
                 ],
                 [
-                    "$field_name" => 'regex:/^[0-9]{4,6}(\-[0-9]{4})?$/'
+                    "$field_name" => 'max:10|regex:'. config('regex.zip_code')
                 ]
             );
 

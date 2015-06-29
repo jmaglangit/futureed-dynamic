@@ -31,8 +31,8 @@ class ParentStudentRepository implements ParentStudentRepositoryInterface{
 
         $parent_student = new ParentStudent();
 
-        $parent_student = $parent_student->where('parent_user_id',$parent_id);
-        $parent_student = $parent_student->where('student_user_id',$student_id)->pluck('id');
+        $parent_student = $parent_student->parentId($parent_id);
+        $parent_student = $parent_student->studentId($student_id)->pluck('id');
 
         return $parent_student;
 
@@ -42,8 +42,8 @@ class ParentStudentRepository implements ParentStudentRepositoryInterface{
 
         $parent_student = new ParentStudent();
 
-        $parent_student = $parent_student->where('invitation_code',$invitation_code);
-        $parent_student = $parent_student->where('parent_user_id',$parent_user_id)->first();
+        $parent_student = $parent_student->invitationCode($invitation_code);
+        $parent_student = $parent_student->parentId($parent_user_id)->first();
 
         return $parent_student;
     }
@@ -69,12 +69,12 @@ class ParentStudentRepository implements ParentStudentRepositoryInterface{
 
     }
 
-    public function getParenStudents($criteria)
+    public function getParentStudents($criteria)
     {
         $parentStudent = new ParentStudent();
 
         if(isset($criteria['parent_user_id'])){
-            $parentStudent = $parentStudent->parent($criteria['parent_user_id']);
+            $parentStudent = $parentStudent->parentId($criteria['parent_user_id']);
         }
 
         $parentStudent = $parentStudent->with('student_user','student');
@@ -107,12 +107,11 @@ class ParentStudentRepository implements ParentStudentRepositoryInterface{
     public function deleteParentStudentByParentId($parent_id)
     {
         try {
-            $result = ParentStudent::parent($parent_id);
+            $result = ParentStudent::parentId($parent_id);
             return !is_null($result) ? $result->delete() : false;
         } catch (Exception $e) {
             return $e->getMessage();
         }
     }
-
 
 }

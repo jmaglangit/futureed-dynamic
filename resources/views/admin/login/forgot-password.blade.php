@@ -5,7 +5,7 @@
 
   <div template-directive template-url="{!! route('admin.base_url') !!}"></div>
 
-		<div class="col-md-6 col-md-offset-3">
+		<div class="login-container col-md-6 col-md-offset-3">
 			<div class="form-style form-narrow">
 				<div class="logo-container">
 					{!! Html::image('images/logo-md.png') !!}

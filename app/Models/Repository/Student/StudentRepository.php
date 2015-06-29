@@ -14,8 +14,38 @@ use League\Flysystem\Exception;
 class StudentRepository implements StudentRepositoryInterface
 {
 
-	public function getStudents()
+	public function getStudents($criteria = array(), $limit = 0, $offset = 0)
 	{
+
+		$student = new Student();
+
+		if(isset($criteria['name'])){
+
+			$student = $student->name($criteria['name']);
+		}
+
+		if(isset($criteria['client_id'])){
+
+			$student = $student->parentid($criteria['client_id']);
+		}
+
+		$student = $student->with('user','parent');
+
+		$count = $student->get()->count();
+
+		if ($offset >= 0 && $limit > 0) {
+
+			$student = $student->skip($offset)->take($limit);
+		}
+
+		$records = $student->get();
+
+
+		Return [
+			'total' => $count,
+			'record' => $records
+		];
+
 
 	}
 
@@ -335,7 +365,35 @@ class StudentRepository implements StudentRepositoryInterface
 
 		$student = $student->with('user','school','grade')->token($reg_token)->id($id);
 
-		return $student->get();
+		return $student->get()->toArray();
+
+	}
+
+
+	//get subscription
+	public function subscriptionExpired($id)
+	{
+
+		$student = new Student();
+
+		$student = $student->with('studentclassroom')->subscription()->id($id);
+
+		return $student->get()->toArray();
+	}
+
+	public function updateSchool($id,$school_code){
+
+		try{
+
+			return Student::find($id)
+				->update([
+					'school_code' => $school_code
+				]);
+
+		} catch (Exception $e) {
+
+			throw new Exception($e->getMessage());
+		}
 
 	}
 

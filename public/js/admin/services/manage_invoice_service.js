@@ -19,7 +19,15 @@ function manageInvoiceService($http) {
 	invoiceAPI.details = function(invoice_no) {
 		return $http({
 			method : Constants.METHOD_GET
-			, url  : invoiceURL + 'sales-invoice/details?invoice_no=' + invoice_no
+			, url  : invoiceURL + 'sales-invoice/details?id=' + invoice_no
+		});
+	}
+
+	invoiceAPI.updateStatus = function(data) {
+		return $http({
+			method : Constants.METHOD_POST
+			, data : data
+			, url  : invoiceURL + 'sales-invoice/edit'
 		});
 	}
 

@@ -22,32 +22,42 @@
         </div>
 		<div class="form-search">
 			{!! Form::open(
-					[
-						'id' => 'teacher_search',
-						'class' => 'form-horizontal'
-					]
+				array(
+					'id' => 'search_form'
+					, 'class' => 'form-horizontal'
+				)
 			) !!}
 			<div class="form-group">
-				<label class="col-xs-2 control-label">Name</label>
-				<div class="col-xs-5">
-					{!! Form::text('search_name', '',['class' => 'form-control', 'ng-model' => 'student.search.name', 'placeholder' => 'Name']) !!}
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-xs-2 control-label">Email</label>
-				<div class="col-xs-5">
-					{!! Form::text('search_email', '',['class' => 'form-control', 'ng-model' => 'student.search.email', 'placeholder' => 'Email']) !!}
-				</div>
-				<div class="btn-container col-xs-5">
-					{!! Form::button('Search', 
-						array(
-							'class' => 'btn btn-blue btn-medium'
-							, 'ng-click' => 'student.getStudentlist()'
+				<div class="col-xs-4">
+					{!! Form::text('search_name', ''
+						, array(
+							'class' => 'form-control'
+							, 'ng-model' => 'student.search.name'
+							, 'placeholder' => 'Name'
 						)
 					) !!}
+				</div>
+				<div class="col-xs-4">
+					{!! Form::text('search_email', ''
+						, array(
+							'class' => 'form-control'
+							, 'ng-model' => 'student.search.email'
+							, 'placeholder' => 'Email'
+						)
+					) !!}
+				</div>
+				<div class="col-xs-2">
+					{!! Form::button('Search', 
+						array(
+							'class' => 'btn btn-blue'
+							, 'ng-click' => "student.getStudentlist('search')"
+						)
+					) !!}
+				</div>
+				<div class="col-xs-2">
 					{!! Form::button('Clear', 
 						array(
-							'class' => 'btn btn-gold btn-medium'
+							'class' => 'btn btn-gold'
 							, 'ng-click' => 'student.clear()'
 						)
 					) !!}
@@ -55,16 +65,17 @@
 			</div>
 		</div>
 	</div>
-	<div class="col-xs-12 padding-0-30">
-		<div class="title-mid">
-			Student List
-		</div>
-	</div>
-	<button class="btn btn-blue btn-small margin-0-30" ng-click="student.setActive('add')">
-		<i class="fa fa-plus-square"></i> Add 
-	</button>
+
 	<div class="col-xs-12 table-container" ng-init="student.list()">
 		<div class="list-container" ng-cloak>
+			<button class="btn btn-blue btn-small" ng-click="student.setActive('add')">
+				<i class="fa fa-plus-square"></i> Add 
+			</button>
+
+			<div class="title-mid">
+				Student List
+			</div>
+
 			<div class="size-container">
 				{!! Form::select('size'
 					, array(

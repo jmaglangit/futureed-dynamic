@@ -38,6 +38,16 @@
 					'as' => 'client.parent.student.partials.view_student_form',
 					'uses' => $manage_parent_student_controller . '@view_student_form'
 				]);
+
+				Routes::get('invitation_code_form', [
+					'as' => 'client.parent.student.partials.invitation_code_form',
+					'uses' => $manage_parent_student_controller . '@invitation_code_form'
+				]);
+
+				Routes::get('change_email_form', [
+					'as' => 'client.parent.student.partials.change_email_form',
+					'uses' => $manage_parent_student_controller . '@change_email_form'
+				]);
 			});
 		});				
 
@@ -61,7 +71,22 @@
 					'as' => 'client.parent.payment.partials.add_payment_form',
 					'uses' => $manage_parent_payment_controller . '@add_payment_form'
 				]);
+
+				Routes::get('view_payment_form', [
+					'as' => 'client.parent.payment.partials.view_payment_form',
+					'uses' => $manage_parent_payment_controller . '@view_payment_form'
+				]);
 			});
+
+			Routes::get('/success', [
+					'as' => 'client.parent.payment.success',
+					'uses' => $manage_parent_payment_controller . '@payment_success'
+				]);
+
+			Routes::get('/fail', [
+					'as' => 'client.parent.payment.fail',
+					'uses' => $manage_parent_payment_controller . '@payment_fail'
+				]);
 		});
 
 		Routes::group(['prefix' => 'invoice'], function() {

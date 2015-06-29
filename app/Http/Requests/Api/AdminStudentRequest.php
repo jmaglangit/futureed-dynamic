@@ -36,17 +36,17 @@ class AdminStudentRequest extends ApiRequest {
 			case 'POST':
 				$student = config('futureed.student');
 				return [
-					'username' => "required|string|min:8|max:32|unique:users,username,NULL,id,user_type,$student,deleted_at,NULL",
+					'username' => "required|alpha_num|string|min:8|max:32|unique:users,username,NULL,id,user_type,$student,deleted_at,NULL",
 					'email' => "required|email|unique:users,email,NULL,id,user_type,$student,deleted_at,NULL",
 					'first_name' => 'required|regex:'. config('regex.name') .'|string',
 					'last_name' => 'required|regex:'. config('regex.name') .'|string',
 					'gender' => 'required|in:Male,Female',
 					'birth_date' => 'required|date_format:Ymd',
 					'city' => 'required|string',
-					'state' => 'required|string',
+					'state' => 'string',
 					'country' => 'string',
 					'country_id' => 'required|integer',
-					'school_code' => 'required|integer',
+					'school_code' => 'integer',
 					'grade_code' => 'required|integer',
 					'callback_uri' => 'required|string',
 				];
@@ -54,16 +54,16 @@ class AdminStudentRequest extends ApiRequest {
 			case 'PUT':
 				$student = config('futureed.student');
 				return [
-					'username' => "required|string|min:8|max:32|unique:users,username," . $student_user_id . ",id,user_type,$student,deleted_at,NULL",
+					'username' => "required|alpha_num|string|min:8|max:32|unique:users,username," . $student_user_id . ",id,user_type,$student,deleted_at,NULL",
 					'first_name' => 'required|regex:'. config('regex.name') .'|string',
 					'last_name' => 'required|regex:'. config('regex.name') .'|string',
 					'gender' => 'required|in:Male,Female',
 					'birth_date' => 'required|date_format:Ymd',
 					'city' => 'required|string',
-					'state' => 'required|string',
+					'state' => 'string',
 					'country' => 'string',
 					'country_id' => 'required|integer',
-					'school_code' => 'required|integer',
+					'school_code' => 'integer',
 					'grade_code' => 'required|integer'];
 				break;
 
@@ -78,8 +78,11 @@ class AdminStudentRequest extends ApiRequest {
      */
     public function messages() {
 		return [
-			'school_code.required' => 'School Name is required.',
 			'grade_code.required' => 'Grade is required.',
+			'grade_code.integer' => 'Grade is Invalid.',
+			'country_id.required' => 'Country is required.',
+			'country_id.integer' => 'Country is Invalid.',
+			'school_code.integer' => 'School is Invalid.',
 
 		];
     }

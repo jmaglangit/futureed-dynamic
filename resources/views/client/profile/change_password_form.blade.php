@@ -2,7 +2,7 @@
 	, 'class' => 'form-horizontal', 'ng-if' => 'profile.active_password && !profile.password_changed'))!!}
 	<div class="form-group">
 		<label class="col-xs-3 control-label">Current Password <span class="required">*</span></label>
-		<div class="col-xs-5">
+		<div class="col-xs-6">
     		{!! Form::password('password'
     			, array(
         			'class' => 'form-control'
@@ -13,7 +13,7 @@
 	</div>
 	<div class="form-group">
 		<label class="col-xs-3 control-label">New Password <span class="required">*</span></label>
-		<div class="col-xs-5">
+		<div class="col-xs-6">
     		{!! Form::password('new_password'
     			, array(
         			'class' => 'form-control'
@@ -21,11 +21,12 @@
         			, 'ng-model' => 'profile.change.new_password'
         			, 'ng-model-option' => "{debounce: {'default' : 10000} }") 
         		)!!}
-        </div>		
+        	<p class="help-block">Password must be at least 8 characters and with at least 1 number.</p>
+        </div>
 	</div>
 	<div class="form-group">
 		<label class="col-xs-3 control-label">Confirm Password <span class="required">*</span></label>
-		<div class="col-xs-5">
+		<div class="col-xs-6">
     		{!! Form::password('confirm_password'
     			, array(
         			'class' => 'form-control'

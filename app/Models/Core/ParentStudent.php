@@ -30,7 +30,15 @@ class ParentStudent extends Model {
     }
     //-------------scopes
 
-    public function scopeParent($query,$parent_user_id){
+    public function scopeParentId($query,$parent_user_id){
         return $query->where('parent_user_id',$parent_user_id);
+    }
+
+    public function scopeStudentId($query,$student_user_id){
+        return $query->where('student_user_id',$student_user_id);
+    }
+
+    public function scopeInvitationCode($query,$invitation_code){
+        return $query->where('invitation_code',$invitation_code);
     }
 }

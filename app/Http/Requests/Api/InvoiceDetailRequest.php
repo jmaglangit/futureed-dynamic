@@ -22,9 +22,20 @@ class InvoiceDetailRequest extends ApiRequest {
         switch($this->method) {
             case 'POST':
                 return [
-                    'invoice_no' => 'required',
+                    'id' => 'required',
                     'payment_status' => 'required|in:Pending,Paid,Cancelled',
                 ];
         }
     }
+
+	/**
+	 * Get the validation rules custom messages that apply to the request.
+	 *
+	 * @return array
+	 */
+	public function messages() {
+		return [
+			'id.required' => 'Invoice is required.'
+		];
+	}
 }

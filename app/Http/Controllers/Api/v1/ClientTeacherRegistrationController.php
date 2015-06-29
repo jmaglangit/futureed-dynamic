@@ -84,7 +84,7 @@ class ClientTeacherRegistrationController extends ApiController
 			'password',
 			'first_name',
 			'last_name',
-			'address',
+			'street_address',
 			'city',
 			'state',
 			'country',
@@ -93,6 +93,10 @@ class ClientTeacherRegistrationController extends ApiController
 			'callback_uri'
 
 		]);
+
+        //apply name on user table.
+        $name = ['name' => $input['first_name'].' '.$input['last_name']];
+        $input = array_merge($input, $name);
 
 		//apply code
 		$input = array_merge($input, $this->code->getCodeExpiry());

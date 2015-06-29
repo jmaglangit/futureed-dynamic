@@ -26,7 +26,7 @@ class Classroom extends Model {
 
     public function client(){
 
-        return $this->belongsTo('FutureEd\Models\Core\Client');
+        return $this->belongsTo('FutureEd\Models\Core\Client')->with('user');
     }
 
     public function grade(){
@@ -38,6 +38,12 @@ class Classroom extends Model {
 
         return $this->belongsTo('FutureEd\Models\Core\ClassStudent');
     }
+
+	public function invoiceDetails(){
+
+		return $this->belongsTo('FutureEd\Models\Core\InvoiceDetail', 'id','class_id');
+
+	}
 
 
     //Scopes
@@ -66,10 +72,5 @@ class Classroom extends Model {
 
 		return $query->where('client_id',$client_id);
 	}
-
-
-
-    
-
 
 }

@@ -56,9 +56,6 @@
     {!! Html::script('//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular.min.js') !!}
     {!! Html::script('//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular-resource.min.js') !!}
     {!! Html::script('//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-cookies.min.js') !!}
-    {!! Html::script('/js/ui-bootstrap-tpls-0.13.0.min.js') !!}
-    {!! Html::script('/js/jquery.smooth-scroll.js') !!}
-   
     
     {!! Html::script('/js/futureed_constants.js') !!}
     {!! Html::script('/js/futureed_utils.js') !!}
@@ -66,8 +63,9 @@
     {!! Html::script('/js/futureed_controllers.js') !!}
     {!! Html::script('/js/futureed_services.js') !!}
     {!! Html::script('/js/common/table_service.js') !!}
-    {!! Html::script('/js/filters/date_filter.js') !!}
+    {!! Html::script('/js/common/filters.js') !!}
     {!! Html::script('/js/datetimepicker.js') !!}
+    {!! Html::script('/js/ui-bootstrap-tpls-0.13.0.min.js') !!}
 
     @yield('scripts')
 

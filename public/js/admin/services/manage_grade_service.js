@@ -8,11 +8,11 @@ function manageGradeService($http) {
 	var manageGradeApi = {};
 	var manageGradeApiUrl = '/api/v1/';
 
-	manageGradeApi.getGradeList = function(grade, country, table) {
+	manageGradeApi.getGradeList = function(grade, country_id, table) {
 		return $http({
 			method	: Constants.METHOD_GET
 			, url 	: manageGradeApiUrl + "grade?name=" + grade
-				+ "&country_id=" + country
+				+ "&country_id=" + country_id
 				+ "&limit=" + table.size
 				+ "&offset=" + table.offset
 		});

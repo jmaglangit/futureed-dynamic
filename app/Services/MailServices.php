@@ -193,12 +193,14 @@ class MailServices {
         $template = 'emails.student.change-email';
        
         if($send == 0){
-            
-            $subject = str_replace('{user}',config('futureed.student'),config('futureed.subject_change_email'));
+		//TODO: should specify if student,parent,teacher,principal,admin,superadmin
+		//$subject = str_replace('{user}',config('futureed.student'),config('futureed.subject_change_email'));
+		$subject = "Change Email";
 
         }else{
-
-            $subject = str_replace('{user}',config('futureed.student'),config('futureed.subject_email_resend'));
+		//TODO: should specify if student,parent,teacher,principal,admin,superadmin
+		//$subject = str_replace('{user}',config('futureed.student'),config('futureed.subject_email_resend'));
+		$subject = "Resend Change Email";
         }
         
         $content = [
@@ -212,7 +214,6 @@ class MailServices {
             'mail_recipient_name' => $data['name' ],
             'subject' => $subject
         ];
-
         $this->sendMail($content);
     }
 
@@ -371,7 +372,7 @@ class MailServices {
 			'data' => [
 				'student_name' => $user_detail['name'],
 				'teacher_name' => $data['teacher_name'],
-				'link' => $data['url'] . '/' . $data['student_id'] . '?registration_token=' . $token,
+				'link' => $data['url'] . '?id=' . $data['student_id'] . '&registration_token=' . $token,
 			],
 			'mail_recipient' => $user_detail['email'],
 			'mail_recipient_name' => $user_detail['name'],
@@ -394,7 +395,7 @@ class MailServices {
 			'data' => [
 				'name' => $data->user->name,
 				'code' => $code->confirmation_code,
-				'link' => $data->callback_uri,
+				'link' => $data->callback_uri.'?email='.$data->user->email,
 			],
 			'mail_recipient' => $data->user->email,
 			'mail_recipient_name' => $data->user->name,
@@ -422,11 +423,55 @@ class MailServices {
 			],
 			'mail_recipient' => $data['email'],
 			'mail_recipient_name' => $data['username'],
-			'subject' => 'Welcome to Future Lesson!'
+			'subject' => 'A Parent has requested to add you in his/her dashboard!'
 
 		];
 
 		$this->sendMail($contents);
+	}
+
+    public function sendTeacherAddClass($data){
+        $contents = [
+            'view' => 'emails.client.invite-teacher-to-teach-class',
+            'data' => [
+                'name' => $data['name'],
+                'school_name' => $data['school_name'],
+                'class_name' => $data['class_name'],
+                'login_link' => $data['login_link']
+            ],
+            'mail_recipient' => $data['email'],
+            'mail_recipient_name' => $data['username'],
+            'subject' => 'You have been assigned to a Class!'
+
+        ];
+
+        $this->sendMail($contents);
+    }
+
+	//
+
+	public function sendParentInviteStudent($user_id,$url){
+
+		$user_type = config('futureed.student');
+
+
+		//get user information for the email
+		$user_detail = $this->user->getUser($user_id,$user_type);
+
+		$code = $this->user->getConfirmationCode($user_id);
+
+		$content = [
+			'view' => 'emails.student.registration-email',
+			'data' => [
+				'name' => $user_detail['name'],
+				'code' => $code['confirmation_code'],
+				'link' => $url . '?email=' . $user_detail['email'],
+			],
+			'mail_recipient' => $user_detail['email'],
+			'mail_recipient_name' => $user_detail['first_name' ] . $user_detail['last_name'],
+			'subject' => config('futureed.invite_student')
+		];
+		$this->sendMail($content);
 	}
 
 

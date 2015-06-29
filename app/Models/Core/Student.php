@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Carbon\Carbon;
 
 class Student extends Model {
 
@@ -27,7 +28,6 @@ class Student extends Model {
 	protected $attributes = [
 		'created_by' => 1,
 		'updated_by' => 1,
-
 	];
 
 
@@ -86,11 +86,24 @@ class Student extends Model {
 
     }
 
+	//TODO: This should be changed...whenever it is called.. parent() in relationship is called.
 	public function scopeParent($query, $parent_user_id){
 
 		return $query->whereHas('parent',function($query) use ($parent_user_id) {
 			$query->where('parent_user_id', '=', $parent_user_id);
 		});
+	}
+
+	public function scopeParentId($query, $parent_id){
+
+		return $query->whereHas('parent',function($query) use ($parent_id) {
+			$query->where('parent_user_id', '=', $parent_id);
+		});
+	}
+
+	public function scopeClientId($query, $parent_id){
+
+		return $query->where('parent_id',$parent_id);
 	}
 
 
@@ -122,6 +135,33 @@ class Student extends Model {
 	{
 		return $query->where('id', $id);
 	}
+
+	public function scopeSubscription($query){
+
+		//check if has ClassStudent relation
+		return $query->whereHas('studentclassroom',function($query) {
+
+			//check if ClassStudent has Classroom relation
+			 $query->whereHas('classroom',function($query) {
+
+				//check relation invoice_details
+				$query->whereHas('invoiceDetails', function($query){
+
+					//check relation to invoice
+					$query->whereHas('invoice', function($query){
+
+						$query->where('date_end','>=', Carbon::now())
+						      ->Where('payment_status', '!=', 'Cancelled');
+
+					});
+
+				});
+
+			});
+		});
+
+	}
+
 
 
 

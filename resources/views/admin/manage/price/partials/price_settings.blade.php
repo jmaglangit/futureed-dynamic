@@ -61,13 +61,16 @@
 	      		<div class="form-group">
 	      			<label class="col-xs-3 control-label">Price <span class="required">*</span></label>
 	      			<div class="col-xs-5">
-	      				{!! Form::text('price','',
-	      					[
-	      						'class' => 'form-control',
-	      						'placeholder' => 'Price',
-	      						'ng-model' => 'sale.data.price'
-	      					]) 
-	      				!!}
+	      				<div class="input-group">
+							  <span class="input-group-addon" id="basic-addon1">USD$</span>
+							  {!! Form::text('total_amount',''
+								, [
+									'class' => 'form-control'
+									, 'ng-model' => 'sale.data.price'
+									, 'placeholder' => 'Price'
+								]
+							) !!}
+						</div>
 	      			</div>
 	      		</div>
 	      		<div class="form-group">
@@ -173,26 +176,26 @@
 		<table id="price-list" class="table table-striped table-bordered">
 			<thead>
 	        <tr>
-	            <th>Subscription Name</th>
-	            <th>Description</th>
+	            <th class="width-200">Subscription Name</th>
+	            <th class="width-200">Description</th>
 	            <th>Price</th>
 	            <th>Action</th>
 	        </tr>
 	        </thead>
 	        <tbody>
-	        <tr ng-repeat="p in sale.price">
-	            <td>{! p.name !}</td>
-	            <td>{! p.description !}</td>
-	            <td>{! p.price !}</td>
+	        <tr ng-repeat="prce in sale.price">
+	            <td>{! prce.name !}</td>
+	            <td>{! prce.description !}</td>
+	            <td>{! prce.price | currency : "USD$ " : 2 !}</td>
 	            <td>
 	            	<div class="row">
-	            		<div class="col-xs-4">
-	            			{! p.status !}
+	            		<div class="col-xs-5">
+	            			{! prce.status !}
 	            		</div>
-	            		<div class="col-xs-4">
+	            		<div class="col-xs-3">
 	            			<a href="" ng-click="sale.getPrice(p.id)"><span><i class="fa fa-pencil"></i></span></a>
 	            		</div>
-	            		<div class="col-xs-4">
+	            		<div class="col-xs-3">
 	            			<a href="" ng-click="sale.deletePrice(p.id)"><span><i class="fa fa-trash"></i></span></a>
 	            		</div>
 	            	</div>

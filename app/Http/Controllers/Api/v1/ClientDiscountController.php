@@ -43,6 +43,10 @@ class ClientDiscountController extends ApiController {
 		if(Input::get('client_role')) {
 			$criteria['client_role'] = Input::get('client_role');
 		}
+
+		if(Input::get('client_id')) {
+			$criteria['client_id'] = Input::get('client_id');
+		}
 				
 		if(Input::get('limit')) {
 			$limit = intval(Input::get('limit'));

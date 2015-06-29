@@ -31,21 +31,22 @@ class ClientTeacherRequest extends ApiRequest
 					'street_address' => 'string',
 					'city' => 'string',
 					'state' => 'string',
-					'zip' => 'numeric|regex:/^[0-9]{4,6}(\-[0-9]{4})?$/',
-					'country' => 'string'
+					'zip' => 'max:10|regex:'.config('regex.zip_code'),
+					'country_id' => 'integer'
 				];
 				break;
 			case 'POST':
 			default:
 				$client = config('futureed.client');
 				return [
-					'username' => "required|string|min:8|max:32|unique:users,username,NULL,id,user_type,$client,deleted_at,NULL",
+					'username' => "required|alpha_num|string|min:8|max:32|unique:users,username,NULL,id,user_type,$client,deleted_at,NULL",
 					'email' => "required|email|unique:users,email,NULL,id,user_type,$client,deleted_at,NULL",
 
 					'first_name' => 'required|regex:'. config('regex.name'),
 					'last_name' => 'required|regex:'. config('regex.name') ,
 					'current_user' => 'required|numeric',
-					'callback_uri' => 'required|string'
+					'callback_uri' => 'required|string',
+					'country_id' => 'integer'
 				];
 				break;
 		}
@@ -60,7 +61,8 @@ class ClientTeacherRequest extends ApiRequest
 	{
 		return [
 			'numeric' => 'The :attribute must be a number.',
-			'unique' => 'Teacher already exist.',
+			'unique' => 'Teacher already exists.',
+			'country_id.integer' => 'Country is invalid.',
 		];
 	}
 }

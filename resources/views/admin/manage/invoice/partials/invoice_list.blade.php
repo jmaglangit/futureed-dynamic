@@ -121,18 +121,18 @@
 			        <tr ng-repeat="invoiceInfo in invoice.records">
 			            <td>{! invoiceInfo.order_no !}</td>
 			            <td>{! invoiceInfo.subscription.name !}</td>
-			            <td>{! invoiceInfo.date_start | ddMMyyyy !}</td>
-			            <td>{! invoiceInfo.date_end | ddMMyyyy !}</td>
+			            <td>{! invoiceInfo.date_start | ddMMyy !}</td>
+			            <td>{! invoiceInfo.date_end | ddMMyy !}</td>
 			            <td>{! invoiceInfo.seats_total !}</td>
-			            <td>{! invoiceInfo.total_amount !}</td>
+			            <td>{! invoiceInfo.total_amount | currency : "USD$ " : 2 !}</td>
 			            <td>{! invoiceInfo.payment_status !}</td>
 			            <td ng-if="invoice.records.length">
 			            	<div class="row">
 			            		<div class="col-xs-6">
-			            			<a href="" ng-click="invoice.setActive('view', invoiceInfo.invoice_no)"><span><i class="fa fa-eye"></i></span></a>
+			            			<a href="" ng-click="invoice.details(invoiceInfo.id, futureed.ACTIVE_VIEW)"><span><i class="fa fa-eye"></i></span></a>
 			            		</div>
 			            		<div class="col-xs-6">
-			            			<a href="" ng-click="invoice.setActive('edit', invoiceInfo.invoice_no)"><span><i class="fa fa-pencil"></i></span></a>
+			            			<a href="" ng-click="invoice.details(invoiceInfo.id, futureed.ACTIVE_EDIT)"><span><i class="fa fa-pencil"></i></span></a>
 			            		</div>
 			            	</div>
 			            </td>

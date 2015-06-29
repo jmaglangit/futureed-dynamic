@@ -32,7 +32,7 @@
 					<div class="col-md-4" ng-init="class.getGradeLevel()">
 	                    <select name="grade_id" class="form-control" ng-disabled="class.grades.length <= 0" ng-model="class.search.grade_id">
 	                        <option value="">-- Select Level --</option>
-	                        <option ng-repeat="grade in class.grades" value="{! grade.id !}">{! grade.name !}</option>
+	                        <option ng-repeat="grade in class.grades" ng-value="grade.id">{! grade.name !}</option>
 	                    </select>
 	                </div>
 					<div class="col-xs-2">

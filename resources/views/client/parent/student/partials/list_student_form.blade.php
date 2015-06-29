@@ -1,8 +1,20 @@
-<div ng-if="student.list">
+<div ng-if="student.active_list">
 	<div class="content-title">
 		<div class="title-main-content">
 			<span>Student Management</span>
 		</div>
+	</div>
+	<div class="alert-container col-xs-12">
+		<div class="alert alert-error" ng-if="student.errors">
+            <p ng-repeat="error in student.errors track by $index" > 
+                {! error !}
+            </p>
+        </div>
+        <div class="alert alert-success" ng-if="student.success">
+            <p> 
+                {! student.success !}
+            </p>
+        </div>
 	</div>
 	<div class="col-xs-12">
 		<div class="title-mid mid-container">
@@ -20,22 +32,22 @@
 			<div class="form-group">
 				<label class="col-xs-2 control-label">Name</label>
 				<div class="col-xs-5">
-					{!! Form::text('search_name', '',['class' => 'form-control', 'ng-model' => 'payment.search_order', 'placeholder' => 'Name']) !!}
+					{!! Form::text('search_name', '',['class' => 'form-control', 'ng-model' => 'student.search.name', 'placeholder' => 'Name']) !!}
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-xs-2 control-label">Email</label>
 				<div class="col-xs-5">
-					{!! Form::text('search_order', '',['class' => 'form-control', 'ng-model' => 'payment.search_order', 'placeholder' => 'Email']) !!}
+					{!! Form::text('search_email', '',['class' => 'form-control', 'ng-model' => 'student.search.email', 'placeholder' => 'Email']) !!}
 				</div>
 				<div class="btn-container col-xs-5">
-					<button class="btn btn-blue btn-medium" type="button" ng-click="teacher.getTeacherList()">Search</button>
-					<button class="btn btn-gold btn-medium" type="button" ng-click="teacher.clearSearch()">Clear</button>
+					<button class="btn btn-blue btn-medium" type="button" ng-click="student.getStudentlist()">Search</button>
+					<button class="btn btn-gold btn-medium" type="button" ng-click="student.clear()">Clear</button>
 				</div>
 			</div>
 		</div>
 	</div>
-	<button class="btn btn-blue btn-small margin-0-30" ng-click="payment.setActive('add')">
+	<button class="btn btn-blue btn-small margin-0-30" ng-click="student.setActive('add')">
 		<i class="fa fa-plus-square"></i> Add 
 	</button>
 	<div class="col-xs-12 padding-0-30">
@@ -43,7 +55,7 @@
 			Student List
 		</div>
 	</div>
-	<div class="col-xs-12 table-container">
+	<div class="col-xs-12 table-container" ng-init="student.list()">
 		<div class="list-container" ng-cloak>
 			<div class="size-container">
 				{!! Form::select('size'
@@ -55,9 +67,9 @@
 					)
 					, '10'
 					, array(
-						'ng-model' => 'admin.table.size'
-						, 'ng-change' => 'admin.paginateBySize()'
-						, 'ng-if' => "admin.data.length"
+						'ng-model' => 'student.table.size'
+						, 'ng-change' => 'student.paginateBySize()'
+						, 'ng-if' => "student.students.length"
 						, 'class' => 'form-control paginate-size pull-right'
 					)
 				) !!}
@@ -74,29 +86,26 @@
 
 		        <tbody>
 		        {{-- added sample data --}}
-		        <tr>
-		            <td>Bart Simpson</td>
-		            <td>bart.simpson@simpson.com</td>
+		        <tr ng-repeat="key in student.students">
+		            <td>{! key.first_name !} {! key.last_name !}</td>
+		            <td>{! key.user.email !}</td>
 		            <td>
 		            	<div class="row">
-		            		<div class="col-xs-4">
-	    						<a href="" ng-click="admin.viewAdmin(a.id)"><span><i class="fa fa-play"></i></span></a>
+		            		<div class="col-xs-6">
+	    						<a href="" ng-click="student.setActive('view', key.id)"><span><i class="fa fa-eye"></i></span></a>
 	    					</div>
-		            		<div class="col-xs-4">
-	    						<a href="" ng-click="admin.viewAdmin(a.id)"><span><i class="fa fa-eye"></i></span></a>
-	    					</div>
-	    					<div class="col-xs-4">
-	    						<a href="" ng-click="admin.viewAdmin(a.id)"><span><i class="fa fa-pencil"></i></span></a>
+	    					<div class="col-xs-6">
+	    						<a href="" ng-click="student.setActive('edit', key.id)"><span><i class="fa fa-pencil"></i></span></a>
 	    					</div>
 		            	</div>
 		            </td>
 		        </tr>
-		        <tr class="odd" ng-if="!admin.data.length && !admin.table.loading">
+		        <tr class="odd" ng-if="!student.students.length && !student.table.loading">
 		        	<td valign="top" colspan="7" class="dataTables_empty">
 		        		No records found
 		        	</td>
 		        </tr>
-		        <tr class="odd" ng-if="admin.table.loading">
+		        <tr class="odd" ng-if="student.table.loading">
 		        	<td valign="top" colspan="7" class="dataTables_empty">
 		        		Loading...
 		        	</td>
@@ -104,17 +113,17 @@
 		        </tbody>
 			</table>
 
-			<div class="pull-right" ng-if="admin.data.length">
+			<div class="pull-right" ng-if="student.students.length">
 				<pagination 
-					total-items="admin.table.total_items" 
-					ng-model="admin.table.page"
-					max-size="admin.table.paging_size"
-					items-per-page="admin.table.size" 
+					total-items="student.table.total_items" 
+					ng-model="student.table.page"
+					max-size="student.table.paging_size"
+					items-per-page="student.table.size" 
 					previous-text = "&lt;"
 					next-text="&gt;"
 					class="pagination" 
 					boundary-links="true"
-					ng-change="admin.paginateByPage()">
+					ng-change="student.paginateByPage()">
 				</pagination>
 			</div>
 		</div>

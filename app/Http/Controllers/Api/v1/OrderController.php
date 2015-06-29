@@ -2,15 +2,9 @@
 
 use FutureEd\Http\Requests;
 use FutureEd\Http\Requests\Api\OrderRequest;
-use FutureEd\Http\Controllers\Controller;
-
 use FutureEd\Models\Repository\Order\OrderRepositoryInterface;
-
-
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Input;
-
 use FutureEd\Services\InvoiceServices;
+
 
 class OrderController extends ApiController {
 
@@ -22,35 +16,35 @@ class OrderController extends ApiController {
         $this->order = $order;
         $this->invoice_service = $invoice_service;
     }
-    
-    /**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-    public function index()
-    {
-        
-    }
 
     /**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
+     * Store a newly created resource in storage.
+     *
+     * @return Response
+     */
 
     public function store(OrderRequest $request)
     {
         $input = $request->all();
-        
+
         $order = $this->order->addOrder($input);
         return $this->respondWithData($order);
     }
 
+    /**
+     * Create stub record for order.
+     * @param $client_id
+     * @return newly created order record.
+     */
     public function getNextOrderNo($client_id)
     {
-        $order_no = $this->order->getNextOrderNo();
-        $new_order_no = $order_no['id'] + 1;
-        return $this->respondWithData($this->invoice_service->createOrderNo($client_id,$new_order_no));
+        $input['client_id'] = $client_id;
+        $input['payment_status'] = 'Pending';
+        $order = $this->order->addOrder($input);
+
+        $order['order_no'] = $this->invoice_service->createOrderNo($client_id,$order['id']);
+        $this->order->updateOrder($order['id'],$order);
+
+        return $this->respondWithData($order);
     }
 }

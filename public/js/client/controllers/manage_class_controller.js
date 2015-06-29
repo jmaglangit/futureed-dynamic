@@ -190,8 +190,6 @@ function ManageClassController($scope, manageClassService, apiService, TableServ
 		self.success = Constants.FALSE;
 		self.fields = [];
 
-		self.add = {};
-		self.add.email = self.record.email;
 		self.add.client_id = self.record.client_id;
 		self.add.class_id = self.record.id;
 
@@ -206,7 +204,6 @@ function ManageClassController($scope, manageClassService, apiService, TableServ
 					});
 				} else if(response.data) {
 					delete self.add;
-					delete self.record.email;
 
 					self.success = "You have successfully added a student to " + self.record.name;
 					self.setActive(Constants.ACTIVE_VIEW, self.record.id);
@@ -316,6 +313,24 @@ function ManageClassController($scope, manageClassService, apiService, TableServ
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
+	}
+
+	self.clearData = function() {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+		self.fields = [];
+		self.validation = {};
+
+		self.record.email = Constants.EMPTY_STR;
+
+		self.add.username = Constants.EMPTY_STR;
+		self.add.email = Constants.EMPTY_STR;
+		self.add.first_name = Constants.EMPTY_STR;
+		self.add.last_name = Constants.EMPTY_STR;
+		self.add.gender = Constants.EMPTY_STR;
+		self.add.city = Constants.EMPTY_STR;
+		self.add.state = Constants.EMPTY_STR;
+		self.add.birth = Constants.EMPTY_STR;
 	}
 
 	self.getSchoolDetails = function(school_code) {

@@ -25,14 +25,14 @@ class ClientStudentRequest extends ApiRequest {
 			default:
 				$student = config('futureed.student');
 				return[
-					'username' => "required|string|min:8|max:32|unique:users,username,NULL,id,user_type,$student,deleted_at,NULL",
+					'username' => "required|alpha_num|string|min:8|max:32|unique:users,username,NULL,id,user_type,$student,deleted_at,NULL",
 					'email' => "required|email|unique:users,email,NULL,id,user_type,$student,deleted_at,NULL",
 					'first_name'    => 'required|regex:'. config('regex.name') .'|max:64',
 					'last_name'     => 'required|regex:'. config('regex.name') .'|max:64',
 					'gender'        => 'required|alpha|in:Male,Female',
 					'birth_date'    => 'required|date_format:Ymd',
 					'country_id'    => 'required|integer',
-					'state'         => 'required|string',
+					'state'         => 'string',
 					'city'          => 'required|string',
 					'callback_uri'  => 'required|string',
 					'client_id'     => 'required|integer'
@@ -47,7 +47,7 @@ class ClientStudentRequest extends ApiRequest {
 					'gender'        => 'required|alpha|in:Male,Female',
 					'birth_date'    => 'required|date_format:Ymd',
 					'country_id'    => 'required|integer',
-					'state'         => 'required|string',
+					'state'         => 'string',
 					'city'          => 'required|string',
 					'grade_code' 	=> 'required|integer'
 				];

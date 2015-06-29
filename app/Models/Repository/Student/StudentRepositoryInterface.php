@@ -9,7 +9,7 @@ namespace FutureEd\Models\Repository\Student;
 
 interface StudentRepositoryInterface {
 
-    public function getStudents();
+    public function getStudents($criteria = array(), $limit = 0, $offset = 0);
 
     public function getStudent($id);
 
@@ -48,5 +48,10 @@ interface StudentRepositoryInterface {
 	public function getStudentListByClient($criteria = [], $limit = 0, $offset = 0);
 
 	public function viewStudentByToken($id,$reg_token);
+
+	public function subscriptionExpired($id);
+
+	public function updateSchool($id,$school_code);
+
 
 }

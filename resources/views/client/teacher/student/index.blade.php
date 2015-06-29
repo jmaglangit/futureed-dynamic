@@ -26,6 +26,7 @@
 	{!! Html::script('/js/client/services/manage_teacher_student_service.js')!!}
 
 	{!! Html::script('/js/client/constants/teacher_constants.js')!!}
+	{!! Html::script('/js/common/validation_service.js')!!}
 	{!! Html::script('/js/common/table_service.js')!!}
 	{!! Html::script('/js/common/search_service.js')!!}
 @stop

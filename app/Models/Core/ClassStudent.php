@@ -39,6 +39,11 @@ class ClassStudent extends Model {
 		return $this->belongsTo('FutureEd\Models\Core\Student')->with('user');
 	}
 
+	public function classroom()
+	{
+		return $this->belongsTo('FutureEd\Models\Core\Classroom', 'class_id', 'id')->with('order');
+	}
+
 
 	//Scopes
 
@@ -49,30 +54,49 @@ class ClassStudent extends Model {
 	}
 
 
-	public function scopeUsername($query, $username)
+	public function scopeName($query, $name)
 	{
 
-		return $query->whereHas('user', function ($query) use ($username) {
-
-			$query->where('username', 'like', '%' . $username . '%');
+		return $query->whereHas('student', function ($query) use ($name) {
+			$query->where(function($query) use ($name) {
+				$query->where('first_name', 'like', '%' . $name . '%')->orWhere('last_name', 'like', '%' . $name . '%');
+			});
 		});
 
 	}
 
-
-	//-------------scopes
 	public function scopeEmail($query, $email)
 	{
 
-		return $query->whereHas('user', function ($query) use ($email) {
-			$query->where('email', 'like', '%' . $email . '%');
+		return $query->whereHas('student', function ($query) use ($email) {
+
+			return $query->whereHas('user', function ($query) use ($email) {
+
+				$query->where('email', 'like', '%' . $email . '%');
+
+			});
+
 		});
 
 	}
 
-	//-------------relationships
-	public function classroom()
-	{
-		return $this->belongsTo('FutureEd\Models\Core\Classroom', 'class_id', 'id');
+	public function scopeStudentId($query,$student_id){
+
+		return $query->where('student_id',$student_id);
 	}
+
+	public function scopeCurrentDate($query,$current_date){
+
+		return $query->whereHas('classroom', function ($query) use ($current_date) {
+
+			$query->whereHas('order', function ($query) use ($current_date) {
+
+				$query->where('date_start', '<=', $current_date)
+
+					->where('date_end', '>=', $current_date);
+			});
+		});
+	}
+
+
 }

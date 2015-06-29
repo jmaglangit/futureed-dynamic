@@ -12,6 +12,7 @@
 
 			<div template-directive template-url="{!! route('client.parent.payment.partials.payment_form') !!}"></div>
 			<div template-directive template-url="{!! route('client.parent.payment.partials.add_payment_form') !!}"></div>
+			<div template-directive template-url="{!! route('client.parent.payment.partials.view_payment_form') !!}"></div>
 			
 		</div>
 	</div>
@@ -21,4 +22,6 @@
 @section('scripts')
 	{!! Html::script('/js/client/controllers/manage_parent_payment_controller.js')!!}
 	{!! Html::script('/js/client/services/manage_parent_payment_service.js')!!}
+	{!! Html::script('/js/common/table_service.js')!!}
+	{!! Html::script('/js/common/search_service.js')!!}
 @stop

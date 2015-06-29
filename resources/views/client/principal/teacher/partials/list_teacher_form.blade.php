@@ -112,16 +112,16 @@
 						<td>{! t.user.email !}</td>
 						<td>
 							<div class="row">
-			            		<div class="col-xs-3">
+			            		<div class="col-xs-5">
 			            			{! t.user.status !}
 			            		</div>
-			            		<div class="col-xs-3">
+			            		<div class="col-xs-2">
 			            			<a href="" ng-click="teacher.setActive('view', t.id)"><span><i class="fa fa-eye"></i></span></a>
 			            		</div>
-			            		<div class="col-xs-3">
+			            		<div class="col-xs-2">
 			            			<a href="" ng-click="teacher.setActive('edit', t.id)"><span><i class="fa fa-pencil"></i></span></a>
 			            		</div>
-			            		<div class="col-xs-3">
+			            		<div class="col-xs-2">
 			            			<a href="" ng-click="teacher.confirmDelete(t.id)"><span><i class="fa fa-trash	"></i></span></a>
 			            		</div>
 			            	</div>

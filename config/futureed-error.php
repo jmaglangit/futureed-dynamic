@@ -49,6 +49,11 @@ return [
 		2034 => 'Username/Email or password is invalid. Have you verified your email? Please check your inbox. Your account may have been locked, please click on forgot password to reset your password.',
 		2035 => 'Account has been locked. Please click on forgot password to reset your password.',
 		2036 => 'Client has active transaction.',
+		2037 => 'Student has an existing subscription.',
+		2038 => 'No student added.',
+		2039 => 'Student is not associated to the parent.',
+		2040 => 'Student already exist.',
+		2041 => 'Country is required',
 
 		2100 => 'Reset code is invalid.',
 		2101 => 'Password image is invalid.',
@@ -65,7 +70,7 @@ return [
 		2112 => 'Password must be at least 8 characters and with at least 1 number.',
 		2113 => 'Username and password is invalid.',
 		2114 => 'Your password is incorrect.',
-		2115 => 'Your contact number must be this format +00 (000) 000-0000.',
+		2115 => 'Your contact number is incorrect.',
 		2116 => 'School name is not available.',
 		2117 => 'The Student has to be 13 years old or above.',
 		2118 => 'Your account is being reviewed or contact administrator for assistance.',
@@ -75,7 +80,7 @@ return [
 		2122 => 'Unable to Delete. Teacher is associate to a class.',
 		2123 => 'Unable to Delete. Parent is associated to a student.',
 		2124 => 'Student does not exist.',
-		2125 => 'Student is already in the class.',
+		2125 => 'Student is already in a class.',
 		2126 => 'Unable to Delete. Student is associated to a Parent.',
 		2127 => 'Unable to Delete. Student has Points.',
 		2128 => 'Unable to Delete. Student has Badge.',
@@ -84,6 +89,8 @@ return [
 		2131 => 'Student is already added.',
 		2132 => 'Invitation code is invalid.',
 		2133 => 'Registration token is invalid.',
+		2134 => "Can't change School: Student has active Subscription.",
+        2135 => "The class is already full.",
 
 		// Client Error messages
 		2200 => 'Email already exists.',

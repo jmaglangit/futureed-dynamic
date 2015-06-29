@@ -146,5 +146,15 @@ class ClassroomRepository implements ClassroomRepositoryInterface{
         }
     }
 
+    public function getClassroomByOrderNo($order_no){
+        try{
+            $result = Classroom::order_no($order_no);
+            $result = $result->with('client')->get();
+            return !is_null($result) ? $result->toArray():null;
+        } catch( Exception $e ){
+            return $e->getMessage();
+        }
+    }
+
 
 }

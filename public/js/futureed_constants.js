@@ -24,6 +24,10 @@ var Constants = {
 	, TEACHER		: "Teacher"
 	, ADMIN			: "Admin"
 
+	, PENDING		: "Pending"
+	, PAID			: "Paid"
+	, CANCELLED		: "Cancelled"
+
 	, AVATAR		: "avatar"
 	, REWARDS		: "rewards"
 	, PASSWORD		: "password"
@@ -39,6 +43,7 @@ var Constants = {
 	, ACTIVE_VIEW	: "view"
 	, ACTIVE_EDIT	: "edit"
 	, ACTIVE_ADD	: "add"
+	, ACTIVE_EMAIL	: "email"
 
 	, ADD_CLIENT 	: "add_client"
 	, ADD_STUDENT	: "add_student"
@@ -88,6 +93,9 @@ var Constants = {
 	, ADD_AREA_SUCCESS 			: "You have successfully added a new subject area."
 	, EDIT_AREA_SUCCESS 		: "You have successfully updated a subject area."
 	, DELETE_AREA_SUCCESS 		: "You have successfully deleted a subject area."
+
+	, UPDATE_PAYMENT_STATUS_SUCCESS 	: "You have successfully updated the payment status."
+	, DELETE_INVOICE_SUCCESS : "You have successfully delete the selected invoice."
 
 	, MSG_U_NOTEXIST		: "User does not exist."
 	, MSG_U_EXIST 			: "Username already exists."

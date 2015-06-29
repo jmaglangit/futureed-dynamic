@@ -54,6 +54,7 @@ class ClientRepository implements ClientRepositoryInterface
 
     public function addClient($client)
     {
+		$client['country_id'] = isset($client['country_id']) ? $client['country_id'] : 0;
 
         try {
 
@@ -95,24 +96,12 @@ class ClientRepository implements ClientRepositoryInterface
 
     }
 
-    public function updateClientDetails($id, $clientData)
+    public function updateClientDetails($id, $client)
     {
-
-        foreach ($clientData as $key => $value) {
-            if ($value != null) {
-
-                $update[$key] = $value;
-
-            } else {
-
-                $update[$key] = null;
-
-            }
-        }
 
         try {
 
-            Client::where('id', $id)->update($update);
+            Client::where('id', $id)->update($client);
 
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
@@ -140,6 +129,7 @@ class ClientRepository implements ClientRepositoryInterface
             $data['password'] =  (!isset($data['password'])) ?: sha1($data['password']);
 
             //TODO: to be updated through relationships.
+
             $user = User::find($client)->update($data);
 
             $client = Client::find($id)->update($data);
@@ -200,6 +190,10 @@ class ClientRepository implements ClientRepositoryInterface
                 if (isset($criteria['school'])) {
                     $clients = $clients->school_name($criteria['school']);
                 }
+
+				if (isset($criteria['school_code'])) {
+					$clients = $clients->schoolcode($criteria['school_code']);
+				}
             }
 
             $count = $clients->count();
@@ -244,50 +238,56 @@ class ClientRepository implements ClientRepositoryInterface
 
     }
 
-    public function getTeacherDetails($criteria = array(), $limit = 0, $offset = 0)
-    {
+	public function getTeacherDetails($criteria = array(), $limit = 0, $offset = 0)
+	{
 
 
-        $clients = new Client();
+		$clients = new Client();
 
-        $clients = $clients->teacher();
+		$clients = $clients->teacher();
 
-        $count = 0;
+		$count = 0;
 
-        if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
+		if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
 
-            $count = $clients->count();
+			$count = $clients->count();
 
-        } else {
+		} else {
 
-            if (count($criteria) > 0) {
+			if (count($criteria) > 0) {
 
-                if (isset($criteria['name'])) {
+				if (isset($criteria['name'])) {
 
-                    $clients = $clients->name($criteria['name']);
+					$clients = $clients->name($criteria['name']);
 
-                }
+				}
 
-                if (isset($criteria['email'])) {
+				if (isset($criteria['email'])) {
 
-                    $clients = $clients->email($criteria['email']);
+					$clients = $clients->email($criteria['email']);
 
-                }
-            }
+				}
 
-            $count = $clients->count();
+				if (isset($criteria['school_code'])) {
 
-            if ($limit > 0 && $offset >= 0) {
-                $clients = $clients->offset($offset)->limit($limit);;
-            }
+					$clients = $clients->schoolcode($criteria['school_code']);
 
-        }
+				}
+			}
 
-        $clients = $clients->with('user')->orderBy('first_name', 'asc');
+			$count = $clients->count();
 
-        return ['total' => $count, 'records' => $clients->get()->toArray()];
+			if ($limit > 0 && $offset >= 0) {
+				$clients = $clients->offset($offset)->limit($limit);;
+			}
 
-    }
+		}
+
+		$clients = $clients->with('user')->orderBy('first_name', 'asc');
+
+		return ['total' => $count, 'records' => $clients->get()->toArray()];
+
+	}
 
     public function getClientByUserId($id)
     {
@@ -376,4 +376,9 @@ class ClientRepository implements ClientRepositoryInterface
 
         return $clients;
     }
+
+	public function getSchoolCode($id){
+
+		return Client::id($id)->pluck('school_code');
+	}
 }

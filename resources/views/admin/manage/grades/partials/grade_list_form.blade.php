@@ -38,9 +38,9 @@
 				</div>
 
 				<div class="col-xs-5">
-	        		<select ng-init="getCountries()" name="country_id" class="form-control" ng-model="grade.search.country">
+	        		<select ng-init="getCountries()" name="country_id" class="form-control" ng-model="grade.search.country_id">
 		          		<option value="">-- Select Country --</option>
-		          		<option ng-repeat="country in countries" value="{! country.id !}">{! country.name!}</option>
+		          		<option ng-repeat="country in countries" ng-value="country.id">{! country.name!}</option>
 	        		</select>
 	        	</div>
 				

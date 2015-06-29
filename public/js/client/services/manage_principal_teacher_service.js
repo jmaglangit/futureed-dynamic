@@ -11,6 +11,7 @@ function managePrincipalTeacherService($http){
 		return $http({
 			method 	: Constants.METHOD_GET
 			, url 	: teacherApiUrl + 'client/teacher?name=' + search.name
+				+ '&school_code=' + search.school_code
 				+ '&email=' + search.email
 				+ '&limit=' + table.size
 				+ '&offset=' + table.offset

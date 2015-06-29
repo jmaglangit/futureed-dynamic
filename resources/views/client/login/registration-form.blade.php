@@ -50,6 +50,7 @@
               , 'ng-model' => 'register.reg.password'
             )
         ) !!}
+        <p class="help-block">Password must be at least 8 characters and with at least 1 number.</p>
       </div>
       <label class="col-md-2 control-label">Confirm Password<span class="required">*</span></label>
       <div class="col-md-4">
@@ -124,7 +125,7 @@
       </div>
     </div>   
     <div class="form-group">
-      <label class="col-md-2 control-label">Zip Code<span class="required" ng-if="register.required">*</span></label>
+      <label class="col-md-2 control-label">Postal Code</label>
       <div class="col-md-4">
         {!! Form::text('zip', ''
               , array(
@@ -136,9 +137,9 @@
       </div>
       <label class="col-md-2 control-label">Country<span class="required" ng-if="register.required">*</span></label>
       <div class="col-md-4" ng-init="getCountries()">
-        <select  name="country" class="form-control" ng-model="register.reg.country">
+        <select  name="country_id" class="form-control" ng-model="register.reg.country_id">
           <option value="">-- Select Country --</option>
-          <option ng-repeat="country in countries" value="{! country.name !}">{! country.name!}</option>
+          <option ng-repeat="country in countries" ng-value="country.id">{! country.name!}</option>
         </select>
       </div>
     </div>
@@ -193,7 +194,7 @@
       </div>
     </div>   
     <div class="form-group">
-      <label class="col-md-2 control-label">Zip Code<span class="required">*</span></label>
+      <label class="col-md-2 control-label">Postal Code</label>
       <div class="col-md-4">
         {!! Form::text('school_zip', ''
             , array(
@@ -205,9 +206,9 @@
       </div>
       <label class="col-md-2 control-label">Country<span class="required">*</span></label>
       <div class="col-md-4" ng-init="getCountries()">
-        <select  name="school_country" class="form-control" ng-model="register.reg.school_country">
+        <select  name="school_country_id" class="form-control" ng-model="register.reg.school_country_id">
           <option value="">-- Select Country --</option>
-          <option ng-repeat="country in countries" value="{! country.name !}">{! country.name!}</option>
+          <option ng-repeat="country in countries" ng-value="country.id">{! country.name!}</option>
         </select>
       </div>
     </div> 

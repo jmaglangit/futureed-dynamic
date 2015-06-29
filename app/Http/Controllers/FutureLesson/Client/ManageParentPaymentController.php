@@ -31,4 +31,34 @@ class ManageParentPaymentController extends Controller{
 	{
 		return view('client.parent.payment.partials.payment_form');
 	}
+
+	/**
+	*@return View Payment form
+	*/
+	public function view_payment_form()
+	{
+		return view('client.parent.payment.partials.view_payment_form');
+	}
+
+	public function payment_success() 
+	{
+		$input = Input::only('token', 'paymentId');
+
+		if(!($input['token'] || $input['paymentId'])) {
+			return redirect()->route('client.parent.payment.index');
+		}
+
+		return view('client.partials.success_payment');
+	}
+
+	public function payment_fail() 
+	{
+		$input = Input::only('token');
+
+		if(!$input['token']) {
+			return redirect()->route('client.parent.payment.index');
+		}
+
+		return view('client.partials.fail_payment');
+	}
 }

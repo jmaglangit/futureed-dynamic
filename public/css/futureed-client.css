@@ -38,7 +38,9 @@ table#client-list{
 .row > .col-sm-5{
 	display: none;
 }
-
+.width-200{
+	width: 200px;
+}
 .title-mid{
 	text-transform: uppercase;
   	color: #055A7F;
@@ -86,7 +88,9 @@ table#client-list{
 	padding: 0 30px 0 30px;
 	margin-bottom: 30px;
 }
-
+.alert-container {
+	margin-top: 30px;
+}
 .success-container {
 	padding: 30px 30px 0px 30px;
 }
@@ -147,11 +151,17 @@ table#client-list{
 	position: relative;
 	bottom: 5px;
 }
+
+.bottom-10{
+	position: relative;
+	bottom: 10px;
+}
 .text-red{
 	color: red;
 }
-.margin-60-top{
-	margin-top: 60px;
+
+.alert-container{
+	margin-top: 30px;
 }
 
 input[type=radio]{box-sizing: border-box;padding: 0;}

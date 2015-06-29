@@ -13,7 +13,9 @@ class InvoiceDetail extends Model {
 
     protected $hidden = ['created_by','updated_by','created_at','updated_at','deleted_at'];
     
-    protected $fillable = ['invoice_no', 'class_id', 'grade_code'];
+    protected $fillable = ['invoice_id', 'class_id', 'grade_id','price','created_by','updated_by'];
+
+    protected $attributes = ['created_by' => 1,'updated_by' =>1];
 
     public function classroom() {
 
@@ -22,7 +24,8 @@ class InvoiceDetail extends Model {
 
     public function invoice(){
 
-        return $this->hasMany('FutureEd\Models\Core\Invoice','invoice_no','invoice_no');
+        return $this->BelongsTo('FutureEd\Models\Core\Invoice','invoice_id','id');
+
 
     }
 
@@ -30,6 +33,14 @@ class InvoiceDetail extends Model {
 
         return $this->belongsTo('FutureEd\Models\Core\Grade');
 
+    }
+
+    public function scopeInvoiceId($query,$invoice_id){
+        return $query->where('invoice_id',$invoice_id);
+    }
+
+    public function scopeClassId($query,$class_id){
+        return $query->where('class_id',$class_id);
     }
     
 }

@@ -4,6 +4,7 @@ use FutureEd\Http\Controllers\Controller;
 use FutureEd\Http\Requests;
 use FutureEd\Http\Requests\Api\ClassStudentRequest;
 
+use FutureEd\Models\Repository\Classroom\ClassroomRepositoryInterface;
 use FutureEd\Models\Repository\ClassStudent\ClassStudentRepositoryInterface;
 use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
 
@@ -21,18 +22,21 @@ class ClassStudentController extends ApiController {
     protected $mail;
     protected $student;
     protected $user;
+    protected $classroom;
 
     public function __construct(ClassStudentRepositoryInterface $classStudentRepositoryInterface,
                                 ClientRepositoryInterface $clientRepositoryInterface,
                                 UserServices $userServices,
                                 MailServices $mailServices,
-                                StudentServices $studentRepositoryInterface)
+                                StudentServices $studentRepositoryInterface,
+                                ClassroomRepositoryInterface $classroom)
     {
         $this->class_student = $classStudentRepositoryInterface;
         $this->client = $clientRepositoryInterface;
         $this->mail = $mailServices;
         $this->student = $studentRepositoryInterface;
         $this->user = $userServices;
+        $this->classroom = $classroom;
     }
 
     /**
@@ -69,6 +73,12 @@ class ClassStudentController extends ApiController {
         //check if email exist
         $check_email = $this->user->checkEmail($user['email'],config('futureed.student'));
 
+		//get client details
+		$client = $this->client->getClientDetails($class_student['client_id']);
+
+		//assign to student the school of teacher
+		$student['school_code'] = $client['school_code'];
+
 
         if($check_username){
             return $this->respondErrorMessage(2201);
@@ -76,6 +86,13 @@ class ClassStudentController extends ApiController {
 
         if($check_email){
             return $this->respondErrorMessage(2200);
+        }
+
+        //check seats availability.
+        $classroom = $this->classroom->getClassroom($class_student['class_id']);
+
+        if( $classroom->seats_taken >= $classroom->seats_total ){
+            return $this->respondErrorMessage(2135);
         }
 
         $user = array_merge($user,[
@@ -111,6 +128,10 @@ class ClassStudentController extends ApiController {
 
             $this->class_student->addClassStudent($class_student);
 
+            //increment seats_taken
+            $classroom_data['seats_taken'] = $classroom->seats_taken + 1;
+            $this->classroom->updateClassroom($classroom->id,$classroom_data);
+
             //send email to student.
             $client_user_id = $this->client->checkClient($class_student['client_id'],config('futureed.teacher'));
             $teacher = $this->user->getUser($client_user_id,config('futureed.client'));
@@ -144,41 +165,57 @@ class ClassStudentController extends ApiController {
      */
     public function addExistingStudent(ClassStudentRequest $request)
     {
-        $data = $request->all();
-        $check_email = $this->user->checkEmail($data['email'],config('futureed.student'));
+		$data = $request->all();
+		$check_email = $this->user->checkEmail($data['email'], config('futureed.student'));
 
-        if(!$check_email){
-            return $this->respondErrorMessage(2124);// Student does not exist.
+		if (!$check_email) {
+			return $this->respondErrorMessage(2124);// Student does not exist.
+		}
+
+		$student_id = $this->student->getStudentId($check_email['user_id']);
+
+		//Get current school if exist.
+		$classroom = $this->class_student->getStudentCurrentClassroom($student_id);
+
+		if ($classroom) {
+			return $this->respondErrorMessage(2125);// Student is already in the class.
+		}
+
+        //check seats availability.
+        $classroom = $this->classroom->getClassroom($data['class_id']);
+
+        if( $classroom->seats_taken >= $classroom->seats_total ){
+            return $this->respondErrorMessage(2135);
         }
 
-        $student_id = $this->student->getStudentId($check_email['user_id']);
+		//add to class student table.
+		$data['student_id'] = $student_id;
+		$data['status'] = 'Enabled';
+		$this->class_student->addClassStudent($data);
 
-        $class_student = $this->class_student->getClassStudent($student_id);
+        //increment seats_taken
+        $classroom_data['seats_taken'] = $classroom->seats_taken + 1;
+        $this->classroom->updateClassroom($classroom->id,$classroom_data);
 
-        if(!is_null($class_student)){
-            return $this->respondErrorMessage(2125);// Student is already in the class.
-        }
+		//send email to student.
+		$classroom = $this->class_student->getClassroom($data['class_id']);
+		$client_user_id = $this->client->checkClient($data['client_id'], config('futureed.teacher'));
+		$teacher = $this->user->getUser($client_user_id, config('futureed.client'));
 
-        //add to class student table.
-        $data['student_id'] = $student_id;
-        $data['status'] = 'Enabled';
-        $this->class_student->addClassStudent($data);
+		//update school code of student.
+		$client_school_code = $this->client->getSchoolCode($data['client_id']);
+
+		$this->student->updateSchool($student_id, $client_school_code);
 
 
+		$data['user_id'] = $check_email['user_id'];
+		$data['class_name'] = $classroom ? $classroom['name'] : "";
+		$data['teacher_name'] = !is_null($teacher) ? $teacher['name'] : "";
 
-        //send email to student.
-        $classroom = $this->class_student->getClassroom($data['class_id']);
-        $client_user_id = $this->client->checkClient($data['client_id'],config('futureed.teacher'));
-        $teacher = $this->user->getUser($client_user_id,config('futureed.client'));
+		$this->mail->sendExistingStudentRegister($data);
 
-        $data['user_id'] = $check_email['user_id'];
-        $data['class_name'] = $classroom ? $classroom['name'] : "";
-        $data['teacher_name'] = !is_null($teacher) ? $teacher['name'] : "";
-
-        $this->mail->sendExistingStudentRegister($data);
-
-        //return success
-        return $this->respondWithData(['id' => $check_email['user_id']]);
+		//return success
+		return $this->respondWithData(['id' => $student_id]);
 
     }
 
