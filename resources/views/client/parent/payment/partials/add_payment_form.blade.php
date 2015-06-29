@@ -74,18 +74,17 @@
         </fieldset>
 	</div>
 	{!! Form::close() !!}
-	<div class="col-xs-12">
-		<div class="table-form">
+	<div class="col-xs-12 search-container">
+		<div class="form-search">
+			{!! Form::open(
+					[
+						'id' => 'subscription_form',
+						'class' => 'form-horizontal'
+					]
+			) !!}
 			<div class="form-group">
-				<div class="col-xs-3">
-					<div class="col-xs-6">
-						<b>Item</b>
-					</div>
-					<div class="col-xs-6">
-						Subscription
-					</div>	
-				</div>
-				<div class="col-xs-3">
+				<label class="col-xs-2 control-label">Subscription</label>
+				<div class="col-xs-4">
 					<select name="subscription" ng-disabled="!payment.subscriptions.length"
 							id="subscription" 
 							class="form-control"
@@ -106,72 +105,74 @@
 					</div>
 				</div>
 			</div>
-			<div class="form-group margin-top-60">
-				<table class="table table-bordered">
-					<thead>
-						<tr>
-							<td>Name</td>
-							<td>Email</td>
-							<td>Price</td>
-							<td>Action</td>
-						</tr>
-					</thead>
-					<tbody>
-						<tr ng-repeat="key in payment.students">
-						{{-- Sample Data --}}
-							<td>{! key.student.user.name !}</td>
-							<td>{! key.student.user.email !}</td>
-							<td>{! payment.invoice.price | number: 2 !}</td>
-							<td>
-								<a href="#" ng-click="payment.confirmCancelAdd(key.id)"><span><i class="fa fa-trash"></i></span></a>
-							</td>
-						</tr>
-						<tr class="odd" ng-if="!payment.students.length && !payment.table.loading">
-				        	<td valign="top" colspan="4" class="dataTables_empty">
-				        		No records found
-				        	</td>
-				        </tr>
-				        <tr class="odd" ng-if="payment.table.loading">
-				        	<td valign="top" colspan="4" class="dataTables_empty">
-				        		Loading...
-				        	</td>
-				        </tr>
-					</tbody>
-				</table>
-			</div>
-			<div class="row margin-10-bot">
-				<div class="col-xs-4 div-right">
-					<label class="col-xs-4 control-label">Sub Total</label>
-					<div class="col-xs-8">
-						<input type="text" class="form-control" placeHolder="Subtotal" value="{! payment.invoice.subtotal | number:2 !}" ng-disabled="true">
-					</div>
-				</div>
-			</div>
-			<div class="row margin-10-bot">
-				<div class="col-xs-4 div-right">
-					<label class="col-xs-4 control-label">Discount</label>
-					<div class="col-xs-8">
-						{!! Form::text('discount',''
-	        				, array(
-	        					'placeHolder' => 'Discount'
-	        					, 'ng-model' => 'payment.discount.percentage'
-	        					, 'class' => 'form-control'
-	        					, 'ng-disabled' => 'true'
-	        				)
-	        			) !!}
-					</div>
-				</div>
-			</div>
-			<div class="row margin-10-bot">
-				<div class="col-xs-4 div-right">
-					<label class="col-xs-4 control-label">Total</label>
-					<div class="col-xs-8">
-						<input type="text" class="form-control" placeHolder="Total" value="{! payment.invoice.total_amount | number:2 !}" ng-disabled="true">
-					</div>
+		</div>
+	</div>
+	<div class="col-xs-12 table-container margin-top-30">
+		<table class="table table-bordered">
+			<thead>
+				<tr>
+					<td>Name</td>
+					<td>Email</td>
+					<td>Price</td>
+					<td>Action</td>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="key in payment.students">
+				{{-- Sample Data --}}
+					<td>{! key.student.user.name !}</td>
+					<td>{! key.student.user.email !}</td>
+					<td>{! payment.invoice.price | number: 2 !}</td>
+					<td>
+						<a href="#" ng-click="payment.confirmCancelAdd(key.id)"><span><i class="fa fa-trash"></i></span></a>
+					</td>
+				</tr>
+				<tr class="odd" ng-if="!payment.students.length && !payment.table.loading">
+		        	<td valign="top" colspan="4" class="dataTables_empty">
+		        		No records found
+		        	</td>
+		        </tr>
+		        <tr class="odd" ng-if="payment.table.loading">
+		        	<td valign="top" colspan="4" class="dataTables_empty">
+		        		Loading...
+		        	</td>
+		        </tr>
+			</tbody>
+		</table>
+	</div>
+	<div class="col-xs-12">
+		<div class="row margin-10-bot">
+			<div class="col-xs-4 div-right">
+				<label class="col-xs-4 control-label">Sub Total</label>
+				<div class="col-xs-8">
+					<input type="text" class="form-control" placeHolder="Subtotal" value="{! payment.invoice.subtotal | number:2 !}" ng-disabled="true">
 				</div>
 			</div>
 		</div>
-	</div>
+		<div class="row margin-10-bot">
+			<div class="col-xs-4 div-right">
+				<label class="col-xs-4 control-label">Discount</label>
+				<div class="col-xs-8">
+					{!! Form::text('discount',''
+        				, array(
+        					'placeHolder' => 'Discount'
+        					, 'ng-model' => 'payment.discount.percentage'
+        					, 'class' => 'form-control'
+        					, 'ng-disabled' => 'true'
+        				)
+        			) !!}
+				</div>
+			</div>
+		</div>
+		<div class="row margin-10-bot">
+			<div class="col-xs-4 div-right">
+				<label class="col-xs-4 control-label">Total</label>
+				<div class="col-xs-8">
+					<input type="text" class="form-control" placeHolder="Total" value="{! payment.invoice.total_amount | number:2 !}" ng-disabled="true">
+				</div>
+			</div>
+		</div>
+	</div>	
 	<div class="col-xs-12 margin-30-bot">
 		<div class="container">
 		<div class="btn-container margin-30-top">
