@@ -419,8 +419,8 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 						var date = new Date();
 							self.invoice.date_start = $filter('date')(date, 'yyyyMMdd');
 							self.invoice.dis_date_start = date.getTime();
-							
-							date.setDate(date.getDate() + subscription.days);
+							console.log(subscription.days);
+							date.setDate(date.getDate() + parseInt(subscription.days));
 							
 							self.invoice.date_end = $filter('date')(date, 'yyyyMMdd');
 							self.invoice.dis_date_end = date.getTime();
