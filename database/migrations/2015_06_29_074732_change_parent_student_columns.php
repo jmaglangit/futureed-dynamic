@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\DB;
 
 class ChangeParentStudentColumns extends Migration {
 
@@ -12,14 +13,8 @@ class ChangeParentStudentColumns extends Migration {
 	 */
 	public function up()
 	{
-		Schema::table('parent_students',function(Blueprint $table){
-			$table->dropColumn(['parent_user_id','student_user_id']);
-		});
-
-		Schema::table('parent_students',function(Blueprint $table){
-			$table->bigInteger('parent_id')->after('id');
-			$table->bigInteger('student_id')->after('parent_id');
-		});
+		DB::statement("ALTER TABLE parent_students change parent_user_id parent_id INTEGER ;");
+		DB::statement("ALTER TABLE parent_students change student_user_id student_id INTEGER ;");
 	}
 
 	/**
@@ -29,15 +24,8 @@ class ChangeParentStudentColumns extends Migration {
 	 */
 	public function down()
 	{
-		Schema::table('parent_students',function(Blueprint $table){
-			$table->dropColumn(['parent_id','student_id']);
-		});
-
-		Schema::table('parent_students',function(Blueprint $table){
-			$table->bigInteger('parent_user_id')->after('id');
-			$table->bigInteger('student_user_id')->after('parent_user_id');
-		});
-
+		DB::statement("ALTER TABLE parent_students change parent_id parent_user_id INTEGER ;");
+		DB::statement("ALTER TABLE parent_students change student_id student_user_id INTEGER ;");
 	}
 
 }
