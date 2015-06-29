@@ -210,7 +210,7 @@ function ManageStudentController($scope, manageStudentService, apiService, Table
 		switch(method){
 			case 'edit':
 				self.detail.school_code = school.code;
-				self.detail.school_name = school.name;
+				self.detail.school = school.name;
 				break;
 
 			case 'create':
@@ -363,10 +363,9 @@ function ManageStudentController($scope, manageStudentService, apiService, Table
 			if(angular.equals(response.status,Constants.STATUS_OK)){
 				if(response.errors){
 					self.errors = $scope.errorHandler(response.errors);
-
 					angular.forEach(response.errors, function(value, key) {
-						$("#add_student_form input[name='" + value.field +"']").addClass("required-field");
-						$("#add_student_form select[name='" + value.field +"']").addClass("required-field");
+						$("#view_student_form input[name='" + value.field +"']").addClass("required-field");
+						$("#view_student_form select[name='" + value.field +"']").addClass("required-field");
 		            });
 				} else if(response.data) {
 					self.success = Constants.TRUE;
