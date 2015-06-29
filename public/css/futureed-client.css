@@ -127,6 +127,9 @@ table#client-list{
 .btn-semi-large{
 	width: 50%;
 }
+.padding-top-7{
+	padding-top: 7px;
+}
 .margin-30-left{
 	margin-left: 30px;
 }

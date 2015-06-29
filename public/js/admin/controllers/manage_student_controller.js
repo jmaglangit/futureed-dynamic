@@ -313,7 +313,10 @@ function ManageStudentController($scope, manageStudentService, apiService, Table
 					self.detail.email = data.user.email;
 					self.detail.username = data.user.username;
 					self.detail.new_email = data.user.new_email;
-					self.detail.school = data.school.name;
+					
+					if(data['school'] != null) {
+						self.detail.school = data.school.name;
+					}
 					self.getGradeLevel();
 				}
 			}
