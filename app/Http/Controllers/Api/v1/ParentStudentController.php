@@ -3,6 +3,7 @@
 use FutureEd\Http\Requests;
 use FutureEd\Http\Requests\Api\InvoiceRequest;
 use FutureEd\Http\Requests\Api\ParentStudentRequest;
+use FutureEd\Models\Repository\Avatar\AvatarRepositoryInterface;
 use FutureEd\Models\Repository\Classroom\ClassroomRepositoryInterface;
 use FutureEd\Models\Repository\ClassStudent\ClassStudentRepositoryInterface;
 use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
@@ -13,6 +14,7 @@ use FutureEd\Models\Repository\OrderDetail\OrderDetailRepositoryInterface;
 use FutureEd\Models\Repository\ParentStudent\ParentStudentRepositoryInterface;
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use FutureEd\Models\Repository\User\UserRepositoryInterface;
+use FutureEd\Services\AvatarServices;
 use FutureEd\Services\CodeGeneratorServices;
 use FutureEd\Services\MailServices;
 use FutureEd\Services\InvoiceServices;
@@ -33,6 +35,7 @@ class ParentStudentController extends ApiController {
     protected $parent_student;
     protected $invoice_service;
     protected $order_details;
+	protected $avatar;
 
     public function __construct(
         StudentRepositoryInterface $student,
@@ -47,7 +50,8 @@ class ParentStudentController extends ApiController {
         InvoiceRepositoryInterface $invoice,
         InvoiceDetailRepositoryInterface $invoice_detail,
         InvoiceServices $invoice_service,
-        OrderDetailRepositoryInterface $order_details){
+        OrderDetailRepositoryInterface $order_details,
+		AvatarServices $avatarServices){
 
         $this->student = $student;
         $this->client = $client;
@@ -62,6 +66,7 @@ class ParentStudentController extends ApiController {
         $this->invoice_detail = $invoice_detail;
         $this->invoice_service = $invoice_service;
         $this->order_details = $order_details;
+		$this->avatar = $avatarServices;
     }
 
     public function addExistingStudent(ParentStudentRequest $request){
@@ -108,9 +113,9 @@ class ParentStudentController extends ApiController {
         //generate invitation_code
         $invitation_code = $this->code->getCode();
 
-        //form data needed for adding (parent_user_id,student_user_id,invitation_code,status)
-        $details['parent_user_id'] = $data['client_id'];
-        $details['student_user_id'] = $student_id;
+        //form data needed for adding (parent_id,student_id,invitation_code,status)
+        $details['parent_id'] = $data['client_id'];
+        $details['student_id'] = $student_id;
         $details['invitation_code'] = $invitation_code;
         $details['status'] = config('futureed.user_disabled');
 
@@ -209,7 +214,7 @@ class ParentStudentController extends ApiController {
 
         //1. Insert Classroom.
 
-        $client_id = $this->client->getClientId($parent_student_data['parent_user_id']);
+        $client_id = $this->client->getClientId($parent_student_data['parent_id']);
 
         $order_no = $order_no['order_no'];
 
@@ -303,7 +308,7 @@ class ParentStudentController extends ApiController {
     /**
      * get list by parent user id
      *
-     * @param $parent_user_id
+     * @param $parent_id
      * @return mixed
      */
     public function getStudents($order_no){
@@ -323,11 +328,11 @@ class ParentStudentController extends ApiController {
 
     /**
      * Remove resource from storage by parent user id
-     * @param $parent_user_id
+     * @param $parent_id
      * @return Response
      */
-    public function deleteStudentByParentId($parent_user_id){
-        return $this->respondWithData($this->parent_student->deleteParentStudentByParentId($parent_user_id));
+    public function deleteStudentByParentId($parent_id){
+        return $this->respondWithData($this->parent_student->deleteParentStudentByParentId($parent_id));
     }
 
     /**
@@ -339,15 +344,15 @@ class ParentStudentController extends ApiController {
     public function addStudentByEmail(ParentStudentRequest $request){
         $email = $request->only('email');
 
-        $student_user_id = $this->user->checkEmail($email,config('futureed.student'));
+        $student_id = $this->user->checkEmail($email,config('futureed.student'));
 
-        if(is_null($student_user_id)){
+        if(is_null($student_id)){
             return $this->respondErrorMessage(2002);
         }
 
-        $student_id = $this->student->getStudentId($student_user_id);
+        $student_id = $this->student->getStudentId($student_id);
 
-        $parent_id = $request->only('parent_user_id');//this is a client id
+        $parent_id = $request->only('parent_id');//this is a client id
 
         //check if user is associated to the parent.
         $check_parent_student = $this->parent_student->checkParentStudent($parent_id,$student_id);
@@ -374,7 +379,7 @@ class ParentStudentController extends ApiController {
         $order_details['student_id'] = $student_id;
         $this->order_details->addOrderDetail($order_details);
 
-        return $this->respondWithData($this->user->getUserDetail($student_user_id,config('futureed.student')));
+        return $this->respondWithData($this->user->getUserDetail($student_id,config('futureed.student')));
     }
 
     /**
@@ -387,15 +392,15 @@ class ParentStudentController extends ApiController {
 
         $user_name = $request->only('username');
 
-        $student_user_id = $this->user->checkUserName($user_name,config('futureed.student'));
+        $student_id = $this->user->checkUserName($user_name,config('futureed.student'));
 
-        if(is_null($student_user_id)){
+        if(is_null($student_id)){
             return $this->respondErrorMessage(2018);
         }
 
-        $student_id = $this->student->getStudentId($student_user_id);
+        $student_id = $this->student->getStudentId($student_id);
 
-        $parent_id = $request->only('parent_user_id');
+        $parent_id = $request->only('parent_id');
 
         //check if user is associated to the parent.
        $check_parent_student = $this->parent_student->checkParentStudent($parent_id,$student_id);
@@ -421,6 +426,27 @@ class ParentStudentController extends ApiController {
         $order_details['student_id'] = $student_id;
         $this->order_details->addOrderDetail($order_details);
 
-        return $this->respondWithData($this->user->getUserDetail($student_user_id,config('futureed.student')));
+        return $this->respondWithData($this->user->getUserDetail($student_id,config('futureed.student')));
     }
+
+	//TODO: 711
+	public function getStudentList($id){
+
+		$criteria['parent_id'] = $id;
+		$student_list = $this->parent_student->getParentStudents($criteria);
+
+		//check if parent has student
+		if (empty($student_list->toArray())) {
+
+			return $this->respondErrorMessage(2130);
+		}
+
+		foreach($student_list as $list => $student){
+
+			$student->student->avatar->url = $this->avatar->getAvatarThumbnailUrl($student->student->avatar->avatar_image);
+
+		}
+
+		return $this->respondWithData($student_list);
+	}
 }

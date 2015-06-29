@@ -62,6 +62,10 @@ class Student extends Model {
 		return $this->belongsTo('FutureEd\Models\Core\ParentStudent','id','student_user_id');
 	}
 
+	public function avatar(){
+		return $this->belongsTo('FutureEd\Models\Core\Avatar');
+	}
+
 	//get student with relation to ClassStudent with relation to classroom
 	public function studentclassroom(){
 
