@@ -193,10 +193,10 @@
 	            			{! prce.status !}
 	            		</div>
 	            		<div class="col-xs-3">
-	            			<a href="" ng-click="sale.getPrice(p.id)"><span><i class="fa fa-pencil"></i></span></a>
+	            			<a href="" ng-click="sale.getPrice(prce.id)"><span><i class="fa fa-pencil"></i></span></a>
 	            		</div>
 	            		<div class="col-xs-3">
-	            			<a href="" ng-click="sale.deletePrice(p.id)"><span><i class="fa fa-trash"></i></span></a>
+	            			<a href="" ng-click="sale.deletePrice(prce.id)"><span><i class="fa fa-trash"></i></span></a>
 	            		</div>
 	            	</div>
 	            </td>
