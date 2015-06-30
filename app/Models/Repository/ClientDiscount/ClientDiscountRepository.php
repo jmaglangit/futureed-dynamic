@@ -38,6 +38,10 @@ class ClientDiscountRepository implements ClientDiscountRepositoryInterface
 				if (isset($criteria['client_role'])) {
 					$clientDiscounts = $clientDiscounts->role($criteria['client_role']);
 				}
+				if (isset($criteria['client_id'])) {
+					$clientDiscounts = $clientDiscounts->clientid($criteria['client_id']);
+				}
+
 			}
 
 			$count = $clientDiscounts->count();

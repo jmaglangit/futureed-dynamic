@@ -21,8 +21,8 @@
 		<div class="form-search">
 			{!! Form::open(
 				array('id' => 'search_form'
-					, 'method' => 'POST'
 					, 'class' => 'form-inline'
+					, 'ng-submit' => 'grade.searchFnc($event)'
 					)
 				)!!}
 			<div class="form-group">
@@ -32,14 +32,15 @@
 							'placeholder' => 'Grade'
 							, 'ng-model' => 'grade.search.grade'
 							, 'class' => 'form-control btn-fit'
+							, 'autocomplete' => 'off'
 						)
 					)!!}
 				</div>
 
 				<div class="col-xs-5">
-	        		<select ng-init="getCountries()" name="country_id" class="form-control" ng-model="grade.search.country">
+	        		<select ng-init="getCountries()" name="country_id" class="form-control" ng-model="grade.search.country_id">
 		          		<option value="">-- Select Country --</option>
-		          		<option ng-repeat="country in countries" value="{! country.id !}">{! country.name!}</option>
+		          		<option ng-repeat="country in countries" ng-value="country.id">{! country.name!}</option>
 	        		</select>
 	        	</div>
 				
@@ -47,7 +48,7 @@
 					{!! Form::button('Search'
 						,array(
 							'class' => 'btn btn-blue'
-							, 'ng-click' => 'grade.getGradeList()'
+							, 'ng-click' => 'grade.searchFnc()'
 						)
 					)!!}
 				</div>
@@ -55,7 +56,7 @@
 					{!! Form::button('Clear'
 						,array(
 							'class' => 'btn btn-gold'
-							, 'ng-click' => 'grade.clearSearchForm()'
+							, 'ng-click' => 'grade.clear()'
 						)
 					)!!}
 				</div>

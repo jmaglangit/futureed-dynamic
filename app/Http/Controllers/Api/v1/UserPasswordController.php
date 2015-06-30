@@ -13,110 +13,126 @@ class UserPasswordController extends UserController {
 
     public function passwordForgot(){
 
-        $input = Input::only('username','user_type','callback_uri');
+		$input = Input::only('username', 'user_type', 'callback_uri');
 
-        $this->addMessageBag($this->userType($input,'user_type'));
-        $this->addMessageBag($this->validateString($input,'callback_uri'));
-        $subject = config('futureed.subject_forgot');
+		$this->addMessageBag($this->userType($input, 'user_type'));
+		$this->addMessageBag($this->validateString($input, 'callback_uri'));
+		$subject = config('futureed.subject_forgot');
 
-        $flag=0;
-        
-        if(!$this->email($input,'username')){
-            
-            $flag = 1;
-             
-        }
-        if(!$this->username($input,'username')){
-            
-            $flag = 0;
-        }
-        
+		$flag = 0;
 
-        if($flag){
+		if (!$this->email($input, 'username')) {
 
-            $this->addMessageBag($this->email($input,'username'));
-            
-        }else{
-          
-            $this->addMessageBag($this->username($input,'username'));
-            
-        }
-    
-       if($this->getMessageBag()){
-         
-         return $this->respondWithError($this->getMessageBag());
-          
-       }else {
+			$flag = 1;
 
-            $return= $this->user->checkLoginName($input['username'],$input['user_type']);
+		}
+		if (!$this->username($input, 'username')) {
+
+			$flag = 0;
+		}
 
 
-            if($this->valid->email($input['username'])){
-               
-                $return = $this->user->checkEmail($input['username'],$input['user_type']);
+		if ($flag) {
+
+			$this->addMessageBag($this->email($input, 'username'));
+
+		} else {
+
+			$this->addMessageBag($this->username($input, 'username'));
+
+		}
+
+		if ($this->getMessageBag()) {
+
+			return $this->respondWithError($this->getMessageBag());
+
+		} else {
+
+			$return = $this->user->checkLoginName($input['username'], $input['user_type']);
 
 
-            }elseif($this->valid->username($input['username'])) {
+			if ($this->valid->email($input['username'])) {
 
-                $return = $this->user->checkUserName($input['username'], $input['user_type']);
-
-            }
-
- 
-           if(isset($return['status'])){
-            
-            
-                $userDetails = $this->user->getUserDetails($return['user_id']);
-                
-                $isActivated = $this->user->isActivated($return['user_id']);
-                
-                if($isActivated==1){
-                    
-                    
-                    // get code 
-                    $code=$this->code->getCodeExpiry();
-
-                     //update reset_code and expiry to db
-                    $this->user->setResetCode($return['user_id'],$code);
+				$return = $this->user->checkEmail($input['username'], $input['user_type']);
 
 
-                    if(strcasecmp($input['user_type'],config('futureed.student')) == 0){
+			} elseif ($this->valid->username($input['username'])) {
 
-                      $this->mail->sendStudentMailResetPassword($userDetails,$code['confirmation_code'],$input['callback_uri'],$subject);
-                      
-                    }elseif(strcasecmp($input['user_type'],config('futureed.client')) == 0){
+				$return = $this->user->checkUserName($input['username'], $input['user_type']);
 
-                      $client_id = $this->client->getClientId($return['user_id']);
-                      $client = $this->client->getClientDetails($client_id);
-
-                      if($client['account_status'] != config('futureed.client_account_status_accepted')){
-
-                        return $this->respondErrorMessage(2013);
+			}
 
 
-                      }
+			if (isset($return['status'])) {
 
-                      $this->mail->sendClientMailResetPassword($userDetails,$code['confirmation_code'],$input['callback_uri'],$subject);
 
-                    }else{
+				$userDetails = $this->user->getUserDetails($return['user_id']);
 
-                      $this->mail->sendAdminMailResetPassword($userDetails,$code['confirmation_code'],$input['callback_uri'],$subject);
+				$isActivated = $this->user->isActivated($return['user_id']);
 
-                    }
+				if ($isActivated == 1) {
 
-                    return $this->respondWithData($userDetails);
-                    
-                }else{
-                    
-                    return $this->respondErrorMessage(2018);
-                         
-                }
-                
-          }else{
-            
-             return $this->respondErrorMessage(2018);
-          }
-        }
+
+					// get code
+					$code = $this->code->getCodeExpiry();
+
+					//update reset_code and expiry to db
+					$this->user->setResetCode($return['user_id'], $code);
+
+
+					if (strcasecmp($input['user_type'], config('futureed.student')) == 0) {
+
+						$subject = str_replace('{user}', config('futureed.student'), $subject);
+
+						$this->mail->sendStudentMailResetPassword($userDetails, $code['confirmation_code'], $input['callback_uri'], $subject);
+
+					} elseif (strcasecmp($input['user_type'], config('futureed.client')) == 0) {
+
+						$client_id = $this->client->getClientId($return['user_id']);
+
+						$client = $this->client->getClientDetails($client_id);
+
+
+						if ($client['account_status'] != config('futureed.client_account_status_accepted')) {
+
+							return $this->respondErrorMessage(2013);
+						}
+
+						//update subject
+						$subject = str_replace('{user}', $client->client_role, $subject);
+
+						$subject = str_replace('{user}', config('futureed.client'), $subject);
+
+						$this->mail->sendClientMailResetPassword($userDetails, $code['confirmation_code'], $input['callback_uri'], $subject);
+
+					} else {
+
+						$admin_id = $this->admin->getAdminId($return['user_id']);
+
+						$admin = $this->admin->getAdmin($admin_id);
+
+						//update subject
+						$subject = str_replace('{user}', $admin->admin_role, $subject);
+
+						$subject = str_replace('{user}', config('futureed.Admin'), $subject);
+
+						$this->mail->sendAdminMailResetPassword($userDetails, $code['confirmation_code'], $input['callback_uri'], $subject);
+
+					}
+
+					return $this->respondWithData($userDetails->toArray());
+
+				} else {
+
+					return $this->respondErrorMessage(2018);
+
+				}
+
+			} else {
+
+				return $this->respondErrorMessage(2018);
+			}
+		}
 
     }
 

@@ -8,6 +8,7 @@ var Constants = {
 
 	, EMPTY_STR		: ''
 	, ALL			: 'all'
+	, UNDEFINED		: 'undefined'
 
 	, METHOD_POST	: 'POST'
 	, METHOD_GET	: 'GET'
@@ -22,6 +23,10 @@ var Constants = {
 	, PARENT		: "Parent"
 	, TEACHER		: "Teacher"
 	, ADMIN			: "Admin"
+
+	, PENDING		: "Pending"
+	, PAID			: "Paid"
+	, CANCELLED		: "Cancelled"
 
 	, AVATAR		: "avatar"
 	, REWARDS		: "rewards"
@@ -38,6 +43,7 @@ var Constants = {
 	, ACTIVE_VIEW	: "view"
 	, ACTIVE_EDIT	: "edit"
 	, ACTIVE_ADD	: "add"
+	, ACTIVE_EMAIL	: "email"
 
 	, ADD_CLIENT 	: "add_client"
 	, ADD_STUDENT	: "add_student"
@@ -67,6 +73,7 @@ var Constants = {
 	, MSG_EA_NOTEXIST		: "Email does not exist."
 	, MSG_EA_CONFIRM		: "Confirm your new email address."
 	, MSG_EA_EXIST 			: "Email address already exists."
+	, MSG_EA_AVAILABLE 		: "Email address is available."
 	, MSG_EA_CURR_NOTMATCH	: "Current email address does not match."
 	, MSG_EA_NOT_MATCH		: "Email Address does not match."
 	, ANNOUNCE_SUCCESS		: "Success You've created Site Maintainance Announcement."
@@ -87,8 +94,12 @@ var Constants = {
 	, EDIT_AREA_SUCCESS 		: "You have successfully updated a subject area."
 	, DELETE_AREA_SUCCESS 		: "You have successfully deleted a subject area."
 
+	, UPDATE_PAYMENT_STATUS_SUCCESS 	: "You have successfully updated the payment status."
+	, DELETE_INVOICE_SUCCESS : "You have successfully delete the selected invoice."
+
 	, MSG_U_NOTEXIST		: "User does not exist."
 	, MSG_U_EXIST 			: "Username already exists."
+	, MSG_U_AVAILABLE		: "Username is available."
 
 	, MSG_NO_RECORD			: "No record found."
 

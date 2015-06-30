@@ -25,6 +25,11 @@
 			, 'uses' => 'FutureLesson\Client\LoginController@registration'
 		]);
 
+		Routes::get('/registration/{id}', [
+			'as' => 'client.registration.invite'
+			, 'uses' => 'FutureLesson\Client\LoginController@registration_invite'
+		]);
+
 		Routes::post('/update-user-session', [ 
 				'as' => 'client.update_user_session'
 				, 'uses' => 'FutureLesson\Client\ProfileController@update_session'

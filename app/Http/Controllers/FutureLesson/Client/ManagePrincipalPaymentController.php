@@ -32,4 +32,34 @@ class ManagePrincipalPaymentController extends Controller{
 	{
 		return view('client.principal.payment.partials.add_payment_form');
 	}
+
+	/**
+	* @return Principal View Partial Payment Form
+	*/
+	public function view_payment_form() 
+	{
+		return view('client.principal.payment.partials.view_payment_details');
+	}
+
+	public function payment_success() 
+	{
+		$input = Input::only('token', 'paymentId');
+
+		if(!($input['token'] || $input['paymentId'])) {
+			return redirect()->route('client.principal.payment.index');
+		}
+
+		return view('client.partials.success_payment');
+	}
+
+	public function payment_fail() 
+	{
+		$input = Input::only('token');
+
+		if(!$input['token']) {
+			return redirect()->route('client.principal.payment.index');
+		}
+
+		return view('client.partials.fail_payment');
+	}
 }

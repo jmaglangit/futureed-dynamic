@@ -84,14 +84,19 @@ class ClientTeacherRegistrationController extends ApiController
 			'password',
 			'first_name',
 			'last_name',
-			'address',
+			'street_address',
 			'city',
 			'state',
 			'country',
 			'country_id',
+			'zip',
 			'callback_uri'
 
 		]);
+
+        //apply name on user table.
+        $name = ['name' => $input['first_name'].' '.$input['last_name']];
+        $input = array_merge($input, $name);
 
 		//apply code
 		$input = array_merge($input, $this->code->getCodeExpiry());
@@ -109,6 +114,9 @@ class ClientTeacherRegistrationController extends ApiController
 
 			//send email to teacher
 			$this->mail->sendTeacherRegistration($data);
+
+			//removed registration token.
+			$this->user->deleteRegistrationToken($data->user->id);
 
 			return $this->respondWithData($data);
 

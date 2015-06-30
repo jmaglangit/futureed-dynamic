@@ -21,7 +21,7 @@ function manageClientService($http) {
 			method 	: Constants.METHOD_GET
 			, url 	: manageClientApiUrl + 'client?name=' + search_name
 				+ "&email=" + search_email
-				+ "&school_code=" + search_school
+				+ "&school=" + search_school
 				+ "&client_role=" + search_client_role
 				+ "&limit=" + table.size
 				+ "&offset=" + table.offset

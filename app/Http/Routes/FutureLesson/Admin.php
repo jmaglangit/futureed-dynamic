@@ -1,5 +1,5 @@
 <?php 
-	Routes::group(['prefix' => '/admin'], function()
+	Routes::group(['prefix' => '/peaches'], function()
 	{
 		Routes::get('/', 'FutureLesson\Admin\LoginController@index');
 		Routes::get('/password/forgot',[
@@ -156,6 +156,48 @@
 						, 'middleware' => 'admin'
 						, 'uses' => $manage_client_controller . '@delete_client_form'
 					]);
+				});
+			});
+			
+			/**
+			*STUDENT Routes
+			*/
+			Routes::group(['prefix' => '/student'], function(){
+				$manage_student_controller = 'FutureLesson\Admin\ManageStudentController';
+
+				Routes::get('/',
+					[
+						'as' => 'admin.manage.student.index'
+						, 'middleware' => 'admin'
+						, 'uses' => $manage_student_controller . '@index'
+					]);
+				Routes::group(['prefix' => '/partials'], function(){
+					$manage_student_controller = 'FutureLesson\Admin\ManageStudentController';
+
+					Routes::get('/list_student_form',
+						[
+							'as' => 'admin.manage.student.partials.list_student_form'
+							, 'middleware' => 'admin'
+							, 'uses' => $manage_student_controller . '@list_student_form'
+						]);
+					Routes::get('/add_student_form',
+						[
+							'as' => 'admin.manage.student.partials.add_student_form'
+							, 'middleware' => 'admin'
+							, 'uses' => $manage_student_controller . '@add_student_form'
+						]);
+					Routes::get('/view_student_form',
+						[
+							'as' => 'admin.manage.student.partials.view_student_form'
+							, 'middleware' => 'admin'
+							, 'uses' => $manage_student_controller . '@view_student_form'
+						]);
+					Routes::get('/delete_student_form',
+						[
+							'as' => 'admin.manage.student.partials.delete_student_form'
+							, 'middleware' => 'admin'
+							, 'uses' => $manage_student_controller . '@delete_student_form'
+						]);
 				});
 			});
 

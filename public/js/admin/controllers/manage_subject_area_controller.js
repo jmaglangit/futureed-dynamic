@@ -66,6 +66,7 @@ function ManageSubjectAreaController($scope, apiService, manageSubjectAreaServic
 
 	self.list = function() {
 		self.errors = Constants.FALSE;
+		self.records = {};
 		self.search.subject_id = self.record.subject_id;
 		self.table.loading = Constants.TRUE;
 
@@ -90,11 +91,13 @@ function ManageSubjectAreaController($scope, apiService, manageSubjectAreaServic
 		});
 	}
 
-	self.searchFnc = function() {
+	self.searchFnc = function(event) {
 		self.errors = Constants.FALSE;
 		self.delete_area = {};
 
 		self.list();
+		event = getEvent(event);
+		event.preventDefault();
 	}
 
 	self.clear = function() {

@@ -33,9 +33,6 @@ function ProfileController($scope, apiService, clientProfileApiService) {
 	    self.password_changed = Constants.FALSE;
 	    self.email_confirmed = Constants.FALSE;
 
-	    $scope.$parent.u_error = Constants.FALSE;
-		$scope.$parent.u_success = Constants.FALSE;
-
 		self.active_index = Constants.FALSE;
 	    self.active_edit = Constants.FALSE;
 	    self.active_password = Constants.FALSE;
@@ -141,8 +138,6 @@ function ProfileController($scope, apiService, clientProfileApiService) {
 		if(self.validation.u_error) {
 			$("html, body").animate({ scrollTop: 0 }, "slow");
 		} else {
-			$scope.$parent.u_error = Constants.FALSE;
-			$scope.$parent.u_success = Constants.FALSE;
 			$('input, select').removeClass('required-field');
 
 			$scope.ui_block();
@@ -156,8 +151,8 @@ function ProfileController($scope, apiService, clientProfileApiService) {
 			              $("#client_profile_form select[name='" + value.field +"']").addClass("required-field");
 			            });
 					} else if(response.data) {
-						$scope.$parent.user = response.data;
-
+						self.prof = {};
+						$scope.user = response.data;
 						clientProfileApiService.updateUserSession(response.data).success(function(response) {
 			              self.setClientProfileActive(Constants.INDEX);
 			              self.success = Constants.TRUE;

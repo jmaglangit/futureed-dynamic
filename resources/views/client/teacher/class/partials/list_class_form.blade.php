@@ -11,7 +11,13 @@
 		</div>
 
 		<div class="form-search">
-			<form ng-submit="class.searchFnc($event)" class="form-horizontal">
+			{!! Form::open(
+					array(
+						'id' => 'search_form',
+						'class' => 'form-horizontal'
+						, 'ng-submit' => 'class.searchFnc($event)'
+					)
+			) !!}
 				<div class="form-group">
 					<div class="col-xs-4">
 						{!! Form::text('name', ''
@@ -26,14 +32,14 @@
 					<div class="col-md-4" ng-init="class.getGradeLevel()">
 	                    <select name="grade_id" class="form-control" ng-disabled="class.grades.length <= 0" ng-model="class.search.grade_id">
 	                        <option value="">-- Select Level --</option>
-	                        <option ng-repeat="grade in class.grades" value="{! grade.id !}">{! grade.name !}</option>
+	                        <option ng-repeat="grade in class.grades" ng-value="grade.id">{! grade.name !}</option>
 	                    </select>
 	                </div>
 					<div class="col-xs-2">
 						{!! Form::button('Search', 
 							array(
 								'class' => 'btn btn-blue'
-								, 'ng-click' => 'class.searchFnc()'
+								, 'ng-click' => 'class.searchFnc($event)'
 							)
 						) !!}
 					</div>

@@ -17,72 +17,76 @@
         </div>
     </div>
 
-	<div class="col-xs-12 module-container">
-		<div class="col-xs-4 col-xs-offset-3">
-			{!! Form::radio('add'
-				, '1'
-				, true
-				, array(
-					'id' => 'existing_student'
-					, 'ng-model' => 'class.add_existing_student'
-					, 'ng-click' => 'class.display()'
-				)
-			) !!}
-			<span class="lbl padding-8" for="existing_student">Existing Student</span>
-		</div>
-
-		<div class="col-xs-3">
-			{!! Form::radio('add'
-				, '0'
-				, false
-				, array(
-					  'id' => 'new_student'
-					, 'ng-model' => 'class.add_existing_student'
-					, 'ng-click' => 'class.display()'
-				)	
-			) !!}
-			<span class="lbl padding-8" for="new_student">New Student</span>
-		</div>
+	<div class="module-container">
+        <div class="col-xs-6  col-xs-offset-2"> 
+            <label class="cursor-pointer">
+            {!! Form::radio('status'
+                , false
+                , false
+                , array(
+                    'ng-model' => 'class.add_existing_student'
+                    , 'ng-change' => 'class.clearData()'
+                )
+            ) !!}
+            <span class="lbl padding-8">New Student</span>
+            </label>
+        </div>
+        <div>
+            <label class="cursor-pointer">
+            {!! Form::radio('status'
+                , true
+                , true
+                , array(
+                    'ng-model' => 'class.add_existing_student'
+                    , 'ng-change' => 'class.clearData()'
+                )
+            ) !!}
+            <span class="lbl padding-8">Existing Student</span>
+            </label>
+        </div>
 	</div>
 
-	<div class="col-xs-12 module-container" ng-if="class.add_existing_student">
+	<div class="col-xs-12" ng-if="class.add_existing_student">
 		{!! Form::open(
 			[
 				'id' => 'add_existing_student',
 				'class' => 'form-horizontal'
 			]
 		) !!}
-		
-		<div class="form-group">
-				<div class="col-xs-2">
-					<label class="control-label">Email Address </label>
-				</div>
-				<div class="col-xs-5">
-					{!! Form::text('email', ''
-						, array(
-							'class' => 'form-control'
-							, 'ng-model' => 'class.record.email'
-							, 'placeholder' => 'Email Address'
-							, 'autocomplete' => 'off'
-						)
-					) !!}
-				</div>
-		</div>
-		<div class="btn-container col-xs-5 col-xs-offset-2">
-			{!! Form::button('Add'
-				, array(
-					'class' => 'btn btn-blue btn-medium'
-					, 'ng-click' => 'class.addExistingStudent()'
-				)
-			) !!}
+            <fieldset>
+                <legend>User Credential</legend>
+                <div class="form-group">
+                    <label for="" class="col-md-3 control-label">Email Address <span class="required">*</span></label>
+                    <div class="col-xs-4">
+                        {!! Form::text('email', ''
+                            , array(
+                                'class' => 'form-control'
+                                , 'ng-model' => 'class.add.email'
+                                , 'placeholder' => 'Email Address'
+                                , 'ng-class' => "{ 'required-field' : class.fields['email'] }"
+                                , 'autocomplete' => 'off'
+                            )
+                        ) !!}
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <div class="btn-container col-xs-5 col-xs-offset-2">
+                    {!! Form::button('Add'
+                        , array(
+                            'class' => 'btn btn-blue btn-medium'
+                            , 'ng-click' => 'class.addExistingStudent()'
+                        )
+                    ) !!}
 
-			{!! Form::button('Cancel'
-				, array(
-					'class' => 'btn btn-gold btn-medium'
-					, 'ng-click' => "class.setActive('view', class.record.id)"
-				)
-			) !!}
-		</div>
+                    {!! Form::button('Cancel'
+                        , array(
+                            'class' => 'btn btn-gold btn-medium'
+                            , 'ng-click' => "class.setActive('view', class.record.id)"
+                        )
+                    ) !!}
+                </div>
+            </fieldset> 
 		{!! Form::close() !!}
 	</div>
 
@@ -107,6 +111,7 @@
                             , 'ng-model-options' => "{ debounce : { 'default' : 1000 } }"
                             , 'ng-class' => "{ 'required-field' : class.fields['username'] }"
                             , 'ng-change' => "class.validateUsername()"
+                            , 'autocomplete' => 'off'
                         )
                     ) !!}
                 </div>
@@ -117,7 +122,7 @@
                 </div>
             </div> 
             <div class="form-group">
-                <label for="" class="col-md-3 control-label">Email <span class="required">*</span></label>
+                <label for="" class="col-md-3 control-label">Email Address <span class="required">*</span></label>
                 <div class="col-md-4">
                     {!! Form::text('email', ''
                         , array(
@@ -127,6 +132,7 @@
                             , 'ng-model-options' => "{ debounce : { 'default' : 1000 } }"
                             , 'ng-class' => "{ 'required-field' : class.fields['email'] }"
                             , 'ng-change' => "class.validateEmail()"
+                            , 'autocomplete' => 'off'
                         )
                     ) !!}
                 </div>
@@ -140,14 +146,16 @@
         <fieldset>
             <legend>Personal Information</legend>
             <div class="form-group">
-                <label for="" class="col-md-3 control-label">First Name <span ng-class="required">*</span></label>
+                <label for="" class="col-md-3 control-label">First Name <span class="required">*</span></label>
                 <div class="col-md-4">
                     {!! Form::text('first_name', ''
                         , array(
                             'class' => 'form-control'
                             , 'ng-class' => "{ 'required-field' : class.fields['first_name'] }"
                             , 'placeholder' => 'First Name' 
-                            , 'ng-model' => 'class.add.first_name')
+                            , 'ng-model' => 'class.add.first_name'
+                            , 'autocomplete' => 'off'
+                        )
                     ) !!}
                 </div>
             </div>
@@ -159,7 +167,9 @@
                             'class' => 'form-control'
                             , 'ng-class' => "{ 'required-field' : class.fields['last_name'] }"
                             , 'placeholder' => 'Last Name' 
-                            , 'ng-model' => 'class.add.last_name')
+                            , 'ng-model' => 'class.add.last_name'
+                            , 'autocomplete' => 'off'
+                        )
                     ) !!}
                 </div>
             </div>
@@ -192,7 +202,7 @@
                         </div>
                       </a>
                       <ul class="dropdown-menu date-dropdown-menu" role="menu" aria-labelledby="dLabel">
-                        <datetimepicker data-ng-model="class.add.birth" data-ng-change="class.updateBirthday()" data-before-render="beforeDateRender($dates)" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', startView:'day', minView:'day' }"/>
+                        <datetimepicker data-ng-model="class.add.birth" data-before-render="beforeDateRender($dates)" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', startView:'day', minView:'day' }"/>
                       </ul>
                     </div>
                 </div>
@@ -211,7 +221,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="" class="col-md-3 control-label">State <span class="required">*</span></label>
+                <label for="" class="col-md-3 control-label">State</label>
                 <div class="col-md-4">
                     {!! Form::text('state', ''
                         , array(
@@ -226,9 +236,9 @@
             <div class="form-group" ng-init="getCountries()">
                 <label for="" class="col-md-3 control-label">Country <span class="required">*</span></label>
                 <div class="col-md-4">
-                    <select name="country" class="form-control" ng-class="{ 'required-field' : class.fields['country'] }" ng-model="class.add.country" ng-change="getGrades(reg.country)">
-                        <option value="">-- Select Country --</option>
-                        <option ng-repeat="country in countries" value="{! country.name !}">{! country.name!}</option>
+                    <select name="country_id" class="form-control" ng-disabled="true" ng-class="{ 'required-field' : class.fields['country'] }" ng-model="class.add.country_id" ng-change="getGrades(reg.country_id">
+                        <option ng-selected="class.add.country_id == futureed.FALSE" value="">-- Select Country --</option>
+                        <option ng-selected="class.add.country_id == country.id" ng-repeat="country in countries" ng-value="country.id">{! country.name!}</option>
                     </select>
                 </div>
             </div>
@@ -238,23 +248,23 @@
             <div class="form-group">
                 <label for="" class="col-md-3 control-label">School Name <span class="required">*</span></label>
                 <div class="col-md-4">
-                    {!! Form::text('school_code', ''
+                    {!! Form::text('school_name', ''
                         , array(
                             'class' => 'form-control'
                             , 'ng-disabled'=>'true'
-                            , 'ng-model' => 'class.add.school_code'
-                            , 'ng-class' => "{ 'required-field' : class.fields['school_code'] }"
+                            , 'ng-model' => 'class.add.school_name'
+                            , 'ng-class' => "{ 'required-field' : class.fields['school_name'] || class.fields['school_code'] }"
                         )
                     ) !!}
                 </div>
             </div>
-            <div class="form-group" ng-init="getGradeLevel()">
+            <div class="form-group">
                 <label for="" class="col-md-3 control-label">School level <span class="required">*</span></label>
 
-                <div class="col-md-4 nullable">
+                <div class="col-md-4 nullable" ng-init="class.getGradeLevel(class.add.country_id)">
                     <select name="grade_code" class="form-control" ng-disabled="true" ng-class="{ 'required-field' : class.fields['grade_code'] }" ng-model="class.add.grade_codse">
                         <option value="">-- Select Level --</option>
-                        <option ng-selected="class.add.grade_code == grade.code" ng-repeat="grade in grades" value="{! grade.code !}">{! grade.name !}</option>
+                        <option ng-selected="class.add.grade_code == grade.code" ng-repeat="grade in class.grades" ng-value="grade.code">{! grade.name !}</option>
                     </select>
                 </div>
             </div>    

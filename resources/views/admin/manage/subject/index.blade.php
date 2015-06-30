@@ -39,8 +39,12 @@
 @section('scripts')
 	{!! Html::script('/js/admin/constants/manage_subject_constants.js')!!}
 	{!! Html::script('/js/admin/manage_subject.js')!!}
+	
 	{!! Html::script('/js/admin/controllers/manage_subject_controller.js')!!}
 	{!! Html::script('/js/admin/services/manage_subject_service.js')!!}
+
 	{!! Html::script('/js/admin/controllers/manage_subject_area_controller.js')!!}
 	{!! Html::script('/js/admin/services/manage_subject_area_service.js')!!}
+
+	{!! Html::script('/js/common/search_service.js')!!}
 @stop

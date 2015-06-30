@@ -101,10 +101,14 @@ class ClassroomController extends ApiController {
      */
     public function update($id, ClassroomRequest $request)
     {
-        //can only update the name
-        $input['name'] = $request->get('name');
-
-
+        //KH# 603: User can edit classroom in an invoice.
+        switch($request->route()->getName()){
+            case "api.v1.classroom.update":
+                $input = $request->only('name');
+                break;
+            default:
+                $input = $request->all();
+        }
         return $this->respondWithData($this->classroom->updateClassroom($id,$input));
     }
 
@@ -128,5 +132,4 @@ class ClassroomController extends ApiController {
     public function deleteClassroomByOrderNo($order_no){
         return $this->respondWithData($this->classroom->deleteClassroomByOrderNo($order_no));
     }
-
 }

@@ -147,7 +147,7 @@
             </div>
         </div>
         <div class="form-group">
-            <label for="" class="col-md-2 control-label">State <span class="required">*</span></label>
+            <label for="" class="col-md-2 control-label">State</span></label>
             <div class="col-md-5">
             	{!! Form::text('state', ''
                     , array(
@@ -167,8 +167,8 @@
                     ng-change="profile.setCountryGrade()" 
                     ng-disabled="!profile.active_edit"
                     ng-class="{ 'required-field' : profile.fields['country_id'] || profile.fields['country']}">
-                    <option value="">-- Select Country --</option>
-                    <option ng-repeat="country in countries" ng-selected="profile.prof.country_id == country.id" value="{! country.id !}">{! country.name !}</option>
+                    <option ng-selected="profile.prof.country_id == futureed.FALSE" value="">-- Select Country --</option>
+                    <option ng-selected="profile.prof.country_id == country.id" ng-repeat="country in countries" ng-value="country.id">{! country.name !}</option>
                 </select>
             </div>
         </div>
@@ -197,7 +197,7 @@
                 ng-disabled="!profile.active_edit || profile.grades.length <= 0"
                 ng-class="{ 'required-field' : profile.fields['grade_code']}">
                 <option value="">-- Select Level --</option>
-                <option ng-selected="profile.prof.grade_code == grade.code" ng-repeat="grade in profile.grades" value="{! grade.code !}">{! grade.name !}</option>
+                <option ng-selected="profile.prof.grade_code == grade.code" ng-repeat="grade in profile.grades" ng-value="grade.code">{! grade.name !}</option>
             </select>
         </div><br><br>
     </div>   

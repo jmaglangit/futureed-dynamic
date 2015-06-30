@@ -50,7 +50,7 @@
 			{!! Form::button('Cancel'
 				, array(
 					'class' => 'btn btn-gold btn-medium'
-					, 'ng-click' => "admin.setManageAdminActive('view')"
+					, 'ng-click' => "admin.viewAdmin(admin.admininfo.id)"
 				)
 			) !!}
 		</div>

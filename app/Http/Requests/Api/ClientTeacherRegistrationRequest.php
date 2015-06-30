@@ -54,25 +54,27 @@ class ClientTeacherRegistrationRequest extends ApiRequest
 					'email' => 'required|email',
 					'username' => "required|min:8|max:32|alpha_num|unique:users,username,$user_id,id,user_type,$client,deleted_at,NULL",
 					'password' => 'required|custom_password',
-					'first_name' => 'required|regex:/^([a-z\x20])+$/i|max:64',
-					'last_name' => 'required|regex:/^([a-z\x20])+$/i|max:64',
+					'first_name' => 'required|regex:'. config('regex.name') .'|max:64',
+					'last_name' => 'required|regex:'. config('regex.name') .'|max:64',
 					'street_address' => 'required|string',
 					'city' => 'required|string',
 					'state' => 'required|string',
 					'country' => 'exists:countries,name',
 					'country_id' => 'required|exists:countries,id',
+					'zip' => 'max:10|regex:'. config('regex.zip_code'),
 					'callback_uri' => 'required|string',
+					'registration_token' => "required|exists:users,registration_token,deleted_at,NULL"
 				];
 				break;
 
 			case 'POST':
 			default:
 				return [
-					'email' => 'required',
-					'username' => 'required',
+					'email' => 'required|email',
+					'username' => 'required|alpha_num',
 					'password' => 'required',
-					'first_name' => 'required',
-					'last_name' => 'required',
+					'first_name' => 'required|regex:'. config('regex.name'),
+					'last_name' => 'required|regex:'. config('regex.name') ,
 					'role' => 'required',
 					'address' => 'required',
 					'city' => 'required',
@@ -85,7 +87,8 @@ class ClientTeacherRegistrationRequest extends ApiRequest
 	{
 
 		return [
-			'custom_password' => config('futureed-error.error_messages.2112')
+			'custom_password' => config('futureed-error.error_messages.2112'),
+			'country_id.required' => config('futureed-error.error_messages.2041')
 		];
 	}
 

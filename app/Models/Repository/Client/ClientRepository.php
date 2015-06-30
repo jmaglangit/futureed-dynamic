@@ -29,11 +29,10 @@ class ClientRepository implements ClientRepositoryInterface
 
         $client = new Client();
 
-        return $client->with('user')
-            ->id($id)
+        return $client->with('user','school')
             ->role(config('futureed.teacher'))
             ->registrationtoken($registration_token)
-            ->get();
+            ->find($id);
 
     }
 
@@ -55,28 +54,20 @@ class ClientRepository implements ClientRepositoryInterface
 
     public function addClient($client)
     {
+		$client['country_id'] = isset($client['country_id']) ? $client['country_id'] : 0;
 
         try {
-            Client::insert([
-                'user_id' => $client['user_id'],
-                'first_name' => $client['first_name'],
-                'last_name' => $client['last_name'],
-                'client_role' => $client['client_role'],
-                'school_code' => $client['school_code'],
-                'street_address' => $client['street_address'],
-                'city' => $client['city'],
-                'state' => $client['state'],
-                'country_id' => ((isset($client['country_id'])) ? $client['country_id'] : 0),
-                'country' => $client['country'],
-                'zip' => $client['zip'],
-                'account_status' => (isset($client['account_status'])) ? $client['account_status'] : config('futureed.client_account_status_pending'),
-                'created_by' => 1,
-                'updated_by' => 1,
-            ]);
+
+			$client =  Client::create($client);
+
+
+			return $client;
+
+
         } catch (Exception $e) {
             return $e->getMessage();
         }
-        return true;
+
     }
 
     public function getClientId($user_id)
@@ -105,24 +96,12 @@ class ClientRepository implements ClientRepositoryInterface
 
     }
 
-    public function updateClientDetails($id, $clientData)
+    public function updateClientDetails($id, $client)
     {
-
-        foreach ($clientData as $key => $value) {
-            if ($value != null) {
-
-                $update[$key] = $value;
-
-            } else {
-
-                $update[$key] = null;
-
-            }
-        }
 
         try {
 
-            Client::where('id', $id)->update($update);
+            Client::where('id', $id)->update($client);
 
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
@@ -150,13 +129,14 @@ class ClientRepository implements ClientRepositoryInterface
             $data['password'] =  (!isset($data['password'])) ?: sha1($data['password']);
 
             //TODO: to be updated through relationships.
+
             $user = User::find($client)->update($data);
 
             $client = Client::find($id)->update($data);
 
             if($user && $client){
 
-                return Client::with('user')->find($id);
+                return Client::with('user','school')->find($id);
             }
 
 
@@ -210,6 +190,10 @@ class ClientRepository implements ClientRepositoryInterface
                 if (isset($criteria['school'])) {
                     $clients = $clients->school_name($criteria['school']);
                 }
+
+				if (isset($criteria['school_code'])) {
+					$clients = $clients->schoolcode($criteria['school_code']);
+				}
             }
 
             $count = $clients->count();
@@ -240,7 +224,7 @@ class ClientRepository implements ClientRepositoryInterface
 
             $client_role = explode(',',$criteria['client_role'] );
 
-            $clients = $clients->clientRole($client_role);
+            $clients = $clients->role($client_role);
         }
 
         if (isset($criteria['name'])) {
@@ -254,50 +238,56 @@ class ClientRepository implements ClientRepositoryInterface
 
     }
 
-    public function getTeacherDetails($criteria = array(), $limit = 0, $offset = 0)
-    {
+	public function getTeacherDetails($criteria = array(), $limit = 0, $offset = 0)
+	{
 
 
-        $clients = new Client();
+		$clients = new Client();
 
-        $clients = $clients->teacher();
+		$clients = $clients->teacher();
 
-        $count = 0;
+		$count = 0;
 
-        if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
+		if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
 
-            $count = $clients->count();
+			$count = $clients->count();
 
-        } else {
+		} else {
 
-            if (count($criteria) > 0) {
+			if (count($criteria) > 0) {
 
-                if (isset($criteria['name'])) {
+				if (isset($criteria['name'])) {
 
-                    $clients = $clients->name($criteria['name']);
+					$clients = $clients->name($criteria['name']);
 
-                }
+				}
 
-                if (isset($criteria['email'])) {
+				if (isset($criteria['email'])) {
 
-                    $clients = $clients->email($criteria['email']);
+					$clients = $clients->email($criteria['email']);
 
-                }
-            }
+				}
 
-            $count = $clients->count();
+				if (isset($criteria['school_code'])) {
 
-            if ($limit > 0 && $offset >= 0) {
-                $clients = $clients->offset($offset)->limit($limit);;
-            }
+					$clients = $clients->schoolcode($criteria['school_code']);
 
-        }
+				}
+			}
 
-        $clients = $clients->with('user')->orderBy('first_name', 'asc');
+			$count = $clients->count();
 
-        return ['total' => $count, 'records' => $clients->get()->toArray()];
+			if ($limit > 0 && $offset >= 0) {
+				$clients = $clients->offset($offset)->limit($limit);;
+			}
 
-    }
+		}
+
+		$clients = $clients->with('user')->orderBy('first_name', 'asc');
+
+		return ['total' => $count, 'records' => $clients->get()->toArray()];
+
+	}
 
     public function getClientByUserId($id)
     {
@@ -386,4 +376,9 @@ class ClientRepository implements ClientRepositoryInterface
 
         return $clients;
     }
+
+	public function getSchoolCode($id){
+
+		return Client::id($id)->pluck('school_code');
+	}
 }

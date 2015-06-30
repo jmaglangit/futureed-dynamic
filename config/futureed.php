@@ -31,18 +31,23 @@ return [
 	//thumbnial folder
 	'thumbnail' => 'images/thumbnail',
 
+	//mail change password
+	'subject_change_password' => '{user} Change Password',
+	'subject_resend_change_password' => 'Resending: {user} Change Password',
+
 	//mail forgot password
-	'subject_forgot' => 'Forgot Password',
-	'subject_forgot_resend' => 'Resending: Forgot Password',
+	'subject_forgot' => '{user} Forgot Password',
+	'subject_forgot_resend' => 'Resending: {user} Forgot Password',
+
 
 	//mail register
 	'subject_register' => 'Welcome to Future Lesson!',
-	'subject_reg_resend' => 'Resending: Email Confirmation',
+	'subject_reg_resend' => 'Resending: {user} Email Confirmation',
 
 	//new email
 
-	'subject_change_email' => 'Change Email',
-	'subject_email_resend' => 'Resending: Change Email',
+	'subject_change_email' => '{user} Change Email',
+	'subject_email_resend' => 'Resending: {user} Change Email',
 
 	'admin_delete_threshold' => 3,
 
@@ -54,11 +59,10 @@ return [
 	'first_name_max' => 64,
 	'last_name_max' => 64,
 
-	#client account status
+	#client account status 
 	'client_account_status_pending' => 'Pending',
 	'client_account_status_accepted' => 'Accepted',
 	'client_account_status_rejected' => 'Rejected',
-
 
 	//Default country
 	'default_country' => 840, //United States
@@ -76,10 +80,13 @@ return [
 	'user_disabled' => 'Disabled',
 	'user_enabled' => 'Enabled',
 
-    //order no. zero fill constants
-    'client_id_zero_fill' => 4,
-    'order_id_zero_fill' => 6,
-    'invoice_id_zero_fill' => 10
+	//order no. zero fill constants
+	'client_id_zero_fill' => 4,
+	'order_id_zero_fill' => 6,
+	'invoice_id_zero_fill' => 10,
+
+	//Parent invite student subject
+	'invite_student' => 'You have been invited by a Parent!',
 
 
 ];

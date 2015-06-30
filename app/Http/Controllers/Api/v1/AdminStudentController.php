@@ -94,6 +94,11 @@ class AdminStudentController extends ApiController {
 			$user['confirmation_code'] = $code['confirmation_code'];
 			$user['confirmation_code_expiry'] = $code['confirmation_code_expiry'];
 
+			//for home based student
+			if($student['school_code'] == NULL){
+				$student['school_code'] = 0;
+			}
+
 			//add user
 			$this->user->addUser($user);
 
@@ -147,11 +152,30 @@ class AdminStudentController extends ApiController {
 
 			$user['name'] = $data['first_name'].$data['last_name'];
 
+
 			$student = $this->student->viewStudent($id);
 
 			if(!$student){
 
 				return $this->respondErrorMessage(2001);
+			}
+
+			//check if subscription is expired or not, if not it returns a data
+			$subscription = $this->student->subscriptionExpired($id);
+
+			//for home based student
+			if($data['school_code'] == NULL){
+				$data['school_code'] = 0;
+			}
+
+			if($subscription){
+
+				if($data['school_code']!= $student['school_code']){
+
+					return $this->respondErrorMessage(2134);
+
+				}
+
 			}
 
 			//update user

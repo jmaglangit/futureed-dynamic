@@ -1,6 +1,7 @@
 angular.module('futureed.controllers', [])
 	.controller('futureedController', FutureedController)
-	.directive('templateDirective', TemplateDirective);
+	.directive('templateDirective', TemplateDirective)
+	.constant("futureed", Constants);
 
 function TemplateDirective() {
 	return {
@@ -10,7 +11,8 @@ function TemplateDirective() {
 	}
 }
 
-function FutureedController($scope, apiService) {
+function FutureedController($scope, apiService, futureed) {
+	$scope.futureed = futureed;
 	$scope.display_date = new Date();
 	
 	/**
@@ -23,16 +25,13 @@ function FutureedController($scope, apiService) {
 
 	$scope.goHome = goHome;
 	$scope.highlight = highlight;
-	$scope.getCountries = getCountries;
-	$scope.getGradeLevel = getGradeLevel;
 	$scope.checkAvailability = checkAvailability;
 	$scope.checkEmailAvailability = checkEmailAvailability;
 	$scope.getAnnouncement = getAnnouncement;
-	$scope.getGrades = getGrades;
-	$scope.getCountryId = getCountryId;
 
 	$scope.beforeDateRender = beforeDateRender;
 
+	$scope.checkRegistration = checkRegistration;
 	function beforeDateRender($dates){
 		maxDate = new Date().setHours(0,0,0,0); // Set minimum date to whatever you want here
 
@@ -99,7 +98,7 @@ function FutureedController($scope, apiService) {
 	/**
 	* Retrieves a list of countries
 	*/
-	function getCountries() {
+	$scope.getCountries = function() {
 		$scope.countries = Constants.FALSE;
 
 		apiService.getCountries().success(function(response) {
@@ -114,20 +113,11 @@ function FutureedController($scope, apiService) {
 			$scope.internalError();
 		});
 	}
-
-	/**
-	* Retrieves list of Grades by country
-	* function for get grade by country
-	* To be Implemented
-	*/
-	function getGrades(id){
-		
-	}
 	
-	function getGradeLevel() {
+	$scope.getGradeLevel = function(country_id) {
 		$scope.grades = Constants.FALSE;
-		$scope.countryid = ($scope.reg.country_id != null) ? $scope.reg.country_id : 840;
-		apiService.getGradeLevel($scope.countryid).success(function(response) {
+
+		apiService.getGradeLevel(country_id).success(function(response) {
 			if(response.status == Constants.STATUS_OK) {
 				if(response.errors) {
 					$scope.errorHandler(response.errors);
@@ -477,7 +467,7 @@ function FutureedController($scope, apiService) {
 		});
 	}
 
-	function validateRegistration(reg, terms) {
+	function validateRegistration(reg, terms, flag) {
 		$scope.errors = Constants.FALSE;
 		$scope.terms = terms;
 
@@ -503,27 +493,47 @@ function FutureedController($scope, apiService) {
 			$scope.ui_block();
 			$('#registration_form input').removeClass('required-field');
 			$('#registration_form select').removeClass('required-field');
+			if(flag == 'add'){
+				apiService.validateRegistration($scope.reg).success(function(response) {
+					if(response.status == Constants.STATUS_OK) {
+						if(response.errors) {
+							$scope.errorHandler(response.errors);
 
-			apiService.validateRegistration($scope.reg).success(function(response) {
-				if(response.status == Constants.STATUS_OK) {
-					if(response.errors) {
-						$scope.errorHandler(response.errors);
-
-						angular.forEach(response.errors, function(value, key) {
-							$("#registration_form input[name='" + value.field +"']").addClass("required-field");
-							$("#registration_form select[name='" + value.field +"']").addClass("required-field");
-						});
-					} else if(response.data){
-						$scope.success = Constants.TRUE;
-						$scope.email = $scope.reg.email;
+							angular.forEach(response.errors, function(value, key) {
+								$("#registration_form input[name='" + value.field +"']").addClass("required-field");
+								$("#registration_form select[name='" + value.field +"']").addClass("required-field");
+							});
+						} else if(response.data){
+							$scope.success = Constants.TRUE;
+							$scope.email = $scope.reg.email;
+						}
 					}
-				}
+					$scope.ui_unblock();
+				}).error(function(response) {
+					$scope.internalError();
+					$scope.ui_unblock();
+				});
+			}else {
+				apiService.editRegistration($scope.reg).success(function(response) {
+					if(response.status == Constants.STATUS_OK) {
+						if(response.errors) {
+							$scope.errorHandler(response.errors);
 
-				$scope.ui_unblock();
-			}).error(function(response) {
-				$scope.internalError();
-				$scope.ui_unblock();
-			});
+							angular.forEach(response.errors, function(value, key) {
+								$("#registration_form input[name='" + value.field +"']").addClass("required-field");
+								$("#registration_form select[name='" + value.field +"']").addClass("required-field");
+							});
+						} else if(response.data){
+							$scope.success = Constants.TRUE;
+							$scope.email = $scope.reg.email;
+						}
+					}
+					$scope.ui_unblock();
+				}).error(function(response) {
+					$scope.internalError();
+					$scope.ui_unblock();
+				});
+			}
 		}
 	}
 
@@ -763,9 +773,59 @@ function FutureedController($scope, apiService) {
 	* Get Country ID
 	*/
 	function getCountryId(){
-		$scope.reg.countryid = '';
-		$scope.reg.country_id = $('#country').find(':selected').data('id');
+		$scope.reg.country_id = '';
+		$scope.reg.country_id = $('#country_id').find(':selected').data('id');
 		$scope.getGradeLevel();
 
 	}
+
+	function checkRegistration(id, token) {
+		$scope.invited = Constants.FALSE;
+		$scope.edit_registration = Constants.FALSE;
+		if(id != '' && token != ''){
+			$scope.errors = Constants.FALSE;
+
+			apiService.getStudentDetails(id, token).success(function(response){
+				if(angular.equals(response.status, Constants.STATUS_OK)){
+					if(response.errors) {
+						$scope.errors = $scope.errorHandler(response.errors);
+					}else if(response.data){
+						$scope.invited = Constants.TRUE;
+						$scope.reg = response.data[0];
+						$scope.reg.username = $scope.reg.user.username;
+						$scope.reg.email = $scope.reg.user.email;
+						$scope.reg.birth = $scope.reg.birth_date;
+						$scope.reg.school_name = $scope.reg.school.name;
+						$scope.getGradeLevel($scope.reg.grade_code);
+						$scope.edit_registration = Constants.TRUE;
+					}
+				}
+			}).error(function(response){
+				$scope.internalError();
+			});
+		}
+	}
+
+	$scope.setCountryGrade = setCountryGrade;
+	function setCountryGrade() {
+	  	// Set Grade Code to empty string
+	  	$scope.grade_code = Constants.EMPTY_STR;
+	  	$scope.getGradeLevel($scope.reg.country_id);
+
+	  	// Get Country details, set country name
+	  	$scope.country = Constants.EMPTY_STR;
+		apiService.getCountryDetails($scope.reg.country_id).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					$scope.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					if(response.data.length) {
+						$scope.country = response.data[0].name;
+					}
+				}
+			}
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+		});
+	  }
 };

@@ -29,12 +29,12 @@ class UserRepository implements UserRepositoryInterface {
             ,'password'
             ,'name'
             ,'user_type'
-            ,'status');
+            ,'status')->where('id',$id);
 
-        $user->where('id','=',$id);
+
 
         if($user_type <> 'all'){
-            $user->where('user_type','=',$user_type);
+            $user->where('user_type',$user_type);
         }
 
         return $user->first();
@@ -52,7 +52,7 @@ class UserRepository implements UserRepositoryInterface {
 
         try{
 
-            User::create([
+            return User::create([
                 'username' => $user['username'],
                 'email' => $user['email'],
                 'name' => $user['first_name'] .' '.$user['last_name'],
@@ -69,7 +69,7 @@ class UserRepository implements UserRepositoryInterface {
         }catch(Exception $e){
             return $e->getMessage();
         }
-        return true;
+
     }
 
     public function updateUser($id, $data) {
@@ -130,6 +130,12 @@ class UserRepository implements UserRepositoryInterface {
         return User::where('id','=',$id)->pluck('is_account_deleted');
 
     }
+
+	public function accountStatus($id){
+
+		return User::where('id','=',$id)->pluck('status');
+
+	}
 
     public function addLoginAttempt($id){
         $attempt = $this->getLoginAttempts($id);
@@ -295,7 +301,8 @@ class UserRepository implements UserRepositoryInterface {
 
             User::where('id',$id)->update([
                 'username' => $username['username'],
-                'name' => $username['name']
+                'name' => $username['name'],
+                'email'=>$username['email']
             ]);
 
         } catch (Exception $e){
@@ -372,6 +379,49 @@ class UserRepository implements UserRepositoryInterface {
             throw new Exception($e->getMessage());
         }
     }
+
+	/**
+	 * Add Registration Token.
+	 * @param $id
+	 * @param $registration_token
+	 * @throws Exception
+	 */
+	public function addRegistrationToken($id,$registration_token){
+
+		try{
+
+			User::where('id',$id)->update([
+				'registration_token' => $registration_token
+			]);
+
+		} catch (Exception $e){
+
+			throw new Exception($e->getMessage());
+		}
+	}
+
+	/**
+	 * Get Registration Token.
+	 * @param $id
+	 * @return mixed
+	 */
+	public function getRegistrationToken($id){
+
+		return User::select('registration_token')
+			->where('id',$id);
+	}
+
+	/**
+	 * Remove registration token.
+	 * @param $id
+	 * @return mixed
+	 */
+	public function deleteRegistrationToken($id){
+
+		return User::where('id',$id)->update([
+			'registration_token' => NULL
+		]);
+	}
 
 
 

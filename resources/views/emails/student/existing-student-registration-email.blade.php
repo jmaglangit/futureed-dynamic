@@ -5,11 +5,13 @@
 </head>
 <body>
 <div>Hi there {{ $name }},</div>
-<br>
+<br/>
 <div>
     <div>You have been added in {{$class_name}} by Teacher {{$teacher_name}}.
 </div>
-	<div>Your confirmation code : {{ $code  }}. This code will be used by your parent if they want to add you in their dashboard.</div>
+	<div>Regards,</div><br/>
+    <div>Admin</div>
+
 </div>
 </body>
 </html>

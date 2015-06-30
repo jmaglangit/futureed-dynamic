@@ -1,185 +1,215 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
-use FutureEd\Http\Controllers\Controller;
 use FutureEd\Http\Requests;
 use FutureEd\Http\Requests\Api\PaymentRequest;
-
+use FutureEd\Models\Repository\Classroom\ClassroomRepositoryInterface;
+use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
 use FutureEd\Models\Repository\Invoice\InvoiceRepositoryInterface;
-
-use Illuminate\Http\Request;
+use FutureEd\Models\Repository\Order\OrderRepositoryInterface;
+use FutureEd\Services\MailServices;
 use Illuminate\Support\Facades\Input;
-use Illuminate\Support\Facades\URL;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Redirect;
-
-use PayPal\Rest\ApiContext;
-use PayPal\Auth\OAuthTokenCredential;
+use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\URL;
 use PayPal\Api\Amount;
-use PayPal\Api\Details;
+use PayPal\Api\ExecutePayment;
 use PayPal\Api\Item;
 use PayPal\Api\ItemList;
 use PayPal\Api\Payer;
 use PayPal\Api\Payment;
-use PayPal\Api\RedirectUrls;
-use PayPal\Api\ExecutePayment;
 use PayPal\Api\PaymentExecution;
+use PayPal\Api\RedirectUrls;
 use PayPal\Api\Transaction;
+use PayPal\Auth\OAuthTokenCredential;
+use PayPal\Rest\ApiContext;
+use Symfony\Component\Routing\Generator\UrlGenerator;
 
 class PaymentController extends ApiController
 {
-	private $_api_context;
-	protected $invoice;
-	
-	
-	public function __construct(InvoiceRepositoryInterface $invoice)
-	{
-		$paypal_conf = config('paypal');
-		$this->_api_context = new ApiContext(new OAuthTokenCredential($paypal_conf['client_id'], $paypal_conf['secret']));
-		$this->_api_context->setConfig($paypal_conf['settings']);
-		$this->invoice = $invoice;
-	}
-	/**
-	* 	Post payment to Paypal portal
-	*	@params $request object
-	*	@return callback_uri
-	*/
-	public function postPayment(PaymentRequest $request)
-	{	
-		$data = $request->all();
-		
-		$payer = new Payer();
-		$payer->setPaymentMethod('paypal');
+    private $_api_context;
+    protected $invoice;
+    protected $email;
+    protected $classroom;
+    protected $client;
+    protected $order;
 
-		$item_1 = new Item();
-		$item_1->setName('Payment for Future Lesson Seats')->setCurrency('USD')->setQuantity($data['quantity'])->setPrice($data['total_amount']);
+    public function __construct(InvoiceRepositoryInterface $invoice,
+                                MailServices $email,
+                                ClientRepositoryInterface $client,
+                                ClassroomRepositoryInterface $classroom,
+                                OrderRepositoryInterface $order)
+    {
+        $paypal_conf = config('paypal');
+        $this->_api_context = new ApiContext(new OAuthTokenCredential($paypal_conf['client_id'], $paypal_conf['secret']));
+        $this->_api_context->setConfig($paypal_conf['settings']);
 
-		 	// add item to list
-		$item_list = new ItemList();
-		$item_list->setItems(array($item_1));
+        $this->email = $email;
+        $this->invoice = $invoice;
+        $this->classroom = $classroom;
+        $this->client = $client;
+        $this->order = $order;
+    }
+    /**
+     * 	Post payment to Paypal portal
+     *	@params $request object
+     *	@return callback_uri
+     */
+    public function postPayment(PaymentRequest $request)
+    {
+        $data = $request->all();
+        //default currency to USD.
+        $currency = "USD";
+        $payer = new Payer();
+        $payer->setPaymentMethod('paypal');
 
-		$amount = new Amount();
-		$amount->setCurrency('USD')->setTotal($data['total_amount']);
+        $item_1 = new Item();
+        $item_1->setName('Payment for Future Lesson Seats')->setCurrency($currency)->setQuantity($data['quantity'])->setPrice($data['price']);
 
-		$transaction = new Transaction();
-		$transaction->setAmount($amount)->setItemList($item_list)->setDescription('FutureEd Classes');
+        // add item to list
+        $item_list = new ItemList();
+        $item_list->setItems(array($item_1));
 
-		$redirect_urls = new RedirectUrls();
-		$redirect_urls->setReturnUrl(URL::route('payment.status'))->setCancelUrl(URL::route('payment.status'));
+        $amount = new Amount();
+        $total_amount = $data['quantity'] * $data['price'];
+        $amount->setCurrency($currency)->setTotal($total_amount);
 
-		$payment = new Payment();
-		$payment->setIntent('Sale')->setPayer($payer)->setRedirectUrls($redirect_urls)->setTransactions(array($transaction));
+        $transaction = new Transaction();
+        $transaction->setAmount($amount)->setItemList($item_list)->setDescription('FutureEd Classes');
 
-		try {
-			$payment->create($this->_api_context);
-		} catch (\PayPal\Exception\PPConnectionException $ex) {
-		  	if (\Config::get('app.debug')) {
-				 echo "Exception: " . $ex->getMessage() . PHP_EOL;
-				 $err_data = json_decode($ex->getData(), true);
-				 exit;
-			} else {
-			 	die('Some error occur, sorry for inconvenient');
-			}
-		}
+        $redirect_urls = new RedirectUrls();
+        $redirect_urls->setReturnUrl(URL::route('payment.status'))->setCancelUrl(URL::route('payment.status'));
 
-		foreach($payment->getLinks() as $link) {
-		 	if($link->getRel() == 'approval_url') {
-				 $redirect_url = $link->getHref();
-				 break;
-			}
-		}
+        $payment = new Payment();
+        $payment->setIntent('Sale')->setPayer($payer)->setRedirectUrls($redirect_urls)->setTransactions(array($transaction));
 
-		// add payment ID to session
-	 	Session::put('paypal_payment_id', $payment->getId());
-	 	Session::put('paypal_payment_invoice_id', $data['invoice_id']);
-	
-	 	if(isset($redirect_url)) {
-		 // redirect to paypal
-		 //return Redirect::away($redirect_url);
-		 
-		 	return $this->respondWithData([
-				'status' => 'succcess',
-				'url' => $redirect_url]);
-		}
+        try {
+            $payment->create($this->_api_context);
+        } catch (\PayPal\Exception\PPConnectionException $ex) {
 
-		/*
-		return Redirect::route('original.route')
-					   ->with('error', 'Unknown error occurred');
-		*/
-		 
-		return $this->respondWithData([
-			'status' => 'error',
-			'data' => 'Unknown error occurred']);
-	}
-	
-	/**
-	*	Return uri to be called from Paypal portal
-	*
-	*/
-	
-	public function getPaymentStatus()
-	{
-		// Get the payment ID before session clear
-		$payment_id = Session::get('paypal_payment_id');
-		$invoice_id = Session::get('paypal_payment_invoice_id');
-		
-		 // clear the session payment ID
-		Session::forget('paypal_payment_id');
-		Session::forget('paypal_payment_invoice_id');
-		 
-		if (empty(Input::get('PayerID')) || empty(Input::get('token'))) {
-		 
-		 	//Update invoice status to paid.
-		 	$data['payment_status'] = config('futureed.cancelled');
-		 	$this->invoice->updateInvoice($invoice_id,$data);
-		 	
-			 /*
-			return Redirect::route('original.route')
-							->with('error', 'Payment failed');
-			*/
-				 
-			return $this->respondWithData([
-				'status' => 'error',
-				'data' => 'Payment failed'
-			]);
-		}
-	
-		$payment = Payment::get($payment_id, $this->_api_context);
-	
-		 // PaymentExecution object includes information necessary 
-		 // to execute a PayPal account payment. 
-		 // The payer_id is added to the request query parameters
-		 // when the user is redirected from paypal back to your site
-		$execution = new PaymentExecution();
-		$execution->setPayerId(Input::get('PayerID'));
-	
-		 //Execute the payment
-		$result = $payment->execute($execution, $this->_api_context);
-	
-		// DEBUG RESULT, remove it later
-		//echo '<pre>';print_r($result);echo '</pre>';exit; 
-	
-		if ($result->getState() == 'approved') { // payment made
-		 	//Update invoice status to paid.
-		 	$data['payment_status'] = config('futureed.paid');
-		 	$this->invoice->updateInvoice($invoice_id,$data);
-			 
-			 /*
-				return Redirect::route('original.route') // front-end dev will provide a route here.
-								 ->with('success', 'Payment success');
-				*/
-			return $this->respondWithData([
-				'status' => 'success',
-				'data' => 'Payment success'
-			]);
-		 }
-		 /*
-		return Redirect::route('original.route') // front-end dev will provide a route here.
-					   ->with('error', 'Payment failed');	
-		*/
-	
-	 	return $this->respondWithData([
-				 'status' => 'error',
-				 'data' => 'Payment failed'
-			 ]);
-	}
+            return $this->respondWithData([
+                'status' => 'error',
+                'data' => $ex->getMessage()]);
+        }
+
+        foreach($payment->getLinks() as $link) {
+            if($link->getRel() == 'approval_url') {
+                $redirect_url = $link->getHref();
+                break;
+            }
+        }
+
+        // add payment ID to session
+        Session::put('paypal_payment_id', $payment->getId());
+        Session::put('paypal_payment_invoice_id', $data['invoice_id']);
+
+        Session::put('success_callback_uri', $data['success_callback_uri']);
+        Session::put('fail_callback_uri', $data['fail_callback_uri']);
+
+        if(isset($data['client_id'])){
+            Session::put('paypal_payment_client_id', $data['client_id']);
+            Session::put('paypal_payment_order_no', $data['order_no']);
+        }
+        //dd($redirect_url);
+        if(isset($redirect_url)) {
+            // redirect to paypal
+            //return Redirect::away($redirect_url);
+
+            return $this->respondWithData([
+                'status' => 'succcess',
+                'url' => $redirect_url]);
+        }
+
+        /*
+        return Redirect::route('original.route')
+                       ->with('error', 'Unknown error occurred');
+        */
+
+        return $this->respondWithData([
+            'status' => 'error',
+            'data' => 'Unknown error occurred']);
+    }
+
+    /**
+     *	Return uri to be called from Paypal portal
+     *
+     */
+
+    public function getPaymentStatus()
+    {
+        // Get the payment ID before session clear
+        $payment_id = Session::get('paypal_payment_id');
+        $invoice_id = Session::get('paypal_payment_invoice_id');
+        $order_no = Session::get('paypal_payment_order_no');
+
+        $order_id = $this->order->getOrderByOrderNo($order_no);
+        $order_id = $order_id['id'];
+
+        // clear the session payment ID
+        Session::forget('paypal_payment_id');
+        Session::forget('paypal_payment_invoice_id');
+
+        if (empty(Input::get('PayerID')) || empty(Input::get('token'))) {
+
+            $fail_callback_uri = Session::get('fail_callback_uri');
+            $fail_callback_uri = $fail_callback_uri.'?token='.Input::get('token');
+            return Redirect::away($fail_callback_uri);
+        }
+
+        $payment = Payment::get($payment_id, $this->_api_context);
+
+        // PaymentExecution object includes information necessary
+        // to execute a PayPal account payment.
+        // The payer_id is added to the request query parameters
+        // when the user is redirected from paypal back to your site
+        $execution = new PaymentExecution();
+        $execution->setPayerId(Input::get('PayerID'));
+
+        //Execute the payment
+        $result = $payment->execute($execution, $this->_api_context);
+
+        if ($result->getState() == 'approved') { // payment made
+            //Update invoice status to paid.
+            $data['payment_status'] = config('futureed.paid');
+            $this->invoice->updateInvoice($invoice_id,$data);
+            $this->order->updateOrder($order_id,$data);
+
+            //send email
+            if(Session::has('paypal_payment_client_id')){
+                $client_id = Session::get('paypal_payment_client_id');
+
+                Session::forget('paypal_payment_client_id');
+                Session::forget('paypal_payment_order_no');
+
+                $client = $this->client->getClientDetails($client_id);
+                $client = $this->client->getClient($client->user_id,config('futureed.principal'));
+
+                $classrooms = $this->classroom->getClassroomByOrderNo($order_no);
+
+                if(count($classrooms) > 0 ){
+                    foreach($classrooms as $res){
+                        //classroom / teacher
+                        $data['name'] = $res['client']['first_name'].' '.$res['client']['last_name'];
+                        $data['class_name'] = $res['name'];
+                        $data['email'] = $res['client']['user']['email'];
+                        $data['username'] = $res['client']['user']['username'];
+
+                        //client
+                        $data['school_name'] = $client['school']['name'];
+                        $data['login_link'] = URL::to('/client/login');
+                        $this->email->sendTeacherAddClass($data);
+                    }
+                }
+            }
+
+            $success_callback_uri = Session::get('success_callback_uri');
+            $success_callback_uri = $success_callback_uri.'?paymentId='.$payment_id.'?token='.Input::get('token');
+            return Redirect::away($success_callback_uri);
+        }
+        Session::set('paypal_token',Input::get('token'));
+
+        $fail_callback_uri = Session::get('fail_callback_uri');
+        $fail_callback_uri = $fail_callback_uri.'?token='.Input::get('token');
+        return Redirect::away($fail_callback_uri);
+    }
 }

@@ -33,18 +33,19 @@ class SchoolRepository implements SchoolRepositoryInterface{
 		$code = $code = Carbon::now()->timestamp;
 		try{
 			School::insert([
-					'code' 				=> $code,
-					'name' 				=> $school['school_name'],
-					'street_address'	=> $school['school_address'],
-					'city'				=> $school['school_city'],
-					'state'				=> $school['school_state'],
-					'country'			=> $school['school_country'],
-					'zip'				=> $school['school_zip'],
-					'contact_name'		=> $school['contact_name'],
-					'contact_number'	=> $school['contact_number'],
-					'created_by'		=> 1,
-					'updated_by'		=> 1,
- 				]);
+				'code' => $code,
+				'name' => $school['school_name'],
+				'street_address' => $school['school_address'],
+				'city' => $school['school_city'],
+				'state' => $school['school_state'],
+				'country' => isset($school['school_country']) ? $school['school_country'] : 0,
+				'country_id' => isset($school['school_country_id']) ? $school['school_country_id'] : 0,
+				'zip' => $school['school_zip'],
+				'contact_name' => $school['contact_name'],
+				'contact_number' => $school['contact_number'],
+				'created_by' => 1,
+				'updated_by' => 1,
+			]);
 		}catch(Exception $e){
 			return $e->getMessage();
 		}

@@ -6,7 +6,7 @@ Routes::group(['middleware' => 'api_user','prefix' => '/client'], function()
     //Parent
     Routes::resource('/parent','Api\v1\ClientParentController',
         ['except' => ['create','edit']]);
-    Routes::get('/parent/student/list/{id}','Api\v1\ClientParentController@getStudentList');
+    Routes::get('/parent/student/list/{id}','Api\v1\ParentStudentController@getStudentList');
 
     //Principal
     Routes::resource('/principal','Api\v1\ClientPrincipalController',
