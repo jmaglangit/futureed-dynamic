@@ -135,7 +135,7 @@
 					<div class="col-xs-4">
 						<div class="input-group">
 							<span class="input-group-addon" id="basic-addon1">USD$</span>
-							<input type="text" ng-disabled="true" class="form-control" value="{! invoice.record.subtotal | currency : '' : 2 !}" />
+							<input type="text" ng-disabled="true" class="form-control" value="{! invoice.record.subtotal | currency : '' : 2 !}" placeholder="Sub Total" />
 						</div>
 					</div>
 				</div>
@@ -158,11 +158,11 @@
 				</div>
 				<div class="form-group">
 					<div class="col-xs-6"></div>
-					<label class="col-xs-2 control-label">Total Amount</label>
+					<label class="col-xs-2 control-label">Total</label>
 					<div class="col-xs-4">
 						<div class="input-group">
 							<span class="input-group-addon" id="basic-addon1">USD$</span>
-							<input type="text" ng-disabled="true" class="form-control" value="{! invoice.record.total | currency : '' : 2 !}" />
+							<input type="text" ng-disabled="true" class="form-control" value="{! invoice.record.total | currency : '' : 2 !}" placeholder="Total" />
 						</div>
 					</div>
 				</div>

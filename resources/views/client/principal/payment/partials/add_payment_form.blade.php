@@ -198,7 +198,7 @@
 				<div class="col-xs-8">
 					<div class="input-group">
 						<span class="input-group-addon" id="basic-addon1">USD$</span>
-						<input type="text" ng-disabled="true" class="form-control" value="{! payment.invoice.sub_total | currency : '' : 2 !}" />
+						<input type="text" ng-disabled="true" class="form-control" value="{! payment.invoice.sub_total | currency : '' : 2 !}" placeholder="Sub Total" />
 					</div>
 				</div>
 			</div>
@@ -228,7 +228,7 @@
 				<div class="col-xs-8">
 					<div class="input-group">
 						<span class="input-group-addon" id="basic-addon1">USD$</span>
-						<input type="text" ng-disabled="true" class="form-control" value="{! payment.invoice.total_amount | currency : '' : 2 !}" />
+						<input type="text" ng-disabled="true" class="form-control" value="{! payment.invoice.total_amount | currency : '' : 2 !}" placeholder="Total" />
 					</div>
 				</div>
 			</div>
