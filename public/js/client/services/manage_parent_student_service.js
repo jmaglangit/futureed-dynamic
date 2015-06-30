@@ -8,8 +8,8 @@ function ManageParentStudentService($http){
 	manageStudentApi.getStudentlist = function(id, search, table) {
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url 	: studentApiUrl + 'client/parent/student/list/' + id
-				+ '?name=' + search.name
+			, url 	: studentApiUrl + 'client/manage/student?client_id=' + id
+				+ '&name=' + search.name
 				+ '&email=' + search.email
 				+ '&limit=' + table.size
 				+ '&offset=' + table.offset
