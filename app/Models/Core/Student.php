@@ -176,12 +176,12 @@ class Student extends Model {
 
 	}
 
-	public function scopeConfirmationCode($query){
+	public function scopeNoConfirmationCode($query){
 
 		//check relation to user
 		$query->whereHas('user', function($query){
 
-			$query->Where('confirmation_code', '=', NULL)
+			$query->where('confirmation_code', '=', NULL)
 			      ->where('confirmation_code_expiry','=', NULL);
 
 		});
