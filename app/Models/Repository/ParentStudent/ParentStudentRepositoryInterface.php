@@ -7,7 +7,7 @@ interface ParentStudentRepositoryInterface {
 
     public function checkParentStudent($parent_id,$student_id);
 
-    public function checkInvitationCode($invitation_code,$parent_user_id);
+    public function checkInvitationCode($invitation_code,$parent_id);
 
     public function updateParentStudent($id,$data);
 
