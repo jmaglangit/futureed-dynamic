@@ -339,7 +339,7 @@ class StudentRepository implements StudentRepositoryInterface
 						$student = $student->with('studentclassroom')->teacher($criteria['client_id']);
 					}
 
-					$student = $student->noconfirmationcode();
+					$student = $student->noConfirmationCode();
 
 				}
 
