@@ -441,10 +441,12 @@ class ParentStudentController extends ApiController {
 			return $this->respondErrorMessage(2130);
 		}
 
-		foreach($student_list as $list => $student){
+		foreach($student_list as $list => $students){
 
-			$student->student->avatar->url = $this->avatar->getAvatarThumbnailUrl($student->student->avatar->avatar_image);
+			if($students->student->avatar <> NULL) {
 
+				$students->student->avatar->url = $this->avatar->getAvatarThumbnailUrl($students->student->avatar->avatar_image);
+			}
 		}
 
 		return $this->respondWithData($student_list);
