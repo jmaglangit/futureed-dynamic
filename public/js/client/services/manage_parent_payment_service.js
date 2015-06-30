@@ -79,7 +79,7 @@ function ManageParentPaymentService($http){
 		return $http({
 			method 	: Constants.METHOD_POST
 			, url 	: paymentApiUrl + 'parent-student/add-students-by-email?email=' + data.email
-				+ '&parent_user_id=' + data.parent_user_id
+				+ '&parent_id=' + data.parent_id
 				+ '&order_id=' + data.order_id
 				+ '&price=' + data.price
 		})
@@ -88,8 +88,8 @@ function ManageParentPaymentService($http){
 	managePaymentApi.searchName = function(name, id) {
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url 	: paymentApiUrl + 'student?name=' + name
-					+ '&client_id=' + id
+			, url 	: paymentApiUrl + 'client/manage/student?client_id=' + id
+					+ '&name=' + name
 		});
 	}
 
@@ -104,7 +104,7 @@ function ManageParentPaymentService($http){
 		return $http({
 			method 	: Constants.METHOD_POST
 			, url 	: paymentApiUrl + 'parent-student/add-students-by-username?username=' + data.username
-				+ '&parent_user_id=' + data.parent_user_id
+				+ '&parent_id=' + data.parent_id
 				+ '&order_id=' + data.order_id
 				+ '&price=' + data.price
 		})
