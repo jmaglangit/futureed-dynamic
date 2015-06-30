@@ -138,8 +138,9 @@ function ManageParentStudentController($scope, ManageParentStudentService, apiSe
 			if(angular.equals(response.status,Constants.STATUS_OK)){
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
+					self.table.loading = Constants.FALSE;
 				} else if(response.data) {
-					self.students = response.data.records;
+					self.students = response.data;
 					self.updatePageCount(response.data);
 					self.table.loading = Constants.FALSE;
 				}

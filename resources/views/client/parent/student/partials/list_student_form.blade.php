@@ -88,8 +88,8 @@
 		        <tbody>
 		        {{-- added sample data --}}
 		        <tr ng-repeat="key in student.students">
-		            <td>{! key.first_name !} {! key.last_name !}</td>
-		            <td>{! key.user.email !}</td>
+		            <td>{! key.student.user.name !}</td>
+		            <td>{! key.student.user.email !}</td>
 		            <td>
 		            	<div class="row">
 		            		<div class="col-xs-6">
