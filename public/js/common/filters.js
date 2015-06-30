@@ -1,9 +1,29 @@
+/**
+* Author: Mar
+*
+* Formats date object tp dd/MM/yy (e.g 01/02/15 which is February 1, 2015)
+* 
+* Parameters
+*	input 	- can be date object, milliseconds, "0000-00-00 00:00:00" date string format
+* Returns
+*	_date 	- "dd/MM/yy" date string format
+*/
 angular.module('futureed').filter('ddMMyy', function($filter) {
 	return function(input) {
-		var _date = new Date(input);
+		var _date = Constants.EMPTY_STR;
 
+		if(!input) {
+			return _date;
+		}
+		
+		// Replace spaces since FF does not have a date parse
+		if(typeof input !== "object") {
+			input = input.replace(/(.+) (.+)/, "$1T$2Z");
+		}
+
+		_date = new Date(input);
 		if(_date != "Invalid Date") {
-			_date = $filter('date')(_date, 'dd/MM/yy');
+			_date = $filter('date')(_date.getTime(), 'dd/MM/yy');
 		} else {
 			_date = Constants.EMPTY_STR;
 		}
@@ -12,6 +32,11 @@ angular.module('futureed').filter('ddMMyy', function($filter) {
 	};
 });
 
+/**
+* Author: Mar
+*
+* Appends "%" to an input
+*/
 angular.module('futureed').filter('percent', function($filter) {
 	return function(input) {
 		var percent = input + " %";

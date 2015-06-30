@@ -405,8 +405,8 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 						self.invoice.seats_total += value.seats_total;
 					});
 
-					self.invoice.dis_date_start = new Date(self.invoice.date_start).getTime();
-					self.invoice.dis_date_end = new Date(self.invoice.date_end).getTime();
+					self.invoice.dis_date_start = new Date(self.invoice.date_start);
+					self.invoice.dis_date_end = new Date(self.invoice.date_end);
 
 					self.invoice.sub_total = subscription.price * self.invoice.seats_total;
 					self.invoice.total_amount = self.invoice.sub_total - ( self.invoice.sub_total * (self.invoice.discount / 100) );
@@ -418,11 +418,11 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 					if(subscription.price) {
 						var date = new Date();
 							self.invoice.date_start = $filter('date')(date, 'yyyyMMdd');
-							self.invoice.dis_date_start = date.getTime();
+							self.invoice.dis_date_start = date;
 							date.setDate(date.getDate() + parseInt(subscription.days));
 							
 							self.invoice.date_end = $filter('date')(date, 'yyyyMMdd');
-							self.invoice.dis_date_end = date.getTime();
+							self.invoice.dis_date_end = date;
 
 						angular.forEach(self.classrooms, function(value, key) {
 							value.price = subscription.price * value.seats_total;
