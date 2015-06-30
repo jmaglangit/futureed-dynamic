@@ -182,7 +182,7 @@ class Student extends Model {
 		$query->whereHas('user', function($query){
 
 			$query->Where('confirmation_code', '=', NULL)
-				  ->where('confirmation_code_expiry','=', NULL);
+			      ->where('confirmation_code_expiry','=', NULL);
 
 		});
 	}
