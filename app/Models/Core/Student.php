@@ -30,6 +30,16 @@ class Student extends Model {
 		'updated_by' => 1,
 	];
 
+	public static function boot()
+	{
+
+		parent::boot();
+
+		Student::deleting(function ($student) {
+			$student->user->delete();
+		});
+	}
+
 
 
     //-------------relationships
