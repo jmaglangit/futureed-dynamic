@@ -27,7 +27,7 @@ class StudentEmailRequest extends ApiRequest {
 
 				return [
 						'email' => 'required|email',
-						'new_email' => 'required|email|unique:users,email',
+						'new_email' => 'required|email|unique:users,email,NULL,id,user_type,'.config('futureed.student').',deleted_at,NULL',
 						'password' => 'required',
 						'client_id' => 'required|integer',
 						'callback_uri' => 'required|string'
