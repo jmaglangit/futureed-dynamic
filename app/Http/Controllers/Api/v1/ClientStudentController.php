@@ -171,10 +171,10 @@ class ClientStudentController extends ApiController {
 		$student_id = $this->student->getStudentId($user_id);
 
 		//add student id to parent_student
-		$parent_student['student_user_id'] = $student_id;
+		$parent_student['student_id'] = $student_id;
 
-		//add parent_user_id to parent_student
-		$parent_student['parent_user_id'] = $parent_student['client_id'];
+		//add parent_id to parent_student
+		$parent_student['parent_id'] = $parent_student['client_id'];
 
 		//add to parent_students table
 		$this->parent_student->addParentStudent($parent_student);
