@@ -344,13 +344,13 @@ class ParentStudentController extends ApiController {
     public function addStudentByEmail(ParentStudentRequest $request){
         $email = $request->only('email');
 
-        $student_id = $this->user->checkEmail($email,config('futureed.student'));
+        $student_user_id = $this->user->checkEmail($email,config('futureed.student'));
 
-        if(is_null($student_id)){
+        if(is_null($student_user_id)){
             return $this->respondErrorMessage(2002);
         }
 
-        $student_id = $this->student->getStudentId($student_id);
+        $student_id = $this->student->getStudentId($student_user_id);
 
         $parent_id = $request->only('parent_id');//this is a client id
 
@@ -379,7 +379,7 @@ class ParentStudentController extends ApiController {
         $order_details['student_id'] = $student_id;
         $this->order_details->addOrderDetail($order_details);
 
-        return $this->respondWithData($this->user->getUserDetail($student_id,config('futureed.student')));
+        return $this->respondWithData($this->user->getUserDetail($student_user_id,config('futureed.student')));
     }
 
     /**
@@ -392,13 +392,13 @@ class ParentStudentController extends ApiController {
 
         $user_name = $request->only('username');
 
-        $student_id = $this->user->checkUserName($user_name,config('futureed.student'));
+        $student_user_id = $this->user->checkUserName($user_name,config('futureed.student'));
 
-        if(is_null($student_id)){
+        if(is_null($student_user_id)){
             return $this->respondErrorMessage(2018);
         }
 
-        $student_id = $this->student->getStudentId($student_id);
+        $student_id = $this->student->getStudentId($student_user_id);
 
         $parent_id = $request->only('parent_id');
 
@@ -426,7 +426,7 @@ class ParentStudentController extends ApiController {
         $order_details['student_id'] = $student_id;
         $this->order_details->addOrderDetail($order_details);
 
-        return $this->respondWithData($this->user->getUserDetail($student_id,config('futureed.student')));
+        return $this->respondWithData($this->user->getUserDetail($student_user_id,config('futureed.student')));
     }
 
 	//TODO: 711
