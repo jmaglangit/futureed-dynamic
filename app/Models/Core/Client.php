@@ -70,7 +70,7 @@ class Client extends Model
 	{
 
 
-		return $this->hasMany('FutureEd\Models\Core\ParentStudent', 'parent_user_id', 'id');
+		return $this->hasMany('FutureEd\Models\Core\ParentStudent', 'parent_id', 'id');
 	}
 
 	//-------------scopes
