@@ -117,9 +117,9 @@
 		            		<div class="col-xs-6">
 	    						<a href="" ng-click="payment.setActive('view', key.id)" title="view"><span><i class="fa fa-eye"></i></span></a>
 	    					</div>
-	    					<div class="col-xs-6">
-	    						<a href="" ng-if="key.payment_status == 'Pending' || key.payment_status == 'Cancelled'" ng-click="payment.confirmRemoveInvoice(key.id, 'list')" title="delete"><span><i class="fa fa-trash"></i></span></a>
-	    					</div>
+							<div class="col-xs-6">
+								<a href="" ng-if="key.payment_status == 'Pending' || key.payment_status == 'Cancelled'" ng-click="payment.confirmRemoveInvoice(key.id, 'list')" title="delete"><span><i class="fa fa-trash"></i></span></a>
+							</div>
 		            	</div>
 		            </td>
 		        </tr>
