@@ -198,14 +198,7 @@
 				<div class="col-xs-8">
 					<div class="input-group">
 						<span class="input-group-addon" id="basic-addon1">USD$</span>
-						{!! Form::text('sub_total',''
-							, [
-								'ng-disabled' => true
-								, 'class' => 'form-control'
-								, 'ng-model' => 'payment.invoice.sub_total'
-
-							]
-						) !!}
+						<input type="text" ng-disabled="true" class="form-control" value="{! payment.invoice.sub_total | currency : '' : 2 !}" />
 					</div>
 				</div>
 			</div>
@@ -234,15 +227,8 @@
 				<label class="col-xs-4 control-label top-10">Total</label>
 				<div class="col-xs-8">
 					<div class="input-group">
-						  <span class="input-group-addon" id="basic-addon1">USD$</span>
-						  {!! Form::text('total_amount',''
-							, [
-								'ng-disabled' => true
-								, 'class' => 'form-control'
-								, 'ng-model' => 'payment.invoice.total_amount'
-
-							]
-						) !!}
+						<span class="input-group-addon" id="basic-addon1">USD$</span>
+						<input type="text" ng-disabled="true" class="form-control" value="{! payment.invoice.total_amount | currency : '' : 2 !}" />
 					</div>
 				</div>
 			</div>

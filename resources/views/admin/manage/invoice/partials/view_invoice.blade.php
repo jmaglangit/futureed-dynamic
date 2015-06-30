@@ -135,14 +135,7 @@
 					<div class="col-xs-4">
 						<div class="input-group">
 							<span class="input-group-addon" id="basic-addon1">USD$</span>
-							{!! Form::text('subtotal',''
-								, [
-									'ng-disabled' => true
-									, 'class' => 'form-control'
-									, 'ng-model' => 'invoice.record.subtotal'
-									, 'placeholder' => 'Sub Total'
-								]
-							) !!}
+							<input type="text" ng-disabled="true" class="form-control" value="{! invoice.record.subtotal | currency : '' : 2 !}" />
 						</div>
 					</div>
 				</div>
@@ -168,15 +161,8 @@
 					<label class="col-xs-2 control-label">Total Amount</label>
 					<div class="col-xs-4">
 						<div class="input-group">
-							  <span class="input-group-addon" id="basic-addon1">USD$</span>
-							  {!! Form::text('total',''
-								, [
-									'ng-disabled' => true
-									, 'class' => 'form-control'
-									, 'ng-model' => 'invoice.record.total'
-									, 'placeholder' => 'Total Amount'
-								]
-							) !!}
+							<span class="input-group-addon" id="basic-addon1">USD$</span>
+							<input type="text" ng-disabled="true" class="form-control" value="{! invoice.record.total | currency : '' : 2 !}" />
 						</div>
 					</div>
 				</div>
