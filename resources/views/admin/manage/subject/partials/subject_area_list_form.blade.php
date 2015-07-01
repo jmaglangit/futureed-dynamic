@@ -57,7 +57,7 @@
 	</div>
 
 	<button class="btn btn-blue btn-small margin-0-30" ng-click="area.setActive('add_subject_area')">
-		<i class="fa fa-plus-square"></i> Add 
+		<i class="fa fa-plus-square"></i> Add Subject Area
 	</button>
 
 	<div class="col-xs-12 padding-0-30">
