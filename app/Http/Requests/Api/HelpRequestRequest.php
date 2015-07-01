@@ -18,20 +18,25 @@ class HelpRequestRequest extends ApiRequest{
      */
     public function rules() {
 
-        return [
-            'class_id' => 'required|integer',
-            'student_id' => 'required|integer',
-            'title' => 'required',
-            'content' => 'required',
-            'module_id' => 'required|integer',
-            'subject_id' => 'required|integer',
-            'subject_area_id' => 'required|integer',
-            'link_type' => 'required|in:General,Content,Question',
-            'link_id' => 'required|integer',
-            'request_status' => 'required|in:Pending,Accepted,Rejected',
-            'status' => 'required|in:Enabled,Disabled',
-            'question_status' => 'required|in:Open,Answered,Cancelled',
-        ];
+        switch($this->method) {
+            case 'PATCH':
+                return ['request_status' => 'required|in:Accepted,Rejected'];
+            default:
+                return [
+                    'class_id' => 'required|integer',
+                    'student_id' => 'required|integer',
+                    'title' => 'required',
+                    'content' => 'required',
+                    'module_id' => 'required|integer',
+                    'subject_id' => 'required|integer',
+                    'subject_area_id' => 'required|integer',
+                    'link_type' => 'required|in:General,Content,Question',
+                    'link_id' => 'required|integer',
+                    'request_status' => 'required|in:Pending,Accepted,Rejected',
+                    'status' => 'required|in:Enabled,Disabled',
+                    'question_status' => 'required|in:Open,Answered,Cancelled'];
+        }
+
     }
 
     /**

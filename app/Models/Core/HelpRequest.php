@@ -13,7 +13,7 @@ class HelpRequest extends Model {
 
     protected $hidden = ['created_by', 'updated_by', 'created_at', 'updated_at', 'deleted_at'];
 
-    protected $fillable =['class_id','student_id','title','content','module_id','subject_id','subject_area_id','link_type','link_id', 'is_verified','status','question_status','last_answered_at'];
+    protected $fillable =['class_id','student_id','title','content','module_id','subject_id','subject_area_id','link_type','link_id', 'request_status','status','question_status','last_answered_at'];
 
     protected $attributes = ['created_by' => 1, 'updated_by' => 1];
 
