@@ -89,4 +89,28 @@ class TipRepository implements TipRepositoryInterface{
 
 	}
 
+	public function viewTip($id){
+
+		$tip = new Tip();
+		$tip = $tip->with('subject','module','subjectarea')->id($id);
+
+		return $tip->first();
+
+	}
+
+	public function updateTip($id, $data){
+
+		try{
+
+			return Tip::find($id)
+						->update($data);
+
+		} catch (Exception $e) {
+
+			throw new Exception($e->getMessage());
+		}
+
+	}
+	
+
 }
