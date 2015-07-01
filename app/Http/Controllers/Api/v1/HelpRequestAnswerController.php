@@ -110,29 +110,6 @@ class HelpRequestAnswerController extends ApiController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-
-//+-----------------------+---------------------------------------+------+-----+---------------------+----------------+
-//| Field                 | Type                                  | Null | Key | Default             | Extra          |
-//+-----------------------+---------------------------------------+------+-----+---------------------+----------------+
-//| id                    | bigint(20) unsigned                   | NO   | PRI | NULL                | auto_increment |
-//| student_id            | int(11)                               | NO   |     | NULL                |                |
-//| content               | text                                  | NO   |     | NULL                |                |
-//| help_request_id       | bigint(20)                            | NO   |     | NULL                |                |
-//| module_id             | bigint(20)                            | NO   |     | NULL                |                |
-//| subject_id            | bigint(20)                            | NO   |     | NULL                |                |
-//| subject_area_id       | int(11)                               | NO   |     | NULL                |                |
-//| rating                | tinyint(4)                            | YES  |     | NULL                |                |
-//| seq_no                | bigint(20)                            | NO   |     | NULL                |                |
-//| request_answer_status | enum('Pending','Accepted','Rejected') | NO   |     | NULL                |                |
-//| status                | enum('Enabled','Disabled')            | NO   |     | NULL                |                |
-//| points                | int(11)                               | YES  |     | NULL                |                |
-//| created_by            | bigint(20)                            | NO   |     | NULL                |                |
-//| updated_by            | bigint(20)                            | NO   |     | NULL                |                |
-//| created_at            | timestamp                             | NO   |     | 0000-00-00 00:00:00 |                |
-//| updated_at            | timestamp                             | NO   |     | 0000-00-00 00:00:00 |                |
-//| deleted_at            | timestamp                             | YES  |     | NULL                |                |
-//+-----------------------+---------------------------------------+------+-----+---------------------+----------------+
-
 	public function update(HelpRequestAnswerRequest $request,$id)
 	{
 		$data = $request->only(
