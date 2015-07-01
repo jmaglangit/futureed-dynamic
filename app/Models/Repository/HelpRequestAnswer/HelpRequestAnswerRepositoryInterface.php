@@ -9,5 +9,5 @@ interface HelpRequestAnswerRepositoryInterface {
 
 	public function updateHelpRequestAnswer($id,$data);
 
-	public function deleteHelperRequestAnswer($id);
+	public function deleteHelpRequestAnswer($id);
 }
