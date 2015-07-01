@@ -161,6 +161,21 @@ class AdminTipController extends ApiController {
 	public function destroy($id)
 	{
 
+		$tip = $this->tip->viewTip($id);
+
+		if(!$tip){
+
+			return $this->respondErrorMessage(2120);
+		}
+
+		if($tip['rating'] != NULL){
+
+			return $this->respondErrorMessage(2136);
+		}
+
+		return $this->respondWithData($this->tip->deleteTip($id));
+
+
 	}
 
 }

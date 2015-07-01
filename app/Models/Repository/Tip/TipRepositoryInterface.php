@@ -11,5 +11,7 @@ interface TipRepositoryInterface {
 
 	public function updateTip($id, $data);
 
+	public function deleteTip($id);
+
 
 }

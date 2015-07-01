@@ -111,6 +111,21 @@ class TipRepository implements TipRepositoryInterface{
 		}
 
 	}
+
+	public function deleteTip($id){
+
+		try {
+
+			$tip = Tip::find($id);
+
+			return !is_null($tip) ? $tip->delete() : false;
+
+		} catch(Exception $e) {
+
+			return $e->getMessage();
+
+		}
+	}
 	
 
 }
