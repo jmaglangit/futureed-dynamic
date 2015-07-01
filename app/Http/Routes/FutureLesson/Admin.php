@@ -426,6 +426,27 @@
 					]);
 				});
 			});
+
+			Routes::group(['prefix' => '/tips'], function() {
+
+				Routes::get('/', 
+					['as' => 'admin.manage.tips.index'
+						, 'uses' => 'FutureLesson\Admin\ManageTipsController@index'
+					]);
+
+				Routes::group(['prefix' => '/patials'], function() {
+
+					Routes::get('/detail', 
+						['as' => 'admin.manage.tips.partials.detail'
+						, 'uses' => 'FutureLesson\Admin\ManageTipsController@detail_form'
+					]);
+
+					Routes::get('/list', 
+						['as' => 'admin.manage.tips.partials.list'
+						, 'uses' => 'FutureLesson\Admin\ManageTipsController@list_form'
+					]);
+				});
+			});
 		});
 			
 
