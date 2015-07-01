@@ -13,4 +13,22 @@ class Avatar extends Model {
 
     protected $hidden = ['created_by','updated_by','created_at','updated_at','deleted_at'];
 
+	protected $fillable = [
+		'code',
+		'gender',
+		'avatar_image',
+		'background_image',
+		'points_to_unlock',
+		'description',
+		'created_by',
+		'updated_by',
+		'created_at',
+		'updated_at'
+	];
+
+	protected $attributes = [
+		'created_by' => 1,
+		'updated_by' => 1
+	];
+
 }
