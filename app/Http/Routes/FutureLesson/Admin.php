@@ -447,6 +447,27 @@
 					]);
 				});
 			});
+
+			Routes::group(['prefix' => '/help_request'], function() {
+
+				Routes::get('/', 
+					['as' => 'admin.manage.help.index'
+						, 'uses' => 'FutureLesson\Admin\ManageHelpRequestController@index'
+					]);
+
+				Routes::group(['prefix' => '/patials'], function() {
+
+					Routes::get('/detail', 
+						['as' => 'admin.manage.help.partials.detail'
+						, 'uses' => 'FutureLesson\Admin\ManageHelpRequestController@detail_form'
+					]);
+
+					Routes::get('/list', 
+						['as' => 'admin.manage.help.partials.list'
+						, 'uses' => 'FutureLesson\Admin\ManageHelpRequestController@list_form'
+					]);
+				});
+			});
 		});
 			
 
