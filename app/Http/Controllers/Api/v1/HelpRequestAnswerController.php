@@ -1,6 +1,8 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
 
+use FutureEd\Http\Requests\Api\HelpRequestAnswerRequest;
+use FutureEd\Models\Core\HelpRequestAnswer;
 use FutureEd\Models\Repository\HelpRequestAnswer\HelpRequestAnswerRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
@@ -106,9 +108,49 @@ class HelpRequestAnswerController extends ApiController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+
+//+-----------------------+---------------------------------------+------+-----+---------------------+----------------+
+//| Field                 | Type                                  | Null | Key | Default             | Extra          |
+//+-----------------------+---------------------------------------+------+-----+---------------------+----------------+
+//| id                    | bigint(20) unsigned                   | NO   | PRI | NULL                | auto_increment |
+//| student_id            | int(11)                               | NO   |     | NULL                |                |
+//| content               | text                                  | NO   |     | NULL                |                |
+//| help_request_id       | bigint(20)                            | NO   |     | NULL                |                |
+//| module_id             | bigint(20)                            | NO   |     | NULL                |                |
+//| subject_id            | bigint(20)                            | NO   |     | NULL                |                |
+//| subject_area_id       | int(11)                               | NO   |     | NULL                |                |
+//| rating                | tinyint(4)                            | YES  |     | NULL                |                |
+//| seq_no                | bigint(20)                            | NO   |     | NULL                |                |
+//| request_answer_status | enum('Pending','Accepted','Rejected') | NO   |     | NULL                |                |
+//| status                | enum('Enabled','Disabled')            | NO   |     | NULL                |                |
+//| points                | int(11)                               | YES  |     | NULL                |                |
+//| created_by            | bigint(20)                            | NO   |     | NULL                |                |
+//| updated_by            | bigint(20)                            | NO   |     | NULL                |                |
+//| created_at            | timestamp                             | NO   |     | 0000-00-00 00:00:00 |                |
+//| updated_at            | timestamp                             | NO   |     | 0000-00-00 00:00:00 |                |
+//| deleted_at            | timestamp                             | YES  |     | NULL                |                |
+//+-----------------------+---------------------------------------+------+-----+---------------------+----------------+
+
+	public function update(HelpRequestAnswerRequest $request,$id)
 	{
-		//
+		$data = $request->only(
+			'student_id',
+			'content',
+			'help_request_id',
+			'module_id',
+			'subject_id',
+			'subject_area_id',
+			'rating',
+			'seq_no',
+			'request_answer_status',
+			'status',
+			'points'
+		);
+
+		return $this->respondWithData(
+			$this->help_request_answer->updateHelpRequestAnswer($id,$data)
+		);
+
 	}
 
 	/**
@@ -119,7 +161,8 @@ class HelpRequestAnswerController extends ApiController {
 	 */
 	public function destroy($id)
 	{
-		//
+
+		return $this->respondWithData($this->help_request_answer->deleteHelperRequestAnswer($id));
 	}
 
 }
