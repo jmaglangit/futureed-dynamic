@@ -62,7 +62,7 @@
                 <a href="{!! route('admin.manage.announce.index') !!}"><span><i class="fa fa-bullhorn"></i>Announcement</span></a>
             </li>
             <li>
-                <a href="{!! route('admin.manage.tips.index') !!}" ng-init="tips.setActive()"><span><i class="fa fa-lightbulb-o"></i>Tips</span></a>
+                <a href="{!! route('admin.manage.tips.index') !!}" ng-init="tips.setActive()"><span><i class="fa fa-lightbulb-o"></i> Tips & Help Requests</span></a>
             </li>
         </ul>
     </ul>

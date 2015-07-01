@@ -1,9 +1,9 @@
 angular.module('futureed.controllers')
-	.controller('ManageTipsController', ManageTipsController);
+	.controller('ManageHelpRequestController', ManageHelpRequestController);
 
-ManageTipsController.$inject = ['$scope', 'ManageTipsService', 'TableService', 'SearchService'];
+ManageHelpRequestController.$inject = ['$scope', 'ManageHelpRequestService', 'TableService', 'SearchService'];
 
-function ManageTipsController($scope, ManageTipsService, TableService, SearchService) {
+function ManageHelpRequestController($scope, ManageHelpRequestService, TableService, SearchService) {
 	var self = this;
 	
 	TableService(self);
@@ -43,7 +43,7 @@ function ManageTipsController($scope, ManageTipsService, TableService, SearchSer
 		$("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 
-	self.updateTip = function() {
+	self.updateHelpRequest = function() {
 		self.setActive(Constants.ACTIVE_VIEW);
 	}
 
