@@ -113,7 +113,7 @@
             	</div>
             </fieldset>
             <div class="btn-container col-sm-7 col-sm-offset-2">
-            	{!! Form::button('Add'
+            	{!! Form::button('Add Subject Area'
             		, array(
             			'class' => 'btn btn-blue btn-medium'
             			, 'ng-click' => 'area.add()'

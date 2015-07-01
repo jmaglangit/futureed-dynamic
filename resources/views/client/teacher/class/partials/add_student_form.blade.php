@@ -72,7 +72,7 @@
             </fieldset>
             <fieldset>
                 <div class="btn-container col-xs-5 col-xs-offset-2">
-                    {!! Form::button('Add'
+                    {!! Form::button('Add Student'
                         , array(
                             'class' => 'btn btn-blue btn-medium'
                             , 'ng-click' => 'class.addExistingStudent()'
@@ -271,7 +271,7 @@
         </fieldset> 
         <fieldset>
 			<div class="btn-container col-xs-6 col-xs-offset-2">
-				{!! Form::button('Add'
+				{!! Form::button('Add Student'
 					, array(
 						'class' => 'btn btn-blue btn-medium'
 						, 'ng-click' => 'class.addNewStudent()'

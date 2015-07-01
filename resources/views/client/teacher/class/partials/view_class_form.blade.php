@@ -137,7 +137,7 @@
 
 	<div class="col-xs-12 table-container">
 		<button class="btn btn-blue btn-small" type="button" ng-click="class.setActive('add_student')">
-			<i class="fa fa-plus-square"></i> Add 
+			<i class="fa fa-plus-square"></i> Add Student
 		</button>
 
 		<div class="title-mid">

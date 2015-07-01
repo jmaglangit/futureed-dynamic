@@ -71,7 +71,7 @@
 	</div>
 
 	<button class="btn btn-blue btn-small margin-0-30" ng-click="teacher.setActive('add')">
-		<i class="fa fa-plus-square"></i> Add 
+		<i class="fa fa-plus-square"></i> Add Teacher
 	</button>
 	
 	<div class="col-xs-12 table-container" ng-init="teacher.listRecords()">
