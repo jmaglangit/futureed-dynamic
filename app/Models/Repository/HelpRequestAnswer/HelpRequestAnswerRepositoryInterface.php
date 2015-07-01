@@ -4,4 +4,6 @@
 interface HelpRequestAnswerRepositoryInterface {
 
 	public function getHelpRequestAnswers($criteria,$limit,$offset);
+
+	public function getHelpRequestAnswer($id);
 }
