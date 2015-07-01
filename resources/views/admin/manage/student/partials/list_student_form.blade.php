@@ -69,7 +69,7 @@
 	<div class="col-xs-12 table-container" ng-init="student.list()">
 		<div class="list-container" ng-cloak>
 			<button class="btn btn-blue btn-small" ng-click="student.setActive('add')">
-				<i class="fa fa-plus-square"></i> Add 
+				<i class="fa fa-plus-square"></i> Add Student
 			</button>
 
 			<div class="title-mid">

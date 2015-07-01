@@ -92,7 +92,7 @@
 		        			)
 		        		) !!}
 
-		        		{!! Form::button('Add'
+		        		{!! Form::button('Add Classroom'
 		        			, array(
 		        				'class' => 'btn btn-blue btn-medium'
 		        				, 'ng-click' => 'payment.addClassroom()'

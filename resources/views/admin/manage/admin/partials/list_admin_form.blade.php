@@ -82,7 +82,7 @@
 	</div>
 
 	<button class="btn btn-blue btn-small margin-0-30" ng-click="admin.setManageAdminActive('add')">
-		<i class="fa fa-plus-square"></i> Add 
+		<i class="fa fa-plus-square"></i> Add Admin
 	</button>
 
 	<div class="col-xs-12 padding-0-30">
