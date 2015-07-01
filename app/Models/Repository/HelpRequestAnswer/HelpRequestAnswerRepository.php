@@ -16,6 +16,15 @@ class HelpRequestAnswerRepository implements HelpRequestAnswerRepositoryInterfac
 
 		$help_request_answer = new HelpRequestAnswer();
 
+		/*
+		 * Filters:
+		 * help_request
+		 * module
+		 * subject_area
+		 * subject
+		 * request_answer_status
+		 *
+		 */
 		if(isset($criteria['help_request'])){
 
 			$help_request_answer = $help_request_answer->RequestTitle($criteria['help_request']);
