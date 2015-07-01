@@ -468,6 +468,27 @@
 					]);
 				});
 			});
+
+			Routes::group(['prefix' => '/request_answers'], function() {
+
+				Routes::get('/', 
+					['as' => 'admin.manage.answer.index'
+						, 'uses' => 'FutureLesson\Admin\ManageHelpAnswerController@index'
+					]);
+
+				Routes::group(['prefix' => '/patials'], function() {
+
+					Routes::get('/detail', 
+						['as' => 'admin.manage.answer.partials.detail'
+						, 'uses' => 'FutureLesson\Admin\ManageHelpAnswerController@detail_form'
+					]);
+
+					Routes::get('/list', 
+						['as' => 'admin.manage.answer.partials.list'
+						, 'uses' => 'FutureLesson\Admin\ManageHelpAnswerController@list_form'
+					]);
+				});
+			});
 		});
 			
 
