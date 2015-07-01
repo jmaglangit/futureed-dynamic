@@ -11,7 +11,7 @@ class AdminTipRequest extends ApiRequest {
 	 */
 	public function authorize()
 	{
-		return false;
+		return true;
 	}
 
 	/**
@@ -21,9 +21,17 @@ class AdminTipRequest extends ApiRequest {
 	 */
 	public function rules()
 	{
-		return [
-			//
-		];
+		switch($this->method()){
+
+			case 'PUT':
+
+				return [
+					'title' => 'required|string',
+					'content' => 'required|string',
+					'link_type' => 'required|alpha|in:General,Question,Content',
+					'status' => 'required|alpha|in:Enabled,Disabled'
+				];
+		}
 	}
 
 }

@@ -7,4 +7,9 @@ interface TipRepositoryInterface {
 
 	public function getTips($criteria = array(), $limit = 0, $offset = 0);
 
+	public function viewTip($id);
+
+	public function updateTip($id, $data);
+
+
 }

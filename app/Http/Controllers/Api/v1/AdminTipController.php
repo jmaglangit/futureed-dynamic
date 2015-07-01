@@ -2,7 +2,7 @@
 
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
-use FutureEd\Http\Requests\Api\StudentTipRequest;
+use FutureEd\Http\Requests\Api\AdminTipRequest;
 use Illuminate\Support\Facades\Input;
 use FutureEd\Models\Repository\Tip\TipRepositoryInterface;
 
@@ -103,7 +103,16 @@ class AdminTipController extends ApiController {
 	 */
 	public function show($id)
 	{
-		//
+
+		$tip = $this->tip->viewTip($id);
+
+		if(!$tip){
+
+			return $this->respondErrorMessage(2120);
+		}
+
+		return $this->respondWithData($tip);
+
 	}
 
 	/**
@@ -123,8 +132,23 @@ class AdminTipController extends ApiController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id, StudentTipRequest $request )
+	public function update($id,AdminTipRequest $request )
 	{
+		$data = $request->only('title','content','link_type','status');
+
+		//get tip
+		$tip = $this->tip->viewTip($id);
+
+		//check if tip is empty
+		if(!$tip){
+
+			return $this->respondErrorMessage(2120);
+		}
+
+		$this->tip->updateTip($id,$data);
+
+		return $this->respondWithData($this->tip->viewTip($id));
+
 
 	}
 
@@ -136,7 +160,7 @@ class AdminTipController extends ApiController {
 	 */
 	public function destroy($id)
 	{
-		//
+
 	}
 
 }
