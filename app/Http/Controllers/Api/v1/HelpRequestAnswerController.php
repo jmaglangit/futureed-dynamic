@@ -97,9 +97,11 @@ class HelpRequestAnswerController extends ApiController {
 	 */
 	public function show($id)
 	{
+
 		$help_request_answer = $this->help_request_answer->getHelpRequestAnswer($id);
 
 		return $this->respondWithData($help_request_answer);
+
 	}
 
 	/**
