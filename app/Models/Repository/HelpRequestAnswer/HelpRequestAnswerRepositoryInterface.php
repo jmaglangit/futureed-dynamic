@@ -6,4 +6,8 @@ interface HelpRequestAnswerRepositoryInterface {
 	public function getHelpRequestAnswers($criteria,$limit,$offset);
 
 	public function getHelpRequestAnswer($id);
+
+	public function updateHelpRequestAnswer($id,$data);
+
+	public function deleteHelperRequestAnswer($id);
 }
