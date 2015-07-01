@@ -108,7 +108,7 @@ class HelpRequestAnswerRepository implements HelpRequestAnswerRepositoryInterfac
 	 * @return bool|null|string
 	 * @throws \Exception
 	 */
-	public function deleteHelperRequestAnswer($id){
+	public function deleteHelpRequestAnswer($id){
 
 		try{
 
