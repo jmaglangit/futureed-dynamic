@@ -1,7 +1,6 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jason
- * Date: 7/1/15
- * Time: 5:43 PM
- */
+
+
+Routes::resource('/help-request-answer','Api\v1\HelpRequestAnswerController'
+	, ['except' => ['create','edit']]
+	);
