@@ -157,20 +157,20 @@
 			        <tbody>
 				        <tr ng-repeat="tipInfo in tips.records">
 				            <td>{! tipInfo.code !}</td>
-				            <td class="td-fix">{! tipInfo.name !}</td>
-				            <td class="td-fix">{! tipInfo.description !}</td>
+				            <td>{! tipInfo.name !}</td>
+				            <td>{! tipInfo.description !}</td>
 				            <td>{! tipInfo.code !}</td>
-				            <td class="td-fix">{! tipInfo.name !}</td>
-				            <td class="td-fix">{! tipInfo.description !}</td>
-				            <td ng-if="tips.records.length" class="table-action">
+				            <td>{! tipInfo.name !}</td>
+				            <td>{! tipInfo.description !}</td>
+				            <td ng-if="tips.records.length">
 				            	<div class="row">
-				            		<div class="col-xs-2">
-				            			<a href="" ng-click=""><span><i class="fa fa-eye"></i></span></a>
+				            		<div class="col-xs-4">
+				            			<a href="" ng-click="tips.setActive(futureed.ACTIVE_VIEW)"><span><i class="fa fa-eye"></i></span></a>
 				            		</div>
-				            		<div class="col-xs-2">
-				            			<a href="" ng-click=""><span><i class="fa fa-pencil"></i></span></a>
+				            		<div class="col-xs-4">
+				            			<a href="" ng-click="tips.setActive(futureed.ACTIVE_EDIT)"><span><i class="fa fa-pencil"></i></span></a>
 				            		</div>
-				            		<div class="col-xs-2">
+				            		<div class="col-xs-4">
 				            			<a href="" ng-click=""><span><i class="fa fa-trash"></i></span></a>
 				            		</div>	
 				            	</div>
