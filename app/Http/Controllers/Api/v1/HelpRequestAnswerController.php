@@ -31,7 +31,15 @@ class HelpRequestAnswerController extends ApiController {
 		$limit = 0;
 		$offset = 0;
 
-
+		/*
+		 * Filters:
+		 * help_request
+		 * module
+		 * subject_area
+		 * subject
+		 * request_answer_status
+		 *
+		 */
 		if(Input::get('help_request')){
 
 			$criteria['help_request'] = Input::get('help_request');
