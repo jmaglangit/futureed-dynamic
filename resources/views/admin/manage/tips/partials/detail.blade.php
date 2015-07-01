@@ -19,7 +19,7 @@
 							[
 								'placeholder' => 'Module',
 								'ng-disabled' => 'true',
-								'ng-model' => 'admin.admininfo.user.username',
+								'ng-model' => 'tips.record.module',
 								'class' => 'form-control'
 							]
 						) !!}

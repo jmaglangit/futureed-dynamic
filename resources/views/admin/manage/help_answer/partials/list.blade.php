@@ -131,11 +131,11 @@
 				<table id="grade-list" class="table table-striped table-bordered">
 					<thead>
 				        <tr>
-				            <th>Displayed At</th>
 				            <th>Module</th>
 				            <th>Subject</th>
 				            <th>Area</th>
-				            <th>Title</th>
+				            <th>Help Request</th>
+				            <th>Answer</th>
 				            <th>Status</th>
 				            <th ng-if="answer.records.length">Actions</th>
 				        </tr>
