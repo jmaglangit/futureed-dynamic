@@ -163,5 +163,9 @@ class AppServiceProvider extends ServiceProvider {
 			'FutureEd\Models\Repository\Tip\TipRepositoryInterface',
 			'FutureEd\Models\Repository\Tip\TipRepository'
 		);
+        $this->app->bind(
+            'FutureEd\Models\Repository\HelpRequest\HelpRequestRepositoryInterface',
+            'FutureEd\Models\Repository\HelpRequest\HelpRequestRepository'
+        );
 	}
 }
