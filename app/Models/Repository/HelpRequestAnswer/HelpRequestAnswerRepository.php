@@ -1,7 +1,7 @@
 <?php namespace FutureEd\Models\Repository\HelpRequestAnswer;
 
 
-use FutureEd\HelpRequestAnswer;
+use FutureEd\Models\Core\HelpRequestAnswer;
 
 class HelpRequestAnswerRepository implements HelpRequestAnswerRepositoryInterface{
 
@@ -39,10 +39,13 @@ class HelpRequestAnswerRepository implements HelpRequestAnswerRepositoryInterfac
 
 		if(isset($criteria['request_answer_status'])){
 
-			$help_request_answer = $help_request_answer->AnswerStatus($criteria['status']);
+			$help_request_answer = $help_request_answer->AnswerStatus($criteria['request_answer_status']);
 
 		}
 
+		$help_request_answer = $help_request_answer
+			->with('helpRequest','module','subject','subjectArea')
+			->StatusEnabled();
 
 		$count = $help_request_answer->count();
 
