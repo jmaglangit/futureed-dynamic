@@ -34,7 +34,7 @@ class HelpRequestAnswerRepository implements HelpRequestAnswerRepositoryInterfac
 
 		if(isset($criteria['subject_area'])){
 
-			$help_request_answer = $help_request_answer->SubjectAreaName($criteria['subject_are']);
+			$help_request_answer = $help_request_answer->SubjectAreaName($criteria['subject_area']);
 		}
 
 		if(isset($criteria['request_answer_status'])){
