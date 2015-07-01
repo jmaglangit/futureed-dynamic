@@ -69,7 +69,7 @@
 
 	<div class="col-xs-12 table-container" ng-init="payment.listPayments()">
 		<button class="btn btn-blue btn-small" ng-click="payment.setActive('add')">
-			<i class="fa fa-plus-square"></i> Add 
+			<i class="fa fa-plus-square"></i> Add Payment
 		</button>
 
 		<div class="title-mid">

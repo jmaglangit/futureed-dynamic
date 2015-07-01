@@ -8,5 +8,9 @@ Routes::group(['prefix' => '/tip'], function() {
 			['except' => ['create', 'edit']]);
 
 
+		Routes::resource('/admin', 'Api\v1\AdminTipController',
+			['except' => ['create', 'edit']]);
+
+
 
 });

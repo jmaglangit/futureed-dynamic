@@ -1,13 +1,13 @@
-<div ng-if="tips.active_list">
-	<div class="col-xs-12 success-container" ng-if="tips.errors || tips.success">
-		<div class="alert alert-error" ng-if="tips.errors">
-			<p ng-repeat="error in tips.errors track by $index">
+<div ng-if="help.active_list">
+	<div class="col-xs-12 success-container" ng-if="help.errors || help.success">
+		<div class="alert alert-error" ng-if="help.errors">
+			<p ng-repeat="error in help.errors track by $index">
 				{! error !}
 			</p>
 		</div>
 
-        <div class="alert alert-success" ng-if="tips.success">
-            <p>{! tips.success !}</p>
+        <div class="alert alert-success" ng-if="help.success">
+            <p>{! help.success !}</p>
         </div>
     </div>
 
@@ -20,7 +20,7 @@
 			{!! Form::open(
 				array('id' => 'search_form'
 					, 'class' => 'form-horizontal'
-					, 'ng-submit' => 'tips.searchFnc($event)'
+					, 'ng-submit' => 'help.searchFnc($event)'
 				)
 			)!!}
 			<div class="form-group">
@@ -28,7 +28,7 @@
 					{!! Form::text('search_module', ''
 						,array(
 							'placeholder' => 'Module'
-							, 'ng-model' => 'tips.search.module'
+							, 'ng-model' => 'help.search.module'
 							, 'class' => 'form-control btn-fit'
 						)
 					)!!}
@@ -38,7 +38,7 @@
 					{!! Form::text('search_subject', ''
 						,array(
 							'placeholder' => 'Subject'
-							, 'ng-model' => 'tips.search.subject'
+							, 'ng-model' => 'help.search.subject'
 							, 'class' => 'form-control btn-fit'
 						)
 					)!!}
@@ -48,7 +48,7 @@
 					{!! Form::button('Search'
 						,array(
 							'class' => 'btn btn-blue'
-							, 'ng-click' => 'tips.searchFnc($event)'
+							, 'ng-click' => 'help.searchFnc($event)'
 						)
 					)!!}
 				</div>
@@ -58,7 +58,7 @@
 					{!! Form::text('search_area', ''
 						,array(
 							'placeholder' => 'Area'
-							, 'ng-model' => 'tips.search.area'
+							, 'ng-model' => 'help.search.area'
 							, 'class' => 'form-control btn-fit'
 						)
 					)!!}
@@ -74,7 +74,7 @@
 						, ''
 						, array(
 							'class' => 'form-control'
-							, 'ng-model' => 'tips.search.status'
+							, 'ng-model' => 'help.search.status'
 						)
 					) !!}
 				</div>
@@ -83,7 +83,7 @@
 					{!! Form::button('Clear'
 						,array(
 							'class' => 'btn btn-gold'
-							, 'ng-click' => 'tips.clearFnc($event)'
+							, 'ng-click' => 'help.clearFnc($event)'
 						)
 					)!!}
 				</div>
@@ -102,7 +102,7 @@
 						, ''
 						, array(
 							'class' => 'form-control'
-							, 'ng-model' => 'tips.search.link_type'
+							, 'ng-model' => 'help.search.link_type'
 						)
 					) !!}
 				</div>
@@ -112,7 +112,7 @@
 	 
 	<div class="col-xs-12 table-container">
 		<div class="title-mid">
-			Tip List
+			Help Request List
 		</div>
 
 		<div class="list-container" ng-cloak>
@@ -126,9 +126,9 @@
 					)
 					, '10'
 					, array(
-						'ng-model' => 'tips.table.size'
-						, 'ng-change' => 'tips.paginateBySize()'
-						, 'ng-if' => "tips.records.length"
+						'ng-model' => 'help.table.size'
+						, 'ng-change' => 'help.paginateBySize()'
+						, 'ng-if' => "help.records.length"
 						, 'class' => 'form-control paginate-size pull-right'
 					)
 				) !!}
@@ -145,24 +145,24 @@
 				            <th>Area</th>
 				            <th>Title</th>
 				            <th>Status</th>
-				            <th ng-if="tips.records.length">Actions</th>
+				            <th ng-if="help.records.length">Actions</th>
 				        </tr>
 			        </thead>
 			        <tbody>
-				        <tr ng-repeat="tipInfo in tips.records">
+				        <tr ng-repeat="tipInfo in help.records">
 				            <td>{! tipInfo.code !}</td>
 				            <td>{! tipInfo.name !}</td>
 				            <td>{! tipInfo.description !}</td>
 				            <td>{! tipInfo.code !}</td>
 				            <td>{! tipInfo.name !}</td>
 				            <td>{! tipInfo.description !}</td>
-				            <td ng-if="tips.records.length">
+				            <td ng-if="help.records.length">
 				            	<div class="row">
 				            		<div class="col-xs-4">
-				            			<a href="" ng-click="tips.setActive(futureed.ACTIVE_VIEW)"><span><i class="fa fa-eye"></i></span></a>
+				            			<a href="" ng-click="help.setActive(futureed.ACTIVE_VIEW)"><span><i class="fa fa-eye"></i></span></a>
 				            		</div>
 				            		<div class="col-xs-4">
-				            			<a href="" ng-click="tips.setActive(futureed.ACTIVE_EDIT)"><span><i class="fa fa-pencil"></i></span></a>
+				            			<a href="" ng-click="help.setActive(futureed.ACTIVE_EDIT)"><span><i class="fa fa-pencil"></i></span></a>
 				            		</div>
 				            		<div class="col-xs-4">
 				            			<a href="" ng-click=""><span><i class="fa fa-trash"></i></span></a>
@@ -170,12 +170,12 @@
 				            	</div>
 				            </td>
 				        </tr>
-				        <tr class="odd" ng-if="!tips.records.length && !tips.table.loading">
+				        <tr class="odd" ng-if="!help.records.length && !help.table.loading">
 				        	<td valign="top" colspan="7">
 				        		No records found
 				        	</td>
 				        </tr>
-				        <tr class="odd" ng-if="tips.table.loading">
+				        <tr class="odd" ng-if="help.table.loading">
 				        	<td valign="top" colspan="7">
 				        		Loading...
 				        	</td>
@@ -183,17 +183,17 @@
 			        </tbody>
 				</table>
 			</div>
-			<div class="pull-right" ng-if="tips.records.length">
+			<div class="pull-right" ng-if="help.records.length">
 				<pagination 
-					total-items="tips.table.total_items" 
-					ng-model="tips.table.page"
+					total-items="help.table.total_items" 
+					ng-model="help.table.page"
 					max-size="3"
-					items-per-page="tips.table.size" 
+					items-per-page="help.table.size" 
 					previous-text = "&lt;"
 					next-text="&gt;"
 					class="pagination" 
 					boundary-links="true"
-					ng-change="tips.paginateByPage()">
+					ng-change="help.paginateByPage()">
 				</pagination>
 			</div>
 		</div>

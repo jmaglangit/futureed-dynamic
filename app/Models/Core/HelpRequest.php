@@ -56,5 +56,4 @@ class HelpRequest extends Model {
     public function scopeStatus($query, $status){
         return $query->where('status',$status);
     }
-
 }

@@ -41,7 +41,7 @@
 			</div>
 			<div class="form-group">
 				<div class="col-xs-6 col-xs-offset-3 btn-container">
-					{!! Form::button('Add'
+					{!! Form::button('Add Student'
 						, array(
 							'class' => 'btn btn-blue btn-medium bottom-5'
 							, 'ng-disabled' => 'student.exist'
@@ -213,7 +213,7 @@
 			<div class="col-xs-6 col-xs-offset-3">
 				<div class="btn-container">
 						<div class="margin-40-bot">
-							{!! Form::button('Add'
+							{!! Form::button('Add Student'
 								, array(
 									'class' => 'btn btn-blue btn-medium'
 									, 'ng-click' => 'student.addStudent()'
