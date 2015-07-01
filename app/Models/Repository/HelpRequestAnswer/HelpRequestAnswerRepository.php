@@ -69,4 +69,11 @@ class HelpRequestAnswerRepository implements HelpRequestAnswerRepositoryInterfac
 
 	}
 
+	public function getHelpRequestAnswer($id){
+
+		return HelpRequestAnswer::with('helpRequest','module','subject','subjectArea')
+			->StatusEnabled()->find($id);
+
+	}
+
 }
