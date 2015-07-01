@@ -63,7 +63,7 @@
 	</div>
 
 	<button class="btn btn-blue btn-small margin-0-30" ng-click="subject.setManageSubjectActive('add_subject')">
-		<i class="fa fa-plus-square"></i> Add 
+		<i class="fa fa-plus-square"></i> Add Subject
 	</button>
 
 	<div class="col-xs-12 padding-0-30">

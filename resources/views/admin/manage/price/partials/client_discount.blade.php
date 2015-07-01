@@ -130,7 +130,7 @@
 	                				)
 	                			) !!}
 
-	                			{!! Form::button('Add'
+	                			{!! Form::button('Add Client Discount'
 	                				, array(
 	                					'class' => 'btn btn-blue btn-medium'
 	                					, 'ng-click' => "sale.addClientDiscount()"

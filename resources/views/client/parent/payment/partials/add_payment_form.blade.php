@@ -32,7 +32,7 @@
         		</div>
         		<div class="col-xs-3">
         			<div class="btn-container">
-						<button class="btn btn-blue btn-medium margin-0-top" ng-click="payment.addStudentOrderByEmail()" type="button"><span><i class="fa fa-plus-square"></i></span> Add</button>
+						<button class="btn btn-blue btn-large margin-0-top" ng-click="payment.addStudentOrderByEmail()" type="button"><span><i class="fa fa-plus-square"></i></span> Add Student</button>
         			</div>
         		</div>
         	</div>
@@ -67,7 +67,7 @@
         		</div>
         		<div class="col-xs-3">
         			<div class="btn-container">
-        				<button class="btn btn-blue btn-medium margin-0-top" ng-click="payment.addStudentOrderByUsername()" type="button"><span><i class="fa fa-plus-square"></i></span> Add</button>
+        				<button class="btn btn-blue btn-large margin-0-top" ng-click="payment.addStudentOrderByUsername()" type="button"><span><i class="fa fa-plus-square"></i></span> Add Student</button>
         			</div>
         		</div>
         	</div>
