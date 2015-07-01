@@ -159,5 +159,9 @@ class AppServiceProvider extends ServiceProvider {
             'FutureEd\Models\Repository\OrderDetail\OrderDetailRepositoryInterface',
             'FutureEd\Models\Repository\OrderDetail\OrderDetailRepository'
         );
+		$this->app->bind(
+			'FutureEd\Models\Repository\Tip\TipRepositoryInterface',
+			'FutureEd\Models\Repository\Tip\TipRepository'
+		);
 	}
 }

@@ -88,5 +88,8 @@ return [
 	//Parent invite student subject
 	'invite_student' => 'You have been invited by a Parent!',
 
+	//set value for link_type
+	'link_type_general' => 'General',
+
 
 ];
