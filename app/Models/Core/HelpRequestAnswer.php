@@ -30,22 +30,22 @@ class HelpRequestAnswer extends Model {
 	//Relationships
 	public function helpRequest(){
 
-		return $this->belongsTo('FutureEd\Model\Core\HelpRequest');
+		return $this->belongsTo('FutureEd\Models\Core\HelpRequest');
 	}
 
 	public function module(){
 
-		return $this->belongsTo('FutureEd\Model\Core\Module');
+		return $this->belongsTo('FutureEd\Models\Core\Module');
 	}
 
 	public function subject(){
 
-		return $this->belongsTo('FutureEd\Model\Core\Subject');
+		return $this->belongsTo('FutureEd\Models\Core\Subject');
 	}
 
 	public function subjectArea(){
 
-		return $this->belongsTo('FutureEd\Model\Core\SubjectArea');
+		return $this->belongsTo('FutureEd\Models\Core\SubjectArea');
 	}
 
 
@@ -82,6 +82,11 @@ class HelpRequestAnswer extends Model {
 
 		return $query->where('request_answer_status', $answer_status);
 
+	}
+
+	public function scopeStatusEnabled($query){
+
+		return $query->where('status', config('futureed.enabled'));
 	}
 
 
