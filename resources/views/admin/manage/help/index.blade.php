@@ -26,7 +26,10 @@
 					    	<a href="{!! route('admin.manage.tips.index') !!}"><span><i class="fa fa-lightbulb-o"></i>Tips</span></a>
 					    </li>
 					    <li class="active">
-					    	<a href=""><span><i class="fa fa-database"></i>Help Requests</span></a>
+					    	<a href=""><span><i class="fa fa-question-circle"></i>Help Requests</span></a>
+					    </li>
+					    <li>
+					    	<a href="{!! route('admin.manage.answer.index') !!}"><span><i class="fa fa-exclamation-circle"></i>Help Request Answers</span></a>
 					    </li>
 					</ul>
 				</div>
