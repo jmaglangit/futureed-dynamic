@@ -11,7 +11,7 @@ interface HelpRequestAnswerRepositoryInterface {
 
 	public function deleteHelpRequestAnswer($id);
 
-	public function acceptHelpRequestAnswer($id);
+	public function updateRequestAnswerStatus($id,$status);
 
-	public function reject
+
 }
