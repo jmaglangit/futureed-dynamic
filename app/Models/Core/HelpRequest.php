@@ -75,4 +75,9 @@ class HelpRequest extends Model {
         return $query->where('title','like','%'.$title.'%');
     }
 
+    public function scopeLinkType($query,$link_type){
+        return $query->where('link_type',$link_type);
+    }
+
+
 }
