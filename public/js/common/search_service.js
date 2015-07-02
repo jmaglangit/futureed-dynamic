@@ -23,6 +23,8 @@ function SearchService() {
 				scope.search.subscription_id = Constants.EMPTY_STR;
 				scope.search.subscription_name = Constants.EMPTY_STR;
 				scope.search.subject = Constants.EMPTY_STR;
+				scope.search.subject_area = Constants.EMPTY_STR;
+				scope.search.title = Constants.EMPTY_STR;
 			}
 		});
 	};
