@@ -156,19 +156,19 @@
 			        </thead>
 			        <tbody>
 				        <tr ng-repeat="tipInfo in tips.records">
-				            <td>{! tipInfo.code !}</td>
-				            <td>{! tipInfo.name !}</td>
-				            <td>{! tipInfo.description !}</td>
-				            <td>{! tipInfo.code !}</td>
-				            <td>{! tipInfo.name !}</td>
-				            <td>{! tipInfo.description !}</td>
+				            <td>{! tipInfo.link_type !}</td>
+				            <td>{! tipInfo.module.name !}</td>
+				            <td>{! tipInfo.subject.name !}</td>
+				            <td>{! tipInfo.subjectarea.name !}</td>
+				            <td>{! tipInfo.title !}</td>
+				            <td>{! tipInfo.tip_status !}</td>
 				            <td ng-if="tips.records.length">
 				            	<div class="row">
 				            		<div class="col-xs-4">
-				            			<a href="" ng-click="tips.setActive(futureed.ACTIVE_VIEW)"><span><i class="fa fa-eye"></i></span></a>
+				            			<a href="" ng-click="tips.setActive(futureed.ACTIVE_VIEW, tipInfo.id)"><span><i class="fa fa-eye"></i></span></a>
 				            		</div>
 				            		<div class="col-xs-4">
-				            			<a href="" ng-click="tips.setActive(futureed.ACTIVE_EDIT)"><span><i class="fa fa-pencil"></i></span></a>
+				            			<a href="" ng-click="tips.setActive(futureed.ACTIVE_EDIT, tipInfo.id)"><span><i class="fa fa-pencil"></i></span></a>
 				            		</div>
 				            		<div class="col-xs-4">
 				            			<a href="" ng-click=""><span><i class="fa fa-trash"></i></span></a>

@@ -17,7 +17,7 @@ function ManageTipsController($scope, ManageTipsService, TableService, SearchSer
 		asd : 'asd'
 	}];
 
-	self.setActive = function(active) {
+	self.setActive = function(active, id) {
 		self.errors = Constants.FALSE;
 
 		self.active_list = Constants.FALSE;
@@ -27,10 +27,12 @@ function ManageTipsController($scope, ManageTipsService, TableService, SearchSer
 		switch(active) {
 
 			case Constants.ACTIVE_VIEW :
+				self.tipDetail(id);
 				self.active_view = Constants.TRUE;
 				break;
 
 			case Constants.ACTIVE_EDIT :
+				self.tipDetail(id);
 				self.active_edit = Constants.TRUE;
 				break;
 
@@ -52,6 +54,10 @@ function ManageTipsController($scope, ManageTipsService, TableService, SearchSer
 	}
 
 	self.clearFnc = function() {
+		
+	}
+
+	self.tipDetail = function(id) {
 		
 	}
 }

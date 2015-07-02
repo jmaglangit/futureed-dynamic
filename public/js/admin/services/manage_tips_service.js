@@ -11,5 +11,9 @@ function ManageTipsService($http) {
 		return true;
 	}
 
+	service.detail = function(id) {
+		
+	}
+
 	return service;
 }
