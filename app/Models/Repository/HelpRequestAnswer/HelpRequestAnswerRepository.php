@@ -23,6 +23,7 @@ class HelpRequestAnswerRepository implements HelpRequestAnswerRepositoryInterfac
 		 * subject_area
 		 * subject
 		 * request_answer_status
+		 * created_by
 		 *
 		 */
 		if(isset($criteria['help_request'])){
