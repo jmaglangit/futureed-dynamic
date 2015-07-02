@@ -121,6 +121,12 @@ class HelpRequestAnswerRepository implements HelpRequestAnswerRepositoryInterfac
 		}
 	}
 
+	/**
+	 * Update status.
+	 * @param $id
+	 * @param $status
+	 * @return mixed|string
+	 */
 	public function updateRequestAnswerStatus($id,$status){
 
 		try{
