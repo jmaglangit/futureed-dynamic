@@ -828,4 +828,9 @@ function FutureedController($scope, apiService, futureed) {
 			self.errors = $scope.internalError();
 		});
 	  }
+	  $scope.backgroundClass = backgroundClass;
+	  function backgroundClass() {
+	  	$scope.backgroundChange = Constants.TRUE;
+	  }
+
 };

@@ -23,6 +23,11 @@
               <button type="submit" class="btn btn-default">Submit</button>
             </form>
              -->
+             <ul class="nav navbar-nav ul-left">
+               <li>
+                 <a href="{!! route('student.class.index') !!}">Join Class</a>
+               </li>
+             </ul>
             <ul class="nav navbar-nav navbar-right">
               <!-- <li><a href="#">Link</a></li> -->
               <li class="dropdown">
