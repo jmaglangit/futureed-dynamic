@@ -15,6 +15,9 @@ Routes::group(['prefix' => '/tip'], function() {
 				'uses' => 'Api\v1\TipController@updateTipStatus',
 				'as' => 'tip.update.status']);
 
+		Routes::resource('/teacher', 'Api\v1\TeacherTipController',
+			['except' => ['create', 'edit']]);
+
 
 
 });

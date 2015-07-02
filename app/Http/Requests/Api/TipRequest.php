@@ -28,7 +28,7 @@ class TipRequest extends ApiRequest {
 
 					case 'tip.update.status':
 						return [
-							'tip_status' => 'required|alpha|in:Verified,Rejected',
+							'tip_status' => 'required|alpha|in:Accepted,Rejected',
 						];
 						break;
 				}

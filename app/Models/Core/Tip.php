@@ -3,6 +3,7 @@
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+
 class Tip extends Model {
 
 	use SoftDeletes;
@@ -14,7 +15,6 @@ class Tip extends Model {
 	protected $hidden = [
 		'created_by',
 		'updated_by',
-		'created_at',
 		'updated_at',
 		'deleted_at'];
 
@@ -43,6 +43,12 @@ class Tip extends Model {
 	public function subjectArea(){
 
 		return $this->belongsTo('FutureEd\Models\Core\SubjectArea');
+
+	}
+
+	public function student(){
+
+		return $this->belongsTo('FutureEd\Models\Core\Student');
 
 	}
 
@@ -91,6 +97,24 @@ class Tip extends Model {
 	public function scopeId($query, $id){
 
 		return $query->where('id','=',$id);
+	}
+
+	public function scopeClassId($query, $class_id){
+
+		return $query->where('class_id','=',$class_id);
+	}
+
+	public function scopeTitle($query,$title){
+
+		return $query->where('title','like','%'.$title.'%');
+	}
+
+	public function scopeName($query,$name){
+
+		return $query->whereHas('student', function($query) use ($name) {
+			$query->where('first_name','like','%'.$name.'%')->orWhere('last_name', 'like', '%'.$name.'%');
+		});
+
 	}
 
 

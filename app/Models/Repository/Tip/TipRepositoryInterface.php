@@ -13,5 +13,7 @@ interface TipRepositoryInterface {
 
 	public function deleteTip($id);
 
+	public function viewClassTips($criteria = array(), $limit = 0, $offset = 0);
+
 
 }
