@@ -11,5 +11,7 @@ interface HelpRequestAnswerRepositoryInterface {
 
 	public function deleteHelpRequestAnswer($id);
 
-    public function getHelpRequestAnswerByHelpRequestId($help_request_id);
+	public function updateRequestAnswerStatus($id,$status);
+
+
 }

@@ -121,14 +121,28 @@ class HelpRequestAnswerRepository implements HelpRequestAnswerRepositoryInterfac
 		}
 	}
 
-    /**
-     * Get a record on Help Request Answer by help_request_id.
-     * @param $id
-     * @return mixed
-     */
-    public function getHelpRequestAnswerByHelpRequestId($help_request_id){
-        return HelpRequestAnswer::with('helpRequest','module','subject','subjectArea')->helpRequestId($help_request_id)->first();
-    }
+	/**
+	 * Update status.
+	 * @param $id
+	 * @param $status
+	 * @return mixed|string
+	 */
+	public function updateRequestAnswerStatus($id,$status){
+
+		try{
+			HelpRequestAnswer::find($id)
+				->update([
+					'request_answer_status' => $status
+				]);
+
+			return $this->getHelpRequestAnswer($id);
+
+		}catch (Exception $e){
+
+			return $e->getMessage();
+		}
+	}
+
 
 
 }

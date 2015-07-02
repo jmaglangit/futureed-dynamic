@@ -141,7 +141,7 @@ class HelpRequestAnswerController extends ApiController {
 	public function destroy($id)
 	{
 
-		return $this->respondWithData($this->help_request_answer->deleteHelperRequestAnswer($id));
+		return $this->respondWithData($this->help_request_answer->deleteHelpRequestAnswer($id));
 	}
 
 }

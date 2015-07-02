@@ -17,10 +17,10 @@ class HelpRequestAnswer extends Model {
 		'help_request_id',
 		'module_id',
 		'subject_id',
-		'area_id',
+		'subject_area_id',
 		'rating',
 		'seq_no',
-		'is_verified',
+		'request_answer_status',
 		'status',
 		'points'
 	];
