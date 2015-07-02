@@ -35,5 +35,12 @@ function ManageTipsService($http) {
 		});
 	}
 
+	service.delete = function(id) {
+		return $http({
+			method 	: Constants.METHOD_DELETE
+			, url   : serviceUrl + 'tip/admin/' + id
+		});
+	}
+
 	return service;
 }

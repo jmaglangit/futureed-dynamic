@@ -20,4 +20,8 @@ class ManageTipsController extends Controller{
 	public function detail_form() {
 		return view('admin.manage.tips.partials.detail');
 	}
+
+	public function delete_form() {
+		return view('admin.manage.tips.partials.delete');
+	}
 }	

@@ -445,6 +445,11 @@
 						['as' => 'admin.manage.tips.partials.list'
 						, 'uses' => 'FutureLesson\Admin\ManageTipsController@list_form'
 					]);
+
+					Routes::get('/delete', 
+						['as' => 'admin.manage.tips.partials.delete'
+						, 'uses' => 'FutureLesson\Admin\ManageTipsController@delete_form'
+					]);
 				});
 			});
 
@@ -465,6 +470,11 @@
 					Routes::get('/list', 
 						['as' => 'admin.manage.help.partials.list'
 						, 'uses' => 'FutureLesson\Admin\ManageHelpRequestController@list_form'
+					]);
+
+					Routes::get('/delete', 
+						['as' => 'admin.manage.help.partials.delete'
+						, 'uses' => 'FutureLesson\Admin\ManageHelpRequestController@delete_form'
 					]);
 				});
 			});

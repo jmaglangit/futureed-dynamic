@@ -34,11 +34,13 @@
 					</ul>
 				</div>
 					
-				<div class="tab-content">
+				<div class="tab-content" ng-init="tips.setActive()">
 				  	<div id="home" class="tab-pane fade in active">
 						<div template-directive template-url="{!! route('admin.manage.tips.partials.list') !!}"></div>
 
 						<div template-directive template-url="{!! route('admin.manage.tips.partials.detail') !!}"></div>
+
+						<div template-directive template-url="{!! route('admin.manage.tips.partials.delete') !!}"></div>
 					</div>
 			  	</div>
 			</div>
