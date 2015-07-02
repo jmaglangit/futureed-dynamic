@@ -1,6 +1,8 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
 
+use FutureEd\Http\Requests\Api\HelpRequestAnswerRequest;
+use FutureEd\Models\Core\HelpRequestAnswer;
 use FutureEd\Models\Repository\HelpRequestAnswer\HelpRequestAnswerRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
@@ -108,9 +110,26 @@ class HelpRequestAnswerController extends ApiController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update(HelpRequestAnswerRequest $request,$id)
 	{
-		//
+		$data = $request->only(
+			'student_id',
+			'content',
+			'help_request_id',
+			'module_id',
+			'subject_id',
+			'subject_area_id',
+			'rating',
+			'seq_no',
+			'request_answer_status',
+			'status',
+			'points'
+		);
+
+		return $this->respondWithData(
+			$this->help_request_answer->updateHelpRequestAnswer($id,$data)
+		);
+
 	}
 
 	/**
@@ -121,7 +140,8 @@ class HelpRequestAnswerController extends ApiController {
 	 */
 	public function destroy($id)
 	{
-		//
+
+		return $this->respondWithData($this->help_request_answer->deleteHelperRequestAnswer($id));
 	}
 
 }
