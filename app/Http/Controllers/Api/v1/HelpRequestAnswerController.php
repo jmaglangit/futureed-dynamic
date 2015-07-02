@@ -67,6 +67,11 @@ class HelpRequestAnswerController extends ApiController {
 			$criteria['request_answer_status'] = Input::get('request_answer_status');
 		}
 
+		if(Input::get('created_by')){
+
+			$criteria['created_by'] = Input::get('created_by');
+		}
+
 		if(Input::get('limit')) {
 			$limit = intval(Input::get('limit'));
 		}
@@ -86,7 +91,7 @@ class HelpRequestAnswerController extends ApiController {
 	 */
 	public function store()
 	{
-		//
+		//TODO: Should store the creator of the record and time.
 	}
 
 	/**
