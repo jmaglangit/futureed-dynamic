@@ -1012,3 +1012,9 @@ div > .btncon > a {
 .cursor-pointer {
 	cursor: pointer;
 }
+
+/*Calendar Custom Design*/
+
+.switch {
+	text-decoration: underline;
+}
