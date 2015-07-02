@@ -126,6 +126,79 @@ class TipRepository implements TipRepositoryInterface{
 
 		}
 	}
+
+	/**
+	 *
+	 * @return list of tips under a class
+	 */
+	public function viewClassTips($criteria = array(), $limit = 0, $offset = 0){
+
+		$tip = new Tip();
+
+		$tip = $tip->with('subject','module','subjectarea','student')->where('tip_status','!=','Rejected');
+
+		$count = 0;
+
+		if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
+
+			$count = $tip->count();
+
+		} else {
+
+			if (count($criteria) > 0) {
+
+				//for class_id
+				if(isset($criteria['class_id'])) {
+
+					$tip = $tip->classId($criteria['class_id']);
+				}
+
+				//for title
+				if(isset($criteria['title'])) {
+
+					$tip = $tip->title($criteria['title']);
+				}
+
+
+				//for tip_status
+				if(isset($criteria['status'])) {
+
+					$tip = $tip->tipStatus($criteria['status']);
+
+				}
+
+				//relation to student query creators name
+				if(isset($criteria['created'])) {
+
+					$tip = $tip->name($criteria['created']);
+
+				}
+
+				//check relation to subject
+				if(isset($criteria['subject'])){
+
+					$tip = $tip->subjectName($criteria['subject']);
+				}
+
+				//check relation to subject_area
+				if(isset($criteria['area'])){
+
+					$tip = $tip->subjectAreaName($criteria['area']);
+				}
+
+			}
+
+			$count = $tip->count();
+
+			if ($limit > 0 && $offset >= 0) {
+				$tip = $tip->offset($offset)->limit($limit);
+			}
+
+		}
+
+		return ['total' => $count, 'records' => $tip->get()->toArray()];
+
+	}
 	
 
 }
