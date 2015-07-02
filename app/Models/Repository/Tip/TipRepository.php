@@ -92,7 +92,7 @@ class TipRepository implements TipRepositoryInterface{
 	public function viewTip($id){
 
 		$tip = new Tip();
-		$tip = $tip->with('subject','module','subjectarea')->id($id);
+		$tip = $tip->with('subject','module','subjectarea','student')->id($id);
 
 		return $tip->first();
 

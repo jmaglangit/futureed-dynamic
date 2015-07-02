@@ -102,7 +102,16 @@ class TeacherTipController extends ApiController {
 	 */
 	public function show($id)
 	{
-		//
+		$tip = $this->tip->viewTip($id);
+
+		if(!$tip){
+
+			return $this->respondErrorMessage(2120);
+		}
+
+		return $this->respondWithData($tip);
+
+
 	}
 
 	/**
