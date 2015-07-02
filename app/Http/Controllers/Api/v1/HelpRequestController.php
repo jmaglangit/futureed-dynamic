@@ -2,14 +2,17 @@
 
 use FutureEd\Http\Requests\Api\HelpRequestRequest;
 use FutureEd\Models\Repository\HelpRequest\HelpRequestRepositoryInterface;
+use FutureEd\Models\Repository\HelpRequestAnswer\HelpRequestAnswerRepositoryInterface;
 use Illuminate\Support\Facades\Input;
 
 class HelpRequestController extends ApiController{
 
     protected $help_request;
+    protected $help_request_answer;
 
-    public function __construct(HelpRequestRepositoryInterface $help_request){
+    public function __construct(HelpRequestRepositoryInterface $help_request, HelpRequestAnswerRepositoryInterface $help_request_answer){
         $this->help_request = $help_request;
+        $this->help_request_answer = $help_request_answer;
     }
 
     /**
@@ -79,12 +82,18 @@ class HelpRequestController extends ApiController{
 
     /**
      * Remove the specified resource from storage.
+     * Will Check if the help request has an help request answer. If it does have at least one, help request can't be deleted.
      *
      * @param  int  $id
      * @return Response
      */
     public function destroy($id)
     {
+        $help_request_answer = $this->help_request_answer->getHelpRequestAnswerByHelpRequestId($id);
+        if(!is_null($help_request_answer)){
+            return $this->respondErrorMessage(2137);
+        }
+
         return $this->respondWithData($this->help_request->deleteHelpRequest($id));
     }
 }

@@ -90,8 +90,9 @@ return [
 		2132 => 'Invitation code is invalid.',
 		2133 => 'Registration token is invalid.',
 		2134 => "Can't change School: Student has active Subscription.",
-	       	2135 => "The class is already full.",
+        2135 => "The class is already full.",
 		2136 => 'Unable to Delete.Tip has rating.',
+        2137 => 'Unable to delete. Help request has answers.',
 
 		// Client Error messages
 		2200 => 'Email already exists.',

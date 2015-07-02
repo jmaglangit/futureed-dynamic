@@ -89,6 +89,13 @@ class HelpRequestAnswer extends Model {
 		return $query->where('status', config('futureed.enabled'));
 	}
 
+    public function scopeHelpRequestId($query,$help_request_id){
+
+        return $query->where('help_request_id', $help_request_id);
+    }
+
+
+
 
 
 
