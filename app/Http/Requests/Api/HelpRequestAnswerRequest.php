@@ -38,6 +38,7 @@ class HelpRequestAnswerRequest extends ApiRequest {
 					'request_answer_status' => 'required|in:Pending,Accepted,Rejected',
 					'status' => 'required|in:Enabled,Disabled',
 					'points' => 'required|numeric',
+					'created_by' => 'required|exists:users,id,deleted_at,NULL'
 
 				];
 				break;
