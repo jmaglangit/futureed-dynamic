@@ -66,6 +66,9 @@ class HelpRequestRepository implements HelpRequestRepositoryInterface{
                 if(isset($criteria['title'])) {
                     $query = $query->title($criteria['title']);
                 }
+                if(isset($criteria['link_type'])) {
+                    $query = $query->linkType($criteria['link_type']);
+                }
             }
             $count = $query->count();
 
