@@ -52,8 +52,13 @@ class HelpRequestAnswerRepository implements HelpRequestAnswerRepositoryInterfac
 
 		}
 
+		if(isset($criteria['created_by'])){
+
+			$help_request_answer = $help_request_answer->createdBy($criteria['created_by']);
+		}
+
 		$help_request_answer = $help_request_answer
-			->with('helpRequest','module','subject','subjectArea')
+			->with('helpRequest','module','subject','subjectArea','user')
 			->StatusEnabled();
 
 		$count = $help_request_answer->count();
@@ -76,7 +81,7 @@ class HelpRequestAnswerRepository implements HelpRequestAnswerRepositoryInterfac
 	 */
 	public function getHelpRequestAnswer($id){
 
-		return HelpRequestAnswer::with('helpRequest','module','subject','subjectArea')
+		return HelpRequestAnswer::with('helpRequest','module','subject','subjectArea','user')
 			->StatusEnabled()->find($id);
 
 	}
@@ -128,7 +133,7 @@ class HelpRequestAnswerRepository implements HelpRequestAnswerRepositoryInterfac
 	 */
 	public function getHelpRequestAnswerByHelpRequestId($help_request_id)
 	{
-		return HelpRequestAnswer::with('helpRequest', 'module', 'subject', 'subjectArea')->helpRequestId($help_request_id)->first();
+		return HelpRequestAnswer::with('helpRequest', 'module', 'subject', 'subjectArea','user')->helpRequestId($help_request_id)->first();
 	}
 
 	/**
