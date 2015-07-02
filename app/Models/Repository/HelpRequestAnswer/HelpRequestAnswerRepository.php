@@ -121,6 +121,22 @@ class HelpRequestAnswerRepository implements HelpRequestAnswerRepositoryInterfac
 		}
 	}
 
+	public function updateRequestAnswerStatus($id,$status){
+
+		try{
+			HelpRequestAnswer::find($id)
+				->update([
+					'request_answer_status' => $status
+				]);
+
+			return $this->getHelpRequestAnswer($id);
+
+		}catch (Exception $e){
+
+			return $e->getMessage();
+		}
+	}
+
 
 
 }
