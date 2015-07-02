@@ -95,7 +95,7 @@ class TipRepository implements TipRepositoryInterface{
 
 		$tip = $tip->with('subject','module','subjectarea','student');
 		$tip = $tip->find($id);
-		return $tip;
+		return $tip;	
 
 	}
 
