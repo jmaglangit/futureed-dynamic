@@ -29,7 +29,7 @@ class ChangeValuesInTipStatusOnTips extends Migration {
 
 		Schema::table('tips', function(Blueprint $table) {
 
-			$table->enum('tip_status', ['Pending','Rejected','Verified'])->after('rating');
+			$table->enum('tip_status', ['Pending','Rejected','Verified'])->default('Pending')->after('rating');
 
 		});
 

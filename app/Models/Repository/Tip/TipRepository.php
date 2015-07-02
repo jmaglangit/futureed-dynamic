@@ -127,7 +127,10 @@ class TipRepository implements TipRepositoryInterface{
 		}
 	}
 
-	//view the list of tips under a class
+	/**
+	 *
+	 * @return list of tips under a class
+	 */
 	public function viewClassTips($criteria = array(), $limit = 0, $offset = 0){
 
 		$tip = new Tip();
