@@ -1,5 +1,5 @@
 <div ng-if="tips.active_list">
-	<div class="col-xs-12 success-container" ng-if="tips.errors || tips.success">
+	<div class="col-xs-12" ng-if="tips.errors || tips.success">
 		<div class="alert alert-error" ng-if="tips.errors">
 			<p ng-repeat="error in tips.errors track by $index">
 				{! error !}
@@ -165,7 +165,7 @@
 				            			<a href="" ng-click="tips.setActive(futureed.ACTIVE_EDIT, tipInfo.id)"><span><i class="fa fa-pencil"></i></span></a>
 				            		</div>
 				            		<div class="col-xs-4">
-				            			<a href="" ng-click=""><span><i class="fa fa-trash"></i></span></a>
+				            			<a href="" ng-click="tips.confirmDelete(tipInfo.id)"><span><i class="fa fa-trash"></i></span></a>
 				            		</div>	
 				            	</div>
 				            </td>

@@ -33,6 +33,9 @@ function ManageTipsController($scope, ManageTipsService, TableService, SearchSer
 				break;
 
 			case Constants.ACTIVE_LIST : 
+				self.active_list = Constants.TRUE;
+				break;
+
 			default:
 				self.success = Constants.FALSE;
 				self.active_list = Constants.TRUE;
@@ -43,6 +46,8 @@ function ManageTipsController($scope, ManageTipsService, TableService, SearchSer
 	}
 
 	self.searchFnc = function(event) {
+		self.success = Constants.FALSE;
+
 		self.tableDefaults();
 		self.list();
 
@@ -133,6 +138,40 @@ function ManageTipsController($scope, ManageTipsService, TableService, SearchSer
 				} else if(response.data) {
 					self.success = TipConstants.MSG_UPDATE_SUCCESS;
 					self.setActive(Constants.ACTIVE_VIEW, response.data.id);
+				}
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.confirmDelete = function(id) {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+		
+		self.confirm = {};
+		self.confirm.id = id;
+		self.confirm.delete = Constants.TRUE;
+
+		$("#delete_modal").modal({
+	        backdrop: 'static',
+	        keyboard: Constants.FALSE,
+	        show    : Constants.TRUE
+	    });
+	}
+
+	self.deleteTip = function() {
+		$scope.ui_block();
+		ManageTipsService.delete(self.confirm.id).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.success = TipConstants.MSG_DELETE_SUCCESS;
+					self.setActive(Constants.ACTIVE_LIST);
 				}
 			}
 
