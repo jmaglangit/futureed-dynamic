@@ -73,7 +73,7 @@ class ParentStudentRepository implements ParentStudentRepositoryInterface{
             $parentStudent = $parentStudent->parentId($criteria['parent_id']);
         }
 
-        $parentStudent = $parentStudent->with('student');
+        $parentStudent = $parentStudent->with('student')->UserConfirmed();
 
         return $parentStudent->get();
     }
