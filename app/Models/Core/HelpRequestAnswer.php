@@ -25,7 +25,7 @@ class HelpRequestAnswer extends Model {
 		'points'
 	];
 
-	protected $hidden = ['created_by','updated_by','created_at','updated_at','deleted_at'];
+	protected $hidden = ['updated_by','created_at','deleted_at'];
 
 	//Relationships
 	public function helpRequest(){
@@ -46,6 +46,11 @@ class HelpRequestAnswer extends Model {
 	public function subjectArea(){
 
 		return $this->belongsTo('FutureEd\Models\Core\SubjectArea');
+	}
+
+	public function user(){
+
+		return $this->belongsTo('FutureEd\Models\Core\User','created_by');
 	}
 
 
@@ -93,6 +98,14 @@ class HelpRequestAnswer extends Model {
 
         return $query->where('help_request_id', $help_request_id);
     }
+
+	public function scopeCreatedBy($query, $created_by){
+
+		return $query->whereHas('user',function($query) use ($created_by){
+
+			$query->where('name','like','%'.$created_by.'%');
+		});
+	}
 
 
 
