@@ -135,8 +135,8 @@
 			</div>
 
 			<div class="clearfix"></div>
-			<div class="table-responsive">
-				<table id="grade-list" class="table table-striped table-bordered">
+			<div class="table-responsive" ng-init="tips.listTips()">
+				<table id="tip-list" class="table table-striped table-bordered">
 					<thead>
 				        <tr>
 				            <th>Displayed At</th>
@@ -150,12 +150,12 @@
 			        </thead>
 			        <tbody>
 				        <tr ng-repeat="tipInfo in tips.records">
-				            <td>{! tipInfo.code !}</td>
-				            <td>{! tipInfo.name !}</td>
-				            <td>{! tipInfo.description !}</td>
-				            <td>{! tipInfo.code !}</td>
-				            <td>{! tipInfo.name !}</td>
-				            <td>{! tipInfo.description !}</td>
+				            <td>{! tipInfo.link_type !}</td>
+				            <td>{! tipInfo.module.name !}</td>
+				            <td>{! tipInfo.subject.name !}</td>
+				            <td>{! tipInfo.subject_area.name !}</td>
+				            <td>{! tipInfo.title !}</td>
+				            <td>{! tipInfo.tip_status !}</td>
 				            <td ng-if="tips.records.length">
 				            	<div class="row">
 				            		<div class="col-xs-4">
