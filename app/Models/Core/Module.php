@@ -7,8 +7,12 @@ class Module extends Model {
 
 	use SoftDeletes;
 
-	protected $table = 'modules';
+    protected $table = 'modules';
 
+    //Scopes
+    public function scopeName($query, $name) {
 
+        return $query->where('name', 'like', '%'.$name.'%');
 
+    }
 }
