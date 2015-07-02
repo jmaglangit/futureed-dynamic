@@ -33,8 +33,12 @@ function ManageTipsController($scope, ManageTipsService, TableService, SearchSer
 				self.active_edit = Constants.TRUE;
 				break;
 
-			case Constants.ACTIVE_LIST : 
+			case Constants.ACTIVE_LIST :
 				self.active_list = Constants.TRUE;
+				
+				self.searchDefaults();
+				self.tableDefaults();
+				self.list();
 				break;
 
 			default:

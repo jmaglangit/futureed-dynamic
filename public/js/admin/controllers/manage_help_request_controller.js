@@ -35,6 +35,10 @@ function ManageHelpRequestController($scope, ManageHelpRequestService, TableServ
 
 			case Constants.ACTIVE_LIST : 
 				self.active_list = Constants.TRUE;
+				
+				self.searchDefaults();
+				self.tableDefaults();
+				self.list();
 				break;
 
 			default:
