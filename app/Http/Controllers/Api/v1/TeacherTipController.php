@@ -3,6 +3,7 @@
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
+use FutureEd\Http\Requests\Api\TeacherTipRequest;
 use FutureEd\Models\Repository\Tip\TipRepositoryInterface;
 
 use Illuminate\Http\Request;
@@ -131,9 +132,23 @@ class TeacherTipController extends ApiController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($id,TeacherTipRequest $request)
 	{
-		//
+		$data = $request->only('title','content');
+
+		//get tip
+		$tip = $this->tip->viewTip($id);
+
+		//check if tip is empty
+		if(!$tip){
+
+			return $this->respondErrorMessage(2120);
+		}
+
+		$this->tip->updateTip($id,$data);
+
+		return $this->respondWithData($this->tip->viewTip($id));
+
 	}
 
 	/**
