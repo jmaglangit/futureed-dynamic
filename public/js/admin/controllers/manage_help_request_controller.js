@@ -12,8 +12,9 @@ function ManageHelpRequestController($scope, ManageHelpRequestService, TableServ
 	SearchService(self);
 	self.searchDefaults();
 
-	self.setActive = function(active) {
+	self.setActive = function(active, id) {
 		self.errors = Constants.FALSE;
+		self.fields = [];
 
 		self.active_list = Constants.FALSE;
 		self.active_view = Constants.FALSE;
@@ -22,15 +23,22 @@ function ManageHelpRequestController($scope, ManageHelpRequestService, TableServ
 		switch(active) {
 
 			case Constants.ACTIVE_VIEW :
+				self.helpDetail(id);
 				self.active_view = Constants.TRUE;
 				break;
 
 			case Constants.ACTIVE_EDIT :
+				self.success = Constants.FALSE;
+				self.helpDetail(id);
 				self.active_edit = Constants.TRUE;
 				break;
 
 			case Constants.ACTIVE_LIST : 
+				self.active_list = Constants.TRUE;
+				break;
+
 			default:
+				self.success = Constants.FALSE;
 				self.active_list = Constants.TRUE;
 				break;
 		}
@@ -102,11 +110,12 @@ function ManageHelpRequestController($scope, ManageHelpRequestService, TableServ
 					self.record.id = record.id;
 					self.record.module = record.module.name;
 					self.record.subject = record.subject.name;
-					self.record.area = record.subjectarea.name;
+					self.record.area = record.subject_area.name;
 					self.record.link_type = record.link_type;
 					self.record.title = record.title;
 					self.record.content = record.content;
 					self.record.status = record.status;
+					self.record.request_status = record.request_status;
 				}
 			}
 
@@ -120,15 +129,20 @@ function ManageHelpRequestController($scope, ManageHelpRequestService, TableServ
 	self.updateHelp = function() {
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
+		self.fields = [];
 
 		$scope.ui_block();
 		ManageHelpRequestService.update(self.record).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
+
+					angular.forEach(response.errors, function(value, key) {
+						self.fields[value.field] = Constants.TRUE;
+					});
 				} else if(response.data) {
 					self.success = HelpConstants.MSG_UPDATE_SUCCESS;
-					self.setActive(Constants.ACTIVE_VIEW, response.data.id);
+					self.setActive(Constants.ACTIVE_VIEW, self.record.id);
 				}
 			}
 

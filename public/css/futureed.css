@@ -961,6 +961,10 @@ div > .btncon > a {
 	color: #be0e14;
 }
 
+.warning-icon {
+	color: #F5BB42;
+}
+
 .dataTables_wrapper .row {
   margin: 10px 0px !important;
 }
