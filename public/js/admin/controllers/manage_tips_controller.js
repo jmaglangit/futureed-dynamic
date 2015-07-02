@@ -12,11 +12,6 @@ function ManageTipsController($scope, ManageTipsService, TableService, SearchSer
 	SearchService(self);
 	self.searchDefaults();
 
-	// TODO: delete if API is OK. Dummy data just to show view / edit icons in list
-	self.records = [{
-		asd : 'asd'
-	}];
-
 	self.setActive = function(active, id) {
 		self.errors = Constants.FALSE;
 
@@ -32,21 +27,19 @@ function ManageTipsController($scope, ManageTipsService, TableService, SearchSer
 				break;
 
 			case Constants.ACTIVE_EDIT :
+				self.success = Constants.FALSE;
 				self.tipDetail(id);
 				self.active_edit = Constants.TRUE;
 				break;
 
 			case Constants.ACTIVE_LIST : 
 			default:
+				self.success = Constants.FALSE;
 				self.active_list = Constants.TRUE;
 				break;
 		}
 
 		$("html, body").animate({ scrollTop: 0 }, "slow");
-	}
-
-	self.updateTip = function() {
-		self.setActive(Constants.ACTIVE_VIEW);
 	}
 
 	self.searchFnc = function(event) {
@@ -99,6 +92,54 @@ function ManageTipsController($scope, ManageTipsService, TableService, SearchSer
 	}
 
 	self.tipDetail = function(id) {
-		
+		self.errors = Constants.FALSE;
+		self.record = {};
+
+		$scope.ui_block();
+		ManageTipsService.detail(id).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					var record = response.data;
+
+					self.record.id = record.id;
+					self.record.module = record.module.name;
+					self.record.subject = record.subject.name;
+					self.record.area = record.subjectarea.name;
+					self.record.link_type = record.link_type;
+					self.record.title = record.title;
+					self.record.content = record.content;
+					self.record.status = record.status;
+				}
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.updateTip = function() {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		$scope.ui_block();
+		ManageTipsService.update(self.record).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.success = TipConstants.MSG_UPDATE_SUCCESS;
+					self.setActive(Constants.ACTIVE_VIEW, response.data.id);
+				}
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
 	}
 }

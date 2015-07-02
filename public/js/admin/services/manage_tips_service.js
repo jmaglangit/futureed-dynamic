@@ -9,8 +9,8 @@ function ManageTipsService($http) {
 
 	service.list = function list(search, table) {
 		return $http({
-			method : Constants.METHOD_GET
-			, url    : serviceUrl + 'tip/admin?status=' + search.status
+			method 	: Constants.METHOD_GET
+			, url   : serviceUrl + 'tip/admin?status=' + search.status
 				+ '&link_type=' + search.link_type
 				+ '&module=' + search.module
 				+ '&area=' + search.area
@@ -21,7 +21,18 @@ function ManageTipsService($http) {
 	}
 
 	service.detail = function(id) {
-		
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url   : serviceUrl + 'tip/admin/' + id
+		});
+	}
+
+	service.update = function(data) {
+		return $http({
+			method 	: Constants.METHOD_PUT
+			, data	: data
+			, url   : serviceUrl + 'tip/admin/' + data.id
+		});
 	}
 
 	return service;
