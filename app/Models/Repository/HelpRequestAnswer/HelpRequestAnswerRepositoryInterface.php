@@ -10,4 +10,8 @@ interface HelpRequestAnswerRepositoryInterface {
 	public function updateHelpRequestAnswer($id,$data);
 
 	public function deleteHelpRequestAnswer($id);
+
+	public function acceptHelpRequestAnswer($id);
+
+	public function reject
 }
