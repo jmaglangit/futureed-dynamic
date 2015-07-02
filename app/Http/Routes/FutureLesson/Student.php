@@ -71,6 +71,26 @@
 		});
 
 		Routes::group([
+			  'prefix' => '/class'
+			, 'middleware' => 'student'], function()
+		{
+			Routes::get('/', [ 
+					'as' => 'student.class.index'
+					, 'uses' => 'FutureLesson\Student\ClassController@index'
+				]);
+
+			Routes::group([
+				  'prefix' => '/partials'
+				, 'middleware' => 'student'], function()
+			{
+				Routes::get('/dashbrd-side-nav', [ 
+						'as' => 'student.class.partials.dashbrd-side-nav'
+						, 'uses' => 'FutureLesson\Student\ClassController@dashbrd_side_nav'
+					]);
+			});
+		});
+
+		Routes::group([
 			  'prefix' => 'profile'
 			, 'middleware' => 'student'], function()
 		{
