@@ -1,5 +1,5 @@
 <div ng-if="help.active_list">
-	<div class="col-xs-12 success-container" ng-if="help.errors || help.success">
+	<div class="col-xs-12" ng-if="help.errors || help.success">
 		<div class="alert alert-error" ng-if="help.errors">
 			<p ng-repeat="error in help.errors track by $index">
 				{! error !}
@@ -55,10 +55,10 @@
 			</div>
 			<div class="form-group">
 				<div class="col-xs-5">
-					{!! Form::text('search_area', ''
+					{!! Form::text('search_subject_area', ''
 						,array(
 							'placeholder' => 'Area'
-							, 'ng-model' => 'help.search.area'
+							, 'ng-model' => 'help.search.subject_area'
 							, 'class' => 'form-control btn-fit'
 						)
 					)!!}
@@ -74,7 +74,7 @@
 						, ''
 						, array(
 							'class' => 'form-control'
-							, 'ng-model' => 'help.search.status'
+							, 'ng-model' => 'help.search.request_status'
 						)
 					) !!}
 				</div>
@@ -135,7 +135,7 @@
 			</div>
 
 			<div class="clearfix"></div>
-			<div class="table-responsive">
+			<div class="table-responsive" ng-init="help.list()">
 				<table id="grade-list" class="table table-striped table-bordered">
 					<thead>
 				        <tr>
@@ -149,23 +149,23 @@
 				        </tr>
 			        </thead>
 			        <tbody>
-				        <tr ng-repeat="tipInfo in help.records">
-				            <td>{! tipInfo.code !}</td>
-				            <td>{! tipInfo.name !}</td>
-				            <td>{! tipInfo.description !}</td>
-				            <td>{! tipInfo.code !}</td>
-				            <td>{! tipInfo.name !}</td>
-				            <td>{! tipInfo.description !}</td>
+				        <tr ng-repeat="helpInfo in help.records">
+				            <td>{! helpInfo.link_type !}</td>
+				            <td>{! helpInfo.module.name !}</td>
+				            <td>{! helpInfo.subject.name !}</td>
+				            <td>{! helpInfo.subject_area.name !}</td>
+				            <td>{! helpInfo.title !}</td>
+				            <td>{! helpInfo.request_status !}</td>
 				            <td ng-if="help.records.length">
 				            	<div class="row">
 				            		<div class="col-xs-4">
-				            			<a href="" ng-click="help.setActive(futureed.ACTIVE_VIEW)"><span><i class="fa fa-eye"></i></span></a>
+				            			<a href="" ng-click="help.setActive(futureed.ACTIVE_VIEW, helpInfo.id)"><span><i class="fa fa-eye"></i></span></a>
 				            		</div>
 				            		<div class="col-xs-4">
-				            			<a href="" ng-click="help.setActive(futureed.ACTIVE_EDIT)"><span><i class="fa fa-pencil"></i></span></a>
+				            			<a href="" ng-click="help.setActive(futureed.ACTIVE_EDIT, helpInfo.id)"><span><i class="fa fa-pencil"></i></span></a>
 				            		</div>
 				            		<div class="col-xs-4">
-				            			<a href="" ng-click=""><span><i class="fa fa-trash"></i></span></a>
+				            			<a href="" ng-click="help.confirmDelete(helpInfo.id)"><span><i class="fa fa-trash"></i></span></a>
 				            		</div>	
 				            	</div>
 				            </td>
