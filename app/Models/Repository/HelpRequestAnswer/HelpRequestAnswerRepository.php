@@ -69,11 +69,58 @@ class HelpRequestAnswerRepository implements HelpRequestAnswerRepositoryInterfac
 
 	}
 
+	/**
+	 * Get a record on Help Request Answer.
+	 * @param $id
+	 * @return mixed
+	 */
 	public function getHelpRequestAnswer($id){
 
 		return HelpRequestAnswer::with('helpRequest','module','subject','subjectArea')
 			->StatusEnabled()->find($id);
 
 	}
+
+	/**
+	 * Update a record.
+	 * @param $id
+	 * @param $data
+	 * @return bool|int|string
+	 */
+	public function updateHelpRequestAnswer($id,$data){
+
+		try {
+
+			HelpRequestAnswer::find($id)
+				->update($data);
+
+			return $this->getHelpRequestAnswer($id);
+
+		} catch(Exception $e){
+
+			return $e->getMessage();
+		}
+	}
+
+	/**
+	 * Delete a record.
+	 * @param $id
+	 * @return bool|null|string
+	 * @throws \Exception
+	 */
+	public function deleteHelpRequestAnswer($id){
+
+		try{
+
+			return HelpRequestAnswer::find($id)
+				->delete();
+
+		}catch (Exception $e){
+
+			return $e->getMessage();
+		}
+	}
+
+
 
 }
