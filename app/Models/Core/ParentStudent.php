@@ -22,16 +22,8 @@ class ParentStudent extends Model {
 	];
 
     //-------------relationships
-//    public function parent_user() {
-//        return $this->belongsTo('FutureEd\Models\Core\User','parent_id','id');
-//    }
-
-//    public function student_user() {
-//        return $this->belongsTo('FutureEd\Models\Core\User','student_id','id');
-//    }
-
     public function student(){
-        return $this->belongsTo('FutureEd\Models\Core\Student','student_id')->with('avatar','user');
+        return $this->belongsTo('FutureEd\Models\Core\Student')->with('avatar','user');
     }
     //-------------scopes
 
@@ -46,4 +38,16 @@ class ParentStudent extends Model {
     public function scopeInvitationCode($query,$invitation_code){
         return $query->where('invitation_code',$invitation_code);
     }
+
+	public function scopeUserConfirmed($query){
+
+		return $query->whereHas('student',function($query){
+			$query->whereHas('user', function($query){
+
+				$query->where('confirmation_code', '=', NULL)
+					->where('confirmation_code_expiry','=', NULL);
+
+			});
+		});
+	}
 }
