@@ -1,19 +1,13 @@
 <div ng-if="tips.active_list">
-	<div class="content-title">
-		<div class="title-main-content">
-			<span>Tips Management</span>
-		</div>
-	</div>
-
-	<div class="col-xs-12 success-container" ng-if="subject.errors || subject.success">
-		<div class="alert alert-error" ng-if="subject.errors">
-			<p ng-repeat="error in subject.errors track by $index">
+	<div class="col-xs-12 success-container" ng-if="tips.errors || tips.success">
+		<div class="alert alert-error" ng-if="tips.errors">
+			<p ng-repeat="error in tips.errors track by $index">
 				{! error !}
 			</p>
 		</div>
 
-        <div class="alert alert-success" ng-if="subject.success">
-            <p>{! subject.success !}</p>
+        <div class="alert alert-success" ng-if="tips.success">
+            <p>{! tips.success !}</p>
         </div>
     </div>
 
@@ -89,7 +83,7 @@
 					{!! Form::button('Clear'
 						,array(
 							'class' => 'btn btn-gold'
-							, 'ng-click' => 'tip.clearFnc($event)'
+							, 'ng-click' => 'tips.clearFnc($event)'
 						)
 					)!!}
 				</div>
@@ -141,8 +135,8 @@
 			</div>
 
 			<div class="clearfix"></div>
-			<div class="table-responsive">
-				<table id="grade-list" class="table table-striped table-bordered">
+			<div class="table-responsive" ng-init="tips.listTips()">
+				<table id="tip-list" class="table table-striped table-bordered">
 					<thead>
 				        <tr>
 				            <th>Displayed At</th>

@@ -18,7 +18,7 @@ include('Routes/FutureLesson/Futurelesson.php');
 
 Routes::group(['prefix' => 'api/v1'], function()
 {
-    Routes::get('/','Api\v1\ApiController@index');
+	Routes::get('/', 'Api\v1\ApiController@index');
 
     include('Routes/Api/Admin.php');
     include('Routes/Api/Announcement.php');
@@ -29,6 +29,8 @@ Routes::group(['prefix' => 'api/v1'], function()
     include('Routes/Api/ClientStudent.php');
     include('Routes/Api/Countries.php');
     include('Routes/Api/Grade.php');
+    include('Routes/Api/HelpRequest.php');
+    include('Routes/Api/HelpRequestAnswer.php');
     include('Routes/Api/Invoice.php');
     include('Routes/Api/Order.php');
     include('Routes/Api/OrderDetail.php');
