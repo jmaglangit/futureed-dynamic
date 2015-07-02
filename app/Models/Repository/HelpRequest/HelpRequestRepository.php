@@ -25,7 +25,7 @@ class HelpRequestRepository implements HelpRequestRepositoryInterface{
 
     public function getHelpRequest($id){
         try{
-            $result = HelpRequest::with('classroom','module','subject','subjectArea')->find($id);
+            $result = HelpRequest::with('classroom','module','subject','subjectArea','student')->find($id);
             return is_null($result) ? null : $result->toArray();
         }catch (\Exception $e){
             return $e->getMessage();
@@ -41,6 +41,8 @@ class HelpRequestRepository implements HelpRequestRepositoryInterface{
      */
     public function getHelpRequests($criteria = array(), $limit = 0, $offset = 0){
         $query = new HelpRequest();
+
+        $query = $query->NotRejected();
 
         if(count($criteria) <= 0 && $limit == 0 && $offset == 0) {
             $count = $query->count();
@@ -58,6 +60,12 @@ class HelpRequestRepository implements HelpRequestRepositoryInterface{
                 if(isset($criteria['status'])) {
                     $query = $query->status($criteria['status']);
                 }
+                if(isset($criteria['student'])) {
+                    $query = $query->studentName($criteria['student']);
+                }
+                if(isset($criteria['title'])) {
+                    $query = $query->title($criteria['title']);
+                }
             }
             $count = $query->count();
 
@@ -65,7 +73,7 @@ class HelpRequestRepository implements HelpRequestRepositoryInterface{
                 $query = $query->offset($offset)->limit($limit);
             }
         }
-        $query = $query->with('classroom','module','subject','subjectArea');
+        $query = $query->with('classroom','module','subject','subjectArea','student');
         $query = $query->orderBy('title', 'asc');
 
         return ['total' => $count, 'records' => $query->get()->toArray()];

@@ -21,6 +21,15 @@ class HelpRequestRequest extends ApiRequest{
         switch($this->method) {
             case 'PATCH':
                 return ['request_status' => 'required|in:Accepted,Rejected'];
+                break;  
+            case 'PUT':
+                return [
+                    'title' => 'required',
+                    'content' => 'required',
+                    'link_type' => 'required|in:General,Content,Question',
+                    'request_status' => 'required|in:Pending,Accepted,Rejected',
+                    'status' => 'required|in:Enabled,Disabled'];
+                break;
             default:
                 return [
                     'class_id' => 'required|integer',

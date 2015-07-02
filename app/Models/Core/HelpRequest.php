@@ -11,7 +11,7 @@ class HelpRequest extends Model {
 
     protected $dates = ['deleted_at','last_answered_at','created_at', 'updated_at'];
 
-    protected $hidden = ['created_by', 'updated_by', 'created_at', 'updated_at', 'deleted_at'];
+    protected $hidden = ['created_by', 'updated_by', 'updated_at', 'deleted_at'];
 
     protected $fillable =['class_id','student_id','title','content','module_id','subject_id','subject_area_id','link_type','link_id', 'request_status','status','question_status','last_answered_at'];
 
@@ -32,6 +32,10 @@ class HelpRequest extends Model {
 
     public function subjectArea(){
         return $this->belongsTo('FutureEd\Models\Core\SubjectArea');
+    }
+
+    public function student(){
+        return $this->belongsTo('FutureEd\Models\Core\Student');
     }
 
     //Scopes
@@ -56,4 +60,19 @@ class HelpRequest extends Model {
     public function scopeStatus($query, $status){
         return $query->where('status',$status);
     }
+
+    public function scopeStudentName($query, $student_name) {
+        return $query->whereHas('student', function($query) use ($student_name) {
+            $query->name($student_name);
+        });
+    }
+
+    public function scopeNotRejected($query){
+        return $query->whereNotIn('request_status',[config('futureed.help_request_status_rejected')]);
+    }
+
+    public function scopeTitle($query,$title){
+        return $query->where('title','like','%'.$title.'%');
+    }
+
 }

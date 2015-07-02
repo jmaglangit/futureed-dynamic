@@ -93,5 +93,8 @@ return [
 	//set value for link_type
 	'link_type_general' => 'General',
 
-
+    //Help Request Status
+    'help_request_status_pending' => 'Pending',
+    'help_request_status_accepted' => 'Accepted',
+    'help_request_status_rejected' => 'Rejected',
 ];
