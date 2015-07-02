@@ -1,7 +1,19 @@
 <div ng-if="tips.active_view || tips.active_edit">
+	<div class="col-xs-12" ng-if="tips.errors || tips.success">
+		<div class="alert alert-error" ng-if="tips.errors">
+			<p ng-repeat="error in tips.errors track by $index">
+				{! error !}
+			</p>
+		</div>
+
+        <div class="alert alert-success" ng-if="tips.success">
+            <p>{! tips.success !}</p>
+        </div>
+    </div>
+
 	<div class="module-container">
 		<div class="title-main-content">
-			<span>Tip Detail</span>
+			<span>Tip Details</span>
 		</div>
 	</div>
 	
@@ -24,7 +36,7 @@
 							]
 						) !!}
 					</div>
-					<label class="col-xs-2 control-label" id="email">Type <span class="required">*</span></label>
+					<label class="col-xs-2 control-label" id="email">Displayed At <span class="required">*</span></label>
 					<div class="col-xs-4">
 						{!! Form::select('link_type'
 							, array(
@@ -103,9 +115,9 @@
 		        			</b>
 		        		</label>
 
-		        		<label class="col-md-5" ng-if="tips.record.status !== 'Enabled'">
+		        		<label class="col-md-5" ng-if="tips.record.status == 'Disabled'">
 		        			<b class="error-icon">
-		        				<i class="margin-top-8 fa fa-ban"></i> Disabled {! tips.record.status !}
+		        				<i class="margin-top-8 fa fa-ban"></i> {! tips.record.status !}
 		        			</b>
 		        		</label>
 	        		</div>
@@ -131,11 +143,11 @@
 				<div class="form-group">
 					<label class="col-xs-3 control-label">Description <span class="required">*</span></label>
 					<div class="col-xs-6">
-						{!! Form::textarea('description','',
+						{!! Form::textarea('content','',
 							[
 								'class' => 'form-control',
 								'ng-disabled' => 'tips.active_view',
-								'ng-model' => 'tips.record.description',
+								'ng-model' => 'tips.record.content',
 								'placeholder' => 'Description'
 							]
 						) !!}
@@ -152,7 +164,7 @@
 						{!! Form::button('Cancel'
 							, array(
 								'class' => 'btn btn-gold btn-medium'
-								, 'ng-click' => "tips.setActive(futureed.ACTIVE_VIEW)"
+								, 'ng-click' => "tips.setActive(futureed.ACTIVE_VIEW, tips.record.id)"
 							)
 						) !!}
 				</div>	
@@ -160,7 +172,7 @@
 						{!! Form::button('Edit'
 							, array(
 								'class' => 'btn btn-blue btn-medium'
-								, 'ng-click' => "tips.setActive(futureed.ACTIVE_EDIT)"
+								, 'ng-click' => "tips.setActive(futureed.ACTIVE_EDIT, tips.record.id)"
 							)
 						) !!}
 
