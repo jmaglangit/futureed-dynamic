@@ -1,5 +1,5 @@
 <div template-directive template-url="{!! route('client.partials.base_url') !!}"></div>
-<div ng-controller="ManageTeacherTipsController as tips" ng-init="tips.setActive('list')" ng-cloak>
+<div ng-controller="ManageTeacherTipsController as tips" ng-init="tips.setTipsActive('list')" ng-cloak>
 	<div class="content-title">
 		<div class="title-main-content">
 			<span><i class="fa fa-gear"></i> Tips & Help Requests</span>
@@ -19,13 +19,13 @@
 		</ul>
 	</div>
 		
-	<div class="tab-content" ng-init="tips.setActive()">
+	<div class="tab-content">
 	  	<div id="home" class="tab-pane fade in active">
 			<div template-directive template-url="{!! route('client.teacher.tips.partials.list_tips_form') !!}"></div>
 
-			<div template-directive template-url="{!! route('admin.manage.tips.partials.detail') !!}"></div>
+			<div template-directive template-url="{!! route('client.teacher.tips.partials.view_tips_form') !!}"></div>
 
-			<div template-directive template-url="{!! route('admin.manage.tips.partials.delete') !!}"></div>
+			<div template-directive template-url="{!! route('client.teacher.tips.partials.edit_tips_form') !!}"></div>
 		</div>
   	</div>
 </div>
