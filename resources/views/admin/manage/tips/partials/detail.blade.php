@@ -110,18 +110,56 @@
 	        			</div>
 	        		</div>
 	        		<div ng-if="tips.active_view">
-		        		<label class="col-md-5" ng-if="tips.record.status == 'Enabled'">
+		        		<label class="col-xs-4" ng-if="tips.record.status == 'Enabled'">
 		        			<b class="success-icon">
 		        				<i class="margin-top-8 fa fa-check-circle-o"></i> {! tips.record.status !}
 		        			</b>
 		        		</label>
 
-		        		<label class="col-md-5" ng-if="tips.record.status == 'Disabled'">
+		        		<label class="col-xs-4" ng-if="tips.record.status == 'Disabled'">
 		        			<b class="error-icon">
 		        				<i class="margin-top-8 fa fa-ban"></i> {! tips.record.status !}
 		        			</b>
 		        		</label>
 	        		</div>
+
+	        		<label class="col-xs-2 control-label">Tip Status <span class="required">*</span></label>
+	        		<div>
+		        		<label class="col-xs-4" ng-if="tips.record.tip_status == 'Accepted'">
+		        			<b class="success-icon">
+		        				<i class="margin-top-8 fa fa-check-circle-o"></i> {! tips.record.tip_status !}
+		        			</b>
+		        		</label>
+
+		        		<label class="col-xs-4" ng-if="tips.record.tip_status == 'Pending'">
+		        			<b class="warning-icon">
+		        				<i class="margin-top-8 fa fa-exclamation-circle"></i> {! tips.record.tip_status !}
+		        			</b>
+		        		</label>
+
+		        		<label class="col-xs-4" ng-if="tips.record.tip_status == 'Rejected'">
+		        			<b class="error-icon">
+		        				<i class="margin-top-8 fa fa-ban"></i> {! tips.record.tip_status !}
+		        			</b>
+		        		</label>
+	        		</div>
+	        	</div>
+	        	<div class="form-group" ng-if="tips.record.tip_status == 'Pending' && tips.active_view">
+	        		<div class="btn-container col-xs-8 col-xs-offset-2" ng-if="tips.active_view">
+						{!! Form::button('Accept'
+							, array(
+								'class' => 'btn btn-blue btn-medium'
+								, 'ng-click' => "tips.acceptTip()"
+							)
+						) !!}
+
+						{!! Form::button('Reject'
+							, array(
+								'class' => 'btn btn-gold btn-medium'
+								, 'ng-click' => "tips.rejectTip()"
+							)
+						) !!}		
+					</div>
 	        	</div>
 			</fieldset>
 			<fieldset>
