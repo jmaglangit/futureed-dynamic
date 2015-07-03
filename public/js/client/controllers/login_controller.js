@@ -431,4 +431,17 @@ function LoginController($scope, apiService, clientLoginApiService, clientProfil
 			self.errors = $scope.internalError();
 		});
 	}  
+
+	self.showModal = function(id) {
+		$scope.show_terms = (id == 'terms_modal') ? Constants.TRUE : Constants.FALSE;
+		$scope.show_policy = (id == 'policy_modal') ? Constants.TRUE : Constants.FALSE;
+		$scope.show = Constants.TRUE;
+
+
+		$("#"+id).modal({
+				backdrop: 'static',
+				keyboard: Constants.FALSE,
+				show    : Constants.TRUE
+		});
+	}
 }	

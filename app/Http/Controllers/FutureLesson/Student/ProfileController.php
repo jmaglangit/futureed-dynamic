@@ -43,7 +43,11 @@ class ProfileController extends Controller {
 			return redirect()->route('student.profile.index');
 		}
 
-		return view('student.login.enter-email-code');
+		if($input['email']) {
+			return view('student.login.enter-email-code');	
+		}
+		
+		return redirect()->route('student.login');
 	}
 
 	public function update_session() {

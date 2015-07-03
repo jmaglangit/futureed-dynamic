@@ -2,7 +2,7 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
         <div class="modal-header">
-            <h3>FUTUREED CANDIDATE TERMS AND CONDITIONS</h3>
+            <h3>FUTUREED PTE LTD CLIENT TERMS AND CONDITIONS</h3>
         </div>
         <div class="modal-body">
             <content class="form-content">
@@ -14,35 +14,65 @@
                 )!!}
                     <fieldset>
                         <div>
-                            Thank you for choosing Futureed Pte Ltd.  We intend to provide provide you with a best-in-industry products that are of high quality, price competitive, psychometrically sound and in a technically reliable manner.  To achieve that goal, we need to make certain legal declarations to ensure that our Service is being used in a reasonable, safe, and legal way. These Terms may be updated from time to time. Notice of modifications to these Terms will appear on this page.
+                            Thank you for choosing Futureed Pte Ltdfor your assessment needs.  
+                            We intend to provide provide you with a best-in-industry products that are of high quality, price competitive, psychometrically sound and in a technically reliable manner.  
+                            To achieve that goal, we need to make certain legal declarations to ensure that our Service is being used in a reasonable, safe, and legal way. 
+                            These Terms may be updated from time to time. Notice of modifications to these Terms will appear on this page.
                         </div>
                     </fieldset>
 
                     <fieldset>
                         <legend> Introduction </legend>
                         <div>
-                            Futureed Pte Ltd is made available by Kosh Consulting Group (Asia) Pte Ltd (KCGA) and provides an online assessment platform for assessment tools to remotely test candidates on areas of psychometric abilities and personality.  The two entities are used interchangeably for legal purposes.  By registering to use Futureed Pte Ltd, you are consenting to the terms and conditions as follows in this agreement.  We also have a privacy policy which you can also find on our website.
+                            If you are using Futureed Pte Ltdon behalf of a business entity or other organization, you represent and warrant to KCGA that you have the authority to legally bind such business entity or other organization to these Terms and Conditions of Use. 
+                            In such event, both you, acting on behalf of the business entity or other organization, and the business entity or other organization for whom you act, are jointly and severally bound by these Terms and Conditions of Use and references in these Terms and Conditions of Use to “Customer,” “you” or “your” refer to both you, acting on behalf of the business entity or other organization, and the business entity or other organization for whom you act, jointly and severally. 
+                            It also implies that if you transfer the administration of the account of your organization to another person within the same organization, that person will also be taken legally to be representing and acting on behalf of the business entity of the registration and account.
+                        </div>
+                    </fieldset>
+
+                    <fieldset>
+                        <legend> Using Futureed </legend>
+                        <div>
+                            Futureed Pte Ltdis made available by Kosh Consulting Group (Asia) Pte Ltd (KCGA) and provides an online assessmsessment tools to remotely test candidates on areas of psychometric abilities and personality.  
+                            The two entities are used interchangeably for legal purposes.  
+                            By registering to use Futureed, you are consenting to the terms and conditions as follows in this agreement.  
+                            We also have a privacy policy which you can also find on our website.
+                        </div>
+                        <div>
+                            Otherwise, if you fail to have the legal authority to bind such business entity or other organization or if you are not using the Futureed Pte Ltdsite on behalf of a business entity or other organization, you agree that these Terms and Conditions of Use are binding to you in your individual capacity and references in these Terms and Conditions of Use to “KCGA Customer,” “you” or “your” refer to you in your individual capacity.
                         </div>
                     </fieldset>
 
                     <fieldset>
                         <legend> Responsibility for Use </legend>
+                        <div>
+                            As the account user or user of Futureed, you assume full responsibility for all use of Futureed Pte Ltdby yourself and others within your organization. 
+                            You agree that each individual who accesses and uses Futureed Pte Ltdacts on behalf and for the account of the Customer, and the Customer is responsible for any wrongful acts, and omissions by a user, and a user’s breach or default of these Terms and Conditions of Use.
+                        </div>
                         <div class="list-container">
-                            As the account user or user of Futureed Pte Ltd, you assume full responsibility for all use of Futureed Pte Ltd. You represent, warrant, and covenant that:
+                            You represent, warrant, and covenant that:
+
                             <ul class="list-content">
+                                <li>
+                                    You will submit reasonable and appropriate documentation as requested by KCGA for us to make an assessment on your suitability and qualification to use the Futureed Pte Ltdproducts and services.
+                                </li>
                                 <li>
                                     You will ensure that reasonable safeguards are taken for the protection of your password. You understand that we do not have access to your password and that you must create a new unique password in the event that you lose or forget your password.
                                 </li>
                                 <li>
-                                    We will have the right to delete your Futureed Pte Ltd account and all associated records after a period of 18 months of inactivity on your Futureed Pte Ltd account.
+                                    We will have the right to delete your Futureed Pte Ltdaccount and all associated records after a period of 18 months of inactivity on your Futureed Pte Ltdaccount.
+                                </li>
+                                <li>
+                                    You are solely responsible for backing up all data and records submitted to Futureed Pte Ltdand assume full responsibility for providing backup storage facility for records for any candidate records that are captured on Futureed, and you agree not to rely on Futureed Pte Ltdfor storage of the results of candidate assessments.
                                 </li>
                             </ul>
                         </div>
                     </fieldset>
 
                     <fieldset>
+                        <legend> No Unlawful Use </legend>
                         <div>
-                            As a responsible user, you agree that you will not use the Futureed Pte Ltd site, or any product, or service provided by or made available on or from the Futureed Pte Ltd site for any unlawful purpose.
+                            As a responsible user, you agree that you will not use the Futureed Pte Ltdsite, or any product, or service provided by or made available on or from the Futureed Pte Ltdsite for any unlawful purpose.
                         </div>
                         <div class="list-container">
                             Specifically, you agree to not use the Service to:
@@ -110,28 +140,18 @@
                                 </li>
                             </ul>
                         </div>
-                        <p>
-                            Futureed Pte Ltd may include hyperlinks to Websites operated by parties other than Futureed Pte Ltd including advertisers and other content providers. Those sites may collect data or solicit personal information from you. Futureed Pte Ltd does not control such Websites, and is not responsible for their content, privacy policies, or for the collection, use or disclosure of any information those sites may collect.
-                        </p>
-                        <p>
-                            Futureed Pte Ltd and KCGA makes no guarantee of the accuracy, correctness, or completeness of any information on these web pages, surveys, databases, or results, and are not responsible for a) any errors or omissions arising from the use of such information; 2) any failures, delays, or interruptions in the delivery of any content or services contained on our servers; or 3) losses or damages arising from the use of the content or services provided by us.
-                        </p>
-                        <p>
-                            Futureed Pte Ltd products and services are created based on the integrity of the users using the assessments. As a responsible and user with integrity, by using the assessments on Futureed Pte Ltd, you agree to be personally honest and to treat others with respect and courtesy in terms of taking any assessment at Futureed Pte Ltd. You agree that you have neither received nor been given assistance on the assessment and will not attempt to undermine the test by copying, cheating or plagiarizing questions or answers. You will also not infringe on the intellectual property rights of the owners of the content by distributing the content without permission. If you do so, you are aware that you will be liable for any subsequent consequences related to intellectual property rights infringement actions by us.
-                        </p>
-                        <div class="list-container">
-                            <strong>You also specifically agree that you will not,</strong>
+                    </fieldset>
 
-                            <ul class="list-content">
-                                <li>
-                                    Attempt to copy or share the questions and answers with your friends, family, acquaintances and associates.
-                                </li>
-                                <li>
-                                    Attempt to cheat on any assessment on Futureed Pte Ltd, such as enlisting friends, family, acquaintances and associates to help answer the questions.  We respect your integrity, and strongly encourage you to complete the test to the best of your own abilities.
-                                </li>
-                            </ul>
+                    <fieldset>
+                        <div>
+                            Futureed Pte Ltdmay include hyperlinks to Websites operated by parties other than Futureed Pte Ltdincluding advertisers and other content providers. Those sites may collect data or solicit personal information from you. Futureed Pte Ltddoes not control such Websites, and is not responsible for their content, privacy policies, or for the collection, use or disclosure of any information those sites may collect.
                         </div>
-
+                    </fieldset>
+                    
+                    <fieldset>
+                        <div>
+                            Futureed Pte Ltdand KCGA makes no guarantee of the accuracy, correctness, or completeness of any information on these web pages, surveys, databases, or results, and are not responsible for a) any errors or omissions arising from the use of such information; 2) any failures, delays, or interruptions in the delivery of any content or services contained on our servers; or 3) losses or damages arising from the use of the content or services provided by us.
+                        </div>
                     </fieldset>
 
                     <fieldset>
@@ -139,7 +159,13 @@
                             Intellectual Property Rights
                         </legend>
                         <div>
-                            Unless otherwise indicated, KCGA or its licensors own and retain all proprietary rights in the website and all material and information posted thereon, including without limitation photographs, text, graphics, logos, icons, content, sound recording, tutorials, audio/visual clips and design (collectively, “Content”). All of the materials contained on the Website are copyrighted, except where explicitly noted otherwise. The Futureed Pte Ltd site may be used only by you for assessments on Futureed Pte Ltd. These Terms and Conditions of Use do not grant to or create to you, any user, or any other person any proprietary interest or intellectual property rights in or to the Futureed Pte Ltd site or any assessment tools, or information or other content comprising or available on the Futureed Pte Ltd site. You may not use, copy, reproduce, republish, upload, post, transmit, distribute, or modify the trademarks or the Content, without the express permission of Futureed Pte Ltd in each instance, unless such Content is posted by you. The use of Futureed Pte Ltd or KCGA copyrighted materials on any other website is strictly prohibited. Futureed Pte Ltd and KCGA will aggressively enforce its intellectual property rights to the fullest extent of the law, including the seeking of criminal prosecution.
+                            Unless otherwise indicated, KCGA or its licensors own and retain all proprietary rights in the website and all material and information posted thereon, including without limitation photographs, text, graphics, logos, icons, content, sound recording, tutorials, audio/visual clips and design (collectively, “Content”). 
+                            All of the materials contained on the Website are copyrighted, except where explicitly noted otherwise. 
+                            The Futureed Pte Ltdsite may be used only by you and your employees, or individuals under your control and/or supervision. 
+                            These Terms and Conditions of Use do not grant to or create in the Customer, any user, or any other person any proprietary interest or intellectual property rights in or to the Futureed Pte Ltdsite or any assessment tools, or information or other content comprising or available on the Futureed Pte Ltdsite. 
+                            You may not use, copy, reproduce, republish, upload, post, transmit, distribute, or modify the trademarks or the Content, without the express permission of Futureed Pte Ltdin each instance, unless such Content is posted by you. 
+                            The use of Futureed Pte Ltdor KCGA copyrighted materials on any other website is strictly prohibited. 
+                            Futureed Pte Ltdand KCGA will aggressively enforce its intellectual property rights to the fullest extent of the law, including the seeking of criminal prosecution.
                         </div>
                     </fieldset>
 
@@ -148,7 +174,8 @@
                             Confidential Information
                         </legend>
                         <div>
-                            Confidential Information includes these terms, statements of work, license agreements, business and marketing plans and strategies, non-public business and technology information, trade secrets, Content included in assessments by you, any written materials marked as confidential and any other information, including visual and oral information, which reasonably should be understood to be confidential. Futureed Pte Ltd will use commercially reasonable technology, industry best practices to ensure the integrity and security of all Confidential Information with respect to theft, piracy, and unauthorized access.
+                            Confidential Information includes these terms, statements of work, license agreements, business and marketing plans and strategies, non-public business and technology information, trade secrets, Content included in assessments by you, any written materials marked as confidential and any other information, including visual and oral information, which reasonably should be understood to be confidential. 
+                            Futureed Pte Ltdwill use commercially reasonable technology, industry best practices to ensure the integrity and security of all Confidential Information with respect to theft, piracy, and unauthorized access.
                         </div>
                     </fieldset>
 
@@ -157,7 +184,8 @@
                             Indemnity Obligation
                         </legend>
                         <div>
-                            To the extent allowed by law, you agree to indemnify and hold harmless KCGA against any and all claims and expenses, including reasonable attorneys’ fees, arising from the use of KCGA products, services and this web site. This indemnification expressly includes your responsibility for any and all liability arising from the violation or infringement of copyrights, trademarks or other proprietary rights and from the use of any libelous or unlawful material submitted.
+                            To the extent allowed by law, you agree to indemnify and hold harmless KCGA against any and all claims and expenses, including reasonable attorneys’ fees, arising from the use of KCGA products, services and this web site. 
+                            This indemnification expressly includes your responsibility for any and all liability arising from the violation or infringement of copyrights, trademarks or other proprietary rights and from the use of any libelous or unlawful material contained submitted.
                         </div>
                     </fieldset>
 
@@ -176,10 +204,12 @@
                         </legend>
                         <div class="disclaimer">
                             <p>
-                                FUTUREED PTE LTD IS PROVIDED “AS IS” AND “WITH ALL FAULTS,” AND WITHOUT WARRANTY OF ANY KIND, AND USE OF FUTUREED PTE LTD IS AT EACH USER’S OWN RISK. TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, KCGA DISCLAIMS ALL EXPRESS, AND IMPLIED WARRANTIES, AND CONDITIONS, WHETHER BY STATUTE, COMMON LAW, CUSTOM, COURSE OF DEALING, COURSE OF PERFORMANCE, USAGE OF TRADE, OR OTHERWISE, RELATING TO FUTUREED PTE LTD INCLUDING (BUT NOT LIMITED TO) ALL WARRANTIES AND CONDITIONS OF MERCHANTABILITY, MERCHANTABLE QUALITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, LACK OF VIRUSES, AND NON-INFRINGEMENT. TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, FUTUREED PTE LTD MAKES NO REPRESENTATION, WARRANTY, OR GUARANTY RELATING TO THE SUITABILITY, RELIABILITY, AVAILABILITY, TIMELINESS, QUALITY, ACCURACY, OR COMPLETENESS OF FUTUREED PTE LTD, ANY DATA, INFORMATION, RECORD, OR RESULTS OBTAINED THROUGH OR RESULTING FROM THE USE OF FUTUREED PTE LTD, OR THE ACCURACY OF THE INFORMATIONAL CONTENT, FOR ANY PURPOSE. WITHOUT LIMITING THE GENERALITY OF THE FOREGOING, TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, KCGA MAKES NO REPRESENTATION, WARRANTY, OR GUARANTY THAT FUTUREED PTE LTD WILL MEET ANY USER’S REQUIREMENTS OR EXPECTATIONS, THAT FUTUREED PTE LTD WILL BE ERROR-FREE, THAT ANY DEFECTS OR ERRORS WILL BE CORRECTED, OR THAT THE DATA, INFORMATION, RECORDS OR OTHER RESULTS OBTAINED FROM THE USE OF FUTUREED PTE LTD WILL BE ACCURATE OR RELIABLE FOR ANY OTHER PURPOSE.
+                                FUTUREED PTE LTD IS PROVIDED “AS IS” AND “WITH ALL FAULTS,” AND WITHOUT WARRANTY OF ANY KIND, AND USE OF FUTUREED PTE LTD IS AT CUSTOMER’S, AND EACH USER’S OWN RISK. 
+                                TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, KCGA DISCLAIMS ALL EXPRESS, AND IMPLIED WARRANTIES, AND CONDITIONS, WHETHER BY STATUTE, COMMON LAW, CUSTOM, COURSE OF DEALING, COURSE OF PERFORMANCE, USAGE OF TRADE, OR OTHERWISE, RELATING TO FUTUREED PTE LTD INCLUDING (BUT NOT LIMITED TO) ALL WARRANTIES AND CONDITIONS OF MERCHANTABILITY, MERCHANTABLE QUALITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE, LACK OF VIRUSES, AND NON-INFRINGEMENT. 
+                                TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, FUTUREED PTE LTD MAKES NO REPRESENTATION, WARRANTY, OR GUARANTY RELATING TO THE SUITABILITY, RELIABILITY, AVAILABILITY, TIMELINESS, QUALITY, ACCURACY, OR COMPLETENESS OF FUTUREED PTE LTD, ANY DATA, INFORMATION, RECORD, OR RESULTS OBTAINED THROUGH OR RESULTING FROM THE USE OF FUTUREED PTE LTD, OR THE ACCURACY OF THE INFORMATIONAL CONTENT, FOR ANY PURPOSE. WITHOUT LIMITING THE GENERALITY OF THE FOREGOING, TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, KCGA MAKES NO REPRESENTATION, WARRANTY, OR GUARANTY THAT FUTUREED PTE LTD WILL MEET THE CUSTOMER’S, OR ANY USER’S REQUIREMENTS OR EXPECTATIONS, THAT FUTUREED PTE LTD WILL BE ERROR-FREE, THAT ANY DEFECTS OR ERRORS WILL BE CORRECTED, OR THAT THE DATA, INFORMATION, RECORDS OR OTHER RESULTS OBTAINED FROM THE USE OF FUTUREED PTE LTD WILL BE ACCURATE OR RELIABLE FOR ANY OTHER PURPOSE.
                             </p>
                             <p>
-                                TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, KCGA SHALL NOT BE LIABLE TO ANY USER, OR ANY OTHER PERSON FOR ANY SPECIAL, INCIDENTAL, INDIRECT, COLLATERAL, CONSEQUENTIAL, EXEMPLARY, OR PUNITIVE DAMAGES, WHETHER IN ANY ACTION OR CONTRACT, EQUITY, STRICT LIABILITY, TORT (INCLUDING, BUT NOT LIMITED TO, NEGLIGENCE) OR OTHER THEORY OF LIABILITY (INCLUDING, BUT NOT LIMITED TO, BREACH OF WARRANTY) ARISING OUT OF OR IN ANY WAY CONNECTED WITH OR RELATING TO THE USE OR PERFORMANCE OF OR INABILITY TO USE FUTUREED PTE LTD OR ANY ERROR, OMISSION OR INACCURACY CONTAINED IN, ANY DATA, INFORMATION, RECORD OR RESULTS OBTAINED THROUGH OR RESULTING FROM THE USE OF FUTUREED PTE LTD OR FROM ANY LOSS OR CORRUPTION OF DATA OR OTHER INFORMATION OR RECORD, EVEN IF KCGA HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES OR SUCH POSSIBILITY WAS REASONABLY FORESEEABLE INCLUDING (BUT NOT LIMITED TO) DAMAGES FOR LOSS OF USE, FOR DELAY, LOSS OF BUSINESS, LOSS OF REVENUE, PROFITS OR SAVINGS, BUSINESS INTERRUPTION LOSS, LOSS OR CORRUPTION OF DATA OR OTHER INFORMATION OR RECORD, LOSS OF PRIVACY, AND LOSS OF GOODWILL, AND LIABILITY TO THIRD PARTIES, ARISING OUT OF OR IN ANY WAY CONNECTED WITH OR RELATED TO THE USE OR PERFORMANCE OF OR INABILITY TO USE FUTUREED PTE LTD OR ARISING OUT OF OR IN ANY WAY CONNECTED WITH OR RELATING TO THE USE OR INABILITY TO USE ANY DATA OR OTHER INFORMATION, RECORD, OR RESULTS OBTAINED THROUGH OR RESULTING FROM THE USE OF OR INABILITY TO USE FUTUREED PTE LTD, ANY LOSS OR CORRUPTION OF DATA OR OTHER INFORMATION OR RECORD, OR ARISING FROM ANY FAILURE TO MEET ANY DUTY, INCLUDING (BUT NOT LIMITED TO) ANY DUTY OF GOOD FAITH OR TO EXERCISE COMMERCIALLY REASONABLE CARE, OR ARISING OUT OF ANY COURSE OF DEALING, COURSE OF PERFORMANCE, USAGE OR TRADE, OR OTHERWISE, EVEN IF KCGA OR FUTUREED PTE LTD WAS ADVISED OF THE POSSIBILITY OF SUCH DAMAGES OR IF SUCH POSSIBILITY WAS REASONABLY FORESEEABLE.
+                                TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, KCGA SHALL NOT BE LIABLE TO THE CUSTOMER, ANY USER, OR ANY OTHER PERSON FOR ANY SPECIAL, INCIDENTAL, INDIRECT, COLLATERAL, CONSEQUENTIAL, EXEMPLARY, OR PUNITIVE DAMAGES, WHETHER IN ANY ACTION OR CONTRACT, EQUITY, STRICT LIABILITY, TORT (INCLUDING, BUT NOT LIMITED TO, NEGLIGENCE) OR OTHER THEORY OF LIABILITY (INCLUDING, BUT NOT LIMITED TO, BREACH OF WARRANTY) ARISING OUT OF OR IN ANY WAY CONNECTED WITH OR RELATING TO THE USE OR PERFORMANCE OF OR INABILITY TO USE FUTUREED PTE LTD OR ANY ERROR, OMISSION OR INACCURACY CONTAINED IN, ANY DATA, INFORMATION, RECORD OR RESULTS OBTAINED THROUGH OR RESULTING FROM THE USE OF FUTUREED PTE LTD OR FROM ANY LOSS OR CORRUPTION OF DATA OR OTHER INFORMATION OR RECORD, EVEN IF KCGA HAS BEEN ADVISED OF THE POSSIBILITY OF SUCH DAMAGES OR SUCH POSSIBILITY WAS REASONABLY FORESEEABLE INCLUDING (BUT NOT LIMITED TO) DAMAGES FOR LOSS OF USE, FOR DELAY, LOSS OF BUSINESS, LOSS OF REVENUE, PROFITS OR SAVINGS, BUSINESS INTERRUPTION LOSS, LOSS OR CORRUPTION OF DATA OR OTHER INFORMATION OR RECORD, LOSS OF PRIVACY, AND LOSS OF GOODWILL, AND LIABILITY TO THIRD PARTIES, ARISING OUT OF OR IN ANY WAY CONNECTED WITH OR RELATED TO THE USE OR PERFORMANCE OF OR INABILITY TO USE FUTUREED PTE LTD OR ARISING OUT OF OR IN ANY WAY CONNECTED WITH OR RELATING TO THE USE OR INABILITY TO USE ANY DATA OR OTHER INFORMATION, RECORD, OR RESULTS OBTAINED THROUGH OR RESULTING FROM THE USE OF OR INABILITY TO USE FUTUREED PTE LTD, ANY LOSS OR CORRUPTION OF DATA OR OTHER INFORMATION OR RECORD, OR ARISING FROM ANY FAILURE TO MEET ANY DUTY, INCLUDING (BUT NOT LIMITED TO) ANY DUTY OF GOOD FAITH OR TO EXERCISE COMMERCIALLY REASONABLE CARE, OR ARISING OUT OF ANY COURSE OF DEALING, COURSE OF PERFORMANCE, USAGE OR TRADE, OR OTHERWISE, EVEN IF KCGA OR FUTUREED PTE LTD WAS ADVISED OF THE POSSIBILITY OF SUCH DAMAGES OR IF SUCH POSSIBILITY WAS REASONABLY FORESEEABLE.
                             </p>
                             <p>
                                 TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, KCGA’S TOTAL LIABILITY AND OBLIGATION ARISING OUT OF OR IN ANY MANNER CONNECTED WITH OR RELATING TO THE CUSTOMER’S OR ANY USER’S USE OR INABILITY TO USE FUTUREED PTE LTD, OR THE RESULTS OBTAINED FROM THE USE OF FUTUREED PTE LTD IS LIMITED TO DIRECT DAMAGES WHICH SHALL NOT IN ANY EVENT EXCEED ONE HUNDRED SINGAPORE DOLLARS (S$100.00) IN THE AGGREGATE. TO THE MAXIMUM EXTEND PERMITTED BY APPLICABLE LAW, THIS LIMITATION APPLIES REGARDLESS AS TO WHETHER THE LIABILITY IS BASED ON BREACH OF CONTRACT, TORT (INCLUDING, BUT NOT LIMITED TO, NEGLIGENCE), STRICT LIABILITY, BREACH OF WARRANTY, OR ANY OTHER LEGAL THEORY.
@@ -218,14 +248,14 @@
                     </fieldset>
 
                     <fieldset>
-                        <legend> Your Consent </legend>
+                        <legend>Your Consent</legend>
                         <div>
                             By using our site, you consent to our terms and conditions as written in this agreement.
                         </div>
                     </fieldset>
 
                     <fieldset>
-                        <legend> Contacting Us </legend>
+                        <legend>Contacting Us</legend>
                         <div>
                             If there are any questions regarding this policy you may contact us using the information below.
                         </div>

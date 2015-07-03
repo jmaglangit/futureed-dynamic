@@ -11,6 +11,11 @@ return [
 	'image_password_folder' => 'images/password',
 	'enabled' => 'Enabled',
 	'disabled' => 'Disabled',
+	'active' => 'Active',
+	'inactive' => 'Inactive',
+	'pending' => 'Pending',
+	'accepted' => 'Accepted',
+	'rejected' => 'Rejected',
 
 
 	//Request code expiry in seconds
@@ -106,4 +111,8 @@ return [
 
 	//for accepted tips tip_status
 	'tip_status_accepted' => 'Accepted',
+
+	//tip_rating
+	'tip_rating' => 'rating',
+
 ];

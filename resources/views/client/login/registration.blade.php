@@ -41,7 +41,7 @@
 
   <div template-directive template-url="{!! route('client.partials.registration_success') !!}"></div>
 
-  @include('student.login.terms-and-condition')
+  @include('client.login.terms-and-conditions')
   @include('student.login.privacy-policy')
 
 </div>

@@ -67,6 +67,11 @@ class HelpRequestAnswerController extends ApiController {
 			$criteria['request_answer_status'] = Input::get('request_answer_status');
 		}
 
+		if(Input::get('status')){
+
+			$criteria['status'] = Input::get('status');
+		}
+
 		if(Input::get('created_by')){
 
 			$criteria['created_by'] = Input::get('created_by');
@@ -118,17 +123,8 @@ class HelpRequestAnswerController extends ApiController {
 	public function update(HelpRequestAnswerRequest $request,$id)
 	{
 		$data = $request->only(
-			'student_id',
 			'content',
-			'help_request_id',
-			'module_id',
-			'subject_id',
-			'subject_area_id',
-			'rating',
-			'seq_no',
-			'request_answer_status',
-			'status',
-			'points'
+			'status'
 		);
 
 		return $this->respondWithData(

@@ -90,6 +90,10 @@ class HelpRequestRepository implements HelpRequestRepositoryInterface{
                     $query = $query->subjectId($criteria['subject_id']);
                 }
 
+                if(isset($criteria['class_id'])) {
+                    $query = $query->classId($criteria['class_id']);
+                }
+
             }
 
             if($limit > 0 && $offset >= 0) {

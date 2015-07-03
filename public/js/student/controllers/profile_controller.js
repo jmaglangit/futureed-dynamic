@@ -277,14 +277,37 @@ function ProfileController($scope, apiService, profileService) {
 	  }
 
 	  function backToEditEmail() {
+	  	self.errors = Constants.FALSE;
 	  	self.select_password = Constants.FALSE;
+	  	$scope.image_id = Constants.EMPTY_STR;
 	  }
 
 	  function selectPicturePassword() {
+	  	self.errors = Constants.FALSE;
+	  	self.fields = [];
+
 	  	if(self.validation.e_success && self.validation.n_success && self.validation.c_success) {
 	  		self.select_password = Constants.TRUE;
 	  		$scope.getLoginPassword();
 	  	} else {
+	  		if(!self.change.current_email) {
+	  			self.fields['current_email'] = Constants.TRUE;
+	  			self.errors = [];
+	  			self.errors.push("Current email address is required.");
+	  		}
+
+	  		if(!self.change.new_email) {
+	  			self.fields['new_email'] = Constants.TRUE;
+	  			self.errors = (self.errors) ?  self.errors : [];
+	  			self.errors.push("New email address is required.");
+	  		}
+
+	  		if(!self.change.confirm_email) {
+	  			self.fields['confirm_email'] = Constants.TRUE;
+	  			self.errors = (self.errors) ?  self.errors : [];
+	  			self.errors.push("Confirm email address is required.");
+	  		}
+
 	    	$("html, body").animate({ scrollTop: 0 }, "slow");
 	  	}
 	  }

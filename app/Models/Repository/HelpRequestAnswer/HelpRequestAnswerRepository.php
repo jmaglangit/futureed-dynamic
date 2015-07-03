@@ -53,6 +53,12 @@ class HelpRequestAnswerRepository implements HelpRequestAnswerRepositoryInterfac
 
 		}
 
+		if(isset($criteria['status'])){
+
+			$help_request_answer = $help_request_answer->status($criteria['status']);
+
+		}
+
 		if(isset($criteria['created_by'])){
 
 			$help_request_answer = $help_request_answer->createdBy($criteria['created_by']);

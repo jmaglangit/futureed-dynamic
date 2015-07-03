@@ -22,6 +22,7 @@ class ClassStudent extends Model {
 	protected $attributes = [
 		'created_by' => 1,
 		'updated_by' => 1,
+		'subscription_status' => 'Inactive'
 
 	];
 
@@ -96,6 +97,11 @@ class ClassStudent extends Model {
 					->where('date_end', '>=', $current_date);
 			});
 		});
+	}
+
+	public function scopeActive($query){
+
+		return $query->where('subscription_status',config('futureed.active'));
 	}
 
 
