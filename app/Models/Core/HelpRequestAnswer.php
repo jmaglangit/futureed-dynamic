@@ -85,7 +85,9 @@ class HelpRequestAnswer extends Model {
 
 	public function scopeAnswerStatus($query,$answer_status){
 
-		return $query->where('request_answer_status', $answer_status);
+		$answer_status = (array) $answer_status;
+
+		return $query->whereIn('request_answer_status', $answer_status);
 
 	}
 
@@ -107,9 +109,9 @@ class HelpRequestAnswer extends Model {
 		});
 	}
 
-	public function scopeAccepted($query){
+	public function scopeStatus($query,$status){
 
-		return $query->where('request_answer_status', config('futureed.accepted'));
+		return $query->where('status',$status);
 	}
 
 

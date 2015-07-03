@@ -100,5 +100,9 @@ class HelpRequest extends Model {
         return $query->whereSubjectId($subject_id);
     }
 
+    public function scopeClassId($query,$class_id){
+        return $query->whereClassId($class_id);
+    }
+
 
 }
