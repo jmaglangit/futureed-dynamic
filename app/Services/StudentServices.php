@@ -10,6 +10,7 @@ namespace FutureEd\Services;
 
 
 use Carbon\Carbon;
+use FutureEd\Models\Repository\ClassStudent\ClassStudentRepositoryInterface;
 use FutureEd\Models\Repository\Grade\GradeRepositoryInterface;
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use FutureEd\Models\Repository\PasswordImage\PasswordImageRepositoryInterface;
@@ -27,7 +28,8 @@ class StudentServices {
             ValidatorRepository $validator,
             SchoolServices $school,
             AvatarServices $avatar,
-            GradeRepositoryInterface $gradeRepositoryInterface
+            GradeRepositoryInterface $gradeRepositoryInterface,
+			ClassStudentRepositoryInterface $classStudentRepositoryInterface
             ){
         $this->student = $student;
         $this->password = $password;
@@ -36,6 +38,7 @@ class StudentServices {
         $this->school = $school;
         $this->avatar = $avatar;
         $this->grade = $gradeRepositoryInterface;
+		$this->class_student = $classStudentRepositoryInterface;
         }
 
     public function getStudents($criteria , $limit , $offset ){
@@ -155,51 +158,57 @@ class StudentServices {
 
 
     public function getStudentDetails($id){
-        
-        $student = $this->getStudent($id)->toArray();
-        $student_reference = $this->student->getReferences($id)->toArray();
 
-        //get age
-        $age = $this->age($student['birth_date']);
+		$student = $this->getStudent($id)->toArray();
+		$student_reference = $this->student->getReferences($id)->toArray();
 
-        //get user username and email
-        $user = $this->user->getUsernameEmail($student['user_id'])->toArray();
-        
-        $avatar_url = '';
-        
-        if($student_reference['avatar_id']) {
-        	$avatar = $this->avatar->getAvatar($student_reference['avatar_id'])->toArray();
-        	$avatar_url = $this->avatar->getAvatarUrl($avatar['avatar_image']);
-        }
-        
-        $school = '';
-        
-        if($student_reference['school_code']) {
-        	$school = $this->school->getSchoolName($student_reference['school_code']);
-        }
+		//get age
+		$age = $this->age($student['birth_date']);
 
-        //get grade name
-        if($student_reference['grade_code']){
+		//get user username and email
+		$user = $this->user->getUsernameEmail($student['user_id'])->toArray();
 
-            $grade = $this->grade->getGrade($student_reference['grade_code']);
-        }
+		$avatar_url = '';
+
+		if ($student_reference['avatar_id']) {
+			$avatar = $this->avatar->getAvatar($student_reference['avatar_id'])->toArray();
+			$avatar_url = $this->avatar->getAvatarUrl($avatar['avatar_image']);
+		}
+
+		$school = '';
+
+		if ($student_reference['school_code']) {
+			$school = $this->school->getSchoolName($student_reference['school_code']);
+		}
+
+		//get grade name
+		if ($student_reference['grade_code']) {
+
+			$grade = $this->grade->getGrade($student_reference['grade_code']);
+		}
+
+		//get Class Id
+
+		$student_class = $this->class_student->getStudentCurrentClassroom($id);
+
+		$class_id = ($student_class) ? $student_class->class_id : 0;
+
+		$student = array_merge(array('id' => $id, 'class_id' => $class_id)
+			, $student
+			, $user,
+			array('age' => $age,
+				'avatar' => $avatar_url,
+				'school' => $school,
+				'grade' => isset($grade) ? $grade['name'] : null,
+				'avatar_id' => $student_reference['avatar_id']));
 
 
-
-        $student = array_merge(array('id'=>$id),$student,$user,
-                               array('age'=>$age,
-                                     'avatar'=>$avatar_url,
-                                     'school'=>$school,
-                                      'grade' => isset($grade) ? $grade['name'] : null,
-                                     'avatar_id'=>$student_reference['avatar_id']));
-        
-        
-        foreach ($student as $key => $value) {
-            if($key!='user_id'){
-               $studentdetails[$key]=$value; 
-            }
-        }
-        return $studentdetails;
+		foreach ($student as $key => $value) {
+			if ($key != 'user_id') {
+				$studentdetails[$key] = $value;
+			}
+		}
+		return $studentdetails;
 
     }
     
