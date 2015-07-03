@@ -90,9 +90,14 @@
 					'uses' => $manage_teacher_tips_controller . '@list_tips_form'
 				]);
 
-				Routes::get('view_view_form', [
-					'as' => 'client.teacher.tips.partials.view_view_form',
-					'uses' => $manage_teacher_tips_controller . '@view_view_form'
+				Routes::get('view_tips_form', [
+					'as' => 'client.teacher.tips.partials.view_tips_form',
+					'uses' => $manage_teacher_tips_controller . '@view_tips_form'
+				]);
+
+				Routes::get('edit_tips_form', [
+					'as' => 'client.teacher.tips.partials.edit_tips_form',
+					'uses' => $manage_teacher_tips_controller . '@edit_tips_form'
 				]);
 			});
 		});

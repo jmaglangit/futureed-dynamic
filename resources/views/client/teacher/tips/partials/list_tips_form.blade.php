@@ -131,10 +131,10 @@
 				            <td ng-if="tips.records.length">
 				            	<div class="row">
 				            		<div class="col-xs-6">
-				            			<a href="" ng-click="tips.setActive(futureed.ACTIVE_VIEW, tipInfo.id)"><span><i class="fa fa-eye"></i></span></a>
+				            			<a href="" ng-click="tips.setTipsActive(futureed.ACTIVE_VIEW, tipInfo.id)"><span><i class="fa fa-eye"></i></span></a>
 				            		</div>
 				            		<div class="col-xs-6">
-				            			<a href="" ng-click="tips.setActive(futureed.ACTIVE_EDIT, tipInfo.id)"><span><i class="fa fa-pencil"></i></span></a>
+				            			<a href="" ng-click="tips.setTipsActive(futureed.ACTIVE_EDIT, tipInfo.id)"><span><i class="fa fa-pencil"></i></span></a>
 				            		</div>
 				            	</div>
 				            </td>
