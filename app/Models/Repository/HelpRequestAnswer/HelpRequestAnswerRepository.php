@@ -60,7 +60,8 @@ class HelpRequestAnswerRepository implements HelpRequestAnswerRepositoryInterfac
 
 		$help_request_answer = $help_request_answer
 			->with('helpRequest','module','subject','subjectArea','user')
-			->StatusEnabled();
+			->statusEnabled()
+			->accepted();
 
 		$count = $help_request_answer->count();
 

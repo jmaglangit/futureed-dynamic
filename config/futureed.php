@@ -11,6 +11,9 @@ return [
 	'image_password_folder' => 'images/password',
 	'enabled' => 'Enabled',
 	'disabled' => 'Disabled',
+	'pending' => 'Pending',
+	'accepted' => 'Accepted',
+	'rejected' => 'Rejected',
 
 
 	//Request code expiry in seconds
