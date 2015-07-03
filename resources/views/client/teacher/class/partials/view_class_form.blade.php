@@ -199,7 +199,7 @@
 		</div>
 	</div>
 	<div class="clearfix"></div>
-	<div>
+	<div ng-init="class.setTabActive()">
 		<div template-directive template-url="{!! route('client.teacher.tips.index') !!}"></div>
 	</div>
 </div>

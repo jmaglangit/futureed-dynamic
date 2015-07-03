@@ -40,5 +40,19 @@ function ManageTeacherTipsService($http){
 		});
 	}
 
+	teacherTipsApi.listHelp = function(id, search, table) {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url 	: tipsApiUrl + 'help-request?class_id=' + id
+				+ '&title=' + search.title
+				+ '&status=' + search.status
+				+ '&created' + search.created
+				+ '&subject' + search.subject
+				+ '&area' + search.area
+				+ '&limit=' + table.size
+				+ '&offset=' + table.offset
+		});
+	}
+
 	return teacherTipsApi;
 }

@@ -178,4 +178,66 @@ function ManageTeacherTipsController($scope, ManageTeacherTipsService, TableServ
 			$scope.ui_unblock();
 		});
 	}
+
+	self.setHelpActive = function(active, id) {
+		self.help_errors = Constants.FALSE;
+		self.help_fields = [];
+
+		self.help_active_list = Constants.FALSE;
+		self.help_active_view = Constants.FALSE;
+		self.help_active_edit = Constants.FALSE;
+
+		switch(active) {
+			case Constants.ACTIVE_VIEW :
+				self.helpDetail(id);
+				self.help_active_view = Constants.TRUE;
+				self.help_success = Constants.FALSE;
+				break;
+
+			case Constants.ACTIVE_EDIT :
+				self.help_success = Constants.FALSE;
+				self.helpDetail(id);
+				self.help_active_edit = Constants.TRUE;
+				break;
+
+			case Constants.ACTIVE_LIST :
+				self.help_active_list = Constants.TRUE;
+				
+				self.searchDefaults();
+				self.tableDefaults();
+				self.helpList();
+				break;
+
+			default:
+			self.help_active_list = Constants.TRUE;
+			self.help_success = Constants.FALSE;
+			break;
+		}
+	}
+
+	self.helpList = function() {
+		self.classid = $scope.classid;
+		self.errors = Constants.FALSE;
+		self.records = [];
+		self.table.loading = Constants.TRUE;
+
+		$scope.ui_block();
+		ManageTeacherTipsService.listHelp(self.classid, self.search, self.table).success(function(response) {
+			self.table.loading = Constants.FALSE;
+
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.help_errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.help_records = response.data.records;
+					self.updatePageCount(response.data);
+				}
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
 }
