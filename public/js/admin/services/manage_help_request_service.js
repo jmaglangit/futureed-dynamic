@@ -42,5 +42,12 @@ function ManageHelpRequestService($http) {
 		});
 	}
 
+	service.updateHelpStatus = function(data) {
+		return $http({
+			method 	: Constants.METHOD_PATCH
+			, url   : serviceUrl + 'help-request/update-request-status/' + data.id + "?request_status=" + data.request_status
+		});
+	}
+
 	return service;
 }

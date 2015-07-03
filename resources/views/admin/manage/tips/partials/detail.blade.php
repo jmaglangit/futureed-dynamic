@@ -145,7 +145,7 @@
 	        		</div>
 	        	</div>
 	        	<div class="form-group" ng-if="tips.record.tip_status == 'Pending' && tips.active_view">
-	        		<div class="btn-container col-xs-8 col-xs-offset-2" ng-if="tips.active_view">
+	        		<div class="btn-container col-xs-8 col-xs-offset-2">
 						{!! Form::button('Accept'
 							, array(
 								'class' => 'btn btn-blue btn-medium'

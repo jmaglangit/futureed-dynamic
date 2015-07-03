@@ -124,24 +124,7 @@
 	        		</div>
 
 	        		<label class="col-xs-2 control-label">Request Status <span class="required">*</span></label>
-	        		<div class="col-xs-4" ng-if="help.active_edit">
-						{!! Form::select('request_status'
-							, array(
-								'' => '-- Select Type --'
-								, 'Accepted' => 'Accepted'
-								, 'Pending' => 'Pending'
-								, 'Rejected' => 'Rejected'
-							)
-							, ''
-							, array(
-								'class' => 'form-control'
-								, 'ng-model' => 'help.record.request_status'
-								, 'ng-disabled' => 'help.active_view'
-								, 'ng-class' => "{ 'required-field' : help.fields['request_status'] }"
-							)
-						) !!}
-	        		</div>
-	        		<div ng-if="help.active_view">
+	        		<div>
 		        		<label class="col-xs-4" ng-if="help.record.request_status == 'Accepted'">
 		        			<b class="success-icon">
 		        				<i class="margin-top-8 fa fa-check-circle-o"></i> {! help.record.request_status !}
@@ -160,6 +143,23 @@
 		        			</b>
 		        		</label>
 	        		</div>
+	        	</div>
+	        	<div class="form-group" ng-if="help.record.request_status == 'Pending' && help.active_view">
+	        		<div class="btn-container col-xs-8 col-xs-offset-2">
+						{!! Form::button('Accept'
+							, array(
+								'class' => 'btn btn-blue btn-medium'
+								, 'ng-click' => "help.acceptHelp()"
+							)
+						) !!}
+
+						{!! Form::button('Reject'
+							, array(
+								'class' => 'btn btn-gold btn-medium'
+								, 'ng-click' => "help.rejectHelp()"
+							)
+						) !!}		
+					</div>
 	        	</div>
 			</fieldset>
 			<fieldset>

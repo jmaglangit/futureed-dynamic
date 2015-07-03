@@ -160,7 +160,6 @@ function ManageTipsController($scope, ManageTipsService, TableService, SearchSer
 		});
 	}
 
-
 	self.acceptTip = function() {
 		var data = {};
 			data.id = self.record.id;
