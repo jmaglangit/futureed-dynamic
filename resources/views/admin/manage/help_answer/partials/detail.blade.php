@@ -115,7 +115,7 @@
 		        			</b>
 		        		</label>
 
-		        		<label class="col-xs-4" ng-if="answer.record.status !== 'Enabled'">
+		        		<label class="col-xs-4" ng-if="answer.record.status == 'Disabled'">
 		        			<b class="error-icon">
 		        				<i class="margin-top-8 fa fa-ban"></i> {! answer.record.status !}
 		        			</b>
