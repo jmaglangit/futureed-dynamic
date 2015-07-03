@@ -73,4 +73,27 @@
 				]);
 			});
 		});
+
+		Routes::group(['prefix' => 'tips'], function() {
+			$manage_teacher_tips_controller = 'FutureLesson\Client\ManageTeacherTipsController';
+
+			Routes::get('/', [
+				'as' => 'client.teacher.tips.index',
+				'uses' => $manage_teacher_tips_controller . '@index'
+			]);
+
+			Routes::group(['prefix' => 'partials'], function() {
+				$manage_teacher_tips_controller = 'FutureLesson\Client\ManageTeacherTipsController';
+
+				Routes::get('list_tips_form', [
+					'as' => 'client.teacher.tips.partials.list_tips_form',
+					'uses' => $manage_teacher_tips_controller . '@list_tips_form'
+				]);
+
+				Routes::get('view_view_form', [
+					'as' => 'client.teacher.tips.partials.view_view_form',
+					'uses' => $manage_teacher_tips_controller . '@view_view_form'
+				]);
+			});
+		});
 	});

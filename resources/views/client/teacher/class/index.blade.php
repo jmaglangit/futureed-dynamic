@@ -26,4 +26,7 @@
 	{!! Html::script('/js/common/table_service.js')!!}
 	{!! Html::script('/js/common/search_service.js')!!}
 	{!! Html::script('/js/client/constants/teacher_constants.js')!!}
+	{!! Html::script('/js/client/controllers/manage_teacher_tips_controller.js')!!}
+	{!! Html::script('/js/client/services/manage_teacher_tips_service.js')!!}
+	{!! Html::script('/js/common/validation_service.js')!!}
 @stop
