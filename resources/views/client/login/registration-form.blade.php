@@ -245,7 +245,7 @@
         <div class="checkbox text-center">
           <label>
             <input type="checkbox" ng-model="register.term">
-            I agree on the <a href="#" data-toggle="modal" ng-click="showModal('terms_modal')">Terms and Conditions</a> and <a href="#" ng-click="showModal('policy_modal')">Data Privacy Policy</a>
+            I agree on the <a href="#" data-toggle="modal" ng-click="register.showModal('terms_modal')">Terms and Conditions</a> and <a href="#" ng-click="showModal('policy_modal')">Data Privacy Policy</a>
           </label>
         </div>
       </div>
