@@ -4,18 +4,18 @@
 return [
 
 	'error_messages' => [
-		//Field error codes
+        //Field error codes
 		1001 => "Required field not found.",
 		1002 => "Required field empty.",
 
 
-		//Rules messages
+        //Rules messages
 		2001 => 'User does not exist.',
 		2002 => 'Email does not exist.',
 		2003 => 'Account does not exist.',
 
 
-		//for student error message
+        //for student error message
 		2004 => 'Username and picture password is incorrect.',
 		2005 => 'Country does not exist.',
 		2006 => 'Confirmation code does not match.',
@@ -90,34 +90,34 @@ return [
 		2132 => 'Invitation code is invalid.',
 		2133 => 'Registration token is invalid.',
 		2134 => "Can't change School: Student has active Subscription.",
-        2135 => "The class is already full.",
-        2136 => 'Unable to Delete.Tip has rating.',
-        2137 => 'Unable to delete. Help request has answers.',
-        2138 => 'Password image is required.',
+		2135 => "The class is already full.",
+		2136 => 'Unable to Delete.Tip has rating.',
+		2137 => 'Unable to delete. Help request has answers.',
+		2138 => 'Password image is required.',
 
-		// Client Error messages
+        // Client Error messages
 		2200 => 'Email already exists.',
 		2201 => 'Username already exists.',
 		2202 => 'School Name already exists.',
 
-		//account status messages
+        //account status messages
 		2230 => 'Account is inactive.',
 		2231 => 'Account Locked',
 		2232 => 'Account Deleted',
 
-		// login error messages
+        // login error messages
 		2233 => 'Password is invalid.',
 
 		2234 => 'Unauthorized Registration',
 
-		//Announcement messages.
+        //Announcement messages.
 		2500 => 'Date range should be between today and future dates.',
 
 		2600 => 'Cannot delete subject. Subject has subject areas.',
 		2601 => 'Cannot delete admin.',
 		2602 => 'The school is invalid.',
 
-		// Custom country messages.
+        // Custom country messages.
 		2603 => 'The country field is required.',
 		2604 => 'The country is invalid'
 
