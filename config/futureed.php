@@ -111,4 +111,8 @@ return [
 
 	//for accepted tips tip_status
 	'tip_status_accepted' => 'Accepted',
+
+	//tip_rating
+	'tip_rating' => 'rating',
+
 ];
