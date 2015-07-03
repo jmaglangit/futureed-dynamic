@@ -279,7 +279,6 @@ function ProfileController($scope, apiService, profileService) {
 	  function backToEditEmail() {
 	  	self.errors = Constants.FALSE;
 	  	self.select_password = Constants.FALSE;
-	  	$scope.image_id = Constants.EMPTY_STR;
 	  }
 
 	  function selectPicturePassword() {
