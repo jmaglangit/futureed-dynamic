@@ -67,6 +67,11 @@ class HelpRequestAnswerController extends ApiController {
 			$criteria['request_answer_status'] = Input::get('request_answer_status');
 		}
 
+		if(Input::get('status')){
+
+			$criteria['status'] = Input::get('status');
+		}
+
 		if(Input::get('created_by')){
 
 			$criteria['created_by'] = Input::get('created_by');
