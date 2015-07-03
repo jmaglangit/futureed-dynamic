@@ -54,7 +54,9 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface{
 	public function getClassStudent($student_id)
 	{
 
-		return ClassStudent::where('student_id', $student_id)->pluck('student_id');
+		return ClassStudent::where('student_id', $student_id)
+			->active()
+			->pluck('student_id');
 	}
 
 	public function addClassStudent($class_student)
@@ -91,7 +93,26 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface{
 
 		return ClassStudent::with('classroom')
 			->studentid($student_id)
+			->active()
 			->currentdate(Carbon::now())
 			->first();
+	}
+
+
+	public function studentJoinClassroom($class_students_id){
+
+		try{
+
+			ClassStudent::find($class_students_id)
+				->update([
+					'subscription_status' => config('futureed.active')
+				]);
+
+			return ClassStudent::find($class_students_id);
+
+		} catch (Exception $e){
+
+			return $e->getMessage();
+		}
 	}
 }
