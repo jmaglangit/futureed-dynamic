@@ -368,4 +368,23 @@ function ManageClassController($scope, manageClassService, apiService, TableServ
 	self.display = function() {
 
 	}
+
+	self.setTabActive = function(active) {
+		switch(active) {
+			case 'help':
+				self.help_tab_active = Constants.TRUE;
+				self.tip_tab_active = Constants.FALSE;
+				break;
+
+			case 'tip':
+				self.help_tab_active = Constants.FALSE;
+				self.tip_tab_active = Constants.TRUE;
+				break;
+
+			default:
+				self.tip_tab_active = Constants.TRUE;
+				self.help_tab_active = Constants.FALSE;
+				break;
+		}
+	}
 }

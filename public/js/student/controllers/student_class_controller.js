@@ -66,17 +66,10 @@ function StudentClassController($scope, StudentClassService) {
 		self.help.errors = Constants.FALSE;
 		self.help.success = Constants.FALSE;
 		self.help.student_id = self.student_id;
-		self.help.class_id = parseInt(1);
-		self.help.module_id = parseInt(1);
-		self.help.subject_id = parseInt(1);
-		self.help.subject_area_id = parseInt(1);
-		self.help.link_type = 'General';
-		self.help.link_id = parseInt(1);
-		self.help.request_status = 'Pending';
-		self.help.question_status = 'Open';
+		self.help.class_id = parseInt(9);
 
 		$scope.ui_block();
-		StudentClassService.submitTips(self.help).success(function(response){
+		StudentClassService.submitHelp(self.help).success(function(response){
 		self.alert = Constants.TRUE;
 			if(angular.equals(response.status, Constants.STATUS_OK)){
 				if(response.errors) {

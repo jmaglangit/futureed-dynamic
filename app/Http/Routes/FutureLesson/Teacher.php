@@ -101,4 +101,32 @@
 				]);
 			});
 		});
+
+		Routes::group(['prefix' => 'help'], function() {
+			$manage_teacher_help_controller = 'FutureLesson\Client\ManageTeacherHelpController';
+
+			Routes::get('/', [
+				'as' => 'client.teacher.help.index',
+				'uses' => $manage_teacher_help_controller . '@index'
+			]);
+
+			Routes::group(['prefix' => 'partials'], function() {
+				$manage_teacher_help_controller = 'FutureLesson\Client\ManageTeacherHelpController';
+
+				Routes::get('list_help_form', [
+					'as' => 'client.teacher.help.partials.list_help_form',
+					'uses' => $manage_teacher_help_controller . '@list_help_form'
+				]);
+
+				Routes::get('view_help_form', [
+					'as' => 'client.teacher.help.partials.view_help_form',
+					'uses' => $manage_teacher_help_controller . '@view_help_form'
+				]);
+
+				Routes::get('edit_help_form', [
+					'as' => 'client.teacher.tips.partials.edit_help_form',
+					'uses' => $manage_teacher_help_controller . '@edit_help_form'
+				]);
+			});
+		});
 	});
