@@ -44,8 +44,11 @@ class HelpRequestRepository implements HelpRequestRepositoryInterface{
 
         $query = $query->NotRejected();
 
+        $query = $query->with('classroom','module','subject','subjectArea','student');
+
         if(count($criteria) <= 0 && $limit == 0 && $offset == 0) {
             $count = $query->count();
+            $query = $query->orderBy('title', 'asc');
         } else {
             if(count($criteria) > 0) {
                 if(isset($criteria['module'])) {
@@ -69,15 +72,32 @@ class HelpRequestRepository implements HelpRequestRepositoryInterface{
                 if(isset($criteria['link_type'])) {
                     $query = $query->linkType($criteria['link_type']);
                 }
+                if(isset($criteria['order_by_date'])) {
+                    $query = $query->orderBy('created_at', 'desc');
+                } else{
+                    $query = $query->orderBy('title', 'asc');
+                }
+
+                if(isset($criteria['student_id']) && isset($criteria['help_request_type'])){
+                    if($criteria['help_request_type'] == 'Own'){
+                        $query = $query->ownRequest($criteria['student_id']);
+                    }else{
+                        $query = $query->otherRequest($criteria['student_id']);
+                    }
+                }
+
+                if(isset($criteria['subject_id'])) {
+                    $query = $query->subjectId($criteria['subject_id']);
+                }
+
             }
-            $count = $query->count();
 
             if($limit > 0 && $offset >= 0) {
                 $query = $query->offset($offset)->limit($limit);
             }
+
+            $count = $query->count();
         }
-        $query = $query->with('classroom','module','subject','subjectArea','student');
-        $query = $query->orderBy('title', 'asc');
 
         return ['total' => $count, 'records' => $query->get()->toArray()];
     }

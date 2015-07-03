@@ -36,16 +36,15 @@ class HelpRequestRequest extends ApiRequest{
                     'student_id' => 'required|integer',
                     'title' => 'required',
                     'content' => 'required',
-                    'module_id' => 'required|integer',
-                    'subject_id' => 'required|integer',
-                    'subject_area_id' => 'required|integer',
-                    'link_type' => 'required|in:General,Content,Question',
-                    'link_id' => 'required|integer',
-                    'request_status' => 'required|in:Pending,Accepted,Rejected',
-                    'status' => 'required|in:Enabled,Disabled',
-                    'question_status' => 'required|in:Open,Answered,Cancelled'];
+                    'module_id' => 'integer',
+                    'subject_id' => 'integer',
+                    'subject_area_id' => 'integer',
+                    'link_type' => 'in:General,Content,Question',
+                    'link_id' => 'integer',
+                    'request_status' => 'in:Pending,Accepted,Rejected',
+                    'status' => 'in:Enabled,Disabled',
+                    'question_status' => 'in:Open,Answered,Cancelled'];
         }
-
     }
 
     /**
@@ -57,10 +56,6 @@ class HelpRequestRequest extends ApiRequest{
         return [
             'class_id.required' =>'Class is required.',
             'student_id.required' =>'User is required.',
-            'module_id.required' =>'Module is required.',
-            'subject_id.required' =>'Subject is required.',
-            'subject_area_id.required' =>'Subject area is required.',
-            'link_id.required' =>'Link is required.',
             'class_id.integer' => 'Class must be a number.',
             'student_id.integer' => 'Student must be a number.',
             'module_id.integer' => 'Module must be a number.',
