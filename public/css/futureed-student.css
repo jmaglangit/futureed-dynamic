@@ -9,11 +9,11 @@
     -webkit-transition: ease 1s;
     -o-transition: ease 1s;
     transition: ease 1s;
-	-webkit-transition: 1s ease-out;
-	-moz-transition: 1s ease-out;
-	-ms-transition: 1s ease-out;
-	-o-transition: 1s ease-out;
-	transition: 1s ease-out;
+    -webkit-transition: 1s ease-out;
+    -moz-transition: 1s ease-out;
+    -ms-transition: 1s ease-out;
+    -o-transition: 1s ease-out;
+    transition: 1s ease-out;
     width: 300px;
     background-color: #433d3d;
     position: absolute;
@@ -46,11 +46,11 @@
     -webkit-transition: ease 1s;
     -o-transition: ease 1s;
     transition: ease 1s;
-	-webkit-transition: width 1s ease-out;
-	-moz-transition: 1s ease-out;
-	-ms-transition: 1s ease-out;
-	-o-transition: 1s ease-out;
-	transition: 1s ease-out;
+    -webkit-transition: 1s ease-out;
+    -moz-transition: 1s ease-out;
+    -ms-transition: 1s ease-out;
+    -o-transition: 1s ease-out;
+    transition: 1s ease-out;
     width: 300px;
     left: 0px;
     position: absolute;
@@ -196,9 +196,9 @@
 }
 .flip-horizontal {
 	-moz-transform: scaleX(-1);
-    -o-transform: scaleX(-1);
-    -webkit-transform: scaleX(-1);
-    transform: scaleX(-1);
-    filter: FlipH;
-    -ms-filter: "FlipH";
+	-o-transform: scaleX(-1);
+	-webkit-transform: scaleX(-1);
+	transform: scaleX(-1);
+	filter: FlipH;
+	-ms-filter: "FlipH";
 }
