@@ -39,6 +39,8 @@
 						<div template-directive template-url="{!! route('admin.manage.answer.partials.list') !!}"></div>
 
 						<div template-directive template-url="{!! route('admin.manage.answer.partials.detail') !!}"></div>
+
+						<div template-directive template-url="{!! route('admin.manage.answer.partials.delete') !!}"></div>
 					</div>
 			  	</div>
 			</div>
@@ -49,6 +51,7 @@
 @section('scripts')
 	{!! Html::script('/js/admin/controllers/manage_help_answer_controller.js')!!}
 	{!! Html::script('/js/admin/services/manage_help_answer_service.js')!!}
+	{!! Html::script('/js/admin/constants/manage_help_answer_constants.js')!!}
 
 	{!! Html::script('/js/common/search_service.js')!!}
 	{!! Html::script('/js/common/table_service.js')!!}

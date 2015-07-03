@@ -114,10 +114,12 @@ function ManageTipsController($scope, ManageTipsService, TableService, SearchSer
 					var record = response.data;
 
 					self.record.id = record.id;
-					self.record.module = record.module.name;
-					self.record.subject = record.subject.name;
-					self.record.area = record.subjectarea.name;
+					self.record.module = (record.module) ? record.module.name : Constants.EMPTY_STR;
+					self.record.subject = (record.subject) ? record.subject.name : Constants.EMPTY_STR;
+					self.record.area = (record.subjectarea) ? record.subjectarea.name : Constants.EMPTY_STR;
+					
 					self.record.link_type = record.link_type;
+					self.record.tip_status = record.tip_status;
 					self.record.title = record.title;
 					self.record.content = record.content;
 					self.record.status = record.status;
@@ -147,6 +149,46 @@ function ManageTipsController($scope, ManageTipsService, TableService, SearchSer
 					});
 				} else if(response.data) {
 					self.success = TipConstants.MSG_UPDATE_SUCCESS;
+					self.setActive(Constants.ACTIVE_VIEW, response.data.id);
+				}
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.acceptTip = function() {
+		var data = {};
+			data.id = self.record.id;
+			data.tip_status = "Accepted";
+			data.message = TipConstants.MSG_ACCEPT_TIP_SUCCESS;
+
+		updateTipStatus(data);
+	}
+
+	self.rejectTip = function() {
+		var data = {};
+			data.id = self.record.id;
+			data.tip_status = "Rejected";
+			data.message = TipConstants.MSG_REJECT_TIP_SUCCESS;
+
+		updateTipStatus(data);
+	}
+
+	function updateTipStatus(data) {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		$scope.ui_block();
+		ManageTipsService.updateTipStatus(data).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.success = data.message;
 					self.setActive(Constants.ACTIVE_VIEW, response.data.id);
 				}
 			}

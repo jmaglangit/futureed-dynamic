@@ -42,5 +42,13 @@ function ManageTipsService($http) {
 		});
 	}
 
+	service.updateTipStatus = function(data) {
+		return $http({
+			method 	: Constants.METHOD_PUT
+			, data  : { tip_status : data.tip_status }
+			, url   : serviceUrl + 'tip/update-status/' + data.id
+		});
+	}
+
 	return service;
 }

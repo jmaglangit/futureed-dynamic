@@ -20,4 +20,8 @@ class ManageHelpAnswerController extends Controller{
 	public function detail_form() {
 		return view('admin.manage.help_answer.partials.detail');
 	}
+
+	public function delete_form() {
+		return view('admin.manage.help_answer.partials.delete');
+	}
 }	

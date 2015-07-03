@@ -116,6 +116,10 @@
 					'as' => 'client.partials.registration_success'
 					, 'uses' => 'FutureLesson\Client\LoginController@registration_success' 
 				]);
+			Routes::get('/terms', [
+					'as' => 'client.login.terms-and-condition'
+					, 'uses' => 'FutureLesson\Client\LoginController@terms' 
+				]);
 		});
 	});
 	

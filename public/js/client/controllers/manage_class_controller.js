@@ -107,6 +107,7 @@ function ManageClassController($scope, manageClassService, apiService, TableServ
 	}
 
 	self.studentList = function(id) {
+		$scope.classid = id;
 		self.errors = Constants.FALSE;
 		self.search.id = id;
 

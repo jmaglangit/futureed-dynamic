@@ -28,7 +28,41 @@ class StudentTipController extends ApiController {
 	 */
 	public function index()
 	{
-		//
+		$criteria = [];
+		$limit = 0 ;
+		$offset = 0;
+
+		//for class_id
+		if(Input::get('class_id')){
+
+			$criteria['class_id'] = Input::get('class_id');
+		}
+
+		//for area
+		if(Input::get('area')){
+
+			$criteria['area'] = Input::get('area');
+		}
+
+		//for subject
+		if(Input::get('subject')){
+
+			$criteria['subject'] = Input::get('subject');
+		}
+
+		//assign value to status = Accepted
+		$criteria['status'] = config('futureed.tip_status_accepted');
+
+		if(Input::get('limit')) {
+			$limit = intval(Input::get('limit'));
+		}
+
+		if(Input::get('offset')) {
+			$offset = intval(Input::get('offset'));
+		}
+
+		return $this->respondWithData($this->tip->viewClassTips($criteria , $limit, $offset ));
+
 	}
 
 	/**
@@ -85,7 +119,15 @@ class StudentTipController extends ApiController {
 	 */
 	public function show($id)
 	{
-		//
+		$tip = $this->tip->viewTip($id);
+
+		if(!$tip){
+
+			return $this->respondErrorMessage(2120);
+		}
+
+		return $this->respondWithData($tip);
+
 	}
 
 	/**

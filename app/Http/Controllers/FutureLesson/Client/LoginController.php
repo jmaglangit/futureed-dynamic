@@ -152,4 +152,9 @@ class LoginController extends Controller {
 
 		return view('client.partials.base-url');
 	}
+
+	public function terms()
+	{
+		return view('client.login.terms-and-conditions');
+	}
 }

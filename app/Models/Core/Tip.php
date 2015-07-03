@@ -117,7 +117,17 @@ class Tip extends Model {
 
 	}
 
+	public function scopeAccepted($query){
 
+		$query->where('tip_status', config('futureed.tip_status_accepted'));
+
+	}
+
+	public function scopeGeneral($query){
+
+		$query->where('link_type', config('futureed.link_type_general'));
+
+	}
 
 
 

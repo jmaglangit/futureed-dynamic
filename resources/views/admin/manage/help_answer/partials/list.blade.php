@@ -1,5 +1,5 @@
 <div ng-if="answer.active_list">
-	<div class="col-xs-12 success-container" ng-if="answer.errors || answer.success">
+	<div class="col-xs-12" ng-if="answer.errors || answer.success">
 		<div class="alert alert-error" ng-if="answer.errors">
 			<p ng-repeat="error in answer.errors track by $index">
 				{! error !}
@@ -127,7 +127,7 @@
 			</div>
 
 			<div class="clearfix"></div>
-			<div class="table-responsive">
+			<div class="table-responsive" ng-init="answer.list()">
 				<table id="grade-list" class="table table-striped table-bordered">
 					<thead>
 				        <tr>
@@ -141,23 +141,23 @@
 				        </tr>
 			        </thead>
 			        <tbody>
-				        <tr ng-repeat="tipInfo in answer.records">
-				            <td>{! tipInfo.code !}</td>
-				            <td>{! tipInfo.name !}</td>
-				            <td>{! tipInfo.description !}</td>
-				            <td>{! tipInfo.code !}</td>
-				            <td>{! tipInfo.name !}</td>
-				            <td>{! tipInfo.description !}</td>
+				        <tr ng-repeat="answerInfo in answer.records">
+				            <td>{! answerInfo.module.name !}</td>
+				            <td>{! answerInfo.subject.name !}</td>
+				            <td>{! answerInfo.subject_area.name !}</td>
+				            <td>{! answerInfo.help_request.title !}</td>
+				            <td>{! answerInfo.content !}</td>
+				            <td>{! answerInfo.request_answer_status !}</td>
 				            <td ng-if="answer.records.length">
 				            	<div class="row">
 				            		<div class="col-xs-4">
-				            			<a href="" ng-click="answer.setActive(futureed.ACTIVE_VIEW)"><span><i class="fa fa-eye"></i></span></a>
+				            			<a href="" ng-click="answer.setActive(futureed.ACTIVE_VIEW, answerInfo.id)"><span><i class="fa fa-eye"></i></span></a>
 				            		</div>
 				            		<div class="col-xs-4">
-				            			<a href="" ng-click="answer.setActive(futureed.ACTIVE_EDIT)"><span><i class="fa fa-pencil"></i></span></a>
+				            			<a href="" ng-click="answer.setActive(futureed.ACTIVE_EDIT, answerInfo.id)"><span><i class="fa fa-pencil"></i></span></a>
 				            		</div>
 				            		<div class="col-xs-4">
-				            			<a href="" ng-click=""><span><i class="fa fa-trash"></i></span></a>
+				            			<a href="" ng-click="answer.confirmDelete(answerInfo.id)"><span><i class="fa fa-trash"></i></span></a>
 				            		</div>	
 				            	</div>
 				            </td>

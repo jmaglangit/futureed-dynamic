@@ -112,9 +112,10 @@ function ManageHelpRequestController($scope, ManageHelpRequestService, TableServ
 					var record = response.data;
 
 					self.record.id = record.id;
-					self.record.module = record.module.name;
-					self.record.subject = record.subject.name;
-					self.record.area = record.subject_area.name;
+					self.record.module = (record.module) ? record.module.name : Constants.EMPTY_STR;
+					self.record.subject = (record.subject) ? record.subject.name : Constants.EMPTY_STR;
+					self.record.area = (record.subjectarea) ? record.subjectarea.name : Constants.EMPTY_STR;
+
 					self.record.link_type = record.link_type;
 					self.record.title = record.title;
 					self.record.content = record.content;
@@ -147,6 +148,46 @@ function ManageHelpRequestController($scope, ManageHelpRequestService, TableServ
 				} else if(response.data) {
 					self.success = HelpConstants.MSG_UPDATE_SUCCESS;
 					self.setActive(Constants.ACTIVE_VIEW, self.record.id);
+				}
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.acceptHelp = function() {
+		var data = {};
+			data.id = self.record.id;
+			data.request_status = "Accepted";
+			data.message = HelpConstants.MSG_ACCEPT_HELP_SUCCESS;
+
+		updateHelpStatus(data);
+	}
+
+	self.rejectHelp = function() {
+		var data = {};
+			data.id = self.record.id;
+			data.request_status = "Rejected";
+			data.message = HelpConstants.MSG_REJECT_HELP_SUCCESS;
+
+		updateHelpStatus(data);
+	}
+
+	function updateHelpStatus(data) {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		$scope.ui_block();
+		ManageHelpRequestService.updateHelpStatus(data).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.success = data.message;
+					self.setActive(Constants.ACTIVE_VIEW, data.id);
 				}
 			}
 

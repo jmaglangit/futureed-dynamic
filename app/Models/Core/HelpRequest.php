@@ -15,7 +15,16 @@ class HelpRequest extends Model {
 
     protected $fillable =['class_id','student_id','title','content','module_id','subject_id','subject_area_id','link_type','link_id', 'request_status','status','question_status','last_answered_at'];
 
-    protected $attributes = ['created_by' => 1, 'updated_by' => 1];
+    protected $attributes = [   'created_by' => 1,
+                                'updated_by' => 1,
+                                'module_id'=> 0,
+                                'subject_id'=> 0,
+                                'subject_area_id' => 0,
+                                'link_type' => 'General',
+                                'link_id'=> 0,
+                                'request_status' => 'Pending',
+                                'status' =>'Enabled',
+                                'question_status' => 'Open'  ];
 
     //Relationships
     public function classroom(){
@@ -76,7 +85,19 @@ class HelpRequest extends Model {
     }
 
     public function scopeLinkType($query,$link_type){
-        return $query->where('link_type',$link_type);
+        return $query->whereLinkType($link_type);
+    }
+
+    public function scopeOwnRequest($query,$student_id){
+        return $query->whereStudentId($student_id);
+    }
+
+    public function scopeOtherRequest($query,$student_id){
+        return $query->whereNotIn('student_id',[$student_id]);
+    }
+
+    public function scopeSubjectId($query,$subject_id){
+        return $query->whereSubjectId($subject_id);
     }
 
 

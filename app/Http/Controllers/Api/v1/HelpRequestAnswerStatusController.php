@@ -29,7 +29,9 @@ class HelpRequestAnswerStatusController extends ApiController {
 	 */
 	public function updateStatus(HelpRequestAnswerStatusRequest $request, $id){
 
-		return $this->help_request_answer->updateRequestAnswerStatus($id, $request->get('request_answer_status'));
+		return $this->respondWithData(
+			$this->help_request_answer->updateRequestAnswerStatus($id, $request->get('request_answer_status'))
+		);
 
 
 	}

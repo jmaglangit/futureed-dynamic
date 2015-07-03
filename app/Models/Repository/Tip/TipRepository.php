@@ -189,17 +189,41 @@ class TipRepository implements TipRepositoryInterface{
 
 			}
 
+
+
 			$count = $tip->count();
 
 			if ($limit > 0 && $offset >= 0) {
 				$tip = $tip->offset($offset)->limit($limit);
+
 			}
 
 		}
+		$tip = $tip->orderBy('created_at', 'desc');
 
 		return ['total' => $count, 'records' => $tip->get()->toArray()];
 
 	}
+
+	/**
+	 *
+	 * @return  3 currently added general tips for student under a certain class
+	 */
+
+	public function viewCurrentTips($class_id){
+
+		$tip = new Tip();
+
+		$tip = $tip->with('subject','module','subjectarea','student')->accepted();
+		$tip = $tip->general()->classId($class_id);
+		$tip = $tip->orderBy('created_at','desc')->take(config('futureed.tip_take'));
+		return $tip->get();
+
+	}
+
+
+
+
 	
 
 }
