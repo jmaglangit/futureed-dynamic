@@ -24,7 +24,7 @@ class TipRatingRepository implements TipRatingRepositoryInterface{
 
 	/**
 	 *
-	 * @return average of rating field of a certain tip
+	 * @return average of rating field of a specific tip
 	 */
 
 	public function getAverageRating($tip_id){

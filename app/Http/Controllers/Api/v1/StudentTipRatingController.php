@@ -56,7 +56,7 @@ class StudentTipRatingController extends ApiController {
 
 		$tip['rating'] = $average;
 
-		//update tips table add rating on it
+		//update rating on tips table
 		$this->tip->updateTip($data['tip_id'],$tip);
 
 		return $this->respondWithData(['id'=>$tip_rating['id']]);
