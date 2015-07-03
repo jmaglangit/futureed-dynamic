@@ -15,6 +15,7 @@ function StudentClassController($scope, StudentClassService) {
 		self.add_tips = Constants.FALSE;
 		self.bool_change_class = !self.bool_change_class;
 		self.send_behind = !self.send_behind;
+		$('#div-out').animate({left:300},600);
 	}
 
 	self.addTips = function() {
