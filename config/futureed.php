@@ -97,4 +97,13 @@ return [
     'help_request_status_pending' => 'Pending',
     'help_request_status_accepted' => 'Accepted',
     'help_request_status_rejected' => 'Rejected',
+
+	//for tips take 3
+	'tip_take' => 3,
+
+	//for general tips link_type
+	'link_type_general' => 'General',
+
+	//for accepted tips tip_status
+	'tip_status_accepted' => 'Accepted',
 ];
