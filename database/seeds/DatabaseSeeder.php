@@ -12,19 +12,19 @@ class DatabaseSeeder extends Seeder {
 	 */
 	public function run()
 	{
-        Model::unguard();
+		Model::unguard();
 
-        $this->call('UsersTableSeeder');
-        $this->call('StudentsTableSeeder');
-        $this->call('SchoolsTableSeeder');
-        $this->call('PasswordImagesTableSeeder');
-        $this->call('CountriesSeeder');
-        $this->call('AvatarsTableSeeder');
-        $this->command->info('Seeded the countries!');
-        $this->call('ClientTableSeeder');
-        $this->call('GradeTableSeeder');
-        $this->call('AdminTableSeeder');
-        $this->call('ClassroomTableSeeder');
+		$this->call('UsersTableSeeder');
+		$this->call('StudentsTableSeeder');
+		$this->call('SchoolsTableSeeder');
+		$this->call('PasswordImagesTableSeeder');
+		$this->call('CountriesSeeder');
+		$this->call('AvatarsTableSeeder');
+		$this->command->info('Seeded the countries!');
+		$this->call('ClientTableSeeder');
+		$this->call('GradeTableSeeder');
+		$this->call('AdminTableSeeder');
+		$this->call('ClassroomTableSeeder');
 		$this->call('AgeGroupTableSeeder');
 		$this->call('CountryGradesTableSeeder');
     }
