@@ -1,4 +1,16 @@
 <div ng-if="help.active_view || help.active_edit">
+	<div class="col-xs-12" ng-if="help.errors || help.success">
+		<div class="alert alert-error" ng-if="help.errors">
+			<p ng-repeat="error in help.errors track by $index">
+				{! error !}
+			</p>
+		</div>
+
+        <div class="alert alert-success" ng-if="help.success">
+            <p>{! help.success !}</p>
+        </div>
+    </div>
+
 	<div class="module-container">
 		<div class="title-main-content">
 			<span>Help Request Detail</span>
@@ -38,6 +50,7 @@
 								'class' => 'form-control'
 								, 'ng-model' => 'help.record.link_type'
 								, 'ng-disabled' => 'help.active_view'
+								, 'ng-class' => "{ 'required-field' : help.fields['link_type'] }"
 							)
 						) !!}
 					</div>
@@ -97,15 +110,53 @@
 	        			</div>
 	        		</div>
 	        		<div ng-if="help.active_view">
-		        		<label class="col-md-5" ng-if="help.record.status == 'Enabled'">
+		        		<label class="col-xs-4" ng-if="help.record.status == 'Enabled'">
 		        			<b class="success-icon">
 		        				<i class="margin-top-8 fa fa-check-circle-o"></i> {! help.record.status !}
 		        			</b>
 		        		</label>
 
-		        		<label class="col-md-5" ng-if="help.record.status !== 'Enabled'">
+		        		<label class="col-xs-4" ng-if="help.record.status !== 'Enabled'">
 		        			<b class="error-icon">
 		        				<i class="margin-top-8 fa fa-ban"></i> Disabled {! help.record.status !}
+		        			</b>
+		        		</label>
+	        		</div>
+
+	        		<label class="col-xs-2 control-label">Request Status <span class="required">*</span></label>
+	        		<div class="col-xs-4" ng-if="help.active_edit">
+						{!! Form::select('request_status'
+							, array(
+								'' => '-- Select Type --'
+								, 'Accepted' => 'Accepted'
+								, 'Pending' => 'Pending'
+								, 'Rejected' => 'Rejected'
+							)
+							, ''
+							, array(
+								'class' => 'form-control'
+								, 'ng-model' => 'help.record.request_status'
+								, 'ng-disabled' => 'help.active_view'
+								, 'ng-class' => "{ 'required-field' : help.fields['request_status'] }"
+							)
+						) !!}
+	        		</div>
+	        		<div ng-if="help.active_view">
+		        		<label class="col-xs-4" ng-if="help.record.request_status == 'Accepted'">
+		        			<b class="success-icon">
+		        				<i class="margin-top-8 fa fa-check-circle-o"></i> {! help.record.request_status !}
+		        			</b>
+		        		</label>
+
+		        		<label class="col-xs-4" ng-if="help.record.request_status == 'Pending'">
+		        			<b class="warning-icon">
+		        				<i class="margin-top-8 fa fa-exclamation-circle"></i> {! help.record.request_status !}
+		        			</b>
+		        		</label>
+
+		        		<label class="col-xs-4" ng-if="help.record.request_status == 'Rejected'">
+		        			<b class="error-icon">
+		        				<i class="margin-top-8 fa fa-ban"></i> {! help.record.request_status !}
 		        			</b>
 		        		</label>
 	        		</div>
@@ -124,6 +175,7 @@
 								'ng-disabled' => 'help.active_view',
 								'ng-model' => 'help.record.title',
 								'placeholder' => 'Title'
+								, 'ng-class' => "{ 'required-field' : help.fields['title'] }"
 							]
 						) !!}
 					</div>
@@ -131,12 +183,13 @@
 				<div class="form-group">
 					<label class="col-xs-3 control-label">Description <span class="required">*</span></label>
 					<div class="col-xs-6">
-						{!! Form::textarea('description','',
+						{!! Form::textarea('content','',
 							[
 								'class' => 'form-control',
 								'ng-disabled' => 'help.active_view',
-								'ng-model' => 'help.record.description',
+								'ng-model' => 'help.record.content',
 								'placeholder' => 'Description'
+								, 'ng-class' => "{ 'required-field' : help.fields['content'] }"
 							]
 						) !!}
 					</div>
@@ -145,14 +198,14 @@
 						{!! Form::button('Save'
 							, array(
 								'class' => 'btn btn-blue btn-medium'
-								, 'ng-click' => "help.updateHelpRequest()"
+								, 'ng-click' => "help.updateHelp()"
 							)
 						) !!}
 
 						{!! Form::button('Cancel'
 							, array(
 								'class' => 'btn btn-gold btn-medium'
-								, 'ng-click' => "help.setActive(futureed.ACTIVE_VIEW)"
+								, 'ng-click' => "help.setActive(futureed.ACTIVE_VIEW, help.record.id)"
 							)
 						) !!}
 				</div>	
@@ -160,7 +213,7 @@
 						{!! Form::button('Edit'
 							, array(
 								'class' => 'btn btn-blue btn-medium'
-								, 'ng-click' => "help.setActive(futureed.ACTIVE_EDIT)"
+								, 'ng-click' => "help.setActive(futureed.ACTIVE_EDIT, help.record.id)"
 							)
 						) !!}
 

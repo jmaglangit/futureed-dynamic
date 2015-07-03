@@ -50,6 +50,7 @@
 								'class' => 'form-control'
 								, 'ng-model' => 'tips.record.link_type'
 								, 'ng-disabled' => 'tips.active_view'
+								, 'ng-class' => "{ 'required-field' : tips.fields['link_type'] }"
 							)
 						) !!}
 					</div>
@@ -132,10 +133,11 @@
 					<div class="col-xs-6">
 						{!! Form::text('title', '',
 							[
-								'class' => 'form-control',
-								'ng-disabled' => 'tips.active_view',
-								'ng-model' => 'tips.record.title',
-								'placeholder' => 'Title'
+								'class' => 'form-control'
+								, 'ng-disabled' => 'tips.active_view'
+								, 'ng-model' => 'tips.record.title'
+								, 'placeholder' => 'Title'
+								, 'ng-class' => "{ 'required-field' : tips.fields['title'] }"
 							]
 						) !!}
 					</div>
@@ -145,10 +147,11 @@
 					<div class="col-xs-6">
 						{!! Form::textarea('content','',
 							[
-								'class' => 'form-control',
-								'ng-disabled' => 'tips.active_view',
-								'ng-model' => 'tips.record.content',
-								'placeholder' => 'Description'
+								'class' => 'form-control'
+								, 'ng-disabled' => 'tips.active_view'
+								, 'ng-model' => 'tips.record.content'
+								, 'placeholder' => 'Description'
+								, 'ng-class' => "{ 'required-field' : tips.fields['content'] }"
 							]
 						) !!}
 					</div>

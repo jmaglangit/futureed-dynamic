@@ -53,7 +53,7 @@ class TipController extends ApiController {
 	 * view first 3 most recent general tips under a class
 	 */
 
-	public function viewTips(){
+	public function viewCurrentTips(){
 
 		$class_id = NULL;
 
@@ -66,7 +66,7 @@ class TipController extends ApiController {
 		$tip = $this->tip->viewCurrentTips($class_id);
 
 		return $this->respondWithData($tip);
-		
+
 	}
 
 

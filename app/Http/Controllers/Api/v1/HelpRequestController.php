@@ -43,6 +43,9 @@ class HelpRequestController extends ApiController{
         if(Input::get('title')){
             $criteria['title'] = Input::get('title');
         }
+        if(Input::get('link_type')){
+            $criteria['link_type'] = Input::get('link_type');
+        }
 
         $limit = (Input::get('limit')) ? Input::get('limit') : 0;
         $offset = (Input::get('offset')) ? Input::get('offset') : 0;

@@ -19,7 +19,7 @@ Routes::group(['prefix' => '/tip'], function() {
 			['except' => ['create', 'edit']]);
 
 		Routes::get('/student-view-recent/', [
-			'uses' => 'Api\v1\TipController@viewTips',
+			'uses' => 'Api\v1\TipController@viewCurrentTips',
 			'as' => 'tip.update.status']);
 
 

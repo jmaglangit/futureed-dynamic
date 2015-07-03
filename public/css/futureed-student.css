@@ -1,2 +1,159 @@
 @charset "UTF-8"; 
 
+.ul-left {
+	margin-left: 30px;
+}
+
+.sidebar {
+    -moz-transition: ease .1s;
+    -webkit-transition: ease .1s;
+    -o-transition: ease .1s;
+    transition: ease .1s;
+    width: 300px;
+    background-color: #433d3d;
+    position: absolute;
+    top: 0px;
+    bottom: 0px;
+    left: -300px;
+    overflow-y: scroll;
+    overflow: auto;
+    float: left;
+}
+
+.slide-out {
+    -moz-transition: ease 1s;
+    -webkit-transition: ease 1s;
+    -o-transition: ease 1s;
+    transition: ease 1s;
+    left: 0px;
+    
+}
+
+.sidebar-toggle {
+	  margin-top: 59px;
+	  position: fixed;
+}
+
+.student-class {
+	background: url("../images/class-student/mountain-full-bg.png") no-repeat scroll right bottom / cover !important;
+}
+
+.side-header {
+	padding: 10px;
+}
+
+.tips-img-header {
+	position: relative;
+	width: 260px;
+}
+
+.help-img-header {
+	position: relative;
+	width: 260px;
+}
+.tips-text-overlay {
+	position: absolute; 
+	top: 18px; 
+	left: 70px; 
+	width: 100%;
+	font-size: 20px; 
+}
+.help-text-overlay {
+	position: absolute; 
+	top: 405px; 
+	left: 70px; 
+	width: 100%;
+	font-size: 20px; 
+}
+.send-behind {
+	z-index: -1;
+}
+
+.div-side-content {
+	background-color: #524e4d;
+	padding: 10px;
+}
+
+.sidebar-div {
+	padding: 10px 15px 10px 10px;
+}
+
+.side-title {
+	color: #ffffff;
+	margin: 0;
+}
+.user-detail-star {
+	margin-bottom: 5px;
+}
+
+.user-detail {
+	margin: 0;
+	font-size: 12px;
+}
+
+.side-btn-container {
+	margin-top: 10px;
+	padding: 0 15px 0 10px;
+	margin-bottom: 20px;
+}
+
+.submit-btn-tips, .submit-btn-help {
+	padding: 0;
+}
+
+.tip-btn-container {
+	margin-top: 10px;
+}
+.btn-left {
+	padding-left: 0;
+	padding-right: 10px;
+}
+
+.btn-right {
+	padding-right: 0;
+	padding-left: 10px;
+}
+.margin-top-50 {
+	margin-top: 50px;
+}
+
+.student-link {
+	color: #ffffff;
+}
+
+.student-link:hover {
+	color: #ffffff;
+} 
+
+
+.label-side {
+	text-align: center !important;
+	display: block;
+	font-size: 14px;
+	color: #ffffff;
+}
+.sidebar-input {
+	background-color: #524e4d !important;
+	border: none !important;
+	color: #8e8171;
+}
+
+.sidebar-input:hover {
+	background-color: #524e4d !important;
+	border: none !important;
+	color: #8e8171;
+}
+
+.side-btn {
+	margin-bottom: 10px;
+}
+
+.row {
+	margin: 0;
+}
+.alert-success{
+	margin-left: 0 !important;
+}
+.container-bottom {
+	margin-bottom: 20px;
+}

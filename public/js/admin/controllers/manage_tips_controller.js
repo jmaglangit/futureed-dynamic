@@ -14,6 +14,7 @@ function ManageTipsController($scope, ManageTipsService, TableService, SearchSer
 
 	self.setActive = function(active, id) {
 		self.errors = Constants.FALSE;
+		self.fields = [];
 
 		self.active_list = Constants.FALSE;
 		self.active_view = Constants.FALSE;
@@ -32,8 +33,12 @@ function ManageTipsController($scope, ManageTipsService, TableService, SearchSer
 				self.active_edit = Constants.TRUE;
 				break;
 
-			case Constants.ACTIVE_LIST : 
+			case Constants.ACTIVE_LIST :
 				self.active_list = Constants.TRUE;
+				
+				self.searchDefaults();
+				self.tableDefaults();
+				self.list();
 				break;
 
 			default:
@@ -129,12 +134,17 @@ function ManageTipsController($scope, ManageTipsService, TableService, SearchSer
 	self.updateTip = function() {
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
+		self.fields = [];
 
 		$scope.ui_block();
 		ManageTipsService.update(self.record).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
+
+					angular.forEach(response.errors, function(value, key) {
+						self.fields[value.field] = Constants.TRUE;
+					});
 				} else if(response.data) {
 					self.success = TipConstants.MSG_UPDATE_SUCCESS;
 					self.setActive(Constants.ACTIVE_VIEW, response.data.id);

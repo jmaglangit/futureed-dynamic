@@ -116,7 +116,7 @@ body {/*background: radial-gradient(transparent 50%, rgba(0, 0, 0, 0.3) 100%), l
 }
 
 .btn-blue {
-	border-top: 1px solid #055A7F; 
+	border-top: 1px solid #2E84A9; 
 	box-shadow: 0 0 0 1px #055A7F, 0 3px 3px rgba(0, 0, 0, 0.3);
 	background-color: #055A7F;
 }
@@ -959,6 +959,10 @@ div > .btncon > a {
 
 .error-icon {
 	color: #be0e14;
+}
+
+.warning-icon {
+	color: #F5BB42;
 }
 
 .dataTables_wrapper .row {
