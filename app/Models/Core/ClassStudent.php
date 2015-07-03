@@ -99,5 +99,10 @@ class ClassStudent extends Model {
 		});
 	}
 
+	public function scopeActive($query){
+
+		return $query->where('subscription_status',config('futureed.active'));
+	}
+
 
 }
