@@ -46,6 +46,18 @@ class HelpRequestController extends ApiController{
         if(Input::get('link_type')){
             $criteria['link_type'] = Input::get('link_type');
         }
+        if(Input::get('order_by_date')){
+            $criteria['order_by_date'] = Input::get('order_by_date');
+        }
+
+        if(Input::get('student_id') && Input::get('help_request_type')){
+            $criteria['student_id'] = Input::get('student_id');
+            $criteria['help_request_type'] = Input::get('help_request_type');
+        }
+
+        if(Input::get('subject_id')){
+            $criteria['subject_id'] = Input::get('subject_id');
+        }
 
         $limit = (Input::get('limit')) ? Input::get('limit') : 0;
         $offset = (Input::get('offset')) ? Input::get('offset') : 0;
