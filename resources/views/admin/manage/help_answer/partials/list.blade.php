@@ -40,6 +40,7 @@
 							'placeholder' => 'Subject'
 							, 'ng-model' => 'answer.search.subject'
 							, 'class' => 'form-control'
+							, 'autocomplete' => 'off'
 						)
 					)!!}
 				</div>
@@ -55,26 +56,26 @@
 			</div>
 			<div class="form-group">
 				<div class="col-xs-5">
-					{!! Form::text('search_area', ''
+					{!! Form::text('search_subject_area', ''
 						,array(
 							'placeholder' => 'Area'
-							, 'ng-model' => 'answer.search.area'
+							, 'ng-model' => 'answer.search.subject_area'
 							, 'class' => 'form-control'
 						)
 					)!!}
 				</div>
 				
 				<div class="col-xs-5">
-					{!! Form::select('search_status'
+					{!! Form::select('search_request_answer_status'
 						, array(
 							'' => '-- Select Status --'
 							, 'Pending' => 'Pending'
-							, 'Verified' => 'Verified'
+							, 'Accepted' => 'Accepted'
 						)
 						, ''
 						, array(
 							'class' => 'form-control'
-							, 'ng-model' => 'answer.search.status'
+							, 'ng-model' => 'answer.search.request_answer_status'
 						)
 					) !!}
 				</div>

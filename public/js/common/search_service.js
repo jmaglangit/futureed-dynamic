@@ -19,6 +19,7 @@ function SearchService() {
 				scope.search.order_no = Constants.EMPTY_STR;
 				scope.search.payment_status = Constants.EMPTY_STR;
 				scope.search.request_answer_status = Constants.EMPTY_STR;
+				scope.search.request_status = Constants.EMPTY_STR;
 				scope.search.school_code = Constants.EMPTY_STR;
 				scope.search.status = Constants.EMPTY_STR;
 				scope.search.subscription = Constants.EMPTY_STR;

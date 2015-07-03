@@ -69,7 +69,7 @@
 						, array(
 							'' => '-- Select Status --'
 							, 'Pending' => 'Pending'
-							, 'Verified' => 'Verified'
+							, 'Accepted' => 'Accepted'
 						)
 						, ''
 						, array(

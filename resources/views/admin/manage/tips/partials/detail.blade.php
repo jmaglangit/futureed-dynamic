@@ -92,7 +92,7 @@
 	        							, 'ng-model' => 'tips.record.status'
 	        						) 
 	        					) !!}
-	        				<span class="lbl padding-8">Enabled</span>
+	        				<span class="lbl padding-8">Enable</span>
 	        				</label>
 	        			</div>
 	        			<div class="col-xs-6 checkbox">
@@ -105,7 +105,7 @@
 	        							, 'ng-model' => 'tips.record.status'
 	        						)
 	        					) !!}
-	        				<span class="lbl padding-8">Disabled</span>
+	        				<span class="lbl padding-8">Disable</span>
 	        				</label>
 	        			</div>
 	        		</div>
