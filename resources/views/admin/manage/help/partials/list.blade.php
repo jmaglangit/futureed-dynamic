@@ -69,7 +69,7 @@
 						, array(
 							'' => '-- Select Status --'
 							, 'Pending' => 'Pending'
-							, 'Verified' => 'Verified'
+							, 'Accepted' => 'Accepted'
 						)
 						, ''
 						, array(
@@ -89,22 +89,14 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<div class="col-xs-3"></div>
-				<label class="col-xs-2 control-label">Displayed At</label>
 				<div class="col-xs-5">
-					{!! Form::select('search_link_type'
-						, array(
-							'' => '-- Select Type --'
-							, 'General' => 'General'
-							, 'Content' => 'Content'
-							, 'Question' => 'Question'
+					{!! Form::text('search_title', ''
+						,array(
+							'placeholder' => 'Title'
+							, 'ng-model' => 'help.search.title'
+							, 'class' => 'form-control btn-fit'
 						)
-						, ''
-						, array(
-							'class' => 'form-control'
-							, 'ng-model' => 'help.search.link_type'
-						)
-					) !!}
+					)!!}
 				</div>
 			</div>
 		</div>

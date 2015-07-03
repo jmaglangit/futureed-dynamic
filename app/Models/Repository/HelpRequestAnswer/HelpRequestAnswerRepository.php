@@ -59,8 +59,7 @@ class HelpRequestAnswerRepository implements HelpRequestAnswerRepositoryInterfac
 		}
 
 		$help_request_answer = $help_request_answer
-			->with('helpRequest','module','subject','subjectArea','user')
-			->StatusEnabled();
+			->with('helpRequest','module','subject','subjectArea','user')->where('request_answer_status','!=','Rejected');
 
 		$count = $help_request_answer->count();
 
@@ -82,8 +81,7 @@ class HelpRequestAnswerRepository implements HelpRequestAnswerRepositoryInterfac
 	 */
 	public function getHelpRequestAnswer($id){
 
-		return HelpRequestAnswer::with('helpRequest','module','subject','subjectArea','user')
-			->StatusEnabled()->find($id);
+		return HelpRequestAnswer::with('helpRequest','module','subject','subjectArea','user')->find($id);
 
 	}
 

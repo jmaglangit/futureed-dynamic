@@ -92,7 +92,7 @@
 	        							, 'ng-model' => 'help.record.status'
 	        						) 
 	        					) !!}
-	        				<span class="lbl padding-8">Enabled</span>
+	        				<span class="lbl padding-8">Enable</span>
 	        				</label>
 	        			</div>
 	        			<div class="col-xs-6 checkbox">
@@ -105,7 +105,7 @@
 	        							, 'ng-model' => 'help.record.status'
 	        						)
 	        					) !!}
-	        				<span class="lbl padding-8">Disabled</span>
+	        				<span class="lbl padding-8">Disable</span>
 	        				</label>
 	        			</div>
 	        		</div>
@@ -116,9 +116,9 @@
 		        			</b>
 		        		</label>
 
-		        		<label class="col-xs-4" ng-if="help.record.status !== 'Enabled'">
+		        		<label class="col-xs-4" ng-if="help.record.status == 'Disabled'">
 		        			<b class="error-icon">
-		        				<i class="margin-top-8 fa fa-ban"></i> Disabled {! help.record.status !}
+		        				<i class="margin-top-8 fa fa-ban"></i> {! help.record.status !}
 		        			</b>
 		        		</label>
 	        		</div>

@@ -117,7 +117,7 @@
 
 		        		<label class="col-xs-4" ng-if="answer.record.status !== 'Enabled'">
 		        			<b class="error-icon">
-		        				<i class="margin-top-8 fa fa-ban"></i> Disabled {! answer.record.status !}
+		        				<i class="margin-top-8 fa fa-ban"></i> {! answer.record.status !}
 		        			</b>
 		        		</label>
 	        		</div>
@@ -181,11 +181,11 @@
 				<div class="form-group">
 					<label class="col-xs-3 control-label">Answer <span class="required">*</span></label>
 					<div class="col-xs-6">
-						{!! Form::textarea('answer','',
+						{!! Form::textarea('content','',
 							[
 								'class' => 'form-control',
 								'ng-disabled' => 'answer.active_view',
-								'ng-model' => 'answer.record.answer',
+								'ng-model' => 'answer.record.content',
 								'placeholder' => 'Description'
 							]
 						) !!}
