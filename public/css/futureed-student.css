@@ -5,10 +5,15 @@
 }
 
 .sidebar {
-    -moz-transition: ease .1s;
-    -webkit-transition: ease .1s;
-    -o-transition: ease .1s;
-    transition: ease .1s;
+    -moz-transition: ease 1s;
+    -webkit-transition: ease 1s;
+    -o-transition: ease 1s;
+    transition: ease 1s;
+    -webkit-transition: 1s ease-out;
+	-moz-transition: 1s ease-out;
+	-ms-transition: 1s ease-out;
+	-o-transition: 1s ease-out;
+	transition: 1s ease-out;
     width: 300px;
     background-color: #433d3d;
     position: absolute;
@@ -27,6 +32,30 @@
     transition: ease 1s;
     left: 0px;
     
+}
+
+.div-out {
+	-moz-transition: ease 1s;
+    -webkit-transition: ease 1s;
+    -o-transition: ease 1s;
+    transition: ease 1s;
+    left: 300px !important;
+}
+.side-btn-toggle {
+	-moz-transition: ease 1s;
+    -webkit-transition: ease 1s;
+    -o-transition: ease 1s;
+    transition: ease 1s;
+    -webkit-transition: width 1s ease-out;
+	-moz-transition: 1s ease-out;
+	-ms-transition: 1s ease-out;
+	-o-transition: 1s ease-out;
+	transition: 1s ease-out;
+    width: 300px;
+    left: 0px;
+    position: absolute;
+    top: 50%;
+    cursor: pointer;
 }
 
 .sidebar-toggle {
@@ -156,4 +185,20 @@
 }
 .container-bottom {
 	margin-bottom: 20px;
+}
+.center-div {
+	position: absolute;
+	top: 50%;
+}
+
+.center-div:hover {
+	cursor: pointer;
+}
+.flip-horizontal {
+	-moz-transform: scaleX(-1);
+    -o-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
+    filter: FlipH;
+    -ms-filter: "FlipH";
 }
