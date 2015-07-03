@@ -107,7 +107,7 @@ class HelpRequestAnswer extends Model {
 		});
 	}
 
-	public function scopeIsAccepted($query){
+	public function scopeAccepted($query){
 
 		return $query->where('request_answer_status', config('futureed.accepted'));
 	}
