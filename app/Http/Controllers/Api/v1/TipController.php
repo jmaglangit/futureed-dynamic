@@ -44,5 +44,34 @@ class TipController extends ApiController {
 
 	}
 
+	/**
+	 * Update the specified resource in storage.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 * this is for student only
+	 * view first 3 most recent general tips under a class
+	 */
+
+	public function viewTips(){
+
+		$class_id = NULL;
+
+		//get class_id
+		if(Input::get('class_id')){
+
+			$class_id= Input::get('class_id');
+		}
+
+		$tip = $this->tip->viewCurrentTips($class_id);
+
+		return $this->respondWithData($tip);
+		
+	}
+
+
+
+
+
 
 }

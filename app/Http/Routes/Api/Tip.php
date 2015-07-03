@@ -18,6 +18,10 @@ Routes::group(['prefix' => '/tip'], function() {
 		Routes::resource('/teacher', 'Api\v1\TeacherTipController',
 			['except' => ['create', 'edit']]);
 
+		Routes::get('/student-view-recent/', [
+			'uses' => 'Api\v1\TipController@viewTips',
+			'as' => 'tip.update.status']);
+
 
 
 });

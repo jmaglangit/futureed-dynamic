@@ -15,5 +15,6 @@ interface TipRepositoryInterface {
 
 	public function viewClassTips($criteria = array(), $limit = 0, $offset = 0);
 
+	public function viewCurrentTips($class_id);
 
 }
