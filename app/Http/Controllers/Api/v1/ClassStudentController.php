@@ -14,6 +14,7 @@ use FutureEd\Services\StudentServices;
 use FutureEd\Services\UserServices;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class ClassStudentController extends ApiController {
 
@@ -218,5 +219,18 @@ class ClassStudentController extends ApiController {
 		return $this->respondWithData(['id' => $student_id]);
 
     }
+
+	/**
+	 * Student Joins the class.
+	 * @param $id
+	 * @return mixed
+	 */
+	public function studentJoinClass(ClassStudentRequest $request){
+
+
+		return $this->respondWithData(
+			$this->class_student->studentJoinClassroom($request->get('class_students_id'))
+		);
+	}
 
 }
