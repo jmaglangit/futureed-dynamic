@@ -272,7 +272,7 @@ trait ApiValidatorTrait {
                     "$field_name" => strtolower($input["$field_name"]),
                 ],
                 [
-                    "$field_name" => 'required|string'
+                    "$field_name" => 'required|string|max:128'
                 ]
             );
 
@@ -430,7 +430,7 @@ trait ApiValidatorTrait {
                     "$field_name" => strtolower($input["$field_name"]),
                 ],
                 [
-                    "$field_name" => 'string'
+                    "$field_name" => 'string|max:128'
                 ]
             );
 
@@ -767,7 +767,7 @@ trait ApiValidatorTrait {
                     "$field_name" => strtolower($input["$field_name"]),
                 ],
                 [
-                    "$field_name" => ($field_name == 'state')? 'regex:/^[-\pL\s]+$/u' : 'required|regex:/^[-\pL\s]+$/u'
+                    "$field_name" => ($field_name == 'state')? 'max:128|regex:/^[-\pL\s]+$/u' : 'required|max:128|regex:/^[-\pL\s]+$/u'
                 ]
             );
             if($validator->fails()){
@@ -789,7 +789,7 @@ trait ApiValidatorTrait {
 				"$field_name" => strtolower($input["$field_name"]),
 			],
 			[
-				"$field_name" => ($field_name == 'state')? 'regex:/^[-\pL\s]+$/u' : 'regex:/^[-\pL\s]+$/u'
+				"$field_name" => ($field_name == 'state')? 'max:128|regex:/^[-\pL\s]+$/u' : 'max:128|regex:/^[-\pL\s]+$/u'
 			]
 		);
 		if($validator->fails()){
