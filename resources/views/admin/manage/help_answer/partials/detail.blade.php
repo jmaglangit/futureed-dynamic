@@ -1,4 +1,16 @@
 <div ng-if="answer.active_view || answer.active_edit">
+	<div class="col-xs-12" ng-if="answer.errors || answer.success">
+		<div class="alert alert-error" ng-if="answer.errors">
+			<p ng-repeat="error in answer.errors track by $index">
+				{! error !}
+			</p>
+		</div>
+
+        <div class="alert alert-success" ng-if="answer.success">
+            <p>{! answer.success !}</p>
+        </div>
+    </div>
+
 	<div class="module-container">
 		<div class="title-main-content">
 			<span>Help Answer Detail</span>
@@ -79,7 +91,7 @@
 	        							, 'ng-model' => 'answer.record.status'
 	        						) 
 	        					) !!}
-	        				<span class="lbl padding-8">Enabled</span>
+	        				<span class="lbl padding-8">Enable</span>
 	        				</label>
 	        			</div>
 	        			<div class="col-xs-6 checkbox">
@@ -92,23 +104,61 @@
 	        							, 'ng-model' => 'answer.record.status'
 	        						)
 	        					) !!}
-	        				<span class="lbl padding-8">Disabled</span>
+	        				<span class="lbl padding-8">Disable</span>
 	        				</label>
 	        			</div>
 	        		</div>
 	        		<div ng-if="answer.active_view">
-		        		<label class="col-md-5" ng-if="answer.record.status == 'Enabled'">
+		        		<label class="col-xs-4" ng-if="answer.record.status == 'Enabled'">
 		        			<b class="success-icon">
 		        				<i class="margin-top-8 fa fa-check-circle-o"></i> {! answer.record.status !}
 		        			</b>
 		        		</label>
 
-		        		<label class="col-md-5" ng-if="answer.record.status !== 'Enabled'">
+		        		<label class="col-xs-4" ng-if="answer.record.status !== 'Enabled'">
 		        			<b class="error-icon">
 		        				<i class="margin-top-8 fa fa-ban"></i> Disabled {! answer.record.status !}
 		        			</b>
 		        		</label>
 	        		</div>
+
+	        		<label class="col-xs-3 control-label">Request Answer Status <span class="required">*</span></label>
+	        		<div>
+		        		<label class="col-xs-3" ng-if="answer.record.request_answer_status == 'Accepted'">
+		        			<b class="success-icon">
+		        				<i class="margin-top-8 fa fa-check-circle-o"></i> {! answer.record.request_answer_status !}
+		        			</b>
+		        		</label>
+
+		        		<label class="col-xs-3" ng-if="answer.record.request_answer_status == 'Pending'">
+		        			<b class="warning-icon">
+		        				<i class="margin-top-8 fa fa-exclamation-circle"></i> {! answer.record.request_answer_status !}
+		        			</b>
+		        		</label>
+
+		        		<label class="col-xs-3" ng-if="answer.record.request_answer_status == 'Rejected'">
+		        			<b class="error-icon">
+		        				<i class="margin-top-8 fa fa-ban"></i> {! answer.record.request_answer_status !}
+		        			</b>
+		        		</label>
+	        		</div>
+	        	</div>
+	        	<div class="form-group" ng-if="answer.record.request_answer_status == 'Pending' && answer.active_view">
+	        		<div class="btn-container col-xs-8 col-xs-offset-2">
+						{!! Form::button('Accept'
+							, array(
+								'class' => 'btn btn-blue btn-medium'
+								, 'ng-click' => "answer.acceptAnswer()"
+							)
+						) !!}
+
+						{!! Form::button('Reject'
+							, array(
+								'class' => 'btn btn-gold btn-medium'
+								, 'ng-click' => "answer.rejectAnswer()"
+							)
+						) !!}		
+					</div>
 	        	</div>
 			</fieldset>
 			<fieldset>
@@ -145,14 +195,14 @@
 						{!! Form::button('Save'
 							, array(
 								'class' => 'btn btn-blue btn-medium'
-								, 'ng-click' => "answer.updateanswerRequest()"
+								, 'ng-click' => "answer.updateHelpAnswer()"
 							)
 						) !!}
 
 						{!! Form::button('Cancel'
 							, array(
 								'class' => 'btn btn-gold btn-medium'
-								, 'ng-click' => "answer.setActive(futureed.ACTIVE_VIEW)"
+								, 'ng-click' => "answer.setActive(futureed.ACTIVE_VIEW, answer.record.id)"
 							)
 						) !!}
 				</div>	
@@ -160,7 +210,7 @@
 						{!! Form::button('Edit'
 							, array(
 								'class' => 'btn btn-blue btn-medium'
-								, 'ng-click' => "answer.setActive(futureed.ACTIVE_EDIT)"
+								, 'ng-click' => "answer.setActive(futureed.ACTIVE_EDIT, answer.record.id)"
 							)
 						) !!}
 

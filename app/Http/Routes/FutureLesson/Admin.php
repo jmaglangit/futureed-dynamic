@@ -497,6 +497,11 @@
 						['as' => 'admin.manage.answer.partials.list'
 						, 'uses' => 'FutureLesson\Admin\ManageHelpAnswerController@list_form'
 					]);
+
+					Routes::get('/delete', 
+						['as' => 'admin.manage.answer.partials.delete'
+						, 'uses' => 'FutureLesson\Admin\ManageHelpAnswerController@delete_form'
+					]);
 				});
 			});
 		});
