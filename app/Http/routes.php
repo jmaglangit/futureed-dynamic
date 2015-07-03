@@ -41,6 +41,7 @@ Routes::group(['prefix' => 'api/v1'], function()
     include('Routes/Api/SubjectArea.php');
     include('Routes/Api/Subscription.php');
     include('Routes/Api/Tip.php');
+	include('Routes/Api/TipRating.php');
     include('Routes/Api/User.php');
     include('Routes/Api/VolumeDiscount.php');
 });
