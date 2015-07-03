@@ -14,4 +14,6 @@ interface ClassStudentRepositoryInterface {
 	public function deleteClassStudent($id);
 
 	public function getStudentCurrentClassroom($student_id);
+
+	public function studentJoinClassroom($class_students);
 }

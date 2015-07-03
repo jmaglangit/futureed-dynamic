@@ -11,6 +11,8 @@ return [
 	'image_password_folder' => 'images/password',
 	'enabled' => 'Enabled',
 	'disabled' => 'Disabled',
+	'active' => 'Active',
+	'inactive' => 'Inactive',
 	'pending' => 'Pending',
 	'accepted' => 'Accepted',
 	'rejected' => 'Rejected',
