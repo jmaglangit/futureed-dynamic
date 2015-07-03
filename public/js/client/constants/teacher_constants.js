@@ -7,4 +7,6 @@ var TeacherConstant = {
 	, UPDATE_CLASSNAME_SUCCESS 	: "You have successfully updated the class name."
 	, UPDATE_STUDENT_SUCCESS 	: "You have successfully updated a student account."
 	, UPDATE_STUDENT_EMAIL_SUCCESS 	: "You have successfully updated a student's email address."
+	, APPROVE_TIP				: "You have accepted this tip."
+	, REJECT_TIP 				: "You have rejected this tip."
 }
