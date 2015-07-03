@@ -27,6 +27,8 @@ var Constants = {
 	, PENDING		: "Pending"
 	, PAID			: "Paid"
 	, CANCELLED		: "Cancelled"
+	, ACCEPTED		: "Accepted"
+	, REJECTED		: "Rejected"
 
 	, AVATAR		: "avatar"
 	, REWARDS		: "rewards"

@@ -37,7 +37,7 @@
 				{!! Form::button('Approve'
 					, array(
 						'class' => 'btn btn-blue btn-medium'
-						, 'ng-click' => "class.setActive('list')"
+						, 'ng-click' => "tips.updateTips(tips.record.id, 1)"
 					)
 				) !!}
 			</div>
@@ -58,7 +58,7 @@
 				{!! Form::button('Reject'
 					, array(
 						'class' => 'btn btn-gold btn-medium'
-						, 'ng-click' => "class.setTipsActive('list')"
+						, 'ng-click' => "tips.updateTips(tips.record.id, 0)"
 					)
 				) !!}
 			</div>

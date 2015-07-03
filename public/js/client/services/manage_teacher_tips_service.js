@@ -32,5 +32,13 @@ function ManageTeacherTipsService($http){
 		});
 	}
 
+	teacherTipsApi.updateTips = function(id, status) {
+		return $http({
+			method 	: Constants.METHOD_PUT
+			, data 	: {tip_status : status}
+			, url 	: tipsApiUrl + 'tip/update-status/' + id
+		});
+	}
+
 	return teacherTipsApi;
 }

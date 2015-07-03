@@ -24,6 +24,7 @@ function ManageTeacherTipsController($scope, ManageTeacherTipsService, TableServ
 			case Constants.ACTIVE_VIEW :
 				self.tipDetail(id);
 				self.active_view = Constants.TRUE;
+				self.success = Constants.FALSE;
 				break;
 
 			case Constants.ACTIVE_EDIT :
@@ -145,6 +146,30 @@ function ManageTeacherTipsController($scope, ManageTeacherTipsService, TableServ
 					self.success = Constants.TRUE;
 					var id = response.data.id;
 					self.setTipsActive('view', id);
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(response){
+			$scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.updateTips = function(id, status) {
+		self.success = Constants.FALSE;
+		self.errors = Constants.FALSE;
+		
+		self.u_tip_status = (status == 1) ? Constants.ACCEPTED:Constants.REJECTED;
+
+		$scope.ui_block();
+
+		ManageTeacherTipsService.updateTips(id, self.u_tip_status).success(function(response){
+			if(angular.equals(response.status,Constants.STATUS_OK)){
+				if(response.errors){
+					self.errors = $scope.errorHandler(response.errors);
+				}else if(response.data){
+					self.success = (status == 1) ? TeacherConstant.APPROVE_TIP:TeacherConstant.REJECT_TIP;
+					self.setTipsActive('list');
 				}
 			}
 			$scope.ui_unblock();
