@@ -97,7 +97,7 @@
 	margin-bottom: 20px;
 }
 
-.submit-btn-tips {
+.submit-btn-tips, .submit-btn-help {
 	padding: 0;
 }
 
@@ -125,9 +125,6 @@
 	color: #ffffff;
 } 
 
-.help-form {
-	margin-top: 20px;
-}
 
 .label-side {
 	text-align: center !important;
@@ -156,4 +153,7 @@
 }
 .alert-success{
 	margin-left: 0 !important;
+}
+.container-bottom {
+	margin-bottom: 20px;
 }

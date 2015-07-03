@@ -12,7 +12,13 @@ function StudentClassService($http){
 			, url 	: classApiUrl + 'tip/student'
 		});
 	}
-	
+	studentClassApi.submitHelp = function(data) {
+		return $http({
+			method 	: Constants.METHOD_POST
+			, data 	: data
+			, url 	: classApiUrl + 'help-request'
+		});
+	}
 
 
 	return studentClassApi;
