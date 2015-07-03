@@ -214,9 +214,9 @@ class TipRepository implements TipRepositoryInterface{
 
 		$tip = new Tip();
 
-		$tip = $tip->with('subject','module','subjectarea','student')->tipStatus('Accepted');
-		$tip = $tip->linkType('General')->classId($class_id);
-		$tip = $tip->orderBy('created_at','desc')->take(3);
+		$tip = $tip->with('subject','module','subjectarea','student')->accepted();
+		$tip = $tip->general()->classId($class_id);
+		$tip = $tip->orderBy('created_at','desc')->take(config('futureed.tip_take'));
 		return $tip->get();
 
 	}
