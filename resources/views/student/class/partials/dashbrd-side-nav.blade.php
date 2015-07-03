@@ -235,7 +235,10 @@
             ) !!}
 		</div>
 	</div>
-<button class="bottom" ng-click="class.click()" ng-if="class.boolChangeClass">Toggle Sidebar</button>
 </div>
-
-<button ng-click="class.click()" ng-if="!class.boolChangeClass">Toggle Sidebar</button>
+<div class="center-div">
+	<img class="flip-horizontal" id="div-out"src="/images/class-student/btn-slide.png" ng-click="class.click()" ng-if="!class.bool_change_class">
+</div>
+<div class="side-btn-toggle" id="div-out" ng-class="{'div-out':class.bool_change_class}">
+	<img src="/images/class-student/btn-slide.png" ng-click="class.click()" ng-if="class.bool_change_class">
+</div>

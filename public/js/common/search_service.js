@@ -25,6 +25,7 @@ function SearchService() {
 				scope.search.subject = Constants.EMPTY_STR;
 				scope.search.subject_area = Constants.EMPTY_STR;
 				scope.search.title = Constants.EMPTY_STR;
+				scope.search.created = Constants.EMPTY_STR;
 			}
 		});
 	};
