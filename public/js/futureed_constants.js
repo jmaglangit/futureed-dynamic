@@ -14,6 +14,7 @@ var Constants = {
 	, METHOD_GET	: 'GET'
 	, METHOD_PUT	: 'PUT'
 	, METHOD_DELETE	: 'DELETE'
+	, METHOD_PATCH	: 'PATCH'
 
 	, STATUS_OK		: 200
 
