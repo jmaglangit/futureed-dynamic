@@ -46,4 +46,5 @@ Routes::group(['prefix' => 'api/v1'], function()
 	include('Routes/Api/User.php');
 	include('Routes/Api/VolumeDiscount.php');
 	include('Routes/Api/AgeGroup.php');
+	include('Routes/Api/TeachingContent.php');
 });
