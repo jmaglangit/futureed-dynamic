@@ -41,6 +41,14 @@ class Module extends Model
 		return $this->belongsTo('FutureEd\Models\Core\Grade');
 	}
 
+	public function content() {
+		return $this->hasMany('FutureEd\Models\Core\ModuleContent');
+	}
+
+	public function question() {
+		return $this->hasMany('FutureEd\Models\Core\Question');
+	}
+
 
 
 

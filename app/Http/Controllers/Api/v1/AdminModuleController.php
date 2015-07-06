@@ -161,7 +161,30 @@ class AdminModuleController extends ApiController {
 	 */
 	public function destroy($id)
 	{
-		//
+		//get module details
+		$module = $this->module->viewModule($id);
+
+		//check if module is empty
+		if(!$module){
+
+			return $this->respondErrorMessage(2120);
+		}
+
+		//check if has module_contents
+		if($module['content']->toArray()){
+
+			return $this->respondErrorMessage(2140);
+		}
+
+		//check if has question
+		if($module['question']->toArray()){
+
+			return $this->respondErrorMessage(2141);
+		}
+
+		//delete module
+		return $this->respondWithData($this->module->deleteModule($id));
+
 	}
 
 }

@@ -54,6 +54,9 @@ return [
 		2039 => 'Student is not associated to the parent.',
 		2040 => 'Student already exist.',
 		2041 => 'Country is required',
+        2042 => 'Student has already rated this help request answer.',
+        2043 => 'Student cannot rate his/her own help request answer.',
+
 
 		2100 => 'Reset code is invalid.',
 		2101 => 'Password image is invalid.',
@@ -95,6 +98,8 @@ return [
 		2137 => 'Unable to delete. Help request has answers.',
 		2138 => 'Password image is required.',
 		2139 => 'Points to unlock must be lesser than Points to finish.',
+		2140 => 'Unable to Delete. Module has contents.',
+		2141 => 'Unable to Delete. Module has questions.',
 
 		// Client Error messages
 		2200 => 'Email already exists.',

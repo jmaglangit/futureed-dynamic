@@ -11,4 +11,6 @@ interface ModuleRepositoryInterface {
 
 	public function updateModule($id,$data);
 
+	public function deleteModule($id);
+
 }
