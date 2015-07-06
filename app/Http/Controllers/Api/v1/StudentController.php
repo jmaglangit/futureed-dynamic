@@ -99,7 +99,7 @@ class StudentController extends ApiController {
         $this->addMessageBag($this->validateGradeCode($input,'grade_code'));
         $this->addMessageBag($this->validateNumber($input,'country_id'));
         $this->addMessageBag($this->validateString($input,'city'));
-		$this->addMessageBag($this->validateStringOptional($input,'state'));
+        $this->addMessageBag($this->validateStringOptional($input,'state'));
 
         //User fields validations
         $this->addMessageBag($this->email($input,'email'));
