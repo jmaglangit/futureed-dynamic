@@ -9,17 +9,17 @@
     -webkit-transition: ease 1s;
     -o-transition: ease 1s;
     transition: ease 1s;
-    -webkit-transition: 1s ease-out;
-    -moz-transition: 1s ease-out;
-    -ms-transition: 1s ease-out;
-    -o-transition: 1s ease-out;
-    transition: 1s ease-out;
-    width: 300px;
+    -webkit-transition: 1s ease;
+    -moz-transition: 1s ease;
+    -ms-transition: 1s ease;
+    -o-transition: 1s ease;
+    transition: 1s ease;
+    width: 350px;
     background-color: #433d3d;
     position: absolute;
     top: 0px;
     bottom: 0px;
-    left: -300px;
+    left: -350px;
     overflow-y: scroll;
     overflow: auto;
     float: left;
@@ -39,19 +39,19 @@
     -webkit-transition: ease 1s;
     -o-transition: ease 1s;
     transition: ease 1s;
-    left: 300px !important;
+    left: 350px !important;
 }
+
 .side-btn-toggle {
 	-moz-transition: ease 1s;
     -webkit-transition: ease 1s;
     -o-transition: ease 1s;
     transition: ease 1s;
-    -webkit-transition: 1s ease-out;
-    -moz-transition: 1s ease-out;
-    -ms-transition: 1s ease-out;
-    -o-transition: 1s ease-out;
-    transition: 1s ease-out;
-    width: 300px;
+    -webkit-transition: 1s ease;
+    -moz-transition: 1s ease;
+    -ms-transition: 1s ease;
+    -o-transition: 1s ease;
+    transition: 1s ease;
     left: 0px;
     position: absolute;
     top: 50%;
@@ -101,6 +101,11 @@
 .div-side-content {
 	background-color: #524e4d;
 	padding: 10px;
+	border-radius: 4px;
+}
+
+.div-side-content p {
+	margin: 0px;
 }
 
 .sidebar-div {
@@ -199,6 +204,16 @@
 	-o-transform: scaleX(-1);
 	-webkit-transform: scaleX(-1);
 	transform: scaleX(-1);
+
+	-moz-transition: ease 1s;
+    -webkit-transition: ease 1s;
+    -o-transition: ease 1s;
+    transition: ease 1s;
+    -webkit-transition: 1s ease;
+    -moz-transition: 1s ease;
+    -ms-transition: 1s ease;
+    -o-transition: 1s ease;
+
 	filter: FlipH;
 	-ms-filter: "FlipH";
 }

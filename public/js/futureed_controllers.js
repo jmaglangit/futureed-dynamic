@@ -20,8 +20,6 @@ function FutureedController($scope, apiService, futureed) {
 	*/
 	$scope.errorHandler = errorHandler;
 	$scope.internalError = internalError;
-	$scope.ui_block = ui_block;
-	$scope.ui_unblock = ui_unblock;
 
 	$scope.goHome = goHome;
 	$scope.highlight = highlight;
@@ -75,12 +73,38 @@ function FutureedController($scope, apiService, futureed) {
 		return $scope.errors;
 	}
 
-	function ui_block() {
-		$.blockUI({message : '<img src="/images/ajax-loader.gif" /> Please Wait...'});
+	$scope.ui_block = function() {
+		$.blockUI({ 
+				message : '<img class="loader" src="/images/loading.png" /> Please wait... '
+				, css 	: {
+					  'border-radius' 		: '10px'
+					, 'width' 	  			: '24%'
+					, 'left' 	  			: '40%'
+					, 'background-color'	: 'rgba(255, 255, 255, .4)'
+				}
+			});
 	}
 
-	function ui_unblock() {
+	$scope.ui_unblock = function() {
 		$.unblockUI();
+	}
+
+	$scope.div_block = function(id) {
+		$("#" + id).block({
+				message : '<img src="/images/ajax-loader.gif" /> Please Wait...'
+				, css 	: {
+					  'border' 				: 'none'
+					, 'border-radius' 		: '5px'
+					, 'top' 	  			: '40%'
+					, 'width' 	  			: '40%'
+					, 'left' 	  			: '40%'
+					, 'background-color'	: 'rgba(255, 255, 255, .4)'
+				}
+			});
+	}
+
+	$scope.div_unblock = function(id) {
+		$("#" + id).unblock();
 	}
 
 	function goHome() {

@@ -1,9 +1,9 @@
 angular.module('futureed.controllers')
 	.controller('StudentClassController', StudentClassController);
 
-StudentClassController.$inject = ['$scope', 'StudentClassService'];
+StudentClassController.$inject = ['$scope', '$filter', 'StudentClassService'];
 
-function StudentClassController($scope, StudentClassService) {
+function StudentClassController($scope, $filter, StudentClassService) {
 
 	var self = this;
 
@@ -14,8 +14,9 @@ function StudentClassController($scope, StudentClassService) {
 	self.click = function() {
 		self.add_tips = Constants.FALSE;
 		self.bool_change_class = !self.bool_change_class;
-		self.send_behind = !self.send_behind;
-		$('#div-out').animate({left:300},600);
+		if(self.bool_change_class) {
+			self.listTips();
+		}
 	}
 
 	self.addTips = function() {
@@ -66,7 +67,7 @@ function StudentClassController($scope, StudentClassService) {
 		self.help.errors = Constants.FALSE;
 		self.help.success = Constants.FALSE;
 		self.help.student_id = self.student_id;
-		self.help.class_id = parseInt(9);
+		self.help.class_id = Constants.FALSE;
 
 		$scope.ui_block();
 		StudentClassService.submitHelp(self.help).success(function(response){
@@ -91,5 +92,41 @@ function StudentClassController($scope, StudentClassService) {
 		self.help = {};
 		self.add_help = Constants.FALSE;
 		self.add_help_class = Constants.FALSE;
+	}
+
+	self.listTips = function() {
+		self.errors = Constants.FALSE;
+		self.tip_records = [];
+		self.class_id = $scope.user.class_id;
+		self.table = {};
+		self.table.size = 3;
+		self.table.offset = Constants.FALSE;
+
+		$scope.div_block("tips_form");
+		StudentClassService.listTips(self.class_id, self.table).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					$scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.tip = {};
+					self.tip.records = [];
+					self.tip.total = response.data.total;
+
+					angular.forEach(response.data.records, function(value, key) {
+						value.created_moment = moment(value.created_at).startOf("minute").fromNow();
+						if(value.rating) {
+							value.stars = new Array(value.rating);
+						}
+
+						self.tip.records.push(value);
+					});
+				}
+			}
+
+			$scope.div_unblock("tips_form");
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.div_unblock("tips_form");
+		});
 	}
 }
