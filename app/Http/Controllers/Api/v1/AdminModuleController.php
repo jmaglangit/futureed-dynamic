@@ -25,7 +25,40 @@ class AdminModuleController extends ApiController {
 	 */
 	public function index()
 	{
-		//
+		$criteria = [];
+		$limit = 0 ;
+		$offset = 0;
+
+
+
+		//for module name
+		if(Input::get('name')){
+
+			$criteria['name'] = Input::get('name');
+		}
+
+		//for area
+		if(Input::get('area')){
+
+			$criteria['area'] = Input::get('area');
+		}
+
+		//for subject
+		if(Input::get('subject')){
+
+			$criteria['subject'] = Input::get('subject');
+		}
+
+		if(Input::get('limit')) {
+			$limit = intval(Input::get('limit'));
+		}
+
+		if(Input::get('offset')) {
+			$offset = intval(Input::get('offset'));
+		}
+
+		//get module list with relation to subject,subject_area,grade
+		return $this->respondWithData($this->module->getModules($criteria , $limit, $offset ));
 	}
 
 	/**
