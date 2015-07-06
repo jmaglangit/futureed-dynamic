@@ -49,7 +49,7 @@ class ProfileController extends Controller {
 	}
 
 	public function getUserObject() {		
-		return json_decode(Session::get('Client'));
+		return json_decode(Session::get('client'));
 	}
 
 	public function update_session(){
