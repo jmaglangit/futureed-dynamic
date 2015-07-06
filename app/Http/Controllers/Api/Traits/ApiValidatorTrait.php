@@ -112,7 +112,7 @@ trait ApiValidatorTrait {
                     "$first_name" => $input["$first_name"],
                 ],
                 [
-                    "$first_name" => 'required|regex:'. config('regex.name') .'|max:64'
+                    "$first_name" => 'required|min:2|regex:'. config('regex.name') .'|max:64'
                 ]
             );
 
@@ -135,7 +135,7 @@ trait ApiValidatorTrait {
                     "$last_name" => $input["$last_name"],
                 ],
                 [
-                    "$last_name" => 'required|regex:'. config('regex.name') .'|max:64'
+                    "$last_name" => 'required|min:2|regex:'. config('regex.name') .'|max:64'
                 ]
             );
 

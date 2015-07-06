@@ -20,7 +20,15 @@ class HelpRequestRequest extends ApiRequest{
 
         switch($this->method) {
             case 'PATCH':
-                return ['request_status' => 'required|in:Accepted,Rejected'];
+                switch ($this->route()->getName()) {
+                    case 'help-request.patch.update-request-status':
+                        return ['request_status' => 'required|in:Accepted,Rejected'];
+                        break;
+                    case 'help-request.patch.update-question-status':
+                        return ['question_status' => 'required|in:Answered,Cancelled'];
+                        break;
+                }
+
                 break;  
             case 'PUT':
                 return [

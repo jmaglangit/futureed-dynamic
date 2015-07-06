@@ -94,6 +94,7 @@ return [
 		2136 => 'Unable to Delete.Tip has rating.',
 		2137 => 'Unable to delete. Help request has answers.',
 		2138 => 'Password image is required.',
+		2139 => 'Points to unlock must be lesser than Points to finish.',
 
 		// Client Error messages
 		2200 => 'Email already exists.',

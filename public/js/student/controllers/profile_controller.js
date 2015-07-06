@@ -71,6 +71,7 @@ function ProfileController($scope, apiService, profileService) {
 	      case Constants.PASSWORD 		:
 	        $scope.getLoginPassword();
 	        self.active_password = Constants.TRUE;
+	        self.image_id = Constants.FALSE;
 	        break;
 
 	      case Constants.EDIT    		:

@@ -104,5 +104,9 @@ class HelpRequest extends Model {
         return $query->whereClassId($class_id);
     }
 
+    public function scopeRequestStatus($query,$request_status){
+        return $query->whereRequestStatus($request_status);
+    }
+
 
 }
