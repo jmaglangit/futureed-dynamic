@@ -163,6 +163,33 @@ class HelpRequestAnswerRepository implements HelpRequestAnswerRepositoryInterfac
 		}
 	}
 
+    /**
+     * Add record in storage
+     * @param $data
+     * @return object
+     */
+    public function addHelpRequestAnswer($data){
+        try{
+            return HelpRequestAnswer::create($data)->toArray();
+        }catch (\Exception $e){
+            return $e->getMessage();
+        }
+    }
+
+    /**
+     * Get answer by student id and asnwer id
+     * @param $student_id
+     * @param $help_request_answer_id
+     * @return null|string
+     */
+    public function checkStudentHelpRequestAnswer($student_id,$help_request_answer_id){
+        try{
+            $result = HelpRequestAnswer::StudentId($student_id)->find($help_request_answer_id);
+            return is_null($result) ? null : $result->toArray();
+        }catch (\Exception $e){
+            return $e->getMessage();
+        }
+    }
 
 
 }
