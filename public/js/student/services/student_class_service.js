@@ -2,24 +2,33 @@ angular.module('futureed.services')
 	.factory('StudentClassService', StudentClassService);
 
 function StudentClassService($http){
-	var classApiUrl = '/api/v1/';
-	var studentClassApi = {};
+	var service = {};
+	var serviceUrl = '/api/v1/';
 
-	studentClassApi.submitTips = function(data) {
+	service.submitTips = function(data) {
 		return $http({
 			method 	: Constants.METHOD_POST
 			, data 	: data
-			, url 	: classApiUrl + 'tip/student'
+			, url 	: serviceUrl + 'tip/student'
 		});
 	}
-	studentClassApi.submitHelp = function(data) {
+	service.submitHelp = function(data) {
 		return $http({
 			method 	: Constants.METHOD_POST
 			, data 	: data
-			, url 	: classApiUrl + 'help-request'
+			, url 	: serviceUrl + 'help-request'
+		});
+	}
+
+	service.listTips = function(class_id, table) {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url 	: serviceUrl + 'tip/student?class_id=' + class_id
+				+ "&limit=" + table.size
+				+ "&offset=" + table.offset
 		});
 	}
 
 
-	return studentClassApi;
+	return service;
 }
