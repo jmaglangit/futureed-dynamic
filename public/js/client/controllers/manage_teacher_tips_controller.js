@@ -269,7 +269,6 @@ function ManageTeacherTipsController($scope, ManageTeacherTipsService, TableServ
 
 	self.helpDetail = function(id) {
 		self.help_errors = Constants.FALSE;
-		self.help_success = Constants.FALSE;
 
 		$scope.ui_block();
 
@@ -332,14 +331,14 @@ function ManageTeacherTipsController($scope, ManageTeacherTipsService, TableServ
 			case Constants.ACTIVE_VIEW :
 				self.helpAnsDetail(id);
 				self.help_ans_active_view = Constants.TRUE;
-				self.ans_edit = Constants.FALSE;
+				self.help_ans_edit = Constants.FALSE;
 				break;
 
 			case Constants.ACTIVE_EDIT :
 				self.help_ans_active_view = Constants.TRUE;
 				self.help_ans_success = Constants.FALSE;
 				self.helpAnsDetail(id);
-				self.ans_edit = Constants.TRUE;
+				self.help_ans_edit = Constants.TRUE;
 				break;
 
 			case Constants.ACTIVE_LIST :
@@ -355,6 +354,29 @@ function ManageTeacherTipsController($scope, ManageTeacherTipsService, TableServ
 			self.help_ans_success = Constants.FALSE;
 			break;
 		}
+	}
+
+	self.updateHelp = function(id, status) {
+		self.success = Constants.FALSE;
+		self.errors = Constants.FALSE;
+		self.u_tip_status = (status == 1) ? Constants.ACCEPTED:Constants.REJECTED;
+
+		$scope.ui_block();
+
+		ManageTeacherTipsService.updateHelp(id, self.u_tip_status).success(function(response){
+			if(angular.equals(response.status,Constants.STATUS_OK)){
+				if(response.errors){
+					self.help_errors = $scope.errorHandler(response.errors);
+				}else if(response.data){
+					self.help_success = (status == 1) ? TeacherConstant.APPROVE_HELP:TeacherConstant.REJECT_HELP;
+					self.setHelpActive('list');
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(response){
+			$scope.internalError();
+			$scope.ui_unblock();
+		});
 	}
 
 	self.helpAnsList = function() {
@@ -408,4 +430,80 @@ function ManageTeacherTipsController($scope, ManageTeacherTipsService, TableServ
 
 		self.helpAnsList();
 	}
+
+	self.helpAnsDetail = function(id) {
+		self.help_ans_errors = Constants.FALSE;
+
+		$scope.ui_block();
+
+		ManageTeacherTipsService.helpAnsDetail(id).success(function(response){
+			if(angular.equals(response.status, Constants.STATUS_OK)){
+				if(response.errors){
+					self.help_ans_errors = $scope.errorHandler(response.errors);
+				}else if(response.data){
+					self.help_ans_record = {};
+					var help_ans_record = response.data;
+					self.help_ans_record.id = help_ans_record.id;
+					self.help_ans_record.status = help_ans_record.status;
+					self.help_ans_record.subject = help_ans_record.subject;
+					self.help_ans_record.subject_area = help_ans_record.subject_area;
+					self.help_ans_record.module = help_ans_record.module;
+					self.help_ans_record.created_at = help_ans_record.help_request.created_at;
+					self.help_ans_record.title = help_ans_record.help_request.title;
+					self.help_ans_record.content = help_ans_record.content;
+					self.help_ans_record.created_by = help_ans_record.user.name;
+
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(response){
+			self.help_errors = $scope.internalError();
+			$scope.ui_unblock();
+		})
+	}
+
+	self.saveEditHelpAns = function() {
+		self.help_ans_errors = Constants.FALSE;
+		self.help_ans_success = Constants.FALSE;
+
+		$scope.ui_block();
+		ManageTeacherTipsService.saveEditHelpAns(self.help_ans_record).success(function(response){
+			if(angular.equals(response.status, Constants.STATUS_OK)){
+				if(response.errors){
+					self.help_ans_errors = $scope.errorHandler(response.errors);
+				}else if(response.data){
+					self.help_ans_success = TeacherConstant.SUCCESS_EDIT_HELP_ANS;
+					self.setHelpAnsActive('view', self.help_ans_record.id);
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(response){
+			self.help_errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.updateHelpAns = function(id, status) {
+		self.help_ans_success = Constants.FALSE;
+		self.help_ans_errors = Constants.FALSE;
+		self.u_tip_status = (status == 1) ? Constants.ACCEPTED:Constants.REJECTED;
+
+		$scope.ui_block();
+
+		ManageTeacherTipsService.updateHelpAns(id, self.u_tip_status).success(function(response){
+			if(angular.equals(response.status,Constants.STATUS_OK)){
+				if(response.errors){
+					self.help_ans_errors = $scope.errorHandler(response.errors);
+				}else if(response.data){
+					self.help_ans_success = (status == 1) ? TeacherConstant.APPROVE_HELP_ANS:TeacherConstant.REJECT_HELP_ANS;
+					self.setHelpAnsActive('list');
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(response){
+			$scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
 }

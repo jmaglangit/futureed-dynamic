@@ -94,9 +94,11 @@ class HelpRequestAnswerController extends ApiController {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(HelpRequestAnswerRequest $request)
 	{
-		//TODO: Should store the creator of the record and time.
+        $data = $request->all();
+        $result = $this->help_request_answer->addHelpRequestAnswer($data);
+        return $this->respondWithData($result);
 	}
 
 	/**

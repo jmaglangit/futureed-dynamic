@@ -5,13 +5,16 @@
 @stop
 
 @section('content')
+	<div class="container dshbrd-con" ng-init="backgroundClass()" ng-controller="StudentClassController as class" ng-cloak>
 
-	<div ng-controller="StudentClassController as class" ng-cloak>
+		<div template-directive template-url="{!! route('client.partials.base_url') !!}"></div>
+		
+		<div template-directive template-url="{!! route('student.class.partials.dashbrd-side-nav') !!}"></div>
 
-		<div ng-init="backgroundClass()" template-directive template-url="{!! route('student.class.partials.dashbrd-side-nav') !!}"></div>
-
+		<div class="wrapr"> 
+			
+		</div>
 	</div>
-  
 @stop
 
 @section('scripts')

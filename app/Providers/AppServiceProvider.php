@@ -188,9 +188,14 @@ class AppServiceProvider extends ServiceProvider {
 			'FutureEd\Models\Repository\CountryGrade\CountryGradeRepositoryInterface',
 			'FutureEd\Models\Repository\CountryGrade\CountryGradeRepository'
 		);
+
 		$this->app->bind(
 			'FutureEd\Models\Repository\TeachingContent\TeachingContentRepositoryInterface',
 			'FutureEd\Models\Repository\TeachingContent\TeachingContentRepository'
 		);
+        $this->app->bind(
+            'FutureEd\Models\Repository\HelpRequestAnswerRating\HelpRequestAnswerRatingRepositoryInterface',
+            'FutureEd\Models\Repository\HelpRequestAnswerRating\HelpRequestAnswerRatingRepository'
+        );
 	}
 }

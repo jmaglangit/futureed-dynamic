@@ -20,6 +20,7 @@ Routes::group(['prefix' => 'api/v1'], function()
 {
 	Routes::get('/', 'Api\v1\ApiController@index');
 
+
 	include('Routes/Api/Admin.php');
 	include('Routes/Api/Announcement.php');
 	include('Routes/Api/Classroom.php');
@@ -47,4 +48,5 @@ Routes::group(['prefix' => 'api/v1'], function()
 	include('Routes/Api/VolumeDiscount.php');
 	include('Routes/Api/AgeGroup.php');
 	include('Routes/Api/TeachingContent.php');
+
 });

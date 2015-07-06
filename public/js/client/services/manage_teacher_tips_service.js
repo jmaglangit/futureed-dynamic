@@ -69,6 +69,14 @@ function ManageTeacherTipsService($http){
 		});
 	}
 
+	teacherTipsApi.updateHelp = function(id, status) {
+		return $http({
+			method 	: Constants.METHOD_PATCH
+			, url 	: tipsApiUrl + 'help-request/update-request-status/' + id
+				+ '?request_status=' + status
+		});
+	}
+
 	teacherTipsApi.helpAnsList = function(search, table) {
 		return $http({
 			method 	: Constants.METHOD_GET
@@ -79,6 +87,29 @@ function ManageTeacherTipsService($http){
 				+ '&area=' + search.area
 				+ '&limit=' + table.size
 				+ '&offset=' + table.offset
+		});
+	}
+
+	teacherTipsApi.helpAnsDetail = function(id) {
+		return $http({
+			method 	: Constants.METHOD_GET
+			,url 	: tipsApiUrl + 'help-request-answer/' + id
+		});
+	}
+
+	teacherTipsApi.saveEditHelpAns = function(data) {
+		return $http({
+			method 	: Constants.METHOD_PUT
+			,data 	: data
+			, url 	: tipsApiUrl + 'help-request-answer/' + data.id
+		});
+	}
+
+	teacherTipsApi.updateHelpAns = function(id, status) {
+		return $http({
+			method 	: Constants.METHOD_POST
+			, data 	: {request_answer_status : status}
+			, url 	: tipsApiUrl + 'help-request-answer/status/' + id
 		});
 	}
 
