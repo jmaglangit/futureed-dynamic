@@ -3,6 +3,8 @@
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
+use FutureEd\Models\Repository\Country\CountryRepositoryInterface;
+use FutureEd\Models\Repository\CountryGrade\CountryGradeRepositoryInterface;
 use Illuminate\Http\Request;
 
 use FutureEd\Services\ErrorServices as Errors;
@@ -11,15 +13,23 @@ use FutureEd\Http\Requests\Api\GradeRequest;
 
 use FutureEd\Models\Repository\Grade\GradeRepositoryInterface as Grade;
 
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
+use League\Flysystem\Exception;
 
 class GradeController extends ApiController {
 
 	protected $grade;
 
-	public function __construct(Grade $grade){
+	protected $country_grade;
+
+	public function __construct(
+		Grade $grade,
+		CountryGradeRepositoryInterface $countryGradeRepositoryInterface
+	){
 
 		$this->grade = $grade;
+		$this->country_grade = $countryGradeRepositoryInterface;
 
 	}
 
@@ -81,13 +91,25 @@ class GradeController extends ApiController {
 
     }
 
+	/**
+	 * Add grades to be inserted to
+	 * @param GradeRequest $request
+	 * @return mixed
+	 */
     public function store(GradeRequest $request){
 
-    	$data = $request->all();
+		$grade = $request->only('code', 'name', 'country_id', 'description', 'status');
+		$country_grade = $request->only('age_group_id', 'country_id');
 
-    	$grade = $this->grade->addGrade($data);
+		$grade = $this->grade->addGrade($grade);
 
-    	return $this->respondWithData(['id' => $grade->id]);
+		//Add to Country Grade
+		$country_grade = array_merge($country_grade, ['grade_id' => $grade->id]);
+
+		$this->country_grade->addCountryGrade($country_grade);
+
+
+		return $this->respondWithData(['id' => $grade->id]);
 
     }
 
