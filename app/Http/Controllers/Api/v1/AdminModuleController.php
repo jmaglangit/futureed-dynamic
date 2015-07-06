@@ -101,7 +101,14 @@ class AdminModuleController extends ApiController {
 	 */
 	public function show($id)
 	{
-		//
+		$module = $this->module->viewModule($id);
+
+		if(!$module){
+
+			return $this->respondErrorMessage(2120);
+		}
+
+		return $this->respondWithData($module);
 	}
 
 	/**
