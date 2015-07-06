@@ -45,10 +45,38 @@ function ManageTeacherTipsService($http){
 			method 	: Constants.METHOD_GET
 			, url 	: tipsApiUrl + 'help-request?class_id=' + id
 				+ '&title=' + search.title
-				+ '&status=' + search.status
-				+ '&created' + search.created
-				+ '&subject' + search.subject
-				+ '&area' + search.area
+				+ '&request_status=' + search.status
+				+ '&student=' + search.created
+				+ '&subject=' + search.subject
+				+ '&area=' + search.area
+				+ '&limit=' + table.size
+				+ '&offset=' + table.offset
+		});
+	}
+
+	teacherTipsApi.helpDetail = function(id) {
+		return $http({
+			method 	: Constants.METHOD_GET
+			,url 	: tipsApiUrl + 'help-request/' + id
+		});
+	}
+
+	teacherTipsApi.saveEditHelp = function(data) {
+		return $http({
+			method 	: Constants.METHOD_PUT
+			, data 	: data
+			,url 	: tipsApiUrl + 'help-request/' + data.id
+		});
+	}
+
+	teacherTipsApi.helpAnsList = function(search, table) {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url 	: tipsApiUrl + 'help-request-answer?help_request=' + search.title
+				+ '&request_answer_status=' + search.status
+				+ '&created_by=' + search.created
+				+ '&subject=' + search.subject
+				+ '&area=' + search.area
 				+ '&limit=' + table.size
 				+ '&offset=' + table.offset
 		});

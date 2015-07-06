@@ -21,4 +21,11 @@ class ManageTeacherHelpController extends Controller{
 	public function list_help_form(){
 		return view('client.teacher.help.partials.list_help_form');
 	}
+
+	/**
+	*@return View Form
+	*/	
+	public function view_help_form(){
+		return view('client.teacher.help.partials.view_help_form');
+	}
 }

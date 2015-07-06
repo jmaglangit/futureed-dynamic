@@ -22,7 +22,7 @@
             <div style="margin-top: 7px;"> 
                 <i ng-if="u_loading" class="fa fa-spinner fa-spin"></i>
                 <i ng-if="u_success" class="fa fa-check success-color"></i>
-                <span ng-if="u_error" class="alert alert-error">{! u_error !}</span>
+                <span ng-if="u_error" class="error-msg-con">{! u_error !}</span>
             </div>
         </div>
 		<div class="form-group">

@@ -1,13 +1,13 @@
-<div ng-if="tips.help_active_list">
-	<div class="col-xs-12" ng-if="tips.help_errors || tips.help_success">
-		<div class="alert alert-error" ng-if="tips.help_errors">
-			<p ng-repeat="error in tips.help_errors track by $index">
+<div ng-if="tips.help_ans_active_list">
+	<div class="col-xs-12" ng-if="tips.help_ans_errors || tips.help_ans_success">
+		<div class="alert alert-error" ng-if="tips.help_ans_errors">
+			<p ng-repeat="error in tips.help_ans_errors track by $index">
 				{! error !}
 			</p>
 		</div>
 
-        <div class="alert alert-success" ng-if="tips.help_success">
-            <p>{! tips.help_success !}</p>
+        <div class="alert alert-success" ng-if="tips.help_ans_success">
+            <p>{! tips.help_ans_success !}</p>
         </div>
     </div>
 
@@ -20,7 +20,7 @@
 			{!! Form::open(
 				array('id' => 'search_form'
 					, 'class' => 'form-horizontal'
-					, 'ng-submit' => 'tips.searchFnc($event)'
+					, 'ng-submit' => 'tips.searchAnsFnc($event)'
 				)
 			)!!}
 			<div class="form-group">
@@ -29,7 +29,7 @@
 					{!! Form::text('search_title', ''
 						,array(
 							'placeholder' => 'Title'
-							, 'ng-model' => 'tips.search.help_title'
+							, 'ng-model' => 'tips.search.ans_title'
 							, 'class' => 'form-control btn-fit'
 						)
 					)!!}
@@ -39,7 +39,7 @@
 					{!! Form::text('search_subject', ''
 						,array(
 							'placeholder' => 'Subject'
-							, 'ng-model' => 'tips.search.help_subject'
+							, 'ng-model' => 'tips.search.ans_subject'
 							, 'class' => 'form-control btn-fit'
 						)
 					)!!}
@@ -57,7 +57,7 @@
 						, ''
 						, array(
 							'class' => 'form-control'
-							, 'ng-model' => 'tips.search.help_status'
+							, 'ng-model' => 'tips.search.ans_status'
 						)
 					) !!}
 				</div>
@@ -66,7 +66,7 @@
 					{!! Form::text('search_area', ''
 						,array(
 							'placeholder' => 'Title'
-							, 'ng-model' => 'tips.search.help_area'
+							, 'ng-model' => 'tips.search.ans_area'
 							, 'class' => 'form-control btn-fit'
 						)
 					)!!}
@@ -75,10 +75,10 @@
 			<div class="form-group">
 				<label class="col-xs-2 control-label">Created</label>
 				<div class="col-xs-5">
-					{!! Form::text('search_created', ''
+					{!! Form::text('search_module', ''
 						,array(
 							'placeholder' => 'Created'
-							, 'ng-model' => 'tips.search.help_created'
+							, 'ng-model' => 'tips.search.ans_created'
 							, 'class' => 'form-control btn-fit'
 						)
 					)!!}
@@ -87,7 +87,7 @@
 					{!! Form::button('Search'
 						,array(
 							'class' => 'btn btn-blue'
-							, 'ng-click' => 'tips.searchHelpFnc($event)'
+							, 'ng-click' => 'tips.searchAnsFnc($event)'
 						)
 					)!!}
 				</div>
@@ -95,7 +95,7 @@
 					{!! Form::button('Clear'
 						,array(
 							'class' => 'btn btn-gold'
-							, 'ng-click' => 'tips.clearHelpFnc($event)'
+							, 'ng-click' => 'tips.clearAnsFnc($event)'
 						)
 					)!!}
 				</div>
@@ -133,34 +133,34 @@
 					<thead>
 				        <tr>
 				            <th>Title</th>
-				            <th>Description</th>
+				            <th>Answer</th>
 				            <th>Created By</th>
 				            <th>Time Created</th>
 				            <th>Time of Last Answer</th>
 				            <th>Status</th>
-				            <th ng-if="tips.help_records.length">Actions</th>
+				            <th ng-if="tips.help_ans_records.length">Actions</th>
 				        </tr>
 			        </thead>
 			        <tbody>
-				        <tr ng-repeat="helpInfo in tips.help_records">
-				            <td>{! helpInfo.title !}</td>
-				            <td>{! helpInfo.content !}</td>
-				            <td>{! helpInfo.student.first_name !} {! helpInfo.student.last_name !}</td>
-				            <td>{! helpInfo.created_at !}</td>
-				            <td>{! helpInfo.last_answered_at !}</td>
-				            <td>{! helpInfo.request_status !}</td>
-				            <td ng-if="tips.help_records.length">
+				        <tr ng-repeat="helpAnsInfo in tips.help_ans_records">
+				            <td>{! helpAnsInfo.help_request.title !}</td>
+				            <td>{! helpAnsInfo.content !}</td>
+				            <td>{! helpAnsInfo.user.name !}</td>
+				            <td>{! helpAnsInfo.help_request.created_at !}</td>
+				            <td>{! helpAnsInfo.help_request.last_answered_at !}</td>
+				            <td>{! helpAnsInfo.request_answer_status !}</td>
+				            <td ng-if="tips.help_ans_records.length">
 				            	<div class="row">
 				            		<div class="col-xs-6">
-				            			<a href="" ng-click="tips.setHelpActive(futureed.ACTIVE_VIEW, helpInfo.id)"><span><i class="fa fa-eye"></i></span></a>
+				            			<a href="" ng-click="tips.setHelpAnsActive(futureed.ACTIVE_VIEW, helpAnsInfo.id)"><span><i class="fa fa-eye"></i></span></a>
 				            		</div>
 				            		<div class="col-xs-6">
-				            			<a href="" ng-click="tips.setHelpActive(futureed.ACTIVE_EDIT, helpInfo.id)"><span><i class="fa fa-pencil"></i></span></a>
+				            			<a href="" ng-click="tips.setHelpAnsActive(futureed.ACTIVE_EDIT, helpAnsInfo.id)"><span><i class="fa fa-pencil"></i></span></a>
 				            		</div>
 				            	</div>
 				            </td>
 				        </tr>
-				        <tr class="odd" ng-if="!tips.help_records.length && !tips.table.loading">
+				        <tr class="odd" ng-if="!tips.help_ans_records.length && !tips.table.loading">
 				        	<td valign="top" colspan="7">
 				        		No records found
 				        	</td>
@@ -173,7 +173,7 @@
 			        </tbody>
 				</table>
 			</div>
-			<div class="pull-right" ng-if="tips.help_records.length">
+			<div class="pull-right" ng-if="tips.help_ans_records.length">
 				<pagination 
 					total-items="tips.table.total_items" 
 					ng-model="tips.table.page"

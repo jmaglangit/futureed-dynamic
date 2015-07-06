@@ -175,5 +175,18 @@ class AppServiceProvider extends ServiceProvider {
 			'FutureEd\Models\Repository\TipRating\TipRatingRepositoryInterface',
 			'FutureEd\Models\Repository\TipRating\TipRatingRepository'
 		);
+		$this->app->bind(
+			'FutureEd\Models\Repository\Module\ModuleRepositoryInterface',
+			'FutureEd\Models\Repository\Module\ModuleRepository'
+		);
+		$this->app->bind(
+
+			'FutureEd\Models\Repository\AgeGroup\AgeGroupRepositoryInterface',
+			'FutureEd\Models\Repository\AgeGroup\AgeGroupRepository'
+		);
+		$this->app->bind(
+			'FutureEd\Models\Repository\CountryGrade\CountryGradeRepositoryInterface',
+			'FutureEd\Models\Repository\CountryGrade\CountryGradeRepository'
+		);
 	}
 }

@@ -13,8 +13,8 @@
 		    <li role="presentation">
 		    	<a ng-click="class.setTabActive('help')" href="#help" aria-controls="help" role="tab" data-toggle="tab"><span><i class="fa fa-question-circle"></i>Help Requests</span></a>
 		    </li>
-		    <li>
-		    	<a href="#"><span><i class="fa fa-exclamation-circle"></i>Help Request Answers</span></a>
+		    <li role="presentation">
+		    	<a href="#help-ans" ng-click="class.setTabActive('help')" aria-controls="help-ans" role="tab" data-toggle="tab"><span><i class="fa fa-exclamation-circle"></i>Help Request Answers</span></a>
 		    </li>
 		</ul>
 	</div>
@@ -29,6 +29,11 @@
 		</div>
 		<div role="tabpanel" class="tab-pane fade" ng-class="{'in': class.help_tab_active, 'active': class.help_tab_active}" id="help" ng-init="tips.setHelpActive('list')">
 			<div template-directive template-url="{!! route('client.teacher.help.partials.list_help_form') !!}"></div>
+			<div template-directive template-url="{!! route('client.teacher.help.partials.view_help_form') !!}"></div>
+		</div>
+		<div role="tabpanel" class="tab-pane fade" ng-class="{'in': class.help_ans_tab_active, 'active': class.help_ans_tab_active}" id="help-ans" ng-init="tips.setHelpAnsActive('list')">
+			<div template-directive template-url="{!! route('client.teacher.help_answer.partials.list_help_ans_form') !!}"></div>
+			{{-- <div template-directive template-url="{!! route('client.teacher.help.partials.view_help_form') !!}"></div> --}}
 		</div>
   	</div>
 </div>
