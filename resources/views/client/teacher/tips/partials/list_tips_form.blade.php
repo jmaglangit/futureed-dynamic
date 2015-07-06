@@ -43,7 +43,6 @@
 							'' => '-- Select Status --'
 							, 'Pending' => 'Pending'
 							, 'Accepted' => 'Accepted'
-							, 'Rejected' => 'Rejected'
 						)
 						, ''
 						, array(
