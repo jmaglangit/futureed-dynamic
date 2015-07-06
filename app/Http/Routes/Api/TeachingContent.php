@@ -1,7 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jason
- * Date: 7/6/15
- * Time: 5:44 PM
- */
+
+Routes::resource('/teaching-content','Api\v1\TeachingContentController',
+	['except' => ['create', 'edit']]);
+
