@@ -99,11 +99,9 @@
 		</div>
 		<div class="side-btn-container row" ng-if="!class.add_tips && !class.tips.success">
 			<div class="col-xs-6 btn-left">
-				{!! Form::button('View More'
+				{!! Html::link(route('student.tips.index'), 'View More'
 	                , array(
-	                  'id' => 'validate_code_btn'
-	                  , 'class' => 'btn btn-blue'
-	                  , 'ng-click' => 'studentValidateCode(reset_code)'
+	                   'class' => 'btn btn-blue'
 	                  , 'ng-if' => 'class.tip.total > 3'
 	                )
 	            ) !!}
