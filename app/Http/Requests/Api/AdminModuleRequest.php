@@ -38,6 +38,21 @@ class AdminModuleRequest extends ApiRequest {
 					'points_to_finish' => 'required|integer'
 
 				];
+
+			case 'PUT':
+
+				return [
+					'subject_id' => 'required|integer',
+					'subject_area_id' => 'required|integer',
+					'name' => 'required|string',
+					'description' => 'required|string',
+					'common_core_area' => 'required|string',
+					'common_core_url' => 'required|string',
+					'status' => 'required|alpha|in:Enabled,Disabled',
+					'points_to_unlock' => 'required|integer',
+					'points_to_finish' => 'required|integer'
+
+				];
 		}
 	}
 

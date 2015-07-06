@@ -75,4 +75,28 @@ class ModuleRepository implements ModuleRepositoryInterface{
 
 	}
 
+	public function viewModule($id){
+
+		$module = new Module();
+
+		$module = $module->with('subject','subjectarea','grade');
+		$module = $module->find($id);
+		return $module;
+
+	}
+
+	public function updateModule($id,$data){
+
+		try{
+
+			return Module::find($id)
+				->update($data);
+
+		} catch (Exception $e) {
+
+			throw new Exception($e->getMessage());
+		}
+
+	}
+
 }
