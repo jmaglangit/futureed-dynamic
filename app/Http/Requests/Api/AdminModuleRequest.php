@@ -64,9 +64,9 @@ class AdminModuleRequest extends ApiRequest {
 	public function messages() {
 		return [
 			'subject_id.required' => 'Subject is required.',
-			'subject_id.integer' => 'Subject is Invalid.',
+			'subject_id.integer' => 'Subject is invalid.',
 			'subject_area_id.required' => 'Area is required.',
-			'subject_area_id.integer' => 'Area is Invalid.',
+			'subject_area_id.integer' => 'Area is invalid.',
 			'points_to_unlock.integer' => 'Points to unlock must be a number.',
 			'points_to_finish.integer' => 'Points to finish must be a number.'
 
