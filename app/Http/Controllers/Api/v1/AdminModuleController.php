@@ -46,7 +46,7 @@ class AdminModuleController extends ApiController {
 	public function store(AdminModuleRequest $request)
 	{
 		$data = $request->only('subject_id','subject_area_id','name','code','description','common_core_area',
-						       'common_core_url','status','points_to_unlock','points_to_finish');
+                                      'common_core_url','status','points_to_unlock','points_to_finish');
 
 		if($data['points_to_unlock'] >= $data['points_to_finish']){
 
