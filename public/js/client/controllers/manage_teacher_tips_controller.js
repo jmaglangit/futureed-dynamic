@@ -185,19 +185,19 @@ function ManageTeacherTipsController($scope, ManageTeacherTipsService, TableServ
 
 		self.help_active_list = Constants.FALSE;
 		self.help_active_view = Constants.FALSE;
-		self.help_active_edit = Constants.FALSE;
 
 		switch(active) {
 			case Constants.ACTIVE_VIEW :
 				self.helpDetail(id);
 				self.help_active_view = Constants.TRUE;
-				self.help_success = Constants.FALSE;
+				self.edit = Constants.FALSE;
 				break;
 
 			case Constants.ACTIVE_EDIT :
+				self.help_active_view = Constants.TRUE;
 				self.help_success = Constants.FALSE;
 				self.helpDetail(id);
-				self.help_active_edit = Constants.TRUE;
+				self.edit = Constants.TRUE;
 				break;
 
 			case Constants.ACTIVE_LIST :
@@ -237,6 +237,60 @@ function ManageTeacherTipsController($scope, ManageTeacherTipsService, TableServ
 			$scope.ui_unblock();
 		}).error(function(response) {
 			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.helpDetail = function(id) {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		$scope.ui_block();
+
+		ManageTeacherTipsService.helpDetail(id).success(function(response){
+			if(angular.equals(response.status, Constants.STATUS_OK)){
+				if(response.errors){
+					self.help_errors = $scope.errorHandler(response.errors);
+				}else if(response.data){
+					self.help_record = {};
+					var help_record = response.data;
+					self.help_record.link_type = help_record.link_type;
+					self.help_record.request_status = help_record.request_status;
+					self.help_record.status = help_record.status;
+					self.help_record.id = help_record.id;
+					self.help_record.subject = help_record.subject;
+					self.help_record.subject_area = help_record.subject_area;
+					self.help_record.module = help_record.module;
+					self.help_record.created_at = help_record.created_at;
+					self.help_record.title = help_record.title;
+					self.help_record.content = help_record.content;
+					self.help_record.created_by = help_record.student.first_name + ' ' + help_record.student.last_name;
+
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(response){
+			self.help_errors = $scope.internalError();
+			$scope.ui_unblock();
+		})
+	}
+
+	self.saveEditHelp = function() {
+		self.help_errors = Constants.FALSE;
+		self.help_success = Constants.FALSE;
+		$scope.ui_block();
+		ManageTeacherTipsService.saveEditHelp(self.help_record).success(function(response){
+			if(angular.equals(response.status, Constants.STATUS_OK)){
+				if(response.errors){
+					self.help_errors = $scope.errorHandler(response.errors);
+				}else if(response.data){
+					self.help_success = TeacherConstant.SUCCESS_EDIT_HELP;
+					self.setHelpActive('view', self.help_record.id);
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(response){
+			self.help_errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
 	}

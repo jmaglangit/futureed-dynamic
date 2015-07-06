@@ -54,5 +54,20 @@ function ManageTeacherTipsService($http){
 		});
 	}
 
+	teacherTipsApi.helpDetail = function(id) {
+		return $http({
+			method 	: Constants.METHOD_GET
+			,url 	: tipsApiUrl + 'help-request/' + id
+		});
+	}
+
+	teacherTipsApi.saveEditHelp = function(data) {
+		return $http({
+			method 	: Constants.METHOD_PUT
+			, data 	: data
+			,url 	: tipsApiUrl + 'help-request/' + data.id
+		});
+	}
+
 	return teacherTipsApi;
 }
