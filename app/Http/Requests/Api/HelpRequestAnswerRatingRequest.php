@@ -33,7 +33,8 @@ class HelpRequestAnswerRatingRequest extends ApiRequest {
             'student_id.required' =>'Student is required.',
             'help_request_answer_id.required' =>'Help request is required.',
             'student_id.integer' =>'Student must be a number.',
-            'help_request_answer_id.integer' =>'Help request must be a number.'
+            'help_request_answer_id.integer' =>'Help request must be a number.',
+            'rating.integer' => 'Rating must be a number.'
         ];
     }
 
