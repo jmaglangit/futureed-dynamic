@@ -29,6 +29,7 @@
 		</div>
 		<div role="tabpanel" class="tab-pane fade" ng-class="{'in': class.help_tab_active, 'active': class.help_tab_active}" id="help" ng-init="tips.setHelpActive('list')">
 			<div template-directive template-url="{!! route('client.teacher.help.partials.list_help_form') !!}"></div>
+			<div template-directive template-url="{!! route('client.teacher.help.partials.view_help_form') !!}"></div>
 		</div>
   	</div>
 </div>
