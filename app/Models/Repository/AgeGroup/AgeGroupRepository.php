@@ -9,6 +9,17 @@
 namespace FutureEd\Models\Repository\AgeGroup;
 
 
-class AgeGroupRepository {
+use FutureEd\Models\Core\AgeGroup;
+
+class AgeGroupRepository implements AgeGroupRepositoryInterface{
+
+	/**
+	 * Get all list of Age Groups
+	 * @return \Illuminate\Database\Eloquent\Collection|static[]
+	 */
+	public function getAges(){
+
+		return AgeGroup::all();
+	}
 
 }
