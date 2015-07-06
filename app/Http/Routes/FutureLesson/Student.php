@@ -91,6 +91,31 @@
 		});
 
 		Routes::group([
+			  'prefix' => '/tips'
+			, 'middleware' => 'student'], function()
+		{
+			Routes::get('/', [ 
+					'as' => 'student.tips.index'
+					, 'uses' => 'FutureLesson\Student\TipsController@index'
+				]);
+
+			Routes::group([
+				  'prefix' => '/partials'
+				, 'middleware' => 'student'], function()
+			{
+				Routes::get('/list', [ 
+						'as' => 'student.tips.partials.list'
+						, 'uses' => 'FutureLesson\Student\TipsController@list_form'
+					]);
+
+				Routes::get('/detail', [ 
+						'as' => 'student.tips.partials.detail'
+						, 'uses' => 'FutureLesson\Student\TipsController@detail_form'
+					]);
+			});
+		});
+
+		Routes::group([
 			  'prefix' => 'profile'
 			, 'middleware' => 'student'], function()
 		{
