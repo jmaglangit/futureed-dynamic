@@ -11,4 +11,5 @@ namespace FutureEd\Models\Repository\TeachingContent;
 
 interface TeachingContentRepositoryInterface {
 
+	public function addTeachingContent($data);
 }
