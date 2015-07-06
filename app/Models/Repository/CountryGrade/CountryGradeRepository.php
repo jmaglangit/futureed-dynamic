@@ -9,6 +9,19 @@
 namespace FutureEd\Models\Repository\CountryGrade;
 
 
-class CountryGradeRepository {
+use FutureEd\Models\Core\CountryGrade;
+
+class CountryGradeRepository implements CountryGradeRepositoryInterface{
+
+	public function addCountryGrade($data){
+		try {
+
+			return CountryGrade::create($data);
+
+		} catch (Exception $e){
+
+			return $e->getMessage();
+		}
+	}
 
 }
