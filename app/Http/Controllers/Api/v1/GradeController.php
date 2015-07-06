@@ -1,21 +1,14 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
 use FutureEd\Http\Requests;
-use FutureEd\Http\Controllers\Controller;
 
-use FutureEd\Models\Repository\Country\CountryRepositoryInterface;
 use FutureEd\Models\Repository\CountryGrade\CountryGradeRepositoryInterface;
-use Illuminate\Http\Request;
-
-use FutureEd\Services\ErrorServices as Errors;
 
 use FutureEd\Http\Requests\Api\GradeRequest;
 
 use FutureEd\Models\Repository\Grade\GradeRepositoryInterface as Grade;
 
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Input;
-use League\Flysystem\Exception;
 
 class GradeController extends ApiController {
 
