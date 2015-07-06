@@ -121,9 +121,29 @@ class AdminModuleController extends ApiController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($id, AdminModuleRequest $request)
 	{
-		//
+		$data = $request->only('subject_id','subject_area_id','name','description','common_core_area',
+					'common_core_url','status','points_to_unlock','points_to_finish');
+
+		$module = $this->module->viewModule($id);
+
+		if(!$module){
+
+			return $this->respondErrorMessage(2120);
+		}
+
+		if($data['points_to_unlock'] >= $data['points_to_finish']){
+
+			return $this->respondErrorMessage(2139);
+		}
+
+		//update module
+		$this->module->updateModule($id,$data);
+
+		return $this->respondWithData($this->module->viewModule($id));
+
+
 	}
 
 	/**

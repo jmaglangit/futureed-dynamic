@@ -58,6 +58,16 @@ function ManageTeacherTipsController($scope, ManageTeacherTipsService, TableServ
 		event.preventDefault();
 	}
 
+	self.searchHelpFnc = function(event) {
+		self.help_success = Constants.FALSE;
+
+		self.tableDefaults();
+		self.helpList();
+
+		event = getEvent(event);
+		event.preventDefault();
+	}
+
 	self.clearFnc = function() {
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
@@ -66,6 +76,16 @@ function ManageTeacherTipsController($scope, ManageTeacherTipsService, TableServ
 		self.tableDefaults();
 
 		self.list();
+	}
+
+	self.clearHelpFnc = function() {
+		self.help_errors = Constants.FALSE;
+		self.help_success = Constants.FALSE;
+
+		self.searchDefaults();
+		self.tableDefaults();
+
+		self.helpList();
 	}
 
 	self.list = function() {
@@ -221,6 +241,12 @@ function ManageTeacherTipsController($scope, ManageTeacherTipsService, TableServ
 		self.records = [];
 		self.table.loading = Constants.TRUE;
 
+		self.search.title = (self.search.help_title) ? self.search.help_title:Constants.EMPTY_STR;
+		self.search.status = (self.search.help_status) ? self.search.help_status:Constants.EMPTY_STR;
+		self.search.created = (self.search.help_created) ? self.search.help_created:Constants.EMPTY_STR;
+		self.search.subject = (self.search.help_subject) ? self.search.help_subject:Constants.EMPTY_STR;
+		self.search.area = (self.search.help_area) ? self.search.help_area:Constants.EMPTY_STR;
+
 		$scope.ui_block();
 		ManageTeacherTipsService.listHelp(self.classid, self.search, self.table).success(function(response) {
 			self.table.loading = Constants.FALSE;
@@ -236,14 +262,14 @@ function ManageTeacherTipsController($scope, ManageTeacherTipsService, TableServ
 
 			$scope.ui_unblock();
 		}).error(function(response) {
-			self.errors = $scope.internalError();
+			self.help_errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
 	}
 
 	self.helpDetail = function(id) {
-		self.errors = Constants.FALSE;
-		self.success = Constants.FALSE;
+		self.help_errors = Constants.FALSE;
+		self.help_success = Constants.FALSE;
 
 		$scope.ui_block();
 
@@ -293,5 +319,93 @@ function ManageTeacherTipsController($scope, ManageTeacherTipsService, TableServ
 			self.help_errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
+	}
+
+	self.setHelpAnsActive = function(active, id) {
+		self.help_ans_errors = Constants.FALSE;
+		self.help_ans_fields = [];
+
+		self.help_ans_active_list = Constants.FALSE;
+		self.help_ans_active_view = Constants.FALSE;
+
+		switch(active) {
+			case Constants.ACTIVE_VIEW :
+				self.helpAnsDetail(id);
+				self.help_ans_active_view = Constants.TRUE;
+				self.ans_edit = Constants.FALSE;
+				break;
+
+			case Constants.ACTIVE_EDIT :
+				self.help_ans_active_view = Constants.TRUE;
+				self.help_ans_success = Constants.FALSE;
+				self.helpAnsDetail(id);
+				self.ans_edit = Constants.TRUE;
+				break;
+
+			case Constants.ACTIVE_LIST :
+				self.help_ans_active_list = Constants.TRUE;
+				
+				self.searchDefaults();
+				self.tableDefaults();
+				self.helpAnsList();
+				break;
+
+			default:
+			self.help_ans_active_list = Constants.TRUE;
+			self.help_ans_success = Constants.FALSE;
+			break;
+		}
+	}
+
+	self.helpAnsList = function() {
+		self.classid = $scope.classid;
+		self.help_ans_errors = Constants.FALSE;
+		self.help_ans_records = [];
+		self.table.loading = Constants.TRUE;
+
+		self.search.title = (self.search.ans_title) ? self.search.ans_title:Constants.EMPTY_STR;
+		self.search.status = (self.search.ans_status) ? self.search.ans_status:Constants.EMPTY_STR;
+		self.search.created = (self.search.ans_created) ? self.search.ans_status:Constants.EMPTY_STR;
+		self.search.subject = (self.search.ans_subject) ? self.search.ans_subject:Constants.EMPTY_STR;
+		self.search.area = (self.search.ans_area) ? self.search.ans_area:Constants.EMPTY_STR;
+
+		$scope.ui_block();
+		ManageTeacherTipsService.helpAnsList(self.search, self.table).success(function(response) {
+			self.table.loading = Constants.FALSE;
+
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.help_ans_errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.help_ans_records = response.data.records;
+					self.updatePageCount(response.data);
+				}
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.help_ans_errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.searchAnsFnc = function(event) {
+		self.help_ans_success = Constants.FALSE;
+
+		self.tableDefaults();
+		self.helpAnsList();
+
+		event = getEvent(event);
+		event.preventDefault();
+	}
+
+	self.clearAnsFnc = function() {
+		self.help_ans_errors = Constants.FALSE;
+		self.help_ans_success = Constants.FALSE;
+
+		self.searchDefaults();
+		self.tableDefaults();
+
+		self.helpAnsList();
 	}
 }
