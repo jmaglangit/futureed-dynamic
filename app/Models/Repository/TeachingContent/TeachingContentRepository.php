@@ -9,6 +9,20 @@
 namespace FutureEd\Models\Repository\TeachingContent;
 
 
-class TeachingContentRepository {
+use FutureEd\Models\Core\TeachingContent;
+use League\Flysystem\Exception;
 
+class TeachingContentRepository implements TeachingContentRepositoryInterface{
+
+	public function addTeachingContent($data){
+
+		try{
+
+			return TeachingContent::create($data);
+
+		}catch (Exception $e){
+
+			return $e->getMessage();
+		}
+	}
 }
