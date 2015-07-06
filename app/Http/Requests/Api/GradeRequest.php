@@ -31,8 +31,9 @@ class GradeRequest extends ApiRequest {
 			case 'POST':
 			default:
 				return [
-                    'code' => 'required|Integer|Unique:grades',
-					'name' => 'required|regex:'. config('regex.name_numeric'),
+					'code' => 'required|Integer|Unique:grades',
+					'name' => 'required|regex:' . config('regex.name_numeric'),
+					'age_group_id' => 'required|exists:age_groups,id,deleted_at,NULL',
 					'status' => 'required|in:Enabled,Disabled',
 					'country_id' => 'required|Integer'
 				];				

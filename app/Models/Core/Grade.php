@@ -15,12 +15,27 @@ class Grade extends Model {
 
     protected $hidden = ['created_by','updated_by','created_at','updated_at','deleted_at'];
 
+	protected $attributes = [
+		'created_by' => 1,
+		'updated_by' => 1,
+	];
+
 
     public static $rules = array(
 		'country_id' => 'required|integer',
 		'name' => 'required',
 		'status' => 'required|in:Enabled,Disabled'
 	);
+
+	//Mutators
+	public function setDescriptionAttribute($value){
+
+		if($value == NULL){
+			$this->attributes['description'] = 'None';
+		} else {
+			$this->attributes['description'] = $value;
+		}
+	}
 
 
     //Relationships
