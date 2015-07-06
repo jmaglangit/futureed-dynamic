@@ -352,7 +352,7 @@ function FutureedController($scope, apiService, futureed) {
 			if($scope.user.new_email != null){
 				$scope.confirm_email = Constants.TRUE;
 			}
-
+			
 			$("input[name='userdata']").val('');
 		}
 	}

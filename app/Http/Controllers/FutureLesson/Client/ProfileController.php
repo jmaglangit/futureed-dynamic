@@ -8,8 +8,6 @@ use Illuminate\Support\Facades\Session;
 
 class ProfileController extends Controller {
 
-	use ProfileTrait;
-
 	public function index(){
 		return view('client.profile.index');
 	}
@@ -51,6 +49,18 @@ class ProfileController extends Controller {
 	}
 
 	public function getUserObject() {		
-		return json_decode(Session::get('client'));
+		return json_decode(Session::get('Client'));
 	}
+
+	public function update_session(){
+
+		$user = Input::all();
+
+		Session::forget('client');
+		
+		if(!empty($user)) {
+			Session::put('client', json_encode($user));
+		}
+	}
+
 }
