@@ -1,17 +1,17 @@
 <div class="clearfix"></div>
-<div class="container search-container" ng-if="tips.help_active_view">
+<div class="container search-container" ng-if="tips.help_ans_active_view">
 	<div class="title-mid">
-		<span>View Help</span>		
+		<span>View Help Request Answer</span>		
 	</div>
-	<div class="col-xs-12 success-container" ng-if="tips.help_errors || tips.help_success">
-		<div class="alert alert-error" ng-if="tips.help_errors">
-            <p ng-repeat="error in tips.help_errors track by $index" > 
+	<div class="col-xs-12 success-container" ng-if="tips.help_ans_errors || tips.help_ans_success">
+		<div class="alert alert-error" ng-if="tips.help_ans_errors">
+            <p ng-repeat="error in tips.help_ans_errors track by $index" > 
               	{! error !}
             </p>
         </div>
 
-        <div class="alert alert-success" ng-if="tips.help_success">
-            <p>{! tips.help_success !}</p>
+        <div class="alert alert-success" ng-if="tips.help_ans_success">
+            <p>{! tips.help_ans_success !}</p>
         </div>
     </div>
     <div class="module-container">
@@ -28,7 +28,7 @@
 					, array(
 						'ng-disabled'=>'true'
 						, 'class' => 'form-control'
-						, 'ng-model' => 'tips.record.subject'
+						, 'ng-model' => 'tips.help_ans_record.subject'
 						, 'placeholder' => 'Subject'
 					)
 				) !!}
@@ -41,7 +41,7 @@
 					, array(
 						'ng-disabled'=>'true'
 						, 'class' => 'form-control'
-						, 'ng-model' => 'tips.record.subject_area'
+						, 'ng-model' => 'tips.help_ans_record.subject_area'
 						, 'placeholder' => 'Subject Area'
 					)
 				) !!}
@@ -54,7 +54,7 @@
 					, array(
 						'ng-disabled'=>'true'
 						, 'class' => 'form-control'
-						, 'ng-model' => 'tips.record.module'
+						, 'ng-model' => 'tips.help_ans_record.module'
 						, 'placeholder' => 'Module'
 					)
 				) !!}
@@ -67,7 +67,7 @@
 					, array(
 						'ng-disabled'=>'true'
 						, 'class' => 'form-control'
-						, 'ng-model' => 'tips.help_record.created_at'
+						, 'ng-model' => 'tips.help_ans_record.created_at'
 						, 'placeholder' => 'Date Created'
 					)
 				) !!}
@@ -76,8 +76,7 @@
 				{!! Form::button('Approve'
 					, array(
 						'class' => 'btn btn-blue btn-medium'
-						, 'ng-click' => "tips.updateHelp(tips.help_record.id, 1)"
-						, 'ng-if' => '!tips.edit'
+						, 'ng-click' => "tips.updateHelpAns(tips.help_ans_record.id, 1)"
 					)
 				) !!}
 			</div>
@@ -85,11 +84,11 @@
 		<div class="form-group">
 			<label class="control-label col-xs-2">Title <span class="required">*</span></label>
 			<div class="col-xs-5">
-				{!! Form::text('search_name', ''
+				{!! Form::text('title', ''
 					, array(
-						'ng-disabled'=>'!tips.edit'
+						'ng-disabled'=>'true'
 						, 'class' => 'form-control'
-						, 'ng-model' => 'tips.help_record.title'
+						, 'ng-model' => 'tips.help_ans_record.title'
 						, 'placeholder' => 'Title'
 					)
 				) !!}
@@ -98,8 +97,8 @@
 				{!! Form::button('Reject'
 					, array(
 						'class' => 'btn btn-gold btn-medium'
-						, 'ng-click' => "tips.updateHelp(tips.help_record.id, 0)"
-						, 'ng-if' => '!tips.edit'
+						, 'ng-click' => "tips.updateHelpAns(tips.help_ans_record.id, 0)"
+						, 'ng-if' => '!tips.help_ans_edit'
 					)
 				) !!}
 			</div>
@@ -109,9 +108,9 @@
 			<div class="col-xs-5">
 				{!! Form::textarea('search_name', ''
 					, array(
-						'ng-disabled'=>'!tips.edit'
+						'ng-disabled'=>'!tips.help_ans_edit'
 						, 'class' => 'form-control'
-						, 'ng-model' => 'tips.help_record.content'
+						, 'ng-model' => 'tips.help_ans_record.content'
 						, 'placeholder' => 'Description'
 					)
 				) !!}
@@ -124,7 +123,7 @@
 					, array(
 						'ng-disabled'=>'true'
 						, 'class' => 'form-control'
-						, 'ng-model' => 'tips.help_record.created_by'
+						, 'ng-model' => 'tips.help_ans_record.created_by'
 						, 'placeholder' => '>Created By'
 					)
 				) !!}
@@ -135,29 +134,22 @@
 				{!! Form::button('Edit'
 					, array(
 						'class' => 'btn btn-blue btn-medium'
-						, 'ng-if' => '!tips.edit'
-						, 'ng-click' => "tips.setHelpActive('edit', tips.help_record.id)"
+						, 'ng-if' => '!tips.help_ans_edit'
+						, 'ng-click' => "tips.setHelpAnsActive('edit', tips.help_ans_record.id)"
+						, 'ng-if' => '!tips.help_ans_edit'
 					)
 				) !!}
 				{!! Form::button('Save & Publish'
 					, array(
 						'class' => 'btn btn-blue btn-medium'
-						, 'ng-if' => 'tips.edit'
-						, 'ng-click' => "tips.saveEditHelp()"
+						, 'ng-if' => 'tips.help_ans_edit'
+						, 'ng-click' => "tips.saveEditHelpAns()"
 					)
 				) !!}
 				{!! Form::button('Cancel'
 					, array(
 						'class' => 'btn btn-gold btn-medium'
-						, 'ng-click' => "tips.setHelpActive('list')"
-						, 'ng-if' => '!tips.edit'
-					)
-				) !!}
-				{!! Form::button('Cancel'
-					, array(
-						'class' => 'btn btn-gold btn-medium'
-						, 'ng-click' => "tips.setHelpActive('view', tips.help_record.id)"
-						, 'ng-if' => 'tips.edit'
+						, 'ng-click' => "tips.setHelpAnsActive('list')"
 					)
 				) !!}
 			</div>

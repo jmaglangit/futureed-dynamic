@@ -14,4 +14,11 @@ class ManageTeacherHelpAnswerController extends Controller{
 	public function list_help_ans_form() {
 		return view('client.teacher.help_answer.partials.list_help_ans_form');
 	}
+
+	/**
+	*@return Edit & View Form
+	*/
+	public function view_help_ans_form() {
+		return view('client.teacher.help_answer.partials.view_help_ans_form');
+	}
 }
