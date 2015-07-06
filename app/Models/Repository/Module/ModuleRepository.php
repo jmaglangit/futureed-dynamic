@@ -49,7 +49,7 @@ class ModuleRepository implements ModuleRepositoryInterface{
 					$module = $module->subjectName($criteria['subject']);
 				}
 
-				//check relation to module
+				//check module name
 				if(isset($criteria['name'])){
 
 					$module = $module->name($criteria['name']);
