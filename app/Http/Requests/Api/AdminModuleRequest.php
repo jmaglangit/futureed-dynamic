@@ -67,6 +67,8 @@ class AdminModuleRequest extends ApiRequest {
 			'subject_id.integer' => 'Subject is Invalid.',
 			'subject_area_id.required' => 'Area is required.',
 			'subject_area_id.integer' => 'Area is Invalid.',
+			'points_to_unlock.integer' => 'Points to unlock must be a number.',
+			'points_to_finish.integer' => 'Points to finish must be a number.'
 
 		];
 	}
