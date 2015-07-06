@@ -179,5 +179,9 @@ class AppServiceProvider extends ServiceProvider {
 			'FutureEd\Models\Repository\Module\ModuleRepositoryInterface',
 			'FutureEd\Models\Repository\Module\ModuleRepository'
 		);
+		$this->app->bind(
+			'FutureEd\Models\Repository\AgeGroup\AgeGroupRepositoryInterface',
+			'FutureEd\Models\Repository\AgeGroup\AgeGroupRepository'
+		);
 	}
 }
