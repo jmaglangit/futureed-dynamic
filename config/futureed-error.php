@@ -95,6 +95,8 @@ return [
 		2137 => 'Unable to delete. Help request has answers.',
 		2138 => 'Password image is required.',
 		2139 => 'Points to unlock must be lesser than Points to finish.',
+		2140 => 'Unable to Delete. Module has contents.',
+		2141 => 'Unable to Delete. Module has questions.',
 
 		// Client Error messages
 		2200 => 'Email already exists.',
