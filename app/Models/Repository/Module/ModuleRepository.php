@@ -79,7 +79,7 @@ class ModuleRepository implements ModuleRepositoryInterface{
 
 		$module = new Module();
 
-		$module = $module->with('subject','subjectarea','grade');
+		$module = $module->with('subject','subjectarea','grade','content','question');
 		$module = $module->find($id);
 		return $module;
 
@@ -95,6 +95,22 @@ class ModuleRepository implements ModuleRepositoryInterface{
 		} catch (Exception $e) {
 
 			throw new Exception($e->getMessage());
+		}
+
+	}
+
+	public function deleteModule($id){
+
+		try {
+
+			$module = Module::find($id);
+
+			return !is_null($module) ? $module->delete() : false;
+
+		} catch(Exception $e) {
+
+			return $e->getMessage();
+
 		}
 
 	}
