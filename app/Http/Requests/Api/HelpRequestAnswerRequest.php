@@ -24,6 +24,13 @@ class HelpRequestAnswerRequest extends ApiRequest {
 	{
 		switch($this->method()){
 
+            case 'POST':
+                return [
+                    'student_id' => 'required|integer',
+                    'content' => 'required|string',
+                    'help_request_id' => 'required|integer'
+                ];
+                break;
 			case 'PUT':
 
 				return [
@@ -37,7 +44,10 @@ class HelpRequestAnswerRequest extends ApiRequest {
 	public function messages(){
 
 		return [
-
+            'student_id.required' =>'Student is required.',
+            'help_request_id.required' =>'Help request is required.',
+            'student_id.integer' =>'Student must be a number.',
+            'help_request_id.integer' =>'Help request must be a number.'
 		];
 	}
 

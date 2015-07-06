@@ -13,5 +13,7 @@ interface HelpRequestAnswerRepositoryInterface {
 
 	public function updateRequestAnswerStatus($id,$status);
 
+    public function addHelpRequestAnswer($data);
 
+    public function checkStudentHelpRequestAnswer($student_id,$help_request_answer_id);
 }

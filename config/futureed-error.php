@@ -54,6 +54,9 @@ return [
 		2039 => 'Student is not associated to the parent.',
 		2040 => 'Student already exist.',
 		2041 => 'Country is required',
+        2042 => 'Student has already rated this help request answer.',
+        2043 => 'Student cannot rate his/her own help request answer.',
+
 
 		2100 => 'Reset code is invalid.',
 		2101 => 'Password image is invalid.',

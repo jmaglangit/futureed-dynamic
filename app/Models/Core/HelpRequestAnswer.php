@@ -12,7 +12,7 @@ class HelpRequestAnswer extends Model {
 	protected $dates = ['created_at','updated_at','deleted_at'];
 
 	protected $fillable = [
-		'user_id',
+		'student_id',
 		'content',
 		'help_request_id',
 		'module_id',
@@ -24,6 +24,18 @@ class HelpRequestAnswer extends Model {
 		'status',
 		'points'
 	];
+
+    protected $attributes = [
+        'created_by' => 1,
+        'updated_by' => 1,
+        'module_id'=> 0,
+        'subject_id'=> 0,
+        'subject_area_id' => 0,
+        'rating' => 0,
+        'seq_no'=> 0,
+        'request_answer_status' => 'Pending',
+        'status' =>'Enabled',
+        'points' => 0];
 
 	protected $hidden = ['updated_by','created_at','deleted_at'];
 
@@ -114,6 +126,9 @@ class HelpRequestAnswer extends Model {
 		return $query->where('status',$status);
 	}
 
+    public function scopeStudentId($query,$student_id){
+        return $query->whereStudentId($student_id);
+    }
 
 
 
