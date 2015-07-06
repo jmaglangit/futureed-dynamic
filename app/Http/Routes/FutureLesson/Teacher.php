@@ -122,10 +122,23 @@
 					'as' => 'client.teacher.help.partials.view_help_form',
 					'uses' => $manage_teacher_help_controller . '@view_help_form'
 				]);
+			});
+		});
 
-				Routes::get('edit_help_form', [
-					'as' => 'client.teacher.tips.partials.edit_help_form',
-					'uses' => $manage_teacher_help_controller . '@edit_help_form'
+		Routes::group(['prefix' => 'help_ans'], function() {
+			$manage_teacher_help_ans_controller = 'FutureLesson\Client\ManageTeacherHelpAnswerController';
+
+			Routes::group(['prefix' => 'partials'], function() {
+				$manage_teacher_help_ans_controller = 'FutureLesson\Client\ManageTeacherHelpAnswerController';
+
+				Routes::get('list_help_ans_form', [
+					'as' => 'client.teacher.help_answer.partials.list_help_ans_form',
+					'uses' => $manage_teacher_help_ans_controller . '@list_help_ans_form'
+				]);
+
+				Routes::get('view_help_ans_form', [
+					'as' => 'client.teacher.help_answer.partials.view_help_ans_form',
+					'uses' => $manage_teacher_help_ans_controller . '@view_help_ans_form'
 				]);
 			});
 		});
