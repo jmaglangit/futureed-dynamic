@@ -28,12 +28,43 @@ class Module extends Model
 		'grade_id' => 0,
 	];
 
+	//-------------relationships
+	public function subject() {
+		return $this->belongsTo('FutureEd\Models\Core\Subject');
+	}
+
+	public function subjectArea() {
+		return $this->belongsTo('FutureEd\Models\Core\SubjectArea');
+	}
+
+	public function grade() {
+		return $this->belongsTo('FutureEd\Models\Core\Grade');
+	}
+
+
+
 
 	//Scopes
 	public function scopeName($query, $name)
 	{
 
 		return $query->where('name', 'like', '%' . $name . '%');
+
+	}
+
+	public function scopeSubjectName($query, $name) {
+
+		return $query->whereHas('subject', function($query) use ($name) {
+			$query->where('name','like','%'.$name.'%');
+		});
+
+	}
+
+	public function scopeSubjectAreaName($query, $name) {
+
+		return $query->whereHas('subjectArea', function($query) use ($name) {
+			$query->where('name','like','%'.$name.'%');
+		});
 
 	}
 }
