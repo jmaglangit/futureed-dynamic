@@ -104,5 +104,10 @@ class ClassStudent extends Model {
 		return $query->where('subscription_status',config('futureed.active'));
 	}
 
+	public function scopeId($query, $id){
+
+		return $query->where('id',$id);
+	}
+
 
 }
