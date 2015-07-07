@@ -5,8 +5,10 @@ use Carbon\Carbon;
 use FutureEd\Models\Core\ClassStudent;
 use FutureEd\Models\Core\Classroom;
 use FutureEd\Models\Repository\User\UserRepository;
+use League\Flysystem\Exception;
 
-class ClassStudentRepository implements ClassStudentRepositoryInterface{
+class ClassStudentRepository implements ClassStudentRepositoryInterface
+{
 
 	/**
 	 * @param array $criteria
@@ -98,21 +100,61 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface{
 			->first();
 	}
 
+	/**
+	 * Get Active Class Student by student_id
+	 * @param $student_id
+	 */
+	public function getActiveClassStudent($student_id)
+	{
+		return ClassStudent::with('classroom')
+			->studentId($student_id)
+			->get();
+	}
 
-	public function studentJoinClassroom($class_students_id){
-
+	/**
+	 * Set to Inactive Class.
+	 * @param $id
+	 */
+	public function setClassStudentInactive($id)
+	{
 		try{
+			return ClassStudent::id($id)
+				->update([
+					'subscription_status' => config('futureed.inactive')
+				]);
+		}catch (Exception $e){
+			return $e->getMessage();
+		}
+	}
 
-			ClassStudent::find($class_students_id)
+	/**
+	 * Get Inactive Student Class has date today.
+	 * @param $student_id
+	 */
+	public function getInactiveClassStudent($student_id)
+	{
+		return ClassStudent::with('classroom')
+			->studentId($student_id)
+			->currentDate(Carbon::now())
+			->get();
+	}
+
+	/**
+	 * Set Class student to Active.
+	 * @param $id
+	 */
+	public function setClassStudentActive($id)
+	{
+		try {
+
+			return ClassStudent::id($id)
 				->update([
 					'subscription_status' => config('futureed.active')
 				]);
-
-			return ClassStudent::find($class_students_id);
-
 		} catch (Exception $e){
 
 			return $e->getMessage();
 		}
 	}
+
 }
