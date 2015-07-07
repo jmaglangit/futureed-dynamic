@@ -54,23 +54,10 @@ class TeachingContentController extends ApiController {
 	 */
 	public function store(TeachingContent $request)
 	{
-
-		$data = $request->only(
-			'module_id',
-			'subject_id',
-			'subject_area_id',
-			'code',
-			'teaching_module',
-			'description',
-			'learning_style_id',
-			'content_url',
-			'media_type_id'
-		);
-
+		$data = $request->all();
 		return $this->respondWithData(
 			$this->teaching_content->addTeachingContent($data)
 		);
-
 	}
 
 	/**
@@ -91,9 +78,12 @@ class TeachingContentController extends ApiController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update(TeachingContent $request,$id)
 	{
-		//
+        $data = $request->all();
+        return $this->respondWithData(
+            $this->teaching_content->updateTeachingContent($id,$data)
+        );
 	}
 
 	/**

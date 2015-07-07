@@ -38,6 +38,15 @@ class TeachingContent extends ApiRequest {
 				];
 
 				break;
+            case 'PUT':
+                return [
+                    'teaching_module' => 'required',
+                    'description' => 'required',
+                    'learning_style_id' => 'required|exists:learning_styles,id,deleted_at,NULL',
+                    'content_url' => 'required|url',
+                    'media_type_id' => 'required|exists:media_types,id,deleted_at,NULL'
+                ];
+                break;
 		}
 	}
 

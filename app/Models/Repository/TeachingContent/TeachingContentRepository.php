@@ -84,4 +84,19 @@ class TeachingContentRepository implements TeachingContentRepositoryInterface{
             return $e->getMessage();
         }
     }
+
+    /**
+     * Update Teaching content.
+     * @param $id
+     * @param $data
+     * @return bool
+     */
+    public function updateTeachingContent($id,$data){
+        try{
+            $result = TeachingContent::find($id);
+            return is_null($result) ? false : $result->update($data);
+        }catch (\Exception $e){
+            return $e->getMessage();
+        }
+    }
 }
