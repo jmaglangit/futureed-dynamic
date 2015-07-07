@@ -18,5 +18,28 @@ function manageModuleService($http) {
 		});
 	}
 
+	moduleServiceApi.getSubject = function() {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url 	: moduleServiceUrl + 'subject'
+		});
+	}
+
+	moduleServiceApi.searchArea = function(id, name) {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url 	: moduleServiceUrl + 'subject-area?subject_id=' + id
+				+ '&name=' + name
+		});
+	}
+
+	moduleServiceApi.addNewModule  = function(data){
+		return $http({
+			method 	: Constants.METHOD_POST
+			, data 	: data
+			, url 	: moduleServiceUrl + 'module/admin'
+		});
+	}
+
 	return moduleServiceApi
 }

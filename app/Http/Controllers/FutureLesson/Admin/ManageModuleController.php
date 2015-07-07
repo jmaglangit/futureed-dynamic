@@ -21,4 +21,11 @@ class ManageModuleController extends Controller{
 	public function list_module_form() {
 		return view('admin.manage.module.partials.list_module_form');
 	}
+
+	/**
+	*@return add view form
+	*/
+	public function add_module_form() {
+		return view('admin.manage.module.partials.add_module_form');
+	}
 }
