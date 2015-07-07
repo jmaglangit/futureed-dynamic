@@ -80,6 +80,10 @@ class GradeController extends ApiController {
 
         }
 
+		$country_grade = $this->country_grade->getCountryGradeByGrade($grade->id);
+
+		$grade->age_group_id = $country_grade->age_group_id;
+
         return $this->respondWithData($grade);
 
     }
@@ -109,6 +113,7 @@ class GradeController extends ApiController {
     public function update($id,GradeRequest $request){
 
     	$data = $request->except(array('code'));
+		$country_grade = $request->only('age_group_id');
         $grade = $this->grade->getGradeById($id);
 
         if(empty($grade)){
@@ -117,8 +122,12 @@ class GradeController extends ApiController {
 
         }
 
+		//Update Country Grade
+		$country_grade = $this->country_grade->updateAgeGroup($grade->id,$country_grade);
 
     	$grade = $this->grade->updateGrade($id,$data);
+
+		$grade->age_group_id = $country_grade->age_group_id;
 
     	return $this->respondWithData([$grade]);
 
