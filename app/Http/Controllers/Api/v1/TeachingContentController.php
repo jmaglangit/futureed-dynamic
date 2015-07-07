@@ -1,10 +1,10 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
 use FutureEd\Http\Requests;
-use FutureEd\Http\Controllers\Controller;
 
 use FutureEd\Models\Repository\TeachingContent\TeachingContentRepositoryInterface;
 use FutureEd\Http\Requests\Api\TeachingContent;
+use Illuminate\Support\Facades\Input;
 
 class TeachingContentController extends ApiController {
 
@@ -27,7 +27,22 @@ class TeachingContentController extends ApiController {
 	 */
 	public function index()
 	{
-		//
+        $criteria = [];
+
+        if(Input::get('teaching_module')){
+            $criteria['teaching_module'] = Input::get('teaching_module');
+        }
+
+        if(Input::get('learning_style')){
+            $criteria['learning_style'] = Input::get('learning_style');
+        }
+
+        $limit = (Input::get('limit')) ? Input::get('limit') : 0;
+        $offset = (Input::get('offset')) ? Input::get('offset') : 0;
+
+        return $this->respondWithData(
+            $this->teaching_content->getTeachingContents($criteria,$limit,$offset)
+        );
 	}
 
 
@@ -89,7 +104,7 @@ class TeachingContentController extends ApiController {
 	 */
 	public function destroy($id)
 	{
-		//
+		return $this->respondWithData($this->teaching_content->deleteTeachingContent($id));
 	}
 
 }

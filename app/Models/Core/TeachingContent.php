@@ -1,8 +1,11 @@
 <?php namespace FutureEd\Models\Core;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class TeachingContent extends Model {
+
+    use SoftDeletes;
 
 	protected $table = 'teaching_contents';
 
@@ -33,6 +36,24 @@ class TeachingContent extends Model {
 		'updated_by' => 1
 	];
 
+    //Relationships
 
+    public function learningStyle(){
+        return $this->belongsTo('FutureEd\Models\Core\LearningStyle');
+    }
+
+    public function mediaType(){
+        return $this->belongsTo('FutureEd\Models\Core\MediaType');
+    }
+
+    //Scopes
+
+    public function scopeTeachingModule($query,$teaching_module){
+        return $query->where('teaching_module','like','%'.$teaching_module.'%');
+    }
+
+    public function scopeLearningStyleId($query,$learning_style_id){
+        return $query->whereLearningStyleId($learning_style_id);
+    }
 
 }
