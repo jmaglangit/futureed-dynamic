@@ -8,25 +8,25 @@ use Illuminate\Support\Facades\Input;
 
 class TeachingContentController extends ApiController {
 
-	protected $teaching_content;
+    protected $teaching_content;
 
-	/**
-	 * Initialized Teaching Content.
-	 * @param TeachingContentRepositoryInterface $teachingContentRepositoryInterface
-	 */
-	public function __construct(
-		TeachingContentRepositoryInterface $teachingContentRepositoryInterface
-	){
-		$this->teaching_content = $teachingContentRepositoryInterface;
-	}
+    /**
+     * Initialized Teaching Content.
+     * @param TeachingContentRepositoryInterface $teachingContentRepositoryInterface
+     */
+    public function __construct(
+        TeachingContentRepositoryInterface $teachingContentRepositoryInterface
+    ){
+        $this->teaching_content = $teachingContentRepositoryInterface;
+    }
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
-	public function index()
-	{
+    /**
+     * Display a listing of the resource.
+     *
+     * @return Response
+     */
+    public function index()
+    {
         $criteria = [];
 
         if(Input::get('teaching_module')){
@@ -43,58 +43,58 @@ class TeachingContentController extends ApiController {
         return $this->respondWithData(
             $this->teaching_content->getTeachingContents($criteria,$limit,$offset)
         );
-	}
+    }
 
 
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store(TeachingContent $request)
-	{
-		$data = $request->all();
-		return $this->respondWithData(
-			$this->teaching_content->addTeachingContent($data)
-		);
-	}
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @return Response
+     */
+    public function store(TeachingContent $request)
+    {
+        $data = $request->all();
+        return $this->respondWithData(
+            $this->teaching_content->addTeachingContent($data)
+        );
+    }
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function show($id)
+    {
+        //
+    }
 
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update(TeachingContent $request,$id)
-	{
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function update(TeachingContent $request,$id)
+    {
         $data = $request->all();
         return $this->respondWithData(
             $this->teaching_content->updateTeachingContent($id,$data)
         );
-	}
+    }
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		return $this->respondWithData($this->teaching_content->deleteTeachingContent($id));
-	}
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return Response
+     */
+    public function destroy($id)
+    {
+        return $this->respondWithData($this->teaching_content->deleteTeachingContent($id));
+    }
 
 }
