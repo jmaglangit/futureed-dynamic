@@ -192,5 +192,10 @@ class AppServiceProvider extends ServiceProvider {
             'FutureEd\Models\Repository\HelpRequestAnswerRating\HelpRequestAnswerRatingRepositoryInterface',
             'FutureEd\Models\Repository\HelpRequestAnswerRating\HelpRequestAnswerRatingRepository'
         );
+
+		$this->app->bind(
+			'FutureEd\Models\Repository\Question\QuestionRepositoryInterface',
+			'FutureEd\Models\Repository\Question\QuestionRepository'
+		);
 	}
 }
