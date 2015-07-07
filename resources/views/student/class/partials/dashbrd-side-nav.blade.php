@@ -125,6 +125,17 @@
 		<img class="help-img-header" src="/images/class-student/sidebar_header_helprequest.png" alt="">
 	</div>
 	<div id="help_request_form">
+		<div class="side-btn-container row" ng-if="!class.add_help && !class.help.success">
+			<div class="col-xs-12 submit-btn-help">
+				{!! Html::link(route('student.tips.index'), 'My Help Requests'
+	                , array(
+	                   'class' => 'btn btn-blue'
+	                  , 'ng-if' => 'class.help.total'
+	                )
+	            ) !!}
+			</div>
+		</div>
+
 		<div class="clearfix"></div>
 		<div ng-show="!class.add_help && !class.help.success">
 			<div class="sidebar-div" ng-repeat="help_record in class.help.records">
