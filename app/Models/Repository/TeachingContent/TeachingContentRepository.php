@@ -95,4 +95,17 @@ class TeachingContentRepository implements TeachingContentRepositoryInterface{
             return $e->getMessage();
         }
     }
+
+    /**
+     * Get Teaching content.
+     * @param $id
+     * @return Object
+     */
+    public function getTeachingContent($id){
+        try{
+            return TeachingContent::with('subject','subjectArea','module','learningStyle','mediaType')->find($id);
+        }catch (\Exception $e){
+            return $e->getMessage();
+        }
+    }
 }

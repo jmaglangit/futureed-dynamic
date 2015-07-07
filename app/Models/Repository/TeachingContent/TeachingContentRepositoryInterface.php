@@ -15,4 +15,5 @@ interface TeachingContentRepositoryInterface {
     public function getTeachingContents($criteria = [],$limit,$offset);
     public function deleteTeachingContent($id);
     public function updateTeachingContent($id,$data);
+    public function getTeachingContent($id);
 }

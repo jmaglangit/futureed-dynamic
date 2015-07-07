@@ -45,8 +45,6 @@ class TeachingContentController extends ApiController {
         );
     }
 
-
-
     /**
      * Store a newly created resource in storage.
      *
@@ -68,9 +66,10 @@ class TeachingContentController extends ApiController {
      */
     public function show($id)
     {
-        //
+        return $this->respondWithData(
+            $this->teaching_content->getTeachingContent($id)
+        );
     }
-
 
     /**
      * Update the specified resource in storage.
