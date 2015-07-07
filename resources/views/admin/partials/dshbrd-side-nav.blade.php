@@ -40,6 +40,9 @@
             <li>
                 <a href="{!! route('admin.manage.grades.index') !!}" ng-init="grade.setActive()"><span><i class="fa fa-book"></i>Grades</span></a>
             </li>
+            <li>
+                <a href="{!! route('admin.manage.module.index') !!}" ng-init="module.setManageModuleActive()"><span><i class="fa fa-cubes"></i>Module</span></a>
+            </li>
         </ul> 
 
         <li data-toggle="collapse" data-target="#price" class="collapsed side-nav-li" ng-class="{'active' : admincon.active_price}">
