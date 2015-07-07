@@ -187,13 +187,11 @@ class StudentServices {
 			$grade = $this->grade->getGrade($student_reference['grade_code']);
 		}
 
-		//get Class Id
 
-		$student_class = $this->class_student->getStudentCurrentClassroom($id);
 
-		$class_id = ($student_class) ? $student_class->class_id : 0;
 
-		$student = array_merge(array('id' => $id, 'class_id' => $class_id)
+		$student = array_merge(array('id' => $id
+			,'class_id' => $this->getCurrentClass($id))
 			, $student
 			, $user,
 			array('age' => $age,
@@ -331,6 +329,50 @@ class StudentServices {
 
 		return $this->student->updateSchool($id,$school_code);
 	}
+
+	/**
+	 * Student relationship to class
+	 * Get current class of the student
+	 * @param $student_id
+	 * @return int
+	 */
+	public function getCurrentClass($student_id)
+	{
+		//get all active class.
+		$active_class = $this->class_student->getActiveClassStudent($student_id);
+
+		//mitigate to inactive
+		foreach ($active_class as $list => $class) {
+
+			if (!($class->classroom->order->date_start <= Carbon::now()->toDateString()
+				&& $class->classroom->order->date_end >= Carbon::now()->toDateString())
+			) {
+
+				$this->class_student->setClassStudentInactive($class->id);
+
+			}
+		}
+
+		//get inactive class whose class time has today.
+		$inactive_class = $this->class_student->getInactiveClassStudent($student_id);
+
+		//mitigate to active
+		foreach ($inactive_class as $list => $class) {
+
+			if ($class->classroom->order->date_start <= Carbon::now()->toDateString()
+				&& $class->classroom->order->date_end >= Carbon::now()->toDateString()
+			) {
+
+				$this->class_student->setClassStudentActive($class->id);
+			}
+		}
+
+		$class_student = $this->class_student->getStudentCurrentClassroom($student_id);
+
+		return ($class_student) ? $class_student : 0;
+	}
+
+
     
     
 }

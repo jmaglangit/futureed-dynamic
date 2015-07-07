@@ -229,7 +229,7 @@ class ClassStudentController extends ApiController {
 
 
 		return $this->respondWithData(
-			$this->class_student->studentJoinClassroom($request->get('class_students_id'))
+			$this->student->getCurrentClass($request->get('student_id'))
 		);
 	}
 

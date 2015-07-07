@@ -47,7 +47,7 @@ class ClassStudentRequest extends ApiRequest {
 					case 'api.v1.class-student.student-join-class';
 
 						return [
-							'class_students_id' => 'required|exists:class_students,id,deleted_at,NULL'
+							'student_id' => 'required|exists:class_students,student_id,deleted_at,NULL'
 						];
 						break;
 					default:

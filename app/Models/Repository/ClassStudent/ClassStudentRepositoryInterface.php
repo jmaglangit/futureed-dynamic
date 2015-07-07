@@ -15,5 +15,13 @@ interface ClassStudentRepositoryInterface {
 
 	public function getStudentCurrentClassroom($student_id);
 
-	public function studentJoinClassroom($class_students);
+	public function getActiveClassStudent($student_id);
+
+	public function setClassStudentInactive($id);
+
+	public function getInactiveClassStudent($student_id);
+
+	public function setClassStudentActive($id);
+
+
 }
