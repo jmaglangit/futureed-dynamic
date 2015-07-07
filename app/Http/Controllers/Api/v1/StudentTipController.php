@@ -8,16 +8,19 @@ use FutureEd\Http\Requests\Api\StudentTipRequest;
 use Illuminate\Support\Facades\Input;
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use FutureEd\Models\Repository\Tip\TipRepositoryInterface;
+use FutureEd\Services\AvatarServices;
 
 class StudentTipController extends ApiController {
 
 	protected $student;
 	protected $tip;
+	protected $avatar;
 
-	public function __construct(StudentRepositoryInterface $student,TipRepositoryInterface $tip){
+	public function __construct(StudentRepositoryInterface $student,TipRepositoryInterface $tip, AvatarServices $avatar){
 
 		$this->student = $student;
 		$this->tip = $tip;
+		$this->avatar = $avatar;
 
 	}
 
@@ -125,6 +128,8 @@ class StudentTipController extends ApiController {
 
 			return $this->respondErrorMessage(2120);
 		}
+
+		$tip->student->avatar->avatar_url = $this->avatar->getAvatarUrl($tip->student->avatar->avatar_image);
 
 		return $this->respondWithData($tip);
 
