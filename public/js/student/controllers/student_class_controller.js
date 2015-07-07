@@ -114,9 +114,7 @@ function StudentClassController($scope, $filter, StudentClassService) {
 
 					angular.forEach(response.data.records, function(value, key) {
 						value.created_moment = moment(value.created_at).startOf("minute").fromNow();
-						if(value.rating) {
-							value.stars = new Array(value.rating);
-						}
+						value.stars = new Array(5);
 
 						self.tip.records.push(value);
 					});

@@ -9,7 +9,9 @@
 				<div class="div-side-content">
 					<p class="side-title">{! tip_record.title !}</p>
 					<p class="user-detail-star">
-						<img ng-repeat="i in tip_record.stars track by $index" src="/images/class-student/icon-star_yellow.png">
+						<span ng-repeat="i in tip_record.stars track by $index">
+							<img ng-src="{! $index+1 <= tip_record.rating && '/images/class-student/icon-star_yellow.png' || '/images/class-student/icon-star_white.png' !}" />
+						</span>
 					</p>
 					<p class="user-detail"><span><i class="fa fa-user"></i> {! tip_record.student.first_name !} {! tip_record.student.last_name !}</span></p>
 					<p class="user-detail"><span><i class="fa fa-tag"></i> Some Tag</span></p>
