@@ -505,6 +505,34 @@
 				});
 			});
 		});
+
+		Routes::group(['prefix' => '/module'], function() {
+
+				Routes::get('/', 
+					['as' => 'admin.manage.module.index'
+						, 'uses' => 'FutureLesson\Admin\ManageModuleController@index'
+						, 'middleware' => 'admin_partial'
+					]);
+
+				Routes::group(['prefix' => '/patials'], function() {
+
+					Routes::get('/list_module_form', 
+						['as' => 'admin.manage.module.partials.list_module_form'
+						, 'uses' => 'FutureLesson\Admin\ManageModuleController@list_module_form'
+						, 'middleware' => 'admin_partial'
+					]);
+
+				// 	Routes::get('/list', 
+				// 		['as' => 'admin.manage.answer.partials.list'
+				// 		, 'uses' => 'FutureLesson\Admin\ManageHelpAnswerController@list_form'
+				// 	]);
+
+				// 	Routes::get('/delete', 
+				// 		['as' => 'admin.manage.answer.partials.delete'
+				// 		, 'uses' => 'FutureLesson\Admin\ManageHelpAnswerController@delete_form'
+				// 	]);
+				});
+			});
 			
 
 		Routes::group(['prefix' => '/dashboard'], function()
