@@ -53,7 +53,7 @@
                     )
                 ) !!}
             </div>
-            <div class="col-xs-2">
+            <div class="col-xs-3">
                 <a href="" ng-click="profile.setStudentProfileActive('confirm_email')" class="edit-email">Confirm Email Address</a>
             </div>	
         </div>

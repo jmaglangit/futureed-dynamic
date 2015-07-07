@@ -442,7 +442,6 @@ form p.help-block {
 	width: 40px;
 	height: 40px;
 	margin: 10px auto;
-	cursor: pointer;
 	border-radius: 50%;
 	position: inherit;
 	z-index: 2;
@@ -450,9 +449,7 @@ form p.help-block {
 li.active .rnd-identifier{
 	background: #E85D32;
 }
-.rnd-identifier:hover{
-	background: #F99070;
-}
+
 .steps ul.items li span{
 	width: 100%;
 	display: block;
