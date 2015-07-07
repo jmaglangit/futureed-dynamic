@@ -8,6 +8,22 @@ use League\Flysystem\Exception;
 
 class QuestionRepository implements QuestionRepositoryInterface{
 
+	public function addQuestion($data){
+
+		try {
+
+			$question = Question::create($data);
+
+		} catch(Exception $e) {
+
+			return $e->getMessage();
+
+		}
+
+		return $question;
+
+	}
+
 	public function getQuestions($criteria = array(), $limit = 0, $offset = 0){
 
 		$question = new Question();
