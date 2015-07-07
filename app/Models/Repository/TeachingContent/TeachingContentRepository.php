@@ -19,17 +19,13 @@ class TeachingContentRepository implements TeachingContentRepositoryInterface{
      * @param $data
      * @return string|static
      */
-	public function addTeachingContent($data){
-
-		try{
-
-			return TeachingContent::create($data);
-
-		}catch (Exception $e){
-
-			return $e->getMessage();
-		}
-	}
+    public function addTeachingContent($data){
+        try{
+            return TeachingContent::create($data);
+        }catch (Exception $e){
+            return $e->getMessage();
+        }
+    }
 
     /**
      * Get Teaching contents.

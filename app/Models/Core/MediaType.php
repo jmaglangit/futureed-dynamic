@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class MediaType extends Model {
 
-	use SoftDeletes;
+    use SoftDeletes;
 
     protected $table = 'media_types';
 

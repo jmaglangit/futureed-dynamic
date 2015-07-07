@@ -5,7 +5,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class LearningStyle extends Model {
 
-	use SoftDeletes;
+    use SoftDeletes;
 
     protected $table = 'learning_styles';
 

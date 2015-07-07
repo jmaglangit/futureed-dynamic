@@ -7,34 +7,34 @@ class TeachingContent extends Model {
 
     use SoftDeletes;
 
-	protected $table = 'teaching_contents';
+    protected $table = 'teaching_contents';
 
-	protected $date = ['created_at','updated_at','deleted_at'];
+    protected $date = ['created_at','updated_at','deleted_at'];
 
-	protected $hidden = [
-		'created_by',
-		'updated_by',
-		'created_at',
-		'updated_at'
-	];
+    protected $hidden = [
+        'created_by',
+        'updated_by',
+        'created_at',
+        'updated_at'
+    ];
 
-	protected $fillable = [
-		'module_id',
-		'subject_id',
-		'subject_area_id',
-		'code',
-		'teaching_module',
-		'description',
-		'learning_style_id',
-		'content_url',
-		'media_type_id'
-	];
+    protected $fillable = [
+        'module_id',
+        'subject_id',
+        'subject_area_id',
+        'code',
+        'teaching_module',
+        'description',
+        'learning_style_id',
+        'content_url',
+        'media_type_id'
+    ];
 
 
-	protected $attributes = [
-		'created_by' => 1,
-		'updated_by' => 1
-	];
+    protected $attributes = [
+        'created_by' => 1,
+        'updated_by' => 1
+    ];
 
     //Relationships
 
