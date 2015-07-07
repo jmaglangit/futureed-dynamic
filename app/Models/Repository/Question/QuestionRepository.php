@@ -9,10 +9,10 @@ use League\Flysystem\Exception;
 class QuestionRepository implements QuestionRepositoryInterface{
 
 	/**
-	 *
-	 *add record to questions table
+	 * Add record in Question
+	 * @param $data
+	 * @return object
 	 */
-
 	public function addQuestion($data){
 
 		try {
@@ -29,6 +29,14 @@ class QuestionRepository implements QuestionRepositoryInterface{
 
 	}
 
+
+	/**
+	 * Gets list of Questions.
+	 * @param $criteria
+	 * @param $limit
+	 * @param $offset
+	 * @return array
+	 */
 	public function getQuestions($criteria = array(), $limit = 0, $offset = 0){
 
 		$question = new Question();
