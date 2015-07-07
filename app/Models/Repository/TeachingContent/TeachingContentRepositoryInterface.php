@@ -11,5 +11,8 @@ namespace FutureEd\Models\Repository\TeachingContent;
 
 interface TeachingContentRepositoryInterface {
 
-	public function addTeachingContent($data);
+    public function addTeachingContent($data);
+    public function getTeachingContents($criteria = [],$limit,$offset);
+    public function deleteTeachingContent($id);
+    public function updateTeachingContent($id,$data);
 }
