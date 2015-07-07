@@ -9,5 +9,37 @@ class Question extends Model {
 
 	protected $table = 'questions';
 
+	protected $dates = ['deleted_at'];
+
+	protected $hidden = [
+		'created_by',
+		'updated_by',
+		'created_at',
+		'updated_at',
+		'deleted_at'];
+
+	protected $fillable =['module_id','code','question_type','questions_text','questions_image','answer','seq_no','difficulty','points_earned'
+			     ,'status','created_by','updated_by'];
+
+	protected $attributes = [
+		'created_by' => 1,
+		'updated_by' => 1,
+	];
+
+	//-------------scopes
+	public function scopeQuestionType($query, $question_type)
+	{
+
+		return $query->where('question_type', '=', $question_type);
+
+	}
+
+	public function scopeQuestionText($query, $questions_text)
+	{
+
+		return $query->where('questions_text', 'like', '%'.$questions_text.'%');
+
+	}
+
 
 }
