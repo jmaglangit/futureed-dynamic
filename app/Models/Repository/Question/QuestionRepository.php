@@ -8,6 +8,11 @@ use League\Flysystem\Exception;
 
 class QuestionRepository implements QuestionRepositoryInterface{
 
+	/**
+	 *
+	 *add record to questions table
+	 */
+
 	public function addQuestion($data){
 
 		try {
