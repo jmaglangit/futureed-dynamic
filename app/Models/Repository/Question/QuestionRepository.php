@@ -9,7 +9,7 @@ use League\Flysystem\Exception;
 class QuestionRepository implements QuestionRepositoryInterface{
 
 	/**
-	 * Add record in Question
+	 * Add record in storage
 	 * @param $data
 	 * @return object
 	 */
