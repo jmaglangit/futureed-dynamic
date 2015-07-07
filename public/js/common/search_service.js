@@ -10,8 +10,10 @@ function SearchService() {
 
 				scope.search.area = Constants.EMPTY_STR;
 				scope.search.client_id = Constants.EMPTY_STR;
+				scope.search.country_id = Constants.EMPTY_STR;
 				scope.search.email = Constants.EMPTY_STR;
 				scope.search.help_request = Constants.EMPTY_STR;
+				scope.search.grade = Constants.EMPTY_STR;
 				scope.search.grade_id = Constants.EMPTY_STR;
 				scope.search.link_type = Constants.EMPTY_STR;
 				scope.search.module = Constants.EMPTY_STR;

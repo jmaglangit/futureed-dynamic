@@ -63,6 +63,7 @@
     {!! Html::script('/js/futureed_controllers.js') !!}
     {!! Html::script('/js/futureed_services.js') !!}
     {!! Html::script('/js/common/table_service.js') !!}
+    {!! Html::script('/js/common/search_service.js') !!}
     {!! Html::script('/js/common/filters.js') !!}
     {!! Html::script('/js/datetimepicker.js') !!}
     {!! Html::script('/js/ui-bootstrap-tpls-0.13.0.min.js') !!}
