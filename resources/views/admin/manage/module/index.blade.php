@@ -16,7 +16,7 @@
 
 			<div class="client-content" template-directive template-url="{!! route('admin.manage.module.partials.list_module_form') !!}"></div>
 			
-			{{-- <div class="client-content" template-directive template-url="{!! route('admin.manage.invoice.partials.view_invoice') !!}"></div> --}}
+			<div class="client-content" template-directive template-url="{!! route('admin.manage.module.partials.add_module_form') !!}"></div>
 		
 		</div>
 	</div>
@@ -26,6 +26,7 @@
 @section('scripts')
 	{!! Html::script('/js/admin/controllers/manage_module_controller.js')!!}
 	{!! Html::script('/js/admin/services/manage_module_service.js')!!}
+	{!! Html::script('/js/admin/constants/manage_module_constants.js')!!}
 	
 	{!! Html::script('/js/common/table_service.js')!!}
 	{!! Html::script('/js/common/search_service.js')!!}
