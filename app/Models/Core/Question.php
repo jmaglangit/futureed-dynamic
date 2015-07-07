@@ -24,6 +24,7 @@ class Question extends Model {
 	protected $attributes = [
 		'created_by' => 1,
 		'updated_by' => 1,
+		'questions_image' =>0,
 	];
 
 	//-------------scopes

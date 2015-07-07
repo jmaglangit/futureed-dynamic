@@ -115,4 +115,7 @@ return [
 	//tip_rating
 	'tip_rating' => 'rating',
 
+	//path for question uploaded images
+	'question_image_path' =>  base_path().'/public/images/upload',
+
 ];

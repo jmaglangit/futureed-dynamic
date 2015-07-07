@@ -6,6 +6,7 @@ use FutureEd\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use FutureEd\Models\Repository\Question\QuestionRepositoryInterface;
 use Illuminate\Support\Facades\Input;
+use FutureEd\Http\Requests\Api\AdminQuestionRequest;
 
 class AdminQuestionController extends ApiController {
 
@@ -50,7 +51,18 @@ class AdminQuestionController extends ApiController {
 			$offset = intval(Input::get('offset'));
 		}
 
-		return $this->respondWithData($this->question->getQuestions($criteria , $limit, $offset ));
+		$record = $this->question->getQuestions($criteria , $limit, $offset );
+
+		if($record['total'] > 0){
+
+			foreach($record['records'] as $k=>$v){
+
+				$record['records'][$k]['questions_image'] = config('futureed.question_image_path').'/'.$v['questions_image'];
+			}
+
+		}
+
+		return $this->respondWithData($record);
 	}
 
 	/**
@@ -68,15 +80,34 @@ class AdminQuestionController extends ApiController {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(AdminQuestionRequest $request)
 	{
-		//
+
+		$data =  $request->only('image','code','module_id','seq_no','questions_text','status','question_type','points_earned','difficulty');
+
+		//check if has images uploaded
+		if($data['image']){
+			//get image_name
+			$image = $_FILES['image']['name'];
+
+			//upload image file
+			$data['image']->move(config('futureed.question_image_path'), $image);
+
+			//set value for questions_images
+			$data['questions_image'] = $image;
+
+		}
+
+		$return = $this->question->addQuestion($data);
+
+		return $this->respondWithData(['id'=>$return['id']]);
+
 	}
 
 	/**
 	 * Display the specified resource.
 	 *
-	 * @param  int  $id
+	 * @param  int $id
 	 * @return Response
 	 */
 	public function show($id)
