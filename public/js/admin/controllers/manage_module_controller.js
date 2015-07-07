@@ -6,8 +6,7 @@ ManageModuleController.$inject = ['$scope', 'manageModuleService', 'apiService',
 function ManageModuleController($scope, manageModuleService, apiService, TableService, SearchService) {
 	var self = this;
 
-	self.create = {};
-	self.area_field = Constants.FALSE;
+	self.details = {};
 
 	TableService(self);
 	self.tableDefaults();
@@ -17,18 +16,35 @@ function ManageModuleController($scope, manageModuleService, apiService, TableSe
 
 	self.setActive = function(active, id) {
 		self.errors = Constants.FALSE;
+		self.create = {};
+		self.area_field = Constants.FALSE;
 
 		self.active_list = Constants.FALSE;
+		self.active_view = Constants.FALSE;
+		self.active_add = Constants.FALSE;
+		self.active_edit = Constants.FALSE;
+		self.edit = Constants.FALSE;
 
 		switch (active) {
+			case Constants.ACTIVE_EDIT:
+				self.active_edit = Constants.TRUE;
+				self.getModuleDetail(id);
+				self.edit = Constants.TRUE;
+				self.success = Constants.FALSE;
+				break;
+
+			case Constants.ACTIVE_VIEW :
+				self.active_view = Constants.TRUE;
+				self.getModuleDetail(id);
+				break;
+
 			case Constants.ACTIVE_ADD : 
 				self.active_add = Constants.TRUE;
-				self.active_list = Constants.FALSE;
 				break;
 
 			default:
 				self.active_list = Constants.TRUE;
-				self.active_add = Constants.FALSE;
+				self.success = Constants.FALSE;
 				self.list();
 				break;
 		}
@@ -74,7 +90,7 @@ function ManageModuleController($scope, manageModuleService, apiService, TableSe
 
 	self.addNewModule = function(){
 		self.errors = Constants.FALSE;
-		self.success = Constants.FALSE;
+		self.create.success = Constants.FALSE;
 		self.fields = [];
 
 		$scope.ui_block();
@@ -119,8 +135,16 @@ function ManageModuleController($scope, manageModuleService, apiService, TableSe
 		})
 	}
 
-	self.setSubject = function() {
-		self.area_field = (self.create.subject_id !='') ? Constants.TRUE:Constants.FALSE;
+	self.setSubject = function(method) {
+
+		switch (method){
+			case 'create' :
+				self.area_field = (self.create.subject_id !='') ? Constants.TRUE:Constants.FALSE;
+				break;
+			case 'edit' :
+				self.area_field = (self.details.subject_id !='') ? Constants.TRUE:Constants.FALSE;
+				break;
+		}
 	}
 
 	self.searchArea = function(method) {
@@ -129,20 +153,23 @@ function ManageModuleController($scope, manageModuleService, apiService, TableSe
 		self.validation.s_loading = Constants.TRUE;
 
 		var area = '';
+		var subject_id = '';
 
 		switch(method){
 
 			case 'edit':
 				area = self.details.area;
+				subject_id = self.details.subject.id;
 				break;
 
 			case 'create':
 			default:
 				area = self.create.area;
+				subject_id = self.create.subject_id;
 				break;
 		}
 
-		manageModuleService.searchArea(self.create.subject_id, area).success(function(response){
+		manageModuleService.searchArea(subject_id, area).success(function(response){
 			self.validation.s_loading = Constants.FALSE;
 			if(angular.equals(response.status, Constants.STATUS_OK)){
 				if(response.data) {
@@ -180,5 +207,52 @@ function ManageModuleController($scope, manageModuleService, apiService, TableSe
 		}
 
 		self.areas = Constants.FALSE;
+	}
+
+	self.getModuleDetail = function(id) {
+		self.errors = Constants.FALSE;
+
+		$scope.ui_block();
+		manageModuleService.getModuleDetail(id).success(function(response){
+			if(angular.equals(response.status,Constants.STATUS_OK)){
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.details = response.data;
+					self.details.area = self.details.subjectarea.name;
+				}
+			}
+		$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.saveModule = function(){
+		self.errors = Constants.FALSE;
+		self.fields = [];
+
+		$scope.ui_block();
+		manageModuleService.saveModule(self.details).success(function(response){
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+
+					angular.forEach(response.errors, function(value, a) {
+						self.fields[value.field] = Constants.TRUE;
+					});
+				} else if(response.data) {
+					self.validation = {};
+					self.success = Constants.TRUE;
+					self.setActive('view', self.details.id);
+	    			$("html, body").animate({ scrollTop: 0 }, "slow");
+				}
+			}
+		$scope.ui_unblock();
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		})
 	}
 }

@@ -17,6 +17,8 @@
 			<div class="client-content" template-directive template-url="{!! route('admin.manage.module.partials.list_module_form') !!}"></div>
 			
 			<div class="client-content" template-directive template-url="{!! route('admin.manage.module.partials.add_module_form') !!}"></div>
+			
+			<div class="client-content" template-directive template-url="{!! route('admin.manage.module.partials.view_module_form') !!}"></div>
 		
 		</div>
 	</div>

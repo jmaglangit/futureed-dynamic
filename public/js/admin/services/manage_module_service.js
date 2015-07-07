@@ -41,5 +41,20 @@ function manageModuleService($http) {
 		});
 	}
 
+	moduleServiceApi.getModuleDetail  = function(id) {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url 	: moduleServiceUrl + 'module/admin/' + id
+		});
+	}
+
+	moduleServiceApi.saveModule  = function(data) {
+		return $http({
+			method 	: Constants.METHOD_PUT
+			, data 	: data
+			, url 	: moduleServiceUrl + 'module/admin/' + data.id
+		});
+	}
+
 	return moduleServiceApi
 }

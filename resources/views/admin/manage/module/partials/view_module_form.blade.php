@@ -1,7 +1,7 @@
-<div ng-if="module.active_add">
+<div ng-if="module.active_view || module.active_edit">
 	<div class="content-title">
 		<div class="title-main-content">
-			<span>Add Module</span>
+			<span>View Module</span>
 		</div>
 	</div>
 	{!! Form::open(array('id'=> 'add_module_form', 'class' => 'form-horizontal')) !!}
@@ -12,20 +12,20 @@
             </p>
         </div>
 
-        <div class="alert alert-success" ng-if="module.create.success">
-        	<p>Successfully added new module.</p>
+        <div class="alert alert-success" ng-if="module.success">
+        	<p>Successfully edit module.</p>
         </div>
         <fieldset>
         	<div class="form-group">
         		<label class="control-label col-xs-2">Subject <span class="required">*</span></label>
         		<div class="col-xs-4" ng-init="module.getSubject()">
-	        		<select  name="subject_id" class="form-control" name="subject_id" ng-model="module.create.subject_id" ng-change="module.setSubject('create')" ng-class="{'required-field' : module.fields['subject_id']}">
-		          		<option value="">-- Select Subject --</option>
-		          		<option ng-repeat="subject in module.subjects" ng-value="subject.id">{! subject.name!}</option>
+	        		<select ng-disabled="!module.edit" name="subject_id" class="form-control" name="subject_id" ng-model="module.details.subject_id" ng-change="module.setSubject('edit')" ng-class="{'required-field' : module.fields['subject_id']}">
+		          		<option ng-selected="module.details.subject.id == futureed.FALSE" value="">-- Select Subject --</option>
+		          		<option ng-selected="module.details.subject.name == subject.name" ng-repeat="subject in module.subjects" ng-value="subject.id">{! subject.name!}</option>
 	        		</select>
         		</div>
         		<label class="col-xs-2 control-label">Status <span class="required">*</span></label>
-        		<div class="col-xs-4">
+        		<div class="col-xs-4" ng-if="module.active_edit">
         			<div class="col-xs-6 checkbox">	                				
         				<label>
         					{!! Form::radio('status'
@@ -33,7 +33,7 @@
         						, true
         						, array(
         							'class' => 'field'
-        							, 'ng-model' => 'module.create.status'
+        							, 'ng-model' => 'module.details.status'
         						) 
         					) !!}
         				<span class="lbl padding-8">Enabled</span>
@@ -46,13 +46,26 @@
         						, false
         						, array(
         							'class' => 'field'
-        							, 'ng-model' => 'module.create.status'
+        							, 'ng-model' => 'module.details.status'
         						)
         					) !!}
         				<span class="lbl padding-8">Disabled</span>
         				</label>
         			</div>
         		</div>
+                <div class="col-xs-4" ng-if="module.active_view">
+                    <label class="col-md-5" ng-if="module.details.status == 'Enabled'">
+                        <b class="success-icon">
+                            <i class="margin-top-8 fa fa-check-circle-o"></i> {! module.details.status !}
+                        </b>
+                    </label>
+
+                    <label class="col-md-5" ng-if="module.details.status == 'Disabled'">
+                        <b class="error-icon">
+                            <i class="margin-top-8 fa fa-ban"></i> {! module.details.status !}
+                        </b>
+                    </label>
+                </div>
         	</div>
         	<div class="form-group">
         		<label class="control-label col-xs-2">Area <span class="required">*</span></label>
@@ -60,10 +73,10 @@
         			{!! Form::text('area',''
         				, array(
         					'placeHolder' => 'Area'
-        					, 'ng-model' => 'module.create.area'
-        					, 'ng-disabled' => '!module.area_field'
+        					, 'ng-model' => 'module.details.area'
+        					, 'ng-disabled' => '!module.area_field || !module.edit'
         					, 'class' => 'form-control'
-        					, 'ng-change' => "module.searchArea('create')"
+        					, 'ng-change' => "module.searchArea('edit')"
 	        				, 'ng-class' => "{ 'required-field' : module.fields['subject_area_id'] }"
                         	, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
         				)
@@ -82,26 +95,14 @@
         		</div>
         	</div>
         	<div class="form-group">
-        		<label class="control-label col-xs-2">Code <span class="required">*</span></label>
-        		<div class="col-xs-4">
-        			{!! Form::text('code',''
-        				, array(
-        					'placeHolder' => 'Code'
-        					, 'ng-model' => 'module.create.code'
-        					, 'class' => 'form-control'
-        					, 'ng-class' => "{ 'required-field' : module.fields['code'] }"
-        				)
-        			) !!}
-        		</div>
-        	</div>
-        	<div class="form-group">
         		<label class="control-label col-xs-2">Module <span class="required">*</span></label>
         		<div class="col-xs-4">
         			{!! Form::text('module',''
         				, array(
         					'placeHolder' => 'Module'
-        					, 'ng-model' => 'module.create.name'
+        					, 'ng-model' => 'module.details.name'
         					, 'class' => 'form-control'
+                            , 'ng-disabled' => '!module.edit'
         					, 'ng-class' => "{ 'required-field' : module.fields['name'] }"
         				)
         			) !!}
@@ -111,8 +112,9 @@
         			{!! Form::text('points_to_unlock',''
         				, array(
         					'placeHolder' => 'Points to Unlock'
-        					, 'ng-model' => 'module.create.points_to_unlock'
+        					, 'ng-model' => 'module.details.points_to_unlock'
         					, 'class' => 'form-control'
+                            , 'ng-disabled' => '!module.edit'
         					, 'ng-class' => "{ 'required-field' : module.fields['points_to_unlock'] }"
         				)
         			) !!}
@@ -124,9 +126,10 @@
         			{!! Form::textarea('description',''
         				, array(
         					'placeHolder' => 'Description'
-        					, 'ng-model' => 'module.create.description'
+        					, 'ng-model' => 'module.details.description'
         					, 'class' => 'form-control'
         					, 'style' => 'resize:vertical'
+                            , 'ng-disabled' => '!module.edit'
         					, 'ng-class' => "{ 'required-field' : module.fields['description'] }"
         				)
         			) !!}
@@ -136,8 +139,9 @@
         			{!! Form::text('points_to_finish',''
         				, array(
         					'placeHolder' => 'Points to Finish'
-        					, 'ng-model' => 'module.create.points_to_finish'
+        					, 'ng-model' => 'module.details.points_to_finish'
         					, 'class' => 'form-control'
+                            , 'ng-disabled' => '!module.edit'
         					, 'ng-class' => "{ 'required-field' : module.fields['points_to_finish'] }"
         				)
         			) !!}
@@ -149,8 +153,9 @@
         			{!! Form::text('common_core_area',''
         				, array(
         					'placeHolder' => 'Common Core Area'
-        					, 'ng-model' => 'module.create.common_core_area'
+        					, 'ng-model' => 'module.details.common_core_area'
         					, 'class' => 'form-control'
+                            , 'ng-disabled' => '!module.edit'
         					, 'ng-class' => "{ 'required-field' : module.fields['common_core_area'] }"
         				)
         			) !!}
@@ -160,8 +165,9 @@
         			{!! Form::text('common_core_url',''
         				, array(
         					'placeHolder' => 'Common Core URL'
-        					, 'ng-model' => 'module.create.common_core_url'
+        					, 'ng-model' => 'module.details.common_core_url'
         					, 'class' => 'form-control'
+                            , 'ng-disabled' => '!module.edit'
         					, 'ng-class' => "{ 'required-field' : module.fields['common_core_url'] }"
         				)
         			) !!}
@@ -173,16 +179,32 @@
         		{!! Form::button('Save'
 	        		, array(
 	        			'class' => 'btn btn-blue btn-medium'
-	        			, 'ng-click' => 'module.addNewModule()'
+                        , 'ng-if' => 'module.active_edit'
+	        			, 'ng-click' => 'module.saveModule()'
 	        		)
 	        	) !!}
+                {!! Form::button('Edit'
+                    , array(
+                        'class' => 'btn btn-blue btn-medium'
+                        , 'ng-if' => 'module.active_view'
+                        , 'ng-click' => "module.setActive('edit', module.details.id)"
+                    )
+                ) !!}
 
 	        	{!! Form::button('Cancel'
 	        		, array(
 	        			'class' => 'btn btn-gold btn-medium'
 	        			, 'ng-click' => 'module.setActive()'
+                        , 'ng-if' => 'module.active_view'
 	        		)
 	        	) !!}
+                {!! Form::button('Cancel'
+                    , array(
+                        'class' => 'btn btn-gold btn-medium'
+                        , 'ng-click' => "module.setActive('view', module.details.id)"
+                        , 'ng-if' => 'module.active_edit'
+                    )
+                ) !!}
         	</div>
         </div>
 	</div>

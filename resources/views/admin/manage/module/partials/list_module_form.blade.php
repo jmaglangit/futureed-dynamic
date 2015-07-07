@@ -137,10 +137,10 @@
 			            <td ng-if="module.records.length">
 			            	<div class="row">
 			            		<div class="col-xs-4">
-			            			<a href="" ng-click="module.details(moduleInfo.id, futureed.ACTIVE_VIEW)"><span><i class="fa fa-eye"></i></span></a>
+			            			<a href="" ng-click="module.setActive(futureed.ACTIVE_VIEW, moduleInfo.id)"><span><i class="fa fa-eye"></i></span></a>
 			            		</div>
 			            		<div class="col-xs-4">
-			            			<a href="" ng-click="module.details(moduleInfo.id, futureed.ACTIVE_EDIT)"><span><i class="fa fa-pencil"></i></span></a>
+			            			<a href="" ng-click="module.setActive(futureed.ACTIVE_EDIT, moduleInfo.id)"><span><i class="fa fa-pencil"></i></span></a>
 			            		</div>
 			            		<div class="col-xs-4">
 			            			<a href="" ng-click="module.details(moduleInfo.id, futureed.ACTIVE_EDIT)"><span><i class="fa fa-trash"></i></span></a>
