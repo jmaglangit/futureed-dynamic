@@ -18,6 +18,20 @@ function StudentTipsService($http){
 		});
 	}
 
+	service.detail = function(id) {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url 	: serviceUrl + 'tip/student/' + id
+		});
+	}
+
+	service.rate = function(data) {
+		return $http({
+			method 	: Constants.METHOD_POST
+			, data  : data
+			, url 	: serviceUrl + 'tip-rating /student'
+		});
+	}
 
 	return service;
 }

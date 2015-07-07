@@ -35,6 +35,7 @@ Routes::group(['prefix' => 'api/v1'], function()
     include('Routes/Api/HelpRequestAnswerRating.php');
     include('Routes/Api/Invoice.php');
     include('Routes/Api/Module.php');
+    include('Routes/Api/ModuleGroup.php');
     include('Routes/Api/Order.php');
     include('Routes/Api/OrderDetail.php');
     include('Routes/Api/Payment.php');
@@ -44,6 +45,7 @@ Routes::group(['prefix' => 'api/v1'], function()
     include('Routes/Api/Subject.php');
     include('Routes/Api/SubjectArea.php');
     include('Routes/Api/Subscription.php');
+    include('Routes/Api/TeachingContent.php');
     include('Routes/Api/Tip.php');
     include('Routes/Api/TipRating.php');
     include('Routes/Api/User.php');

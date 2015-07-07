@@ -1,5 +1,11 @@
 <div ng-if="tips.active_view || tips.active_edit">
-	<div class="col-xs-12" ng-if="tips.errors || tips.success">
+	<div class="content-title">
+		<div class="title-main-content">
+			<span>Tip Details</span>
+		</div>
+	</div>
+
+	<div class="col-xs-12 success-container" ng-if="tips.errors || tips.success">
 		<div class="alert alert-error" ng-if="tips.errors">
 			<p ng-repeat="error in tips.errors track by $index">
 				{! error !}
@@ -10,221 +16,85 @@
             <p>{! tips.success !}</p>
         </div>
     </div>
-
-	<div class="module-container">
-		<div class="title-main-content">
-			<span>Tip Details</span>
-		</div>
-	</div>
 	
-	<div class="form-content col-xs-12">
-		{!! Form::open([
-				'id' => 'add_admin_form',
-				'class' => 'form-horizontal'
-			]) 
-		!!}
-			<fieldset>
-				<div class="form-group">
-					<label class="col-xs-2 control-label" id="username">Module <span class="required">*</span></label>
-					<div class="col-xs-4">
-						{!! Form::text('username', '',
-							[
-								'placeholder' => 'Module',
-								'ng-disabled' => 'true',
-								'ng-model' => 'tips.record.module',
-								'class' => 'form-control'
-							]
-						) !!}
-					</div>
-					<label class="col-xs-2 control-label" id="email">Displayed At <span class="required">*</span></label>
-					<div class="col-xs-4">
-						{!! Form::select('link_type'
-							, array(
-								'' => '-- Select Type --'
-								, 'General' => 'General'
-								, 'Content' => 'Content'
-								, 'Question' => 'Question'
-							)
-							, ''
-							, array(
-								'class' => 'form-control'
-								, 'ng-model' => 'tips.record.link_type'
-								, 'ng-disabled' => 'tips.active_view'
-								, 'ng-class' => "{ 'required-field' : tips.fields['link_type'] }"
-							)
-						) !!}
-					</div>
+	<div class="form-content">
+		<div class="col-xs-12">
+			<div class="col-xs-6">
+				<h3>{! tips.record.title !}</h3>
+				<p>{! tips.record.created_moment !}</p>
+			</div>
+
+			<div class="col-xs-6 pull-right">
+				<div class="col-xs-3 avatar-container-small">
+					<img class="pull-left" ng-src="{! tips.record.avatar_url !}" />
 				</div>
-				<div class="form-group">
-					<label class="col-xs-2 control-label">Subject <span class="required">*</span></label>
-					<div class="col-xs-4">
-						{!! Form::text('subject', '',
-							[
-								'placeholder' => 'Subject',
-								'ng-disabled' => 'true',
-								'ng-model' => 'tips.record.subject',
-								'class' => 'form-control'
-							]
-						) !!}
-					</div>
-					<label class="col-xs-2 control-label">Area <span class="required">*</span></label>
-					<div class="col-xs-4">
-						{!! Form::text('area', '',
-							[
-								'placeholder' => 'Area',
-								'ng-disabled' => 'true',
-								'ng-model' => 'tips.record.area',
-								'class' => 'form-control'
-							]
-						) !!}
-					</div>
+				<div class="avatar-name-container col-xs-6"> {! tips.record.name !} </div>
+			</div>
+		</div>
+
+		<div class="col-xs-12">
+			<hr />
+		</div>
+
+		<div class="col-xs-12">
+			<div class="col-xs-12">
+				<p class="text-container">{! tips.record.content !}</p>
+			</div>
+		</div>
+
+		<div class="col-xs-12">
+			<div class="col-xs-6"></div>
+			<div class="col-xs-6">
+				<p ng-if="!tips.record.rating">Was the answer helpful? Please Rate.</p>
+				<p ng-if="tips.record.rating">You rated this: </p>
+			</div>
+		</div>
+
+		<div class="col-xs-12" ng-cloak>
+			<div class="col-xs-6"></div>
+			<div class="col-xs-6">
+				<div class="col-xs-6 rating-container">
+					<span ng-repeat="i in tips.record.stars track by $index">
+						<img ng-if="!tips.record.rating" ng-mouseover="tips.changeColor($index)" ng-src="{! ($index+1 <= tips.record.rating || tips.hovered[$index])  && '/images/class-student/icon-star_yellow.png' || '/images/class-student/icon-star_white.png' !}" />
+						<img ng-if="tips.record.rating" ng-src="{! $index+1 <= tips.record.rating && '/images/class-student/icon-star_yellow.png' || '/images/class-student/icon-star_white.png' !}" />
+					</span>
 				</div>
-				<div class="form-group">
-	        		<label class="col-xs-2 control-label">Status <span class="required">*</span></label>
-	        		<div class="col-xs-4" ng-if="tips.active_edit">
-	        			<div class="col-xs-6 checkbox">	                				
-	        				<label>
-	        					{!! Form::radio('status'
-	        						, 'Enabled'
-	        						, true
-	        						, array(
-	        							'class' => 'field'
-	        							, 'ng-model' => 'tips.record.status'
-	        						) 
-	        					) !!}
-	        				<span class="lbl padding-8">Enable</span>
-	        				</label>
-	        			</div>
-	        			<div class="col-xs-6 checkbox">
-	        				<label>
-	        					{!! Form::radio('status'
-	        						, 'Disabled'
-	        						, false
-	        						, array(
-	        							'class' => 'field'
-	        							, 'ng-model' => 'tips.record.status'
-	        						)
-	        					) !!}
-	        				<span class="lbl padding-8">Disable</span>
-	        				</label>
-	        			</div>
-	        		</div>
-	        		<div ng-if="tips.active_view">
-		        		<label class="col-xs-4" ng-if="tips.record.status == 'Enabled'">
-		        			<b class="success-icon">
-		        				<i class="margin-top-8 fa fa-check-circle-o"></i> {! tips.record.status !}
-		        			</b>
-		        		</label>
+				<div class="col-xs-6">
+					{!! Form::button('Rate'
+						, array(
+							'class' => 'btn btn-blue pull-right'
+							, 'ng-click' => "tips.selectRate()"
+							, 'ng-if' => '!tips.record.rating'
+							, 'ng-disabled' => '!tips.hovered.length'
+						)
+					) !!}
 
-		        		<label class="col-xs-4" ng-if="tips.record.status == 'Disabled'">
-		        			<b class="error-icon">
-		        				<i class="margin-top-8 fa fa-ban"></i> {! tips.record.status !}
-		        			</b>
-		        		</label>
-	        		</div>
-
-	        		<label class="col-xs-2 control-label">Tip Status <span class="required">*</span></label>
-	        		<div>
-		        		<label class="col-xs-4" ng-if="tips.record.tip_status == 'Accepted'">
-		        			<b class="success-icon">
-		        				<i class="margin-top-8 fa fa-check-circle-o"></i> {! tips.record.tip_status !}
-		        			</b>
-		        		</label>
-
-		        		<label class="col-xs-4" ng-if="tips.record.tip_status == 'Pending'">
-		        			<b class="warning-icon">
-		        				<i class="margin-top-8 fa fa-exclamation-circle"></i> {! tips.record.tip_status !}
-		        			</b>
-		        		</label>
-
-		        		<label class="col-xs-4" ng-if="tips.record.tip_status == 'Rejected'">
-		        			<b class="error-icon">
-		        				<i class="margin-top-8 fa fa-ban"></i> {! tips.record.tip_status !}
-		        			</b>
-		        		</label>
-	        		</div>
-	        	</div>
-	        	<div class="form-group" ng-if="tips.record.tip_status == 'Pending' && tips.active_view">
-	        		<div class="btn-container col-xs-8 col-xs-offset-2">
-						{!! Form::button('Accept'
-							, array(
-								'class' => 'btn btn-blue btn-medium'
-								, 'ng-click' => "tips.acceptTip()"
-							)
-						) !!}
-
-						{!! Form::button('Reject'
-							, array(
-								'class' => 'btn btn-gold btn-medium'
-								, 'ng-click' => "tips.rejectTip()"
-							)
-						) !!}		
-					</div>
-	        	</div>
-			</fieldset>
-			<fieldset>
-				<legend class="legend-name-mid">
-					Tip Content
-				</legend>
-				<div class="form-group">
-					<label class="col-xs-3 control-label">Title <span class="required">*</span></label>
-					<div class="col-xs-6">
-						{!! Form::text('title', '',
-							[
-								'class' => 'form-control'
-								, 'ng-disabled' => 'tips.active_view'
-								, 'ng-model' => 'tips.record.title'
-								, 'placeholder' => 'Title'
-								, 'ng-class' => "{ 'required-field' : tips.fields['title'] }"
-							]
-						) !!}
-					</div>
+					{!! Form::button('Cancel'
+						, array(
+							'class' => 'btn btn-gold pull-right'
+							, 'ng-click' => "tips.setActive()"
+							, 'ng-if' => 'tips.record.rating'
+						)
+					) !!}
 				</div>
-				<div class="form-group">
-					<label class="col-xs-3 control-label">Description <span class="required">*</span></label>
-					<div class="col-xs-6">
-						{!! Form::textarea('content','',
-							[
-								'class' => 'form-control'
-								, 'ng-disabled' => 'tips.active_view'
-								, 'ng-model' => 'tips.record.content'
-								, 'placeholder' => 'Description'
-								, 'ng-class' => "{ 'required-field' : tips.fields['content'] }"
-							]
-						) !!}
-					</div>
-				</div>
-				<div class="btn-container col-xs-8 col-xs-offset-2" ng-if="tips.active_edit">
-						{!! Form::button('Save'
-							, array(
-								'class' => 'btn btn-blue btn-medium'
-								, 'ng-click' => "tips.updateTip()"
-							)
-						) !!}
+			</div>
+		</div>
 
-						{!! Form::button('Cancel'
-							, array(
-								'class' => 'btn btn-gold btn-medium'
-								, 'ng-click' => "tips.setActive(futureed.ACTIVE_VIEW, tips.record.id)"
-							)
-						) !!}
-				</div>	
-				<div class="btn-container col-xs-8 col-xs-offset-2" ng-if="tips.active_view">
-						{!! Form::button('Edit'
-							, array(
-								'class' => 'btn btn-blue btn-medium'
-								, 'ng-click' => "tips.setActive(futureed.ACTIVE_EDIT, tips.record.id)"
-							)
-						) !!}
+		<br />
+	</div>
 
-						{!! Form::button('Cancel'
-							, array(
-								'class' => 'btn btn-gold btn-medium'
-								, 'ng-click' => "tips.setActive()"
-							)
-						) !!}		
-				</div>
-			</fieldset>
-		{!! Form::close() !!}
+	<div class="sticky-bottom col-xs-12" ng-if="!tips.record.rating" ng-cloak>
+		<div class="col-xs-6"></div>
+		<div class="col-xs-6">
+			<div class="col-xs-6"></div>
+			<div class="col-xs-6">
+				{!! Form::button('Cancel'
+					, array(
+						'class' => 'btn btn-gold pull-right'
+						, 'ng-click' => "tips.setActive()"
+					)
+				) !!}
+			</div>
+		</div>
 	</div>
 </div>
