@@ -1,6 +1,7 @@
 <div class="col-md-6 col-md-offset-3" ng-init="linked={!! $success !!}" ng-if="success" ng-cloak>
 	<div class="form-style form-select-password">
-		<div class="title">Thank you for registering to Future Lesson!</div>
+		<div class="title" ng-if="!linked">Thank you for registering to Future Lesson!</div>
+		<div class="title" ng-if="linked">Confirm Your Email Address</div>
 		
 		<div class="alert alert-danger" ng-if="errors">
           <p ng-repeat="error in errors" > 
@@ -27,7 +28,7 @@
 	        	</div>
 
         		<p class="text" >
-	        		Please enter the confirmation code to create your new picture password.
+	        		Please enter the confirmation code to verify your email address and to setup your new picture password.
 	        	</p>
         	</div>
 
