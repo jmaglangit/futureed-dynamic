@@ -13,7 +13,6 @@ function ManageModuleController($scope, manageModuleService, apiService, TableSe
 	self.searchDefaults();
 
 	self.setActive = function(active, id) {
-		console.log(active)
 		self.errors = Constants.FALSE;
 
 		self.active_list = Constants.FALSE;
