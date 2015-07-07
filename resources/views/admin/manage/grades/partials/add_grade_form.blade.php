@@ -25,7 +25,7 @@
 	        				, array(
 	        					'placeHolder' => 'Grade Code'
 	        					, 'ng-model' => 'grade.create.code'
-	        					, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
+	        					, 'ng-class' => "{ 'required-field' : grade.fields['code'] }"
 	        					, 'class' => 'form-control'
 	        				)
 	        			) !!}
@@ -38,6 +38,7 @@
 	        				, array(
 	        					'placeHolder' => 'Grade Name'
 	        					, 'ng-model' => 'grade.create.name'
+	        					, 'ng-class' => "{ 'required-field' : grade.fields['name'] }"
 	        					, 'class' => 'form-control'
 	        				)
 	        			) !!}
@@ -50,9 +51,18 @@
 	        		</div>
 	        	</div>
 	        	<div class="form-group">
+	        		<label class="col-md-2 control-label"> Group <span class="required">*</span></label>
+		      		<div class="col-md-5" ng-init="grade.getAgeGroup()">
+		        		<select  name="age_group_id" class="form-control" ng-class="{ 'required-field' : grade.fields['age_group_id'] }" ng-disabled="!grade.ageGroup.length" ng-model="grade.create.age_group_id">
+			          		<option value="">-- Select Age Group --</option>
+			          		<option ng-repeat="age in grade.ageGroup" ng-value="age.id"> {! age.name!} </option>
+		        		</select>
+		      		</div>
+		      	</div>
+	        	<div class="form-group">
 	        		<label class="col-md-2 control-label">Country <span class="required">*</span></label>
 		      		<div class="col-md-5" ng-init="getCountries()">
-		        		<select  name="country_id" class="form-control" ng-model="grade.create.country_id">
+		        		<select  name="country_id" class="form-control" ng-class="{ 'required-field' : grade.fields['country_id'] }" ng-model="grade.create.country_id">
 			          		<option value="">-- Select Country --</option>
 			          		<option ng-repeat="country in countries" ng-value="country.id">{! country.name!}</option>
 		        		</select>
@@ -101,7 +111,7 @@
 	        	{!! Form::button('Cancel'
 	        		, array(
 	        			'class' => 'btn btn-gold btn-medium'
-	        			, 'ng-click' => 'grade.setManageGradeActive()'
+	        			, 'ng-click' => 'grade.setActive()'
 	        		)
 	        	) !!}
 		     </div>
