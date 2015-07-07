@@ -522,15 +522,15 @@
 						, 'middleware' => 'admin_partial'
 					]);
 
-				// 	Routes::get('/list', 
-				// 		['as' => 'admin.manage.answer.partials.list'
-				// 		, 'uses' => 'FutureLesson\Admin\ManageHelpAnswerController@list_form'
-				// 	]);
+					Routes::get('/add_module_form', 
+						['as' => 'admin.manage.module.partials.add_module_form'
+						, 'uses' => 'FutureLesson\Admin\ManageModuleController@add_module_form'
+					]);
 
-				// 	Routes::get('/delete', 
-				// 		['as' => 'admin.manage.answer.partials.delete'
-				// 		, 'uses' => 'FutureLesson\Admin\ManageHelpAnswerController@delete_form'
-				// 	]);
+					Routes::get('/view_module_form', 
+						['as' => 'admin.manage.module.partials.view_module_form'
+						, 'uses' => 'FutureLesson\Admin\ManageModuleController@view_module_form'
+					]);
 				});
 			});
 			
