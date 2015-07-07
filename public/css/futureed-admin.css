@@ -211,6 +211,10 @@ table#client-list{
 	margin-top: 150px;
 }
 
+.center-err {
+	text-align: center;
+}
+
 input[type="checkbox"],
 input[type="radio"] {
   box-sizing: border-box; /* 1 */

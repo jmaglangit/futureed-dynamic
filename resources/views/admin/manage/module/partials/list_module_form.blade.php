@@ -85,6 +85,10 @@
 			{!! Form::close() !!}
 		</div>
 	</div>
+	<div class="clearfix"></div>
+	<button class="btn btn-blue btn-small margin-0-30" ng-click="module.setActive('add')">
+		<i class="fa fa-plus-square"></i> Add Module
+	</button>
 
 	<div class="module-container">
 		<div class="title-mid">
@@ -110,7 +114,7 @@
 		</div>
 	</div>
 
-	<div class="col-xs-12 table-container" ng-init="module.list()">
+	<div class="col-xs-12 table-container">
 		<div class="list-container" ng-cloak>
 			<table id="module-list" class="table table-striped table-bordered">
 				<thead>
@@ -127,8 +131,8 @@
 			        <tr ng-repeat="moduleInfo in module.records">
 			            <td>{! moduleInfo.name !}</td>
 			            <td>{! moduleInfo.description !}</td>
-			            <td>{! moduleInfo.subject !}</td>
-			            <td>{! moduleInfo.subjectarea !}</td>
+			            <td>{! moduleInfo.subject.name !}</td>
+			            <td>{! moduleInfo.subjectarea.name !}</td>
 			            <td>{! moduleInfo.grade.name !}</td>
 			            <td ng-if="module.records.length">
 			            	<div class="row">
