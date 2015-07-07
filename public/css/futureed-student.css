@@ -31,7 +31,6 @@
     -o-transition: ease 1s;
     transition: ease 1s;
     left: 0px;
-    
 }
 
 .div-out {
@@ -60,8 +59,9 @@
 }
 
 .sidebar-toggle {
-	margin-top: 59px;
-	position: fixed;
+	position: absolute;
+    top:59px;
+	z-index: 9999;
 }
 
 .student-class {
