@@ -189,7 +189,6 @@ function ManageHelpAnswerController($scope, ManageHelpAnswerService, TableServic
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
-					console.log(response.data);
 					self.success = data.message;
 					self.setActive(Constants.ACTIVE_VIEW, response.data.id);
 				}
