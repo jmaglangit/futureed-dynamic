@@ -77,4 +77,19 @@ class QuestionRepository implements QuestionRepositoryInterface{
 		return ['total' => $count, 'records' => $question->get()->toArray()];
 
 	}
+
+	/**
+	 * Get a record on Question.
+	 * @param $id
+	 * @return mixed
+	 */
+	public function viewQuestion($id){
+
+		$question = new Question();
+
+		$question = $question->with('module');
+		$question = $question->find($id);
+		return $question;
+
+	}
 }

@@ -20,4 +20,11 @@ interface QuestionRepositoryInterface {
 	 */
 	public function getQuestions($criteria = array(), $limit = 0, $offset = 0);
 
+	/**
+	 * Get a record on Question.
+	 * @param $id
+	 * @return mixed
+	 */
+	public function viewQuestion($id);
+
 }

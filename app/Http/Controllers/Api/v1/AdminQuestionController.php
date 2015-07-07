@@ -112,7 +112,16 @@ class AdminQuestionController extends ApiController {
 	 */
 	public function show($id)
 	{
-		//
+		$question = $this->question->viewQuestion($id);
+
+		if(!$question){
+
+			return $this->respondErrorMessage(2120);
+		}
+
+		$question->questions_image = config('futureed.question_image_path').'/'.$question->questions_image;
+
+		return $this->respondWithData($question);
 	}
 
 	/**
