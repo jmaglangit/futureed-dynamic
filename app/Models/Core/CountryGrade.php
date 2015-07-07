@@ -30,4 +30,13 @@ class CountryGrade extends Model {
 		'updated_by' => 1
 	];
 
+
+	//Scopes
+	public function scopeGradeId($query, $grade_id){
+
+		return $query->where('grade_id',$grade_id);
+	}
+
+
+
 }
