@@ -27,6 +27,11 @@ class Question extends Model {
 		'questions_image' =>0,
 	];
 
+	//-------------relationships
+	public function module() {
+		return $this->belongsTo('FutureEd\Models\Core\Module')->with('subject','subjectArea');
+	}
+
 	//-------------scopes
 	public function scopeQuestionType($query, $question_type)
 	{
