@@ -107,7 +107,7 @@ class AdminQuestionController extends ApiController {
 	/**
 	 * Display the specified resource.
 	 *
-	 * @param  int  $idajax-loader.gif
+	 * @param  int $id
 	 * @return Response
 	 */
 	public function show($id)
