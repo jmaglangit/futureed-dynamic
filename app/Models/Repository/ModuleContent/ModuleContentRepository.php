@@ -26,6 +26,11 @@ class ModuleContentRepository implements ModuleContentRepositoryInterface{
 		return ModuleContent::find($id);
 	}
 
+	/**
+	 * Get Module Content by content_id.
+	 * @param $content_id
+	 * @return mixed
+	 */
 	public function getModuleContentByTeachingContent($content_id){
 
 		return ModuleContent::contentId($content_id)
@@ -70,6 +75,12 @@ class ModuleContentRepository implements ModuleContentRepositoryInterface{
 		}
 	}
 
+	/**
+	 * Update Module Content by content_id.
+	 * @param $content_id
+	 * @param $data
+	 * @return ModuleContentRepository|\Illuminate\Support\Collection|null|string|static
+	 */
 	public function updateModuleContentByTeachingContent($content_id, $data){
 
 		try{
