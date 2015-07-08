@@ -17,7 +17,7 @@ class QuestionAnswerRepository implements QuestionAnswerRepositoryInterface{
 
 		try {
 
-			$question = QuestionAnswer::create($data);
+			$question_answer = QuestionAnswer::create($data);
 
 		} catch(Exception $e) {
 
@@ -25,7 +25,50 @@ class QuestionAnswerRepository implements QuestionAnswerRepositoryInterface{
 
 		}
 
-		return $question;
+		return $question_answer;
+
+	}
+
+	/**
+	 * Gets list of QuestionAnswers.
+	 * @param $criteria
+	 * @param $limit
+	 * @param $offset
+	 * @return array
+	 */
+	public function getQuestionAnswers($criteria = array(), $limit = 0, $offset = 0){
+
+		$question_answer = new QuestionAnswer();
+
+		$count = 0;
+
+		if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
+
+			$count = $question_answer->count();
+
+		} else {
+
+
+			if (count($criteria) > 0) {
+
+				//for question_id
+				if(isset($criteria['question_id'])) {
+
+					$question_answer = $question_answer->questionId($criteria['question_id']);
+
+				}
+
+			}
+
+			$count = $question_answer->count();
+
+			if ($limit > 0 && $offset >= 0) {
+				$question_answer = $question_answer->offset($offset)->limit($limit);
+			}
+
+		}
+
+		return ['total' => $count, 'records' => $question_answer->get()->toArray()];
 
 	}
 }

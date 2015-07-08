@@ -4,6 +4,7 @@ use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 use FutureEd\Models\Repository\QuestionAnswer\QuestionAnswerRepositoryInterface;
 use FutureEd\Http\Requests\Api\AdminQuestionAnswerRequest;
+use Illuminate\Support\Facades\Input;
 
 use Illuminate\Http\Request;
 
@@ -24,7 +25,38 @@ class AdminQuestionAnswerController extends ApiController {
 	 */
 	public function index()
 	{
-		//
+		$criteria = [];
+		$limit = 0 ;
+		$offset = 0;
+
+		//for tip_status
+		if(Input::get('question_id')){
+
+			$criteria['question_id'] = Input::get('question_id');
+		}
+
+		if(Input::get('limit')) {
+			$limit = intval(Input::get('limit'));
+		}
+
+		if(Input::get('offset')) {
+			$offset = intval(Input::get('offset'));
+		}
+
+		$record = $this->question_answer->getQuestionAnswers($criteria , $limit, $offset );
+
+		if($record['total'] > 0){
+
+			foreach($record['records'] as $k=>$v){
+
+				$record['records'][$k]['questions_image'] = config('futureed.question_answer_image_path').'/'.$v['answer_image'];
+			}
+
+		}
+
+		return $this->respondWithData($record);
+		
+
 	}
 
 	/**
