@@ -1021,7 +1021,7 @@ div > .btncon > a {
 }
 
 .modal-body {
-	max-height: 650px;
+	max-height: 500px;
   	overflow: scroll;
 }
 
