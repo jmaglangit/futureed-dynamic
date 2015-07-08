@@ -22,6 +22,21 @@ function ManageAgeGroupService($http) {
 		});
 	}
 
+	ageGroupServiceApi.getAgeGroupDetail = function(id) {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url 	: ageGroupServiceUrl + 'module-group/' + id
+		});
+	}
+
+	ageGroupServiceApi.saveAgeGroup  = function(data) {
+		return $http({
+			method 	: Constants.METHOD_PUT
+			, data 	: data
+			, url 	: ageGroupServiceUrl + 'module-group/' + data.id
+		});
+	}
+
 	return ageGroupServiceApi;
 
 }

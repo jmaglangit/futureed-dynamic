@@ -549,9 +549,9 @@
 						, 'uses' => 'FutureLesson\Admin\ManageAgeGroupController@add_view_form'
 					]);
 
-					Routes::get('/edit_module_form', 
-						['as' => 'admin.manage.age_group.partials.edit_module_form'
-						, 'uses' => 'FutureLesson\Admin\ManageAgeGroupController@edit_module_form'
+					Routes::get('/edit_view_form', 
+						['as' => 'admin.manage.age_group.partials.edit_view_form'
+						, 'uses' => 'FutureLesson\Admin\ManageAgeGroupController@edit_view_form'
 					]);
 				});
 			});
