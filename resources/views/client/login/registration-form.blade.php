@@ -256,7 +256,7 @@
 			<div class="form-group">
 				<div class="checkbox text-center">
 					<label>
-						{!! Form::checkbox('terms', 1, null, array('ng-model' => 'terms')) !!}
+						{!! Form::checkbox('terms', 1, null, array('ng-model' => 'register.terms')) !!}
 
 						I agree on the 
 

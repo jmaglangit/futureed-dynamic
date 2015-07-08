@@ -38,7 +38,10 @@
             </li>
 
             <li>
-                <a href="{!! route('admin.manage.grades.index') !!}" ng-init="grade.setManageGradeActive()"><span><i class="fa fa-book"></i>Grades</span></a>
+                <a href="{!! route('admin.manage.grades.index') !!}" ng-init="grade.setActive()"><span><i class="fa fa-book"></i>Grades</span></a>
+            </li>
+            <li>
+                <a href="{!! route('admin.manage.module.index') !!}" ng-init="module.setManageModuleActive()"><span><i class="fa fa-cubes"></i>Module</span></a>
             </li>
         </ul> 
 

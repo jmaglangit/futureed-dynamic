@@ -245,6 +245,12 @@ var services = angular.module('futureed.services', []);
 			});
 		}
 
+		futureedAPI.getAgeGroup = function() {
+			return $http({
+				method 	: Constants.METHOD_GET
+				, url	: futureedAPIUrl + 'age-group'
+			});
+		}
 
 		return futureedAPI;
 	});

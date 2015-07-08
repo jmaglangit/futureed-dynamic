@@ -163,11 +163,11 @@ class AppServiceProvider extends ServiceProvider {
 			'FutureEd\Models\Repository\Tip\TipRepositoryInterface',
 			'FutureEd\Models\Repository\Tip\TipRepository'
 		);
-        $this->app->bind(
-            'FutureEd\Models\Repository\HelpRequest\HelpRequestRepositoryInterface',
-            'FutureEd\Models\Repository\HelpRequest\HelpRequestRepository'
-        );
-        $this->app->bind(
+		$this->app->bind(
+			'FutureEd\Models\Repository\HelpRequest\HelpRequestRepositoryInterface',
+			'FutureEd\Models\Repository\HelpRequest\HelpRequestRepository'
+		);
+		$this->app->bind(
 			'FutureEd\Models\Repository\HelpRequestAnswer\HelpRequestAnswerRepositoryInterface',
 			'FutureEd\Models\Repository\HelpRequestAnswer\HelpRequestAnswerRepository'
 		);
@@ -188,9 +188,23 @@ class AppServiceProvider extends ServiceProvider {
 			'FutureEd\Models\Repository\CountryGrade\CountryGradeRepositoryInterface',
 			'FutureEd\Models\Repository\CountryGrade\CountryGradeRepository'
 		);
-        $this->app->bind(
-            'FutureEd\Models\Repository\HelpRequestAnswerRating\HelpRequestAnswerRatingRepositoryInterface',
-            'FutureEd\Models\Repository\HelpRequestAnswerRating\HelpRequestAnswerRatingRepository'
-        );
+
+		$this->app->bind(
+			'FutureEd\Models\Repository\TeachingContent\TeachingContentRepositoryInterface',
+			'FutureEd\Models\Repository\TeachingContent\TeachingContentRepository'
+		);
+		$this->app->bind(
+			'FutureEd\Models\Repository\HelpRequestAnswerRating\HelpRequestAnswerRatingRepositoryInterface',
+			'FutureEd\Models\Repository\HelpRequestAnswerRating\HelpRequestAnswerRatingRepository'
+		);
+		$this->app->bind(
+			'FutureEd\Models\Repository\ModuleGroup\ModuleGroupRepositoryInterface',
+			'FutureEd\Models\Repository\ModuleGroup\ModuleGroupRepository'
+		);
+		$this->app->bind(
+			'FutureEd\Models\Repository\Question\QuestionRepositoryInterface',
+			'FutureEd\Models\Repository\Question\QuestionRepository'
+		);
+
 	}
 }

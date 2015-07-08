@@ -209,7 +209,7 @@ function LoginController($scope, apiService, clientLoginApiService, clientProfil
 	    
 	    if($scope.e_error || $scope.u_error) {
 	      $("html, body").animate({ scrollTop: 320 }, "slow");
-	    } else if(!this.term) {
+	    } else if(!this.terms) {
 	      $scope.$parent.errors = ["Please accept the terms and conditions."];
 	      $("html, body").animate({ scrollTop: 0 }, "slow");
 	    } else if(this.reg.password != this.reg.confirm_password) {
@@ -341,7 +341,7 @@ function LoginController($scope, apiService, clientLoginApiService, clientProfil
 		if(!angular.equals(self.record.password, self.record.confirm_password)) {
 			self.fields['password'] = Constants.TRUE;
 			self.errors = [Constants.MSG_PW_NOT_MATCH];
-		} else if(!self.term) {
+		} else if(!self.terms) {
 	      self.errors = ["Please accept the terms and conditions."];
 	    } else {
 			var base_url = $("#base_url_form input[name='base_url']").val();

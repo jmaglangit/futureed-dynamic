@@ -31,7 +31,6 @@
     -o-transition: ease 1s;
     transition: ease 1s;
     left: 0px;
-    
 }
 
 .div-out {
@@ -60,8 +59,9 @@
 }
 
 .sidebar-toggle {
-	margin-top: 59px;
-	position: fixed;
+	position: absolute;
+	top:59px;
+	z-index: 9999;
 }
 
 .student-class {
@@ -260,4 +260,47 @@ th, td {
   vertical-align: middle !important;
 }
 
-@media 
+.rating-container {
+	padding: 5px;
+	width: 240px;
+	text-align: center;
+
+	border: 1px solid #e1e1e1;
+	border-radius: 5px;
+	background-color: #f6f4f5;
+}
+
+.rating-container span {
+	padding: 0px 5px;
+}
+
+.rating-container span img {
+	width: 25px;
+}
+
+.text-container {
+	word-wrap: break-word;
+	max-height: 110px;
+	overflow-y: scroll;
+}
+
+.avatar-container-small img {
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+	border: 3px solid #e1e1e1;
+}
+
+.avatar-name-container {
+	margin: 30px 5px;
+}
+
+.sticky-bottom {
+	position: absolute;
+	bottom: 0px;
+	padding: 35px 50px 35px 0px;
+}
+
+.success-container {
+	padding: 30px 30px 0px 30px;
+}

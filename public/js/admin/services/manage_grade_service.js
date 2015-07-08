@@ -4,56 +4,55 @@ angular.module('futureed.services')
 manageGradeService.$inject = ['$http'];
 
 function manageGradeService($http) {
+	var service = {};
+	var serviceUrl = '/api/v1/';
 
-	var manageGradeApi = {};
-	var manageGradeApiUrl = '/api/v1/';
-
-	manageGradeApi.getGradeList = function(grade, country_id, table) {
+	service.getGradeList = function(search, table) {
 		return $http({
 			method	: Constants.METHOD_GET
-			, url 	: manageGradeApiUrl + "grade?name=" + grade
-				+ "&country_id=" + country_id
+			, url 	: serviceUrl + "grade?name=" + search.grade
+				+ "&country_id=" + search.country_id
 				+ "&limit=" + table.size
 				+ "&offset=" + table.offset
 		});
 	}
 
-	manageGradeApi.getCountryName = function(id) {
+	service.getCountryName = function(id) {
 		return $http({
 			method	: Constants.METHOD_GET
-			, url 	: manageGradeApiUrl + "countries/" + id
+			, url 	: serviceUrl + "countries/" + id
 		});
 	}
 
-	manageGradeApi.addNewGrade = function(data) {
+	service.addNewGrade = function(data) {
 		return $http({
 			method 	: Constants.METHOD_POST
 			, data	: data
-			, url 	 : manageGradeApiUrl + 'grade'
+			, url 	 : serviceUrl + 'grade'
 		});
 	}
 
-	manageGradeApi.getGradeDetails = function(id) {
+	service.getGradeDetails = function(id) {
 		return $http({
 			  method : Constants.METHOD_GET
-			, url 	 : manageGradeApiUrl + 'grade/' + id
+			, url 	 : serviceUrl + 'grade/' + id
 		});
 	}
 
-	manageGradeApi.updateGradeDetails = function(data) {
+	service.updateGradeDetails = function(data) {
 		return $http({
 			  method : Constants.METHOD_PUT
 			, data	 : data
-			, url 	 : manageGradeApiUrl + 'grade/' + data.id
+			, url 	 : serviceUrl + 'grade/' + data.id
 		});
 	}
 
-	manageGradeApi.deleteGrade = function(id) {
+	service.deleteGrade = function(id) {
 		return $http({
-			  method : 'DELETE'
-			, url 	 : manageGradeApiUrl + 'grade/' + id
+			  method : Constants.METHOD_DELETE
+			, url 	 : serviceUrl + 'grade/' + id
 		});
 	}
 
-	return manageGradeApi;
+	return service;
 }

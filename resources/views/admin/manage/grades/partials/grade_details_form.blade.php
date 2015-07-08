@@ -26,6 +26,7 @@
 	        					 'ng-model' => 'grade.details.code'
 	        					, 'ng-disabled' => 'true'
 	        					, 'class' => 'form-control'
+	        					, 'ng-class' => "{ 'required-field' : grade.fields['code'] }"
 	        				)
 	        			) !!}
 	        		</div>
@@ -38,6 +39,7 @@
 	        					'placeHolder' => 'Grade'
 	        					, 'ng-model' => 'grade.details.name'
 	        					, 'class' => 'form-control'
+	        					, 'ng-class' => "{ 'required-field' : grade.fields['name'] }"
 	        				)
 	        			) !!}
 	        		</div>
@@ -49,9 +51,18 @@
 	        		</div>
 	        	</div>
 	        	<div class="form-group">
+	        		<label class="col-md-2 control-label">Group <span class="required">*</span></label>
+		      		<div class="col-md-5" ng-init="grade.getAgeGroup()">
+		        		<select  name="age_group_id" class="form-control" ng-class="{ 'required-field' : grade.fields['age_group_id'] }" ng-disabled="!grade.ageGroup.length" ng-model="grade.details.age_group_id">
+			          		<option ng-selected="grade.details.age_group_id == futureed.FALSE" value="">-- Select Age Group --</option>
+			          		<option ng-repeat="age in grade.ageGroup" ng-value="age.id"> {! age.name!} </option>
+		        		</select>
+		      		</div>
+		      	</div>
+	        	<div class="form-group">
 	        		<label class="col-md-2 control-label">Country <span class="required">*</span></label>
 		      		<div class="col-md-5" ng-init="getCountries()">
-		        		<select  name="country_id" class="form-control" ng-model="grade.details.country_id">
+		        		<select  name="country_id" class="form-control" ng-class="{ 'required-field' : grade.fields['country_id'] }" ng-model="grade.details.country_id">
 			          		<option ng-selected="grade.details.country_id == futureed.FALSE" value="">-- Select Country --</option>
 			          		<option ng-selected="grade.details.country_id == country.id" ng-repeat="country in countries" ng-value="country.id">{! country.name!}</option>
 		        		</select>
@@ -100,7 +111,7 @@
 	        	{!! Form::button('Cancel'
 	        		, array(
 	        			'class' => 'btn btn-gold btn-medium'
-	        			, 'ng-click' => 'grade.setManageGradeActive()'
+	        			, 'ng-click' => 'grade.setActive()'
 	        		)
 	        	) !!}
 		     </div>

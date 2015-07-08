@@ -29,6 +29,15 @@ function StudentClassService($http){
 		});
 	}
 
+	service.listHelpRequests = function(search, table) {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url 	: serviceUrl + 'help-request?order_by_date=' + search.order_by_date
+				+ "&limit=" + table.size
+				+ "&offset=" + table.offset
+		});
+	}
+
 
 	return service;
 }

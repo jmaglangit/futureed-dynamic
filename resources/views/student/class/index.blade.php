@@ -20,4 +20,6 @@
 @section('scripts')
 	{!! Html::script('/js/student/controllers/student_class_controller.js')!!}
 	{!! Html::script('/js/student/services/student_class_service.js')!!}
+
+	{!! Html::script('/js/student/class.js')!!}
 @stop

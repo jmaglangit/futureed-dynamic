@@ -15,11 +15,11 @@ class TipsController extends Controller {
 
 	public function list_form()
 	{	
-		return view('student.tips.list');
+		return view('student.tips.partials.list');
 	}
 
 	public function detail_form()
 	{	
-		return view('student.tips.detail');
+		return view('student.tips.partials.detail');
 	}
 }
