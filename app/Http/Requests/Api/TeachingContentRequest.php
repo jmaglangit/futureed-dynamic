@@ -2,7 +2,7 @@
 
 use FutureEd\Http\Requests\Request;
 
-class TeachingContent extends ApiRequest {
+class TeachingContentRequest extends ApiRequest {
 
 	/**
 	 * Determine if the user is authorized to make this request.
