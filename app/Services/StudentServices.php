@@ -191,7 +191,7 @@ class StudentServices {
 
 
 		$student = array_merge(array('id' => $id
-			,'class' => $this->getCurrentClass($id))
+			,'class_id' => $this->getCurrentClass($id))
 			, $student
 			, $user,
 			array('age' => $age,
@@ -344,8 +344,11 @@ class StudentServices {
 		//mitigate to inactive
 		foreach ($active_class as $list => $class) {
 
-			if (!($class['classroom']['order']['date_start'] <= Carbon::now()->toDateString()
-				&& $class['classroom']['order']['date_end'] >= Carbon::now()->toDateString())
+
+
+			if (!(Carbon::now()->between(
+				Carbon::parse($class->classroom->order->date_start),
+				Carbon::parse($class->classroom->order->date_end)))
 			) {
 
 				$this->class_student->setClassStudentInactive($class->id);
@@ -359,8 +362,9 @@ class StudentServices {
 		//mitigate to active
 		foreach ($inactive_class as $list => $class) {
 
-			if ($class->classroom->order->date_start <= Carbon::now()->toDateString()
-				&& $class->classroom->order->date_end >= Carbon::now()->toDateString()
+			if (Carbon::now()->between(
+				Carbon::parse($class->classroom->order->date_start),
+				Carbon::parse($class->classroom->order->date_end))
 			) {
 
 				$this->class_student->setClassStudentActive($class->id);
