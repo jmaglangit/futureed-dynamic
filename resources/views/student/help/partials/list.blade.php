@@ -124,11 +124,10 @@
 				<table id="tip-list" class="table table-striped table-bordered">
 					<thead>
 				        <tr>
-				            <th>help</th>
-				            <th>Subject</th>
+				            <th>Help Request Question</th>
+				            <th>Category</th>
 				            <th>Area</th>
-				            <th>Posted Since</th>
-				            <th>Posted By</th>
+				            <th>Time</th>
 				            <th ng-if="help.records.length">Actions</th>
 				        </tr>
 			        </thead>
@@ -138,7 +137,6 @@
 				            <td>{! tipInfo.subject.name !}</td>
 				            <td>{! tipInfo.subjectarea.name !}</td>
 				            <td>{! tipInfo.created_at | ddMMyy !}</td>
-				            <td>{! tipInfo.student.first_name !} {! tipInfo.student.last_name !}</td>
 				            <td ng-if="help.records.length">
 				            	<div class="row">
 				            		<div class="col-xs-12">

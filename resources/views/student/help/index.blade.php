@@ -8,8 +8,10 @@
 	<div class="container dshbrd-con" ng-init="backgroundClass()" ng-controller="HelpController as help" ng-cloak>
 
 		<div template-directive template-url="{!! route('client.partials.base_url') !!}"></div>
-
-		<div class="wrapr" ng-init="help.setActive()" ng-init="help.setRequestType({!! $request_type !!})"> 
+		
+		<div class="wrapr" ng-init="help.setActive()"> 
+			<div ng-init="help.setRequestType('{!! $request_type !!}')"></div>
+		
 			<div template-directive template-url="{!! route('student.help.partials.list') !!}"></div>
 
 			<div template-directive template-url="{!! route('student.help.partials.detail') !!}"></div>

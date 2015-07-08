@@ -15,11 +15,6 @@ class HelpController extends Controller {
 		
 		return view('student.help.index', $input);
 	}
-
-	public function own_index()
-	{
-		return view('student.help.index');
-	}
 	
 	public function list_form()
 	{	

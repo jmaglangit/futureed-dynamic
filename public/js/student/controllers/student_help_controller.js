@@ -37,6 +37,10 @@ function HelpController($scope, apiService, StudentHelpService, TableService, Se
 		$("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 
+	self.setRequestType = function(request_type) {
+		self.search.help_request_type = request_type;
+	}
+
 	self.searchFnc = function(event) {
 		self.success = Constants.FALSE;
 
