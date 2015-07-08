@@ -36,6 +36,16 @@ class AdminQuestionAnswerRequest extends ApiRequest {
 
 				];
 				break;
+
+			case 'PUT':
+				return [
+
+					'answer_text' => 'required|string',
+					'correct_answer' => 'required|alpha|in:Yes,No',
+					'point_equivalent' => 'required|integer',
+
+				];
+				break;
 		}
 	}
 

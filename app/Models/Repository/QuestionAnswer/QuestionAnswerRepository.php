@@ -71,4 +71,39 @@ class QuestionAnswerRepository implements QuestionAnswerRepositoryInterface{
 		return ['total' => $count, 'records' => $question_answer->get()->toArray()];
 
 	}
+
+	/**
+	 * Get a record on QuestionAnswer.
+	 * @param $id
+	 * @return mixed
+	 */
+	public function viewQuestionAnswer($id){
+
+		$question_answer = new QuestionAnswer();
+
+		$question_answer = $question_answer->find($id);
+		return $question_answer;
+
+	}
+
+
+	/**
+	 * Update a record.
+	 * @param $id
+	 * @param $data
+	 * @return bool|int|string
+	 */
+
+	public function updateQuestionAnswer($id,$data){
+
+		try{
+
+			return QuestionAnswer::find($id)
+				->update($data);
+
+		}catch (Exception $e){
+
+			return $e->getMessage();
+		}
+	}
 }

@@ -14,4 +14,11 @@ class ManageAgeGroupController extends Controller{
 	public function list_view_form() {
 		return view('admin.manage.age_group.partials.list_view_form');
 	}
+
+	/**
+	*@return add view form
+	*/
+	public function add_view_form() {
+		return view('admin.manage.age_group.partials.add_view_form');
+	}
 }

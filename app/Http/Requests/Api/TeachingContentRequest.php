@@ -2,7 +2,7 @@
 
 use FutureEd\Http\Requests\Request;
 
-class TeachingContent extends ApiRequest {
+class TeachingContentRequest extends ApiRequest {
 
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -21,7 +21,7 @@ class TeachingContent extends ApiRequest {
 	 */
 	public function rules()
 	{
-		switch($this->method){
+		switch ($this->method) {
 
 			case 'POST':
 
@@ -34,26 +34,32 @@ class TeachingContent extends ApiRequest {
 					'description' => 'required',
 					'learning_style_id' => 'required|exists:learning_styles,id,deleted_at,NULL',
 					'content_url' => 'required|url',
-					'media_type_id' => 'required|exists:media_types,id,deleted_at,NULL'
+					'media_type_id' => 'required|exists:media_types,id,deleted_at,NULL',
+					'seq_no' => 'required|integer',
+					'status' => 'required|in:Enabled,Disabled'
 				];
 
 				break;
-            case 'PUT':
-                return [
-                    'teaching_module' => 'required',
-                    'description' => 'required',
-                    'learning_style_id' => 'required|exists:learning_styles,id,deleted_at,NULL',
-                    'content_url' => 'required|url',
-                    'media_type_id' => 'required|exists:media_types,id,deleted_at,NULL'
-                ];
-                break;
+			case 'PUT':
+				return [
+					'teaching_module' => 'required',
+					'description' => 'required',
+					'learning_style_id' => 'required|exists:learning_styles,id,deleted_at,NULL',
+					'content_url' => 'required|url',
+					'media_type_id' => 'required|exists:media_types,id,deleted_at,NULL',
+					'seq_no' => 'required|integer',
+					'status' => 'required|in:Enabled,Disabled'
+				];
+				break;
 		}
 	}
 
 	public function messages(){
 
 		return [
-			'integer' => 'The :attribute must be a number'
+			'integer' => 'The :attribute must be a number',
+			'seq_no.required' => 'The sequence number is required.',
+			'seq_no.integer' => 'The sequence must be a number'
 		];
 	}
 
