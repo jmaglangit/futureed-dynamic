@@ -25,19 +25,19 @@
 					<p class="col-xs-12">{! help.record.created_moment !}</p>
 					<label class="col-xs-3"> Status: </label>
 					<div>
-		        		<label class="col-xs-6" ng-if="help.record.question_status == 'Answered'">
+		        		<label class="col-xs-6" ng-if="help.record.question_status == futureed.ANSWERED">
 		        			<b class="success-icon">
 		        				<i class="margin-top-8 fa fa-check-circle-o"></i> {! help.record.question_status !}
 		        			</b>
 		        		</label>
 
-		        		<label class="col-xs-6" ng-if="help.record.question_status == 'Open'">
+		        		<label class="col-xs-6" ng-if="help.record.question_status == futureed.OPEN">
 		        			<b class="warning-icon">
 		        				<i class="margin-top-8 fa fa-exclamation-circle"></i> {! help.record.question_status !}
 		        			</b>
 		        		</label>
 
-		        		<label class="col-xs-6" ng-if="help.record.question_status == 'Cancelled'">
+		        		<label class="col-xs-6" ng-if="help.record.question_status == futureed.CANCELLED">
 		        			<b class="error-icon">
 		        				<i class="margin-top-8 fa fa-ban"></i> {! help.record.question_status !}
 		        			</b>
@@ -73,7 +73,7 @@
 					)
 				) !!}
 
-				<div ng-if="help.record.question_status == 'Open' && help.record.own"> 
+				<div ng-if="help.record.question_status == futureed.OPEN && help.record.own"> 
 					{!! Form::button('Delete This Request'
 						, array(
 							'class' => 'btn btn-maroon btn-small pull-right'
@@ -164,7 +164,7 @@
 			</div>
 		</div>
 
-		<div class="col-xs-12 search-container" ng-if="help.record.question_status == 'Open'">
+		<div class="col-xs-12 search-container" ng-if="help.record.question_status == futureed.OPEN">
 			{!! Form::textarea('answer', ''
 				, array(
 					'class' => 'form-control'
@@ -175,7 +175,7 @@
 			) !!}
 		</div>
 
-		<div class="btn-container search-container col-xs-12" ng-if="help.record.question_status == 'Open'">
+		<div class="btn-container search-container col-xs-12" ng-if="help.record.question_status == futureed.OPEN">
 			{!! Form::button('Clear'
 				, array(
 					'class' => 'btn btn-gold btn-small pull-right'

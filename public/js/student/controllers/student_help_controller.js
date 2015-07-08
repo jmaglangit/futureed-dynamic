@@ -197,7 +197,7 @@ function HelpController($scope, apiService, StudentHelpService, TableService, Se
 	self.deleteRequest = function() {
 		var data = {};
 			data.id = self.record.id;
-			data.question_status = "Cancelled";
+			data.question_status = Constants.CANCELLED;
 
 		updateStatus(data);
 	}
@@ -205,7 +205,7 @@ function HelpController($scope, apiService, StudentHelpService, TableService, Se
 	self.closeRequest = function() {
 		var data = {};
 			data.id = self.record.id;
-			data.question_status = "Answered";
+			data.question_status = Constants.ANSWERED;
 
 		updateStatus(data);
 	}
