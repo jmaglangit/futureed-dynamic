@@ -56,5 +56,12 @@ function manageModuleService($http) {
 		});
 	}
 
+	moduleServiceApi.deleteModule  = function(id) {
+		return $http({
+			method 	: Constants.METHOD_DELETE
+			, url 	: moduleServiceUrl + 'module/admin/' + id
+		});
+	}
+
 	return moduleServiceApi
 }
