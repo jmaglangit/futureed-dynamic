@@ -14,6 +14,11 @@ use League\Flysystem\Exception;
 
 class CountryGradeRepository implements CountryGradeRepositoryInterface{
 
+	/**
+	 * Add Country Grade.
+	 * @param $data
+	 * @return string|static
+	 */
 	public function addCountryGrade($data){
 		try {
 
@@ -26,7 +31,7 @@ class CountryGradeRepository implements CountryGradeRepositoryInterface{
 	}
 
 	/**
-	 * Get Country Grade by grade_id
+	 * Get Country Grade by grade_id.
 	 * @param $grade_id
 	 * @return mixed
 	 */
@@ -35,6 +40,12 @@ class CountryGradeRepository implements CountryGradeRepositoryInterface{
 		return CountryGrade::gradeId($grade_id)->first();
 	}
 
+	/**
+	 * Update Country Grade by grade_id.
+	 * @param $grade_id
+	 * @param $data
+	 * @return mixed|string
+	 */
 	public function updateAgeGroup($grade_id, $data){
 
 		try{
