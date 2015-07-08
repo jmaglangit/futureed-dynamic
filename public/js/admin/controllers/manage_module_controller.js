@@ -214,7 +214,6 @@ function ManageModuleController($scope, manageModuleService, apiService, TableSe
 	}
 
 	self.getModuleDetail = function(id) {
-		$scope.module_name = Constants.EMPTY_STR;
 		self.errors = Constants.FALSE;
 
 		$scope.ui_block();
