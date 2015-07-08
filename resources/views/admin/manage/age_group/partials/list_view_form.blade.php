@@ -1,6 +1,6 @@
-<div class="col-xs-12" id="age-group">
+<div ng-if="age.active_list" class="col-xs-12" id="age-group">
 <div class="clearfix"></div>
-<button class="btn btn-blue btn-small margin-0-30" ng-click="module.setActive('add')">
+<button class="btn btn-blue btn-small margin-0-30" ng-click="age.setActive('add')">
 	<i class="fa fa-plus-square"></i> Add Age Group
 </button>
 <div class="module-container">
