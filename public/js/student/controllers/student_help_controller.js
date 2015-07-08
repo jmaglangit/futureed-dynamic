@@ -239,7 +239,6 @@ function HelpController($scope, apiService, StudentHelpService, TableService, Se
 		self.errors = Constants.FALSE;
 
 		var data = {};
-			console.log(self.record);
 			data.content = self.record.answer;
 			data.student_id = $scope.user.id;
 			data.help_request_id = self.record.id;
