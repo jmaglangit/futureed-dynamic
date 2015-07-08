@@ -4,7 +4,7 @@ use FutureEd\Http\Requests;
 
 use FutureEd\Models\Repository\ModuleContent\ModuleContentRepositoryInterface;
 use FutureEd\Models\Repository\TeachingContent\TeachingContentRepositoryInterface;
-use FutureEd\Http\Requests\Api\TeachingContent;
+use FutureEd\Http\Requests\Api\TeachingContentRequest;
 use Illuminate\Support\Facades\Input;
 
 class TeachingContentController extends ApiController {
@@ -64,7 +64,7 @@ class TeachingContentController extends ApiController {
      *
      * @return Response
      */
-    public function store(TeachingContent $request)
+    public function store(TeachingContentRequest $request)
     {
         $data = $request->all();
 
@@ -102,7 +102,7 @@ class TeachingContentController extends ApiController {
      * @param  int  $id
      * @return Response
      */
-    public function update(TeachingContent $request,$id)
+    public function update(TeachingContentRequest $request,$id)
     {
         $data = $request->all();
 
