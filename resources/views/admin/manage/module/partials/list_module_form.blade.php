@@ -143,7 +143,7 @@
 			            			<a href="" ng-click="module.setActive(futureed.ACTIVE_EDIT, moduleInfo.id)"><span><i class="fa fa-pencil"></i></span></a>
 			            		</div>
 			            		<div class="col-xs-4">
-			            			<a href="" ng-click="module.details(moduleInfo.id, futureed.ACTIVE_EDIT)"><span><i class="fa fa-trash"></i></span></a>
+			            			<a href="" ng-click="module.confirmDelete(moduleInfo.id)"><span><i class="fa fa-trash"></i></span></a>
 			            		</div>
 			            	</div>
 			            </td>
@@ -176,4 +176,35 @@
 			</div>
 		</div>
 	</div>
+</div>
+
+<div id="delete_module_modal" ng-show="module.delete.confirm" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            Delete Module
+        </div>
+        <div class="modal-body">
+            Are you sure you want to delete this module?
+        </div>
+        <div class="modal-footer">
+        	<div class="btncon col-md-8 col-md-offset-4 pull-left">
+                {!! Form::button('Yes'
+                    , array(
+                        'class' => 'btn btn-blue btn-medium'
+                        , 'ng-click' => 'module.deleteModule()'
+                        , 'data-dismiss' => 'modal'
+                    )
+                ) !!}
+
+                {!! Form::button('No'
+                    , array(
+                        'class' => 'btn btn-gold btn-medium'
+                        , 'data-dismiss' => 'modal'
+                    )
+                ) !!}
+        	</div>
+        </div>
+    </div>
+  </div>
 </div>

@@ -1022,7 +1022,7 @@ div > .btncon > a {
 
 .modal-body {
 	max-height: 650px;
-  	overflow: scroll;
+  	overflow: hidden;
 }
 
 .list-step {
