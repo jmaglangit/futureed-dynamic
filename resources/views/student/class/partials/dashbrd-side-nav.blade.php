@@ -127,12 +127,20 @@
 	<div id="help_request_form">
 		<div class="side-btn-container row" ng-if="!class.add_help && !class.help.success">
 			<div class="col-xs-12 submit-btn-help">
-				{!! Html::link(route('student.tips.index'), 'My Help Requests'
-	                , array(
-	                   'class' => 'btn btn-blue'
-	                  , 'ng-if' => 'class.help.total'
-	                )
-	            ) !!}
+				{!! Form::open(
+					array(
+						'route' => 'student.help.own.index'
+						, 'method' => 'futureed.METHOD_POST'
+					)
+				) !!}
+					{!! Form::hidden('request_type', 'Own') !!}
+					{!! Form::submit('My Help Requests'
+		                , array(
+		                   'class' => 'btn btn-blue'
+		                  , 'ng-if' => 'class.help.total'
+		                )
+		            ) !!}
+	            {!! Form::close() !!}
 			</div>
 		</div>
 
@@ -215,7 +223,7 @@
 
 			<div class="side-btn-container row container-bottom" ng-if="!class.add_help && !class.help.success">
 				<div class="col-xs-6 btn-left">
-		            {!! Html::link(route('student.tips.index'), 'View More'
+		            {!! Html::link(route('student.help.index'), 'View More'
 		                , array(
 		                   'class' => 'btn btn-blue'
 		                  , 'ng-if' => 'class.help.total > 3'

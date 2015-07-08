@@ -101,7 +101,7 @@ function StudentClassController($scope, $filter, StudentClassService) {
 
 	self.listTips = function() {
 		self.errors = Constants.FALSE;
-		self.class_id = $scope.user.class_id;
+		self.class_id = ($scope.user.class) ? $scope.user.class.class_id : Constants.EMPTY_STR;
 		self.table = {};
 		self.table.size = 3;
 		self.table.offset = Constants.FALSE;

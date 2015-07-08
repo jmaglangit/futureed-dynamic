@@ -1,9 +1,9 @@
 angular.module('futureed.controllers')
-	.controller('TipsController', TipsController);
+	.controller('HelpController', HelpController);
 
-TipsController.$inject = ['$scope', 'apiService', 'StudentTipsService', 'TableService', 'SearchService'];
+HelpController.$inject = ['$scope', 'apiService', 'StudentHelpService', 'TableService', 'SearchService'];
 
-function TipsController($scope, apiService, StudentTipsService, TableService, SearchService) {
+function HelpController($scope, apiService, StudentHelpService, TableService, SearchService) {
 	var self = this;
 
 	TableService(self);
@@ -21,7 +21,8 @@ function TipsController($scope, apiService, StudentTipsService, TableService, Se
 
 		switch(active) {
 			case Constants.ACTIVE_VIEW:
-				self.tipsDetail(id);
+				self.helpDetail(id);
+				self.listAnswers(id);
 				self.active_view = Constants.TRUE;
 				break;
 
@@ -35,6 +36,10 @@ function TipsController($scope, apiService, StudentTipsService, TableService, Se
 		}
 
 		$("html, body").animate({ scrollTop: 0 }, "slow");
+	}
+
+	self.setRequestType = function(request_type) {
+		self.search.help_request_type = request_type;
 	}
 
 	self.searchFnc = function(event) {
@@ -59,18 +64,23 @@ function TipsController($scope, apiService, StudentTipsService, TableService, Se
 
 	self.list = function() {
 		if(self.active_list) {
-			self.listTips();
+			self.listHelp();
 		}
 	}
 
-	self.listTips = function() {
+	self.listHelp = function() {
 		self.records = [];
 		self.errors = Constants.FALSE;
-		self.search.class_id = ($scope.user.class) ? $scope.user.class.class_id : Constants.EMPTY_STR;
+		self.search.class_id = ($scope.user.class) ? $scope.user.class.class_id : Constants.EMPTY_STR; 
+		if (self.search.help_request_type) {
+			self.search.student_id = $scope.user.id;
+		}
+
+		self.search.help_request_type = (self.search.help_request_type) ? self.search.help_request_type: Constants.EMPTY_STR;
 		self.table.loading = Constants.TRUE;
 
 		$scope.ui_block();
-		StudentTipsService.list(self.search, self.table).success(function(response) {
+		StudentHelpService.list(self.search, self.table).success(function(response) {
 			self.table.loading = Constants.FALSE;
 
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
@@ -89,13 +99,13 @@ function TipsController($scope, apiService, StudentTipsService, TableService, Se
 		});
 	}
 
-	self.tipsDetail = function(id) {
+	self.helpDetail = function(id) {
 		self.errors = Constants.FALSE;
 		self.hovered = [];
 		self.record = {};
 
 		$scope.ui_block();
-		StudentTipsService.detail(id).success(function(response) {
+		StudentHelpService.detail(id).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
@@ -121,6 +131,29 @@ function TipsController($scope, apiService, StudentTipsService, TableService, Se
 		});
 	}
 
+	self.listAnswers = function(id) {
+		self.answers = [];
+		self.errors = Constants.FALSE;
+
+		$scope.div_block("answers_form");
+		StudentHelpService.listAnswers(id).success(function(response) {
+			self.table.loading = Constants.FALSE;
+
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.answers = response.data.records;
+				}
+			}
+
+			$scope.div_unblock("answers_form");
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.div_unblock("answers_form");
+		});
+	}
+
 	self.changeColor = function(element) {
 		self.hovered = [];
 
@@ -134,11 +167,11 @@ function TipsController($scope, apiService, StudentTipsService, TableService, Se
 
 		self.data = {};
 		self.data.student_id = $scope.user.id;
-		self.data.tip_id = self.record.id;
+		self.data.help_request_answer_id = self.record.id;
 		self.data.rating = self.hovered.length;
 
 		$scope.ui_block();
-		StudentTipsService.rate(self.data).success(function(response) {
+		StudentHelpService.rate(self.data).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);

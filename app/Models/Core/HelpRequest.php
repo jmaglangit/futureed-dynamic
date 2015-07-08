@@ -44,7 +44,7 @@ class HelpRequest extends Model {
     }
 
     public function student(){
-        return $this->belongsTo('FutureEd\Models\Core\Student');
+        return $this->belongsTo('FutureEd\Models\Core\Student')->with('avatar');;
     }
 
     //Scopes
@@ -104,9 +104,22 @@ class HelpRequest extends Model {
         return $query->whereClassId($class_id);
     }
 
+    public function scopeModuleId($query,$moduleId){
+        return $query->whereModuleId($moduleId);
+    }
+
     public function scopeRequestStatus($query,$request_status){
         return $query->whereRequestStatus($request_status);
     }
+
+    public function scopeLinkId($query,$link_id){
+        return $query->whereLinkId($link_id);
+    }
+
+    public function scopeQuestionStatus($query,$question_status){
+        return $query->whereQuestionStatus($question_status);
+    }
+
 
 
 }

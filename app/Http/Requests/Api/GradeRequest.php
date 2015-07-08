@@ -25,7 +25,8 @@ class GradeRequest extends ApiRequest {
 				return [
 					'name' => 'required',
 					'status' => 'required|in:Enabled,Disabled',
-					'country_id' => 'required|Integer'
+					'country_id' => 'required|Integer',
+					'age_group_id' => 'required|exists:age_groups,id,deleted_at,NULL'
 				];
 				break;
 			case 'POST':

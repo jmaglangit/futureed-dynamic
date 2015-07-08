@@ -237,6 +237,10 @@
 	color: #887c70;
 }
 
+.search-container textarea {
+	resize: none;
+}
+
 .table-container{
 	padding: 0 30px 0 30px;
 	margin-bottom: 30px;
@@ -303,4 +307,8 @@ th, td {
 
 .success-container {
 	padding: 30px 30px 0px 30px;
+}
+
+.answers-cancel {
+	margin: 30px 45px !important;
 }

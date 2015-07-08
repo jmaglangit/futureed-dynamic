@@ -56,5 +56,21 @@ function manageModuleService($http) {
 		});
 	}
 
+	moduleServiceApi.deleteModule  = function(id) {
+		return $http({
+			method 	: Constants.METHOD_DELETE
+			, url 	: moduleServiceUrl + 'module/admin/' + id
+		});
+	}
+
+	moduleServiceApi.ageModuleList = function(module, table) {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url 	: moduleServiceUrl + 'module-group?module_name=' + module
+				+ '&limit' + table.size
+				+ '&offset' + table.offset
+		});
+	}
+
 	return moduleServiceApi
 }

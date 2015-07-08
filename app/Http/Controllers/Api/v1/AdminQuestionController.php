@@ -83,7 +83,7 @@ class AdminQuestionController extends ApiController {
 	public function store(AdminQuestionRequest $request)
 	{
 
-		$data =  $request->only('image','code','module_id','seq_no','questions_text','status','question_type','points_earned','difficulty');
+		$data =  $request->only('image','answer','code','module_id','seq_no','questions_text','status','question_type','points_earned','difficulty');
 
 		//check if has images uploaded
 		if($data['image']){
@@ -141,9 +141,24 @@ class AdminQuestionController extends ApiController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($id,AdminQuestionRequest $request)
 	{
-		//
+		$data =  $request->only('seq_no','questions_text','status','question_type','points_earned','difficulty');
+
+		$question = $this->question->viewQuestion($id);
+
+		if(!$question){
+
+			return $this->respondErrorMessage(2120);
+		}
+
+		//update data questions table
+		$this->question->updateQuestion($id,$data);
+
+		return $this->respondWithData($this->question->viewQuestion($id));
+
+
+
 	}
 
 	/**
@@ -154,7 +169,17 @@ class AdminQuestionController extends ApiController {
 	 */
 	public function destroy($id)
 	{
-		//
+
+		$question = $this->question->viewQuestion($id);
+
+		if(!$question){
+
+			return $this->respondErrorMessage(2120);
+		}
+
+		//delete question
+		return $this->respondWithData($this->question->deleteQuestion($id));
+
 	}
 
 }

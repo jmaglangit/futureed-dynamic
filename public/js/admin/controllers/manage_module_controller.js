@@ -7,6 +7,7 @@ function ManageModuleController($scope, manageModuleService, apiService, TableSe
 	var self = this;
 
 	self.details = {};
+	self.delete = {};
 
 	TableService(self);
 	self.tableDefaults();
@@ -14,7 +15,7 @@ function ManageModuleController($scope, manageModuleService, apiService, TableSe
 	SearchService(self);
 	self.searchDefaults();
 
-	self.setActive = function(active, id) {
+	self.setActive = function(active, id, flag) {
 		self.errors = Constants.FALSE;
 		self.create = {};
 		self.area_field = Constants.FALSE;
@@ -24,6 +25,10 @@ function ManageModuleController($scope, manageModuleService, apiService, TableSe
 		self.active_add = Constants.FALSE;
 		self.active_edit = Constants.FALSE;
 		self.edit = Constants.FALSE;
+
+		if(flag != 1) {
+			self.success = Constants.FALSE;
+		}
 
 		switch (active) {
 			case Constants.ACTIVE_EDIT:
@@ -44,7 +49,6 @@ function ManageModuleController($scope, manageModuleService, apiService, TableSe
 
 			default:
 				self.active_list = Constants.TRUE;
-				self.success = Constants.FALSE;
 				self.list();
 				break;
 		}
@@ -220,6 +224,8 @@ function ManageModuleController($scope, manageModuleService, apiService, TableSe
 				} else if(response.data) {
 					self.details = response.data;
 					self.details.area = self.details.subjectarea.name;
+					self.age_records = {};
+					self.ageModuleList(self.details.name);
 				}
 			}
 		$scope.ui_unblock();
@@ -245,7 +251,7 @@ function ManageModuleController($scope, manageModuleService, apiService, TableSe
 				} else if(response.data) {
 					self.validation = {};
 					self.success = Constants.TRUE;
-					self.setActive('view', self.details.id);
+					self.setActive('view', self.details.id, 1);
 	    			$("html, body").animate({ scrollTop: 0 }, "slow");
 				}
 			}
@@ -254,5 +260,57 @@ function ManageModuleController($scope, manageModuleService, apiService, TableSe
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		})
+	}
+
+	self.confirmDelete = function(id) {
+		self.errors = Constants.FALSE;
+		self.delete.id = id;
+		self.delete.confirm = Constants.TRUE;
+
+		$("#delete_module_modal").modal({
+	        backdrop: 'static',
+	        keyboard: Constants.FALSE,
+	        show    : Constants.TRUE
+	    });
+	}
+
+	self.deleteModule = function() {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		$scope.ui_block();
+		manageModuleService.deleteModule(self.delete.id).success(function(response){
+			if(angular.equals(response.status,Constants.STATUS_OK)){
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.success = ManageModuleConstants.SUCCESS_DELETE_MOD;
+					self.setActive('list', '', 1);
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		})
+	}
+
+	self.ageModuleList = function(module) {
+		self.errors = Constants.FALSE;
+		self.records = {};
+		$scope.ui_block();
+		manageModuleService.ageModuleList(module, self.table).success(function(response){
+			if(angular.equals(response.status, Constants.STATUS_OK)){
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				}else if(response.data){
+					self.age_records = response.data.records;
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
 	}
 }
