@@ -80,9 +80,6 @@ class GradeRepository implements GradeRepositoryInterface{
 
     public function updateGrade($id,$data){
 
-    	$data['created_by'] = 1;
-    	$data['updated_by'] = 1;
-
     	try {
 
     		$grade = Grade::find($id);

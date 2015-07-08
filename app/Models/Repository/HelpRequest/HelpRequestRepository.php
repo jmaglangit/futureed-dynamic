@@ -94,8 +94,18 @@ class HelpRequestRepository implements HelpRequestRepositoryInterface{
                     $query = $query->classId($criteria['class_id']);
                 }
 
+                if(isset($criteria['module_id'])) {
+                    $query = $query->moduleId($criteria['module_id']);
+                }
+
                 if(isset($criteria['request_status'])) {
                     $query = $query->requestStatus($criteria['request_status']);
+                }
+                if(isset($criteria['link_id'])) {
+                    $query = $query->linkId($criteria['link_id']);
+                }
+                if(isset($criteria['question_status'])) {
+                    $query = $query->questionStatus($criteria['question_status']);
                 }
 
             }

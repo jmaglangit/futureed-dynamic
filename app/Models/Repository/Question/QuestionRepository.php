@@ -113,4 +113,26 @@ class QuestionRepository implements QuestionRepositoryInterface{
 		}
 	}
 
+	/**
+	 * Update a record.
+	 * @param $id
+	 * @param $data
+	 * @return bool|int|string
+	 */
+
+	public function updateQuestion($id,$data){
+
+		try{
+
+			return Question::find($id)
+				->update($data);
+
+		}catch (Exception $e){
+
+			return $e->getMessage();
+		}
+	}
+
+
+
 }

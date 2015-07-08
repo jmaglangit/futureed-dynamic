@@ -65,9 +65,20 @@ class HelpRequestController extends ApiController{
         if(Input::get('class_id')){
             $criteria['class_id'] = Input::get('class_id');
         }
+        if(Input::get('module_id')){
+            $criteria['module_id'] = Input::get('module_id');
+        }
 
         if(Input::get('request_status')){
             $criteria['request_status'] = Input::get('request_status');
+        }
+
+        if(Input::get('link_id')){
+            $criteria['link_id'] = Input::get('link_id');
+        }
+
+        if(Input::get('question_status')){
+            $criteria['question_status'] = Input::get('question_status');
         }
 
         $limit = (Input::get('limit')) ? Input::get('limit') : 0;

@@ -35,4 +35,13 @@ interface QuestionRepositoryInterface {
 	 */
 	public function deleteQuestion($id);
 
+	/**
+	 * Update a record.
+	 * @param $id
+	 * @param $data
+	 * @return bool|int|string
+	 */
+
+	public function updateQuestion($id,$data);
+
 }
