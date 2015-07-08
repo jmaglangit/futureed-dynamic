@@ -6,6 +6,7 @@ ManageAgeGroupController.$inject = ['$scope', '$timeout', 'ManageAgeGroupService
 function ManageAgeGroupController($scope, $timeout, ManageAgeGroupService, apiService, TableService, SearchService) {
 	var self = this;
 	self.details = {};
+	self.delete = {};
 
 	TableService(self);
 	self.tableDefaults();
@@ -127,6 +128,41 @@ function ManageAgeGroupController($scope, $timeout, ManageAgeGroupService, apiSe
 				}
 			}
 		$scope.ui_unblock();
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		})
+	}
+
+	self.confirmDelete = function(id) {
+		self.errors = Constants.FALSE;
+		self.delete.id = id;
+		self.delete.confirm = Constants.TRUE;
+
+		$("#delete_age_group_modal").modal({
+	        backdrop: 'static',
+	        keyboard: Constants.FALSE,
+	        show    : Constants.TRUE
+	    });
+	}
+
+	self.deleteAgeGroup = function() {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		$scope.ui_block();
+		ManageAgeGroupService.deleteAgeGroup(self.delete.id).success(function(response){
+			if(angular.equals(response.status,Constants.STATUS_OK)){
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.success = ManageModuleConstants.SUCCESS_DELETE_AGE_GROUP;
+					$timeout(function() {
+					    angular.element('#age-list-btn').trigger('click');
+					  }, 1);
+				}
+			}
+			$scope.ui_unblock();
 		}).error(function(response){
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();

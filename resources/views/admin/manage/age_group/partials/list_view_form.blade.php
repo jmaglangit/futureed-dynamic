@@ -49,7 +49,7 @@
 			            			<a href="" ng-click="age.setActive(futureed.ACTIVE_EDIT, ageInfo.id)"><span><i class="fa fa-pencil"></i></span></a>
 			            		</div>
 			            		<div class="col-xs-6">
-			            			<a href="" ng-click="age.confirmDelete(moduleInfo.id)"><span><i class="fa fa-trash"></i></span></a>
+			            			<a href="" ng-click="age.confirmDelete(ageInfo.id)"><span><i class="fa fa-trash"></i></span></a>
 			            		</div>
 			            	</div>
 			            </td>
@@ -77,4 +77,42 @@
 			</div>
 		</div>
 	</div>
+</div>
+
+<div id="delete_age_group_modal" ng-show="age.delete.confirm" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            Delete Age Group
+        </div>
+        <div class="modal-body">
+            Are you sure you want to delete this Age Group?
+        </div>
+        <div class="modal-footer">
+        	<div class="btncon col-md-8 col-md-offset-4 pull-left">
+                {!! Form::button('Yes'
+                    , array(
+                        'class' => 'btn btn-blue btn-medium'
+                        , 'ng-click' => 'age.deleteAgeGroup()'
+                        , 'data-dismiss' => 'modal'
+                    )
+                ) !!}
+                {!! Form::button('Hidden'
+	        		, array(
+	        			'class' => 'hidden'
+	        			, 'id' => 'age-list-btn'
+	        			, 'ng-click' => "module.setActive('view', module.details.id); age.setActive('','',1)"
+	        		)
+	        	) !!}
+
+                {!! Form::button('No'
+                    , array(
+                        'class' => 'btn btn-gold btn-medium'
+                        , 'data-dismiss' => 'modal'
+                    )
+                ) !!}
+        	</div>
+        </div>
+    </div>
+  </div>
 </div>

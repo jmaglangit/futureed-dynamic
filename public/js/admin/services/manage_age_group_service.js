@@ -37,6 +37,13 @@ function ManageAgeGroupService($http) {
 		});
 	}
 
+	ageGroupServiceApi.deleteAgeGroup  = function(id) {
+		return $http({
+			method 	: Constants.METHOD_DELETE
+			, url 	: ageGroupServiceUrl + 'module-group/' + id
+		});
+	}
+
 	return ageGroupServiceApi;
 
 }
