@@ -50,6 +50,7 @@ class AdminQuestionRequest extends ApiRequest {
 					'status' => 'required|alpha|in:Enabled,Disabled',
 					'question_type' => 'required|alpha|in:MC,FIB,O,N',
 					'points_earned' => 'required|integer',
+					'answer' => 'string',
 				];
 				break;
 		}

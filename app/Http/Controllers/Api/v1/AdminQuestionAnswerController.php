@@ -127,9 +127,22 @@ class AdminQuestionAnswerController extends ApiController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($id, AdminQuestionAnswerRequest $request)
 	{
-		//
+		$data = $request->only('answer_text','correct_answer','point_equivalent');
+
+		$question_answer = $this->question_answer->viewQuestionAnswer($id);
+
+		if(!$question_answer){
+
+			return $this->respondErrorMessage(2120);
+		}
+
+		//update question_answer
+		$this->question_answer->updateQuestionAnswer($id,$data);
+
+		return $this->respondWithData($this->question_answer->viewQuestionAnswer($id));
+
 	}
 
 	/**
