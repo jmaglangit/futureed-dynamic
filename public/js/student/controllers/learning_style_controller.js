@@ -18,7 +18,7 @@ angular.module('futureed.controllers')
 					id: attrs.testId
 				}
 			};
-			element.removeClass('hide')
+				
 			$rootScope.$broadcast('testReady', this_session);
 		}
 	};
@@ -29,6 +29,8 @@ LearningStyleController.$inject = ['$rootScope', '$scope', '$interval', '$filter
 function LearningStyleController($rootScope, $scope, $interval, $filter, $sce, $document, $window, LearningStyleService) {
 
 	var self = this;
+	
+	var data_loaded = false;
 	
 	var order_candidate_test = {};
 	
@@ -889,7 +891,9 @@ function LearningStyleController($rootScope, $scope, $interval, $filter, $sce, $
 
 	$rootScope.$on('testReady', function( e, that_session ) {
 		LearningStyleService.getTest().success(function(response) {
-		
+			
+			$scope.data_loaded = true;
+			
 			$scope.session.section = 0;
 			$scope.session.next = 'Next';
 			//TODO:: $scope.session.redirect_on_complete = that_session.post_test_url;
@@ -923,7 +927,7 @@ function LearningStyleController($rootScope, $scope, $interval, $filter, $sce, $
 
 			
 			if ( typeof($scope.sections[$scope.session.section]) != 'undefined' ) {
-				setInstructions('testReady'); console.log($scope.session.section);
+				setInstructions('testReady');
 			} else {
 				// Test already completed so let's rewind the section minus 1
 				// because we are using it for zero based index.

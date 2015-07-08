@@ -304,3 +304,87 @@ th, td {
 .success-container {
 	padding: 30px 30px 0px 30px;
 }
+
+#lsp_panel.panel {
+	margin-bottom: 0;
+}
+
+#lsp_panel .row {
+	margin-right: -15px;
+	margin-left: -15px;
+}
+
+#lsp_panel h6 {
+	font-size: 16px;
+}
+
+#lsp_panel #section_header {
+	font-size: 24px;
+	font-weight: 400;
+	padding: 20px;
+	text-align: center;
+}
+
+#lsp_panel #section_header > div {
+	font-size: 13px;
+	margin-top: 3px;
+}
+
+#lsp_panel .panel-body {
+	min-height: 480px;
+	padding: 15px 20px;
+}
+
+#lsp_panel .modern-paginator a.page-number {
+	background: #ddd;
+	border: 1px solid #dadada;
+	border-radius: 16px;
+	color: #a6a6a6;
+	display: block;
+	font-size: 11px;
+	font-weight: 100;
+	line-height: 16px;
+	padding: 6px 0;
+	height: 32px;
+	width: 32px;
+	vertical-align: middle;
+}
+
+#lsp_panel .modern-paginator a.page-number:hover {
+	text-decoration: none;
+}
+
+#lsp_panel .modern-paginator .active .page-number {
+	background: #34495e;
+	border: 1px solid #e5e5e5;
+	color: #fff;
+}
+
+#lsp_panel ul.answers, #lsp_panel ul.answer_groups {
+	list-style: none;
+	padding-left: 0;
+}
+
+#lsp_panel ul.answers li {
+	  margin-bottom: 10px;
+}
+
+#lsp_panel ul.answers li a:hover,
+#lsp_panel ul.answers li a:active,
+#lsp_panel ul.answers li a:visited,
+#lsp_panel ul.answer_groups li a:hover,
+#lsp_panel ul.answer_groups li a:active,
+#lsp_panel ul.answer_groups li a:visited {
+	  text-decoration: none;
+}
+
+#lsp_panel ul.answer_groups li {
+	display: inline-block;
+	margin: 0;
+	padding: 0 22px 0 30px;
+	text-align: left;
+}
+
+#lsp_panel ul.answers li:last-child, #lsp_panel ul.answer_groups li:last-child {
+	margin-bottom: 0px;
+}
