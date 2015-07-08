@@ -88,12 +88,21 @@ class TeachingContentRepository implements TeachingContentRepositoryInterface{
      * @return bool
      */
     public function updateTeachingContent($id,$data){
-        try{
-            $result = TeachingContent::find($id);
-            return is_null($result) ? false : $result->update($data);
-        }catch (\Exception $e){
-            return $e->getMessage();
-        }
+		try {
+
+			$result = TeachingContent::find($id);
+
+			$response =  is_null($result) ? false : $result->update($data);
+
+			if($response){
+
+				return $this->getTeachingContent($id);
+			}
+
+		} catch (\Exception $e) {
+
+			return $e->getMessage();
+		}
     }
 
     /**
@@ -103,7 +112,7 @@ class TeachingContentRepository implements TeachingContentRepositoryInterface{
      */
     public function getTeachingContent($id){
         try{
-            return TeachingContent::with('subject','subjectArea','module','learningStyle','mediaType')->find($id);
+            return TeachingContent::with('subject','subjectArea','module','learningStyle','mediaType','moduleContent')->find($id);
         }catch (\Exception $e){
             return $e->getMessage();
         }
