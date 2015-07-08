@@ -49,5 +49,13 @@ function StudentHelpService($http){
 		});
 	}
 
+	service.answerRequest = function(data) {
+		return $http({
+			method 	: Constants.METHOD_POST
+			, data  : data
+			, url 	: serviceUrl + 'help-request-answer'
+		});
+	}
+	
 	return service;
 }
