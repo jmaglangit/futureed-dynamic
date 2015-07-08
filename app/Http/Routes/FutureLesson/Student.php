@@ -116,6 +116,36 @@
 		});
 
 		Routes::group([
+			  'prefix' => '/help'
+			, 'middleware' => 'student'], function()
+		{
+			Routes::get('/', [ 
+					'as' => 'student.help.index'
+					, 'uses' => 'FutureLesson\Student\HelpController@index'
+				]);
+
+			Routes::post('/', [ 
+					'as' => 'student.help.own.index'
+					, 'uses' => 'FutureLesson\Student\HelpController@index'
+				]);
+
+			Routes::group([
+				  'prefix' => '/partials'
+				, 'middleware' => 'student'], function()
+			{
+				Routes::get('/list', [ 
+						'as' => 'student.help.partials.list'
+						, 'uses' => 'FutureLesson\Student\HelpController@list_form'
+					]);
+
+				Routes::get('/detail', [ 
+						'as' => 'student.help.partials.detail'
+						, 'uses' => 'FutureLesson\Student\HelpController@detail_form'
+					]);
+			});
+		});
+
+		Routes::group([
 			  'prefix' => 'profile'
 			, 'middleware' => 'student'], function()
 		{
