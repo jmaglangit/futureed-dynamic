@@ -2,22 +2,36 @@
 
 use FutureEd\Http\Requests;
 
+use FutureEd\Models\Repository\ModuleContent\ModuleContentRepositoryInterface;
 use FutureEd\Models\Repository\TeachingContent\TeachingContentRepositoryInterface;
 use FutureEd\Http\Requests\Api\TeachingContent;
 use Illuminate\Support\Facades\Input;
 
 class TeachingContentController extends ApiController {
 
+	/**
+	 * Initialize teaching_content
+	 * @var TeachingContentRepositoryInterface
+	 */
     protected $teaching_content;
+
+	/**
+	 * Initialize module_content
+	 * @var ModuleContentRepositoryInterface
+	 */
+	protected $module_content;
 
     /**
      * Initialized Teaching Content.
      * @param TeachingContentRepositoryInterface $teachingContentRepositoryInterface
      */
     public function __construct(
-        TeachingContentRepositoryInterface $teachingContentRepositoryInterface
+        TeachingContentRepositoryInterface $teachingContentRepositoryInterface,
+		ModuleContentRepositoryInterface $moduleContentRepositoryInterface
     ){
-        $this->teaching_content = $teachingContentRepositoryInterface;
+
+		$this->teaching_content = $teachingContentRepositoryInterface;
+		$this->module_content = $moduleContentRepositoryInterface;
     }
 
     /**
@@ -53,8 +67,18 @@ class TeachingContentController extends ApiController {
     public function store(TeachingContent $request)
     {
         $data = $request->all();
+
+		$teaching_content = $this->teaching_content->addTeachingContent($data);
+
+
+
+		//Add module_contents
+		$data['content_id'] = $teaching_content->id;
+
+		$this->module_content->addModuleContent($data);
+
         return $this->respondWithData(
-            $this->teaching_content->addTeachingContent($data)
+           $this->teaching_content->getTeachingContent($teaching_content->id)
         );
     }
 
@@ -66,6 +90,7 @@ class TeachingContentController extends ApiController {
      */
     public function show($id)
     {
+
         return $this->respondWithData(
             $this->teaching_content->getTeachingContent($id)
         );
@@ -80,8 +105,19 @@ class TeachingContentController extends ApiController {
     public function update(TeachingContent $request,$id)
     {
         $data = $request->all();
+
+		$teaching_content =  $this->teaching_content->updateTeachingContent($id,$data);
+
+
+		if($request->get('seq_no')){
+
+			$module_content = [ 'seq_no' => $request->get('seq_no')];
+
+			$this->module_content->updateModuleContentByTeachingContent($teaching_content->id,$module_content);
+		}
+
         return $this->respondWithData(
-            $this->teaching_content->updateTeachingContent($id,$data)
+            $this->teaching_content->getTeachingContent($id)
         );
     }
 
