@@ -31,6 +31,11 @@ class HelpRequestAnswerRepository implements HelpRequestAnswerRepositoryInterfac
 			$help_request_answer = $help_request_answer->RequestTitle($criteria['help_request']);
 		}
 
+		if(isset($criteria['help_request_id'])){
+
+			$help_request_answer = $help_request_answer->RequestId($criteria['help_request_id']);
+		}
+
 		if(isset($criteria['module'])){
 
 			$help_request_answer = $help_request_answer->ModuleName($criteria['module']);
@@ -65,7 +70,7 @@ class HelpRequestAnswerRepository implements HelpRequestAnswerRepositoryInterfac
 		}
 
 		$help_request_answer = $help_request_answer
-			->with('helpRequest','module','subject','subjectArea','user')->where('request_answer_status','!=','Rejected');
+			->with('student', 'helpRequest','module','subject','subjectArea','user')->where('request_answer_status','!=','Rejected');
 
 		$count = $help_request_answer->count();
 

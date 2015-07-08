@@ -42,5 +42,12 @@ function StudentHelpService($http){
 		});
 	}
 
+	service.updateStatus = function(data) {
+		return $http({
+			method 	: Constants.METHOD_PATCH
+			, url 	: serviceUrl + 'help-request/update-question-status/' + data.id + "?question_status=" + data.question_status
+		});
+	}
+
 	return service;
 }

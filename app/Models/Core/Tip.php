@@ -48,7 +48,7 @@ class Tip extends Model {
 
 	public function student(){
 
-		return $this->belongsTo('FutureEd\Models\Core\Student')->with('Avatar');
+		return $this->belongsTo('FutureEd\Models\Core\Student')->with('avatar');
 
 	}
 

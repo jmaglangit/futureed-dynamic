@@ -120,6 +120,8 @@ function HelpController($scope, apiService, StudentHelpService, TableService, Se
 					self.record.title = record.title;
 					self.record.content = record.content;
 					self.record.rating = record.rating;
+					self.record.own = (record.student_id == $scope.user.id) ? Constants.TRUE : Constants.FALSE;
+					self.record.question_status = record.question_status;
 					self.record.name = record.student.first_name + " " + record.student.last_name;
 				}
 			}
@@ -135,7 +137,7 @@ function HelpController($scope, apiService, StudentHelpService, TableService, Se
 		self.answers = [];
 		self.errors = Constants.FALSE;
 
-		$scope.div_block("answers_form");
+		$scope.ui_block();
 		StudentHelpService.listAnswers(id).success(function(response) {
 			self.table.loading = Constants.FALSE;
 
@@ -144,13 +146,17 @@ function HelpController($scope, apiService, StudentHelpService, TableService, Se
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					self.answers = response.data.records;
+
+					angular.forEach(self.answers, function(value, key) {
+						value.created_moment = moment(value.created_at).startOf("minute").fromNow();
+					});
 				}
 			}
 
-			$scope.div_unblock("answers_form");
+			$scope.ui_unblock();
 		}).error(function(response) {
 			self.errors = $scope.internalError();
-			$scope.div_unblock("answers_form");
+			$scope.ui_unblock();
 		});
 	}
 
@@ -177,6 +183,42 @@ function HelpController($scope, apiService, StudentHelpService, TableService, Se
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					self.record.rating = self.data.rating;
+				}
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.deleteRequest = function() {
+		var data = {};
+			data.id = self.record.id;
+			data.question_status = "Cancelled";
+
+		updateStatus(data);
+	}
+
+	self.closeRequest = function() {
+		var data = {};
+			data.id = self.record.id;
+			data.question_status = "Answered";
+
+		updateStatus(data);
+	}
+
+	function updateStatus(data) {
+		self.errors = Constants.FALSE;
+
+		$scope.ui_block();
+		StudentHelpService.updateStatus(data).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.setActive(Constants.ACTIVE_VIEW, self.record.id);
 				}
 			}
 
