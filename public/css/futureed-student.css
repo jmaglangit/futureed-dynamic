@@ -317,3 +317,7 @@ th, td {
 	max-height: 680px;
 	overflow: scroll;
 }
+
+.notice {
+	color: #A92147;
+}

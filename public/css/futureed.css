@@ -1069,12 +1069,16 @@ content {
 }
 
 .notice {
+	position: fixed;
+	z-index: 999;
+	right: 0px;
+	left: 0px;
 	text-align: center;
 	font-size: 24px;
-	color: #A92147;
+	color: #03658A;
 	background-color: #f6f4f5;
 	border: 5px solid #e1e1e1;
 	border-radius: 5px;
-	width: 50%;
+	width: 25%;
 	margin: auto;
 }
