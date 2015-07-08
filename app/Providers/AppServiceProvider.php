@@ -205,6 +205,10 @@ class AppServiceProvider extends ServiceProvider {
 			'FutureEd\Models\Repository\Question\QuestionRepositoryInterface',
 			'FutureEd\Models\Repository\Question\QuestionRepository'
 		);
+		$this->app->bind(
+			'FutureEd\Models\Repository\QuestionAnswer\QuestionAnswerRepositoryInterface',
+			'FutureEd\Models\Repository\QuestionAnswer\QuestionAnswerRepository'
+		);
 
 	}
 }

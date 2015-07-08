@@ -83,7 +83,7 @@ class AdminQuestionController extends ApiController {
 	public function store(AdminQuestionRequest $request)
 	{
 
-		$data =  $request->only('image','code','module_id','seq_no','questions_text','status','question_type','points_earned','difficulty');
+		$data =  $request->only('image','answer','code','module_id','seq_no','questions_text','status','question_type','points_earned','difficulty');
 
 		//check if has images uploaded
 		if($data['image']){
