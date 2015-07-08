@@ -13,10 +13,23 @@ use Illuminate\Support\Facades\Input;
 class GradeController extends ApiController
 {
 
+	/**
+	 * Initialized grade.
+	 * @var Grade
+	 */
 	protected $grade;
 
+	/**
+	 * Initialized country_grade.
+	 * @var CountryGradeRepositoryInterface
+	 */
 	protected $country_grade;
 
+	/**
+	 * Initialized grade controller.
+	 * @param Grade $grade
+	 * @param CountryGradeRepositoryInterface $countryGradeRepositoryInterface
+	 */
 	public function __construct(
 		Grade $grade,
 		CountryGradeRepositoryInterface $countryGradeRepositoryInterface
@@ -29,7 +42,10 @@ class GradeController extends ApiController
 	}
 
 
-	//get list of grade levels
+	/**
+	 * Get list of grade levels.
+	 * @return mixed
+	 */
 	public function index()
 	{
 
@@ -72,6 +88,11 @@ class GradeController extends ApiController
 
 	}
 
+	/**
+	 * Show grade based on id.
+	 * @param $id
+	 * @return mixed
+	 */
 	public function show($id)
 	{
 
@@ -114,6 +135,12 @@ class GradeController extends ApiController
 
 	}
 
+	/**
+	 * Update grade by id.
+	 * @param $id
+	 * @param GradeRequest $request
+	 * @return mixed
+	 */
 	public function update($id, GradeRequest $request)
 	{
 
@@ -139,6 +166,11 @@ class GradeController extends ApiController
 	}
 
 
+	/**
+	 * Delete grade by id.
+	 * @param $id
+	 * @return mixed
+	 */
 	public function destroy($id)
 	{
 
