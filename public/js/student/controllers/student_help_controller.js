@@ -161,29 +161,29 @@ function HelpController($scope, apiService, StudentHelpService, TableService, Se
 		});
 	}
 
-	self.changeColor = function(element) {
-		self.hovered = [];
+	self.changeColor = function(index, answer_id) {
+		self.hovered[answer_id] = [];
 
-		for (i = 0; i <= element; i++ ) {
-			self.hovered[i] = Constants.TRUE;			
+		for (i = 0; i <= index; i++ ) {
+			self.hovered[answer_id][i] = Constants.TRUE;			
 		}
 	}
 
-	self.selectRate = function(rate) {
+	self.selectRate = function(index, answer_id) {
 		self.errors = Constants.FALSE;
 
-		self.data = {};
-		self.data.student_id = $scope.user.id;
-		self.data.help_request_answer_id = self.record.id;
-		self.data.rating = self.hovered.length;
+		var data = {};
+			data.student_id = $scope.user.id;
+			data.help_request_answer_id = answer_id;
+			data.rating = self.hovered[answer_id].length;
 
 		$scope.ui_block();
-		StudentHelpService.rate(self.data).success(function(response) {
+		StudentHelpService.rate(data).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
-					self.record.rating = self.data.rating;
+					self.answers[index].rating = data.rating;
 				}
 			}
 

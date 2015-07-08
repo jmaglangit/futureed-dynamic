@@ -106,7 +106,7 @@
 				</div>
 			</div>
 
-			<div ng-repeat="answer in help.answers" class="col-xs-12 search-container">
+			<div ng-repeat="answer in help.answers" ng-init="answer_index = $index" class="col-xs-12 search-container">
 				<div class="form-search">
 					{!! Form::open(
 						array('id' => 'search_form'
@@ -134,26 +134,26 @@
 							</div>
 							<div class="col-xs-4">
 								<div class="col-xs-12">
-									<p ng-if="!help.record.rating">Was this answer helpful? Please rate.</p>
-									<p ng-if="help.record.rating">You rated this: </p>
+									<p ng-if="!answer.rating">Was this answer helpful? Please rate.</p>
+									<p ng-if="answer.rating">You rated this: </p>
 								</div>
 
 								<div class="col-xs-12">
 									<div class="rating-container">
 										<span ng-repeat="i in help.record.stars track by $index">
-											<img ng-if="!help.record.rating" ng-mouseover="help.changeColor($index)" ng-src="{! (help.hovered[$index])  && '/images/class-student/icon-star_yellow.png' || '/images/class-student/icon-star_white.png' !}" />
-											<img ng-if="help.record.rating" ng-src="{! $index+1 <= answer.rating && '/images/class-student/icon-star_yellow.png' || '/images/class-student/icon-star_white.png' !}" />
+											<img ng-if="!answer.rating" ng-mouseover="help.changeColor($index, answer.id)" ng-src="{! (help.hovered[answer.id][$index])  && '/images/class-student/icon-star_yellow.png' || '/images/class-student/icon-star_white.png' !}" />
+											<img ng-if="answer.rating" ng-src="{! $index + 1 <= answer.rating && '/images/class-student/icon-star_yellow.png' || '/images/class-student/icon-star_white.png' !}" />
 										</span>
 									</div>
 								</div>
 
-								<div class="btn-container col-xs-12">
+								<div class="btn-container col-xs-12" ng-if="!answer.rating">
 									{!! Form::button('Rate'
 										, array(
-											'class' => 'btn btn-blue pull-right'
-											, 'ng-click' => "help.selectRate()"
+											  'class' => 'btn btn-blue pull-right'
+											, 'ng-click' => "help.selectRate(answer_index, answer.id)"
 											, 'ng-if' => '!help.record.rating'
-											, 'ng-disabled' => '!help.hovered.length'
+											, 'ng-disabled' => '!help.hovered[answer.id].length'
 										)
 									) !!}
 								</div>
