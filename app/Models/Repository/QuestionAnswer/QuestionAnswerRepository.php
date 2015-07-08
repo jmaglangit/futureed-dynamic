@@ -106,4 +106,23 @@ class QuestionAnswerRepository implements QuestionAnswerRepositoryInterface{
 			return $e->getMessage();
 		}
 	}
+
+	/**
+	 * Delete a record.
+	 * @param $id
+	 * @return bool|null|string
+	 * @throws \Exception
+	 */
+	public function deleteQuestionAnswer($id){
+
+		try{
+
+			return QuestionAnswer::find($id)
+				->delete();
+
+		}catch (Exception $e){
+
+			return $e->getMessage();
+		}
+	}
 }

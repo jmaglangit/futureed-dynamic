@@ -4,6 +4,9 @@
 	<i class="fa fa-plus-square"></i> Add Age Group
 </button>
 <div class="module-container">
+	<div class="alert alert-success" ng-if="age.success">
+        	<p>{! age.success !}</p>
+        </div>
 	<div class="title-mid">
 		Age Group List
 	</div>
@@ -43,7 +46,7 @@
 			            <td ng-if="module.age_records.length">
 			            	<div class="row">
 			            		<div class="col-xs-6">
-			            			<a href="" ng-click="age.setActive(futureed.ACTIVE_EDIT, moduleInfo.id)"><span><i class="fa fa-pencil"></i></span></a>
+			            			<a href="" ng-click="age.setActive(futureed.ACTIVE_EDIT, ageInfo.id)"><span><i class="fa fa-pencil"></i></span></a>
 			            		</div>
 			            		<div class="col-xs-6">
 			            			<a href="" ng-click="age.confirmDelete(moduleInfo.id)"><span><i class="fa fa-trash"></i></span></a>

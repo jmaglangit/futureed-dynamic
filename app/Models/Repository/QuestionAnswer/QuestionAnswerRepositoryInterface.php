@@ -36,4 +36,12 @@ interface QuestionAnswerRepositoryInterface {
 
 	public function updateQuestionAnswer($id,$data);
 
+	/**
+	 * Delete a record.
+	 * @param $id
+	 * @return bool|null|string
+	 * @throws \Exception
+	 */
+	public function deleteQuestionAnswer($id);
+
 }

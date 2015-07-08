@@ -347,8 +347,8 @@ class StudentServices {
 
 
 			if (!(Carbon::now()->between(
-				Carbon::parse($class->classroom->order->date_start),
-				Carbon::parse($class->classroom->order->date_end)))
+				Carbon::parse($class->classroom['order']['date_start']),
+				Carbon::parse($class->classroom['order']['date_end'])))
 			) {
 
 				$this->class_student->setClassStudentInactive($class->id);
@@ -363,8 +363,8 @@ class StudentServices {
 		foreach ($inactive_class as $list => $class) {
 
 			if (Carbon::now()->between(
-				Carbon::parse($class->classroom->order->date_start),
-				Carbon::parse($class->classroom->order->date_end))
+				Carbon::parse($class->classroom['order']['date_start']),
+				Carbon::parse($class->classroom['order']['date_end']))
 			) {
 
 				$this->class_student->setClassStudentActive($class->id);
