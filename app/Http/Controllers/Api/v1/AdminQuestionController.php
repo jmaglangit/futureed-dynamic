@@ -143,7 +143,7 @@ class AdminQuestionController extends ApiController {
 	 */
 	public function update($id,AdminQuestionRequest $request)
 	{
-		$data =  $request->only('seq_no','questions_text','status','question_type','points_earned','difficulty');
+		$data =  $request->only('seq_no','answer','questions_text','status','question_type','points_earned','difficulty');
 
 		$question = $this->question->viewQuestion($id);
 
