@@ -92,4 +92,25 @@ class QuestionRepository implements QuestionRepositoryInterface{
 		return $question;
 
 	}
+
+
+	/**
+	 * Delete a record.
+	 * @param $id
+	 * @return bool|null|string
+	 * @throws \Exception
+	 */
+	public function deleteQuestion($id){
+
+		try{
+
+			return Question::find($id)
+				->delete();
+
+		}catch (Exception $e){
+
+			return $e->getMessage();
+		}
+	}
+
 }
