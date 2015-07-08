@@ -1067,3 +1067,14 @@ content {
 .side-container {
 	padding: 10px;
 }
+
+.notice {
+	text-align: center;
+	font-size: 24px;
+	color: #A92147;
+	background-color: #f6f4f5;
+	border: 5px solid #e1e1e1;
+	border-radius: 5px;
+	width: 50%;
+	margin: auto;
+}

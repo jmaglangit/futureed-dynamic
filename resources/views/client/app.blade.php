@@ -38,7 +38,7 @@
 </head>
 <body class="client" ng-controller="futureedController" ng-init="getUserDetails()">
   {!! Form::hidden('userdata', Session::get('client')) !!}
-  
+  <p class="notice"> BETA Stage: Under Development </p>
   @yield('navbar')
 
 	@yield('content')
