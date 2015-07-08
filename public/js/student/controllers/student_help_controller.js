@@ -1,9 +1,9 @@
 angular.module('futureed.controllers')
-	.controller('TipsController', TipsController);
+	.controller('HelpController', HelpController);
 
-TipsController.$inject = ['$scope', 'apiService', 'StudentTipsService', 'TableService', 'SearchService'];
+HelpController.$inject = ['$scope', 'apiService', 'StudentHelpService', 'TableService', 'SearchService'];
 
-function TipsController($scope, apiService, StudentTipsService, TableService, SearchService) {
+function HelpController($scope, apiService, StudentHelpService, TableService, SearchService) {
 	var self = this;
 
 	TableService(self);
@@ -59,18 +59,20 @@ function TipsController($scope, apiService, StudentTipsService, TableService, Se
 
 	self.list = function() {
 		if(self.active_list) {
-			self.listTips();
+			self.listHelp();
 		}
 	}
 
-	self.listTips = function() {
+	self.listHelp = function() {
 		self.records = [];
 		self.errors = Constants.FALSE;
 		self.search.class_id = ($scope.user.class) ? $scope.user.class.class_id : Constants.EMPTY_STR;
+		self.search.student_id = $scope.user.id;
+		self.search.help_request_type = (self.search.help_request_type) ? self.search.help_request_type: "All";
 		self.table.loading = Constants.TRUE;
 
 		$scope.ui_block();
-		StudentTipsService.list(self.search, self.table).success(function(response) {
+		StudentHelpService.list(self.search, self.table).success(function(response) {
 			self.table.loading = Constants.FALSE;
 
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
@@ -95,7 +97,7 @@ function TipsController($scope, apiService, StudentTipsService, TableService, Se
 		self.record = {};
 
 		$scope.ui_block();
-		StudentTipsService.detail(id).success(function(response) {
+		StudentHelpService.detail(id).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
@@ -138,7 +140,7 @@ function TipsController($scope, apiService, StudentTipsService, TableService, Se
 		self.data.rating = self.hovered.length;
 
 		$scope.ui_block();
-		StudentTipsService.rate(self.data).success(function(response) {
+		StudentHelpService.rate(self.data).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
