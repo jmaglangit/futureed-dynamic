@@ -224,6 +224,8 @@ function ManageModuleController($scope, manageModuleService, apiService, TableSe
 				} else if(response.data) {
 					self.details = response.data;
 					self.details.area = self.details.subjectarea.name;
+					$scope.module_id = self.details.id;
+					$scope.module_name = self.details.name;
 					self.age_records = {};
 					self.ageModuleList(self.details.name);
 				}
