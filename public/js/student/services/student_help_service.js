@@ -11,12 +11,19 @@ function StudentHelpService($http){
 		return $http({
 			method 	: Constants.METHOD_GET
 			, url 	: serviceUrl + 'help-request?class_id=' + search.class_id
-					+ "&question_status=" + search.question_status
+					+ "&request_status=" + search.request_status
 					+ "&subject=" + search.subject
 					+ "&student_id=" + search.student_id
 					+ "&help_request_type=" + search.help_request_type
 					+ "&limit=" + table.size
 					+ "&offset=" + table.offset
+		});
+	}
+
+	service.listAnswers = function(help_request_id) {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url 	: serviceUrl + 'help-request-answer?help_request_id=' + help_request_id
 		});
 	}
 
@@ -31,7 +38,7 @@ function StudentHelpService($http){
 		return $http({
 			method 	: Constants.METHOD_POST
 			, data  : data
-			, url 	: serviceUrl + 'help-request-rating /student'
+			, url 	: serviceUrl + 'help-request-answer-rating'
 		});
 	}
 

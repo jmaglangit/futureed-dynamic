@@ -3,16 +3,19 @@
 use FutureEd\Http\Requests\Api\HelpRequestRequest;
 use FutureEd\Models\Repository\HelpRequest\HelpRequestRepositoryInterface;
 use FutureEd\Models\Repository\HelpRequestAnswer\HelpRequestAnswerRepositoryInterface;
+use FutureEd\Services\AvatarServices;
 use Illuminate\Support\Facades\Input;
 
 class HelpRequestController extends ApiController{
 
     protected $help_request;
     protected $help_request_answer;
+    protected $avatar;
 
-    public function __construct(HelpRequestRepositoryInterface $help_request, HelpRequestAnswerRepositoryInterface $help_request_answer){
+    public function __construct(HelpRequestRepositoryInterface $help_request, HelpRequestAnswerRepositoryInterface $help_request_answer, AvatarServices $avatar){
         $this->help_request = $help_request;
         $this->help_request_answer = $help_request_answer;
+        $this->avatar = $avatar;
     }
 
     /**
@@ -93,7 +96,16 @@ class HelpRequestController extends ApiController{
      */
     public function show($id)
     {
-        return $this->respondWithData($this->help_request->getHelpRequest($id));
+
+        $help_request = $this->help_request->getHelpRequest($id);
+
+        if ($help_request) {
+
+            $help_request->student->avatar->avatar_url = $this->avatar->getAvatarUrl($help_request->student->avatar->avatar_image);
+        
+        }
+
+        return $this->respondWithData($help_request);
     }
 
     /**

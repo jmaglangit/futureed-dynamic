@@ -44,7 +44,7 @@ class HelpRequest extends Model {
     }
 
     public function student(){
-        return $this->belongsTo('FutureEd\Models\Core\Student');
+        return $this->belongsTo('FutureEd\Models\Core\Student')->with('Avatar');;
     }
 
     //Scopes

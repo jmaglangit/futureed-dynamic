@@ -36,65 +36,91 @@
 			<hr />
 		</div>
 
-		<div class="col-xs-12">
-			<div class="col-xs-12">
-				<p class="text-container">{! help.record.content !}</p>
-			</div>
-		</div>
-
-		<div class="col-xs-12">
-			<div class="col-xs-6"></div>
-			<div class="col-xs-6">
-				<p ng-if="!help.record.rating">Was the answer helpful? Please Rate.</p>
-				<p ng-if="help.record.rating">You rated this: </p>
-			</div>
-		</div>
-
-		<div class="col-xs-12" ng-cloak>
-			<div class="col-xs-6"></div>
-			<div class="col-xs-6">
-				<div class="col-xs-6 rating-container">
-					<span ng-repeat="i in help.record.stars track by $index">
-						<img ng-if="!help.record.rating" ng-mouseover="help.changeColor($index)" ng-src="{! ($index+1 <= help.record.rating || help.hovered[$index])  && '/images/class-student/icon-star_yellow.png' || '/images/class-student/icon-star_white.png' !}" />
-						<img ng-if="help.record.rating" ng-src="{! $index+1 <= help.record.rating && '/images/class-student/icon-star_yellow.png' || '/images/class-student/icon-star_white.png' !}" />
-					</span>
-				</div>
-				<div class="col-xs-6">
-					{!! Form::button('Rate'
-						, array(
-							'class' => 'btn btn-blue pull-right'
-							, 'ng-click' => "help.selectRate()"
-							, 'ng-if' => '!help.record.rating'
-							, 'ng-disabled' => '!help.hovered.length'
-						)
-					) !!}
-
-					{!! Form::button('Cancel'
-						, array(
-							'class' => 'btn btn-gold pull-right'
-							, 'ng-click' => "help.setActive()"
-							, 'ng-if' => 'help.record.rating'
-						)
-					) !!}
+		<div class="col-xs-12 search-container">
+			<div class="form-search">
+				<div class="form-group">
+					{! help.record.content !}
 				</div>
 			</div>
 		</div>
 
-		<br />
-	</div>
+		<fieldset class="col-xs-12">
+			<legend>Answers</legend>
+		</fieldset>
 
-	<div class="sticky-bottom col-xs-12" ng-if="!help.record.rating" ng-cloak>
-		<div class="col-xs-6"></div>
-		<div class="col-xs-6">
-			<div class="col-xs-6"></div>
-			<div class="col-xs-6">
-				{!! Form::button('Cancel'
-					, array(
-						'class' => 'btn btn-gold pull-right'
-						, 'ng-click' => "help.setActive()"
-					)
-				) !!}
+		<div id="answers_form" class="row">
+			<div ng-repeat="answer in help.answers" class="col-xs-12 search-container">
+				<div class="form-search">
+					{!! Form::open(
+						array('id' => 'search_form'
+							, 'class' => 'form-horizontal'
+							, 'ng-submit' => 'help.searchFnc($event)'
+						)
+					)!!}
+						<div class="form-group">
+							<div class="col-xs-6">
+								<div class="col-xs-3 avatar-container-small">
+									<img class="pull-left" ng-src="{! help.record.avatar_url !}" />
+								</div>
+
+								<div class="col-xs-6"> {! help.record.name !} says . . . </div>
+								<div class="avatar-name-container col-xs-3"> {! answer.content !} </div>
+							</div>
+							<div class="col-xs-6">
+								<div class="col-xs-12">
+									<p ng-if="!help.record.rating">Was this answer helpful? Please rate.</p>
+									<p ng-if="help.record.rating">You rated this: </p>
+								</div>
+
+								<div class="col-xs-12" ng-cloak>
+									<div class="col-xs-6 rating-container">
+										<span ng-repeat="i in help.record.stars track by $index">
+											<img ng-if="!help.record.rating" ng-mouseover="help.changeColor($index)" ng-src="{! ($index+1 <= help.record.rating || help.hovered[$index])  && '/images/class-student/icon-star_yellow.png' || '/images/class-student/icon-star_white.png' !}" />
+											<img ng-if="help.record.rating" ng-src="{! $index+1 <= help.record.rating && '/images/class-student/icon-star_yellow.png' || '/images/class-student/icon-star_white.png' !}" />
+										</span>
+									</div>
+									<div class="col-xs-5">
+										{!! Form::button('Rate'
+											, array(
+												'class' => 'btn btn-blue pull-right'
+												, 'ng-click' => "help.selectRate()"
+												, 'ng-if' => '!help.record.rating'
+												, 'ng-disabled' => '!help.hovered.length'
+											)
+										) !!}
+									</div>
+								</div>
+							</div>
+						</div>
+					{!! Form::close() !!}
+				</div>
 			</div>
+		</div>
+
+		<div class="col-xs-12 search-container">
+			{!! Form::textarea('answer', ''
+				, array(
+					'class' => 'form-control'
+					, 'placeholder' => 'Answer'
+					, 'rows' => '5'
+				)
+			) !!}
+		</div>
+
+		<div class="btn-container search-container col-xs-12" ng-cloak>
+			{!! Form::button('Cancel'
+				, array(
+					'class' => 'btn btn-gold btn-small pull-right'
+					, 'ng-click' => "help.setActive()"
+				)
+			) !!}
+
+			{!! Form::button('Submit'
+				, array(
+					'class' => 'btn btn-maroon btn-small pull-right'
+					, 'ng-click' => "help.setActive()"
+				)
+			) !!}
 		</div>
 	</div>
 </div>
