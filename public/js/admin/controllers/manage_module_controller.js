@@ -224,6 +224,8 @@ function ManageModuleController($scope, manageModuleService, apiService, TableSe
 				} else if(response.data) {
 					self.details = response.data;
 					self.details.area = self.details.subjectarea.name;
+					self.age_records = {};
+					self.ageModuleList(self.details.name);
 				}
 			}
 		$scope.ui_unblock();
@@ -291,5 +293,24 @@ function ManageModuleController($scope, manageModuleService, apiService, TableSe
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		})
+	}
+
+	self.ageModuleList = function(module) {
+		self.errors = Constants.FALSE;
+		self.records = {};
+		$scope.ui_block();
+		manageModuleService.ageModuleList(module, self.table).success(function(response){
+			if(angular.equals(response.status, Constants.STATUS_OK)){
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				}else if(response.data){
+					self.age_records = response.data.records;
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
 	}
 }
