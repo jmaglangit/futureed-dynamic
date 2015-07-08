@@ -154,7 +154,17 @@ class AdminQuestionController extends ApiController {
 	 */
 	public function destroy($id)
 	{
-		//
+
+		$question = $this->question->viewQuestion($id);
+
+		if(!$question){
+
+			return $this->respondErrorMessage(2120);
+		}
+
+		//delete question
+		return $this->respondWithData($this->question->deleteQuestion($id));
+
 	}
 
 }
