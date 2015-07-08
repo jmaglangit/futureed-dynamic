@@ -10,7 +10,8 @@ use FutureEd\Models\Repository\Grade\GradeRepositoryInterface as Grade;
 
 use Illuminate\Support\Facades\Input;
 
-class GradeController extends ApiController {
+class GradeController extends ApiController
+{
 
 	protected $grade;
 
@@ -19,7 +20,8 @@ class GradeController extends ApiController {
 	public function __construct(
 		Grade $grade,
 		CountryGradeRepositoryInterface $countryGradeRepositoryInterface
-	){
+	)
+	{
 
 		$this->grade = $grade;
 		$this->country_grade = $countryGradeRepositoryInterface;
@@ -27,73 +29,75 @@ class GradeController extends ApiController {
 	}
 
 
-    //get list of grade levels
-	public function index(){
+	//get list of grade levels
+	public function index()
+	{
 
-        $criteria = array();
-        $limit = 0;
-        $offset = 0;
+		$criteria = array();
+		$limit = 0;
+		$offset = 0;
 
-        if(Input::get('name')) {
-            $criteria['name'] = Input::get('name');
-        }
-
-
-        $country_exist = $this->grade->checkCountry(Input::get('country_id'));
-
-        switch (Input::get('country_id')) {
-            case 'all':
-                $criteria['country_id'] = 'all';
-                break;
-            default:
-                if($country_exist){
-                    $criteria['country_id'] = Input::get('country_id');
-                }
-                else{
-                    $criteria['country_id'] = config('futureed.default_country');
-                }
-                break;
-        }
-
-        if(Input::get('limit')) {
-            $limit = intval(Input::get('limit'));
-        }
-
-        if(Input::get('offset')) {
-            $offset = intval(Input::get('offset'));
-        }
-
-        $grade = $this->grade->getGrades($criteria,$limit,$offset);
+		if (Input::get('name')) {
+			$criteria['name'] = Input::get('name');
+		}
 
 
-        return $this->respondWithData($grade);
-        
-    }
+		$country_exist = $this->grade->checkCountry(Input::get('country_id'));
 
-    public function show($id){
+		switch (Input::get('country_id')) {
+			case 'all':
+				$criteria['country_id'] = 'all';
+				break;
+			default:
+				if ($country_exist) {
+					$criteria['country_id'] = Input::get('country_id');
+				} else {
+					$criteria['country_id'] = config('futureed.default_country');
+				}
+				break;
+		}
 
-        $grade = $this->grade->getGradeById($id);
+		if (Input::get('limit')) {
+			$limit = intval(Input::get('limit'));
+		}
 
-        if(empty($grade)){
+		if (Input::get('offset')) {
+			$offset = intval(Input::get('offset'));
+		}
 
-            return $this->respondErrorMessage(2120);
+		$grade = $this->grade->getGrades($criteria, $limit, $offset);
 
-        }
+
+		return $this->respondWithData($grade);
+
+	}
+
+	public function show($id)
+	{
+
+		$grade = $this->grade->getGradeById($id);
+
+		if (empty($grade)) {
+
+			return $this->respondErrorMessage(2120);
+
+		}
 
 		$country_grade = $this->country_grade->getCountryGradeByGrade($grade->id);
 
 		$grade->age_group_id = $country_grade->age_group_id;
 
-        return $this->respondWithData($grade);
+		return $this->respondWithData($grade);
 
-    }
+	}
 
 	/**
 	 * Add grades to be inserted to
 	 * @param GradeRequest $request
 	 * @return mixed
 	 */
-    public function store(GradeRequest $request){
+	public function store(GradeRequest $request)
+	{
 
 		$grade = $request->only('code', 'name', 'country_id', 'description', 'status');
 		$country_grade = $request->only('age_group_id', 'country_id');
@@ -108,50 +112,51 @@ class GradeController extends ApiController {
 
 		return $this->respondWithData(['id' => $grade->id]);
 
-    }
+	}
 
-    public function update($id,GradeRequest $request){
+	public function update($id, GradeRequest $request)
+	{
 
-    	$data = $request->except(array('code'));
+		$data = $request->except(array('code'));
 		$country_grade = $request->only('age_group_id');
-        $grade = $this->grade->getGradeById($id);
+		$grade = $this->grade->getGradeById($id);
 
-        if(empty($grade)){
+		if (empty($grade)) {
 
-            return $this->respondErrorMessage(2120);
+			return $this->respondErrorMessage(2120);
 
-        }
+		}
 
 		//Update Country Grade
-		$country_grade = $this->country_grade->updateAgeGroup($grade->id,$country_grade);
+		$country_grade = $this->country_grade->updateAgeGroup($grade->id, $country_grade);
 
-    	$grade = $this->grade->updateGrade($id,$data);
+		$grade = $this->grade->updateGrade($id, $data);
 
 		$grade->age_group_id = $country_grade->age_group_id;
 
-    	return $this->respondWithData([$grade]);
+		return $this->respondWithData([$grade]);
 
-    }
+	}
 
 
-    public function destroy($id){
+	public function destroy($id)
+	{
 
-        //check if this record is related to student before deleting
-        $relation = $this->grade->getStudentByCode($id);
+		//check if this record is related to student before deleting
+		$relation = $this->grade->getStudentByCode($id);
 
-        if(empty($relation)){
+		if (empty($relation)) {
 
-            return $this->respondErrorMessage(2120);
-        }
+			return $this->respondErrorMessage(2120);
+		}
 
-       if($relation['students']->toArray()) {
+		if ($relation['students']->toArray()) {
 
-           return $this->respondErrorMessage(2119);
-       }
+			return $this->respondErrorMessage(2119);
+		}
 
-        return $this->respondWithData($this->grade->deleteGrade($id));
-    }
-
+		return $this->respondWithData($this->grade->deleteGrade($id));
+	}
 
 
 }
