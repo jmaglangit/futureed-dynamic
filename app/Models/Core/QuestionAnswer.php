@@ -27,4 +27,12 @@ class QuestionAnswer extends Model {
 
 	];
 
+	//-------------scopes
+	public function scopeQuestionId($query, $question_id)
+	{
+
+		return $query->where('question_id', '=', $question_id);
+
+	}
+
 }

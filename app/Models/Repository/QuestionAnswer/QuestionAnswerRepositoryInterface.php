@@ -11,4 +11,13 @@ interface QuestionAnswerRepositoryInterface {
 	 */
 	public function addQuestionAnswer($data);
 
+	/**
+	 * Gets list of QuestionAnswers.
+	 * @param $criteria
+	 * @param $limit
+	 * @param $offset
+	 * @return array
+	 */
+	public function getQuestionAnswers($criteria = array(), $limit = 0, $offset = 0);
+
 }
