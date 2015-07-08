@@ -11,7 +11,7 @@ class HelpController extends Controller {
 	public function index()
 	{
 		$input = Input::only('request_type');
-		$input['request_type'] = ($input['request_type']) ? $input['request_type'] : 'All';
+		$input['request_type'] = ($input['request_type']) ? $input['request_type'] : '';
 		
 		return view('student.help.index', $input);
 	}

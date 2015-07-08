@@ -26,7 +26,7 @@ class HelpRequestRepository implements HelpRequestRepositoryInterface{
     public function getHelpRequest($id){
         try{
             $result = HelpRequest::with('classroom','module','subject','subjectArea','student')->find($id);
-            return is_null($result) ? null : $result->toArray();
+            return is_null($result) ? null : $result;
         }catch (\Exception $e){
             return $e->getMessage();
         }

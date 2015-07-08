@@ -21,7 +21,8 @@ function HelpController($scope, apiService, StudentHelpService, TableService, Se
 
 		switch(active) {
 			case Constants.ACTIVE_VIEW:
-				self.tipsDetail(id);
+				self.helpDetail(id);
+				self.listAnswers(id);
 				self.active_view = Constants.TRUE;
 				break;
 
@@ -70,9 +71,12 @@ function HelpController($scope, apiService, StudentHelpService, TableService, Se
 	self.listHelp = function() {
 		self.records = [];
 		self.errors = Constants.FALSE;
-		self.search.class_id = ($scope.user.class) ? $scope.user.class.class_id : Constants.EMPTY_STR;
-		self.search.student_id = $scope.user.id;
-		self.search.help_request_type = (self.search.help_request_type) ? self.search.help_request_type: "All";
+		self.search.class_id = ($scope.user.class) ? $scope.user.class.class_id : Constants.EMPTY_STR; 
+		if (self.search.help_request_type) {
+			self.search.student_id = $scope.user.id;
+		}
+
+		self.search.help_request_type = (self.search.help_request_type) ? self.search.help_request_type: Constants.EMPTY_STR;
 		self.table.loading = Constants.TRUE;
 
 		$scope.ui_block();
@@ -95,7 +99,7 @@ function HelpController($scope, apiService, StudentHelpService, TableService, Se
 		});
 	}
 
-	self.tipsDetail = function(id) {
+	self.helpDetail = function(id) {
 		self.errors = Constants.FALSE;
 		self.hovered = [];
 		self.record = {};
@@ -127,6 +131,29 @@ function HelpController($scope, apiService, StudentHelpService, TableService, Se
 		});
 	}
 
+	self.listAnswers = function(id) {
+		self.answers = [];
+		self.errors = Constants.FALSE;
+
+		$scope.div_block("answers_form");
+		StudentHelpService.listAnswers(id).success(function(response) {
+			self.table.loading = Constants.FALSE;
+
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.answers = response.data.records;
+				}
+			}
+
+			$scope.div_unblock("answers_form");
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.div_unblock("answers_form");
+		});
+	}
+
 	self.changeColor = function(element) {
 		self.hovered = [];
 
@@ -140,7 +167,7 @@ function HelpController($scope, apiService, StudentHelpService, TableService, Se
 
 		self.data = {};
 		self.data.student_id = $scope.user.id;
-		self.data.tip_id = self.record.id;
+		self.data.help_request_answer_id = self.record.id;
 		self.data.rating = self.hovered.length;
 
 		$scope.ui_block();

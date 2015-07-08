@@ -1,11 +1,11 @@
 <div ng-if="help.active_list">
 	<div class="content-title">
 		<div class="title-main-content">
-			<span><i class="fa fa-lightbulb-o"></i> General help</span>
+			<span><i class="fa fa-lightbulb-o"></i> General Help Requests </span>
 		</div>
 	</div>
 
-	<div class="col-xs-12" ng-if="help.errors || help.success">
+	<div class="col-xs-12 success-container" ng-if="help.errors || help.success">
 		<div class="alert alert-error" ng-if="help.errors">
 			<p ng-repeat="error in help.errors track by $index">
 				{! error !}
@@ -42,15 +42,14 @@
 				</div>
 
 				<div class="col-xs-5">
-					{!! Form::select('search_question_status'
+					{!! Form::select('search_request_status'
 						, array(
-							'' => '-- Select Status --'
-							, 'Open' => 'Open'
-							, 'Answered' => 'Answered'
-							, 'Cancelled' => 'Cancelled'
+							'' => '-- Select Request Status --'
+							, 'Pending' => 'Pending'
+							, 'Accepted' => 'Accepted'
 						), ''
 						, array(
-							  'ng-model' => 'help.search.question_status'
+							  'ng-model' => 'help.search.request_status'
 							, 'class' => 'form-control'
 						)
 					) !!}
@@ -69,7 +68,7 @@
 				<div class="col-xs-5">
 					{!! Form::select('search_help_request_type'
 						, array(
-							  'All' => 'All'
+							  '' => 'All'
 							, 'Own' => 'Your Requests'
 							, 'Others' => 'Other Requests'
 						), '$request_type'
