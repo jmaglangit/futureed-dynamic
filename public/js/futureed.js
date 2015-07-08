@@ -1,10 +1,11 @@
 'use strict';
 
 angular.module('futureed', [
-  'ui.bootstrap',
+	'ui.bootstrap',
+	'evgenyneu.markdown-preview',
 	'futureed.services',
 	'futureed.controllers',
-  'ui.bootstrap.datetimepicker'
+	'ui.bootstrap.datetimepicker'
 ]).config(['$interpolateProvider'
         , '$httpProvider'
   , function($interpolateProvider, $httpProvider) {
