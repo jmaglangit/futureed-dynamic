@@ -209,3 +209,6 @@
         </div>
 	</div>
 </div>
+<div ng-if="module.active_view" ng-controller="ManageAgeGroupController as age">
+    <div ng-init="setActive()" template-directive template-url="{!! route('admin.manage.age_group.partials.list_view_form') !!}"></div>
+</div>
