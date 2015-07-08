@@ -312,3 +312,8 @@ th, td {
 .answers-cancel {
 	margin: 30px 45px !important;
 }
+
+.answers-container {
+	max-height: 680px;
+	overflow: scroll;
+}

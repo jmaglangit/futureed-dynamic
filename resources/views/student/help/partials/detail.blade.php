@@ -18,7 +18,7 @@
     </div>
 	
 	<div class="form-content">
-		<div id="detail_form"> 
+		<div id="detail_form" class="row"> 
 			<div class="col-xs-12">
 				<div class="col-xs-6">
 					<h3 class="col-xs-12">{! help.record.title !}</h3>
@@ -97,7 +97,7 @@
 			</fieldset>
 		</div>
 
-		<div id="answers_form" class="row">
+		<div id="answers_form" class="answers-container row">
 			<div class="col-xs-12 search-container" ng-if="!help.answers.length">
 				<div class="form-search">
 					<div class="form-group">
@@ -164,17 +164,18 @@
 			</div>
 		</div>
 
-		<div class="col-xs-12 search-container">
+		<div class="col-xs-12 search-container" ng-if="help.record.question_status == 'Open'">
 			{!! Form::textarea('answer', ''
 				, array(
 					'class' => 'form-control'
 					, 'placeholder' => 'Answer'
+					, 'ng-model' => 'help.record.answer'
 					, 'rows' => '5'
 				)
 			) !!}
 		</div>
 
-		<div class="btn-container search-container col-xs-12">
+		<div class="btn-container search-container col-xs-12" ng-if="help.record.question_status == 'Open'">
 			{!! Form::button('Clear'
 				, array(
 					'class' => 'btn btn-gold btn-small pull-right'
@@ -185,7 +186,7 @@
 			{!! Form::button('Submit'
 				, array(
 					'class' => 'btn btn-maroon btn-small pull-right'
-					, 'ng-click' => "help.setActive()"
+					, 'ng-click' => "help.answerRequest()"
 				)
 			) !!}
 		</div>
