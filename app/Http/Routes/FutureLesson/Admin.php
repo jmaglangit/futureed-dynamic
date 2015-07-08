@@ -533,6 +533,28 @@
 					]);
 				});
 			});
+
+		Routes::group(['prefix' => '/age_group'], function() {
+
+				Routes::group(['prefix' => '/patials'], function() {
+
+					Routes::get('/list_view_form', 
+						['as' => 'admin.manage.age_group.partials.list_view_form'
+						, 'uses' => 'FutureLesson\Admin\ManageAgeGroupController@list_view_form'
+						, 'middleware' => 'admin_partial'
+					]);
+
+					Routes::get('/add_view_form', 
+						['as' => 'admin.manage.age_group.partials.add_view_form'
+						, 'uses' => 'FutureLesson\Admin\ManageAgeGroupController@add_view_form'
+					]);
+
+					Routes::get('/edit_module_form', 
+						['as' => 'admin.manage.age_group.partials.edit_module_form'
+						, 'uses' => 'FutureLesson\Admin\ManageAgeGroupController@edit_module_form'
+					]);
+				});
+			});
 			
 
 		Routes::group(['prefix' => '/dashboard'], function()
