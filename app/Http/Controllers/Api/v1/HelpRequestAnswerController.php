@@ -6,19 +6,23 @@ use FutureEd\Models\Core\HelpRequestAnswer;
 use FutureEd\Models\Repository\HelpRequestAnswer\HelpRequestAnswerRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use FutureEd\Services\AvatarServices;
 
 class HelpRequestAnswerController extends ApiController {
 
 	protected $help_request_answer;
+	protected $avatar;
 
 	/**
 	 *
 	 */
 	public function __construct(
 		HelpRequestAnswerRepositoryInterface $helpRequestAnswerRepositoryInterface
+		, AvatarServices $avatar
 	){
 
 		$this->help_request_answer = $helpRequestAnswerRepositoryInterface;
+		$this->avatar = $avatar;
 
 	}
 
@@ -45,6 +49,11 @@ class HelpRequestAnswerController extends ApiController {
 		if(Input::get('help_request')){
 
 			$criteria['help_request'] = Input::get('help_request');
+		}
+
+		if(Input::get('help_request_id')){
+
+			$criteria['help_request_id'] = Input::get('help_request_id');
 		}
 
 		if(Input::get('module')){
@@ -85,7 +94,18 @@ class HelpRequestAnswerController extends ApiController {
 			$offset = intval(Input::get('offset'));
 		}
 
-		return $this->respondWithData($this->help_request_answer->getHelpRequestAnswers($criteria,$limit,$offset));
+		$record = $this->help_request_answer->getHelpRequestAnswers($criteria,$limit,$offset);
+
+		if($record['total'] > 0){
+
+			foreach($record['records'] as $k=>$v){
+
+				$record['records'][$k]['student']['avatar']['avatar_url'] = $this->avatar->getAvatarUrl($v['student']['avatar']['avatar_image']); 
+			}
+
+		}
+
+		return $this->respondWithData($record);
 
 	}
 
