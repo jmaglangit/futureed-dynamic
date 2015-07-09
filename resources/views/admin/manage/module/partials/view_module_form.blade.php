@@ -1,9 +1,9 @@
 <div ng-if="module.active_view || module.active_edit">
-	<div class="content-title">
-		<div class="title-main-content">
-			<span>View Module</span>
-		</div>
-	</div>
+    <div class="content-title">
+        <div class="title-main-content">
+            <span>View Module</span>
+        </div>
+    </div>
 
     <div class="panel-group module-container" id="accordion">
         <div class="panel panel-default">
