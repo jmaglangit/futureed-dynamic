@@ -43,7 +43,7 @@ trait ClientValidatorTrait {
                     "$field_name" => strtolower($input["$field_name"]),
                 ],
                 [
-                    "$field_name" => 'required|String'
+                    "$field_name" => 'required|String|max:128'
                     //regex:/^[A-Za-z0-9\-\\,.]+$/'
                 ]
             );
@@ -58,6 +58,30 @@ trait ClientValidatorTrait {
                     ->errorMessage();
             }
     }
+
+	public function schoolCityOptional($input, $field_name){
+
+		$validator = Validator::make(
+			[
+				"$field_name" => strtolower($input["$field_name"]),
+			],
+			[
+				"$field_name" => 'max:128'
+				//regex:/^[A-Za-z0-9\-\\,.]+$/'
+			]
+		);
+
+		if($validator->fails()){
+
+			$validator_msg = $validator->messages()->toArray();
+
+			return $this->setErrorCode(1013)
+				->setField($field_name)
+				->setMessage($validator_msg["$field_name"][0])
+				->errorMessage();
+		}
+	}
+
     public function schoolState($input, $schoolState){
 
         if(is_null($input['school_state']) || empty($input['school_state'])){
