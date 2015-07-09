@@ -53,6 +53,24 @@ class StudentTipController extends ApiController {
 			$criteria['subject'] = Input::get('subject');
 		}
 
+		//for module_id
+		if(Input::get('module_id')){
+
+			$criteria['module_id'] = Input::get('module_id');
+		}
+
+		//for link_type
+		if(Input::get('link_type')){
+
+			$criteria['link_type'] = Input::get('link_type');
+		}
+
+		//for link_id
+		if(Input::get('link_id')){
+
+			$criteria['link_id'] = Input::get('link_id');
+		}
+
 		//assign value to status = Accepted
 		$criteria['status'] = config('futureed.tip_status_accepted');
 
@@ -64,7 +82,18 @@ class StudentTipController extends ApiController {
 			$offset = intval(Input::get('offset'));
 		}
 
-		return $this->respondWithData($this->tip->viewClassTips($criteria , $limit, $offset ));
+		$record = $this->tip->viewClassTips($criteria , $limit, $offset );
+
+		if($record['total'] > 0){
+
+			foreach($record['records'] as $k=>$v){
+
+				$record['records'][$k]['student']['avatar']['avatar_image'] = $this->avatar->getAvatarUrl($v['student']['avatar']['avatar_image']);
+			}
+
+		}
+
+		return $this->respondWithData($record);
 
 	}
 
