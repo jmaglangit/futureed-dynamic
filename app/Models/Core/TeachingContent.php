@@ -65,8 +65,12 @@ class TeachingContent extends Model {
         return $query->where('teaching_module','like','%'.$teaching_module.'%');
     }
 
+    public function scopeTeachingModuleId($query,$teaching_module_id){
+        return $query->where('module_id','=',$teaching_module_id);
+    }
+
     public function scopeLearningStyleId($query,$learning_style_id){
-        return $query->whereLearningStyleId($learning_style_id);
+        return $query->where('learning_style_id', '=', $learning_style_id);
     }
 
 }
