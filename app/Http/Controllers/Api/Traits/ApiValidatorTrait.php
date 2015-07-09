@@ -150,6 +150,28 @@ trait ApiValidatorTrait {
             }
     }
 
+	public function validateContactName($input,$contact_name){
+
+		$validator = Validator::make(
+			[
+				"$contact_name" => $input["$contact_name"],
+			],
+			[
+				"$contact_name" => 'required|min:2|regex:'. config('regex.name') .'|max:64'
+			]
+		);
+
+		if($validator->fails()){
+
+			$validator_msg = $validator->messages()->toArray();
+
+			return $this->setErrorCode(1007)
+				->setField($contact_name)
+				->setMessage($validator_msg["$contact_name"][0])
+				->errorMessage();
+		}
+	}
+
     //Validate gender -- accepts any type of case
     public function gender($input,$gender){
 
