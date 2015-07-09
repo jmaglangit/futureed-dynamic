@@ -35,6 +35,7 @@ Routes::group(['prefix' => 'api/v1'], function()
     include('Routes/Api/HelpRequestAnswer.php');
     include('Routes/Api/HelpRequestAnswerRating.php');
     include('Routes/Api/Invoice.php');
+    include('Routes/Api/LearningStyle.php');
     include('Routes/Api/Module.php');
     include('Routes/Api/ModuleGroup.php');
     include('Routes/Api/Order.php');

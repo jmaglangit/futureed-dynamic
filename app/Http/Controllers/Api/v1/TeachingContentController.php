@@ -47,6 +47,10 @@ class TeachingContentController extends ApiController {
             $criteria['teaching_module'] = Input::get('teaching_module');
         }
 
+        if(Input::get('teaching_module_id')){
+            $criteria['teaching_module_id'] = Input::get('teaching_module_id');
+        }
+
         if(Input::get('learning_style')){
             $criteria['learning_style'] = Input::get('learning_style');
         }

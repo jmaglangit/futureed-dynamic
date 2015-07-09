@@ -18,7 +18,7 @@ class Tip extends Model {
 		'updated_at',
 		'deleted_at'];
 
-	protected $fillable =['class_id','student_id','title','content','module_id','subject_id','area_id','link_type','link_id'
+	protected $fillable =['class_id','student_id','title','content','module_id','subject_id','subject_area_id','link_type','link_id'
                             ,'seq_no','rating','tip_status','status','created_by','updated_by'];
 
 	protected $attributes = [
@@ -127,6 +127,16 @@ class Tip extends Model {
 
 		$query->where('link_type', config('futureed.link_type_general'));
 
+	}
+
+	public function scopeModuleId($query, $module_id){
+
+		return $query->where('module_id','=',$module_id);
+	}
+
+	public function scopeLinkId($query, $link_id){
+
+		return $query->where('link_id','=',$link_id);
 	}
 
 

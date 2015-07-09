@@ -11,5 +11,5 @@ return [
 	'name_numeric' => '/^([a-z0-9][a-z0-9ñ\-\x20]*[a-z0-9])+$/i',
 
 	//Zip code
-	'zip_code' => '/^[\w]+(\-[\w]+)*?$/',
+	'zip_code' => '/^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*?$/',
 ];

@@ -25,7 +25,7 @@
              -->
              <ul class="nav navbar-nav ul-left">
                <li>
-                 <a href="{!! route('student.class.index') !!}">Join Class</a>
+                 <a href="#" ng-click="checkClass()">Join Class</a>
                </li>
              </ul>
             <ul class="nav navbar-nav navbar-right">

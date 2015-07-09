@@ -13,8 +13,8 @@ function manageModuleService($http) {
 			, url 	: moduleServiceUrl + 'module/admin?subject=' + search.subject
 				+ '&name=' + search.name
 				+ '&area=' + search.area
-				+ '&limit' + table.size
-				+ '&offset' + table.offset
+				+ '&limit=' + table.size
+				+ '&offset=' + table.offset
 		});
 	}
 
@@ -67,8 +67,8 @@ function manageModuleService($http) {
 		return $http({
 			method 	: Constants.METHOD_GET
 			, url 	: moduleServiceUrl + 'module-group?module_name=' + module
-				+ '&limit' + table.size
-				+ '&offset' + table.offset
+				+ '&limit=' + table.size
+				+ '&offset=' + table.offset
 		});
 	}
 

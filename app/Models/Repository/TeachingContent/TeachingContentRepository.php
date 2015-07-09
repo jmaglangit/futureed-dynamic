@@ -50,6 +50,10 @@ class TeachingContentRepository implements TeachingContentRepositoryInterface{
                     $query = $query->teachingModule($criteria['teaching_module']);
                 }
 
+                if(isset($criteria['teaching_module_id'])){
+                    $query = $query->teachingModuleId($criteria['teaching_module_id']);
+                }
+
                 if(isset($criteria['learning_style'])){
                     $query = $query->learningStyleId($criteria['learning_style']);
                 }

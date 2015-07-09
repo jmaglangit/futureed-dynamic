@@ -17,4 +17,11 @@ class LearningStyle extends Model {
 
     protected $attributes = ['created_by' => 1, 'updated_by' => 1];
 
+
+	//-------------scopes
+	public function scopeName($query, $name){
+
+		return $query->where('name','like','%'.$name.'%');
+	}
+
 }
