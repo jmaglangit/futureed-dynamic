@@ -252,5 +252,13 @@ var services = angular.module('futureed.services', []);
 			});
 		}
 
+		futureedAPI.checkClass = function(id) {
+			return $http({
+				method 	: Constants.METHOD_POST
+				, data 	: {student_id : id}
+				, url	: futureedAPIUrl + 'class-student/student-join-class'
+			});
+		}
+
 		return futureedAPI;
 	});
