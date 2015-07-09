@@ -568,8 +568,11 @@ trait ApiValidatorTrait {
                 "$field_name" => strtolower($input["$field_name"]),
             ],
             [
-                "$field_name" => "required"
-            ]
+                "$field_name" => "required|max:20"
+            ],
+			[
+				'max' => config('futureed-error.error_messages.2046')
+			]
         );
 
         if($validator->fails()){
