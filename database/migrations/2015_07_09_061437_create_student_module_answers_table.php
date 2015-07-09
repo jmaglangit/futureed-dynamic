@@ -17,7 +17,7 @@ class CreateStudentModuleAnswersTable extends Migration {
 			$table->increments('id');
 			$table->bigInteger('student_module_id');
 			$table->bigInteger('module_id');
-			$table->bigIncrements('seq_no');
+			$table->bigInteger('seq_no');
 			$table->bigInteger('question_id');
 			$table->bigInteger('answer_id');
 			$table->text('answer_text');
