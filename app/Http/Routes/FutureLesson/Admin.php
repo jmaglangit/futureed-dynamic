@@ -532,6 +532,37 @@
 						, 'uses' => 'FutureLesson\Admin\ManageModuleController@view_module_form'
 					]);
 				});
+
+				Routes::group(['prefix' => '/content'], function() {
+
+					Routes::get('/', 
+						['as' => 'admin.manage.module.content.index'
+							, 'uses' => 'FutureLesson\Admin\ManageModuleContentController@index'
+						]);
+
+					Routes::group(['prefix' => '/partials'], function() {
+
+						Routes::get('/add', 
+							['as' => 'admin.manage.module.content.partials.add'
+							, 'uses' => 'FutureLesson\Admin\ManageModuleContentController@add_form'
+						]);
+
+						Routes::get('/detail', 
+							['as' => 'admin.manage.module.content.partials.detail'
+							, 'uses' => 'FutureLesson\Admin\ManageModuleContentController@detail_form'
+						]);
+
+						Routes::get('/list', 
+							['as' => 'admin.manage.module.content.partials.list'
+							, 'uses' => 'FutureLesson\Admin\ManageModuleContentController@list_form'
+						]);
+
+						Routes::get('/delete', 
+							['as' => 'admin.manage.module.content.partials.delete'
+							, 'uses' => 'FutureLesson\Admin\ManageModuleContentController@delete_form'
+						]);
+					});
+				});
 			});
 
 		Routes::group(['prefix' => '/age_group'], function() {
