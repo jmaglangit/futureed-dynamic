@@ -354,6 +354,10 @@ th, td {
 	vertical-align: middle;
 }
 
+#lsp_panel ul.answer_groups {
+  margin: 0 -30px;
+}
+
 #lsp_panel .modern-paginator a.page-number:hover {
 	text-decoration: none;
 }
@@ -367,6 +371,10 @@ th, td {
 #lsp_panel ul.answers, #lsp_panel ul.answer_groups {
 	list-style: none;
 	padding-left: 0;
+}
+
+#lsp_panel .question {
+	margin-bottom: 30px;
 }
 
 #lsp_panel ul.answers li {
@@ -391,6 +399,36 @@ th, td {
 
 #lsp_panel ul.answers li:last-child, #lsp_panel ul.answer_groups li:last-child {
 	margin-bottom: 0px;
+}
+
+#lsp_panel #percentage {
+	margin: -15px -5px 0;
+}
+
+#lsp_panel #percentage .progress {
+	background: #d4e5e2;
+	border-radius: 0;
+	height: 5px;
+	margin-bottom: 0;
+	width: 100%;
+}
+
+#lsp_panel #percentage .progress-labels {
+	display: block;
+	margin: 3px 0 0;
+	padding: 0 5px;
+	width: 100%;
+}
+
+#lsp_panel #percentage .percent-text.zero {
+	padding-right: 5px;
+	float: left;
+}
+
+#lsp_panel #percentage .percent-text.hundred {
+	padding-left: 5px;
+	float: right;
+}
 
 .answers-cancel {
 	margin: 30px 45px !important;

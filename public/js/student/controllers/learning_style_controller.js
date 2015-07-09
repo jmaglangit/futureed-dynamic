@@ -104,9 +104,7 @@ function LearningStyleController($rootScope, $scope, $interval, $filter, $sce, $
 
 	var closeTest = function() {
 		$scope.session.next = 'Closing...';
-		OrderCandidateTest.endTest({id: $scope.order_candidate_test.id, token: $scope.session.token, user_id: $scope.session.user_id}, {}, function(r){
-			location.href = $scope.session.redirect_on_complete;
-		});
+		//TODO: put end test logic here.
 	}
 
 	var enablePreviousPageButton = function() {
@@ -148,9 +146,7 @@ function LearningStyleController($rootScope, $scope, $interval, $filter, $sce, $
 		if ( !$scope.order_candidate_test.started_at )
 		{
 			startDurationTicker();
-			OrderCandidateTest.startTest({id: $scope.order_candidate_test.id, token: $scope.session.token, user_id: $scope.session.user_id}, function(r){
-
-			});
+			//TODO: put start test here
 		}
 	}
 
@@ -206,6 +202,8 @@ function LearningStyleController($rootScope, $scope, $interval, $filter, $sce, $
 		s.questions = s.questions.map(function(question){
 			question.question_no = parseInt(question.question_no);
 			question.page_no = parseInt(question.page_no);
+
+			question.user_answers = [];
 
 			angular.forEach(question.user_answers, function( a ) {
 				if ($scope.helpers.isShortTextQuestionMultiple(question))
@@ -269,6 +267,9 @@ function LearningStyleController($rootScope, $scope, $interval, $filter, $sce, $
 	}
 
 	var recalculateProgress = function() {
+		console.log('all_questions');
+		console.log($scope.session.all_questions);
+	
 		var completed = 0;
 		angular.forEach($scope.session.all_questions, function(q){
 			if ( typeof(q.user_answers) != 'undefined' )
@@ -284,7 +285,7 @@ function LearningStyleController($rootScope, $scope, $interval, $filter, $sce, $
 		});
 
 		$scope.session.progress = Math.ceil(completed / $scope.session.all_questions.length * 100) + '%';
-
+		console.log('recalculate:' + $scope.session.progress);
 	}
 
 	var setActualTimeLimit = function() {
@@ -509,14 +510,6 @@ function LearningStyleController($rootScope, $scope, $interval, $filter, $sce, $
 				setToPreviousPage();
 			} else if ( $scope.session.current_state == 'sample questions' ) {
 				setToIndexPage();
-				// if ( $scope.session.current_state == 'sample questions' )
-				// {
-				// 	if ( $scope.helpers.sectionHasStartInstruction($scope.sections[$scope.session.section]) ) {
-
-				// 	}
-				// 	$scope.session.current_state = 'actual questions';
-				// 	$scope.sections[$scope.session.section].page = 1;
-				// }
 			} else if ( $scope.session.section > 0 ) {
 				setToIndexPage();
 				$scope.session.previous = 'Previous';
@@ -530,15 +523,9 @@ function LearningStyleController($rootScope, $scope, $interval, $filter, $sce, $
 			$scope.session.questions = $scope.sections[$scope.session.section].questions;
 			if ( $scope.action == 'answered' ) {
 				stopDurationTicker();
-				OrderCandidateTest.answerQuestions(
-					angular.copy($scope.session.data),
-					function(response) {
-						startDurationTicker();
-						enablePreviousPageButton();
-						$scope.action = 'navigating';
-					},
-					answerFailed
-				);
+				startDurationTicker();
+				enablePreviousPageButton();
+				$scope.action = 'navigating';				
 			}
 		}
 	}
@@ -550,21 +537,7 @@ function LearningStyleController($rootScope, $scope, $interval, $filter, $sce, $
 			}
 		}
 	}
-	var answerQuestionIfChanged = function() {
-		if ( $scope.action == 'answered' ) {
-			OrderCandidateTest.answerQuestions(
-				angular.copy($scope.session.data),
-				function(response) {
-					
-				},
-				answerFailed
-			);
-			$scope.action = 'navigating';
-		}
-	}
-	var isVFI = function() {
-		return $scope.order_candidate_test.test.test_type_id == 4;
-	}
+
 	$scope.proceed = function() {
 		window.scrollTo(0, 0);
 		stopDurationTicker();
@@ -584,28 +557,22 @@ function LearningStyleController($rootScope, $scope, $interval, $filter, $sce, $
 			&& $scope.action == 'answered'
 		) {
 			
-				OrderCandidateTest.answerQuestions(
-					angular.copy($scope.session.data),
-					function(response) {
-						startDurationTicker();
-						/*	Next section's first page has no intro, 
-							set to intro so that it is skipped on current_state checking next */
-						if ($scope.session.current_state != 'sample questions') {
-							$scope.session.section++;
-						}
-						$scope.sections[$scope.session.section].page = 0;
-						$scope.session.current_state = 'actual questions';
-						setToFirstPage();
-						$scope.session.current_state = 'actual questions';
-						$scope.session.ticking = 'taking actual';
-						$scope.session.remaining = $scope.session.time_limit_actual;
-						$scope.session.questions = $scope.sections[$scope.session.section].questions;
-						setInstructions('proceed');
-						checkIncomplete();
-						recalculateProgress();
-					},
-					answerFailed
-				);
+				startDurationTicker();
+				/*	Next section's first page has no intro, 
+					set to intro so that it is skipped on current_state checking next */
+				if ($scope.session.current_state != 'sample questions') {
+					$scope.session.section++;
+				}
+				$scope.sections[$scope.session.section].page = 0;
+				$scope.session.current_state = 'actual questions';
+				setToFirstPage();
+				$scope.session.current_state = 'actual questions';
+				$scope.session.ticking = 'taking actual';
+				$scope.session.remaining = $scope.session.time_limit_actual;
+				$scope.session.questions = $scope.sections[$scope.session.section].questions;
+				setInstructions('proceed');
+				checkIncomplete();
+				recalculateProgress();									
 				$scope.action = 'navigating';
 
 		}
@@ -629,38 +596,33 @@ function LearningStyleController($rootScope, $scope, $interval, $filter, $sce, $
 				}
 			}
 		} else {
-			OrderCandidateTest.answerQuestions(
-				angular.copy($scope.session.data),
-				function(response) {
-					$scope.action = 'navigating';
-					if ( next_page ) {
-						setToNextPage();
-						startDurationTicker();
-						var next_page_questions = section.getPageQuestions( next_page );
-						// Next page has no questions and next section does not exist
-						if (next_page_questions.length == 0) {
-							if ( $scope.session.current_state == 'sample questions' )
-							{
-								$scope.session.current_state = 'actual questions';
-								$scope.sections[$scope.session.section].page = 1;
-							} else {
-								$scope.session.section++;
-							}
-						}
-						checkIncomplete();
-						recalculateProgress();
+			$scope.action = 'navigating';
+			if ( next_page ) {
+				setToNextPage();
+				startDurationTicker();
+				var next_page_questions = section.getPageQuestions( next_page );
+				// Next page has no questions and next section does not exist
+				if (next_page_questions.length == 0) {
+					if ( $scope.session.current_state == 'sample questions' )
+					{
+						$scope.session.current_state = 'actual questions';
+						$scope.sections[$scope.session.section].page = 1;
 					} else {
-						if ( typeof($scope.sections[$scope.session.section+1]) != 'undefined' ) {
-							// There is a next section
-							introNextSection();
-						} else {
-							// No other sections, test is complete
-							enterEndOfTest();
-						}
+						$scope.session.section++;
 					}
-				},
-				answerFailed
-			);
+				}
+				checkIncomplete();
+				recalculateProgress();
+			} else {
+				if ( typeof($scope.sections[$scope.session.section+1]) != 'undefined' ) {
+					// There is a next section
+					introNextSection();
+				} else {
+					// No other sections, test is complete
+					enterEndOfTest();
+				}
+			}
+			
 		}
 		enablePreviousPageButton();
 		checkIncomplete();
@@ -675,54 +637,6 @@ function LearningStyleController($rootScope, $scope, $interval, $filter, $sce, $
 
 	$scope.markdownToHTML = function ( markdown ) {
 		return $sce.trustAsHtml($window.marked(markdown));
-	}
-
-	$scope.multipleNumericRankingChanged = function(q) {
-		var compacted = []
-		$scope.session.incomplete = false;
-
-		if ( typeof(q.question_code_id) != 'undefined' )
-		{
-			if ( typeof($scope.sections[$scope.session.section].question_code_groups) != 'undefined' )
-			{
-				if ( typeof($scope.sections[$scope.session.section].question_code_groups[q.question_code_id]) != 'undefined' )
-				{
-					var choices = $scope.sections[$scope.session.section].question_code_groups[q.question_code_id].keys;
-
-					angular.forEach(choices, function(choice, index){
-						if ( q.user_answers.length < choices.length ) {
-							q.user_answers.push({
-								answer_id: null,
-								answer_text: null
-							});
-							$scope.session.incomplete = true;
-						}
-						else if ( typeof(q.user_answers[index]) == 'undefined' ) {
-							q.user_answers[index] = {
-								answer_id: null,
-								answer_text: null
-							};
-							$scope.session.incomplete = true;
-						}
-					});
-				}
-			}
-		}
-
-		angular.forEach(q.user_answers, function(answer){
-			answer.answer_id = null;
-			compacted.push(answer);
-			if ( !answer.answer_text ) {
-				$scope.session.incomplete = true;
-			}
-		});
-		
-		$scope.action = 'answered';
-		$scope.session.data.section_id = $scope.sections[$scope.session.section].id;
-		$scope.session.data.user_answers = [{
-			test_question_id: q.id,
-			answers: q.user_answers
-		}];
 	}
 
 	$scope.removeAnswer = function(question, $index) {
@@ -872,23 +786,7 @@ function LearningStyleController($rootScope, $scope, $interval, $filter, $sce, $
 		checkIncomplete();
 	}
 
-	$scope.treeOptions = {
-		dropped: function(e) {
-			$scope.action = 'answered';
-			var idx = 1;
-			$scope.session.data.section_id = $scope.sections[$scope.session.section].id;
-			$scope.session.data.user_answers = $scope.session.questions.map(function(q){
-				return {
-					test_question_id: q.id,
-					answers: [{
-						answer_id: null,
-						answer_text: idx++
-					}]
-				};
-			});
-		}
-	};
-
+	/* start */
 	$rootScope.$on('testReady', function( e, that_session ) {
 		LearningStyleService.getTest().success(function(response) {
 			
@@ -941,15 +839,6 @@ function LearningStyleController($rootScope, $scope, $interval, $filter, $sce, $
 			{
 				$scope.session.remaining = $scope.session.time_limit_actual;
 				$scope.session.questions = $scope.sections[$scope.session.section].questions;
-				if ( isVFI() ) {
-					angular.forEach($scope.session.questions, function (q) {
-						if ( q.user_answers[0].answer_text > 0 )
-						{
-							q.user_answers[0].answer_text = parseInt(q.user_answers[0].answer_text);
-						}
-					});
-					$scope.session.questions = $filter('orderBy')($scope.session.questions, 'user_answers[0].answer_text');
-				}
 				
 				var end_of_section = section.getNextPage() == 0;
 				enablePreviousPageButton();
