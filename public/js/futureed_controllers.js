@@ -50,7 +50,12 @@ function FutureedController($scope, apiService, futureed) {
 					$scope.user = null;
 
 					apiService.updateUserSession($scope.user).success(function(response) {
-						window.location.href = "/student/login";
+						$scope.session_expire = Constants.TRUE;
+						$("#session_expire").modal({
+							backdrop: 'static',
+							keyboard: Constants.FALSE,
+							show    : Constants.TRUE
+						});
 					}).error(function() {
 						$scope.internalError();
 					});
@@ -64,6 +69,10 @@ function FutureedController($scope, apiService, futureed) {
 
 		$("html, body").animate({ scrollTop: 0 }, "slow");
 		return $scope.errors;
+	}
+
+	$scope.reLogin = function(){
+		$window.location.href = '/student/login';
 	}
 
 	function internalError() {
