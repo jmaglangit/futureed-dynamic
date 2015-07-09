@@ -40,6 +40,7 @@
             'id' => 'userdata'
         )
     ) !!}
+    <p class="notice"> BETA Stage: Under Development </p>
 
     @yield('navbar')
 

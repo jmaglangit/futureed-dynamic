@@ -13,9 +13,23 @@ class TeachingContent extends Model {
 
     protected $hidden = ['created_by', 'updated_by', 'created_at', 'updated_at', 'deleted_at'];
 
-    protected $fillable = ['module_id', 'subject_id', 'subject_area_id', 'code', 'teaching_module', 'description', 'learning_style_id', 'content_url', 'media_type_id'];
+    protected $fillable = [
+		'module_id',
+		'subject_id',
+		'subject_area_id',
+		'code',
+		'teaching_module',
+		'description',
+		'learning_style_id',
+		'content_url',
+		'media_type_id',
+		'status'
+	];
 
-    protected $attributes = ['created_by' => 1, 'updated_by' => 1];
+    protected $attributes = [
+		'created_by' => 1,
+		'updated_by' => 1
+	];
 
     //Relationships
 
@@ -38,6 +52,11 @@ class TeachingContent extends Model {
     public function subjectArea(){
         return $this->belongsTo('FutureEd\Models\Core\SubjectArea');
     }
+
+	public function moduleContent(){
+
+		return $this->belongsTo('FutureEd\Models\Core\ModuleContent','id','content_id');
+	}
 
 
     //Scopes

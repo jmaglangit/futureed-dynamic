@@ -26,7 +26,7 @@ class HelpRequestRepository implements HelpRequestRepositoryInterface{
     public function getHelpRequest($id){
         try{
             $result = HelpRequest::with('classroom','module','subject','subjectArea','student')->find($id);
-            return is_null($result) ? null : $result->toArray();
+            return is_null($result) ? null : $result;
         }catch (\Exception $e){
             return $e->getMessage();
         }
@@ -94,8 +94,18 @@ class HelpRequestRepository implements HelpRequestRepositoryInterface{
                     $query = $query->classId($criteria['class_id']);
                 }
 
+                if(isset($criteria['module_id'])) {
+                    $query = $query->moduleId($criteria['module_id']);
+                }
+
                 if(isset($criteria['request_status'])) {
                     $query = $query->requestStatus($criteria['request_status']);
+                }
+                if(isset($criteria['link_id'])) {
+                    $query = $query->linkId($criteria['link_id']);
+                }
+                if(isset($criteria['question_status'])) {
+                    $query = $query->questionStatus($criteria['question_status']);
                 }
 
             }

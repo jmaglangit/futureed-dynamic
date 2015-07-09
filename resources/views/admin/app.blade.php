@@ -35,7 +35,7 @@
   </head>
   <body class="admin" ng-controller="futureedController" ng-init="getUserDetails()" ng-cloak>
     {!! Form::hidden('userdata', Session::get('admin')) !!}
-
+    <p class="notice"> BETA Stage: Under Development </p>
     @yield('navbar')
 
   	@yield('content')

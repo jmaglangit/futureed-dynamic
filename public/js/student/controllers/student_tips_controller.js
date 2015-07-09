@@ -66,7 +66,7 @@ function TipsController($scope, apiService, StudentTipsService, TableService, Se
 	self.listTips = function() {
 		self.records = [];
 		self.errors = Constants.FALSE;
-		self.search.class_id = $scope.user.class_id;
+		self.search.class_id = ($scope.user.class) ? $scope.user.class.class_id : Constants.EMPTY_STR;
 		self.table.loading = Constants.TRUE;
 
 		$scope.ui_block();

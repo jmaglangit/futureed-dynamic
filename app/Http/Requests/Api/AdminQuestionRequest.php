@@ -27,7 +27,7 @@ class AdminQuestionRequest extends ApiRequest {
 
 				return [
 
-					'images' => 'mimes:jpeg,jpg,png|max:2000',
+					'image' => 'mimes:jpeg,jpg,png|max:2000',
 					'module_id' => 'required|integer',
 					'seq_no' => 'required|integer',
 					'questions_text' => 'required|string',
@@ -35,8 +35,24 @@ class AdminQuestionRequest extends ApiRequest {
 					'status' => 'required|alpha|in:Enabled,Disabled',
 					'question_type' => 'required|alpha|in:MC,FIB,O,N',
 					'points_earned' => 'required|integer',
-					'code' => 'required|integer'
+					'code' => 'required|integer',
+					'answer' => 'string',
 				];
+				break;
+
+			case 'PUT':
+
+				return [
+
+					'seq_no' => 'required|integer',
+					'questions_text' => 'required|string',
+					'difficulty' => 'required|integer',
+					'status' => 'required|alpha|in:Enabled,Disabled',
+					'question_type' => 'required|alpha|in:MC,FIB,O,N',
+					'points_earned' => 'required|integer',
+					'answer' => 'string',
+				];
+				break;
 		}
 	}
 

@@ -65,12 +65,25 @@ class HelpRequestAnswer extends Model {
 		return $this->belongsTo('FutureEd\Models\Core\User','created_by');
 	}
 
+	public function student(){
+
+		return $this->belongsTo('FutureEd\Models\Core\Student')->with('avatar', 'user');
+
+	}
+
 
 	//Scopes
 	public function scopeRequestTitle($query, $help_request_title){
 
 		return $query->whereHas('helpRequest', function($query) use ($help_request_title){
 			$query->where('title', 'like','%'. $help_request_title . '%');
+		});
+	}
+
+	public function scopeRequestId($query, $help_request_id){
+
+		return $query->whereHas('helpRequest', function($query) use ($help_request_id){
+			$query->where('id', '=', $help_request_id);
 		});
 	}
 

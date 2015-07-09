@@ -118,4 +118,7 @@ return [
 	//path for question uploaded images
 	'question_image_path' =>  base_path().'/public/images/upload',
 
+	//path for question answer uploaded images
+	'question_answer_image_path' =>  base_path().'/public/images/answers',
+
 ];
