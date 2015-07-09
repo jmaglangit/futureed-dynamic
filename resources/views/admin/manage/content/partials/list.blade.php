@@ -92,8 +92,7 @@
 					<thead>
 				        <tr>
 				            <th>Code</th>
-				            <th>Module</th>
-				            <th>Description</th>
+				            <th>Content</th>
 				            <th>Learning Style</th>
 				            <th>Media Type</th>
 				            <th ng-if="content.records.length">Actions</th>
@@ -103,7 +102,6 @@
 				        <tr ng-repeat="contentInfo in content.records">
 				            <td>{! contentInfo.code !}</td>
 				            <td>{! contentInfo.teaching_module !}</td>
-				            <td>{! contentInfo.description !}</td>
 				            <td>{! contentInfo.learning_style.name !}</td>
 				            <td>{! contentInfo.media_type.name !}</td>
 				            <td ng-if="content.records.length">
