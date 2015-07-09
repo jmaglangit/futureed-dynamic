@@ -22,6 +22,9 @@ Routes::group(['prefix' => '/tip'], function() {
 			'uses' => 'Api\v1\TipController@viewCurrentTips',
 			'as' => 'tip.update.status']);
 
+		Routes::resource('/question-content', 'Api\v1\StudentQuestionContentTipController',
+			['except' => ['create', 'edit']]);
+
 
 
 });
