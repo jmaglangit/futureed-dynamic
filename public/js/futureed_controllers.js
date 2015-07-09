@@ -11,7 +11,7 @@ function TemplateDirective() {
 	}
 }
 
-function FutureedController($scope, apiService, futureed) {
+function FutureedController($scope, $window, apiService, futureed) {
 	$scope.futureed = futureed;
 	$scope.display_date = new Date();
 	
@@ -852,9 +852,35 @@ function FutureedController($scope, apiService, futureed) {
 			self.errors = $scope.internalError();
 		});
 	  }
+
 	  $scope.backgroundClass = backgroundClass;
 	  function backgroundClass() {
 	  	$scope.backgroundChange = Constants.TRUE;
 	  }
+
+	  $scope.checkClass = function() {
+		$scope.ui_block();
+
+		apiService.checkClass($scope.user.id).success(function(response){
+			if(angular.equals(response.status, Constants.STATUS_OK)){
+					if(response.errors) {
+						if(response.errors[0]){
+							$scope.no_class = Constants.TRUE;
+							$("#error_class_modal").modal({
+						        backdrop: 'static',
+						        keyboard: Constants.FALSE,
+						        show    : Constants.TRUE
+						    });
+						}
+					}else if(response.data){
+						$window.location.href = '/student/class';
+					}
+				}
+			$scope.ui_unblock();
+		}).error(function(response){
+			$scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
 
 };
