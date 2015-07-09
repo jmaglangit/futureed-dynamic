@@ -21,7 +21,7 @@ class TeachingContentRequest extends ApiRequest {
 	 */
 	public function rules()
 	{
-		switch ($this->method) {
+		switch ($this->method()) {
 
 			case 'POST':
 
@@ -47,7 +47,6 @@ class TeachingContentRequest extends ApiRequest {
 					'learning_style_id' => 'required|exists:learning_styles,id,deleted_at,NULL',
 					'content_url' => 'required|url',
 					'media_type_id' => 'required|exists:media_types,id,deleted_at,NULL',
-					'seq_no' => 'required|integer',
 					'status' => 'required|in:Enabled,Disabled'
 				];
 				break;

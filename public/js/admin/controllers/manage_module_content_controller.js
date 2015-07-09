@@ -138,12 +138,14 @@ function ManageModuleContentController($scope, ManageModuleContentService, Table
 					self.record.id = record.id;
 					self.record.module = (record.module) ? record.module.name : Constants.EMPTY_STR;
 					self.record.subject = (record.subject) ? record.subject.name : Constants.EMPTY_STR;
-					self.record.area = (record.subjectarea) ? record.subjectarea.name : Constants.EMPTY_STR;
-					
-					self.record.link_type = record.link_type;
-					self.record.tip_status = record.tip_status;
-					self.record.title = record.title;
-					self.record.content = record.content;
+					self.record.area = (record.subject_area) ? record.subject_area.name : Constants.EMPTY_STR;
+
+					self.record.code = record.code;
+					self.record.teaching_module = record.teaching_module;
+					self.record.description = record.description;
+					self.record.content_url = record.content_url;
+					self.record.learning_style_id = record.learning_style.id;
+					self.record.media_type_id = record.media_type.id;
 					self.record.status = record.status;
 				}
 			}
