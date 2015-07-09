@@ -46,7 +46,7 @@ class StudentQuestionContentTipController extends ApiController {
 	public function store(StudentQuestionContentTipRequest $request)
 	{
 		$data =  $request->only('class_id','student_id','title','content','module_id','subject_id',
-								'subject_area_id','link_type','link_id');
+					'subject_area_id','link_type','link_id');
 
 		//add data to tips
 		$return = $this->tip->addTip($data);
