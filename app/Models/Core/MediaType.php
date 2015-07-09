@@ -16,4 +16,11 @@ class MediaType extends Model {
     protected $fillable = ['name', 'description'];
 
     protected $attributes = ['created_by' => 1, 'updated_by' => 1];
+
+	//scope
+	public function scopeName($query,$name){
+
+		$query->where('name','like', '%'.$name.'%');
+
+	}
 }
