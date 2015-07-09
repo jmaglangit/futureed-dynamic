@@ -52,6 +52,12 @@ class QuestionRepository implements QuestionRepositoryInterface{
 
 			if (count($criteria) > 0) {
 
+				//check scope module_id
+				if(isset($criteria['module_id'])){
+
+					$question = $question->moduleId($criteria['module_id']);
+				}
+
 				//check scope questions_text
 				if(isset($criteria['questions_text'])){
 

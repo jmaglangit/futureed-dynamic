@@ -31,6 +31,12 @@ class AdminQuestionController extends ApiController {
 		$limit = 0 ;
 		$offset = 0;
 
+		//for module_id
+		if(Input::get('module_id')){
+
+			$criteria['module_id'] = Input::get('module_id');
+		}
+
 		//for question_type
 		if(Input::get('question_type')){
 
