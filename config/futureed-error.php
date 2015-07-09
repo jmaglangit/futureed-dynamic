@@ -56,6 +56,8 @@ return [
 		2041 => 'Country is required',
         2042 => 'Student has already rated this help request answer.',
         2043 => 'Student cannot rate his/her own help request answer.',
+		2044 => 'The Postal Code format is invalid.',
+		2045 => 'The Postal Code may not be greater than 10 characters.',
 
 
 		2100 => 'Reset code is invalid.',
