@@ -1,9 +1,9 @@
 <div ng-if="module.active_view || module.active_edit">
-	<div class="content-title">
-		<div class="title-main-content">
-			<span>View Module</span>
-		</div>
-	</div>
+    <div class="content-title">
+        <div class="title-main-content">
+            <span>View Module</span>
+        </div>
+    </div>
 
     <div class="panel-group module-container" id="accordion">
         <div class="panel panel-default">
@@ -224,7 +224,7 @@
             </div>
         </div>
     </div>
-	
+    
     <div id="module_tabs" ng-if="module.details.id">
         <ul class="nav nav-tabs module-container">
             <li role="presentation" class="tab active"><a href="#age_group" aria-controls="home" data-toggle="tab">Age Group</a></li>
@@ -254,15 +254,9 @@
                     <div template-directive template-url="{!! route('admin.manage.module.content.partials.delete') !!}"></div>
                 </div>
             </div>
-
-            <!-- Diri Franz sun-a lang ang naa sa taas (ManageModuleContentController) -->
-            <div ng-controller="ManageAgeGroupController as age" class="module-container tab-pane fade" id="q_and_a">
-                <div ng-if="module.active_view" ng-init="age.setActive()">
-                    <div ng-init="age.setActive()" template-directive template-url="{!! route('admin.manage.age_group.partials.list_view_form') !!}"></div>
-
-                    <div template-directive template-url="{!! route('admin.manage.age_group.partials.add_view_form') !!}"></div>
-
-                    <div template-directive template-url="{!! route('admin.manage.age_group.partials.edit_view_form') !!}"></div>
+            <div ng-controller="ManageQuestionAnsController as qa" class="module-container tab-pane fade" ng-init="qa.setModuleId(module.details.id)" id="q_and_a">
+                <div ng-if="module.active_view" ng-init="qa.setActive()">
+                    <div template-directive template-url="{!! route('admin.manage.question_answer.partials.question_list_form') !!}"></div>
                 </div>
             </div>
         </div>
