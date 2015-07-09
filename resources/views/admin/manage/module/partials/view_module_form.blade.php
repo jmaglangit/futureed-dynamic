@@ -225,43 +225,45 @@
         </div>
     </div>
 	
-    <ul class="nav nav-tabs module-container">
-        <li role="presentation" class="tab active"><a href="#age_group" aria-controls="home" data-toggle="tab">Age Group</a></li>
-        <li role="presentation" class="tab"><a href="#contents" aria-controls="profile" data-toggle="tab">Contents</a></li>
-        <li role="presentation" class="tab"><a href="#q_and_a" aria-controls="messages" data-toggle="tab">Q & A</a></li>
-    </ul>
+    <div id="module_tabs" ng-if="module.details.id">
+        <ul class="nav nav-tabs module-container">
+            <li role="presentation" class="tab active"><a href="#age_group" aria-controls="home" data-toggle="tab">Age Group</a></li>
+            <li role="presentation" class="tab"><a href="#contents" aria-controls="profile" data-toggle="tab">Contents</a></li>
+            <li role="presentation" class="tab"><a href="#q_and_a" aria-controls="messages" data-toggle="tab">Q & A</a></li>
+        </ul>
 
-    <div class="tab-content">
-        <div class="module-container tab-pane fade in active" id="age_group">
-            <div ng-if="module.active_view" ng-controller="ManageAgeGroupController as age">
-                <div ng-init="age.setActive()" template-directive template-url="{!! route('admin.manage.age_group.partials.list_view_form') !!}"></div>
+        <div class="tab-content">
+            <div class="module-container tab-pane fade in active" id="age_group">
+                <div ng-if="module.active_view" ng-controller="ManageAgeGroupController as age">
+                    <div ng-init="age.setActive()" template-directive template-url="{!! route('admin.manage.age_group.partials.list_view_form') !!}"></div>
 
-                <div template-directive template-url="{!! route('admin.manage.age_group.partials.add_view_form') !!}"></div>
-                <div template-directive template-url="{!! route('admin.manage.age_group.partials.edit_view_form') !!}"></div>
+                    <div template-directive template-url="{!! route('admin.manage.age_group.partials.add_view_form') !!}"></div>
+                    <div template-directive template-url="{!! route('admin.manage.age_group.partials.edit_view_form') !!}"></div>
+                </div>
             </div>
-        </div>
 
-        <div ng-controller="ManageModuleContentController as content" class="module-container tab-pane fade" id="contents">
-            <div ng-if="module.active_view" ng-init="content.setActive()">
-                
-                <div template-directive template-url="{!! route('admin.manage.module.content.partials.list') !!}"></div>
+            <div ng-controller="ManageModuleContentController as content" class="module-container tab-pane fade" ng-init="content.setModuleId(module.details.id)" id="contents">
+                <div ng-if="module.active_view" ng-init="content.setActive()">
+                    
+                    <div template-directive template-url="{!! route('admin.manage.module.content.partials.list') !!}"></div>
 
-                <div template-directive template-url="{!! route('admin.manage.module.content.partials.add') !!}"></div>
+                    <div template-directive template-url="{!! route('admin.manage.module.content.partials.add') !!}"></div>
 
-                <div template-directive template-url="{!! route('admin.manage.module.content.partials.detail') !!}"></div>
+                    <div template-directive template-url="{!! route('admin.manage.module.content.partials.detail') !!}"></div>
 
-                <div template-directive template-url="{!! route('admin.manage.module.content.partials.delete') !!}"></div>
+                    <div template-directive template-url="{!! route('admin.manage.module.content.partials.delete') !!}"></div>
+                </div>
             </div>
-        </div>
 
-        <!-- Diri Franz sun-a lang ang naa sa taas (ManageModuleContentController) -->
-        <div ng-controller="ManageAgeGroupController as age" class="module-container tab-pane fade" id="q_and_a">
-            <div ng-if="module.active_view" ng-init="age.setActive()">
-                <div ng-init="age.setActive()" template-directive template-url="{!! route('admin.manage.age_group.partials.list_view_form') !!}"></div>
+            <!-- Diri Franz sun-a lang ang naa sa taas (ManageModuleContentController) -->
+            <div ng-controller="ManageAgeGroupController as age" class="module-container tab-pane fade" id="q_and_a">
+                <div ng-if="module.active_view" ng-init="age.setActive()">
+                    <div ng-init="age.setActive()" template-directive template-url="{!! route('admin.manage.age_group.partials.list_view_form') !!}"></div>
 
-                <div template-directive template-url="{!! route('admin.manage.age_group.partials.add_view_form') !!}"></div>
+                    <div template-directive template-url="{!! route('admin.manage.age_group.partials.add_view_form') !!}"></div>
 
-                <div template-directive template-url="{!! route('admin.manage.age_group.partials.edit_view_form') !!}"></div>
+                    <div template-directive template-url="{!! route('admin.manage.age_group.partials.edit_view_form') !!}"></div>
+                </div>
             </div>
         </div>
     </div>

@@ -7,20 +7,28 @@ function ManageModuleContentService($http) {
 	var service = {};
 	var serviceUrl = '/api/v1/';
 
-	service.list = function list(search, table) {
+	service.list = function(search, table) {
 		return $http({
 			method 	: Constants.METHOD_GET
 			, url   : serviceUrl + 'teaching-content?teaching_module=' + search.teaching_module
+				+ '&teaching_module_id=' + search.teaching_module_id
 				+ '&learning_style=' + search.learning_style
 				+ '&limit=' + table.size
 				+ '&offset=' + table.offset
 		});
 	}
 
+	service.getLearningStyle = function() {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url   : serviceUrl + 'learning-style/admin'
+		});
+	}
+
 	service.detail = function(id) {
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url   : serviceUrl + 'tip/admin/' + id
+			, url   : serviceUrl + 'teaching-content/' + id
 		});
 	}
 
@@ -28,22 +36,14 @@ function ManageModuleContentService($http) {
 		return $http({
 			method 	: Constants.METHOD_PUT
 			, data	: data
-			, url   : serviceUrl + 'tip/admin/' + data.id
+			, url   : serviceUrl + 'teaching-content/' + data.id
 		});
 	}
 
 	service.delete = function(id) {
 		return $http({
 			method 	: Constants.METHOD_DELETE
-			, url   : serviceUrl + 'tip/admin/' + id
-		});
-	}
-
-	service.updateTipStatus = function(data) {
-		return $http({
-			method 	: Constants.METHOD_PUT
-			, data  : { tip_status : data.tip_status }
-			, url   : serviceUrl + 'tip/update-status/' + data.id
+			, url   : serviceUrl + 'teaching-content/' + id
 		});
 	}
 

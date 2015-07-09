@@ -1,4 +1,4 @@
-<div ng-if="content.active_view || content.active_edit">
+<div class="asd" ng-if="content.active_view || content.active_edit">
 	<div class="col-xs-12" ng-if="content.errors || content.success">
 		<div class="alert alert-error" ng-if="content.errors">
 			<p ng-repeat="error in content.errors track by $index">
@@ -198,7 +198,7 @@
 						{!! Form::button('Save'
 							, array(
 								'class' => 'btn btn-blue btn-medium'
-								, 'ng-click' => "content.updateTip()"
+								, 'ng-click' => "content.updateContent()"
 							)
 						) !!}
 

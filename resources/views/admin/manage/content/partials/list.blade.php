@@ -34,19 +34,11 @@
 					)!!}
 				</div>
 
-				<div class="col-xs-4">
-					{!! Form::select('search_learning_style'
-						, array(
-							'' => '-- Select Learning Style --'
-							, '0' => 'Pending'
-							, '1' => 'Accepted'
-						)
-						, ''
-						, array(
-							'class' => 'form-control'
-							, 'ng-model' => 'content.search.learning_style'
-						)
-					) !!}
+				<div class="col-xs-4" ng-init="content.getLearningStyle()">
+					<select  name="learning_style" class="form-control" ng-model="content.search.learning_style">
+						<option value="">-- Select Learning Style --</option>
+						<option ng-repeat="style in content.styles" ng-value="style.id">{! style.name!}</option>
+					</select>
 				</div>
 				
 				<div class="col-xs-2">
@@ -103,7 +95,6 @@
 				            <th>Module</th>
 				            <th>Description</th>
 				            <th>Learning Style</th>
-				            <th>File</th>
 				            <th>Media Type</th>
 				            <th ng-if="content.records.length">Actions</th>
 				        </tr>
@@ -114,7 +105,6 @@
 				            <td>{! contentInfo.teaching_module !}</td>
 				            <td>{! contentInfo.description !}</td>
 				            <td>{! contentInfo.learning_style.name !}</td>
-				            <td>{! contentInfo.title !}</td>
 				            <td>{! contentInfo.media_type.name !}</td>
 				            <td ng-if="content.records.length">
 				            	<div class="row">

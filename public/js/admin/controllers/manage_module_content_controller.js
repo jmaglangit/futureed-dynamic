@@ -12,6 +12,11 @@ function ManageModuleContentController($scope, ManageModuleContentService, Table
 	SearchService(self);
 	self.searchDefaults();
 
+	self.setModuleId = function(id) {
+		self.module = {};
+		self.module.id = id;
+	}
+
 	self.setActive = function(active, id) {
 		self.errors = Constants.FALSE;
 		self.fields = [];
@@ -50,8 +55,6 @@ function ManageModuleContentController($scope, ManageModuleContentService, Table
 				self.active_list = Constants.TRUE;
 				break;
 		}
-
-		$("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 
 	self.searchFnc = function(event) {
@@ -80,9 +83,24 @@ function ManageModuleContentController($scope, ManageModuleContentService, Table
 		}
 	}
 
+	self.getLearningStyle = function() {
+		ManageModuleContentService.getLearningStyle().success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.styles = response.data.records;
+				}
+			}
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+		});
+	}
+
 	self.listContents = function() {
 		self.errors = Constants.FALSE;
 		self.records = [];
+		self.search.teaching_module_id = self.module.id;
 		self.table.loading = Constants.TRUE;
 
 		$scope.ui_block();
