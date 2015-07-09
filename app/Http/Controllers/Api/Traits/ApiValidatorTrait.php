@@ -586,12 +586,15 @@ trait ApiValidatorTrait {
         $phone_format = "/^((\+|\(|\)|\-)+\s?)?([0-9]+)?((\+|\(|\)|\-)+\s?)?([0-9]+)?((\+|\(|\)|\-)+\s?)?([0-9]+)?((\+|\(|\)|\-)+\s?)?([0-9]+)?$/";
 
         $validator = Validator::make(
-            [
-                "$field_name" => strtolower($input["$field_name"]),
-            ],
-            [
-                "$field_name" => "required"
-            ]
+			[
+				"$field_name" => strtolower($input["$field_name"]),
+			],
+			[
+				"$field_name" => "required|max:20"
+			],
+			[
+				'max' => config('futureed-error.error_messages.2046')
+			]
         );
 
         if($validator->fails()){
