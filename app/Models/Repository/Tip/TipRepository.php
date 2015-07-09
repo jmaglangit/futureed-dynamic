@@ -154,6 +154,24 @@ class TipRepository implements TipRepositoryInterface{
 					$tip = $tip->classId($criteria['class_id']);
 				}
 
+				//for module_id
+				if(isset($criteria['module_id'])) {
+
+					$tip = $tip->moduleId($criteria['module_id']);
+				}
+
+				//check for link_type
+				if(isset($criteria['link_type'])){
+
+					$tip = $tip->linkType($criteria['link_type']);
+				}
+
+				//check for link_id
+				if(isset($criteria['link_id'])){
+
+					$tip = $tip->linkId($criteria['link_id']);
+				}
+
 				//for title
 				if(isset($criteria['title'])) {
 

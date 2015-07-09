@@ -454,7 +454,11 @@ trait ApiValidatorTrait {
                 ],
                 [
                     "$field_name" => 'max:10|regex:'. config('regex.zip_code')
-                ]
+                ],
+				[
+					'regex' => config('futureed-error.error_messages.2044'),
+					'max' => config('futureed-error.error_messages.2045')
+				]
             );
 
             if($validator->fails()){

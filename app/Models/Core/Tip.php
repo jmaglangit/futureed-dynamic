@@ -129,6 +129,16 @@ class Tip extends Model {
 
 	}
 
+	public function scopeModuleId($query, $module_id){
+
+		return $query->where('module_id','=',$module_id);
+	}
+
+	public function scopeLinkId($query, $link_id){
+
+		return $query->where('link_id','=',$link_id);
+	}
+
 
 
 
