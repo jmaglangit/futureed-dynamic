@@ -12,7 +12,7 @@ class ChangeAnswerTypeVarcharToTextQuestionsTable extends Migration {
 	 */
 	public function up()
 	{
-		DB::statement("ALTER TABLE questions change answer answer TEXT;");
+		DB::statement("ALTER TABLE questions CHANGE answer answer TEXT;");
 	}
 
 	/**
@@ -22,7 +22,7 @@ class ChangeAnswerTypeVarcharToTextQuestionsTable extends Migration {
 	 */
 	public function down()
 	{
-		DB::statement("ALTER TABLE questions change answer answer VARCHAR(255);");
+		DB::statement("ALTER TABLE questions CHANGE answer answer VARCHAR(255);");
 	}
 
 }
