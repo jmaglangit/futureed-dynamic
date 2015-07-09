@@ -64,7 +64,7 @@ class ClientRegisterController extends ClientController {
 			$this->addMessageBag($this->validateString($school, 'school_state'));
 			$this->addMessageBag($this->validateNumber($school, 'school_country_id'));
 			$this->addMessageBag($this->zipCodeOptional($school, 'school_zip'));
-			$this->addMessageBag($this->validateAlphaSpace($school, 'contact_name'));
+			$this->addMessageBag($this->validateContactName($school, 'contact_name'));
 			$this->addMessageBag($this->checkContactNumber($school, 'contact_number'));
 
 
