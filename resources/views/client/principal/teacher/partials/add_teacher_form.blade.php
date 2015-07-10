@@ -27,27 +27,6 @@
 			<legend class="legend-name-mid">
 				User Credentials
 			</legend>
-			<div class="form-group">				
-				<label class="col-xs-3 control-label" id="email">Email <span class="required">*</span></label>
-				<div class="col-xs-4">
-					{!! Form::text('email', ''
-						, array(
-							'placeholder' => 'Email',
-							'ng-model' => 'teacher.record.email',
-							'ng-class' => "{ 'required-field' : teacher.fields['email']}", 
-							'ng-model-options' => "{ debounce : {'default' : 1000} }",
-							'ng-change' => 'teacher.checkEmailAvailability()',
-							'autocomplete' => 'off',
-							'class' => 'form-control'
-						)
-					) !!}
-				</div>
-				<div class="margin-top-8">
-					<span class="error-msg-con" ng-if="teacher.validation.e_error">{! teacher.validation.e_error !}</span>
-					<i class="fa fa-spinner fa-spin" ng-if="teacher.validation.e_loading"></i>
-					<i ng-if="teacher.validation.e_success" class="fa fa-check success-color"></i>
-				</div>
-			</div>
 			<div class="form-group">
 				<label class="col-xs-3 control-label" id="username">Username <span class="required">*</span></label>
 				<div class="col-xs-4">
@@ -67,6 +46,27 @@
 					<span class="error-msg-con" ng-if="teacher.validation.u_error">{! teacher.validation.u_error !}</span>
 					<i class="fa fa-spinner fa-spin" ng-if="teacher.validation.u_loading"></i>
 					<i ng-if="teacher.validation.u_success" class="fa fa-check success-color"></i>
+				</div>
+			</div>
+			<div class="form-group">				
+				<label class="col-xs-3 control-label" id="email">Email <span class="required">*</span></label>
+				<div class="col-xs-4">
+					{!! Form::text('email', ''
+						, array(
+							'placeholder' => 'Email',
+							'ng-model' => 'teacher.record.email',
+							'ng-class' => "{ 'required-field' : teacher.fields['email']}", 
+							'ng-model-options' => "{ debounce : {'default' : 1000} }",
+							'ng-change' => 'teacher.checkEmailAvailability()',
+							'autocomplete' => 'off',
+							'class' => 'form-control'
+						)
+					) !!}
+				</div>
+				<div class="margin-top-8">
+					<span class="error-msg-con" ng-if="teacher.validation.e_error">{! teacher.validation.e_error !}</span>
+					<i class="fa fa-spinner fa-spin" ng-if="teacher.validation.e_loading"></i>
+					<i ng-if="teacher.validation.e_success" class="fa fa-check success-color"></i>
 				</div>
 			</div>
 		</fieldset>
