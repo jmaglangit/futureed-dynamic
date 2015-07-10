@@ -1,4 +1,4 @@
-<div class="asd" ng-if="content.active_view || content.active_edit">
+<div ng-if="content.active_view || content.active_edit">
 	<div class="col-xs-12 success-container" ng-if="content.errors || content.success">
 		<div class="alert alert-error" ng-if="content.errors">
 			<p ng-repeat="error in content.errors track by $index">
@@ -22,9 +22,9 @@
 					Module Details
 				</legend>
 				<div class="form-group">
-					<label class="col-xs-2 control-label" id="username">Module <span class="required">*</span></label>
+					<label class="col-xs-2 control-label">Module <span class="required">*</span></label>
 					<div class="col-xs-4">
-						{!! Form::text('username', '',
+						{!! Form::text('module', '',
 							[
 								'placeholder' => 'Module',
 								'ng-disabled' => 'true',
@@ -92,11 +92,11 @@
 					Module Content
 				</legend>
 				<div class="form-group">
-					<label class="col-xs-3 control-label">Content Name <span class="required">*</span></label>
+					<label class="col-xs-3 control-label">Teaching Module <span class="required">*</span></label>
 					<div class="col-xs-6">
 						{!! Form::text('teaching_module', ''
 							, array(
-								  'placeholder' => 'Content Name'
+								  'placeholder' => 'Teaching Module'
 								, 'ng-disabled' => 'content.active_view'
 								, 'ng-model' => 'content.record.teaching_module'
 								, 'ng-class' => "{ 'required-field' : content.fields['teaching_module'] }"
@@ -123,7 +123,7 @@
 				<div class="form-group">
 					<label class="col-xs-3 control-label" id="email">Learning Style <span class="required">*</span></label>
 					<div class="col-xs-6">
-						<select  name="learning_style_id" ng-disabled="content.active_view" class="form-control" ng-model="content.record.learning_style_id">
+						<select  name="learning_style_id" ng-disabled="content.active_view" ng-class="{ 'required-field' : content.fields['learning_style_id'] }" class="form-control" ng-model="content.record.learning_style_id">
 							<option ng-selected="content.record.learning_style_id == futureed.FALSE" value="">-- Select Learning Style --</option>
 							<option ng-selected="content.record.learning_style_id == style.id" ng-repeat="style in content.styles" ng-value="style.id">{! style.name!}</option>
 						</select>
@@ -131,16 +131,11 @@
 				</div>
 				<div class="form-group">
 					<label class="col-xs-3 control-label">Media Type <span class="required">*</span></label>
-					<div class="col-xs-6">
-						{!! Form::text('media_type_id', ''
-							, array(
-								'placeholder' => 'Media Type'
-								, 'ng-disabled' => 'content.active_view'
-								, 'ng-model' => 'content.record.media_type_id'
-								, 'ng-class' => "{ 'required-field' : content.fields['media_type_id'] }"
-								, 'class' => 'form-control'
-							)
-						) !!}
+					<div class="col-xs-6" ng-init="content.getMediaTypes()">
+						<select  name="media_type_id" ng-disabled="content.active_view" ng-class="{ 'required-field' : content.fields['media_type_id'] }" class="form-control" ng-model="content.record.media_type_id">
+							<option ng-selected="content.record.media_type_id == futureed.FALSE" value="">-- Select Media Type --</option>
+							<option ng-selected="content.record.media_type_id == type.id" ng-repeat="type in content.types" ng-value="type.id">{! type.name!}</option>
+						</select>
 					</div>
 				</div>
 				<div class="form-group">
@@ -158,6 +153,51 @@
 						) !!}
 					</div>
 				</div>
+				<div class="form-group">
+	        		<label class="col-xs-3 control-label">Status <span class="required">*</span></label>
+	        		<div class="col-xs-6" ng-if="content.active_edit">
+	        			<div class="col-xs-6 checkbox">	                				
+	        				<label>
+	        					{!! Form::radio('status'
+	        						, 'Enabled'
+	        						, true
+	        						, array(
+	        							'class' => 'field'
+	        							, 'ng-model' => 'content.record.status'
+	        						) 
+	        					) !!}
+	        				<span class="lbl padding-8">Enabled</span>
+	        				</label>
+	        			</div>
+	        			<div class="col-xs-6 checkbox">
+	        				<label>
+	        					{!! Form::radio('status'
+	        						, 'Disabled'
+	        						, false
+	        						, array(
+	        							'class' => 'field'
+	        							, 'ng-model' => 'content.record.status'
+	        						)
+	        					) !!}
+	        				<span class="lbl padding-8">Disabled</span>
+	        				</label>
+	        			</div>
+	        		</div>
+
+	        		<div ng-if="content.active_view">
+		        		<label class="col-xs-6" ng-if="content.record.status == 'Enabled'">
+		        			<b class="success-icon">
+		        				<i class="margin-top-8 fa fa-check-circle-o"></i> {! content.record.status !}
+		        			</b>
+		        		</label>
+
+		        		<label class="col-xs-6" ng-if="content.record.status == 'Disabled'">
+		        			<b class="error-icon">
+		        				<i class="margin-top-8 fa fa-ban"></i> {! content.record.status !}
+		        			</b>
+		        		</label>
+	        		</div>
+	        	</div>
 	        	<div class="form-group" ng-if="content.active_view">
 	        		<div class="btn-container col-xs-8 col-xs-offset-2">
 						{!! Form::button('Edit'

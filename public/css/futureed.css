@@ -974,6 +974,10 @@ div > .btncon > a {
 	margin: 0px 30px;
 }
 
+.content-btn {
+	margin-top: 30px;
+}
+
 .paginate-size {
 	margin: 10px 0px;
 	width: 7%;

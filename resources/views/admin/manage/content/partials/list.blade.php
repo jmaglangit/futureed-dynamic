@@ -1,5 +1,5 @@
 <div ng-if="content.active_list">
-	<div class="col-xs-12" ng-if="content.errors || content.success">
+	<div class="col-xs-12 success-container" ng-if="content.errors || content.success">
 		<div class="alert alert-error" ng-if="content.errors">
 			<p ng-repeat="error in content.errors track by $index">
 				{! error !}
@@ -63,6 +63,10 @@
 	</div>
 	 
 	<div class="col-xs-12">
+		<button class="btn btn-blue btn-small content-btn" ng-click="content.setActive(futureed.ACTIVE_ADD)">
+			<i class="fa fa-plus-square"></i> Add Content
+		</button>
+
 		<div class="title-mid">
 			Module Content List
 		</div>

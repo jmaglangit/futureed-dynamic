@@ -12,9 +12,16 @@ function ManageModuleContentController($scope, ManageModuleContentService, Table
 	SearchService(self);
 	self.searchDefaults();
 
-	self.setModuleId = function(id) {
+	self.setModule = function (data) {
 		self.module = {};
-		self.module.id = id;
+		self.module.id = data.id;	
+		self.module.name = data.name;	
+		self.module.subject = {};
+		self.module.subject.id = data.subject.id;	
+		self.module.subject.name = data.subject.name;	
+		self.module.subject_area = {};
+		self.module.subject_area.id = data.subjectarea.id;
+		self.module.subject_area.name = data.subjectarea.name;
 	}
 
 	self.setActive = function(active, id) {
@@ -28,6 +35,16 @@ function ManageModuleContentController($scope, ManageModuleContentService, Table
 
 		switch(active) {
 			case Constants.ACTIVE_ADD :
+				self.record = {};
+
+				self.record.module_id = self.module.id;
+				self.record.subject_id = self.module.subject.id;
+				self.record.subject_area_id = self.module.subject_area.id;
+				self.record.module = self.module.name;
+				self.record.subject = self.module.subject.name;
+				self.record.subject_area = self.module.subject_area.name;
+
+				self.success = Constants.FALSE;
 				self.active_add = Constants.TRUE;
 				break;
 
@@ -55,6 +72,8 @@ function ManageModuleContentController($scope, ManageModuleContentService, Table
 				self.active_list = Constants.TRUE;
 				break;
 		}
+
+		$("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 
 	self.searchFnc = function(event) {
@@ -90,6 +109,20 @@ function ManageModuleContentController($scope, ManageModuleContentService, Table
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					self.styles = response.data.records;
+				}
+			}
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+		});
+	}
+
+	self.getMediaTypes = function() {
+		ManageModuleContentService.getMediaTypes().success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.types = response.data.records;
 				}
 			}
 		}).error(function(response) {
@@ -157,6 +190,32 @@ function ManageModuleContentController($scope, ManageModuleContentService, Table
 		});
 	}
 
+	self.addContent = function() {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+		self.fields = [];
+
+		$scope.ui_block();
+		ManageModuleContentService.add(self.record).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+
+					angular.forEach(response.errors, function(value, key) {
+						self.fields[value.field] = Constants.TRUE;
+					});
+				} else if(response.data) {
+					self.success = ContentConstants.MSG_ADD_SUCCESS;
+				}
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
 	self.updateContent = function() {
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
@@ -172,47 +231,7 @@ function ManageModuleContentController($scope, ManageModuleContentService, Table
 						self.fields[value.field] = Constants.TRUE;
 					});
 				} else if(response.data) {
-					// self.success = ContentConstants.MSG_UPDATE_SUCCESS;
-					self.setActive(Constants.ACTIVE_VIEW, response.data.id);
-				}
-			}
-
-			$scope.ui_unblock();
-		}).error(function(response) {
-			self.errors = $scope.internalError();
-			$scope.ui_unblock();
-		});
-	}
-
-	self.acceptTip = function() {
-		var data = {};
-			data.id = self.record.id;
-			data.tip_status = "Accepted";
-			// data.message = ContentConstants.MSG_ACCEPT_TIP_SUCCESS;
-
-		updateTipStatus(data);
-	}
-
-	self.rejectTip = function() {
-		var data = {};
-			data.id = self.record.id;
-			data.tip_status = "Rejected";
-			// data.message = ContentConstants.MSG_REJECT_TIP_SUCCESS;
-
-		updateTipStatus(data);
-	}
-
-	function updateTipStatus(data) {
-		self.errors = Constants.FALSE;
-		self.success = Constants.FALSE;
-
-		$scope.ui_block();
-		ManageModuleContentService.updateTipStatus(data).success(function(response) {
-			if(angular.equals(response.status, Constants.STATUS_OK)) {
-				if(response.errors) {
-					self.errors = $scope.errorHandler(response.errors);
-				} else if(response.data) {
-					self.success = data.message;
+					self.success = ContentConstants.MSG_UPDATE_SUCCESS;
 					self.setActive(Constants.ACTIVE_VIEW, response.data.id);
 				}
 			}
@@ -246,7 +265,7 @@ function ManageModuleContentController($scope, ManageModuleContentService, Table
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
-					// self.success = ContentConstants.MSG_DELETE_SUCCESS;
+					self.success = ContentConstants.MSG_DELETE_SUCCESS;
 					self.setActive(Constants.ACTIVE_LIST);
 				}
 			}
