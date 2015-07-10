@@ -9,18 +9,6 @@ use Carbon\Carbon;
 
 class AvatarQuotesTableSeeder extends Seeder
 {
-//+----------------+------------------+------+-----+---------------------+----------------+
-//| Field          | Type             | Null | Key | Default             | Extra          |
-//+----------------+------------------+------+-----+---------------------+----------------+
-//| id             | int(10) unsigned | NO   | PRI | NULL                | auto_increment |
-//| avatar_pose_id | bigint(20)       | NO   |     | NULL                |                |
-//| quote_id       | bigint(20)       | NO   |     | NULL                |                |
-//| created_by     | bigint(20)       | NO   |     | NULL                |                |
-//| updated_by     | bigint(20)       | NO   |     | NULL                |                |
-//| created_at     | timestamp        | NO   |     | 0000-00-00 00:00:00 |                |
-//| updated_at     | timestamp        | NO   |     | 0000-00-00 00:00:00 |                |
-//| deleted_at     | timestamp        | YES  |     | NULL                |                |
-//+----------------+------------------+------+-----+---------------------+----------------+
 
 	public function run()
     {
