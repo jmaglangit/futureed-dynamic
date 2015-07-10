@@ -1,4 +1,4 @@
-<?php namespace FutureEd\Http\Controllers\api\v1;
+<?php namespace FutureEd\Http\Controllers\Api\v1;
 
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
