@@ -102,7 +102,7 @@ class ModuleContentRepository implements ModuleContentRepositoryInterface{
 	 *
 	 * @return ModuleContentRepository|\Illuminate\Support\Collection|null|string|static
 	 */
-	public function getCount($module_id){
+	public function getModuleContentCount($module_id){
 
 		$module_content = new ModuleContent();
 
