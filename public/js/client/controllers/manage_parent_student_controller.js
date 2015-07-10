@@ -20,27 +20,18 @@ function ManageParentStudentController($scope, ManageParentStudentService, apiSe
 	self.change = {};
 	self.user_type = Constants.STUDENT;
 
-	self.existActive = function(req) {
+	self.existActive = function() {
+		self.reg = {};
 		self.errors = Constants.FALSE;
-		switch(req) {
-			case 'new':
-				self.exist = Constants.TRUE;
-				self.reg = {};
-				break
-			case 'old':
-			default:
-				self.exist = Constants.FALSE;
-				self.reg = {};
-				break
-		}
+		self.success = Constants.FALSE;
+
 		$('input, select').removeClass('required-field');
-		$("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 
 	self.setActive = function(active, id, cond) {
 		self.fields = [];
 		self.errors = Constants.FALSE;
-		self.cond = (cond) ? 1:0;
+		self.cond = (cond) ? Constants.TRUE : Constants.FALSE;
 		
 		if(self.cond == 0){
 			self.success = Constants.FALSE;
