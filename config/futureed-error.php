@@ -59,6 +59,8 @@ return [
 		2044 => 'The Postal Code format is invalid.',
 		2045 => 'The Postal Code may not be greater than 10 characters.',
 		2046 => 'The contact number should not exceed 20 digits.',
+		2047 => 'Country name is required.',
+		2048 => 'Grade name is required.',
 
 
 		2100 => 'Reset code is invalid.',

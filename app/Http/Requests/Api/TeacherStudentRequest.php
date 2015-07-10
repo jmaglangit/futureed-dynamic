@@ -63,8 +63,8 @@ class TeacherStudentRequest extends ApiRequest {
 	public function messages()
 	{
 		return [
-			'country_id.required' => 'country name is required.',
-			'grade_code.required' => 'grade name is required.'
+			'country_id.required' => config('futureed-error.error_messages.2047'),
+			'grade_code.required' => config('futureed-error.error_messages.2048')
 		];
 	}
 
