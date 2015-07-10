@@ -248,7 +248,6 @@
                                 <div template-directive template-url="{!! route('admin.manage.age_group.partials.edit_view_form') !!}"></div>
                             </div>
                         </div>
-
                         <div ng-controller="ManageModuleContentController as content" class="tab-pane fade" ng-init="content.setModuleId(module.details.id)" id="contents">
                             <div ng-if="module.active_view" ng-init="content.setActive()">
                                 
@@ -262,14 +261,11 @@
                             </div>
                         </div>
 
-                        <!-- Diri Franz sun-a lang ang naa sa taas (ManageModuleContentController) -->
-                        <div ng-controller="ManageAgeGroupController as age" class="tab-pane fade" id="q_and_a">
-                            <div ng-if="module.active_view" ng-init="age.setActive()">
-                                <div ng-init="age.setActive()" template-directive template-url="{!! route('admin.manage.age_group.partials.list_view_form') !!}"></div>
+                        <div ng-controller="ManageQuestionAnsController as qa" class="module-container tab-pane fade" ng-init="qa.setModule(module.details)" id="q_and_a">
+                            <div ng-if="module.active_view" ng-init="qa.setActive()">
+                                <div template-directive template-url="{!! route('admin.manage.question_answer.partials.question_list_form') !!}"></div>
 
-                                <div template-directive template-url="{!! route('admin.manage.age_group.partials.add_view_form') !!}"></div>
-
-                                <div template-directive template-url="{!! route('admin.manage.age_group.partials.edit_view_form') !!}"></div>
+                                <div template-directive template-url="{!! route('admin.manage.question_answer.partials.question_add_form') !!}"></div>
                             </div>
                         </div>
                     </div>
