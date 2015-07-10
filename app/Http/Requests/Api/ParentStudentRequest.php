@@ -22,7 +22,7 @@ class ParentStudentRequest extends ApiRequest {
      */
     public function rules()
     {
-        switch($this->method)
+        switch($this->method())
         {
 			case 'POST':
 				switch ($this->route()->getName()) {

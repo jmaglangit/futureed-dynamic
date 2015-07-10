@@ -40,7 +40,7 @@ class AdminRequest extends ApiRequest {
 					'last_name' => 'required|regex:'. config('regex.name') .'|max:'.config('futureed.last_name_max')
 				];
 		
-		switch($this->method) {
+		switch($this->method()) {
 			case 'PUT':
 
 				$validation_rules['username'] = 'required|min:'.config('futureed.username_min').'|max:'.config('futureed.username_max').'|alpha_num|unique:users,username,'.$admin_user_id.',id,user_type,'.config('futureed.admin').',deleted_at,NULL';

@@ -32,7 +32,7 @@ class AdminStudentRequest extends ApiRequest {
 			$student_id = $student->user_id;
 		}
 
-		switch ($this->method) {
+		switch ($this->method()) {
 			case 'POST':
 				$student = config('futureed.student');
 				return [

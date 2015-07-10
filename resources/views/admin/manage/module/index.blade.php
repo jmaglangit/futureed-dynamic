@@ -30,8 +30,11 @@
 	{!! Html::script('/js/admin/services/manage_module_service.js')!!}
 	{!! Html::script('/js/admin/controllers/manage_age_group_controller.js')!!}
 	{!! Html::script('/js/admin/services/manage_age_group_service.js')!!}
+
 	{!! Html::script('/js/admin/controllers/manage_module_content_controller.js')!!}
 	{!! Html::script('/js/admin/services/manage_module_content_service.js')!!}
+	{!! Html::script('/js/admin/constants/manage_module_content_constants.js')!!}
+	
 	{!! Html::script('/js/admin/controllers/manage_question_ans_controller.js')!!}
 	{!! Html::script('/js/admin/services/manage_question_ans_service.js')!!}
 	{!! Html::script('/js/admin/constants/manage_module_constants.js')!!}

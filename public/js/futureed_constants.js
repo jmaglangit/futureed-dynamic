@@ -41,6 +41,10 @@ var Constants = {
 	, EDIT_EMAIL	: "edit_email"
 	, CONFIRM_EMAIL : "confirm_email"
 
+	, AGEGROUP		: "agegroup"
+	, CONTENTS 		: "contents"
+	, QANDA 		: "qanda"
+
 	/**
 	* Active Screens
 	*/
