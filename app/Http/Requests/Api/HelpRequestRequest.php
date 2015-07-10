@@ -18,7 +18,7 @@ class HelpRequestRequest extends ApiRequest{
      */
     public function rules() {
 
-        switch($this->method) {
+        switch($this->method()) {
             case 'PATCH':
                 switch ($this->route()->getName()) {
                     case 'help-request.patch.update-request-status':

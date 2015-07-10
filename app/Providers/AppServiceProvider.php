@@ -219,5 +219,10 @@ class AppServiceProvider extends ServiceProvider {
 			'FutureEd\Models\Repository\LearningStyle\LearningStyleRepository'
 		);
 
+		$this->app->bind(
+			'FutureEd\Models\Repository\MediaType\MediaTypeRepositoryInterface',
+			'FutureEd\Models\Repository\MediaType\MediaTypeRepository'
+		);
+
 	}
 }

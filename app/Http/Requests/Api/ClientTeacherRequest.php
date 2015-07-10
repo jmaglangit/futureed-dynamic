@@ -22,9 +22,8 @@ class ClientTeacherRequest extends ApiRequest
 	 */
 	public function rules()
 	{
-		switch ($this->method) {
+		switch ($this->method()) {
 			case 'PUT':
-				$client = config('futureed.client');
 				return [
 					'first_name' => 'required|regex:'. config('regex.name') ,
 					'last_name' => 'required|regex:'. config('regex.name'),

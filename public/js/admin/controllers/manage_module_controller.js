@@ -55,6 +55,10 @@ function ManageModuleController($scope, manageModuleService, apiService, TableSe
 		$("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 
+	self.setActiveContent = function(view) {
+		self.details.current_view = view;
+	}
+
 	self.searchFnc = function(event) {
 		self.errors = Constants.FALSE;
 		self.list();
