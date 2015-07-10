@@ -19,7 +19,7 @@ class ClassStudentRequest extends ApiRequest {
      * @return array
      */
     public function rules() {
-		switch ($this->method) {
+		switch ($this->method()) {
 			case 'POST':
 				switch ($this->route()->getName()) {
 					case 'class-student.add.existing.student':
