@@ -221,7 +221,7 @@ function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService,
                 break;
 
             default:
-                self.active_list = Constants.TRUE;
+                self.active_anslist = Constants.TRUE;
                 self.answerList();
                 break;
         }
@@ -304,6 +304,50 @@ function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService,
 				}
 			}
 			$scope.ui_unblock();
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		})
+	}
+
+	self.getAnswerDetail = function(id) {
+		self.answers.errors = Constants.FALSE;
+
+		$scope.ui_block();
+		ManageQuestionAnsService.getQuestionDetail(id).success(function(response){
+			if(angular.equals(response.status,Constants.STATUS_OK)){
+				if(response.errors) {
+					self.answers.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.ansdetails = response.data;
+				}
+			}
+		$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.saveAnswer = function(){
+		self.answers.errors = Constants.FALSE;
+		self.fields = [];
+
+		$scope.ui_block();
+		ManageQuestionAnsService.saveAnswer(self.ansdetails).success(function(response){
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.answrs.errors = $scope.errorHandler(response.errors);
+
+					angular.forEach(response.errors, function(value, a) {
+						self.fields[value.field + '_ans'] = Constants.TRUE;
+					});
+				} else if(response.data) {
+					self.answers.success = ManageModuleConstants.SUCCESS_EDIT_ANS;
+					self.setAnsActive('list', '' , 1);
+				}
+			}
+		$scope.ui_unblock();
 		}).error(function(response){
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();

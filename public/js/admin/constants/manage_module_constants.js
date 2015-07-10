@@ -8,4 +8,5 @@ var ManageModuleConstants = {
 	, SUCCESS_DELETE_QUESTION 	: "Successfully deleted question"
 	, SUCCESS_ADD_ANSWER 	: "Successfully added answer"
 	, SUCCESS_DELETE_ANS 	: "Successfully deleted answer"
+	, SUCCESS_EDIT_ANS 	: "Successfully edited answer"
 }

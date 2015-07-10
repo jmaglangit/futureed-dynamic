@@ -1,6 +1,105 @@
-<div ng-if="qa.details.question_type == 'MC' || qa.active_anslist" ng-init="qa.answerList()">
+<div ng-if="qa.details.question_type == 'MC'" ng-init="qa.setAnsActive()">
+        <div ng-if="qa.active_anslist">
         {!! Form::open(array('id'=> 'add_answer_form', 'class' => 'form-horizontal', 'enctype' => 'multipart/form-data')) !!}
-        <div class="col-xs-12 form-content">
+            <div class="col-xs-12 form-content">
+                <div class="alert alert-error" ng-if="qa.answers.errors">
+                    <p ng-repeat="error in qa.answers.errors track by $index" > 
+                        {! error !}
+                    </p>
+                </div>
+
+                <div class="alert alert-success" ng-if="qa.answers.success">
+                    <p>{! qa.answers.success !}</p>
+                </div>
+                <fieldset>
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">Answer Code<span class="required">*</span></label>
+                        <div class="col-xs-4">
+                            {!! Form::text('code',''
+                                , array(
+                                    'placeHolder' => 'Answer Code'
+                                    , 'ng-model' => 'qa.answers.code'
+                                    , 'class' => 'form-control'
+                                    , 'ng-class' => "{ 'required-field' : qa.fields['code_ans'] }"
+                                )
+                            ) !!}
+                        </div>
+                        <label class="control-label col-xs-2">Question Image</label>
+                        <div class="col-xs-4">
+                              <div style="position:relative;">
+                                <a class='btn btn-primary btn-semi-large' href='javascript:;'>
+                                    Choose File...
+                                    <input ng-model="qa.answers.image" id="q_image" type="file" class="img-input" name="file_source" size="40"  onchange='$("#upload-file-info").html($(this).val());'>
+                                </a>
+                                <center><span class='label label-info' id="upload-file-info"></span></center>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">Answer <span class="required">*</span></label>
+                        <div class="col-xs-4">
+                            {!! Form::text('answer_text',''
+                                , array(
+                                    'placeHolder' => 'Answer'
+                                    , 'ng-model' => 'qa.answers.answer_text'
+                                    , 'class' => 'form-control'
+                                    , 'ng-class' => "{ 'required-field' : qa.fields['answer_text_ans'] }"
+                                )
+                            ) !!}
+                        </div>
+                        <label class="col-xs-2 control-label">Points Equivalent <span class="required">*</span></label>
+                        <div class="col-xs-4">
+                            {!! Form::text('point_equivalent',''
+                                , array(
+                                    'placeHolder' => 'Points Equivalent'
+                                    , 'ng-model' => 'qa.answers.point_equivalent'
+                                    , 'class' => 'form-control'
+                                    , 'ng-class' => "{ 'required-field' : qa.fields['point_equivalent_ans'] }"
+                                )
+                            ) !!}
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-xs-2 control-label">Correct Answer <span class="required">*</span></label>
+                        <div class="col-xs-4">
+                            {!! Form::select('correct_answer'
+                                , array(
+                                    '' => '-- Select Answer --'
+                                    , 'Yes' => 'Yes'
+                                    , 'No' => 'No'
+                                )
+                                , ''
+                                , array(
+                                    'class' => 'form-control'
+                                    , 'ng-model' => 'qa.answers.correct_answer'
+                                    , 'ng-class' => "{ 'required-field' : qa.fields['correct_answer_ans'] }"
+                                )
+                            ) !!}
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="col-xs-6 col-xs-offset-3">
+                    <div class="btn-container">
+                        {!! Form::button('Add'
+                            , array(
+                                'class' => 'btn btn-blue btn-medium'
+                                , 'ng-click' => 'qa.addAnswer()'
+                            )
+                        ) !!}
+                        {!! Form::button('Cancel'
+                            , array(
+                                'class' => 'btn btn-gold btn-medium'
+                                , 'ng-click' => 'qa.setActive()'
+                            )
+                        ) !!}
+                    </div>
+                </div>
+            </div>
+            {!! Form::close() !!}
+        </div>
+    <div ng-if="qa.active_ansedit">
+        {!! Form::open(array('id'=> 'add_answer_form', 'class' => 'form-horizontal', 'enctype' => 'multipart/form-data')) !!}
+            <div class="col-xs-12 form-content">
             <div class="alert alert-error" ng-if="qa.answers.errors">
                 <p ng-repeat="error in qa.answers.errors track by $index" > 
                     {! error !}
@@ -17,7 +116,7 @@
                         {!! Form::text('code',''
                             , array(
                                 'placeHolder' => 'Answer Code'
-                                , 'ng-model' => 'qa.answers.code'
+                                , 'ng-model' => 'qa.ansdetails.code'
                                 , 'class' => 'form-control'
                                 , 'ng-class' => "{ 'required-field' : qa.fields['code_ans'] }"
                             )
@@ -40,7 +139,7 @@
                         {!! Form::text('answer_text',''
                             , array(
                                 'placeHolder' => 'Answer'
-                                , 'ng-model' => 'qa.answers.answer_text'
+                                , 'ng-model' => 'qa.ansdetails.answer_text'
                                 , 'class' => 'form-control'
                                 , 'ng-class' => "{ 'required-field' : qa.fields['answer_text_ans'] }"
                             )
@@ -51,7 +150,7 @@
                         {!! Form::text('point_equivalent',''
                             , array(
                                 'placeHolder' => 'Points Equivalent'
-                                , 'ng-model' => 'qa.answers.point_equivalent'
+                                , 'ng-model' => 'qa.ansdetails.point_equivalent'
                                 , 'class' => 'form-control'
                                 , 'ng-class' => "{ 'required-field' : qa.fields['point_equivalent_ans'] }"
                             )
@@ -70,7 +169,7 @@
                             , ''
                             , array(
                                 'class' => 'form-control'
-                                , 'ng-model' => 'qa.answers.correct_answer'
+                                , 'ng-model' => 'qa.ansdetails.correct_answer'
                                 , 'ng-class' => "{ 'required-field' : qa.fields['correct_answer_ans'] }"
                             )
                         ) !!}
@@ -79,16 +178,16 @@
             </fieldset>
             <div class="col-xs-6 col-xs-offset-3">
                 <div class="btn-container">
-                    {!! Form::button('Add'
+                    {!! Form::button('Save'
                         , array(
                             'class' => 'btn btn-blue btn-medium'
-                            , 'ng-click' => 'qa.addAnswer()'
+                            , 'ng-click' => 'qa.saveAnswer()'
                         )
                     ) !!}
                     {!! Form::button('Cancel'
                         , array(
                             'class' => 'btn btn-gold btn-medium'
-                            , 'ng-click' => 'qa.setActive()'
+                            , 'ng-click' => 'qa.setAnsActive()'
                         )
                     ) !!}
                 </div>
@@ -142,7 +241,7 @@
                             <td ng-if="qa.ans_records.length">
                                 <div class="row">
                                     <div class="col-xs-6">
-                                        <a href="" ng-click="qa.setqaActive(futureed.ACTIVE_VIEW, ansInfo.id)"><span><i class="fa fa-pencil"></i></span></a>
+                                        <a href="" ng-click="qa.setAnsActive(futureed.ACTIVE_EDIT, ansInfo.id)"><span><i class="fa fa-pencil"></i></span></a>
                                     </div>
                                     <div class="col-xs-6">
                                         <a href="" ng-click="qa.confirmAnsDelete(ansInfo.id)"><span><i class="fa fa-trash"></i></span></a>
