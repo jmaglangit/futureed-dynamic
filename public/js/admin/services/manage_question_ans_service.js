@@ -26,5 +26,27 @@ function ManageQuestionAnsService($http) {
         });
     }
 
+    qaServiceApi.getQuestionDetail = function(id) {
+        return $http({
+            method  : Constants.METHOD_GET
+            , url   : qaServiceUrl + 'question/admin/' + id
+        });
+    }
+
+    qaServiceApi.saveEditQuestion = function(data) {
+        return $http({
+            method  : Constants.METHOD_PUT
+            , data  : data
+            , url   : qaServiceUrl + 'question/admin/' + data.id
+        });
+    }
+
+    qaServiceApi.deleteQuestion = function(id) {
+        return $http({
+            method  : Constants.METHOD_DELETE
+            , url   : qaServiceUrl + 'question/admin/' + id
+        });
+    }
+
     return qaServiceApi;
 }

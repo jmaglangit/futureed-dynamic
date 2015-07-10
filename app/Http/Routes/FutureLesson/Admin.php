@@ -602,6 +602,12 @@
 						, 'uses' => 'FutureLesson\Admin\ManageQuestionAnsController@question_add_form'
 						, 'middleware' => 'admin_partial'
 					]);
+
+					Routes::get('/question_view_form', 
+						['as' => 'admin.manage.question_answer.partials.question_view_form'
+						, 'uses' => 'FutureLesson\Admin\ManageQuestionAnsController@question_view_form'
+						, 'middleware' => 'admin_partial'
+					]);
 				});
 			});
 			

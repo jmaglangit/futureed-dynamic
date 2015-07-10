@@ -45,7 +45,7 @@ function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService,
 
             case Constants.ACTIVE_VIEW :
                 self.active_view = Constants.TRUE;
-                self.getModuleDetail(id);
+                self.getQuestionDetail(id);
                 break;
 
             case Constants.ACTIVE_ADD : 
@@ -122,4 +122,81 @@ function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService,
 		})
     }
 
+    self.getQuestionDetail = function(id) {
+    	self.errors = Constants.FALSE;
+
+		$scope.ui_block();
+		ManageQuestionAnsService.getQuestionDetail(id).success(function(response){
+			if(angular.equals(response.status,Constants.STATUS_OK)){
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.details = response.data;
+				}
+			}
+		$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = internalError();
+			$scope.ui_unblock();
+		});
+    }
+
+    self.saveEditQuestion = function(){
+		self.errors = Constants.FALSE;
+		self.fields = [];
+
+		$scope.ui_block();
+		ManageQuestionAnsService.saveEditQuestion(self.details).success(function(response){
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+
+					angular.forEach(response.errors, function(value, a) {
+						self.fields[value.field] = Constants.TRUE;
+					});
+				} else if(response.data) {
+					self.validation = {};
+					self.success = ManageModuleConstants.SUCCESS_EDIT_QUESTION;
+					self.setActive('view', self.details.id, 1);
+				}
+			}
+		$scope.ui_unblock();
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		})
+	}
+
+	self.confirmDelete = function(id) {
+		self.errors = Constants.FALSE;
+		self.delete.id = id;
+		self.delete.confirm = Constants.TRUE;
+
+		$("#delete_question_modal").modal({
+	        backdrop: 'static',
+	        keyboard: Constants.FALSE,
+	        show    : Constants.TRUE
+	    });
+	}
+
+	self.deleteQuestion = function() {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		$scope.ui_block();
+		ManageQuestionAnsService.deleteQuestion(self.delete.id).success(function(response){
+			if(angular.equals(response.status,Constants.STATUS_OK)){
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.success = ManageModuleConstants.SUCCESS_DELETE_QUESTION;
+					self.setActive('', '', 1);
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		})
+	}
 }

@@ -262,11 +262,13 @@
                             </div>
                         </div>
 
-                        <div ng-controller="ManageQuestionAnsController as qa" class="module-container tab-pane fade" ng-init="qa.setModule(module.details)" id="q_and_a">
+                        <div ng-if="module.details.current_view == futureed.QANDA" ng-controller="ManageQuestionAnsController as qa" class="module-container tab-pane fade" ng-init="qa.setModule(module.details)" id="q_and_a">
                             <div ng-if="module.active_view" ng-init="qa.setActive()">
                                 <div template-directive template-url="{!! route('admin.manage.question_answer.partials.question_list_form') !!}"></div>
 
                                 <div template-directive template-url="{!! route('admin.manage.question_answer.partials.question_add_form') !!}"></div>
+
+                                <div template-directive template-url="{!! route('admin.manage.question_answer.partials.question_view_form') !!}"></div>
                             </div>
                         </div>
                     </div>
