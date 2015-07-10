@@ -14,4 +14,11 @@ class ManageQuestionAnsController extends Controller{
 	public function question_list_form() {
 		return view('admin.manage.question_answer.partials.question_list_form');
 	}
+
+	/**
+	*@return add View Form
+	*/
+	public function question_add_form() {
+		return view('admin.manage.question_answer.partials.question_add_form');
+	}
 }

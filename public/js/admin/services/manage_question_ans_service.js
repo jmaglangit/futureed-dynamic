@@ -18,5 +18,13 @@ function ManageQuestionAnsService($http) {
         });
     }
 
+    qaServiceApi.addNewQuestion = function(data) {
+        return $http({
+            method  : Constants.METHOD_POST
+            , data  : data
+            , url   : qaServiceUrl + 'question/admin'
+        });
+    }
+
     return qaServiceApi;
 }

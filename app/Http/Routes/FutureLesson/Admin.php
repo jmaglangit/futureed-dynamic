@@ -596,6 +596,12 @@
 						, 'uses' => 'FutureLesson\Admin\ManageQuestionAnsController@question_list_form'
 						, 'middleware' => 'admin_partial'
 					]);
+
+					Routes::get('/question_add_form', 
+						['as' => 'admin.manage.question_answer.partials.question_add_form'
+						, 'uses' => 'FutureLesson\Admin\ManageQuestionAnsController@question_add_form'
+						, 'middleware' => 'admin_partial'
+					]);
 				});
 			});
 			
