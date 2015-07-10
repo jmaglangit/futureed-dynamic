@@ -121,17 +121,20 @@
                     <tr ng-repeat="qaInfo in qa.qa_records">
                         <td>{! qaInfo.code !}</td>
                         <td>{! qaInfo.questions_text !}</td>
-                        <td><img src="{! qaInfo.questions_image !}"></td>
+                        <td><img src=""></td>
                         <td>{! qaInfo.question_type !}</td>
                         <td>{! qaInfo.difficulty !}</td>
                         <td>{! qaInfo.seq_no !}</td>
                         <td>{! qaInfo.points_earned !}</td>
                         <td ng-if="qa.qa_records.length">
                             <div class="row">
-                                <div class="col-xs-6">
+                                <div class="col-xs-4">
+                                    <a href="" ng-click="qa.setActive(futureed.ACTIVE_VIEW, qaInfo.id)"><span><i class="fa fa-eye"></i></span></a>
+                                </div>
+                                <div class="col-xs-4">
                                     <a href="" ng-click="qa.setActive(futureed.ACTIVE_EDIT, qaInfo.id)"><span><i class="fa fa-pencil"></i></span></a>
                                 </div>
-                                <div class="col-xs-6">
+                                <div class="col-xs-4">
                                     <a href="" ng-click="qa.confirmDelete(qaInfo.id)"><span><i class="fa fa-trash"></i></span></a>
                                 </div>
                             </div>
@@ -160,4 +163,34 @@
             </div>
         </div>
     </div>
+</div>
+<div id="delete_question_modal" ng-show="qa.delete.confirm" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+        <div class="modal-header">
+            Delete Question
+        </div>
+        <div class="modal-body">
+            Are you sure you want to delete this Question?
+        </div>
+        <div class="modal-footer">
+            <div class="btncon col-md-8 col-md-offset-4 pull-left">
+                {!! Form::button('Yes'
+                    , array(
+                        'class' => 'btn btn-blue btn-medium'
+                        , 'ng-click' => 'qa.deleteQuestion()'
+                        , 'data-dismiss' => 'modal'
+                    )
+                ) !!}
+
+                {!! Form::button('No'
+                    , array(
+                        'class' => 'btn btn-gold btn-medium'
+                        , 'data-dismiss' => 'modal'
+                    )
+                ) !!}
+            </div>
+        </div>
+    </div>
+  </div>
 </div>
