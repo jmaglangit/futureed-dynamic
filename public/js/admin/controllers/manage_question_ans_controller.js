@@ -15,9 +15,9 @@ function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService,
     SearchService(self);
     self.searchDefaults();
 
-    self.setModuleId = function(id) {
-        self.module = {};
-        self.module.id = id;
+    self.setModule = function(data) {
+        self.module = data;
+        self.module.id = data.id;
     }
 
     self.setActive = function(active, id, flag) {
@@ -38,7 +38,7 @@ function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService,
         switch (active) {
             case Constants.ACTIVE_EDIT:
                 self.active_edit = Constants.TRUE;
-                self.getModuleDetail(id);
+                self.getQuestionDetail(id);
                 self.edit = Constants.TRUE;
                 self.success = Constants.FALSE;
                 break;
@@ -57,7 +57,6 @@ function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService,
                 self.list();
                 break;
         }
-        $("html, body").animate({ scrollTop: 0 }, "slow");
     }
 
     self.searchFnc = function(event) {
@@ -92,6 +91,35 @@ function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService,
             self.errors = $scope.internalError();
             $scope.ui_unblock();
         });
+    }
+
+    self.addNewQuestion = function() {
+    	self.errors = Constants.FALSE;
+		self.create.success = Constants.FALSE;
+		self.fields = [];
+		// set temporary seq_no (this will be remove once api will not require seq_no)
+		self.create.seq_no = 1;
+		self.create.module_id = self.module.id;
+
+		$scope.ui_block();
+		ManageQuestionAnsService.addNewQuestion(self.create).success(function(response){
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+
+					angular.forEach(response.errors, function(value, a) {
+						self.fields[value.field] = Constants.TRUE;
+					});
+				} else if(response.data) {
+					self.create = {};
+					self.create.success = Constants.TRUE;
+				}
+			}
+		$scope.ui_unblock();
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		})
     }
 
 }

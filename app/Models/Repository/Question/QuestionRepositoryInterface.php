@@ -44,4 +44,12 @@ interface QuestionRepositoryInterface {
 
 	public function updateQuestion($id,$data);
 
+	/**
+	 * Get number of row.
+	 * @param $module_id
+	 * @param $data
+	 * @return int
+	 */
+	public function getQuestionCount($module_id);
+
 }

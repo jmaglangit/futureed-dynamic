@@ -79,6 +79,9 @@ class TeachingContentController extends ApiController {
 		//Add module_contents
 		$data['content_id'] = $teaching_content->id;
 
+		//Add seq_no
+		$data['seq_no'] = $this->module_content->getModuleContentCount($data['module_id']) +1;
+
 		$this->module_content->addModuleContent($data);
 
         return $this->respondWithData(
@@ -110,15 +113,8 @@ class TeachingContentController extends ApiController {
     {
         $data = $request->all();
 
-		$teaching_content =  $this->teaching_content->updateTeachingContent($id,$data);
-
-
-		if($request->get('seq_no')){
-
-			$module_content = [ 'seq_no' => $request->get('seq_no')];
-
-			$this->module_content->updateModuleContentByTeachingContent($teaching_content->id,$module_content);
-		}
+		//update teaching_content
+		$this->teaching_content->updateTeachingContent($id,$data);
 
         return $this->respondWithData(
             $this->teaching_content->getTeachingContent($id)

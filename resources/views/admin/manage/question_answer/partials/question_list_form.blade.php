@@ -1,4 +1,15 @@
-<div class="clearfix"></div>
+<div ng-if="qa.active_list">
+<div class="col-xs-12" ng-if="qa.errors || qa.success">
+        <div class="alert alert-error" ng-if="qa.errors">
+            <p ng-repeat="error in qa.errors track by $index">
+                {! error !}
+            </p>
+        </div>
+
+        <div class="alert alert-success" ng-if="qa.success">
+            <p>{! qa.success !}</p>
+        </div>
+    </div>
 <div class="col-xs-12 search-container">
         <div class="title-mid">
             Search
@@ -149,3 +160,4 @@
             </div>
         </div>
     </div>
+</div>
