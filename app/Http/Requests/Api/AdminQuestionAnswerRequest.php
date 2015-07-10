@@ -30,7 +30,8 @@ class AdminQuestionAnswerRequest extends ApiRequest {
 					'question_id' => 'required|integer',
 					'code' => 'required|integer',
 					'answer_text' => 'required|string',
-					'image' => 'required|mimes:jpeg,jpg,png|max:2000',
+					// temporarily not required because this will will be on another call
+					// 'image' => 'required|mimes:jpeg,jpg,png|max:2000',
 					'correct_answer' => 'required|alpha|in:Yes,No',
 					'point_equivalent' => 'required|integer',
 

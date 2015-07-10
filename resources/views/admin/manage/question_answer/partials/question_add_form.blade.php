@@ -98,15 +98,16 @@
                         )
                     ) !!}
                 </div>
-                <label class="control-label col-xs-2">Question Image</label>
-                <div class="col-xs-4">
-                      <div style="position:relative;">
-                        <a class='btn btn-primary btn-semi-large' href='javascript:;'>
-                            Choose File...
-                            <input ng-model="qa.create.image" id="q_image" type="file" class="img-input" name="file_source" size="40"  onchange='$("#upload-file-info").html($(this).val());'>
-                        </a>
-                        <center><span class='label label-info' id="upload-file-info"></span></center>
-                    </div>
+                <label ng-if="qa.create.question_type == 'O'" class="control-label col-xs-2">Answer <span class="required">*</span></label>
+                <div class="col-xs-4" ng-if="qa.create.question_type == 'O'">
+                    {!! Form::text('answer',''
+                        , array(
+                            'placeHolder' => 'Answer'
+                            , 'ng-model' => 'qa.create.answer'
+                            , 'class' => 'form-control'
+                            , 'ng-class' => "{ 'required-field' : qa.fields['answer'] }"
+                        )
+                    ) !!}
                 </div>
             </div>
         	<div class="form-group">
@@ -121,35 +122,16 @@
                         )
                     ) !!}
                 </div>
-        		<label class="col-xs-2 control-label">Status <span class="required">*</span></label>
-        		<div class="col-xs-4">
-        			<div class="col-xs-6 checkbox">	                				
-        				<label>
-        					{!! Form::radio('status'
-        						, 'Enabled'
-        						, true
-        						, array(
-        							'class' => 'field'
-        							, 'ng-model' => 'qa.create.status'
-        						) 
-        					) !!}
-        				<span class="lbl padding-8">Enabled</span>
-        				</label>
-        			</div>
-        			<div class="col-xs-6 checkbox">
-        				<label>
-        					{!! Form::radio('status'
-        						, 'Disabled'
-        						, false
-        						, array(
-        							'class' => 'field'
-        							, 'ng-model' => 'qa.create.status'
-        						)
-        					) !!}
-        				<span class="lbl padding-8">Disabled</span>
-        				</label>
-        			</div>
-        		</div>
+        		<label class="control-label col-xs-2">Question Image</label>
+                <div class="col-xs-4">
+                      <div style="position:relative;">
+                        <a class='btn btn-primary btn-semi-large' href='javascript:;'>
+                            Choose File...
+                            <input ng-model="qa.create.image" id="q_image" type="file" class="img-input" name="file_source" size="40"  onchange='$("#upload-file-info").html($(this).val());'>
+                        </a>
+                        <center><span class='label label-info' id="upload-file-info"></span></center>
+                    </div>
+                </div>
         	</div>
             <div class="form-group">
                 <label class="control-label col-xs-2">Difficulty <span class="required">*</span></label>
@@ -162,6 +144,35 @@
                             , 'ng-class' => "{ 'required-field' : qa.fields['difficulty'] }"
                         )
                     ) !!}
+                </div>
+                <label class="col-xs-2 control-label">Status <span class="required">*</span></label>
+                <div class="col-xs-4">
+                    <div class="col-xs-6 checkbox">                                 
+                        <label>
+                            {!! Form::radio('status'
+                                , 'Enabled'
+                                , true
+                                , array(
+                                    'class' => 'field'
+                                    , 'ng-model' => 'qa.create.status'
+                                ) 
+                            ) !!}
+                        <span class="lbl padding-8">Enabled</span>
+                        </label>
+                    </div>
+                    <div class="col-xs-6 checkbox">
+                        <label>
+                            {!! Form::radio('status'
+                                , 'Disabled'
+                                , false
+                                , array(
+                                    'class' => 'field'
+                                    , 'ng-model' => 'qa.create.status'
+                                )
+                            ) !!}
+                        <span class="lbl padding-8">Disabled</span>
+                        </label>
+                    </div>
                 </div>
             </div>
         </fieldset>
