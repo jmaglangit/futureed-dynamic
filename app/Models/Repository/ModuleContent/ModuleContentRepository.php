@@ -96,4 +96,22 @@ class ModuleContentRepository implements ModuleContentRepositoryInterface{
 		}
 	}
 
+	/**
+	 * Get number of row under module.
+	 * @param $module_id
+	 *
+	 * @return ModuleContentRepository|\Illuminate\Support\Collection|null|string|static
+	 */
+	public function getModuleContentCount($module_id){
+
+		$module_content = new ModuleContent();
+
+		$module_content = $module_content->moduleId($module_id);
+
+		$count = $module_content->get()->count();
+
+		return $count;
+
+	}
+
 }

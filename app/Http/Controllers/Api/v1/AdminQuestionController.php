@@ -89,7 +89,7 @@ class AdminQuestionController extends ApiController {
 	public function store(AdminQuestionRequest $request)
 	{
 
-		$data =  $request->only('image','answer','code','module_id','seq_no','questions_text','status','question_type','points_earned','difficulty');
+		$data =  $request->only('image','answer','code','module_id','questions_text','status','question_type','points_earned','difficulty');
 
 		//check if has images uploaded
 		if($data['image']){
@@ -103,6 +103,8 @@ class AdminQuestionController extends ApiController {
 			$data['questions_image'] = $image;
 
 		}
+		//get question count
+		$data['seq_no'] = $this->question->getQuestionCount($data['module_id']) +1;
 
 		$return = $this->question->addQuestion($data);
 
@@ -149,7 +151,7 @@ class AdminQuestionController extends ApiController {
 	 */
 	public function update($id,AdminQuestionRequest $request)
 	{
-		$data =  $request->only('seq_no','answer','questions_text','status','question_type','points_earned','difficulty');
+		$data =  $request->only('answer','questions_text','status','question_type','points_earned','difficulty');
 
 		$question = $this->question->viewQuestion($id);
 

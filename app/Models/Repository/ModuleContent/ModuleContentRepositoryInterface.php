@@ -15,4 +15,6 @@ interface ModuleContentRepositoryInterface {
 
 	public function updateModuleContentByTeachingContent($content_id, $data);
 
+	public function getModuleContentCount($module_id);
+
 }

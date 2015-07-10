@@ -29,7 +29,6 @@ class AdminQuestionRequest extends ApiRequest {
 
 					'image' => 'mimes:jpeg,jpg,png|max:2000',
 					'module_id' => 'required|integer',
-					'seq_no' => 'required|integer',
 					'questions_text' => 'required|string',
 					'difficulty' => 'required|integer',
 					'status' => 'required|alpha|in:Enabled,Disabled',
@@ -44,7 +43,6 @@ class AdminQuestionRequest extends ApiRequest {
 
 				return [
 
-					'seq_no' => 'required|integer',
 					'questions_text' => 'required|string',
 					'difficulty' => 'required|integer',
 					'status' => 'required|alpha|in:Enabled,Disabled',
@@ -62,7 +60,6 @@ class AdminQuestionRequest extends ApiRequest {
 		return [
 			'module_id.required' => 'Module is required.',
 			'module_id.integer' => 'Module is invalid.',
-			'seq_no.integer' => 'Sequence must be a number.',
 			'difficulty.integer' => 'Difficulty must be a number.',
 			'points_earned.integer' => 'Points earned must be a number.',
 			'code.integer' => 'Code must be a number.'

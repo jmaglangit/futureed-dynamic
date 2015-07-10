@@ -139,6 +139,21 @@ class QuestionRepository implements QuestionRepositoryInterface{
 		}
 	}
 
+	/**
+	 * Get number of row under module.
+	 * @param $module_id
+	 *
+	 * @return int
+	 */
+	public function getQuestionCount($module_id){
+
+		$question = new Question();
+		$question = $question->moduleId($module_id);
+		$count = $question->get()->count();
+
+		return $count;
+	}
+
 
 
 }
