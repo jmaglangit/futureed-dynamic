@@ -102,6 +102,10 @@ function ManageClientController($scope, apiService, manageClientService) {
 	}
 
 	function rejectClient() {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+		self.details.verified = Constants.FALSE;
+
 		self.base_url = $("#base_url_form input[name='base_url']").val();
 	    var callback_uri = self.base_url + "/" + angular.lowercase(Constants.CLIENT) +"/registration";
 
@@ -125,6 +129,10 @@ function ManageClientController($scope, apiService, manageClientService) {
 	}
 
 	function verifyClient() {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+		self.details.rejected = Constants.FALSE;
+
 		self.base_url = $("#base_url_form input[name='base_url']").val();
 	    var callback_uri = self.base_url + "/" + angular.lowercase(Constants.CLIENT);
 		
@@ -167,6 +175,10 @@ function ManageClientController($scope, apiService, manageClientService) {
 
 	function updateClientDetails() {
 		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+		self.details.rejected = Constants.FALSE;
+		self.details.verified = Constants.FALSE;
+		
 		self.schools = Constants.FALSE;
 		self.fields = [];
 

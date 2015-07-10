@@ -176,30 +176,33 @@ function LoginController($scope, apiService, clientLoginApiService, clientProfil
 	}
 
 	function selectRole(role) {
-	    this.principal = Constants.FALSE;
-	    this.teacher = Constants.FALSE;
-	    this.parent = Constants.FALSE;
-	    this.reg = (this.reg) ? this.reg: {} ;
+		$scope.$parent.errors = Constants.FALSE;
+
+	    self.principal = Constants.FALSE;
+	    self.parent = Constants.FALSE;
+	    self.reg = {} ;
 
 	    switch(role) {
 	      case Constants.PRINCIPAL :
-	        this.required = Constants.FALSE;
-	        this.role_click = Constants.TRUE;
-	        this.principal = Constants.TRUE;
-	        this.reg.client_role = Constants.PRINCIPAL;
+	        self.required = Constants.FALSE;
+	        self.role_click = Constants.TRUE;
+	        self.principal = Constants.TRUE;
+	        self.reg.client_role = Constants.PRINCIPAL;
 	        break;
 
 	      case Constants.PARENT    :
-	      	this.required = Constants.TRUE;
-	        this.role_click = Constants.TRUE;
-	        this.parent = Constants.TRUE;
-	        this.reg.client_role = Constants.PARENT;
+	      	self.required = Constants.TRUE;
+	        self.role_click = Constants.TRUE;
+	        self.parent = Constants.TRUE;
+	        self.reg.client_role = Constants.PARENT;
 	        break;
 
 	      default:
-	      	this.reg = {};
+	      	self.reg = {};
 	        break;
 	    }
+
+	    $("#registration_form input, #registration_form select").removeClass("required-field");
 	}
 
 	function registerClient() {
