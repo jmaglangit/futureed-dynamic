@@ -36,7 +36,7 @@ class ClientTeacherRegistrationRequest extends ApiRequest
 			$user_id = $user->user_id;
 		}
 
-		switch ($this->method) {
+		switch ($this->method()) {
 			case 'GET':
 
 				//For registration token validation

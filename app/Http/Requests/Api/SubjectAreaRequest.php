@@ -20,7 +20,7 @@ class SubjectAreaRequest extends ApiRequest {
 	 */
 	public function rules() {
 				
-		switch($this->method) {
+		switch($this->method()) {
 			case 'PUT':
 				return [
 					'subject_id' => 'required|integer|exists:subjects,id',

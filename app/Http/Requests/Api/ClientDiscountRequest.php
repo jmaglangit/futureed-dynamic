@@ -19,7 +19,7 @@ class ClientDiscountRequest extends ApiRequest {
 	 * @return array
 	 */
 	public function rules() {
-	    switch($this->method){
+	    switch($this->method()){
 	        case 'POST':
 	            return ['client_id'     => 'required|numeric|unique:client_discounts,client_id,NULL,id,deleted_at,NULL',
             			'percentage'    => 'required|numeric|min:1.00|max:100.00',

@@ -20,7 +20,7 @@ class ClientStudentRequest extends ApiRequest {
 	 * @return array
 	 */
 	public function rules() {
-		switch($this->method){
+		switch($this->method()){
 			case 'POST':
 			default:
 				$student = config('futureed.student');
