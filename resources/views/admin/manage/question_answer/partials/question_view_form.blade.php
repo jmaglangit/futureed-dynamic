@@ -100,6 +100,32 @@
                         )
                     ) !!}
                 </div>
+                <label ng-if="qa.details.question_type == 'O'" class="control-label col-xs-2">Answer <span class="required">*</span></label>
+                <div class="col-xs-4" ng-if="qa.details.question_type == 'O'">
+                    {!! Form::text('question',''
+                        , array(
+                            'placeHolder' => 'Answer'
+                            , 'ng-model' => 'qa.details.answer'
+                            , 'class' => 'form-control'
+                            , 'ng-disabled' => '!qa.edit'
+                            , 'ng-class' => "{ 'required-field' : qa.fields['answer'] }"
+                        )
+                    ) !!}
+                </div>
+            </div>
+        	<div class="form-group">
+                <label class="control-label col-xs-2">Points Earned<span class="required">*</span></label>
+                <div class="col-xs-4">
+                    {!! Form::text('points_earned',''
+                        , array(
+                            'placeHolder' => 'Points Earned'
+                            , 'ng-model' => 'qa.details.points_earned'
+                            , 'class' => 'form-control'
+                            , 'ng-disabled' => '!qa.edit'
+                            , 'ng-class' => "{ 'required-field' : qa.fields['points_earned'] }"
+                        )
+                    ) !!}
+                </div>
                 <label ng-if="qa.active_edit" class="control-label col-xs-2">Question Image</label>
                 <div class="col-xs-4" ng-if="qa.active_edit">
                       <div style="position:relative;">
@@ -116,20 +142,8 @@
                         <a href="javascript:;">View Question Image</a>
                     </div>
                 </div>
-            </div>
-        	<div class="form-group">
-                <label class="control-label col-xs-2">Points Earned<span class="required">*</span></label>
-                <div class="col-xs-4">
-                    {!! Form::text('points_earned',''
-                        , array(
-                            'placeHolder' => 'Points Earned'
-                            , 'ng-model' => 'qa.details.points_earned'
-                            , 'class' => 'form-control'
-                            , 'ng-disabled' => '!qa.edit'
-                            , 'ng-class' => "{ 'required-field' : qa.fields['points_earned'] }"
-                        )
-                    ) !!}
-                </div>
+        	</div>
+            <div class="form-group">
                 <label class="control-label col-xs-2">Difficulty <span class="required">*</span></label>
                 <div class="col-xs-4">
                     {!! Form::text('difficulty',''
@@ -142,8 +156,6 @@
                         )
                     ) !!}
                 </div>
-        	</div>
-            <div class="form-group">
                 <label class="col-xs-2 control-label">Status <span class="required">*</span></label>
                 <div class="col-xs-4" ng-if="qa.active_edit">
                     <div class="col-xs-6 checkbox">                                 
@@ -218,7 +230,9 @@
                         , 'ng-if' => 'qa.active_view'
 	        		)
 	        	) !!}
+                {!! Form::close() !!}
         	</div>
         </div>
 	</div>
+    <div template-directive template-url="{!! route('admin.manage.question_answer.partials.answer_list_form') !!}"></div>
 </div>

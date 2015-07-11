@@ -608,6 +608,12 @@
 						, 'uses' => 'FutureLesson\Admin\ManageQuestionAnsController@question_view_form'
 						, 'middleware' => 'admin_partial'
 					]);
+
+					Routes::get('/answer_list_form', 
+						['as' => 'admin.manage.question_answer.partials.answer_list_form'
+						, 'uses' => 'FutureLesson\Admin\ManageQuestionAnsController@answer_list_form'
+						, 'middleware' => 'admin_partial'
+					]);
 				});
 			});
 			

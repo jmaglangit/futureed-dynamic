@@ -8,6 +8,7 @@ function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService,
 
     self.details = {};
     self.delete = {};
+    self.answers = {};
 
     TableService(self);
     self.tableDefaults();
@@ -191,6 +192,115 @@ function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService,
 				} else if(response.data) {
 					self.success = ManageModuleConstants.SUCCESS_DELETE_QUESTION;
 					self.setActive('', '', 1);
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		})
+	}
+
+	self.setAnsActive = function(active, id, flag) {
+        self.answers.errors = Constants.FALSE
+        self.area_field = Constants.FALSE;
+
+        self.active_anslist = Constants.FALSE;
+        self.active_ansedit = Constants.FALSE;
+        self.edit = Constants.FALSE;
+
+        if(flag != 1) {
+            self.answers.success = Constants.FALSE;
+        }
+
+        switch (active) {
+            case Constants.ACTIVE_EDIT:
+                self.active_ansedit = Constants.TRUE;
+                self.getAnswerDetail(id);
+                self.answers.success = Constants.FALSE;
+                break;
+
+            default:
+                self.active_list = Constants.TRUE;
+                self.answerList();
+                break;
+        }
+    }
+
+	self.addAnswer = function() {
+    	self.answers.errors = Constants.FALSE;
+		self.answers.success = Constants.FALSE;
+		self.fields = [];
+		self.answers.module_id = self.module.id;
+		self.answers.question_id = self.details.id;
+		$scope.ui_block();
+		ManageQuestionAnsService.addAnswer(self.answers).success(function(response){
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.answers.errors = $scope.errorHandler(response.errors);
+
+					angular.forEach(response.errors, function(value, a) {
+						self.fields[value.field + '_ans'] = Constants.TRUE;
+					});
+				} else if(response.data) {
+					self.answers = {};
+					self.answers.success = ManageModuleConstants.SUCCESS_ADD_ANSWER;
+				}
+			}
+		$scope.ui_unblock();
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		})
+	}
+
+	self.answerList = function(flag) {
+		if(flag != 1){
+			self.errors = Constants.FALSE;
+		}
+		var id = self.details.id;
+		self.ans_records = {};
+
+		$scope.ui_block();
+		ManageQuestionAnsService.answerList(id).success(function(response){
+			if(angular.equals(response.status, Constants.STATUS_OK)){
+				if(response.errors) {
+					self.answers.errors = $scope.errorHandler(response.errors);
+				}else if(response.data){
+					self.ans_records = response.data.records;
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.confirmAnsDelete = function(id) {
+		self.errors = Constants.FALSE;
+		self.delete.ans_id = id;
+		self.delete.ans_confirm = Constants.TRUE;
+
+		$("#delete_answer_modal").modal({
+	        backdrop: 'static',
+	        keyboard: Constants.FALSE,
+	        show    : Constants.TRUE
+	    });
+	}
+
+	self.deleteAnswer = function() {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		$scope.ui_block();
+		ManageQuestionAnsService.deleteAnswer(self.delete.ans_id).success(function(response){
+			if(angular.equals(response.status,Constants.STATUS_OK)){
+				if(response.errors) {
+					self.answers.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.answers.success = ManageModuleConstants.SUCCESS_DELETE_ANS;
+					self.answerList(1);
 				}
 			}
 			$scope.ui_unblock();
