@@ -70,6 +70,20 @@ function ManageQuestionAnsService($http) {
         });
     }
 
+    qaServiceApi.getAnswerDetail = function(id) {
+        return $http({
+            method  : Constants.METHOD_GET
+            , url   : qaServiceUrl + 'question/answer/admin/' + id
+        });
+    }
+
+    qaServiceApi.saveAnswer = function(data) {
+        return $http({
+            method  : Constants.METHOD_PUT
+            , data  : data
+            , url   : qaServiceUrl + 'question/answer/admin/' + data.id
+        });
+    }
 
     return qaServiceApi;
 }
