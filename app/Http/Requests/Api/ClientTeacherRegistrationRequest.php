@@ -36,7 +36,7 @@ class ClientTeacherRegistrationRequest extends ApiRequest
 			$user_id = $user->user_id;
 		}
 
-		switch ($this->method) {
+		switch ($this->method()) {
 			case 'GET':
 
 				//For registration token validation
@@ -56,11 +56,11 @@ class ClientTeacherRegistrationRequest extends ApiRequest
 					'password' => 'required|custom_password',
 					'first_name' => 'required|regex:'. config('regex.name') .'|max:64',
 					'last_name' => 'required|regex:'. config('regex.name') .'|max:64',
-					'street_address' => 'required|string',
-					'city' => 'required|string',
-					'state' => 'required|string',
+					'street_address' => 'string',
+					'city' => 'string',
+					'state' => 'string',
 					'country' => 'exists:countries,name',
-					'country_id' => 'required|exists:countries,id',
+					'country_id' => 'exists:countries,id',
 					'zip' => 'max:10|regex:'. config('regex.zip_code'),
 					'callback_uri' => 'required|string',
 					'registration_token' => "required|exists:users,registration_token,deleted_at,NULL"

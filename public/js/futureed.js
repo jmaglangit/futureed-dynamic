@@ -7,74 +7,29 @@ angular.module('futureed', [
 	'futureed.controllers',
 	'ui.bootstrap.datetimepicker'
 ]).config(['$interpolateProvider'
-        , '$httpProvider'
-  , function($interpolateProvider, $httpProvider) {
+	, '$httpProvider'
+	, function($interpolateProvider, $httpProvider) {
 
-  $interpolateProvider.startSymbol('{!');
-  $interpolateProvider.endSymbol('!}');
+	$interpolateProvider.startSymbol('{!');
+	$interpolateProvider.endSymbol('!}');
 
-  // Use x-www-form-urlencoded Content-Type
-  $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
-  $httpProvider.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+	$httpProvider.interceptors.push([function() {
+		return {
+			'request' : function(config) {
+				if(localStorage.authorization) {
+					config.headers.authorization = localStorage.authorization;
+				}
 
-  delete $httpProvider.defaults.headers.common['X-Requested-With'];
-  /**
-   * The workhorse; converts an object to x-www-form-urlencoded serialization.
-   * @param {Object} obj
-   * @return {String}
-   */ 
-  var param = function(obj) {
-    var query = '', name, value, fullSubName, subName, subValue, innerObj, i;
+				return config;
+			} 
 
-    for(name in obj) {
-      value = obj[name];
+			, 'response': function (response) {
+				if(response && response.headers("authorization")) {
+					localStorage.authorization = response.headers("authorization");
+				}
 
-      if(value instanceof Array) {
-        for(i=0; i<value.length; ++i) {
-          subValue = value[i];
-          fullSubName = name + '[' + i + ']';
-          innerObj = {};
-          innerObj[fullSubName] = subValue;
-          query += param(innerObj) + '&';
-        }
-      }
-      else if(value instanceof Object) {
-        for(subName in value) {
-          subValue = value[subName];
-          fullSubName = name + '[' + subName + ']';
-          innerObj = {};
-          innerObj[fullSubName] = subValue;
-          query += param(innerObj) + '&';
-        }
-      }
-      else if(value !== undefined && value !== null)
-        query += encodeURIComponent(name) + '=' + encodeURIComponent(value) + '&';
-    }
-    return query.length ? query.substr(0, query.length - 1) : query;
-  };
-
-  $httpProvider.defaults.transformRequest = [function(data) {
-    return angular.isObject(data) && String(data) !== '[object File]' ? param(data) : data;
-  }];
-
-  $httpProvider.interceptors.push(['$q', function ($q) {
-      return {
-          'request' : function(config) {
-            if(localStorage.authorization) {
-              config.headers.authorization = localStorage.authorization;
-            }
-
-            return config;
-          } 
-
-          , 'response': function (response) {
-              if(response && response.headers("authorization")) {
-                localStorage.authorization = response.headers("authorization");
-              }
-
-              return response;
-          }
-      };
-  }]);
-
+				return response;
+			}
+		};
+	}]);
 }]);

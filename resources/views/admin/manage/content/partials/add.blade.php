@@ -1,201 +1,189 @@
-<div ng-if="tips.active_list">
-	<div class="col-xs-12" ng-if="tips.errors || tips.success">
-		<div class="alert alert-error" ng-if="tips.errors">
-			<p ng-repeat="error in tips.errors track by $index">
+<div ng-if="content.active_add">
+	<div class="col-xs-12 success-container" ng-if="content.errors || content.success">
+		<div class="alert alert-error" ng-if="content.errors">
+			<p ng-repeat="error in content.errors track by $index">
 				{! error !}
 			</p>
 		</div>
 
-        <div class="alert alert-success" ng-if="tips.success">
-            <p>{! tips.success !}</p>
+        <div class="alert alert-success" ng-if="content.success">
+            <p>{! content.success !}</p>
         </div>
     </div>
+	
+	<div class="form-content col-xs-12">
+		{!! Form::open([
+				'id' => 'add_admin_form',
+				'class' => 'form-horizontal'
+			]) 
+		!!}
+			<fieldset>
+				<legend class="legend-name-mid">
+					Module Details
+				</legend>
+				<div class="form-group">
+					<label class="col-xs-2 control-label" id="username">Module <span class="required">*</span></label>
+					<div class="col-xs-4">
+						{!! Form::text('module_id', '',
+							[
+								'placeholder' => 'Module',
+								'ng-disabled' => 'true',
+								'ng-model' => 'content.record.module_id',
+								'class' => 'form-control'
+							]
+						) !!}
+					</div>
+					<label class="col-xs-2 control-label">Subject <span class="required">*</span></label>
+					<div class="col-xs-4">
+						{!! Form::text('subject_id', '',
+							[
+								'placeholder' => 'Subject',
+								'ng-disabled' => 'true',
+								'ng-model' => 'content.record.subject_id',
+								'class' => 'form-control'
+							]
+						) !!}
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-2 control-label">Area <span class="required">*</span></label>
+					<div class="col-xs-4">
+						{!! Form::text('subject_area_id', '',
+							[
+								'placeholder' => 'Area',
+								'ng-disabled' => 'true',
+								'ng-model' => 'content.record.subject_area_id',
+								'class' => 'form-control'
+							]
+						) !!}
+					</div>
+				</div>
+			</fieldset>
+			<fieldset>
+				<legend class="legend-name-mid">
+					Module Content
+				</legend>
+				<div class="form-group">
+					<label class="col-xs-3 control-label">Content Code <span class="required">*</span></label>
+					<div class="col-xs-6">
+						{!! Form::text('code', ''
+							, array(
+								'placeholder' => 'Content Code'
+								, 'ng-model' => 'content.record.code'
+								, 'ng-class' => "{ 'required-field' : content.fields['code'] }"
+								, 'class' => 'form-control'
+							)
+						) !!}
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-3 control-label">Teaching Module <span class="required">*</span></label>
+					<div class="col-xs-6">
+						{!! Form::text('teaching_module', ''
+							, array(
+								  'placeholder' => 'Teaching Module'
+								, 'ng-model' => 'content.record.teaching_module'
+								, 'ng-class' => "{ 'required-field' : content.fields['teaching_module'] }"
+								, 'class' => 'form-control'
+							)
+						) !!}
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-3 control-label">Content URL <span class="required">*</span></label>
+					<div class="col-xs-6">
+						{!! Form::text('content_url', ''
+							, array(
+								'placeholder' => 'Content Url'
+								, 'ng-model' => 'content.record.content_url'
+								, 'ng-class' => "{ 'required-field' : content.fields['content_url'] }"
+								, 'class' => 'form-control'
+							)
+						) !!}
+					</div>
+					
+				</div>
+				<div class="form-group">
+					<label class="col-xs-3 control-label" id="email">Learning Style <span class="required">*</span></label>
+					<div class="col-xs-6">
+						<select  name="learning_style_id" ng-class="{ 'required-field' : content.fields['learning_style_id'] }" class="form-control" ng-model="content.record.learning_style_id">
+							<option ng-selected="content.record.learning_style_id == futureed.FALSE" value="">-- Select Learning Style --</option>
+							<option ng-selected="content.record.learning_style_id == style.id" ng-repeat="style in content.styles" ng-value="style.id">{! style.name!}</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-3 control-label">Media Type <span class="required">*</span></label>
+					<div class="col-xs-6" ng-init="content.getMediaTypes()">
+						<select  name="media_type_id" ng-class="{ 'required-field' : content.fields['media_type_id'] }" class="form-control" ng-model="content.record.media_type_id">
+							<option ng-selected="content.record.media_type_id == futureed.FALSE" value="">-- Select Media Type --</option>
+							<option ng-selected="content.record.media_type_id == type.id" ng-repeat="type in content.types" ng-value="type.id">{! type.name!}</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-3 control-label">Description <span class="required">*</span></label>
+					<div class="col-xs-6">
+						{!! Form::textarea('description', ''
+							, array(
+								  'class' => 'form-control disabled-textarea'
+								, 'placeholder' => 'Description'
+								, 'ng-model' => 'content.record.description'
+								, 'ng-class' => "{ 'required-field' : content.fields['description'] }"
+								, 'rows' => '5'
+							)
+						) !!}
+					</div>
+				</div>
+				<div class="form-group">
+	        		<label class="col-xs-3 control-label">Status <span class="required">*</span></label>
+	        		<div class="col-xs-6">
+	        			<div class="col-xs-6 checkbox">	                				
+	        				<label>
+	        					{!! Form::radio('status'
+	        						, 'Enabled'
+	        						, true
+	        						, array(
+	        							'class' => 'field'
+	        							, 'ng-model' => 'content.record.status'
+	        						) 
+	        					) !!}
+	        				<span class="lbl padding-8">Enabled</span>
+	        				</label>
+	        			</div>
+	        			<div class="col-xs-6 checkbox">
+	        				<label>
+	        					{!! Form::radio('status'
+	        						, 'Disabled'
+	        						, false
+	        						, array(
+	        							'class' => 'field'
+	        							, 'ng-model' => 'content.record.status'
+	        						)
+	        					) !!}
+	        				<span class="lbl padding-8">Disabled</span>
+	        				</label>
+	        			</div>
+	        		</div>
+	        	</div>
+	        	<div class="form-group">
+	        		<div class="btn-container col-xs-8 col-xs-offset-2">
+						{!! Form::button('Add Content'
+							, array(
+								'class' => 'btn btn-blue btn-medium'
+								, 'ng-click' => "content.addContent()"
+							)
+						) !!}
 
-	<div class="col-xs-12 search-container">
-		<div class="title-mid">
-			Search
-		</div>
-
-		<div class="form-search">
-			{!! Form::open(
-				array('id' => 'search_form'
-					, 'class' => 'form-horizontal'
-					, 'ng-submit' => 'tips.searchFnc($event)'
-				)
-			)!!}
-			<div class="form-group">
-				<div class="col-xs-5">
-					{!! Form::text('search_module', ''
-						,array(
-							'placeholder' => 'Module'
-							, 'ng-model' => 'tips.search.module'
-							, 'class' => 'form-control btn-fit'
-						)
-					)!!}
-				</div>
-
-				<div class="col-xs-5">
-					{!! Form::text('search_subject', ''
-						,array(
-							'placeholder' => 'Subject'
-							, 'ng-model' => 'tips.search.subject'
-							, 'class' => 'form-control btn-fit'
-						)
-					)!!}
-				</div>
-				
-				<div class="col-xs-2">
-					{!! Form::button('Search'
-						,array(
-							'class' => 'btn btn-blue'
-							, 'ng-click' => 'tips.searchFnc($event)'
-						)
-					)!!}
-				</div>
-			</div>
-			<div class="form-group">
-				<div class="col-xs-5">
-					{!! Form::text('search_area', ''
-						,array(
-							'placeholder' => 'Area'
-							, 'ng-model' => 'tips.search.area'
-							, 'class' => 'form-control btn-fit'
-						)
-					)!!}
-				</div>
-				
-				<div class="col-xs-5">
-					{!! Form::select('search_status'
-						, array(
-							'' => '-- Select Status --'
-							, 'Pending' => 'Pending'
-							, 'Accepted' => 'Accepted'
-						)
-						, ''
-						, array(
-							'class' => 'form-control'
-							, 'ng-model' => 'tips.search.status'
-						)
-					) !!}
-				</div>
-				
-				<div class="col-xs-2">
-					{!! Form::button('Clear'
-						,array(
-							'class' => 'btn btn-gold'
-							, 'ng-click' => 'tips.clearFnc($event)'
-						)
-					)!!}
-				</div>
-			</div>
-			<div class="form-group">
-				<div class="col-xs-3"></div>
-				<label class="col-xs-2 control-label">Displayed At</label>
-				<div class="col-xs-5">
-					{!! Form::select('search_link_type'
-						, array(
-							'' => '-- Select Type --'
-							, 'General' => 'General'
-							, 'Content' => 'Content'
-							, 'Question' => 'Question'
-						)
-						, ''
-						, array(
-							'class' => 'form-control'
-							, 'ng-model' => 'tips.search.link_type'
-						)
-					) !!}
-				</div>
-			</div>
-		</div>
-	</div>
-	 
-	<div class="col-xs-12 table-container">
-		<div class="title-mid">
-			Tip List
-		</div>
-
-		<div class="list-container" ng-cloak>
-			<div class="size-container">
-				{!! Form::select('size'
-					, array(
-						  '10' => '10'
-						, '20' => '20'
-						, '50' => '50'
-						, '100' => '100'
-					)
-					, '10'
-					, array(
-						'ng-model' => 'tips.table.size'
-						, 'ng-change' => 'tips.paginateBySize()'
-						, 'ng-if' => "tips.records.length"
-						, 'class' => 'form-control paginate-size pull-right'
-					)
-				) !!}
-			</div>
-
-			<div class="clearfix"></div>
-			<div class="table-responsive" ng-init="tips.listTips()">
-				<table id="tip-list" class="table table-striped table-bordered">
-					<thead>
-				        <tr>
-				            <th>Displayed At</th>
-				            <th>Module</th>
-				            <th>Subject</th>
-				            <th>Area</th>
-				            <th>Title</th>
-				            <th>Status</th>
-				            <th ng-if="tips.records.length">Actions</th>
-				        </tr>
-			        </thead>
-			        <tbody>
-				        <tr ng-repeat="tipInfo in tips.records">
-				            <td>{! tipInfo.link_type !}</td>
-				            <td>{! tipInfo.module.name !}</td>
-				            <td>{! tipInfo.subject.name !}</td>
-				            <td>{! tipInfo.subjectarea.name !}</td>
-				            <td>{! tipInfo.title !}</td>
-				            <td>{! tipInfo.tip_status !}</td>
-				            <td ng-if="tips.records.length">
-				            	<div class="row">
-				            		<div class="col-xs-4">
-				            			<a href="" ng-click="tips.setActive(futureed.ACTIVE_VIEW, tipInfo.id)"><span><i class="fa fa-eye"></i></span></a>
-				            		</div>
-				            		<div class="col-xs-4">
-				            			<a href="" ng-click="tips.setActive(futureed.ACTIVE_EDIT, tipInfo.id)"><span><i class="fa fa-pencil"></i></span></a>
-				            		</div>
-				            		<div class="col-xs-4">
-				            			<a href="" ng-click="tips.confirmDelete(tipInfo.id)"><span><i class="fa fa-trash"></i></span></a>
-				            		</div>	
-				            	</div>
-				            </td>
-				        </tr>
-				        <tr class="odd" ng-if="!tips.records.length && !tips.table.loading">
-				        	<td valign="top" colspan="7">
-				        		No records found
-				        	</td>
-				        </tr>
-				        <tr class="odd" ng-if="tips.table.loading">
-				        	<td valign="top" colspan="7">
-				        		Loading...
-				        	</td>
-				        </tr>
-			        </tbody>
-				</table>
-			</div>
-			<div class="pull-right" ng-if="tips.records.length">
-				<pagination 
-					total-items="tips.table.total_items" 
-					ng-model="tips.table.page"
-					max-size="3"
-					items-per-page="tips.table.size" 
-					previous-text = "&lt;"
-					next-text="&gt;"
-					class="pagination" 
-					boundary-links="true"
-					ng-change="tips.paginateByPage()">
-				</pagination>
-			</div>
-		</div>
+						{!! Form::button('Cancel'
+							, array(
+								'class' => 'btn btn-gold btn-medium'
+								, 'ng-click' => "content.setActive()"
+							)
+						) !!}		
+					</div>
+	        	</div>
+			</fieldset>
+		{!! Form::close() !!}
 	</div>
 </div>

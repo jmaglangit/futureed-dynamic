@@ -25,12 +25,12 @@
 	        		User Credentials
 	        	</legend>
 	        	<div class="form-group">
-	        		<label class="col-xs-2 control-label">Email <span class="required">*</span></label>
+	        		<label class="col-xs-2 control-label">Username <span class="required">*</span></label>
 	        		<div class="col-xs-4">
-	        			{!! Form::text('email',''
+	        			{!! Form::text('username',''
 	        				, array(
-	        					'placeHolder' => 'Email'
-	        					, 'ng-model' => 'teacher.record.user.email'
+	        					'placeHolder' => 'Username'
+	        					, 'ng-model' => 'teacher.record.user.username'
 	        					, 'ng-disabled' => 'true'
 	        					, 'class' => 'form-control'
 	        				)
@@ -38,12 +38,12 @@
 	        		</div>
 	        	</div>
 	        	<div class="form-group">
-	        		<label class="col-xs-2 control-label">Username <span class="required">*</span></label>
+	        		<label class="col-xs-2 control-label">Email <span class="required">*</span></label>
 	        		<div class="col-xs-4">
-	        			{!! Form::text('username',''
+	        			{!! Form::text('email',''
 	        				, array(
-	        					'placeHolder' => 'Username'
-	        					, 'ng-model' => 'teacher.record.user.username'
+	        					'placeHolder' => 'Email'
+	        					, 'ng-model' => 'teacher.record.user.email'
 	        					, 'ng-disabled' => 'true'
 	        					, 'class' => 'form-control'
 	        				)

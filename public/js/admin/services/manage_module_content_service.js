@@ -25,6 +25,13 @@ function ManageModuleContentService($http) {
 		});
 	}
 
+	service.getMediaTypes = function() {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url   : serviceUrl + 'media-type/admin'
+		});
+	}
+
 	service.detail = function(id) {
 		return $http({
 			method 	: Constants.METHOD_GET
@@ -37,6 +44,14 @@ function ManageModuleContentService($http) {
 			method 	: Constants.METHOD_PUT
 			, data	: data
 			, url   : serviceUrl + 'teaching-content/' + data.id
+		});
+	}
+
+	service.add = function(data) {
+		return $http({
+			method 	: Constants.METHOD_POST
+			, data	: data
+			, url   : serviceUrl + 'teaching-content'
 		});
 	}
 

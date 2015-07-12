@@ -19,7 +19,7 @@ class SubscriptionRequest extends ApiRequest {
 	 * @return array
 	 */
 	public function rules() {
-	    switch($this->method){
+	    switch($this->method()){
     	    case 'POST':
 
         	    return ['name'          => 'required|regex:'. config('regex.name_numeric'),

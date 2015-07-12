@@ -337,7 +337,6 @@ fieldset legend{color: #8e8171; font-size: 16px; text-transform: uppercase;}
 	border: 1px solid #F8C8BD;
 }
 .form-content legend{
-	font-family: 'Schoolbell', cursive;
 	padding-bottom: 10px;
 	font-size: 23px;
 }
@@ -479,7 +478,7 @@ li.active .rnd-identifier{
 	width: 100%;
 	min-height: 620px;
 	position: relative;
-	overflow: hidden;
+	overflow: auto;
 	margin-bottom: 40px;
 }
 .dshbrd-con .side-nav{
@@ -974,6 +973,10 @@ div > .btncon > a {
 	margin: 0px 30px;
 }
 
+.content-btn {
+	margin-top: 30px;
+}
+
 .paginate-size {
 	margin: 10px 0px;
 	width: 7%;
@@ -1082,4 +1085,8 @@ content {
 	border-radius: 5px;
 	width: 25%;
 	margin: auto;
+}
+
+.disabled-textarea {
+	resize: none;
 }

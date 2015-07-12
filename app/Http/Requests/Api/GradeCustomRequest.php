@@ -20,7 +20,7 @@ class GradeCustomRequest extends ApiRequest {
      */
     public function rules() {
 
-        switch($this->method) {
+        switch($this->method()) {
             case 'PUT':
                 return [
                     'status' => 'required|in:Enabled,Disabled'

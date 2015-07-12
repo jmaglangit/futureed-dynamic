@@ -1,5 +1,5 @@
-<div class="asd" ng-if="content.active_view || content.active_edit">
-	<div class="col-xs-12" ng-if="content.errors || content.success">
+<div ng-if="content.active_view || content.active_edit">
+	<div class="col-xs-12 success-container" ng-if="content.errors || content.success">
 		<div class="alert alert-error" ng-if="content.errors">
 			<p ng-repeat="error in content.errors track by $index">
 				{! error !}
@@ -10,12 +10,6 @@
             <p>{! content.success !}</p>
         </div>
     </div>
-
-	<div class="module-container">
-		<div class="title-main-content">
-			<span>Tip Details</span>
-		</div>
-	</div>
 	
 	<div class="form-content col-xs-12">
 		{!! Form::open([
@@ -24,10 +18,13 @@
 			]) 
 		!!}
 			<fieldset>
+				<legend class="legend-name-mid">
+					Module Details
+				</legend>
 				<div class="form-group">
-					<label class="col-xs-2 control-label" id="username">Module <span class="required">*</span></label>
+					<label class="col-xs-2 control-label">Module <span class="required">*</span></label>
 					<div class="col-xs-4">
-						{!! Form::text('username', '',
+						{!! Form::text('module', '',
 							[
 								'placeholder' => 'Module',
 								'ng-disabled' => 'true',
@@ -36,26 +33,6 @@
 							]
 						) !!}
 					</div>
-					<label class="col-xs-2 control-label" id="email">Displayed At <span class="required">*</span></label>
-					<div class="col-xs-4">
-						{!! Form::select('link_type'
-							, array(
-								'' => '-- Select Type --'
-								, 'General' => 'General'
-								, 'Content' => 'Content'
-								, 'Question' => 'Question'
-							)
-							, ''
-							, array(
-								'class' => 'form-control'
-								, 'ng-model' => 'content.record.link_type'
-								, 'ng-disabled' => 'content.active_view'
-								, 'ng-class' => "{ 'required-field' : content.fields['link_type'] }"
-							)
-						) !!}
-					</div>
-				</div>
-				<div class="form-group">
 					<label class="col-xs-2 control-label">Subject <span class="required">*</span></label>
 					<div class="col-xs-4">
 						{!! Form::text('subject', '',
@@ -65,6 +42,19 @@
 								'ng-model' => 'content.record.subject',
 								'class' => 'form-control'
 							]
+						) !!}
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-2 control-label">Content Code <span class="required">*</span></label>
+					<div class="col-xs-4">
+						{!! Form::text('code', ''
+							, array(
+								'placeholder' => 'Content Code',
+								'ng-disabled' => 'true',
+								'ng-model' => 'content.record.code',
+								'class' => 'form-control'
+							)
 						) !!}
 					</div>
 					<label class="col-xs-2 control-label">Area <span class="required">*</span></label>
@@ -79,71 +69,6 @@
 						) !!}
 					</div>
 				</div>
-				<div class="form-group">
-	        		<label class="col-xs-2 control-label">Status <span class="required">*</span></label>
-	        		<div class="col-xs-4" ng-if="content.active_edit">
-	        			<div class="col-xs-6 checkbox">	                				
-	        				<label>
-	        					{!! Form::radio('status'
-	        						, 'Enabled'
-	        						, true
-	        						, array(
-	        							'class' => 'field'
-	        							, 'ng-model' => 'content.record.status'
-	        						) 
-	        					) !!}
-	        				<span class="lbl padding-8">Enable</span>
-	        				</label>
-	        			</div>
-	        			<div class="col-xs-6 checkbox">
-	        				<label>
-	        					{!! Form::radio('status'
-	        						, 'Disabled'
-	        						, false
-	        						, array(
-	        							'class' => 'field'
-	        							, 'ng-model' => 'content.record.status'
-	        						)
-	        					) !!}
-	        				<span class="lbl padding-8">Disable</span>
-	        				</label>
-	        			</div>
-	        		</div>
-	        		<div ng-if="content.active_view">
-		        		<label class="col-xs-4" ng-if="content.record.status == 'Enabled'">
-		        			<b class="success-icon">
-		        				<i class="margin-top-8 fa fa-check-circle-o"></i> {! content.record.status !}
-		        			</b>
-		        		</label>
-
-		        		<label class="col-xs-4" ng-if="content.record.status == 'Disabled'">
-		        			<b class="error-icon">
-		        				<i class="margin-top-8 fa fa-ban"></i> {! content.record.status !}
-		        			</b>
-		        		</label>
-	        		</div>
-
-	        		<label class="col-xs-2 control-label">Tip Status <span class="required">*</span></label>
-	        		<div>
-		        		<label class="col-xs-4" ng-if="content.record.tip_status == 'Accepted'">
-		        			<b class="success-icon">
-		        				<i class="margin-top-8 fa fa-check-circle-o"></i> {! content.record.tip_status !}
-		        			</b>
-		        		</label>
-
-		        		<label class="col-xs-4" ng-if="content.record.tip_status == 'Pending'">
-		        			<b class="warning-icon">
-		        				<i class="margin-top-8 fa fa-exclamation-circle"></i> {! content.record.tip_status !}
-		        			</b>
-		        		</label>
-
-		        		<label class="col-xs-4" ng-if="content.record.tip_status == 'Rejected'">
-		        			<b class="error-icon">
-		        				<i class="margin-top-8 fa fa-ban"></i> {! content.record.tip_status !}
-		        			</b>
-		        		</label>
-	        		</div>
-	        	</div>
 	        	<div class="form-group" ng-if="content.record.tip_status == 'Pending' && content.active_view">
 	        		<div class="btn-container col-xs-8 col-xs-offset-2">
 						{!! Form::button('Accept'
@@ -164,52 +89,117 @@
 			</fieldset>
 			<fieldset>
 				<legend class="legend-name-mid">
-					Tip Content
+					Module Content
 				</legend>
 				<div class="form-group">
-					<label class="col-xs-3 control-label">Title <span class="required">*</span></label>
+					<label class="col-xs-3 control-label">Teaching Module <span class="required">*</span></label>
 					<div class="col-xs-6">
-						{!! Form::text('title', '',
-							[
-								'class' => 'form-control'
+						{!! Form::text('teaching_module', ''
+							, array(
+								  'placeholder' => 'Teaching Module'
 								, 'ng-disabled' => 'content.active_view'
-								, 'ng-model' => 'content.record.title'
-								, 'placeholder' => 'Title'
-								, 'ng-class' => "{ 'required-field' : content.fields['title'] }"
-							]
+								, 'ng-model' => 'content.record.teaching_module'
+								, 'ng-class' => "{ 'required-field' : content.fields['teaching_module'] }"
+								, 'class' => 'form-control'
+							)
 						) !!}
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-3 control-label">Content URL <span class="required">*</span></label>
+					<div class="col-xs-6">
+						{!! Form::text('content_url', ''
+							, array(
+								'placeholder' => 'Content Url'
+								, 'ng-disabled' => 'content.active_view'
+								, 'ng-model' => 'content.record.content_url'
+								, 'ng-class' => "{ 'required-field' : content.fields['content_url'] }"
+								, 'class' => 'form-control'
+							)
+						) !!}
+					</div>
+					
+				</div>
+				<div class="form-group">
+					<label class="col-xs-3 control-label" id="email">Learning Style <span class="required">*</span></label>
+					<div class="col-xs-6">
+						<select  name="learning_style_id" ng-disabled="content.active_view" ng-class="{ 'required-field' : content.fields['learning_style_id'] }" class="form-control" ng-model="content.record.learning_style_id">
+							<option ng-selected="content.record.learning_style_id == futureed.FALSE" value="">-- Select Learning Style --</option>
+							<option ng-selected="content.record.learning_style_id == style.id" ng-repeat="style in content.styles" ng-value="style.id">{! style.name!}</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-3 control-label">Media Type <span class="required">*</span></label>
+					<div class="col-xs-6" ng-init="content.getMediaTypes()">
+						<select  name="media_type_id" ng-disabled="content.active_view" ng-class="{ 'required-field' : content.fields['media_type_id'] }" class="form-control" ng-model="content.record.media_type_id">
+							<option ng-selected="content.record.media_type_id == futureed.FALSE" value="">-- Select Media Type --</option>
+							<option ng-selected="content.record.media_type_id == type.id" ng-repeat="type in content.types" ng-value="type.id">{! type.name!}</option>
+						</select>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="col-xs-3 control-label">Description <span class="required">*</span></label>
 					<div class="col-xs-6">
-						{!! Form::textarea('content','',
-							[
-								'class' => 'form-control'
-								, 'ng-disabled' => 'content.active_view'
-								, 'ng-model' => 'content.record.content'
+						{!! Form::textarea('description', ''
+							, array(
+								  'class' => 'form-control disabled-textarea'
 								, 'placeholder' => 'Description'
-								, 'ng-class' => "{ 'required-field' : content.fields['content'] }"
-							]
+								, 'ng-disabled' => 'content.active_view'
+								, 'ng-model' => 'content.record.description'
+								, 'ng-class' => "{ 'required-field' : content.fields['description'] }"
+								, 'rows' => '5'
+							)
 						) !!}
 					</div>
 				</div>
-				<div class="btn-container col-xs-8 col-xs-offset-2" ng-if="content.active_edit">
-						{!! Form::button('Save'
-							, array(
-								'class' => 'btn btn-blue btn-medium'
-								, 'ng-click' => "content.updateContent()"
-							)
-						) !!}
+				<div class="form-group">
+	        		<label class="col-xs-3 control-label">Status <span class="required">*</span></label>
+	        		<div class="col-xs-6" ng-if="content.active_edit">
+	        			<div class="col-xs-6 checkbox">	                				
+	        				<label>
+	        					{!! Form::radio('status'
+	        						, 'Enabled'
+	        						, true
+	        						, array(
+	        							'class' => 'field'
+	        							, 'ng-model' => 'content.record.status'
+	        						) 
+	        					) !!}
+	        				<span class="lbl padding-8">Enabled</span>
+	        				</label>
+	        			</div>
+	        			<div class="col-xs-6 checkbox">
+	        				<label>
+	        					{!! Form::radio('status'
+	        						, 'Disabled'
+	        						, false
+	        						, array(
+	        							'class' => 'field'
+	        							, 'ng-model' => 'content.record.status'
+	        						)
+	        					) !!}
+	        				<span class="lbl padding-8">Disabled</span>
+	        				</label>
+	        			</div>
+	        		</div>
 
-						{!! Form::button('Cancel'
-							, array(
-								'class' => 'btn btn-gold btn-medium'
-								, 'ng-click' => "content.setActive(futureed.ACTIVE_VIEW, content.record.id)"
-							)
-						) !!}
-				</div>	
-				<div class="btn-container col-xs-8 col-xs-offset-2" ng-if="content.active_view">
+	        		<div ng-if="content.active_view">
+		        		<label class="col-xs-6" ng-if="content.record.status == 'Enabled'">
+		        			<b class="success-icon">
+		        				<i class="margin-top-8 fa fa-check-circle-o"></i> {! content.record.status !}
+		        			</b>
+		        		</label>
+
+		        		<label class="col-xs-6" ng-if="content.record.status == 'Disabled'">
+		        			<b class="error-icon">
+		        				<i class="margin-top-8 fa fa-ban"></i> {! content.record.status !}
+		        			</b>
+		        		</label>
+	        		</div>
+	        	</div>
+	        	<div class="form-group" ng-if="content.active_view">
+	        		<div class="btn-container col-xs-8 col-xs-offset-2">
 						{!! Form::button('Edit'
 							, array(
 								'class' => 'btn btn-blue btn-medium'
@@ -223,7 +213,25 @@
 								, 'ng-click' => "content.setActive()"
 							)
 						) !!}		
-				</div>
+					</div>
+	        	</div>
+	        	<div class="form-group" ng-if="content.active_edit">
+	        		<div class="btn-container col-xs-8 col-xs-offset-2">
+						{!! Form::button('Save'
+							, array(
+								'class' => 'btn btn-blue btn-medium'
+								, 'ng-click' => "content.updateContent()"
+							)
+						) !!}
+
+						{!! Form::button('Cancel'
+							, array(
+								'class' => 'btn btn-gold btn-medium'
+								, 'ng-click' => "content.setActive(futureed.ACTIVE_VIEW, content.record.id)"
+							)
+						) !!}		
+					</div>
+	        	</div>
 			</fieldset>
 		{!! Form::close() !!}
 	</div>

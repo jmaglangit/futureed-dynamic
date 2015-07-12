@@ -567,22 +567,52 @@
 
 		Routes::group(['prefix' => '/age_group'], function() {
 
+			Routes::group(['prefix' => '/patials'], function() {
+
+				Routes::get('/list_view_form', 
+					['as' => 'admin.manage.age_group.partials.list_view_form'
+					, 'uses' => 'FutureLesson\Admin\ManageAgeGroupController@list_view_form'
+					, 'middleware' => 'admin_partial'
+				]);
+
+				Routes::get('/add_view_form', 
+					['as' => 'admin.manage.age_group.partials.add_view_form'
+					, 'uses' => 'FutureLesson\Admin\ManageAgeGroupController@add_view_form'
+				]);
+
+				Routes::get('/edit_view_form', 
+					['as' => 'admin.manage.age_group.partials.edit_view_form'
+					, 'uses' => 'FutureLesson\Admin\ManageAgeGroupController@edit_view_form'
+				]);
+			});
+		});
+
+		Routes::group(['prefix' => '/q_a'], function() {
+
 				Routes::group(['prefix' => '/patials'], function() {
 
-					Routes::get('/list_view_form', 
-						['as' => 'admin.manage.age_group.partials.list_view_form'
-						, 'uses' => 'FutureLesson\Admin\ManageAgeGroupController@list_view_form'
+					Routes::get('/question_list_form', 
+						['as' => 'admin.manage.question_answer.partials.question_list_form'
+						, 'uses' => 'FutureLesson\Admin\ManageQuestionAnsController@question_list_form'
 						, 'middleware' => 'admin_partial'
 					]);
 
-					Routes::get('/add_view_form', 
-						['as' => 'admin.manage.age_group.partials.add_view_form'
-						, 'uses' => 'FutureLesson\Admin\ManageAgeGroupController@add_view_form'
+					Routes::get('/question_add_form', 
+						['as' => 'admin.manage.question_answer.partials.question_add_form'
+						, 'uses' => 'FutureLesson\Admin\ManageQuestionAnsController@question_add_form'
+						, 'middleware' => 'admin_partial'
 					]);
 
-					Routes::get('/edit_view_form', 
-						['as' => 'admin.manage.age_group.partials.edit_view_form'
-						, 'uses' => 'FutureLesson\Admin\ManageAgeGroupController@edit_view_form'
+					Routes::get('/question_view_form', 
+						['as' => 'admin.manage.question_answer.partials.question_view_form'
+						, 'uses' => 'FutureLesson\Admin\ManageQuestionAnsController@question_view_form'
+						, 'middleware' => 'admin_partial'
+					]);
+
+					Routes::get('/answer_list_form', 
+						['as' => 'admin.manage.question_answer.partials.answer_list_form'
+						, 'uses' => 'FutureLesson\Admin\ManageQuestionAnsController@answer_list_form'
+						, 'middleware' => 'admin_partial'
 					]);
 				});
 			});
