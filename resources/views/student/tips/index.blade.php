@@ -10,6 +10,8 @@
 		<div template-directive template-url="{!! route('client.partials.base_url') !!}"></div>
 
 		<div class="wrapr" ng-init="tips.setActive()"> 
+			<div ng-init="tips.setTipView('{!! $id !!}')"></div>
+
 			<div template-directive template-url="{!! route('student.tips.partials.list') !!}"></div>
 
 			<div template-directive template-url="{!! route('student.tips.partials.detail') !!}"></div>

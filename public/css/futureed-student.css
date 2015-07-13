@@ -25,6 +25,12 @@
     float: left;
 }
 
+.sidebar-div a {
+	color: #FFFFFF;
+	cursor: pointer;
+	text-decoration: none;
+}
+
 .slide-out {
     -moz-transition: ease 1s;
     -webkit-transition: ease 1s;
