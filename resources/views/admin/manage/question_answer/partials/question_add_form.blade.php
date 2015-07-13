@@ -67,6 +67,31 @@
                         )
                     ) !!}
                 </div>
+                <label class="control-label col-xs-2">Sequence No</label>
+                <div class="col-xs-4">
+                    {!! Form::text('seq_no',''
+                        , array(
+                            'placeHolder' => 'Sequence No'
+                            , 'ng-model' => 'qa.create.seq_no'
+                            , 'class' => 'form-control'
+                            , 'ng-class' => "{ 'required-field' : qa.fields['seq_no'] }"
+                        )
+                    ) !!}
+                </div>
+                
+            </div>
+            <div class="form-group">
+                <label class="control-label col-xs-2">Question <span class="required">*</span></label>
+                <div class="col-xs-4">
+                    {!! Form::text('question',''
+                        , array(
+                            'placeHolder' => 'Question'
+                            , 'ng-model' => 'qa.create.questions_text'
+                            , 'class' => 'form-control'
+                            , 'ng-class' => "{ 'required-field' : qa.fields['questions_text'] }"
+                        )
+                    ) !!}
+                </div>
                 <label class="control-label col-xs-2">Question Type<span class="required">*</span></label>
                 <div class="col-xs-4">
                     {!! Form::select('question_type'
@@ -86,15 +111,39 @@
                     ) !!}
                 </div>
             </div>
-            <div class="form-group">
-                <label class="control-label col-xs-2">Question <span class="required">*</span></label>
+        	<div class="form-group">
+                <label class="control-label col-xs-2">Points Earned<span class="required">*</span></label>
                 <div class="col-xs-4">
-                    {!! Form::text('question',''
+                    {!! Form::text('points_earned',''
                         , array(
-                            'placeHolder' => 'Question'
-                            , 'ng-model' => 'qa.create.questions_text'
+                            'placeHolder' => 'Points Earned'
+                            , 'ng-model' => 'qa.create.points_earned'
                             , 'class' => 'form-control'
-                            , 'ng-class' => "{ 'required-field' : qa.fields['questions_text'] }"
+                            , 'ng-class' => "{ 'required-field' : qa.fields['points_earned'] }"
+                        )
+                    ) !!}
+                </div>
+                <label ng-if="qa.create.question_type == 'O'" class="control-label col-xs-2">Answer <span class="required">*</span></label>
+                <div class="col-xs-4" ng-if="qa.create.question_type == 'O'">
+                    {!! Form::text('answer',''
+                        , array(
+                            'placeHolder' => 'Answer'
+                            , 'ng-model' => 'qa.create.answer'
+                            , 'class' => 'form-control'
+                            , 'ng-class' => "{ 'required-field' : qa.fields['answer'] }"
+                        )
+                    ) !!}
+                </div>
+        	</div>
+            <div class="form-group">
+                <label class="control-label col-xs-2">Difficulty <span class="required">*</span></label>
+                <div class="col-xs-4">
+                    {!! Form::text('difficulty',''
+                        , array(
+                            'placeHolder' => 'Difficulty'
+                            , 'ng-model' => 'qa.create.difficulty'
+                            , 'class' => 'form-control'
+                            , 'ng-class' => "{ 'required-field' : qa.fields['difficulty'] }"
                         )
                     ) !!}
                 </div>
@@ -109,59 +158,35 @@
                     </div>
                 </div>
             </div>
-        	<div class="form-group">
-                <label class="control-label col-xs-2">Points Earned<span class="required">*</span></label>
-                <div class="col-xs-4">
-                    {!! Form::text('points_earned',''
-                        , array(
-                            'placeHolder' => 'Points Earned'
-                            , 'ng-model' => 'qa.create.points_earned'
-                            , 'class' => 'form-control'
-                            , 'ng-class' => "{ 'required-field' : qa.fields['points_earned'] }"
-                        )
-                    ) !!}
-                </div>
-        		<label class="col-xs-2 control-label">Status <span class="required">*</span></label>
-        		<div class="col-xs-4">
-        			<div class="col-xs-6 checkbox">	                				
-        				<label>
-        					{!! Form::radio('status'
-        						, 'Enabled'
-        						, true
-        						, array(
-        							'class' => 'field'
-        							, 'ng-model' => 'qa.create.status'
-        						) 
-        					) !!}
-        				<span class="lbl padding-8">Enabled</span>
-        				</label>
-        			</div>
-        			<div class="col-xs-6 checkbox">
-        				<label>
-        					{!! Form::radio('status'
-        						, 'Disabled'
-        						, false
-        						, array(
-        							'class' => 'field'
-        							, 'ng-model' => 'qa.create.status'
-        						)
-        					) !!}
-        				<span class="lbl padding-8">Disabled</span>
-        				</label>
-        			</div>
-        		</div>
-        	</div>
             <div class="form-group">
-                <label class="control-label col-xs-2">Difficulty <span class="required">*</span></label>
+                <label class="col-xs-2 control-label">Status <span class="required">*</span></label>
                 <div class="col-xs-4">
-                    {!! Form::text('difficulty',''
-                        , array(
-                            'placeHolder' => 'Difficulty'
-                            , 'ng-model' => 'qa.create.difficulty'
-                            , 'class' => 'form-control'
-                            , 'ng-class' => "{ 'required-field' : qa.fields['difficulty'] }"
-                        )
-                    ) !!}
+                    <div class="col-xs-6 checkbox">                                 
+                        <label>
+                            {!! Form::radio('status'
+                                , 'Enabled'
+                                , true
+                                , array(
+                                    'class' => 'field'
+                                    , 'ng-model' => 'qa.create.status'
+                                ) 
+                            ) !!}
+                        <span class="lbl padding-8">Enabled</span>
+                        </label>
+                    </div>
+                    <div class="col-xs-6 checkbox">
+                        <label>
+                            {!! Form::radio('status'
+                                , 'Disabled'
+                                , false
+                                , array(
+                                    'class' => 'field'
+                                    , 'ng-model' => 'qa.create.status'
+                                )
+                            ) !!}
+                        <span class="lbl padding-8">Disabled</span>
+                        </label>
+                    </div>
                 </div>
             </div>
         </fieldset>

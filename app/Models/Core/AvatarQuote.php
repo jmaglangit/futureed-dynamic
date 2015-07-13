@@ -2,8 +2,8 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class AvatarWiki extends Model {
+class AvatarQuote extends Model {
 
-	protected $table = 'avatar_wikis';
+	//
 
 }

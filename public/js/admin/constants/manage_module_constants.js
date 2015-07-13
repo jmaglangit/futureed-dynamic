@@ -6,4 +6,7 @@ var ManageModuleConstants = {
 	, SUCCESS_EDIT_AGE_GROUP 	: "Successfully edited age group."
 	, SUCCESS_EDIT_QUESTION 	: "Successfully edited question."
 	, SUCCESS_DELETE_QUESTION 	: "Successfully deleted question"
+	, SUCCESS_ADD_ANSWER 	: "Successfully added answer"
+	, SUCCESS_DELETE_ANS 	: "Successfully deleted answer"
+	, SUCCESS_EDIT_ANS 	: "Successfully edited answer"
 }

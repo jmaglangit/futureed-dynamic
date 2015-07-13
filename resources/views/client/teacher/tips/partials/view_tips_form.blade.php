@@ -33,7 +33,7 @@
 					)
 				) !!}
 			</div>
-			<div class="col-xs-5">
+			<div class="col-xs-5" ng-if="tips.record.tip_status != futureed.ACCEPTED">
 				{!! Form::button('Approve'
 					, array(
 						'class' => 'btn btn-blue btn-medium'
@@ -54,7 +54,7 @@
 					)
 				) !!}
 			</div>
-			<div class="col-xs-5">
+			<div class="col-xs-5" ng-if="tips.record.tip_status != futureed.ACCEPTED">
 				{!! Form::button('Reject'
 					, array(
 						'class' => 'btn btn-gold btn-medium'

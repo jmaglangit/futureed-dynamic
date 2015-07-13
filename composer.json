@@ -11,7 +11,8 @@
 		"webpatser/laravel-countries": "~1.4",
 		"ext-curl": "*",
 		"ext-json": "*",
-		"paypal/rest-api-sdk-php" : "*"
+		"paypal/rest-api-sdk-php" : "*",
+		"league/csv": "^7.1"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "~4.0",

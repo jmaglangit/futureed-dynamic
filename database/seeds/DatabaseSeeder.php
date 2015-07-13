@@ -28,6 +28,10 @@ class DatabaseSeeder extends Seeder {
 		$this->call('AgeGroupTableSeeder');
 		$this->call('CountryGradesTableSeeder');
 		$this->call('ModuleTableSeeder');
+		$this->call('QuotesTableSeeder');
+		$this->call('AvatarQuotesTableSeeder');
+		$this->call('AvatarPosesTableSeeder');
+		$this->call('AvatarWikisTableSeeder');
     }
 
 }

@@ -48,5 +48,42 @@ function ManageQuestionAnsService($http) {
         });
     }
 
+    qaServiceApi.addAnswer = function(data) {
+        return $http({
+            method  : Constants.METHOD_POST
+            , data  : data
+            , url   : qaServiceUrl + 'question/answer/admin'
+        });
+    }
+
+    qaServiceApi.answerList = function(id) {
+        return $http({
+            method  : Constants.METHOD_GET
+            , url   : qaServiceUrl + 'question/answer/admin?questionid=' + id
+        });
+    }
+
+    qaServiceApi.deleteAnswer = function(id) {
+        return $http({
+            method  : Constants.METHOD_DELETE
+            , url   : qaServiceUrl + 'question/answer/admin/' + id
+        });
+    }
+
+    qaServiceApi.getAnswerDetail = function(id) {
+        return $http({
+            method  : Constants.METHOD_GET
+            , url   : qaServiceUrl + 'question/answer/admin/' + id
+        });
+    }
+
+    qaServiceApi.saveAnswer = function(data) {
+        return $http({
+            method  : Constants.METHOD_PUT
+            , data  : data
+            , url   : qaServiceUrl + 'question/answer/admin/' + data.id
+        });
+    }
+
     return qaServiceApi;
 }

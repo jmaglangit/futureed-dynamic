@@ -49,7 +49,7 @@
 
                             <ul class="list-content">
                                 <li>
-                                    Use any device, software, or routine to interfere or attempt to interfere with the proper working of the Futureed Pte Ltdsite or any activity being conducted on the Futureed Pte Ltdsite.
+                                    Use any device, software, or routine to interfere or attempt to interfere with the proper working of the Futureed Pte Ltd site or any activity being conducted on the Futureed Pte Ltd site.
                                 </li>
                                 <li>
                                     Upload, post, email, transmit or otherwise make available any Content that is unlawful, harmful, threatening, abusive, harassing, tortious, defamatory, vulgar, obscene, pornographic, libelous, invasive of another's privacy, subversive, hateful, or racially, ethnically or otherwise objectionable or contrary to public interest, public order or national harmony in all relevant jurisdictions;
@@ -79,7 +79,7 @@
                                     Disrupt the normal flow of dialogue, cause a screen to "scroll" faster than other users of the Service are able to type, or otherwise act in a manner that negatively affects other users' ability to engage in real time exchanges;
                                 </li>
                                 <li>
-                                    Interfere with or disrupt the service of Futureed Pte Ltdor another person's use of the Futureed Pte Ltdor servers or networks connected to the Futureed, or disobey any requirements, procedures, policies or regulations of networks connected to Futureed;
+                                    Interfere with or disrupt the service of Futureed Pte Ltd or another person's use of the Futureed Pte Ltd or servers or networks connected to the Futureed, or disobey any requirements, procedures, policies or regulations of networks connected to Futureed;
                                 </li>
                                 <li>
                                     Intentionally or unintentionally violate any applicable law, statute, ordinance, regulation, rule or code, including, but not limited to, any regulations, rules, notices, instructions or directives of any regulatory body or authority, governmental agency or national or other securities exchange ;
@@ -106,7 +106,7 @@
                                     Create, display, transmit, or obtain materials that violates intellectual property laws;
                                 </li>
                                 <li>
-                                    Use of machines, computers, scripts, “bots” or any automated system on Futureed Pte Ltdis strictly prohibited and may result in criminal liability. Futureed Pte Ltdmay terminate and permanently disqualify any User who, in its sole discretion, determines as being in violation of these Terms of Service. All decisions by Futureed Pte Ltdare final;
+                                    Use of machines, computers, scripts, “bots” or any automated system on Futureed Pte Ltd is strictly prohibited and may result in criminal liability. Futureed Pte Ltd may terminate and permanently disqualify any User who, in its sole discretion, determines as being in violation of these Terms of Service. All decisions by Futureed Pte Ltd are final;
                                 </li>
                             </ul>
                         </div>
@@ -234,7 +234,7 @@
                      <fieldset>
                         <div>
                             <p>Futurelesson.com c/o</p>
-                            <p>Kosh Consulting Group (Asia) Pte Ltd</p>
+                            <p>Kosh Consulting Group (Asia) Pte Ltd </p>
                             <p>545 Orchard Road, #03-24</p>
                             <p>Far East Shopping Centre, Singapore 238882</p>
                             <p>Email: <span>i n f o @ f u t u r e l e s s o n . c o m</span></p>
