@@ -17,11 +17,11 @@ class CreateStudentLsScores extends Migration {
 			$table->increments('id');
 			$table->bigInteger('student_id');
 			$table->bigInteger('ls_test_id');
-			$table->string('ls_group', 50);
-			$table->string('ls_name', 50);
-			$table->integer('ls_seq_no');
-			$table->integer('ls_std_score');
-			$table->string('ls_banding', 256);
+			$table->string('ls_group', 50)->nullable();
+			$table->string('ls_name', 50)->nullable();
+			$table->integer('ls_seq_no')->nullable();
+			$table->integer('ls_std_score')->nullable();
+			$table->string('ls_banding', 256)->nullable();
 			$table->bigInteger('created_by');
 			$table->bigInteger('updated_by');
 			$table->timestamps();
