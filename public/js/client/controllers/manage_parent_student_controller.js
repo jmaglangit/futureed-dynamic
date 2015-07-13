@@ -39,6 +39,7 @@ function ManageParentStudentController($scope, ManageParentStudentService, apiSe
 		switch(active) {
 			case Constants.ACTIVE_EDIT:
 				self.active_list = Constants.FALSE;
+				self.e_success = Constants.FALSE;
 				self.edit_form = Constants.TRUE;
 				self.active_view = Constants.TRUE;
 				self.edit = Constants.TRUE;
@@ -50,6 +51,8 @@ function ManageParentStudentController($scope, ManageParentStudentService, apiSe
 
 			case 'change':
 				self.validation = {};
+				self.change = {};
+				self.e_success = Constants.FALSE;
 				self.active_list = Constants.FALSE;
 				self.active_view = Constants.FALSE;
 				self.active_add = Constants.FALSE;
