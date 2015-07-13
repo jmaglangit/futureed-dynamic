@@ -67,6 +67,31 @@
                         )
                     ) !!}
                 </div>
+                <label class="control-label col-xs-2">Sequence No</label>
+                <div class="col-xs-4">
+                    {!! Form::text('seq_no',''
+                        , array(
+                            'placeHolder' => 'Sequence No'
+                            , 'ng-model' => 'qa.create.seq_no'
+                            , 'class' => 'form-control'
+                            , 'ng-class' => "{ 'required-field' : qa.fields['seq_no'] }"
+                        )
+                    ) !!}
+                </div>
+                
+            </div>
+            <div class="form-group">
+                <label class="control-label col-xs-2">Question <span class="required">*</span></label>
+                <div class="col-xs-4">
+                    {!! Form::text('question',''
+                        , array(
+                            'placeHolder' => 'Question'
+                            , 'ng-model' => 'qa.create.questions_text'
+                            , 'class' => 'form-control'
+                            , 'ng-class' => "{ 'required-field' : qa.fields['questions_text'] }"
+                        )
+                    ) !!}
+                </div>
                 <label class="control-label col-xs-2">Question Type<span class="required">*</span></label>
                 <div class="col-xs-4">
                     {!! Form::select('question_type'
@@ -86,15 +111,15 @@
                     ) !!}
                 </div>
             </div>
-            <div class="form-group">
-                <label class="control-label col-xs-2">Question <span class="required">*</span></label>
+        	<div class="form-group">
+                <label class="control-label col-xs-2">Points Earned<span class="required">*</span></label>
                 <div class="col-xs-4">
-                    {!! Form::text('question',''
+                    {!! Form::text('points_earned',''
                         , array(
-                            'placeHolder' => 'Question'
-                            , 'ng-model' => 'qa.create.questions_text'
+                            'placeHolder' => 'Points Earned'
+                            , 'ng-model' => 'qa.create.points_earned'
                             , 'class' => 'form-control'
-                            , 'ng-class' => "{ 'required-field' : qa.fields['questions_text'] }"
+                            , 'ng-class' => "{ 'required-field' : qa.fields['points_earned'] }"
                         )
                     ) !!}
                 </div>
@@ -109,29 +134,6 @@
                         )
                     ) !!}
                 </div>
-            </div>
-        	<div class="form-group">
-                <label class="control-label col-xs-2">Points Earned<span class="required">*</span></label>
-                <div class="col-xs-4">
-                    {!! Form::text('points_earned',''
-                        , array(
-                            'placeHolder' => 'Points Earned'
-                            , 'ng-model' => 'qa.create.points_earned'
-                            , 'class' => 'form-control'
-                            , 'ng-class' => "{ 'required-field' : qa.fields['points_earned'] }"
-                        )
-                    ) !!}
-                </div>
-        		<label class="control-label col-xs-2">Question Image</label>
-                <div class="col-xs-4">
-                      <div style="position:relative;">
-                        <a class='btn btn-primary btn-semi-large' href='javascript:;'>
-                            Choose File...
-                            <input ng-model="qa.create.image" id="q_image" type="file" class="img-input" name="file_source" size="40"  onchange='$("#upload-file-info").html($(this).val());'>
-                        </a>
-                        <center><span class='label label-info' id="upload-file-info"></span></center>
-                    </div>
-                </div>
         	</div>
             <div class="form-group">
                 <label class="control-label col-xs-2">Difficulty <span class="required">*</span></label>
@@ -145,6 +147,18 @@
                         )
                     ) !!}
                 </div>
+                <label class="control-label col-xs-2">Question Image</label>
+                <div class="col-xs-4">
+                      <div style="position:relative;">
+                        <a class='btn btn-primary btn-semi-large' href='javascript:;'>
+                            Choose File...
+                            <input ng-model="qa.create.image" id="q_image" type="file" class="img-input" name="file_source" size="40"  onchange='$("#upload-file-info").html($(this).val());'>
+                        </a>
+                        <center><span class='label label-info' id="upload-file-info"></span></center>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
                 <label class="col-xs-2 control-label">Status <span class="required">*</span></label>
                 <div class="col-xs-4">
                     <div class="col-xs-6 checkbox">                                 

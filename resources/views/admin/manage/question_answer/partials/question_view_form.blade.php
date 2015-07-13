@@ -199,6 +199,20 @@
                     </label>
                 </div>
             </div>
+            <div class="form-group">
+                <label class="control-label col-xs-2">Sequance No</label>
+                <div class="col-xs-4">
+                    {!! Form::text('seq_no',''
+                        , array(
+                            'placeHolder' => 'Sequance No'
+                            , 'ng-model' => 'qa.details.seq_no'
+                            , 'class' => 'form-control'
+                            , 'ng-disabled' => '!qa.edit'
+                            , 'ng-class' => "{ 'required-field' : qa.fields['seq_no'] }"
+                        )
+                    ) !!}
+                </div>
+            </div>
         </fieldset>
         <div class="col-xs-6 col-xs-offset-3">
         	<div class="btn-container">
