@@ -147,7 +147,7 @@ class AdminStudentController extends ApiController {
 		public function update($id,AdminStudentRequest $request)
 		{
 			$data = $request->only('first_name','last_name','gender','birth_date','country','state','city','country_id','school_code','grade_code');
-			$user = $request->only('username');
+			$user = $request->only('username','email');
 			$user_type = config('futureed.student');
 
 			$user['name'] = $data['first_name'].$data['last_name'];
