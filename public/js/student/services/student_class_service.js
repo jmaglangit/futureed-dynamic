@@ -33,6 +33,7 @@ function StudentClassService($http){
 		return $http({
 			method 	: Constants.METHOD_GET
 			, url 	: serviceUrl + 'help-request?order_by_date=' + search.order_by_date
+				+ "&request_status=" + search.request_status
 				+ "&limit=" + table.size
 				+ "&offset=" + table.offset
 		});
