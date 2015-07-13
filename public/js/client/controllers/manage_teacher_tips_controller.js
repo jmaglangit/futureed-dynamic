@@ -143,6 +143,7 @@ function ManageTeacherTipsController($scope, ManageTeacherTipsService, TableServ
 					self.record.subject = record.subject;
 					self.record.subjectarea = record.subjectarea;
 					self.record.module = record.module;
+					self.record.tip_status = record.tip_status;
 				}
 			}
 
