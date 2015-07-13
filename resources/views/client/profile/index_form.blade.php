@@ -124,7 +124,7 @@
             </div>
         </div>
         <div class="form-group">
-    		<label for="" class="col-md-2 control-label">Street Address </label>
+    		<label for="" class="col-md-2 control-label">Street Address <span class="required">*</span></label>
             <div class="col-md-5">
                 {!! Form::text('school_street_addres', ''
                     , array(
