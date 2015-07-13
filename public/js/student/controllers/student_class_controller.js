@@ -102,6 +102,7 @@ function StudentClassController($scope, $filter, StudentClassService) {
 	self.listTips = function() {
 		self.errors = Constants.FALSE;
 		self.class_id = ($scope.user.class) ? $scope.user.class.class_id : Constants.EMPTY_STR;
+		
 		self.table = {};
 		self.table.size = 3;
 		self.table.offset = Constants.FALSE;
@@ -137,6 +138,7 @@ function StudentClassController($scope, $filter, StudentClassService) {
 
 		self.search = {};
 		self.search.order_by_date = Constants.TRUE;
+		self.search.request_status = Constants.ACCEPTED;
 
 		self.table = {};
 		self.table.size = 3;
