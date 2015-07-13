@@ -289,12 +289,13 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 			self.invoice.price = (self.payment_total.s_price) ? self.payment_total.s_price: self.students.price;
 			
 			self.invoice.date_start = $filter('date')(date, 'yyyyMMdd');
-			self.invoice.dis_date_start = date.getTime();
+			self.invoice.dis_date_start = date;
 
-			date.setDate(date.getDate() + parseInt(self.no_days));
+			var end_date = new Date(date.getTime());
+			end_date.setDate(end_date.getDate() + parseInt(self.no_days));
 
-			self.invoice.date_end = $filter('date')(date, 'yyyyMMdd');
-			self.invoice.dis_date_end = date.getTime();
+			self.invoice.date_end = $filter('date')(end_date, 'yyyyMMdd');
+			self.invoice.dis_date_end = end_date;
 			self.computation(1);
 		}
 	}
