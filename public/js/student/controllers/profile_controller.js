@@ -432,8 +432,6 @@ function ProfileController($scope, apiService, profileService) {
 
 	    $("ul.form_password li").removeClass('selected');
 	    $(target).addClass('selected');
-	    console.log(self.image_id);
-
 	    self.image_id = $(target).find("#image_id").val();
 	}
 
