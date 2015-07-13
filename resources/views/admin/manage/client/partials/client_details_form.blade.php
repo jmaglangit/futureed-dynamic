@@ -238,7 +238,7 @@
 	        		</div>
 	        	</div>
 	        	<div class="form-group">
-	        		<label class="col-md-3 control-label" id="school_city">City <span class="required">*</span></label>
+	        		<label class="col-md-3 control-label" id="school_city">City</label>
 	        		<div class="col-md-5">
 	        			{!! Form::text('school_city',''
 	        				, array(
