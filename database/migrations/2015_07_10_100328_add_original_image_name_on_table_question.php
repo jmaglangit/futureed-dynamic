@@ -25,7 +25,7 @@ class AddOriginalImageNameOnTableQuestion extends Migration {
 	public function down()
 	{
 		Schema::table('questions', function(Blueprint $table){
-			$table->drop('original_image_name');
+			$table->dropColumn('original_image_name');
 		});
 	}
 
