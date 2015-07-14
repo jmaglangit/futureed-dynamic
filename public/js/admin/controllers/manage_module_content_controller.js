@@ -205,7 +205,10 @@ function ManageModuleContentController($scope, ManageModuleContentService, Table
 						self.fields[value.field] = Constants.TRUE;
 					});
 				} else if(response.data) {
+					self.record = {};
 					self.success = ContentConstants.MSG_ADD_SUCCESS;
+
+					$("html, body").animate({ scrollTop: 0 }, "slow");
 				}
 			}
 
