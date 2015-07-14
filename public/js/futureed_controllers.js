@@ -882,7 +882,16 @@ function FutureedController($scope, $window, apiService, futureed) {
 						    });
 						}
 					}else if(response.data){
-						$window.location.href = '/student/class';
+						if(response.data == 0) {
+							$scope.no_class = Constants.TRUE;
+							$("#error_class_modal").modal({
+						        backdrop: 'static',
+						        keyboard: Constants.FALSE,
+						        show    : Constants.TRUE
+						    });
+						}else{
+							$window.location.href = '/student/class';
+						}
 					}
 				}
 			$scope.ui_unblock();
