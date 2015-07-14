@@ -342,6 +342,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 	}
 
 	self.addStudentOrderByEmail = function() {
+		self.no_days = Constants.EMPTY_STR;
 		self.errors = Constants.FALSE;
 		self.add.success = Constants.FALSE;
 		self.success = Constants.FALSE;
@@ -357,6 +358,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				}else if(response.data){
+					self.add = {};
 					self.student_detail = response.data;
 					self.add.success = Constants.TRUE;
 					self.getSubscriptionList();
@@ -402,6 +404,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 	}
 
 	self.addStudentOrderByUsername = function() {
+		self.no_days = Constants.EMPTY_STR;
 		self.errors = Constants.FALSE;
 		self.add.success = Constants.FALSE;
 		self.success = Constants.FALSE;
@@ -415,6 +418,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				}else if(response.data){
+					self.add = {};
 					self.student_detail = response.data;
 					self.add.success = Constants.TRUE;
 					self.getSubscriptionList();
