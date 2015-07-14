@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use FutureEd\Http\Requests\Api\QuestionRequest;
 use Illuminate\Support\Facades\Input;
 use FutureEd\Models\Repository\Question\QuestionRepositoryInterface;
+use Carbon\Carbon;
 
 class QuestionController extends ApiController {
 
@@ -23,34 +24,26 @@ class QuestionController extends ApiController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function updateQuestionImage($id, QuestionRequest $request)
+	public function uploadQuestionImage(QuestionRequest $request)
 	{
 		$data = $request->only('image');
+		$now = Carbon::now()->timestamp;
 
-		$question = $this->question->viewQuestion($id);
-
-		if(!$question){
-
-			return $this->respondErrorMessage(2120);
-		}
+		$return = NULL;
 
 		//check if has images uploaded
 		if($data['image']){
 			//get image_name
 			$image = $_FILES['image']['name'];
 
-			//upload image file
-			$data['image']->move(config('futureed.question_image_path'), $image);
+			//uploads image file
+			$data['image']->move(config('futureed.question_image_path').'/'.$now,$image);
 
-			//set value for questions_images
-			$data['questions_image'] = $image;
-
+			//return the original name of the image
+			$return['image_name'] = $now.'/'.$image;
 		}
 
-		//update questions_image
-		$this->question->updateQuestion($id,$data);
-
-		return $this->respondWithData($this->question->viewQuestion($id));
+		return $this->respondWithData($return);
 
 	}
 

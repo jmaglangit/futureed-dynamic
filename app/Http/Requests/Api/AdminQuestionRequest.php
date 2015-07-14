@@ -27,7 +27,7 @@ class AdminQuestionRequest extends ApiRequest {
 
 				return [
 
-					'image' => 'mimes:jpeg,jpg,png|max:2000',
+					'image' => 'string',
 					'module_id' => 'required|integer',
 					'questions_text' => 'required|string',
 					'difficulty' => 'required|integer',
@@ -36,13 +36,15 @@ class AdminQuestionRequest extends ApiRequest {
 					'points_earned' => 'required|integer',
 					'code' => 'required|integer',
 					'answer' => 'string',
+					'seq_no' => 'integer',
 				];
 				break;
 
 			case 'PUT':
 
 				return [
-
+					'image' => 'string',
+					'seq_no' => 'integer',
 					'questions_text' => 'required|string',
 					'difficulty' => 'required|integer',
 					'status' => 'required|alpha|in:Enabled,Disabled',
@@ -62,7 +64,8 @@ class AdminQuestionRequest extends ApiRequest {
 			'module_id.integer' => 'Module is invalid.',
 			'difficulty.integer' => 'Difficulty must be a number.',
 			'points_earned.integer' => 'Points earned must be a number.',
-			'code.integer' => 'Code must be a number.'
+			'code.integer' => 'Code must be a number.',
+			'seq_no.integer' => 'Sequence number is invalid.'
 
 		];
 	}
