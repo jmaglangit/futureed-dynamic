@@ -121,6 +121,9 @@ return [
 	//path for question uploaded images final
 	'question_image_path_final' => base_path().'/uploads/question',
 
+	//path for answer uploaded images temp
+	'answer_image_path' =>  base_path().'/uploads/temp/answer',
+
 	//question
 	'question' => 'question',
 
