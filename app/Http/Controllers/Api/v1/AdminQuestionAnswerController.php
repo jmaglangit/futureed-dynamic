@@ -162,13 +162,30 @@ class AdminQuestionAnswerController extends ApiController {
 	 */
 	public function update($id, AdminQuestionAnswerRequest $request)
 	{
-		$data = $request->only('answer_text','correct_answer','point_equivalent');
+		$data = $request->only('answer_text','correct_answer','point_equivalent','image');
 
 		$question_answer = $this->question_answer->viewQuestionAnswer($id);
 
 		if(!$question_answer){
 
 			return $this->respondErrorMessage(2120);
+		}
+
+		if($data['image']){
+
+			$from = config('futureed.answer_image_path');
+			$to = config('futureed.answer_image_path_final').'/'.$id;
+
+			$image = explode('/',$data['image']);
+			$image_type = explode('.',$image[1]);
+
+			$data['original_image_name'] = $image[1];
+			$data['answer_image'] = config('futureed.answer').'_'.$id.'.'.$image_type[1];
+
+			$this->file->deleteDirectory($to);
+			$this->file->move($from.'/'.$image[0],$to);
+			$this->file->copy($to.'/'.$image[1],$to.'/'.$data['answer_image']);
+
 		}
 
 		//update question_answer
