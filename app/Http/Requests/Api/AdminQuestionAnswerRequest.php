@@ -62,8 +62,8 @@ class AdminQuestionAnswerRequest extends ApiRequest {
 			'question_id.integer' => 'Question is invalid.',
 			'code.integer' => 'Code must be a number.',
 			'point_equivalent.integer' => 'Points Equivalent must be a number.',
-			'answer_text.required_if' =>'The answer text field is required when  image is empty.',
-			'image.required_if' =>'The image field is required when  answer text is empty.',
+			'answer_text.required_if' =>'The answer text field is required when image is empty.',
+			'image.required_if' =>'The image field is required when answer text is empty.',
 
 
 		];
