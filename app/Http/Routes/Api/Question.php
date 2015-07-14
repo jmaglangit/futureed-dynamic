@@ -15,9 +15,9 @@ Routes::group(['prefix' => '/question'], function() {
 	Routes::resource('/answer/admin', 'Api\v1\AdminQuestionAnswerController',
 		['except' => ['create', 'edit']]);
 
-	Routes::post('/answer/update-image/{id}',[
-		'as' => 'api.v1.admin.answer.image.update',
-		'uses' => 'Api\v1\QuestionAnswerController@updateQuestionAnswerImage']);
+	Routes::post('/answer/upload-image/',[
+		'as' => 'api.v1.admin.answer.image.upload',
+		'uses' => 'Api\v1\QuestionAnswerController@uploadQuestionAnswerImage']);
 
 
 });
