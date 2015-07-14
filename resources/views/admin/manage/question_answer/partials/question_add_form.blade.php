@@ -123,8 +123,8 @@
                         )
                     ) !!}
                 </div>
-                <label ng-if="qa.create.question_type == 'O'" class="control-label col-xs-2">Answer <span class="required">*</span></label>
-                <div class="col-xs-4" ng-if="qa.create.question_type == 'O'">
+                <label ng-if="qa.create.question_type != 'MC' && qa.create.question_type" class="control-label col-xs-2">Answer <span class="required">*</span></label>
+                <div class="col-xs-4" ng-if="qa.create.question_type != 'MC' && qa.create.question_type">
                     {!! Form::text('answer',''
                         , array(
                             'placeHolder' => 'Answer'

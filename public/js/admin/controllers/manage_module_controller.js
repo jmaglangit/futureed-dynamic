@@ -40,6 +40,8 @@ function ManageModuleController($scope, manageModuleService, apiService, TableSe
 
 			case Constants.ACTIVE_VIEW :
 				self.active_view = Constants.TRUE;
+				self.detail_hidden = Constants.FALSE;
+				self.content_hidden = Constants.TRUE;
 				self.getModuleDetail(id);
 				break;
 
@@ -53,6 +55,28 @@ function ManageModuleController($scope, manageModuleService, apiService, TableSe
 				break;
 		}
 		$("html, body").animate({ scrollTop: 0 }, "slow");
+	}
+
+	self.toggleDetail = function() {
+		var detail_shown = $('#module_detail').hasClass('in');
+
+		if(detail_shown) {
+			self.detail_hidden = Constants.TRUE;
+		} else {
+			self.detail_hidden = Constants.FALSE;
+			self.content_hidden = Constants.TRUE;
+		}
+	}
+
+	self.toggleContent = function() {
+		var content_shown = $('#module_tabs').hasClass('in');
+		
+		if(content_shown) {
+			self.content_hidden = Constants.TRUE;
+		} else {
+			self.content_hidden = Constants.FALSE;
+			self.detail_hidden = Constants.TRUE;
+		}
 	}
 
 	self.setActiveContent = function(view) {
@@ -227,7 +251,7 @@ function ManageModuleController($scope, manageModuleService, apiService, TableSe
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					self.details = response.data;
-					self.details.area = self.details.subjectarea.name;
+					self.details.area = (self.details.subjectarea) ? self.details.subjectarea.name : Constants.EMPTY_STR;
 					$scope.module_id = self.details.id;
 					$scope.module_name = self.details.name;
 					self.age_records = {};

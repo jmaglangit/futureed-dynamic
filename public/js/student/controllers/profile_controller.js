@@ -75,6 +75,7 @@ function ProfileController($scope, apiService, profileService) {
 	        break;
 
 	      case Constants.EDIT    		:
+	      	self.studentDetails();
 	      	self.active_edit = Constants.TRUE;
 	        break;
 
