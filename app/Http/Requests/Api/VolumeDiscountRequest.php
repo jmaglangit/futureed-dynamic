@@ -19,6 +19,9 @@ class VolumeDiscountRequest extends ApiRequest {
 	 * @return array
 	 */
 	public function rules() {
+
+		$id =$this->__get('volume_discount');
+
 		switch ($this->method()) {
 
 			case 'POST':
@@ -34,7 +37,7 @@ class VolumeDiscountRequest extends ApiRequest {
 			case 'PUT':
 
 				return [
-					'min_seats' => 'required|numeric|min:1|max:30000',
+					'min_seats' => "required|numeric|min:1|max:30000|unique:volume_discounts,min_seats,$id,id,deleted_at,NULL",
 					'percentage' => 'required|numeric|min:1.00|max:100.00',
 					'status' => 'required|in:Enabled,Disabled'
 				];
