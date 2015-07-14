@@ -319,7 +319,7 @@ class ClientController extends ApiController {
 			$this->addMessageBag($this->validateString($school, 'school_address'));
 			$this->addMessageBag($this->validateStringOptional($school, 'school_city'));
 			$this->addMessageBag($this->zipCodeOptional($school, 'school_zip'));
-			$this->addMessageBag($this->validateString($school, 'contact_name'));
+			$this->addMessageBag($this->validateContactName($school, 'contact_name'));
 			$this->addMessageBag($this->checkContactNumber($school, 'contact_number'));
 
 		}
