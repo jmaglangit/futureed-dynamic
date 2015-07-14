@@ -33,17 +33,12 @@ function ManageTeacherTipsController($scope, ManageTeacherTipsService, TableServ
 				self.active_edit = Constants.TRUE;
 				break;
 
-			case Constants.ACTIVE_LIST :
+			default :
 				self.active_list = Constants.TRUE;
 				
 				self.searchDefaults();
 				self.tableDefaults();
 				self.list();
-				break;
-
-			default:
-				self.success = Constants.FALSE;
-				self.active_list = Constants.TRUE;
 				break;
 		}
 	}
@@ -221,18 +216,13 @@ function ManageTeacherTipsController($scope, ManageTeacherTipsService, TableServ
 				self.edit = Constants.TRUE;
 				break;
 
-			case Constants.ACTIVE_LIST :
+			default :
 				self.help_active_list = Constants.TRUE;
 				
 				self.searchDefaults();
 				self.tableDefaults();
 				self.helpList();
 				break;
-
-			default:
-			self.help_active_list = Constants.TRUE;
-			self.help_success = Constants.FALSE;
-			break;
 		}
 	}
 
@@ -327,6 +317,7 @@ function ManageTeacherTipsController($scope, ManageTeacherTipsService, TableServ
 
 		self.help_ans_active_list = Constants.FALSE;
 		self.help_ans_active_view = Constants.FALSE;
+		self.help_ans_active_edit = Constants.FALSE;
 
 		switch(active) {
 			case Constants.ACTIVE_VIEW :
@@ -342,18 +333,13 @@ function ManageTeacherTipsController($scope, ManageTeacherTipsService, TableServ
 				self.help_ans_edit = Constants.TRUE;
 				break;
 
-			case Constants.ACTIVE_LIST :
+			default :
 				self.help_ans_active_list = Constants.TRUE;
 				
 				self.searchDefaults();
 				self.tableDefaults();
 				self.helpAnsList();
 				break;
-
-			default:
-			self.help_ans_active_list = Constants.TRUE;
-			self.help_ans_success = Constants.FALSE;
-			break;
 		}
 	}
 

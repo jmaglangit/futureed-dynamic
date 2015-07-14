@@ -1,4 +1,24 @@
 <div id="sticky-side-bar" class="sidebar sidebar-toggle" ng-class="{'slide-out':class.bool_change_class}">
+	{!! Form::open(
+		array(
+			  'id' => 'redirect_tip'
+			, 'route' => 'student.tips.post.index'
+			, 'method' => 'futureed.METHOD_POST'
+		)
+	) !!}
+		{!! Form::hidden('id', null) !!}
+	{!! Form::close() !!}
+
+	{!! Form::open(
+		array(
+			  'id' => 'redirect_help'
+			, 'route' => 'student.help.post.index'
+			, 'method' => 'futureed.METHOD_POST'
+		)
+	) !!}
+		{!! Form::hidden('id', null) !!}
+	{!! Form::close() !!}
+
 	<div class="side-header">
 		<img class="tips-img-header" src="/images/class-student/sidebar_header_tips.png" alt="">
 	</div>
@@ -7,7 +27,7 @@
 		<div ng-show="!class.add_tips && !class.tips.success">
 			<div class="sidebar-div" ng-repeat="tip_record in class.tip.records">
 				<div class="div-side-content">
-					<p class="side-title">{! tip_record.title !}</p>
+					<a href="" ng-click="class.redirectTip(tip_record.id)">{! tip_record.title !}</a>
 					<p class="user-detail-star">
 						<span ng-repeat="i in tip_record.stars track by $index">
 							<img ng-src="{! $index+1 <= tip_record.rating && '/images/class-student/icon-star_yellow.png' || '/images/class-student/icon-star_white.png' !}" />
@@ -129,7 +149,7 @@
 			<div class="col-xs-12 submit-btn-help">
 				{!! Form::open(
 					array(
-						'route' => 'student.help.own.index'
+						'route' => 'student.help.post.index'
 						, 'method' => 'futureed.METHOD_POST'
 					)
 				) !!}
@@ -148,7 +168,9 @@
 		<div ng-show="!class.add_help && !class.help.success">
 			<div class="sidebar-div" ng-repeat="help_record in class.help.records">
 				<div class="div-side-content">
-					<p class="side-title">{! help_record.title !}</p>
+					<p class="side-title">
+						<a href="" ng-click="class.redirectHelp(help_record.id)">{! help_record.title !}</a>
+					</p>
 					<p class="user-detail-star">
 						<span ng-repeat="i in help_record.stars track by $index">
 							<img ng-src="{! $index+1 <= help_record.rating && '/images/class-student/icon-star_yellow.png' || '/images/class-student/icon-star_white.png' !}" />

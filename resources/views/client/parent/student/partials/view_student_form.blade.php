@@ -158,7 +158,7 @@
                                     <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                                 </div>
                               </a>
-                              <ul class="dropdown-menu date-dropdown-menu" role="menu" aria-labelledby="dLabel">
+                              <ul class="dropdown-menu date-dropdown-menu" role="menu" aria-labelledby="dLabel" ng-if="student.edit">
                                 <datetimepicker data-ng-model="student.detail.birth_date" data-before-render="beforeDateRender($dates)" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', startView:'day', minView:'day' }"/>
                               </ul>
                             </div>

@@ -99,6 +99,11 @@
 					, 'uses' => 'FutureLesson\Student\TipsController@index'
 				]);
 
+			Routes::post('/', [ 
+					'as' => 'student.tips.post.index'
+					, 'uses' => 'FutureLesson\Student\TipsController@index'
+				]);
+
 			Routes::group([
 				  'prefix' => '/partials'
 				, 'middleware' => 'student'], function()
@@ -125,7 +130,7 @@
 				]);
 
 			Routes::post('/', [ 
-					'as' => 'student.help.own.index'
+					'as' => 'student.help.post.index'
 					, 'uses' => 'FutureLesson\Student\HelpController@index'
 				]);
 

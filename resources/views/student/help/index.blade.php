@@ -10,7 +10,7 @@
 		<div template-directive template-url="{!! route('client.partials.base_url') !!}"></div>
 		
 		<div class="wrapr" ng-init="help.setActive()"> 
-			<div ng-init="help.setRequestType('{!! $request_type !!}')"></div>
+			<div ng-init="help.setRequestType('{!! $request_type !!}', '{!! $id !!}')"></div>
 		
 			<div template-directive template-url="{!! route('student.help.partials.list') !!}"></div>
 

@@ -154,6 +154,21 @@
 					</div>
 				</div>
 				<div class="form-group">
+					<label class="col-xs-3 control-label">Sequence Number</label>
+					<div class="col-xs-6">
+						{!! Form::text('seq_no', ''
+							, array(
+								'placeholder' => 'Sequence Number'
+								, 'ng-model' => 'content.record.seq_no'
+								, 'ng-disabled' => 'content.active_view'
+								, 'ng-class' => "{ 'required-field' : content.fields['seq_no'] }"
+								, 'class' => 'form-control'
+							)
+						) !!}
+					</div>
+					
+				</div>
+				<div class="form-group">
 	        		<label class="col-xs-3 control-label">Status <span class="required">*</span></label>
 	        		<div class="col-xs-6" ng-if="content.active_edit">
 	        			<div class="col-xs-6 checkbox">	                				

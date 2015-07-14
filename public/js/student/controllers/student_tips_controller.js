@@ -37,6 +37,12 @@ function TipsController($scope, apiService, StudentTipsService, TableService, Se
 		$("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 
+	self.setTipView = function(tip_id) {
+		if(tip_id) {
+			self.setActive(Constants.ACTIVE_VIEW, tip_id);
+		}
+	}
+
 	self.searchFnc = function(event) {
 		self.success = Constants.FALSE;
 

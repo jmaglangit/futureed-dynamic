@@ -29,7 +29,7 @@
       </div>
       <div class="col-md-12" ng-if="register.role_click">
         <div class="alert alert-error" ng-if="errors">
-          <p ng-repeat="error in errors"> 
+          <p ng-repeat="error in errors track by $index"> 
             {! error !}
           </p>
         </div>

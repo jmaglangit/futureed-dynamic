@@ -104,13 +104,17 @@ class AdminQuestionController extends ApiController {
 			$from = config('futureed.question_image_path');
 			$to = config('futureed.question_image_path_final').'/'.$return['id'];
 
+			//check if directory don't exist, it will create new directory
+			if (!$this->file->exists(config('futureed.question_image_path_final'))){
+
+				$this->file->makeDirectory(config('futureed.question_image_path_final'));
+			}
 
 			$image = explode('/',$data['image']);
 			$image_type = explode('.',$image[1]);
 
 			$update['original_image_name'] = $image[1];
 			$update['questions_image'] = config('futureed.question').'_'.$return['id'].'.'.$image_type[1];
-
 
 			//move image to question directory
 			$this->file->move($from.'/'.$image[0],$to);

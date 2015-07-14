@@ -38,8 +38,12 @@ function HelpController($scope, apiService, StudentHelpService, TableService, Se
 		$("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 
-	self.setRequestType = function(request_type) {
+	self.setRequestType = function(request_type, help_id) {
 		self.search.help_request_type = request_type;
+
+		if(help_id) {
+			self.setActive(Constants.ACTIVE_VIEW, help_id);
+		}
 	}
 
 	self.searchFnc = function(event) {

@@ -11,6 +11,16 @@ function StudentClassController($scope, $filter, StudentClassService) {
 	self.help = {};
 	self.student_id = $scope.user.id;
 
+	self.redirectHelp = function(help_id) {
+		$("#redirect_help input[name='id']").val(help_id);
+		$("#redirect_help").submit();
+	}
+
+	self.redirectTip = function(help_id) {
+		$("#redirect_tip input[name='id']").val(help_id);
+		$("#redirect_tip").submit();
+	}
+
 	self.click = function() {
 		self.add_tips = Constants.FALSE;
 		self.bool_change_class = !self.bool_change_class;

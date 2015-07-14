@@ -101,7 +101,6 @@
 							)
 						) !!}
 					</div>
-					
 				</div>
 				<div class="form-group">
 					<label class="col-xs-3 control-label" id="email">Learning Style <span class="required">*</span></label>
@@ -131,6 +130,19 @@
 								, 'ng-model' => 'content.record.description'
 								, 'ng-class' => "{ 'required-field' : content.fields['description'] }"
 								, 'rows' => '5'
+							)
+						) !!}
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-3 control-label">Sequence Number</label>
+					<div class="col-xs-6">
+						{!! Form::text('seq_no', ''
+							, array(
+								'placeholder' => 'Sequence Number'
+								, 'ng-model' => 'content.record.seq_no'
+								, 'ng-class' => "{ 'required-field' : content.fields['seq_no'] }"
+								, 'class' => 'form-control'
 							)
 						) !!}
 					</div>
