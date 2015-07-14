@@ -36,7 +36,7 @@ class QuestionController extends ApiController {
 			//get image_name
 			$image = $_FILES['image']['name'];
 
-			//upload image file
+			//uploads image file
 			$data['image']->move(config('futureed.question_image_path').'/'.$now,$image);
 
 			//return the original name of the image

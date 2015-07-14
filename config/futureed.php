@@ -116,10 +116,10 @@ return [
 	'tip_rating' => 'rating',
 
 	//path for question uploaded images temp
-	'question_image_path' =>  base_path().'/public/images/temp/question',
+	'question_image_path' =>  base_path().'/uploads/temp/question',
 
 	//path for question uploaded images final
-	'question_image_path_final' => base_path().'/public/images/question',
+	'question_image_path_final' => base_path().'/uploads/question',
 
 	//question
 	'question' => 'question',
