@@ -7,4 +7,5 @@
 .env.php
 .idea
 composer.lock
-/uploads
+/uploads/question
+/uploads/temp/question
