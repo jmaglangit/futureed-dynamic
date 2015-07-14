@@ -123,7 +123,6 @@
 			            <th>Description</th>
 			            <th>Subject</th>
 			            <th>Area</th>
-			            <th>Grade</th>
 			            <th ng-if="module.records.length">Action</th>
 			        </tr>
 		        </thead>
@@ -133,7 +132,6 @@
 			            <td>{! moduleInfo.description !}</td>
 			            <td>{! moduleInfo.subject.name !}</td>
 			            <td>{! moduleInfo.subjectarea.name !}</td>
-			            <td>{! moduleInfo.grade.name !}</td>
 			            <td ng-if="module.records.length">
 			            	<div class="row">
 			            		<div class="col-xs-4">

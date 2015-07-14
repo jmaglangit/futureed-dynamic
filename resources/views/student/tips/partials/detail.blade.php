@@ -45,8 +45,8 @@
 		<div class="col-xs-12">
 			<div class="col-xs-6"></div>
 			<div class="col-xs-6">
-				<p ng-if="!tips.record.rating">Was the answer helpful? Please Rate.</p>
-				<p ng-if="tips.record.rating">You rated this: </p>
+				<!-- <p ng-if="!tips.record.rating">Was the answer helpful? Please Rate.</p> -->
+				<p>Average rating: </p>
 			</div>
 		</div>
 
@@ -55,8 +55,9 @@
 			<div class="col-xs-6">
 				<div class="col-xs-6 rating-container">
 					<span ng-repeat="i in tips.record.stars track by $index">
-						<img ng-if="!tips.record.rating" ng-mouseover="tips.changeColor($index)" ng-src="{! ($index+1 <= tips.record.rating || tips.hovered[$index])  && '/images/class-student/icon-star_yellow.png' || '/images/class-student/icon-star_white.png' !}" />
-						<img ng-if="tips.record.rating" ng-src="{! $index+1 <= tips.record.rating && '/images/class-student/icon-star_yellow.png' || '/images/class-student/icon-star_white.png' !}" />
+						<!-- <img ng-if="!tips.record.rating" ng-mouseover="tips.changeColor($index)" ng-src="{! ($index+1 <= tips.record.rating || tips.hovered[$index])  && '/images/class-student/icon-star_yellow.png' || '/images/class-student/icon-star_white.png' !}" /> -->
+						<!-- <img ng-if="tips.record.rating" ng-src="{! $index+1 <= tips.record.rating && '/images/class-student/icon-star_yellow.png' || '/images/class-student/icon-star_white.png' !}" /> -->
+						<img ng-src="{! $index+1 <= tips.record.rating && '/images/class-student/icon-star_yellow.png' || '/images/class-student/icon-star_white.png' !}" />
 					</span>
 				</div>
 				<div class="col-xs-6">
@@ -64,7 +65,7 @@
 						, array(
 							'class' => 'btn btn-blue pull-right'
 							, 'ng-click' => "tips.selectRate()"
-							, 'ng-if' => '!tips.record.rating'
+							, 'ng-if' => 'false'
 							, 'ng-disabled' => '!tips.hovered.length'
 						)
 					) !!}
@@ -73,7 +74,6 @@
 						, array(
 							'class' => 'btn btn-gold pull-right'
 							, 'ng-click' => "tips.setActive()"
-							, 'ng-if' => 'tips.record.rating'
 						)
 					) !!}
 				</div>
@@ -83,7 +83,7 @@
 		<br />
 	</div>
 
-	<div class="sticky-bottom col-xs-12" ng-if="!tips.record.rating" ng-cloak>
+	<div class="sticky-bottom col-xs-12" ng-if="false" ng-cloak>
 		<div class="col-xs-6"></div>
 		<div class="col-xs-6">
 			<div class="col-xs-6"></div>

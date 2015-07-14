@@ -134,20 +134,21 @@
 							</div>
 							<div class="col-xs-4">
 								<div class="col-xs-12">
-									<p ng-if="!answer.rating">Was this answer helpful? Please rate.</p>
-									<p ng-if="answer.rating">You rated this: </p>
+									<p ng-if="false">Was this answer helpful? Please rate.</p>
+									<p>Average rating: </p>
 								</div>
 
 								<div class="col-xs-12">
 									<div class="rating-container">
 										<span ng-repeat="i in help.record.stars track by $index">
-											<img ng-if="!answer.rating" ng-mouseover="help.changeColor($index, answer.id)" ng-src="{! (help.hovered[answer.id][$index])  && '/images/class-student/icon-star_yellow.png' || '/images/class-student/icon-star_white.png' !}" />
-											<img ng-if="answer.rating" ng-src="{! $index + 1 <= answer.rating && '/images/class-student/icon-star_yellow.png' || '/images/class-student/icon-star_white.png' !}" />
+											<!-- <img ng-if="!answer.rating" ng-mouseover="help.changeColor($index, answer.id)" ng-src="{! (help.hovered[answer.id][$index])  && '/images/class-student/icon-star_yellow.png' || '/images/class-student/icon-star_white.png' !}" /> -->
+											<!-- <img ng-if="answer.rating" ng-src="{! $index + 1 <= answer.rating && '/images/class-student/icon-star_yellow.png' || '/images/class-student/icon-star_white.png' !}" /> -->
+											<img ng-src="{! $index+1 <= answer.rating && '/images/class-student/icon-star_yellow.png' || '/images/class-student/icon-star_white.png' !}" />
 										</span>
 									</div>
 								</div>
 
-								<div class="btn-container col-xs-12" ng-if="!answer.rating">
+								<div class="btn-container col-xs-12" ng-if="false">
 									{!! Form::button('Rate'
 										, array(
 											  'class' => 'btn btn-blue pull-right'

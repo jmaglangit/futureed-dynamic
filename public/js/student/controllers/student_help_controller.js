@@ -153,7 +153,7 @@ function HelpController($scope, apiService, StudentHelpService, TableService, Se
 					self.answers = response.data.records;
 
 					angular.forEach(self.answers, function(value, key) {
-						value.created_moment = moment(value.created_at).startOf("minute").fromNow();
+						value.created_moment = moment(value.updated_at).startOf("minute").fromNow();
 					});
 				}
 			}
