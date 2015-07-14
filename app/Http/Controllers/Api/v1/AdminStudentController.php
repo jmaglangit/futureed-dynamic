@@ -155,7 +155,7 @@ class AdminStudentController extends ApiController {
 			$user = $request->only('username','email');
 			$user_type = config('futureed.student');
 
-			$user['name'] = $data['first_name'].$data['last_name'];
+			$user['name'] = $data['first_name'].' '.$data['last_name'];
 
 
 			$student = $this->student->viewStudent($id);
