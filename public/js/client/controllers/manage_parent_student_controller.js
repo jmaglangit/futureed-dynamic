@@ -185,6 +185,7 @@ function ManageParentStudentController($scope, ManageParentStudentService, apiSe
 		});
 	}
 	self.addStudent = function() {
+		self.fields = [];
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
 		self.reg.client_id = $scope.user.id;
@@ -202,8 +203,7 @@ function ManageParentStudentController($scope, ManageParentStudentService, apiSe
 					self.errors = $scope.errorHandler(response.errors);
 
 					angular.forEach(response.errors, function(value, key) {
-						$("#add_student_form input[name='" + value.field +"']").addClass("required-field");
-						$("#add_student_form select[name='" + value.field +"']").addClass("required-field");
+						self.fields[value.field] = Constants.TRUE;
 		            });
 				} else if(response.data) {
 					self.success = Constants.TRUE;

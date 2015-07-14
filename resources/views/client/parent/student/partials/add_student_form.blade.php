@@ -94,6 +94,7 @@
 									'class' => 'form-control'
 									, 'ng-model' => 'student.reg.username'
 									, 'placeHolder' => 'Username'
+									, 'ng-class' => "{ 'required-field' : student.fields['username'] }"
 									, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
 									, 'ng-change' => 'student.checkUsernameAvailability()'
 								]
@@ -112,6 +113,7 @@
 								[
 									'class' => 'form-control'
 									, 'ng-model' => 'student.reg.email'
+									, 'ng-class' => "{ 'required-field' : student.fields['email'] }"
 									, 'placeHolder' => 'Email'
 									, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
 									, 'ng-change' => 'student.checkEmailAvailability()'
@@ -133,9 +135,10 @@
 						<div class="col-xs-5">
 							{!! Form::text('first_name', '',
 								[
-									'class' => 'form-control',
-									'ng-model' => 'student.reg.first_name',
-									'placeHolder' => 'First Name',
+									'class' => 'form-control'
+									, 'ng-model' => 'student.reg.first_name'
+									, 'ng-class' => "{ 'required-field' : student.fields['first_name'] }"
+									, 'placeHolder' => 'First Name'
 								]
 							) !!}
 						</div>
@@ -145,9 +148,10 @@
 						<div class="col-xs-5">
 							{!! Form::text('last_name', '',
 								[
-									'class' => 'form-control',
-									'ng-model' => 'student.reg.last_name',
-									'placeHolder' => 'Last Name'
+									'class' => 'form-control'
+									, 'ng-model' => 'student.reg.last_name'
+									, 'ng-class' => "{ 'required-field' : student.fields['last_name'] }"
+									, 'placeHolder' => 'Last Name'
 								]
 							) !!}
 						</div>
@@ -160,8 +164,9 @@
 								'Male'=> 'Male', 
 								'Female' => 'Female']
 								,null,
-								['class' => 'form-control', 
-								'ng-model' => 'student.reg.gender'
+								['class' => 'form-control'
+								, 'ng-model' => 'student.reg.gender'
+								, 'ng-class' => "{ 'required-field' : student.fields['gender'] }"
 								]) 
 							!!}
 						</div>
@@ -172,7 +177,7 @@
 	                        <div class="dropdown">
 	                          	<a class="dropdown-toggle" id="dropdown3" role="button" data-toggle="dropdown" data-target="#" href="#">
 	                                <div class="input-group">
-	                                <input readonly="readonly" type="text" name="birth_date" placeholder="DD/MM/YY" class="form-control" value="{! student.reg.birth | date:'dd/MM/yy' !}">
+	                                <input readonly="readonly" type="text" name="birth_date" placeholder="DD/MM/YY" class="form-control" ng-class="{ 'required-field' : student.fields['birth_date'] }" value="{! student.reg.birth | date:'dd/MM/yy' !}">
 	                                    <input type="hidden" name="hidden_date" value="{! student.reg.birth | date:'yyyyMMdd' !}">
 	                                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
 	                                </div>
@@ -188,9 +193,10 @@
 						<div class="col-xs-5">
 							{!! Form::text('city', '',
 								[
-									'class' => 'form-control',
-									'ng-model' => 'student.reg.city',
-									'placeHolder' => 'City'
+									'class' => 'form-control'
+									, 'ng-model' => 'student.reg.city'
+									, 'ng-class' => "{'required-field' : student.fields['city']}"
+									, 'placeHolder' => 'City'
 								]
 							) !!}
 						</div>
@@ -210,7 +216,7 @@
 					<div class="form-group" ng-init="getCountries()">
 						<label class="control-label col-xs-3">Country <span class="required">*</span></label>
 						<div class="col-xs-5">
-	                    	<select name="country_id" class="form-control" ng-model="student.reg.country_id">
+	                    	<select name="country_id" class="form-control" ng-model="student.reg.country_id" ng-class="{'required-field' : student.fields['country_id']}">
 	                        	<option value="">-- Select Country --</option>
 	                        	<option ng-repeat="country in countries" ng-value="country.id">{! country.name!}</option>
 	                    	</select>
