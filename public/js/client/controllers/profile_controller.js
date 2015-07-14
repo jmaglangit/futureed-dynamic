@@ -152,6 +152,8 @@ function ProfileController($scope, apiService, clientProfileApiService) {
 					} else if(response.data) {
 						self.prof = {};
 						$scope.$parent.user = response.data;
+						response.data.role = response.data.client_role;
+						
 						clientProfileApiService.updateUserSession(response.data).success(function(response) {
 							self.setClientProfileActive(Constants.INDEX);
 							self.success = Constants.TRUE;

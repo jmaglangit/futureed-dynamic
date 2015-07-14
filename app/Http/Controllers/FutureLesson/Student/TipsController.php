@@ -2,7 +2,7 @@
 
 use FutureEd\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
-
+use Illuminate\Support\Facades\Input;
 
 use Illuminate\Http\Request;
 
@@ -10,7 +10,11 @@ class TipsController extends Controller {
 
 	public function index()
 	{
-		return view('student.tips.index');
+		$input = Input::only('id');
+		
+		$input['id'] = ($input['id']) ? $input['id'] : '';
+
+		return view('student.tips.index', $input);
 	}
 
 	public function list_form()

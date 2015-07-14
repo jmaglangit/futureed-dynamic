@@ -279,6 +279,7 @@ function ProfileController($scope, apiService, profileService) {
 
 	  function backToEditEmail() {
 	  	self.errors = Constants.FALSE;
+	  	self.image_id = Constants.EMPTY_STR;
 	  	self.select_password = Constants.FALSE;
 	  }
 
@@ -318,7 +319,7 @@ function ProfileController($scope, apiService, profileService) {
 	    self.callback_uri = self.base_url + Constants.URL_CHANGE_EMAIL(angular.lowercase(Constants.STUDENT));
 
 	      $scope.ui_block();
-	      apiService.changeValidate(self.prof.id, self.change.new_email, $scope.image_id, self.callback_uri).success(function(response){
+	      apiService.changeValidate(self.prof.id, self.change.new_email, self.image_id, self.callback_uri).success(function(response){
 	        if(angular.equals(response.status, Constants.STATUS_OK)){
 	          if(response.errors){
 	            self.errors = $scope.errorHandler(response.errors);
