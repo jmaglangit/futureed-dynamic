@@ -84,7 +84,7 @@ class AdminQuestionAnswerController extends ApiController {
 			//get image_name
 			$image = $_FILES['image']['name'];
 
-			//uploads image file
+			//upload image file
 			$data['image']->move(config('futureed.question_answer_image_path'), $image);
 
 			//set value for answer_image
