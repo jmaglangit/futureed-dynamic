@@ -91,6 +91,7 @@ function ManageClassController($scope, manageClassService, apiService, TableServ
 		$scope.ui_block();
 		manageClassService.list(self.search, self.table).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				self.getGradeLevel($scope.user.country_id);
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
