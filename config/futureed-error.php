@@ -62,6 +62,7 @@ return [
 		2047 => 'Country name is required.',
 		2048 => 'Grade name is required.',
 		2049 => 'Account has already been registered.',
+		2050 => 'Student has an active subscription.',
 
 
 		2100 => 'Reset code is invalid.',
