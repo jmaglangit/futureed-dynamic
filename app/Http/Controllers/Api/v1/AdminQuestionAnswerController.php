@@ -5,16 +5,19 @@ use FutureEd\Http\Controllers\Controller;
 use FutureEd\Models\Repository\QuestionAnswer\QuestionAnswerRepositoryInterface;
 use FutureEd\Http\Requests\Api\AdminQuestionAnswerRequest;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Filesystem\Filesystem;
 
 use Illuminate\Http\Request;
 
 class AdminQuestionAnswerController extends ApiController {
 
 	protected $question_answer;
+	protected $file;
 
-	public function __construct(QuestionAnswerRepositoryInterface $question_answer){
+	public function __construct(QuestionAnswerRepositoryInterface $question_answer, Filesystem $file){
 
 		$this->question_answer = $question_answer;
+		$this->file = $file;
 
 	}
 
@@ -49,7 +52,7 @@ class AdminQuestionAnswerController extends ApiController {
 
 			foreach($record['records'] as $k=>$v){
 
-				$record['records'][$k]['questions_image'] = config('futureed.question_answer_image_path').'/'.$v['answer_image'];
+				$record['records'][$k]['answer_image'] = config('futureed.answer_image_path_final').'/'.$v['id'].'/'.$v['answer_image'];
 			}
 
 		}
@@ -79,21 +82,43 @@ class AdminQuestionAnswerController extends ApiController {
 
 		$data = $request->only('module_id','question_id','code','answer_text','correct_answer','point_equivalent','image');
 
-		//check if has images uploaded
-		if($data['image']){
-			//get image_name
-			$image = $_FILES['image']['name'];
-
-			//upload image file
-			$data['image']->move(config('futureed.question_answer_image_path'), $image);
-
-			//set value for answer_image
-			$data['answer_image'] = $image;
-
-		}
 
 		//add data to question_answer table
 		$return = $this->question_answer->addQuestionAnswer($data);
+
+		//check if has images uploaded
+		if($data['image']){
+
+			$update = NULL;
+
+			$from = config('futureed.answer_image_path');
+			$to = config('futureed.answer_image_path_final').'/'.$return['id'];
+
+			//check if directory don't exist, it will create new directory
+			if (!$this->file->exists(config('futureed.answer_image_path_final'))){
+
+				$this->file->makeDirectory(config('futureed.answer_image_path_final'));
+			}
+
+
+			$image = explode('/',$data['image']);
+			$image_type = explode('.',$image[1]);
+
+			$update['original_image_name'] = $image[1];
+			$update['answer_image'] = config('futureed.answer').'_'.$return['id'].'.'.$image_type[1];
+
+
+			//move image to question directory
+			$this->file->move($from.'/'.$image[0],$to);
+			$this->file->copy($to.'/'.$image[1],$to.'/'.$update['answer_image']);
+
+
+			//add questions_image and original_image_name
+			$this->question_answer->updateQuestionAnswer($return['id'],$update);
+
+		}
+
+
 
 		return $this->respondWithData(['id'=>$return['id']]);
 
@@ -107,7 +132,15 @@ class AdminQuestionAnswerController extends ApiController {
 	 */
 	public function show($id)
 	{
-		//
+		$question_answer = $this->question_answer->viewQuestionAnswer($id);
+
+		if(!$question_answer){
+
+			return $this->respondErrorMessage(2120);
+		}
+		$question_answer->answer_image = config('futureed.answer_image_path_final').'/'.$question_answer->id.'/'.$question_answer->answer_image;
+
+		return $this->respondWithData($question_answer);
 	}
 
 	/**
@@ -129,13 +162,30 @@ class AdminQuestionAnswerController extends ApiController {
 	 */
 	public function update($id, AdminQuestionAnswerRequest $request)
 	{
-		$data = $request->only('answer_text','correct_answer','point_equivalent');
+		$data = $request->only('answer_text','correct_answer','point_equivalent','image');
 
 		$question_answer = $this->question_answer->viewQuestionAnswer($id);
 
 		if(!$question_answer){
 
 			return $this->respondErrorMessage(2120);
+		}
+
+		if($data['image']){
+
+			$from = config('futureed.answer_image_path');
+			$to = config('futureed.answer_image_path_final').'/'.$id;
+
+			$image = explode('/',$data['image']);
+			$image_type = explode('.',$image[1]);
+
+			$data['original_image_name'] = $image[1];
+			$data['answer_image'] = config('futureed.answer').'_'.$id.'.'.$image_type[1];
+
+			$this->file->deleteDirectory($to);
+			$this->file->move($from.'/'.$image[0],$to);
+			$this->file->copy($to.'/'.$image[1],$to.'/'.$data['answer_image']);
+
 		}
 
 		//update question_answer
