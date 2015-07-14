@@ -357,6 +357,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 			if(angular.equals(response.status,Constants.STATUS_OK)){
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
+					self.add = {};
 				}else if(response.data){
 					self.add = {};
 					self.student_detail = response.data;
@@ -417,6 +418,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 			if(angular.equals(response.status,Constants.STATUS_OK)){
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
+					self.add = {};
 				}else if(response.data){
 					self.add = {};
 					self.student_detail = response.data;
