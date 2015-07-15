@@ -246,13 +246,11 @@
                     </ul>
 
                     <div class="tab-content row">
-                        <div class="tab-pane fade in active" id="age_group">
-                            <div ng-if="module.active_view" ng-controller="ManageAgeGroupController as age">
-                                <div ng-init="age.setActive()" template-directive template-url="{!! route('admin.manage.age_group.partials.list_view_form') !!}"></div>
+                        <div class="tab-pane fade in active" id="age_group"  ng-if="module.active_view" ng-controller="ManageAgeGroupController as age" ng-init="age.setModule(module.details)">
+                            <div ng-init="age.setActive()" template-directive template-url="{!! route('admin.manage.age_group.partials.list_view_form') !!}"></div>
 
-                                <div template-directive template-url="{!! route('admin.manage.age_group.partials.add_view_form') !!}"></div>
-                                <div template-directive template-url="{!! route('admin.manage.age_group.partials.edit_view_form') !!}"></div>
-                            </div>
+                            <div template-directive template-url="{!! route('admin.manage.age_group.partials.add_view_form') !!}"></div>
+                            <div template-directive template-url="{!! route('admin.manage.age_group.partials.edit_view_form') !!}"></div>
                         </div>
 
                         <div ng-if="module.details.current_view == futureed.CONTENTS" ng-controller="ManageModuleContentController as content" class="tab-pane fade" ng-init="content.setModule(module.details)" id="contents">

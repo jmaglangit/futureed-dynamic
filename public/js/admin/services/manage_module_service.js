@@ -63,14 +63,5 @@ function manageModuleService($http) {
 		});
 	}
 
-	moduleServiceApi.ageModuleList = function(module, table) {
-		return $http({
-			method 	: Constants.METHOD_GET
-			, url 	: moduleServiceUrl + 'module-group?module_name=' + module
-				+ '&limit=' + table.size
-				+ '&offset=' + table.offset
-		});
-	}
-
 	return moduleServiceApi
 }
