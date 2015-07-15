@@ -123,6 +123,7 @@ function ManageTipsController($scope, ManageTipsService, TableService, SearchSer
 					self.record.title = record.title;
 					self.record.content = record.content;
 					self.record.status = record.status;
+					self.record.name = record.student.first_name + ' ' + record.student.last_name;
 				}
 			}
 
