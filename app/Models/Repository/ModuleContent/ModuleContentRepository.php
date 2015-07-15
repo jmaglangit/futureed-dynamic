@@ -114,4 +114,64 @@ class ModuleContentRepository implements ModuleContentRepositoryInterface{
 
 	}
 
+	/**
+	 * Get Module Content sequence number.
+	 * @param $module_id
+	 */
+	public function getModuleContentSequenceNos($module_id){
+
+		return ModuleContent::select('id','seq_no')
+			->moduleId($module_id)
+			->orderBySeqNo()
+			->get();
+	}
+
+	/**
+	 * Get module content sequence no.
+	 * @param $content_id
+	 * @return mixed
+	 */
+	public function getModuleContentSequenceNo($content_id){
+
+		return ModuleContent::select('id','seq_no','module_id')
+			->contentId($content_id)
+			->get();
+	}
+
+	/**
+	 * Get last sequence number.
+	 * @param $module_id
+	 * @return mixed
+	 */
+	public function getLastSequenceNo($module_id){
+
+		return ModuleContent::moduleId($module_id)
+			->orderBySeqNoDesc()
+			->pluck('seq_no');
+	}
+
+	/**
+	 * Update sequence number.
+	 * @param $sequence
+	 */
+	public function updateSequence($sequence){
+		try {
+			$data = $sequence;
+
+			foreach ($data as $seq => $list) {
+
+				ModuleContent::find($list->id)
+					->update([
+						'seq_no' => $list->seq_no
+					]);
+			}
+
+
+		} catch (Exception $e) {
+
+			return $e->getMessage();
+		}
+
+	}
+
 }
