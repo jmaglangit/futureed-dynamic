@@ -155,5 +155,69 @@ class QuestionRepository implements QuestionRepositoryInterface{
 	}
 
 
+	/**
+	 * Get questions id and sequence number order sequence.
+	 * @param $module_id
+	 */
+	public function getQuestionSequenceNos($module_id){
+
+		return Question::select('id','seq_no')
+			->moduleId($module_id)
+			->orderBySeqNo()
+			->get();
+	}
+
+	/**
+	 * Get sequence number.
+	 * @param $module_id
+	 * @param $id
+	 */
+	public function getQuestionSequenceNo($id){
+
+		return Question::select('id','seq_no','module_id')
+			->id($id)
+			->get();
+
+	}
+
+	/**
+	 * Get last sequence number.
+	 * @param $module_id
+	 */
+	public function getLastSequence($module_id){
+
+		return Question::moduleId($module_id)
+			->orderBySeqNoDesc()
+			->pluck('seq_no');
+	}
+
+	/**
+	 * Update sequence.
+	 * @param $module_id
+	 * @param $sequence
+	 */
+	public function updateSequence($sequence){
+
+		try{
+			$data = $sequence;
+
+			foreach($data as $seq => $list){
+
+				Question::find($list->id)
+					->update([
+						'seq_no' => $list->seq_no
+					]);
+			}
+
+
+		}catch(Exception $e){
+
+			return $e->getMessage();
+		}
+
+
+	}
+
+
 
 }

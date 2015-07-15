@@ -3,6 +3,7 @@
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
+use FutureEd\Services\QuestionServices;
 use Illuminate\Http\Request;
 use FutureEd\Models\Repository\Question\QuestionRepositoryInterface;
 use Illuminate\Support\Facades\Input;
@@ -13,11 +14,18 @@ class AdminQuestionController extends ApiController {
 
 	protected $question;
 	protected $file;
+	protected $question_service;
 
-	public function __construct(QuestionRepositoryInterface $question, Filesystem $file){
+	public function __construct(
+		QuestionRepositoryInterface $question,
+		Filesystem $file,
+		QuestionServices $questionServices
+		){
 
 		$this->question = $question;
 		$this->file = $file;
+		$this->question_service = $questionServices;
+
 	}
 
 
@@ -93,6 +101,22 @@ class AdminQuestionController extends ApiController {
 	{
 
 		$data =  $request->only('image','answer','seq_no','code','module_id','questions_text','status','question_type','points_earned','difficulty');
+
+
+		$last_sequence = $this->question->getLastSequence($data['module_id']);
+		//get sequence
+		if(!$data['seq_no'] || $data['seq_no'] > $last_sequence ) {
+
+			//get last sequence and add.
+			$data['seq_no'] = $last_sequence + 1;
+		}else {
+
+			//move sequence
+			$current_sequence = $this->question_service->updateSequence($data['module_id'],$data['seq_no']);
+
+			//update sequence
+			$this->question->updateSequence($current_sequence);
+		}
 
 		$return = $this->question->addQuestion($data);
 
@@ -194,6 +218,33 @@ class AdminQuestionController extends ApiController {
 			$this->file->copy($to.'/'.$image[1],$to.'/'.$data['questions_image']);
 
 		}
+
+		//update sequence
+		//get current sequence and compare
+		$current_sequence = $this->question->getQuestionSequenceNo($id);
+
+		$last_current_seq_no = $this->question->getLastSequence($current_sequence[0]->module_id);
+		$data['seq_no'] = ($data['seq_no'] > $last_current_seq_no)? $last_current_seq_no : $data['seq_no'];
+
+		if($data['seq_no'] <> $current_sequence[0]->seq_no){
+
+			//pull sequence number.
+			$pulled = $this->question_service->pullSequenceNo($current_sequence[0]->module_id, $current_sequence[0]->seq_no,$id);
+
+			//update sequence
+			$this->question->updateSequence($pulled);
+
+			//insert sequence number.
+			$current_sequence = $this->question_service->updateSequence($current_sequence[0]->module_id,$data['seq_no']);
+
+
+			//update sequence
+			$this->question->updateSequence($current_sequence);
+
+		}
+
+		//if not equal remove number and fill in.
+		//update sequence with new sequence
 
 		//update data questions table
 		$this->question->updateQuestion($id,$data);
