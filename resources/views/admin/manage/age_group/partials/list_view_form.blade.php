@@ -116,7 +116,7 @@
 				            	</div>
 				            </td>
 				        </tr>
-				        <tr class="odd" ng-if="!age.records.length && !age.table.loading">
+				        <tr class="odd" ng-if="!age.age_records.length && !age.table.loading">
 				        	<td valign="top" colspan="7">
 				        		No records found
 				        	</td>
@@ -129,7 +129,7 @@
 			        </tbody>
 				</table>
 			</div>
-			<div class="pull-right" ng-if="age.records.length">
+			<div class="pull-right" ng-if="age.age_records.length">
 				<pagination 
 					total-items="age.table.total_items" 
 					ng-model="age.table.page"

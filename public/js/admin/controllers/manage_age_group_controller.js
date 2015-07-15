@@ -11,6 +11,11 @@ function ManageAgeGroupController($scope, $timeout, ManageAgeGroupService, apiSe
 	TableService(self);
 	self.tableDefaults();
 
+	self.setModule = function(data) {
+        self.module = data;
+        self.module.id = data.id;
+    }
+
 	self.setActive = function(active, id, flag) {
 		self.errors = Constants.FALSE;
 		self.create = {};
@@ -39,8 +44,28 @@ function ManageAgeGroupController($scope, $timeout, ManageAgeGroupService, apiSe
 
 			default:
 				self.active_list = Constants.TRUE;
+				self.ageModuleList();
 				break;
 		}
+	}
+
+	self.ageModuleList = function() {
+		self.errors = Constants.FALSE;
+		self.records = {};
+		$scope.ui_block();
+		ManageAgeGroupService.ageModuleList(self.module.name, self.table).success(function(response){
+			if(angular.equals(response.status, Constants.STATUS_OK)){
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				}else if(response.data){
+					self.age_records = response.data.records;
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
 	}
 
 	self.getAge = function() {
