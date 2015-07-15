@@ -178,7 +178,7 @@ function ManageModuleContentController($scope, ManageModuleContentService, Table
 					self.record.description = record.description;
 					self.record.content_url = record.content_url;
 					self.record.learning_style_id = record.learning_style.id;
-					self.record.media_type_id = record.media_type.id;
+					self.record.media_type_id = (record.media_type) ? record.media_type.id : Constants.EMPTY_STR;
 					self.record.status = record.status;
 				}
 			}
