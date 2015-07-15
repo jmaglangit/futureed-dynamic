@@ -231,7 +231,7 @@ class ParentStudentController extends ApiController {
         if(empty($check_classroom)){
             $classroom_result = $this->classroom->addClassroom($classroom);
         }else{
-            $classroom_result = $this->classroom->updateClassroom($check_classroom['id'],$classroom);
+            $classroom_result = $this->classroom->updateClassroom($check_classroom[0]['id'],$classroom);
         }
 
         //2. Insert Class Student.
