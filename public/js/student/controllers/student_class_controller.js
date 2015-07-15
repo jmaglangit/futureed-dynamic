@@ -83,7 +83,7 @@ function StudentClassController($scope, $filter, StudentClassService) {
 		self.help.errors = Constants.FALSE;
 		self.help.success = Constants.FALSE;
 		self.help.student_id = self.student_id;
-		self.help.class_id = Constants.FALSE;
+		self.help.class_id = $scope.user.class_id.class_id;
 
 		$scope.div_block("help_request_form");
 		StudentClassService.submitHelp(self.help).success(function(response){
@@ -102,10 +102,10 @@ function StudentClassController($scope, $filter, StudentClassService) {
 			$scope.div_unblock("help_request_form");
 		})
 	}
-
+	// API changes object class to class_id
 	self.listTips = function() {
 		self.errors = Constants.FALSE;
-		self.class_id = ($scope.user.class) ? $scope.user.class.class_id : Constants.EMPTY_STR;
+		self.class_id = ($scope.user.class_id) ? $scope.user.class_id.class_id : Constants.EMPTY_STR;
 		
 		self.table = {};
 		self.table.size = 3;
@@ -149,7 +149,7 @@ function StudentClassController($scope, $filter, StudentClassService) {
 		self.table.offset = Constants.FALSE;
 
 		$scope.div_block("help_request_form");
-		StudentClassService.listHelpRequests(self.search, self.table).success(function(response) {
+		StudentClassService.listHelpRequests($scope.user.class_id.class_id, self.search, self.table).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					$scope.errorHandler(response.errors);

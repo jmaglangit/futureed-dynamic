@@ -29,10 +29,11 @@ function StudentClassService($http){
 		});
 	}
 
-	service.listHelpRequests = function(search, table) {
+	service.listHelpRequests = function(id, search, table) {
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url 	: serviceUrl + 'help-request?order_by_date=' + search.order_by_date
+			, url 	: serviceUrl + 'help-request?class_id=' + id
+				+ "&order_by_date=" + search.order_by_date
 				+ "&request_status=" + search.request_status
 				+ "&limit=" + table.size
 				+ "&offset=" + table.offset
