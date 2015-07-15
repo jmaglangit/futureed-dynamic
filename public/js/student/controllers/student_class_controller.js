@@ -70,6 +70,7 @@ function StudentClassController($scope, $filter, StudentClassService) {
 	}
 
 	self.addHelp = function() {
+		self.help = {};
 		self.add_help = Constants.TRUE;
 		self.help.success = Constants.FALSE;
 		self.help.errors = Constants.FALSE;
