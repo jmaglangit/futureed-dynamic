@@ -157,4 +157,18 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 		}
 	}
 
+	/**
+	 * Check if student is Enrolled in a class.
+	 * @param $student_id,$class_id
+	 */
+	public function isEnrolled($student_id,$class_id)
+	{
+
+		$class_student = new  ClassStudent();
+		$class_student = $class_student->studentId($student_id)->classroom($class_id);
+
+		return $class_student->first();
+
+	}
+
 }
