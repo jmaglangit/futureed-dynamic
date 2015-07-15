@@ -24,22 +24,22 @@
 				<div class="form-group">
 					<label class="col-xs-2 control-label" id="username">Module <span class="required">*</span></label>
 					<div class="col-xs-4">
-						{!! Form::text('module_id', '',
+						{!! Form::text('module', '',
 							[
 								'placeholder' => 'Module',
 								'ng-disabled' => 'true',
-								'ng-model' => 'content.record.module_id',
+								'ng-model' => 'content.record.module',
 								'class' => 'form-control'
 							]
 						) !!}
 					</div>
 					<label class="col-xs-2 control-label">Subject <span class="required">*</span></label>
 					<div class="col-xs-4">
-						{!! Form::text('subject_id', '',
+						{!! Form::text('subject', '',
 							[
 								'placeholder' => 'Subject',
 								'ng-disabled' => 'true',
-								'ng-model' => 'content.record.subject_id',
+								'ng-model' => 'content.record.subject',
 								'class' => 'form-control'
 							]
 						) !!}
@@ -48,11 +48,11 @@
 				<div class="form-group">
 					<label class="col-xs-2 control-label">Area <span class="required">*</span></label>
 					<div class="col-xs-4">
-						{!! Form::text('subject_area_id', '',
+						{!! Form::text('subject_area', '',
 							[
 								'placeholder' => 'Area',
 								'ng-disabled' => 'true',
-								'ng-model' => 'content.record.subject_area_id',
+								'ng-model' => 'content.record.subject_area',
 								'class' => 'form-control'
 							]
 						) !!}

@@ -17,11 +17,11 @@ function ManageModuleContentController($scope, ManageModuleContentService, Table
 		self.module.id = data.id;	
 		self.module.name = data.name;	
 		self.module.subject = {};
-		self.module.subject.id = data.subject.id;	
-		self.module.subject.name = data.subject.name;	
+		self.module.subject.id = (data.subject) ? data.subject.id : Constants.EMPTY_STR;	
+		self.module.subject.name = (data.subject) ? data.subject.name : Constants.EMPTY_STR;	
 		self.module.subject_area = {};
-		self.module.subject_area.id = data.subjectarea.id;
-		self.module.subject_area.name = data.subjectarea.name;
+		self.module.subject_area.id = (data.subjectarea) ? data.subjectarea.id : Constants.EMPTY_STR;
+		self.module.subject_area.name = (data.subjectarea) ? data.subjectarea.name : Constants.EMPTY_STR;
 	}
 
 	self.setActive = function(active, id) {
@@ -178,7 +178,7 @@ function ManageModuleContentController($scope, ManageModuleContentService, Table
 					self.record.description = record.description;
 					self.record.content_url = record.content_url;
 					self.record.learning_style_id = record.learning_style.id;
-					self.record.media_type_id = record.media_type.id;
+					self.record.media_type_id = (record.media_type) ? record.media_type.id : Constants.EMPTY_STR;
 					self.record.status = record.status;
 				}
 			}
