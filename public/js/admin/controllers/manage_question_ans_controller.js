@@ -1,9 +1,9 @@
 angular.module('futureed.controllers')
     .controller('ManageQuestionAnsController', ManageQuestionAnsController);
 
-ManageQuestionAnsController.$inject = ['$scope', '$timeout', 'ManageQuestionAnsService', 'apiService', 'TableService', 'SearchService'];
+ManageQuestionAnsController.$inject = ['$scope', '$timeout', 'ManageQuestionAnsService', 'apiService', 'TableService', 'SearchService', 'Upload'];
 
-function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService, apiService, TableService, SearchService) {
+function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService, apiService, TableService, SearchService, Upload) {
     var self = this;
 
     self.details = {};
@@ -21,9 +21,37 @@ function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService,
         self.module.id = data.id;
     }
 
+    self.upload = function(file) {
+    	self.uploaded = Constants.FALSE;
+
+		if(file.length) {
+			$scope.ui_block();
+			Upload.upload({
+                url: '/api/v1/question/upload-image'
+                , file: file[0]
+            }).success(function(response) {
+                if(angular.equals(response.status, Constants.STATUS_OK)) {
+	                if(response.errors) {
+	                    self.errors = $scope.errorHandler(response.errors);
+	                }else if(response.data){
+                		self.create.image = response.data.image_name;
+                		self.details.image = response.data.image_name;
+                		self.uploaded = Constants.TRUE;
+	                }
+	            }
+
+            	$scope.ui_unblock();
+            }).error(function(response) {
+                self.errors = $scope.internalError();
+                $scope.ui_unblock();
+            });
+        }
+	}
+
     self.setActive = function(active, id, flag) {
         self.errors = Constants.FALSE;
         self.create = {};
+        self.uploaded = Constants.FALSE;
         self.area_field = Constants.FALSE;
 
         self.active_list = Constants.FALSE;
@@ -85,6 +113,7 @@ function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService,
                     self.errors = $scope.errorHandler(response.errors);
                 }else if(response.data){
                     self.qa_records = response.data.records;
+                    self.updatePageCount(response.data);
                 }
             }
             $scope.ui_unblock();
@@ -125,6 +154,7 @@ function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService,
 
     self.getQuestionDetail = function(id) {
     	self.errors = Constants.FALSE;
+    	self.details = {};
 
 		$scope.ui_block();
 		ManageQuestionAnsService.getQuestionDetail(id).success(function(response){
@@ -140,6 +170,17 @@ function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService,
 			self.errors = internalError();
 			$scope.ui_unblock();
 		});
+    }
+
+    self.viewImage = function(base) {
+		self.details.image_path = base + "?path=" + self.details.questions_image;
+		self.view_image = Constants.TRUE;
+
+		$("#view_image_modal").modal({
+	        backdrop: 'static',
+	        keyboard: Constants.FALSE,
+	        show    : Constants.TRUE
+	    });
     }
 
     self.saveEditQuestion = function(){

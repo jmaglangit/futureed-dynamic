@@ -1090,3 +1090,11 @@ content {
 .disabled-textarea {
 	resize: none;
 }
+
+.upload-label {
+	position: absolute;
+	right: 0px;
+	left: 0px;
+	margin: 5px 15px;
+	padding: 5px;
+}

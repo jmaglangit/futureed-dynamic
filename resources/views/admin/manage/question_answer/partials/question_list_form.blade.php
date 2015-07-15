@@ -151,14 +151,14 @@
             <div class="pull-right" ng-if="qa.qa_records.length">
                 <pagination 
                     total-items="qa.table.total_items" 
-                    ng-model="qa.table.pqa"
+                    ng-model="qa.table.page"
                     max-size="3"
                     items-per-pqa="qa.table.size" 
                     previous-text = "&lt;"
                     next-text="&gt;"
                     class="pagination" 
                     boundary-links="true"
-                    ng-change="qa.paginateByPqa()">
+                    ng-change="qa.paginateByPage()">
                 </pagination>
             </div>
         </div>

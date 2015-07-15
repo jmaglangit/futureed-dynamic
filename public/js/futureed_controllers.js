@@ -1,4 +1,4 @@
-angular.module('futureed.controllers', [])
+angular.module('futureed.controllers', ['ngFileUpload'])
 	.controller('futureedController', FutureedController)
 	.directive('templateDirective', TemplateDirective)
 	.constant("futureed", Constants);
