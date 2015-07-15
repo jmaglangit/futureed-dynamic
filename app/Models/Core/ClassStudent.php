@@ -22,7 +22,7 @@ class ClassStudent extends Model {
 	protected $attributes = [
 		'created_by' => 1,
 		'updated_by' => 1,
-		'subscription_status' => 'Inactive'
+		'subscription_status' => 'Active'
 
 	];
 
