@@ -61,7 +61,7 @@
                     {!! Form::text('code',''
                         , array(
                             'placeHolder' => 'Code'
-                            , 'ng-model' => 'qa.details.code'
+                            , 'ng-model' => 'qa.qa_details.code'
                             , 'class' => 'form-control'
                             , 'ng-disabled' => 'true'
                         )
@@ -80,7 +80,7 @@
                         , ''
                         , array(
                             'class' => 'form-control'
-                            , 'ng-model' => 'qa.details.question_type'
+                            , 'ng-model' => 'qa.qa_details.question_type'
                             , 'ng-disabled' => '!qa.edit'
                             , 'ng-class' => "{ 'required-field' : qa.fields['question_type'] }"
                         )
@@ -93,19 +93,19 @@
                     {!! Form::text('question',''
                         , array(
                             'placeHolder' => 'Question'
-                            , 'ng-model' => 'qa.details.questions_text'
+                            , 'ng-model' => 'qa.qa_details.questions_text'
                             , 'class' => 'form-control'
                             , 'ng-disabled' => '!qa.edit'
                             , 'ng-class' => "{ 'required-field' : qa.fields['questions_text'] }"
                         )
                     ) !!}
                 </div>
-                <label ng-if="qa.details.question_type != 'MC' && qa.details.question_type" class="control-label col-xs-2">Answer <span class="required">*</span></label>
-                <div class="col-xs-4" ng-if="qa.details.question_type != 'MC' && qa.details.question_type">
+                <label ng-if="qa.qa_details.question_type != 'MC' && qa.qa_details.question_type" class="control-label col-xs-2">Answer <span class="required">*</span></label>
+                <div class="col-xs-4" ng-if="qa.qa_details.question_type != 'MC' && qa.qa_details.question_type">
                     {!! Form::text('question',''
                         , array(
                             'placeHolder' => 'Answer'
-                            , 'ng-model' => 'qa.details.answer'
+                            , 'ng-model' => 'qa.qa_details.answer'
                             , 'class' => 'form-control'
                             , 'ng-disabled' => '!qa.edit'
                             , 'ng-class' => "{ 'required-field' : qa.fields['answer'] }"
@@ -119,7 +119,7 @@
                     {!! Form::text('points_earned',''
                         , array(
                             'placeHolder' => 'Points Earned'
-                            , 'ng-model' => 'qa.details.points_earned'
+                            , 'ng-model' => 'qa.qa_details.points_earned'
                             , 'class' => 'form-control'
                             , 'ng-disabled' => '!qa.edit'
                             , 'ng-class' => "{ 'required-field' : qa.fields['points_earned'] }"
@@ -138,7 +138,7 @@
                 </div>
                 <div ng-if="qa.active_view">
                     <div class="col-xs-2"></div>
-                    <div class="col-xs-4">
+                    <div class="col-xs-4" ng-if="qa.qa_details.image">
                         <a href="javascript:;">View Question Image</a>
                     </div>
                 </div>
@@ -149,7 +149,7 @@
                     {!! Form::text('difficulty',''
                         , array(
                             'placeHolder' => 'Difficulty'
-                            , 'ng-model' => 'qa.details.difficulty'
+                            , 'ng-model' => 'qa.qa_details.difficulty'
                             , 'class' => 'form-control'
                             , 'ng-disabled' => '!qa.edit'
                             , 'ng-class' => "{ 'required-field' : qa.fields['difficulty'] }"
@@ -165,7 +165,7 @@
                                 , true
                                 , array(
                                     'class' => 'field'
-                                    , 'ng-model' => 'qa.create.status'
+                                    , 'ng-model' => 'qa.qa_details.status'
                                 ) 
                             ) !!}
                         <span class="lbl padding-8">Enabled</span>
@@ -178,7 +178,7 @@
                                 , false
                                 , array(
                                     'class' => 'field'
-                                    , 'ng-model' => 'qa.create.status'
+                                    , 'ng-model' => 'qa.qa_details.status'
                                 )
                             ) !!}
                         <span class="lbl padding-8">Disabled</span>
@@ -186,26 +186,26 @@
                     </div>
                 </div>
                 <div class="col-xs-4" ng-if="qa.active_view">
-                    <label class="col-md-8" ng-if="qa.details.status == 'Enabled'">
+                    <label class="col-md-8" ng-if="qa.qa_details.status == 'Enabled'">
                         <b class="success-icon">
-                            <i class="margin-top-8 fa fa-check-circle-o"></i> {! module.details.status !}
+                            <i class="margin-top-8 fa fa-check-circle-o"></i> {! module.qa_details.status !}
                         </b>
                     </label>
 
-                    <label class="col-md-8" ng-if="qa.details.status == 'Disabled'">
+                    <label class="col-md-8" ng-if="qa.qa_details.status == 'Disabled'">
                         <b class="error-icon">
-                            <i class="margin-top-8 fa fa-ban"></i> {! module.details.status !}
+                            <i class="margin-top-8 fa fa-ban"></i> {! module.qa_details.status !}
                         </b>
                     </label>
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-xs-2">Sequance No</label>
+                <label class="control-label col-xs-2">Sequence No</label>
                 <div class="col-xs-4">
                     {!! Form::text('seq_no',''
                         , array(
                             'placeHolder' => 'Sequance No'
-                            , 'ng-model' => 'qa.details.seq_no'
+                            , 'ng-model' => 'qa.qa_details.seq_no'
                             , 'class' => 'form-control'
                             , 'ng-disabled' => '!qa.edit'
                             , 'ng-class' => "{ 'required-field' : qa.fields['seq_no'] }"
@@ -219,7 +219,7 @@
                 {!! Form::button('Edit'
                     , array(
                         'class' => 'btn btn-blue btn-medium'
-                        , 'ng-click' => "qa.setActive('edit', qa.details.id)"
+                        , 'ng-click' => "qa.setActive('edit', qa.qa_details.id)"
                         , 'ng-if' => 'qa.active_view'
                     )
                 ) !!}
@@ -233,7 +233,7 @@
                 {!! Form::button('Cancel'
                     , array(
                         'class' => 'btn btn-gold btn-medium'
-                        , 'ng-click' => "qa.setActive('view', qa.details.id)"
+                        , 'ng-click' => "qa.setActive('view', qa.qa_details.id)"
                         , 'ng-if' => 'qa.active_edit'
                     )
                 ) !!}
