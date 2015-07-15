@@ -56,6 +56,11 @@ class TeachingContentRequest extends ApiRequest {
 
 		return [
 			'integer' => 'The :attribute must be a number',
+			'learning_style_id.required' => 'The learning style field is required.',
+			'media_type_id.required' => 'The media type field is required.',
+			'module_id.required' => 'The module field is required.',
+			'subject_id.required' => 'The subject field is required.',
+			'subject_area_id.required' => 'The subject area field is required.',
 		];
 	}
 

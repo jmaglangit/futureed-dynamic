@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder {
 		$this->call('AvatarQuotesTableSeeder');
 		$this->call('AvatarPosesTableSeeder');
 		$this->call('AvatarWikisTableSeeder');
+		$this->call('MediaTypeTableSeeder');
     }
 
 }
