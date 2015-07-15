@@ -68,13 +68,13 @@
                                         </div>
                                     </div>
                                     <div class="col-xs-4" ng-if="module.active_view">
-                                        <label class="col-md-5" ng-if="module.details.status == 'Enabled'">
+                                        <label ng-if="module.details.status == 'Enabled'">
                                             <b class="success-icon">
                                                 <i class="margin-top-8 fa fa-check-circle-o"></i> {! module.details.status !}
                                             </b>
                                         </label>
 
-                                        <label class="col-md-5" ng-if="module.details.status == 'Disabled'">
+                                        <label ng-if="module.details.status == 'Disabled'">
                                             <b class="error-icon">
                                                 <i class="margin-top-8 fa fa-ban"></i> {! module.details.status !}
                                             </b>
