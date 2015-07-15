@@ -24,20 +24,36 @@ class QuestionController extends ApiController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function uploadQuestionImage(QuestionRequest $request)
+	public function uploadQuestionImage()
 	{
-		$data = $request->only('image');
-		$now = Carbon::now()->timestamp;
 
+		$input = Input::only('file');
+
+		$now = Carbon::now()->timestamp;
 		$return = NULL;
+		define('MB',1048576);
 
 		//check if has images uploaded
-		if($data['image']){
+		if($input['file'])
+		{
+			if($_FILES['file']['type'] != 'image/jpeg' && $_FILES['file']['type'] != 'image/png'){
+
+				return $this->respondErrorMessage(2142);
+
+			}
+
+
+			if($_FILES['file']['size'] > 2 * MB){
+
+				return $this->respondErrorMessage(2143);
+
+			}
+
 			//get image_name
-			$image = $_FILES['image']['name'];
+			$image = $_FILES['file']['name'];
 
 			//uploads image file
-			$data['image']->move(config('futureed.question_image_path').'/'.$now,$image);
+			$input['file']->move(config('futureed.question_image_path').'/'.$now,$image);
 
 			//return the original name of the image
 			$return['image_name'] = $now.'/'.$image;

@@ -8,16 +8,6 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 
 class LoginController extends Controller{
-
-	public function image_viewer() {
-		$file_path = Input::only('path');
-
-		$mime_type = mime_content_type($file_path['path']);
-  		header('Content-Type: '. $mime_type);
-
-		readfile($file_path['path']);
-	}
-
 	public function index(){
 		
 		if(Session::get('admin')){
