@@ -74,7 +74,7 @@ class InvoiceRepository implements InvoiceRepositoryInterface{
 
 	public function getInvoice($id)
 	{
-		return Invoice::with('subscription')->find($id);
+		return Invoice::with('subscription','order')->find($id);
 	}
 
 	public function updateInvoice($id, $data)
