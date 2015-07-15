@@ -867,13 +867,16 @@ function FutureedController($scope, $window, apiService, futureed) {
 	  	$scope.backgroundChange = Constants.TRUE;
 	  }
 
-	  $scope.checkClass = function() {
+	  $scope.checkClass = function(flag) {
 		$scope.ui_block();
 
 		apiService.checkClass($scope.user.id).success(function(response){
 			if(angular.equals(response.status, Constants.STATUS_OK)){
 					if(response.errors) {
 						if(response.errors[0]){
+							if(flag == 1){
+								$window.location.href = '/student';
+							}
 							$scope.no_class = Constants.TRUE;
 							$("#error_class_modal").modal({
 						        backdrop: 'static',
@@ -881,15 +884,20 @@ function FutureedController($scope, $window, apiService, futureed) {
 						        show    : Constants.TRUE
 						    });
 						}
-					}else if(response.data){
-						if(response.data == 0) {
-							$scope.no_class = Constants.TRUE;
-							$("#error_class_modal").modal({
-						        backdrop: 'static',
-						        keyboard: Constants.FALSE,
-						        show    : Constants.TRUE
-						    });
-						}else{
+					}else if(response.data == Constants.FALSE){
+						if(flag == 1){
+							$window.location.href = '/student';
+						}
+						$scope.no_class = Constants.TRUE;
+						$("#error_class_modal").modal({
+					        backdrop: 'static',
+					        keyboard: Constants.FALSE,
+					        show    : Constants.TRUE
+					    });
+					}else{
+						if(flag == 1){
+							$scope.ui_unblock();
+						} else{
 							$window.location.href = '/student/class';
 						}
 					}

@@ -2,6 +2,11 @@
 	<div class="content-title">
 		<div class="title-main-content">
 			<span><i class="fa fa-question-circle"></i> General Help Requests </span>
+			<div class="col-xs-2 pull-right">
+				<span>
+					<a href="{!! route('student.class.index') !!}" class="btn btn-maroon top-10">Back</a>
+				</span>
+			</div>
 		</div>
 	</div>
 
@@ -127,6 +132,7 @@
 				            <th>Category</th>
 				            <th>Area</th>
 				            <th>Time</th>
+				            <th>Status</th>
 				            <th ng-if="help.records.length">Actions</th>
 				        </tr>
 			        </thead>
@@ -136,6 +142,7 @@
 				            <td>{! tipInfo.subject.name !}</td>
 				            <td>{! tipInfo.subjectarea.name !}</td>
 				            <td>{! tipInfo.created_at | ddMMyy !}</td>
+				            <td>{! tipInfo.request_status !}</td>
 				            <td ng-if="help.records.length">
 				            	<div class="row">
 				            		<div class="col-xs-12">
