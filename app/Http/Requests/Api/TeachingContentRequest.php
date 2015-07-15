@@ -35,7 +35,8 @@ class TeachingContentRequest extends ApiRequest {
 					'learning_style_id' => 'required|exists:learning_styles,id,deleted_at,NULL',
 					'content_url' => 'required|url',
 					'media_type_id' => 'required|exists:media_types,id,deleted_at,NULL',
-					'status' => 'required|in:Enabled,Disabled'
+					'status' => 'required|in:Enabled,Disabled',
+					'seq_no' => 'integer'
 				];
 
 				break;
@@ -46,7 +47,8 @@ class TeachingContentRequest extends ApiRequest {
 					'learning_style_id' => 'required|exists:learning_styles,id,deleted_at,NULL',
 					'content_url' => 'required|url',
 					'media_type_id' => 'required|exists:media_types,id,deleted_at,NULL',
-					'status' => 'required|in:Enabled,Disabled'
+					'status' => 'required|in:Enabled,Disabled',
+					'seq_no' => 'integer'
 				];
 				break;
 		}
