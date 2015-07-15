@@ -1,4 +1,4 @@
-<div ng-if="qa.details.question_type == 'MC'" ng-init="qa.setAnsActive()">
+<div ng-if="qa.qa_details.question_type == 'MC'" ng-init="qa.setAnsActive()">
         <div ng-if="qa.active_anslist">
         {!! Form::open(array('id'=> 'add_answer_form', 'class' => 'form-horizontal', 'enctype' => 'multipart/form-data')) !!}
             <div class="col-xs-12 form-content">
@@ -24,7 +24,7 @@
                                 )
                             ) !!}
                         </div>
-                        <label class="control-label col-xs-2">Question Image</label>
+                        <label class="control-label col-xs-2">Answer Image</label>
                         <div class="col-xs-4">
                               <div style="position:relative;">
                                 <a class='btn btn-primary btn-semi-large' href='javascript:;'>

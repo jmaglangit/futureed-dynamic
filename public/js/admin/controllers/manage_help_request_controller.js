@@ -121,6 +121,7 @@ function ManageHelpRequestController($scope, ManageHelpRequestService, TableServ
 					self.record.content = record.content;
 					self.record.status = record.status;
 					self.record.request_status = record.request_status;
+					self.record.name = record.student.first_name + ' ' + record.student.last_name;
 				}
 			}
 

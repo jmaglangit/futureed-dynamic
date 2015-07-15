@@ -5,11 +5,11 @@
 @stop
 
 @section('content')
-	<div class="container dshbrd-con" ng-init="backgroundClass()" ng-controller="StudentClassController as class" ng-cloak>
+	<div class="container dshbrd-con" ng-init="backgroundClass(); checkClass(1)" ng-cloak>
 
 		<div template-directive template-url="{!! route('client.partials.base_url') !!}"></div>
 		
-		<div template-directive template-url="{!! route('student.class.partials.dashbrd-side-nav') !!}"></div>
+		<div ng-controller="StudentClassController as class"  template-directive template-url="{!! route('student.partials.sidebar_nav') !!}"></div>
 
 		<div class="wrapr"> 
 			

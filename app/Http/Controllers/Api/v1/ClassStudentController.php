@@ -175,6 +175,14 @@ class ClassStudentController extends ApiController {
 
 		$student_id = $this->student->getStudentId($check_email['user_id']);
 
+		//check if student is added in a class already including inactive class
+		$isEnrolled = $this->class_student->isEnrolled($student_id,$data['class_id']);
+
+		if($isEnrolled){
+
+			return $this->respondErrorMessage(2125);// Student is already in the class.
+		}
+
 		//Get current school if exist.
 		$classroom = $this->class_student->getStudentCurrentClassroom($student_id);
 

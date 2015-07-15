@@ -193,6 +193,19 @@
 						) !!}
 					</div>
 				</div>
+				<div class="form-group">
+					<label class="col-xs-3 control-label">Answered By:</label>
+					<div class="col-xs-6">
+						{!! Form::text('answer_by','',
+							[
+								'class' => 'form-control',
+								'ng-disabled' => 'true',
+								'ng-model' => 'answer.record.name',
+								'placeholder' => 'Description'
+							]
+						) !!}
+					</div>
+				</div>
 				<div class="btn-container col-xs-8 col-xs-offset-2" ng-if="answer.active_edit">
 						{!! Form::button('Save'
 							, array(

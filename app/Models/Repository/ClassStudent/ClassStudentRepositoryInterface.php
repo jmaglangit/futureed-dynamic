@@ -23,5 +23,7 @@ interface ClassStudentRepositoryInterface {
 
 	public function setClassStudentActive($id);
 
+	public function isEnrolled($id,$class_id);
+
 
 }

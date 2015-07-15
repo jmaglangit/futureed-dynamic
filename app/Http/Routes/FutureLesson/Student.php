@@ -192,6 +192,10 @@
 					'as' => 'student.partials.base_url'
 					, 'uses' => 'FutureLesson\Student\LoginController@base_url'
 				]);
-		});
+			Routes::get('/sidebar_nav', [
+					'as' => 'student.partials.sidebar_nav'
+					, 'uses' => 'FutureLesson\Student\LoginController@sidebar_nav'
+				]);
+			});
 	});
 ?>

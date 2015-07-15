@@ -58,7 +58,7 @@
 	-o-transition: 1s ease;
 	transition: 1s ease;
 	left: 0px;
-	position: absolute;
+	position: fixed;
 	top: 50%;
 	cursor: pointer;
 	z-index: 9999;
@@ -321,7 +321,7 @@ th, td {
 
 .answers-container {
 	max-height: 680px;
-	overflow: scroll;
+	overflow: auto;
 }
 
 .notice {
@@ -331,3 +331,8 @@ th, td {
 .unrated-star {
 	opacity: .5;
 }
+
+.top-10 {
+	position: relative;
+	bottom: 10px;
+} 

@@ -46,6 +46,12 @@ class HelpRequestAnswerController extends ApiController {
 		 * request_answer_status
 		 *
 		 */
+
+		if(Input::get('class_id')){
+
+			$criteria['class_id'] = Input::get('class_id');
+		}
+
 		if(Input::get('help_request')){
 
 			$criteria['help_request'] = Input::get('help_request');

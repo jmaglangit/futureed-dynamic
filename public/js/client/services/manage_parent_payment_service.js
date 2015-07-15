@@ -65,13 +65,11 @@ function ManageParentPaymentService($http){
 		})
 	}
 
-	managePaymentApi.saveOrder = function(data) {
+	managePaymentApi.addInvoice = function(data) {
 		return $http({
 			method 	: Constants.METHOD_POST
-			, url 	: paymentApiUrl + 'invoice?client_id=' + data.client_id
-				+ '&client_name=' + data.client_name
-				+ '&order_no=' + data.order_no
-				+ '&payment_status=' + data.payment_status
+			, data 	: data
+			, url 	: paymentApiUrl + 'invoice'
 		})
 	}
 
@@ -110,11 +108,11 @@ function ManageParentPaymentService($http){
 		})
 	}
 
-	managePaymentApi.updatePayment = function(data) {
+	managePaymentApi.paySubscription = function(data) {
 		return $http({
 			method : Constants.METHOD_PUT
 			, data : data
-			, url  : paymentApiUrl + 'invoice/' + data.id
+			, url  : paymentApiUrl + 'parent-student/pay-subscription/' + data.id
 		});
 	}
 
