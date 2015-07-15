@@ -159,7 +159,7 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 
 	/**
 	 * Check if student is Enrolled in a class.
-	 * @param $id
+	 * @param $student_id,$class_id
 	 */
 	public function isEnrolled($student_id,$class_id)
 	{
