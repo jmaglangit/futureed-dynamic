@@ -143,6 +143,15 @@ class HelpRequestAnswer extends Model {
         return $query->whereStudentId($student_id);
     }
 
+	public function scopeClassId($query,$class_id){
+
+		return $query->whereHas('helpRequest',function($query) use ($class_id){
+
+			$query->where('class_id','=',$class_id);
+		});
+
+	}
+
 
 
 
