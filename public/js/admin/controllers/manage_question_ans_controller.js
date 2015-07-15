@@ -21,8 +21,8 @@ function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService,
         self.module.id = data.id;
     }
 
-    self.upload = function(file) {
-    	self.uploaded = Constants.FALSE;
+    self.upload = function(file, object) {
+    	object.uploaded = Constants.FALSE;
 
 		if(file.length) {
 			$scope.ui_block();
@@ -34,9 +34,34 @@ function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService,
 	                if(response.errors) {
 	                    self.errors = $scope.errorHandler(response.errors);
 	                }else if(response.data){
-                		self.create.image = response.data.image_name;
-                		self.details.image = response.data.image_name;
-                		self.uploaded = Constants.TRUE;
+                		object.image = response.data.image_name;
+                		object.uploaded = Constants.TRUE;
+	                }
+	            }
+
+            	$scope.ui_unblock();
+            }).error(function(response) {
+                self.errors = $scope.internalError();
+                $scope.ui_unblock();
+            });
+        }
+	}
+
+	self.uploadAnswer = function(file, object) {
+    	object.uploaded = Constants.FALSE;
+
+		if(file.length) {
+			$scope.ui_block();
+			Upload.upload({
+                url: '/api/v1/question/answer/upload-image'
+                , file: file[0]
+            }).success(function(response) {
+                if(angular.equals(response.status, Constants.STATUS_OK)) {
+	                if(response.errors) {
+	                    self.errors = $scope.errorHandler(response.errors);
+	                }else if(response.data){
+                		object.image = response.data.image_name;
+                		object.uploaded = Constants.TRUE;
 	                }
 	            }
 
@@ -172,9 +197,24 @@ function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService,
 		});
     }
 
-    self.viewImage = function(base) {
-		self.details.image_path = base + "?path=" + self.details.questions_image;
-		self.view_image = Constants.TRUE;
+    self.viewImage = function(base, object) {
+    	self.view_image = {};
+		self.view_image.image_path = base + "?path=" + object.questions_image;
+		self.view_image.questions_text = object.questions_text;
+		self.view_image.show = Constants.TRUE;
+
+		$("#view_image_modal").modal({
+	        backdrop: 'static',
+	        keyboard: Constants.FALSE,
+	        show    : Constants.TRUE
+	    });
+    }
+
+    self.viewAnswerImage = function(base, object) {
+    	self.view_image = {};
+		self.view_image.image_path = base + "?path=" + object.answer_image;
+		self.view_image.questions_text = object.answer_text;
+		self.view_image.show = Constants.TRUE;
 
 		$("#view_image_modal").modal({
 	        backdrop: 'static',

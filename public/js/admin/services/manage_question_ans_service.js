@@ -59,7 +59,7 @@ function ManageQuestionAnsService($http) {
     qaServiceApi.answerList = function(id) {
         return $http({
             method  : Constants.METHOD_GET
-            , url   : qaServiceUrl + 'question/answer/admin?questionid=' + id
+            , url   : qaServiceUrl + 'question/answer/admin?question_id=' + id
         });
     }
 

@@ -149,8 +149,8 @@
                 </div>
                 <label class="control-label col-xs-2">Question Image</label>
                 <div class="col-xs-4">
-                    <div class="btn btn-blue" ngf-select ngf-change="qa.upload($files)"> Choose Image... </div>
-                    <span ng-if="qa.uploaded" class="label label-info upload-label">Image Uploaded...</span>
+                    <div class="btn btn-blue" ngf-select ngf-change="qa.upload($files, qa.create)"> Choose Image... </div>
+                    <span ng-if="qa.create.uploaded" class="label label-info upload-label">Image Uploaded...</span>
                 </div>
             </div>
             <div class="form-group">
