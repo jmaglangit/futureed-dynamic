@@ -17,4 +17,14 @@ interface ModuleContentRepositoryInterface {
 
 	public function getModuleContentCount($module_id);
 
+	public function getModuleContentSequenceNos($module_id);
+
+	public function getModuleContentSequenceNo($content_id);
+
+	public function getLastSequenceNo($module_id);
+
+	public function updateSequence($sequence);
+
+
+
 }
