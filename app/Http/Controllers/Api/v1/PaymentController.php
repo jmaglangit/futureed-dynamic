@@ -9,7 +9,6 @@ use FutureEd\Models\Repository\Order\OrderRepositoryInterface;
 use FutureEd\Services\MailServices;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\URL;
 use PayPal\Api\Amount;
@@ -23,7 +22,6 @@ use PayPal\Api\RedirectUrls;
 use PayPal\Api\Transaction;
 use PayPal\Auth\OAuthTokenCredential;
 use PayPal\Rest\ApiContext;
-use Symfony\Component\Routing\Generator\UrlGenerator;
 
 class PaymentController extends ApiController
 {
@@ -110,20 +108,12 @@ class PaymentController extends ApiController
             Session::put('paypal_payment_client_id', $data['client_id']);
             Session::put('paypal_payment_order_no', $data['order_no']);
         }
-        //dd($redirect_url);
-        if(isset($redirect_url)) {
-            // redirect to paypal
-            //return Redirect::away($redirect_url);
 
+        if(isset($redirect_url)) {
             return $this->respondWithData([
                 'status' => 'succcess',
                 'url' => $redirect_url]);
         }
-
-        /*
-        return Redirect::route('original.route')
-                       ->with('error', 'Unknown error occurred');
-        */
 
         return $this->respondWithData([
             'status' => 'error',
@@ -166,50 +156,61 @@ class PaymentController extends ApiController
         $execution->setPayerId(Input::get('PayerID'));
 
         //Execute the payment
-        $result = $payment->execute($execution, $this->_api_context);
+        try{
+            $result = $payment->execute($execution, $this->_api_context);
 
-        if ($result->getState() == 'approved') { // payment made
-            //Update invoice status to paid.
-            $data['payment_status'] = config('futureed.paid');
-            $this->invoice->updateInvoice($invoice_id,$data);
-            $this->order->updateOrder($order_id,$data);
+            if ($result->getState() == 'approved') { // payment made
+                //Update invoice status to paid.
+                $data['payment_status'] = config('futureed.paid');
+                $this->invoice->updateInvoice($invoice_id,$data);
+                $this->order->updateOrder($order_id,$data);
 
-            //send email
-            if(Session::has('paypal_payment_client_id')){
-                $client_id = Session::get('paypal_payment_client_id');
+                //send email
+                if(Session::has('paypal_payment_client_id')){
+                    $client_id = Session::get('paypal_payment_client_id');
 
-                Session::forget('paypal_payment_client_id');
-                Session::forget('paypal_payment_order_no');
+                    Session::forget('paypal_payment_client_id');
+                    Session::forget('paypal_payment_order_no');
 
-                $client = $this->client->getClientDetails($client_id);
-                $client = $this->client->getClient($client->user_id,config('futureed.principal'));
+                    $client = $this->client->getClientDetails($client_id);
+                    $client = $this->client->getClient($client->user_id,config('futureed.principal'));
 
-                $classrooms = $this->classroom->getClassroomByOrderNo($order_no);
+                    //check if the client is principal. Only those teachers under a principal will receive a classroom assignment email.
+                    if(!is_null($client)){
+                        $classrooms = $this->classroom->getClassroomByOrderNo($order_no);
 
-                if(count($classrooms) > 0 ){
-                    foreach($classrooms as $res){
-                        //classroom / teacher
-                        $data['name'] = $res['client']['first_name'].' '.$res['client']['last_name'];
-                        $data['class_name'] = $res['name'];
-                        $data['email'] = $res['client']['user']['email'];
-                        $data['username'] = $res['client']['user']['username'];
+                        if(count($classrooms) > 0 ){
+                            foreach($classrooms as $res){
+                                //classroom / teacher
+                                $data['name'] = $res['client']['first_name'].' '.$res['client']['last_name'];
+                                $data['class_name'] = $res['name'];
+                                $data['email'] = $res['client']['user']['email'];
+                                $data['username'] = $res['client']['user']['username'];
 
-                        //client
-                        $data['school_name'] = $client['school']['name'];
-                        $data['login_link'] = URL::to('/client/login');
-                        $this->email->sendTeacherAddClass($data);
+                                //client
+                                $data['school_name'] = $client['school']['name'];
+                                $data['login_link'] = URL::to('/client/login');
+                                $this->email->sendTeacherAddClass($data);
+                            }
+                        }
                     }
                 }
+
+                $success_callback_uri = Session::get('success_callback_uri');
+                $success_callback_uri = $success_callback_uri.'?paymentId='.$payment_id.'?token='.Input::get('token');
+                return Redirect::away($success_callback_uri);
             }
+            Session::set('paypal_token',Input::get('token'));
 
-            $success_callback_uri = Session::get('success_callback_uri');
-            $success_callback_uri = $success_callback_uri.'?paymentId='.$payment_id.'?token='.Input::get('token');
-            return Redirect::away($success_callback_uri);
+            $fail_callback_uri = Session::get('fail_callback_uri');
+            $fail_callback_uri = $fail_callback_uri.'?token='.Input::get('token');
+            return Redirect::away($fail_callback_uri);
+
+        }catch (\Exception $ex){
+
+            $fail_callback_uri = Session::get('fail_callback_uri');
+            $fail_callback_uri = $fail_callback_uri.'?token='.Input::get('token');
+            return Redirect::away($fail_callback_uri);
         }
-        Session::set('paypal_token',Input::get('token'));
-
-        $fail_callback_uri = Session::get('fail_callback_uri');
-        $fail_callback_uri = $fail_callback_uri.'?token='.Input::get('token');
-        return Redirect::away($fail_callback_uri);
     }
 }
