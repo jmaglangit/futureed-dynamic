@@ -15,7 +15,7 @@
         	<div class="form-group">
         		<label class="control-label col-xs-3">Age <span class="required">*</span></label>
         		<div class="col-xs-5" ng-init="age.getAge()">
-	        		<select  name="age_group_id" class="form-control" name="age_group_id" ng-model="age.create.age_group_id" ng-class="{'required-field' : age.fields['age_group_id']}">
+	        		<select  name="age_group_id" class="form-control" name="age_group_id" ng-model="age.details.age_group_id" ng-class="{'required-field' : age.fields['age_group_id']}">
 		          		<option value="">-- Select Age --</option>
 		          		<option ng-selected="age.details.age_group.id == ageinfo.id" ng-repeat="ageinfo in age.ages" ng-value="ageinfo.id">{! ageinfo.age!}</option>
 	        		</select>
