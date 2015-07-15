@@ -56,5 +56,20 @@ class Question extends Model {
 
 	}
 
+	public function scopeId($query, $id){
+
+		return $query->where('id',$id);
+	}
+
+	public function scopeOrderBySeqNo($query){
+
+		return $query->OrderBy('seq_no');
+	}
+
+	public function scopeOrderBySeqNoDesc($query){
+
+		return $query->OrderBy('seq_no','desc');
+	}
+
 
 }
