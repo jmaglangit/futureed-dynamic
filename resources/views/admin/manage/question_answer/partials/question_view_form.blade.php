@@ -126,20 +126,17 @@
                         )
                     ) !!}
                 </div>
+
                 <label ng-if="qa.active_edit" class="control-label col-xs-2">Question Image</label>
                 <div class="col-xs-4" ng-if="qa.active_edit">
-                      <div style="position:relative;">
-                        <a class='btn btn-primary btn-semi-large' href='javascript:;'>
-                            Choose File...
-                            <input ng-model="qa.create.image" id="q_image" type="file" class="img-input" name="file_source" size="40"  onchange='$("#upload-file-info").html($(this).val());'>
-                        </a>
-                        <center><span class='label label-info' id="upload-file-info"></span></center>
-                    </div>
+                    <div class="btn btn-blue" ngf-select ngf-change="qa.upload($files, qa.qa_details)"> Choose Image... </div>
+                    <span ng-if="qa.qa_details.uploaded" class="label label-info upload-label">Image Uploaded...</span>
                 </div>
-                <div ng-if="qa.active_view">
+
+                <div ng-if="qa.active_view && qa.qa_details.original_image_name && qa.qa_details.original_image_name != '0'">
                     <div class="col-xs-2"></div>
-                    <div class="col-xs-4" ng-if="qa.qa_details.image">
-                        <a href="javascript:;">View Question Image</a>
+                    <div class="col-xs-4 control-label">
+                        <a href="" ng-click="qa.viewImage('{!! route('admin.image.viewer') !!}', qa.qa_details)">View Question Image</a>
                     </div>
                 </div>
         	</div>
@@ -188,13 +185,13 @@
                 <div class="col-xs-4" ng-if="qa.active_view">
                     <label class="col-md-8" ng-if="qa.qa_details.status == 'Enabled'">
                         <b class="success-icon">
-                            <i class="margin-top-8 fa fa-check-circle-o"></i> {! module.qa_details.status !}
+                            <i class="margin-top-8 fa fa-check-circle-o"></i> {! qa.qa_details.status !}
                         </b>
                     </label>
 
                     <label class="col-md-8" ng-if="qa.qa_details.status == 'Disabled'">
                         <b class="error-icon">
-                            <i class="margin-top-8 fa fa-ban"></i> {! module.qa_details.status !}
+                            <i class="margin-top-8 fa fa-ban"></i> {! qa.qa_details.status !}
                         </b>
                     </label>
                 </div>
@@ -249,4 +246,29 @@
         </div>
 	</div>
     <div template-directive template-url="{!! route('admin.manage.question_answer.partials.answer_list_form') !!}"></div>
+
+    <div id="view_image_modal" ng-show="qa.view_image.show" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    {! qa.view_image.questions_text !}
+                </div>
+                <div class="modal-body">
+                    <div class="modal-image">
+                        <img ng-src="{! qa.view_image.image_path !}"/>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="btncon col-md-8 col-md-offset-4 pull-left">
+                        {!! Form::button('Close'
+                            , array(
+                                'class' => 'btn btn-gold btn-medium'
+                                , 'data-dismiss' => 'modal'
+                            )
+                        ) !!}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

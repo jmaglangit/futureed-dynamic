@@ -149,13 +149,8 @@
                 </div>
                 <label class="control-label col-xs-2">Question Image</label>
                 <div class="col-xs-4">
-                      <div style="position:relative;">
-                        <a class='btn btn-primary btn-semi-large' href='javascript:;'>
-                            Choose File...
-                            <input ng-model="qa.create.image" id="q_image" type="file" class="img-input" name="file_source" size="40"  onchange='$("#upload-file-info").html($(this).val());'>
-                        </a>
-                        <center><span class='label label-info' id="upload-file-info"></span></center>
-                    </div>
+                    <div class="btn btn-blue" ngf-select ngf-change="qa.upload($files, qa.create)"> Choose Image... </div>
+                    <span ng-if="qa.create.uploaded" class="label label-info upload-label">Image Uploaded...</span>
                 </div>
             </div>
             <div class="form-group">
