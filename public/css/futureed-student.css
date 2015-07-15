@@ -182,13 +182,13 @@
 .sidebar-input {
 	background-color: #524e4d !important;
 	border: none !important;
-	color: #8e8171;
+	color: #ffffff;
 }
 
 .sidebar-input:hover {
 	background-color: #524e4d !important;
 	border: none !important;
-	color: #8e8171;
+	color: #ffffff;
 }
 
 .side-btn {
@@ -326,4 +326,8 @@ th, td {
 
 .notice {
 	color: #A92147;
+}
+
+.unrated-star {
+	opacity: .5;
 }

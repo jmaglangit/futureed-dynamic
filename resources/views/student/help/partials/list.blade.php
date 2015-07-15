@@ -1,7 +1,7 @@
 <div ng-if="help.active_list">
 	<div class="content-title">
 		<div class="title-main-content">
-			<span><i class="fa fa-lightbulb-o"></i> General Help Requests </span>
+			<span><i class="fa fa-question-circle"></i> General Help Requests </span>
 		</div>
 	</div>
 

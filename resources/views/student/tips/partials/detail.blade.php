@@ -36,9 +36,11 @@
 			<hr />
 		</div>
 
-		<div class="col-xs-12">
-			<div class="col-xs-12">
-				<p class="text-container">{! tips.record.content !}</p>
+		<div class="col-xs-12 search-container">
+			<div class="form-search">
+				<div class="form-group">
+					{! tips.record.content !}
+				</div>
 			</div>
 		</div>
 

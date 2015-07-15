@@ -114,7 +114,7 @@ function ManageHelpRequestController($scope, ManageHelpRequestService, TableServ
 					self.record.id = record.id;
 					self.record.module = (record.module) ? record.module.name : Constants.EMPTY_STR;
 					self.record.subject = (record.subject) ? record.subject.name : Constants.EMPTY_STR;
-					self.record.area = (record.subjectarea) ? record.subjectarea.name : Constants.EMPTY_STR;
+					self.record.area = (record.subject_area) ? record.subject_area.name : Constants.EMPTY_STR;
 
 					self.record.link_type = record.link_type;
 					self.record.title = record.title;

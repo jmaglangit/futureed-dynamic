@@ -4,7 +4,6 @@ angular.module('futureed.controllers')
 StudentClassController.$inject = ['$scope', '$filter', 'StudentClassService'];
 
 function StudentClassController($scope, $filter, StudentClassService) {
-
 	var self = this;
 
 	self.tips = {};
@@ -22,26 +21,25 @@ function StudentClassController($scope, $filter, StudentClassService) {
 	}
 
 	self.click = function() {
-		self.add_tips = Constants.FALSE;
 		self.bool_change_class = !self.bool_change_class;
+
 		if(self.bool_change_class) {
+			self.add_tips = Constants.FALSE;
+			self.add_help = Constants.FALSE;
+
 			self.listTips();
 			self.listHelpRequests();
 		}
 	}
 
 	self.addTips = function() {
-		self.add_tip_class = !self.add_tip_class;
-		self.add_tips = Constants.TRUE;
-		self.tips.success = Constants.FALSE;
-		self.alert = Constants.FALSE;
 		self.tips = {};
+		self.add_tips = Constants.TRUE;
 	}
 
 	self.backTips = function() {
 		self.tips = {};
 		self.add_tips = Constants.FALSE;
-		self.add_tip_class = Constants.FALSE;
 
 		self.listTips();
 	}
@@ -50,6 +48,7 @@ function StudentClassController($scope, $filter, StudentClassService) {
 		self.tips.errors = Constants.FALSE;
 		self.tips.success = Constants.FALSE;
 		self.tips.student_id = self.student_id;
+
 		$scope.div_block("tips_form");
 		StudentClassService.submitTips(self.tips).success(function(response){
 		self.alert = Constants.TRUE;
@@ -58,13 +57,12 @@ function StudentClassController($scope, $filter, StudentClassService) {
 					self.tips.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					self.tips.success = Constants.TRUE;
-					self.tips.errors = Constants.FALSE;
 					self.add_tips = Constants.FALSE;
 				}
 			}
 			$scope.div_unblock("tips_form");
 		}).error(function(response){
-			$scope.internalError();
+			self.tips.errors = $scope.internalError();
 			$scope.div_unblock("tips_form");
 		})
 	}
@@ -72,9 +70,13 @@ function StudentClassController($scope, $filter, StudentClassService) {
 	self.addHelp = function() {
 		self.help = {};
 		self.add_help = Constants.TRUE;
-		self.help.success = Constants.FALSE;
-		self.help.errors = Constants.FALSE;
-		self.alert = Constants.FALSE;
+	}
+
+	self.backHelp = function() {
+		self.help = {};
+		self.add_help = Constants.FALSE;
+
+		self.listHelpRequests();
 	}
 
 	self.submitHelp = function() {
@@ -91,23 +93,14 @@ function StudentClassController($scope, $filter, StudentClassService) {
 					self.help.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					self.help.success = Constants.TRUE;
-					self.help.errors = Constants.FALSE;
 					self.add_help = Constants.FALSE;
 				}
 			}
 			$scope.div_unblock("help_request_form");
 		}).error(function(response){
-			$scope.internalError();
+			self.help.errors = $scope.internalError();
 			$scope.div_unblock("help_request_form");
 		})
-	}
-
-	self.backHelp = function() {
-		self.help = {};
-		self.add_help = Constants.FALSE;
-		self.add_help_class = Constants.FALSE;
-
-		self.listHelpRequests();
 	}
 
 	self.listTips = function() {
@@ -124,15 +117,15 @@ function StudentClassController($scope, $filter, StudentClassService) {
 				if(response.errors) {
 					$scope.errorHandler(response.errors);
 				} else if(response.data) {
-					self.tip = {};
-					self.tip.records = [];
-					self.tip.total = response.data.total;
+					self.tips = {};
+					self.tips.records = [];
+					self.tips.total = response.data.total;
 
 					angular.forEach(response.data.records, function(value, key) {
 						value.created_moment = moment(value.created_at).startOf("minute").fromNow();
 						value.stars = new Array(5);
 
-						self.tip.records.push(value);
+						self.tips.records.push(value);
 					});
 				}
 			}

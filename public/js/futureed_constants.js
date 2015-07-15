@@ -45,6 +45,10 @@ var Constants = {
 	, CONTENTS 		: "contents"
 	, QANDA 		: "qanda"
 
+	, GENERAL		: "General"
+	, CONTENT 		: "Content"
+	, QUESTION		: "Question"
+
 	/**
 	* Active Screens
 	*/

@@ -25,16 +25,18 @@
 		!!}
 			<fieldset>
 				<div class="form-group">
-					<label class="col-xs-2 control-label" id="username">Module <span class="required">*</span></label>
-					<div class="col-xs-4">
-						{!! Form::text('username', '',
-							[
-								'placeholder' => 'Module',
-								'ng-disabled' => 'true',
-								'ng-model' => 'answer.record.module',
-								'class' => 'form-control'
-							]
-						) !!}
+					<div ng-if="answer.record.link_type != futureed.GENERAL">
+						<label class="col-xs-2 control-label" id="username">Module <span class="required">*</span></label>
+						<div class="col-xs-4">
+							{!! Form::text('username', '',
+								[
+									'placeholder' => 'Module',
+									'ng-disabled' => 'true',
+									'ng-model' => 'answer.record.module',
+									'class' => 'form-control'
+								]
+							) !!}
+						</div>
 					</div>
 					<label class="col-xs-2 control-label" id="email">Type <span class="required">*</span></label>
 					<div class="col-xs-4">
@@ -54,7 +56,7 @@
 						) !!}
 					</div>
 				</div>
-				<div class="form-group">
+				<div class="form-group" ng-if="answer.record.link_type != futureed.GENERAL">
 					<label class="col-xs-2 control-label">Subject <span class="required">*</span></label>
 					<div class="col-xs-4">
 						{!! Form::text('subject', '',
