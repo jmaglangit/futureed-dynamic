@@ -105,7 +105,7 @@
 	 
 	<div class="col-xs-12 table-container">
 		<div class="title-mid">
-			Tip List
+			Help Request Answer List
 		</div>
 
 		<div class="list-container" ng-cloak>
