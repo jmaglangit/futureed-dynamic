@@ -26,6 +26,12 @@ class HelpRequestAnswerRepository implements HelpRequestAnswerRepositoryInterfac
 		 * created_by
 		 *
 		 */
+
+		if(isset($criteria['class_id'])){
+
+			$help_request_answer = $help_request_answer->ClassId($criteria['class_id']);
+		}
+
 		if(isset($criteria['help_request'])){
 
 			$help_request_answer = $help_request_answer->RequestTitle($criteria['help_request']);
@@ -74,6 +80,7 @@ class HelpRequestAnswerRepository implements HelpRequestAnswerRepositoryInterfac
 
 		$count = $help_request_answer->count();
 
+
 		if($limit > 0 && $offset >= 0) {
 			$help_request_answer = $help_request_answer->offset($offset)->limit($limit);
 		}
@@ -82,6 +89,7 @@ class HelpRequestAnswerRepository implements HelpRequestAnswerRepositoryInterfac
 			'total' => $count,
 			'records' => $help_request_answer->get()
 		];
+
 
 	}
 
