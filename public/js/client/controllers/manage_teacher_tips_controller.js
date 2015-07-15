@@ -237,7 +237,6 @@ function ManageTeacherTipsController($scope, ManageTeacherTipsService, TableServ
 		self.search.created = (self.search.help_created) ? self.search.help_created:Constants.EMPTY_STR;
 		self.search.subject = (self.search.help_subject) ? self.search.help_subject:Constants.EMPTY_STR;
 		self.search.area = (self.search.help_area) ? self.search.help_area:Constants.EMPTY_STR;
-
 		$scope.ui_block();
 		ManageTeacherTipsService.listHelp(self.classid, self.search, self.table).success(function(response) {
 			self.table.loading = Constants.FALSE;
