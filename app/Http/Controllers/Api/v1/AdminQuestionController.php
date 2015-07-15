@@ -103,11 +103,12 @@ class AdminQuestionController extends ApiController {
 		$data =  $request->only('image','answer','seq_no','code','module_id','questions_text','status','question_type','points_earned','difficulty');
 
 
+		$last_sequence = $this->question->getLastSequence($data['module_id']);
 		//get sequence
-		if(!$data['seq_no']) {
+		if(!$data['seq_no'] || $data['seq_no'] > $last_sequence ) {
 
 			//get last sequence and add.
-			$data['seq_no'] = $this->question->getLastSequence($data['module_id']) + 1;
+			$data['seq_no'] = $last_sequence + 1;
 		}else {
 
 			//move sequence
