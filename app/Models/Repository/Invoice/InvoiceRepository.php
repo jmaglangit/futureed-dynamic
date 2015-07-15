@@ -7,7 +7,13 @@ use FutureEd\Models\Core\ClientDiscount;
 
 class InvoiceRepository implements InvoiceRepositoryInterface{
 
-
+    /**
+     * Get list of invoice based with optional pagination.
+     * @param array $criteria
+     * @param int $limit
+     * @param int $offset
+     * @return array
+     */
     public function getInvoiceDetails($criteria = [], $limit = 0, $offset = 0)
     {
 
@@ -57,11 +63,14 @@ class InvoiceRepository implements InvoiceRepositoryInterface{
 
         }
 
-
         return ['total' => $count, 'records' => $invoice->get()->toArray()];
-
     }
 
+    /**
+     * Add new Invoice
+     * @param $data
+     * @return array|string
+     */
     public function addInvoice($data)
     {
         try {
@@ -72,11 +81,22 @@ class InvoiceRepository implements InvoiceRepositoryInterface{
         }
     }
 
+    /**
+     * Get invoice info.
+     * @param $id
+     * @return Object
+     */
     public function getInvoice($id)
     {
         return Invoice::with('subscription','order')->find($id);
     }
 
+    /**
+     * Update invoice based on the data needed.
+     * @param $id
+     * @param $data
+     * @return bool|int|string
+     */
     public function updateInvoice($id, $data)
     {
         try {
@@ -98,13 +118,21 @@ class InvoiceRepository implements InvoiceRepositoryInterface{
         return ClientDiscount::clientId($client_id)->get();
     }
 
+    /**
+     * Get next invoice data from the storage.
+     * @return array
+     */
     public function getNextInvoiceNo()
     {
         return Invoice::orderBy('id', 'desc')->first()->toArray();
     }
 
 
-    //get invoice with relation to subscription and invoice_detail which related to classroom and client
+    /**
+     * Get invoice with relation to subscription and invoice_detail which related to classroom and client
+     * @param $id
+     * @return Invoice
+     */
     public function getDetails($id)
     {
 
@@ -133,6 +161,11 @@ class InvoiceRepository implements InvoiceRepositoryInterface{
         return $invoice;
     }
 
+    /**
+     * Delete invoice from storage.
+     * @param $id
+     * @return bool|null|string
+     */
     public function deleteInvoice($id){
         try{
             $result = Invoice::find($id);
