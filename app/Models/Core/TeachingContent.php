@@ -24,7 +24,8 @@ class TeachingContent extends Model {
 		'content_url',
 		'media_type_id',
 		'status',
-		'original_image_name'
+		'original_image_name',
+        'content_text'
 	];
 
     protected $attributes = [
