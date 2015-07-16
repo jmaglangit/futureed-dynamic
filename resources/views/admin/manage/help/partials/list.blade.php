@@ -127,7 +127,7 @@
 			</div>
 
 			<div class="clearfix"></div>
-			<div class="table-responsive" ng-init="help.listHelp()">
+			<div class="table-responsive" ng-init="help.list()">
 				<table id="grade-list" class="table table-striped table-bordered">
 					<thead>
 				        <tr>
@@ -185,7 +185,7 @@
 					next-text="&gt;"
 					class="pagination" 
 					boundary-links="true"
-					ng-change="help.paginateByPage($event)">
+					ng-change="help.paginateByPage()">
 				</pagination>
 			</div>
 		</div>
