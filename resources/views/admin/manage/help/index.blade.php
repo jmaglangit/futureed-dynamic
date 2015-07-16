@@ -14,7 +14,7 @@
 				@include('admin.partials.dshbrd-side-nav')
 			</div>	        
 
-			<div class="price-content" ng-init="help.setActive()">
+			<div class="price-content">
 				<div class="content-title">
 					<div class="title-main-content">
 						<span><i class="fa fa-gear"></i> Tips & Help Requests</span>
@@ -34,7 +34,7 @@
 					</ul>
 				</div>
 					
-				<div class="tab-content">
+				<div class="tab-content" ng-init="help.setActive()">
 				  	<div class="tab-pane fade in active">
 						<div template-directive template-url="{!! route('admin.manage.help.partials.list') !!}"></div>
 

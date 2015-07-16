@@ -47,7 +47,6 @@
 			</div>
 		</div>
 
-
 		<div class="col-xs-12 search-container">
 			<div class="form-search">
 				<div class="form-group">

@@ -24,6 +24,7 @@ function StudentHelpService($http){
 		return $http({
 			method 	: Constants.METHOD_GET
 			, url 	: serviceUrl + 'help-request-answer?help_request_id=' + help_request_id
+				+ "&request_answer_status=" + Constants.ACCEPTED
 		});
 	}
 

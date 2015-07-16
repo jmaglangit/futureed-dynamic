@@ -9,6 +9,10 @@
 
 		<div template-directive template-url="{!! route('client.partials.base_url') !!}"></div>
 
+		<div ng-if="user.class_id">
+			<div ng-controller="StudentClassController as class" template-directive template-url="{!! route('student.partials.tips_help_bar') !!}"></div>
+		</div>
+		
 		<div class="wrapr" ng-init="tips.setActive()"> 
 			<div ng-init="tips.setTipView('{!! $id !!}')"></div>
 
