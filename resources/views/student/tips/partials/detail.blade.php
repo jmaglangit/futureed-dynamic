@@ -18,23 +18,35 @@
     </div>
 	
 	<div class="form-content">
-		<div class="col-xs-12">
+		<div class="col-xs-12 tip-help-container">
 			<div class="col-xs-6">
 				<h3>{! tips.record.title !}</h3>
 				<p>{! tips.record.created_moment !}</p>
 			</div>
 
-			<div class="col-xs-6 pull-right">
+			<div class="col-xs-6 margin-top-8 pull-right">
 				<div class="col-xs-3 avatar-container-small">
 					<img class="pull-left" ng-src="{! tips.record.avatar_url !}" />
 				</div>
-				<div class="avatar-name-container col-xs-6"> {! tips.record.name !} </div>
+				<div class="avatar-name-container col-xs-6">Posted by <br /> {! tips.record.name !}</div>
 			</div>
 		</div>
 
 		<div class="col-xs-12">
 			<hr />
 		</div>
+
+		<div class="col-xs-12">
+			<div class="pull-right rating-container">
+				<!-- <p ng-if="!tips.record.rating">Was the answer helpful? Please Rate.</p> -->
+				<span class="pull-right" ng-repeat="i in tips.record.stars track by $index">
+					<!-- <img ng-if="!tips.record.rating" ng-mouseover="tips.changeColor($index)" ng-src="{! ($index+1 <= tips.record.rating || tips.hovered[$index])  && '/images/class-student/icon-star_yellow.png' || '/images/class-student/icon-star_white.png' !}" /> -->
+					<!-- <img ng-if="tips.record.rating" ng-src="{! $index+1 <= tips.record.rating && '/images/class-student/icon-star_yellow.png' || '/images/class-student/icon-star_white.png' !}" /> -->
+					<img ng-src="{! $index+1 <= tips.record.rating && '/images/class-student/icon-star_yellow.png' || '/images/class-student/icon-star_white.png' !}" />
+				</span>
+			</div>
+		</div>
+
 
 		<div class="col-xs-12 search-container">
 			<div class="form-search">
@@ -44,25 +56,10 @@
 			</div>
 		</div>
 
-		<div class="col-xs-12">
-			<div class="col-xs-6"></div>
-			<div class="col-xs-6">
-				<!-- <p ng-if="!tips.record.rating">Was the answer helpful? Please Rate.</p> -->
-				<p>Average rating: </p>
-			</div>
-		</div>
-
 		<div class="col-xs-12" ng-cloak>
 			<div class="col-xs-6"></div>
 			<div class="col-xs-6">
-				<div class="col-xs-6 rating-container">
-					<span ng-repeat="i in tips.record.stars track by $index">
-						<!-- <img ng-if="!tips.record.rating" ng-mouseover="tips.changeColor($index)" ng-src="{! ($index+1 <= tips.record.rating || tips.hovered[$index])  && '/images/class-student/icon-star_yellow.png' || '/images/class-student/icon-star_white.png' !}" /> -->
-						<!-- <img ng-if="tips.record.rating" ng-src="{! $index+1 <= tips.record.rating && '/images/class-student/icon-star_yellow.png' || '/images/class-student/icon-star_white.png' !}" /> -->
-						<img ng-src="{! $index+1 <= tips.record.rating && '/images/class-student/icon-star_yellow.png' || '/images/class-student/icon-star_white.png' !}" />
-					</span>
-				</div>
-				<div class="col-xs-6">
+				<div class="pull-right">
 					{!! Form::button('Rate'
 						, array(
 							'class' => 'btn btn-blue pull-right'
