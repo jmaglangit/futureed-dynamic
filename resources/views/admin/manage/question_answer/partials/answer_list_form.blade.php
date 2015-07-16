@@ -1,4 +1,4 @@
-<div ng-if="qa.details.question_type == 'MC'" ng-init="qa.setAnsActive()">
+<div ng-if="qa.qa_details.question_type == 'MC'" ng-init="qa.setAnsActive()">
         <div ng-if="qa.active_anslist">
         {!! Form::open(array('id'=> 'add_answer_form', 'class' => 'form-horizontal', 'enctype' => 'multipart/form-data')) !!}
             <div class="col-xs-12 form-content">
@@ -24,15 +24,16 @@
                                 )
                             ) !!}
                         </div>
-                        <label class="control-label col-xs-2">Question Image</label>
+                        <label class="col-xs-2 control-label">Points Equivalent <span class="required">*</span></label>
                         <div class="col-xs-4">
-                              <div style="position:relative;">
-                                <a class='btn btn-primary btn-semi-large' href='javascript:;'>
-                                    Choose File...
-                                    <input ng-model="qa.answers.image" id="q_image" type="file" class="img-input" name="file_source" size="40"  onchange='$("#upload-file-info").html($(this).val());'>
-                                </a>
-                                <center><span class='label label-info' id="upload-file-info"></span></center>
-                            </div>
+                            {!! Form::text('point_equivalent',''
+                                , array(
+                                    'placeHolder' => 'Points Equivalent'
+                                    , 'ng-model' => 'qa.answers.point_equivalent'
+                                    , 'class' => 'form-control'
+                                    , 'ng-class' => "{ 'required-field' : qa.fields['point_equivalent_ans'] }"
+                                )
+                            ) !!}
                         </div>
                     </div>
                     <div class="form-group">
@@ -47,16 +48,10 @@
                                 )
                             ) !!}
                         </div>
-                        <label class="col-xs-2 control-label">Points Equivalent <span class="required">*</span></label>
+                        <label class="control-label col-xs-2">Answer Image</label>
                         <div class="col-xs-4">
-                            {!! Form::text('point_equivalent',''
-                                , array(
-                                    'placeHolder' => 'Points Equivalent'
-                                    , 'ng-model' => 'qa.answers.point_equivalent'
-                                    , 'class' => 'form-control'
-                                    , 'ng-class' => "{ 'required-field' : qa.fields['point_equivalent_ans'] }"
-                                )
-                            ) !!}
+                            <div class="btn btn-blue" ngf-select ngf-change="qa.uploadAnswer($files, qa.answers)"> Choose Image... </div>
+                            <span ng-if="qa.answers.uploaded" class="label label-info upload-label">Image Uploaded...</span>
                         </div>
                     </div>
                     <div class="form-group">
@@ -116,21 +111,23 @@
                         {!! Form::text('code',''
                             , array(
                                 'placeHolder' => 'Answer Code'
+                                , 'ng-disabled' => 'true'
                                 , 'ng-model' => 'qa.ansdetails.code'
                                 , 'class' => 'form-control'
                                 , 'ng-class' => "{ 'required-field' : qa.fields['code_ans'] }"
                             )
                         ) !!}
                     </div>
-                    <label class="control-label col-xs-2">Question Image</label>
+                    <label class="col-xs-2 control-label">Points Equivalent <span class="required">*</span></label>
                     <div class="col-xs-4">
-                          <div style="position:relative;">
-                            <a class='btn btn-primary btn-semi-large' href='javascript:;'>
-                                Choose File...
-                                <input ng-model="qa.answers.image" id="q_image" type="file" class="img-input" name="file_source" size="40"  onchange='$("#upload-file-info").html($(this).val());'>
-                            </a>
-                            <center><span class='label label-info' id="upload-file-info"></span></center>
-                        </div>
+                        {!! Form::text('point_equivalent',''
+                            , array(
+                                'placeHolder' => 'Points Equivalent'
+                                , 'ng-model' => 'qa.ansdetails.point_equivalent'
+                                , 'class' => 'form-control'
+                                , 'ng-class' => "{ 'required-field' : qa.fields['point_equivalent_ans'] }"
+                            )
+                        ) !!}
                     </div>
                 </div>
                 <div class="form-group">
@@ -145,16 +142,10 @@
                             )
                         ) !!}
                     </div>
-                    <label class="col-xs-2 control-label">Points Equivalent <span class="required">*</span></label>
+                    <label class="control-label col-xs-2">Question Image</label>
                     <div class="col-xs-4">
-                        {!! Form::text('point_equivalent',''
-                            , array(
-                                'placeHolder' => 'Points Equivalent'
-                                , 'ng-model' => 'qa.ansdetails.point_equivalent'
-                                , 'class' => 'form-control'
-                                , 'ng-class' => "{ 'required-field' : qa.fields['point_equivalent_ans'] }"
-                            )
-                        ) !!}
+                        <div class="btn btn-blue" ngf-select ngf-change="qa.uploadAnswer($files, qa.ansdetails)"> Choose Image... </div>
+                        <span ng-if="qa.ansdetails.uploaded" class="label label-info upload-label">Image Uploaded...</span>
                     </div>
                 </div>
                 <div class="form-group">
@@ -173,6 +164,12 @@
                                 , 'ng-class' => "{ 'required-field' : qa.fields['correct_answer_ans'] }"
                             )
                         ) !!}
+                    </div>
+                    <div ng-if="qa.active_view && qa.ansdetails.original_image_name && qa.ansdetails.original_image_name != '0'">
+                        <div class="col-xs-2"></div>
+                        <div class="col-xs-4 control-label">
+                            <a href="" ng-click="qa.viewAnswerImage('{!! route('admin.image.viewer') !!}', qa.ansdetails)">View Question Image</a>
+                        </div>
                     </div>
                 </div>
             </fieldset>
@@ -225,7 +222,6 @@
                         <tr>
                             <th>Code</th>
                             <th>Answer</th>
-                            <th>Answer Image</th>
                             <th>Correct Answer</th>
                             <th>Point Equivalent</th>
                             <th ng-if="qa.ans_records.length">Actions</th>
@@ -235,7 +231,6 @@
                         <tr ng-repeat="ansInfo in qa.ans_records">
                             <td>{! ansInfo.code !}</td>
                             <td>{! ansInfo.answer_text !}</td>
-                            <td></td>
                             <td>{! ansInfo.correct_answer !}</td>
                             <td>{! ansInfo.point_equivalent !}</td>
                             <td ng-if="qa.ans_records.length">

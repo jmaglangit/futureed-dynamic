@@ -30,7 +30,8 @@ class ModuleContent extends Model {
 
 	protected $attributes = [
 		'created_by' => 1,
-		'updated_by' => 1
+		'updated_by' => 1,
+		'content_id' => 0
 	];
 
 	//Scopes
@@ -48,6 +49,15 @@ class ModuleContent extends Model {
 
 		return $query->where('module_id', $module_id);
 	}
+
+	public function scopeOrderBySeqNo($query){
+
+		return $query->OrderBy('seq_no');
+	}
+	 public function scopeOrderBySeqNoDesc($query){
+
+		 return $query->orderBy('seq_no','desc');
+	 }
 
 
 

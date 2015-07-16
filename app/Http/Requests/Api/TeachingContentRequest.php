@@ -37,6 +37,8 @@ class TeachingContentRequest extends ApiRequest {
 					'media_type_id' => 'required|exists:media_types,id,deleted_at,NULL',
 					'status' => 'required|in:Enabled,Disabled',
 					'image' => 'required_if:content_url,|string',
+					'seq_no' => 'integer'
+
 				];
 
 				break;
@@ -49,6 +51,8 @@ class TeachingContentRequest extends ApiRequest {
 					'media_type_id' => 'required|exists:media_types,id,deleted_at,NULL',
 					'status' => 'required|in:Enabled,Disabled',
 					'image' => 'required_if:content_url,|string',
+					'seq_no' => 'integer'
+
 				];
 				break;
 		}

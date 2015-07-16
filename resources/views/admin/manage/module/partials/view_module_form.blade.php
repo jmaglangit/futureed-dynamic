@@ -68,13 +68,13 @@
                                         </div>
                                     </div>
                                     <div class="col-xs-4" ng-if="module.active_view">
-                                        <label class="col-md-5" ng-if="module.details.status == 'Enabled'">
+                                        <label ng-if="module.details.status == 'Enabled'">
                                             <b class="success-icon">
                                                 <i class="margin-top-8 fa fa-check-circle-o"></i> {! module.details.status !}
                                             </b>
                                         </label>
 
-                                        <label class="col-md-5" ng-if="module.details.status == 'Disabled'">
+                                        <label ng-if="module.details.status == 'Disabled'">
                                             <b class="error-icon">
                                                 <i class="margin-top-8 fa fa-ban"></i> {! module.details.status !}
                                             </b>
@@ -246,13 +246,11 @@
                     </ul>
 
                     <div class="tab-content row">
-                        <div class="tab-pane fade in active" id="age_group">
-                            <div ng-if="module.active_view" ng-controller="ManageAgeGroupController as age">
-                                <div ng-init="age.setActive()" template-directive template-url="{!! route('admin.manage.age_group.partials.list_view_form') !!}"></div>
+                        <div class="tab-pane fade in active" id="age_group"  ng-if="module.active_view" ng-controller="ManageAgeGroupController as age" ng-init="age.setModule(module.details)">
+                            <div ng-init="age.setActive()" template-directive template-url="{!! route('admin.manage.age_group.partials.list_view_form') !!}"></div>
 
-                                <div template-directive template-url="{!! route('admin.manage.age_group.partials.add_view_form') !!}"></div>
-                                <div template-directive template-url="{!! route('admin.manage.age_group.partials.edit_view_form') !!}"></div>
-                            </div>
+                            <div template-directive template-url="{!! route('admin.manage.age_group.partials.add_view_form') !!}"></div>
+                            <div template-directive template-url="{!! route('admin.manage.age_group.partials.edit_view_form') !!}"></div>
                         </div>
 
                         <div ng-if="module.details.current_view == futureed.CONTENTS" ng-controller="ManageModuleContentController as content" class="tab-pane fade" ng-init="content.setModule(module.details)" id="contents">

@@ -52,4 +52,16 @@ interface QuestionRepositoryInterface {
 	 */
 	public function getQuestionCount($module_id);
 
+
+	public function getQuestionSequenceNos($module_id);
+
+	public function getQuestionSequenceNo($id);
+
+	public function getLastSequence($module_id);
+
+	public function updateSequence($sequence);
+
+
+
+
 }

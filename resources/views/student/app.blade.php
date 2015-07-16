@@ -96,6 +96,9 @@
     {!! Html::script('/js/student/controllers/student_class_controller.js')!!}
     {!! Html::script('/js/student/services/student_class_service.js')!!}
 
+    {!! Html::script('/js/ng-file-upload-shim.min.js')!!}
+    {!! Html::script('/js/ng-file-upload.min.js')!!}
+
     @yield('scripts')
 
     <!-- END SCRIPTS -->

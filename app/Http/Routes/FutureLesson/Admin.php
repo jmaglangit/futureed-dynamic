@@ -1,6 +1,11 @@
 <?php 
 	Routes::group(['prefix' => '/peaches'], function()
 	{
+		Routes::get('/image', [
+			'as' => 'admin.image.viewer'
+			, 'uses' => 'FutureLesson\Admin\ImageController@view'
+		]);
+
 		Routes::get('/', 'FutureLesson\Admin\LoginController@index');
 		Routes::get('/password/forgot',[
 				'as' => 'admin.password.reset'
