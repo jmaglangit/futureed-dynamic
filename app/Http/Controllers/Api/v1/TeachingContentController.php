@@ -46,13 +46,14 @@ class TeachingContentController extends ApiController {
 		Filesystem $file,
 		ModuleContentServices $moduleContentServices
 
-	){
+	)
+	{
 
 		$this->teaching_content = $teachingContentRepositoryInterface;
 		$this->module_content = $moduleContentRepositoryInterface;
 		$this->file = $file;
 		$this->module_content_services = $moduleContentServices;
-    }
+	}
 
     /**
      * Display a listing of the resource.
