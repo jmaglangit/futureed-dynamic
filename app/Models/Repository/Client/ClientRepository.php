@@ -231,7 +231,7 @@ class ClientRepository implements ClientRepositoryInterface
             $clients = $clients->name($criteria['name']);
         }
 
-        $clients = $clients->with('user')->orderBy('created_at', 'desc');
+        $clients = $clients->with('user')->activated()->verified()->orderBy('created_at', 'desc');
 
         return $clients->get()->toArray();
 
@@ -244,7 +244,7 @@ class ClientRepository implements ClientRepositoryInterface
 
 		$clients = new Client();
 
-		$clients = $clients->teacher();
+		$clients = $clients->teacher()->activated()->verified();
 
 		$count = 0;
 
