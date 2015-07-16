@@ -199,7 +199,7 @@ function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService,
 
     self.viewImage = function(base, object) {
     	self.view_image = {};
-		self.view_image.image_path = base + "?path=" + object.questions_image;
+		self.view_image.image_path = object.questions_image;
 		self.view_image.questions_text = object.questions_text;
 		self.view_image.show = Constants.TRUE;
 
@@ -212,7 +212,7 @@ function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService,
 
     self.viewAnswerImage = function(base, object) {
     	self.view_image = {};
-		self.view_image.image_path = base + "?path=" + object.answer_image;
+		self.view_image.image_path = object.answer_image;
 		self.view_image.questions_text = object.answer_text;
 		self.view_image.show = Constants.TRUE;
 
