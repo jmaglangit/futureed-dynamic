@@ -103,8 +103,6 @@
 					<thead>
 				        <tr>
 				            <th>Tips</th>
-				            <th>Subject</th>
-				            <th>Area</th>
 				            <th>Posted Since</th>
 				            <th>Posted By</th>
 				            <th ng-if="tips.records.length">Actions</th>
@@ -113,8 +111,6 @@
 			        <tbody>
 				        <tr ng-repeat="tipInfo in tips.records">
 				            <td>{! tipInfo.title !}</td>
-				            <td>{! tipInfo.subject.name !}</td>
-				            <td>{! tipInfo.subjectarea.name !}</td>
 				            <td>{! tipInfo.created_at | ddMMyy !}</td>
 				            <td>{! tipInfo.student.first_name !} {! tipInfo.student.last_name !}</td>
 				            <td ng-if="tips.records.length">
