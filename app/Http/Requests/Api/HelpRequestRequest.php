@@ -70,7 +70,7 @@ class HelpRequestRequest extends ApiRequest{
             'subject_id.integer' => 'Subject must be a number.',
             'subject_area_id.integer' => 'Subject area must be a number.',
             'link_id.integer' => 'Link must be a number.',
-			'content.required' => 'The description field is required.',
+            'content.required' => 'The description field is required.',
         ];
     }
 }
