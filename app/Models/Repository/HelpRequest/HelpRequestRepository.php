@@ -110,11 +110,11 @@ class HelpRequestRepository implements HelpRequestRepositoryInterface{
 
             }
 
+            $count = $query->count();
+
             if($limit > 0 && $offset >= 0) {
                 $query = $query->offset($offset)->limit($limit);
             }
-
-            $count = $query->count();
         }
 
         return ['total' => $count, 'records' => $query->get()->toArray()];

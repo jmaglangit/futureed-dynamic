@@ -191,7 +191,8 @@ class StudentServices {
 
 
 		$student = array_merge(array('id' => $id
-			,'class_id' => $this->getCurrentClass($id))
+            ,'class_id' => $this->getCurrentClass($id)
+			,'class' => $this->getCurrentClass($id))
 			, $student
 			, $user,
 			array('age' => $age,

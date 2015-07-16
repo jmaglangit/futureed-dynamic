@@ -76,6 +76,7 @@ function HelpController($scope, apiService, StudentHelpService, TableService, Se
 		self.records = [];
 		self.errors = Constants.FALSE;
 		self.search.class_id = ($scope.user.class) ? $scope.user.class.class_id : Constants.EMPTY_STR; 
+		
 		if (self.search.help_request_type) {
 			self.search.student_id = $scope.user.id;
 		}
@@ -92,6 +93,11 @@ function HelpController($scope, apiService, StudentHelpService, TableService, Se
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					self.records = response.data.records;
+
+					angular.forEach(self.records, function(value, key) {
+						value.created_moment = moment(value.created_at).startOf("minute").fromNow();
+					});
+
 					self.updatePageCount(response.data);
 				}
 			}
