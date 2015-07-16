@@ -15,6 +15,11 @@ class ModuleGroup extends Model {
 
     protected $fillable = ['age_group_id','module_id','points_earned'];
 
+	protected $attributes = [
+		'created_by' => 1,
+		'updated_by' => 1
+	];
+
     //Relationships
 
     public function ageGroup(){
