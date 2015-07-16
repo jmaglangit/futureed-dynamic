@@ -829,7 +829,7 @@ function FutureedController($scope, $window, apiService, futureed) {
 						$scope.reg.email = $scope.reg.user.email;
 						$scope.reg.birth = $scope.reg.birth_date;
 						$scope.reg.school_name = $scope.reg.school.name;
-						$scope.getGradeLevel($scope.reg.grade_code);
+						$scope.getGradeLevel($scope.reg.country_id);
 						$scope.edit_registration = Constants.TRUE;
 					}
 				}
