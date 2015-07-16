@@ -7,6 +7,7 @@ use FutureEd\Models\Repository\TeachingContent\TeachingContentRepositoryInterfac
 use FutureEd\Http\Requests\Api\TeachingContentRequest;
 use FutureEd\Services\ModuleContentServices;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Filesystem\Filesystem;
 
 class TeachingContentController extends ApiController {
 
@@ -23,6 +24,13 @@ class TeachingContentController extends ApiController {
 	protected $module_content;
 
 	/**
+	 * Initialized file
+	 * @var Filesystem
+	 */
+
+	protected $file;
+
+	/**
 	 * Initialized module_content_services
 	 * @var ModuleContentServices
 	 */
@@ -32,16 +40,20 @@ class TeachingContentController extends ApiController {
      * Initialized Teaching Content.
      * @param TeachingContentRepositoryInterface $teachingContentRepositoryInterface
      */
-    public function __construct(
-        TeachingContentRepositoryInterface $teachingContentRepositoryInterface,
+	public function __construct(
+		TeachingContentRepositoryInterface $teachingContentRepositoryInterface,
 		ModuleContentRepositoryInterface $moduleContentRepositoryInterface,
+		Filesystem $file,
 		ModuleContentServices $moduleContentServices
-    ){
+
+	)
+	{
 
 		$this->teaching_content = $teachingContentRepositoryInterface;
 		$this->module_content = $moduleContentRepositoryInterface;
+		$this->file = $file;
 		$this->module_content_services = $moduleContentServices;
-    }
+	}
 
     /**
      * Display a listing of the resource.
@@ -107,6 +119,37 @@ class TeachingContentController extends ApiController {
 
 		$this->module_content->addModuleContent($data);
 
+		//have image
+		if($data['image'] && $data['media_type_id'] == 3){
+
+			$update = NULL;
+
+			$from = config('futureed.content_image_path');
+			$to = config('futureed.content_image_path_final').'/'.$teaching_content->id;
+
+			//check if directory don't exist, it will create new directory
+			if (!$this->file->exists(config('futureed.content_image_path_final'))){
+
+				$this->file->makeDirectory(config('futureed.content_image_path_final'));
+			}
+
+			$image = explode('/',$data['image']);
+			$image_type = explode('.',$image[1]);
+
+			$update['original_image_name'] = $image[1];
+			$update['content_url'] = config('futureed.content').'_'.$teaching_content->id.'.'.$image_type[1];
+
+			//move image to content directory
+			$this->file->move($from.'/'.$image[0],$to);
+			$this->file->copy($to.'/'.$image[1],$to.'/'.$update['content_url']);
+
+
+			//add content_url and original_image_name
+			$this->teaching_content->updateTeachingContent($teaching_content->id,$update);
+
+		}
+
+
         return $this->respondWithData(
            $this->teaching_content->getTeachingContent($teaching_content->id)
         );
@@ -135,6 +178,23 @@ class TeachingContentController extends ApiController {
     public function update(TeachingContentRequest $request,$id)
     {
         $data = $request->all();
+
+		if($data['image'] && $data['media_type_id'] == 3){
+
+			$from = config('futureed.content_image_path');
+			$to = config('futureed.content_image_path_final').'/'.$id;
+
+			$image = explode('/',$data['image']);
+			$image_type = explode('.',$image[1]);
+
+			$data['original_image_name'] = $image[1];
+			$data['content_url'] = config('futureed.content').'_'.$id.'.'.$image_type[1];
+
+			$this->file->deleteDirectory($to);
+			$this->file->move($from.'/'.$image[0],$to);
+			$this->file->copy($to.'/'.$image[1],$to.'/'.$data['content_url']);
+
+		}
 
 		//update teaching_content
 		$teaching_content = $this->teaching_content->updateTeachingContent($id,$data);
