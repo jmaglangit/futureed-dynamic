@@ -21,13 +21,15 @@ class StudentEmailRequest extends ApiRequest {
 	 */
 	public function rules()
 	{
+		$id = $this->__get('id');
+		$user_type = config('futureed.student');
 		switch($this->method()){
 
 			case 'PUT':
 
 				return [
 						'email' => 'required|email',
-						'new_email' => 'required|email',
+						'new_email' => "required|email|unique:users,email,$id,id,user_type,$user_type,deleted_at,NULL",
 						'password' => 'required',
 						'client_id' => 'required|integer',
 						'callback_uri' => 'required|string'
