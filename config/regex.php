@@ -12,4 +12,7 @@ return [
 
 	//Zip code
 	'zip_code' => '/^[a-zA-Z0-9]+(\-[a-zA-Z0-9]+)*?$/',
+
+	//State and City
+	'state_city' => '/^[-\pL\s]+$/u',
 ];
