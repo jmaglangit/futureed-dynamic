@@ -115,6 +115,9 @@ return [
 	//tip_rating
 	'tip_rating' => 'rating',
 
+	//uploads base path
+	'uploads' => base_path(). '/uploads',
+
 	//path for question uploaded images temp
 	'question_image_path' =>  base_path().'/uploads/temp/question',
 

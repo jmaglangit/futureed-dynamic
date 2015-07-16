@@ -52,4 +52,5 @@ Routes::group(['prefix' => 'api/v1'], function()
     include('Routes/Api/TipRating.php');
     include('Routes/Api/User.php');
     include('Routes/Api/VolumeDiscount.php');
+	include('Routes/Api/Image.php');
 });
