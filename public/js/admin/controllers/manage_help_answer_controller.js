@@ -123,7 +123,7 @@ function ManageHelpAnswerController($scope, ManageHelpAnswerService, TableServic
 					self.record.title = record.help_request.title;
 					self.record.content = record.content;
 					self.record.status = record.status;
-					self.record.name = record.student.first_name + ' ' + record.student.last_name;
+					self.record.name = record.user.name;
 				}
 			}
 
