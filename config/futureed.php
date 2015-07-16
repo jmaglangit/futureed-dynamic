@@ -144,6 +144,7 @@ return [
 
 	//path for content uploaded images final
 	'content_image_path_final' => base_path().'/public/uploads/content',
+	'content_image_path_final_public' => '/uploads/content',
 
 	//answer
 	'content' => 'content',

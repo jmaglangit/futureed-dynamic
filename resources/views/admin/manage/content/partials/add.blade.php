@@ -90,19 +90,6 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-xs-3 control-label">Content URL <span class="required">*</span></label>
-					<div class="col-xs-6">
-						{!! Form::text('content_url', ''
-							, array(
-								'placeholder' => 'Content Url'
-								, 'ng-model' => 'content.record.content_url'
-								, 'ng-class' => "{ 'required-field' : content.fields['content_url'] }"
-								, 'class' => 'form-control'
-							)
-						) !!}
-					</div>
-				</div>
-				<div class="form-group">
 					<label class="col-xs-3 control-label" id="email">Learning Style <span class="required">*</span></label>
 					<div class="col-xs-6">
 						<select  name="learning_style_id" ng-class="{ 'required-field' : content.fields['learning_style_id'] }" class="form-control" ng-model="content.record.learning_style_id">
@@ -118,6 +105,39 @@
 							<option ng-selected="content.record.media_type_id == futureed.FALSE" value="">-- Select Media Type --</option>
 							<option ng-selected="content.record.media_type_id == type.id" ng-repeat="type in content.types" ng-value="type.id">{! type.name!}</option>
 						</select>
+					</div>
+				</div>
+				<div class="form-group" ng-if="content.record.media_type_id == 1">
+					<label class="col-xs-3 control-label">Video <span class="required">*</span></label>
+					<div class="col-xs-6">
+						{!! Form::text('content_url', ''
+							, array(
+								'placeholder' => 'Content Url'
+								, 'ng-model' => 'content.record.content_url'
+								, 'ng-class' => "{ 'required-field' : content.fields['content_url'] }"
+								, 'class' => 'form-control'
+							)
+						) !!}
+					</div>
+				</div>
+				<div class="form-group" ng-if="content.record.media_type_id == 2">
+					<label class="col-xs-3 control-label">Content Text <span class="required">*</span></label>
+					<div class="col-xs-6">
+						{!! Form::text('content_text', ''
+							, array(
+								'placeholder' => 'Content Text'
+								, 'ng-model' => 'content.record.content_text'
+								, 'ng-class' => "{ 'required-field' : content.fields['content_text'] }"
+								, 'class' => 'form-control'
+							)
+						) !!}
+					</div>
+				</div>
+				<div class="form-group" ng-if="content.record.media_type_id == 3">
+					<label class="col-xs-3 control-label">Image <span class="required">*</span></label>
+					<div class="col-xs-6">
+	                    <div class="btn btn-blue" ngf-select ngf-change="content.upload($files, content.record)"> Choose Image... </div>
+	                    <span ng-if="content.record.uploaded" class="label label-info margin-top-5 col-xs-12">Image Uploaded...</span>
 					</div>
 				</div>
 				<div class="form-group">
