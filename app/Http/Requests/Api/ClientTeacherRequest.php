@@ -28,8 +28,8 @@ class ClientTeacherRequest extends ApiRequest
 					'first_name' => 'required|regex:'. config('regex.name') ,
 					'last_name' => 'required|regex:'. config('regex.name'),
 					'street_address' => 'string',
-					'city' => 'string',
-					'state' => 'string',
+					'city' => 'max:128|regex:'.config('regex.state_city'),
+					'state' => 'max:128|regex:'.config('regex.state_city'),
 					'zip' => 'max:10|regex:'.config('regex.zip_code'),
 					'country_id' => 'integer'
 				];
