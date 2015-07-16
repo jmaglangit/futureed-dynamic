@@ -52,7 +52,7 @@ class AdminQuestionAnswerController extends ApiController {
 
 			foreach($record['records'] as $k=>$v){
 
-				$record['records'][$k]['answer_image'] = config('futureed.answer_image_path_final').'/'.$v['id'].'/'.$v['answer_image'];
+				$record['records'][$k]['answer_image'] = config('futureed.answer_image_path_final_public').'/'.$v['id'].'/'.$v['answer_image'];
 			}
 
 		}
@@ -138,7 +138,7 @@ class AdminQuestionAnswerController extends ApiController {
 
 			return $this->respondErrorMessage(2120);
 		}
-		$question_answer->answer_image = config('futureed.answer_image_path_final').'/'.$question_answer->id.'/'.$question_answer->answer_image;
+		$question_answer->answer_image = config('futureed.answer_image_path_final_public').'/'.$question_answer->id.'/'.$question_answer->answer_image;
 
 		return $this->respondWithData($question_answer);
 	}
