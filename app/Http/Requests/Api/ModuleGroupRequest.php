@@ -20,7 +20,7 @@ class ModuleGroupRequest extends ApiRequest{
 
     public function rules()
     {
-        $age_group_id_rules = $this->method == 'POST' ?
+        $age_group_id_rules = $this->method() == 'POST' ?
             'required|integer|unique:module_groups,age_group_id,NULL,id,module_id,'.$this->module_id.',deleted_at,NULL' :
             'required|integer';
         return [

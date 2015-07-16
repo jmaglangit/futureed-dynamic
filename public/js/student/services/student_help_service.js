@@ -12,7 +12,7 @@ function StudentHelpService($http){
 			method 	: Constants.METHOD_GET
 			, url 	: serviceUrl + 'help-request?class_id=' + search.class_id
 					+ "&request_status=" + search.request_status
-					+ "&subject=" + search.subject
+					+ "&title=" + search.title
 					+ "&student_id=" + search.student_id
 					+ "&help_request_type=" + search.help_request_type
 					+ "&limit=" + table.size
@@ -24,6 +24,7 @@ function StudentHelpService($http){
 		return $http({
 			method 	: Constants.METHOD_GET
 			, url 	: serviceUrl + 'help-request-answer?help_request_id=' + help_request_id
+				+ "&request_answer_status=" + Constants.ACCEPTED
 		});
 	}
 

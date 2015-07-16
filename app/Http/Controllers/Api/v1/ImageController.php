@@ -36,7 +36,7 @@ class ImageController extends ApiController {
 
 		}
 
-		return $this->respondErrorMessage(2051);
+		return $this->respondErrorMessage(2052);
 	}
 
 }

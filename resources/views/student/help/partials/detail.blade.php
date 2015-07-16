@@ -19,42 +19,45 @@
 	
 	<div class="form-content">
 		<div id="detail_form" class="row"> 
-			<div class="col-xs-12">
+			<div class="col-xs-12 tip-help-container">
 				<div class="col-xs-6">
 					<h3 class="col-xs-12">{! help.record.title !}</h3>
 					<p class="col-xs-12">{! help.record.created_moment !}</p>
-					<label class="col-xs-3"> Status: </label>
-					<div>
-		        		<label class="col-xs-6" ng-if="help.record.question_status == futureed.ANSWERED">
-		        			<b class="success-icon">
-		        				<i class="margin-top-8 fa fa-check-circle-o"></i> {! help.record.question_status !}
-		        			</b>
-		        		</label>
-
-		        		<label class="col-xs-6" ng-if="help.record.question_status == futureed.OPEN">
-		        			<b class="warning-icon">
-		        				<i class="margin-top-8 fa fa-exclamation-circle"></i> {! help.record.question_status !}
-		        			</b>
-		        		</label>
-
-		        		<label class="col-xs-6" ng-if="help.record.question_status == futureed.CANCELLED">
-		        			<b class="error-icon">
-		        				<i class="margin-top-8 fa fa-ban"></i> {! help.record.question_status !}
-		        			</b>
-		        		</label>
-	        		</div>
 				</div>
 
-				<div class="col-xs-6 pull-right">
+				<div class="col-xs-6 margin-top-8 pull-right">
 					<div class="col-xs-3 avatar-container-small">
 						<img class="pull-left" ng-src="{! help.record.avatar_url !}" />
 					</div>
-					<div class="avatar-name-container col-xs-6"> {! help.record.name !} </div>
+					<div class="avatar-name-container col-xs-6"> Posted by <br /> {! help.record.name !}</div>
 				</div>
 			</div>
 
 			<div class="col-xs-12">
 				<hr />
+			</div>
+
+			<div class="col-xs-12">
+				<label class="col-xs-1 margin-top-8"> Status: </label>
+				<div>
+	        		<label class="col-xs-6" ng-if="help.record.question_status == futureed.ANSWERED">
+	        			<b class="success-icon">
+	        				<i class="margin-top-8 fa fa-check-circle-o"></i> {! help.record.question_status !}
+	        			</b>
+	        		</label>
+
+	        		<label class="col-xs-6" ng-if="help.record.question_status == futureed.OPEN">
+	        			<b class="warning-icon">
+	        				<i class="margin-top-8 fa fa-exclamation-circle"></i> {! help.record.question_status !}
+	        			</b>
+	        		</label>
+
+	        		<label class="col-xs-6" ng-if="help.record.question_status == futureed.CANCELLED">
+	        			<b class="error-icon">
+	        				<i class="margin-top-8 fa fa-ban"></i> {! help.record.question_status !}
+	        			</b>
+	        		</label>
+        		</div>
 			</div>
 
 			<div class="col-xs-12 search-container">
@@ -116,7 +119,7 @@
 					)!!}
 						<div class="form-group">
 							<div class="col-xs-8">
-								<div class="col-xs-3 avatar-container-small">
+								<div class="col-xs-2 avatar-container-small">
 									<img class="pull-left" ng-src="{! answer.student.avatar.avatar_url !}" />
 								</div>
 

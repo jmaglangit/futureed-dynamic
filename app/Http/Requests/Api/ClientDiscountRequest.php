@@ -43,7 +43,8 @@ class ClientDiscountRequest extends ApiRequest {
 	public function messages() {
 		return [
 			'numeric' => 'The :attribute must be a number.',
-			'unique' => 'Client Name already exists.' 
+			'unique' => 'Client Name already exists.',
+			'client_id.required' => 'The name field is required.',
 		];
 	}
 }

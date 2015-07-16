@@ -34,7 +34,7 @@
 						</span>
 					</p>
 					<p class="user-detail"><span><i class="fa fa-user"></i> {! tip_record.student.first_name !} {! tip_record.student.last_name !}</span></p>
-					<p class="user-detail"><span><i class="fa fa-tag"></i> Some Tag</span></p>
+					<p class="user-detail"><span><i class="fa fa-tag"></i> General </span></p>
 					<p class="user-detail"><span><i class="fa fa-calendar-o"></i> {! tip_record.created_moment !}</span></p>
 				</div>
 			</div>
@@ -121,10 +121,10 @@
 			</div>
 			<div class="side-btn-container row" ng-if="!class.add_tips && !class.tips.success">
 				<div class="col-xs-6 btn-left">
-					{!! Html::link(route('student.tips.index'), 'View More'
+					{!! Html::link(route('student.tips.index'), 'View List'
 		                , array(
 		                   'class' => 'btn btn-blue'
-		                  , 'ng-if' => 'class.tips.total > 3'
+		                  , 'ng-if' => 'class.tips.total'
 		                )
 		            ) !!}
 				</div>
@@ -177,11 +177,11 @@
 						</span>
 					</p>
 					<p class="user-detail"><span><i class="fa fa-user"></i> {! help_record.student.first_name !} {! help_record.student.last_name !}</span></p>
-					<p class="user-detail"><span><i class="fa fa-tag"></i> Some Tag</span></p>
+					<p class="user-detail"><span><i class="fa fa-tag"></i> General </span></p>
 					<p class="user-detail"><span><i class="fa fa-calendar-o"></i> {! help_record.created_moment !}</span></p>
 				</div>
 			</div>
-			<div class="sidebar-div" ng-if="class.help.total">
+			<div class="sidebar-div" ng-if="!class.help.total">
 				<div class="div-side-content">
 					<p>No Help Requests for now...</p>
 				</div>
@@ -245,10 +245,10 @@
 
 			<div class="side-btn-container row container-bottom" ng-if="!class.add_help && !class.help.success">
 				<div class="col-xs-6 btn-left">
-		            {!! Html::link(route('student.help.index'), 'View More'
+		            {!! Html::link(route('student.help.index'), 'View List'
 		                , array(
 		                   'class' => 'btn btn-blue'
-		                  , 'ng-if' => 'class.help.total > 3'
+		                  , 'ng-if' => 'class.help.total'
 		                )
 		            ) !!}
 				</div>

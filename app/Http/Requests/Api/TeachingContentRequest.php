@@ -33,11 +33,12 @@ class TeachingContentRequest extends ApiRequest {
 					'teaching_module' => 'required',
 					'description' => 'required',
 					'learning_style_id' => 'required|exists:learning_styles,id,deleted_at,NULL',
-					'content_url' => 'required_if:image,|string',
+					'content_url' => 'required_if:media_type_id,1|string',
 					'media_type_id' => 'required|exists:media_types,id,deleted_at,NULL',
 					'status' => 'required|in:Enabled,Disabled',
-					'image' => 'required_if:content_url,|string',
-					'seq_no' => 'integer'
+					'image' => 'required_if:media_type_id,3|string',
+					'seq_no' => 'integer',
+					'content_text' => 'required_if:media_type_id,2|string',
 
 				];
 
@@ -47,11 +48,12 @@ class TeachingContentRequest extends ApiRequest {
 					'teaching_module' => 'required',
 					'description' => 'required',
 					'learning_style_id' => 'required|exists:learning_styles,id,deleted_at,NULL',
-					'content_url' => 'required_if:image,|string',
+					'content_url' => 'required_if:media_type_id,1|string',
 					'media_type_id' => 'required|exists:media_types,id,deleted_at,NULL',
 					'status' => 'required|in:Enabled,Disabled',
-					'image' => 'required_if:content_url,|string',
-					'seq_no' => 'integer'
+					'image' => 'required_if:media_type_id,3|string',
+					'seq_no' => 'integer',
+					'content_text' => 'required_if:media_type_id,2|string',
 
 				];
 				break;
@@ -67,8 +69,9 @@ class TeachingContentRequest extends ApiRequest {
 			'module_id.required' => 'The module field is required.',
 			'subject_id.required' => 'The subject field is required.',
 			'subject_area_id.required' => 'The subject area field is required.',
-			'image.required_if' =>'The image field is required when content_url is empty.',
-			'content_url.required_if' =>'The content url field is required when image is empty.',
+			'image.required_if' =>'The image field is required.',
+			'content_url.required_if' =>'The content url field is required.',
+			'content_text.required_if' =>'The content text field is required.',
 		];
 	}
 
