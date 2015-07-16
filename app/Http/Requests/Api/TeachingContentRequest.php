@@ -51,7 +51,6 @@ class TeachingContentRequest extends ApiRequest {
 					'content_url' => 'required_if:media_type_id,1|string',
 					'media_type_id' => 'required|exists:media_types,id,deleted_at,NULL',
 					'status' => 'required|in:Enabled,Disabled',
-					'image' => 'required_if:media_type_id,3|string',
 					'seq_no' => 'integer',
 					'content_text' => 'required_if:media_type_id,2|string',
 

@@ -117,7 +117,7 @@
 				<div class="form-group">
 					<label class="col-xs-3 control-label">Media Type <span class="required">*</span></label>
 					<div class="col-xs-6" ng-init="content.getMediaTypes()">
-						<select  name="media_type_id" ng-disabled="content.active_view" ng-class="{ 'required-field' : content.fields['media_type_id'] }" class="form-control" ng-model="content.record.media_type_id">
+						<select  name="media_type_id" ng-disabled="content.active_view" ng-class="{ 'required-field' : content.fields['media_type_id'] }" ng-change="content.emptyValue()" class="form-control" ng-model="content.record.media_type_id">
 							<option ng-selected="content.record.media_type_id == futureed.FALSE" value="">-- Select Media Type --</option>
 							<option ng-selected="content.record.media_type_id == type.id" ng-repeat="type in content.types" ng-value="type.id">{! type.name!}</option>
 						</select>
@@ -130,6 +130,7 @@
 							, array(
 								'placeholder' => 'Content Url'
 								, 'ng-model' => 'content.record.content_url'
+								, 'ng-disabled' => 'content.active_view'
 								, 'ng-class' => "{ 'required-field' : content.fields['content_url'] }"
 								, 'class' => 'form-control'
 							)
@@ -143,6 +144,7 @@
 							, array(
 								'placeholder' => 'Content Text'
 								, 'ng-model' => 'content.record.content_text'
+								, 'ng-disabled' => 'content.active_view'
 								, 'ng-class' => "{ 'required-field' : content.fields['content_text'] }"
 								, 'class' => 'form-control'
 								, 'rows' => '5'

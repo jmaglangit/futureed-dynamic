@@ -208,6 +208,8 @@ function ManageModuleContentController($scope, ManageModuleContentService, Table
 					self.record.media_type_id = (record.media_type) ? record.media_type.id : Constants.EMPTY_STR;
 					self.record.status = record.status;
 					self.record.content_image = record.content_image;
+					self.record.content_text = record.content_text;
+					self.record.seq_no = record.module_content.seq_no;
 				}
 			}
 
@@ -321,5 +323,10 @@ function ManageModuleContentController($scope, ManageModuleContentService, Table
 	        keyboard: Constants.FALSE,
 	        show    : Constants.TRUE
 	    });
+    }
+
+    self.emptyValue = function() {
+    	self.record.content_url = Constants.EMPTY_STR;
+    	self.record.content_text = Constants.EMPTY_STR;
     }
 }
