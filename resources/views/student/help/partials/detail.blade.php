@@ -36,6 +36,7 @@
 			<div class="col-xs-12">
 				<hr />
 			</div>
+
 			<div class="col-xs-12">
 				<label class="col-xs-1 margin-top-8"> Status: </label>
 				<div>
@@ -58,6 +59,7 @@
 	        		</label>
         		</div>
 			</div>
+
 			<div class="col-xs-12 search-container">
 				<div class="form-search">
 					<div class="form-group">
