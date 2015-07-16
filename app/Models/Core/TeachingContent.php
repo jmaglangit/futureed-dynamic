@@ -31,7 +31,8 @@ class TeachingContent extends Model {
 		'created_by' => 1,
 		'updated_by' => 1,
 		'original_image_name'=>0,
-		'content_text' => 0
+		'content_text' => 0,
+		'content_url' => 0
 	];
 
     //Relationships
