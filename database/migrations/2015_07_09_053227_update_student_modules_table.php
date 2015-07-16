@@ -38,7 +38,7 @@ class UpdateStudentModulesTable extends Migration {
 
 			//Add
 			$table->smallInteger('no_of_mistakes')->after('total_time');
-			$table->integer('total_points_lost')->after('total_points_lost');
+			$table->integer('total_points_lost')->after('no_of_mistakes');
 
 			//Drop
 			$table->dropColumn(['question_counter','wrong_counter','running_points','points_earned']);
