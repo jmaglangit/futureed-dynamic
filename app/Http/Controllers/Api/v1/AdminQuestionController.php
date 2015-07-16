@@ -79,6 +79,7 @@ class AdminQuestionController extends ApiController {
 
 		}
 
+
 		return $this->respondWithData($record);
 	}
 
@@ -168,6 +169,7 @@ class AdminQuestionController extends ApiController {
 
 			return $this->respondErrorMessage(2120);
 		}
+
 
 		$question->questions_image = config('futureed.question_image_path_final_public').'/'.$question->id.'/'.$question->questions_image;
 
