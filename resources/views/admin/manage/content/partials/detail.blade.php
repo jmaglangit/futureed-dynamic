@@ -106,21 +106,6 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-xs-3 control-label">Content URL <span class="required">*</span></label>
-					<div class="col-xs-6">
-						{!! Form::text('content_url', ''
-							, array(
-								'placeholder' => 'Content Url'
-								, 'ng-disabled' => 'content.active_view'
-								, 'ng-model' => 'content.record.content_url'
-								, 'ng-class' => "{ 'required-field' : content.fields['content_url'] }"
-								, 'class' => 'form-control'
-							)
-						) !!}
-					</div>
-					
-				</div>
-				<div class="form-group">
 					<label class="col-xs-3 control-label" id="email">Learning Style <span class="required">*</span></label>
 					<div class="col-xs-6">
 						<select  name="learning_style_id" ng-disabled="content.active_view" ng-class="{ 'required-field' : content.fields['learning_style_id'] }" class="form-control" ng-model="content.record.learning_style_id">
@@ -136,6 +121,46 @@
 							<option ng-selected="content.record.media_type_id == futureed.FALSE" value="">-- Select Media Type --</option>
 							<option ng-selected="content.record.media_type_id == type.id" ng-repeat="type in content.types" ng-value="type.id">{! type.name!}</option>
 						</select>
+					</div>
+				</div>
+				<div class="form-group" ng-if="content.record.media_type_id == 1">
+					<label class="col-xs-3 control-label">Video <span class="required">*</span></label>
+					<div class="col-xs-6">
+						{!! Form::text('content_url', ''
+							, array(
+								'placeholder' => 'Content Url'
+								, 'ng-model' => 'content.record.content_url'
+								, 'ng-class' => "{ 'required-field' : content.fields['content_url'] }"
+								, 'class' => 'form-control'
+							)
+						) !!}
+					</div>
+				</div>
+				<div class="form-group" ng-if="content.record.media_type_id == 2">
+					<label class="col-xs-3 control-label">Content Text <span class="required">*</span></label>
+					<div class="col-xs-6">
+						{!! Form::textarea('content_text', ''
+							, array(
+								'placeholder' => 'Content Text'
+								, 'ng-model' => 'content.record.content_text'
+								, 'ng-class' => "{ 'required-field' : content.fields['content_text'] }"
+								, 'class' => 'form-control'
+								, 'rows' => '5'
+							)
+						) !!}
+					</div>
+				</div>
+				<div class="form-group" ng-if="content.record.media_type_id == 3 && content.active_edit">
+					<label class="col-xs-3 control-label">Image <span class="required">*</span></label>
+					<div class="col-xs-6">
+	                    <div class="btn btn-blue" ngf-select ngf-change="content.upload($files, content.record)"> Choose Image... </div>
+	                    <span ng-if="content.record.uploaded" class="label label-info margin-top-5 col-xs-12">Image Uploaded...</span>
+					</div>
+				</div>
+				<div class="form-group" ng-if="content.record.media_type_id == 3 && content.active_view">
+					<label class="col-xs-3 control-label">Image </label>
+					<div class="col-xs-6">
+	                    <a href="javascript:;" class="top-5" ng-click="content.viewImage('{!! route('admin.image.viewer') !!}', content.record)">View Content Image</a>
 					</div>
 				</div>
 				<div class="form-group">
@@ -250,4 +275,28 @@
 			</fieldset>
 		{!! Form::close() !!}
 	</div>
+	<div id="view_image_modal" ng-show="content.view_image.show" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    {! content.view_image.questions_text !}
+                </div>
+                <div class="modal-body">
+                    <div class="modal-image">
+                        <img ng-src="{! content.view_image.image_path !}"/>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="btncon col-md-8 col-md-offset-4 pull-left">
+                        {!! Form::button('Close'
+                            , array(
+                                'class' => 'btn btn-gold btn-medium'
+                                , 'data-dismiss' => 'modal'
+                            )
+                        ) !!}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

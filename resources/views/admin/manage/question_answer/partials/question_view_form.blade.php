@@ -61,7 +61,7 @@
                     {!! Form::text('code',''
                         , array(
                             'placeHolder' => 'Code'
-                            , 'ng-model' => 'qa.qa_details.code'
+                            , 'ng-model' => 'qa.q_details.code'
                             , 'class' => 'form-control'
                             , 'ng-disabled' => 'true'
                         )
@@ -80,7 +80,7 @@
                         , ''
                         , array(
                             'class' => 'form-control'
-                            , 'ng-model' => 'qa.qa_details.question_type'
+                            , 'ng-model' => 'qa.q_details.question_type'
                             , 'ng-disabled' => '!qa.edit'
                             , 'ng-class' => "{ 'required-field' : qa.fields['question_type'] }"
                         )
@@ -93,19 +93,19 @@
                     {!! Form::text('question',''
                         , array(
                             'placeHolder' => 'Question'
-                            , 'ng-model' => 'qa.qa_details.questions_text'
+                            , 'ng-model' => 'qa.q_details.questions_text'
                             , 'class' => 'form-control'
                             , 'ng-disabled' => '!qa.edit'
                             , 'ng-class' => "{ 'required-field' : qa.fields['questions_text'] }"
                         )
                     ) !!}
                 </div>
-                <label ng-if="qa.qa_details.question_type != 'MC' && qa.qa_details.question_type" class="control-label col-xs-2">Answer <span class="required">*</span></label>
-                <div class="col-xs-4" ng-if="qa.qa_details.question_type != 'MC' && qa.qa_details.question_type">
+                <label ng-if="qa.q_details.question_type != 'MC' && qa.q_details.question_type" class="control-label col-xs-2">Answer <span class="required">*</span></label>
+                <div class="col-xs-4" ng-if="qa.q_details.question_type != 'MC' && qa.q_details.question_type">
                     {!! Form::text('question',''
                         , array(
                             'placeHolder' => 'Answer'
-                            , 'ng-model' => 'qa.qa_details.answer'
+                            , 'ng-model' => 'qa.q_details.answer'
                             , 'class' => 'form-control'
                             , 'ng-disabled' => '!qa.edit'
                             , 'ng-class' => "{ 'required-field' : qa.fields['answer'] }"
@@ -119,7 +119,7 @@
                     {!! Form::text('points_earned',''
                         , array(
                             'placeHolder' => 'Points Earned'
-                            , 'ng-model' => 'qa.qa_details.points_earned'
+                            , 'ng-model' => 'qa.q_details.points_earned'
                             , 'class' => 'form-control'
                             , 'ng-disabled' => '!qa.edit'
                             , 'ng-class' => "{ 'required-field' : qa.fields['points_earned'] }"
@@ -129,14 +129,14 @@
 
                 <label ng-if="qa.active_edit" class="control-label col-xs-2">Question Image</label>
                 <div class="col-xs-4" ng-if="qa.active_edit">
-                    <div class="btn btn-blue" ngf-select ngf-change="qa.upload($files, qa.qa_details)"> Choose Image... </div>
-                    <span ng-if="qa.qa_details.uploaded" class="label label-info upload-label">Image Uploaded...</span>
+                    <div class="btn btn-blue" ngf-select ngf-change="qa.upload($files, qa.q_details)"> Choose Image... </div>
+                    <span ng-if="qa.q_details.uploaded" class="label label-info upload-label">Image Uploaded...</span>
                 </div>
 
-                <div ng-if="qa.active_view && qa.qa_details.original_image_name && qa.qa_details.original_image_name != '0'">
+                <div ng-if="qa.active_view && qa.q_details.original_image_name && qa.q_details.original_image_name != '0'">
                     <div class="col-xs-2"></div>
                     <div class="col-xs-4 control-label">
-                        <a href="" ng-click="qa.viewImage('{!! route('admin.image.viewer') !!}', qa.qa_details)">View Question Image</a>
+                        <a href="" ng-click="qa.viewImage('{!! route('admin.image.viewer') !!}', qa.q_details)">View Question Image</a>
                     </div>
                 </div>
         	</div>
@@ -146,7 +146,7 @@
                     {!! Form::text('difficulty',''
                         , array(
                             'placeHolder' => 'Difficulty'
-                            , 'ng-model' => 'qa.qa_details.difficulty'
+                            , 'ng-model' => 'qa.q_details.difficulty'
                             , 'class' => 'form-control'
                             , 'ng-disabled' => '!qa.edit'
                             , 'ng-class' => "{ 'required-field' : qa.fields['difficulty'] }"
@@ -162,7 +162,7 @@
                                 , true
                                 , array(
                                     'class' => 'field'
-                                    , 'ng-model' => 'qa.qa_details.status'
+                                    , 'ng-model' => 'qa.q_details.status'
                                 ) 
                             ) !!}
                         <span class="lbl padding-8">Enabled</span>
@@ -175,7 +175,7 @@
                                 , false
                                 , array(
                                     'class' => 'field'
-                                    , 'ng-model' => 'qa.qa_details.status'
+                                    , 'ng-model' => 'qa.q_details.status'
                                 )
                             ) !!}
                         <span class="lbl padding-8">Disabled</span>
@@ -183,15 +183,15 @@
                     </div>
                 </div>
                 <div class="col-xs-4" ng-if="qa.active_view">
-                    <label class="col-md-8" ng-if="qa.qa_details.status == 'Enabled'">
+                    <label class="col-md-8" ng-if="qa.q_details.status == 'Enabled'">
                         <b class="success-icon">
-                            <i class="margin-top-8 fa fa-check-circle-o"></i> {! qa.qa_details.status !}
+                            <i class="margin-top-8 fa fa-check-circle-o"></i> {! qa.q_details.status !}
                         </b>
                     </label>
 
-                    <label class="col-md-8" ng-if="qa.qa_details.status == 'Disabled'">
+                    <label class="col-md-8" ng-if="qa.q_details.status == 'Disabled'">
                         <b class="error-icon">
-                            <i class="margin-top-8 fa fa-ban"></i> {! qa.qa_details.status !}
+                            <i class="margin-top-8 fa fa-ban"></i> {! qa.q_details.status !}
                         </b>
                     </label>
                 </div>
@@ -202,7 +202,7 @@
                     {!! Form::text('seq_no',''
                         , array(
                             'placeHolder' => 'Sequance No'
-                            , 'ng-model' => 'qa.qa_details.seq_no'
+                            , 'ng-model' => 'qa.q_details.seq_no'
                             , 'class' => 'form-control'
                             , 'ng-disabled' => '!qa.edit'
                             , 'ng-class' => "{ 'required-field' : qa.fields['seq_no'] }"
@@ -216,7 +216,7 @@
                 {!! Form::button('Edit'
                     , array(
                         'class' => 'btn btn-blue btn-medium'
-                        , 'ng-click' => "qa.setActive('edit', qa.qa_details.id)"
+                        , 'ng-click' => "qa.setActive('edit', qa.q_details.id)"
                         , 'ng-if' => 'qa.active_view'
                     )
                 ) !!}
@@ -230,7 +230,7 @@
                 {!! Form::button('Cancel'
                     , array(
                         'class' => 'btn btn-gold btn-medium'
-                        , 'ng-click' => "qa.setActive('view', qa.qa_details.id)"
+                        , 'ng-click' => "qa.setActive('view', qa.q_details.id)"
                         , 'ng-if' => 'qa.active_edit'
                     )
                 ) !!}

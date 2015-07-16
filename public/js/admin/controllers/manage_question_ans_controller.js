@@ -6,7 +6,7 @@ ManageQuestionAnsController.$inject = ['$scope', '$timeout', 'ManageQuestionAnsS
 function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService, apiService, TableService, SearchService, Upload) {
     var self = this;
 
-    self.qa_details = {};
+    self.q_details = {};
     self.delete = {};
     self.answers = {};
 
@@ -187,7 +187,7 @@ function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService,
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
-					self.qa_details = response.data;
+					self.q_details = response.data;
 				}
 			}
 		$scope.ui_unblock();
@@ -228,7 +228,7 @@ function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService,
 		self.fields = [];
 
 		$scope.ui_block();
-		ManageQuestionAnsService.saveEditQuestion(self.qa_details).success(function(response){
+		ManageQuestionAnsService.saveEditQuestion(self.q_details).success(function(response){
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
@@ -239,7 +239,7 @@ function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService,
 				} else if(response.data) {
 					self.validation = {};
 					self.success = ManageModuleConstants.SUCCESS_EDIT_QUESTION;
-					self.setActive('view', self.qa_details.id, 1);
+					self.setActive('view', self.q_details.id, 1);
 				}
 			}
 		$scope.ui_unblock();
@@ -313,7 +313,7 @@ function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService,
 		self.answers.success = Constants.FALSE;
 		self.fields = [];
 		self.answers.module_id = self.module.id;
-		self.answers.question_id = self.qa_details.id;
+		self.answers.question_id = self.q_details.id;
 		$scope.ui_block();
 		ManageQuestionAnsService.addAnswer(self.answers).success(function(response){
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
@@ -340,7 +340,7 @@ function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService,
 		if(flag != 1){
 			self.errors = Constants.FALSE;
 		}
-		var id = self.qa_details.id;
+		var id = self.q_details.id;
 		self.ans_records = {};
 
 		$scope.ui_block();

@@ -1,9 +1,9 @@
 angular.module('futureed.controllers')
 	.controller('ManageModuleContentController', ManageModuleContentController);
 
-ManageModuleContentController.$inject = ['$scope', 'ManageModuleContentService', 'TableService', 'SearchService'];
+ManageModuleContentController.$inject = ['$scope', 'ManageModuleContentService', 'TableService', 'SearchService', 'Upload'];
 
-function ManageModuleContentController($scope, ManageModuleContentService, TableService, SearchService) {
+function ManageModuleContentController($scope, ManageModuleContentService, TableService, SearchService, Upload) {
 	var self = this;
 	
 	TableService(self);
@@ -74,6 +74,33 @@ function ManageModuleContentController($scope, ManageModuleContentService, Table
 		}
 
 		$("html, body").animate({ scrollTop: 0 }, "slow");
+	}
+
+	self.upload = function(file, object) {
+    	object.uploaded = Constants.FALSE;
+
+		if(file.length) {
+			$scope.ui_block();
+			Upload.upload({
+                url: '/api/v1/teaching-content/upload-image'
+                , file: file[0]
+            }).success(function(response) {
+                if(angular.equals(response.status, Constants.STATUS_OK)) {
+	                if(response.errors) {
+	                    self.errors = $scope.errorHandler(response.errors);
+	                }else if(response.data){
+                		object.image = response.data.image_name;
+                		object.uploaded = Constants.TRUE;
+                		self.record.image = object.image;
+	                }
+	            }
+
+            	$scope.ui_unblock();
+            }).error(function(response) {
+                self.errors = $scope.internalError();
+                $scope.ui_unblock();
+            });
+        }
 	}
 
 	self.searchFnc = function(event) {
@@ -180,6 +207,7 @@ function ManageModuleContentController($scope, ManageModuleContentService, Table
 					self.record.learning_style_id = record.learning_style.id;
 					self.record.media_type_id = (record.media_type) ? record.media_type.id : Constants.EMPTY_STR;
 					self.record.status = record.status;
+					self.record.image = record.content_url;
 				}
 			}
 
@@ -194,6 +222,7 @@ function ManageModuleContentController($scope, ManageModuleContentService, Table
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
 		self.fields = [];
+		self.record.image = (self.record.image) ? self.record.image:null; 
 
 		$scope.ui_block();
 		ManageModuleContentService.add(self.record).success(function(response) {
@@ -223,6 +252,7 @@ function ManageModuleContentController($scope, ManageModuleContentService, Table
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
 		self.fields = [];
+		self.record.image = (self.record.image) ? self.record.image:null;
 
 		$scope.ui_block();
 		ManageModuleContentService.update(self.record).success(function(response) {
@@ -279,4 +309,17 @@ function ManageModuleContentController($scope, ManageModuleContentService, Table
 			$scope.ui_unblock();
 		});
 	}
+
+	self.viewImage = function(base, object) {
+    	self.view_image = {};
+		self.view_image.image_path = object.content_image;
+		self.view_image.questions_text = object.questions_text;
+		self.view_image.show = Constants.TRUE;
+
+		$("#view_image_modal").modal({
+	        backdrop: 'static',
+	        keyboard: Constants.FALSE,
+	        show    : Constants.TRUE
+	    });
+    }
 }

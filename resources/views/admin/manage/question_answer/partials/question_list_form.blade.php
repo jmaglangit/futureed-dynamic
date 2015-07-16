@@ -121,7 +121,7 @@
                     <tr ng-repeat="qaInfo in qa.qa_records">
                         <td>{! qaInfo.code !}</td>
                         <td>{! qaInfo.questions_text !}</td>
-                        <td><img src=""></td>
+                        <td><a href="javascript:;" ng-if="qaInfo.original_image_name">View Image</a></td>
                         <td>{! qaInfo.question_type !}</td>
                         <td>{! qaInfo.difficulty !}</td>
                         <td>{! qaInfo.seq_no !}</td>
