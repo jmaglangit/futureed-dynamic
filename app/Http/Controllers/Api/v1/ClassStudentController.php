@@ -190,6 +190,14 @@ class ClassStudentController extends ApiController {
 
 		$student_id = $this->student->getStudentId($check_email['user_id']);
 
+		//check classroom has not expired.
+		$classroom_status = $this->classroom_services->checkActiveClassroom($data['class_id']);
+
+		if(!$classroom_status){
+
+			return $this->respondErrorMessage(2051);
+		}
+
 		//check if student is added in a class already including inactive class
 		$isEnrolled = $this->class_student->isEnrolled($student_id,$data['class_id']);
 
