@@ -279,7 +279,7 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    {! content.view_image.questions_text !}
+                    {! content.view_image.description !}
                 </div>
                 <div class="modal-body">
                     <div class="modal-image">

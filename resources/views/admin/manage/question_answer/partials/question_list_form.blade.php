@@ -121,7 +121,7 @@
                     <tr ng-repeat="qaInfo in qa.qa_records">
                         <td>{! qaInfo.code !}</td>
                         <td>{! qaInfo.questions_text !}</td>
-                        <td><a href="javascript:;" ng-if="qaInfo.original_image_name">View Image</a></td>
+                        <td><a href="javascript:;" ng-if="qaInfo.original_image_name" ng-click="qa.viewImage('{!! route('admin.image.viewer') !!}', qaInfo)">View Image</a></td>
                         <td>{! qaInfo.question_type !}</td>
                         <td>{! qaInfo.difficulty !}</td>
                         <td>{! qaInfo.seq_no !}</td>
@@ -195,3 +195,27 @@
     </div>
   </div>
 </div>
+<div id="view_image_modal" ng-show="qa.view_image.show" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    {! qa.view_image.questions_text !}
+                </div>
+                <div class="modal-body">
+                    <div class="modal-image">
+                        <img ng-src="{! qa.view_image.image_path !}"/>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="btncon col-md-8 col-md-offset-4 pull-left">
+                        {!! Form::button('Close'
+                            , array(
+                                'class' => 'btn btn-gold btn-medium'
+                                , 'data-dismiss' => 'modal'
+                            )
+                        ) !!}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

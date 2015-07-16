@@ -207,7 +207,7 @@ function ManageModuleContentController($scope, ManageModuleContentService, Table
 					self.record.learning_style_id = record.learning_style.id;
 					self.record.media_type_id = (record.media_type) ? record.media_type.id : Constants.EMPTY_STR;
 					self.record.status = record.status;
-					self.record.image = record.content_url;
+					self.record.content_image = record.content_image;
 				}
 			}
 
@@ -313,8 +313,10 @@ function ManageModuleContentController($scope, ManageModuleContentService, Table
 	self.viewImage = function(base, object) {
     	self.view_image = {};
 		self.view_image.image_path = object.content_image;
-		self.view_image.questions_text = object.questions_text;
+		self.view_image.description = object.description;
 		self.view_image.show = Constants.TRUE;
+
+		console.log(object)
 
 		$("#view_image_modal").modal({
 	        backdrop: 'static',
