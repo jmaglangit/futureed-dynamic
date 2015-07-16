@@ -1,9 +1,10 @@
 <?php namespace FutureEd\Services;
 
 
+use Carbon\Carbon;
 use FutureEd\Models\Repository\Classroom\ClassroomRepositoryInterface;
 
-class Classroom {
+class ClassroomServices {
 
 	/**
 	 * @var ClassroomRepositoryInterface
@@ -28,7 +29,22 @@ class Classroom {
 
 		$classroom = $this->classroom->getClassroom($class_id);
 
-		dd($classroom->toArray());
+
+		if($classroom->order){
+
+			if($classroom->order->date_start <= Carbon::now()
+				&& $classroom->order->date_end >= Carbon::now()){
+
+				return true;
+
+			}
+
+			return false;
+
+		}else{
+
+			return false;
+		}
 
 
 
