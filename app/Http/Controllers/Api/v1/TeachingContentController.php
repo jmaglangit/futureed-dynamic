@@ -40,13 +40,13 @@ class TeachingContentController extends ApiController {
      * Initialized Teaching Content.
      * @param TeachingContentRepositoryInterface $teachingContentRepositoryInterface
      */
-    public function __construct(
-        TeachingContentRepositoryInterface $teachingContentRepositoryInterface,
+	public function __construct(
+		TeachingContentRepositoryInterface $teachingContentRepositoryInterface,
 		ModuleContentRepositoryInterface $moduleContentRepositoryInterface,
 		Filesystem $file,
 		ModuleContentServices $moduleContentServices
 
-    ){
+	){
 
 		$this->teaching_content = $teachingContentRepositoryInterface;
 		$this->module_content = $moduleContentRepositoryInterface;
