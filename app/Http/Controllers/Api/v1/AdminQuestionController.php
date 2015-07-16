@@ -70,15 +70,6 @@ class AdminQuestionController extends ApiController {
 
 		$record = $this->question->getQuestions($criteria , $limit, $offset );
 
-		if($record['total'] > 0){
-
-			foreach($record['records'] as $k=>$v){
-
-				$record['records'][$k]['questions_image'] = config('futureed.question_image_path_final').'/'.$v['id'].'/'.$v['questions_image'];
-			}
-
-		}
-
 		return $this->respondWithData($record);
 	}
 
@@ -168,8 +159,6 @@ class AdminQuestionController extends ApiController {
 
 			return $this->respondErrorMessage(2120);
 		}
-
-		$question->questions_image = config('futureed.question_image_path_final').'/'.$question->id.'/'.$question->questions_image;
 
 		return $this->respondWithData($question);
 	}

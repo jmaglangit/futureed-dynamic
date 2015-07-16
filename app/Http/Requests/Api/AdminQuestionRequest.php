@@ -35,7 +35,7 @@ class AdminQuestionRequest extends ApiRequest {
 					'question_type' => 'required|alpha|in:MC,FIB,O,N',
 					'points_earned' => 'required|integer',
 					'code' => 'required|integer',
-					'answer' => 'string',
+					'answer' => 'required_if:question_type,FIB,O,N|string',
 					'seq_no' => 'integer',
 				];
 				break;
@@ -65,7 +65,8 @@ class AdminQuestionRequest extends ApiRequest {
 			'difficulty.integer' => 'Difficulty must be a number.',
 			'points_earned.integer' => 'Points earned must be a number.',
 			'code.integer' => 'Code must be a number.',
-			'seq_no.integer' => 'Sequence number is invalid.'
+			'seq_no.integer' => 'Sequence number is invalid.',
+			'answer.required_if' => 'The answer field is required.'
 
 		];
 	}
