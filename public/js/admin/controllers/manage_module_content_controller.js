@@ -316,8 +316,6 @@ function ManageModuleContentController($scope, ManageModuleContentService, Table
 		self.view_image.description = object.description;
 		self.view_image.show = Constants.TRUE;
 
-		console.log(object)
-
 		$("#view_image_modal").modal({
 	        backdrop: 'static',
 	        keyboard: Constants.FALSE,
