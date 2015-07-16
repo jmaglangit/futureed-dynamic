@@ -8,6 +8,7 @@ use FutureEd\Models\Repository\Classroom\ClassroomRepositoryInterface;
 use FutureEd\Models\Repository\ClassStudent\ClassStudentRepositoryInterface;
 use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
 
+use FutureEd\Services\ClassroomServices;
 use FutureEd\Services\CodeGeneratorServices;
 use FutureEd\Services\MailServices;
 use FutureEd\Services\StudentServices;
@@ -24,20 +25,25 @@ class ClassStudentController extends ApiController {
     protected $student;
     protected $user;
     protected $classroom;
+	protected $classroom_services;
 
-    public function __construct(ClassStudentRepositoryInterface $classStudentRepositoryInterface,
-                                ClientRepositoryInterface $clientRepositoryInterface,
-                                UserServices $userServices,
-                                MailServices $mailServices,
-                                StudentServices $studentRepositoryInterface,
-                                ClassroomRepositoryInterface $classroom)
-    {
-        $this->class_student = $classStudentRepositoryInterface;
-        $this->client = $clientRepositoryInterface;
-        $this->mail = $mailServices;
-        $this->student = $studentRepositoryInterface;
-        $this->user = $userServices;
-        $this->classroom = $classroom;
+    public function __construct(
+		ClassStudentRepositoryInterface $classStudentRepositoryInterface,
+		ClientRepositoryInterface $clientRepositoryInterface,
+		UserServices $userServices,
+		MailServices $mailServices,
+		StudentServices $studentRepositoryInterface,
+		ClassroomRepositoryInterface $classroom,
+		ClassroomServices $classroomServices
+	)
+	{
+		$this->class_student = $classStudentRepositoryInterface;
+		$this->client = $clientRepositoryInterface;
+		$this->mail = $mailServices;
+		$this->student = $studentRepositoryInterface;
+		$this->user = $userServices;
+		$this->classroom = $classroom;
+		$this->classroom_services = $classroomServices;
     }
 
     /**
@@ -88,6 +94,15 @@ class ClassStudentController extends ApiController {
         if($check_email){
             return $this->respondErrorMessage(2200);
         }
+
+		//check classroom has not expired.
+
+		$classroom_status = $this->classroom_services->checkActiveClassroom($class_student['class_id']);
+
+		if(!$classroom_status){
+
+			return $this->respondErrorMessage(2051);
+		}
 
         //check seats availability.
         $classroom = $this->classroom->getClassroom($class_student['class_id']);
