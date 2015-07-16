@@ -38,10 +38,10 @@ class SubscriptionRequest extends ApiRequest {
                     break;
                     default:
                     return [
-						'name' => 'required|regex:' . config('regex.name_numeric'),
-						'price' => 'required|numeric|min:0.01|max:999999.99',
-						'description' => 'required',
-						'status' => 'required|in:Enabled,Disabled'];
+					'name' => 'required|regex:' . config('regex.name_numeric'),
+					'price' => 'required|numeric|min:0.01|max:999999.99',
+					'description' => 'required',
+					'status' => 'required|in:Enabled,Disabled'];
                 }
 
             break;
