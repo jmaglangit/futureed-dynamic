@@ -143,6 +143,7 @@ return [
 	'content_image_path' =>  base_path().'/public/uploads/temp/content',
 
 	//path for content uploaded images final
+	'content_image_path_final' => base_path().'/public/uploads/content',
 	'content_image_path_final_public' => '/uploads/content',
 
 	//answer
