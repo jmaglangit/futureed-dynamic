@@ -129,7 +129,7 @@
 					<thead>
 				        <tr>
 				            <th>Help Request Question</th>
-				            <th>Created Date</th>
+				            <th>Date Created</th>
 				            <th>Status</th>
 				            <th ng-if="help.records.length">Actions</th>
 				        </tr>
