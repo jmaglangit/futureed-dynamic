@@ -134,6 +134,16 @@ return [
 	'answer' => 'answer',
 
 
+	//path for content uploaded images temp
+	'content_image_path' =>  base_path().'/uploads/temp/content',
+
+	//path for content uploaded images final
+	'content_image_path_final' => base_path().'/uploads/content',
+
+	//answer
+	'content' => 'content',
+
+
 
 
 

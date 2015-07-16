@@ -30,7 +30,7 @@ class MediaTypeTableSeeder extends Seeder
 				'updated_at' => Carbon::now()
 			],
 			[
-				'name' => 'Text',
+				'name' => 'Image',
 				'description' => 'Image Content',
 				'created_by' => 1,
 				'updated_by' => 1,
