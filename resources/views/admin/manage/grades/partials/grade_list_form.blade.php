@@ -39,8 +39,8 @@
 
 				<div class="col-xs-5">
 	        		<select ng-init="getCountries()" name="country_id" class="form-control" ng-model="grade.search.country_id">
-		          		<option value="">-- Select Country --</option>
-		          		<option ng-repeat="country in countries" ng-value="country.id">{! country.name!}</option>
+		          		<option ng-selected="grade.search.country_id == futureed.FALSE" value="">-- Select Country --</option>
+		          		<option ng-selected="grade.search.country_id == country.id" ng-repeat="country in countries" ng-value="country.id">{! country.name!}</option>
 	        		</select>
 	        	</div>
 				
@@ -64,8 +64,8 @@
 		</div>
 	</div>
 
-	<button class="btn btn-blue btn-small margin-0-30" ng-click="grade.setManageGradeActive('add_grade')">
-		<i class="fa fa-plus-square"></i> Add 
+	<button class="btn btn-blue btn-small margin-0-30" ng-click="grade.setActive('add_grade')">
+		<i class="fa fa-plus-square"></i> Add Grade
 	</button>
 
 	<div class="col-xs-12 padding-0-30">

@@ -176,30 +176,33 @@ function LoginController($scope, apiService, clientLoginApiService, clientProfil
 	}
 
 	function selectRole(role) {
-	    this.principal = Constants.FALSE;
-	    this.teacher = Constants.FALSE;
-	    this.parent = Constants.FALSE;
-	    this.reg = (this.reg) ? this.reg: {} ;
+		$scope.$parent.errors = Constants.FALSE;
+
+	    self.principal = Constants.FALSE;
+	    self.parent = Constants.FALSE;
+	    self.reg = {} ;
 
 	    switch(role) {
 	      case Constants.PRINCIPAL :
-	        this.required = Constants.FALSE;
-	        this.role_click = Constants.TRUE;
-	        this.principal = Constants.TRUE;
-	        this.reg.client_role = Constants.PRINCIPAL;
+	        self.required = Constants.FALSE;
+	        self.role_click = Constants.TRUE;
+	        self.principal = Constants.TRUE;
+	        self.reg.client_role = Constants.PRINCIPAL;
 	        break;
 
 	      case Constants.PARENT    :
-	      	this.required = Constants.TRUE;
-	        this.role_click = Constants.TRUE;
-	        this.parent = Constants.TRUE;
-	        this.reg.client_role = Constants.PARENT;
+	      	self.required = Constants.TRUE;
+	        self.role_click = Constants.TRUE;
+	        self.parent = Constants.TRUE;
+	        self.reg.client_role = Constants.PARENT;
 	        break;
 
 	      default:
-	      	this.reg = {};
+	      	self.reg = {};
 	        break;
 	    }
+
+	    $("#registration_form input, #registration_form select").removeClass("required-field");
 	}
 
 	function registerClient() {
@@ -209,7 +212,7 @@ function LoginController($scope, apiService, clientLoginApiService, clientProfil
 	    
 	    if($scope.e_error || $scope.u_error) {
 	      $("html, body").animate({ scrollTop: 320 }, "slow");
-	    } else if(!this.term) {
+	    } else if(!this.terms) {
 	      $scope.$parent.errors = ["Please accept the terms and conditions."];
 	      $("html, body").animate({ scrollTop: 0 }, "slow");
 	    } else if(this.reg.password != this.reg.confirm_password) {
@@ -341,7 +344,7 @@ function LoginController($scope, apiService, clientLoginApiService, clientProfil
 		if(!angular.equals(self.record.password, self.record.confirm_password)) {
 			self.fields['password'] = Constants.TRUE;
 			self.errors = [Constants.MSG_PW_NOT_MATCH];
-		} else if(!self.term) {
+		} else if(!self.terms) {
 	      self.errors = ["Please accept the terms and conditions."];
 	    } else {
 			var base_url = $("#base_url_form input[name='base_url']").val();
@@ -431,4 +434,17 @@ function LoginController($scope, apiService, clientLoginApiService, clientProfil
 			self.errors = $scope.internalError();
 		});
 	}  
+
+	self.showModal = function(id) {
+		$scope.show_terms = (id == 'terms_modal') ? Constants.TRUE : Constants.FALSE;
+		$scope.show_policy = (id == 'policy_modal') ? Constants.TRUE : Constants.FALSE;
+		$scope.show = Constants.TRUE;
+
+
+		$("#"+id).modal({
+				backdrop: 'static',
+				keyboard: Constants.FALSE,
+				show    : Constants.TRUE
+		});
+	}
 }	

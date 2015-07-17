@@ -5,6 +5,7 @@ use FutureEd\Http\Controllers\Controller;
 use FutureEd\Http\Requests\Api\AdminStudentRequest;
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use FutureEd\Models\Repository\User\UserRepositoryInterface;
+use FutureEd\Services\StudentServices;
 use Illuminate\Http\Request;
 use FutureEd\Services\CodeGeneratorServices;
 use FutureEd\Services\MailServices;
@@ -17,12 +18,16 @@ class AdminStudentController extends ApiController {
 			UserRepositoryInterface $user,
 			StudentRepositoryInterface $student,
 			CodeGeneratorServices $code,
-			MailServices $mail ){
+			MailServices $mail,
+			StudentServices $studentServices
 
-				$this->user = $user;
-				$this->student = $student;
-				$this->code = $code;
-				$this->mail = $mail;
+		){
+
+			$this->user = $user;
+			$this->student = $student;
+			$this->code = $code;
+			$this->mail = $mail;
+			$this->student_service = $studentServices;
 		}
 
 		/**
@@ -147,10 +152,10 @@ class AdminStudentController extends ApiController {
 		public function update($id,AdminStudentRequest $request)
 		{
 			$data = $request->only('first_name','last_name','gender','birth_date','country','state','city','country_id','school_code','grade_code');
-			$user = $request->only('username');
+			$user = $request->only('username','email');
 			$user_type = config('futureed.student');
 
-			$user['name'] = $data['first_name'].$data['last_name'];
+			$user['name'] = $data['first_name'].' '.$data['last_name'];
 
 
 			$student = $this->student->viewStudent($id);
@@ -161,21 +166,18 @@ class AdminStudentController extends ApiController {
 			}
 
 			//check if subscription is expired or not, if not it returns a data
-			$subscription = $this->student->subscriptionExpired($id);
+			if($request->get('school_code')){
 
-			//for home based student
-			if($data['school_code'] == NULL){
-				$data['school_code'] = 0;
-			}
+				$student_class = $this->student_service->getCurrentClass($id);
 
-			if($subscription){
+				if($student_class <> 0){
 
-				if($data['school_code']!= $student['school_code']){
-
-					return $this->respondErrorMessage(2134);
-
+					return $this->respondErrorMessage(2050);
 				}
 
+			} else {
+
+				$data['school_code'] = 0;
 			}
 
 			//update user

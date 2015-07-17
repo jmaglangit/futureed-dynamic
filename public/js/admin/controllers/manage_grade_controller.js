@@ -1,19 +1,19 @@
 angular.module('futureed.controllers')
 	.controller('ManageGradeController', ManageGradeController);
 
-ManageGradeController.$inject = ['$scope', 'apiService', 'manageGradeService', 'TableService'];
+ManageGradeController.$inject = ['$scope', 'apiService', 'manageGradeService', 'TableService', 'SearchService'];
 
-function ManageGradeController($scope, apiService, manageGradeService, TableService) {
+function ManageGradeController($scope, apiService, manageGradeService, TableService, SearchService) {
 	var self = this;
 
 	TableService(self);
 	self.tableDefaults();
 
-	self.search = {};
+	SearchService(self);
+	self.searchDefaults();
+
 	self.create = {};
 	self.delete = {};
-
-	self.setManageGradeActive = setManageGradeActive;
 
 	self.addNewGrade = addNewGrade;
 	self.getGradeDetails = getGradeDetails;
@@ -22,10 +22,10 @@ function ManageGradeController($scope, apiService, manageGradeService, TableServ
 	self.confirmDeleteGrade = confirmDeleteGrade;
 	self.deleteGrade = deleteGrade;
 
-	function setManageGradeActive(active) {
+	self.setActive = function(active) {
 		self.errors = Constants.FALSE;
 
-		self.search = {};
+		self.fields = [];
 		self.create = {};
 		self.delete = {};
 
@@ -49,7 +49,6 @@ function ManageGradeController($scope, apiService, manageGradeService, TableServ
 				break;
 		}
 
-		$('input, select').removeClass('required-field');
 	    $("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 
@@ -67,13 +66,13 @@ function ManageGradeController($scope, apiService, manageGradeService, TableServ
 
 	self.getGradeList = function() {
 		self.errors = Constants.FALSE;
-		var grade = (self.search.grade) ? self.search.grade : Constants.EMPTY_STR;
-		var country_id = (self.search.country_id) ? self.search.country_id : Constants.ALL;
 		self.grades = {};
 		self.table.loading = Constants.TRUE;
 
+		self.search.country_id = (self.search.country_id == Constants.EMPTY_STR) ? Constants.ALL:self.search.country_id;
+
 		$scope.ui_block();
-		manageGradeService.getGradeList(grade, country_id, self.table).success(function(response) {
+		manageGradeService.getGradeList(self.search, self.table).success(function(response) {
 			self.table.loading = Constants.FALSE;
 
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
@@ -95,16 +94,16 @@ function ManageGradeController($scope, apiService, manageGradeService, TableServ
 
 	self.clear = function() {
 		self.errors = Constants.FALSE;
-		self.search = {};
-
+		
 		self.tableDefaults();
+		self.searchDefaults();
 		self.getGradeList();
 	}
 
 	function addNewGrade() {
 		self.errors = Constants.FALSE;
 		self.create.success = Constants.FALSE;
-		$("input").removeClass("required-field");
+		self.fields = [];
 
 		$scope.ui_block();
 		manageGradeService.addNewGrade(self.create).success(function(response) {
@@ -113,7 +112,7 @@ function ManageGradeController($scope, apiService, manageGradeService, TableServ
 					self.errors = $scope.errorHandler(response.errors);
 
 					angular.forEach(response.errors, function(value, key) {
-						$("input[name='" + value.field + "'], select[name='" + value.field + "']").addClass("required-field");
+						self.fields[value.field] = Constants.TRUE;
 					});
 				} else if(response.data) {
 					self.create = {};
@@ -139,7 +138,7 @@ function ManageGradeController($scope, apiService, manageGradeService, TableServ
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					self.details = response.data;
-					self.setManageGradeActive('grade_details');
+					self.setActive('grade_details');
 				}
 			}
 
@@ -152,6 +151,7 @@ function ManageGradeController($scope, apiService, manageGradeService, TableServ
 
 	function updateGradeDetails() {
 		self.errors = Constants.FALSE;
+		self.fields = [];
 		self.details.success = Constants.FALSE;
 
 		$scope.ui_block();
@@ -159,6 +159,10 @@ function ManageGradeController($scope, apiService, manageGradeService, TableServ
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
+
+					angular.forEach(response.errors, function(value, key) {
+						self.fields[value.field] = Constants.TRUE;
+					});
 				} else if(response.data) {
 					self.details.success = Constants.TRUE;
 	    			$("html, body").animate({ scrollTop: 0 }, "slow");
@@ -202,6 +206,22 @@ function ManageGradeController($scope, apiService, manageGradeService, TableServ
 		}).error(function(response) {
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
+		});
+	}
+
+	self.getAgeGroup = function() {
+		self.ageGroup = Constants.FALSE;
+
+		apiService.getAgeGroup().success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.ageGroup = response.data;
+				}
+			}
+		}).error(function(response) {
+			self.errors = $scope.internalError();
 		});
 	}
 }

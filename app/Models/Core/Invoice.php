@@ -26,7 +26,7 @@ class Invoice extends Model {
     }
     
     public function order(){
-        return $this->hasOne('FutureEd\Models\Core\Order');
+        return $this->belongsTo('FutureEd\Models\Core\Order','order_no','order_no');
     }
     
     public function invoiceDetail(){

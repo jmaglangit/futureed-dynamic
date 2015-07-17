@@ -141,7 +141,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="col-md-2 control-label">Street Address<span class="required">*</span></label>
+                    <label class="col-md-2 control-label">Street Address</label>
                     <div class="col-md-6">
                         {!! Form::text('street_address', ''
                             , array(
@@ -155,7 +155,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="col-md-2 control-label">City<span class="required">*</span></label>
+                    <label class="col-md-2 control-label">City</label>
                     <div class="col-md-4">
                         {!! Form::text('city', ''
                             , array(
@@ -167,7 +167,7 @@
                         ) !!}
                     </div>
                     
-                    <label class="col-md-2 control-label">State<span class="required">*</span></label>
+                    <label class="col-md-2 control-label">State</label>
                     <div class="col-md-4">
                         {!! Form::text('state', ''
                             , array(
@@ -193,7 +193,7 @@
                         ) !!}
                     </div>
                 
-                    <label class="col-md-2 control-label">Country <span class="required">*</span></label>
+                    <label class="col-md-2 control-label">Country</label>
                     <div class="col-md-4" ng-init="getCountries()">
                         <select  name="country_id" ng-class="{ 'required-field' : register.fields['country_id'] }" 
                                 class="form-control" ng-model="register.record.country_id">
@@ -228,7 +228,7 @@
                     <div class="form-group">
                         <div class="checkbox text-center">
                             <label>
-                                <input type="checkbox" ng-model="register.term">
+                                <input type="checkbox" ng-model="register.terms">
                                 I agree on the <a href="#" data-toggle="modal" ng-click="showModal('terms_modal')">Terms and Conditions</a> and <a href="#" data-toggle="modal" ng-click="showModal('policy_modal')">Data Privacy Policy</a>
                             </label>
                         </div>

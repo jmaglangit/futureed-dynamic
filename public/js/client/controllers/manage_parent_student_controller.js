@@ -20,27 +20,18 @@ function ManageParentStudentController($scope, ManageParentStudentService, apiSe
 	self.change = {};
 	self.user_type = Constants.STUDENT;
 
-	self.existActive = function(req) {
+	self.existActive = function() {
+		self.reg = {};
 		self.errors = Constants.FALSE;
-		switch(req) {
-			case 'new':
-				self.exist = Constants.TRUE;
-				self.reg = {};
-				break
-			case 'old':
-			default:
-				self.exist = Constants.FALSE;
-				self.reg = {};
-				break
-		}
+		self.success = Constants.FALSE;
+
 		$('input, select').removeClass('required-field');
-		$("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 
 	self.setActive = function(active, id, cond) {
 		self.fields = [];
 		self.errors = Constants.FALSE;
-		self.cond = (cond) ? 1:0;
+		self.cond = (cond) ? Constants.TRUE : Constants.FALSE;
 		
 		if(self.cond == 0){
 			self.success = Constants.FALSE;
@@ -48,6 +39,7 @@ function ManageParentStudentController($scope, ManageParentStudentService, apiSe
 		switch(active) {
 			case Constants.ACTIVE_EDIT:
 				self.active_list = Constants.FALSE;
+				self.e_success = Constants.FALSE;
 				self.edit_form = Constants.TRUE;
 				self.active_view = Constants.TRUE;
 				self.edit = Constants.TRUE;
@@ -59,6 +51,8 @@ function ManageParentStudentController($scope, ManageParentStudentService, apiSe
 
 			case 'change':
 				self.validation = {};
+				self.change = {};
+				self.e_success = Constants.FALSE;
 				self.active_list = Constants.FALSE;
 				self.active_view = Constants.FALSE;
 				self.active_add = Constants.FALSE;
@@ -191,6 +185,7 @@ function ManageParentStudentController($scope, ManageParentStudentService, apiSe
 		});
 	}
 	self.addStudent = function() {
+		self.fields = [];
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
 		self.reg.client_id = $scope.user.id;
@@ -208,8 +203,7 @@ function ManageParentStudentController($scope, ManageParentStudentService, apiSe
 					self.errors = $scope.errorHandler(response.errors);
 
 					angular.forEach(response.errors, function(value, key) {
-						$("#add_student_form input[name='" + value.field +"']").addClass("required-field");
-						$("#add_student_form select[name='" + value.field +"']").addClass("required-field");
+						self.fields[value.field] = Constants.TRUE;
 		            });
 				} else if(response.data) {
 					self.success = Constants.TRUE;

@@ -35,6 +35,7 @@ class Kernel extends HttpKernel {
 		'parent' => 'FutureEd\Http\Middleware\ParentMiddleware',
 		'principal' => 'FutureEd\Http\Middleware\PrincipalMiddleware',
 		'teacher' => 'FutureEd\Http\Middleware\TeacherMiddleware',
+		'admin_partial' => 'FutureEd\Http\Middleware\AdminPartialsMiddleware'
 	];
 
 }

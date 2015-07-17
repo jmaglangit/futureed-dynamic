@@ -71,6 +71,86 @@
 		});
 
 		Routes::group([
+			  'prefix' => '/class'
+			, 'middleware' => 'student'], function()
+		{
+			Routes::get('/', [ 
+					'as' => 'student.class.index'
+					, 'uses' => 'FutureLesson\Student\ClassController@index'
+				]);
+
+			Routes::group([
+				  'prefix' => '/partials'
+				, 'middleware' => 'student'], function()
+			{
+				Routes::get('/dashbrd-side-nav', [ 
+						'as' => 'student.class.partials.dashbrd-side-nav'
+						, 'uses' => 'FutureLesson\Student\ClassController@dashbrd_side_nav'
+					]);
+			});
+		});
+
+		Routes::group([
+			  'prefix' => '/tips'
+			, 'middleware' => 'student'], function()
+		{
+			Routes::get('/', [ 
+					'as' => 'student.tips.index'
+					, 'uses' => 'FutureLesson\Student\TipsController@index'
+				]);
+
+			Routes::post('/', [ 
+					'as' => 'student.tips.post.index'
+					, 'uses' => 'FutureLesson\Student\TipsController@index'
+				]);
+
+			Routes::group([
+				  'prefix' => '/partials'
+				, 'middleware' => 'student'], function()
+			{
+				Routes::get('/list', [ 
+						'as' => 'student.tips.partials.list'
+						, 'uses' => 'FutureLesson\Student\TipsController@list_form'
+					]);
+
+				Routes::get('/detail', [ 
+						'as' => 'student.tips.partials.detail'
+						, 'uses' => 'FutureLesson\Student\TipsController@detail_form'
+					]);
+			});
+		});
+
+		Routes::group([
+			  'prefix' => '/help'
+			, 'middleware' => 'student'], function()
+		{
+			Routes::get('/', [ 
+					'as' => 'student.help.index'
+					, 'uses' => 'FutureLesson\Student\HelpController@index'
+				]);
+
+			Routes::post('/', [ 
+					'as' => 'student.help.post.index'
+					, 'uses' => 'FutureLesson\Student\HelpController@index'
+				]);
+
+			Routes::group([
+				  'prefix' => '/partials'
+				, 'middleware' => 'student'], function()
+			{
+				Routes::get('/list', [ 
+						'as' => 'student.help.partials.list'
+						, 'uses' => 'FutureLesson\Student\HelpController@list_form'
+					]);
+
+				Routes::get('/detail', [ 
+						'as' => 'student.help.partials.detail'
+						, 'uses' => 'FutureLesson\Student\HelpController@detail_form'
+					]);
+			});
+		});
+
+		Routes::group([
 			  'prefix' => 'profile'
 			, 'middleware' => 'student'], function()
 		{
@@ -112,6 +192,10 @@
 					'as' => 'student.partials.base_url'
 					, 'uses' => 'FutureLesson\Student\LoginController@base_url'
 				]);
-		});
+			Routes::get('/tips_help_bar', [
+					'as' => 'student.partials.tips_help_bar'
+					, 'uses' => 'FutureLesson\Student\LoginController@tips_help_bar'
+				]);
+			});
 	});
 ?>

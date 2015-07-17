@@ -35,7 +35,7 @@
   </head>
   <body class="admin" ng-controller="futureedController" ng-init="getUserDetails()" ng-cloak>
     {!! Form::hidden('userdata', Session::get('admin')) !!}
-
+    <p class="notice"> BETA Stage: Under Development </p>
     @yield('navbar')
 
   	@yield('content')
@@ -63,8 +63,12 @@
     {!! Html::script('/js/futureed_controllers.js') !!}
     {!! Html::script('/js/futureed_services.js') !!}
     {!! Html::script('/js/common/table_service.js') !!}
+    {!! Html::script('/js/common/search_service.js') !!}
     {!! Html::script('/js/common/filters.js') !!}
     {!! Html::script('/js/datetimepicker.js') !!}
+
+    {!! Html::script('/js/ng-file-upload-shim.min.js')!!}
+    {!! Html::script('/js/ng-file-upload.min.js')!!}
     {!! Html::script('/js/ui-bootstrap-tpls-0.13.0.min.js') !!}
 
     @yield('scripts')

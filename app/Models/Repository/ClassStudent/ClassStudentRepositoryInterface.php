@@ -14,4 +14,16 @@ interface ClassStudentRepositoryInterface {
 	public function deleteClassStudent($id);
 
 	public function getStudentCurrentClassroom($student_id);
+
+	public function getActiveClassStudent($student_id);
+
+	public function setClassStudentInactive($id);
+
+	public function getInactiveClassStudent($student_id);
+
+	public function setClassStudentActive($id);
+
+	public function isEnrolled($id,$class_id);
+
+
 }

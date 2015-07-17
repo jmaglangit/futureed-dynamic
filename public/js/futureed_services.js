@@ -245,6 +245,20 @@ var services = angular.module('futureed.services', []);
 			});
 		}
 
+		futureedAPI.getAgeGroup = function() {
+			return $http({
+				method 	: Constants.METHOD_GET
+				, url	: futureedAPIUrl + 'age-group'
+			});
+		}
+
+		futureedAPI.checkClass = function(id) {
+			return $http({
+				method 	: Constants.METHOD_POST
+				, data 	: {student_id : id}
+				, url	: futureedAPIUrl + 'class-student/student-join-class'
+			});
+		}
 
 		return futureedAPI;
 	});

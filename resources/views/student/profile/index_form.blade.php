@@ -22,7 +22,7 @@
             <div style="margin-top: 7px;"> 
                 <i ng-if="u_loading" class="fa fa-spinner fa-spin"></i>
                 <i ng-if="u_success" class="fa fa-check success-color"></i>
-                <span ng-if="u_error" class="alert alert-error">{! u_error !}</span>
+                <span ng-if="u_error" class="error-msg-con">{! u_error !}</span>
             </div>
         </div>
 		<div class="form-group">
@@ -53,8 +53,8 @@
                     )
                 ) !!}
             </div>
-            <div class="col-xs-2">
-                <a href="" ng-click="profile.setStudentProfileActive('confirm_email')" class="edit-email">Confirm</a>
+            <div class="col-xs-3">
+                <a href="" ng-click="profile.setStudentProfileActive('confirm_email')" class="edit-email">Confirm Email Address</a>
             </div>	
         </div>
 	</fieldset>					

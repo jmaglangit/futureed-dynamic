@@ -153,5 +153,17 @@ class Client extends Model
 		return $query->whereIn('client_role', $roles);
 	}
 
+	public function scopeActivated($query){
+
+		return $query->whereHas('user', function($query){
+			$query->where('is_account_activated',1);
+		});
+	}
+
+	public function scopeVerified($query){
+
+		return $query->where('account_status',config('futureed.accepted'));
+	}
+
 
 }

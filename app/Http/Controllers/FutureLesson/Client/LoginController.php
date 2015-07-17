@@ -61,9 +61,6 @@ class LoginController extends Controller {
 		$user_object = json_decode(Session::get('client'));
 
 		Session::forget('client');
-		Session::forget($user_object->role);
-
-		unset($user_object);
 
 		return redirect()->route('client.login');
 	}
@@ -151,5 +148,10 @@ class LoginController extends Controller {
 	public function base_url() {
 
 		return view('client.partials.base-url');
+	}
+
+	public function terms()
+	{
+		return view('client.login.terms-and-conditions');
 	}
 }

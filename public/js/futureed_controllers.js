@@ -1,4 +1,4 @@
-angular.module('futureed.controllers', [])
+angular.module('futureed.controllers', ['ngFileUpload'])
 	.controller('futureedController', FutureedController)
 	.directive('templateDirective', TemplateDirective)
 	.constant("futureed", Constants);
@@ -11,7 +11,7 @@ function TemplateDirective() {
 	}
 }
 
-function FutureedController($scope, apiService, futureed) {
+function FutureedController($scope, $window, apiService, futureed) {
 	$scope.futureed = futureed;
 	$scope.display_date = new Date();
 	
@@ -20,8 +20,6 @@ function FutureedController($scope, apiService, futureed) {
 	*/
 	$scope.errorHandler = errorHandler;
 	$scope.internalError = internalError;
-	$scope.ui_block = ui_block;
-	$scope.ui_unblock = ui_unblock;
 
 	$scope.goHome = goHome;
 	$scope.highlight = highlight;
@@ -52,7 +50,12 @@ function FutureedController($scope, apiService, futureed) {
 					$scope.user = null;
 
 					apiService.updateUserSession($scope.user).success(function(response) {
-						window.location.href = "/student/login";
+						$scope.session_expire = Constants.TRUE;
+						$("#session_expire").modal({
+							backdrop: 'static',
+							keyboard: Constants.FALSE,
+							show    : Constants.TRUE
+						});
 					}).error(function() {
 						$scope.internalError();
 					});
@@ -68,6 +71,10 @@ function FutureedController($scope, apiService, futureed) {
 		return $scope.errors;
 	}
 
+	$scope.reLogin = function(){
+		$window.location.href = '/student/login';
+	}
+
 	function internalError() {
 		$scope.errors = [Constants.MSG_INTERNAL_ERROR];
 		$("html, body").animate({ scrollTop: 0 }, "slow");
@@ -75,12 +82,38 @@ function FutureedController($scope, apiService, futureed) {
 		return $scope.errors;
 	}
 
-	function ui_block() {
-		$.blockUI({message : '<img src="/images/ajax-loader.gif" /> Please Wait...'});
+	$scope.ui_block = function() {
+		$.blockUI({ 
+				message : '<img class="loader" src="/images/loading.png" /> Please wait... '
+				, css 	: {
+					  'border-radius' 		: '10px'
+					, 'width' 	  			: '24%'
+					, 'left' 	  			: '40%'
+					, 'background-color'	: 'rgba(255, 255, 255, .4)'
+				}
+			});
 	}
 
-	function ui_unblock() {
+	$scope.ui_unblock = function() {
 		$.unblockUI();
+	}
+
+	$scope.div_block = function(id) {
+		$("#" + id).block({
+				message : '<img src="/images/ajax-loader.gif" /> Please Wait...'
+				, css 	: {
+					  'border' 				: 'none'
+					, 'border-radius' 		: '5px'
+					, 'top' 	  			: '40%'
+					, 'width' 	  			: '40%'
+					, 'left' 	  			: '40%'
+					, 'background-color'	: 'rgba(255, 255, 255, .4)'
+				}
+			});
+	}
+
+	$scope.div_unblock = function(id) {
+		$("#" + id).unblock();
 	}
 
 	function goHome() {
@@ -328,7 +361,7 @@ function FutureedController($scope, apiService, futureed) {
 			if($scope.user.new_email != null){
 				$scope.confirm_email = Constants.TRUE;
 			}
-
+			
 			$("input[name='userdata']").val('');
 		}
 	}
@@ -796,7 +829,7 @@ function FutureedController($scope, apiService, futureed) {
 						$scope.reg.email = $scope.reg.user.email;
 						$scope.reg.birth = $scope.reg.birth_date;
 						$scope.reg.school_name = $scope.reg.school.name;
-						$scope.getGradeLevel($scope.reg.grade_code);
+						$scope.getGradeLevel($scope.reg.country_id);
 						$scope.edit_registration = Constants.TRUE;
 					}
 				}
@@ -828,4 +861,52 @@ function FutureedController($scope, apiService, futureed) {
 			self.errors = $scope.internalError();
 		});
 	  }
+
+	  $scope.backgroundClass = backgroundClass;
+	  function backgroundClass() {
+	  	$scope.backgroundChange = Constants.TRUE;
+	  }
+
+	  $scope.checkClass = function(flag) {
+		$scope.ui_block();
+
+		apiService.checkClass($scope.user.id).success(function(response){
+			if(angular.equals(response.status, Constants.STATUS_OK)){
+					if(response.errors) {
+						if(response.errors[0]){
+							if(flag == 1){
+								$window.location.href = '/student';
+							}
+							$scope.no_class = Constants.TRUE;
+							$("#error_class_modal").modal({
+						        backdrop: 'static',
+						        keyboard: Constants.FALSE,
+						        show    : Constants.TRUE
+						    });
+						}
+					}else if(response.data == Constants.FALSE){
+						if(flag == 1){
+							$window.location.href = '/student';
+						}
+						$scope.no_class = Constants.TRUE;
+						$("#error_class_modal").modal({
+					        backdrop: 'static',
+					        keyboard: Constants.FALSE,
+					        show    : Constants.TRUE
+					    });
+					}else{
+						if(flag == 1){
+							$scope.ui_unblock();
+						} else{
+							$window.location.href = '/student/class';
+						}
+					}
+				}
+			$scope.ui_unblock();
+		}).error(function(response){
+			$scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
 };

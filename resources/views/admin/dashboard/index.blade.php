@@ -10,6 +10,14 @@
 			<div class="client-nav side-nav">
 				@include('admin.partials.dshbrd-side-nav')				
 			</div>
+
+			<div class="client-content">
+				<div class="content-title">
+					<div class="title-main-content">
+						<span>Admin Dashboard</span>
+					</div>
+				</div>
+			</div>
 		</div>		
 	</div>
 @stop

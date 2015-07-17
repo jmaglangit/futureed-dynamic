@@ -9,6 +9,13 @@ return [
 	'locked' => 0,
 	'image_password_count' => 3,
 	'image_password_folder' => 'images/password',
+	'enabled' => 'Enabled',
+	'disabled' => 'Disabled',
+	'active' => 'Active',
+	'inactive' => 'Inactive',
+	'pending' => 'Pending',
+	'accepted' => 'Accepted',
+	'rejected' => 'Rejected',
 
 
 	//Request code expiry in seconds
@@ -87,6 +94,65 @@ return [
 
 	//Parent invite student subject
 	'invite_student' => 'You have been invited by a Parent!',
+
+	//set value for link_type
+	'link_type_general' => 'General',
+
+    //Help Request Status
+    'help_request_status_pending' => 'Pending',
+    'help_request_status_accepted' => 'Accepted',
+    'help_request_status_rejected' => 'Rejected',
+
+	//for tips take 3
+	'tip_take' => 3,
+
+	//for general tips link_type
+	'link_type_general' => 'General',
+
+	//for accepted tips tip_status
+	'tip_status_accepted' => 'Accepted',
+
+	//tip_rating
+	'tip_rating' => 'rating',
+
+	//uploads base path
+	'uploads' => base_path(). '/public/uploads',
+
+	//path for question uploaded images temp
+	'question_image_path' =>  base_path().'/public/uploads/temp/question',
+
+	//path for question uploaded images final
+	'question_image_path_final' => base_path().'/public/uploads/question',
+	'question_image_path_final_public' => '/uploads/question',
+
+	//question
+	'question' => 'question',
+
+	//path for answer uploaded images temp
+	'answer_image_path' =>  base_path().'/public/uploads/temp/answer',
+
+	//path for question uploaded images final
+	'answer_image_path_final' => base_path().'/public/uploads/answer',
+	'answer_image_path_final_public' => '/uploads/answer',
+
+	//answer
+	'answer' => 'answer',
+
+
+	//path for content uploaded images temp
+	'content_image_path' =>  base_path().'/public/uploads/temp/content',
+
+	//path for content uploaded images final
+	'content_image_path_final' => base_path().'/public/uploads/content',
+	'content_image_path_final_public' => '/uploads/content',
+
+	//answer
+	'content' => 'content',
+
+
+
+
+
 
 
 ];

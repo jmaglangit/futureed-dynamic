@@ -4,7 +4,7 @@
         <div class="navcon">
         <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-                <a href="#">{!! Html::image('/images/logo-sm.png') !!}</a>
+                <a href="{!! route('client.dashboard.index') !!}">{!! Html::image('/images/logo-sm.png') !!}</a>
             </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->

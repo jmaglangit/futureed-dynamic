@@ -1,6 +1,11 @@
 <?php 
 	Routes::group(['prefix' => '/peaches'], function()
 	{
+		Routes::get('/image', [
+			'as' => 'admin.image.viewer'
+			, 'uses' => 'FutureLesson\Admin\ImageController@view'
+		]);
+
 		Routes::get('/', 'FutureLesson\Admin\LoginController@index');
 		Routes::get('/password/forgot',[
 				'as' => 'admin.password.reset'
@@ -426,7 +431,196 @@
 					]);
 				});
 			});
+
+			Routes::group(['prefix' => '/tips'], function() {
+
+				Routes::get('/', 
+					['as' => 'admin.manage.tips.index'
+						, 'uses' => 'FutureLesson\Admin\ManageTipsController@index'
+					]);
+
+				Routes::group(['prefix' => '/patials'], function() {
+
+					Routes::get('/detail', 
+						['as' => 'admin.manage.tips.partials.detail'
+						, 'uses' => 'FutureLesson\Admin\ManageTipsController@detail_form'
+					]);
+
+					Routes::get('/list', 
+						['as' => 'admin.manage.tips.partials.list'
+						, 'uses' => 'FutureLesson\Admin\ManageTipsController@list_form'
+					]);
+
+					Routes::get('/delete', 
+						['as' => 'admin.manage.tips.partials.delete'
+						, 'uses' => 'FutureLesson\Admin\ManageTipsController@delete_form'
+					]);
+				});
+			});
+
+			Routes::group(['prefix' => '/help_request'], function() {
+
+				Routes::get('/', 
+					['as' => 'admin.manage.help.index'
+						, 'uses' => 'FutureLesson\Admin\ManageHelpRequestController@index'
+					]);
+
+				Routes::group(['prefix' => '/patials'], function() {
+
+					Routes::get('/detail', 
+						['as' => 'admin.manage.help.partials.detail'
+						, 'uses' => 'FutureLesson\Admin\ManageHelpRequestController@detail_form'
+					]);
+
+					Routes::get('/list', 
+						['as' => 'admin.manage.help.partials.list'
+						, 'uses' => 'FutureLesson\Admin\ManageHelpRequestController@list_form'
+					]);
+
+					Routes::get('/delete', 
+						['as' => 'admin.manage.help.partials.delete'
+						, 'uses' => 'FutureLesson\Admin\ManageHelpRequestController@delete_form'
+					]);
+				});
+			});
+
+			Routes::group(['prefix' => '/request_answers'], function() {
+
+				Routes::get('/', 
+					['as' => 'admin.manage.answer.index'
+						, 'uses' => 'FutureLesson\Admin\ManageHelpAnswerController@index'
+					]);
+
+				Routes::group(['prefix' => '/patials'], function() {
+
+					Routes::get('/detail', 
+						['as' => 'admin.manage.answer.partials.detail'
+						, 'uses' => 'FutureLesson\Admin\ManageHelpAnswerController@detail_form'
+					]);
+
+					Routes::get('/list', 
+						['as' => 'admin.manage.answer.partials.list'
+						, 'uses' => 'FutureLesson\Admin\ManageHelpAnswerController@list_form'
+					]);
+
+					Routes::get('/delete', 
+						['as' => 'admin.manage.answer.partials.delete'
+						, 'uses' => 'FutureLesson\Admin\ManageHelpAnswerController@delete_form'
+					]);
+				});
+			});
 		});
+
+		Routes::group(['prefix' => '/module'], function() {
+
+				Routes::get('/', 
+					['as' => 'admin.manage.module.index'
+						, 'uses' => 'FutureLesson\Admin\ManageModuleController@index'
+						, 'middleware' => 'admin_partial'
+					]);
+
+				Routes::group(['prefix' => '/patials'], function() {
+
+					Routes::get('/list_module_form', 
+						['as' => 'admin.manage.module.partials.list_module_form'
+						, 'uses' => 'FutureLesson\Admin\ManageModuleController@list_module_form'
+						, 'middleware' => 'admin_partial'
+					]);
+
+					Routes::get('/add_module_form', 
+						['as' => 'admin.manage.module.partials.add_module_form'
+						, 'uses' => 'FutureLesson\Admin\ManageModuleController@add_module_form'
+					]);
+
+					Routes::get('/view_module_form', 
+						['as' => 'admin.manage.module.partials.view_module_form'
+						, 'uses' => 'FutureLesson\Admin\ManageModuleController@view_module_form'
+					]);
+				});
+
+				Routes::group(['prefix' => '/content'], function() {
+
+					Routes::get('/', 
+						['as' => 'admin.manage.module.content.index'
+							, 'uses' => 'FutureLesson\Admin\ManageModuleContentController@index'
+						]);
+
+					Routes::group(['prefix' => '/partials'], function() {
+
+						Routes::get('/add', 
+							['as' => 'admin.manage.module.content.partials.add'
+							, 'uses' => 'FutureLesson\Admin\ManageModuleContentController@add_form'
+						]);
+
+						Routes::get('/detail', 
+							['as' => 'admin.manage.module.content.partials.detail'
+							, 'uses' => 'FutureLesson\Admin\ManageModuleContentController@detail_form'
+						]);
+
+						Routes::get('/list', 
+							['as' => 'admin.manage.module.content.partials.list'
+							, 'uses' => 'FutureLesson\Admin\ManageModuleContentController@list_form'
+						]);
+
+						Routes::get('/delete', 
+							['as' => 'admin.manage.module.content.partials.delete'
+							, 'uses' => 'FutureLesson\Admin\ManageModuleContentController@delete_form'
+						]);
+					});
+				});
+			});
+
+		Routes::group(['prefix' => '/age_group'], function() {
+
+			Routes::group(['prefix' => '/patials'], function() {
+
+				Routes::get('/list_view_form', 
+					['as' => 'admin.manage.age_group.partials.list_view_form'
+					, 'uses' => 'FutureLesson\Admin\ManageAgeGroupController@list_view_form'
+					, 'middleware' => 'admin_partial'
+				]);
+
+				Routes::get('/add_view_form', 
+					['as' => 'admin.manage.age_group.partials.add_view_form'
+					, 'uses' => 'FutureLesson\Admin\ManageAgeGroupController@add_view_form'
+				]);
+
+				Routes::get('/edit_view_form', 
+					['as' => 'admin.manage.age_group.partials.edit_view_form'
+					, 'uses' => 'FutureLesson\Admin\ManageAgeGroupController@edit_view_form'
+				]);
+			});
+		});
+
+		Routes::group(['prefix' => '/q_a'], function() {
+
+				Routes::group(['prefix' => '/patials'], function() {
+
+					Routes::get('/question_list_form', 
+						['as' => 'admin.manage.question_answer.partials.question_list_form'
+						, 'uses' => 'FutureLesson\Admin\ManageQuestionAnsController@question_list_form'
+						, 'middleware' => 'admin_partial'
+					]);
+
+					Routes::get('/question_add_form', 
+						['as' => 'admin.manage.question_answer.partials.question_add_form'
+						, 'uses' => 'FutureLesson\Admin\ManageQuestionAnsController@question_add_form'
+						, 'middleware' => 'admin_partial'
+					]);
+
+					Routes::get('/question_view_form', 
+						['as' => 'admin.manage.question_answer.partials.question_view_form'
+						, 'uses' => 'FutureLesson\Admin\ManageQuestionAnsController@question_view_form'
+						, 'middleware' => 'admin_partial'
+					]);
+
+					Routes::get('/answer_list_form', 
+						['as' => 'admin.manage.question_answer.partials.answer_list_form'
+						, 'uses' => 'FutureLesson\Admin\ManageQuestionAnsController@answer_list_form'
+						, 'middleware' => 'admin_partial'
+					]);
+				});
+			});
 			
 
 		Routes::group(['prefix' => '/dashboard'], function()

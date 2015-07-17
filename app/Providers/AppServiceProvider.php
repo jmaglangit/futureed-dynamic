@@ -155,9 +155,74 @@ class AppServiceProvider extends ServiceProvider {
 			'FutureEd\Models\Repository\ParentStudent\ParentStudentRepositoryInterface',
 			'FutureEd\Models\Repository\ParentStudent\ParentStudentRepository'
 		);
-        $this->app->bind(
-            'FutureEd\Models\Repository\OrderDetail\OrderDetailRepositoryInterface',
-            'FutureEd\Models\Repository\OrderDetail\OrderDetailRepository'
-        );
+		$this->app->bind(
+			'FutureEd\Models\Repository\OrderDetail\OrderDetailRepositoryInterface',
+			'FutureEd\Models\Repository\OrderDetail\OrderDetailRepository'
+		);
+		$this->app->bind(
+			'FutureEd\Models\Repository\Tip\TipRepositoryInterface',
+			'FutureEd\Models\Repository\Tip\TipRepository'
+		);
+		$this->app->bind(
+			'FutureEd\Models\Repository\HelpRequest\HelpRequestRepositoryInterface',
+			'FutureEd\Models\Repository\HelpRequest\HelpRequestRepository'
+		);
+		$this->app->bind(
+			'FutureEd\Models\Repository\HelpRequestAnswer\HelpRequestAnswerRepositoryInterface',
+			'FutureEd\Models\Repository\HelpRequestAnswer\HelpRequestAnswerRepository'
+		);
+		$this->app->bind(
+			'FutureEd\Models\Repository\TipRating\TipRatingRepositoryInterface',
+			'FutureEd\Models\Repository\TipRating\TipRatingRepository'
+		);
+		$this->app->bind(
+			'FutureEd\Models\Repository\Module\ModuleRepositoryInterface',
+			'FutureEd\Models\Repository\Module\ModuleRepository'
+		);
+		$this->app->bind(
+
+			'FutureEd\Models\Repository\AgeGroup\AgeGroupRepositoryInterface',
+			'FutureEd\Models\Repository\AgeGroup\AgeGroupRepository'
+		);
+		$this->app->bind(
+			'FutureEd\Models\Repository\CountryGrade\CountryGradeRepositoryInterface',
+			'FutureEd\Models\Repository\CountryGrade\CountryGradeRepository'
+		);
+
+		$this->app->bind(
+			'FutureEd\Models\Repository\TeachingContent\TeachingContentRepositoryInterface',
+			'FutureEd\Models\Repository\TeachingContent\TeachingContentRepository'
+		);
+		$this->app->bind(
+			'FutureEd\Models\Repository\HelpRequestAnswerRating\HelpRequestAnswerRatingRepositoryInterface',
+			'FutureEd\Models\Repository\HelpRequestAnswerRating\HelpRequestAnswerRatingRepository'
+		);
+		$this->app->bind(
+			'FutureEd\Models\Repository\ModuleGroup\ModuleGroupRepositoryInterface',
+			'FutureEd\Models\Repository\ModuleGroup\ModuleGroupRepository'
+		);
+		$this->app->bind(
+			'FutureEd\Models\Repository\Question\QuestionRepositoryInterface',
+			'FutureEd\Models\Repository\Question\QuestionRepository'
+		);
+		$this->app->bind(
+			'FutureEd\Models\Repository\ModuleContent\ModuleContentRepositoryInterface',
+			'FutureEd\Models\Repository\ModuleContent\ModuleContentRepository'
+		);
+		$this->app->bind(
+			'FutureEd\Models\Repository\QuestionAnswer\QuestionAnswerRepositoryInterface',
+			'FutureEd\Models\Repository\QuestionAnswer\QuestionAnswerRepository'
+		);
+
+		$this->app->bind(
+			'FutureEd\Models\Repository\LearningStyle\LearningStyleRepositoryInterface',
+			'FutureEd\Models\Repository\LearningStyle\LearningStyleRepository'
+		);
+
+		$this->app->bind(
+			'FutureEd\Models\Repository\MediaType\MediaTypeRepositoryInterface',
+			'FutureEd\Models\Repository\MediaType\MediaTypeRepository'
+		);
+
 	}
 }

@@ -112,7 +112,7 @@ trait ApiValidatorTrait {
                     "$first_name" => $input["$first_name"],
                 ],
                 [
-                    "$first_name" => 'required|regex:'. config('regex.name') .'|max:64'
+                    "$first_name" => 'required|min:2|regex:'. config('regex.name') .'|max:64'
                 ]
             );
 
@@ -135,7 +135,7 @@ trait ApiValidatorTrait {
                     "$last_name" => $input["$last_name"],
                 ],
                 [
-                    "$last_name" => 'required|regex:'. config('regex.name') .'|max:64'
+                    "$last_name" => 'required|min:2|regex:'. config('regex.name') .'|max:64'
                 ]
             );
 
@@ -149,6 +149,28 @@ trait ApiValidatorTrait {
                     ->errorMessage();
             }
     }
+
+	public function validateContactName($input,$contact_name){
+
+		$validator = Validator::make(
+			[
+				"$contact_name" => $input["$contact_name"],
+			],
+			[
+				"$contact_name" => 'required|min:2|regex:'. config('regex.name') .'|max:64'
+			]
+		);
+
+		if($validator->fails()){
+
+			$validator_msg = $validator->messages()->toArray();
+
+			return $this->setErrorCode(1007)
+				->setField($contact_name)
+				->setMessage($validator_msg["$contact_name"][0])
+				->errorMessage();
+		}
+	}
 
     //Validate gender -- accepts any type of case
     public function gender($input,$gender){
@@ -220,7 +242,8 @@ trait ApiValidatorTrait {
 				"country_id.required" => $error_msg[2603],
 				"country_id.numeric" => $error_msg[2604],
 				"school_country_id.required" => $error_msg[2603],
-				"school_country_id.numeric" => $error_msg[2604]
+				"school_country_id.numeric" => $error_msg[2604],
+				"password_image_id.required" => $error_msg[2138],
 			]
 		);
 
@@ -272,7 +295,7 @@ trait ApiValidatorTrait {
                     "$field_name" => strtolower($input["$field_name"]),
                 ],
                 [
-                    "$field_name" => 'required|string'
+                    "$field_name" => 'required|string|max:128'
                 ]
             );
 
@@ -430,7 +453,7 @@ trait ApiValidatorTrait {
                     "$field_name" => strtolower($input["$field_name"]),
                 ],
                 [
-                    "$field_name" => 'string'
+                    "$field_name" => 'string|max:128'
                 ]
             );
 
@@ -453,7 +476,11 @@ trait ApiValidatorTrait {
                 ],
                 [
                     "$field_name" => 'max:10|regex:'. config('regex.zip_code')
-                ]
+                ],
+				[
+					'regex' => config('futureed-error.error_messages.2044'),
+					'max' => config('futureed-error.error_messages.2045')
+				]
             );
 
             if($validator->fails()){
@@ -559,12 +586,15 @@ trait ApiValidatorTrait {
         $phone_format = "/^((\+|\(|\)|\-)+\s?)?([0-9]+)?((\+|\(|\)|\-)+\s?)?([0-9]+)?((\+|\(|\)|\-)+\s?)?([0-9]+)?((\+|\(|\)|\-)+\s?)?([0-9]+)?$/";
 
         $validator = Validator::make(
-            [
-                "$field_name" => strtolower($input["$field_name"]),
-            ],
-            [
-                "$field_name" => "required"
-            ]
+			[
+				"$field_name" => strtolower($input["$field_name"]),
+			],
+			[
+				"$field_name" => "required|max:20"
+			],
+			[
+				'max' => config('futureed-error.error_messages.2046')
+			]
         );
 
         if($validator->fails()){
@@ -767,7 +797,7 @@ trait ApiValidatorTrait {
                     "$field_name" => strtolower($input["$field_name"]),
                 ],
                 [
-                    "$field_name" => ($field_name == 'state')? 'regex:/^[-\pL\s]+$/u' : 'required|regex:/^[-\pL\s]+$/u'
+                    "$field_name" => ($field_name == 'state')? 'max:128|regex:/^[-\pL\s]+$/u' : 'required|max:128|regex:/^[-\pL\s]+$/u'
                 ]
             );
             if($validator->fails()){
@@ -789,7 +819,7 @@ trait ApiValidatorTrait {
 				"$field_name" => strtolower($input["$field_name"]),
 			],
 			[
-				"$field_name" => ($field_name == 'state')? 'regex:/^[-\pL\s]+$/u' : 'regex:/^[-\pL\s]+$/u'
+				"$field_name" => ($field_name == 'state')? 'max:128|regex:/^[-\pL\s]+$/u' : 'max:128|regex:/^[-\pL\s]+$/u'
 			]
 		);
 		if($validator->fails()){

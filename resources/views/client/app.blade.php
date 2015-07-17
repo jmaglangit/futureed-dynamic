@@ -38,7 +38,7 @@
 </head>
 <body class="client" ng-controller="futureedController" ng-init="getUserDetails()">
   {!! Form::hidden('userdata', Session::get('client')) !!}
-  
+  <p class="notice"> BETA Stage: Under Development </p>
   @yield('navbar')
 
 	@yield('content')
@@ -68,6 +68,9 @@
   {!! Html::script('/js/datetimepicker.js') !!}
   {!! Html::script('/js/ui-bootstrap-tpls-0.13.0.min.js') !!}
   {!! Html::script('/js/common/filters.js') !!}
+
+  {!! Html::script('/js/ng-file-upload-shim.min.js')!!}
+  {!! Html::script('/js/ng-file-upload.min.js')!!}
 
   @yield('scripts')
   <!-- END SCRIPTS -->

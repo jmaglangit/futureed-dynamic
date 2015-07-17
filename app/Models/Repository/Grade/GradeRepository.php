@@ -64,9 +64,6 @@ class GradeRepository implements GradeRepositoryInterface{
 
     public function addGrade($data){
 
-    	$data['created_by'] = 1;
-    	$data['updated_by'] = 1;
-
 		try {
 		
 			$grade = Grade::create($data);
@@ -82,9 +79,6 @@ class GradeRepository implements GradeRepositoryInterface{
     }
 
     public function updateGrade($id,$data){
-
-    	$data['created_by'] = 1;
-    	$data['updated_by'] = 1;
 
     	try {
 
