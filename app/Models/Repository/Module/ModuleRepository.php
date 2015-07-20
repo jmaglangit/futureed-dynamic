@@ -61,6 +61,12 @@ class ModuleRepository implements ModuleRepositoryInterface{
 					$module = $module->subjectAreaName($criteria['area']);
 				}
 
+				//check age group
+				if(isset($criteria['age_group_id'])){
+
+					$module = $module->ageGroup($criteria['age_group_id']);
+				}
+
 			}
 
 			$count = $module->count();

@@ -38,7 +38,7 @@ class Module extends Model
 	}
 
 	public function grade() {
-		return $this->belongsTo('FutureEd\Models\Core\Grade');
+		return $this->belongsTo('FutureEd\Models\Core\Grade')->with('countryGrade');
 	}
 
 	public function content() {
@@ -73,6 +73,20 @@ class Module extends Model
 		return $query->whereHas('subjectArea', function($query) use ($name) {
 			$query->where('name','like','%'.$name.'%');
 		});
+
+	}
+
+	public function scopeAgeGroup($query, $age_group_id){
+
+
+		return $query->whereHas('grade', function($query) use ($age_group_id){
+
+			$query->whereHas('countryGrade',function($query) use ($age_group_id){
+
+				$query->where('age_group_id',$age_group_id);
+			});
+		});
+
 
 	}
 }

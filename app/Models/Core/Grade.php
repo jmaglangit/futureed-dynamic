@@ -50,6 +50,13 @@ class Grade extends Model {
         return $this->belongsTo('Webpatser\Countries\Countries');
     }
 
+	public function countryGrade(){
+
+		return $this->belongsTo('FutureEd\Models\Core\CountryGrade','id','grade_id')->with('ageGroup');
+	}
+
+
+
 
 
     //Scopes
