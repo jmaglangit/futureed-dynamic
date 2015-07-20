@@ -152,8 +152,6 @@ function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService,
     	self.errors = Constants.FALSE;
 		self.create.success = Constants.FALSE;
 		self.fields = [];
-		// set temporary seq_no (this will be remove once api will not require seq_no)
-		self.create.seq_no = 1;
 		self.create.module_id = self.module.id;
 
 		$scope.ui_block();
