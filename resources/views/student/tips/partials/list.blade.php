@@ -2,6 +2,11 @@
 	<div class="content-title">
 		<div class="title-main-content">
 			<span><i class="fa fa-lightbulb-o"></i> General Tips </span>
+			<div class="col-xs-2 pull-right">
+				<span>
+					<a href="{!! route('student.class.index') !!}" class="btn btn-maroon top-10">Back</a>
+				</span>
+			</div>
 		</div>
 	</div>
 
