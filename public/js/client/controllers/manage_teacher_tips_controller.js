@@ -12,9 +12,13 @@ function ManageTeacherTipsController($scope, ManageTeacherTipsService, TableServ
 	SearchService(self);
 	self.searchDefaults();
 
-	self.setTipsActive = function(active, id) {
+	self.setTipsActive = function(active, id , flag) {
 		self.errors = Constants.FALSE;
 		self.fields = [];
+
+		if(flag != 1) {
+			self.success = Constants.FALSE;
+		}
 
 		self.active_list = Constants.FALSE;
 		self.active_view = Constants.FALSE;
@@ -195,9 +199,13 @@ function ManageTeacherTipsController($scope, ManageTeacherTipsService, TableServ
 		});
 	}
 
-	self.setHelpActive = function(active, id) {
+	self.setHelpActive = function(active, id, flag) {
 		self.help_errors = Constants.FALSE;
 		self.help_fields = [];
+
+		if(flag != 1) {
+			self.help_success = Constants.FALSE;
+		}
 
 		self.help_active_list = Constants.FALSE;
 		self.help_active_view = Constants.FALSE;
@@ -269,6 +277,7 @@ function ManageTeacherTipsController($scope, ManageTeacherTipsService, TableServ
 				}else if(response.data){
 					self.help_record = {};
 					var help_record = response.data;
+					
 					self.help_record.link_type = help_record.link_type;
 					self.help_record.request_status = help_record.request_status;
 					self.help_record.status = help_record.status;
@@ -300,7 +309,7 @@ function ManageTeacherTipsController($scope, ManageTeacherTipsService, TableServ
 					self.help_errors = $scope.errorHandler(response.errors);
 				}else if(response.data){
 					self.help_success = TeacherConstant.SUCCESS_EDIT_HELP;
-					self.setHelpActive('view', self.help_record.id);
+					self.setHelpActive('view', self.help_record.id, 1);
 				}
 			}
 			$scope.ui_unblock();
@@ -310,9 +319,13 @@ function ManageTeacherTipsController($scope, ManageTeacherTipsService, TableServ
 		});
 	}
 
-	self.setHelpAnsActive = function(active, id) {
+	self.setHelpAnsActive = function(active, id, flag) {
 		self.help_ans_errors = Constants.FALSE;
 		self.help_ans_fields = [];
+
+		if(flag != 1) {
+			self.help_ans_success = Constants.FALSE;
+		}
 
 		self.help_ans_active_list = Constants.FALSE;
 		self.help_ans_active_view = Constants.FALSE;
@@ -355,7 +368,7 @@ function ManageTeacherTipsController($scope, ManageTeacherTipsService, TableServ
 					self.help_errors = $scope.errorHandler(response.errors);
 				}else if(response.data){
 					self.help_success = (status == 1) ? TeacherConstant.APPROVE_HELP:TeacherConstant.REJECT_HELP;
-					self.setHelpActive('list');
+					self.setHelpActive('list', '', 1);
 				}
 			}
 			$scope.ui_unblock();
@@ -378,7 +391,7 @@ function ManageTeacherTipsController($scope, ManageTeacherTipsService, TableServ
 		self.search.area = (self.search.ans_area) ? self.search.ans_area:Constants.EMPTY_STR;
 
 		$scope.ui_block();
-		ManageTeacherTipsService.helpAnsList(self.search, self.table).success(function(response) {
+		ManageTeacherTipsService.helpAnsList(self.classid, self.search, self.table).success(function(response) {
 			self.table.loading = Constants.FALSE;
 
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
@@ -438,6 +451,7 @@ function ManageTeacherTipsController($scope, ManageTeacherTipsService, TableServ
 					self.help_ans_record.title = help_ans_record.help_request.title;
 					self.help_ans_record.content = help_ans_record.content;
 					self.help_ans_record.created_by = help_ans_record.user.name;
+					self.help_ans_record.request_answer_status = help_ans_record.request_answer_status;
 
 				}
 			}
@@ -459,7 +473,7 @@ function ManageTeacherTipsController($scope, ManageTeacherTipsService, TableServ
 					self.help_ans_errors = $scope.errorHandler(response.errors);
 				}else if(response.data){
 					self.help_ans_success = TeacherConstant.SUCCESS_EDIT_HELP_ANS;
-					self.setHelpAnsActive('view', self.help_ans_record.id);
+					self.setHelpAnsActive('view', self.help_ans_record.id, 1);
 				}
 			}
 			$scope.ui_unblock();
@@ -482,7 +496,7 @@ function ManageTeacherTipsController($scope, ManageTeacherTipsService, TableServ
 					self.help_ans_errors = $scope.errorHandler(response.errors);
 				}else if(response.data){
 					self.help_ans_success = (status == 1) ? TeacherConstant.APPROVE_HELP_ANS:TeacherConstant.REJECT_HELP_ANS;
-					self.setHelpAnsActive('list');
+					self.setHelpAnsActive('list', '', 1);
 				}
 			}
 			$scope.ui_unblock();
