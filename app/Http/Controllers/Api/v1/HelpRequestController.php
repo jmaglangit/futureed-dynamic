@@ -5,6 +5,7 @@ use FutureEd\Models\Repository\HelpRequest\HelpRequestRepositoryInterface;
 use FutureEd\Models\Repository\HelpRequestAnswer\HelpRequestAnswerRepositoryInterface;
 use FutureEd\Services\AvatarServices;
 use Illuminate\Support\Facades\Input;
+use Carbon\Carbon;
 
 class HelpRequestController extends ApiController{
 
@@ -95,6 +96,7 @@ class HelpRequestController extends ApiController{
     public function store(HelpRequestRequest $request)
     {
         $data = $request->all();
+        $data['last_answered_at'] = Carbon::now();
         $result = $this->help_request->addHelpRequest($data);
         return $this->respondWithData($result);
     }
