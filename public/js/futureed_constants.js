@@ -50,6 +50,13 @@ var Constants = {
 	, QUESTION		: "Question"
 
 	/**
+	* Media Types
+	*/
+	, VIDEO			: 1
+	, TEXT			: 2
+	, IMAGE			: 3
+
+	/**
 	* Active Screens
 	*/
 	, ACTIVE_LIST	: "list"

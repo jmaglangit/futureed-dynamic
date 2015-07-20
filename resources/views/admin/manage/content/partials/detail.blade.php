@@ -69,7 +69,7 @@
 						) !!}
 					</div>
 				</div>
-	        	<div class="form-group" ng-if="content.record.tip_status == 'Pending' && content.active_view">
+	        	<div class="form-group" ng-if="content.record.tip_status == futureed.PENDING && content.active_view">
 	        		<div class="btn-container col-xs-8 col-xs-offset-2">
 						{!! Form::button('Accept'
 							, array(
@@ -89,14 +89,14 @@
 			</fieldset>
 			<fieldset>
 				<legend class="legend-name-mid">
-					Module Content
+					Teaching Module Content
 				</legend>
 				<div class="form-group">
-					<label class="col-xs-3 control-label">Teaching Module <span class="required">*</span></label>
+					<label class="col-xs-4 control-label">Teaching Module Name <span class="required">*</span></label>
 					<div class="col-xs-6">
 						{!! Form::text('teaching_module', ''
 							, array(
-								  'placeholder' => 'Teaching Module'
+								  'placeholder' => 'Teaching Module Name'
 								, 'ng-disabled' => 'content.active_view'
 								, 'ng-model' => 'content.record.teaching_module'
 								, 'ng-class' => "{ 'required-field' : content.fields['teaching_module'] }"
@@ -106,7 +106,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-xs-3 control-label" id="email">Learning Style <span class="required">*</span></label>
+					<label class="col-xs-4 control-label" id="email">Learning Style <span class="required">*</span></label>
 					<div class="col-xs-6">
 						<select  name="learning_style_id" ng-disabled="content.active_view" ng-class="{ 'required-field' : content.fields['learning_style_id'] }" class="form-control" ng-model="content.record.learning_style_id">
 							<option ng-selected="content.record.learning_style_id == futureed.FALSE" value="">-- Select Learning Style --</option>
@@ -115,7 +115,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-xs-3 control-label">Media Type <span class="required">*</span></label>
+					<label class="col-xs-4 control-label">Media Type <span class="required">*</span></label>
 					<div class="col-xs-6" ng-init="content.getMediaTypes()">
 						<select  name="media_type_id" ng-disabled="content.active_view" ng-class="{ 'required-field' : content.fields['media_type_id'] }" ng-change="content.emptyValue()" class="form-control" ng-model="content.record.media_type_id">
 							<option ng-selected="content.record.media_type_id == futureed.FALSE" value="">-- Select Media Type --</option>
@@ -123,8 +123,8 @@
 						</select>
 					</div>
 				</div>
-				<div class="form-group" ng-if="content.record.media_type_id == 1">
-					<label class="col-xs-3 control-label">Video <span class="required">*</span></label>
+				<div class="form-group" ng-if="content.record.media_type_id == futureed.VIDEO">
+					<label class="col-xs-4 control-label">Video <span class="required">*</span></label>
 					<div class="col-xs-6">
 						{!! Form::text('content_url', ''
 							, array(
@@ -137,8 +137,8 @@
 						) !!}
 					</div>
 				</div>
-				<div class="form-group" ng-if="content.record.media_type_id == 2">
-					<label class="col-xs-3 control-label">Content Text <span class="required">*</span></label>
+				<div class="form-group" ng-if="content.record.media_type_id == futureed.TEXT">
+					<label class="col-xs-4 control-label">Content Text <span class="required">*</span></label>
 					<div class="col-xs-6">
 						{!! Form::textarea('content_text', ''
 							, array(
@@ -152,21 +152,21 @@
 						) !!}
 					</div>
 				</div>
-				<div class="form-group" ng-if="content.record.media_type_id == 3 && content.active_edit">
-					<label class="col-xs-3 control-label">Image <span class="required">*</span></label>
+				<div class="form-group" ng-if="content.record.media_type_id == futureed.IMAGE && content.active_edit">
+					<label class="col-xs-4 control-label">Image <span class="required">*</span></label>
 					<div class="col-xs-6">
 	                    <div class="btn btn-blue" ngf-select ngf-change="content.upload($files, content.record)"> Choose Image... </div>
 	                    <span ng-if="content.record.uploaded" class="label label-info margin-top-5 col-xs-12">Image Uploaded...</span>
 					</div>
 				</div>
-				<div class="form-group" ng-if="content.record.media_type_id == 3 && content.active_view">
-					<label class="col-xs-3 control-label">Image </label>
+				<div class="form-group" ng-if="content.record.media_type_id == futureed.IMAGE && content.active_view">
+					<label class="col-xs-4 control-label">Image </label>
 					<div class="col-xs-6">
 	                    <a href="javascript:;" class="top-5" ng-click="content.viewImage('{!! route('admin.image.viewer') !!}', content.record)">View Content Image</a>
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-xs-3 control-label">Description <span class="required">*</span></label>
+					<label class="col-xs-4 control-label">Description <span class="required">*</span></label>
 					<div class="col-xs-6">
 						{!! Form::textarea('description', ''
 							, array(
@@ -181,7 +181,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-xs-3 control-label">Sequence Number</label>
+					<label class="col-xs-4 control-label">Sequence Number</label>
 					<div class="col-xs-6">
 						{!! Form::text('seq_no', ''
 							, array(
@@ -196,7 +196,7 @@
 					
 				</div>
 				<div class="form-group">
-	        		<label class="col-xs-3 control-label">Status <span class="required">*</span></label>
+	        		<label class="col-xs-4 control-label">Status <span class="required">*</span></label>
 	        		<div class="col-xs-6" ng-if="content.active_edit">
 	        			<div class="col-xs-6 checkbox">	                				
 	        				<label>
