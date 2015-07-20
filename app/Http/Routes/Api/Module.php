@@ -11,6 +11,6 @@ Routes::group(['prefix' => '/module'], function() {
 });
 
 Routes::resource('/module','Api\v1\ModuleController',
-	['except' => ['edit']]);
+	['except' => ['create','edit']]);
 
 
