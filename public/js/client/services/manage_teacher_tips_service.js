@@ -77,10 +77,11 @@ function ManageTeacherTipsService($http){
 		});
 	}
 
-	teacherTipsApi.helpAnsList = function(search, table) {
+	teacherTipsApi.helpAnsList = function(id, search, table) {
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url 	: tipsApiUrl + 'help-request-answer?help_request=' + search.title
+			, url 	: tipsApiUrl + 'help-request-answer?class_id=' + id 
+				+ '&help_request=' + search.title
 				+ '&request_answer_status=' + search.status
 				+ '&created_by=' + search.created
 				+ '&subject=' + search.subject

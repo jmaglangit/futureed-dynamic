@@ -72,11 +72,12 @@
 					)
 				) !!}
 			</div>
-			<div class="col-xs-5">
+			<div class="col-xs-5" ng-show="tips.help_ans_record.request_answer_status == futureed.PENDING">
 				{!! Form::button('Approve'
 					, array(
 						'class' => 'btn btn-blue btn-medium'
 						, 'ng-click' => "tips.updateHelpAns(tips.help_ans_record.id, 1)"
+						, 'ng-if' => '!tips.help_ans_edit'
 					)
 				) !!}
 			</div>
@@ -93,7 +94,7 @@
 					)
 				) !!}
 			</div>
-			<div class="col-xs-5">
+			<div class="col-xs-5" ng-show="tips.help_ans_record.request_answer_status == futureed.PENDING">
 				{!! Form::button('Reject'
 					, array(
 						'class' => 'btn btn-gold btn-medium'

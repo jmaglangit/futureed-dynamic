@@ -72,7 +72,7 @@
 					)
 				) !!}
 			</div>
-			<div class="col-xs-5">
+			<div class="col-xs-5" ng-show="tips.help_record.request_status == futureed.PENDING">
 				{!! Form::button('Approve'
 					, array(
 						'class' => 'btn btn-blue btn-medium'
@@ -94,7 +94,7 @@
 					)
 				) !!}
 			</div>
-			<div class="col-xs-5">
+			<div class="col-xs-5" ng-show="tips.help_record.request_status == futureed.PENDING">
 				{!! Form::button('Reject'
 					, array(
 						'class' => 'btn btn-gold btn-medium'
