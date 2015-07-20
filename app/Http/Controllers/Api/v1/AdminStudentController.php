@@ -170,7 +170,7 @@ class AdminStudentController extends ApiController {
 
 				$student_class = $this->student_service->getCurrentClass($id);
 
-				if($student_class <> 0){
+				if(!is_object($student_class)){
 
 					return $this->respondErrorMessage(2050);
 				}
