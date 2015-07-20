@@ -1,4 +1,4 @@
-<div ng-if="qa.qa_details.question_type == 'MC'" ng-init="qa.setAnsActive()">
+<div ng-if="qa.q_details.question_type == 'MC'" ng-init="qa.setAnsActive()">
         <div ng-if="qa.active_anslist">
         {!! Form::open(array('id'=> 'add_answer_form', 'class' => 'form-horizontal', 'enctype' => 'multipart/form-data')) !!}
             <div class="col-xs-12 form-content">

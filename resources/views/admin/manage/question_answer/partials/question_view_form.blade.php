@@ -16,6 +16,9 @@
         	<p>{! qa.success !}</p>
         </div>
         <fieldset>
+            <legend class="legend-name-mid">
+                Module Details
+            </legend>
             <div class="form-group">
                 <label class="control-label col-xs-2">Module</label>
                 <div class="col-xs-4">
@@ -28,27 +31,12 @@
                         )
                     ) !!}
                 </div>
-            </div>
-            <div class="form-group">
                 <label class="control-label col-xs-2">Subject</label>
                 <div class="col-xs-4">
                     {!! Form::text('subject',''
                         , array(
                             'placeHolder' => 'Subject'
                             , 'ng-model' => 'qa.module.subject.name'
-                            , 'ng-disabled' => 'true'
-                            , 'class' => 'form-control'
-                        )
-                    ) !!}
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="control-label col-xs-2">Area</label>
-                <div class="col-xs-4">
-                    {!! Form::text('area',''
-                        , array(
-                            'placeHolder' => 'Area'
-                            , 'ng-model' => 'qa.module.area'
                             , 'ng-disabled' => 'true'
                             , 'class' => 'form-control'
                         )
@@ -67,8 +55,61 @@
                         )
                     ) !!}
                 </div>
-                <label class="control-label col-xs-2">Question Type<span class="required">*</span></label>
+                <label class="control-label col-xs-2">Area</label>
                 <div class="col-xs-4">
+                    {!! Form::text('area',''
+                        , array(
+                            'placeHolder' => 'Area'
+                            , 'ng-model' => 'qa.module.area'
+                            , 'ng-disabled' => 'true'
+                            , 'class' => 'form-control'
+                        )
+                    ) !!}
+                </div>
+            </div>
+        </fieldset>
+        <fieldset>
+            <legend class="legend-name-mid">
+                Question Details
+            </legend>
+            <div class="form-group">
+                <label class="control-label col-xs-3">Question <span class="required">*</span></label>
+                <div class="col-xs-5">
+                    {!! Form::textarea('questions_text',''
+                        , array(
+                            'placeHolder' => 'Question'
+                            , 'ng-model' => 'qa.q_details.questions_text'
+                            , 'class' => 'form-control disabled-textarea'
+                            , 'ng-disabled' => '!qa.edit'
+                            , 'ng-class' => "{ 'required-field' : qa.fields['questions_text'] }"
+                            , 'rows' => 5
+                        )
+                    ) !!}
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-xs-3">Question Image <span class="required">*</span></label>
+                <div class="col-xs-5" ng-if="qa.active_edit">
+                    <div class="btn btn-blue" ngf-select ngf-change="qa.upload($files, qa.q_details)"> Choose Image... </div>
+                </div>
+
+                <div ng-if="qa.active_view && qa.q_details.original_image_name && qa.q_details.original_image_name != '0'">
+                    <div class="col-xs-4">
+                        <a href="" ng-click="qa.viewImage('{!! route('admin.image.viewer') !!}', qa.q_details)">View Image</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group" ng-if="qa.q_details.uploaded">
+                <div class="col-xs-3"></div>
+                <div class="col-xs-5">
+                    <span class="label label-info">Image Uploaded...</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-xs-3">Question Type <span class="required">*</span></label>
+                <div class="col-xs-5">
                     {!! Form::select('question_type'
                         , array(
                             '' => '-- Select Question Type --'
@@ -87,35 +128,24 @@
                     ) !!}
                 </div>
             </div>
-            <div class="form-group">
-                <label class="control-label col-xs-2">Question <span class="required">*</span></label>
-                <div class="col-xs-4">
-                    {!! Form::text('question',''
-                        , array(
-                            'placeHolder' => 'Question'
-                            , 'ng-model' => 'qa.q_details.questions_text'
-                            , 'class' => 'form-control'
-                            , 'ng-disabled' => '!qa.edit'
-                            , 'ng-class' => "{ 'required-field' : qa.fields['questions_text'] }"
-                        )
-                    ) !!}
-                </div>
-                <label ng-if="qa.q_details.question_type != 'MC' && qa.q_details.question_type" class="control-label col-xs-2">Answer <span class="required">*</span></label>
-                <div class="col-xs-4" ng-if="qa.q_details.question_type != 'MC' && qa.q_details.question_type">
-                    {!! Form::text('question',''
+            <div class="form-group" ng-if="qa.q_details.question_type != 'MC' && qa.q_details.question_type">
+                <label class="control-label col-xs-3">Answer <span class="required">*</span></label>
+                <div class="col-xs-5">
+                    {!! Form::textarea('answer',''
                         , array(
                             'placeHolder' => 'Answer'
                             , 'ng-model' => 'qa.q_details.answer'
-                            , 'class' => 'form-control'
+                            , 'class' => 'form-control disabled-textarea'
                             , 'ng-disabled' => '!qa.edit'
                             , 'ng-class' => "{ 'required-field' : qa.fields['answer'] }"
+                            , 'rows' => 5
                         )
                     ) !!}
                 </div>
             </div>
         	<div class="form-group">
-                <label class="control-label col-xs-2">Points Earned<span class="required">*</span></label>
-                <div class="col-xs-4">
+                <label class="control-label col-xs-3">Points Earned <span class="required">*</span></label>
+                <div class="col-xs-5">
                     {!! Form::text('points_earned',''
                         , array(
                             'placeHolder' => 'Points Earned'
@@ -126,23 +156,10 @@
                         )
                     ) !!}
                 </div>
-
-                <label ng-if="qa.active_edit" class="control-label col-xs-2">Question Image</label>
-                <div class="col-xs-4" ng-if="qa.active_edit">
-                    <div class="btn btn-blue" ngf-select ngf-change="qa.upload($files, qa.q_details)"> Choose Image... </div>
-                    <span ng-if="qa.q_details.uploaded" class="label label-info upload-label">Image Uploaded...</span>
-                </div>
-
-                <div ng-if="qa.active_view && qa.q_details.original_image_name && qa.q_details.original_image_name != '0'">
-                    <div class="col-xs-2"></div>
-                    <div class="col-xs-4 control-label">
-                        <a href="" ng-click="qa.viewImage('{!! route('admin.image.viewer') !!}', qa.q_details)">View Question Image</a>
-                    </div>
-                </div>
         	</div>
             <div class="form-group">
-                <label class="control-label col-xs-2">Difficulty <span class="required">*</span></label>
-                <div class="col-xs-4">
+                <label class="control-label col-xs-3">Difficulty <span class="required">*</span></label>
+                <div class="col-xs-5">
                     {!! Form::text('difficulty',''
                         , array(
                             'placeHolder' => 'Difficulty'
@@ -153,8 +170,10 @@
                         )
                     ) !!}
                 </div>
-                <label class="col-xs-2 control-label">Status <span class="required">*</span></label>
-                <div class="col-xs-4" ng-if="qa.active_edit">
+            </div>
+            <div class="form-group">
+                <label class="col-xs-3 control-label">Status <span class="required">*</span></label>
+                <div class="col-xs-5" ng-if="qa.active_edit">
                     <div class="col-xs-6 checkbox">                                 
                         <label>
                             {!! Form::radio('status'
@@ -182,14 +201,14 @@
                         </label>
                     </div>
                 </div>
-                <div class="col-xs-4" ng-if="qa.active_view">
-                    <label class="col-md-8" ng-if="qa.q_details.status == 'Enabled'">
+                <div class="col-xs-5" ng-if="qa.active_view">
+                    <label ng-if="qa.q_details.status == 'Enabled'">
                         <b class="success-icon">
                             <i class="margin-top-8 fa fa-check-circle-o"></i> {! qa.q_details.status !}
                         </b>
                     </label>
 
-                    <label class="col-md-8" ng-if="qa.q_details.status == 'Disabled'">
+                    <label ng-if="qa.q_details.status == 'Disabled'">
                         <b class="error-icon">
                             <i class="margin-top-8 fa fa-ban"></i> {! qa.q_details.status !}
                         </b>
@@ -197,8 +216,8 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-xs-2">Sequence No</label>
-                <div class="col-xs-4">
+                <label class="control-label col-xs-3">Sequence No</label>
+                <div class="col-xs-5">
                     {!! Form::text('seq_no',''
                         , array(
                             'placeHolder' => 'Sequance No'
@@ -211,7 +230,7 @@
                 </div>
             </div>
         </fieldset>
-        <div class="col-xs-6 col-xs-offset-3">
+        <div class="col-xs-8 col-xs-offset-2">
         	<div class="btn-container">
                 {!! Form::button('Edit'
                     , array(
