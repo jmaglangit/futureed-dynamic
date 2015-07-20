@@ -30,7 +30,6 @@
 	        			) !!}
 	        		</div>
 	        	</div>
-	        	
 	        	<div class="form-group" ng-init="getGradeLevel(user.country_id)">
 	        		<label class="col-xs-4 control-label">Grade <span class="required">*</span></label>
 	        		<div class="col-xs-4">
