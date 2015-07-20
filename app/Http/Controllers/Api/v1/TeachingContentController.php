@@ -220,21 +220,24 @@ class TeachingContentController extends ApiController {
 			if($data['seq_no'] <> $current_sequence[0]->seq_no){
 
 				//pull sequence number.
-				$pulled = $this->module_content_services->pullSequenceNo($data['module_id'],$current_sequence[0]->seq_no,$current_sequence[0]->id);
+				$pulled = $this->module_content_services->pullSequenceNo($teaching_content->module_id,$current_sequence[0]->seq_no,$current_sequence[0]->id);
 
 				//update sequence
 				$this->module_content->updateSequence($pulled);
 
 
 				//insert sequence number
-				$current_sequence = $this->module_content_services->updateSequence($data['module_id'],$data['seq_no']);
+				$current_sequence = $this->module_content_services->updateSequence($teaching_content->module_id,$data['seq_no']);
 
 				//update sequence
 				$this->module_content->updateSequence($current_sequence);
 
 			}
 
-			$this->module_content->updateModuleContent($current_sequence[0]->id, ['seq_no'=> $data['seq_no']]);
+			if($data['seq_no'] != NULL) {
+
+				$this->module_content->updateModuleContent($current_sequence[0]->id, ['seq_no' => $data['seq_no']]);
+			}
 		}
 
 
