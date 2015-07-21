@@ -1,6 +1,6 @@
 <div class="container search-container" ng-if="help.active_view || help.active_edit">
 	<div class="title-mid">
-		<span>View Help</span>		
+		<span>Help Request Details</span>		
 	</div>
 	<div class="col-xs-12 success-container" ng-if="help.errors || help.success">
 		<div class="alert alert-error" ng-if="help.errors">

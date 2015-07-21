@@ -1,6 +1,6 @@
 <div class="container search-container" ng-if="tips.active_view || tips.active_edit">
 	<div class="title-mid">
-		<span>tips tips Details</span>		
+		<span>Tip Details</span>		
 	</div>
 
 	<div class="col-xs-12 success-container" ng-if="tips.errors || tips.success">
@@ -101,7 +101,7 @@
 						'ng-disabled'=>'true'
 						, 'class' => 'form-control'
 						, 'ng-model' => 'tips.record.created_by'
-						, 'placeholder' => '>Created By'
+						, 'placeholder' => 'Created By'
 					)
 				) !!}
 			</div>
