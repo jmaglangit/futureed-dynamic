@@ -51,7 +51,7 @@ class TeachingContentRequest extends ApiRequest {
 					'content_url' => 'required_if:media_type_id,1|string',
 					'media_type_id' => 'required|exists:media_types,id,deleted_at,NULL',
 					'status' => 'required|in:Enabled,Disabled',
-					'seq_no' => 'integer',
+					'seq_no' => 'integer|min:1',
 					'content_text' => 'required_if:media_type_id,2|string',
 
 				];
@@ -71,6 +71,7 @@ class TeachingContentRequest extends ApiRequest {
 			'image.required_if' =>'The image field is required.',
 			'content_url.required_if' =>'The content url field is required.',
 			'content_text.required_if' =>'The content text field is required.',
+			'teaching_module.required' => 'The teaching module name field is required.'
 		];
 	}
 

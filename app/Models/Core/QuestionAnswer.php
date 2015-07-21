@@ -18,7 +18,7 @@ class QuestionAnswer extends Model {
 		'updated_at',
 		'deleted_at'];
 
-	protected $fillable =['module_id','question_id','code','answer_text','answer_image','original_image_name','correct_answer','point_equivalent','difficulty',
+	protected $fillable =['module_id','label','question_id','code','answer_text','answer_image','original_image_name','correct_answer','point_equivalent','difficulty',
 		'created_by','updated_by'];
 
 	protected $attributes = [

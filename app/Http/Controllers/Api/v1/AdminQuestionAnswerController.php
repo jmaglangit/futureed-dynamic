@@ -81,7 +81,7 @@ class AdminQuestionAnswerController extends ApiController {
 	public function store(AdminQuestionAnswerRequest $request)
 	{
 
-		$data = $request->only('module_id','question_id','code','answer_text','correct_answer','point_equivalent','image');
+		$data = $request->only('module_id','question_id','code','answer_text','correct_answer','point_equivalent','image','label');
 
 
 		//add data to question_answer table
@@ -165,7 +165,7 @@ class AdminQuestionAnswerController extends ApiController {
 	 */
 	public function update($id, AdminQuestionAnswerRequest $request)
 	{
-		$data = $request->only('answer_text','correct_answer','point_equivalent','image');
+		$data = $request->only('answer_text','correct_answer','point_equivalent','image','label');
 
 		$question_answer = $this->question_answer->viewQuestionAnswer($id);
 
