@@ -12,13 +12,13 @@ class ManageTeacherHelpAnswerController extends Controller{
 	*@return List View
 	*/
 	public function list_help_ans_form() {
-		return view('client.teacher.help_answer.partials.list_help_ans_form');
+		return view('client.teacher.help_answer.partials.list');
 	}
 
 	/**
 	*@return Edit & View Form
 	*/
 	public function view_help_ans_form() {
-		return view('client.teacher.help_answer.partials.view_help_ans_form');
+		return view('client.teacher.help_answer.partials.view');
 	}
 }
