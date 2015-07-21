@@ -81,11 +81,31 @@
 
 			Routes::group([
 				  'prefix' => '/partials'
-				, 'middleware' => 'student'], function()
+				, 'middleware' => 'student_partial'], function()
 			{
 				Routes::get('/dashbrd-side-nav', [ 
 						'as' => 'student.class.partials.dashbrd-side-nav'
 						, 'uses' => 'FutureLesson\Student\ClassController@dashbrd_side_nav'
+					]);
+
+				Routes::get('/module_list', [ 
+						'as' => 'student.class.partials.module_list'
+						, 'uses' => 'FutureLesson\Student\ClassController@module_list'
+					]);
+			});
+
+			Routes::group([
+				  'prefix' => '/module'
+				, 'middleware' => 'student_partial'], function()
+			{
+				Routes::get('/', [ 
+					'as' => 'student.class.module.index'
+					, 'uses' => 'FutureLesson\Student\ClassController@index'
+				]);
+
+				Routes::get('/{name}', [ 
+						'as' => 'student.class.modulename'
+						, 'uses' => 'FutureLesson\Student\ClassController@module'
 					]);
 			});
 		});
