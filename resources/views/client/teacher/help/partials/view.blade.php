@@ -20,7 +20,7 @@
 				, 'class' => 'form-horizontal'
 			)
 		) !!}
-		<div class="form-group" ng-if="help.record.subject">
+		<div class="form-group" ng-if="help.record.link_type != futureed.General && help.record.subject">
 			<label class="control-label col-xs-3">Subject</label>
 			<div class="col-xs-5">
 				{!! Form::text('subject', ''
@@ -33,7 +33,7 @@
 				) !!}
 			</div>
 		</div>
-		<div class="form-group" ng-if="help.record.subject_area">
+		<div class="form-group" ng-if="help.record.link_type != futureed.General && help.record.subject_area">
 			<label class="control-label col-xs-3">Subject Area</label>
 			<div class="col-xs-5">
 				{!! Form::text('subject_area', ''
@@ -46,7 +46,7 @@
 				) !!}
 			</div>
 		</div>
-		<div class="form-group" ng-if="help.record.module">
+		<div class="form-group" ng-if="help.record.link_type != futureed.General && help.record.module">
 			<label class="control-label col-xs-3">Module</label>
 			<div class="col-xs-5">
 				{!! Form::text('module', ''

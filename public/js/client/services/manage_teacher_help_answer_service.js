@@ -9,11 +9,11 @@ function ManageTeacherAnswerService($http){
 		return $http({
 			method 	: Constants.METHOD_GET
 			, url 	: url + 'help-request-answer?class_id=' + search.class_id 
-				+ '&help_request=' + search.title
-				+ '&request_answer_status=' + search.status
+				+ '&help_request=' + search.help_request
+				+ '&request_answer_status=' + search.request_answer_status
 				+ '&created_by=' + search.created
 				+ '&subject=' + search.subject
-				+ '&area=' + search.area
+				+ '&subject_area=' + search.subject_area
 				+ '&limit=' + table.size
 				+ '&offset=' + table.offset
 		});

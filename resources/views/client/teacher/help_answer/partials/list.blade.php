@@ -25,10 +25,10 @@
 			)!!}
 			<div class="form-group">
 				<div class="col-xs-5">
-					{!! Form::text('search_title', ''
+					{!! Form::text('search_help_request', ''
 						,array(
 							'placeholder' => 'Title'
-							, 'ng-model' => 'answer.search.title'
+							, 'ng-model' => 'answer.search.help_request'
 							, 'class' => 'form-control'
 						)
 					)!!}

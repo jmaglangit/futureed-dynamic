@@ -79,14 +79,14 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="control-label col-xs-3">Description <span class="required">*</span></label>
+			<label class="control-label col-xs-3">Answer <span class="required">*</span></label>
 			<div class="col-xs-5">
-				{!! Form::textarea('search_name', ''
+				{!! Form::textarea('search_content', ''
 					, array(
 						'ng-disabled'=>'answer.active_view'
 						, 'class' => 'form-control disabled-textarea'
 						, 'ng-model' => 'answer.record.content'
-						, 'placeholder' => 'Description'
+						, 'placeholder' => 'Answer'
 					)
 				) !!}
 			</div>
