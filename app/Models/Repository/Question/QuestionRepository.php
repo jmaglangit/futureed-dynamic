@@ -80,7 +80,7 @@ class QuestionRepository implements QuestionRepositoryInterface{
 
 		}
 
-		return ['total' => $count, 'records' => $question->get()->toArray()];
+		return ['total' => $count, 'records' => $question->orderBySeqNo()->get()->toArray()];
 
 	}
 
