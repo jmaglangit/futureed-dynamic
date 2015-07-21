@@ -5,6 +5,7 @@ use FutureEd\Http\Controllers\Controller;
 
 use FutureEd\Models\Repository\Module\ModuleRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class ModuleController extends ApiController {
 
@@ -30,7 +31,7 @@ class ModuleController extends ApiController {
 		$offset = 0;
 
 
-		
+
 		//for module name
 		if(Input::get('name')){
 
