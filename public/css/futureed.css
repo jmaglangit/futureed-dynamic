@@ -1098,3 +1098,10 @@ content {
 	margin: 5px 15px;
 	padding: 5px;
 }
+
+.wide-column {
+	max-width: 200px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
