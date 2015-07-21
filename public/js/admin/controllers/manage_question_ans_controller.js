@@ -284,11 +284,12 @@ function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService,
 
 	self.setAnsActive = function(active, id, flag) {
         self.answers.errors = Constants.FALSE
+        self.answers = {};
+        self.fields = [];
         self.area_field = Constants.FALSE;
 
         self.active_anslist = Constants.FALSE;
         self.active_ansedit = Constants.FALSE;
-        self.edit = Constants.FALSE;
 
         if(flag != 1) {
             self.answers.success = Constants.FALSE;
@@ -306,6 +307,10 @@ function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService,
                 self.answerList();
                 break;
         }
+    }
+
+    self.clearAnswer = function() {
+    	self.setAnsActive();
     }
 
 	self.addAnswer = function() {
@@ -361,6 +366,8 @@ function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService,
 
 	self.confirmAnsDelete = function(id) {
 		self.errors = Constants.FALSE;
+		self.setAnsActive();
+
 		self.delete.ans_id = id;
 		self.delete.ans_confirm = Constants.TRUE;
 
@@ -394,6 +401,7 @@ function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService,
 
 	self.getAnswerDetail = function(id) {
 		self.answers.errors = Constants.FALSE;
+		self.fields = [];
 
 		$scope.ui_block();
 		ManageQuestionAnsService.getAnswerDetail(id).success(function(response){
@@ -401,12 +409,13 @@ function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService,
 				if(response.errors) {
 					self.answers.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
-					self.ansdetails = response.data;
+					self.answers = response.data;
 				}
 			}
-		$scope.ui_unblock();
+
+			$scope.ui_unblock();
 		}).error(function(response) {
-			self.errors = internalError();
+			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
 	}
@@ -416,7 +425,7 @@ function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService,
 		self.fields = [];
 
 		$scope.ui_block();
-		ManageQuestionAnsService.saveAnswer(self.ansdetails).success(function(response){
+		ManageQuestionAnsService.saveAnswer(self.answers).success(function(response){
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.answrs.errors = $scope.errorHandler(response.errors);

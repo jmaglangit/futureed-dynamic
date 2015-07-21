@@ -211,7 +211,7 @@
                 </div>
             </div>
         </fieldset>
-        <div class="col-xs-6 col-xs-offset-3">
+        <div class="col-xs-8 col-xs-offset-2">
         	<div class="btn-container">
                 {!! Form::button('Edit'
                     , array(
