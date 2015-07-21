@@ -5,6 +5,7 @@ use FutureEd\Http\Controllers\Controller;
 
 use FutureEd\Models\Repository\Module\ModuleRepositoryInterface;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class ModuleController extends ApiController {
 
@@ -25,7 +26,38 @@ class ModuleController extends ApiController {
 	 */
 	public function index()
 	{
-		//
+		$criteria = [];
+		$limit = 0 ;
+		$offset = 0;
+
+		//for subject
+		if(Input::get('subject_id')){
+
+			$criteria['subject_id'] = Input::get('subject_id');
+		}
+
+		//for grade
+		if(Input::get('grade_id')){
+
+			$criteria['grade_id'] = Input::get('grade_id');
+		}
+
+		//for module_status
+		if(Input::get('module_status')){
+
+			$criteria['module_status'] = Input::get('module_status');
+		}
+
+		if(Input::get('limit')) {
+			$limit = intval(Input::get('limit'));
+		}
+
+		if(Input::get('offset')) {
+			$offset = intval(Input::get('offset'));
+		}
+
+		//get list of module
+		return $this->respondWithData($this->module->getModules($criteria , $limit, $offset ));
 	}
 
 	/**

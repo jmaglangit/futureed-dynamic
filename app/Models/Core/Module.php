@@ -49,6 +49,10 @@ class Module extends Model
 		return $this->hasMany('FutureEd\Models\Core\Question');
 	}
 
+	public function studentModule() {
+		return $this->hasMany('FutureEd\Models\Core\StudentModule');
+	}
+
 
 
 
@@ -57,6 +61,20 @@ class Module extends Model
 	{
 
 		return $query->where('name', 'like', '%' . $name . '%');
+
+	}
+
+	public function scopeSubjectId($query, $subject_id)
+	{
+
+		return $query->where('subject_id', '=',  $subject_id );
+
+	}
+
+	public function scopeGradeId($query, $grade_id)
+	{
+
+		return $query->where('grade_id', '=',  $grade_id );
 
 	}
 
@@ -72,6 +90,14 @@ class Module extends Model
 
 		return $query->whereHas('subjectArea', function($query) use ($name) {
 			$query->where('name','like','%'.$name.'%');
+		});
+
+	}
+
+	public function scopeModuleStatus($query, $status) {
+
+		return $query->whereHas('studentModule', function($query) use ($status) {
+			$query->where('module_status','=',$status);
 		});
 
 	}
