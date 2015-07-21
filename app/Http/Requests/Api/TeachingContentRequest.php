@@ -71,6 +71,7 @@ class TeachingContentRequest extends ApiRequest {
 			'image.required_if' =>'The image field is required.',
 			'content_url.required_if' =>'The content url field is required.',
 			'content_text.required_if' =>'The content text field is required.',
+			'teaching_module.required' => 'The teaching module name field is required.'
 		];
 	}
 
