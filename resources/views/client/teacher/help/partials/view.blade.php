@@ -62,7 +62,7 @@
 		<div class="form-group">
 			<label class="control-label col-xs-3">Date Created</label>
 			<div class="col-xs-5">
-				<input type="text" ng-disabled="true" name="created_at" class="form-control" placeholder="Date Created" value="{! help.record.created_at | ddMMyy !}" />
+				<input type="text" ng-disabled="true" name="created_at" class="form-control" placeholder="Date Created" value="{! help.record.created_at | ddMMyyHHmmss : '-' !}" />
 			</div>
 		</div>
 		<div class="form-group">
@@ -99,7 +99,7 @@
 						'ng-disabled'=>'true'
 						, 'class' => 'form-control'
 						, 'ng-model' => 'help.record.created_by'
-						, 'placeholder' => '>Created By'
+						, 'placeholder' => 'Created By'
 					)
 				) !!}
 			</div>
