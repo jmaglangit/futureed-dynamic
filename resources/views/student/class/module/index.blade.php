@@ -97,7 +97,7 @@
 									  , 'ng-click' => 'class.submitHelp()'
 									)
 								) !!}
-					            {!! Form::button('Back'
+								{!! Form::button('Back'
 									, array(
 										'id' => 'validate_code_btn'
 										, 'class' => 'btn btn-gold btn-medium'
