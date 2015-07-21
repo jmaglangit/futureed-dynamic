@@ -1,9 +1,9 @@
 angular.module('futureed.controllers')
-	.controller('ManageTeacherTipsController', ManageTeacherTipsController);
+	.controller('ManageTeacherHelpController', ManageTeacherHelpController);
 
-ManageTeacherTipsController.$inject = ['$scope', 'ManageTeacherTipsService', 'TableService', 'SearchService'];
+ManageTeacherHelpController.$inject = ['$scope', 'ManageTeacherHelpService', 'TableService', 'SearchService'];
 
-function ManageTeacherTipsController($scope, ManageTeacherTipsService, TableService, SearchService) {
+function ManageTeacherHelpController($scope, ManageTeacherHelpService, TableService, SearchService) {
 	var self = this;
 
 	TableService(self);
@@ -22,14 +22,14 @@ function ManageTeacherTipsController($scope, ManageTeacherTipsService, TableServ
 
 		switch(active) {
 			case Constants.ACTIVE_VIEW :
-				self.tipDetail(id);
+				self.detail(id);
 				self.active_view = Constants.TRUE;
 				break;
 
 			case Constants.ACTIVE_EDIT :
 				self.success = Constants.FALSE;
 				self.active_edit = Constants.TRUE;
-				self.tipDetail(id);
+				self.detail(id);
 				break;
 
 			case Constants.ACTIVE_LIST :
@@ -67,18 +67,18 @@ function ManageTeacherTipsController($scope, ManageTeacherTipsService, TableServ
 
 	self.list = function() {
 		if(self.active_list) {
-			self.listTips();
+			self.listHelp();
 		}
 	}
 
-	self.listTips = function() {
+	self.listHelp = function() {
 		self.errors = Constants.FALSE;
 		self.records = [];
-		self.search.class_id = $scope.classid;
 		self.table.loading = Constants.TRUE;
+		self.search.class_id = $scope.classid;
 
 		$scope.ui_block();
-		ManageTeacherTipsService.list(self.search, self.table).success(function(response) {
+		ManageTeacherHelpService.listHelp(self.search, self.table).success(function(response) {
 			self.table.loading = Constants.FALSE;
 
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
@@ -97,52 +97,52 @@ function ManageTeacherTipsController($scope, ManageTeacherTipsService, TableServ
 		});
 	}
 
-	self.tipDetail = function(id) {
+	self.detail = function(id) {
 		self.errors = Constants.FALSE;
-		self.record = {};
 
 		$scope.ui_block();
-		ManageTeacherTipsService.detail(id).success(function(response) {
-			if(angular.equals(response.status, Constants.STATUS_OK)) {
-				if(response.errors) {
+		ManageTeacherHelpService.detail(id).success(function(response){
+			if(angular.equals(response.status, Constants.STATUS_OK)){
+				if(response.errors){
 					self.errors = $scope.errorHandler(response.errors);
-				} else if(response.data) {
-					var record = response.data;
+				}else if(response.data){
+					self.record = {};
 
-					self.record.id = record.id;
-					self.record.created_at = record.created_at;
-					self.record.created_by = record.student.first_name + ' ' + record.student.last_name;
+					var record = response.data;
+					
 					self.record.link_type = record.link_type;
-					self.record.tip_status = record.tip_status;
+					self.record.request_status = record.request_status;
+					self.record.status = record.status;
+					self.record.id = record.id;
+					self.record.subject = record.subject;
+					self.record.subject_area = record.subject_area;
+					self.record.module = record.module;
+					self.record.created_at = record.created_at;
 					self.record.title = record.title;
 					self.record.content = record.content;
-					self.record.status = record.status;
-					self.record.subject = record.subject;
-					self.record.subjectarea = record.subjectarea;
-					self.record.module = record.module;
-					self.record.tip_status = record.tip_status;
+					self.record.created_by = record.student.first_name + ' ' + record.student.last_name;
+
 				}
 			}
-
 			$scope.ui_unblock();
-		}).error(function(response) {
+		}).error(function(response){
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
-		});
+		})
 	}
 
-	self.update = function(){
+	self.update = function() {
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
 
 		$scope.ui_block();
-		ManageTeacherTipsService.update(self.record).success(function(response){
-			if(angular.equals(response.status,Constants.STATUS_OK)){
+		ManageTeacherHelpService.update(self.record).success(function(response){
+			if(angular.equals(response.status, Constants.STATUS_OK)){
 				if(response.errors){
 					self.errors = $scope.errorHandler(response.errors);
 				}else if(response.data){
-					self.success = TeacherConstant.SUCCESS_EDIT_TIP;
-					self.setActive(Constants.ACTIVE_VIEW, response.data.id);
+					self.success = TeacherConstant.SUCCESS_EDIT_HELP;
+					self.setActive(Constants.ACTIVE_VIEW, self.record.id);
 				}
 			}
 			$scope.ui_unblock();
@@ -158,12 +158,13 @@ function ManageTeacherTipsController($scope, ManageTeacherTipsService, TableServ
 		var tip_status = (status) ? Constants.ACCEPTED : Constants.REJECTED;
 
 		$scope.ui_block();
-		ManageTeacherTipsService.updateStatus(id, tip_status).success(function(response){
+
+		ManageTeacherHelpService.updateStatus(id, tip_status).success(function(response){
 			if(angular.equals(response.status,Constants.STATUS_OK)){
 				if(response.errors){
 					self.errors = $scope.errorHandler(response.errors);
 				}else if(response.data){
-					self.success = (status) ? TeacherConstant.APPROVE_TIP : TeacherConstant.REJECT_TIP;
+					self.success = (status) ? TeacherConstant.APPROVE_HELP : TeacherConstant.REJECT_HELP;
 					self.setActive(Constants.ACTIVE_VIEW, id);
 				}
 			}
