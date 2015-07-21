@@ -88,14 +88,18 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-xs-3">Question Image <span class="required">*</span></label>
+                <label class="control-label col-xs-3">Question Image </label>
                 <div class="col-xs-5" ng-if="qa.active_edit">
                     <div class="btn btn-blue" ngf-select ngf-change="qa.upload($files, qa.q_details)"> Choose Image... </div>
                 </div>
 
+                <div class="margin-top-8" ng-if="qa.q_details.uploaded">
+                    <a href="" ng-click="qa.removeImage(qa.q_details)"><i class="fa fa-trash"></i></a>
+                </div>
+
                 <div ng-if="qa.active_view && qa.q_details.original_image_name && qa.q_details.original_image_name != '0'">
-                    <div class="col-xs-4">
-                        <a href="" ng-click="qa.viewImage('{!! route('admin.image.viewer') !!}', qa.q_details)">View Image</a>
+                    <div class="col-xs-4 margin-top-8">
+                        <a href="" ng-click="qa.viewImage(qa.q_details)">View Image</a>
                     </div>
                 </div>
             </div>
@@ -103,7 +107,8 @@
             <div class="form-group" ng-if="qa.q_details.uploaded">
                 <div class="col-xs-3"></div>
                 <div class="col-xs-5">
-                    <span class="label label-info">Image Uploaded...</span>
+                    <span class="col-xs-6 upload-label label label-info">Image Uploaded...</span>
+                    <a href="" class="control-label col-xs-6" ng-click="qa.viewImage(qa.q_details)">View Image</a>
                 </div>
             </div>
 
