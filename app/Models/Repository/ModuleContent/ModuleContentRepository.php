@@ -174,4 +174,44 @@ class ModuleContentRepository implements ModuleContentRepositoryInterface{
 
 	}
 
+	/**
+	 * Get Module contents.
+	 * @param array $criteria
+	 * @param $limit
+	 * @param $offset
+	 * @return array
+	 */
+	public function getModuleContentLists($criteria = [],$limit,$offset){
+
+		$query = new ModuleContent();
+		$query = $query->with('teachingContent');
+
+
+
+		if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
+
+			$count = $query->count();
+		} else {
+			if (count($criteria) > 0) {
+
+
+				if(isset($criteria['module_id'])){
+					$query = $query->moduleId($criteria['module_id']);
+				}
+			}
+
+			$count = $query->count();
+
+			if ($limit > 0 && $offset >= 0) {
+				$query = $query->offset($offset)->limit($limit);
+			}
+
+		}
+
+		$query = $query->orderBySeqNo();
+
+		return ['total' => $count, 'records' => $query->get()->toArray()];
+
+	}
+
 }
