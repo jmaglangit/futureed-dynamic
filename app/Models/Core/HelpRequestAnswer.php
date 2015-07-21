@@ -37,7 +37,7 @@ class HelpRequestAnswer extends Model {
         'status' =>'Enabled',
         'points' => 0];
 
-	protected $hidden = ['updated_by','created_at','deleted_at'];
+	protected $hidden = ['updated_by','deleted_at'];
 
 	//Relationships
 	public function helpRequest(){
