@@ -10,9 +10,9 @@ function ManageHelpAnswerService($http) {
 	service.list = function(search, table) {
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url   : serviceUrl + 'help-request-answer?help_request=' + search.help_request
+			, url   : serviceUrl + 'help-request-answer?title=' + search.title
 				+ '&request_answer_status=' + search.request_answer_status
-				+ '&module=' + search.module
+				+ '&created=' + search.created
 				+ '&subject_area=' + search.subject_area
 				+ '&subject=' + search.subject
 				+ '&limit=' + table.size
