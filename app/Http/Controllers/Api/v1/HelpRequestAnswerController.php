@@ -126,14 +126,14 @@ class HelpRequestAnswerController extends ApiController {
 	 */
 	public function store(HelpRequestAnswerRequest $request)
 	{
-        $data = $request->all();
-        $result = $this->help_request_answer->addHelpRequestAnswer($data);
+		$data = $request->all();
+		$result = $this->help_request_answer->addHelpRequestAnswer($data);
 
 		//update last_answered_at in help_request table
 		$help_request['last_answered_at'] = Carbon::now();
 		$this->help_request->updateHelpRequest($data['help_request_id'], $help_request);
 
-        return $this->respondWithData($result);
+		return $this->respondWithData($result);
 	}
 
 	/**
