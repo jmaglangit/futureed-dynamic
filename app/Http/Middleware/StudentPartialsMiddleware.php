@@ -10,8 +10,8 @@ class StudentPartialsMiddleware {
     	$student = Session::get('student');
 
     	if(!$student) {
-            Session::flush();
-		}
+    		Session::flush();
+    	}
 
         $response = $next($request);
 
