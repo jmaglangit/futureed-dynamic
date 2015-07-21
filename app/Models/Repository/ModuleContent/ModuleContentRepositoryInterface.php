@@ -25,6 +25,8 @@ interface ModuleContentRepositoryInterface {
 
 	public function updateSequence($sequence);
 
+	public function getModuleContentLists($criteria = [],$limit,$offset);
+
 
 
 }
