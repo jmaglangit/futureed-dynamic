@@ -19,7 +19,7 @@ class ClassStudentRequest extends ApiRequest {
      * @return array
      */
     public function rules() {
-		switch ($this->method) {
+		switch ($this->method()) {
 			case 'POST':
 				switch ($this->route()->getName()) {
 					case 'class-student.add.existing.student':
@@ -43,6 +43,12 @@ class ClassStudentRequest extends ApiRequest {
 							'callback_uri' => 'required|string',
 							'client_id' => 'required',
 							'class_id' => 'required'];
+						break;
+					case 'api.v1.class-student.student-join-class';
+
+						return [
+							'student_id' => 'required|exists:class_students,student_id,deleted_at,NULL'
+						];
 						break;
 					default:
 						return ['user_id' => 'required|email',

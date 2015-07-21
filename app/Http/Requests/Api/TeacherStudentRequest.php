@@ -21,23 +21,23 @@ class TeacherStudentRequest extends ApiRequest {
 	 * @return array
 	 */
 	public function rules() {
-		switch($this->method){
+		switch($this->method()){
 
 			case 'PUT':
 
 				$student_id = $this->__get('id');
 				$student = Student::find($student_id);
-				$student_user_id = NULL;
+				$student_id = NULL;
 
 				if($student){
 
-					$student_user_id = $student->user_id;
+					$student_id = $student->user_id;
 				}
 
 				$student = config('futureed.student');
 				return[
-					'username' => 'required|min:'.config('futureed.username_min').'|max:'.config('futureed.username_max').'|alpha_num|unique:users,username,'.$student_user_id.',id,user_type,'.$student.',deleted_at,NULL',
-					'email' => 'required|email|unique:users,email,'.$student_user_id.',id,user_type,'.$student.',deleted_at,NULL',
+					'username' => 'required|min:'.config('futureed.username_min').'|max:'.config('futureed.username_max').'|alpha_num|unique:users,username,'.$student_id.',id,user_type,'.$student.',deleted_at,NULL',
+					'email' => 'required|email|unique:users,email,'.$student_id.',id,user_type,'.$student.',deleted_at,NULL',
 					'first_name'    => 'required|regex:'. config('regex.name') .'|string',
 					'last_name'     => 'required|regex:'. config('regex.name') .'|string',
 					'gender'        => 'required|alpha|in:Male,Female',
@@ -63,8 +63,8 @@ class TeacherStudentRequest extends ApiRequest {
 	public function messages()
 	{
 		return [
-			'country_id.required' => 'country name is required.',
-			'grade_code.required' => 'grade name is required.'
+			'country_id.required' => config('futureed-error.error_messages.2047'),
+			'grade_code.required' => config('futureed-error.error_messages.2048')
 		];
 	}
 

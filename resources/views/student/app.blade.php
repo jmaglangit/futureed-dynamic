@@ -23,6 +23,7 @@
     {!! Html::style('//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css') !!}
     {!! Html::style('/css/datetimepicker.css') !!}
     {!! Html::style('/css/futureed.css') !!}
+    {!! Html::style('/css/futureed-student.css') !!}
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -31,7 +32,7 @@
     <![endif]-->
     @yield('styles')
   </head>
-  <body class="student" ng-controller="futureedController" ng-init="getUserDetails()">
+  <body class="student" ng-class="{'student-class':backgroundChange}" ng-controller="futureedController" ng-init="getUserDetails()">
     {!! Form::hidden('userdata', Session::get('student')) !!}
 
     {!! Form::hidden('_authorization', Session::get('client')
@@ -39,12 +40,36 @@
             'id' => 'userdata'
         )
     ) !!}
+    <p class="notice"> BETA Stage: Under Development </p>
 
     @yield('navbar')
 
   	@yield('content')
 
     @section('footer')
+        <div id="session_expire" ng-show="session_expire" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    Inactive
+                </div>
+                <div class="modal-body">
+                    You have been logged out due to inactivity. Please login again.
+                </div>
+                <div class="modal-footer">
+                    <div class="btncon col-md-8 col-md-offset-4 pull-left">
+                        {!! Form::button('Login'
+                            , array(
+                                'class' => 'btn btn-gold btn-medium'
+                                , 'ng-click' => 'reLogin()'
+                                , 'data-dismiss' => 'modal'
+                            )
+                        ) !!}
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
       <footer class="footer" ng-cloak>
         <div class="container text-center">
           <p class="text-muted">{{ date('Y') }} &copy; All Rights Reserved. FutureEd Pte Ltd</p>
@@ -66,7 +91,13 @@
     {!! Html::script('/js/futureed_controllers.js') !!}
     {!! Html::script('/js/futureed_services.js') !!}
     {!! Html::script('/js/datetimepicker.js') !!}
+    {!! Html::script('/js/common/filters.js') !!}
     {!! Html::script('/js/ui-bootstrap-tpls-0.13.0.min.js') !!}
+    {!! Html::script('/js/student/controllers/student_class_controller.js')!!}
+    {!! Html::script('/js/student/services/student_class_service.js')!!}
+
+    {!! Html::script('/js/ng-file-upload-shim.min.js')!!}
+    {!! Html::script('/js/ng-file-upload.min.js')!!}
 
     @yield('scripts')
 

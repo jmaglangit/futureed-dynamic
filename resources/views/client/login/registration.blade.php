@@ -29,7 +29,7 @@
       </div>
       <div class="col-md-12" ng-if="register.role_click">
         <div class="alert alert-error" ng-if="errors">
-          <p ng-repeat="error in errors"> 
+          <p ng-repeat="error in errors track by $index"> 
             {! error !}
           </p>
         </div>
@@ -41,7 +41,7 @@
 
   <div template-directive template-url="{!! route('client.partials.registration_success') !!}"></div>
 
-  @include('student.login.terms-and-condition')
+  @include('client.login.terms-and-conditions')
   @include('student.login.privacy-policy')
 
 </div>

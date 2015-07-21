@@ -5,8 +5,10 @@ use Carbon\Carbon;
 use FutureEd\Models\Core\ClassStudent;
 use FutureEd\Models\Core\Classroom;
 use FutureEd\Models\Repository\User\UserRepository;
+use League\Flysystem\Exception;
 
-class ClassStudentRepository implements ClassStudentRepositoryInterface{
+class ClassStudentRepository implements ClassStudentRepositoryInterface
+{
 
 	/**
 	 * @param array $criteria
@@ -54,7 +56,9 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface{
 	public function getClassStudent($student_id)
 	{
 
-		return ClassStudent::where('student_id', $student_id)->pluck('student_id');
+		return ClassStudent::where('student_id', $student_id)
+			->active()
+			->pluck('student_id');
 	}
 
 	public function addClassStudent($class_student)
@@ -91,7 +95,80 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface{
 
 		return ClassStudent::with('classroom')
 			->studentid($student_id)
+			->active()
 			->currentdate(Carbon::now())
 			->first();
 	}
+
+	/**
+	 * Get Active Class Student by student_id
+	 * @param $student_id
+	 */
+	public function getActiveClassStudent($student_id)
+	{
+		return ClassStudent::with('classroom')
+			->studentId($student_id)
+			->get();
+	}
+
+	/**
+	 * Set to Inactive Class.
+	 * @param $id
+	 */
+	public function setClassStudentInactive($id)
+	{
+		try{
+			return ClassStudent::id($id)
+				->update([
+					'subscription_status' => config('futureed.inactive')
+				]);
+		}catch (Exception $e){
+			return $e->getMessage();
+		}
+	}
+
+	/**
+	 * Get Inactive Student Class has date today.
+	 * @param $student_id
+	 */
+	public function getInactiveClassStudent($student_id)
+	{
+		return ClassStudent::with('classroom')
+			->studentId($student_id)
+			->currentDate(Carbon::now())
+			->get();
+	}
+
+	/**
+	 * Set Class student to Active.
+	 * @param $id
+	 */
+	public function setClassStudentActive($id)
+	{
+		try {
+
+			return ClassStudent::id($id)
+				->update([
+					'subscription_status' => config('futureed.active')
+				]);
+		} catch (Exception $e){
+
+			return $e->getMessage();
+		}
+	}
+
+	/**
+	 * Check if student is Enrolled in a class.
+	 * @param $student_id,$class_id
+	 */
+	public function isEnrolled($student_id,$class_id)
+	{
+
+		$class_student = new  ClassStudent();
+		$class_student = $class_student->studentId($student_id)->classroom($class_id);
+
+		return $class_student->first();
+
+	}
+
 }

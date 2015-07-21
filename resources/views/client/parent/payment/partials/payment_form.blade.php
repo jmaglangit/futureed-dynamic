@@ -62,7 +62,7 @@
 		</div>
 	</div>
 	<button class="btn btn-blue btn-small margin-0-30" ng-click="payment.setActive('add')">
-		<i class="fa fa-plus-square"></i> Add 
+		<i class="fa fa-plus-square"></i> Add Payment
 	</button>
 	<div class="col-xs-12 padding-0-30">
 		<div class="title-mid">
@@ -113,17 +113,14 @@
 		            <td>{! key.payment_status !}</td>
 		            <td>{! key.total_amount !}</td>
 		            <td>
-		            	<div class="row">
-		            		<div class="col-xs-4">
-	    						<a href="" ng-click="payment.setActive('view', key.id)" title="view"><span><i class="fa fa-eye"></i></span></a>
-	    					</div>
-	    					<div class="col-xs-4">
-	    						<a href="" ng-if="key.payment_status == 'Pending'" ng-click="payment.confirmCancelInvoice(key.id)" title="cancel"><span><i class="fa fa-ban"></i></span></a>
-	    					</div>
-	    					<div class="col-xs-4">
-	    						<a href="" ng-if="key.payment_status == 'Pending' || key.payment_status == 'Cancelled'" ng-click="payment.confirmRemoveInvoice(key.id, 'list')" title="delete"><span><i class="fa fa-trash"></i></span></a>
-	    					</div>
-		            	</div>
+						<div class="row">
+							<div class="col-xs-6">
+								<a href="" ng-click="payment.setActive('view', key.id)" title="view"><span><i class="fa fa-eye"></i></span></a>
+							</div>
+							<div class="col-xs-6">
+								<a href="" ng-if="key.payment_status == 'Pending' || key.payment_status == 'Cancelled'" ng-click="payment.confirmRemoveInvoice(key.id, 'list')" title="delete"><span><i class="fa fa-trash"></i></span></a>
+							</div>
+						</div>
 		            </td>
 		        </tr>
 		        <tr class="odd" ng-if="!payment.records.length && !payment.table.loading">

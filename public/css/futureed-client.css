@@ -127,6 +127,9 @@ table#client-list{
 .btn-semi-large{
 	width: 50%;
 }
+.padding-top-7{
+	padding-top: 7px;
+}
 .margin-30-left{
 	margin-left: 30px;
 }
@@ -180,3 +183,7 @@ input[type=radio]:active+.lbl::before,input[type=radio]:checked:active+.lbl::bef
 input[type=radio]:disabled+.lbl::before,input[type=radio][disabled]+.lbl::before,input[type=radio].disabled+.lbl::before{background-color:#DDD !important;border-color:#CCC !important;box-shadow:none !important;color:#BBB;}
 input[type=radio]+.lbl::before{border-radius:32px;font-family:Arial,Helvetica,sans-serif;font-size:36px;}
 input[type=radio]:checked+.lbl::before{content:"\2022";}
+
+content legend {
+	font-family: 'Roboto', cursive !important;
+}

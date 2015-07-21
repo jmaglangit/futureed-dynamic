@@ -116,7 +116,7 @@ body {/*background: radial-gradient(transparent 50%, rgba(0, 0, 0, 0.3) 100%), l
 }
 
 .btn-blue {
-	border-top: 1px solid #055A7F; 
+	border-top: 1px solid #2E84A9; 
 	box-shadow: 0 0 0 1px #055A7F, 0 3px 3px rgba(0, 0, 0, 0.3);
 	background-color: #055A7F;
 }
@@ -337,7 +337,6 @@ fieldset legend{color: #8e8171; font-size: 16px; text-transform: uppercase;}
 	border: 1px solid #F8C8BD;
 }
 .form-content legend{
-	font-family: 'Schoolbell', cursive;
 	padding-bottom: 10px;
 	font-size: 23px;
 }
@@ -442,7 +441,6 @@ form p.help-block {
 	width: 40px;
 	height: 40px;
 	margin: 10px auto;
-	cursor: pointer;
 	border-radius: 50%;
 	position: inherit;
 	z-index: 2;
@@ -450,9 +448,7 @@ form p.help-block {
 li.active .rnd-identifier{
 	background: #E85D32;
 }
-.rnd-identifier:hover{
-	background: #F99070;
-}
+
 .steps ul.items li span{
 	width: 100%;
 	display: block;
@@ -480,9 +476,9 @@ li.active .rnd-identifier{
 	border-radius: 8px;
 	box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
 	width: 100%;
-	min-height: 620px;
+	min-height: 900px;
 	position: relative;
-	overflow: hidden;
+	overflow: auto;
 	margin-bottom: 40px;
 }
 .dshbrd-con .side-nav{
@@ -961,6 +957,10 @@ div > .btncon > a {
 	color: #be0e14;
 }
 
+.warning-icon {
+	color: #F5BB42;
+}
+
 .dataTables_wrapper .row {
   margin: 10px 0px !important;
 }
@@ -971,6 +971,10 @@ div > .btncon > a {
 
 .margin-0-30 {
 	margin: 0px 30px;
+}
+
+.content-btn {
+	margin-top: 30px;
 }
 
 .paginate-size {
@@ -1011,4 +1015,86 @@ div > .btncon > a {
 
 .cursor-pointer {
 	cursor: pointer;
+}
+
+/*Calendar Custom Design*/
+
+.switch {
+	text-decoration: underline;
+}
+
+.modal-body {
+	max-height: 500px;
+  	overflow: auto;
+}
+
+.list-step {
+	text-align: left;
+}
+
+.list-step li p {
+	font-size: 20px;
+}
+
+content form, content .list-container, content .list-content, content .list-content li {
+	margin: 20px;
+}
+
+content .disclaimer {
+	border: 1px solid #e5e5e5;
+	border-radius: 5px;
+	padding: 15px;
+	text-align: justify;
+	background-color: #e5e5e5;
+}
+
+content span {
+	color : #428BCD;
+}
+
+content {
+	text-align: justify;
+	line-height: 1.5;
+}
+
+.loader {
+    width: 12%;
+    -webkit-animation:spin 3s linear infinite;
+    -moz-animation:spin 3s linear infinite;
+    animation:spin 3s linear infinite;
+}
+@-moz-keyframes spin { 100% { -moz-transform: rotate(-360deg); } }
+@-webkit-keyframes spin { 100% { -webkit-transform: rotate(-360deg); } }
+@keyframes spin { 100% { -webkit-transform: rotate(-360deg); transform:rotate(-360deg); } }
+
+.side-container {
+	padding: 10px;
+}
+
+.notice {
+	position: fixed;
+	z-index: 999;
+	top: 0px;
+	right: 0px;
+	left: 0px;
+	text-align: center;
+	font-size: 24px;
+	color: #03658A;
+	background-color: #f6f4f5;
+	border: 5px solid #e1e1e1;
+	border-radius: 5px;
+	width: 25%;
+	margin: auto;
+}
+
+.disabled-textarea {
+	resize: none;
+}
+
+.upload-label {
+	position: absolute;
+	right: 0px;
+	left: 0px;
+	margin: 5px 15px;
+	padding: 5px;
 }

@@ -1,8 +1,8 @@
-<?php namespace FutureEd\Http\Requests;
+<?php namespace FutureEd\Http\Requests\Api;
 
 use FutureEd\Http\Requests\Request;
 
-class RegistrationRequest extends Request {
+class QuestionRequest extends ApiRequest {
 
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -11,7 +11,7 @@ class RegistrationRequest extends Request {
 	 */
 	public function authorize()
 	{
-		return false;
+		return true;
 	}
 
 	/**
@@ -21,9 +21,16 @@ class RegistrationRequest extends Request {
 	 */
 	public function rules()
 	{
-		return [
-			//
-		];
+		switch($this->method()) {
+
+			case 'POST':
+
+				return [
+
+					'image' => 'mimes:jpeg,jpg,png|max:2000',
+				];
+				break;
+		}
 	}
 
 }

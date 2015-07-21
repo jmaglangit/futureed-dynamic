@@ -17,6 +17,7 @@
 						'class' => 'form-control'
 						, 'placeholder' => 'Current Email Address'
 						, 'ng-model' => 'profile.change.current_email'
+						, 'ng-class' => "{ 'required-field' : profile.fields['current_email'] }"
 						, 'ng-model-options' => "{ debounce: {'default' : 1000} }"
 						, 'ng-change' => "profile.validateStudentCurrentEmail()"
 					)
@@ -39,6 +40,7 @@
 						'class' => 'form-control'
 						, 'placeholder' => 'New Email Address'
 						, 'ng-model' => 'profile.change.new_email'
+						, 'ng-class' => "{ 'required-field' : profile.fields['new_email'] }"
 						, 'ng-model-options' => "{ debounce: {'default' : 1000} }"
 						, 'ng-change' => "profile.validateStudentNewEmail()"
 					)
@@ -61,6 +63,7 @@
 						'class' => 'form-control'
 						, 'placeholder' => 'Confirm Email Address'
 						, 'ng-model' => 'profile.change.confirm_email'
+						, 'ng-class' => "{ 'required-field' : profile.fields['confirm_email'] }"
 						, 'ng-model-options' => "{ debounce: {'default' : 1000} }"
 						, 'ng-change' => "profile.confirmStudentNewEmail()"
 					)
@@ -92,11 +95,13 @@
 		</div>
 	</div>
 
-	<div ng-if="profile.select_password">
+	<div ng-if="profile.select_password">		
 		<div class="enter-pass-con form-select-password col-xs-8 col-xs-offset-2"> 
+			<div class="title title-student">Please Select Your Picture Password</div>
+	        
 	        <div class="form_content">
 	            <ul class="form_password list-unstyled list-inline">
-	              <li class="item" ng-repeat="item in image_pass" ng-click="highlight($event)">
+	              <li class="item" ng-repeat="item in image_pass" ng-click="profile.highlightPassword($event)">
 	                 <img ng-src="{! item.url !}" alt="{! item.name !}">
 	                 <input type="hidden" id="image_id" name="image_id" value="{! item.id !}">
 	              </li>

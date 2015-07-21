@@ -15,7 +15,7 @@
               User Management <i class="fa fa-caret-down"></i>
             </a>
         </li>
-        <ul class="sub-menu collapse" id="students">
+        <ul class="sub-menu collapse" ng-class="{ 'in' : admin || client || student }" id="students">
             <li>
 				<a href="{!! route('admin.manage.admin.index') !!}" ng-init="admin.setManageAdminActive()"><span><i class="fa fa-user"></i></span>Manage Admin</a>
             </li>
@@ -32,34 +32,40 @@
         <li data-toggle="collapse" data-target="#module" class="collapsed side-nav-li">
             <a href="" class="nav-link">Module Management <i class="fa fa-caret-down"></i></a>
         </li>
-        <ul class="sub-menu collapse" id="module">
+        <ul class="sub-menu collapse" ng-class="{ 'in' : subject || grade }" id="module">
             <li>
                 <a href="{!! route('admin.manage.subject.index') !!}" ng-init="subject.setManageSubjectActive()"><span><i class="fa fa-book"></i>Subject</span></a>
             </li>
 
             <li>
-                <a href="{!! route('admin.manage.grades.index') !!}" ng-init="grade.setManageGradeActive()"><span><i class="fa fa-book"></i>Grades</span></a>
+                <a href="{!! route('admin.manage.grades.index') !!}" ng-init="grade.setActive()"><span><i class="fa fa-book"></i>Grades</span></a>
+            </li>
+            <li>
+                <a href="{!! route('admin.manage.module.index') !!}" ng-init="module.setManageModuleActive()"><span><i class="fa fa-cubes"></i>Module</span></a>
             </li>
         </ul> 
 
         <li data-toggle="collapse" data-target="#price" class="collapsed side-nav-li" ng-class="{'active' : admincon.active_price}">
             <a href="" class="nav-link">Price Management <i class="fa fa-caret-down"></i></a>
         </li>  
-        <ul class="sub-menu collapse" id="price">
+        <ul class="sub-menu collapse" ng-class="{ 'in' : sale || invoice }" id="price">
             <li>
                 <a href="{!! route('admin.manage.price.index') !!}" ng-init="sale.setDiscountsActive()"><span><i class="fa fa-dollar"></i>Price & Discounts</span></a>
             </li>
             <li>
-                <a href="{!! route('admin.manage.invoice.index') !!}" ng-init="sale.setActive()"><span><i class="fa fa-file-text-o"></i>Invoice</span></a>
+                <a href="{!! route('admin.manage.invoice.index') !!}"><span><i class="fa fa-file-text-o"></i>Invoice</span></a>
             </li>
         </ul>
 
         <li data-toggle="collapse" data-target="#master" class="collapsed side-nav-li" ng-class="{'active' : admincon.active_announcement}">
             <a href="" class="nav-link">Master Settings <i class="fa fa-caret-down"></i></a>
         </li>  
-        <ul class="sub-menu collapse" id="master">
+        <ul class="sub-menu collapse" ng-class="{ 'in' : tips || announce }" id="master">
             <li>
                 <a href="{!! route('admin.manage.announce.index') !!}"><span><i class="fa fa-bullhorn"></i>Announcement</span></a>
+            </li>
+            <li>
+                <a href="{!! route('admin.manage.tips.index') !!}"><span><i class="fa fa-lightbulb-o"></i> Tips & Help Requests</span></a>
             </li>
         </ul>
     </ul>

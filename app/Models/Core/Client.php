@@ -70,7 +70,7 @@ class Client extends Model
 	{
 
 
-		return $this->hasMany('FutureEd\Models\Core\ParentStudent', 'parent_user_id', 'id');
+		return $this->hasMany('FutureEd\Models\Core\ParentStudent', 'parent_id', 'id');
 	}
 
 	//-------------scopes
@@ -151,6 +151,18 @@ class Client extends Model
 	public function scopeClientRoleIn($query, $roles = array())
 	{
 		return $query->whereIn('client_role', $roles);
+	}
+
+	public function scopeActivated($query){
+
+		return $query->whereHas('user', function($query){
+			$query->where('is_account_activated',1);
+		});
+	}
+
+	public function scopeVerified($query){
+
+		return $query->where('account_status',config('futureed.accepted'));
 	}
 
 

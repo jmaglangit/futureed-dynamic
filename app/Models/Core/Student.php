@@ -30,6 +30,16 @@ class Student extends Model {
 		'updated_by' => 1,
 	];
 
+	public static function boot()
+	{
+
+		parent::boot();
+
+		Student::deleting(function ($student) {
+			$student->user->delete();
+		});
+	}
+
 
 
     //-------------relationships
@@ -59,7 +69,11 @@ class Student extends Model {
 
 	public function parent(){
 
-		return $this->belongsTo('FutureEd\Models\Core\ParentStudent','id','student_user_id');
+		return $this->belongsTo('FutureEd\Models\Core\ParentStudent','id','student_id');
+	}
+
+	public function avatar(){
+		return $this->belongsTo('FutureEd\Models\Core\Avatar');
 	}
 
 	//get student with relation to ClassStudent with relation to classroom
@@ -87,17 +101,17 @@ class Student extends Model {
     }
 
 	//TODO: This should be changed...whenever it is called.. parent() in relationship is called.
-	public function scopeParent($query, $parent_user_id){
+	public function scopeParent($query, $parent_id){
 
-		return $query->whereHas('parent',function($query) use ($parent_user_id) {
-			$query->where('parent_user_id', '=', $parent_user_id);
+		return $query->whereHas('parent',function($query) use ($parent_id) {
+			$query->where('parent_id', '=', $parent_id);
 		});
 	}
 
 	public function scopeParentId($query, $parent_id){
 
 		return $query->whereHas('parent',function($query) use ($parent_id) {
-			$query->where('parent_user_id', '=', $parent_id);
+			$query->where('parent_id', '=', $parent_id);
 		});
 	}
 
@@ -160,6 +174,17 @@ class Student extends Model {
 			});
 		});
 
+	}
+
+	public function scopeNoConfirmationCode($query){
+
+		//check relation to user
+		$query->whereHas('user', function($query){
+
+			$query->where('confirmation_code', '=', NULL)
+			      ->where('confirmation_code_expiry','=', NULL);
+
+		});
 	}
 
 

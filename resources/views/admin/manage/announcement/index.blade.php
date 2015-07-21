@@ -5,7 +5,7 @@
 @stop
 
 @section('content')
-	<div class="container dshbrd-con" ng-controller="AdminDashboardController as admincon" ng-cloak>
+	<div class="container dshbrd-con" ng-controller="AnnouncementController as announce" ng-cloak>
 		<div class="wrapr">
 			<div class="client-nav side-nav">
 				@include('admin.partials.dshbrd-side-nav')				
@@ -16,7 +16,7 @@
 						<span><i class="fa fa-gear"></i> System Settings</span>
 					</div>
 				</div>
-				<div class="form-content col-xs-12" ng-controller="AnnouncementController as announce">
+				<div class="form-content col-xs-12">
 					<div class="alert alert-danger" ng-if="announce.errors">
 						<p ng-repeat="error in announce.errors">
 							{! error !}

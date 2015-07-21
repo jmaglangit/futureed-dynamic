@@ -165,4 +165,8 @@ class LoginController extends Controller {
 
 		return view('student.partials.base-url');
 	}
+
+	public function tips_help_bar() {
+		return view('student.partials.tips-help-bar');
+	}	
 }

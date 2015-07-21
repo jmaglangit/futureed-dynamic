@@ -10,8 +10,6 @@ class ParentStudentRepository implements ParentStudentRepositoryInterface{
 
         $parent_student  = new ParentStudent();
 
-        $data['created_by'] = 1;
-        $data['updated_by'] = 1;
 
         try {
 
@@ -38,20 +36,18 @@ class ParentStudentRepository implements ParentStudentRepositoryInterface{
 
     }
 
-    public function checkInvitationCode($invitation_code,$parent_user_id){
+    public function checkInvitationCode($invitation_code,$parent_id){
 
         $parent_student = new ParentStudent();
 
         $parent_student = $parent_student->invitationCode($invitation_code);
-        $parent_student = $parent_student->parentId($parent_user_id)->first();
+        $parent_student = $parent_student->parentId($parent_id)->first();
 
         return $parent_student;
     }
 
     public function updateParentStudent($id,$data){
 
-        $data['created_by'] = 1;
-        $data['updated_by'] = 1;
 
         try {
 
@@ -73,11 +69,11 @@ class ParentStudentRepository implements ParentStudentRepositoryInterface{
     {
         $parentStudent = new ParentStudent();
 
-        if(isset($criteria['parent_user_id'])){
-            $parentStudent = $parentStudent->parentId($criteria['parent_user_id']);
+        if(isset($criteria['parent_id'])){
+            $parentStudent = $parentStudent->parentId($criteria['parent_id']);
         }
 
-        $parentStudent = $parentStudent->with('student_user','student');
+        $parentStudent = $parentStudent->with('student')->userConfirmed();
 
         return $parentStudent->get();
     }

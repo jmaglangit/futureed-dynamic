@@ -19,7 +19,7 @@ class ClientDiscountRequest extends ApiRequest {
 	 * @return array
 	 */
 	public function rules() {
-	    switch($this->method){
+	    switch($this->method()){
 	        case 'POST':
 	            return ['client_id'     => 'required|numeric|unique:client_discounts,client_id,NULL,id,deleted_at,NULL',
             			'percentage'    => 'required|numeric|min:1.00|max:100.00',
@@ -43,7 +43,8 @@ class ClientDiscountRequest extends ApiRequest {
 	public function messages() {
 		return [
 			'numeric' => 'The :attribute must be a number.',
-			'unique' => 'Client Name already exists.' 
+			'unique' => 'Client Name already exists.',
+			'client_id.required' => 'The name field is required.',
 		];
 	}
 }

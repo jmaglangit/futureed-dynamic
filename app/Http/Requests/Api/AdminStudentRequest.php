@@ -26,13 +26,13 @@ class AdminStudentRequest extends ApiRequest {
 
 		$student = Student::find($student_id);
 
-		$student_user_id = NULL;
+		$student_id = NULL;
 
 		if ($student) {
-			$student_user_id = $student->user_id;
+			$student_id = $student->user_id;
 		}
 
-		switch ($this->method) {
+		switch ($this->method()) {
 			case 'POST':
 				$student = config('futureed.student');
 				return [
@@ -54,7 +54,8 @@ class AdminStudentRequest extends ApiRequest {
 			case 'PUT':
 				$student = config('futureed.student');
 				return [
-					'username' => "required|alpha_num|string|min:8|max:32|unique:users,username," . $student_user_id . ",id,user_type,$student,deleted_at,NULL",
+					'username' => "required|alpha_num|string|min:8|max:32|unique:users,username," . $student_id . ",id,user_type,$student,deleted_at,NULL",
+					'email' => "required|email|unique:users,email,$student_id,id,user_type,$student,deleted_at,NULL",
 					'first_name' => 'required|regex:'. config('regex.name') .'|string',
 					'last_name' => 'required|regex:'. config('regex.name') .'|string',
 					'gender' => 'required|in:Male,Female',

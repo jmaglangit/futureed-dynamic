@@ -29,6 +29,11 @@ class Kernel extends HttpKernel {
         'jwt' => 'FutureEd\Http\Middleware\Api\JWTMiddleware',
         'api_user' => 'FutureEd\Http\Middleware\Api\UserMiddleware',
         'api_after' => 'FutureEd\Http\Middleware\Api\AfterMiddleware',
+
+		'parent' => 'FutureEd\Http\Middleware\ParentMiddleware',
+		'principal' => 'FutureEd\Http\Middleware\PrincipalMiddleware',
+		'teacher' => 'FutureEd\Http\Middleware\TeacherMiddleware',
+		'admin_partial' => 'FutureEd\Http\Middleware\AdminPartialsMiddleware'
 	];
 
 }

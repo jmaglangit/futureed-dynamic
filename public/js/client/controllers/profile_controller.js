@@ -75,7 +75,6 @@ function ProfileController($scope, apiService, clientProfileApiService) {
 
 	function getClientDetails() {
 		self.errors = Constants.FALSE;
-
 		$scope.ui_block();
 		clientProfileApiService.getClientDetails($scope.user.id).success(function(response) {
 			if(response.status == Constants.STATUS_OK) {
@@ -152,12 +151,14 @@ function ProfileController($scope, apiService, clientProfileApiService) {
 			            });
 					} else if(response.data) {
 						self.prof = {};
-						$scope.user = response.data;
+						$scope.$parent.user = response.data;
+						response.data.role = response.data.client_role;
+						
 						clientProfileApiService.updateUserSession(response.data).success(function(response) {
-			              self.setClientProfileActive(Constants.INDEX);
-			              self.success = Constants.TRUE;
+							self.setClientProfileActive(Constants.INDEX);
+							self.success = Constants.TRUE;
 			            }).error(function() {
-			              $scope.internalError();
+							$scope.internalError();
 			            });
 					}
 				}

@@ -3,7 +3,7 @@
 	    <div class="col-xs-4 add-price">
 	      	<button class="btn btn-blue" 
 	      		ng-click="sale.setDiscountsActive('bulk_settings_add')">
-	      		<span><i class="fa fa-plus-square"></i></span> Add Bulk
+	      		<span><i class="fa fa-plus-square"></i></span> Add Bulk Discount
 	      	</button>
 	    </div>
   	</div>
@@ -101,7 +101,7 @@
                 				)
                 			) !!}
 
-                			{!! Form::button('Add'
+                			{!! Form::button('Add Bulk Discount'
                 				, array(
                 					'class' => 'btn btn-blue btn-medium'
                 					, 'ng-click' => "sale.addBulk()"

@@ -71,9 +71,11 @@ function ProfileController($scope, apiService, profileService) {
 	      case Constants.PASSWORD 		:
 	        $scope.getLoginPassword();
 	        self.active_password = Constants.TRUE;
+	        self.image_id = Constants.FALSE;
 	        break;
 
 	      case Constants.EDIT    		:
+	      	self.studentDetails();
 	      	self.active_edit = Constants.TRUE;
 	        break;
 
@@ -277,14 +279,37 @@ function ProfileController($scope, apiService, profileService) {
 	  }
 
 	  function backToEditEmail() {
+	  	self.errors = Constants.FALSE;
+	  	self.image_id = Constants.EMPTY_STR;
 	  	self.select_password = Constants.FALSE;
 	  }
 
 	  function selectPicturePassword() {
+	  	self.errors = Constants.FALSE;
+	  	self.fields = [];
+
 	  	if(self.validation.e_success && self.validation.n_success && self.validation.c_success) {
 	  		self.select_password = Constants.TRUE;
 	  		$scope.getLoginPassword();
 	  	} else {
+	  		if(!self.change.current_email) {
+	  			self.fields['current_email'] = Constants.TRUE;
+	  			self.errors = [];
+	  			self.errors.push("Current email address is required.");
+	  		}
+
+	  		if(!self.change.new_email) {
+	  			self.fields['new_email'] = Constants.TRUE;
+	  			self.errors = (self.errors) ?  self.errors : [];
+	  			self.errors.push("New email address is required.");
+	  		}
+
+	  		if(!self.change.confirm_email) {
+	  			self.fields['confirm_email'] = Constants.TRUE;
+	  			self.errors = (self.errors) ?  self.errors : [];
+	  			self.errors.push("Confirm email address is required.");
+	  		}
+
 	    	$("html, body").animate({ scrollTop: 0 }, "slow");
 	  	}
 	  }
@@ -295,7 +320,7 @@ function ProfileController($scope, apiService, profileService) {
 	    self.callback_uri = self.base_url + Constants.URL_CHANGE_EMAIL(angular.lowercase(Constants.STUDENT));
 
 	      $scope.ui_block();
-	      apiService.changeValidate(self.prof.id, self.change.new_email, $scope.image_id, self.callback_uri).success(function(response){
+	      apiService.changeValidate(self.prof.id, self.change.new_email, self.image_id, self.callback_uri).success(function(response){
 	        if(angular.equals(response.status, Constants.STATUS_OK)){
 	          if(response.errors){
 	            self.errors = $scope.errorHandler(response.errors);

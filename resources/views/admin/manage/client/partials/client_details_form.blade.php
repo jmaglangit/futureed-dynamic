@@ -30,27 +30,6 @@
 	        		User Credentials
 	        	</legend>
 	        	<div class="form-group">
-	        		<label class="col-md-3 control-label" id="email">Email <span class="required">*</span></label>
-	        		<div class="col-md-5">
-	        			{!! Form::text('email',''
-	        				, array(
-	        					'placeHolder' => 'Email'
-	        					, 'ng-model' => 'client.details.email'
-	        					, 'ng-disabled' => 'client.active_view_client'
-	        					, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
-	        					, 'ng-change' => 'client.checkEmailAvailability()'
-	        					, 'ng-class' => "{ 'required-field' : client.fields['email'] }"
-	        					, 'class' => 'form-control'
-	        				)
-	        			) !!}
-	        		</div>
-	        		<div class="margin-top-8" ng-if="client.active_edit_client"> 
-		                <i ng-if="client.validation.e_loading" class="fa fa-spinner fa-spin"></i>
-		                <i ng-if="client.validation.e_success" class="fa fa-check success-color"></i>
-		                <span ng-if="client.validation.e_error" class="error-msg-con">{! client.validation.e_error !}</span>
-		            </div>	
-	        	</div>
-	        	<div class="form-group">
 	        		<label class="col-md-3 control-label" id="username">Username <span class="required">*</span></label>
 	        		<div class="col-md-5">
 	        			{!! Form::text('username',''
@@ -69,6 +48,27 @@
 		                <i ng-if="client.validation.u_loading" class="fa fa-spinner fa-spin"></i>
 		                <i ng-if="client.validation.u_success" class="fa fa-check success-color"></i>
 		                <span ng-if="client.validation.u_error" class="error-msg-con">{! client.validation.u_error !}</span>
+		            </div>	
+	        	</div>
+	        	<div class="form-group">
+	        		<label class="col-md-3 control-label" id="email">Email <span class="required">*</span></label>
+	        		<div class="col-md-5">
+	        			{!! Form::text('email',''
+	        				, array(
+	        					'placeHolder' => 'Email'
+	        					, 'ng-model' => 'client.details.email'
+	        					, 'ng-disabled' => 'client.active_view_client'
+	        					, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
+	        					, 'ng-change' => 'client.checkEmailAvailability()'
+	        					, 'ng-class' => "{ 'required-field' : client.fields['email'] }"
+	        					, 'class' => 'form-control'
+	        				)
+	        			) !!}
+	        		</div>
+	        		<div class="margin-top-8" ng-if="client.active_edit_client"> 
+		                <i ng-if="client.validation.e_loading" class="fa fa-spinner fa-spin"></i>
+		                <i ng-if="client.validation.e_success" class="fa fa-check success-color"></i>
+		                <span ng-if="client.validation.e_error" class="error-msg-con">{! client.validation.e_error !}</span>
 		            </div>	
 	        	</div>
 	        	<div class="form-group">
@@ -238,7 +238,7 @@
 	        		</div>
 	        	</div>
 	        	<div class="form-group">
-	        		<label class="col-md-3 control-label" id="school_city">City <span class="required">*</span></label>
+	        		<label class="col-md-3 control-label" id="school_city">City</label>
 	        		<div class="col-md-5">
 	        			{!! Form::text('school_city',''
 	        				, array(

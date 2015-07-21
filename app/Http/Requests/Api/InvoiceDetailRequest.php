@@ -19,7 +19,7 @@ class InvoiceDetailRequest extends ApiRequest {
      */
     public function rules()
     {
-        switch($this->method) {
+        switch($this->method()) {
             case 'POST':
                 return [
                     'id' => 'required',

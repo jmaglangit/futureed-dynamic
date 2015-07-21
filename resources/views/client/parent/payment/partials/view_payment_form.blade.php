@@ -69,7 +69,7 @@
         		</div>
         	</div>
         </fieldset>
-		<div class="col-xs-12">
+		<div class="col-xs-12 margin-top-60">
 			<div class="col-xs-3 pull-right" ng-if="payment.print">
 				{!! Form::button('Print'
 					, array(
@@ -78,70 +78,84 @@
 					)
 				) !!}
 			</div>
-			<div class="col-xs-8">
-				<div class="col-xs-6">
-					<center>
-						<i><p>Contact Name : {! payment.client.first_name !} {! payment.client.last_name !}</p>
-						<p>Address: {! payment.client.street_address !}</p>
-						<p>{! payment.client.city !}</p>
-						<p>{! payment.client.state !}</p>
-						</i>
-					</center>
+			<div class="row">
+				<div class="col-xs-8 search-container">
+					<div class="form-search">
+					{!! Form::open(
+							[
+								'id' => 'search_form',
+								'class' => 'form-horizontal'
+							]
+					) !!}
+						<div class="form-group">
+							<label class="col-xs-4 control-label">Contact Name : </label>
+							<p class="col-xs-8 pull-right padding-top-7">{! payment.client.first_name !} {! payment.client.last_name !}</p>
+						</div>
+						<div class="form-group">
+							<label class="col-xs-4 control-label">Address:</label>
+							<p class="col-xs-8 pull-right padding-top-7">{! payment.client.street_address !}
+							{! payment.client.city !}
+							{! payment.client.state !}</p>
+						</div>
+					{!! Form::close() !!}
+					</div>
 				</div>
 			</div>
 			<div class="clearfix"></div>
-			{!! Form::open(
-					[
-						'id' => 'invoice_form',
-						'class' => 'form-horizontal'
-					]
-			) !!}
-			<div class="col-xs-10 col-xs-offset-1 margin-top-60">
-				<div class="form-group">
-					<label class="control-label col-xs-2">Invoice #</label>
-					<div class="col-xs-4">
-						{!! Form::text('invoice',''
-	        				, array(
-	        					'placeHolder' => 'Invoice'
-	        					, 'ng-model' => 'payment.invoice.id'
-	        					, 'class' => 'form-control'
-	        					, 'ng-disabled' => 'true'
-	        				)
-	        			) !!}
+			<div class="row margin-top-60 search-container">
+				<div class="form-search">
+					{!! Form::open(
+							[
+								'id' => 'invoice_form',
+								'class' => 'form-horizontal'
+							]
+					) !!}
+					<div class="form-group">
+						<label class="control-label col-xs-2">Invoice #</label>
+						<div class="col-xs-4">
+							{!! Form::text('invoice',''
+		        				, array(
+		        					'placeHolder' => 'Invoice'
+		        					, 'ng-model' => 'payment.invoice.id'
+		        					, 'class' => 'form-control'
+		        					, 'ng-disabled' => 'true'
+		        				)
+		        			) !!}
+						</div>
+						<label class="control-label col-xs-2">Subscription</label>
+						<div class="col-xs-4">
+							<select ng-disabled="!payment.invoice.subscription_enable" name="subscription"
+									ng-change="payment.setDate(1)"
+									ng-model="payment.no_days"
+									id="subscription" 
+									class="form-control">
+		                        <option value="">-- Select Subscription --</option>
+		                        <option ng-repeat="subscription in payment.subscriptions" ng-selected="payment.invoice.subscription.name == subscription.name" data-id="{! subscription.id !}" data-price="{! subscription.price !}" data-name="{! subscription.name!}" value="{! subscription.days !}">{! subscription.name!}</option>
+		                    </select>
+						</div>
 					</div>
-					<label class="control-label col-xs-2">Subscription</label>
-					<div class="col-xs-4">
-						<select ng-disabled="!payment.invoice.subscription_enable" name="subscription"
-								ng-change="payment.setDate(1)"
-								ng-model="payment.no_days"
-								id="subscription" 
-								class="form-control">
-	                        <option value="">-- Select Subscription --</option>
-	                        <option ng-repeat="subscription in payment.subscriptions" ng-selected="payment.invoice.subscription.name == subscription.name" data-id="{! subscription.id !}" data-price="{! subscription.price !}" data-name="{! subscription.name!}" value="{! subscription.days !}">{! subscription.name!}</option>
-	                    </select>
+					<div class="form-group">
+						<label class="control-label col-xs-2">Date Started</label>
+						<div class="col-xs-4">
+							<input type="text" name="start_date" placeHolder="Start Date" ng-disabled="true" class="form-control" value="{! payment.invoice.dis_date_start | ddMMyy !}">
+						</div>
+						<label class="control-label col-xs-2">Date End</label>
+						<div class="col-xs-4">
+							<input type="text" name="start_date" placeHolder="End Date" ng-disabled="true" class="form-control" value="{! payment.invoice.dis_date_end | ddMMyy !}">
+						</div>
 					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-xs-2">Date Started</label>
-					<div class="col-xs-4">
-						<input type="text" name="start_date" placeHolder="Start Date" ng-disabled="true" class="form-control" value="{! payment.invoice.dis_date_start | ddMMyy !}">
-					</div>
-					<label class="control-label col-xs-2">Date End</label>
-					<div class="col-xs-4">
-						<input type="text" name="start_date" placeHolder="End Date" ng-disabled="true" class="form-control" value="{! payment.invoice.dis_date_end | ddMMyy !}">
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-xs-2">Payment Status</label>
-					<div class="col-xs-4">
-						{!! Form::text('invoice',''
-	        				, array(
-	        					'placeHolder' => 'Status'
-	        					, 'ng-model' => 'payment.invoice.payment_status'
-	        					, 'class' => 'form-control'
-	        					, 'ng-disabled' => 'true'
-	        				)
-	        			) !!}
+					<div class="form-group">
+						<label class="control-label col-xs-2">Payment Status</label>
+						<div class="col-xs-4">
+							{!! Form::text('invoice',''
+		        				, array(
+		        					'placeHolder' => 'Status'
+		        					, 'ng-model' => 'payment.invoice.payment_status'
+		        					, 'class' => 'form-control'
+		        					, 'ng-disabled' => 'true'
+		        				)
+		        			) !!}
+						</div>
 					</div>
 				</div>
 			</div>

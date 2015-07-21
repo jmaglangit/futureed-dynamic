@@ -39,14 +39,14 @@
 	<div class="btn-container">
 		{!! Form::button('Save'
             , array(
-                'class' => 'btn btn-gold btn-medium'
+                'class' => 'btn btn-blue btn-medium'
                 , 'ng-click' => "profile.changeClientPassword()"
             )
         ) !!}
 
         {!! Form::button('Cancel'
             , array(
-                'class' => 'btn btn-blue btn-medium'
+                'class' => 'btn btn-gold btn-medium'
                 , 'ng-click' => "profile.setClientProfileActive('index')"
             )
         ) !!}

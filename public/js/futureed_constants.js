@@ -14,6 +14,7 @@ var Constants = {
 	, METHOD_GET	: 'GET'
 	, METHOD_PUT	: 'PUT'
 	, METHOD_DELETE	: 'DELETE'
+	, METHOD_PATCH	: 'PATCH'
 
 	, STATUS_OK		: 200
 
@@ -26,7 +27,11 @@ var Constants = {
 
 	, PENDING		: "Pending"
 	, PAID			: "Paid"
+	, OPEN			: "Open"
+	, ANSWERED		: "Answered"
 	, CANCELLED		: "Cancelled"
+	, ACCEPTED		: "Accepted"
+	, REJECTED		: "Rejected"
 
 	, AVATAR		: "avatar"
 	, REWARDS		: "rewards"
@@ -35,6 +40,21 @@ var Constants = {
 	, EDIT			: "edit"
 	, EDIT_EMAIL	: "edit_email"
 	, CONFIRM_EMAIL : "confirm_email"
+
+	, AGEGROUP		: "agegroup"
+	, CONTENTS 		: "contents"
+	, QANDA 		: "qanda"
+
+	, GENERAL		: "General"
+	, CONTENT 		: "Content"
+	, QUESTION		: "Question"
+
+	/**
+	* Media Types
+	*/
+	, VIDEO			: 1
+	, TEXT			: 2
+	, IMAGE			: 3
 
 	/**
 	* Active Screens

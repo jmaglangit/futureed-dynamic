@@ -21,7 +21,7 @@ class InvoiceRequest extends ApiRequest {
      */
     public function rules()
     {
-        switch($this->method){
+        switch($this->method()){
 
             case 'PUT':
                 return [

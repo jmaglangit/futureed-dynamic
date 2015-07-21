@@ -14,31 +14,40 @@ class ParentStudent extends Model {
 
     protected $hidden = ['created_by','updated_by','created_at','updated_at','deleted_at'];
 
-    protected $fillable = ['parent_user_id','student_user_id','invitation_code','status','created_by','updated_by'];
+    protected $fillable = ['parent_id','student_id','invitation_code','status','created_by','updated_by'];
+
+	protected $attributes = [
+		'created_by' => 1,
+		'updated_by' => 1,
+	];
 
     //-------------relationships
-    public function parent_user() {
-        return $this->belongsTo('FutureEd\Models\Core\User','parent_user_id','id');
-    }
-
-    public function student_user() {
-        return $this->belongsTo('FutureEd\Models\Core\User','student_user_id','id');
-    }
-
     public function student(){
-        return $this->belongsTo('FutureEd\Models\Core\Student','student_user_id','user_id');
+        return $this->belongsTo('FutureEd\Models\Core\Student')->with('avatar','user');
     }
     //-------------scopes
 
-    public function scopeParentId($query,$parent_user_id){
-        return $query->where('parent_user_id',$parent_user_id);
+    public function scopeParentId($query,$parent_id){
+        return $query->where('parent_id',$parent_id);
     }
 
-    public function scopeStudentId($query,$student_user_id){
-        return $query->where('student_user_id',$student_user_id);
+    public function scopeStudentId($query,$student_id){
+        return $query->where('student_id',$student_id);
     }
 
     public function scopeInvitationCode($query,$invitation_code){
         return $query->where('invitation_code',$invitation_code);
     }
+
+	public function scopeUserConfirmed($query){
+
+		return $query->whereHas('student',function($query){
+			$query->whereHas('user', function($query){
+
+				$query->where('confirmation_code', '=', NULL)
+					->where('confirmation_code_expiry','=', NULL);
+
+			});
+		});
+	}
 }

@@ -91,6 +91,7 @@ function ManageClassController($scope, manageClassService, apiService, TableServ
 		$scope.ui_block();
 		manageClassService.list(self.search, self.table).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				self.getGradeLevel($scope.user.country_id);
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
@@ -107,6 +108,7 @@ function ManageClassController($scope, manageClassService, apiService, TableServ
 	}
 
 	self.studentList = function(id) {
+		$scope.classid = id;
 		self.errors = Constants.FALSE;
 		self.search.id = id;
 
@@ -366,5 +368,23 @@ function ManageClassController($scope, manageClassService, apiService, TableServ
 
 	self.display = function() {
 
+	}
+
+	self.setTabActive = function(active) {
+		self.help_ans_tab_active = Constants.FALSE;
+		self.help_tab_active = Constants.FALSE;
+		self.tip_tab_active = Constants.FALSE;
+		switch(active) {
+			case 'help-ans':
+				self.help_ans_tab_active = Constants.TRUE;
+				break;
+
+			case 'help':
+				self.help_tab_active = Constants.TRUE;
+				break;
+			default:
+				self.tip_tab_active = Constants.TRUE;
+				break;
+		}
 	}
 }

@@ -47,8 +47,9 @@
 			</div>
 		</div>
 	</div>
+	<div class="clearfix"></div>
 	<button class="btn btn-blue btn-small margin-0-30" ng-click="student.setActive('add')">
-		<i class="fa fa-plus-square"></i> Add 
+		<i class="fa fa-plus-square"></i> Add Student
 	</button>
 	<div class="col-xs-12 padding-0-30">
 		<div class="title-mid">
