@@ -130,7 +130,7 @@
 				            <th>Title</th>
 				            <th>Answer</th>
 				            <th>Created By</th>
-				            <th>Time of Last Answer</th>
+				            <th>Date Created</th>
 				            <th>Status</th>
 				            <th ng-if="answer.records.length">Actions</th>
 				        </tr>
@@ -140,7 +140,7 @@
 				            <td>{! answerInfo.help_request.title !}</td>
 				            <td class="wide-column">{! answerInfo.content !}</td>
 				            <td>{! answerInfo.user.name !}</td>
-				            <td>{! answerInfo.help_request.last_answered_at | ddMMyy : '-' !}</td>
+				            <td>{! answerInfo.created_at | ddMMyyHHmmss : '-' !}</td>
 				            <td>{! answerInfo.request_answer_status !}</td>
 				            <td ng-if="answer.records.length">
 				            	<div class="row">

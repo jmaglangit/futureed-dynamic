@@ -130,8 +130,8 @@
 				            <th>Title</th>
 				            <th>Description</th>
 				            <th>Created By</th>
-				            <th>Time Created</th>
-				            <th>Time of Last Answer</th>
+				            <th>Date Created</th>
+				            <th>Date of Last Answer</th>
 				            <th>Status</th>
 				            <th ng-if="help.records.length">Actions</th>
 				        </tr>
@@ -141,8 +141,8 @@
 				            <td>{! helpInfo.title !}</td>
 				            <td class="wide-column">{! helpInfo.content !}</td>
 				            <td>{! helpInfo.student.first_name !} {! helpInfo.student.last_name !}</td>
-				            <td>{! helpInfo.created_at | ddMMyy !}</td>
-				            <td>{! helpInfo.last_answered_at | ddMMyy : '-' !}</td>
+				            <td>{! helpInfo.created_at | ddMMyyHHmmss : '-' !}</td>
+				            <td>{! helpInfo.last_answered_at | ddMMyyHHmmss : '-' !}</td>
 				            <td>{! helpInfo.request_status !}</td>
 				            <td ng-if="help.records.length">
 				            	<div class="row">

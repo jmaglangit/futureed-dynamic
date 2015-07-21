@@ -112,7 +112,7 @@
 				            <th>Title</th>
 				            <th>Description</th>
 				            <th>Created By</th>
-				            <th>Time Created</th>
+				            <th>Date Created</th>
 				            <th>Status</th>
 				            <th ng-if="tips.records.length">Actions</th>
 				        </tr>
@@ -122,7 +122,7 @@
 				            <td>{! tipInfo.title !}</td>
 				            <td class="wide-column">{! tipInfo.content !}</td>
 				            <td>{! tipInfo.student.first_name !} {! tipInfo.student.last_name !}</td>
-				            <td>{! tipInfo.created_at | ddMMyy !}</td>
+				            <td>{! tipInfo.created_at | ddMMyyHHmmss : '-' !}</td>
 				            <td>{! tipInfo.tip_status !}</td>
 				            <td ng-if="tips.records.length">
 				            	<div class="row">
