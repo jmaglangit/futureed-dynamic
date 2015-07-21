@@ -224,10 +224,16 @@ function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService,
 	    });
     }
 
-    self.viewAnswerImage = function(base, object) {
+    self.viewAnswerImage = function(object) {
     	self.view_image = {};
-		self.view_image.image_path = object.answer_image;
-		self.view_image.questions_text = object.answer_text;
+
+		if(object.image) {
+			self.view_image.image_path = "/uploads/temp/answer/" + object.image;
+		} else if(object.questions_image) {
+			self.view_image.image_path = object.answer_image;
+		}
+
+		self.view_image.questions_text = (object.answer_text) ? object.answer_text : Constants.ANSWER ;
 		self.view_image.show = Constants.TRUE;
 
 		$("#view_image_modal").modal({

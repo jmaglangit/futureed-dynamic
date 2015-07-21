@@ -1092,11 +1092,9 @@ content {
 }
 
 .upload-label {
-	position: absolute;
-	right: 0px;
-	left: 0px;
-	margin: 5px 15px;
-	padding: 5px;
+	padding: 6px;
+	font-weight: normal;
+	font-size: 13px;
 }
 
 .wide-column {
