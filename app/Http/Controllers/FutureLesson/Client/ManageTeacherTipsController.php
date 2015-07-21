@@ -19,20 +19,13 @@ class ManageTeacherTipsController extends Controller{
 	*@return Index Tips
 	*/
 	public function list_tips_form(){
-		return view('client.teacher.tips.partials.list_tips_form');
+		return view('client.teacher.tips.partials.list');
 	}
 
 	/**
 	*@return View Tips
 	*/
 	public function view_tips_form(){
-		return view('client.teacher.tips.partials.view_tips_form');
+		return view('client.teacher.tips.partials.view');
 	}	
-
-	/**
-	*@return Edit Tips
-	*/
-	public function edit_tips_form(){
-		return view('client.teacher.tips.partials.edit_tips_form');
-	}		
 }

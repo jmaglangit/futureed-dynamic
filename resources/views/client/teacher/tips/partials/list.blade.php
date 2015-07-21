@@ -24,7 +24,6 @@
 				)
 			)!!}
 			<div class="form-group">
-				<label class="control-label col-xs-2">Title</label>
 				<div class="col-xs-5">
 					{!! Form::text('search_module', ''
 						,array(
@@ -34,9 +33,6 @@
 						)
 					)!!}
 				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-xs-2">Status</label>
 				<div class="col-xs-5">
 					{!! Form::select('search_status'
 						, array(
@@ -51,9 +47,16 @@
 						)
 					) !!}
 				</div>
+				<div class="col-xs-2">
+					{!! Form::button('Search'
+						,array(
+							'class' => 'btn btn-blue'
+							, 'ng-click' => 'tips.searchFnc($event)'
+						)
+					)!!}
+				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-xs-2 control-label">Created</label>
 				<div class="col-xs-5">
 					{!! Form::text('search_module', ''
 						,array(
@@ -63,14 +66,8 @@
 						)
 					)!!}
 				</div>
-				<div class="col-xs-2">
-					{!! Form::button('Search'
-						,array(
-							'class' => 'btn btn-blue'
-							, 'ng-click' => 'tips.searchFnc($event)'
-						)
-					)!!}
-				</div>
+				<div class="col-xs-5"></div>
+
 				<div class="col-xs-2">
 					{!! Form::button('Clear'
 						,array(
@@ -123,17 +120,17 @@
 			        <tbody>
 				        <tr ng-repeat="tipInfo in tips.records">
 				            <td>{! tipInfo.title !}</td>
-				            <td>{! tipInfo.content !}</td>
+				            <td class="wide-column">{! tipInfo.content !}</td>
 				            <td>{! tipInfo.student.first_name !} {! tipInfo.student.last_name !}</td>
-				            <td>{! tipInfo.created_at !}</td>
+				            <td>{! tipInfo.created_at | ddMMyy !}</td>
 				            <td>{! tipInfo.tip_status !}</td>
 				            <td ng-if="tips.records.length">
 				            	<div class="row">
 				            		<div class="col-xs-6">
-				            			<a href="" ng-click="tips.setTipsActive(futureed.ACTIVE_VIEW, tipInfo.id)"><span><i class="fa fa-eye"></i></span></a>
+				            			<a href="" ng-click="tips.setActive(futureed.ACTIVE_VIEW, tipInfo.id)"><span><i class="fa fa-eye"></i></span></a>
 				            		</div>
 				            		<div class="col-xs-6">
-				            			<a href="" ng-click="tips.setTipsActive(futureed.ACTIVE_EDIT, tipInfo.id)"><span><i class="fa fa-pencil"></i></span></a>
+				            			<a href="" ng-click="tips.setActive(futureed.ACTIVE_EDIT, tipInfo.id)"><span><i class="fa fa-pencil"></i></span></a>
 				            		</div>
 				            	</div>
 				            </td>

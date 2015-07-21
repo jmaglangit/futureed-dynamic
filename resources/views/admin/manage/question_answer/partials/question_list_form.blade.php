@@ -120,8 +120,8 @@
                 <tbody>
                     <tr ng-repeat="qaInfo in qa.qa_records">
                         <td>{! qaInfo.code !}</td>
-                        <td>{! qaInfo.questions_text !}</td>
-                        <td><a href="javascript:;" ng-if="qaInfo.original_image_name" ng-click="qa.viewImage('{!! route('admin.image.viewer') !!}', qaInfo)">View Image</a></td>
+                        <td class="wide-column">{! qaInfo.questions_text !}</td>
+                        <td><a href="javascript:;" ng-if="qaInfo.original_image_name" ng-click="qa.viewImage(qaInfo)">View Image</a></td>
                         <td>{! qaInfo.question_type !}</td>
                         <td>{! qaInfo.difficulty !}</td>
                         <td>{! qaInfo.seq_no !}</td>

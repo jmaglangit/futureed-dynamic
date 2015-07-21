@@ -21,3 +21,6 @@ Routes::group(['prefix' => '/question'], function() {
 
 
 });
+
+Routes::resource('/question', 'Api\v1\QuestionController',
+	['except' => ['create', 'edit']]);

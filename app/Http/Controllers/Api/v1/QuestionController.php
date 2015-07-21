@@ -19,6 +19,56 @@ class QuestionController extends ApiController {
 	}
 
 	/**
+	 * @return Display all questions.
+	 */
+	public function index(){
+
+		$criteria = [];
+		$limit = 0 ;
+		$offset = 0;
+
+		//for module_id
+		if(Input::get('module_id')){
+
+			$criteria['module_id'] = Input::get('module_id');
+		}
+
+		//for question_type
+		if(Input::get('question_type')){
+
+			$criteria['question_type'] = Input::get('question_type');
+		}
+
+		//for questions_text
+		if(Input::get('questions_text')){
+
+			$criteria['questions_text'] = Input::get('questions_text');
+		}
+
+		if(Input::get('limit')) {
+			$limit = intval(Input::get('limit'));
+		}
+
+		if(Input::get('offset')) {
+			$offset = intval(Input::get('offset'));
+		}
+
+		$record = $this->question->getQuestions($criteria , $limit, $offset );
+
+		if($record['total'] > 0){
+
+			foreach($record['records'] as $k=>$v){
+
+				$record['records'][$k]['questions_image'] = config('futureed.question_image_path_final_public').'/'.$v['id'].'/'.$v['questions_image'];
+			}
+
+		}
+
+
+		return $this->respondWithData($record);
+	}
+
+	/**
 	 * Update the specified resource in storage.
 	 *
 	 * @param  int  $id

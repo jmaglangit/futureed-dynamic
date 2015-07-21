@@ -145,7 +145,7 @@
 		<img class="help-img-header" src="/images/class-student/sidebar_header_helprequest.png" alt="">
 	</div>
 	<div id="help_request_form">
-		<div class="side-btn-container row" ng-if="!class.add_help && !class.help.success && class.help.total">
+		<div class="side-btn-container row" ng-if="!class.add_help && !class.help.success">
 			<div class="col-xs-12 submit-btn-help">
 				{!! Form::open(
 					array(
@@ -157,7 +157,6 @@
 					{!! Form::submit('My Help Requests'
 		                , array(
 		                   'class' => 'btn btn-blue'
-		                  , 'ng-if' => 'class.help.total'
 		                )
 		            ) !!}
 	            {!! Form::close() !!}

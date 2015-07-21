@@ -7,7 +7,7 @@ use FutureEd\Models\Repository\Module\ModuleRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
-class ModuleController extends ApiController {
+class StudentModuleController extends ApiController {
 
 	protected $module;
 
@@ -30,25 +30,22 @@ class ModuleController extends ApiController {
 		$limit = 0 ;
 		$offset = 0;
 
+		//for subject
+		if(Input::get('subject_id')){
 
-
-		//for module name
-		if(Input::get('name')){
-
-			$criteria['name'] = Input::get('name');
+			$criteria['subject_id'] = Input::get('subject_id');
 		}
 
-		//for subject
-		if(Input::get('subject')){
+		//for grade
+		if(Input::get('grade_id')){
 
-			$criteria['subject'] = Input::get('subject');
+			$criteria['grade_id'] = Input::get('grade_id');
 		}
 
-		//Age Group
-		//for subject
-		if(Input::get('age_group_id')){
+		//for module_status
+		if(Input::get('module_status')){
 
-			$criteria['age_group_id'] = Input::get('age_group_id');
+			$criteria['module_status'] = Input::get('module_status');
 		}
 
 		if(Input::get('limit')) {
@@ -59,8 +56,18 @@ class ModuleController extends ApiController {
 			$offset = intval(Input::get('offset'));
 		}
 
-		//get module list with relation to subject,subject_area,grade
+		//get list of module
 		return $this->respondWithData($this->module->getModules($criteria , $limit, $offset ));
+	}
+
+	/**
+	 * Show the form for creating a new resource.
+	 *
+	 * @return Response
+	 */
+	public function create()
+	{
+		//
 	}
 
 	/**
@@ -81,9 +88,18 @@ class ModuleController extends ApiController {
 	 */
 	public function show($id)
 	{
-		return $this->respondWithData(
-			$this->module->viewModule($id)
-		);
+		//
+	}
+
+	/**
+	 * Show the form for editing the specified resource.
+	 *
+	 * @param  int  $id
+	 * @return Response
+	 */
+	public function edit($id)
+	{
+		//
 	}
 
 	/**

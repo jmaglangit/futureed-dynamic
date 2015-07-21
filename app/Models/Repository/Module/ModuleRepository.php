@@ -30,7 +30,7 @@ class ModuleRepository implements ModuleRepositoryInterface{
 
 		$count = 0;
 
-		$module = $module->with('subject','subjectarea','grade');
+		$module = $module->with('subject','subjectArea','grade','studentModule');
 
 
 		if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
@@ -42,6 +42,23 @@ class ModuleRepository implements ModuleRepositoryInterface{
 
 			if (count($criteria) > 0) {
 
+				//check  subject_id
+				if(isset($criteria['subject_id'])){
+
+					$module = $module->subjectId($criteria['subject_id']);
+				}
+
+				//check grade_id
+				if(isset($criteria['grade_id'])){
+
+					$module = $module->gradeId($criteria['grade_id']);
+				}
+
+				//check module status
+				if(isset($criteria['module_status'])){
+
+					$module = $module->moduleStatus($criteria['module_status']);
+				}
 
 				//check relation to subject
 				if(isset($criteria['subject'])){
@@ -59,6 +76,12 @@ class ModuleRepository implements ModuleRepositoryInterface{
 				if(isset($criteria['area'])){
 
 					$module = $module->subjectAreaName($criteria['area']);
+				}
+
+				//check age group
+				if(isset($criteria['age_group_id'])){
+
+					$module = $module->ageGroup($criteria['age_group_id']);
 				}
 
 			}
