@@ -30,8 +30,7 @@ class ModuleController extends ApiController {
 		$offset = 0;
 
 
-
-
+		
 		//for module name
 		if(Input::get('name')){
 
@@ -52,11 +51,11 @@ class ModuleController extends ApiController {
 		}
 
 		if(Input::get('limit')) {
-					$limit = intval(Input::get('limit'));
+			$limit = intval(Input::get('limit'));
 		}
 
 		if(Input::get('offset')) {
-					$offset = intval(Input::get('offset'));
+			$offset = intval(Input::get('offset'));
 		}
 
 		//get module list with relation to subject,subject_area,grade
