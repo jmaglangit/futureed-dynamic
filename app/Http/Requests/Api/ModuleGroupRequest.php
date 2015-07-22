@@ -39,7 +39,7 @@ class ModuleGroupRequest extends ApiRequest{
             'module_id.integer' =>'Module must be a number.',
             'age_group_id.unique' => 'Age already exist.',
             'points_earned.required' => 'Total Points earned is required.',
-            'points_earned.integer' => 'Total Points earned must be a number..'
+            'points_earned.integer' => 'Total Points earned must be a number.'
         ];
     }
 }
