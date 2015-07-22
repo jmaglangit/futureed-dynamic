@@ -65,6 +65,8 @@ return [
 		2050 => 'Student has an active subscription.',
 		2051 => 'Class has already ended.',
 		2052 => 'No Image',
+		2053 => 'File Location is invalid.',
+		2054 => 'File deleted.',
 
 
 		2100 => 'Reset code is invalid.',
