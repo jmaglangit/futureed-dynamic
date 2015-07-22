@@ -1,7 +1,6 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
 use FutureEd\Http\Requests;
-use FutureEd\Http\Controllers\Controller;
 use FutureEd\Models\Repository\QuestionAnswer\QuestionAnswerRepositoryInterface;
 use FutureEd\Http\Requests\Api\QuestionAnswerRequest;
 use Carbon\Carbon;
@@ -9,8 +8,6 @@ use FutureEd\Services\FileServices;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\File;
-
-use Illuminate\Http\Request;
 
 class QuestionAnswerController extends ApiController {
 
@@ -79,6 +76,19 @@ class QuestionAnswerController extends ApiController {
 
 
 	}
+
+    /**
+     *
+     */
+    public function index(){
+        $criteria = [];
+
+        if(Input::get('question_id')){
+            $criteria['question_id'] = Input::get('question_id');
+        }
+
+        return $this->respondWithData($this->question_answer->getQuestionAnswers($criteria));
+    }
 
 	/**
 	 * Delete Question Answer Image.

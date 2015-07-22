@@ -113,6 +113,8 @@ return [
 		2141 => 'Unable to Delete. Module has questions.',
 		2142 => 'The image must be a file of type: jpeg, jpg, png.',
 		2143 => 'The image size had exceeded 2MB.',
+		2144 => 'Module does not exist',
+		2145 => 'Student needs to watch the videos again.',
 
 		// Client Error messages
 		2200 => 'Email already exists.',

@@ -91,7 +91,6 @@ function ManageModuleContentController($scope, ManageModuleContentService, Table
 	                }else if(response.data){
                 		object.image = response.data.image_name;
                 		object.uploaded = Constants.TRUE;
-                		self.record.image = object.image;
 	                }
 	            }
 
@@ -312,10 +311,25 @@ function ManageModuleContentController($scope, ManageModuleContentService, Table
 		});
 	}
 
-	self.viewImage = function(base, object) {
+	self.removeImage = function(object) {
+    	// In add content 
     	self.view_image = {};
-		self.view_image.image_path = object.content_image;
-		self.view_image.description = object.description;
+
+    	object.image = Constants.EMPTY_STR;
+    	object.image_path = Constants.EMPTY_STR;
+    	object.uploaded = Constants.FALSE;
+    } 
+
+	self.viewImage = function(object) {
+    	self.view_image = {};
+		
+		if(object.image) {
+			self.view_image.image_path = "/uploads/temp/content/" + object.image;
+		} else if(object.questions_image) {
+			self.view_image.image_path = object.questions_image;
+		}
+
+		self.view_image.teaching_module = (object.teaching_module) ? object.teaching_module : Constants.CONTENT;
 		self.view_image.show = Constants.TRUE;
 
 		$("#view_image_modal").modal({

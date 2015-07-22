@@ -155,4 +155,8 @@ return [
 
 
 
+    //answer status
+    'answer_status_correct' => 'Correct',
+    'answer_status_wrong' => 'Wrong',
+
 ];

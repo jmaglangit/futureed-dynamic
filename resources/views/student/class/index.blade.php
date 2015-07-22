@@ -13,8 +13,8 @@
 			<div ng-controller="StudentClassController as class" template-directive template-url="{!! route('student.partials.tips_help_bar') !!}"></div>
 		</div>
 
-		<div class="wrapr"> 
-			
+		<div class="module-wrapr"> 
+			<div template-directive template-url="{!! route('student.class.partials.module_list') !!}"></div>
 		</div>
 	</div>
 @stop

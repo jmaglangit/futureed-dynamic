@@ -48,6 +48,7 @@ var Constants = {
 	, GENERAL		: "General"
 	, CONTENT 		: "Content"
 	, QUESTION		: "Question"
+	, ANSWER		: "Answer"
 
 	/**
 	* Media Types
