@@ -137,5 +137,6 @@
 @section('scripts')
 	{!! Html::script('/js/student/controllers/student_module_controller.js')!!}
 	{!! Html::script('/js/student/services/student_module_service.js')!!}
+	{!! Html::script('/js/student/constants/student_module_constant.js')!!}
 @stop
 

@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class ClassController extends Controller {
 	/**
-		*Display Class Index Page
+	*Display Class Index Page
 	*/
 	public function index() {
 		return view('student.class.index');
@@ -27,4 +27,5 @@ class ClassController extends Controller {
 	public function module_list() {
 		return view('student.class.partials.module_list');
 	}
+
 }

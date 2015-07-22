@@ -26,6 +26,29 @@ function StudentModuleService($http){
 				+ '&link_id=' + data.link_id
 		});
 	}
+	
+	service.getCurrentDetails = function(id) {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url 	: serviceUrl + 'help-request/' + id
+		})
+	}
+
+	service.getHelpAnswer = function(id, status) {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url 	: serviceUrl + 'help-request-answer?help_request_id=' + id
+				+ '&request_answer_status=' + status
+		})
+	}
+
+	service.submitAnswer = function(data) {
+		return $http({
+			method 	: Constants.METHOD_POST
+			, data 	: data
+			, url 	: serviceUrl + 'help-request-answer'
+		})
+	}
 
 	return service;
 }
