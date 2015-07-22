@@ -37,6 +37,18 @@ class StudentModuleController extends ApiController {
 			$criteria['subject_id'] = Input::get('subject_id');
 		}
 
+		//for student_id
+		if(Input::get('student_id')){
+
+			$criteria['student_id'] = Input::get('student_id');
+		}
+
+		//for class_id
+		if(Input::get('class_id')){
+
+			$criteria['class_id'] = Input::get('class_id');
+		}
+
 		//for grade
 		if(Input::get('grade_id')){
 

@@ -29,11 +29,21 @@ class TipRequest extends ApiRequest {
 					case 'tip.update.status':
 						return [
 							'tip_status' => 'required|alpha|in:Accepted,Rejected',
+							'rating' => 'required_if:tip_status,Accepted|integer',
+							'rated_by' => 'required|alpha|in:Teacher,Admin'
 						];
 						break;
 				}
 				break;
 		}
 	}
+
+	public function messages(){
+
+		return [
+			'rating.required_if' => 'The rating is required.',
+		];
+	}
+
 
 }

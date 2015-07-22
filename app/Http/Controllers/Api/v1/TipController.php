@@ -27,7 +27,7 @@ class TipController extends ApiController {
 	 */
 	public function updateTipStatus($id, TipRequest $request)
 	{
-		$data = $request->only('tip_status');
+		$data = $request->only('tip_status','rated_by','rating');
 
 		//view tip details
 
