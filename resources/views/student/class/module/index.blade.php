@@ -21,7 +21,7 @@
 				<img src="/images/class-student/icon-givetip.png" ng-click="mod.giveTip()">
 			</div>
 		</div>
-		{{-- this is a sample iframe only (vimeo) --}}
+		
 		<div class="col-xs-8">
 			<div class="video-iframe">
 				<iframe src="https://player.vimeo.com/video/133667971" width="100%" height="500" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
