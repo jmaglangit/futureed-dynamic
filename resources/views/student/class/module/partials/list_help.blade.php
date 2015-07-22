@@ -4,6 +4,9 @@
             {! error !}
         </p>
     </div>
+    <div class="alert alert-success" ng-if="mod.success">
+    	<p>{! mod.success !}</p>
+    </div>
     <div class="col-xs-12" ng-init="mod.setCurrentActive()">
     	<ul class="nav nav-pills col-xs-8">
     		<li class="active">
@@ -30,6 +33,7 @@
 		    </div>
 		    <div class="tab-pane active" id="tab3">
 		    	<div template-directive template-url="{!! route('student.class.module.partials.current_help') !!}"></div>
+		    	<div template-directive template-url="{!! route('student.class.module.partials.current_view_help') !!}"></div>
 		    </div>
 		    <div class="tab-pane" id="tab4">
 		    	4

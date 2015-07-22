@@ -114,7 +114,7 @@ class StudentModuleController extends ApiController {
 	 */
 	public function update($id,StudentModuleRequest $request)
 	{
-		$data = $request->only('last_viewed_content_id');
+		$data = $request->only('last_viewed_content_id','last_answered_question_id');
 
 		$this->student_module->updateStudentModule($id,$data);
 

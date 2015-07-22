@@ -89,6 +89,8 @@ function StudentModuleController($scope, apiService, StudentModuleService) {
 		switch(active){
 			case Constants.ACTIVE_VIEW:
 				self.active_current_view = Constants.TRUE;
+				self.answer = {};
+				self.getCurrentDetails(id);
 				break;
 			default:
 				self.active_current_list = Constants.TRUE;
@@ -116,8 +118,76 @@ function StudentModuleController($scope, apiService, StudentModuleService) {
 				}else if(response.data){
 					self.records = {};
 					self.records = response.data.records;
+
+					angular.forEach(self.records, function(value, key) {
+						value.created_at = moment(value.created_at).startOf("minute").fromNow();
+					});
 				}
 			}
+			$scope.ui_unblock();
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		})
+	}
+
+	self.getCurrentDetails = function(id) {
+		$scope.ui_block();
+		StudentModuleService.getCurrentDetails(id).success(function(response){
+			if(angular.equals(response.status,Constants.STATUS_OK)){
+				if(response.errors){
+					self.errors = $scope.errorHandler(response.errors);
+				}else if(response.data){
+					self.details = {};
+					var details = response.data;
+					self.details.created_at = moment(details.created_at).startOf("minute").fromNow();
+					self.details.name = details.student.first_name + ' ' + details.student.last_name;
+					self.details.title = details.title;
+					self.details.subject_area = details.subject_area;
+					self.details.subject = details.subject.name;
+					self.details.content = details.content;
+					self.details.id = details.id;
+					self.getHelpAnswer(self.details.id);
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		})
+	}
+
+	self.getHelpAnswer = function(id) {
+		self.answer_status = Constants.ACCEPTED;
+		StudentModuleService.getHelpAnswer(id, self.answer_status).success(function(response){
+			if(angular.equals(response.status,Constants.STATUS_OK)){
+				if(response.errors){
+					self.errors = $scope.errorHandler(response.errors);
+				}else if(response.data){
+					self.ans_record = response.data.records;
+				}
+			}
+		}).error(function(response){	
+			self.errors = $scope.internalError();
+		});
+	}
+
+	self.submitAnswer = function() {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		self.answer.student_id = $scope.user.id;
+		self.answer.help_request_id = self.details.id;
+
+		$scope.ui_block();
+		StudentModuleService.submitAnswer(self.answer).success(function(response){
+			if(response.errors){
+					self.errors = $scope.errorHandler(response.errors);
+				}else if(response.data){
+					self.success = studentModule.ADD_ANSWER_SUCCESS;
+					self.answer = {};
+					self.getHelpAnswer(self.details.id);
+				}
 			$scope.ui_unblock();
 		}).error(function(response){
 			self.errors = $scope.internalError();

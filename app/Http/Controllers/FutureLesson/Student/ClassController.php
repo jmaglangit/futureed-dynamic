@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class ClassController extends Controller {
 	/**
+	*Display Class Index Page
+	*/
+	public function index() {
+		return view('student.class.index');
+	}
+
+	/**
 	*Display Class Side Nave Page
 	*/
 	public function dashbrd_side_nav() {
@@ -20,4 +27,5 @@ class ClassController extends Controller {
 	public function module_list() {
 		return view('student.class.partials.module_list');
 	}
+
 }
