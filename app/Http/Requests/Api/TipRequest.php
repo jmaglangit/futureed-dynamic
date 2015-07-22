@@ -41,8 +41,7 @@ class TipRequest extends ApiRequest {
 	public function messages(){
 
 		return [
-			'rating.required_if' => 'rating is required.',
-
+			'rating.required_if' => 'The rating is required.',
 		];
 	}
 
