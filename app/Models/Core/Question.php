@@ -34,6 +34,11 @@ class Question extends Model {
 		return $this->belongsTo('FutureEd\Models\Core\Module')->with('subject','subjectArea');
 	}
 
+	//
+	public function questionAnswers(){
+		return $this->hasMany('FutureEd\Models\Core\QuestionAnswer');
+	}
+
 	//-------------scopes
 	public function scopeQuestionType($query, $question_type)
 	{
@@ -69,6 +74,10 @@ class Question extends Model {
 	public function scopeOrderBySeqNoDesc($query){
 
 		return $query->OrderBy('seq_no','desc');
+	}
+
+	public function scopeDifficulty($query,$difficulty){
+		return $query->whereDifficulty($difficulty);
 	}
 
 
