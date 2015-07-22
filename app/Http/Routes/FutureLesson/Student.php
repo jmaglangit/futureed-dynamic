@@ -125,6 +125,11 @@
 							'as' => 'student.class.module.partials.current_help'
 							, 'uses' => 'FutureLesson\Student\ClassModuleController@current_help'
 						]);
+
+					Routes::get('/current_view_help', [ 
+							'as' => 'student.class.module.partials.current_view_help'
+							, 'uses' => 'FutureLesson\Student\ClassModuleController@current_view_help'
+						]);
 				});
 			});
 		});

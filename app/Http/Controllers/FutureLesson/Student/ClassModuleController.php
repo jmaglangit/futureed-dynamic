@@ -8,10 +8,10 @@ use Illuminate\Http\Request;
 
 class ClassModuleController extends Controller {
 	/**
-	*Display Class Index Page
+	*Display Module Index Page
 	*/
 	public function index() {
-		return view('student.class.index');
+		return view('student.class.module.index');
 	}
 
 	/**
@@ -40,5 +40,12 @@ class ClassModuleController extends Controller {
 	*/
 	public function current_help() {
 		return view('student.class.module.partials.current_help');
+	}
+
+	/**
+	*Display Current View Help
+	*/
+	public function current_view_help() {
+		return view('student.class.module.partials.current_view_help');
 	}
 }

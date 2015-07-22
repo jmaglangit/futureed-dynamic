@@ -27,5 +27,28 @@ function StudentModuleService($http){
 		});
 	}
 
+	moduleService.getCurrentDetails = function(id) {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url 	: moduleServiceUrl + 'help-request/' + id
+		})
+	}
+
+	moduleService.getHelpAnswer = function(id, status) {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url 	: moduleServiceUrl + 'help-request-answer?help_request_id=' + id
+				+ '&request_answer_status=' + status
+		})
+	}
+
+	moduleService.submitAnswer = function(data) {
+		return $http({
+			method 	: Constants.METHOD_POST
+			, data 	: data
+			, url 	: moduleServiceUrl + 'help-request-answer'
+		})
+	}
+
 	return moduleService;
 }
