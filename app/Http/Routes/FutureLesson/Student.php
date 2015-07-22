@@ -100,13 +100,32 @@
 			{
 				Routes::get('/', [ 
 					'as' => 'student.class.module.index'
-					, 'uses' => 'FutureLesson\Student\ClassController@index'
+					, 'uses' => 'FutureLesson\Student\ClassModuleController@index'
 				]);
 
 				Routes::get('/{name}', [ 
 						'as' => 'student.class.modulename'
-						, 'uses' => 'FutureLesson\Student\ClassController@module'
+						, 'uses' => 'FutureLesson\Student\ClassModuleController@module'
 					]);
+				Routes::group([
+					  'prefix' => '/partials'
+					, 'middleware' => 'student_partial'], function()
+				{
+					Routes::get('/add_help', [ 
+							'as' => 'student.class.module.partials.add_help'
+							, 'uses' => 'FutureLesson\Student\ClassModuleController@add_help'
+						]);
+
+					Routes::get('/list_help', [ 
+							'as' => 'student.class.module.partials.list_help'
+							, 'uses' => 'FutureLesson\Student\ClassModuleController@list_help'
+						]);
+
+					Routes::get('/current_help', [ 
+							'as' => 'student.class.module.partials.current_help'
+							, 'uses' => 'FutureLesson\Student\ClassModuleController@current_help'
+						]);
+				});
 			});
 		});
 

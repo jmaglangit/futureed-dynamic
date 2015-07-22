@@ -1,6 +1,5 @@
 <?php namespace FutureEd\Http\Requests\Api;
 
-
 class StudentModuleRequest extends ApiRequest{
     /**
      * Determine if the user is authorized to make this request.
@@ -19,9 +18,20 @@ class StudentModuleRequest extends ApiRequest{
      */
     public function rules()
     {
-        return ['class_id' => 'required|integer',
-            'student_id' => 'required|integer',
-            'module_id' => 'required|integer'];
+        switch($this->method()){
+
+            case 'PUT':
+
+                return [
+                    'last_viewed_content_id' => 'required|integer'
+                ];
+                break;
+            default:
+                return ['class_id' => 'required|integer',
+                    'student_id' => 'required|integer',
+                    'module_id' => 'required|integer'];
+        }
+
     }
 
     public function messages()
@@ -32,7 +42,9 @@ class StudentModuleRequest extends ApiRequest{
             'student_id.required' => 'Student is required.',
             'student_id.integer' => 'Student must be a number.',
             'module_id.required' => 'Module is required.',
-            'module_id.integer' => 'Module must be a number.'
+            'module_id.integer' => 'Module must be a number.',
+            'last_viewed_content_id.required' => 'Content is required.',
+            'last_viewed_content_id.integer' => 'Content is invalid.'
         ];
     }
 }

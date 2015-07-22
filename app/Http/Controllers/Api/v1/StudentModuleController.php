@@ -3,6 +3,7 @@
 use Carbon\Carbon;
 use FutureEd\Http\Requests;
 use FutureEd\Http\Requests\Api\StudentModuleRequest;
+use FutureEd\Http\Requests\Api\StudentModuleRequest;
 use FutureEd\Models\Repository\Module\ModuleRepositoryInterface;
 use FutureEd\Models\Repository\StudentModule\StudentModuleRepositoryInterface;
 use Illuminate\Support\Facades\Input;
@@ -12,9 +13,9 @@ class StudentModuleController extends ApiController {
 	protected $module;
 	protected $student_module;
 
+
 	public function __construct(ModuleRepositoryInterface $moduleRepositoryInterface,
-								StudentModuleRepositoryInterface $student_module
-	){
+								StudentModuleRepositoryInterface $student_module){
 		$this->module = $moduleRepositoryInterface;
 		$this->student_module = $student_module;
 	}
@@ -110,9 +111,13 @@ class StudentModuleController extends ApiController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($id,StudentModuleRequest $request)
 	{
-		//
+		$data = $request->only('last_viewed_content_id');
+
+		$this->student_module->updateStudentModule($id,$data);
+
+		return $this->respondWithData($this->student_module->viewStudentModule($id));
 	}
 
 	/**

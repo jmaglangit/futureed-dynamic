@@ -4,6 +4,7 @@ use FutureEd\Models\Core\StudentModule;
 
 class StudentModuleRepository implements StudentModuleRepositoryInterface{
 
+
     /**
      * Add new Student Module
      * @param $data
@@ -37,5 +38,19 @@ class StudentModuleRepository implements StudentModuleRepositoryInterface{
         }catch (\Exception $e){
             return $e->getMessage();
         }
+    }
+
+    /**
+     * Get a record on StudentModule.
+     * @param $id
+     * @return mixed
+     */
+    public function viewStudentModule($id){
+
+        $student_module = new StudentModule();
+
+        $student_module = $student_module->find($id);
+        return $student_module;
+
     }
 }
