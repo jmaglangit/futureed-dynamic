@@ -406,7 +406,7 @@ th, td {
 	clear: both;
 }
 .drawer-inside {
-	height: 0;
+	height: 60px;
     width: 100%;
     margin: 0 auto;
     overflow: hidden;
@@ -444,4 +444,65 @@ th, td {
 
 .drawer-header {
 	background-color: #f4d859;
+}
+
+.nav-pills>li>a {
+	font-size: 14px;
+}
+
+.nav-pills>li.active>a {
+	background-color: #504c4c !important;
+}
+
+.nav-pills>li.active>a:hover {
+	background-color: #504c4c !important;
+}
+
+.pill-grey {
+	color: #ffffff;
+}
+
+.pill-grey:hover {
+	background-color: #504c4c !important;
+	color: #ffffff;
+}
+
+.pill-gold {
+	color: #ffffff;
+}
+
+.pill-gold:hover {
+	background-color: #d3bf49 !important;
+	color: #ffffff;
+}
+
+.nav-gold>li.active>a {
+	background-color: #d3bf49	 !important;
+}
+
+.nav-gold>li.active>a:hover {
+	background-color: #d3bf49	 !important;
+}
+
+.list-box {
+	background-color: #504c4c;
+}
+
+.list-title {
+	margin-left: 10px;
+	margin-right: 10px;
+}
+
+.list-container {
+	padding-right: 0 !important;
+	padding-left: 0 !important;
+}
+
+.list-box > a {
+	color: #ffffff;
+}
+
+.list-box > a:hover {
+	color: #ffffff;
+	text-decoration: none;
 }
