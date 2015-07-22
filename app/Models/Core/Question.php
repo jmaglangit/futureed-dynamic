@@ -19,7 +19,7 @@ class Question extends Model {
 		'deleted_at'];
 
 	protected $fillable =['module_id','code','question_type','questions_text','questions_image','answer','seq_no','difficulty','points_earned'
-			     ,'original_image_name','status','created_by','updated_by'];
+		,'original_image_name','status','created_by','updated_by'];
 
 	protected $attributes = [
 		'created_by' => 1,

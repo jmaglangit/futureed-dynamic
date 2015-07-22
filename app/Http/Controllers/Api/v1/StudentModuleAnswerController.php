@@ -50,7 +50,7 @@ class StudentModuleAnswerController extends ApiController{
         $student_module = $this->student_module->getStudentModule($data['student_module_id']);
 
         if(is_null($student_module)){
-           return $this->respondErrorMessage(2142);
+            return $this->respondErrorMessage(2142);
         }
 
         $student_module = $student_module->toArray();

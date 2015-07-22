@@ -69,10 +69,10 @@ class QuestionRepository implements QuestionRepositoryInterface{
 
 					$question = $question->questionType($criteria['question_type']);
 				}
-                if(isset($criteria['difficulty'])){
+				if(isset($criteria['difficulty'])){
 
-                    $question = $question->difficulty($criteria['difficulty']);
-                }
+					$question = $question->difficulty($criteria['difficulty']);
+				}
 
 
 			}
@@ -84,7 +84,7 @@ class QuestionRepository implements QuestionRepositoryInterface{
 			}
 		}
 		$question = $question->with('questionAnswers');
-        $question = $question->orderBy('seq_no','asc');
+		$question = $question->orderBy('seq_no','asc');
 
 		return ['total' => $count, 'records' => $question->orderBySeqNo()->get()->toArray()];
 

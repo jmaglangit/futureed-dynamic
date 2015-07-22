@@ -34,8 +34,8 @@ class QuestionAnswer extends Model {
 		return $query->whereQuestionId($question_id);
 	}
 
-    public function scopeIsCorrectAnswer($query){
-        return $query->whereCorrectAnswer('Yes');
-    }
+	public function scopeIsCorrectAnswer($query){
+		return $query->whereCorrectAnswer('Yes');
+	}
 
 }

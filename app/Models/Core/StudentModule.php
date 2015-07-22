@@ -19,6 +19,6 @@ class StudentModule extends Model {
         ,'created_by','updated_by'];
 
     protected $attributes = ['progress' => 0,'total_time' => 0,'question_counter'=> 0,
-                             'wrong_counter' => 0,'correct_counter'=> 0,
-                             'running_points'=> 0,'points_earned'=> 0,'last_answered_question_id'=> 0];
+        'wrong_counter' => 0,'correct_counter'=> 0,
+        'running_points'=> 0,'points_earned'=> 0,'last_answered_question_id'=> 0];
 }

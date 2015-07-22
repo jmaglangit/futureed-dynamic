@@ -10,7 +10,7 @@ class QuotesTableSeeder extends Seeder
 {
 
 	public function run()
-    {
+	{
 		\DB::table('quotes')->truncate();
 		\DB::table('quotes')->insert([
 			[
@@ -243,67 +243,67 @@ class QuotesTableSeeder extends Seeder
 				'created_at' => Carbon::now(),
 				'updated_at' => Carbon::now()
 			],
-            [
-                'quote' => 'This is a challenging topic but you can do it',
-                'percent' => '0',
-                'answer_status' => 'Correct',
-                'seq_no' => '1',
-                'created_by' => 1,
-                'updated_by' => 1,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now()
-            ],
-            [
-                'quote' => 'Do not give up! I know this is a little tough and will take more work. Keep going',
-                'percent' => '0',
-                'answer_status' => 'Correct',
-                'seq_no' => '2',
-                'created_by' => 1,
-                'updated_by' => 1,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now()
-            ],
-            [
-                'quote' => 'As you learn mistakes are expected. Just keep going, you will master it',
-                'percent' => '0',
-                'answer_status' => 'Correct',
-                'seq_no' => '3',
-                'created_by' => 1,
-                'updated_by' => 1,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now()
-            ],
-            [
-                'quote' => 'You have succeeded before with hard work, lets do it again',
-                'percent' => '0',
-                'answer_status' => 'Correct',
-                'seq_no' => '4',
-                'created_by' => 1,
-                'updated_by' => 1,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now()
-            ],
-            [
-                'quote' => 'This is difficult now but once you master this content you will grow',
-                'percent' => '0',
-                'answer_status' => 'Correct',
-                'seq_no' => '5',
-                'created_by' => 1,
-                'updated_by' => 1,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now()
-            ],
-            [
-                'quote' => 'So you did not do as well as you want, look at this as a learning opportunity',
-                'percent' => '0',
-                'answer_status' => 'Correct',
-                'seq_no' => '6',
-                'created_by' => 1,
-                'updated_by' => 1,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now()
-            ]
+			[
+				'quote' => 'This is a challenging topic but you can do it',
+				'percent' => '0',
+				'answer_status' => 'Correct',
+				'seq_no' => '1',
+				'created_by' => 1,
+				'updated_by' => 1,
+				'created_at' => Carbon::now(),
+				'updated_at' => Carbon::now()
+			],
+			[
+				'quote' => 'Do not give up! I know this is a little tough and will take more work. Keep going',
+				'percent' => '0',
+				'answer_status' => 'Correct',
+				'seq_no' => '2',
+				'created_by' => 1,
+				'updated_by' => 1,
+				'created_at' => Carbon::now(),
+				'updated_at' => Carbon::now()
+			],
+			[
+				'quote' => 'As you learn mistakes are expected. Just keep going, you will master it',
+				'percent' => '0',
+				'answer_status' => 'Correct',
+				'seq_no' => '3',
+				'created_by' => 1,
+				'updated_by' => 1,
+				'created_at' => Carbon::now(),
+				'updated_at' => Carbon::now()
+			],
+			[
+				'quote' => 'You have succeeded before with hard work, lets do it again',
+				'percent' => '0',
+				'answer_status' => 'Correct',
+				'seq_no' => '4',
+				'created_by' => 1,
+				'updated_by' => 1,
+				'created_at' => Carbon::now(),
+				'updated_at' => Carbon::now()
+			],
+			[
+				'quote' => 'This is difficult now but once you master this content you will grow',
+				'percent' => '0',
+				'answer_status' => 'Correct',
+				'seq_no' => '5',
+				'created_by' => 1,
+				'updated_by' => 1,
+				'created_at' => Carbon::now(),
+				'updated_at' => Carbon::now()
+			],
+			[
+				'quote' => 'So you did not do as well as you want, look at this as a learning opportunity',
+				'percent' => '0',
+				'answer_status' => 'Correct',
+				'seq_no' => '6',
+				'created_by' => 1,
+				'updated_by' => 1,
+				'created_at' => Carbon::now(),
+				'updated_at' => Carbon::now()
+			]
 
 		]);
-    }
+	}
 }
