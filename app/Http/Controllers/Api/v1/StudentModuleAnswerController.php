@@ -94,7 +94,7 @@ class StudentModuleAnswerController extends ApiController{
 
 
         if($should_interrupt_exam){
-            return $this->respondErrorMessage(2);
+            return $this->respondErrorMessage(2145);
         }else{
             $question_counter = $student_module['question_counter'];
 

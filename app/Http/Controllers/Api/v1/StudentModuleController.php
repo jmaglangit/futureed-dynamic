@@ -3,7 +3,6 @@
 use Carbon\Carbon;
 use FutureEd\Http\Requests;
 use FutureEd\Http\Requests\Api\StudentModuleRequest;
-use FutureEd\Http\Requests\Api\StudentModuleRequest;
 use FutureEd\Models\Repository\Module\ModuleRepositoryInterface;
 use FutureEd\Models\Repository\StudentModule\StudentModuleRepositoryInterface;
 use Illuminate\Support\Facades\Input;
