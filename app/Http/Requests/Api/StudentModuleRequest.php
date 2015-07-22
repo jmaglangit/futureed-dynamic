@@ -26,7 +26,8 @@ class StudentModuleRequest extends ApiRequest {
 			case 'PUT':
 
 				return [
-					'last_viewed_content_id' => 'required|integer'
+					'last_viewed_content_id' => 'integer',
+					'last_answered_question_id' => 'integer'
 				];
 		}
 	}
@@ -35,8 +36,8 @@ class StudentModuleRequest extends ApiRequest {
 	{
 
 		return [
-			'last_viewed_content_id.required' => 'Content is required.',
 			'last_viewed_content_id.integer' => 'Content is invalid.',
+			'last_answered_question_id.integer' => 'Question is invalid.',
 
 		];
 	}
