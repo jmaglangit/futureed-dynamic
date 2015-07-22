@@ -33,6 +33,7 @@ Routes::group(['prefix' => 'api/v1'], function()
     include('Routes/Api/HelpRequest.php');
     include('Routes/Api/HelpRequestAnswer.php');
     include('Routes/Api/HelpRequestAnswerRating.php');
+    include('Routes/Api/Image.php');
     include('Routes/Api/Invoice.php');
     include('Routes/Api/LearningStyle.php');
     include('Routes/Api/MediaType.php');
@@ -45,6 +46,7 @@ Routes::group(['prefix' => 'api/v1'], function()
     include('Routes/Api/QuestionAnswer.php');
     include('Routes/Api/School.php');
     include('Routes/Api/Student.php');
+    include('Routes/Api/StudentBadge.php');
     include('Routes/Api/StudentModule.php');
     include('Routes/Api/StudentModuleAnswer.php');
     include('Routes/Api/Subject.php');
@@ -55,5 +57,4 @@ Routes::group(['prefix' => 'api/v1'], function()
     include('Routes/Api/TipRating.php');
     include('Routes/Api/User.php');
     include('Routes/Api/VolumeDiscount.php');
-	include('Routes/Api/Image.php');
 });
