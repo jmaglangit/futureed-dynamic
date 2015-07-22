@@ -98,7 +98,7 @@ class AdminQuestionAnswerController extends ApiController {
 			//check if directory don't exist, it will create new directory
 			if (!$this->file->exists(config('futureed.answer_image_path_final'))){
 
-				$this->file->makeDirectory(config('futureed.answer_image_path_final'));
+				$this->file->makeDirectory(config('futureed.answer_image_path_final'),0775);
 			}
 
 
