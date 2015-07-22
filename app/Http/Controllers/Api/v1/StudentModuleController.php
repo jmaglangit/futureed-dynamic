@@ -14,7 +14,8 @@ class StudentModuleController extends ApiController {
 
 
 	public function __construct(ModuleRepositoryInterface $moduleRepositoryInterface,
-								StudentModuleRepositoryInterface $student_module){
+								StudentModuleRepositoryInterface $student_module)
+	{
 		$this->module = $moduleRepositoryInterface;
 		$this->student_module = $student_module;
 	}
@@ -75,7 +76,8 @@ class StudentModuleController extends ApiController {
 	 * @param StudentModuleRequest $request
 	 * @return json response
 	 */
-	public function store(StudentModuleRequest $request){
+	public function store(StudentModuleRequest $request)
+	{
 		$data = $request->all();
 		$data['date_start'] = Carbon::now();
 		$data['date_end'] = Carbon::now();
