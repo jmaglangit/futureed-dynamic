@@ -224,5 +224,10 @@ class AppServiceProvider extends ServiceProvider {
 			'FutureEd\Models\Repository\MediaType\MediaTypeRepository'
 		);
 
+		$this->app->bind(
+			'FutureEd\Models\Repository\StudentModule\StudentModuleRepositoryInterface',
+			'FutureEd\Models\Repository\StudentModule\StudentModuleRepository'
+		);
+
 	}
 }
