@@ -264,5 +264,9 @@ class AppServiceProvider extends ServiceProvider {
 			'FutureEd\Models\Repository\Badge\BadgeRepository'
 		);
 
+		$this->app->bind(
+			'FutureEd\Models\Repository\AvatarWiki\AvatarWikiRepositoryInterface',
+			'FutureEd\Models\Repository\AvatarWiki\AvatarWikiRepository'
+		);
 	}
 }

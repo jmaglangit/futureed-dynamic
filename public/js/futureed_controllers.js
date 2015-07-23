@@ -909,4 +909,20 @@ function FutureedController($scope, $window, apiService, futureed) {
 		});
 	}
 
+	$scope.getStudentBadges = function() {
+		var id = $scope.user.id;
+
+		apiService.getStudentBadges(id).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					$scope.errorHandler(response.errors);
+				} else if(response.data) {
+					$scope.badges = response.data;
+				}
+			}
+		}).error(function(response) {
+			$scope.internalError()
+		});
+	}
+
 };
