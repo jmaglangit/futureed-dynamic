@@ -15,7 +15,7 @@ function StudentModuleService($http){
 		})
 	}
 
-	moduleService.currentList = function(data) {
+	moduleService.list = function(data) {
 		return $http({
 			method 	: Constants.METHOD_GET
 			, url 	: moduleServiceUrl + 'help-request?module_id=' + data.module_id
@@ -27,7 +27,7 @@ function StudentModuleService($http){
 		});
 	}
 
-	moduleService.getCurrentDetails = function(id) {
+	moduleService.getHelpDetails = function(id) {
 		return $http({
 			method 	: Constants.METHOD_GET
 			, url 	: moduleServiceUrl + 'help-request/' + id
@@ -47,6 +47,14 @@ function StudentModuleService($http){
 			method 	: Constants.METHOD_POST
 			, data 	: data
 			, url 	: moduleServiceUrl + 'help-request-answer'
+		})
+	}
+
+	moduleService.updateHelp = function(id, status) {
+		return $http({
+			method 	: Constants.METHOD_PATCH
+			, data 	: {question_status: status}
+			, url 	: moduleServiceUrl + 'help-request/update-question-status/' + id
 		})
 	}
 
