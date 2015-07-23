@@ -26,11 +26,20 @@ class HelpRequestAnswerStatusRequest extends ApiRequest {
 
 				return [
 
-					'request_answer_status' => 'required|in:Pending,Accepted,Rejected',
+					'request_answer_status' => 'required|in:Accepted,Rejected',
+					'rated_by' => 'required|in:Teacher,Admin',
+					'rating' => 'required_if:request_answer_status,Accepted|integer',
 				];
 
 				break;
 		}
+	}
+
+	public function messages(){
+		return[
+			'rating.required_if' => 'The rating is required.',
+			'rating.integer' => 'The rating must be a number.'
+		];
 	}
 
 }
