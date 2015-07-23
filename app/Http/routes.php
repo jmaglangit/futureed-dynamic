@@ -49,6 +49,7 @@ Routes::group(['prefix' => 'api/v1'], function()
     include('Routes/Api/StudentBadge.php');
     include('Routes/Api/StudentModule.php');
     include('Routes/Api/StudentModuleAnswer.php');
+    include('Routes/Api/StudentPoint.php');
     include('Routes/Api/Subject.php');
     include('Routes/Api/SubjectArea.php');
     include('Routes/Api/Subscription.php');
