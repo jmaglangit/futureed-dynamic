@@ -52,4 +52,38 @@ class StudentBadgeRepository implements StudentBadgeRepositoryInterface{
 
 	}
 
+	/**
+	 * Update a record.
+	 * @param $id
+	 * @param $data
+	 * @return bool|int|string
+	 */
+
+	public function updateStudentBadge($id,$data){
+
+		try{
+
+			return StudentBadge::find($id)
+				->update($data);
+
+		}catch (Exception $e){
+
+			return $e->getMessage();
+		}
+	}
+
+	/**
+	 * Get a record on StudentBadge.
+	 * @param $id
+	 * @return mixed
+	 */
+	public function viewStudentBadge($id){
+
+		$student_badge = new StudentBadge();
+		$student_badge = $student_badge->with('badges');
+		$student_badge = $student_badge->find($id);
+		return $student_badge;
+
+	}
+
 }

@@ -13,6 +13,13 @@ class Badge extends Model {
 
 	protected $hidden = ['created_by','updated_by','created_at','updated_at','deleted_at'];
 
+	//-------------scopes
+	public function scopeName($query, $name) {
+
+		return $query->where('name', 'like', '%'.$name.'%');
+
+	}
+
 
 
 }
