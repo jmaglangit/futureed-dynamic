@@ -10,6 +10,7 @@
     padding: 3px 0px;
     margin: 10px;
     font-size: 20px;
+    text-transform: capitalize;
 }
 
 .nav-dropdown-menu {

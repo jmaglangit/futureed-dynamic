@@ -13,10 +13,7 @@
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav ul-left">
-					<li>
-						<a href="" ng-click="checkClass()">Join Class</a>
-					</li>
-					
+					<li class="nav-label cursor-pointer" ng-click="checkClass()">Join Class</li>
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
