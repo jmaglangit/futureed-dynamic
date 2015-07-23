@@ -249,8 +249,8 @@ function StudentClassController($scope, $filter, StudentClassService, SearchServ
 		event.preventDefault();
 
 		url += "/" + slug_name;
-	    $("#search_form").attr('action', url);
-	    $("#search_form").attr('method', Constants.METHOD_POST);
-	    $("#search_form").trigger('submit');
+		$("#search_form").attr('action', url);
+		$("#search_form").attr('method', Constants.METHOD_POST);
+		$("#search_form").trigger('submit');
 	}
 }
