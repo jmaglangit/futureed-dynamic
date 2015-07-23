@@ -39,6 +39,7 @@ class DatabaseSeeder extends Seeder {
 		$this->call('ModuleGroupTableSeeder');
 		$this->call('QuestionAnswerTableSeeder');
 		$this->call('QuestionTableSeeder');
+		$this->call('BadgesTableSeeder');
     }
 
 }
