@@ -125,4 +125,18 @@ class QuestionAnswerRepository implements QuestionAnswerRepositoryInterface{
 			return $e->getMessage();
 		}
 	}
+
+    /**
+     * Get correct answer from question.
+     * @param $question_id
+     * @param $answer_id
+     * @return object
+     */
+    public function getCorrectAnswer($question_id,$answer_id){
+        try{
+            return QuestionAnswer::questionId($question_id)->isCorrectAnswer()->find($answer_id);
+        }catch (\Exception $e){
+            return $e->getMessage();
+        }
+    }
 }

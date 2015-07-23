@@ -1,21 +1,33 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
 use FutureEd\Http\Requests;
-use FutureEd\Http\Controllers\Controller;
 use FutureEd\Models\Repository\QuestionAnswer\QuestionAnswerRepositoryInterface;
 use FutureEd\Http\Requests\Api\QuestionAnswerRequest;
 use Carbon\Carbon;
+use FutureEd\Services\FileServices;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Input;
-
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 
 class QuestionAnswerController extends ApiController {
 
 	protected $question_answer;
 
-	public function __construct(QuestionAnswerRepositoryInterface $question_answer){
+	protected $file_services;
+
+	protected $file_system;
+
+	public function __construct(
+		QuestionAnswerRepositoryInterface $question_answer,
+		FileServices $fileServices,
+		Filesystem $filesystem
+	){
 
 		$this->question_answer = $question_answer;
+
+		$this->file_services = $fileServices;
+
+		$this->file_system = $filesystem;
 
 	}
 
@@ -62,6 +74,40 @@ class QuestionAnswerController extends ApiController {
 
 		return $this->respondWithData($return);
 
+
+	}
+
+    /**
+     *
+     */
+    public function index(){
+        $criteria = [];
+
+        if(Input::get('question_id')){
+            $criteria['question_id'] = Input::get('question_id');
+        }
+
+        return $this->respondWithData($this->question_answer->getQuestionAnswers($criteria));
+    }
+
+	/**
+	 * Delete Question Answer Image.
+	 */
+	public function deleteQuestionAnswerImage(){
+
+		//get file to be deleted
+		$delete_file = Input::get('delete_file');
+
+
+		$delete_file = public_path() . $delete_file;
+
+		$return = $this->file_services->deleteDirectory($delete_file);
+
+		if($return) {
+			return $this->respondWithData($return);
+		}
+
+		return $this->respondErrorMessage(2053);
 
 	}
 

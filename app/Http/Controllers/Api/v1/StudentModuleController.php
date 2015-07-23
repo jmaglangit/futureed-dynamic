@@ -34,6 +34,12 @@ class StudentModuleController extends ApiController {
 		$limit = 0 ;
 		$offset = 0;
 
+		//for module name
+		if(Input::get('name')){
+
+			$criteria['name'] = Input::get('name');
+		}
+
 		//for subject
 		if(Input::get('subject_id')){
 

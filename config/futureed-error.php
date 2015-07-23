@@ -65,6 +65,8 @@ return [
 		2050 => 'Student has an active subscription.',
 		2051 => 'Class has already ended.',
 		2052 => 'No Image',
+		2053 => 'File Location is invalid.',
+		2054 => 'File deleted.',
 
 
 		2100 => 'Reset code is invalid.',
@@ -111,6 +113,8 @@ return [
 		2141 => 'Unable to Delete. Module has questions.',
 		2142 => 'The image must be a file of type: jpeg, jpg, png.',
 		2143 => 'The image size had exceeded 2MB.',
+		2144 => 'Module does not exist',
+		2145 => 'Student needs to watch the videos again.',
 
 		// Client Error messages
 		2200 => 'Email already exists.',
