@@ -4,18 +4,16 @@ use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use FutureEd\Models\Repository\Badge\BadgeRepositoryInterface;
 use Illuminate\Support\Facades\Input;
-use FutureEd\Models\Repository\StudentBadge\StudentBadgeRepositoryInterface;
-use FutureEd\Http\Requests\Api\StudentBadgeRequest;
 
-class StudentBadgeController extends ApiController {
+class BadgeController extends ApiController {
 
-	protected $student_badge;
+	protected $badge;
 
-	public function __construct(StudentBadgeRepositoryInterface $student_badge){
+	public function __construct(BadgeRepositoryInterface $badge){
 
-		$this->student_badge = $student_badge;
-
+		$this->badge = $badge;
 	}
 	/**
 	 * Display a listing of the resource.
@@ -24,22 +22,21 @@ class StudentBadgeController extends ApiController {
 	 */
 	public function index()
 	{
-
 		$criteria = [];
 		$limit = 0 ;
 		$offset = 0;
 
-		//for student_id
-		if(Input::get('student_id')){
+		//for name
+		if(Input::get('name')){
 
-			$criteria['student_id'] = Input::get('student_id');
+			$criteria['name'] = Input::get('name');
 		}
 
 		if(Input::get('offset')) {
 			$offset = intval(Input::get('offset'));
 		}
 
-		return $this->respondWithData($this->student_badge->getStudentBadges($criteria , $limit, $offset ));
+		return $this->respondWithData($this->badge->getBadges($criteria , $limit, $offset ));
 
 	}
 
@@ -91,15 +88,9 @@ class StudentBadgeController extends ApiController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id, StudentBadgeRequest $request)
+	public function update($id)
 	{
-		$data = $request->only('badge_id');
-
-		$this->student_badge->updateStudentBadge($id,$data);
-
-		return $this->respondWithData($this->student_badge->viewStudentBadge($id));
-
-
+		//
 	}
 
 	/**

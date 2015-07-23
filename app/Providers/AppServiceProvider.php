@@ -259,5 +259,10 @@ class AppServiceProvider extends ServiceProvider {
 			'FutureEd\Models\Repository\StudentPoint\StudentPointRepository'
 		);
 
+		$this->app->bind(
+			'FutureEd\Models\Repository\Badge\BadgeRepositoryInterface',
+			'FutureEd\Models\Repository\Badge\BadgeRepository'
+		);
+
 	}
 }
