@@ -33,7 +33,9 @@ class DatabaseSeeder extends Seeder {
 		$this->call('AvatarPosesTableSeeder');
 		$this->call('AvatarWikisTableSeeder');
 		$this->call('MediaTypeTableSeeder');
+		$this->call('LearningStyleTableSeeder');
 		$this->call('BadgesTableSeeder');
+
     }
 
 }
