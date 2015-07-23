@@ -58,5 +58,13 @@ function StudentModuleService($http){
 		})
 	}
 
+	service.addTip = function(data) {
+		return $http({
+			method 	: Constants.METHOD_POST
+			, data 	: data
+			, url 	: serviceUrl + 'tip/question-content'
+		})
+	}
+
 	return service;
 }
