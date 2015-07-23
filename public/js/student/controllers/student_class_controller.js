@@ -1,9 +1,9 @@
 angular.module('futureed.controllers')
 	.controller('StudentClassController', StudentClassController);
 
-StudentClassController.$inject = ['$scope', '$filter', 'StudentClassService', 'SearchService', 'TableService'];
+StudentClassController.$inject = ['$scope', '$filter', 'apiService', 'StudentClassService', 'SearchService', 'TableService'];
 
-function StudentClassController($scope, $filter, StudentClassService, SearchService, TableService) {
+function StudentClassController($scope, $filter, apiService, StudentClassService, SearchService, TableService) {
 	var self = this;
 
 	self.tips = {};
