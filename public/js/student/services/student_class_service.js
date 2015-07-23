@@ -46,8 +46,16 @@ function StudentClassService($http){
 			, url 	: serviceUrl + 'module/student?subject_id=' + search.subject_id
 				+ '&grade_id=' + search.grade_id
 				+ '&module_status=' + search.module_status
-				+ '&limit=' + table.limit
+				+ '&module=' + search.module
+				+ '&limit=' + table.size
 				+ '&offset=' + table.offset
+		});
+	}
+
+	service.getSubjects = function() {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url 	: serviceUrl + 'subject'
 		});
 	}
 

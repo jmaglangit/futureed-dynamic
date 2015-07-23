@@ -4,7 +4,7 @@
 			{!! Form::open(
 				array('id' => 'search_form'
 					, 'class' => 'form-horizontal'
-					, 'ng-submit' => 'tips.searchFnc($event)'
+					, 'ng-submit' => 'class.searchFnc($event)'
 				)
 			)!!}
 			<div class="form-group">
@@ -12,14 +12,14 @@
 					{!! Form::text('search_module', ''
 						,array(
 							'placeholder' => 'Module'
-							, 'ng-model' => 'tips.search.module'
+							, 'ng-model' => 'class.search.module'
 							, 'class' => 'form-control btn-fit'
 							, 'data-clear-btn' => 'true'
 						)
 					)!!}
 				</div>
 				<div class="col-xs-5">
-					{!! Form::select('search_status'
+					{!! Form::select('search_module_status'
 						, array(
 							'' => 'All'
 							, 'Available' => 'Available'
@@ -29,7 +29,7 @@
 						, ''
 						, array(
 							'class' => 'form-control'
-							, 'ng-model' => 'tips.search.status'
+							, 'ng-model' => 'class.search.module_status'
 						)
 					) !!}
 				</div>
@@ -37,59 +37,35 @@
 					{!! Form::button('Search'
 						, array(
 							'class' => 'btn btn-blue'
+							, 'ng-click' => 'class.searchFnc($event)'
 						)
 					) !!}
 				</div>
 			</div>
 			<div class="form-group">
-				<div class="col-xs-5">
-					{!! Form::select('search_status'
-						, array(
-							'' => '-- Grade --'
-							, '1' => 'Grade 1'
-							, '2' => 'Grade 2'
-						)
-						, ''
-						, array(
-							'class' => 'form-control'
-							, 'ng-model' => 'tips.search.grade_id'
-						)
-					) !!}
+				<div class="col-xs-5" ng-init="getGradeLevel(user.country_id)">
+					<select class="form-control" ng-model="class.search.grade_id">
+						<option value="">-- Select Grade --</option>
+						<option ng-repeat="grade in grades" ng-value="grade.id">{! grade.name !}</option>
+					</select>
 				</div>
-				<div class="col-xs-5">
-					{!! Form::select('search_status'
-						, array(
-							'' => '-- Subject --'
-							, 'English' => 'English'
-							, 'Math' => 'Math'
-						)
-						, ''
-						, array(
-							'class' => 'form-control'
-							, 'ng-model' => 'tips.search.subject'
-						)
-					) !!}
+				<div class="col-xs-5" ng-init="class.getSubjects()">
+					<select class="form-control" ng-model="class.search.subject_id">
+						<option value="">-- Select Subject --</option>
+						<option ng-repeat="subject in class.subjects" ng-value="subject.id">{! subject.name !}</option>
+					</select>
 				</div>
 				<div class="col-xs-2">
 					{!! Form::button('Clear'
 						, array(
 							'class' => 'btn btn-gold'
+							, 'ng-click' => 'class.clearFnc()'
 						)
 					) !!}
 				</div>
 			</div>
 			{!! Form::close() !!}
 		</div>
-	</div>
-
-	<div class="col-xs-6 col-xs-offset-3">
-
-		{!! Form::open(
-				array('id' => 'search_form'
-					, 'class' => 'form-horizontal'
-					, 'ng-submit' => 'tips.searchFnc($event)'
-				)
-			)!!}
 	</div>
 
 	<div class="col-xs-12 table-container">
@@ -110,9 +86,9 @@
 					)
 					, '10'
 					, array(
-						'ng-model' => 'tips.table.size'
-						, 'ng-change' => 'tips.paginateBySize()'
-						, 'ng-if' => "tips.records.length"
+						'ng-model' => 'class.table.size'
+						, 'ng-change' => 'class.paginateBySize()'
+						, 'ng-if' => "class.records.length"
 						, 'class' => 'form-control paginate-size pull-right'
 					)
 				) !!}
@@ -120,48 +96,37 @@
 
 			<div class="clearfix"></div>
 
-			<div class="no-record-label">
-				You do not have a module yet...
+			<div class="no-record-label" ng-if="!class.records.length && !class.table.loading">
+				No modules found.
 			</div>
 
-			<div class="module-list">
-				<div class="module-item">
-					<a href="{!! route('student.class.modulename',['name' => 'sample-page']) !!}">
-						<img class="module-icon" src="/images/cake.png">
-					</a>
+			<div class="no-record-label" ng-if="class.table.loading">
+				Loading...
+			</div>
 
-					<p class="module-name">Ball</p>
-					<button type="button" class="btn btn-blue module-btn"><i class="fa fa-play-circle"></i> Resume lesson</button>
-				</div>
-				<div class="module-item">
+			<div class="module-list" ng-if="class.records.length">
+				<div class="module-item" ng-repeat="record in class.records">
 					<a href="{!! route('student.class.modulename',['name' => 'sample-page']) !!}">
 						<img class="module-icon" src="/images/class-student/icon-addition.png">
 					</a>
 
-					<p class="module-name">Ball Ball Ball Ball Ball Ball</p>
-					<button type="button" class="btn btn-blue module-btn"><i class="fa fa-pencil"></i> Begin Lesson</button>
-				</div>
-				<div class="module-item">
-					<a href="{!! route('student.class.modulename',['name' => 'sample-page']) !!}">
-						<img class="module-icon" src="/images/cake.png">
-					</a>
-
-					<p class="module-name">BallBallBallBallBallBallBallBallBallBallBallBallBallBall</p>
-					<button type="button" class="btn btn-blue module-btn"><i class="fa fa-play-circle"></i> Resume Lesson</button>
+					<p class="module-name">{! record.name !}</p>
+					<button ng-if="record.student_module.length" type="button" class="btn btn-blue module-btn"><i class="fa fa-play-circle"></i> Resume lesson</button>
+					<button ng-if="!record.student_module.length" type="button" class="btn btn-blue module-btn"><i class="fa fa-pencil"></i> Begin lesson</button>
 				</div>
 			</div>
 			
-			<div class="pull-right" ng-if="tips.records.length">
+			<div class="pull-right" ng-if="class.records.length">
 				<pagination 
-					total-items="tips.table.total_items" 
-					ng-model="tips.table.page"
+					total-items="class.table.total_items" 
+					ng-model="class.table.page"
 					max-size="3"
-					items-per-page="tips.table.size" 
+					items-per-page="class.table.size" 
 					previous-text = "&lt;"
 					next-text="&gt;"
 					class="pagination" 
 					boundary-links="true"
-					ng-change="tips.paginateByPage()">
+					ng-change="class.paginateByPage()">
 				</pagination>
 			</div>
 		</div>
