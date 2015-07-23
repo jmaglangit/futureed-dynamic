@@ -47,7 +47,7 @@
             , array(
               'id' => 'validate_code_btn'
               , 'class' => 'btn btn-gold btn-medium'
-              , 'ng-click' => 'class.submitHelp()'
+              , 'ng-click' => 'mod.setCurrentActive(); mod.toggleBtnHelp()'
             )
         ) !!}
 	</div>
