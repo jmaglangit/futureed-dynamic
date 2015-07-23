@@ -1,14 +1,13 @@
 angular.module('futureed.controllers')
 	.controller('StudentClassController', StudentClassController);
 
-StudentClassController.$inject = ['$scope', '$filter', 'apiService', 'StudentClassService', 'SearchService', 'TableService'];
+StudentClassController.$inject = ['$scope', '$filter', '$window', 'StudentClassService', 'SearchService', 'TableService'];
 
-function StudentClassController($scope, $filter, apiService, StudentClassService, SearchService, TableService) {
+function StudentClassController($scope, $filter, $window, StudentClassService, SearchService, TableService) {
 	var self = this;
 
 	self.tips = {};
 	self.help = {};
-	self.student_id = $scope.user.id;
 
 	SearchService(self);
 	self.searchDefaults();
@@ -53,7 +52,7 @@ function StudentClassController($scope, $filter, apiService, StudentClassService
 	self.submitTips = function() {
 		self.tips.errors = Constants.FALSE;
 		self.tips.success = Constants.FALSE;
-		self.tips.student_id = self.student_id;
+		self.tips.student_id = $scope.user.id;
 
 		$scope.div_block("tips_form");
 		StudentClassService.submitTips(self.tips).success(function(response){
@@ -88,7 +87,7 @@ function StudentClassController($scope, $filter, apiService, StudentClassService
 	self.submitHelp = function() {
 		self.help.errors = Constants.FALSE;
 		self.help.success = Constants.FALSE;
-		self.help.student_id = self.student_id;
+		self.help.student_id = $scope.user.id;
 		self.help.class_id = $scope.user.class_id.class_id;
 
 		$scope.div_block("help_request_form");
@@ -244,13 +243,8 @@ function StudentClassController($scope, $filter, apiService, StudentClassService
 		});
 	}
 
-	self.redirect = function(event, url, slug_name) {
-		event = getEvent(event);
-		event.preventDefault();
-
+	self.redirect = function(url, slug_name) {
 		url += "/" + slug_name;
-		$("#search_form").attr('action', url);
-		$("#search_form").attr('method', Constants.METHOD_POST);
-		$("#search_form").trigger('submit');
+		$window.location.href=url;
 	}
 }

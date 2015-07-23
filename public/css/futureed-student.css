@@ -646,6 +646,7 @@ hr {
 	width: 120px;
 	transition: ease-out .1s;
 	background-color: #ffffff;
+	cursor: pointer;
 }
 
 .module-icon:hover {

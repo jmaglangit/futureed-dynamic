@@ -106,12 +106,14 @@
 
 			<div class="module-list" ng-if="class.records.length">
 				<div class="module-item" ng-repeat="record in class.records">
-					<a href="" ng-click="class.redirect($event, '{!! route('student.class.module.index') !!}', record.slug_name)" id="module_click">
-						<img class="module-icon" src="/images/class-student/icon-addition.png">
-					</a>
+					<img class="module-icon" src="/images/class-student/icon-addition.png"
+						ng-click="class.redirect('{!! route('student.class.module.index') !!}', record.slug_name)">
+					
 					<p class="module-name">{! record.name !}</p>
-					<button ng-if="record.student_module.length" type="button" class="btn btn-blue module-btn"><i class="fa fa-play-circle"></i> Resume lesson</button>
-					<button ng-if="!record.student_module.length" type="button" class="btn btn-blue module-btn"><i class="fa fa-pencil"></i> Begin lesson</button>
+					<button ng-if="record.student_module.length" ng-click="class.redirect('{!! route('student.class.module.index') !!}', record.slug_name)" 
+						type="button" class="btn btn-blue module-btn"><i class="fa fa-play-circle"></i> Resume lesson</button>
+					<button ng-if="!record.student_module.length" ng-click="class.redirect('{!! route('student.class.module.index') !!}', record.slug_name)"
+						type="button" class="btn btn-blue module-btn"><i class="fa fa-pencil"></i> Begin lesson</button>
 				</div>
 			</div>
 			
