@@ -106,7 +106,7 @@
 
 			<div class="module-list" ng-if="class.records.length">
 				<div class="module-item" ng-repeat="record in class.records">
-					<a href="{!! route('student.class.modulename',['name' => 'sample-page']) !!}">
+					<a href="" ng-click="class.redirect($event, '{!! route('student.class.module.index') !!}', record.slug_name)" id="module_click">
 						<img class="module-icon" src="/images/class-student/icon-addition.png">
 					</a>
 

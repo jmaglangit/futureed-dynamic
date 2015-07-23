@@ -215,6 +215,10 @@ function StudentClassController($scope, $filter, StudentClassService, SearchServ
 				} else if(response.data) {
 					self.records = response.data.records;
 					self.updatePageCount(response.data);
+
+					angular.forEach(self.records, function(value, key) {
+						value.slug_name = formatSlug(value.name);
+					});
 				}
 			}
 
@@ -238,5 +242,15 @@ function StudentClassController($scope, $filter, StudentClassService, SearchServ
 		}).error(function(response) {
 			self.errors = $scope.internalError();
 		});
+	}
+
+	self.redirect = function(event, url, slug_name) {
+		event = getEvent(event);
+		event.preventDefault();
+
+		url += "/" + slug_name;
+	    $("#search_form").attr('action', url);
+	    $("#search_form").attr('method', Constants.METHOD_POST);
+	    $("#search_form").trigger('submit');
 	}
 }
