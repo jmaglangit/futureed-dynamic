@@ -110,7 +110,7 @@ function StudentModuleController($scope, apiService, StudentModuleService) {
 		self.request = {};
 		self.request.student_id = $scope.user.id;
 		self.request.module_id = 1;
-		self.request.link_type = 'Question';
+		self.request.link_type = 'Content';
 		self.request.help_request_type = studentModule.OTHERS;
 		self.request.question_status = 'Open'
 		self.request.link_id = 1;
@@ -232,9 +232,9 @@ function StudentModuleController($scope, apiService, StudentModuleService) {
 		self.request = {};
 		self.request.student_id = $scope.user.id;
 		self.request.module_id = 1;
-		self.request.link_type = 'Question';
+		self.request.link_type = 'Content';
 		self.request.help_request_type = studentModule.OWN;
-		self.request.question_status = 'Open'
+		self.request.question_status = 'Open,Answered'
 		self.request.link_id = 1;
 
 		$scope.ui_block();
@@ -277,6 +277,56 @@ function StudentModuleController($scope, apiService, StudentModuleService) {
 						self.hide = Constants.TRUE;
 						self.getHelpDetails(id);
 					}
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		})
+
+	}
+
+	self.setTipActive = function(active, id) {
+		self.errors = Constants.FALSE;
+
+		self.active_tip_add = Constants.FALSE;
+		self.active_tip_list = Constants.FALSE;
+
+		switch(active) {
+			case Constants.ACTIVE_ADD :
+				self.active_tip_add = Constants.TRUE;
+				self.toggle_bottom = !self.toggle_bottom;
+				break;
+			default:
+				self.active_tip_list = Constants.TRUE;
+				break;
+		}
+	}
+
+	self.addTip = function() {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		/*Setting temporary params*/
+		self.add.module_id = parseInt(1);
+		self.add.subject_id = parseInt(1);
+		self.add.subject_area_id = parseInt(1);
+		self.add.link_type = "Content"
+		self.add.link_id = parseInt(1);
+		self.add.class_id = $scope.user.class.id;
+		self.add.student_id = $scope.user.id;
+
+		$scope.ui_block();
+		StudentModuleService.addTip(self.add).success(function(response){
+			if(angular.equals(response.status,Constants.STATUS_OK)){
+				if(response.errors){
+					self.success = Constants.FALSE;
+					self.errors = $scope.errorHandler(response.errors);
+				}else if(response.data){
+					self.success = Constants.TRUE;
+					self.errors = Constants.FALSE;
+					self.add = {};
 				}
 			}
 			$scope.ui_unblock();
