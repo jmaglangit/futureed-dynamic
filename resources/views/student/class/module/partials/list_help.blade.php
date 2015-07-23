@@ -7,33 +7,36 @@
     <div class="alert alert-success" ng-if="mod.success">
     	<p>{! mod.success !}</p>
     </div>
-    <div class="col-xs-12" ng-init="mod.setCurrentActive()">
-    	<ul class="nav nav-pills col-xs-8">
-    		<li class="active">
-    			<a class="pill-grey" href="#tab1" data-toggle="tab">From your Classmates [2]</a>
+    <div class="col-xs-12" ng-init="mod.setTabActive(futureed.CURRENT)">
+    	<ul class="nav nav-pills col-xs-12">
+    		<li>
+    			<a class="pill-grey" href="#tab1" data-toggle="tab" ng-click="mod.setTabActive(futureed.CLASSMATE)">From your Classmates [2]</a>
     		</li>
     		<li>
-    			<a class="pill-grey" href="#tab2" data-toggle="tab">From you [2]</a>
+    			<a class="pill-grey" href="#tab2" data-toggle="tab" ng-click="mod.setTabActive(futureed.OWN)">From you</a>
     		</li>
-    	</ul>
-    	<ul class="nav nav-pills col-xs-4 pull-right nav-gold">
-    		<li class="active">
-    			<a class="pill-gold" href="#tab3" data-toggle="tab" ng-click="mod.setCurrentActive()">Current</a>
+    		<li class="pull-right">
+    			<a class="pill-gold" href="#tab4" data-toggle="tab" ng-click="mod.setTabActive(futureed.ALL)">All</a>
     		</li>
-    		<li>
-    			<a class="pill-gold" href="#tab4" data-toggle="tab">All</a>
+    		<li class="active nav-gold pull-right">
+    			<a class="pill-gold" href="#tab3" data-toggle="tab" ng-click="mod.setTabActive(futureed.CURRENT)">Current</a>
     		</li>
     	</ul>
     	<div class="tab-content">
     		<div class="tab-pane" id="tab1">
 		    	1
 		    </div>
-		    <div class="tab-pane" id="tab2">
-		    	2
+		    <div class="tab-pane" id="tab2" ng-if="mod.current_view == futureed.OWN">
+		    	<div ng-init="mod.setOwnActive()">
+		    		<div template-directive template-url="{!! route('student.class.module.partials.list_your_help') !!}"></div>
+		    		<div template-directive template-url="{!! route('student.class.module.partials.view_your_help') !!}"></div>
+		    	</div>
 		    </div>
-		    <div class="tab-pane active" id="tab3">
-		    	<div template-directive template-url="{!! route('student.class.module.partials.current_help') !!}"></div>
-		    	<div template-directive template-url="{!! route('student.class.module.partials.current_view_help') !!}"></div>
+		    <div class="tab-pane active" id="tab3" ng-if="mod.current_view == futureed.CURRENT">
+		    	<div ng-init="mod.setCurrentActive()">
+		    		<div template-directive template-url="{!! route('student.class.module.partials.current_help') !!}"></div>
+		    		<div template-directive template-url="{!! route('student.class.module.partials.current_view_help') !!}"></div>
+		    	</div>
 		    </div>
 		    <div class="tab-pane" id="tab4">
 		    	4

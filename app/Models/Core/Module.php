@@ -114,4 +114,20 @@ class Module extends Model
 			$query->where('module_status', '=', $status);
 		});
 	}
+
+	public function scopeStudentId($query, $student_id){
+
+		return $query->whereHas('studentModule', function ($query) use ($student_id) {
+			$query->where('student_id', '=', $student_id);
+		});
+
+	}
+
+	public function scopeClassId($query, $class_id){
+
+		return $query->whereHas('studentModule', function ($query) use ($class_id) {
+			$query->where('class_id', '=', $class_id);
+		});
+
+	}
 }

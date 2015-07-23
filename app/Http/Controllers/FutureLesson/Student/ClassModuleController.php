@@ -48,4 +48,25 @@ class ClassModuleController extends Controller {
 	public function current_view_help() {
 		return view('student.class.module.partials.current_view_help');
 	}
+
+	/**
+	*Display Your Help
+	*/
+	public function list_your_help() {
+		return view('student.class.module.partials.list_your_help');
+	}
+
+	/**
+	*Display Own Help
+	*/
+	public function view_your_help() {
+		return view('student.class.module.partials.view_your_help');
+	}
+
+	/**
+	*Display Add Tip
+	*/
+	public function add_tip() {
+		return view('student.class.module.partials.add_tip');
+	}
 }

@@ -8,9 +8,6 @@
 			<div class="col-xs-6">
 				<span><i class="fa fa-user"></i> {! current.student.first_name !} {! current.student.last_name !}</span>
 			</div>
-			<div class="col-xs-6">
-				<span><i class="fa fa-user"></i> <img src="/images/class-student/icon-star_yellow.png"> <img src="/images/class-student/icon-star_white.png"> <img src="/images/class-student/icon-star_white.png"></span>
-			</div>
 		</div>
 		<div class="row">
 			<div class="col-xs-6">

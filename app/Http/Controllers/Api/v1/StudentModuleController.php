@@ -31,10 +31,28 @@ class StudentModuleController extends ApiController {
 		$limit = 0 ;
 		$offset = 0;
 
+		//for module name
+		if(Input::get('name')){
+
+			$criteria['name'] = Input::get('name');
+		}
+
 		//for subject
 		if(Input::get('subject_id')){
 
 			$criteria['subject_id'] = Input::get('subject_id');
+		}
+
+		//for student_id
+		if(Input::get('student_id')){
+
+			$criteria['student_id'] = Input::get('student_id');
+		}
+
+		//for class_id
+		if(Input::get('class_id')){
+
+			$criteria['class_id'] = Input::get('class_id');
 		}
 
 		//for grade

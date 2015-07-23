@@ -18,10 +18,10 @@
 				<a href="javascript:;"><img src="/images/class-student/icon-askforhelp.png" ng-click="mod.askHelp()"></a>
 			</div>
 			<div class="margin-top-bot-5 pointer">
-				<img src="/images/class-student/icon-givetip.png" ng-click="mod.giveTip()">
+				<img src="/images/class-student/icon-givetip.png" ng-click="mod.setTipActive(futureed.ACTIVE_ADD)">
 			</div>
 		</div>
-		{{-- this is a sample iframe only (vimeo) --}}
+		
 		<div class="col-xs-8">
 			<div class="video-iframe">
 				<iframe src="https://player.vimeo.com/video/133667971" width="100%" height="500" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
@@ -60,53 +60,7 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-xs-10 col-xs-offset-1 margin-top-15">
-							<div class="col-xs-12">
-								<div class="clearfix"></div>
-								{!! Form::open(['class' => 'form-horizontal margin-top-15']) !!}
-								<div class="form-group">
-									<label class="control-label col-xs-2">Title</label>
-									<div class="col-xs-10">
-										{!! Form::text('title', ''
-											, array(
-											    'class' => 'form-control sidebar-input'
-											    , 'placeholder' => 'Title' 
-											    , 'ng-model' => 'class.help.title'
-											    , 'autocomplete' => 'off')
-										) !!}
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="control-label col-xs-2">Description</label>
-									<div class="col-xs-10">
-										{!! Form::textarea('content', ''
-							                , array(
-							                    'class' => 'form-control sidebar-input'
-							                    , 'placeholder' => 'Description' 
-							                    , 'ng-model' => 'class.help.content'
-							                    , 'autocomplete' => 'off')
-							            ) !!}
-									</div>
-								</div>
-							</div>
-							<div class="col-xs-12 btn-container">
-								{!! Form::button('Submit'
-									, array(
-									  'id' => 'validate_code_btn'
-									  , 'class' => 'btn btn-maroon btn-medium'
-									  , 'ng-click' => 'class.submitHelp()'
-									)
-								) !!}
-								{!! Form::button('Back'
-									, array(
-										'id' => 'validate_code_btn'
-										, 'class' => 'btn btn-gold btn-medium'
-										, 'ng-click' => 'class.submitHelp()'
-										)
-								) !!}
-							</div>
-							{!! Form::close() !!}
-						</div>
+						<div template-directive template-url="{!! route('student.class.module.partials.add_tip') !!}"></div>
 					</div>
 				</div>
 			</div>
