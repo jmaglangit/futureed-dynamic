@@ -58,6 +58,14 @@ var Constants = {
 	, IMAGE			: 3
 
 	/**
+	* Help Tabs
+	*/
+	, CURRENT 		: "current"
+	, OWN 			: "own"
+	, ALL 			: "all"
+	, CLASSMATE 	: "classmate"
+
+	/**
 	* Active Screens
 	*/
 	, ACTIVE_LIST	: "list"

@@ -130,6 +130,16 @@
 							'as' => 'student.class.module.partials.current_view_help'
 							, 'uses' => 'FutureLesson\Student\ClassModuleController@current_view_help'
 						]);
+
+					Routes::get('/list_your_help', [ 
+							'as' => 'student.class.module.partials.list_your_help'
+							, 'uses' => 'FutureLesson\Student\ClassModuleController@list_your_help'
+						]);
+
+					Routes::get('/view_your_help', [ 
+							'as' => 'student.class.module.partials.view_your_help'
+							, 'uses' => 'FutureLesson\Student\ClassModuleController@view_your_help'
+						]);
 				});
 			});
 		});
