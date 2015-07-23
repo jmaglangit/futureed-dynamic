@@ -140,6 +140,11 @@
 							'as' => 'student.class.module.partials.view_your_help'
 							, 'uses' => 'FutureLesson\Student\ClassModuleController@view_your_help'
 						]);
+
+					Routes::get('/add_tip', [ 
+							'as' => 'student.class.module.partials.add_tip'
+							, 'uses' => 'FutureLesson\Student\ClassModuleController@add_tip'
+						]);
 				});
 			});
 		});
