@@ -20,9 +20,19 @@
 				</ul>
 
 				<ul class="nav navbar-nav navbar-right">
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Welcome, {! user.first_name !} <span class="caret"></span></a>
-						<ul class="dropdown-menu" role="menu">
+					<li class="nav-label">Reward Points</li>
+					<li class="nav-points-rewards"><i class="fa fa-star nav-icon-holder"></i> {! user.points !}</li>
+					<li class="nav-points-rewards" ng-init="getStudentBadges()"><i class="fa fa-trophy nav-icon-holder"></i> {! badges.total !}</li>
+
+					<li class="nav-label"></li>
+					<li class="nav-label"></li>
+					<li class="nav-label"></li>
+
+					<li><img class="nav-image-holder" ng-src="{! user.avatar !}" /></li>
+					<li class="nav-label">Welcome, {! user.first_name !}</li>
+					<li class="dropdown nav-dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="fa fa-2x fa-bars"></span></a>
+						<ul class="dropdown-menu nav-dropdown-menu" role="menu">
 							<li><a href="{!! route('student.profile.index') !!}">Profile</a></li>
 							<li><a href="#">Settings</a></li>
 							<li class="divider"></li>

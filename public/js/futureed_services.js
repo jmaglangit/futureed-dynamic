@@ -260,5 +260,12 @@ var services = angular.module('futureed.services', []);
 			});
 		}
 
+		futureedAPI.getStudentBadges = function(id) {
+			return $http({
+				method 	: Constants.METHOD_GET
+				, url	: futureedAPIUrl + 'badge/student?student_id=' + id 
+			});
+		}
+
 		return futureedAPI;
 	});
