@@ -1,12 +1,12 @@
 <div class="col-xs-12 margin-top-15" ng-if="mod.active_tip_list">
 	<div class="alert alert-error" ng-if="mod.errors">
-        <p ng-repeat="error in mod.errors track by $index" > 
-            {! error !}
-        </p>
-    </div>
-    <div class="alert alert-success" ng-if="mod.success">
-    	<p>{! mod.success !}</p>
-    </div>
+		<p ng-repeat="error in mod.errors track by $index" > 
+			{! error !}
+		</p>
+	</div>
+	<div class="alert alert-success" ng-if="mod.success">
+		<p>{! mod.success !}</p>
+	</div>
     <div class="col-xs-12" ng-init="mod.setTabActive(futureed.CURRENT)">
     	<ul class="nav nav-pills col-xs-12">
     		<li class="active">
