@@ -105,7 +105,8 @@ class HelpRequestRepository implements HelpRequestRepositoryInterface{
                     $query = $query->linkId($criteria['link_id']);
                 }
                 if(isset($criteria['question_status'])) {
-                    $query = $query->questionStatus($criteria['question_status']);
+                    $array_question_status = explode(',', $criteria['question_status']);
+                    $query = $query->questionStatus($array_question_status);
                 }
 
             }

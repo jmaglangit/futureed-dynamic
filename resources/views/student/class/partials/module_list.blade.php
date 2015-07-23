@@ -1,71 +1,134 @@
-<div class="col-xs-12">
-	<div class="col-xs-6 col-xs-offset-3">
-		{!! Form::open(
+<div class="row">
+	<div class="col-xs-12">
+		<div class="module-search">
+			{!! Form::open(
 				array('id' => 'search_form'
 					, 'class' => 'form-horizontal'
-					, 'ng-submit' => 'tips.searchFnc($event)'
+					, 'ng-submit' => 'class.searchFnc($event)'
 				)
 			)!!}
-		<div class="form-group">
-			<div class="col-xs-12">
-				{!! Form::text('search_module', ''
-					,array(
-						'placeholder' => 'Search Subject'
-						, 'ng-model' => 'tips.search.title'
-						, 'class' => 'form-control btn-fit'
-					)
-				)!!}
+			<div class="form-group">
+				<div class="col-xs-5">
+					{!! Form::text('search_module', ''
+						,array(
+							'placeholder' => 'Module'
+							, 'ng-model' => 'class.search.module'
+							, 'class' => 'form-control btn-fit'
+							, 'data-clear-btn' => 'true'
+						)
+					)!!}
+				</div>
+				<div class="col-xs-5">
+					{!! Form::select('search_module_status'
+						, array(
+							'' => 'All'
+							, 'Available' => 'Available'
+							, 'Ongoing' => 'Ongoing'
+							, 'Completed' => 'Completed'
+						)
+						, ''
+						, array(
+							'class' => 'form-control'
+							, 'ng-model' => 'class.search.module_status'
+						)
+					) !!}
+				</div>
+				<div class="col-xs-2">
+					{!! Form::button('Search'
+						, array(
+							'class' => 'btn btn-blue'
+							, 'ng-click' => 'class.searchFnc($event)'
+						)
+					) !!}
+				</div>
 			</div>
-		</div>
-		{{-- Only Sample Datas are shown on the select inputs --}}
-		<div class="form-group">
-			<div class="col-xs-4">
-				{!! Form::select('search_status'
-					, array(
-						'' => '-- Subject --'
-						, 'Pending' => 'Pending'
-						, 'Accepted' => 'Accepted'
-					)
-					, ''
-					, array(
-						'class' => 'form-control'
-						, 'ng-model' => 'tips.search.status'
-					)
-				) !!}
+			<div class="form-group">
+				<div class="col-xs-5" ng-init="getGradeLevel(user.country_id)">
+					<select class="form-control" ng-model="class.search.grade_id">
+						<option value="">-- Select Grade --</option>
+						<option ng-repeat="grade in grades" ng-value="grade.id">{! grade.name !}</option>
+					</select>
+				</div>
+				<div class="col-xs-5" ng-init="class.getSubjects()">
+					<select class="form-control" ng-model="class.search.subject_id">
+						<option value="">-- Select Subject --</option>
+						<option ng-repeat="subject in class.subjects" ng-value="subject.id">{! subject.name !}</option>
+					</select>
+				</div>
+				<div class="col-xs-2">
+					{!! Form::button('Clear'
+						, array(
+							'class' => 'btn btn-gold'
+							, 'ng-click' => 'class.clearFnc()'
+						)
+					) !!}
+				</div>
 			</div>
-			<div class="col-xs-4">
-				{!! Form::select('search_status'
-					, array(
-						'' => '-- Grade --'
-						, 'Pending' => 'Pending'
-						, 'Accepted' => 'Accepted'
-					)
-					, ''
-					, array(
-						'class' => 'form-control'
-						, 'ng-model' => 'tips.search.status'
-					)
-				) !!}
-			</div>
-			<div class="col-xs-4">
-				{!! Form::select('search_status'
-					, array(
-						'' => '-- Status All --'
-						, 'Pending' => 'Pending'
-						, 'Accepted' => 'Accepted'
-					)
-					, ''
-					, array(
-						'class' => 'form-control'
-						, 'ng-model' => 'tips.search.status'
-					)
-				) !!}
-			</div>
+			{!! Form::close() !!}
 		</div>
 	</div>
-	<div class="clearfix"></div>
-	{{-- no Data's yet. --}}
-	<div class="container margin-top-30">
-		<a href="{!! route('student.class.modulename',['name' => 'sample-page']) !!}"><img class="module-icon" src="/images/class-student/icon-addition.png"></a>
+
+	<div class="col-xs-12 table-container">
+		<div class="clearfix"></div>
+
+		<div class="title-mid">
+			Class Modules
+		</div>
+
+		<div class="list-container" ng-init="class.listModules()" ng-cloak>
+			<div class="size-container">
+				{!! Form::select('size'
+					, array(
+						  '10' => '10'
+						, '20' => '20'
+						, '50' => '50'
+						, '100' => '100'
+					)
+					, '10'
+					, array(
+						'ng-model' => 'class.table.size'
+						, 'ng-change' => 'class.paginateBySize()'
+						, 'ng-if' => "class.records.length"
+						, 'class' => 'form-control paginate-size pull-right'
+					)
+				) !!}
+			</div>
+
+			<div class="clearfix"></div>
+
+			<div class="no-record-label" ng-if="!class.records.length && !class.table.loading">
+				No modules found.
+			</div>
+
+			<div class="no-record-label" ng-if="class.table.loading">
+				Loading...
+			</div>
+
+			<div class="module-list" ng-if="class.records.length">
+				<div class="module-item" ng-repeat="record in class.records">
+					<a href="{!! route('student.class.modulename',['name' => 'sample-page']) !!}">
+						<img class="module-icon" src="/images/class-student/icon-addition.png">
+					</a>
+
+					<p class="module-name">{! record.name !}</p>
+					<button ng-if="record.student_module.length" type="button" class="btn btn-blue module-btn"><i class="fa fa-play-circle"></i> Resume lesson</button>
+					<button ng-if="!record.student_module.length" type="button" class="btn btn-blue module-btn"><i class="fa fa-pencil"></i> Begin lesson</button>
+				</div>
+			</div>
+			
+			<div class="pull-right" ng-if="class.records.length">
+				<pagination 
+					total-items="class.table.total_items" 
+					ng-model="class.table.page"
+					max-size="3"
+					items-per-page="class.table.size" 
+					previous-text = "&lt;"
+					next-text="&gt;"
+					class="pagination" 
+					boundary-links="true"
+					ng-change="class.paginateByPage()">
+				</pagination>
+			</div>
+		</div>
 	</div>
 </div>

@@ -360,10 +360,6 @@ th, td {
 	overflow: hidden;
 	margin-bottom: 40px;
 }
-.module-icon {
-	border-radius: 50%;
-	width: 120px;
-}
 
 .margin-top-30{
 	margin-top: 30px;
@@ -549,4 +545,66 @@ hr {
 .row > h4 {
 	margin-left: 15px;
 	margin-right: 15px;
+}
+
+.no-record-label {
+	border: 1px solid rgba(255, 255, 255, .5);
+	border-radius: 5px;
+	padding: 20px;
+	background-color: rgba(255, 255, 255, .4);
+	text-align: center;
+}
+
+.module-wrapper {
+
+}
+
+.module-search {
+	padding: 15px 30px 30px 30px;
+	width: 90%;
+	margin: auto;
+}
+
+.module-list {
+	padding: 10px;
+}
+
+.module-item {
+	margin: 25px;
+	display: inline-block;
+	text-align: center;
+	width: 15%;
+}
+
+.module-icon {
+	border-radius: 50%;
+	width: 120px;
+	transition: ease-out .1s;
+}
+
+.module-icon:hover {
+	box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+	width: 140px;
+	margin: -10px;
+	transition: ease-out .1s;
+}
+
+.module-name {
+	padding: 10px 0px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	word-wrap: normal;
+	height: 40px;
+	font-size: 23px;
+	color: #055A7F;
+}
+
+.module-btn {
+	text-transform: capitalize;
+	border-radius: 20px;
+}
+
+.module-btn i {
+	padding-right: 5px;
+	color: rgb(255, 244, 149);
 }

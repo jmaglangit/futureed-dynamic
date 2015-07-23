@@ -116,8 +116,8 @@ class HelpRequest extends Model {
         return $query->whereLinkId($link_id);
     }
 
-    public function scopeQuestionStatus($query,$question_status){
-        return $query->whereQuestionStatus($question_status);
+    public function scopeQuestionStatus($query,$question_status = array()){
+        return $query->whereIn('question_status',$question_status);
     }
 
 
