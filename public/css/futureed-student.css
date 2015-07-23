@@ -1,5 +1,16 @@
 @charset "UTF-8"; 
 
+.nav-dropdown-menu {
+	margin-top: 5px;
+	color: #055A7F !important;
+	transition: 5s ease;
+}
+
+.nav-dropdown a {
+	padding: 10px 15px;
+    color: #055A7F !important;
+}
+
 .ul-left {
 	margin-left: 30px;
 }
