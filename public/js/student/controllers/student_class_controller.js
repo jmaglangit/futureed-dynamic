@@ -1,14 +1,20 @@
 angular.module('futureed.controllers')
 	.controller('StudentClassController', StudentClassController);
 
-StudentClassController.$inject = ['$scope', '$filter', 'StudentClassService'];
+StudentClassController.$inject = ['$scope', '$filter', 'StudentClassService', 'SearchService', 'TableService'];
 
-function StudentClassController($scope, $filter, StudentClassService) {
+function StudentClassController($scope, $filter, StudentClassService, SearchService, TableService) {
 	var self = this;
 
 	self.tips = {};
 	self.help = {};
 	self.student_id = $scope.user.id;
+
+	SearchService(self);
+	self.searchDefaults();
+
+	TableService(self);
+	self.tableDefaults();
 
 	self.redirectHelp = function(help_id) {
 		$("#redirect_help input[name='id']").val(help_id);
@@ -171,6 +177,66 @@ function StudentClassController($scope, $filter, StudentClassService) {
 		}).error(function(response) {
 			self.errors = $scope.internalError();
 			$scope.div_unblock("help_request_form");
+		});
+	}
+
+	self.searchFnc = function(event) {
+		self.errors = Constants.FALSE;
+		self.list();
+		
+		event = getEvent(event);
+		event.preventDefault();
+	}
+
+	self.clearFnc = function() {
+		self.errors = Constants.FALSE;
+
+		self.searchDefaults();
+		self.tableDefaults();
+		self.list();
+	}
+
+	self.list = function() {
+		self.listModules();
+	}
+
+	self.listModules = function() {
+		self.errors = Constants.FALSE;
+		self.records = [];
+		self.table.loading = Constants.TRUE;
+
+		$scope.ui_block();
+		StudentClassService.listModules(self.search, self.table).success(function(response) {
+			self.table.loading = Constants.FALSE;
+
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.records = response.data.records;
+					self.updatePageCount(response.data);
+				}
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.getSubjects = function() {
+		StudentClassService.getSubjects().success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.subjects = response.data.records;
+				}
+			}
+
+		}).error(function(response) {
+			self.errors = $scope.internalError();
 		});
 	}
 }
