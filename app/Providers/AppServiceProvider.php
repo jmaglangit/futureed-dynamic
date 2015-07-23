@@ -223,10 +223,35 @@ class AppServiceProvider extends ServiceProvider {
 			'FutureEd\Models\Repository\MediaType\MediaTypeRepositoryInterface',
 			'FutureEd\Models\Repository\MediaType\MediaTypeRepository'
 		);
+        $this->app->bind(
+            'FutureEd\Models\Repository\AvatarPose\AvatarPoseRepositoryInterface',
+            'FutureEd\Models\Repository\AvatarPose\AvatarPoseRepository'
+        );
+        $this->app->bind(
+            'FutureEd\Models\Repository\AvatarQuote\AvatarQuoteRepositoryInterface',
+            'FutureEd\Models\Repository\AvatarQuote\AvatarQuoteRepository'
+        );
+        $this->app->bind(
+            'FutureEd\Models\Repository\Quote\QuoteRepositoryInterface',
+            'FutureEd\Models\Repository\Quote\QuoteRepository'
+        );
+        $this->app->bind(
+            'FutureEd\Models\Repository\StudentModule\StudentModuleRepositoryInterface',
+            'FutureEd\Models\Repository\StudentModule\StudentModuleRepository'
+        );
+        $this->app->bind(
+            'FutureEd\Models\Repository\StudentModuleAnswer\StudentModuleAnswerRepositoryInterface',
+            'FutureEd\Models\Repository\StudentModuleAnswer\StudentModuleAnswerRepository'
+        );
 
 		$this->app->bind(
 			'FutureEd\Models\Repository\StudentModule\StudentModuleRepositoryInterface',
 			'FutureEd\Models\Repository\StudentModule\StudentModuleRepository'
+		);
+
+		$this->app->bind(
+			'FutureEd\Models\Repository\StudentBadge\StudentBadgeRepositoryInterface',
+			'FutureEd\Models\Repository\StudentBadge\StudentBadgeRepository'
 		);
 
 	}

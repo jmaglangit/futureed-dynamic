@@ -45,6 +45,10 @@ class QuestionController extends ApiController {
 			$criteria['questions_text'] = Input::get('questions_text');
 		}
 
+		if(Input::get('difficulty')){
+			$criteria['difficulty'] = Input::get('difficulty');
+		}
+
 		if(Input::get('limit')) {
 			$limit = intval(Input::get('limit'));
 		}
@@ -112,6 +116,5 @@ class QuestionController extends ApiController {
 		return $this->respondWithData($return);
 
 	}
-
 
 }

@@ -1,24 +1,21 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
+use Carbon\Carbon;
 use FutureEd\Http\Requests;
-use FutureEd\Http\Controllers\Controller;
-
+use FutureEd\Http\Requests\Api\StudentModuleRequest;
 use FutureEd\Models\Repository\Module\ModuleRepositoryInterface;
 use FutureEd\Models\Repository\StudentModule\StudentModuleRepositoryInterface;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
-use FutureEd\Http\Requests\Api\StudentModuleRequest;
 
 class StudentModuleController extends ApiController {
 
 	protected $module;
 	protected $student_module;
 
-	public function __construct(
-		ModuleRepositoryInterface $moduleRepositoryInterface,
-		StudentModuleRepositoryInterface $student_module
-	){
 
+	public function __construct(ModuleRepositoryInterface $moduleRepositoryInterface,
+								StudentModuleRepositoryInterface $student_module)
+	{
 		$this->module = $moduleRepositoryInterface;
 		$this->student_module = $student_module;
 	}
@@ -38,6 +35,18 @@ class StudentModuleController extends ApiController {
 		if(Input::get('subject_id')){
 
 			$criteria['subject_id'] = Input::get('subject_id');
+		}
+
+		//for student_id
+		if(Input::get('student_id')){
+
+			$criteria['student_id'] = Input::get('student_id');
+		}
+
+		//for class_id
+		if(Input::get('class_id')){
+
+			$criteria['class_id'] = Input::get('class_id');
 		}
 
 		//for grade
@@ -75,13 +84,16 @@ class StudentModuleController extends ApiController {
 	}
 
 	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
+	 * Add new Student Module
+	 * @param StudentModuleRequest $request
+	 * @return json response
 	 */
-	public function store()
+	public function store(StudentModuleRequest $request)
 	{
-		//
+		$data = $request->all();
+		$data['date_start'] = Carbon::now();
+		$data['date_end'] = Carbon::now();
+		return $this->respondWithData($this->student_module->addStudentModule($data));
 	}
 
 	/**
@@ -114,7 +126,7 @@ class StudentModuleController extends ApiController {
 	 */
 	public function update($id,StudentModuleRequest $request)
 	{
-		$data = $request->only('last_viewed_content_id');
+		$data = $request->only('last_viewed_content_id','last_answered_question_id');
 
 		$this->student_module->updateStudentModule($id,$data);
 

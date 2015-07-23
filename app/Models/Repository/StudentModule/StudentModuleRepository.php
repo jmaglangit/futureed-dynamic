@@ -1,44 +1,56 @@
 <?php namespace FutureEd\Models\Repository\StudentModule;
 
-
 use FutureEd\Models\Core\StudentModule;
 
 class StudentModuleRepository implements StudentModuleRepositoryInterface{
 
-	/**
-	 * Get a record on StudentModule.
-	 * @param $id
-	 * @return mixed
-	 */
-	public function viewStudentModule($id){
 
-		$student_module = new StudentModule();
+    /**
+     * Add new Student Module
+     * @param $data
+     * @return object
+     */
+    public function addStudentModule($data){
+        try{
+            return StudentModule::create($data);
+        }catch (\Exception $e){
+            return $e->getMessage();
+        }
+    }
 
-		$student_module = $student_module->find($id);
-		return $student_module;
+    /**
+     * Get Student Module
+     * @param $id
+     * @return object
+     */
+    public function getStudentModule($id){
+        try{
+            return StudentModule::find($id);
+        }catch (\Exception $e){
+            return $e->getMessage();
+        }
+    }
 
-	}
+    public function updateStudentModule($id,$data){
+        try{
+            $result = StudentModule::find($id);
+            return is_null($result) ? false : $result->update($data);
+        }catch (\Exception $e){
+            return $e->getMessage();
+        }
+    }
 
-	/**
-	 * Update a record.
-	 * @param $id
-	 * @param $data
-	 * @return bool|int|string
-	 */
+    /**
+     * Get a record on StudentModule.
+     * @param $id
+     * @return mixed
+     */
+    public function viewStudentModule($id){
 
-	public function updateStudentModule($id,$data){
+        $student_module = new StudentModule();
 
-		try{
+        $student_module = $student_module->find($id);
+        return $student_module;
 
-			return StudentModule::find($id)
-				->update($data);
-
-		}catch (Exception $e){
-
-			return $e->getMessage();
-		}
-	}
-
-
-
+    }
 }
