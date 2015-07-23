@@ -29,10 +29,11 @@ class AdminQuestionAnswerRequest extends ApiRequest {
 					'module_id' => 'required|integer',
 					'question_id' => 'required|integer',
 					'code' => 'required|integer',
-					'answer_text' => 'required|string',
-					'image' => 'required|mimes:jpeg,jpg,png|max:2000',
+					'answer_text' => 'required_if:image,|string',
+					'image' => 'required_if:answer_text,|string',
 					'correct_answer' => 'required|alpha|in:Yes,No',
 					'point_equivalent' => 'required|integer',
+					'label' => 'string'
 
 				];
 				break;
@@ -40,9 +41,12 @@ class AdminQuestionAnswerRequest extends ApiRequest {
 			case 'PUT':
 				return [
 
-					'answer_text' => 'required|string',
+					'answer_text' => 'required_if:image,|string',
 					'correct_answer' => 'required|alpha|in:Yes,No',
 					'point_equivalent' => 'required|integer',
+					'image' => 'required_if:answer_text,|string',
+					'label' => 'string'
+
 
 				];
 				break;
@@ -60,6 +64,9 @@ class AdminQuestionAnswerRequest extends ApiRequest {
 			'question_id.integer' => 'Question is invalid.',
 			'code.integer' => 'Code must be a number.',
 			'point_equivalent.integer' => 'Points Equivalent must be a number.',
+			'answer_text.required_if' =>'The answer text field is required when image is empty.',
+			'image.required_if' =>'The image field is required when answer text is empty.',
+
 
 		];
 	}

@@ -7,9 +7,12 @@
 
     <div class="panel-group module-container" id="accordion">
         <div class="panel panel-default">
-            <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#module_detail" aria-expanded="true" aria-controls="module_detail">
+            <div id="detail_heading" class="panel-heading" data-toggle="collapse" ng-click="module.toggleDetail()" data-parent="#accordion" href="#module_detail" aria-expanded="true" aria-controls="module_detail">
                 <h4 class="panel-title">
                     Module Details
+
+                    <span class="pull-right" ng-if="!module.detail_hidden"><i class="fa fa-angle-double-down"></i></span>
+                    <span class="pull-right" ng-if="module.detail_hidden"><i class="fa fa-angle-double-up"></i></span>
                 </h4>
             </div>
 
@@ -65,13 +68,13 @@
                                         </div>
                                     </div>
                                     <div class="col-xs-4" ng-if="module.active_view">
-                                        <label class="col-md-5" ng-if="module.details.status == 'Enabled'">
+                                        <label ng-if="module.details.status == 'Enabled'">
                                             <b class="success-icon">
                                                 <i class="margin-top-8 fa fa-check-circle-o"></i> {! module.details.status !}
                                             </b>
                                         </label>
 
-                                        <label class="col-md-5" ng-if="module.details.status == 'Disabled'">
+                                        <label ng-if="module.details.status == 'Disabled'">
                                             <b class="error-icon">
                                                 <i class="margin-top-8 fa fa-ban"></i> {! module.details.status !}
                                             </b>
@@ -225,9 +228,12 @@
         </div>
 
         <div class="panel panel-default" ng-if="module.details.id && module.active_view">
-            <div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#module_tabs" aria-expanded="true" aria-controls="module_tabs">
+            <div id="content_heading" class="panel-heading" data-toggle="collapse" ng-click="module.toggleContent()" data-parent="#accordion" href="#module_tabs" aria-expanded="false" aria-controls="module_tabs">
                 <h4 class="panel-title">
                     Module Contents
+
+                    <span class="pull-right" ng-if="!module.content_hidden"><i class="fa fa-angle-double-down"></i></span>
+                    <span class="pull-right" ng-if="module.content_hidden"><i class="fa fa-angle-double-up"></i></span>
                 </h4>
             </div>
 
@@ -240,13 +246,11 @@
                     </ul>
 
                     <div class="tab-content row">
-                        <div class="tab-pane fade in active" id="age_group">
-                            <div ng-if="module.active_view" ng-controller="ManageAgeGroupController as age">
-                                <div ng-init="age.setActive()" template-directive template-url="{!! route('admin.manage.age_group.partials.list_view_form') !!}"></div>
+                        <div class="tab-pane fade in active" id="age_group"  ng-if="module.active_view" ng-controller="ManageAgeGroupController as age" ng-init="age.setModule(module.details)">
+                            <div ng-init="age.setActive()" template-directive template-url="{!! route('admin.manage.age_group.partials.list_view_form') !!}"></div>
 
-                                <div template-directive template-url="{!! route('admin.manage.age_group.partials.add_view_form') !!}"></div>
-                                <div template-directive template-url="{!! route('admin.manage.age_group.partials.edit_view_form') !!}"></div>
-                            </div>
+                            <div template-directive template-url="{!! route('admin.manage.age_group.partials.add_view_form') !!}"></div>
+                            <div template-directive template-url="{!! route('admin.manage.age_group.partials.edit_view_form') !!}"></div>
                         </div>
 
                         <div ng-if="module.details.current_view == futureed.CONTENTS" ng-controller="ManageModuleContentController as content" class="tab-pane fade" ng-init="content.setModule(module.details)" id="contents">
@@ -262,7 +266,7 @@
                             </div>
                         </div>
 
-                        <div ng-if="module.details.current_view == futureed.QANDA" ng-controller="ManageQuestionAnsController as qa" class="module-container tab-pane fade" ng-init="qa.setModule(module.details)" id="q_and_a">
+                        <div ng-if="module.details.current_view == futureed.QANDA" ng-controller="ManageQuestionAnsController as qa" class="tab-pane fade" ng-init="qa.setModule(module.details)" id="q_and_a">
                             <div ng-if="module.active_view" ng-init="qa.setActive()">
                                 <div template-directive template-url="{!! route('admin.manage.question_answer.partials.question_list_form') !!}"></div>
 

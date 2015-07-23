@@ -173,6 +173,7 @@ class StudentServices {
 		if ($student_reference['avatar_id']) {
 			$avatar = $this->avatar->getAvatar($student_reference['avatar_id'])->toArray();
 			$avatar_url = $this->avatar->getAvatarUrl($avatar['avatar_image']);
+			$avatar_url_background = $this->avatar->getAvatarUrl($avatar['background_image']);
 		}
 
 		$school = '';
@@ -191,11 +192,13 @@ class StudentServices {
 
 
 		$student = array_merge(array('id' => $id
-			,'class_id' => $this->getCurrentClass($id))
+            ,'class_id' => $this->getCurrentClass($id)
+			,'class' => $this->getCurrentClass($id))
 			, $student
 			, $user,
 			array('age' => $age,
 				'avatar' => $avatar_url,
+				'background' => $avatar_url_background,
 				'school' => $school,
 				'grade' => isset($grade) ? $grade['name'] : null,
 				'avatar_id' => $student_reference['avatar_id']));

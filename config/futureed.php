@@ -115,10 +115,48 @@ return [
 	//tip_rating
 	'tip_rating' => 'rating',
 
-	//path for question uploaded images
-	'question_image_path' =>  base_path().'/public/images/upload',
+	//uploads base path
+	'uploads' => base_path(). '/public/uploads',
 
-	//path for question answer uploaded images
-	'question_answer_image_path' =>  base_path().'/public/images/answers',
+	//path for question uploaded images temp
+	'question_image_path' =>  base_path().'/public/uploads/temp/question',
+
+	//path for question uploaded images final
+	'question_image_path_final' => base_path().'/public/uploads/question',
+	'question_image_path_final_public' => '/uploads/question',
+
+	//question
+	'question' => 'question',
+
+	//path for answer uploaded images temp
+	'answer_image_path' =>  base_path().'/public/uploads/temp/answer',
+
+	//path for question uploaded images final
+	'answer_image_path_final' => base_path().'/public/uploads/answer',
+	'answer_image_path_final_public' => '/uploads/answer',
+
+	//answer
+	'answer' => 'answer',
+
+
+	//path for content uploaded images temp
+	'content_image_path' =>  base_path().'/public/uploads/temp/content',
+
+	//path for content uploaded images final
+	'content_image_path_final' => base_path().'/public/uploads/content',
+	'content_image_path_final_public' => '/uploads/content',
+
+	//answer
+	'content' => 'content',
+
+
+
+
+
+
+
+    //answer status
+    'answer_status_correct' => 'Correct',
+    'answer_status_wrong' => 'Wrong',
 
 ];

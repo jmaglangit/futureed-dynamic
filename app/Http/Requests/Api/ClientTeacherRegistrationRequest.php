@@ -57,8 +57,8 @@ class ClientTeacherRegistrationRequest extends ApiRequest
 					'first_name' => 'required|regex:'. config('regex.name') .'|max:64',
 					'last_name' => 'required|regex:'. config('regex.name') .'|max:64',
 					'street_address' => 'string',
-					'city' => 'string',
-					'state' => 'string',
+					'city' => 'max:128|regex:'.config('regex.state_city'),
+					'state' => 'max:128|regex:'.config('regex.state_city'),
 					'country' => 'exists:countries,name',
 					'country_id' => 'exists:countries,id',
 					'zip' => 'max:10|regex:'. config('regex.zip_code'),
@@ -77,7 +77,7 @@ class ClientTeacherRegistrationRequest extends ApiRequest
 					'last_name' => 'required|regex:'. config('regex.name') ,
 					'role' => 'required',
 					'address' => 'required',
-					'city' => 'required',
+					'city' => 'required|max:128|regex:'.config('regex.state_city'),
 				];
 
 		}
@@ -88,7 +88,8 @@ class ClientTeacherRegistrationRequest extends ApiRequest
 
 		return [
 			'custom_password' => config('futureed-error.error_messages.2112'),
-			'country_id.required' => config('futureed-error.error_messages.2041')
+			'country_id.required' => config('futureed-error.error_messages.2041'),
+			'registration_token.exists' => config('futureed-error.error_messages.2049'),
 		];
 	}
 

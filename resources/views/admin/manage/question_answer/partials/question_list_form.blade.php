@@ -10,7 +10,7 @@
             <p>{! qa.success !}</p>
         </div>
     </div>
-<div class="col-xs-12 search-container">
+<div class="col-xs-12">
         <div class="title-mid">
             Search
         </div>
@@ -73,37 +73,37 @@
             {!! Form::close() !!}
         </div>
     </div>
-<button class="btn btn-blue btn-small margin-0-30" ng-click="qa.setActive('add')">
-    <i class="fa fa-plus-square"></i> Add Q & A
-</button>
-<div class="module-container">
-    <div class="alert alert-success" ng-if="qa.success">
-            <p>{! qa.success !}</p>
-        </div>
+
+<div class="col-xs-12">
+    <button class="btn btn-blue btn-small content-btn" ng-click="qa.setActive('add')">
+        <i class="fa fa-plus-square"></i> Add Q & A
+    </button>
+
     <div class="title-mid">
         Question & Answer List
     </div>
 
-    <div class="size-container">
-        {!! Form::select('size'
-            , array(
-                  '10' => '10'
-                , '20' => '20'
-                , '50' => '50'
-                , '100' => '100'
-            )
-            , '10'
-            , array(
-                'ng-model' => 'qa.table.size'
-                , 'ng-change' => 'qa.paginateBySize()'
-                , 'ng-if' => "qa.qa_records.length"
-                , 'class' => 'form-control paginate-size pull-right'
-            )
-        ) !!}
-    </div>
-</div>
-<div class="col-xs-12 table-container">
-        <div class="list-container" ng-cloak>
+    <div class="list-container">
+        <div class="size-container">
+            {!! Form::select('size'
+                , array(
+                      '10' => '10'
+                    , '20' => '20'
+                    , '50' => '50'
+                    , '100' => '100'
+                )
+                , '10'
+                , array(
+                    'ng-model' => 'qa.table.size'
+                    , 'ng-change' => 'qa.paginateBySize()'
+                    , 'ng-if' => "qa.qa_records.length"
+                    , 'class' => 'form-control paginate-size pull-right'
+                )
+            ) !!}
+        </div>
+
+        <div class="clearfix"></div>
+        <div class="table-responsive" ng-cloak>
             <table id="qa-list" class="table table-striped table-bordered">
                 <thead>
                     <tr>
@@ -120,8 +120,8 @@
                 <tbody>
                     <tr ng-repeat="qaInfo in qa.qa_records">
                         <td>{! qaInfo.code !}</td>
-                        <td>{! qaInfo.questions_text !}</td>
-                        <td><img src=""></td>
+                        <td class="wide-column">{! qaInfo.questions_text !}</td>
+                        <td><a href="javascript:;" ng-if="qaInfo.original_image_name" ng-click="qa.viewImage(qaInfo)">View Image</a></td>
                         <td>{! qaInfo.question_type !}</td>
                         <td>{! qaInfo.difficulty !}</td>
                         <td>{! qaInfo.seq_no !}</td>
@@ -151,19 +151,20 @@
             <div class="pull-right" ng-if="qa.qa_records.length">
                 <pagination 
                     total-items="qa.table.total_items" 
-                    ng-model="qa.table.pqa"
+                    ng-model="qa.table.page"
                     max-size="3"
                     items-per-pqa="qa.table.size" 
                     previous-text = "&lt;"
                     next-text="&gt;"
                     class="pagination" 
                     boundary-links="true"
-                    ng-change="qa.paginateByPqa()">
+                    ng-change="qa.paginateByPage()">
                 </pagination>
             </div>
         </div>
     </div>
 </div>
+
 <div id="delete_question_modal" ng-show="qa.delete.confirm" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
@@ -194,3 +195,27 @@
     </div>
   </div>
 </div>
+<div id="view_image_modal" ng-show="qa.view_image.show" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    {! qa.view_image.questions_text !}
+                </div>
+                <div class="modal-body">
+                    <div class="modal-image">
+                        <img ng-src="{! qa.view_image.image_path !}"/>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="btncon col-md-8 col-md-offset-4 pull-left">
+                        {!! Form::button('Close'
+                            , array(
+                                'class' => 'btn btn-gold btn-medium'
+                                , 'data-dismiss' => 'modal'
+                            )
+                        ) !!}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

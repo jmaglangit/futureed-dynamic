@@ -3,18 +3,29 @@
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
+use FutureEd\Services\QuestionServices;
 use Illuminate\Http\Request;
 use FutureEd\Models\Repository\Question\QuestionRepositoryInterface;
 use Illuminate\Support\Facades\Input;
 use FutureEd\Http\Requests\Api\AdminQuestionRequest;
+use Illuminate\Filesystem\Filesystem;
 
 class AdminQuestionController extends ApiController {
 
 	protected $question;
+	protected $file;
+	protected $question_service;
 
-	public function __construct(QuestionRepositoryInterface $question){
+	public function __construct(
+		QuestionRepositoryInterface $question,
+		Filesystem $file,
+		QuestionServices $questionServices
+		){
 
 		$this->question = $question;
+		$this->file = $file;
+		$this->question_service = $questionServices;
+
 	}
 
 
@@ -63,10 +74,11 @@ class AdminQuestionController extends ApiController {
 
 			foreach($record['records'] as $k=>$v){
 
-				$record['records'][$k]['questions_image'] = config('futureed.question_image_path').'/'.$v['questions_image'];
+				$record['records'][$k]['questions_image'] = config('futureed.question_image_path_final_public').'/'.$v['id'].'/'.$v['questions_image'];
 			}
 
 		}
+
 
 		return $this->respondWithData($record);
 	}
@@ -89,24 +101,55 @@ class AdminQuestionController extends ApiController {
 	public function store(AdminQuestionRequest $request)
 	{
 
-		$data =  $request->only('image','answer','code','module_id','questions_text','status','question_type','points_earned','difficulty');
+		$data =  $request->only('image','answer','seq_no','code','module_id','questions_text','status','question_type','points_earned','difficulty');
 
-		//check if has images uploaded
-		if($data['image']){
-			//get image_name
-			$image = $_FILES['image']['name'];
 
-			//upload image file
-			$data['image']->move(config('futureed.question_image_path'), $image);
+		$last_sequence = $this->question->getLastSequence($data['module_id']);
+		//get sequence
+		if(!$data['seq_no'] || $data['seq_no'] > $last_sequence ) {
 
-			//set value for questions_images
-			$data['questions_image'] = $image;
+			//get last sequence and add.
+			$data['seq_no'] = $last_sequence + 1;
+		}else {
 
+			//move sequence
+			$current_sequence = $this->question_service->updateSequence($data['module_id'],$data['seq_no']);
+
+			//update sequence
+			$this->question->updateSequence($current_sequence);
 		}
-		//get question count
-		$data['seq_no'] = $this->question->getQuestionCount($data['module_id']) +1;
 
 		$return = $this->question->addQuestion($data);
+
+		//have image
+		if($data['image']){
+
+			$update = NULL;
+
+			$from = config('futureed.question_image_path');
+			$to = config('futureed.question_image_path_final').'/'.$return['id'];
+
+			//check if directory don't exist, it will create new directory
+			if (!$this->file->exists(config('futureed.question_image_path_final'))){
+
+				$this->file->makeDirectory(config('futureed.question_image_path_final'));
+			}
+
+			$image = explode('/',$data['image']);
+			$image_type = explode('.',$image[1]);
+
+			$update['original_image_name'] = $image[1];
+			$update['questions_image'] = config('futureed.question').'_'.$return['id'].'.'.$image_type[1];
+
+			//move image to question directory
+			$this->file->move($from.'/'.$image[0],$to);
+			$this->file->copy($to.'/'.$image[1],$to.'/'.$update['questions_image']);
+
+
+			//add questions_image and original_image_name
+			$this->question->updateQuestion($return['id'],$update);
+
+		}
 
 		return $this->respondWithData(['id'=>$return['id']]);
 
@@ -127,7 +170,8 @@ class AdminQuestionController extends ApiController {
 			return $this->respondErrorMessage(2120);
 		}
 
-		$question->questions_image = config('futureed.question_image_path').'/'.$question->questions_image;
+
+		$question->questions_image = config('futureed.question_image_path_final_public').'/'.$question->id.'/'.$question->questions_image;
 
 		return $this->respondWithData($question);
 	}
@@ -151,7 +195,7 @@ class AdminQuestionController extends ApiController {
 	 */
 	public function update($id,AdminQuestionRequest $request)
 	{
-		$data =  $request->only('answer','questions_text','status','question_type','points_earned','difficulty');
+		$data =  $request->only('image','answer','questions_text','status','question_type','points_earned','difficulty','seq_no');
 
 		$question = $this->question->viewQuestion($id);
 
@@ -159,6 +203,50 @@ class AdminQuestionController extends ApiController {
 
 			return $this->respondErrorMessage(2120);
 		}
+
+		if($data['image']){
+
+			$from = config('futureed.question_image_path');
+			$to = config('futureed.question_image_path_final').'/'.$id;
+
+			$image = explode('/',$data['image']);
+			$image_type = explode('.',$image[1]);
+
+			$data['original_image_name'] = $image[1];
+			$data['questions_image'] = config('futureed.question').'_'.$id.'.'.$image_type[1];
+
+			$this->file->deleteDirectory($to);
+			$this->file->move($from.'/'.$image[0],$to);
+			$this->file->copy($to.'/'.$image[1],$to.'/'.$data['questions_image']);
+
+		}
+
+		//update sequence
+		//get current sequence and compare
+		$current_sequence = $this->question->getQuestionSequenceNo($id);
+
+		$last_current_seq_no = $this->question->getLastSequence($current_sequence[0]->module_id);
+		$data['seq_no'] = ($data['seq_no'] > $last_current_seq_no)? $last_current_seq_no : $data['seq_no'];
+
+		if($data['seq_no'] <> $current_sequence[0]->seq_no){
+
+			//pull sequence number.
+			$pulled = $this->question_service->pullSequenceNo($current_sequence[0]->module_id, $current_sequence[0]->seq_no,$id);
+
+			//update sequence
+			$this->question->updateSequence($pulled);
+
+			//insert sequence number.
+			$current_sequence = $this->question_service->updateSequence($current_sequence[0]->module_id,$data['seq_no']);
+
+
+			//update sequence
+			$this->question->updateSequence($current_sequence);
+
+		}
+
+		//if not equal remove number and fill in.
+		//update sequence with new sequence
 
 		//update data questions table
 		$this->question->updateQuestion($id,$data);

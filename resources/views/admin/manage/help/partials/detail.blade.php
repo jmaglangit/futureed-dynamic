@@ -25,16 +25,18 @@
 		!!}
 			<fieldset>
 				<div class="form-group">
-					<label class="col-xs-2 control-label" id="username">Module <span class="required">*</span></label>
-					<div class="col-xs-4">
-						{!! Form::text('username', '',
-							[
-								'placeholder' => 'Module',
-								'ng-disabled' => 'true',
-								'ng-model' => 'help.record.module',
-								'class' => 'form-control'
-							]
-						) !!}
+					<div ng-if="help.record.link_type != futureed.GENERAL">
+						<label class="col-xs-2 control-label" id="username">Module <span class="required">*</span></label>
+						<div class="col-xs-4">
+							{!! Form::text('username', '',
+								[
+									'placeholder' => 'Module',
+									'ng-disabled' => 'true',
+									'ng-model' => 'help.record.module',
+									'class' => 'form-control'
+								]
+							) !!}
+						</div>
 					</div>
 					<label class="col-xs-2 control-label" id="email">Type <span class="required">*</span></label>
 					<div class="col-xs-4">
@@ -55,7 +57,7 @@
 						) !!}
 					</div>
 				</div>
-				<div class="form-group">
+				<div class="form-group" ng-if="help.record.link_type != futureed.GENERAL">
 					<label class="col-xs-2 control-label">Subject <span class="required">*</span></label>
 					<div class="col-xs-4">
 						{!! Form::text('subject', '',
@@ -190,6 +192,19 @@
 								'ng-model' => 'help.record.content',
 								'placeholder' => 'Description'
 								, 'ng-class' => "{ 'required-field' : help.fields['content'] }"
+							]
+						) !!}
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-3 control-label">Created By:</label>
+					<div class="col-xs-6">
+						{!! Form::text('created_by','',
+							[
+								'class' => 'form-control',
+								'ng-disabled' => 'true',
+								'ng-model' => 'help.record.name',
+								'placeholder' => 'Description'
 							]
 						) !!}
 					</div>

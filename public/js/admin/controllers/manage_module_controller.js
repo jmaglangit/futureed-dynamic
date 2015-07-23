@@ -1,9 +1,9 @@
 angular.module('futureed.controllers')
 	.controller('ManageModuleController', ManageModuleController);
 
-ManageModuleController.$inject = ['$scope', 'manageModuleService', 'apiService', 'TableService', 'SearchService'];
+ManageModuleController.$inject = ['$scope', 'manageModuleService', 'ManageQuestionAnsService', 'apiService', 'TableService', 'SearchService'];
 
-function ManageModuleController($scope, manageModuleService, apiService, TableService, SearchService) {
+function ManageModuleController($scope, manageModuleService, ManageQuestionAnsService, apiService, TableService, SearchService) {
 	var self = this;
 
 	self.details = {};
@@ -40,6 +40,8 @@ function ManageModuleController($scope, manageModuleService, apiService, TableSe
 
 			case Constants.ACTIVE_VIEW :
 				self.active_view = Constants.TRUE;
+				self.detail_hidden = Constants.FALSE;
+				self.content_hidden = Constants.TRUE;
 				self.getModuleDetail(id);
 				break;
 
@@ -53,6 +55,60 @@ function ManageModuleController($scope, manageModuleService, apiService, TableSe
 				break;
 		}
 		$("html, body").animate({ scrollTop: 0 }, "slow");
+	}
+
+	self.toggleDetail = function() {
+		var detail_shown = $('#module_detail').hasClass('in');
+
+		if(detail_shown) {
+			self.detail_hidden = Constants.TRUE;
+		} else {
+			self.detail_hidden = Constants.FALSE;
+			self.content_hidden = Constants.TRUE;
+		}
+	}
+
+	self.addNewQuestion = function() {
+		self.details.seq_no = 1;
+		self.details.module_id = 1;
+		self.details.questions_text = "Mar testing image....";
+		self.details.difficulty = 1;
+		self.details.status = "Enabled";
+		self.details.question_type = "FIB";
+		self.details.points_earned = 1;
+		self.details.code = 1;
+		console.log(self.details);
+
+		$scope.ui_block();
+		ManageQuestionAnsService.addNewQuestion(self.details).success(function(response){
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+
+					angular.forEach(response.errors, function(value, a) {
+						self.fields[value.field] = Constants.TRUE;
+					});
+				} else if(response.data) {
+					self.details = {};
+					self.details.success = Constants.TRUE;
+				}
+			}
+		$scope.ui_unblock();
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		})
+    }
+
+	self.toggleContent = function() {
+		var content_shown = $('#module_tabs').hasClass('in');
+		
+		if(content_shown) {
+			self.content_hidden = Constants.TRUE;
+		} else {
+			self.content_hidden = Constants.FALSE;
+			self.detail_hidden = Constants.TRUE;
+		}
 	}
 
 	self.setActiveContent = function(view) {
@@ -227,11 +283,10 @@ function ManageModuleController($scope, manageModuleService, apiService, TableSe
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					self.details = response.data;
-					self.details.area = self.details.subjectarea.name;
+					self.details.area = (self.details.subjectarea) ? self.details.subjectarea.name : Constants.EMPTY_STR;
 					$scope.module_id = self.details.id;
 					$scope.module_name = self.details.name;
 					self.age_records = {};
-					self.ageModuleList(self.details.name);
 				}
 			}
 		$scope.ui_unblock();
@@ -299,24 +354,5 @@ function ManageModuleController($scope, manageModuleService, apiService, TableSe
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		})
-	}
-
-	self.ageModuleList = function(module) {
-		self.errors = Constants.FALSE;
-		self.records = {};
-		$scope.ui_block();
-		manageModuleService.ageModuleList(module, self.table).success(function(response){
-			if(angular.equals(response.status, Constants.STATUS_OK)){
-				if(response.errors) {
-					self.errors = $scope.errorHandler(response.errors);
-				}else if(response.data){
-					self.age_records = response.data.records;
-				}
-			}
-			$scope.ui_unblock();
-		}).error(function(response){
-			self.errors = $scope.internalError();
-			$scope.ui_unblock();
-		});
 	}
 }

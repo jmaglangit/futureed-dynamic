@@ -55,6 +55,7 @@ class AdminStudentRequest extends ApiRequest {
 				$student = config('futureed.student');
 				return [
 					'username' => "required|alpha_num|string|min:8|max:32|unique:users,username," . $student_id . ",id,user_type,$student,deleted_at,NULL",
+					'email' => "required|email|unique:users,email,$student_id,id,user_type,$student,deleted_at,NULL",
 					'first_name' => 'required|regex:'. config('regex.name') .'|string',
 					'last_name' => 'required|regex:'. config('regex.name') .'|string',
 					'gender' => 'required|in:Male,Female',

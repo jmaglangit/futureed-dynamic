@@ -30,8 +30,14 @@ class ModuleContent extends Model {
 
 	protected $attributes = [
 		'created_by' => 1,
-		'updated_by' => 1
+		'updated_by' => 1,
+		'content_id' => 0
 	];
+
+	//-------------relationships
+	public function teachingContent() {
+		return $this->belongsTo('FutureEd\Models\Core\TeachingContent','content_id','id')->with('learningStyle','mediaType');
+	}
 
 	//Scopes
 	public function scopeId($query, $id){
@@ -47,6 +53,16 @@ class ModuleContent extends Model {
 	public function scopeModuleId($query, $module_id){
 
 		return $query->where('module_id', $module_id);
+	}
+
+	public function scopeOrderBySeqNo($query){
+
+		return $query->OrderBy('seq_no');
+	}
+
+	public function scopeOrderBySeqNoDesc($query){
+
+		 return $query->orderBy('seq_no','desc');
 	}
 
 

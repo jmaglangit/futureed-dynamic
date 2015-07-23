@@ -9,9 +9,9 @@
 *	_date 	- "dd/MM/yy" date string format
 */
 angular.module('futureed').filter('ddMMyy', function($filter) {
-	return function(input) {
-		var _date = Constants.EMPTY_STR;
-
+	return function(input, default_msg) {
+		var _date = (default_msg) ? default_msg : Constants.EMPTY_STR;
+		
 		if(!input) {
 			return _date;
 		}
@@ -25,7 +25,7 @@ angular.module('futureed').filter('ddMMyy', function($filter) {
 		if(_date != "Invalid Date") {
 			_date = $filter('date')(_date.getTime(), 'dd/MM/yy');
 		} else {
-			_date = Constants.EMPTY_STR;
+			_date = (default_msg) ? default_msg : Constants.EMPTY_STR;
 		}
 
 		return _date;

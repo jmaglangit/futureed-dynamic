@@ -16,6 +16,9 @@
         	<p>{! qa.success !}</p>
         </div>
         <fieldset>
+            <legend class="legend-name-mid">
+                Module Details
+            </legend>
             <div class="form-group">
                 <label class="control-label col-xs-2">Module</label>
                 <div class="col-xs-4">
@@ -28,8 +31,6 @@
                         )
                     ) !!}
                 </div>
-            </div>
-            <div class="form-group">
                 <label class="control-label col-xs-2">Subject</label>
                 <div class="col-xs-4">
                     {!! Form::text('subject',''
@@ -43,6 +44,17 @@
                 </div>
             </div>
             <div class="form-group">
+                <label class="control-label col-xs-2">Code<span class="required">*</span></label>
+                <div class="col-xs-4">
+                    {!! Form::text('code',''
+                        , array(
+                            'placeHolder' => 'Code'
+                            , 'ng-model' => 'qa.q_details.code'
+                            , 'class' => 'form-control'
+                            , 'ng-disabled' => 'true'
+                        )
+                    ) !!}
+                </div>
                 <label class="control-label col-xs-2">Area</label>
                 <div class="col-xs-4">
                     {!! Form::text('area',''
@@ -55,20 +67,54 @@
                     ) !!}
                 </div>
             </div>
+        </fieldset>
+        <fieldset>
+            <legend class="legend-name-mid">
+                Question Details
+            </legend>
             <div class="form-group">
-                <label class="control-label col-xs-2">Code<span class="required">*</span></label>
-                <div class="col-xs-4">
-                    {!! Form::text('code',''
+                <label class="control-label col-xs-3">Question <span class="required">*</span></label>
+                <div class="col-xs-5">
+                    {!! Form::textarea('questions_text',''
                         , array(
-                            'placeHolder' => 'Code'
-                            , 'ng-model' => 'qa.details.code'
-                            , 'class' => 'form-control'
-                            , 'ng-disabled' => 'true'
+                            'placeHolder' => 'Question'
+                            , 'ng-model' => 'qa.q_details.questions_text'
+                            , 'class' => 'form-control disabled-textarea'
+                            , 'ng-disabled' => '!qa.edit'
+                            , 'ng-class' => "{ 'required-field' : qa.fields['questions_text'] }"
+                            , 'rows' => 5
                         )
                     ) !!}
                 </div>
-                <label class="control-label col-xs-2">Question Type<span class="required">*</span></label>
-                <div class="col-xs-4">
+            </div>
+            <div class="form-group">
+                <label class="control-label col-xs-3">Question Image </label>
+                <div class="col-xs-5" ng-if="qa.active_edit">
+                    <div class="btn btn-blue" ngf-select ngf-change="qa.upload($files, qa.q_details)"> Choose Image... </div>
+                </div>
+
+                <div class="margin-top-8" ng-if="qa.q_details.uploaded">
+                    <a href="" ng-click="qa.removeImage(qa.q_details)"><i class="fa fa-trash"></i></a>
+                </div>
+
+                <div ng-if="qa.active_view && qa.q_details.original_image_name && qa.q_details.original_image_name != '0'">
+                    <div class="col-xs-4 margin-top-8">
+                        <a href="" ng-click="qa.viewImage(qa.q_details)">View Image</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group" ng-if="qa.q_details.uploaded">
+                <div class="col-xs-3"></div>
+                <div class="col-xs-5">
+                    <span class="col-xs-6 upload-label label label-info">Image Uploaded...</span>
+                    <a href="" class="control-label col-xs-6" ng-click="qa.viewImage(qa.q_details)">View Image</a>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-xs-3">Question Type <span class="required">*</span></label>
+                <div class="col-xs-5">
                     {!! Form::select('question_type'
                         , array(
                             '' => '-- Select Question Type --'
@@ -80,84 +126,59 @@
                         , ''
                         , array(
                             'class' => 'form-control'
-                            , 'ng-model' => 'qa.details.question_type'
+                            , 'ng-model' => 'qa.q_details.question_type'
                             , 'ng-disabled' => '!qa.edit'
                             , 'ng-class' => "{ 'required-field' : qa.fields['question_type'] }"
                         )
                     ) !!}
                 </div>
             </div>
-            <div class="form-group">
-                <label class="control-label col-xs-2">Question <span class="required">*</span></label>
-                <div class="col-xs-4">
-                    {!! Form::text('question',''
-                        , array(
-                            'placeHolder' => 'Question'
-                            , 'ng-model' => 'qa.details.questions_text'
-                            , 'class' => 'form-control'
-                            , 'ng-disabled' => '!qa.edit'
-                            , 'ng-class' => "{ 'required-field' : qa.fields['questions_text'] }"
-                        )
-                    ) !!}
-                </div>
-                <label ng-if="qa.details.question_type == 'O'" class="control-label col-xs-2">Answer <span class="required">*</span></label>
-                <div class="col-xs-4" ng-if="qa.details.question_type == 'O'">
-                    {!! Form::text('question',''
+            <div class="form-group" ng-if="qa.q_details.question_type != 'MC' && qa.q_details.question_type">
+                <label class="control-label col-xs-3">Answer <span class="required">*</span></label>
+                <div class="col-xs-5">
+                    {!! Form::textarea('answer',''
                         , array(
                             'placeHolder' => 'Answer'
-                            , 'ng-model' => 'qa.details.answer'
-                            , 'class' => 'form-control'
+                            , 'ng-model' => 'qa.q_details.answer'
+                            , 'class' => 'form-control disabled-textarea'
                             , 'ng-disabled' => '!qa.edit'
                             , 'ng-class' => "{ 'required-field' : qa.fields['answer'] }"
+                            , 'rows' => 5
                         )
                     ) !!}
                 </div>
             </div>
         	<div class="form-group">
-                <label class="control-label col-xs-2">Points Earned<span class="required">*</span></label>
-                <div class="col-xs-4">
+                <label class="control-label col-xs-3">Points Earned <span class="required">*</span></label>
+                <div class="col-xs-5">
                     {!! Form::text('points_earned',''
                         , array(
                             'placeHolder' => 'Points Earned'
-                            , 'ng-model' => 'qa.details.points_earned'
+                            , 'ng-model' => 'qa.q_details.points_earned'
                             , 'class' => 'form-control'
                             , 'ng-disabled' => '!qa.edit'
                             , 'ng-class' => "{ 'required-field' : qa.fields['points_earned'] }"
                         )
                     ) !!}
                 </div>
-                <label ng-if="qa.active_edit" class="control-label col-xs-2">Question Image</label>
-                <div class="col-xs-4" ng-if="qa.active_edit">
-                      <div style="position:relative;">
-                        <a class='btn btn-primary btn-semi-large' href='javascript:;'>
-                            Choose File...
-                            <input ng-model="qa.create.image" id="q_image" type="file" class="img-input" name="file_source" size="40"  onchange='$("#upload-file-info").html($(this).val());'>
-                        </a>
-                        <center><span class='label label-info' id="upload-file-info"></span></center>
-                    </div>
-                </div>
-                <div ng-if="qa.active_view">
-                    <div class="col-xs-2"></div>
-                    <div class="col-xs-4">
-                        <a href="javascript:;">View Question Image</a>
-                    </div>
-                </div>
         	</div>
             <div class="form-group">
-                <label class="control-label col-xs-2">Difficulty <span class="required">*</span></label>
-                <div class="col-xs-4">
+                <label class="control-label col-xs-3">Difficulty <span class="required">*</span></label>
+                <div class="col-xs-5">
                     {!! Form::text('difficulty',''
                         , array(
                             'placeHolder' => 'Difficulty'
-                            , 'ng-model' => 'qa.details.difficulty'
+                            , 'ng-model' => 'qa.q_details.difficulty'
                             , 'class' => 'form-control'
                             , 'ng-disabled' => '!qa.edit'
                             , 'ng-class' => "{ 'required-field' : qa.fields['difficulty'] }"
                         )
                     ) !!}
                 </div>
-                <label class="col-xs-2 control-label">Status <span class="required">*</span></label>
-                <div class="col-xs-4" ng-if="qa.active_edit">
+            </div>
+            <div class="form-group">
+                <label class="col-xs-3 control-label">Status <span class="required">*</span></label>
+                <div class="col-xs-5" ng-if="qa.active_edit">
                     <div class="col-xs-6 checkbox">                                 
                         <label>
                             {!! Form::radio('status'
@@ -165,7 +186,7 @@
                                 , true
                                 , array(
                                     'class' => 'field'
-                                    , 'ng-model' => 'qa.create.status'
+                                    , 'ng-model' => 'qa.q_details.status'
                                 ) 
                             ) !!}
                         <span class="lbl padding-8">Enabled</span>
@@ -178,34 +199,48 @@
                                 , false
                                 , array(
                                     'class' => 'field'
-                                    , 'ng-model' => 'qa.create.status'
+                                    , 'ng-model' => 'qa.q_details.status'
                                 )
                             ) !!}
                         <span class="lbl padding-8">Disabled</span>
                         </label>
                     </div>
                 </div>
-                <div class="col-xs-4" ng-if="qa.active_view">
-                    <label class="col-md-8" ng-if="qa.details.status == 'Enabled'">
+                <div class="col-xs-5" ng-if="qa.active_view">
+                    <label ng-if="qa.q_details.status == 'Enabled'">
                         <b class="success-icon">
-                            <i class="margin-top-8 fa fa-check-circle-o"></i> {! module.details.status !}
+                            <i class="margin-top-8 fa fa-check-circle-o"></i> {! qa.q_details.status !}
                         </b>
                     </label>
 
-                    <label class="col-md-8" ng-if="qa.details.status == 'Disabled'">
+                    <label ng-if="qa.q_details.status == 'Disabled'">
                         <b class="error-icon">
-                            <i class="margin-top-8 fa fa-ban"></i> {! module.details.status !}
+                            <i class="margin-top-8 fa fa-ban"></i> {! qa.q_details.status !}
                         </b>
                     </label>
                 </div>
             </div>
+            <div class="form-group">
+                <label class="control-label col-xs-3">Sequence No</label>
+                <div class="col-xs-5">
+                    {!! Form::text('seq_no',''
+                        , array(
+                            'placeHolder' => 'Sequance No'
+                            , 'ng-model' => 'qa.q_details.seq_no'
+                            , 'class' => 'form-control'
+                            , 'ng-disabled' => '!qa.edit'
+                            , 'ng-class' => "{ 'required-field' : qa.fields['seq_no'] }"
+                        )
+                    ) !!}
+                </div>
+            </div>
         </fieldset>
-        <div class="col-xs-6 col-xs-offset-3">
+        <div class="col-xs-8 col-xs-offset-2">
         	<div class="btn-container">
                 {!! Form::button('Edit'
                     , array(
                         'class' => 'btn btn-blue btn-medium'
-                        , 'ng-click' => "qa.setActive('edit', qa.details.id)"
+                        , 'ng-click' => "qa.setActive('edit', qa.q_details.id)"
                         , 'ng-if' => 'qa.active_view'
                     )
                 ) !!}
@@ -219,7 +254,7 @@
                 {!! Form::button('Cancel'
                     , array(
                         'class' => 'btn btn-gold btn-medium'
-                        , 'ng-click' => "qa.setActive('view', qa.details.id)"
+                        , 'ng-click' => "qa.setActive('view', qa.q_details.id)"
                         , 'ng-if' => 'qa.active_edit'
                     )
                 ) !!}
@@ -235,4 +270,29 @@
         </div>
 	</div>
     <div template-directive template-url="{!! route('admin.manage.question_answer.partials.answer_list_form') !!}"></div>
+
+    <div id="view_image_modal" ng-show="qa.view_image.show" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    {! qa.view_image.questions_text !}
+                </div>
+                <div class="modal-body">
+                    <div class="modal-image">
+                        <img ng-src="{! qa.view_image.image_path !}"/>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="btncon col-md-8 col-md-offset-4 pull-left">
+                        {!! Form::button('Close'
+                            , array(
+                                'class' => 'btn btn-gold btn-medium'
+                                , 'data-dismiss' => 'modal'
+                            )
+                        ) !!}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

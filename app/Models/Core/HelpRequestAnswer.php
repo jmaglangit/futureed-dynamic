@@ -22,7 +22,8 @@ class HelpRequestAnswer extends Model {
 		'seq_no',
 		'request_answer_status',
 		'status',
-		'points'
+		'points',
+		'rated_by'
 	];
 
     protected $attributes = [
@@ -37,7 +38,7 @@ class HelpRequestAnswer extends Model {
         'status' =>'Enabled',
         'points' => 0];
 
-	protected $hidden = ['updated_by','created_at','deleted_at'];
+	protected $hidden = ['updated_by','deleted_at'];
 
 	//Relationships
 	public function helpRequest(){
@@ -142,6 +143,15 @@ class HelpRequestAnswer extends Model {
     public function scopeStudentId($query,$student_id){
         return $query->whereStudentId($student_id);
     }
+
+	public function scopeClassId($query,$class_id){
+
+		return $query->whereHas('helpRequest',function($query) use ($class_id){
+
+			$query->where('class_id','=',$class_id);
+		});
+
+	}
 
 
 

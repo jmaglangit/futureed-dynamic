@@ -69,6 +69,11 @@ class QuestionRepository implements QuestionRepositoryInterface{
 
 					$question = $question->questionType($criteria['question_type']);
 				}
+				if(isset($criteria['difficulty'])){
+
+					$question = $question->difficulty($criteria['difficulty']);
+				}
+
 
 			}
 
@@ -77,10 +82,11 @@ class QuestionRepository implements QuestionRepositoryInterface{
 			if ($limit > 0 && $offset >= 0) {
 				$question = $question->offset($offset)->limit($limit);
 			}
-
 		}
+		$question = $question->with('questionAnswers');
+		$question = $question->orderBy('seq_no','asc');
 
-		return ['total' => $count, 'records' => $question->get()->toArray()];
+		return ['total' => $count, 'records' => $question->orderBySeqNo()->get()->toArray()];
 
 	}
 
@@ -152,6 +158,70 @@ class QuestionRepository implements QuestionRepositoryInterface{
 		$count = $question->get()->count();
 
 		return $count;
+	}
+
+
+	/**
+	 * Get questions id and sequence number order sequence.
+	 * @param $module_id
+	 */
+	public function getQuestionSequenceNos($module_id){
+
+		return Question::select('id','seq_no')
+			->moduleId($module_id)
+			->orderBySeqNo()
+			->get();
+	}
+
+	/**
+	 * Get sequence number.
+	 * @param $module_id
+	 * @param $id
+	 */
+	public function getQuestionSequenceNo($id){
+
+		return Question::select('id','seq_no','module_id')
+			->id($id)
+			->get();
+
+	}
+
+	/**
+	 * Get last sequence number.
+	 * @param $module_id
+	 */
+	public function getLastSequence($module_id){
+
+		return Question::moduleId($module_id)
+			->orderBySeqNoDesc()
+			->pluck('seq_no');
+	}
+
+	/**
+	 * Update sequence.
+	 * @param $module_id
+	 * @param $sequence
+	 */
+	public function updateSequence($sequence){
+
+		try{
+			$data = $sequence;
+
+			foreach($data as $seq => $list){
+
+				Question::find($list->id)
+					->update([
+						'seq_no' => $list->seq_no
+					]);
+			}
+
+
+		}catch(Exception $e){
+
+			return $e->getMessage();
+		}
+
+
 	}
 
 

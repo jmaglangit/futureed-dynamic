@@ -20,4 +20,12 @@ class ClassController extends Controller {
 	public function dashbrd_side_nav() {
 		return view('student.class.partials.dashbrd-side-nav');
 	}
+
+	/**
+	*Display List of Modules
+	*/
+	public function module_list() {
+		return view('student.class.partials.module_list');
+	}
+
 }

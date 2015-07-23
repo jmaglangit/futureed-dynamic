@@ -36,8 +36,8 @@
 		        		<label class="col-xs-4 control-label">Grade <span class="required">*</span></label>
 		        		<div class="col-xs-4">
 		        			<select name="grade_id" ng-class="{ 'required-field' : payment.fields['grade_id'] }" class="form-control" ng-model="payment.classroom.grade_id">
-	                            <option value="">-- Select Level --</option>
-	                            <option ng-repeat="grade in grades" ng-value="grade.id">{! grade.name !}</option>
+	                            <option ng-selected="payment.classroom.grade_id == futureed.false" value="">-- Select Level --</option>
+	                            <option ng-selected="payment.classroom.grade_id == grade.id" ng-repeat="grade in grades" ng-value="grade.id">{! grade.name !}</option>
 	                        </select>
 		        		</div>		
 		        	</div>

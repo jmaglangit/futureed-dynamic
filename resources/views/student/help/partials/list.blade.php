@@ -1,7 +1,12 @@
 <div ng-if="help.active_list">
 	<div class="content-title">
 		<div class="title-main-content">
-			<span><i class="fa fa-lightbulb-o"></i> General Help Requests </span>
+			<span><i class="fa fa-question-circle"></i> General Help Requests </span>
+			<div class="col-xs-2 pull-right">
+				<span>
+					<a href="{!! route('student.class.index') !!}" class="btn btn-maroon top-10">Back</a>
+				</span>
+			</div>
 		</div>
 	</div>
 
@@ -31,10 +36,10 @@
 			)!!}
 			<div class="form-group">
 				<div class="col-xs-5">
-					{!! Form::text('search_subject', ''
+					{!! Form::text('search_title', ''
 						,array(
-							'placeholder' => 'Subject'
-							, 'ng-model' => 'help.search.subject'
+							'placeholder' => 'Question Title'
+							, 'ng-model' => 'help.search.title'
 							, 'class' => 'form-control'
 							, 'autocomplete' => 'off'
 						)
@@ -96,7 +101,7 @@
 	 
 	<div class="col-xs-12 table-container">
 		<div class="title-mid">
-			Tip List
+			Help Request List
 		</div>
 
 		<div class="list-container" ng-cloak>
@@ -124,18 +129,16 @@
 					<thead>
 				        <tr>
 				            <th>Help Request Question</th>
-				            <th>Category</th>
-				            <th>Area</th>
-				            <th>Time</th>
+				            <th>Date Created</th>
+				            <th>Status</th>
 				            <th ng-if="help.records.length">Actions</th>
 				        </tr>
 			        </thead>
 			        <tbody>
 				        <tr ng-repeat="tipInfo in help.records">
 				            <td>{! tipInfo.title !}</td>
-				            <td>{! tipInfo.subject.name !}</td>
-				            <td>{! tipInfo.subjectarea.name !}</td>
 				            <td>{! tipInfo.created_at | ddMMyy !}</td>
+				            <td>{! tipInfo.request_status !}</td>
 				            <td ng-if="help.records.length">
 				            	<div class="row">
 				            		<div class="col-xs-12">

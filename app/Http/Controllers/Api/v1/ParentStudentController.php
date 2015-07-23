@@ -214,7 +214,7 @@ class ParentStudentController extends ApiController {
 
         //1. Insert Classroom.
 
-        $client_id = $this->client->getClientId($parent_student_data['parent_id']);
+        $client_id = $parent_student_data['parent_id'];
 
         $order_no = $order_no['order_no'];
 
@@ -228,10 +228,10 @@ class ParentStudentController extends ApiController {
         $classroom['seats_total'] = $order_details_ctr;
         $classroom['status'] = 'Enabled';
 
-        if(is_null($check_classroom)){
+        if(empty($check_classroom)){
             $classroom_result = $this->classroom->addClassroom($classroom);
         }else{
-            $classroom_result = $this->classroom->updateClassroom($check_classroom['id'],$classroom);
+            $classroom_result = $this->classroom->updateClassroom($check_classroom[0]['id'],$classroom);
         }
 
         //2. Insert Class Student.

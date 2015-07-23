@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use FutureEd\Http\Requests\Api\QuestionRequest;
 use Illuminate\Support\Facades\Input;
 use FutureEd\Models\Repository\Question\QuestionRepositoryInterface;
+use Carbon\Carbon;
 
 class QuestionController extends ApiController {
 
@@ -18,41 +19,102 @@ class QuestionController extends ApiController {
 	}
 
 	/**
+	 * @return Display all questions.
+	 */
+	public function index(){
+
+		$criteria = [];
+		$limit = 0 ;
+		$offset = 0;
+
+		//for module_id
+		if(Input::get('module_id')){
+
+			$criteria['module_id'] = Input::get('module_id');
+		}
+
+		//for question_type
+		if(Input::get('question_type')){
+
+			$criteria['question_type'] = Input::get('question_type');
+		}
+
+		//for questions_text
+		if(Input::get('questions_text')){
+
+			$criteria['questions_text'] = Input::get('questions_text');
+		}
+
+		if(Input::get('difficulty')){
+			$criteria['difficulty'] = Input::get('difficulty');
+		}
+
+		if(Input::get('limit')) {
+			$limit = intval(Input::get('limit'));
+		}
+
+		if(Input::get('offset')) {
+			$offset = intval(Input::get('offset'));
+		}
+
+		$record = $this->question->getQuestions($criteria , $limit, $offset );
+
+		if($record['total'] > 0){
+
+			foreach($record['records'] as $k=>$v){
+
+				$record['records'][$k]['questions_image'] = config('futureed.question_image_path_final_public').'/'.$v['id'].'/'.$v['questions_image'];
+			}
+
+		}
+
+
+		return $this->respondWithData($record);
+	}
+
+	/**
 	 * Update the specified resource in storage.
 	 *
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function updateQuestionImage($id, QuestionRequest $request)
+	public function uploadQuestionImage()
 	{
-		$data = $request->only('image');
 
-		$question = $this->question->viewQuestion($id);
+		$input = Input::only('file');
 
-		if(!$question){
-
-			return $this->respondErrorMessage(2120);
-		}
+		$now = Carbon::now()->timestamp;
+		$return = NULL;
+		define('MB',1048576);
 
 		//check if has images uploaded
-		if($data['image']){
+		if($input['file'])
+		{
+			if($_FILES['file']['type'] != 'image/jpeg' && $_FILES['file']['type'] != 'image/png'){
+
+				return $this->respondErrorMessage(2142);
+
+			}
+
+
+			if($_FILES['file']['size'] > 2 * MB){
+
+				return $this->respondErrorMessage(2143);
+
+			}
+
 			//get image_name
-			$image = $_FILES['image']['name'];
+			$image = $_FILES['file']['name'];
 
-			//upload image file
-			$data['image']->move(config('futureed.question_image_path'), $image);
+			//uploads image file
+			$input['file']->move(config('futureed.question_image_path').'/'.$now,$image);
 
-			//set value for questions_images
-			$data['questions_image'] = $image;
-
+			//return the original name of the image
+			$return['image_name'] = $now.'/'.$image;
 		}
 
-		//update questions_image
-		$this->question->updateQuestion($id,$data);
-
-		return $this->respondWithData($this->question->viewQuestion($id));
+		return $this->respondWithData($return);
 
 	}
-
 
 }

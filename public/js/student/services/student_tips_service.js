@@ -29,7 +29,7 @@ function StudentTipsService($http){
 		return $http({
 			method 	: Constants.METHOD_POST
 			, data  : data
-			, url 	: serviceUrl + 'tip-rating /student'
+			, url 	: serviceUrl + 'tip-rating/student'
 		});
 	}
 

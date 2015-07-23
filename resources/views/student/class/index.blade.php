@@ -5,14 +5,16 @@
 @stop
 
 @section('content')
-	<div class="container dshbrd-con" ng-init="backgroundClass()" ng-controller="StudentClassController as class" ng-cloak>
+	<div class="container dshbrd-con" ng-controller="StudentClassController as class" ng-init="backgroundClass(); checkClass(1)" ng-cloak>
 
 		<div template-directive template-url="{!! route('client.partials.base_url') !!}"></div>
 		
-		<div template-directive template-url="{!! route('student.class.partials.dashbrd-side-nav') !!}"></div>
+		<div ng-if="user.class_id">
+			<div template-directive template-url="{!! route('student.partials.tips_help_bar') !!}"></div>
+		</div>
 
-		<div class="wrapr"> 
-			
+		<div class="module-wrapper"> 
+			<div template-directive template-url="{!! route('student.class.partials.module_list') !!}"></div>
 		</div>
 	</div>
 @stop
@@ -21,5 +23,7 @@
 	{!! Html::script('/js/student/controllers/student_class_controller.js')!!}
 	{!! Html::script('/js/student/services/student_class_service.js')!!}
 
+	{!! Html::script('/js/common/search_service.js')!!}
+	{!! Html::script('/js/common/table_service.js')!!}
 	{!! Html::script('/js/student/class.js')!!}
 @stop

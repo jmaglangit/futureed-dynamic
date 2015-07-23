@@ -476,7 +476,7 @@ li.active .rnd-identifier{
 	border-radius: 8px;
 	box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
 	width: 100%;
-	min-height: 620px;
+	min-height: 900px;
 	position: relative;
 	overflow: auto;
 	margin-bottom: 40px;
@@ -1089,4 +1089,17 @@ content {
 
 .disabled-textarea {
 	resize: none;
+}
+
+.upload-label {
+	padding: 6px;
+	font-weight: normal;
+	font-size: 13px;
+}
+
+.wide-column {
+	max-width: 200px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }

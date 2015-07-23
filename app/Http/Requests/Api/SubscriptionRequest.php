@@ -22,11 +22,12 @@ class SubscriptionRequest extends ApiRequest {
 	    switch($this->method()){
     	    case 'POST':
 
-        	    return ['name'          => 'required|regex:'. config('regex.name_numeric'),
-            			'price'         => 'required|numeric|min:0.01|max:999999.99',
-            			'description'   => 'required',
-                        'days'          => 'required|integer',
-            			'status'        => 'required|in:Enabled,Disabled'];
+        	    return [
+					'name' => 'required|regex:' . config('regex.name_numeric'),
+					'price' => 'required|numeric|min:0.01|max:999999.99',
+					'description' => 'required',
+					'days' => 'required|integer',
+					'status' => 'required|in:Enabled,Disabled'];
     	    break;
 
     	    case 'PATCH':
@@ -36,10 +37,11 @@ class SubscriptionRequest extends ApiRequest {
                         return ['status' => 'required|in:Enabled,Disabled'];    
                     break;
                     default:
-                    return ['name'          => 'requiredregex:'.config('regex.name_numeric'),
-                			'price'         => 'required|numeric|min:0.01|max:999999.99',
-                			'description'   => 'required',
-                			'status'        => 'required|in:Enabled,Disabled'];
+                    return [
+					'name' => 'required|regex:' . config('regex.name_numeric'),
+					'price' => 'required|numeric|min:0.01|max:999999.99',
+					'description' => 'required',
+					'status' => 'required|in:Enabled,Disabled'];
                 }
 
             break;
@@ -69,7 +71,9 @@ class SubscriptionRequest extends ApiRequest {
 	 */
 	public function messages() {
 		return [
-			'numeric' => 'The :attribute must be a number.' 
+			'numeric' => 'The :attribute must be a number.',
+			'name.required' => 'The subscription name field is required.',
+			'name.regex' => 'The subscription name format is invalid.',
 		];
 	}
 }

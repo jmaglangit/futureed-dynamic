@@ -18,21 +18,24 @@ class QuestionAnswer extends Model {
 		'updated_at',
 		'deleted_at'];
 
-	protected $fillable =['module_id','question_id','code','answer_text','answer_image','correct_answer','point_equivalent','difficulty',
+	protected $fillable =['module_id','label','question_id','code','answer_text','answer_image','original_image_name','correct_answer','point_equivalent','difficulty',
 		'created_by','updated_by'];
 
 	protected $attributes = [
 		'created_by' => 1,
 		'updated_by' => 1,
+		'answer_image' => 0,
+		'original_image_name' => 0,
 
 	];
 
 	//-------------scopes
-	public function scopeQuestionId($query, $question_id)
-	{
+	public function scopeQuestionId($query, $question_id){
+		return $query->whereQuestionId($question_id);
+	}
 
-		return $query->where('question_id', '=', $question_id);
-
+	public function scopeIsCorrectAnswer($query){
+		return $query->whereCorrectAnswer('Yes');
 	}
 
 }

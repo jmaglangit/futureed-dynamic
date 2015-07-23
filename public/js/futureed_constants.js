@@ -45,6 +45,26 @@ var Constants = {
 	, CONTENTS 		: "contents"
 	, QANDA 		: "qanda"
 
+	, GENERAL		: "General"
+	, CONTENT 		: "Content"
+	, QUESTION		: "Question"
+	, ANSWER		: "Answer"
+
+	/**
+	* Media Types
+	*/
+	, VIDEO			: 1
+	, TEXT			: 2
+	, IMAGE			: 3
+
+	/**
+	* Help Tabs
+	*/
+	, CURRENT 		: "current"
+	, OWN 			: "own"
+	, ALL 			: "all"
+	, CLASSMATE 	: "classmate"
+
 	/**
 	* Active Screens
 	*/

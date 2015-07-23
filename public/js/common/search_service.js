@@ -19,6 +19,7 @@ function SearchService() {
                 scope.search.learning_style = Constants.EMPTY_STR;
                 scope.search.link_type = Constants.EMPTY_STR;
                 scope.search.module = Constants.EMPTY_STR;
+                scope.search.module_status = Constants.EMPTY_STR;
                 scope.search.name = Constants.EMPTY_STR;
                 scope.search.order_no = Constants.EMPTY_STR;
                 scope.search.payment_status = Constants.EMPTY_STR;
