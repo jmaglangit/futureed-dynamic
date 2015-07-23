@@ -34,6 +34,11 @@ class DatabaseSeeder extends Seeder {
 		$this->call('AvatarWikisTableSeeder');
 		$this->call('MediaTypeTableSeeder');
 		$this->call('LearningStyleTableSeeder');
+		$this->call('SubjectTableSeeder');
+		$this->call('SubjectAreaTableSeeder');
+		$this->call('ModuleGroupTableSeeder');
+		$this->call('QuestionAnswerTableSeeder');
+		$this->call('QuestionTableSeeder');
     }
 
 }
