@@ -1,1 +1,1 @@
-<?php Routes::resource('/student-module-answer','Api\v1\StudentModuleAnswerController', ['only' => ['store','show']]);
+<?php Routes::resource('/student-module-answer','Api\v1\StudentModuleAnswerController', ['only' => ['store']]);

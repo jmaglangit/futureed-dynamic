@@ -2,8 +2,8 @@
 
 namespace FutureEd\Http\Requests\Api;
 
-
-class StudentModuleAnswerRequest extends ApiRequest{
+class StudentModuleAnswerRequest extends ApiRequest
+{
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -24,8 +24,8 @@ class StudentModuleAnswerRequest extends ApiRequest{
         return ['student_module_id' => 'required|integer',
             'module_id' => 'required|integer',
             'seq_no' => 'required|integer',
-            'question_id' =>'required|integer',
-            'answer_id' =>'required|integer',
+            'question_id' => 'required|integer',
+            'answer_id' => 'required|integer',
             'answer_text' => 'string',
             'student_id' => 'required|integer',
             'total_time' => 'required|integer'];

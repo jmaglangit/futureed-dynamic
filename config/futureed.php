@@ -98,10 +98,10 @@ return [
 	//set value for link_type
 	'link_type_general' => 'General',
 
-    //Help Request Status
-    'help_request_status_pending' => 'Pending',
-    'help_request_status_accepted' => 'Accepted',
-    'help_request_status_rejected' => 'Rejected',
+	//Help Request Status
+	'help_request_status_pending' => 'Pending',
+	'help_request_status_accepted' => 'Accepted',
+	'help_request_status_rejected' => 'Rejected',
 
 	//for tips take 3
 	'tip_take' => 3,
@@ -149,9 +149,9 @@ return [
 	//answer
 	'content' => 'content',
 
-    //answer status
-    'answer_status_correct' => 'Correct',
-    'answer_status_wrong' => 'Wrong',
+	//answer status
+	'answer_status_correct' => 'Correct',
+	'answer_status_wrong' => 'Wrong',
 
 	//Student Module
 	'module_status_available' => 'Available',
