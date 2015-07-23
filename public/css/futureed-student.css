@@ -446,12 +446,12 @@ th, td {
 	font-size: 14px;
 }
 
-.nav-pills>li.active>a {
+.active>.pill-grey {
 	background-color: #504c4c !important;
 }
 
-.nav-pills>li.active>a:hover {
-	background-color: #504c4c !important;
+.active>.pill-grey:hover {
+	background-color: #504c4c;
 }
 
 .pill-grey {
@@ -472,11 +472,11 @@ th, td {
 	color: #ffffff;
 }
 
-.nav-gold>li.active>a {
+.active > .pill-gold {
 	background-color: #d3bf49	 !important;
 }
 
-.nav-gold>li.active>a:hover {
+.nav-gold>a:hover {
 	background-color: #d3bf49	 !important;
 }
 

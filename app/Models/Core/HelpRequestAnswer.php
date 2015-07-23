@@ -22,7 +22,8 @@ class HelpRequestAnswer extends Model {
 		'seq_no',
 		'request_answer_status',
 		'status',
-		'points'
+		'points',
+		'rated_by'
 	];
 
     protected $attributes = [
