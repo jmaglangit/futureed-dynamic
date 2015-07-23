@@ -1,14 +1,13 @@
 angular.module('futureed.controllers')
 	.controller('StudentClassController', StudentClassController);
 
-StudentClassController.$inject = ['$scope', '$filter', 'apiService', 'StudentClassService', 'SearchService', 'TableService'];
+StudentClassController.$inject = ['$scope', '$filter', '$window', 'StudentClassService', 'SearchService', 'TableService'];
 
-function StudentClassController($scope, $filter, apiService, StudentClassService, SearchService, TableService) {
+function StudentClassController($scope, $filter, $window, StudentClassService, SearchService, TableService) {
 	var self = this;
 
 	self.tips = {};
 	self.help = {};
-	self.student_id = $scope.user.id;
 
 	SearchService(self);
 	self.searchDefaults();
@@ -53,7 +52,7 @@ function StudentClassController($scope, $filter, apiService, StudentClassService
 	self.submitTips = function() {
 		self.tips.errors = Constants.FALSE;
 		self.tips.success = Constants.FALSE;
-		self.tips.student_id = self.student_id;
+		self.tips.student_id = $scope.user.id;
 
 		$scope.div_block("tips_form");
 		StudentClassService.submitTips(self.tips).success(function(response){
@@ -88,7 +87,7 @@ function StudentClassController($scope, $filter, apiService, StudentClassService
 	self.submitHelp = function() {
 		self.help.errors = Constants.FALSE;
 		self.help.success = Constants.FALSE;
-		self.help.student_id = self.student_id;
+		self.help.student_id = $scope.user.id;
 		self.help.class_id = $scope.user.class_id.class_id;
 
 		$scope.div_block("help_request_form");
@@ -215,6 +214,10 @@ function StudentClassController($scope, $filter, apiService, StudentClassService
 				} else if(response.data) {
 					self.records = response.data.records;
 					self.updatePageCount(response.data);
+
+					angular.forEach(self.records, function(value, key) {
+						value.slug_name = formatSlug(value.name);
+					});
 				}
 			}
 
@@ -238,5 +241,10 @@ function StudentClassController($scope, $filter, apiService, StudentClassService
 		}).error(function(response) {
 			self.errors = $scope.internalError();
 		});
+	}
+
+	self.redirect = function(url, slug_name) {
+		url += "/" + slug_name;
+		$window.location.href=url;
 	}
 }

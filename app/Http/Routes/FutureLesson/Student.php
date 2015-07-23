@@ -107,6 +107,7 @@
 						'as' => 'student.class.modulename'
 						, 'uses' => 'FutureLesson\Student\ClassModuleController@module'
 					]);
+				
 				Routes::group([
 					  'prefix' => '/partials'
 					, 'middleware' => 'student_partial'], function()
@@ -144,6 +145,21 @@
 					Routes::get('/add_tip', [ 
 							'as' => 'student.class.module.partials.add_tip'
 							, 'uses' => 'FutureLesson\Student\ClassModuleController@add_tip'
+						]);
+
+					Routes::get('/list_tips', [ 
+							'as' => 'student.class.module.partials.list_tips'
+							, 'uses' => 'FutureLesson\Student\ClassModuleController@list_tips'
+						]);
+
+					Routes::get('/list_current_tips', [ 
+							'as' => 'student.class.module.partials.list_current_tips'
+							, 'uses' => 'FutureLesson\Student\ClassModuleController@list_current_tips'
+						]);
+
+					Routes::get('/list_all_tips', [ 
+							'as' => 'student.class.module.partials.list_all_tips'
+							, 'uses' => 'FutureLesson\Student\ClassModuleController@list_all_tips'
 						]);
 				});
 			});
