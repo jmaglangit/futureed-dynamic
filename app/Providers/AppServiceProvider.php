@@ -259,5 +259,9 @@ class AppServiceProvider extends ServiceProvider {
 			'FutureEd\Models\Repository\StudentPoint\StudentPointRepository'
 		);
 
+		$this->app->bind(
+			'FutureEd\Models\Repository\AvatarWiki\AvatarWikiRepositoryInterface',
+			'FutureEd\Models\Repository\AvatarWiki\AvatarWikiRepository'
+		);
 	}
 }

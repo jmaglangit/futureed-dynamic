@@ -149,14 +149,14 @@ return [
 	//answer
 	'content' => 'content',
 
-
-
-
-
-
-
     //answer status
     'answer_status_correct' => 'Correct',
     'answer_status_wrong' => 'Wrong',
 
+	//Student Module
+	'module_status_available' => 'Available',
+	'module_status_ongoing' => 'On Going',
+	'module_status_completed' => 'Completed',
+	'points_to_finish_module' => 12,
+	'deductions_to_fail_module' => 10,
 ];

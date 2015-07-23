@@ -27,7 +27,8 @@ class StudentModuleAnswerRequest extends ApiRequest{
             'question_id' =>'required|integer',
             'answer_id' =>'required|integer',
             'answer_text' => 'string',
-            'student_id' => 'required|integer'];
+            'student_id' => 'required|integer',
+            'total_time' => 'required|integer'];
     }
 
     public function messages()
