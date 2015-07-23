@@ -51,13 +51,13 @@
 		<div class="col-xs-12" ng-if="!mod.hide">
 			{!! Form::open(['class' => 'form-horizontal']) !!}
 			{!! Form::textarea('content', ''
-                , array(
-                    'class' => 'form-control toggle-input'
-                    , 'placeholder' => 'Help Answer' 
-                    , 'ng-model' => 'mod.answer.content'
-                    , 'autocomplete' => 'off'
-                    , 'rows' => 6)
-            ) !!}
+			    , array(
+			        'class' => 'form-control toggle-input'
+			        , 'placeholder' => 'Help Answer' 
+			        , 'ng-model' => 'mod.answer.content'
+			        , 'autocomplete' => 'off'
+			        , 'rows' => 6)
+			) !!}
 		</div>
 		<div class="row">
 			<div class="col-xs-8 pull-right">
