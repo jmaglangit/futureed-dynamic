@@ -18,8 +18,18 @@
 
 				<ul class="nav navbar-nav navbar-right">
 					<li class="nav-label">Reward Points</li>
-					<li class="nav-points-rewards"><i class="fa fa-star nav-icon-holder"></i> {! user.points !}</li>
-					<li class="nav-points-rewards" ng-init="getStudentBadges()"><i class="fa fa-trophy nav-icon-holder"></i> {! badges.total !}</li>
+					<li class="nav-points-rewards">
+						{!! Html::image('/images/icons/icon-reward.png', ''
+							, array(
+								'class' => 'nav-icon-holder'
+							)
+						) !!} {! user.points !}</li>
+					<li class="nav-points-rewards" ng-init="getStudentBadges()">
+						{!! Html::image('/images/icons/icon-badges.png', ''
+							, array(
+								'class' => 'nav-icon-holder'
+							)
+						) !!} {! badges.total !}</li>
 
 					<li class="nav-label"></li>
 					<li class="nav-label"></li>
