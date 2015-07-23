@@ -38,7 +38,7 @@
 					<li><img class="nav-image-holder" ng-src="{! user.avatar !}" /></li>
 					<li class="nav-label">Welcome, {! user.first_name !}</li>
 					<li class="dropdown nav-dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="fa fa-2x fa-bars"></span></a>
+						<a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="fa fa-2x fa-bars"></span></a>
 						<ul class="dropdown-menu nav-dropdown-menu" role="menu">
 							<li><a href="{!! route('student.profile.index') !!}">Profile</a></li>
 							<li><a href="#">Settings</a></li>
