@@ -90,26 +90,26 @@ class QuestionAnswerController extends ApiController {
         return $this->respondWithData($this->question_answer->getQuestionAnswers($criteria));
     }
 
-	/**
-	 * Delete Question Answer Image.
-	 */
-	public function deleteQuestionAnswerImage(){
-
-		//get file to be deleted
-		$delete_file = Input::get('delete_file');
-
-
-		$delete_file = public_path() . $delete_file;
-
-		$return = $this->file_services->deleteDirectory($delete_file);
-
-		if($return) {
-			return $this->respondWithData($return);
-		}
-
-		return $this->respondErrorMessage(2053);
-
-	}
+//	/**
+//	 * Delete Question Answer Image.
+//	 */
+//	public function deleteQuestionAnswerImage(){
+//
+//		//get file to be deleted
+//		$delete_file = Input::get('delete_file');
+//
+//
+//		$delete_file = public_path() . $delete_file;
+//
+//		$return = $this->file_services->deleteDirectory($delete_file);
+//
+//		if($return) {
+//			return $this->respondWithData($return);
+//		}
+//
+//		return $this->respondErrorMessage(2053);
+//
+//	}
 
 
 
