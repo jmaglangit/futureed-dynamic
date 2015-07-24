@@ -24,8 +24,6 @@ class FileServices {
 
 		//get file
 
-
-
 		if($this->file_system->exists($file)){
 
 			$file_dir = dirname($file);
