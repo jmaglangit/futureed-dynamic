@@ -81,9 +81,11 @@ class ImageController extends ApiController {
 
 		$delete_file = public_path() . $delete_file;
 
-		$delete_file = $this->file_system->extension($delete_file);
+		$extension_file = $this->file_system->extension($delete_file);
 
-		if(!(empty($delete_file))){
+
+		if(!(empty($extension_file))){
+
 			$return = $this->file_services->deleteDirectory($delete_file);
 
 			if ($return) {
