@@ -151,7 +151,7 @@
                 {!! Form::text('school_state', ''
                     , array(
                         'class' => 'form-control'
-                        , 'placeholder' => 'City'
+                        , 'placeholder' => 'State'
                         , 'ng-disabled' => '!profile.active_edit' 
                         , 'ng-model' => 'profile.prof.school_state')
                 ) !!}
@@ -237,12 +237,12 @@
                         , 'ng-model' => 'profile.prof.city')
                 ) !!}
             </div>
-            <label for="" class="col-md-2 control-label">State <span class="required" ng-if="profile.is_required">*</span></label>
+            <label for="" class="col-md-2 control-label">State </label>
             <div class="col-md-4">
                 {!! Form::text('state', ''
                     , array(
                         'class' => 'form-control'
-                        , 'placeholder' => 'City'
+                        , 'placeholder' => 'State'
                         , 'ng-disabled' => '!profile.active_edit' 
                         , 'ng-model' => 'profile.prof.state')
                 ) !!}
@@ -261,7 +261,7 @@
             </div>
             <label for="" class="col-md-2 control-label">Country <span class="required" ng-if="profile.is_required">*</span></label>
             <div class="col-md-4">
-                <select name="country" class="form-control" ng-model="profile.prof.country_id" ng-disabled="!profile.active_edit">
+                <select name="country_id" class="form-control" ng-model="profile.prof.country_id" ng-disabled="!profile.active_edit">
                     <option ng-selected="profile.prof.country_id == futureed.FALSE" value="">-- Select Country --</option>
                     <option ng-selected="profile.prof.country_id == country.id" ng-repeat="country in countries" ng-value="country.id">{! country.name!}</option>
                 </select>
