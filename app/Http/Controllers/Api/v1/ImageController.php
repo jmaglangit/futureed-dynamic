@@ -3,18 +3,47 @@
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
-use Illuminate\Http\Request;
+use FutureEd\Services\FileServices;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Input;
 use League\Flysystem\Exception;
 use League\Glide\ServerFactory;
+use FutureEd\Http\Requests\Api\ImageRequest;
+use PayPal\Api\Image;
 
 
 class ImageController extends ApiController {
 
-	//get path
-	//convert to stream
+	/**
+	 * @var Initialized.
+	 */
+	protected $file_services;
 
+	/**
+	 * @var Initialized.
+	 */
+	protected $file_system;
+
+	/**
+	 * Initialized.
+	 * @param FileServices $fileServices
+	 * @param Filesystem $filesystem
+	 */
+	public function __construct(
+		FileServices $fileServices,
+		Filesystem $filesystem
+	){
+		$this->file_services = $fileServices;
+
+		$this->file_system = $filesystem;
+	}
+
+
+	/**
+	 * Get path; Convert to stream.
+	 * @return mixed
+	 */
 	public function getImage(){
 
 		//type -- answer, question
@@ -37,6 +66,33 @@ class ImageController extends ApiController {
 		}
 
 		return $this->respondErrorMessage(2052);
+	}
+
+
+	/**
+	 * Delete Image physical file.
+	 * @param ImageRequest $request
+	 * @return mixed
+	 */
+	public function deleteImage(ImageRequest $request){
+
+		//get file to be deleted
+		$delete_file = $request->get('delete_file');
+
+		$delete_file = public_path() . $delete_file;
+
+		$delete_file = $this->file_system->extension($delete_file);
+
+		if(!(empty($delete_file))){
+			$return = $this->file_services->deleteDirectory($delete_file);
+
+			if ($return) {
+				return $this->respondWithData($return);
+			}
+		}
+
+		return $this->respondErrorMessage(2053);
+
 	}
 
 }
