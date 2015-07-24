@@ -269,7 +269,7 @@ class AppServiceProvider extends ServiceProvider {
 			'FutureEd\Models\Repository\Event\EventRepositoryInterface',
 			'FutureEd\Models\Repository\Event\EventRepository'
 		);
-		
+
 		$this->app->bind(
 
 			'FutureEd\Models\Repository\AvatarWiki\AvatarWikiRepositoryInterface',

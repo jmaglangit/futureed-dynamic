@@ -97,6 +97,7 @@ class StudentModuleController extends ApiController {
 	public function store(StudentModuleRequest $request)
 	{
 		$data = $request->all();
+		$data['module_status'] = config('futureed.module_status_ongoing');
 		$data['date_start'] = Carbon::now();
 		$data['date_end'] = Carbon::now();
 		return $this->respondWithData($this->student_module->addStudentModule($data));
