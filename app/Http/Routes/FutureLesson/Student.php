@@ -161,6 +161,16 @@
 							'as' => 'student.class.module.partials.list_all_tips'
 							, 'uses' => 'FutureLesson\Student\ClassModuleController@list_all_tips'
 						]);
+
+					Routes::get('/view_current_tips', [ 
+							'as' => 'student.class.module.partials.view_current_tips'
+							, 'uses' => 'FutureLesson\Student\ClassModuleController@view_current_tips'
+						]);
+
+					Routes::get('/view_all_tips', [ 
+							'as' => 'student.class.module.partials.view_all_tips'
+							, 'uses' => 'FutureLesson\Student\ClassModuleController@view_all_tips'
+						]);
 				});
 			});
 		});

@@ -18,4 +18,7 @@
 			</div>
 		</div>
 	</div>
+	<div class="col-xs-8" ng-if="mod.show_btn">
+		<button class="btn btn-maroon" ng-click="mod.currentList(1)">View More</button>
+	</div>
 </div>

@@ -76,5 +76,12 @@ function StudentModuleService($http){
 		})
 	}
 
+	service.getTipDetails = function(id) {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url 	: serviceUrl + 'tip/student/' + id
+		})
+	}
+
 	return service;
 }
