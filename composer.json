@@ -12,7 +12,7 @@
 		"ext-curl": "*",
 		"ext-json": "*",
 		"paypal/rest-api-sdk-php" : "*",
-		"curl/curl" : "*"
+		"curl/curl" : "*",
 		"league/csv": "^7.1",
 		"league/glide": "^0.3.5"
 	},
