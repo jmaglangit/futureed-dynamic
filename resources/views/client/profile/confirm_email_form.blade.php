@@ -62,14 +62,14 @@
 	        {!! Form::button('Proceed'
 	            , array(
 	                    'id' => 'proceed_btn'
-	                , 'class' => 'btn btn-gold btn-medium'
+	                , 'class' => 'btn btn-blue btn-medium'
 	                , 'ng-click' => 'profile.confirmClientEmail()'
 	              )
 	        ) !!}
 
 	        {!! Form::button('Resend Code'
 	            , array(
-	                    'class' => 'btn btn-blue btn-medium'
+	                    'class' => 'btn btn-gold btn-medium'
 	                , 'ng-click' => 'profile.resendClientEmailCode()'
 	            )
 	        ) !!}
