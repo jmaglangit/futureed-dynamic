@@ -262,6 +262,18 @@
 			});
 		});
 
+		Routes::group([
+			  'prefix' => 'learning-style'
+			, 'middleware' => 'student'], function()
+		{
+			Routes::get('/', [ 
+					'as' => 'student.learning-style.index'
+					, 'uses' => 'FutureLesson\Student\LearningStyleController@index'
+				]);
+
+			
+		});
+
 		Routes::group(['prefix' => 'partials'], function() {
 			Routes::get('/base_url', [
 					'as' => 'student.partials.base_url'
