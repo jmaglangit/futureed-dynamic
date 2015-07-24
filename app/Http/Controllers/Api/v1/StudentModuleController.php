@@ -14,7 +14,7 @@ class StudentModuleController extends ApiController {
 
 
 	public function __construct(ModuleRepositoryInterface $moduleRepositoryInterface,
-								StudentModuleRepositoryInterface $student_module)
+                                   StudentModuleRepositoryInterface $student_module)
 	{
 		$this->module = $moduleRepositoryInterface;
 		$this->student_module = $student_module;
