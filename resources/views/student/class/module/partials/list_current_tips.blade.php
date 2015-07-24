@@ -3,7 +3,7 @@
 		<center><h2>No Tips Found</h2></center>
 	</div>
 	<div class="content-box row margin-top-bot-5" ng-repeat="current in mod.tip_records">
-		<a href="#" ng-click="mod.setCurrentActive('view', current.id)"><h4 class="list-title">{! current.title !}</h4></a>
+		<a href="#" ng-click="mod.setCurrentActiveTip('view', current.id)"><h4 class="list-title">{! current.title !}</h4></a>
 		<div class="row">
 			<div class="col-xs-6">
 				<span><i class="fa fa-user"></i> {! current.student.first_name !} {! current.student.last_name !}</span>
@@ -19,6 +19,6 @@
 		</div>
 	</div>
 	<div class="col-xs-8" ng-if="mod.show_btn">
-		<button class="btn btn-maroon" ng-click="mod.tipList('', futureed.CURRENT)">View More</button>
+		<button class="btn btn-maroon" ng-click="mod.tipList('', futureed.CURRENT, 1)">View More</button>
 	</div>
 </div>

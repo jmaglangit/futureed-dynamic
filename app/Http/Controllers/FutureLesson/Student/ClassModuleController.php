@@ -90,4 +90,18 @@ class ClassModuleController extends Controller {
 	public function list_all_tips() {
 		return view('student.class.module.partials.list_all_tips');
 	}
+
+	/**
+	*Display View Current Tip
+	*/
+	public function view_current_tips() {
+		return view('student.class.module.partials.view_current_tips');
+	}
+
+	/**
+	*Display View All Tip
+	*/
+	public function view_all_tips() {
+		return view('student.class.module.partials.view_all_tips');
+	}
 }
