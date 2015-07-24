@@ -2,6 +2,7 @@
 
 angular.module('futureed', [
 	'ui.bootstrap',
+	'evgenyneu.markdown-preview',
 	'futureed.services',
 	'futureed.controllers',
 	'ui.bootstrap.datetimepicker'

@@ -58,5 +58,23 @@ function StudentModuleService($http){
 		})
 	}
 
+	service.addTip = function(data) {
+		return $http({
+			method 	: Constants.METHOD_POST
+			, data 	: data
+			, url 	: serviceUrl + 'tip/question-content'
+		})
+	}
+
+	service.tipList = function(data) {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url 	: serviceUrl + 'tip/student?module_id=' + data.module_id
+				+ '&link_id=' + data.link_id
+				+ '&link_type=' + data.link_type
+				+ '&limit=' + data.limit
+		})
+	}
+
 	return service;
 }

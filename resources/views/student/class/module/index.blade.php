@@ -60,53 +60,8 @@
 								</div>
 							</div>
 						</div>
-						<div class="col-xs-10 col-xs-offset-1 margin-top-15">
-							<div class="col-xs-12">
-								<div class="clearfix"></div>
-								{!! Form::open(['class' => 'form-horizontal margin-top-15']) !!}
-								<div class="form-group">
-									<label class="control-label col-xs-2">Title</label>
-									<div class="col-xs-10">
-										{!! Form::text('title', ''
-											, array(
-											    'class' => 'form-control sidebar-input'
-											    , 'placeholder' => 'Title' 
-											    , 'ng-model' => 'class.help.title'
-											    , 'autocomplete' => 'off')
-										) !!}
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="control-label col-xs-2">Description</label>
-									<div class="col-xs-10">
-										{!! Form::textarea('content', ''
-							                , array(
-							                    'class' => 'form-control sidebar-input'
-							                    , 'placeholder' => 'Description' 
-							                    , 'ng-model' => 'class.help.content'
-							                    , 'autocomplete' => 'off')
-							            ) !!}
-									</div>
-								</div>
-							</div>
-							<div class="col-xs-12 btn-container">
-								{!! Form::button('Submit'
-									, array(
-									  'id' => 'validate_code_btn'
-									  , 'class' => 'btn btn-maroon btn-medium'
-									  , 'ng-click' => 'class.submitHelp()'
-									)
-								) !!}
-								{!! Form::button('Back'
-									, array(
-										'id' => 'validate_code_btn'
-										, 'class' => 'btn btn-gold btn-medium'
-										, 'ng-click' => 'class.submitHelp()'
-										)
-								) !!}
-							</div>
-							{!! Form::close() !!}
-						</div>
+						<div template-directive template-url="{!! route('student.class.module.partials.add_tip') !!}"></div>
+						<div template-directive template-url="{!! route('student.class.module.partials.list_tips') !!}"></div>
 					</div>
 				</div>
 			</div>

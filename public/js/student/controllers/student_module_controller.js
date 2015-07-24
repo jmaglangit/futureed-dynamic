@@ -18,6 +18,7 @@ function StudentModuleController($scope, apiService, StudentModuleService) {
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
 		self.toggle_bottom = !self.toggle_bottom;
+		self.setTipActive();
 	}
 
 	self.toggleBtnHelp = function() {
@@ -28,7 +29,10 @@ function StudentModuleController($scope, apiService, StudentModuleService) {
 	}
 
 	self.giveTip = function() {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
 		self.toggle_bottom = !self.toggle_bottom;
+		self.setTipActive('add');
 	}
 
 	self.askHelp = function() {
@@ -41,13 +45,8 @@ function StudentModuleController($scope, apiService, StudentModuleService) {
 	self.setHelpActive = function(active, id) {
 		self.active_help_list = Constants.FALSE;
 		self.active_help_add = Constants.FALSE;
-		self.active_help_view = Constants.FALSE;
 
 		switch(active) {
-			case Constants.ACTIVE_VIEW:
-				self.active_help_view = Constants.TRUE;
-				break;
-
 			case Constants.ACTIVE_ADD:
 				self.active_help_add = Constants.TRUE;
 				break;
@@ -110,7 +109,7 @@ function StudentModuleController($scope, apiService, StudentModuleService) {
 		self.request = {};
 		self.request.student_id = $scope.user.id;
 		self.request.module_id = 1;
-		self.request.link_type = 'Question';
+		self.request.link_type = 'Content';
 		self.request.help_request_type = studentModule.OTHERS;
 		self.request.question_status = 'Open'
 		self.request.link_id = 1;
@@ -232,9 +231,9 @@ function StudentModuleController($scope, apiService, StudentModuleService) {
 		self.request = {};
 		self.request.student_id = $scope.user.id;
 		self.request.module_id = 1;
-		self.request.link_type = 'Question';
+		self.request.link_type = 'Content';
 		self.request.help_request_type = studentModule.OWN;
-		self.request.question_status = 'Open'
+		self.request.question_status = 'Open,Answered'
 		self.request.link_id = 1;
 
 		$scope.ui_block();
@@ -285,5 +284,120 @@ function StudentModuleController($scope, apiService, StudentModuleService) {
 			$scope.ui_unblock();
 		})
 
+	}
+
+	self.setTipActive = function(active, id) {
+		self.errors = Constants.FALSE;
+
+		self.active_tip_add = Constants.FALSE;
+		self.active_tip_list = Constants.FALSE;
+
+		switch(active) {
+			case Constants.ACTIVE_ADD :
+				self.active_tip_add = Constants.TRUE;
+				break;
+			default:
+				self.active_tip_list = Constants.TRUE;
+				break;
+		}
+	}
+
+	self.addTip = function() {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		/*Setting temporary params*/
+		self.add.module_id = parseInt(1);
+		self.add.subject_id = parseInt(1);
+		self.add.subject_area_id = parseInt(1);
+		self.add.link_type = "Content"
+		self.add.link_id = parseInt(1);
+		self.add.class_id = $scope.user.class.id;
+		self.add.student_id = $scope.user.id;
+
+		$scope.ui_block();
+		StudentModuleService.addTip(self.add).success(function(response){
+			if(angular.equals(response.status,Constants.STATUS_OK)){
+				if(response.errors){
+					self.success = Constants.FALSE;
+					self.errors = $scope.errorHandler(response.errors);
+				}else if(response.data){
+					self.success = Constants.TRUE;
+					self.errors = Constants.FALSE;
+					self.add = {};
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		})
+	}
+
+	self.tipList = function(limit, view, flag) {
+		self.filters = {};
+		/*setting temp params*/
+		self.filters.module_id = parseInt(1);
+		self.filters.link_id = (view == Constants.ALL) ? Constants.EMPTY_STR:parseInt(1);
+		self.filters.link_type = "Content";
+		self.filters.limit = (limit == 3) ? 3:0;
+
+		$scope.ui_block();
+		StudentModuleService.tipList(self.filters).success(function(response){
+			if(angular.equals(response.status,Constants.STATUS_OK)){
+				if(response.errors){
+					self.errors = $scope.errorHandler(response.errors);
+				}else if(response.data){
+					self.tip_records = {};
+					self.tip_records = response.data.records;
+
+					angular.forEach(self.tip_records, function(value, key) {
+						value.created_at = moment(value.created_at).startOf("minute").fromNow();
+					});
+
+					self.show_btn = (self.tip_records.length <= 3 || flag == 1) ? self.show_btn = Constants.TRUE:self.show_btn = Constants.FALSE;
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		})
+	}
+
+	self.setCurrentActiveTip = function(active, id) {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		self.active_current_tip_view = Constants.FALSE;
+		self.actuve_current_tip_list = Constants.FALSE;
+
+		switch (active) {
+			case Constants.ACTIVE_VIEW :
+				self.active_current_tip_view = Constants.TRUE;
+				break;
+			default :
+				self.active_current_tip_list = Constants.TRUE;
+				self.tipList(3, Constants.CURRENT);
+				break;
+		}
+	}
+
+	self.setAllActiveTip = function(active, id) {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		self.active_current_tip_view = Constants.FALSE;
+		self.actuve_current_tip_list = Constants.FALSE;
+
+		switch (active) {
+			case Constants.ACTIVE_VIEW :
+				self.active_current_tip_view = Constants.TRUE;
+				break;
+			default :
+				self.active_all_tip_list = Constants.TRUE;
+				self.tipList(3, Constants.ALL);
+				break;
+		}
 	}
 }
