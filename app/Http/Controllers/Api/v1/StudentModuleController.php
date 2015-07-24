@@ -110,7 +110,7 @@ class StudentModuleController extends ApiController {
 	 */
 	public function show($id)
 	{
-		//
+		return $this->respondWithData($this->student_module->viewStudentModule($id));
 	}
 
 	/**

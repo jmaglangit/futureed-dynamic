@@ -2,20 +2,18 @@
 
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
-use FutureEd\Models\Repository\StudentPoint\StudentPointRepositoryInterface;
-use Illuminate\Support\Facades\Input;
-use FutureEd\Http\Requests\Api\StudentPointRequest;
-
 
 use Illuminate\Http\Request;
+use FutureEd\Models\Repository\Event\EventRepositoryInterface;
+use Illuminate\Support\Facades\Input;
 
-class StudentPointController extends ApiController {
+class EventController extends ApiController {
 
-	protected $student_point;
+	protected $event;
 
-	public function __construct(StudentPointRepositoryInterface $student_point){
+	public function __construct(EventRepositoryInterface $event){
 
-		$this->student_point = $student_point;
+		$this->event = $event;
 
 	}
 
@@ -30,10 +28,11 @@ class StudentPointController extends ApiController {
 		$limit = 0 ;
 		$offset = 0;
 
-		//for student_id
-		if(Input::get('student_id')){
 
-			$criteria['student_id'] = Input::get('student_id');
+		//for name
+		if(Input::get('name')){
+
+			$criteria['name'] = Input::get('name');
 		}
 
 		if(Input::get('limit')) {
@@ -44,8 +43,8 @@ class StudentPointController extends ApiController {
 			$offset = intval(Input::get('offset'));
 		}
 
-		//get Student Points
-		return $this->respondWithData($this->student_point->getStudentPoints($criteria , $limit, $offset ));
+		return $this->respondWithData($this->event->getEvents($criteria , $limit, $offset ));
+
 	}
 
 	/**
@@ -76,7 +75,7 @@ class StudentPointController extends ApiController {
 	 */
 	public function show($id)
 	{
-		return $this->respondWithData($this->student_point->viewStudentPoint($id));
+		//
 	}
 
 	/**
@@ -96,13 +95,9 @@ class StudentPointController extends ApiController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id, StudentPointRequest $request)
+	public function update($id)
 	{
-		$data = $request->only('event_id','points_earned','description');
-
-		$this->student_point->updateStudentPoint($id,$data);
-
-		return $this->respondWithData($this->student_point->viewStudentPoint($id));
+		//
 	}
 
 	/**
