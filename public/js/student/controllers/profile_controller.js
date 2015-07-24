@@ -519,8 +519,13 @@ function ProfileController($scope, apiService, profileService) {
 	          self.errors = $scope.internalError();
 	        });
 	    } else {
-	      self.errors = [Constants.MSG_PPW_NOT_MATCH];
-	      $("html, body").animate({ scrollTop: 0 }, "slow");
+	    	if(!self.image_id) {
+	    		self.errors = [Constants.MSG_PPW_SELECT];
+	    	} else {
+	    		self.errors = [Constants.MSG_PPW_NOT_MATCH];
+	    	}
+	      	
+	      	$("html, body").animate({ scrollTop: 0 }, "slow");
 	    }
 	}
 }
