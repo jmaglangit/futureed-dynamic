@@ -159,4 +159,10 @@ return [
 	'module_status_completed' => 'Completed',
 	'points_to_finish_module' => 12,
 	'deductions_to_fail_module' => 10,
+
+    //Question Types
+    'question_type_fill_in_the_blank' => 'FIB',
+    'question_type_multiple_choice' => 'MC',
+    'question_type_provide_answer' => 'N',
+    'question_type_ordering' => 'O'
 ];

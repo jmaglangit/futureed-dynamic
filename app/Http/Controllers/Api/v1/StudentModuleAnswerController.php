@@ -5,6 +5,7 @@ use FutureEd\Http\Requests\Api\StudentModuleAnswerRequest;
 use FutureEd\Models\Repository\AvatarPose\AvatarPoseRepositoryInterface;
 use FutureEd\Models\Repository\AvatarQuote\AvatarQuoteRepositoryInterface;
 use FutureEd\Models\Repository\AvatarWiki\AvatarWikiRepositoryInterface;
+use FutureEd\Models\Repository\Question\QuestionRepositoryInterface;
 use FutureEd\Models\Repository\QuestionAnswer\QuestionAnswerRepositoryInterface;
 use FutureEd\Models\Repository\Quote\QuoteRepositoryInterface;
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
@@ -16,6 +17,7 @@ class StudentModuleAnswerController extends ApiController{
     protected $avatar_pose;
     protected $avatar_quotes;
     protected $avatar_wiki;
+    protected $question;
     protected $question_answer;
     protected $quote;
     protected $student;
@@ -26,6 +28,7 @@ class StudentModuleAnswerController extends ApiController{
     public function __construct(AvatarPoseRepositoryInterface $avatar_pose,
                                 AvatarQuoteRepositoryInterface $avatar_quotes,
                                 AvatarWikiRepositoryInterface $avatar_wiki,
+                                QuestionRepositoryInterface $question,
                                 QuestionAnswerRepositoryInterface $question_answer,
                                 QuoteRepositoryInterface $quote,
                                 StudentModuleRepositoryInterface $student_module,
@@ -35,6 +38,7 @@ class StudentModuleAnswerController extends ApiController{
         $this->avatar_pose = $avatar_pose;
         $this->avatar_quotes = $avatar_quotes;
         $this->avatar_wiki = $avatar_wiki;
+        $this->question = $question;
         $this->question_answer = $question_answer;
         $this->quote = $quote;
         $this->student = $student;
@@ -55,20 +59,33 @@ class StudentModuleAnswerController extends ApiController{
         $student_module = $this->student_module->getStudentModule($data['student_module_id']);
 
         if(is_null($student_module)){
-            return $this->respondErrorMessage(2142);
+            return $this->respondErrorMessage(2144);
         }
 
         $student_module = $student_module->toArray();
         $student_module_id = $student_module['id'];
 
+        //get question details.
+        $question = $this->question->viewQuestion($data['question_id']);
+        $is_correct_answer = false;
         //get correct answer.
-        $check_correct_answer = $this->question_answer->getCorrectAnswer($data['question_id'],$data['answer_id']);
+        if(!is_null($question)){
+            switch($question->question_type){
+                case config('futureed.question_type_fill_in_the_black'):
+                case config('futureed.question_type_provide_answer'):
+                case config('futureed.question_type_ordering'):
+                    $is_correct_answer = ( strtolower($question->answer) == strtolower($data['answer_text']) );
+                    break;
+                case config('futureed.question_type_multiple_choice'):
+                    $is_correct_answer = $this->question_answer->getCorrectAnswer($data['question_id'],$data['answer_id']);
+            }
+        }
 
         $point = 0;
         $should_interrupt_exam = false;
 
         //check answer if it's correct/incorrect.
-        if (is_null($check_correct_answer)){
+        if (!$is_correct_answer){
             //if incorrect answer, increment the wrong_counter.
             $student_module['wrong_counter'] += 1;
 
@@ -85,11 +102,16 @@ class StudentModuleAnswerController extends ApiController{
             $data['answer_status'] = config('futureed.answer_status_wrong');
         }else{ //if correct answer. reset the wrong_counter to zero and increment the correct_counter
             $student_module['wrong_counter'] = 0;
-            $student_module['correct_counter'] += 1;
+            $student_module['total_correct_answer'] = $student_module['correct_counter'] += 1;
             $point = 1;
             $data['answer_status'] = config('futureed.answer_status_correct');
+
+            //Levels of difficulty, 3 levels, must get 4 right per level minimum.
+            if( ($student_module['total_correct_answer'] % 4) == 0 ){
+                $student_module['current_difficulty_level'] += 1;
+            }
         }
-        $student_module['question_counter'] += 1;
+        $student_module['progress'] = $student_module['question_counter'] += 1;
         $student_module['running_points'] = $student_module['points_earned'] += $point;
         $student_module['last_answered_question_id'] = $data['question_id'];
         $student_module['total_time'] = $data['total_time'];
