@@ -43,6 +43,41 @@ class StudentPointRepository implements StudentPointRepositoryInterface{
 		return ['total' => $count, 'records' => $student_point->get()->toArray()];
 	}
 
+	/**
+	 * Get a record on StudentPoint.
+	 * @param $id
+	 * @return mixed
+	 */
+	public function viewStudentPoint($id){
+
+		$student_point = new StudentPoint();
+
+		$student_point = $student_point->with('event');
+		$student_point = $student_point->find($id);
+		return $student_point;
+
+	}
+
+	/**
+	 * Update a record.
+	 * @param $id
+	 * @param $data
+	 * @return bool|int|string
+	 */
+
+	public function updateStudentPoint($id,$data){
+
+		try{
+
+			return StudentPoint::find($id)
+				->update($data);
+
+		}catch (Exception $e){
+
+			return $e->getMessage();
+		}
+	}
+
 }
 
 

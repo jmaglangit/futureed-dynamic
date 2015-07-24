@@ -18,8 +18,17 @@ class StudentPoint extends Model {
 	protected $attributes = [
 		'created_by' => 1,
 		'updated_by' => 1,
+		'points_earned' => 0,
+		'event_id' => 0,
+		'description' =>0
 
 	];
+
+	//relationship
+	public function event(){
+
+		return $this->belongsTo('FutureEd\Models\Core\Event');
+	}
 
 	//scope
 	public function scopeStudentId($query,$student_id){
