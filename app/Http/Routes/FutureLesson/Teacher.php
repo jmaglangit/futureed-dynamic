@@ -137,4 +137,27 @@
 				]);
 			});
 		});
+
+		Routes::group(['prefix' => 'module'], function() {
+			$manage_teacher_module_controller = 'FutureLesson\Client\ManageTeacherModuleController';
+
+			Routes::get('/', [
+				'as' => 'client.teacher.module.index',
+				'uses' => $manage_teacher_module_controller . '@index'
+			]);
+
+			Routes::group(['prefix' => 'partials'], function() {
+				$manage_teacher_module_controller = 'FutureLesson\Client\ManageTeacherModuleController';
+
+				Routes::get('list_module_form', [
+					'as' => 'client.teacher.module.partials.list_module_form',
+					'uses' => $manage_teacher_module_controller . '@list_module_form'
+				]);
+
+				Routes::get('view_module', [
+					'as' => 'client.teacher.module.partials.view_module',
+					'uses' => $manage_teacher_module_controller . '@view_module'
+				]);
+			});
+		});
 	});
