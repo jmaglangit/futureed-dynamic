@@ -12,6 +12,7 @@
     			, array(
         			'class' => 'form-control'
         			, 'placeholder' => 'Current Email Address'
+                    , 'ng-class' => "{ 'required-field' : profile.fields['current_email'] }"
         			, 'ng-model' => 'profile.change.current_email'
         			, 'ng-model-options' => "{ debounce: {'default' : 1000} }"
         			, 'ng-change' => 'profile.validateCurrentClientEmail()')
@@ -30,6 +31,7 @@
     			, array(
         			'class' => 'form-control'
         			, 'placeholder' => 'New Email Address'
+                    , 'ng-class' => "{ 'required-field' : profile.fields['new_email'] }"
         			, 'ng-model' => 'profile.change.new_email'
         			, 'ng-model-options' => "{ debounce: {'default' : 1000} }"
         			, 'ng-change' => 'profile.validateNewClientEmail()') 
@@ -49,6 +51,7 @@
         			'class' => 'form-control'
         			, 'placeholder' => 'Confirm Email Address'
         			, 'ng-model' => 'profile.change.confirm_email'
+                    , 'ng-class' => "{ 'required-field' : profile.fields['confirm_email'] }"
         			, 'ng-model-options' => "{ debounce: {'default' : 1000} }"
         			, 'ng-change' => 'profile.confirmNewEmail()') 
         		)!!}
@@ -64,6 +67,7 @@
     		{!! Form::password('password'
     			, array(
         			'class' => 'form-control'
+                    , 'ng-class' => "{ 'required-field' : profile.fields['password'] }"
         			, 'placeholder' => 'Password'
         			, 'ng-model' => 'profile.change.password') 
         		)!!}
@@ -72,14 +76,14 @@
 	<div class="btn-container">
 		{!! Form::button('Save'
             , array(
-                'class' => 'btn btn-gold btn-medium'
+                'class' => 'btn btn-blue btn-medium'
                 , 'ng-click' => "profile.changeClientEmail()"
             )
         ) !!}
 
         {!! Form::button('Cancel'
             , array(
-                'class' => 'btn btn-blue btn-medium'
+                'class' => 'btn btn-gold btn-medium'
                 , 'ng-click' => "profile.setClientProfileActive('index')"
             )
         ) !!}

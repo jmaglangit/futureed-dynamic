@@ -27,6 +27,7 @@ function ProfileController($scope, apiService, clientProfileApiService) {
 	function setClientProfileActive(active) {
 	    self.errors = Constants.FALSE;
 	    self.success = Constants.FALSE;
+	    self.fields = [];
 
 	    self.change = {};
 	    self.validation = {};
@@ -264,16 +265,21 @@ function ProfileController($scope, apiService, clientProfileApiService) {
 	*/
 	function changeClientEmail() {
 		self.errors = Constants.FALSE;
+		self.fields = [];
 
-		if(self.validation.e_success && self.validation.n_success && self.validation.c_success) {
-			self.base_url = $("#base_url_form input[name='base_url']").val();
-		    self.callback_uri = self.base_url + Constants.URL_CHANGE_EMAIL(angular.lowercase(Constants.CLIENT));
+		self.base_url = $("#base_url_form input[name='base_url']").val();
+	    self.callback_uri = self.base_url + Constants.URL_CHANGE_EMAIL(angular.lowercase(Constants.CLIENT));
 
+	    if(self.validation.e_success && self.validation.n_success && self.validation.c_success) {
 			$scope.ui_block();
 			clientProfileApiService.changeClientEmail($scope.user.id, self.change, self.callback_uri).success(function(response) {
 				if(angular.equals(response.status, Constants.STATUS_OK)) {
 					if(response.errors) {
 						self.errors = $scope.errorHandler(response.errors);
+
+						angular.forEach(response.errors, function(value, key) {
+							self.fields[value.field] = Constants.TRUE;
+						});
 					} else if(response.data) {
 						self.prof.new_email = self.change.new_email;
 						self.setClientProfileActive(Constants.CONFIRM_EMAIL);
@@ -286,7 +292,18 @@ function ProfileController($scope, apiService, clientProfileApiService) {
 				$scope.ui_unblock();
 			});
 		} else {
-	    	$("html, body").animate({ scrollTop: 0 }, "slow");
+			
+			if(!self.change.current_email && !self.change.new_email
+				&& !self.change.confirm_email && !self.change.password) {
+
+				self.fields[Constants.ATTR_CURRENT_EMAIL] = Constants.TRUE;
+				self.fields[Constants.ATTR_NEW_EMAIL] = Constants.TRUE;
+				self.fields[Constants.ATTR_CONFIRM_EMAIL] = Constants.TRUE;
+				self.fields[Constants.ATTR_PASSWORD] = Constants.TRUE;
+				self.errors = [Constants.MSG_FILL_FIELDS];
+			}
+				
+			$("html, body").animate({ scrollTop: 0 }, "slow");
 		}
 	}
 

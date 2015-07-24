@@ -90,6 +90,7 @@ var Constants = {
 	, MSG_INTERNAL_ERROR	: "Hmm, something went wrong. Please contact the system administrator."
 	, MSG_PPW_NOT_MATCH 	: "Picture Password does not match."
 	, MSG_PPW_INCORRECT		: "Picture password is incorrect."
+	, MSG_PPW_SELECT 		: "Please select a picture password."
 	, MSG_PPW_SELECT_NEW 	: "Please select a new picture password."
 
 	// API Message
@@ -131,6 +132,13 @@ var Constants = {
 	, MSG_U_AVAILABLE		: "Username is available."
 
 	, MSG_NO_RECORD			: "No record found."
+
+	, MSG_FILL_FIELDS 		: "Please fill the required fields."
+
+	, ATTR_CURRENT_EMAIL 	: "current_email"
+	, ATTR_NEW_EMAIL 		: "new_email"
+	, ATTR_CONFIRM_EMAIL 	: "confirm_email"
+	, ATTR_PASSWORD 		: "password"
 
 	, URL_FORGOT_PASSWORD	: function(user_type) {
 		return '/' + user_type + '/password/forgot';
