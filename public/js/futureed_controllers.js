@@ -361,8 +361,6 @@ function FutureedController($scope, $window, apiService, futureed) {
 			if($scope.user.new_email != null){
 				$scope.confirm_email = Constants.TRUE;
 			}
-			
-			$("input[name='userdata']").val('');
 		}
 	}
 
@@ -906,6 +904,22 @@ function FutureedController($scope, $window, apiService, futureed) {
 		}).error(function(response){
 			$scope.internalError();
 			$scope.ui_unblock();
+		});
+	}
+
+	$scope.getStudentBadges = function() {
+		var id = $scope.user.id;
+
+		apiService.getStudentBadges(id).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					$scope.errorHandler(response.errors);
+				} else if(response.data) {
+					$scope.badges = response.data;
+				}
+			}
+		}).error(function(response) {
+			$scope.internalError()
 		});
 	}
 

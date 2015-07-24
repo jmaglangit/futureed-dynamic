@@ -6,6 +6,7 @@ use FutureEd\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use FutureEd\Models\Repository\StudentBadge\StudentBadgeRepositoryInterface;
+use FutureEd\Http\Requests\Api\StudentBadgeRequest;
 
 class StudentBadgeController extends ApiController {
 
@@ -90,9 +91,15 @@ class StudentBadgeController extends ApiController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($id, StudentBadgeRequest $request)
 	{
-		//
+		$data = $request->only('badge_id');
+
+		$this->student_badge->updateStudentBadge($id,$data);
+
+		return $this->respondWithData($this->student_badge->viewStudentBadge($id));
+
+
 	}
 
 	/**

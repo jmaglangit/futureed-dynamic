@@ -18,7 +18,7 @@
 				<a href="javascript:;"><img src="/images/class-student/icon-askforhelp.png" ng-click="mod.askHelp()"></a>
 			</div>
 			<div class="margin-top-bot-5 pointer">
-				<img src="/images/class-student/icon-givetip.png" ng-click="mod.setTipActive(futureed.ACTIVE_ADD)">
+				<img src="/images/class-student/icon-givetip.png" ng-click="mod.giveTip()">
 			</div>
 		</div>
 		
@@ -61,6 +61,7 @@
 							</div>
 						</div>
 						<div template-directive template-url="{!! route('student.class.module.partials.add_tip') !!}"></div>
+						<div template-directive template-url="{!! route('student.class.module.partials.list_tips') !!}"></div>
 					</div>
 				</div>
 			</div>
