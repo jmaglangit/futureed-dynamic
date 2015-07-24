@@ -70,7 +70,9 @@ class ImageController extends ApiController {
 
 
 	/**
-	 * Delete Question Answer Image.
+	 * Delete Image physical file.
+	 * @param ImageRequest $request
+	 * @return mixed
 	 */
 	public function deleteImage(ImageRequest $request){
 
