@@ -159,5 +159,23 @@
 					'uses' => $manage_teacher_module_controller . '@view_module'
 				]);
 			});
+
+			Routes::group(['prefix' => 'teaching-content'], function() {
+			$manage_teacher_content_controller = 'FutureLesson\Client\ManageTeacherContentController';
+
+			Routes::get('/', [
+				'as' => 'client.teacher.teaching_content.index',
+				'uses' => $manage_teacher_content_controller . '@index'
+			]);
+
+			Routes::group(['prefix' => 'partials'], function() {
+				$manage_teacher_content_controller = 'FutureLesson\Client\ManageTeacherContentController';
+
+				Routes::get('list_content_form', [
+					'as' => 'client.teacher.teaching_content.partials.list_content_form',
+					'uses' => $manage_teacher_content_controller . '@list_content_form'
+				]);
+			});
 		});
 	});
+});

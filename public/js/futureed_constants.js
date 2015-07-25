@@ -87,6 +87,9 @@ var Constants = {
 	, STATUS_TRUE 	: "true"
 	, STATUS_FALSE 	: "false"
 
+	, BACK 			: "Back"
+	, NEXT 			: "Next"
+
 	, MSG_INTERNAL_ERROR	: "Hmm, something went wrong. Please contact the system administrator."
 	, MSG_PPW_NOT_MATCH 	: "Picture Password does not match."
 	, MSG_PPW_INCORRECT		: "Picture password is incorrect."
