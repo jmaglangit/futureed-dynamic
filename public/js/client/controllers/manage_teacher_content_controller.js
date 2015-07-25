@@ -84,9 +84,13 @@ function ManageTeacherContentController($scope, ManageTeacherContentService, api
 		self.details = {};
 
 		self.details = self.records[seq];
+		/**
+		*TODO:
+		* No Image Path
+		*/
+		
 		if(self.details.media_type_id == Constants.IMAGE) {
 			self.details.image_path = '/uploads/content/' + self.details.id + '/' + self.details.content_url;
-			$('#content-image').append("hi");
 		}
 		$scope.ui_unblock();
 	}
