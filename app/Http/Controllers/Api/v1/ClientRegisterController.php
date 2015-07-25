@@ -52,7 +52,7 @@ class ClientRegisterController extends ClientController {
 		if (strtolower($client['client_role']) == strtolower(config('futureed.parent'))) {
 
 			$this->addMessageBag($this->validateString($client, 'street_address'));
-			$this->addMessageBag($this->validateString($client, 'city'));
+			$this->addMessageBag($this->validateAlphaSpace($client, 'city'));
 			$this->addMessageBag($this->validateAlphaSpaceOptional($client, 'state'));
 			$this->addMessageBag($this->validateNumber($client, 'country_id'));
 			$this->addMessageBag($this->zipCodeOptional($client, 'zip'));
@@ -60,7 +60,7 @@ class ClientRegisterController extends ClientController {
 
 			$this->addMessageBag($this->validateString($school, 'school_name'));
 			$this->addMessageBag($this->schoolAddress($school, 'school_address'));
-			$this->addMessageBag($this->schoolCityOptional($school, 'school_city'));
+			$this->addMessageBag($this->validateAlphaSpaceOptional($school, 'school_city'));
 			$this->addMessageBag($this->validateAlphaSpace($school, 'school_state'));
 			$this->addMessageBag($this->validateNumber($school, 'school_country_id'));
 			$this->addMessageBag($this->zipCodeOptional($school, 'school_zip'));
@@ -69,7 +69,7 @@ class ClientRegisterController extends ClientController {
 
 
 			$this->addMessageBag($this->validateStringOptional($client, 'street_address'));
-			$this->addMessageBag($this->validateStringOptional($client, 'city'));
+			$this->addMessageBag($this->validateAlphaSpaceOptional	($client, 'city'));
 			$this->addMessageBag($this->validateAlphaSpace($client, 'state'));
 			$this->addMessageBag($this->validateStringOptional($client, 'country'));
 			$this->addMessageBag($this->zipCodeOptional($client, 'zip'));

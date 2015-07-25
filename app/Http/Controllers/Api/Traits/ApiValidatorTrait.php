@@ -85,7 +85,7 @@ trait ApiValidatorTrait {
                     "$birth_date" => $input["$birth_date"],
                 ],
                 [
-                    "$birth_date" => 'required|date_format:Ymd|before:-13 year'
+                    "$birth_date" => 'required|date_format:Ymd|before:-14 year'
                 ],
                 [
                     "before" => $error_msg[2028]
@@ -583,7 +583,7 @@ trait ApiValidatorTrait {
 
 
     public function checkContactNumber($input,$field_name){
-        $phone_format = "/^((\+|\(|\)|\-)+\s?)?([0-9]+)?((\+|\(|\)|\-)+\s?)?([0-9]+)?((\+|\(|\)|\-)+\s?)?([0-9]+)?((\+|\(|\)|\-)+\s?)?([0-9]+)?$/";
+        $phone_format = "/^[0-9()]+$/";
 
         $validator = Validator::make(
 			[
@@ -720,7 +720,7 @@ trait ApiValidatorTrait {
                     "$birth_date" => $input["$birth_date"],
                 ],
                 [
-                    "$birth_date" => 'required|date_format:Ymd|before:-13 year'
+                    "$birth_date" => 'required|date_format:Ymd|before:-14 year'
                 ],
                 [
                     "before" => $error_msg[2117]
