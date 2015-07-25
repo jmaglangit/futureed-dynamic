@@ -22,6 +22,9 @@
                             </li>
                         </ul>
                     </li>
+                    <li>
+                        <a href="{!! route('client.teacher.module.index') !!}">Module</a>
+                    </li>
 
                     <li class="dropdown" ng-if="user.role == futureed.PRINCIPAL">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Principal <span class="caret"></span></a>
