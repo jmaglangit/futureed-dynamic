@@ -1,9 +1,9 @@
 angular.module('futureed.controllers')
 	.controller('ManageTeacherModuleController', ManageTeacherModuleController);
 
-ManageTeacherModuleController.$inject = ['$scope', 'ManageTeacherModuleService', 'TableService', 'SearchService', 'apiService'];
+ManageTeacherModuleController.$inject = ['$scope', 'clientProfileApiService', 'ManageTeacherModuleService', 'TableService', 'SearchService', 'apiService'];
 
-function ManageTeacherModuleController($scope, ManageTeacherModuleService, TableService, SearchService, apiService) {
+function ManageTeacherModuleController($scope, clientProfileApiService, ManageTeacherModuleService, TableService, SearchService, apiService) {
 	var self = this;
 
 	TableService(self);
@@ -147,5 +147,17 @@ function ManageTeacherModuleController($scope, ManageTeacherModuleService, Table
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		})
+	}
+
+	self.launchModule = function(id) {
+		self.errors = Constants.FALSE;
+
+		$scope.$parent.user.module_id = id;
+
+		clientProfileApiService.updateUserSession($scope.$parent.user).success(function(response){
+			window.location.href = 'module/teaching-content';
+        }).error(function(response) {
+			self.errors = $scope.internalError();
+        });
 	}
 }

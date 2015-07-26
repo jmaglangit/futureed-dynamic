@@ -96,7 +96,7 @@
 		            <th>Module</th>
 		            <th>Description</th>
 		            <th>Grade</th>
-		            <th ng-if="module.records.length">Action</th>
+		            <th ng-if="module.records.length" class="table-width-200">Actions</th>
 		        </tr>
 	        </thead>
 	        <tbody>
@@ -106,7 +106,12 @@
 		            <td>{! moduleInfo.grade.name !}</td>
 		            <td ng-if="module.records.length">
 		            	<div class="row">
-		            		<a href="" ng-click="module.setActive('view',moduleInfo.id)"><span><i class="fa fa-eye"></i></span></a>
+		            		<div class="col-xs-6">
+		            			<a href="" ng-click="module.launchModule(moduleInfo.id)" title="launch">Launch</a>
+		            		</div>
+		            		<div class="col-xs-6">
+		            			<a href="" ng-click="module.setActive('view',moduleInfo.id)" title="view"><span><i class="fa fa-eye"></i></span></a>
+		            		</div>
 		            	</div>
 		            </td>
         		</tr>

@@ -478,7 +478,7 @@ li.active .rnd-identifier{
 	width: 100%;
 	min-height: 900px;
 	position: relative;
-	overflow: auto;
+	overflow: hidden;
 	margin-bottom: 40px;
 }
 .dshbrd-con .side-nav{
