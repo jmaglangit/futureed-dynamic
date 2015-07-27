@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Filesystem\Filesystem;
 
 class Question extends Model {
 
@@ -28,6 +29,24 @@ class Question extends Model {
 		'original_image_name' =>0,
 		'seq_no' => 0
 	];
+
+	//Accessor
+	public function getQuestionsImageAttribute($value){
+
+		$filesystem = new Filesystem();
+
+		//get path
+		$image_path = config('futureed.question_image_path_final') .'/'. $this->attributes['id'] . '/'. $value;
+
+		//check path
+		if($filesystem->exists($image_path)){
+			return asset(config('futureed.question_image_path_final_public') .'/'. $this->attributes['id'] . '/'. $value);
+
+		} else {
+
+			return 'None';
+		}
+	}
 
 	//-------------relationships
 	public function module() {
