@@ -1,6 +1,9 @@
 <div class="container search-container" ng-if="content.active_list">
 	<div class="title-mid">
-		<span>Teaching Content</span>		
+		<span>Teaching Content</span>
+		<div class="pull-right col-xs-4">
+			<a class="btn btn-medium btn-maroon pull-right" href="{!! route('client.teacher.question.index') !!}">Skip</a>	
+		</div>	
 	</div>
 	<div class="col-xs-12 content-container">
 		<div class="row content-display">

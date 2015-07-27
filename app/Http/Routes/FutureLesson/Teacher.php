@@ -163,19 +163,37 @@
 			Routes::group(['prefix' => 'teaching-content'], function() {
 			$manage_teacher_content_controller = 'FutureLesson\Client\ManageTeacherContentController';
 
-			Routes::get('/', [
-				'as' => 'client.teacher.teaching_content.index',
-				'uses' => $manage_teacher_content_controller . '@index'
-			]);
-
-			Routes::group(['prefix' => 'partials'], function() {
-				$manage_teacher_content_controller = 'FutureLesson\Client\ManageTeacherContentController';
-
-				Routes::get('list_content_form', [
-					'as' => 'client.teacher.teaching_content.partials.list_content_form',
-					'uses' => $manage_teacher_content_controller . '@list_content_form'
+				Routes::get('/', [
+					'as' => 'client.teacher.teaching_content.index',
+					'uses' => $manage_teacher_content_controller . '@index'
 				]);
+
+				Routes::group(['prefix' => 'partials'], function() {
+					$manage_teacher_content_controller = 'FutureLesson\Client\ManageTeacherContentController';
+
+					Routes::get('list_content_form', [
+						'as' => 'client.teacher.teaching_content.partials.list_content_form',
+						'uses' => $manage_teacher_content_controller . '@list_content_form'
+					]);
+				});
+			});
+
+			Routes::group(['prefix' => 'question'], function() {
+			$manage_teacher_question_controller = 'FutureLesson\Client\ManageTeacherQuestionController';
+
+				Routes::get('/', [
+					'as' => 'client.teacher.question.index',
+					'uses' => $manage_teacher_question_controller . '@index'
+				]);
+
+				Routes::group(['prefix' => 'partials'], function() {
+					$manage_teacher_question_controller = 'FutureLesson\Client\ManageTeacherQuestionController';
+
+					Routes::get('list', [
+						'as' => 'client.teacher.question.partials.list',
+						'uses' => $manage_teacher_question_controller . '@listview'
+					]);
+				});
 			});
 		});
 	});
-});
