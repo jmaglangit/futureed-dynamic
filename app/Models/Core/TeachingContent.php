@@ -36,6 +36,13 @@ class TeachingContent extends Model {
 		'content_url' => 0
 	];
 
+	//Accessor
+
+	public function getContentUrlAttribute($value){
+
+		return  asset(config('futureed.teaching_content_image_uploads'). '/'. $this->attributes['id']. '/' . $value);
+	}
+
     //Relationships
 
     public function learningStyle(){
