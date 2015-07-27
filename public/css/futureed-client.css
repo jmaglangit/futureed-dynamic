@@ -177,6 +177,11 @@ table#client-list{
 	border:1px solid #b5b5b5;
 }
 
+.question-container {
+	border-radius: 5px;
+	min-height: 500px;
+}
+
 .content-text {
 	margin: 30px 60px 0 60px;
 }
