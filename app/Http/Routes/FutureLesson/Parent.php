@@ -106,4 +106,44 @@
 				]);
 			});
 		});
+		Routes::group(['prefix' => 'module'], function() {
+			$manage_parent_module_controller = 'FutureLesson\Client\ManageParentModuleController';
+
+			Routes::get('/', [
+				'as' => 'client.parent.module.index',
+				'uses' => $manage_parent_module_controller . '@index'
+			]);
+
+			Routes::group(['prefix' => 'partials'], function() {
+				$manage_parent_module_controller = 'FutureLesson\Client\ManageParentModuleController';
+
+				Routes::get('list_module_form', [
+					'as' => 'client.parent.module.partials.list_module_form',
+					'uses' => $manage_parent_module_controller . '@list_module_form'
+				]);
+
+				Routes::get('view_module', [
+					'as' => 'client.parent.module.partials.view_module',
+					'uses' => $manage_parent_module_controller . '@view_module'
+				]);
+			});
+
+			Routes::group(['prefix' => 'teaching-content'], function() {
+			$manage_parent_content_controller = 'FutureLesson\Client\ManageParentContentController';
+
+			Routes::get('/', [
+				'as' => 'client.parent.teaching_content.index',
+				'uses' => $manage_parent_content_controller . '@index'
+			]);
+
+			Routes::group(['prefix' => 'partials'], function() {
+				$manage_parent_content_controller = 'FutureLesson\Client\ManageParentContentController';
+
+				Routes::get('list_content_form', [
+					'as' => 'client.parent.teaching_content.partials.list_content_form',
+					'uses' => $manage_parent_content_controller . '@list_content_form'
+				]);
+			});
+		});
+	});
 	});
