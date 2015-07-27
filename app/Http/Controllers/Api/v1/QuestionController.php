@@ -59,14 +59,14 @@ class QuestionController extends ApiController {
 
 		$record = $this->question->getQuestions($criteria , $limit, $offset );
 
-		if($record['total'] > 0){
-
-			foreach($record['records'] as $k=>$v){
-
-				$record['records'][$k]['questions_image'] = config('futureed.question_image_path_final_public').'/'.$v['id'].'/'.$v['questions_image'];
-			}
-
-		}
+//		if($record['total'] > 0){
+//
+//			foreach($record['records'] as $k=>$v){
+//
+//				$record['records'][$k]['questions_image'] = config('futureed.question_image_path_final_public').'/'.$v['id'].'/'.$v['questions_image'];
+//			}
+//
+//		}
 
 
 		return $this->respondWithData($record);
