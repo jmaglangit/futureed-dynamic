@@ -83,5 +83,29 @@ function StudentModuleService($http){
 		})
 	}
 
+	service.getModuleDetail = function(id) {
+		return $http({
+			method  : Constants.METHOD_GET
+			, url  	: serviceUrl + "module/" + id
+		});
+	}
+
+	service.getTeachingContents = function(search, table) {
+		return $http({
+			method  : Constants.METHOD_GET
+			, url  	: serviceUrl + "teaching-module/student?module_id=" + search.module_id
+				+ '&limit=' + table.size
+				+ '&offset=' + table.offset
+		});
+	}
+
+	service.exitModule = function(data) {
+		return $http({
+			method  : Constants.METHOD_PUT
+			, data  : data
+			, url  	: serviceUrl + 'module/student/' + data.module_id
+		});
+	}
+
 	return service;
 }

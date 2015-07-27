@@ -10,15 +10,15 @@ class ClassModuleController extends Controller {
 	/**
 	*Display Module Index Page
 	*/
-	public function index() {
-		return view('student.class.module.index');
+	public function index($id = null) {
+		return view('student.class.module.index')->with('id', $id);
 	}
 
 	/**
 	*Display Modules
 	*/
-	public function module() {
-		return view('student.class.module.index');
+	public function module($id = null) {
+		return view('student.class.module.index')->with('id', $id);
 	}
 
 	/**
@@ -103,5 +103,13 @@ class ClassModuleController extends Controller {
 	*/
 	public function view_all_tips() {
 		return view('student.class.module.partials.view_all_tips');
+	}
+
+	public function view_question_list() {
+		return view('student.class.module.partials.questions.list');
+	}
+
+	public function view_question_message() {
+		return view('student.class.module.partials.questions.message');
 	}
 }
