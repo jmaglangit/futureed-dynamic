@@ -59,7 +59,12 @@ function ManageTeacherContentController($scope, ManageTeacherContentService, api
 						angular.forEach(self.records,function(value,key){
 							value.key = key;
 						});
-						self.showContent(0);
+						
+						if(response.data.total == Constants.FALSE){
+							self.no_content = Constants.TRUE;
+						}else{
+							self.showContent(0);
+						}
 					}
 				}
 			$scope.ui_unblock();
