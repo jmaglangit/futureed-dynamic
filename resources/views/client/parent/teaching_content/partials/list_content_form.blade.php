@@ -2,10 +2,10 @@
 	<div class="title-mid">
 		<span>Teaching Content</span>
 		<div class="pull-right col-xs-4" ng-if="!content.no_content">
-			<a class="btn btn-medium btn-maroon pull-right">Skip</a>	
+			<a class="btn btn-medium btn-maroon pull-right" href="{!! route('client.parent.question.index') !!}">Skip</a>	
 		</div>
 		<div class="pull-right col-xs-4" ng-if="content.no_content">
-			<a class="btn btn-medium btn-gold pull-right" href="{!! route('client.parent.module.index') !!}">Back</a>	
+			<a class="btn btn-medium btn-gold pull-right" href="{!! route('client.parent.module.index') !!}">Back</a>
 		</div>	
 	</div>
 	<div class="col-xs-12 content-container" ng-if="content.no_content">

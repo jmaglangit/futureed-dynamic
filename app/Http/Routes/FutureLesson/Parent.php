@@ -131,19 +131,37 @@
 			Routes::group(['prefix' => 'teaching-content'], function() {
 			$manage_parent_content_controller = 'FutureLesson\Client\ManageParentContentController';
 
-			Routes::get('/', [
-				'as' => 'client.parent.teaching_content.index',
-				'uses' => $manage_parent_content_controller . '@index'
-			]);
-
-			Routes::group(['prefix' => 'partials'], function() {
-				$manage_parent_content_controller = 'FutureLesson\Client\ManageParentContentController';
-
-				Routes::get('list_content_form', [
-					'as' => 'client.parent.teaching_content.partials.list_content_form',
-					'uses' => $manage_parent_content_controller . '@list_content_form'
+				Routes::get('/', [
+					'as' => 'client.parent.teaching_content.index',
+					'uses' => $manage_parent_content_controller . '@index'
 				]);
+
+				Routes::group(['prefix' => 'partials'], function() {
+					$manage_parent_content_controller = 'FutureLesson\Client\ManageParentContentController';
+
+					Routes::get('list_content_form', [
+						'as' => 'client.parent.teaching_content.partials.list_content_form',
+						'uses' => $manage_parent_content_controller . '@list_content_form'
+					]);
+				});
+			});
+
+			Routes::group(['prefix' => 'question'], function() {
+			$manage_parent_question_controller = 'FutureLesson\Client\ManageParentQuestionController';
+
+				Routes::get('/', [
+					'as' => 'client.parent.question.index',
+					'uses' => $manage_parent_question_controller . '@index'
+				]);
+
+				Routes::group(['prefix' => 'partials'], function() {
+					$manage_parent_question_controller = 'FutureLesson\Client\ManageParentQuestionController';
+
+					Routes::get('list', [
+						'as' => 'client.parent.question.partials.list',
+						'uses' => $manage_parent_question_controller . '@listview'
+					]);
+				});
 			});
 		});
-	});
 	});
