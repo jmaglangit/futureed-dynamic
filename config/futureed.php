@@ -138,6 +138,11 @@ return [
 	//answer
 	'answer' => 'answer',
 
+	//Teaching content image
+	'teaching_content_image_local' => base_path() . '/public/uploads/content',
+	'teaching_content_image_uploads' => '/uploads/content',
+
+
 
 	//path for content uploaded images temp
 	'content_image_path' =>  base_path().'/public/uploads/temp/content',
