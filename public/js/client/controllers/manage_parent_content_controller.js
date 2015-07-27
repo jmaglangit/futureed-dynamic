@@ -1,9 +1,9 @@
 angular.module('futureed.controllers')
-	.controller('ManageTeacherContentController', ManageTeacherContentController);
+	.controller('ManageParentContentController', ManageParentContentController);
 
-ManageTeacherContentController.$inject = ['$scope', 'ManageTeacherContentService', 'apiService'];
+ManageParentContentController.$inject = ['$scope', 'ManageParentContentService', 'apiService'];
 
-function ManageTeacherContentController($scope, ManageTeacherContentService, apiService) {
+function ManageParentContentController($scope, ManageParentContentService, apiService) {
 	var self = this;
 
 	self.setActive = function(active, id) {
@@ -48,18 +48,18 @@ function ManageTeacherContentController($scope, ManageTeacherContentService, api
 
 		$scope.ui_block();
 
-		ManageTeacherContentService.listContent($scope.user.module_id).success(function(response){
+		ManageParentContentService.listContent($scope.user.module_id).success(function(response){
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 					if(response.errors) {
 						self.errors = $scope.errorHandler(response.errors);
 					} else if(response.data) {
 						self.records = response.data.records;
+
 						self.total = response.data.total-1;
 
 						angular.forEach(self.records,function(value,key){
 							value.key = key;
 						});
-						
 						if(response.data.total == Constants.FALSE){
 							self.no_content = Constants.TRUE;
 						}else{
