@@ -171,6 +171,16 @@
 							'as' => 'student.class.module.partials.view_all_tips'
 							, 'uses' => 'FutureLesson\Student\ClassModuleController@view_all_tips'
 						]);
+
+					Routes::get('/questions', [
+						'as' => 'student.class.module.partials.view_question_list'
+						, 'uses' => 'FutureLesson\Student\ClassModuleController@view_question_list'
+						]);
+
+					Routes::get('/messages', [
+						'as' => 'student.class.module.partials.view_question_message'
+						, 'uses' => 'FutureLesson\Student\ClassModuleController@view_question_message'
+						]);
 				});
 			});
 		});

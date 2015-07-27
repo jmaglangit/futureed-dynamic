@@ -1,10 +1,16 @@
 angular.module('futureed.controllers')
 	.controller('StudentModuleController', StudentModuleController);
 
-StudentModuleController.$inject = ['$scope', 'apiService', 'StudentModuleService'];
+StudentModuleController.$inject = ['$scope', '$window', 'apiService', 'StudentModuleService', 'SearchService', 'TableService'];
 
-function StudentModuleController($scope, apiService, StudentModuleService) {
+function StudentModuleController($scope, $window, apiService, StudentModuleService, SearchService, TableService) {
 	var self = this;
+
+	SearchService(self);
+	self.searchDefaults();
+
+	TableService(self);
+	self.tableDefaults();
 
 	self.add = {};
 
@@ -446,5 +452,131 @@ function StudentModuleController($scope, apiService, StudentModuleService) {
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		})
+	}
+
+
+	self.setActive = function(active) {
+		self.errors = Constants.FALSE;
+
+		self.active_questions = Constants.FALSE;
+		self.active_contents = Constants.FALSE;
+
+		switch(active) {
+			case Constants.ACTIVE_QUESTIONS 	: 
+				self.active_questions = Constants.TRUE;
+				break;
+
+			case Constants.CONTENTS 	:
+
+			default 		:
+				self.active_contents = Constants.TRUE;
+				break;
+		}
+	}
+
+	self.getModuleDetail = function(id) {
+		if(id) {
+			$scope.ui_block();
+			StudentModuleService.getModuleDetail(id).success(function(response) {
+				if(angular.equals(response.status, Constants.STATUS_OK)) {
+					if(response.errors) {
+						self.errors = $scope.errorHandler(response.errors);
+					} else {
+						self.record = response.data;
+
+						if(!self.record) {
+							self.errors = [Constants.MSG_NO_RECORD];
+							self.no_record = Constants.TRUE;
+						}
+					}
+				}
+
+				$scope.ui_unblock();
+			}).error(function(response) {
+				self.errors = $scope.internalError();
+				$scope.ui_unblock();
+			});
+		} else {
+			self.errors = [Constants.MSG_NO_RECORD];
+			self.no_record = Constants.TRUE;
+		}
+	}
+
+	self.paginateContent = function() {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		var page = self.table.page;
+
+		self.table.page = (page < Constants.DEFAULT_PAGE) ? Constants.DEFAULT_PAGE : page;
+		self.table.offset = (page - 1) * self.table.size;
+		self.getTeachingContents(self.search.module_id);
+
+	}
+
+	self.getTeachingContents = function(id) {
+		if(id) {
+			self.search.module_id = id;
+			self.table.size = 1;
+
+			$scope.ui_block();
+			StudentModuleService.getTeachingContents(self.search, self.table).success(function(response) {
+				if(angular.equals(response.status, Constants.STATUS_OK)) {
+					if(response.errors) {
+						self.errors = $scope.errorHandler(response.errors);
+					} else {
+						self.contents = response.data.records[0];
+						self.contents.content_url = self.contents.teaching_content.content_url; 
+						self.updatePageCount(response.data);
+					}
+				}
+
+				$scope.ui_unblock();
+			}).error(function(response) {
+				self.errors = $scope.internalError();
+				$scope.ui_unblock();
+			});
+		} else {
+			self.errors = [Constants.MSG_NO_RECORD];
+			self.no_record = Constants.TRUE;
+		}
+	}
+
+	self.exitModule = function() {
+		var data = {};
+		data.module_id = (self.contents) ? self.contents.module_id : Constants.EMPTY_STR;
+		data.last_viewed_content_id = (self.contents) ? self.contents.content_id : Constants.EMPTY_STR;
+		data.last_answered_question_id = (self.questions) ? self.questions.question_id : Constants.EMPTY_STR;
+
+		$scope.ui_block();
+		StudentModuleService.exitModule(data).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else {
+					var base_url = $("#base_url_form input[name='base_url']").val();
+					$window.location.href = base_url +"/student/class";
+				}
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});	
+	}
+
+	self.startQuestions = function() {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		self.module_message = {};
+		self.module_message.show = Constants.TRUE;
+
+		$("#message_modal").modal({
+	        backdrop: 'static',
+	        keyboard: Constants.FALSE,
+	        show    : Constants.TRUE
+	    });
 	}
 }

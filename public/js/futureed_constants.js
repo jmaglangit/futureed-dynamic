@@ -75,6 +75,9 @@ var Constants = {
 	, ACTIVE_ADD	: "add"
 	, ACTIVE_EMAIL	: "email"
 
+	, ACTIVE_QUESTIONS 	: "questions"
+	, ACTIVE_CONTENTS 	: "contents"
+
 	, ADD_CLIENT 	: "add_client"
 	, ADD_STUDENT	: "add_student"
 	, ANNOUNCEMENT 	: "announcement"

@@ -44,3 +44,9 @@ angular.module('futureed').filter('percent', function($filter) {
 		return percent;
 	};
 });
+
+angular.module('futureed').filter('trustAsResourceUrl', ['$sce', function($sce) {
+    return function(val) {
+        return $sce.trustAsResourceUrl(val);
+    };
+}])

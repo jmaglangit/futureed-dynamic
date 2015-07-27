@@ -147,13 +147,11 @@
 }
 
 .student-class {
-	background: url("../images/class-student/mountain-full-bg.png") !important;
-	background-attachment: fixed;
-	font-family: 'Schoolbell', sans-serif;
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-position: 50% 50%;
-	min-height: 100%;
+	background: url("../images/class-student/mountain-full-bg.png") no-repeat center center fixed !important;
+	-webkit-background-size: cover !important;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover !important;
 }
 
 .side-header {
@@ -569,12 +567,14 @@ th, td {
 .drawer {
 	position: fixed;
 	bottom: 0;
+	z-index: 3;
 }
 
 .drawer-help {
 	position: fixed;
 	bottom: 0;
 	right: 0;
+	z-index: 3;
 }
 
 .button {
@@ -795,4 +795,63 @@ hr {
 .module-btn i {
 	padding-right: 5px;
 	color: rgb(255, 244, 149);
+}
+
+.content_pagination > li > a {
+	font-size: 25px;
+	min-width: 80px;
+	text-align: center;
+}
+
+.message-container {
+	text-align: center;
+    max-height: 650px;
+    overflow: auto;
+}
+
+.module-message {
+	position: relative;
+    background: #EBE3B4;
+    border: 1px solid #F9EFB7;
+    border-radius: 5px;
+    padding: 12px;
+    width: 50%;
+    margin: 20px auto 32px auto;
+}
+
+.module-message:after, .module-message:before {
+	top: 100%;
+	left: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.module-message:after {
+	border-color: rgba(136, 183, 213, 0);
+    border-top-color: #EBE3B4;
+    border-width: 30px;
+    margin-left: -10px;
+    transform: skew(-58deg);
+}
+.module-message:before {
+	border-color: rgba(194, 225, 245, 0);
+	border-top-color: #F9EFB7;
+	border-width: 32px;
+    margin-left: -15px;
+    transform: skew(-58deg);
+}
+
+.message-point {
+	font-size: 5em;
+    color: #055A7F;
+}
+
+.message-badge {
+	width: 120px;
+	background-color: #e1e1e1;
+    border-radius: 50%;
 }
