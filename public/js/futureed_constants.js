@@ -89,7 +89,6 @@ var Constants = {
 	, STATUS_FALSE 	: "false"
 
 	, M_CHOICE		: "MC"
-	, FILL_BLAN		: "FIB"
 
 	, BACK 			: "Back"
 	, NEXT 			: "Next"
