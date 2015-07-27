@@ -40,7 +40,11 @@ class TeachingContent extends Model {
 
 	public function getContentUrlAttribute($value){
 
-		return  asset(config('futureed.teaching_content_image_uploads'). '/'. $this->attributes['id']. '/' . $value);
+		if($this->attributes['media_type_id'] == 3){
+			return  asset(config('futureed.teaching_content_image_uploads'). '/'. $this->attributes['id']. '/' . $value);
+		}
+
+		return $value;
 	}
 
     //Relationships
