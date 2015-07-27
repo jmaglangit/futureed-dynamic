@@ -153,17 +153,31 @@ function ManageTeacherHelpAnswerController($scope, ManageTeacherAnswerService, T
 		});
 	}
 
+	self.rateAnswer = function() {
+		self.rate_answer = Constants.TRUE;
+		$("#rate_answer").modal({
+	        backdrop: 'static',
+	        keyboard: Constants.FALSE,
+	        show    : Constants.TRUE
+	    });
+	}
+
 	self.updateStatus = function(id, status) {
 		self.success = Constants.FALSE;
 		self.errors = Constants.FALSE;
-		var tip_status = (status) ? Constants.ACCEPTED : Constants.REJECTED;
-
+		self.rate = {};
+		var answer_status = (status) ? Constants.ACCEPTED : Constants.REJECTED;
+		self.rate.id = id;
+		self.rate.request_answer_status = answer_status;
+		self.rate.rated_by = Constants.TEACHER;
+		self.rate.rating = self.rating;
 		$scope.ui_block();
-		ManageTeacherAnswerService.updateStatus(id, tip_status).success(function(response){
+		ManageTeacherAnswerService.updateStatus(self.rate).success(function(response){
 			if(angular.equals(response.status,Constants.STATUS_OK)){
 				if(response.errors){
-					self.errors = $scope.errorHandler(response.errors);
+					self.rate_errors = $scope.errorHandler(response.errors);
 				}else if(response.data){
+					$("#rate_answer").modal('hide');
 					self.success = (status) ? TeacherConstant.APPROVE_HELP_ANS : TeacherConstant.REJECT_HELP_ANS;
 					self.setActive(Constants.ACTIVE_VIEW, id);
 				}
