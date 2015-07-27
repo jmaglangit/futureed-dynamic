@@ -9,6 +9,7 @@ var Constants = {
 	, EMPTY_STR		: ''
 	, ALL			: 'all'
 	, UNDEFINED		: 'undefined'
+	, NULL 			: null
 
 	, METHOD_POST	: 'POST'
 	, METHOD_GET	: 'GET'
@@ -87,8 +88,13 @@ var Constants = {
 	, STATUS_TRUE 	: "true"
 	, STATUS_FALSE 	: "false"
 
+	, M_CHOICE		: "MC"
+
 	, BACK 			: "Back"
 	, NEXT 			: "Next"
+
+	, YES 			: "Yes"
+	, NO 			: "No"
 
 	, MSG_INTERNAL_ERROR	: "Hmm, something went wrong. Please contact the system administrator."
 	, MSG_PPW_NOT_MATCH 	: "Picture Password does not match."

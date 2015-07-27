@@ -10,7 +10,6 @@
 
 		<div class="wrapr" ng-init="content.setActive()">
 			<div template-directive template-url="{!! route('client.teacher.teaching_content.partials.list_content_form') !!}"></div>
-			{{-- <div template-directive template-url="{!! route('client.teacher.teaching_content.partials.view_module') !!}"></div> --}}
 		</div>
 	</div>
 
