@@ -46,7 +46,7 @@ var services = angular.module('futureed.services', []);
 		futureedAPI.validateUser = function(username) {
 			return $http({
 				method 	: 'POST'
-				, data	: { username : username } 
+				, data	: { username : username} 
 				, url	: futureedAPIUrl + 'student/login/username'
 			});
 		}

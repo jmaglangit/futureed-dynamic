@@ -27,6 +27,9 @@ class LoginController extends Controller {
 		} else if(Session::get('client')) {
 
 			return redirect()->route('client.dashboard.index');
+		} else if(Input::only('id')){
+			$id = Input::only('id');
+			return view('student.login.login', ['id' => $id['id']]);
 		}
 
 		return view('student.login.login');

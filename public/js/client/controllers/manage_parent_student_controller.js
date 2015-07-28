@@ -389,4 +389,17 @@ function ManageParentStudentController($scope, ManageParentStudentService, apiSe
 			$scope.ui_unblock();
 		});
 	}
+
+	self.playStudent = function(id) {
+		$scope.ui_block();
+		ManageParentStudentService.playStudent().success(function(response){
+			if(angular.equals(response.status,Constants.STATUS_OK)){
+				window.location.href = '/student/login?id=' + id;
+			}
+			$scope.ui_unblock();
+		}).error(function(){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		})
+	}
 }
