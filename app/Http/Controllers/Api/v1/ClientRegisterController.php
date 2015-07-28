@@ -30,15 +30,16 @@ class ClientRegisterController extends ClientController {
 
 		$error_msg = config('futureed-error.error_messages');
 
-
+		$this->addMessageBag($this->email($user, 'email'));
+		$this->addMessageBag($this->username($user, 'username'));
 		$this->addMessageBag($this->checkPassword($user, 'password'));
 		$this->addMessageBag($this->validateString($input, 'callback_uri'));
 
 		$this->addMessageBag($this->firstName($client, 'first_name'));
 		$this->addMessageBag($this->lastName($client, 'last_name'));
 		$this->addMessageBag($this->clientRole($client, 'client_role'));
-		$this->addMessageBag($this->email($user, 'email'));
-		$this->addMessageBag($this->username($user, 'username'));
+
+
 
 
 		if (strtolower($client['client_role']) == strtolower(config('futureed.teacher'))) {
