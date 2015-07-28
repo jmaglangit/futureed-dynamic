@@ -258,6 +258,14 @@ class AdminQuestionController extends ApiController {
 			return $this->respondErrorMessage(2120);
 		}
 
+		$current_sequence = $this->question->getQuestionSequenceNo($id);
+
+		//pull sequence number.
+		$pulled = $this->question_service->pullSequenceNo($current_sequence[0]->module_id, $current_sequence[0]->seq_no,$id);
+
+		//update sequence
+		$this->question->updateSequence($pulled);
+
 		//delete question
 		return $this->respondWithData($this->question->deleteQuestion($id));
 
