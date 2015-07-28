@@ -107,6 +107,14 @@ function StudentModuleService($http){
 		});
 	}
 
+	service.createModuleStudent = function(data) {
+		return $http({
+			method  : Constants.METHOD_POST
+			, data  : data
+			, url  	: serviceUrl + 'module/student'
+		});
+	}
+
 	service.listQuestions = function(search, table) {
 		return $http({
 			method  : Constants.METHOD_GET

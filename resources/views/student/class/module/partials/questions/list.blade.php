@@ -11,8 +11,9 @@
 		<p>{! mod.questions.questions_text !}</p>
 	</div>
 
-	<div class="questions-answers col-xs-12">
-		<a ng-if="mod.questions.question_type == futureed.MULTIPLECHOICE" href="" class="choices" ng-repeat="choices in mod.questions.question_answers">{! choices.answer_text !}</a>
+	<div class="questions-answers" ng-class="{ 'col-xs-12' : mod.questions.question_type == futureed.FILLINBLANK }">
+		<a ng-if="mod.questions.question_type == futureed.MULTIPLECHOICE" href="" class="choices" ng-repeat="choices in mod.questions.question_answers"
+			ng-click="mod.selectAnswer(choices)" ng-class="{ 'selected-choice' : mod.questions.answer_id == choices.id }">{! choices.answer_text !}</a>
 		
 		<div ng-if="mod.questions.question_type == futureed.FILLINBLANK">
 			<label class="control-label col-xs-3">Answer </label>

@@ -768,6 +768,7 @@ hr {
 	transition: ease-out .1s;
 	background-color: #ffffff;
 	cursor: pointer;
+	padding: 10px;
 }
 
 .module-icon:hover {
@@ -899,11 +900,12 @@ hr {
     margin: 20px 30px;
     padding: 10px;
     color: #FEFEC4;
+    text-decoration: none;
     font-size: 1.25em;
     transition: ease .5s;
 }
 
-.choices:hover, .selected_choice {
+.choices:hover, .selected-choice, .selected-choice:focus {
 	font-size: 2em;
     text-decoration: none;
     transition: ease .5s;
@@ -945,7 +947,6 @@ hr {
     top: 0;
     width: 200px;
     right: -230px;
-	border-radius: 50%;
 }
 
 .panel-student {

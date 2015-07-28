@@ -499,6 +499,24 @@ function StudentModuleController($scope, $window, $interval, apiService, Student
 		});	
 	}
 
+	var createModuleStudent = function(data, successCallback) {
+		$scope.ui_block();
+		StudentModuleService.createModuleStudent(data).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else {
+					successCallback();
+				}
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});	
+	}
+
 
 	self.getModuleDetail = function(id) {
 		if(id) {
@@ -514,8 +532,14 @@ function StudentModuleController($scope, $window, $interval, apiService, Student
 							self.errors = [Constants.MSG_NO_RECORD];
 							self.no_record = Constants.TRUE;
 						} else {
-							data.module_id =  self.record.id;
-							updateModuleStudent();
+							if(!self.record.student_module.length) {
+								var data = {};
+									data.student_id =  $scope.user.id;
+									data.module_id =  self.record.id;
+									data.class_id =  $scope.user.class.class_id;
+
+									createModuleStudent(data, function() {});
+							}
 						}
 					}
 				}
@@ -614,7 +638,7 @@ function StudentModuleController($scope, $window, $interval, apiService, Student
 		self.errors = Constants.FALSE;
 
 		self.search.module_id = self.record.id;
-		self.search.difficulty = 1;
+		self.search.difficulty = (self.search.difficulty) ? self.search.difficulty : 1;
 
 		self.table.size = 1;
 
@@ -648,21 +672,24 @@ function StudentModuleController($scope, $window, $interval, apiService, Student
 	self.checkAnswer = function() {
 		var answer = {};
 
-		answer.student_module_id = self.record.id;
+		answer.student_module_id = self.record.student_module[0].id;
 		answer.module_id = self.record.id;
 		answer.seq_no = self.questions.seq_no;
 		answer.question_id = self.questions.id;
 		answer.answer_id = self.questions.answer_id;
 		answer.student_id = $scope.user.id;
-		answer.total_time = self.questions.total_time;
+		answer.total_time = self.total_time;
 		answer.answer_text = self.questions.answer_text;
+
+		console.log();
 
 		StudentModuleService.answerQuestion(answer).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
-					console.log(response.data);
+					self.search.difficulty = response.data.current_difficulty_level;
+					self.nextQuestion();
 				}
 			}
 		}).error(function(response) {
@@ -671,7 +698,18 @@ function StudentModuleController($scope, $window, $interval, apiService, Student
 		});
 	}
 
-	self.nextQuestion = function() {
+	self.selectAnswer = function(object) {
+		self.questions.answer_id = object.id;
+	}
 
+	self.nextQuestion = function() {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		var page = self.table.page + 1;
+
+		self.table.page = (page < Constants.DEFAULT_PAGE) ? Constants.DEFAULT_PAGE : page;
+		self.table.offset = (page - 1) * self.table.size;
+		self.listQuestions();
 	}
 }
