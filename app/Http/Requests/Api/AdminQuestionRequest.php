@@ -69,7 +69,7 @@ class AdminQuestionRequest extends ApiRequest {
 			'code.integer' => 'Code must be a number.',
 			'seq_no.integer' => 'Sequence number is invalid.',
 			'answer.required_if' => 'The answer field is required.',
-			'question_order_text.required_if' => 'Question order text is required'
+			'question_order_text.required_if' => 'Question order text is required.'
 
 		];
 	}
