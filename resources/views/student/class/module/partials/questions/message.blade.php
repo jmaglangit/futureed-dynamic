@@ -39,6 +39,7 @@
 						, array(
 							'class' => 'btn btn-gold btn-medium'
 							, 'data-dismiss' => 'modal'
+							, 'ng-click' => 'mod.skipModule()'
 						)
 					) !!}
 				</div>
