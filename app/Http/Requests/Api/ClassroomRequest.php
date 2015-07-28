@@ -65,10 +65,13 @@ class ClassroomRequest extends ApiRequest {
         return [
 			'grade_id.required' => 'Grade is required.',
 			'grade_id.integer' => 'Grade must be a number.',
-			'client_id.required' => 'Client is required.',
+			'client_id.required' => 'Teacher is required.',
 			'client_id.integer' => 'Client must be a number.',
-			'seats_total.integer' => 'Seats total is invalid.',
-			'seats_taken.integer' => 'Seats taken is invalid.'
+			'seats_total.integer' => 'Number of seats is invalid.',
+			'seats_taken.integer' => 'Seats taken is invalid.',
+			'name.required' => 'Class name is required.',
+			'seats_total.required' => 'Number of seats is required.',
+			'name.regex' => 'Class name format is invalid.',
         ];
     }
 
