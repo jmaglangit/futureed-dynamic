@@ -13,6 +13,10 @@
 			'uses' => $manage_parent_controller . '@index'
 		]);
 
+		Routes::post('/play-student', [
+			'uses' => $manage_parent_controller . '@play_student'
+		]);
+		
 		Routes::group(['prefix' => 'student'], function(){
 			$manage_parent_student_controller = 'FutureLesson\Client\ManageParentStudentController';
 
