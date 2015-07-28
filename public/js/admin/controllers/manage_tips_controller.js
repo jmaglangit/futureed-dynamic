@@ -206,6 +206,7 @@ function ManageTipsController($scope, ManageTipsService, TableService, SearchSer
 					$("#rate_tip").modal('hide');
 					self.success = data.message;
 					self.setActive(Constants.ACTIVE_VIEW, response.data.id);
+					self.rate_errors = Constants.FALSE;
 				}
 			}
 

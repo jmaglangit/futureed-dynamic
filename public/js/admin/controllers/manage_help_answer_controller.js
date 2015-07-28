@@ -124,6 +124,9 @@ function ManageHelpAnswerController($scope, ManageHelpAnswerService, TableServic
 					self.record.content = record.content;
 					self.record.status = record.status;
 					self.record.name = record.user.name;
+					self.record.rated_by = record.rated_by;
+					self.record.stars = new Array(5);
+					self.record.rating = record.rating;
 				}
 			}
 
@@ -161,10 +164,20 @@ function ManageHelpAnswerController($scope, ManageHelpAnswerService, TableServic
 		});
 	}
 
+	self.rateAnswer = function() {
+		self.rate_modal = Constants.TRUE;
+		$("#rate_answer").modal({
+	        backdrop: 'static',
+	        keyboard: Constants.FALSE,
+	        show    : Constants.TRUE
+	    });
+	}
 
 	self.acceptAnswer = function() {
 		var data = {};
 			data.id = self.record.id;
+			data.rated_by = Constants.ADMIN;
+			data.rating = self.rating;
 			data.request_answer_status = "Accepted";
 			data.message = HelpAnswerConstants.MSG_ACCEPT_ANSWER_SUCCESS;
 
@@ -188,10 +201,13 @@ function ManageHelpAnswerController($scope, ManageHelpAnswerService, TableServic
 		ManageHelpAnswerService.updateHelpAnswerStatus(data).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
-					self.errors = $scope.errorHandler(response.errors);
+					self.rate_errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
+					$("#rate_answer").modal('hide');
 					self.success = data.message;
 					self.setActive(Constants.ACTIVE_VIEW, response.data.id);
+					self.rate_errors = Constants.FALSE;
+					self.rating = Constants.EMPTY_STR
 				}
 			}
 
