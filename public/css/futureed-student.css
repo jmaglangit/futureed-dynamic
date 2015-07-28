@@ -853,11 +853,11 @@ hr {
 .message-badge {
 	width: 120px;
 	background-color: #e1e1e1;
-    border-radius: 50%;
+	border-radius: 50%;
 }
 
 .panel-student {
-    border-color: #065a7f !important;
+	border-color: #065a7f !important;
 }
 
 .panel-student > .panel-heading {
