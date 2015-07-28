@@ -2,8 +2,8 @@
 
 @section('content')
     <div class="container login student-fnt" ng-cloak>
-        <div ng-class="{ 'col-md-8 col-md-offset-2': enter_pass && !locked, 'col-md-6 col-md-offset-3': !enter_pass || locked }" >
-            <div class="form-style">
+        <div  ng-class="{ 'col-md-8 col-md-offset-2': enter_pass && !locked, 'col-md-6 col-md-offset-3': !enter_pass || locked }" >
+            <div class="form-style" ng-init="checkEmail('{!! $email !!}')">
             @include('student.login.account-locked')
             @include('student.login.enter-password')
 

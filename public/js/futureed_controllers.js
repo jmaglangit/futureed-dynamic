@@ -266,11 +266,11 @@ function FutureedController($scope, $window, apiService, futureed) {
 	* @Params 
 	*   username - the username
 	*/
-	function validateUser() {
+	function validateUser(source) {
 		$scope.errors = Constants.FALSE;
-
+		$scope.source = (source) ? source:Constants.EMPTY_STR;
 		$scope.ui_block();
-		apiService.validateUser($scope.username).success(function(response) {
+		apiService.validateUser($scope.username, $scope.source).success(function(response) {
 			if(response.status == Constants.STATUS_OK) {
 				if(response.errors) {
 					$scope.errorHandler(response.errors);
@@ -921,6 +921,14 @@ function FutureedController($scope, $window, apiService, futureed) {
 		}).error(function(response) {
 			$scope.internalError()
 		});
+	}
+
+	$scope.checkEmail = function(email) {
+
+		if(email != Constants.EMPTY_STR){
+			$scope.username = email;
+			$scope.validateUser(Constants.PARENT);
+		}
 	}
 
 };

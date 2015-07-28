@@ -15,4 +15,14 @@ class ManageParentController extends Controller{
 	{
 		return view('client.parent.index');
 	}
+
+	/**
+	*Logout Client and redirect to student Login password
+	*/
+	public function play_student() 
+	{
+		Session::flush();
+
+		return ['status' => 200];
+	}
 }

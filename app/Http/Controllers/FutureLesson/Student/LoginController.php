@@ -27,6 +27,9 @@ class LoginController extends Controller {
 		} else if(Session::get('client')) {
 
 			return redirect()->route('client.dashboard.index');
+		} else if(Input::only('email')){
+			$email = Input::only('email');
+			return view('student.login.login', ['email' => $email['email']]);
 		}
 
 		return view('student.login.login');

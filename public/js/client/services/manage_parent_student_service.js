@@ -62,5 +62,12 @@ function ManageParentStudentService($http){
 			, url 	: studentApiUrl + 'client/manage/email/student/' + data.id
 		});
 	}
+
+	manageStudentApi.playStudent = function(email) {
+		return $http({
+			method 	: Constants.METHOD_POST
+			, url 	: '/client/parent/play-student'
+		});
+	}
 	return manageStudentApi;
 }
