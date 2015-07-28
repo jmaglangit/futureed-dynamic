@@ -18,10 +18,11 @@ class AdminStudentModuleController extends ApiController {
 	protected $module;
 
 
-	public function __construct(StudentModuleRepositoryInterface $student_module,
-								MailServices $mail,
-								StudentRepositoryInterface $student,
-								ModuleRepositoryInterface $module)
+	public function __construct(
+					StudentModuleRepositoryInterface $student_module,
+					MailServices $mail,
+					StudentRepositoryInterface $student,
+					ModuleRepositoryInterface $module)
 	{
 
 		$this->student_module = $student_module;
