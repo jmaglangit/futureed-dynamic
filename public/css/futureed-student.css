@@ -945,4 +945,20 @@ hr {
     top: 0;
     width: 200px;
     right: -230px;
+	border-radius: 50%;
+}
+
+.panel-student {
+	border-color: #065a7f !important;
+}
+
+.panel-student > .panel-heading {
+	color: #fff;
+	background-color: #065a7f;
+	border-color: #065a7f;
+}
+
+.badge-image {
+	width: 150px;
+	height: 150px;
 }
