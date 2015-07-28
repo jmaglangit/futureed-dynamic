@@ -63,7 +63,7 @@ function ManageParentStudentService($http){
 		});
 	}
 
-	manageStudentApi.playStudent = function(email) {
+	manageStudentApi.playStudent = function() {
 		return $http({
 			method 	: Constants.METHOD_POST
 			, url 	: '/client/parent/play-student'

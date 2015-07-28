@@ -390,11 +390,11 @@ function ManageParentStudentController($scope, ManageParentStudentService, apiSe
 		});
 	}
 
-	self.playStudent = function(email) {
+	self.playStudent = function(id) {
 		$scope.ui_block();
-		ManageParentStudentService.playStudent(email).success(function(response){
+		ManageParentStudentService.playStudent().success(function(response){
 			if(angular.equals(response.status,Constants.STATUS_OK)){
-				window.location.href = '/student/login?email=' + email;
+				window.location.href = '/student/login?id=' + id;
 			}
 			$scope.ui_unblock();
 		}).error(function(){

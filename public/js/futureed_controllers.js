@@ -266,11 +266,10 @@ function FutureedController($scope, $window, apiService, futureed) {
 	* @Params 
 	*   username - the username
 	*/
-	function validateUser(source) {
+	function validateUser() {
 		$scope.errors = Constants.FALSE;
-		$scope.source = (source) ? source:Constants.EMPTY_STR;
 		$scope.ui_block();
-		apiService.validateUser($scope.username, $scope.source).success(function(response) {
+		apiService.validateUser($scope.username).success(function(response) {
 			if(response.status == Constants.STATUS_OK) {
 				if(response.errors) {
 					$scope.errorHandler(response.errors);
@@ -290,7 +289,6 @@ function FutureedController($scope, $window, apiService, futureed) {
 
 	function getLoginPassword() {
 		$scope.id = ($scope.id) ? $scope.id : $scope.user.id;
-
 		apiService.getLoginPassword($scope.id).success(function (response) {
 			if(response.status == Constants.STATUS_OK) {
 				if(response.errors) {
@@ -923,11 +921,12 @@ function FutureedController($scope, $window, apiService, futureed) {
 		});
 	}
 
-	$scope.checkEmail = function(email) {
+	$scope.checkEmail = function(id) {
 
-		if(email != Constants.EMPTY_STR){
-			$scope.username = email;
-			$scope.validateUser(Constants.PARENT);
+		if(id != Constants.EMPTY_STR){
+			$scope.id = id;
+			$scope.getLoginPassword();
+			$scope.enter_pass = Constants.TRUE;
 		}
 	}
 
