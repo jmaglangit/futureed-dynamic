@@ -106,20 +106,21 @@
 
 			<div class="module-list" ng-if="class.records.length">
 				<div class="module-item" ng-repeat="record in class.records">
-				
-					<img ng-if="user.points >= record.points_to_unlock" class="module-icon" src="/images/icons/default-module-icon.png"
-						ng-click="class.redirect('{!! route('student.class.module.index') !!}', record.id)">
-
-					<img ng-if="user.points < record.points_to_unlock" class="module-icon" src="/images/icons/icon-lock.png"
-						ng-click="class.redirect('{!! route('student.class.module.index') !!}', record.id)">					
+					<img ng-class="{ 'module-icon' : user.points >= record.points_to_unlock, 'locked-module-icon' : user.points < record.points_to_unlock }" 
+						ng-src="{! user.points >= record.points_to_unlock && '/images/icons/default-module-icon.png' || '/images/icons/icon-lock.png' !}"
+						ng-click="class.redirect('{!! route('student.class.module.index') !!}', record)">				
 
 					<p class="module-name">{! record.name !}</p>
-					<div ng-if="user.points >= record.points_to_unlock">
-						<button ng-if="record.student_module.length && record.student_module[0].module_status == 'On Going'" ng-click="class.redirect('{!! route('student.class.module.index') !!}', record.id)" 
-							type="button" class="btn btn-blue module-btn"><i class="fa fa-play-circle"></i> Resume lesson</button>
-						<button ng-if="!record.student_module.length" ng-click="class.redirect('{!! route('student.class.module.index') !!}', record.id)"
-							type="button" class="btn btn-blue module-btn"><i class="fa fa-pencil"></i> Begin lesson</button>
-					</div>
+
+					<button ng-if="record.student_module.length && record.student_module[0].module_status == 'On Going' && user.points >= record.points_to_unlock"
+						ng-click="class.redirect('{!! route('student.class.module.index') !!}', record)" 
+						type="button" class="btn btn-blue module-btn"><i class="fa fa-play-circle"></i> Resume lesson</button>
+
+					<button ng-if="!record.student_module.length && user.points >= record.points_to_unlock" ng-click="class.redirect('{!! route('student.class.module.index') !!}', record)"
+						type="button" class="btn btn-blue module-btn"><i class="fa fa-pencil"></i> Begin lesson</button>
+
+					<button ng-if="user.points < record.points_to_unlock"
+						type="button" class="btn btn-blue module-btn" ng-disabled="true"><i class="fa fa-lock"></i> Module Locked</button>
 				</div>
 			</div>
 			

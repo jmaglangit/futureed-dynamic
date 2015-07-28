@@ -762,12 +762,11 @@ hr {
 	width: 15%;
 }
 
-.module-icon {
+.module-icon, .locked-module-icon {
 	border-radius: 50%;
 	width: 120px;
 	transition: ease-out .1s;
 	background-color: #ffffff;
-	cursor: pointer;
 	padding: 10px;
 }
 
@@ -776,6 +775,7 @@ hr {
 	width: 140px;
 	margin: -10px;
 	transition: ease-out .1s;
+	cursor: pointer;
 }
 
 .module-name {

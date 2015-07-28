@@ -464,12 +464,12 @@ function StudentModuleController($scope, $window, $interval, apiService, Student
 		self.active_contents = Constants.FALSE;
 
 		switch(active) {
-			case Constants.ACTIVE_QUESTIONS 	: 
+			case Constants.ACTIVE_QUESTIONS 	:
+				self.listQuestions(); 
 				self.active_questions = Constants.TRUE;
 				break;
 
 			case Constants.CONTENTS 	:
-				self.getTeachingContents(id);
 				self.getModuleDetail(id);
 
 			default 		:
@@ -539,6 +539,11 @@ function StudentModuleController($scope, $window, $interval, apiService, Student
 									data.class_id =  $scope.user.class.class_id;
 
 									createModuleStudent(data, function() {});
+							} else if(self.record.student_module[0].last_answered_question_id) {
+								self.search.question_id = self.record.student_module[0].last_answered_question_id;
+								self.setActive(Constants.ACTIVE_QUESTIONS, self.record.id);
+							} else if(!self.record.student_module[0].last_answered_question_id) {
+								self.getTeachingContents(id);
 							}
 						}
 					}
@@ -615,8 +620,6 @@ function StudentModuleController($scope, $window, $interval, apiService, Student
 			updateModuleStudent(data, function() {
 				// set view to question list
 				self.setActive(Constants.ACTIVE_QUESTIONS);
-				// get question list
-				self.listQuestions();
 			});	
 	}
 
@@ -639,6 +642,7 @@ function StudentModuleController($scope, $window, $interval, apiService, Student
 
 		self.search.module_id = self.record.id;
 		self.search.difficulty = (self.search.difficulty) ? self.search.difficulty : 1;
+		self.search.question_id = (self.search.question_id) ? self.search.difficulty : Constants.EMPTY_STR;
 
 		self.table.size = 1;
 
@@ -707,6 +711,7 @@ function StudentModuleController($scope, $window, $interval, apiService, Student
 		self.success = Constants.FALSE;
 
 		var page = self.table.page + 1;
+		self.search.question_id = Constants.EMPTY_STR;
 
 		self.table.page = (page < Constants.DEFAULT_PAGE) ? Constants.DEFAULT_PAGE : page;
 		self.table.offset = (page - 1) * self.table.size;

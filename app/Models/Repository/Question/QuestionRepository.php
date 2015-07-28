@@ -64,6 +64,12 @@ class QuestionRepository implements QuestionRepositoryInterface{
 					$question = $question->questionText($criteria['questions_text']);
 				}
 
+				//check scope questions_text
+				if(isset($criteria['questions_id'])){
+
+					$question = $question->scopeId($criteria['questions_id']);
+				}
+
 				//check scope to question_type
 				if(isset($criteria['question_type'])){
 
