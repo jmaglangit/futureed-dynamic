@@ -45,7 +45,7 @@ function ManageHelpAnswerService($http) {
 	service.updateHelpAnswerStatus = function(data) {
 		return $http({
 			method 	: Constants.METHOD_POST
-			, data  : { request_answer_status : data.request_answer_status }
+			, data  : data
 			, url   : serviceUrl + 'help-request-answer/status/' + data.id
 		});
 	}

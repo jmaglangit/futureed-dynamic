@@ -156,7 +156,7 @@
 						</span>
 	        		</div>
 	        	</div>
-	        	<div class="form-group" ng-if="tips.record.rated_by != futureed.ADMIN && tips.active_view">
+	        	<div class="form-group" ng-if="answer.record.request_answer_status == 'Pending' && answer.active_view">
 	        		<div class="btn-container col-xs-8 col-xs-offset-2">
 	        			<button class="btn btn-blue btn-medium" type="button" ng-click="tips.rateTip()" ng-if="tips.record.rating != futureed.NULL">Change Rating</button>
 
