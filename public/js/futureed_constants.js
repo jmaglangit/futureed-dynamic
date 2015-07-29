@@ -58,6 +58,8 @@ var Constants = {
 	, TEXT			: 2
 	, IMAGE			: 3
 
+	, NONE 			: "None"
+
 	/**
 	* Help Tabs
 	*/
@@ -143,6 +145,8 @@ var Constants = {
 
 	, UPDATE_PAYMENT_STATUS_SUCCESS 	: "You have successfully updated the payment status."
 	, DELETE_INVOICE_SUCCESS : "You have successfully delete the selected invoice."
+
+	, RESET_SUCCESS 		: "Your module was reset successfully."
 
 	, MSG_U_NOTEXIST		: "User does not exist."
 	, MSG_U_EXIST 			: "Username already exists."

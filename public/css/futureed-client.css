@@ -175,6 +175,7 @@ table#client-list{
 	border-radius: 5px;
 	min-height: 500px;
 	border:1px solid #b5b5b5;
+	max-width: 1200px;
 }
 
 .question-container {
@@ -202,6 +203,11 @@ table#client-list{
 .title-content{
 	margin-top: 0;
 	margin-bottom: 0;
+}
+
+.content-image {
+	padding: 20px;
+	width: 100%;
 }
 
 input[type=radio]{box-sizing: border-box;padding: 0;}
