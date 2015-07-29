@@ -26,8 +26,8 @@ class StudentTeachingContentController extends ApiController {
 
 		$criteria = [];
 
-		if(Input::get('content_id')){
-			$criteria['content_id'] = Input::get('content_id');
+		if(Input::get('module_id')){
+			$criteria['module_id'] = Input::get('module_id');
 		}
 
 		$limit = (Input::get('limit')) ? Input::get('limit') : 0;
