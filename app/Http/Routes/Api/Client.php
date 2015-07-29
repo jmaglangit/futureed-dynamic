@@ -34,15 +34,15 @@ Routes::group(['prefix' => '/client'], function()
         Routes::resource('/teacher','Api\v1\ClientTeacherController',
             ['except' => ['create','edit']]);
 
-        Routes::post('/change-password/{id}',[
-            'uses' => 'Api\v1\ClientPasswordController@changePassword',
-            'as' => 'api.v1.client.change-password'
-        ]);
-
-        Routes::post('/new-password/{id}',[
-            'uses' => 'Api\v1\ClientPasswordController@setPassword',
-            'as' => 'api.v1.client.new-password'
-        ]);
+//        Routes::post('/change-password/{id}',[
+//            'uses' => 'Api\v1\ClientPasswordController@changePassword',
+//            'as' => 'api.v1.client.change-password'
+//        ]);
+//
+//        Routes::post('/new-password/{id}',[
+//            'uses' => 'Api\v1\ClientPasswordController@setPassword',
+//            'as' => 'api.v1.client.new-password'
+//        ]);
 
         Routes::post('/change-email/{id}',[
             'uses' => 'Api\v1\EmailController@updateClientEmail',
@@ -142,8 +142,8 @@ Routes::group(['prefix' => '/client'], function()
  */
 Routes::group([
     'middleware' => ['api_user','api_after'],
-    'permission' => ['admin','client'],
-    'role' => ['principal','teacher','parent','admin','super_admin']
+//    'permission' => ['admin','client'],
+//    'role' => ['principal','teacher','parent','admin','super_admin']
 ],function(){
 
     Routes::resource('/client','Api\v1\ClientController',

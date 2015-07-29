@@ -30,11 +30,11 @@ class Kernel extends HttpKernel {
         'api_user' => 'FutureEd\Http\Middleware\Api\UserMiddleware',
         'api_after' => 'FutureEd\Http\Middleware\Api\AfterMiddleware',
 
-		'parent' => 'FutureEd\Http\Middleware\ParentMiddleware',
-		'principal' => 'FutureEd\Http\Middleware\PrincipalMiddleware',
-		'teacher' => 'FutureEd\Http\Middleware\TeacherMiddleware',
-		'admin_partial' => 'FutureEd\Http\Middleware\AdminPartialsMiddleware',
-		'student_partial' => 'FutureEd\Http\Middleware\StudentPartialsMiddleware'
+//		'parent' => 'FutureEd\Http\Middleware\ParentMiddleware',
+//		'principal' => 'FutureEd\Http\Middleware\PrincipalMiddleware',
+//		'teacher' => 'FutureEd\Http\Middleware\TeacherMiddleware',
+//		'admin_partial' => 'FutureEd\Http\Middleware\AdminPartialsMiddleware',
+//		'student_partial' => 'FutureEd\Http\Middleware\StudentPartialsMiddleware'
 	];
 
 }
