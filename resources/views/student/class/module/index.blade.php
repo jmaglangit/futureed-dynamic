@@ -8,15 +8,25 @@
 	<div class="col-xs-12" ng-init="backgroundClass(); checkClass(1)" ng-controller="StudentModuleController as mod" ng-cloak>
 		<div template-directive template-url="{!! route('student.partials.base_url') !!}"></div>
 
-		<div ng-init="mod.setActive(futureed.ACTIVE_CONTENTS, '{!! $id !!}')" ng-if="!mod.no_record">
-			<ul class="breadcrumb">
-			    <li><a href="#"><span><i class="fa fa-home"></i></span></a></li>
-			    <li><a href="#">United States</a></li>
-			    <li class="active">Math</li>
-			</ul>
-		</div>
+		<ul class="breadcrumb">
+		    <li><a href="#"><span><i class="fa fa-home"></i></span></a></li>
+		    <li><a href="#">United States</a></li>
+		    <li class="active">Math</li>
+		</ul>
+
+		<div class="col-xs-12" ng-if="mod.errors || mod.success">
+			<div class="alert alert-error" ng-if="mod.errors">
+				<p ng-repeat="error in mod.errors track by $index">
+					{! error !}
+				</p>
+			</div>
+
+	        <div class="alert alert-success" ng-if="mod.success">
+	            <p>{! mod.success !}</p>
+	        </div>
+	    </div>
 		
-		<div class="col-xs-2">
+		<div class="col-xs-2" ng-init="mod.launchModule('{!! $id !!}')">
 			<div class="margin-top-bot-5" ng-if="!mod.no_record">
 				<a href="javascript:;"><img src="/images/class-student/icon-askforhelp.png" ng-click="mod.askHelp()"></a>
 			</div>
