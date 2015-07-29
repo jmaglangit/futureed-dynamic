@@ -28,7 +28,7 @@ class StudentQuestionContentTipRequest extends ApiRequest {
 				return [
 					'class_id' => 'required|integer',
 					'student_id'=> 'required|integer',
-					'title' => 'required|string',
+					'title' => 'required|string|max:128|min:2',
 					'content' => 'required|string',
 					'module_id' => 'required|integer',
 					'subject_id' => 'required|integer',
@@ -59,6 +59,8 @@ class StudentQuestionContentTipRequest extends ApiRequest {
 			'subject_area_id.integer' => 'Area is invalid.',
 			'link_id.required' => 'Link is required.',
 			'link_id.integer' => 'Link is invalid.',
+			'content.required' => 'The description field is required.',
+			'content.string' => 'The description field is invalid.',
 
 
 		];

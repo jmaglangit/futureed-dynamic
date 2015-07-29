@@ -47,7 +47,9 @@ class HelpRequestAnswerRequest extends ApiRequest {
             'student_id.required' =>'Student is required.',
             'help_request_id.required' =>'Help request is required.',
             'student_id.integer' =>'Student must be a number.',
-            'help_request_id.integer' =>'Help request must be a number.'
+            'help_request_id.integer' =>'Help request must be a number.',
+            'content.required' => 'The answer field is required.',
+            'content.string' => 'The answer field is invalid.'
 		];
 	}
 
