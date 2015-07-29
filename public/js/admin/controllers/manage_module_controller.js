@@ -143,6 +143,7 @@ function ManageModuleController($scope, manageModuleService, ManageQuestionAnsSe
 					self.errors = $scope.errorHandler(response.errors);
 				}else if(response.data){
 					self.records = response.data.records;
+					self.updatePageCount(response.data);
 				}
 			}
 			$scope.ui_unblock();

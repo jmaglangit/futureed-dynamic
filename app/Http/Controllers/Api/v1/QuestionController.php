@@ -45,10 +45,6 @@ class QuestionController extends ApiController {
 			$criteria['questions_text'] = Input::get('questions_text');
 		}
 
-		if(Input::get('questions_id')){
-			$criteria['questions_id'] = Input::get('questions_id');
-		}
-
 		if(Input::get('difficulty')){
 			$criteria['difficulty'] = Input::get('difficulty');
 		}

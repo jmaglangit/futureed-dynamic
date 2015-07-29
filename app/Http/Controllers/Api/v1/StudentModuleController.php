@@ -135,6 +135,15 @@ class StudentModuleController extends ApiController {
 	{
 		$data = $request->only('last_viewed_content_id','last_answered_question_id');
 
+		if(!$data['last_viewed_content_id']) {
+			unset($data['last_viewed_content_id']);
+		}
+
+
+		if(!$data['last_answered_question_id']) {
+			unset($data['last_answered_question_id']);
+		}
+
 		$this->student_module->updateStudentModule($id,$data);
 
 		return $this->respondWithData($this->student_module->viewStudentModule($id));

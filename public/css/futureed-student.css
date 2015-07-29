@@ -914,6 +914,10 @@ hr {
     color: #FEFEC4;
 }
 
+.selected-choice, .selected-choice:focus {
+	box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
 .contents-container {
 	min-height: 500px;
     min-width: 1000px;
@@ -962,4 +966,9 @@ hr {
 .badge-image {
 	width: 150px;
 	height: 150px;
+}
+
+.question-text-answer {
+	width: 500px;
+    margin: 10px auto;
 }
