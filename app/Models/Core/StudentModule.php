@@ -21,4 +21,11 @@ class StudentModule extends Model {
     protected $attributes = ['progress' => 0,'total_time' => 0,'question_counter'=> 0,
         'wrong_counter' => 0,'correct_counter'=> 0, 'running_points'=> 0,'points_earned'=> 0,
         'last_answered_question_id'=> 0,'total_correct_answer' => 0,'current_difficulty_level'=> 1];
+
+	//Relationship
+
+	public function question(){
+
+		return $this->belongsTo('FutureEd\Models\Core\Question','last_answered_question_id');
+	}
 }
