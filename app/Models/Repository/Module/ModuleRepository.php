@@ -54,6 +54,18 @@ class ModuleRepository implements ModuleRepositoryInterface{
 					$module = $module->gradeId($criteria['grade_id']);
 				}
 
+				//check module student_id
+				if(isset($criteria['student_id'])){
+
+					$module = $module->studentId($criteria['student_id']);
+				}
+
+				//check module class_id
+				if(isset($criteria['class_id'])){
+
+					$module = $module->classId($criteria['class_id']);
+				}
+
 				//check module status
 				if(isset($criteria['module_status'])){
 
@@ -102,7 +114,7 @@ class ModuleRepository implements ModuleRepositoryInterface{
 
 		$module = new Module();
 
-		$module = $module->with('subject','subjectarea','grade','content','question');
+		$module = $module->with('subject','subjectarea','grade','content','question','studentModule');
 		$module = $module->find($id);
 		return $module;
 

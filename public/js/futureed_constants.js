@@ -9,6 +9,7 @@ var Constants = {
 	, EMPTY_STR		: ''
 	, ALL			: 'all'
 	, UNDEFINED		: 'undefined'
+	, NULL 			: null
 
 	, METHOD_POST	: 'POST'
 	, METHOD_GET	: 'GET'
@@ -48,6 +49,7 @@ var Constants = {
 	, GENERAL		: "General"
 	, CONTENT 		: "Content"
 	, QUESTION		: "Question"
+	, ANSWER		: "Answer"
 
 	/**
 	* Media Types
@@ -57,6 +59,14 @@ var Constants = {
 	, IMAGE			: 3
 
 	/**
+	* Help Tabs
+	*/
+	, CURRENT 		: "current"
+	, OWN 			: "own"
+	, ALL 			: "all"
+	, CLASSMATE 	: "classmate"
+
+	/**
 	* Active Screens
 	*/
 	, ACTIVE_LIST	: "list"
@@ -64,6 +74,9 @@ var Constants = {
 	, ACTIVE_EDIT	: "edit"
 	, ACTIVE_ADD	: "add"
 	, ACTIVE_EMAIL	: "email"
+
+	, ACTIVE_QUESTIONS 	: "questions"
+	, ACTIVE_CONTENTS 	: "contents"
 
 	, ADD_CLIENT 	: "add_client"
 	, ADD_STUDENT	: "add_student"
@@ -78,9 +91,18 @@ var Constants = {
 	, STATUS_TRUE 	: "true"
 	, STATUS_FALSE 	: "false"
 
+	, M_CHOICE		: "MC"
+
+	, BACK 			: "Back"
+	, NEXT 			: "Next"
+
+	, YES 			: "Yes"
+	, NO 			: "No"
+
 	, MSG_INTERNAL_ERROR	: "Hmm, something went wrong. Please contact the system administrator."
 	, MSG_PPW_NOT_MATCH 	: "Picture Password does not match."
 	, MSG_PPW_INCORRECT		: "Picture password is incorrect."
+	, MSG_PPW_SELECT 		: "Please select a picture password."
 	, MSG_PPW_SELECT_NEW 	: "Please select a new picture password."
 
 	// API Message
@@ -122,6 +144,13 @@ var Constants = {
 	, MSG_U_AVAILABLE		: "Username is available."
 
 	, MSG_NO_RECORD			: "No record found."
+
+	, MSG_FILL_FIELDS 		: "Please fill the required fields."
+
+	, ATTR_CURRENT_EMAIL 	: "current_email"
+	, ATTR_NEW_EMAIL 		: "new_email"
+	, ATTR_CONFIRM_EMAIL 	: "confirm_email"
+	, ATTR_PASSWORD 		: "password"
 
 	, URL_FORGOT_PASSWORD	: function(user_type) {
 		return '/' + user_type + '/password/forgot';

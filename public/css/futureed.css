@@ -478,7 +478,7 @@ li.active .rnd-identifier{
 	width: 100%;
 	min-height: 900px;
 	position: relative;
-	overflow: auto;
+	overflow: hidden;
 	margin-bottom: 40px;
 }
 .dshbrd-con .side-nav{
@@ -1092,9 +1092,14 @@ content {
 }
 
 .upload-label {
-	position: absolute;
-	right: 0px;
-	left: 0px;
-	margin: 5px 15px;
-	padding: 5px;
+	padding: 6px;
+	font-weight: normal;
+	font-size: 13px;
+}
+
+.wide-column {
+	max-width: 200px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }

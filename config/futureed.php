@@ -98,10 +98,10 @@ return [
 	//set value for link_type
 	'link_type_general' => 'General',
 
-    //Help Request Status
-    'help_request_status_pending' => 'Pending',
-    'help_request_status_accepted' => 'Accepted',
-    'help_request_status_rejected' => 'Rejected',
+	//Help Request Status
+	'help_request_status_pending' => 'Pending',
+	'help_request_status_accepted' => 'Accepted',
+	'help_request_status_rejected' => 'Rejected',
 
 	//for tips take 3
 	'tip_take' => 3,
@@ -138,6 +138,11 @@ return [
 	//answer
 	'answer' => 'answer',
 
+	//Teaching content image
+	'teaching_content_image_local' => base_path() . '/public/uploads/content',
+	'teaching_content_image_uploads' => '/uploads/content',
+
+
 
 	//path for content uploaded images temp
 	'content_image_path' =>  base_path().'/public/uploads/temp/content',
@@ -149,10 +154,23 @@ return [
 	//answer
 	'content' => 'content',
 
+	//answer status
+	'answer_status_correct' => 'Correct',
+	'answer_status_wrong' => 'Wrong',
 
+	//Student Module
+	'module_status_available' => 'Available',
+	'module_status_ongoing' => 'On Going',
+	'module_status_completed' => 'Completed',
+	'points_to_finish_module' => 12,
+	'deductions_to_fail_module' => 10,
 
+    //Question Types
+    'question_type_fill_in_the_blank' => 'FIB',
+    'question_type_multiple_choice' => 'MC',
+    'question_type_provide_answer' => 'N',
+    'question_type_ordering' => 'O',
 
-
-
-
+    //reset module
+    'reset_module' => 'Reset Module',
 ];

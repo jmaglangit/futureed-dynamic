@@ -58,7 +58,7 @@
                 Add Question Details
             </legend>
             <div class="form-group">
-                <label class="control-label col-xs-3">Code <span class="required">*</span></label>
+                <label class="control-label col-xs-4">Code <span class="required">*</span></label>
                 <div class="col-xs-5">
                     {!! Form::text('code',''
                         , array(
@@ -71,7 +71,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-xs-3">Question <span class="required">*</span></label>
+                <label class="control-label col-xs-4">Question <span class="required">*</span></label>
                 <div class="col-xs-5">
                     {!! Form::textarea('question',''
                         , array(
@@ -85,23 +85,24 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-xs-3">Question Image <span class="required">*</span></label>
+                <label class="control-label col-xs-4">Question Image</label>
                 <div class="col-xs-5">
                     <div class="btn btn-blue" ngf-select ngf-change="qa.upload($files, qa.create)"> Choose Image... </div>
                 </div>
 
-                <div class="col-xs-4 margin-top-8">
-                    View Image
+                <div class="margin-top-8" ng-if="qa.create.uploaded">
+                    <a href="" ng-click="qa.removeImage(qa.create)"><i class="fa fa-trash"></i></a>
                 </div>
             </div>
             <div class="form-group" ng-if="qa.create.uploaded">
-                <div class="col-xs-3"></div>
+                <div class="col-xs-4"></div>
                 <div class="col-xs-5">
-                    <span class="label label-info">Image Uploaded...</span>
+                    <span class="col-xs-6 upload-label label label-info">Image Uploaded...</span>
+                    <a href="" class="control-label col-xs-6" ng-click="qa.viewImage(qa.create)">View Image</a>
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-xs-3">Question Type <span class="required">*</span></label>
+                <label class="control-label col-xs-4">Question Type <span class="required">*</span></label>
                 <div class="col-xs-5">
                     {!! Form::select('question_type'
                         , array(
@@ -121,7 +122,7 @@
                 </div>
             </div>
             <div class="form-group" ng-if="qa.create.question_type != 'MC' && qa.create.question_type">
-                <label class="control-label col-xs-3">Answer <span class="required">*</span></label>
+                <label class="control-label col-xs-4">Answer <span class="required">*</span></label>
                 <div class="col-xs-5" >
                     {!! Form::textarea('answer',''
                         , array(
@@ -135,7 +136,7 @@
                 </div>
             </div>
         	<div class="form-group">
-                <label class="control-label col-xs-3">Points Earned<span class="required">*</span></label>
+                <label class="control-label col-xs-4">Points Earned<span class="required">*</span></label>
                 <div class="col-xs-5">
                     {!! Form::text('points_earned',''
                         , array(
@@ -149,7 +150,7 @@
                 
         	</div>
             <div class="form-group">
-                <label class="control-label col-xs-3">Difficulty <span class="required">*</span></label>
+                <label class="control-label col-xs-4">Difficulty <span class="required">*</span></label>
                 <div class="col-xs-5">
                     {!! Form::text('difficulty',''
                         , array(
@@ -162,7 +163,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-xs-3">Sequence No</label>
+                <label class="control-label col-xs-4">Sequence No</label>
                 <div class="col-xs-5">
                     {!! Form::text('seq_no',''
                         , array(
@@ -175,7 +176,7 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-xs-3 control-label">Status <span class="required">*</span></label>
+                <label class="col-xs-4 control-label">Status <span class="required">*</span></label>
                 <div class="col-xs-5">
                     <div class="col-xs-6 checkbox">                                 
                         <label>
@@ -224,4 +225,29 @@
         	</div>
         </div>
 	</div>
+
+    <div id="view_image_modal" ng-show="qa.view_image.show" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    {! qa.view_image.questions_text !}
+                </div>
+                <div class="modal-body">
+                    <div class="modal-image">
+                        <img ng-src="{! qa.view_image.image_path !}"/>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="btncon col-md-8 col-md-offset-4 pull-left">
+                        {!! Form::button('Close'
+                            , array(
+                                'class' => 'btn btn-gold btn-medium'
+                                , 'data-dismiss' => 'modal'
+                            )
+                        ) !!}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

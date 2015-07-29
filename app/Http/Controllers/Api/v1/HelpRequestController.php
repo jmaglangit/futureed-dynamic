@@ -6,6 +6,7 @@ use FutureEd\Models\Repository\HelpRequestAnswer\HelpRequestAnswerRepositoryInte
 use FutureEd\Services\AvatarServices;
 use Illuminate\Support\Facades\Input;
 
+
 class HelpRequestController extends ApiController{
 
     protected $help_request;

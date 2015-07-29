@@ -268,7 +268,6 @@ function FutureedController($scope, $window, apiService, futureed) {
 	*/
 	function validateUser() {
 		$scope.errors = Constants.FALSE;
-
 		$scope.ui_block();
 		apiService.validateUser($scope.username).success(function(response) {
 			if(response.status == Constants.STATUS_OK) {
@@ -290,7 +289,6 @@ function FutureedController($scope, $window, apiService, futureed) {
 
 	function getLoginPassword() {
 		$scope.id = ($scope.id) ? $scope.id : $scope.user.id;
-
 		apiService.getLoginPassword($scope.id).success(function (response) {
 			if(response.status == Constants.STATUS_OK) {
 				if(response.errors) {
@@ -361,8 +359,6 @@ function FutureedController($scope, $window, apiService, futureed) {
 			if($scope.user.new_email != null){
 				$scope.confirm_email = Constants.TRUE;
 			}
-			
-			$("input[name='userdata']").val('');
 		}
 	}
 
@@ -907,6 +903,31 @@ function FutureedController($scope, $window, apiService, futureed) {
 			$scope.internalError();
 			$scope.ui_unblock();
 		});
+	}
+
+	$scope.getStudentBadges = function() {
+		var id = $scope.user.id;
+
+		apiService.getStudentBadges(id).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					$scope.errorHandler(response.errors);
+				} else if(response.data) {
+					$scope.badges = response.data;
+				}
+			}
+		}).error(function(response) {
+			$scope.internalError()
+		});
+	}
+
+	$scope.checkEmail = function(id) {
+
+		if(id != Constants.EMPTY_STR){
+			$scope.id = id;
+			$scope.getLoginPassword();
+			$scope.enter_pass = Constants.TRUE;
+		}
 	}
 
 };

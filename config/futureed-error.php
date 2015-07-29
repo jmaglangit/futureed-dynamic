@@ -20,7 +20,7 @@ return [
 		2005 => 'Country does not exist.',
 		2006 => 'Confirmation code does not match.',
 		2007 => 'Confirmation code has expired.',
-		2008 => 'The Username or Email you entered is invalid. Please try inputting again. If the account you are attempting to login is for a student less than 13 yrs old, please login via the parent site.',
+		2008 => 'The Username or Email you entered is invalid. Please try inputting again. If the account you are attempting to login is for a student less than 14 yrs old, please login via the parent site.',
 		2009 => 'Avatar does not exist.',
 		2010 => 'Parent does not exist.',
 		2011 => 'Username and password is incorrect.',
@@ -40,7 +40,7 @@ return [
 		2025 => 'Reset code is required.',
 		2026 => 'Reset code should be number only.',
 		2027 => 'Reset code is invalid.',
-		2028 => 'The Student has to be 13 years old or above to be able to register.',
+		2028 => 'The Student has to be 14 years old or above to be able to register.',
 		2029 => 'Access authentication failure.',
 		2030 => 'Access authorization is required.',
 		2031 => 'Access authorization is invalid.',
@@ -65,6 +65,8 @@ return [
 		2050 => 'Student has an active subscription.',
 		2051 => 'Class has already ended.',
 		2052 => 'No Image',
+		2053 => 'File Location is invalid.',
+		2054 => 'File deleted.',
 
 
 		2100 => 'Reset code is invalid.',
@@ -82,9 +84,9 @@ return [
 		2112 => 'Password must be at least 8 characters and with at least 1 number.',
 		2113 => 'Username and password is invalid.',
 		2114 => 'Your password is incorrect.',
-		2115 => 'Your contact number is incorrect.',
+		2115 => 'Contact number format is incorrect.',
 		2116 => 'School name is not available.',
-		2117 => 'The Student has to be 13 years old or above.',
+		2117 => 'The Student has to be 14 years old or above.',
 		2118 => 'Your account is being reviewed or contact administrator for assistance.',
 		2119 => 'This record is being used.',
 		2120 => 'This record is invalid.',
@@ -111,6 +113,8 @@ return [
 		2141 => 'Unable to Delete. Module has questions.',
 		2142 => 'The image must be a file of type: jpeg, jpg, png.',
 		2143 => 'The image size had exceeded 2MB.',
+		2144 => 'Module does not exist',
+		2145 => 'Student needs to watch the videos again.',
 
 		// Client Error messages
 		2200 => 'Email already exists.',

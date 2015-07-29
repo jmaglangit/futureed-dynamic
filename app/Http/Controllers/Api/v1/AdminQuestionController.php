@@ -68,19 +68,7 @@ class AdminQuestionController extends ApiController {
 			$offset = intval(Input::get('offset'));
 		}
 
-		$record = $this->question->getQuestions($criteria , $limit, $offset );
-
-		if($record['total'] > 0){
-
-			foreach($record['records'] as $k=>$v){
-
-				$record['records'][$k]['questions_image'] = config('futureed.question_image_path_final_public').'/'.$v['id'].'/'.$v['questions_image'];
-			}
-
-		}
-
-
-		return $this->respondWithData($record);
+		return $this->respondWithData($this->question->getQuestions($criteria , $limit, $offset ));
 	}
 
 	/**
@@ -170,9 +158,6 @@ class AdminQuestionController extends ApiController {
 			return $this->respondErrorMessage(2120);
 		}
 
-
-		$question->questions_image = config('futureed.question_image_path_final_public').'/'.$question->id.'/'.$question->questions_image;
-
 		return $this->respondWithData($question);
 	}
 
@@ -195,7 +180,8 @@ class AdminQuestionController extends ApiController {
 	 */
 	public function update($id,AdminQuestionRequest $request)
 	{
-		$data =  $request->only('image','answer','questions_text','status','question_type','points_earned','difficulty','seq_no');
+		$data =  $request->only('image','answer','question_order_text','questions_text','status','question_type'
+			,'points_earned','difficulty','seq_no');
 
 		$question = $this->question->viewQuestion($id);
 
@@ -272,6 +258,14 @@ class AdminQuestionController extends ApiController {
 
 			return $this->respondErrorMessage(2120);
 		}
+
+		$current_sequence = $this->question->getQuestionSequenceNo($id);
+
+		//pull sequence number.
+		$pulled = $this->question_service->pullSequenceNo($current_sequence[0]->module_id, $current_sequence[0]->seq_no,$id);
+
+		//update sequence
+		$this->question->updateSequence($pulled);
 
 		//delete question
 		return $this->respondWithData($this->question->deleteQuestion($id));

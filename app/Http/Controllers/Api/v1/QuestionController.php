@@ -45,6 +45,10 @@ class QuestionController extends ApiController {
 			$criteria['questions_text'] = Input::get('questions_text');
 		}
 
+		if(Input::get('difficulty')){
+			$criteria['difficulty'] = Input::get('difficulty');
+		}
+
 		if(Input::get('limit')) {
 			$limit = intval(Input::get('limit'));
 		}
@@ -53,19 +57,7 @@ class QuestionController extends ApiController {
 			$offset = intval(Input::get('offset'));
 		}
 
-		$record = $this->question->getQuestions($criteria , $limit, $offset );
-
-		if($record['total'] > 0){
-
-			foreach($record['records'] as $k=>$v){
-
-				$record['records'][$k]['questions_image'] = config('futureed.question_image_path_final_public').'/'.$v['id'].'/'.$v['questions_image'];
-			}
-
-		}
-
-
-		return $this->respondWithData($record);
+		return $this->respondWithData($this->question->getQuestions($criteria , $limit, $offset ));
 	}
 
 	/**
@@ -112,6 +104,5 @@ class QuestionController extends ApiController {
 		return $this->respondWithData($return);
 
 	}
-
 
 }

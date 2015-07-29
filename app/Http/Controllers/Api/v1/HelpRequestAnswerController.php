@@ -7,22 +7,26 @@ use FutureEd\Models\Repository\HelpRequestAnswer\HelpRequestAnswerRepositoryInte
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 use FutureEd\Services\AvatarServices;
+use FutureEd\Models\Repository\HelpRequest\HelpRequestRepositoryInterface;
+use Carbon\Carbon;
 
 class HelpRequestAnswerController extends ApiController {
 
 	protected $help_request_answer;
 	protected $avatar;
+	protected $help_request;
 
 	/**
 	 *
 	 */
 	public function __construct(
 		HelpRequestAnswerRepositoryInterface $helpRequestAnswerRepositoryInterface
-		, AvatarServices $avatar
+		, AvatarServices $avatar, HelpRequestRepositoryInterface  $help_request
 	){
 
 		$this->help_request_answer = $helpRequestAnswerRepositoryInterface;
 		$this->avatar = $avatar;
+		$this->help_request = $help_request;
 
 	}
 
@@ -122,9 +126,14 @@ class HelpRequestAnswerController extends ApiController {
 	 */
 	public function store(HelpRequestAnswerRequest $request)
 	{
-        $data = $request->all();
-        $result = $this->help_request_answer->addHelpRequestAnswer($data);
-        return $this->respondWithData($result);
+		$data = $request->all();
+		$result = $this->help_request_answer->addHelpRequestAnswer($data);
+
+		//update last_answered_at in help_request table
+		$help_request['last_answered_at'] = Carbon::now();
+		$this->help_request->updateHelpRequest($data['help_request_id'], $help_request);
+
+		return $this->respondWithData($result);
 	}
 
 	/**

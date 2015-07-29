@@ -22,7 +22,8 @@ class HelpRequestAnswer extends Model {
 		'seq_no',
 		'request_answer_status',
 		'status',
-		'points'
+		'points',
+		'rated_by'
 	];
 
     protected $attributes = [
@@ -37,7 +38,7 @@ class HelpRequestAnswer extends Model {
         'status' =>'Enabled',
         'points' => 0];
 
-	protected $hidden = ['updated_by','created_at','deleted_at'];
+	protected $hidden = ['updated_by','deleted_at'];
 
 	//Relationships
 	public function helpRequest(){

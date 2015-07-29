@@ -33,6 +33,7 @@ class AdminQuestionAnswerRequest extends ApiRequest {
 					'image' => 'required_if:answer_text,|string',
 					'correct_answer' => 'required|alpha|in:Yes,No',
 					'point_equivalent' => 'required|integer',
+					'label' => 'string'
 
 				];
 				break;
@@ -44,6 +45,7 @@ class AdminQuestionAnswerRequest extends ApiRequest {
 					'correct_answer' => 'required|alpha|in:Yes,No',
 					'point_equivalent' => 'required|integer',
 					'image' => 'required_if:answer_text,|string',
+					'label' => 'string'
 
 
 				];

@@ -38,7 +38,7 @@ class TeachingContentRepository implements TeachingContentRepositoryInterface{
 
         $query = new TeachingContent();
 
-        $query = $query->with('learningStyle','mediaType');
+        $query = $query->with('module','learningStyle','mediaType');
 
         if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
 
