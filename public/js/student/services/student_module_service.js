@@ -119,7 +119,7 @@ function StudentModuleService($http){
 		return $http({
 			method  : Constants.METHOD_GET
 			, url  	: serviceUrl + 'question?module_id=' + search.module_id
-				+ '&question_id=' + search.question_id
+				+ '&seq_no=' + search.seq_no
 				+ '&difficulty=' + search.difficulty
 				+ '&limit=' + table.size
 				+ '&offset=' + table.offset

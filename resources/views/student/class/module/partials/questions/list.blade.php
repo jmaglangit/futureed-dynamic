@@ -15,9 +15,8 @@
 		<a ng-if="mod.questions.question_type == futureed.MULTIPLECHOICE" href="" class="choices" ng-repeat="choices in mod.questions.question_answers"
 			ng-click="mod.selectAnswer(choices)" ng-class="{ 'selected-choice' : mod.questions.answer_id == choices.id }">{! choices.answer_text !}</a>
 		
-		<div ng-if="mod.questions.question_type == futureed.FILLINBLANK">
-			<label class="control-label col-xs-3">Answer </label>
-			<input ng-model="mod.questions.answer_text" type="text" class="form-control col-xs-5" placeholder="Answer" />
+		<div ng-if="mod.questions.question_type == futureed.FILLINBLANK || mod.questions.question_type == futureed.PROVIDE" class="form-group">
+			<input ng-model="mod.questions.answer_text" type="text" class="form-control question-text-answer" placeholder="Answer" />
 		</div>
 	</div>
 

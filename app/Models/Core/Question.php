@@ -87,6 +87,11 @@ class Question extends Model {
 		return $query->where('id',$id);
 	}
 
+	public function scopeSeqNo($query, $seq_no){
+
+		return $query->where('seq_no',$seq_no);
+	}
+
 	public function scopeOrderBySeqNo($query){
 
 		return $query->OrderBy('seq_no');
