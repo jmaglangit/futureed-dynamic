@@ -558,6 +558,7 @@ function StudentModuleController($scope, $window, $interval, $timeout, apiServic
 		} else {
 			// if last_answered_question_id value is > 0, load question
 			self.setActive(Constants.ACTIVE_QUESTIONS);
+			self.table.offset = student_module.last_answered_question_id - 1;
 			self.listQuestions();
 		}
 	}
@@ -571,7 +572,7 @@ function StudentModuleController($scope, $window, $interval, $timeout, apiServic
 			}
 
 			if(self.active_questions) {
-				data.last_answered_question_id = self.questions.id;
+				data.last_answered_question_id = self.questions.seq_no;
 				data.seq_no = self.questions.seq_no;
 			}
 			
@@ -617,8 +618,7 @@ function StudentModuleController($scope, $window, $interval, $timeout, apiServic
 		// update current view
 		self.setActive(Constants.ACTIVE_QUESTIONS);
 
-		// get question list; set seq_no to 1
-		self.search.seq_no = 1;
+		// get question list; offset to 0
 		self.listQuestions();
 	}
 
@@ -686,7 +686,6 @@ function StudentModuleController($scope, $window, $interval, $timeout, apiServic
 
 		self.search.module_id = self.record.id;
 		self.search.difficulty = (self.search.difficulty) ? self.search.difficulty : 1;
-		self.search.seq_no = (self.search.seq_no) ? self.search.seq_no : self.record.student_module[0].last_answered_question_id;
 
 		self.table.size = 1;
 
@@ -697,7 +696,7 @@ function StudentModuleController($scope, $window, $interval, $timeout, apiServic
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					self.questions = response.data.records[0];
-					console.log(self.questions);
+
 					var data = {};
 						data.module_id = self.record.student_module[0].id;
 
@@ -724,7 +723,6 @@ function StudentModuleController($scope, $window, $interval, $timeout, apiServic
 
 		$interval(function() {
             self.total_time += 1;
-            console.log(self.total_time);
         }, 1000);
 	}
 

@@ -70,12 +70,6 @@ class QuestionRepository implements QuestionRepositoryInterface{
 					$question = $question->id($criteria['question_id']);
 				}
 
-				//check scope seq_no
-				if(isset($criteria['seq_no'])){
-
-					$question = $question->seqNo($criteria['seq_no']);
-				}
-
 				//check scope to question_type
 				if(isset($criteria['question_type'])){
 
@@ -89,6 +83,8 @@ class QuestionRepository implements QuestionRepositoryInterface{
 
 
 			}
+
+			$count = $question->count();
 
 			if ($limit > 0 && $offset >= 0) {
 				$question = $question->offset($offset)->limit($limit);
