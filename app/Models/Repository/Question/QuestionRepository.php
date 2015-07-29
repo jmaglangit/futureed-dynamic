@@ -64,12 +64,6 @@ class QuestionRepository implements QuestionRepositoryInterface{
 					$question = $question->questionText($criteria['questions_text']);
 				}
 
-				//check scope questions_text
-				if(isset($criteria['questions_id'])){
-
-					$question = $question->id($criteria['questions_id']);
-				}
-
 				//check scope to question_type
 				if(isset($criteria['question_type'])){
 
@@ -100,8 +94,8 @@ class QuestionRepository implements QuestionRepositoryInterface{
 				$question = $question->offset($offset)->limit($limit);
 			}
 		}
+
 		$question = $question->with('questionAnswers');
-		$question = $question->orderBy('seq_no','asc');
 
 		return ['total' => $count, 'records' => $question->get()->toArray()];
 
