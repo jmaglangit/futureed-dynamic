@@ -49,6 +49,10 @@ class QuestionController extends ApiController {
 			$criteria['questions_id'] = Input::get('questions_id');
 		}
 
+		if(Input::get('last_answered_question_id')){
+			$criteria['last_answered_question_id'] = Input::get('last_answered_question_id');
+		}
+
 		if(Input::get('difficulty')){
 			$criteria['difficulty'] = Input::get('difficulty');
 		}
