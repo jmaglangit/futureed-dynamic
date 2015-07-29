@@ -602,9 +602,10 @@ function StudentModuleController($scope, $window, $interval, apiService, Student
 
 	self.exitModule = function() {
 		var data = {};
-			data.module_id = (self.contents) ? self.contents.module_id : Constants.EMPTY_STR;
+			data.module_id = (self.record) ? self.record.id : Constants.EMPTY_STR;
 			data.last_viewed_content_id = (self.active_contents) ? self.contents.content_id : Constants.EMPTY_STR;
 			data.last_answered_question_id = (self.active_questions) ? self.questions.id : Constants.EMPTY_STR;
+			data.seq_no = (self.active_questions) ? self.questions.seq_no : Constants.EMPTY_STR;
 
 			updateModuleStudent(data, function() {
 				var base_url = $("#base_url_form input[name='base_url']").val();
@@ -642,7 +643,7 @@ function StudentModuleController($scope, $window, $interval, apiService, Student
 
 		self.search.module_id = self.record.id;
 		self.search.difficulty = (self.search.difficulty) ? self.search.difficulty : 1;
-		self.search.question_id = (self.search.question_id) ? self.search.difficulty : Constants.EMPTY_STR;
+		self.search.question_id = (self.search.question_id) ? self.search.question_id : Constants.EMPTY_STR;
 
 		self.table.size = 1;
 
@@ -684,8 +685,6 @@ function StudentModuleController($scope, $window, $interval, apiService, Student
 		answer.student_id = $scope.user.id;
 		answer.total_time = self.total_time;
 		answer.answer_text = self.questions.answer_text;
-
-		console.log();
 
 		StudentModuleService.answerQuestion(answer).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
