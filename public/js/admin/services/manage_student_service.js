@@ -57,5 +57,19 @@ function manageStudentService($http) {
 			, url 	: adminApiUrl + 'admin/manage/student/' + id
 		});
 	}
+
+	manageStudentApi.moduleList = function(id) {
+		return $http({
+			method 	: Constants.METHOD_GET	
+			, url 	: adminApiUrl + 'module/student?student_id=' + id
+		});
+	}
+
+	manageStudentApi.resetModule = function(id) {
+		return $http({
+			method 	: Constants.METHOD_PUT	
+			, url 	: adminApiUrl + 'reset/student-module/' + id
+		});
+	}
 	return manageStudentApi
 }

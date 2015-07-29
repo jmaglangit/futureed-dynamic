@@ -6,6 +6,8 @@ ManageTeacherContentController.$inject = ['$scope', 'ManageTeacherContentService
 function ManageTeacherContentController($scope, ManageTeacherContentService, apiService) {
 	var self = this;
 
+	self.detail = {};
+
 	self.setActive = function(active, id) {
 		self.errors = Constants.FALSE;
 		self.fields = [];
@@ -56,14 +58,10 @@ function ManageTeacherContentController($scope, ManageTeacherContentService, api
 						self.records = response.data.records;
 						self.total = response.data.total-1;
 
-						angular.forEach(self.records,function(value,key){
-							value.key = key;
-						});
-						
 						if(response.data.total == Constants.FALSE){
 							self.no_content = Constants.TRUE;
 						}else{
-							self.showContent(0);
+							self.navigate(0);
 						}
 					}
 				}
@@ -74,9 +72,8 @@ function ManageTeacherContentController($scope, ManageTeacherContentService, api
 		});
 	}
 	
-	self.showContent = function(key, flag) {
+	self.navigate = function(key, flag) {
 		self.errors = Constants.FALSE;
-
 		$scope.ui_block();
 		var seq = key;
 
@@ -86,17 +83,27 @@ function ManageTeacherContentController($scope, ManageTeacherContentService, api
 			seq -= 1;
 		}
 
-		self.details = {};
-
-		self.details = self.records[seq];
-		/**
-		*TODO:
-		* No Image Path
-		*/
+		self.detail = self.records[seq];
+		self.getContent(self.detail.id, key);
+		self.detail.key = seq;
 		
-		if(self.details.media_type_id == Constants.IMAGE) {
-			self.details.image_path = '/uploads/content/' + self.details.id + '/' + self.details.content_url;
-		}
-		$scope.ui_unblock();
+	}
+
+	self.getContent = function(id, key) {
+		self.detail.key = key;
+		$scope.ui_block();
+		ManageTeacherContentService.getContent(id).success(function(response){
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+					if(response.errors) {
+						self.errors = $scope.errorHandler(response.errors);
+					} else if(response.data) {
+						self.content = response.data;
+					}
+				}
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		})
 	}
 }

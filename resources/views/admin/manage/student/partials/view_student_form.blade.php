@@ -298,4 +298,77 @@
         	</div>
         </fieldset>
 	</div>
+    <div class="col-xs-12 table-container">
+        <div class="list-container" ng-cloak>
+            <div class="title-mid">
+                Module List
+            </div>
+
+            <div class="size-container">
+                {!! Form::select('size'
+                    , array(
+                          '10' => '10'
+                        , '20' => '20'
+                        , '50' => '50'
+                        , '100' => '100'
+                    )
+                    , '10'
+                    , array(
+                        'ng-model' => 'student.table.size'
+                        , 'ng-change' => 'student.paginateBySize()'
+                        , 'ng-if' => "student.modules.length"
+                        , 'class' => 'form-control paginate-size pull-right'
+                    )
+                ) !!}
+            </div>
+
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>Modules</th>
+                        <th>Age Group</th>
+                        <th ng-if="student.modules.length">Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                <tr ng-repeat="module in student.modules">
+                    <td>{! module.name !}</td>
+                    <td>{! module.grade.country_grade.age_group.age !}</td>
+                    <td ng-if="student.records.length">
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <a href="" ng-click="student.resetModule(module.student_module_id, student.record.id)" title="refresh"><span><i class="fa fa-refresh"></i></span></a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="odd" ng-if="!student.modules.length && !student.table.loading">
+                    <td valign="top" colspan="7">
+                        No records found
+                    </td>
+                </tr>
+                <tr class="odd" ng-if="student.table.loading">
+                    <td valign="top" colspan="7">
+                        Loading...
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div class="pull-right" ng-if="student.modules.length">
+                <pagination 
+                    total-items="student.table.total_items" 
+                    ng-model="student.table.page"
+                    max-size="student.table.paging_size"
+                    items-per-page="student.table.size" 
+                    previous-text = "&lt;"
+                    next-text="&gt;"
+                    class="pagination" 
+                    boundary-links="true"
+                    ng-change="student.paginateByPage()">
+                </pagination>
+            </div>
+        </div>
+    </div>
 </div>

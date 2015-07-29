@@ -6,7 +6,7 @@
 		<div class="row content-display">
 			<div class="content-text">
 				<p>{! question.details.questions_text !}</p>
-				<div>
+				<div ng-if="question.details.questions_image != futureed.NONE">
 					<img ng-src="{! question.details.questions_image !}">
 				</div>
 			</div>
@@ -16,8 +16,7 @@
 				<b>Answer/s:</b>
 			</div>
 			<div class="col-xs-6" ng-if="question.details.question_type == futureed.M_CHOICE" ng-repeat="answer in question.details.question_answers">
-				<p ng-if="answer.answer_text">
-					<span ng-if="answer.correct_answer == futureed.YES" class="success-icon"><i class="fa fa-check-circle-o"></i></span> {! answer.answer_text !}
+				<p ng-if="answer.answer_text">{! answer.answer_text !}
 				</p>
 			</div>
 			<div class="col-xs-6" ng-if="question.details.question_type != futureed.M_CHOICE">

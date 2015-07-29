@@ -277,6 +277,8 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 					self.record.new_email = data.user.new_email;
 					self.record.birth = data.birth_date;
 
+					self.moduleList(id);
+
 					if(data.school) {
 						self.record.school_name = data.school.name;
 						self.record.school_code = data.school.code;
@@ -356,5 +358,48 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
+	}
+
+	self.moduleList = function(id) {
+		manageStudentService.moduleList(id).success(function(response){
+			if(angular.equals(response.status,Constants.STATUS_OK)){
+				if(response.errors){
+					self.errors = $scope.errorHandler(response.errors);
+				}else if(response.data){
+					self.modules = response.data.records;
+					angular.forEach(self.modules, function(value,key){
+						value.student_module_id = value.student_module[0].id;
+					});
+
+					self.updatePageCount(response.data);
+				}
+			}
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		})
+	}
+
+	self.resetModule = function(id, student_id) {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		$scope.ui_block();
+
+		manageStudentService.resetModule(id).success(function(response){
+			if(angular.equals(response.status,Constants.STATUS_OK)){
+				if(response.errors){
+					self.errors = $scope.errorHandler(response.errors);
+				}else if(response.data){
+					self.success = Constants.RESET_SUCCESS;
+
+					self.moduleList(student_id);
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		})
 	}
 }
