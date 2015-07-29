@@ -32,7 +32,7 @@ class HelpRequestRequest extends ApiRequest{
                 break;  
             case 'PUT':
                 return [
-                    'title' => 'required',
+                    'title' => 'required|max:128|min:2',
                     'content' => 'required',
                     'link_type' => 'required|in:General,Content,Question',
                     'request_status' => 'required|in:Pending,Accepted,Rejected',
@@ -42,7 +42,7 @@ class HelpRequestRequest extends ApiRequest{
                 return [
                     'class_id' => 'required|integer',
                     'student_id' => 'required|integer',
-                    'title' => 'required',
+                    'title' => 'required|max:128|min:2',
                     'content' => 'required',
                     'module_id' => 'integer',
                     'subject_id' => 'integer',
