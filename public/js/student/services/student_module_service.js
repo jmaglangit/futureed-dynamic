@@ -99,11 +99,38 @@ function StudentModuleService($http){
 		});
 	}
 
-	service.exitModule = function(data) {
+	service.updateModuleStudent = function(data) {
 		return $http({
 			method  : Constants.METHOD_PUT
 			, data  : data
 			, url  	: serviceUrl + 'module/student/' + data.module_id
+		});
+	}
+
+	service.createModuleStudent = function(data) {
+		return $http({
+			method  : Constants.METHOD_POST
+			, data  : data
+			, url  	: serviceUrl + 'module/student'
+		});
+	}
+
+	service.listQuestions = function(search, table) {
+		return $http({
+			method  : Constants.METHOD_GET
+			, url  	: serviceUrl + 'question?module_id=' + search.module_id
+				+ '&question_id=' + search.question_id
+				+ '&difficulty=' + search.difficulty
+				+ '&limit=' + table.size
+				+ '&offset=' + table.offset
+		});
+	}
+
+	service.answerQuestion = function(data) {
+		return $http({
+			method  : Constants.METHOD_POST
+			, data  : data
+			, url  	: serviceUrl + 'student-module-answer'
 		});
 	}
 

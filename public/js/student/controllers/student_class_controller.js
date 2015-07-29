@@ -243,8 +243,10 @@ function StudentClassController($scope, $filter, $window, StudentClassService, S
 		});
 	}
 
-	self.redirect = function(url, slug_name) {
-		url += "/" + slug_name;
-		$window.location.href=url;
+	self.redirect = function(url, record) {
+		if($scope.user.points >= record.points_to_unlock) {
+			url += "/" + record.id;
+			$window.location.href = url;
+		}
 	}
 }

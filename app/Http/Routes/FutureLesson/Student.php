@@ -172,9 +172,14 @@
 							, 'uses' => 'FutureLesson\Student\ClassModuleController@view_all_tips'
 						]);
 
+					Routes::get('/contents', [
+						'as' => 'student.class.module.partials.contents'
+						, 'uses' => 'FutureLesson\Student\ClassModuleController@contents'
+						]);
+
 					Routes::get('/questions', [
-						'as' => 'student.class.module.partials.view_question_list'
-						, 'uses' => 'FutureLesson\Student\ClassModuleController@view_question_list'
+						'as' => 'student.class.module.partials.questions'
+						, 'uses' => 'FutureLesson\Student\ClassModuleController@questions'
 						]);
 
 					Routes::get('/messages', [

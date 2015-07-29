@@ -105,7 +105,11 @@ class ClassModuleController extends Controller {
 		return view('student.class.module.partials.view_all_tips');
 	}
 
-	public function view_question_list() {
+	public function contents() {
+		return view('student.class.module.partials.contents.list');
+	}
+
+	public function questions() {
 		return view('student.class.module.partials.questions.list');
 	}
 
