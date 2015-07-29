@@ -474,5 +474,21 @@ class MailServices {
 		$this->sendMail($content);
 	}
 
+	public function resetStudentModule($data){
+
+		$content = [
+			'view' => 'emails.student.reset-student-module',
+			'data' => [
+				'name' => $data['name'],
+				'module' => $data['module_name'],
+			],
+			'mail_recipient' => $data['email'],
+			'mail_recipient_name' => $data['name'],
+			'subject' => config('futureed.reset_module')
+		];
+		$this->sendMail($content);
+
+	}
+
 
 }
