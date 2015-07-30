@@ -21,7 +21,8 @@ class StudentModuleAnswerRequest extends ApiRequest
      */
     public function rules()
     {
-        return ['student_module_id' => 'required|integer',
+        return [
+			'student_module_id' => 'required|integer',
             'module_id' => 'required|integer',
             'seq_no' => 'required|integer',
             'question_id' => 'required|integer',
@@ -29,7 +30,7 @@ class StudentModuleAnswerRequest extends ApiRequest
             'answer_text' => 'string',
             'student_id' => 'required|integer',
             'total_time' => 'required|integer',
-            'answer_text' => 'string'];
+		];
     }
 
     public function messages()
