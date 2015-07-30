@@ -11,4 +11,7 @@ interface StudentBadgeRepositoryInterface {
 
 	public function deleteStudentBadge($id);
 
+	public function addStudentBadge($data);
+
+
 }

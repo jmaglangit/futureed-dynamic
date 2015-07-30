@@ -105,4 +105,27 @@ class StudentBadgeRepository implements StudentBadgeRepositoryInterface{
 
 	}
 
+	/**
+	 * Add record in storage
+	 * @param $data
+	 * @return object
+	 */
+	public function addStudentBadge($data){
+
+		try {
+
+			$student_badge = StudentBadge::create($data);
+
+		} catch(Exception $e) {
+
+			return $e->getMessage();
+
+		}
+
+		return $student_badge;
+
+	}
+
+
+
 }
