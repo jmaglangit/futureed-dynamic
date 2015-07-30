@@ -169,6 +169,7 @@ class StudentServices {
 		$user = $this->user->getUsernameEmail($student['user_id'])->toArray();
 
 		$avatar_url = '';
+		$avatar_url_background = '';
 
 		if ($student_reference['avatar_id']) {
 			$avatar = $this->avatar->getAvatar($student_reference['avatar_id'])->toArray();
