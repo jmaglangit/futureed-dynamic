@@ -23,14 +23,14 @@ class PointLevelTableSeeder extends Seeder
 		foreach($seeder as $data){
 
 			DB::table('point_levels')->insert([
-			'name' => $data[0],
-			'points_required' => $data[1],
-			'description' => $data[2],
-			'filename' => $data[3],
-			'created_by' => $data[4],
-			'updated_by' => $data[5],
-			'created_at' => Carbon::now(),
-			'updated_at' => Carbon::now()
+				'name' => $data[0],
+				'points_required' => $data[1],
+				'description' => $data[2],
+				'filename' => $data[3],
+				'created_by' => $data[4],
+				'updated_by' => $data[5],
+				'created_at' => Carbon::now(),
+				'updated_at' => Carbon::now()
 			]);
 		}
 
