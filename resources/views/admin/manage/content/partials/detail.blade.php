@@ -124,17 +124,20 @@
 					</div>
 				</div>
 				<div class="form-group" ng-if="content.record.media_type_id == futureed.VIDEO">
-					<label class="col-xs-4 control-label">Video <span class="required">*</span></label>
+					<label class="col-xs-4 control-label">Video Url <span class="required">*</span></label>
 					<div class="col-xs-6">
 						{!! Form::text('content_url', ''
 							, array(
-								'placeholder' => 'Content Url'
+								'placeholder' => 'Video Url'
 								, 'ng-model' => 'content.record.content_url'
 								, 'ng-disabled' => 'content.active_view'
 								, 'ng-class' => "{ 'required-field' : content.fields['content_url'] }"
 								, 'class' => 'form-control'
 							)
 						) !!}
+						<p class="help-block">Video url should have this format: 
+							<span class="error-msg-con"> https://player.vimeo.com/video/{video_id}</span>
+						</p>
 					</div>
 				</div>
 				<div class="form-group" ng-if="content.record.media_type_id == futureed.TEXT">
