@@ -79,7 +79,6 @@ return [
 	'existing' => 'Existing',
 
 	#Payment status
-	'pending' => 'Pending',
 	'paid' => 'Paid',
 	'cancelled' => 'Cancelled',
 
@@ -105,9 +104,6 @@ return [
 
 	//for tips take 3
 	'tip_take' => 3,
-
-	//for general tips link_type
-	'link_type_general' => 'General',
 
 	//for accepted tips tip_status
 	'tip_status_accepted' => 'Accepted',
