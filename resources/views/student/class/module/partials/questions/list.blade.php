@@ -8,7 +8,7 @@
 	</div>
 
 	<div class="questions-message">
-		<p>{! mod.questions.questions_text !}</p>
+		<p ng-bind-html="mod.questions.questions_text | trustAsHtml"></p>
 	</div>
 
 	<div class="questions-answers" ng-class="{ 'col-xs-12' : mod.questions.question_type == futureed.FILLINBLANK }">

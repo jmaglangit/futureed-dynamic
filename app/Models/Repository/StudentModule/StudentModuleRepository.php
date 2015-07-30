@@ -47,7 +47,7 @@ class StudentModuleRepository implements StudentModuleRepositoryInterface{
      */
     public function viewStudentModule($id){
 
-		return  StudentModule::find($id)->with('question')->get();
+		return  StudentModule::whereId($id)->with('question')->first();
 
     }
 }

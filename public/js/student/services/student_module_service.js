@@ -107,6 +107,13 @@ function StudentModuleService($http){
 		});
 	}
 
+	service.getModuleStudent = function(module_id) {
+		return $http({
+			method  : Constants.METHOD_GET
+			, url  	: serviceUrl + 'module/student/' + module_id
+		});
+	}
+
 	service.createModuleStudent = function(data) {
 		return $http({
 			method  : Constants.METHOD_POST
@@ -119,7 +126,6 @@ function StudentModuleService($http){
 		return $http({
 			method  : Constants.METHOD_GET
 			, url  	: serviceUrl + 'question?module_id=' + search.module_id
-				+ '&difficulty=' + search.difficulty
 				+ '&limit=' + table.size
 				+ '&offset=' + table.offset
 		});

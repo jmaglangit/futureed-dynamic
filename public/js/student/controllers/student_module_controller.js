@@ -558,8 +558,14 @@ function StudentModuleController($scope, $window, $interval, $timeout, apiServic
 		} else {
 			// if last_answered_question_id value is > 0, load question
 			self.setActive(Constants.ACTIVE_QUESTIONS);
-			self.table.offset = student_module.last_answered_question_id - 1;
-			self.listQuestions();
+			// self.search.last_answered_question_id = student_module.last_answered_question_id;
+			self.getModuleStudent(student_module.id, function(response) {
+				var question = response.data.question;
+
+				self.table.offset = question.seq_no - 1;
+				self.table.page = question.seq_no; 
+				self.listQuestions();	
+			});
 		}
 	}
 
@@ -572,8 +578,7 @@ function StudentModuleController($scope, $window, $interval, $timeout, apiServic
 			}
 
 			if(self.active_questions) {
-				data.last_answered_question_id = self.questions.seq_no;
-				data.seq_no = self.questions.seq_no;
+				data.last_answered_question_id = self.questions.id;
 			}
 			
 		updateModuleStudent(data, function() {
@@ -681,12 +686,29 @@ function StudentModuleController($scope, $window, $interval, $timeout, apiServic
 		});
 	}
 
+	self.getModuleStudent = function(module_id, successCallback) {
+		$scope.ui_block();
+		StudentModuleService.getModuleStudent(module_id).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					if(successCallback)
+						successCallback(response);
+				}
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
 	self.listQuestions = function() {
 		self.errors = Constants.FALSE;
 
 		self.search.module_id = self.record.id;
-		self.search.difficulty = (self.search.difficulty) ? self.search.difficulty : 1;
-
 		self.table.size = 1;
 
 		$scope.ui_block();
@@ -700,12 +722,11 @@ function StudentModuleController($scope, $window, $interval, $timeout, apiServic
 					var data = {};
 						data.module_id = self.record.student_module[0].id;
 
-						if(self.active_questions) {
+						if(self.active_questions && self.questions) {
 							data.last_answered_question_id = self.questions.id;
 						}
 
 					updateModuleStudent(data);
-					
 					startTimer();
 					self.updatePageCount(response.data);
 				}
@@ -762,7 +783,7 @@ function StudentModuleController($scope, $window, $interval, $timeout, apiServic
 		self.success = Constants.FALSE;
 
 		var page = self.table.page + 1;
-		self.search.question_id = Constants.EMPTY_STR;
+		self.search.last_answered_question_id = Constants.EMPTY_STR;
 
 		self.table.page = (page < Constants.DEFAULT_PAGE) ? Constants.DEFAULT_PAGE : page;
 		self.table.offset = (page - 1) * self.table.size;
