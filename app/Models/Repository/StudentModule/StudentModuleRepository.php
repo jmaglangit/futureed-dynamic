@@ -53,4 +53,24 @@ class StudentModuleRepository implements StudentModuleRepositoryInterface{
         return $student_module;
 
     }
+
+	/**
+	 * count the number of module under a subject of a student.
+	 * @param array $criteria;
+	 * @return count
+	 */
+	public function countSubjectModuleDone($criteria = array()){
+
+		$student_module = new StudentModule();
+		$student_module = $student_module->studentId($criteria['student_id']);
+		$student_module = $student_module->progress($criteria['progress']);
+		$student_module = $student_module->subjectId($criteria['subject_id']);
+		$student_module = $student_module->gradeId($criteria['grade_id']);
+		$student_module = $student_module->with('module');
+		return $student_module->count();
+
+
+	}
+
+
 }

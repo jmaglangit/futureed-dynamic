@@ -275,5 +275,11 @@ class AppServiceProvider extends ServiceProvider {
 			'FutureEd\Models\Repository\AvatarWiki\AvatarWikiRepositoryInterface',
 			'FutureEd\Models\Repository\AvatarWiki\AvatarWikiRepository'
 		);
+
+		$this->app->bind(
+
+			'FutureEd\Models\Repository\PointLevel\PointLevelRepositoryInterface',
+			'FutureEd\Models\Repository\PointLevel\PointLevelRepository'
+		);
 	}
 }

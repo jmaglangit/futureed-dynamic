@@ -13,6 +13,8 @@ class StudentBadge extends Model {
 
 	protected $hidden = ['created_by','updated_by','updated_at','deleted_at'];
 	protected $fillable = ['student_id','badge_id','created_by','updated_by'];
+	protected $attributes = ['created_by'=>1,
+					         'updated_by'=>1];
 
 	//-------------relationships
 	public function badges() {

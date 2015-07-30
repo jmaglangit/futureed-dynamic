@@ -150,4 +150,20 @@ class ModuleRepository implements ModuleRepositoryInterface{
 
 	}
 
+	/**
+	 * count the number of module under a subject under a grade
+	 * @param $subject_id,$grade_id;
+	 * @return count
+	 */
+	public function countSubjectModule($subject_id,$grade_id){
+
+		$module = new Module();
+
+		$module = $module->subjectId($subject_id);
+		$module = $module->gradeId($grade_id);
+		$count = $module->count();
+
+		return $count;
+	}
+
 }

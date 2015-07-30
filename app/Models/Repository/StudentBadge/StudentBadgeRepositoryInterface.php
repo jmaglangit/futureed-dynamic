@@ -9,4 +9,6 @@ interface StudentBadgeRepositoryInterface {
 
 	public function viewStudentBadge($id);
 
+	public function addStudentBadge($data);
+
 }

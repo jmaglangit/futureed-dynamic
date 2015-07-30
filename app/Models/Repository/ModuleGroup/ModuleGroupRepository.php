@@ -32,6 +32,11 @@ class ModuleGroupRepository implements ModuleGroupRepositoryInterface{
                 if(isset($criteria['module_name'])){
                     $moduleGroup = $moduleGroup->moduleName($criteria['module_name']);
                 }
+
+                //check module_id
+                if(isset($criteria['module_id'])){
+	                $moduleGroup = $moduleGroup->moduleId($criteria['module_id']);
+                }
             }
 
             $count = $moduleGroup->count();
@@ -70,5 +75,6 @@ class ModuleGroupRepository implements ModuleGroupRepositoryInterface{
         }
 
     }
+
 
 }

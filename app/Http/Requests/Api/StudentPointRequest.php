@@ -24,6 +24,15 @@ class StudentPointRequest extends ApiRequest {
 	{
 		switch($this->method()){
 
+			case 'POST':
+				return[
+					'student_id' => 'required|integer',
+					'points_earned' => 'required|integer',
+					'module_id' => 'required|integer'
+
+				];
+				break;
+
 			case 'PUT':
 				return [
 					'event_id' => 'required|integer',
@@ -41,6 +50,8 @@ class StudentPointRequest extends ApiRequest {
 		return [
 			'event_id.integer' => 'Event is invalid.',
 			'points_earned.integer' => 'Points must be a number.',
+			'student_id.required' => 'Student is required.',
+			'student_id.integer' => 'Student is invalid.',
 
 		];
 	}

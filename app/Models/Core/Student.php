@@ -15,7 +15,6 @@ class Student extends Model {
 
     protected $hidden = [
         'password_image_id',
-        'point_level_id',
         'created_by',
         'updated_by',
         'created_at',
