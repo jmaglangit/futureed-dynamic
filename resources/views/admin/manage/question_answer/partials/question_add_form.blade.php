@@ -121,7 +121,8 @@
                     ) !!}
                 </div>
             </div>
-            <div class="form-group" ng-if="qa.create.question_type != 'MC' && qa.create.question_type">
+
+            <div class="form-group" ng-if="qa.create.question_type && qa.create.question_type != futureed.MULTIPLECHOICE && qa.create.question_type != futureed.ORDERING">
                 <label class="control-label col-xs-4">Answer <span class="required">*</span></label>
                 <div class="col-xs-5" >
                     {!! Form::textarea('answer',''
@@ -130,11 +131,28 @@
                             , 'ng-model' => 'qa.create.answer'
                             , 'class' => 'form-control disabled-textarea'
                             , 'ng-class' => "{ 'required-field' : qa.fields['answer'] }"
-                            , 'rows' => 5
+                            , 'rows' => 3
                         )
                     ) !!}
                 </div>
             </div>
+
+            <div class="form-group" ng-if="qa.create.question_type == futureed.ORDERING  && qa.create.question_type">
+                <label class="control-label col-xs-4">Order <span class="required">*</span></label>
+                <div class="col-xs-5">
+                    {!! Form::textarea('question_order_text',''
+                        , array(
+                            'placeHolder' => 'Order'
+                            , 'ng-model' => 'qa.create.question_order_text'
+                            , 'class' => 'form-control disabled-textarea'
+                            , 'ng-class' => "{ 'required-field' : qa.fields['question_order_text'] }"
+                            , 'rows' => 3
+                        )
+                    ) !!}
+                    <p class="help-block">Answer should be comma separated to indicate the order.</p>
+                </div>
+            </div>
+
         	<div class="form-group">
                 <label class="control-label col-xs-4">Points Earned<span class="required">*</span></label>
                 <div class="col-xs-5">
