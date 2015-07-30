@@ -1,10 +1,12 @@
 angular.module('futureed.controllers')
 	.controller('StudentModuleController', StudentModuleController);
 
-StudentModuleController.$inject = ['$scope', '$window', 'apiService', 'StudentModuleService', 'SearchService', 'TableService'];
+StudentModuleController.$inject = ['$scope', '$window', '$interval', '$timeout', 'apiService', 'StudentModuleService', 'SearchService', 'TableService'];
 
-function StudentModuleController($scope, $window, apiService, StudentModuleService, SearchService, TableService) {
+function StudentModuleController($scope, $window, $interval, $timeout, apiService, StudentModuleService, SearchService, TableService) {
 	var self = this;
+
+	self.list = [];
 
 	SearchService(self);
 	self.searchDefaults();
@@ -455,18 +457,18 @@ function StudentModuleController($scope, $window, apiService, StudentModuleServi
 	}
 
 
-	self.setActive = function(active) {
+	self.setActive = function(active, id) {
 		self.errors = Constants.FALSE;
 
 		self.active_questions = Constants.FALSE;
 		self.active_contents = Constants.FALSE;
 
 		switch(active) {
-			case Constants.ACTIVE_QUESTIONS 	: 
+			case Constants.ACTIVE_QUESTIONS 	:
 				self.active_questions = Constants.TRUE;
 				break;
 
-			case Constants.CONTENTS 	:
+			case Constants.ACTIVE_CONTENTS 	:
 
 			default 		:
 				self.active_contents = Constants.TRUE;
@@ -474,35 +476,116 @@ function StudentModuleController($scope, $window, apiService, StudentModuleServi
 		}
 	}
 
-	self.getModuleDetail = function(id) {
-		if(id) {
-			$scope.ui_block();
-			StudentModuleService.getModuleDetail(id).success(function(response) {
-				if(angular.equals(response.status, Constants.STATUS_OK)) {
-					if(response.errors) {
-						self.errors = $scope.errorHandler(response.errors);
-					} else {
-						self.record = response.data;
-
-						if(!self.record) {
-							self.errors = [Constants.MSG_NO_RECORD];
-							self.no_record = Constants.TRUE;
-						}
-					}
+	/**
+	* Updates Student Module
+	*/
+	var updateModuleStudent = function(data, successCallback) {
+		$scope.ui_block();
+		StudentModuleService.updateModuleStudent(data).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else {
+					if(successCallback)
+						successCallback(response);
 				}
+			}
 
-				$scope.ui_unblock();
-			}).error(function(response) {
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});	
+	}
+
+	var createModuleStudent = function(data, successCallback) {
+		$scope.ui_block();
+		StudentModuleService.createModuleStudent(data).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else {
+					if(successCallback)
+						successCallback(response);
+				}
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});	
+	}
+
+
+	self.launchModule = function(module_id) {
+		// get module details
+		self.getModuleDetail(module_id, function(response) {
+			if(response.data) {
+				self.record = response.data;
+				
+				if(!self.record.student_module.length) {
+					// create student_module
+					var data = {};
+						data.class_id = $scope.user.class.class_id;
+						data.student_id = $scope.user.id;
+						data.module_id = self.record.id;
+
+					createModuleStudent(data, function(response) {
+						if(response.data) {
+							self.record.student_module[0] = response.data;	
+							loadModuleView();
+						} else {
+							self.errors = $internalError();
+						}
+					});
+				} else {
+					loadModuleView();
+				}
+			} else {
 				self.errors = $scope.internalError();
-				$scope.ui_unblock();
-			});
+			}
+		});
+	}
+
+	var loadModuleView = function() {
+		var student_module = self.record.student_module[0];
+				
+		// if last_answered_question_id value is 0, load contents
+		if(!student_module.last_answered_question_id) {
+			self.getTeachingContents(student_module.module_id);
+			self.setActive(Constants.ACTIVE_CONTENTS);
 		} else {
-			self.errors = [Constants.MSG_NO_RECORD];
-			self.no_record = Constants.TRUE;
+			// if last_answered_question_id value is > 0, load question
+			self.setActive(Constants.ACTIVE_QUESTIONS);
+			self.table.offset = student_module.last_answered_question_id - 1;
+			self.listQuestions();
 		}
 	}
 
+	self.exitModule = function() {
+		var data = {};
+			data.module_id = self.record.student_module[0].id;
+
+			if(self.active_contents) {
+				data.last_viewed_content_id = self.contents.content_id;
+			}
+
+			if(self.active_questions) {
+				data.last_answered_question_id = self.questions.seq_no;
+				data.seq_no = self.questions.seq_no;
+			}
+			
+		updateModuleStudent(data, function() {
+			var base_url = $("#base_url_form input[name='base_url']").val();
+			$window.location.href = base_url +"/student/class";
+		});
+	}
+
 	self.paginateContent = function() {
+		// get next / prev content details
+		// update student_module
+
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
 
@@ -514,48 +597,41 @@ function StudentModuleController($scope, $window, apiService, StudentModuleServi
 
 	}
 
-	self.getTeachingContents = function(id) {
-		if(id) {
-			self.search.module_id = id;
-			self.table.size = 1;
+	self.startQuestions = function(object) {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
 
-			$scope.ui_block();
-			StudentModuleService.getTeachingContents(self.search, self.table).success(function(response) {
-				if(angular.equals(response.status, Constants.STATUS_OK)) {
-					if(response.errors) {
-						self.errors = $scope.errorHandler(response.errors);
-					} else {
-						self.contents = response.data.records[0];
-						self.contents.content_url = self.contents.teaching_content.content_url; 
-						self.updatePageCount(response.data);
-					}
-				}
+		self.module_message = {};
+		self.module_message.show = Constants.TRUE;
+		self.module_message.name = self.record.name;
+		self.module_message.points_to_finish = self.record.points_to_finish;
+		self.module_message.badge_to_earn = self.record.badge_to_earn;
 
-				$scope.ui_unblock();
-			}).error(function(response) {
-				self.errors = $scope.internalError();
-				$scope.ui_unblock();
-			});
-		} else {
-			self.errors = [Constants.MSG_NO_RECORD];
-			self.no_record = Constants.TRUE;
-		}
+		$("#message_modal").modal({
+	        backdrop: 'static',
+	        keyboard: Constants.FALSE,
+	        show    : Constants.TRUE
+	    });
 	}
 
-	self.exitModule = function() {
-		var data = {};
-		data.module_id = (self.contents) ? self.contents.module_id : Constants.EMPTY_STR;
-		data.last_viewed_content_id = (self.contents) ? self.contents.content_id : Constants.EMPTY_STR;
-		data.last_answered_question_id = (self.questions) ? self.questions.question_id : Constants.EMPTY_STR;
+	self.skipModule = function() {
+		// update current view
+		self.setActive(Constants.ACTIVE_QUESTIONS);
 
+		// get question list; offset to 0
+		self.listQuestions();
+	}
+
+
+	self.getModuleDetail = function(id, successCallback) {
 		$scope.ui_block();
-		StudentModuleService.exitModule(data).success(function(response) {
+		StudentModuleService.getModuleDetail(id).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else {
-					var base_url = $("#base_url_form input[name='base_url']").val();
-					$window.location.href = base_url +"/student/class";
+					if(successCallback)
+						successCallback(response);
 				}
 			}
 
@@ -563,20 +639,133 @@ function StudentModuleController($scope, $window, apiService, StudentModuleServi
 		}).error(function(response) {
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
-		});	
+		});
 	}
 
-	self.startQuestions = function() {
+	
+
+	self.getTeachingContents = function(id) {
+		self.search.module_id = id;
+
+		if( self.record.student_module[0]) {
+			self.search.content_id = self.record.student_module[0].last_viewed_content_id;
+		}
+
+		self.table.size = 1;
+
+		$scope.ui_block();
+		StudentModuleService.getTeachingContents(self.search, self.table).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else {
+					self.contents = response.data.records[0];
+					self.contents.content_url = self.contents.teaching_content.content_url;
+					self.updatePageCount(response.data);
+
+					var data = {};
+						data.module_id = self.record.student_module[0].id;
+
+						if(self.active_contents) {
+							data.last_viewed_content_id = self.contents.id;
+						}
+
+					updateModuleStudent(data);
+				}
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.listQuestions = function() {
+		self.errors = Constants.FALSE;
+
+		self.search.module_id = self.record.id;
+		self.search.difficulty = (self.search.difficulty) ? self.search.difficulty : 1;
+
+		self.table.size = 1;
+
+		$scope.ui_block();
+		StudentModuleService.listQuestions(self.search, self.table).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.questions = response.data.records[0];
+
+					var data = {};
+						data.module_id = self.record.student_module[0].id;
+
+						if(self.active_questions) {
+							data.last_answered_question_id = self.questions.id;
+						}
+
+					updateModuleStudent(data);
+					
+					startTimer();
+					self.updatePageCount(response.data);
+				}
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	function startTimer() {
+		self.total_time = (self.total_time) ? self.total_time : Constants.FALSE;
+
+		$interval(function() {
+            self.total_time += 1;
+        }, 1000);
+	}
+
+	self.checkAnswer = function() {
+		var answer = {};
+
+		answer.student_module_id = self.record.student_module[0].id;
+		answer.module_id = self.record.id;
+		answer.seq_no = self.questions.seq_no;
+		answer.question_id = self.questions.id;
+		answer.answer_id = self.questions.answer_id;
+		answer.student_id = $scope.user.id;
+		answer.total_time = self.total_time;
+		answer.answer_text = self.questions.answer_text;
+
+		StudentModuleService.answerQuestion(answer).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.search.difficulty = response.data.current_difficulty_level;
+					self.nextQuestion();
+				}
+			}
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.selectAnswer = function(object) {
+		self.questions.answer_id = object.id;
+	}
+
+	self.nextQuestion = function() {
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
 
-		self.module_message = {};
-		self.module_message.show = Constants.TRUE;
+		var page = self.table.page + 1;
+		self.search.question_id = Constants.EMPTY_STR;
 
-		$("#message_modal").modal({
-	        backdrop: 'static',
-	        keyboard: Constants.FALSE,
-	        show    : Constants.TRUE
-	    });
+		self.table.page = (page < Constants.DEFAULT_PAGE) ? Constants.DEFAULT_PAGE : page;
+		self.table.offset = (page - 1) * self.table.size;
+		self.listQuestions();
 	}
 }

@@ -2,7 +2,7 @@
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
-			<h3> Basic Addition </h3>
+				<h3 class="title-main-content"> {! mod.module_message.name !} </h3>
 			</div>
 			<div class="modal-body message-container">
 				<div class="col-xs-12" >
@@ -25,7 +25,7 @@
 
 					<div class="col-xs-12">
 						<div class="col-xs-6">
-							<p class="message-point">+12</p>
+							<p class="message-point">+{! mod.module_message.points_to_finish !}</p>
 						</div>
 						<div class="col-xs-6">
 							<img class="message-badge" src="/images/badges/math/boys/math_badge_boy_grade_1.png" />
@@ -33,9 +33,18 @@
 					</div>
 				</div>
 			</div>
+
 			<div class="modal-footer">
 				<div class="btn-container">
 					{!! Form::button('Begin Lesson'
+						, array(
+							'class' => 'btn btn-maroon btn-medium'
+							, 'data-dismiss' => 'modal'
+							, 'ng-click' => 'mod.skipModule()'
+						)
+					) !!}
+
+					{!! Form::button('Later'
 						, array(
 							'class' => 'btn btn-gold btn-medium'
 							, 'data-dismiss' => 'modal'

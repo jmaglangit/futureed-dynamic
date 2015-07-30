@@ -81,6 +81,8 @@
     {!! Html::script('/js/jquery.js') !!}
     {!! Html::script('/js/ui-block.js') !!}
     {!! Html::script('https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js') !!}
+    {!! Html::script('https://cdnjs.cloudflare.com/ajax/libs/humanize-plus/1.5.0/humanize.js') !!}
+
     {!! Html::script('//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js') !!}
     {!! Html::script('http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular.min.js') !!}
     
@@ -95,6 +97,7 @@
     {!! Html::script('/js/datetimepicker.js') !!}
     {!! Html::script('/js/common/filters.js') !!}
     {!! Html::script('/js/ui-bootstrap-tpls-0.13.0.min.js') !!}
+    {!! Html::script('/js/angular-drag-and-drop-lists.min.js')!!}
 
     {!! Html::script('/js/ng-file-upload-shim.min.js')!!}
     {!! Html::script('/js/ng-file-upload.min.js')!!}

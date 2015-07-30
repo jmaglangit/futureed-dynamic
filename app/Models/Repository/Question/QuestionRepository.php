@@ -79,14 +79,25 @@ class QuestionRepository implements QuestionRepositoryInterface{
 
 			$count = $question->count();
 
+			$question = $question->orderBySeqNo();
+
+			//set offset to last_answered_question
+			if(isset($criteria['last_answered_question_id'])){
+
+				//get question_id's sequence number and set as $offset
+				$question_id = $this->getQuestionSequenceNo($criteria['last_answered_question_id']);
+				$offset = $question_id[0]->seq_no - 1;
+			}
+
+
 			if ($limit > 0 && $offset >= 0) {
 				$question = $question->offset($offset)->limit($limit);
 			}
 		}
-		$question = $question->with('questionAnswers');
-		$question = $question->orderBy('seq_no','asc');
 
-		return ['total' => $count, 'records' => $question->orderBySeqNo()->get()->toArray()];
+		$question = $question->with('questionAnswers');
+
+		return ['total' => $count, 'records' => $question->get()->toArray()];
 
 	}
 

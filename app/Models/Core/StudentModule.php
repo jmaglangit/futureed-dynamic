@@ -22,9 +22,15 @@ class StudentModule extends Model {
         'wrong_counter' => 0,'correct_counter'=> 0, 'running_points'=> 0,'points_earned'=> 0,
         'last_answered_question_id'=> 0,'total_correct_answer' => 0,'current_difficulty_level'=> 1];
 
+
 	//-------------relationships
 	public function module() {
 		return $this->belongsTo('FutureEd\Models\Core\Module');
+	}
+
+	public function question(){
+
+		return $this->belongsTo('FutureEd\Models\Core\Question','last_answered_question_id');
 	}
 
 
@@ -56,8 +62,6 @@ class StudentModule extends Model {
 		});
 
 	}
-
-
 
 
 }
