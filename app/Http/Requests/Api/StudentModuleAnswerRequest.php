@@ -2,6 +2,8 @@
 
 namespace FutureEd\Http\Requests\Api;
 
+use FutureEd\Models\Core\Question;
+
 class StudentModuleAnswerRequest extends ApiRequest
 {
     /**
@@ -21,7 +23,7 @@ class StudentModuleAnswerRequest extends ApiRequest
      */
     public function rules()
     {
-        return [
+        $return = [
 			'student_module_id' => 'required|integer',
             'module_id' => 'required|integer',
             'seq_no' => 'required|integer',
@@ -31,6 +33,17 @@ class StudentModuleAnswerRequest extends ApiRequest
             'student_id' => 'required|integer',
             'total_time' => 'required|integer',
 		];
+
+		//require answer_id if question is MC.
+		$question = Question::find($this->__get('question_id'));
+		$question_type = $question->question_type;
+
+		if($question_type == config('futureed.question_type_multiple_choice')){
+
+			$return['answer_id'] = 'integer|required|exists:question_answers,id,deleted_at,NULL,question_id,'. $question->id ;
+		}
+
+		return $return;
     }
 
     public function messages()
