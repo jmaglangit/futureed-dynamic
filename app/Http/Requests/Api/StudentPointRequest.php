@@ -52,6 +52,8 @@ class StudentPointRequest extends ApiRequest {
 			'points_earned.integer' => 'Points must be a number.',
 			'student_id.required' => 'Student is required.',
 			'student_id.integer' => 'Student is invalid.',
+			'module_id.required' => 'Module is required.',
+			'module_id.integer' => 'Module is invalid.',
 
 		];
 	}
