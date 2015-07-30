@@ -20,6 +20,21 @@ class Badge extends Model {
 
 	}
 
+	public function scopeSubjectId($query, $subject_id) {
+
+		return $query->where('subject_id','=',$subject_id);
+	}
+
+	public function scopeAgeGroupId($query, $age_group_id) {
+
+		return $query->where('age_group_id','=',$age_group_id);
+	}
+
+	public function scopeGender($query, $gender) {
+
+		return $query->where('gender','=',$gender);
+	}
+
 
 
 }
