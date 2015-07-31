@@ -31,10 +31,12 @@ class StudentModuleRepository implements StudentModuleRepositoryInterface{
         }
     }
 
-    public function updateStudentModule($id,$data){
+	public function updateStudentModule($id,$data){
         try{
-            $result = StudentModule::find($id);
-            return is_null($result) ? false : $result->update($data);
+
+			return StudentModule::find($id)
+				->update($data->toArray());
+
         }catch (\Exception $e){
             return $e->getMessage();
         }
