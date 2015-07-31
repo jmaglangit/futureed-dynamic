@@ -264,6 +264,15 @@ class QuestionRepository implements QuestionRepositoryInterface{
 		return Question::whereId($id)->pluck('points_earned');
 	}
 
+	/**
+	 * Get questions by module.
+	 * @param $module_id
+	 */
+	public function getQuestionsByModule($module_id){
+
+		return Question::whereModuleId($module_id)->get();
+	}
+
 
 
 }
