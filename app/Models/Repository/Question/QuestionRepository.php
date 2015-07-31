@@ -236,5 +236,34 @@ class QuestionRepository implements QuestionRepositoryInterface{
 	}
 
 
+	/**
+	 * Get question type.
+	 * @param $id
+	 * @return mixed
+	 */
+	public function getQuestionType($id){
+
+		return Question::whereId($id)->pluck('question_type');
+	}
+
+	/**
+	 * Get question answer.
+	 * @param $id
+	 * @return mixed
+	 */
+	public function getQuestionAnswer($id){
+
+		return Question::whereId($id)->pluck('answer');
+	}
+
+	/**
+	 * Get points earned if correct.
+	 * @param $id
+	 */
+	public function getQuestionPointsEarned($id){
+		return Question::whereId($id)->pluck('points_earned');
+	}
+
+
 
 }
