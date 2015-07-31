@@ -7,21 +7,8 @@
 			<div class="content-text">
 				<p>{! question.details.questions_text !}</p>
 				<div ng-if="question.details.questions_image != futureed.NONE">
-					<img ng-src="{! question.details.questions_image !}">
+					<img class="img-full" ng-src="{! question.details.questions_image !}">
 				</div>
-			</div>
-		</div>
-		<div class="col-xs-6 col-xs-offset-3 margin-30-top">
-			<div class="row">
-				<b>Answer/s:</b>
-			</div>
-			<div class="col-xs-6" ng-if="question.details.question_type == futureed.M_CHOICE" ng-repeat="answer in question.details.question_answers">
-				<p ng-if="answer.answer_text">
-					{! answer.answer_text !}
-				</p>
-			</div>
-			<div class="col-xs-6" ng-if="question.details.question_type != futureed.M_CHOICE">
-				<p><span class="success-icon" ng-if="question.details.answer != futureed.NULL"><i class="fa fa-check-circle-o"></i></span> {! question.details.answer !}</p>
 			</div>
 		</div>
 	</div>
