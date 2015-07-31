@@ -205,7 +205,7 @@ table#client-list{
 	margin-bottom: 0;
 }
 
-.content-image {
+.content-image, .img-full{
 	padding: 20px;
 	width: 100%;
 }
