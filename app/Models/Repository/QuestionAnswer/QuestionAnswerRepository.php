@@ -140,4 +140,23 @@ class QuestionAnswerRepository implements QuestionAnswerRepositoryInterface{
             return $e->getMessage();
         }
     }
+
+	/**
+	 * Get Question correct answer.
+	 * @param $id
+	 * @return mixed
+	 */
+	public function getQuestionCorrectAnswer($id){
+
+		return QuestionAnswer::whereId($id)->pluck('correct_answer');
+	}
+
+
+	public function getQuestionPointEquivalent($id){
+
+		return QuestionAnswer::whereId($id)->pluck('point_equivalent');
+	}
+
+
+
 }
