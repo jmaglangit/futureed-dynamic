@@ -7,7 +7,7 @@
 			<div class="content-text">
 				<p>{! question.details.questions_text !}</p>
 				<div ng-if="question.details.questions_image != futureed.NONE">
-					<img ng-src="{! question.details.questions_image !}">
+					<img class="img-full" ng-src="{! question.details.questions_image !}">
 				</div>
 			</div>
 		</div>
