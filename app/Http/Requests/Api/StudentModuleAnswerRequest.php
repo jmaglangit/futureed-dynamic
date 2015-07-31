@@ -28,10 +28,10 @@ class StudentModuleAnswerRequest extends ApiRequest
             'module_id' => 'required|integer',
             'seq_no' => 'required|integer',
             'question_id' => 'required|integer',
-            'answer_id' => 'integer',
             'answer_text' => 'string',
             'student_id' => 'required|integer',
-            'total_time' => 'required|integer',
+			'date_start' => 'required|date',
+			'date_end' => 'required|date'
 		];
 
 		//require answer_id if question is MC.
