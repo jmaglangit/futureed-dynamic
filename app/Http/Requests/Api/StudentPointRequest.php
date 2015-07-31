@@ -36,7 +36,6 @@ class StudentPointRequest extends ApiRequest {
 			case 'PUT':
 				return [
 					'event_id' => 'required|integer',
-					'points_earned' => 'required|integer',
 					'description' => 'string'
 
 				];

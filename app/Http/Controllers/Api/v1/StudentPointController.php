@@ -189,7 +189,7 @@ class StudentPointController extends ApiController {
 	 */
 	public function update($id, StudentPointRequest $request)
 	{
-		$data = $request->only('event_id','points_earned','description');
+		$data = $request->only('event_id','description');
 
 		$this->student_point->updateStudentPoint($id,$data);
 
