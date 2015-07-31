@@ -121,4 +121,14 @@ class TeachingContentRepository implements TeachingContentRepositoryInterface{
             return $e->getMessage();
         }
     }
+
+	/**
+	 * Get teaching content Id.
+	 * @param $module_id
+	 */
+	public function getTeachingContentId($module_id){
+
+		return TeachingContent::whereModuleId($module_id)->pluck('id');
+
+	}
 }
