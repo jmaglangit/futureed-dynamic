@@ -27,7 +27,7 @@
 	</div>
 	<div class="col-xs-12 btn-content">
 		<div class="col-xs-4">
-			<button class="btn btn-gold btn-medium" ng-click="question.viewQuestion(question.details.seq_no, futureed.BACK)" ng-if="question.details.seq_no != futureed.TRUE">Back</button>
+			<button class="btn btn-gold btn-medium" ng-click="question.viewQuestion(question.details.seq_no, futureed.BACK)" ng-if="question.details.seq_no != futureed.TRUE">Previous</button>
 		</div>
 		<div class="col-xs-4">
 			<center><h2 class="title-content">{! question.details.teaching_module !}</h2></center>

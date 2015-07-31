@@ -448,7 +448,7 @@ function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService,
 		ManageQuestionAnsService.saveAnswer(self.answers).success(function(response){
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
-					self.answrs.errors = $scope.errorHandler(response.errors);
+					self.answers.errors = $scope.errorHandler(response.errors);
 
 					angular.forEach(response.errors, function(value, a) {
 						self.fields[value.field + '_ans'] = Constants.TRUE;
