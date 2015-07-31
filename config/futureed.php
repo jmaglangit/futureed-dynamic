@@ -167,6 +167,10 @@ return [
     'question_type_provide_answer' => 'N',
     'question_type_ordering' => 'O',
 
+	//Correct Answer
+	'yes' => 'Yes',
+	'no' => 'No',
+
     //reset module
     'reset_module' => 'Reset Module',
 ];
