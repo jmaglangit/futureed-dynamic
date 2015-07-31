@@ -1,16 +1,19 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
 use Carbon\Carbon;
+use Carbon\CarbonInterval;
 use FutureEd\Http\Requests\Api\StudentModuleAnswerRequest;
 use FutureEd\Models\Repository\AvatarPose\AvatarPoseRepositoryInterface;
 use FutureEd\Models\Repository\AvatarQuote\AvatarQuoteRepositoryInterface;
 use FutureEd\Models\Repository\AvatarWiki\AvatarWikiRepositoryInterface;
+use FutureEd\Models\Repository\ModuleContent\ModuleContentRepositoryInterface;
 use FutureEd\Models\Repository\Question\QuestionRepositoryInterface;
 use FutureEd\Models\Repository\QuestionAnswer\QuestionAnswerRepositoryInterface;
 use FutureEd\Models\Repository\Quote\QuoteRepositoryInterface;
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use FutureEd\Models\Repository\StudentModule\StudentModuleRepositoryInterface;
 use FutureEd\Models\Repository\StudentModuleAnswer\StudentModuleAnswerRepositoryInterface;
+use FutureEd\Models\Repository\TeachingContent\TeachingContentRepositoryInterface;
 use Illuminate\Support\Facades\Input;
 
 class StudentModuleAnswerController extends ApiController{
@@ -24,6 +27,8 @@ class StudentModuleAnswerController extends ApiController{
     protected $student;
     protected $student_module;
     protected $student_module_answer;
+	protected $module;
+	protected $teaching_content;
 
 
     public function __construct(AvatarPoseRepositoryInterface $avatar_pose,
@@ -34,7 +39,9 @@ class StudentModuleAnswerController extends ApiController{
                                 QuoteRepositoryInterface $quote,
                                 StudentModuleRepositoryInterface $student_module,
                                 StudentModuleAnswerRepositoryInterface $student_module_answer,
-                                StudentRepositoryInterface $student){
+                                StudentRepositoryInterface $student,
+								ModuleContentRepositoryInterface $moduleContentRepositoryInterface,
+								TeachingContentRepositoryInterface $teachingContentRepositoryInterface){
 
         $this->avatar_pose = $avatar_pose;
         $this->avatar_quotes = $avatar_quotes;
@@ -45,6 +52,8 @@ class StudentModuleAnswerController extends ApiController{
         $this->student = $student;
         $this->student_module = $student_module;
         $this->student_module_answer = $student_module_answer;
+		$this->module = $moduleContentRepositoryInterface;
+		$this->teaching_content = $teachingContentRepositoryInterface;
     }
 
     /**
@@ -52,7 +61,7 @@ class StudentModuleAnswerController extends ApiController{
      * @param StudentModuleAnswerRequest $request
      * @return json
      */
-    public function store(StudentModuleAnswerRequest $request){
+    public function stores(StudentModuleAnswerRequest $request){
 
         $data = $request->all();
 
@@ -87,6 +96,7 @@ class StudentModuleAnswerController extends ApiController{
 
         //check answer if it's correct/incorrect.
         if (!$is_correct_answer){
+
             //if incorrect answer, increment the wrong_counter.
             $student_module['wrong_counter'] += 1;
 
@@ -101,7 +111,8 @@ class StudentModuleAnswerController extends ApiController{
             }
 
             $data['answer_status'] = config('futureed.answer_status_wrong');
-        }else{ //if correct answer. reset the wrong_counter to zero and increment the correct_counter
+        }else{
+        //if correct answer. reset the wrong_counter to zero and increment the correct_counter
             $student_module['wrong_counter'] = 0;
             $student_module['total_correct_answer'] = $student_module['correct_counter'] += 1;
             $point = 1;
@@ -123,7 +134,9 @@ class StudentModuleAnswerController extends ApiController{
         }
 
         //update student module.
-        $this->student_module->updateStudentModule($student_module_id,$student_module);
+        $return = $this->student_module->updateStudentModule($student_module_id,$student_module);
+
+		dd($return);
 
         //insert student module answer.
         $this->student_module_answer->addStudentModuleAnswer($data);
@@ -169,4 +182,177 @@ class StudentModuleAnswerController extends ApiController{
             return $this->respondWithData($student_module);
         }
     }
+//+-------------------+-------------------------+------+-----+---------------------+----------------+
+//| Field             | Type                    | Null | Key | Default             | Extra          |
+//+-------------------+-------------------------+------+-----+---------------------+----------------+
+//| id                | int(10) unsigned        | NO   | PRI | NULL                | auto_increment |
+//| student_module_id | bigint(20)              | NO   |     | NULL                |                |
+//| module_id         | bigint(20)              | NO   |     | NULL                |                |
+//| seq_no            | bigint(20)              | NO   |     | NULL                |                |
+//| question_id       | bigint(20)              | NO   |     | NULL                |                |
+//| answer_id         | bigint(20)              | NO   |     | NULL                |                |
+//| answer_text       | text                    | NO   |     | NULL                |                |
+//| points_earned     | int(11)                 | NO   |     | NULL                |                |
+//| date_start        | timestamp               | NO   |     | 0000-00-00 00:00:00 |                |
+//| date_end          | timestamp               | NO   |     | 0000-00-00 00:00:00 |                |
+//| total_time        | int(11)                 | NO   |     | NULL                |                |
+//| answer_status     | enum('Correct','Wrong') | NO   |     | NULL                |                |
+//| created_by        | bigint(20)              | NO   |     | NULL                |                |
+//| updated_by        | bigint(20)              | NO   |     | NULL                |                |
+//| created_at        | timestamp               | NO   |     | 0000-00-00 00:00:00 |                |
+//| updated_at        | timestamp               | NO   |     | 0000-00-00 00:00:00 |                |
+//| deleted_at        | timestamp               | YES  |     | NULL                |                |
+//+-------------------+-------------------------+------+-----+---------------------+----------------+
+
+
+	public function store(StudentModuleAnswerRequest $request){
+
+
+		$data = $request->only(
+			'student_module_id',
+			'module_id',
+			'seq_no',
+			'question_id',
+			'answer_id',
+			'answer_text',
+			'student_id',
+			'date_start',
+			'date_end'
+		);
+
+		//ADD ANSWER
+
+
+
+		//check type of question
+		$question_type = $this->question->getQuestionType($data['question_id']);
+
+		//check answer and points
+		if($question_type == config('futureed.question_type_multiple_choice')){
+
+			//Get answer and point from question_answers.
+			$answer = $this->question_answer->getQuestionCorrectAnswer($data['answer_id']);
+
+			$data['answer_status'] = ($answer == config('futureed.yes')) ?
+				config('futureed.answer_status_correct') :
+				config('futureed.answer_status_wrong');
+
+			$data['points_earned'] = $this->question_answer->getQuestionPointEquivalent($data['answer_id']);
+
+
+		}else {
+
+			//Get answer and point from Question.
+			$question_answer = $this->question->getQuestionAnswer($data['question_id']);
+
+
+			$data['answer_status'] = ($data['answer_text'] == $question_answer) ?
+				config('futureed.answer_status_correct') :
+				config('futureed.answer_status_wrong');
+
+			$data['points_earned'] = ($data['answer_text'] == $question_answer) ?
+				//get points earned from question
+				$this->question->getQuestionPointsEarned($data['question_id'])
+				  : 0 ;
+		}
+
+		//check total_time
+		$data['date_start'] = Carbon::parse($data['date_start']);
+		$data['date_end'] = Carbon::parse($data['date_end']);
+		$data['total_time'] = Carbon::parse($data['date_start'])->diffInSeconds(Carbon::parse($data['date_end']));
+
+
+		//to be computed
+		// points_earned, total_time, answer_status
+
+
+		//Adding to record.
+		$student_answer = $this->student_module_answer->addStudentModuleAnswer($data);
+
+
+		//UPDATE STUDENT MODULE SCORES
+
+		//get necessary data to compare.
+		$student_module  = $this->student_module->getStudentModule($data['student_module_id']);
+		$points_to_finish = $this->module->getModulePointsToFinish($data['module_id']);
+
+
+/*
+		"id" => 1
+  "class_id" => 1
+  "student_id" => 1
+  "module_id" => 18
+  "module_status" => "On Going" -- check if points to finish is satisfied.
+
+
+  "date_start" => "-0001-11-30 00:00:00"
+  "date_end" => "-0001-11-30 00:00:00" -- if points to finish is satisfied. $data['date_end']
+  "total_time" => 0 -- $data['date_end'] - date_start
+
+ --"progress" => 0 -- correct answer / points to finish for over all. leave it.
+  --"question_counter" => 0 -- how many question taken
+  --"wrong_counter" => 0 -- if equals to 3 = minus points reset value.
+  --"correct_counter" => 0 -- how many correct
+  --"running_points" => 0 -- minus 1 point
+  --"points_earned" => 0 -- how points you just earned
+
+  "last_viewed_content_id" => null -- get teaching_content id
+  "last_answered_question_id" => 56
+
+  "total_correct_answer" => 0
+  "current_difficulty_level" => 0
+
+ADDTIONAL OUTPUT
+quote trigger with avatar pose
+next question
+
+*/
+		//CURRENT UPDATE
+
+		//question counter
+		$student_module->question_counter++;
+
+		//wrong counter
+		if($student_answer->answer_status == config('futureed.answer_status_wrong')){
+
+			$student_module->wrong_counter++;
+
+			if($student_module->wrong_counter == 3){
+
+				$student_module->running_points--;
+			}
+		}
+
+		//correct counter
+		if($student_answer->answer_status == config('futureed.answer_status_correct')){
+			$student_module->correct_counter++;
+		}
+
+		//points just earned
+		$student_module->points_earned = $student_answer->points_earned;
+
+		//last_viewed_content_id -- get current content_id
+		$student_module->last_viewed_content_id = $this->teaching_content->getTeachingContentId($data['module_id']);
+
+		//last_answered_question_id
+		$student_module->last_answered_question_id = $data['module_id'];
+
+		//update module_status
+		if($student_module->running_points >= $points_to_finish){
+
+			$student_module->module_status = config('futureed.module_status_completed');
+
+		} else {
+
+			$student_module->module_status = config('futureed.module_status_ongoing');
+
+		}
+
+		$this->student_module->updateStudentModule($data['module_id'],$student_module);
+
+		return $this->respondWithData($student_module->toArray());
+		//Quote Trigger
+		//next question sets
+
+	}
 }
