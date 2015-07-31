@@ -12,7 +12,7 @@ class StudentModuleAnswerRepository implements StudentModuleAnswerRepositoryInte
      */
     public function addStudentModuleAnswer($data){
         try{
-            return StudentModuleAnswer::create($data)->toArray();
+            return StudentModuleAnswer::create($data);
         }catch (\Exception $e){
             return $e->getMessage();
         }
