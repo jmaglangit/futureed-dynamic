@@ -28,7 +28,7 @@
 	</div>
 	<div class="col-xs-12 btn-content" ng-if="!content.no_content">
 		<div class="col-xs-4">
-			<button class="btn btn-gold btn-medium" ng-click="content.navigate(content.detail.key, futureed.BACK)" ng-if="content.detail.key != futureed.FALSE">Back</button>
+			<button class="btn btn-gold btn-medium" ng-click="content.navigate(content.detail.key, futureed.BACK)" ng-if="content.detail.key != futureed.FALSE">Previous</button>
 		</div>
 		<div class="col-xs-4">
 			<center><h2 class="title-content">{! content.content.teaching_module !}</h2></center>
