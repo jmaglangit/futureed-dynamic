@@ -34,10 +34,20 @@ class StudentModule extends Model {
 	];
 
 	//Mutator
+
 	public function getAttributeDateStart($value){
 
 		return Carbon::parse($value);
+	}
 
+	public function setAttributeDateStart($value){
+
+		return (!$value) ? Carbon::now() : $value;
+	}
+
+	public function setAttributeDateEnd($value){
+
+		return (!$value) ? Carbon::now() : $value;
 	}
 
 	//Relationship
