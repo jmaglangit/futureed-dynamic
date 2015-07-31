@@ -13,8 +13,9 @@ class AdminStudentPointController extends ApiController {
 	protected $student;
 	protected $point_level;
 
-	public function __construct(StudentRepositoryInterface $student,
-								PointLevelRepositoryInterface $point_level){
+	public function __construct(
+			StudentRepositoryInterface $student,
+			PointLevelRepositoryInterface $point_level){
 
 		$this->student = $student;
 		$this->point_level = $point_level;
