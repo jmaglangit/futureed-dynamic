@@ -67,6 +67,7 @@ interface QuestionRepositoryInterface {
 
 	public function getQuestionPointsEarned($id);
 
+	public function getQuestionsByModule($module_id);
 
 
 
