@@ -37,7 +37,7 @@ class AdminQuestionRequest extends ApiRequest {
 					'code' => 'required|integer|unique:questions,code,NULL,id,deleted_at,NULL',
 					'answer' => 'required_if:question_type,FIB,O,N|string',
 					'question_order_text' => 'required_if:question_type,O|string',
-					'seq_no' => 'integer',
+					'seq_no' => 'integer|min:1',
 				];
 				break;
 
@@ -45,7 +45,7 @@ class AdminQuestionRequest extends ApiRequest {
 
 				return [
 					'image' => 'string',
-					'seq_no' => 'integer',
+					'seq_no' => 'integer|min:1',
 					'questions_text' => 'required|string',
 					'difficulty' => 'required|integer',
 					'status' => 'required|alpha|in:Enabled,Disabled',
