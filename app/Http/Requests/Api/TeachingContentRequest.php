@@ -29,7 +29,7 @@ class TeachingContentRequest extends ApiRequest {
 					'module_id' => 'required|exists:modules,id,deleted_at,NULL',
 					'subject_id' => 'required|exists:subjects,id,deleted_at,NULL',
 					'subject_area_id' => 'required|exists:subject_areas,id,deleted_at,NULL',
-					'code' => 'required|integer',
+					'code' => 'required|integer|unique:teaching_contents,code,NULL,id,deleted_at,NULL',
 					'teaching_module' => 'required',
 					'description' => 'required',
 					'learning_style_id' => 'required|exists:learning_styles,id,deleted_at,NULL',
