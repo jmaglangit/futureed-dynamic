@@ -32,14 +32,9 @@
     <![endif]-->
     @yield('styles')
   </head>
-  <body class="student" ng-class="{'student-class':backgroundChange}" ng-controller="futureedController" ng-init="getUserDetails()">
+  <body class="student" ng-controller="futureedController" ng-init="getUserDetails()">
     {!! Form::hidden('userdata', Session::get('student')) !!}
 
-    {!! Form::hidden('_authorization', Session::get('client')
-        , array(
-            'id' => 'userdata'
-        )
-    ) !!}
     <p class="notice"> BETA Stage: Under Development </p>
 
     @yield('navbar')

@@ -4,7 +4,7 @@
 	</div>
 
 	<div class="questions-image">
-		<img src="http://localhost:8000/images/avatar/doctor-male/doctor_male-2_main.png" />
+		<img src="/images/avatar/doctor-male/doctor_male-2_main.png" />
 	</div>
 
 	<div class="questions-message">

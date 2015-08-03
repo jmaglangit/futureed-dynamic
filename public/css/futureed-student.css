@@ -146,14 +146,6 @@
 	z-index: 9999;
 }
 
-.student-class {
-	background: url("../images/class-student/mountain-full-bg.png") no-repeat center center fixed !important;
-	-webkit-background-size: cover !important;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover !important;
-}
-
 .side-header {
 	padding: 10px;
 }
@@ -550,7 +542,9 @@ th, td {
 }
 
 .breadcrumb {
-	background-color: transparent !important;
+	color: #055A7F;
+    font-size: 1.3em;
+    background-color: rgba(255, 255, 255, .3);
 }
 
 .margin-top-bot-5{
@@ -753,6 +747,8 @@ hr {
 
 .module-list {
 	padding: 10px;
+	background-color: rgba(255, 255, 255, .3);
+	border-radius: 10px;
 }
 
 .module-item {
@@ -971,4 +967,14 @@ hr {
 .question-text-answer {
 	width: 500px;
     margin: 10px auto;
+}
+
+.module-progress {
+	color: #055A7F;
+    text-align: center;
+    position: absolute;
+}
+
+.progress {
+	margin-top: 15px;
 }

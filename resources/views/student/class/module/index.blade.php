@@ -5,13 +5,13 @@
 @stop
 
 @section('content')
-	<div class="col-xs-12" ng-init="backgroundClass(); checkClass(1)" ng-controller="StudentModuleController as mod" ng-cloak>
+	<div class="col-xs-12" ng-controller="StudentModuleController as mod" ng-init="mod.updateBackground()" ng-cloak>
 		<div template-directive template-url="{!! route('student.partials.base_url') !!}"></div>
 
 		<ul class="breadcrumb">
-		    <li><a href="#"><span><i class="fa fa-home"></i></span></a></li>
-		    <li><a href="#">United States</a></li>
-		    <li class="active">Math</li>
+		    <li><i class="fa fa-home"></i></li>
+		    <li>{! mod.record.subject.name !}</li>
+		    <li>{! mod.record.name !}</li>
 		</ul>
 
 		<div class="col-xs-12" ng-if="mod.errors || mod.success">
