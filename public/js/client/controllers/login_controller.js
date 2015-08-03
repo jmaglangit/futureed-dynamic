@@ -178,9 +178,14 @@ function LoginController($scope, apiService, clientLoginApiService, clientProfil
 	function selectRole(role) {
 		$scope.$parent.errors = Constants.FALSE;
 
-	    self.principal = Constants.FALSE;
-	    self.parent = Constants.FALSE;
-	    self.reg = {} ;
+		self.principal = Constants.FALSE;
+		self.parent = Constants.FALSE;
+		self.reg = {} ;
+
+		$scope.$parent.e_error = Constants.FALSE;
+		$scope.$parent.e_success = Constants.FALSE;
+		$scope.$parent.u_error = Constants.FALSE;
+		$scope.$parent.u_success = Constants.FALSE;
 
 	    switch(role) {
 	      case Constants.PRINCIPAL :
