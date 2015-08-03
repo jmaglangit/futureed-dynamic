@@ -34,7 +34,7 @@ class AdminQuestionRequest extends ApiRequest {
 					'status' => 'required|alpha|in:Enabled,Disabled',
 					'question_type' => 'required|alpha|in:MC,FIB,O,N',
 					'points_earned' => 'required|integer',
-					'code' => 'required|integer',
+					'code' => 'required|integer|unique:questions,code,NULL,id,deleted_at,NULL',
 					'answer' => 'required_if:question_type,FIB,O,N|string',
 					'question_order_text' => 'required_if:question_type,O|string',
 					'seq_no' => 'integer',

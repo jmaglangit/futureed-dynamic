@@ -264,7 +264,7 @@ class AdminQuestionController extends ApiController {
 		$current_sequence = $this->question->getQuestionSequenceNo($id);
 
 		//pull sequence number.
-		$pulled = $this->question_service->pullSequenceNo($current_sequence[0]->module_id, $current_sequence[0]->seq_no,$id);
+		$pulled = $this->question_service->pullSequenceNo($current_sequence[0]->module_id, $current_sequence[0]->seq_no,$id,$question['difficulty']);
 
 		//update sequence
 		$this->question->updateSequence($pulled);
