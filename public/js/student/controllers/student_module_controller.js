@@ -768,4 +768,10 @@ function StudentModuleController($scope, $window, $interval, $timeout, apiServic
 		self.table.offset = (page - 1) * self.table.size;
 		self.listQuestions();
 	}
+
+	self.updateBackground = function() {
+		angular.element('body.student').css({
+			'background-image' : 'url('+ $scope.user.background +')'
+		});
+	}
 }

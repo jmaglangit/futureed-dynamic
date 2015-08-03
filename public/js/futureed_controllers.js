@@ -929,5 +929,4 @@ function FutureedController($scope, $window, apiService, futureed) {
 			$scope.enter_pass = Constants.TRUE;
 		}
 	}
-
 };
