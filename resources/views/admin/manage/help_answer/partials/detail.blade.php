@@ -259,21 +259,10 @@
 			              	{! error !}
 			            </p>
 			        </div>
-                    {!! Form::select('rate'
-						, array(
-							'' => '-- Select Rate --'
-							, '1' => '1'
-							, '2' => '2'
-							, '3' => '3'
-							, '4' => '4'
-							, '5' => '5'
-						)
-						, ''
-						, array(
-							'class' => 'form-control'
-							, 'ng-model' => 'answer.rating'
-						)
-					) !!}
+                    <select class="form-control" ng-model="answer.rating">
+			        	<option value="">-- Select Rate --</option>
+			        	<option ng-selected="answer.record.rating == $index+1" ng-repeat="i in answer.record.stars track by $index" ng-value="$index+1">{! $index+1 !}</option>
+			        </select>
                 </div>
                 <div class="modal-footer">
                     <div class="btncon col-md-8 col-md-offset-4 pull-left">

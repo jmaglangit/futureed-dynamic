@@ -120,7 +120,7 @@
                             {!! Form::button('Add'
                                 , array(
                                     'class' => 'btn btn-blue btn-medium'
-                                    , 'ng-click' => 'qa.addAnswer()'
+                                    , 'ng-click' => 'qa.addAnswer($event)'
                                 )
                             ) !!}
                             {!! Form::button('Clear'
