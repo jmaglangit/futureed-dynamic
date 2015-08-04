@@ -150,4 +150,13 @@ class ModuleRepository implements ModuleRepositoryInterface{
 
 	}
 
+	/**
+	 * Get Module points to finish.
+	 * @param $module_id
+	 */
+	public function getPointsToFinish($module_id){
+
+		return Module::find($module_id)->pluck('points_to_finish');
+	}
+
 }
