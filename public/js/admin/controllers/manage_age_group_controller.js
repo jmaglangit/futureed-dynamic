@@ -5,6 +5,7 @@ ManageAgeGroupController.$inject = ['$scope', '$timeout', 'ManageAgeGroupService
 
 function ManageAgeGroupController($scope, $timeout, ManageAgeGroupService, apiService, TableService, SearchService) {
 	var self = this;
+
 	self.details = {};
 	self.delete = {};
 
@@ -17,6 +18,7 @@ function ManageAgeGroupController($scope, $timeout, ManageAgeGroupService, apiSe
     }
 
 	self.setActive = function(active, id, flag) {
+		self.fields = [];
 		self.errors = Constants.FALSE;
 		self.create = {};
 		self.area_field = Constants.FALSE;
@@ -53,7 +55,7 @@ function ManageAgeGroupController($scope, $timeout, ManageAgeGroupService, apiSe
 		self.errors = Constants.FALSE;
 		self.records = {};
 		$scope.ui_block();
-		ManageAgeGroupService.ageModuleList(self.module.name, self.table).success(function(response){
+		ManageAgeGroupService.ageModuleList(self.module.id, self.table).success(function(response){
 			if(angular.equals(response.status, Constants.STATUS_OK)){
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
@@ -89,7 +91,7 @@ function ManageAgeGroupController($scope, $timeout, ManageAgeGroupService, apiSe
 
 	self.addAgeGroup = function() {
 		self.errors = Constants.FALSE;
-		self.fields = [];
+		self.create.success = Constants.FALSE;
 		self.create.module_id = $scope.module_id;
 
 		$scope.ui_block();

@@ -53,11 +53,11 @@ interface QuestionRepositoryInterface {
 	public function getQuestionCount($module_id);
 
 
-	public function getQuestionSequenceNos($module_id);
+	public function getQuestionSequenceNos($module_id,$difficulty);
 
 	public function getQuestionSequenceNo($id);
 
-	public function getLastSequence($module_id);
+	public function getLastSequence($module_id,$difficulty);
 
 	public function updateSequence($sequence);
 

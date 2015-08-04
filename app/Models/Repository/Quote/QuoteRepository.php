@@ -22,4 +22,46 @@ class QuoteRepository implements QuoteRepositoryInterface{
             return $e->getMessage();
         }
     }
+    
+	/**
+     * Get Quotes
+     * @param $avatar_id
+     * @return null|array
+     *
+     */
+    public function getQuotes($avatar_id){
+        try{
+        	$new_array = array();
+        
+            $result = Quote::with(['avatarQuote' => function($query) use ($avatar_id)
+						{
+						    $query->where('avatar_id', '=', $avatar_id);
+						
+						}])->orderBy('seq_no')->orderBy('percent')->get();
+			
+			if(!is_null($result)) {
+				$quotes = $result->toArray();
+			
+				foreach($quotes as $quote) {
+					
+					if(!isset($new_array[$quote['seq_no']])) {
+						$new_array[$quote['seq_no']] = array();
+					}
+				
+					$new_array[$quote['seq_no']][$quote['percent']] = $quote;
+				
+				}
+				
+				return $new_array;
+				
+			} else {
+				return null;
+			}
+			
+            return is_null($result) ? null : $result->toArray();
+
+        }catch (\Exception $e){
+            return $e->getMessage();
+        }
+    }
 }

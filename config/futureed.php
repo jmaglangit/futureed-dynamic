@@ -173,4 +173,10 @@ return [
 
     //reset module
     'reset_module' => 'Reset Module',
+
+	//student points description
+	'student_point_description' => 'Completion of Module',
+
+	//student progress
+	'student_progress' => 100,
 ];

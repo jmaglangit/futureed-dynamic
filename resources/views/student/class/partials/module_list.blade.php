@@ -9,10 +9,10 @@
 			)!!}
 			<div class="form-group">
 				<div class="col-xs-5">
-					{!! Form::text('search_module', ''
+					{!! Form::text('search_name', ''
 						,array(
 							'placeholder' => 'Module'
-							, 'ng-model' => 'class.search.module'
+							, 'ng-model' => 'class.search.name'
 							, 'class' => 'form-control btn-fit'
 							, 'data-clear-btn' => 'true'
 						)
@@ -121,6 +121,20 @@
 
 					<button ng-if="user.points < record.points_to_unlock"
 						type="button" class="btn btn-blue module-btn" ng-disabled="true"><i class="fa fa-lock"></i> Module Locked</button>
+
+					<div class="progress">
+						<span class="module-progress">{! record.progress !}%</span>
+						<div class="progress-bar progress-bar-striped" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+							ng-class="{ 
+								'progress-bar-success' : record.progress > 75,
+								'progress-bar-info' : record.progress > 50 && record.progress <= 75 ,
+								'progress-bar-warning' : record.progress > 25 && record.progress <= 50 ,
+								'progress-bar-danger' : record.progress <= 25,
+
+							}"
+							ng-style="{ 'width' : record.progress+'%' }">
+						</div>
+					</div>
 				</div>
 			</div>
 			

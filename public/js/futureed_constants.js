@@ -156,6 +156,10 @@ var Constants = {
 
 	, MSG_FILL_FIELDS 		: "Please fill the required fields."
 
+	, POINT_UPDATE 			: "successfully updated the point"
+	, BADGE_UPDATE 			: "successfully updated the badge"
+	, BADGE_DELETE 			: "successfully deleted the badge"
+
 	, ATTR_CURRENT_EMAIL 	: "current_email"
 	, ATTR_NEW_EMAIL 		: "new_email"
 	, ATTR_CONFIRM_EMAIL 	: "confirm_email"

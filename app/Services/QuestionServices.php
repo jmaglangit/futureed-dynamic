@@ -28,10 +28,10 @@ class QuestionServices {
 	 * @param $seq_no
 	 * @return mixed
 	 */
-	public function updateSequence($module_id, $seq_no){
+	public function updateSequence($module_id, $seq_no, $difficulty){
 
 		//get sequence number
-		$sequence = $this->question->getQuestionSequenceNos($module_id);
+		$sequence = $this->question->getQuestionSequenceNos($module_id, $difficulty);
 
 		foreach($sequence as $seq => $list){
 
@@ -49,10 +49,10 @@ class QuestionServices {
 	 * @param $module_id
 	 * @param $seq_no
 	 */
-	public function pullSequenceNo($module_id, $seq_no,$id){
+	public function pullSequenceNo($module_id, $seq_no,$id,$difficulty){
 
 		//get sequence number
-		$sequence = $this->question->getQuestionSequenceNos($module_id);
+		$sequence = $this->question->getQuestionSequenceNos($module_id,$difficulty);
 
 
 		foreach($sequence as $seq => $list){

@@ -44,6 +44,18 @@ class ModuleController extends ApiController {
 			$criteria['subject'] = Input::get('subject');
 		}
 
+		//for subject_id
+		if(Input::get('subject_id')){
+
+			$criteria['subject_id'] = Input::get('subject_id');
+		}
+
+		//for grade_id
+		if(Input::get('grade_id')){
+
+			$criteria['grade_id'] = Input::get('grade_id');
+		}
+
 		//Age Group
 		//for subject
 		if(Input::get('age_group_id')){

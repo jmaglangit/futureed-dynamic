@@ -5,7 +5,7 @@
 			<a class="btn btn-medium btn-maroon pull-right" href="{!! route('client.teacher.question.index') !!}">Skip</a>	
 		</div>
 		<div class="pull-right col-xs-4" ng-if="content.no_content">
-			<a class="btn btn-medium btn-gold pull-right" href="{!! route('client.parent.module.index') !!}">Back</a>
+			<a class="btn btn-medium btn-gold pull-right" href="{!! route('client.teacher.module.index') !!}">Back</a>
 		</div>	
 	</div>
 	<div class="col-xs-12 content-container" ng-if="content.no_content">
@@ -28,7 +28,7 @@
 	</div>
 	<div class="col-xs-12 btn-content" ng-if="!content.no_content">
 		<div class="col-xs-4">
-			<button class="btn btn-gold btn-medium" ng-click="content.navigate(content.detail.key, futureed.BACK)" ng-if="content.detail.key != futureed.FALSE">Back</button>
+			<button class="btn btn-gold btn-medium" ng-click="content.navigate(content.detail.key, futureed.BACK)" ng-if="content.detail.key != futureed.FALSE">Previous</button>
 		</div>
 		<div class="col-xs-4">
 			<center><h2 class="title-content">{! content.content.teaching_module !}</h2></center>

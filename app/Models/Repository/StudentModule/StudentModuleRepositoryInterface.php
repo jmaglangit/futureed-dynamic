@@ -1,6 +1,7 @@
 <?php namespace FutureEd\Models\Repository\StudentModule;
 
-interface StudentModuleRepositoryInterface {
+interface StudentModuleRepositoryInterface
+{
 	public function addStudentModule($data);
 
 	public function getStudentModule($id);
@@ -8,4 +9,7 @@ interface StudentModuleRepositoryInterface {
 	public function updateStudentModule($id, $data);
 
 	public function viewStudentModule($id);
+
+	public function countSubjectModuleDone($criteria = array());
+
 }

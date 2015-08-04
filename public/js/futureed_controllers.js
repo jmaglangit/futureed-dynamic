@@ -40,7 +40,7 @@ function FutureedController($scope, $window, apiService, futureed) {
 		}
 	}
 
-	function errorHandler(errors) {
+	function errorHandler(errors, flag) {
 		$scope.errors = [];
 
 		if(angular.isArray(errors)) {
@@ -66,8 +66,9 @@ function FutureedController($scope, $window, apiService, futureed) {
 		} else {
 			$scope.errors[0] = errors.message;
 		}
-
-		$("html, body").animate({ scrollTop: 0 }, "slow");
+		if(flag != 1) {
+			$("html, body").animate({ scrollTop: 0 }, "slow");
+		}
 		return $scope.errors;
 	}
 
@@ -929,5 +930,4 @@ function FutureedController($scope, $window, apiService, futureed) {
 			$scope.enter_pass = Constants.TRUE;
 		}
 	}
-
 };

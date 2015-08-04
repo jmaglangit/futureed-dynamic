@@ -13,8 +13,19 @@ class Quote extends Model {
 
     protected $fillable =['quote','percent','answer_status','seq_no'];
 
-    //scopes
 
+	//relationships
+	public function avatarQuote(){
+        return $this->hasOne('FutureEd\Models\Core\AvatarQuote');
+    }
+
+    //scopes
+    public function scopeAvatarId($query, $avatar_id){
+        return $query->whereHas('avatarQuote', function ($query) use ($avatar_id) {
+			$query->where('avatar_id', '=', $avatar_id);
+		});
+    }
+    
     public function scopePercent($query,$pct){
         return $query->wherePercent($pct);
     }

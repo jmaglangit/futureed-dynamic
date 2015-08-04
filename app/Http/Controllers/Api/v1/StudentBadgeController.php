@@ -71,7 +71,9 @@ class StudentBadgeController extends ApiController {
 	 */
 	public function show($id)
 	{
-		//
+		$student_badge = $this->student_badge->viewStudentBadge($id);
+
+		return $this->respondWithData($student_badge);
 	}
 
 	/**
@@ -110,7 +112,7 @@ class StudentBadgeController extends ApiController {
 	 */
 	public function destroy($id)
 	{
-		//
+		return $this->respondWithData($this->student_badge->deleteStudentBadge($id));
 	}
 
 }

@@ -17,6 +17,7 @@ class ModuleGroupRepository implements ModuleGroupRepositoryInterface{
         $moduleGroup = new ModuleGroup();
 
         $moduleGroup = $moduleGroup->with('ageGroup','module');
+        $moduleGroup = $moduleGroup->orderByAge();
         
 
         if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
@@ -31,6 +32,11 @@ class ModuleGroupRepository implements ModuleGroupRepositoryInterface{
                 //check module name
                 if(isset($criteria['module_name'])){
                     $moduleGroup = $moduleGroup->moduleName($criteria['module_name']);
+                }
+
+                //check module_id
+                if(isset($criteria['module_id'])){
+	                $moduleGroup = $moduleGroup->moduleId($criteria['module_id']);
                 }
             }
 
@@ -70,5 +76,6 @@ class ModuleGroupRepository implements ModuleGroupRepositoryInterface{
         }
 
     }
+
 
 }
