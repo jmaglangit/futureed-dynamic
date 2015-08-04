@@ -105,10 +105,12 @@
 			</div>
 
 			<div class="module-list" ng-if="class.records.length">
-				<div class="module-item" ng-repeat="record in class.records">
-					<img ng-class="{ 'module-icon' : user.points >= record.points_to_unlock, 'locked-module-icon' : user.points < record.points_to_unlock }" 
-						ng-src="{! user.points >= record.points_to_unlock && '/images/icons/default-module-icon.png' || '/images/icons/icon-lock.png' !}"
-						ng-click="class.redirect('{!! route('student.class.module.index') !!}', record)">				
+				<div class="module-item" ng-repeat="record in class.records" tooltip-class="module-tooltip" tooltip-placement="top" tooltip="{! record.name !}">
+					<div class="module-image-holder">
+						<img ng-class="{ 'module-icon' : user.points >= record.points_to_unlock, 'locked-module-icon' : user.points < record.points_to_unlock }" 
+							ng-src="{! user.points >= record.points_to_unlock && '/images/icons/default-module-icon.png' || '/images/icons/icon-lock.png' !}"
+							ng-click="class.redirect('{!! route('student.class.module.index') !!}', record)">
+					</div>
 
 					<p class="module-name">{! record.name !}</p>
 

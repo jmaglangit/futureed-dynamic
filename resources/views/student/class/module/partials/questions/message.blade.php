@@ -5,30 +5,22 @@
 				<h3 class="title-main-content"> {! mod.module_message.name !} </h3>
 			</div>
 			<div class="modal-body message-container">
-				<div class="col-xs-12" >
-					<p class="module-message">Let's get started...</p>
-				</div>
-
-				<div class="module-icon-holder">
-					<img src="/images/avatar/doctor-male/doctor_male-2_main.png" />
-				</div>
-
-				<div class="points-badge-holder row">
-					<div class="col-xs-12">
-						<div class="col-xs-6">
-							<img ng-src="/images/icons/icon-reward.png"/> Reward points to earn
-						</div>
-						<div class="col-xs-6">
-							<img ng-src="/images/icons/icon-badges.png"/> Badge to earn
-						</div>
+				<div ng-if="mod.module_message.skip_module">
+					<div class="col-xs-12" >
+						<p class="module-message">Let's get started...</p>
 					</div>
 
-					<div class="col-xs-12">
-						<div class="col-xs-6">
-							<p class="message-point">+{! mod.module_message.points_to_finish !}</p>
+					<div class="module-icon-holder">
+						<img src="/images/avatar/doctor-male/doctor_male-2_main.png" />
+					</div>
+
+					<div class="points-badge-holder row">
+						<div class="col-xs-12">
+							<img ng-src="/images/icons/icon-reward.png"/> Reward points to earn
 						</div>
-						<div class="col-xs-6">
-							<img class="message-badge" src="/images/badges/math/boys/math_badge_boy_grade_1.png" />
+
+						<div class="col-xs-12">
+							<p class="message-point">+{! mod.module_message.points_to_finish !}</p>
 						</div>
 					</div>
 				</div>
@@ -36,20 +28,31 @@
 
 			<div class="modal-footer">
 				<div class="btn-container">
-					{!! Form::button('Begin Lesson'
-						, array(
-							'class' => 'btn btn-maroon btn-medium'
-							, 'data-dismiss' => 'modal'
-							, 'ng-click' => 'mod.skipModule()'
-						)
-					) !!}
+					<div ng-if="mod.module_message.skip_module">
+						{!! Form::button('Begin Lesson'
+							, array(
+								'class' => 'btn btn-maroon btn-medium'
+								, 'data-dismiss' => 'modal'
+								, 'ng-click' => 'mod.skipModule()'
+							)
+						) !!}
 
-					{!! Form::button('Later'
-						, array(
-							'class' => 'btn btn-gold btn-medium'
-							, 'data-dismiss' => 'modal'
-						)
-					) !!}
+						{!! Form::button('Later'
+							, array(
+								'class' => 'btn btn-gold btn-medium'
+								, 'data-dismiss' => 'modal'
+							)
+						) !!}
+					</div>
+					<div ng-if="mod.module_message.next_question">
+						{!! Form::button('Next Question'
+							, array(
+								'class' => 'btn btn-maroon btn-medium'
+								, 'data-dismiss' => 'modal'
+								, 'ng-click' => 'mod.skipModule()'
+							)
+						) !!}
+					</div>
 				</div>
 			</div>
 		</div>

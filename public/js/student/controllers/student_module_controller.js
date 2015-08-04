@@ -1,9 +1,9 @@
 angular.module('futureed.controllers')
 	.controller('StudentModuleController', StudentModuleController);
 
-StudentModuleController.$inject = ['$scope', '$window', '$interval', '$timeout', 'apiService', 'StudentModuleService', 'SearchService', 'TableService'];
+StudentModuleController.$inject = ['$scope', '$window', '$interval', 'apiService', 'StudentModuleService', 'SearchService', 'TableService'];
 
-function StudentModuleController($scope, $window, $interval, $timeout, apiService, StudentModuleService, SearchService, TableService) {
+function StudentModuleController($scope, $window, $interval, apiService, StudentModuleService, SearchService, TableService) {
 	var self = this;
 
 	self.list = [];
@@ -457,6 +457,9 @@ function StudentModuleController($scope, $window, $interval, $timeout, apiServic
 	}
 
 
+	/**
+	* Functions related to module
+	*/
 	self.setActive = function(active, id) {
 		self.errors = Constants.FALSE;
 
@@ -558,9 +561,47 @@ function StudentModuleController($scope, $window, $interval, $timeout, apiServic
 		} else {
 			// if last_answered_question_id value is > 0, load question
 			self.setActive(Constants.ACTIVE_QUESTIONS);
-			self.table.offset = student_module.last_answered_question_id - 1;
-			self.listQuestions();
+			// self.search.last_answered_question_id = student_module.last_answered_question_id;
+			self.getModuleStudent(student_module.id, function(response) {
+				var question = response.data.question;
+
+				self.table.offset = question.seq_no - 1;
+				self.table.page = question.seq_no; 
+
+				getAvatarPose($scope.user.avatar_id);
+				listAvatarQuotes($scope.user.avatar_id);
+
+				self.listQuestions();	
+			});
 		}
+	}
+
+	var getAvatarPose = function(avatar_id) {
+		StudentModuleService.getAvatarPose(avatar_id).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.avatar_pose = response.data;
+				}
+			}
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+		});
+	}
+
+	var listAvatarQuotes = function(avatar_id) {
+		StudentModuleService.listAvatarQuotes(avatar_id).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.avatar_quotes = response.data;
+				}
+			}
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+		});
 	}
 
 	self.exitModule = function() {
@@ -572,8 +613,7 @@ function StudentModuleController($scope, $window, $interval, $timeout, apiServic
 			}
 
 			if(self.active_questions) {
-				data.last_answered_question_id = self.questions.seq_no;
-				data.seq_no = self.questions.seq_no;
+				data.last_answered_question_id = self.questions.id;
 			}
 			
 		updateModuleStudent(data, function() {
@@ -606,6 +646,7 @@ function StudentModuleController($scope, $window, $interval, $timeout, apiServic
 		self.module_message.name = self.record.name;
 		self.module_message.points_to_finish = self.record.points_to_finish;
 		self.module_message.badge_to_earn = self.record.badge_to_earn;
+		self.module_message.skip_module = Constants.TRUE;
 
 		$("#message_modal").modal({
 	        backdrop: 'static',
@@ -681,12 +722,29 @@ function StudentModuleController($scope, $window, $interval, $timeout, apiServic
 		});
 	}
 
+	self.getModuleStudent = function(module_id, successCallback) {
+		$scope.ui_block();
+		StudentModuleService.getModuleStudent(module_id).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					if(successCallback)
+						successCallback(response);
+				}
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
 	self.listQuestions = function() {
 		self.errors = Constants.FALSE;
 
 		self.search.module_id = self.record.id;
-		self.search.difficulty = (self.search.difficulty) ? self.search.difficulty : 1;
-
 		self.table.size = 1;
 
 		$scope.ui_block();
@@ -700,12 +758,15 @@ function StudentModuleController($scope, $window, $interval, $timeout, apiServic
 					var data = {};
 						data.module_id = self.record.student_module[0].id;
 
-						if(self.active_questions) {
+						if(self.active_questions && self.questions) {
 							data.last_answered_question_id = self.questions.id;
 						}
 
+						if(angular.equals(self.questions.question_type, Constants.ORDERING)) {
+							self.questions.answer_text = self.questions.question_order_text.split(",");
+						}
+
 					updateModuleStudent(data);
-					
 					startTimer();
 					self.updatePageCount(response.data);
 				}
@@ -762,7 +823,7 @@ function StudentModuleController($scope, $window, $interval, $timeout, apiServic
 		self.success = Constants.FALSE;
 
 		var page = self.table.page + 1;
-		self.search.question_id = Constants.EMPTY_STR;
+		self.search.last_answered_question_id = Constants.EMPTY_STR;
 
 		self.table.page = (page < Constants.DEFAULT_PAGE) ? Constants.DEFAULT_PAGE : page;
 		self.table.offset = (page - 1) * self.table.size;
@@ -774,4 +835,17 @@ function StudentModuleController($scope, $window, $interval, $timeout, apiServic
 			'background-image' : 'url('+ $scope.user.background +')'
 		});
 	}
+
+	self.dragControlListeners = {
+	    accept: function (sourceItemHandleScope, destSortableScope) {
+	    	return true;
+	    }
+	    , itemMoved: function (event) {
+	    	
+	    }
+	    , orderChanged: function(event) {
+	    	
+	    }
+	    , containment: '#board'//optional param.
+	};
 }

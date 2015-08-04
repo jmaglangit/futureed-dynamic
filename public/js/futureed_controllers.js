@@ -1,4 +1,4 @@
-angular.module('futureed.controllers', ['ngFileUpload', 'dndLists'])
+angular.module('futureed.controllers', ['ngFileUpload', 'as.sortable'])
 	.controller('futureedController', FutureedController)
 	.directive('templateDirective', TemplateDirective)
 	.constant("futureed", Constants);
