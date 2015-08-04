@@ -12,5 +12,11 @@ class AvatarPose extends Model {
     protected $hidden = ['created_by', 'updated_by', 'created_at', 'updated_at', 'deleted_at'];
 
     protected $fillable = ['avatar_id','code','name','pose_image','description'];
+    
+	
+	//-----scope
+	public function scopeAvatarId($query,$avatar_id){
+		return $query->whereAvatarId($avatar_id);
+	}
 
 }

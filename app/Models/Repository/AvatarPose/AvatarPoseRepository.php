@@ -17,4 +17,23 @@ class AvatarPoseRepository implements AvatarPoseRepositoryInterface{
             return $e->getMessage();
         }
     }
+    
+    /**
+     * Get Avatar poses
+     * @param $avatar_id
+     * @return Object
+     */
+    public function getAvatarPoses($avatar_id){
+        try {
+        
+            $results = AvatarPose::avatarId($avatar_id)->get();
+            
+            return !is_null($results) ? $results->toArray() : null;
+        
+        } catch(\Exception $e) {
+            
+            return $e->getMessage();
+        
+        }
+    }
 }
