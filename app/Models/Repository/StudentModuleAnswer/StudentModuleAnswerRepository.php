@@ -17,4 +17,17 @@ class StudentModuleAnswerRepository implements StudentModuleAnswerRepositoryInte
             return $e->getMessage();
         }
     }
+
+	/**
+	 * Get student module answer.
+	 * @param $student_id
+	 * @param $module_id
+	 */
+	public function getStudentModuleAnswer($student_module_id, $module_id){
+
+		return StudentModuleAnswer::with('question')->studentModuleId($student_module_id)
+			->moduleId($module_id)
+			->orderBySeqNo()
+			->get();
+	}
 }
