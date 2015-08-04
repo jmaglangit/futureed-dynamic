@@ -46,10 +46,10 @@ class ModuleGroup extends Model {
         });
     }
 
-	public function scopeOrderByAge($query){
+    public function scopeOrderByAge($query){
 
-		return $query->orderBy('age_group_id','ASC');
+	    return $query->orderBy('age_group_id','ASC');
 
-	}
+    }
 
 }
