@@ -31,20 +31,17 @@
 				</div>
 				<div class="clearfix"></div>
 				<div class="panel-body">
-					<div class="row">
-						<div class="col-xs-6">
-							Finished Exercise
-						</div>
-						<div class="col-xs-6">
-							0
+					<div class="row" ng-if="profile.points.length == 0">
+						<div class="col-xs-12">
+							No Available Points
 						</div>
 					</div>
-					<div class="row">
+					<div class="row" ng-repeat="point in profile.points">
 						<div class="col-xs-6">
-							Answered 5 straight no errors
+							{! point.description !}
 						</div>
 						<div class="col-xs-6">
-							0
+							{! point.points_earned !}
 						</div>
 					</div>
 				</div>

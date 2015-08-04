@@ -55,7 +55,7 @@ function ManageAgeGroupController($scope, $timeout, ManageAgeGroupService, apiSe
 		self.errors = Constants.FALSE;
 		self.records = {};
 		$scope.ui_block();
-		ManageAgeGroupService.ageModuleList(self.module.name, self.table).success(function(response){
+		ManageAgeGroupService.ageModuleList(self.module.id, self.table).success(function(response){
 			if(angular.equals(response.status, Constants.STATUS_OK)){
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
