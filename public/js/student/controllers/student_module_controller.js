@@ -1,9 +1,9 @@
 angular.module('futureed.controllers')
 	.controller('StudentModuleController', StudentModuleController);
 
-StudentModuleController.$inject = ['$scope', '$window', '$interval', '$timeout', 'apiService', 'StudentModuleService', 'SearchService', 'TableService'];
+StudentModuleController.$inject = ['$scope', '$window', '$interval', 'apiService', 'StudentModuleService', 'SearchService', 'TableService'];
 
-function StudentModuleController($scope, $window, $interval, $timeout, apiService, StudentModuleService, SearchService, TableService) {
+function StudentModuleController($scope, $window, $interval, apiService, StudentModuleService, SearchService, TableService) {
 	var self = this;
 
 	self.list = [];
@@ -457,6 +457,9 @@ function StudentModuleController($scope, $window, $interval, $timeout, apiServic
 	}
 
 
+	/**
+	* Functions related to module
+	*/
 	self.setActive = function(active, id) {
 		self.errors = Constants.FALSE;
 
@@ -564,9 +567,43 @@ function StudentModuleController($scope, $window, $interval, $timeout, apiServic
 
 				self.table.offset = question.seq_no - 1;
 				self.table.page = question.seq_no; 
+
+				getAvatarPose($scope.user.avatar_id);
+				listAvatarQuotes($scope.user.avatar_id);
+
 				self.listQuestions();	
 			});
 		}
+	}
+
+	var getAvatarPose = function(avatar_id) {
+		StudentModuleService.getAvatarPose(avatar_id).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.avatar_pose = response.data;
+					console.log(response.data);
+				}
+			}
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+		});
+	}
+
+	var listAvatarQuotes = function(avatar_id) {
+		StudentModuleService.listAvatarQuotes(avatar_id).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.avatar_quotes = response.data;
+					console.log(response.data);
+				}
+			}
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+		});
 	}
 
 	self.exitModule = function() {

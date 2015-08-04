@@ -15,21 +15,11 @@
 
 				<div class="points-badge-holder row">
 					<div class="col-xs-12">
-						<div class="col-xs-6">
-							<img ng-src="/images/icons/icon-reward.png"/> Reward points to earn
-						</div>
-						<div class="col-xs-6">
-							<img ng-src="/images/icons/icon-badges.png"/> Badge to earn
-						</div>
+						<img ng-src="/images/icons/icon-reward.png"/> Reward points to earn
 					</div>
 
 					<div class="col-xs-12">
-						<div class="col-xs-6">
-							<p class="message-point">+{! mod.module_message.points_to_finish !}</p>
-						</div>
-						<div class="col-xs-6">
-							<img class="message-badge" src="/images/badges/math/boys/math_badge_boy_grade_1.png" />
-						</div>
+						<p class="message-point">+{! mod.module_message.points_to_finish !}</p>
 					</div>
 				</div>
 			</div>

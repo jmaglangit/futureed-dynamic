@@ -139,5 +139,19 @@ function StudentModuleService($http){
 		});
 	}
 
+	service.listAvatarQuotes = function(avatar_id) {
+		return $http({
+			method  : Constants.METHOD_GET
+			, url  	: serviceUrl + 'quote?avatar_id=' + avatar_id
+		});
+	}
+
+	service.getAvatarPose = function(avatar_id) {
+		return $http({
+			method  : Constants.METHOD_GET
+			, url  	: serviceUrl + 'avatar-pose?avatar_id=' + avatar_id
+		});
+	}
+
 	return service;
 }
