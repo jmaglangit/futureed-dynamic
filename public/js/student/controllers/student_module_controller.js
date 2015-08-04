@@ -648,6 +648,7 @@ function StudentModuleController($scope, $window, $interval, apiService, Student
 		self.module_message.name = self.record.name;
 		self.module_message.points_to_finish = self.record.points_to_finish;
 		self.module_message.badge_to_earn = self.record.badge_to_earn;
+		self.module_message.skip_module = Constants.TRUE;
 
 		$("#message_modal").modal({
 	        backdrop: 'static',
@@ -763,6 +764,10 @@ function StudentModuleController($scope, $window, $interval, apiService, Student
 							data.last_answered_question_id = self.questions.id;
 						}
 
+						if(angular.equals(self.questions.question_type, Constants.ORDERING)) {
+							self.questions.answer_text = self.questions.question_order_text.split(",");
+						}
+
 					updateModuleStudent(data);
 					startTimer();
 					self.updatePageCount(response.data);
@@ -803,6 +808,9 @@ function StudentModuleController($scope, $window, $interval, apiService, Student
 				} else if(response.data) {
 					self.search.difficulty = response.data.current_difficulty_level;
 					self.nextQuestion();
+					// console.log($scope.user);
+					// self.question = {};
+					// self.question.answered = Constants.TRUE;
 				}
 			}
 		}).error(function(response) {
@@ -832,4 +840,19 @@ function StudentModuleController($scope, $window, $interval, apiService, Student
 			'background-image' : 'url('+ $scope.user.background +')'
 		});
 	}
+
+	self.dragControlListeners = {
+	    accept: function (sourceItemHandleScope, destSortableScope) {
+	    	console.log("accept");
+	    	return true;
+	    }
+	    , itemMoved: function (event) {
+	    	console.log("itemMoved");
+	    }
+	    , orderChanged: function(event) {
+	    	console.log("orderChanged");
+	    	console.log(self.questions.answer_text);
+	    }
+	    , containment: '#board'//optional param.
+	};
 }

@@ -774,14 +774,46 @@ hr {
 	cursor: pointer;
 }
 
+.module-image-holder {
+	min-width: 130px;
+}
+
+.tooltip.module-tooltip .tooltip-inner {
+	background-color: rgba(005, 090, 127, .8);
+	padding: 10px;
+	margin: 10px;
+	box-sizing: border-box;
+	font-family: 'Schoolbell', sans-serif;
+	min-width: 143px;
+}
+
+.tooltip.module-tooltip .tooltip-arrow {
+	display: none;
+}
+
+.tooltip.module-tooltip:before {
+	border-color: rgba(005, 090, 127, .8);
+	border-top-color: #F9EFB7;
+	border-width: 320px;
+    margin-left: -15px;
+}
+
+.tooltip.module-tooltip:after {
+	border-color: rgba(005, 090, 127, .8);
+    border-top-color: #EBE3B4;
+    border-width: 300px;
+    margin-left: -10px;
+}
+
 .module-name {
 	padding: 10px 0px;
-	text-overflow: ellipsis;
-	overflow: hidden;
-	word-wrap: normal;
-	height: 40px;
-	font-size: 23px;
-	color: #055A7F;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    height: 40px;
+    font-size: 17px;
+    color: #055A7F;
+    max-width: 143px;
 }
 
 .module-btn {
@@ -886,6 +918,20 @@ hr {
     text-align: center;
 }
 
+.questions-tips {
+	margin: 36px auto;
+    background-color: rgba(213, 213, 213, .3);
+    padding: 20px;
+    border-radius: 5px;
+    font-size: 22px;
+}
+
+.questions-tips img {
+	border-radius: 50%;
+    width: 100px;
+    margin: 5px 10px 5px 5px;
+}
+
 .choices {
 	display: inline-block;
     width: 40%;
@@ -898,16 +944,13 @@ hr {
     color: #FEFEC4;
     text-decoration: none;
     font-size: 1.25em;
-    transition: ease .5s;
 }
 
-.choices:hover, .selected-choice, .selected-choice:focus {
-	font-size: 2em;
+.choices:hover, .selected-choice
+, .selected-choice:focus, .choices:focus {
     text-decoration: none;
-    transition: ease .5s;
-    transform: scale(1);
-    margin: 10px 30px;
-    color: #FEFEC4;
+    background-color: #F3D94F;
+    color: #696969;
 }
 
 .selected-choice, .selected-choice:focus {
@@ -977,4 +1020,56 @@ hr {
 
 .progress {
 	margin-top: 15px;
+}
+
+.ordered-list-container{
+	min-height: 100px;
+	border: 1px solid;
+}
+
+/* ************************************** */
+/* Mandatory CSS required for ng-sortable */
+/* ************************************** */
+.as-sortable-item, .as-sortable-placeholder {
+    display: block;
+}
+
+.as-sortable-item {
+    -ms-touch-action: none;
+    touch-action: none;
+}
+
+.as-sortable-item-handle {
+	cursor: move;
+    width: 500px;
+    background-color: #DFC010;
+    border: 4px solid #F3D94F;
+    color: #FEFEC4;
+    margin: 10px auto;
+    padding: 20px;
+    border-radius: 5px;
+    font-size: 1.25em;
+}
+
+.as-sortable-placeholder {
+}
+
+.as-sortable-drag {
+    position: absolute;
+    pointer-events: none;
+    z-index: 9999;
+    text-align: center;
+}
+
+.as-sortable-hidden {
+    display: none !important;
+}
+
+.as-sortable-un-selectable {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }

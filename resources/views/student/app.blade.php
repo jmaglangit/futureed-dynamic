@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>FutureEd Online Education Platform</title>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 
     <!--[if IE]>
     <link rel="stylesheet" type="text/css" media="all" href="https://www.formstack.com/forms/css/3/ie.css?20140508" />
@@ -80,6 +81,7 @@
 
     {!! Html::script('//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js') !!}
     {!! Html::script('http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular.min.js') !!}
+    {!! Html::script('/js/ng-sortable.min.js')!!}
     
     {!! Html::script('/js/student/app.js') !!}
     {!! Html::script('/js/futureed_constants.js') !!}

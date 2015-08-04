@@ -173,7 +173,8 @@ class StudentServices {
 
 		if ($student_reference['avatar_id']) {
 			$avatar = $this->avatar->getAvatar($student_reference['avatar_id'])->toArray();
-			$avatar_url = $this->avatar->getAvatarUrl($avatar['avatar_image']);
+            $avatar_url = $this->avatar->getAvatarUrl($avatar['avatar_image']);
+			$avatar_thumbnail_url = $this->avatar->getAvatarThumbnailUrl($avatar['avatar_image']);
 			$avatar_url_background = $this->avatar->getAvatarUrl($avatar['background_image']);
 		}
 
@@ -198,7 +199,8 @@ class StudentServices {
 			, $student
 			, $user,
 			array('age' => $age,
-				'avatar' => $avatar_url,
+                'avatar' => $avatar_url,
+				'thumbnail' => $avatar_thumbnail_url,
 				'background' => $avatar_url_background,
 				'school' => $school,
 				'grade' => isset($grade) ? $grade['name'] : null,
