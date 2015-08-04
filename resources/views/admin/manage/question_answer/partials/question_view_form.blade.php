@@ -133,7 +133,7 @@
                     ) !!}
                 </div>
             </div>
-            <div class="form-group" ng-if="qa.q_details.question_type != 'MC' && qa.q_details.question_type">
+            <div class="form-group" ng-if="qa.q_details.question_type && qa.q_details.question_type != futureed.MULTIPLECHOICE && qa.q_details.question_type != futureed.ORDERING">
                 <label class="control-label col-xs-3">Answer <span class="required">*</span></label>
                 <div class="col-xs-5">
                     {!! Form::textarea('answer',''
@@ -143,11 +143,29 @@
                             , 'class' => 'form-control disabled-textarea'
                             , 'ng-disabled' => '!qa.edit'
                             , 'ng-class' => "{ 'required-field' : qa.fields['answer'] }"
-                            , 'rows' => 5
+                            , 'rows' => 3
                         )
                     ) !!}
                 </div>
             </div>
+
+            <div class="form-group" ng-if="qa.q_details.question_type == futureed.ORDERING  && qa.q_details.question_type">
+                <label class="control-label col-xs-3">Order <span class="required">*</span></label>
+                <div class="col-xs-5">
+                    {!! Form::textarea('question_order_text',''
+                        , array(
+                            'placeHolder' => 'Order'
+                            , 'ng-model' => 'qa.q_details.question_order_text'
+                            , 'class' => 'form-control disabled-textarea'
+                            , 'ng-disabled' => '!qa.edit'
+                            , 'ng-class' => "{ 'required-field' : qa.fields['question_order_text'] }"
+                            , 'rows' => 3
+                        )
+                    ) !!}
+                    <p class="help-block">Answer should be comma separated to indicate the order.</p>
+                </div>
+            </div>
+
         	<div class="form-group">
                 <label class="control-label col-xs-3">Points Earned <span class="required">*</span></label>
                 <div class="col-xs-5">

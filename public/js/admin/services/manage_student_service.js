@@ -71,5 +71,70 @@ function manageStudentService($http) {
 			, url 	: adminApiUrl + 'reset/student-module/' + id
 		});
 	}
+
+	manageStudentApi.getPoints = function(id) {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url 	: adminApiUrl + 'student-point?student_id=' + id
+		});
+	}
+
+	manageStudentApi.getBadges = function(id) {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url 	: adminApiUrl + 'badge/student?student_id=' + id
+		});
+	}
+
+	manageStudentApi.getPointDetail = function(id) {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url 	: adminApiUrl + 'student-point/' + id
+		});
+	}
+
+	manageStudentApi.getEvents = function(event) {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url 	: adminApiUrl + 'event?name=' + event
+		});
+	}
+
+	manageStudentApi.savePoint = function(data) {
+		return $http({
+			method 	: Constants.METHOD_PUT
+			, data 	: data	
+			, url 	: adminApiUrl + 'student-point/' + data.id
+		});
+	}
+
+	manageStudentApi.getBadgeDetail = function(id) {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url 	: adminApiUrl + 'badge/student/' + id
+		});
+	}
+
+	manageStudentApi.getAllBadges = function(name) {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url 	: adminApiUrl + 'badge/admin?name=' + name
+		});
+	}
+
+	manageStudentApi.saveBadge = function(data) {
+		return $http({
+			method 	: Constants.METHOD_PUT
+			, data 	: {badge_id : data.badge_id}	
+			, url 	: adminApiUrl + 'badge/student/' + data.id
+		});
+	}
+
+	manageStudentApi.deleteBadge = function(id) {
+		return $http({
+			method 	: Constants.METHOD_DELETE	
+			, url 	: adminApiUrl + 'badge/student/' + id
+		});
+	}
 	return manageStudentApi
 }

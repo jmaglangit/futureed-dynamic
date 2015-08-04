@@ -111,13 +111,16 @@
                     ) !!}
                 </div>
             </div>
-            <div class="btn-container" ng-if="false">
-                {!! Form::button('Edit Reward'
-                , array(
-                    'class' => 'btn btn-blue btn-medium pull-right'
-                    , 'ng-click' => 'student.save()'
-                )
-            ) !!}
+            <div class="form-group">
+                <div class="col-xs-3"></div>
+                <div class="col-xs-5">
+                    {!! Form::button('Edit Reward'
+                        , array(
+                            'class' => 'btn btn-blue'
+                            , 'ng-click' => "student.setActive('reward', student.record.id)"
+                        )
+                    ) !!}
+                </div>
             </div>
         </fieldset>
 

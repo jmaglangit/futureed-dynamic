@@ -30,6 +30,10 @@ class ModuleGroupController extends ApiController{
             $criteria['age_group'] = Input::get('age_group');
         }
 
+        if (Input::get('module_id')) {
+           $criteria['module_id'] = Input::get('module_id');
+        }
+
         $limit = (Input::get('limit')) ? Input::get('limit') : 0;
         $offset = (Input::get('offset')) ? Input::get('offset') : 0;
 

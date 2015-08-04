@@ -216,7 +216,7 @@ function StudentClassController($scope, $filter, $window, StudentClassService, S
 					self.updatePageCount(response.data);
 
 					angular.forEach(self.records, function(value, key) {
-						value.slug_name = formatSlug(value.name);
+						value.progress = (value.student_module.length) ? value.student_module[0].progress : Constants.FALSE;
 					});
 				}
 			}
@@ -248,5 +248,11 @@ function StudentClassController($scope, $filter, $window, StudentClassService, S
 			url += "/" + record.id;
 			$window.location.href = url;
 		}
+	}
+
+	self.updateBackground = function() {
+		angular.element('body.student').css({
+			'background-image' : 'url("/images/class-student/mountain-full-bg.png")'
+		});
 	}
 }

@@ -203,6 +203,20 @@
 							, 'middleware' => 'admin'
 							, 'uses' => $manage_student_controller . '@delete_student_form'
 						]);
+
+					Routes::get('/reward',
+						[
+							'as' => 'admin.manage.student.partials.reward'
+							, 'middleware' => 'admin'
+							, 'uses' => $manage_student_controller . '@reward'
+						]);
+
+					Routes::get('/edit_reward',
+						[
+							'as' => 'admin.manage.student.partials.edit_reward'
+							, 'middleware' => 'admin'
+							, 'uses' => $manage_student_controller . '@edit_reward'
+						]);
 				});
 			});
 

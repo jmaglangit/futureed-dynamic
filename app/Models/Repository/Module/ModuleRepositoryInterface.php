@@ -13,4 +13,6 @@ interface ModuleRepositoryInterface {
 
 	public function deleteModule($id);
 
+	public function countSubjectModule($subject_id,$grade_id);
+
 }

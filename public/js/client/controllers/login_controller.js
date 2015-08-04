@@ -178,31 +178,36 @@ function LoginController($scope, apiService, clientLoginApiService, clientProfil
 	function selectRole(role) {
 		$scope.$parent.errors = Constants.FALSE;
 
-	    self.principal = Constants.FALSE;
-	    self.parent = Constants.FALSE;
-	    self.reg = {} ;
+		self.principal = Constants.FALSE;
+		self.parent = Constants.FALSE;
+		self.reg = {} ;
 
-	    switch(role) {
-	      case Constants.PRINCIPAL :
-	        self.required = Constants.FALSE;
-	        self.role_click = Constants.TRUE;
-	        self.principal = Constants.TRUE;
-	        self.reg.client_role = Constants.PRINCIPAL;
-	        break;
+		$scope.$parent.e_error = Constants.FALSE;
+		$scope.$parent.e_success = Constants.FALSE;
+		$scope.$parent.u_error = Constants.FALSE;
+		$scope.$parent.u_success = Constants.FALSE;
 
-	      case Constants.PARENT    :
-	      	self.required = Constants.TRUE;
-	        self.role_click = Constants.TRUE;
-	        self.parent = Constants.TRUE;
-	        self.reg.client_role = Constants.PARENT;
-	        break;
+		switch(role) {
+			case Constants.PRINCIPAL :
+				self.required = Constants.FALSE;
+				self.role_click = Constants.TRUE;
+				self.principal = Constants.TRUE;
+				self.reg.client_role = Constants.PRINCIPAL;
+				break;
 
-	      default:
-	      	self.reg = {};
-	        break;
-	    }
+			case Constants.PARENT    :
+				self.required = Constants.TRUE;
+				self.role_click = Constants.TRUE;
+				self.parent = Constants.TRUE;
+				self.reg.client_role = Constants.PARENT;
+				break;
 
-	    $("#registration_form input, #registration_form select").removeClass("required-field");
+			default:
+				self.reg = {};
+				break;
+		}
+
+		$("#registration_form input, #registration_form select").removeClass("required-field");
 	}
 
 	function registerClient() {

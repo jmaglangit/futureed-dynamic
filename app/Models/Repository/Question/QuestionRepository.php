@@ -176,10 +176,11 @@ class QuestionRepository implements QuestionRepositoryInterface{
 	 * Get questions id and sequence number order sequence.
 	 * @param $module_id
 	 */
-	public function getQuestionSequenceNos($module_id){
+	public function getQuestionSequenceNos($module_id,$difficulty){
 
 		return Question::select('id','seq_no')
 			->moduleId($module_id)
+			->difficulty($difficulty)
 			->orderBySeqNo()
 			->get();
 	}
@@ -201,9 +202,11 @@ class QuestionRepository implements QuestionRepositoryInterface{
 	 * Get last sequence number.
 	 * @param $module_id
 	 */
-	public function getLastSequence($module_id){
+	public function getLastSequence($module_id,$difficulty){
 
-		return Question::moduleId($module_id)
+		$question = new Question();
+		return $question->moduleId($module_id)
+			->difficulty($difficulty)
 			->orderBySeqNoDesc()
 			->pluck('seq_no');
 	}

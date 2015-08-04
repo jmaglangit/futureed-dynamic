@@ -22,10 +22,46 @@ class StudentModule extends Model {
         'wrong_counter' => 0,'correct_counter'=> 0, 'running_points'=> 0,'points_earned'=> 0,
         'last_answered_question_id'=> 0,'total_correct_answer' => 0,'current_difficulty_level'=> 1];
 
-	//Relationship
+
+	//-------------relationships
+	public function module() {
+		return $this->belongsTo('FutureEd\Models\Core\Module');
+	}
 
 	public function question(){
 
 		return $this->belongsTo('FutureEd\Models\Core\Question','last_answered_question_id');
 	}
+
+
+	//-------------scope
+	public function scopeStudentId($query, $student_id){
+
+		return $query->where('student_id', '=',$student_id);
+	}
+
+	public function scopeProgress($query, $progress){
+
+		return $query->where('progress', '=',$progress);
+	}
+
+	public function scopeSubjectId($query, $subject_id){
+
+		return $query->whereHas('module', function($query) use ($subject_id){
+
+				$query->where('subject_id',$subject_id);
+		});
+
+	}
+
+	public function scopeGradeId($query, $grade_id){
+
+		return $query->whereHas('module', function($query) use ($grade_id){
+
+			$query->where('grade_id',$grade_id);
+		});
+
+	}
+
+
 }
