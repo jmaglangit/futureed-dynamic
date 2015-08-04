@@ -13,4 +13,6 @@ interface ModuleRepositoryInterface {
 
 	public function deleteModule($id);
 
+	public function getPointsToFinish($module_id);
+
 }
