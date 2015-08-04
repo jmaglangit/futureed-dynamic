@@ -69,6 +69,10 @@ interface QuestionRepositoryInterface {
 
 	public function getQuestionsByModule($module_id);
 
+	public function getQuestionByPointsToFinish($module_id, $points_to_finish);
+
+	public function getQuestionFirst($module_id);
+
 
 
 }
