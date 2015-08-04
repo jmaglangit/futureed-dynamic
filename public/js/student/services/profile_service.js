@@ -25,5 +25,12 @@ function profileService($http) {
 		});
 	}
 
+	api.getPoints = function(id) {
+		return $http({
+			  method 	: Constants.METHOD_GET
+			, url	: apiUrl + 'student-point?student_id=' + id
+		});
+	}
+
 	return api;
 }

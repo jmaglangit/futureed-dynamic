@@ -61,6 +61,7 @@ function ProfileController($scope, apiService, profileService) {
 
 	      case Constants.REWARDS  		:
 	        self.active_rewards = Constants.TRUE;
+	        self.getPoints();
 	        self.getBadges();
 	        break;
 
@@ -544,6 +545,25 @@ function ProfileController($scope, apiService, profileService) {
 	              angular.forEach(self.badges,function(value,key){
 	              	value.badge_path = '/images/badges/' + value.badges.badge_image;
 	              });
+	            } 
+	          }
+	          $scope.ui_unblock();
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.getPoints = function() {
+		var id = $scope.user.id;
+
+		$scope.ui_block();
+		profileService.getPoints(id).success(function(response){
+			if(response.status == Constants.STATUS_OK) {
+	            if(response.errors) {
+	              self.errors = $scope.errorHandler(response.errors);
+	            } else if(response.data){
+	              self.points = response.data.records;
 	            } 
 	          }
 	          $scope.ui_unblock();
