@@ -583,7 +583,6 @@ function StudentModuleController($scope, $window, $interval, apiService, Student
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					self.avatar_pose = response.data;
-					console.log(response.data);
 				}
 			}
 		}).error(function(response) {
@@ -598,7 +597,6 @@ function StudentModuleController($scope, $window, $interval, apiService, Student
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					self.avatar_quotes = response.data;
-					console.log(response.data);
 				}
 			}
 		}).error(function(response) {
@@ -808,9 +806,6 @@ function StudentModuleController($scope, $window, $interval, apiService, Student
 				} else if(response.data) {
 					self.search.difficulty = response.data.current_difficulty_level;
 					self.nextQuestion();
-					// console.log($scope.user);
-					// self.question = {};
-					// self.question.answered = Constants.TRUE;
 				}
 			}
 		}).error(function(response) {
@@ -843,15 +838,13 @@ function StudentModuleController($scope, $window, $interval, apiService, Student
 
 	self.dragControlListeners = {
 	    accept: function (sourceItemHandleScope, destSortableScope) {
-	    	console.log("accept");
 	    	return true;
 	    }
 	    , itemMoved: function (event) {
-	    	console.log("itemMoved");
+	    	
 	    }
 	    , orderChanged: function(event) {
-	    	console.log("orderChanged");
-	    	console.log(self.questions.answer_text);
+	    	
 	    }
 	    , containment: '#board'//optional param.
 	};
