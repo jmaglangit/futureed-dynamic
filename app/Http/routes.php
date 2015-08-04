@@ -24,6 +24,7 @@ Routes::group(['prefix' => 'api/v1'], function()
     include('Routes/Api/AgeGroup.php');
     include('Routes/Api/Announcement.php');
     include('Routes/Api/Assess.php');
+    include('Routes/Api/AvatarPose.php');
     include('Routes/Api/Classroom.php');
     include('Routes/Api/ClassStudent.php');
     include('Routes/Api/Client.php');
@@ -46,6 +47,7 @@ Routes::group(['prefix' => 'api/v1'], function()
     include('Routes/Api/Payment.php');
     include('Routes/Api/Question.php');
     include('Routes/Api/QuestionAnswer.php');
+    include('Routes/Api/Quote.php');
     include('Routes/Api/School.php');
     include('Routes/Api/Student.php');
     include('Routes/Api/StudentBadge.php');
