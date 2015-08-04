@@ -14,6 +14,7 @@ use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use FutureEd\Models\Repository\StudentModule\StudentModuleRepositoryInterface;
 use FutureEd\Models\Repository\StudentModuleAnswer\StudentModuleAnswerRepositoryInterface;
 use FutureEd\Models\Repository\TeachingContent\TeachingContentRepositoryInterface;
+use FutureEd\Services\StudentModuleServices;
 use Illuminate\Support\Facades\Input;
 
 class StudentModuleAnswerController extends ApiController{
@@ -29,32 +30,38 @@ class StudentModuleAnswerController extends ApiController{
     protected $student_module_answer;
 	protected $module;
 	protected $teaching_content;
+	protected $student_module_services;
 
 
-    public function __construct(AvatarPoseRepositoryInterface $avatar_pose,
-                                AvatarQuoteRepositoryInterface $avatar_quotes,
-                                AvatarWikiRepositoryInterface $avatar_wiki,
-                                QuestionRepositoryInterface $question,
-                                QuestionAnswerRepositoryInterface $question_answer,
-                                QuoteRepositoryInterface $quote,
-                                StudentModuleRepositoryInterface $student_module,
-                                StudentModuleAnswerRepositoryInterface $student_module_answer,
-                                StudentRepositoryInterface $student,
-								ModuleContentRepositoryInterface $moduleContentRepositoryInterface,
-								TeachingContentRepositoryInterface $teachingContentRepositoryInterface){
+	public function __construct(
+		AvatarPoseRepositoryInterface $avatar_pose,
+		AvatarQuoteRepositoryInterface $avatar_quotes,
+		AvatarWikiRepositoryInterface $avatar_wiki,
+		QuestionRepositoryInterface $question,
+		QuestionAnswerRepositoryInterface $question_answer,
+		QuoteRepositoryInterface $quote,
+		StudentModuleRepositoryInterface $student_module,
+		StudentModuleAnswerRepositoryInterface $student_module_answer,
+		StudentRepositoryInterface $student,
+		ModuleContentRepositoryInterface $moduleContentRepositoryInterface,
+		TeachingContentRepositoryInterface $teachingContentRepositoryInterface,
+		StudentModuleServices $studentModuleServices
+	)
+	{
 
-        $this->avatar_pose = $avatar_pose;
-        $this->avatar_quotes = $avatar_quotes;
-        $this->avatar_wiki = $avatar_wiki;
-        $this->question = $question;
-        $this->question_answer = $question_answer;
-        $this->quote = $quote;
-        $this->student = $student;
-        $this->student_module = $student_module;
-        $this->student_module_answer = $student_module_answer;
+		$this->avatar_pose = $avatar_pose;
+		$this->avatar_quotes = $avatar_quotes;
+		$this->avatar_wiki = $avatar_wiki;
+		$this->question = $question;
+		$this->question_answer = $question_answer;
+		$this->quote = $quote;
+		$this->student = $student;
+		$this->student_module = $student_module;
+		$this->student_module_answer = $student_module_answer;
 		$this->module = $moduleContentRepositoryInterface;
 		$this->teaching_content = $teachingContentRepositoryInterface;
-    }
+		$this->student_module_services = $studentModuleServices;
+	}
 
 //+-------------------+-------------------------+------+-----+---------------------+----------------+
 //| Field             | Type                    | Null | Key | Default             | Extra          |
@@ -204,6 +211,8 @@ class StudentModuleAnswerController extends ApiController{
 		$return = $this->student_module->updateStudentModule($student_module->id,$student_module);
 
 		//next question sets
+		$return->next_question = $this->student_module_services->getNextQuestion($data['student_module_id'],$data['module_id']);
+
 
 		return $this->respondWithData($return);
 
