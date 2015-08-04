@@ -51,4 +51,10 @@ interface QuestionAnswerRepositoryInterface {
      * @return object
      */
     public function getCorrectAnswer($question_id,$answer_id);
+
+	public function getQuestionCorrectAnswer($id);
+
+	public function getQuestionPointEquivalent($id);
+
+
 }

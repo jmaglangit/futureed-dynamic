@@ -239,5 +239,66 @@ class QuestionRepository implements QuestionRepositoryInterface{
 	}
 
 
+	/**
+	 * Get question type.
+	 * @param $id
+	 * @return mixed
+	 */
+	public function getQuestionType($id){
+
+		return Question::whereId($id)->pluck('question_type');
+	}
+
+	/**
+	 * Get question answer.
+	 * @param $id
+	 * @return mixed
+	 */
+	public function getQuestionAnswer($id){
+
+		return Question::whereId($id)->pluck('answer');
+	}
+
+	/**
+	 * Get points earned if correct.
+	 * @param $id
+	 */
+	public function getQuestionPointsEarned($id){
+		return Question::whereId($id)->pluck('points_earned');
+	}
+
+	/**
+	 * Get questions by module.
+	 * @param $module_id
+	 */
+	public function getQuestionsByModule($module_id){
+
+		return Question::whereModuleId($module_id)
+			->orderBySeqNo()->get();
+	}
+
+	/**
+	 * Get questions by points to finish.
+	 * @param $module_id
+	 * @param $points_to_finish
+	 */
+	public function getQuestionByPointsToFinish($module_id, $points_to_finish){
+
+		return Question::whereModuleId($module_id)
+			->orderBySeqNo()->take($points_to_finish)->get();
+	}
+
+	/**
+	 * GEt first question.
+	 * @param $module_id
+	 * @return mixed
+	 */
+	public function getQuestionFirst($module_id){
+
+		return Question::whereModuleId($module_id)
+			->orderBySeqNo()->take(1)->get();
+	}
+
+
 
 }

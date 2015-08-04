@@ -15,6 +15,40 @@ class StudentModuleAnswer extends Model {
 
     protected $fillable = ['student_module_id','module_id','seq_no','question_id','answer_id','answer_text','points_earned','date_start','date_end','total_time','answer_status'];
 
-    protected $attributes = ['total_time' => 0,'points_earned' => 0,'created_by' => 1,'updated_by' => 1];
+    protected $attributes = [
+		'total_time' => 0,
+		'points_earned' => 0,
+		'created_by' => 1,
+		'updated_by' => 1
+	];
+
+	//Relationships
+
+	public function module(){
+
+		return $this->belongsTo('FutureEd\Models\Core\Module');
+	}
+
+	public function question(){
+
+		return $this->belongsTo('FutureEd\Models\Core\Question');
+	}
+
+	//Scopes
+
+	public function scopeStudentModuleId($query, $student_module_id){
+
+		return $query->where('student_module_id',$student_module_id);
+	}
+
+	public function scopeModuleId($query, $module_id){
+
+		return $query->where('module_id',$module_id);
+	}
+
+	public function scopeOrderBySeqNo($query){
+
+		return $query->orderBy('seq_no');
+	}
 
 }
