@@ -42,6 +42,7 @@ class DatabaseSeeder extends Seeder {
 		$this->call('BadgesTableSeeder');
 		$this->call('PointLevelTableSeeder');
 		$this->call('EventTableSeeder');
+		$this->call('ContentTableSeeder');
     }
 
 }
