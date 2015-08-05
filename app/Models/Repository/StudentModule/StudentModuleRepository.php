@@ -91,7 +91,15 @@ class StudentModuleRepository implements StudentModuleRepositoryInterface
 		$student_module = $student_module->gradeId($criteria['grade_id']);
 		$student_module = $student_module->with('module');
 		return $student_module->count();
+	}
 
+	/**
+	 * Get Student Module Status.
+	 * @param $id
+	 */
+	public function getStudentModuleStatus($id){
+
+		return StudentModule::find($id)->pluck('module_status');
 
 	}
 
