@@ -24,6 +24,14 @@ function StudentTipsService($http){
 		});
 	}
 
+	service.addTip = function(data) {
+		return $http({
+			method 	: Constants.METHOD_POST
+			, data 	: data
+			, url 	: serviceUrl + 'tip/question-content'
+		})
+	}
+
 	service.detail = function(id) {
 		return $http({
 			method 	: Constants.METHOD_GET

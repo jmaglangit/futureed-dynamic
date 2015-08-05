@@ -1048,6 +1048,8 @@ hr {
 
 .tips-container {
 	margin-top: 50px;
+	overflow-y: auto;
+	height: 370px;
 }
 
 .view-tips-container {
