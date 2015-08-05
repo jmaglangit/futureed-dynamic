@@ -19,8 +19,29 @@ class StudentModuleAnswer extends Model {
 		'total_time' => 0,
 		'points_earned' => 0,
 		'created_by' => 1,
-		'updated_by' => 1
+		'updated_by' => 1,
 	];
+
+	//Mutators
+	public function setAnswerIdAttribute($value){
+
+		if($value == ''){
+
+			$this->attributes['answer_id'] = 0;
+		} else {
+
+			$this->attributes['answer_id'] = $value;
+		}
+	}
+
+	public function estAnswerTextAttribute($value){
+
+		if($value == ''){
+			$this->attributes['answer_text'] = 'NA';
+		} else {
+			$this->attributes['answer_text'] = $value;
+		}
+	}
 
 	//Relationships
 
