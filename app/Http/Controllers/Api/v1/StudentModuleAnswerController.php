@@ -167,13 +167,19 @@ class StudentModuleAnswerController extends ApiController{
 		//wrong counter
 		if($student_answer->answer_status == config('futureed.answer_status_wrong')){
 
-			$student_module->wrong_counter++;
-
-			if($student_module->wrong_counter == 3){
-
-				$student_module->running_points--;
+			//when 10 wrong answer reset to 1. Front-end detects if 10 wrong to go back to video.
+			if($student_module->wrong_counter == 10){
 				$student_module->wrong_counter = 0;
 			}
+
+			//increment wrong counter.
+			$student_module->wrong_counter++;
+
+			//starting 3 consecutive wrongs to minus 1 to correct points.
+			if(($student_module->wrong_counter % 3) == 0){
+				$student_module->running_points--;;
+			}
+
 		}
 
 		//Date update
