@@ -378,27 +378,6 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		})
 	}
 
-	self.setCurrentActiveTip = function(active, id) {
-		self.errors = Constants.FALSE;
-		self.success = Constants.FALSE;
-
-		self.active_current_tip_view = Constants.FALSE;
-		self.active_current_tip_list = Constants.FALSE;
-		self.active_all_tip_view = Constants.FALSE;
-		self.active_all_tip_list = Constants.FALSE;
-
-		switch (active) {
-			case Constants.ACTIVE_VIEW :
-				self.active_current_tip_view = Constants.TRUE;
-				self.getTipDetails(id);
-				break;
-			default :
-				self.active_current_tip_list = Constants.TRUE;
-				self.tipList(3, Constants.CURRENT);
-				break;
-		}
-	}
-
 	self.setAllActiveTip = function(active, id) {
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
