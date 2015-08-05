@@ -37,6 +37,7 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 
 		switch(active) {
 			case Constants.ACTIVE_VIEW:
+				self.fields = [];
 				self.success = Constants.FALSE;
 				self.active_view = Constants.TRUE;
 				break;
@@ -61,7 +62,7 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 				self.active_list = Constants.TRUE;
 				break;
 		}
-
+		
 		$("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 
@@ -162,12 +163,15 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 		self.success = Constants.FALSE;
 		self.invoice.invoice_date = $filter('date')(new Date(), 'yyyyMMdd');
 		self.invoice.invoice_id = self.invoice.id;
-
+		
 		$scope.ui_block();
 		managePrincipalPaymentService.updatePayment(self.invoice).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
+					angular.forEach(response.errors, function(value, key) {
+						self.fields[value.field] = Constants.TRUE;
+					});
 					$scope.ui_unblock();
 				} else if(response.data) {
 					if(save) {
@@ -373,7 +377,7 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 	self.selectSubscription = function() {
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
-
+		self.fields = [];
 		self.setPrice();
 	}
 
