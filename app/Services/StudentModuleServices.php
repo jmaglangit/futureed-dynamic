@@ -33,10 +33,13 @@ class StudentModuleServices {
 	public function getModuleQuestions($module_id){
 
 		//get points to finish.
-		$points_to_finish = $this->module->getPointsToFinish($module_id);
+		//$points_to_finish = $this->module->getPointsToFinish($module_id);
 
 		//get module questions based on points to finish.
-		$questions =  $this->question->getQuestionByPointsToFinish($module_id,$points_to_finish);
+		//$questions =  $this->question->getQuestionByPointsToFinish($module_id,$points_to_finish);
+
+		//get all module questions.
+		$questions = $this->question->getQuestionsByModule($module_id);
 
 		//parse question [difficulty][question]
 		$question_set = [];
@@ -87,14 +90,13 @@ class StudentModuleServices {
 
 				$module_questions[$answer->question->difficulty][$answer->question_id] = $answer->answer_status;
 
-				$last_answered = $answer->question_id;
+//				$last_answered = $answer->question_id;
 			}
-
 
 			//level is done and has wrong.. set wrong as next.
 			for($i = 1 ; $i <= count($module_questions); $i++){
 
-				$next_question = $this->levelQuestion($module_questions[$i]);
+				$next_question = $this->levelQuestion($module_questions[$i],$i);
 
 				if($next_question <> false){
 
@@ -118,7 +120,27 @@ class StudentModuleServices {
 
 
 	//parse each level
-	public function levelQuestion($data){
+	public function levelQuestion($data, $difficulty){
+
+		//get all correct answers count
+		if($difficulty == 1 || $difficulty == 3	){
+
+			//check number of correct answers.
+			$counts = array_count_values($data);
+
+			$correct_limit = 4;
+
+
+			if(array_key_exists(config('futureed.answer_status_correct'), $counts)){
+
+				if($counts['Correct'] >= $correct_limit){
+
+					return false;
+				}
+			}
+
+
+		}
 
 		//get first 0 question
 		$zero = array_search(0,$data, true);
@@ -133,6 +155,8 @@ class StudentModuleServices {
 		$key = array_search(config('futureed.answer_status_wrong'),$data);
 
 		return $key;
+
+
 
 	}
 
