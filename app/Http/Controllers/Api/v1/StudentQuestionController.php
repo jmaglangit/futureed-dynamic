@@ -69,7 +69,6 @@ class StudentQuestionController extends ApiController {
 		foreach($question['records'] as $k => $v){
 
 			unset($question['records'][$k]['answer']);
-			unset($question['records'][$k]['question_answers']);
 		}
 
 		return $this->respondWithData($question);
