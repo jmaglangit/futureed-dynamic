@@ -73,6 +73,7 @@ function TipsController($scope, apiService, StudentTipsService, TableService, Se
 		self.records = [];
 		self.errors = Constants.FALSE;
 		self.search.class_id = ($scope.user.class) ? $scope.user.class.class_id : Constants.EMPTY_STR;
+
 		self.table.loading = Constants.TRUE;
 
 		$scope.ui_block();
@@ -84,6 +85,12 @@ function TipsController($scope, apiService, StudentTipsService, TableService, Se
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					self.records = response.data.records;
+
+					angular.forEach(self.records, function(value, key) {
+						value.created_at = moment(value.created_at).startOf("minute").fromNow();
+						value.stars = new Array(5);
+					});
+
 					self.updatePageCount(response.data);
 				}
 			}
@@ -158,5 +165,45 @@ function TipsController($scope, apiService, StudentTipsService, TableService, Se
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
+	}
+
+	/**
+	* Events inside a module
+	*/
+	self.toggleTips = function(module, question) {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		self.show_content_tips = !self.show_content_tips;
+		self.module = module;
+		self.question = question;
+
+		self.setActive();
+		self.setTipTabActive(Constants.CURRENT);
+	}
+
+	self.setTipTabActive = function(active) {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		switch(active) {
+			case Constants.ALL:
+				self.search.link_id = Constants.EMPTY_STR;
+				self.search.link_type = (self.module.student_module[0].last_answered_question_id) ? Constants.QUESTION : Constants.CONTENT;
+				self.search.module_id = self.module.id;
+
+				self.listTips();
+				break;
+
+			case Constants.CURRENT:
+				self.search.link_id = self.question.id;
+				self.search.link_type = (self.module.student_module[0].last_answered_question_id) ? Constants.QUESTION : Constants.CONTENT;
+				self.search.module_id = self.module.id;
+
+				self.listTips();
+			default:
+				
+				break;
+		}
 	}
 }

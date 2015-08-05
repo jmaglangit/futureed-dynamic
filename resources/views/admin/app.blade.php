@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>FutureEd Online Education Platform</title>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 
     <!--[if IE]>
     <link rel="stylesheet" type="text/css" media="all" href="https://www.formstack.com/forms/css/3/ie.css?20140508" />

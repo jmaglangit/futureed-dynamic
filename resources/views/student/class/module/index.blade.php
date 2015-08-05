@@ -45,42 +45,38 @@
 		<!-- End of Main Container -->
 
 		<div class="row" ng-if="!mod.no_record">
-			<div class="drawer col-xs-6">
-				<div class="button" id="button">
-					<img ng-click="mod.toggleBtn()" class="pointer" ng-class="{'flip-270':mod.toggle_bottom,'flip-90':!mod.toggle_bottom, }" src="/images/class-student/btn-slide.png">
-				</div>
-				<div class="drawer-appear">
-					<div class="drawer-inside" ng-class="{'openup' : mod.toggle_bottom}">
-						<div class="drawer-header">
-							<div class="row">
-								<div class="margin-top-5">
-									<img class="pull-left" src="/images/class-student/icon-tip_principal.png">
-									<h3 class="pull-left">Give Tips</h3>	
-								</div>
-							</div>
-						</div>
-						<div template-directive template-url="{!! route('student.class.module.partials.add_tip') !!}"></div>
-						<div template-directive template-url="{!! route('student.class.module.partials.list_tips') !!}"></div>
+			<div class="drawer col-xs-6" ng-controller="TipsController as tips">
+				<div class="drawer-inside" ng-class="{ 'openup' : tips.show_content_tips }">
+					<div class="drawer-header pointer" ng-click="tips.toggleTips(mod.record, mod.questions)">
+						<img class="pull-left" ng-src="/images/class-student/icon-tip_principal.png">
+
+						<p class="pull-left">Give Tips</p>	
+
+						<img class="drawer-button" 
+							ng-class="{ 'flip-270' : tips.show_content_tips, 'flip-90' : !tips.show_content_tips, }" 
+							ng-src="/images/class-student/btn-slide.png">
 					</div>
+
+					<div template-directive template-url="{!! route('student.class.module.partials.add_tip') !!}"></div>
+
+					<div template-directive template-url="{!! route('student.class.module.partials.list_tips') !!}"></div>
+
+					<div template-directive template-url="{!! route('student.class.module.partials.view_tip') !!}"></div>
 				</div>
 			</div>
 			<div class="drawer-help col-xs-6">
-				<div class="button" id="button">
-					<img ng-click="mod.toggleBtnHelp()" class="pointer" ng-class="{'flip-270':mod.toggle_help_bottom,'flip-90':!mod.toggle_help_bottom, }" src="/images/class-student/btn-slide.png">
-				</div>
-				<div class="drawer-appear">
-					<div class="drawer-inside" ng-class="{'openup' : mod.toggle_help_bottom}">
-						<div class="drawer-header">
-							<div class="row">
-								<div class="margin-top-5">
-									<img class="pull-left" src="/images/class-student/icon-tip_principal.png">
-									<h3 class="pull-left">Help Request</h3>	
-								</div>
-							</div>
-						</div>
-						<div template-directive template-url="{!! route('student.class.module.partials.add_help') !!}"></div>
-						<div template-directive template-url="{!! route('student.class.module.partials.list_help') !!}"></div>
+				<div class="drawer-inside" ng-class="{'openup' : mod.toggle_help_bottom}">
+					<div class="drawer-header pointer" ng-click="mod.toggleBtnHelp()">
+						<img class="pull-left" src="/images/class-student/icon-tip_principal.png">
+						<p class="pull-left">Help Request</p>	
+
+						<img class="drawer-button" 
+							ng-class="{'flip-270':mod.toggle_help_bottom,'flip-90':!mod.toggle_help_bottom, }" src="/images/class-student/btn-slide.png">
 					</div>
+					
+					<div template-directive template-url="{!! route('student.class.module.partials.add_help') !!}"></div>
+					
+					<div template-directive template-url="{!! route('student.class.module.partials.list_help') !!}"></div>
 				</div>
 			</div>
 		</div>
@@ -91,6 +87,9 @@
 @stop
 
 @section('scripts')
+	{!! Html::script('/js/student/controllers/student_tips_controller.js')!!}
+	{!! Html::script('/js/student/services/student_tips_service.js')!!}
+
 	{!! Html::script('/js/student/controllers/student_module_controller.js')!!}
 	{!! Html::script('/js/student/services/student_module_service.js')!!}
 	{!! Html::script('/js/student/constants/student_module_constant.js')!!}

@@ -22,12 +22,6 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		self.current_view = view;
 	}
 
-	self.setTipTabActive = function(view) {
-		self.errors = Constants.FALSE;
-		self.success = Constants.FALSE;
-		self.current_tips_view = view;
-	}
-
 	self.toggleBtn = function() {
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
@@ -372,6 +366,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 					angular.forEach(self.tip_records, function(value, key) {
 						value.created_at = moment(value.created_at).startOf("minute").fromNow();
+						value.stars = new Array(5);
 					});
 					self.show_btn = (response.data.total >= 4 && flag != 1) ? self.show_btn = Constants.TRUE:self.show_btn = Constants.FALSE;
 				}

@@ -25,84 +25,70 @@ class ClassModuleController extends Controller {
 	*Display Add Help
 	*/
 	public function add_help() {
-		return view('student.class.module.partials.add_help');
+		return view('student.class.module.partials.help_request.add_help');
 	}
 
 	/**
 	*Display List Help
 	*/
 	public function list_help() {
-		return view('student.class.module.partials.list_help');
+		return view('student.class.module.partials.help_request.list_help');
 	}
 
 	/**
 	*Display Current Help
 	*/
 	public function current_help() {
-		return view('student.class.module.partials.current_help');
+		return view('student.class.module.partials.help_request.current_help');
 	}
 
 	/**
 	*Display Current View Help
 	*/
 	public function current_view_help() {
-		return view('student.class.module.partials.current_view_help');
+		return view('student.class.module.partials.help_request.current_view_help');
 	}
 
 	/**
 	*Display Your Help
 	*/
 	public function list_your_help() {
-		return view('student.class.module.partials.list_your_help');
+		return view('student.class.module.partials.help_request.list_your_help');
 	}
 
 	/**
 	*Display Own Help
 	*/
 	public function view_your_help() {
-		return view('student.class.module.partials.view_your_help');
-	}
-
-	/**
-	*Display Add Tip
-	*/
-	public function add_tip() {
-		return view('student.class.module.partials.add_tip');
-	}
-
-	/**
-	*Display List Tip
-	*/
-	public function list_tips() {
-		return view('student.class.module.partials.list_tips');
+		return view('student.class.module.partials.help_request.view_your_help');
 	}
 
 	/**
 	*Display List Current Tip
 	*/
 	public function list_current_tips() {
-		return view('student.class.module.partials.list_current_tips');
+		return view('student.class.module.partials.tips.list_current_tips');
 	}
 
 	/**
 	*Display List All Tip
 	*/
 	public function list_all_tips() {
-		return view('student.class.module.partials.list_all_tips');
+		return view('student.class.module.partials.tips.list_all_tips');
 	}
 
 	/**
 	*Display View Current Tip
 	*/
 	public function view_current_tips() {
-		return view('student.class.module.partials.view_current_tips');
+		return view('student.class.module.partials.tips.view_current_tips');
 	}
 
 	/**
 	*Display View All Tip
 	*/
 	public function view_all_tips() {
-		return view('student.class.module.partials.view_all_tips');
+		return view('student.class.module.partials.tips.view_all_tips');
 	}
 
 	public function contents() {
