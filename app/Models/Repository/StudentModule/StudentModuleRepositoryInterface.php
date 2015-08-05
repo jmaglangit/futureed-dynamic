@@ -14,4 +14,6 @@ interface StudentModuleRepositoryInterface
 
 	public function getStudentModuleStatus($id);
 
+	public function updateStudentActivity($id,$data);
+
 }

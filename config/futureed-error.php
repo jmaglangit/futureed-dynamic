@@ -142,7 +142,9 @@ return [
 
 		// Custom country messages.
 		2603 => 'The country field is required.',
-		2604 => 'The country is invalid'
+		2604 => 'The country is invalid',
+
+		7000 => 'Oops! Something went wrong.',
 
 	],
 ];

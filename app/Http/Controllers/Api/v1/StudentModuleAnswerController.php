@@ -221,7 +221,8 @@ class StudentModuleAnswerController extends ApiController{
 		}
 
 		//progress correct_counter/ points_to_finish
-		$student_module->progress = ($student_module->running_points /$points_to_finish) * 100 ;
+		$progress = ($student_module->running_points /$points_to_finish) * 100 ;
+		$student_module->progress = ($progress < 0 )? 0 : $progress;
 
 		$return = $this->student_module->updateStudentModule($student_module->id,$student_module);
 
