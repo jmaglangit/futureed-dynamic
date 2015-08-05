@@ -88,7 +88,7 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 		$("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 
-	self.searchFnc = function() {
+	self.searchFnc = function(event) {
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
 

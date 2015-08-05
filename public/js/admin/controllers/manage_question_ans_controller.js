@@ -116,6 +116,7 @@ function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService,
 
     self.searchFnc = function(event) {
         self.errors = Constants.FALSE;
+        self.tableDefaults();
         self.list();
         
         event = getEvent(event);

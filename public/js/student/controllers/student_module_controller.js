@@ -1,9 +1,9 @@
 angular.module('futureed.controllers')
 	.controller('StudentModuleController', StudentModuleController);
 
-StudentModuleController.$inject = ['$scope', '$window', '$interval', 'apiService', 'StudentModuleService', 'SearchService', 'TableService'];
+StudentModuleController.$inject = ['$scope', '$window', '$interval', '$filter', 'apiService', 'StudentModuleService', 'SearchService', 'TableService'];
 
-function StudentModuleController($scope, $window, $interval, apiService, StudentModuleService, SearchService, TableService) {
+function StudentModuleController($scope, $window, $interval, $filter, apiService, StudentModuleService, SearchService, TableService) {
 	var self = this;
 
 	self.list = [];
@@ -797,7 +797,9 @@ function StudentModuleController($scope, $window, $interval, apiService, Student
 		answer.answer_id = self.questions.answer_id;
 		answer.student_id = $scope.user.id;
 		answer.total_time = self.total_time;
-		answer.answer_text = self.questions.answer_text;
+		answer.date_start = $filter('date')(new Date() - (answer.total_time * 1000), 'yyyyMMdd');
+		answer.date_end = $filter('date')(new Date(), 'yyyyMMdd');
+		answer.answer_text = (angular.equals(self.questions.question_type, Constants.ORDERING)) ? self.questions.answer_text.join(",") : self.questions.answer_text;		
 
 		StudentModuleService.answerQuestion(answer).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
