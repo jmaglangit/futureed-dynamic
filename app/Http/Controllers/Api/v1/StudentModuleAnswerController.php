@@ -218,8 +218,10 @@ class StudentModuleAnswerController extends ApiController{
 		} else {
 
 			$student_module->module_status = config('futureed.module_status_ongoing');
-
 		}
+
+		//progress correct_counter/ points_to_finish
+		$student_module->progress = ($student_module->running_points /$points_to_finish) * 100 ;
 
 		$return = $this->student_module->updateStudentModule($student_module->id,$student_module);
 
