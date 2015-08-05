@@ -77,7 +77,9 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 	}
 
 	self.searchFnc = function(event) {
+		self.tableDefaults();
 		self.listPayments();
+		
 		event = getEvent(event);
 		event.preventDefault();
 	}

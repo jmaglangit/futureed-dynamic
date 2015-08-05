@@ -88,6 +88,7 @@ function ManagePrincipalTeacherController($scope, managePrincipalTeacherService,
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
 
+		self.tableDefaults();
 		self.list();
 		event = getEvent(event);
 		event.preventDefault();

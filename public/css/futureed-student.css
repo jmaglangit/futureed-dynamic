@@ -81,10 +81,6 @@
 }
 
 .sidebar {
-    -moz-transition: ease 1s;
-    -webkit-transition: ease 1s;
-    -o-transition: ease 1s;
-    transition: ease 1s;
     -webkit-transition: 1s ease;
     -moz-transition: 1s ease;
     -ms-transition: 1s ease;
@@ -99,6 +95,7 @@
     overflow-y: scroll;
     overflow: auto;
     float: left;
+    color: #989494
 }
 
 .sidebar-div a {
@@ -115,19 +112,11 @@
     left: 0px;
 }
 
-.div-out {
-	-moz-transition: ease 1s;
-    -webkit-transition: ease 1s;
-    -o-transition: ease 1s;
-    transition: ease 1s;
+.side-btn-out {
     left: 350px !important;
 }
 
-.side-btn-toggle {
-	-moz-transition: ease 1s;
-	-webkit-transition: ease 1s;
-	-o-transition: ease 1s;
-	transition: ease 1s;
+.side-btn-in {
 	-webkit-transition: 1s ease;
 	-moz-transition: 1s ease;
 	-ms-transition: 1s ease;
@@ -137,13 +126,13 @@
 	position: fixed;
 	top: 50%;
 	cursor: pointer;
-	z-index: 9999;
+	z-index: 10;
 }
 
 .sidebar-toggle {
 	position: absolute;
 	top:59px;
-	z-index: 9999;
+	z-index: 10;
 }
 
 .side-header {
@@ -277,24 +266,6 @@
 
 .center-div:hover {
 	cursor: pointer;
-}
-.flip-horizontal {
-	-moz-transform: scaleX(-1);
-	-o-transform: scaleX(-1);
-	-webkit-transform: scaleX(-1);
-	transform: scaleX(-1);
-
-	-moz-transition: ease 1s;
-    -webkit-transition: ease 1s;
-    -o-transition: ease 1s;
-    transition: ease 1s;
-    -webkit-transition: 1s ease;
-    -moz-transition: 1s ease;
-    -ms-transition: 1s ease;
-    -o-transition: 1s ease;
-
-	filter: FlipH;
-	-ms-filter: "FlipH";
 }
 
 .form-search{
@@ -515,6 +486,7 @@ th, td {
 
 .unrated-star {
 	opacity: .5;
+	width: 15px;
 }
 
 .top-10 {
@@ -564,6 +536,19 @@ th, td {
 	z-index: 3;
 }
 
+.drawer-header {
+	background-color: #f4d859;
+	height: 55px;
+	padding: 5px;
+}
+
+.drawer-header p {
+	font-size: 1.5em;
+	color: rgb(5, 90, 127);
+	margin-top: 5px;
+	cursor: pointer;
+}
+
 .drawer-help {
 	position: fixed;
 	bottom: 0;
@@ -571,10 +556,23 @@ th, td {
 	z-index: 3;
 }
 
+img.drawer-button {
+	position: absolute;
+	right: 45px;
+	top: -5px;
+	width: 30px;
+}
+
 .button {
 	height: 65px;
 	text-align: end;
 	margin-right: 25px;
+}
+
+.flip-180 {
+	-ms-transform: rotate(180deg); /* IE 9 */
+    -webkit-transform: rotate(180deg); /* Chrome, Safari, Opera */
+    transform: rotate(180deg);
 }
 
 .flip-90{
@@ -589,11 +587,8 @@ th, td {
     transform: rotate(270deg);
 }
 
-.drawer-appear{
-	clear: both;
-}
 .drawer-inside {
-	height: 60px;
+	height: 55px;
     width: 100%;
     margin: 0 auto;
     overflow: hidden;
@@ -629,51 +624,45 @@ th, td {
 	margin-top: 5px;
 }
 
-.drawer-header {
-	background-color: #f4d859;
-}
-
-.nav-pills>li>a {
+.nav-pills > li {
+	min-width: 100px;
+	text-align: center;
 	font-size: 14px;
 }
 
-.active>.pill-grey {
+.active > .pill-grey, .active > .pill-grey:hover, .pill-grey:hover {
 	background-color: #504c4c !important;
 }
 
-.active>.pill-grey:hover {
-	background-color: #504c4c;
-}
-
-.pill-grey {
+.pill-grey, .pill-grey:hover, .pill-gold, .pill-gold:hover {
 	color: #ffffff;
 }
 
-.pill-grey:hover {
-	background-color: #504c4c !important;
-	color: #ffffff;
-}
-
-.pill-gold {
-	color: #ffffff;
-}
-
-.pill-gold:hover {
+.pill-gold:hover, .active > .pill-gold, .nav-gold > a:hover {
 	background-color: #d3bf49 !important;
-	color: #ffffff;
 }
 
-.active > .pill-gold {
-	background-color: #d3bf49	 !important;
-}
-
-.nav-gold>a:hover {
-	background-color: #d3bf49	 !important;
+.content-bar-title {
+	color: #FFFFFF;
+	cursor: pointer;
+	text-decoration: none;
 }
 
 .content-box {
 	background-color: #504c4c;
 	color: #989494;
+	border-radius: 5px;
+	padding: 10px 0px;
+	margin: 10px 0px;
+}
+
+.content-box .unrated-star {
+	opacity: 1;
+	width: 15px;
+}
+
+.content-row {
+	margin: 3px 0px;
 }
 
 .list-title {
@@ -1058,4 +1047,8 @@ hr {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+
+.tips-container {
+	margin-top: 50px;
 }

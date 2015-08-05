@@ -75,7 +75,9 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 	}
 
 	self.searchFnc = function(event) {
+		self.tableDefaults();
 		self.listPayments();
+		
 		event = getEvent(event);
 		event.preventDefault();
 	}

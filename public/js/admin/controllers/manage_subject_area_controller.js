@@ -95,6 +95,7 @@ function ManageSubjectAreaController($scope, apiService, manageSubjectAreaServic
 		self.errors = Constants.FALSE;
 		self.delete_area = {};
 
+		self.tableDefaults();
 		self.list();
 		event = getEvent(event);
 		event.preventDefault();

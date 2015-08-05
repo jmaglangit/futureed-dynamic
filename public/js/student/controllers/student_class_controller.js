@@ -123,14 +123,12 @@ function StudentClassController($scope, $filter, $window, StudentClassService, S
 					$scope.errorHandler(response.errors);
 				} else if(response.data) {
 					self.tips = {};
-					self.tips.records = [];
+					self.tips.records = response.data.records;
 					self.tips.total = response.data.total;
 
 					angular.forEach(response.data.records, function(value, key) {
 						value.created_moment = moment(value.created_at).startOf("minute").fromNow();
 						value.stars = new Array(5);
-
-						self.tips.records.push(value);
 					});
 				}
 			}
@@ -181,6 +179,7 @@ function StudentClassController($scope, $filter, $window, StudentClassService, S
 
 	self.searchFnc = function(event) {
 		self.errors = Constants.FALSE;
+		self.tableDefaults();
 		self.list();
 		
 		event = getEvent(event);

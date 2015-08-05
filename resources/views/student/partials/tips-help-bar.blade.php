@@ -285,6 +285,6 @@
 	</div>
 </div>
 
-<div class="side-btn-toggle" ng-class="{'div-out':class.bool_change_class, 'flip-horizontal' : !class.bool_change_class }">
-	<img src="/images/class-student/btn-slide.png" ng-click="class.click()">
+<div class="side-btn-in" ng-class="{ 'side-btn-out' : class.bool_change_class }">
+	<img src="/images/class-student/btn-slide.png" ng-class="{'flip-180' : !class.bool_change_class }" ng-click="class.click()">
 </div>

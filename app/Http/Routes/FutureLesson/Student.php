@@ -142,15 +142,22 @@
 							, 'uses' => 'FutureLesson\Student\ClassModuleController@view_your_help'
 						]);
 
+					// Start TODO: Organize routes
 					Routes::get('/add_tip', [ 
 							'as' => 'student.class.module.partials.add_tip'
-							, 'uses' => 'FutureLesson\Student\ClassModuleController@add_tip'
+							, 'uses' => 'FutureLesson\Student\TipsController@add_tip'
 						]);
 
 					Routes::get('/list_tips', [ 
 							'as' => 'student.class.module.partials.list_tips'
-							, 'uses' => 'FutureLesson\Student\ClassModuleController@list_tips'
+							, 'uses' => 'FutureLesson\Student\TipsController@list_tips'
 						]);
+
+					Routes::get('/view_tip', [ 
+							'as' => 'student.class.module.partials.view_tip'
+							, 'uses' => 'FutureLesson\Student\TipsController@view_tip'
+						]);
+					// End TODO: Organize routes
 
 					Routes::get('/list_current_tips', [ 
 							'as' => 'student.class.module.partials.list_current_tips'

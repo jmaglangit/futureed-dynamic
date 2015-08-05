@@ -26,4 +26,22 @@ class TipsController extends Controller {
 	{	
 		return view('student.tips.partials.detail');
 	}
+
+	/**
+	*Display Add Tip
+	*/
+	public function add_tip() {
+		return view('student.class.module.partials.tips.add');
+	}
+
+	/**
+	*Display List Tip
+	*/
+	public function list_tips() {
+		return view('student.class.module.partials.tips.list');
+	}
+
+	public function view_tip() {
+		return view('student.class.module.partials.tips.view');
+	}
 }
