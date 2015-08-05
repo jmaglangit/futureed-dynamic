@@ -34,6 +34,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 				self.date = {};
 				self.add = {};
 				self.invoice = {};
+				self.fields = [];
 				self.active_add = Constants.TRUE;
 				self.active_list = Constants.FALSE;
 				self.active_view = Constants.FALSE;
@@ -45,6 +46,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 				self.date = {};
 				self.add = {};
 				self.invoice = {};
+				self.fields = [];
 				self.active_add = Constants.FALSE;
 				self.active_list = Constants.FALSE;
 				self.active_view = Constants.TRUE;
@@ -285,6 +287,8 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 
 	//set date-end and date start on subscription
 	self.setDate = function(flag) {
+		self.fields = [];
+		$scope.ui_block();
 		var date = new Date();
 		if(self.no_days) {
 			self.invoice.h_date_start = null;
@@ -293,7 +297,6 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 			self.payment_total.s_price = ($('#subscription').find(':selected').data('price') != null) ? $('#subscription').find(':selected').data('price'):0;
 			self.invoice.s_price = ($('#subscription').find(':selected').data('price') != null) ? $('#subscription').find(':selected').data('price'):0;
 			self.invoice.price = (self.payment_total.s_price) ? self.payment_total.s_price: self.students.price;
-			
 			self.invoice.date_start = $filter('date')(date, 'yyyyMMdd');
 			self.invoice.dis_date_start = date;
 
@@ -304,6 +307,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 			self.invoice.dis_date_end = end_date;
 			self.computation(1);
 		}
+		$scope.ui_unblock();
 	}
 
 	//add order no.
@@ -350,6 +354,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 	}
 
 	self.addStudentOrderByEmail = function() {
+		self.fields = [];
 		self.no_days = Constants.EMPTY_STR;
 		self.errors = Constants.FALSE;
 		self.add.success = Constants.FALSE;
@@ -413,6 +418,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 	}
 
 	self.addStudentOrderByUsername = function() {
+		self.fields = [];
 		self.no_days = Constants.EMPTY_STR;
 		self.errors = Constants.FALSE;
 		self.add.success = Constants.FALSE;
@@ -472,7 +478,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 		self.success = Constants.FALSE;
 		self.add.success = Constants.FALSE;
 
-		self.invoice.invoice_date = $filter('date')(new Date(), 'yyyyMMdd');
+		self.invoice.order_date = $filter('date')(new Date(), 'yyyyMMdd');
 		self.invoice.order_no = (flag == 'add') ? self.invoice_detail.order_no : self.invoice.order_no;
 		self.invoice.client_id = (flag == 'add') ? parseInt(self.invoice_detail.client_id):self.invoice.client_id;
 		self.invoice.client_name = (flag == 'add') ? self.invoice_detail.client_name:self.invoice.client_name;
@@ -485,11 +491,16 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 		self.invoice.discount_type = null;
 		self.invoice.discount_id = 0;
 		self.invoice.id = (flag == 'add') ? self.invoice_detail.id:self.invoice.id;
+		self.invoice.parent_id = self.client.id;
+
 		$scope.ui_block();
 		ManageParentPaymentService.paySubscription(self.invoice).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
+					angular.forEach(response.errors, function(value, key) {
+						self.fields[value.field] = Constants.TRUE;
+					});
 				} else if(response.data) {
 					self.setActive('list');
 				}
@@ -524,6 +535,9 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
+					angular.forEach(response.errors, function(value, key) {
+						self.fields[value.field] = Constants.TRUE;
+					});
 					$scope.ui_unblock();
 				} else if(response.data) {
 					self.getPaymentUri();
