@@ -105,6 +105,12 @@ class StudentModuleAnswerController extends ApiController{
 			'date_end'
 		);
 
+		//check if module has been completed
+		if($this->student_module->getStudentModuleStatus($data['student_module_id']) == config('futureed.module_status_completed')){
+
+			return $this->respondErrorMessage(2055);
+		}
+
 		//ADD ANSWER
 
 		//check type of question
@@ -172,13 +178,13 @@ class StudentModuleAnswerController extends ApiController{
 				$student_module->wrong_counter = 0;
 			}
 
-			//increment wrong counter.
-			$student_module->wrong_counter++;
-
 			//starting 3 consecutive wrongs to minus 1 to correct points.
-			if(($student_module->wrong_counter % 3) == 0){
+			if($student_module->wrong_counter >= 3){
 				$student_module->running_points--;;
 			}
+
+			//increment wrong counter.
+			$student_module->wrong_counter++;
 
 		}
 
@@ -201,7 +207,7 @@ class StudentModuleAnswerController extends ApiController{
 		$student_module->last_viewed_content_id = $this->teaching_content->getTeachingContentId($data['module_id']);
 
 		//last_answered_question_id
-		$student_module->last_answered_question_id = $data['module_id'];
+		//$student_module->last_answered_question_id = $data['module_id'];
 
 		//update module_status
 		if($student_module->running_points >= $points_to_finish){

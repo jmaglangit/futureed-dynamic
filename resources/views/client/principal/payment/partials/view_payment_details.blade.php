@@ -151,7 +151,7 @@
 		<div class="form-search">
 			{!! Form::open(
 					[
-						'id' => 'search_form',
+						'id' => 'principal-payment',
 						'class' => 'form-horizontal'
 						, 'ng-submit' => 'payment.searchFnc($event)'
 					]
@@ -176,7 +176,7 @@
 					<select ng-model="payment.invoice.subscription_id" 
 						ng-disabled="!payment.subscriptions.length || payment.invoice.payment_status !== futureed.PENDING" 
 						ng-init="payment.listSubscription()"
-						ng-change="payment.selectSubscription()" class="form-control">
+						ng-change="payment.selectSubscription()" class="form-control" name="subscription_id" ng-class="{ 'required-field' : payment.fields['subscription_id'] }">
 
 						<option value="">-- Select Subscription --</option>
 						<option ng-selected="payment.invoice.subscription_id == subscription.id" ng-repeat="subscription in payment.subscriptions" ng-value="subscription.id">{! subscription.name !}</option>
