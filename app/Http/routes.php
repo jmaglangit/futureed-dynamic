@@ -25,6 +25,7 @@ Routes::group(['prefix' => 'api/v1'], function()
     include('Routes/Api/Announcement.php');
     include('Routes/Api/Assess.php');
     include('Routes/Api/AvatarPose.php');
+	include('Routes/Api/AvatarWiki.php');
     include('Routes/Api/Classroom.php');
     include('Routes/Api/ClassStudent.php');
     include('Routes/Api/Client.php');
