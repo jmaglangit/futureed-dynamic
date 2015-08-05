@@ -123,7 +123,7 @@ class StudentModuleServices {
 	public function levelQuestion($data, $difficulty){
 
 		//get all correct answers count
-		if($difficulty == 1 || $difficulty == 3	){
+		if($difficulty == 1 || $difficulty == 2	){
 
 			//check number of correct answers.
 			$counts = array_count_values($data);
