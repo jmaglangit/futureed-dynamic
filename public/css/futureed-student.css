@@ -601,7 +601,6 @@ img.drawer-button {
 .openup {
 	height: 500px;
     transition: height .7s ease;
-    overflow: auto;
 }
 
 .footer {
@@ -701,8 +700,6 @@ img.drawer-button {
 
 .help-container {
 	margin: 15px;
-	border-radius: 5px;
-	border: 1px solid #838181;
 }
 
 hr {
@@ -1051,4 +1048,20 @@ hr {
 
 .tips-container {
 	margin-top: 50px;
+}
+
+.view-tips-container {
+	overflow-y: auto;
+	height: 360px;
+	width: 100%;
+	padding: 0px 10px;
+}
+
+.view-tips-container p {
+	word-wrap: break-word;
+}
+
+.tip-title {
+	font-size: 1.5em;
+	color: #ffffff;
 }

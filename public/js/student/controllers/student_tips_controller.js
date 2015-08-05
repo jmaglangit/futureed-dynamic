@@ -116,13 +116,17 @@ function TipsController($scope, apiService, StudentTipsService, TableService, Se
 					var record = response.data;
 
 					self.record.id = record.id;
-					self.record.created_moment = moment(record.created_at).startOf("minute").fromNow();
+					self.record.created_at = moment(record.created_at).startOf("minute").fromNow();
 					self.record.stars = new Array(5);
 					
 					self.record.avatar_url = record.student.avatar.avatar_url;
 					self.record.title = record.title;
 					self.record.content = record.content;
 					self.record.rating = record.rating;
+					self.record.subject_name = record.subject.name;
+					self.record.subject_area_name = record.subjectarea.name;
+					console.log(record);
+
 					self.record.name = record.student.first_name + " " + record.student.last_name;
 				}
 			}
@@ -186,11 +190,15 @@ function TipsController($scope, apiService, StudentTipsService, TableService, Se
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
 
+		self.active_all = Constants.FALSE;
+		self.active_current = Constants.FALSE;
+
 		switch(active) {
 			case Constants.ALL:
 				self.search.link_id = Constants.EMPTY_STR;
 				self.search.link_type = (self.module.student_module[0].last_answered_question_id) ? Constants.QUESTION : Constants.CONTENT;
 				self.search.module_id = self.module.id;
+				self.active_all = Constants.TRUE;
 
 				self.listTips();
 				break;
@@ -199,11 +207,17 @@ function TipsController($scope, apiService, StudentTipsService, TableService, Se
 				self.search.link_id = self.question.id;
 				self.search.link_type = (self.module.student_module[0].last_answered_question_id) ? Constants.QUESTION : Constants.CONTENT;
 				self.search.module_id = self.module.id;
+				self.active_current = Constants.TRUE;
 
 				self.listTips();
 			default:
 				
 				break;
 		}
+	}
+
+	self.viewTipList = function() {
+		self.setActive();
+		self.listTips();
 	}
 }

@@ -7,12 +7,13 @@
 	<div class="alert alert-success" ng-if="tips.success">
 		<p>{! tips.success !}</p>
 	</div>
+
     <div class="col-xs-12">
     	<ul class="nav nav-pills col-xs-12">
-    		<li class="active">
+    		<li ng-class="{ 'active' : !tips.active_all }">
     			<a class="pill-grey" href="#current" data-toggle="tab" ng-click="tips.setTipTabActive(futureed.CURRENT)">Current</a>
     		</li>
-    		<li>
+    		<li ng-class="{ 'active' : tips.active_all }">
     			<a class="pill-grey" href="#" data-toggle="tab" ng-click="tips.setTipTabActive(futureed.ALL)">All</a>
     		</li>
     	</ul>
@@ -29,7 +30,7 @@
 					<div class="content-box" ng-repeat="current in tips.records">
 						<div class="row content-row">
 							<div class="col-xs-6">
-								<span class="content-bar-title" ng-click="mod.setCurrentActiveTip('view', current.id)">
+								<span class="content-bar-title" ng-click="tips.setActive(futureed.ACTIVE_VIEW, current.id)">
 									{! current.title !}
 								</span>
 							</div>
