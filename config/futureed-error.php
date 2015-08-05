@@ -68,6 +68,7 @@ return [
 		2053 => 'File Location is invalid.',
 		2054 => 'File deleted.',
 		2055 => 'Practice Exercise has already been Completed.',
+		2056 => 'You need to review the teaching content.',
 
 
 		2100 => 'Reset code is invalid.',
