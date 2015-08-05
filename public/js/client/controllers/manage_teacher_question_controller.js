@@ -21,7 +21,6 @@ function ManageTeacherQuestionController($scope, ManageTeacherQuestionService, a
 			default :
 				self.active_list = Constants.TRUE;
 				
-				self.view();
 				break;
 		}
 	}
@@ -38,7 +37,6 @@ function ManageTeacherQuestionController($scope, ManageTeacherQuestionService, a
 		self.filter.id = $scope.user.module_id;
 		self.filter.limit = 1;
 		self.filter.offset = (seq != null) ? seq:0;
-
 		if(flag == Constants.NEXT){
 			self.filter.offset + 1;
 		}else if(flag == Constants.BACK){
@@ -47,7 +45,7 @@ function ManageTeacherQuestionController($scope, ManageTeacherQuestionService, a
 
 		$scope.ui_block();
 		
-		ManageTeacherQuestionService.viewQuestion(self.filter).success(function(response){
+		ManageTeacherQuestionService.viewQuestion(self.filter, self.q_difficulty).success(function(response){
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 					if(response.errors) {
 						self.errors = $scope.errorHandler(response.errors);
@@ -61,5 +59,11 @@ function ManageTeacherQuestionController($scope, ManageTeacherQuestionService, a
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
+	}
+
+	self.setDifficulty = function() {
+		self.hide_difficulty = Constants.TRUE;
+		self.q_difficulty = self.details.difficulty_filter
+		self.view();
 	}
 }
