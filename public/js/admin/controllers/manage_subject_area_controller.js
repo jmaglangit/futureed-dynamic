@@ -160,6 +160,7 @@ function ManageSubjectAreaController($scope, apiService, manageSubjectAreaServic
 
 	self.add = function() {
 		self.errors = Constants.FALSE;
+		self.record.success = Constants.FALSE;
 
 		$("input").removeClass("required-field");
 		$scope.ui_block();
