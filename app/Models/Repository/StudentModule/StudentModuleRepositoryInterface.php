@@ -12,4 +12,6 @@ interface StudentModuleRepositoryInterface
 
 	public function countSubjectModuleDone($criteria = array());
 
+	public function getStudentModuleStatus($id);
+
 }
