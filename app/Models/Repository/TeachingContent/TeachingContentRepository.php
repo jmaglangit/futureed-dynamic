@@ -128,7 +128,7 @@ class TeachingContentRepository implements TeachingContentRepositoryInterface{
 	 */
 	public function getTeachingContentId($module_id){
 
-		return TeachingContent::whereModuleId($module_id)->pluck('id');
+		return TeachingContent::teachingModuleId($module_id)->pluck('id');
 
 	}
 }
