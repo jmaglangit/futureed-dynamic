@@ -67,6 +67,7 @@ return [
 		2052 => 'No Image',
 		2053 => 'File Location is invalid.',
 		2054 => 'File deleted.',
+		2055 => 'Practice Exercise has already been Completed.',
 
 
 		2100 => 'Reset code is invalid.',

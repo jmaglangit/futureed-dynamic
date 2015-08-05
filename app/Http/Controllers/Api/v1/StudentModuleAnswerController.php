@@ -105,6 +105,12 @@ class StudentModuleAnswerController extends ApiController{
 			'date_end'
 		);
 
+		//check if module has been completed
+		if($this->student_module->getStudentModuleStatus($data['student_module_id']) == config('futureed.module_status_completed')){
+
+			return $this->respondErrorMessage(2055);
+		}
+
 		//ADD ANSWER
 
 		//check type of question
