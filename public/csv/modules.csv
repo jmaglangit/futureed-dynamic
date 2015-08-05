@@ -1,4 +1,3 @@
-id,subject_id,area_id,code,name,description,common_core_area,common_core_url,points_earned,points_to_unlock,points_to_finish,status,created_by,,created_at,updated_at,deleted_at
 1,1,5,1101,Counting,,Grade 1: Number and Operations in Base Ten,http://www.corestandards.org/Math/Content/1/introduction/,12,0,12,Enabled,,,,,
 2,1,1,1102,Addition ,,Grade 1: Operations and Algebraic Thinking,http://www.corestandards.org/Math/Content/1/introduction/,12,0,12,Enabled,,,,,
 3,1,23,1103,Subtraction,,Grade 1: Operations and Algebraic Thinking,http://www.corestandards.org/Math/Content/1/introduction/,12,0,12,Enabled,,,,,
