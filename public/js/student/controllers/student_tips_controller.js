@@ -13,11 +13,13 @@ function TipsController($scope, apiService, StudentTipsService, TableService, Se
 	self.searchDefaults();
 
 	self.setActive = function(active, id) {
+		self.record = {};
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
 
 		self.active_list = Constants.FALSE;
 		self.active_view = Constants.FALSE;
+		self.active_add = Constants.FALSE;
 
 		switch(active) {
 			case Constants.ACTIVE_VIEW:
@@ -27,6 +29,10 @@ function TipsController($scope, apiService, StudentTipsService, TableService, Se
 
 			case Constants.ACTIVE_LIST:
 				self.active_list = Constants.TRUE;
+				break;
+			
+			case Constants.ACTIVE_ADD:
+				self.active_add = Constants.TRUE;
 				break;
 
 			default:
@@ -138,6 +144,36 @@ function TipsController($scope, apiService, StudentTipsService, TableService, Se
 		});
 	}
 
+	self.add = function() {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		self.record.module_id = self.module.id;
+		self.record.subject_id = self.module.subject_id;
+		self.record.subject_area_id = self.module.subject_area_id;
+		self.record.link_type = (self.module.student_module[0].last_answered_question_id) ? Constants.QUESTION : Constants.CONTENT;
+		self.record.link_id = self.question.id;
+		self.record.class_id = $scope.user.class.id;
+		self.record.student_id = $scope.user.id;
+
+		$scope.ui_block();
+		StudentTipsService.addTip(self.record).success(function(response){
+			if(angular.equals(response.status,Constants.STATUS_OK)){
+				if(response.errors){
+					self.success = Constants.FALSE;
+					self.errors = $scope.errorHandler(response.errors);
+				}else if(response.data){
+					self.success = Constants.TRUE;
+					self.record = {};
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		})
+	}
+
 	self.changeColor = function(element) {
 		self.hovered = [];
 
@@ -174,6 +210,22 @@ function TipsController($scope, apiService, StudentTipsService, TableService, Se
 	/**
 	* Events inside a module
 	*/
+	
+	$scope.$on('toggle-tips', function(event) {
+		var self = event.currentScope.tips;
+		var module = event.targetScope.mod;
+
+
+		if(!self.show_content_tips) {
+			self.show_content_tips = !self.show_content_tips;
+		}
+
+		self.module = module.record;
+		self.question = module.questions;
+
+		self.setActive(Constants.ACTIVE_ADD);
+	});
+
 	self.toggleTips = function(module, question) {
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
@@ -189,6 +241,10 @@ function TipsController($scope, apiService, StudentTipsService, TableService, Se
 	self.setTipTabActive = function(active) {
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
+
+		if(!active) {
+			active = (self.active_all) ? Constants.ALL : Constants.CURRENT;
+		}
 
 		self.active_all = Constants.FALSE;
 		self.active_current = Constants.FALSE;
@@ -218,6 +274,6 @@ function TipsController($scope, apiService, StudentTipsService, TableService, Se
 
 	self.viewTipList = function() {
 		self.setActive();
-		self.listTips();
+		self.setTipTabActive();
 	}
 }

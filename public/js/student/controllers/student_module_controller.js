@@ -37,10 +37,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 	}
 
 	self.giveTip = function() {
-		self.errors = Constants.FALSE;
-		self.success = Constants.FALSE;
-		self.toggle_bottom = !self.toggle_bottom;
-		self.setTipActive('add');
+		$scope.$broadcast('toggle-tips');
 	}
 
 	self.askHelp = function() {
@@ -313,38 +310,6 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				self.active_tip_list = Constants.TRUE;
 				break;
 		}
-	}
-
-	self.addTip = function() {
-		self.errors = Constants.FALSE;
-		self.success = Constants.FALSE;
-
-		/*Setting temporary params*/
-		self.add.module_id = parseInt(1);
-		self.add.subject_id = parseInt(1);
-		self.add.subject_area_id = parseInt(1);
-		self.add.link_type = "Content"
-		self.add.link_id = parseInt(1);
-		self.add.class_id = $scope.user.class.id;
-		self.add.student_id = $scope.user.id;
-
-		$scope.ui_block();
-		StudentModuleService.addTip(self.add).success(function(response){
-			if(angular.equals(response.status,Constants.STATUS_OK)){
-				if(response.errors){
-					self.success = Constants.FALSE;
-					self.errors = $scope.errorHandler(response.errors);
-				}else if(response.data){
-					self.success = Constants.TRUE;
-					self.errors = Constants.FALSE;
-					self.add = {};
-				}
-			}
-			$scope.ui_unblock();
-		}).error(function(response){
-			self.errors = $scope.internalError();
-			$scope.ui_unblock();
-		})
 	}
 
 	self.tipList = function(limit, view, flag) {
