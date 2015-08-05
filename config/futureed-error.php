@@ -116,6 +116,7 @@ return [
 		2143 => 'The image size had exceeded 2MB.',
 		2144 => 'Module does not exist',
 		2145 => 'Student needs to watch the videos again.',
+		2146 => 'Prevent having dot for an image file name.',
 
 		// Client Error messages
 		2200 => 'Email already exists.',
