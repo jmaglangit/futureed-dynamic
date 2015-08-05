@@ -178,13 +178,13 @@ class StudentModuleAnswerController extends ApiController{
 				$student_module->wrong_counter = 0;
 			}
 
+			//increment wrong counter.
+			$student_module->wrong_counter++;
+
 			//starting 3 consecutive wrongs to minus 1 to correct points.
 			if($student_module->wrong_counter >= 3){
 				$student_module->running_points--;;
 			}
-
-			//increment wrong counter.
-			$student_module->wrong_counter++;
 
 		}
 
@@ -197,6 +197,7 @@ class StudentModuleAnswerController extends ApiController{
 
 			$student_module->running_points += $student_answer->points_earned;
 			$student_module->correct_counter++;
+			$student_module->wrong_counter = 0;
 
 		}
 
