@@ -27,23 +27,29 @@
 				</div>
 
 				<div ng-if="mod.module_message.module_done">
-					<div class="points-badge-holder row">
-						<div class="col-xs-12">
-							<p class="message-point">+{! mod.module_message.points_earned !}</p>
-						</div>
-
-						<div class="col-xs-12">
-							Congratulations! You have earned {! mod.module_message.points_earned !} points.
+					<div class="row">
+						<div class="col-xs-12 wiki-earn-message">
+							You have earned {! mod.module_message.points_earned !} point(s).
 						</div>
 					</div>
 
-
-					<div class="col-xs-12" >
-						<p class="module-message">Congratulations...</p>
+					<div class="row">
+						<div class="col-xs-12">
+							<p class="wiki-title">{! mod.module_message.title !}</p>
+						</div>
 					</div>
 
-					<div class="module-icon-holder">
-						<img src="/images/avatar/doctor-male/doctor_male-2_main.png" />
+					<div class="col-xs-12 wiki-message">
+						<p>{! mod.module_message.message !}</p>
+						<div class="wiki-view-more" ng-if="!mod.module_message.full_message">
+							<button type="button" class="btn btn-gold" ng-click="mod.viewMoreWikiMessage()">
+								View More
+							</button>
+						</div>
+					</div>
+
+					<div class="wiki-icon-holder" ng-if="mod.module_message.image">
+						<img ng-src="{! mod.module_message.image !}" />
 					</div>
 				</div>
 			</div>

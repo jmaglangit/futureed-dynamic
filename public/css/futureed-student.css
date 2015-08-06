@@ -804,7 +804,7 @@ hr {
     overflow: auto;
 }
 
-.module-message {
+.module-message, .wiki-message {
 	position: relative;
 	background: #EBE3B4;
 	border: 1px solid #F9EFB7;
@@ -815,7 +815,35 @@ hr {
 	font-size: 1.5em;
 }
 
-.module-message:after, .module-message:before {
+.wiki-title {
+	font-size: 2em;
+	color: #03658A;
+	padding: 5px;
+}
+
+.wiki-earn-message {
+	padding: 15px;
+	background-color: #d6d6d6;
+	border-radius: 7px;
+	color: #03658A;
+	font-size: 1.5em;
+}
+
+.wiki-message {
+	width: 100%;
+}
+
+.wiki-view-more {
+	float: right;
+}
+
+.wiki-icon-holder img {
+	width: 220px;
+	border-radius: 7px;
+}
+
+.module-message:after, .module-message:before,
+.wiki-message:after, .wiki-message:before {
 	top: 100%;
 	left: 50%;
 	border: solid transparent;
@@ -826,14 +854,14 @@ hr {
 	pointer-events: none;
 }
 
-.module-message:after {
+.module-message:after, .wiki-message:after {
 	border-color: rgba(136, 183, 213, 0);
     border-top-color: #EBE3B4;
     border-width: 30px;
     margin-left: -10px;
     transform: skew(-58deg);
 }
-.module-message:before {
+.module-message:before, .wiki-message:before {
 	border-color: rgba(194, 225, 245, 0);
 	border-top-color: #F9EFB7;
 	border-width: 32px;
