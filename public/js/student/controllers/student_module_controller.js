@@ -879,7 +879,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 	var setAvatarQuote = function() {
 		if(!((self.result.question_counter) % 5)) {
 			// get quote
-			var percentage = Math.floor(self.result.correct_counter / self.result.question_counter) * 100;
+			var percentage = Math.floor((self.result.correct_counter / self.result.question_counter) * 100);
 			var seq_no = Math.floor(self.result.question_counter / 5) % 6;
 			var avatar_quote_sequence = (!seq_no) ? 6 : seq_no;
 
@@ -912,7 +912,6 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 			});
 
 			self.avatar_quote_info = avatar_quote_info;
-			console.log(self.avatar_quote_info);
 			self.result.quoted = Constants.TRUE;
 		} else {
 			self.result.answered = Constants.TRUE;
