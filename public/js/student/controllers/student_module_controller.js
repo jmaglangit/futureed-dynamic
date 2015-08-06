@@ -522,7 +522,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 								self.current_question.answer_text = Constants.EMPTY_STR;
 								self.current_question.answer_id = Constants.EMPTY_STR;
 
-								self.question_counter = module_student.question_counter + 1;
+								self.question_counter = parseInt(module_student.question_counter) + 1;
 
 								if(angular.equals(self.current_question.question_type, Constants.ORDERING)) {
 									self.current_question.answer_text = self.current_question.question_order_text.split(",");
