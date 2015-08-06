@@ -8,12 +8,14 @@ use FutureEd\Services\WikipediaServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
-class AvatarWikiController extends ApiController {
+class AvatarWikiController extends ApiController
+{
 
 	public function __construct(
 		AvatarWikiRepositoryInterface $avatarWikiRepositoryInterface,
 		WikipediaServices $wikipediaServices
-	){
+	)
+	{
 
 		$this->avatar_wiki = $avatarWikiRepositoryInterface;
 
@@ -21,7 +23,8 @@ class AvatarWikiController extends ApiController {
 
 	}
 
-	public function getAvatarWikiByAvatarId(){
+	public function getAvatarWikiByAvatarId()
+	{
 
 		$return = $this->avatar_wiki->getAvatarWikiByAvatarId(Input::get('avatar_id'));
 
@@ -35,7 +38,7 @@ class AvatarWikiController extends ApiController {
 
 		$image = $this->wikipedia->getImage($api_url);
 
-		$return[0]->image = ($image <> null) ? $image : 0 ;
+		$return[0]->image = ($image <> null) ? $image : 0;
 
 		return $this->respondWithData($return);
 
