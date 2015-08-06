@@ -750,6 +750,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
+					$scope.ui_unblock();
 				} else if(response.data) {
 					// show message
 					self.result = response.data;
@@ -804,7 +805,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 						});
 					} else {
 						$scope.ui_unblock();
-						
+
 						// update student_module
 						var data = {};
 							data.module_id = self.result.id;
@@ -879,7 +880,10 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		if(!((self.result.question_counter) % 5)) {
 			// get quote
 			var percentage = Math.floor(self.result.correct_counter / self.result.question_counter) * 100;
-			var avatar_quote = self.avatar_quotes[self.result.current_difficulty_level];
+			var seq_no = Math.floor(self.result.question_counter / 5) % 6;
+			var avatar_quote_sequence = (!seq_no) ? 6 : seq_no;
+
+			var avatar_quote = self.avatar_quotes[avatar_quote_sequence];
 			var avatar_quote_info = {};
 
 			if(percentage < 20) {
@@ -908,6 +912,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 			});
 
 			self.avatar_quote_info = avatar_quote_info;
+			console.log(self.avatar_quote_info);
 			self.result.quoted = Constants.TRUE;
 		} else {
 			self.result.answered = Constants.TRUE;
