@@ -14,8 +14,8 @@ class AvatarWiki extends Model {
 	protected $fillable = ['avatar_id','code','name','description_full','description_summary','title','source'];
 
 	//scopes
+	public function scopeAvatarId($query, $avatar_id){
 
-	public function scopeAvatarId($query,$avatar_id){
-		return $query->whereAvatarId($avatar_id);
+		return $query->where('avatar_id',$avatar_id);
 	}
 }

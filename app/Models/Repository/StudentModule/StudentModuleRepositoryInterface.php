@@ -16,4 +16,6 @@ interface StudentModuleRepositoryInterface
 
 	public function updateStudentActivity($id,$data);
 
+	public function getStudentModuleWrongCount($id);
+
 }

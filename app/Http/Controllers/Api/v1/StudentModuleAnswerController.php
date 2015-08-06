@@ -105,11 +105,18 @@ class StudentModuleAnswerController extends ApiController{
 			'date_end'
 		);
 
-		//check if module has been completed
+		//check if module has been completed.
 		if($this->student_module->getStudentModuleStatus($data['student_module_id']) == config('futureed.module_status_completed')){
 
 			return $this->respondErrorMessage(2055);
 		}
+
+		//check if wrong is equal to 10.
+		if($this->student_module->getStudentModuleWrongCount($data['student_module_id']) == 10){
+
+			return $this->respondErrorMessage(2056);
+		}
+
 
 		//ADD ANSWER
 
