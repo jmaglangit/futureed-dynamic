@@ -34,6 +34,10 @@
 				<div class="margin-top-bot-5 pointer" ng-if="!mod.no_record">
 					<img src="/images/class-student/icon-givetip.png" ng-click="mod.giveTip()">
 				</div>
+				<div class="pointer" ng-if="!mod.no_record && mod.active_questions">
+					<button type="button" class="btn btn-maroon margin-top-bot-5" ng-style="{ 'width' : '182px' }"
+						ng-click="mod.reviewContent()"> Review Contents </button>
+				</div>
 			</div>
 		</div>
 		<!-- Main Container -->
