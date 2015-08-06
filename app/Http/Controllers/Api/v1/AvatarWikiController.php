@@ -25,21 +25,19 @@ class AvatarWikiController extends ApiController {
 
 		$return = $this->avatar_wiki->getAvatarWikiByAvatarId(Input::get('avatar_id'));
 
+		$api_url = $return[0]->source;
+
 		//get link image from wikipedia
 		//e.g. https://en.wikipedia.org/w/api.php?action=query&titles=Alexey_Leonov&prop=pageimages&format=json&pithumbsize=250
 		//parse api get image location.
 
-		//pixel size
-		$image_size = 250;
+//		$api_url = "https://en.wikipedia.org/w/api.php?action=query&titles=Alexey_Leonov&prop=pageimages&format=json&pithumbsize=250";
 
-		$api_url = "https://en.wikipedia.org/w/api.php?action=query&titles=Alexey_Leonov&prop=pageimages&format=json&pithumbsize=250";
+		$image = $this->wikipedia->getImage($api_url);
 
+		$return[0]->image = ($image <> null) ? $image : 0 ;
 
-		$image = $this->wikipedia->getImage($api_url,$image_size);
-
-		dd($image);
-
-		return $return;
+		return $this->respondWithData($return);
 
 	}
 }
