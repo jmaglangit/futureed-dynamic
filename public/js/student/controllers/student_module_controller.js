@@ -925,7 +925,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 	self.nextQuestion = function() {
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
-		self.current_question = Constants.EMPTY_STR;
+		self.current_question = {};
 
 		angular.forEach(self.questions, function(value, key) {
 			if(angular.equals(parseInt(value.id), parseInt(self.result.next_question))) {
