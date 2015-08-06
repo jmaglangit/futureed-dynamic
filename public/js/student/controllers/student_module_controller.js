@@ -517,7 +517,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 					
 					listQuestions(function(response) {
 						angular.forEach(self.questions, function(value, key) {
-							if(angular.equals(value.id, module_student.last_answered_question_id)) {
+							if(angular.equals(parseInt(value.id), parseInt(module_student.last_answered_question_id))) {
 								self.current_question = value;
 								self.current_question.answer_text = Constants.EMPTY_STR;
 								self.current_question.answer_id = Constants.EMPTY_STR;
@@ -905,7 +905,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 			// get pose
 			var avatar_pose_id = avatar_quote_info.avatar_quote.avatar_pose_id;
 			angular.forEach(self.avatar_pose, function(value, key) {
-				if(angular.equals(value.id, avatar_pose_id)) {
+				if(angular.equals(parseInt(value.id), parseInt(avatar_pose_id))) {
 					avatar_quote_info.avatar_pose = value;
 					return;
 				}
@@ -925,10 +925,10 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 	self.nextQuestion = function() {
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
-		self.current_question = {};
+		self.current_question = Constants.EMPTY_STR;
 
 		angular.forEach(self.questions, function(value, key) {
-			if(angular.equals(value.id, self.result.next_question)) {
+			if(angular.equals(parseInt(value.id), parseInt(self.result.next_question))) {
 				self.current_question = value;
 				self.current_question.answer_text = Constants.EMPTY_STR;
 				self.current_question.answer_id = Constants.EMPTY_STR;
