@@ -99,8 +99,9 @@ class StudentModuleRepository implements StudentModuleRepositoryInterface
 	 */
 	public function getStudentModuleStatus($id){
 
-		return StudentModule::find($id)->pluck('module_status');
+		$return = StudentModule::find($id);
 
+		return $return->module_status;
 	}
 
 	/**
