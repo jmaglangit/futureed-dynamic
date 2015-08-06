@@ -14,7 +14,6 @@ class UpdateModulesTable extends Migration {
 	{
 		Schema::table('modules', function(Blueprint $table){
 
-			$table->dropColumn('grade_id');
 			$table->integer('points_earned')->after('common_core_url');
 		});
 
@@ -31,7 +30,6 @@ class UpdateModulesTable extends Migration {
 		Schema::table('modules', function(Blueprint $table){
 
 			$table->dropColumn('points_earned');
-			$table->bigInteger('grade_id')->after('subject_area_id');
 		});
 	}
 
