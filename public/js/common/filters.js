@@ -49,4 +49,10 @@ angular.module('futureed').filter('trustAsResourceUrl', ['$sce', function($sce) 
     return function(val) {
         return $sce.trustAsResourceUrl(val);
     };
-}])
+}]);
+
+angular.module('futureed').filter('trustAsHtml', ['$sce', function($sce) {
+    return function(val) {
+        return $sce.trustAsHtml(val);
+    };
+}]);

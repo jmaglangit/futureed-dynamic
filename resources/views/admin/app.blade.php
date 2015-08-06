@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>FutureEd Online Education Platform</title>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 
     <!--[if IE]>
     <link rel="stylesheet" type="text/css" media="all" href="https://www.formstack.com/forms/css/3/ie.css?20140508" />
@@ -52,10 +53,10 @@
     {!! Html::script('/js/jquery.js') !!}
     {!! Html::script('/js/ui-block.js') !!}
     {!! Html::script('//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js') !!}
+    
     {!! Html::script('//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js') !!}
     {!! Html::script('//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular.min.js') !!}
-    {!! Html::script('//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular-resource.min.js') !!}
-    {!! Html::script('//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.15/angular-cookies.min.js') !!}
+    {!! Html::script('/js/ng-sortable.min.js')!!}
     
     {!! Html::script('/js/futureed_constants.js') !!}
     {!! Html::script('/js/futureed_utils.js') !!}
@@ -73,6 +74,7 @@
     {!! Html::script('/js/ng-file-upload-shim.min.js')!!}
     {!! Html::script('/js/ng-file-upload.min.js')!!}
     {!! Html::script('/js/ui-bootstrap-tpls-0.13.0.min.js') !!}
+    {!! Html::script('/js/ng-sortable.min.js')!!}
 
     @yield('scripts')
 

@@ -13,11 +13,13 @@ function TipsController($scope, apiService, StudentTipsService, TableService, Se
 	self.searchDefaults();
 
 	self.setActive = function(active, id) {
+		self.record = {};
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
 
 		self.active_list = Constants.FALSE;
 		self.active_view = Constants.FALSE;
+		self.active_add = Constants.FALSE;
 
 		switch(active) {
 			case Constants.ACTIVE_VIEW:
@@ -27,6 +29,10 @@ function TipsController($scope, apiService, StudentTipsService, TableService, Se
 
 			case Constants.ACTIVE_LIST:
 				self.active_list = Constants.TRUE;
+				break;
+			
+			case Constants.ACTIVE_ADD:
+				self.active_add = Constants.TRUE;
 				break;
 
 			default:
@@ -73,6 +79,7 @@ function TipsController($scope, apiService, StudentTipsService, TableService, Se
 		self.records = [];
 		self.errors = Constants.FALSE;
 		self.search.class_id = ($scope.user.class) ? $scope.user.class.class_id : Constants.EMPTY_STR;
+
 		self.table.loading = Constants.TRUE;
 
 		$scope.ui_block();
@@ -84,6 +91,12 @@ function TipsController($scope, apiService, StudentTipsService, TableService, Se
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					self.records = response.data.records;
+
+					angular.forEach(self.records, function(value, key) {
+						value.created_at = moment(value.created_at).startOf("minute").fromNow();
+						value.stars = new Array(5);
+					});
+
 					self.updatePageCount(response.data);
 				}
 			}
@@ -109,13 +122,16 @@ function TipsController($scope, apiService, StudentTipsService, TableService, Se
 					var record = response.data;
 
 					self.record.id = record.id;
-					self.record.created_moment = moment(record.created_at).startOf("minute").fromNow();
+					self.record.created_at = moment(record.created_at).startOf("minute").fromNow();
 					self.record.stars = new Array(5);
 					
 					self.record.avatar_url = record.student.avatar.avatar_url;
 					self.record.title = record.title;
 					self.record.content = record.content;
 					self.record.rating = record.rating;
+					self.record.subject_name = (record.subject) ? record.subject.name : Constants.EMPTY_STR;
+					self.record.subject_area_name = (record.subjectarea) ? record.subjectarea.name : Constants.EMPTY_STR;
+
 					self.record.name = record.student.first_name + " " + record.student.last_name;
 				}
 			}
@@ -125,6 +141,36 @@ function TipsController($scope, apiService, StudentTipsService, TableService, Se
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
+	}
+
+	self.add = function() {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		self.record.module_id = self.module.id;
+		self.record.subject_id = self.module.subject_id;
+		self.record.subject_area_id = self.module.subject_area_id;
+		self.record.link_type = (self.module.student_module[0].last_answered_question_id) ? Constants.QUESTION : Constants.CONTENT;
+		self.record.link_id = (angular.equals(self.record.link_type, Constants.QUESTION)) ? self.question.id : self.content.id;
+		self.record.class_id = $scope.user.class.id;
+		self.record.student_id = $scope.user.id;
+
+		$scope.ui_block();
+		StudentTipsService.addTip(self.record).success(function(response){
+			if(angular.equals(response.status,Constants.STATUS_OK)){
+				if(response.errors){
+					self.success = Constants.FALSE;
+					self.errors = $scope.errorHandler(response.errors);
+				}else if(response.data){
+					self.success = Constants.TRUE;
+					self.record = {};
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		})
 	}
 
 	self.changeColor = function(element) {
@@ -158,5 +204,78 @@ function TipsController($scope, apiService, StudentTipsService, TableService, Se
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
+	}
+
+	/**
+	* Events inside a module
+	*/
+	
+	$scope.$on('toggle-tips', function(event) {
+		var self = event.currentScope.tips;
+		var module = event.targetScope.mod;
+
+
+		if(!self.show_content_tips) {
+			self.show_content_tips = !self.show_content_tips;
+		}
+
+		self.module = module.record;
+		self.question = module.current_question;
+		self.content = module.contents;
+
+		self.setActive(Constants.ACTIVE_ADD);
+	});
+
+	self.toggleTips = function(module) {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		self.show_content_tips = !self.show_content_tips;
+		
+		self.module = module.record;
+		self.question = module.current_question;
+		self.content = module.contents;
+
+		self.setActive();
+		self.setTipTabActive(Constants.CURRENT);
+	}
+
+	self.setTipTabActive = function(active) {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		if(!active) {
+			active = (self.active_all) ? Constants.ALL : Constants.CURRENT;
+		}
+
+		self.active_all = Constants.FALSE;
+		self.active_current = Constants.FALSE;
+		self.searchDefaults();
+
+		switch(active) {
+			case Constants.ALL:
+				self.search.link_id = Constants.EMPTY_STR;
+				self.search.module_id = self.module.id;
+				self.active_all = Constants.TRUE;
+
+				self.listTips();
+				break;
+
+			case Constants.CURRENT:
+				self.search.link_type = (self.module.student_module[0].last_answered_question_id) ? Constants.QUESTION : Constants.CONTENT;
+				self.search.link_id = (angular.equals(self.search.link_type, Constants.QUESTION)) ? self.question.id : self.content.id;
+				self.search.module_id = self.module.id;
+				self.active_current = Constants.TRUE;
+
+				self.listTips();
+			default:
+				
+				break;
+		}
+	}
+
+	self.viewTipList = function() {
+		self.setActive();
+		self.setTipTabActive();
 	}
 }

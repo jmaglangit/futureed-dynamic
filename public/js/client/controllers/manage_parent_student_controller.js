@@ -102,8 +102,10 @@ function ManageParentStudentController($scope, ManageParentStudentService, apiSe
 		$("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 
-	self.searchFnc = function() {
+	self.searchFnc = function(event) {
+		self.tableDefaults();
 		self.list();
+
 		event = getEvent(event);
 		event.preventDefault();
 	}

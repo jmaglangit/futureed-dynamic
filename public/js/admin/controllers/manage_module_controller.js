@@ -117,6 +117,7 @@ function ManageModuleController($scope, manageModuleService, ManageQuestionAnsSe
 
 	self.searchFnc = function(event) {
 		self.errors = Constants.FALSE;
+		self.tableDefaults();
 		self.list();
 		
 		event = getEvent(event);

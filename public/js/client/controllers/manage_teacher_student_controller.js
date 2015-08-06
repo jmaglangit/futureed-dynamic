@@ -57,9 +57,12 @@ function ManageTeacherStudentController($scope, manageTeacherStudentService, api
 		}
 	}
 
-	self.searchFnc = function() {
+	self.searchFnc = function(event) {
 		self.tableDefaults();
 		self.list();
+
+		event = getEvent(event);
+		event.preventDefault();
 	}
 
 	self.clearSearch = function() {

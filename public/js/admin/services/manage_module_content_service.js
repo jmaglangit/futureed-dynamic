@@ -62,5 +62,13 @@ function ManageModuleContentService($http) {
 		});
 	}
 
+	service.deleteImage = function(image) {
+		return $http({
+			method 	: Constants.METHOD_POST
+			, data 	: {delete_file : image}
+			, url 	: serviceUrl + 'image/delete'
+		});
+	}
+
 	return service;
 }

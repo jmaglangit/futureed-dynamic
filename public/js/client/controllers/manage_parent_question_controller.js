@@ -20,8 +20,7 @@ function ManageParentQuestionController($scope, ManageParentQuestionService, api
 
 			default :
 				self.active_list = Constants.TRUE;
-				
-				self.view();
+
 				break;
 		}
 	}
@@ -38,7 +37,6 @@ function ManageParentQuestionController($scope, ManageParentQuestionService, api
 		self.filter.id = $scope.user.module_id;
 		self.filter.limit = 1;
 		self.filter.offset = (seq != null) ? seq:0;
-
 		if(flag == Constants.NEXT){
 			self.filter.offset + 1;
 		}else if(flag == Constants.BACK){
@@ -47,7 +45,7 @@ function ManageParentQuestionController($scope, ManageParentQuestionService, api
 
 		$scope.ui_block();
 		
-		ManageParentQuestionService.viewQuestion(self.filter).success(function(response){
+		ManageParentQuestionService.viewQuestion(self.filter, self.q_difficulty).success(function(response){
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 					if(response.errors) {
 						self.errors = $scope.errorHandler(response.errors);
@@ -61,5 +59,11 @@ function ManageParentQuestionController($scope, ManageParentQuestionService, api
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
+	}
+
+	self.setDifficulty = function() {
+		self.hide_difficulty = Constants.TRUE;
+		self.q_difficulty = self.details.difficulty_filter
+		self.view();
 	}
 }

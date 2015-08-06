@@ -35,7 +35,7 @@
 					<li class="nav-label"></li>
 					<li class="nav-label"></li>
 
-					<li><img class="nav-image-holder" ng-src="{! user.avatar !}" /></li>
+					<li><img class="nav-image-holder" ng-src="{! user.thumbnail !}" /></li>
 					<li class="nav-label">Welcome, {! user.first_name !}</li>
 					<li class="dropdown nav-dropdown">
 						<a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="fa fa-2x fa-bars"></span></a>

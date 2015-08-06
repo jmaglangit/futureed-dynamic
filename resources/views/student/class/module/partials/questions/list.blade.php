@@ -1,47 +1,99 @@
 <div class="questions-container col-xs-8">
 	<div class="questions-header">
-		<h3> Question #{! mod.questions.seq_no !} </h3>
+		<h3> Question #{! mod.question_counter !} </h3>
 	</div>
 
-	<div class="questions-image">
-		<img src="/images/avatar/doctor-male/doctor_male-2_main.png" />
-	</div>
+	<div ng-if="!mod.result.answered && !mod.result.quoted">
+		<div class="questions-image">
+			<img ng-if="mod.current_question.original_image_name" ng-src="{! mod.current_question.questions_image !}" />
+		</div>
 
-	<div class="questions-message">
-		<p>{! mod.questions.questions_text !}</p>
-	</div>
+		<div class="questions-message">
+			<p ng-bind-html="mod.current_question.questions_text | trustAsHtml"></p>
+		</div>
 
-	<div class="questions-answers" ng-class="{ 'col-xs-12' : mod.questions.question_type == futureed.FILLINBLANK }">
-		<a ng-if="mod.questions.question_type == futureed.MULTIPLECHOICE" href="" class="choices" ng-repeat="choices in mod.questions.question_answers"
-			ng-click="mod.selectAnswer(choices)" ng-class="{ 'selected-choice' : mod.questions.answer_id == choices.id }">{! choices.answer_text !}</a>
-		
-		<div ng-if="mod.questions.question_type == futureed.FILLINBLANK || mod.questions.question_type == futureed.PROVIDE" class="form-group">
-			<input ng-model="mod.questions.answer_text" type="text" class="form-control question-text-answer" placeholder="Answer" />
+		<div class="questions-answers">
+			<a ng-if="mod.current_question.question_type == futureed.MULTIPLECHOICE" href="" class="choices" ng-repeat="choices in mod.current_question.question_answers"
+				ng-click="mod.selectAnswer(choices)" ng-class="{ 'selected-choice' : mod.current_question.answer_id == choices.id }">{! choices.answer_text !}</a>
+			
+			<div ng-if="mod.current_question.question_type == futureed.FILLINBLANK || mod.current_question.question_type == futureed.PROVIDE" class="form-group">
+				<input ng-model="mod.current_question.answer_text" type="text" class="form-control question-text-answer" placeholder="Answer" />
+			</div>
+
+			<div ng-if="mod.current_question.question_type == futureed.ORDERING">
+				<ul as-sortable="mod.dragControlListeners" ng-model="mod.current_question.answer_text">
+	                <li ng-repeat="item in mod.current_question.answer_text" as-sortable-item class="as-sortable-item">
+	                    <div as-sortable-item-handle class="as-sortable-item-handle">
+	                        <span data-ng-bind="item"></span>
+	                    </div>
+	                </li>
+	            </ul>
+			</div>
+		</div>
+
+		<div class="questions-tips" ng-if="mod.current_question.question_type == futureed.ORDERING">
+			<p> <img src="/images/user_teacher.png" /> <span>Drag the items to reorder. </span></p>
 		</div>
 	</div>
 
-	<div class="questions-tips">
+	<div ng-if="mod.result.answered">
+		<div class="result-image">
+			<i class="fa fa-5x img-rounded text-center"
+				ng-class="{ 'fa-times' : !mod.result.points_earned, 'fa-check' : mod.result.points_earned }"></i>
+		</div>
 
+		<div class="result-message"
+			ng-class="{ 'result-correct' : mod.result.points_earned, 'result-incorrect' : !mod.result.points_earned }">	
+			<p ng-if="mod.result.points_earned > 0">
+				Correct!
+			</p>
+
+			<p ng-if="mod.result.points_earned <= 0">
+				Wrong.
+			</p>
+		</div>
+
+		<div class="btn-container">
+			<button type="button" class="btn btn-maroon btn-medium" ng-click="mod.nextQuestion()">
+				Proceed to next Question
+			</button>
+		</div>
+	</div>
+
+	<div ng-if="mod.result.quoted">
+		<div class="quote-message"
+			ng-class="{ 'result-correct' : mod.result.points_earned, 'result-incorrect' : !mod.result.points_earned }">	
+				<p ng-if="mod.result.points_earned > 0">
+					Correct!
+				</p>
+
+				<p ng-if="mod.result.points_earned <= 0">
+					Wrong.
+				</p>
+		</div>
+
+		<div class="message-container">
+			<div class="col-xs-12">
+				<p class="module-message">
+					{! mod.avatar_quote_info.quote !}
+				</p>
+			</div>
+
+			<div class="module-icon-holder">
+				<img src="/images/avatar/doctor-male/doctor_male-2_main.png" />
+			</div>
+		</div>
+
+
+		<div class="btn-container">
+			<button type="button" class="btn btn-maroon btn-medium" ng-click="mod.nextQuestion()">
+				Proceed to next Question
+			</button>
+		</div>
 	</div>
 
 	<div class="questions-btn-container">
-		<button type="button" class="btn btn-maroon exit-btn" ng-click="mod.exitModule()">Exit Module</button>
-		<button type="button" class="btn btn-gold next-btn" ng-click="mod.checkAnswer()"> Next </button>
+		<button type="button" class="btn btn-gold exit-btn" ng-click="mod.exitModule()">Exit Module</button>
+		<button ng-if="!mod.result.answered && !mod.result.quoted" type="button" class="btn btn-maroon next-btn" ng-click="mod.checkAnswer()"> Submit </button>
 	</div>
 </div>
-
-<ul dnd-list="list">
-    <!-- The dnd-draggable directive makes an element draggable and will
-         transfer the object that was assigned to it. If an element was
-         dragged away, you have to remove it from the original list
-         yourself using the dnd-moved attribute -->
-    <li ng-repeat="item in mod.list track by $index"
-        dnd-draggable="item"
-        dnd-moved="mod.list.splice($index, 1)"
-        dnd-effect-allowed="move"
-        dnd-selected="mod.models.selected = item"
-        ng-class="{'selected': mod.models.selected === item}"
-        >
-        {! item.label !}
-    </li>
-</ul>

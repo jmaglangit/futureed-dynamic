@@ -61,6 +61,7 @@
 			</div>
 		</div>
 	</div>
+	<div class="clearfix"></div>
 	<button class="btn btn-blue btn-small margin-0-30" ng-click="payment.setActive('add')">
 		<i class="fa fa-plus-square"></i> Add Payment
 	</button>

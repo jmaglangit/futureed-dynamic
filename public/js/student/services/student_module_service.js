@@ -58,14 +58,6 @@ function StudentModuleService($http){
 		})
 	}
 
-	service.addTip = function(data) {
-		return $http({
-			method 	: Constants.METHOD_POST
-			, data 	: data
-			, url 	: serviceUrl + 'tip/question-content'
-		})
-	}
-
 	service.tipList = function(data) {
 		return $http({
 			method 	: Constants.METHOD_GET
@@ -107,6 +99,13 @@ function StudentModuleService($http){
 		});
 	}
 
+	service.getModuleStudent = function(module_id) {
+		return $http({
+			method  : Constants.METHOD_GET
+			, url  	: serviceUrl + 'module/student/' + module_id
+		});
+	}
+
 	service.createModuleStudent = function(data) {
 		return $http({
 			method  : Constants.METHOD_POST
@@ -118,10 +117,7 @@ function StudentModuleService($http){
 	service.listQuestions = function(search, table) {
 		return $http({
 			method  : Constants.METHOD_GET
-			, url  	: serviceUrl + 'question?module_id=' + search.module_id
-				+ '&difficulty=' + search.difficulty
-				+ '&limit=' + table.size
-				+ '&offset=' + table.offset
+			, url  	: serviceUrl + 'question?module_id=' + search.module_id 
 		});
 	}
 
@@ -130,6 +126,43 @@ function StudentModuleService($http){
 			method  : Constants.METHOD_POST
 			, data  : data
 			, url  	: serviceUrl + 'student-module-answer'
+		});
+	}
+
+	service.listAvatarQuotes = function(avatar_id) {
+		return $http({
+			method  : Constants.METHOD_GET
+			, url  	: serviceUrl + 'quote?avatar_id=' + avatar_id
+		});
+	}
+
+	service.getAvatarPose = function(avatar_id) {
+		return $http({
+			method  : Constants.METHOD_GET
+			, url  	: serviceUrl + 'avatar-pose?avatar_id=' + avatar_id
+		});
+	}
+
+	service.getPointsEarned = function(data) {
+		return $http({
+			method  : Constants.METHOD_GET
+			, url  	: serviceUrl + 'module-group?age_group=' + data.age_group
+				+ '&module_id=' + data.module_id
+		});
+	}
+
+	service.saveStudentPoints = function(data) {
+		return $http({
+			method  : Constants.METHOD_POST
+			, data  : data
+			, url  	: serviceUrl + 'student-point'
+		});
+	}
+
+	service.getWiki = function(avatar_id) {
+		return $http({
+			method  : Constants.METHOD_GET
+			, url  	: serviceUrl + 'avatar-wiki?avatar_id=' + avatar_id
 		});
 	}
 
