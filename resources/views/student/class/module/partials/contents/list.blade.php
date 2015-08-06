@@ -1,4 +1,4 @@
-<div class="contents-container col-xs-8" ng-if="mod.contents.teaching_content.content_url">
+<div class="contents-container col-xs-8" ng-if="mod.contents.teaching_content.media_type.id == futureed.VIDEO">
 	<!-- TODO: Mar -->
 	<iframe ng-if="mod.contents.teaching_content.content_url" ng-src="{! mod.contents.teaching_content.content_url | trustAsResourceUrl !}" width="100%" height="500" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen ng-cloak></iframe>
 
