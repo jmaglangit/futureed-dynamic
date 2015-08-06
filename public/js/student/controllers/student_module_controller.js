@@ -428,8 +428,9 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else {
-					if(successCallback)
+					if(successCallback) {
 						successCallback(response);
+					}
 				}
 			}
 
@@ -447,8 +448,9 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else {
-					if(successCallback)
+					if(successCallback) {
 						successCallback(response);
+					}
 				}
 			}
 
@@ -575,8 +577,9 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					self.questions = response.data.records;
-					if(successCallback)
+					if(successCallback) {
 						successCallback(response);
+					}
 				}
 			}
 
@@ -665,8 +668,9 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else {
-					if(successCallback)
+					if(successCallback) {
 						successCallback(response);
+					}
 				}
 			}
 
@@ -715,8 +719,9 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
-					if(successCallback)
+					if(successCallback) {
 						successCallback(response);
+					}
 				}
 			}
 
@@ -802,8 +807,9 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
-					if(successCallback)
+					if(successCallback) {
 						successCallback(response);
+					}
 				}
 			}
 		}).error(function(response) {
@@ -817,8 +823,9 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
-					if(successCallback)
+					if(successCallback) {
 						successCallback(response);
+					}
 				}
 			}
 		}).error(function(response) {
@@ -832,8 +839,9 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
-					if(successCallback)
+					if(successCallback) {
 						successCallback(response);
+					}
 				}
 			}
 		}).error(function(response) {
@@ -874,9 +882,6 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 			});
 
 			self.avatar_quote_info = avatar_quote_info;
-
-			console.log(self.avatar_quote_info);
-
 			self.result.quoted = Constants.TRUE;
 		} else {
 			self.result.answered = Constants.TRUE;
