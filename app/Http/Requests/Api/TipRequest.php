@@ -30,7 +30,7 @@ class TipRequest extends ApiRequest {
 						return [
 							'tip_status' => 'required|alpha|in:Accepted,Rejected',
 							'rating' => 'required_if:tip_status,Accepted|integer',
-							'rated_by' => 'required|alpha|in:Teacher,Admin'
+							'rated_by' => 'alpha|in:Teacher,Admin'
 						];
 						break;
 				}
