@@ -134,7 +134,10 @@ class StudentModuleRepository implements StudentModuleRepositoryInterface
 	 */
 	public function getStudentModuleWrongCount($id){
 
-		return StudentModule::find($id)->pluck('wrong_counter');
+		$return  = StudentModule::find($id);
+
+		return $return->wrong_counter;
+
 	}
 
 
