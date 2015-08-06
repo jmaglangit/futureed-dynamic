@@ -19,7 +19,7 @@ class Tip extends Model {
 		'deleted_at'];
 
 	protected $fillable =['class_id','student_id','title','content','module_id','subject_id','subject_area_id','link_type','link_id'
-                            ,'seq_no','rating','tip_status','status','created_by','updated_by'];
+                            ,'seq_no','rating','tip_status','rated_by','status','created_by','updated_by'];
 
 	protected $attributes = [
 		'created_by' => 1,

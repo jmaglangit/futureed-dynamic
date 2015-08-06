@@ -27,7 +27,7 @@ class ClassroomRequest extends ApiRequest {
                 switch( $this->route()->getName() ){
                     case 'classroom.update.invoice-classroom':
                         return [
-                            'name' => 'required|regex:'. config('regex.name'),
+                            'name' => 'required|max:128|min:2|regex:'. config('regex.name'),
                             'grade_id' => 'required|integer',
                             'seats_total' => 'required|integer|min:1|max:999999',
                             'client_id' => 'required|integer',
@@ -44,7 +44,7 @@ class ClassroomRequest extends ApiRequest {
             default:
                 return [
                     'order_no' => 'required',
-                    'name' => 'required|regex:'. config('regex.name'),
+                    'name' => 'required|max:128|min:2|regex:'. config('regex.name'),
                     'grade_id' => 'required|integer',
                     'client_id' => 'required|integer',
                     'seats_taken' => 'required|integer|max:999999',
@@ -65,10 +65,15 @@ class ClassroomRequest extends ApiRequest {
         return [
 			'grade_id.required' => 'Grade is required.',
 			'grade_id.integer' => 'Grade must be a number.',
-			'client_id.required' => 'Client is required.',
+			'client_id.required' => 'Teacher is required.',
 			'client_id.integer' => 'Client must be a number.',
-			'seats_total.integer' => 'Seats total is invalid.',
-			'seats_taken.integer' => 'Seats taken is invalid.'
+			'seats_total.integer' => 'Number of seats is invalid.',
+			'seats_taken.integer' => 'Seats taken is invalid.',
+			'name.required' => 'Class name is required.',
+			'seats_total.required' => 'Number of seats is required.',
+			'name.regex' => 'Class name format is invalid.',
+			'name.min' => 'Class name should be a minimum of 2 characters.',
+			'name.max' => 'Class name may not be greater than 128 characters.',
         ];
     }
 

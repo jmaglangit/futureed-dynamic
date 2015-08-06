@@ -111,7 +111,7 @@
 				{!! Form::button('Approve'
 					, array(
 						'class' => 'btn btn-blue btn-medium'
-						, 'ng-click' => "tips.updateStatus(tips.record.id, futureed.TRUE)"
+						, 'ng-click' => "tips.rateTip()"
 					)
 				) !!}
 				{!! Form::button('Reject'
@@ -157,3 +157,50 @@
 		{!! Form::close() !!}
     </div>
 </div>
+<div id="rate_tip" ng-show="tips.rate_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myMediumModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    Rate this tip
+                </div>
+                <div class="modal-body">
+	                <div class="alert alert-error" ng-if="tips.rate_errors">
+			            <p ng-repeat="error in tips.rate_errors track by $index" > 
+			              	{! error !}
+			            </p>
+			        </div>
+                    {!! Form::select('rate'
+						, array(
+							'' => '-- Select Rate --'
+							, '1' => '1'
+							, '2' => '2'
+							, '3' => '3'
+							, '4' => '4'
+							, '5' => '5'
+						)
+						, ''
+						, array(
+							'class' => 'form-control'
+							, 'ng-model' => 'tips.rating'
+						)
+					) !!}
+                </div>
+                <div class="modal-footer">
+                    <div class="btncon col-md-8 col-md-offset-4 pull-left">
+                        {!! Form::button('Accept'
+                            , array(
+                                'class' => 'btn btn-blue btn-medium'
+                                , 'ng-click' => 'tips.updateStatus(tips.record.id, futureed.TRUE)'
+                            )
+                        ) !!}
+                        {!! Form::button('Cancel'
+                            , array(
+                                'class' => 'btn btn-gold btn-medium'
+                                , 'data-dismiss' => 'modal'
+                            )
+                        ) !!}
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>

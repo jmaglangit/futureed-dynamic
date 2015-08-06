@@ -25,8 +25,8 @@ class ClientTeacherRequest extends ApiRequest
 		switch ($this->method()) {
 			case 'PUT':
 				return [
-					'first_name' => 'required|regex:'. config('regex.name') ,
-					'last_name' => 'required|regex:'. config('regex.name'),
+					'first_name' => 'required|max:64|min:2|regex:'. config('regex.name') ,
+					'last_name' => 'required|max:64|min:2|regex:'. config('regex.name'),
 					'street_address' => 'string',
 					'city' => 'max:128|regex:'.config('regex.state_city'),
 					'state' => 'max:128|regex:'.config('regex.state_city'),
@@ -41,8 +41,8 @@ class ClientTeacherRequest extends ApiRequest
 					'username' => "required|alpha_num|string|min:8|max:32|unique:users,username,NULL,id,user_type,$client,deleted_at,NULL",
 					'email' => "required|email|unique:users,email,NULL,id,user_type,$client,deleted_at,NULL",
 
-					'first_name' => 'required|regex:'. config('regex.name'),
-					'last_name' => 'required|regex:'. config('regex.name') ,
+					'first_name' => 'required|max:64|min:2|regex:'. config('regex.name'),
+					'last_name' => 'required|max:64|min:2|regex:'. config('regex.name') ,
 					'current_user' => 'required|numeric',
 					'callback_uri' => 'required|string',
 					'country_id' => 'integer'

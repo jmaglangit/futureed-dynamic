@@ -47,4 +47,20 @@ class ManageStudentController extends Controller{
 	{
 		return view('admin.manage.student.partials.delete_student_form');
 	}
+
+	/**
+	*@return Reward Form
+	*/
+	public function reward()
+	{
+		return view('admin.manage.student.partials.reward');
+	}
+
+	/**
+	*@return Edit Reward Form
+	*/
+	public function edit_reward()
+	{
+		return view('admin.manage.student.partials.edit_reward');
+	}
 }

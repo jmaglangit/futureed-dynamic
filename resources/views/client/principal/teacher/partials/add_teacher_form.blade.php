@@ -101,7 +101,7 @@
 				</div>
 			</div>
 			<div class="btn-container col-xs-6 col-xs-offset-2">
-				{!! Form::button('Save'
+				{!! Form::button('Send Invitation'
 					, array(
 						'class' => 'btn btn-blue btn-medium'
 						, 'ng-click' => 'teacher.save()'

@@ -61,6 +61,8 @@ function ProfileController($scope, apiService, profileService) {
 
 	      case Constants.REWARDS  		:
 	        self.active_rewards = Constants.TRUE;
+	        self.getPoints();
+	        self.getBadges();
 	        break;
 
 	      case Constants.AVATAR   		:
@@ -104,7 +106,6 @@ function ProfileController($scope, apiService, profileService) {
 
 	  function studentDetails() {
 	  	self.errors = Constants.FALSE;
-
 	  	$scope.ui_block();
 	    apiService.studentDetails($scope.user.id).success(function(response) {
 			if(response.status == Constants.STATUS_OK) {
@@ -113,6 +114,7 @@ function ProfileController($scope, apiService, profileService) {
 				} else if(response.data) {
 					self.prof = response.data[0];
 					self.prof.birth = self.prof.birth_date;
+
 					self.getGradeLevel();
 				} 
 			}
@@ -519,8 +521,55 @@ function ProfileController($scope, apiService, profileService) {
 	          self.errors = $scope.internalError();
 	        });
 	    } else {
-	      self.errors = [Constants.MSG_PPW_NOT_MATCH];
-	      $("html, body").animate({ scrollTop: 0 }, "slow");
+	    	if(!self.image_id) {
+	    		self.errors = [Constants.MSG_PPW_SELECT];
+	    	} else {
+	    		self.errors = [Constants.MSG_PPW_NOT_MATCH];
+	    	}
+	      	
+	      	$("html, body").animate({ scrollTop: 0 }, "slow");
 	    }
+	}
+
+	self.getBadges = function() {
+		var id = $scope.user.id;
+
+		$scope.ui_block();
+		profileService.getBadges(id).success(function(response){
+			if(response.status == Constants.STATUS_OK) {
+	            if(response.errors) {
+	              self.errors = $scope.errorHandler(response.errors);
+	            } else if(response.data){
+	              self.badges = response.data.records;
+
+	              angular.forEach(self.badges,function(value,key){
+	              	value.badge_path = '/images/badges/' + value.badges.badge_image;
+	              });
+	            } 
+	          }
+	          $scope.ui_unblock();
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.getPoints = function() {
+		var id = $scope.user.id;
+
+		$scope.ui_block();
+		profileService.getPoints(id).success(function(response){
+			if(response.status == Constants.STATUS_OK) {
+	            if(response.errors) {
+	              self.errors = $scope.errorHandler(response.errors);
+	            } else if(response.data){
+	              self.points = response.data.records;
+	            } 
+	          }
+	          $scope.ui_unblock();
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
 	}
 }

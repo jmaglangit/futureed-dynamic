@@ -145,7 +145,7 @@
 		<img class="help-img-header" src="/images/class-student/sidebar_header_helprequest.png" alt="">
 	</div>
 	<div id="help_request_form">
-		<div class="side-btn-container row" ng-if="!class.add_help && !class.help.success && class.help.total">
+		<div class="side-btn-container row" ng-if="!class.add_help && !class.help.success">
 			<div class="col-xs-12 submit-btn-help">
 				{!! Form::open(
 					array(
@@ -157,7 +157,6 @@
 					{!! Form::submit('My Help Requests'
 		                , array(
 		                   'class' => 'btn btn-blue'
-		                  , 'ng-if' => 'class.help.total'
 		                )
 		            ) !!}
 	            {!! Form::close() !!}
@@ -286,6 +285,6 @@
 	</div>
 </div>
 
-<div class="side-btn-toggle" ng-class="{'div-out':class.bool_change_class, 'flip-horizontal' : !class.bool_change_class }">
-	<img src="/images/class-student/btn-slide.png" ng-click="class.click()">
+<div class="side-btn-in" ng-class="{ 'side-btn-out' : class.bool_change_class }">
+	<img src="/images/class-student/btn-slide.png" ng-class="{'flip-180' : !class.bool_change_class }" ng-click="class.click()">
 </div>

@@ -102,8 +102,10 @@ function ManageParentStudentController($scope, ManageParentStudentService, apiSe
 		$("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 
-	self.searchFnc = function() {
+	self.searchFnc = function(event) {
+		self.tableDefaults();
 		self.list();
+
 		event = getEvent(event);
 		event.preventDefault();
 	}
@@ -388,5 +390,18 @@ function ManageParentStudentController($scope, ManageParentStudentService, apiSe
 			$scope.internalError();
 			$scope.ui_unblock();
 		});
+	}
+
+	self.playStudent = function(id) {
+		$scope.ui_block();
+		ManageParentStudentService.playStudent().success(function(response){
+			if(angular.equals(response.status,Constants.STATUS_OK)){
+				window.location.href = '/student/login?id=' + id;
+			}
+			$scope.ui_unblock();
+		}).error(function(){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		})
 	}
 }

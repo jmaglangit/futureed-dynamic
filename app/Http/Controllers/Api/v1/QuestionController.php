@@ -19,6 +19,56 @@ class QuestionController extends ApiController {
 	}
 
 	/**
+	 * @return Display all questions.
+	 */
+	public function index(){
+
+		$criteria = [];
+		$limit = 0 ;
+		$offset = 0;
+
+		//for module_id
+		if(Input::get('module_id')){
+
+			$criteria['module_id'] = Input::get('module_id');
+		}
+
+		//for question_type
+		if(Input::get('question_type')){
+
+			$criteria['question_type'] = Input::get('question_type');
+		}
+
+		//for questions_text
+		if(Input::get('questions_text')){
+
+			$criteria['questions_text'] = Input::get('questions_text');
+		}
+
+		if(Input::get('questions_id')){
+			$criteria['questions_id'] = Input::get('questions_id');
+		}
+
+		if(Input::get('last_answered_question_id')){
+			$criteria['last_answered_question_id'] = Input::get('last_answered_question_id');
+		}
+
+		if(Input::get('difficulty')){
+			$criteria['difficulty'] = Input::get('difficulty');
+		}
+
+		if(Input::get('limit')) {
+			$limit = intval(Input::get('limit'));
+		}
+
+		if(Input::get('offset')) {
+			$offset = intval(Input::get('offset'));
+		}
+
+		return $this->respondWithData($this->question->getQuestions($criteria , $limit, $offset ));
+	}
+
+	/**
 	 * Update the specified resource in storage.
 	 *
 	 * @param  int  $id
@@ -42,6 +92,14 @@ class QuestionController extends ApiController {
 
 			}
 
+			$image_type = explode('.',$_FILES['file']['name']);
+
+			if(count($image_type) >= 3){
+
+				return $this->respondErrorMessage(2146);
+
+			}
+
 
 			if($_FILES['file']['size'] > 2 * MB){
 
@@ -62,6 +120,5 @@ class QuestionController extends ApiController {
 		return $this->respondWithData($return);
 
 	}
-
 
 }

@@ -44,4 +44,17 @@ interface QuestionAnswerRepositoryInterface {
 	 */
 	public function deleteQuestionAnswer($id);
 
+    /**
+     * Get correct answer from question.
+     * @param $question_id
+     * @param $answer_id
+     * @return object
+     */
+    public function getCorrectAnswer($question_id,$answer_id);
+
+	public function getQuestionCorrectAnswer($id);
+
+	public function getQuestionPointEquivalent($id);
+
+
 }

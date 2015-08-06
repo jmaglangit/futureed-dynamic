@@ -9,6 +9,7 @@ var Constants = {
 	, EMPTY_STR		: ''
 	, ALL			: 'all'
 	, UNDEFINED		: 'undefined'
+	, NULL 			: null
 
 	, METHOD_POST	: 'POST'
 	, METHOD_GET	: 'GET'
@@ -48,6 +49,24 @@ var Constants = {
 	, GENERAL		: "General"
 	, CONTENT 		: "Content"
 	, QUESTION		: "Question"
+	, ANSWER		: "Answer"
+
+	/**
+	* Media Types
+	*/
+	, VIDEO			: 1
+	, TEXT			: 2
+	, IMAGE			: 3
+
+	, NONE 			: "None"
+
+	/**
+	* Help Tabs
+	*/
+	, CURRENT 		: "current"
+	, OWN 			: "own"
+	, ALL 			: "all"
+	, CLASSMATE 	: "classmate"
 
 	/**
 	* Active Screens
@@ -57,6 +76,9 @@ var Constants = {
 	, ACTIVE_EDIT	: "edit"
 	, ACTIVE_ADD	: "add"
 	, ACTIVE_EMAIL	: "email"
+
+	, ACTIVE_QUESTIONS 	: "questions"
+	, ACTIVE_CONTENTS 	: "contents"
 
 	, ADD_CLIENT 	: "add_client"
 	, ADD_STUDENT	: "add_student"
@@ -71,9 +93,23 @@ var Constants = {
 	, STATUS_TRUE 	: "true"
 	, STATUS_FALSE 	: "false"
 
+	, M_CHOICE		: "MC"
+
+	, BACK 			: "Back"
+	, NEXT 			: "Next"
+
+	, YES 			: "Yes"
+	, NO 			: "No"
+
+	, FILLINBLANK 		: "FIB"
+	, MULTIPLECHOICE 	: "MC"
+	, ORDERING 			: "O"
+	, PROVIDE 			: "N"
+
 	, MSG_INTERNAL_ERROR	: "Hmm, something went wrong. Please contact the system administrator."
 	, MSG_PPW_NOT_MATCH 	: "Picture Password does not match."
 	, MSG_PPW_INCORRECT		: "Picture password is incorrect."
+	, MSG_PPW_SELECT 		: "Please select a picture password."
 	, MSG_PPW_SELECT_NEW 	: "Please select a new picture password."
 
 	// API Message
@@ -110,11 +146,24 @@ var Constants = {
 	, UPDATE_PAYMENT_STATUS_SUCCESS 	: "You have successfully updated the payment status."
 	, DELETE_INVOICE_SUCCESS : "You have successfully delete the selected invoice."
 
+	, RESET_SUCCESS 		: "Your module was reset successfully."
+
 	, MSG_U_NOTEXIST		: "User does not exist."
 	, MSG_U_EXIST 			: "Username already exists."
 	, MSG_U_AVAILABLE		: "Username is available."
 
 	, MSG_NO_RECORD			: "No record found."
+
+	, MSG_FILL_FIELDS 		: "Please fill the required fields."
+
+	, POINT_UPDATE 			: "successfully updated the point"
+	, BADGE_UPDATE 			: "successfully updated the badge"
+	, BADGE_DELETE 			: "successfully deleted the badge"
+
+	, ATTR_CURRENT_EMAIL 	: "current_email"
+	, ATTR_NEW_EMAIL 		: "new_email"
+	, ATTR_CONFIRM_EMAIL 	: "confirm_email"
+	, ATTR_PASSWORD 		: "password"
 
 	, URL_FORGOT_PASSWORD	: function(user_type) {
 		return '/' + user_type + '/password/forgot';

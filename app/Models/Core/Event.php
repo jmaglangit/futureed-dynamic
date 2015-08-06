@@ -13,6 +13,14 @@ class Event extends Model {
     protected $dates = ['deleted_at'];
 
     protected $hidden = ['created_by','updated_by','created_at','updated_at','deleted_at'];
+
+
+	//scope
+	public function scopeName($query, $name) {
+
+		return $query->where('name', 'like' , '%'.$name.'%');
+
+	}
     
 
 }

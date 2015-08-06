@@ -1,5 +1,5 @@
 <div ng-if="qa.q_details.question_type == 'MC'" ng-init="qa.setAnsActive()">
-    {!! Form::open(array('id'=> 'add_answer_form', 'class' => 'form-horizontal', 'enctype' => 'multipart/form-data')) !!}
+	    {!! Form::open(array('id'=> 'add_answer_form', 'class' => 'form-horizontal', 'enctype' => 'multipart/form-data')) !!}
         <div class="col-xs-12 form-content">
             <div class="alert alert-error" ng-if="qa.answers.errors">
                 <p ng-repeat="error in qa.answers.errors track by $index" > 
@@ -93,14 +93,25 @@
                         <label class="control-label col-xs-4">Answer Image</label>
                         <div class="col-xs-5">
                             <div class="btn btn-blue" ngf-select ngf-change="qa.uploadAnswer($files, qa.answers)"> Choose Image... </div>
-                            <span ng-if="qa.answers.uploaded" class="label label-info upload-label">Image Uploaded...</span>
+                        </div>
+
+                        <div class="margin-top-8" ng-if="qa.answers.uploaded">
+                            <a href="" ng-click="qa.removeImage(qa.answers)"><i class="fa fa-trash"></i></a>
+                        </div>
+                    </div>
+
+                    <div class="form-group" ng-if="qa.answers.uploaded">
+                        <div class="col-xs-4"></div>
+                        <div class="col-xs-5">
+                            <span class="col-xs-6 upload-label label label-info">Image Uploaded...</span>
+                            <a href="" class="control-label col-xs-6" ng-click="qa.viewAnswerImage(qa.answers)">View Image</a>
                         </div>
                     </div>
 
                     <div class="form-group" ng-if="qa.active_view && qa.answers.original_image_name && qa.answers.original_image_name != '0'">
                         <div class="control-label col-xs-4"></div>
                         <div class="col-xs-5">
-                            <a href="" ng-click="qa.viewAnswerImage('{!! route('admin.image.viewer') !!}', qa.answers)">View Image</a>
+                            <a href="" ng-click="qa.viewAnswerImage(qa.answers)">View Image</a>
                         </div>
                     </div>
 

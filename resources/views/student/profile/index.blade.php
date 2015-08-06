@@ -28,9 +28,9 @@
 						<div class="points">
 							<span class="star">☆</span>
 							<div class="pcon">
-								<span>20</span> points
+								<span>{! user.points !}</span> points
 							</div>
-							<a href="" class="lnk">See all points</a>
+							<a href="javascript:;" ng-click="profile.setStudentProfileActive('rewards')" class="lnk">See all points</a>
 						</div>
 					</div>
 					<h2 class="student-font">

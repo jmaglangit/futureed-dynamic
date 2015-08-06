@@ -24,7 +24,10 @@
 @stop
 
 @section('scripts')
+	{!! Html::script('/js/student/controllers/student_class_controller.js')!!}
 	{!! Html::script('/js/student/controllers/student_help_controller.js')!!}
+	
+	{!! Html::script('/js/student/services/student_class_service.js')!!}
 	{!! Html::script('/js/student/services/student_help_service.js')!!}
 
 	{!! Html::script('/js/common/search_service.js')!!}

@@ -12,6 +12,8 @@ class QuestionAnswer extends Model {
 	protected $dates = ['deleted_at'];
 
 	protected $hidden = [
+		'correct_answer',
+		'point_equivalent',
 		'created_by',
 		'updated_by',
 		'created_at',
@@ -30,11 +32,12 @@ class QuestionAnswer extends Model {
 	];
 
 	//-------------scopes
-	public function scopeQuestionId($query, $question_id)
-	{
+	public function scopeQuestionId($query, $question_id){
+		return $query->whereQuestionId($question_id);
+	}
 
-		return $query->where('question_id', '=', $question_id);
-
+	public function scopeIsCorrectAnswer($query){
+		return $query->whereCorrectAnswer('Yes');
 	}
 
 }

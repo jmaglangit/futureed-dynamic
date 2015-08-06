@@ -27,7 +27,7 @@
 				<div class="col-xs-4">
 					{!! Form::text('search_teaching_module', ''
 						,array(
-							'placeholder' => 'Teaching Module'
+							'placeholder' => 'Teaching Module Name'
 							, 'ng-model' => 'content.search.teaching_module'
 							, 'class' => 'form-control'
 						)
@@ -96,7 +96,7 @@
 					<thead>
 				        <tr>
 				            <th>Code</th>
-				            <th>Content</th>
+				            <th>Teaching Module Name</th>
 				            <th>Learning Style</th>
 				            <th>Media Type</th>
 				            <th ng-if="content.records.length">Actions</th>
@@ -105,7 +105,7 @@
 			        <tbody>
 				        <tr ng-repeat="contentInfo in content.records">
 				            <td>{! contentInfo.code !}</td>
-				            <td>{! contentInfo.teaching_module !}</td>
+				            <td class="wide-column">{! contentInfo.teaching_module !}</td>
 				            <td>{! contentInfo.learning_style.name !}</td>
 				            <td>{! contentInfo.media_type.name !}</td>
 				            <td ng-if="content.records.length">

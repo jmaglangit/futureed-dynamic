@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Filesystem\Filesystem;
 
 class Question extends Model {
 
@@ -18,8 +19,9 @@ class Question extends Model {
 		'updated_at',
 		'deleted_at'];
 
-	protected $fillable =['module_id','code','question_type','questions_text','questions_image','answer','seq_no','difficulty','points_earned'
-			     ,'original_image_name','status','created_by','updated_by'];
+	protected $fillable =['module_id','code','question_type','questions_text','questions_image','answer'
+		,'question_order_text','seq_no','difficulty','points_earned'
+		,'original_image_name','status','created_by','updated_by'];
 
 	protected $attributes = [
 		'created_by' => 1,
@@ -29,9 +31,32 @@ class Question extends Model {
 		'seq_no' => 0
 	];
 
+	//Accessor
+	public function getQuestionsImageAttribute($value){
+
+		$filesystem = new Filesystem();
+
+		//get path
+		$image_path = config('futureed.question_image_path_final') .'/'. $this->attributes['id'] . '/'. $value;
+
+		//check path
+		if($filesystem->exists($image_path)){
+			return asset(config('futureed.question_image_path_final_public') .'/'. $this->attributes['id'] . '/'. $value);
+
+		} else {
+
+			return 'None';
+		}
+	}
+
 	//-------------relationships
 	public function module() {
 		return $this->belongsTo('FutureEd\Models\Core\Module')->with('subject','subjectArea');
+	}
+
+	//
+	public function questionAnswers(){
+		return $this->hasMany('FutureEd\Models\Core\QuestionAnswer');
 	}
 
 	//-------------scopes
@@ -69,6 +94,10 @@ class Question extends Model {
 	public function scopeOrderBySeqNoDesc($query){
 
 		return $query->OrderBy('seq_no','desc');
+	}
+
+	public function scopeDifficulty($query,$difficulty){
+		return $query->whereDifficulty($difficulty);
 	}
 
 

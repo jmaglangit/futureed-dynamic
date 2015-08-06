@@ -32,11 +32,11 @@ function ManageTeacherTipsService($http){
 		});
 	}
 
-	service.updateStatus = function(id, status) {
+	service.updateStatus = function(data) {
 		return $http({
 			method 	: Constants.METHOD_PUT
-			, data 	: {tip_status : status}
-			, url 	: url + 'tip/update-status/' + id
+			, data 	: data
+			, url 	: url + 'tip/update-status/' + data.id
 		});
 	}
 

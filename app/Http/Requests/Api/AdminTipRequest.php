@@ -26,12 +26,19 @@ class AdminTipRequest extends ApiRequest {
 			case 'PUT':
 
 				return [
-					'title' => 'required|string',
+					'title' => 'required|string|max:128|min:2',
 					'content' => 'required|string',
 					'link_type' => 'required|alpha|in:General,Question,Content',
 					'status' => 'required|alpha|in:Enabled,Disabled'
 				];
 		}
+	}
+
+	public function messages(){
+		return[
+			'content.required' => 'The description field is required.',
+			'content.string' => 'The description field is invalid.',
+		];
 	}
 
 }

@@ -81,12 +81,119 @@
 
 			Routes::group([
 				  'prefix' => '/partials'
-				, 'middleware' => 'student'], function()
+				, 'middleware' => 'student_partial'], function()
 			{
 				Routes::get('/dashbrd-side-nav', [ 
 						'as' => 'student.class.partials.dashbrd-side-nav'
 						, 'uses' => 'FutureLesson\Student\ClassController@dashbrd_side_nav'
 					]);
+
+				Routes::get('/module_list', [ 
+						'as' => 'student.class.partials.module_list'
+						, 'uses' => 'FutureLesson\Student\ClassController@module_list'
+					]);
+			});
+
+			Routes::group([
+				  'prefix' => '/module'
+				, 'middleware' => 'student_partial'], function()
+			{
+				Routes::get('/', [ 
+					'as' => 'student.class.module.index'
+					, 'uses' => 'FutureLesson\Student\ClassModuleController@index'
+				]);
+
+				Routes::get('/{name}', [ 
+						'as' => 'student.class.modulename'
+						, 'uses' => 'FutureLesson\Student\ClassModuleController@module'
+					]);
+				
+				Routes::group([
+					  'prefix' => '/partials'
+					, 'middleware' => 'student_partial'], function()
+				{
+					Routes::get('/add_help', [ 
+							'as' => 'student.class.module.partials.add_help'
+							, 'uses' => 'FutureLesson\Student\ClassModuleController@add_help'
+						]);
+
+					Routes::get('/list_help', [ 
+							'as' => 'student.class.module.partials.list_help'
+							, 'uses' => 'FutureLesson\Student\ClassModuleController@list_help'
+						]);
+
+					Routes::get('/current_help', [ 
+							'as' => 'student.class.module.partials.current_help'
+							, 'uses' => 'FutureLesson\Student\ClassModuleController@current_help'
+						]);
+
+					Routes::get('/current_view_help', [ 
+							'as' => 'student.class.module.partials.current_view_help'
+							, 'uses' => 'FutureLesson\Student\ClassModuleController@current_view_help'
+						]);
+
+					Routes::get('/list_your_help', [ 
+							'as' => 'student.class.module.partials.list_your_help'
+							, 'uses' => 'FutureLesson\Student\ClassModuleController@list_your_help'
+						]);
+
+					Routes::get('/view_your_help', [ 
+							'as' => 'student.class.module.partials.view_your_help'
+							, 'uses' => 'FutureLesson\Student\ClassModuleController@view_your_help'
+						]);
+
+					// Start TODO: Organize routes
+					Routes::get('/add_tip', [ 
+							'as' => 'student.class.module.partials.add_tip'
+							, 'uses' => 'FutureLesson\Student\TipsController@add_tip'
+						]);
+
+					Routes::get('/list_tips', [ 
+							'as' => 'student.class.module.partials.list_tips'
+							, 'uses' => 'FutureLesson\Student\TipsController@list_tips'
+						]);
+
+					Routes::get('/view_tip', [ 
+							'as' => 'student.class.module.partials.view_tip'
+							, 'uses' => 'FutureLesson\Student\TipsController@view_tip'
+						]);
+					// End TODO: Organize routes
+
+					Routes::get('/list_current_tips', [ 
+							'as' => 'student.class.module.partials.list_current_tips'
+							, 'uses' => 'FutureLesson\Student\ClassModuleController@list_current_tips'
+						]);
+
+					Routes::get('/list_all_tips', [ 
+							'as' => 'student.class.module.partials.list_all_tips'
+							, 'uses' => 'FutureLesson\Student\ClassModuleController@list_all_tips'
+						]);
+
+					Routes::get('/view_current_tips', [ 
+							'as' => 'student.class.module.partials.view_current_tips'
+							, 'uses' => 'FutureLesson\Student\ClassModuleController@view_current_tips'
+						]);
+
+					Routes::get('/view_all_tips', [ 
+							'as' => 'student.class.module.partials.view_all_tips'
+							, 'uses' => 'FutureLesson\Student\ClassModuleController@view_all_tips'
+						]);
+
+					Routes::get('/contents', [
+						'as' => 'student.class.module.partials.contents'
+						, 'uses' => 'FutureLesson\Student\ClassModuleController@contents'
+						]);
+
+					Routes::get('/questions', [
+						'as' => 'student.class.module.partials.questions'
+						, 'uses' => 'FutureLesson\Student\ClassModuleController@questions'
+						]);
+
+					Routes::get('/messages', [
+						'as' => 'student.class.module.partials.view_question_message'
+						, 'uses' => 'FutureLesson\Student\ClassModuleController@view_question_message'
+						]);
+				});
 			});
 		});
 
@@ -185,6 +292,18 @@
 						, 'uses' => 'FutureLesson\Student\ProfileController@change_password_form'
 					]);
 			});
+		});
+
+		Routes::group([
+			  'prefix' => 'learning-style'
+			, 'middleware' => 'student'], function()
+		{
+			Routes::get('/', [ 
+					'as' => 'student.learning-style.index'
+					, 'uses' => 'FutureLesson\Student\LearningStyleController@index'
+				]);
+
+			
 		});
 
 		Routes::group(['prefix' => 'partials'], function() {

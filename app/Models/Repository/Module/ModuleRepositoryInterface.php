@@ -1,7 +1,8 @@
 <?php
 namespace FutureEd\Models\Repository\Module;
 
-interface ModuleRepositoryInterface {
+interface ModuleRepositoryInterface
+{
 
 	public function addModule($data);
 
@@ -9,8 +10,12 @@ interface ModuleRepositoryInterface {
 
 	public function viewModule($id);
 
-	public function updateModule($id,$data);
+	public function updateModule($id, $data);
 
 	public function deleteModule($id);
+
+	public function getPointsToFinish($module_id);
+
+	public function countSubjectModule($subject_id, $grade_id);
 
 }

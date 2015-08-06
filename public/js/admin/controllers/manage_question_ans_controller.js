@@ -75,6 +75,7 @@ function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService,
 
     self.setActive = function(active, id, flag) {
         self.errors = Constants.FALSE;
+        self.fields = [];
         self.create = {};
         self.uploaded = Constants.FALSE;
         self.area_field = Constants.FALSE;
@@ -115,6 +116,7 @@ function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService,
 
     self.searchFnc = function(event) {
         self.errors = Constants.FALSE;
+        self.tableDefaults();
         self.list();
         
         event = getEvent(event);
@@ -152,8 +154,6 @@ function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService,
     	self.errors = Constants.FALSE;
 		self.create.success = Constants.FALSE;
 		self.fields = [];
-		// set temporary seq_no (this will be remove once api will not require seq_no)
-		self.create.seq_no = 1;
 		self.create.module_id = self.module.id;
 
 		$scope.ui_block();
@@ -197,10 +197,25 @@ function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService,
 		});
     }
 
-    self.viewImage = function(base, object) {
+    self.removeImage = function(object) {
+    	// In add question 
     	self.view_image = {};
-		self.view_image.image_path = object.questions_image;
-		self.view_image.questions_text = object.questions_text;
+
+    	object.image = Constants.EMPTY_STR;
+    	object.image_path = Constants.EMPTY_STR;
+    	object.uploaded = Constants.FALSE;
+    } 
+
+    self.viewImage = function(object) {
+    	self.view_image = {};
+
+		if(object.image) {
+			self.view_image.image_path = "/uploads/temp/question/" + object.image;
+		} else if(object.questions_image) {
+			self.view_image.image_path = object.questions_image;
+		}
+
+		self.view_image.questions_text = (object.questions_text) ? object.questions_text : Constants.QUESTION ;
 		self.view_image.show = Constants.TRUE;
 
 		$("#view_image_modal").modal({
@@ -210,10 +225,16 @@ function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService,
 	    });
     }
 
-    self.viewAnswerImage = function(base, object) {
+    self.viewAnswerImage = function(object) {
     	self.view_image = {};
-		self.view_image.image_path = object.answer_image;
-		self.view_image.questions_text = object.answer_text;
+
+		if(object.image) {
+			self.view_image.image_path = "/uploads/temp/answer/" + object.image;
+		} else if(object.questions_image) {
+			self.view_image.image_path = object.answer_image;
+		}
+
+		self.view_image.questions_text = (object.answer_text) ? object.answer_text : Constants.ANSWER ;
 		self.view_image.show = Constants.TRUE;
 
 		$("#view_image_modal").modal({
@@ -323,11 +344,12 @@ function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService,
 		ManageQuestionAnsService.addAnswer(self.answers).success(function(response){
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
-					self.answers.errors = $scope.errorHandler(response.errors);
+					self.answers.errors = $scope.errorHandler(response.errors, 1);
 
 					angular.forEach(response.errors, function(value, a) {
 						self.fields[value.field + '_ans'] = Constants.TRUE;
 					});
+
 				} else if(response.data) {
 					self.answers = {};
 					self.answers.success = ManageModuleConstants.SUCCESS_ADD_ANSWER;
@@ -428,7 +450,7 @@ function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService,
 		ManageQuestionAnsService.saveAnswer(self.answers).success(function(response){
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
-					self.answrs.errors = $scope.errorHandler(response.errors);
+					self.answers.errors = $scope.errorHandler(response.errors);
 
 					angular.forEach(response.errors, function(value, a) {
 						self.fields[value.field + '_ans'] = Constants.TRUE;

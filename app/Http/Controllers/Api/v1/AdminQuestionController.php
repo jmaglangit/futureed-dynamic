@@ -68,19 +68,7 @@ class AdminQuestionController extends ApiController {
 			$offset = intval(Input::get('offset'));
 		}
 
-		$record = $this->question->getQuestions($criteria , $limit, $offset );
-
-		if($record['total'] > 0){
-
-			foreach($record['records'] as $k=>$v){
-
-				$record['records'][$k]['questions_image'] = config('futureed.question_image_path_final_public').'/'.$v['id'].'/'.$v['questions_image'];
-			}
-
-		}
-
-
-		return $this->respondWithData($record);
+		return $this->respondWithData($this->question->getQuestions($criteria , $limit, $offset ));
 	}
 
 	/**
@@ -104,16 +92,18 @@ class AdminQuestionController extends ApiController {
 		$data =  $request->only('image','answer','seq_no','code','module_id','questions_text','status','question_type','points_earned','difficulty');
 
 
-		$last_sequence = $this->question->getLastSequence($data['module_id']);
+		$last_sequence = $this->question->getLastSequence($data['module_id'],$data['difficulty']);
+
 		//get sequence
 		if(!$data['seq_no'] || $data['seq_no'] > $last_sequence ) {
 
 			//get last sequence and add.
 			$data['seq_no'] = $last_sequence + 1;
+
 		}else {
 
 			//move sequence
-			$current_sequence = $this->question_service->updateSequence($data['module_id'],$data['seq_no']);
+			$current_sequence = $this->question_service->updateSequence($data['module_id'],$data['seq_no'],$data['difficulty']);
 
 			//update sequence
 			$this->question->updateSequence($current_sequence);
@@ -170,9 +160,6 @@ class AdminQuestionController extends ApiController {
 			return $this->respondErrorMessage(2120);
 		}
 
-
-		$question->questions_image = config('futureed.question_image_path_final_public').'/'.$question->id.'/'.$question->questions_image;
-
 		return $this->respondWithData($question);
 	}
 
@@ -195,7 +182,8 @@ class AdminQuestionController extends ApiController {
 	 */
 	public function update($id,AdminQuestionRequest $request)
 	{
-		$data =  $request->only('image','answer','questions_text','status','question_type','points_earned','difficulty','seq_no');
+		$data =  $request->only('image','answer','question_order_text','questions_text','status','question_type'
+			,'points_earned','difficulty','seq_no');
 
 		$question = $this->question->viewQuestion($id);
 
@@ -225,19 +213,19 @@ class AdminQuestionController extends ApiController {
 		//get current sequence and compare
 		$current_sequence = $this->question->getQuestionSequenceNo($id);
 
-		$last_current_seq_no = $this->question->getLastSequence($current_sequence[0]->module_id);
+		$last_current_seq_no = $this->question->getLastSequence($current_sequence[0]->module_id,$data['difficulty']);
 		$data['seq_no'] = ($data['seq_no'] > $last_current_seq_no)? $last_current_seq_no : $data['seq_no'];
 
 		if($data['seq_no'] <> $current_sequence[0]->seq_no){
 
 			//pull sequence number.
-			$pulled = $this->question_service->pullSequenceNo($current_sequence[0]->module_id, $current_sequence[0]->seq_no,$id);
-
+			$pulled = $this->question_service->pullSequenceNo($current_sequence[0]->module_id, $current_sequence[0]->seq_no,$id,$data['difficulty']);
+			
 			//update sequence
 			$this->question->updateSequence($pulled);
 
 			//insert sequence number.
-			$current_sequence = $this->question_service->updateSequence($current_sequence[0]->module_id,$data['seq_no']);
+			$current_sequence = $this->question_service->updateSequence($current_sequence[0]->module_id,$data['seq_no'],$data['difficulty']);
 
 
 			//update sequence
@@ -272,6 +260,14 @@ class AdminQuestionController extends ApiController {
 
 			return $this->respondErrorMessage(2120);
 		}
+
+		$current_sequence = $this->question->getQuestionSequenceNo($id);
+
+		//pull sequence number.
+		$pulled = $this->question_service->pullSequenceNo($current_sequence[0]->module_id, $current_sequence[0]->seq_no,$id,$question['difficulty']);
+
+		//update sequence
+		$this->question->updateSequence($pulled);
 
 		//delete question
 		return $this->respondWithData($this->question->deleteQuestion($id));

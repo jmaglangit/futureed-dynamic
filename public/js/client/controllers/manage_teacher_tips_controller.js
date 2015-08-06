@@ -156,13 +156,19 @@ function ManageTeacherTipsController($scope, ManageTeacherTipsService, TableServ
 		self.success = Constants.FALSE;
 		self.errors = Constants.FALSE;
 		var tip_status = (status) ? Constants.ACCEPTED : Constants.REJECTED;
+		self.rate = {};
+		self.rate.id = id;
+		self.rate.tip_status = tip_status;
+		self.rate.rated_by = Constants.TEACHER;
+		self.rate.rating = self.rating;
 
 		$scope.ui_block();
-		ManageTeacherTipsService.updateStatus(id, tip_status).success(function(response){
+		ManageTeacherTipsService.updateStatus(self.rate).success(function(response){
 			if(angular.equals(response.status,Constants.STATUS_OK)){
 				if(response.errors){
-					self.errors = $scope.errorHandler(response.errors);
+					self.rate_errors = $scope.errorHandler(response.errors);
 				}else if(response.data){
+					$("#rate_tip").modal('hide');
 					self.success = (status) ? TeacherConstant.APPROVE_TIP : TeacherConstant.REJECT_TIP;
 					self.setActive(Constants.ACTIVE_VIEW, id);
 				}
@@ -172,5 +178,14 @@ function ManageTeacherTipsController($scope, ManageTeacherTipsService, TableServ
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
+	}
+
+	self.rateTip = function() {
+		self.rate_modal = Constants.TRUE;
+		$("#rate_tip").modal({
+	        backdrop: 'static',
+	        keyboard: Constants.FALSE,
+	        show    : Constants.TRUE
+	    });
 	}
 }

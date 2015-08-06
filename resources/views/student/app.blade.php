@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
     <title>FutureEd Online Education Platform</title>
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 
     <!--[if IE]>
     <link rel="stylesheet" type="text/css" media="all" href="https://www.formstack.com/forms/css/3/ie.css?20140508" />
@@ -32,14 +33,9 @@
     <![endif]-->
     @yield('styles')
   </head>
-  <body class="student" ng-class="{'student-class':backgroundChange}" ng-controller="futureedController" ng-init="getUserDetails()">
+  <body class="student" ng-controller="futureedController" ng-init="getUserDetails()">
     {!! Form::hidden('userdata', Session::get('student')) !!}
 
-    {!! Form::hidden('_authorization', Session::get('client')
-        , array(
-            'id' => 'userdata'
-        )
-    ) !!}
     <p class="notice"> BETA Stage: Under Development </p>
 
     @yield('navbar')
@@ -81,20 +77,24 @@
     {!! Html::script('/js/jquery.js') !!}
     {!! Html::script('/js/ui-block.js') !!}
     {!! Html::script('https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.2/moment.min.js') !!}
+    {!! Html::script('https://cdnjs.cloudflare.com/ajax/libs/humanize-plus/1.5.0/humanize.js') !!}
+
     {!! Html::script('//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js') !!}
     {!! Html::script('http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular.min.js') !!}
+    {!! Html::script('/js/ng-sortable.min.js')!!}
     
     {!! Html::script('/js/student/app.js') !!}
     {!! Html::script('/js/futureed_constants.js') !!}
     {!! Html::script('/js/futureed_utils.js') !!}
-    {!! Html::script('/js/futureed.js') !!}
+	{!! Html::script('/js/common/angular/marked.js')!!}
+	{!! Html::script('/js/common/angular/markdown-preview.js')!!}
+	{!! Html::script('/js/futureed.js') !!}
     {!! Html::script('/js/futureed_controllers.js') !!}
     {!! Html::script('/js/futureed_services.js') !!}
     {!! Html::script('/js/datetimepicker.js') !!}
     {!! Html::script('/js/common/filters.js') !!}
     {!! Html::script('/js/ui-bootstrap-tpls-0.13.0.min.js') !!}
-    {!! Html::script('/js/student/controllers/student_class_controller.js')!!}
-    {!! Html::script('/js/student/services/student_class_service.js')!!}
+    {!! Html::script('/js/angular-drag-and-drop-lists.min.js')!!}
 
     {!! Html::script('/js/ng-file-upload-shim.min.js')!!}
     {!! Html::script('/js/ng-file-upload.min.js')!!}

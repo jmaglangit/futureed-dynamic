@@ -18,5 +18,19 @@ function profileService($http) {
 		});
 	}
 
+	api.getBadges = function(id) {
+		return $http({
+			  method 	: Constants.METHOD_GET
+			, url	: apiUrl + 'badge/student?student_id=' + id
+		});
+	}
+
+	api.getPoints = function(id) {
+		return $http({
+			  method 	: Constants.METHOD_GET
+			, url	: apiUrl + 'student-point?student_id=' + id
+		});
+	}
+
 	return api;
 }

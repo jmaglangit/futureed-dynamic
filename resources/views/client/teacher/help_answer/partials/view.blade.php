@@ -109,7 +109,7 @@
 				{!! Form::button('Approve'
 					, array(
 						'class' => 'btn btn-blue btn-medium'
-						, 'ng-click' => "answer.updateStatus(answer.record.id, futureed.TRUE)"
+						, 'ng-click' => "answer.rateAnswer()"
 					)
 				) !!}
 				{!! Form::button('Reject'
@@ -152,5 +152,52 @@
 				) !!}
 			</div>
 		</div>
+    </div>
+<div id="rate_answer" ng-show="answer.rate_answer" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myMediumModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content">
+            <div class="modal-header">
+                Rate this Answer
+            </div>
+            <div class="modal-body">
+                <div class="alert alert-error" ng-if="answer.rate_errors">
+		            <p ng-repeat="error in answer.rate_errors track by $index" > 
+		              	{! error !}
+		            </p>
+		        </div>
+                {!! Form::select('rate'
+					, array(
+						'' => '-- Select Rate --'
+						, '1' => '1'
+						, '2' => '2'
+						, '3' => '3'
+						, '4' => '4'
+						, '5' => '5'
+					)
+					, ''
+					, array(
+						'class' => 'form-control'
+						, 'ng-model' => 'answer.rating'
+					)
+				) !!}
+            </div>
+            <div class="modal-footer">
+                <div class="btncon col-md-8 col-md-offset-4 pull-left">
+                    {!! Form::button('Accept'
+                        , array(
+                            'class' => 'btn btn-blue btn-medium'
+                            , 'ng-click' => 'answer.updateStatus(answer.record.id, futureed.TRUE)'
+                        )
+                    ) !!}
+                    {!! Form::button('Cancel'
+                        , array(
+                            'class' => 'btn btn-gold btn-medium'
+                            , 'data-dismiss' => 'modal'
+                        )
+                    ) !!}
+                </div>
+            </div>
+        </div>
+      </div>
     </div>
 </div>

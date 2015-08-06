@@ -22,7 +22,7 @@ class ModuleGroupRequest extends ApiRequest{
     {
         $age_group_id_rules = $this->method() == 'POST' ?
             'required|integer|unique:module_groups,age_group_id,NULL,id,module_id,'.$this->module_id.',deleted_at,NULL' :
-            'required|integer';
+            'required|integer|unique:module_groups,age_group_id,'.$this->id.',id,module_id,'.$this->module_id.',deleted_at,NULL';
         return [
             'age_group_id' => $age_group_id_rules,
             'module_id' => 'required|integer',
@@ -33,11 +33,13 @@ class ModuleGroupRequest extends ApiRequest{
     public function messages(){
 
         return [
-            'age_group_id.required' =>'Age group is required.',
+            'age_group_id.required' =>'Age is required.',
             'module_id.required' =>'Module is required.',
-            'age_group_id.integer' =>'Age group must be a number.',
+            'age_group_id.integer' =>'Age must be a number.',
             'module_id.integer' =>'Module must be a number.',
-            'age_group_id.unique' => 'Age group already exist.'
+            'age_group_id.unique' => 'Age already exist.',
+            'points_earned.required' => 'Total Points earned is required.',
+            'points_earned.integer' => 'Total Points earned must be a number.'
         ];
     }
 }

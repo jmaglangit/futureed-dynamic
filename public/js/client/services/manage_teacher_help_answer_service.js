@@ -34,11 +34,11 @@ function ManageTeacherAnswerService($http){
 		});
 	}
 
-	service.updateStatus = function(id, status) {
+	service.updateStatus = function(data) {
 		return $http({
 			method 	: Constants.METHOD_POST
-			, data 	: {request_answer_status : status}
-			, url 	: url + 'help-request-answer/status/' + id
+			, data 	: data
+			, url 	: url + 'help-request-answer/status/' + data.id
 		});
 	}
 

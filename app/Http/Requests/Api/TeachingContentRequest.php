@@ -29,7 +29,7 @@ class TeachingContentRequest extends ApiRequest {
 					'module_id' => 'required|exists:modules,id,deleted_at,NULL',
 					'subject_id' => 'required|exists:subjects,id,deleted_at,NULL',
 					'subject_area_id' => 'required|exists:subject_areas,id,deleted_at,NULL',
-					'code' => 'required|integer',
+					'code' => 'required|integer|unique:teaching_contents,code,NULL,id,deleted_at,NULL',
 					'teaching_module' => 'required',
 					'description' => 'required',
 					'learning_style_id' => 'required|exists:learning_styles,id,deleted_at,NULL',
@@ -37,7 +37,7 @@ class TeachingContentRequest extends ApiRequest {
 					'media_type_id' => 'required|exists:media_types,id,deleted_at,NULL',
 					'status' => 'required|in:Enabled,Disabled',
 					'image' => 'required_if:media_type_id,3|string',
-					'seq_no' => 'integer',
+					'seq_no' => 'integer|min:1',
 					'content_text' => 'required_if:media_type_id,2|string',
 
 				];
@@ -71,6 +71,7 @@ class TeachingContentRequest extends ApiRequest {
 			'image.required_if' =>'The image field is required.',
 			'content_url.required_if' =>'The content url field is required.',
 			'content_text.required_if' =>'The content text field is required.',
+			'teaching_module.required' => 'The teaching module name field is required.'
 		];
 	}
 

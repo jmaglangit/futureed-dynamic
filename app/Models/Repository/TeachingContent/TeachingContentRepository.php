@@ -38,7 +38,7 @@ class TeachingContentRepository implements TeachingContentRepositoryInterface{
 
         $query = new TeachingContent();
 
-        $query = $query->with('learningStyle','mediaType');
+        $query = $query->with('module','learningStyle','mediaType');
 
         if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
 
@@ -121,4 +121,14 @@ class TeachingContentRepository implements TeachingContentRepositoryInterface{
             return $e->getMessage();
         }
     }
+
+	/**
+	 * Get teaching content Id.
+	 * @param $module_id
+	 */
+	public function getTeachingContentId($module_id){
+
+		return TeachingContent::teachingModuleId($module_id)->pluck('id');
+
+	}
 }

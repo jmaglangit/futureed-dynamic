@@ -40,6 +40,24 @@ function StudentClassService($http){
 		});
 	}
 
+	service.listModules = function(search, table) {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url 	: serviceUrl + 'module/student?subject_id=' + search.subject_id
+				+ '&grade_id=' + search.grade_id
+				+ '&module_status=' + search.module_status
+				+ '&name=' + search.name
+				+ '&limit=' + table.size
+				+ '&offset=' + table.offset
+		});
+	}
+
+	service.getSubjects = function() {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url 	: serviceUrl + 'subject'
+		});
+	}
 
 	return service;
 }

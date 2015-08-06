@@ -227,6 +227,10 @@ table#client-list{
 	color: transparent; 
 }
 
+.margin-top-5 {
+	margin-top: 5px;
+}
+
 input[type="checkbox"],
 input[type="radio"] {
   box-sizing: border-box; /* 1 */
@@ -284,4 +288,9 @@ input[type=radio]:checked+.lbl::before{content:"\2022";}
 .top-5 {
 	position: relative;
 	top: 5px;
+}
+
+.top-40 {
+	position: relative;
+	top: 40px;
 }

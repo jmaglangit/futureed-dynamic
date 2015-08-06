@@ -145,14 +145,21 @@
 		        		</label>
 	        		</div>
 	        	</div>
-	        	<div class="form-group" ng-if="answer.record.request_answer_status == 'Pending' && answer.active_view">
+	        	<div class="form-group" ng-if="answer.record.request_answer_status == futureed.ACCEPTED">
+	        		<label class="control-label col-xs-2">Rating</label>
+	        		<div class="col-xs-4 margin-top-5">
+	        			<span ng-repeat="i in answer.record.stars track by $index">
+							<!-- <img ng-if="!answer.rating" ng-mouseover="help.changeColor($index, answer.id)" ng-src="{! (help.hovered[answer.id][$index])  && '/images/class-student/icon-star_yellow.png' || '/images/class-student/icon-star_white.png' !}" /> -->
+							<!-- <img ng-if="answer.rating" ng-src="{! $index + 1 <= answer.rating && '/images/class-student/icon-star_yellow.png' || '/images/class-student/icon-star_white.png' !}" /> -->
+							<img ng-src="{! $index+1 <= answer.record.rating && '/images/class-student/icon-star_yellow.png' || '/images/class-student/icon-star_white.png' !}" />
+						</span>
+	        		</div>
+	        	</div>
+	        	<div class="form-group" ng-if="answer.record.rated_by != futureed.ADMIN && answer.active_view">
 	        		<div class="btn-container col-xs-8 col-xs-offset-2">
-						{!! Form::button('Accept'
-							, array(
-								'class' => 'btn btn-blue btn-medium'
-								, 'ng-click' => "answer.acceptAnswer()"
-							)
-						) !!}
+						<button class="btn btn-blue btn-medium" type="button" ng-click="answer.rateAnswer()" ng-if="answer.record.request_answer_status == futureed.ACCEPTED">Change Rating</button>
+
+	        			<button class="btn btn-blue btn-medium" type="button" ng-click="answer.rateAnswer()" ng-if="answer.record.request_answer_status == futureed.PENDING">Accept</button>
 
 						{!! Form::button('Reject'
 							, array(
@@ -240,3 +247,39 @@
 		{!! Form::close() !!}
 	</div>
 </div>
+<div id="rate_answer" ng-show="answer.rate_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myMediumModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    Rate this Answer
+                </div>
+                <div class="modal-body">
+	                <div class="alert alert-error" ng-if="answer.rate_errors">
+			            <p ng-repeat="error in answer.rate_errors track by $index" > 
+			              	{! error !}
+			            </p>
+			        </div>
+				<select class="form-control" ng-model="answer.rating">
+					<option value="">-- Select Rate --</option>
+					<option ng-selected="answer.record.rating == $index+1" ng-repeat="i in answer.record.stars track by $index" ng-value="$index+1">{! $index+1 !}</option>
+				</select>
+                </div>
+                <div class="modal-footer">
+                    <div class="btncon col-md-8 col-md-offset-4 pull-left">
+                        {!! Form::button('Accept'
+                            , array(
+                                'class' => 'btn btn-blue btn-medium'
+                                , 'ng-click' => 'answer.acceptAnswer()'
+                            )
+                        ) !!}
+                        {!! Form::button('Cancel'
+                            , array(
+                                'class' => 'btn btn-gold btn-medium'
+                                , 'data-dismiss' => 'modal'
+                            )
+                        ) !!}
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>

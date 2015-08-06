@@ -119,10 +119,13 @@ function ManageTipsController($scope, ManageTipsService, TableService, SearchSer
 					self.record.area = (record.subjectarea) ? record.subjectarea.name : Constants.EMPTY_STR;
 					
 					self.record.link_type = record.link_type;
+					self.record.rated_by = record.rated_by;
 					self.record.tip_status = record.tip_status;
 					self.record.title = record.title;
 					self.record.content = record.content;
 					self.record.status = record.status;
+					self.record.stars = new Array(5);
+					self.record.rating = record.rating;
 					self.record.name = record.student.first_name + ' ' + record.student.last_name;
 				}
 			}
@@ -161,10 +164,21 @@ function ManageTipsController($scope, ManageTipsService, TableService, SearchSer
 		});
 	}
 
+	self.rateTip = function() {
+		self.rate_modal = Constants.TRUE;
+		$("#rate_tip").modal({
+	        backdrop: 'static',
+	        keyboard: Constants.FALSE,
+	        show    : Constants.TRUE
+	    });
+	}
+
 	self.acceptTip = function() {
 		var data = {};
 			data.id = self.record.id;
+			data.rated_by = Constants.ADMIN;
 			data.tip_status = "Accepted";
+			data.rating = self.rating;
 			data.message = TipConstants.MSG_ACCEPT_TIP_SUCCESS;
 
 		updateTipStatus(data);
@@ -187,10 +201,12 @@ function ManageTipsController($scope, ManageTipsService, TableService, SearchSer
 		ManageTipsService.updateTipStatus(data).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
-					self.errors = $scope.errorHandler(response.errors);
+					self.rate_errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
+					$("#rate_tip").modal('hide');
 					self.success = data.message;
 					self.setActive(Constants.ACTIVE_VIEW, response.data.id);
+					self.rate_errors = Constants.FALSE;
 				}
 			}
 

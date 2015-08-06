@@ -1,4 +1,4 @@
-angular.module('futureed.controllers', ['ngFileUpload'])
+angular.module('futureed.controllers', ['ngFileUpload', 'as.sortable'])
 	.controller('futureedController', FutureedController)
 	.directive('templateDirective', TemplateDirective)
 	.constant("futureed", Constants);
@@ -40,7 +40,7 @@ function FutureedController($scope, $window, apiService, futureed) {
 		}
 	}
 
-	function errorHandler(errors) {
+	function errorHandler(errors, flag) {
 		$scope.errors = [];
 
 		if(angular.isArray(errors)) {
@@ -66,8 +66,9 @@ function FutureedController($scope, $window, apiService, futureed) {
 		} else {
 			$scope.errors[0] = errors.message;
 		}
-
-		$("html, body").animate({ scrollTop: 0 }, "slow");
+		if(flag != 1) {
+			$("html, body").animate({ scrollTop: 0 }, "slow");
+		}
 		return $scope.errors;
 	}
 
@@ -268,7 +269,6 @@ function FutureedController($scope, $window, apiService, futureed) {
 	*/
 	function validateUser() {
 		$scope.errors = Constants.FALSE;
-
 		$scope.ui_block();
 		apiService.validateUser($scope.username).success(function(response) {
 			if(response.status == Constants.STATUS_OK) {
@@ -290,7 +290,6 @@ function FutureedController($scope, $window, apiService, futureed) {
 
 	function getLoginPassword() {
 		$scope.id = ($scope.id) ? $scope.id : $scope.user.id;
-
 		apiService.getLoginPassword($scope.id).success(function (response) {
 			if(response.status == Constants.STATUS_OK) {
 				if(response.errors) {
@@ -361,8 +360,6 @@ function FutureedController($scope, $window, apiService, futureed) {
 			if($scope.user.new_email != null){
 				$scope.confirm_email = Constants.TRUE;
 			}
-			
-			$("input[name='userdata']").val('');
 		}
 	}
 
@@ -909,4 +906,28 @@ function FutureedController($scope, $window, apiService, futureed) {
 		});
 	}
 
+	$scope.getStudentBadges = function() {
+		var id = $scope.user.id;
+
+		apiService.getStudentBadges(id).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					$scope.errorHandler(response.errors);
+				} else if(response.data) {
+					$scope.badges = response.data;
+				}
+			}
+		}).error(function(response) {
+			$scope.internalError()
+		});
+	}
+
+	$scope.checkEmail = function(id) {
+
+		if(id != Constants.EMPTY_STR){
+			$scope.id = id;
+			$scope.getLoginPassword();
+			$scope.enter_pass = Constants.TRUE;
+		}
+	}
 };

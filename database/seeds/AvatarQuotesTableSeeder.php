@@ -11,7 +11,7 @@ class AvatarQuotesTableSeeder extends Seeder
 {
 
 	public function run()
-    {
+	{
 		DB::table('avatar_quotes')->truncate();
 
 		//1 loop 4, 3, 5, 1,2
@@ -46,6 +46,7 @@ class AvatarQuotesTableSeeder extends Seeder
 			[68, 65, 67, 67, 66]
 		];
 
+		$avatar_id = 1;
 		foreach ($seeder_data as $data) {
 			//Loop Start
 			$sequence = 1;
@@ -57,6 +58,7 @@ class AvatarQuotesTableSeeder extends Seeder
 				for ($loop = 0; $loop < $repeat[$i]; $loop++) {
 
 					DB::table('avatar_quotes')->insert([
+						'avatar_id' => $avatar_id,
 						'avatar_pose_id' => $data[$i],
 						'quote_id' => $sequence,
 						'created_by' => 1,
@@ -67,9 +69,34 @@ class AvatarQuotesTableSeeder extends Seeder
 					$sequence++;
 				}
 			}
+			$avatar_id++;
 		}
 
+		$seeder_data = [4, 10, 12, 18, 21,26,35,38,40,45,50,55,63,68];
+		$avatar_id = 1;
+		foreach($seeder_data as $seed){
 
+			$quote_id = 24;
+			if( $avatar_id == 11){
+				$avatar_id = 12;//skip id 11
+			}
+			if($avatar_id == 14){
+				$avatar_id = 16;//skip ids 14 to 15
+			}
 
-    }
+			for($i = 0; $i < 6; $i++){
+				DB::table('avatar_quotes')->insert([
+					'avatar_id' => $avatar_id,
+					'avatar_pose_id' => $seed,
+					'quote_id' => $quote_id,
+					'created_by' => 1,
+					'updated_by' => 1,
+					'created_at' => Carbon::now(),
+					'updated_at' => Carbon::now()
+				]);
+				$quote_id++;
+			}
+			$avatar_id++;
+		}
+	}
 }

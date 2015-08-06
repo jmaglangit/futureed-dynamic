@@ -146,15 +146,21 @@
 		        		</label>
 	        		</div>
 	        	</div>
-	        	<div class="form-group" ng-if="tips.record.tip_status == 'Pending' && tips.active_view">
+	        	<div class="form-group" ng-if="tips.record.tip_status == futureed.ACCEPTED">
+	        		<label class="control-label col-xs-2">Rating</label>
+	        		<div class="col-xs-4 margin-top-5">
+	        			<span ng-repeat="i in tips.record.stars track by $index">
+							<!-- <img ng-if="!answer.rating" ng-mouseover="help.changeColor($index, answer.id)" ng-src="{! (help.hovered[answer.id][$index])  && '/images/class-student/icon-star_yellow.png' || '/images/class-student/icon-star_white.png' !}" /> -->
+							<!-- <img ng-if="answer.rating" ng-src="{! $index + 1 <= answer.rating && '/images/class-student/icon-star_yellow.png' || '/images/class-student/icon-star_white.png' !}" /> -->
+							<img ng-src="{! $index+1 <= tips.record.rating && '/images/class-student/icon-star_yellow.png' || '/images/class-student/icon-star_white.png' !}" />
+						</span>
+	        		</div>
+	        	</div>
+	        	<div class="form-group" ng-if="tips.record.rated_by != futureed.ADMIN && tips.active_view">
 	        		<div class="btn-container col-xs-8 col-xs-offset-2">
-						{!! Form::button('Accept'
-							, array(
-								'class' => 'btn btn-blue btn-medium'
-								, 'ng-click' => "tips.acceptTip()"
-							)
-						) !!}
+	        			<button class="btn btn-blue btn-medium" type="button" ng-click="tips.rateTip()" ng-if="tips.record.rating != futureed.NULL">Change Rating</button>
 
+	        			<button class="btn btn-blue btn-medium" type="button" ng-click="tips.rateTip()" ng-if="tips.record.rating == futureed.NULL">Accept</button>
 						{!! Form::button('Reject'
 							, array(
 								'class' => 'btn btn-gold btn-medium'
@@ -243,3 +249,39 @@
 		{!! Form::close() !!}
 	</div>
 </div>
+<div id="rate_tip" ng-show="tips.rate_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myMediumModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    Rate this tip
+                </div>
+                <div class="modal-body">
+	                <div class="alert alert-error" ng-if="tips.rate_errors">
+			            <p ng-repeat="error in tips.rate_errors track by $index" > 
+			              	{! error !}
+			            </p>
+			        </div>
+			        <select class="form-control" ng-model="tips.rating">
+			        	<option value="">-- Select Rate --</option>
+			        	<option ng-selected="tips.record.rating == $index+1" ng-repeat="i in tips.record.stars track by $index" ng-value="$index+1">{! $index+1 !}</option>
+			        </select>
+                </div>
+                <div class="modal-footer">
+                    <div class="btncon col-md-8 col-md-offset-4 pull-left">
+                        {!! Form::button('Accept'
+                            , array(
+                                'class' => 'btn btn-blue btn-medium'
+                                , 'ng-click' => 'tips.acceptTip()'
+                            )
+                        ) !!}
+                        {!! Form::button('Cancel'
+                            , array(
+                                'class' => 'btn btn-gold btn-medium'
+                                , 'data-dismiss' => 'modal'
+                            )
+                        ) !!}
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
