@@ -80,7 +80,7 @@
 			</div>
 
 			<div class="module-icon-holder">
-				<img src="/images/avatar/doctor-male/doctor_male-2_main.png" />
+				<img ng-src="{! mod.avatar_quote_info.avatar_pose && '/images/avatar/' + mod.avatar_quote_info.avatar_pose.pose_image || '/images/avatar/doctor-male/doctor_male-2_main.png' !}" />
 			</div>
 		</div>
 
