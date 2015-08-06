@@ -117,9 +117,7 @@ function StudentModuleService($http){
 	service.listQuestions = function(search, table) {
 		return $http({
 			method  : Constants.METHOD_GET
-			, url  	: serviceUrl + 'question?module_id=' + search.module_id
-				+ '&limit=' + table.size
-				+ '&offset=' + table.offset
+			, url  	: serviceUrl + 'question?module_id=' + search.module_id 
 		});
 	}
 
@@ -142,6 +140,29 @@ function StudentModuleService($http){
 		return $http({
 			method  : Constants.METHOD_GET
 			, url  	: serviceUrl + 'avatar-pose?avatar_id=' + avatar_id
+		});
+	}
+
+	service.getPointsEarned = function(data) {
+		return $http({
+			method  : Constants.METHOD_GET
+			, url  	: serviceUrl + 'module-group?age_group=' + data.age_group
+				+ '&module_id' + data.module_id
+		});
+	}
+
+	service.saveStudentPoints = function(data) {
+		return $http({
+			method  : Constants.METHOD_POST
+			, data  : data
+			, url  	: serviceUrl + 'student-point'
+		});
+	}
+
+	service.getWiki = function(avatar_id) {
+		return $http({
+			method  : Constants.METHOD_GET
+			, url  	: serviceUrl + 'avatar-wiki?avatar_id' + avatar_id
 		});
 	}
 
