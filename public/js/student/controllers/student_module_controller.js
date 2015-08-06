@@ -745,6 +745,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		answer.date_end = new Date();
 		answer.answer_text = (angular.equals(self.current_question.question_type, Constants.ORDERING)) ? self.current_question.answer_text.join(",") : self.current_question.answer_text;		
 
+		$scope.ui_block();
 		StudentModuleService.answerQuestion(answer).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
@@ -755,25 +756,43 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 						
 					if(angular.equals(self.result.module_status, "Completed")) {
 						// get points
+						var data = {};
+							data.age_group = 1;
+							data.module_id = self.record.id;
 						getPointsEarned(data, function(response) {
-
 							// save points
+							var data = {};
+								data.student_id = $scope.user.id;
+								data.points_earned = self.record.points_earned;
+								data.module_id = self.record.id;
+
 							saveStudentPoints(data, function(response) {
+								var avatar_id = $scope.user.avatar_id;
 
 								// get wiki
-								getWiki(data, function() {
+								getWiki(avatar_id, function(response) {
+									$scope.ui_unblock();
+
+									var avatar_wiki = response.data[0];
+
 									self.result = {};
-									self.done = Constants.TRUE;
 
 									self.errors = Constants.FALSE;
 									self.success = Constants.FALSE;
 
 									self.module_message = {};
-									self.module_message.show = Constants.TRUE;
-									self.module_message.name = self.record.name;
 									self.module_message.points_earned = self.record.points_earned;
-									self.module_message.badge_to_earn = self.record.badge_to_earn;
-									self.module_message.module_done = Constants.TRUE;
+									self.module_message.show = Constants.TRUE;
+									self.module_message.title = avatar_wiki.title;
+									self.module_message.name = self.record.name;
+									
+									self.module_message.description_summary = avatar_wiki.description_summary;
+									self.module_message.description_full = avatar_wiki.description_full;
+									self.module_message.message = self.module_message.description_summary;
+
+									self.module_message.image = avatar_wiki.image; // ok
+									self.module_message.source = avatar_wiki.source;
+									self.module_message.module_done = Constants.TRUE; // ok
 
 									$("#message_modal").modal({
 								        backdrop: 'static',
@@ -784,6 +803,8 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 							});
 						});
 					} else {
+						$scope.ui_unblock();
+						
 						// update student_module
 						var data = {};
 							data.module_id = self.result.id;
@@ -799,6 +820,11 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
+	}
+
+	self.viewMoreWikiMessage = function() {
+		self.module_message.message = self.module_message.description_full;
+		self.module_message.full_message = Constants.TRUE;
 	}
 
 	var getPointsEarned = function(data, successCallback) {

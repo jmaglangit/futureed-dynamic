@@ -147,7 +147,7 @@ function StudentModuleService($http){
 		return $http({
 			method  : Constants.METHOD_GET
 			, url  	: serviceUrl + 'module-group?age_group=' + data.age_group
-				+ '&module_id' + data.module_id
+				+ '&module_id=' + data.module_id
 		});
 	}
 
@@ -162,7 +162,7 @@ function StudentModuleService($http){
 	service.getWiki = function(avatar_id) {
 		return $http({
 			method  : Constants.METHOD_GET
-			, url  	: serviceUrl + 'avatar-wiki?avatar_id' + avatar_id
+			, url  	: serviceUrl + 'avatar-wiki?avatar_id=' + avatar_id
 		});
 	}
 
