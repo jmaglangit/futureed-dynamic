@@ -963,4 +963,15 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 	    }
 	    , containment: '#board'//optional param.
 	};
+
+	self.reviewContent = function() {
+		var data = {};
+			data.module_id = self.record.student_module[0].id;
+			data.last_answered_question_id = 0;
+			
+		updateModuleStudent(data, function() {
+			self.setActive();
+			self.launchModule(self.record.id);
+		});
+	}
 }
