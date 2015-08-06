@@ -129,9 +129,8 @@ function TipsController($scope, apiService, StudentTipsService, TableService, Se
 					self.record.title = record.title;
 					self.record.content = record.content;
 					self.record.rating = record.rating;
-					self.record.subject_name = record.subject.name;
-					self.record.subject_area_name = record.subjectarea.name;
-					console.log(record);
+					self.record.subject_name = (record.subject) ? record.subject.name : Constants.EMPTY_STR;
+					self.record.subject_area_name = (record.subjectarea) ? record.subjectarea.name : Constants.EMPTY_STR;
 
 					self.record.name = record.student.first_name + " " + record.student.last_name;
 				}
@@ -152,7 +151,7 @@ function TipsController($scope, apiService, StudentTipsService, TableService, Se
 		self.record.subject_id = self.module.subject_id;
 		self.record.subject_area_id = self.module.subject_area_id;
 		self.record.link_type = (self.module.student_module[0].last_answered_question_id) ? Constants.QUESTION : Constants.CONTENT;
-		self.record.link_id = self.question.id;
+		self.record.link_id = (angular.equals(self.record.link_type, Constants.QUESTION)) ? self.question.id : self.content.id;
 		self.record.class_id = $scope.user.class.id;
 		self.record.student_id = $scope.user.id;
 
@@ -221,18 +220,21 @@ function TipsController($scope, apiService, StudentTipsService, TableService, Se
 		}
 
 		self.module = module.record;
-		self.question = module.questions;
+		self.question = module.current_question;
+		self.content = module.contents;
 
 		self.setActive(Constants.ACTIVE_ADD);
 	});
 
-	self.toggleTips = function(module, question) {
+	self.toggleTips = function(module) {
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
 
 		self.show_content_tips = !self.show_content_tips;
-		self.module = module;
-		self.question = question;
+		
+		self.module = module.record;
+		self.question = module.current_question;
+		self.content = module.contents;
 
 		self.setActive();
 		self.setTipTabActive(Constants.CURRENT);
@@ -248,11 +250,11 @@ function TipsController($scope, apiService, StudentTipsService, TableService, Se
 
 		self.active_all = Constants.FALSE;
 		self.active_current = Constants.FALSE;
+		self.searchDefaults();
 
 		switch(active) {
 			case Constants.ALL:
 				self.search.link_id = Constants.EMPTY_STR;
-				self.search.link_type = (self.module.student_module[0].last_answered_question_id) ? Constants.QUESTION : Constants.CONTENT;
 				self.search.module_id = self.module.id;
 				self.active_all = Constants.TRUE;
 
@@ -260,8 +262,8 @@ function TipsController($scope, apiService, StudentTipsService, TableService, Se
 				break;
 
 			case Constants.CURRENT:
-				self.search.link_id = self.question.id;
 				self.search.link_type = (self.module.student_module[0].last_answered_question_id) ? Constants.QUESTION : Constants.CONTENT;
+				self.search.link_id = (angular.equals(self.search.link_type, Constants.QUESTION)) ? self.question.id : self.content.id;
 				self.search.module_id = self.module.id;
 				self.active_current = Constants.TRUE;
 

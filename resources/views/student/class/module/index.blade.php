@@ -5,7 +5,7 @@
 @stop
 
 @section('content')
-	<div class="col-xs-12" ng-controller="StudentModuleController as mod" ng-init="mod.updateBackground()" ng-cloak>
+	<div class="col-xs-12" ng-controller="StudentModuleController as mod" ng-init="mod.updateBackground();mod.launchModule('{!! $id !!}');" ng-cloak>
 		<div template-directive template-url="{!! route('student.partials.base_url') !!}"></div>
 
 		<ul class="breadcrumb">
@@ -26,28 +26,32 @@
 	        </div>
 	    </div>
 		
-		<div class="col-xs-2" ng-init="mod.launchModule('{!! $id !!}')">
-			<div class="margin-top-bot-5" ng-if="!mod.no_record">
-				<a href="javascript:;"><img src="/images/class-student/icon-askforhelp.png" ng-click="mod.askHelp()"></a>
-			</div>
-			<div class="margin-top-bot-5 pointer" ng-if="!mod.no_record">
-				<img src="/images/class-student/icon-givetip.png" ng-click="mod.giveTip()">
+		<div class="col-xs-2">
+			<div ng-if="!mod.record.module_done">
+				<div class="margin-top-bot-5" ng-if="!mod.no_record">
+					<a href="javascript:;"><img src="/images/class-student/icon-askforhelp.png" ng-click="mod.askHelp()"></a>
+				</div>
+				<div class="margin-top-bot-5 pointer" ng-if="!mod.no_record">
+					<img src="/images/class-student/icon-givetip.png" ng-click="mod.giveTip()">
+				</div>
 			</div>
 		</div>
 		<!-- Main Container -->
-		<div ng-if="mod.active_contents">
-			<div template-directive template-url="{!! route('student.class.module.partials.contents') !!}"></div>
-		</div>
+		<div ng-if="!mod.record.module_done">
+			<div ng-if="mod.active_contents">
+				<div template-directive template-url="{!! route('student.class.module.partials.contents') !!}"></div>
+			</div>
 
-		<div ng-if="mod.active_questions">
-			<div template-directive template-url="{!! route('student.class.module.partials.questions') !!}"></div>
+			<div ng-if="mod.active_questions">
+				<div template-directive template-url="{!! route('student.class.module.partials.questions') !!}"></div>
+			</div>
 		</div>
-		<!-- End of Main Container -->
+			<!-- End of Main Container -->
 
-		<div class="row" ng-if="!mod.no_record">
+		<div class="row" ng-if="!mod.no_record && !mod.record.module_done">
 			<div class="drawer col-xs-6" ng-controller="TipsController as tips">
 				<div class="drawer-inside" ng-class="{ 'openup' : tips.show_content_tips }">
-					<div class="drawer-header pointer" ng-click="tips.toggleTips(mod.record, mod.questions)">
+					<div class="drawer-header pointer" ng-click="tips.toggleTips(mod)">
 						<img class="pull-left" ng-src="/images/class-student/icon-tip_principal.png">
 
 						<p class="pull-left">Give Tips</p>	

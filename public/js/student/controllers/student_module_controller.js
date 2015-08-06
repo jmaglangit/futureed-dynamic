@@ -492,7 +492,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 	var loadModuleView = function() {
 		var student_module = self.record.student_module[0];
-				
+
 		// if last_answered_question_id value is 0, load contents
 		if(!student_module.last_answered_question_id) {
 			self.getTeachingContents(student_module.module_id);
@@ -500,17 +500,37 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		} else {
 			// if last_answered_question_id value is > 0, load question
 			self.setActive(Constants.ACTIVE_QUESTIONS);
-			// self.search.last_answered_question_id = student_module.last_answered_question_id;
+			self.search.last_answered_question_id = student_module.last_answered_question_id;
 			self.getModuleStudent(student_module.id, function(response) {
-				var question = response.data.question;
+				var module_student = response.data;
 
-				self.table.offset = question.seq_no - 1;
-				self.table.page = question.seq_no; 
+				if(module_student.module_status == "Completed") {
+					self.record.module_done = Constants.TRUE;
+					self.errors = ["You have already completed this module."];
+				} else {
+					getAvatarPose($scope.user.avatar_id);
+					listAvatarQuotes($scope.user.avatar_id);
 
-				getAvatarPose($scope.user.avatar_id);
-				listAvatarQuotes($scope.user.avatar_id);
+					
+					
+					listQuestions(function(response) {
+						angular.forEach(self.questions, function(value, key) {
+							if(angular.equals(value.id, module_student.last_answered_question_id)) {
+								self.current_question = value;
+								self.current_question.answer_text = Constants.EMPTY_STR;
+								self.current_question.answer_id = Constants.EMPTY_STR;
 
-				self.listQuestions();	
+								self.question_counter = module_student.question_counter + 1;
+
+								if(angular.equals(self.current_question.question_type, Constants.ORDERING)) {
+									self.current_question.answer_text = self.current_question.question_order_text.split(",");
+								}
+
+								return;		
+							}
+						});
+					});
+				}
 			});
 		}
 	}
@@ -540,6 +560,30 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 			}
 		}).error(function(response) {
 			self.errors = $scope.internalError();
+		});
+	}
+
+	var listQuestions = function(successCallback) {
+		self.errors = Constants.FALSE;
+
+		self.search.module_id = self.record.id;
+
+		$scope.ui_block();
+		StudentModuleService.listQuestions(self.search, self.table).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.questions = response.data.records;
+					if(successCallback)
+						successCallback(response);
+				}
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
 		});
 	}
 
@@ -583,7 +627,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		self.module_message = {};
 		self.module_message.show = Constants.TRUE;
 		self.module_message.name = self.record.name;
-		self.module_message.points_to_finish = self.record.points_to_finish;
+		self.module_message.points_earned = self.record.points_earned;
 		self.module_message.badge_to_earn = self.record.badge_to_earn;
 		self.module_message.skip_module = Constants.TRUE;
 
@@ -599,7 +643,18 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		self.setActive(Constants.ACTIVE_QUESTIONS);
 
 		// get question list; offset to 0
-		self.listQuestions();
+		getAvatarPose($scope.user.avatar_id);
+		listAvatarQuotes($scope.user.avatar_id);
+		listQuestions(function(response) {
+			self.current_question = self.questions[0];
+			self.question_counter = 1;
+
+			var data = {};
+				data.module_id = self.record.student_module[0].id;
+				data.last_answered_question_id = self.current_question.id;
+
+			updateModuleStudent(data);
+		});
 	}
 
 
@@ -622,15 +677,8 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		});
 	}
 
-	
-
 	self.getTeachingContents = function(id) {
 		self.search.module_id = id;
-
-		if( self.record.student_module[0]) {
-			self.search.content_id = self.record.student_module[0].last_viewed_content_id;
-		}
-
 		self.table.size = 1;
 
 		$scope.ui_block();
@@ -640,7 +688,6 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 					self.errors = $scope.errorHandler(response.errors);
 				} else {
 					self.contents = response.data.records[0];
-					self.contents.content_url = self.contents.teaching_content.content_url;
 					self.updatePageCount(response.data);
 
 					var data = {};
@@ -680,73 +727,67 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		});
 	}
 
-	self.listQuestions = function() {
-		self.errors = Constants.FALSE;
-
-		self.search.module_id = self.record.id;
-		self.table.size = 1;
-
-		$scope.ui_block();
-		StudentModuleService.listQuestions(self.search, self.table).success(function(response) {
-			if(angular.equals(response.status, Constants.STATUS_OK)) {
-				if(response.errors) {
-					self.errors = $scope.errorHandler(response.errors);
-				} else if(response.data) {
-					self.questions = response.data.records[0];
-
-					var data = {};
-						data.module_id = self.record.student_module[0].id;
-
-						if(self.active_questions && self.questions) {
-							data.last_answered_question_id = self.questions.id;
-						}
-
-						if(angular.equals(self.questions.question_type, Constants.ORDERING)) {
-							self.questions.answer_text = self.questions.question_order_text.split(",");
-						}
-
-					updateModuleStudent(data);
-					startTimer();
-					self.updatePageCount(response.data);
-				}
-			}
-
-			$scope.ui_unblock();
-		}).error(function(response) {
-			self.errors = $scope.internalError();
-			$scope.ui_unblock();
-		});
-	}
-
-	function startTimer() {
-		self.total_time = (self.total_time) ? self.total_time : Constants.FALSE;
-
-		$interval(function() {
-            self.total_time += 1;
-        }, 1000);
-	}
-
 	self.checkAnswer = function() {
 		var answer = {};
 
 		answer.student_module_id = self.record.student_module[0].id;
 		answer.module_id = self.record.id;
-		answer.seq_no = self.questions.seq_no;
-		answer.question_id = self.questions.id;
-		answer.answer_id = self.questions.answer_id;
+		answer.seq_no = self.current_question.seq_no;
+		answer.question_id = self.current_question.id;
+		answer.answer_id = self.current_question.answer_id;
 		answer.student_id = $scope.user.id;
-		answer.total_time = self.total_time;
-		answer.date_start = $filter('date')(new Date() - (answer.total_time * 1000), 'yyyyMMdd');
-		answer.date_end = $filter('date')(new Date(), 'yyyyMMdd');
-		answer.answer_text = (angular.equals(self.questions.question_type, Constants.ORDERING)) ? self.questions.answer_text.join(",") : self.questions.answer_text;		
+		answer.date_start = new Date();
+		answer.date_end = new Date();
+		answer.answer_text = (angular.equals(self.current_question.question_type, Constants.ORDERING)) ? self.current_question.answer_text.join(",") : self.current_question.answer_text;		
 
 		StudentModuleService.answerQuestion(answer).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
-					self.search.difficulty = response.data.current_difficulty_level;
-					self.nextQuestion();
+					// show message
+					self.result = response.data;
+						
+					if(angular.equals(self.result.module_status, "Completed")) {
+						// get points
+						getPointsEarned(data, function(response) {
+
+							// save points
+							saveStudentPoints(data, function(response) {
+
+								// get wiki
+								getWiki(data, function() {
+									self.result = {};
+									self.done = Constants.TRUE;
+
+									self.errors = Constants.FALSE;
+									self.success = Constants.FALSE;
+
+									self.module_message = {};
+									self.module_message.show = Constants.TRUE;
+									self.module_message.name = self.record.name;
+									self.module_message.points_earned = self.record.points_earned;
+									self.module_message.badge_to_earn = self.record.badge_to_earn;
+									self.module_message.module_done = Constants.TRUE;
+
+									$("#message_modal").modal({
+								        backdrop: 'static',
+								        keyboard: Constants.FALSE,
+								        show    : Constants.TRUE
+								    });
+								});
+							});
+						});
+					} else {
+						// update student_module
+						var data = {};
+							data.module_id = self.result.id;
+							data.last_answered_question_id = self.result.next_question;
+				
+							updateModuleStudent(data, function(response) {
+								setAvatarQuote();
+							});
+					}
 				}
 			}
 		}).error(function(response) {
@@ -755,20 +796,118 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		});
 	}
 
+	var getPointsEarned = function(data, successCallback) {
+		StudentModuleService.getPointsEarned(data).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					if(successCallback)
+						successCallback(response);
+				}
+			}
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+		});
+	}
+
+	var saveStudentPoints = function(data, successCallback) {
+		StudentModuleService.saveStudentPoints(data).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					if(successCallback)
+						successCallback(response);
+				}
+			}
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+		});
+	}
+
+	var getWiki = function(data, successCallback) {
+		StudentModuleService.getWiki(data).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					if(successCallback)
+						successCallback(response);
+				}
+			}
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+		});
+	}
+
+	var setAvatarQuote = function() {
+		if(!((self.result.question_counter) % 5)) {
+			// get quote
+			var percentage = Math.floor(self.result.correct_counter / self.result.question_counter) * 100;
+			var avatar_quote = self.avatar_quotes[self.result.current_difficulty_level];
+			var avatar_quote_info = {};
+
+			if(percentage < 20) {
+				avatar_quote_info = avatar_quote[0];
+			} else if(percentage >= 20 && percentage < 40) {
+				avatar_quote_info = avatar_quote[20];
+			} else if(percentage >= 40 && percentage < 60) {
+				avatar_quote_info = avatar_quote[40];
+			} else if(percentage >= 60 && percentage < 80) {
+				avatar_quote_info = avatar_quote[60];
+			} else if(percentage >= 80 && percentage < 100) {
+				avatar_quote_info = avatar_quote[80];
+			} else if(percentage >= 100) {
+				avatar_quote_info = avatar_quote[100];
+			} else {
+				self.result.answered = Constants.TRUE;
+			}
+
+			// get pose
+			var avatar_pose_id = avatar_quote_info.avatar_quote.avatar_pose_id;
+			angular.forEach(self.avatar_pose, function(value, key) {
+				if(angular.equals(value.id, avatar_pose_id)) {
+					avatar_quote_info.avatar_pose = value;
+					return;
+				}
+			});
+
+			self.avatar_quote_info = avatar_quote_info;
+
+			console.log(self.avatar_quote_info);
+
+			self.result.quoted = Constants.TRUE;
+		} else {
+			self.result.answered = Constants.TRUE;
+		}
+	}
+
 	self.selectAnswer = function(object) {
-		self.questions.answer_id = object.id;
+		self.current_question.answer_id = object.id;
 	}
 
 	self.nextQuestion = function() {
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
+		self.current_question = {};
 
-		var page = self.table.page + 1;
-		self.search.last_answered_question_id = Constants.EMPTY_STR;
+		angular.forEach(self.questions, function(value, key) {
+			if(angular.equals(value.id, self.result.next_question)) {
+				self.current_question = value;
+				self.current_question.answer_text = Constants.EMPTY_STR;
+				self.current_question.answer_id = Constants.EMPTY_STR;
 
-		self.table.page = (page < Constants.DEFAULT_PAGE) ? Constants.DEFAULT_PAGE : page;
-		self.table.offset = (page - 1) * self.table.size;
-		self.listQuestions();
+				if(angular.equals(self.current_question.question_type, Constants.ORDERING)) {
+					self.current_question.answer_text = self.current_question.question_order_text.split(",");
+				}
+
+				self.question_counter = self.result.question_counter + 1;
+
+				self.result = {};
+				return;
+			}
+		});
 	}
 
 	self.updateBackground = function() {

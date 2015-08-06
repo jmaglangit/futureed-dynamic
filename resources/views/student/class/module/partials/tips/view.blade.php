@@ -15,7 +15,7 @@
 				</div>
 
 				<div class="row">
-					<div class="col-xs-6">
+					<div class="col-xs-6" ng-if="tips.record.subject_area_name && tips.record.subject_name">
 						<p>{! tips.record.subject_area_name !} > {! tips.record.subject_name !}</p>
 					</div>
 					<div class="col-xs-6">
