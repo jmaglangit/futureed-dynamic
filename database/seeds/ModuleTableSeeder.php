@@ -28,6 +28,7 @@ class ModuleTableSeeder extends Seeder
 					'subject_area_id' => ($data[2] == '') ? 0 : $data[2],
 					'code' => $data[3],
 					'name' => $data[4],
+					'grade_id' => 1,
 					'description' => $data[5],
 					'common_core_area' => $data[6],
 					'common_core_url' => $data[7],
