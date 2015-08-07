@@ -141,12 +141,11 @@ class StudentModuleAnswerController extends ApiController{
 			//Get answer and point from Question.
 			$question_answer = $this->question->getQuestionAnswer($data['question_id']);
 
-
-			$data['answer_status'] = ($data['answer_text'] == $question_answer) ?
+			$data['answer_status'] = (strcasecmp($data['answer_text'],$question_answer) == 0) ?
 				config('futureed.answer_status_correct') :
 				config('futureed.answer_status_wrong');
 
-			$data['points_earned'] = ($data['answer_text'] == $question_answer) ?
+			$data['points_earned'] = (strcasecmp($data['answer_text'],$question_answer) == 0) ?
 				//get points earned from question
 				$this->question->getQuestionPointsEarned($data['question_id'])
 				  : 0 ;
