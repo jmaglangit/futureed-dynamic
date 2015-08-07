@@ -309,12 +309,22 @@ function HelpController($scope, apiService, StudentHelpService, TableService, Se
 			self.show_help_requests = !self.show_help_requests;
 		}
 
+		self.module_instance = module;
 		self.module = module.record;
 		self.question = module.current_question;
 		self.content = module.contents;
 
-		self.setActive(Constants.ACTIVE_ADD);
+		self.setModuleActive(Constants.ACTIVE_ADD);
 	});
+
+	self.viewHelpList = function() {
+		self.setModuleActive();
+
+		if(!self.active_own && !self.active_classmate 
+			&& !self.active_current && !self.active_all) {
+			self.setHelpTabActive();
+		}
+	}
 
 	self.toggleHelp = function(module) {
 		self.errors = Constants.FALSE;
@@ -322,11 +332,12 @@ function HelpController($scope, apiService, StudentHelpService, TableService, Se
 
 		self.show_help_requests = !self.show_help_requests;
 		
+		self.module_instance = module;
 		self.module = module.record;
 		self.question = module.current_question;
 		self.content = module.contents;
 
-		self.setActive();
+		self.setModuleActive();
 		self.setHelpTabActive();
 	}
 
@@ -340,7 +351,7 @@ function HelpController($scope, apiService, StudentHelpService, TableService, Se
 		self.search.question_status = Constants.EMPTY_STR;
 
 		if(!self.active_all) {
-			self.search.link_type = (self.module.student_module[0].last_answered_question_id) ? Constants.QUESTION : Constants.CONTENT;
+			self.search.link_type = (self.module_instance.active_questions) ? Constants.QUESTION : Constants.CONTENT;
 			self.search.link_id = (angular.equals(self.search.link_type, Constants.QUESTION)) ? self.question.id : self.content.id;
 		}
 
@@ -363,7 +374,7 @@ function HelpController($scope, apiService, StudentHelpService, TableService, Se
 				self.active_current = Constants.TRUE;
 				self.active_all = Constants.FALSE;
 
-				self.search.link_type = (self.module.student_module[0].last_answered_question_id) ? Constants.QUESTION : Constants.CONTENT;
+				self.search.link_type = (self.module_instance.active_questions) ? Constants.QUESTION : Constants.CONTENT;
 				self.search.link_id = (angular.equals(self.search.link_type, Constants.QUESTION)) ? self.question.id : self.content.id;
 				break;
 
@@ -376,7 +387,6 @@ function HelpController($scope, apiService, StudentHelpService, TableService, Se
 				break;
 
 			default 	:
-
 				self.active_classmate = Constants.TRUE;
 				self.active_own = Constants.FALSE;
 

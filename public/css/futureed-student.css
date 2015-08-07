@@ -973,6 +973,13 @@ hr {
 
 .next-btn {
 	position: absolute;
+    bottom: 0px;
+    width: 200px;
+    right: -230px;
+}
+
+.next-question-btn {
+	position: absolute;
     bottom: 15px;
     width: 200px;
     right: 25px;
