@@ -10,27 +10,33 @@
 
     <div class="col-xs-12">
     	<ul class="nav nav-pills col-xs-12">
-    		<li ng-class="{ 'active' : !tips.active_all }">
-    			<a class="pill-grey" href="#current" data-toggle="tab" ng-click="tips.setTipTabActive(futureed.CURRENT)">Current</a>
+    		<li ng-class="{ 'active' : tips.active_current }">
+    			<a class="pill-grey" href="javascript:void(0)" data-toggle="tab" ng-click="tips.setTipTabActive(futureed.CURRENT)">Current</a>
     		</li>
     		<li ng-class="{ 'active' : tips.active_all }">
-    			<a class="pill-grey" href="#" data-toggle="tab" ng-click="tips.setTipTabActive(futureed.ALL)">All</a>
+    			<a class="pill-grey" href="javascript:void(0)" data-toggle="tab" ng-click="tips.setTipTabActive(futureed.ALL)">All</a>
     		</li>
     	</ul>
 
     	<div class="tab-content">
     		<div class="tab-pane active" id="current">
-		    	<div class="tips-container">
-					<div class="content-box" ng-if="!tips.records.length">
+		    	<div id="tip_list" class="tips-container">
+					<div class="content-box" ng-if="!tips.records.length && !tips.table.loading">
 						<div class="row content-row">
 							<center><p>No Tips Found</p></center>
+						</div>
+					</div>
+
+					<div class="content-box" ng-if="tips.table.loading">
+						<div class="row content-row">
+							<center><p>Loading...</p></center>
 						</div>
 					</div>
 
 					<div class="content-box" ng-repeat="current in tips.records">
 						<div class="row content-row">
 							<div class="col-xs-6">
-								<span class="content-bar-title" ng-click="tips.setActive(futureed.ACTIVE_VIEW, current.id)">
+								<span class="content-bar-title" ng-click="tips.setModuleActive(futureed.ACTIVE_VIEW, current.id)">
 									{! current.title !}
 								</span>
 							</div>
@@ -54,10 +60,6 @@
 								<span><i class="fa fa-calendar-o"></i> {! current.created_at !}</span>
 							</div>
 						</div>
-					</div>
-
-					<div class="col-xs-8" ng-if="mod.show_btn">
-						<button class="btn btn-maroon" ng-click="mod.tipList('', futureed.CURRENT, 1)">View More</button>
 					</div>
 				</div>
 		    </div>

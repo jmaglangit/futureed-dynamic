@@ -1,34 +1,34 @@
 <div class="col-xs-12 margin-top-15" ng-if="tips.active_view">
-	<div class="view-tips-container">
+	<div id="tip_details" class="view-tips-container">
 		<div class="content-box row margin-top-bot-5">
-			<div class="help-container">
-				<div class="row">
-					<div class="col-xs-6">
-						<p class="tip-title">{! tips.record.title !}</p class="title-mid">
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-xs-6">
-						<p><i class="fa fa-calendar-o"></i> {! tips.record.created_at !}</p>
-					</div>
-				</div>
-
-				<div class="row">
-					<div class="col-xs-6" ng-if="tips.record.subject_area_name && tips.record.subject_name">
-						<p>{! tips.record.subject_area_name !} > {! tips.record.subject_name !}</p>
-					</div>
-					<div class="col-xs-6">
-						<span><i class="fa fa-user"></i> By : {! tips.record.name !}</span>
-					</div>
-				</div>
-
-				<div class="row">
-					<hr/>
-					<p>{! tips.record.content !}</p>
+			<div class="row">
+				<div class="col-xs-6">
+					<p class="tip-title">{! tips.record.title !}</p class="title-mid">
 				</div>
 			</div>
+
+			<div class="row">
+				<div class="col-xs-6">
+					<p><i class="fa fa-calendar-o"></i> {! tips.record.created_at !}</p>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-xs-6" ng-if="tips.record.subject_area_name && tips.record.subject_name">
+					<p>{! tips.record.subject_area_name !} > {! tips.record.subject_name !}</p>
+				</div>
+				<div class="col-xs-6">
+					<span><i class="fa fa-user"></i> By : {! tips.record.name !}</span>
+				</div>
+			</div>
+
+			<div class="row">
+				<hr/>
+				<p>{! tips.record.content !}</p>
+			</div>
+
 			<div class="clearfix"></div>
+
 			<div class="help-container" ng-repeat="rec in tips.ans_record">
 				<div class="row">
 					<h4>{! rec.content !}</h4>
