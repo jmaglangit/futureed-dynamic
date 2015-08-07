@@ -12,7 +12,7 @@ class AddFailedStatusOnStudentModule extends Migration {
 	 */
 	public function up()
 	{
-		DB::statement("ALTER TABLE student_modules CHANGE module_status module_status ENUM('Available','On Going','Completed','Failed')");
+		DB::statement("ALTER TABLE student_modules CHANGE module_status module_status ENUM('Available','On Going','Completed','Failed');");
 	}
 
 	/**
@@ -22,7 +22,8 @@ class AddFailedStatusOnStudentModule extends Migration {
 	 */
 	public function down()
 	{
-		DB::statement("ALTER TABLE student_modules CHANGE module_status module_status ENUM('Available','On Going','Completed')");
+		DB::statement("UPDATE student_modules set module_status = NULL WHERE module_status='Failed';");
+		DB::statement("ALTER TABLE student_modules CHANGE module_status module_status ENUM('Available','On Going','Completed');");
 	}
 
 }
