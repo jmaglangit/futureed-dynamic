@@ -57,7 +57,7 @@
 			<div class="modal-footer">
 				<div class="btn-container">
 					<div ng-if="mod.module_message.skip_module">
-						{!! Form::button('Begin Lesson'
+						{!! Form::button('Proceed to Questions'
 							, array(
 								'class' => 'btn btn-maroon btn-medium'
 								, 'data-dismiss' => 'modal'

@@ -213,6 +213,7 @@ function TipsController($scope, apiService, StudentTipsService, TableService, Se
 			self.show_content_tips = !self.show_content_tips;
 		}
 
+		self.module_instance = module;
 		self.module = module.record;
 		self.question = module.current_question;
 		self.content = module.contents;
@@ -226,6 +227,7 @@ function TipsController($scope, apiService, StudentTipsService, TableService, Se
 
 		self.show_content_tips = !self.show_content_tips;
 		
+		self.module_instance = module;
 		self.module = module.record;
 		self.question = module.current_question;
 		self.content = module.contents;
@@ -256,7 +258,7 @@ function TipsController($scope, apiService, StudentTipsService, TableService, Se
 				break;
 
 			case Constants.CURRENT:
-				self.search.link_type = (self.module.student_module[0].last_answered_question_id) ? Constants.QUESTION : Constants.CONTENT;
+				self.search.link_type = (self.module_instance.active_questions) ? Constants.QUESTION : Constants.CONTENT;
 				self.search.link_id = (angular.equals(self.search.link_type, Constants.QUESTION)) ? self.question.id : self.content.id;
 				self.search.module_id = self.module.id;
 				self.active_current = Constants.TRUE;

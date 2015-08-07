@@ -94,6 +94,6 @@
 
 	<div class="questions-btn-container">
 		<button type="button" class="btn btn-gold exit-btn" ng-click="mod.exitModule()">Exit Module</button>
-		<button ng-if="!mod.result.answered && !mod.result.quoted" type="button" class="btn btn-maroon next-btn" ng-click="mod.checkAnswer()"> Submit </button>
+		<button ng-if="!mod.result.answered && !mod.result.quoted && !mod.result.failed" type="button" class="btn btn-maroon next-question-btn" ng-click="mod.checkAnswer()"> Submit </button>
 	</div>
 </div>

@@ -50,7 +50,7 @@
 		{!! Form::button('Back'
 			, array(
 				 'class' => 'btn btn-gold btn-medium'
-				, 'ng-click' => 'help.setModuleActive()'
+				, 'ng-click' => 'help.viewHelpList();'
 				)
 		) !!}
 	</div>

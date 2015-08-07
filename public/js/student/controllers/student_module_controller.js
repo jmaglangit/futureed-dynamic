@@ -118,6 +118,9 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 	var loadModuleView = function() {
 		var student_module = self.record.student_module[0];
+		self.getTeachingContents(student_module.module_id);
+		self.setActive(Constants.ACTIVE_CONTENTS);
+		return;
 
 		// if last_answered_question_id value is 0, load contents
 		if(!student_module.last_answered_question_id) {
@@ -273,8 +276,19 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		getAvatarPose($scope.user.avatar_id);
 		listAvatarQuotes($scope.user.avatar_id);
 		listQuestions(function(response) {
-			self.current_question = self.questions[0];
-			self.question_counter = 1;
+			if(self.record.student_module[0].last_answered_question_id) {
+				angular.forEach(self.questions, function(value, key) {
+					if(angular.equals(parseInt(self.record.student_module[0].last_answered_question_id), parseInt(value.id))) {
+						self.current_question = self.questions[key];
+						return;
+					}
+				});
+
+			} else {
+				self.current_question = self.questions[0];
+			}
+
+			self.question_counter = (self.record.student_module[0].question_counter) ? parseInt(self.record.student_module[0].question_counter) + 1 : 1;
 
 			var data = {};
 				data.module_id = self.record.student_module[0].id;
@@ -374,11 +388,18 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
+					self.result = {};
+
+					if(response.errors[0].error_code == 2056) {
+						self.result.failed = Constants.TRUE;
+					}
+
 					$scope.ui_unblock();
 				} else if(response.data) {
 					// show message
 					self.result = response.data;
-						
+					self.result.failed = Constants.FALSE;
+
 					if(angular.equals(self.result.module_status, "Completed")) {
 						// get points
 						var data = {};
@@ -427,6 +448,10 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 								});
 							});
 						});
+					} else if(angular.equals(self.result.module_status, "Failed")) {
+						self.errors = ["You need to review the teaching content."];
+						self.result.failed = Constants.TRUE;
+						$scope.ui_unblock();
 					} else {
 						$scope.ui_unblock();
 
@@ -591,13 +616,23 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 	};
 
 	self.reviewContent = function() {
-		var data = {};
-			data.module_id = self.record.student_module[0].id;
-			data.last_answered_question_id = 0;
-			
-		updateModuleStudent(data, function() {
-			self.setActive();
+		if(self.result && self.result.failed) {
+			// create student_module
+			var data = {};
+				data.class_id = $scope.user.class.class_id;
+				data.student_id = $scope.user.id;
+				data.module_id = self.record.id;
+
+			createModuleStudent(data, function(response) {
+				if(response.data) {
+					self.record.student_module[0] = response.data;	
+					loadModuleView();
+				} else {
+					self.errors = $internalError();
+				}
+			});
+		} else {
 			self.launchModule(self.record.id);
-		});
+		}
 	}
 }
