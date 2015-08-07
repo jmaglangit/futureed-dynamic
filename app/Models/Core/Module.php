@@ -50,7 +50,7 @@ class Module extends Model
 	}
 
 	public function studentModule() {
-		return $this->hasMany('FutureEd\Models\Core\StudentModule');
+		return $this->hasMany('FutureEd\Models\Core\StudentModule')->notFailed();
 	}
 
 
