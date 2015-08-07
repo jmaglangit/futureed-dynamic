@@ -59,6 +59,14 @@ function StudentHelpService($http){
 		});
 	}
 
+	service.addHelp = function(data) {
+		return $http({
+			method 	: Constants.METHOD_POST
+			, data 	: data
+			, url 	: serviceUrl + 'help-request'
+		})
+	}
+
 	service.updateStatus = function(data) {
 		return $http({
 			method 	: Constants.METHOD_PATCH
