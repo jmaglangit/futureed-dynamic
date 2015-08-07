@@ -203,7 +203,7 @@
 	padding: 0;
 }
 
-.tip-btn-container {
+.tip-btn-container, .margin-top-10 {
 	margin-top: 10px;
 }
 .btn-left {
@@ -332,12 +332,16 @@ th, td {
 	width: 100px;
 	height: 100px;
 	border-radius: 50%;
-	border: 3px solid #e1e1e1;
 	background-color: #ffffff;
 }
 
-.avatar-name-container {
-	margin: 30px 5px;
+.avatar-name-container, .btn-help  {
+	margin-top: 30px;
+	text-align: center;
+}
+
+.help-status {
+	text-align: center
 }
 
 .sticky-bottom {
@@ -477,7 +481,6 @@ th, td {
 
 .answers-container {
 	max-height: 680px;
-	overflow: auto;
 }
 
 .notice {
@@ -498,7 +501,6 @@ th, td {
 	background-color: #055A7F;
 	color: #FFFFFF;
 	border-radius: 5px;
-	padding: 5px;
 }
 
 .module-wrapr {
@@ -971,9 +973,9 @@ hr {
 
 .next-btn {
 	position: absolute;
-    bottom: 0;
+    bottom: 15px;
     width: 200px;
-    right: -230px;
+    right: 25px;
 }
 
 .exit-btn {
@@ -1006,7 +1008,8 @@ hr {
 .module-progress {
 	color: #055A7F;
     text-align: center;
-    position: absolute;
+    position: relative;
+    bottom: 40px;
 }
 
 .progress {
@@ -1136,4 +1139,71 @@ hr {
 
 .content-body {
 	min-height: 400px;
+}
+
+.time-right {
+	position: relative;
+	top: 20px;
+}
+
+.avatar-help {
+	margin-left: 25%;
+}
+
+.bottom-5 {
+	position: relative;
+	bottom: 5px;
+}
+
+.help-title {
+	padding: 0;
+}
+
+.col-xs-9 > .panel-student {
+	min-height: 310px;
+}
+
+.bubble 
+{
+position: relative;
+min-height: 120px;
+padding: 15px;
+background: #FFFFFF;
+-webkit-border-radius: 10px;
+-moz-border-radius: 10px;
+border-radius: 10px;
+border: #065a7f solid 1px;
+}
+
+.bubble:after 
+{
+content: '';
+position: absolute;
+border-style: solid;
+border-width: 12px 23px 12px 0;
+border-color: transparent #FFFFFF;
+display: block;
+width: 0;
+z-index: 1;
+left: -23px;
+top: 43px;
+}
+
+.bubble:before 
+{
+content: '';
+position: absolute;
+border-style: solid;
+border-width: 14px 27px 13px 0;
+border-color: transparent #065a7f;
+display: block;
+width: 0;
+z-index: 0;
+left: -27px;
+top: 41px;
+}
+
+.answer-container {
+	padding: 15px 30px 30px 0;
+    color: #887c70;
 }
