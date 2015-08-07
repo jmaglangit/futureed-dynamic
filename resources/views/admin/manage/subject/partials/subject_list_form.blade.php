@@ -1,4 +1,4 @@
-<div ng-if="subject.active_list_subject">
+<div ng-if="subject.active_list_subject && list_subject">
 	<div class="content-title">
 		<div class="title-main-content">
 			<span>Subject Management</span>

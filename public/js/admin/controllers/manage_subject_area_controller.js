@@ -224,4 +224,10 @@ function ManageSubjectAreaController($scope, apiService, manageSubjectAreaServic
 			$scope.ui_unblock();
 		});
 	}
+
+	self.setSubjectList = function(){
+		$scope.list_subject = Constants.TRUE;
+		$scope.subject_area_list = Constants.FALSE;
+		self.active_list = Constants.NULL;
+	}
 }
