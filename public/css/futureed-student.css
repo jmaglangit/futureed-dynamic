@@ -1073,7 +1073,7 @@ hr {
 	padding: 0px 10px;
 }
 
-.view-tips-container {
+.view-tips-container, .view-help-container {
 	overflow-y: auto;
 	height: 360px;
 	width: 100%;
