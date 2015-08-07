@@ -1,10 +1,10 @@
-<div class="col-xs-10 col-xs-offset-1 margin-top-15" ng-if="mod.active_help_add">
-	<div class="alert alert-error" ng-if="mod.errors">
-        <p ng-repeat="error in mod.errors track by $index" > 
+<div class="col-xs-10 col-xs-offset-1 margin-top-15" ng-if="help.active_add">
+	<div class="alert alert-error" ng-if="help.errors">
+        <p ng-repeat="error in help.errors track by $index" > 
             {! error !}
         </p>
     </div>
-    <div class="alert alert-success" ng-if="mod.success">
+    <div class="alert alert-success" ng-if="help.success">
     	<p>Successfully added your help request</p>
     </div>
 	<div class="col-xs-12">
@@ -17,7 +17,7 @@
 					, array(
 					    'class' => 'form-control sidebar-input'
 					    , 'placeholder' => 'Title' 
-					    , 'ng-model' => 'mod.add.title'
+					    , 'ng-model' => 'help.add.title'
 					    , 'autocomplete' => 'off')
 				) !!}
 			</div>
@@ -29,7 +29,7 @@
 					, array(
 					    'class' => 'form-control sidebar-input'
 					    , 'placeholder' => 'Description' 
-					    , 'ng-model' => 'mod.add.content'
+					    , 'ng-model' => 'help.add.content'
 					    , 'autocomplete' => 'off')
 				) !!}
 			</div>
@@ -40,14 +40,14 @@
 			, array(
 			  'id' => 'validate_code_btn'
 			  , 'class' => 'btn btn-maroon btn-medium'
-			  , 'ng-click' => 'mod.addHelp()'
+			  , 'ng-click' => 'help.addHelp()'
 			)
 		) !!}
         {!! Form::button('Back'
             , array(
               'id' => 'validate_code_btn'
               , 'class' => 'btn btn-gold btn-medium'
-              , 'ng-click' => 'mod.setCurrentActive(); mod.toggleBtnHelp()'
+              , 'ng-click' => 'help.setCurrentActive(); help.toggleBtnHelp()'
             )
         ) !!}
 	</div>
