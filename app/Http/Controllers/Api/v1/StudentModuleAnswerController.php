@@ -112,7 +112,7 @@ class StudentModuleAnswerController extends ApiController{
 		}
 
 		//check if wrong is equal to 10.
-		if($this->student_module->getStudentModuleWrongCount($data['student_module_id']) == 10){
+		if($this->student_module->getStudentModuleStatus($data['student_module_id']) == config('futureed.module_status_failed')){
 
 			return $this->respondErrorMessage(2056);
 		}
@@ -180,13 +180,11 @@ class StudentModuleAnswerController extends ApiController{
 		//wrong counter
 		if($student_answer->answer_status == config('futureed.answer_status_wrong')){
 
-			//when 10 wrong answer reset to 1. Front-end detects if 10 wrong to go back to video.
-			if($student_module->wrong_counter == 10){
-				$student_module->wrong_counter = 0;
-			}
-
 			//increment wrong counter.
 			$student_module->wrong_counter++;
+
+
+
 
 			//starting 3 consecutive wrongs to minus 1 to correct points.
 			if($student_module->wrong_counter >= 3){
@@ -221,6 +219,11 @@ class StudentModuleAnswerController extends ApiController{
 		if($student_module->running_points >= $points_to_finish){
 
 			$student_module->module_status = config('futureed.module_status_completed');
+
+		} //when 10 wrong answer set status to Failed.
+		elseif($student_module->wrong_counter >= 10){
+
+			$student_module->module_status = config('futureed.module_status_failed');
 
 		} else {
 

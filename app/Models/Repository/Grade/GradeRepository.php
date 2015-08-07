@@ -58,7 +58,7 @@ class GradeRepository implements GradeRepositoryInterface{
     public function getGrade($code){
 
 
-        return Grade::where('code',$code)->first();
+        return Grade::where('code',$code)->with('countryGrade')->first();
 
     }
 

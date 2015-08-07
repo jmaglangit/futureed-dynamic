@@ -16,9 +16,9 @@
 
 
     <!-- Fonts -->
-    {!! Html::style('http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css') !!}
-    {!! Html::style('http://fonts.googleapis.com/css?family=Roboto:400,300,400italic,500,500italic,700,700italic') !!}
-    {!! Html::style('http://fonts.googleapis.com/css?family=Schoolbell') !!}
+    {!! Html::style('//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css') !!}
+    {!! Html::style('//fonts.googleapis.com/css?family=Roboto:400,300,400italic,500,500italic,700,700italic') !!}
+    {!! Html::style('//fonts.googleapis.com/css?family=Schoolbell') !!}
     
     <!-- CSS -->
     {!! Html::style('//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css') !!}
@@ -29,8 +29,8 @@
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+      <script src="//oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="//oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
     @yield('styles')
   </head>
