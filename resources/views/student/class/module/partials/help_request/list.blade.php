@@ -8,7 +8,7 @@
     	<p>{! help.success !}</p>
     </div>
     
-    <div class="col-xs-12" ng-init="help.setHelpTabActive(futureed.CURRENT)">
+    <div class="col-xs-12">
     	<ul class="nav nav-pills col-xs-12">
     		<li ng-class="{ 'active' : help.active_classmate }">
     			<a class="pill-grey" href="javascript:void(0);" 
@@ -40,7 +40,7 @@
                     <div class="content-box" ng-repeat="record in help.records">
                         <div class="row content-row">
                             <div class="col-xs-6">
-                                <span class="content-bar-title" ng-click="help.setActive(futureed.ACTIVE_VIEW, record.id)">
+                                <span class="content-bar-title" ng-click="help.setModuleActive(futureed.ACTIVE_VIEW, record.id)">
                                     {! record.title !}
                                 </span>
                             </div>
@@ -48,12 +48,6 @@
                         <div class="row content-row">
                             <div class="col-xs-6">
                                 <span><i class="fa fa-user"></i> {! record.student.first_name !} {! record.student.last_name !}</span>
-                            </div>
-                            <div class="col-xs-6">
-                                <span ng-repeat="i in record.stars track by $index">
-                                    <img ng-class="{ 'unrated-star' : $index + 1 > record.rating || !tip_record.rating}" 
-                                        ng-src="{! $index + 1 <= record.rating && '/images/class-student/icon-star_yellow.png' || '/images/class-student/icon-star_white.png' !}" />
-                                </span>
                             </div>
                         </div>
                         <div class="row content-row">

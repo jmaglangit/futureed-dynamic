@@ -28,26 +28,6 @@
 					<p>{! tips.record.content !}</p>
 				</div>
 			</div>
-			<div class="clearfix"></div>
-			<div class="help-container" ng-repeat="rec in tips.ans_record">
-				<div class="row">
-					<h4>{! rec.content !}</h4>
-				</div>
-				<div class="row">
-					<div class="col-xs-6 pull-right">
-						<span><i class="fa fa-user"></i> {! rec.student.first_name !} {! rec.student.last_name !}</span>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-xs-6 pull-right">
-						<span ng-repeat="i in tips.record.stars track by $index">
-							<!-- <img ng-if="!answer.rating" ng-mouseover="help.changeColor($index, answer.id)" ng-src="{! (help.hovered[answer.id][$index])  && '/images/class-student/icon-star_yellow.png' || '/images/class-student/icon-star_white.png' !}" /> -->
-							<!-- <img ng-if="answer.rating" ng-src="{! $index + 1 <= answer.rating && '/images/class-student/icon-star_yellow.png' || '/images/class-student/icon-star_white.png' !}" /> -->
-							<img ng-src="{! $index+1 <= rec.rating && '/images/class-student/icon-star_yellow.png' || '/images/class-student/icon-star_white.png' !}" />
-						</span>
-					</div>
-				</div>
-			</div>
 		</div>
 	</div>
 	<div class="btn-container">
