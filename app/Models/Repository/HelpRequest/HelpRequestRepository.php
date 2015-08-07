@@ -117,7 +117,7 @@ class HelpRequestRepository implements HelpRequestRepositoryInterface{
                 $query = $query->offset($offset)->limit($limit);
             }
         }
-		$query = $query->orderBy('created_at', 'desc');
+       $query = $query->orderBy('created_at', 'desc');
 
         return ['total' => $count, 'records' => $query->get()->toArray()];
     }
