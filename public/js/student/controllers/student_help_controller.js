@@ -120,7 +120,7 @@ function HelpController($scope, apiService, StudentHelpService, TableService, Se
 					self.record.created_moment = moment(record.created_at).startOf("minute").fromNow();
 					self.record.stars = new Array(5);
 					
-					self.record.avatar_url = record.student.avatar.avatar_url;
+					self.record.avatar_url = '/images/thumbnail/' + record.student.avatar.avatar_image;
 					self.record.title = record.title;
 					self.record.content = record.content;
 					self.record.rating = record.rating;
@@ -154,6 +154,7 @@ function HelpController($scope, apiService, StudentHelpService, TableService, Se
 
 					angular.forEach(self.answers, function(value, key) {
 						value.created_moment = moment(value.updated_at).startOf("minute").fromNow();
+						value.answer_av = '/images/thumbnail/' + value.student.avatar.avatar_image;
 					});
 				}
 			}

@@ -131,7 +131,6 @@
 						type="button" class="btn btn-blue module-btn" ng-disabled="true"><i class="fa fa-lock"></i> Module Completed</button>
 
 					<div class="progress">
-						<span class="module-progress">{! record.progress !}%</span>
 						<div class="progress-bar progress-bar-striped" role="progressbar" aria-valuemin="0" aria-valuemax="100"
 							ng-class="{ 
 								'progress-bar-success' : record.progress > 75,
@@ -143,6 +142,7 @@
 							ng-style="{ 'width' : record.progress+'%' }">
 						</div>
 					</div>
+					<span class="module-progress">{! record.progress !}%</span>
 				</div>
 			</div>
 			
