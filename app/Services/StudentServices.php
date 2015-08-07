@@ -203,7 +203,7 @@ class StudentServices {
 				'thumbnail' => $avatar_thumbnail_url,
 				'background' => $avatar_url_background,
 				'school' => $school,
-				'grade' => isset($grade) ? $grade['name'] : null,
+				'grade' => isset($grade) ? $grade : null,
 				'avatar_id' => $student_reference['avatar_id']));
 
 
