@@ -158,6 +158,7 @@ return [
 	'module_status_available' => 'Available',
 	'module_status_ongoing' => 'On Going',
 	'module_status_completed' => 'Completed',
+	'module_status_failed' => 'Failed',
 	'points_to_finish_module' => 12,
 	'deductions_to_fail_module' => 10,
 
