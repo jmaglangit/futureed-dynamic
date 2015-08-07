@@ -8,15 +8,31 @@ function StudentHelpService($http){
 	var serviceUrl = '/api/v1/';
 
 	service.list = function(search, table) {
-		return $http({
-			method 	: Constants.METHOD_GET
-			, url 	: serviceUrl + 'help-request?class_id=' + search.class_id
-					+ "&request_status=" + search.request_status
+		var params = Constants.EMPTY_STR;
+
+		if(search.module_id) {
+			params += 'module_id=' + search.module_id
+					+ '&link_type=' + search.link_type
+					+ '&student_id=' + search.student_id
+					+ '&help_request_type=' + search.help_request_type
+					+ '&question_status=' + search.question_status
+					+ '&link_id=' + search.link_id
+		} else {
+			params += 'class_id=' + search.class_id 
 					+ "&title=" + search.title
 					+ "&student_id=" + search.student_id
+					+ "&request_status=" + search.request_status 
 					+ "&help_request_type=" + search.help_request_type
-					+ "&limit=" + table.size
-					+ "&offset=" + table.offset
+		}
+
+		if(table) {
+			params += "&limit=" + table.size + "&offset=" + table.offset
+		}
+
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url 	: serviceUrl + 'help-request?' + params
+					
 		});
 	}
 
@@ -41,6 +57,14 @@ function StudentHelpService($http){
 			, data  : data
 			, url 	: serviceUrl + 'help-request-answer-rating'
 		});
+	}
+
+	service.addHelp = function(data) {
+		return $http({
+			method 	: Constants.METHOD_POST
+			, data 	: data
+			, url 	: serviceUrl + 'help-request'
+		})
 	}
 
 	service.updateStatus = function(data) {

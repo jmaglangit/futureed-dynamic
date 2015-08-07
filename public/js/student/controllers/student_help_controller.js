@@ -15,9 +15,11 @@ function HelpController($scope, apiService, StudentHelpService, TableService, Se
 	self.setActive = function(active, id) {
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
+		self.record = {};
 
 		self.active_list = Constants.FALSE;
 		self.active_view = Constants.FALSE;
+		self.active_add = Constants.FALSE;
 
 		switch(active) {
 			case Constants.ACTIVE_VIEW:
@@ -28,6 +30,10 @@ function HelpController($scope, apiService, StudentHelpService, TableService, Se
 
 			case Constants.ACTIVE_LIST:
 				self.active_list = Constants.TRUE;
+				break;
+
+			case Constants.ACTIVE_ADD:
+				self.active_add = Constants.TRUE;
 				break;
 
 			default:
@@ -263,5 +269,146 @@ function HelpController($scope, apiService, StudentHelpService, TableService, Se
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
+	}
+
+	/**
+	* Related to Contents / Questions
+	*/
+	$scope.$on('toggle-help', function(event) {
+		var self = event.currentScope.help;
+		var module = event.targetScope.mod;
+
+
+		if(!self.show_help_requests) {
+			self.show_help_requests = !self.show_help_requests;
+		}
+
+		self.module = module.record;
+		self.question = module.current_question;
+		self.content = module.contents;
+
+		self.setActive(Constants.ACTIVE_ADD);
+	});
+
+	self.toggleHelp = function(module) {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		self.show_help_requests = !self.show_help_requests;
+		
+		self.module = module.record;
+		self.question = module.current_question;
+		self.content = module.contents;
+
+		self.setActive();
+		self.setHelpTabActive();
+
+		// + '&help_request_type=' + search.help_request_type
+		// + '&question_status=' + search.question_status
+	}
+
+	self.setHelpTabActive = function(active) {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		self.search.module_id= self.module.id;
+		
+		self.search.student_id= $scope.user.id;
+		self.search.link_id = Constants.EMPTY_STR;
+		self.search.question_status = Constants.EMPTY_STR;
+
+		switch(active) {
+			case Constants.CLASSMATE 	:
+				self.active_classmate = Constants.TRUE;
+				self.active_own = Constants.FALSE;
+
+				self.search.help_request_type = StudentModuleConstants.OTHERS;
+				break;
+
+			case Constants.OWN 			:
+				self.active_own = Constants.TRUE;
+				self.active_classmate = Constants.FALSE;
+
+				self.search.help_request_type = StudentModuleConstants.OWN;
+				break;
+
+			case Constants.CURRENT 		:
+				self.active_current = Constants.TRUE;
+				self.active_all = Constants.FALSE;
+
+				self.search.link_type = (self.module.student_module[0].last_answered_question_id) ? Constants.QUESTION : Constants.CONTENT;
+				self.search.link_id = (angular.equals(self.search.link_type, Constants.QUESTION)) ? self.question.id : self.content.id;
+				break;
+
+			case Constants.ALL 			:
+				self.active_all = Constants.TRUE;
+				self.active_current = Constants.FALSE;
+
+				self.search.link_type = Constants.EMPTY_STR;
+				break;
+
+			default 	:
+				self.active_classmate = Constants.TRUE;
+				self.active_own = Constants.FALSE;
+
+				self.active_current = Constants.TRUE;
+				self.active_all = Constants.FALSE;
+
+				self.search.link_type = (self.module.student_module[0].last_answered_question_id) ? Constants.QUESTION : Constants.CONTENT;
+				self.search.link_id = (angular.equals(self.search.link_type, Constants.QUESTION)) ? self.question.id : self.content.id;
+				self.search.help_request_type = StudentModuleConstants.OTHERS;
+				break;
+		}
+
+		self.listContentHelp();
+	}
+
+	self.listContentHelp = function() {
+		$scope.div_block('help_request_list');
+		StudentHelpService.list(self.search).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.records = response.data.records;
+					self.updatePageCount(response.data);
+				}
+			}
+
+			$scope.div_unblock('help_request_list');
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.div_unblock('help_request_list');
+		});
+	}
+
+	self.addHelp = function() {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		self.record.module_id = self.module.id;
+		self.record.subject_id = self.module.subject_id;
+		self.record.subject_area_id = self.module.subject_area_id;
+		self.record.link_type = (self.module.student_module[0].last_answered_question_id) ? Constants.QUESTION : Constants.CONTENT;
+		self.record.link_id = (angular.equals(self.record.link_type, Constants.QUESTION)) ? self.question.id : self.content.id;
+		self.record.class_id = $scope.user.class.id;
+		self.record.student_id = $scope.user.id;
+
+		$scope.div_block('help_request_list');
+		StudentHelpService.addHelp(self.record).success(function(response){
+			if(angular.equals(response.status,Constants.STATUS_OK)){
+				if(response.errors){
+					self.errors = $scope.errorHandler(response.errors);
+				}else if(response.data){
+					self.record = {};
+					self.success = Constants.TRUE;
+				}
+			}
+
+			$scope.div_unblock('help_request_list');
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.div_unblock('help_request_list');
+		})
 	}
 }
