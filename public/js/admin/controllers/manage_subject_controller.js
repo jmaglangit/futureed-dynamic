@@ -67,6 +67,7 @@ function ManageSubjectController($scope, apiService, manageSubjectService, Table
 			default:
 				self.list();
 				self.active_list_subject = Constants.TRUE;
+				$scope.list_subject = Constants.TRUE;
 				break;
 		}
 
