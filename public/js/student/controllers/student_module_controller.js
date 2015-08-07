@@ -28,6 +28,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 		self.active_questions = Constants.FALSE;
 		self.active_contents = Constants.FALSE;
+		self.result = Constants.FALSE;
 
 		switch(active) {
 			case Constants.ACTIVE_QUESTIONS 	:
@@ -402,6 +403,14 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 					if(angular.equals(self.result.module_status, "Completed")) {
 						// get points
+						var data = $scope.user;
+							data.points = parseInt(data.points) + parseInt(self.record.points_earned);
+
+						apiService.updateUserSession(data).success(function(response) {
+							$scope.getUserDetails();
+						});
+
+
 						var data = {};
 							data.age_group = 1;
 							data.module_id = self.record.id;
