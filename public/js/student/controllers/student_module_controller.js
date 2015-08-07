@@ -124,13 +124,13 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		return;
 
 		// if last_answered_question_id value is 0, load contents
-		if(!student_module.last_answered_question_id) {
+		if(!parseInt(student_module.last_answered_question_id)) {
 			self.getTeachingContents(student_module.module_id);
 			self.setActive(Constants.ACTIVE_CONTENTS);
 		} else {
 			// if last_answered_question_id value is > 0, load question
 			self.setActive(Constants.ACTIVE_QUESTIONS);
-			self.search.last_answered_question_id = student_module.last_answered_question_id;
+			self.search.last_answered_question_id = parseInt(student_module.last_answered_question_id);
 			self.getModuleStudent(student_module.id, function(response) {
 				var module_student = response.data;
 
@@ -227,7 +227,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 			}
 
 			if(self.active_questions) {
-				data.last_answered_question_id = self.questions.id;
+				data.last_answered_question_id = parseInt(self.questions.id);
 			}
 			
 		updateModuleStudent(data, function() {
@@ -277,7 +277,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		getAvatarPose($scope.user.avatar_id);
 		listAvatarQuotes($scope.user.avatar_id);
 		listQuestions(function(response) {
-			if(self.record.student_module[0].last_answered_question_id) {
+			if(parseInt(self.record.student_module[0].last_answered_question_id)) {
 				angular.forEach(self.questions, function(value, key) {
 					if(angular.equals(parseInt(self.record.student_module[0].last_answered_question_id), parseInt(value.id))) {
 						self.current_question = self.questions[key];
@@ -293,7 +293,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 			var data = {};
 				data.module_id = self.record.student_module[0].id;
-				data.last_answered_question_id = self.current_question.id;
+				data.last_answered_question_id = parseInt(self.current_question.id);
 
 			updateModuleStudent(data);
 		});
@@ -467,7 +467,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 						// update student_module
 						var data = {};
 							data.module_id = self.result.id;
-							data.last_answered_question_id = self.result.next_question;
+							data.last_answered_question_id = parseInt(self.result.next_question);
 				
 							updateModuleStudent(data, function(response) {
 								setAvatarQuote();
