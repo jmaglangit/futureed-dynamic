@@ -91,5 +91,13 @@ class StudentModule extends Model {
 
 	}
 
+	public function scopeNotFailed($query){
+
+		return $query->where('module_status','<>',config('futureed.module_status_failed'));
+
+	}
+
+
+
 
 }
