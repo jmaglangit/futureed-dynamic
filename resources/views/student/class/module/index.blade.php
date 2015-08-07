@@ -72,19 +72,21 @@
 					<div template-directive template-url="{!! route('student.class.module.partials.view_tip') !!}"></div>
 				</div>
 			</div>
-			<div class="drawer-help col-xs-6">
-				<div class="drawer-inside" ng-class="{'openup' : mod.toggle_help_bottom}">
-					<div class="drawer-header pointer" ng-click="mod.toggleBtnHelp()">
+			<div class="drawer-help col-xs-6" ng-controller="HelpController as help">
+				<div class="drawer-inside" ng-class="{ 'openup' : help.show_help_requests }">
+					<div class="drawer-header pointer" ng-click="help.toggleHelp(mod)">
 						<img class="pull-left" src="/images/class-student/icon-tip_principal.png">
 						<p class="pull-left">Help Request</p>	
 
 						<img class="drawer-button" 
-							ng-class="{'flip-270':mod.toggle_help_bottom,'flip-90':!mod.toggle_help_bottom, }" src="/images/class-student/btn-slide.png">
+							ng-class="{ 'flip-270' : help.show_help_requests, 'flip-90' : !help.show_help_requests }" src="/images/class-student/btn-slide.png">
 					</div>
 					
 					<div template-directive template-url="{!! route('student.class.module.partials.add_help') !!}"></div>
-					
+
 					<div template-directive template-url="{!! route('student.class.module.partials.list_help') !!}"></div>
+
+					<div template-directive template-url="{!! route('student.class.module.partials.view_help') !!}"></div>
 				</div>
 			</div>
 		</div>
@@ -98,8 +100,12 @@
 	{!! Html::script('/js/student/controllers/student_tips_controller.js')!!}
 	{!! Html::script('/js/student/services/student_tips_service.js')!!}
 
+	{!! Html::script('/js/student/controllers/student_help_controller.js')!!}
+	{!! Html::script('/js/student/services/student_help_service.js')!!}
+
 	{!! Html::script('/js/student/controllers/student_module_controller.js')!!}
 	{!! Html::script('/js/student/services/student_module_service.js')!!}
+
 	{!! Html::script('/js/student/constants/student_module_constant.js')!!}
 
 	{!! Html::script('/js/common/search_service.js')!!}
