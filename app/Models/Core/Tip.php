@@ -3,6 +3,8 @@
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+use Carbon\Carbon;
+
 
 class Tip extends Model {
 
@@ -138,6 +140,17 @@ class Tip extends Model {
 
 		return $query->where('link_id','=',$link_id);
 	}
+
+	//set created_at to GMT
+	public function setCreatedAtAttribute($value)
+	{
+		$this->attributes['created_at'] = Carbon::createFromTimestamp(strtotime($value))
+			->timezone('GMT')
+			->toDateTimeString();
+
+	}
+
+
 
 
 
