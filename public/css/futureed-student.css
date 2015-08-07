@@ -698,10 +698,6 @@ img.drawer-button {
 	border-color: #3d3d3d !important;
 }
 
-.help-container {
-	margin: 15px;
-}
-
 hr {
 	border: 0;
 	border-top: 1px solid #a19c9c;
@@ -1069,10 +1065,12 @@ hr {
     user-select: none;
 }
 
-.tips-container {
+.tips-container, .help-container {
 	margin-top: 50px;
 	overflow-y: auto;
 	height: 370px;
+	border-radius: 7px;
+	padding: 0px 10px;
 }
 
 .view-tips-container {
