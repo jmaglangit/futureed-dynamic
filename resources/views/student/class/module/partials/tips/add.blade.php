@@ -1,5 +1,5 @@
 <div class="col-xs-12 margin-top-15" ng-if="tips.active_add">
-	<div class="view-tips-container">
+	<div id="add_tip" class="view-tips-container">
 		<div class="alert alert-error" ng-if="tips.errors">
 	        <p ng-repeat="error in tips.errors track by $index" > 
 	            {! error !}
