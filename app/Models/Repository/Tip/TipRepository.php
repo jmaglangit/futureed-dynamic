@@ -84,7 +84,7 @@ class TipRepository implements TipRepositoryInterface{
 			}
 
 		}
-
+		$tip = $tip->orderBy('created_at', 'desc');
 		return ['total' => $count, 'records' => $tip->get()->toArray()];
 
 	}
