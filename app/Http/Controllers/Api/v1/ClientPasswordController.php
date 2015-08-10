@@ -1,177 +1,162 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
-use FutureEd\Http\Controllers\Api\Traits\ApiValidatorTrait;
 use FutureEd\Http\Requests;
-use FutureEd\Http\Controllers\Controller;
-
-use FutureEd\Services\userervices;
-use FutureEd\Services\MailServices;
-use FutureEd\Services\CodeGeneratorServices;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
-class ClientPasswordController extends ApiController{
+class ClientPasswordController extends ApiController
+{
 
-   public function resetPassword($id){
+	public function resetPassword($id)
+	{
 
-        $input = input::only('reset_code','password');
-        $client = config('futureed.client');
+		$input = input::only('reset_code', 'password');
+		$client = config('futureed.client');
 
-        $this->addMessageBag($this->validateVarNumber($id));
-        $this->addMessageBag($this->validateNumber($input,'reset_code'));
-        $this->addMessageBag($this->checkPassword($input,'password'));
+		$this->addMessageBag($this->validateVarNumber($id));
+		$this->addMessageBag($this->validateNumber($input, 'reset_code'));
+		$this->addMessageBag($this->checkPassword($input, 'password'));
 
-        $password = sha1($input['password']);
-        
-        $msg_bag = $this->getMessageBag();
+		$password = sha1($input['password']);
 
-        if($msg_bag){
+		$msg_bag = $this->getMessageBag();
 
-            return $this->respondWithError($msg_bag);
+		if ($msg_bag) {
 
-        }else{
+			return $this->respondWithError($msg_bag);
 
-            $return = $this->client->verifyClientId($id);
+		} else {
 
-            if($return){
+			$return = $this->client->verifyClientId($id);
 
-                $userDetails = $this->user->getUserDetail($return['user_id'],$client);
+			if ($return) {
 
-                if($input['reset_code'] == $userDetails['reset_code']){
+				$userDetails = $this->user->getUserDetail($return['user_id'], $client);
 
-                    $expired = $this->user->checkCodeExpiry($userDetails['reset_code_expiry']);
+				if ($input['reset_code'] == $userDetails['reset_code']) {
 
-                    if(!$expired){
+					$expired = $this->user->checkCodeExpiry($userDetails['reset_code_expiry']);
 
-                       $this->user->updateInactiveLock($return['user_id']);
-                       $this->user->updatePassword($return['user_id'],$password);
+					if (!$expired) {
 
-                       return $this->respondWithData(['id'=>$return['id']]);
+						$this->user->updateInactiveLock($return['user_id']);
+						$this->user->updatePassword($return['user_id'], $password);
 
-                    }else{
+						return $this->respondWithData(['id' => $return['id']]);
 
-                        return $this->respondErrorMessage(2007);
-                    }
+					} else {
 
-                }else{
+						return $this->respondErrorMessage(2007);
+					}
 
-                    return $this->respondErrorMessage(2100);
-                }
+				} else {
 
+					return $this->respondErrorMessage(2100);
+				}
 
 
-            }else{
+			} else {
 
-                return $this->respondErrorMessage(2001);
+				return $this->respondErrorMessage(2001);
 
-            }
+			}
 
 
-        }
-    }
+		}
+	}
 
 
-     public function changePassword($id){
+	public function changePassword($id)
+	{
 
-        $input = input::only('password','new_password');
-        $client = config('futureed.client');
+		$input = Input::only('password', 'new_password');
+		$client = config('futureed.client');
 
-        $this->addMessageBag($this->validateVarNumber($id));
-        $this->addMessageBag($this->checkPassword($input,'password'));
-        $this->addMessageBag($this->checkPassword($input,'new_password'));
+		$this->addMessageBag($this->validateVarNumber($id));
+		$this->addMessageBag($this->checkPassword($input, 'password'));
+		$this->addMessageBag($this->checkPassword($input, 'new_password'));
 
-        $password = sha1($input['password']);
-        $new_password = sha1($input['new_password']);
-        
-        $msg_bag = $this->getMessageBag();
+		$password = sha1($input['password']);
+		$new_password = sha1($input['new_password']);
 
-        if($msg_bag){
+		$msg_bag = $this->getMessageBag();
 
-            return $this->respondWithError($msg_bag);
+		if ($msg_bag) {
 
-        }else{
+			return $this->respondWithError($msg_bag);
 
-            $return = $this->client->verifyClientId($id);
+		} else {
 
-            if($return){
+			$return = $this->client->verifyClientId($id);
 
-                $userDetails = $this->user->getUserDetail($return['user_id'],$client);
+			if ($return) {
 
-                if($password == $userDetails['password']){
+				$userDetails = $this->user->getUserDetail($return['user_id'], $client);
 
-                    $this->user->updatePassword($return['user_id'],$new_password);
-                    return $this->respondWithData(['id'=>$return['id']]);
+				if ($password == $userDetails['password']) {
 
+					$this->user->updatePassword($return['user_id'], $new_password);
+					return $this->respondWithData(['id' => $return['id']]);
 
-                }else{
 
-                    return $this->respondErrorMessage(2114);
-                }
+				} else {
 
+					return $this->respondErrorMessage(2114);
+				}
 
 
-            }else{
+			} else {
 
-                return $this->respondErrorMessage(2001);
+				return $this->respondErrorMessage(2001);
 
-            }
+			}
 
 
-        }
+		}
 
 
+	}
 
 
-   }
+	public function setPassword($id)
+	{
 
+		$input = input::only('password');
+		$client = config('futureed.client');
 
-   public function setPassword($id){
+		$this->addMessageBag($this->validateVarNumber($id));
+		$this->addMessageBag($this->checkPassword($input, 'password'));
 
-        $input = input::only('password');
-        $client = config('futureed.client');
+		$password = sha1($input['password']);
 
-        $this->addMessageBag($this->validateVarNumber($id));
-        $this->addMessageBag($this->checkPassword($input,'password'));
+		$msg_bag = $this->getMessageBag();
 
-        $password = sha1($input['password']);
-        
-        $msg_bag = $this->getMessageBag();
+		if ($msg_bag) {
 
-        if($msg_bag){
+			return $this->respondWithError($msg_bag);
 
-            return $this->respondWithError($msg_bag);
+		} else {
 
-        }else{
+			$return = $this->client->verifyClientId($id);
 
-            $return = $this->client->verifyClientId($id);
+			if ($return) {
 
-            if($return){
+				$userDetails = $this->user->getUserDetail($return['user_id'], $client);
 
-                $userDetails = $this->user->getUserDetail($return['user_id'],$client);
+				$this->user->updatePassword($return['user_id'], $password);
+				return $this->respondWithData(['id' => $return['id']]);
 
-                    $this->user->updatePassword($return['user_id'],$password);
-                    return $this->respondWithData(['id'=>$return['id']]);
 
+			} else {
 
-            }else{
+				return $this->respondErrorMessage(2001);
 
-                return $this->respondErrorMessage(2001);
+			}
 
-            }
 
+		}
 
-        }
 
-
-
-
-   }
-
-
-
-   
-    
-
+	}
 
 
 }
