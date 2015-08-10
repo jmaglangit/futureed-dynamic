@@ -34,15 +34,15 @@ Routes::group(['prefix' => '/client'], function()
         Routes::resource('/teacher','Api\v1\ClientTeacherController',
             ['except' => ['create','edit']]);
 
-//        Routes::post('/change-password/{id}',[
-//            'uses' => 'Api\v1\ClientPasswordController@changePassword',
-//            'as' => 'api.v1.client.change-password'
-//        ]);
-//
-//        Routes::post('/new-password/{id}',[
-//            'uses' => 'Api\v1\ClientPasswordController@setPassword',
-//            'as' => 'api.v1.client.new-password'
-//        ]);
+        Routes::post('/change-password/{id}',[
+            'uses' => 'Api\v1\ClientPasswordController@changePassword',
+            'as' => 'api.v1.client.change-password'
+        ]);
+
+        Routes::post('/new-password/{id}',[
+            'uses' => 'Api\v1\ClientPasswordController@setPassword',
+            'as' => 'api.v1.client.new-password'
+        ]);
 
         Routes::post('/change-email/{id}',[
             'uses' => 'Api\v1\EmailController@updateClientEmail',
@@ -66,8 +66,6 @@ Routes::group(['prefix' => '/client'], function()
     Routes::post('/login','Api\v1\ClientLoginController@login');
     Routes::post('/register','Api\v1\ClientRegisterController@register');
     Routes::post('/reset-password/{id}','Api\v1\ClientPasswordController@resetPassword');
-    Routes::post('/change-password/{id}','Api\v1\ClientPasswordController@changePassword');
-    Routes::post('/new-password/{id}','Api\v1\ClientPasswordController@setPassword');
 
     /**
      * Client login
