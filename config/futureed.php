@@ -79,7 +79,6 @@ return [
 	'existing' => 'Existing',
 
 	#Payment status
-	'pending' => 'Pending',
 	'paid' => 'Paid',
 	'cancelled' => 'Cancelled',
 
@@ -105,9 +104,6 @@ return [
 
 	//for tips take 3
 	'tip_take' => 3,
-
-	//for general tips link_type
-	'link_type_general' => 'General',
 
 	//for accepted tips tip_status
 	'tip_status_accepted' => 'Accepted',
@@ -162,6 +158,7 @@ return [
 	'module_status_available' => 'Available',
 	'module_status_ongoing' => 'On Going',
 	'module_status_completed' => 'Completed',
+	'module_status_failed' => 'Failed',
 	'points_to_finish_module' => 12,
 	'deductions_to_fail_module' => 10,
 
@@ -171,6 +168,16 @@ return [
     'question_type_provide_answer' => 'N',
     'question_type_ordering' => 'O',
 
+	//Correct Answer
+	'yes' => 'Yes',
+	'no' => 'No',
+
     //reset module
     'reset_module' => 'Reset Module',
+
+	//student points description
+	'student_point_description' => 'Completion of Module',
+
+	//student progress
+	'student_progress' => 100,
 ];

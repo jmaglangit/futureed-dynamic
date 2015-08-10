@@ -9,10 +9,10 @@
 			)!!}
 			<div class="form-group">
 				<div class="col-xs-5">
-					{!! Form::text('search_module', ''
+					{!! Form::text('search_name', ''
 						,array(
 							'placeholder' => 'Module'
-							, 'ng-model' => 'class.search.module'
+							, 'ng-model' => 'class.search.name'
 							, 'class' => 'form-control btn-fit'
 							, 'data-clear-btn' => 'true'
 						)
@@ -105,15 +105,44 @@
 			</div>
 
 			<div class="module-list" ng-if="class.records.length">
-				<div class="module-item" ng-repeat="record in class.records">
-					<img class="module-icon" src="/images/class-student/icon-addition.png"
-						ng-click="class.redirect('{!! route('student.class.module.index') !!}', record.id)">
-					
+				<div class="module-item" ng-repeat="record in class.records" tooltip-class="module-tooltip" tooltip-placement="top" tooltip="{! record.name !}">
+					<div class="module-image-holder">
+						<img ng-if="record.student_module[0].module_status != 'Completed'" ng-class="{ 'module-icon' : user.points >= record.points_to_unlock, 'locked-module-icon' : user.points < record.points_to_unlock}" 
+							ng-src="{! user.points >= record.points_to_unlock && '/images/icons/default-module-icon.png' || '/images/icons/icon-lock.png' !}"
+							ng-click="class.redirect('{!! route('student.class.module.index') !!}', record)">
+
+						<img ng-if="record.student_module[0].module_status == 'Completed'" class="locked-module-icon"
+							ng-src="/images/icons/default-module-icon.png">
+					</div>
+
 					<p class="module-name">{! record.name !}</p>
-					<button ng-if="record.student_module.length" ng-click="class.redirect('{!! route('student.class.module.index') !!}', record.id)" 
+
+					<button ng-if="record.student_module.length && record.student_module[0].module_status == 'On Going' && user.points >= record.points_to_unlock"
+						ng-click="class.redirect('{!! route('student.class.module.index') !!}', record)" 
 						type="button" class="btn btn-blue module-btn"><i class="fa fa-play-circle"></i> Resume lesson</button>
-					<button ng-if="!record.student_module.length" ng-click="class.redirect('{!! route('student.class.module.index') !!}', record.id)"
+
+					<button ng-if="!record.student_module.length && user.points >= record.points_to_unlock" ng-click="class.redirect('{!! route('student.class.module.index') !!}', record)"
 						type="button" class="btn btn-blue module-btn"><i class="fa fa-pencil"></i> Begin lesson</button>
+
+					<button ng-if="user.points < record.points_to_unlock"
+						type="button" class="btn btn-blue module-btn" ng-disabled="true"><i class="fa fa-lock"></i> Module Locked</button>
+
+					<button ng-if="record.student_module.length && record.student_module[0].module_status == 'Completed'"
+						type="button" class="btn btn-blue module-btn" ng-disabled="true"><i class="fa fa-lock"></i> Module Completed</button>
+
+					<div class="progress">
+						<div class="progress-bar progress-bar-striped" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+							ng-class="{ 
+								'progress-bar-success' : record.progress > 75,
+								'progress-bar-info' : record.progress > 50 && record.progress <= 75 ,
+								'progress-bar-warning' : record.progress > 25 && record.progress <= 50 ,
+								'progress-bar-danger' : record.progress <= 25,
+
+							}"
+							ng-style="{ 'width' : record.progress+'%' }">
+						</div>
+					</div>
+					<span class="module-progress">{! record.progress !}%</span>
 				</div>
 			</div>
 			

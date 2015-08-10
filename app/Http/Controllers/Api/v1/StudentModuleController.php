@@ -135,7 +135,14 @@ class StudentModuleController extends ApiController {
 	{
 		$data = $request->only('last_viewed_content_id','last_answered_question_id');
 
-		$this->student_module->updateStudentModule($id,$data);
+
+		$return = $this->student_module->updateStudentActivity($id,$data);
+
+		if($return <> true){
+
+			return $this->respondErrorMessage(7000);
+		}
+
 
 		return $this->respondWithData($this->student_module->viewStudentModule($id));
 	}

@@ -53,14 +53,25 @@ interface QuestionRepositoryInterface {
 	public function getQuestionCount($module_id);
 
 
-	public function getQuestionSequenceNos($module_id);
+	public function getQuestionSequenceNos($module_id,$difficulty);
 
 	public function getQuestionSequenceNo($id);
 
-	public function getLastSequence($module_id);
+	public function getLastSequence($module_id,$difficulty);
 
 	public function updateSequence($sequence);
 
+	public function getQuestionType($id);
+
+	public function getQuestionAnswer($id);
+
+	public function getQuestionPointsEarned($id);
+
+	public function getQuestionsByModule($module_id);
+
+	public function getQuestionByPointsToFinish($module_id, $points_to_finish);
+
+	public function getQuestionFirst($module_id);
 
 
 

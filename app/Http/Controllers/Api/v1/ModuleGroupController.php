@@ -13,6 +13,8 @@ class ModuleGroupController extends ApiController{
         $this->module_group = $module_group;
     }
 
+	//TODO: Remove age_group requirement.
+
     /**
      * Display list of Age Group.
      *
@@ -28,6 +30,10 @@ class ModuleGroupController extends ApiController{
 
         if(Input::get('age_group')){
             $criteria['age_group'] = Input::get('age_group');
+        }
+
+        if (Input::get('module_id')) {
+           $criteria['module_id'] = Input::get('module_id');
         }
 
         $limit = (Input::get('limit')) ? Input::get('limit') : 0;

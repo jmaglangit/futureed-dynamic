@@ -116,6 +116,7 @@ function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService,
 
     self.searchFnc = function(event) {
         self.errors = Constants.FALSE;
+        self.tableDefaults();
         self.list();
         
         event = getEvent(event);
@@ -343,11 +344,12 @@ function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService,
 		ManageQuestionAnsService.addAnswer(self.answers).success(function(response){
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
-					self.answers.errors = $scope.errorHandler(response.errors);
+					self.answers.errors = $scope.errorHandler(response.errors, 1);
 
 					angular.forEach(response.errors, function(value, a) {
 						self.fields[value.field + '_ans'] = Constants.TRUE;
 					});
+
 				} else if(response.data) {
 					self.answers = {};
 					self.answers.success = ManageModuleConstants.SUCCESS_ADD_ANSWER;
@@ -448,7 +450,7 @@ function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService,
 		ManageQuestionAnsService.saveAnswer(self.answers).success(function(response){
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
-					self.answrs.errors = $scope.errorHandler(response.errors);
+					self.answers.errors = $scope.errorHandler(response.errors);
 
 					angular.forEach(response.errors, function(value, a) {
 						self.fields[value.field + '_ans'] = Constants.TRUE;

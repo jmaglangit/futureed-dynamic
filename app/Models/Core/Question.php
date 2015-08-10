@@ -13,7 +13,6 @@ class Question extends Model {
 	protected $dates = ['deleted_at'];
 
 	protected $hidden = [
-		'answer',
 		'created_by',
 		'updated_by',
 		'created_at',

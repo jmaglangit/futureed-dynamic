@@ -16,7 +16,14 @@ Routes::group(['prefix' => '/question'], function() {
 		'as' => 'api.v1.admin.answer.image.upload',
 		'uses' => 'Api\v1\QuestionAnswerController@uploadQuestionAnswerImage']);
 
+
 });
 
 Routes::resource('/question', 'Api\v1\QuestionController',
 	['except' => ['create', 'edit']]);
+
+Routes::resource('student/question', 'Api\v1\StudentQuestionController',
+	['except' => ['create', 'edit']]);
+
+
+

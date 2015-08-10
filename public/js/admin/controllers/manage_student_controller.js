@@ -15,7 +15,7 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 	self.delete = {};
 	self.user_type = Constants.STUDENT;
 
-	self.setActive = function(active, id) {
+	self.setActive = function(active, id, flag) {
 		self.errors = Constants.FALSE;
 		self.fields = [];
 
@@ -28,6 +28,16 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 		self.active_add  = Constants.FALSE;
 		self.active_view = Constants.FALSE;
 		self.active_edit = Constants.FALSE;
+		self.active_reward = Constants.FALSE;
+		self.active_edit_reward = Constants.FALSE;
+		self.active_points = Constants.FALSE;
+		self.active_badge = Constants.FALSE;
+
+		if(flag == 'points'){
+			self.active_points = Constants.TRUE;
+		}else{
+			self.active_badge = Constants.TRUE;
+		}
 
 		switch(active) {
 			case Constants.ACTIVE_EDIT 	:
@@ -47,6 +57,22 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 				self.active_add = Constants.TRUE;
 				break;
 
+			case 'reward' :
+				self.active_reward = Constants.TRUE;
+				self.getPoints(id);
+				self.getBadges(id);
+				break;
+
+			case 'edit_reward' :
+				self.success = Constants.FALSE;
+				self.active_edit_reward = Constants.TRUE;
+					if(flag == 'points'){
+						self.getPointDetail(id)
+					}else{
+						self.getBadgeDetail(id);
+					}
+				break;
+
 			case Constants.ACTIVE_LIST 	:
 				self.active_list = Constants.TRUE;
 				self.list();
@@ -62,7 +88,7 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 		$("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 
-	self.searchFnc = function() {
+	self.searchFnc = function(event) {
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
 
@@ -276,6 +302,9 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 					self.record.username = data.user.username;
 					self.record.new_email = data.user.new_email;
 					self.record.birth = data.birth_date;
+					self.record.id = data.id;
+
+					self.moduleList(id);
 
 					if(data.school) {
 						self.record.school_name = data.school.name;
@@ -349,6 +378,287 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 				}else if(response.data){
 					self.success = 'Student ' + Constants.DELETE_SUCCESS;
 					self.setActive(Constants.ACTIVE_LIST);
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.moduleList = function(id) {
+		manageStudentService.moduleList(id).success(function(response){
+			if(angular.equals(response.status,Constants.STATUS_OK)){
+				if(response.errors){
+					self.errors = $scope.errorHandler(response.errors);
+				}else if(response.data){
+					self.modules = response.data.records;
+					angular.forEach(self.modules, function(value,key){
+						value.student_module_id = value.student_module[0].id;
+					});
+
+					self.updatePageCount(response.data);
+				}
+			}
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		})
+	}
+
+	self.resetModule = function(id, student_id) {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		$scope.ui_block();
+
+		manageStudentService.resetModule(id).success(function(response){
+			if(angular.equals(response.status,Constants.STATUS_OK)){
+				if(response.errors){
+					self.errors = $scope.errorHandler(response.errors);
+				}else if(response.data){
+					self.success = Constants.RESET_SUCCESS;
+
+					self.moduleList(student_id);
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		})
+	}
+
+	self.getPoints = function(id) {
+		self.errors = Constants.FALSE;
+
+		$scope.ui_block();
+
+		manageStudentService.getPoints(id).success(function(response){
+			if(angular.equals(response.status,Constants.STATUS_OK)){
+				if(response.errors){
+					self.errors = $scope.errorHandler(response.errors);
+				}else if(response.data){
+					self.points = response.data.records
+					self.updatePageCount(response.data);
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		})
+	}
+
+	self.getBadges = function(id) {
+		self.errors = Constants.FALSE;
+
+		$scope.ui_block();
+
+		manageStudentService.getBadges(id).success(function(response){
+			if(angular.equals(response.status,Constants.STATUS_OK)){
+				if(response.errors){
+					self.errors = $scope.errorHandler(response.errors);
+				}else if(response.data){
+					self.badges = response.data.records
+					self.updatePageCount(response.data);
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		})
+	}
+
+	self.getPointDetail = function(id) {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		$scope.ui_block();
+
+		manageStudentService.getPointDetail(id).success(function(response){
+			if(angular.equals(response.status,Constants.STATUS_OK)){
+				if(response.errors){
+					self.errors = $scope.errorHandler(response.errors);
+				}else if(response.data){
+					self.point_detail = {};
+
+					var point = response.data;
+
+					self.point_detail.points_earned = point.points_earned;
+					self.point_detail.event = point.event.name;
+					self.point_detail.description = point.event.description;
+					self.point_detail.event_id = point.event.id;
+					self.point_detail.date_earned = point.earned_at;
+					self.point_detail.id = point.id;
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		})
+	}
+
+	self.getEvents = function(event) {
+		self.s_error = Constants.FALSE;
+		self.success = Constants.FALSE;
+		self.s_loading = Constants.TRUE;
+
+		manageStudentService.getEvents(event).success(function(response){
+			self.s_loading = Constants.FALSE;
+			if(angular.equals(response.status,Constants.STATUS_OK)){
+				if(response.errors){
+					self.errors = $scope.errorHandler(response.errors);
+				}else if(response.data){
+					self.events = response.data.records;
+
+					if(self.events.length == Constants.FALSE) {
+						self.events = Constants.FALSE;
+						self.s_error = Constants.MSG_NO_RECORD;
+					}
+				}
+			}
+		}).error(function(response){
+			self.errors = $scope.internalError();
+		})
+	}
+
+	self.selectEvent = function(event){
+		self.point_detail.event = event.name;
+		self.point_detail.event_id = event.id;
+
+		self.events = Constants.FALSE;
+	}
+
+	self.savePoint = function() {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		$scope.ui_block();
+
+		manageStudentService.savePoint(self.point_detail).success(function(response){
+			if(angular.equals(response.status,Constants.STATUS_OK)){
+				if(response.errors){
+					self.errors = $scope.errorHandler(response.errors);
+				}else if(response.data){
+					self.success = Constants.POINT_UPDATE;
+					self.setActive('reward', self.record.id);
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		})
+	}
+
+	self.getBadgeDetail = function(id) {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		$scope.ui_block();
+
+		manageStudentService.getBadgeDetail(id).success(function(response){
+			if(angular.equals(response.status,Constants.STATUS_OK)){
+				if(response.errors){
+					self.errors = $scope.errorHandler(response.errors);
+				}else if(response.data){
+					self.badge_detail = {};
+
+					var badge = response.data;
+
+					self.badge_detail.badge_id = badge.badge_id;
+					self.badge_detail.date_earned = badge.created_at;
+					self.badge_detail.name = badge.badges.name;
+					self.badge_detail.id = badge.id;
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		})
+	}
+
+	self.getAllBadges = function(name) {
+		self.s_error = Constants.FALSE;
+		self.success = Constants.FALSE;
+		self.s_loading = Constants.TRUE;
+
+		manageStudentService.getAllBadges(name).success(function(response){
+			self.s_loading = Constants.FALSE;
+			if(angular.equals(response.status,Constants.STATUS_OK)){
+				if(response.errors){
+					self.errors = $scope.errorHandler(response.errors);
+				}else if(response.data){
+					self.list_badges = response.data.records;
+
+					if(self.list_badges.length == Constants.FALSE) {
+						self.list_badges = Constants.FALSE;
+						self.s_error = Constants.MSG_NO_RECORD;
+					}
+				}
+			}
+		}).error(function(response){
+			self.errors = $scope.internalError();
+		})
+	}
+
+	self.selectBadge = function(badge) {
+		self.badge_detail.name = badge.name;
+		self.badge_detail.badge_id = badge.id;
+
+		self.list_badges = Constants.FALSE;
+	}
+
+	self.saveBadge = function() {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		$scope.ui_block();
+
+		manageStudentService.saveBadge(self.badge_detail).success(function(response){
+			if(angular.equals(response.status,Constants.STATUS_OK)){
+				if(response.errors){
+					self.errors = $scope.errorHandler(response.errors);
+				}else if(response.data){
+					self.success = Constants.BADGE_UPDATE;
+					self.setActive('reward', self.record.id);
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		})
+	}
+
+	self.confirmBadgeDelete = function(id){
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		self.delete.id = id;
+		self.delete.confirm_badge = Constants.TRUE;
+
+		$("#delete_badge_modal").modal({
+	        backdrop: 'static',
+	        keyboard: Constants.FALSE,
+	        show    : Constants.TRUE
+	    });
+	}
+
+	self.deleteBadge = function(){
+		$scope.ui_block();
+		manageStudentService.deleteBadge(self.delete.id).success(function(response){
+			if(angular.equals(response.status,Constants.STATUS_OK)){
+				if(response.errors){
+					self.errors = $scope.errorHandler(response.errors);
+				}else if(response.data){
+					self.success = Constants.BADGE_DELETE;
+					self.setActive('reward', self.record.id);
 				}
 			}
 			$scope.ui_unblock();

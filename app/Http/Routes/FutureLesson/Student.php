@@ -103,10 +103,10 @@
 					, 'uses' => 'FutureLesson\Student\ClassModuleController@index'
 				]);
 
-				Routes::get('/{name}', [ 
-						'as' => 'student.class.modulename'
-						, 'uses' => 'FutureLesson\Student\ClassModuleController@module'
-					]);
+				Routes::get('/{id}', [ 
+					'as' => 'student.class.module.view'
+					, 'uses' => 'FutureLesson\Student\ClassModuleController@index'
+				]);
 				
 				Routes::group([
 					  'prefix' => '/partials'
@@ -114,67 +114,42 @@
 				{
 					Routes::get('/add_help', [ 
 							'as' => 'student.class.module.partials.add_help'
-							, 'uses' => 'FutureLesson\Student\ClassModuleController@add_help'
+							, 'uses' => 'FutureLesson\Student\HelpController@add_help'
 						]);
 
 					Routes::get('/list_help', [ 
 							'as' => 'student.class.module.partials.list_help'
-							, 'uses' => 'FutureLesson\Student\ClassModuleController@list_help'
+							, 'uses' => 'FutureLesson\Student\HelpController@list_help'
 						]);
 
-					Routes::get('/current_help', [ 
-							'as' => 'student.class.module.partials.current_help'
-							, 'uses' => 'FutureLesson\Student\ClassModuleController@current_help'
-						]);
-
-					Routes::get('/current_view_help', [ 
-							'as' => 'student.class.module.partials.current_view_help'
-							, 'uses' => 'FutureLesson\Student\ClassModuleController@current_view_help'
-						]);
-
-					Routes::get('/list_your_help', [ 
-							'as' => 'student.class.module.partials.list_your_help'
-							, 'uses' => 'FutureLesson\Student\ClassModuleController@list_your_help'
-						]);
-
-					Routes::get('/view_your_help', [ 
-							'as' => 'student.class.module.partials.view_your_help'
-							, 'uses' => 'FutureLesson\Student\ClassModuleController@view_your_help'
+					Routes::get('/view_help', [ 
+							'as' => 'student.class.module.partials.view_help'
+							, 'uses' => 'FutureLesson\Student\HelpController@view_help'
 						]);
 
 					Routes::get('/add_tip', [ 
 							'as' => 'student.class.module.partials.add_tip'
-							, 'uses' => 'FutureLesson\Student\ClassModuleController@add_tip'
+							, 'uses' => 'FutureLesson\Student\TipsController@add_tip'
 						]);
 
 					Routes::get('/list_tips', [ 
 							'as' => 'student.class.module.partials.list_tips'
-							, 'uses' => 'FutureLesson\Student\ClassModuleController@list_tips'
+							, 'uses' => 'FutureLesson\Student\TipsController@list_tips'
 						]);
 
-					Routes::get('/list_current_tips', [ 
-							'as' => 'student.class.module.partials.list_current_tips'
-							, 'uses' => 'FutureLesson\Student\ClassModuleController@list_current_tips'
+					Routes::get('/view_tip', [ 
+							'as' => 'student.class.module.partials.view_tip'
+							, 'uses' => 'FutureLesson\Student\TipsController@view_tip'
 						]);
 
-					Routes::get('/list_all_tips', [ 
-							'as' => 'student.class.module.partials.list_all_tips'
-							, 'uses' => 'FutureLesson\Student\ClassModuleController@list_all_tips'
-						]);
-
-					Routes::get('/view_current_tips', [ 
-							'as' => 'student.class.module.partials.view_current_tips'
-							, 'uses' => 'FutureLesson\Student\ClassModuleController@view_current_tips'
-						]);
-
-					Routes::get('/view_all_tips', [ 
-							'as' => 'student.class.module.partials.view_all_tips'
-							, 'uses' => 'FutureLesson\Student\ClassModuleController@view_all_tips'
+					Routes::get('/contents', [
+						'as' => 'student.class.module.partials.contents'
+						, 'uses' => 'FutureLesson\Student\ClassModuleController@contents'
 						]);
 
 					Routes::get('/questions', [
-						'as' => 'student.class.module.partials.view_question_list'
-						, 'uses' => 'FutureLesson\Student\ClassModuleController@view_question_list'
+						'as' => 'student.class.module.partials.questions'
+						, 'uses' => 'FutureLesson\Student\ClassModuleController@questions'
 						]);
 
 					Routes::get('/messages', [

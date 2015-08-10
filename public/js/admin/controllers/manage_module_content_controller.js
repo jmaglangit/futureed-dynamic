@@ -91,6 +91,7 @@ function ManageModuleContentController($scope, ManageModuleContentService, Table
 	                }else if(response.data){
                 		object.image = response.data.image_name;
                 		object.uploaded = Constants.TRUE;
+                		self.image = object.image;
 	                }
 	            }
 
@@ -100,6 +101,29 @@ function ManageModuleContentController($scope, ManageModuleContentService, Table
                 $scope.ui_unblock();
             });
         }
+	}
+
+	self.deleteImage = function() {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		self.delete_image = '/uploads/temp/content/' + self.image;
+
+		$scope.ui_block();
+		ManageModuleContentService.deleteImage(self.delete_image).success(function(response){
+			 if(angular.equals(response.status, Constants.STATUS_OK)) {
+	                if(response.errors) {
+	                    self.errors = $scope.errorHandler(response.errors);
+	                }else if(response.data){
+                		self.success = ContentConstants.MSG_DELETE_IMG;
+                		self.record.uploaded = Constants.FALSE;
+	                }
+	            }
+			$scope.ui_unblock();
+		}).error(function(){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		})
 	}
 
 	self.searchFnc = function(event) {

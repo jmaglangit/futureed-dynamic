@@ -27,4 +27,25 @@ class HelpController extends Controller {
 	{	
 		return view('student.help.partials.detail');
 	}
+
+	/**
+	*Display Add Help
+	*/
+	public function add_help() {
+		return view('student.class.module.partials.help_request.add');
+	}
+
+	/**
+	*Display List Help
+	*/
+	public function list_help() {
+		return view('student.class.module.partials.help_request.list');
+	}
+
+	/**
+	*Display Current Help
+	*/
+	public function view_help() {
+		return view('student.class.module.partials.help_request.view');
+	}
 }

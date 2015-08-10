@@ -55,6 +55,14 @@ class QuestionAnswerController extends ApiController {
 
 			}
 
+			$image_type = explode('.',$_FILES['file']['name']);
+
+			if(count($image_type) >= 3){
+
+				return $this->respondErrorMessage(2146);
+
+			}
+
 
 			if($_FILES['file']['size'] > 2 * MB){
 

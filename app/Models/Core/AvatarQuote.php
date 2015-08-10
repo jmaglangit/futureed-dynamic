@@ -13,6 +13,12 @@ class AvatarQuote extends Model {
 
     protected $fillable = ['avatar_pose_id','quote_id','avatar_id'];
 
+
+	//relationships
+	public function avatarPose(){
+        return $this->hasOne('FutureEd\Models\Core\AvatarPose');
+    }
+    
     //scopes
 
     public function scopeQuoteId($query,$quote_id){

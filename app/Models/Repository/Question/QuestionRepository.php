@@ -79,14 +79,25 @@ class QuestionRepository implements QuestionRepositoryInterface{
 
 			$count = $question->count();
 
+			$question = $question->orderBySeqNo();
+
+			//set offset to last_answered_question
+			if(isset($criteria['last_answered_question_id'])){
+
+				//get question_id's sequence number and set as $offset
+				$question_id = $this->getQuestionSequenceNo($criteria['last_answered_question_id']);
+				$offset = $question_id[0]->seq_no - 1;
+			}
+
+
 			if ($limit > 0 && $offset >= 0) {
 				$question = $question->offset($offset)->limit($limit);
 			}
 		}
-		$question = $question->with('questionAnswers');
-		$question = $question->orderBy('seq_no','asc');
 
-		return ['total' => $count, 'records' => $question->orderBySeqNo()->get()->toArray()];
+		$question = $question->with('questionAnswers');
+
+		return ['total' => $count, 'records' => $question->get()->toArray()];
 
 	}
 
@@ -165,10 +176,11 @@ class QuestionRepository implements QuestionRepositoryInterface{
 	 * Get questions id and sequence number order sequence.
 	 * @param $module_id
 	 */
-	public function getQuestionSequenceNos($module_id){
+	public function getQuestionSequenceNos($module_id,$difficulty){
 
 		return Question::select('id','seq_no')
 			->moduleId($module_id)
+			->difficulty($difficulty)
 			->orderBySeqNo()
 			->get();
 	}
@@ -190,9 +202,11 @@ class QuestionRepository implements QuestionRepositoryInterface{
 	 * Get last sequence number.
 	 * @param $module_id
 	 */
-	public function getLastSequence($module_id){
+	public function getLastSequence($module_id,$difficulty){
 
-		return Question::moduleId($module_id)
+		$question = new Question();
+		return $question->moduleId($module_id)
+			->difficulty($difficulty)
 			->orderBySeqNoDesc()
 			->pluck('seq_no');
 	}
@@ -222,6 +236,67 @@ class QuestionRepository implements QuestionRepositoryInterface{
 		}
 
 
+	}
+
+
+	/**
+	 * Get question type.
+	 * @param $id
+	 * @return mixed
+	 */
+	public function getQuestionType($id){
+
+		return Question::whereId($id)->pluck('question_type');
+	}
+
+	/**
+	 * Get question answer.
+	 * @param $id
+	 * @return mixed
+	 */
+	public function getQuestionAnswer($id){
+
+		return Question::whereId($id)->pluck('answer');
+	}
+
+	/**
+	 * Get points earned if correct.
+	 * @param $id
+	 */
+	public function getQuestionPointsEarned($id){
+		return Question::whereId($id)->pluck('points_earned');
+	}
+
+	/**
+	 * Get questions by module.
+	 * @param $module_id
+	 */
+	public function getQuestionsByModule($module_id){
+
+		return Question::whereModuleId($module_id)
+			->orderBySeqNo()->get();
+	}
+
+	/**
+	 * Get questions by points to finish.
+	 * @param $module_id
+	 * @param $points_to_finish
+	 */
+	public function getQuestionByPointsToFinish($module_id, $points_to_finish){
+
+		return Question::whereModuleId($module_id)
+			->orderBySeqNo()->take($points_to_finish)->get();
+	}
+
+	/**
+	 * GEt first question.
+	 * @param $module_id
+	 * @return mixed
+	 */
+	public function getQuestionFirst($module_id){
+
+		return Question::whereModuleId($module_id)
+			->orderBySeqNo()->take(1)->get();
 	}
 
 

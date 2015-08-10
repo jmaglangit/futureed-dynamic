@@ -8,12 +8,13 @@ body {
 	background: url("../images/bg-option-1.jpg") no-repeat scroll right bottom / cover;
 	background-attachment: fixed;
 }
+
 body.client{
 	background: url("../images/client-page-bg.jpg") no-repeat scroll right bottom / cover;
 	background-attachment: fixed;
 }
 body.student{
-	background: url("../images/student_page_bg.jpg") no-repeat scroll right bottom / cover;
+	background: url("/images/student_page_bg.jpg");
 	background-attachment: fixed;
 	font-family: 'Schoolbell', sans-serif;
 	background-size: cover;
@@ -24,6 +25,10 @@ body.student{
 body {/*background: radial-gradient(transparent 50%, rgba(0, 0, 0, 0.3) 100%), linear-gradient(#d77a6b, #d2c09c 60%, #876d54);*/
   /*background: rgba(255,255,255,1); background: -moz-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 49%, rgba(242,242,242,1) 100%); background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(255,255,255,1)), color-stop(49%, rgba(255,255,255,1)), color-stop(100%, rgba(242,242,242,1))); background: -webkit-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 49%, rgba(242,242,242,1) 100%); background: -o-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 49%, rgba(242,242,242,1) 100%);adient(center, ellipse cover, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 49%, rgba(242,242,242,1) 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f2f2f2', GradientType=1 );  */
   font: 16px 'Roboto', sans-serif; color: #8e8171; /*margin-bottom: 30px;*/}
+
+header, body, footer {
+	min-width: 900px;
+}
 
 .container {
 	min-height: 90%;
@@ -1102,4 +1107,8 @@ content {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+}
+
+ul[dnd-list], ul[dnd-list] > li { 
+    position: relative;
 }

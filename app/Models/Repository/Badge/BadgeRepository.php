@@ -48,4 +48,24 @@ class BadgeRepository implements BadgeRepositoryInterface{
 		return ['total' => $count, 'records' => $badge->get()->toArray()];
 
 	}
+
+
+	/**
+	 * Gets  Completed Badge details.
+	 * @param $criteria
+	 * @param $limit
+	 * @param $offset
+	 * @return array
+	 */
+	public function getCompletedBadges($criteria = array()){
+
+		$badge = new Badge();
+
+		$badge = $badge->ageGroupId($criteria['age_group_id']);
+		$badge = $badge->subjectId($criteria['subject_id']);
+		$badge = $badge->gender($criteria['gender']);
+
+		return $badge->first();
+
+	}
 }

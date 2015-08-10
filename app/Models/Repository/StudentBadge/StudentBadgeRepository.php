@@ -86,4 +86,46 @@ class StudentBadgeRepository implements StudentBadgeRepositoryInterface{
 
 	}
 
+	/**
+	 * Delete StudentBadge.
+	 * @param $id
+	 * @return mixed
+	 */
+	public function deleteStudentBadge($id){
+
+		try{
+
+			return StudentBadge::find($id)
+				->delete();
+
+		}catch (Exception $e){
+
+			return $e->getMessage();
+		}
+
+	}
+
+	/**
+	 * Add record in storage
+	 * @param $data
+	 * @return object
+	 */
+	public function addStudentBadge($data){
+
+		try {
+
+			$student_badge = StudentBadge::create($data);
+
+		} catch(Exception $e) {
+
+			return $e->getMessage();
+
+		}
+
+		return $student_badge;
+
+	}
+
+
+
 }

@@ -117,6 +117,7 @@ function ManageModuleController($scope, manageModuleService, ManageQuestionAnsSe
 
 	self.searchFnc = function(event) {
 		self.errors = Constants.FALSE;
+		self.tableDefaults();
 		self.list();
 		
 		event = getEvent(event);
@@ -143,6 +144,7 @@ function ManageModuleController($scope, manageModuleService, ManageQuestionAnsSe
 					self.errors = $scope.errorHandler(response.errors);
 				}else if(response.data){
 					self.records = response.data.records;
+					self.updatePageCount(response.data);
 				}
 			}
 			$scope.ui_unblock();

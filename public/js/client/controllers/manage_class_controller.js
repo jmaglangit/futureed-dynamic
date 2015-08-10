@@ -62,8 +62,8 @@ function ManageClassController($scope, manageClassService, apiService, TableServ
 	}
 
 	self.searchFnc = function(event) {
-		self.list();
 		self.tableDefaults();
+		self.list();
 
 		event = getEvent(event);
 		event.preventDefault();

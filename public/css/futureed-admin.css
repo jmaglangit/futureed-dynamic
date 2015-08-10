@@ -289,3 +289,8 @@ input[type=radio]:checked+.lbl::before{content:"\2022";}
 	position: relative;
 	top: 5px;
 }
+
+.top-40 {
+	position: relative;
+	top: 40px;
+}

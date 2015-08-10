@@ -27,6 +27,8 @@ interface ModuleContentRepositoryInterface {
 
 	public function getModuleContentLists($criteria = [],$limit,$offset);
 
+	public function getModulePointsToFinish($id);
+
 
 
 }

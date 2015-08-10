@@ -45,6 +45,14 @@ class QuestionController extends ApiController {
 			$criteria['questions_text'] = Input::get('questions_text');
 		}
 
+		if(Input::get('questions_id')){
+			$criteria['questions_id'] = Input::get('questions_id');
+		}
+
+		if(Input::get('last_answered_question_id')){
+			$criteria['last_answered_question_id'] = Input::get('last_answered_question_id');
+		}
+
 		if(Input::get('difficulty')){
 			$criteria['difficulty'] = Input::get('difficulty');
 		}
@@ -81,6 +89,14 @@ class QuestionController extends ApiController {
 			if($_FILES['file']['type'] != 'image/jpeg' && $_FILES['file']['type'] != 'image/png'){
 
 				return $this->respondErrorMessage(2142);
+
+			}
+
+			$image_type = explode('.',$_FILES['file']['name']);
+
+			if(count($image_type) >= 3){
+
+				return $this->respondErrorMessage(2146);
 
 			}
 

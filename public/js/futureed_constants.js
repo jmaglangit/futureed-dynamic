@@ -58,6 +58,8 @@ var Constants = {
 	, TEXT			: 2
 	, IMAGE			: 3
 
+	, NONE 			: "None"
+
 	/**
 	* Help Tabs
 	*/
@@ -99,6 +101,11 @@ var Constants = {
 	, YES 			: "Yes"
 	, NO 			: "No"
 
+	, FILLINBLANK 		: "FIB"
+	, MULTIPLECHOICE 	: "MC"
+	, ORDERING 			: "O"
+	, PROVIDE 			: "N"
+
 	, MSG_INTERNAL_ERROR	: "Hmm, something went wrong. Please contact the system administrator."
 	, MSG_PPW_NOT_MATCH 	: "Picture Password does not match."
 	, MSG_PPW_INCORRECT		: "Picture password is incorrect."
@@ -139,6 +146,8 @@ var Constants = {
 	, UPDATE_PAYMENT_STATUS_SUCCESS 	: "You have successfully updated the payment status."
 	, DELETE_INVOICE_SUCCESS : "You have successfully delete the selected invoice."
 
+	, RESET_SUCCESS 		: "Your module was reset successfully."
+
 	, MSG_U_NOTEXIST		: "User does not exist."
 	, MSG_U_EXIST 			: "Username already exists."
 	, MSG_U_AVAILABLE		: "Username is available."
@@ -146,6 +155,10 @@ var Constants = {
 	, MSG_NO_RECORD			: "No record found."
 
 	, MSG_FILL_FIELDS 		: "Please fill the required fields."
+
+	, POINT_UPDATE 			: "successfully updated the point"
+	, BADGE_UPDATE 			: "successfully updated the badge"
+	, BADGE_DELETE 			: "successfully deleted the badge"
 
 	, ATTR_CURRENT_EMAIL 	: "current_email"
 	, ATTR_NEW_EMAIL 		: "new_email"

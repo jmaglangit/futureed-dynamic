@@ -214,4 +214,13 @@ class ModuleContentRepository implements ModuleContentRepositoryInterface{
 
 	}
 
+	/**
+	 * Get Points to finish the module.
+	 * @param $id
+	 */
+	public function getModulePointsToFinish($id){
+
+		return Module::whereId($id)->pluck('points_to_finish');
+	}
+
 }

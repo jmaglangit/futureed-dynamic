@@ -583,7 +583,7 @@ trait ApiValidatorTrait {
 
 
     public function checkContactNumber($input,$field_name){
-        $phone_format = "/^[0-9()]+$/";
+        $phone_format = "/^[0-9()-]+$/";
 
         $validator = Validator::make(
 			[

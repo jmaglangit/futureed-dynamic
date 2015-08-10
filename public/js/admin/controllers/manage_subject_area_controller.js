@@ -95,6 +95,7 @@ function ManageSubjectAreaController($scope, apiService, manageSubjectAreaServic
 		self.errors = Constants.FALSE;
 		self.delete_area = {};
 
+		self.tableDefaults();
 		self.list();
 		event = getEvent(event);
 		event.preventDefault();
@@ -160,6 +161,7 @@ function ManageSubjectAreaController($scope, apiService, manageSubjectAreaServic
 
 	self.add = function() {
 		self.errors = Constants.FALSE;
+		self.record.success = Constants.FALSE;
 
 		$("input").removeClass("required-field");
 		$scope.ui_block();
@@ -221,5 +223,11 @@ function ManageSubjectAreaController($scope, apiService, manageSubjectAreaServic
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
+	}
+
+	self.setSubjectList = function(){
+		$scope.list_subject = Constants.TRUE;
+		$scope.subject_area_list = Constants.FALSE;
+		self.active_list = Constants.NULL;
 	}
 }

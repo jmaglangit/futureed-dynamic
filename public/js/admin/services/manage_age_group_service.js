@@ -47,7 +47,7 @@ function ManageAgeGroupService($http) {
 	ageGroupServiceApi.ageModuleList = function(module, table) {
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url 	: ageGroupServiceUrl + 'module-group?module_name=' + module
+			, url 	: ageGroupServiceUrl + 'module-group?module_id=' + module
 				+ '&limit=' + table.size
 				+ '&offset=' + table.offset
 		});

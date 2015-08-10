@@ -67,6 +67,8 @@ return [
 		2052 => 'No Image',
 		2053 => 'File Location is invalid.',
 		2054 => 'File deleted.',
+		2055 => 'Practice Exercise has already been Completed.',
+		2056 => 'You need to review the teaching content.',
 
 
 		2100 => 'Reset code is invalid.',
@@ -115,6 +117,7 @@ return [
 		2143 => 'The image size had exceeded 2MB.',
 		2144 => 'Module does not exist',
 		2145 => 'Student needs to watch the videos again.',
+		2146 => 'Prevent having dot for an image file name.',
 
 		// Client Error messages
 		2200 => 'Email already exists.',
@@ -140,7 +143,9 @@ return [
 
 		// Custom country messages.
 		2603 => 'The country field is required.',
-		2604 => 'The country is invalid'
+		2604 => 'The country is invalid',
+
+		7000 => 'Oops! Something went wrong.',
 
 	],
 ];

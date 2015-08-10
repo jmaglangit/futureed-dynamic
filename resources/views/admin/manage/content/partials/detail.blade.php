@@ -124,17 +124,20 @@
 					</div>
 				</div>
 				<div class="form-group" ng-if="content.record.media_type_id == futureed.VIDEO">
-					<label class="col-xs-4 control-label">Video <span class="required">*</span></label>
+					<label class="col-xs-4 control-label">Video Url <span class="required">*</span></label>
 					<div class="col-xs-6">
 						{!! Form::text('content_url', ''
 							, array(
-								'placeholder' => 'Content Url'
+								'placeholder' => 'Video Url'
 								, 'ng-model' => 'content.record.content_url'
 								, 'ng-disabled' => 'content.active_view'
 								, 'ng-class' => "{ 'required-field' : content.fields['content_url'] }"
 								, 'class' => 'form-control'
 							)
 						) !!}
+						<p class="help-block">Video url should have this format: 
+							<span class="error-msg-con"> https://player.vimeo.com/video/{video_id}</span>
+						</p>
 					</div>
 				</div>
 				<div class="form-group" ng-if="content.record.media_type_id == futureed.TEXT">
@@ -158,6 +161,7 @@
 	                    <div class="btn btn-blue" ngf-select ngf-change="content.upload($files, content.record)"> Choose Image... </div>
 	                    <span ng-if="content.record.uploaded" class="label label-info margin-top-5 col-xs-12">Image Uploaded...</span>
 					</div>
+					<div class="col-xs-2 top-40" ng-if="content.record.uploaded"><span><a href="javascript:;" ng-click="content.deleteImage()"><i class="fa fa-trash"></i></a></span></div>
 				</div>
 				<div class="form-group" ng-if="content.record.media_type_id == futureed.IMAGE && content.active_view">
 					<label class="col-xs-4 control-label">Image </label>
@@ -285,7 +289,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="modal-image">
-                        <img ng-src="{! content.view_image.image_path !}"/>
+                        <img ng-src="{! content.record.content_url !}"/>
                     </div>
                 </div>
                 <div class="modal-footer">

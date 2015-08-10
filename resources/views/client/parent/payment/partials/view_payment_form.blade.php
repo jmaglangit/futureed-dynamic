@@ -128,7 +128,9 @@
 									ng-change="payment.setDate(1)"
 									ng-model="payment.no_days"
 									id="subscription" 
-									class="form-control">
+									class="form-control"
+									name="subscription_id" 
+									ng-class="{ 'required-field' : payment.fields['subscription_id'] }">
 		                        <option value="">-- Select Subscription --</option>
 		                        <option ng-repeat="subscription in payment.subscriptions" ng-selected="payment.invoice.subscription.name == subscription.name" data-id="{! subscription.id !}" data-price="{! subscription.price !}" data-name="{! subscription.name!}" value="{! subscription.days !}">{! subscription.name!}</option>
 		                    </select>

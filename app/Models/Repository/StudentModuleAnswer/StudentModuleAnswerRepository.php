@@ -12,9 +12,22 @@ class StudentModuleAnswerRepository implements StudentModuleAnswerRepositoryInte
      */
     public function addStudentModuleAnswer($data){
         try{
-            return StudentModuleAnswer::create($data)->toArray();
+            return StudentModuleAnswer::create($data);
         }catch (\Exception $e){
             return $e->getMessage();
         }
     }
+
+	/**
+	 * Get student module answer.
+	 * @param $student_id
+	 * @param $module_id
+	 */
+	public function getStudentModuleAnswer($student_module_id, $module_id){
+
+		return StudentModuleAnswer::with('question')->studentModuleId($student_module_id)
+			->moduleId($module_id)
+			->orderBySeqNo()
+			->get();
+	}
 }
