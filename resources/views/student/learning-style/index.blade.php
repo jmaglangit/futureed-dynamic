@@ -1,4 +1,4 @@
-<div class="container dshbrd-con ng-scope" ng-controller="LearningStyleController as learning_style" ng-cloak>
+<div ng-controller="LearningStyleController as learning_style" ng-cloak>
 	<div class="wrapr"> 
 		<test-directive ng-show="data_loaded">
 			<div class="panel panel-brand panel-test" id="lsp_panel">
