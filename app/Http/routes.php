@@ -26,7 +26,7 @@ Routes::group(['prefix' => 'api/v1'], function () {
 	include('Routes/Api/AvatarWiki.php');
 	include('Routes/Api/Classroom.php');
 	include('Routes/Api/ClassStudent.php');
-	include('Routes/Api/Client.php'); /* TODO: deal with comment routes... has errors with closures.
+	include('Routes/Api/Client.php'); // TODO: deal with comment routes... has errors with closures.
 	include('Routes/Api/ClientDiscount.php');
 	include('Routes/Api/ClientStudent.php');
 	include('Routes/Api/Countries.php');
@@ -60,5 +60,5 @@ Routes::group(['prefix' => 'api/v1'], function () {
 	include('Routes/Api/Tip.php');
 	include('Routes/Api/TipRating.php');
 	include('Routes/Api/User.php');
-	include('Routes/Api/VolumeDiscount.php'); */
+	include('Routes/Api/VolumeDiscount.php');
 });
