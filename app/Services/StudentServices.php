@@ -170,6 +170,9 @@ class StudentServices {
 
 		$avatar_url = '';
 		$avatar_url_background = '';
+		$avatar_thumbnail_url = '';
+
+
 
 		if ($student_reference['avatar_id']) {
 			$avatar = $this->avatar->getAvatar($student_reference['avatar_id'])->toArray();
