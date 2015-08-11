@@ -65,13 +65,22 @@ Routes::group(['prefix' => '/student'], function()
         'as' => 'api.v1.student.password'
     ]);
 
-    /**
-     * Student login
-     */
-    Routes::post('/login/username',[
-        'uses' => 'Api\v1\StudentLoginController@login',
-        'as' => 'api.v1.student.login.username'
-    ]);
+	// NOTE: Token to be inserted on success login.
+	Routes::group([
+		'middleware' => ['api_after_student_login'],
+		'permission' => ['admin','user','student'],
+		'role' => ['principal','teacher','parent','admin','super_admin']
+	],function(){
+
+		/**
+		 * Student login
+		 */
+		Routes::post('/login/username',[
+			'uses' => 'Api\v1\StudentLoginController@login',
+			'as' => 'api.v1.student.login.username'
+		]);
+	});
+
 
     Routes::post('/login/image',[
         'uses' => 'Api\v1\StudentLoginController@imagePassword',
