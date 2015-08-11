@@ -81,9 +81,9 @@ $admin = new Admin();
 
     }
 
-    public function getAdmin($id) {
+    public function getAdmin($id,$role) {
 
-		$admin = Admin::with('user')->find($id);
+		$admin = Admin::with('user')->role($role)->find($id);
 				
 		#$admin = $admin->find($id)->with('user')->get();
 
