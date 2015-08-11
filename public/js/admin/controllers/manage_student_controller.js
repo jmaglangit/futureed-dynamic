@@ -259,7 +259,7 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 		self.fields = [];
 
 		var base_url = $("#base_url_form input[name='base_url']").val();
-		self.record.callback_uri = self.base_url + Constants.URL_REGISTRATION(angular.lowercase(Constants.STUDENT));
+		self.record.callback_uri = base_url + Constants.URL_REGISTRATION(angular.lowercase(Constants.STUDENT));
 		self.record.birth_date = $filter('date')(self.record.birth, 'yyyyMMdd');
 
 		$scope.ui_block();

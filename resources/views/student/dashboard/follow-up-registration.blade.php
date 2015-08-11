@@ -52,15 +52,9 @@
                 </div>
                 <div class="lmtcontain form-group" ng-if="has_avatar">
                     <h3>Learning Style Quiz</h3>
-                    <div class="avatar-selection">
-                        <p>
-                            <strong>This quiz aims to get what is your learning style so that you wll have a better understanding on how you learn.</strong>
-                        </p>
-                        <br /> Are you ready? Click on the next button to start.
-                    </div>
-                    <div class="btmcon">
-                       <a href="{!! route('student.dashboard.index') !!}" type="button" class="btn btn-maroon btn-medium">NEXT</a>
-                    </div>
+
+                    <div template-directive template-url="{!! route('student.learning-style.index') !!}"></div>
+                    
                 </div>
             </div>
         </form>
@@ -69,5 +63,7 @@
 @stop
 
 @section('scripts')
-
+    {!! Html::script('/js/student/helpers/test.js')!!}
+    {!! Html::script('/js/student/controllers/learning_style_controller.js')!!}
+    {!! Html::script('/js/student/services/learning_style_service.js')!!}
 @stop

@@ -105,6 +105,8 @@ function LearningStyleController($rootScope, $scope, $interval, $filter, $sce, $
 	var closeTest = function() {
 		$scope.session.next = 'Closing...';
 		//TODO: put end test logic here.
+		
+		window.location.href= '/student/dashboard';
 	}
 
 	var enablePreviousPageButton = function() {
