@@ -255,8 +255,6 @@ class TokenServices {
 
         $token_decoded = explode(".",$token);
 
-
-
         if($token_decoded[0] && $token_decoded[1] && $token_decoded[2]){
 
             //check details for comparison
@@ -266,7 +264,7 @@ class TokenServices {
             $this->setPayloadData($this->decodePayload($token_decoded[1]));
 
         } else {
-            return false;
+            return 0;
         }
 
 
@@ -278,15 +276,15 @@ class TokenServices {
 
         if(Carbon::now()->timestamp >= $payload['exp']){
 
-            return false;
+            return 0;
         }
 
         if (!$this->validateSignature($token_decoded[2],$this->getSignature())){
 
-            return false;
+            return 0;
         }
 
-        return true;
+        return 1;
 
 
     }
