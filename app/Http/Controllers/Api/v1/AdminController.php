@@ -112,7 +112,13 @@ if(Input::get('limit')){
 	 */
 	public function show($id)
 	{
-        return $this->respondWithData($this->admin->getAdmin($id));
+		if(Input::get('role')){
+			$role = Input::get('role');
+		}else {
+			$role = config('futureed.admin_role_admin');
+		}
+
+        return $this->respondWithData($this->admin->getAdmin($id,$role));
 	}
 
 	/**
