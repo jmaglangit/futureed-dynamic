@@ -2,36 +2,36 @@
 
 Routes::group(['prefix' => '/student'], function()
 {
-    /**
-     * Authenticated student routes
-     */
-    Routes::group([
-        'middleware' => ['api_user','api_after'],
-        'permission' => ['admin','client','student'],
-        'role' => ['principal','teacher','parent','admin','super_admin']
-    ],function(){
+	/**
+	 * Authenticated student routes
+	 */
+	Routes::group([
+		'middleware' => ['api_user', 'api_after'],
+		'permission' => ['admin', 'client', 'student'],
+		'role' => ['principal', 'teacher', 'parent', 'admin', 'super_admin']
+	], function () {
 
-        /**
-         * Student password
-         */
-        Routes::post('/password/confirm/{id}',[
-            'uses' => 'Api\v1\StudentPasswordController@confirmPassword',
-            'as' => 'api.v1.student.password.confirm'
-        ]);
+		/**
+		 * Student password
+		 */
+		Routes::post('/password/confirm/{id}', [
+			'uses' => 'Api\v1\StudentPasswordController@confirmPassword',
+			'as' => 'api.v1.student.password.confirm'
+		]);
 
-        /**
-         * Student email
-         */
-        Routes::put('/email/{id}',[
-            'uses' => 'Api\v1\EmailController@updateStudentEmail',
-            'as' => 'api.v1.student.email'
-        ]);
+		/**
+		 * Student email
+		 */
+		Routes::put('/email/{id}', [
+			'uses' => 'Api\v1\EmailController@updateStudentEmail',
+			'as' => 'api.v1.student.email'
+		]);
 
-			Routes::post('/confirmation/email',[
-            'uses' => 'Api\v1\EmailController@confirmChangeEmail',
-            'as' => 'api.v1.student.confirmation.email'
-        ]);
-    });
+		Routes::post('/confirmation/email', [
+			'uses' => 'Api\v1\EmailController@confirmChangeEmail',
+			'as' => 'api.v1.student.confirmation.email'
+		]);
+	});
 
 	Routes::group([
 		'middleware' => ['api_user', 'api_after'],
@@ -70,7 +70,7 @@ Routes::group(['prefix' => '/student'], function()
 		]);
 	});
 
-	// NOTE: Token to be inserted on success login.
+    // NOTE: Token to be inserted on success login.
 	Routes::group([
 		'middleware' => ['api_after_student_login'],
 	], function () {
@@ -90,35 +90,33 @@ Routes::group(['prefix' => '/student'], function()
 		]);
 	});
 
-    /**
-     * Returns token if login confirm.
-     */
-    Routes::post('/login/password',[
-        'uses' => 'Api\v1\StudentLoginController@loginPassword',
-        'as' => 'api.v1.student.login.password',
-        'middleware' => 'api_after',
-    ]);
-
-
+	/**
+	 * Returns token if login confirm.
+	 */
+	Routes::post('/login/password', [
+		'uses' => 'Api\v1\StudentLoginController@loginPassword',
+		'as' => 'api.v1.student.login.password',
+		'middleware' => 'api_after',
+	]);
 
 
 	Routes::group([
-		'middleware' => ['api_user','api_after'],
+		'middleware' => ['api_user', 'api_after'],
 		'permission' => ['student'],
-		'role' => ['principal','teacher','parent','admin','super_admin']
-	],function(){
+		'role' => ['principal', 'teacher', 'parent', 'admin', 'super_admin']
+	], function () {
 
 
-		Routes::post('/register',[
-        'uses' => 'Api\v1\StudentRegistrationController@register',
-        'as' => 'api.v1.student.register'
-    	]);
+		Routes::post('/register', [
+			'uses' => 'Api\v1\StudentRegistrationController@register',
+			'as' => 'api.v1.student.register'
+		]);
 
 
 		/**
 		 * Student registration by invite
 		 */
-		Routes::post('/invite',[
+		Routes::post('/invite', [
 			'uses' => 'Api\v1\StudentRegistrationController@invite',
 			'as' => 'api.v1.student.invite'
 		]);
@@ -126,7 +124,7 @@ Routes::group(['prefix' => '/student'], function()
 		/**
 		 * Student email resend
 		 */
-		Routes::post('/resend/email/{id}',[
+		Routes::post('/resend/email/{id}', [
 			'uses' => 'Api\v1\EmailController@resendChangeEmail',
 			'as' => 'api.v1.student.resend.email'
 		]);
