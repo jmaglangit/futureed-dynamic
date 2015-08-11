@@ -9,7 +9,7 @@ use Illuminate\Contracts\Routing\Middleware;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Validator;
 
-class JWTMiddleware implements Middleware{
+class JWTMiddleware {
 
     use MessageBagTrait;
     use ErrorMessageTrait;
@@ -25,11 +25,13 @@ class JWTMiddleware implements Middleware{
      * @param TokenServices $tokenServices
      * @param UserRepositoryInterface $userRepositoryInterface
      */
-    public function __construct (TokenServices $tokenServices, UserRepositoryInterface $userRepositoryInterface){
+    public function __construct (
+		TokenServices $tokenServices,
+		UserRepositoryInterface $userRepositoryInterface
+	){
 
         $this->token = $tokenServices;
         $this->user = $userRepositoryInterface;
-
     }
 
 	/**
@@ -52,7 +54,7 @@ class JWTMiddleware implements Middleware{
 
            return $this->respondWithError($this->getMessageBag());
         }
-        dd($this->getPayload());
+
         return $next($request);
 
 	}
@@ -61,9 +63,9 @@ class JWTMiddleware implements Middleware{
      * get token
      * @return mixed
      */
-    public function getToken(){
+    public function getToken($payload){
 
-        return $this->token->getToken();
+        return $this->token->getToken($payload);
     }
 
     public function getPayload(){
@@ -101,7 +103,6 @@ class JWTMiddleware implements Middleware{
             $return = $this->setErrorCode(2030)
                 ->setField('authorization')
                 ->setMessage($validator_msg["authorization"][0])
-//                ->setMessage($error_msg[2030])
                 ->errorMessage();
 
             $this->addMessageBag($return);
@@ -109,6 +110,7 @@ class JWTMiddleware implements Middleware{
             return 0;
         }
 
+		//Validate Token
         $token_result = $this->token->validateToken($token);
 
         if(!$token_result){
