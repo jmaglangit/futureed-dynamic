@@ -26,7 +26,7 @@ class AdminLoginController extends ApiController {
 	public function login(){
 
         $error = config('futureed-error.error_messages');
-        $input = Input::only('username','password');
+        $input = Input::only('username','password','role');
 
 
         if(!$this->email($input,'username')){
@@ -77,7 +77,7 @@ class AdminLoginController extends ApiController {
 
            $this->user->resetLoginAttempt($return['id']);
            $admin_id= $this->admin->getAdminId($return['id']);
-           $admin_detail = $this->admin->getAdmin($admin_id);
+           $admin_detail = $this->admin->getAdmin($admin_id, Input::get('role'));
 
             $token = $this->token->getToken([
                 'id' => $admin_detail['id'],

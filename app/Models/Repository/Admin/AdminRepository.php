@@ -81,7 +81,7 @@ $admin = new Admin();
 
     }
 
-    public function getAdmin($id,$role) {
+    public function getAdmin($id,$role='Admin') {
 
 		$admin = Admin::with('user')->role($role)->find($id);
 				
@@ -156,6 +156,15 @@ $admin = new Admin();
 	    $admins = Admin::all();
 	    
 	    return $admins->count() > config('futureed.admin_delete_threshold');
+	}
+
+	/**
+	 * Get Admin role
+	 * @param $id
+	 */
+	public function getAdminRole($id){
+
+		return Admin::find($id)->pluck('admin_role');
 	}
 
 }

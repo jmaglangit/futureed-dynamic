@@ -6,7 +6,8 @@ Routes::group(['prefix' => '/admin'], function()
 
 	Routes::post('/login',[
         'uses' => 'Api\v1\AdminLoginController@login',
-        'as' => 'api.v1.admin.login'
+        'as' => 'api.v1.admin.login',
+		'middleware' => ['api_after_admin_login']
     ]);
 
     /**

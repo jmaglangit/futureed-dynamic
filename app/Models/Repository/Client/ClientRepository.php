@@ -381,4 +381,13 @@ class ClientRepository implements ClientRepositoryInterface
 
 		return Client::id($id)->pluck('school_code');
 	}
+
+	/**
+	 * Get client role by Id.
+	 * @param $id
+	 */
+	public function getClientRole($id){
+
+		return Client::find($id)->pluck('client_role');
+	}
 }

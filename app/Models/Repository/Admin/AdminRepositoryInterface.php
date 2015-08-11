@@ -11,7 +11,7 @@ interface AdminRepositoryInterface {
 
     public function getAdmins($criteria = array(), $limit = 0, $offset = 0);
 
-    public function getAdmin($id, $role);
+    public function getAdmin($id, $role='Admin');
 
     public function addAdmin($data);
 
@@ -22,5 +22,7 @@ interface AdminRepositoryInterface {
     public function getAdminId($user_id);
 
     public function verifyAdminId($id);
+
+	public function getAdminRole($id);
 
 }

@@ -63,12 +63,14 @@ Routes::group(['prefix' => '/client'], function()
 	]);
 
 
+	//NOTE: Token insert if login success.
     /**
      * Client login
      */
     Routes::post('/login',[
         'uses' => 'Api\v1\ClientLoginController@login',
-        'as' => 'api.v1.client.login'
+        'as' => 'api.v1.client.login',
+		'middleware' => ['api_after_client_login']
     ]);
 
     Routes::post('/register',[
