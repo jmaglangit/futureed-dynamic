@@ -59,7 +59,16 @@ class UserMiddleware extends JWTMiddleware{
 		//if client and admin, check role.
 		$payload_data = $this->token->getPayloadData();
 
-		if($this->checkUser($payload_data['id'],$payload_data['type'],$payload_data['role'])){
+		//get actions
+		$routes_actions = $request->route()->getAction();
+
+		//Validate actions.
+		$user_validate = $this->validateAction($payload_data['type'],$payload_data['role'], $routes_actions);
+
+		//Validate user
+		$user_check = $this->checkUser($payload_data['id'],$payload_data['type'],$payload_data['role']);
+
+		if($user_check && $user_validate){
 
 			//Authorized access.
 			return $next($request);
@@ -111,6 +120,48 @@ class UserMiddleware extends JWTMiddleware{
 		}
 
 		return $return;
+	}
+
+	/**
+	 * Validate user actions.
+	 * @param $user_type
+	 * @param $user_role
+	 * @param $action
+	 * @return bool
+	 */
+	public function validateAction($user_type, $user_role, $action){
+
+
+		$action_type = $action['permission'];
+		$action_role = $action['role'];
+
+		switch($user_type){
+
+			case config('futureed.student'):
+
+				$return = (in_array(strtolower($user_type),$action_type))? true : false;
+				break;
+
+			case config('futureed.client'):
+
+				$return = (in_array(strtolower($user_type),$action_type) && in_array($user_role,$action_role))
+					? true : false ;
+				break;
+
+			case config('futureed.admin'):
+
+				$return = (in_array(strtolower($user_type),$action_type) && in_array($user_role,$action_role))
+					? true : false ;
+				break;
+
+			default:
+
+				$return = false;
+				break;
+		}
+
+		return $return;
+
 	}
 
 
