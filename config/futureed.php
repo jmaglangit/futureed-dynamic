@@ -28,7 +28,7 @@ return [
 
 	//admin types
 	'admin_role_admin' => 'Admin',
-	'admin_role_super_admin' => 'Super_Admin',
+	'admin_role_super_admin' => 'Super Admin',
 
 	//client types Parent, Principal, Teacher
 	'parent' => 'Parent',

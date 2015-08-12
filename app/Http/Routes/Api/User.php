@@ -52,7 +52,7 @@ Routes::group(['prefix' => '/user'], function() {
             'uses' => 'Api\v1\AvatarController@selectAvatars',
             'as' => 'api.v1.user.avatar',
             'permission' => ['admin','client','student'],
-            'role' => ['principal','teacher','parent','admin','super_admin']
+            'role' => ['principal','teacher','parent','admin','super admin']
         ]);
 
 
@@ -60,7 +60,7 @@ Routes::group(['prefix' => '/user'], function() {
             'uses' => 'Api\v1\AvatarController@saveUserAvatar',
             'as' => 'api.v1.user.avatar',
             'permission' => ['admin','client','student'],
-            'role' => ['principal','teacher','parent','admin','super_admin']
+            'role' => ['principal','teacher','parent','admin','super admin']
         ]);
 
     });
@@ -71,7 +71,7 @@ Routes::group(['prefix' => '/user'], function() {
 Routes::group([
     'middleware' => ['api_user','api_after'],
     'permission' => ['admin','client','student'],
-    'role' => ['principal','teacher','parent','admin','super_admin']
+    'role' => ['principal','teacher','parent','admin','super admin']
 ],function(){
 
     Routes::resource('/user','Api\v1\UserController',

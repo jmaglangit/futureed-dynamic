@@ -20,7 +20,7 @@ Routes::group(['prefix' => '/badge'], function() {
 	Routes::group([
 		'middleware' => ['api_user','api_after'],
 		'permission' => ['admin'],
-		'role' => ['admin','super_admin']
+		'role' => ['admin','super admin']
 
 	],function(){
 
