@@ -133,7 +133,7 @@ class UserMiddleware extends JWTMiddleware{
 
 
 		$action_type = $action['permission'];
-		$action_role = $action['role'];
+		$action_role = (isset($action['role']))? $action['role'] : [] ;
 
 		switch($user_type){
 
