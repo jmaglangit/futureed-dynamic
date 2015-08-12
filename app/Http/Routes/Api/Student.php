@@ -76,27 +76,29 @@ Routes::group(['prefix' => '/student'], function()
 	], function () {
 
 		/**
-		 * Student login
+		 * Returns token if login confirm.
 		 */
-		Routes::post('/login/username', [
-			'uses' => 'Api\v1\StudentLoginController@login',
-			'as' => 'api.v1.student.login.username'
+		Routes::post('/login/password', [
+			'uses' => 'Api\v1\StudentLoginController@loginPassword',
+			'as' => 'api.v1.student.login.password',
+			'middleware' => 'api_after',
 		]);
 
 
-		Routes::post('/login/image', [
-			'uses' => 'Api\v1\StudentLoginController@imagePassword',
-			'as' => 'api.v1.student.login.image'
-		]);
 	});
 
 	/**
-	 * Returns token if login confirm.
+	 * Student login
 	 */
-	Routes::post('/login/password', [
-		'uses' => 'Api\v1\StudentLoginController@loginPassword',
-		'as' => 'api.v1.student.login.password',
-		'middleware' => 'api_after',
+	Routes::post('/login/username', [
+		'uses' => 'Api\v1\StudentLoginController@login',
+		'as' => 'api.v1.student.login.username'
+	]);
+
+
+	Routes::post('/login/image', [
+		'uses' => 'Api\v1\StudentLoginController@imagePassword',
+		'as' => 'api.v1.student.login.image'
 	]);
 
 
