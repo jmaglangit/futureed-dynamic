@@ -23,18 +23,20 @@ Routes::group(['prefix' => '/admin'], function()
             'uses' => 'Api\v1\AdminPasswordController@changePassword',
             'as' => 'api.v1.admin.password'
         ]);
-    });
 
+		Routes::post('/change-email/{id}',[
+			'uses' => 'Api\v1\EmailController@adminChangeEmail',
+			'as' => 'api.v1.admin.change-email'
+		]);
 
+		Routes::post('/check-email/{id}',[
+			'uses' => 'Api\v1\AdminEmailController@checkEmail',
+			'as' => 'api.v1.admin.check-email'
+		]);
 
-    
-    Routes::post('/change-email/{id}','Api\v1\EmailController@adminChangeEmail');
+	});
 
 	Routes::post('/forgot-password/{id}','Api\v1\AdminPasswordController@forgotPassword');
-
-
-	Routes::post('/check-email/{id}','Api\v1\AdminEmailController@checkEmail');
-
 });
 
 
