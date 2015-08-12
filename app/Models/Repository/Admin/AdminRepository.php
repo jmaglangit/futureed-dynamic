@@ -164,7 +164,7 @@ $admin = new Admin();
 	 */
 	public function getAdminRole($id){
 
-		return Admin::find($id)->pluck('admin_role');
+		return Admin::where('id','=',$id)->pluck('admin_role');
 	}
 
 }
