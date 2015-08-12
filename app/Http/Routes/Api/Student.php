@@ -8,7 +8,7 @@ Routes::group(['prefix' => '/student'], function()
 	Routes::group([
 		'middleware' => ['api_user', 'api_after'],
 		'permission' => ['admin', 'client', 'student'],
-		'role' => ['principal', 'teacher', 'parent', 'admin', 'super_admin']
+		'role' => ['principal', 'teacher', 'parent', 'admin', 'super admin']
 	], function () {
 
 		/**
@@ -105,7 +105,7 @@ Routes::group(['prefix' => '/student'], function()
 	Routes::group([
 		'middleware' => ['api_user', 'api_after'],
 		'permission' => ['student'],
-		'role' => ['principal', 'teacher', 'parent', 'admin', 'super_admin']
+		'role' => ['principal', 'teacher', 'parent', 'admin', 'super admin']
 	], function () {
 
 
@@ -141,7 +141,7 @@ Routes::group(['prefix' => '/student'], function()
 Routes::group([
     'middleware' => ['api_user','api_after'],
     'permission' => ['admin','user','student'],
-    'role' => ['principal','teacher','parent','admin','super_admin']
+    'role' => ['principal','teacher','parent','admin','super admin']
 ],function(){
 
     Routes::resource('/student', 'Api\v1\StudentController',
