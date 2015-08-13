@@ -1,5 +1,5 @@
 <?php 
-Routes::resource('/announcement','Api\v1\AnnouncementController', ['only' => ['index','store']]);
+Routes::resource('/announcement','Api\v1\AnnouncementController', ['only' => ['index']]);
 
 Routes::post('/announcement',[
 	'uses' => 'Api\v1\AnnouncementController@store',
