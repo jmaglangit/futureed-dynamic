@@ -144,13 +144,13 @@ class UserMiddleware extends JWTMiddleware{
 
 			case config('futureed.client'):
 
-				$return = (in_array(strtolower($user_type),$action_type) && in_array($user_role,$action_role))
+				$return = (in_array(strtolower($user_type),$action_type) && in_array(strtolower($user_role),$action_role))
 					? true : false ;
 				break;
 
 			case config('futureed.admin'):
 
-				$return = (in_array(strtolower($user_type),$action_type) && in_array($user_role,$action_role))
+				$return = (in_array(strtolower($user_type),$action_type) && in_array(strtolower($user_role),$action_role))
 					? true : false ;
 				break;
 
