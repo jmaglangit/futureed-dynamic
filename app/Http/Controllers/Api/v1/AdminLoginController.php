@@ -4,6 +4,7 @@ use FutureEd\Http\Controllers\Api\Traits\ClientValidatorTrait;
 use FutureEd\Http\Controllers\Api\v1\ClientController;
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
+use FutureEd\Models\Repository\Admin\AdminRepositoryInterface;
 use FutureEd\Services\TokenServices;
 use FutureEd\Services\UserServices;
 use FutureEd\Services\AdminServices;
@@ -15,12 +16,19 @@ use Illuminate\Support\Facades\Input;
 
 class AdminLoginController extends ApiController {
 
-    public function __construct(UserServices $user,AdminServices $admin, PasswordServices $password, TokenServices $tokenServices){
+    public function __construct(
+		UserServices $user,
+		AdminServices $admin,
+		AdminRepositoryInterface $adminRepositoryInterface,
+		PasswordServices $password,
+		TokenServices $tokenServices
+	){
 
         $this->admin = $admin;
         $this->user  = $user; 
         $this->password = $password;
         $this->token = $tokenServices;
+		$this->admin_repo = $adminRepositoryInterface;
     }
 
 	public function login(){
@@ -75,9 +83,17 @@ class AdminLoginController extends ApiController {
                 return $this->respondErrorMessage(2233);
             }
 
+
            $this->user->resetLoginAttempt($return['id']);
            $admin_id= $this->admin->getAdminId($return['id']);
-           $admin_detail = $this->admin->getAdmin($admin_id, Input::get('role'));
+
+			$admin_role = $this->admin_repo->getAdminRole($admin_id);
+
+			if(Input::get('role')){
+
+				$admin_role = Input::get('role');
+			}
+           $admin_detail = $this->admin->getAdmin($admin_id, $admin_role);
 
             $token = $this->token->getToken([
                 'id' => $admin_detail['id'],
