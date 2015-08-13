@@ -24,8 +24,13 @@ angular.module('futureed', [
 			} 
 
 			, 'response': function (response) {
+				localStorage.token_expire = Constants.FALSE;
 				if(response && response.headers("authorization")) {
 					localStorage.authorization = response.headers("authorization");
+				}
+
+				if(response.data.status == 401) {
+					localStorage.token_expire = Constants.TRUE;
 				}
 
 				return response;

@@ -96,6 +96,21 @@ function FutureedController($scope, $window, apiService, futureed) {
 	}
 
 	$scope.ui_unblock = function() {
+		if(localStorage.token_expire == Constants.TRUE) {
+
+			$scope.user = null;
+
+				apiService.updateUserSession($scope.user).success(function(response) {
+					$scope.session_expire = Constants.TRUE;
+					$("#session_expire").modal({
+						backdrop: 'static',
+						keyboard: Constants.FALSE,
+						show    : Constants.TRUE
+					});
+				}).error(function() {
+					$scope.internalError();
+				});
+		}
 		$.unblockUI();
 	}
 
