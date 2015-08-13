@@ -12,6 +12,6 @@ Routes::group([
 	Routes::group(['prefix' => '/volume-discount'], function () {
 		Routes::get('/rounded-off-discount/{min_seats}', [
 			'uses' => 'Api\v1\VolumeDiscountController@getRoundedOffDiscount',
-			'as' => 'volume-discount.get.rounded-off-discount']);
+			'as' => 'api.v1.volume-discount.get.rounded-off-disccount']);
 	});
 });

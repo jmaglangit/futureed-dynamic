@@ -80,14 +80,13 @@ Routes::group(['prefix' => '/client'], function()
 
 	Routes::post('/register', [
 		'uses' => 'Api\v1\ClientRegisterController@register',
-		'as' => 'api.v1.client.register',
-		'middleware' => ['api_after_client_login']
+		'as' => 'api.v1.client.register'
+
 	]);
 
 	Routes::post('/reset-password/{id}', [
 		'uses' => 'Api\v1\ClientPasswordController@resetPassword',
-		'as' => 'api.v1.client.reset-password',
-		'middleware' => ['api_after_client_login']
+		'as' => 'api.v1.client.reset-password'
 	]);
 
 	/**
