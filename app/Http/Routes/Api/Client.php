@@ -50,18 +50,23 @@ Routes::group(['prefix' => '/client'], function()
         ]);
     });
 
+	Routes::group([
+		'middleware' => ['api_after_client_login'],
+		'permission' => ['client'],
+		'role' => ['principal','teacher','parent'],
+	], function() {
 
-	//teacher-information is for registration purposes, no auth token needed.
-	Routes::get('/teacher-information/{id}',[
-		'as' => 'api.v1.client.teacher.information',
-		'uses' => 'Api\v1\ClientTeacherRegistrationController@getTeacherInformation'
-	]);
+		//teacher-information is for registration purposes, no auth token needed.
+		Routes::get('/teacher-information/{id}', [
+			'as' => 'api.v1.client.teacher.information',
+			'uses' => 'Api\v1\ClientTeacherRegistrationController@getTeacherInformation'
+		]);
 
-	Routes::put('/teacher-information/{id}',[
-		'as' => 'api.v1.client.teacher.information.update',
-		'uses' => 'Api\v1\ClientTeacherRegistrationController@updateTeacherInformation'
-	]);
-
+		Routes::put('/teacher-information/{id}', [
+			'as' => 'api.v1.client.teacher.information.update',
+			'uses' => 'Api\v1\ClientTeacherRegistrationController@updateTeacherInformation'
+		]);
+	});
 
 	//NOTE: Token insert if login success.
     /**
@@ -75,26 +80,36 @@ Routes::group(['prefix' => '/client'], function()
 
     Routes::post('/register',[
         'uses' => 'Api\v1\ClientRegisterController@register',
-        'as' => 'api.v1.client.register'
+        'as' => 'api.v1.client.register',
+        'middleware' => ['api_after_client_login']
     ]);
 
     Routes::post('/reset-password/{id}',[
         'uses' => 'Api\v1\ClientPasswordController@resetPassword',
-        'as' => 'api.v1.client.reset-password'
+        'as' => 'api.v1.client.reset-password',
+        'middleware' => ['api_after_client_login']
     ]);
 
     /**
      * Change client email
      */
-    Routes::post('/resend-email/{id}',[
-        'uses' => 'Api\v1\EmailController@resendChangeEmail',
-        'as' => 'api.v1.client.resend-email'
-    ]);
+	Routes::group([
+		'middleware' => ['api_user','api_after'],
+		'permission' => ['admin','client','student'],
+		'role' => ['principal','teacher','parent','admin','super admin'],
+	], function() {
 
-    Routes::post('/update-email/{id}',[
-        'uses' => 'Api\v1\EmailController@confirmChangeEmail',
-        'as' => 'api.v1.client.update-email'
-    ]);
+
+		Routes::post('/resend-email/{id}', [
+			'uses' => 'Api\v1\EmailController@resendChangeEmail',
+			'as' => 'api.v1.client.resend-email'
+		]);
+
+		Routes::post('/update-email/{id}', [
+			'uses' => 'Api\v1\EmailController@confirmChangeEmail',
+			'as' => 'api.v1.client.update-email'
+		]);
+	});
 
     /**
      * Authenticated routes of the client for admin access only.
