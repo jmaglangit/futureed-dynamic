@@ -53,10 +53,10 @@ Routes::group(['prefix' => '/client'], function()
 	Routes::group([
 		'middleware' => ['api_after_client_login'],
 		'permission' => ['client'],
-		'role' => ['principal','teacher','parent'],
-	], function() {
+		'role' => ['principal', 'teacher', 'parent'],
+	], function () {
 
-		//teacher-information is for registration purposes, no auth token needed.
+        //teacher-information is for registration purposes, no auth token needed.
 		Routes::get('/teacher-information/{id}', [
 			'as' => 'api.v1.client.teacher.information',
 			'uses' => 'Api\v1\ClientTeacherRegistrationController@getTeacherInformation'
@@ -94,10 +94,10 @@ Routes::group(['prefix' => '/client'], function()
      * Change client email
      */
 	Routes::group([
-		'middleware' => ['api_user','api_after'],
-		'permission' => ['admin','client','student'],
-		'role' => ['principal','teacher','parent','admin','super admin'],
-	], function() {
+		'middleware' => ['api_user', 'api_after'],
+		'permission' => ['admin', 'client', 'student'],
+		'role' => ['principal', 'teacher', 'parent', 'admin', 'super admin'],
+	], function () {
 
 
 		Routes::post('/resend-email/{id}', [
