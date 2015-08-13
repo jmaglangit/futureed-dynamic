@@ -148,7 +148,7 @@ class JWTMiddleware {
 
         return $this->respond(
             [
-                'status' => Response::HTTP_OK,
+                'status' => Response::HTTP_UNAUTHORIZED,
                 'errors' => $message
             ]
         );
