@@ -6,7 +6,7 @@
 Routes::group([
 	'prefix' => '/classroom/{id}',
 	'middleware' => ['api_user','api_after'],
-	'permission' => ['admin','user','student'],
+	'permission' => ['admin','client','student'],
 	'role' => ['principal','teacher','parent','admin','super admin']
 ], function(){
 
@@ -21,7 +21,7 @@ Routes::group([
  */
 Routes::group([
 	'middleware' => ['api_user','api_after'],
-	'permission' => ['admin','user','student'],
+	'permission' => ['admin','client','student'],
 	'role' => ['principal','teacher','parent','admin','super admin']
 ],function(){
 
@@ -34,7 +34,7 @@ Routes::group([
 Routes::group([
 	'prefix' => '/classroom',
 	'middleware' => ['api_user','api_after'],
-	'permission' => ['admin','user','student'],
+	'permission' => ['admin','client','student'],
 	'role' => ['principal','teacher','parent','admin','super admin']
 ], function()
 {

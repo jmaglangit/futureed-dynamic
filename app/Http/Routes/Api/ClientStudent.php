@@ -1,5 +1,10 @@
 <?php
-Routes::group(['prefix' => '/parent-student'], function()
+Routes::group([
+	'prefix' => '/parent-student',
+	'middleware' => ['api_user','api_after'],
+	'permission' => ['admin','client'],
+	'role' => ['principal','teacher','parent','admin','super admin']
+], function()
 {
     Routes::post('/add-existing-student', [
         'uses' => 'Api\v1\ParentStudentController@addExistingStudent',

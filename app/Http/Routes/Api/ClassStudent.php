@@ -2,7 +2,7 @@
 Routes::group([
 	'prefix' => '/class-student',
 	'middleware' => ['api_user','api_after'],
-	'permission' => ['admin','user','student'],
+	'permission' => ['admin','client','student'],
 	'role' => ['principal','teacher','parent','admin','super admin']
 ], function()
 {
