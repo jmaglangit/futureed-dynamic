@@ -61,7 +61,7 @@ class HelpRequestRepository implements HelpRequestRepositoryInterface{
                     $query = $query->subjectAreaName($criteria['subject_area']);
                 }
                 if(isset($criteria['status'])) {
-                    $query = $query->status($criteria['status']);
+                    $query = $query->requestStatus($criteria['status']);
                 }
                 if(isset($criteria['student'])) {
                     $query = $query->studentName($criteria['student']);
