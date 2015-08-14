@@ -1,5 +1,8 @@
 <?php
 
+/**
+ * Get list of events.
+ */
 Routes::get('/event',[
 	'uses' => 'Api\v1\EventController@index',
 	'as' => 'api.v1.event.index',
