@@ -45,6 +45,11 @@ class Classroom extends Model {
 
 	}
 
+	public function subject(){
+
+		return $this->hasOne('FutureEd\Models\Core\Subject','id','subject_id');
+	}
+
 
     //Scopes
 

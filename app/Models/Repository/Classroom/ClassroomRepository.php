@@ -47,7 +47,7 @@ class ClassroomRepository implements ClassroomRepositoryInterface{
             $classroom = $classroom->order_no($criteria['order_no']);
         }
 
-        $classroom = $classroom->with('order', 'grade', 'client');
+        $classroom = $classroom->with('order', 'grade', 'client','subject');
 
         $count = $classroom->get()->count();
 
