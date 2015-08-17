@@ -72,11 +72,11 @@ class ClassroomController extends ApiController {
             'name',
             'grade_id',
             'client_id',
+			'subject_id',
             'seats_taken',
             'seats_total',
             'status'
         ]);
-
         $classroom = $this->classroom->addClassroom($classroom);
 
         return $this->respondWithData($classroom);

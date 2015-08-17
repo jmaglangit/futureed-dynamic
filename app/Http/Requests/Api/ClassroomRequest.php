@@ -49,7 +49,8 @@ class ClassroomRequest extends ApiRequest {
                     'client_id' => 'required|integer',
                     'seats_taken' => 'required|integer|max:999999',
                     'seats_total' => 'required|integer|min:1|max:999999',
-                    'status' => 'required|in:Enabled,Disabled'
+                    'status' => 'required|in:Enabled,Disabled',
+					'subject_id' => 'required|integer',
                 ];
                 break;
         }
@@ -74,6 +75,8 @@ class ClassroomRequest extends ApiRequest {
 			'name.regex' => 'Class name format is invalid.',
 			'name.min' => 'Class name should be a minimum of 2 characters.',
 			'name.max' => 'Class name may not be greater than 128 characters.',
+			'subject_id.required' => 'Subject is required.',
+			'subject_id.integer' => 'Subject must be a number.',
         ];
     }
 
