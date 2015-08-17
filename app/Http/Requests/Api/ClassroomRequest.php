@@ -50,7 +50,7 @@ class ClassroomRequest extends ApiRequest {
                     'seats_taken' => 'required|integer|max:999999',
                     'seats_total' => 'required|integer|min:1|max:999999',
                     'status' => 'required|in:Enabled,Disabled',
-					'subject_id' => 'required|integer',
+                    'subject_id' => 'required|integer',
                 ];
                 break;
         }
