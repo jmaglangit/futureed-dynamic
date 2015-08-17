@@ -31,6 +31,7 @@ class ClassroomRequest extends ApiRequest {
                             'grade_id' => 'required|integer',
                             'seats_total' => 'required|integer|min:1|max:999999',
                             'client_id' => 'required|integer',
+                            'subject_id' => 'required|integer'
                         ];
                         break;
                     default:
