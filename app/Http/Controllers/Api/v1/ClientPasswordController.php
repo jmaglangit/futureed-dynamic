@@ -14,7 +14,7 @@ class ClientPasswordController extends ApiController{
 
    public function resetPassword($id){
 
-        $input = input::only('reset_code','password');
+        $input = Input::only('reset_code','password');
         $client = config('futureed.client');
 
         $this->addMessageBag($this->validateVarNumber($id));
@@ -73,7 +73,7 @@ class ClientPasswordController extends ApiController{
 
      public function changePassword($id){
 
-        $input = input::only('password','new_password');
+        $input = Input::only('password','new_password');
         $client = config('futureed.client');
 
         $this->addMessageBag($this->validateVarNumber($id));
@@ -127,7 +127,7 @@ class ClientPasswordController extends ApiController{
 
    public function setPassword($id){
 
-        $input = input::only('password');
+        $input = Input::only('password');
         $client = config('futureed.client');
 
         $this->addMessageBag($this->validateVarNumber($id));
