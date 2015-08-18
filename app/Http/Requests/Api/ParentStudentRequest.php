@@ -42,14 +42,17 @@ class ParentStudentRequest extends ApiRequest {
 							'email' => 'required|email',
 							'parent_id' => 'required|integer',
 							'order_id' => 'required',
-							'price' => 'required|numeric'];
+							'price' => 'required|numeric',
+							'subject_id' => 'required|integer'];
 						break;
 					case 'parent-student.add.student.by.username':
 						return [
 							'username' => 'required',
 							'parent_id' => 'required|integer',
 							'order_id' => 'required',
-							'price' => 'required|numeric'];
+							'price' => 'required|numeric',
+							'subject_id' => 'required|integer'
+							];
 						break;
 				}
 

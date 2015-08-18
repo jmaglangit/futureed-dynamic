@@ -156,5 +156,25 @@ class ClassroomRepository implements ClassroomRepositoryInterface{
         }
     }
 
+	public function getClassroomBySubjectId($subject_id,$student_id){
+
+		$classroom = new Classroom();
+
+		try{
+
+			$classroom = $classroom->subject_Id($subject_id);
+			$classroom = $classroom->active();
+			$classroom = $classroom->student_id($student_id);
+			$classroom = $classroom->with('classStudent')->get();
+
+			return !is_null($classroom) ? $classroom->toArray():null;
+
+		} catch( Exception $e ){
+
+			return $e->getMessage();
+		}
+
+	}
+
 
 }
