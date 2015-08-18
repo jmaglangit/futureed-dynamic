@@ -382,7 +382,7 @@ class StudentServices {
 
 		$class_student = $this->class_student->getStudentCurrentClassroom($student_id);
 
-		return ($class_student) ? $class_student : 0;
+		return ($class_student) ? $class_student : null;
 	}
 
 
