@@ -14,7 +14,7 @@ class Classroom extends Model {
 
     protected $hidden = ['created_by','updated_by','created_at','updated_at','deleted_at'];
 
-    protected $fillable = ['order_no','name','grade_id','client_id','seats_taken','seats_total','status'];
+    protected $fillable = ['order_no','name','grade_id','client_id','seats_taken','seats_total','status','subject_id'];
 
 
     //Relationships
@@ -43,6 +43,11 @@ class Classroom extends Model {
 
 		return $this->belongsTo('FutureEd\Models\Core\InvoiceDetail', 'id','class_id');
 
+	}
+
+	public function subject(){
+
+		return $this->hasOne('FutureEd\Models\Core\Subject','id','subject_id');
 	}
 
 
