@@ -425,8 +425,6 @@ class ParentStudentController extends ApiController {
 
         // Add order details
         $order_details = $request->all();
-
-
         $order_details['student_id'] = $student_id;
         $this->order_details->addOrderDetail($order_details);
 
