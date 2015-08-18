@@ -18,6 +18,7 @@ use FutureEd\Services\AvatarServices;
 use FutureEd\Services\CodeGeneratorServices;
 use FutureEd\Services\MailServices;
 use FutureEd\Services\InvoiceServices;
+use Carbon\Carbon;
 
 class ParentStudentController extends ApiController {
 
@@ -221,11 +222,12 @@ class ParentStudentController extends ApiController {
         $check_classroom = $this->classroom->getClassroomByOrderNo($order_no);
 
         $classroom['order_no'] = $order_no;
-        $classroom['name'] = 'NONE';
+        $classroom['name'] = 'PAR'.Carbon::now()->timestamp;
         $classroom['grade_id'] = 1;
         $classroom['client_id'] = $client_id;
         $classroom['seats_taken'] = $order_details_ctr;
         $classroom['seats_total'] = $order_details_ctr;
+        $classroom['subject_id'] = $parent_student_data['subject_id'];
         $classroom['status'] = 'Enabled';
 
         if(empty($check_classroom)){
@@ -423,6 +425,8 @@ class ParentStudentController extends ApiController {
 
         // Add order details
         $order_details = $request->all();
+
+
         $order_details['student_id'] = $student_id;
         $this->order_details->addOrderDetail($order_details);
 

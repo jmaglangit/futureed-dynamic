@@ -66,7 +66,9 @@ class ParentStudentRequest extends ApiRequest {
 							'discount_type' => 'in:Client,Volume,',
 							'discount_id' => 'integer',
 							'discount' => 'numeric',
-							'order_no' => 'required'];
+							'order_no' => 'required',
+							'subject_id' => 'required|integer'
+							];
 						break;
 					default:
 						$student_id = $this->__get('id');
@@ -108,7 +110,9 @@ class ParentStudentRequest extends ApiRequest {
             'parent_id.required' => 'Parent is required.',
             'parent_id.integer' => 'Parent must be a number.',
             'order_id.required' => 'Order is required.',
-            'order_id.integer' => 'Order must be a number.'
+            'order_id.integer' => 'Order must be a number.',
+            'subject_id.required' => 'Subject is required.',
+            'subject_id.integer' => 'Subject must be a number',
         ];
     }
 }
