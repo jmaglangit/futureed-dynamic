@@ -475,7 +475,7 @@ function HelpController($scope, apiService, StudentHelpService, TableService, Se
 		self.record.module_id = self.module.id;
 		self.record.subject_id = self.module.subject_id;
 		self.record.subject_area_id = self.module.subject_area_id;
-		self.record.link_type = (self.module.student_module[0].last_answered_question_id) ? Constants.QUESTION : Constants.CONTENT;
+		self.record.link_type = (self.active_questions) ? Constants.QUESTION : Constants.CONTENT;
 		self.record.link_id = (angular.equals(self.record.link_type, Constants.QUESTION)) ? self.question.id : self.content.id;
 		self.record.class_id = $scope.user.class.id;
 		self.record.student_id = $scope.user.id;
