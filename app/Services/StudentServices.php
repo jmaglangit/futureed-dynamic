@@ -10,10 +10,12 @@ namespace FutureEd\Services;
 
 
 use Carbon\Carbon;
+use FutureEd\Models\Core\StudentModule;
 use FutureEd\Models\Repository\ClassStudent\ClassStudentRepositoryInterface;
 use FutureEd\Models\Repository\Grade\GradeRepositoryInterface;
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use FutureEd\Models\Repository\PasswordImage\PasswordImageRepositoryInterface;
+use FutureEd\Models\Repository\StudentModule\StudentModuleRepositoryInterface;
 use FutureEd\Models\Repository\User\UserRepositoryInterface;
 use FutureEd\Models\Repository\Validator\ValidatorRepository;
 use FutureEd\Services\SchoolServices;
@@ -29,7 +31,8 @@ class StudentServices {
             SchoolServices $school,
             AvatarServices $avatar,
             GradeRepositoryInterface $gradeRepositoryInterface,
-			ClassStudentRepositoryInterface $classStudentRepositoryInterface
+			ClassStudentRepositoryInterface $classStudentRepositoryInterface,
+			StudentModuleRepositoryInterface $studentModuleRepositoryInterface
             ){
         $this->student = $student;
         $this->password = $password;
@@ -39,6 +42,7 @@ class StudentServices {
         $this->avatar = $avatar;
         $this->grade = $gradeRepositoryInterface;
 		$this->class_student = $classStudentRepositoryInterface;
+		$this->student_module = $studentModuleRepositoryInterface;
         }
 
     public function getStudents($criteria , $limit , $offset ){
@@ -380,7 +384,17 @@ class StudentServices {
 			}
 		}
 
-		$class_student = $this->class_student->getStudentCurrentClassroom($student_id);
+		$current_class = $this->class_student->getStudentCurrentClassroom($student_id);
+
+		$class_id = [];
+		foreach($current_class as $class){
+
+			array_push($class_id,$class->class_id);
+		}
+
+		$class_student = $this->student_module->getStudentModuleByClass($student_id, $class_id);
+
+
 
 		return ($class_student) ? $class_student : null;
 	}
