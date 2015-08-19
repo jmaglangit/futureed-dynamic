@@ -26,14 +26,14 @@ class TeacherStudentController extends ApiController {
 		UserRepositoryInterface $user,
 		CodeGeneratorServices $code,
 		MailServices $mail,
-        ClassStudentRepositoryInterface $class_student
+        	ClassStudentRepositoryInterface $class_student
 	)
 	{
 		$this->student = $student;
 		$this->user = $user;
 		$this->code = $code;
 		$this->mail = $mail;
-        $this->class_student = $class_student;
+        	$this->class_student = $class_student;
 
 	}
 
