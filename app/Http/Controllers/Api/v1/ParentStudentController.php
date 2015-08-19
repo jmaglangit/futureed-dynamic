@@ -222,7 +222,7 @@ class ParentStudentController extends ApiController {
         $check_classroom = $this->classroom->getClassroomByOrderNo($order_no);
 
         $classroom['order_no'] = $order_no;
-        $classroom['name'] = 'PAR'.Carbon::now()->timestamp;
+        $classroom['name'] = config('futureed.PAR').Carbon::now()->timestamp;
         $classroom['grade_id'] = 1;
         $classroom['client_id'] = $client_id;
         $classroom['seats_taken'] = $order_details_ctr;

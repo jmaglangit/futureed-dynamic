@@ -156,6 +156,13 @@ class ClassroomRepository implements ClassroomRepositoryInterface{
         }
     }
 
+	/**
+	 *  Get classroom by subject and by student.
+	 *  @param $subject_id
+	 *  @param $student_id
+	 *  @return boolean
+	 */
+
     public function getClassroomBySubjectId($subject_id,$student_id){
 
         $classroom = new Classroom();
