@@ -34,9 +34,9 @@ class Classroom extends Model {
         return $this->belongsTo('FutureEd\Models\Core\Grade');
     }
 
-    public function students(){
+    public function classStudent(){
 
-        return $this->belongsTo('FutureEd\Models\Core\ClassStudent');
+        return $this->belongsTo('FutureEd\Models\Core\ClassStudent','id','class_id');
     }
 
 	public function invoiceDetails(){
@@ -81,6 +81,28 @@ class Classroom extends Model {
 	public function scopeClient_Id($query, $client_id){
 
 		return $query->where('client_id',$client_id);
+	}
+
+	public function scopeSubject_Id($query, $subject_id){
+
+		return $query->where('subject_id',$subject_id);
+
+	}
+
+	public function scopeActive($query){
+
+		return $query->whereHas('classStudent',function($query){
+			$query->where('subscription_status',config('futureed.active'));
+
+		});
+	}
+
+	public function scopeStudent_Id($query, $student_id){
+
+		return $query->whereHas('classStudent',function($query) use ($student_id){
+			$query->where('student_id',$student_id);
+
+		});
 	}
 
 }

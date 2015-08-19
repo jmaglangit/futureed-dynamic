@@ -12,7 +12,7 @@
 					</div>
 
 					<div class="module-icon-holder">
-						<img src="/images/avatar/doctor-male/doctor_male-2_main.png" />
+						<img ng-src="{! user.avatar !}" />
 					</div>
 
 					<div class="points-badge-holder row">

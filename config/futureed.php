@@ -180,4 +180,7 @@ return [
 
 	//student progress
 	'student_progress' => 100,
+
+	//PAR shortcut for parent
+	'PAR' => 'PAR',
 ];
