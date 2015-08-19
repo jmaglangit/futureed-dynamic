@@ -93,13 +93,6 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 	 */
 	public function getStudentCurrentClassroom($student_id)
 	{
-
-//		return ClassStudent::with('classroom')
-//			->studentid($student_id)
-//			->active()
-//			->currentdate(Carbon::now())
-//			->first();
-
 		return ClassStudent::with('classroom')
 			->studentid($student_id)
 			->active()
