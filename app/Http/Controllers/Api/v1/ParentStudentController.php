@@ -356,6 +356,8 @@ class ParentStudentController extends ApiController {
 
         $parent_id = $request->only('parent_id');//this is a client id
 
+        $subject_id = $request->only('subject_id');
+
         //check if user is associated to the parent.
         $check_parent_student = $this->parent_student->checkParentStudent($parent_id,$student_id);
 
@@ -363,11 +365,13 @@ class ParentStudentController extends ApiController {
             return $this->respondErrorMessage(2039);
         }
 
-        // check if student has existing subscription
-        $check_class_student = $this->student->subscriptionExpired($student_id);
 
-        if($check_class_student){
-            return $this->respondErrorMessage(2037);
+        // check if student have current subscription of a subject
+        $class_student_subject = $this->classroom->getClassroomBySubjectId($subject_id, $student_id);
+
+        if ($class_student_subject) {
+
+	       return $this->respondErrorMessage(2037);
         }
 
         $order_id = $request->only('order_id');
@@ -413,13 +417,6 @@ class ParentStudentController extends ApiController {
             return $this->respondErrorMessage(2039);
         }
 
-        // check if student has existing subscription
-        $check_class_student = $this->student->subscriptionExpired($student_id);
-
-		if($check_class_student){
-			return $this->respondErrorMessage(2037);
-		}
-
 		// check if student have current subscription of a subject
 		$class_student_subject = $this->classroom->getClassroomBySubjectId($subject_id, $student_id);
 
@@ -427,7 +424,7 @@ class ParentStudentController extends ApiController {
 
 			return $this->respondErrorMessage(2037);
 		}
-		
+
         $order_id = $request->only('order_id');
         $check_order_detail = $this->order_details->getOrderDetailByOrderIdAndStudentId($order_id['order_id'],$student_id);
         if(!is_null($check_order_detail)){
