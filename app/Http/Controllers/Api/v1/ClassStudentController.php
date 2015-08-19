@@ -35,7 +35,7 @@ class ClassStudentController extends ApiController {
 		MailServices $mailServices,
 		StudentServices $studentRepositoryInterface,
 		ClassroomRepositoryInterface $classroom,
-		ClassroomServices $classroomServices
+        		ClassroomServices $classroomServices
 	)
 	{
 		$this->class_student = $classStudentRepositoryInterface;
@@ -44,7 +44,7 @@ class ClassStudentController extends ApiController {
 		$this->student = $studentRepositoryInterface;
 		$this->user = $userServices;
 		$this->classroom = $classroom;
-		$this->classroom_services = $classroomServices;
+			$this->classroom_services = $classroomServices;
     }
 
     /**
