@@ -16,6 +16,7 @@ use FutureEd\Services\UserServices;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use Carbon\Carbon;
 
 class ClassStudentController extends ApiController {
 
@@ -106,10 +107,6 @@ class ClassStudentController extends ApiController {
 
         //check seats availability.
         $classroom = $this->classroom->getClassroom($class_student['class_id']);
-
-        if( $classroom->seats_taken >= $classroom->seats_total ){
-            return $this->respondErrorMessage(2135);
-        }
 
         $user = array_merge($user,[
             'user_type' => config('futureed.student')
@@ -216,13 +213,10 @@ class ClassStudentController extends ApiController {
         //check seats availability.
         $classroom = $this->classroom->getClassroom($data['class_id']);
 
-        if( $classroom->seats_taken >= $classroom->seats_total ){
-            return $this->respondErrorMessage(2135);
-        }
-
 		//add to class student table.
 		$data['student_id'] = $student_id;
 		$data['status'] = 'Enabled';
+		$data['date_started'] = Carbon::now();
 		$this->class_student->addClassStudent($data);
 
         //increment seats_taken
