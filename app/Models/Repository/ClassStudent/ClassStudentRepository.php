@@ -6,6 +6,7 @@ use FutureEd\Models\Core\ClassStudent;
 use FutureEd\Models\Core\Classroom;
 use FutureEd\Models\Repository\User\UserRepository;
 use League\Flysystem\Exception;
+use Illuminate\Support\Facades\DB;
 
 class ClassStudentRepository implements ClassStudentRepositoryInterface
 {
@@ -93,11 +94,17 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 	public function getStudentCurrentClassroom($student_id)
 	{
 
+//		return ClassStudent::with('classroom')
+//			->studentid($student_id)
+//			->active()
+//			->currentdate(Carbon::now())
+//			->first();
+
 		return ClassStudent::with('classroom')
 			->studentid($student_id)
 			->active()
 			->currentdate(Carbon::now())
-			->first();
+			->get();
 	}
 
 	/**
