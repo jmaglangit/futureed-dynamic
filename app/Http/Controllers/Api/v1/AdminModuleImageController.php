@@ -13,7 +13,7 @@ class AdminModuleImageController extends Controller {
 	 * @return Response
 	 */
 	public function index()
-	{
+		{
 		//
 	}
 
