@@ -5,7 +5,7 @@
 				{! error !}
 			</p>
 		</div>
-	<fieldset>
+	<fieldset class="reward-set">
 		<legend>Rewards</legend>
 		<div class="form-group">
 			<label class="control-label col-xs-2">Points</label>
@@ -48,7 +48,7 @@
 			</div>
 		</div>
 	</fieldset>
-	<fieldset>
+	<fieldset class="reward-set">
 		<legend>Badges</legend>
 		<div ng-if="profile.badges.length <=0">
 			<div class="alert alert-info">No Badges Available</div>
@@ -59,7 +59,7 @@
 			</div>
 		</div>
 	</fieldset>
-	<fieldset>
+	<fieldset class="reward-set">
 		<legend>Medals</legend>
 		<div>
 			<div class="alert alert-info">No Medals Available</div>

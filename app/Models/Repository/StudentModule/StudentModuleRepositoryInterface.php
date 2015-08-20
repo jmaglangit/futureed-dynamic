@@ -18,4 +18,6 @@ interface StudentModuleRepositoryInterface
 
 	public function getStudentModuleWrongCount($id);
 
+	public function getStudentModuleByClass($student_id, $class_id);
+
 }
