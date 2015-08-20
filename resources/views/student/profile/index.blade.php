@@ -59,26 +59,6 @@
 							</div>
 							
 					</h2>
-					<p ng-if="!profile.active_password && !profile.active_avatar">
-						Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam ut erat a erat vehicula pulvinar.
-						Vivamus vitae justo consectetur, molestie justo ut, suscipit nibh. Pellentesque accumsan elit.
-					</p>
-
-					<p ng-if="profile.active_avatar">
-						Select your new avatar.
-					</p>
-
-					<div ng-if="profile.active_password">
-						<p ng-if="!profile.password_validated">
-							Select your current picture password
-						</p>
-						<p ng-if="profile.password_validated && !profile.password_selected">
-							Select your new picture password
-						</p>
-						<p ng-if="profile.password_validated && profile.password_selected && !profile.password_confirmed">
-							Confirm your new picture password
-						</p>
-					</div>
 				</div>
 			</div>
 			<div class="form-content col-xs-12">

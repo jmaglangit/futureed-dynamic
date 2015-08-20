@@ -7,7 +7,7 @@
 		<legend>Credentials Information</legend>
 		<div class="form-group">
             <label for="" class="col-md-2 control-label">Username <span class="required">*</span></label>
-            <div class="col-md-5">
+            <div class="col-md-4">
             	{!! Form::text('username', ''
                     , array(
                         'class' => 'form-control'
@@ -18,17 +18,15 @@
                         , 'ng-model-options' => "{debounce : {'default' : 1000} }"
                         , 'ng-change' => "checkAvailability(profile.prof.username, 'Student')")
                 ) !!}
+                <div class="prof-info"> 
+                    <i ng-if="u_loading" class="fa fa-spinner fa-spin"></i>
+                    <i ng-if="u_success" class="fa fa-check success-color"></i>
+                    <span ng-if="u_error" class="error-msg-con">{! u_error !}</span>
+                </div>
             </div>
-            <div style="margin-top: 7px;"> 
-                <i ng-if="u_loading" class="fa fa-spinner fa-spin"></i>
-                <i ng-if="u_success" class="fa fa-check success-color"></i>
-                <span ng-if="u_error" class="error-msg-con">{! u_error !}</span>
-            </div>
-        </div>
-		<div class="form-group">
             <label for="" class="col-md-2 control-label">Email <span class="required">*</span></label>
-            <div class="col-md-5">
-            	{!! Form::text('email', ''
+            <div class="col-md-3">
+                {!! Form::text('email', ''
                     , array(
                         'class' => 'form-control'
                         , 'placeholder' => 'Email Address' 
@@ -37,9 +35,9 @@
                     )
                 ) !!}
             </div>
-            <div class="col-xs-2">
+            <div class="col-xs-1">
                 <a href="" ng-click="profile.setStudentProfileActive('edit_email')" class="edit-email">Edit</a>
-            </div>	
+            </div>  
         </div>
         <div class="form-group" ng-if="profile.prof.new_email">
             <label for="" class="col-md-2 control-label">Pending Email <span class="required">*</span></label>
@@ -62,7 +60,7 @@
 		<legend>Personal Information</legend>
 		<div class="form-group">
             <label for="" class="col-md-2 control-label">First Name <span class="required">*</span></label>
-            <div class="col-md-5">
+            <div class="col-md-4">
                 {!! Form::text('first_name', ''
                     , array(
                         'class' => 'form-control'
@@ -72,11 +70,9 @@
                         , 'ng-model' => 'profile.prof.first_name')
                 ) !!}
             </div>
-        </div>
-		<div class="form-group">
             <label for="" class="col-md-2 control-label">Last Name <span class="required">*</span></label>
-            <div class="col-md-5">
-            	{!! Form::text('last_name', ''
+            <div class="col-md-4">
+                {!! Form::text('last_name', ''
                     , array(
                         'class' => 'form-control'
                         , 'placeholder' => 'Last Name'
@@ -88,7 +84,7 @@
         </div>
         <div class="form-group">
             <label for="" class="col-md-2 control-label">Gender <span class="required">*</span></label>
-            <div class="col-md-5">
+            <div class="col-md-4">
                 {!! Form::select(''
                 	, array(
                 		'' => '-- Select Gender --'
@@ -103,10 +99,8 @@
                 		, 'ng-disabled' => '!profile.active_edit')
                 ) !!}
             </div>
-        </div>  
-        <div class="form-group">
             <label for="" class="col-xs-2 control-label">Birthday <span class="required">*</span></label>
-            <div class="col-xs-5">
+            <div class="col-xs-4">
                 <div class="dropdown">
                   <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
                     <div class="input-group">
@@ -123,7 +117,7 @@
         </div>
         <div class="form-group">
             <label for="" class="col-md-2 control-label">Age</label>
-            <div class="col-md-5">
+            <div class="col-md-4">
             	{!! Form::text('age', ''
                     , array(
                         'class' => 'form-control'
@@ -132,11 +126,9 @@
                         , 'ng-model' => 'profile.prof.age')
                 ) !!}
             </div>
-        </div>
-        <div class="form-group">
             <label for="" class="col-md-2 control-label">City <span class="required">*</span></label>
-            <div class="col-md-5">
-            	{!! Form::text('city', ''
+            <div class="col-md-4">
+                {!! Form::text('city', ''
                     , array(
                         'class' => 'form-control'
                         , 'ng-disabled' => '!profile.active_edit'
@@ -146,9 +138,9 @@
                 ) !!}
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group" ng-init="getCountries()">
             <label for="" class="col-md-2 control-label">State</span></label>
-            <div class="col-md-5">
+            <div class="col-md-4">
             	{!! Form::text('state', ''
                     , array(
                         'class' => 'form-control'
@@ -158,10 +150,8 @@
                         , 'ng-model' => 'profile.prof.state')
                 ) !!}
             </div>
-        </div>
-        <div class="form-group" ng-init="getCountries()">
             <label for="" class="col-md-2 control-label">Country <span class="required">*</span></label>
-            <div class="col-md-5">
+            <div class="col-md-4">
                 <select class="form-control" name="country_id"
                     ng-model="profile.prof.country_id" 
                     ng-change="profile.setCountryGrade()" 
@@ -177,7 +167,7 @@
 		<legend>School Information</legend>
 		<div class="form-group" ng-if="prof.school_name">
             <label for="" class="col-md-2 control-label">School Name</label>
-            <div class="col-md-5">
+            <div class="col-md-4">
             	{!! Form::text('school_name', ''
                     , array(
                         'class' => 'form-control'
@@ -191,7 +181,7 @@
 		<div class="form-group">
         <label for="" class="col-xs-2 control-label">School level <span class="required">*</span></label>
 
-        <div class="col-md-5 nullable">
+        <div class="col-md-4 nullable">
             <select class="form-control" name="grade_code" 
                 ng-model="profile.prof.grade_code" 
                 ng-disabled="!profile.active_edit || profile.grades.length <= 0"
