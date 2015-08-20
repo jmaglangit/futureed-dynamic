@@ -150,6 +150,17 @@ return [
 	//answer
 	'content' => 'content',
 
+	//icons
+	'icon' => 'icon',
+
+	//path for icon on uploaded images temp
+	'icon_image_path' => base_path() . '/public/uploads/temp/icon',
+
+	//path for icon to uploaded final images
+	'icon_image_path_final' => base_path() . '/public/uploads/icon',
+	'icon_image_path_final_public' => base_path() . '/uploads/icon',
+
+
 	//answer status
 	'answer_status_correct' => 'Correct',
 	'answer_status_wrong' => 'Wrong',
