@@ -5,7 +5,7 @@ use FutureEd\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
-class AdminModuleImageController extends Controller {
+class AdminModuleImageController extends ApiController {
 
 	/**
 	 * Display a listing of the resource.
@@ -59,7 +59,7 @@ class AdminModuleImageController extends Controller {
 			$image = $_FILES['file']['name'];
 
 			//uploads image file
-			$input['file']->move(config('futureed.question_image_path').'/'.$now,$image);
+			$input['file']->move(config('futureed.icon_image_path').'/'.$now,$image);
 
 			//return the original name of the image
 			$return['image_name'] = $now.'/'.$image;
