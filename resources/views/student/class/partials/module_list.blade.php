@@ -1,6 +1,6 @@
 <div class="row">
 	<div class="col-xs-12">
-		<div class="module-search">
+		<div class="class-search">
 			{!! Form::open(
 				array('id' => 'search_form'
 					, 'class' => 'form-horizontal'
@@ -8,7 +8,7 @@
 				)
 			)!!}
 			<div class="form-group">
-				<div class="col-xs-5">
+				<div class="col-xs-2">
 					{!! Form::text('search_name', ''
 						,array(
 							'placeholder' => 'Module'
@@ -18,7 +18,7 @@
 						)
 					)!!}
 				</div>
-				<div class="col-xs-5">
+				<div class="col-xs-2">
 					{!! Form::select('search_module_status'
 						, array(
 							'' => 'All'
@@ -33,6 +33,18 @@
 						)
 					) !!}
 				</div>
+				<div class="col-xs-2" ng-init="getGradeLevel(user.country_id)">
+					<select class="form-control" ng-model="class.search.grade_id">
+						<option value="">-- Select Grade --</option>
+						<option ng-repeat="grade in grades" ng-value="grade.id">{! grade.name !}</option>
+					</select>
+				</div>
+				<div class="col-xs-2" ng-init="class.getSubjects()">
+					<select class="form-control" ng-model="class.search.subject_id">
+						<option value="">-- Select Subject --</option>
+						<option ng-repeat="subject in class.subjects" ng-value="subject.id">{! subject.name !}</option>
+					</select>
+				</div>
 				<div class="col-xs-2">
 					{!! Form::button('Search'
 						, array(
@@ -40,20 +52,6 @@
 							, 'ng-click' => 'class.searchFnc($event)'
 						)
 					) !!}
-				</div>
-			</div>
-			<div class="form-group">
-				<div class="col-xs-5" ng-init="getGradeLevel(user.country_id)">
-					<select class="form-control" ng-model="class.search.grade_id">
-						<option value="">-- Select Grade --</option>
-						<option ng-repeat="grade in grades" ng-value="grade.id">{! grade.name !}</option>
-					</select>
-				</div>
-				<div class="col-xs-5" ng-init="class.getSubjects()">
-					<select class="form-control" ng-model="class.search.subject_id">
-						<option value="">-- Select Subject --</option>
-						<option ng-repeat="subject in class.subjects" ng-value="subject.id">{! subject.name !}</option>
-					</select>
 				</div>
 				<div class="col-xs-2">
 					{!! Form::button('Clear'
@@ -68,32 +66,10 @@
 		</div>
 	</div>
 
-	<div class="col-xs-12 table-container">
+	<div class="col-xs-12 class-container">
 		<div class="clearfix"></div>
 
-		<div class="title-mid">
-			Class Modules
-		</div>
-
 		<div class="list-container" ng-init="class.listModules()" ng-cloak>
-			<div class="size-container">
-				{!! Form::select('size'
-					, array(
-						  '10' => '10'
-						, '20' => '20'
-						, '50' => '50'
-						, '100' => '100'
-					)
-					, '10'
-					, array(
-						'ng-model' => 'class.table.size'
-						, 'ng-change' => 'class.paginateBySize()'
-						, 'ng-if' => "class.records.length"
-						, 'class' => 'form-control paginate-size pull-right'
-					)
-				) !!}
-			</div>
-
 			<div class="clearfix"></div>
 
 			<div class="no-record-label" ng-if="!class.records.length && !class.table.loading">
@@ -105,11 +81,11 @@
 			</div>
 
 			<div class="module-list" ng-if="class.records.length">
-				<div class="module-item" ng-repeat="record in class.records" tooltip-class="module-tooltip" tooltip-placement="top" tooltip="{! record.name !}">
+				<div class="module-item" ng-repeat="record in class.records">
 					<div class="module-image-holder">
 						<img ng-if="record.student_module[0].module_status != 'Completed'" ng-class="{ 'module-icon' : user.points >= record.points_to_unlock, 'locked-module-icon' : user.points < record.points_to_unlock}" 
 							ng-src="{! user.points >= record.points_to_unlock && '/images/icons/default-module-icon.png' || '/images/icons/icon-lock.png' !}"
-							ng-click="class.redirect('{!! route('student.class.module.index') !!}', record)">
+							ng-click="class.redirect('{!! route('student.class.module.index') !!}', record)" tooltip-class="module-tooltip" tooltip-placement="bottom" tooltip="{! record.name !}">
 
 						<img ng-if="record.student_module[0].module_status == 'Completed'" class="locked-module-icon"
 							ng-src="/images/icons/default-module-icon.png">
