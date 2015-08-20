@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Jason
- * Date: 3/6/15
- * Time: 5:38 PM
- */
 
 namespace FutureEd\Services;
 
@@ -24,6 +18,18 @@ use FutureEd\Services\AvatarServices;
 class StudentServices
 {
 
+	/**
+	 * Initialized constructor.
+	 * @param StudentRepositoryInterface $student
+	 * @param PasswordImageServices $password
+	 * @param UserServices $user
+	 * @param ValidatorRepository $validator
+	 * @param SchoolServices $school
+	 * @param AvatarServices $avatar
+	 * @param GradeRepositoryInterface $gradeRepositoryInterface
+	 * @param ClassStudentRepositoryInterface $classStudentRepositoryInterface
+	 * @param StudentModuleRepositoryInterface $studentModuleRepositoryInterface
+	 */
 	public function __construct(
 		StudentRepositoryInterface $student,
 		PasswordImageServices $password,
@@ -47,12 +53,24 @@ class StudentServices
 		$this->student_module = $studentModuleRepositoryInterface;
 	}
 
+	/**
+	 * Get students.
+	 * @param $criteria
+	 * @param $limit
+	 * @param $offset
+	 * @return mixed
+	 */
 	public function getStudents($criteria, $limit, $offset)
 	{
 
 		return $this->student->getStudents($criteria, $limit, $offset);
 	}
 
+	/**
+	 * Get student by id.
+	 * @param $id
+	 * @return mixed
+	 */
 	public function getStudent($id)
 	{
 		return $this->student->getStudent($id);
@@ -71,6 +89,11 @@ class StudentServices
 			'city'
 	 */
 	//TODO: Add more validations on the each data variables.
+	/**
+	 * Add Student
+	 * @param $student
+	 * @return array
+	 */
 	public function addStudent($student)
 	{
 
@@ -89,16 +112,6 @@ class StudentServices
 		}
 
 		return $return;
-	}
-
-	public function updateStudent($student)
-	{
-		$this->student->updateStudent($student);
-	}
-
-	public function deleteStudent($id)
-	{
-		$this->student->deleteStudent($id);
 	}
 
 	public function getImagePassword($id)
@@ -122,12 +135,12 @@ class StudentServices
 		];
 	}
 
-	/*
-	 * @param id
-	 * @param image_id
-	 * @param token
-	 * @desc id is the student id, image_id is the image password, token is optional if it has a token.
+	/**
 	 * token is the indicator if it has login.
+	 * @param $id is the student id, image_id is the image password, token is optional if it has a token.
+	 * @param $image_id
+	 * @param null $token
+	 * @return array
 	 */
 	public function checkAccess($id, $image_id, $token = null)
 	{
@@ -170,6 +183,11 @@ class StudentServices
 	}
 
 
+	/**
+	 * Get student details.
+	 * @param $id
+	 * @return mixed
+	 */
 	public function getStudentDetails($id)
 	{
 
@@ -230,14 +248,22 @@ class StudentServices
 
 	}
 
-	//get age
+	/**
+	 * Get current age based on birth_date
+	 * @param $birth_date
+	 * @return string
+	 */
 	public function age($birth_date)
 	{
 		$interval = date_diff(date_create(), date_create($birth_date));
 		return $interval->format("%Y");
 	}
 
-	//get student birth_date
+	/**
+	 * Get student birth_date
+	 * @param $id
+	 * @return int
+	 */
 	public function getAge($id)
 	{
 
@@ -249,7 +275,11 @@ class StudentServices
 
 	}
 
-	//udpate student_image_password
+	/**
+	 * Update student_image_password
+	 * @param $data
+	 * @return array
+	 */
 	public function resetPasswordImage($data)
 	{
 
@@ -259,13 +289,21 @@ class StudentServices
 		return $return;
 	}
 
-
+	/**
+	 * Get students of a parent.
+	 * @param $parent_id
+	 * @return mixed
+	 */
 	public function getStudentByParent($parent_id)
 	{
 		return $this->student->getStudentParent($parent_id);
 	}
 
-	//save student avatar
+	/**
+	 * Save Student avatar.
+	 * @param $data
+	 * @return mixed
+	 */
 	public function saveStudentAvatar($data)
 	{
 
@@ -273,36 +311,12 @@ class StudentServices
 
 	}
 
-	//validation email/username/firstname/lastname/gender
-	public function validateStudentDetails($input)
-	{
 
-		if (!$this->validator->gender($input['gender'])) {
-
-			return ['status' => 202,
-				'data' => 'invalid gender'];
-		} else {
-
-			if (!$this->validator->email($input['email'])) {
-
-				return ['status' => 202,
-					'data' => 'invalid email'];
-			} else {
-
-				if (!$this->validator->username($input['username'])) {
-
-					return ['status' => 202,
-						'data' => 'invalid username'];
-				} else {
-
-					return ['status' => 200];
-				}
-
-			}
-
-		}
-	}
-
+	/**
+	 * Update Student details.
+	 * @param $id
+	 * @param $input
+	 */
 	public function updateStudentDetails($id, $input)
 	{
 
@@ -316,7 +330,11 @@ class StudentServices
 	}
 
 
-	//format return for student reset code
+	/**
+	 * Format return for student reset code.
+	 * @param $user_id
+	 * @return array
+	 */
 	public function resetCodeResponse($user_id)
 	{
 		$id = $this->student->getStudentId($user_id);
@@ -326,37 +344,56 @@ class StudentServices
 		return $return;
 	}
 
-
-	//get student references
+	/**
+	 * Get Student references.
+	 * @param $id
+	 * @return mixed
+	 */
 	public function getStudentReferences($id)
 	{
 
 		return $this->student->getReferences($id);
 	}
 
-
-	//get student id
+	/**
+	 * Get student Id.
+	 * @param $user_id
+	 * @return mixed
+	 */
 	public function getStudentId($user_id)
 	{
 
 		return $this->student->getStudentId($user_id);
 	}
 
-	//change password images
+	/**
+	 * Change password images.
+	 * @param $id
+	 * @param $password_image_id
+	 */
 	public function changePasswordImage($id, $password_image_id)
 	{
 
 		$this->student->changePasswordImage($id, $password_image_id);
-
 	}
 
-	//check if id exist
+	/**
+	 * Check existing id.
+	 * @param $id
+	 * @return mixed
+	 */
 	public function checkIdExist($id)
 	{
 
 		return $this->student->checkIdExist($id);
 	}
 
+	/**
+	 * Update School of student.
+	 * @param $id
+	 * @param $school_code
+	 * @return mixed
+	 */
 	public function updateSchool($id, $school_code)
 	{
 
