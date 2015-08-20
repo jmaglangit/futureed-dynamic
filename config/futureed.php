@@ -183,4 +183,7 @@ return [
 
 	//PAR shortcut for parent
 	'PAR' => 'PAR',
+
+	//STU shortcut for Student
+	'STU' => 'STU',
 ];

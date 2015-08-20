@@ -9,3 +9,8 @@ Routes::get('payment/status', array(
     'as' => 'payment.status',
     'uses' => 'Api\v1\PaymentController@getPaymentStatus',
 ));
+
+Routes::post('student-payment', array(
+	'as' => 'student.payment',
+	'uses' => 'Api\v1\StudentPaymentController@studentPayment'
+));
