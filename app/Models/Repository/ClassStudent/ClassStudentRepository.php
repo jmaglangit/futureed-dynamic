@@ -70,8 +70,24 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 		}
 	}
 
+	/**
+	 * Update a record.
+	 * @param $id
+	 * @param $data
+	 * @return bool|int|string
+	 */
+
 	public function updateClassStudent($id, $class_student)
 	{
+		try{
+
+			return ClassStudent::find($id)
+				->update($class_student);
+
+		} catch (Exception $e) {
+
+			throw new Exception($e->getMessage());
+		}
 
 	}
 
