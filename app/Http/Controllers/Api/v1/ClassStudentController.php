@@ -252,7 +252,6 @@ class ClassStudentController extends ApiController {
 	 */
 	public function studentJoinClass(ClassStudentRequest $request){
 
-
 		return $this->respondWithData(
 			$this->student->getCurrentClass($request->get('student_id'))
 		);
