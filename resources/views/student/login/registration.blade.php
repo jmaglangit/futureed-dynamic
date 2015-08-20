@@ -29,71 +29,13 @@
                     {! error !}
                   </p>
                 </div>
-                
-                <fieldset>
-                    <legend>User Credentials</legend>
-                    <div class="form-group">
-                        <label for="" class="col-md-2 control-label">Username<span class="required">*</span></label>
-                        <div class="col-md-4">
-                            {!! Form::text('username', ''
-                                , array(
-                                    'class' => 'form-control'
-                                    , 'placeholder' => 'Username' 
-                                    , 'ng-model' => 'reg.username'
-                                    , 'ng-model-options' => "{debounce : {'default' : 1000}}"
-                                    , 'ng-change' => "checkAvailability(reg.username, 'Student')")
-                            ) !!}
-                        </div>
-                        <div style="margin-top: 7px;"> 
-                            <i ng-if="u_loading" class="fa fa-spinner fa-spin"></i>
-                            <i ng-if="u_success" class="fa fa-check success-color"></i>
-                            <span ng-if="u_error" class="error-msg-con">{! u_error !}</span>
-                        </div>
-                    </div> 
-                    <div class="form-group">
-                        <label for="" class="col-md-2 control-label">Email<span class="required">*</span></label>
-                        <div class="col-md-4">
-                            {!! Form::text('email', ''
-                                , array(
-                                    'class' => 'form-control'
-                                    , 'placeholder' => 'Email Address' 
-                                    , 'ng-model' => 'reg.email'
-                                    , 'ng-model-options' => "{debounce : {'default' : 1000}}"
-                                    , 'ng-change' => "checkEmailAvailability(reg.email, 'Student')")
-                            ) !!}
-                        </div>
-                        <div style="margin-top: 7px;">
-                            <i ng-if="e_loading" class="fa fa-spinner fa-spin"></i>
-                            <i ng-if="e_success" class="fa fa-check success-color"></i>
-                            <span ng-if="e_error" class="error-msg-con">{! e_error !}</span>
-                        </div>
-                    </div>
-                </fieldset>
                 <fieldset>
                     <legend>Personal Information</legend>
                     <div class="form-group">
-                        <label for="" class="col-md-2 control-label">First Name<span class="required">*</span></label>
+                        <label for="" class="col-md-2 control-label">Birthday<span class="required">*</span></label>
                         <div class="col-md-4">
-                            {!! Form::text('first_name', ''
-                                , array(
-                                    'class' => 'form-control'
-                                    , 'placeholder' => 'First Name' 
-                                    , 'ng-model' => 'reg.first_name')
-                            ) !!}
+                            <input type="hidden" id="birth_date">
                         </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="" class="col-md-2 control-label">Last Name<span class="required">*</span></label>
-                        <div class="col-md-4">
-                            {!! Form::text('last_name', ''
-                                , array(
-                                    'class' => 'form-control'
-                                    , 'placeholder' => 'Last Name' 
-                                    , 'ng-model' => 'reg.last_name')
-                            ) !!}
-                        </div>
-                    </div>
-                    <div class="form-group">
                         <label for="" class="col-md-2 control-label">Gender<span class="required">*</span></label>
                         <div class="col-md-4">
                             {!! Form::select('gender'
@@ -107,24 +49,27 @@
                                     , 'ng-model' => 'reg.gender')
                             ); !!}
                         </div>
-                    </div>  
+                    </div>
                     <div class="form-group">
-                        <label for="" class="col-md-2 control-label">Birthday<span class="required">*</span></label>
+                        <label for="" class="col-md-2 control-label">First Name<span class="required">*</span></label>
                         <div class="col-md-4">
-                            <div class="dropdown">
-                              <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
-                                <div class="input-group">
-                                    <input readonly="readonly" type="text" name="birth_date" placeholder="DD/MM/YY" class="form-control" value="{! reg.birth | date:'dd/MM/yy' !}">
-                                    <input type="hidden" name="hidden_date" value="{! reg.birth | date:'yyyyMMdd' !}">
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                                </div>
-                              </a>
-                              <ul class="dropdown-menu date-dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                <datetimepicker data-ng-model="reg.birth" data-before-render="beforeDateRender($dates)" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', startView:'day', minView:'day' }"/>
-                              </ul>
-                            </div>
+                            {!! Form::text('first_name', ''
+                                , array(
+                                    'class' => 'form-control'
+                                    , 'placeholder' => 'First Name' 
+                                    , 'ng-model' => 'reg.first_name')
+                            ) !!}
                         </div>
-                    </div> 
+                        <label for="" class="col-md-2 control-label">Last Name<span class="required">*</span></label>
+                        <div class="col-md-4">
+                            {!! Form::text('last_name', ''
+                                , array(
+                                    'class' => 'form-control'
+                                    , 'placeholder' => 'Last Name' 
+                                    , 'ng-model' => 'reg.last_name')
+                            ) !!}
+                        </div>
+                    </div>
                     <div class="form-group">
                         <label for="" class="col-md-2 control-label">City<span class="required">*</span></label>
                         <div class="col-md-4">
@@ -135,8 +80,6 @@
                                     , 'ng-model' => 'reg.city')
                             ) !!}
                         </div>
-                    </div>
-                    <div class="form-group">
                         <label for="" class="col-md-2 control-label">State</label>
                         <div class="col-md-4">
                             {!! Form::text('state', ''
@@ -154,6 +97,43 @@
                                 <option ng-selected ="reg.country_id == futureed.FALSE" value="">-- Select Country --</option>
                                 <option ng-selected ="reg.country_id == country.id" ng-repeat="country in countries" ng-value="country.id">{! country.name !}</option>
                             </select>
+                        </div>
+                    </div>
+                </fieldset>
+                <fieldset>
+                    <legend>User Credentials</legend>
+                    <div class="form-group">
+                        <label for="" class="col-md-2 control-label">Username<span class="required">*</span></label>
+                        <div class="col-md-4">
+                            {!! Form::text('username', ''
+                                , array(
+                                    'class' => 'form-control'
+                                    , 'placeholder' => 'Username' 
+                                    , 'ng-model' => 'reg.username'
+                                    , 'ng-model-options' => "{debounce : {'default' : 1000}}"
+                                    , 'ng-change' => "checkAvailability(reg.username, 'Student')")
+                            ) !!}
+                            <div class="reg-info"> 
+                                <i ng-if="u_loading" class="fa fa-spinner fa-spin"></i>
+                                <i ng-if="u_success" class="fa fa-check success-color"></i>
+                                <span ng-if="u_error" class="error-msg-con">{! u_error !}</span>
+                            </div>
+                        </div>
+                        <label for="" class="col-md-2 control-label">Email<span class="required">*</span></label>
+                        <div class="col-md-4">
+                            {!! Form::text('email', ''
+                                , array(
+                                    'class' => 'form-control'
+                                    , 'placeholder' => 'Email Address' 
+                                    , 'ng-model' => 'reg.email'
+                                    , 'ng-model-options' => "{debounce : {'default' : 1000}}"
+                                    , 'ng-change' => "checkEmailAvailability(reg.email, 'Student')")
+                            ) !!}
+                            <div class="reg-info">
+                                <i ng-if="e_loading" class="fa fa-spinner fa-spin"></i>
+                                <i ng-if="e_success" class="fa fa-check success-color"></i>
+                                <span ng-if="e_error" class="error-msg-con">{! e_error !}</span>
+                            </div>
                         </div>
                     </div>
                 </fieldset>
@@ -235,7 +215,28 @@
             </div>
         {!! Form::close() !!}
     </div>
-
+    <div id="invalid_student" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myMediumModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-md">
+            <div class="modal-content">
+                <div class="modal-header">
+                    
+                </div>
+                <div class="modal-body">
+                    <h5>Students 13 years old or younger cannot register. Please ask a Parent to sign up in the <a href="{!! route('client.registration') !!}">client site</a></h5>
+                </div>
+                <div class="modal-footer">
+                    <div class="btncon col-md-8 col-md-offset-4 pull-left">
+                        {!! Form::button('Cancel'
+                            , array(
+                                'class' => 'btn btn-gold btn-medium'
+                                , 'data-dismiss' => 'modal'
+                            )
+                        ) !!}
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>
     @include('student.login.registration-success')
     @include('student.login.terms-and-condition')
     @include('student.login.privacy-policy')
@@ -243,7 +244,8 @@
 @stop
 
 @section('scripts')
+    {!! Html::script('/js/jquery.date-dropdowns.js') !!}
+    {!! Html::script('/js/student/login.js') !!}
   
-  {!! Html::script('/js/student/login.js') !!}
 
 @stop
