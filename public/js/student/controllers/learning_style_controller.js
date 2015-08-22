@@ -104,9 +104,30 @@ function LearningStyleController($rootScope, $scope, $interval, $filter, $sce, $
 
 	var closeTest = function() {
 		$scope.session.next = 'Closing...';
-		//TODO: put end test logic here.
+
+		var user_answers_final = [];
+
+		angular.forEach($scope.session.all_questions, function(q){
+			if ( typeof(q.user_answers) != 'undefined' )
+			{
+				var question_obj = {
+					test_question_id: q.id,
+					answers: q.user_answers
+				}
+				
+				user_answers_final.push(question_obj);
+			}
+		});
+
+		LearningStyleService.saveTest($scope.order_candidate_test.test.id, $scope.sections[$scope.session.section].id, user_answers_final, $scope.user.id).success(function(response) {
 		
-		window.location.href= '/student/dashboard';
+			window.location.href= '/student/dashboard';
+		
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+		
 	}
 
 	var enablePreviousPageButton = function() {
@@ -269,9 +290,7 @@ function LearningStyleController($rootScope, $scope, $interval, $filter, $sce, $
 	}
 
 	var recalculateProgress = function() {
-		console.log('all_questions');
-		console.log($scope.session.all_questions);
-	
+
 		var completed = 0;
 		angular.forEach($scope.session.all_questions, function(q){
 			if ( typeof(q.user_answers) != 'undefined' )
@@ -287,7 +306,7 @@ function LearningStyleController($rootScope, $scope, $interval, $filter, $sce, $
 		});
 
 		$scope.session.progress = Math.ceil(completed / $scope.session.all_questions.length * 100) + '%';
-		console.log('recalculate:' + $scope.session.progress);
+
 	}
 
 	var setActualTimeLimit = function() {
@@ -850,6 +869,9 @@ function LearningStyleController($rootScope, $scope, $interval, $filter, $sce, $
 				checkIncomplete();
 			}
 			recalculateProgress();
-		});
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});;
 	});
 }	

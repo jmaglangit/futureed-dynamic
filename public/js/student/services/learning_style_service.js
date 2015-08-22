@@ -12,5 +12,19 @@ function LearningStyleService($http) {
 		});
 	}
 	
+	service.saveTest = function(test_id, section_id, user_answers, student_id) {
+		return $http({
+			method 	: Constants.METHOD_POST
+			, data 	: 
+					{
+						test_id: test_id,
+						student_id: student_id,
+						section_id: section_id,
+						user_answers: user_answers
+					}
+			, url 	: serviceUrl + 'save-test'
+		});
+	}
+	
 	return service;
 }

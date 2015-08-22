@@ -416,6 +416,15 @@ form p.help-block {
   content: " ";
   width: 100%;
 }
+
+.form-style .learning-style-form {
+	text-align: left;	
+}
+
+.form-style .learning-style-form ul {
+	list-style: none;
+}
+
 .steps{
 	position: relative;
 }

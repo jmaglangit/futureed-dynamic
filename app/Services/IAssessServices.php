@@ -42,27 +42,30 @@ class IAssessServices {
      */
     private function login() {
         
-        $this->curl->post('http://beta.measure.iassessonline.com/api/v1/user/login', array(
-        	'type' => 'client',
-		    'login' => 'futureed',
-		    'password' => 'FutureEd123',
-		));
-		
-		if ($this->curl->error) {
-		
-			$this->error_code = $this->curl->error_code;
+        if(env('IASSESS_URL') && env('IASSESS_URL') != '') {
+	        $this->curl->post(env('IASSESS_URL').'/api/v1/user/login', array(
+	        	'type' => 'client',
+			    'login' => 'futureed',
+			    'password' => 'FutureEd123',
+			));
 			
-			return FALSE;
-		
-		} else {
+			if ($this->curl->error) {
 			
-			$response = json_decode($this->curl->response);
+				$this->error_code = $this->curl->error_code;
+				
+				return FALSE;
 			
-			$this->user_id = $response->user_id;
-			$this->token = $response->token;
-			
-			return TRUE;
-		}		
+			} else {
+				
+				$response = json_decode($this->curl->response);
+	
+				$this->user_id = $response->user_id;
+				$this->token = $response->token;
+				
+				return TRUE;
+			}
+        }
+        		
     }
     
     /**
@@ -74,7 +77,7 @@ class IAssessServices {
     public function getTestData() {
     	if($this->login()) {
 	    	if($this->user_id && $this->token) {
-			    $this->curl->get('http://beta.measure.iassessonline.com/api/v1/candidates/tests/774/sections?user_id='.$this->user_id.'&token='.$this->token);
+			    $this->curl->get(env('IASSESS_URL').'/api/v1/candidates/tests/774/sections?user_id='.$this->user_id.'&token='.$this->token);
 			    
 			    if ($this->curl->error) {
 				
@@ -95,5 +98,50 @@ class IAssessServices {
 	    	return FALSE;
     	}
     }
+    
+    /**
+     * Saves the LSP test data
+     *
+     * @param void
+     * @return boolean
+     */
+    public function saveTestData($data) {
+    	if($this->login()) {
+	    	if($this->user_id && $this->token) {
+	    			    		
+	    		$data['user_id'] = $this->user_id;
+				$data['token'] = $this->token;
+				$data['overwrite'] = true;
 
+				$json = json_encode($data);				
+								
+				$this->curl->setHeader('Content-Type', 'application/json');
+				
+			    $this->curl->post(env('IASSESS_URL').'/api/v1/candidates/tests/answer-questions', $json);
+			    
+			    if($this->curl->error) {
+				
+					$this->error_code = $this->curl->error_code;
+					
+/*
+					error_log($this->error_code);
+					error_log($this->curl->error_message);
+					error_log($this->curl->http_error_message);
+*/
+					
+					return FALSE;
+				
+				} else {
+					
+					$this->data = json_decode($this->curl->response, true);
+					
+					return TRUE;
+				}
+	    	} else {
+		    	return FALSE;
+	    	}
+    	} else {
+	    	return FALSE;
+    	}
+    }
 }

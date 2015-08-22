@@ -2,6 +2,11 @@
 
 use FutureEd\Services\IAssessServices as iAssess;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
+
+use FutureEd\Http\Requests\Api\LearningStyleRequest;
+
 class AssessController extends ApiController {
 
 	/**
@@ -41,5 +46,30 @@ class AssessController extends ApiController {
 		}
 
     }
+
+	/**
+	 * save Test data
+	 *
+	 * @param void
+	 * @return Resource
+	 */
+	 public function saveTest(LearningStyleRequest $request){
+
+		$input = Input::all();
+				
+		if($this->iassess->saveTestData($input)) {
+		
+			$data = $this->iassess->data;
+			
+			return $this->respondWithData($data);
+			
+		} else {
+		
+			return $this->respondWithError();
+			
+		}
+
+    }
+
 
 }

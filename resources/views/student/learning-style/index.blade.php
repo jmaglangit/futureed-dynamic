@@ -1,4 +1,4 @@
-<div ng-controller="LearningStyleController as learning_style" ng-cloak>
+<div class="learning-style-form" ng-controller="LearningStyleController as learning_style" ng-cloak>
 	<div class="wrapr"> 
 		<test-directive ng-show="data_loaded">
 			<div class="panel panel-brand panel-test" id="lsp_panel">
