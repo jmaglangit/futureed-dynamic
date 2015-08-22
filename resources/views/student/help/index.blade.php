@@ -29,6 +29,7 @@
 	
 	{!! Html::script('/js/student/services/student_class_service.js')!!}
 	{!! Html::script('/js/student/services/student_help_service.js')!!}
+	{!! Html::script('/js/student/constants/student_help_constant.js')!!}
 
 	{!! Html::script('/js/common/search_service.js')!!}
 	{!! Html::script('/js/common/table_service.js')!!}

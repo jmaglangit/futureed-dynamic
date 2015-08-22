@@ -114,12 +114,12 @@ class ClientController extends ApiController {
 				$clientDetails = $this->client->getClientDetails($id)->toArray();
 				$userDetails = $this->user->getUserDetail($return['user_id'],'Client')->toArray();
 
-				$user = input::only('username','email');
+				$user = Input::only('username','email');
 
-				$client = input::only('first_name','last_name','street_address',
+				$client = Input::only('first_name','last_name','street_address',
 									  'city','country','zip','state','country_id');
 
-				$school = input::only('school_name','school_code','school_street_address','school_city',
+				$school = Input::only('school_name','school_code','school_street_address','school_city',
 										  'school_state','school_country','school_country_id','school_zip','school_contact_name','school_contact_number');
 				
 				$this->addMessageBag($this->username($user,'username'));

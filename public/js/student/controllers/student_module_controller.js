@@ -641,6 +641,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				}
 			});
 		} else {
+			self.current_question = {};
 			self.launchModule(self.record.id);
 		}
 	}

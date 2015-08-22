@@ -14,7 +14,7 @@ class ClassStudent extends Model {
 
 	protected $dates = ['deleted_at'];
 
-	protected $fillable = ['student_id', 'class_id', 'status', 'verification_code'];
+	protected $fillable = ['student_id', 'class_id', 'status', 'verification_code','date_started'];
 
 	protected $hidden = ['verification_code', 'created_by', 'updated_by', 'created_at', 'updated_at', 'deleted_at'];
 
