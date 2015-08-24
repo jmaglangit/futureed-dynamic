@@ -130,7 +130,10 @@ class StudentPaymentController extends ApiController {
 		//insert data to invoice_detail
 		$this->invoice_detail->addInvoiceDetail($invoice_detail);
 
+		return $this->respondWithData($this->order->getOrder($next_order_id));
+
 	}
+
 
 
 
