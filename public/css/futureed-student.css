@@ -1285,6 +1285,22 @@ top: 41px;
 	padding: 0 15px;
 }
 
+.date-dropdowns > select {
+	height: 40px;
+	line-height: 30px;
+    padding: 4px 6px;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #555555;
+    vertical-align: middle;
+    border-radius: 4px;
+	border: 1px solid #CCCCCC;
+}
+
+.date-dropdowns {
+	margin-left: 0 !important;
+}
+
 /*bootstrap changes font-sizes*/
 
 .form-control {
