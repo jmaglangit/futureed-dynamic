@@ -41,9 +41,9 @@ class AssessController extends ApiController {
 	 * @return void
 	 */
 	public function __construct(iAssess $iassess,
-								StudentLsScore $student_ls_score,
-								StudentLsAnswer $student_ls_answer,
-								StudentServices $student_service) 
+		StudentLsScore $student_ls_score,
+		StudentLsAnswer $student_ls_answer,
+		StudentServices $student_service) 
 	{
 		$this->iassess = $iassess;
 		$this->student_ls_score = $student_ls_score;

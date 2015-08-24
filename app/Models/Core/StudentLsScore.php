@@ -26,14 +26,14 @@ class StudentLsScore extends Model {
 	
 	//-- Scopes
 	public function scopeStudent_id($query, $student_id) {
-        return $query->where('student_id', '=', $student_id);
-    }
+		return $query->where('student_id', '=', $student_id);
+	}
     
     public function scopeTest_id($query, $ls_test_id) {
-        return $query->where('ls_test_id', '=', $ls_test_id);
+    	return $query->where('ls_test_id', '=', $ls_test_id);
     }
     
     public function scopeName($query, $name) {
-	    return $query->whereLsName($name);
+    	return $query->whereLsName($name);
     }
 }
