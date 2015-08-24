@@ -442,16 +442,14 @@ class StudentServices
 
 		$current_class = $this->class_student->getStudentCurrentClassroom($student_id);
 
-		$class_id = [];
-		foreach ($current_class as $class) {
+		//TODO: Return current class and subject.
+		if(empty($current_class->toArray())){
 
-			array_push($class_id, $class->class_id);
+			return null;
+		}else{
+
+			return $current_class;
 		}
-
-		$class_student = $this->student_module->getStudentModuleByClass($student_id, $class_id);
-
-
-		return ($class_student) ? $class_student : null;
 	}
 
 
