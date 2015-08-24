@@ -58,10 +58,16 @@ class Invoice extends Model {
 	   return $query->where('client_id', $client_id);
    }
 
-   public function scopeId($query,$id){
+   public function scopeId($query,$id)
+   {
 
 	   return $query->where('id', $id);
 
+   }
+
+   public function scopeStudentId($query,$student_id){
+
+	   return $query->where('student_id', $student_id);
    }
 
     

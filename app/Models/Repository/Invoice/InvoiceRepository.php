@@ -52,6 +52,10 @@ class InvoiceRepository implements InvoiceRepositoryInterface{
                 if (isset($criteria['client_id'])) {
                     $invoice = $invoice->with('subscription')->clientId($criteria['client_id']);
                 }
+
+                if (isset($criteria['student_id'])) {
+	                $invoice = $invoice->with('subscription')->studentId($criteria['student_id']);
+                }
             }
 
 
