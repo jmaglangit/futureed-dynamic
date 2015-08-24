@@ -5,10 +5,10 @@ function LearningStyleService($http) {
 	var service = {};
 	var serviceUrl = '/api/v1/assess/';
 
-	service.getTest = function() {
+	service.getTest = function(student_id) {
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url 	: serviceUrl + 'get-test'
+			, url 	: serviceUrl + 'get-test?student_id='+student_id
 		});
 	}
 	

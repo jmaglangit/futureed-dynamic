@@ -45,8 +45,8 @@ class IAssessServices {
         if(env('IASSESS_URL') && env('IASSESS_URL') != '') {
 	        $this->curl->post(env('IASSESS_URL').'/api/v1/user/login', array(
 	        	'type' => 'client',
-			    'login' => 'futureed',
-			    'password' => 'FutureEd123',
+			    'login' => env('IASSESS_LOGIN', ''),
+			    'password' => env('IASSESS_PASSWORD', ''),
 			));
 			
 			if ($this->curl->error) {
@@ -74,10 +74,11 @@ class IAssessServices {
      * @param void
      * @return boolean
      */
-    public function getTestData() {
+    public function getTestData($is_adult = false) {
     	if($this->login()) {
 	    	if($this->user_id && $this->token) {
-			    $this->curl->get(env('IASSESS_URL').'/api/v1/candidates/tests/774/sections?user_id='.$this->user_id.'&token='.$this->token);
+	    		
+			    $this->curl->get(env('IASSESS_URL').'/api/v1/tests/'.($is_adult ? config('futureed.lsp_adult_id') : config('futureed.lsp_child_id') ).'/questions?user_id='.$this->user_id.'&token='.$this->token);
 			    
 			    if ($this->curl->error) {
 				
