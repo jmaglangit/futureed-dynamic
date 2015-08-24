@@ -81,5 +81,26 @@ class OrderDetailRepository implements OrderDetailRepositoryInterface{
         }
     }
 
+	/**
+	 * Update a record.
+	 * @param $id
+	 * @param $data
+	 * @return bool|int|string
+	 */
+
+	public function updateOrderDetail($id, $data)
+	{
+		try{
+
+			return OrderDetail::find($id)
+				->update($data);
+
+		} catch (Exception $e) {
+
+			throw new Exception($e->getMessage());
+		}
+
+	}
+
 
 }

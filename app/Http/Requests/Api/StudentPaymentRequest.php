@@ -41,6 +41,24 @@ class StudentPaymentRequest extends ApiRequest {
 
 				];
 				break;
+
+			case 'PUT':
+
+				return [
+					'subject_id' => 'required|numeric',
+					'order_date' => 'required|date_format:Ymd',
+					'student_id' => 'required|numeric',
+					'subscription_id' => 'required|numeric',
+					'date_start' => 'required|date_format:Ymd',
+					'date_end' => 'required|date_format:Ymd',
+					'seats_total' => 'required|numeric|between:1,999999',
+					'seats_taken' => 'numeric',
+					'total_amount' => 'required|numeric|between:1,999999.99',
+					'payment_status' => 'required|in:Pending,Paid,Cancelled',
+
+
+				];
+				break;
 		}
 
 	}

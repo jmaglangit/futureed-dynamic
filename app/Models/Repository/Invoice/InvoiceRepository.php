@@ -179,6 +179,15 @@ class InvoiceRepository implements InvoiceRepositoryInterface{
         }
     }
 
+	public function getInvoiceByOrderNo($order_no){
+
+		$invoice = new Invoice();
+
+		//query relation to subscription and invoice_detail
+		return $invoice = $invoice->with('subscription')->with('InvoiceDetail')->order($order_no)->get();
+
+	}
+
 
 
 

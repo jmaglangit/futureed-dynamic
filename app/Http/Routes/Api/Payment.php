@@ -14,3 +14,8 @@ Routes::post('student-payment', array(
 	'as' => 'student.payment',
 	'uses' => 'Api\v1\StudentPaymentController@studentPayment'
 ));
+
+Routes::put('student-payment-edit/{id}', array(
+	'as' => 'student.payment.edit',
+	'uses' => 'Api\v1\StudentPaymentController@studentPaymentEdit'
+));
