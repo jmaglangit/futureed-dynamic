@@ -62,7 +62,14 @@ class StudentPaymentController extends ApiController {
 		//get student details
 		$student = $this->student->viewStudent($order['student_id']);
 
-		//get the last inputed order
+		//check if student have existing subscription to a subject
+		$student_classroom = $this->classroom->getClassroomBySubjectId($order['subject_id'],$order['student_id']);
+
+		if ($student_classroom) {
+
+			return $this->respondErrorMessage(2037);
+		}
+		//get the last inputted order
 		$prev_order = $this->order->getNextOrderNo();
 		$next_order_id = ++$prev_order['id'];
 		$order['order_no'] = $this->invoice_services->createOrderNo($order['student_id'],$next_order_id);
@@ -93,7 +100,6 @@ class StudentPaymentController extends ApiController {
 		//insert data to invoices table
 		$inserted_invoice = $this->invoice->addInvoice($invoice);
 
-
 		//form data for classroom
 		$classroom['order_no'] = $order['order_no'];
 		$classroom['name'] = config('futureed.STU').Carbon::now()->timestamp;
@@ -123,31 +129,6 @@ class StudentPaymentController extends ApiController {
 
 		//insert data to invoice_detail
 		$this->invoice_detail->addInvoiceDetail($invoice_detail);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 	}
 
