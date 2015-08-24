@@ -442,7 +442,6 @@ class StudentServices
 
 		$current_class = $this->class_student->getStudentCurrentClassroom($student_id);
 
-		//TODO: Return current class and subject.
 		if(empty($current_class->toArray())){
 
 			return null;
