@@ -250,7 +250,7 @@ class ClassStudentController extends ApiController {
 	 * @param $id
 	 * @return mixed
 	 */
-	public function studentJoinClass(ClassStudentRequest $request){
+	public function studentCurrentClass(ClassStudentRequest $request){
 
 		return $this->respondWithData(
 			$this->student->getCurrentClass($request->get('student_id'))
