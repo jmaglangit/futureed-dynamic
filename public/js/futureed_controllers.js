@@ -60,8 +60,10 @@ function FutureedController($scope, $window, apiService, futureed) {
 						$scope.internalError();
 					});
 				}
-
-				$scope.errors[key] = value.message;
+				
+				if(angular.equals($scope.errors.indexOf(value.message), -1)) {
+					$scope.errors[key] = value.message;
+				}
 			});
 		} else {
 			$scope.errors[0] = errors.message;
