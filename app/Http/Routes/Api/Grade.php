@@ -4,9 +4,6 @@
  * Get predefined types of grades.
  */
 Routes::group([
-	'middleware' => ['api_user','api_after'],
-	'permission' => ['admin','client','student'],
-	'role' => ['principal','teacher','parent','admin','super admin']
 ], function()
 {
 	Routes::resource('/grade','Api\v1\GradeController',
