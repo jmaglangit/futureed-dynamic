@@ -3,6 +3,7 @@
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 use FutureEd\Http\Requests\Api\AdminModuleRequest;
+use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Input;
 use FutureEd\Models\Repository\Module\ModuleRepositoryInterface;
 
@@ -12,10 +13,16 @@ class AdminModuleController extends ApiController {
 
 	protected $module;
 
-	public function __construct(ModuleRepositoryInterface $module){
+	protected $file;
+
+	public function __construct(
+		ModuleRepositoryInterface $module,
+		Filesystem $filesystem
+	){
 
 		$this->module = $module;
 
+		$this->file = $filesystem;
 	}
 
 	/**
@@ -79,7 +86,7 @@ class AdminModuleController extends ApiController {
 	public function store(AdminModuleRequest $request)
 	{
 		$data = $request->only('subject_id','subject_area_id','name','code','description','common_core_area',
-                                      'common_core_url','status','points_to_unlock','points_to_finish');
+                                      'common_core_url','status','points_to_unlock','points_to_finish','image');
 
 		if($data['points_to_unlock'] >= $data['points_to_finish']){
 
@@ -87,6 +94,36 @@ class AdminModuleController extends ApiController {
 		}
 
 		$return = $this->module->addModule($data);
+
+		//TODO: admin icon image.
+		if($data['image']){
+
+			$update = NULL;
+
+			$from = config('futureed.icon_image_path');
+			$to = config('futureed.icon_image_path_final').'/'.$return['id'];
+
+			//check if directory don't exist, it will create new directory
+			if (!$this->file->exists(config('futureed.icon_image_path_final'))){
+
+				$this->file->makeDirectory(config('futureed.icon_image_path_final'));
+			}
+
+			$image = explode('/',$data['image']);
+			$image_type = explode('.',$image[1]);
+
+			$update['original_image_name'] = $image[1];
+			$update['icon_image'] = config('futureed.question').'_'.$return['id'].'.'.$image_type[1];
+
+			//move image to question directory
+			$this->file->move($from.'/'.$image[0],$to);
+			$this->file->copy($to.'/'.$image[1],$to.'/'.$update['icon_image']);
+
+
+			//add questions_image and original_image_name
+			$this->module->updateModule($return['id'],$update);
+
+		}
 
 		return $this->respondWithData(['id'=>$return['id']]);
 
