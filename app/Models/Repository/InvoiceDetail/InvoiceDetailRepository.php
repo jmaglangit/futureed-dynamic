@@ -36,4 +36,25 @@ class InvoiceDetailRepository implements InvoiceDetailRepositoryInterface{
             return $e->getMessage();
         }
     }
+
+    /**
+    	 * Update a record.
+    	 * @param $id
+    	 * @param $data
+    	 * @return bool|int|string
+    	 */
+
+    	public function updateInvoiceDetail($id, $data)
+    	{
+    		try{
+
+    			return InvoiceDetail::find($id)
+    				->update($data);
+
+    		} catch (Exception $e) {
+
+    			throw new Exception($e->getMessage());
+    		}
+
+    	}
 }

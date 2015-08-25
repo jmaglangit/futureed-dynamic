@@ -8,4 +8,5 @@ interface OrderDetailRepositoryInterface {
     public function deleteOrderDetail($id);
     public function getOrderDetailByOrderIdAndStudentId($order_id,$student_id);
     public function deleteOrderDetailByOrderId($order_id);
+    public function updateOrderDetail($id, $data);
 }

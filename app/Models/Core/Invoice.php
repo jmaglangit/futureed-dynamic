@@ -11,7 +11,7 @@ class Invoice extends Model {
 
     protected $dates = ['deleted_at'];
     
-    protected $fillable = ['order_no', 'invoice_date', 'invoice_no', 'client_id','client_name','date_start','date_end','seats_total','discount_type','discount_id','discount','total_amount','subscription_id','payment_status'];
+    protected $fillable = ['order_no', 'invoice_date', 'invoice_no', 'client_id','client_name','date_start','date_end','seats_total','discount_type','discount_id','discount','total_amount','subscription_id','payment_status','student_id','student_name'];
 
     protected $hidden = ['created_by','updated_by','created_at','updated_at','deleted_at'];	
     
@@ -58,10 +58,16 @@ class Invoice extends Model {
 	   return $query->where('client_id', $client_id);
    }
 
-   public function scopeId($query,$id){
+   public function scopeId($query,$id)
+   {
 
 	   return $query->where('id', $id);
 
+   }
+
+   public function scopeStudentId($query,$student_id){
+
+	   return $query->where('student_id', $student_id);
    }
 
     
