@@ -24,7 +24,7 @@ body.student{
 
 body {/*background: radial-gradient(transparent 50%, rgba(0, 0, 0, 0.3) 100%), linear-gradient(#d77a6b, #d2c09c 60%, #876d54);*/
   /*background: rgba(255,255,255,1); background: -moz-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 49%, rgba(242,242,242,1) 100%); background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, rgba(255,255,255,1)), color-stop(49%, rgba(255,255,255,1)), color-stop(100%, rgba(242,242,242,1))); background: -webkit-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 49%, rgba(242,242,242,1) 100%); background: -o-radial-gradient(center, ellipse cover, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 49%, rgba(242,242,242,1) 100%);adient(center, ellipse cover, rgba(255,255,255,1) 0%, rgba(255,255,255,1) 49%, rgba(242,242,242,1) 100%); filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#f2f2f2', GradientType=1 );  */
-  font: 16px 'Roboto', sans-serif; color: #8e8171; /*margin-bottom: 30px;*/}
+  font: 12px 'Roboto', sans-serif; color: #8e8171; /*margin-bottom: 30px;*/}
 
 header, body, footer {
 	min-width: 900px;
@@ -32,6 +32,7 @@ header, body, footer {
 
 .container {
 	min-height: 90%;
+	max-width: 1000px;
 }
 
 .logo-container {
@@ -292,7 +293,7 @@ fieldset legend{color: #8e8171; font-size: 16px; text-transform: uppercase;}
 .register_users img{cursor: pointer;}
 .register_student .form-header {
 	background: #f9f5f6;
-	padding: 40px;
+	padding: 20px;
 }
 .register_student {
 	text-align: left;
@@ -308,7 +309,7 @@ fieldset legend{color: #8e8171; font-size: 16px; text-transform: uppercase;}
 	display: inline-block;
 	margin-top: 0;
 	margin-bottom: 20px;
-	font-size: 36px;
+	font-size: 26px;
 	/*border-bottom: 3px solid #8d8171; */
 	text-transform: uppercase;
 }
@@ -318,7 +319,7 @@ fieldset legend{color: #8e8171; font-size: 16px; text-transform: uppercase;}
 .info-box{
     display: block;
     float: none;
-    padding: 20px;
+    padding: 15px;
     font-size: 13px;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 200;
@@ -331,7 +332,7 @@ fieldset legend{color: #8e8171; font-size: 16px; text-transform: uppercase;}
 .info-box h4{
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 200;
-    font-size: 20px;
+    font-size: 18px;
 	margin-top: 0;
 }
 .info-box p{
@@ -343,7 +344,7 @@ fieldset legend{color: #8e8171; font-size: 16px; text-transform: uppercase;}
 }
 .form-content legend{
 	padding-bottom: 10px;
-	font-size: 23px;
+	font-size: 16px;
 }
 form p.help-block {
 	font-size: 12px;
@@ -415,6 +416,15 @@ form p.help-block {
   content: " ";
   width: 100%;
 }
+
+.form-style .learning-style-form {
+	text-align: left;	
+}
+
+.form-style .learning-style-form ul {
+	list-style: none;
+}
+
 .steps{
 	position: relative;
 }
@@ -473,7 +483,7 @@ li.active .rnd-identifier{
 	width: 100%;
 }
 .dshbrd-con{
-	margin-top: 45px;
+	margin-top: 15px;
 	min-width: 1200px;
 }
 .dshbrd-con .wrapr{
@@ -481,7 +491,7 @@ li.active .rnd-identifier{
 	border-radius: 8px;
 	box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
 	width: 100%;
-	min-height: 900px;
+	min-height: 700px;
 	position: relative;
 	overflow: hidden;
 	margin-bottom: 40px;
@@ -525,21 +535,21 @@ li.active .rnd-identifier{
 }
 .dshbrd-con .content .hdr{
 	background: #065A7F;
-	min-height: 240px;
+	min-height: 150px;
 }
 .avtrcon, .detcon{
-	padding: 40px 0;
+	padding: 20px 0;
 	float: left;
 }
 .avtrcon{
-	width: 25%;
+	width: 30%;
 }
 .detcon{
-	width: 75%;
+	width: 60%;
 }
 .avtrcon img {
-    width: 130px;
-    height: 130px;
+    width: 110px;
+    height: 110px;
     border-radius: 50%;
     border: 5px solid #fff;
     background: #fff;
@@ -548,8 +558,8 @@ li.active .rnd-identifier{
 }
 
 .avatar_list img {
-    width: 200px;
-    height: 200px;
+    width: 100px;
+    height: 100px;
 }
 
 .detcon h1{
@@ -562,14 +572,14 @@ li.active .rnd-identifier{
 }
 .detcon p{
 	color: #fff;
-	font-size: 13px;
+	font-size: 11px;
 	font-weight: 100;
 	letter-spacing: 1.2px;
 	max-width: 330px;
 	line-height: 1.4em;
 }
 .detcon h2{
-	font-size: 36px;
+	font-size: 26px;
  	color:#fff;
 }
 .detcon p{
@@ -585,9 +595,9 @@ li.active .rnd-identifier{
 .rwrdscon h3{
 	font-weight: 100;
 	text-transform: uppercase;
-	padding: 12px 16px;
+	padding: 10px 16px;
 	background: #DEC010;
-	font-size: 18px;
+	font-size: 16px;
 	color: #065A7F;
 	margin: 0;
 	letter-spacing: 0.5px;
@@ -597,7 +607,7 @@ li.active .rnd-identifier{
 	font-weight: 300;
 }
 .points{
-	margin: 20px 0;
+	margin: 14px 0;
 	position: relative;
 }
 .points .pcon span{
@@ -617,17 +627,18 @@ li.active .rnd-identifier{
 }
 .rbn-left, .rbn-right{
 	position: absolute;
-	left: -21px;
-	border-top: 22px solid #DEC010;
-	border-bottom: 21px solid #DEC010;
-	border-left: 21px solid transparent;
-	top: 0;
+	left: -17px;
+	border-top: 18px solid #DEC010;
+	border-bottom: 17px solid #DEC010;
+	border-left: 17px solid transparent;
+	top: -2px;
 }
 .rbn-right{
 	right: -21px;
 	left: auto;
 	border-left: none;
 	border-right: 21px solid transparent;
+	top: -2px;
 }
 .points .star{
 	direction: rtl;
@@ -635,7 +646,6 @@ li.active .rnd-identifier{
 	unicode-bidi: bidi-override;
 	position: absolute;
 	color: #F4DB5A;
-	left: 10px;
 	top: -8px;
 	font-size: 40px;
 	background: #DEC010;
@@ -655,7 +665,7 @@ li.active .rnd-identifier{
 	color: #fff;
 	float: right;
 	font-size: 11px;
-	margin-top: 10px;
+	margin-top: 14px;
 	letter-spacing: 1px;
 	font-weight: lighter;
 	margin-right: 25px;
@@ -666,7 +676,7 @@ li.active .rnd-identifier{
 }
 .dshbrd-con legend{
 	color: #065A7F;
-	font-size: 20px;
+	font-size: 16px;
 }
 .btncon a.btn {
   width: auto;
@@ -687,7 +697,6 @@ li.active .rnd-identifier{
 /*----- FOOTER -----*/
 footer{font:normal 12px/30px arial; }
 .footer {
-	margin-top: 20px;
   position: relative;
   bottom: 0;
   width: 100%;
@@ -904,6 +913,7 @@ div > .btncon > a {
 }
 .hdr > .detcon > h2 {
 	text-transform: uppercase;
+	margin-left: 70px;
 }
 .edit-mail{
 	margin-left: 10px !important;

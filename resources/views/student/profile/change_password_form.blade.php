@@ -9,8 +9,8 @@
         <div class="form-select-password">
           <div class="form_content">
             <ul class="form_password list-unstyled list-inline">
-              <li class="item" ng-repeat="item in image_pass" ng-click="profile.highlightPassword($event)">
-                 <img ng-src="{! item.url !}" alt="{! item.name !}">
+              <li class="item col-xs-4" ng-repeat="item in image_pass" ng-click="profile.highlightPassword($event)">
+                 <img ng-src="{! item.url !}" class="pass-img" alt="{! item.name !}">
                  <input type="hidden" id="image_id" name="image_id" value="{! item.id !}">
               </li>
             </ul>

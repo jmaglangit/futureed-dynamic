@@ -14,7 +14,7 @@ class StudentModule extends Model {
 
     protected $hidden = ['created_by','updated_by','created_at','updated_at','deleted_at'];
 
-    protected $fillable = ['class_id', 'student_id', 'module_id', 'module_status', 'last_viewed_content_id', 'progress', 'date_start',
+    protected $fillable = ['class_id', 'student_id', 'subject_id', 'module_id', 'module_status', 'last_viewed_content_id', 'progress', 'date_start',
         'date_end', 'total_time', 'question_counter', 'wrong_counter','correct_counter', 'running_points', 'points_earned','last_answered_question_id',
         'total_correct_answer','current_difficulty_level', 'created_by','updated_by'];
 
@@ -61,6 +61,16 @@ class StudentModule extends Model {
 		return $this->belongsTo('FutureEd\Models\Core\Question','last_answered_question_id');
 	}
 
+	public function classroom(){
+
+		return $this->belongsTo('FutureEd\Models\Core\Classroom','class_id')->with('subject');
+	}
+
+	public function subject(){
+
+		return $this->belongsTo('FutureEd\Models\Core\Subject','subject_id');
+	}
+
 
 	//-------------scope
 	public function scopeStudentId($query, $student_id){
@@ -95,6 +105,13 @@ class StudentModule extends Model {
 
 		return $query->where('module_status','<>',config('futureed.module_status_failed'));
 
+	}
+
+	public function scopeClassId($query, $class_id){
+
+		$class_id = (array) $class_id;
+
+		return $query->whereIn('class_id',$class_id);
 	}
 
 

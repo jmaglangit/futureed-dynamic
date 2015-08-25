@@ -41,7 +41,7 @@
 			</div>
 		</div>
 		<!-- Main Container -->
-		<div ng-if="!mod.record.module_done">
+		<div ng-if="!mod.record.module_done" class="col-xs-8">
 			<div ng-if="mod.active_contents">
 				<div template-directive template-url="{!! route('student.class.module.partials.contents') !!}"></div>
 			</div>

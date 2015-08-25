@@ -12,9 +12,12 @@ function HelpController($scope, apiService, StudentHelpService, TableService, Se
 	SearchService(self);
 	self.searchDefaults();
 
-	self.setActive = function(active, id) {
+	self.setActive = function(active, id, flag) {
 		self.errors = Constants.FALSE;
-		self.success = Constants.FALSE;
+		if(flag != 1) {
+			self.success = Constants.FALSE;
+		}
+		
 		self.record = {};
 
 		self.active_list = Constants.FALSE;
@@ -241,6 +244,7 @@ function HelpController($scope, apiService, StudentHelpService, TableService, Se
 
 	self.answerRequest = function() {
 		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
 
 		var data = {};
 			data.content = self.record.answer;
@@ -253,7 +257,8 @@ function HelpController($scope, apiService, StudentHelpService, TableService, Se
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
-					self.setActive(Constants.ACTIVE_VIEW, self.record.id);
+					self.success = studentHelp.ANSWER_SUCCESS;
+					self.setActive(Constants.ACTIVE_VIEW, self.record.id, 1);
 				}
 			}
 
@@ -470,7 +475,7 @@ function HelpController($scope, apiService, StudentHelpService, TableService, Se
 		self.record.module_id = self.module.id;
 		self.record.subject_id = self.module.subject_id;
 		self.record.subject_area_id = self.module.subject_area_id;
-		self.record.link_type = (self.module.student_module[0].last_answered_question_id) ? Constants.QUESTION : Constants.CONTENT;
+		self.record.link_type = (self.active_questions) ? Constants.QUESTION : Constants.CONTENT;
 		self.record.link_id = (angular.equals(self.record.link_type, Constants.QUESTION)) ? self.question.id : self.content.id;
 		self.record.class_id = $scope.user.class.id;
 		self.record.student_id = $scope.user.id;

@@ -10,6 +10,8 @@ use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use FutureEd\Models\Repository\User\UserRepositoryInterface;
 use FutureEd\Services\CodeGeneratorServices;
 use FutureEd\Services\MailServices;
+use FutureEd\Models\Repository\ClassStudent\ClassStudentRepositoryInterface;
+use Carbon\Carbon;
 
 class TeacherStudentController extends ApiController {
 
@@ -17,18 +19,21 @@ class TeacherStudentController extends ApiController {
 	protected $user;
 	protected $code;
 	protected $mail;
+	protected $class_student;
 
 	public function __construct(
 		StudentRepositoryInterface $student,
 		UserRepositoryInterface $user,
 		CodeGeneratorServices $code,
-		MailServices $mail
+		MailServices $mail,
+        	ClassStudentRepositoryInterface $class_student
 	)
 	{
 		$this->student = $student;
 		$this->user = $user;
 		$this->code = $code;
 		$this->mail = $mail;
+        	$this->class_student = $class_student;
 
 	}
 
@@ -55,6 +60,16 @@ class TeacherStudentController extends ApiController {
 		if(!$student_detail){
 
 			return $this->respondErrorMessage(2001);
+		}
+
+		//get class student
+		$class_student = $this->class_student->getStudentCurrentClassroom($id);
+
+		if($class_student){
+
+			$data['date_started'] = Carbon::now();
+
+			$this->class_student->updateClassStudent($class_student['id'],$data);
 		}
 
 		//set registration code to NULL

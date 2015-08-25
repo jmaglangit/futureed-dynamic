@@ -140,6 +140,21 @@ class StudentModuleRepository implements StudentModuleRepositoryInterface
 
 	}
 
+	/**
+	 * Get Student Module by Student and Class
+	 * @param $student_id
+	 * @param $class_id
+	 */
+	public function getStudentModuleByClass($student_id, $class_id){
+
+		$class_id = (array) $class_id;
+
+		return StudentModule::with('subject')
+			->studentId($student_id)
+			->classId($class_id)
+			->get();
+	}
+
 
 
 

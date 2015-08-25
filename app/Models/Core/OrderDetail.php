@@ -16,6 +16,8 @@ class OrderDetail extends Model{
 
     protected $fillable = ['order_id','student_id','price','created_by','updated_by'];
 
+    protected $attributes =['created_by' => 1,'updated_by' => 1];
+
     public function student(){
         return $this->belongsTo('FutureEd\Models\Core\Student','student_id','id')->with('user');
     }

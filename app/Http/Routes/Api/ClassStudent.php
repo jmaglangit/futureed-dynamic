@@ -14,8 +14,9 @@ Routes::group([
 		'uses' => 'Api\v1\ClassStudentController@addNewStudent',
 		'as' => 'class-student.add.new.student']);
 
-	Routes::post('/student-join-class', [
-			'uses' => 'Api\v1\ClassStudentController@studentJoinClass',
-			'as' => 'api.v1.class-student.student-join-class'
+	Routes::post('/student-current-class',
+		[
+			'uses' => 'Api\v1\ClassStudentController@studentCurrentClass',
+			'as' => 'api.v1.class-student.student-current-class'
 		]);
 });

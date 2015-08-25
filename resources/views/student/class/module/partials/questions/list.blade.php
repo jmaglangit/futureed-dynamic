@@ -1,4 +1,4 @@
-<div class="questions-container col-xs-8">
+<div class="questions-container col-xs-12">
 	<div class="questions-header">
 		<h3> Question #{! mod.question_counter !} </h3>
 	</div>

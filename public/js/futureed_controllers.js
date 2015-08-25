@@ -60,8 +60,10 @@ function FutureedController($scope, $window, apiService, futureed) {
 						$scope.internalError();
 					});
 				}
-
-				$scope.errors[key] = value.message;
+				
+				if(angular.equals($scope.errors.indexOf(value.message), -1)) {
+					$scope.errors[key] = value.message;
+				}
 			});
 		} else {
 			$scope.errors[0] = errors.message;
@@ -531,7 +533,12 @@ function FutureedController($scope, $window, apiService, futureed) {
 
 
 			if($scope.reg) {
-				$scope.reg.birth_date = $("#registration_form input[name='hidden_date']").val();
+				var bdate = $("#registration_form #birth_date").val();
+				var day = $("#registration_form .day").val();
+				var month = $("#registration_form .month").val();
+				var year = $("#registration_form .year").val();
+
+				$scope.reg.birth_date = year + month + day;
 				$scope.reg.school_code = -1;
 			}
 			
@@ -945,4 +952,5 @@ function FutureedController($scope, $window, apiService, futureed) {
 			$scope.enter_pass = Constants.TRUE;
 		}
 	}
+
 };
