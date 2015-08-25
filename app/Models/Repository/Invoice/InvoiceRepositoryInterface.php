@@ -17,4 +17,6 @@ interface InvoiceRepositoryInterface {
 
 	public function updateInvoice($id, $data);
 
+	public function getInvoiceByOrderNo($order_no);
+
 }

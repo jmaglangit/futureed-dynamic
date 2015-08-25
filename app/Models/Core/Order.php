@@ -13,7 +13,7 @@ class Order extends Model {
 
     protected $hidden = ['created_by','updated_by','created_at','updated_at','deleted_at'];
 
-    protected $fillable = ['order_no','order_date','client_id','subscription_id','date_start','date_end','seats_total','seats_taken','total_amount','payment_status'];
+    protected $fillable = ['order_no','order_date','client_id','subscription_id','date_start','date_end','seats_total','seats_taken','total_amount','payment_status','student_id'];
 
 
 
