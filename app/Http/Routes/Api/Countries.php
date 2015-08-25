@@ -5,9 +5,6 @@
  */
 Routes::group([
 	'prefix' => '/countries',
-	'middleware' => ['api_user','api_after'],
-	'permission' => ['admin','client','student'],
-	'role' => ['principal','teacher','parent','admin','super admin']
 ],function(){
 
 	Routes::get('/',[
