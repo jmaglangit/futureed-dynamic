@@ -101,19 +101,17 @@ Routes::group(['prefix' => '/student'], function()
 		'as' => 'api.v1.student.login.image'
 	]);
 
+	Routes::post('/register', [
+		'uses' => 'Api\v1\StudentRegistrationController@register',
+		'as' => 'api.v1.student.register'
+	]);
+
 
 	Routes::group([
 		'middleware' => ['api_user', 'api_after'],
 		'permission' => ['student'],
 		'role' => ['principal', 'teacher', 'parent', 'admin', 'super admin']
 	], function () {
-
-
-		Routes::post('/register', [
-			'uses' => 'Api\v1\StudentRegistrationController@register',
-			'as' => 'api.v1.student.register'
-		]);
-
 
 		/**
 		 * Student registration by invite
