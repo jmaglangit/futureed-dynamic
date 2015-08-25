@@ -179,6 +179,13 @@ class InvoiceRepository implements InvoiceRepositoryInterface{
         }
     }
 
+
+	/**
+	 * get invoice by order_no.
+	 * @param $order_no
+	 * @return bool|null|string
+	 */
+
 	public function getInvoiceByOrderNo($order_no){
 
 		$invoice = new Invoice();
