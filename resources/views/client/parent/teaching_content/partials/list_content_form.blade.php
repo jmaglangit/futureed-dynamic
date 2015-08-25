@@ -1,10 +1,10 @@
 <div class="container search-container" ng-if="content.active_list">
 	<div class="title-mid">
 		<span>Teaching Content</span>
-		<div class="pull-right col-xs-4" ng-if="!content.no_content">
+		<div class="pull-right col-xs-4 btn-right" ng-if="!content.no_content">
 			<a class="btn btn-medium btn-maroon pull-right" href="{!! route('client.parent.question.index') !!}">Skip</a>	
 		</div>
-		<div class="pull-right col-xs-4" ng-if="content.no_content">
+		<div class="pull-right col-xs-4 btn-right" ng-if="content.no_content">
 			<a class="btn btn-medium btn-gold pull-right" href="{!! route('client.parent.module.index') !!}">Back</a>
 		</div>	
 	</div>

@@ -1,4 +1,4 @@
-<div class="container search-container" ng-if="module.active_view">
+<div class="col-xs-12 search-container" ng-if="module.active_view">
 	<div class="title-mid">
 		<span>Module Details</span>		
 	</div>
@@ -9,8 +9,8 @@
 			)
 		) !!}
 		<div class="form-group">
-			<label class="control-label col-xs-3">Module</label>
-			<div class="col-xs-5">
+			<label class="control-label col-xs-2">Module</label>
+			<div class="col-xs-4">
 				{!! Form::text('module', ''
 					, array(
 						'ng-disabled'=>'true'
@@ -20,10 +20,8 @@
 					)
 				) !!}
 			</div>
-		</div>
-		<div class="form-group">
-			<label class="control-label col-xs-3">Subject</label>
-			<div class="col-xs-5">
+			<label class="control-label col-xs-2">Subject</label>
+			<div class="col-xs-4">
 				{!! Form::text('subject', ''
 					, array(
 						'ng-disabled'=>'true'
@@ -35,8 +33,8 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="control-label col-xs-3">Area</label>
-			<div class="col-xs-5">
+			<label class="control-label col-xs-2">Area</label>
+			<div class="col-xs-4">
 				{!! Form::text('area', ''
 					, array(
 						'ng-disabled'=>'true'
@@ -46,10 +44,8 @@
 					)
 				) !!}
 			</div>
-		</div>
-		<div class="form-group">
-			<label class="control-label col-xs-3">Grade</label>
-			<div class="col-xs-5">
+			<label class="control-label col-xs-2">Grade</label>
+			<div class="col-xs-4">
 				{!! Form::text('grade', ''
 					, array(
 						'ng-disabled'=>'true'
@@ -61,8 +57,8 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="control-label col-xs-3">Common Core Area</label>
-			<div class="col-xs-5">
+			<label class="control-label col-xs-2">Common Core Area</label>
+			<div class="col-xs-4">
 				{!! Form::text('core_area', ''
 					, array(
 						'ng-disabled'=>'true'
@@ -72,10 +68,8 @@
 					)
 				) !!}
 			</div>
-		</div>
-		<div class="form-group">
-			<label class="control-label col-xs-3">Common Core URL</label>
-			<div class="col-xs-5">
+			<label class="control-label col-xs-2">Common Core URL</label>
+			<div class="col-xs-4">
 				{!! Form::text('core_area', ''
 					, array(
 						'ng-disabled'=>'true'
@@ -87,14 +81,15 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label class="control-label col-xs-3">Description</label>
-			<div class="col-xs-5">
+			<label class="control-label col-xs-2">Description</label>
+			<div class="col-xs-10">
 				{!! Form::textarea('description', ''
 					, array(
 						'ng-disabled'=>'true'
 						, 'class' => 'form-control disabled-textarea'
 						, 'ng-model' => 'module.record.description'
 						, 'placeholder' => 'Description'
+						, 'rows' => '5'
 					)
 				) !!}
 			</div>

@@ -5,7 +5,7 @@
 		</div>
 	</div>
 	<div class="col-xs-12 form-container">
-		<div class="alert-container">
+		<div class="alert-container" ng-if="payment.errors || payment.success">
 			<div class="alert alert-error" ng-if="payment.errors">
 	            <p ng-repeat="error in payment.errors track by $index" > 
 	              	{! error !}
@@ -100,7 +100,7 @@
 			            <th>Total # of Seats</th>
 			            <th>Status</th>
 			            <th>Total Price</th>
-			            <th>Actions</th>
+			            <th class="width-100">Actions</th>
 			        </tr>
 			    </thead>
 

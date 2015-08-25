@@ -5,12 +5,18 @@
 @stop
 
 @section('content')
-	<div class="container dshbrd-con" ng-controller="ManageParentModuleController as module" ng-cloak>
+	<div class="container dshbrd-con" ng-controller="ManageParentModuleController as module" ng-init="module.active = '{!! $active !!}'" ng-cloak>
+		<input type="hidden" value="{!! $active !!}">
 		<div template-directive template-url="{!! route('client.partials.base_url') !!}"></div>
 
 		<div class="wrapr" ng-init="module.setActive()">
-			<div template-directive template-url="{!! route('client.parent.module.partials.list_module_form') !!}"></div>
-			<div template-directive template-url="{!! route('client.parent.module.partials.view_module') !!}"></div>
+			<div class="client-nav side-nav">
+				@include('client.partials.dshbrd-side-nav')			
+			</div>
+			<div class="client-content">
+				<div template-directive template-url="{!! route('client.parent.module.partials.list_module_form') !!}"></div>
+				<div template-directive template-url="{!! route('client.parent.module.partials.view_module') !!}"></div>
+			</div>
 		</div>
 	</div>
 
