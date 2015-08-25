@@ -14,8 +14,8 @@ class AddImageColumnOnModuleTable extends Migration {
 	{
 		Schema::table('modules', function(Blueprint $table){
 
-			$table->string('icon_image', 256)->after('name');
-			$table->string('original_icon_image',256)->after('icon_image');
+			$table->string('icon_image', 256)->nullable()->after('name');
+			$table->string('original_icon_image',256)->nullable()->after('icon_image');
 		});
 	}
 
