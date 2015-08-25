@@ -114,7 +114,7 @@ function LearningStyleController($rootScope, $scope, $interval, $filter, $sce, $
 					question_code_id: q.question_code_id,
 					seq_no: null,
 					test_question_id: q.id,
-					question_code_detail_id: null,
+					question_code_detail_id: q.question_code_detail_id,
 					answers: q.user_answers
 				}
 				
