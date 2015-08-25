@@ -35,8 +35,8 @@ class DatabaseSeeder extends Seeder {
 		$this->call('BadgesTableSeeder');
 		$this->command->info('BadgesTableSeeder seeded!');
 		
-		$this->call('ClassroomTableSeeder');
-		$this->command->info('ClassroomTableSeeder seeded!');
+		#$this->call('ClassroomTableSeeder');
+		#$this->command->info('ClassroomTableSeeder seeded!');
 		
 		#$this->call('ClientTableSeeder');
 		#$this->command->info('ClientTableSeeder seeded!');
@@ -104,7 +104,14 @@ class DatabaseSeeder extends Seeder {
 		#$this->call('UsersTableSeeder');
 		#$this->command->info('UsersTableSeeder seeded!');
 		
-		$this->command->info('OPTIONAL: Do individual seeding for the following: UsersTableSeeder, StudentsTableSeeder, SchoolsTableSeeder, OrdersTableSeeder, ClientTableSeeder, AdminTableSeeder');
+		$this->command->info('OPTIONAL: Do individual seeding for the following:');
+		$this->command->info('AdminTableSeeder');
+		$this->command->info('ClassroomTableSeeder');
+		$this->command->info('ClientTableSeeder');
+		$this->command->info('OrdersTableSeeder');
+		$this->command->info('SchoolsTableSeeder');
+		$this->command->info('StudentsTableSeeder');
+		$this->command->info('UsersTableSeeder');
 
     }
 
