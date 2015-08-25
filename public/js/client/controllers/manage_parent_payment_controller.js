@@ -509,7 +509,6 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 
 		$scope.ui_block();
 		ManageParentPaymentService.paySubscription(self.invoice).success(function(response) {
-			console.log(response)
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
@@ -705,7 +704,6 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 	self.getSubject = function() {
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
-		console.log('x')
 
 		ManageParentPaymentService.getSubject().success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {

@@ -66,7 +66,6 @@ function ManageParentModuleController($scope, clientProfileApiService, ManagePar
 	}
 
 	self.list = function() {
-		console.log(self.active)
 		if(self.active_list) {
 			self.listModule();
 		}
