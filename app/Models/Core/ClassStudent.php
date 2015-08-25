@@ -42,7 +42,7 @@ class ClassStudent extends Model {
 
 	public function classroom()
 	{
-		return $this->belongsTo('FutureEd\Models\Core\Classroom', 'class_id', 'id')->with('order');
+		return $this->belongsTo('FutureEd\Models\Core\Classroom', 'class_id', 'id')->with('subject','order');
 	}
 
 
