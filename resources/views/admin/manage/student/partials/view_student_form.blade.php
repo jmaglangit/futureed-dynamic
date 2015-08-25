@@ -1,10 +1,10 @@
 <div ng-if="student.active_view || student.active_edit">
-	<div class="content-title">
-		<div class="title-main-content">
+    <div class="content-title">
+        <div class="title-main-content">
             <span ng-if="client.active_view">View Student Details</span>
             <span ng-if="client.active_edit">Edit Student Details</span>
-		</div>
-	</div>
+        </div>
+    </div>
 
     <div class="col-xs-12 success-container" ng-if="student.errors || student.success">
         <div class="alert alert-error" ng-if="student.errors">
