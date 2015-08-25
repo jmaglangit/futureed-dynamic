@@ -52,6 +52,10 @@ class InvoiceRepository implements InvoiceRepositoryInterface{
                 if (isset($criteria['client_id'])) {
                     $invoice = $invoice->with('subscription')->clientId($criteria['client_id']);
                 }
+
+                if (isset($criteria['student_id'])) {
+	                $invoice = $invoice->with('subscription')->studentId($criteria['student_id']);
+                }
             }
 
 
@@ -174,6 +178,22 @@ class InvoiceRepository implements InvoiceRepositoryInterface{
             return $e->getMessage();
         }
     }
+
+
+	/**
+	 * get invoice by order_no.
+	 * @param $order_no
+	 * @return bool|null|string
+	 */
+
+	public function getInvoiceByOrderNo($order_no){
+
+		$invoice = new Invoice();
+
+		//query relation to subscription and invoice_detail
+		return $invoice = $invoice->with('subscription')->with('InvoiceDetail')->order($order_no)->get();
+
+	}
 
 
 

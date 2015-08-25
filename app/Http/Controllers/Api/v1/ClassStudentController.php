@@ -189,7 +189,7 @@ class ClassStudentController extends ApiController {
 
 		//check classroom has not expired.
 		$classroom_status = $this->classroom_services->checkActiveClassroom($data['class_id']);
-
+		
 		if(!$classroom_status){
 
 			return $this->respondErrorMessage(2051);
@@ -200,13 +200,6 @@ class ClassStudentController extends ApiController {
 
 		if($isEnrolled){
 
-			return $this->respondErrorMessage(2125);// Student is already in the class.
-		}
-
-		//Get current school if exist.
-		$classroom = $this->class_student->getStudentCurrentClassroom($student_id);
-
-		if ($classroom) {
 			return $this->respondErrorMessage(2125);// Student is already in the class.
 		}
 
@@ -250,7 +243,7 @@ class ClassStudentController extends ApiController {
 	 * @param $id
 	 * @return mixed
 	 */
-	public function studentJoinClass(ClassStudentRequest $request){
+	public function studentCurrentClass(ClassStudentRequest $request){
 
 		return $this->respondWithData(
 			$this->student->getCurrentClass($request->get('student_id'))
