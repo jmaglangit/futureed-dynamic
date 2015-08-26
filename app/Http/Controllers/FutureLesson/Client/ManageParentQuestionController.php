@@ -12,7 +12,7 @@ class ManageParentQuestionController extends Controller{
 	*@return Question Index
 	*/
 	public function index() {
-		return view('client.parent.question.index');
+		return view('client.parent.question.index',['active' => 'module']);
 	}
 
 	/**

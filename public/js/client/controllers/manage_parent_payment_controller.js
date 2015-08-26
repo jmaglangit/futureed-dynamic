@@ -25,6 +25,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 		self.errors = Constants.FALSE;
 		self.cond = (cond) ? 1:0;
 		self.getClientDiscount(self.user_id);
+		self.validation = {};
 
 		if(self.cond == 0){
 			self.success = Constants.FALSE;
