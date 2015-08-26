@@ -256,9 +256,7 @@ class ClassStudentController extends ApiController {
 
 		$this->class_student->updateClassStudent($id,$data);
 
-		dd($this->class_student->getClassStudent($id));
-
-		return $this->respondWithData($this->class_student->getClassStudent($id));
+		return $this->respondWithData($this->class_student->getClassStudentById($id));
 
 	}
 
