@@ -12,7 +12,7 @@ class ManageParentContentController extends Controller{
 	*@return Parent Content Index
 	*/
 	public function index() {
-		return view('client.parent.teaching_content.index');
+		return view('client.parent.teaching_content.index',['active' => 'module']);
 	}
 
 	/**

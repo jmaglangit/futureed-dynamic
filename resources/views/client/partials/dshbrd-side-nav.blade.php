@@ -35,7 +35,7 @@
 	<li class="client-nav" ng-class="{ 'tab-active' : payment.active == 'payment' }">
 		<a href="{{ route('client.parent.payment.index') }}"><span><i class="fa fa-edit"></i></span>Payment</a>
 	</li>
-	<li class="client-nav" ng-class="{ 'tab-active' : module.active == 'module' }">
+	<li class="client-nav" ng-class="{ 'tab-active' : module.active == 'module' || content.active == 'module' || question.active == 'module'}">
 		<a href="{{ route('client.parent.module.index') }}"><span><i class="fa fa-cubes"></i></span>Module</a>
 	</li>
 </ul>

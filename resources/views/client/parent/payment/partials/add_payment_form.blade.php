@@ -19,7 +19,7 @@
         	<p>Successfully removed Student</p>
         </div>
         <fieldset class="payment-field">
-        	<span class="step">1</span>
+        	<span class="step">1</span><p class="step-label">Please Select a Subject</p>
         	<div class="form-group">
         		<label class="col-xs-2 control-label">Subject <span class="required">*</span></label>
         		<div class="col-xs-5">
@@ -32,7 +32,7 @@
         </fieldset>
         <hr/>
         <fieldset class="payment-field">
-        	<span class="step">2</span>
+        	<span class="step">2</span><p class="step-label">Please Select an Email or a Name of a Student.</p>
         	<div class="form-group group-0">
         		<label class="col-xs-2 control-label" id="email">Email<span class="required">*</span></label>
         		<div class="col-xs-5">

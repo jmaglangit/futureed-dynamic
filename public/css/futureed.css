@@ -68,7 +68,7 @@ header, body, footer {
 
 /*----- BUTTON -----*/
 .btn {
-	font-size: 14px;
+	font-size: 12px;
 	width: 100%;
 	color: #fff;
 	font-weight: 100;
@@ -86,7 +86,7 @@ header, body, footer {
 }
 
 .btn-container .btn{
-	margin: 10px;
+	margin-right: 10px;
 }
 
 .btn-small {
@@ -267,8 +267,9 @@ fieldset legend{color: #8e8171; font-size: 16px; text-transform: uppercase;}
 
 /*----- BOOTSTRAP -----*/
 .form-control {
-	height: 40px;
+	height: 30px;
 	border: 1px solid #CCCCCC;
+	font-size: 12px !important;
 }
 .navbar{
 	border-radius: 0px;
@@ -939,7 +940,7 @@ div > .btncon > a {
 	color: #a94442;
   	background-color: #f2dede;
   	border-color: #ebccd1;
-  	font-size: 15px;
+  	font-size: 12px;
   	margin-left: 60px;
   	padding: 10px;
   	text-align: left;
