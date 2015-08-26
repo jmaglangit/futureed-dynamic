@@ -250,6 +250,12 @@ class ClassStudentController extends ApiController {
 		);
 	}
 
+	/**
+	 * Remove student from the class.
+	 * @param $id
+	 * @return mixed
+	 */
+
 	public function removeStudentClass($id){
 
 		$data['date_removed'] = Carbon::now();
