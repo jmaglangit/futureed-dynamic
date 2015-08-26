@@ -19,7 +19,7 @@ class InvoiceDetail extends Model {
 
     public function classroom() {
 
-        return $this->belongsTo('FutureEd\Models\Core\Classroom','class_id','id')->with('client','subject');
+        return $this->belongsTo('FutureEd\Models\Core\Classroom','class_id','id')->with('client','subject','classStudent');
     }
 
     public function invoice(){
