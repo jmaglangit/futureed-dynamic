@@ -113,9 +113,11 @@
                                     , 'ng-model-options' => "{debounce : {'default' : 1000}}"
                                     , 'ng-change' => "checkAvailability(reg.username, 'Student')")
                             ) !!}
+                            <div class="check-ico">
+                                <i ng-if="u_success" class="fa fa-check success-color"></i>
+                            </div>
                             <div class="reg-info"> 
                                 <i ng-if="u_loading" class="fa fa-spinner fa-spin"></i>
-                                <i ng-if="u_success" class="fa fa-check success-color"></i>
                                 <span ng-if="u_error" class="error-msg-con">{! u_error !}</span>
                             </div>
                         </div>
@@ -129,9 +131,11 @@
                                     , 'ng-model-options' => "{debounce : {'default' : 1000}}"
                                     , 'ng-change' => "checkEmailAvailability(reg.email, 'Student')")
                             ) !!}
+                            <div class="check-ico">
+                                <i ng-if="e_success" class="fa fa-check success-color"></i>
+                            </div>
                             <div class="reg-info">
                                 <i ng-if="e_loading" class="fa fa-spinner fa-spin"></i>
-                                <i ng-if="e_success" class="fa fa-check success-color"></i>
                                 <span ng-if="e_error" class="error-msg-con">{! e_error !}</span>
                             </div>
                         </div>

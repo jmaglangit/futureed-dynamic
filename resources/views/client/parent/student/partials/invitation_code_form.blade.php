@@ -4,7 +4,7 @@
 			<span>Invitation Code</span>
 		</div>
 	</div>
-	<div class="container form-content">
+	<div class="col-xs-12 form-content">
 		<div class="alert alert-error" ng-if="student.errors">
             <p ng-repeat="error in student.errors track by $index" > 
                 {! error !}

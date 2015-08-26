@@ -8,7 +8,7 @@
 		</div>
 	</div>
 	{!! Form::open(['class' => 'form-horizontal', 'id' => 'student_form']) !!}
-	<div class="container form-content">
+	<div class="col-xs-12 form-content">
 		<div class="alert alert-error" ng-if="student.errors">
             <p ng-repeat="error in student.errors track by $index" > 
               	{! error !}
@@ -21,7 +21,7 @@
         <div class="alert alert-success" ng-if="student.e_success">
         	<p>{! student.e_success !}</p>
         </div>
-		<div class="col-xs-10 col-xs-offset-1 margin-30-top">
+		<div class="col-xs-10 col-xs-offset-1">
 			<fieldset>
 				<legend class="legend-name-mid">
 					User Credentials
@@ -179,7 +179,7 @@
 				</div>
 			</fieldset>
 			<div class="col-xs-12">
-				<div class="row margin-150-bot">
+				<div class="row">
 					<div class="col-md-6 col-md-offset-3 btn-container">
 						{!! Form::button('Edit'
 							, array(

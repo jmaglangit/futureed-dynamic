@@ -76,10 +76,8 @@ function ManageParentPaymentService($http){
 	managePaymentApi.addStudentOrderByEmail = function(data) {
 		return $http({
 			method 	: Constants.METHOD_POST
-			, url 	: paymentApiUrl + 'parent-student/add-students-by-email?email=' + data.email
-				+ '&parent_id=' + data.parent_id
-				+ '&order_id=' + data.order_id
-				+ '&price=' + data.price
+			, data 	: data
+			, url 	: paymentApiUrl + 'parent-student/add-students-by-email'
 		})
 	}
 
@@ -101,10 +99,8 @@ function ManageParentPaymentService($http){
 	managePaymentApi.addStudentOrderByUsername = function(data) {
 		return $http({
 			method 	: Constants.METHOD_POST
-			, url 	: paymentApiUrl + 'parent-student/add-students-by-username?username=' + data.username
-				+ '&parent_id=' + data.parent_id
-				+ '&order_id=' + data.order_id
-				+ '&price=' + data.price
+			, data 	: data
+			, url 	: paymentApiUrl + 'parent-student/add-students-by-username'
 		})
 	}
 
@@ -135,6 +131,13 @@ function ManageParentPaymentService($http){
 		return $http({
 			method : Constants.METHOD_PUT
 			, url  : paymentApiUrl + 'invoice/cancel-invoice/' + id
+		});
+	}
+
+	managePaymentApi.getSubject = function() {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url 	: paymentApiUrl + 'subject'
 		});
 	}
 	return managePaymentApi;

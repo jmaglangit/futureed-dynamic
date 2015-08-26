@@ -12,7 +12,7 @@ class ManageParentModuleController extends Controller{
 	*@return Module Index View
 	*/
 	public function index() {
-		return view('client.parent.module.index');
+		return view('client.parent.module.index',['active' => 'module']);
 	}
 
 	/**

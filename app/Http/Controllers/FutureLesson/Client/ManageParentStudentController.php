@@ -13,7 +13,7 @@ class ManageParentStudentController extends Controller{
 	*/
 	public function index()
 	{
-		return view('client.parent.student.index');
+		return view('client.parent.student.index',['active' => 'student']);
 	}
 
 	/**

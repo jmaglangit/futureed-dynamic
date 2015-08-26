@@ -4,7 +4,7 @@
     @include('client.partials.main-nav')
 @stop
 @section('content')
-	<div class="container dshbrd-con" ng-controller="ProfileController as profile" ng-cloak>
+	<div class="container dshbrd-con" ng-controller="ProfileController as profile" ng-init="profileActive = futureed.TRUE" ng-cloak>
   		
   		<div template-directive template-url="{!! route('client.partials.base_url') !!}"></div>
 
