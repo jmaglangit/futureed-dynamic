@@ -27,5 +27,7 @@ interface ClassStudentRepositoryInterface {
 
 	public function getClassStudentByClassId($class_id);
 
+	public function getClassStudentById($id);
+
 
 }
