@@ -158,7 +158,7 @@ return [
 
 	//path for icon to uploaded final images
 	'icon_image_path_final' => base_path() . '/public/uploads/icon',
-	'icon_image_path_final_public' => base_path() . '/uploads/icon',
+	'icon_image_path_final_public' => '/uploads/icon',
 
 
 	//answer status
