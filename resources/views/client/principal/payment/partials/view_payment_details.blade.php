@@ -17,8 +17,21 @@
 		        <div class="alert alert-success" ng-if="payment.success">
 		        	<p>{! payment.success !}</p>
 		        </div>
-
-		        <fieldset>
+		        <fieldset class="payment-field">
+		        	<span class="step">1</span><p class="step-label">Please Select a Subject</p>
+		        	<div class="form-group">
+		        		<label class="col-xs-4 control-label">Subject <span class="required">*</span></label>
+		        		<div class="col-xs-4">
+		        			<select class="form-control" id="subject_id" name="subject_id" ng-disabled="payment.subjects.length <= 0" ng-model="payment.invoice.subject_id" ng-class="{ 'required-field' : payment.fields['subject_id'] }">
+			                        <option value="">-- Select Subject --</option>
+			                        <option ng-selected="payment.invoice.subject_id == subject.id" ng-repeat="subject in payment.subjects" ng-value="subject.id">{! subject.name !}</option>
+			                    </select>
+		        		</div>
+		        	</div>
+		        </fieldset>
+		        <hr/>
+		        <fieldset class="payment-field">
+		        	<span class="step">2</span><p class="step-label">Please Add Classroom</p>
 		        	<div class="form-group">
 		        		<label class="col-xs-4 control-label" id="email">Number of Seats <span class="required">*</span></label>
 		        		<div class="col-xs-4">
@@ -111,42 +124,32 @@
 			</div>
 		{!! Form::close() !!}
 	</div>
+	<div class="clearfix"></div>
+	<div class="search-container" ng-if="payment.invoice.payment_status == 'Paid'">
+	<hr/>
+		<h4>BILLING INVOICE</h4>
+		<div class="invoice-group">
+			<p>Ref: KCGA {! payment.invoice.client_name !} {! payment.invoice.id !} / {!! date('Y') !!}</p>
+		</div>
+		<div class="invoice-group">
+			<p>Date : {{ date('d/m/Y') }}</p>
+		</div>
+		<div class="invoice-group">
+			<p>Kosh Consulting Group (Asia) Pte. Ltd.<br/>
+				545 Orchard Road, #03-24<br/>
+				Far East Shopping Centre<br/>
+				Singapore 238882</p>
+		</div>
 
-	<div class="col-xs-7 search-container">
-		<div class="form-search" ng-init="payment.getSchoolCode()">
-			{!! Form::open(
-					[
-						'id' => 'search_form',
-						'class' => 'form-horizontal'
-					]
-			) !!}
-			<div class="form-group">
-				<label class="col-xs-12">
-					<p class="title-main-content">{! payment.school.school_name !}</p>
-				</label>
-			</div>
-			<div class="form-group">
-				<label class="col-xs-4 control-label">Contact name : </label>
-				<p class="col-xs-8 control-label pull-left">
-					{! payment.school.school_contact_name !}
-				</p>
-			</div>
-			<div class="form-group">
-				<label class="col-xs-4 control-label">Contact Number : </label>
-				<p class="col-xs-8 control-label pull-left">
-					{! payment.school.school_contact_number !}
-				</p>
-			</div>
-			<div class="form-group">
-				<label class="col-xs-4 control-label">School Address : </label>
-				<p class="col-xs-8 control-label pull-left">
-					{! payment.school.school_street_address !}
-				</p>
-			</div>
-			{!! Form::close() !!}
+		<div class="invoice-group">
+			<p>Bill to: {! payment.invoice.client_name !} <br/>
+			{! payment.user.street_address !}
+			{! payment.user.city !}
+			{! payment.user.state !}<br/>
+			Attention: {! payment.school.school_contact_name !}</span>	
+			</p>
 		</div>
 	</div>
-
 	<div class="col-xs-12 search-container">
 		<div class="form-search">
 			{!! Form::open(
@@ -286,26 +289,42 @@
 				</div>
 			</div>
 		</div>
-
+		<div class="col-xs-12">
+			<hr/>
+			<div ng-if="payment.invoice.payment_status == 'Paid'">
+				<div class="invoice-group">
+					<p>No signature required.<br/>
+					Electronic Invoice</p>
+				</div>
+				<div class="invoice-group">
+					<p>Payment Methods:<br/>
+					Cheque/Draft to: KOSH CONSULTING GROUP  (ASIA) PTE. LTD.<br/>
+					Direct Credit to:<br/>
+					OCBC Bacnk: <br/>
+					Bank Account: 529-871345-001.<br/>
+					Bank Code: 7339; Branch Code: 529; SWIFT Code: OCBCSGSG</p>
+				</div>
+			</div>
+		</div>	
 		<div class="col-xs-12 margin-30-bot">
 			<div class="btn-container" ng-if="payment.invoice.payment_status == futureed.PENDING">
         		{!! Form::button('Delete Subscription'
         			, array(
-        				'class' => 'btn btn-gold btn-small div-right'
+        				'class' => 'btn btn-gold btn-semi-medium div-right'
         				, 'ng-click' => 'payment.deleteInvoice(payment.invoice.id)'
         			)
         		) !!}
 
         		{!! Form::button('Save Subscription'
         			, array(
-        				'class' => 'btn btn-blue btn-small div-right'
+        				'class' => 'btn btn-blue btn-semi-medium div-right'
         				, 'ng-click' => 'payment.savePayment()'
         			)
         		) !!}
 
         		{!! Form::button('Pay Subscription'
         			, array(
-        				'class' => 'btn btn-blue btn-small div-right'
+        				'class' => 'btn btn-blue btn-semi-medium div-right'
         				, 'ng-click' => 'payment.addPayment()'
         			)
         		) !!}
@@ -313,14 +332,14 @@
 			<div class="btn-container" ng-if="payment.invoice.payment_status !== futureed.PENDING">
 				{!! Form::button('View List'
         			, array(
-        				'class' => 'btn btn-gold btn-small div-right'
+        				'class' => 'btn btn-gold btn-semi-medium div-right'
         				, 'ng-click' => 'payment.setActive()'
         			)
         		) !!}
 
 				{!! Form::button('Renew Subscription'
         			, array(
-        				'class' => 'btn btn-blue btn-small div-right'
+        				'class' => 'btn btn-blue btn-semi-medium div-right'
         				, 'ng-disabled' => 'true'
         				, 'ng-click' => 'payment.addPayment()'
         				, 'ng-if' => "payment.invoice.payment_status == 'Paid'"

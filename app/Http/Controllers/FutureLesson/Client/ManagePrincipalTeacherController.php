@@ -13,7 +13,7 @@ class ManagePrincipalTeacherController extends Controller{
 	*/
 	public function index()
 	{
-		return view('client.principal.teacher.index');
+		return view('client.principal.teacher.index',['active' => 'teacher']);
 	}
 
 	/**
