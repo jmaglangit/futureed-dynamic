@@ -71,7 +71,7 @@ class ClassroomRepository implements ClassroomRepositoryInterface{
      */
     public function getClassroom($id){
 
-        $return = Classroom::with('order','grade','client','subject')->find($id);
+        $return = Classroom::with('order','grade','client','subject','classStudent')->find($id);
 
         return $return;
     }
