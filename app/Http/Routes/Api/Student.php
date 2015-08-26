@@ -33,19 +33,26 @@ Routes::group(['prefix' => '/student'], function()
 		]);
 	});
 
+	/**
+	 * Student new password.
+	 */
+	Routes::post('/password/new', [
+		'uses' => 'Api\v1\StudentPasswordController@confirmNewImagePassword',
+		'as' => 'api.v1.student.password.new'
+	]);
+
+	/**
+	 * Student password image
+	 */
+	Routes::get('/password/image', [
+		'uses' => 'Api\v1\StudentPasswordController@getPasswordImages',
+		'as' => 'api.v1.student.password.image'
+	]);
+
 	Routes::group([
 		'middleware' => ['api_user', 'api_after'],
 		'permission' => ['student'],
 	], function () {
-
-		/**
-		 * Student new password.
-		 */
-		Routes::post('/password/new', [
-			'uses' => 'Api\v1\StudentPasswordController@confirmNewImagePassword',
-			'as' => 'api.v1.student.password.new'
-		]);
-
 
 		Routes::post('/password/reset', [
 			'uses' => 'Api\v1\StudentPasswordController@passwordReset',
@@ -62,14 +69,6 @@ Routes::group(['prefix' => '/student'], function()
 			'as' => 'api.v1.student.password'
 		]);
 	});
-
-	/**
-	 * Student password image
-	 */
-	Routes::get('/password/image', [
-		'uses' => 'Api\v1\StudentPasswordController@getPasswordImages',
-		'as' => 'api.v1.student.password.image'
-	]);
 
     // NOTE: Token to be inserted on success login.
 	Routes::group([
