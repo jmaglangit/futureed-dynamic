@@ -201,8 +201,8 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 	}
 
 	/**
-	 * get the class student record by class_id.
-	 * @param $student_id,$class_id
+	 * get the class student record by id.
+	 * @param $id
 	 */
 	public function getClassStudentById($id)
 	{
