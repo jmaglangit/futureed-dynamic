@@ -19,13 +19,28 @@ class Module extends Model
 		'updated_at',
 		'deleted_at'];
 
-	protected $fillable = ['subject_id', 'subject_area_id', 'grade_id', 'code', 'name', 'description', 'common_core_area'
-                              ,'common_core_url', 'points_to_unlock', 'points_to_finish', 'status', 'created_by', 'updated_by'];
+	protected $fillable = [
+		'subject_id',
+		'subject_area_id',
+		'grade_id',
+		'code',
+		'name',
+		'icon_image',
+		'original_icon_image',
+		'description',
+		'common_core_area',
+		'common_core_url',
+		'points_to_unlock',
+		'points_to_finish',
+		'status',
+		'created_by',
+		'updated_by'];
 
 	protected $attributes = [
 		'created_by' => 1,
 		'updated_by' => 1,
 		'grade_id' => 0,
+		'points_earned' => 0
 	];
 
 	//-------------relationships

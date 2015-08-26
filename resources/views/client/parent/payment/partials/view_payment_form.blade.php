@@ -5,7 +5,7 @@
 		</div>
 	</div>
 	{!! Form::open(array('id'=> 'add_payment_form', 'class' => 'form-horizontal')) !!}
-	<div class="container form-content">
+	<div class="col-xs-12 form-content">
 		<div class="alert alert-error" ng-if="payment.errors">
             <p ng-repeat="error in payment.errors track by $index" > 
               	{! error !}
@@ -15,7 +15,21 @@
         <div class="alert alert-success" ng-if="payment.add.success">
         	<p>Successfully added Student</p>
         </div>
+        <fieldset class="payment-field">
+        	<span class="step">1</span>
+        	<div class="form-group">
+        		<label class="col-xs-2 control-label">Subject <span class="required">*</span></label>
+        		<div class="col-xs-5">
+        			<select class="form-control" id="subject_id" name="subject_id" ng-disabled="payment.subjects.length <= 0" ng-model="payment.invoice.subject_id" ng-class="{ 'required-field' : payment.fields['subject_id'] }">
+	                        <option value="">-- Select Subject --</option>
+	                        <option ng-selected="payment.invoice.subject_id == subject.id" ng-repeat="subject in payment.subjects" ng-value="subject.id">{! subject.name !}</option>
+	                    </select>
+        		</div>
+        	</div>
+        </fieldset>
+        <hr/>
         <fieldset ng-if="payment.invoice.payment_status == 'Pending'">
+        	<span class="step">2</span>
         	<div class="form-group">
         		<label class="col-xs-2 control-label" id="email">Email<span class="required">*</span></label>
         		<div class="col-xs-5">
@@ -239,25 +253,25 @@
 			<div class="clearfix"></div>
 		</div>
 	</div>
-	<div class="container margin-30-bot">
-		<div class="btn-container margin-30-top">
+	<div class="col-xs-12 margin-30-bot">
+		<div class="btn-container">
 			{!! Form::button('Delete Subscription'
 				, array(
-					'class' => 'btn btn-gold btn-small div-right'
+					'class' => 'btn btn-gold btn-semi-medium div-right'
 					, 'ng-click' => "payment.deleteInvoice(payment.invoice.id)"
 					, 'ng-if' => "payment.invoice.payment_status == 'Pending'"
 				)
 			) !!}
 			{!! Form::button('View List'
 				, array(
-					'class' => 'btn btn-gold btn-small div-right'
+					'class' => 'btn btn-gold btn-semi-medium div-right'
 					, 'ng-click' => "payment.setActive('list')"
 					, 'ng-if' => "payment.invoice.payment_status != 'Pending'"
 				)
 			) !!}
 			{!! Form::button('Renew Subscription'
 				, array(
-					'class' => 'btn btn-blue btn-small div-right'
+					'class' => 'btn btn-blue btn-semi-medium div-right'
 					, 'ng-click' => 'payment.renew()'
 					, 'ng-if' => "payment.invoice.payment_status == 'Paid'"
 					, 'ng-disabled' => 'true'
@@ -265,14 +279,14 @@
 			) !!}
 			{!! Form::button('Save Subscription'
 				, array(
-					'class' => 'btn btn-blue btn-small div-right'
+					'class' => 'btn btn-blue btn-semi-medium div-right'
 					, 'ng-click' => "payment.savePayment('view')"
 					, 'ng-if' => "payment.invoice.payment_status == 'Pending'"
 				)
 			) !!}
 			{!! Form::button('Pay Subscription'
 				, array(
-					'class' => 'btn btn-blue btn-small div-right'
+					'class' => 'btn btn-blue btn-semi-medium div-right'
 					, 'ng-click' => "payment.addPayment('view')"
 					, 'ng-if' => "payment.invoice.payment_status == 'Pending'"
 				)
