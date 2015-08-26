@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Filesystem\Filesystem;
 
 class Module extends Model
 {
@@ -43,6 +44,23 @@ class Module extends Model
 		'points_earned' => 0
 	];
 
+	//Accessor
+	public function getIconImageAttribute($value){
+
+		$filesystem = new Filesystem();
+
+		//get path
+		$image_path = config('futureed.icon_image_path_final') .'/'. $this->attributes['id'] . '/'. $value;
+
+		//check path
+		if($filesystem->exists($image_path)){
+			return asset(config('futureed.icon_image_path_final_public') .'/'. $this->attributes['id'] . '/'. $value);
+
+		} else {
+
+			return 'None';
+		}
+	}
 	//-------------relationships
 	public function subject() {
 		return $this->belongsTo('FutureEd\Models\Core\Subject');
