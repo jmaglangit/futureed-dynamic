@@ -44,7 +44,12 @@ class Module extends Model
 		'points_earned' => 0
 	];
 
-	//Accessor
+	//Accessors
+	/**
+	 * Modified database data into a URI.
+	 * @param $value
+	 * @return string
+	 */
 	public function getIconImageAttribute($value){
 
 		$filesystem = new Filesystem();
