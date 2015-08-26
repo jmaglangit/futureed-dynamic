@@ -40,23 +40,6 @@
                         </ul>
                     </li>
                 </ul>
-                <ul class="nav navbar-nav" ng-if="user.role == futureed.PARENT">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Parent <span class="caret"></span></a>
-                    
-                        <ul class="dropdown-menu" role="menu">
-                            <li class="">
-                                <a href="{!! route('client.parent.student.index') !!}">Student</a>
-                            </li>
-                            <li class="">
-                                <a href="{!! route('client.parent.payment.index') !!}">Payment</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="{!! route('client.parent.module.index') !!}">Module</a>
-                    </li>
-                </ul>
 
                 <ul class="nav navbar-nav navbar-right">
                     <!-- <li><a href="#">Link</a></li> -->
