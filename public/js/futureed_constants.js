@@ -165,6 +165,21 @@ var Constants = {
 	, ATTR_CONFIRM_EMAIL 	: "confirm_email"
 	, ATTR_PASSWORD 		: "password"
 
+	/*Billing Information for invoice*/
+
+	, BILL_COMPANY				: "Futureed Pte. Ltd."
+	, BILL_STREET				: "545 Orchard Road, #03-24"
+	, BILL_ADDRESS				: "Far East Shopping Centre"
+	, BILL_COUNTRY				: "Singapore 238882"
+	, CC_NAME 					: "Futureed Pte Ltd"
+	, BANK_NAME					: "OCBC"
+	, BANK_ACCT_NO_SGD 			: "582-066825 -001 SGD"
+	, BANK_ACCT_NO_USD 			: "508-011715-301 USD"
+	, BANK_ADDRESS 				: "65 Chulia Street, #01-00, OCBC Centre, Singapore 049513"
+	, BANK_CODE 				: "7339"
+	, BRANCH_CODE 				: "582 (SGD), 508 (USD)"
+	, SWIFT_CODE 				: "OCBCSGSG"
+
 	, URL_FORGOT_PASSWORD	: function(user_type) {
 		return '/' + user_type + '/password/forgot';
 	}

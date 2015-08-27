@@ -129,25 +129,23 @@
 	<hr/>
 		<h4>BILLING INVOICE</h4>
 		<div class="invoice-group">
-			<p>Ref: KCGA {! payment.invoice.client_name !} {! payment.invoice.id !} / {!! date('Y') !!}</p>
+			<p>Ref: {! payment.invoice.client_name !} {! payment.invoice.id !} / {!! date('Y') !!}</p>
 		</div>
 		<div class="invoice-group">
 			<p>Date : {{ date('d/m/Y') }}</p>
 		</div>
-		<div class="invoice-group">
-			<p>Kosh Consulting Group (Asia) Pte. Ltd.<br/>
-				545 Orchard Road, #03-24<br/>
-				Far East Shopping Centre<br/>
-				Singapore 238882</p>
+		<div class="invoice-group margin-10-bot">
+			<p class="bill-info">{! payment.invoice.client_name !}</p>
+			<p class="bill-info">{! payment.user.street_address !}</p>
+			<p class="bill-info">{! payment.user.city !}</p>
+			<p class="bill-info">{! payment.user.state !}</p>
 		</div>
-
 		<div class="invoice-group">
-			<p>Bill to: {! payment.invoice.client_name !} <br/>
-			{! payment.user.street_address !}
-			{! payment.user.city !}
-			{! payment.user.state !}<br/>
-			Attention: {! payment.school.school_contact_name !}</span>	
-			</p>
+			<p class="bill-info">Bill to:</p>
+			<p class="bill-info">{! futureed.BILL_COMPANY !}</p>
+			<p class="bill-info">{! futureed.BILL_STREET !}</p>
+			<p class="bill-info">{! futureed.BILL_ADDRESS !}</p>
+			<p class="bill-info">{! futureed.BILL_COUNTRY !}</p>
 		</div>
 	</div>
 	<div class="col-xs-12 search-container">
@@ -298,11 +296,14 @@
 				</div>
 				<div class="invoice-group">
 					<p>Payment Methods:<br/>
-					Cheque/Draft to: KOSH CONSULTING GROUP  (ASIA) PTE. LTD.<br/>
-					Direct Credit to:<br/>
-					OCBC Bacnk: <br/>
-					Bank Account: 529-871345-001.<br/>
-					Bank Code: 7339; Branch Code: 529; SWIFT Code: OCBCSGSG</p>
+					Direct Credit to: {! futureed.CC_NAME !}<br/>
+					Bank Name: {! futureed.BANK_NAME !}<br/>
+					Bank Account Number: <br/>
+					{! futureed.BANK_ACCT_NO_SGD !}<br/>
+					{! futureed.BANK_ACCT_NO_USD !}<br/>
+					Bank Address: {! futureed.BANK_ADDRESS !}<br/>
+					Bank Code: {! futureed.BANK_CODE !}
+					</p>
 				</div>
 			</div>
 		</div>	
