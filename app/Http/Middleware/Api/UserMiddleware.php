@@ -74,7 +74,7 @@ class UserMiddleware extends JWTMiddleware{
 			return $next($request);
 		} else {
 
-			//unauthorize access.
+			//unauthorized access.
 			return $this->respondErrorMessage(2032);
 		}
 
