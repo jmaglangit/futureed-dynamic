@@ -8,7 +8,7 @@ Routes::group(['prefix' => '/tip'], function() {
 	], function () {
 
 		Routes::resource('/student', 'Api\v1\StudentTipController',
-			['except' => ['create', 'edit']]);
+			['only' => ['index', 'store', 'show']]);
 	});
 
 	Routes::group([
@@ -18,7 +18,7 @@ Routes::group(['prefix' => '/tip'], function() {
 	], function () {
 
 		Routes::resource('/admin', 'Api\v1\AdminTipController',
-			['except' => ['create', 'edit']]);
+			['except' => ['create', 'store', 'edit']]);
 	});
 
 
@@ -40,7 +40,7 @@ Routes::group(['prefix' => '/tip'], function() {
 	], function () {
 
 		Routes::resource('/teacher', 'Api\v1\TeacherTipController',
-			['except' => ['create', 'edit']]);
+			['only' => ['index', 'show', 'update']]);
 	});
 
 		Routes::get('/student-view-recent/', [
@@ -54,7 +54,7 @@ Routes::group(['prefix' => '/tip'], function() {
 	], function () {
 
 		Routes::resource('/question-content', 'Api\v1\StudentQuestionContentTipController',
-			['except' => ['create', 'edit']]);
+			['only' => ['store']]);
 	});
 
 

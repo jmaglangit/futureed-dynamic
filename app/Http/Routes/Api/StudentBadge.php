@@ -11,7 +11,7 @@ Routes::group(['prefix' => '/badge'], function() {
 	],function(){
 
 		Routes::resource('/student', 'Api\v1\StudentBadgeController',
-			['except' => ['create', 'edit']]);
+			['only' => ['index', 'show', 'update']]);
 	});
 
 	/**
@@ -25,7 +25,7 @@ Routes::group(['prefix' => '/badge'], function() {
 	],function(){
 
 		Routes::resource('/admin', 'Api\v1\BadgeController',
-			['except' => ['create', 'edit']]);
+			['only' => ['index']]);
 	});
 
 

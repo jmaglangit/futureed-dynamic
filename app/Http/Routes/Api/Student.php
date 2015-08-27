@@ -143,7 +143,7 @@ Routes::group([
 ],function(){
 
     Routes::resource('/student', 'Api\v1\StudentController',
-        ['except' => ['create', 'edit']]);
+        ['only' => ['index', 'show', 'update']]);
 
     Routes::resource('/admin/manage/student', 'Api\v1\AdminStudentController',
         ['except' => ['create', 'edit']]);

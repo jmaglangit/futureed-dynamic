@@ -10,5 +10,5 @@ Routes::group([
 ],function(){
 
     Routes::resource('/client-discount','Api\v1\ClientDiscountController',
-        ['except' => ['edit']]);
+        ['except' => ['create', 'edit']]);
 });

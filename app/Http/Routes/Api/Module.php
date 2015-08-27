@@ -10,9 +10,9 @@ Routes::group([
 		['except' => ['create', 'edit']]);
 
 	Routes::resource('/module/student','Api\v1\StudentModuleController',
-		['except' => ['create', 'edit']]);
+		['except' => ['create', 'store', 'edit', 'destroy']]);
 
 	Routes::resource('/module','Api\v1\ModuleController',
-		['except' => ['create','edit']]);
+		['only' => ['index', 'show']]);
 
 });
