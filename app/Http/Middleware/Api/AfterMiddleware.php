@@ -1,6 +1,7 @@
 <?php namespace FutureEd\Http\Middleware\Api;
 
 use Closure;
+use Illuminate\Support\Facades\Session;
 
 class AfterMiddleware extends JWTMiddleware{
 
@@ -16,6 +17,11 @@ class AfterMiddleware extends JWTMiddleware{
 
         $response =  $next($request);
 
+		//Remove session
+		if(Session::has('current_user')){
+
+			Session::forget('current_user');
+		}
 
         $authorization  = $request->header('authorization');
 
