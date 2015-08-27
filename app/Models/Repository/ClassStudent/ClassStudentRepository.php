@@ -208,7 +208,7 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 	{
 
 		$class_student = new  ClassStudent();
-		$class_student = $class_student->with('student')->find($id);
+		$class_student = $class_student->with('student','classroom')->find($id);
 		return $class_student;
 
 	}
