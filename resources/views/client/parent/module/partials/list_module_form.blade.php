@@ -29,8 +29,6 @@
 							)
 						) !!}
 					</div>
-				</div>
-				<div class="form-group">
 					<div class="col-md-6">
 	                    <select name="grade_id" class="form-control" ng-disabled="module.grades.length <= 0" ng-model="module.search.grade_id">
 	                        <option value="">-- Select Level --</option>

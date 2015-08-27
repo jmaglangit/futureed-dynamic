@@ -5,16 +5,20 @@
 @stop
 
 @section('content')
-	<div class="container dshbrd-con" ng-controller="ManagePrincipalPaymentController as payment" ng-cloak>
+	<div class="container dshbrd-con" ng-controller="ManagePrincipalPaymentController as payment" ng-init="payment.active = '{!! $active !!}'" ng-cloak>
 		<div template-directive template-url="{!! route('client.partials.base_url') !!}"></div>
 
 		<div class="wrapr" ng-init="payment.setActive()" >
-
-			<div template-directive template-url="{!! route('client.principal.payment.partials.payment_form') !!}"></div>
+			<div class="client-nav side-nav">
+				@include('client.partials.dshbrd-side-nav')			
+			</div>
+			<div class="client-content">
+				<div template-directive template-url="{!! route('client.principal.payment.partials.payment_form') !!}"></div>
 			
-			<div template-directive template-url="{!! route('client.principal.payment.partials.add_payment_form') !!}"></div>
+				<div template-directive template-url="{!! route('client.principal.payment.partials.add_payment_form') !!}"></div>
 
-			<div template-directive template-url="{!! route('client.principal.payment.partials.view_payment_form') !!}"></div>
+				<div template-directive template-url="{!! route('client.principal.payment.partials.view_payment_form') !!}"></div>
+			</div>
 			
 		</div>
 	</div>

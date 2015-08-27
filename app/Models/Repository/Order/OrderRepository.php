@@ -48,7 +48,7 @@ class OrderRepository implements OrderRepositoryInterface{
 
     public function getOrder($id){
         try{
-            return Order::find($id);
+            return Order::with('invoice')->find($id);
         }catch (\Exception $e){
             return $e->getMessage();
         }

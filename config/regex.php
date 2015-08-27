@@ -15,4 +15,7 @@ return [
 
 	//State and City
 	'state_city' => '/^[-\pL\s]+$/u',
+
+	//Phone Format
+	'phone' => '/^[0-9()-]+$/',
 ];

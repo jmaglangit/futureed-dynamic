@@ -69,25 +69,21 @@ table#client-list{
 	text-transform: uppercase;
   	color: #055A7F;
   	font-size: 1.5em;
-  	margin: 20px 0 20px 0;
+  	margin: 10px 0 10px 0;
 }
 
 .search-container {
-	padding:15px 30px 30px 30px;
+	padding: 0 30px 10px 30px;
 	color: #887c70;
 }
 
 .form-search,.table-form{
 	border: 1px solid #e1e1e1;
   	border-radius: 5px;
-  	padding: 30px;
+  	padding: 15px;
   	background-color: #f6f4f5;
 }
 
-.table-container{
-	padding: 0 30px 0 30px;
-	margin-bottom: 30px;
-}
 .alert-container {
 	margin-top: 30px;
 }
@@ -111,6 +107,12 @@ table#client-list{
 }
 .margin-10-bot{
 	margin-bottom: 10px;
+}
+.margin-10-top{
+	margin-top: 10px;
+}
+.margin-20-bot{
+	margin-bottom: 20px;
 }
 .margin-30-bot{
 	margin-bottom: 30px;
@@ -173,14 +175,14 @@ table#client-list{
 
 .content-container {
 	border-radius: 5px;
-	min-height: 500px;
+	min-height: 300px;
 	border:1px solid #b5b5b5;
 	max-width: 1200px;
 }
 
 .question-container {
 	border-radius: 5px;
-	min-height: 500px;
+	min-height: 200px;
 }
 
 .content-text {
@@ -208,6 +210,68 @@ table#client-list{
 .content-image, .img-full{
 	padding: 20px;
 	width: 100%;
+}
+
+ul > .tab-active > a , ul > .client-nav > a:hover{
+	background: #FFFFFF !important;
+	color: #777 !important;
+}
+
+.btn-right {
+	margin-bottom: 10px;
+}
+
+span.step {
+	background: #cccccc;
+	border-radius: 0.8em;
+	-moz-border-radius: 0.8em;
+	-webkit-border-radius: 0.8em;
+	color: #ffffff;
+	display: inline-block;
+	font-weight: bold;
+	line-height: 1.6em;
+	margin-right: 5px;
+	text-align: center;
+	width: 1.6em;
+	float: left;
+}
+
+.payment-field {
+	margin-bottom: 0 !important;
+	padding: 10px 0 15px 15px;
+}
+
+form hr {
+	margin: 10px 0 10px 0;
+}
+
+form > .form-content {
+	padding-top: 10px !important;
+}
+
+.group-0 {
+	margin-bottom: 0 !important;
+}
+
+.width-100 {
+	width: 100px;
+}
+
+.invoice-form {
+	margin-bottom: 15px;
+}
+
+.dropdown-menu {
+	font-size: 12px;
+}
+
+.step-label {
+	margin-top: 3px;
+	font-style: italic;
+}
+
+.bill-info {
+	margin-bottom: 0;
 }
 
 input[type=radio]{box-sizing: border-box;padding: 0;}

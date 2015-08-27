@@ -70,7 +70,7 @@
 		</div>
 	</div>
 
-	<button class="btn btn-blue btn-small margin-0-30" ng-click="teacher.setActive('add')">
+	<button class="btn btn-blue btn-semi-medium margin-0-30" ng-click="teacher.setActive('add')">
 		<i class="fa fa-plus-square"></i> Teacher Invitation
 	</button>
 	

@@ -56,7 +56,7 @@
 			</div>
 		{!! Form::close() !!}
 
-		<div class="btn-container col-xs-5 col-xs-offset-3" ng-if="class.active_view">
+		<div class="btn-container col-xs-5 col-xs-offset-3 margin-10-top" ng-if="class.active_view">
 			{!! Form::button('View List'
 				, array(
 					'class' => 'btn btn-gold btn-large'

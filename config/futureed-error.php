@@ -123,6 +123,7 @@ return [
 		2200 => 'Email already exists.',
 		2201 => 'Username already exists.',
 		2202 => 'School Name already exists.',
+		2203 => 'The selected country is invalid.',
 
 		//account status messages
 		2230 => 'Account is inactive.',

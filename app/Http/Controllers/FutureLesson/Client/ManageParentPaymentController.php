@@ -13,7 +13,7 @@ class ManageParentPaymentController extends Controller{
 	*/
 	public function index()
 	{
-		return view('client.parent.payment.index');
+		return view('client.parent.payment.index',['active' => 'payment']);
 	}
 
 	/**

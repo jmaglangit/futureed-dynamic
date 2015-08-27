@@ -31,7 +31,7 @@ header, body, footer {
 }
 
 .container {
-	min-height: 90%;
+	min-height: 80%;
 	max-width: 1000px;
 }
 
@@ -68,7 +68,7 @@ header, body, footer {
 
 /*----- BUTTON -----*/
 .btn {
-	font-size: 16px;
+	font-size: 12px;
 	width: 100%;
 	color: #fff;
 	font-weight: 100;
@@ -77,12 +77,16 @@ header, body, footer {
 	border-radius: 2px;
 }
 
+.btn-semi-medium {
+	width: 30%;
+}
+
 .btn-container {
 	text-align: center;
 }
 
 .btn-container .btn{
-	margin: 10px;
+	margin-right: 10px;
 }
 
 .btn-small {
@@ -263,8 +267,9 @@ fieldset legend{color: #8e8171; font-size: 16px; text-transform: uppercase;}
 
 /*----- BOOTSTRAP -----*/
 .form-control {
-	height: 40px;
+	height: 30px;
 	border: 1px solid #CCCCCC;
+	font-size: 12px !important;
 }
 .navbar{
 	border-radius: 0px;
@@ -484,14 +489,14 @@ li.active .rnd-identifier{
 }
 .dshbrd-con{
 	margin-top: 15px;
-	min-width: 1200px;
+	min-width: 1000px;
 }
 .dshbrd-con .wrapr{
 	background: #fff;
 	border-radius: 8px;
 	box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
 	width: 100%;
-	min-height: 700px;
+	min-height: 450px;
 	position: relative;
 	overflow: hidden;
 	margin-bottom: 40px;
@@ -944,7 +949,7 @@ div > .btncon > a {
 	color: #a94442;
   	background-color: #f2dede;
   	border-color: #ebccd1;
-  	font-size: 15px;
+  	font-size: 12px;
   	margin-left: 60px;
   	padding: 10px;
   	text-align: left;

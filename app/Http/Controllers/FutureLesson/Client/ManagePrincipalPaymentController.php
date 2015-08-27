@@ -14,7 +14,7 @@ class ManagePrincipalPaymentController extends Controller{
 	*/
 	public function index()
 	{
-		return view('client.principal.payment.index');
+		return view('client.principal.payment.index', ['active' => 'payment']);
 	}
 
 	/**
