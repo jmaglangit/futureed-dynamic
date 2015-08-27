@@ -16,7 +16,7 @@ function ManageClassController($scope, manageClassService, apiService, TableServ
 	self.fields = {};
 	self.validation = {};
 
-	self.setActive = function(active, id) {
+	self.setActive = function(active, id, flag) {
 		self.errors = Constants.FALSE;
 		
 		self.searchDefaults();
@@ -29,6 +29,10 @@ function ManageClassController($scope, manageClassService, apiService, TableServ
 		self.active_view = Constants.FALSE;
 		self.active_edit = Constants.FALSE;
 		self.active_add_student = Constants.FALSE;
+
+		if(flag != 1) {
+			self.success = Constants.FALSE;
+		}
 
 		switch(active) {
 			case 'add_student' 			:
@@ -208,7 +212,7 @@ function ManageClassController($scope, manageClassService, apiService, TableServ
 					delete self.add;
 
 					self.success = "You have successfully added a student to " + self.record.name;
-					self.setActive(Constants.ACTIVE_VIEW, self.record.id);
+					self.setActive(Constants.ACTIVE_VIEW, self.record.id, 1);
 				}
 			}
 
@@ -306,7 +310,7 @@ function ManageClassController($scope, manageClassService, apiService, TableServ
 				} else if(response.data) {
 					delete self.add;
 					self.success = "You have successfully added a student to " + self.record.name;
-					self.setActive(Constants.ACTIVE_VIEW, self.record.id);
+					self.setActive(Constants.ACTIVE_VIEW, self.record.id, 1);
 				}
 			}
 
