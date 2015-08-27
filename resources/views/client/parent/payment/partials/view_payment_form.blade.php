@@ -94,7 +94,7 @@
 				) !!}
 			</div>
 			<div class="row">
-				<div class="col-xs-8">
+				<div class="search-container">
 					<div>
 					{!! Form::open(
 							[
@@ -105,25 +105,23 @@
 					<div ng-if="payment.invoice.payment_status == 'Paid'">
 						<h4>BILLING INVOICE</h4>
 						<div class="invoice-group">
-							<p>Ref: KCGA {! payment.client.first_name !} {! payment.client.last_name !} {! payment.invoice.id !} / {!! date('Y') !!}</p>
+							<p>Ref: {! payment.client.first_name !} {! payment.client.last_name !} {! payment.invoice.id !} / {!! date('Y') !!}</p>
 						</div>
 						<div class="invoice-group">
 							<p>Date : {{ date('d/m/Y') }}</p>
 						</div>
 						<div class="invoice-group">
-							<p>Kosh Consulting Group (Asia) Pte. Ltd.<br/>
-								545 Orchard Road, #03-24<br/>
-								Far East Shopping Centre<br/>
-								Singapore 238882</p>
+							<p class="bill-info">{! payment.client.first_name !} {! payment.client.last_name !}
+							<p class="bill-info">{! payment.client.street_address !}</p>
+							<p class="bill-info">{! payment.client.city !}</p>
+							<p class="bill-info">{! payment.client.state !}</p>
 						</div>
-
 						<div class="invoice-group">
-							<p>Bill to: {! payment.client.first_name !} {! payment.client.last_name !} <br/>
-							{! payment.client.street_address !}
-							{! payment.client.city !}
-							{! payment.client.state !}<br/>
-							Attention: {! payment.client.first_name !} {! payment.client.last_name !}</span>	
-							</p>
+							<p class="bill-info">Bill to:</p>
+							<p class="bill-info">{! futureed.BILL_COMPANY !}</p>
+							<p class="bill-info">{! futureed.BILL_STREET !}</p>
+							<p class="bill-info">{! futureed.BILL_ADDRESS !}</p>
+							<p class="bill-info">{! futureed.BILL_COUNTRY !}</p>
 						</div>
 					</div>
 					{!! Form::close() !!}
@@ -269,18 +267,21 @@
 		<div class="clearfix"></div>
 		{!! Form::close() !!}
 		<hr/>
-		<div ng-if="payment.invoice.payment_status == 'Paid'">
+		<div ng-if="payment.invoice.payment_status == 'Paid'" class="search-container">
 			<div class="invoice-group">
 				<p>No signature required.<br/>
 				Electronic Invoice</p>
 			</div>
 			<div class="invoice-group">
 				<p>Payment Methods:<br/>
-				Cheque/Draft to: KOSH CONSULTING GROUP  (ASIA) PTE. LTD.<br/>
-				Direct Credit to:<br/>
-				OCBC Bacnk: <br/>
-				Bank Account: 529-871345-001.<br/>
-				Bank Code: 7339; Branch Code: 529; SWIFT Code: OCBCSGSG</p>
+				Direct Credit to: {! futureed.CC_NAME !}<br/>
+				Bank Name: {! futureed.BANK_NAME !}<br/>
+				Bank Account Number: <br/>
+				{! futureed.BANK_ACCT_NO_SGD !}<br/>
+				{! futureed.BANK_ACCT_NO_USD !}<br/>
+				Bank Address: {! futureed.BANK_ADDRESS !}<br/>
+				Bank Code: {! futureed.BANK_CODE !}
+				</p>
 			</div>
 		</div>
 	</div>

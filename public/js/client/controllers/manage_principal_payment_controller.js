@@ -40,6 +40,7 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 				self.fields = [];
 				self.success = Constants.FALSE;
 				self.active_view = Constants.TRUE;
+				self.getSubject();
 				break;
 
 			case Constants.ACTIVE_ADD :
@@ -54,6 +55,7 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 				self.invoice.total_amount = Constants.FALSE;
 
 				self.active_add = Constants.TRUE;
+				self.getSubject();
 				break;
 
 			case Constants.ACTIVE_LIST:
@@ -327,6 +329,7 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 		self.fields = [];
 		self.classroom.seats_taken = Constants.FALSE;
 		self.classroom.order_no = self.invoice.order_no;
+		self.classroom.subject_id = $('#add_payment_form #subject_id').val();
 		self.classroom.status = "Enabled";
 
 		$scope.ui_block();
@@ -518,6 +521,7 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 				self.errors = $scope.errorHandler(response.errors);
 			} else if(response.data) {
 				self.invoice = response.data;
+				self.invoice.subject_id = self.invoice.invoice_detail[0].classroom.subject_id;
 				self.listClassroom(self.invoice.order_no);
 				self.setActive(active);
 			}
@@ -648,5 +652,24 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 		});
 
 		$("html, body").animate({ scrollTop: 0 }, "slow");
+	}
+
+	self.getSubject = function() {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		managePrincipalPaymentService.getSubject().success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.subjects = response.data.records;			
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
 	}
 }
