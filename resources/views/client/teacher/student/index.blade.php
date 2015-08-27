@@ -5,17 +5,21 @@
 @stop
 
 @section('content')
-	<div class="container dshbrd-con" ng-controller="ManageTeacherStudentController as teacher" ng-cloak>
+	<div class="container dshbrd-con" ng-controller="ManageTeacherStudentController as teacher" ng-init="teacher.active = '{!! $active !!}'" ng-cloak>
 		
 		<div template-directive template-url="{!! route('client.partials.base_url') !!}"></div>
 
 		<div class="wrapr" ng-init="teacher.setActive()" >
+			<div class="client-nav side-nav">
+				@include('client.partials.dshbrd-side-nav')			
+			</div>
+			<div class="client-content">
+				<div template-directive template-url="{!! route('client.teacher.student.partials.list_student_form') !!}"></div>
 
-			<div template-directive template-url="{!! route('client.teacher.student.partials.list_student_form') !!}"></div>
-
-			<div template-directive template-url="{!! route('client.teacher.student.partials.view_student_form') !!}"></div>			
-			
-			<div template-directive template-url="{!! route('client.teacher.student.partials.email_student_form') !!}"></div>			
+				<div template-directive template-url="{!! route('client.teacher.student.partials.view_student_form') !!}"></div>			
+				
+				<div template-directive template-url="{!! route('client.teacher.student.partials.email_student_form') !!}"></div>		
+			</div>	
 		</div>
 	</div>
 

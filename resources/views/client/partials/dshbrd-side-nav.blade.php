@@ -39,3 +39,14 @@
 		<a href="{{ route('client.parent.module.index') }}"><span><i class="fa fa-cubes"></i></span>Module</a>
 	</li>
 </ul>
+<ul ng-if="!profileActive  && user.role == futureed.TEACHER">
+	<li class="client-nav" ng-class="{ 'tab-active' : teacher.active == 'teacher' }">
+		<a href="{{ route('client.teacher.student.index') }}"><span><i class="fa fa-user"></i></span>Student</a>
+	</li>
+	<li class="client-nav" ng-class="{ 'tab-active' : class.active == 'class' }">
+		<a href="{{ route('client.teacher.class.index') }}"><span><i class="fa fa-users"></i></span>Class</a>
+	</li>
+	<li class="client-nav" ng-class="{ 'tab-active' : module.active == 'module' || content.active == 'module' || question.active == 'module'}">
+		<a href="{{ route('client.parent.module.index') }}"><span><i class="fa fa-cubes"></i></span>Module</a>
+	</li>
+</ul>
