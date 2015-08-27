@@ -50,3 +50,11 @@
 		<a href="{{ route('client.parent.module.index') }}"><span><i class="fa fa-cubes"></i></span>Module</a>
 	</li>
 </ul>
+<ul ng-if="!profileActive  && user.role == futureed.PRINCIPAL">
+	<li class="client-nav" ng-class="{ 'tab-active' : teacher.active == 'teacher' }">
+		<a href="{{ route('client.principal.teacher.index') }}"><span><i class="fa fa-users"></i></span>Teacher</a>
+	</li>
+	<li class="client-nav" ng-class="{ 'tab-active' : payment.active == 'payment' }">
+		<a href="{{ route('client.principal.payment.index') }}"><span><i class="fa fa-credit-card"></i></span>Payment</a>
+	</li>
+</ul>
