@@ -49,7 +49,7 @@ Routes::group([
 ], function()
 {
     Routes::resource('/student','Api\v1\ClientStudentController',
-        ['except' => ['create','edit']]);
+        ['except' => ['create','edit', 'destroy']]);
 
     //NOTE:student confirm his/her invitation via teacher
     Routes::put('/update-student/{id}', [

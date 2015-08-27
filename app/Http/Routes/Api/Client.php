@@ -23,12 +23,6 @@ Routes::group(['prefix' => '/client'], function()
 		]);
 
 		/**
-		 * Principal resource
-		 */
-		Routes::resource('/principal', 'Api\v1\ClientPrincipalController',
-			['except' => ['create', 'edit']]);
-
-		/**
 		 * Teacher resource
 		 */
 		Routes::resource('/teacher', 'Api\v1\ClientTeacherController',

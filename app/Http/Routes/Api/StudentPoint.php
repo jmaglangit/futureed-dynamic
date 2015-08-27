@@ -7,11 +7,11 @@ Routes::group([
 ],function(){
 
 	Routes::resource('/student-point', 'Api\v1\StudentPointController',
-		['except' => ['create', 'edit']]);
+		['except' => ['create', 'edit', 'destroy']]);
 
 
 	Routes::resource('admin/student/point', 'Api\v1\AdminStudentPointController',
-		['except' => ['create', 'edit']]);
+		['only' => ['update']]);
 });
 
 

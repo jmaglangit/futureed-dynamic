@@ -17,7 +17,7 @@ angular.module('futureed', [
 		return {
 			'request' : function(config) {
 				if(localStorage.authorization) {
-					config.headers.authorization = localStorage.authorization;
+					config.headers.Authorization = localStorage.authorization;
 				}
 
 				return config;
@@ -25,8 +25,8 @@ angular.module('futureed', [
 
 			, 'response': function (response) {
 				localStorage.token_expire = Constants.FALSE;
-				if(response && response.headers("authorization")) {
-					localStorage.authorization = response.headers("authorization");
+				if(response && response.headers("Authorization")) {
+					localStorage.authorization = response.headers("Authorization");
 				}
 
 				if(response.data.status == 401) {
