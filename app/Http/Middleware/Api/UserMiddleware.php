@@ -6,7 +6,6 @@ use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use FutureEd\Services\TokenServices;
 use FutureEd\Services\SessionServices;
-use Illuminate\Support\Facades\Session;
 
 class UserMiddleware extends JWTMiddleware{
 
@@ -80,7 +79,6 @@ class UserMiddleware extends JWTMiddleware{
 			//Add session user
 			$this->session->getUserInformation($payload_data['id'],$payload_data['type']);
 			$this->session->addSessionUser();
-//			dd(Session::all());
 
 			//Authorized access.
 			return $next($request);
