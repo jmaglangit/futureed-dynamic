@@ -5,6 +5,7 @@ use FutureEd\Models\Repository\Admin\AdminRepositoryInterface;
 use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use FutureEd\Services\TokenServices;
+use FutureEd\Services\SessionServices;
 
 class UserMiddleware extends JWTMiddleware{
 
@@ -16,11 +17,14 @@ class UserMiddleware extends JWTMiddleware{
 
 	protected $token;
 
+	protected $session;
+
 	public function __construct(
 		StudentRepositoryInterface $studentRepositoryInterface,
 		ClientRepositoryInterface $clientRepositoryInterface,
 		AdminRepositoryInterface $adminRepositoryInterface,
-		TokenServices $tokenServices
+		TokenServices $tokenServices,
+		SessionServices $sessionServices
 	){
 
 		$this->student = $studentRepositoryInterface;
@@ -30,6 +34,8 @@ class UserMiddleware extends JWTMiddleware{
 		$this->admin = $adminRepositoryInterface;
 
 		$this->token = $tokenServices;
+
+		$this->session = $sessionServices;
 	}
 
 	/**
@@ -70,11 +76,15 @@ class UserMiddleware extends JWTMiddleware{
 
 		if($user_check && $user_validate){
 
+			//Add session user
+			$this->session->getUserInformation($payload_data['id'],$payload_data['type']);
+			$this->session->addSessionUser();
+
 			//Authorized access.
 			return $next($request);
 		} else {
 
-			//unauthorize access.
+			//unauthorized access.
 			return $this->respondErrorMessage(2032);
 		}
 

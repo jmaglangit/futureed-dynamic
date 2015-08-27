@@ -91,6 +91,15 @@ $admin = new Admin();
 
     }
 
+	/**
+	 * Get Admin information.
+	 * @param $id
+	 */
+	public function getAdminDetail($id){
+
+		return Admin::find($id);
+	}
+
     public function addAdmin($data) {
 		try {
 		

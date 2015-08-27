@@ -1,6 +1,7 @@
 <?php namespace FutureEd\Http\Middleware\Api;
 
 use Closure;
+use Illuminate\Support\Facades\Session;
 
 class AfterMiddleware extends JWTMiddleware{
 
@@ -14,9 +15,13 @@ class AfterMiddleware extends JWTMiddleware{
 	public function handle($request, Closure $next)
 	{
 
-//		        return $next($request);
         $response =  $next($request);
 
+		//Remove session
+		if(Session::has('current_user')){
+
+			Session::forget('current_user');
+		}
 
         $authorization  = $request->header('authorization');
 
@@ -27,12 +32,12 @@ class AfterMiddleware extends JWTMiddleware{
 
             $payload_data = $this->getPayload();
 
+			//parse payload data ang extract id, type, and role and insert to getToken()
             $token = $this->getToken([
                 'id' => $payload_data['id'],
                 'type' => $payload_data['type'],
                 'role' => $payload_data['role'],
             ]);
-            //parse payload data ang extract id, type, and role and insert to getToken()
 
 
             $collection = $response->headers;
