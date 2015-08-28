@@ -146,7 +146,7 @@ var Constants = {
 	, DELETE_AREA_SUCCESS 		: "You have successfully deleted a subject area."
 
 	, UPDATE_PAYMENT_STATUS_SUCCESS 	: "You have successfully updated the payment status."
-	, DELETE_INVOICE_SUCCESS : "You have successfully delete the selected invoice."
+	, DELETE_INVOICE_SUCCESS : "You have successfully deleted the selected invoice."
 
 	, RESET_SUCCESS 		: "Your module was reset successfully."
 

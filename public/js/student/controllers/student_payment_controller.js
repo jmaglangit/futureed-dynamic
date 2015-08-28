@@ -17,6 +17,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 
 	self.setActive = function(active, id) {
 		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
 		self.fields = [];
 
 		self.active_list = Constants.FALSE;
@@ -45,6 +46,9 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 	}
 
 	self.searchFnc = function(event) {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
 		self.tableDefaults();
 		self.listPayments();
 		
@@ -53,6 +57,9 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 	}
 
 	self.clear = function() {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
 		self.searchDefaults();
 		self.listPayments();
 	}
@@ -262,6 +269,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 				var data = response.data;
 
 				self.invoice = {};
+				self.invoice.id = data.id;
 				self.invoice.payment_status = data.payment_status;
 				self.invoice.subscription_id = data.subscription_id;
 				self.invoice.order_id = data.order.id;
@@ -276,5 +284,48 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});;
+	}
+
+	self.confirmDelete = function(id) {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		self.delete_invoice = {};
+		self.delete_invoice.id = id;
+		self.delete_invoice.confirm = Constants.TRUE;
+		$("#delete_invoice_modal").modal({
+	        backdrop: 'static',
+	        keyboard: Constants.FALSE,
+	        show    : Constants.TRUE
+	    });
+	}
+
+	self.deleteInvoice = function(id) {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		$scope.ui_block();
+		StudentPaymentService.deleteInvoice(id).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.searchDefaults();
+
+					self.success = Constants.DELETE_INVOICE_SUCCESS;
+					self.active_add = Constants.FALSE;
+					self.active_view = Constants.FALSE;
+					self.active_list = Constants.TRUE;
+					self.listPayments();
+				}
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+
+		$("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 }
