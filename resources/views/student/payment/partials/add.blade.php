@@ -75,10 +75,10 @@
 			</div>
 
 			<div class="col-xs-12">
-				<div class="row margin-10-bot">
-					<div class="col-xs-4 div-right">
-						<label class="col-xs-4 control-label top-10">Sub Total</label>
-						<div class="col-xs-8">
+				<div class="row">
+					<div class="col-xs-4 margin-10-bot pull-right">
+						<label class="col-xs-4 control-label">Sub Total</label>
+						<div>
 							<div class="input-group">
 								<span class="input-group-addon" id="basic-addon1">USD$</span>
 								<input type="text" ng-disabled="true" class="form-control" value="{! payment.sub_total | currency : '' : 2 !}" placeholder="Sub Total" />
@@ -86,10 +86,10 @@
 						</div>
 					</div>
 				</div>
-				<div class="row margin-10-bot">
-					<div class="col-xs-4 div-right">
-						<label class="col-xs-4 control-label top-10">Discount</label>
-						<div class="col-xs-8">
+				<div class="row">
+					<div class="col-xs-4 margin-10-bot pull-right">
+						<label class="col-xs-4 control-label">Discount</label>
+						<div>
 							<div class="input-group">
 								{!! Form::text('discount',''
 									, [
@@ -105,10 +105,10 @@
 					</div>
 				</div>
 
-				<div class="row margin-10-bot">
-					<div class="col-xs-4 div-right">
-						<label class="col-xs-4 control-label top-10">Total</label>
-						<div class="col-xs-8">
+				<div class="row">
+					<div class="col-xs-4 margin-10-bot pull-right">
+						<label class="col-xs-4 control-label">Total</label>
+						<div>
 							<div class="input-group">
 								<span class="input-group-addon" id="basic-addon1">USD$</span>
 								<input type="text" ng-disabled="true" class="form-control" value="{! payment.invoice.total_amount | currency : '' : 2 !}" placeholder="Total" />
@@ -118,23 +118,23 @@
 				</div>
 			</div>
 
-			<div class="col-xs-12 margin-30-bot">
+			<div class="col-xs-12 margin-10-top">
 				<div class="btn-container">
 					{!! Form::button('Delete Subscription'
 						, array(
-							'class' => 'btn btn-gold btn-semi-medium div-right'
-							, 'ng-click' => "payment.deleteInvoice(payment.invoice_detail.id)"
+							'class' => 'btn btn-gold btn-small pull-right'
+							, 'ng-click' => "payment.setActive()"
 						)
 					) !!}
 					{!! Form::button('Save Subscription'
 						, array(
-							'class' => 'btn btn-blue btn-semi-medium div-right'
-							, 'ng-click' => "payment.savePayment('add')"
+							'class' => 'btn btn-blue btn-small pull-right'
+							, 'ng-click' => "payment.saveSubscription()"
 						)
 					) !!}
 					{!! Form::button('Pay Subscription'
 						, array(
-							'class' => 'btn btn-blue btn-semi-medium div-right'
+							'class' => 'btn btn-blue btn-small pull-right'
 							, 'ng-click' => "payment.paySubscription()"
 						)
 					) !!}

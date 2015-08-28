@@ -6,6 +6,8 @@ var Constants = {
 	, DEFAULT_SIZE	: 10
 	, DEFAULT_PAGE	: 1
 
+	, CUSTOM_TABLE_SIZE : 5
+
 	, EMPTY_STR		: ''
 	, ALL			: 'all'
 	, UNDEFINED		: 'undefined'

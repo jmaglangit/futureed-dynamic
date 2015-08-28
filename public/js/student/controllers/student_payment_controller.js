@@ -17,6 +17,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 
 	self.setActive = function(active) {
 		self.errors = Constants.FALSE;
+		self.fields = [];
 
 		self.active_list = Constants.FALSE;
 		self.active_add = Constants.FALSE;
@@ -57,7 +58,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 	self.listPayments = function() {
 		self.errors = Constants.FALSE;
 		
-		self.table.size = 5;
+		self.table.size = Constants.CUSTOM_TABLE_SIZE;
 		self.search.student_id = $scope.user.id;
 
 		$scope.ui_block();
@@ -141,8 +142,8 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 			self.invoice.date_end = $filter('date')(end_date, 'yyyyMMdd');
 			self.dis_date_end = end_date;
 
-		self.invoice.seats_total = 1;
-		self.invoice.seats_taken = 1;
+		self.invoice.seats_total = Constants.TRUE;
+		self.invoice.seats_taken = Constants.TRUE;
 		self.invoice.total_amount = parseInt(subscription.price);
 		
 		self.sub_total = parseInt(subscription.price);
