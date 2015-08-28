@@ -9,6 +9,12 @@ use Illuminate\Http\Request;
 class PaymentController extends Controller {
 
 	public function index() {
+		$user = json_decode(Session::get('student'));
+		
+		if(intval($user->age) <= 13) {
+			return redirect()->route('student.dashboard.index');
+		}
+
 		return view('student.payment.index');
 	}
 
