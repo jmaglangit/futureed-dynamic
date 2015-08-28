@@ -45,6 +45,13 @@ class ClassStudent extends Model {
 		return $this->belongsTo('FutureEd\Models\Core\Classroom', 'class_id', 'id')->with('subject','order');
 	}
 
+	//Student Class Modules
+	public function studentClassroom(){
+
+		return $this->belongsTo('FutureEd\Models\Core\Classroom','class_id')->with('studentSubject');
+
+	}
+
 
 	//Scopes
 
