@@ -74,5 +74,12 @@ function StudentPaymentService($http) {
 		});
 	}
 
+	service.deleteInvoice = function(id) {
+		return $http({
+			method : Constants.METHOD_DELETE
+			, url  : serviceUrl + 'invoice/' + id
+		});
+	}
+
 	return service;
 }
