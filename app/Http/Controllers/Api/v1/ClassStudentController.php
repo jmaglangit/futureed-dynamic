@@ -250,6 +250,22 @@ class ClassStudentController extends ApiController {
 		);
 	}
 
+
+	//TODO: return with hierarchy class, module, current progress.
+	public function studentClassModules(){
+
+		//Get list of current class of student
+		//GET class, modules,
+
+		//Allow search module_name, grade, and module_status
+
+
+		return $this->respondWithData(
+			$this->class_student->getCurrentClassStudent(Input::get('student_id'),Input::get('class_id'))
+		);
+
+	}
+
 	/**
 	 * Remove student from the class.
 	 * @param $id
