@@ -847,6 +847,12 @@ function FutureedController($scope, $window, apiService, futureed) {
 			}).error(function(response){
 				$scope.internalError();
 			});
+		} else {
+			$("#birth_date").dateDropdowns({
+			    submitFieldName: 'birth_date',
+			    minAge: Constants.MIN_AGE,
+			    maxAge: Constants.MAX_AGE
+			});
 		}
 	}
 
@@ -945,4 +951,16 @@ function FutureedController($scope, $window, apiService, futureed) {
 		}
 	}
 
+	$scope.checkLearningStyle = function() {
+		if($scope.user){
+			if(!$scope.user.learning_style_id && $scope.user.checked != Constants.TRUE){
+				$scope.user.checked = Constants.TRUE;
+				apiService.updateUserSession($scope.user).success(function(response) {
+					window.location.href = '/student/dashboard/follow-up-registration';
+				}).error(function() {
+					$scope.internalError();
+				});
+			}
+		}
+	}	
 };

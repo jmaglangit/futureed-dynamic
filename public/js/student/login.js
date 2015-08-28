@@ -19,12 +19,6 @@ $(document).on('submit', '#registration_success_form', function() {
 	return false;
 });
 
-$("#birth_date").dateDropdowns({
-    submitFieldName: 'birth_date',
-    minAge: Constants.MIN_AGE,
-    maxAge: Constants.MAX_AGE
-});
-
 $("#birth_date").change(function(){
     var bdate = $("#birth_date").val();
     if(bdate) {

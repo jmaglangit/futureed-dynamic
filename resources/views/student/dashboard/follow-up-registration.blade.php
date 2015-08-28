@@ -8,11 +8,11 @@
                 <div class="lmtcontain">
                     <div class="steps two">
                         <ul class="items">
-                            <li ng-class="{active : !has_avatar}">
+                            <li>
                                 <div class="rnd-identifier"></div>
                                 <span>Step 1</span>
                             </li>
-                            <li ng-class="{active : has_avatar}">
+                            <li>
                                 <div class="rnd-identifier"></div>
                                 <span>Step 2</span>
                                 <div class="pbar"></div>
