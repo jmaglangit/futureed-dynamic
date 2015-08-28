@@ -22,7 +22,7 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 
 
 		$class_student = new ClassStudent();
-		$class_student = $class_student->isNullDateRemoved();
+		$class_student = $class_student->isDateRemovedNull();
 		$class_student = $class_student->with('student');
 
 		if (isset($criteria['class_id'])) {

@@ -186,7 +186,7 @@ class Student extends Model {
 		});
 	}
 
-	public function scopeIsNullDateRemoved($query){
+	public function scopeIsDateRemovedNull($query){
 
 		return $query->whereHas('studentClassroom', function($query){
 
