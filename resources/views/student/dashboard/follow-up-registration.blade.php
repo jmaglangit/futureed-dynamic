@@ -1,7 +1,7 @@
 @extends('student.app')
 
 @section('content')
-<div class="container login" ng-cloak>
+<div class="container login" ng-init="resetChecked()" ng-cloak>
     <div class="form-style form-wide" ng-if="!done"> 
     	<form class="form-horizontal" name="followup_registration_form">
             <div class="form-header">
