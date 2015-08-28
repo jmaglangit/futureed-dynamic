@@ -109,5 +109,11 @@ class ClassStudent extends Model {
 		return $query->where('id',$id);
 	}
 
+	public function scopeIsDateRemovedNull($query){
+
+		return $query->where('date_removed',NULL);
+
+	}
+
 
 }

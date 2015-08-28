@@ -260,6 +260,18 @@ class ClassStudentController extends ApiController {
 
 		$data['date_removed'] = Carbon::now();
 
+		$class_student = $this->class_student->getClassStudentById($id);
+
+		if(!$class_student){
+
+			return $this->respondErrorMessage(2120);
+
+		}
+
+		$data['seats_taken'] = $class_student['classroom']['seats_taken']-1;
+
+		$this->classroom->updateClassroom($class_student['classroom']['id'],$data);
+
 		$this->class_student->updateClassStudent($id,$data);
 
 		return $this->respondWithData($this->class_student->getClassStudentById($id));
