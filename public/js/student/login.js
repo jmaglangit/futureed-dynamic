@@ -34,7 +34,7 @@ $("#birth_date").change(function(){
         var dayDiff = Math.ceil(today.getTime() - firstdate.getTime()) / (1000 * 60 * 60 * 24 * 365);
         var age = parseInt(dayDiff);
 
-        if(age < 14) {
+        if(age < Constants.AGE_RANGE) {
             $("#invalid_student").modal({
                 backdrop: 'static',
                 keyboard: false,
