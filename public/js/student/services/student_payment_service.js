@@ -29,6 +29,36 @@ function StudentPaymentService($http) {
 
 	}
 
+	service.getSubjects = function() {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url 	: serviceUrl + 'subject'
+		});
+	}
+
+	service.subscriptionDetails =function(id) {
+		return $http({
+			method : Constants.METHOD_GET
+			, url  : serviceUrl + 'subscription/' + id
+		});
+	}
+
+	service.paySubscription = function(data) {
+		return $http({
+			method 	: Constants.METHOD_POST
+			, data 	: data
+			, url 	: serviceUrl + 'student-payment'
+		});
+	}
+
+	service.getPaymentUri = function(data) {
+		return $http({
+			method : Constants.METHOD_POST
+			, data : data
+			, url  : serviceUrl + 'payment'
+		});
+	}
+
 	service.view = function() {
 
 	}

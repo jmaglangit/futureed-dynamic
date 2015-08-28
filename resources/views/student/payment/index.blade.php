@@ -13,6 +13,8 @@
 
 			<div template-directive template-url="{!! route('student.payment.partials.list') !!}"></div>
 
+			<div template-directive template-url="{!! route('student.payment.partials.add') !!}"></div>
+			
 			<div template-directive template-url="{!! route('student.payment.partials.view') !!}"></div>
 		</div>
 	</div>
