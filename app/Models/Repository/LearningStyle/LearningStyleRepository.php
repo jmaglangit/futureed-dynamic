@@ -51,4 +51,17 @@ class LearningStyleRepository implements LearningStyleRepositoryInterface{
 		return ['total' => $count, 'records' => $learning_style->get()->toArray()];
 
 	}
+	
+	/**
+	 * Gets learning style by ls_banding.
+	 * @param $ls_banding
+	 * @return Object
+	 */
+	public function getLearningStyleByBanding($ls_banding) {
+		
+		$learning_style = LearningStyle::lsBanding($ls_banding)->first();
+		
+		return $learning_style;
+	
+	}
 }
