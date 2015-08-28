@@ -9,23 +9,6 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav" ng-if="user.role == futureed.TEACHER">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Teacher <span class="caret"></span></a>
-                        
-                        <ul class="dropdown-menu" role="menu">
-                            <li class="">
-                                <a href="{!! route('client.teacher.student.index') !!}">Student</a>
-                            </li>
-                            <li class="">
-                                <a href="{!! route('client.teacher.class.index') !!}">Class</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="{!! route('client.teacher.module.index') !!}">Module</a>
-                    </li>
-                </ul>
                 <ul class="nav navbar-nav" ng-if="user.role == futureed.PRINCIPAL">
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Principal <span class="caret"></span></a>
@@ -38,23 +21,6 @@
                                 <a href="{!! route('client.principal.payment.index') !!}">Payment</a>
                             </li>
                         </ul>
-                    </li>
-                </ul>
-                <ul class="nav navbar-nav" ng-if="user.role == futureed.PARENT">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Parent <span class="caret"></span></a>
-                    
-                        <ul class="dropdown-menu" role="menu">
-                            <li class="">
-                                <a href="{!! route('client.parent.student.index') !!}">Student</a>
-                            </li>
-                            <li class="">
-                                <a href="{!! route('client.parent.payment.index') !!}">Payment</a>
-                            </li>
-                        </ul>
-                    </li>
-                    <li>
-                        <a href="{!! route('client.parent.module.index') !!}">Module</a>
                     </li>
                 </ul>
 

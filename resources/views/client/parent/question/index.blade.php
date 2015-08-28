@@ -5,11 +5,16 @@
 @stop
 
 @section('content')
-	<div class="container dshbrd-con" ng-controller="ManageParentQuestionController as question" ng-cloak>
+	<div class="container dshbrd-con" ng-controller="ManageParentQuestionController as question" ng-init="question.active = '{!! $active !!}'" ng-cloak>
 		<div template-directive template-url="{!! route('client.partials.base_url') !!}"></div>
 
 		<div class="wrapr" ng-init="question.setActive()">
-			<div template-directive template-url="{!! route('client.parent.question.partials.list') !!}"></div>
+			<div class="client-nav side-nav">
+				@include('client.partials.dshbrd-side-nav')			
+			</div>
+			<div class="client-content">
+				<div template-directive template-url="{!! route('client.parent.question.partials.list') !!}"></div>
+			</div>
 		</div>
 	</div>
 

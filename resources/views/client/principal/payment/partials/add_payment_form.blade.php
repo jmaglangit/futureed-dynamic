@@ -16,7 +16,21 @@
 	        <div class="alert alert-success" ng-if="payment.success">
 	        	<p>{! payment.success !}</p>
 	        </div>
-	        <fieldset>
+	        <fieldset class="payment-field">
+	        	<span class="step">1</span><p class="step-label">Please Select a Subject</p>
+	        	<div class="form-group">
+	        		<label class="col-xs-4 control-label">Subject <span class="required">*</span></label>
+	        		<div class="col-xs-4">
+	        			<select class="form-control" id="subject_id" name="subject_id" ng-disabled="payment.subjects.length <= 0" ng-model="payment.invoice.subject_id" ng-class="{ 'required-field' : payment.fields['subject_id'] }">
+		                        <option value="">-- Select Subject --</option>
+		                        <option ng-repeat="subject in payment.subjects" ng-value="subject.id">{! subject.name !}</option>
+		                    </select>
+	        		</div>
+	        	</div>
+	        </fieldset>
+	        <hr/>
+	        <fieldset class="payment-field">
+	        	<span class="step">2</span><p class="step-label">Please Add Classroom</p>
 	        	<div class="form-group">
 	        		<label class="col-xs-4 control-label" id="email">Number of Seats <span class="required">*</span></label>
 	        		<div class="col-xs-4">

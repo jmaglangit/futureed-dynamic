@@ -15,8 +15,8 @@
         <div class="alert alert-success" ng-if="payment.add.success">
         	<p>Successfully added Student</p>
         </div>
-        <fieldset class="payment-field">
-        	<span class="step">1</span>
+        <fieldset class="payment-field" ng-if="payment.invoice.payment_status == 'Pending'">
+        	<span class="step">1</span><p class="step-label">Please Select a Subject</p>
         	<div class="form-group">
         		<label class="col-xs-2 control-label">Subject <span class="required">*</span></label>
         		<div class="col-xs-5">
@@ -27,9 +27,9 @@
         		</div>
         	</div>
         </fieldset>
-        <hr/>
-        <fieldset ng-if="payment.invoice.payment_status == 'Pending'">
-        	<span class="step">2</span>
+        <hr/ ng-if="payment.invoice.payment_status == 'Pending'">
+        <fieldset class="payment-field" ng-if="payment.invoice.payment_status == 'Pending'">
+        	<span class="step">2</span><p class="step-label">Please Select an Email or a Name of a Student.</p>
         	<div class="form-group">
         		<label class="col-xs-2 control-label" id="email">Email<span class="required">*</span></label>
         		<div class="col-xs-5">
@@ -43,7 +43,7 @@
         		</div>
         		<div class="col-xs-3">
         			<div class="btn-container">
-						<button class="btn btn-blue btn-medium margin-0-top" ng-click="payment.addStudentOrderByEmail()" type="button"><span><i class="fa fa-plus-square"></i></span> Add</button>
+						<button class="btn btn-blue margin-0-top" ng-click="payment.addStudentOrderByEmail()" type="button"><span><i class="fa fa-plus-square"></i></span> Add</button>
         			</div>
         		</div>
         	</div>
@@ -71,19 +71,20 @@
 							</li>
 						</ul>
 					</div>
+					<div> 
+		                <i ng-if="payment.validation.s_loading" class="fa fa-spinner fa-spin"></i>
+		                <span ng-if="payment.validation.s_error" class="error-msg-con">{! payment.validation.s_error !}</span>
+		            </div>
         		</div>
-        		<div class="margin-top-8"> 
-	                <i ng-if="payment.validation.s_loading" class="fa fa-spinner fa-spin"></i>
-	                <span ng-if="payment.validation.s_error" class="error-msg-con">{! payment.validation.s_error !}</span>
-	            </div>
         		<div class="col-xs-3">
         			<div class="btn-container">
-        				<button class="btn btn-blue btn-medium margin-0-top" ng-click="payment.addStudentOrderByUsername()" type="button"><span><i class="fa fa-plus-square"></i></span> Add</button>
+        				<button class="btn btn-blue margin-0-top" ng-click="payment.addStudentOrderByUsername()" type="button"><span><i class="fa fa-plus-square"></i></span> Add</button>
         			</div>
         		</div>
         	</div>
         </fieldset>
-		<div class="col-xs-12 margin-top-60">
+        <hr/>
+		<div class="col-xs-12">
 			<div class="col-xs-3 pull-right" ng-if="payment.print">
 				{!! Form::button('Print'
 					, array(
@@ -93,30 +94,42 @@
 				) !!}
 			</div>
 			<div class="row">
-				<div class="col-xs-8 search-container">
-					<div class="form-search">
+				<div class="search-container">
+					<div>
 					{!! Form::open(
 							[
 								'id' => 'search_form',
 								'class' => 'form-horizontal'
 							]
 					) !!}
-						<div class="form-group">
-							<label class="col-xs-4 control-label">Contact Name : </label>
-							<p class="col-xs-8 pull-right padding-top-7">{! payment.client.first_name !} {! payment.client.last_name !}</p>
+					<div ng-if="payment.invoice.payment_status == 'Paid'">
+						<h4>BILLING INVOICE</h4>
+						<div class="invoice-group">
+							<p>Ref: {! payment.client.first_name !} {! payment.client.last_name !} {! payment.invoice.id !} / {!! date('Y') !!}</p>
 						</div>
-						<div class="form-group">
-							<label class="col-xs-4 control-label">Address:</label>
-							<p class="col-xs-8 pull-right padding-top-7">{! payment.client.street_address !}
-							{! payment.client.city !}
-							{! payment.client.state !}</p>
+						<div class="invoice-group">
+							<p>Date : {{ date('d/m/Y') }}</p>
 						</div>
+						<div class="invoice-group">
+							<p class="bill-info">{! payment.client.first_name !} {! payment.client.last_name !}
+							<p class="bill-info">{! payment.client.street_address !}</p>
+							<p class="bill-info">{! payment.client.city !}</p>
+							<p class="bill-info">{! payment.client.state !}</p>
+						</div>
+						<div class="invoice-group">
+							<p class="bill-info">Bill to:</p>
+							<p class="bill-info">{! futureed.BILL_COMPANY !}</p>
+							<p class="bill-info">{! futureed.BILL_STREET !}</p>
+							<p class="bill-info">{! futureed.BILL_ADDRESS !}</p>
+							<p class="bill-info">{! futureed.BILL_COUNTRY !}</p>
+						</div>
+					</div>
 					{!! Form::close() !!}
 					</div>
 				</div>
 			</div>
 			<div class="clearfix"></div>
-			<div class="row margin-top-60 search-container">
+			<div class="row margin-30-top search-container">
 				<div class="form-search">
 					{!! Form::open(
 							[
@@ -176,7 +189,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="col-xs-12 table-container margin-30-top">
+		<div class="col-xs-12 table-container">
 			<div class="list-container" ng-cloak>
 				<table class="table table-striped table-bordered">
 					<thead>
@@ -222,7 +235,7 @@
 					'class' => 'form-horizontal'
 				]
 		) !!}
-		<div class="margin-30-top col-xs-6 pull-right">
+		<div class="col-xs-6 pull-right">
 			<div class="col-xs-8 pull-right">
 				<div class="form-group">
 					<label class="control-label col-xs-4">Subtotal</label>
@@ -250,7 +263,26 @@
 					</div>	
 				</div>
 			</div>
-			<div class="clearfix"></div>
+		</div>
+		<div class="clearfix"></div>
+		{!! Form::close() !!}
+		<hr/>
+		<div ng-if="payment.invoice.payment_status == 'Paid'" class="search-container">
+			<div class="invoice-group">
+				<p>No signature required.<br/>
+				Electronic Invoice</p>
+			</div>
+			<div class="invoice-group">
+				<p>Payment Methods:<br/>
+				Direct Credit to: {! futureed.CC_NAME !}<br/>
+				Bank Name: {! futureed.BANK_NAME !}<br/>
+				Bank Account Number: <br/>
+				{! futureed.BANK_ACCT_NO_SGD !}<br/>
+				{! futureed.BANK_ACCT_NO_USD !}<br/>
+				Bank Address: {! futureed.BANK_ADDRESS !}<br/>
+				Bank Code: {! futureed.BANK_CODE !}
+				</p>
+			</div>
 		</div>
 	</div>
 	<div class="col-xs-12 margin-30-bot">

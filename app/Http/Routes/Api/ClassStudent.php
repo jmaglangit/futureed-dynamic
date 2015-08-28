@@ -19,4 +19,10 @@ Routes::group([
 			'uses' => 'Api\v1\ClassStudentController@studentCurrentClass',
 			'as' => 'api.v1.class-student.student-current-class'
 		]);
+
+	Routes::put('/student-remove-class/{id}',
+		[
+			'uses' => 'Api\v1\ClassStudentController@removeStudentClass',
+			'as' => 'api.v1.class-student.student-remove-class'
+		]);
 });

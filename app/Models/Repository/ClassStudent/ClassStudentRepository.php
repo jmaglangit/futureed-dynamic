@@ -200,4 +200,17 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 
 	}
 
+	/**
+	 * get the class student record by id.
+	 * @param $id
+	 */
+	public function getClassStudentById($id)
+	{
+
+		$class_student = new  ClassStudent();
+		$class_student = $class_student->with('student')->find($id);
+		return $class_student;
+
+	}
+
 }
