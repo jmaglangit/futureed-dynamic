@@ -68,38 +68,6 @@ function ManageModuleController($scope, manageModuleService, ManageQuestionAnsSe
 		}
 	}
 
-	self.addNewQuestion = function() {
-		self.details.seq_no = 1;
-		self.details.module_id = 1;
-		self.details.questions_text = "Mar testing image....";
-		self.details.difficulty = 1;
-		self.details.status = "Enabled";
-		self.details.question_type = "FIB";
-		self.details.points_earned = 1;
-		self.details.code = 1;
-		console.log(self.details);
-
-		$scope.ui_block();
-		ManageQuestionAnsService.addNewQuestion(self.details).success(function(response){
-			if(angular.equals(response.status, Constants.STATUS_OK)) {
-				if(response.errors) {
-					self.errors = $scope.errorHandler(response.errors);
-
-					angular.forEach(response.errors, function(value, a) {
-						self.fields[value.field] = Constants.TRUE;
-					});
-				} else if(response.data) {
-					self.details = {};
-					self.details.success = Constants.TRUE;
-				}
-			}
-		$scope.ui_unblock();
-		}).error(function(response){
-			self.errors = $scope.internalError();
-			$scope.ui_unblock();
-		})
-    }
-
 	self.toggleContent = function() {
 		var content_shown = $('#module_tabs').hasClass('in');
 		

@@ -281,5 +281,15 @@ class AppServiceProvider extends ServiceProvider {
 			'FutureEd\Models\Repository\PointLevel\PointLevelRepositoryInterface',
 			'FutureEd\Models\Repository\PointLevel\PointLevelRepository'
 		);
+		
+		$this->app->bind(
+			'FutureEd\Models\Repository\StudentLsScore\StudentLsScoreRepositoryInterface',
+			'FutureEd\Models\Repository\StudentLsScore\StudentLsScoreRepository'
+		);
+		
+		$this->app->bind(
+			'FutureEd\Models\Repository\StudentLsAnswer\StudentLsAnswerRepositoryInterface',
+			'FutureEd\Models\Repository\StudentLsAnswer\StudentLsAnswerRepository'
+		);
 	}
 }

@@ -13,9 +13,11 @@ class Order extends Model {
 
     protected $hidden = ['created_by','updated_by','created_at','updated_at','deleted_at'];
 
-    protected $fillable = ['order_no','order_date','client_id','subscription_id','date_start','date_end','seats_total','seats_taken','total_amount','payment_status'];
+    protected $fillable = ['order_no','order_date','client_id','subscription_id','date_start','date_end','seats_total','seats_taken','total_amount','payment_status','student_id'];
 
-
+	public function invoice(){
+		return $this->belongsTo('FutureEd\Models\Core\Invoice','order_no','order_no')->with('invoiceDetail');
+	}
 
     public function scopeOrderNo($query,$order_no){
         return $query->where('order_no',$order_no);

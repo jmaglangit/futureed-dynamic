@@ -104,7 +104,34 @@ function LearningStyleController($rootScope, $scope, $interval, $filter, $sce, $
 
 	var closeTest = function() {
 		$scope.session.next = 'Closing...';
-		//TODO: put end test logic here.
+
+		var user_answers_final = [];
+
+		angular.forEach($scope.session.all_questions, function(q){
+			if ( typeof(q.user_answers) != 'undefined' )
+			{
+				var question_obj = {
+					question_code_id: q.question_code_id,
+					seq_no: null,
+					test_question_id: q.id,
+					question_code_detail_id: q.question_code_detail_id,
+					answers: q.user_answers
+				}
+				
+				user_answers_final.push(question_obj);
+			}
+		});
+		
+		$scope.ui_block();
+
+		LearningStyleService.saveTest($scope.order_candidate_test.id, $scope.sections[$scope.session.section].id, user_answers_final, $scope.user.id).success(function(response) {
+			window.location.href= '/student/dashboard';
+		
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+		
 	}
 
 	var enablePreviousPageButton = function() {
@@ -267,9 +294,7 @@ function LearningStyleController($rootScope, $scope, $interval, $filter, $sce, $
 	}
 
 	var recalculateProgress = function() {
-		console.log('all_questions');
-		console.log($scope.session.all_questions);
-	
+
 		var completed = 0;
 		angular.forEach($scope.session.all_questions, function(q){
 			if ( typeof(q.user_answers) != 'undefined' )
@@ -285,7 +310,7 @@ function LearningStyleController($rootScope, $scope, $interval, $filter, $sce, $
 		});
 
 		$scope.session.progress = Math.ceil(completed / $scope.session.all_questions.length * 100) + '%';
-		console.log('recalculate:' + $scope.session.progress);
+
 	}
 
 	var setActualTimeLimit = function() {
@@ -294,10 +319,10 @@ function LearningStyleController($rootScope, $scope, $interval, $filter, $sce, $
 			minutes: 0,
 			seconds: 0
 		}
-		if ( $scope.order_candidate_test.test.time_limit_actual > 0 ) {
-			$scope.session.time_limit_actual.seconds = leftPad($scope.order_candidate_test.test.time_limit_actual % 60, '0', 2);
+		if ( $scope.order_candidate_test.time_limit_actual > 0 ) {
+			$scope.session.time_limit_actual.seconds = leftPad($scope.order_candidate_test.time_limit_actual % 60, '0', 2);
 
-			$scope.session.time_limit_actual.minutes = ($scope.order_candidate_test.test.time_limit_actual - $scope.session.time_limit_actual.seconds) / 60;
+			$scope.session.time_limit_actual.minutes = ($scope.order_candidate_test.time_limit_actual - $scope.session.time_limit_actual.seconds) / 60;
 
 			if ( $scope.session.time_limit_actual.minutes < 0 ) {
 				$scope.session.time_limit_actual.minutes = 0;
@@ -376,10 +401,10 @@ function LearningStyleController($rootScope, $scope, $interval, $filter, $sce, $
 	$scope.sections = [];
 
 	$interval(function(){
-		if ($scope.session.current_state == 'sample questions' && $scope.order_candidate_test.test.time_limit_sample) {
-			$scope.order_candidate_test.test.time_limit_sample--;
-		} else if ($scope.session.current_state == 'actual questions' && $scope.order_candidate_test.test.time_limit_actual) {
-			$scope.order_candidate_test.test.time_limit_actual--;
+		if ($scope.session.current_state == 'sample questions' && $scope.order_candidate_test.time_limit_sample) {
+			$scope.order_candidate_test.time_limit_sample--;
+		} else if ($scope.session.current_state == 'actual questions' && $scope.order_candidate_test.time_limit_actual) {
+			$scope.order_candidate_test.time_limit_actual--;
 			setActualTimeLimit();
 		}
 	}, 1000)
@@ -788,7 +813,9 @@ function LearningStyleController($rootScope, $scope, $interval, $filter, $sce, $
 
 	/* start */
 	$rootScope.$on('testReady', function( e, that_session ) {
-		LearningStyleService.getTest().success(function(response) {
+		$scope.ui_block();
+		
+		LearningStyleService.getTest($scope.user.id).success(function(response) {
 			
 			$scope.data_loaded = true;
 			
@@ -796,7 +823,7 @@ function LearningStyleController($rootScope, $scope, $interval, $filter, $sce, $
 			$scope.session.next = 'Next';
 			//TODO:: $scope.session.redirect_on_complete = that_session.post_test_url;
 			$scope.order_candidate_test = response.data;
-			$scope.sections = parseSections($scope.order_candidate_test.test.sections);
+			$scope.sections = parseSections($scope.order_candidate_test.sections);
 
 			$scope.session.all_questions = [];
 			for (var i = 0; i < $scope.sections.length; i++) {
@@ -819,7 +846,7 @@ function LearningStyleController($rootScope, $scope, $interval, $filter, $sce, $
 
 			$scope.markups = {
 				intro: '',
-				end: $sce.trustAsHtml($window.marked($scope.order_candidate_test.test.test_instructions_end)),
+				end: $sce.trustAsHtml($window.marked($scope.order_candidate_test.test_instructions_end)),
 				page: ''
 			}
 
@@ -848,6 +875,12 @@ function LearningStyleController($rootScope, $scope, $interval, $filter, $sce, $
 				checkIncomplete();
 			}
 			recalculateProgress();
-		});
+			
+			$scope.ui_unblock();
+			
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});;
 	});
 }	

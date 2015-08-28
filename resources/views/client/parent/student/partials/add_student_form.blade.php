@@ -5,7 +5,7 @@
 		</div>
 	</div>
 
-	<div class="container form-content">
+	<div class="col-xs-12 form-content">
 		<div class="alert alert-error" ng-if="student.errors">
             <p ng-repeat="error in student.errors track by $index" > 
                 {! error !}
@@ -173,19 +173,8 @@
 					</div>
 					<div class="form-group">
 						<label class="control-label col-xs-3">Birthday <span class="required">*</span></label>
-						<div class="col-xs-5">
-	                        <div class="dropdown">
-	                          	<a class="dropdown-toggle" id="dropdown3" role="button" data-toggle="dropdown" data-target="#" href="#">
-	                                <div class="input-group">
-	                                <input readonly="readonly" type="text" name="birth_date" placeholder="DD/MM/YY" class="form-control" ng-class="{ 'required-field' : student.fields['birth_date'] }" value="{! student.reg.birth | date:'dd/MM/yy' !}">
-	                                    <input type="hidden" name="hidden_date" value="{! student.reg.birth | date:'yyyyMMdd' !}">
-	                                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-	                                </div>
-	                            </a>
-	                            <ul class="dropdown-menu date-dropdown-menu" role="menu" aria-labelledby="dLabel">
-	                                <datetimepicker data-ng-model="student.reg.birth" data-before-render="beforeDateRender($dates)" data-datetimepicker-config="{ dropdownSelector: '#dropdown3', startView:'day', minView:'day' }"/>
-	                            </ul>
-	                        </div>
+						<div class="col-xs-6">
+	                        <input type="hidden" id="birth_date">
 	                    </div>
 					</div>
 					<div class="form-group">

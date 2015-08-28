@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Carbon\Carbon;
 
 class HelpRequest extends Model {
 
@@ -119,6 +120,15 @@ class HelpRequest extends Model {
     public function scopeQuestionStatus($query,$question_status = array()){
         return $query->whereIn('question_status',$question_status);
     }
+
+    //set created_at to GMT
+    public function setCreatedAtAttribute($value)
+    {
+        $this->attributes['created_at'] = Carbon::createFromTimestamp(strtotime($value))
+        ->timezone('GMT')
+        ->toDateTimeString();
+
+   }
 
 
 

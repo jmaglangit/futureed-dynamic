@@ -6,6 +6,7 @@ use FutureEd\Models\Core\ClassStudent;
 use FutureEd\Models\Core\Classroom;
 use FutureEd\Models\Repository\User\UserRepository;
 use League\Flysystem\Exception;
+use Illuminate\Support\Facades\DB;
 
 class ClassStudentRepository implements ClassStudentRepositoryInterface
 {
@@ -21,9 +22,9 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 
 
 		$class_student = new ClassStudent();
-
+		$class_student = $class_student->isDateRemovedNull();
 		$class_student = $class_student->with('student');
-//        dd($class_student->get()->toArray());
+
 		if (isset($criteria['class_id'])) {
 
 			$class_student = $class_student->classroom($criteria['class_id']);
@@ -39,9 +40,17 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 			$class_student = $class_student->email($criteria['email']);
 		}
 
-		if ($offset > 0 && $limit > 0) {
+		if(isset($criteria['student_id'])){
 
-			$class_student = $class_student->skip($offset)->take($limit);
+			$class_student = $class_student->studentId($criteria['student_id']);
+			$class_student = $class_student->active();
+			$class_student = $class_student->with('classroom');
+
+		}
+
+		if ($limit > 0 && $offset >= 0) {
+
+			$class_student = $class_student->offset($offset)->limit($limit);
 		}
 
 		$records = $class_student->get();
@@ -70,8 +79,24 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 		}
 	}
 
+	/**
+	 * Update a record.
+	 * @param $id
+	 * @param $data
+	 * @return bool|int|string
+	 */
+
 	public function updateClassStudent($id, $class_student)
 	{
+		try{
+
+			return ClassStudent::find($id)
+				->update($class_student);
+
+		} catch (Exception $e) {
+
+			throw new Exception($e->getMessage());
+		}
 
 	}
 
@@ -92,7 +117,6 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 	 */
 	public function getStudentCurrentClassroom($student_id)
 	{
-
 		return ClassStudent::with('classroom')
 			->studentid($student_id)
 			->active()
@@ -168,6 +192,32 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 		$class_student = $class_student->studentId($student_id)->classroom($class_id);
 
 		return $class_student->first();
+
+	}
+
+	/**
+	 * get the class student record by class_id.
+	 * @param $student_id,$class_id
+	 */
+	public function getClassStudentByClassId($class_id)
+	{
+
+		$class_student = new  ClassStudent();
+		$class_student = $class_student->where('class_id',$class_id);
+		return $class_student->get();
+
+	}
+
+	/**
+	 * get the class student record by id.
+	 * @param $id
+	 */
+	public function getClassStudentById($id)
+	{
+
+		$class_student = new  ClassStudent();
+		$class_student = $class_student->with('student','classroom')->find($id);
+		return $class_student;
 
 	}
 

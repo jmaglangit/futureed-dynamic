@@ -11,7 +11,20 @@ Routes::group(['prefix' => '/class-student'], function()
 
 	Routes::post('/student-join-class',
 		[
-			'uses' => 'Api\v1\ClassStudentController@studentJoinClass',
+			'uses' => 'Api\v1\ClassStudentController@studentCurrentClass',
 			'as' => 'api.v1.class-student.student-join-class'
 		]);
+
+	Routes::put('/student-remove-class/{id}',
+		[
+			'uses' => 'Api\v1\ClassStudentController@removeStudentClass',
+			'as' => 'api.v1.class-student.student-remove-class'
+		]);
+
+	Routes::get('/student-class-list',
+		[
+			'uses' => 'Api\v1\ClassStudentController@index',
+			'as' => 'api.v1.class-student.student-class-list'
+		]);
+
 });

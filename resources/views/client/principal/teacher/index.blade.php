@@ -5,19 +5,23 @@
 @stop
 
 @section('content')
-	<div class="container dshbrd-con" ng-controller="ManagePrincipalTeacherController as teacher" ng-cloak>
+	<div class="container dshbrd-con" ng-controller="ManagePrincipalTeacherController as teacher" ng-init="teacher.active = '{!! $active !!}'" ng-cloak>
 	
 		<div template-directive template-url="{!! route('client.partials.base_url') !!}"></div>
 
 		<div class="wrapr" ng-init="teacher.setActive()" >
+			<div class="client-nav side-nav">
+				@include('client.partials.dshbrd-side-nav')			
+			</div>
+			<div class="client-content">
+				<div template-directive template-url="{!! route('client.principal.teacher.partials.list_teacher_form') !!}"></div>
 
-			<div template-directive template-url="{!! route('client.principal.teacher.partials.list_teacher_form') !!}"></div>
+				<div template-directive template-url="{!! route('client.principal.teacher.partials.add_teacher_form') !!}"></div>
 
-			<div template-directive template-url="{!! route('client.principal.teacher.partials.add_teacher_form') !!}"></div>
-
-			<div template-directive template-url="{!! route('client.principal.teacher.partials.view_teacher_form') !!}"></div>
-			
-			<div template-directive template-url="{!! route('client.principal.teacher.partials.delete_teacher_form') !!}"></div>
+				<div template-directive template-url="{!! route('client.principal.teacher.partials.view_teacher_form') !!}"></div>
+				
+				<div template-directive template-url="{!! route('client.principal.teacher.partials.delete_teacher_form') !!}"></div>
+			</div>
 		</div>
 	</div>
 

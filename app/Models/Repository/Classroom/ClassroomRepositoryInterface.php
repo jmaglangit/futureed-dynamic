@@ -25,4 +25,6 @@ interface ClassroomRepositoryInterface {
 
     public function getClassroomByOrderNo($order_no);
 
+    public function getClassroomBySubjectId($subject_id, $student_id);
+
 }

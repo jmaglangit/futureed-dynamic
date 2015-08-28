@@ -71,6 +71,12 @@ class InvoiceController extends ApiController {
 
         }
 
+        if(Input::get('student_id')){
+
+            $criteria['student_id'] = Input::get('student_id');
+
+        }
+
         if(Input::get('limit')) {
             $limit = intval(Input::get('limit'));
         }

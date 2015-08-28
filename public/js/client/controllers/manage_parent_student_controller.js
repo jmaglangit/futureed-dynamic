@@ -25,6 +25,12 @@ function ManageParentStudentController($scope, ManageParentStudentService, apiSe
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
 
+		$("#birth_date").dateDropdowns({
+		    submitFieldName: 'birth_date',
+		    minAge: Constants.MIN_AGE,
+		    maxAge: Constants.MAX_AGE
+		});
+
 		$('input, select').removeClass('required-field');
 	}
 
@@ -192,9 +198,13 @@ function ManageParentStudentController($scope, ManageParentStudentService, apiSe
 		self.success = Constants.FALSE;
 		self.reg.client_id = $scope.user.id;
 
-		if(self.reg) {
-				self.reg.birth_date = $("#add_student_form input[name='hidden_date']").val();
-			}
+		var bdate = $("#add_student_form #birth_date").val();
+		var day = $("#add_student_form .day").val();
+		var month = $("#add_student_form .month").val();
+		var year = $("#add_student_form .year").val();
+
+		self.reg.birth_date = year + month + day;
+
 
 		self.base_url = $("#base_url_form input[name='base_url']").val();
 		self.reg.callback_uri = self.base_url + Constants.URL_REGISTRATION(angular.lowercase(Constants.STUDENT));

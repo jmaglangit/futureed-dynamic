@@ -25,7 +25,7 @@ class StudentsTableSeeder extends Seeder {
 						'parent_id' => 1,
 						'school_code' => 1,
 						'grade_code' => 1,
-						'points' => 123,
+						'points' => 0,
 						'point_level_id' => 4,
 						'country_id' => 4,
 						'learning_style_id' => 1,

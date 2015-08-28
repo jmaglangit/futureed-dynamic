@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Filesystem\Filesystem;
 
 class Module extends Model
 {
@@ -19,15 +20,52 @@ class Module extends Model
 		'updated_at',
 		'deleted_at'];
 
-	protected $fillable = ['subject_id', 'subject_area_id', 'grade_id', 'code', 'name', 'description', 'common_core_area'
-                              ,'common_core_url', 'points_to_unlock', 'points_to_finish', 'status', 'created_by', 'updated_by'];
+	protected $fillable = [
+		'subject_id',
+		'subject_area_id',
+		'grade_id',
+		'code',
+		'name',
+		'icon_image',
+		'original_icon_image',
+		'description',
+		'common_core_area',
+		'common_core_url',
+		'points_to_unlock',
+		'points_to_finish',
+		'status',
+		'created_by',
+		'updated_by'];
 
 	protected $attributes = [
 		'created_by' => 1,
 		'updated_by' => 1,
 		'grade_id' => 0,
+		'points_earned' => 0
 	];
 
+	//Accessors
+	/**
+	 * Modified database data into a URI.
+	 * @param $value
+	 * @return string
+	 */
+	public function getIconImageAttribute($value){
+
+		$filesystem = new Filesystem();
+
+		//get path
+		$image_path = config('futureed.icon_image_path_final') .'/'. $this->attributes['id'] . '/'. $value;
+
+		//check path
+		if($filesystem->exists($image_path)){
+			return asset(config('futureed.icon_image_path_final_public') .'/'. $this->attributes['id'] . '/'. $value);
+
+		} else {
+
+			return 'None';
+		}
+	}
 	//-------------relationships
 	public function subject() {
 		return $this->belongsTo('FutureEd\Models\Core\Subject');

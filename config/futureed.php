@@ -150,6 +150,17 @@ return [
 	//answer
 	'content' => 'content',
 
+	//icons
+	'icon' => 'icon',
+
+	//path for icon on uploaded images temp
+	'icon_image_path' => base_path() . '/public/uploads/temp/icon',
+
+	//path for icon to uploaded final images
+	'icon_image_path_final' => base_path() . '/public/uploads/icon',
+	'icon_image_path_final_public' => '/uploads/icon',
+
+
 	//answer status
 	'answer_status_correct' => 'Correct',
 	'answer_status_wrong' => 'Wrong',
@@ -180,4 +191,19 @@ return [
 
 	//student progress
 	'student_progress' => 100,
+
+	//PAR shortcut for parent
+	'PAR' => 'PAR',
+
+	//STU shortcut for Student
+	'STU' => 'STU',
+
+	
+	#iAssess IDs for LSP
+	'lsp_child_id' => 100063,
+	'lsp_adult_id' => 100064,
+	'lsp_for_adult_age' => 18,
+	'lsp_result_name' => 'IPS1',
+	'default_lsp' => 3,
+
 ];

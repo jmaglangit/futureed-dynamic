@@ -60,8 +60,10 @@ function FutureedController($scope, $window, apiService, futureed) {
 						$scope.internalError();
 					});
 				}
-
-				$scope.errors[key] = value.message;
+				
+				if(angular.equals($scope.errors.indexOf(value.message), -1)) {
+					$scope.errors[key] = value.message;
+				}
 			});
 		} else {
 			$scope.errors[0] = errors.message;
@@ -357,6 +359,7 @@ function FutureedController($scope, $window, apiService, futureed) {
 
 		if(angular.isString(user) && user.length > 0) {
 			$scope.user = JSON.parse(user);
+			$scope.user.age = parseInt($scope.user.age);
 			if($scope.user.new_email != null){
 				$scope.confirm_email = Constants.TRUE;
 			}
@@ -516,7 +519,12 @@ function FutureedController($scope, $window, apiService, futureed) {
 
 
 			if($scope.reg) {
-				$scope.reg.birth_date = $("#registration_form input[name='hidden_date']").val();
+				var bdate = $("#registration_form #birth_date").val();
+				var day = $("#registration_form .day").val();
+				var month = $("#registration_form .month").val();
+				var year = $("#registration_form .year").val();
+
+				$scope.reg.birth_date = year + month + day;
 				$scope.reg.school_code = -1;
 			}
 			
@@ -828,10 +836,23 @@ function FutureedController($scope, $window, apiService, futureed) {
 						$scope.reg.school_name = $scope.reg.school.name;
 						$scope.getGradeLevel($scope.reg.country_id);
 						$scope.edit_registration = Constants.TRUE;
+
+						$("#birth_date").dateDropdowns({
+						    submitFieldName: 'birth_date',
+						    defaultDate: $scope.reg.birth,
+						    minAge: Constants.MIN_AGE,
+						    maxAge: Constants.MAX_AGE
+						});
 					}
 				}
 			}).error(function(response){
 				$scope.internalError();
+			});
+		} else {
+			$("#birth_date").dateDropdowns({
+			    submitFieldName: 'birth_date',
+			    minAge: Constants.MIN_AGE,
+			    maxAge: Constants.MAX_AGE
 			});
 		}
 	}
@@ -930,4 +951,33 @@ function FutureedController($scope, $window, apiService, futureed) {
 			$scope.enter_pass = Constants.TRUE;
 		}
 	}
+
+	$scope.checkLearningStyle = function() {
+		var lsp_url = Constants.LSP_URL;
+		var current_url = window.location.pathname;
+
+		if($scope.user){
+			if(lsp_url != current_url){
+				if(!$scope.user.learning_style_id && $scope.user.checked != Constants.TRUE){
+					$scope.user.checked = Constants.TRUE;
+					apiService.updateUserSession($scope.user).success(function(response) {
+						window.location.href = '/student/dashboard/follow-up-registration';
+					}).error(function() {
+						$scope.internalError();
+					});
+				}
+			}
+		}
+	}
+
+	$scope.resetChecked = function() {
+		
+		$scope.user.checked = Constants.FALSE;
+		apiService.updateUserSession($scope.user).success(function(response) {
+			
+		}).error(function() {
+			$scope.internalError();
+		});
+			
+	}	
 };

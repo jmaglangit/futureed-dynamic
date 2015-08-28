@@ -16,6 +16,7 @@ use FutureEd\Services\UserServices;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use Carbon\Carbon;
 
 class ClassStudentController extends ApiController {
 
@@ -34,7 +35,7 @@ class ClassStudentController extends ApiController {
 		MailServices $mailServices,
 		StudentServices $studentRepositoryInterface,
 		ClassroomRepositoryInterface $classroom,
-		ClassroomServices $classroomServices
+        	ClassroomServices $classroomServices
 	)
 	{
 		$this->class_student = $classStudentRepositoryInterface;
@@ -43,7 +44,7 @@ class ClassStudentController extends ApiController {
 		$this->student = $studentRepositoryInterface;
 		$this->user = $userServices;
 		$this->classroom = $classroom;
-		$this->classroom_services = $classroomServices;
+        	$this->classroom_services = $classroomServices;
     }
 
     /**
@@ -106,10 +107,6 @@ class ClassStudentController extends ApiController {
 
         //check seats availability.
         $classroom = $this->classroom->getClassroom($class_student['class_id']);
-
-        if( $classroom->seats_taken >= $classroom->seats_total ){
-            return $this->respondErrorMessage(2135);
-        }
 
         $user = array_merge($user,[
             'user_type' => config('futureed.student')
@@ -192,7 +189,7 @@ class ClassStudentController extends ApiController {
 
 		//check classroom has not expired.
 		$classroom_status = $this->classroom_services->checkActiveClassroom($data['class_id']);
-
+		
 		if(!$classroom_status){
 
 			return $this->respondErrorMessage(2051);
@@ -206,23 +203,13 @@ class ClassStudentController extends ApiController {
 			return $this->respondErrorMessage(2125);// Student is already in the class.
 		}
 
-		//Get current school if exist.
-		$classroom = $this->class_student->getStudentCurrentClassroom($student_id);
-
-		if ($classroom) {
-			return $this->respondErrorMessage(2125);// Student is already in the class.
-		}
-
         //check seats availability.
         $classroom = $this->classroom->getClassroom($data['class_id']);
-
-        if( $classroom->seats_taken >= $classroom->seats_total ){
-            return $this->respondErrorMessage(2135);
-        }
 
 		//add to class student table.
 		$data['student_id'] = $student_id;
 		$data['status'] = 'Enabled';
+		$data['date_started'] = Carbon::now();
 		$this->class_student->addClassStudent($data);
 
         //increment seats_taken
@@ -256,12 +243,69 @@ class ClassStudentController extends ApiController {
 	 * @param $id
 	 * @return mixed
 	 */
-	public function studentJoinClass(ClassStudentRequest $request){
-
+	public function studentCurrentClass(ClassStudentRequest $request){
 
 		return $this->respondWithData(
 			$this->student->getCurrentClass($request->get('student_id'))
 		);
+	}
+
+	/**
+	 * Remove student from the class.
+	 * @param $id
+	 * @return mixed
+	 */
+
+	public function removeStudentClass($id){
+
+		$data['date_removed'] = Carbon::now();
+
+		$class_student = $this->class_student->getClassStudentById($id);
+
+		if(!$class_student){
+
+			return $this->respondErrorMessage(2120);
+
+		}
+
+		$data['seats_taken'] = $class_student['classroom']['seats_taken']-1;
+
+		$this->classroom->updateClassroom($class_student['classroom']['id'],$data);
+
+		$this->class_student->updateClassStudent($id,$data);
+
+		return $this->respondWithData($this->class_student->getClassStudentById($id));
+
+	}
+
+
+	/**
+	 *  list of active class under a student.
+	 *
+	 * @return mixed
+	 */
+
+	public function index(){
+
+		$criteria = [];
+
+		if(Input::get('student_id')){
+
+			$criteria['student_id'] = Input::get('student_id');
+		}
+
+		$offset = (Input::get('offset')) ? Input::get('offset') : 0;
+
+		$limit = (Input::get('limit')) ? Input::get('limit') : 0 ;
+
+
+
+		return $this->respondWithData($this->class_student->getClassStudents($criteria,$limit,$offset));
+
+
+
+
+
 	}
 
 }

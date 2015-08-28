@@ -2,45 +2,31 @@
 
 use FutureEd\Http\Controllers\Api\Traits\ClientValidatorTrait;
 use FutureEd\Http\Requests;
-use FutureEd\Http\Controllers\Controller;
-use FutureEd\Services\ClientServices;
-
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
-use League\Flysystem\Exception;
+use FutureEd\Http\Requests\Api\ClientRegisterRequest;
 
-use Carbon\Carbon;
 
 class ClientRegisterController extends ClientController {
 	
 	use ClientValidatorTrait;
 
-	public function register()
+	public function register(ClientRegisterRequest $request)
 	{
 		//TODO: for refactoring 
 		// cannot be use for teacher registration
 
-		$client = Input::only('first_name', 'last_name', 'client_role', 'street_address', 'city', 'state', 'country', 'zip', 'country_id');
+		$client = $request->only('first_name', 'last_name', 'client_role', 'street_address', 'city', 'state', 'country', 'zip', 'country_id');
 
-		$user = Input::only('username', 'email', 'first_name', 'last_name', 'password');
+		$user = $request->only('username', 'email', 'first_name', 'last_name', 'password');
 
-		$school = Input::only('school_name', 'school_address', 'school_city', 'school_state', 'school_country', 'school_zip', 'contact_name', 'contact_number', 'school_country_id');
+		$school = $request->only('school_name', 'school_address', 'school_city', 'school_state', 'school_country', 'school_zip', 'contact_name', 'contact_number', 'school_country_id');
 
-		$input = Input:: only('callback_uri');
+		$input = $request->only('callback_uri');
 
 		$error_msg = config('futureed-error.error_messages');
 
-		$this->addMessageBag($this->email($user, 'email'));
-		$this->addMessageBag($this->username($user, 'username'));
+		//TODO: Create password validation.
 		$this->addMessageBag($this->checkPassword($user, 'password'));
-		$this->addMessageBag($this->validateString($input, 'callback_uri'));
-
-		$this->addMessageBag($this->firstName($client, 'first_name'));
-		$this->addMessageBag($this->lastName($client, 'last_name'));
-		$this->addMessageBag($this->clientRole($client, 'client_role'));
-
-
-
 
 		if (strtolower($client['client_role']) == strtolower(config('futureed.teacher'))) {
 
@@ -48,32 +34,6 @@ class ClientRegisterController extends ClientController {
 				->setField('client_role')
 				->setMessage($error_msg[2234])
 				->errorMessage());
-		}
-
-		if (strtolower($client['client_role']) == strtolower(config('futureed.parent'))) {
-
-			$this->addMessageBag($this->validateString($client, 'street_address'));
-			$this->addMessageBag($this->validateAlphaSpace($client, 'city'));
-			$this->addMessageBag($this->validateAlphaSpaceOptional($client, 'state'));
-			$this->addMessageBag($this->validateNumber($client, 'country_id'));
-			$this->addMessageBag($this->zipCodeOptional($client, 'zip'));
-		} else {
-
-			$this->addMessageBag($this->validateString($school, 'school_name'));
-			$this->addMessageBag($this->schoolAddress($school, 'school_address'));
-			$this->addMessageBag($this->validateAlphaSpaceOptional($school, 'school_city'));
-			$this->addMessageBag($this->validateAlphaSpace($school, 'school_state'));
-			$this->addMessageBag($this->validateNumber($school, 'school_country_id'));
-			$this->addMessageBag($this->zipCodeOptional($school, 'school_zip'));
-			$this->addMessageBag($this->validateContactName($school, 'contact_name'));
-			$this->addMessageBag($this->checkContactNumber($school, 'contact_number'));
-
-
-			$this->addMessageBag($this->validateStringOptional($client, 'street_address'));
-			$this->addMessageBag($this->validateAlphaSpaceOptional	($client, 'city'));
-			$this->addMessageBag($this->validateAlphaSpace($client, 'state'));
-			$this->addMessageBag($this->validateStringOptional($client, 'country'));
-			$this->addMessageBag($this->zipCodeOptional($client, 'zip'));
 		}
 
 		$email_check = $this->client->checkClientEmail($user);

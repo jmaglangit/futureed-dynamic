@@ -16,7 +16,7 @@ function ManageClassController($scope, manageClassService, apiService, TableServ
 	self.fields = {};
 	self.validation = {};
 
-	self.setActive = function(active, id) {
+	self.setActive = function(active, id, flag) {
 		self.errors = Constants.FALSE;
 		
 		self.searchDefaults();
@@ -29,6 +29,10 @@ function ManageClassController($scope, manageClassService, apiService, TableServ
 		self.active_view = Constants.FALSE;
 		self.active_edit = Constants.FALSE;
 		self.active_add_student = Constants.FALSE;
+
+		if(flag != 1) {
+			self.success = Constants.FALSE;
+		}
 
 		switch(active) {
 			case 'add_student' 			:
@@ -208,7 +212,7 @@ function ManageClassController($scope, manageClassService, apiService, TableServ
 					delete self.add;
 
 					self.success = "You have successfully added a student to " + self.record.name;
-					self.setActive(Constants.ACTIVE_VIEW, self.record.id);
+					self.setActive(Constants.ACTIVE_VIEW, self.record.id, 1);
 				}
 			}
 
@@ -289,7 +293,13 @@ function ManageClassController($scope, manageClassService, apiService, TableServ
 
 		self.add.client_id = self.record.client_id;
 		self.add.class_id = self.record.id;
-		self.add.birth_date = $("input[name='hidden_date']").val();
+
+		var bdate = $("#add_new_student #student_bdate").val();
+		var day = $("#add_new_student .day").val();
+		var month = $("#add_new_student .month").val();
+		var year = $("#add_new_student .year").val();
+
+		self.add.birth_date = year + month + day;
 		
 		var base_url = $("#base_url_form input[name='base_url']").val();
 		self.add.callback_uri = base_url + "/student/registration";
@@ -306,7 +316,7 @@ function ManageClassController($scope, manageClassService, apiService, TableServ
 				} else if(response.data) {
 					delete self.add;
 					self.success = "You have successfully added a student to " + self.record.name;
-					self.setActive(Constants.ACTIVE_VIEW, self.record.id);
+					self.setActive(Constants.ACTIVE_VIEW, self.record.id, 1);
 				}
 			}
 
@@ -333,6 +343,14 @@ function ManageClassController($scope, manageClassService, apiService, TableServ
 		self.add.city = Constants.EMPTY_STR;
 		self.add.state = Constants.EMPTY_STR;
 		self.add.birth = Constants.EMPTY_STR;
+	}
+
+	self.setDropdown = function() {
+		$("#student_bdate").dateDropdowns({
+		    submitFieldName: 'student_bdate',
+		    minAge: Constants.MIN_AGE,
+		    maxAge: Constants.MAX_AGE
+		});
 	}
 
 	self.getSchoolDetails = function(school_code) {

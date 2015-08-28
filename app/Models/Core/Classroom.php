@@ -14,7 +14,7 @@ class Classroom extends Model {
 
     protected $hidden = ['created_by','updated_by','created_at','updated_at','deleted_at'];
 
-    protected $fillable = ['order_no','name','grade_id','client_id','seats_taken','seats_total','status'];
+    protected $fillable = ['order_no','name','grade_id','client_id','seats_taken','seats_total','status','subject_id','student_id'];
 
 
     //Relationships
@@ -34,15 +34,25 @@ class Classroom extends Model {
         return $this->belongsTo('FutureEd\Models\Core\Grade');
     }
 
-    public function students(){
+    public function classStudent(){
 
-        return $this->belongsTo('FutureEd\Models\Core\ClassStudent');
+        return $this->belongsTo('FutureEd\Models\Core\ClassStudent','id','class_id')->with('student');
     }
 
 	public function invoiceDetails(){
 
 		return $this->belongsTo('FutureEd\Models\Core\InvoiceDetail', 'id','class_id');
 
+	}
+
+	public function subject(){
+
+		return $this->hasOne('FutureEd\Models\Core\Subject','id','subject_id');
+	}
+
+	public function studentModule(){
+
+		return $this->hasMany('FutureEd\Models\Core\StudentModule','subject_id');
 	}
 
 
@@ -71,6 +81,28 @@ class Classroom extends Model {
 	public function scopeClient_Id($query, $client_id){
 
 		return $query->where('client_id',$client_id);
+	}
+
+	public function scopeSubject_Id($query, $subject_id){
+
+		return $query->where('subject_id',$subject_id);
+
+	}
+
+	public function scopeActive($query){
+
+		return $query->whereHas('classStudent',function($query){
+			$query->where('subscription_status',config('futureed.active'));
+
+		});
+	}
+
+	public function scopeStudent_Id($query, $student_id){
+
+		return $query->whereHas('classStudent',function($query) use ($student_id){
+			$query->where('student_id',$student_id);
+
+		});
 	}
 
 }

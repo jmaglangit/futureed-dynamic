@@ -1,10 +1,10 @@
-<div class="container search-container" ng-if="content.active_list">
+<div class="col-xs-12 search-container" ng-if="content.active_list">
 	<div class="title-mid">
 		<span>Teaching Content</span>
-		<div class="pull-right col-xs-4" ng-if="!content.no_content">
+		<div class="pull-right col-xs-4 btn-right" ng-if="!content.no_content">
 			<a class="btn btn-medium btn-maroon pull-right" href="{!! route('client.parent.question.index') !!}">Skip</a>	
 		</div>
-		<div class="pull-right col-xs-4" ng-if="content.no_content">
+		<div class="pull-right col-xs-4 btn-right" ng-if="content.no_content">
 			<a class="btn btn-medium btn-gold pull-right" href="{!! route('client.parent.module.index') !!}">Back</a>
 		</div>	
 	</div>
@@ -37,7 +37,7 @@
 			<button class="btn btn-maroon btn-medium pull-right" ng-click="content.navigate(content.detail.key, futureed.NEXT)" ng-if="content.detail.key != content.total">Next</button>
 		</div>
 	</div>
-	<div class="col-xs-12 content-list">
+	<div class="col-xs-12 content-list margin-20-bot">
 		<div ng-repeat="record in content.records track by $index" class="col-xs-4">
 			<a href="javascript:;" class="btn btn-blue content-btn" id="content_name" ng-click="content.getContent(record.id, $index)">{! record.teaching_module !}</a>
 		</div>

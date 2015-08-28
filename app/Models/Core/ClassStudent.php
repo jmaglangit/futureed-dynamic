@@ -14,7 +14,7 @@ class ClassStudent extends Model {
 
 	protected $dates = ['deleted_at'];
 
-	protected $fillable = ['student_id', 'class_id', 'status', 'verification_code'];
+	protected $fillable = ['student_id', 'class_id', 'status', 'verification_code','date_started','date_removed'];
 
 	protected $hidden = ['verification_code', 'created_by', 'updated_by', 'created_at', 'updated_at', 'deleted_at'];
 
@@ -42,7 +42,7 @@ class ClassStudent extends Model {
 
 	public function classroom()
 	{
-		return $this->belongsTo('FutureEd\Models\Core\Classroom', 'class_id', 'id')->with('order');
+		return $this->belongsTo('FutureEd\Models\Core\Classroom', 'class_id', 'id')->with('subject','order');
 	}
 
 
@@ -107,6 +107,12 @@ class ClassStudent extends Model {
 	public function scopeId($query, $id){
 
 		return $query->where('id',$id);
+	}
+
+	public function scopeIsDateRemovedNull($query){
+
+		return $query->where('date_removed',NULL);
+
 	}
 
 

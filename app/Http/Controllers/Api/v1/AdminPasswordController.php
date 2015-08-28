@@ -18,7 +18,7 @@ class AdminPasswordController extends ApiController {
      */
      public function forgotPassword($id){
 
-        $input = input::only('reset_code','password');
+        $input = Input::only('reset_code','password');
         $admin = config('futureed.admin');
 
         $this->addMessageBag($this->validateVarNumber($id));
@@ -74,7 +74,7 @@ class AdminPasswordController extends ApiController {
 
    public function changePassword($id){
 
-       $input = input::only('new_password');
+       $input = Input::only('new_password');
        $user_type = config('futureed.admin');
 
        $this->addMessageBag($this->validateVarNumber($id));

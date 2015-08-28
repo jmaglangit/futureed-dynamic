@@ -25,5 +25,9 @@ interface ClassStudentRepositoryInterface {
 
 	public function isEnrolled($id,$class_id);
 
+	public function getClassStudentByClassId($class_id);
+
+	public function getClassStudentById($id);
+
 
 }
