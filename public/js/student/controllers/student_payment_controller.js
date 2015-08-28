@@ -104,7 +104,6 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					self.subjects = response.data.records;
-					console.log(self.subjects);
 				}
 			}
 		}).error(function(response) {
