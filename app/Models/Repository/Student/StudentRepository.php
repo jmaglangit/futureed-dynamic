@@ -398,6 +398,28 @@ class StudentRepository implements StudentRepositoryInterface
 		}
 
 	}
+	
+	/**
+	 * Update the learning style ID
+	 * @param $ls_banding
+	 * @return Object
+	 */
+
+	public function updateLearningStyle($id, $learning_style_id) {
+
+		try{
+
+			return Student::find($id)
+				->update([
+					'learning_style_id' => $learning_style_id
+				]);
+
+		} catch (Exception $e) {
+
+			throw new Exception($e->getMessage());
+		}
+
+	}
 
 
 }
