@@ -38,6 +38,11 @@ class Subject extends Model {
 		return $this->hasMany('FutureEd\Models\Core\SubjectArea');
 		
 	}
+
+	public function student_modules(){
+
+//		return $this->hasMany('Future')
+	}
     
     //-------------scopes
 	public function scopeName($query, $name) {
