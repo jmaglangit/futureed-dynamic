@@ -839,8 +839,8 @@ function FutureedController($scope, $window, apiService, futureed) {
 						$("#birth_date").dateDropdowns({
 						    submitFieldName: 'birth_date',
 						    defaultDate: $scope.reg.birth,
-						    minAge: 12,
-						    maxAge: 99
+						    minAge: Constants.MIN_AGE,
+						    maxAge: Constants.MAX_AGE
 						});
 					}
 				}
