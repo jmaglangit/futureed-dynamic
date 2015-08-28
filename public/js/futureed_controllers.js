@@ -957,8 +957,9 @@ function FutureedController($scope, $window, apiService, futureed) {
 		var current_url = window.location.pathname;
 
 		if($scope.user){
+			var lsp_id = parseInt($scope.user.learning_style_id);
 			if(lsp_url != current_url){
-				if(!$scope.user.learning_style_id && $scope.user.checked != Constants.TRUE){
+				if(!lsp_id && $scope.user.checked != Constants.TRUE){
 					$scope.user.checked = Constants.TRUE;
 					apiService.updateUserSession($scope.user).success(function(response) {
 						window.location.href = '/student/dashboard/follow-up-registration';
