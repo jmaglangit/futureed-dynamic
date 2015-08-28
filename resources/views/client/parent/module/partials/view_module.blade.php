@@ -39,7 +39,7 @@
 					, array(
 						'ng-disabled'=>'true'
 						, 'class' => 'form-control'
-						, 'ng-model' => 'module.record.subject_area.name'
+						, 'ng-model' => 'module.record.subjectarea.name'
 						, 'placeholder' => 'Area'
 					)
 				) !!}
@@ -70,14 +70,7 @@
 			</div>
 			<label class="control-label col-xs-2">Common Core URL</label>
 			<div class="col-xs-4">
-				{!! Form::text('core_area', ''
-					, array(
-						'ng-disabled'=>'true'
-						, 'class' => 'form-control'
-						, 'ng-model' => 'module.record.common_core_url'
-						, 'placeholder' => 'Common Core URL'
-					)
-				) !!}
+				<a class="form-control-link" href="{! module.record.common_core_url !}">{! module.record.common_core_url !}</a>
 			</div>
 		</div>
 		<div class="form-group">

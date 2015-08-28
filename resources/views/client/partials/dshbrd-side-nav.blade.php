@@ -11,6 +11,9 @@
 	<div class="client-name">
 		Welcome, {! user.first_name !}
 	</div>
+	<div class="back-link">
+		{!! HTML::link(route('client.dashboard.index'),'< Back to Dashboard') !!}
+	</div>
 </div>
 
 <div class="title-row" ng-if="profileActive">
