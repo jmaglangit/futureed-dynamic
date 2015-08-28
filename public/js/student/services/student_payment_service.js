@@ -43,6 +43,14 @@ function StudentPaymentService($http) {
 		});
 	}
 
+	service.updateSubscription = function(data) {
+		return $http({
+			method 	: Constants.METHOD_PUT
+			, data 	: data
+			, url 	: serviceUrl + 'student-payment-edit/' + data.order_id
+		});
+	}
+
 	service.paySubscription = function(data) {
 		return $http({
 			method 	: Constants.METHOD_POST
@@ -59,8 +67,11 @@ function StudentPaymentService($http) {
 		});
 	}
 
-	service.view = function() {
-
+	service.paymentDetails = function(id) {
+		return $http({
+			method : Constants.METHOD_GET
+			, url  : serviceUrl + 'invoice/' + id
+		});
 	}
 
 	return service;
