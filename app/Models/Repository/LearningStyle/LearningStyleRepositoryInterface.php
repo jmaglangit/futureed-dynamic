@@ -2,12 +2,8 @@
 
 interface LearningStyleRepositoryInterface {
 
-	/**
-	 * Gets list of LearningStyle.
-	 * @param $criteria
-	 * @param $limit
-	 * @param $offset
-	 * @return array
-	 */
 	public function getLearningStyles($criteria = array(), $limit = 0, $offset = 0);
+	
+	public function getLearningStyleByBanding($ls_banding);
+
 }
