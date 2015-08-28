@@ -169,6 +169,16 @@
 					, 'uses' => 'FutureLesson\Student\PaymentController@index'
 				]);
 
+			Routes::get('/success', [ 
+					'as' => 'student.payment.success'
+					, 'uses' => 'FutureLesson\Student\PaymentController@success'
+				]);
+
+			Routes::get('/fail', [ 
+					'as' => 'student.payment.fail'
+					, 'uses' => 'FutureLesson\Student\PaymentController@fail'
+				]);
+
 			Routes::group([
 				  'prefix' => '/partials'
 				, 'middleware' => 'student'], function()
