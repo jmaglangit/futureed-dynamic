@@ -363,22 +363,7 @@ function FutureedController($scope, $window, apiService, futureed) {
 				$scope.confirm_email = Constants.TRUE;
 			}
 		}
-		var lsp_url = Constants.LSP_URL;
-		var current_url = window.location.pathname;
-
-		if($scope.user){
-			if(lsp_url != current_url){
-				console.log('x')
-				if(!$scope.user.learning_style_id && $scope.user.checked != Constants.TRUE){
-					$scope.user.checked = Constants.TRUE;
-					apiService.updateUserSession($scope.user).success(function(response) {
-						window.location.href = '/student/dashboard/follow-up-registration';
-					}).error(function() {
-						$scope.internalError();
-					});
-				}
-			}
-		}
+		
 	}
 
 	/**
@@ -964,6 +949,24 @@ function FutureedController($scope, $window, apiService, futureed) {
 			$scope.id = id;
 			$scope.getLoginPassword();
 			$scope.enter_pass = Constants.TRUE;
+		}
+	}
+
+	$scope.checkLearningStyle = function() {
+		var lsp_url = Constants.LSP_URL;
+		var current_url = window.location.pathname;
+
+		if($scope.user){
+			if(lsp_url != current_url){
+				if(!$scope.user.learning_style_id && $scope.user.checked != Constants.TRUE){
+					$scope.user.checked = Constants.TRUE;
+					apiService.updateUserSession($scope.user).success(function(response) {
+						window.location.href = '/student/dashboard/follow-up-registration';
+					}).error(function() {
+						$scope.internalError();
+					});
+				}
+			}
 		}
 	}
 
