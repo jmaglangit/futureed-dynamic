@@ -278,4 +278,34 @@ class ClassStudentController extends ApiController {
 
 	}
 
+
+	/**
+	 *  list of active class under a student.
+	 *
+	 * @return mixed
+	 */
+
+	public function index(){
+
+		$criteria = [];
+
+		if(Input::get('student_id')){
+
+			$criteria['student_id'] = Input::get('student_id');
+		}
+
+		$offset = (Input::get('offset')) ? Input::get('offset') : 0;
+
+		$limit = (Input::get('limit')) ? Input::get('limit') : 0 ;
+
+
+
+		return $this->respondWithData($this->class_student->getClassStudents($criteria,$limit,$offset));
+
+
+
+
+
+	}
+
 }

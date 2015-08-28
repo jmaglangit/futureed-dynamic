@@ -20,4 +20,11 @@ Routes::group(['prefix' => '/class-student'], function()
 			'uses' => 'Api\v1\ClassStudentController@removeStudentClass',
 			'as' => 'api.v1.class-student.student-remove-class'
 		]);
+
+	Routes::get('/student-class-list',
+		[
+			'uses' => 'Api\v1\ClassStudentController@index',
+			'as' => 'api.v1.class-student.student-class-list'
+		]);
+
 });
