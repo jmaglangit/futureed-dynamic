@@ -167,6 +167,8 @@ var Constants = {
 	, ATTR_CONFIRM_EMAIL 	: "confirm_email"
 	, ATTR_PASSWORD 		: "password"
 
+	, LSP_URL 				: "/student/dashboard/follow-up-registration"
+
 	/*Billing Information for invoice*/
 
 	, BILL_COMPANY				: "Futureed Pte. Ltd."

@@ -18,7 +18,7 @@
           
           <div class="form_content">
             <ul class="form_password list-unstyled list-inline" ng-init="getImagePassword()">
-              <li class="item" ng-repeat="item in image_pass" ng-click="highlight($event)">
+              <li class="item col-xs-4" ng-repeat="item in image_pass" ng-click="highlight($event)">
                  <img ng-src="{! item.url !}" alt="{! item.name !}">
                  <input type="hidden" id="image_id" name="image_id" value="{! item.id !}">
               </li>
