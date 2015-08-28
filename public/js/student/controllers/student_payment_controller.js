@@ -273,8 +273,8 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 				self.invoice.payment_status = data.payment_status;
 				self.invoice.subscription_id = data.subscription_id;
 				self.invoice.order_id = data.order.id;
-				self.invoice.subject_id = data.invoice_detail[0].classroom.subject_id;
-				self.invoice.subject_name = data.invoice_detail[0].classroom.subject.name;
+				self.invoice.subject_id = (data.invoice_detail[0]) ? data.invoice_detail[0].classroom.subject_id : Constants.EMPTY_STR;
+				self.invoice.subject_name = (data.invoice_detail[0]) ? data.invoice_detail[0].classroom.subject.name : Constants.EMPTY_STR;
 				
 				computeDays(data.subscription);
 			}
