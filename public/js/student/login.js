@@ -19,3 +19,23 @@ $(document).on('submit', '#registration_success_form', function() {
 	return false;
 });
 
+$("#birth_date").change(function(){
+    var bdate = $("#birth_date").val();
+    if(bdate) {
+        var str=bdate.split('-');
+        var firstdate = new Date(str[0],str[1],str[2]);
+        var today = new Date();
+        var dayDiff = Math.ceil(today.getTime() - firstdate.getTime()) / (1000 * 60 * 60 * 24 * 365);
+        var age = parseInt(dayDiff);
+
+        if(age < 14) {
+            $("#invalid_student").modal({
+                backdrop: 'static',
+                keyboard: false,
+                show    : true
+            });
+        }
+    }
+});
+
+

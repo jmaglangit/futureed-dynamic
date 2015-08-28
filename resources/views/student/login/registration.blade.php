@@ -13,17 +13,17 @@
                         {!! Html::image('/images/user_student.png') !!}
                     </div>
                     <div class="media-body">
-                        <h2 class="box-title"><span class="thin">Student</span> Registration</h2>
+                        <h3 class="box-title"><span class="thin">Student</span> Registration</h3>
                         <div class="info-box rd col-md-6">
-                            <h4>For Student below 13 years old</h4>
+                            <h4>For Students 13 years old and below</h4>
                             <p>Parents should be the one to register, please click {!! Html::link(route('client.registration'), 'here') !!} to register.</p>
                         </div>
-                        <div style="margin: 7px 0px;">(<span class="required">*</span> ) Indicates a required field.</div>
                     </div>
                 </div>
             </div>
             
             <div class="form-content col-md-12">
+                <div style="margin: 7px 0px;">(<span class="required">*</span> ) Indicates a required field.</div>
                 <div class="alert alert-danger" ng-if="errors">
                   <p ng-repeat="error in errors" > 
                     {! error !}
@@ -248,7 +248,6 @@
 @stop
 
 @section('scripts')
-    {!! Html::script('/js/jquery.date-dropdowns.js') !!}
     {!! Html::script('/js/student/login.js') !!}
   
 

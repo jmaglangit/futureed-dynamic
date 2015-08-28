@@ -24,7 +24,7 @@
             <div class="">
                 <div ng-if="!has_avatar">
                     <div class="lmtcontain form-select-password form-group">
-                        <h3>Pick an Avatar for your Profile</h3>
+                        <h4>Pick an Avatar for your Profile</h4>
                         <div class="alert alert-danger" ng-if="errors">
                             <p ng-repeat="error in errors" > 
                               {! error !}
@@ -34,9 +34,9 @@
                           <form id="change_avatar_form">
                             <div class="form-select-password">
                               <div id="title" class="title"></div>
-                              <div class="form_content">
+                              <div class="form_content col-xs-12">
                                 <ul class="avatar_list list-unstyled list-inline" ng-init="getAvatarImages()">
-                                  <li class="item avtrcon" ng-repeat="avatar in avatars" ng-click="highlightAvatar($event)">
+                                  <li class="item col-xs-4" ng-repeat="avatar in avatars" ng-click="highlightAvatar($event)">
                                      <img ng-src="{! avatar.url !}" alt="{! avatar.name !}">
                                      <input type="hidden" id="avatar_id" name="avatar_id" value="{! avatar.id !}">
                                   </li>
