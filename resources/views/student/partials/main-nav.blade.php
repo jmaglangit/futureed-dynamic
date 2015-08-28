@@ -41,7 +41,7 @@
 						<a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="fa fa-2x fa-bars"></span></a>
 						<ul class="dropdown-menu nav-dropdown-menu" role="menu">
 							<li><a href="{!! route('student.profile.index') !!}">Profile</a></li>
-							<li><a href="#">Settings</a></li>
+							<li ng-if="user.age > 13"><a href="{!! route('student.payment.index') !!}">Payment</a></li>
 							<li class="divider"></li>
 							<li><a href="{!! route('student.logout') !!}">Logout</a></li>
 						</ul>

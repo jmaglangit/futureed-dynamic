@@ -1165,3 +1165,8 @@ span.step {
 .margin-30-bot{
 	margin-bottom: 30px;
 }
+
+.disabled-link {
+	pointer-events: none;
+	cursor: default;
+}
