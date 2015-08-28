@@ -15,12 +15,13 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 
 	self.user_id = $scope.user.id;
 
-	self.setActive = function(active) {
+	self.setActive = function(active, id) {
 		self.errors = Constants.FALSE;
 		self.fields = [];
 
 		self.active_list = Constants.FALSE;
 		self.active_add = Constants.FALSE;
+		self.active_view = Constants.FALSE;
 
 		switch(active) {
 			case Constants.ACTIVE_ADD 	:
@@ -28,6 +29,11 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 
 				self.invoice = {};
 				self.invoice.student_id = $scope.user.id;
+				break;
+
+			case Constants.ACTIVE_VIEW  : 
+				self.active_view = Constants.TRUE;
+				self.paymentDetail(id);
 				break;
 
 			case Constants.ACTIVE_LIST 	:
@@ -133,20 +139,52 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 	function computeDays(subscription) {
 		var start_date = new Date();
 			self.invoice.date_start = $filter('date')(start_date, 'yyyyMMdd');
-			self.dis_date_start = start_date;
+			self.invoice.dis_date_start = start_date;
 
 		var end_date = new Date(start_date.getTime());
 			end_date.setDate(end_date.getDate() + parseInt(subscription.days));
 
 			self.invoice.date_end = $filter('date')(end_date, 'yyyyMMdd');
-			self.dis_date_end = end_date;
+			self.invoice.dis_date_end = end_date;
 
 		self.invoice.seats_total = Constants.TRUE;
 		self.invoice.seats_taken = Constants.TRUE;
 		self.invoice.total_amount = parseInt(subscription.price);
 		
-		self.sub_total = parseInt(subscription.price);
-		self.discount = Constants.FALSE;
+		self.invoice.sub_total = parseInt(subscription.price);
+		self.invoice.discount = Constants.FALSE;
+	}
+
+	self.updateSubscription = function(save) {
+		self.fields = [];
+		self.errors = Constants.FALSE;
+
+		self.invoice.order_date = $filter('date')(new Date(), 'yyyyMMdd');
+		self.invoice.student_id = $scope.user.id;
+
+		$scope.ui_block();
+		StudentPaymentService.updateSubscription(self.invoice).success(function(response) {
+			if(response.errors) {
+				self.errors = $scope.errorHandler(response.errors);
+
+				angular.forEach(response.errors, function(value, key) {
+					self.fields[value.field] = Constants.TRUE;
+				});
+
+				$scope.ui_unblock();
+			} else if(response.data) {
+				if(save) {
+					self.setActive();
+					$scope.ui_unblock();
+				} else {
+					self.invoice = response.data;
+					self.getPaymentUri();
+				}
+			}
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
 	}
 
 	self.saveSubscription = function() {
@@ -211,5 +249,32 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
+	}
+
+	self.paymentDetail = function(id) {
+		self.errors = Constants.FALSE;
+
+		$scope.ui_block();
+		StudentPaymentService.paymentDetails(id).success(function(response) {
+			if(response.errors) {
+				self.errors = $scope.errorHandler(response.errors);
+			} else if(response.data) {
+				var data = response.data;
+
+				self.invoice = {};
+				self.invoice.payment_status = data.payment_status;
+				self.invoice.subscription_id = data.subscription_id;
+				self.invoice.order_id = data.order.id;
+				self.invoice.subject_id = data.invoice_detail[0].classroom.subject_id;
+				self.invoice.subject_name = data.invoice_detail[0].classroom.subject.name;
+				
+				computeDays(data.subscription);
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});;
 	}
 }

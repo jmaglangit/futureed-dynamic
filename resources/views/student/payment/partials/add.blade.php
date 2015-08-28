@@ -63,11 +63,11 @@
 						<div class="col-xs-6">
 							<label class="col-xs-2 control-label">Starting</label>
 							<div class="col-xs-4">
-								<input type="text" name="start_date" placeHolder="Start Date" ng-disabled="true" class="form-control" value="{! payment.dis_date_start | ddMMyy !}">
+								<input type="text" name="start_date" placeHolder="Start Date" ng-disabled="true" class="form-control" value="{! payment.invoice.dis_date_start | ddMMyy !}">
 							</div>
 							<label class="col-xs-2 control-label">To</label>
 							<div class="col-xs-4">
-								<input type="text" name="start_date" placeHolder="End Date" ng-disabled="true" class="form-control" value="{! payment.dis_date_end | ddMMyy !}">
+								<input type="text" name="start_date" placeHolder="End Date" ng-disabled="true" class="form-control" value="{! payment.invoice.dis_date_end | ddMMyy !}">
 							</div>
 						</div>
 					</div>
@@ -81,7 +81,7 @@
 						<div>
 							<div class="input-group">
 								<span class="input-group-addon" id="basic-addon1">USD$</span>
-								<input type="text" ng-disabled="true" class="form-control" value="{! payment.sub_total | currency : '' : 2 !}" placeholder="Sub Total" />
+								<input type="text" ng-disabled="true" class="form-control" value="{! payment.invoice.sub_total | currency : '' : 2 !}" placeholder="Sub Total" />
 							</div>
 						</div>
 					</div>
@@ -95,7 +95,7 @@
 									, [
 										'ng-disabled' => true
 										, 'class' => 'form-control'
-										, 'ng-model' => 'payment.discount'
+										, 'ng-model' => 'payment.invoice.discount'
 										, 'placeholder' => 'Discount'
 									]
 								) !!}
