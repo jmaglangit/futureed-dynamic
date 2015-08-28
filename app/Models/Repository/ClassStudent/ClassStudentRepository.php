@@ -121,7 +121,7 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 			->studentid($student_id)
 			->active()
 			->currentdate(Carbon::now())
-			->get();
+			->first();
 	}
 
 	/**
