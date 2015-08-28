@@ -12,7 +12,7 @@ Routes::group(['prefix' => '/class-student'], function()
 	Routes::post('/student-join-class',
 		[
 			'uses' => 'Api\v1\ClassStudentController@studentCurrentClass',
-			'as' => 'api.v1.class-student.student-current-class'
+			'as' => 'api.v1.class-student.student-join-class'
 		]);
 
 	Routes::put('/student-remove-class/{id}',
