@@ -337,6 +337,7 @@ class StudentRepository implements StudentRepositoryInterface
 					if($criteria['client_role'] === config('futureed.teacher')){
 
 						$student = $student->with('studentclassroom')->teacher($criteria['client_id']);
+						$student = $student->isDateRemovedNull();
 					}
 
 					$student = $student->noConfirmationCode();

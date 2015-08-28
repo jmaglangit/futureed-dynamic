@@ -180,6 +180,12 @@ var Constants = {
 	, BRANCH_CODE 				: "582 (SGD), 508 (USD)"
 	, SWIFT_CODE 				: "OCBCSGSG"
 
+	/*Birthdate dropdown config*/
+
+	, MIN_AGE 			: 12
+	, MAX_AGE			: 99
+	, AGE_RANGE			: 14
+
 	, URL_FORGOT_PASSWORD	: function(user_type) {
 		return '/' + user_type + '/password/forgot';
 	}

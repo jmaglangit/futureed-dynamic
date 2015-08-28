@@ -835,6 +835,13 @@ function FutureedController($scope, $window, apiService, futureed) {
 						$scope.reg.school_name = $scope.reg.school.name;
 						$scope.getGradeLevel($scope.reg.country_id);
 						$scope.edit_registration = Constants.TRUE;
+
+						$("#birth_date").dateDropdowns({
+						    submitFieldName: 'birth_date',
+						    defaultDate: $scope.reg.birth,
+						    minAge: Constants.MIN_AGE,
+						    maxAge: Constants.MAX_AGE
+						});
 					}
 				}
 			}).error(function(response){
