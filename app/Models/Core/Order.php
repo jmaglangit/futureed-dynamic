@@ -15,6 +15,11 @@ class Order extends Model {
 
     protected $fillable = ['order_no','order_date','client_id','subscription_id','date_start','date_end','seats_total','seats_taken','total_amount','payment_status','student_id'];
 
+	protected $attributes = [
+		'client_id' => 0,
+		'created_by' => 1,
+		'updated_by' => 1
+	];
 	public function invoice(){
 		return $this->belongsTo('FutureEd\Models\Core\Invoice','order_no','order_no')->with('invoiceDetail');
 	}
