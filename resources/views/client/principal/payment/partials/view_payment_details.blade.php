@@ -137,8 +137,8 @@
 		<div class="invoice-group margin-10-bot">
 			<p class="bill-info">{! payment.invoice.client_name !}</p>
 			<p class="bill-info">{! payment.user.street_address !}</p>
-			<p class="bill-info">{! payment.user.city !}</p>
-			<p class="bill-info">{! payment.user.state !}</p>
+			<p class="bill-info">{! payment.user.city !}, {! payment.user.state !}, {! payment.user.zip !}</p>
+			<p class="bill-info">{! payment.user.country !}</p>
 		</div>
 		<div class="invoice-group">
 			<p class="bill-info">Bill to:</p>
