@@ -238,30 +238,55 @@ class ClassStudentController extends ApiController {
 
     }
 
+//	/**
+//	 * Student Joins the class.
+//	 * @param $id
+//	 * @return mixed
+//	 */
+//	public function studentCurrentClass(ClassStudentRequest $request){
+//
+//		return $this->respondWithData(
+//			$this->student->getCurrentClass($request->get('student_id'))
+//		);
+//	}
+
 	/**
-	 * Student Joins the class.
-	 * @param $id
+	 * Get Student Classes, with hierarchy class, module, current progress.
 	 * @return mixed
 	 */
 	public function studentCurrentClass(ClassStudentRequest $request){
 
-		return $this->respondWithData(
-			$this->student->getCurrentClass($request->get('student_id'))
-		);
-	}
-
-
-	//TODO: return with hierarchy class, module, current progress.
-	public function studentClassModules(){
-
 		//Get list of current class of student
 		//GET class, modules,
 
-		//Allow search module_name, grade, and module_status
+		//Allow search module_name, grade_id, and module_status
+
+		//Required parameters
+		$criteria['student_id'] = $request->get('student_id');
+
+		$criteria['class_id'] = $request->get('class_id');
+
+		//Get module_name
+		if($request->get('module_name')){
+
+			$criteria['module_name'] = $request->get('module_name');
+		}
+
+		//Get grade_id
+		if($request->get('grade_id')){
+
+			$criteria['grade_id'] = $request->get('grade_id');
+		}
+
+		//Get module_status
+		if($request->get('module_status')){
+
+			$criteria['module_status'] = $request->get('module_status');
+		}
 
 
 		return $this->respondWithData(
-			$this->class_student->getCurrentClassStudent(Input::get('student_id'),Input::get('class_id'))
+			$this->class_student->getCurrentClassStudent($criteria)
 		);
 
 	}
