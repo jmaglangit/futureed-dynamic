@@ -221,13 +221,15 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 	 * @param $class_id
 	 * @return ClassStudent
 	 */
-	public function getCurrentClassStudent($student_id, $class_id){
+	public function getCurrentClassStudent($criteria){
 
 		$class_student = new ClassStudent();
 
+		//Search module_name, grade_id, module_status
+
 		$class_student = $class_student
-			->studentId($student_id)
-			->classroomId($class_id)
+			->studentId($criteria['student_id'])
+			->classroomId($criteria['class_id'])
 			->with('studentClassroom');
 
 
@@ -236,8 +238,8 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 		foreach ($class_student[0]->studentClassroom->studentSubject[0]->studentModules as $modules) {
 
 			//Get student progress by student_id, class_id, module_id
-			$student_modules_progress = StudentModule::studentId($student_id)
-				->classId($class_id)
+			$student_modules_progress = StudentModule::studentId($criteria['student_id'])
+				->classId($criteria['class_id'])
 				->moduleId($modules->id);
 
 			$modules->student_module_progress = $student_modules_progress->get();
