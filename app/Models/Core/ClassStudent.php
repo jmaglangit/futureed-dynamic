@@ -55,10 +55,17 @@ class ClassStudent extends Model {
 
 	//Scopes
 
+	//TODO: To be remove, check if used.
 	public function scopeClassroom($query, $classroom)
 	{
 
 		return $query->where('class_id', $classroom);
+	}
+
+
+	public function scopeClassroomId($query, $class_id)
+	{
+		return $query->where('class_students.class_id', $class_id);
 	}
 
 
@@ -90,7 +97,7 @@ class ClassStudent extends Model {
 
 	public function scopeStudentId($query,$student_id){
 
-		return $query->where('student_id',$student_id);
+		return $query->where('class_students.student_id',$student_id);
 	}
 
 	public function scopeCurrentDate($query,$current_date){
