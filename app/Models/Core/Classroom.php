@@ -16,6 +16,11 @@ class Classroom extends Model {
 
     protected $fillable = ['order_no','name','grade_id','client_id','seats_taken','seats_total','status','subject_id','student_id'];
 
+	protected $attributes = [
+		'client_id' => 0,
+		'created_by' => 1,
+		'updated_by' => 1
+	];
 
     //Relationships
 
