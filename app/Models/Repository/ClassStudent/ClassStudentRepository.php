@@ -4,6 +4,7 @@ namespace FutureEd\Models\Repository\ClassStudent;
 use Carbon\Carbon;
 use FutureEd\Models\Core\ClassStudent;
 use FutureEd\Models\Core\Classroom;
+use FutureEd\Models\Core\StudentModule;
 use FutureEd\Models\Repository\User\UserRepository;
 use League\Flysystem\Exception;
 use Illuminate\Support\Facades\DB;
@@ -218,32 +219,31 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 	 * Get Current student class.
 	 * @param $student_id
 	 * @param $class_id
+	 * @return ClassStudent
 	 */
 	public function getCurrentClassStudent($student_id, $class_id){
 
-		/* TODO: Get this query working on eloquent.
-		 * select
-cs.id, cs.student_id, cs.class_id,
-c.order_no, c.name,c.grade_id,c.client_id,c.subject_id,
-s.code, s.name, s.description,
-m.name as module_name,
-sm.class_id as sm_class_id, sm.student_id as sm_student_id, sm.subject_id as sm_subject_id, sm.module_id as sm_module_id, sm.module_status as sm_module_status
-from class_students cs
-left join classrooms c on cs.class_id=c.id
-left join subjects s on c.subject_id=s.id
-left join modules m on s.id=m.subject_id
-left join student_modules sm on sm.student_id=cs.student_id and sm.class_id=cs.class_id and sm.module_id=m.id
-where cs.student_id=3 and cs.class_id=8
-order by student_id, class_id;
-
-		 */
 		$class_student = new ClassStudent();
 
-		$class_student = $class_student->with('studentClassroom');
+		$class_student = $class_student
+			->studentId($student_id)
+			->classroomId($class_id)
+			->with('studentClassroom');
 
 
-		return $class_student->get();
+		//Parse and merge module with student progress.
+		$class_student = $class_student->get();
+		foreach ($class_student[0]->studentClassroom->studentSubject[0]->studentModules as $modules) {
 
+			//Get student progress by student_id, class_id, module_id
+			$student_modules_progress = StudentModule::studentId($student_id)
+				->classId($class_id)
+				->moduleId($modules->id);
+
+			$modules->student_module_progress = $student_modules_progress->get();
+		}
+
+		return $class_student;
 
 	}
 
