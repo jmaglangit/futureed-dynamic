@@ -15,13 +15,6 @@ Routes::group(['prefix' => '/class-student'], function()
 			'as' => 'api.v1.class-student.student-current-class'
 		]);
 
-	//TODO:  to replace student current class.
-	Routes::post('/student-class',
-		[
-			'uses' => 'Api\v1\ClassStudentController@studentClassModules',
-			'as' => 'api.v1.class-student.student-class'
-		]);
-
 	Routes::put('/student-remove-class/{id}',
 		[
 			'uses' => 'Api\v1\ClassStudentController@removeStudentClass',
