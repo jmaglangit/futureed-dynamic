@@ -24,9 +24,9 @@ angular.module('futureed.controllers')
 	};
 }]);
 	
-LearningStyleController.$inject = ['$rootScope', '$scope', '$interval', '$filter', '$sce', '$document', '$window', 'LearningStyleService'];
+LearningStyleController.$inject = ['$rootScope', '$scope', '$interval', '$filter', '$sce', '$document', '$window', 'LearningStyleService', 'apiService'];
 
-function LearningStyleController($rootScope, $scope, $interval, $filter, $sce, $document, $window, LearningStyleService) {
+function LearningStyleController($rootScope, $scope, $interval, $filter, $sce, $document, $window, LearningStyleService, apiService) {
 
 	var self = this;
 	
@@ -125,7 +125,16 @@ function LearningStyleController($rootScope, $scope, $interval, $filter, $sce, $
 		$scope.ui_block();
 
 		LearningStyleService.saveTest($scope.order_candidate_test.id, $scope.sections[$scope.session.section].id, user_answers_final, $scope.user.id).success(function(response) {
-			window.location.href= '/student/dashboard';
+			if(angular.equals(Constants.STATUS_OK, response.status)){
+				if(response.data) {
+					$scope.user.learning_style_id = parseInt(response.data.learning_style_id);
+					apiService.updateUserSession($scope.user).success(function(response) {
+						window.location.href= '/student/dashboard';
+					}).error(function() {
+						$scope.internalError();
+					});
+				}
+			}
 		
 		}).error(function(response){
 			self.errors = $scope.internalError();
