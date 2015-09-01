@@ -12,6 +12,7 @@
           {!! Html::image('/images/user_principal.png', 'Principal'
             , array(
               'id' => 'user_principal'
+              , 'class' => 'client-reg-img'
               , 'ng-class' => '{role : !register.principal}'
             )
           ) !!}
@@ -21,6 +22,7 @@
           {!! Html::image('/images/user_parent.png', 'Parent'
             , array(
               'id' => 'user_parent'
+              , 'class' => 'client-reg-img'
               , 'ng-class' => '{role : !register.parent}'
             )
           ) !!}
