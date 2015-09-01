@@ -141,6 +141,8 @@ class AssessController extends ApiController {
 		
 			$data = $this->iassess->data;
 			
+			$response = ['learning_style_id' => config('futureed.default_lsp')];
+			
 			foreach($data as $score) {
 				#save scores
 				
@@ -160,6 +162,7 @@ class AssessController extends ApiController {
 					
 					if($matched_learning_style) {
 						$this->student->updateLearningStyle($student_id, $matched_learning_style->id);
+						$response['learning_sytle_id'] = $matched_learning_style->id;
 					} else {
 						$this->student->updateLearningStyle($student_id, config('futureed.default_lsp'));
 					}
@@ -168,7 +171,7 @@ class AssessController extends ApiController {
 				$score = $this->student_ls_score->addScore($save_data);
 			}
 			
-			return $this->respondWithData($data);
+			return $this->respondWithData($response);
 			
 		} else {
 		
