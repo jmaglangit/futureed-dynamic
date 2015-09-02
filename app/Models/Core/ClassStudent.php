@@ -48,7 +48,7 @@ class ClassStudent extends Model {
 	//Student Class Modules
 	public function studentClassroom(){
 
-		return $this->belongsTo('FutureEd\Models\Core\Classroom','class_id')->with('studentSubject');
+		return $this->hasOne('FutureEd\Models\Core\Classroom','id','class_id')->with('studentSubject');
 
 	}
 
