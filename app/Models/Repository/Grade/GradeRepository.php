@@ -46,7 +46,7 @@ class GradeRepository implements GradeRepositoryInterface{
 
         }
 
-        $grade = $grade->with('country')->orderBy('name', 'asc');
+        $grade = $grade->with('country')->orderBy('id', 'asc');
 
         return ['total' => $count, 'records' => $grade->get()->toArray()];
 
