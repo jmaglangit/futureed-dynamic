@@ -359,6 +359,7 @@ function FutureedController($scope, $window, apiService, futureed) {
 
 		if(angular.isString(user) && user.length > 0) {
 			$scope.user = JSON.parse(user);
+			$scope.user.age = parseInt($scope.user.age);
 			if($scope.user.new_email != null){
 				$scope.confirm_email = Constants.TRUE;
 			}
@@ -835,10 +836,23 @@ function FutureedController($scope, $window, apiService, futureed) {
 						$scope.reg.school_name = $scope.reg.school.name;
 						$scope.getGradeLevel($scope.reg.country_id);
 						$scope.edit_registration = Constants.TRUE;
+
+						$("#birth_date").dateDropdowns({
+						    submitFieldName: 'birth_date',
+						    defaultDate: $scope.reg.birth,
+						    minAge: Constants.MIN_AGE,
+						    maxAge: Constants.MAX_AGE
+						});
 					}
 				}
 			}).error(function(response){
 				$scope.internalError();
+			});
+		} else {
+			$("#birth_date").dateDropdowns({
+			    submitFieldName: 'birth_date',
+			    minAge: Constants.MIN_AGE,
+			    maxAge: Constants.MAX_AGE
 			});
 		}
 	}
@@ -938,4 +952,33 @@ function FutureedController($scope, $window, apiService, futureed) {
 		}
 	}
 
+	$scope.checkLearningStyle = function() {
+		var lsp_url = Constants.LSP_URL;
+		var current_url = window.location.pathname;
+
+		if($scope.user){
+			var lsp_id = parseInt($scope.user.learning_style_id);
+			if(lsp_url != current_url){
+				if(!lsp_id && $scope.user.checked != Constants.TRUE){
+					$scope.user.checked = Constants.TRUE;
+					apiService.updateUserSession($scope.user).success(function(response) {
+						window.location.href = '/student/dashboard/follow-up-registration';
+					}).error(function() {
+						$scope.internalError();
+					});
+				}
+			}
+		}
+	}
+
+	$scope.resetChecked = function() {
+		
+		$scope.user.checked = Constants.FALSE;
+		apiService.updateUserSession($scope.user).success(function(response) {
+			
+		}).error(function() {
+			$scope.internalError();
+		});
+			
+	}	
 };

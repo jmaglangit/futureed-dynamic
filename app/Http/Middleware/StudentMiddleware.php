@@ -7,8 +7,7 @@ class StudentMiddleware {
 
     public function handle($request, Closure $next)
     {
-    	$student = Session::get('student');
-
+        $student = Session::get('student');
     	if(!$student) {
 			return redirect()->route('student.login')->send();
 		}

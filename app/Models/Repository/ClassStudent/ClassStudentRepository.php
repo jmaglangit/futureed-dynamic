@@ -31,9 +31,9 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 
 
 		$class_student = new ClassStudent();
-
+		$class_student = $class_student->isDateRemovedNull();
 		$class_student = $class_student->with('student');
-//        dd($class_student->get()->toArray());
+
 		if (isset($criteria['class_id'])) {
 
 			$class_student = $class_student->classroom($criteria['class_id']);
@@ -49,9 +49,17 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 			$class_student = $class_student->email($criteria['email']);
 		}
 
-		if ($offset > 0 && $limit > 0) {
+		if(isset($criteria['student_id'])){
 
-			$class_student = $class_student->skip($offset)->take($limit);
+			$class_student = $class_student->studentId($criteria['student_id']);
+			$class_student = $class_student->active();
+			$class_student = $class_student->with('classroom');
+
+		}
+
+		if ($limit > 0 && $offset >= 0) {
+
+			$class_student = $class_student->offset($offset)->limit($limit);
 		}
 
 		$records = $class_student->get();
@@ -122,7 +130,7 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 			->studentid($student_id)
 			->active()
 			->currentdate(Carbon::now())
-			->get();
+			->first();
 	}
 
 	/**
@@ -217,7 +225,7 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 	{
 
 		$class_student = new  ClassStudent();
-		$class_student = $class_student->with('student')->find($id);
+		$class_student = $class_student->with('student','classroom')->find($id);
 		return $class_student;
 
 	}

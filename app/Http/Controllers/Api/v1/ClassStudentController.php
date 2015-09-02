@@ -312,9 +312,51 @@ class ClassStudentController extends ApiController {
 
 		$data['date_removed'] = Carbon::now();
 
+		$class_student = $this->class_student->getClassStudentById($id);
+
+		if(!$class_student){
+
+			return $this->respondErrorMessage(2120);
+
+		}
+
+		$data['seats_taken'] = $class_student['classroom']['seats_taken']-1;
+
+		$this->classroom->updateClassroom($class_student['classroom']['id'],$data);
+
 		$this->class_student->updateClassStudent($id,$data);
 
 		return $this->respondWithData($this->class_student->getClassStudentById($id));
+
+	}
+
+
+	/**
+	 *  list of active class under a student.
+	 *
+	 * @return mixed
+	 */
+
+	public function index(){
+
+		$criteria = [];
+
+		if(Input::get('student_id')){
+
+			$criteria['student_id'] = Input::get('student_id');
+		}
+
+		$offset = (Input::get('offset')) ? Input::get('offset') : 0;
+
+		$limit = (Input::get('limit')) ? Input::get('limit') : 0 ;
+
+
+
+		return $this->respondWithData($this->class_student->getClassStudents($criteria,$limit,$offset));
+
+
+
+
 
 	}
 

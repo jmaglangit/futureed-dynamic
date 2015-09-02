@@ -379,7 +379,7 @@ th, td {
 }
 
 #lsp_panel .panel-body {
-	min-height: 480px;
+	min-height: 220px;
 	padding: 15px 20px;
 }
 
@@ -1295,10 +1295,15 @@ top: 41px;
     vertical-align: middle;
     border-radius: 4px;
 	border: 1px solid #CCCCCC;
+	margin-right: 5px;
 }
 
 .date-dropdowns {
 	margin-left: 0 !important;
+}
+
+.media > .media-left > img {
+	width: 125px;
 }
 
 /*bootstrap changes font-sizes*/

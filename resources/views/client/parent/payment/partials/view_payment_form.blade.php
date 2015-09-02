@@ -115,6 +115,8 @@
 							<p class="bill-info">{! payment.client.street_address !}</p>
 							<p class="bill-info">{! payment.client.city !}</p>
 							<p class="bill-info">{! payment.client.state !}</p>
+							<p class="bill-info">{! payment.client.country !}</p>
+							<p class="bill-info">{! payment.client.zip !}</p>
 						</div>
 						<div class="invoice-group">
 							<p class="bill-info">Bill to:</p>

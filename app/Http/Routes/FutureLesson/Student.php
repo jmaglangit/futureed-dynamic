@@ -159,6 +159,46 @@
 				});
 			});
 		});
+	
+		Routes::group([
+			  'prefix' => '/payment'
+			, 'middleware' => 'student'], function()
+		{
+			Routes::get('/', [ 
+					'as' => 'student.payment.index'
+					, 'uses' => 'FutureLesson\Student\PaymentController@index'
+				]);
+
+			Routes::get('/success', [ 
+					'as' => 'student.payment.success'
+					, 'uses' => 'FutureLesson\Student\PaymentController@success'
+				]);
+
+			Routes::get('/fail', [ 
+					'as' => 'student.payment.fail'
+					, 'uses' => 'FutureLesson\Student\PaymentController@fail'
+				]);
+
+			Routes::group([
+				  'prefix' => '/partials'
+				, 'middleware' => 'student'], function()
+			{
+				Routes::get('/list', [ 
+						'as' => 'student.payment.partials.list'
+						, 'uses' => 'FutureLesson\Student\PaymentController@list_form'
+					]);
+
+				Routes::get('/add', [ 
+						'as' => 'student.payment.partials.add'
+						, 'uses' => 'FutureLesson\Student\PaymentController@add_form'
+					]);
+
+				Routes::get('/view', [ 
+						'as' => 'student.payment.partials.view'
+						, 'uses' => 'FutureLesson\Student\PaymentController@view_form'
+					]);
+			});
+		});
 
 		Routes::group([
 			  'prefix' => '/tips'

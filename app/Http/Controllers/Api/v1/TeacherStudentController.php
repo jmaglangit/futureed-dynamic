@@ -69,7 +69,7 @@ class TeacherStudentController extends ApiController {
 
 			$data['date_started'] = Carbon::now();
 
-			$this->class_student->updateClassStudent($class_student[0]['id'],$data);
+			$this->class_student->updateClassStudent($class_student->id,$data);
 		}
 
 		//set registration code to NULL

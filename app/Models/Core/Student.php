@@ -186,6 +186,16 @@ class Student extends Model {
 		});
 	}
 
+	public function scopeIsDateRemovedNull($query){
+
+		return $query->whereHas('studentClassroom', function($query){
+
+			$query->where('date_removed', NULL);
+
+		});
+
+	}
+
 
 
 

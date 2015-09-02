@@ -207,7 +207,7 @@
 
 	<div class="col-xs-12">
 		<div class="row margin-10-bot">
-			<div class="col-xs-4 div-right">
+			<div class="col-xs-6 div-right">
 				<label class="col-xs-4 control-label top-10">Sub Total</label>
 				<div class="col-xs-8">
 					<div class="input-group">
@@ -218,7 +218,7 @@
 			</div>
 		</div>
 		<div class="row margin-10-bot">
-			<div class="col-xs-4 div-right">
+			<div class="col-xs-6 div-right">
 				<label class="col-xs-4 control-label top-10">Discount</label>
 				<div class="col-xs-8">
 					<div class="input-group">
@@ -237,7 +237,7 @@
 		</div>
 
 		<div class="row margin-10-bot">
-			<div class="col-xs-4 div-right">
+			<div class="col-xs-6 div-right">
 				<label class="col-xs-4 control-label top-10">Total</label>
 				<div class="col-xs-8">
 					<div class="input-group">
@@ -252,21 +252,21 @@
 			<div class="btn-container">
 				{!! Form::button('Delete Subscription'
         			, array(
-        				'class' => 'btn btn-gold btn-small div-right'
+        				'class' => 'btn btn-gold btn-semi-medium div-right'
         				, 'ng-click' => 'payment.deleteInvoice(payment.invoice.id)'
         			)
         		) !!}
 
         		{!! Form::button('Save Subscription'
         			, array(
-        				'class' => 'btn btn-blue btn-small div-right'
+        				'class' => 'btn btn-blue btn-semi-medium div-right'
         				, 'ng-click' => 'payment.savePayment()'
         			)
         		) !!}
 
         		{!! Form::button('Pay Subscription'
         			, array(
-        				'class' => 'btn btn-blue btn-small div-right'
+        				'class' => 'btn btn-blue btn-semi-medium div-right'
         				, 'ng-click' => 'payment.addPayment()'
         			)
         		) !!}        		

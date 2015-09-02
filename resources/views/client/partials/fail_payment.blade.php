@@ -9,7 +9,7 @@
 	<div class="form-narrow form-style">
 		<div class="content-title">
 			<div class="pull-left title-main-content">
-				<span>Fialed Payment</span>
+				<span>Failed Payment</span>
 			</div>
 		</div>
 

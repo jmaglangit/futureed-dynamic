@@ -247,7 +247,7 @@
 	<div class="col-xs-12">
 		<div class="margin-30-bot">
 			<div class="row margin-10-bot">
-				<div class="col-xs-4 div-right">
+				<div class="col-xs-6 div-right">
 					<label class="col-xs-4 control-label top-10">Sub Total</label>
 					<div class="col-xs-8">
 						<div class="input-group">
@@ -258,7 +258,7 @@
 				</div>
 			</div>
 			<div class="row margin-10-bot">
-				<div class="col-xs-4 div-right">
+				<div class="col-xs-6 div-right">
 					<label class="col-xs-4 control-label top-10">Discount</label>
 					<div class="col-xs-8">
 						<div class="input-group">
@@ -276,7 +276,7 @@
 				</div>
 			</div>
 			<div class="row margin-10-bot">
-				<div class="col-xs-4 div-right">
+				<div class="col-xs-6 div-right">
 					<label class="col-xs-4 control-label top-10">Total</label>
 					<div class="col-xs-8">
 						<div class="input-group">

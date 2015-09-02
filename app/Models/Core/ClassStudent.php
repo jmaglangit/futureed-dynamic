@@ -123,16 +123,23 @@ class ClassStudent extends Model {
 		return $query->where('id',$id);
 	}
 
-	public function scopeModuleName($query, $module_name){
 
-		return $query->whereHas('studentClassroom', function($query) use ($module_name){
-			$query->whereHas('studentSubject', function($query) use ($module_name){
-				$query->whereHas('studentModules', function($query) use ($module_name){
+	public function scopeModuleName($query, $module_name) {
 
-					$query->where('name','like', '%' . $module_name . '%');
+		return $query->whereHas('studentClassroom', function ($query) use ($module_name) {
+			$query->whereHas('studentSubject', function ($query) use ($module_name) {
+				$query->whereHas('studentModules', function ($query) use ($module_name) {
+
+					$query->where('name', 'like', '%' . $module_name . '%');
 				});
 			});
 		});
+	}
+
+	public function scopeIsDateRemovedNull($query){
+
+		return $query->where('date_removed',NULL);
+
 	}
 
 
