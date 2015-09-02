@@ -59,7 +59,7 @@ class Classroom extends Model {
 
 	public function studentSubject(){
 
-		return $this->hasMany('FutureEd\Models\Core\Subject','id','subject_id')->with('studentModules');
+		return $this->hasMany('FutureEd\Models\Core\Subject','id','subject_id');
 	}
 
 
