@@ -238,17 +238,6 @@ class ClassStudentController extends ApiController {
 
     }
 
-//	/**
-//	 * Student Joins the class.
-//	 * @param $id
-//	 * @return mixed
-//	 */
-//	public function studentCurrentClass(ClassStudentRequest $request){
-//
-//		return $this->respondWithData(
-//			$this->student->getCurrentClass($request->get('student_id'))
-//		);
-//	}
 
 	/**
 	 * Get Student Classes, with hierarchy class, module, current progress.
