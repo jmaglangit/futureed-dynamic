@@ -101,6 +101,11 @@ class StudentModule extends Model {
 
 	}
 
+	public function scopeModuleId($query, $module_id){
+
+		return $query->where('module_id',$module_id);
+	}
+
 	public function scopeNotFailed($query){
 
 		return $query->where('module_status','<>',config('futureed.module_status_failed'));

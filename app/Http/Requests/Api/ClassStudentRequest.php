@@ -44,10 +44,16 @@ class ClassStudentRequest extends ApiRequest {
 							'client_id' => 'required',
 							'class_id' => 'required'];
 						break;
-					case 'api.v1.class-student.student-join-class';
+					case 'api.v1.class-student.student-current-class';
 
 						return [
-							'student_id' => 'required|exists:class_students,student_id,deleted_at,NULL'
+							'student_id' => 'required|exists:class_students,student_id,deleted_at,NULL',
+							'class_id' => 'required|exists:classrooms,id,deleted_at,NULL',
+							'grade_id' => 'exists:grades,id,deleted_at,NULL',
+							'module_status' => 'in:'. config('futureed.module_status_available')
+								.','.config('futureed.module_status_ongoing')
+								.','.config('futureed.module_status_completed')
+								.','.config('futureed.module_status_failed'),
 						];
 						break;
 					default:

@@ -4,13 +4,22 @@ namespace FutureEd\Models\Repository\ClassStudent;
 use Carbon\Carbon;
 use FutureEd\Models\Core\ClassStudent;
 use FutureEd\Models\Core\Classroom;
-use FutureEd\Models\Repository\User\UserRepository;
+use FutureEd\Models\Core\Module;
+use FutureEd\Models\Core\StudentModule;
+use FutureEd\Models\Repository\Module\ModuleRepository as ModuleRepository;
 use League\Flysystem\Exception;
-use Illuminate\Support\Facades\DB;
 
 class ClassStudentRepository implements ClassStudentRepositoryInterface
 {
 
+	protected $module;
+
+	public function __construct(
+		ModuleRepository $moduleRepository
+	){
+		$this->module = $moduleRepository;
+
+	}
 	/**
 	 * @param array $criteria
 	 * @param int $limit
@@ -218,6 +227,47 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 		$class_student = new  ClassStudent();
 		$class_student = $class_student->with('student','classroom')->find($id);
 		return $class_student;
+
+	}
+
+
+	/**
+	 * Get Current student class.
+	 * @param $criteria
+	 * @return mixed
+	 */
+	public function getCurrentClassStudent($criteria){
+
+		try {
+
+			$class_student = ClassStudent::studentId($criteria['student_id'])
+				->classroomId($criteria['class_id'])
+				->with('studentClassroom');
+
+			//Modules search student_id, class_id, module_name, grade_id, module_status
+			$subject = $class_student->first();
+
+			//Get subject_id
+			$criteria['subject_id'] = $subject->studentClassroom->studentSubject->id;
+
+			$student_modules = $this->module->getModulesByStudentProgress($criteria);
+
+			if ($student_modules) {
+
+				//merge module
+				$subject->studentClassroom->studentSubject->student_modules = $student_modules;
+
+				return $subject;
+
+			} else {
+
+				return null;
+			}
+
+		} catch (\Exception $e) {
+
+			return null;
+		}
 
 	}
 

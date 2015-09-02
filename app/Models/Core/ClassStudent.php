@@ -45,13 +45,27 @@ class ClassStudent extends Model {
 		return $this->belongsTo('FutureEd\Models\Core\Classroom', 'class_id', 'id')->with('subject','order');
 	}
 
+	//Student Class Modules
+	public function studentClassroom(){
+
+		return $this->hasOne('FutureEd\Models\Core\Classroom','id','class_id')->with('studentSubject');
+
+	}
+
 
 	//Scopes
 
+	//TODO: To be remove, check if used.
 	public function scopeClassroom($query, $classroom)
 	{
 
 		return $query->where('class_id', $classroom);
+	}
+
+
+	public function scopeClassroomId($query, $class_id)
+	{
+		return $query->where('class_students.class_id', $class_id);
 	}
 
 
@@ -83,7 +97,7 @@ class ClassStudent extends Model {
 
 	public function scopeStudentId($query,$student_id){
 
-		return $query->where('student_id',$student_id);
+		return $query->where('class_students.student_id',$student_id);
 	}
 
 	public function scopeCurrentDate($query,$current_date){
@@ -107,6 +121,19 @@ class ClassStudent extends Model {
 	public function scopeId($query, $id){
 
 		return $query->where('id',$id);
+	}
+
+
+	public function scopeModuleName($query, $module_name) {
+
+		return $query->whereHas('studentClassroom', function ($query) use ($module_name) {
+			$query->whereHas('studentSubject', function ($query) use ($module_name) {
+				$query->whereHas('studentModules', function ($query) use ($module_name) {
+
+					$query->where('name', 'like', '%' . $module_name . '%');
+				});
+			});
+		});
 	}
 
 	public function scopeIsDateRemovedNull($query){

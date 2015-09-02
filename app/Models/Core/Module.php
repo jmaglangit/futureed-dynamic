@@ -168,4 +168,13 @@ class Module extends Model
 		});
 
 	}
+
+	public function scopeLeftJoinStudentModule($query, $criteria){
+
+		return $query->leftJoin(
+			'student_modules', function($leftJoin) use ($criteria){
+			$leftJoin->on('modules.id','=','student_modules.module_id')
+				->where('student_modules.class_id','=',$criteria['class_id']);
+		})->where('modules.subject_id',$criteria['subject_id']);
+	}
 }
