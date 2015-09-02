@@ -43,6 +43,7 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 			case Constants.ACTIVE_EDIT 	:
 				self.success = Constants.FALSE;
 				self.active_edit = Constants.TRUE;
+				self.tableDefaults();
 				self.viewStudent(id);
 				break;
 
@@ -102,7 +103,9 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 	self.list = function() {
 		if(self.active_list) {
 			self.studentlist();
-		}
+		} else if(self.active_view) {
+			self.moduleList(self.record.id);
+ 		}
 	}
 
 	self.clear = function() {
@@ -388,7 +391,10 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 	}
 
 	self.moduleList = function(id) {
-		manageStudentService.moduleList(id).success(function(response){
+		self.errors = Constants.FALSE;
+
+		$scope.ui_block();
+		manageStudentService.moduleList(id, self.table).success(function(response){
 			if(angular.equals(response.status,Constants.STATUS_OK)){
 				if(response.errors){
 					self.errors = $scope.errorHandler(response.errors);
@@ -401,6 +407,8 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 					self.updatePageCount(response.data);
 				}
 			}
+
+			$scope.ui_unblock();
 		}).error(function(response){
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
