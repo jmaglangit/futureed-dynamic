@@ -18,4 +18,6 @@ interface ModuleRepositoryInterface
 
 	public function countSubjectModule($subject_id, $grade_id);
 
+	public function getModulesByStudentProgress($criteria,  $offset = 0, $limit = 0);
+
 }
