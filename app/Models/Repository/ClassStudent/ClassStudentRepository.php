@@ -238,25 +238,35 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 	 */
 	public function getCurrentClassStudent($criteria){
 
-		//Search module_name, grade_id, module_status
+		try {
 
-		//Class Student
-		$class_student = ClassStudent::studentId($criteria['student_id'])
-			->classroomId($criteria['class_id'])
-			->with('studentClassroom');
+			$class_student = ClassStudent::studentId($criteria['student_id'])
+				->classroomId($criteria['class_id'])
+				->with('studentClassroom');
 
-		//Modules search student_id, class_id, module_name, grade_id, module_status
-		$subject = $class_student->get();
+			//Modules search student_id, class_id, module_name, grade_id, module_status
+			$subject = $class_student->first();
 
-		//Get subject_id
-		$criteria['subject_id'] = $subject[0]->studentClassroom->studentSubject[0]->id;
+			//Get subject_id
+			$criteria['subject_id'] = $subject->studentClassroom->studentSubject->id;
 
-		$student_modules =  $this->module->getModulesByStudentProgress($criteria);
+			$student_modules = $this->module->getModulesByStudentProgress($criteria);
 
-		//merge module
-		$subject[0]->studentClassroom->studentSubject[0]->student_modules = $student_modules;
+			if($student_modules){
+				//merge module
+				$subject->studentClassroom->studentSubject->student_modules = $student_modules;
 
-		return $subject;
+				return $subject;
+
+			}else{
+
+				return null;
+			}
+
+		} catch (\Exception $e) {
+
+			return null;
+		}
 
 	}
 
