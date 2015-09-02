@@ -252,6 +252,7 @@ class ModuleRepository implements ModuleRepositoryInterface
 			$count = $student_module->count();
 
 			if ($limit > 0 && $offset >= 0) {
+
 				$student_module = $student_module->offset($offset)->limit($limit);
 			}
 
