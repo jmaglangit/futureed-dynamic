@@ -284,6 +284,17 @@ class ClassStudentController extends ApiController {
 			$criteria['module_status'] = $request->get('module_status');
 		}
 
+		//Get Offset
+		if($request->get('offset')){
+			$criteria['offset'] = intval($request->get('offset'));
+		}
+
+		//Get limit
+		if($request->get('limit')){
+
+			$criteria['limit'] = intval($request->get('limit'));
+		}
+
 
 		return $this->respondWithData(
 			$this->class_student->getCurrentClassStudent($criteria)
