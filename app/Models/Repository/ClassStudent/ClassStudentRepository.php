@@ -252,13 +252,14 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 
 			$student_modules = $this->module->getModulesByStudentProgress($criteria);
 
-			if($student_modules){
+			if ($student_modules) {
+
 				//merge module
 				$subject->studentClassroom->studentSubject->student_modules = $student_modules;
 
 				return $subject;
 
-			}else{
+			} else {
 
 				return null;
 			}
