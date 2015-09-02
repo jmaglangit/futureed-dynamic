@@ -4,14 +4,22 @@ namespace FutureEd\Models\Repository\ClassStudent;
 use Carbon\Carbon;
 use FutureEd\Models\Core\ClassStudent;
 use FutureEd\Models\Core\Classroom;
+use FutureEd\Models\Core\Module;
 use FutureEd\Models\Core\StudentModule;
-use FutureEd\Models\Repository\User\UserRepository;
+use FutureEd\Models\Repository\Module\ModuleRepository as ModuleRepository;
 use League\Flysystem\Exception;
-use Illuminate\Support\Facades\DB;
 
 class ClassStudentRepository implements ClassStudentRepositoryInterface
 {
 
+	protected $module;
+
+	public function __construct(
+		ModuleRepository $moduleRepository
+	){
+		$this->module = $moduleRepository;
+
+	}
 	/**
 	 * @param array $criteria
 	 * @param int $limit
@@ -217,35 +225,30 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 
 	/**
 	 * Get Current student class.
-	 * @param $student_id
-	 * @param $class_id
-	 * @return ClassStudent
+	 * @param $criteria
+	 * @return mixed
 	 */
 	public function getCurrentClassStudent($criteria){
 
-		$class_student = new ClassStudent();
-
 		//Search module_name, grade_id, module_status
 
-		$class_student = $class_student
-			->studentId($criteria['student_id'])
+		//Class Student
+		$class_student = ClassStudent::studentId($criteria['student_id'])
 			->classroomId($criteria['class_id'])
 			->with('studentClassroom');
 
+		//Modules search student_id, class_id, module_name, grade_id, module_status
+		$subject = $class_student->get();
 
-		//Parse and merge module with student progress.
-		$class_student = $class_student->get();
-		foreach ($class_student[0]->studentClassroom->studentSubject[0]->studentModules as $modules) {
+		//Get subject_id
+		$criteria['subject_id'] = $subject[0]->studentClassroom->studentSubject[0]->id;
 
-			//Get student progress by student_id, class_id, module_id
-			$student_modules_progress = StudentModule::studentId($criteria['student_id'])
-				->classId($criteria['class_id'])
-				->moduleId($modules->id);
+		$student_modules =  $this->module->getModulesByStudentProgress($criteria);
 
-			$modules->student_module_progress = $student_modules_progress->get();
-		}
+		//merge module
+		$subject[0]->studentClassroom->studentSubject[0]->student_modules = $student_modules;
 
-		return $class_student;
+		return $subject;
 
 	}
 
