@@ -586,7 +586,7 @@ function ProfileController($scope, apiService, profileService) {
 		    minAge: Constants.MIN_AGE,
 		    maxAge: Constants.MAX_AGE
 		});
-		console.log(self.active_edit);
+		
 		if(self.active_edit == Constants.FALSE) {
 			$(".day").attr('disabled', 'disabled');
 			$(".month").attr('disabled', 'disabled');
