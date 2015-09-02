@@ -7,13 +7,13 @@ trait TransactionTrait {
 	
 		static::creating(function($model){
 	
-			$model->created_by = 1;
+			$model->created_by = session('current_user');
 	
 		});
 	
 		static::updating(function($model){
 	
-			$model->updated_by = 1;
+			$model->updated_by = session('current_user');
 	
 		});
 	}
