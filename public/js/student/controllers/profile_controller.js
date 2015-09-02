@@ -116,6 +116,8 @@ function ProfileController($scope, apiService, profileService) {
 					self.prof.birth = self.prof.birth_date;
 
 					self.getGradeLevel();
+
+					self.dateDropdown(self.prof.birth_date);
 				} 
 			}
 
@@ -169,10 +171,14 @@ function ProfileController($scope, apiService, profileService) {
 	    self.fields = [];
 
 	    if($scope.e_error || $scope.u_error) {
-	      $("html, body").animate({ scrollTop: 350 }, "slow");
+			$("html, body").animate({ scrollTop: 350 }, "slow");
 	    } else {
 	      self.prof.school_code = 1;
-	      self.prof.birth_date = $("input[name='hidden_date']").val();
+			var day = $("#profile_form .day").val();
+			var month = $("#profile_form .month").val();
+			var year = $("#profile_form .year").val();
+
+			self.prof.birth_date = year + month + day;
 
 	      $scope.ui_block();
 	      apiService.saveProfile(self.prof).success(function(response) {
@@ -571,5 +577,24 @@ function ProfileController($scope, apiService, profileService) {
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
+	}
+
+	self.dateDropdown = function(date) {
+		$("#birth_date").dateDropdowns({
+			defaultDate : date,
+		    submitFieldName: 'birth_date',
+		    minAge: Constants.MIN_AGE,
+		    maxAge: Constants.MAX_AGE
+		});
+		console.log(self.active_edit);
+		if(self.active_edit == Constants.FALSE) {
+			$(".day").attr('disabled', 'disabled');
+			$(".month").attr('disabled', 'disabled');
+			$(".year").attr('disabled', 'disabled');
+		}else {
+			$(".day").prop('disabled', false);
+			$(".month").prop('disabled', false);
+			$(".year").prop('disabled', false);
+		}
 	}
 }

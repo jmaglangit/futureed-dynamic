@@ -83,6 +83,12 @@
             </div>
         </div>
         <div class="form-group">
+            <label for="" class="col-xs-2 control-label">Birthday <span class="required">*</span></label>
+            <div class="col-xs-6">
+                <input type="hidden" id="birth_date">
+            </div>
+        </div>
+        <div class="form-group">
             <label for="" class="col-md-2 control-label">Gender <span class="required">*</span></label>
             <div class="col-md-4">
                 {!! Form::select(''
@@ -99,26 +105,9 @@
                 		, 'ng-disabled' => '!profile.active_edit')
                 ) !!}
             </div>
-            <label for="" class="col-xs-2 control-label">Birthday <span class="required">*</span></label>
-            <div class="col-xs-4">
-                <div class="dropdown">
-                  <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
-                    <div class="input-group">
-                        <input readonly="readonly" type="text" ng-class="{ 'required-field' : profile.fields['birth_date']}" name="birth_date" placeholder="DD/MM/YY" class="form-control" value="{! profile.prof.birth | date:'dd/MM/yy' !}">
-                        <input type="hidden" name="hidden_date" value="{! profile.prof.birth | date:'yyyyMMdd' !}">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                    </div>
-                  </a>
-                  <ul ng-show="profile.active_edit" class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                    <datetimepicker data-ng-model="profile.prof.birth" ng-change="updateAge()" data-before-render="beforeDateRender($dates)" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', startView:'day', minView:'day' }"/>
-                  </ul>
-                </div>
-            </div>
-        </div>
-        <div class="form-group">
-            <label for="" class="col-md-2 control-label">Age</label>
+             <label for="" class="col-md-2 control-label">Age</label>
             <div class="col-md-4">
-            	{!! Form::text('age', ''
+                {!! Form::text('age', ''
                     , array(
                         'class' => 'form-control'
                         , 'ng-disabled' => 'true'
@@ -126,6 +115,8 @@
                         , 'ng-model' => 'profile.prof.age')
                 ) !!}
             </div>
+        </div>
+        <div class="form-group">
             <label for="" class="col-md-2 control-label">City <span class="required">*</span></label>
             <div class="col-md-4">
                 {!! Form::text('city', ''
@@ -137,11 +128,9 @@
                         , 'ng-model' => 'profile.prof.city')
                 ) !!}
             </div>
-        </div>
-        <div class="form-group" ng-init="getCountries()">
             <label for="" class="col-md-2 control-label">State</span></label>
             <div class="col-md-4">
-            	{!! Form::text('state', ''
+                {!! Form::text('state', ''
                     , array(
                         'class' => 'form-control'
                         , 'ng-disabled' => '!profile.active_edit'
@@ -150,6 +139,8 @@
                         , 'ng-model' => 'profile.prof.state')
                 ) !!}
             </div>
+        </div>
+        <div class="form-group" ng-init="getCountries()">
             <label for="" class="col-md-2 control-label">Country <span class="required">*</span></label>
             <div class="col-md-4">
                 <select class="form-control" name="country_id"
