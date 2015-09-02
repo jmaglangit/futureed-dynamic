@@ -268,6 +268,11 @@ class ClassStudentController extends ApiController {
 
 		}
 
+		if($class_student['subscription_status'] != config('futureed.active')){
+
+			return $this->respondErrorMessage(2147);
+		}
+
 		$data['seats_taken'] = $class_student['classroom']['seats_taken']-1;
 
 		$this->classroom->updateClassroom($class_student['classroom']['id'],$data);
