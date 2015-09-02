@@ -3,8 +3,8 @@
 Routes::group([
 	'prefix' => '/question',
 	'middleware' => ['api_user','api_after'],
-	'permission' => ['admin','client','student'],
-	'role' => ['principal','teacher','parent','admin','super admin']
+	'permission' => ['admin'],
+	'role' => ['admin','super admin']
 ], function() {
 
 	Routes::resource('/admin', 'Api\v1\AdminQuestionController',
