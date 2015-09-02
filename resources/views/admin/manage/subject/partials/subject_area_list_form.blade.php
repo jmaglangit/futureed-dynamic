@@ -60,7 +60,7 @@
 		<i class="fa fa-plus-square"></i> Add Subject Area
 	</button>
 	<button class="btn btn-gold btn-small margin-0-30 pull-right" ng-click="area.setSubjectList(); subject.setManageSubjectActive()">
-		Add Subject Area
+		Back to Subject
 	</button>
 
 	<div class="col-xs-12 padding-0-30">

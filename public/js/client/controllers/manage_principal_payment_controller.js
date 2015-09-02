@@ -141,6 +141,7 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 
 					angular.forEach(self.classrooms, function(value, key) {
 						value.price = (self.invoice.subscription) ? value.seats_total * self.invoice.subscription.price : Constants.FALSE;
+						self.invoice.seats_total += value.seats_total;
 					});
 
 					if(self.invoice.subscription) {
@@ -671,5 +672,9 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
+	}
+
+	self.subjectSelected = function() {
+		self.choose_subject = Constants.TRUE;
 	}
 }

@@ -174,7 +174,7 @@
 					<div class="form-group">
 						<label class="control-label col-xs-3">Birthday <span class="required">*</span></label>
 						<div class="col-xs-6">
-	                        <input type="hidden" id="birth_date">
+	                        <input type="hidden" id="birth_date" ng-disabled="true">
 	                    </div>
 					</div>
 					<div class="form-group">
