@@ -120,7 +120,7 @@ class ClassroomController extends ApiController {
 
 					foreach($related_classes as $k => $v){
 
-						//update also the related subject_id
+						//update subject_id of classrooms with the same order_no
 						$this->classroom->updateClassroom($v['id'], $data);
 
 					}
