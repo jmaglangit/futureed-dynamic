@@ -48,7 +48,12 @@ class ClassStudentRequest extends ApiRequest {
 
 						return [
 							'student_id' => 'required|exists:class_students,student_id,deleted_at,NULL',
-							'class_id' => 'required|exists:classrooms,id,deleted_at,NULL'
+							'class_id' => 'required|exists:classrooms,id,deleted_at,NULL',
+							'grade_id' => 'exists:grades,id,deleted_at,NULL',
+							'module_status' => 'in:'. config('futureed.module_status_available')
+								.','.config('futureed.module_status_ongoing')
+								.','.config('futureed.module_status_completed')
+								.','.config('futureed.module_status_failed'),
 						];
 						break;
 					default:
