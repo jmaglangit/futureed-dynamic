@@ -327,3 +327,13 @@ content legend {
 .client-reg-img {
 	width: 125px;
 }
+
+.day[disabled], .month[disabled], .year[disabled] {
+	cursor: not-allowed;
+	background-color: #eeeeee;
+	opacity: 1;
+}
+
+.bdate-dropdown > .date-dropdowns > select {
+	max-width: 30%;
+}

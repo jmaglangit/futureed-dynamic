@@ -338,6 +338,7 @@ function ManageParentStudentController($scope, ManageParentStudentService, apiSe
 					self.detail.email = data.user.email;
 					self.detail.username = data.user.username;
 					self.detail.new_email = data.user.new_email;
+					self.dateDropdown(self.detail.birth_date);
 				}
 			}
 			$scope.ui_unblock();
@@ -413,5 +414,24 @@ function ManageParentStudentController($scope, ManageParentStudentService, apiSe
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		})
+	}
+
+	self.dateDropdown = function(date) {
+		$("#birth_date").dateDropdowns({
+			defaultDate : date,
+		    submitFieldName: 'birth_date',
+		    minAge: Constants.MIN_AGE,
+		    maxAge: Constants.MAX_AGE
+		});
+
+		if(self.edit == Constants.FALSE) {
+			$(".day").attr('disabled', 'disabled');
+			$(".month").attr('disabled', 'disabled');
+			$(".year").attr('disabled', 'disabled');
+		}else {
+			$(".day").prop('disabled', false);
+			$(".month").prop('disabled', false);
+			$(".year").prop('disabled', false);
+		}
 	}
 }
