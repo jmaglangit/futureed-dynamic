@@ -62,4 +62,15 @@ class LoginController extends Controller{
 
 		return view('admin.login.reset-password');
 	}
+
+	public function update_session() {
+		
+		$user = Input::all();
+
+		Session::forget('admin');
+		
+		if(!empty($user)) {
+			Session::put('admin', json_encode($user));
+		}
+	}
 }

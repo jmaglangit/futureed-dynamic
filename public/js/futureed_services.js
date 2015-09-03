@@ -43,6 +43,23 @@ var services = angular.module('futureed.services', []);
 			});
 		}
 
+		futureedAPI.updateClientUserSession = function(user) {
+			return $http({
+				method	: 'POST',
+				data 	: user,
+				url		: '/client/update-user-session'
+			});
+		}
+
+		futureedAPI.updateAdminUserSession = function(user) {
+			return $http({
+				method	: 'POST',
+				data 	: user,
+				url		: '/peaches/update-user-session'
+			});
+		}
+
+
 		futureedAPI.validateUser = function(username) {
 			return $http({
 				method 	: 'POST'
