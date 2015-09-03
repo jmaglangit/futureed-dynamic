@@ -67,7 +67,7 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 
 		return [
 			'total' => $count,
-			'record' => $records
+			'records' => $records
 		];
 	}
 
