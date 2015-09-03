@@ -293,7 +293,13 @@ function ManageClassController($scope, manageClassService, apiService, TableServ
 
 		self.add.client_id = self.record.client_id;
 		self.add.class_id = self.record.id;
-		self.add.birth_date = $("input[name='hidden_date']").val();
+
+		var bdate = $("#add_new_student #student_bdate").val();
+		var day = $("#add_new_student .day").val();
+		var month = $("#add_new_student .month").val();
+		var year = $("#add_new_student .year").val();
+
+		self.add.birth_date = year + month + day;
 		
 		var base_url = $("#base_url_form input[name='base_url']").val();
 		self.add.callback_uri = base_url + "/student/registration";
@@ -337,6 +343,14 @@ function ManageClassController($scope, manageClassService, apiService, TableServ
 		self.add.city = Constants.EMPTY_STR;
 		self.add.state = Constants.EMPTY_STR;
 		self.add.birth = Constants.EMPTY_STR;
+	}
+
+	self.setDropdown = function() {
+		$("#student_bdate").dateDropdowns({
+		    submitFieldName: 'student_bdate',
+		    minAge: Constants.MIN_AGE,
+		    maxAge: Constants.MAX_AGE
+		});
 	}
 
 	self.getSchoolDetails = function(school_code) {

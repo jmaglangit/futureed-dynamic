@@ -228,6 +228,6 @@ function ManageSubjectAreaController($scope, apiService, manageSubjectAreaServic
 	self.setSubjectList = function(){
 		$scope.list_subject = Constants.TRUE;
 		$scope.subject_area_list = Constants.FALSE;
-		self.active_list = Constants.NULL;
+		self.active_list = Constants.FALSE;
 	}
 }

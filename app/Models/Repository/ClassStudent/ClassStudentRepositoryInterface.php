@@ -29,5 +29,7 @@ interface ClassStudentRepositoryInterface {
 
 	public function getClassStudentById($id);
 
+	public function getCurrentClassStudent($criteria);
+
 
 }

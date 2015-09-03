@@ -101,6 +101,9 @@ class ClassroomController extends ApiController {
      */
     public function update($id, ClassroomRequest $request)
     {
+		//get classroom data
+		$classroom = $this->classroom->getClassroom($id);
+
         //KH# 603: User can edit classroom in an invoice.
         switch($request->route()->getName()){
             case "api.v1.classroom.update":
@@ -108,6 +111,22 @@ class ClassroomController extends ApiController {
                 break;
             default:
                 $input = $request->all();
+				$data['subject_id'] = $input['subject_id'];
+
+				//get related classroom via order_no
+				$related_classes = $this->classroom->getClassroomByOrderNo($classroom['order_no']);
+
+				if($related_classes){
+
+					foreach($related_classes as $k => $v){
+
+						//update subject_id of classrooms with the same order_no
+						$this->classroom->updateClassroom($v['id'], $data);
+
+					}
+
+				}
+				break;
         }
         return $this->respondWithData($this->classroom->updateClassroom($id,$input));
     }

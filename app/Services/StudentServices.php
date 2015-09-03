@@ -440,15 +440,9 @@ class StudentServices
 			}
 		}
 
-		$current_class = $this->class_student->getStudentCurrentClassroom($student_id);
+		$class_student = $this->class_student->getStudentCurrentClassroom($student_id);
 
-		if(empty($current_class->toArray())){
-
-			return null;
-		}else{
-
-			return $current_class;
-		}
+		return ($class_student) ? $class_student : null;
 	}
 
 

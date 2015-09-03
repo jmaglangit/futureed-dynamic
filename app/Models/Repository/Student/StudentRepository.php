@@ -337,6 +337,7 @@ class StudentRepository implements StudentRepositoryInterface
 					if($criteria['client_role'] === config('futureed.teacher')){
 
 						$student = $student->with('studentclassroom')->teacher($criteria['client_id']);
+						$student = $student->isDateRemovedNull();
 					}
 
 					$student = $student->noConfirmationCode();
@@ -389,6 +390,28 @@ class StudentRepository implements StudentRepositoryInterface
 			return Student::find($id)
 				->update([
 					'school_code' => $school_code
+				]);
+
+		} catch (Exception $e) {
+
+			throw new Exception($e->getMessage());
+		}
+
+	}
+	
+	/**
+	 * Update the learning style ID
+	 * @param $ls_banding
+	 * @return Object
+	 */
+
+	public function updateLearningStyle($id, $learning_style_id) {
+
+		try{
+
+			return Student::find($id)
+				->update([
+					'learning_style_id' => $learning_style_id
 				]);
 
 		} catch (Exception $e) {

@@ -25,6 +25,12 @@ function ManageParentStudentController($scope, ManageParentStudentService, apiSe
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
 
+		$("#birth_date").dateDropdowns({
+		    submitFieldName: 'birth_date',
+		    minAge: Constants.MIN_AGE,
+		    maxAge: Constants.MAX_AGE
+		});
+
 		$('input, select').removeClass('required-field');
 	}
 
@@ -192,9 +198,13 @@ function ManageParentStudentController($scope, ManageParentStudentService, apiSe
 		self.success = Constants.FALSE;
 		self.reg.client_id = $scope.user.id;
 
-		if(self.reg) {
-				self.reg.birth_date = $("#add_student_form input[name='hidden_date']").val();
-			}
+		var bdate = $("#add_student_form #birth_date").val();
+		var day = $("#add_student_form .day").val();
+		var month = $("#add_student_form .month").val();
+		var year = $("#add_student_form .year").val();
+
+		self.reg.birth_date = year + month + day;
+
 
 		self.base_url = $("#base_url_form input[name='base_url']").val();
 		self.reg.callback_uri = self.base_url + Constants.URL_REGISTRATION(angular.lowercase(Constants.STUDENT));
@@ -328,6 +338,7 @@ function ManageParentStudentController($scope, ManageParentStudentService, apiSe
 					self.detail.email = data.user.email;
 					self.detail.username = data.user.username;
 					self.detail.new_email = data.user.new_email;
+					self.dateDropdown(self.detail.birth_date);
 				}
 			}
 			$scope.ui_unblock();
@@ -403,5 +414,24 @@ function ManageParentStudentController($scope, ManageParentStudentService, apiSe
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		})
+	}
+
+	self.dateDropdown = function(date) {
+		$("#birth_date").dateDropdowns({
+			defaultDate : date,
+		    submitFieldName: 'birth_date',
+		    minAge: Constants.MIN_AGE,
+		    maxAge: Constants.MAX_AGE
+		});
+
+		if(self.edit == Constants.FALSE) {
+			$(".day").attr('disabled', 'disabled');
+			$(".month").attr('disabled', 'disabled');
+			$(".year").attr('disabled', 'disabled');
+		}else {
+			$(".day").prop('disabled', false);
+			$(".month").prop('disabled', false);
+			$(".year").prop('disabled', false);
+		}
 	}
 }

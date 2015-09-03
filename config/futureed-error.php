@@ -118,6 +118,7 @@ return [
 		2144 => 'Module does not exist',
 		2145 => 'Student needs to watch the videos again.',
 		2146 => 'Prevent having dot for an image file name.',
+		2147 => 'Unable to Delete. Subscription already expired.',
 
 		// Client Error messages
 		2200 => 'Email already exists.',

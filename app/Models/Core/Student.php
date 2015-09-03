@@ -1,5 +1,6 @@
 <?php namespace FutureEd\Models\Core;
 
+use FutureEd\Models\Traits\TransactionTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Carbon\Carbon;
@@ -8,6 +9,8 @@ class Student extends Model {
 
 
     use SoftDeletes;
+
+	use TransactionTrait;
 
     protected $table = 'students';
 
@@ -76,9 +79,9 @@ class Student extends Model {
 	}
 
 	//get student with relation to ClassStudent with relation to classroom
-	public function studentclassroom(){
+	public function studentClassroom(){
 
-		return $this->belongsTo('FutureEd\Models\Core\ClassStudent','id','student_id')->with('classroom');
+		return $this->belongsTo('FutureEd\Models\Core\ClassStudent','id','student_id')->classroom();
 	}
 
 
@@ -184,6 +187,16 @@ class Student extends Model {
 			      ->where('confirmation_code_expiry','=', NULL);
 
 		});
+	}
+
+	public function scopeIsDateRemovedNull($query){
+
+		return $query->whereHas('studentClassroom', function($query){
+
+			$query->where('date_removed', NULL);
+
+		});
+
 	}
 
 

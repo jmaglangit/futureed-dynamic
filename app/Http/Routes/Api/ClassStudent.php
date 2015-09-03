@@ -14,7 +14,7 @@ Routes::group([
 		'uses' => 'Api\v1\ClassStudentController@addNewStudent',
 		'as' => 'class-student.add.new.student']);
 
-	Routes::post('/student-current-class',
+	Routes::get('/student-current-class',
 		[
 			'uses' => 'Api\v1\ClassStudentController@studentCurrentClass',
 			'as' => 'api.v1.class-student.student-current-class'
@@ -25,4 +25,11 @@ Routes::group([
 			'uses' => 'Api\v1\ClassStudentController@removeStudentClass',
 			'as' => 'api.v1.class-student.student-remove-class'
 		]);
+
+	Routes::get('/student-class-list',
+		[
+			'uses' => 'Api\v1\ClassStudentController@index',
+			'as' => 'api.v1.class-student.student-class-list'
+		]);
+
 });

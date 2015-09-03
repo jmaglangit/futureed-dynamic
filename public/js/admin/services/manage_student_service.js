@@ -58,10 +58,12 @@ function manageStudentService($http) {
 		});
 	}
 
-	manageStudentApi.moduleList = function(id) {
+	manageStudentApi.moduleList = function(id, table) {
 		return $http({
 			method 	: Constants.METHOD_GET	
 			, url 	: adminApiUrl + 'module/student?student_id=' + id
+				+ '&limit=' + table.size
+				+ '&offset=' + table.offset
 		});
 	}
 

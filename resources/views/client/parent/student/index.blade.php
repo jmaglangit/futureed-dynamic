@@ -36,4 +36,5 @@
 	{!! Html::script('/js/common/search_service.js')!!}
 	{!! Html::script('/js/common/validation_service.js')!!}
 	{!! Html::script('/js/client/constants/parent_constants.js')!!}
+	{!! Html::script('/js/client/student.js')!!}
 @stop

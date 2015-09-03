@@ -105,17 +105,8 @@ table#client-list{
 .div-right{
 	float:right;
 }
-.margin-10-bot{
-	margin-bottom: 10px;
-}
-.margin-10-top{
-	margin-top: 10px;
-}
 .margin-20-bot{
 	margin-bottom: 20px;
-}
-.margin-30-bot{
-	margin-bottom: 30px;
 }
 .margin-40-bot{
 	margin-bottom: 40px;
@@ -274,6 +265,18 @@ form > .form-content {
 	margin-bottom: 0;
 }
 
+.back-link {
+	margin: 20px;
+}
+
+.back-link > a {
+	color: #ffffff;
+}
+
+.back-link > a:hover {
+	text-decoration: underline;
+}
+
 input[type=radio]{box-sizing: border-box;padding: 0;}
 input[type=radio]{opacity:0;position:absolute;z-index:12;width:18px;height:18px;}
 input[type=radio]:checked,input[type=radio]:focus{outline:none !important;}
@@ -293,4 +296,44 @@ input[type=radio]:checked+.lbl::before{content:"\2022";}
 
 content legend {
 	font-family: 'Roboto', cursive !important;
+}
+
+.date-dropdowns > select {
+	height: 30px;
+	line-height: 30px;
+    padding: 4px 6px;
+    font-size: 14px;
+    color: #555555;
+    vertical-align: middle;
+    border-radius: 4px;
+	border: 1px solid #CCCCCC;
+	margin-right: 5px;
+}
+
+.date-dropdowns {
+	margin-left: 0 !important;
+}
+
+.media > .media-left > img {
+	width: 125px;
+}
+
+.form-control-link {
+	display: block;
+    word-wrap: break-word;
+    margin-top: 10px;
+}
+
+.client-reg-img {
+	width: 125px;
+}
+
+.day[disabled], .month[disabled], .year[disabled] {
+	cursor: not-allowed;
+	background-color: #eeeeee;
+	opacity: 1;
+}
+
+.bdate-dropdown > .date-dropdowns > select {
+	max-width: 30%;
 }

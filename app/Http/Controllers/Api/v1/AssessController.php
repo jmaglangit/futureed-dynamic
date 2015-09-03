@@ -9,6 +9,8 @@ use FutureEd\Http\Requests\Api\LearningStyleRequest;
 
 use FutureEd\Models\Repository\StudentLsScore\StudentLsScoreRepositoryInterface as StudentLsScore;
 use FutureEd\Models\Repository\StudentLsAnswer\StudentLsAnswerRepositoryInterface as StudentLsAnswer;
+use FutureEd\Models\Repository\LearningStyle\LearningStyleRepositoryInterface as LearningStyle;
+use FutureEd\Models\Repository\Student\StudentRepositoryInterface as Student;
 
 use FutureEd\Services\StudentServices;
 
@@ -30,7 +32,19 @@ class AssessController extends ApiController {
 	protected $student_ls_answer;
 	
 	/**
-     *   holds the StudentLsAnswerRepositoryInterface
+     *   holds the LearningStyleRepositoryInterface
+     */
+	protected $learning_style;
+
+
+	/**
+     *   holds the StudentRepositoryInterface
+     */
+	protected $student;
+
+	
+	/**
+     *   holds the Student Services
      */
 	protected $student_service;
 
@@ -43,12 +57,16 @@ class AssessController extends ApiController {
 	public function __construct(iAssess $iassess,
 		StudentLsScore $student_ls_score,
 		StudentLsAnswer $student_ls_answer,
+		LearningStyle $learning_style,
+		Student $student,
 		StudentServices $student_service) 
 	{
 		$this->iassess = $iassess;
 		$this->student_ls_score = $student_ls_score;
 		$this->student_ls_answer = $student_ls_answer;
 		$this->student_service = $student_service;
+		$this->learning_style = $learning_style;
+		$this->student = $student;
 	}
 
 	/**
@@ -90,6 +108,8 @@ class AssessController extends ApiController {
 	 public function saveTest(LearningStyleRequest $request){
 
 		$input = Input::all();
+		
+		$student_id = $input['student_id'];
 				
 		if($this->iassess->saveTestData($input)) {
 		
@@ -101,7 +121,7 @@ class AssessController extends ApiController {
 					if($answer['answers'] && count($answer['answers']) > 0) {
 						$answer_data = array();
 					
-						$answer_data['student_id'] = $input['student_id'];
+						$answer_data['student_id'] = $student_id;
 						$answer_data['ls_test_id'] = $input['test_id'];
 						$answer_data['ls_section_id'] = $input['section_id'];
 						$answer_data['ls_seq_no'] = $sequence_no;
@@ -121,6 +141,8 @@ class AssessController extends ApiController {
 		
 			$data = $this->iassess->data;
 			
+			$response = ['learning_style_id' => config('futureed.default_lsp')];
+			
 			foreach($data as $score) {
 				#save scores
 				
@@ -135,10 +157,21 @@ class AssessController extends ApiController {
 				$save_data['ls_percentile'] = $score['percentile'];
 				$save_data['ls_banding'] = $score['banding'];
 				
+				if(strcmp($score['name'], config('futureed.lsp_result_name')) == 0) {
+					$matched_learning_style =  $this->learning_style->getLearningStyleByBanding($score['banding']);
+					
+					if($matched_learning_style) {
+						$this->student->updateLearningStyle($student_id, $matched_learning_style->id);
+						$response['learning_sytle_id'] = $matched_learning_style->id;
+					} else {
+						$this->student->updateLearningStyle($student_id, config('futureed.default_lsp'));
+					}
+				}
+				
 				$score = $this->student_ls_score->addScore($save_data);
 			}
 			
-			return $this->respondWithData($data);
+			return $this->respondWithData($response);
 			
 		} else {
 		

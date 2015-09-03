@@ -110,18 +110,12 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-xs-2">City <span class="required">*</span></label>
-					<div class="col-xs-4">
-						{!!
-							Form::text('city','',
-								[
-									'class' => 'form-control',
-									'ng-model' => 'student.detail.city',
-									'ng-disabled' => '!student.edit',
-									'placeHolder' => 'City'
-								])
-						!!}
-					</div>
+					<label class="control-label col-xs-2">Birthday <span class="required">*</span></label>
+					<div class="col-md-8 bdate-dropdown">
+                        <input type="hidden" id="birth_date">
+                    </div>
+				</div>
+				<div class="form-group">
 					<label class="control-label col-xs-2">Gender <span class="required">*</span></label>
 					<div class="col-xs-4">
 						{!!
@@ -129,6 +123,18 @@
 								[
 									'class' => 'form-control',
 									'ng-model' => 'student.detail.gender',
+									'ng-disabled' => '!student.edit',
+									'placeHolder' => 'City'
+								])
+						!!}
+					</div>
+					<label class="control-label col-xs-2">City <span class="required">*</span></label>
+					<div class="col-xs-4">
+						{!!
+							Form::text('city','',
+								[
+									'class' => 'form-control',
+									'ng-model' => 'student.detail.city',
 									'ng-disabled' => '!student.edit',
 									'placeHolder' => 'City'
 								])
@@ -148,34 +154,17 @@
 								])
 						!!}
 					</div>
-					<label class="control-label col-xs-2">Birthday <span class="required">*</span></label>
-					<div class="col-md-4">
-                            <div class="dropdown">
-                              <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
-                                <div class="input-group">
-                                    <input readonly="readonly" type="text" name="birth_date" placeholder="DD/MM/YY" class="form-control" value="{! student.detail.birth_date | date:'dd/MM/yy' !}">
-                                    <input type="hidden" name="hidden_date" value="{! student.detail.birth_date | date:'yyyyMMdd' !}">
-                                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                                </div>
-                              </a>
-                              <ul class="dropdown-menu date-dropdown-menu" role="menu" aria-labelledby="dLabel" ng-if="student.edit">
-                                <datetimepicker data-ng-model="student.detail.birth_date" data-before-render="beforeDateRender($dates)" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', startView:'day', minView:'day' }"/>
-                              </ul>
-                            </div>
-                        </div>
-				</div>
-				<div class="form-group" ng-init="getCountries()">
 					<label class="control-label col-xs-2">Country <span class="required">*</span></label>
-					<div class="col-md-4">
-                            <select ng-disabled="!student.edit" name="country_id" 
-									id="country" 
-									class="form-control" 
-									ng-model="student.detail.country_id" 
-									ng-change="student.getCountryId()">
-		                        <option ng-selected="student.detail.country_id == futureed.FALSE" value="">-- Select Country --</option>
-		                        <option ng-selected="student.detail.country_id == country.id" ng-repeat="country in countries" ng-value="country.id">{! country.name!}</option>
-		                    </select>
-                        </div>
+					<div class="col-md-4" ng-init="getCountries()">
+                        <select ng-disabled="!student.edit" name="country_id" 
+								id="country" 
+								class="form-control" 
+								ng-model="student.detail.country_id" 
+								ng-change="student.getCountryId()">
+	                        <option ng-selected="student.detail.country_id == futureed.FALSE" value="">-- Select Country --</option>
+	                        <option ng-selected="student.detail.country_id == country.id" ng-repeat="country in countries" ng-value="country.id">{! country.name!}</option>
+	                    </select>
+                    </div>
 				</div>
 			</fieldset>
 			<div class="col-xs-12">

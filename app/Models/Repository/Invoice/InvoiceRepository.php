@@ -65,6 +65,8 @@ class InvoiceRepository implements InvoiceRepositoryInterface{
                 $invoice = $invoice->with('subscription')->offset($offset)->limit($limit);
             }
 
+            $invoice = $invoice->orderBy('id', 'desc');
+
         }
 
         return ['total' => $count, 'records' => $invoice->get()->toArray()];
