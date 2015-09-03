@@ -19,6 +19,10 @@ class DashboardController extends Controller {
 		if(!is_numeric($user_object->avatar_id)) {
 			return redirect()->route('student.dashboard.follow_up_registration');
 		}
+		
+		if(isset($user_object->class) && $user_object->class->subscription_status === "Active") {
+			return redirect()->route('student.class.index');		
+		}
 
 		return view('student.dashboard.index');
 	}

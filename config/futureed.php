@@ -207,5 +207,7 @@ return [
 	'lsp_child_id' => 100063,
 	'lsp_adult_id' => 100064,
 	'lsp_for_adult_age' => 18,
+	'lsp_result_name' => 'IPS1',
+	'default_lsp' => 3,
 
 ];

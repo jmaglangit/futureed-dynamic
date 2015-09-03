@@ -11,6 +11,12 @@ class ClassController extends Controller {
 	*Display Class Index Page
 	*/
 	public function index() {
+		$user_object = json_decode(Session::get('student'));
+
+		if(!(isset($user_object->class) && $user_object->class->subscription_status === "Active")) {
+			return redirect()->route('student.dashboard.index');				
+		}
+
 		return view('student.class.index');
 	}
 

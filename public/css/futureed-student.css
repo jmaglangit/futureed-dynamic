@@ -40,18 +40,18 @@
 .nav-dropdown-menu:before {
 	border-bottom-color: #cccccc;
     border-width: 12px;
-    margin-left: 125px;
+    margin-left: 126px;
 }
 
 .nav-dropdown a {
-	padding: 10px 15px !important;
+	padding: 15px !important;
     color: #055A7F !important;
 }
 
 .nav-image-holder {
 	border-radius: 50%;
     width: 50px;
-    margin: 0px 5px;
+    margin: 3px 5px;
 }
 
 .nav-icon-holder {
@@ -73,7 +73,9 @@
     min-height: 34px;
     text-align: right;
     margin: 10px;
-    padding: 5px 15px 5px 7px;
+	padding-top: 6px;
+	padding-right: 15px;
+	font-size: 15px;
 }
 
 .ul-left, .check-ico {
@@ -379,7 +381,7 @@ th, td {
 }
 
 #lsp_panel .panel-body {
-	min-height: 480px;
+	min-height: 220px;
 	padding: 15px 20px;
 }
 
@@ -716,6 +718,8 @@ hr {
 	padding: 20px;
 	background-color: rgba(255, 255, 255, .4);
 	text-align: center;
+	color: #055A7F;
+	font-size: 20px;
 }
 
 .module-wrapper {
@@ -729,7 +733,6 @@ hr {
 }
 
 .module-list {
-	padding: 10px;
 	background-color: rgba(255, 255, 255, .3);
 	border-radius: 10px;
 }
@@ -1249,7 +1252,7 @@ top: 41px;
 
 .class-search{
 	background-color: rgba(255, 255, 255, 0.51);
-	padding: 15px 30px 30px 30px;
+	padding: 15px 30px 15px 30px;
 	width: 90%;
 	margin: auto;
 	border-radius: 10px;
@@ -1286,7 +1289,7 @@ top: 41px;
 }
 
 .date-dropdowns > select {
-	height: 40px;
+	height: 30px;
 	line-height: 30px;
     padding: 4px 6px;
     margin-bottom: 10px;
@@ -1295,14 +1298,29 @@ top: 41px;
     vertical-align: middle;
     border-radius: 4px;
 	border: 1px solid #CCCCCC;
+	margin-right: 5px;
 }
 
 .date-dropdowns {
 	margin-left: 0 !important;
 }
 
+.media > .media-left > img {
+	width: 125px;
+}
+
 /*bootstrap changes font-sizes*/
 
 .form-control {
 	font-size: 12px;
+}
+
+.day[disabled], .month[disabled], .year[disabled] {
+	cursor: not-allowed;
+	background-color: #eeeeee;
+	opacity: 1;
+}
+
+.bdate-dropdown > .date-dropdowns > select {
+	max-width: 30%;
 }

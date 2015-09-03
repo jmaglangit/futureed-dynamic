@@ -23,5 +23,10 @@ class LearningStyle extends Model {
 
 		return $query->where('name','like','%'.$name.'%');
 	}
+	
+	public function scopeLsBanding($query, $ls_banding){
+
+		return $query->where('ls_banding', 'like', $ls_banding);
+	}
 
 }

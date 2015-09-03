@@ -75,10 +75,10 @@ class StudentPaymentController extends ApiController {
 		$order['order_no'] = $this->invoice_services->createOrderNo($order['student_id'],$next_order_id);
 
 		//insert data into order
-		$this->order->addOrder($order);
+		$inserted_order = $this->order->addOrder($order);
 
 		//form data for order_details
-		$order_detail['order_id'] = $next_order_id;
+		$order_detail['order_id'] = $inserted_order['id'];
 		$order_detail['student_id'] = $order['student_id'];
 		$order_detail['price'] = $order['total_amount'];
 
@@ -130,7 +130,7 @@ class StudentPaymentController extends ApiController {
 		//insert data to invoice_detail
 		$this->invoice_detail->addInvoiceDetail($invoice_detail);
 
-		return $this->respondWithData($this->order->getOrder($next_order_id));
+		return $this->respondWithData($this->order->getOrder($inserted_order['id']));
 
 	}
 
@@ -142,6 +142,14 @@ class StudentPaymentController extends ApiController {
 
 		//get order details
 		$order_record = $this->order->getOrder($id);
+
+		//check if student have existing subscription to a subject
+		$student_classroom = $this->classroom->getClassroomBySubjectId($order['subject_id'],$order['student_id']);
+
+		if ($student_classroom && $order_record['order_no']!= $student_classroom[0]['order_no']) {
+
+			return $this->respondErrorMessage(2037);
+		}
 
 		//get student details
 		$student = $this->student->viewStudent($order['student_id']);

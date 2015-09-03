@@ -167,7 +167,11 @@ header, body, footer {
 	text-align: center;
 	min-height: 200px;
 	opacity: .98;
-	background: #fff; padding: 30px; box-sizing: border-box; border-radius: 5px; box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+	background: #fff; 
+	padding: 20px; 
+	box-sizing: border-box; 
+	border-radius: 5px; 
+	box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
 	margin-bottom: 40px;
 }
 .form-style small{
@@ -217,6 +221,8 @@ header, body, footer {
 	border-radius: 50%;
 	border: 6px solid transparent;
 	cursor: pointer;
+	width: 100px;
+	height: 100px;
 }
 .selected {
 	/*text-align: center; */
@@ -313,7 +319,7 @@ fieldset legend{color: #8e8171; font-size: 16px; text-transform: uppercase;}
 .register_student .form-header .box-title {
 	display: inline-block;
 	margin-top: 0;
-	margin-bottom: 20px;
+	margin-bottom: 10px;
 	font-size: 26px;
 	/*border-bottom: 3px solid #8d8171; */
 	text-transform: uppercase;
@@ -325,7 +331,7 @@ fieldset legend{color: #8e8171; font-size: 16px; text-transform: uppercase;}
     display: block;
     float: none;
     padding: 15px;
-    font-size: 13px;
+    font-size: 12px;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 200;
     letter-spacing: 0.5px;
@@ -337,7 +343,7 @@ fieldset legend{color: #8e8171; font-size: 16px; text-transform: uppercase;}
 .info-box h4{
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
     font-weight: 200;
-    font-size: 18px;
+    font-size: 16px;
 	margin-top: 0;
 }
 .info-box p{
@@ -357,10 +363,12 @@ form p.help-block {
 	text-align: left;
 }
 /*----- LOGIN ----- */
-.client .login > [class*="col-md-"],
 .student .login > [class*="col-md-"],
 .student .login > [class*="col-md-"]{	
-	margin-top:80px;
+	margin-top:20px;
+}
+.client .login > [class*="col-md-"] {
+	margin-top: 80px;
 }
 .student .login .roundcon{
 	width:120px;
@@ -450,7 +458,6 @@ form p.help-block {
 }
 .steps ul.items li {
   float: left;
-  padding: 10px 0;
   position: relative;
   list-style: none;
 }
@@ -746,7 +753,7 @@ footer{font:normal 12px/30px arial; }
 , .required-field:hover
 , .required-field:active
 , .required-field:focus {
-	border: 1px solid #f7b9aa;
+	border: 1px solid #f7b9aa !important;
 	box-shadow: none;
 }
 
@@ -857,7 +864,7 @@ li > a > span > .fa{
   	height: 35px;
 }
 .title-main-content{
-	font-size: 1.5em;
+	font-size: 16px;
   	color: #03658A;
 }
 .sbtitle-main-content{
@@ -867,7 +874,7 @@ li > a > span > .fa{
 .legend-name-mid{
 	text-transform: none;
 	font-family: inherit !important;
-	font-size: 18px !important;
+	font-size: 16px !important;
 }
 .btncon-client{
 	font-style: inherit !important;
@@ -959,7 +966,7 @@ div > .btncon > a {
 	color: #3c763d;
   	background-color: #dff0d8;
   	border-color: #d6e9c6;
-  	font-size: 15px;
+  	font-size: 12px;
   	margin-left: 60px;
   	padding: 10px;
   	text-align: left;
@@ -999,7 +1006,7 @@ div > .btncon > a {
 
 .paginate-size {
 	margin: 10px 0px;
-	width: 7%;
+	width: 50px;
 	font-size: 14px;
 	text-align: center;
 	height: 35px;
@@ -1126,4 +1133,40 @@ content {
 
 ul[dnd-list], ul[dnd-list] > li { 
     position: relative;
+}
+
+span.step {
+	background: #cccccc;
+	border-radius: 0.8em;
+	-moz-border-radius: 0.8em;
+	-webkit-border-radius: 0.8em;
+	color: #ffffff;
+	display: inline-block;
+	font-weight: bold;
+	line-height: 1.6em;
+	margin-right: 5px;
+	text-align: center;
+	width: 1.6em;
+	float: left;
+}
+
+.form-header > .media {
+	margin-left: 120px;
+}
+
+.margin-10-bot{
+	margin-bottom: 10px;
+}
+
+.margin-10-top{
+	margin-top: 10px;
+}
+
+.margin-30-bot{
+	margin-bottom: 30px;
+}
+
+.disabled-link {
+	pointer-events: none;
+	cursor: default;
 }

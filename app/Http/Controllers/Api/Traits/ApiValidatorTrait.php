@@ -157,7 +157,7 @@ trait ApiValidatorTrait {
 				"$contact_name" => $input["$contact_name"],
 			],
 			[
-				"$contact_name" => 'required|min:2|regex:'. config('regex.name') .'|max:64'
+				"$contact_name" => 'required|min:2|regex:'. config('regex.name') .'|max:128'
 			]
 		);
 

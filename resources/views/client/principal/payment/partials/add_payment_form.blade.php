@@ -16,20 +16,23 @@
 	        <div class="alert alert-success" ng-if="payment.success">
 	        	<p>{! payment.success !}</p>
 	        </div>
-	        <fieldset class="payment-field">
-	        	<span class="step">1</span><p class="step-label">Please Select a Subject</p>
+	        <div class="form-search">
+	        	<fieldset class="payment-field">
+	        	<span class="step">1</span><p class="step-label">Please Select a Subject for all Classrooms</p>
 	        	<div class="form-group">
 	        		<label class="col-xs-4 control-label">Subject <span class="required">*</span></label>
 	        		<div class="col-xs-4">
-	        			<select class="form-control" id="subject_id" name="subject_id" ng-disabled="payment.subjects.length <= 0" ng-model="payment.invoice.subject_id" ng-class="{ 'required-field' : payment.fields['subject_id'] }">
+	        			<select class="form-control" id="subject_id" name="subject_id" ng-disabled="payment.subjects.length <= 0 || payment.choose_subject" ng-model="payment.invoice.subject_id" ng-class="{ 'required-field' : payment.fields['subject_id'] }" ng-change="payment.subjectSelected()">
 		                        <option value="">-- Select Subject --</option>
 		                        <option ng-repeat="subject in payment.subjects" ng-value="subject.id">{! subject.name !}</option>
 		                    </select>
 	        		</div>
 	        	</div>
 	        </fieldset>
+	        </div>
 	        <hr/>
-	        <fieldset class="payment-field">
+	        <div class="form-search">
+	        	<fieldset class="payment-field">
 	        	<span class="step">2</span><p class="step-label">Please Add Classroom</p>
 	        	<div class="form-group">
 	        		<label class="col-xs-4 control-label" id="email">Number of Seats <span class="required">*</span></label>
@@ -120,9 +123,9 @@
 	        		) !!}
 	        	</div>
 	        </fieldset>
+	        </div>
 		</div>
 	{!! Form::close() !!}
-
 	<div class="col-xs-12 search-container">
 		<div class="form-search">
 			{!! Form::open(
@@ -207,7 +210,7 @@
 
 	<div class="col-xs-12">
 		<div class="row margin-10-bot">
-			<div class="col-xs-4 div-right">
+			<div class="col-xs-6 div-right">
 				<label class="col-xs-4 control-label top-10">Sub Total</label>
 				<div class="col-xs-8">
 					<div class="input-group">
@@ -218,7 +221,7 @@
 			</div>
 		</div>
 		<div class="row margin-10-bot">
-			<div class="col-xs-4 div-right">
+			<div class="col-xs-6 div-right">
 				<label class="col-xs-4 control-label top-10">Discount</label>
 				<div class="col-xs-8">
 					<div class="input-group">
@@ -237,7 +240,7 @@
 		</div>
 
 		<div class="row margin-10-bot">
-			<div class="col-xs-4 div-right">
+			<div class="col-xs-6 div-right">
 				<label class="col-xs-4 control-label top-10">Total</label>
 				<div class="col-xs-8">
 					<div class="input-group">
@@ -252,21 +255,21 @@
 			<div class="btn-container">
 				{!! Form::button('Delete Subscription'
         			, array(
-        				'class' => 'btn btn-gold btn-small div-right'
+        				'class' => 'btn btn-gold btn-semi-medium div-right'
         				, 'ng-click' => 'payment.deleteInvoice(payment.invoice.id)'
         			)
         		) !!}
 
         		{!! Form::button('Save Subscription'
         			, array(
-        				'class' => 'btn btn-blue btn-small div-right'
+        				'class' => 'btn btn-blue btn-semi-medium div-right'
         				, 'ng-click' => 'payment.savePayment()'
         			)
         		) !!}
 
         		{!! Form::button('Pay Subscription'
         			, array(
-        				'class' => 'btn btn-blue btn-small div-right'
+        				'class' => 'btn btn-blue btn-semi-medium div-right'
         				, 'ng-click' => 'payment.addPayment()'
         			)
         		) !!}        		

@@ -180,6 +180,7 @@
                     <thead>
                         <tr>
                             <th>Code</th>
+                            <th>Label</th>
                             <th>Answer</th>
                             <th>Correct Answer</th>
                             <th>Point Equivalent</th>
@@ -189,6 +190,7 @@
                     <tbody>
                         <tr ng-repeat="ansInfo in qa.ans_records">
                             <td>{! ansInfo.code !}</td>
+                            <td>{! ansInfo.label !}</td>
                             <td>{! ansInfo.answer_text !}</td>
                             <td>{! ansInfo.correct_answer !}</td>
                             <td>{! ansInfo.point_equivalent !}</td>
