@@ -4,12 +4,38 @@ use FutureEd\Models\Traits\TransactionTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+trait AdminTransactionTrait {
+
+	//TODO: Make use of generic trait.
+	protected static function boot() {
+
+		parent::boot();
+
+		static::creating(function($model){
+
+			$model->created_by = (session()->has('current_user'))? session('current_user') : 1;
+
+		});
+
+		static::updating(function($model){
+
+			$model->updated_by = (session()->has('current_user'))? session('current_user') : 1;
+
+		});
+
+		Admin::deleting(function($admin){
+
+			$admin->user->delete();
+
+		});
+	}
+}
 class Admin extends Model {
 
 
     use SoftDeletes;
 
-	use TransactionTrait;
+	use AdminTransactionTrait;
 
     protected $table = 'admins';
 
@@ -30,15 +56,6 @@ class Admin extends Model {
     public function user(){
 
         return $this->belongsTo('FutureEd\Models\Core\User');
-    }
-
-    public static function boot(){
-
-        parent::boot();
-
-        Admin::deleting(function($admin){
-            $admin->user->delete();
-        });
     }
 
 	//-------------scopes
