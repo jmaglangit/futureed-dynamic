@@ -1,11 +1,14 @@
 <?php namespace FutureEd\Models\Core;
 
+use FutureEd\Models\Traits\TransactionTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class HelpRequestAnswerRating extends Model {
 
     use SoftDeletes;
+
+	use TransactionTrait;
 
     protected $table = 'help_request_answer_ratings';
 
@@ -14,6 +17,11 @@ class HelpRequestAnswerRating extends Model {
     protected $hidden = ['updated_by','created_at','deleted_at'];
 
     protected $fillable = ['student_id','help_request_answer_id','rating','comments'];
+
+	protected $attributes = [
+		'created_by' => 1,
+		'updated_by' => 1
+	];
 
     //Relationships
 
