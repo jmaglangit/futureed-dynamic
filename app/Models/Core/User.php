@@ -1,5 +1,6 @@
 <?php namespace FutureEd\Models\Core;
 
+use FutureEd\Models\Traits\TransactionTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -7,6 +8,8 @@ class User extends Model {
 
 	//
     use SoftDeletes;
+
+	use TransactionTrait;
 
     protected $table = 'users';
 
@@ -37,10 +40,14 @@ class User extends Model {
         'deleted_at',
     ];
 
-
     protected $fillable = ['username', 'email','new_email', 'name', 'password', 'user_type', 'confirmation_code',
 
         'confirmation_code_expiry','email_code','email_code_expiry','registration_token','status', 'is_account_activated','created_by', 'updated_by'];
+
+	protected $attributes = [
+		'created_by' => 1,
+		'updated_by' => 1
+	];
 
     
 	//-------------relationships

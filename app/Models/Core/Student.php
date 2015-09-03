@@ -5,12 +5,36 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Carbon\Carbon;
 
+trait StudentTransactionTrait {
+
+	//TODO: Make use of generic trait.
+	protected static function boot() {
+		parent::boot();
+
+		static::creating(function($model){
+
+			$model->created_by = (session()->has('current_user'))? session('current_user') : 1;
+
+		});
+
+		static::updating(function($model){
+
+			$model->updated_by = (session()->has('current_user'))? session('current_user') : 1;
+
+		});
+
+		Student::deleting(function ($student) {
+			$student->user->delete();
+		});
+	}
+}
+
 class Student extends Model {
 
 
     use SoftDeletes;
 
-	use TransactionTrait;
+	use StudentTransactionTrait;
 
     protected $table = 'students';
 
@@ -31,16 +55,6 @@ class Student extends Model {
 		'created_by' => 1,
 		'updated_by' => 1,
 	];
-
-	public static function boot()
-	{
-
-		parent::boot();
-
-		Student::deleting(function ($student) {
-			$student->user->delete();
-		});
-	}
 
 
 

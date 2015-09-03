@@ -1,12 +1,15 @@
 <?php namespace FutureEd\Models\Core;
 
 use Carbon\Carbon;
+use FutureEd\Models\Traits\TransactionTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class StudentModule extends Model {
 
     use SoftDeletes;
+
+	use TransactionTrait;
 
     protected $table = 'student_modules';
 
