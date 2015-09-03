@@ -4,7 +4,7 @@
     		User Credentials
     	</legend>
     	<div class="form-group">
-    		<label for="" class="col-md-2 control-label">Username <span class="required">*</span></label>
+    		<label for="" class="col-md-3 control-label">Username <span class="required">*</span></label>
     		<div class="col-xs-5">
     			{!! Form::text('username', ''
                     , array(
@@ -25,7 +25,7 @@
             </div>		
     	</div>
     	<div class="form-group">
-            <label for="" class="col-md-2 control-label">Email <span class="required">*</span></label>
+            <label for="" class="col-md-3 control-label">Email <span class="required">*</span></label>
             <div class="col-md-5">
             	{!! Form::text('email', ''
                     , array(
@@ -42,7 +42,7 @@
         </div>
         
         <div class="form-group" ng-if='profile.prof.new_email'>
-            <label for="" class="col-md-2 control-label" style="color:#7F7504">Pending Email <span class="required">*</span></label>
+            <label for="" class="col-md-3 control-label" style="color:#7F7504">Pending Email <span class="required">*</span></label>
             <div class="col-md-5">
             	{!! Form::text('email', ''
                     , array(
@@ -64,7 +64,7 @@
     		Personal Information
     	</legend>
     	<div class="form-group">
-                <label for="" class="col-md-2 control-label">First Name <span class="required">*</span></label>
+                <label for="" class="col-md-3 control-label">First Name <span class="required">*</span></label>
                 <div class="col-md-5">
                     {!! Form::text('first_name', ''
                         , array(
@@ -76,7 +76,7 @@
                 </div>
             </div>
     		<div class="form-group">
-                <label for="" class="col-md-2 control-label">Last Name <span class="required">*</span></label>
+                <label for="" class="col-md-3 control-label">Last Name <span class="required">*</span></label>
                 <div class="col-md-5">
                 	{!! Form::text('last_name', ''
                         , array(
@@ -94,7 +94,7 @@
     		School Information
     	</legend>
     	<div class="form-group">
-    		<label for="" class="col-md-2 control-label">School Name <span class="required">*</span></label>
+    		<label for="" class="col-md-3 control-label">School Name <span class="required">*</span></label>
             <div class="col-md-5">
                 {!! Form::text('school_name', ''
                     , array(
@@ -112,7 +112,7 @@
     		School Information
     	</legend>
     	<div class="form-group">
-    		<label for="" class="col-md-2 control-label">School Name <span class="required">*</span></label>
+    		<label for="" class="col-md-3 control-label">School Name <span class="required">*</span></label>
             <div class="col-md-5">
                 {!! Form::text('school_name', ''
                     , array(
@@ -124,7 +124,7 @@
             </div>
         </div>
         <div class="form-group">
-    		<label for="" class="col-md-2 control-label">Street Address <span class="required">*</span></label>
+    		<label for="" class="col-md-3 control-label">Street Address <span class="required">*</span></label>
             <div class="col-md-5">
                 {!! Form::text('school_street_address', ''
                     , array(
@@ -136,8 +136,8 @@
             </div>
         </div>
         <div class="form-group">
-    		<label for="" class="col-md-2 control-label">City </label>
-            <div class="col-md-4">
+    		<label for="" class="col-md-3 control-label">City </label>
+            <div class="col-md-3">
                 {!! Form::text('school_city', ''
                     , array(
                         'class' => 'form-control'
@@ -146,8 +146,8 @@
                         , 'ng-model' => 'profile.prof.school_city')
                 ) !!}
             </div>
-            <label for="" class="col-md-2 control-label">State <span class="required">*</span></label>
-            <div class="col-md-4">
+            <label for="" class="col-md-3 control-label">State <span class="required">*</span></label>
+            <div class="col-md-3">
                 {!! Form::text('school_state', ''
                     , array(
                         'class' => 'form-control'
@@ -158,8 +158,8 @@
             </div>
         </div>
         <div class="form-group" ng-init="getCountries()">
-    		<label for="" class="col-md-2 control-label">Postal Code</label>
-            <div class="col-md-4">
+    		<label for="" class="col-md-3 control-label">Postal Code</label>
+            <div class="col-md-3">
                 {!! Form::text('school_zip', ''
                     , array(
                         'class' => 'form-control'
@@ -168,8 +168,8 @@
                         , 'ng-model' => 'profile.prof.school_zip')
                 ) !!}
             </div>
-            <label for="" class="col-md-2 control-label">Country <span class="required">*</span></label>
-            <div class="col-md-4">
+            <label for="" class="col-md-3 control-label">Country <span class="required">*</span></label>
+            <div class="col-md-3">
                 <select name="school_country_id" class="form-control" ng-model="profile.prof.school_country_id" ng-disabled="!profile.active_edit">
                     <option ng-selected="profile.prof.school_country_id == futureed.FALSE" value="">-- Select Country --</option>
                     <option ng-selected="profile.prof.school_country_id == country.id" ng-repeat="country in countries" ng-value="country.id">{! country.name!}</option>
@@ -215,7 +215,7 @@
     		Address Information
     	</legend>
         <div class="form-group">
-    		<label for="" class="col-md-2 control-label">Street Address <span class="required" ng-if="profile.is_required">*</span></label>
+    		<label for="" class="col-md-3 control-label">Street Address <span class="required" ng-if="profile.is_required">*</span></label>
             <div class="col-md-5">
                 {!! Form::text('street_address', ''
                     , array(
@@ -227,8 +227,8 @@
             </div>
         </div>
         <div class="form-group">
-    		<label for="" class="col-md-2 control-label">City <span class="required" ng-if="profile.is_required">*</span></label>
-            <div class="col-md-4">
+    		<label for="" class="col-md-3 control-label">City <span class="required" ng-if="profile.is_required">*</span></label>
+            <div class="col-md-3">
                 {!! Form::text('city', ''
                     , array(
                         'class' => 'form-control'
@@ -237,8 +237,8 @@
                         , 'ng-model' => 'profile.prof.city')
                 ) !!}
             </div>
-            <label for="" class="col-md-2 control-label">State </label>
-            <div class="col-md-4">
+            <label for="" class="col-md-3 control-label">State </label>
+            <div class="col-md-3">
                 {!! Form::text('state', ''
                     , array(
                         'class' => 'form-control'
@@ -249,8 +249,8 @@
             </div>
         </div>
         <div class="form-group" ng-init="getCountries()">
-    		<label for="" class="col-md-2 control-label">Postal Code </label>
-            <div class="col-md-4">
+    		<label for="" class="col-md-3 control-label">Postal Code </label>
+            <div class="col-md-3">
                 {!! Form::text('zip', ''
                     , array(
                         'class' => 'form-control'
@@ -259,8 +259,8 @@
                         , 'ng-model' => 'profile.prof.zip')
                 ) !!}
             </div>
-            <label for="" class="col-md-2 control-label">Country <span class="required" ng-if="profile.is_required">*</span></label>
-            <div class="col-md-4">
+            <label for="" class="col-md-3 control-label">Country <span class="required" ng-if="profile.is_required">*</span></label>
+            <div class="col-md-3">
                 <select name="country_id" class="form-control" ng-model="profile.prof.country_id" ng-disabled="!profile.active_edit">
                     <option ng-selected="profile.prof.country_id == futureed.FALSE" value="">-- Select Country --</option>
                     <option ng-selected="profile.prof.country_id == country.id" ng-repeat="country in countries" ng-value="country.id">{! country.name!}</option>
