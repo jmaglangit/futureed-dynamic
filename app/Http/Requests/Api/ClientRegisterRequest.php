@@ -48,8 +48,8 @@ class ClientRegisterRequest extends ApiRequest {
 					'school_name' => 'required_if:client_role,'.config('futureed.principal').'|string|max:128',
 					'school_address' => 'required_if:client_role,'.config('futureed.principal').'|String|max:128',
 					'school_city' => 'max:128|regex:'.config('regex.state_city'),
-					'school_state' => 'required|max:128|regex:'.config('regex.state_city'),
-					'school_country_id' => 'required|numeric',
+					'school_state' => 'required_if:client_role,'.config('futureed.principal').'|max:128|regex:'.config('regex.state_city'),
+					'school_country_id' => 'required_if:client_role,'.config('futureed.principal').'|numeric',
 					'school_zip' => 'max:10|regex:'. config('regex.zip_code'),
 					'contact_number' => 'required_if:client_role,'.config('futureed.principal').'|max:20|regex:'.config('regex.phone'),
 				];
