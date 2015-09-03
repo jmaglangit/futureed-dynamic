@@ -83,7 +83,7 @@ function FutureedController($scope, $window, apiService, futureed) {
 	}
 
 	$scope.adminReLogin = function(){
-		$window.location.href = '/peaches/login';
+		$window.location.href = '/';
 	}
 
 	function internalError() {
