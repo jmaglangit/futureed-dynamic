@@ -1,8 +1,8 @@
 <div ng-if="student.active_view || student.active_edit">
     <div class="content-title">
         <div class="title-main-content">
-            <span ng-if="client.active_view">View Student Details</span>
-            <span ng-if="client.active_edit">Edit Student Details</span>
+            <span ng-if="student.active_view">View Student Details</span>
+            <span ng-if="student.active_edit">Edit Student Details</span>
         </div>
     </div>
 

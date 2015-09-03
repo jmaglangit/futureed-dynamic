@@ -753,7 +753,7 @@ footer{font:normal 12px/30px arial; }
 , .required-field:hover
 , .required-field:active
 , .required-field:focus {
-	border: 1px solid #f7b9aa;
+	border: 1px solid #f7b9aa !important;
 	box-shadow: none;
 }
 
@@ -864,7 +864,7 @@ li > a > span > .fa{
   	height: 35px;
 }
 .title-main-content{
-	font-size: 1.5em;
+	font-size: 16px;
   	color: #03658A;
 }
 .sbtitle-main-content{
@@ -874,7 +874,7 @@ li > a > span > .fa{
 .legend-name-mid{
 	text-transform: none;
 	font-family: inherit !important;
-	font-size: 18px !important;
+	font-size: 16px !important;
 }
 .btncon-client{
 	font-style: inherit !important;
@@ -1006,7 +1006,7 @@ div > .btncon > a {
 
 .paginate-size {
 	margin: 10px 0px;
-	width: 7%;
+	width: 50px;
 	font-size: 14px;
 	text-align: center;
 	height: 35px;

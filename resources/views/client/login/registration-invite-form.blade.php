@@ -13,6 +13,7 @@
                     {!! Html::image('/images/user_teacher.png', 'Teacher'
                         , array(
                             'id' => 'user_teacher'
+                            ,'class' => 'client-reg-img'
                         )
                     ) !!}
                 

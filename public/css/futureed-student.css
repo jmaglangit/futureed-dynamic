@@ -1286,7 +1286,7 @@ top: 41px;
 }
 
 .date-dropdowns > select {
-	height: 40px;
+	height: 30px;
 	line-height: 30px;
     padding: 4px 6px;
     margin-bottom: 10px;
@@ -1310,4 +1310,14 @@ top: 41px;
 
 .form-control {
 	font-size: 12px;
+}
+
+.day[disabled], .month[disabled], .year[disabled] {
+	cursor: not-allowed;
+	background-color: #eeeeee;
+	opacity: 1;
+}
+
+.bdate-dropdown > .date-dropdowns > select {
+	max-width: 30%;
 }

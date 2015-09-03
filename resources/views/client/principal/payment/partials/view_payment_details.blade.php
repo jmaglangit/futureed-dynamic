@@ -22,7 +22,7 @@
 		        	<div class="form-group">
 		        		<label class="col-xs-4 control-label">Subject <span class="required">*</span></label>
 		        		<div class="col-xs-4">
-		        			<select class="form-control" id="subject_id" name="subject_id" ng-disabled="payment.subjects.length <= 0" ng-model="payment.invoice.subject_id" ng-class="{ 'required-field' : payment.fields['subject_id'] }">
+		        			<select class="form-control" id="subject_id" name="subject_id" ng-disabled="true" ng-model="payment.invoice.subject_id" ng-class="{ 'required-field' : payment.fields['subject_id'] }">
 			                        <option value="">-- Select Subject --</option>
 			                        <option ng-selected="payment.invoice.subject_id == subject.id" ng-repeat="subject in payment.subjects" ng-value="subject.id">{! subject.name !}</option>
 			                    </select>
@@ -137,8 +137,8 @@
 		<div class="invoice-group margin-10-bot">
 			<p class="bill-info">{! payment.invoice.client_name !}</p>
 			<p class="bill-info">{! payment.user.street_address !}</p>
-			<p class="bill-info">{! payment.user.city !}</p>
-			<p class="bill-info">{! payment.user.state !}</p>
+			<p class="bill-info">{! payment.user.city !}, {! payment.user.state !}, {! payment.user.zip !}</p>
+			<p class="bill-info">{! payment.user.country !}</p>
 		</div>
 		<div class="invoice-group">
 			<p class="bill-info">Bill to:</p>
