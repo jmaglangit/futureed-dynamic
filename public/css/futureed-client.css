@@ -337,3 +337,11 @@ content legend {
 .bdate-dropdown > .date-dropdowns > select {
 	max-width: 30%;
 }
+
+.tr-overflow {
+	word-wrap: break-word;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	max-width: 60px;
+}

@@ -108,9 +108,9 @@
 				</thead>
 				<tbody>
 					<tr ng-repeat="t in teacher.records">
-						<td>{! t.user.name !}</td>
-						<td>{! t.user.email !}</td>
-						<td>
+						<td class="tr-overflow">{! t.user.name !}</td>
+						<td class="tr-overflow">{! t.user.email !}</td>
+						<td class="tr-overflow">
 							<div class="row">
 			            		<div class="col-xs-5">
 			            			{! t.user.status !}
