@@ -2,7 +2,7 @@
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h3 class="title-main-content" ng-if="mod.module_message.skip_module"> {! mod.module_message.name !} </h3>
+				<h3 class="title-main-content" ng-if="mod.module_message.skip_module || mod.module_message.no_questions"> {! mod.module_message.name !} </h3>
 				<h3 class="title-main-content" ng-if="mod.module_message.module_done"> {! mod.module_message.name !} Module Complete </h3>
 			</div>
 			<div class="modal-body message-container">
@@ -23,6 +23,17 @@
 						<div class="col-xs-12">
 							<p class="message-point">+{! mod.module_message.points_earned !}</p>
 						</div>
+					</div>
+				</div>
+
+				<div ng-if="mod.module_message.no_questions">
+					<div class="col-xs-12" >
+						<p class="module-message">No available questions for this module.</br>
+						Please contact the system administrator.</p>
+					</div>
+
+					<div class="module-icon-holder">
+						<img ng-src="{! user.avatar !}" />
 					</div>
 				</div>
 
@@ -66,6 +77,20 @@
 						) !!}
 
 						{!! Form::button('Later'
+							, array(
+								'class' => 'btn btn-gold btn-medium'
+								, 'data-dismiss' => 'modal'
+							)
+						) !!}
+					</div>
+					<div ng-if="mod.module_message.no_questions">
+						{!! Html::link(route('student.dashboard.index'), 'Proceed to Dashboard'
+							, array(
+								'class' => 'btn btn-maroon btn-medium'
+							)
+						) !!}
+
+						{!! Form::button('Close'
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'data-dismiss' => 'modal'
