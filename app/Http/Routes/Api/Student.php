@@ -49,15 +49,17 @@ Routes::group(['prefix' => '/student'], function()
 		'as' => 'api.v1.student.password.image'
 	]);
 
+	Routes::post('/password/reset', [
+		'uses' => 'Api\v1\StudentPasswordController@passwordReset',
+		'as' => 'api.v1.student.password.reset'
+	]);
+
 	Routes::group([
 		'middleware' => ['api_user', 'api_after'],
 		'permission' => ['student'],
 	], function () {
 
-		Routes::post('/password/reset', [
-			'uses' => 'Api\v1\StudentPasswordController@passwordReset',
-			'as' => 'api.v1.student.password.reset'
-		]);
+
 
 		Routes::post('/password/code', [
 			'uses' => 'Api\v1\StudentPasswordController@confirmResetCode',
