@@ -99,6 +99,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 						data.class_id = $scope.user.class.class_id;
 						data.student_id = $scope.user.id;
 						data.module_id = self.record.id;
+						data.subject_id = self.record.subject_id;
 
 					createModuleStudent(data, function(response) {
 						if(response.data) {
@@ -630,6 +631,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 			var data = {};
 				data.class_id = $scope.user.class.class_id;
 				data.student_id = $scope.user.id;
+				data.module_id = self.record.id;
 				data.module_id = self.record.id;
 
 			createModuleStudent(data, function(response) {
