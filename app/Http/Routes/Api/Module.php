@@ -7,7 +7,7 @@ Routes::group([
 ], function(){
 
 	Routes::resource('/module/student','Api\v1\StudentModuleController',
-		['except' => ['create', 'store', 'edit', 'destroy']]);
+		['except' => ['create', 'edit', 'destroy']]);
 
 	Routes::resource('/module','Api\v1\ModuleController',
 		['only' => ['index', 'show']]);
