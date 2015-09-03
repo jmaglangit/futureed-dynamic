@@ -184,8 +184,8 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 					self.setActive();
 					$scope.ui_unblock();
 				} else {
-					self.invoice = response.data;
-					self.getPaymentUri();
+					var invoice = response.data;
+					self.getPaymentUri(invoice);
 				}
 			}
 		}).error(function(response) {
@@ -220,8 +220,8 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 					self.setActive();
 					$scope.ui_unblock();
 				} else {
-					self.invoice = response.data;
-					self.getPaymentUri();
+					var invoice = response.data;
+					self.getPaymentUri(invoice);
 				}
 			}
 		}).error(function(response) {
@@ -230,13 +230,13 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 		});
 	}
 
-	self.getPaymentUri = function() {
+	self.getPaymentUri = function(invoice) {
 		var payment = {};
-			payment.invoice_id = self.invoice.invoice.id;
+			payment.invoice_id = invoice.invoice.id;
 			payment.quantity = Constants.TRUE;
-			payment.price = self.invoice.total_amount;
-			payment.client_id = self.invoice.student_id;
-			payment.order_no = self.invoice.order_no;
+			payment.price = invoice.total_amount;
+			payment.client_id = invoice.student_id;
+			payment.order_no = invoice.order_no;
 
 		var base_url = $("#base_url_form input[name='base_url']").val();
 			payment.success_callback_uri = base_url + "/" + angular.lowercase(Constants.STUDENT) + "/payment/success"
