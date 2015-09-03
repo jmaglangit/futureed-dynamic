@@ -133,7 +133,7 @@ class ClientController extends ApiController {
 					$this->addMessageBag($this->validateString($client, 'street_address'));
 					$this->addMessageBag($this->validateAlphaSpace($client, 'city'));
 					$this->addMessageBag($this->validateStringOptional($client, 'country'));
-					$this->addMessageBag($this->validateString($client, 'country_id'));
+					$this->addMessageBag($this->validateNumber($client, 'country_id'));
 					$this->addMessageBag($this->validateAlphaSpace($client, 'state'));
 					$this->addMessageBag($this->zipCodeOptional($client, 'zip'));
 
