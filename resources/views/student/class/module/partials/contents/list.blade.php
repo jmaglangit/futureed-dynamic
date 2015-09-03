@@ -63,13 +63,13 @@
 		<div>
 			{!! Form::button('Exit Module'
 				,array(
-					'class' => 'btn btn-maroon exit-btn'
+					'class' => 'btn btn-gold exit-btn'
 					, 'ng-click' => "mod.exitModule()"
 				)
 			)!!}
 			{!! Form::button('Skip'
 				,array(
-					'class' => 'btn btn-gold next-btn'
+					'class' => 'btn btn-maroon next-btn'
 					, 'ng-click' => 'mod.startQuestions()'
 				)
 			)!!}
