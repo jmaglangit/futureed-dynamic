@@ -44,6 +44,16 @@ class ClassStudentRequest extends ApiRequest {
 							'client_id' => 'required',
 							'class_id' => 'required'];
 						break;
+					default:
+						return ['user_id' => 'required|email',
+							'class_id' => 'required',
+							'status' => 'required|in:Enabled,Disabled'];
+				}
+				break;
+
+			case 'GET':
+				switch ($this->route()->getName()) {
+
 					case 'api.v1.class-student.student-current-class';
 
 						return [
@@ -56,10 +66,6 @@ class ClassStudentRequest extends ApiRequest {
 								.','.config('futureed.module_status_failed'),
 						];
 						break;
-					default:
-						return ['user_id' => 'required|email',
-							'class_id' => 'required',
-							'status' => 'required|in:Enabled,Disabled'];
 				}
 				break;
         }
