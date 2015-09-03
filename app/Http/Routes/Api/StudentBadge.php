@@ -7,7 +7,8 @@ Routes::group(['prefix' => '/badge'], function() {
 	 */
 	Routes::group([
 		'middleware' => ['api_user','api_after'],
-		'permission' => ['student']
+		'permission' => ['student','admin'],
+		'role' => ['admin','super admin']
 	],function(){
 
 		Routes::resource('/student', 'Api\v1\StudentBadgeController',
