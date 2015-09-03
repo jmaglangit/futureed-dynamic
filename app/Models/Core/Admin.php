@@ -15,7 +15,7 @@ class Admin extends Model {
 
     protected $dates = ['deleted_at'];
 
-    protected $hidden = ['user_id','created_by','updated_by','created_at','updated_at','deleted_at'];
+    protected $hidden = ['created_by','updated_by','created_at','updated_at','deleted_at'];
 
     protected $fillable = ['user_id', 'first_name', 'last_name', 'admin_role'];
 
