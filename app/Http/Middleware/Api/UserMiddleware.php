@@ -111,7 +111,7 @@ class UserMiddleware extends JWTMiddleware{
 
 			case config('futureed.client'):
 
-				$response = $this->client->getClient($id,$user_role);
+				$response = $this->client->getClientDetails($id,$user_role);
 
 				$return = ($response <> null) ? true : false;
 				break;
