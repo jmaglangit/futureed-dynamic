@@ -1,12 +1,14 @@
 <?php namespace FutureEd\Models\Core;
 
+use FutureEd\Models\Traits\TransactionTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Classroom extends Model {
 
-	//
-	use SoftDeletes;
+≠	use SoftDeletes;
+
+	use TransactionTrait;
 
 	protected $table = 'classrooms';
 
