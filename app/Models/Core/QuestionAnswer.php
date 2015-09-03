@@ -12,7 +12,6 @@ class QuestionAnswer extends Model {
 	protected $dates = ['deleted_at'];
 
 	protected $hidden = [
-		'point_equivalent',
 		'created_by',
 		'updated_by',
 		'created_at',
