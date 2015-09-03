@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Classroom extends Model {
 
-≠	use SoftDeletes;
+	use SoftDeletes;
 
 	use TransactionTrait;
 
