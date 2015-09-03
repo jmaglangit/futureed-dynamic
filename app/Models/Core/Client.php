@@ -4,12 +4,40 @@ use FutureEd\Models\Traits\TransactionTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+trait ClientTransactionTrait {
+
+	//TODO: Make use of generic trait.
+	protected static function boot() {
+
+		parent::boot();
+
+		static::creating(function($model){
+
+			$model->created_by = (session()->has('current_user'))? session('current_user') : 1;
+
+		});
+
+		static::updating(function($model){
+
+			$model->updated_by = (session()->has('current_user'))? session('current_user') : 1;
+
+		});
+
+		Client::deleting(function ($admin) {
+
+			$admin->user->delete();
+
+		});
+	}
+
+}
+
 class Client extends Model
 {
 
 	use SoftDeletes;
 
-	use TransactionTrait;
+	use ClientTransactionTrait;
 
 	protected $table = 'clients';
 
@@ -39,16 +67,6 @@ class Client extends Model
 		'account_status' => 'Pending'
 	];
 
-
-	public static function boot()
-	{
-
-		parent::boot();
-
-		Client::deleting(function ($admin) {
-			$admin->user->delete();
-		});
-	}
 
 	//-------------relationships
 	public function user()
