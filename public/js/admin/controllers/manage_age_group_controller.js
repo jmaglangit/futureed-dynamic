@@ -91,6 +91,7 @@ function ManageAgeGroupController($scope, $timeout, ManageAgeGroupService, apiSe
 
 	self.addAgeGroup = function() {
 		self.errors = Constants.FALSE;
+		self.fields = [];
 		self.create.success = Constants.FALSE;
 		self.create.module_id = $scope.module_id;
 

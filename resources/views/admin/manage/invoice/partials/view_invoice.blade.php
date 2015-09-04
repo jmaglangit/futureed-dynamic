@@ -91,7 +91,7 @@
 				Order List
 			</div>
 
-			<table id="class-list" class="table table-striped table-bordered">
+			<table id="class-list" class="table table-striped table-bordered" ng-if="!invoice.view_students_tables">
 				<thead>
 					<tr>
 						<td>Number of Seats</td>
@@ -118,7 +118,32 @@
 					</tr>
 				</tbody>
 			</table>
+			<table id="class-list" class="table table-striped table-bordered" ng-if="invoice.view_students_tables">
+				<thead>
+					<tr>
+						<td>Name</td>
+						<td>Email</td>
+						<td>Date Added</td>
+						<td>Date Removed</td>
+					</tr>
+				</thead>
+	        	<tbody>
+					<tr ng-repeat="student in invoice.students">
+						<td>{! student.student.user.name !}</td>
+						<td>{! student.student.user.email !}</td>
+						<td>{! student.date_started !}</td>
+						<td>{! student.date_removed !}</td>
+					</tr>
+					<tr class="odd" ng-if="!invoice.students.length">
+						<td valign="top" colspan="6" >
+							No records found
+						</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
+		<a href="" class="pull-right" ng-if="invoice.view_student_list_link" ng-click="invoice.viewAllStudents(invoice.record.id)">View All Students under this Order</a>
+		<a href="" class="pull-right" ng-if="!invoice.view_student_list_link" ng-click="invoice.details(invoice.record.id, 'view')">Back to Class List</a>
 	</div>
 
 	<div class="col-xs-12 search-container">

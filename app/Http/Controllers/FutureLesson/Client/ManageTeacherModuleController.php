@@ -12,7 +12,7 @@ class ManageTeacherModuleController extends Controller{
 	*@return Module Index View
 	*/
 	public function index() {
-		return view('client.teacher.module.index');
+		return view('client.teacher.module.index',['active' => 'module']);
 	}
 
 	/**
