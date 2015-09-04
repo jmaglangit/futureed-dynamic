@@ -51,9 +51,7 @@ div > .nav-list > li > a{
 .nav-list{
 	margin-bottom: 0;
 }
-.col-xs-3 > .btn{
-	padding: 30px;
-}
+
 .client-content > .col-xs-12 > .title-mid{
 	margin: 0 0 0 15px;
   	text-transform: none;
