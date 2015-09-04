@@ -93,16 +93,6 @@ class InvoiceController extends ApiController {
     }
 
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      *
      * @return Response
@@ -130,17 +120,6 @@ class InvoiceController extends ApiController {
     {
         $invoice = $this->invoice->getInvoice($id);
         return $this->respondWithData($invoice);
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**

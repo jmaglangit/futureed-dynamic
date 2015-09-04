@@ -1,11 +1,14 @@
 <?php namespace FutureEd\Models\Core;
 
+use FutureEd\Models\Traits\TransactionTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class TipRating extends Model {
 
 	use SoftDeletes;
+
+	use TransactionTrait;
 
 	protected $table = 'tip_ratings';
 

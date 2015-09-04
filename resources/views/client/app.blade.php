@@ -46,6 +46,29 @@
 		@yield('content')
 
 		@section('footer')
+			<div id="session_expire" ng-show="session_expire" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	        <div class="modal-dialog modal-lg">
+	            <div class="modal-content">
+	                <div class="modal-header">
+	                    Inactive
+	                </div>
+	                <div class="modal-body">
+	                    You have been logged out due to inactivity. Please login again.
+	                </div>
+	                <div class="modal-footer">
+	                    <div class="btncon col-md-8 col-md-offset-4 pull-left">
+	                        {!! Form::button('Login'
+	                            , array(
+	                                'class' => 'btn btn-gold btn-medium'
+	                                , 'ng-click' => 'clientReLogin()'
+	                                , 'data-dismiss' => 'modal'
+	                            )
+	                        ) !!}
+	                    </div>
+	                </div>
+	            </div>
+	          </div>
+	        </div>
 			<footer class="footer" ng-cloak>
 				<div class="container text-center">
 					<p class="text-muted">{{ date('Y') }} &copy; All Rights Reserved. FutureEd Pte Ltd</p>

@@ -1,5 +1,7 @@
 <?php namespace FutureEd\Models\Core;
 
+use FutureEd\Models\Traits\TransactionTrait;
+use FutureEd\Models\Traits\UserTransactionTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -8,11 +10,13 @@ class Admin extends Model {
 
     use SoftDeletes;
 
+	use UserTransactionTrait;
+
     protected $table = 'admins';
 
     protected $dates = ['deleted_at'];
 
-    protected $hidden = ['user_id','created_by','updated_by','created_at','updated_at','deleted_at'];
+    protected $hidden = ['created_by','updated_by','created_at','updated_at','deleted_at'];
 
     protected $fillable = ['user_id', 'first_name', 'last_name', 'admin_role'];
 
@@ -27,15 +31,6 @@ class Admin extends Model {
     public function user(){
 
         return $this->belongsTo('FutureEd\Models\Core\User');
-    }
-
-    public static function boot(){
-
-        parent::boot();
-
-        Admin::deleting(function($admin){
-            $admin->user->delete();
-        });
     }
 
 	//-------------scopes

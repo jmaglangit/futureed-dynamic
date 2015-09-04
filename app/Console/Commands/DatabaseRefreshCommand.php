@@ -37,6 +37,7 @@ class DatabaseRefreshCommand extends Command {
 	 */
 	public function handle()
 	{
+
 		\DB::table('class_students')->truncate();
 		\DB::table('classrooms')->truncate();
 		\DB::table('invoices')->truncate();
@@ -45,8 +46,9 @@ class DatabaseRefreshCommand extends Command {
 		\DB::table('student_modules')->truncate();
 		\DB::table('student_module_answers')->truncate();
 		\DB::table('student_points')->truncate();
-
 		$this->comment('Future Lessons Database Refresh.');
 
 	}
+
+
 }

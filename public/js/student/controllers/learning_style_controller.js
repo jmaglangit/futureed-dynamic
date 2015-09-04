@@ -135,7 +135,7 @@ function LearningStyleController($rootScope, $scope, $interval, $filter, $sce, $
 					});
 				}
 			}
-		
+			$scope.ui_unblock();
 		}).error(function(response){
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
@@ -825,68 +825,75 @@ function LearningStyleController($rootScope, $scope, $interval, $filter, $sce, $
 		$scope.ui_block();
 		
 		LearningStyleService.getTest($scope.user.id).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)){
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					$scope.data_loaded = true;
 			
-			$scope.data_loaded = true;
-			
-			$scope.session.section = 0;
-			$scope.session.next = 'Next';
-			//TODO:: $scope.session.redirect_on_complete = that_session.post_test_url;
-			$scope.order_candidate_test = response.data;
-			$scope.sections = parseSections($scope.order_candidate_test.sections);
+					$scope.session.section = 0;
+					$scope.session.next = 'Next';
+					//TODO:: $scope.session.redirect_on_complete = that_session.post_test_url;
+					$scope.order_candidate_test = response.data;
+					$scope.sections = parseSections($scope.order_candidate_test.sections);
 
-			$scope.session.all_questions = [];
-			for (var i = 0; i < $scope.sections.length; i++) {
-				if ( $scope.session.section > 0 && i < $scope.session.section ) {
-					$scope.sections[i].page = $scope.sections[i].max_page;
+					$scope.session.all_questions = [];
+					for (var i = 0; i < $scope.sections.length; i++) {
+						if ( $scope.session.section > 0 && i < $scope.session.section ) {
+							$scope.sections[i].page = $scope.sections[i].max_page;
+						}
+
+						$scope.session.all_questions = $scope.session.all_questions.concat($scope.sections[i].questions);
+					}
+					$filter('orderBy', $scope.session.all_questions, 'question_no' );
+				
+					$scope.session.data = {
+						test_id: $scope.order_candidate_test.test_id,
+						page_no: $scope.order_candidate_test.most_recent_page_no
+					}
+					if ( $scope.order_candidate_test.start_time_at ) {
+						$scope.session.data.start_time_at = start_utc = new Date($scope.order_candidate_test.start_time_at);
+
+					}
+
+					$scope.markups = {
+						intro: '',
+						end: $sce.trustAsHtml($window.marked($scope.order_candidate_test.test_instructions_end)),
+						page: ''
+					}
+
+				
+					if ( typeof($scope.sections[$scope.session.section]) != 'undefined' ) {
+						setInstructions('testReady');
+					} else {
+						// Test already completed so let's rewind the section minus 1
+						// because we are using it for zero based index.
+						$scope.session.section = $scope.session.section-1;
+						$scope.session.questions = $scope.sections[$scope.session.section].questions;
+						setInstructions('testReady');
+						enterEndOfTest();
+					}
+
+					if ( $scope.session.current_state == 'actual questions' )
+					{
+						$scope.session.remaining = $scope.session.time_limit_actual;
+						$scope.session.questions = $scope.sections[$scope.session.section].questions;
+						
+						var end_of_section = section.getNextPage() == 0;
+						enablePreviousPageButton();
+						
+						setActualTimeLimit();
+						startDurationTicker();
+						checkIncomplete();
+					}
 				}
-
-				$scope.session.all_questions = $scope.session.all_questions.concat($scope.sections[i].questions);
 			}
-			$filter('orderBy', $scope.session.all_questions, 'question_no' );
-			
-			$scope.session.data = {
-				test_id: $scope.order_candidate_test.test_id,
-				page_no: $scope.order_candidate_test.most_recent_page_no
+			if(response.status != 401) {
+				recalculateProgress();
 			}
-			if ( $scope.order_candidate_test.start_time_at ) {
-				$scope.session.data.start_time_at = start_utc = new Date($scope.order_candidate_test.start_time_at);
-
-			}
-
-			$scope.markups = {
-				intro: '',
-				end: $sce.trustAsHtml($window.marked($scope.order_candidate_test.test_instructions_end)),
-				page: ''
-			}
-
-			
-			if ( typeof($scope.sections[$scope.session.section]) != 'undefined' ) {
-				setInstructions('testReady');
-			} else {
-				// Test already completed so let's rewind the section minus 1
-				// because we are using it for zero based index.
-				$scope.session.section = $scope.session.section-1;
-				$scope.session.questions = $scope.sections[$scope.session.section].questions;
-				setInstructions('testReady');
-				enterEndOfTest();
-			}
-
-			if ( $scope.session.current_state == 'actual questions' )
-			{
-				$scope.session.remaining = $scope.session.time_limit_actual;
-				$scope.session.questions = $scope.sections[$scope.session.section].questions;
-				
-				var end_of_section = section.getNextPage() == 0;
-				enablePreviousPageButton();
-				
-				setActualTimeLimit();
-				startDurationTicker();
-				checkIncomplete();
-			}
-			recalculateProgress();
 			
 			$scope.ui_unblock();
-			
+		
 		}).error(function(response){
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();

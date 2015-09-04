@@ -1,11 +1,14 @@
 <?php namespace FutureEd\Models\Core;
 
+use FutureEd\Models\Traits\TransactionTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class MediaType extends Model {
 
     use SoftDeletes;
+
+	use TransactionTrait;
 
     protected $table = 'media_types';
 
@@ -15,7 +18,10 @@ class MediaType extends Model {
 
     protected $fillable = ['name', 'description'];
 
-    protected $attributes = ['created_by' => 1, 'updated_by' => 1];
+    protected $attributes = [
+		'created_by' => 1,
+		'updated_by' => 1
+	];
 
 	//scope
 	public function scopeName($query,$name){

@@ -15,7 +15,11 @@
 				'as' => 'admin.base_url'
 				, 'uses' => 'FutureLesson\Admin\LoginController@base_url'
 			]);
-		
+		Routes::post('/update-user-session',[
+				'as' => 'admin.update_user_session'
+				, 'uses' => 'FutureLesson\Admin\LoginController@update_session'
+			]);
+
 		Routes::get('/logout', [ 
 			'as' => 'admin.logout'
 			, 'middleware' => 'admin'

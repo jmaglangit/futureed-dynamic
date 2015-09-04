@@ -26,17 +26,22 @@ class Kernel extends HttpKernel {
 	protected $routeMiddleware = [
 		'auth' => 'FutureEd\Http\Middleware\Authenticate',
 		'auth.basic' => 'Illuminate\Auth\Middleware\AuthenticateWithBasicAuth',
-		'student' => 'FutureEd\Http\Middleware\StudentMiddleware',				
-		'admin' => 'FutureEd\Http\Middleware\AdminMiddleware',		
+		'student' => 'FutureEd\Http\Middleware\StudentMiddleware',
+		'admin' => 'FutureEd\Http\Middleware\AdminMiddleware',
 		'client' => 'FutureEd\Http\Middleware\ClientMiddleware',
-        'jwt' => 'FutureEd\Http\Middleware\Api\JWTMiddleware',
-        'api_user' => 'FutureEd\Http\Middleware\Api\UserMiddleware',
-        'api_after' => 'FutureEd\Http\Middleware\Api\AfterMiddleware',
 		'parent' => 'FutureEd\Http\Middleware\ParentMiddleware',
 		'principal' => 'FutureEd\Http\Middleware\PrincipalMiddleware',
 		'teacher' => 'FutureEd\Http\Middleware\TeacherMiddleware',
 		'admin_partial' => 'FutureEd\Http\Middleware\AdminPartialsMiddleware',
-		'student_partial' => 'FutureEd\Http\Middleware\StudentPartialsMiddleware'
+		'student_partial' => 'FutureEd\Http\Middleware\StudentPartialsMiddleware',
+
+		//API MIDDLEWARE
+        'jwt' => 'FutureEd\Http\Middleware\Api\JWTMiddleware',
+        'api_user' => 'FutureEd\Http\Middleware\Api\UserMiddleware',
+        'api_after' => 'FutureEd\Http\Middleware\Api\AfterMiddleware',
+		'api_after_student_login' => 'FutureEd\Http\Middleware\Api\AfterStudentLoginMiddleware',
+		'api_after_client_login' => 'FutureEd\Http\Middleware\Api\AfterClientLoginMiddleware',
+		'api_after_admin_login' => 'FutureEd\Http\Middleware\Api\AfterAdminLoginMiddleware'
 	];
 
 }

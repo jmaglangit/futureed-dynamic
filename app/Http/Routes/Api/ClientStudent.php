@@ -1,5 +1,10 @@
 <?php
-Routes::group(['prefix' => '/parent-student'], function()
+Routes::group([
+	'prefix' => '/parent-student',
+	'middleware' => ['api_user','api_after'],
+	'permission' => ['admin','client'],
+	'role' => ['principal','teacher','parent','admin','super admin']
+], function()
 {
     Routes::post('/add-existing-student', [
         'uses' => 'Api\v1\ParentStudentController@addExistingStudent',
@@ -28,14 +33,23 @@ Routes::group(['prefix' => '/parent-student'], function()
         'uses' => 'Api\v1\ParentStudentController@addStudentByName',
         'as' => 'parent-student.add.student.by.username']);
 
+	Routes::delete('/{id}',[
+		'uses' => 'Api\v1\ParentStudentController@destroy',
+		'as' => 'api.v1.parent-student.destroy'
+	]);
+
 });
 
-Routes::resource('/parent-student','Api\v1\ParentStudentController', ['only' => ['destroy']]);
 
-Routes::group(['prefix' => '/client/manage'], function()
+Routes::group([
+	'prefix' => '/client/manage',
+	'middleware' => ['api_user','api_after'],
+	'permission' => ['admin','client'],
+	'role' => ['principal','teacher','parent','admin','super admin']
+], function()
 {
     Routes::resource('/student','Api\v1\ClientStudentController',
-        ['except' => ['create','edit']]);
+        ['except' => ['create','edit', 'destroy']]);
 
     //NOTE:student confirm his/her invitation via teacher
     Routes::put('/update-student/{id}', [
@@ -49,7 +63,6 @@ Routes::group(['prefix' => '/client/manage'], function()
     Routes::put('/email/student/{id}', [
         'uses' => 'Api\v1\StudentEmailController@updateStudentEmail',
         'as' => 'parent-student.email.student']);
-
 
 });
 
