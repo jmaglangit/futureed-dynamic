@@ -45,8 +45,8 @@ class AdminQuestionRequest extends ApiRequest {
 
 				return [
 					'image' => 'string',
-					'seq_no' => 'integer|min:1',
-					'questions_text' => 'required|string',
+					'seq_no' => 'integer',
+					'questions_text' => 'required|string|max:256',
 					'difficulty' => 'required|integer',
 					'status' => 'required|alpha|in:Enabled,Disabled',
 					'question_type' => 'required|alpha|in:MC,FIB,O,N',
@@ -64,9 +64,9 @@ class AdminQuestionRequest extends ApiRequest {
 		return [
 			'module_id.required' => 'Module is required.',
 			'module_id.integer' => 'Module is invalid.',
-			'difficulty.integer' => 'Difficulty must be a number.',
-			'points_earned.integer' => 'Points earned must be a number.',
-			'code.integer' => 'Code must be a number.',
+			'difficulty.integer' => 'Difficulty is invalid.',
+			'points_earned.integer' => 'Points earned is invalid.',
+			'code.integer' => 'Code is invalid.',
 			'seq_no.integer' => 'Sequence number is invalid.',
 			'answer.required_if' => 'The answer field is required.',
 			'question_order_text.required_if' => 'Question order text is required.'
