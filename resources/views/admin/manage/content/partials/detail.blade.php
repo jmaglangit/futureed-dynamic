@@ -300,7 +300,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="modal-image">
-                        <img ng-src="{! content.record.content_url !}"/>
+                        <img ng-src="{! content.view_image.image_path !}"/>
                     </div>
                 </div>
                 <div class="modal-footer">
