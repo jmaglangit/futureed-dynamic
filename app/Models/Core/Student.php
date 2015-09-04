@@ -1,40 +1,17 @@
 <?php namespace FutureEd\Models\Core;
 
 use FutureEd\Models\Traits\TransactionTrait;
+use FutureEd\Models\Traits\UserTransactionTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Carbon\Carbon;
-
-trait StudentTransactionTrait {
-
-	//TODO: Make use of generic trait.
-	protected static function boot() {
-		parent::boot();
-
-		static::creating(function($model){
-
-			$model->created_by = (session()->has('current_user'))? session('current_user') : 1;
-
-		});
-
-		static::updating(function($model){
-
-			$model->updated_by = (session()->has('current_user'))? session('current_user') : 1;
-
-		});
-
-		Student::deleting(function ($student) {
-			$student->user->delete();
-		});
-	}
-}
 
 class Student extends Model {
 
 
     use SoftDeletes;
 
-	use StudentTransactionTrait;
+	use UserTransactionTrait;
 
     protected $table = 'students';
 
