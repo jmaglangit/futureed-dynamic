@@ -43,7 +43,8 @@ class TeachingContent extends Model {
 
 	public function getContentUrlAttribute($value){
 
-		if($this->attributes['media_type_id'] == 3){
+		if($this->attributes['media_type_id'] == 3 && $this->attributes['content_url'] <> ''){
+
 			return  asset(config('futureed.teaching_content_image_uploads'). '/'. $this->attributes['id']. '/' . $value);
 		}
 
