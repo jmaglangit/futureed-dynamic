@@ -377,6 +377,7 @@ function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService,
 					self.answers.errors = $scope.errorHandler(response.errors);
 				}else if(response.data){
 					self.ans_records = response.data.records;
+					self.updateTable(response.data);
 				}
 			}
 			$scope.ui_unblock();
@@ -465,5 +466,29 @@ function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService,
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		})
+	}
+
+	self.paginateBySize = function() {
+		self.table.page = 1;
+		self.table.offset = (self.table.page - 1) * self.table.size;
+		self.answerList();
+	}
+
+	self.paginateByPage = function() {
+		var page = self.table.page;
+		
+		self.table.page = (page < 1) ? 1 : page;
+		self.table.offset = (page - 1) * self.table.size;
+
+		self.answerList();
+	}
+
+	self.updateTable = function(data) {
+		self.table.total_items = data.total;
+
+		// Set Page Count
+		var page_count = data.total / self.table.size;
+			page_count = (page_count < Constants.DEFAULT_PAGE) ? Constants.DEFAULT_PAGE : Math.ceil(page_count);
+		self.table.page_count = page_count;
 	}
 }
