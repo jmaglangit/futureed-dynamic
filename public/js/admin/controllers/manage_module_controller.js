@@ -26,6 +26,9 @@ function ManageModuleController($scope, manageModuleService, TableService, Searc
 		self.active_edit = Constants.FALSE;
 		self.edit = Constants.FALSE;
 
+		self.tableDefaults();
+		self.searchDefaults();
+
 		if(flag != 1) {
 			self.success = Constants.FALSE;
 		}
@@ -76,6 +79,8 @@ function ManageModuleController($scope, manageModuleService, TableService, Searc
 		} else {
 			self.content_hidden = Constants.FALSE;
 			self.detail_hidden = Constants.TRUE;
+
+			self.setActiveContent(Constants.AGEGROUP);
 		}
 	}
 

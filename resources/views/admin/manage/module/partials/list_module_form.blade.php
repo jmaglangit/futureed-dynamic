@@ -32,7 +32,7 @@
 			) !!}
 				<div class="form-group">
 					<div class="col-xs-5" ng-init="module.getSubject()">
-						<select ng-model="module.search.subject" class="form-control">
+						<select ng-model="module.search.subject" ng-disabled="!module.subjects.length" class="form-control">
 							<option value=""> -- Select Subject -- </option>
 							<option ng-repeat="subject in module.subjects" ng-value="subject.name"> {! subject.name !} </option>
 						</select>
@@ -113,7 +113,6 @@
 				<thead>
 			        <tr>
 			            <th>Module</th>
-			            <th>Description</th>
 			            <th>Subject</th>
 			            <th>Area</th>
 			            <th ng-if="module.records.length">Action</th>
@@ -122,7 +121,6 @@
 		        <tbody>
 			        <tr ng-repeat="moduleInfo in module.records">
 			            <td class="wide-column">{! moduleInfo.name !}</td>
-			            <td class="wide-column">{! moduleInfo.description !}</td>
 			            <td>{! moduleInfo.subject.name !}</td>
 			            <td>{! moduleInfo.subject_area.name !}</td>
 			            <td ng-if="module.records.length">

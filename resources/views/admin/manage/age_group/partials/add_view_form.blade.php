@@ -51,7 +51,7 @@
 	        	{!! Form::button('Cancel'
 	        		, array(
 	        			'class' => 'btn btn-gold btn-medium'
-	        			, 'ng-click' => "module.setActive('view', module.details.id); age.setActive()"
+	        			, 'ng-click' => "age.setActive()"
 	        		)
 	        	) !!}
         	</div>

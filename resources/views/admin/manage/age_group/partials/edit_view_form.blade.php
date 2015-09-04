@@ -1,17 +1,23 @@
 <div ng-if="age.active_edit" class="col-xs-12" id="age-group">
-	<div class="content-title">
-		<div class="title-main-content">
-			<span>Edit Age Group</span>
+	<div class="col-xs-12 success-container" ng-if="age.errors || age.success">
+		<div class="alert alert-error" ng-if="age.errors">
+			<p ng-repeat="error in age.errors track by $index">
+				{! error !}
+			</p>
 		</div>
-	</div>
+
+        <div class="alert alert-success" ng-if="age.success">
+            <p>{! age.success !}</p>
+        </div>
+    </div>
+
 	{!! Form::open(array('id'=> 'add_age_group_form', 'class' => 'form-horizontal')) !!}
 	<div class="col-xs-12 form-content">
-		<div class="alert alert-error" ng-if="age.errors">
-            <p ng-repeat="error in age.errors track by $index" > 
-              	{! error !}
-            </p>
-        </div>
         <fieldset>
+			<legend class="legend-name-mid">
+				Edit Age Group
+			</legend>
+
         	<div class="form-group">
         		<label class="control-label col-xs-3">Age <span class="required">*</span></label>
         		<div class="col-xs-5" ng-init="age.getAge()">
@@ -35,7 +41,7 @@
         		</div>
         	</div>
         </fieldset>
-        <div class="col-xs-6 col-xs-offset-3">
+        <div class="col-xs-9 col-xs-offset-1">
         	<div class="btn-container">
         		{!! Form::button('Save'
 	        		, array(
@@ -43,18 +49,11 @@
 	        			, 'ng-click' => 'age.saveAgeGroup()'
 	        		)
 	        	) !!}
-	        	{!! Form::button('Save'
-	        		, array(
-	        			'class' => 'hidden'
-	        			, 'id' => 'age-list-btn'
-	        			, 'ng-click' => "module.setActive('view', module.details.id); age.setActive('','',1)"
-	        		)
-	        	) !!}
 
 	        	{!! Form::button('Cancel'
 	        		, array(
 	        			'class' => 'btn btn-gold btn-medium'
-	        			, 'ng-click' => "module.setActive('view', module.details.id); age.setActive()"
+	        			, 'ng-click' => "age.setActive()"
 	        		)
 	        	) !!}
         	</div>
