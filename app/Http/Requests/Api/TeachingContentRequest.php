@@ -30,15 +30,15 @@ class TeachingContentRequest extends ApiRequest {
 					'subject_id' => 'required|exists:subjects,id,deleted_at,NULL',
 					'subject_area_id' => 'required|exists:subject_areas,id,deleted_at,NULL',
 					'code' => 'required|integer|unique:teaching_contents,code,NULL,id,deleted_at,NULL',
-					'teaching_module' => 'required',
-					'description' => 'required',
+					'teaching_module' => 'required|max:64',
+					'description' => 'required|max:256',
 					'learning_style_id' => 'required|exists:learning_styles,id,deleted_at,NULL',
 					'content_url' => 'required_if:media_type_id,1|string',
 					'media_type_id' => 'required|exists:media_types,id,deleted_at,NULL',
 					'status' => 'required|in:Enabled,Disabled',
 					'image' => 'required_if:media_type_id,3|string',
 					'seq_no' => 'integer',
-					'content_text' => 'required_if:media_type_id,2|string',
+					'content_text' => 'required_if:media_type_id,2|string|max:255',
 
 				];
 
