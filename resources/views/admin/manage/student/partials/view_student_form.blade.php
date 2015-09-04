@@ -92,7 +92,7 @@
                     {!! Form::text('points',''
                         , array(
                             'placeHolder' => 'Points'
-                            , 'ng-disabled' => 'true'
+                            , 'ng-disabled' => 'student.active_view'
                             , 'ng-model' => 'student.record.points'
                             , 'class' => 'form-control'
                         )
@@ -105,17 +105,17 @@
                     {!! Form::text('badges',''
                         , array(
                             'placeHolder' => 'Badges'
-                            , 'ng-disabled' => 'true'
+                            , 'ng-disabled' => 'student.active_view'
                             , 'ng-model' => 'student.record.badges'
                             , 'class' => 'form-control'
                         )
                     ) !!}
                 </div>
             </div>
-            <div class="form-group">
+            <div class="form-group" ng-if="student.active_view">
                 <div class="col-xs-3"></div>
                 <div class="col-xs-5">
-                    {!! Form::button('Edit Reward'
+                    {!! Form::button('View Rewards'
                         , array(
                             'class' => 'btn btn-blue'
                             , 'ng-click' => "student.setActive('reward', student.record.id)"

@@ -244,7 +244,7 @@ function StudentClassController($scope, $filter, $window, StudentClassService, S
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					self.records = response.data.student_classroom.student_subject.student_modules.records;
-					self.updatePageCount(response.data);
+					self.updatePageCount(response.data.student_classroom.student_subject.student_modules);
 
 					angular.forEach(self.records, function(value, key) {
 						value.progress = (value.progress) ? value.progress : Constants.FALSE;

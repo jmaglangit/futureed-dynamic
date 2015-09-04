@@ -39,7 +39,7 @@
         		</div>
         	</div>
         </fieldset>
-        <div class="col-xs-6 col-xs-offset-3">
+        <div class="col-xs-9 col-xs-offset-1">
         	<div class="btn-container">
         		{!! Form::button('Add'
 	        		, array(
