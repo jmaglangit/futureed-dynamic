@@ -48,6 +48,7 @@ var Constants = {
 	, CONTENTS 		: "contents"
 	, QANDA 		: "qanda"
 
+	, MODULE		: "Module"
 	, GENERAL		: "General"
 	, CONTENT 		: "Content"
 	, QUESTION		: "Question"
