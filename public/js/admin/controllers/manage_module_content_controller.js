@@ -356,7 +356,7 @@ function ManageModuleContentController($scope, ManageModuleContentService, Table
 		self.view_image.teaching_module = (object.teaching_module) ? object.teaching_module : Constants.CONTENT;
 		self.view_image.show = Constants.TRUE;
 
-		$("#view_image_modal").modal({
+		$("#content_image_modal").modal({
 	        backdrop: 'static',
 	        keyboard: Constants.FALSE,
 	        show    : Constants.TRUE

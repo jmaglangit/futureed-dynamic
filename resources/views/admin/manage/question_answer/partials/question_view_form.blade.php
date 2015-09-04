@@ -1,9 +1,4 @@
 <div ng-if="qa.active_view || qa.active_edit">
-	<div class="content-title">
-		<div class="title-main-content">
-			<span>View Question</span>
-		</div>
-	</div>
 	{!! Form::open(array('id'=> 'add_question_form', 'class' => 'form-horizontal', 'enctype' => 'multipart/form-data')) !!}
 	<div class="col-xs-12 form-content">
 		<div class="alert alert-error" ng-if="qa.errors">
@@ -97,10 +92,14 @@
                     <a href="" ng-click="qa.removeImage(qa.q_details)"><i class="fa fa-trash"></i></a>
                 </div>
 
-                <div ng-if="qa.active_view && qa.q_details.original_image_name && qa.q_details.original_image_name != '0'">
+                <div ng-if="qa.active_view && qa.q_details.questions_image != 'None' && qa.q_details.original_image_name != '0'">
                     <div class="col-xs-4 margin-top-8">
                         <a href="" ng-click="qa.viewImage(qa.q_details)">View Image</a>
                     </div>
+                </div>
+
+                <div class="col-xs-3" ng-if="qa.active_view && qa.q_details.questions_image == 'None'">
+                    <span class="upload-label label label-info">{! qa.q_details.questions_image !}</span>
                 </div>
             </div>
 
@@ -289,7 +288,7 @@
 	</div>
     <div template-directive template-url="{!! route('admin.manage.question_answer.partials.answer_list_form') !!}"></div>
 
-    <div id="view_image_modal" ng-show="qa.view_image.show" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div id="qa_image_modal" ng-show="qa.view_image.show" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
