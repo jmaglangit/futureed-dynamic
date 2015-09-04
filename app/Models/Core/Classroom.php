@@ -41,7 +41,7 @@ class Classroom extends Model {
 
 	public function classStudent() {
 
-		return $this->belongsTo('FutureEd\Models\Core\ClassStudent', 'id', 'class_id')->with('student');
+		return $this->hasMany('FutureEd\Models\Core\ClassStudent','class_id','id')->with('student');
 	}
 
 	public function invoiceDetails() {
