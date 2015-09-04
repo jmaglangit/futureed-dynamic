@@ -2,6 +2,17 @@
 
 Routes::group([
 	'middleware' => ['api_user','api_after'],
+	'permission' => ['admin'],
+	'role' => ['admin','super admin']
+], function(){
+
+	Routes::resource('/module/admin', 'Api\v1\AdminModuleController',
+		['except' => ['create', 'edit']]);
+
+});
+
+Routes::group([
+	'middleware' => ['api_user','api_after'],
 	'permission' => ['admin','client','student'],
 	'role' => ['principal','teacher','parent','admin','super admin']
 ], function(){
@@ -15,13 +26,3 @@ Routes::group([
 });
 
 
-Routes::group([
-	'middleware' => ['api_user','api_after'],
-	'permission' => ['admin'],
-	'role' => ['admin','super admin']
-], function(){
-
-	Routes::resource('/module/admin', 'Api\v1\AdminModuleController',
-		['except' => ['create', 'edit']]);
-
-});
