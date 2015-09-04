@@ -115,7 +115,6 @@ function ManageClassController($scope, manageClassService, apiService, TableServ
 		$scope.classid = id;
 		self.errors = Constants.FALSE;
 		self.search.id = id;
-
 		$scope.ui_block();
 		manageClassService.studentList(self.search, self.table).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
@@ -404,5 +403,53 @@ function ManageClassController($scope, manageClassService, apiService, TableServ
 				self.tip_tab_active = Constants.TRUE;
 				break;
 		}
+	}
+
+
+	self.confirmDeleteStudent = function(id) {
+		self.errors = Constants.FALSE;
+		
+		self.delete_student_id = id;
+		self.delete_student_modal = Constants.TRUE;
+		$("#delete_student_modal").modal({
+	        backdrop: 'static',
+	        keyboard: Constants.FALSE,
+	        show    : Constants.TRUE
+	    });
+
+		$("#delete_date").dateDropdowns({
+		    submitFieldName: 'delete_date'
+		});
+	}
+
+	self.deleteStudent = function(id) {
+		self.delete_student = {};
+
+		self.delete_student.errors = Constants.FALSE;
+		self.delete_student.id = id;
+
+		var day = $(".day").val();
+		var month = $(".month").val();
+		var year = $(".year").val();
+
+		self.delete_student.date_removed = year + month + day;
+
+		$scope.ui_block();
+		manageClassService.deleteStudent(self.delete_student).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.delete_student.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.success = Constants.DELETE_STU_SUCCESS;
+					self.studentList($scope.classid);
+
+					$('#delete_student_modal').modal('toggle');
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
 	}
 }

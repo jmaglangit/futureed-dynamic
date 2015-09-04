@@ -337,3 +337,7 @@ content legend {
 .bdate-dropdown > .date-dropdowns > select {
 	max-width: 30%;
 }
+
+.center-date {
+	text-align: center;
+}

@@ -170,6 +170,8 @@ var Constants = {
 
 	, LSP_URL 				: "/student/dashboard/follow-up-registration"
 
+	, DELETE_STU_SUCCESS 	: "Student successfully deleted"
+
 	/*Billing Information for invoice*/
 
 	, BILL_COMPANY				: "Futureed Pte. Ltd."
