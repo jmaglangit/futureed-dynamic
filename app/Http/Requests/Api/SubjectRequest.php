@@ -24,7 +24,8 @@ class SubjectRequest extends ApiRequest {
 			case 'PUT':
 				return [
 					'name' => 'required',
-					'status' => 'required|in:Enabled,Disabled'
+					'status' => 'required|in:Enabled,Disabled',
+					'description' => 'string|max:256',
 				];
 				break;
 			case 'POST':
@@ -32,7 +33,8 @@ class SubjectRequest extends ApiRequest {
 				return [
 					'code' => 'required|numeric|digits_between:1,19|unique:subjects,code,NULL,id,deleted_at,NULL',
 					'name' => 'required|regex:'. config('regex.name'),
-					'status' => 'required|in:Enabled,Disabled'
+					'status' => 'required|in:Enabled,Disabled',
+					'description' => 'string|max:256',
 				];				
 	        	break;
 		}
