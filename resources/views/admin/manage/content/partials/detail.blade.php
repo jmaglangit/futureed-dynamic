@@ -166,7 +166,7 @@
 				<div class="form-group" ng-if="content.record.media_type_id == futureed.IMAGE && content.active_view">
 					<label class="col-xs-4 control-label">Image </label>
 					<div class="col-xs-6">
-	                    <a href="javascript:;" class="top-5" ng-click="content.viewImage('{!! route('admin.image.viewer') !!}', content.record)">View Content Image</a>
+	                    <a href="javascript:;" class="top-5" ng-click="content.viewImage(content.record)">View Content Image</a>
 					</div>
 				</div>
 				<div class="form-group">
@@ -281,11 +281,11 @@
 			</fieldset>
 		{!! Form::close() !!}
 	</div>
-	<div id="view_image_modal" ng-show="content.view_image.show" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	<div id="content_image_modal" ng-show="content.view_image.show" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    {! content.view_image.description !}
+                    {! content.view_image.teaching_module !}
                 </div>
                 <div class="modal-body">
                     <div class="modal-image">

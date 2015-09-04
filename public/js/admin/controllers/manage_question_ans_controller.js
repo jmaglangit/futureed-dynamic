@@ -218,7 +218,7 @@ function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService,
 		self.view_image.questions_text = (object.questions_text) ? object.questions_text : Constants.QUESTION ;
 		self.view_image.show = Constants.TRUE;
 
-		$("#view_image_modal").modal({
+		$("#qa_image_modal").modal({
 	        backdrop: 'static',
 	        keyboard: Constants.FALSE,
 	        show    : Constants.TRUE
@@ -237,7 +237,7 @@ function ManageQuestionAnsController($scope, $timeout, ManageQuestionAnsService,
 		self.view_image.questions_text = (object.answer_text) ? object.answer_text : Constants.ANSWER ;
 		self.view_image.show = Constants.TRUE;
 
-		$("#view_image_modal").modal({
+		$("#qa_image_modal").modal({
 	        backdrop: 'static',
 	        keyboard: Constants.FALSE,
 	        show    : Constants.TRUE
