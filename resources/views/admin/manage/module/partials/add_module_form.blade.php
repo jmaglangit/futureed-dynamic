@@ -80,6 +80,17 @@
 		                <span ng-if="module.validation.s_error" class="error-msg-con">{! module.validation.s_error !}</span>
 		            </div>
         		</div>
+
+                <div class="form-group">
+                    <label class="control-label col-xs-2">Image </label>
+                    <div class="col-xs-3">
+                        <div class="btn btn-blue" ngf-select ngf-change="module.upload($files, module.create)"> Choose Image... </div>
+                    </div>
+
+                    <div class="margin-top-8" ng-if="module.create.uploaded">
+                        <a href="" ng-click="module.removeImage(module.create)"><i class="fa fa-trash"></i></a>
+                    </div>
+                </div>
         	</div>
         	<div class="form-group">
         		<label class="control-label col-xs-2">Code <span class="required">*</span></label>
@@ -93,6 +104,11 @@
         				)
         			) !!}
         		</div>
+                <div class="col-xs-6" ng-if="module.create.uploaded">
+                    <div class="col-xs-2"></div>
+                    <span class="col-xs-5 upload-label label label-info">Image Uploaded...</span>
+                    <a href="" class="control-label col-xs-5" ng-click="module.viewImage(module.create)">View Image</a>
+                </div>
         	</div>
         	<div class="form-group">
         		<label class="control-label col-xs-2">Module <span class="required">*</span></label>
@@ -125,9 +141,9 @@
         				, array(
         					'placeHolder' => 'Description'
         					, 'ng-model' => 'module.create.description'
-        					, 'class' => 'form-control'
-        					, 'style' => 'resize:vertical'
+        					, 'class' => 'form-control disabled-textarea'
         					, 'ng-class' => "{ 'required-field' : module.fields['description'] }"
+        					, 'rows' => '5'
         				)
         			) !!}
         		</div>
@@ -143,10 +159,19 @@
         			) !!}
         		</div>
         	</div>
+
         	<div class="form-group">
-        		<label class="control-label col-xs-3">Common Core Area <span class="required">*</span></label>
-        		<div class="col-xs-3">
-        			{!! Form::text('common_core_area',''
+				<label class="control-label col-xs-3">Common Core Area <span class="required">*</span></label>
+				<div class="col-xs-3"></div>
+
+				<label class="control-label col-xs-3">Common Core URL <span class="required">*</span></label>
+				<div class="col-xs-3"></div>
+			</div>
+
+			<div class="form-group">
+				<div class="col-xs-1"></div>
+				<div class="col-xs-5">
+					{!! Form::text('common_core_area',''
         				, array(
         					'placeHolder' => 'Common Core Area'
         					, 'ng-model' => 'module.create.common_core_area'
@@ -154,10 +179,11 @@
         					, 'ng-class' => "{ 'required-field' : module.fields['common_core_area'] }"
         				)
         			) !!}
-        		</div>
-        		<label class="control-label col-xs-3">Common Core URL <span class="required">*</span></label>
-        		<div class="col-xs-3">
-        			{!! Form::text('common_core_url',''
+				</div>
+
+				<div class="col-xs-1"></div>
+				<div class="col-xs-5">
+					{!! Form::text('common_core_url',''
         				, array(
         					'placeHolder' => 'Common Core URL'
         					, 'ng-model' => 'module.create.common_core_url'
@@ -165,10 +191,10 @@
         					, 'ng-class' => "{ 'required-field' : module.fields['common_core_url'] }"
         				)
         			) !!}
-        		</div>
-        	</div>
+				</div>
+			</div>
         </fieldset>
-        <div class="col-xs-6 col-xs-offset-3">
+        <div class="col-xs-9 col-xs-offset-2">
         	<div class="btn-container">
         		{!! Form::button('Save'
 	        		, array(
@@ -185,5 +211,30 @@
 	        	) !!}
         	</div>
         </div>
+	</div>
+
+    <div id="view_image_modal" ng-show="module.view_image.show" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					{! module.view_image.teaching_module !}
+				</div>
+				<div class="modal-body">
+					<div class="modal-image">
+						<img ng-src="{! module.view_image.image_path !}"/>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<div class="btncon col-md-8 col-md-offset-4 pull-left">
+						{!! Form::button('Close'
+							, array(
+								'class' => 'btn btn-gold btn-medium'
+								, 'data-dismiss' => 'modal'
+							)
+						) !!}
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>

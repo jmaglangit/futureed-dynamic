@@ -89,7 +89,36 @@ function ManageInvoiceController($scope, manageInvoiceService, apiService, Table
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					self.record = response.data;
+					var class_name = self.record.invoice_detail[0].classroom.name;
+					var prefix = class_name.substring(0,3);
+
+					self.view_student_list_link = (prefix != Constants.PREF_STU && prefix != Constants.PREF_PAR) ? Constants.TRUE:Constants.FALSE;
+					self.view_students_tables = Constants.FALSE;
 					self.setActive(active);
+				}
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.viewAllStudents = function(id) {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+		self.view_student_list_link = Constants.FALSE;
+
+		$scope.ui_block();
+		manageInvoiceService.viewAllStudents(id).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.students = response.data.invoice_detail[0].classroom.class_student;
+					self.view_students_tables = Constants.TRUE;
+					self.back_to_order = Constants.TRUE;
 				}
 			}
 

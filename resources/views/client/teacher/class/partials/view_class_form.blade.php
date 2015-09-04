@@ -40,7 +40,19 @@
 					<a href="" ng-if="class.active_view" ng-click="class.setActive('edit', class.record.id)" class="edit-class">Edit Class</a>
 				</div>
 			</div>
-
+			<div class="form-group">
+				<label class="col-xs-3 control-label">Subject</label>
+				<div class="col-xs-5">
+					{!! Form::text('subject', ''
+						, array(
+							'ng-disabled'=>'true'
+							, 'class' => 'form-control'
+							, 'ng-model' => 'class.record.subject.name'
+							, 'placeholder' => 'Subject'
+						)
+					) !!}
+				</div>
+			</div>
 			<div class="form-group">
 				<label class="col-xs-3 control-label">Grade</label>
 				<div class="col-xs-5">

@@ -31,20 +31,7 @@
 					]
 			) !!}
 				<div class="form-group">
-					<label class="control-label col-xs-2">Module Name</label>
-					<div class="col-xs-6">
-						{!! Form::text('module_name', ''
-							, array(
-								'class' => 'form-control'
-								, 'ng-model' => 'module.search.name'
-								, 'placeholder' => 'Module Name'
-							)
-						) !!}
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-xs-2">Subject Name</label>
-					<div class="col-xs-6">
+					<div class="col-xs-5">
 						{!! Form::text('subject_name', ''
 							, array(
 								'class' => 'form-control'
@@ -53,15 +40,12 @@
 							)
 						) !!}
 					</div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-xs-2">Area Name</label>
-					<div class="col-xs-6">
+					<div class="col-xs-5">
 						{!! Form::text('area_name', ''
 							, array(
 								'class' => 'form-control'
 								, 'ng-model' => 'module.search.area'
-								, 'placeholder' => 'Area Name'
+								, 'placeholder' => 'Subject Area'
 							)
 						) !!}
 					</div>
@@ -73,6 +57,18 @@
 							)
 						)!!}
 					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-xs-5">
+						{!! Form::text('module_name', ''
+							, array(
+								'class' => 'form-control'
+								, 'ng-model' => 'module.search.name'
+								, 'placeholder' => 'Module Name'
+							)
+						) !!}
+					</div>
+					<div class="col-xs-5"></div>
 					<div class="col-xs-2">
 						{!! Form::button('Clear'
 							,array(
@@ -129,7 +125,7 @@
 		        <tbody>
 			        <tr ng-repeat="moduleInfo in module.records">
 			            <td>{! moduleInfo.name !}</td>
-			            <td>{! moduleInfo.description !}</td>
+			            <td class="wide-column">{! moduleInfo.description !}</td>
 			            <td>{! moduleInfo.subject.name !}</td>
 			            <td>{! moduleInfo.subject_area.name !}</td>
 			            <td ng-if="module.records.length">

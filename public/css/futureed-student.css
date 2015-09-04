@@ -734,7 +734,7 @@ hr {
 
 .module-list {
 	background-color: rgba(255, 255, 255, .3);
-	border-radius: 10px;
+	border-radius: 0px 0px 10px 10px;
 }
 
 .module-item {
@@ -785,7 +785,7 @@ hr {
 	height: 40px;
 	font-size: 15px;
 	color: #055A7F;
-	max-width: 143px;
+	max-width: 170px;
 	margin-bottom: 0;
 }
 
@@ -1136,7 +1136,7 @@ hr {
     background: #e8e8e8;
     border-radius: 50%;
     padding: 20px;
-    width: 120px;	
+    width: 100px;	
 }
 
 .result-message {
@@ -1323,4 +1323,21 @@ top: 41px;
 
 .bdate-dropdown > .date-dropdowns > select {
 	max-width: 30%;
+}
+
+.module-pills > li > a:focus
+	, .module-pills > li > a:hover
+	, .module-pills > li.active > a {
+	min-width: 100px;
+	text-align: center;
+	border-radius: 7px 7px 0px 0px;
+	background-color: rgba(255, 255, 255, .3) !important;
+	color: #055A7F !important;
+}
+
+.no-module-label p {
+	text-align: center;
+	padding: 20px;
+	font-size: 16px;
+	color: #055A7F;
 }

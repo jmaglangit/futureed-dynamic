@@ -14,6 +14,7 @@ class Kernel extends ConsoleKernel {
 		'FutureEd\Console\Commands\Inspire',
 		'FutureEd\Console\Commands\TruncateCommand',
 		'FutureEd\Console\Commands\DatabaseRefreshCommand',
+		'FutureEd\Console\Commands\DatabaseRefreshCommand'
 	];
 
 	/**

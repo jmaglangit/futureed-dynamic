@@ -99,6 +99,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 						data.class_id = $scope.user.class.class_id;
 						data.student_id = $scope.user.id;
 						data.module_id = self.record.id;
+						data.subject_id = self.record.subject_id;
 
 					createModuleStudent(data, function(response) {
 						if(response.data) {
@@ -255,18 +256,26 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
 
-		self.module_message = {};
-		self.module_message.show = Constants.TRUE;
-		self.module_message.name = self.record.name;
-		self.module_message.points_earned = self.record.points_earned;
-		self.module_message.badge_to_earn = self.record.badge_to_earn;
-		self.module_message.skip_module = Constants.TRUE;
+		listQuestions(function(response) {
+			self.module_message = {};
 
-		$("#message_modal").modal({
-	        backdrop: 'static',
-	        keyboard: Constants.FALSE,
-	        show    : Constants.TRUE
-	    });
+			if(!self.questions.length) {
+				self.module_message.no_questions = Constants.TRUE;
+			} else {
+				self.module_message.points_earned = self.record.points_earned;
+				self.module_message.badge_to_earn = self.record.badge_to_earn;
+				self.module_message.skip_module = Constants.TRUE;
+			}
+
+			self.module_message.name = self.record.name;
+			self.module_message.show = Constants.TRUE;
+
+			$("#message_modal").modal({
+		        backdrop: 'static',
+		        keyboard: Constants.FALSE,
+		        show    : Constants.TRUE
+		    });
+		});
 	}
 
 	self.skipModule = function() {
@@ -276,27 +285,25 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		// get question list; offset to 0
 		getAvatarPose($scope.user.avatar_id);
 		listAvatarQuotes($scope.user.avatar_id);
-		listQuestions(function(response) {
-			if(parseInt(self.record.student_module[0].last_answered_question_id)) {
-				angular.forEach(self.questions, function(value, key) {
-					if(angular.equals(parseInt(self.record.student_module[0].last_answered_question_id), parseInt(value.id))) {
-						self.current_question = self.questions[key];
-						return;
-					}
-				});
+		
+		if(parseInt(self.record.student_module[0].last_answered_question_id)) {
+			angular.forEach(self.questions, function(value, key) {
+				if(angular.equals(parseInt(self.record.student_module[0].last_answered_question_id), parseInt(value.id))) {
+					self.current_question = self.questions[key];
+					return;
+				}
+			});
+		} else {
+			self.current_question = self.questions[0];
+		}
 
-			} else {
-				self.current_question = self.questions[0];
-			}
+		self.question_counter = (self.record.student_module[0].question_counter) ? parseInt(self.record.student_module[0].question_counter) + 1 : 1;
 
-			self.question_counter = (self.record.student_module[0].question_counter) ? parseInt(self.record.student_module[0].question_counter) + 1 : 1;
+		var data = {};
+			data.module_id = self.record.student_module[0].id;
+			data.last_answered_question_id = parseInt(self.current_question.id);
 
-			var data = {};
-				data.module_id = self.record.student_module[0].id;
-				data.last_answered_question_id = parseInt(self.current_question.id);
-
-			updateModuleStudent(data);
-		});
+		updateModuleStudent(data);
 	}
 
 
@@ -458,7 +465,6 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 							});
 						});
 					} else if(angular.equals(self.result.module_status, "Failed")) {
-						self.errors = ["You need to review the teaching content."];
 						self.result.failed = Constants.TRUE;
 						$scope.ui_unblock();
 					} else {
@@ -631,6 +637,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				data.class_id = $scope.user.class.class_id;
 				data.student_id = $scope.user.id;
 				data.module_id = self.record.id;
+				data.subject_id = self.record.subject_id;
 
 			createModuleStudent(data, function(response) {
 				if(response.data) {
