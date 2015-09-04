@@ -56,12 +56,10 @@
 	                    You have been logged out due to inactivity. Please login again.
 	                </div>
 	                <div class="modal-footer">
-	                    <div class="btncon col-md-8 col-md-offset-4 pull-left">
-	                        {!! Form::button('Login'
+	                    <div class="col-md-8 col-md-offset-4 pull-left">
+	                        {!! Html::link(route('client.login'), 'Login'
 	                            , array(
 	                                'class' => 'btn btn-gold btn-medium'
-	                                , 'ng-click' => 'clientReLogin()'
-	                                , 'data-dismiss' => 'modal'
 	                            )
 	                        ) !!}
 	                    </div>

@@ -5,7 +5,7 @@
 @stop
 
 @section('content')
-    <div class="row">
+    <div class="row" ng-cloak>
         <div class="col-xs-12 class-container">
             <h3 class="alert alert-danger">You have no available subjects.</h3>
             

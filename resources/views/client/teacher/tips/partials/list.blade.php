@@ -110,7 +110,6 @@
 					<thead>
 				        <tr>
 				            <th>Title</th>
-				            <th>Description</th>
 				            <th>Created By</th>
 				            <th>Date Created</th>
 				            <th>Status</th>
@@ -120,7 +119,6 @@
 			        <tbody>
 				        <tr ng-repeat="tipInfo in tips.records">
 				            <td>{! tipInfo.title !}</td>
-				            <td class="wide-column">{! tipInfo.content !}</td>
 				            <td>{! tipInfo.student.first_name !} {! tipInfo.student.last_name !}</td>
 				            <td>{! tipInfo.created_at | ddMMyyHHmmss : '-' !}</td>
 				            <td>{! tipInfo.tip_status !}</td>

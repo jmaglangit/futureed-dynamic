@@ -98,7 +98,6 @@
 				        <tr>
 				            <th>Subject Code</th>
 				            <th>Subject Name</th>
-				            <th>Description</th>
 				            <th>Action</th>
 				        </tr>
 			        </thead>
@@ -106,7 +105,6 @@
 				        <tr ng-repeat="a in subject.subjects">
 				            <td>{! a.code !}</td>
 				            <td class="td-fix">{! a.name !}</td>
-				            <td class="td-fix">{! a.description !}</td>
 				            <td class="table-action">
 				            	<div class="row">
 				            		<div class="col-xs-4">
