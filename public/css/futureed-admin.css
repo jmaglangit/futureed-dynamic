@@ -31,12 +31,14 @@ body.admin{
 	font-weight: 100;
 	margin-top: 20px;
 }
+
 .title-mid{
-	 text-transform: uppercase;
-  	color: #055A7F;
-  	font-size: 1.5em;
-  	margin: 20px 0 20px 0;
+	text-transform: uppercase;
+	color: #055A7F;
+	font-size: 1.5em;
+	margin: 10px 0px;
 }
+
 .navbar-collapse > .navbar-nav > li > p {
 	padding-top: 15px;
 }
@@ -46,7 +48,7 @@ body.admin{
 div > .nav-list > li > a{
 	position: relative;
   	font-size: 1.1em;
-  	padding: 15px 0 15px 30px
+  	padding: 15px 0 15px 30px;
 }
 .nav-list{
 	margin-bottom: 0;
@@ -58,9 +60,9 @@ div > .nav-list > li > a{
 }
 .form-search{
 	border: 1px solid #e1e1e1;
-  	border-radius: 5px;
-  	padding: 30px;
-  	background-color: #f6f4f5;
+	border-radius: 5px;
+	padding: 15px;
+	background-color: #f6f4f5;
 }
 .search-container{
 	padding:15px 30px 30px 30px;

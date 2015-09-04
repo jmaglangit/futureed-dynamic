@@ -39,35 +39,8 @@
 										</select>
 									</div>
 									
-									<label class="control-label col-xs-2">Subject Area <span class="required">*</span></label>
-									<div class="col-xs-4">
-										{!! Form::text('area',''
-											, array(
-												'placeHolder' => 'Subject Area'
-												, 'ng-model' => 'module.details.area'
-												, 'ng-disabled' => '!module.area_field || !module.edit'
-												, 'class' => 'form-control'
-												, 'ng-change' => "module.searchArea('edit')"
-												, 'ng-class' => "{ 'required-field' : module.fields['subject_area_id'] }"
-												, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
-											)
-										) !!}
-										<div class="angucomplete-holder" ng-if="module.areas">
-											<ul class="col-md-6 angucomplete-dropdown">
-												<li class="angucomplete-row" ng-repeat="area in module.areas" ng-click="module.selectArea(area)">
-													{! area.name !}
-												</li>
-											</ul>
-										</div>
-										<div class="margin-top-8 center-err"> 
-											<i ng-if="module.validation.s_loading" class="fa fa-spinner fa-spin"></i>
-											<span ng-if="module.validation.s_error" class="error-msg-con">{! module.validation.s_error !}</span>
-										</div>
-									</div>
-								</div>
-								<div class="form-group">
 									<label class="col-xs-2 control-label">Status <span class="required">*</span></label>
-									<div class="col-xs-3" ng-if="module.active_edit">
+									<div class="col-xs-4" ng-if="module.active_edit">
 										<div class="col-xs-6 checkbox">                                 
 											<label>
 												{!! Form::radio('status'
@@ -108,10 +81,37 @@
 											</b>
 										</label>
 									</div>
+								</div>
+								<div class="form-group">
+									<label class="control-label col-xs-2">Subject Area <span class="required">*</span></label>
+									<div class="col-xs-4">
+										{!! Form::text('area',''
+											, array(
+												'placeHolder' => 'Subject Area'
+												, 'ng-model' => 'module.details.area'
+												, 'ng-disabled' => '!module.area_field || !module.edit'
+												, 'class' => 'form-control'
+												, 'ng-change' => "module.searchArea('edit')"
+												, 'ng-class' => "{ 'required-field' : module.fields['subject_area_id'] }"
+												, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
+											)
+										) !!}
+										<div class="angucomplete-holder" ng-if="module.areas">
+											<ul class="col-md-6 angucomplete-dropdown">
+												<li class="angucomplete-row" ng-repeat="area in module.areas" ng-click="module.selectArea(area)">
+													{! area.name !}
+												</li>
+											</ul>
+										</div>
+										<div class="margin-top-8 center-err"> 
+											<i ng-if="module.validation.s_loading" class="fa fa-spinner fa-spin"></i>
+											<span ng-if="module.validation.s_error" class="error-msg-con">{! module.validation.s_error !}</span>
+										</div>
+									</div>
 
 									<div class="form-group" ng-if="module.active_edit">
-										<label class="control-label col-xs-2">Image <span class="required">*</span></label>
-										<div class="col-xs-4">
+										<label class="control-label col-xs-2">Image</label>
+										<div class="col-xs-3">
 											<div class="btn btn-blue" ngf-select ngf-change="module.upload($files, module.details)"> Choose Image... </div>
 										</div>
 
@@ -121,7 +121,7 @@
 									</div>
 
 									<div ng-if="module.active_view">
-										<label class="col-xs-3 control-label">Image </label>
+										<label class="col-xs-2 control-label">Image </label>
 										<div class="col-xs-3">
 						                    <a href="javascript:void(0);" class="top-5" ng-click="module.viewImage(module.details)">View Image</a>
 										</div>
@@ -131,8 +131,9 @@
 								<div class="form-group" ng-if="module.active_edit && module.details.uploaded">
 					                <div class="col-xs-6"></div>
 					                <div class="col-xs-6">
-					                    <span class="col-xs-6 upload-label label label-info">Image Uploaded...</span>
-					                    <a href="" class="control-label col-xs-6" ng-click="module.viewImage(module.details)">View Image</a>
+										<div class="col-xs-2"></div>
+										<span class="col-xs-5 upload-label label label-info">Image Uploaded...</span>
+										<a href="" class="control-label col-xs-5" ng-click="module.viewImage(module.details)">View Image</a>
 					                </div>
 					            </div>
 
