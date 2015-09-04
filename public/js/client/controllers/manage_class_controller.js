@@ -122,7 +122,7 @@ function ManageClassController($scope, manageClassService, apiService, TableServ
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
-					self.students = response.data.record;
+					self.students = response.data.records;
 					self.updatePageCount(response.data);
 				}
 			}
