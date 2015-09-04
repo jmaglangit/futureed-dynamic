@@ -6,6 +6,11 @@ Routes::post('question/upload-image/',[
 	'uses' => 'Api\v1\QuestionController@uploadQuestionImage'
 ]);
 
+Routes::post('question/answer/upload-image/',[
+	'as' => 'api.v1.admin.answer.image.upload',
+	'uses' => 'Api\v1\QuestionAnswerController@uploadQuestionAnswerImage']);
+
+
 Routes::group([
 	'prefix' => '/question',
 	'middleware' => ['api_user','api_after'],
@@ -20,9 +25,6 @@ Routes::group([
 	Routes::resource('/answer/admin', 'Api\v1\AdminQuestionAnswerController',
 		['except' => ['create', 'edit']]);
 
-	Routes::post('/answer/upload-image/',[
-		'as' => 'api.v1.admin.answer.image.upload',
-		'uses' => 'Api\v1\QuestionAnswerController@uploadQuestionAnswerImage']);
 
 
 });
