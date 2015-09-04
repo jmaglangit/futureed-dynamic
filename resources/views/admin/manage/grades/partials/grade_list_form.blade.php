@@ -99,7 +99,6 @@
 		        <tr>
 		            <th>Grade Code</th>
 		            <th>Grade</th>
-		            <th>Description</th>
 		            <th>Country</th>
 		            <th>Action</th>
 		        </tr>
@@ -108,7 +107,6 @@
 		        <tr ng-repeat="a in grade.grades">
 		            <td>{! a.code !}</td>
 		            <td>{! a.name !}</td>
-		            <td>{! a.description !}</td>
 		            <td>{! a.country.name !}</td>
 		            <td>
 		            	<div class="row">

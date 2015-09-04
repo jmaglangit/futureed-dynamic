@@ -94,7 +94,6 @@
 			        <tr>
 			            <th>Area Code</th>
 			            <th>Area</th>
-			            <th>Description</th>
 			            <th>Action</th>
 			        </tr>
 		        </thead>
@@ -102,7 +101,6 @@
 			        <tr ng-repeat="a in area.records">
 			            <td>{! a.code !}</td>
 			            <td>{! a.name !}</td>
-			            <td>{! a.description !}</td>
 			            <td>
 			            	<div class="row">
 			            		<div class="col-xs-4">

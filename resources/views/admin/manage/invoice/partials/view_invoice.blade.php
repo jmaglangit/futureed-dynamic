@@ -131,8 +131,8 @@
 					<tr ng-repeat="student in invoice.students">
 						<td>{! student.student.user.name !}</td>
 						<td>{! student.student.user.email !}</td>
-						<td>{! student.date_started !}</td>
-						<td>{! student.date_removed !}</td>
+						<td>{! student.date_started | ddMMyy !}</td>
+						<td>{! student.date_removed | ddMMyy !}</td>
 					</tr>
 					<tr class="odd" ng-if="!invoice.students.length">
 						<td valign="top" colspan="6" >
