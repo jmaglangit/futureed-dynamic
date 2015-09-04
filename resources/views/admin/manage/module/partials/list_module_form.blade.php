@@ -31,14 +31,11 @@
 					]
 			) !!}
 				<div class="form-group">
-					<div class="col-xs-5">
-						{!! Form::text('subject_name', ''
-							, array(
-								'class' => 'form-control'
-								, 'ng-model' => 'module.search.subject'
-								, 'placeholder' => 'Subject Name'
-							)
-						) !!}
+					<div class="col-xs-5" ng-init="module.getSubject()">
+						<select ng-model="module.search.subject" class="form-control">
+							<option value=""> -- Select Subject -- </option>
+							<option ng-repeat="subject in module.subjects" ng-value="subject.name"> {! subject.name !} </option>
+						</select>
 					</div>
 					<div class="col-xs-5">
 						{!! Form::text('area_name', ''
@@ -124,7 +121,7 @@
 		        </thead>
 		        <tbody>
 			        <tr ng-repeat="moduleInfo in module.records">
-			            <td>{! moduleInfo.name !}</td>
+			            <td class="wide-column">{! moduleInfo.name !}</td>
 			            <td class="wide-column">{! moduleInfo.description !}</td>
 			            <td>{! moduleInfo.subject.name !}</td>
 			            <td>{! moduleInfo.subject_area.name !}</td>

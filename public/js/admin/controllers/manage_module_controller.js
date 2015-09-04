@@ -152,13 +152,11 @@ function ManageModuleController($scope, manageModuleService, TableService, Searc
 
 	self.getSubject = function() {
 		$scope.ui_block();
-
 		manageModuleService.getSubject().success(function(response){
 			if(angular.equals(response.status, Constants.STATUS_OK)){
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data){
-					self.subjects = {};
 					self.subjects = response.data.records;
 				}
 			}
