@@ -186,11 +186,11 @@
 				<div class="col-xs-6">
 					<label class="col-xs-2 control-label">Starting</label>
 					<div class="col-xs-4">
-						<input class="form-control" ng-disabled="true" value="{! payment.invoice.dis_date_start | ddMMyy !}" placeholder="DD/MM/YY" />
+						<input class="form-control" ng-disabled="true" value="{! payment.invoice.date_start | ddMMyy !}" placeholder="DD/MM/YY" />
 					</div>
 					<label class="col-xs-2 control-label">To</label>
 					<div class="col-xs-4">
-						<input class="form-control" ng-disabled="true" value="{! payment.invoice.dis_date_end | ddMMyy !}" placeholder="DD/MM/YY" />
+						<input class="form-control" ng-disabled="true" value="{! payment.invoice.date_end | ddMMyy !}" placeholder="DD/MM/YY" />
 					</div>
 				</div>
 			</div>
