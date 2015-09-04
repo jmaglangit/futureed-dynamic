@@ -342,6 +342,9 @@ function ManageModuleContentController($scope, ManageModuleContentService, Table
     	object.image = Constants.EMPTY_STR;
     	object.image_path = Constants.EMPTY_STR;
     	object.uploaded = Constants.FALSE;
+
+    	object.content_image = Constants.EMPTY_STR;
+    	object.content_url = Constants.EMPTY_STR;
     } 
 
 	self.viewImage = function(object) {
