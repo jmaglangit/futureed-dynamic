@@ -180,12 +180,20 @@
 			        <tr>
 			            <th>Student's Name</th>
 			            <th class="width-medium">Email</th>
+			            <th>Action</th>
 			        </tr>
 		        </thead>
 		        <tbody>
 			        <tr ng-repeat="student in class.students">
 			            <td>{! student.student.user.name !}</td>
 			            <td>{! student.student.user.email !}</td>
+			            <td>
+			            	<div class="row">
+		    					<div class="col-xs-12">
+		    						<a href="" ng-click="class.confirmDeleteStudent(student.id)"><span><i class="fa fa-trash"></i></span></a>
+		    					</div>
+			            	</div>
+			            </td>
 			        </tr>
 			        <tr class="odd" ng-if="!class.students.length">
 			        	<td valign="top" colspan="2">
@@ -214,4 +222,38 @@
 	<div>
 		<div template-directive template-url="{!! route('client.teacher.tips.index') !!}"></div>
 	</div>
+</div>
+<div id="delete_student_modal" ng-show="class.delete_student_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  	<div class="modal-dialog modal-lg">
+	    <div class="modal-content">
+	        <div class="modal-header">
+	            Delete Student
+	        </div>
+	        <div class="modal-body center-date">
+			    <div class="alert alert-error" ng-if="class.delete_student.errors">
+		            <p ng-repeat="error in class.delete_student.errors track by $index" > 
+		              	{! error !}
+		            </p>
+		        </div>
+	            <input type="hidden" id="delete_date">
+	        </div>
+	        <div class="modal-footer">
+	        	<div class="btncon col-md-8 col-md-offset-4 pull-left">
+	                {!! Form::button('Delete'
+	                    , array(
+	                        'class' => 'btn btn-blue btn-medium'
+	                        , 'ng-click' => 'class.deleteStudent(class.delete_student_id)'
+	                    )
+	                ) !!}
+
+	                {!! Form::button('Cancel'
+	                    , array(
+	                        'class' => 'btn btn-gold btn-medium'
+	                        , 'data-dismiss' => 'modal'
+	                    )
+	                ) !!}
+	        	</div>
+	        </div>
+	    </div>
+  	</div>
 </div>

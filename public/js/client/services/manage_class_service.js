@@ -66,5 +66,13 @@ function manageClassService($http){
 		});
 	}
 
+	manageClassApi.deleteStudent = function(data) {
+		return $http({
+			method : Constants.METHOD_PUT
+			, data : {date_removed : data.date_removed}
+			, url  : classApiUrl + 'class-student/student-remove-class/' + data.id
+		});
+	}
+
 	return manageClassApi;
 }
