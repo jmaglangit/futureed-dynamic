@@ -165,9 +165,6 @@ class TeachingContentController extends ApiController {
     {
 		$teaching_content = $this->teaching_content->getTeachingContent($id);
 
-
-		$teaching_content->content_image = config('futureed.content_image_path_final_public').'/'.$teaching_content->id.'/'.$teaching_content->content_url;
-
         return $this->respondWithData(
 			$teaching_content
 
