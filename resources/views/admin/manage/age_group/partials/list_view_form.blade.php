@@ -72,7 +72,7 @@
 			Age Group List
 		</div>
 
-		<div class="list-container" ng-cloak>
+		<div class="list-container" ng-init="age.ageModuleList()" ng-cloak>
 			<div class="size-container">
 				{!! Form::select('size'
 					, array(
@@ -163,13 +163,6 @@
 			                    , 'data-dismiss' => 'modal'
 			                )
 			            ) !!}
-			            {!! Form::button('Hidden'
-			        		, array(
-			        			'class' => 'hidden'
-			        			, 'id' => 'age-list-btn'
-			        			, 'ng-click' => "module.setActive('view', module.details.id); age.setActive('','',1)"
-			        		)
-			        	) !!}
 
 			            {!! Form::button('No'
 			                , array(

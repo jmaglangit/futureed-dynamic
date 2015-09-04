@@ -54,6 +54,7 @@ function ManageAgeGroupController($scope, $timeout, ManageAgeGroupService, apiSe
 	self.ageModuleList = function() {
 		self.errors = Constants.FALSE;
 		self.records = {};
+
 		$scope.ui_block();
 		ManageAgeGroupService.ageModuleList(self.module.id, self.table).success(function(response){
 			if(angular.equals(response.status, Constants.STATUS_OK)){
@@ -150,12 +151,10 @@ function ManageAgeGroupController($scope, $timeout, ManageAgeGroupService, apiSe
 					});
 				} else if(response.data) {
 					self.success = ManageModuleConstants.SUCCESS_EDIT_AGE_GROUP;
-					$timeout(function() {
-					    angular.element('#age-list-btn').trigger('click');
-					  }, 1);
 				}
 			}
-		$scope.ui_unblock();
+		
+			$scope.ui_unblock();
 		}).error(function(response){
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
@@ -185,9 +184,7 @@ function ManageAgeGroupController($scope, $timeout, ManageAgeGroupService, apiSe
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					self.success = ManageModuleConstants.SUCCESS_DELETE_AGE_GROUP;
-					$timeout(function() {
-					    angular.element('#age-list-btn').trigger('click');
-					  }, 1);
+					self.ageModuleList();
 				}
 			}
 			$scope.ui_unblock();
