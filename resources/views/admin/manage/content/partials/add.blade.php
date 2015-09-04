@@ -140,20 +140,20 @@
 				<div class="form-group" ng-if="content.record.media_type_id == futureed.IMAGE">
 					<label class="col-xs-4 control-label">Image <span class="required">*</span></label>
 					<div class="col-xs-5">
-	                    <div class="btn btn-blue" ngf-select ngf-change="content.upload($files, content.record)"> Choose Image... </div>
+						<div class="btn btn-blue" ngf-select ngf-change="content.upload($files, content.record)"> Choose Image... </div>
 					</div>
 
 					<div class="margin-top-8" ng-if="content.record.uploaded">
-	                    <a href="" ng-click="content.removeImage(content.record)"><i class="fa fa-trash"></i></a>
-	                </div>
+						<a href="" ng-click="content.removeImage(content.record)"><i class="fa fa-trash"></i></a>
+					</div>
 				</div>
 				<div class="form-group" ng-if="content.record.uploaded">
-	                <div class="col-xs-4"></div>
-	                <div class="col-xs-5">
-	                    <span class="col-xs-6 upload-label label label-info">Image Uploaded...</span>
-	                    <a href="" class="control-label col-xs-6" ng-click="content.viewImage(content.record)">View Image</a>
-	                </div>
-	            </div>
+					<div class="col-xs-4"></div>
+					<div class="col-xs-5">
+						<span class="col-xs-6 upload-label label label-info">Image Uploaded...</span>
+						<a href="" class="control-label col-xs-6" ng-click="content.viewImage(content.record)">View Image</a>
+					</div>
+				</div>
 				<div class="form-group">
 					<label class="col-xs-4 control-label">Description <span class="required">*</span></label>
 					<div class="col-xs-5">
