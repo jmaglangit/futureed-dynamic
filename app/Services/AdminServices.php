@@ -21,16 +21,12 @@ class AdminServices {
         return $this->admin->getAdmins();
     }
 
-    public function getAdmin($id){
-        return $this->admin->getAdmin($id);
+    public function getAdmin($id,$role = 'Admin'){
+        return $this->admin->getAdmin($id,$role);
     }
 
     public function addAdmin($admin){
         $this->admin->addAdmin($admin);
-    }
-
-    public function updateAdmin($admin){
-        $this->admin->updateAdmin($admin);
     }
 
     public function deleteAdmin($id){

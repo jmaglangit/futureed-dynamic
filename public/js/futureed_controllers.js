@@ -78,6 +78,14 @@ function FutureedController($scope, $window, apiService, futureed) {
 		$window.location.href = '/student/login';
 	}
 
+	$scope.clientReLogin = function(){
+		$window.location.href = '/client/login';
+	}
+
+	$scope.adminReLogin = function(){
+		$window.location.href = '/';
+	}
+
 	function internalError() {
 		$scope.errors = [Constants.MSG_INTERNAL_ERROR];
 		$("html, body").animate({ scrollTop: 0 }, "slow");
@@ -98,6 +106,50 @@ function FutureedController($scope, $window, apiService, futureed) {
 	}
 
 	$scope.ui_unblock = function() {
+		if(localStorage.token_expire == Constants.TRUE) {
+			var url = window.location.pathname;
+			var segment = url.split('/');
+			if(segment[1] == 'student') {
+				$scope.user = null;
+
+				apiService.updateUserSession($scope.user).success(function(response) {
+					$scope.session_expire = Constants.TRUE;
+					$("#session_expire").modal({
+						backdrop: 'static',
+						keyboard: Constants.FALSE,
+						show    : Constants.TRUE
+					});
+				}).error(function() {
+					$scope.internalError();
+				});
+			} else if(segment[1] == 'client') {
+				$scope.user = null;
+
+				apiService.updateClientUserSession($scope.user).success(function(response) {
+					$scope.session_expire = Constants.TRUE;
+					$("#session_expire").modal({
+						backdrop: 'static',
+						keyboard: Constants.FALSE,
+						show    : Constants.TRUE
+					});
+				}).error(function() {
+					$scope.internalError();
+				});
+			} else if(segment[1] == 'peaches') {
+				$scope.user = null;
+
+				apiService.updateAdminUserSession($scope.user).success(function(response) {
+					$scope.session_expire = Constants.TRUE;
+					$("#session_expire").modal({
+						backdrop: 'static',
+						keyboard: Constants.FALSE,
+						show    : Constants.TRUE
+					});
+				}).error(function() {
+					$scope.internalError();
+				});
+			}
+		}
 		$.unblockUI();
 	}
 
@@ -740,6 +792,7 @@ function FutureedController($scope, $window, apiService, futureed) {
 	}
 
 	function selectAvatar() {
+		$scope.ui_block();
 		apiService.selectAvatar($scope.user.id, $scope.avatar_id).success(function(response) {
 			if(response.status == Constants.STATUS_OK) {
 				if(response.errors) {
@@ -757,6 +810,7 @@ function FutureedController($scope, $window, apiService, futureed) {
 					});
 				}
 			}
+			$scope.ui_unblock();
 		}).error(function(response) {
 			$scope.internalError();
 		});

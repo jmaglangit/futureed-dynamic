@@ -8,6 +8,7 @@ use FutureEd\Models\Traits\TransactionTrait;
 class StudentLsScore extends Model {
 
 	use SoftDeletes;
+
 	use TransactionTrait;
 
 	protected $table = 'student_ls_scores';

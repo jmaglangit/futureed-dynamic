@@ -1,13 +1,16 @@
 <?php namespace FutureEd\Models\Core;
 
+use FutureEd\Models\Traits\UserTransactionTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+
 
 class Client extends Model
 {
 
-	//
 	use SoftDeletes;
+
+	use UserTransactionTrait;
 
 	protected $table = 'clients';
 
@@ -37,16 +40,6 @@ class Client extends Model
 		'account_status' => 'Pending'
 	];
 
-
-	public static function boot()
-	{
-
-		parent::boot();
-
-		Client::deleting(function ($admin) {
-			$admin->user->delete();
-		});
-	}
 
 	//-------------relationships
 	public function user()

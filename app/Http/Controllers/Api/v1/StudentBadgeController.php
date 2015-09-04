@@ -44,26 +44,6 @@ class StudentBadgeController extends ApiController {
 	}
 
 	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
-	}
-
-	/**
 	 * Display the specified resource.
 	 *
 	 * @param  int  $id
@@ -74,17 +54,6 @@ class StudentBadgeController extends ApiController {
 		$student_badge = $this->student_badge->viewStudentBadge($id);
 
 		return $this->respondWithData($student_badge);
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
 	}
 
 	/**
@@ -102,17 +71,6 @@ class StudentBadgeController extends ApiController {
 		return $this->respondWithData($this->student_badge->viewStudentBadge($id));
 
 
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		return $this->respondWithData($this->student_badge->deleteStudentBadge($id));
 	}
 
 }

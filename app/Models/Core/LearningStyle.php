@@ -1,11 +1,14 @@
 <?php namespace FutureEd\Models\Core;
 
+use FutureEd\Models\Traits\TransactionTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class LearningStyle extends Model {
 
     use SoftDeletes;
+
+	use TransactionTrait;
 
     protected $table = 'learning_styles';
 
@@ -15,7 +18,10 @@ class LearningStyle extends Model {
 
     protected $fillable = ['name', 'description'];
 
-    protected $attributes = ['created_by' => 1, 'updated_by' => 1];
+    protected $attributes = [
+		'created_by' => 1,
+		'updated_by' => 1
+	];
 
 
 	//-------------scopes

@@ -37,7 +37,18 @@ class TokenServices {
 
     protected $user;
 
+    //Hashed data
+
     protected $payload;
+
+    protected $header;
+
+    protected $signature;
+
+    //Data variables
+    protected $header_data;
+
+    protected $payload_data;
 
 
 
@@ -45,6 +56,40 @@ class TokenServices {
         $this->token_config = config('token');
         $this->user = $userRepositoryInterface;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getHeaderData()
+    {
+        return $this->header_data;
+    }
+
+    /**
+     * @param mixed $header_data
+     */
+    public function setHeaderData($header_data)
+    {
+        $this->header_data = $header_data;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPayloadData()
+    {
+        return $this->payload_data;
+    }
+
+    /**
+     * @param mixed $payload_data
+     */
+    public function setPayloadData($payload_data)
+    {
+        $this->payload_data = $payload_data;
+    }
+
+
 
     /**
      * set payload
@@ -69,7 +114,18 @@ class TokenServices {
             'typ' => $this->token_config['typ']
         ];
 
-        return base64_encode(json_encode($header));
+        $this->setHeaderData($header);
+
+        $this->header = base64_encode(json_encode($header));
+
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getHeader(){
+
+        return $this->header;
     }
 
     /**
@@ -84,9 +140,6 @@ class TokenServices {
         //check if client the
 
 
-
-
-//        dd(Carbon::now()->addSeconds($this->token['exp'])->toDateTimeString());
         $payload = [
 
             //full url of the issuer or just the main url
@@ -94,42 +147,56 @@ class TokenServices {
 
             //time expiry of the token in unix set or auto set
             'exp' => (isset($token['exp'])) ?
-                        $token['exp']
-                        : Carbon::now()->addSeconds($this->token_config['exp'])->timestamp,
+                $token['exp']
+                : Carbon::now()->addSeconds($this->token_config['exp'])->timestamp,
 
             'iat' => (isset($token['iat'])) ?
-                        $token['iat']
-                        : Carbon::now()->timestamp,
+                $token['iat']
+                : Carbon::now()->timestamp,
             //app name
             'app' => $this->token_config['app'],
 
             //set user id of the user
             'id' => (isset($token['id'])) ?
-                        $token['id']
-                        : 0,
+                $token['id']
+                : 0,
 
             //set user type of the user
             'type' => (isset($token['type'])) ?
-                        $token['type']
-                        : 'Guest',
+                $token['type']
+                : 'Guest',
 
             //set user role
             'role' => (isset($token['role'])) ?
-                        $token['role']
-                        : false
+                $token['role']
+                : false
 
         ];
 
-        $this->payload = $payload;
+        $this->setPayloadData($payload);
 
-        return base64_encode(json_encode($payload));
+        $this->payload = base64_encode(json_encode($payload));
+
     }
 
+    /**
+     * @return mixed
+     */
+    public function getSignature(){
+
+        return $this->signature;
+    }
+
+    /**
+     * @param $header
+     * @param $payload
+     * @return string
+     */
     public function setSignature($header,$payload){
 
         $encodedString = $header . "." . $payload;
-        return Hash_hmac('sha1',$encodedString,'FutureLessonsOfFutureEd');
 
+        $this->signature = Hash_hmac('sha1',$encodedString,'FutureLessonsOfFutureEd');
     }
 
     /*
@@ -137,12 +204,12 @@ class TokenServices {
      */
     public function getToken($payload_data = []){
 
-        $header = $this->setHeader();
-        $payload = $this->setPayload($payload_data);
-        $signature = $this->setSignature($header,$payload);
+        $this->setHeader();
+        $this->setPayload($payload_data);
+        $this->setSignature($this->getHeader(),$this->getPayload());
 
         return [
-            'authorization' => $header . "." . $payload . "." . $signature
+            'authorization' => $this->getHeader() . "." . $this->getPayload() . "." .$this->getSignature()
         ];
     }
 
@@ -158,7 +225,7 @@ class TokenServices {
     public function decodePayload($payload){
 
         //set filters for data
-        $payload_decoded = json_decode(base64_decode($payload),true);
+//        $payload_decoded = json_decode(base64_decode($payload),true);
 
         //validate url
         //if(!$this->validateTokenUrl($payload_decoded['iss'])){
@@ -170,14 +237,13 @@ class TokenServices {
         //    return false;
         //}
 
-        //validate user
-        if(!$this->validateTokenUser($payload_decoded['id'],$payload_decoded['type'])){
-            return false;
-        }
+//        //validate user
+//        if(!$this->validateTokenUser($payload_decoded['id'],$payload_decoded['type'])){
+//            return false;
+//        }
 
-        $this->setPayload($payload_decoded);
 
-        return $payload_decoded;
+        return json_decode(base64_decode($payload),true);
     }
 
 
@@ -189,33 +255,31 @@ class TokenServices {
 
         $token_decoded = explode(".",$token);
 
-
-
         if($token_decoded[0] && $token_decoded[1] && $token_decoded[2]){
 
             //check details for comparison
-            $header = $this->decodeHeader($token_decoded[0]);
+            $this->setHeaderData($this->decodeHeader($token_decoded[0]));
 
             //check details for comparison
-            $payload = $this->decodePayload($token_decoded[1]);
+            $this->setPayloadData($this->decodePayload($token_decoded[1]));
 
         } else {
             return false;
         }
 
 
-
+        $payload = $this->getPayloadData();
         $token_exp = new Carbon();
         $token_exp->timestamp = $payload['exp'];
 
-        $signature = $this->setSignature($token_decoded[0],$token_decoded[1]);
+        $this->setSignature($token_decoded[0],$token_decoded[1]);
 
-        if(Carbon::now()->timestamp >= $token_exp->timestamp){
+        if(Carbon::now()->timestamp >= $payload['exp']){
 
             return false;
         }
 
-        if (!$this->validateSignature($token_decoded[2],$signature)){
+        if (!$this->validateSignature($token_decoded[2],$this->getSignature())){
 
             return false;
         }
@@ -293,6 +357,32 @@ class TokenServices {
         }
 
         return false;
+    }
+
+    /**
+     * parse token
+     *
+     * @param $token
+     * @return bool
+     */
+    public function parseToken($token){
+
+        $token_decoded = explode(".",$token);
+
+        if($token_decoded[0] && $token_decoded[1] && $token_decoded[2]){
+
+            //check details for comparison
+            $this->setHeaderData($this->decodeHeader($token_decoded[0]));
+
+            //check details for comparison
+            $this->setPayloadData($this->decodePayload($token_decoded[1]));
+
+        } else {
+            return false;
+        }
+
+        return true;
+
     }
 
 

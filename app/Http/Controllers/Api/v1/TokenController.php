@@ -69,28 +69,10 @@ class TokenController extends ApiController {
     }
 
     public function input(){
-        $input = Input::only('name');
-        $header = Request::header('access_token');
+      //decode token
+        $this->token->validateToken(Input::get('auth'));
 
-        $this->messageBag->add('errors',
-            [
-                'error_code' => 12344,
-                'field' => 'field',
-                'message' => 'is required'
-            ]
-        );
-
-        $this->messageBag->add('errors',
-            [
-                'error_code' => 123232344,
-                'field' => 'fields',
-                'message' => 'are required'
-            ]
-        );
-
-
-        $errors = $this->messageBag->getMessageBag()->toJson();
-        return $errors;
+        return $this->token->getPayloadData();
     }
 
 
