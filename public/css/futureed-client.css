@@ -341,3 +341,7 @@ content legend {
 .center-date {
 	text-align: center;
 }
+
+.invoice-group:last-child {
+	margin-top: 5px;
+}
