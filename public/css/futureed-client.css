@@ -338,6 +338,14 @@ content legend {
 	max-width: 30%;
 }
 
+.center-date {
+	text-align: center;
+}
+
+.invoice-group:last-child {
+	margin-top: 5px;
+}
+
 .tr-overflow {
 	word-wrap: break-word;
 	white-space: nowrap;

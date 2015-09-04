@@ -31,5 +31,12 @@ function manageInvoiceService($http) {
 		});
 	}
 
+	invoiceAPI.viewAllStudents = function(id) {
+		return $http({
+			method : Constants.METHOD_GET
+			, url  : invoiceURL + 'invoice/' + id
+		});
+	}
+
 	return invoiceAPI
 }

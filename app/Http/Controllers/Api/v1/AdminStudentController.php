@@ -69,16 +69,6 @@ class AdminStudentController extends ApiController {
 		}
 
 		/**
-		* Show the form for creating a new resource.
-		*
-		* @return Response
-		*/
-		public function create()
-		{
-		//
-		}
-
-		/**
 		* Store a newly created resource in storage.
 		*
 		* @return Response
@@ -151,7 +141,7 @@ class AdminStudentController extends ApiController {
 		*/
 		public function update($id,AdminStudentRequest $request)
 		{
-			$data = $request->only('first_name','last_name','gender','birth_date','country','state','city','country_id','school_code','grade_code');
+			$data = $request->only('first_name','last_name','gender','birth_date','country','state','city','country_id','school_code','grade_code','points');
 			$user = $request->only('username','email');
 			$user_type = config('futureed.student');
 
@@ -170,15 +160,16 @@ class AdminStudentController extends ApiController {
 
 				$student_class = $this->student_service->getCurrentClass($id);
 
-				if(!is_object($student_class)){
+				if($student_class  && $student['school_code'] != $request->get('school_code')){
 
 					return $this->respondErrorMessage(2050);
 				}
 
 			} else {
 
-				$data['school_code'] = 0;
+				$data['school_code'] = $request->get('school_code');
 			}
+
 
 			//update user
 			$this->user->updateUser($student['user_id'], $user);

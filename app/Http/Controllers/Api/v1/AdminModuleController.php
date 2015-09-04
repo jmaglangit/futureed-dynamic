@@ -67,16 +67,6 @@ class AdminModuleController extends ApiController {
 	}
 
 	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
-
-	/**
 	 * Store a newly created resource in storage.
 	 *
 	 * @return Response
@@ -85,11 +75,6 @@ class AdminModuleController extends ApiController {
 	{
 		$data = $request->only('subject_id','subject_area_id','name','code','description','common_core_area',
                                       'common_core_url','status','points_to_unlock','points_to_finish','image');
-
-		if($data['points_to_unlock'] >= $data['points_to_finish']){
-
-			return $this->respondErrorMessage(2139);
-		}
 
 		$return = $this->module->addModule($data);
 
@@ -146,17 +131,6 @@ class AdminModuleController extends ApiController {
 	}
 
 	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-	/**
 	 * Update the specified resource in storage.
 	 *
 	 * @param  int  $id
@@ -172,11 +146,6 @@ class AdminModuleController extends ApiController {
 		if(!$module){
 
 			return $this->respondErrorMessage(2120);
-		}
-
-		if($data['points_to_unlock'] >= $data['points_to_finish']){
-
-			return $this->respondErrorMessage(2139);
 		}
 
 		//update module

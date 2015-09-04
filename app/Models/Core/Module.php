@@ -1,5 +1,6 @@
 <?php namespace FutureEd\Models\Core;
 
+use FutureEd\Models\Traits\TransactionTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Filesystem\Filesystem;
@@ -8,6 +9,8 @@ class Module extends Model
 {
 
 	use SoftDeletes;
+
+	use TransactionTrait;
 
 	protected $table = 'modules';
 
@@ -167,5 +170,15 @@ class Module extends Model
 			$query->where('class_id', '=', $class_id);
 		});
 
+	}
+
+	public function scopeLeftJoinStudentModule($query, $criteria){
+
+		return $query->leftJoin(
+			'student_modules', function($leftJoin) use ($criteria){
+			$leftJoin->on('modules.id','=','student_modules.module_id')
+				->where('student_modules.class_id','=',$criteria['class_id'])
+				->where('student_modules.module_status','<>',config('futureed.module_status_failed'));
+		})->where('modules.subject_id',$criteria['subject_id']);
 	}
 }

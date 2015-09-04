@@ -12,13 +12,13 @@
 					{!! Form::text('search_name', ''
 						,array(
 							'placeholder' => 'Module'
-							, 'ng-model' => 'class.search.name'
+							, 'ng-model' => 'class.search.module_name'
 							, 'class' => 'form-control btn-fit'
 							, 'data-clear-btn' => 'true'
 						)
 					)!!}
 				</div>
-				<div class="col-xs-2">
+				<div class="col-xs-3">
 					{!! Form::select('search_module_status'
 						, array(
 							'' => 'All'
@@ -33,16 +33,10 @@
 						)
 					) !!}
 				</div>
-				<div class="col-xs-2" ng-init="getGradeLevel(user.country_id)">
+				<div class="col-xs-3" ng-init="getGradeLevel(user.country_id)">
 					<select class="form-control" ng-model="class.search.grade_id">
 						<option value="">-- Select Grade --</option>
 						<option ng-repeat="grade in grades" ng-value="grade.id">{! grade.name !}</option>
-					</select>
-				</div>
-				<div class="col-xs-2" ng-init="class.getSubjects()">
-					<select class="form-control" ng-model="class.search.subject_id">
-						<option value="">-- Select Subject --</option>
-						<option ng-repeat="subject in class.subjects" ng-value="subject.id">{! subject.name !}</option>
 					</select>
 				</div>
 				<div class="col-xs-2">
@@ -67,73 +61,86 @@
 	</div>
 
 	<div class="col-xs-12 class-container">
-		<div class="clearfix"></div>
+		<ul class="nav nav-pills module-pills" role="tablist" ng-init="class.listClass()">
+			<li role="presentation" class="module-tabs" ng-repeat="aClass in class.classes track by $index" ng-class="{ 'active' : $index == 0 }" ng-click="class.selectClass(aClass.class_id)">
+				<div ng-if="$index == 0"><span ng-init="class.selectClass(aClass.class_id)"></span></div>
+				<a href="#home" aria-controls="home" role="tab" data-toggle="tab" >{! aClass.classroom.subject.name !}</a>
+			</li>
+		</ul>
 
-		<div class="list-container" ng-init="class.listModules()" ng-cloak>
-			<div class="clearfix"></div>
+		<div class="tab-content">
+		    <div class="tab-pane active">
+				<div class="list-container" ng-cloak>
+					<div class="clearfix"></div>
 
-			<div class="no-record-label" ng-if="!class.records.length && !class.table.loading">
-				No modules found.
-			</div>
-
-			<div class="no-record-label" ng-if="class.table.loading">
-				Loading...
-			</div>
-
-			<div class="module-list" ng-if="class.records.length">
-				<div class="module-item" ng-repeat="record in class.records">
-					<div class="module-image-holder">
-						<img ng-if="record.student_module[0].module_status != 'Completed'" ng-class="{ 'module-icon' : user.points >= record.points_to_unlock, 'locked-module-icon' : user.points < record.points_to_unlock}" 
-							ng-src="{! user.points >= record.points_to_unlock && '/images/icons/default-module-icon.png' || '/images/icons/icon-lock.png' !}"
-							ng-click="class.redirect('{!! route('student.class.module.index') !!}', record)" tooltip-class="module-tooltip" tooltip-placement="bottom" tooltip="{! record.name !}">
-
-						<img ng-if="record.student_module[0].module_status == 'Completed'" class="locked-module-icon"
-							ng-src="/images/icons/default-module-icon.png">
-					</div>
-
-					<p class="module-name">{! record.name !}</p>
-
-					<button ng-if="record.student_module.length && record.student_module[0].module_status == 'On Going' && user.points >= record.points_to_unlock"
-						ng-click="class.redirect('{!! route('student.class.module.index') !!}', record)" 
-						type="button" class="btn btn-blue module-btn"><i class="fa fa-play-circle"></i> Resume lesson</button>
-
-					<button ng-if="!record.student_module.length && user.points >= record.points_to_unlock" ng-click="class.redirect('{!! route('student.class.module.index') !!}', record)"
-						type="button" class="btn btn-blue module-btn"><i class="fa fa-pencil"></i> Begin lesson</button>
-
-					<button ng-if="user.points < record.points_to_unlock"
-						type="button" class="btn btn-blue module-btn" ng-disabled="true"><i class="fa fa-lock"></i> Module Locked</button>
-
-					<button ng-if="record.student_module.length && record.student_module[0].module_status == 'Completed'"
-						type="button" class="btn btn-blue module-btn" ng-disabled="true"><i class="fa fa-lock"></i> Module Completed</button>
-
-					<div class="progress">
-						<div class="progress-bar progress-bar-striped" role="progressbar" aria-valuemin="0" aria-valuemax="100"
-							ng-class="{ 
-								'progress-bar-success' : record.progress > 75,
-								'progress-bar-info' : record.progress > 50 && record.progress <= 75 ,
-								'progress-bar-warning' : record.progress > 25 && record.progress <= 50 ,
-								'progress-bar-danger' : record.progress <= 25,
-
-							}"
-							ng-style="{ 'width' : record.progress+'%' }">
+					<div class="module-list" ng-if="!class.records.length && !class.table.loading">
+						<div class="no-module-label">
+							<p>No modules found.</p>
 						</div>
 					</div>
-					<span class="module-progress">{! record.progress !}%</span>
+
+					<div class="module-list" ng-if="class.table.loading">
+						<div class="no-module-label">
+							<p>Loading...</p>
+						</div>
+					</div>
+
+					<div class="module-list" ng-if="class.records.length">
+						<div class="module-item" ng-repeat="record in class.records">
+							<div class="module-image-holder">
+								<img ng-if="record.module_status != 'Completed'" ng-class="{ 'module-icon' : user.points >= record.points_to_unlock, 'locked-module-icon' : user.points < record.points_to_unlock}" 
+									ng-src="{! user.points >= record.points_to_unlock && '/images/icons/default-module-icon.png' || '/images/icons/icon-lock.png' !}"
+									ng-click="class.redirect('{!! route('student.class.module.index') !!}', record)" tooltip-class="module-tooltip" tooltip-placement="bottom" tooltip="{! record.name !}">
+
+								<img ng-if="record.module_status == 'Completed'" class="locked-module-icon"
+									ng-src="/images/icons/default-module-icon.png">
+							</div>
+
+							<p class="module-name">{! record.name !}</p>
+
+							<button ng-if="record.module_status == 'On Going' && user.points >= record.points_to_unlock"
+								ng-click="class.redirect('{!! route('student.class.module.index') !!}', record)" 
+								type="button" class="btn btn-blue module-btn"><i class="fa fa-play-circle"></i> Resume lesson</button>
+
+							<button ng-if="!record.module_status && user.points >= record.points_to_unlock" ng-click="class.redirect('{!! route('student.class.module.index') !!}', record)"
+								type="button" class="btn btn-blue module-btn"><i class="fa fa-pencil"></i> Begin lesson</button>
+
+							<button ng-if="user.points < record.points_to_unlock"
+								type="button" class="btn btn-blue module-btn" ng-disabled="true"><i class="fa fa-lock"></i> Module Locked</button>
+
+							<button ng-if="record.module_status == 'Completed'"
+								type="button" class="btn btn-blue module-btn" ng-disabled="true"><i class="fa fa-lock"></i> Module Completed</button>
+
+							<div class="progress">
+								<div class="progress-bar progress-bar-striped" role="progressbar" aria-valuemin="0" aria-valuemax="100"
+									ng-class="{ 
+										'progress-bar-success' : record.progress > 75,
+										'progress-bar-info' : record.progress > 50 && record.progress <= 75 ,
+										'progress-bar-warning' : record.progress > 25 && record.progress <= 50 ,
+										'progress-bar-danger' : record.progress <= 25,
+
+									}"
+									ng-style="{ 'width' : record.progress+'%' }">
+								</div>
+							</div>
+							<span class="module-progress">{! record.progress !}%</span>
+						</div>
+					</div>
+					
+					<div class="pull-right" ng-if="class.records.length">
+						<pagination 
+							total-items="class.table.total_items" 
+							ng-model="class.table.page"
+							max-size="3"
+							items-per-page="class.table.size" 
+							previous-text = "&lt;"
+							next-text="&gt;"
+							class="pagination" 
+							boundary-links="true"
+							ng-change="class.paginateByPage()">
+						</pagination>
+					</div>
 				</div>
-			</div>
-			
-			<div class="pull-right" ng-if="class.records.length">
-				<pagination 
-					total-items="class.table.total_items" 
-					ng-model="class.table.page"
-					max-size="3"
-					items-per-page="class.table.size" 
-					previous-text = "&lt;"
-					next-text="&gt;"
-					class="pagination" 
-					boundary-links="true"
-					ng-change="class.paginateByPage()">
-				</pagination>
 			</div>
 		</div>
 	</div>

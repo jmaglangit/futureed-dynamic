@@ -17,15 +17,20 @@ angular.module('futureed', [
 		return {
 			'request' : function(config) {
 				if(localStorage.authorization) {
-					config.headers.authorization = localStorage.authorization;
+					config.headers.Authorization = localStorage.authorization;
 				}
 
 				return config;
 			} 
 
 			, 'response': function (response) {
-				if(response && response.headers("authorization")) {
-					localStorage.authorization = response.headers("authorization");
+				localStorage.token_expire = Constants.FALSE;
+				if(response && response.headers("Authorization")) {
+					localStorage.authorization = response.headers("Authorization");
+				}
+
+				if(response.data.status == 401) {
+					localStorage.token_expire = Constants.TRUE;
 				}
 
 				return response;

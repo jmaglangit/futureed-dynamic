@@ -198,10 +198,42 @@ function StudentClassController($scope, $filter, $window, StudentClassService, S
 		self.listModules();
 	}
 
-	self.listModules = function() {
+	self.listClass = function() {
+		self.errors = Constants.FALSE;
+		var student_id = $scope.user.id;
+
+		$scope.ui_block();
+		StudentClassService.listClass(student_id).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.classes = response.data.records;
+				}
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.selectClass = function(class_id) {
+		self.searchDefaults();
+		self.tableDefaults();
+		
+		self.listModules(class_id);
+	}
+
+	self.listModules = function(class_id) {
 		self.errors = Constants.FALSE;
 		self.records = [];
 		self.table.loading = Constants.TRUE;
+
+		self.current_class = (class_id) ? class_id : self.current_class;
+		self.search.class_id = self.current_class;
+		self.search.student_id = $scope.user.id;
 
 		$scope.ui_block();
 		StudentClassService.listModules(self.search, self.table).success(function(response) {
@@ -211,11 +243,11 @@ function StudentClassController($scope, $filter, $window, StudentClassService, S
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
-					self.records = response.data.records;
-					self.updatePageCount(response.data);
+					self.records = response.data.student_classroom.student_subject.student_modules.records;
+					self.updatePageCount(response.data.student_classroom.student_subject.student_modules);
 
 					angular.forEach(self.records, function(value, key) {
-						value.progress = (value.student_module.length) ? value.student_module[0].progress : Constants.FALSE;
+						value.progress = (value.progress) ? value.progress : Constants.FALSE;
 					});
 				}
 			}

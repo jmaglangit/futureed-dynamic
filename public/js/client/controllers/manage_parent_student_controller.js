@@ -353,7 +353,13 @@ function ManageParentStudentController($scope, ManageParentStudentService, apiSe
 		self.success = Constants.FALSE;
 		self.validation = Constants.FALSE;
 
-		self.detail.birth_date = $("#student_form input[name='hidden_date']").val();
+		var bdate = $("#student_form #birth_date").val();
+		var day = $("#student_form .day").val();
+		var month = $("#student_form .month").val();
+		var year = $("#student_form .year").val();
+
+		self.detail.birth_date = year + month + day;
+
 		$scope.ui_block();
 		ManageParentStudentService.saveStudent(self.detail).success(function(response){
 			if(angular.equals(response.status, Constants.STATUS_OK)){

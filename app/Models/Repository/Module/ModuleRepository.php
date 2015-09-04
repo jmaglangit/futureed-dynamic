@@ -4,6 +4,7 @@ namespace FutureEd\Models\Repository\Module;
 
 use FutureEd\Models\Core\Module;
 use League\Flysystem\Exception;
+use Illuminate\Support\Facades\DB;
 
 
 class ModuleRepository implements ModuleRepositoryInterface
@@ -181,6 +182,87 @@ class ModuleRepository implements ModuleRepositoryInterface
 		$count = $module->count();
 
 		return $count;
+	}
+
+	//
+	/**
+	 * Modules search student_id, class_id, module_name, grade_id, module_status
+	 * @param $criteria
+	 * @param $limit
+	 * @param $offset
+	 * @return array
+	 */
+	public function getModulesByStudentProgress($criteria, $offset = 0, $limit = 0){
+
+		try {
+
+			$student_module = Module::select(
+				'modules.id as id',
+				'modules.subject_id',
+				'modules.subject_area_id',
+				'modules.grade_id',
+				'modules.code',
+				'modules.name',
+				'modules.icon_image',
+				'modules.description',
+				'modules.common_core_area',
+				'modules.common_core_url',
+				'modules.points_earned',
+				'modules.points_to_unlock',
+				'modules.points_to_finish',
+				'student_modules.class_id',
+				'student_modules.student_id',
+				'student_modules.module_status',
+				'student_modules.last_viewed_content_id',
+				'student_modules.progress',
+				'student_modules.date_start',
+				'student_modules.date_end',
+				'student_modules.total_time'
+			)
+				->leftJoinStudentModule($criteria);
+
+			//Get module_name
+			if (isset($criteria['module_name'])) {
+
+				$student_module = $student_module->name($criteria['module_name']);
+			}
+
+			//Get grade_id
+			if (isset($criteria['grade_id'])) {
+
+				$student_module = $student_module->gradeId($criteria['grade_id']);
+			}
+
+			//module_status
+			if (isset($criteria['module_status'])) {
+
+				$student_module = $student_module->moduleStatus($criteria['module_status']);
+			}
+
+			if (isset($criteria['limit'])) {
+
+				$limit = $criteria['limit'];
+			}
+
+			if (isset($criteria['offset'])) {
+
+				$offset = $criteria['offset'];
+			}
+
+			$count = $student_module->count();
+
+			if ($limit > 0 && $offset >= 0) {
+
+				$student_module = $student_module->offset($offset)->limit($limit);
+			}
+
+			return ['total' => $count, 'records' => $student_module->get()];
+
+		} catch (\Exception $e) {
+
+			return null;
+		}
+
 	}
 
 }

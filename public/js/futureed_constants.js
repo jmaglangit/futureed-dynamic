@@ -48,6 +48,7 @@ var Constants = {
 	, CONTENTS 		: "contents"
 	, QANDA 		: "qanda"
 
+	, MODULE		: "Module"
 	, GENERAL		: "General"
 	, CONTENT 		: "Content"
 	, QUESTION		: "Question"
@@ -168,6 +169,8 @@ var Constants = {
 	, ATTR_PASSWORD 		: "password"
 
 	, LSP_URL 				: "/student/dashboard/follow-up-registration"
+
+	, DELETE_STU_SUCCESS 	: "Student successfully deleted"
 
 	/*Billing Information for invoice*/
 

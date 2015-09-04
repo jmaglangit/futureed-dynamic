@@ -1,11 +1,14 @@
 <?php namespace FutureEd\Models\Core;
 
+use FutureEd\Models\Traits\TransactionTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class TeachingContent extends Model {
 
     use SoftDeletes;
+
+	use TransactionTrait;
 
     protected $table = 'teaching_contents';
 
@@ -40,7 +43,8 @@ class TeachingContent extends Model {
 
 	public function getContentUrlAttribute($value){
 
-		if($this->attributes['media_type_id'] == 3){
+		if($this->attributes['media_type_id'] == 3 && $this->attributes['content_url'] <> ''){
+
 			return  asset(config('futureed.teaching_content_image_uploads'). '/'. $this->attributes['id']. '/' . $value);
 		}
 

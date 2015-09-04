@@ -238,16 +238,57 @@ class ClassStudentController extends ApiController {
 
     }
 
+
 	/**
-	 * Student Joins the class.
-	 * @param $id
+	 * Get Student Classes, with hierarchy class, module, current progress.
 	 * @return mixed
 	 */
 	public function studentCurrentClass(ClassStudentRequest $request){
 
+		//Get list of current class of student
+		//GET class, modules,
+
+		//Allow search module_name, grade_id, and module_status
+
+		//Required parameters
+		$criteria['student_id'] = $request->get('student_id');
+
+		$criteria['class_id'] = $request->get('class_id');
+
+		//Get module_name
+		if($request->get('module_name')){
+
+			$criteria['module_name'] = $request->get('module_name');
+		}
+
+		//Get grade_id
+		if($request->get('grade_id')){
+
+			$criteria['grade_id'] = $request->get('grade_id');
+		}
+
+		//Get module_status
+		if($request->get('module_status')){
+
+			$criteria['module_status'] = $request->get('module_status');
+		}
+
+		//Get Offset
+		if($request->get('offset')){
+			$criteria['offset'] = intval($request->get('offset'));
+		}
+
+		//Get limit
+		if($request->get('limit')){
+
+			$criteria['limit'] = intval($request->get('limit'));
+		}
+
+
 		return $this->respondWithData(
-			$this->student->getCurrentClass($request->get('student_id'))
+			$this->class_student->getCurrentClassStudent($criteria)
 		);
+
 	}
 
 	/**
@@ -256,9 +297,9 @@ class ClassStudentController extends ApiController {
 	 * @return mixed
 	 */
 
-	public function removeStudentClass($id){
+	public function removeStudentClass(ClassStudentRequest $request, $id){
 
-		$data['date_removed'] = Carbon::now();
+		$data = $request->only('date_removed');
 
 		$class_student = $this->class_student->getClassStudentById($id);
 
@@ -268,9 +309,15 @@ class ClassStudentController extends ApiController {
 
 		}
 
+		if($class_student['subscription_status'] != config('futureed.active')){
+
+			return $this->respondErrorMessage(2147);
+		}
+
 		$data['seats_taken'] = $class_student['classroom']['seats_taken']-1;
 
 		$this->classroom->updateClassroom($class_student['classroom']['id'],$data);
+
 
 		$this->class_student->updateClassStudent($id,$data);
 

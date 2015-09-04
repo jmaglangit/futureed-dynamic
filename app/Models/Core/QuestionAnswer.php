@@ -1,5 +1,6 @@
 <?php namespace FutureEd\Models\Core;
 
+use FutureEd\Models\Traits\TransactionTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -7,13 +8,13 @@ class QuestionAnswer extends Model {
 
 	use SoftDeletes;
 
+	use TransactionTrait;
+
 	protected $table = 'question_answers';
 
 	protected $dates = ['deleted_at'];
 
 	protected $hidden = [
-		'correct_answer',
-		'point_equivalent',
 		'created_by',
 		'updated_by',
 		'created_at',

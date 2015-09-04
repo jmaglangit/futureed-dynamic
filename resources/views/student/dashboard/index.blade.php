@@ -5,30 +5,19 @@
 @stop
 
 @section('content')
-
-
-<div id="error_class_modal" ng-show="no_class" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-        <div class="modal-header">
-            No Class
-        </div>
-        <div class="modal-body">
-            You do not belong to a class.
-        </div>
-        <div class="modal-footer">
-        	<div class="btncon col-md-8 col-md-offset-4 pull-left">
-                {!! Form::button('Back'
-                    , array(
-                        'class' => 'btn btn-gold btn-medium'
-                        , 'data-dismiss' => 'modal'
-                    )
-                ) !!}
-        	</div>
+    <div class="row" ng-cloak>
+        <div class="col-xs-12 class-container">
+            <h3 class="alert alert-danger">You have no available subjects.</h3>
+            
+            <div class="no-record-label">    
+                <p>You need a Teacher to add you to a Class. </p>
+                <p>or</p>
+                <p>You can have your Parent buy you a subscription. </p>
+                <p ng-if="user.age > 13">or</p>
+                <p ng-if="user.age > 13">You can proceed to <a href="{!! route('student.payment.index') !!}">student payment</a> page.</p>
+            </div>
         </div>
     </div>
-  </div>
-</div>
 @stop
 
 @section('scripts')

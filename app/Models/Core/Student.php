@@ -1,5 +1,7 @@
 <?php namespace FutureEd\Models\Core;
 
+use FutureEd\Models\Traits\TransactionTrait;
+use FutureEd\Models\Traits\UserTransactionTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Carbon\Carbon;
@@ -8,6 +10,8 @@ class Student extends Model {
 
 
     use SoftDeletes;
+
+	use UserTransactionTrait;
 
     protected $table = 'students';
 
@@ -28,16 +32,6 @@ class Student extends Model {
 		'created_by' => 1,
 		'updated_by' => 1,
 	];
-
-	public static function boot()
-	{
-
-		parent::boot();
-
-		Student::deleting(function ($student) {
-			$student->user->delete();
-		});
-	}
 
 
 
@@ -76,7 +70,7 @@ class Student extends Model {
 	}
 
 	//get student with relation to ClassStudent with relation to classroom
-	public function studentclassroom(){
+	public function studentClassroom(){
 
 		return $this->belongsTo('FutureEd\Models\Core\ClassStudent','id','student_id')->with('classroom');
 	}

@@ -413,27 +413,32 @@ function ProfileController($scope, apiService, profileService) {
 	}
 
 	function selectAvatar() {
-	    apiService.selectAvatar(self.prof.id, self.avatar_id).success(function(response) {
-	      if(response.status == Constants.STATUS_OK) {
-	        if(response.errors) {
-	          self.errors = $scope.errorHandler(response.errors);
-	        } else if(response.data){
-	          self.prof.avatar_id = response.data.id;
-	          self.prof.avatar = response.data.url;
-	          $scope.$parent.user = self.prof;
+		$scope.ui_block();
+		apiService.selectAvatar(self.prof.id, self.avatar_id).success(function(response) {
+			if(response.status == Constants.STATUS_OK) {
+				if(response.errors) {
+				self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data){
+					self.prof.avatar_id = response.data.id;
+					self.prof.avatar = response.data.url;
+					self.prof.thumbnail = '/images/thumbnail/' + response.data.name;
+					$scope.user = self.prof;
 
-	          self.success = Constants.TRUE;
-	    	  
-	          apiService.updateUserSession(self.prof).success(function(response) {
-	              $("ul.avatar_list li").removeClass('selected');
-	          }).error(function() {
-	            self.errors = $scope.internalError();
-	          });
-	        }
-	      }
-	    }).error(function(response) {
-	      self.errors = $scope.internalError();
-	    });
+					self.success = Constants.TRUE;
+
+					apiService.updateUserSession(self.prof).success(function(response) {
+						$("ul.avatar_list li").removeClass('selected');
+						$window.location;
+					}).error(function() {
+						self.errors = $scope.internalError();
+					});
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
 	}
 
 	function highlightPassword(e) {

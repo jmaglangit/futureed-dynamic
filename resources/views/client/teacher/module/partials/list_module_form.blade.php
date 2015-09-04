@@ -94,7 +94,6 @@
 			<thead>
 		        <tr>
 		            <th>Module</th>
-		            <th>Description</th>
 		            <th>Grade</th>
 		            <th ng-if="module.records.length" class="table-width-200">Actions</th>
 		        </tr>
@@ -102,7 +101,6 @@
 	        <tbody>
 		        <tr ng-repeat="moduleInfo in module.records">
 		            <td>{! moduleInfo.name !}</td>
-		            <td>{! moduleInfo.description !}</td>
 		            <td>{! moduleInfo.grade.name !}</td>
 		            <td ng-if="module.records.length">
 		            	<div class="row">

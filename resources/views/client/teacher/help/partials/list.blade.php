@@ -128,7 +128,6 @@
 					<thead>
 				        <tr>
 				            <th>Title</th>
-				            <th>Description</th>
 				            <th>Created By</th>
 				            <th>Date Created</th>
 				            <th>Date of Last Answer</th>
@@ -139,7 +138,6 @@
 			        <tbody>
 				        <tr ng-repeat="helpInfo in help.records">
 				            <td>{! helpInfo.title !}</td>
-				            <td class="wide-column">{! helpInfo.content !}</td>
 				            <td>{! helpInfo.student.first_name !} {! helpInfo.student.last_name !}</td>
 				            <td>{! helpInfo.created_at | ddMMyyHHmmss : '-' !}</td>
 				            <td>{! helpInfo.last_answered_at | ddMMyyHHmmss : '-' !}</td>

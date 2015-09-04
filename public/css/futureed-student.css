@@ -40,18 +40,18 @@
 .nav-dropdown-menu:before {
 	border-bottom-color: #cccccc;
     border-width: 12px;
-    margin-left: 125px;
+    margin-left: 126px;
 }
 
 .nav-dropdown a {
-	padding: 10px 15px !important;
+	padding: 15px !important;
     color: #055A7F !important;
 }
 
 .nav-image-holder {
 	border-radius: 50%;
     width: 50px;
-    margin: 0px 5px;
+    margin: 3px 5px;
 }
 
 .nav-icon-holder {
@@ -73,7 +73,9 @@
     min-height: 34px;
     text-align: right;
     margin: 10px;
-    padding: 5px 15px 5px 7px;
+	padding-top: 6px;
+	padding-right: 15px;
+	font-size: 15px;
 }
 
 .ul-left, .check-ico {
@@ -716,6 +718,8 @@ hr {
 	padding: 20px;
 	background-color: rgba(255, 255, 255, .4);
 	text-align: center;
+	color: #055A7F;
+	font-size: 20px;
 }
 
 .module-wrapper {
@@ -729,9 +733,8 @@ hr {
 }
 
 .module-list {
-	padding: 10px;
 	background-color: rgba(255, 255, 255, .3);
-	border-radius: 10px;
+	border-radius: 0px 0px 10px 10px;
 }
 
 .module-item {
@@ -782,7 +785,7 @@ hr {
 	height: 40px;
 	font-size: 15px;
 	color: #055A7F;
-	max-width: 143px;
+	max-width: 170px;
 	margin-bottom: 0;
 }
 
@@ -1133,7 +1136,7 @@ hr {
     background: #e8e8e8;
     border-radius: 50%;
     padding: 20px;
-    width: 120px;	
+    width: 100px;	
 }
 
 .result-message {
@@ -1249,7 +1252,7 @@ top: 41px;
 
 .class-search{
 	background-color: rgba(255, 255, 255, 0.51);
-	padding: 15px 30px 30px 30px;
+	padding: 15px 30px 15px 30px;
 	width: 90%;
 	margin: auto;
 	border-radius: 10px;
@@ -1320,4 +1323,21 @@ top: 41px;
 
 .bdate-dropdown > .date-dropdowns > select {
 	max-width: 30%;
+}
+
+.module-pills > li > a:focus
+	, .module-pills > li > a:hover
+	, .module-pills > li.active > a {
+	min-width: 100px;
+	text-align: center;
+	border-radius: 7px 7px 0px 0px;
+	background-color: rgba(255, 255, 255, .3) !important;
+	color: #055A7F !important;
+}
+
+.no-module-label p {
+	text-align: center;
+	padding: 20px;
+	font-size: 16px;
+	color: #055A7F;
 }

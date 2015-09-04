@@ -3,7 +3,7 @@
 		<h3> Question #{! mod.question_counter !} </h3>
 	</div>
 
-	<div ng-if="!mod.result.answered && !mod.result.quoted">
+	<div ng-if="!mod.result.answered && !mod.result.quoted && !mod.result.failed">
 		<div class="questions-image">
 			<img ng-if="mod.current_question.original_image_name" ng-src="{! mod.current_question.questions_image !}" />
 		</div>
@@ -80,7 +80,7 @@
 			</div>
 
 			<div class="module-icon-holder">
-				<img ng-src="{! mod.avatar_quote_info.avatar_pose && '/images/avatar/' + mod.avatar_quote_info.avatar_pose.pose_image || '/images/avatar/doctor-male/doctor_male-2_main.png' !}" />
+				<img ng-src="{! mod.avatar_quote_info.avatar_pose && '/images/avatar/' + mod.avatar_quote_info.avatar_pose.pose_image || user.avatar !}" />
 			</div>
 		</div>
 
@@ -88,6 +88,30 @@
 		<div class="btn-container">
 			<button type="button" class="btn btn-maroon btn-medium" ng-click="mod.nextQuestion()">
 				Proceed to next Question
+			</button>
+		</div>
+	</div>
+
+	<div ng-if="mod.result.failed">
+		<div class="result-image">
+			<i class="fa fa-5x img-rounded fa-times text-center"></i>
+		</div>
+
+		<div class="result-message result-incorrect">	
+			<p>
+				You need to review the teaching content.
+			</p>
+		</div>
+
+		<div class="message-container">
+			<div class="module-icon-holder">
+				<img ng-src="{! user.avatar !}" />
+			</div>
+		</div>
+
+		<div class="btn-container">
+			<button type="button" class="btn btn-maroon btn-medium" ng-click="mod.reviewContent()">
+				Review Contents
 			</button>
 		</div>
 	</div>

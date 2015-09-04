@@ -159,14 +159,25 @@
 					<label class="col-xs-4 control-label">Image <span class="required">*</span></label>
 					<div class="col-xs-6">
 	                    <div class="btn btn-blue" ngf-select ngf-change="content.upload($files, content.record)"> Choose Image... </div>
-	                    <span ng-if="content.record.uploaded" class="label label-info margin-top-5 col-xs-12">Image Uploaded...</span>
 					</div>
-					<div class="col-xs-2 top-40" ng-if="content.record.uploaded"><span><a href="javascript:;" ng-click="content.deleteImage()"><i class="fa fa-trash"></i></a></span></div>
+
+					<div class="margin-top-8" ng-if="content.record.uploaded">
+	                    <a href="" ng-click="content.removeImage(content.record)"><i class="fa fa-trash"></i></a>
+	                </div>
 				</div>
+
+				<div class="form-group" ng-if="content.record.uploaded">
+	                <div class="col-xs-4"></div>
+	                <div class="col-xs-5">
+	                    <span class="col-xs-6 upload-label label label-info">Image Uploaded...</span>
+	                    <a href="" class="control-label col-xs-6" ng-click="content.viewImage(content.record)">View Image</a>
+	                </div>
+	            </div>
+
 				<div class="form-group" ng-if="content.record.media_type_id == futureed.IMAGE && content.active_view">
 					<label class="col-xs-4 control-label">Image </label>
 					<div class="col-xs-6">
-	                    <a href="javascript:;" class="top-5" ng-click="content.viewImage('{!! route('admin.image.viewer') !!}', content.record)">View Content Image</a>
+	                    <a href="javascript:;" class="top-5" ng-click="content.viewImage(content.record)">View Content Image</a>
 					</div>
 				</div>
 				<div class="form-group">
@@ -281,15 +292,15 @@
 			</fieldset>
 		{!! Form::close() !!}
 	</div>
-	<div id="view_image_modal" ng-show="content.view_image.show" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	<div id="content_image_modal" ng-show="content.view_image.show" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    {! content.view_image.description !}
+                    {! content.view_image.teaching_module !}
                 </div>
                 <div class="modal-body">
                     <div class="modal-image">
-                        <img ng-src="{! content.record.content_url !}"/>
+                        <img ng-src="{! content.view_image.image_path !}"/>
                     </div>
                 </div>
                 <div class="modal-footer">

@@ -22,7 +22,7 @@ class ClientPasswordController extends ApiController{
         $this->addMessageBag($this->checkPassword($input,'password'));
 
         $password = sha1($input['password']);
-        
+
         $msg_bag = $this->getMessageBag();
 
         if($msg_bag){
@@ -82,7 +82,7 @@ class ClientPasswordController extends ApiController{
 
         $password = sha1($input['password']);
         $new_password = sha1($input['new_password']);
-        
+
         $msg_bag = $this->getMessageBag();
 
         if($msg_bag){
@@ -134,7 +134,7 @@ class ClientPasswordController extends ApiController{
         $this->addMessageBag($this->checkPassword($input,'password'));
 
         $password = sha1($input['password']);
-        
+
         $msg_bag = $this->getMessageBag();
 
         if($msg_bag){
@@ -169,8 +169,8 @@ class ClientPasswordController extends ApiController{
 
 
 
-   
-    
+
+
 
 
 

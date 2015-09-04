@@ -1,11 +1,14 @@
 <?php namespace FutureEd\Models\Core;
 
+use FutureEd\Models\Traits\TransactionTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Subject extends Model {
 
 	use SoftDeletes;
+
+	use TransactionTrait;
 
     protected $table = 'subjects';
 
@@ -37,6 +40,12 @@ class Subject extends Model {
 	
 		return $this->hasMany('FutureEd\Models\Core\SubjectArea');
 		
+	}
+
+	// Student Modules
+	public function studentModules(){
+
+		return $this->hasMany('FutureEd\Models\Core\Module');
 	}
     
     //-------------scopes
