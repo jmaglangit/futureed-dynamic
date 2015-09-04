@@ -352,8 +352,8 @@ function ManageModuleContentController($scope, ManageModuleContentService, Table
 		
 		if(object.image) {
 			self.view_image.image_path = "/uploads/temp/content/" + object.image;
-		} else if(object.questions_image) {
-			self.view_image.image_path = object.questions_image;
+		} else if(object.content_url) {
+			self.view_image.image_path = object.content_url;
 		}
 
 		self.view_image.teaching_module = (object.teaching_module) ? object.teaching_module : Constants.CONTENT;
