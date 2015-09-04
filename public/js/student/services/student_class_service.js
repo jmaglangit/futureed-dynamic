@@ -40,13 +40,21 @@ function StudentClassService($http){
 		});
 	}
 
+	service.listClass = function(student_id) {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url 	: serviceUrl + 'class-student/student-class-list?student_id=' + student_id
+		});
+	}
+
 	service.listModules = function(search, table) {
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url 	: serviceUrl + 'module/student?subject_id=' + search.subject_id
+			, url 	: serviceUrl + 'class-student/student-current-class?student_id=' + search.student_id
+				+ '&class_id=' + search.class_id
 				+ '&grade_id=' + search.grade_id
 				+ '&module_status=' + search.module_status
-				+ '&name=' + search.name
+				+ '&module_name=' + search.module_name
 				+ '&limit=' + table.size
 				+ '&offset=' + table.offset
 		});

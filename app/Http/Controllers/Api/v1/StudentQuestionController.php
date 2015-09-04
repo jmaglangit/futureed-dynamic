@@ -74,6 +74,8 @@ class StudentQuestionController extends ApiController {
 
 				unset($question['records'][$k]['question_answers'][$key]['correct_answer']);
 
+				unset($question['records'][$k]['question_answers'][$key]['point_equivalent']);
+
 			}
 		}
 

@@ -1,9 +1,9 @@
 angular.module('futureed.controllers')
 	.controller('ManageModuleController', ManageModuleController);
 
-ManageModuleController.$inject = ['$scope', 'manageModuleService', 'ManageQuestionAnsService', 'apiService', 'TableService', 'SearchService'];
+ManageModuleController.$inject = ['$scope', 'manageModuleService', 'TableService', 'SearchService', 'Upload'];
 
-function ManageModuleController($scope, manageModuleService, ManageQuestionAnsService, apiService, TableService, SearchService) {
+function ManageModuleController($scope, manageModuleService, TableService, SearchService, Upload) {
 	var self = this;
 
 	self.details = {};
@@ -325,4 +325,58 @@ function ManageModuleController($scope, manageModuleService, ManageQuestionAnsSe
 			$scope.ui_unblock();
 		})
 	}
+
+	self.upload = function(file, object) {
+    	object.uploaded = Constants.FALSE;
+
+		if(file.length) {
+			$scope.ui_block();
+			Upload.upload({
+                url: '/api/v1/module/icon'
+                , file: file[0]
+            }).success(function(response) {
+                if(angular.equals(response.status, Constants.STATUS_OK)) {
+	                if(response.errors) {
+	                    self.errors = $scope.errorHandler(response.errors);
+	                }else if(response.data){
+                		object.image = response.data.image_name;
+                		object.uploaded = Constants.TRUE;
+                		self.image = object.image;
+	                }
+	            }
+
+            	$scope.ui_unblock();
+            }).error(function(response) {
+                self.errors = $scope.internalError();
+                $scope.ui_unblock();
+            });
+        }
+	}
+
+	self.viewImage = function(object) {
+    	self.view_image = {};
+		
+		if(object.image) {
+			self.view_image.image_path = "/uploads/temp/icon/" + object.image;
+		} else if(object.icon_image) {
+			self.view_image.image_path = object.icon_image;
+		}
+
+		self.view_image.teaching_module = (object.name) ? object.name : Constants.MODULE;
+		self.view_image.show = Constants.TRUE;
+
+		$("#view_image_modal").modal({
+	        backdrop: 'static',
+	        keyboard: Constants.FALSE,
+	        show    : Constants.TRUE
+	    });
+    }
+
+    self.removeImage = function(object) {
+    	self.view_image = {};
+
+    	object.image = Constants.EMPTY_STR;
+    	object.image_path = Constants.EMPTY_STR;
+    	object.uploaded = Constants.FALSE;
+    }
 }
