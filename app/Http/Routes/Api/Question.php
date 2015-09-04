@@ -1,5 +1,11 @@
 <?php
 
+//TODO: Removed from Authorization.
+Routes::post('question/upload-image/',[
+	'as' => 'api.v1.admin.image.upload',
+	'uses' => 'Api\v1\QuestionController@uploadQuestionImage'
+]);
+
 Routes::group([
 	'prefix' => '/question',
 	'middleware' => ['api_user','api_after'],
@@ -10,10 +16,6 @@ Routes::group([
 	Routes::resource('/admin', 'Api\v1\AdminQuestionController',
 		['except' => ['create', 'edit']]);
 
-	Routes::post('/upload-image/',[
-		'as' => 'api.v1.admin.image.upload',
-		'uses' => 'Api\v1\QuestionController@uploadQuestionImage'
-	]);
 
 	Routes::resource('/answer/admin', 'Api\v1\AdminQuestionAnswerController',
 		['except' => ['create', 'edit']]);
