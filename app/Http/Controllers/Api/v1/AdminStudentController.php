@@ -170,15 +170,16 @@ class AdminStudentController extends ApiController {
 
 				$student_class = $this->student_service->getCurrentClass($id);
 
-				if(!is_object($student_class)){
+				if($student_class  && $student['school_code'] != $request->get('school_code')){
 
 					return $this->respondErrorMessage(2050);
 				}
 
 			} else {
 
-				$data['school_code'] = 0;
+				$data['school_code'] = $request->get('school_code');
 			}
+
 
 			//update user
 			$this->user->updateUser($student['user_id'], $user);
