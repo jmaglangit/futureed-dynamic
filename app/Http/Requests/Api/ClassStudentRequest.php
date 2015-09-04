@@ -68,6 +68,8 @@ class ClassStudentRequest extends ApiRequest {
 						break;
 				}
 				break;
+
+			case 'PUT':return['date_removed' => 'required|date_format:Ymd'];
         }
 
 
