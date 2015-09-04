@@ -297,9 +297,9 @@ class ClassStudentController extends ApiController {
 	 * @return mixed
 	 */
 
-	public function removeStudentClass($id){
+	public function removeStudentClass(ClassStudentRequest $request, $id){
 
-		$data['date_removed'] = Carbon::now();
+		$data = $request->only('date_removed');
 
 		$class_student = $this->class_student->getClassStudentById($id);
 
@@ -317,6 +317,7 @@ class ClassStudentController extends ApiController {
 		$data['seats_taken'] = $class_student['classroom']['seats_taken']-1;
 
 		$this->classroom->updateClassroom($class_student['classroom']['id'],$data);
+
 
 		$this->class_student->updateClassStudent($id,$data);
 
