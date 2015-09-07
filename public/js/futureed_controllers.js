@@ -42,7 +42,7 @@ function FutureedController($scope, $window, apiService, futureed) {
 
 	function errorHandler(errors, flag) {
 		$scope.errors = [];
-		console.log(errors);
+
 		if(angular.isArray(errors)) {
 			angular.forEach(errors, function(value, key) {
 

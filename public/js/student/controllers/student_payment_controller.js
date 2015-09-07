@@ -144,7 +144,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 	}
 
 	function computeDays(subscription, record) {
-		var start_date = (record.date_start) ? new Date(record.date_start) : new Date();
+		var start_date = (record) ? new Date(record.date_start) : new Date();
 			self.invoice.date_start = $filter('date')(start_date, 'yyyyMMdd');
 			self.invoice.dis_date_start = start_date;
 
