@@ -74,10 +74,10 @@ class QuestionController extends ApiController {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function uploadQuestionImage()
+	public function uploadQuestionImage(QuestionRequest $request)
 	{
 
-		$input = Input::only('file');
+		$input = $request->only('file');
 
 		$now = Carbon::now()->timestamp;
 		$return = NULL;
