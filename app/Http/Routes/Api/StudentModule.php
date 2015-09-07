@@ -2,8 +2,8 @@
 
 Routes::group([
 	'middleware' => ['api_user','api_after'],
-	'permission' => ['student'],
-	'role' => []
+	'permission' => ['student','admin'],
+	'role' => ['admin','super admin']
 ], function(){
 
 	Routes::resource('/student-module','Api\v1\StudentModuleController',
