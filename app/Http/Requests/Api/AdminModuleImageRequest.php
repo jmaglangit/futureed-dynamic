@@ -1,9 +1,6 @@
 <?php namespace FutureEd\Http\Requests\Api;
 
-use FutureEd\Http\Requests\Request;
-
-class QuestionRequest extends ApiRequest {
-
+class AdminModuleImageRequest extends ApiRequest {
 	/**
 	 * Determine if the user is authorized to make this request.
 	 *
@@ -13,7 +10,6 @@ class QuestionRequest extends ApiRequest {
 	{
 		return true;
 	}
-
 	/**
 	 * Get the validation rules that apply to the request.
 	 *
@@ -21,16 +17,12 @@ class QuestionRequest extends ApiRequest {
 	 */
 	public function rules()
 	{
-		switch($this->method()) {
-
+		switch($this->method()){
 			case 'POST':
-
 				return [
-
-					'file' => 'mimes:jpeg,jpg,png|max:2000',
+					'file' => 'required|mimes:jpeg,jpg,png|max:2000'
 				];
 				break;
 		}
 	}
-
 }
