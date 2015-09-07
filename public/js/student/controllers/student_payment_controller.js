@@ -143,8 +143,8 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 		});
 	}
 
-	function computeDays(subscription) {
-		var start_date = new Date();
+	function computeDays(subscription, record) {
+		var start_date = (record) ? new Date(record.date_start) : new Date();
 			self.invoice.date_start = $filter('date')(start_date, 'yyyyMMdd');
 			self.invoice.dis_date_start = start_date;
 
@@ -273,10 +273,10 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 				self.invoice.payment_status = data.payment_status;
 				self.invoice.subscription_id = data.subscription_id;
 				self.invoice.order_id = data.order.id;
-				self.invoice.subject_id = (data.invoice_detail[0]) ? data.invoice_detail[0].classroom.subject_id : Constants.EMPTY_STR;
-				self.invoice.subject_name = (data.invoice_detail[0]) ? data.invoice_detail[0].classroom.subject.name : Constants.EMPTY_STR;
+				self.invoice.subject_id = (data.invoice_detail[0] && data.invoice_detail[0].classroom) ? data.invoice_detail[0].classroom.subject_id : Constants.EMPTY_STR;
+				self.invoice.subject_name = (data.invoice_detail[0] && data.invoice_detail[0].classroom) ? data.invoice_detail[0].classroom.subject.name : Constants.EMPTY_STR;
 				
-				computeDays(data.subscription);
+				computeDays(data.subscription, data);
 			}
 
 			$scope.ui_unblock();

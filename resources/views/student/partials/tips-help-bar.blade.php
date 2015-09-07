@@ -34,7 +34,7 @@
 						</span>
 					</p>
 					<p class="user-detail"><span><i class="fa fa-user"></i> {! tip_record.student.first_name !} {! tip_record.student.last_name !}</span></p>
-					<p class="user-detail"><span><i class="fa fa-tag"></i> General </span></p>
+					<p class="user-detail"><span><i class="fa fa-tag"></i> {! tip_record.link_type !} </span></p>
 					<p class="user-detail"><span><i class="fa fa-calendar-o"></i> {! tip_record.created_moment !}</span></p>
 				</div>
 			</div>

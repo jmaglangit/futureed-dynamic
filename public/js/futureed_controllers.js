@@ -74,18 +74,6 @@ function FutureedController($scope, $window, apiService, futureed) {
 		return $scope.errors;
 	}
 
-	$scope.reLogin = function(){
-		$window.location.href = '/student/login';
-	}
-
-	$scope.clientReLogin = function(){
-		$window.location.href = '/client/login';
-	}
-
-	$scope.adminReLogin = function(){
-		$window.location.href = '/';
-	}
-
 	function internalError() {
 		$scope.errors = [Constants.MSG_INTERNAL_ERROR];
 		$("html, body").animate({ scrollTop: 0 }, "slow");

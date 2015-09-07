@@ -74,7 +74,7 @@ function TipsController($scope, apiService, StudentTipsService, TableService, Se
 	self.listTips = function() {
 		self.records = [];
 		self.errors = Constants.FALSE;
-		self.search.class_id = ($scope.user.class) ? $scope.user.class.class_id : Constants.EMPTY_STR;
+		self.search.class_id = Constants.EMPTY_STR;
 
 		self.table.loading = Constants.TRUE;
 
@@ -296,6 +296,8 @@ function TipsController($scope, apiService, StudentTipsService, TableService, Se
 
 					self.updatePageCount(response.data);
 				}
+			} else {
+				self.errors = $scope.errorHandler(response.errors);
 			}
 
 			$scope.div_unblock('tip_list');
