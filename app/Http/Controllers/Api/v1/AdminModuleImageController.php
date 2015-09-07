@@ -4,6 +4,7 @@ use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 use Carbon\Carbon;
+use FutureEd\Http\Requests\Api\AdminModuleImageRequest;
 
 use Illuminate\Http\Request;
 
@@ -14,10 +15,10 @@ class AdminModuleImageController extends ApiController {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(AdminModuleImageRequest $request)
 	{
 
-		$input = Input::only('file');
+		$input = $request->only('file');
 
 		$now = Carbon::now()->timestamp;
 		$return = NULL;

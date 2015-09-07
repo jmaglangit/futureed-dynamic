@@ -54,6 +54,7 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 			$class_student = $class_student->studentId($criteria['student_id']);
 			$class_student = $class_student->active();
 			$class_student = $class_student->with('classroom');
+			$class_student = $class_student->paidOrder();
 
 		}
 

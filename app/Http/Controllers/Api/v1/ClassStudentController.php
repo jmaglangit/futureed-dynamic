@@ -203,14 +203,23 @@ class ClassStudentController extends ApiController {
 			return $this->respondErrorMessage(2125);// Student is already in the class.
 		}
 
+
         //check seats availability.
         $classroom = $this->classroom->getClassroom($data['class_id']);
 
-		//add to class student table.
-		$data['student_id'] = $student_id;
-		$data['status'] = 'Enabled';
-		$data['date_started'] = Carbon::now();
-		$this->class_student->addClassStudent($data);
+        //check if student have a subscription with the same subject_id
+        $check_subscription = $this->classroom->getClassroomBySubjectId($classroom['subject_id'], $student_id);
+
+        if ($check_subscription) {
+
+           return $this->respondErrorMessage(2037);
+        }
+
+        //add to class student table.
+        $data['student_id'] = $student_id;
+        $data['status'] = 'Enabled';
+        $data['date_started'] = Carbon::now();
+        $this->class_student->addClassStudent($data);
 
         //increment seats_taken
         $classroom_data['seats_taken'] = $classroom->seats_taken + 1;
