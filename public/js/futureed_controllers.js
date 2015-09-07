@@ -42,7 +42,7 @@ function FutureedController($scope, $window, apiService, futureed) {
 
 	function errorHandler(errors, flag) {
 		$scope.errors = [];
-
+		console.log(errors);
 		if(angular.isArray(errors)) {
 			angular.forEach(errors, function(value, key) {
 
@@ -72,18 +72,6 @@ function FutureedController($scope, $window, apiService, futureed) {
 			$("html, body").animate({ scrollTop: 0 }, "slow");
 		}
 		return $scope.errors;
-	}
-
-	$scope.reLogin = function(){
-		$window.location.href = '/student/login';
-	}
-
-	$scope.clientReLogin = function(){
-		$window.location.href = '/client/login';
-	}
-
-	$scope.adminReLogin = function(){
-		$window.location.href = '/';
 	}
 
 	function internalError() {

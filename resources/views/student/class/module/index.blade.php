@@ -107,6 +107,7 @@
 	{!! Html::script('/js/student/services/student_module_service.js')!!}
 
 	{!! Html::script('/js/student/constants/student_module_constant.js')!!}
+	{!! Html::script('/js/student/constants/student_help_constant.js')!!}
 
 	{!! Html::script('/js/common/search_service.js')!!}
 	{!! Html::script('/js/common/table_service.js')!!}	
