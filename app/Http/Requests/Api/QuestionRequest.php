@@ -27,7 +27,7 @@ class QuestionRequest extends ApiRequest {
 
 				return [
 
-					'image' => 'mimes:jpeg,jpg,png|max:2000',
+					'file' => 'mimes:jpeg,jpg,png|max:2000',
 				];
 				break;
 		}
