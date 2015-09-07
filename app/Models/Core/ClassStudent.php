@@ -143,5 +143,19 @@ class ClassStudent extends Model {
 
 	}
 
+	public function scopePaidOrder($query){
+
+		return $query->whereHas('classroom', function ($query) {
+
+			$query->whereHas('order', function ($query)  {
+
+				$query->where('payment_status', '=', config('futureed.paid'));
+
+
+			});
+		});
+
+	}
+
 
 }
