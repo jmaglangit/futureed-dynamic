@@ -132,7 +132,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					var subscription = response.data;
-					computeDays(subscription);
+					computeDays(subscription, self.invoice);
 				}
 			}
 
@@ -144,15 +144,20 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 	}
 
 	function computeDays(subscription, record) {
-		var start_date = (record) ? new Date(record.date_start) : new Date();
-			self.invoice.date_start = $filter('date')(start_date, 'yyyyMMdd');
-			self.invoice.dis_date_start = start_date;
+		if(angular.equals(record.payment_status, Constants.PAID)) {
+				self.invoice.dis_date_start = record.date_start;
+				self.invoice.dis_date_end =  record.date_end;
+		} else {
+			var start_date = new Date();
+				self.invoice.date_start = $filter('date')(start_date, 'yyyyMMdd');
+				self.invoice.dis_date_start = start_date;
 
-		var end_date = new Date(start_date.getTime());
-			end_date.setDate(end_date.getDate() + parseInt(subscription.days));
+			var end_date = new Date(start_date.getTime());
+				end_date.setDate(end_date.getDate() + parseInt(subscription.days));
 
-			self.invoice.date_end = $filter('date')(end_date, 'yyyyMMdd');
-			self.invoice.dis_date_end = end_date;
+				self.invoice.date_end = $filter('date')(end_date, 'yyyyMMdd');
+				self.invoice.dis_date_end = end_date;
+		}
 
 		self.invoice.seats_total = Constants.TRUE;
 		self.invoice.seats_taken = Constants.TRUE;
@@ -268,15 +273,18 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 			} else if(response.data) {
 				var data = response.data;
 
-				self.invoice = {};
-				self.invoice.id = data.id;
-				self.invoice.payment_status = data.payment_status;
-				self.invoice.subscription_id = data.subscription_id;
-				self.invoice.order_id = data.order.id;
-				self.invoice.subject_id = (data.invoice_detail[0] && data.invoice_detail[0].classroom) ? data.invoice_detail[0].classroom.subject_id : Constants.EMPTY_STR;
-				self.invoice.subject_name = (data.invoice_detail[0] && data.invoice_detail[0].classroom) ? data.invoice_detail[0].classroom.subject.name : Constants.EMPTY_STR;
-				
-				computeDays(data.subscription, data);
+				self.invoice = {
+					  id 				: 	data.id
+					, payment_status	: 	data.payment_status
+					, subscription_id 	: 	data.subscription_id
+					, order_id 			:  	data.order.id
+					, subject_id 		:  	(data.invoice_detail[0] && data.invoice_detail[0].classroom) ? data.invoice_detail[0].classroom.subject_id : Constants.EMPTY_STR
+					, subject_name 		: 	(data.invoice_detail[0] && data.invoice_detail[0].classroom) ? data.invoice_detail[0].classroom.subject.name : Constants.EMPTY_STR
+					, date_start 		: 	data.date_start
+					, date_end 			: 	data.date_end
+				};
+
+				computeDays(data.subscription, self.invoice);
 			}
 
 			$scope.ui_unblock();
