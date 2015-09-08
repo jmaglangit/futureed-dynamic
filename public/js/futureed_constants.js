@@ -138,7 +138,7 @@ var Constants = {
 	, EDIT_BULK_SUCCESS 		: "You have successfully updated this bulk."
 	, DELETE_BULK_SUCCESS 		: "You have successfully deleted this bulk."
 
-	, ADD_DISCOUNT_SUCCESS 			: "You have successfully create a client discount."
+	, ADD_DISCOUNT_SUCCESS 			: "You have successfully created a client discount."
 	, EDIT_DISCOUNT_SUCCESS 		: "You have successfully updated a client discount."
 	, DELETE_DISCOUNT_SUCCESS 		: "You have successfully deleted a client discount."
 
@@ -147,7 +147,9 @@ var Constants = {
 	, DELETE_AREA_SUCCESS 		: "You have successfully deleted a subject area."
 
 	, UPDATE_PAYMENT_STATUS_SUCCESS 	: "You have successfully updated the payment status."
-	, DELETE_INVOICE_SUCCESS : "You have successfully deleted the selected invoice."
+	, DELETE_INVOICE_SUCCESS 	: "You have successfully deleted the selected invoice."
+	, ADD_STUDENT_SUCCESS 		: "You have successfully added the selected student."
+	, REMOVE_STUDENT_SUCCESS 	: "You have successfully removed the selected student."
 
 	, RESET_SUCCESS 		: "Your module was reset successfully."
 
@@ -186,6 +188,11 @@ var Constants = {
 	, BANK_CODE 				: "7339"
 	, BRANCH_CODE 				: "582 (SGD), 508 (USD)"
 	, SWIFT_CODE 				: "OCBCSGSG"
+
+	// attributes
+	, STATIC 				: "static"
+	, DATE 					: "date"
+	, DATE_YYYYMMDD 		: "yyyyMMdd"
 
 	/*Birthdate dropdown config*/
 
