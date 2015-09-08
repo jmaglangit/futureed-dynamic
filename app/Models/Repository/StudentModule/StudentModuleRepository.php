@@ -155,6 +155,22 @@ class StudentModuleRepository implements StudentModuleRepositoryInterface
 			->get();
 	}
 
+	/**
+	 * Delete Student Module.
+	 * @param $id
+	 */
+	public function deleteStudentModule($id){
+
+		try{
+
+			return StudentModule::find($id)->delete();
+
+		} catch(\Exception $e){
+
+			return $e->getMessage();
+		}
+	}
+
 
 
 
