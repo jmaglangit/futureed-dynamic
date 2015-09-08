@@ -1,9 +1,9 @@
 angular.module('futureed.controllers')
 	.controller('ManageParentPaymentController', ManageParentPaymentController);
 
-ManageParentPaymentController.$inject = ['$scope','$window', '$filter', 'ManageParentPaymentService', 'apiService', 'TableService', 'SearchService'];
+ManageParentPaymentController.$inject = ['$scope','$window', '$filter', 'ManageParentPaymentService', 'TableService', 'SearchService'];
 
-function ManageParentPaymentController($scope, $window, $filter, ManageParentPaymentService, apiService, TableService, SearchService) {
+function ManageParentPaymentController($scope, $window, $filter, ManageParentPaymentService, TableService, SearchService) {
 	var self = this;
 	
 	TableService(self);
@@ -16,6 +16,11 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 
 	self.setActive = function(active, id) {
 		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		self.records = {};
+		self.selected_subscription = {};
+		self.students = {};
 		self.validation = {};
 
 		self.active_add = Constants.FALSE;
@@ -24,6 +29,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 
 		switch(active){
 			case Constants.ACTIVE_ADD 	:
+
 				self.active_add = Constants.TRUE;
 				break;
 
@@ -42,8 +48,8 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 		$("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 
-	self.list = function(cond) {
-		if(self.active_list || self.active_view) {
+	self.list = function() {
+		if(self.active_list) {
 			self.listPayments();
 		}
 	}
@@ -58,6 +64,8 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 
 	self.clear = function() {
 		self.searchDefaults();
+		self.tableDefaults();
+
 		self.listPayments();
 	}
 
@@ -123,6 +131,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 					}
 				}
 			}
+
 			$scope.ui_unblock();
 		}).error(function(response){
 			self.errors = $scope.internalError();
@@ -137,7 +146,6 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 					self.errors = $scope.errorHandler(response.errors);
 				}else if(response.data){
 					self.client = response.data;
-					console.log(self.client);
 				}
 			}
 		}).error(function(response){
@@ -173,6 +181,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 					self.errors = $scope.errorHandler(response.errors);
 				}else if(response.data){
 					self.students = response.data;
+					
 					if(self.invoice.subscription_id) {
 						self.setSubscription(record);
 					}
@@ -186,27 +195,11 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 		});
 	}
 
-	// get list of subscription available
-	self.getSubscription = function(id) {
-		self.errors = Constants.FALSE;
-
-		ManageParentPaymentService.getSubscription(id).success(function(response){
-			if(angular.equals(response.status,Constants.STATUS_OK)){
-				if(response.errors) {
-					self.errors = $scope.errorHandler(response.errors);
-				}else if(response.data){
-
-					self.subscription = response.data;
-					self.getStudents(self.invoice.order_no);
-				}
-			}
-		}).error(function(response){
-			self.errors = $scope.internalError();
-		});
-	}
-
 	self.setSubscription = function(record) {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
 		self.fields = [];
+
 		var subscription = {};
 
 		angular.forEach(self.subscriptions, function(value, key) {
@@ -223,13 +216,13 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 		if(subscription.id) {
 			// set date range based on subscription
 			var start_date = (record) ? new Date(self.invoice.date_start) : new Date();
-				self.invoice.date_start = $filter('date')(start_date, 'yyyyMMdd');
+				self.invoice.date_start = $filter(Constants.DATE)(start_date, Constants.DATE_YYYYMMDD);
 				self.invoice.dis_date_start = start_date;
 
 			var end_date = new Date(start_date.getTime());
 				end_date.setDate(end_date.getDate() + parseInt(subscription.days));
 
-				self.invoice.date_end = $filter('date')(end_date, 'yyyyMMdd');
+				self.invoice.date_end = $filter(Constants.DATE)(end_date, Constants.DATE_YYYYMMDD);
 				self.invoice.dis_date_end = end_date;
 
 			self.selected_subscription = subscription;
@@ -352,33 +345,25 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 	}
 
 	self.addStudentOrderByEmail = function() {
-		self.fields = [];
-		self.no_days = Constants.EMPTY_STR;
 		self.errors = Constants.FALSE;
-		self.add.success = Constants.FALSE;
 		self.success = Constants.FALSE;
+		self.fields = [];
 
 		self.add.parent_id = self.user_id;
 		self.add.order_id = self.invoice.order_id;
-		self.add.price = (self.selected_subscription) ? parseInt(self.selected_subscription.price) : Constants.FALSE;
+		self.add.price = (self.selected_subscription.price) ? parseInt(self.selected_subscription.price) : Constants.FALSE;
 		self.add.subject_id = self.invoice.subject_id;
 
 		$scope.ui_block();
 		ManageParentPaymentService.addStudentOrderByEmail(self.add).success(function(response){
-			if(angular.equals(response.status,Constants.STATUS_OK)){
+			if(angular.equals(response.status,Constants.STATUS_OK)) {
+				self.add = {};
+
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
-					self.add = {};
 				}else if(response.data){
-					self.add = {};
-					self.student_detail = response.data;
-					self.add.success = Constants.TRUE;
-					self.getSubscriptionList();
-					if(self.invoice){
-						self.getStudents(self.invoice.order_no, 1);
-					}else{
-						self.getStudents(self.invoice_detail.order_no, 1);
-					}
+					self.success = [Constants.ADD_STUDENT_SUCCESS];
+					self.getStudents(self.invoice.order_no);
 				}
 			}
 			$scope.ui_unblock();
@@ -393,6 +378,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 		var name = self.add.name;
 		self.validation.s_loading = Constants.TRUE;
 		self.validation.s_error = Constants.FALSE;
+
 		ManageParentPaymentService.searchName(name, $scope.user.id).success(function(response){
 			self.validation.s_loading = Constants.FALSE;
 			if(angular.equals(response.status,Constants.STATUS_OK)){
@@ -429,18 +415,18 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 
 		self.add.parent_id = self.user_id;
 		self.add.order_id = self.invoice.order_id;
-		self.add.price = (self.selected_subscription) ? parseInt(self.selected_subscription.price) : Constants.FALSE;
+		self.add.price = (self.selected_subscription.price) ? parseInt(self.selected_subscription.price) : Constants.FALSE;
 		self.add.subject_id = self.invoice.subject_id;
 
 		$scope.ui_block();
 		ManageParentPaymentService.addStudentOrderByUsername(self.add).success(function(response){
-			if(angular.equals(response.status,Constants.STATUS_OK)){
+			if(angular.equals(response.status,Constants.STATUS_OK)) {
+				self.add = {};
+
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
-					self.add = {};
 				}else if(response.data){
-					self.add = {};
-					self.success = ["Successfully added a student"];
+					self.success = [Constants.ADD_STUDENT_SUCCESS];
 					
 					self.getStudents(self.invoice.order_no);
 				}
@@ -454,20 +440,31 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 	}
 
 	self.deleteInvoice = function(id) {
-		var id = (id) ? id:self.remove_invoice_id
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
+
+		var inList = Constants.TRUE;
+		if(!id) {
+			id = self.invoice.id;
+			inList = Constants.FALSE;
+		}
+
 		$scope.ui_block();
 		ManageParentPaymentService.deleteInvoice(id).success(function(response){
 			if(angular.equals(response.status,Constants.STATUS_OK)){
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				}else if(response.data){
-					self.success = Constants.TRUE;
-					self.list();
-					self.setActive('list', '', 1);
+					self.success = [Constants.DELETE_INVOICE_SUCCESS];
+					
+					if(inList) {
+						self.listPayments();
+					} else {
+						self.setActive();
+					}
 				}
 			}
+
 			$scope.ui_unblock();
 		}).error(function(response){
 			self.errors = $scope.internalError();
@@ -480,7 +477,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 		self.fields = [];
 
 		self.invoice.parent_id = self.user_id;
-		self.invoice.order_date = $filter('date')(new Date(), 'yyyyMMdd');
+		self.invoice.order_date = $filter(Constants.DATE)(new Date(), Constants.DATE_YYYYMMDD);
 
 		$scope.ui_block();
 		ManageParentPaymentService.paySubscription(self.invoice).success(function(response) {
@@ -510,7 +507,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 		self.paying = Constants.TRUE;
 
 		self.invoice.parent_id = self.user_id;
-		self.invoice.order_date = $filter('date')(new Date(), 'yyyyMMdd');
+		self.invoice.order_date = $filter(Constants.DATE)(new Date(), Constants.DATE_YYYYMMDD);
 
 		$scope.ui_block();
 		ManageParentPaymentService.paySubscription(self.invoice).success(function(response) {
@@ -551,7 +548,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 			payment.success_callback_uri = base_url + "/" + angular.lowercase(Constants.CLIENT) + "/parent/payment/success"
 			payment.fail_callback_uri = base_url + "/" + angular.lowercase(Constants.CLIENT) + "/parent/payment/fail"
 
-		ManageParentPaymentService.getPaymentUri(self.payment).success(function(response) {
+		ManageParentPaymentService.getPaymentUri(payment).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
@@ -574,7 +571,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
-					self.success = ["Successfully removed a student."];
+					self.success = [Constants.REMOVE_STUDENT_SUCCESS];
 					self.getStudents(self.invoice.order_no);
 				}
 			}
@@ -591,75 +588,22 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 		self.confirm_delete = Constants.TRUE;
 
 		$("#remove_subscription_modal_add").modal({
-	        backdrop: 'static',
+	        backdrop: Constants.STATIC,
 	        keyboard: Constants.FALSE,
 	        show    : Constants.TRUE
 	    });
 	}
 
-	self.confirmRemoveInvoice = function(id, cond) {
-		self.remove_invoice_id = id;
-		self.remove_cond = cond;
+	self.confirmDelete = function(id) {
+		self.invoice_id = id;
 		self.errors = Constants.FALSE;
 		self.confirm_delete = Constants.TRUE;
-		$("#remove_subscription_modal_invoice").modal({
-	        backdrop: 'static',
+
+		$("#invoice_modal").modal({
+	        backdrop: Constants.STATIC,
 	        keyboard: Constants.FALSE,
 	        show    : Constants.TRUE
 	    });
-	}
-	self.confirmCancelView = function(id) {
-		self.remove_student_id = id;
-		self.errors = Constants.FALSE;
-		self.confirm_delete = Constants.TRUE;
-		$("#remove_subscription_modal_view").modal({
-	        backdrop: 'static',
-	        keyboard: Constants.FALSE,
-	        show    : Constants.TRUE
-	    });
-	}
-
-	self.confirmCancel = function(id) {
-		self.remove = {};
-		self.remove.id = id;
-		self.errors = Constants.FALSE;
-		self.confirm_delete = Constants.TRUE;
-		$("#cancel_subscription_modal").modal({
-	        backdrop: 'static',
-	        keyboard: Constants.FALSE,
-	        show    : Constants.TRUE
-	    });
-	}
-
-	self.confirmCancelInvoice = function(id) {
-		self.cancel_invoice_id = id;
-		self.errors = Constants.FALSE;
-		self.confirm_delete = Constants.TRUE;
-		$("#cancel_subscription_modal_invoice").modal({
-	        backdrop: 'static',
-	        keyboard: Constants.FALSE,
-	        show    : Constants.TRUE
-	    });
-	}
-
-	self.cancelInvoice = function() {
-		self.errors = Constants.FALSE;
-		self.success = Constants.FALSE;
-
-		ManageParentPaymentService.cancelInvoice(self.cancel_invoice_id).success(function(response) {
-			if(angular.equals(response.status, Constants.STATUS_OK)) {
-				if(response.errors) {
-					self.errors = $scope.errorHandler(response.errors);
-				} else if(response.data) {
-					self.listPayments();
-					self.setActive('list', '', 1);				
-				}
-			}
-			$scope.ui_unblock();
-		}).error(function(response) {
-			self.errors = $scope.internalError();
-			$scope.ui_unblock();
-		});
 	}
 
 	self.getSubject = function() {

@@ -135,7 +135,7 @@
 						'class' => 'form-horizontal'
 						]
 						) !!}
-							<div ng-if="payment.invoice.payment_status == 'Paid'">
+							<div ng-if="payment.invoice.payment_status == futureed.PAID">
 								<h4>BILLING INVOICE</h4>
 								<div class="invoice-group">
 									<p>Ref: {! payment.client.first_name !} {! payment.client.last_name !} {! payment.invoice.id !} / {!! date('Y') !!}</p>
@@ -254,7 +254,7 @@
 								<td ng-if="payment.invoice.payment_status == futureed.PENDING">
 									<div class="row">
 										<div>
-											<a href="javascript:void(0)" ng-click="payment.confirmCancelView(student.id)"><span><i class="fa fa-trash"></i></span></a>
+											<a href="javascript:void(0)" ng-click="payment.confirmCancelAdd(student.id)"><span><i class="fa fa-trash"></i></span></a>
 										</div>
 									</div>
 								</td>
@@ -354,71 +354,73 @@
 				{!! Form::button('Delete Subscription'
 					, array(
 						'class' => 'btn btn-gold btn-semi-medium div-right'
-						, 'ng-click' => "payment.deleteInvoice(payment.invoice.id)"
-						, 'ng-if' => "payment.invoice.payment_status == 'Pending'"
+						, 'ng-click' => "payment.deleteInvoice()"
+						, 'ng-if' => "payment.invoice.payment_status == futureed.PENDING"
 					)
 				) !!}
 				{!! Form::button('View List'
 					, array(
 						'class' => 'btn btn-gold btn-semi-medium div-right'
-						, 'ng-click' => "payment.setActive('list')"
-						, 'ng-if' => "payment.invoice.payment_status != 'Pending'"
+						, 'ng-click' => "payment.setActive()"
+						, 'ng-if' => "payment.invoice.payment_status != futureed.PENDING"
 					)
 				) !!}
 				{!! Form::button('Renew Subscription'
 					, array(
 						'class' => 'btn btn-blue btn-semi-medium div-right'
 						, 'ng-click' => 'payment.renew()'
-						, 'ng-if' => "payment.invoice.payment_status == 'Paid'"
+						, 'ng-if' => "payment.invoice.payment_status == futureed.PAID"
 						, 'ng-disabled' => 'true'
 					)
 				) !!}
 				{!! Form::button('Save Subscription'
 					, array(
 						'class' => 'btn btn-blue btn-semi-medium div-right'
-						, 'ng-click' => "payment.savePayment('view')"
-						, 'ng-if' => "payment.invoice.payment_status == 'Pending'"
+						, 'ng-click' => "payment.savePayment()"
+						, 'ng-if' => "payment.invoice.payment_status == futureed.PENDING"
 					)
 				) !!}
 				{!! Form::button('Pay Subscription'
 					, array(
 						'class' => 'btn btn-blue btn-semi-medium div-right'
-						, 'ng-click' => "payment.addPayment('view')"
-						, 'ng-if' => "payment.invoice.payment_status == 'Pending'"
+						, 'ng-click' => "payment.addPayment()"
+						, 'ng-if' => "payment.invoice.payment_status == futureed.PENDING"
 					)
 				) !!}
 			</div>
 		</div>
 	</div>
 
-	<div id="remove_subscription_modal_view" ng-show="payment.confirm_delete" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-	<div class="modal-dialog modal-lg">
-	<div class="modal-content">
-	<div class="modal-header">
-	Remove Student
-	</div>
-	<div class="modal-body">
-	Are you sure you want to remove this student?
-	</div>
-	<div class="modal-footer">
-	<div class="btncon col-md-8 col-md-offset-4 pull-left">
-	{!! Form::button('Yes'
-	, array(
-	'class' => 'btn btn-blue btn-medium'
-	, 'ng-click' => "payment.removeStudent('view')"
-	, 'data-dismiss' => 'modal'
-	)
-	) !!}
+	<div id="remove_subscription_modal_add" ng-show="payment.confirm_delete" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					Remove Student
+				</div>
 
-	{!! Form::button('No'
-	, array(
-	'class' => 'btn btn-gold btn-medium'
-	, 'data-dismiss' => 'modal'
-	)
-	) !!}
-	</div>
-	</div>
-	</div>
-	</div>
+				<div class="modal-body">
+					Are you sure you want to remove this student?
+				</div>
+
+				<div class="modal-footer">
+					<div class="btncon col-md-8 col-md-offset-4 pull-left">
+						{!! Form::button('Yes'
+							, array(
+								'class' => 'btn btn-blue btn-medium'
+								, 'ng-click' => "payment.removeStudent()"
+								, 'data-dismiss' => 'modal'
+							)
+						) !!}
+
+						{!! Form::button('No'
+							, array(
+								'class' => 'btn btn-gold btn-medium'
+								, 'data-dismiss' => 'modal'
+							)
+						) !!}
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
 </div>
