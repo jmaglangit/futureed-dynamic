@@ -113,9 +113,9 @@
 										ng-change="payment.setSubscription()"
 										ng-model="payment.invoice.subscription_id"
 										ng-class="{ 'required-field' : payment.fields['subscription_id'] }">
-			                        <option value="">-- Select Subscription --</option>
-			                        <option ng-repeat="subscription in payment.subscriptions" ng-value="{! subscription.id !}">{! subscription.name!}</option>
-			                    </select>
+									<option value="">-- Select Subscription --</option>
+									<option ng-repeat="subscription in payment.subscriptions" ng-value="{! subscription.id !}">{! subscription.name!}</option>
+								</select>
 							</div>
 							<div class="col-xs-8">
 								<label class="col-xs-2 control-label">Starting</label>
@@ -178,52 +178,50 @@
 	        </fieldset>
 
 	        <fieldset class="payment-field">
-	        	<div>
-					<div class="row margin-10-bot">
-						<div class="col-xs-6 div-right">
-							<label class="col-xs-4 control-label">Subtotal</label>
-							<div class="col-xs-8">
-								<div class="input-group">
-									<span class="input-group-addon" id="basic-addon1">USD$</span>
-									<input type="text" 
-										ng-disabled="true" 
-										class="form-control" 
-										value="{! payment.invoice.sub_total | currency : '' : 2 !}" 
-										placeholder="Subtotal" />
-								</div>
+				<div class="row margin-10-bot">
+					<div class="col-xs-6 div-right">
+						<label class="col-xs-4 control-label">Subtotal</label>
+						<div class="col-xs-8">
+							<div class="input-group">
+								<span class="input-group-addon" id="basic-addon1">USD$</span>
+								<input type="text" 
+									ng-disabled="true" 
+									class="form-control" 
+									value="{! payment.invoice.sub_total | currency : '' : 2 !}" 
+									placeholder="Subtotal" />
 							</div>
 						</div>
 					</div>
-					<div class="row margin-10-bot">
-						<div class="col-xs-6 div-right">
-							<label class="col-xs-4 control-label">Discount</label>
-							<div class="col-xs-8">
-								<div class="input-group">
-									{!! Form::text('discount',''
-										, [
-											'ng-disabled' => true
-											, 'class' => 'form-control'
-											, 'ng-model' => 'payment.invoice.discount'
-											, 'placeholder' => 'Discount'
-										]
-									) !!}
-									<span class="input-group-addon" id="basic-addon1">%</span>
-								</div>
+				</div>
+				<div class="row margin-10-bot">
+					<div class="col-xs-6 div-right">
+						<label class="col-xs-4 control-label">Discount</label>
+						<div class="col-xs-8">
+							<div class="input-group">
+								{!! Form::text('discount',''
+									, [
+										'ng-disabled' => true
+										, 'class' => 'form-control'
+										, 'ng-model' => 'payment.invoice.discount'
+										, 'placeholder' => 'Discount'
+									]
+								) !!}
+								<span class="input-group-addon" id="basic-addon1">%</span>
 							</div>
 						</div>
 					</div>
-					<div class="row margin-10-bot">
-						<div class="col-xs-6 div-right">
-							<label class="col-xs-4 control-label">Total</label>
-							<div class="col-xs-8">
-								<div class="input-group">
-									<span class="input-group-addon" id="basic-addon1">USD$</span>
-									<input type="text" 
-										ng-disabled="true" 
-										class="form-control" 
-										value="{! payment.invoice.total_amount | currency : '' : 2 !}" 
-										placeholder="Total" />
-								</div>
+				</div>
+				<div class="row margin-10-bot">
+					<div class="col-xs-6 div-right">
+						<label class="col-xs-4 control-label">Total</label>
+						<div class="col-xs-8">
+							<div class="input-group">
+								<span class="input-group-addon" id="basic-addon1">USD$</span>
+								<input type="text" 
+									ng-disabled="true" 
+									class="form-control" 
+									value="{! payment.invoice.total_amount | currency : '' : 2 !}" 
+									placeholder="Total" />
 							</div>
 						</div>
 					</div>

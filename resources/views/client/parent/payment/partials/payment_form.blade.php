@@ -14,8 +14,10 @@
 	        </div>
 
 	        <div class="alert alert-success" ng-if="payment.success">
-	        	<p>Successfully deleted Invoice</p>
-	        </div>
+				<p ng-repeat="success in payment.success track by $index" > 
+					{! success !}
+				</p>
+			</div>
 		</div>
 	</div>
 
@@ -115,21 +117,21 @@
 			    </thead>
 
 		        <tbody>
-		        <tr ng-repeat="key in payment.records">
-		            <td class="width-200">{! key.order_no !}</td>
-		            <td class="width-200">{! key.subscription.name !}</td>
-		            <td>{! key.date_start | ddMMyy !}</td>
-		            <td>{! key.date_end | ddMMyy !}</td>
-		            <td>{! key.seats_total !}</td>
-		            <td>{! key.payment_status !}</td>
-		            <td>{! key.total_amount !}</td>
+		        <tr ng-repeat="invoice in payment.records">
+		            <td class="width-200">{! invoice.order_no !}</td>
+		            <td class="width-200">{! invoice.subscription.name !}</td>
+		            <td>{! invoice.date_start | ddMMyy !}</td>
+		            <td>{! invoice.date_end | ddMMyy !}</td>
+		            <td>{! invoice.seats_total !}</td>
+		            <td>{! invoice.payment_status !}</td>
+		            <td>{! invoice.total_amount !}</td>
 		            <td>
 						<div class="row">
 							<div class="col-xs-6">
-								<a href="" ng-click="payment.setActive('view', key.id)" title="view"><span><i class="fa fa-eye"></i></span></a>
+								<a href="" ng-click="payment.setActive(futureed.ACTIVE_VIEW, invoice.id)" title="view"><span><i class="fa fa-eye"></i></span></a>
 							</div>
 							<div class="col-xs-6">
-								<a href="" ng-if="key.payment_status == 'Pending' || key.payment_status == 'Cancelled'" ng-click="payment.confirmRemoveInvoice(key.id, 'list')" title="delete"><span><i class="fa fa-trash"></i></span></a>
+								<a href="" ng-if="invoice.payment_status == 'Pending' || invoice.payment_status == 'Cancelled'" ng-click="payment.confirmRemoveInvoice(key.id, 'list')" title="delete"><span><i class="fa fa-trash"></i></span></a>
 							</div>
 						</div>
 		            </td>
@@ -140,7 +142,7 @@
 		        	</td>
 		        </tr>
 		        <tr class="odd" ng-if="payment.table.loading">
-		        	<td valign="top" colspan="8" class="dataTables_empty">
+		        	<td valign="top" colspan="8">
 		        		Loading...
 		        	</td>
 		        </tr>
