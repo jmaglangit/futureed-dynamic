@@ -58,6 +58,13 @@ function ManageParentPaymentService($http){
 		})
 	}
 
+	managePaymentApi.getBulkDiscount = function(min_seats) {
+		return $http({
+			method : Constants.METHOD_GET
+			, url  : paymentApiUrl + 'volume-discount/rounded-off-discount/' + min_seats
+		});
+	}
+
 	managePaymentApi.getOrderNo = function(id) {
 		return $http({
 			method 	: Constants.METHOD_GET
