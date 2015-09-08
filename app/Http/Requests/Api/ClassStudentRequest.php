@@ -1,5 +1,6 @@
 <?php namespace FutureEd\Http\Requests\Api;
 
+use FutureEd\Models\Core\ClassStudent;
 use FutureEd\Http\Requests\Api\ApiRequest;
 
 class ClassStudentRequest extends ApiRequest {
@@ -69,7 +70,14 @@ class ClassStudentRequest extends ApiRequest {
 				}
 				break;
 
-			case 'PUT':return['date_removed' => 'required|date_format:Ymd'];
+			case 'PUT':
+
+				$class_student_id = $this->__get('id');
+
+				$class_student = ClassStudent::find($class_student_id);
+
+				return['date_removed' => 'required|date_format:Ymd|after:'.$class_student->date_started.'|before:Tomorrow'];
+			
         }
 
 
