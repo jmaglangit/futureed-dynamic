@@ -192,7 +192,7 @@ class UserController extends ApiController{
 
 						$admin_id = $this->admin->getAdminId($return['user_id']);
 
-						$admin_detail = $this->admin->getAdmin($admin_id);
+						$admin_detail = $this->admin->getAdminDetail($admin_id);
 
 						$subject = str_replace('{user}', $admin_detail->admin_role, $subject);
 
