@@ -124,7 +124,7 @@
 		            <td>{! invoice.date_end | ddMMyy !}</td>
 		            <td>{! invoice.seats_total !}</td>
 		            <td>{! invoice.payment_status !}</td>
-		            <td>{! invoice.total_amount !}</td>
+		            <td>{! invoice.total_amount | currency : 'USD$ ' : 2 !}</td>
 		            <td>
 						<div class="row">
 							<div class="col-xs-6">
