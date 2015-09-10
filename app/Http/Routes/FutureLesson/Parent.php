@@ -93,23 +93,6 @@
 				]);
 		});
 
-		Routes::group(['prefix' => 'invoice'], function() {
-			$manage_parent_invoice_controller = 'FutureLesson\Client\ManageParentInvoiceController';
-
-			Routes::get('/', [
-				'as' => 'client.parent.invoice.index',
-				'uses' => $manage_parent_invoice_controller . '@index'
-			]);
-
-			Routes::group(['prefix' => 'partials'], function(){
-				$manage_parent_invoice_controller = 'FutureLesson\Client\ManageParentInvoiceController';
-
-				Routes::get('invoice_form', [
-					'as' => 'client.parent.invoice.partials.invoice_form',
-					'uses' => $manage_parent_invoice_controller . '@invoice_form'
-				]);
-			});
-		});
 		Routes::group(['prefix' => 'module'], function() {
 			$manage_parent_module_controller = 'FutureLesson\Client\ManageParentModuleController';
 
