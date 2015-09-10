@@ -26,8 +26,8 @@ class StudentTipRequest extends ApiRequest {
 			case 'POST':
 
 				return [
-					'title' => 'required|string',
-					'content' => 'required|string',
+					'title' => 'required|string|max:128',
+					'content' => 'required|string|max:128',
 					'student_id' => 'required|integer',
 				];
 				break;

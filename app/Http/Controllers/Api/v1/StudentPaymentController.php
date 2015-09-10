@@ -71,7 +71,15 @@ class StudentPaymentController extends ApiController {
 		}
 		//get the last inputted order
 		$prev_order = $this->order->getNextOrderNo();
-		$next_order_id = ++$prev_order['id'];
+
+		if(!$prev_order){
+
+			$next_order_id = 1;
+		}else{
+
+			$next_order_id = ++$prev_order['id'];
+		}
+
 		$order['order_no'] = $this->invoice_services->createOrderNo($order['student_id'],$next_order_id);
 
 		//insert data into order
