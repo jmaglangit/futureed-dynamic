@@ -180,39 +180,42 @@ var Constants = {
 	, BILL_STREET				: "545 Orchard Road, #03-24"
 	, BILL_ADDRESS				: "Far East Shopping Centre"
 	, BILL_COUNTRY				: "Singapore 238882"
-	, CC_NAME 					: "Futureed Pte Ltd"
+	, CC_NAME					: "Futureed Pte Ltd"
 	, BANK_NAME					: "OCBC"
-	, BANK_ACCT_NO_SGD 			: "582-066825 -001 SGD"
-	, BANK_ACCT_NO_USD 			: "508-011715-301 USD"
-	, BANK_ADDRESS 				: "65 Chulia Street, #01-00, OCBC Centre, Singapore 049513"
-	, BANK_CODE 				: "7339"
-	, BRANCH_CODE 				: "582 (SGD), 508 (USD)"
-	, SWIFT_CODE 				: "OCBCSGSG"
+	, BANK_ACCT_NO_SGD			: "582-066825 -001 SGD"
+	, BANK_ACCT_NO_USD			: "508-011715-301 USD"
+	, BANK_ADDRESS				: "65 Chulia Street, #01-00, OCBC Centre, Singapore 049513"
+	, BANK_CODE					: "7339"
+	, BRANCH_CODE				: "582 (SGD), 508 (USD)"
+	, SWIFT_CODE				: "OCBCSGSG"
 
 	// attributes
-	, STATIC 				: "static"
-	, DATE 					: "date"
-	, DATE_YYYYMMDD 		: "yyyyMMdd"
+	, STATIC					: "static"
+	, DATE						: "date"
+	, DATE_YYYYMMDD				: "yyyyMMdd"
+
+	, ENABLED					: "Enabled"
+	, DISABLED					: "Disabled"
 
 	/*Birthdate dropdown config*/
 
-	, MIN_AGE 			: 12
-	, MAX_AGE			: 99
-	, AGE_RANGE			: 14
+	, MIN_AGE					: 12
+	, MAX_AGE					: 99
+	, AGE_RANGE					: 14
 
-	, URL_FORGOT_PASSWORD	: function(user_type) {
+	, URL_FORGOT_PASSWORD		: function(user_type) {
 		return '/' + user_type + '/password/forgot';
 	}
 
-	, URL_REGISTRATION		: function(user_type) {
+	, URL_REGISTRATION			: function(user_type) {
 		return '/' + user_type + '/register/confirm';
 	}
 
-	, URL_CHANGE_EMAIL		: function(user_type) {
+	, URL_CHANGE_EMAIL			: function(user_type) {
 		return '/' + user_type + '/email/confirm';
 	}
 
-	, URL_USER_CREATION		: function(user_type) {
+	, URL_USER_CREATION			: function(user_type) {
 		return '/' + user_type + '/user/confirm';
 	}
 }

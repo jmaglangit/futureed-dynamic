@@ -73,7 +73,7 @@
 							<label class="control-label label-side">Description</label>
 							{!! Form::textarea('description', ''
 				                , array(
-				                    'class' => 'form-control sidebar-input'
+				                    'class' => 'form-control sidebar-input disabled-textarea'
 				                    , 'placeholder' => 'Description' 
 				                    , 'ng-model' => 'class.tips.content'
 				                    , 'autocomplete' => 'off')
@@ -144,7 +144,7 @@
 	<div class="side-header">
 		<img class="help-img-header" src="/images/class-student/sidebar_header_helprequest.png" alt="">
 	</div>
-	<div id="help_request_form">
+	<div id="help_request_form" class="side-container">
 		<div class="side-btn-container row" ng-if="!class.add_help && !class.help.success">
 			<div class="col-xs-12 submit-btn-help">
 				{!! Form::open(
@@ -216,7 +216,7 @@
 							<label class="control-label label-side">Description</label>
 								{!! Form::textarea('content', ''
 					                , array(
-					                    'class' => 'form-control sidebar-input'
+					                    'class' => 'form-control sidebar-input disabled-textarea'
 					                    , 'placeholder' => 'Description' 
 					                    , 'ng-model' => 'class.help.content'
 					                    , 'autocomplete' => 'off')
@@ -283,8 +283,8 @@
 			</div>
 		{!! Form::close() !!}
 	</div>
-</div>
-
-<div class="side-btn-in" ng-class="{ 'side-btn-out' : class.bool_change_class }">
-	<img src="/images/class-student/btn-slide.png" ng-class="{'flip-180' : !class.bool_change_class }" ng-click="class.click()">
+	
+	<div class="side-btn-in" ng-class="{ 'side-btn-out' : class.bool_change_class }">
+		<img src="/images/class-student/btn-slide.png" ng-class="{'flip-180' : !class.bool_change_class }" ng-click="class.click()">
+	</div>
 </div>
