@@ -240,7 +240,7 @@ class ParentStudentController extends ApiController {
         foreach($order_details as $stud){
 
             $check_class_student = $this->class_student->getClassStudent($stud->student->id);
-            if(is_null($check_class_student)){
+            if(!is_null($check_class_student)){
                 $class_student['student_id'] = $stud->student->id;
                 $class_student['class_id'] = $classroom_result->id;
                 $class_student['status'] = 'Enabled';
