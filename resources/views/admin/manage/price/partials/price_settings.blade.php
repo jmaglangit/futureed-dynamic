@@ -202,7 +202,7 @@
 	            </td>
 	        </tr>
 	        <tr class="odd" ng-if="!sale.price.length">
-	        	<td valign="top" colspan="4" class="dataTables_empty">
+	        	<td valign="top" colspan="4">
 	        		No records found
 	        	</td>
 	        </tr>
