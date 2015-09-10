@@ -96,7 +96,6 @@
 		{!! Html::script('/js/datetimepicker.js') !!}
 		{!! Html::script('/js/ui-bootstrap-tpls-0.13.0.min.js') !!}
 		{!! Html::script('/js/common/filters.js') !!}
-		{!! Html::script('/js/angular-drag-and-drop-lists.min.js')!!}
 
 		{!! Html::script('/js/ng-file-upload-shim.min.js')!!}
 		{!! Html::script('/js/ng-file-upload.min.js')!!}
