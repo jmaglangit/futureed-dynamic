@@ -27,7 +27,7 @@ class AdminTipRequest extends ApiRequest {
 
 				return [
 					'title' => 'required|string|max:128|min:2',
-					'content' => 'required|string',
+					'content' => 'required|string|max:128',
 					'link_type' => 'required|alpha|in:General,Question,Content',
 					'status' => 'required|alpha|in:Enabled,Disabled'
 				];
