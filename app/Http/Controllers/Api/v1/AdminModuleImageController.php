@@ -18,7 +18,7 @@ class AdminModuleImageController extends ApiController {
 	public function store(AdminModuleImageRequest $request)
 	{
 
-		$input = $request->get('file');
+		$input = $request->only('file');
 
 		$now = Carbon::now()->timestamp;
 		$return = NULL;
