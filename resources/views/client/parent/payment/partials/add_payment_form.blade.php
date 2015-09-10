@@ -163,12 +163,12 @@
 								</td>
 							</tr>
 							<tr class="odd" ng-if="!payment.students.length && !payment.table.loading">
-					        	<td valign="top" colspan="4" class="dataTables_empty">
+					        	<td valign="top" colspan="4">
 					        		No records found
 					        	</td>
 					        </tr>
 					        <tr class="odd" ng-if="payment.table.loading">
-					        	<td valign="top" colspan="4" class="dataTables_empty">
+					        	<td valign="top" colspan="4">
 					        		Loading...
 					        	</td>
 					        </tr>

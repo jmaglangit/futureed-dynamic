@@ -124,12 +124,12 @@
 				            </td>
 				        </tr>
 				        <tr class="odd" ng-if="!subject.subjects.length && !subject.table.loading">
-				        	<td valign="top" colspan="4" class="dataTables_empty">
+				        	<td valign="top" colspan="4">
 				        		No data available in table
 				        	</td>
 				        </tr>
 				        <tr class="odd" ng-if="subject.table.loading">
-				        	<td valign="top" colspan="4" class="dataTables_empty">
+				        	<td valign="top" colspan="4">
 				        		Loading...
 				        	</td>
 				        </tr>

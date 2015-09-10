@@ -175,7 +175,7 @@
 		            </td>
 		        </tr>
 		        <tr class="odd" ng-if="!sale.bulk.length">
-			        	<td valign="top" colspan="4" class="dataTables_empty">
+			        	<td valign="top" colspan="4">
 			        		No records found
 			        	</td>
 			        </tr>
