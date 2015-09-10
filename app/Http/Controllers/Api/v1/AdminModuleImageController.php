@@ -15,7 +15,7 @@ class AdminModuleImageController extends ApiController {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(AdminModuleImageRequest $request)
 	{
 
 		$input = Input::get('file');
