@@ -144,12 +144,12 @@
 		            </td>
 		        </tr>
 		        <tr class="odd" ng-if="!admin.data.length && !admin.table.loading">
-		        	<td valign="top" colspan="4" class="dataTables_empty">
+		        	<td valign="top" colspan="4">
 		        		No records found
 		        	</td>
 		        </tr>
 		        <tr class="odd" ng-if="admin.table.loading">
-		        	<td valign="top" colspan="4" class="dataTables_empty">
+		        	<td valign="top" colspan="4">
 		        		Loading...
 		        	</td>
 		        </tr>

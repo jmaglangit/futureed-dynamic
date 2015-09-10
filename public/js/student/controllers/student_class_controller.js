@@ -146,13 +146,14 @@ function StudentClassController($scope, $filter, $window, StudentClassService, S
 		self.search = {};
 		self.search.order_by_date = Constants.TRUE;
 		self.search.request_status = Constants.ACCEPTED;
+		self.search.class_id = (self.current_class) ? self.current_class : Constants.EMPTY_STR;
 
 		self.table = {};
 		self.table.size = 3;
 		self.table.offset = Constants.FALSE;
 
 		$scope.div_block("help_request_form");
-		StudentClassService.listHelpRequests($scope.user.class_id.class_id, self.search, self.table).success(function(response) {
+		StudentClassService.listHelpRequests(self.search, self.table).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					$scope.errorHandler(response.errors);

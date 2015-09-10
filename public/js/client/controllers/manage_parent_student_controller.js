@@ -1,9 +1,9 @@
 angular.module('futureed.controllers')
 	.controller('ManageParentStudentController', ManageParentStudentController);
 
-ManageParentStudentController.$inject = ['$scope', 'ManageParentStudentService', 'apiService', 'TableService', 'SearchService', 'ValidationService'];
+ManageParentStudentController.$inject = ['$scope', '$filter', 'ManageParentStudentService', 'apiService', 'TableService', 'SearchService', 'ValidationService'];
 
-function ManageParentStudentController($scope, ManageParentStudentService, apiService, TableService, SearchService, ValidationService) {
+function ManageParentStudentController($scope, $filter, ManageParentStudentService, apiService, TableService, SearchService, ValidationService) {
 	var self = this;
 
 	self.students = [{}];
@@ -118,6 +118,8 @@ function ManageParentStudentController($scope, ManageParentStudentService, apiSe
 
 	self.clear = function() {
 		self.searchDefaults();
+		self.tableDefaults();
+		
 		self.list();
 	}
 
@@ -153,7 +155,7 @@ function ManageParentStudentController($scope, ManageParentStudentService, apiSe
 		});
 	}
 
-	self.addExist = function() {
+	self.addExist = function(event) {
 		self.errors = Constants.FALSE;
 
 		$scope.ui_block();
@@ -165,11 +167,15 @@ function ManageParentStudentController($scope, ManageParentStudentService, apiSe
 					self.setActive('invite');
 				}
 			}
+
 			$scope.ui_unblock();
 		}).error(function(response){
-			$scope.internalError();
+			self.errors = $scope.internalError();
 			$scope.ui_unblock();
-		})
+		});
+
+		event = getEvent(event);
+		event.preventDefault();
 	}
 
 	self.submitCode = function() {
@@ -192,22 +198,19 @@ function ManageParentStudentController($scope, ManageParentStudentService, apiSe
 			$scope.ui_unblock();
 		});
 	}
-	self.addStudent = function() {
+
+	self.addStudent = function(event) {
 		self.fields = [];
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
 		self.reg.client_id = $scope.user.id;
 
-		var bdate = $("#add_student_form #birth_date").val();
-		var day = $("#add_student_form .day").val();
-		var month = $("#add_student_form .month").val();
-		var year = $("#add_student_form .year").val();
+		var bdate = $("input#birth_date").val();
+		self.reg.birth_date = $filter(Constants.DATE)(new Date(bdate), Constants.DATE_YYYYMMDD)
 
-		self.reg.birth_date = year + month + day;
+		var base_url = $("#base_url_form input[name='base_url']").val();
+		self.reg.callback_uri = base_url + Constants.URL_REGISTRATION(angular.lowercase(Constants.STUDENT));
 
-
-		self.base_url = $("#base_url_form input[name='base_url']").val();
-		self.reg.callback_uri = self.base_url + Constants.URL_REGISTRATION(angular.lowercase(Constants.STUDENT));
 		$scope.ui_block();
 		ManageParentStudentService.addStudent(self.reg).success(function(response){
 			if(angular.equals(response.status,Constants.STATUS_OK)){
@@ -228,6 +231,10 @@ function ManageParentStudentController($scope, ManageParentStudentService, apiSe
 			$scope.internalError();
 			$scope.ui_unblock();
 		});
+
+		event = getEvent(event);
+		event.preventDefault();
+
 		$("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 

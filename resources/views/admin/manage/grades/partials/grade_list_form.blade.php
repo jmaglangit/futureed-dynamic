@@ -124,12 +124,12 @@
 		            </td>
 		        </tr>
 		        <tr class="odd" ng-if="!grade.grades.length && !grade.table.loading">
-			        	<td valign="top" colspan="5" class="dataTables_empty">
+			        	<td valign="top" colspan="5">
 			        		No records found
 			        	</td>
 			        </tr>
 			        <tr class="odd" ng-if="grade.table.loading">
-			        	<td valign="top" colspan="5" class="dataTables_empty">
+			        	<td valign="top" colspan="5">
 			        		Loading...
 			        	</td>
 			        </tr>

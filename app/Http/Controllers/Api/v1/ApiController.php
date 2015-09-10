@@ -4,6 +4,7 @@ use FutureEd\Http\Controllers\Api\Traits\AccessTokenTrait;
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
+use FutureEd\Models\Repository\Admin\AdminRepositoryInterface;
 use FutureEd\Models\Repository\ClientDiscount\ClientDiscountRepositoryInterface;
 use FutureEd\Models\Repository\Country\CountryRepositoryInterface;
 use FutureEd\Models\Repository\School\SchoolRepositoryInterface;
@@ -39,6 +40,7 @@ class ApiController extends Controller {
     private $status_code = Response::HTTP_OK;
     private $header = [];
 
+	//TODO: To be removed.
 	public function __construct(
 		UserServices $user,
 		StudentServices $student,
@@ -50,7 +52,7 @@ class ApiController extends Controller {
 		GradeServices $grade,
 		AvatarServices $avatar,
 		CodeGeneratorServices $code,
-		AdminServices $admin,
+		AdminRepositoryInterface $admin,
 		PasswordServices $password,
 		ValidatorRepositoryInterface $validatorRepositoryInterface,
 		SchoolRepositoryInterface $schoolRepositoryInterface,

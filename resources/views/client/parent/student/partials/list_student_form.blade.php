@@ -16,36 +16,57 @@
             </p>
         </div>
 	</div>
-	<div class="col-xs-12">
-		<div class="title-mid mid-container">
+
+	<div class="col-xs-12 search-container">
+		<div class="title-mid">
 			Search
 		</div>
-	</div>
-	<div class="col-xs-12 search-container">
-		<div class="form-search">
-			{!! Form::open(
-					[
-						'id' => 'teacher_search',
-						'class' => 'form-horizontal'
-					]
-			) !!}
-			<div class="form-group">
-				<label class="col-xs-2 control-label">Name</label>
-				<div class="col-xs-5">
-					{!! Form::text('search_name', '',['class' => 'form-control', 'ng-model' => 'student.search.name', 'placeholder' => 'Name']) !!}
+
+		{!! Form::open(
+				[
+					'id' => 'teacher_search',
+					'class' => 'form-horizontal'
+				]
+		) !!}
+			<div class="form-search">
+				<div class="form-group">
+					<div class="col-xs-4">
+						{!! Form::text('search_name', ''
+							, array(
+								'class' => 'form-control'
+								, 'ng-model' => 'student.search.name'
+								, 'placeholder' => 'Name'
+							)
+						) !!}
+					</div>
+					<div class="col-xs-4">
+						{!! Form::text('search_email', ''
+							, array(
+								'class' => 'form-control'
+								, 'ng-model' => 'student.search.email'
+								, 'placeholder' => 'Email'
+							)
+						) !!}
+					</div>
+					<div class="col-xs-2">
+						{!! Form::button('Search'
+							, array(
+								'class' => 'btn btn-blue'
+								, 'ng-click' => 'student.searchFnc($event)'
+							)
+						) !!}
+					</div>
+					<div class="col-xs-2">
+						{!! Form::button('Clear'
+							, array(
+								'class' => 'btn btn-gold'
+								, 'ng-click' => 'student.clear()'
+							)
+						) !!}
+					</div>
 				</div>
 			</div>
-			<div class="form-group">
-				<label class="col-xs-2 control-label">Email</label>
-				<div class="col-xs-5">
-					{!! Form::text('search_email', '',['class' => 'form-control', 'ng-model' => 'student.search.email', 'placeholder' => 'Email']) !!}
-				</div>
-				<div class="btn-container col-xs-5">
-					<button class="btn btn-blue btn-medium" type="button" ng-click="student.getStudentlist()">Search</button>
-					<button class="btn btn-gold btn-medium" type="button" ng-click="student.clear()">Clear</button>
-				</div>
-			</div>
-		</div>
+		{!! Form::close() !!}
 	</div>
 	<div class="clearfix"></div>
 	<button class="btn btn-blue btn-small margin-0-30" ng-click="student.setActive('add')">
@@ -105,12 +126,12 @@
 		            </td>
 		        </tr>
 		        <tr class="odd" ng-if="!student.students.length && !student.table.loading">
-		        	<td valign="top" colspan="7" class="dataTables_empty">
+		        	<td valign="top" colspan="7">
 		        		No records found
 		        	</td>
 		        </tr>
 		        <tr class="odd" ng-if="student.table.loading">
-		        	<td valign="top" colspan="7" class="dataTables_empty">
+		        	<td valign="top" colspan="7">
 		        		Loading...
 		        	</td>
 		        </tr>

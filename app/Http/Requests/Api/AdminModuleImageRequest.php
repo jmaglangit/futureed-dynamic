@@ -20,7 +20,7 @@ class AdminModuleImageRequest extends ApiRequest {
 		switch($this->method()){
 			case 'POST':
 				return [
-					'file' => 'required|mimes:jpeg,jpg,png|max:2000'
+					'file' => 'mimes:jpeg,jpg,png|max:2000'
 				];
 				break;
 		}

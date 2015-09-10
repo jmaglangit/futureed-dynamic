@@ -137,7 +137,7 @@
 		            </td>
 		        </tr>
 		        <tr class="odd" ng-if="!payment.records.length && !payment.table.loading">
-		        	<td valign="top" colspan="8" class="dataTables_empty">
+		        	<td valign="top" colspan="8">
 		        		No records found
 		        	</td>
 		        </tr>
