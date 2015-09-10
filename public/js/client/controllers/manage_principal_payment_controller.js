@@ -580,14 +580,14 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 					var data = response.data;
 
 					self.classroom = {
-						  id 				: data.id
-						, name 				: data.name
-						, grade_id 			: data.grade_id
-						, client_name 		: data.client.user.name
-						, client_id 		: data.client_id
+						id					: data.id
+						, name				: data.name
+						, grade_id			: data.grade_id
+						, client_name		: data.client.user.name
+						, client_id			: data.client_id
 						, seats_total		: data.seats_total
 						, subject_id		: data.subject_id
-						, update 			: Constants.TRUE
+						, update			: Constants.TRUE
 					}
 					
 					$("html, body").animate({ scrollTop: 0 }, "slow");
