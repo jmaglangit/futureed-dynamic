@@ -6,11 +6,10 @@ ManagePrincipalPaymentController.$inject = ['$scope'
 	, '$filter'
 	, 'managePrincipalPaymentService'
 	, 'clientProfileApiService'
-	, 'apiService'
 	, 'TableService'
 	, 'SearchService'];
 
-function ManagePrincipalPaymentController($scope, $window, $filter, managePrincipalPaymentService, clientProfileApiService, apiService, TableService, SearchService) {
+function ManagePrincipalPaymentController($scope, $window, $filter, managePrincipalPaymentService, clientProfileApiService, TableService, SearchService) {
 	var self = this;
 
 	TableService(self);
@@ -166,7 +165,7 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 	self.addPayment = function(save) {
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
-		self.invoice.invoice_date = $filter('date')(new Date(), 'yyyyMMdd');
+		self.invoice.invoice_date = $filter(Constants.DATE)(new Date(), Constants.DATE_YYYYMMDD);
 		self.invoice.invoice_id = self.invoice.id;
 		
 		$scope.ui_block();
@@ -249,7 +248,7 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 	self.addInvoice = function() {
 		self.invoice.client_id = $scope.user.id;
 		self.invoice.client_name = $scope.user.first_name + " " + $scope.user.last_name;
-		self.invoice.payment_status = "Pending";
+		self.invoice.payment_status = Constants.PENDING;
 
 		managePrincipalPaymentService.addInvoice(self.invoice).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
@@ -326,12 +325,11 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 	self.addClassroom = function() {
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
-
 		self.fields = [];
+
 		self.classroom.seats_taken = Constants.FALSE;
 		self.classroom.order_no = self.invoice.order_no;
-		self.classroom.subject_id = $('#add_payment_form #subject_id').val();
-		self.classroom.status = "Enabled";
+		self.classroom.status = Constants.ENABLED;
 
 		$scope.ui_block();
 		managePrincipalPaymentService.addClassroom(self.classroom).success(function(response) {
@@ -427,13 +425,13 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 
 					if(subscription.price) {
 						var start_date = new Date();
-							self.invoice.date_start = $filter('date')(start_date, 'yyyyMMdd');
+							self.invoice.date_start = $filter(Constants.DATE)(start_date, Constants.DATE_YYYYMMDD);
 							self.invoice.dis_date_start = start_date;
 
 						var end_date = new Date(start_date.getTime());
 							end_date.setDate(end_date.getDate() + parseInt(subscription.days));
 
-							self.invoice.date_end = $filter('date')(end_date, 'yyyyMMdd');
+							self.invoice.date_end = $filter(Constants.DATE)(end_date, Constants.DATE_YYYYMMDD);
 							self.invoice.dis_date_end = end_date;
 
 						angular.forEach(self.classrooms, function(value, key) {
@@ -581,15 +579,17 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 				} else if(response.data) {
 					var data = response.data;
 
-					self.classroom = {};
-					self.classroom.id = data.id;
-					self.classroom.name = data.name;
-					self.classroom.grade_id = data.grade_id;
-					self.classroom.client_name = data.client.user.name;
-					self.classroom.client_id = data.client_id;
-					self.classroom.seats_total = data.seats_total;
-					self.classroom.update = Constants.TRUE;
-
+					self.classroom = {
+						  id 				: data.id
+						, name 				: data.name
+						, grade_id 			: data.grade_id
+						, client_name 		: data.client.user.name
+						, client_id 		: data.client_id
+						, seats_total		: data.seats_total
+						, subject_id		: data.subject_id
+						, update 			: Constants.TRUE
+					}
+					
 					$("html, body").animate({ scrollTop: 0 }, "slow");
 				}
 			}
@@ -672,9 +672,5 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
-	}
-
-	self.subjectSelected = function() {
-		self.choose_subject = Constants.TRUE;
 	}
 }

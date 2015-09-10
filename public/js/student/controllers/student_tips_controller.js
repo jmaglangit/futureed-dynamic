@@ -1,9 +1,9 @@
 angular.module('futureed.controllers')
 	.controller('TipsController', TipsController);
 
-TipsController.$inject = ['$scope', 'apiService', 'StudentTipsService', 'TableService', 'SearchService'];
+TipsController.$inject = ['$scope', 'StudentTipsService', 'TableService', 'SearchService'];
 
-function TipsController($scope, apiService, StudentTipsService, TableService, SearchService) {
+function TipsController($scope, StudentTipsService, TableService, SearchService) {
 	var self = this;
 
 	TableService(self);
