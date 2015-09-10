@@ -5,6 +5,7 @@ use FutureEd\Http\Controllers\Api\v1\ClientController;
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
+use FutureEd\Models\Repository\Admin\AdminRepositoryInterface;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
@@ -102,7 +103,7 @@ class AdminPasswordController extends ApiController {
        $user_details = $this->user->getUserDetail($return->user_id,$user_type);
 
 	   $admin_id = $this->admin->getAdminId($user_details->id);
-	   $admin = $this->admin->getAdmin($admin_id);
+	   $admin = $this->admin->getAdminDetail($admin_id);
 
 
        //send email to admin user

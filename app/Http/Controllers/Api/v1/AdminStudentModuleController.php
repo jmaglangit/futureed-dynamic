@@ -39,34 +39,53 @@ class AdminStudentModuleController extends ApiController {
 	 */
 	public function resetStudentModule($id)
 	{
-		$data['module_status'] = config('futureed.module_status_ongoing');
-		$data['date_start'] = Carbon::now();
-		$data['date_end'] = Carbon::now();
-		$data['last_viewed_content_id'] = 0;
-		$data['progress'] = 0;
-		$data['total_time'] = 0;
-		$data['question_counter'] = 0;
-		$data['wrong_counter'] = 0;
-		$data['correct_counter'] = 0;
-		$data['running_points'] = 0;
-		$data['points_earned'] = 0;
-		$data['last_answered_question_id'] = 0;
 
-		$this->student_module->updateStudentModule($id,$data);
-		$student_module = $this->student_module->viewStudentModule($id);
+		$old_student_module = $this->student_module->getStudentModule($id);
 
-		//get student details
-		$student_detail = $this->student->viewStudent($student_module['student_id']);
+		if($old_student_module){
 
-		//get module detatils
-		$module_detail = $this->module->viewModule($student_module['module_id']);
-		$email = $student_detail['user'];
-		$email['module_name'] = $module_detail['name'];
+			$data = [
+				'class_id' => $old_student_module->class_id,
+				'student_id' => $old_student_module->student_id,
+				'subject_id' => $old_student_module->subject_id,
+				'module_id' => $old_student_module->module_id,
+				'module_status' => config('futureed.module_status_ongoing')
+			];
 
-		//send email to student
-		$this->mail->resetStudentModule($email);
+			//create new data of old data
+			$new_student_module = $this->student_module->addStudentModule($data);
 
-		return $this->respondWithData($this->student_module->viewStudentModule($id));
+			//delete old
+			if(!$this->student_module->deleteStudentModule($id)){
+
+				return $this->respondErrorMessage(2057);
+			}
+
+			$student_module = $this->student_module->viewStudentModule($new_student_module->id);
+
+			//get student details
+			$student_detail = $this->student->viewStudent($student_module['student_id']);
+
+			//get module detatils
+			$module_detail = $this->module->viewModule($student_module['module_id']);
+			$email = $student_detail['user'];
+			$email['module_name'] = $module_detail['name'];
+
+			//send email to student
+			$this->mail->resetStudentModule($email);
+
+
+			return $this->respondWithData($this->student_module->viewStudentModule($new_student_module->id));
+
+		}else {
+
+			return $this->respondErrorMessage(2120);
+		}
+
+
+
+
+
 	}
 
 }

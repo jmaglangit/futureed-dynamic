@@ -21,7 +21,7 @@ Routes::group(['prefix' => '/admin'], function()
 
         Routes::post('change-password/{id}',[
             'uses' => 'Api\v1\AdminPasswordController@changePassword',
-            'as' => 'api.v1.admin.password'
+            'as' => 'api.v1.admin.change-password'
         ]);
 
 		Routes::post('/change-email/{id}',[

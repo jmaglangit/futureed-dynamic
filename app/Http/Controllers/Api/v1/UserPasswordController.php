@@ -109,7 +109,7 @@ class UserPasswordController extends UserController {
 
 						$admin_id = $this->admin->getAdminId($return['user_id']);
 
-						$admin = $this->admin->getAdmin($admin_id);
+						$admin = $this->admin->getAdminDetail($admin_id);
 
 						//update subject
 						$subject = str_replace('{user}', $admin->admin_role, $subject);
