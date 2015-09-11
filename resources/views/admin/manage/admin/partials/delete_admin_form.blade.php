@@ -1,4 +1,4 @@
-<div id="delete_admin_modal" ng-show="admin.delete.confirm" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div id="delete_admin_modal" ng-show="admin.delete_confirm" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
         <div class="modal-header">
@@ -12,7 +12,7 @@
                 {!! Form::button('Yes'
                     , array(
                         'class' => 'btn btn-blue btn-medium'
-                        , 'ng-click' => 'admin.deleteModeAdmin(a.id)'
+                        , 'ng-click' => 'admin.deleteModeAdmin()'
                         , 'data-dismiss' => 'modal'
                     )
                 ) !!}
