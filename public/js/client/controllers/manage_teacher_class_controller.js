@@ -1,9 +1,9 @@
 angular.module('futureed.controllers')
-	.controller('ManageClassController', ManageClassController);
+	.controller('ManageTeacherClassController', ManageTeacherClassController);
 
-ManageClassController.$inject = ['$scope', 'manageClassService', 'apiService', 'TableService', 'SearchService'];
+ManageTeacherClassController.$inject = ['$scope', 'ManageClassService', 'apiService', 'TableService', 'SearchService'];
 
-function ManageClassController($scope, manageClassService, apiService, TableService, SearchService) {
+function ManageTeacherClassController($scope, ManageClassService, apiService, TableService, SearchService) {
 	var self = this;
 
 	TableService(self);
@@ -93,9 +93,8 @@ function ManageClassController($scope, manageClassService, apiService, TableServ
 		self.search.client_id = $scope.user.id;
 
 		$scope.ui_block();
-		manageClassService.list(self.search, self.table).success(function(response) {
+		ManageClassService.list(self.search, self.table).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
-				self.getGradeLevel($scope.user.country_id);
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
@@ -116,7 +115,7 @@ function ManageClassController($scope, manageClassService, apiService, TableServ
 		self.errors = Constants.FALSE;
 		self.search.id = id;
 		$scope.ui_block();
-		manageClassService.studentList(self.search, self.table).success(function(response) {
+		ManageClassService.studentList(self.search, self.table).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
@@ -153,7 +152,7 @@ function ManageClassController($scope, manageClassService, apiService, TableServ
 		self.errors = Constants.FALSE;
 
 		$scope.ui_block();
-		manageClassService.details(id).success(function(response) {
+		ManageClassService.details(id).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
@@ -173,7 +172,7 @@ function ManageClassController($scope, manageClassService, apiService, TableServ
 		self.errors = Constants.FALSE;
 
 		$scope.ui_block();
-		manageClassService.update(self.record).success(function(response) {
+		ManageClassService.update(self.record).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
@@ -199,7 +198,7 @@ function ManageClassController($scope, manageClassService, apiService, TableServ
 		self.add.class_id = self.record.id;
 
 		$scope.ui_block();
-		manageClassService.addExistingStudent(self.add).success(function(response) {
+		ManageClassService.addExistingStudent(self.add).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
@@ -220,6 +219,9 @@ function ManageClassController($scope, manageClassService, apiService, TableServ
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
+
+		event = getEvent(event);
+		event.preventDefault();
 	}
 
 	self.validateUsername = function() {
@@ -304,7 +306,7 @@ function ManageClassController($scope, manageClassService, apiService, TableServ
 		self.add.callback_uri = base_url + "/student/registration";
 		
 		$scope.ui_block();
-		manageClassService.addNewStudent(self.add).success(function(response) {
+		ManageClassService.addNewStudent(self.add).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
@@ -353,7 +355,7 @@ function ManageClassController($scope, manageClassService, apiService, TableServ
 	}
 
 	self.getSchoolDetails = function(school_code) {
-		manageClassService.getSchoolDetails(school_code).success(function(response) {
+		ManageClassService.getSchoolDetails(school_code).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
@@ -435,7 +437,7 @@ function ManageClassController($scope, manageClassService, apiService, TableServ
 		self.delete_student.date_removed = year + month + day;
 
 		$scope.ui_block();
-		manageClassService.deleteStudent(self.delete_student).success(function(response) {
+		ManageClassService.deleteStudent(self.delete_student).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.delete_student.errors = $scope.errorHandler(response.errors);

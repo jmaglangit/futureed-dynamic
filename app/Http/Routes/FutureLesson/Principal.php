@@ -7,13 +7,11 @@
 	Routes::group(array(
 			'prefix' => 'principal'
 			, 'middleware' => ['client', 'principal']), function() {
-
-		$manage_principal_controller = 'FutureLesson\Client\ManagePrincipalController';
 		
 		Routes::get('/', [
 			'as' => 'client.principal.index',
 			'middleware' => 'client',
-			'uses' => $manage_principal_controller . '@index'
+			'uses' => 'FutureLesson\Client\DashboardController@index'
 		]);
 
 		/**

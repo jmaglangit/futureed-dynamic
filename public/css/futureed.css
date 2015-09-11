@@ -1004,7 +1004,7 @@ div > .btncon > a {
 
 .paginate-size {
 	margin: 10px 0px;
-	width: 50px;
+	width: 65px;
 	font-size: 14px;
 	text-align: center;
 	height: 35px;
@@ -1040,6 +1040,10 @@ div > .btncon > a {
 
 .cursor-pointer {
 	cursor: pointer;
+}
+
+.cursor-auto {
+	cursor: auto;
 }
 
 /*Calendar Custom Design*/

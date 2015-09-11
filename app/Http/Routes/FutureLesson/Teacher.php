@@ -6,11 +6,9 @@
 			'prefix' => 'teacher'
 			, 'middleware' => ['client', 'teacher']), function() {
 
-		$manage_teacher_controller = 'FutureLesson\Client\ManageTeacherController';
-
 		Routes::get('/', [
 			'as' => 'client.teacher.index',
-			'uses' => $manage_teacher_controller . '@index'
+			'uses' => 'FutureLesson\Client\DashboardController@index'
 		]);
 
 		Routes::group(['prefix' => 'class'], function(){

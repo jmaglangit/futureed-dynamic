@@ -48,7 +48,7 @@ function ManageClientController($scope, apiService, manageClientService) {
 		var search_email = (self.search.email) ? self.search.email: Constants.EMPTY_STR;
 		var search_school = (self.search.school) ? self.search.school: Constants.EMPTY_STR;
 		var search_client_role = (self.search.client_role) ? self.search.client_role: Constants.EMPTY_STR;
-		self.clients = Constants.FALSE;
+		self.clients = {};
 		self.table.loading = Constants.TRUE;
 
 		$scope.ui_block();

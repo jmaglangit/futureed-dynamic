@@ -1,9 +1,9 @@
 angular.module('futureed.services')
-	.factory('manageClassService', manageClassService);
+	.factory('ManageClassService', ManageClassService);
 
-manageClassService.$inject = ['$http'];
+ManageClassService.$inject = ['$http'];
 
-function manageClassService($http){
+function ManageClassService($http){
 	var manageClassApi = {};
 	var classApiUrl = '/api/v1/';
 	

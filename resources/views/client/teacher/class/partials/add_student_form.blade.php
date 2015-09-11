@@ -49,8 +49,9 @@
 	<div class="col-xs-12" ng-if="!class.add_existing_student">
 		{!! Form::open(
 			[
-				'id' => 'add_existing_student',
-				'class' => 'form-horizontal'
+				'id' => 'add_existing_student'
+				, 'class' => 'form-horizontal'
+                , 'ng-submit' => 'class.addExistingStudent($event)'
 			]
 		) !!}
             <fieldset>
