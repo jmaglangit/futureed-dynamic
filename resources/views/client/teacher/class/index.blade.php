@@ -5,7 +5,7 @@
 @stop
 
 @section('content')
-	<div class="container dshbrd-con" ng-controller="ManageClassController as class" ng-init="class.active = '{!! $active !!}'" ng-cloak>
+	<div class="container dshbrd-con" ng-controller="ManageTeacherClassController as class" ng-init="class.active = '{!! $active !!}'" ng-cloak>
 		<div template-directive template-url="{!! route('client.partials.base_url') !!}"></div>
 
 		<div class="wrapr" ng-init="class.setActive()">
@@ -24,8 +24,8 @@
 @stop
 	
 @section('scripts')
-	{!! Html::script('/js/client/controllers/manage_class_controller.js')!!}
-	{!! Html::script('/js/client/services/manage_class_service.js')!!}
+	{!! Html::script('/js/client/controllers/manage_teacher_class_controller.js')!!}
+	{!! Html::script('/js/client/services/manage_teacher_class_service.js')!!}
 
 	{!! Html::script('/js/client/constants/teacher_constants.js')!!}
 

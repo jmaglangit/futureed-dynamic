@@ -132,7 +132,7 @@
 		        
 		        <div class="form-search">
 			        <fieldset class="payment-field">
-			        	<span class="step">2</span><p class="step-label">Please select a subscription.</p>
+			        	<span class="step">3</span><p class="step-label">Please select a subscription.</p>
 			        	<div class="col-xs-12 search-container">
 			        		<div class="form-group">
 								<div class="col-xs-5"></div>

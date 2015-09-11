@@ -107,17 +107,21 @@
 				            <td class="td-fix">{! a.name !}</td>
 				            <td class="table-action">
 				            	<div class="row">
-				            		<div class="col-xs-4">
-				            			{! a.status !}
+				            		<div class="col-xs-3">
+				            			<i class="fa" 
+				            				ng-class="{ 'fa-ban error-icon' : a.status == futureed.DISABLED, 'fa-check-circle-o success-icon' : a.status == futureed.ENABLED }"
+				            				tooltip="{! a.status !}"
+				            				tooltip-placement="top"
+				            				tooltip-trigger="mouseenter"></i>
 				            		</div>
-				            		<div class="col-xs-4">
+				            		<div class="col-xs-3">
 				            			<a href="" ng-click="subject.setSubjectAreaDetails(a.id, a.name)"><span><i class="fa fa-plus"></i></span> Area</a>
 				            		</div>
-				            		<div class="col-xs-2">
+				            		<div class="col-xs-3">
 				            			<a href="" ng-click="subject.getSubjectDetails(a.id)"><span><i class="fa fa-pencil"></i></span></a>
 				            		</div>
 				            		
-				            		<div class="col-xs-2">
+				            		<div class="col-xs-3">
 				            			<a href="" ng-click="subject.confirmDeleteSubject(a.id)"><span><i class="fa fa-trash"></i></span></a>
 				            		</div>	
 				            	</div>
@@ -125,7 +129,7 @@
 				        </tr>
 				        <tr class="odd" ng-if="!subject.subjects.length && !subject.table.loading">
 				        	<td valign="top" colspan="4">
-				        		No data available in table
+				        		No records found
 				        	</td>
 				        </tr>
 				        <tr class="odd" ng-if="subject.table.loading">
