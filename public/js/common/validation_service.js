@@ -45,8 +45,39 @@ function ValidationService($http, apiService) {
 				});
 			}
 
-			, checkEmail : function() {
-				// check email
+			, checkEmail : function(email, user_type, is_profile) {
+				scope.errors = Constants.FALSE;
+				scope.success = Constants.FALSE;
+
+				scope.validation.e_error = Constants.FALSE;
+				scope.validation.e_success = Constants.FALSE;
+				scope.validation.e_loading = Constants.TRUE;
+
+				apiService.validateEmail(email, user_type).success(function(response){
+					scope.validation.e_loading = Constants.FALSE;
+
+					if(angular.equals(response.status, Constants.STATUS_OK)){
+						if(response.errors) {
+							scope.validation.e_error = response.errors[0].message;
+
+							if(angular.equals(scope.validation.e_error, Constants.MSG_EA_NOTEXIST)){
+								scope.validation.e_error = Constants.FALSE;
+								// in registration
+								scope.validation.e_success = Constants.TRUE;
+							}
+						}else if(response.data){
+							if(is_profile && (response.data.id == scope.record.id)) {
+								// In Edit Profile
+								scope.validation.e_success = Constants.MSG_EA_AVAILABLE;
+							} else {
+								scope.validation.e_error = Constants.MSG_EA_EXIST;
+							}
+						}
+					}
+				}).error(function(response) {
+					scope.errors = $scope.internalError();
+					scope.validation.e_loading = Constants.FALSE;
+				});
 			}
 
 			, validateCurrentEmail : function(email, current_email, user_type) {

@@ -23,7 +23,7 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 
 	self.setActive = function(active, id) {
 		self.errors = Constants.FALSE;
-		self.records = [];
+		self.records = {};
 		self.validation = {};
 
 		self.active_list = Constants.FALSE;

@@ -1,7 +1,20 @@
-<div ng-if="admin.active_list_admin">
+<div ng-if="admin.active_list">
 	<div class="content-title">
 		<div class="title-main-content">
 			<span>Admin Management</span>
+		</div>
+	</div>
+
+	<div class="col-xs-12 success-container" ng-if="admin.errors || admin.success">
+		<div class="alert alert-error" ng-if="admin.errors">
+			<p ng-repeat="error in admin.errors track by $index" > 
+				{! error !}
+			</p>
+		</div>
+		<div class="alert alert-success" ng-if="admin.success">
+			<p ng-repeat="success in admin.success track by $index" > 
+				{! success !}
+			</p>
 		</div>
 	</div>
 
@@ -12,16 +25,6 @@
 	</div>
 
 	<div class="col-xs-12 search-container">
-		<div class="alert alert-error" ng-if="admin.errors">
-            <p ng-repeat="error in admin.errors track by $index" > 
-                {! error !}
-            </p>
-        </div>
-        <div class="alert alert-success" ng-if="admin.validation.c_success">
-            <p> 
-                {! admin.validation.c_success !}
-            </p>
-        </div>
 		<div class="form-search">
 			{!! Form::open(
 					[

@@ -70,12 +70,6 @@
 				Routes::group(['prefix' => '/partials'], function(){
 					$manage_admin_controller = 'FutureLesson\Admin\ManageAdminController';
 
-					Routes::get('/side_nav', [
-						'as' => 'admin.manage.admin.partials.side_nav'
-						, 'middleware' => 'admin'
-						, 'uses' => $manage_admin_controller . '@side_nav'
-					]);
-
 					Routes::get('/list_admin_form', [
 						  'as' => 'admin.manage.admin.partials.list_admin_form'
 						, 'middleware' => 'admin'
