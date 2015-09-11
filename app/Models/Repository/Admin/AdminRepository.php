@@ -75,7 +75,7 @@ $admin = new Admin();
 														
 		}
 		
-		$admins = $admins->orderBy('first_name', 'asc');
+		$admins = $admins->orderBy('created_at', 'asc');
 		
 		return ['total' => $count, 'records' => $admins->with('user')->get()->toArray()];
 
