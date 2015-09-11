@@ -36,7 +36,7 @@
 
 		    <div class="form-search">
 	        	<fieldset class="payment-field">
-		        	<span class="step">1</span><p class="step-label">Please add a classroom.</p>
+		        	<span class="step">2</span><p class="step-label">Please add a classroom.</p>
 		        	<div class="form-group">
 		        		<label class="col-xs-3 control-label" id="email">Number of Seats <span class="required">*</span></label>
 		        		<div class="col-xs-5">

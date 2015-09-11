@@ -169,20 +169,23 @@
 			<div class="col-xs-12">
 				<div class="form-search">
 					<div class="form-group">
-						<div class="col-xs-4" ng-if="payment.invoice.payment_status == futureed.PAID">
-							<select class="form-control" 
-								ng-init="payment.getSubject()"
-								ng-disabled="true" 
-								ng-model="payment.invoice.subject_id" 
-								ng-class="{ 'required-field' : payment.fields['subject_id'] }">
-								<option value="">-- Select Subject --</option>
-								<option ng-selected="payment.invoice.subject_id == subject.id" 
-									ng-repeat="subject in payment.subjects" 
-									ng-value="subject.id">{! subject.name !}</option>
-							</select>
+						<div ng-if="payment.invoice.payment_status == futureed.PAID">
+							<label class="control-label col-xs-2">Subject</label>
+							<div class="col-xs-4">
+								<select class="form-control" 
+									ng-init="payment.getSubject()"
+									ng-disabled="true" 
+									ng-model="payment.invoice.subject_id" 
+									ng-class="{ 'required-field' : payment.fields['subject_id'] }">
+									<option value="">-- Select Subject --</option>
+									<option ng-selected="payment.invoice.subject_id == subject.id" 
+										ng-repeat="subject in payment.subjects" 
+										ng-value="subject.id">{! subject.name !}</option>
+								</select>
+							</div>
 						</div>
 
-						<label class="control-label col-xs-3">Payment Status</label>
+						<label class="control-label col-xs-2">Payment Status</label>
 						<div class="col-xs-4">
 							{!! Form::text('invoice',''
 								, array(
@@ -196,7 +199,8 @@
 					</div>
 
 					<div class="form-group">
-						<div class="col-xs-4">
+						<label class="control-label col-xs-2">Subscription</label>
+						<div class="col-xs-5">
 							<select ng-disabled="!payment.subscriptions.length || payment.invoice.payment_status == futureed.PAID"
 								ng-change="payment.setSubscription()"
 								ng-model="payment.invoice.subscription_id"
@@ -208,25 +212,25 @@
 									value="{! subscription.id !}">{! subscription.name!}</option>
 							</select>
 						</div>
+					</div>
 
-						<div class="col-xs-8">
-							<label class="control-label col-xs-2">Starting</label>
-							<div class="col-xs-4">
-								<input type="text" 
-									placeholder="Start Date" 
-									ng-disabled="true" 
-									class="form-control" 
-									value="{! payment.invoice.dis_date_start | ddMMyy !}" />
-							</div>
+					<div class="form-group">
+						<label class="control-label col-xs-2">Starting</label>
+						<div class="col-xs-4">
+							<input type="text" 
+								placeholder="Start Date" 
+								ng-disabled="true" 
+								class="form-control" 
+								value="{! payment.invoice.dis_date_start | ddMMyy !}" />
+						</div>
 
-							<label class="control-label col-xs-2">To</label>
-							<div class="col-xs-4">
-								<input type="text" 
-									placeholder="End Date" 
-									ng-disabled="true" 
-									class="form-control" 
-									value="{! payment.invoice.dis_date_end | ddMMyy !}" />
-							</div>
+						<label class="control-label col-xs-2">To</label>
+						<div class="col-xs-4">
+							<input type="text" 
+								placeholder="End Date" 
+								ng-disabled="true" 
+								class="form-control" 
+								value="{! payment.invoice.dis_date_end | ddMMyy !}" />
 						</div>
 					</div>
 				</div>
