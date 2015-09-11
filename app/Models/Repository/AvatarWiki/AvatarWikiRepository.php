@@ -19,7 +19,13 @@ class AvatarWikiRepository implements AvatarWikiRepositoryInterface
      */
     public function getAvatarWikiByAvatarId($avatar_id){
 
-		$wikis = collect(AvatarWiki::select('id')->avatarId($avatar_id)->get()->toArray());
+
+        $wikis = collect(AvatarWiki::select('id')->avatarId($avatar_id)->get()->toArray());
+
+        if(empty($wikis->toArray())){
+
+            $wikis = collect(AvatarWiki::select('id')->get()->toArray());
+        }
 
 		return AvatarWiki::find($wikis->random(1));
 
