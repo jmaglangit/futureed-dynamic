@@ -86,7 +86,7 @@ class Client extends Model
 	{
 
 		return $query->whereHas('user', function ($query) use ($email) {
-			$query->whereEmail($email);
+			$query->where('email','like','%'.$email.'%');
 		});
 
 	}
