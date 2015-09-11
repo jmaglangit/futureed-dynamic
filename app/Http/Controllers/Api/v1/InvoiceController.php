@@ -15,6 +15,7 @@ use FutureEd\Models\Repository\Classroom\ClassroomRepositoryInterface;
 use FutureEd\Models\Repository\Order\OrderRepositoryInterface;
 
 use FutureEd\Services\InvoiceServices;
+use Carbon\Carbon;
 
 class InvoiceController extends ApiController {
 
@@ -119,6 +120,14 @@ class InvoiceController extends ApiController {
     public function show($id)
     {
         $invoice = $this->invoice->getInvoice($id);
+
+        $now = Carbon::now();
+
+        if($now > $invoice['date_end']){
+
+             $invoice['expired'] = true;
+
+        }
         return $this->respondWithData($invoice);
     }
 

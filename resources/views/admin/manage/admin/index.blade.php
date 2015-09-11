@@ -23,14 +23,15 @@
 			<div class="client-content" template-directive template-url="{!! route('admin.manage.admin.partials.reset_pass') !!}"></div>
 
 			<div class="client-content" template-directive template-url="{!! route('admin.manage.admin.partials.edit_email_form') !!}"></div>
+
 			<div class="client-content" template-directive template-url="{!! route('admin.manage.admin.partials.delete_admin_form') !!}"></div>
 		</div>		
 	</div>
 @stop
 	
 @section('scripts')
-	{!! Html::script('/js/admin/constants/manage_admin_constants.js')!!}
-	{!! Html::script('/js/admin/manage_admin.js')!!}
 	{!! Html::script('/js/admin/controllers/manage_admin_controller.js')!!}
 	{!! Html::script('/js/admin/services/manage_admin_service.js')!!}
+
+	{!! Html::script('/js/common/validation_service.js')!!}
 @stop

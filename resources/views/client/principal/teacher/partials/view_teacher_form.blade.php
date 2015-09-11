@@ -219,7 +219,7 @@
 			            <td>{! class.grade.name !}</td>
 			        </tr>
 			        <tr class="odd" ng-if="!teacher.classes.length && !teacher.table.loading">
-			        	<td valign="top" colspan="4" class="dataTables_empty">
+			        	<td valign="top" colspan="4">
 			        		No records found
 			        	</td>
 			        </tr>

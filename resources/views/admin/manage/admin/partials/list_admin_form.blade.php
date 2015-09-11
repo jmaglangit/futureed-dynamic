@@ -1,7 +1,20 @@
-<div ng-if="admin.active_list_admin">
+<div ng-if="admin.active_list">
 	<div class="content-title">
 		<div class="title-main-content">
 			<span>Admin Management</span>
+		</div>
+	</div>
+
+	<div class="col-xs-12 success-container" ng-if="admin.errors || admin.success">
+		<div class="alert alert-error" ng-if="admin.errors">
+			<p ng-repeat="error in admin.errors track by $index" > 
+				{! error !}
+			</p>
+		</div>
+		<div class="alert alert-success" ng-if="admin.success">
+			<p ng-repeat="success in admin.success track by $index" > 
+				{! success !}
+			</p>
 		</div>
 	</div>
 
@@ -12,16 +25,6 @@
 	</div>
 
 	<div class="col-xs-12 search-container">
-		<div class="alert alert-error" ng-if="admin.errors">
-            <p ng-repeat="error in admin.errors track by $index" > 
-                {! error !}
-            </p>
-        </div>
-        <div class="alert alert-success" ng-if="admin.validation.c_success">
-            <p> 
-                {! admin.validation.c_success !}
-            </p>
-        </div>
 		<div class="form-search">
 			{!! Form::open(
 					[
@@ -35,7 +38,7 @@
 					{!! Form::text('search_name', ''
 						, [
 							'class' => 'form-control'
-							, 'ng-model' => 'admin.search_user'
+							, 'ng-model' => 'admin.search.user'
 							, 'placeholder' => 'Username'
 						]
 					) !!}
@@ -44,7 +47,7 @@
 					{!! Form::text('search_email', ''
 						, [
 							'class' => 'form-control'
-							, 'ng-model' => 'admin.search_email'
+							, 'ng-model' => 'admin.search.email'
 							, 'placeholder' => 'Email'
 						]
 					) !!}
@@ -65,7 +68,7 @@
 							'Admin' => 'Admin', 
 							'Super Admin' => 'Super Admin'), 
 							null, 
-							['ng-model' => 'admin.search_role' , 'class' => 'form-control']
+							['ng-model' => 'admin.search.role' , 'class' => 'form-control']
 					) !!}
 				</div>
 				<div class="col-xs-5"></div>
@@ -81,18 +84,16 @@
 		</div>
 	</div>
 
-	<button class="btn btn-blue btn-small margin-0-30" ng-click="admin.setManageAdminActive('add')">
-		<i class="fa fa-plus-square"></i> Add Admin
-	</button>
-
-	<div class="col-xs-12 padding-0-30">
-		<div class="title-mid">
-			Admin List
-		</div>
-	</div>
-
 	<div class="col-xs-12 table-container">
+		<button class="btn btn-blue btn-small" ng-click="admin.setActive(futureed.ACTIVE_ADD)">
+			<i class="fa fa-plus-square"></i> Add Admin
+		</button>
+
 		<div class="list-container" ng-cloak>
+			<div class="title-mid">
+				Admin List
+			</div>
+
 			<div class="size-container">
 				{!! Form::select('size'
 					, array(
@@ -128,14 +129,18 @@
 		            <td>{! a.admin_role !}</td>
 		            <td>
 		            	<div class="row">
+    						<div class="col-xs-3">
+		            			<i class="fa" 
+		            				ng-class="{ 'fa-ban error-icon' : a.user.status == futureed.DISABLED, 'fa-check-circle-o success-icon' : a.user.status == futureed.ENABLED }"
+		            				tooltip="{! a.user.status !}"
+		            				tooltip-placement="top"
+		            				tooltip-trigger="mouseenter"></i>
+		            		</div>
 		            		<div class="col-xs-3">
-	    						{! a.user.status !}
-	    					</div>
-		            		<div class="col-xs-3">
-	    						<a href="" ng-click="admin.viewAdmin(a.id)"><span><i class="fa fa-eye"></i></span></a>
+	    						<a href="" ng-click="admin.setActive(futureed.ACTIVE_VIEW, a.id)"><span><i class="fa fa-eye"></i></span></a>
 	    					</div>
 	        				<div class="col-xs-3">
-	        					<a href="" ng-click="admin.editModeAdmin(a.id)"><span><i class="fa fa-pencil"></i></span></a>
+	        					<a href="" ng-click="admin.setActive(futureed.ACTIVE_EDIT, a.id)"><span><i class="fa fa-pencil"></i></span></a>
 	        				</div>
 	        				<div class="col-xs-3">
 	        					<a href="" ng-click="admin.confirmDelete(a.id)"><span><i class="fa fa-trash"></i></span></a>
@@ -144,12 +149,12 @@
 		            </td>
 		        </tr>
 		        <tr class="odd" ng-if="!admin.data.length && !admin.table.loading">
-		        	<td valign="top" colspan="4" class="dataTables_empty">
+		        	<td valign="top" colspan="4">
 		        		No records found
 		        	</td>
 		        </tr>
 		        <tr class="odd" ng-if="admin.table.loading">
-		        	<td valign="top" colspan="4" class="dataTables_empty">
+		        	<td valign="top" colspan="4">
 		        		Loading...
 		        	</td>
 		        </tr>

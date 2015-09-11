@@ -115,7 +115,7 @@
 			        </thead>
 			        <tbody>
 				        <tr ng-repeat="tipInfo in tips.records">
-				            <td>{! tipInfo.title !}</td>
+				            <td class="wide-column">{! tipInfo.title !}</td>
 				            <td>{! tipInfo.created_at !}</td>
 				            <td>{! tipInfo.student.first_name !} {! tipInfo.student.last_name !}</td>
 				            <td ng-if="tips.records.length">

@@ -2,13 +2,13 @@ angular.module('futureed.services')
 	.factory('ManageParentPaymentService', ManageParentPaymentService);
 
 function ManageParentPaymentService($http){
-	var paymentApiUrl = '/api/v1/';
-	var managePaymentApi = {};
+	var serviceUrl = '/api/v1/';
+	var service = {};
 	
-	managePaymentApi.list = function(search, table) {
+	service.list = function(search, table) {
 		return $http({
 			method : Constants.METHOD_GET
-			, url  : paymentApiUrl + 'invoice?client_id=' + search.client_id
+			, url  : serviceUrl + 'invoice?client_id=' + search.client_id
 				+ '&order_no=' + search.order_no
 				+ '&subscription_name=' + search.subscription_name
 				+ '&limit=' + table.size
@@ -16,129 +16,129 @@ function ManageParentPaymentService($http){
 		});
 	}
 
-	managePaymentApi.viewPayment = function(id) {
+	service.viewPayment = function(id) {
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url 	: paymentApiUrl + 'invoice/' + id
+			, url 	: serviceUrl + 'invoice/' + id
 		})
 	}
 
-	managePaymentApi.getSubscriptionList = function() {
+	service.getSubscriptionList = function() {
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url 	: paymentApiUrl + 'subscription'
+			, url 	: serviceUrl + 'subscription'
 		})
 	}
 
-	managePaymentApi.getSubscription = function(id) {
+	service.getClient = function(id) {
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url 	: paymentApiUrl + 'subscription/' + id
+			, url 	: serviceUrl + 'client/' + id
 		})
 	}
 
-	managePaymentApi.getClient = function(id) {
+	service.getStudents = function(id) {
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url 	: paymentApiUrl + 'client/' + id
+			, url 	: serviceUrl + 'order-detail/get-students/' + id
 		})
 	}
 
-	managePaymentApi.getStudents = function(id) {
+	service.getClientDiscount = function(id) {
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url 	: paymentApiUrl + 'order-detail/get-students/' + id
+			, url 	: serviceUrl + 'invoice/client-invoice-discount/' + id
 		})
 	}
 
-	managePaymentApi.getClientDiscount = function(id) {
+	service.getBulkDiscount = function(min_seats) {
+		return $http({
+			method : Constants.METHOD_GET
+			, url  : serviceUrl + 'volume-discount/rounded-off-discount/' + min_seats
+		});
+	}
+
+	service.getOrderNo = function(id) {
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url 	: paymentApiUrl + 'invoice/client-invoice-discount/' + id
+			, url 	: serviceUrl + 'order/get-next-order-no/' + id
 		})
 	}
 
-	managePaymentApi.getOrderNo = function(id) {
-		return $http({
-			method 	: Constants.METHOD_GET
-			, url 	: paymentApiUrl + 'order/get-next-order-no/' + id
-		})
-	}
-
-	managePaymentApi.addInvoice = function(data) {
+	service.addInvoice = function(data) {
 		return $http({
 			method 	: Constants.METHOD_POST
 			, data 	: data
-			, url 	: paymentApiUrl + 'invoice'
+			, url 	: serviceUrl + 'invoice'
 		})
 	}
 
-	managePaymentApi.addStudentOrderByEmail = function(data) {
+	service.addStudentOrderByEmail = function(data) {
 		return $http({
 			method 	: Constants.METHOD_POST
 			, data 	: data
-			, url 	: paymentApiUrl + 'parent-student/add-students-by-email'
+			, url 	: serviceUrl + 'parent-student/add-students-by-email'
 		})
 	}
 
-	managePaymentApi.searchName = function(name, id) {
+	service.searchName = function(name, id) {
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url 	: paymentApiUrl + 'client/manage/student?client_id=' + id
+			, url 	: serviceUrl + 'client/manage/student?client_id=' + id
 					+ '&name=' + name
 		});
 	}
 
-	managePaymentApi.deleteInvoice = function(id) {
+	service.deleteInvoice = function(id) {
 		return $http({
 			method 	: Constants.METHOD_DELETE
-			, url 	: paymentApiUrl + 'invoice/' + id
+			, url 	: serviceUrl + 'invoice/' + id
 		});
 	}
 
-	managePaymentApi.addStudentOrderByUsername = function(data) {
+	service.addStudentOrderByUsername = function(data) {
 		return $http({
 			method 	: Constants.METHOD_POST
 			, data 	: data
-			, url 	: paymentApiUrl + 'parent-student/add-students-by-username'
+			, url 	: serviceUrl + 'parent-student/add-students-by-username'
 		})
 	}
 
-	managePaymentApi.paySubscription = function(data) {
+	service.paySubscription = function(data) {
 		return $http({
 			method : Constants.METHOD_PUT
 			, data : data
-			, url  : paymentApiUrl + 'parent-student/pay-subscription/' + data.id
+			, url  : serviceUrl + 'parent-student/pay-subscription/' + data.id
 		});
 	}
 
-	managePaymentApi.getPaymentUri = function(data) {
+	service.getPaymentUri = function(data) {
 		return $http({
 			method : Constants.METHOD_POST
 			, data : data
-			, url  : paymentApiUrl + 'payment'
+			, url  : serviceUrl + 'payment'
 		});
 	}
 
-	managePaymentApi.removeStudent = function(id) {
+	service.removeStudent = function(id) {
 		return $http({
 			method : Constants.METHOD_DELETE
-			, url  : paymentApiUrl + 'order-detail/' + id
+			, url  : serviceUrl + 'order-detail/' + id
 		});
 	}
 
-	managePaymentApi.cancelInvoice = function(id) {
+	service.cancelInvoice = function(id) {
 		return $http({
 			method : Constants.METHOD_PUT
-			, url  : paymentApiUrl + 'invoice/cancel-invoice/' + id
+			, url  : serviceUrl + 'invoice/cancel-invoice/' + id
 		});
 	}
 
-	managePaymentApi.getSubject = function() {
+	service.getSubject = function() {
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url 	: paymentApiUrl + 'subject'
+			, url 	: serviceUrl + 'subject'
 		});
 	}
-	return managePaymentApi;
+	return service;
 }

@@ -1,4 +1,4 @@
-<div ng-if="admin.active_add_admin">
+<div ng-if="admin.active_add">
 	<div class="content-title">
 		<div class="title-main-content">
 			<span>Add Admin User</span>
@@ -17,8 +17,10 @@
 			</p>
 		</div>
 
-		<div class="alert alert-success" ng-if="admin.reg.success">
-			Successfully created an admin user.
+		<div class="alert alert-success" ng-if="admin.success">
+			<p ng-repeat="success in admin.success track by $index">
+				{! success !}
+			</p>
 		</div>
 
 		<fieldset>
@@ -32,9 +34,10 @@
 						array(
 							'placeholder' => 'Username'
 							, 'autocomplete' => 'off'
-							, 'ng-model' => 'admin.reg.username'
+							, 'ng-model' => 'admin.record.username'
 							, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
-							, 'ng-change' => 'admin.checkUsernameAvailability(admin.reg.username)'
+							, 'ng-class' => "{ 'required-field' : admin.fields['username'] }"
+							, 'ng-change' => 'admin.checkUsername(admin.record.username, futureed.ADMIN, futureed.FALSE)'
 							, 'class' => 'form-control'
 						)
 					) !!}
@@ -52,9 +55,10 @@
 						array(
 							'placeholder' => 'Email'
 							, 'autocomplete' => 'off'
-							, 'ng-model' => 'admin.reg.email'
+							, 'ng-model' => 'admin.record.email'
 							, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
-							, 'ng-change' => 'admin.checkEmailAvailability(admin.reg.email)'
+							, 'ng-class' => "{ 'required-field' : admin.fields['email'] }"
+							, 'ng-change' => 'admin.checkEmail(admin.record.email, futureed.ADMIN, futureed.FALSE)'
 							, 'class' => 'form-control'
 						)
 					) !!}
@@ -74,7 +78,9 @@
 							'Admin' => 'Admin',
 							'Super Admin' => 'Super Admin'
 						], null,
-						['ng-model' => 'admin.reg.admin_role', 'class' => 'form-control']
+						['ng-model' => 'admin.record.admin_role'
+							, 'ng-class' => "{ 'required-field' : admin.fields['admin_role'] }"
+							, 'class' => 'form-control']
 					)!!}
 				</div>
 			</div>
@@ -87,10 +93,10 @@
 	                			,'Enabled'
 	                			, true
 	                			, array(
-	                				'ng-model' => 'admin.reg.status'
+	                				'ng-model' => 'admin.record.status'
 	                			)
 	                		) !!}
-	                		<span class="lbl padding-8">Enabled</span>
+	                		<span class="lbl padding-8">{! futureed.ENABLED !}</span>
 	                		</label>
 	                	</div>
 	                	<div class="col-xs-6 checkbox">
@@ -99,10 +105,10 @@
 	                			,'Disabled'
 	                			, false
 	                			, array(
-	                				'ng-model' => 'admin.reg.status'
+	                				'ng-model' => 'admin.record.status'
 	                			)
 	                		) !!}
-	                		<span class="lbl padding-8">Disabled</span>
+	                		<span class="lbl padding-8">{! futureed.DISABLED !}</span>
 	                		</label>
 	                	</div>
 	                </div>
@@ -112,9 +118,10 @@
 				<div class="col-xs-4">
 					{!! Form::password('password',
 						[
-							'class' => 'form-control',
-							'ng-model' => 'admin.reg.password',
-							'placeholder' => 'Password'
+							'class' => 'form-control'
+							, 'ng-model' => 'admin.record.password'
+							, 'ng-class' => "{ 'required-field' : admin.fields['password'] }"
+							, 'placeholder' => 'Password'
 						]) 
 					!!}
 				</div>
@@ -124,9 +131,10 @@
 				<div class="col-xs-4">
 					{!! Form::password('password_c',
 						[
-							'class' => 'form-control',
-							'ng-model' => 'admin.reg.confirm_password',
-							'placeholder' => 'Confirm Password'
+							'class' => 'form-control'
+							, 'ng-model' => 'admin.record.confirm_password'
+							, 'ng-class' => "{ 'required-field' : admin.fields['password'] }"
+							, 'placeholder' => 'Confirm Password'
 						]) 
 					!!}
 				</div>
@@ -141,9 +149,10 @@
 				<div class="col-xs-4">
 					{!! Form::text('first_name','',
 						[
-							'class' => 'form-control',
-							'ng-model' => 'admin.reg.first_name',
-							'placeholder' => 'First Name'
+							'class' => 'form-control'
+							, 'ng-model' => 'admin.record.first_name'
+							, 'placeholder' => 'First Name'
+							, 'ng-class' => "{ 'required-field' : admin.fields['first_name'] }"
 						]
 					) !!}
 				</div>
@@ -153,9 +162,10 @@
 				<div class="col-xs-4">
 					{!! Form::text('last_name','',
 						[
-							'class' => 'form-control',
-							'ng-model' => 'admin.reg.last_name',
-							'placeholder' => 'Last Name'
+							'class' => 'form-control'
+							, 'ng-model' => 'admin.record.last_name'
+							, 'placeholder' => 'Last Name'
+							, 'ng-class' => "{ 'required-field' : admin.fields['last_name'] }"
 						]
 					) !!}
 				</div>
@@ -171,7 +181,7 @@
 				{!! Form::button('Cancel'
 					, array(
 						'class' => 'btn btn-gold btn-medium'
-						, 'ng-click' => "admin.setManageAdminActive()"
+						, 'ng-click' => "admin.setActive()"
 					)
 				) !!}
 			</div>

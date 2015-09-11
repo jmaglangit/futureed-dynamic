@@ -46,9 +46,13 @@
 	        </div>
 		</div>
 
-		{!! Form::open(['class' => 'form-horizontal', 'id' => 'add_student_form']) !!}
-		<div class="form-content row">
-			<div ng-if="student.exist">
+		<div ng-if="student.exist">
+			{!! Form::open(
+				array(
+					'class' => 'form-horizontal'
+					, 'ng-submit' => 'student.addExist($event)'
+				)
+			) !!}
 				<fieldset>
 					<legend class="legend">Login Credential</legend>
 
@@ -69,7 +73,7 @@
 							{!! Form::button('Add Student'
 								, array(
 									'class' => 'btn btn-blue btn-medium bottom-5'
-									, 'ng-click' => 'student.addExist()'
+									, 'ng-click' => 'student.addExist($event)'
 								)
 							) !!}
 							{!! Form::button('Cancel'
@@ -81,9 +85,17 @@
 						</div>
 					</div>
 				</fieldset>
-			</div>
-			
-			<div ng-if="!student.exist">
+			{!! Form::close() !!}
+		</div>
+		
+		<div ng-if="!student.exist">
+			{!! Form::open(
+				array(
+					'class' => 'form-horizontal'
+					, 'ng-submit' => 'student.addStudent($event)'
+					, 'id' => 'add_student_form'
+				)
+			) !!}
 				<fieldset>
 					<legend class="legend">Login Credentials</legend>
 					<div class="form-group">
@@ -213,7 +225,7 @@
 					</div>
 				</fieldset>
 			
-				<div class="col-xs-7 col-xs-offset-2 btn-container">
+				<div class="col-xs-8 col-xs-offset-1 btn-container">
 					{!! Form::button('Add Student'
 						, array(
 							'class' => 'btn btn-blue btn-medium'
@@ -227,7 +239,7 @@
 						)
 					) !!}
 				</div>
-			</div>
+			{!! Form::close() !!}
 		</div>
 	</div>
 </div>

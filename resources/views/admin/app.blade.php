@@ -90,7 +90,6 @@
     {!! Html::script('/js/common/search_service.js') !!}
     {!! Html::script('/js/common/filters.js') !!}
     {!! Html::script('/js/datetimepicker.js') !!}
-    {!! Html::script('/js/angular-drag-and-drop-lists.min.js')!!}
 
     {!! Html::script('/js/ng-file-upload-shim.min.js')!!}
     {!! Html::script('/js/ng-file-upload.min.js')!!}

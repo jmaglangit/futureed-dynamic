@@ -27,14 +27,14 @@ class HelpRequestAnswerRequest extends ApiRequest {
             case 'POST':
                 return [
                     'student_id' => 'required|integer',
-                    'content' => 'required|string',
+                    'content' => 'required|string|max:128',
                     'help_request_id' => 'required|integer'
                 ];
                 break;
 			case 'PUT':
 
 				return [
-					'content' => 'required|string',
+					'content' => 'required|string|max:128',
 					'status' => 'required|in:Enabled,Disabled',
 				];
 				break;

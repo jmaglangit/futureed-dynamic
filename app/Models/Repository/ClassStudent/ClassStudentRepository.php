@@ -242,6 +242,7 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 		try {
 
 			$class_student = ClassStudent::studentId($criteria['student_id'])
+				->isDateRemovedNull()
 				->classroomId($criteria['class_id'])
 				->with('studentClassroom');
 

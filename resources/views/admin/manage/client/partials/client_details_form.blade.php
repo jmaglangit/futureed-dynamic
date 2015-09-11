@@ -414,19 +414,21 @@
 			        	) !!}
 		        	</div>
 
-		        	{!! Form::button('Edit'
-		        		, array(
-		        			'class' => 'btn btn-blue btn-medium'
-		        			, 'ng-click' => "client.setManageClientActive('edit_client')"
-		        		)
-		        	) !!}
+		        	<div class="margin-10-top">
+			        	{!! Form::button('Edit'
+			        		, array(
+			        			'class' => 'btn btn-blue btn-medium'
+			        			, 'ng-click' => "client.setManageClientActive('edit_client')"
+			        		)
+			        	) !!}
 
-		        	{!! Form::button('Cancel'
-		        		, array(
-		        			'class' => 'btn btn-gold btn-medium'
-		        			, 'ng-click' => 'client.setManageClientActive()'
-		        		)
-		        	) !!}
+			        	{!! Form::button('Cancel'
+			        		, array(
+			        			'class' => 'btn btn-gold btn-medium'
+			        			, 'ng-click' => 'client.setManageClientActive()'
+			        		)
+			        	) !!}
+		        	</div>
 	        	</div>
 
 	        	<div ng-if="client.active_edit_client">

@@ -29,7 +29,8 @@ class OrderRepository implements OrderRepositoryInterface{
         }
     }
     public function getNextOrderNo(){
-        return Order::orderBy('id','desc')->first()->toArray();
+        $result =  Order::orderBy('id','desc')->first();
+        return !is_null($result) ? $result->toArray(): null;
     }
 
     public function getOrderByOrderNo($order_no){

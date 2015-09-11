@@ -77,7 +77,7 @@
 			) !!}
 		</div>
 
-		<div class="btn-container col-xs-5 col-xs-offset-3" ng-if="class.active_edit">
+		<div class="btn-container col-xs-5 col-xs-offset-3 margin-10-top" ng-if="class.active_edit">
 			{!! Form::button('Save'
 				, array(
 					'class' => 'btn btn-blue btn-medium'
@@ -180,14 +180,14 @@
 			        <tr>
 			            <th>Student's Name</th>
 			            <th class="width-medium">Email</th>
-			            <th>Action</th>
+			            <th ng-if="class.students.length">Action</th>
 			        </tr>
 		        </thead>
 		        <tbody>
 			        <tr ng-repeat="student in class.students">
 			            <td>{! student.student.user.name !}</td>
 			            <td>{! student.student.user.email !}</td>
-			            <td>
+			            <td ng-if="class.students.length">
 			            	<div class="row">
 		    					<div class="col-xs-12">
 		    						<a href="" ng-click="class.confirmDeleteStudent(student.id)"><span><i class="fa fa-trash"></i></span></a>
@@ -196,7 +196,7 @@
 			            </td>
 			        </tr>
 			        <tr class="odd" ng-if="!class.students.length">
-			        	<td valign="top" colspan="2">
+			        	<td valign="top" colspan="3">
 			        		No records found.
 			        	</td>
 			        </tr>

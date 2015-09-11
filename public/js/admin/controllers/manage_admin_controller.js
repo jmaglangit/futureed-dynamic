@@ -1,48 +1,78 @@
 angular.module('futureed.controllers')
 	.controller('ManageAdminController', ManageAdminController);
 
-ManageAdminController.$inject = ['$scope', 'manageAdminService', 'apiService'];
+ManageAdminController.$inject = ['$scope', 'ManageAdminService', 'TableService', 'SearchService', 'ValidationService'];
 
-function ManageAdminController($scope, manageAdminService, apiService) {
+function ManageAdminController($scope, ManageAdminService, TableService, SearchService, ValidationService) {
 	var self = this;
 
-	self.table = {};
-	self.table.size = Constants.DEFAULT_SIZE;
-	self.table.page = Constants.DEFAULT_PAGE;
+	TableService(self);
+	self.tableDefaults();
+
+	SearchService(self);
+	self.searchDefaults();
+
+	ValidationService(self);
+	self.default();
 
 	self.user_type = Constants.ADMIN;
-	this.reg = {};
-	this.val = {};
-	self.validation = {};
-	self.change = {};
-	self.delete = {};
+	
 
-	this.getAdminList = getAdminList;
-	this.viewAdmin = viewAdmin;
-	self.editModeAdmin = editModeAdmin;
-	self.deleteModeAdmin = deleteModeAdmin;
-	this.saveAdmin = saveAdmin;
-	this.checkUsernameAvailability = checkUsernameAvailability;
-	this.checkEmailAvailability = checkEmailAvailability;
+	self.setActive = function(active, id){
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
 
-	this.editAdmin = editAdmin;
-	this.setManageAdminActive = setManageAdminActive;
-	this.resetPass = resetPass;
-	this.clearSearch = clearSearch;
+		self.fields = [];
+		self.change = {};
+		self.validation = {};
 
-	self.validateNewAdminEmail = validateNewAdminEmail;
-	self.confirmNewEmail = confirmNewEmail;
-	self.changeAdminEmail = changeAdminEmail;
-	self.confirmDelete = confirmDelete;
+		self.active_list = Constants.FALSE;
+		self.active_add  = Constants.FALSE
+		self.active_view = Constants.FALSE;
+		self.active_edit = Constants.FALSE;
+		self.active_edit_email = Constants.FALSE;
+		self.active_edit_pass  = Constants.FALSE;
 
-	function getAdminList(){
-		var search_user = (self.search_user) ? self.search_user : Constants.EMPTY_STR;
-		var search_email = (self.search_email) ? self.search_email : Constants.EMPTY_STR;
-		var search_role = (self.search_role) ? self.search_role : Constants.EMPTY_STR;
+		switch(active){
+			case 'pass' :
+				self.active_edit_pass = Constants.TRUE;
+				break;
+
+			case Constants.ACTIVE_ADD :
+				self.record = {};
+				self.active_add = Constants.TRUE;
+				break;
+
+			case Constants.ACTIVE_VIEW :
+				self.viewAdmin(id);
+				self.active_view = Constants.TRUE;
+				break;
+
+			case Constants.ACTIVE_EDIT :
+				self.viewAdmin(id);
+				self.active_edit = Constants.TRUE;
+				break;
+
+			case 'edit_email' :
+				self.active_edit_email = Constants.TRUE;
+				break;
+
+			case Constants.ACTIVE_LIST :
+			default:
+				self.record = {};
+				self.getAdminList();
+				self.active_list = Constants.TRUE;
+				break;
+		} 
+
+		$("html, body").animate({ scrollTop: 0 }, "slow");
+	}
+
+	self.getAdminList = function(){
 		self.table.loading = Constants.TRUE;
 
 		$scope.ui_block();
-		manageAdminService.getAdminList(search_user, search_email, search_role, self.table).success(function(response){
+		ManageAdminService.getAdminList(self.search, self.table).success(function(response){
 			self.table.loading = Constants.FALSE;
 
 			if(angular.equals(response.status, Constants.STATUS_OK)){
@@ -50,7 +80,7 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data){
 					self.data = response.data.records;
-					self.updateTable(response.data);
+					self.updatePageCount(response.data);
 				}
 			}
 
@@ -62,187 +92,134 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 		});
 	}
 
-	function clearSearch(){
-		self.search_user = Constants.EMPTY_STR;
-		self.search_email = Constants.EMPTY_STR;
-		self.search_role = Constants.EMPTY_STR;
+	self.clearSearch = function(){
+		self.errors = Constants.FALSE;
+
+		self.searchDefaults();
+		self.tableDefaults();
 
 		self.getAdminList();
 	}
 
-	function saveAdmin(){
+	self.saveAdmin = function() {
 		self.errors = Constants.FALSE;
-		self.reg.success = Constants.FALSE;
+		self.success = Constants.FALSE;
+		
+		self.fields = [];
 		self.validation = {};
 		
-		if(!angular.equals(self.reg.password, self.reg.confirm_password)){
+		if(!angular.equals(self.record.password, self.record.confirm_password)){
 			self.errors = [Constants.MSG_PW_NOT_MATCH];
+			self.fields["password"] = Constants.TRUE;
 			$("html, body").animate({ scrollTop: 0 }, "slow");
-		} else {	
-			$("input, select").removeClass("required-field");
-
+		} else {
 			$scope.ui_block();
-			manageAdminService.saveAdmin(self.reg).success(function(response){
+			ManageAdminService.saveAdmin(self.record).success(function(response){
 				if(angular.equals(response.status, Constants.STATUS_OK)){
 					if(response.errors){
 						self.errors = $scope.errorHandler(response.errors);
 
 						angular.forEach(response.errors, function(value, key){
-							$("#add_admin_form input[name='" + value.field +"']" ).addClass("required-field");
-							$("#add_admin_form select[name='" + value.field +"']" ).addClass("required-field");
+							self.fields[value.field] = Constants.TRUE;
 						});
 
 					}else if(response.data){
-						self.reg = {};
-						self.reg.success = Constants.TRUE;
+						self.record = {};
+						self.success = ["You have successfully created an administrator."];
 						$("html, body").animate({ scrollTop: 0 }, "slow");
 					}
 				}
+
 				$scope.ui_unblock();
 			}).error(function(response){
-				$scope.ui_unblock();
 				self.errors = $scope.internalError();
+				$scope.ui_unblock();
 			});
 		}
 	}
 
-	function viewAdmin(id){
-		self.is_success = Constants.FALSE;
+	self.viewAdmin = function(id){
 		self.errors = Constants.FALSE;
-		self.view_id = id;
+		self.record = {};
 
-		$('input, select').removeClass('required-field');
-		manageAdminService.viewAdmin(self.view_id).success(function(response){
-			if(angular.equals(response.status,Constants.STATUS_OK)){
-				if(response.data){
-					self.admininfo = response.data;
-					self.setManageAdminActive('view');
-				}
-			}
-		}).error(function(response) {
-			self.errors = $scope.internalError();
-		});
-	}
-
-	function editModeAdmin(id){
-		self.is_success = Constants.FALSE;
-		self.errors = Constants.FALSE;
-
-		manageAdminService.viewAdmin(id).success(function(response){
-			if(angular.equals(response.status,Constants.STATUS_OK)){
-				if(response.data){
-					self.admininfo = response.data;
-					self.setManageAdminActive('edit');
-				}
-			}
-		}).error(function(response) {
-			self.errors = $scope.internalError();
-		});
-	}
-
-	function checkUsernameAvailability(username){
-		self.validation.u_error = Constants.FALSE;
-		self.validation.u_success = Constants.FALSE;
-		self.validation.u_loading = Constants.TRUE;
-
-		apiService.validateUsername(username, self.user_type).success(function(response){
-			self.validation.u_loading = Constants.FALSE;
-
-			if(angular.equals(response.status, Constants.STATUS_OK)){
+		$scope.ui_block();
+		ManageAdminService.viewAdmin(id).success(function(response) {
+			if(angular.equals(response.status,Constants.STATUS_OK)) {
 				if(response.errors) {
-					self.validation.u_error = response.errors[0].message;
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data){
+					var data = response.data;
 
-					if(angular.equals(self.validation.u_error, Constants.MSG_U_NOTEXIST)){
-						self.validation.u_error = Constants.FALSE;
-						// in registration
-						self.validation.u_success = Constants.TRUE;
-					}
-				}else if(response.data){
-					// in profile
-					if(self.admininfo && response.data.id == self.admininfo.id) {
-						self.validation.u_success = Constants.TRUE;
-					} else {
-						self.validation.u_error = Constants.MSG_U_EXIST;
+					self.record = {
+						 id 				: data.id
+						, email 			: data.user.email
+						, username			: data.user.username
+						, status			: data.user.status
+						, admin_role		: data.admin_role
+						, first_name		: data.first_name
+						, last_name			: data.last_name
 					}
 				}
 			}
+
+			$scope.ui_unblock();
 		}).error(function(response) {
 			self.errors = $scope.internalError();
-			self.validation.u_loading = Constants.FALSE;
+			$scope.ui_unblock();
 		});
 	}
 
-	
-	function checkEmailAvailability(email){
-		self.validation.e_error = Constants.FALSE;
-		self.validation.e_success = Constants.FALSE;
-		self.validation.e_loading = Constants.TRUE;
+	self.updateAdmin = function() {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+		
+		self.fields = [];
+		self.validation = {};
 
-		apiService.validateEmail(email, self.user_type).success(function(response){
-			self.validation.e_loading = Constants.FALSE;
-
+		$scope.ui_block();
+		ManageAdminService.editAdmin(self.record).success(function(response){
 			if(angular.equals(response.status, Constants.STATUS_OK)){
-				if(response.errors) {
-					self.validation.e_error = response.errors[0].message;
+				if(response.errors){
+					self.errors = $scope.errorHandler(response.errors);
 
-					if(angular.equals(self.validation.e_error, Constants.MSG_EA_NOTEXIST)){
-						self.validation.e_error = Constants.FALSE;
-						// in registration
-						self.validation.e_success = Constants.TRUE;
-					}
-				}else if(response.data){
-					self.validation.e_error = Constants.MSG_EA_EXIST;
+					angular.forEach(response.errors, function(value, key){
+						self.fields[value.field] = Constants.TRUE;
+					});
+				} else if(response.data){
+					self.success = ["Successfully updated this profile."];
+
+					self.viewAdmin(response.data.id);
+					self.active_edit = Constants.FALSE;
+					self.active_view = Constants.TRUE;
 				}
 			}
-		}).error(function(response) {
+			$scope.ui_unblock();
+		}).error(function(response){
+			self.errors = $scope.ui_unblock();
 			self.errors = $scope.internalError();
-			self.validation.e_loading = Constants.FALSE;
 		});
-	}
-
-	function editAdmin() {
-		self.errors = Constants.FALSE;
-		self.admininfo.email = self.admininfo.user.email;
-		self.admininfo.username = self.admininfo.user.username;
-
-		self.admininfo.status = $('input[name=status]:checked', '#add_admin_form').val();
-
-				$scope.ui_block();
-				manageAdminService.editAdmin(self.admininfo).success(function(response){
-					if(angular.equals(response.status, Constants.STATUS_OK)){
-						if(response.errors){
-							self.errors = $scope.errorHandler(response.errors);
-
-							angular.forEach(response.errors, function(value, key){
-								$("#add_admin_form input[name='" + value.field +"']" ).addClass("required-field");
-							});
-
-						}else if(response.data){
-							self.errors = Constants.FALSE;
-							self.update_success = Constants.TRUE;
-							self.viewAdmin(response.data.id);
-						}
-					}
-					$scope.ui_unblock();
-				}).error(function(response){
-					$scope.ui_unblock();
-					self.errors = $scope.internalError();
-				});
 
 	}
 
-	function resetPass(){
+	self.resetPassword = function(){
 		self.errors = Constants.FALSE;
+		self.fields = [];
 
-		if(self.password != self.password_c){
+		if(self.change.new_password != self.change.confirm_password){
 			self.errors = [Constants.MSG_PW_NOT_MATCH];
+			self.fields["new_password"] = Constants.TRUE;
+			self.fields["confirm_password"] = Constants.TRUE;
 			$("html, body").animate({ scrollTop: 0 }, "slow");
 		}else{
 			$scope.ui_block();
-			manageAdminService.resetPass(self.password, self.admininfo.id).success(function(response){
+			ManageAdminService.resetPass(self.change.new_password, self.record.id).success(function(response){
 				if(angular.equals(response.status, Constants.STATUS_OK)){
 					if(response.errors){
 						self.errors = $scope.errorHandler(response.errors);
+
+						angular.forEach(response.errors, function(value, key){
+							self.fields[value.field] = Constants.TRUE;
+						});
 					}else if(response.data){
 						self.reset_success = Constants.TRUE;
 					}
@@ -256,101 +233,13 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 		}
 	}
 
-	function setManageAdminActive(active){
+	self.confirmDelete = function(id){
 		self.errors = Constants.FALSE;
-		self.reset_success = Constants.FALSE;
-		self.update_success = Constants.FALSE;
-		self.validation = {};
-		self.change = {};
-		self.reg = {};
-
-		self.active_list_admin = Constants.FALSE;
-		self.active_add_admin  = Constants.FALSE
-		self.active_view_admin = Constants.FALSE;
-		self.active_edit_admin = Constants.FALSE;
-		self.active_edit_email = Constants.FALSE;
-		self.active_edit_pass  = Constants.FALSE;
-
-		switch(active){
-			case 'pass' :
-				// TODO: create an object for this
-				self.password = Constants.EMPTY_STR;
-				self.password_c = Constants.EMPTY_STR;
-				self.active_edit_pass = Constants.TRUE;
-				break;
-
-			case 'add' :
-				self.active_add_admin = Constants.TRUE;
-				break;
-
-			case 'view' :
-				self.active_view_admin = Constants.TRUE;
-				break;
-
-			case 'edit' :
-				self.active_edit_admin = Constants.TRUE;
-				break;
-
-			case 'edit_email' :
-				self.active_edit_email = Constants.TRUE;
-				break;
-
-			case 'list' :
-			default:
-				self.getAdminList();
-				self.active_list_admin = Constants.TRUE;
-				break;
-		} 
-
-		$("html, body").animate({ scrollTop: 0 }, "slow");
-	}
-
-	function validateNewAdminEmail() {
-		self.errors = Constants.FALSE;
-		// Clear error messages in new email field
-		self.validation.n_error = Constants.FALSE;
-		self.validation.n_success = Constants.FALSE;
-		self.validation.n_loading = Constants.TRUE;
-
-		// Clear error messages in confirm email field
-		self.validation.c_error = Constants.FALSE;
-		self.validation.c_success = Constants.FALSE;
-
-		manageAdminService.checkAdminEmail(self.admininfo.id, self.change.new_email).success(function(response) {
-			
-			self.validation.n_loading = Constants.FALSE;
-			
-			if(angular.equals(response.status, Constants.STATUS_OK)) {
-		        if(response.errors) {
-		            self.validation.n_error = response.errors[0].message;
-		        } else if(response.data) {
-		        	self.validation.n_success = Constants.TRUE;
-		        	self.validation.c_error = Constants.MSG_EA_CONFIRM;
-		        }
-		    }
-			
-		}).error(function(response) {
-			self.validation.n_loading = Constants.FALSE;
-			self.errors = $scope.internalError();
-		});
-
-	}
-
-	function confirmNewEmail() {
-		self.errors = Constants.FALSE;
-		self.validation.c_error = Constants.FALSE;
-		self.validation.c_success = Constants.FALSE;
+		self.success = Constants.FALSE;
 		
-		if(!angular.equals(self.change.new_email, self.change.confirm_email)) {
-			self.validation.c_error = Constants.MSG_EA_NOT_MATCH;
-		} else {
-			self.validation.c_success = Constants.TRUE;
-		}
-	}
-	function confirmDelete(id){
-		self.errors = Constants.FALSE;
-		self.delete.id = id;
-		self.delete.confirm = Constants.TRUE;
+		self.delete_id = id;
+		self.delete_confirm = Constants.TRUE;
+		
 		$("#delete_admin_modal").modal({
 	        backdrop: 'static',
 	        keyboard: Constants.FALSE,
@@ -358,18 +247,17 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 	    });
 	}
 
-	function deleteModeAdmin(){
+	self.deleteModeAdmin = function(){
 		self.errors = Constants.FALSE;
-		self.validation.c_error = Constants.FALSE;
-		self.validation.c_success = Constants.FALSE;
+		self.success = Constants.FALSE;
 
 		$scope.ui_block();
-		manageAdminService.deleteModeAdmin(self.delete.id).success(function(response){
+		ManageAdminService.deleteModeAdmin(self.delete_id).success(function(response){
 			if(angular.equals(response.status,Constants.STATUS_OK)){
 				if(response.errors){
 					self.errors = $scope.errorHandler(response.errors);
 				}else if(response.data){
-					self.validation.c_success = 'User ' + Constants.DELETE_SUCCESS;
+					self.success = ["You have successfully deleted the selected administrator."];
 					self.getAdminList();
 				}
 			}
@@ -378,55 +266,45 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
+
 		$("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 
-	function changeAdminEmail() {
+	self.changeAdminEmail = function() {
 		self.errors = Constants.FALSE;
 
 		self.base_url = $("#base_url_form input[name='base_url']").val();
 	    var callback_uri = self.base_url + "/" + angular.lowercase(Constants.ADMIN);
 
-		$scope.ui_block();
-		manageAdminService.changeAdminEmail(self.admininfo.id, self.change.new_email, callback_uri).success(function(response) {
-			if(angular.equals(response.status, Constants.STATUS_OK)) {
-				if(response.errors) {
-					self.errors = $scope.errorHandler(response.errors);
-				} else if(response.data) {
-					self.admininfo.user.email = self.change.new_email;
-					self.change.success = Constants.TRUE;
-					self.setManageAdminActive('view');
+	    if(!angular.equals(self.change.new_email, self.change.confirm_email)){
+			self.errors = [Constants.MSG_EA_NOT_MATCH];
+			self.fields["new_email"] = Constants.TRUE;
+			self.fields["confirm_email"] = Constants.TRUE;
+			$("html, body").animate({ scrollTop: 0 }, "slow");
+		} else {
+			$scope.ui_block();
+			ManageAdminService.changeAdminEmail(self.record.id, self.change.new_email, callback_uri).success(function(response) {
+				if(angular.equals(response.status, Constants.STATUS_OK)) {
+					if(response.errors) {
+						self.errors = $scope.errorHandler(response.errors);
+
+						angular.forEach(response.errors, function(value, key){
+							self.fields[value.field] = Constants.TRUE;
+						});
+					} else if(response.data) {
+						self.success = ["Successfully updated the email address."];
+
+						self.viewAdmin(self.record.id);
+						self.active_edit_email = Constants.FALSE;
+						self.active_view = Constants.TRUE;
+					}
 				}
-			}
 
-			$scope.ui_unblock();
-		}).error(function(response) {
-			self.errors = $scope.internalError();
-			$scope.ui_unblock();
-		});
-	}
-
-	self.paginateBySize = function() {
-		self.table.page = 1;
-		self.table.offset = (self.table.page - 1) * self.table.size;
-		self.getAdminList();
-	}
-
-	self.paginateByPage = function() {
-		var page = self.table.page;
-		
-		self.table.page = (page < 1) ? 1 : page;
-		self.table.offset = (page - 1) * self.table.size;
-
-		self.getAdminList();
-	}
-
-	self.updateTable = function(data) {
-		self.table.total_items = data.total;
-
-		// Set Page Count
-		var page_count = data.total / self.table.size;
-			page_count = (page_count < Constants.DEFAULT_PAGE) ? Constants.DEFAULT_PAGE : Math.ceil(page_count);
-		self.table.page_count = page_count;
+				$scope.ui_unblock();
+			}).error(function(response) {
+				self.errors = $scope.internalError();
+				$scope.ui_unblock();
+			});
+		}
 	}
 }

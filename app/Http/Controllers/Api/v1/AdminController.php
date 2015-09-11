@@ -147,9 +147,15 @@ if(Input::get('limit')){
 	 */
 	public function destroy($id)
 	{
-		#TODO: Admin cannot delete a Super Admin account but Super admin can delete admin account and other super admin account.
-		
-		if($this->admin->canDelete()) {
+
+		//If Admin deletes Super Admin respond error.
+		if($this->admin->getAdminRole($id) == config('admin_role_super_admin')
+			&& $this->admin->getAdminRole(session('current_user')) == config('admin')){
+
+			return $this->respondErrorMessage(2601);
+		}
+
+		if($this->admin->canDelete() && $id <> session('current_user')) {
 			$admin = $this->admin->deleteAdmin($id);
 			
 			if($admin) {

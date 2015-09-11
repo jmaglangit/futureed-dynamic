@@ -27,10 +27,12 @@
             			, 'placeholder' => 'New Email Address'
             			, 'ng-model' => 'admin.change.new_email'
             			, 'ng-model-options' => "{ debounce: {'default' : 1000} }"
-            			, 'ng-change' => 'admin.validateNewAdminEmail()') 
-            		)!!}
+                        , 'ng-class' => "{ 'required-field' : admin.fields['new_email'] }"
+            			, 'ng-change' => 'admin.validateNewEmail(admin.change.new_email, admin.change.confirm_email, futureed.ADMIN)'
+                    ) 
+            	)!!}
             </div>		
-            <div style="margin-top: 7px;"> 
+            <div class="margin-top-8"> 
                 <i ng-if="admin.validation.n_loading" class="fa fa-spinner fa-spin"></i>
                 <i ng-if="admin.validation.n_success" class="fa fa-check success-color"></i>
                 <span ng-if="admin.validation.n_error" class="error-msg-con">{! admin.validation.n_error !}</span>
@@ -45,8 +47,10 @@
             			, 'placeholder' => 'Confirm Email Address'
             			, 'ng-model' => 'admin.change.confirm_email'
             			, 'ng-model-options' => "{ debounce: {'default' : 1000} }"
-            			, 'ng-change' => 'admin.confirmNewEmail()') 
-            		)!!}
+                        , 'ng-class' => "{ 'required-field' : admin.fields['confirm_email'] }"
+            			, 'ng-change' => 'admin.confirmNewEmail(admin.change.new_email, admin.change.confirm_email)'
+                    ) 
+            	) !!}
             </div>
             <div style="margin-top: 7px;"> 
                 <i ng-if="admin.validation.c_success" class="fa fa-check success-color"></i>
@@ -64,7 +68,7 @@
             {!! Form::button('Cancel'
                 , array(
                     'class' => 'btn btn-gold btn-medium'
-                    , 'ng-click' => "admin.viewAdmin(admin.admininfo.id)"
+                    , 'ng-click' => "admin.setActive(futureed.ACTIVE_VIEW, admin.record.id)"
                 )
             ) !!}
     	</div>

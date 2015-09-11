@@ -26,13 +26,13 @@
 	</div>
 
 	<div class="col-xs-12 search-container">
+		{!! Form::open(
+			array('id' => 'search_form'
+				, 'class' => 'form-horizontal'
+				, 'ng-submit' => 'client.getClientList()'
+			)
+		)!!}
 		<div class="form-search">
-			{!! Form::open(
-				array('id' => 'search_form'
-					, 'method' => 'POST'
-					, 'class' => 'form-inline'
-					)
-				)!!}
 			<div class="form-group">
 				<div class="col-xs-5">
 					{!! Form::text('search_name', ''
@@ -61,7 +61,8 @@
 					)!!}
 				</div>
 			</div>
-			<div class="form-group" style="margin-top:20px;">
+
+			<div class="form-group">
 				<div class="col-xs-5">
 					{!! Form::text('search_school', ''
 						,array(
@@ -97,20 +98,19 @@
 				</div>
 			</div>
 		</div>
-	</div>
-
-	<button class="btn btn-blue btn-small margin-0-30" ng-click="client.setManageClientActive('add_client')">
-		<i class="fa fa-plus-square"></i> Add Client
-	</button>
-
-	<div class="col-xs-12 padding-0-30">
-		<div class="title-mid">
-			Client List
-		</div>
+		{!! Form::close() !!}
 	</div>
 	 
 	<div class="col-xs-12 table-container">
+		<button class="btn btn-blue btn-small" ng-click="client.setManageClientActive('add_client')">
+			<i class="fa fa-plus-square"></i> Add Client
+		</button>
+
 		<div class="list-container" ng-cloak>
+			<div class="title-mid">
+				Client List
+			</div>
+
 			<div class="size-container">
 				{!! Form::select('size'
 					, array(
@@ -135,7 +135,7 @@
 			            <th class="width-200">Name</th>
 			            <th class="width-200">Email</th>
 			            <th>Role</th>
-			            <th>Status</th>
+			            <th>Account Status</th>
 			            <th>Action</th>
 			        </tr>
 		        </thead>
@@ -148,7 +148,11 @@
 			            <td>
 			            	<div class="row">
 			            		<div class="col-xs-3">
-			            			{! a.user.status !}
+			            			<i class="fa" 
+			            				ng-class="{ 'fa-ban error-icon' : a.user.status == futureed.DISABLED, 'fa-check-circle-o success-icon' : a.user.status == futureed.ENABLED }"
+			            				tooltip="{! a.user.status !}"
+			            				tooltip-placement="top"
+			            				tooltip-trigger="mouseenter"></i>
 			            		</div>
 			            		<div class="col-xs-3">
 			            			<a href="" ng-click="client.setManageClientActive('view_client',a.id)"><span><i class="fa fa-eye"></i></span></a>
