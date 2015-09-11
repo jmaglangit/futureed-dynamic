@@ -155,6 +155,11 @@ $admin = new Admin();
         return Admin::where('user_id','=',$user_id)->pluck('id');
     }
 
+	public function getAdminUserId($id){
+
+		return Admin::find($id)->user_id;
+	}
+
     public function verifyAdminId($id){
 
         return Admin::select('id','user_id')->where('id','=',$id)->first();

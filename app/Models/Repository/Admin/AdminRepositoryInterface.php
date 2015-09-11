@@ -23,6 +23,8 @@ interface AdminRepositoryInterface {
 
     public function getAdminId($user_id);
 
+    public function getAdminUserId($id);
+
     public function verifyAdminId($id);
 
 	public function getAdminRole($id);
