@@ -97,7 +97,7 @@ $admin = new Admin();
 	 */
 	public function getAdminDetail($id){
 
-		return Admin::find($id);
+		return Admin::with('user')->find($id);
 	}
 
     public function addAdmin($data) {
