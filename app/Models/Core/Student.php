@@ -88,7 +88,7 @@ class Student extends Model {
     public function scopeEmail($query, $email) {
 
         return $query->whereHas('user', function($query) use ($email) {
-            $query->whereEmail($email);
+            $query->where('email','like','%'.$email.'%');
         });
 
     }
