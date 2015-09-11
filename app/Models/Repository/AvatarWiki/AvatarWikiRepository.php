@@ -22,12 +22,12 @@ class AvatarWikiRepository implements AvatarWikiRepositoryInterface
 
         $wikis = collect(AvatarWiki::select('id')->avatarId($avatar_id)->get()->toArray());
 
-        if(empty($wikis->toArray())){
+        if (empty($wikis->toArray())) {
 
             $wikis = collect(AvatarWiki::select('id')->get()->toArray());
         }
 
-		return AvatarWiki::find($wikis->random(1));
+        return AvatarWiki::find($wikis->random(1));
 
     }
 }
