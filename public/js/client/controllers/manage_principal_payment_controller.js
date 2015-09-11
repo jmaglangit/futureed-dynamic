@@ -162,13 +162,9 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 		self.addPayment(Constants.TRUE);
 	}
 
-	self.addPayment = function(save, record) {
+	self.addPayment = function(save) {
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
-		
-		if(record) {
-			self.invoice = data;
-		}
 
 		self.invoice.invoice_date = $filter(Constants.DATE)(new Date(), Constants.DATE_YYYYMMDD);
 		self.invoice.invoice_id = self.invoice.id;

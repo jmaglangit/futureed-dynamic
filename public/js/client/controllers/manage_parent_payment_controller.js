@@ -125,7 +125,8 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 						, total_amount 		: 	data.total_amount
 					}
 
-					self.getStudents(self.invoice.order_no, self.invoice);
+					self.getStudents(self.invoice.order_no);
+					
 					if(angular.equals(self.invoice.payment_status, Constants.PAID)) {
 						getClient(self.invoice.client_id)
 					}
@@ -171,7 +172,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 	}
 
 	//get Students associated to the payment
-	self.getStudents = function(order_no, record) {
+	self.getStudents = function(order_no) {
 		self.errors = Constants.FALSE;
 
 		$scope.ui_block();
@@ -183,7 +184,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 					self.students = response.data;
 					
 					if(self.invoice.subscription_id) {
-						self.setSubscription(record);
+						self.setSubscription();
 					}
 				}
 			}
@@ -195,7 +196,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 		});
 	}
 
-	self.setSubscription = function(record) {
+	self.setSubscription = function() {
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
 		self.fields = [];
@@ -215,15 +216,20 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 
 		if(subscription.id) {
 			// set date range based on subscription
-			var start_date = (record) ? new Date(self.invoice.date_start) : new Date();
-				self.invoice.date_start = $filter(Constants.DATE)(start_date, Constants.DATE_YYYYMMDD);
-				self.invoice.dis_date_start = start_date;
+			if(angular.equals(self.invoice.payment_status, Constants.PAID)) {
+					self.invoice.dis_date_start = self.invoice.date_start;
+					self.invoice.dis_date_end =  self.invoice.date_end;
+			} else {
+				var start_date = new Date();
+					self.invoice.date_start = $filter(Constants.DATE)(start_date, Constants.DATE_YYYYMMDD);
+					self.invoice.dis_date_start = start_date;
 
-			var end_date = new Date(start_date.getTime());
-				end_date.setDate(end_date.getDate() + parseInt(subscription.days));
+				var end_date = new Date(start_date.getTime());
+					end_date.setDate(end_date.getDate() + parseInt(subscription.days));
 
-				self.invoice.date_end = $filter(Constants.DATE)(end_date, Constants.DATE_YYYYMMDD);
-				self.invoice.dis_date_end = end_date;
+					self.invoice.date_end = $filter(Constants.DATE)(end_date, Constants.DATE_YYYYMMDD);
+					self.invoice.dis_date_end = end_date;
+			}	
 
 			self.selected_subscription = subscription;
 		}
