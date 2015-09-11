@@ -84,18 +84,16 @@
 		</div>
 	</div>
 
-	<button class="btn btn-blue btn-small margin-0-30" ng-click="admin.setActive(futureed.ACTIVE_ADD)">
-		<i class="fa fa-plus-square"></i> Add Admin
-	</button>
-
-	<div class="col-xs-12 padding-0-30">
-		<div class="title-mid">
-			Admin List
-		</div>
-	</div>
-
 	<div class="col-xs-12 table-container">
+		<button class="btn btn-blue btn-small" ng-click="admin.setActive(futureed.ACTIVE_ADD)">
+			<i class="fa fa-plus-square"></i> Add Admin
+		</button>
+
 		<div class="list-container" ng-cloak>
+			<div class="title-mid">
+				Admin List
+			</div>
+
 			<div class="size-container">
 				{!! Form::select('size'
 					, array(
@@ -131,9 +129,13 @@
 		            <td>{! a.admin_role !}</td>
 		            <td>
 		            	<div class="row">
-		            		<div class="col-xs-3">
-	    						{! a.user.status !}
-	    					</div>
+    						<div class="col-xs-3">
+		            			<i class="fa" 
+		            				ng-class="{ 'fa-ban error-icon' : a.user.status == futureed.DISABLED, 'fa-check-circle-o success-icon' : a.user.status == futureed.ENABLED }"
+		            				tooltip="{! a.user.status !}"
+		            				tooltip-placement="top"
+		            				tooltip-trigger="mouseenter"></i>
+		            		</div>
 		            		<div class="col-xs-3">
 	    						<a href="" ng-click="admin.setActive(futureed.ACTIVE_VIEW, a.id)"><span><i class="fa fa-eye"></i></span></a>
 	    					</div>

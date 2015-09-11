@@ -13,7 +13,7 @@ class ManageClassController extends Controller{
 	*/
 	public function index()
 	{
-		return view('client.teacher.class.index',['active' => 'class']);
+		return view('client.teacher.class.index', ['active' => 'class']);
 	}
 
 	/**

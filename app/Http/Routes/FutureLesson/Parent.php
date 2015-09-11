@@ -10,7 +10,7 @@
 
 		Routes::get('/', [
 			'as' => 'client.parent.index',
-			'uses' => $manage_parent_controller . '@index'
+			'uses' => 'FutureLesson\Client\DashboardController@index'
 		]);
 
 		Routes::post('/play-student', [
