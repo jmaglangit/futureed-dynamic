@@ -329,6 +329,7 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 
 		self.classroom.seats_taken = Constants.FALSE;
 		self.classroom.order_no = self.invoice.order_no;
+		self.classroom.subject_id = self.invoice.subject_id;
 		self.classroom.status = Constants.ENABLED;
 
 		$scope.ui_block();
@@ -604,6 +605,8 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 	self.updateClassroom = function() {
 		self.errors = Constants.FALSE;
 		self.fields = [];
+
+		self.classroom.subject_id = self.invoice.subject_id;
 
 		$scope.ui_block();
 		managePrincipalPaymentService.updateClassroom(self.classroom).success(function(response) {
