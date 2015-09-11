@@ -162,9 +162,14 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 		self.addPayment(Constants.TRUE);
 	}
 
-	self.addPayment = function(save) {
+	self.addPayment = function(save, record) {
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
+		
+		if(record) {
+			self.invoice = data;
+		}
+
 		self.invoice.invoice_date = $filter(Constants.DATE)(new Date(), Constants.DATE_YYYYMMDD);
 		self.invoice.invoice_id = self.invoice.id;
 		
@@ -190,6 +195,20 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
+	}
+
+	self.renewSubscription = function() {
+		var start_date = new Date();
+			self.invoice.date_start = $filter(Constants.DATE)(start_date, Constants.DATE_YYYYMMDD);
+			self.invoice.dis_date_start = start_date;
+		
+		var end_date = new Date(start_date.getTime());
+			end_date.setDate(end_date.getDate() + parseInt(self.invoice.subscription.days));
+
+			self.invoice.date_end = $filter(Constants.DATE)(end_date, Constants.DATE_YYYYMMDD);
+			self.invoice.dis_date_end = end_date;
+			
+		self.addPayment(Constants.FALSE);
 	}
 
 	$window.addEventListener('beforeunload', function() {

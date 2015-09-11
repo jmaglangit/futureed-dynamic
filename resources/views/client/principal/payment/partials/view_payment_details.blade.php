@@ -5,19 +5,17 @@
 		</div>
 	</div>
 
+	<div class="col-xs-12 success-container" ng-if="payment.errors">
+		<div class="alert alert-error" ng-if="payment.errors">
+			<p ng-repeat="error in payment.errors track by $index" > 
+				{! error !}
+			</p>
+		</div>
+	</div>
+
 	<div ng-if="payment.invoice.payment_status == futureed.PENDING">
 		{!! Form::open(array('id'=> 'add_payment_form', 'class' => 'form-horizontal')) !!}
 			<div class="form-content col-xs-12" ng-init="payment.getSchoolCode()">
-				<div class="alert alert-error" ng-if="payment.errors">
-		            <p ng-repeat="error in payment.errors track by $index" > 
-		              	{! error !}
-		            </p>
-		        </div>
-
-		        <div class="alert alert-success" ng-if="payment.success">
-		        	<p>{! payment.success !}</p>
-		        </div>
-		        
 		        <div class="form-search">
 		        	<fieldset class="payment-field">
 			        	<span class="step">1</span><p class="step-label">Please select a subject.</p>
@@ -37,7 +35,7 @@
 
 		        <div class="form-search">
 		        	<fieldset class="payment-field">
-			        	<span class="step">1</span><p class="step-label">Please add a classroom.</p>
+			        	<span class="step">2</span><p class="step-label">Please add a classroom.</p>
 			        	<div class="form-group">
 			        		<label class="col-xs-3 control-label" id="email">Number of Seats <span class="required">*</span></label>
 			        		<div class="col-xs-5">
@@ -399,7 +397,7 @@
         			, array(
         				'class' => 'btn btn-blue btn-semi-medium div-right'
         				, 'ng-disabled' => 'true'
-        				, 'ng-click' => 'payment.addPayment()'
+        				, 'ng-click' => 'payment.renewSubscription()'
         				, 'ng-if' => "payment.invoice.payment_status == futureed.PAID"
         			)
         		) !!}
