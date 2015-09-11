@@ -119,4 +119,14 @@ class Classroom extends Model {
 		});
 	}
 
+	public function scopePaymentStatus($query, $payment_status){
+
+		return $query->whereHas('order', function ($query) use ($payment_status) {
+			$query->where('payment_status', $payment_status);
+
+		});
+
+
+	}
+
 }

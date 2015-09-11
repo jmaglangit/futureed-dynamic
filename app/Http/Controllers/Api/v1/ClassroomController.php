@@ -51,6 +51,12 @@ class ClassroomController extends ApiController {
             $criteria['order_no'] = Input::get('order_no');
         }
 
+        //get payment status.
+        if(Input::get('payment_status')){
+
+           $criteria['payment_status'] = Input::get('payment_status');
+        }
+
         $limit = (Input::get('limit')) ? Input::get('limit') : 0;
 
         $offset = (Input::get('offset')) ? Input::get('offset') : 0;
