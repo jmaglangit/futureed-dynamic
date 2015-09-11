@@ -147,29 +147,32 @@ if(Input::get('limit')){
 	 */
 	public function destroy($id)
 	{
+		$current_admin_id = $this->admin->getAdminId(session('current_user'));
 
 		//If Admin deletes Super Admin respond error.
-		if($this->admin->getAdminRole($id) == config('admin_role_super_admin')
-			&& $this->admin->getAdminRole(session('current_user')) == config('admin')){
+		if ($this->admin->getAdminRole($id) == config('futureed.admin_role_super_admin')
+			&& $this->admin->getAdminRole($current_admin_id) == config('futureed.admin')
+		) {
 
 			return $this->respondErrorMessage(2601);
 		}
 
-		if($this->admin->canDelete() && $id <> session('current_user')) {
+		if ($this->admin->canDelete() && $this->admin->getAdminUserId($id) <> session('current_user')) {
+
 			$admin = $this->admin->deleteAdmin($id);
-			
-			if($admin) {
-			
+
+			if ($admin) {
+
 				$user = $this->user->deleteUser($admin->user_id);
-				
+
 				return $this->respondWithData(TRUE);
-				
+
 			} else {
-				
+
 				return $this->respondWithData(FALSE);
-				
+
 			}
-			
+
 		} else {
 			return $this->respondErrorMessage(2601);
 		}
