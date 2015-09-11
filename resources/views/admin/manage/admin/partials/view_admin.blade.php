@@ -35,9 +35,9 @@
 						[
 							'placeholder' => 'Username',
 							'ng-disabled' => 'admin.active_view_admin',
-							'ng-model' => 'admin.admininfo.user.username',
+							'ng-model' => 'admin.record.user.username',
 							'ng-model-options' => "{ debounce : {'default' : 1000} }",
-							'ng-change' => 'admin.checkUsernameAvailability(admin.admininfo.user.username)',
+							'ng-change' => 'admin.checkUsernameAvailability(admin.record.user.username)',
 							'class' => 'form-control'
 						]
 					) !!}
@@ -54,14 +54,14 @@
 					{!! Form::text('email', '',
 						[
 							'placeholder' => 'Email',
-							'ng-model' => 'admin.admininfo.user.email',
+							'ng-model' => 'admin.record.user.email',
 							'ng-disabled' => 'true',
 							'class' => 'form-control'
 						]
 					) !!}
 				</div>
 				<div class="col-xs-2">
-					<a href="" ng-click="admin.setManageAdminActive('edit_email')" class="edit-email">Edit Email</a>
+					<a href="" ng-click="admin.setActive('edit_email')" class="edit-email">Edit Email</a>
 				</div>
 			</div>
 			<div class="form-group">
@@ -72,8 +72,8 @@
 							'' => '-- Select Role --',
 							'Admin' => 'Admin',
 							'Super Admin' => 'Super Admin'
-						],'{! admin.admininfo.admin_role !}',
-						['ng-model' => 'admin.admininfo.admin_role', 'class' => 'form-control', 'ng-disabled' => 'admin.active_view_admin']
+						],'{! admin.record.admin_role !}',
+						['ng-model' => 'admin.record.admin_role', 'class' => 'form-control', 'ng-disabled' => 'admin.active_view_admin']
 					)!!}
 				</div>
 			</div>
@@ -83,40 +83,40 @@
 	                	<div class="col-xs-6 checkbox">	                				
 	                		<label>
 	                		{!! Form::radio('status'
-	                			,'Enabled'
+	                			,'futureed.ENABLED'
 	                			, false
 	                			, array(
-	                				'ng-model' => 'admin.admininfo.user.status'
+	                				'ng-model' => 'admin.record.user.status'
 	                				, 'ng-click' => 'admin.adminChangeStatus()'
 	                			)
 	                		) !!}
-	                		<span class="lbl padding-8">Enabled</span>
+	                		<span class="lbl padding-8">futureed.ENABLED</span>
 	                		</label>
 	                	</div>
 	                	<div class="col-xs-6 checkbox">
 	                		<label>
 	                		{!! Form::radio('status'
-	                			,'Disabled'
+	                			,'futureed.DISABLED'
 	                			, false
 	                			, array(
-	                				'ng-model' => 'admin.admininfo.user.status'
+	                				'ng-model' => 'admin.record.user.status'
 	                				, 'ng-click' => 'admin.adminChangeStatus()'
 	                			)
 	                		) !!}
-	                		<span class="lbl padding-8">Disabled</span>
+	                		<span class="lbl padding-8">futureed.DISABLED</span>
 	                		</label>
 	                	</div>
 	                </div>
 	                <div class="col-xs-3" ng-if="admin.active_view_admin">
-	                	<label ng-if="admin.admininfo.user.status == 'Enabled'">
+	                	<label ng-if="admin.record.user.status == futureed.ENABLED">
 	                		<b class="success-icon">
-	                			<i class="margin-top-8 fa fa-check-circle-o"></i> {! admin.admininfo.user.status !}
+	                			<i class="margin-top-8 fa fa-check-circle-o"></i> {! admin.record.user.status !}
 	                		</b>
 	                	</label>
 
-	                	<label ng-if="admin.admininfo.user.status == 'Disabled'">
+	                	<label ng-if="admin.record.user.status == futureed.DISABLED">
 	                		<b class="error-icon">
-	                			<i class="margin-top-8 fa fa-ban"></i> {! admin.admininfo.user.status !}
+	                			<i class="margin-top-8 fa fa-ban"></i> {! admin.record.user.status !}
 	                		</b>
 	                	</label>
 	                </div>
@@ -133,7 +133,7 @@
 						[
 							'class' => 'form-control',
 							'ng-disabled' => 'admin.active_view_admin',
-							'ng-model' => 'admin.admininfo.first_name',
+							'ng-model' => 'admin.record.first_name',
 							'placeholder' => 'First Name'
 						]
 					) !!}
@@ -146,15 +146,15 @@
 						[
 							'class' => 'form-control',
 							'ng-disabled' => 'admin.active_view_admin',
-							'ng-model' => 'admin.admininfo.last_name',
+							'ng-model' => 'admin.record.last_name',
 							'placeholder' => 'First Name'
 						]
 					) !!}
 				</div>
 			</div>
 			<div class="btn-container col-xs-6 col-xs-offset-2" ng-if="admin.active_edit_admin">
-				<div class="row">		
-					<div class="col-xs-6"   >
+				<div class="row form-group">		
+					<div class="col-xs-6">
 						{!! Form::button('Save'
 							, array(
 								'class' => 'btn btn-blue'
@@ -166,17 +166,18 @@
 						{!! Form::button('Cancel'
 							, array(
 								'class' => 'btn btn-gold'
-								, 'ng-click' => "admin.viewAdmin(admin.admininfo.id)"
+								, 'ng-click' => "admin.setActive(futureed.ACTIVE_VIEW, admin.record.id)"
 							)
 						) !!}
 					</div>
 				</div>
-				<div class="row">
+
+				<div class="row form-group">
 					<div class="col-xs-12">
 						{!! Form::button('Reset Password'
 							, array(
 								'class' => 'btn btn-blue'
-								, 'ng-click' => "admin.setManageAdminActive('pass')"
+								, 'ng-click' => "admin.setActive('pass')"
 							)
 						) !!}
 					</div>
@@ -186,14 +187,14 @@
 					{!! Form::button('Edit'
 						, array(
 							'class' => 'btn btn-blue btn-medium'
-							, 'ng-click' => "admin.setManageAdminActive('edit')"
+							, 'ng-click' => "admin.setActive(futureed.ACTIVE_EDIT)"
 						)
 					) !!}
 
 					{!! Form::button('Cancel'
 						, array(
 							'class' => 'btn btn-gold btn-medium'
-							, 'ng-click' => "admin.setManageAdminActive()"
+							, 'ng-click' => "admin.setActive()"
 						)
 					) !!}		
 			</div>

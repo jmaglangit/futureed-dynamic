@@ -1,14 +1,16 @@
 angular.module('futureed.controllers')
 	.controller('ManageAdminController', ManageAdminController);
 
-ManageAdminController.$inject = ['$scope', 'manageAdminService', 'apiService'];
+ManageAdminController.$inject = ['$scope', 'ManageAdminService', 'apiService', 'TableService', 'SearchService'];
 
-function ManageAdminController($scope, manageAdminService, apiService) {
+function ManageAdminController($scope, ManageAdminService, apiService, TableService, SearchService) {
 	var self = this;
 
-	self.table = {};
-	self.table.size = Constants.DEFAULT_SIZE;
-	self.table.page = Constants.DEFAULT_PAGE;
+	TableService(self);
+	self.tableDefaults();
+
+	SearchService(self);
+	self.searchDefaults()
 
 	self.user_type = Constants.ADMIN;
 	this.reg = {};
@@ -17,32 +19,75 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 	self.change = {};
 	self.delete = {};
 
-	this.getAdminList = getAdminList;
-	this.viewAdmin = viewAdmin;
-	self.editModeAdmin = editModeAdmin;
 	self.deleteModeAdmin = deleteModeAdmin;
 	this.saveAdmin = saveAdmin;
 	this.checkUsernameAvailability = checkUsernameAvailability;
 	this.checkEmailAvailability = checkEmailAvailability;
 
 	this.editAdmin = editAdmin;
-	this.setManageAdminActive = setManageAdminActive;
 	this.resetPass = resetPass;
-	this.clearSearch = clearSearch;
 
 	self.validateNewAdminEmail = validateNewAdminEmail;
 	self.confirmNewEmail = confirmNewEmail;
 	self.changeAdminEmail = changeAdminEmail;
 	self.confirmDelete = confirmDelete;
 
-	function getAdminList(){
-		var search_user = (self.search_user) ? self.search_user : Constants.EMPTY_STR;
-		var search_email = (self.search_email) ? self.search_email : Constants.EMPTY_STR;
-		var search_role = (self.search_role) ? self.search_role : Constants.EMPTY_STR;
+	self.setActive = function(active, id){
+		self.errors = Constants.FALSE;
+		self.reset_success = Constants.FALSE;
+		self.update_success = Constants.FALSE;
+		self.validation = {};
+		self.change = {};
+		self.reg = {};
+
+		self.active_list_admin = Constants.FALSE;
+		self.active_add_admin  = Constants.FALSE
+		self.active_view_admin = Constants.FALSE;
+		self.active_edit_admin = Constants.FALSE;
+		self.active_edit_email = Constants.FALSE;
+		self.active_edit_pass  = Constants.FALSE;
+
+		switch(active){
+			case 'pass' :
+				// TODO: create an object for this
+				self.password = Constants.EMPTY_STR;
+				self.password_c = Constants.EMPTY_STR;
+				self.active_edit_pass = Constants.TRUE;
+				break;
+
+			case Constants.ACTIVE_ADD :
+				self.active_add_admin = Constants.TRUE;
+				break;
+
+			case Constants.ACTIVE_VIEW :
+				self.viewAdmin(id);
+				self.active_view_admin = Constants.TRUE;
+				break;
+
+			case Constants.ACTIVE_EDIT :
+				self.viewAdmin(id);
+				self.active_edit_admin = Constants.TRUE;
+				break;
+
+			case 'edit_email' :
+				self.active_edit_email = Constants.TRUE;
+				break;
+
+			case Constants.ACTIVE_LIST :
+			default:
+				self.getAdminList();
+				self.active_list_admin = Constants.TRUE;
+				break;
+		} 
+
+		$("html, body").animate({ scrollTop: 0 }, "slow");
+	}
+
+	self.getAdminList = function(){
 		self.table.loading = Constants.TRUE;
 
 		$scope.ui_block();
-		manageAdminService.getAdminList(search_user, search_email, search_role, self.table).success(function(response){
+		ManageAdminService.getAdminList(self.search, self.table).success(function(response){
 			self.table.loading = Constants.FALSE;
 
 			if(angular.equals(response.status, Constants.STATUS_OK)){
@@ -62,10 +107,11 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 		});
 	}
 
-	function clearSearch(){
-		self.search_user = Constants.EMPTY_STR;
-		self.search_email = Constants.EMPTY_STR;
-		self.search_role = Constants.EMPTY_STR;
+	self.clearSearch = function(){
+		self.errors = Constants.FALSE;
+
+		self.searchDefaults();
+		self.tableDefaults();
 
 		self.getAdminList();
 	}
@@ -82,7 +128,7 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 			$("input, select").removeClass("required-field");
 
 			$scope.ui_block();
-			manageAdminService.saveAdmin(self.reg).success(function(response){
+			ManageAdminService.saveAdmin(self.reg).success(function(response){
 				if(angular.equals(response.status, Constants.STATUS_OK)){
 					if(response.errors){
 						self.errors = $scope.errorHandler(response.errors);
@@ -106,37 +152,24 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 		}
 	}
 
-	function viewAdmin(id){
-		self.is_success = Constants.FALSE;
+	self.viewAdmin = function(id){
 		self.errors = Constants.FALSE;
-		self.view_id = id;
+		self.is_success = Constants.FALSE;
 
-		$('input, select').removeClass('required-field');
-		manageAdminService.viewAdmin(self.view_id).success(function(response){
-			if(angular.equals(response.status,Constants.STATUS_OK)){
-				if(response.data){
-					self.admininfo = response.data;
-					self.setManageAdminActive('view');
+		$scope.ui_block();
+		ManageAdminService.viewAdmin(id).success(function(response) {
+			if(angular.equals(response.status,Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data){
+					self.record = response.data;
 				}
 			}
+
+			$scope.ui_unblock();
 		}).error(function(response) {
 			self.errors = $scope.internalError();
-		});
-	}
-
-	function editModeAdmin(id){
-		self.is_success = Constants.FALSE;
-		self.errors = Constants.FALSE;
-
-		manageAdminService.viewAdmin(id).success(function(response){
-			if(angular.equals(response.status,Constants.STATUS_OK)){
-				if(response.data){
-					self.admininfo = response.data;
-					self.setManageAdminActive('edit');
-				}
-			}
-		}).error(function(response) {
-			self.errors = $scope.internalError();
+			$scope.ui_unblock();
 		});
 	}
 
@@ -202,32 +235,30 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 
 	function editAdmin() {
 		self.errors = Constants.FALSE;
-		self.admininfo.email = self.admininfo.user.email;
-		self.admininfo.username = self.admininfo.user.username;
+		self.record.email = self.record.user.email;
+		self.record.username = self.record.user.username;
 
-		self.admininfo.status = $('input[name=status]:checked', '#add_admin_form').val();
 
-				$scope.ui_block();
-				manageAdminService.editAdmin(self.admininfo).success(function(response){
-					if(angular.equals(response.status, Constants.STATUS_OK)){
-						if(response.errors){
-							self.errors = $scope.errorHandler(response.errors);
+		$scope.ui_block();
+		ManageAdminService.editAdmin(self.admininfo).success(function(response){
+			if(angular.equals(response.status, Constants.STATUS_OK)){
+				if(response.errors){
+					self.errors = $scope.errorHandler(response.errors);
 
-							angular.forEach(response.errors, function(value, key){
-								$("#add_admin_form input[name='" + value.field +"']" ).addClass("required-field");
-							});
+					angular.forEach(response.errors, function(value, key){
+						$("#add_admin_form input[name='" + value.field +"']" ).addClass("required-field");
+					});
 
-						}else if(response.data){
-							self.errors = Constants.FALSE;
-							self.update_success = Constants.TRUE;
-							self.viewAdmin(response.data.id);
-						}
-					}
-					$scope.ui_unblock();
-				}).error(function(response){
-					$scope.ui_unblock();
-					self.errors = $scope.internalError();
-				});
+				}else if(response.data){
+					self.update_success = Constants.TRUE;
+					self.viewAdmin(response.data.id);
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(response){
+			self.errors = $scope.ui_unblock();
+			self.errors = $scope.internalError();
+		});
 
 	}
 
@@ -239,7 +270,7 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 			$("html, body").animate({ scrollTop: 0 }, "slow");
 		}else{
 			$scope.ui_block();
-			manageAdminService.resetPass(self.password, self.admininfo.id).success(function(response){
+			ManageAdminService.resetPass(self.password, self.admininfo.id).success(function(response){
 				if(angular.equals(response.status, Constants.STATUS_OK)){
 					if(response.errors){
 						self.errors = $scope.errorHandler(response.errors);
@@ -256,55 +287,6 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 		}
 	}
 
-	function setManageAdminActive(active){
-		self.errors = Constants.FALSE;
-		self.reset_success = Constants.FALSE;
-		self.update_success = Constants.FALSE;
-		self.validation = {};
-		self.change = {};
-		self.reg = {};
-
-		self.active_list_admin = Constants.FALSE;
-		self.active_add_admin  = Constants.FALSE
-		self.active_view_admin = Constants.FALSE;
-		self.active_edit_admin = Constants.FALSE;
-		self.active_edit_email = Constants.FALSE;
-		self.active_edit_pass  = Constants.FALSE;
-
-		switch(active){
-			case 'pass' :
-				// TODO: create an object for this
-				self.password = Constants.EMPTY_STR;
-				self.password_c = Constants.EMPTY_STR;
-				self.active_edit_pass = Constants.TRUE;
-				break;
-
-			case 'add' :
-				self.active_add_admin = Constants.TRUE;
-				break;
-
-			case 'view' :
-				self.active_view_admin = Constants.TRUE;
-				break;
-
-			case 'edit' :
-				self.active_edit_admin = Constants.TRUE;
-				break;
-
-			case 'edit_email' :
-				self.active_edit_email = Constants.TRUE;
-				break;
-
-			case 'list' :
-			default:
-				self.getAdminList();
-				self.active_list_admin = Constants.TRUE;
-				break;
-		} 
-
-		$("html, body").animate({ scrollTop: 0 }, "slow");
-	}
-
 	function validateNewAdminEmail() {
 		self.errors = Constants.FALSE;
 		// Clear error messages in new email field
@@ -316,7 +298,7 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 		self.validation.c_error = Constants.FALSE;
 		self.validation.c_success = Constants.FALSE;
 
-		manageAdminService.checkAdminEmail(self.admininfo.id, self.change.new_email).success(function(response) {
+		ManageAdminService.checkAdminEmail(self.admininfo.id, self.change.new_email).success(function(response) {
 			
 			self.validation.n_loading = Constants.FALSE;
 			
@@ -364,7 +346,7 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 		self.validation.c_success = Constants.FALSE;
 
 		$scope.ui_block();
-		manageAdminService.deleteModeAdmin(self.delete.id).success(function(response){
+		ManageAdminService.deleteModeAdmin(self.delete.id).success(function(response){
 			if(angular.equals(response.status,Constants.STATUS_OK)){
 				if(response.errors){
 					self.errors = $scope.errorHandler(response.errors);
@@ -388,14 +370,14 @@ function ManageAdminController($scope, manageAdminService, apiService) {
 	    var callback_uri = self.base_url + "/" + angular.lowercase(Constants.ADMIN);
 
 		$scope.ui_block();
-		manageAdminService.changeAdminEmail(self.admininfo.id, self.change.new_email, callback_uri).success(function(response) {
+		ManageAdminService.changeAdminEmail(self.admininfo.id, self.change.new_email, callback_uri).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					self.admininfo.user.email = self.change.new_email;
 					self.change.success = Constants.TRUE;
-					self.setManageAdminActive('view');
+					self.setActive('view');
 				}
 			}
 

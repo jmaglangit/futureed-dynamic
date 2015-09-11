@@ -1,85 +1,85 @@
 angular.module('futureed.services')
-	.factory('manageAdminService', manageAdminService);
+	.factory('ManageAdminService', ManageAdminService);
 
-function manageAdminService($http) {
-	var adminApiUrl = '/api/v1/';
-	var manageAdminApi = {};
+function ManageAdminService($http) {
+	var serviceUrl = '/api/v1/';
+	var service = {};
 
-	manageAdminApi.getAdminList = function(user, email, role, table){
+	service.getAdminList = function(search, table){
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url 	: adminApiUrl + 'admin?username=' + user
-				+ '&email=' + email 
-				+ '&role=' + role
+			, url 	: serviceUrl + 'admin?username=' + search.user
+				+ '&email=' + search.email 
+				+ '&role=' + search.role
 				+ '&limit=' + table.size
 				+ '&offset=' + table.offset
 		});
 	}
 
-	manageAdminApi.checkUserAvailable = function(username, user_type){
+	service.checkUserAvailable = function(username, user_type){
 		return $http({
 			method 	: Constants.METHOD_POST
 			, data 	: {username : username, user_type : user_type}
-			, url 	: adminApiUrl + 'user/username'
+			, url 	: serviceUrl + 'user/username'
 		});
 	}
 
-	manageAdminApi.saveAdmin = function(data){
+	service.saveAdmin = function(data){
 		return $http({
 			method 	: Constants.METHOD_POST
 			, data 	: data
-			, url 	: adminApiUrl + 'admin'
+			, url 	: serviceUrl + 'admin'
 		});
 	}
 
-	manageAdminApi.viewAdmin = function(id){
+	service.viewAdmin = function(id){
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url 	: adminApiUrl + 'admin/' + id
+			, url 	: serviceUrl + 'admin/' + id
 		})
 	}
 
-	manageAdminApi.editAdmin = function(data){
+	service.editAdmin = function(data){
 		return $http({
 			method 	: Constants.METHOD_PUT
 			, data 	: data 
-			, url 	: adminApiUrl + 'admin/' + data.id
+			, url 	: serviceUrl + 'admin/' + data.id
 		})
 	}
 
-	manageAdminApi.resetPass = function(password, id){
+	service.resetPass = function(password, id){
 		return $http({
 			method 	: Constants.METHOD_POST
 			, data 	: {new_password : password}
-			, url 	: adminApiUrl + 'admin/change-password/' + id
+			, url 	: serviceUrl + 'admin/change-password/' + id
 
 		});
 	}
 
-	manageAdminApi.changeAdminEmail = function(id, new_email, callback_uri) {
+	service.changeAdminEmail = function(id, new_email, callback_uri) {
 		return $http({
 			method 	: Constants.METHOD_POST
 			, data 	: {new_email : new_email, callback_uri : callback_uri}
-			, url 	: adminApiUrl + 'admin/change-email/' + id
+			, url 	: serviceUrl + 'admin/change-email/' + id
 
 		});
 	}
 	
-	manageAdminApi.checkAdminEmail = function(id, email) {
+	service.checkAdminEmail = function(id, email) {
 		return $http({
 			method 	: Constants.METHOD_POST
 			, data 	: {email : email}
-			, url 	: adminApiUrl + 'admin/check-email/' + id
+			, url 	: serviceUrl + 'admin/check-email/' + id
 
 		});
 	}
 
-	manageAdminApi.deleteModeAdmin = function(id){
+	service.deleteModeAdmin = function(id){
 		return $http({
 			method 	: Constants.METHOD_DELETE
-			, url 	: adminApiUrl + 'admin/' + id
+			, url 	: serviceUrl + 'admin/' + id
 		})
 	}
 	
-	return manageAdminApi;
+	return service;
 }

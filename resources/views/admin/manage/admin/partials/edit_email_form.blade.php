@@ -64,7 +64,7 @@
             {!! Form::button('Cancel'
                 , array(
                     'class' => 'btn btn-gold btn-medium'
-                    , 'ng-click' => "admin.viewAdmin(admin.admininfo.id)"
+                    , 'ng-click' => "admin.setActive(futureed.ACTIVE_VIEW, admin.record.id)"
                 )
             ) !!}
     	</div>

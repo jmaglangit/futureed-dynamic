@@ -26,6 +26,7 @@ function SearchService() {
                 scope.search.payment_status = Constants.EMPTY_STR;
                 scope.search.request_answer_status = Constants.EMPTY_STR;
                 scope.search.request_status = Constants.EMPTY_STR;
+                scope.search.role = Constants.EMPTY_STR;
                 scope.search.school_code = Constants.EMPTY_STR;
                 scope.search.question_status = Constants.EMPTY_STR;
                 scope.search.status = Constants.EMPTY_STR;
@@ -38,6 +39,7 @@ function SearchService() {
                 scope.search.subject_id = Constants.EMPTY_STR;
                 scope.search.teaching_module = Constants.EMPTY_STR;
                 scope.search.title = Constants.EMPTY_STR;
+                scope.search.user = Constants.EMPTY_STR;
                 scope.search.created = Constants.EMPTY_STR;
                 scope.search.question_type = Constants.EMPTY_STR;
                 scope.search.questions_text = Constants.EMPTY_STR;

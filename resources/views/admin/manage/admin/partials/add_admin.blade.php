@@ -171,7 +171,7 @@
 				{!! Form::button('Cancel'
 					, array(
 						'class' => 'btn btn-gold btn-medium'
-						, 'ng-click' => "admin.setManageAdminActive()"
+						, 'ng-click' => "admin.setActive()"
 					)
 				) !!}
 			</div>
