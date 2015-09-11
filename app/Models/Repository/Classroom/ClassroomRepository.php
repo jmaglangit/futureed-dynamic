@@ -47,10 +47,10 @@ class ClassroomRepository implements ClassroomRepositoryInterface{
             $classroom = $classroom->order_no($criteria['order_no']);
         }
 
-		if (isset($criteria['payment_status'])) {
+        if (isset($criteria['payment_status'])) {
 
-			$classroom = $classroom->paymentStatus($criteria['payment_status']);
-		}
+            $classroom = $classroom->paymentStatus($criteria['payment_status']);
+        }
 
         $classroom = $classroom->with('order', 'grade', 'client','subject');
 
