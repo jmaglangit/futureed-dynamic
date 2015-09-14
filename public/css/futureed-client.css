@@ -354,3 +354,8 @@ content legend {
 	overflow: hidden;
 	max-width: 60px;
 }
+
+.invitation-code p {
+	color: #B7B4B1;
+	font-style: italic;
+}

@@ -180,13 +180,17 @@ function ManageParentStudentController($scope, $filter, ManageParentStudentServi
 
 	self.submitCode = function() {
 		self.errors = Constants.FALSE;
+		self.fields = [];
 
 		$scope.ui_block();
-
 		ManageParentStudentService.submitCode($scope.user.id, self.reg.invitation_code).success(function(response){
 			if(angular.equals(response.status,Constants.STATUS_OK)){
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
+
+					angular.forEach(response.errors, function(value, key) {
+						self.fields[value.field] = Constants.TRUE;
+					});
 				}else if(response.data) {
 					self.success = Constants.STUDENT + ' ' + Constants.ADD_SUCCESS_MSG;
 					self.setActive('list', 1);
