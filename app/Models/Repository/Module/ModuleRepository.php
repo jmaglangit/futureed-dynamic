@@ -236,7 +236,7 @@ class ModuleRepository implements ModuleRepositoryInterface
 			//module_status
 			if (isset($criteria['module_status'])) {
 
-				$student_module = $student_module->moduleStatus($criteria['module_status']);
+				$student_module = $student_module->studentModuleStatus($criteria['module_status']);
 			}
 
 			if (isset($criteria['limit'])) {
