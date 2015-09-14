@@ -14,7 +14,7 @@
 						<h6 class="text-danger ng-hide" ng-show="session.current_state == 'introduction'">Instructions</h6>
 						
 						<!-- INTRODUCTION -->
-						<div id="instructions" class="ng-hide" ng-show="session.current_state == 'introduction'">
+						<div id="instructions" class="instructions ng-hide" ng-show="session.current_state == 'introduction'">
 							<div ng-bind-html="markups.intro"></div>
 						</div>
 						<!--// INTRODUCTION -->

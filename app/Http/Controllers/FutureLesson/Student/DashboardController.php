@@ -15,8 +15,8 @@ class DashboardController extends Controller {
 	public function index()
 	{
 		$user_object = json_decode(Session::get('student'));
-
-		if(!is_numeric($user_object->avatar_id)) {
+		
+		if(!(is_numeric($user_object->avatar_id) && is_numeric($user_object->learning_style_id))) {
 			return redirect()->route('student.dashboard.follow_up_registration');
 		}
 		

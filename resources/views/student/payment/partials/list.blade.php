@@ -1,4 +1,14 @@
 <div ng-if="payment.active_list">
+	<div class="content-title">
+		<div class="title-main-content">
+			<div class="col-xs-2 pull-right">
+				<span>
+					<a href="{!! route('student.class.index') !!}" class="btn btn-maroon top-10">Back</a>
+				</span>
+			</div>
+		</div>
+	</div>
+	
 	<div class="col-xs-12 success-container" ng-if="payment.errors || payment.success">
 		<div class="alert alert-error" ng-if="payment.errors">
 			<p ng-repeat="error in payment.errors track by $index">
