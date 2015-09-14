@@ -588,10 +588,7 @@ li.active .rnd-identifier{
 	max-width: 330px;
 	line-height: 1.4em;
 }
-.detcon h2{
-	font-size: 26px;
- 	color:#fff;
-}
+
 .detcon p{
 
 }
@@ -923,7 +920,8 @@ div > .btncon > a {
 }
 .hdr > .detcon > h2 {
 	text-transform: uppercase;
-	margin-left: 70px;
+	font-size: 26px;
+ 	color:#fff;
 }
 .edit-mail{
 	margin-left: 10px !important;
