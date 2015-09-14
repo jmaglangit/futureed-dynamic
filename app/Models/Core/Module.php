@@ -156,6 +156,11 @@ class Module extends Model
 		});
 	}
 
+	public function scopeStudentModuleStatus($query,$status){
+
+		return $query->where('module_status',$status);
+	}
+
 	public function scopeStudentId($query, $student_id){
 
 		return $query->whereHas('studentModule', function ($query) use ($student_id) {
