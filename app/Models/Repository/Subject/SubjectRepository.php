@@ -29,7 +29,12 @@ class SubjectRepository implements SubjectRepositoryInterface {
 			if(count($criteria) > 0) {
 				if(isset($criteria['name'])) {
 					$subjects = $subjects->with('areas')->name($criteria['name']);
-				}				
+				}
+
+
+				if(isset($criteria['status'])) {
+					$subjects = $subjects->with('areas')->status($criteria['status']);
+				}
 			}
 		
 			$count = $subjects->count();

@@ -44,6 +44,10 @@ class SubjectController extends ApiController {
 		if(Input::get('name')) {
 			$criteria['name'] = Input::get('name');
 		}
+
+		if(Input::get('status')) {
+			$criteria['status'] = Input::get('status');
+		}
 				
 		if(Input::get('limit')) {
 			$limit = intval(Input::get('limit'));
