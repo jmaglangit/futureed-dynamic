@@ -15,13 +15,13 @@ class DashboardController extends Controller {
 	public function index()
 	{
 		$user_object = json_decode(Session::get('student'));
-
-		if(!is_numeric($user_object->avatar_id)) {
+		
+		if(!(is_numeric($user_object->avatar_id) && is_numeric($user_object->learning_style_id))) {
 			return redirect()->route('student.dashboard.follow_up_registration');
 		}
 		
 		if(isset($user_object->class) && $user_object->class->subscription_status === "Active") {
-			return redirect()->route('student.class.index');		
+			// return redirect()->route('student.class.index');		
 		}
 
 		return view('student.dashboard.index');
