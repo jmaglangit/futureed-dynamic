@@ -97,6 +97,8 @@ class ClassStudentRequest extends ApiRequest {
 			'grade_code.required' => 'The grade field is required.',
 			'grade_code.numeric' => 'grade is invalid.',
 			'class_id.required' => 'The class field is required.',
+			'after' => 'The date removed must be a date today or lesser than the date the student was added.',
+			'before' => 'The date removed must be a date today or lesser than the date the student was added.'
 		];
     }
 }
