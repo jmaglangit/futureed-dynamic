@@ -274,6 +274,7 @@ class QuestionRepository implements QuestionRepositoryInterface{
 	public function getQuestionsByModule($module_id){
 
 		return Question::whereModuleId($module_id)
+			->whereStatus(config('futureed.enabled'))
 			->orderBySeqNo()->get();
 	}
 
