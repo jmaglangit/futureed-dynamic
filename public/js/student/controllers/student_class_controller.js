@@ -15,6 +15,18 @@ function StudentClassController($scope, $filter, $window, StudentClassService, S
 	TableService(self);
 	self.tableDefaults();
 
+	self.setCurrentClass = function(class_id) {
+		if(parseInt(class_id)) {
+			self.current_class = class_id;	
+		}
+	}
+
+	self.redirectClass = function(url, class_id) {
+		if(parseInt(class_id) && self.current_class != class_id) {
+			$window.location.href = url + "/" + class_id;	
+		}
+	}
+
 	self.redirectHelp = function(help_id) {
 		$("#redirect_help input[name='id']").val(help_id);
 		$("#redirect_help").submit();
@@ -53,6 +65,7 @@ function StudentClassController($scope, $filter, $window, StudentClassService, S
 		self.tips.errors = Constants.FALSE;
 		self.tips.success = Constants.FALSE;
 		self.tips.student_id = $scope.user.id;
+		self.tips.class_id = (self.current_class) ? self.current_class : Constants.EMPTY_STR;
 
 		$scope.div_block("tips_form");
 		StudentClassService.submitTips(self.tips).success(function(response){
@@ -88,7 +101,7 @@ function StudentClassController($scope, $filter, $window, StudentClassService, S
 		self.help.errors = Constants.FALSE;
 		self.help.success = Constants.FALSE;
 		self.help.student_id = $scope.user.id;
-		self.help.class_id = $scope.user.class_id.class_id;
+		self.help.class_id = (self.current_class) ? self.current_class : Constants.EMPTY_STR;
 
 		$scope.div_block("help_request_form");
 		StudentClassService.submitHelp(self.help).success(function(response){
@@ -210,6 +223,12 @@ function StudentClassController($scope, $filter, $window, StudentClassService, S
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					self.classes = response.data.records;
+
+					if(!self.current_class && self.classes) {
+						self.current_class = self.classes[0].id;
+					}
+
+					self.listModules();
 				}
 			}
 
@@ -220,19 +239,11 @@ function StudentClassController($scope, $filter, $window, StudentClassService, S
 		});
 	}
 
-	self.selectClass = function(class_id) {
-		self.searchDefaults();
-		self.tableDefaults();
-		
-		self.listModules(class_id);
-	}
-
-	self.listModules = function(class_id) {
+	self.listModules = function() {
 		self.errors = Constants.FALSE;
 		self.records = [];
 		self.table.loading = Constants.TRUE;
 
-		self.current_class = (class_id) ? class_id : self.current_class;
 		self.search.class_id = self.current_class;
 		self.search.student_id = $scope.user.id;
 

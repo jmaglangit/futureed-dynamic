@@ -149,7 +149,7 @@
 								, 'ng-model' => 'content.record.content_text'
 								, 'ng-disabled' => 'content.active_view'
 								, 'ng-class' => "{ 'required-field' : content.fields['content_text'] }"
-								, 'class' => 'form-control'
+								, 'class' => 'form-control disabled-textarea'
 								, 'rows' => '5'
 							)
 						) !!}
@@ -256,7 +256,7 @@
 	        		</div>
 	        	</div>
 	        	<div class="form-group" ng-if="content.active_view">
-	        		<div class="btn-container col-xs-8 col-xs-offset-2">
+	        		<div class="btn-container col-xs-9 col-xs-offset-2">
 						{!! Form::button('Edit'
 							, array(
 								'class' => 'btn btn-blue btn-medium'
@@ -273,7 +273,7 @@
 					</div>
 	        	</div>
 	        	<div class="form-group" ng-if="content.active_edit">
-	        		<div class="btn-container col-xs-8 col-xs-offset-2">
+	        		<div class="btn-container col-xs-9 col-xs-offset-2">
 						{!! Form::button('Save'
 							, array(
 								'class' => 'btn btn-blue btn-medium'

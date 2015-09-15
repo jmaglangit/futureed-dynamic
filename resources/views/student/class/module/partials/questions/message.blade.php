@@ -2,8 +2,8 @@
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
-				<h3 class="title-main-content" ng-if="mod.module_message.skip_module || mod.module_message.no_questions"> {! mod.module_message.name !} </h3>
-				<h3 class="title-main-content" ng-if="mod.module_message.module_done"> {! mod.module_message.name !} Module Complete </h3>
+				<div class="title-main-content" ng-if="mod.module_message.skip_module || mod.module_message.no_questions"> {! mod.module_message.name !} </div>
+				<div class="title-main-content" ng-if="mod.module_message.module_done"> {! mod.module_message.name !} Module Complete </div>
 			</div>
 			<div class="modal-body message-container">
 				<div ng-if="mod.module_message.skip_module">
@@ -70,7 +70,7 @@
 					<div ng-if="mod.module_message.skip_module">
 						{!! Form::button('Proceed to Questions'
 							, array(
-								'class' => 'btn btn-maroon btn-medium'
+								'class' => 'btn btn-maroon btn-semi-medium'
 								, 'data-dismiss' => 'modal'
 								, 'ng-click' => 'mod.skipModule()'
 							)
@@ -78,7 +78,7 @@
 
 						{!! Form::button('Later'
 							, array(
-								'class' => 'btn btn-gold btn-medium'
+								'class' => 'btn btn-gold btn-semi-medium'
 								, 'data-dismiss' => 'modal'
 							)
 						) !!}

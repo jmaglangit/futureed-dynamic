@@ -50,7 +50,7 @@
 				<div template-directive template-url="{!! route('student.class.module.partials.questions') !!}"></div>
 			</div>
 		</div>
-			<!-- End of Main Container -->
+		<!-- End of Main Container -->
 
 		<div class="row" ng-if="!mod.no_record && !mod.record.module_done">
 			<div class="drawer col-xs-6" ng-controller="TipsController as tips">
