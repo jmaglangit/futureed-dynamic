@@ -13,7 +13,7 @@
 			<div template-directive template-url="{!! route('student.partials.tips_help_bar') !!}"></div>
 		</div>
 
-		<div class="module-wrapper"> 
+		<div class="module-wrapper" ng-init="class.setCurrentClass('{!! $class_id !!}')"> 
 			<div template-directive template-url="{!! route('student.class.partials.module_list') !!}"></div>
 		</div>
 	</div>

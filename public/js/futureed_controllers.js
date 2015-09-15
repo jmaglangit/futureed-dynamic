@@ -5,7 +5,8 @@ angular.module('futureed.controllers', ['ngFileUpload', 'as.sortable'])
 
 function TemplateDirective() {
 	return {
-		templateUrl : function(scope, element, attrs) {
+		scope: false
+		, templateUrl : function(scope, element, attrs) {
 			return element.templateUrl;
 		}
 	}

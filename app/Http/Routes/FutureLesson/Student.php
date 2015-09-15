@@ -79,6 +79,15 @@
 					, 'uses' => 'FutureLesson\Student\ClassController@index'
 				]);
 
+			Routes::get('/{id}', [ 
+					'uses' => 'FutureLesson\Student\ClassController@index'
+				]);
+
+			Routes::post('/', [ 
+					'as' => 'student.class.post.index'
+					, 'uses' => 'FutureLesson\Student\ClassController@post_index'
+				]);
+
 			Routes::group([
 				  'prefix' => '/partials'
 				, 'middleware' => 'student_partial'], function()

@@ -62,7 +62,8 @@
 
 	<div class="col-xs-12 class-container">
 		<ul class="nav nav-pills module-pills" role="tablist" ng-init="class.listClass()">
-			<li role="presentation" class="module-tabs" ng-repeat="aClass in class.classes track by $index" ng-class="{ 'active' : $index == 0 }" ng-click="class.selectClass(aClass.class_id)">
+			<li role="presentation" class="module-tabs" ng-repeat="aClass in class.classes track by $index" ng-class="{ 'active' : aClass.class_id == class.current_class }"
+				ng-click="class.redirectClass('{!! route('student.class.index') !!}', aClass.class_id)">
 				<div ng-if="$index == 0"><span ng-init="class.selectClass(aClass.class_id)"></span></div>
 				<a href="#home" aria-controls="home" role="tab" data-toggle="tab" >{! aClass.classroom.subject.name !}</a>
 			</li>
@@ -88,12 +89,15 @@
 					<div class="module-list" ng-if="class.records.length">
 						<div class="module-item" ng-repeat="record in class.records">
 							<div class="module-image-holder">
-								<img ng-if="record.module_status != 'Completed'" ng-class="{ 'module-icon' : user.points >= record.points_to_unlock, 'locked-module-icon' : user.points < record.points_to_unlock}" 
-									ng-src="{! user.points >= record.points_to_unlock && '/images/icons/default-module-icon.png' || '/images/icons/icon-lock.png' !}"
+								<img ng-if="record.module_status != 'Completed' && user.points >= record.points_to_unlock" class="module-icon"
+									ng-src="{! record.icon_image == futureed.NONE && '/images/icons/default-module-icon.png' || record.icon_image !}"
 									ng-click="class.redirect('{!! route('student.class.module.index') !!}', record)" tooltip-class="module-tooltip" tooltip-placement="bottom" tooltip="{! record.name !}">
 
+								<img ng-if="record.module_status !== 'Completed' && user.points < record.points_to_unlock" class="locked-module-icon"
+									ng-src="/images/icons/icon-lock.png" tooltip-class="module-tooltip" tooltip-placement="bottom" tooltip="{! record.name !}">
+
 								<img ng-if="record.module_status == 'Completed'" class="locked-module-icon"
-									ng-src="/images/icons/default-module-icon.png">
+									ng-src="/images/icons/default-module-icon.png" tooltip-class="module-tooltip" tooltip-placement="bottom" tooltip="{! record.name !}">
 							</div>
 
 							<p class="module-name">{! record.name !}</p>

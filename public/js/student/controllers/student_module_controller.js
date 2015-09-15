@@ -86,32 +86,61 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		});	
 	}
 
+	var getClassrooms = function(successCallback) {
+		StudentModuleService.listClass($scope.user.id).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else {
+					if(successCallback) {
+						successCallback(response);
+					}
+				}
+			}
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+		});	
+	} 
+
 
 	self.launchModule = function(module_id) {
 		// get module details
 		self.getModuleDetail(module_id, function(response) {
 			if(response.data) {
 				self.record = response.data;
+				var class_id = Constants.FALSE;
 				
-				if(!self.record.student_module.length) {
-					// create student_module
-					var data = {};
-						data.class_id = $scope.user.class.class_id;
-						data.student_id = $scope.user.id;
-						data.module_id = self.record.id;
-						data.subject_id = self.record.subject_id;
+				getClassrooms(function(response) {
+					var data = response.data.records;
+					var subject_id = self.record.subject_id;
 
-					createModuleStudent(data, function(response) {
-						if(response.data) {
-							self.record.student_module[0] = response.data;	
-							loadModuleView();
-						} else {
-							self.errors = $internalError();
+					for (var key = 0; key < data.length; key++) {
+						if(angular.equals(parseInt(data[key].classroom.subject_id), parseInt(subject_id))) {
+							class_id = data[key].class_id;
+							break;
 						}
-					});
-				} else {
-					loadModuleView();
-				}
+					};
+
+					if(!self.record.student_module.length) {
+						// create student_module
+						var data = {};
+							data.class_id = class_id;
+							data.student_id = $scope.user.id;
+							data.module_id = self.record.id;
+							data.subject_id = self.record.subject_id;
+
+						createModuleStudent(data, function(response) {
+							if(response.data) {
+								self.record.student_module[0] = response.data;	
+								loadModuleView();
+							} else {
+								self.errors = $internalError();
+							}
+						});
+					} else {
+						loadModuleView();
+					}
+				});
 			} else {
 				self.errors = $scope.internalError();
 			}
@@ -219,7 +248,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		});
 	}
 
-	self.exitModule = function() {
+	self.exitModule = function(redirect_to) {
 		var data = {};
 			data.module_id = self.record.student_module[0].id;
 
@@ -232,8 +261,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 			}
 			
 		updateModuleStudent(data, function() {
-			var base_url = $("#base_url_form input[name='base_url']").val();
-			$window.location.href = base_url +"/student/class";
+			$window.location.href = redirect_to + "/" + self.record.student_module[0].class_id;
 		});
 	}
 

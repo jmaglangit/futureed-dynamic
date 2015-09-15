@@ -98,5 +98,12 @@ function StudentModuleService($http){
 		});
 	}
 
+	service.listClass = function(student_id) {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url 	: serviceUrl + 'class-student/student-class-list?student_id=' + student_id
+		});
+	}
+
 	return service;
 }

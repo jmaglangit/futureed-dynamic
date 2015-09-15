@@ -1,33 +1,7 @@
-<div class="contents-container col-xs-12" ng-if="mod.contents.teaching_content.media_type.id == futureed.VIDEO">
-	<!-- TODO: Mar -->
-	<iframe ng-if="mod.contents.teaching_content.content_url" ng-src="{! mod.contents.teaching_content.content_url | trustAsResourceUrl !}" width="100%" height="500" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen ng-cloak></iframe>
 
-	<div>
-		{!! Form::button('Exit Module'
-			,array(
-				'class' => 'btn btn-maroon exit-btn'
-				, 'ng-click' => "mod.exitModule()"
-			)
-		)!!}
-		{!! Form::button('Skip'
-			,array(
-				'class' => 'btn btn-gold next-btn'
-				, 'ng-click' => 'mod.startQuestions()'
-			)
-		)!!}
-	</div>
-
-	<div class="content-pagination" ng-if="mod.record">
-		<pagination 
-			total-items="mod.table.total_items" 
-			ng-model="mod.table.page"
-			max-size="1"
-			items-per-page="mod.table.size" 
-			previous-text = "Prev"
-			next-text="Next"
-			class="pagination" 
-			ng-change="mod.paginateContent()">
-		</pagination>
+<div ng-if="mod.contents.teaching_content.media_type.id == futureed.VIDEO">
+	<div class="contents-container col-xs-12">
+		<iframe ng-if="mod.contents.teaching_content.content_url" ng-src="{! mod.contents.teaching_content.content_url | trustAsResourceUrl !}" width="100%" height="500" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen ng-cloak></iframe>
 	</div>
 </div>
 
@@ -45,34 +19,6 @@
 			<div class="questions-message">
 				<p ng-bind-html="mod.contents.teaching_content.content_text | trustAsHtml"></p>
 			</div>
-		</div>
-
-		<div class="content-pagination" ng-if="mod.record">
-			<pagination 
-				total-items="mod.table.total_items" 
-				ng-model="mod.table.page"
-				max-size="1"
-				items-per-page="mod.table.size" 
-				previous-text = "Prev"
-				next-text="Next"
-				class="pagination" 
-				ng-change="mod.paginateContent()">
-			</pagination>
-		</div>
-
-		<div>
-			{!! Form::button('Exit Module'
-				,array(
-					'class' => 'btn btn-gold exit-btn'
-					, 'ng-click' => "mod.exitModule()"
-				)
-			)!!}
-			{!! Form::button('Skip'
-				,array(
-					'class' => 'btn btn-maroon next-btn'
-					, 'ng-click' => 'mod.startQuestions()'
-				)
-			)!!}
 		</div>
 	</div>
 </div>
@@ -92,33 +38,28 @@
 				<p ng-bind-html="mod.contents.teaching_content.content_text | trustAsHtml"></p>
 			</div>
 		</div>
-
-		<div class="content-pagination" ng-if="mod.record">
-			<pagination 
-				total-items="mod.table.total_items" 
-				ng-model="mod.table.page"
-				max-size="1"
-				items-per-page="mod.table.size" 
-				previous-text = "Prev"
-				next-text="Next"
-				class="pagination" 
-				ng-change="mod.paginateContent()">
-			</pagination>
-		</div>
-
-		<div>
-			{!! Form::button('Exit Module'
-				,array(
-					'class' => 'btn btn-gold exit-btn'
-					, 'ng-click' => "mod.exitModule()"
-				)
-			)!!}
-			{!! Form::button('Skip'
-				,array(
-					'class' => 'btn btn-maroon next-btn'
-					, 'ng-click' => 'mod.startQuestions()'
-				)
-			)!!}
-		</div>
 	</div>
+</div>
+
+<div class="content-pagination" ng-if="mod.record">
+	<pagination 
+		total-items="mod.table.total_items" 
+		ng-model="mod.table.page"
+		max-size="1"
+		items-per-page="mod.table.size" 
+		previous-text = "Prev"
+		next-text="Next"
+		class="pagination" 
+		ng-change="mod.paginateContent()">
+	</pagination>
+</div>
+
+<div>
+	<button type="button" class="btn btn-maroon exit-btn" ng-click="mod.exitModule('{!! route('student.class.index') !!}')">Exit Module</button>
+	{!! Form::button('Skip'
+		,array(
+			'class' => 'btn btn-gold next-btn'
+			, 'ng-click' => 'mod.startQuestions()'
+		)
+	)!!}
 </div>

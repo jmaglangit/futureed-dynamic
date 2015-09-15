@@ -2,22 +2,30 @@
 
 use FutureEd\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Session;
-
-
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Input;
 
 class ClassController extends Controller {
 	/**
 	*Display Class Index Page
 	*/
-	public function index() {
+	public function index($id = null) {
 		$user_object = json_decode(Session::get('student'));
 
 		if(!(isset($user_object->class) && $user_object->class->subscription_status === "Active")) {
 			return redirect()->route('student.dashboard.index');				
 		}
 
-		return view('student.class.index');
+		if(isset($id) && !intval($id)) {
+			abort(404);
+		}
+
+		return view('student.class.index', array('class_id' => $id));
+	}
+
+	public function post_index() {
+		$input = Input::only('class');
+
+		return view('student.class.index', array('class_id' => $input['class']));
 	}
 
 	/**

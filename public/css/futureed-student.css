@@ -738,7 +738,7 @@ hr {
 }
 
 .module-item {
-	margin: 20px 25px 0 25px;
+	margin: 10px 25px 0 25px;
 	display: inline-block;
 	text-align: center;
 	width: 15%;
@@ -747,16 +747,15 @@ hr {
 .module-icon, .locked-module-icon {
 	border-radius: 50%;
 	width: 80px;
+	height: 80px;
 	transition: ease-out .1s;
 	background-color: #ffffff;
 	padding: 10px;
+
 }
 
 .module-icon:hover {
 	box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-	width: 100px;
-	margin: -10px;
-	transition: ease-out .1s;
 	cursor: pointer;
 }
 
@@ -765,16 +764,18 @@ hr {
 }
 
 .tooltip.module-tooltip .tooltip-inner {
-	background-color: #ab2046;	
-	margin:20px;
+	background-color: #04435e;
+	margin: 20px 0px;
 	padding: 15px;
 	box-sizing: border-box;
 	font-family: 'Schoolbell', sans-serif;
-	min-width: 150px;
+	width: 180px;
 }
 
 .tooltip.module-tooltip .tooltip-arrow {
-	display: none;
+	margin:20px;
+	border-bottom-color: #04435e;
+	left: 65px;
 }
 
 .module-name {
@@ -883,11 +884,11 @@ hr {
 
 .questions-container {
 	background-color: #FFFFFF;
-    min-height: 500px;
-    border-radius: 5px;
-    border: 5px solid #EEEEEE;
-    padding: 0px 15px 15px 15px;
-    min-width: 700px;
+	height: 450px;
+	border-radius: 5px;
+	border: 5px solid #EEEEEE;
+	padding: 0px 15px 15px 15px;
+	width: 100%
 }
 
 .questions-header {
@@ -901,8 +902,13 @@ hr {
 }
 
 .questions-image {
-	margin: 90px 50px 20px 50px;
+	margin: 70px 50px 20px 50px;
     text-align: center;
+}
+
+.questions-img img {
+	height: 100px;
+	width: 100px;
 }
 
 .questions-message {
@@ -911,7 +917,7 @@ hr {
     color: #055A7F;
     max-width: 75%;
     margin: auto;
-    margin-bottom: 50px;
+    margin-bottom: 10px;
 }
 
 .questions-answers {
@@ -942,7 +948,7 @@ hr {
     background-color: #DFC010;
     border: 4px solid #F3D94F;
     border-radius: 5px;
-    margin: 20px 30px;
+    margin: 10px;
     padding: 10px;
     color: #FEFEC4;
     text-decoration: none;
@@ -1020,7 +1026,7 @@ hr {
 	color: #055A7F;
     text-align: center;
     position: relative;
-    bottom: 40px;
+    bottom: 17px;
 }
 
 .progress {
@@ -1150,7 +1156,7 @@ hr {
 }
 
 .quote-message {
-	margin: 105px auto 0px auto;
+	margin: 80px auto 0px auto;
     background-color: rgba(213, 213, 213, .3);
     padding: 9px;
     border-radius: 7px;
@@ -1339,4 +1345,14 @@ top: 41px;
 	padding: 20px;
 	font-size: 16px;
 	color: #055A7F;
+}
+
+.progress {
+	height: 20px;
+	margin-bottom: 0px;
+	overflow: hidden;
+	background-color: #f5f5f5;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+	box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
 }
