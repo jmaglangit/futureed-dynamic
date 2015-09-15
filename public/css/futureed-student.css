@@ -738,7 +738,7 @@ hr {
 }
 
 .module-item {
-	margin: 20px 25px 0 25px;
+	margin: 10px 25px 0 25px;
 	display: inline-block;
 	text-align: center;
 	width: 15%;
@@ -747,16 +747,15 @@ hr {
 .module-icon, .locked-module-icon {
 	border-radius: 50%;
 	width: 80px;
+	height: 80px;
 	transition: ease-out .1s;
 	background-color: #ffffff;
 	padding: 10px;
+
 }
 
 .module-icon:hover {
 	box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
-	width: 100px;
-	margin: -10px;
-	transition: ease-out .1s;
 	cursor: pointer;
 }
 
@@ -765,16 +764,18 @@ hr {
 }
 
 .tooltip.module-tooltip .tooltip-inner {
-	background-color: #ab2046;	
-	margin:20px;
+	background-color: #04435e;
+	margin: 20px 0px;
 	padding: 15px;
 	box-sizing: border-box;
 	font-family: 'Schoolbell', sans-serif;
-	min-width: 150px;
+	width: 180px;
 }
 
 .tooltip.module-tooltip .tooltip-arrow {
-	display: none;
+	margin:20px;
+	border-bottom-color: #04435e;
+	left: 65px;
 }
 
 .module-name {
@@ -803,6 +804,7 @@ hr {
 	text-align: center;
     max-height: 650px;
     overflow: auto;
+    padding: 10px;
 }
 
 .module-message, .wiki-message {
@@ -810,9 +812,9 @@ hr {
 	background: #EBE3B4;
 	border: 1px solid #F9EFB7;
 	border-radius: 7px;
-	padding: 25px;
+	padding: 15px;
 	width: 50%;
-	margin: 20px auto 32px auto;
+	margin: 10px auto 20px auto;
 	font-size: 1.5em;
 }
 
@@ -858,14 +860,14 @@ hr {
 .module-message:after, .wiki-message:after {
 	border-color: rgba(136, 183, 213, 0);
     border-top-color: #EBE3B4;
-    border-width: 30px;
+    border-width: 20px;
     margin-left: -10px;
     transform: skew(-58deg);
 }
 .module-message:before, .wiki-message:before {
 	border-color: rgba(194, 225, 245, 0);
 	border-top-color: #F9EFB7;
-	border-width: 32px;
+	border-width: 22px;
     margin-left: -15px;
     transform: skew(-58deg);
 }
@@ -883,11 +885,11 @@ hr {
 
 .questions-container {
 	background-color: #FFFFFF;
-    min-height: 500px;
-    border-radius: 5px;
-    border: 5px solid #EEEEEE;
-    padding: 0px 15px 15px 15px;
-    min-width: 700px;
+	height: 450px;
+	border-radius: 5px;
+	border: 5px solid #EEEEEE;
+	width: 100%;
+	overflow: auto;
 }
 
 .questions-header {
@@ -901,17 +903,22 @@ hr {
 }
 
 .questions-image {
-	margin: 90px 50px 20px 50px;
-    text-align: center;
+	margin-top: 80px;
+	text-align: center;
+}
+
+.questions-image img {
+	height: 100px;
+	width: 100px;
+	border-radius: 10px;
 }
 
 .questions-message {
 	text-align: center;
-    font-size: 2em;
-    color: #055A7F;
-    max-width: 75%;
-    margin: auto;
-    margin-bottom: 50px;
+	font-size: 2em;
+	color: #055A7F;
+	max-width: 75%;
+	margin: 10px auto;
 }
 
 .questions-answers {
@@ -942,7 +949,7 @@ hr {
     background-color: #DFC010;
     border: 4px solid #F3D94F;
     border-radius: 5px;
-    margin: 20px 30px;
+    margin: 10px;
     padding: 10px;
     color: #FEFEC4;
     text-decoration: none;
@@ -962,6 +969,7 @@ hr {
 
 .content-pagination > .pagination {
 	margin-bottom: 0px;
+	margin-right: 15px;
 	float: right;
 }
 
@@ -979,21 +987,14 @@ hr {
 	position: absolute;
     bottom: 0px;
     width: 200px;
-    right: -230px;
-}
-
-.next-question-btn {
-	position: absolute;
-    bottom: 15px;
-    width: 200px;
-    right: 25px;
+    right: -200px;
 }
 
 .exit-btn {
 	position: absolute;
     top: 0;
     width: 200px;
-    right: -230px;
+    right: -200px;
 }
 
 .panel-student {
@@ -1020,7 +1021,7 @@ hr {
 	color: #055A7F;
     text-align: center;
     position: relative;
-    bottom: 40px;
+    bottom: 17px;
 }
 
 .progress {
@@ -1131,7 +1132,7 @@ hr {
 }
 
 .result-image {
-	margin: 100px auto 0px auto;
+	margin: 80px auto 0px auto;
     text-align: center;
     background: #e8e8e8;
     border-radius: 50%;
@@ -1150,7 +1151,7 @@ hr {
 }
 
 .quote-message {
-	margin: 105px auto 0px auto;
+	margin: 80px auto 0px auto;
     background-color: rgba(213, 213, 213, .3);
     padding: 9px;
     border-radius: 7px;
@@ -1339,4 +1340,56 @@ top: 41px;
 	padding: 20px;
 	font-size: 16px;
 	color: #055A7F;
+}
+
+.progress {
+	height: 20px;
+	margin-bottom: 0px;
+	overflow: hidden;
+	background-color: #f5f5f5;
+	border-radius: 4px;
+	-webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+	box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+}
+
+.content-container {
+	background-color: #FFFFFF;
+	height: 450px;
+	border-radius: 5px;
+	border: 5px solid #EEEEEE;
+	width: 100%;
+	overflow: auto;
+}
+
+.content-header {
+	background-color: #D5D5D5;
+	min-height: 55px;
+	position: absolute;
+	right: 0;
+	left: 0;
+	text-align: center;
+	padding-bottom: 10px;
+}
+
+.content-image {
+	margin-top: 80px;
+}
+
+.content-image img {
+	width: 100%;
+	max-height: 350px;
+	border-radius: 10px;
+}
+
+.content-message {
+	font-size: 2em;
+	color: #055A7F;
+	margin-top: 80px;
+	overflow: auto;
+	height: 350px;
+}
+
+.module-icon-holder img {
+	border-radius: 10px;
+	width: 145px;
 }
