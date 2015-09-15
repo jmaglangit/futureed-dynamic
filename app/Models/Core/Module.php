@@ -185,6 +185,7 @@ class Module extends Model
 				->where('student_modules.class_id','=',$criteria['class_id'])
 				->where('student_modules.module_status','<>',config('futureed.module_status_failed'))
 				->whereNull('student_modules.deleted_at');
-		})->where('modules.subject_id',$criteria['subject_id']);
+		})->where('modules.subject_id',$criteria['subject_id'])
+			->where('modules.status', config('futureed.enabled'));
 	}
 }
