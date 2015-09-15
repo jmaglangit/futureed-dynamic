@@ -407,6 +407,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 	}
 
 	self.checkAnswer = function() {
+		self.errors = Constants.FALSE;
 		var answer = {};
 
 		answer.student_module_id = self.record.student_module[0].id;

@@ -804,6 +804,7 @@ hr {
 	text-align: center;
     max-height: 650px;
     overflow: auto;
+    padding: 10px;
 }
 
 .module-message, .wiki-message {
@@ -811,9 +812,9 @@ hr {
 	background: #EBE3B4;
 	border: 1px solid #F9EFB7;
 	border-radius: 7px;
-	padding: 25px;
+	padding: 15px;
 	width: 50%;
-	margin: 20px auto 32px auto;
+	margin: 10px auto 20px auto;
 	font-size: 1.5em;
 }
 
@@ -859,14 +860,14 @@ hr {
 .module-message:after, .wiki-message:after {
 	border-color: rgba(136, 183, 213, 0);
     border-top-color: #EBE3B4;
-    border-width: 30px;
+    border-width: 20px;
     margin-left: -10px;
     transform: skew(-58deg);
 }
 .module-message:before, .wiki-message:before {
 	border-color: rgba(194, 225, 245, 0);
 	border-top-color: #F9EFB7;
-	border-width: 32px;
+	border-width: 22px;
     margin-left: -15px;
     transform: skew(-58deg);
 }
@@ -887,8 +888,8 @@ hr {
 	height: 450px;
 	border-radius: 5px;
 	border: 5px solid #EEEEEE;
-	padding: 0px 15px 15px 15px;
-	width: 100%
+	width: 100%;
+	overflow: auto;
 }
 
 .questions-header {
@@ -902,22 +903,22 @@ hr {
 }
 
 .questions-image {
-	margin: 70px 50px 20px 50px;
-    text-align: center;
+	margin-top: 80px;
+	text-align: center;
 }
 
 .questions-image img {
 	height: 100px;
 	width: 100px;
+	border-radius: 10px;
 }
 
 .questions-message {
 	text-align: center;
-    font-size: 2em;
-    color: #055A7F;
-    max-width: 75%;
-    margin: auto;
-    margin-bottom: 10px;
+	font-size: 2em;
+	color: #055A7F;
+	max-width: 75%;
+	margin: 10px auto;
 }
 
 .questions-answers {
@@ -987,13 +988,6 @@ hr {
     bottom: 0px;
     width: 200px;
     right: -200px;
-}
-
-.next-question-btn {
-	position: absolute;
-    bottom: 15px;
-    width: 200px;
-    right: 25px;
 }
 
 .exit-btn {
@@ -1138,7 +1132,7 @@ hr {
 }
 
 .result-image {
-	margin: 100px auto 0px auto;
+	margin: 80px auto 0px auto;
     text-align: center;
     background: #e8e8e8;
     border-radius: 50%;
@@ -1364,6 +1358,7 @@ top: 41px;
 	border-radius: 5px;
 	border: 5px solid #EEEEEE;
 	width: 100%;
+	overflow: auto;
 }
 
 .content-header {
@@ -1390,6 +1385,11 @@ top: 41px;
 	font-size: 2em;
 	color: #055A7F;
 	margin-top: 80px;
-	overflow: scroll;
+	overflow: auto;
 	height: 350px;
+}
+
+.module-icon-holder img {
+	border-radius: 10px;
+	width: 145px;
 }

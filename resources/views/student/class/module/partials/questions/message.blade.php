@@ -70,7 +70,7 @@
 					<div ng-if="mod.module_message.skip_module">
 						{!! Form::button('Proceed to Questions'
 							, array(
-								'class' => 'btn btn-maroon btn-medium'
+								'class' => 'btn btn-maroon btn-semi-medium'
 								, 'data-dismiss' => 'modal'
 								, 'ng-click' => 'mod.skipModule()'
 							)
@@ -78,7 +78,7 @@
 
 						{!! Form::button('Later'
 							, array(
-								'class' => 'btn btn-gold btn-medium'
+								'class' => 'btn btn-gold btn-semi-medium'
 								, 'data-dismiss' => 'modal'
 							)
 						) !!}
