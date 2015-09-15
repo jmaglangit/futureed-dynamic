@@ -35,7 +35,7 @@ class ClassroomRequest extends ApiRequest {
                         ];
                         break;
                     default:
-                        return ['name' => 'required'];
+                        return ['name' => 'required|max:128|min:2|regex:'. config('regex.name')];
                 }
                 break;
             case 'PATCH':
