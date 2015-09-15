@@ -157,5 +157,16 @@ class ClassStudent extends Model {
 
 	}
 
+	public function scopeSubjectEnabled($query){
+
+		return $query->whereHas('classroom', function ($query) {
+
+			$query->whereHas('subject', function ($query) {
+
+				$query->where('status',config('futureed.enabled'));
+			});
+		});
+	}
+
 
 }
