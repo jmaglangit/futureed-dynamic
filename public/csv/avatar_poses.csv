@@ -1,4 +1,3 @@
-id,avatar_id,code,name,pose_image,description,created_by,updated_by,created_at,updated_at,deleted_at
 1,1,1,Astronaut Female Pose Side,astronaut-female/astronaut_female_0_side.png,Astronaut Female Pose Side,,,,,
 2,1,2,Astronaut Female Pose 2,astronaut-female/astronaut_female_2.png,Astronaut Female Pose 2,,,,,
 3,1,3,Astronaut Female Pose 3,astronaut-female/astronaut_female_3.png,Astronaut Female Pose 3,,,,,
