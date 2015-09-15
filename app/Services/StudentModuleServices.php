@@ -93,16 +93,21 @@ class StudentModuleServices {
 //				$last_answered = $answer->question_id;
 			}
 
+			//Traps if Modules/Question set doesn't have either of levels 1,2, and 3.
+
 			//level is done and has wrong.. set wrong as next.
 			for($i = 1 ; $i <= count($module_questions); $i++){
 
-				$next_question = $this->levelQuestion($module_questions[$i],$i);
+				if(array_key_exists($i,$module_questions)){
 
-				if($next_question <> false){
+					$next_question = $this->levelQuestion($module_questions[$i],$i);
 
-					//return next question.
-					return $next_question;
+					if($next_question <> false){
 
+						//return next question.
+						return $next_question;
+
+					}
 				}
 			}
 
