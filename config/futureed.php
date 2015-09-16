@@ -210,4 +210,7 @@ return [
 	'lsp_result_name' => 'IPS1',
 	'default_lsp' => 3,
 
+	//true
+	'true' => 'true'
+
 ];

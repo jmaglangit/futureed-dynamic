@@ -30,7 +30,7 @@ class DeleteTempImageController extends ApiController {
 
 		$this->file_system->deleteDirectory(config('futureed.question_image_path'));
 
-		return $this->respondWithData('true');
+		return $this->respondWithData(config('futureed.true'));
 
 	}
 
