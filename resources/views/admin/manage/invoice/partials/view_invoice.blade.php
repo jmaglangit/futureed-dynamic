@@ -26,8 +26,18 @@
 					)
 			) !!}
 				<div class="form-group">
-					<div class="col-xs-5"></div>
-					<label class="col-xs-3 control-label">Payment Status</label>
+					<label class="col-xs-2 control-label">Subject</label>
+					<div class="col-xs-4">
+						{!! Form::text('invoice_no', ''
+							, array(
+								  'ng-disabled' => 'true'
+								, 'class' => 'form-control'
+								, 'ng-model' => 'invoice.record.subject_name'
+								, 'placeholder' => 'Invoice No.'
+							)
+						) !!}
+					</div>
+					<label class="col-xs-2 control-label">Payment Status</label>
 					<div class="col-xs-4">
 						{!! Form::select('search_status'
 							, array(

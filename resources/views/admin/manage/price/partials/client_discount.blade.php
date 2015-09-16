@@ -122,7 +122,7 @@
 	                	</div>
 	                	<div class="col-xs-7 col-xs-offset-1">
 	                		<div class="btn-container">
-	                			{!! Form::button('Edit'
+	                			{!! Form::button('Save'
 	                				, array(
 	                					'class' => 'btn btn-blue btn-medium'
 	                					, 'ng-click' => "sale.updateClientDiscount()"
@@ -196,7 +196,11 @@
 			            <td>
 			            	<div class="row">
 			            		<div class="col-xs-4">
-			            			{! p.status !}
+			            			<i class="fa" 
+			            				ng-class="{ 'fa-ban error-icon' : p.status == futureed.DISABLED, 'fa-check-circle-o success-icon' : p.status == futureed.ENABLED }"
+			            				tooltip="{! p.status !}"
+			            				tooltip-placement="top"
+			            				tooltip-trigger="mouseenter"></i>
 			            		</div>
 			            		<div class="col-xs-4">
 			            			<a href="" ng-click="sale.getDiscountDetails(p.id)"><span><i class="fa fa-pencil"></i></span></a>
