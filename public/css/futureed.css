@@ -1187,3 +1187,10 @@ span.step {
 .birth-date-wrapper select:last-child {
 	margin-right: 0px;
 }
+
+.title-mid {
+	text-transform: uppercase;
+  	color: #055A7F;
+  	font-size: 1.5em;
+  	margin: 10px 0 10px 0;
+}

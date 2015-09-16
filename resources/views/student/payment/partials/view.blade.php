@@ -19,15 +19,27 @@
 		        </div>
 		        <fieldset class="payment-field">
 		        	<span class="step">1</span><p class="step-label">Please Select a Subject</p>
-		        	<div class="form-group">
-		        		<label class="col-xs-4 control-label">Subject <span class="required">*</span></label>
-		        		<div class="col-xs-4" ng-init="payment.getSubjects()">
-		        			<select class="form-control" id="subject_id" name="subject_id" ng-disabled="payment.subjects.length <= 0" ng-model="payment.invoice.subject_id" ng-class="{ 'required-field' : payment.fields['subject_id'] }">
-			                        <option value="">-- Select Subject --</option>
-			                        <option ng-selected="payment.invoice.subject_id == subject.id" ng-repeat="subject in payment.subjects" ng-value="subject.id">{! subject.name !}</option>
-			                    </select>
-		        		</div>
-		        	</div>
+		        	<div class="col-xs-12 search-container">
+						<div class="form-search">
+							{!! Form::open(
+									[
+										'id' => 'principal-payment',
+										'class' => 'form-horizontal'
+										, 'ng-submit' => 'payment.searchFnc($event)'
+									]
+							) !!}
+					        	<div class="form-group">
+					        		<label class="col-xs-2 control-label">Subject <span class="required">*</span></label>
+					        		<div class="col-xs-4" ng-init="payment.getSubjects()">
+					        			<select class="form-control" id="subject_id" name="subject_id" ng-disabled="payment.subjects.length <= 0" ng-model="payment.invoice.subject_id" ng-class="{ 'required-field' : payment.fields['subject_id'] }">
+						                        <option value="">-- Select Subject --</option>
+						                        <option ng-selected="payment.invoice.subject_id == subject.id" ng-repeat="subject in payment.subjects" ng-value="subject.id">{! subject.name !}</option>
+						                    </select>
+					        		</div>
+					        	</div>
+					        {!! Form::close() !!}
+						</div>
+					</div>
 		        </fieldset>
 		        <hr/>
 		        <fieldset class="payment-field">
@@ -131,7 +143,7 @@
 
 	<div class="clearfix"></div>
 
-	<div class="search-container" ng-if="payment.invoice.payment_status == 'Paid'">
+	<div class="search-container" ng-if="payment.invoice.payment_status == futureed.PAID || payment.invoice.payment_status == futureed.CANCELLED">
 		<h4>BILLING INVOICE</h4>
 		<div class="invoice-group">
 			<p>Ref: {! payment.invoice.client_name !} {! payment.invoice.id !} / {!! date('Y') !!}</p>
@@ -192,7 +204,7 @@
 					<label class="col-xs-2 control-label">Subscription</label>
 					<div class="col-xs-4">
 						<select ng-model="payment.invoice.subscription_id" 
-							ng-disabled="!payment.subscriptions.length || payment.invoice.payment_status !== futureed.PENDING" 
+							ng-disabled="true" 
 							ng-init="payment.listSubscription()"
 							ng-change="payment.setSubscription()" class="form-control" name="subscription_id" ng-class="{ 'required-field' : payment.fields['subscription_id'] }">
 
@@ -278,48 +290,48 @@
 		</div>
 	</div>
 	
-
-	<div class="col-xs-12">
-		<hr />
+	<div class="col-xs-12" ng-if="payment.invoice.payment_status">
 		<div class="col-xs-12 margin-30-bot">
+			<hr />
+
 			<div class="btn-container" ng-if="payment.invoice.payment_status == futureed.PENDING">
-        		{!! Form::button('Delete Subscription'
-        			, array(
-        				'class' => 'btn btn-gold btn-small pull-right'
-        				, 'ng-click' => 'payment.deleteInvoice(payment.invoice.id)'
-        			)
-        		) !!}
+	    		{!! Form::button('Delete Subscription'
+	    			, array(
+	    				'class' => 'btn btn-gold btn-small pull-right'
+	    				, 'ng-click' => 'payment.deleteInvoice(payment.invoice.id)'
+	    			)
+	    		) !!}
 
-        		{!! Form::button('Save Subscription'
-        			, array(
-        				'class' => 'btn btn-blue btn-small pull-right'
-        				, 'ng-click' => 'payment.updateSubscription(futureed.TRUE)'
-        			)
-        		) !!}
+	    		{!! Form::button('Save Subscription'
+	    			, array(
+	    				'class' => 'btn btn-blue btn-small pull-right'
+	    				, 'ng-click' => 'payment.updateSubscription(futureed.TRUE)'
+	    			)
+	    		) !!}
 
-        		{!! Form::button('Pay Subscription'
-        			, array(
-        				'class' => 'btn btn-blue btn-small pull-right'
-        				, 'ng-click' => 'payment.updateSubscription()'
-        			)
-        		) !!}
+	    		{!! Form::button('Pay Subscription'
+	    			, array(
+	    				'class' => 'btn btn-blue btn-small pull-right'
+	    				, 'ng-click' => 'payment.updateSubscription()'
+	    			)
+	    		) !!}
 			</div>
-			<div class="btn-container" ng-if="payment.invoice.payment_status !== futureed.PENDING">
+			<div class="btn-container" ng-if="payment.invoice.payment_status == futureed.PAID || payment.invoice.payment_status == futureed.CANCELLED">
 				{!! Form::button('View List'
-        			, array(
-        				'class' => 'btn btn-gold btn-small pull-right'
-        				, 'ng-click' => 'payment.setActive()'
-        			)
-        		) !!}
+	    			, array(
+	    				'class' => 'btn btn-gold btn-small pull-right'
+	    				, 'ng-click' => 'payment.setActive()'
+	    			)
+	    		) !!}
 
 				{!! Form::button('Renew Subscription'
-        			, array(
-        				'class' => 'btn btn-blue btn-small pull-right'
-        				, 'ng-disabled' => 'true'
-        				, 'ng-click' => 'payment.addPayment()'
-        				, 'ng-if' => "payment.invoice.payment_status == 'Paid'"
-        			)
-        		) !!}
+	    			, array(
+	    				'class' => 'btn btn-blue btn-small pull-right'
+	    				, 'ng-disabled' => 'true'
+	    				, 'ng-click' => 'payment.addPayment()'
+	    				, 'ng-if' => "payment.invoice.payment_status == futureed.PAID"
+	    			)
+	    		) !!}
 			</div>
 		</div>
 	</div>

@@ -32,13 +32,6 @@ body.admin{
 	margin-top: 20px;
 }
 
-.title-mid{
-	text-transform: uppercase;
-	color: #055A7F;
-	font-size: 1.5em;
-	margin: 10px 0px;
-}
-
 .navbar-collapse > .navbar-nav > li > p {
 	padding-top: 15px;
 }
