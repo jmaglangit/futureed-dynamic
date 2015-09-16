@@ -1,9 +1,9 @@
 angular.module('futureed.controllers')
 	.controller('ManageInvoiceController', ManageInvoiceController);
 
-ManageInvoiceController.$inject = ['$scope', 'manageInvoiceService', 'apiService', 'TableService', 'SearchService'];
+ManageInvoiceController.$inject = ['$scope', 'ManageInvoiceService', 'apiService', 'TableService', 'SearchService'];
 
-function ManageInvoiceController($scope, manageInvoiceService, apiService, TableService, SearchService) {
+function ManageInvoiceController($scope, ManageInvoiceService, apiService, TableService, SearchService) {
 
 	var self = this;
 
@@ -61,7 +61,7 @@ function ManageInvoiceController($scope, manageInvoiceService, apiService, Table
 		self.errors = Constants.FALSE;
 
 		$scope.ui_block();
-		manageInvoiceService.list(self.search, self.table).success(function(response) {
+		ManageInvoiceService.list(self.search, self.table).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
@@ -83,12 +83,14 @@ function ManageInvoiceController($scope, manageInvoiceService, apiService, Table
 		self.success = Constants.FALSE;
 
 		$scope.ui_block();
-		manageInvoiceService.details(invoice_no).success(function(response) {
+		ManageInvoiceService.details(invoice_no).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					self.record = response.data;
+					self.record.subject_name = (self.record.invoice_detail) ? self.record.invoice_detail[0].classroom.subject.name : Constants.EMPTY_STR;
+					
 					var class_name = self.record.invoice_detail[0].classroom.name;
 					var prefix = class_name.substring(0,3);
 
@@ -111,7 +113,7 @@ function ManageInvoiceController($scope, manageInvoiceService, apiService, Table
 		self.view_student_list_link = Constants.FALSE;
 
 		$scope.ui_block();
-		manageInvoiceService.viewAllStudents(id).success(function(response) {
+		ManageInvoiceService.viewAllStudents(id).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
@@ -135,7 +137,7 @@ function ManageInvoiceController($scope, manageInvoiceService, apiService, Table
 		self.success = Constants.FALSE;
 
 		$scope.ui_block();
-		manageInvoiceService.updateStatus(self.record).success(function(response) {
+		ManageInvoiceService.updateStatus(self.record).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
@@ -153,6 +155,23 @@ function ManageInvoiceController($scope, manageInvoiceService, apiService, Table
 		}).error(function(response) {
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
+		});
+	}
+
+	self.getSubscriptionList = function() {
+		self.errors = Constants.FALSE;
+		self.subscriptions = [];
+
+		ManageInvoiceService.getSubscriptionList().success(function(response){
+			if(angular.equals(response.status,Constants.STATUS_OK)){
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				}else if(response.data){
+					self.subscriptions = response.data.records;
+				}
+			}
+		}).error(function(response){
+			self.errors = $scope.internalError();
 		});
 	}
 }

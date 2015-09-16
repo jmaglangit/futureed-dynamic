@@ -1,14 +1,14 @@
 angular.module('futureed.services')
-	.factory('manageInvoiceService', manageInvoiceService);
+	.factory('ManageInvoiceService', ManageInvoiceService);
 
-function manageInvoiceService($http) {
-	var invoiceURL = '/api/v1/';
-	var invoiceAPI = {}
+function ManageInvoiceService($http) {
+	var serviceUrl = '/api/v1/';
+	var service = {}
 
-	invoiceAPI.list = function(search, table) {
+	service.list = function(search, table) {
 		return $http({
 			method : Constants.METHOD_GET
-			, url  : invoiceURL + 'invoice?order_no=' + search.order_no
+			, url  : serviceUrl + 'invoice?order_no=' + search.order_no
 				+ '&subscription_name=' + search.subscription_name
 				+ '&payment_status=' + search.payment_status
 				+ '&limit=' + table.size
@@ -16,27 +16,34 @@ function manageInvoiceService($http) {
 		});
 	}
 
-	invoiceAPI.details = function(invoice_no) {
+	service.details = function(invoice_no) {
 		return $http({
 			method : Constants.METHOD_GET
-			, url  : invoiceURL + 'sales-invoice/details?id=' + invoice_no
+			, url  : serviceUrl + 'sales-invoice/details?id=' + invoice_no
 		});
 	}
 
-	invoiceAPI.updateStatus = function(data) {
+	service.updateStatus = function(data) {
 		return $http({
 			method : Constants.METHOD_POST
 			, data : data
-			, url  : invoiceURL + 'sales-invoice/edit'
+			, url  : serviceUrl + 'sales-invoice/edit'
 		});
 	}
 
-	invoiceAPI.viewAllStudents = function(id) {
+	service.viewAllStudents = function(id) {
 		return $http({
 			method : Constants.METHOD_GET
-			, url  : invoiceURL + 'invoice/' + id
+			, url  : serviceUrl + 'invoice/' + id
 		});
 	}
 
-	return invoiceAPI
+	service.getSubscriptionList = function() {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url 	: serviceUrl + 'subscription'
+		})
+	}
+
+	return service
 }

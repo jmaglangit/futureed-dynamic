@@ -61,13 +61,10 @@
 				</div>
 				<div class="form-group">
 					<div class="col-xs-5">
-						{!! Form::text('subscription_name', ''
-							, array(
-								'class' => 'form-control'
-								, 'ng-model' => 'invoice.search.subscription_name'
-								, 'placeholder' => 'Subscription Name'
-							)
-						) !!}
+						<select ng-model="invoice.search.subscription_name" ng-disabled="!invoice.subscriptions.length" ng-init="invoice.getSubscriptionList()" class="form-control">
+							<option value="">-- Select Subscription --</option>
+						<option ng-repeat="subscription in invoice.subscriptions" ng-value="subscription.name">{! subscription.name !}</option>
+					</select>
 					</div>
 					<div class="col-xs-5">
 						

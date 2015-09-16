@@ -1124,8 +1124,8 @@ content {
 	font-size: 13px;
 }
 
-.wide-column {
-	max-width: 200px;
+td {
+	max-width: 150px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -1169,4 +1169,21 @@ span.step {
 .disabled-link {
 	pointer-events: none;
 	cursor: default;
+}
+
+.birth-date-wrapper select {
+	height: 30px;
+    line-height: 30px;
+    padding: 4px 6px;
+    font-size: 12px;
+    color: #555555;
+    vertical-align: middle;
+    border-radius: 4px;
+    border: 1px solid #CCCCCC;
+    margin-right: 10px;
+    min-width: 75px;
+}
+
+.birth-date-wrapper select:last-child {
+	margin-right: 0px;
 }
