@@ -106,7 +106,7 @@
 					, array(
 						'ng-model' => 'admin.table.size'
 						, 'ng-change' => 'admin.paginateBySize()'
-						, 'ng-if' => "admin.data.length"
+						, 'ng-if' => "admin.records.length"
 						, 'class' => 'form-control paginate-size pull-right'
 					)
 				) !!}
@@ -118,16 +118,16 @@
 			            <th>Username</th>
 			            <th>Email</th>
 			            <th>Role</th>
-			            <th>Actions</th>
+			            <th ng-if="admin.records.length">Actions</th>
 			        </tr>
 			    </thead>
 
 		        <tbody>
-		        <tr ng-repeat="a in admin.data">
+		        <tr ng-repeat="a in admin.records">
 		            <td>{! a.user.username !}</td>
 		            <td>{! a.user.email !}</td>
 		            <td>{! a.admin_role !}</td>
-		            <td>
+		            <td ng-if="admin.records.length">
 		            	<div class="row">
     						<div class="col-xs-3">
 		            			<i class="fa" 
@@ -148,7 +148,7 @@
 		            	</div>
 		            </td>
 		        </tr>
-		        <tr class="odd" ng-if="!admin.data.length && !admin.table.loading">
+		        <tr class="odd" ng-if="!admin.records.length && !admin.table.loading">
 		        	<td valign="top" colspan="4">
 		        		No records found
 		        	</td>
@@ -161,7 +161,7 @@
 		        </tbody>
 			</table>
 
-			<div class="pull-right" ng-if="admin.data.length">
+			<div class="pull-right" ng-if="admin.records.length">
 				<pagination 
 					total-items="admin.table.total_items" 
 					ng-model="admin.table.page"
