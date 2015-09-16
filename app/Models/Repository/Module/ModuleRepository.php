@@ -210,6 +210,7 @@ class ModuleRepository implements ModuleRepositoryInterface
 				'modules.points_earned',
 				'modules.points_to_unlock',
 				'modules.points_to_finish',
+				'student_modules.id as student_module_id',
 				'student_modules.class_id',
 				'student_modules.student_id',
 				'student_modules.module_status',
