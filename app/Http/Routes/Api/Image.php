@@ -17,9 +17,3 @@ Routes::group([
 	]);
 
 });
-
-
-Routes::post('/image/temp/delete',[
-	'uses' => 'Api\v1\DeleteTempImageController@deleteTempImages',
-	'as' => 'api.v1.image.temp.delete'
-]);
