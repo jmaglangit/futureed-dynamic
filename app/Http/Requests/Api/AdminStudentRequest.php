@@ -66,7 +66,7 @@ class AdminStudentRequest extends ApiRequest {
 					'country_id' => 'required|integer',
 					'school_code' => 'integer',
 					'grade_code' => 'required|integer',
-					'points' => 'integer'];
+					'points' => 'integer|min:1|max:9999'];
 				break;
 
 		}
