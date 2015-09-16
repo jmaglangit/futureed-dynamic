@@ -15,4 +15,9 @@ Routes::group([
 
     Routes::resource('/subscription','Api\v1\SubscriptionController',
         ['except' => ['create','edit']]);
+
+
+	Routes::post('/renew-subscription/{id}', [
+		'uses' => 'Api\v1\RenewSubscriptionController@renewSubscription',
+		'as' => 'subscription.renew']);
 });
