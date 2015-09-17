@@ -69,7 +69,7 @@ class StudentModuleServices {
 
 
 	//TODO: merge module answer
-	public function checkAnswers($student_module_id, $module_id){
+	public function checkAnswers($student_module_id, $module_id,$student_answer){
 
 
 		//get module question with answer
@@ -77,6 +77,7 @@ class StudentModuleServices {
 
 		//get student module answer.
 		$student_module_answer = $this->getStudentModuleAnswer($student_module_id, $module_id);
+
 
 		//Initialized next question.
 		$next_question = 0;
@@ -90,7 +91,6 @@ class StudentModuleServices {
 
 				$module_questions[$answer->question->difficulty][$answer->question_id] = $answer->answer_status;
 
-//				$last_answered = $answer->question_id;
 			}
 
 			//Traps if Modules/Question set doesn't have either of levels 1,2, and 3.
@@ -100,7 +100,7 @@ class StudentModuleServices {
 
 				if(array_key_exists($i,$module_questions)){
 
-					$next_question = $this->levelQuestion($module_questions[$i],$i);
+					$next_question = $this->levelQuestion($module_questions[$i],$i, $student_answer);
 
 					if($next_question <> false){
 
@@ -119,13 +119,36 @@ class StudentModuleServices {
 			$next_question = $question[0]->id;
 		}
 
+	}
 
-		return $next_question;
+	/**
+	 * Get all wrong answers.
+	 * @param $module_level_questions
+	 * @return mixed
+	 */
+	public function getWrongAnswers($module_level_questions){
+
+		while(array_search(config('futureed.answer_status_correct'), $module_level_questions)){
+			$delete_key = array_search(config('futureed.answer_status_correct'), $module_level_questions);
+
+			unset($module_level_questions[$delete_key]);
+		}
+
+		return $module_level_questions;
+
+
 	}
 
 
 	//parse each level
-	public function levelQuestion($data, $difficulty){
+	/**
+	 * Parse each level.
+	 * @param $data
+	 * @param $difficulty
+	 * @param $student_answer
+	 * @return mixed
+	 */
+	public function levelQuestion($data, $difficulty,$student_answer){
 
 		//get all correct answers count
 		if($difficulty == 1 || $difficulty == 2	){
@@ -155,21 +178,55 @@ class StudentModuleServices {
 			return $zero;
 		}
 
-		//get first wrong question and return with id.
-			//get array key
-		$key = array_search(config('futureed.answer_status_wrong'),$data);
+		$wrong_answers = $this->getWrongAnswers($data);
 
-		return $key;
+		//if question id in wrong.
+		if(isset($wrong_answers[$student_answer->question_id])){
 
+			//if question id is the last get first.
+			end($wrong_answers);
+			if($student_answer->question_id == key($wrong_answers)){
+
+				reset($wrong_answers);
+
+				return key($wrong_answers);
+
+			}else {
+				//parse through next of question id
+				reset($wrong_answers);
+
+				while(key($wrong_answers) <> $student_answer->question_id){
+
+					next($wrong_answers);
+				}
+
+				next($wrong_answers);
+
+				return key($wrong_answers);
+			}
+
+		}else {
+
+			//else get first
+			current($wrong_answers);
+
+			return key($wrong_answers);
+		}
 
 
 	}
 
 
-	//TODO: output questions to take.
-	public function getNextQuestion($student_module_id, $module_id){
+	/**
+	 * Output question to take.
+	 * @param $student_module_id
+	 * @param $module_id
+	 * @param $student_answer
+	 * @return int|mixed
+	 */
+	public function getNextQuestion($student_module_id, $module_id,$student_answer){
 
-		return $this->checkAnswers($student_module_id,$module_id);
+		return $this->checkAnswers($student_module_id,$module_id,$student_answer);
 	}
 
 }
