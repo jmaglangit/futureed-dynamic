@@ -15,6 +15,12 @@ use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 
 class AvatarServices {
 
+    /**
+     * Constructors
+     * @param AvatarRepositoryInterface $avatar
+     * @param ValidatorRepositoryInterface $validator
+     * @param StudentRepositoryInterface $student
+     */
     public function __construct(AvatarRepositoryInterface $avatar,
         ValidatorRepositoryInterface $validator,
         StudentRepositoryInterface $student){
@@ -23,6 +29,11 @@ class AvatarServices {
         $this->student = $student;
     }
 
+    /**
+     * Get Avatars by Gender.
+     * @param $gender
+     * @return array
+     */
     public function getAvatars($gender){
         
         $dimension = \Config::get('futureed.image_avatar_count');
@@ -39,16 +50,26 @@ class AvatarServices {
         }
         return $avatar;
     }
-    
+
     public function genderCheck($input){
         return $this->validator->gender($input);
     }
-    
+
+    /**
+     * Get Avatar Id.
+     * @param $avatar_id
+     * @return mixed
+     */
     public function getAvatar($avatar_id){
 
         return $this->avatar->getAvatar($avatar_id);
     }
-    
+
+    /**
+     * Get Avatar image location.
+     * @param $avatar_image
+     * @return string
+     */
     public function getAvatarUrl($avatar_image){
         
         $image_folders = \Config::get('futureed.image_avatar_folder');
@@ -60,6 +81,11 @@ class AvatarServices {
         return $password_image_url;            
     }
 
+    /**
+     * Get Avatar thumbnail url.
+     * @param $avatar_image
+     * @return string
+     */
     public function getAvatarThumbnailUrl($avatar_image){
         
         $thumbnail = \Config::get('futureed.thumbnail');
@@ -70,8 +96,21 @@ class AvatarServices {
         
         return $password_image_url;            
     }
+
+    public function getAvatarBackgroundUrl($avatar_image){
+
+        $image_folder =\Config::get('futureed.image_avatar_folder');
+
+        $background_image = url() . '/' . $image_folder . '/' . $avatar_image;
+
+        return $background_image;
+    }
     
-    //check if avatar exist
+    /**
+     * Check if Avatar exists.
+     * @param $avatar_id
+     * @return mixed
+     */
     public function checkAvatarExist($avatar_id){
         
         return $this->avatar->checkAvatarExist($avatar_id);
