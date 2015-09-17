@@ -133,23 +133,9 @@
 		        <div class="form-search">
 			        <fieldset class="payment-field">
 			        	<span class="step">3</span><p class="step-label">Please select a subscription.</p>
-			        	<div class="col-xs-12 search-container">
-			        		<div class="form-group">
-								<div class="col-xs-5"></div>
-								<label class="col-xs-3 control-label">Payment Status</label>
-								<div class="col-xs-4">
-									{!! Form::text('name',''
-				        				, array(
-				        					'placeHolder' => 'Payment Status'
-				        					, 'ng-model' => 'payment.invoice.payment_status'
-				        					, 'ng-disabled' => 'true'
-				        					, 'class' => 'form-control'
-				        				)
-				        			) !!}
-								</div>
-								<div class="col-xs-6"></div>
-							</div>
+			        	<div class="col-xs-12">
 							<div class="form-group">
+								<label class="col-xs-2 control-label">Subscription</label>
 								<div class="col-xs-4">
 									<select ng-model="payment.invoice.subscription_id" 
 										ng-disabled="!payment.subscriptions.length || payment.invoice.payment_status !== futureed.PENDING" 
@@ -160,15 +146,26 @@
 										<option ng-selected="payment.invoice.subscription_id == subscription.id" ng-repeat="subscription in payment.subscriptions" ng-value="subscription.id">{! subscription.name !}</option>
 									</select>
 								</div>
-								<div class="col-xs-8">
-									<label class="col-xs-2 control-label">Starting</label>
-									<div class="col-xs-4">
-										<input class="form-control" ng-disabled="true" value="{! payment.invoice.dis_date_start | ddMMyy !}" placeholder="DD/MM/YY" />
-									</div>
-									<label class="col-xs-2 control-label">To</label>
-									<div class="col-xs-4">
-										<input class="form-control" ng-disabled="true" value="{! payment.invoice.dis_date_end | ddMMyy !}" placeholder="DD/MM/YY" />
-									</div>
+								<label class="col-xs-2 control-label">Payment Status</label>
+								<div class="col-xs-4">
+									{!! Form::text('name',''
+				        				, array(
+				        					'placeHolder' => 'Payment Status'
+				        					, 'ng-model' => 'payment.invoice.payment_status'
+				        					, 'ng-disabled' => 'true'
+				        					, 'class' => 'form-control'
+				        				)
+				        			) !!}
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-xs-2 control-label">Starting</label>
+								<div class="col-xs-4">
+									<input class="form-control" ng-disabled="true" value="{! payment.invoice.dis_date_start | ddMMyy !}" placeholder="DD/MM/YY" />
+								</div>
+								<label class="col-xs-2 control-label">To</label>
+								<div class="col-xs-4">
+									<input class="form-control" ng-disabled="true" value="{! payment.invoice.dis_date_end | ddMMyy !}" placeholder="DD/MM/YY" />
 								</div>
 							</div>
 						</div>
@@ -178,7 +175,7 @@
 	{!! Form::close() !!}
 	</div>
 
-	<div class="search-container" ng-if="payment.invoice.payment_status == futureed.PAID">
+	<div class="search-container" ng-if="payment.invoice.payment_status == futureed.PAID || payment.invoice.payment_status == futureed.CANCELLED">
 		{!! Form::open(array('id'=> 'add_payment_form', 'class' => 'form-horizontal')) !!}
 
 			<h4>BILLING INVOICE</h4>
@@ -205,11 +202,14 @@
 			<hr/>
 		
 			<div class="form-search">
-		        <fieldset class="payment-field">
-		        	<div class="col-xs-12 search-container">
+		        <fieldset>
+		        	<div class="col-xs-12">
 		        		<div class="form-group">
-							<div class="col-xs-5"></div>
-							<label class="col-xs-3 control-label">Payment Status</label>
+							<label class="col-xs-2 control-label">Subject </label>
+							<div class="col-xs-4">
+								<input class="form-control" ng-disabled="true" value="{! payment.invoice.subject_name !}" placeholder="Subject" />
+							</div>
+							<label class="col-xs-2 control-label">Payment Status</label>
 							<div class="col-xs-4">
 								{!! Form::text('name',''
 			        				, array(
@@ -223,6 +223,7 @@
 							<div class="col-xs-6"></div>
 						</div>
 						<div class="form-group">
+							<label class="col-xs-2 control-label">Subscription</label>
 							<div class="col-xs-4">
 								<select ng-model="payment.invoice.subscription_id" 
 									ng-disabled="!payment.subscriptions.length || payment.invoice.payment_status !== futureed.PENDING" 
@@ -233,15 +234,16 @@
 									<option ng-selected="payment.invoice.subscription_id == subscription.id" ng-repeat="subscription in payment.subscriptions" ng-value="subscription.id">{! subscription.name !}</option>
 								</select>
 							</div>
-							<div class="col-xs-8">
-								<label class="col-xs-2 control-label">Starting</label>
-								<div class="col-xs-4">
-									<input class="form-control" ng-disabled="true" value="{! payment.invoice.dis_date_start | ddMMyy !}" placeholder="DD/MM/YY" />
-								</div>
-								<label class="col-xs-2 control-label">To</label>
-								<div class="col-xs-4">
-									<input class="form-control" ng-disabled="true" value="{! payment.invoice.dis_date_end | ddMMyy !}" placeholder="DD/MM/YY" />
-								</div>
+						</div>
+
+						<div class="form-group">
+							<label class="col-xs-2 control-label">Starting</label>
+							<div class="col-xs-4">
+								<input class="form-control" ng-disabled="true" value="{! payment.invoice.dis_date_start | ddMMyy !}" placeholder="DD/MM/YY" />
+							</div>
+							<label class="col-xs-2 control-label">To</label>
+							<div class="col-xs-4">
+								<input class="form-control" ng-disabled="true" value="{! payment.invoice.dis_date_end | ddMMyy !}" placeholder="DD/MM/YY" />
 							</div>
 						</div>
 					</div>

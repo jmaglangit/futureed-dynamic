@@ -264,7 +264,7 @@ body {/*background: radial-gradient(transparent 50%, rgba(0, 0, 0, 0.3) 100%), l
 
 .form_content{margin-top: 0;}
 form label{font-weight: normal;}
-form fieldset{margin-bottom: 30px;}
+
 fieldset legend{color: #8e8171; font-size: 16px; text-transform: uppercase;}
 
 .block_bottom{background: #f8f3f0; box-shadow: 0 0 0 30px #f8f3f0; margin-top: 20px; display: inline-block; width: 100%;}
@@ -1186,4 +1186,11 @@ span.step {
 
 .birth-date-wrapper select:last-child {
 	margin-right: 0px;
+}
+
+.title-mid {
+	text-transform: uppercase;
+  	color: #055A7F;
+  	font-size: 1.5em;
+  	margin: 10px 0 10px 0;
 }

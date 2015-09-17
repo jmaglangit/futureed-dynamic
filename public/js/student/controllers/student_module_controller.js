@@ -663,7 +663,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		if(self.result && self.result.failed) {
 			// create student_module
 			var data = {};
-				data.class_id = $scope.user.class.class_id;
+				data.class_id = self.record.student_module[0].class_id;
 				data.student_id = $scope.user.id;
 				data.module_id = self.record.id;
 				data.subject_id = self.record.subject_id;

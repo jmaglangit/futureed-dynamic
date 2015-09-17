@@ -21,19 +21,31 @@
         </div>
         <fieldset class="payment-field">
         	<span class="step">1</span><p class="step-label">Please Select a Subject</p>
-        	<div class="form-group">
-        		<label class="col-xs-2 control-label">Subject <span class="required">*</span></label>
-        		<div class="col-xs-5" ng-init="payment.getSubjects()">
-        			<select class="form-control" id="subject_id" 
-        				name="subject_id" 
-    					ng-disabled="payment.subjects.length <= 0" 
-    					ng-model="payment.invoice.subject_id" 
-    					ng-class="{ 'required-field' : payment.fields['subject_id'] }">
-	                        <option value="">-- Select Subject --</option>
-	                        <option ng-repeat="subject in payment.subjects" ng-value="subject.id">{! subject.name !}</option>
-	                    </select>
-        		</div>
-        	</div>
+        	<div class="col-xs-12 search-container">
+				<div class="form-search">
+					{!! Form::open(
+							[
+								'id' => 'principal-payment',
+								'class' => 'form-horizontal'
+								, 'ng-submit' => 'payment.searchFnc($event)'
+							]
+					) !!}
+			        	<div class="form-group">
+			        		<label class="col-xs-2 control-label">Subject <span class="required">*</span></label>
+			        		<div class="col-xs-4" ng-init="payment.getSubjects()">
+			        			<select class="form-control" id="subject_id" 
+			        				name="subject_id" 
+			    					ng-disabled="payment.subjects.length <= 0" 
+			    					ng-model="payment.invoice.subject_id" 
+			    					ng-class="{ 'required-field' : payment.fields['subject_id'] }">
+				                        <option value="">-- Select Subject --</option>
+				                        <option ng-repeat="subject in payment.subjects" ng-value="subject.id">{! subject.name !}</option>
+				                    </select>
+			        		</div>
+			        	</div>
+			        {!! Form::close() !!}
+			    </div>
+			</div>
         </fieldset>
         <hr/>
         <fieldset class="payment-field">

@@ -225,7 +225,7 @@ function StudentClassController($scope, $filter, $window, StudentClassService, S
 					self.classes = response.data.records;
 
 					if(!self.current_class && self.classes) {
-						self.current_class = self.classes[0].id;
+						self.current_class = self.classes[0].class_id;
 					}
 
 					self.listModules();

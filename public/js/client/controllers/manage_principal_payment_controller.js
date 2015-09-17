@@ -536,7 +536,9 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 				self.errors = $scope.errorHandler(response.errors);
 			} else if(response.data) {
 				self.invoice = response.data;
-				self.invoice.subject_id = self.invoice.invoice_detail[0].classroom.subject_id;
+				self.invoice.subject_id = self.invoice.invoice_detail[0].classroom.subject.id;
+				self.invoice.subject_name = self.invoice.invoice_detail[0].classroom.subject.name;
+				
 				self.listClassroom(self.invoice.order_no);
 				self.setActive(active);
 			}

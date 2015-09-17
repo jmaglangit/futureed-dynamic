@@ -20,6 +20,12 @@
 			) !!}
 				<div class="form-group">
 					<div class="col-xs-6">
+	                    <select name="grade_id" class="form-control" ng-disabled="module.grades.length <= 0" ng-model="module.search.grade_id">
+	                        <option value="">-- Select Level --</option>
+	                        <option ng-repeat="grade in module.grades" ng-value="grade.id">{! grade.name !}</option>
+	                    </select>
+	                </div>
+	                <div class="col-xs-6">
 						{!! Form::text('name', ''
 							, array(
 								'class' => 'form-control'
@@ -31,15 +37,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<div class="col-md-6">
-	                    <select name="grade_id" class="form-control" ng-disabled="module.grades.length <= 0" ng-model="module.search.grade_id">
-	                        <option value="">-- Select Level --</option>
-	                        <option ng-repeat="grade in module.grades" ng-value="grade.id">{! grade.name !}</option>
-	                    </select>
-	                </div>
-				</div>
-				<div class="form-group">
-					<div class="col-md-6">
+					<div class="col-xs-6">
 	                    <select name="grade_id" class="form-control" ng-disabled="module.subject.length <= 0" ng-model="module.search.subject">
 	                        <option value="">-- Select Subject --</option>
 	                        <option ng-repeat="subject in module.subjects" ng-value="subject.name">{! subject.name !}</option>
