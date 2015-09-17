@@ -582,6 +582,7 @@ function ProfileController($scope, apiService, profileService) {
 		$("#birth_date").dateDropdowns({
 			defaultDate : date,
 		    submitFieldName: 'birth_date',
+		    wrapperClass: 'birth-date-wrapper',
 		    minAge: Constants.MIN_AGE,
 		    maxAge: Constants.MAX_AGE
 		});

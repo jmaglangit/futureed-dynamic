@@ -58,7 +58,6 @@
 		<div class="col-xs-12" ng-cloak>
 			<div class="col-xs-6"></div>
 			<div class="col-xs-6">
-				<div class="pull-right">
 					{!! Form::button('Rate'
 						, array(
 							'class' => 'btn btn-blue pull-right'
@@ -70,29 +69,13 @@
 
 					{!! Form::button('Cancel'
 						, array(
-							'class' => 'btn btn-gold pull-right'
+							'class' => 'btn btn-gold btn-medium pull-right'
 							, 'ng-click' => "tips.setActive()"
 						)
 					) !!}
-				</div>
 			</div>
 		</div>
 
 		<br />
-	</div>
-
-	<div class="sticky-bottom col-xs-12" ng-if="false" ng-cloak>
-		<div class="col-xs-6"></div>
-		<div class="col-xs-6">
-			<div class="col-xs-6"></div>
-			<div class="col-xs-6">
-				{!! Form::button('Cancel'
-					, array(
-						'class' => 'btn btn-gold pull-right'
-						, 'ng-click' => "tips.setActive()"
-					)
-				) !!}
-			</div>
-		</div>
 	</div>
 </div>
