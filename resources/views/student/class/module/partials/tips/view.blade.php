@@ -21,6 +21,11 @@
 					<span><i class="fa fa-user"></i> By : {! tips.record.name !}</span>
 				</div>
 			</div>
+
+			<div class="row">
+				<hr/>
+				<p>{! tips.record.content !}</p>
+			</div>
 		</div>
 	</div>
 	<div class="btn-container">

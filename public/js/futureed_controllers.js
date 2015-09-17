@@ -1030,4 +1030,9 @@ function FutureedController($scope, $window, apiService, futureed) {
 		});
 			
 	}
+
+	$scope.updateUserData = function(data) {
+		$scope.user = data;
+		apiService.updateUserSession($scope.user);
+	} 
 };

@@ -422,16 +422,17 @@ function ProfileController($scope, apiService, profileService) {
 					self.prof.avatar_id = response.data.id;
 					self.prof.avatar = response.data.url;
 					self.prof.thumbnail = '/images/thumbnail/' + response.data.name;
-					$scope.user = self.prof;
+					$("ul.avatar_list li").removeClass('selected');
 
 					self.success = Constants.TRUE;
-
-					apiService.updateUserSession(self.prof).success(function(response) {
-						$("ul.avatar_list li").removeClass('selected');
-						$window.location;
-					}).error(function() {
-						self.errors = $scope.internalError();
-					});
+					
+					$scope.updateUserData(self.prof);
+					// apiService.updateUserSession(self.prof).success(function(response) {
+					// 	$scope.getUserDetails();	
+					// 	console.log($scope.user);
+					// }).error(function() {
+					// 	self.errors = $scope.internalError();
+					// });
 				}
 			}
 			$scope.ui_unblock();
