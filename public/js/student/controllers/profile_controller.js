@@ -425,14 +425,7 @@ function ProfileController($scope, apiService, profileService) {
 					$("ul.avatar_list li").removeClass('selected');
 
 					self.success = Constants.TRUE;
-					
 					$scope.updateUserData(self.prof);
-					// apiService.updateUserSession(self.prof).success(function(response) {
-					// 	$scope.getUserDetails();	
-					// 	console.log($scope.user);
-					// }).error(function() {
-					// 	self.errors = $scope.internalError();
-					// });
 				}
 			}
 			$scope.ui_unblock();

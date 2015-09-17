@@ -225,12 +225,11 @@ class StudentServices
 		}
 
 
-		$student = array_merge(array('id' => $id
-			, 'class_id' => $this->getCurrentClass($id)
-			, 'class' => $this->getCurrentClass($id))
+		$student = array_merge(array('id' => $id)
 			, $student
 			, $user,
 			array('age' => $age,
+				'role' => config('futureed.student'),
 				'avatar' => $avatar_url,
 				'thumbnail' => $avatar_thumbnail_url,
 				'background' => $avatar_url_background,

@@ -224,11 +224,13 @@ function StudentClassController($scope, $filter, $window, StudentClassService, S
 				} else if(response.data) {
 					self.classes = response.data.records;
 
-					if(!self.current_class && self.classes) {
-						self.current_class = self.classes[0].class_id;
-					}
+					if(self.classes.length) {
+						if(!self.current_class) {
+							self.current_class = self.classes[0].class_id;
+						}
 
-					self.listModules();
+						self.listModules();
+					}
 				}
 			}
 

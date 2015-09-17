@@ -11,7 +11,7 @@ class ClassController extends Controller {
 	public function index($id = null) {
 		$user_object = json_decode(Session::get('student'));
 
-		if(!(isset($user_object->class) && $user_object->class->subscription_status === "Active")) {
+		if(!isset($user_object->class)) {
 			return redirect()->route('student.dashboard.index');				
 		}
 
@@ -20,12 +20,6 @@ class ClassController extends Controller {
 		}
 
 		return view('student.class.index', array('class_id' => $id));
-	}
-
-	public function post_index() {
-		$input = Input::only('class');
-
-		return view('student.class.index', array('class_id' => $input['class']));
 	}
 
 	/**

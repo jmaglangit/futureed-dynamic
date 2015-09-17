@@ -20,7 +20,7 @@ class DashboardController extends Controller {
 			return redirect()->route('student.dashboard.follow_up_registration');
 		}
 		
-		if(isset($user_object->class) && $user_object->class->subscription_status === "Active") {
+		if(isset($user_object->class)) {
 			return redirect()->route('student.class.index');		
 		}
 
