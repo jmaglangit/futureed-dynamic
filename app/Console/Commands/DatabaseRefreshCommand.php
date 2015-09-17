@@ -38,14 +38,21 @@ class DatabaseRefreshCommand extends Command {
 	public function handle()
 	{
 
-		\DB::table('class_students')->truncate();
+		\DB::table('announcements')->truncate();
 		\DB::table('classrooms')->truncate();
+		\DB::table('class_students')->truncate();
+		\DB::table('help_requests')->truncate();
+		\DB::table('help_request_answers')->truncate();
 		\DB::table('invoices')->truncate();
 		\DB::table('invoice_details')->truncate();
 		\DB::table('orders')->truncate();
+		\DB::table('tips')->truncate();
 		\DB::table('student_modules')->truncate();
 		\DB::table('student_module_answers')->truncate();
 		\DB::table('student_points')->truncate();
+		\DB::table('student_ls_scores')->truncate();
+		\DB::table('student_ls_answers')->truncate();
+		\DB::table('student_badges')->truncate();
 		$this->comment('Future Lessons Database Refresh.');
 
 	}
