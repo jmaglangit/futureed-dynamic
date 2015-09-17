@@ -19,13 +19,13 @@ class AvatarWikisTableSeeder extends Seeder
 
 			\DB::table('avatar_wikis')->insert([
 				[
-					'avatar_id' => $row[0],
-					'code' => $row[1],
-					'name' => $row[2],
-					'description_full' => $row[3],
-					'description_summary' => $row[4],
-					'title' => $row[5],
-					'source' => $row[6],
+					'avatar_id' => $row[1],
+					'code' => $row[2],
+					'name' => $row[3],
+					'description_full' => $row[4],
+					'description_summary' => $row[5],
+					'title' => $row[6],
+					'source' => $row[7],
 					'created_by' => 1,
 					'updated_by' => 1,
 					'created_at' => Carbon::now(),
