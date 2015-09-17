@@ -409,14 +409,19 @@ function FutureedController($scope, $window, apiService, futureed) {
 			}
 
 			if(angular.equals($scope.user.role, Constants.STUDENT)) {
+				$scope.user.class = Constants.FALSE;
+
 				apiService.listClass($scope.user.id).success(function(response) {
 					if(angular.equals(response.status, Constants.STATUS_OK)) {
 						if(response.errors) {
 							$scope.errorHandler(response.errors);
 						} else if(response.data){
-							$scope.user.class = Constants.TRUE;
-							$scope.updateUserData($scope.user);
-						} 
+							if(response.data.records.length) {
+								$scope.user.class = Constants.TRUE;
+							}
+						}
+
+						$scope.updateUserData($scope.user);
 					}
 				}).error(function(response) {
 					$scope.internalError();
