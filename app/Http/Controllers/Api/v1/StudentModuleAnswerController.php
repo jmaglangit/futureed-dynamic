@@ -117,6 +117,8 @@ class StudentModuleAnswerController extends ApiController{
 			return $this->respondErrorMessage(2056);
 		}
 
+		//check if questions
+
 
 		//ADD ANSWER
 
@@ -237,7 +239,13 @@ class StudentModuleAnswerController extends ApiController{
 		$return = $this->student_module->updateStudentModule($student_module->id,$student_module);
 
 		//next question sets
-		$return->next_question = $this->student_module_services->getNextQuestion($data['student_module_id'],$data['module_id']);
+		$return->next_question = $this->student_module_services->getNextQuestion(
+			$data['student_module_id'],
+			$data['module_id'],
+			$student_answer
+		);
+
+		//TODO: Check if questions on
 
 
 		return $this->respondWithData($return);
