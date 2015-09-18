@@ -102,11 +102,14 @@ class StudentModuleServices {
 
 					$next_question = $this->levelQuestion($module_questions[$i],$i, $student_answer);
 
-					if($next_question <> false){
+					if($next_question <> false && $next_question <> -1){
 
 						//return next question.
 						return $next_question;
 
+					}elseif($next_question == -1){
+
+						return -1;
 					}
 				}
 			}
@@ -182,7 +185,7 @@ class StudentModuleServices {
 
 		$wrong_answers = $this->getWrongAnswers($data);
 
-		//if question id in wrong.
+		//if question id in wrong answers.
 		if(isset($wrong_answers[$student_answer->question_id])){
 
 			//if question id is the last get first.
@@ -208,6 +211,12 @@ class StudentModuleServices {
 			}
 
 		}else {
+
+			//Check if there are no wrong questions.
+			if(empty($wrong_answers)){
+
+				return -1;
+			}
 
 			//else Answer is correct and get first next wrong question.
 			current($data);
