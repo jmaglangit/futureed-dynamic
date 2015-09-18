@@ -1208,3 +1208,9 @@ fieldset legend {
 	cursor: pointer;
 	color: #065A7F;
 }
+
+.day[disabled], .month[disabled], .year[disabled] {
+	cursor: not-allowed;
+	background-color: #eeeeee;
+	opacity: 1;
+}
