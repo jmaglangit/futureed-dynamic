@@ -39,8 +39,11 @@ return [
 	'image_avatar_folder' => 'images/avatar',
 	'image_avatar_count' => 5,
 
-	//thumbnial folder
+	//thumbnail folder
 	'thumbnail' => 'images/thumbnail',
+
+	//background image folder
+	'image_avatar_background_folder' => 'images/avatar/background_image',
 
 	//mail change password
 	'subject_change_password' => '{user} Change Password',
