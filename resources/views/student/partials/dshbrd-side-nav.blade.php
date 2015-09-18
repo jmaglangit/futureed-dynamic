@@ -1,6 +1,6 @@
 <ul ng-init="profile.setStudentProfileActive()">
 	<li class="active">
-		<a href="{!! route('student.dashboard.index') !!}" ng-click="profile.setStudentProfileActive('index')">
+		<a href="{!! route('student.dashboard.index') !!}">
 			<i class="fa fa-arrow-left"></i> Back to Dashboard</a>
 	</li>
 
