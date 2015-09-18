@@ -249,7 +249,6 @@ function HelpController($scope, apiService, StudentHelpService, TableService, Se
 			data.content = self.record.answer;
 			data.student_id = $scope.user.id;
 			data.help_request_id = self.record.id;
-			console.log(self.record);
 
 		$scope.ui_block();
 		StudentHelpService.answerRequest(data).success(function(response) {
