@@ -239,18 +239,23 @@ class StudentModuleAnswerController extends ApiController{
 		$return = $this->student_module->updateStudentModule($student_module->id,$student_module);
 
 		//next question sets
-		$return->next_question = $this->student_module_services->getNextQuestion(
+//		$return->next_question
+		$next_question = $this->student_module_services->getNextQuestion(
 			$data['student_module_id'],
 			$data['module_id'],
 			$student_answer
 		);
 
-		//TODO: Check if questions
+		//Check if next question is equal to -1
+		if($next_question == -1){
 
+			return $this->respondErrorMessage(2056);
 
-		return $this->respondWithData($return);
+		} else {
 
-
+			$return->next_question = $next_question;
+			return $this->respondWithData($return);
+		}
 
 	}
 }
