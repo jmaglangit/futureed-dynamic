@@ -27,7 +27,6 @@ function ValidationService($http, apiService) {
 							if(angular.equals(response.errors[0].message, Constants.MSG_U_NOTEXIST)) {
 								// In registration and Edit Profile
 								scope.validation.u_success = Constants.MSG_U_AVAILABLE;
-								console.log(scope.validation);
 							} else {
 								scope.validation.u_error = response.errors[0].message;
 							}
