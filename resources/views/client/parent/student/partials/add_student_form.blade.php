@@ -61,9 +61,10 @@
 						<div class="col-xs-5">
 							{!! Form::text('email_exist', '',
 								[
-									'class' => 'form-control',
-									'ng-model' => 'student.reg.email_exist',
-									'placeHolder' => 'Email'
+									'class' => 'form-control'
+									, 'ng-class' => "{ 'required-field' : student.fields['email']}"
+									, 'ng-model' => 'student.record.email_exist'
+									, 'placeHolder' => 'Email'
 								]
 							) !!}
 						</div>
@@ -104,11 +105,11 @@
 							{!! Form::text('username', '',
 								[
 									'class' => 'form-control'
-									, 'ng-model' => 'student.reg.username'
+									, 'ng-model' => 'student.record.username'
 									, 'placeHolder' => 'Username'
 									, 'ng-class' => "{ 'required-field' : student.fields['username'] }"
 									, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
-									, 'ng-change' => 'student.checkUsernameAvailability()'
+									, 'ng-change' => 'student.checkUsername(student.record.username, futureed.STUDENT, futureed.FALSE)'
 								]
 							) !!}
 						</div>
@@ -124,11 +125,11 @@
 							{!! Form::text('email', '',
 								[
 									'class' => 'form-control'
-									, 'ng-model' => 'student.reg.email'
+									, 'ng-model' => 'student.record.email'
 									, 'ng-class' => "{ 'required-field' : student.fields['email'] }"
 									, 'placeHolder' => 'Email'
 									, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
-									, 'ng-change' => 'student.checkEmailAvailability()'
+									, 'ng-change' => 'student.checkEmail(student.record.email, futureed.STUDENT, futureed.FALSE)'
 								]
 							) !!}
 						</div>
@@ -148,7 +149,7 @@
 							{!! Form::text('first_name', '',
 								[
 									'class' => 'form-control'
-									, 'ng-model' => 'student.reg.first_name'
+									, 'ng-model' => 'student.record.first_name'
 									, 'ng-class' => "{ 'required-field' : student.fields['first_name'] }"
 									, 'placeHolder' => 'First Name'
 								]
@@ -161,7 +162,7 @@
 							{!! Form::text('last_name', '',
 								[
 									'class' => 'form-control'
-									, 'ng-model' => 'student.reg.last_name'
+									, 'ng-model' => 'student.record.last_name'
 									, 'ng-class' => "{ 'required-field' : student.fields['last_name'] }"
 									, 'placeHolder' => 'Last Name'
 								]
@@ -177,7 +178,7 @@
 								'Female' => 'Female']
 								,null,
 								['class' => 'form-control'
-								, 'ng-model' => 'student.reg.gender'
+								, 'ng-model' => 'student.record.gender'
 								, 'ng-class' => "{ 'required-field' : student.fields['gender'] }"
 								]) 
 							!!}
@@ -195,7 +196,7 @@
 							{!! Form::text('city', '',
 								[
 									'class' => 'form-control'
-									, 'ng-model' => 'student.reg.city'
+									, 'ng-model' => 'student.record.city'
 									, 'ng-class' => "{'required-field' : student.fields['city']}"
 									, 'placeHolder' => 'City'
 								]
@@ -208,7 +209,7 @@
 							{!! Form::text('state', '',
 								[
 									'class' => 'form-control',
-									'ng-model' => 'student.reg.state',
+									'ng-model' => 'student.record.state',
 									'placeHolder' => 'State'
 								]
 							) !!}
@@ -217,28 +218,30 @@
 					<div class="form-group" ng-init="getCountries()">
 						<label class="control-label col-xs-3">Country <span class="required">*</span></label>
 						<div class="col-xs-5">
-	                    	<select name="country_id" class="form-control" ng-model="student.reg.country_id" ng-class="{'required-field' : student.fields['country_id']}">
+	                    	<select name="country_id" class="form-control" ng-model="student.record.country_id" ng-class="{'required-field' : student.fields['country_id']}">
 	                        	<option value="">-- Select Country --</option>
 	                        	<option ng-repeat="country in countries" ng-value="country.id">{! country.name!}</option>
 	                    	</select>
 	                	</div>
 					</div>
 				</fieldset>
-			
-				<div class="col-xs-8 col-xs-offset-1 btn-container">
-					{!! Form::button('Add Student'
-						, array(
-							'class' => 'btn btn-blue btn-medium'
-							, 'ng-click' => 'student.addStudent()'
-						)
-					) !!}
-					{!! Form::button('Cancel'
-						, array(
-							'class' => 'btn btn-gold btn-medium'
-							, 'ng-click' => "student.setActive('list')"
-						)
-					) !!}
-				</div>
+
+				<fieldset>
+					<div class="col-xs-8 col-xs-offset-1 btn-container">
+						{!! Form::button('Add Student'
+							, array(
+								'class' => 'btn btn-blue btn-medium'
+								, 'ng-click' => 'student.addStudent($event)'
+							)
+						) !!}
+						{!! Form::button('Cancel'
+							, array(
+								'class' => 'btn btn-gold btn-medium'
+								, 'ng-click' => "student.setActive('list')"
+							)
+						) !!}
+					</div>
+				</fieldset>
 			{!! Form::close() !!}
 		</div>
 	</div>

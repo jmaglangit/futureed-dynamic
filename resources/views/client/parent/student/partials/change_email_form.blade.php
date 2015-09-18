@@ -93,7 +93,7 @@
 					{!! Form::button('Cancel'
 						, array(
 							'class' => 'btn btn-gold btn-medium'
-							, 'ng-click' => "student.setActive('view', student.detail.id)"
+							, 'ng-click' => "student.setActive('view', student.record.id)"
 						)
 					) !!}
 				</div>

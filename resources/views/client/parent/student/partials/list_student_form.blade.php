@@ -68,17 +68,17 @@
 			</div>
 		{!! Form::close() !!}
 	</div>
-	<div class="clearfix"></div>
-	<button class="btn btn-blue btn-small margin-0-30" ng-click="student.setActive('add')">
-		<i class="fa fa-plus-square"></i> Add Student
-	</button>
-	<div class="col-xs-12 padding-0-30">
-		<div class="title-mid">
-			Student List
-		</div>
-	</div>
+	
 	<div class="col-xs-12 table-container" ng-init="student.list()">
+		<button class="btn btn-blue btn-small" ng-click="student.setActive(futureed.ACTIVE_ADD)">
+			<i class="fa fa-plus-square"></i> Add Student
+		</button>
+
 		<div class="list-container" ng-cloak>
+			<div class="title-mid">
+				Student List
+			</div>
+
 			<div class="size-container">
 				{!! Form::select('size'
 					, array(
@@ -91,7 +91,7 @@
 					, array(
 						'ng-model' => 'student.table.size'
 						, 'ng-change' => 'student.paginateBySize()'
-						, 'ng-if' => "student.students.length"
+						, 'ng-if' => "student.records.length"
 						, 'class' => 'form-control paginate-size pull-right'
 					)
 				) !!}
@@ -107,38 +107,37 @@
 			    </thead>
 
 		        <tbody>
-		        {{-- added sample data --}}
-		        <tr ng-repeat="key in student.students">
-		            <td>{! key.first_name !} {! key.last_name !}</td>
-		            <td>{! key.user.email !}</td>
-		            <td>
-					<div class="row">
-						<div class="col-xs-4">
-							<a href="" ng-click="student.playStudent(key.id)"><span><i class="fa fa-play"></i></span></a>
+			        <tr ng-repeat="record in student.records">
+			            <td>{! record.user.name !}</td>
+			            <td>{! record.user.email !}</td>
+			            <td>
+						<div class="row">
+							<div class="col-xs-4">
+								<a href="javascript:void(0)" ng-click="student.playStudent(record.id)"><span><i class="fa fa-play"></i></span></a>
+							</div>
+							<div class="col-xs-4">
+								<a href="javascript:void(0)" ng-click="student.setActive(futureed.ACTIVE_VIEW, record.id)"><span><i class="fa fa-eye"></i></span></a>
+							</div>
+							<div class="col-xs-4">
+								<a href="javascript:void(0)" ng-click="student.setActive(futureed.ACTIVE_EDIT, record.id)"><span><i class="fa fa-pencil"></i></span></a>
+							</div>
 						</div>
-						<div class="col-xs-4">
-							<a href="" ng-click="student.setActive('view', key.id)"><span><i class="fa fa-eye"></i></span></a>
-						</div>
-						<div class="col-xs-4">
-							<a href="" ng-click="student.setActive('edit', key.id)"><span><i class="fa fa-pencil"></i></span></a>
-						</div>
-					</div>
-		            </td>
-		        </tr>
-		        <tr class="odd" ng-if="!student.students.length && !student.table.loading">
-		        	<td valign="top" colspan="7">
-		        		No records found
-		        	</td>
-		        </tr>
-		        <tr class="odd" ng-if="student.table.loading">
-		        	<td valign="top" colspan="7">
-		        		Loading...
-		        	</td>
-		        </tr>
+			            </td>
+			        </tr>
+			        <tr class="odd" ng-if="!student.records.length && !student.table.loading">
+			        	<td valign="top" colspan="7">
+			        		No records found
+			        	</td>
+			        </tr>
+			        <tr class="odd" ng-if="student.table.loading">
+			        	<td valign="top" colspan="7">
+			        		Loading...
+			        	</td>
+			        </tr>
 		        </tbody>
 			</table>
 
-			<div class="pull-right" ng-if="student.students.length">
+			<div class="pull-right" ng-if="student.records.length">
 				<pagination 
 					total-items="student.table.total_items" 
 					ng-model="student.table.page"

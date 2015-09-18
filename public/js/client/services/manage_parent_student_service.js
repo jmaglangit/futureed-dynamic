@@ -5,10 +5,10 @@ function ManageParentStudentService($http){
 	var studentApiUrl = '/api/v1/';
 	var manageStudentApi = {};
 	
-	manageStudentApi.getStudentlist = function(id, search, table) {
+	manageStudentApi.getStudentlist = function(search, table) {
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url 	: studentApiUrl + 'client/manage/student?client_id=' + id
+			, url 	: studentApiUrl + 'client/manage/student?client_id=' + search.client_id
 				+ '&name=' + search.name
 				+ '&email=' + search.email
 				+ '&limit=' + table.size

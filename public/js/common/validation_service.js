@@ -12,8 +12,8 @@ function ValidationService($http, apiService) {
 	    	}
 
 			, checkUsername : function(username, user_type, is_profile) {
-				self.errors = Constants.FALSE;
-				self.success = Constants.FALSE;
+				scope.errors = Constants.FALSE;
+				scope.success = Constants.FALSE;
 				
 				scope.validation.u_loading = Constants.TRUE;
 				scope.validation.u_success = Constants.FALSE;
@@ -27,6 +27,7 @@ function ValidationService($http, apiService) {
 							if(angular.equals(response.errors[0].message, Constants.MSG_U_NOTEXIST)) {
 								// In registration and Edit Profile
 								scope.validation.u_success = Constants.MSG_U_AVAILABLE;
+								console.log(scope.validation);
 							} else {
 								scope.validation.u_error = response.errors[0].message;
 							}
