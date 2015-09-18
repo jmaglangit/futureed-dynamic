@@ -10,7 +10,7 @@
                 {! error !}
             </p>
         </div>
-        {!! Form::open(['class' => 'form-horizontal', 'id' => '']) !!}
+        {!! Form::open(['class' => 'form-horizontal', 'ng-submit' => 'student.submitCode($event)']) !!}
 	        <div class="col-xs-12">
 	        	<div class="form-group">
 	        		<label class="control-label col-xs-3">Invitation Code <span class="required">*</span></label>
@@ -18,17 +18,37 @@
 	        			{!! Form::text('invitation_code', '',
 							[
 								'class' => 'form-control'
-								, 'ng-model' => 'student.reg.invitation_code'
+								, 'ng-model' => 'student.record.invitation_code'
 								, 'ng-class' => "{ 'required-field' : student.fields['invitation_code'] }"
 								, 'placeholder' => 'Invitation Code'
 							]
 						) !!}
 	        		</div>
+
 	        		<div class="col-xs-3">
 	        			{!! Form::button('Proceed'
 							, array(
-								'class' => 'btn btn-blue'
-								, 'ng-click' => 'student.submitCode()'
+								'class' => 'btn btn-blue btn-medium'
+								, 'ng-click' => 'student.submitCode($event)'
+								, 'ng-if' => '!student.record.id'
+							)
+						) !!}
+					</div>
+	        	</div>
+
+	        	<div class="form-group btn-container" ng-if="student.record.id">
+	        		<div class="col-xs-9 col-xs-offset-1">
+	        			{!! Form::button('Proceed'
+							, array(
+								'class' => 'btn btn-blue btn-medium'
+								, 'ng-click' => 'student.submitCode($event)'
+							)
+						) !!}
+
+						{!! Form::button('Cancel'
+							, array(
+								'class' => 'btn btn-gold btn-medium'
+								, 'ng-click' => 'student.setActive(futureed.ACTIVE_VIEW, student.record.id)'
 							)
 						) !!}
 	        		</div>

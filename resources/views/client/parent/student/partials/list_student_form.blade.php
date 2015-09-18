@@ -102,7 +102,7 @@
 			        <tr>
 			            <th>Name</th>
 			            <th>Email</th>
-			            <th>Actions</th>
+			            <th ng-if="student.records.length">Actions</th>
 			        </tr>
 			    </thead>
 
@@ -111,17 +111,17 @@
 			            <td>{! record.user.name !}</td>
 			            <td>{! record.user.email !}</td>
 			            <td>
-						<div class="row">
-							<div class="col-xs-4">
-								<a href="javascript:void(0)" ng-click="student.playStudent(record.id)"><span><i class="fa fa-play"></i></span></a>
+							<div class="row">
+								<div class="col-xs-4">
+									<a href="javascript:void(0)" ng-click="student.playStudent(record.id)"><span><i class="fa fa-play"></i></span></a>
+								</div>
+								<div class="col-xs-4">
+									<a href="javascript:void(0)" ng-click="student.setActive(futureed.ACTIVE_VIEW, record.id)"><span><i class="fa fa-eye"></i></span></a>
+								</div>
+								<div class="col-xs-4">
+									<a href="javascript:void(0)" ng-click="student.setActive(futureed.ACTIVE_EDIT, record.id)"><span><i class="fa fa-pencil"></i></span></a>
+								</div>
 							</div>
-							<div class="col-xs-4">
-								<a href="javascript:void(0)" ng-click="student.setActive(futureed.ACTIVE_VIEW, record.id)"><span><i class="fa fa-eye"></i></span></a>
-							</div>
-							<div class="col-xs-4">
-								<a href="javascript:void(0)" ng-click="student.setActive(futureed.ACTIVE_EDIT, record.id)"><span><i class="fa fa-pencil"></i></span></a>
-							</div>
-						</div>
 			            </td>
 			        </tr>
 			        <tr class="odd" ng-if="!student.records.length && !student.table.loading">

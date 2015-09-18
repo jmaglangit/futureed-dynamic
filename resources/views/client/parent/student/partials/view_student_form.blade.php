@@ -1,9 +1,9 @@
-<div ng-if="student.active_view">
+<div ng-if="student.active_view || student.active_edit">
 	<div class="content-title">
-		<div class="title-main-content" ng-if="!student.edit">
+		<div class="title-main-content" ng-if="student.active_view">
 			<span>View Student</span>
 		</div>
-		<div class="title-main-content" ng-if="student.edit">
+		<div class="title-main-content" ng-if="student.active_edit">
 			<span>Edit Student</span>
 		</div>
 	</div>
@@ -25,7 +25,7 @@
 	        </div>
 
 			<fieldset>
-				<legend class="legend-name-mid">
+				<legend class="legend">
 					User Credentials
 				</legend>
 				<div class="form-group">
@@ -35,8 +35,9 @@
 							Form::text('username','',
 								[
 									'class' => 'form-control'
+									, 'ng-class' => "{ 'required-field' : student.fields['username'] }"
 									, 'ng-model' => 'student.record.username'
-									, 'ng-disabled' => '!student.edit'
+									, 'ng-disabled' => 'student.active_view'
 									, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
 	        						, 'ng-change' => 'student.checkUsername(student.record.username, futureed.STUDENT, futureed.TRUE)'
 									, 'placeholder' => 'Username'
@@ -70,7 +71,7 @@
 
 					<div ng-if="student.record.new_email">
 						<label class="control-label col-xs-2 text-red">Pending Email</label>
-						<div class="col-xs-5">
+						<div class="col-xs-4">
 							{!!
 								Form::text('pending_email','asd',
 									[
@@ -86,7 +87,7 @@
 			</fieldset>
 
 			<fieldset>
-				<legend class="legend-name-mid">
+				<legend class="legend">
 					Personal Information
 				</legend>
 				<div class="form-group">
@@ -95,10 +96,11 @@
 						{!!
 							Form::text('firstname','',
 								[
-									'class' => 'form-control',
-									'ng-model' => 'student.record.first_name',
-									'ng-disabled' => '!student.edit',
-									'placeHolder' => 'First Name'
+									'class' => 'form-control'
+									, 'ng-class' => "{ 'required-field' : student.fields['first_name'] }"
+									, 'ng-model' => 'student.record.first_name'
+									, 'ng-disabled' => 'student.active_view'
+									, 'placeHolder' => 'First Name'
 								])
 						!!}
 					</div>
@@ -107,10 +109,11 @@
 						{!!
 							Form::text('lastname','',
 								[
-									'class' => 'form-control',
-									'ng-model' => 'student.record.last_name',
-									'ng-disabled' => '!student.edit',
-									'placeHolder' => 'Last Name'
+									'class' => 'form-control'
+									, 'ng-class' => "{ 'required-field' : student.fields['last_name'] }"
+									, 'ng-model' => 'student.record.last_name'
+									, 'ng-disabled' => 'student.active_view'
+									, 'placeHolder' => 'Last Name'
 								])
 						!!}
 					</div>
@@ -127,10 +130,11 @@
 						{!!
 							Form::select('gender',['' => '-- Select Gender --', 'Male' => 'Male', 'Female' => 'Female'],null,
 								[
-									'class' => 'form-control',
-									'ng-model' => 'student.record.gender',
-									'ng-disabled' => '!student.edit',
-									'placeHolder' => 'City'
+									'class' => 'form-control'
+									, 'ng-model' => 'student.record.gender'
+									, 'ng-disabled' => 'student.active_view'
+									, 'ng-class' => "{ 'required-field' : student.fields['gender'] }"
+									, 'placeHolder' => 'City'
 								])
 						!!}
 					</div>
@@ -139,10 +143,11 @@
 						{!!
 							Form::text('city','',
 								[
-									'class' => 'form-control',
-									'ng-model' => 'student.record.city',
-									'ng-disabled' => '!student.edit',
-									'placeHolder' => 'City'
+									'class' => 'form-control'
+									, 'ng-class' => "{ 'required-field' : student.fields['city'] }"
+									, 'ng-model' => 'student.record.city'
+									, 'ng-disabled' => 'student.active_view'
+									, 'placeHolder' => 'City'
 								])
 						!!}
 					</div>
@@ -153,18 +158,20 @@
 						{!!
 							Form::text('state','',
 								[
-									'class' => 'form-control',
-									'ng-model' => 'student.record.state',
-									'ng-disabled' => '!student.edit',
-									'placeHolder' => 'State'
+									'class' => 'form-control'
+									, 'ng-class' => "{ 'required-field' : student.fields['city'] }"
+									, 'ng-model' => 'student.record.state'
+									, 'ng-disabled' => 'student.active_view'
+									, 'placeHolder' => 'State'
 								])
 						!!}
 					</div>
 					<label class="control-label col-xs-2">Country <span class="required">*</span></label>
 					<div class="col-xs-4" ng-init="getCountries()">
-	                    <select ng-disabled="!student.edit" name="country_id" 
+	                    <select ng-disabled="student.active_view" name="country_id" 
 								id="country" 
 								class="form-control" 
+								ng-class="{ 'required-field' : student.fields['country_id'] }"
 								ng-model="student.record.country_id" 
 								ng-change="student.getCountryId()">
 	                        <option ng-selected="student.record.country_id == futureed.FALSE" value="">-- Select Country --</option>
@@ -173,35 +180,41 @@
 	                </div>
 				</div>
 
+	        	<div class="form-group" ng-if="student.active_view && student.record.parent && student.record.parent.status == futureed.DISABLED" ng-cloak> 
+					<div class="col-xs-9 col-xs-offset-2 btn-container">
+	        			<a href="javascript:void(0)" class="btn btn-blue btn-medium"
+	        				ng-click="student.setActive('invite')">Confirm Invitation</a>
+	        		</div>
+	        	</div>
+
 				<div class="form-group">
 					<div class="col-xs-9 col-xs-offset-2 btn-container">
 						{!! Form::button('Edit'
 							, array(
 								'class' => 'btn btn-blue btn-medium'
-								, 'ng-if' => '!student.edit'
+								, 'ng-if' => 'student.active_view'
 								, 'ng-click' => "student.setActive('edit', student.record.id)"
-								, 'ng-show' => '!student.edit_form'
 							)
 						) !!}
 						{!! Form::button('Save'
 							, array(
 								'class' => 'btn btn-blue btn-medium'
-								, 'ng-if' => 'student.edit_form'
+								, 'ng-if' => 'student.active_edit'
 								, 'ng-click' => "student.saveStudent()"
 							)
 						) !!}
 						{!! Form::button('Cancel'
 							, array(
 								'class' => 'btn btn-gold btn-medium'
-								, 'ng-if' => '!student.edit'
-								, 'ng-click' => "student.setActive('list')"
+								, 'ng-if' => 'student.active_view'
+								, 'ng-click' => "student.setActive(futureed.ACTIVE_LIST)"
 							)
 						) !!}
 						{!! Form::button('Cancel'
 							, array(
 								'class' => 'btn btn-gold btn-medium'
-								, 'ng-if' => 'student.edit'
-								, 'ng-click' => "student.setActive('view', student.record.id)"
+								, 'ng-if' => 'student.active_edit'
+								, 'ng-click' => "student.setActive(futureed.ACTIVE_VIEW, student.record.id)"
 							)
 						) !!}
 					</div>

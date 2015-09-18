@@ -15,7 +15,7 @@
         	<p>Successfully added new student user.</p>
         </div>
 
-        <div class="module-container" ng-init="student.existActive('new')">
+        <fieldset ng-init="student.existActive('new')">
 	        <div class="col-xs-6  col-xs-offset-2"> 
 	            <label class="cursor-pointer">
 	            {!! Form::radio('status'
@@ -44,7 +44,7 @@
 	            <span class="lbl padding-8">Existing Student</span>
 	            </label>
 	        </div>
-		</div>
+		</fieldset>
 
 		<div ng-if="student.exist">
 			{!! Form::open(
@@ -62,7 +62,7 @@
 							{!! Form::text('email_exist', '',
 								[
 									'class' => 'form-control'
-									, 'ng-class' => "{ 'required-field' : student.fields['email']}"
+									, 'ng-class' => "{ 'required-field' : student.fields['email'] }"
 									, 'ng-model' => 'student.record.email_exist'
 									, 'placeHolder' => 'Email'
 								]
@@ -73,14 +73,14 @@
 						<div class="col-xs-7 col-xs-offset-2 btn-container">
 							{!! Form::button('Add Student'
 								, array(
-									'class' => 'btn btn-blue btn-medium bottom-5'
+									'class' => 'btn btn-blue btn-medium'
 									, 'ng-click' => 'student.addExist($event)'
 								)
 							) !!}
 							{!! Form::button('Cancel'
 								, array(
-									'class' => 'btn btn-gold btn-medium bottom-5'
-									, 'ng-click' => "student.setActive('list')"
+									'class' => 'btn btn-gold btn-medium'
+									, 'ng-click' => "student.setActive()"
 								)
 							) !!}
 						</div>
@@ -237,7 +237,7 @@
 						{!! Form::button('Cancel'
 							, array(
 								'class' => 'btn btn-gold btn-medium'
-								, 'ng-click' => "student.setActive('list')"
+								, 'ng-click' => "student.setActive()"
 							)
 						) !!}
 					</div>

@@ -32,12 +32,11 @@ function ManageParentStudentController($scope, $filter, ManageParentStudentServi
 		$('input, select').removeClass('required-field');
 	}
 
-	self.setActive = function(active) {
+	self.setActive = function(active, id) {
 		self.errors = Constants.FALSE;
 
 		self.fields = [];
 
-		self.change = {};
 		self.validation = {};
 		
 		self.active_list = Constants.FALSE;
@@ -54,6 +53,7 @@ function ManageParentStudentController($scope, $filter, ManageParentStudentServi
 				break;
 
 			case 'change':
+				self.change = {};
 				self.active_change = Constants.TRUE;
 				break;
 
@@ -72,7 +72,7 @@ function ManageParentStudentController($scope, $filter, ManageParentStudentServi
 				break;
 
 			case Constants.ACTIVE_LIST:
-				self.getStudentlist();
+				self.list();
 			
 			default :
 				self.active_list = Constants.TRUE;
@@ -159,7 +159,10 @@ function ManageParentStudentController($scope, $filter, ManageParentStudentServi
 		event.preventDefault();
 	}
 
-	self.submitCode = function() {
+	self.submitCode = function(event) {
+		event = getEvent(event);
+		event.preventDefault();
+
 		self.errors = Constants.FALSE;
 		self.fields = [];
 
@@ -174,12 +177,17 @@ function ManageParentStudentController($scope, $filter, ManageParentStudentServi
 					});
 				}else if(response.data) {
 					self.success = Constants.STUDENT + ' ' + Constants.ADD_SUCCESS_MSG;
-					self.setActive('list', 1);
+					
+					if(self.record.id) {
+						self.setActive(Constants.ACTIVE_VIEW, self.record.id);
+					} else {
+						self.setActive(Constants.ACTIVE_LIST);
+					}
 				}
 			}
 			$scope.ui_unblock();
 		}).error(function(response){
-			$scope.internalError();
+			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
 	}
@@ -198,7 +206,6 @@ function ManageParentStudentController($scope, $filter, ManageParentStudentServi
 		var base_url = $("#base_url_form input[name='base_url']").val();
 		self.record.callback_uri = base_url + Constants.URL_REGISTRATION(angular.lowercase(Constants.STUDENT));
 
-		
 		$scope.ui_block();
 		ManageParentStudentService.addStudent(self.record).success(function(response){
 			if(angular.equals(response.status,Constants.STATUS_OK)){
@@ -232,16 +239,10 @@ function ManageParentStudentController($scope, $filter, ManageParentStudentServi
 		$("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 
-	self.viewStudent = function(id , cond) {
+	self.viewStudent = function(id) {
 		self.errors = Constants.FALSE;
-		self.validation = {};
-		if(cond == 0){
-			self.success = Constants.FALSE;
-		}
-		self.record = {};
 
 		$scope.ui_block();
-
 		ManageParentStudentService.viewStudent(id).success(function(response){
 			if(angular.equals(response.status,Constants.STATUS_OK)){
 				if(response.errors) {
@@ -253,20 +254,23 @@ function ManageParentStudentController($scope, $filter, ManageParentStudentServi
 					self.record.email = data.user.email;
 					self.record.username = data.user.username;
 					self.record.new_email = data.user.new_email;
+
 					self.dateDropdown(self.record.birth_date);
 				}
 			}
 			$scope.ui_unblock();
 		}).error(function(response){
-			$scope.internalError();
+			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
 	}
 
 	self.saveStudent = function() {
+		self.fields = [];
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
-		self.validation = {};
+
+		$("div.birth-date-wrapper select").removeClass("required-field");
 
 		var birth_date = $("#student_form #birth_date").val();
 		self.record.birth_date = $filter(Constants.DATE)(new Date(birth_date), Constants.DATE_YYYYMMDD);
@@ -278,16 +282,16 @@ function ManageParentStudentController($scope, $filter, ManageParentStudentServi
 					self.errors = $scope.errorHandler(response.errors);
 
 					angular.forEach(response.errors, function(value, key) {
-						$("#student_form input[name='" + value.field +"']").addClass("required-field");
-						$("#student_form select[name='" + value.field +"']").addClass("required-field");
+						self.fields[value.field] = Constants.TRUE;
 		            });
 
 		            if(self.fields['birth_date']) {
 		            	$("div.birth-date-wrapper select").addClass("required-field");
 		            }
 				}else if(response.data) {
+					self.validation = {};
 					self.success = Constants.TRUE;
-					self.setActive('view', self.record.id, 1);
+					self.setActive(Constants.ACTIVE_VIEW, self.record.id);
 				}
 			}
 			$scope.ui_unblock();
@@ -301,20 +305,27 @@ function ManageParentStudentController($scope, $filter, ManageParentStudentServi
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
 
-		$scope.ui_block();
-		self.change.id = self.detail.id;
+		self.fields = [];
+		
+		self.change.id = self.record.id;
 		self.change.client_id = $scope.user.id;
 		self.change.email = self.change.current_email;
+
 		var base_url = $("#base_url_form input[name='base_url']").val();
 		self.change.callback_uri = base_url + Constants.URL_CHANGE_EMAIL(angular.lowercase(Constants.STUDENT));
 
+		$scope.ui_block();
 		ManageParentStudentService.changeEmail(self.change).success(function(response){
 			if(angular.equals(response.status, Constants.STATUS_OK)){
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
+
+					angular.forEach(response.errors, function(value, key) {
+						self.fields[value.field] = Constants.TRUE;
+					});
 				} else if(response.data) {
 					self.e_success = ParentConstant.UPDATE_STUDENT_EMAIL_SUCCESS;
-					self.setActive('view', self.detail.id, 1);
+					self.setActive(Constants.ACTIVE_VIEW, self.record.id);
 				}
 			}
 			$scope.ui_unblock();
@@ -325,11 +336,12 @@ function ManageParentStudentController($scope, $filter, ManageParentStudentServi
 	}
 
 	self.playStudent = function(id) {
-		$scope.ui_block();
+			$scope.ui_block();
 		ManageParentStudentService.playStudent().success(function(response){
 			if(angular.equals(response.status,Constants.STATUS_OK)){
 				window.location.href = '/student/login?id=' + id;
 			}
+
 			$scope.ui_unblock();
 		}).error(function(){
 			self.errors = $scope.internalError();
@@ -341,14 +353,15 @@ function ManageParentStudentController($scope, $filter, ManageParentStudentServi
 		$("#birth_date").dateDropdowns({
 			defaultDate : date,
 		    submitFieldName: 'birth_date',
+		    wrapperClass: 'birth-date-wrapper',
 		    minAge: Constants.MIN_AGE,
 		    maxAge: Constants.MAX_AGE
 		});
 
-		if(self.edit == Constants.FALSE) {
-			$(".day, .month, .year").prop('disabled', true);
-		}else {
+		if(self.active_edit) {
 			$(".day, .month, .year").prop('disabled', false);
+		}else {
+			$(".day, .month, .year").prop('disabled', true);
 		}
 	}
 }

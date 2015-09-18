@@ -278,7 +278,7 @@ class StudentRepository implements StudentRepositoryInterface
 
 		$student = new Student();
 
-		$student = $student->with('user', 'school', 'grade')->where('id', $id)->orderBy('created_at', 'desc');
+		$student = $student->with('user', 'school', 'grade', 'parent')->where('id', $id)->orderBy('created_at', 'desc');
 
 		$student = $student->first();
 
