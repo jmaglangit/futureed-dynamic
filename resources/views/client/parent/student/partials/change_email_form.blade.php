@@ -11,9 +11,9 @@
             </p>
         </div>
 		{!! Form::open(['class' => 'form-horizontal', 'id' => 'add_student_form']) !!}
-		<div class="col-xs-12 margin-30-top">
+		<fieldset>
 			<div class="form-group">
-				<label class="control-label col-xs-2">Current Email <span class="required">*</span></label>
+				<label class="control-label col-xs-3">Current Email <span class="required">*</span></label>
 				<div class="col-xs-5">
 					{!! Form::text('current_email', ''
 		    			, array(
@@ -22,7 +22,7 @@
 		        			, 'ng-model' => 'student.change.current_email'
 		        			, 'ng-model-options' => "{ debounce: {'default' : 1000} }"
 		        			, 'ng-class' => "{ 'required-field' : student.fields['current_email'] }"
-		        			, 'ng-change' => 'student.validateCurrentEmail(student.detail.email, student.change.current_email, futureed.STUDENT)'
+		        			, 'ng-change' => 'student.validateCurrentEmail(student.record.email, student.change.current_email, futureed.STUDENT)'
 		        		)
 	        		)!!}
 				</div>
@@ -33,7 +33,7 @@
 	            </div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-xs-2">New Email <span class="required">*</span></label>
+				<label class="control-label col-xs-3">New Email <span class="required">*</span></label>
 				<div class="col-xs-5">
 					{!! Form::text('new_email', ''
 		    			, array(
@@ -53,7 +53,7 @@
 		        </div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-xs-2">Confirm Email <span class="required">*</span></label>
+				<label class="control-label col-xs-3">Confirm Email <span class="required">*</span></label>
 				<div class="col-xs-5">
 					{!! Form::text('confirm_email', ''
 		    			, array(
@@ -71,7 +71,7 @@
 		        </div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-xs-2">Password <span class="required">*</span></label>
+				<label class="control-label col-xs-3">Password <span class="required">*</span></label>
 				<div class="col-xs-5">
 					{!! Form::password('password',
 						[
@@ -82,7 +82,7 @@
 					) !!}
 				</div>
 			</div>
-			<div class="col-xs-6 col-xs-offset-3">
+			<div class="col-xs-8 col-xs-offset-1">
 				<div class="btn-container">
 					{!! Form::button('Change'
 						, array(
@@ -93,11 +93,11 @@
 					{!! Form::button('Cancel'
 						, array(
 							'class' => 'btn btn-gold btn-medium'
-							, 'ng-click' => "student.setActive('view', student.detail.id)"
+							, 'ng-click' => "student.setActive(futureed.ACTIVE_VIEW, student.record.id)"
 						)
 					) !!}
 				</div>
 			</div>
-		</div>
+		</fieldset>
 	</div>
 </div>

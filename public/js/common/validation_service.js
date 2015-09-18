@@ -12,8 +12,8 @@ function ValidationService($http, apiService) {
 	    	}
 
 			, checkUsername : function(username, user_type, is_profile) {
-				self.errors = Constants.FALSE;
-				self.success = Constants.FALSE;
+				scope.errors = Constants.FALSE;
+				scope.success = Constants.FALSE;
 				
 				scope.validation.u_loading = Constants.TRUE;
 				scope.validation.u_success = Constants.FALSE;
