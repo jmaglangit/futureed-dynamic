@@ -25,7 +25,7 @@
 			)
 		) !!}
 			<div class="form-group">
-				<label class="col-xs-3 control-label">Class</label>
+				<label class="col-xs-3 control-label">Class <span class="required">*</span></label>
 				<div class="col-xs-5">
 					{!! Form::text('class_name', ''
 						, array(

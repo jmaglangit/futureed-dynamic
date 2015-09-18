@@ -224,18 +224,22 @@ class StudentServices
 			$grade = $this->grade->getGrade($student_reference['grade_code']);
 		}
 
+		$criteria['student_id'] = $id;
 
-		$student = array_merge(array('id' => $id
-			, 'class_id' => $this->getCurrentClass($id)
-			, 'class' => $this->getCurrentClass($id))
+		//get class_student
+		$class_student = $this->class_student->getClassStudents($criteria);
+
+		$student = array_merge(array('id' => $id)
 			, $student
 			, $user,
 			array('age' => $age,
+				'role' => config('futureed.student'),
 				'avatar' => $avatar_url,
 				'thumbnail' => $avatar_thumbnail_url,
 				'background' => $avatar_url_background,
 				'school' => $school,
 				'grade' => isset($grade) ? $grade : null,
+				'class' => isset($class_student['records'][0]) ? $class_student['records'][0]['class_id'] : null,
 				'avatar_id' => $student_reference['avatar_id']));
 
 

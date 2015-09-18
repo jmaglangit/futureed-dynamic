@@ -116,7 +116,7 @@
 			</fieldset>
         </div>
         
-        <div ng-if="payment.invoice.payment_status == futureed.PAID">
+        <div ng-if="payment.invoice.payment_status == futureed.PAID || payment.invoice.payment_status == futureed.CANCELLED">
         	<div class="col-xs-3 pull-right" ng-if="payment.print">
 				{!! Form::button('Print'
 					, array(
@@ -135,7 +135,7 @@
 						'class' => 'form-horizontal'
 						]
 						) !!}
-							<div ng-if="payment.invoice.payment_status == futureed.PAID">
+							<div>
 								<h4>BILLING INVOICE</h4>
 								<div class="invoice-group">
 									<p>Ref: {! payment.client.first_name !} {! payment.client.last_name !} {! payment.invoice.id !} / {!! date('Y') !!}</p>
@@ -169,7 +169,7 @@
 			<div class="col-xs-12">
 				<div class="form-search">
 					<div class="form-group">
-						<div ng-if="payment.invoice.payment_status == futureed.PAID">
+						<div ng-if="payment.invoice.payment_status == futureed.PAID || payment.invoice.payment_status == futureed.CANCELLED">
 							<label class="control-label col-xs-2">Subject</label>
 							<div class="col-xs-4">
 								<select class="form-control" 
@@ -201,7 +201,7 @@
 					<div class="form-group">
 						<label class="control-label col-xs-2">Subscription</label>
 						<div class="col-xs-5">
-							<select ng-disabled="!payment.subscriptions.length || payment.invoice.payment_status == futureed.PAID"
+							<select ng-disabled="!payment.subscriptions.length || payment.invoice.payment_status !== futureed.PENDING"
 								ng-change="payment.setSubscription()"
 								ng-model="payment.invoice.subscription_id"
 								class="form-control"
@@ -254,7 +254,7 @@
 							<tr ng-repeat="student in payment.students">
 								<td>{! student.student.user.name !}</td>
 								<td>{! student.student.user.email !}</td>
-								<td>{! student.price | currency : '' : 2 !}</td>
+								<td>{! student.price | currency : 'USD$ ' : 2 !}</td>
 								<td ng-if="payment.invoice.payment_status == futureed.PENDING">
 									<div class="row">
 										<div>
@@ -330,7 +330,7 @@
 				</div>
         </fieldset>
 
-		<div ng-if="payment.invoice.payment_status == futureed.PAID">
+		<div ng-if="payment.invoice.payment_status == futureed.PAID || payment.invoice.payment_status == futureed.CANCELLED">
 			<fieldset class="payment-field">
 				<div class="col-xs-12">
 					<div class="invoice-group">

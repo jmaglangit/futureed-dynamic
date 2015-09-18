@@ -16,7 +16,7 @@
 		<div class="content">
 			<div class="hdr">
 				<div class="avtrcon">
-					<img ng-src="{! profile.prof.avatar !}">
+					<img ng-src="{! user.avatar !}">
 				</div>
 				<div class="detcon">
 					<div class="rwrdscon">
@@ -26,7 +26,11 @@
 							Quick <span>Rewards</span>
 						</h3>
 						<div class="points">
-							<span class="star">☆</span>
+							{!! Html::image('/images/icons/icon-reward.png', ''
+								, array(
+									'class' => 'nav-icon-holder'
+								)
+							) !!}
 							<div class="pcon">
 								<span>{! user.points !}</span> points
 							</div>

@@ -31,9 +31,23 @@
 			</div>
 		</div>
 	</div>
+
+	<div ng-if="!mod.contents.teaching_content">
+		<div class="content-container col-xs-12">
+			<div class="content-header">
+				<h3>Content</h3>
+			</div>
+
+			<div class="content-body">
+				<div class="content-message">
+					<h3 class="alert alert-info">Content not available. </h3>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
-<div class="content-pagination" ng-if="mod.record">
+<div class="content-pagination" ng-if="mod.contents">
 	<pagination 
 		total-items="mod.table.total_items" 
 		ng-model="mod.table.page"

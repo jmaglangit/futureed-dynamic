@@ -197,6 +197,8 @@ var Constants = {
 	, ENABLED					: "Enabled"
 	, DISABLED					: "Disabled"
 
+	, VOLUME					: "Volume"
+
 	/*Birthdate dropdown config*/
 
 	, MIN_AGE					: 12

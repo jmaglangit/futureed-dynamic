@@ -163,7 +163,11 @@
 		            <td>
 		            	<div class="row">
 		            		<div class="col-xs-4">
-		            			{! b.status !}
+		            			<i class="fa" 
+		            				ng-class="{ 'fa-ban error-icon' : b.status == futureed.DISABLED, 'fa-check-circle-o success-icon' : b.status == futureed.ENABLED }"
+		            				tooltip="{! b.status !}"
+		            				tooltip-placement="top"
+		            				tooltip-trigger="mouseenter"></i>
 		            		</div>
 		            		<div class="col-xs-4">
 		            			<a href="" ng-click="sale.getBulk(b.id)"><span><i class="fa fa-pencil"></i></span></a>

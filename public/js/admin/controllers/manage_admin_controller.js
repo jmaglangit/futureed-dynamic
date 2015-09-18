@@ -69,6 +69,9 @@ function ManageAdminController($scope, ManageAdminService, TableService, SearchS
 	}
 
 	self.getAdminList = function(){
+		self.errors = Constants.FALSE;
+		self.records = [];
+
 		self.table.loading = Constants.TRUE;
 
 		$scope.ui_block();
@@ -79,14 +82,13 @@ function ManageAdminController($scope, ManageAdminService, TableService, SearchS
 				if(response.errors){
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data){
-					self.data = response.data.records;
+					self.records = response.data.records;
 					self.updatePageCount(response.data);
 				}
 			}
 
 			$scope.ui_unblock();
 		}).error(function(response) {
-			self.table.loading = Constants.FALSE;
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});

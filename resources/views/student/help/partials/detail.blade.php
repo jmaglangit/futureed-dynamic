@@ -75,8 +75,8 @@
 				<div class="col-xs-9">
 					<div class="panel panel-student">
 						<div class="panel-heading row help-title">
-							<h3 class="col-xs-9">{! help.record.title !}</h3>
-							<p class="col-xs-2 pull-right time-right">{! help.record.created_moment !}</p>
+							<h3 class="col-xs-8">{! help.record.title !}</h3>
+							<p class="col-xs-3 pull-right time-right">{! help.record.created_moment !}</p>
 						</div>
 						<div class="clearfix"></div>
 						<div class="panel-body">

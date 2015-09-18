@@ -118,7 +118,7 @@
                 	</div>
                 	<div class="col-xs-7 col-xs-offset-2">
                 		<div class="btn-container">
-                			{!! Form::button('Edit'
+                			{!! Form::button('Save'
                 				, array(
                 					'class' => 'btn btn-blue btn-medium'
                 					, 'ng-click' => "sale.editPrice()"
@@ -189,13 +189,17 @@
 	            <td>{! prce.price | currency : "USD$ " : 2 !}</td>
 	            <td>
 	            	<div class="row">
-	            		<div class="col-xs-5">
-	            			{! prce.status !}
+	            		<div class="col-xs-4">
+	            			<i class="fa" 
+	            				ng-class="{ 'fa-ban error-icon' : prce.status == futureed.DISABLED, 'fa-check-circle-o success-icon' : prce.status == futureed.ENABLED }"
+	            				tooltip="{! prce.status !}"
+	            				tooltip-placement="top"
+	            				tooltip-trigger="mouseenter"></i>
 	            		</div>
-	            		<div class="col-xs-3">
+	            		<div class="col-xs-4">
 	            			<a href="" ng-click="sale.getPrice(prce.id)"><span><i class="fa fa-pencil"></i></span></a>
 	            		</div>
-	            		<div class="col-xs-3">
+	            		<div class="col-xs-4">
 	            			<a href="" ng-click="sale.deletePrice(prce.id)"><span><i class="fa fa-trash"></i></span></a>
 	            		</div>
 	            	</div>

@@ -110,17 +110,7 @@
         	<div class="form-group">
         		<label class="control-label col-xs-3">Birthday <span class="required">*</span></label>
 				<div class="col-xs-5">
-					<div class="dropdown">
-						<a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
-							<div class="input-group">
-								<input readonly="readonly" type="text" ng-class="{ 'required-field' : student.fields['birth_date']}" name="birth_date" placeholder="DD/MM/YY" class="form-control" value="{! student.record.birth | date:'dd/MM/yy' !}">
-								<span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-							</div>
-						</a>
-						<ul class="dropdown-menu date-dropdown-menu" role="menu" aria-labelledby="dLabel">
-							<datetimepicker data-ng-model="student.record.birth" data-before-render="beforeDateRender($dates)" data-datetimepicker-config="{ dropdownSelector: '#dropdown2', startView:'day', minView:'day' }"/>
-						</ul>
-					</div>
+					<input type="hidden" id="birth_date" ng-init="student.setDropDown()" />
 				</div>
         	</div>
 

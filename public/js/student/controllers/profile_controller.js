@@ -421,17 +421,14 @@ function ProfileController($scope, apiService, profileService) {
 				} else if(response.data){
 					self.prof.avatar_id = response.data.id;
 					self.prof.avatar = response.data.url;
-					self.prof.thumbnail = '/images/thumbnail/' + response.data.name;
-					$scope.user = self.prof;
+					self.prof.background = response.data.background_url;
+					self.prof.thumbnail = response.data.thumbnail;
+					self.prof.class = $scope.user.class;
+
+					$("ul.avatar_list li").removeClass('selected');
 
 					self.success = Constants.TRUE;
-
-					apiService.updateUserSession(self.prof).success(function(response) {
-						$("ul.avatar_list li").removeClass('selected');
-						$window.location;
-					}).error(function() {
-						self.errors = $scope.internalError();
-					});
+					$scope.updateUserData(self.prof);
 				}
 			}
 			$scope.ui_unblock();
@@ -588,6 +585,7 @@ function ProfileController($scope, apiService, profileService) {
 		$("#birth_date").dateDropdowns({
 			defaultDate : date,
 		    submitFieldName: 'birth_date',
+		    wrapperClass: 'birth-date-wrapper',
 		    minAge: Constants.MIN_AGE,
 		    maxAge: Constants.MAX_AGE
 		});

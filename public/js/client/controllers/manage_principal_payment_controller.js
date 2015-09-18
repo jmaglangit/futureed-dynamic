@@ -422,23 +422,17 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 				var subscription = response.data;
 				self.invoice.subscription = subscription;
 				
-				var price = Constants.FALSE;
-				
 				if(!angular.equals(self.invoice.payment_status, Constants.PENDING)) {
+					self.invoice.dis_date_start = self.invoice.date_start;
+					self.invoice.dis_date_end = self.invoice.date_end;
+
 					angular.forEach(self.classrooms, function(value, key) {
 						self.invoice.seats_total += value.seats_total;
 					});
 
-					self.invoice.dis_date_start = new Date(self.invoice.date_start);
-					self.invoice.dis_date_end = new Date(self.invoice.date_end);
-
 					self.invoice.sub_total = subscription.price * self.invoice.seats_total;
 					self.invoice.total_amount = self.invoice.sub_total - ( self.invoice.sub_total * (self.invoice.discount / 100) );
 				} else {
-					self.invoice.discount = Constants.FALSE;
-					self.invoice.discount_id = null;
-					self.invoice.discount_type = Constants.CLIENT;
-
 					if(subscription.price) {
 						var start_date = new Date();
 							self.invoice.date_start = $filter(Constants.DATE)(start_date, Constants.DATE_YYYYMMDD);
@@ -477,6 +471,10 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 
 	self.getDiscount = function() {
 		var client_id = $scope.user.id;
+
+		self.invoice.discount = Constants.FALSE;
+		self.invoice.discount_id = Constants.EMPTY_STR;
+		self.invoice.discount_type = Constants.CLIENT;
 		self.invoice.total_amount = self.invoice.sub_total;
 
 		self.getClientDiscount(client_id);
@@ -506,7 +504,7 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 			} else if(response.data) {
 				self.invoice.discount = response.data.percentage;
 				self.invoice.discount_id = response.data.id;
-				self.invoice.discount_type = "Volume";
+				self.invoice.discount_type = Constants.VOLUME;
 				self.invoice.total_amount = self.invoice.sub_total - ( self.invoice.sub_total * (self.invoice.discount / 100) );
 			}
 		}).error(function(response) {
@@ -536,7 +534,9 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 				self.errors = $scope.errorHandler(response.errors);
 			} else if(response.data) {
 				self.invoice = response.data;
-				self.invoice.subject_id = self.invoice.invoice_detail[0].classroom.subject_id;
+				self.invoice.subject_id = self.invoice.invoice_detail[0].classroom.subject.id;
+				self.invoice.subject_name = self.invoice.invoice_detail[0].classroom.subject.name;
+				
 				self.listClassroom(self.invoice.order_no);
 				self.setActive(active);
 			}

@@ -56,14 +56,21 @@ class AvatarController extends ApiController {
                     if($return){
                         
                         $avatar = $this->avatar->getAvatar($input['avatar_id']);
-                        $avatar_url=$this->avatar->getAvatarUrl($avatar['avatar_image']);
+                        $avatar_url = $this->avatar->getAvatarUrl($avatar['avatar_image']);
+                        $avatar_thumbnail_url = $this->avatar->getAvatarThumbnailUrl($avatar['avatar_image']);
+                        $avatar_background_url = $this->avatar->getAvatarBackgroundUrl($avatar['background_image']);
 
-                        $reponse = ['id'=> $avatar['id'],
-                                    'name' => $avatar['avatar_image'],
-                                    'url' =>$avatar_url
-                                   ];
+                        $response = [
+                            'id' => $avatar['id'],
+                            'name' => $avatar['avatar_image'],
+                            'url' => $avatar_url,
+                            'background_url' => $avatar_background_url,
+                            'thumbnail' => $avatar_thumbnail_url,
+                        ];
+
+
                         
-                        return $this->respondWithData($reponse);
+                        return $this->respondWithData($response);
                     }
                 }else{
                     

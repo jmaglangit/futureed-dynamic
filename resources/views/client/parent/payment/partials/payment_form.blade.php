@@ -106,7 +106,6 @@
 				<thead>
 			        <tr>
 			            <th>Order #</th>
-			            <th>Subscription Name</th>
 			            <th>Date Started</th>
 			            <th>Date End</th>
 			            <th>Total # of Seats</th>
@@ -118,8 +117,7 @@
 
 		        <tbody>
 		        <tr ng-repeat="invoice in payment.records">
-		            <td class="width-200">{! invoice.order_no !}</td>
-		            <td class="width-200">{! invoice.subscription.name !}</td>
+		            <td>{! invoice.order_no !}</td>
 		            <td>{! invoice.date_start | ddMMyy !}</td>
 		            <td>{! invoice.date_end | ddMMyy !}</td>
 		            <td>{! invoice.seats_total !}</td>

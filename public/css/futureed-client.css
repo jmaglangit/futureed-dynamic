@@ -41,12 +41,7 @@ table#client-list{
 .width-200{
 	width: 200px;
 }
-.title-mid{
-	text-transform: uppercase;
-  	color: #055A7F;
-  	font-size: 1.5em;
-  	margin: 30px 0 20px 0;
-}
+
 .col-action{
 	padding-right: 5px;
 	padding-left : 5px;
@@ -65,13 +60,6 @@ table#client-list{
 	margin-right: 15px;
 }
 
-.title-mid {
-	text-transform: uppercase;
-  	color: #055A7F;
-  	font-size: 1.5em;
-  	margin: 10px 0 10px 0;
-}
-
 .search-container {
 	padding: 0 30px 10px 30px;
 	color: #887c70;
@@ -88,7 +76,7 @@ table#client-list{
 	margin-top: 30px;
 }
 .success-container {
-	padding: 30px 30px 0px 30px;
+	padding: 15px 30px 0px 30px;
 }
 
 .margin-side{
@@ -229,7 +217,6 @@ span.step {
 
 .payment-field {
 	margin-bottom: 0 !important;
-	padding: 10px 0 15px 15px;
 }
 
 form hr {
@@ -329,12 +316,6 @@ content legend {
 	width: 125px;
 }
 
-.day[disabled], .month[disabled], .year[disabled] {
-	cursor: not-allowed;
-	background-color: #eeeeee;
-	opacity: 1;
-}
-
 .bdate-dropdown > .date-dropdowns > select {
 	max-width: 30%;
 }
@@ -353,4 +334,9 @@ content legend {
 	text-overflow: ellipsis;
 	overflow: hidden;
 	max-width: 60px;
+}
+
+.invitation-code p {
+	color: #B7B4B1;
+	font-style: italic;
 }

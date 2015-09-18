@@ -12,8 +12,8 @@ class Kernel extends ConsoleKernel {
 	 */
 	protected $commands = [
 		'FutureEd\Console\Commands\Inspire',
-		'FutureEd\Console\Commands\TruncateCommand',
-		'FutureEd\Console\Commands\DatabaseRefreshCommand'
+		'FutureEd\Console\Commands\DatabaseRefreshCommand',
+		'FutureEd\Console\Commands\DeleteTempImageCommand'
 	];
 
 	/**

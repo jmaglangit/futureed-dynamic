@@ -61,13 +61,10 @@
 				</div>
 				<div class="form-group">
 					<div class="col-xs-5">
-						{!! Form::text('subscription_name', ''
-							, array(
-								'class' => 'form-control'
-								, 'ng-model' => 'invoice.search.subscription_name'
-								, 'placeholder' => 'Subscription Name'
-							)
-						) !!}
+						<select ng-model="invoice.search.subscription_name" ng-disabled="!invoice.subscriptions.length" ng-init="invoice.getSubscriptionList()" class="form-control">
+							<option value="">-- Select Subscription --</option>
+						<option ng-repeat="subscription in invoice.subscriptions" ng-value="subscription.name">{! subscription.name !}</option>
+					</select>
 					</div>
 					<div class="col-xs-5">
 						
@@ -110,7 +107,6 @@
 				<thead>
 			        <tr>
 			            <th>Order #</th>
-			            <th>Subscription Name</th>
 			            <th>Date Started</th>
 			            <th>Date End</th>
 			            <th>Total # of Seats</th>
@@ -122,7 +118,6 @@
 		        <tbody>
 			        <tr ng-repeat="invoiceInfo in invoice.records">
 			            <td>{! invoiceInfo.order_no !}</td>
-			            <td>{! invoiceInfo.subscription.name !}</td>
 			            <td>{! invoiceInfo.date_start | ddMMyy !}</td>
 			            <td>{! invoiceInfo.date_end | ddMMyy !}</td>
 			            <td>{! invoiceInfo.seats_total !}</td>

@@ -284,5 +284,12 @@ var services = angular.module('futureed.services', []);
 			});
 		}
 
+		futureedAPI.listClass = function(student_id) {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url 	: futureedAPIUrl + 'class-student/student-class-list?student_id=' + student_id
+		});
+	}
+
 		return futureedAPI;
 	});

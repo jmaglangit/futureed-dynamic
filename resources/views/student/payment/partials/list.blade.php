@@ -1,4 +1,14 @@
 <div ng-if="payment.active_list">
+	<div class="content-title">
+		<div class="title-main-content">
+			<span><i class="fa fa-dollar"></i> Payment</span>
+
+			<div class="col-xs-2 pull-right top-10">
+				<a href="{!! route('student.class.index') !!}" class="btn btn-maroon">Back</a>
+			</div>
+		</div>
+	</div>
+
 	<div class="col-xs-12 success-container" ng-if="payment.errors || payment.success">
 		<div class="alert alert-error" ng-if="payment.errors">
 			<p ng-repeat="error in payment.errors track by $index">
@@ -75,7 +85,6 @@
 				<thead>
 			        <tr>
 			            <th>Order #</th>
-			            <th>Subscription Name</th>
 			            <th>Date Started</th>
 			            <th>Date End</th>
 			            <th>Total # of Seats</th>
@@ -88,7 +97,6 @@
 		        <tbody>
 		        <tr ng-repeat="record in payment.records">
 		            <td>{! record.order_no !}</td>
-		            <td>{! record.subscription.name !}</td>
 		            <td>{! record.date_start | ddMMyy !}</td>
 		            <td>{! record.date_end | ddMMyy !}</td>
 		            <td>{! record.seats_total !}</td>

@@ -52,7 +52,7 @@
                         </div>
                         <div class="row content-row">
                             <div class="col-xs-6">
-                                <span><i class="fa fa-tag"></i> {! record.module.description !} {! record.module.common_core_area !}</span>
+                                <span><i class="fa fa-tag"></i> {! record.link_type !} </span>
                             </div>
                             <div class="col-xs-6">
                                 <span><i class="fa fa-calendar-o"></i> {! record.created_at !}</span>
