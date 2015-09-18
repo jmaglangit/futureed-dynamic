@@ -28,8 +28,8 @@ function FutureedController($scope, $window, apiService, futureed) {
 	$scope.getAnnouncement = getAnnouncement;
 
 	$scope.beforeDateRender = beforeDateRender;
-
 	$scope.checkRegistration = checkRegistration;
+
 	function beforeDateRender($dates){
 		maxDate = new Date().setHours(0,0,0,0); // Set minimum date to whatever you want here
 
@@ -399,9 +399,33 @@ function FutureedController($scope, $window, apiService, futureed) {
 
 		if(angular.isString(user) && user.length > 0) {
 			$scope.user = JSON.parse(user);
-			$scope.user.age = parseInt($scope.user.age);
+			
+			if ($scope.user.age) {
+				$scope.user.age = parseInt($scope.user.age)
+			}
+
 			if($scope.user.new_email != null){
 				$scope.confirm_email = Constants.TRUE;
+			}
+
+			if(angular.equals($scope.user.role, Constants.STUDENT)) {
+				$scope.user.class = Constants.FALSE;
+
+				apiService.listClass($scope.user.id).success(function(response) {
+					if(angular.equals(response.status, Constants.STATUS_OK)) {
+						if(response.errors) {
+							$scope.errorHandler(response.errors);
+						} else if(response.data){
+							if(response.data.records.length) {
+								$scope.user.class = Constants.TRUE;
+							}
+						}
+
+						$scope.updateUserData($scope.user);
+					}
+				}).error(function(response) {
+					$scope.internalError();
+				});
 			}
 		}
 	}
@@ -1033,6 +1057,8 @@ function FutureedController($scope, $window, apiService, futureed) {
 
 	$scope.updateUserData = function(data) {
 		$scope.user = data;
+		$("input[name='userdata'").val(JSON.stringify($scope.user));
+
 		apiService.updateUserSession($scope.user);
 	} 
 };

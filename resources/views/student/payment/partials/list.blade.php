@@ -1,7 +1,7 @@
 <div ng-if="payment.active_list">
 	<div class="content-title">
 		<div class="title-main-content">
-			<span>Add Payment</span>
+			<span><i class="fa fa-dollar"></i> Payment</span>
 
 			<div class="col-xs-2 pull-right top-10">
 				<a href="{!! route('student.class.index') !!}" class="btn btn-maroon">Back</a>
