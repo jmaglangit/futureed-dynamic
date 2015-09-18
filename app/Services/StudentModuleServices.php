@@ -117,6 +117,8 @@ class StudentModuleServices {
 
 			//set to the first question
 			$next_question = $question[0]->id;
+
+			return $next_question;
 		}
 
 	}
