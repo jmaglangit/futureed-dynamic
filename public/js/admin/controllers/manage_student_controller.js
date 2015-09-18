@@ -86,6 +86,7 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 				break;
 		}
 
+		$("input, select").removeClass("required-field");
 		$("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 
@@ -258,12 +259,17 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 	self.save = function() {
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
+		
 		self.validation = {};
 		self.fields = [];
 
+		$("div.birth-date-wrapper select").removeClass("required-field");
+
+		var birth_date = $("input#birth_date").val();
+		self.record.birth_date = $filter(Constants.DATE)(new Date(birth_date), Constants.DATE_YYYYMMDD);
+
 		var base_url = $("#base_url_form input[name='base_url']").val();
 		self.record.callback_uri = base_url + Constants.URL_REGISTRATION(angular.lowercase(Constants.STUDENT));
-		self.record.birth_date = $filter('date')(self.record.birth, 'yyyyMMdd');
 
 		$scope.ui_block();
 		manageStudentService.save(self.record).success(function(response){
@@ -274,6 +280,10 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 					angular.forEach(response.errors, function(value, key) {
 						self.fields[value.field] = Constants.TRUE;
 		            });
+
+		            if(self.fields['birth_date']) {
+		            	$("div.birth-date-wrapper select").addClass("required-field");
+		            }
 				} else if(response.data) {
 					self.success = "Successfully added new student user.";
 					self.record = {};
@@ -304,7 +314,6 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 					self.record.email = data.user.email;
 					self.record.username = data.user.username;
 					self.record.new_email = data.user.new_email;
-					self.record.birth = data.birth_date;
 					self.record.id = data.id;
 
 					self.moduleList(id);
@@ -315,6 +324,7 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 					}
 
 					self.getGradeLevel();
+					self.setDropDown(self.record.birth_date);
 				}
 			}
 			$scope.ui_unblock();
@@ -330,10 +340,14 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 	self.saveEdit = function() {
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
+		self.schools = Constants.FALSE;
 		self.validation = {};
 		
 		self.fields = [];
-		self.record.birth_date = $filter('date')(self.record.birth, 'yyyyMMdd');
+		$("div.birth-date-wrapper select").removeClass("required-field");
+
+		var birth_date = $("input#birth_date").val();
+		self.record.birth_date = $filter(Constants.DATE)(new Date(birth_date), Constants.DATE_YYYYMMDD);
 
 		$scope.ui_block();
 		manageStudentService.saveEdit(self.record).success(function(response){
@@ -345,6 +359,9 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 						self.fields[value.field] = Constants.TRUE;
 		            });
 
+		            if(self.fields['birth_date']) {
+		            	$("div.birth-date-wrapper select").addClass("required-field");
+		            }
 				} else if(response.data) {
 					self.success = "Successfully updated this student user.";
 					self.setActive(Constants.ACTIVE_VIEW, self.record.id);
@@ -674,5 +691,26 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
+	}
+
+	self.setDropDown = function(default_date) {
+		var options = {
+		      submitFieldName	: 'birth_date'
+		    , wrapperClass	: 'birth-date-wrapper'
+		    , minAge		: Constants.MIN_AGE
+		    , maxAge		: Constants.MAX_AGE
+		}
+
+		if(default_date) {
+			options.defaultDate = default_date;
+		}
+
+		$("#birth_date").dateDropdowns(options);
+
+		if(self.active_edit) {
+			$(".day, .month, .year").prop('disabled', false);
+		}else {
+			$(".day, .month, .year").prop('disabled', true);
+		}
 	}
 }
