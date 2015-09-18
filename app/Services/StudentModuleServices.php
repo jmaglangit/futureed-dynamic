@@ -117,6 +117,8 @@ class StudentModuleServices {
 
 			//set to the first question
 			$next_question = $question[0]->id;
+
+			return $next_question;
 		}
 
 	}
@@ -207,12 +209,37 @@ class StudentModuleServices {
 
 		}else {
 
-			//else get first
-			current($wrong_answers);
+			//else Answer is correct and get first next wrong question.
+			current($data);
 
-			return key($wrong_answers);
+			//find the correct answer id.
+			for($i=0; $i < count($data); $i++){
+
+				if(key($data) <> $student_answer->question_id){
+					next($data);
+
+				} else{
+
+					next($data);
+					break;
+				}
+			}
+
+
+			//Check if current is equal to wrong.
+			for(;$i < count($data); $i++){
+
+				if(current($data) <> config('futureed.answer_status_wrong')){
+
+					next($data);
+				}else {
+
+					break;
+				}
+			}
+
+			return key($data);
 		}
-
 
 	}
 

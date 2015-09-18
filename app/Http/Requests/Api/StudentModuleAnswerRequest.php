@@ -38,20 +38,25 @@ class StudentModuleAnswerRequest extends ApiRequest
 		];
 
 		if(!is_null($this->__get('question_id'))){
+
 			$module = Module::find($this->__get('module_id'));
 			$return['question_id'] = 'required|integer|exists:questions,id,deleted_at,NULL,module_id,'. $module->id;
 
-			//require answer_id if question is MC.
-			$question = Question::find($this->__get('question_id'));
-			$question_type = $question->question_type;
+            //If question_id has value.
+            if($this->__get('question_id')){
+                //require answer_id if question is MC.
+                $question = Question::find($this->__get('question_id'));
+                $question_type = $question->question_type;
 
 
-			if($question_type == config('futureed.question_type_multiple_choice')){
+                if($question_type == config('futureed.question_type_multiple_choice')){
 
-				$return['answer_id'] = 'integer|required|exists:question_answers,id,deleted_at,NULL,question_id,'. $question->id;
-			}else {
-				$return['answer_text'] = 'required|string';
-			}
+                    $return['answer_id'] = 'integer|required|exists:question_answers,id,deleted_at,NULL,question_id,'. $question->id;
+                }else {
+                    $return['answer_text'] = 'required|string';
+                }
+            }
+
 		}
 
 		return $return;
