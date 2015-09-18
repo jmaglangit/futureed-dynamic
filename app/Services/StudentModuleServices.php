@@ -207,12 +207,25 @@ class StudentModuleServices {
 
 		}else {
 
-			//else get first
-			current($wrong_answers);
+			//else Answer is correct and get first next wrong question.
+			current($data);
 
-			return key($wrong_answers);
+			//find the correct answer id.
+			while(key($data) <> $student_answer->question_id){
+
+				next($data);
+			}
+
+			next($data);
+
+			//Check if current is equal to wrong.
+			while(current($data) <> config('futureed.answer_status_wrong')){
+
+				next($data);
+			}
+
+			return key($data);
 		}
-
 
 	}
 
