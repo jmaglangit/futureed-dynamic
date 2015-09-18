@@ -340,6 +340,7 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 	self.saveEdit = function() {
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
+		self.schools = Constants.FALSE;
 		self.validation = {};
 		
 		self.fields = [];

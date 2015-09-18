@@ -221,7 +221,7 @@
         <fieldset>
         	<legend class="legend-name-mid">School Information</legend>
         	<div class="form-group">
-        		<label class="control-label col-xs-3">School Name <span class="required">*</span></label>
+        		<label class="control-label col-xs-3">School Name </label>
         		<div class="col-xs-5">
         			{!! Form::text('school_name',''
 	        				, array(
