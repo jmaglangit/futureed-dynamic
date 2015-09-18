@@ -73,7 +73,7 @@
 						<label class="control-label col-xs-2 text-red">Pending Email</label>
 						<div class="col-xs-4">
 							{!!
-								Form::text('pending_email','asd',
+								Form::text('pending_email','',
 									[
 										'class' => 'form-control',
 										'ng-model' => 'student.record.new_email',
