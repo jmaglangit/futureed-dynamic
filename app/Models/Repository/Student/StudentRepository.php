@@ -1,15 +1,10 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Jason
- * Date: 3/6/15
- * Time: 11:30 AM
- */
-namespace FutureEd\Models\Repository\Student;
+<?php namespace FutureEd\Models\Repository\Student;
 
 use FutureEd\Models\Core\Student;
 use FutureEd\Models\Core\User;
+use Illuminate\Contracts\Validation\ValidationException;
 use League\Flysystem\Exception;
+use Illuminate\Support\Facades\DB;
 
 class StudentRepository implements StudentRepositoryInterface
 {
@@ -418,6 +413,46 @@ class StudentRepository implements StudentRepositoryInterface
 
 			throw new Exception($e->getMessage());
 		}
+
+	}
+
+	/**
+	 * Add new Student Registered from Facebook
+	 * @param $data
+	 * @return string|static
+	 */
+	public function addStudentFromFacebook($data){
+
+		DB::beginTransaction();
+
+		try{
+
+			//Add user table
+			$data = array_add($data,'username','NA');
+
+			$data = array_add($data, 'name',$data['first_name'] . ' ' . $data['last_name']);
+
+			//Default to USA -- No country code from login response.
+			$data['country_id'] = ($data['country_id'] == null ) ?  840 : $data['country_id'];
+
+			$user = User::create($data);
+
+			$data = array_add($data,'user_id',$user->id);
+
+			//Add student table
+			$student = Student::create($data);
+
+		} catch(\Exception $e){
+
+			DB::rollback();
+
+			return $e->getMessage();
+
+		}
+
+		DB::commit();
+
+		return $student;
 
 	}
 
