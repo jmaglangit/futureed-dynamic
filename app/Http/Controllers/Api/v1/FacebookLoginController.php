@@ -3,9 +3,13 @@
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 use FutureEd\Http\Requests\Api\FacebookLoginRequest;
+use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
+use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
+use FutureEd\Models\Repository\User\UserRepositoryInterface;
+use PhpSpec\Exception\Exception;
 
 
-class FacebookLoginController extends Controller {
+class FacebookLoginController extends ApiController {
 
 	/**
 	 * REGISTRATION
@@ -36,13 +40,21 @@ class FacebookLoginController extends Controller {
 	 *
 	 */
 
+	protected $user;
+
 	protected $student;
 
 	protected $client;
 
 	public function __construct(
-
+		UserRepositoryInterface $userRepositoryInterface,
+		StudentRepositoryInterface $studentRepositoryInterface,
+		ClientRepositoryInterface $clientRepositoryInterface
 	){
+
+		$this->student = $studentRepositoryInterface;
+
+		$this->client = $clientRepositoryInterface;
 
 	}
 
@@ -51,31 +63,48 @@ class FacebookLoginController extends Controller {
 	 */
 	public function facebookRegistration(FacebookLoginRequest $request){
 
-		$data = $request->only(
+		$user_type = $request->only('user_type');
+
+		$student_data = $request->only(
 			'facebook_app_id',
 			'email',
 			'user_type',
 			'first_name',
 			'last_name',
-			'client_role',
 			'gender',
 			'birth_date',
-			'country_id'
+			'country_id',
+			'state',
+			'city'
 		);
 
-		switch ($data['user_type']){
+		$client_data = $request->only(
+			'facebook_app_id',
+			'first_name',
+			'last_name',
+			'email',
+			'user_type',
+			'client_role',
+			'street_address',
+			'city',
+			'state',
+			'country_id',
+			'zip'
+		);
+
+		switch ($user_type['user_type']){
 
 			case config('futureed.student'):
 
 				//Registration of Student.
-
-
+				return $this->respondWithData($this->student->addStudentFromFacebook($student_data));
 
 				break;
 
 			case config('futureed.client'):
 
 				//Registration for Client.
+				return $this->respondWithData($this->client->addClientFromFacebook($client_data));
 
 				break;
 		}
