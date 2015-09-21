@@ -84,6 +84,7 @@ class FacebookLoginController extends ApiController {
 			'last_name',
 			'email',
 			'user_type',
+			'birth_date',
 			'client_role',
 			'street_address',
 			'city',
