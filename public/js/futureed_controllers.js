@@ -900,21 +900,21 @@ function FutureedController($scope, $window, apiService, futureed) {
 				if(angular.equals(response.status, Constants.STATUS_OK)){
 					if(response.errors) {
 						$scope.errors = $scope.errorHandler(response.errors);
-					}else if(response.data){
+					} else if(response.data){
 						$scope.invited = Constants.TRUE;
 						$scope.reg = response.data[0];
 						$scope.reg.username = $scope.reg.user.username;
 						$scope.reg.email = $scope.reg.user.email;
-						$scope.reg.birth = $scope.reg.birth_date;
 						$scope.reg.school_name = $scope.reg.school.name;
 						$scope.getGradeLevel($scope.reg.country_id);
 						$scope.edit_registration = Constants.TRUE;
 
 						$("#birth_date").dateDropdowns({
-						    submitFieldName: 'birth_date',
-						    defaultDate: $scope.reg.birth,
-						    minAge: Constants.MIN_AGE,
-						    maxAge: Constants.MAX_AGE
+						    submitFieldName: 'birth_date'
+						    , wrapperClass : 'birth-date-wrapper'
+						    , defaultDate: $scope.reg.birth_date
+						    , minAge: Constants.MIN_AGE
+						    , maxAge: Constants.MAX_AGE
 						});
 					}
 				}
