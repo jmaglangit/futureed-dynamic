@@ -3,12 +3,14 @@
 use FutureEd\Models\Core\Client;
 use FutureEd\Models\Core\Grade;
 use FutureEd\Models\Core\User;
+use FutureEd\Models\Traits\LoggerTrait;
 use League\Flysystem\Exception;
 use Illuminate\Support\Facades\DB;
 
 
 class ClientRepository implements ClientRepositoryInterface
 {
+    use LoggerTrait;
 
     public function getClient($user_id, $role)
     {
@@ -422,7 +424,9 @@ class ClientRepository implements ClientRepositoryInterface
 
             DB::rollback();
 
-            return $e->getMessage();
+            $this->errorLog($e);
+
+            return 0;
         }
 
         DB::commit();
