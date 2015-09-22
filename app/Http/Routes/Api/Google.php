@@ -1,7 +1,9 @@
 <?php
+
 /**
- * Created by PhpStorm.
- * User: jason
- * Date: 9/22/15
- * Time: 3:06 PM
+ * Google registration.
  */
+Routes::post('/registration/google',[
+	'uses' => 'Api\v1\GoogleLoginController@googleRegistration',
+	'as' => 'api.v1.registration.google'
+]);
