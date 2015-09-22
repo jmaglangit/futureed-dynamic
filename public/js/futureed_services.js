@@ -1,6 +1,6 @@
 var services = angular.module('futureed.services', []);
 
-	services.factory('apiService', function($http) {
+	services.factory('apiService', function($http, $q) {
 		var futureedAPI = {};
 		var futureedAPIUrl = '/api/v1/';
 
@@ -285,11 +285,26 @@ var services = angular.module('futureed.services', []);
 		}
 
 		futureedAPI.listClass = function(student_id) {
-		return $http({
-			method 	: Constants.METHOD_GET
-			, url 	: futureedAPIUrl + 'class-student/student-class-list?student_id=' + student_id
-		});
-	}
+			return $http({
+				method 	: Constants.METHOD_GET
+				, url 	: futureedAPIUrl + 'class-student/student-class-list?student_id=' + student_id
+			});
+		}
+
+		futureedAPI.getMyLastName = function() {
+            var deferred = $q.defer();
+            FB.api('/me', {
+                fields: 'last_name'
+            }, function(response) {
+                if (!response || response.error) {
+                    deferred.reject('Error occured');
+                } else {
+                    deferred.resolve(response);
+                }
+            });
+            
+            return deferred.promise;
+        }
 
 		return futureedAPI;
 	});

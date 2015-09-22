@@ -205,6 +205,9 @@ var Constants = {
 	, MAX_AGE					: 99
 	, AGE_RANGE					: 14
 
+	, DI_PPA_BF 				: "430329777152115"
+	, DI_TNEILC_ELGOOG 			: "501345076089-e05ok200b81g1560d00moln30n60k9nm.apps.googleusercontent.com"
+
 	, URL_FORGOT_PASSWORD		: function(user_type) {
 		return '/' + user_type + '/password/forgot';
 	}

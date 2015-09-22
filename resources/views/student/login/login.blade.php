@@ -8,7 +8,7 @@
             @include('student.login.enter-password')
 
                 <div ng-show="!locked && !enter_pass">
-                    {!! Form::open(array('id' => 'login_form')) !!}
+                    {!! Form::open(array('id' => 'login_form', 'ng-submit' => 'validateUser($event)')) !!}
                         <div class="logo-container">
                             {!! Html::image('/images/logo-md.png') !!}
                         </div>
@@ -36,9 +36,28 @@
                                 , array(
                                     'id' => 'validate_user_btn'
                                     , 'class' => 'btn btn-maroon'
-                                    , 'ng-click' => 'validateUser()'
+                                    , 'ng-click' => 'validateUser($event)'
                                 )
                             ) !!}
+                        </div>
+                        <div class="form-group login-divider">
+                        	<em>or</em>
+                        </div>
+
+                        <div class="row form-group" ng-controller="MediaLoginController as media">
+                            <div class="col-xs-6"> 
+                                <button type="button" class="btn btn-fb"
+                                	ng-click="media.loginViaFacebook()">
+                                		<i class="fa fa-facebook"></i> Login via Facebook
+                                </button>
+                            </div>
+
+                            <div class="col-xs-6"> 
+								<button id="btn-google" type="button" class="btn btn-google" ng-init="media.googleInit()"> 
+									<span><img src="/images/icons/google-logo.png" /></span>
+								    <span>Sign in with Google</span> 
+                                </button>
+                            </div>
                         </div>
                     {!! Form::close() !!}
 
@@ -68,11 +87,13 @@
             </div>
         </div>
     </div>
-
 @stop
 
 @section('scripts')
+	{!! Html::script('//connect.facebook.net/en_US/sdk.js') !!}
+    {!! Html::script('https://apis.google.com/js/platform.js') !!}
 
-{!! Html::script('/js/student/login.js') !!} 
-
+    {!! Html::script('/js/student/login.js') !!} 
+    {!! Html::script('/js/student/controllers/media_login_controller.js') !!} 
+    {!! Html::script('/js/student/services/media_login_service.js') !!} 
 @stop

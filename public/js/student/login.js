@@ -1,9 +1,4 @@
 //login
-$(document).on('submit', '#login_form', function() {
-	$("#validate_user_btn").trigger('click');
-	return false;
-});
-
 $(document).on('submit', '#forgot_password_form', function() {
 	$("#forgot_password_btn").trigger('click');
 	return false;
