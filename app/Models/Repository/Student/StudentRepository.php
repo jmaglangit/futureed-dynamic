@@ -2,12 +2,13 @@
 
 use FutureEd\Models\Core\Student;
 use FutureEd\Models\Core\User;
-use Illuminate\Contracts\Validation\ValidationException;
+use FutureEd\Models\Traits\LoggerTrait;
 use League\Flysystem\Exception;
 use Illuminate\Support\Facades\DB;
 
 class StudentRepository implements StudentRepositoryInterface
 {
+	use LoggerTrait;
 
 	public function getStudents($criteria = array(), $limit = 0, $offset = 0)
 	{
@@ -446,7 +447,9 @@ class StudentRepository implements StudentRepositoryInterface
 
 			DB::rollback();
 
-			return $e->getMessage();
+			$this->errorLog($e);
+
+			return 0;
 
 		}
 
