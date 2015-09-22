@@ -7,33 +7,12 @@ use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use FutureEd\Http\Requests\Api\GoogleLoginRequest;
 
-class GoogleLoginController extends Controller {
+class GoogleLoginController extends ApiController {
 
 	/**
 	 * REGISTRATION
 	 */
-	/*
-	 * Get required variables
-	 *
-	 *
-	 * USER
-	 * 	google_app_id
-	 *	email
-	 *	name -- combined with first_name and last_name
-	 * 	user_type
-	 *
-	 * STUDENT
-	 * 	first_name
-	 * 	last_name
-	 * 	gender
-	 * 	birth_date
-	 *
-	 * CLIENT
-	 * 	first_name
-	 * 	last_name
-	 * 	client_role
-	 *
-	 */
+
 
 	protected $student;
 
@@ -84,11 +63,21 @@ class GoogleLoginController extends Controller {
 			case config('futureed.student'):
 
 				//Registration of Student
+				$response = $this->student->addStudentFromGoogle($student);
+
+				return ($response) ?
+					$this->respondWithData($response) : $this->respondErrorMessage(7000);
+
 				break;
 
 			case config('futureed.client'):
 
 				//Registration of Client.
+				$response = $this->client->addClientFromGoogle($client);
+
+				return ($response) ?
+					$this->respondWithData($response) : $this->respondErrorMessage(7000);
+
 				break;
 		}
 
