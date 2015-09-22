@@ -109,38 +109,64 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 			if(response.data) {
 				self.record = response.data;
 				var class_id = Constants.FALSE;
-				
-				getClassrooms(function(response) {
-					var data = response.data.records;
-					var subject_id = self.record.subject_id;
 
-					for (var key = 0; key < data.length; key++) {
-						if(angular.equals(parseInt(data[key].classroom.subject_id), parseInt(subject_id))) {
-							class_id = data[key].class_id;
+				var student_modules = self.record.student_module;
+				
+				if(student_modules.length) {
+					var student_id = parseInt($scope.user.id);
+					for (var key = 0; key < student_modules.length; key++) {
+						if(angular.equals(parseInt(student_modules[key].student_id), student_id)) {
+							self.record.student_module = {
+								id								: student_modules[key].id
+								, class_id						: student_modules[key].class_id
+								, last_answered_question_id		: student_modules[key].last_answered_question_id
+								, question_counter				: student_modules[key].question_counter
+								, module_status					: student_modules[key].module_status
+							}
+
 							break;
 						}
 					};
 
-					if(!self.record.student_module.length) {
+					loadModuleView();
+				} else {
+					getClassrooms(function(response) {
+						var data = response.data.records;
+						var subject_id = self.record.subject_id;
+
+						for (var key = 0; key < data.length; key++) {
+							if(angular.equals(parseInt(data[key].classroom.subject_id), parseInt(subject_id))) {
+								class_id = data[key].class_id;
+								break;
+							}
+						};
+
 						// create student_module
 						var data = {};
 							data.class_id = class_id;
 							data.student_id = $scope.user.id;
 							data.module_id = self.record.id;
-							data.subject_id = self.record.subject_id;
+							data.subject_id = subject_id;
 
 						createModuleStudent(data, function(response) {
 							if(response.data) {
-								self.record.student_module[0] = response.data;	
+								var data = response.data;
+
+								self.record.student_module = {
+									id								: data.id
+									, class_id						: data.class_id
+									, last_answered_question_id		: data.last_answered_question_id
+									, question_counter				: data.question_counter
+									, module_status					: data.module_status
+								}
+
 								loadModuleView();
 							} else {
 								self.errors = $internalError();
 							}
 						});
-					} else {
-						loadModuleView();
-					}
-				});
+					});
+				}
 			} else {
 				self.errors = $scope.internalError();
 			}
@@ -148,51 +174,8 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 	}
 
 	var loadModuleView = function() {
-		var student_module = self.record.student_module[0];
-		self.getTeachingContents(student_module.module_id);
+		self.getTeachingContents(self.record.id);
 		self.setActive(Constants.ACTIVE_CONTENTS);
-		return;
-
-		// if last_answered_question_id value is 0, load contents
-		if(!parseInt(student_module.last_answered_question_id)) {
-			self.getTeachingContents(student_module.module_id);
-			self.setActive(Constants.ACTIVE_CONTENTS);
-		} else {
-			// if last_answered_question_id value is > 0, load question
-			self.setActive(Constants.ACTIVE_QUESTIONS);
-			self.search.last_answered_question_id = parseInt(student_module.last_answered_question_id);
-			self.getModuleStudent(student_module.id, function(response) {
-				var module_student = response.data;
-
-				if(module_student.module_status == "Completed") {
-					self.record.module_done = Constants.TRUE;
-					self.errors = ["You have already completed this module."];
-				} else {
-					getAvatarPose($scope.user.avatar_id);
-					listAvatarQuotes($scope.user.avatar_id);
-
-					
-					
-					listQuestions(function(response) {
-						angular.forEach(self.questions, function(value, key) {
-							if(angular.equals(parseInt(value.id), parseInt(module_student.last_answered_question_id))) {
-								self.current_question = value;
-								self.current_question.answer_text = Constants.EMPTY_STR;
-								self.current_question.answer_id = Constants.EMPTY_STR;
-
-								self.question_counter = parseInt(module_student.question_counter) + 1;
-
-								if(angular.equals(self.current_question.question_type, Constants.ORDERING)) {
-									self.current_question.answer_text = self.current_question.question_order_text.split(",");
-								}
-
-								return;		
-							}
-						});
-					});
-				}
-			});
-		}
 	}
 
 	var getAvatarPose = function(avatar_id) {
@@ -250,7 +233,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 	self.exitModule = function(redirect_to) {
 		var data = {};
-			data.module_id = self.record.student_module[0].id;
+			data.module_id = self.record.student_module.id;
 
 			if(self.active_contents) {
 				data.last_viewed_content_id = self.contents.content_id;
@@ -261,7 +244,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 			}
 			
 		updateModuleStudent(data, function() {
-			$window.location.href = redirect_to + "/" + self.record.student_module[0].class_id;
+			$window.location.href = redirect_to + "/" + self.record.student_module.class_id;
 		});
 	}
 
@@ -314,9 +297,9 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		getAvatarPose($scope.user.avatar_id);
 		listAvatarQuotes($scope.user.avatar_id);
 		
-		if(parseInt(self.record.student_module[0].last_answered_question_id)) {
+		if(parseInt(self.record.student_module.last_answered_question_id)) {
 			angular.forEach(self.questions, function(value, key) {
-				if(angular.equals(parseInt(self.record.student_module[0].last_answered_question_id), parseInt(value.id))) {
+				if(angular.equals(parseInt(self.record.student_module.last_answered_question_id), parseInt(value.id))) {
 					self.current_question = self.questions[key];
 					return;
 				}
@@ -325,10 +308,10 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 			self.current_question = self.questions[0];
 		}
 
-		self.question_counter = (self.record.student_module[0].question_counter) ? parseInt(self.record.student_module[0].question_counter) + 1 : 1;
+		self.question_counter = (self.record.student_module.question_counter) ? parseInt(self.record.student_module.question_counter) + 1 : 1;
 
 		var data = {};
-			data.module_id = self.record.student_module[0].id;
+			data.module_id = self.record.student_module.id;
 			data.last_answered_question_id = parseInt(self.current_question.id);
 
 		updateModuleStudent(data);
@@ -368,14 +351,16 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 					self.contents = response.data.records[0];
 					self.updatePageCount(response.data);
 
-					var data = {};
-						data.module_id = self.record.student_module[0].id;
+					if(self.contents) {
+						var data = {};
+							data.module_id = self.record.student_module.id;
 
-						if(self.active_contents) {
-							data.last_viewed_content_id = self.contents.id;
-						}
+							if(self.active_contents) {
+								data.last_viewed_content_id = self.contents.id;
+							}
 
-					updateModuleStudent(data);
+						updateModuleStudent(data);
+					}
 				}
 			}
 
@@ -410,7 +395,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		self.errors = Constants.FALSE;
 		var answer = {};
 
-		answer.student_module_id = self.record.student_module[0].id;
+		answer.student_module_id = self.record.student_module.id;
 		answer.module_id = self.record.id;
 		answer.seq_no = self.current_question.seq_no;
 		answer.question_id = self.current_question.id;
@@ -663,14 +648,23 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		if(self.result && self.result.failed) {
 			// create student_module
 			var data = {};
-				data.class_id = self.record.student_module[0].class_id;
+				data.class_id = self.record.student_module.class_id;
 				data.student_id = $scope.user.id;
 				data.module_id = self.record.id;
 				data.subject_id = self.record.subject_id;
 
 			createModuleStudent(data, function(response) {
 				if(response.data) {
-					self.record.student_module[0] = response.data;	
+					var data = response.data;
+
+					self.record.student_module = {
+						id								: data.id
+						, class_id						: data.class_id
+						, last_answered_question_id		: data.last_answered_question_id
+						, question_counter				: data.question_counter
+						, module_status					: data.module_status
+					}
+
 					loadModuleView();
 				} else {
 					self.errors = $internalError();
