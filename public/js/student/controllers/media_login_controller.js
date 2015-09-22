@@ -41,9 +41,36 @@ function MediaLoginController($scope, $filter, $window, MediaLoginService) {
 	var fbLoginCallback = function(response) {
 		if (response.authResponse) {
 			FB.api('/' + response.authResponse.userID, {fields: 'email, first_name, last_name, gender, birthday, location'}, function(response) {
-				var birth_date = $filter(Constants.DATE)(new Date(response.birthday), Constants.DATE_YYYYMMDD);
+				var fb_data = response;
+				var birth_date = $filter(Constants.DATE)(new Date(fb_data.birthday), Constants.DATE_YYYYMMDD);
 
-				// TODO: API call to save info
+				var data = {
+					facebook_app_id		: fb_data.id
+					, email				: fb_data.email
+					, user_type			: Constants.STUDENT
+					, first_name		: fb_data.first_name
+					, last_name			: fb_data.last_name
+					, gender			: fb_data.gender
+					, birth_date		: birth_date
+				}
+
+				$scope.ui_block();
+				MediaLoginService.saveFB(data).success(function(response) {
+					if(angular.equals(response.status, Constants.STATUS_OK)) {
+						if(response.errors) {
+							$scope.errorHandler(response.errors);
+						} else if(response.data){
+							$scope.user = JSON.stringify(response.data);
+							$("input[name='user_data']").val(JSON.stringify(response.data));
+							$("#media_form").submit();
+						} 
+					}
+
+					$scope.ui_unblock();
+				}).error(function(response) {
+					$scope.internalError();
+					$scope.ui_unblock();
+				});
 			});
 		}
 	}

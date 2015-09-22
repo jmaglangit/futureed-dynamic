@@ -15,7 +15,7 @@ function MediaLoginService($http) {
 		});
 	}
 
-	api.saveFB = function(data) {
+	api.saveGoogle = function(data) {
 		return $http({
 			  method 	: Constants.METHOD_POST
 			, data 		: data
