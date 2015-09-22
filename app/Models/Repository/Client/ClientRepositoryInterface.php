@@ -48,4 +48,6 @@ interface ClientRepositoryInterface
 
 	public function addClientFromFacebook($data);
 
+	public function addClientFromGoogle($data);
+
 }
