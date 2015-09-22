@@ -30,7 +30,7 @@ class GoogleLoginRequest extends ApiRequest {
 					case 'api.v1.registration.google':
 
 						return [
-							'google_app_id' => 'required|integer
+							'google_app_id' => 'required|string
 								|unique:users,facebook_app_id,NULL,id,user_type,' . $this->__get('user_type'),
 							'email' => 'required|email|unique:users,email,NULL,id,user_type,'.$this->__get('user_type'),
 							'user_type' => 'required|in:'. config('futureed.client') . ',' . config('futureed.student'),
