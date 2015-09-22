@@ -2,13 +2,15 @@
 
 use FutureEd\Models\Core\Client;
 use FutureEd\Models\Core\Grade;
-use FutureEd\Models\Core\ParentStudent;
 use FutureEd\Models\Core\User;
+use FutureEd\Models\Traits\LoggerTrait;
 use League\Flysystem\Exception;
+use Illuminate\Support\Facades\DB;
 
 
 class ClientRepository implements ClientRepositoryInterface
 {
+    use LoggerTrait;
 
     public function getClient($user_id, $role)
     {
@@ -390,4 +392,45 @@ class ClientRepository implements ClientRepositoryInterface
 
 		return Client::find($id)->pluck('client_role');
 	}
+
+    /**
+     * Add new Client Register from Facebook.
+     * @param $data
+     * @return string|static
+     */
+    public function addClientFromFacebook($data){
+
+        DB::beginTransaction();
+
+        try{
+
+            //Add user
+            $data = array_add($data,'username','NA');
+
+            $data = array_add($data, 'name',$data['first_name'] . ' ' . $data['last_name']);
+
+            //Default to USA -- No country code from login response.
+            $data['country_id'] = ($data['country_id'] == null ) ?  840 : $data['country_id'];
+
+            $user = User::create($data);
+
+            $data = array_add($data,'user_id',$user->id);
+
+            //Add Client
+            $client = Client::create($data);
+
+
+        }catch (\Exception $e){
+
+            DB::rollback();
+
+            $this->errorLog($e);
+
+            return 0;
+        }
+
+        DB::commit();
+
+        return $client;
+    }
 }
