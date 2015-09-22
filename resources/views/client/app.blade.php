@@ -83,7 +83,6 @@
 
 		{!! Html::script('//cdnjs.cloudflare.com/ajax/libs/angular.js/1.3.13/angular.min.js') !!}
 		{!! Html::script('/js/ng-sortable.min.js')!!}
-
     	{!! Html::script('/js/jquery.date-dropdowns.js') !!}
 
 		{!! Html::script('/js/futureed_constants.js') !!}
