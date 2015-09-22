@@ -46,4 +46,6 @@ interface ClientRepositoryInterface
 
 	public function getClientRole($id);
 
+	public function addClientFromFacebook($data);
+
 }
