@@ -12,42 +12,20 @@ use PhpSpec\Exception\Exception;
 class FacebookLoginController extends ApiController {
 
 	/**
-	 * REGISTRATION
+	 * @var StudentRepositoryInterface
 	 */
-
-	/*
-	 * Get required variables
-	 *
-	 *
-	 * USER
-	 * 	facebook_app_id
-	 *	email
-	 *	name -- combined with first_name and last_name
-	 * 	user_type
-	 *
-	 * STUDENT
-	 * 	first_name
-	 * 	last_name
-	 * 	gender
-	 * 	birth_date
-	 * 	country_id
-	 *
-	 * CLIENT
-	 * 	first_name
-	 * 	last_name
-	 * 	client_role
-	 * 	country_id
-	 *
-	 */
-
-	protected $user;
-
 	protected $student;
 
+	/**
+	 * @var ClientRepositoryInterface
+	 */
 	protected $client;
 
+	/**
+	 * @param StudentRepositoryInterface $studentRepositoryInterface
+	 * @param ClientRepositoryInterface $clientRepositoryInterface
+	 */
 	public function __construct(
-		UserRepositoryInterface $userRepositoryInterface,
 		StudentRepositoryInterface $studentRepositoryInterface,
 		ClientRepositoryInterface $clientRepositoryInterface
 	){
@@ -60,6 +38,8 @@ class FacebookLoginController extends ApiController {
 
 	/**
 	 * Through Facebook registration for Students and Client.
+	 * @param FacebookLoginRequest $request
+	 * @return mixed
 	 */
 	public function facebookRegistration(FacebookLoginRequest $request){
 
@@ -98,14 +78,20 @@ class FacebookLoginController extends ApiController {
 			case config('futureed.student'):
 
 				//Registration of Student.
-				return $this->respondWithData($this->student->addStudentFromFacebook($student_data));
+				$response = $this->student->addStudentFromFacebook($student_data);
+
+				return ($response) ?
+					$this->respondWithData($response) : $this->respondErrorMessage(7000) ;
 
 				break;
 
 			case config('futureed.client'):
 
 				//Registration for Client.
-				return $this->respondWithData($this->client->addClientFromFacebook($client_data));
+				$response = $this->client->addClientFromFacebook($client_data);
+
+				return ($response) ?
+					$this->respondWithData($response) : $this->respondErrorMessage(7000) ;
 
 				break;
 		}
