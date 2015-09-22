@@ -1,8 +1,6 @@
 <?php namespace FutureEd\Http\Requests\Api;
 
-use FutureEd\Http\Requests\Request;
-
-class GoogleLoginRequest extends Request {
+class GoogleLoginRequest extends ApiRequest {
 
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -11,7 +9,7 @@ class GoogleLoginRequest extends Request {
 	 */
 	public function authorize()
 	{
-		return false;
+		return true;
 	}
 
 	/**
@@ -21,9 +19,32 @@ class GoogleLoginRequest extends Request {
 	 */
 	public function rules()
 	{
-		return [
-			//
-		];
+		switch($this->method()){
+
+			case 'POST' :
+
+				//Added checking if
+
+				switch($this->route()->getName()){
+
+					case 'api.v1.registration.google':
+
+						return [
+							'google_app_id' => 'required|integer
+								|unique:users,facebook_app_id,NULL,id,user_type,' . $this->__get('user_type'),
+							'email' => 'required|email|unique:users,email,NULL,id,user_type,'.$this->__get('user_type'),
+							'user_type' => 'required|in:'. config('futureed.client') . ',' . config('futureed.student'),
+							'first_name' => 'required',
+							'last_name' => 'required',
+							'birth_date' => 'required|date',
+
+							'gender' => 'required_if:user_type,' . config('futureed.student'),
+							'client_role' => 'required_if:user_type,' . config('futureed.client')
+						];
+						break;
+				}
+
+		}
 	}
 
 }
