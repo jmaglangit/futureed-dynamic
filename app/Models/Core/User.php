@@ -40,9 +40,24 @@ class User extends Model {
         'deleted_at',
     ];
 
-    protected $fillable = ['username', 'email','new_email', 'name', 'password', 'user_type', 'confirmation_code',
-
-        'confirmation_code_expiry','email_code','email_code_expiry','registration_token','status', 'is_account_activated','created_by', 'updated_by'];
+    protected $fillable = [
+        'username',
+        'email',
+        'new_email',
+        'name',
+        'password',
+        'user_type',
+        'facebook_app_id',
+        'confirmation_code',
+        'confirmation_code_expiry',
+        'email_code',
+        'email_code_expiry',
+        'registration_token',
+        'status',
+        'is_account_activated',
+        'created_by',
+        'updated_by'
+    ];
 
 	protected $attributes = [
 		'created_by' => 1,
