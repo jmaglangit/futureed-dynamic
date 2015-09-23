@@ -16,5 +16,5 @@ Routes::post('/registration/facebook',[
 Routes::post('/login/facebook',[
 	'uses' => 'Api\v1\FacebookLoginController@facebookLogin',
 	'as' => 'api.v1.login.facebook',
-	'middleware' => 'api_after_student_login'
+	'middleware' => 'api_after_auto_login'
 ]);
