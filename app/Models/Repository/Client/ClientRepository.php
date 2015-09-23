@@ -433,4 +433,9 @@ class ClientRepository implements ClientRepositoryInterface
 
         return $client;
     }
+
+    public function getClientByFacebook($facebook_id){
+
+        return Client::with('user')->facebookId($facebook_id)->get();
+    }
 }

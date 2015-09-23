@@ -459,5 +459,15 @@ class StudentRepository implements StudentRepositoryInterface
 
 	}
 
+	/**
+	 * Get Student by Facebook Id.
+	 * @param $facebook_id
+	 * @return mixed
+	 */
+	public function getStudentByFacebook($facebook_id){
+
+		return Student::with('user')->facebookId($facebook_id)->get();
+	}
+
 
 }

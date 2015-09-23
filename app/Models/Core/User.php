@@ -38,6 +38,8 @@ class User extends Model {
         'created_at',
         'updated_at',
         'deleted_at',
+        'facebook_app_id',
+        'google_app_id'
     ];
 
     protected $fillable = [
@@ -61,7 +63,9 @@ class User extends Model {
 
 	protected $attributes = [
 		'created_by' => 1,
-		'updated_by' => 1
+		'updated_by' => 1,
+        'is_account_activated' => 0,
+        'is_account_locked' => 0
 	];
 
     
