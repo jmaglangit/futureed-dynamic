@@ -52,6 +52,6 @@ interface ClientRepositoryInterface
 
 	public function addClientFromGoogle($data);
 
-	public function getClientByGoogle($google_id);
+	public function getClientByGoogleId($google_id);
 
 }
