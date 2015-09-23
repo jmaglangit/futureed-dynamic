@@ -55,5 +55,7 @@ interface StudentRepositoryInterface {
 
     public function addStudentFromFacebook($data);
 
+    public function addStudentFromGoogle($data);
+
 
 }

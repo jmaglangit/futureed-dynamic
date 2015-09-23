@@ -33,6 +33,7 @@ Routes::group(['prefix' => 'api/v1'], function () {
 	include('Routes/Api/Event.php');
 	include('Routes/Api/Facebook.php');
 	include('Routes/Api/Grade.php');
+	include('Routes/Api/Google.php');
 	include('Routes/Api/HelpRequest.php');
 	include('Routes/Api/HelpRequestAnswer.php');
 	include('Routes/Api/HelpRequestAnswerRating.php');
