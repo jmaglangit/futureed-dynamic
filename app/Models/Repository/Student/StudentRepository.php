@@ -511,5 +511,10 @@ class StudentRepository implements StudentRepositoryInterface
 
 	}
 
+	public function getStudentByGoogleId($google_id){
+
+		return Student::with('user')->googleId($google_id)->get();
+	}
+
 
 }

@@ -59,5 +59,7 @@ interface StudentRepositoryInterface {
 
     public function addStudentFromGoogle($data);
 
+    public function getStudentByGoogleId($google_id);
+
 
 }

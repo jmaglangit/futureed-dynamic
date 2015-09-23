@@ -6,6 +6,7 @@ use FutureEd\Http\Controllers\Controller;
 use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use FutureEd\Http\Requests\Api\GoogleLoginRequest;
+use FutureEd\Services\StudentServices;
 
 class GoogleLoginController extends ApiController {
 
@@ -16,17 +17,38 @@ class GoogleLoginController extends ApiController {
 
 	protected $student;
 
+	/**
+	 * @var StudentServices
+	 */
+	protected $student_service;
+
+	/**
+	 * @var ClientRepositoryInterface
+	 */
 	protected $client;
 
+	/**
+	 * @param StudentRepositoryInterface $studentRepositoryInterface
+	 * @param StudentServices $studentServices
+	 * @param ClientRepositoryInterface $clientRepositoryInterface
+	 */
 	public function __construct(
 		StudentRepositoryInterface $studentRepositoryInterface,
+		StudentServices $studentServices,
 		ClientRepositoryInterface $clientRepositoryInterface
 	){
 		$this->student = $studentRepositoryInterface;
 
+		$this->student_service = $studentServices;
+
 		$this->client = $clientRepositoryInterface;
 	}
 
+	/**
+	 * Google Registration
+	 * @param GoogleLoginRequest $request
+	 * @return mixed
+	 */
 	public function googleRegistration(GoogleLoginRequest $request){
 
 		$user_type = $request->only('user_type');
@@ -45,6 +67,7 @@ class GoogleLoginController extends ApiController {
 		);
 
 		$client = $request->only(
+			'google_app_id',
 			'first_name',
 			'last_name',
 			'email',
@@ -81,6 +104,55 @@ class GoogleLoginController extends ApiController {
 				break;
 		}
 
+	}
+
+	/**
+	 * Google Login
+	 * @param GoogleLoginRequest $request
+	 * @return mixed
+	 */
+	public function googleLogin(GoogleLoginRequest $request) {
+
+		$user_type = $request->only('user_type');
+
+		$app_id = $request->only('google_app_id');
+
+		switch ($user_type['user_type']) {
+
+			case config('futureed.student'):
+
+				//Student login.
+
+				//get student id by facebook_app_id
+
+				$student_details = $this->student->getStudentByGoogleId($app_id);
+
+				return $this->respondWithData(
+					$this->student_service->getStudentDetails($student_details[0]->id)
+				);
+
+				break;
+
+			case config('futureed.client'):
+
+				//Client Login
+
+				//get Client id by facebook_app_id
+
+				$client_details = $this->client->getClientByGoogleId($app_id);
+
+				return $this->respondWithData($client_details[0]->toArray());
+
+				break;
+
+			default:
+
+				//TODO: Log issue if not on option.
+
+				return $this->respondErrorMessage(2003);
+
+				break;
+		}
 	}
 
 }

@@ -556,4 +556,9 @@ class ClientRepository implements ClientRepositoryInterface
 
         return $client;
     }
+
+    public function getClientByGoogleId($google_id){
+
+        return Client::with('user')->googleId($google_id)->get();
+    }
 }

@@ -31,7 +31,7 @@ class GoogleLoginRequest extends ApiRequest {
 
 						return [
 							'google_app_id' => 'required|string
-								|unique:users,facebook_app_id,NULL,id,user_type,' . $this->__get('user_type'),
+								|unique:users,google_app_id,NULL,id,user_type,' . $this->__get('user_type'),
 							'email' => 'required|email|unique:users,email,NULL,id,user_type,'.$this->__get('user_type'),
 							'user_type' => 'required|in:'. config('futureed.client') . ',' . config('futureed.student'),
 							'first_name' => 'required',
@@ -40,6 +40,16 @@ class GoogleLoginRequest extends ApiRequest {
 
 							'gender' => 'required_if:user_type,' . config('futureed.student'),
 							'client_role' => 'required_if:user_type,' . config('futureed.client')
+						];
+						break;
+
+					case 'api.v1.login.google':
+
+						return [
+							'google_app_id' => 'required|string
+								|exists:users,google_app_id,deleted_at,NULL,is_account_activated,0,is_account_locked,0,user_type,'
+								. $this->__get('user_type'),
+							'user_type' => 'required|in:' . config('futureed.client') . ',' . config('futureed.student')
 						];
 						break;
 				}
