@@ -28,10 +28,14 @@
 		
 		<div class="col-xs-2">
 			<div ng-if="!mod.record.module_done">
-				<div class="margin-top-bot-5" ng-if="!mod.no_record">
-					<a href="javascript:;"><img src="/images/class-student/icon-askforhelp.png" ng-click="mod.askHelp()"></a>
+				<div class="margin-top-bot-5 pointer" 
+					ng-class="{ 'disabled-help-bar' : mod.active_contents && !mod.contents }"
+					ng-if="!mod.no_record">
+					<img src="/images/class-student/icon-askforhelp.png" ng-click="mod.askHelp()">
 				</div>
-				<div class="margin-top-bot-5 pointer" ng-if="!mod.no_record">
+				<div class="margin-top-bot-5 pointer" 
+					ng-class="{ 'disabled-tips-bar' : mod.active_contents && !mod.contents }"
+					ng-if="!mod.no_record">
 					<img src="/images/class-student/icon-givetip.png" ng-click="mod.giveTip()">
 				</div>
 				<div class="pointer" ng-if="!mod.no_record && mod.active_questions && !mod.result.failed">
@@ -52,7 +56,7 @@
 		</div>
 		<!-- End of Main Container -->
 
-		<div class="row" ng-if="!mod.no_record && !mod.record.module_done">
+		<div class="row" ng-hide="mod.record.module_done || (mod.active_contents && !mod.contents)">
 			<div class="drawer col-xs-6" ng-controller="TipsController as tips">
 				<div class="drawer-inside" ng-class="{ 'openup' : tips.show_content_tips }">
 					<div class="drawer-header pointer" ng-click="tips.toggleTips(mod)">

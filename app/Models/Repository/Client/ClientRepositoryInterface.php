@@ -50,4 +50,6 @@ interface ClientRepositoryInterface
 
 	public function getClientByFacebook($facebook_id);
 
+	public function addClientFromGoogle($data);
+
 }

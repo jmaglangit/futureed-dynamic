@@ -312,7 +312,7 @@ function TipsController($scope, StudentTipsService, TableService, SearchService)
 		self.success = Constants.FALSE;
 
 		self.record.module_id = self.module.id;
-		self.record.class_id = self.module.student_module[0].class_id;
+		self.record.class_id = self.module.student_module.class_id;
 		self.record.subject_id = self.module.subject_id;
 		self.record.subject_area_id = self.module.subject_area_id;
 		self.record.link_type = (self.active_questions) ? Constants.QUESTION : Constants.CONTENT;

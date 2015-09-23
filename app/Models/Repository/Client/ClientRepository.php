@@ -434,8 +434,50 @@ class ClientRepository implements ClientRepositoryInterface
         return $client;
     }
 
-    public function getClientByFacebook($facebook_id){
+    public function getClientByFacebook($facebook_id) {
 
         return Client::with('user')->facebookId($facebook_id)->get();
+
+    }
+
+    /**
+     * Ad new Client Register from Google.
+     * @param $data
+     * @return int|static
+     */
+    public function addClientFromGoogle($data){
+
+        DB::beginTransaction();
+
+        try{
+
+            //Add user
+            $data = array_add($data,'username','NA');
+
+            $data = array_add($data, 'name',$data['first_name'] . ' ' . $data['last_name']);
+
+            //Default to USA -- No country code from login response.
+            $data['country_id'] = ($data['country_id'] == null ) ?  840 : $data['country_id'];
+
+            $user = User::create($data);
+
+            $data = array_add($data,'user_id',$user->id);
+
+            //Add Client
+            $client = Client::create($data);
+
+
+        }catch (\Exception $e){
+
+            DB::rollback();
+
+            $this->errorLog($e);
+
+            return 0;
+        }
+
+        DB::commit();
+
+        return $client;
     }
 }

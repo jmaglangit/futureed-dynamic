@@ -107,10 +107,10 @@
 			            <td>
 			            	<div class="row">
 			            		<div class="col-xs-6">
-		    						<a href="" ng-click="teacher.studentDetails(student.id, futureed.ACTIVE_VIEW)"><span><i class="fa fa-eye"></i></span></a>
+		    						<a href="" ng-click="teacher.setActive(futureed.ACTIVE_VIEW, student.id)"><span><i class="fa fa-eye"></i></span></a>
 		    					</div>
 		    					<div class="col-xs-6">
-		    						<a href="" ng-click="teacher.studentDetails(student.id, futureed.ACTIVE_EDIT)"><span><i class="fa fa-pencil"></i></span></a>
+		    						<a href="" ng-click="teacher.setActive(futureed.ACTIVE_EDIT, student.id)"><span><i class="fa fa-pencil"></i></span></a>
 		    					</div>
 			            	</div>
 			            </td>
