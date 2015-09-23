@@ -114,7 +114,9 @@ function ManageTeacherStudentController($scope, $filter, manageTeacherStudentSer
 					self.record.username = data.user.username;
 					self.record.email = data.user.email;
 					self.record.new_email = data.user.new_email;
+					
 					self.dateDropdown(self.record.birth_date);
+					self.getGradeLevel(self.record.country_id)
 				}
 			}
 
@@ -202,6 +204,10 @@ function ManageTeacherStudentController($scope, $filter, manageTeacherStudentSer
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
+	}
+
+	self.getGradeLevel = function(country_id) {
+		$scope.getGradeLevel(country_id);
 	}
 
 	self.dateDropdown = function(date) {

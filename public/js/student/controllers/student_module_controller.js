@@ -111,29 +111,34 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				var class_id = Constants.FALSE;
 
 				var student_modules = self.record.student_module;
-				
-				if(student_modules.length) {
-					var student_id = parseInt($scope.user.id);
-					for (var key = 0; key < student_modules.length; key++) {
-						if(angular.equals(parseInt(student_modules[key].student_id), student_id)) {
-							self.record.student_module = {
-								id								: student_modules[key].id
-								, class_id						: student_modules[key].class_id
-								, last_answered_question_id		: student_modules[key].last_answered_question_id
-								, question_counter				: student_modules[key].question_counter
-								, module_status					: student_modules[key].module_status
-							}
+				var student_id = parseInt($scope.user.id);
+				var student_module = Constants.FALSE;
 
-							break;
+				// Check if student has existing data
+				for (var key = 0; key < student_modules.length; key++) {
+					if(angular.equals(parseInt(student_modules[key].student_id), student_id)) {
+						student_module = {
+							id								: student_modules[key].id
+							, class_id						: student_modules[key].class_id
+							, last_answered_question_id		: student_modules[key].last_answered_question_id
+							, question_counter				: student_modules[key].question_counter
+							, module_status					: student_modules[key].module_status
 						}
-					};
-
+						break;
+					}
+				};
+				
+				// if student module data exists; continue.
+				if(student_module) {
+					self.record.student_module = student_module;
 					loadModuleView();
 				} else {
+					// else; get class list to get the class id for this module
 					getClassrooms(function(response) {
 						var data = response.data.records;
 						var subject_id = self.record.subject_id;
 
+						// look for same subject ID, checking is by subject ID since each class has unique subject
 						for (var key = 0; key < data.length; key++) {
 							if(angular.equals(parseInt(data[key].classroom.subject_id), parseInt(subject_id))) {
 								class_id = data[key].class_id;
@@ -141,7 +146,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 							}
 						};
 
-						// create student_module
+						// create student_module data
 						var data = {};
 							data.class_id = class_id;
 							data.student_id = $scope.user.id;
