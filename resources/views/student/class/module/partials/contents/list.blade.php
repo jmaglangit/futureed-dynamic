@@ -66,7 +66,7 @@
 		,array(
 			'class' => 'btn btn-gold next-btn'
 			, 'ng-click' => 'mod.startQuestions()'
-			, 'ng-if' => "mod.record.student_module[0].module_status == 'On Going'"
+			, 'ng-if' => "mod.record.student_module.module_status == 'On Going'"
 		)
 	)!!}
 </div>

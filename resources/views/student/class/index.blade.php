@@ -9,7 +9,7 @@
 
 		<div template-directive template-url="{!! route('client.partials.base_url') !!}"></div>
 		
-		<div ng-if="user.class_id">
+		<div ng-if="user.class">
 			<div template-directive template-url="{!! route('student.partials.tips_help_bar') !!}"></div>
 		</div>
 
