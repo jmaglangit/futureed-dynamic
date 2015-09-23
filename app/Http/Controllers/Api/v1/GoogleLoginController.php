@@ -125,7 +125,7 @@ class GoogleLoginController extends ApiController {
 
 				//get student id by facebook_app_id
 
-				$student_details = $this->student->getStudentByGoogle($app_id);
+				$student_details = $this->student->getStudentByGoogleId($app_id);
 
 				return $this->respondWithData(
 					$this->student_service->getStudentDetails($student_details[0]->id)
@@ -139,7 +139,7 @@ class GoogleLoginController extends ApiController {
 
 				//get Client id by facebook_app_id
 
-				$client_details = $this->client->getClientByGoogle($app_id);
+				$client_details = $this->client->getClientByGoogleId($app_id);
 
 				return $this->respondWithData($client_details[0]->toArray());
 
