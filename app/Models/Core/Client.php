@@ -158,10 +158,18 @@ class Client extends Model
 		return $query->where('account_status',config('futureed.accepted'));
 	}
 
-	public function scopeGoogleId($query, $google_id){
+	public function scopeGoogleId($query, $google_id) {
 
-		return $query->whereHas('user', function($query) use ($google_id){
-			$query->where('google_app_id',$google_id);
+		return $query->whereHas('user', function ($query) use ($google_id) {
+			$query->where('google_app_id', $google_id);
+		});
+	}
+
+	public function scopeFacebookId($query, $facebook_id){
+
+		return $query->whereHas('user', function($query) use ($facebook_id){
+
+			$query->where('facebook_app_id',$facebook_id);
 		});
 	}
 

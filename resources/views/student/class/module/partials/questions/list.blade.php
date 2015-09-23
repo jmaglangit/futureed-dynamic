@@ -32,8 +32,8 @@
 				</div>
 			</div>
 
-			<div class="questions-tips" ng-if="mod.current_question.question_type == futureed.ORDERING">
-				<p> <img src="/images/user_teacher.png" /> <span>Drag the items to reorder. </span></p>
+			<div class="questions-tips" ng-if="mod.current_question.question_type !== futureed.ORDERING">
+				<p> <img ng-src="{! user.avatar !}" /> <span>Drag the items to reorder. </span></p>
 			</div>
 		</div>
 	</div>

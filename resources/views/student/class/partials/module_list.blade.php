@@ -22,8 +22,7 @@
 					{!! Form::select('search_module_status'
 						, array(
 							'' => 'All'
-							, 'Available' => 'Available'
-							, 'Ongoing' => 'Ongoing'
+							, 'On Going' => 'On Going'
 							, 'Completed' => 'Completed'
 						)
 						, ''

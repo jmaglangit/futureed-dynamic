@@ -182,7 +182,7 @@
 							!!}
 						</div>
 					</div>
-					<div class="form-group" ng-init="getGradeLevel(teacher.record.country_id)">
+					<div class="form-group">
 						<label class="control-label col-xs-2">Grade <span class="required">*</span></label>
 						<div class="col-xs-5 nullable">
 		                    <select ng-disabled="true" name="grade_code" class="form-control" ng-model="teacher.record.grade_code">

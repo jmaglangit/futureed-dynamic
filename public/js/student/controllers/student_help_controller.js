@@ -355,7 +355,7 @@ function HelpController($scope, apiService, StudentHelpService, TableService, Se
 		self.search.question_status = Constants.EMPTY_STR;
 
 		if(!self.active_all) {
-			self.search.link_type = (self.module_instance.active_questions) ? Constants.QUESTION : Constants.CONTENT;
+			self.search.link_type = (self.module_instance.module_instance.active_questions) ? Constants.QUESTION : Constants.CONTENT;
 			self.search.link_id = (angular.equals(self.search.link_type, Constants.QUESTION)) ? self.question.id : self.content.id;
 		}
 
@@ -378,7 +378,7 @@ function HelpController($scope, apiService, StudentHelpService, TableService, Se
 				self.active_current = Constants.TRUE;
 				self.active_all = Constants.FALSE;
 
-				self.search.link_type = (self.module_instance.active_questions) ? Constants.QUESTION : Constants.CONTENT;
+				self.search.link_type = (self.module_instance.module_instance.active_questions) ? Constants.QUESTION : Constants.CONTENT;
 				self.search.link_id = (angular.equals(self.search.link_type, Constants.QUESTION)) ? self.question.id : self.content.id;
 				break;
 
@@ -474,7 +474,7 @@ function HelpController($scope, apiService, StudentHelpService, TableService, Se
 		self.record.module_id = self.module.id;
 		self.record.subject_id = self.module.subject_id;
 		self.record.subject_area_id = self.module.subject_area_id;
-		self.record.link_type = (self.active_questions) ? Constants.QUESTION : Constants.CONTENT;
+		self.record.link_type = (self.module_instance.active_questions) ? Constants.QUESTION : Constants.CONTENT;
 		self.record.link_id = (angular.equals(self.record.link_type, Constants.QUESTION)) ? self.question.id : self.content.id;
 		self.record.class_id = self.module.student_module.class_id;
 		self.record.student_id = $scope.user.id;

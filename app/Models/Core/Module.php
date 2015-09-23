@@ -182,6 +182,7 @@ class Module extends Model
 		return $query->leftJoin(
 			'student_modules', function($leftJoin) use ($criteria){
 			$leftJoin->on('modules.id','=','student_modules.module_id')
+				->where('student_modules.student_id','=',$criteria['student_id'])
 				->where('student_modules.class_id','=',$criteria['class_id'])
 				->where('student_modules.module_status','<>',config('futureed.module_status_failed'))
 				->whereNull('student_modules.deleted_at');
