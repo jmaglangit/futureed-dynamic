@@ -99,6 +99,7 @@ function salesService($http){
 		return $http({
 			method 	: Constants.METHOD_GET
 			, url 	: salesApiUrl + 'client/custom/view-details?name=' + name
+				+ '&client_role=Parent,Principal'
 		});
 	}
 

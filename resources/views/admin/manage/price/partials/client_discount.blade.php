@@ -40,6 +40,7 @@
 			      					'class' => 'form-control'
 			      					, 'ng-model' => 'sale.data.name'
 			      					, 'placeholder' => 'Name'
+			      					, 'autocomplete' => 'off'
 			      					, 'ng-disabled' => 'sale.active_client_discount_edit'
 			      					, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
 	        						, 'ng-change' => 'sale.suggestClient()'
