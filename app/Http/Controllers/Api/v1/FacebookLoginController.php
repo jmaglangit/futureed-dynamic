@@ -5,8 +5,8 @@ use FutureEd\Http\Controllers\Controller;
 use FutureEd\Http\Requests\Api\FacebookLoginRequest;
 use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
-use FutureEd\Models\Repository\User\UserRepositoryInterface;
-use PhpSpec\Exception\Exception;
+use FutureEd\Services\StudentServices;
+use FutureEd\Services\UserServices;
 
 
 class FacebookLoginController extends ApiController {
@@ -15,6 +15,10 @@ class FacebookLoginController extends ApiController {
 	 * @var StudentRepositoryInterface
 	 */
 	protected $student;
+
+	protected $student_service;
+
+	protected $user_service;
 
 	/**
 	 * @var ClientRepositoryInterface
@@ -27,13 +31,18 @@ class FacebookLoginController extends ApiController {
 	 */
 	public function __construct(
 		StudentRepositoryInterface $studentRepositoryInterface,
-		ClientRepositoryInterface $clientRepositoryInterface
+		StudentServices $studentServices,
+		ClientRepositoryInterface $clientRepositoryInterface,
+		UserServices $userServices
 	){
 
 		$this->student = $studentRepositoryInterface;
 
+		$this->student_service = $studentServices;
+
 		$this->client = $clientRepositoryInterface;
 
+		$this->user_service = $userServices;
 	}
 
 	/**
@@ -94,8 +103,58 @@ class FacebookLoginController extends ApiController {
 					$this->respondWithData($response) : $this->respondErrorMessage(7000) ;
 
 				break;
+
+			default:
+
+				//TODO: Log issue if not on option.
+
+				return $this->respondErrorMessage(2003);
+
+				break;
 		}
 
+	}
+
+	public function facebookLogin(FacebookLoginRequest $request){
+
+		$user_type = $request->only('user_type');
+
+		$app_id = $request->only('facebook_app_id');
+
+		switch($user_type['user_type']){
+
+			case config('futureed.student'):
+
+				//Student login.
+
+				//get student id by facebook_app_id
+				$student_details =  $this->student->getStudentByFacebook($app_id);
+
+				return $this->respondWithData(
+					$this->student_service->getStudentDetails($student_details[0]->id)
+				);
+
+				break;
+
+			case config('futureed.client'):
+
+				//Client Login
+
+				//get Client id by facebook_app_id
+				$client_details = $this->client->getClientByFacebook($app_id);
+
+				return $this->respondWithData($client_details[0]->toArray());
+
+				break;
+
+			default:
+
+				//TODO: Log issue if not on option.
+
+				return $this->respondErrorMessage(2003);
+
+				break;
+		}
 	}
 
 }

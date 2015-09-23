@@ -190,6 +190,14 @@ class Student extends Model {
 
 	}
 
+	public function scopeFacebookId($query, $facebook_id){
+
+		return $query->whereHas('user', function($query) use ($facebook_id){
+
+			$query->where('facebook_app_id',$facebook_id);
+		});
+	}
+
 
 
 
