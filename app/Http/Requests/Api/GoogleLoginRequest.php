@@ -23,8 +23,6 @@ class GoogleLoginRequest extends ApiRequest {
 
 			case 'POST' :
 
-				//Added checking if
-
 				switch($this->route()->getName()){
 
 					case 'api.v1.registration.google':
@@ -37,6 +35,9 @@ class GoogleLoginRequest extends ApiRequest {
 							'first_name' => 'required',
 							'last_name' => 'required',
 							'birth_date' => 'required|date',
+							'grade_code' => 'required|exists:grades,code',
+							'country_id' => 'required|exists:countries,id',
+							'city' => 'required',
 
 							'gender' => 'required_if:user_type,' . config('futureed.student'),
 							'client_role' => 'required_if:user_type,' . config('futureed.client')
