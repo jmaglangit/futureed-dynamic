@@ -89,8 +89,16 @@ class GoogleLoginController extends ApiController {
 				//Registration of Student
 				$response = $this->student->addStudentFromGoogle($student);
 
-				return ($response) ?
-					$this->respondWithData(['id' => $response->id]) : $this->respondErrorMessage(7000);
+				if($response){
+
+					return $this->respondWithData(
+						$this->student_service->getStudentDetails($response->id)
+					);
+
+				}else{
+
+					return $this->respondErrorMessage(7000);
+				}
 
 				break;
 
@@ -99,8 +107,14 @@ class GoogleLoginController extends ApiController {
 				//Registration of Client.
 				$response = $this->client->addClientFromGoogle($client);
 
-				return ($response) ?
-					$this->respondWithData(['id' => $response->id]) : $this->respondErrorMessage(7000);
+				if($response){
+
+					return $this->respondWithData($response[0]->toArray());
+
+				}else{
+
+					return $this->respondErrorMessage(7000);
+				}
 
 				break;
 		}
