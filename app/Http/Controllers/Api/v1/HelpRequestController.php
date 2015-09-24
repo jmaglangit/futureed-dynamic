@@ -95,6 +95,7 @@ class HelpRequestController extends ApiController{
      */
     public function store(HelpRequestRequest $request)
     {
+        //TODO: Specify the variables comming in.
         $data = $request->all();
         $result = $this->help_request->addHelpRequest($data);
         return $this->respondWithData($result);

@@ -105,9 +105,8 @@ class StudentTipController extends ApiController {
 	 */
 	public function store(StudentTipRequest $request)
 	{
-		$data = $request->only('title','content','student_id');
+		$data = $request->only('title','content','student_id','class_id');
 
-		$data['class_id'] = 0;
 		$data['link_type'] = config('futureed.link_type_general');
 
 		//get student details with relation to class
@@ -117,13 +116,6 @@ class StudentTipController extends ApiController {
 		if(!$student){
 
 			return $this->respondErrorMessage(2001);
-		}
-
-		//check if student is associated with class
-		if($student['classroom']){
-
-			//get the classroom class_id and save the value to data['class_id'];
-			$data['class_id'] = $student['classroom']['class_id'];
 		}
 
 		//add data to tips
