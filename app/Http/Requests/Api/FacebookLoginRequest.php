@@ -27,8 +27,6 @@ class FacebookLoginRequest extends ApiRequest {
 
 				switch($this->route()->getName()){
 
-					//TODO: Add checking if user is enabled or not.
-
 					case 'api.v1.registration.facebook':
 
 						return [
@@ -39,6 +37,9 @@ class FacebookLoginRequest extends ApiRequest {
 							'first_name' => 'required',
 							'last_name' => 'required',
 							'birth_date' => 'required|date',
+							'grade_code' => 'required|exists:grades,code',
+							'country_id' => 'required|exists:countries,id',
+							'city' => 'required',
 
 							'gender' => 'required_if:user_type,' . config('futureed.student'),
 							'client_role' => 'required_if:user_type,' . config('futureed.client')
