@@ -39,5 +39,21 @@ function StudentLoginService($http) {
 		});
 	}
 
+	api.validateUser = function(username) {
+		return $http({
+			method 	: Constants.METHOD_POST
+			, data	: { username : username} 
+			, url	: apiUrl + 'student/login/username'
+		});
+	}
+
+	api.validatePassword = function(id, image_id) {
+		return $http({
+			method	: Constants.METHOD_POST
+			, data	: {id : id, image_id : image_id}
+			, url	: apiUrl + 'student/login/password'
+		});
+	}
+
 	return api;
 }

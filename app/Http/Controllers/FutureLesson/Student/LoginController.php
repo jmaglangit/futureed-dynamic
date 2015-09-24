@@ -178,7 +178,7 @@ class LoginController extends Controller {
 	}
 
 	public function enter_password() {
-		return view('student.login.enter-password');
+		return view('student.login.partials.enter-password');
 	}
 
 	public function index_form() {

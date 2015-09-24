@@ -1,9 +1,9 @@
 angular.module('futureed.controllers')
 	.controller('StudentLoginController', StudentLoginController);
 
-StudentLoginController.$inject = ['$scope', '$filter', '$controller', '$window', 'MediaLoginService'];
+StudentLoginController.$inject = ['$scope', '$filter', '$controller', '$window', 'StudentLoginService', 'MediaLoginService'];
 
-function StudentLoginController($scope, $filter, $controller, $window, MediaLoginService) {
+function StudentLoginController($scope, $filter, $controller, $window, StudentLoginService, MediaLoginService) {
 	var self = this;
 
 	angular.extend(self, $controller('MediaLoginController', { $scope : $scope}));
@@ -15,6 +15,7 @@ function StudentLoginController($scope, $filter, $controller, $window, MediaLogi
 
 		self.active_login = Constants.FALSE;
 		self.active_confirm = Constants.FALSE;
+		self.active_enter_password = Constants.FALSE;
 
 		switch(active) {
 			case 'confirm_media'	:
@@ -25,12 +26,18 @@ function StudentLoginController($scope, $filter, $controller, $window, MediaLogi
 				self.active_confirm_success = Constants.TRUE;
 				break;
 
+			case 'enter_password'	:
+				self.active_enter_password = Constants.TRUE;
+				break;
+
 			case 'login'			:
 
 			default					:
 				self.active_login = Constants.TRUE;
 				break;
 		}
+
+		$("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 
 	self.setActive();
@@ -118,4 +125,82 @@ function StudentLoginController($scope, $filter, $controller, $window, MediaLogi
 
 		$("#birth_date").dateDropdowns(options);
 	}
+
+
+
+	// Manual Login
+
+	/**
+	* Validate Student Email Address / Username
+	* 
+	* @Params 
+	*   username - the username
+	*/
+	self.manual = {};
+
+	self.validateUser = function(event) {
+		event = getEvent(event);
+		event.preventDefault();
+		
+		$scope.errors = Constants.FALSE;
+
+		$scope.ui_block();
+		StudentLoginService.validateUser(self.manual.username).success(function(response) {
+			if(response.status == Constants.STATUS_OK) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data){
+					self.manual.id = response.data.id;
+					$scope.getLoginPassword(self.manual.id);
+					self.setActive('enter_password');
+				} 
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.cancelLogin = function() {
+		self.errors = Constants.FALSE;
+		self.manual = {};
+		self.setActive();
+	}
+
+	self.selectPassword = function(event) {
+			$scope.highlight(event);
+			self.validatePassword();
+	}
+
+	/**
+	* Validate Selected Image Password
+	* 
+	* @Params 
+	*   id        - the student id
+	*   image_id  - selected image password
+	*/
+	self.validatePassword = function() {
+		self.errors = Constants.FALSE;
+
+		$scope.ui_block();
+		StudentLoginService.validatePassword(self.manual.id, $scope.image_id).success(function(response) {
+			if(response.status == Constants.STATUS_OK) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+					$scope.image_pass = shuffle($scope.image_pass);
+				} else if(response.data){
+					$scope.user = JSON.stringify(response.data);
+					$("input[name='user_data']").val(JSON.stringify(response.data));
+					$("#media_form").submit();
+				} 
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	} 
 }

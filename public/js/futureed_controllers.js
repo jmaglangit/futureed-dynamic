@@ -18,29 +18,14 @@ function FutureedController($scope, $window, apiService, futureed) {
 	/**
 	* Common API calls
 	*/
-	$scope.errorHandler = errorHandler;
-	$scope.internalError = internalError;
-
-	$scope.goHome = goHome;
 	$scope.highlight = highlight;
 	$scope.checkAvailability = checkAvailability;
 	$scope.checkEmailAvailability = checkEmailAvailability;
 	$scope.getAnnouncement = getAnnouncement;
 
-	$scope.beforeDateRender = beforeDateRender;
 	$scope.checkRegistration = checkRegistration;
 
-	function beforeDateRender($dates){
-		maxDate = new Date().setHours(0,0,0,0); // Set minimum date to whatever you want here
-
-		for(d in $dates){        
-				if($dates[d].utcDateValue > maxDate){
-						$dates[d].selectable = false;
-				}
-		}
-	}
-
-	function errorHandler(errors, flag) {
+	$scope.errorHandler = function(errors, flag) {
 		$scope.errors = [];
 
 		if(angular.isArray(errors)) {
@@ -74,7 +59,7 @@ function FutureedController($scope, $window, apiService, futureed) {
 		return $scope.errors;
 	}
 
-	function internalError() {
+	$scope.internalError = function() {
 		$scope.errors = [Constants.MSG_INTERNAL_ERROR];
 		$("html, body").animate({ scrollTop: 0 }, "slow");
 
@@ -157,10 +142,6 @@ function FutureedController($scope, $window, apiService, futureed) {
 
 	$scope.div_unblock = function(id) {
 		$("#" + id).unblock();
-	}
-
-	function goHome() {
-		
 	}
 
 	function highlight(e) {
@@ -273,11 +254,6 @@ function FutureedController($scope, $window, apiService, futureed) {
 	* Student Page with API calls
 	*/
 	// Login 
-	$scope.validateUser = validateUser;
-	$scope.validatePassword = validatePassword;
-	$scope.getLoginPassword = getLoginPassword;
-	$scope.selectPassword = selectPassword;
-	$scope.cancelLogin = cancelLogin;
 	$scope.getUserDetails = getUserDetails;
 
 	//Forgot Password
@@ -303,41 +279,9 @@ function FutureedController($scope, $window, apiService, futureed) {
 	$scope.highlightAvatar = highlightAvatar;
 	$scope.selectAvatar = selectAvatar;
 
-	/**
-	* Validate Student Email Address / Username
-	* 
-	* @Params 
-	*   username - the username
-	*/
-	function validateUser(event) {
-		event = getEvent(event);
-		event.preventDefault();
-		
-		$scope.errors = Constants.FALSE;
-
-		$scope.ui_block();
-		apiService.validateUser($scope.username).success(function(response) {
-			if(response.status == Constants.STATUS_OK) {
-				if(response.errors) {
-					$scope.errorHandler(response.errors);
-				} else if(response.data){
-					$scope.id = response.data.id;
-					$scope.getLoginPassword();
-					$scope.enter_pass = Constants.TRUE;
-				} 
-			}
-
-			$scope.ui_unblock();
-		}).error(function(response) {
-			$scope.ui_unblock();
-			$scope.internalError();
-		});
-	}
-
-	function getLoginPassword() {
-		$scope.id = ($scope.id) ? $scope.id : $scope.user.id;
-		apiService.getLoginPassword($scope.id).success(function (response) {
-			if(response.status == Constants.STATUS_OK) {
+	$scope.getLoginPassword = function(id) {
+		apiService.getLoginPassword(id).success(function (response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					$scope.errorHandler(response.errors);
 				} else if(response.data) {
@@ -347,55 +291,6 @@ function FutureedController($scope, $window, apiService, futureed) {
 		}).error(function(response) {
 			$scope.internalError();
 		});
-	}
-
-	/**
-	* Validate Selected Image Password
-	* 
-	* @Params 
-	*   id        - the student id
-	*   image_id  - selected image password
-	*/
-	function validatePassword() {
-		$scope.errors = Constants.FALSE;
-
-		$scope.ui_block();
-		apiService.validatePassword($scope.id, $scope.image_id).success(function(response) {
-			if(response.status == Constants.STATUS_OK) {
-				if(response.errors) {
-					$scope.errorHandler(response.errors);
-					$scope.image_pass = shuffle($scope.image_pass);
-				} else if(response.data){
-					$scope.user = JSON.stringify(response.data);
-					$("input[name='user_data']").val(JSON.stringify(response.data));
-					$("#password_form").submit();
-				} 
-			}
-
-			$scope.ui_unblock();
-		}).error(function(response) {
-			$scope.ui_unblock();
-			$scope.internalError();
-		});
-	} 
-
-	/**
-	* Highlight the selected image password; Validate.
-	*
-	*/
-	function selectPassword(e) {
-			$scope.highlight(e);
-			$scope.validatePassword();
-	}
-
-	/**
-	* Cancel selection of Image Password. 
-	*/
-	function cancelLogin() {
-		$scope.errors = Constants.FALSE;
-		$scope.enter_pass = Constants.FALSE;
-		$scope.id = "";
-		$scope.username = "";
 	}
 
 	function getUserDetails() {

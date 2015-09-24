@@ -1,13 +1,13 @@
 <div class="login-container form-style" ng-if="login.active_login">
-	{!! Form::open(array('id' => 'login_form', 'ng-submit' => 'validateUser($event)')) !!}
+	{!! Form::open(array('ng-submit' => 'login.validateUser($event)')) !!}
 		<div class="logo-container">
 			{!! Html::image('/images/logo-md.png') !!}
 		</div>
 
 	<div class="title title-student">Student login</div>
 
-		<div class="alert alert-danger" ng-if="errors">
-			<p ng-repeat="error in errors" > 
+		<div class="alert alert-danger" ng-if="login.errors">
+			<p ng-repeat="error in login.errors" > 
 				{! error !}
 			</p>
 		</div>
@@ -18,7 +18,7 @@
 					'class' => 'form-control'
 					, 'placeholder' => 'Enter Your Username or Email'
 					, 'autocomplete' => 'off'
-					, 'ng-model' => 'username'
+					, 'ng-model' => 'login.manual.username'
 				)
 			) !!}
 		</div>
@@ -27,7 +27,7 @@
 				, array(
 					'id' => 'validate_user_btn'
 					, 'class' => 'btn btn-maroon'
-					, 'ng-click' => 'validateUser($event)'
+					, 'ng-click' => 'login.validateUser($event)'
 				)
 			) !!}
 		</div>
