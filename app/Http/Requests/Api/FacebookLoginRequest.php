@@ -43,6 +43,9 @@ class FacebookLoginRequest extends ApiRequest {
 
 							'gender' => 'required_if:user_type,' . config('futureed.student'),
 							'client_role' => 'required_if:user_type,' . config('futureed.client')
+								.'|in:' . config('futureed.parent')
+								.','. config('futureed.teacher')
+								.','. config('futureed.principal')
 						];
 						break;
 
