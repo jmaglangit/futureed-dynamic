@@ -12,6 +12,7 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 
 	self.setActive = function(active) {
 		self.errors = Constants.FALSE;
+		self.record = Constants.FALSE;
 
 		self.active_login = Constants.FALSE;
 		self.active_confirm = Constants.FALSE;
@@ -47,7 +48,19 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 	function checkMediaLogin(event, data) {
 		if(data.confirm) {
 			self.setActive('confirm_media');
-			self.record = data;
+
+			if(angular.equals(data.media_type, Constants.GOOGLE)) {
+
+				self.getGoogleDetails(function(response) {
+					self.record = data;
+					self.record.first_name = response.given_name;
+					self.record.last_name = response.family_name;
+
+					$scope.$apply();
+				});
+			} else {
+				self.record = data;
+			}
 		}
 	}
 
@@ -67,7 +80,7 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 			self.record.birth_date = $filter(Constants.DATE)(new Date(birth_date), Constants.DATE_YYYYMMDD);
 
 		$scope.ui_block();
-		MediaLoginService.registerFB(self.record).success(function(response) {
+		MediaLoginService.registerMedia(self.record, angular.lowercase(self.record.media_type)).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
@@ -94,7 +107,7 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 
 	self.proceedToDashboard = function() {
 		$scope.user = JSON.stringify(self.record);
-		$("input[name='user_data']").val(JSON.stringify(response.data));
+		$("input[name='user_data']").val(JSON.stringify(self.record));
 		$("#media_form").submit();
 	}
 

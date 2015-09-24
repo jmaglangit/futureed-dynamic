@@ -4,7 +4,7 @@
 			{!! Html::image('/images/logo-md.png') !!}
 		</div>
 
-	<div class="title title-student">Student login</div>
+	<div class="title title-student">Student Login</div>
 
 		<div class="alert alert-danger" ng-if="login.errors">
 			<p ng-repeat="error in login.errors" > 

@@ -38,44 +38,47 @@ function MediaLoginController($scope, $filter, $window, MediaLoginService) {
 		if (response.authResponse) {
 			FB.api('/' + response.authResponse.userID, {fields: 'email, first_name, last_name, gender, birthday'}, function(response) {
 				var fb_data = response;
-				
-				var data = {
-					facebook_app_id		: fb_data.id
-					, user_type			: Constants.STUDENT
-				}
-
-				$scope.ui_block();
-				MediaLoginService.loginFacebook(data).success(function(response) {
-					if(angular.equals(response.status, Constants.STATUS_OK)) {
-						if(response.errors) {
-							$scope.errorHandler(response.errors);
-							if(angular.equals($scope.errors[0], "The selected facebook app id is invalid.")) {
-								self.errors = Constants.FALSE;
-
-								data.email = fb_data.email;
-								data.first_name = fb_data.first_name;
-								data.last_name = fb_data.last_name;
-								data.gender = fb_data.gender;
-								data.media_type = 'Facebook';
-								data.birth_date = (fb_data.birthday) ? fb_data.birthday : Constants.EMPTY_STR;;
-								data.confirm = Constants.TRUE;
-
-								$scope.$emit('confirm-media', data);
-							}
-						} else if(response.data){
-							$scope.user = JSON.stringify(response.data);
-							$("input[name='user_data']").val(JSON.stringify(response.data));
-							$("#media_form").submit();
-						} 
-					}
-
-					$scope.ui_unblock();
-				}).error(function(response) {
-					$scope.internalError();
-					$scope.ui_unblock();
-				});
+				loginFacebook(fb_data);
 			});
 		}
+	}
+
+	var loginFacebook = function(fb_data) {
+		var data = {
+			facebook_app_id		: fb_data.id
+			, user_type			: Constants.STUDENT
+		}
+
+		$scope.ui_block();
+		MediaLoginService.loginFacebook(data).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					$scope.errorHandler(response.errors);
+					if(angular.equals($scope.errors[0], "The selected facebook app id is invalid.")) {
+						self.errors = Constants.FALSE;
+
+						data.email = fb_data.email;
+						data.first_name = fb_data.first_name;
+						data.last_name = fb_data.last_name;
+						data.gender = fb_data.gender;
+						data.media_type = Constants.FACEBOOK;
+						data.birth_date = (fb_data.birthday) ? fb_data.birthday : Constants.EMPTY_STR;;
+						data.confirm = Constants.TRUE;
+
+						$scope.$emit('confirm-media', data);
+					}
+				} else if(response.data) {
+					$scope.user = JSON.stringify(response.data);
+					$("input[name='user_data']").val(JSON.stringify(response.data));
+					$("#media_form").submit();
+				} 
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			$scope.internalError();
+			$scope.ui_unblock();
+		});
 	}
 
 	self.googleInit = function() {
@@ -83,31 +86,65 @@ function MediaLoginController($scope, $filter, $window, MediaLoginService) {
 			var auth2 = gapi.auth2.init({
 				client_id: Constants.DI_TNEILC_ELGOOG
 				, cookie_policy : 'none'
-				, scope : 'https://www.googleapis.com/auth/plus.me https://www.googleapis.com/auth/plus.login'
+				, scope : 'https://www.googleapis.com/auth/plus.me'
 			});
 
 			auth2.attachClickHandler('btn-google', auth2, function(response) {
-				console.log("Google success...");
-
 				var profile = auth2.currentUser.get();
-					console.log(profile.getGrantedScopes());
-					
-				gapi.client.request({
-					  'path'		: 'https://www.googleapis.com/plus/v1/people/me'
-					, 'method'		: Constants.METHOD_GET
-					, 'callback'	: callback
-				});
-
-				var callback = function(response) {
-					console.log(response);
-				}
-
+				loginGoogle(profile.getBasicProfile());
 			}, function(response) {
-				console.log("Google failure...");
 				var authInstance = gapi.auth2.getAuthInstance();
-				console.log(authInstance);
-				console.log(authInstance.signOut());
 			});
+		});
+	}
+
+	self.getGoogleDetails = function(successCallback) {
+		gapi.client.request({
+			path : 'https://www.googleapis.com/oauth2/v1/userinfo'
+		}).execute(function(response) {
+			if(successCallback) {
+				successCallback(response);
+			}
+		});
+	}
+
+	var loginGoogle = function(google_data) {
+		var data = {
+			google_app_id		: google_data.getId()
+			, user_type			: Constants.STUDENT
+		}
+
+		$scope.ui_block();
+		MediaLoginService.loginGoogle(data).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					$scope.errorHandler(response.errors);
+
+					if(angular.equals($scope.errors[0], "The selected google app id is invalid.")) {
+						self.errors = Constants.FALSE;
+
+						var client_data = {
+							google_app_id		: google_data.getId()
+							, user_type			: Constants.STUDENT
+							, email 			: google_data.getEmail()
+							, media_type		: Constants.GOOGLE
+							, confirm			: Constants.TRUE
+							, birth_date		: Constants.EMPTY_STR
+						}
+
+						$scope.$emit('confirm-media', client_data);
+					}
+				} else if(response.data){
+					$scope.user = JSON.stringify(response.data);
+					$("input[name='user_data']").val(JSON.stringify(response.data));
+					$("#media_form").submit();
+				} 
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			$scope.internalError();
+			$scope.ui_unblock();
 		});
 	}
 }

@@ -7,19 +7,11 @@ function MediaLoginService($http) {
 	var api = {};
 	var apiUrl = '/api/v1/';
 
-	api.registerFB = function(data) {
+	api.registerMedia = function(data, type) {
 		return $http({
 			  method 	: Constants.METHOD_POST
 			, data 		: data 
-			, url		: apiUrl + 'registration/facebook'
-		});
-	}
-
-	api.registerGoogle = function(data) {
-		return $http({
-			  method 	: Constants.METHOD_POST
-			, data 		: data
-			, url		: apiUrl + 'registration/google'
+			, url		: apiUrl + 'registration/' + type
 		});
 	}
 
@@ -36,6 +28,14 @@ function MediaLoginService($http) {
 			  method 	: Constants.METHOD_POST
 			, data 		: data
 			, url		: apiUrl + 'login/google'
+		});
+	}
+
+	api.getGoogleDetails = function(data) {
+		return $http({
+			  method 	: Constants.METHOD_GET
+			, data 		: data
+			, url		: 'https://www.googleapis.com/oauth2/v1/userinfo'
 		});
 	}
 

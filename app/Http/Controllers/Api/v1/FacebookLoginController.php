@@ -64,7 +64,8 @@ class FacebookLoginController extends ApiController {
 			'birth_date',
 			'country_id',
 			'state',
-			'city'
+			'city',
+			'grade_code'
 		);
 
 		$client_data = $request->only(
@@ -90,7 +91,7 @@ class FacebookLoginController extends ApiController {
 				$response = $this->student->addStudentFromFacebook($student_data);
 
 				return ($response) ?
-					$this->respondWithData($response) : $this->respondErrorMessage(7000) ;
+					$this->respondWithData(['id' => $response->id]) : $this->respondErrorMessage(7000) ;
 
 				break;
 
@@ -100,7 +101,7 @@ class FacebookLoginController extends ApiController {
 				$response = $this->client->addClientFromFacebook($client_data);
 
 				return ($response) ?
-					$this->respondWithData($response) : $this->respondErrorMessage(7000) ;
+					$this->respondWithData(['id' => $response->id]) : $this->respondErrorMessage(7000) ;
 
 				break;
 

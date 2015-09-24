@@ -50,6 +50,7 @@
 								, ''
 								, array(
 									'class' => 'form-control'
+									, 'ng-class' => "{ 'required-field' : login.fields['gender'] }"
 									, 'ng-model' => 'login.record.gender')
 							); !!}
 						</div>
