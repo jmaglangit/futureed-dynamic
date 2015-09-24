@@ -1,6 +1,6 @@
 <?php namespace FutureEd\Http\Requests\Api;
 
-class FacebookLoginRequest extends ApiRequest {
+class GoogleLoginRequest extends ApiRequest {
 
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -27,13 +27,11 @@ class FacebookLoginRequest extends ApiRequest {
 
 				switch($this->route()->getName()){
 
-					//TODO: Add checking if user is enabled or not.
-
-					case 'api.v1.registration.facebook':
+					case 'api.v1.registration.google':
 
 						return [
-							'facebook_app_id' => 'required|integer
-								|unique:users,facebook_app_id,NULL,id,user_type,' . $this->__get('user_type'),
+							'google_app_id' => 'required|string
+								|unique:users,google_app_id,NULL,id,user_type,' . $this->__get('user_type'),
 							'email' => 'required|email|unique:users,email,NULL,id,user_type,'.$this->__get('user_type'),
 							'user_type' => 'required|in:'. config('futureed.client') . ',' . config('futureed.student'),
 							'first_name' => 'required',
@@ -45,13 +43,13 @@ class FacebookLoginRequest extends ApiRequest {
 						];
 						break;
 
-					case 'api.v1.login.facebook':
+					case 'api.v1.login.google':
 
 						return [
-							'facebook_app_id' => 'required|integer
-								|exists:users,facebook_app_id,deleted_at,NULL,is_account_activated,0,is_account_locked,0,user_type,'
+							'google_app_id' => 'required|string
+								|exists:users,google_app_id,deleted_at,NULL,is_account_activated,0,is_account_locked,0,user_type,'
 								. $this->__get('user_type'),
-							'user_type' => 'required|in:'. config('futureed.client') . ',' . config('futureed.student')
+							'user_type' => 'required|in:' . config('futureed.client') . ',' . config('futureed.student')
 						];
 						break;
 				}

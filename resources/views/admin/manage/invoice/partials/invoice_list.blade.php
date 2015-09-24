@@ -31,7 +31,7 @@
 					]
 			) !!}
 				<div class="form-group">
-					<div class="col-xs-5">
+					<div class="col-xs-4">
 						{!! Form::text('order_no', ''
 							, array(
 								'class' => 'form-control'
@@ -40,7 +40,7 @@
 							)
 						) !!}
 					</div>
-					<div class="col-xs-5">
+					<div class="col-xs-4">
 						{!! Form::select('payment_status'
 							, array(
 								'' =>' -- Select Status --'
@@ -57,17 +57,6 @@
 					</div>
 					<div class="col-xs-2">
 						<button class="btn btn-blue" type="button" ng-click="invoice.searchFnc($event)">Search</button>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-xs-5">
-						<select ng-model="invoice.search.subscription_name" ng-disabled="!invoice.subscriptions.length" ng-init="invoice.getSubscriptionList()" class="form-control">
-							<option value="">-- Select Subscription --</option>
-						<option ng-repeat="subscription in invoice.subscriptions" ng-value="subscription.name">{! subscription.name !}</option>
-					</select>
-					</div>
-					<div class="col-xs-5">
-						
 					</div>
 					<div class="col-xs-2">
 						<button class="btn btn-gold" type="button" ng-click="invoice.clear()">Clear</button>

@@ -459,5 +459,62 @@ class StudentRepository implements StudentRepositoryInterface
 
 	}
 
+	/**
+	 * Get Student by Facebook Id.
+	 * @param $facebook_id
+	 * @return mixed
+	 */
+	public function getStudentByFacebook($facebook_id) {
+
+		return Student::with('user')->facebookId($facebook_id)->get();
+	}
+
+	/**
+	 * Add new Student from Google.
+	 * @param $data
+	 * @return int|static
+	 */
+	public function addStudentFromGoogle($data){
+
+		DB::beginTransaction();
+
+		try{
+
+			//Add user table
+			$data = array_add($data,'username','NA');
+
+			$data = array_add($data, 'name',$data['first_name'] . ' ' . $data['last_name']);
+
+			//Default to USA -- No country code from login response.
+			$data['country_id'] = ($data['country_id'] == null ) ?  840 : $data['country_id'];
+
+			$user = User::create($data);
+
+			$data = array_add($data,'user_id',$user->id);
+
+			//Add student table
+			$student = Student::create($data);
+
+		} catch(\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e);
+
+			return 0;
+
+		}
+
+		DB::commit();
+
+		return $student;
+
+	}
+
+	public function getStudentByGoogleId($google_id){
+
+		return Student::with('user')->googleId($google_id)->get();
+	}
+
 
 }

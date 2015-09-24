@@ -2,23 +2,25 @@
 
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
-use FutureEd\Http\Requests\Api\FacebookLoginRequest;
+
 use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
+use FutureEd\Http\Requests\Api\GoogleLoginRequest;
 use FutureEd\Services\StudentServices;
-use FutureEd\Services\UserServices;
 
-
-class FacebookLoginController extends ApiController {
+class GoogleLoginController extends ApiController {
 
 	/**
-	 * @var StudentRepositoryInterface
+	 * REGISTRATION
 	 */
+
+
 	protected $student;
 
+	/**
+	 * @var StudentServices
+	 */
 	protected $student_service;
-
-	protected $user_service;
 
 	/**
 	 * @var ClientRepositoryInterface
@@ -27,35 +29,32 @@ class FacebookLoginController extends ApiController {
 
 	/**
 	 * @param StudentRepositoryInterface $studentRepositoryInterface
+	 * @param StudentServices $studentServices
 	 * @param ClientRepositoryInterface $clientRepositoryInterface
 	 */
 	public function __construct(
 		StudentRepositoryInterface $studentRepositoryInterface,
 		StudentServices $studentServices,
-		ClientRepositoryInterface $clientRepositoryInterface,
-		UserServices $userServices
+		ClientRepositoryInterface $clientRepositoryInterface
 	){
-
 		$this->student = $studentRepositoryInterface;
 
 		$this->student_service = $studentServices;
 
 		$this->client = $clientRepositoryInterface;
-
-		$this->user_service = $userServices;
 	}
 
 	/**
-	 * Through Facebook registration for Students and Client.
-	 * @param FacebookLoginRequest $request
+	 * Google Registration
+	 * @param GoogleLoginRequest $request
 	 * @return mixed
 	 */
-	public function facebookRegistration(FacebookLoginRequest $request){
+	public function googleRegistration(GoogleLoginRequest $request){
 
 		$user_type = $request->only('user_type');
 
-		$student_data = $request->only(
-			'facebook_app_id',
+		$student = $request->only(
+			'google_app_id',
 			'email',
 			'user_type',
 			'first_name',
@@ -67,8 +66,8 @@ class FacebookLoginController extends ApiController {
 			'city'
 		);
 
-		$client_data = $request->only(
-			'facebook_app_id',
+		$client = $request->only(
+			'google_app_id',
 			'first_name',
 			'last_name',
 			'email',
@@ -82,53 +81,51 @@ class FacebookLoginController extends ApiController {
 			'zip'
 		);
 
-		switch ($user_type['user_type']){
+		switch($user_type['user_type']){
 
 			case config('futureed.student'):
 
-				//Registration of Student.
-				$response = $this->student->addStudentFromFacebook($student_data);
+				//Registration of Student
+				$response = $this->student->addStudentFromGoogle($student);
 
 				return ($response) ?
-					$this->respondWithData($response) : $this->respondErrorMessage(7000) ;
+					$this->respondWithData($response) : $this->respondErrorMessage(7000);
 
 				break;
 
 			case config('futureed.client'):
 
-				//Registration for Client.
-				$response = $this->client->addClientFromFacebook($client_data);
+				//Registration of Client.
+				$response = $this->client->addClientFromGoogle($client);
 
 				return ($response) ?
-					$this->respondWithData($response) : $this->respondErrorMessage(7000) ;
-
-				break;
-
-			default:
-
-				//TODO: Log issue if not on option.
-
-				return $this->respondErrorMessage(2003);
+					$this->respondWithData($response) : $this->respondErrorMessage(7000);
 
 				break;
 		}
 
 	}
 
-	public function facebookLogin(FacebookLoginRequest $request){
+	/**
+	 * Google Login
+	 * @param GoogleLoginRequest $request
+	 * @return mixed
+	 */
+	public function googleLogin(GoogleLoginRequest $request) {
 
 		$user_type = $request->only('user_type');
 
-		$app_id = $request->only('facebook_app_id');
+		$app_id = $request->only('google_app_id');
 
-		switch($user_type['user_type']){
+		switch ($user_type['user_type']) {
 
 			case config('futureed.student'):
 
 				//Student login.
 
 				//get student id by facebook_app_id
-				$student_details =  $this->student->getStudentByFacebook($app_id);
+
+				$student_details = $this->student->getStudentByGoogleId($app_id);
 
 				return $this->respondWithData(
 					$this->student_service->getStudentDetails($student_details[0]->id)
@@ -141,7 +138,8 @@ class FacebookLoginController extends ApiController {
 				//Client Login
 
 				//get Client id by facebook_app_id
-				$client_details = $this->client->getClientByFacebook($app_id);
+
+				$client_details = $this->client->getClientByGoogleId($app_id);
 
 				return $this->respondWithData($client_details[0]->toArray());
 

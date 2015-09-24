@@ -12,6 +12,11 @@ class ClientRepository implements ClientRepositoryInterface
 {
     use LoggerTrait;
 
+	/**
+     * @param $user_id
+     * @param $role
+     * @return mixed
+     */
     public function getClient($user_id, $role)
     {
 
@@ -39,7 +44,11 @@ class ClientRepository implements ClientRepositoryInterface
     }
 
 
-
+	/**
+     * @param $id
+     * @param $role
+     * @return mixed
+     */
     public function checkClient($id, $role)
     {
 
@@ -48,12 +57,19 @@ class ClientRepository implements ClientRepositoryInterface
 
     }
 
+	/**
+     * @param $input
+     */
     public function checkClientEmail($input)
     {
         $email = $input['email'];
         $client_role = $input['client_role'];
     }
 
+	/**
+     * @param $client
+     * @return string|static
+     */
     public function addClient($client)
     {
 		$client['country_id'] = isset($client['country_id']) ? $client['country_id'] : 0;
@@ -72,18 +88,30 @@ class ClientRepository implements ClientRepositoryInterface
 
     }
 
+	/**
+     * @param $user_id
+     * @return mixed
+     */
     public function getClientId($user_id)
     {
 
         return Client::where('user_id', '=', $user_id)->pluck('id');
     }
 
+	/**
+     * @param $user_id
+     * @return mixed
+     */
     public function getRole($user_id)
     {
 
         return Client::where('user_id', '=', $user_id)->pluck('client_role');
     }
 
+	/**
+     * @param $id
+     * @return mixed
+     */
     public function verifyClientId($id)
     {
 
@@ -91,6 +119,10 @@ class ClientRepository implements ClientRepositoryInterface
 
     }
 
+	/**
+     * @param $id
+     * @return \Illuminate\Support\Collection|null|static
+     */
     public function getClientDetails($id)
     {
 
@@ -98,6 +130,11 @@ class ClientRepository implements ClientRepositoryInterface
 
     }
 
+	/**
+     * @param $id
+     * @param $client
+     * @throws Exception
+     */
     public function updateClientDetails($id, $client)
     {
 
@@ -211,6 +248,10 @@ class ClientRepository implements ClientRepositoryInterface
         return ['total' => $count, 'records' => $clients->get()->toArray()];
     }
 
+	/**
+     * @param $criteria
+     * @return mixed
+     */
     public function getClientCustomDetails($criteria)
     {
 
@@ -240,7 +281,13 @@ class ClientRepository implements ClientRepositoryInterface
 
     }
 
-	public function getTeacherDetails($criteria = array(), $limit = 0, $offset = 0)
+    /**
+     * @param array $criteria
+     * @param int $limit
+     * @param int $offset
+     * @return array
+     */
+    public function getTeacherDetails($criteria = array(), $limit = 0, $offset = 0)
 	{
 
 
@@ -291,6 +338,10 @@ class ClientRepository implements ClientRepositoryInterface
 
 	}
 
+	/**
+     * @param $id
+     * @return Client
+     */
     public function getClientByUserId($id)
     {
 
@@ -303,6 +354,10 @@ class ClientRepository implements ClientRepositoryInterface
         return $clients;
     }
 
+	/**
+     * @param $id
+     * @return bool|\Illuminate\Support\Collection|null|string|static
+     */
     public function deleteClient($id)
     {
 
@@ -323,6 +378,10 @@ class ClientRepository implements ClientRepositoryInterface
 
     //check relation of teacher to classroom
 
+	/**
+     * @param $id
+     * @return Client
+     */
     public function getClassroom($id)
     {
 
@@ -333,6 +392,10 @@ class ClientRepository implements ClientRepositoryInterface
         return $clients;
     }
 
+	/**
+     * @param $id
+     * @return Client
+     */
     public function getStudent($id)
     {
 
@@ -346,6 +409,10 @@ class ClientRepository implements ClientRepositoryInterface
     }
 
 
+	/**
+     * @param $id
+     * @return Client
+     */
     public function getClientToClassroom($id)
     {
 
@@ -379,7 +446,11 @@ class ClientRepository implements ClientRepositoryInterface
         return $clients;
     }
 
-	public function getSchoolCode($id){
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function getSchoolCode($id){
 
 		return Client::id($id)->pluck('school_code');
 	}
@@ -432,5 +503,62 @@ class ClientRepository implements ClientRepositoryInterface
         DB::commit();
 
         return $client;
+    }
+
+	/**
+     * Get Client by Facebook id.
+     * @param $facebook_id
+     * @return mixed
+     */
+    public function getClientByFacebook($facebook_id) {
+
+        return Client::with('user')->facebookId($facebook_id)->get();
+
+    }
+
+    /**
+     * Ad new Client Register from Google.
+     * @param $data
+     * @return int|static
+     */
+    public function addClientFromGoogle($data){
+
+        DB::beginTransaction();
+
+        try{
+
+            //Add user
+            $data = array_add($data,'username','NA');
+
+            $data = array_add($data, 'name',$data['first_name'] . ' ' . $data['last_name']);
+
+            //Default to USA -- No country code from login response.
+            $data['country_id'] = ($data['country_id'] == null ) ?  840 : $data['country_id'];
+
+            $user = User::create($data);
+
+            $data = array_add($data,'user_id',$user->id);
+
+            //Add Client
+            $client = Client::create($data);
+
+
+        }catch (\Exception $e){
+
+            DB::rollback();
+
+            $this->errorLog($e);
+
+            return 0;
+        }
+
+        DB::commit();
+
+        return $client;
+    }
+
+    public function getClientByGoogleId($google_id){
+
+        return Client::with('user')->googleId($google_id)->get();
     }
 }

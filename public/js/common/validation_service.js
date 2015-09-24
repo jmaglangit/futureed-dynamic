@@ -83,6 +83,7 @@ function ValidationService($http, apiService) {
 			, validateCurrentEmail : function(email, current_email, user_type) {
 				scope.errors = Constants.FALSE;
 				scope.fields['current_email'] = Constants.FALSE;
+				scope.fields['email'] = Constants.FALSE;
 
 				scope.validation.e_error = Constants.FALSE;
 				scope.validation.e_success = Constants.FALSE;
