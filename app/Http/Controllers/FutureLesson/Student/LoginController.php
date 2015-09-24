@@ -29,10 +29,10 @@ class LoginController extends Controller {
 			return redirect()->route('client.dashboard.index');
 		} else if(Input::only('id')){
 			$id = Input::only('id');
-			return view('student.login.login', ['id' => $id['id']]);
+			return view('student.login.index', ['id' => $id['id']]);
 		}
 
-		return view('student.login.login');
+		return view('student.login.index');
 	}
 
 	/**
@@ -172,4 +172,16 @@ class LoginController extends Controller {
 	public function tips_help_bar() {
 		return view('student.partials.tips-help-bar');
 	}	
+
+	public function confirm_media() {
+		return view('student.login.partials.confirm-media');
+	}
+
+	public function enter_password() {
+		return view('student.login.enter-password');
+	}
+
+	public function index_form() {
+		return view('student.login.partials.login');	
+	}
 }

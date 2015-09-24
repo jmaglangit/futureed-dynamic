@@ -7,7 +7,7 @@ function MediaLoginService($http) {
 	var api = {};
 	var apiUrl = '/api/v1/';
 
-	api.saveFB = function(data) {
+	api.registerFB = function(data) {
 		return $http({
 			  method 	: Constants.METHOD_POST
 			, data 		: data 
@@ -15,11 +15,27 @@ function MediaLoginService($http) {
 		});
 	}
 
-	api.saveGoogle = function(data) {
+	api.registerGoogle = function(data) {
 		return $http({
 			  method 	: Constants.METHOD_POST
 			, data 		: data
 			, url		: apiUrl + 'registration/google'
+		});
+	}
+
+	api.loginFacebook = function(data) {
+		return $http({
+			  method 	: Constants.METHOD_POST
+			, data 		: data
+			, url		: apiUrl + 'login/facebook'
+		});
+	}
+
+	api.loginGoogle = function(data) {
+		return $http({
+			  method 	: Constants.METHOD_POST
+			, data 		: data
+			, url		: apiUrl + 'login/google'
 		});
 	}
 

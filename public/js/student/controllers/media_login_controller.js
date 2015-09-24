@@ -11,7 +11,7 @@ function MediaLoginController($scope, $filter, $window, MediaLoginService) {
 	*/
 
 	// Initialize FB API on load
-	$window.fbAsyncInit = function() {
+	self.fbAsyncInit = function() {
 	    FB.init({ 
 	      appId: Constants.DI_PPA_BF
 	      , status: true 
@@ -20,17 +20,13 @@ function MediaLoginController($scope, $filter, $window, MediaLoginService) {
 	    });
 	};
 
-	self.logoutFacebook = function() {
-		FB.logout();
-	}
-
 	self.loginViaFacebook = function() {
 		FB.getLoginStatus(function(response) {
 			if (response.status === 'connected') {
 				fbLoginCallback(response);
 			} else {
 				var fbOptions = {
-					scope : 'email, public_profile, user_birthday, user_location'
+					scope : 'email, public_profile, user_birthday'
 				}
 
 				FB.login(fbLoginCallback, fbOptions);
@@ -40,25 +36,32 @@ function MediaLoginController($scope, $filter, $window, MediaLoginService) {
 
 	var fbLoginCallback = function(response) {
 		if (response.authResponse) {
-			FB.api('/' + response.authResponse.userID, {fields: 'email, first_name, last_name, gender, birthday, location'}, function(response) {
+			FB.api('/' + response.authResponse.userID, {fields: 'email, first_name, last_name, gender, birthday'}, function(response) {
 				var fb_data = response;
-				var birth_date = $filter(Constants.DATE)(new Date(fb_data.birthday), Constants.DATE_YYYYMMDD);
-
+				
 				var data = {
 					facebook_app_id		: fb_data.id
-					, email				: fb_data.email
 					, user_type			: Constants.STUDENT
-					, first_name		: fb_data.first_name
-					, last_name			: fb_data.last_name
-					, gender			: fb_data.gender
-					, birth_date		: birth_date
 				}
 
 				$scope.ui_block();
-				MediaLoginService.saveFB(data).success(function(response) {
+				MediaLoginService.loginFacebook(data).success(function(response) {
 					if(angular.equals(response.status, Constants.STATUS_OK)) {
 						if(response.errors) {
 							$scope.errorHandler(response.errors);
+							if(angular.equals($scope.errors[0], "The selected facebook app id is invalid.")) {
+								self.errors = Constants.FALSE;
+
+								data.email = fb_data.email;
+								data.first_name = fb_data.first_name;
+								data.last_name = fb_data.last_name;
+								data.gender = fb_data.gender;
+								data.media_type = 'Facebook';
+								data.birth_date = (fb_data.birthday) ? fb_data.birthday : Constants.EMPTY_STR;;
+								data.confirm = Constants.TRUE;
+
+								$scope.$emit('confirm-media', data);
+							}
 						} else if(response.data){
 							$scope.user = JSON.stringify(response.data);
 							$("input[name='user_data']").val(JSON.stringify(response.data));

@@ -1066,26 +1066,5 @@ function FutureedController($scope, $window, apiService, futureed) {
 		apiService.updateUserSession($scope.user);
 	} 
 
-	$scope.signInCallback = function(response) {
-		console.log("Google signInCallback...");
-		console.log(response);
-	}
-
-	$scope.onSignIn = function(googleUser) {
-		var profile = googleUser.getBasicProfile();
-  		console.log(profile);
-	}
-
-	$window.googleRenderButton = function() {
-        gapi.signin.render('signInButton',
-            {
-                'callback': $scope.signInCallback, // Function handling the callback.
-                'clientid': Constants.DI_TNEILC_ELGOOG, // CLIENT_ID from developer console which has been explained earlier.
-                'requestvisibleactions': 'http://schemas.google.com/AddActivity', // Visible actions, scope and cookie policy wont be described now,
-                                                                                  // as their explanation is available in Google+ API Documentation.
-                'scope': 'https://www.googleapis.com/auth/plus.login https://www.googleapis.com/auth/userinfo.email',
-                'cookiepolicy': 'single_host_origin'
-            }
-        );
-    }
+	
 };
