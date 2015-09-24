@@ -63,7 +63,8 @@ class GoogleLoginController extends ApiController {
 			'birth_date',
 			'country_id',
 			'state',
-			'city'
+			'city',
+			'grade_code'
 		);
 
 		$client = $request->only(
@@ -89,7 +90,7 @@ class GoogleLoginController extends ApiController {
 				$response = $this->student->addStudentFromGoogle($student);
 
 				return ($response) ?
-					$this->respondWithData($response) : $this->respondErrorMessage(7000);
+					$this->respondWithData(['id' => $response->id]) : $this->respondErrorMessage(7000);
 
 				break;
 
@@ -99,7 +100,7 @@ class GoogleLoginController extends ApiController {
 				$response = $this->client->addClientFromGoogle($client);
 
 				return ($response) ?
-					$this->respondWithData($response) : $this->respondErrorMessage(7000);
+					$this->respondWithData(['id' => $response->id]) : $this->respondErrorMessage(7000);
 
 				break;
 		}
