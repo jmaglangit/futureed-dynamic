@@ -328,10 +328,12 @@
 			If you have not yet receive the email, please check your inbox or your spam folder.
 		</small>
 		
-		{!! Html::link(route('client.login'), 'Click here to Login'
-			, array(
-			'class' => 'btn btn-blue btn-medium'
-			) 
-		) !!}
+		<div class="form-group">
+			{!! Html::link(route('client.login'), 'Click here to Login'
+				, array(
+				'class' => 'btn btn-blue btn-medium'
+				) 
+			) !!}
+		</div>
 	</div>
 </div>

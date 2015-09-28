@@ -11,6 +11,7 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 
 	angular.extend(self, $controller('MediaLoginController', { $scope : $scope}));
 
+	self.setSetUserType(Constants.STUDENT);
 	self.fbAsyncInit();
 
 	self.setActive = function(active) {

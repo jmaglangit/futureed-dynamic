@@ -2,8 +2,8 @@
 	<fieldset>
 		<legend>User Credentials</legend>
 		<div class="form-group">
-			<label class="col-md-2 control-label">Email<span class="required">*</span></label>
-			<div class="col-md-4">
+			<label class="col-xs-2 control-label">Email<span class="required">*</span></label>
+			<div class="col-xs-4">
 				{!! Form::text('email', ''
 					, array(
 						'class' => 'form-control'
@@ -21,8 +21,8 @@
 				</div>
 			</div>
 
-			<label class="col-md-2 control-label">Username<span class="required">*</span></label>
-			<div class="col-md-4">
+			<label class="col-xs-2 control-label">Username<span class="required">*</span></label>
+			<div class="col-xs-4">
 				{!! Form::text('username', ''
 					, array(
 						'class' => 'form-control'
@@ -42,8 +42,8 @@
 		</div>
 
 		<div class="form-group">
-			<label class="col-md-2 control-label">Password<span class="required">*</span></label>
-			<div class="col-md-4">
+			<label class="col-xs-2 control-label">Password<span class="required">*</span></label>
+			<div class="col-xs-4">
 				{!! Form::password('password'
 					, array(
 						'class' => 'form-control'
@@ -53,8 +53,8 @@
 				) !!}
 			<p class="help-block">Password must be at least 8 characters and with at least 1 number.</p>
 			</div>
-		<label class="col-md-2 control-label">Confirm Password<span class="required">*</span></label>
-			<div class="col-md-4">
+		<label class="col-xs-2 control-label">Confirm Password<span class="required">*</span></label>
+			<div class="col-xs-4">
 				{!! Form::password('confirm_password'
 					, array(
 						'class' => 'form-control'
@@ -69,8 +69,8 @@
 	<fieldset>
 		<legend>Personal Information</legend>
 		<div class="form-group">
-			<label class="col-md-2 control-label">First Name<span class="required">*</span></label>
-			<div class="col-md-4">
+			<label class="col-xs-2 control-label">First Name<span class="required">*</span></label>
+			<div class="col-xs-4">
 				{!! Form::text('first_name', ''
 					, array(
 						'class' => 'form-control'
@@ -79,8 +79,8 @@
 					)
 				) !!}
 			</div>
-			<label class="col-md-2 control-label">Last Name<span class="required">*</span></label>
-			<div class="col-md-4">
+			<label class="col-xs-2 control-label">Last Name<span class="required">*</span></label>
+			<div class="col-xs-4">
 				{!! Form::text('last_name', ''
 					, array(
 						'class' => 'form-control'
@@ -92,8 +92,8 @@
 		</div>
 
 		<div class="form-group">
-			<label class="col-md-2 control-label">Street Address<span class="required" ng-if="register.required">*</span></label>
-			<div class="col-md-6">
+			<label class="col-xs-2 control-label">Street Address<span class="required" ng-if="register.required">*</span></label>
+			<div class="col-xs-6">
 				{!! Form::text('street_address', ''
 				, array(
 					'class' => 'form-control'
@@ -105,8 +105,8 @@
 		</div>
 
 		<div class="form-group">
-			<label class="col-md-2 control-label">City<span class="required" ng-if="register.required">*</span></label>
-			<div class="col-md-4">
+			<label class="col-xs-2 control-label">City<span class="required" ng-if="register.required">*</span></label>
+			<div class="col-xs-4">
 				{!! Form::text('city', ''
 					, array(
 						'class' => 'form-control'
@@ -115,8 +115,8 @@
 					)
 				) !!}
 			</div>
-			<label class="col-md-2 control-label">State</label>
-			<div class="col-md-4">
+			<label class="col-xs-2 control-label">State</label>
+			<div class="col-xs-4">
 				{!! Form::text('state', ''
 					, array(
 						'class' => 'form-control'
@@ -128,8 +128,8 @@
 		</div>
 
 		<div class="form-group">
-			<label class="col-md-2 control-label">Postal Code</label>
-			<div class="col-md-4">
+			<label class="col-xs-2 control-label">Postal Code</label>
+			<div class="col-xs-4">
 				{!! Form::text('zip', ''
 					, array(
 						'class' => 'form-control'
@@ -139,8 +139,8 @@
 				) !!}
 			</div>
 
-			<label class="col-md-2 control-label">Country<span class="required" ng-if="register.required">*</span></label>
-			<div class="col-md-4" ng-init="getCountries()">
+			<label class="col-xs-2 control-label">Country<span class="required" ng-if="register.required">*</span></label>
+			<div class="col-xs-4" ng-init="getCountries()">
 				<select  name="country_id" class="form-control" ng-model="register.reg.country_id">
 					<option value="">-- Select Country --</option>
 					<option ng-repeat="country in countries" ng-value="country.id">{! country.name!}</option>
@@ -153,8 +153,8 @@
 		<fieldset>
 			<legend>School Information</legend>
 			<div class="form-group">
-				<label class="col-md-2 control-label">School Name<span class="required">*</span></label>
-				<div class="col-md-6">
+				<label class="col-xs-2 control-label">School Name<span class="required">*</span></label>
+				<div class="col-xs-6">
 					{!! Form::text('school_name', ''
 						, array(
 							'class' => 'form-control'
@@ -166,8 +166,8 @@
 			</div>
 
 			<div class="form-group">
-				<label class="col-md-2 control-label">School Address<span class="required">*</span></label>
-				<div class="col-md-6">
+				<label class="col-xs-2 control-label">School Address<span class="required">*</span></label>
+				<div class="col-xs-6">
 					{!! Form::text('school_address', ''
 						, array(
 							'class' => 'form-control'
@@ -179,8 +179,8 @@
 			</div>
 
 			<div class="form-group">
-			<label class="col-md-2 control-label">City</label>
-				<div class="col-md-4">
+			<label class="col-xs-2 control-label">City</label>
+				<div class="col-xs-4">
 					{!! Form::text('school_city', ''
 						, array(
 							'class' => 'form-control'
@@ -189,8 +189,8 @@
 						)
 					) !!}
 				</div>
-				<label class="col-md-2 control-label">State<span class="required">*</span></label>
-				<div class="col-md-4">
+				<label class="col-xs-2 control-label">State<span class="required">*</span></label>
+				<div class="col-xs-4">
 					{!! Form::text('school_state', ''
 						, array(
 							'class' => 'form-control'
@@ -202,8 +202,8 @@
 			</div>  
 
 			<div class="form-group">
-				<label class="col-md-2 control-label">Postal Code</label>
-				<div class="col-md-4">
+				<label class="col-xs-2 control-label">Postal Code</label>
+				<div class="col-xs-4">
 					{!! Form::text('school_zip', ''
 						, array(
 							'class' => 'form-control'
@@ -213,8 +213,8 @@
 					) !!}
 				</div>
 
-				<label class="col-md-2 control-label">Country<span class="required">*</span></label>
-				<div class="col-md-4" ng-init="getCountries()">
+				<label class="col-xs-2 control-label">Country<span class="required">*</span></label>
+				<div class="col-xs-4" ng-init="getCountries()">
 					<select  name="school_country_id" class="form-control" ng-model="register.reg.school_country_id">
 						<option value="">-- Select Country --</option>
 						<option ng-repeat="country in countries" ng-value="country.id">{! country.name!}</option>
@@ -224,8 +224,8 @@
 
 			<legend>School Contact Information</legend>
 			<div class="form-group">
-				<label class="col-md-2 control-label">Contact Person<span class="required">*</span></label>
-				<div class="col-md-6">
+				<label class="col-xs-2 control-label">Contact Person<span class="required">*</span></label>
+				<div class="col-xs-6">
 					{!! Form::text('contact_name', ''
 						, array(
 							'class' => 'form-control'
@@ -237,8 +237,8 @@
 			</div>
 
 			<div class="form-group">
-				<label class="col-md-2 control-label">Contact Number<span class="required">*</span></label>
-				<div class="col-md-6">
+				<label class="col-xs-2 control-label">Contact Number<span class="required">*</span></label>
+				<div class="col-xs-6">
 					{!! Form::text('contact_number', ''
 						, array(
 							'class' => 'form-control'
@@ -256,7 +256,7 @@
 			<div class="form-group">
 				<div class="checkbox text-center">
 					<label>
-						{!! Form::checkbox('terms', 1, null, array('ng-model' => 'register.terms')) !!}
+						{!! Form::checkbox('terms', 1, null, array('ng-model' => 'register.record.terms')) !!}
 
 						I agree on the 
 

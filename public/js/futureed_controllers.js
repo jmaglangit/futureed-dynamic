@@ -19,9 +19,6 @@ function FutureedController($scope, $window, apiService, futureed) {
 	* Common API calls
 	*/
 	$scope.highlight = highlight;
-	$scope.checkAvailability = checkAvailability;
-	$scope.checkEmailAvailability = checkEmailAvailability;
-	$scope.getAnnouncement = getAnnouncement;
 
 	$scope.errorHandler = function(errors, flag) {
 		$scope.errors = [];
@@ -187,7 +184,7 @@ function FutureedController($scope, $window, apiService, futureed) {
 		});
 	}
 
-	function checkAvailability(username, user_type) {
+	$scope.checkAvailability = function(username, user_type) {
 		$scope.u_loading = Constants.TRUE;
 		$scope.u_success = Constants.FALSE;
 		$scope.u_error = Constants.FALSE;
@@ -218,7 +215,7 @@ function FutureedController($scope, $window, apiService, futureed) {
 		});
 	}
 
-	function checkEmailAvailability(email, user_type) {
+	$scope.checkEmailAvailability = function(email, user_type) {
 		$scope.e_loading = Constants.TRUE;
 		$scope.e_success = Constants.FALSE;
 		$scope.e_error = Constants.FALSE;
@@ -253,9 +250,6 @@ function FutureedController($scope, $window, apiService, futureed) {
 	/**
 	* Student Page with API calls
 	*/
-	// Login 
-	$scope.getUserDetails = getUserDetails;
-
 	//Forgot Password
 	$scope.studentForgotPassword = studentForgotPassword;
 	$scope.studentResendCode = studentResendCode;
@@ -286,7 +280,7 @@ function FutureedController($scope, $window, apiService, futureed) {
 		});
 	}
 
-	function getUserDetails() {
+	$scope.getUserDetails = function() {
 		var user = $("input[name='userdata']").val();
 
 		if(angular.isString(user) && user.length > 0) {
@@ -526,29 +520,9 @@ function FutureedController($scope, $window, apiService, futureed) {
 	*/
 
 	/**
-	* Client Page With API calls
-	*/
-	$scope.saveEmail = saveEmail;
-
-	function saveEmail() {
-
-		$scope.error = "";
-		$scope.success_msg = "";
-
-		if($scope.c_error != false || $scope.n_error != false || $scope.cf_error != false){
-			$scope.error = "Please fill up required fields";
-		}else{
-			$scope.getLoginPassword();
-			$scope.email_pass = Constants.TRUE;
-
-		}
-		$("html, body").animate({ scrollTop: 0 }, "slow");
-	}
-
-	/**
 	* Get announcement
 	*/
-	function getAnnouncement(){
+	$scope.getAnnouncement = function(){
 		apiService.getAnnouncement().success(function(response){
 				if(angular.equals(response.status, Constants.STATUS_OK)){
 					if(!isDataEmpty(response.data)){
@@ -558,16 +532,6 @@ function FutureedController($scope, $window, apiService, futureed) {
 		}).error(function(response){
 				$scope.internalError();
 		});
-	}
-
-	/**
-	* Get Country ID
-	*/
-	function getCountryId(){
-		$scope.reg.country_id = '';
-		$scope.reg.country_id = $('#country_id').find(':selected').data('id');
-		$scope.getGradeLevel();
-
 	}
 
 	$scope.setCountryGrade = setCountryGrade;
