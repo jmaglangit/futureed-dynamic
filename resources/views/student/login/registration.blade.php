@@ -3,6 +3,10 @@
 @section('content')
 <div class="container login student-fnt" ng-controller="StudentLoginController as login" ng-init="login.checkRegistration('{!! $id !!}', '{!! $registration_token !!}')">
 	
+	{!! Form::open(array('id' => 'process_form', 'method' => 'POST', 'route' => 'student.login.process')) !!}
+        {!! Form::hidden('user_data', '') !!}
+    {!! Form::close() !!}
+	
 	<div template-directive template-url="{!! route('student.partials.base_url') !!}"></div>
 
 	<div template-directive template-url="{!! route('student.login.registration_form') !!}"></div>

@@ -3,7 +3,7 @@
 @section('content')
     <div class="container login student-fnt" ng-controller="StudentLoginController as login" ng-cloak>
             
-        {!! Form::open(array('id' => 'media_form', 'method' => 'POST', 'route' => 'student.login.process')) !!}
+        {!! Form::open(array('id' => 'process_form', 'method' => 'POST', 'route' => 'student.login.process')) !!}
             {!! Form::hidden('user_data', '') !!}
         {!! Form::close() !!}
 

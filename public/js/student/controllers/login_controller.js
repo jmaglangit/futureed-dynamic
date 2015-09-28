@@ -102,7 +102,7 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 						$("div.birth-date-wrapper select").addClass("required-field");
 					}
 				} else if(response.data){
-					self.record = response.data;
+					$scope.user = JSON.stringify(response.data);
 					self.setActive('confirm_success');
 				} 
 			}
@@ -115,9 +115,8 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 	}
 
 	self.proceedToDashboard = function() {
-		$scope.user = JSON.stringify(self.record);
-		$("input[name='user_data']").val(JSON.stringify(self.record));
-		$("#media_form").submit();
+		$("#process_form input[name='user_data']").val($scope.user);
+		$("#process_form").submit();
 	}
 
 	function showModal(id) {
@@ -197,8 +196,8 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 					$scope.image_pass = shuffle($scope.image_pass);
 				} else if(response.data){
 					$scope.user = JSON.stringify(response.data);
-					$("input[name='user_data']").val(JSON.stringify(response.data));
-					$("#media_form").submit();
+					$("#process_form input[name='user_data']").val($scope.user);
+					$("#process_form").submit();
 				} 
 			}
 
