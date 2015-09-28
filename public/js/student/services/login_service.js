@@ -55,5 +55,21 @@ function StudentLoginService($http) {
 		});
 	}
 
+	api.validateRegistration = function(data) {
+		return $http({
+			method	: Constants.METHOD_POST
+			, data	: data
+			, url	: apiUrl + 'student/register'
+		});
+	}
+
+	api.editRegistration = function(data) {
+		return $http({
+			method 	: Constants.METHOD_PUT
+			, data 	: data 	
+			, url	: apiUrl + 'client/manage/update-student/' + data.id
+		});
+	}
+
 	return api;
 }

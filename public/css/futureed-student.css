@@ -78,8 +78,12 @@
 	font-size: 15px;
 }
 
-.ul-left, .check-ico {
+.ul-left {
 	margin-left: 30px;
+}
+
+.check-ico {
+	text-align: center;
 }
 
 .sidebar {
@@ -1298,8 +1302,8 @@ top: 41px;
 	margin-left: 0 !important;
 }
 
-.media > .media-left > img {
-	width: 125px;
+.media-left img {
+	width: 110px;
 }
 
 /*bootstrap changes font-sizes*/
@@ -1440,3 +1444,4 @@ top: 41px;
 	width: 550px;
 	margin: 70px auto;
 }
+

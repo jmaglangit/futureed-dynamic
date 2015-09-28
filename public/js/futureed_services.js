@@ -162,14 +162,6 @@ var services = angular.module('futureed.services', []);
 			});
 		}
 
-		futureedAPI.validateRegistration = function(registration) {
-			return $http({
-				method	: 'POST'
-				, data	: registration
-				, url	: futureedAPIUrl + 'student/register'
-			});
-		}
-
 		futureedAPI.getAvatarImages = function(gender) {
 			return $http({
 				method	: 'POST'
@@ -234,14 +226,6 @@ var services = angular.module('futureed.services', []);
 			return $http({
 				method 	: Constants.METHOD_GET
 				, url	: futureedAPIUrl + 'countries/' + id
-			});
-		}
-
-		futureedAPI.editRegistration = function(data) {
-			return $http({
-				method 	: Constants.METHOD_PUT
-				, data 	: data 	
-				, url	: futureedAPIUrl + 'client/manage/update-student/' + data.id
 			});
 		}
 

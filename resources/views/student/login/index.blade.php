@@ -23,6 +23,8 @@
     {!! Html::script('https://apis.google.com/js/platform.js') !!}
     {!! Html::script('https://apis.google.com/js/client.js') !!}
 
+    {!! Html::script('/js/common/validation_service.js') !!}
+
     {!! Html::script('/js/student/controllers/media_login_controller.js') !!}
     {!! Html::script('/js/student/services/media_login_service.js') !!} 
 

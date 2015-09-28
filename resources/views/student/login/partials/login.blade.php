@@ -31,6 +31,7 @@
 				)
 			) !!}
 		</div>
+		
 		<div class="form-group login-divider">
 			<em>or</em>
 		</div>
@@ -39,7 +40,7 @@
 			<div class="col-xs-6"> 
 				<button type="button" class="btn btn-fb"
 					ng-click="login.loginViaFacebook()">
-						<i class="fa fa-facebook"></i> Login via Facebook
+						<i class="fa fa-facebook"></i> Sign in via Facebook
 				</button>
 			</div>
 

@@ -182,6 +182,10 @@ class LoginController extends Controller {
 	}
 
 	public function index_form() {
-		return view('student.login.partials.login');	
+		return view('student.login.partials.login');
+	}
+
+	public function registration_form() {
+		return view('student.login.register.registration_form');
 	}
 }

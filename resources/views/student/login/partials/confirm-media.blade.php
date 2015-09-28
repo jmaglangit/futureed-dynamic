@@ -3,19 +3,24 @@
 		{!! Form::open(array('id' => 'registration_form' , 'class' => 'form-horizontal simple-form')) !!}
 
 			<div class="form-header">
-				<div class="media">
-					<div class="media-left">
-						{!! Html::image('/images/user_student.png') !!}
-					</div>
-					<div class="media-body">
-						<h3 class="box-title">
-							Register {! login.record.media_type !} Detail</h3>
-						<div class="info-box rd col-xs-6">
-							<h4>For Students 13 years old and below</h4>
-							<p>Parents should be the one to register, please click {!! Html::link(route('client.registration'), 'here') !!} to register.</p>
+				<fieldset>
+					<div class="form-group media">
+						<div class="col-xs-9"> 
+							<div class="media-left">
+								{!! Html::image('/images/user_student.png') !!}
+							</div>
+							<div class="media-body">
+								<h3 class="box-title">Register {! login.record.media_type !} Detail</h3>
+								<div class="info-box rd">
+									<h4>For Students 13 years old and below</h4>
+									<p>Parents should be the one to register, please click {!! Html::link(route('client.registration'), 'here') !!} to register.</p>
+								</div>
+							</div>
 						</div>
+
+						<div class="col-xs-3"></div>
 					</div>
-				</div>
+				</fieldset>
 			</div>
 			
 			<div class="form-content col-xs-12">
@@ -32,7 +37,7 @@
 					</div>
 				</div>
 
-				<div style="margin: 7px 0px;">(<span class="required">*</span> ) Indicates a required field.</div>
+				<div>(<span class="required">*</span> ) Indicates a required field.</div>
 				<fieldset>
 					<legend>Personal Information</legend>
 					<div class="form-group">

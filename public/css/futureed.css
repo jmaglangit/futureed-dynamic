@@ -340,9 +340,9 @@ form label{font-weight: normal;}
 }
 .info-box h4{
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-weight: 200;
     font-size: 16px;
 	margin-top: 0;
+	font: bold;
 }
 .info-box p{
 	margin-bottom: 0;
@@ -350,6 +350,7 @@ form label{font-weight: normal;}
 .info-box.rd{
 	background: #FBE6E1;
 	border: 1px solid #F8C8BD;
+	border-radius: 8px;
 }
 .form-content legend{
 	padding-bottom: 10px;
@@ -752,10 +753,16 @@ footer{font:normal 12px/30px arial; }
 	box-shadow: none;
 }
 
-.error-msg-con{
+.error-msg-con {
 	font-style: italic;
 	font-size: 12px;
 	color: red;
+}
+
+.success-msg-con {
+	font-style: italic;
+	font-size: 12px;
+	color: #3c763d
 }
 
 /**

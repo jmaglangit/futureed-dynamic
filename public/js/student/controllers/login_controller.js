@@ -1,10 +1,13 @@
 angular.module('futureed.controllers')
 	.controller('StudentLoginController', StudentLoginController);
 
-StudentLoginController.$inject = ['$scope', '$filter', '$controller', '$window', 'StudentLoginService', 'MediaLoginService'];
+StudentLoginController.$inject = ['$scope', '$filter', '$controller', '$window', 'StudentLoginService', 'MediaLoginService', 'ValidationService'];
 
-function StudentLoginController($scope, $filter, $controller, $window, StudentLoginService, MediaLoginService) {
+function StudentLoginController($scope, $filter, $controller, $window, StudentLoginService, MediaLoginService, ValidationService) {
 	var self = this;
+
+	ValidationService(self);
+	self.default();
 
 	angular.extend(self, $controller('MediaLoginController', { $scope : $scope}));
 
@@ -17,6 +20,7 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 		self.active_login = Constants.FALSE;
 		self.active_confirm = Constants.FALSE;
 		self.active_enter_password = Constants.FALSE;
+		self.active_registration = Constants.FALSE;
 
 		switch(active) {
 			case 'confirm_media'	:
@@ -29,6 +33,10 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 
 			case 'enter_password'	:
 				self.active_enter_password = Constants.TRUE;
+				break;
+
+			case 'registration'	:
+				self.active_registration = Constants.TRUE;
 				break;
 
 			case 'login'			:
@@ -50,13 +58,14 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 			self.setActive('confirm_media');
 
 			if(angular.equals(data.media_type, Constants.GOOGLE)) {
-
+				$scope.ui_block();
 				self.getGoogleDetails(function(response) {
 					self.record = data;
 					self.record.first_name = response.given_name;
 					self.record.last_name = response.family_name;
 
 					$scope.$apply();
+					$scope.ui_unblock();
 				});
 			} else {
 				self.record = data;
@@ -139,16 +148,6 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 		$("#birth_date").dateDropdowns(options);
 	}
 
-
-
-	// Manual Login
-
-	/**
-	* Validate Student Email Address / Username
-	* 
-	* @Params 
-	*   username - the username
-	*/
 	self.manual = {};
 
 	self.validateUser = function(event) {
@@ -187,13 +186,6 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 			self.validatePassword();
 	}
 
-	/**
-	* Validate Selected Image Password
-	* 
-	* @Params 
-	*   id        - the student id
-	*   image_id  - selected image password
-	*/
 	self.validatePassword = function() {
 		self.errors = Constants.FALSE;
 
@@ -216,4 +208,114 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 			$scope.ui_unblock();
 		});
 	} 
+
+	/**
+	* Student registration
+	*/
+	self.checkRegistration = function(id, token) {
+		self.record.invited = Constants.FALSE;
+		self.setActive('registration');
+
+		if(id && token){
+			self.errors = Constants.FALSE;
+
+			StudentLoginService.getStudentDetails(id, token).success(function(response){
+				if(angular.equals(response.status, Constants.STATUS_OK)) {
+					if(response.errors) {
+						self.errors = $scope.errorHandler(response.errors);
+					} else if(response.data){
+						self.record = response.data[0];
+						self.record.username = self.record.user.username;
+						self.record.email = self.record.user.email;
+						self.record.school_name = self.record.school.name;
+						
+						self.getGradeLevel(self.record.country_id);
+						self.record.invited = Constants.TRUE;
+
+						self.setDropdown(self.record.birth_date);
+					}
+				}
+			}).error(function(response){
+				self.errors = $scope.internalError();
+			});
+		}
+	}
+
+	self.validateRegistration = function() {
+		self.fields = [];
+		self.errors = Constants.FALSE;
+
+		if(!self.record.terms) {
+			$scope.errors = ["Please accept the terms and conditions."];
+			$("html, body").animate({ scrollTop: 0 }, "slow");
+			return;
+		}
+
+		$("div.birth-date-wrapper select").removeClass("required-field");
+
+		var birth_date = $("input#birth_date").val();
+		self.record.birth_date = $filter(Constants.DATE)(new Date(birth_date), Constants.DATE_YYYYMMDD);
+
+		var base_url = $("#base_url_form input[name='base_url']").val();
+		self.record.callback_uri = base_url + Constants.URL_REGISTRATION(angular.lowercase(Constants.STUDENT));
+
+		$scope.ui_block();
+		StudentLoginService.validateRegistration(self.record).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					$scope.errorHandler(response.errors);
+
+					angular.forEach(response.errors, function(value, key) {
+						self.fields[value.field] = Constants.TRUE;
+					});
+				} else if(response.data){
+					self.register.success = Constants.TRUE;
+					self.register.email = self.record.email;
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(response) {
+			scope.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.editRegistration = function() {
+		self.fields = [];
+		self.errors = Constants.FALSE;
+
+		if(!self.record.terms) {
+			$scope.errors = ["Please accept the terms and conditions."];
+			$("html, body").animate({ scrollTop: 0 }, "slow");
+			return;
+		}
+
+		$("div.birth-date-wrapper select").removeClass("required-field");
+
+		var birth_date = $("input#birth_date").val();
+		self.record.birth_date = $filter(Constants.DATE)(new Date(birth_date), Constants.DATE_YYYYMMDD);
+
+		var base_url = $("#base_url_form input[name='base_url']").val();
+		self.record.callback_uri = base_url + Constants.URL_REGISTRATION(angular.lowercase(Constants.STUDENT));
+
+		$scope.ui_block();
+		StudentLoginService.editRegistration(self.record).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					$scope.errorHandler(response.errors);
+
+					angular.forEach(response.errors, function(value, key) {
+						self.fields[value.field] = Constants.TRUE;
+					});
+				} else if(response.data){
+					self.register.success = Constants.TRUE;
+					self.register.email = self.record.email;
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(response) {
+			scope.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
 }

@@ -69,6 +69,11 @@
 					'as' => 'student.login.index_form'
 					, 'uses' => 'FutureLesson\Student\LoginController@index_form'
 				]);
+
+			Routes::get('/registration-form', [ 
+					'as' => 'student.login.registration_form'
+					, 'uses' => 'FutureLesson\Student\LoginController@registration_form'
+				]);
 		});
 
 		Routes::group([

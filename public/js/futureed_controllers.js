@@ -23,8 +23,6 @@ function FutureedController($scope, $window, apiService, futureed) {
 	$scope.checkEmailAvailability = checkEmailAvailability;
 	$scope.getAnnouncement = getAnnouncement;
 
-	$scope.checkRegistration = checkRegistration;
-
 	$scope.errorHandler = function(errors, flag) {
 		$scope.errors = [];
 
@@ -264,7 +262,6 @@ function FutureedController($scope, $window, apiService, futureed) {
 
 	// Registration
 	$scope.showModal = showModal;
-	$scope.validateRegistration = validateRegistration;
 	$scope.studentConfirmRegistration = studentConfirmRegistration;
 	$scope.studentResendConfirmation = studentResendConfirmation;
 	$scope.saveNewPassword = saveNewPassword;
@@ -461,88 +458,6 @@ function FutureedController($scope, $window, apiService, futureed) {
 				keyboard: Constants.FALSE,
 				show    : Constants.TRUE
 		});
-	}
-
-	function validateRegistration(reg, terms, flag) {
-		$scope.errors = Constants.FALSE;
-		$scope.terms = terms;
-
-		$('#registration_form input').removeClass('required-field');
-		$('#registration_form select').removeClass('required-field');
-
-		if($scope.e_error || $scope.u_error) {
-			$("html, body").animate({ scrollTop: 320 }, "slow");
-		} else {
-			if(!terms) {
-				$scope.errors = ["Please accept the terms and conditions."];
-				$("html, body").animate({ scrollTop: 0 }, "slow");
-				return;
-			}
-
-			$scope.reg = (reg) ? reg : {};
-			$scope.base_url = $("#base_url_form input[name='base_url']").val();
-			$scope.reg.callback_uri = $scope.base_url + Constants.URL_REGISTRATION(angular.lowercase(Constants.STUDENT));
-
-			var bdate = $("#registration_form #birth_date").val();
-
-			if($scope.reg && bdate) {
-				
-				var day = $("#registration_form .day").val();
-				var month = $("#registration_form .month").val();
-				var year = $("#registration_form .year").val();
-
-				$scope.reg.birth_date = year + month + day;
-				$scope.reg.school_code = -1;
-
-			}else {
-				$("#registration_form select[name='birth_date_[day]']").addClass("required-field");
-				$("#registration_form select[name='birth_date_[month]']").addClass("required-field");
-				$("#registration_form select[name='birth_date_[year]']").addClass("required-field");
-			}
-			
-			$scope.ui_block();
-			if(flag == 'add'){
-				apiService.validateRegistration($scope.reg).success(function(response) {
-					if(response.status == Constants.STATUS_OK) {
-						if(response.errors) {
-							$scope.errorHandler(response.errors);
-
-							angular.forEach(response.errors, function(value, key) {
-								$("#registration_form input[name='" + value.field +"']").addClass("required-field");
-								$("#registration_form select[name='" + value.field +"']").addClass("required-field");
-							});
-						} else if(response.data){
-							$scope.success = Constants.TRUE;
-							$scope.email = $scope.reg.email;
-						}
-					}
-					$scope.ui_unblock();
-				}).error(function(response) {
-					$scope.internalError();
-					$scope.ui_unblock();
-				});
-			}else {
-				apiService.editRegistration($scope.reg).success(function(response) {
-					if(response.status == Constants.STATUS_OK) {
-						if(response.errors) {
-							$scope.errorHandler(response.errors);
-
-							angular.forEach(response.errors, function(value, key) {
-								$("#registration_form input[name='" + value.field +"']").addClass("required-field");
-								$("#registration_form select[name='" + value.field +"']").addClass("required-field");
-							});
-						} else if(response.data){
-							$scope.success = Constants.TRUE;
-							$scope.email = $scope.reg.email;
-						}
-					}
-					$scope.ui_unblock();
-				}).error(function(response) {
-					$scope.internalError();
-					$scope.ui_unblock();
-				});
-			}
-		}
 	}
 
 	function studentConfirmRegistration() {
@@ -787,46 +702,6 @@ function FutureedController($scope, $window, apiService, futureed) {
 		$scope.reg.country_id = $('#country_id').find(':selected').data('id');
 		$scope.getGradeLevel();
 
-	}
-
-	function checkRegistration(id, token) {
-		$scope.invited = Constants.FALSE;
-		$scope.edit_registration = Constants.FALSE;
-		if(id != '' && token != ''){
-			$scope.errors = Constants.FALSE;
-
-			apiService.getStudentDetails(id, token).success(function(response){
-				if(angular.equals(response.status, Constants.STATUS_OK)){
-					if(response.errors) {
-						$scope.errors = $scope.errorHandler(response.errors);
-					} else if(response.data){
-						$scope.invited = Constants.TRUE;
-						$scope.reg = response.data[0];
-						$scope.reg.username = $scope.reg.user.username;
-						$scope.reg.email = $scope.reg.user.email;
-						$scope.reg.school_name = $scope.reg.school.name;
-						$scope.getGradeLevel($scope.reg.country_id);
-						$scope.edit_registration = Constants.TRUE;
-
-						$("#birth_date").dateDropdowns({
-						    submitFieldName: 'birth_date'
-						    , wrapperClass : 'birth-date-wrapper'
-						    , defaultDate: $scope.reg.birth_date
-						    , minAge: Constants.MIN_AGE
-						    , maxAge: Constants.MAX_AGE
-						});
-					}
-				}
-			}).error(function(response){
-				$scope.internalError();
-			});
-		} else {
-			$("#birth_date").dateDropdowns({
-			    submitFieldName: 'birth_date',
-			    minAge: Constants.MIN_AGE,
-			    maxAge: Constants.MAX_AGE
-			});
-		}
 	}
 
 	$scope.setCountryGrade = setCountryGrade;
