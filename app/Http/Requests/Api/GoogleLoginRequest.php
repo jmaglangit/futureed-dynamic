@@ -29,8 +29,8 @@ class GoogleLoginRequest extends ApiRequest {
 
 						return [
 							'google_app_id' => 'required|string
-								|unique:users,google_app_id,NULL,id,user_type,' . $this->__get('user_type'),
-							'email' => 'required|email|unique:users,email,NULL,id,user_type,'.$this->__get('user_type'),
+								|unique:users,google_app_id,NULL,id,deleted_at,NULL,user_type,' . $this->__get('user_type'),
+							'email' => 'required|email|unique:users,email,NULL,id,deleted_at,NULL,user_type,'.$this->__get('user_type'),
 							'first_name' => 'required|min:2|max:64|regex:'. config('regex.name'),
 							'last_name' => 'required|min:2|max:64|regex:'. config('regex.name'),
 							'country_id' => 'required_if:user_type,'. config('futureed.student')
