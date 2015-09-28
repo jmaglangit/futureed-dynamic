@@ -145,8 +145,6 @@ function FutureedController($scope, $window, apiService, futureed) {
 		$("ul.form_password li").removeClass('selected');
 		$(target).addClass('selected');
 		$scope.image_id = $(target).find("#image_id").val();
-
-		console.log($scope.image_id);
 	}
 
 	/**

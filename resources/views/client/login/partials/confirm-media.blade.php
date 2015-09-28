@@ -38,6 +38,27 @@
 					<fieldset>
 						<legend class="legend">User Credentials</legend>
 						<div class="form-group">
+							<label class="col-xs-2 control-label">Username<span class="required">*</span></label>
+							<div class="col-xs-4">
+								{!! Form::text('username', ''
+									, array(
+										'class' => 'form-control'
+										, 'autocomplete' => 'off'
+										, 'ng-class' => "{ 'required-field' : login.fields['username'] }"
+										, 'placeholder' => 'Username'
+										, 'ng-model' => 'login.record.username'
+										, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
+										, 'ng-change' => "login.checkUsername(login.record.username, futureed.CLIENT, futureed.FALSE)"
+									)
+								) !!}
+								
+								<div> 
+									<span ng-if="login.validation.u_error" class="error-msg-con">{! login.validation.u_error !}</span>
+									<i ng-if="login.validation.u_loading" class="fa fa-spinner fa-spin"></i>
+									<span ng-if="login.validation.u_success" class="error-msg-con success-color">{! futureed.MSG_U_AVAILABLE !}</span>
+								</div>
+							</div>
+							
 							<label class="col-xs-2 control-label">Email<span class="required">*</span></label>
 							<div class="col-xs-4">
 								{!! Form::text('email', ''

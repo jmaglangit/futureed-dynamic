@@ -59,6 +59,8 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 	$scope.$on('confirm-media', checkMediaLogin);
 
 	function checkMediaLogin(event, data) {
+		self.setActive('confirm_media');
+
 		if(data.confirm) {
 			if(angular.equals(data.media_type, Constants.GOOGLE)) {
 				self.getGoogleDetails(function(response) {
@@ -68,11 +70,9 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 
 					// apply before showing page
 					$scope.$apply();
-					self.setActive('confirm_media');
 				});
 			} else {
 				self.record = data;
-				self.setActive('confirm_media');
 			}
 		}
 	}
