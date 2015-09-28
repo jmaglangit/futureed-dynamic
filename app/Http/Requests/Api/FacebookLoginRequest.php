@@ -42,7 +42,7 @@ class FacebookLoginRequest extends ApiRequest {
 							'user_type' => 'required|in:'. config('futureed.client') . ',' . config('futureed.student'),
 
 							//Student
-							'birth_date' => 'required_if:user_type,' . config('futureed.student').'|date',
+							'birth_date' => 'required_if:user_type,' . config('futureed.student').'|date|before:-14 year',
 							'grade_code' => 'required_if:user_type,' . config('futureed.student').'|exists:grades,code',
 							'gender' => 'required_if:user_type,' . config('futureed.student').'|in:Male,Female',
 
@@ -73,7 +73,7 @@ class FacebookLoginRequest extends ApiRequest {
 
 						return [
 							'facebook_app_id' => 'required|string
-								|exists:users,facebook_app_id,deleted_at,NULL,is_account_activated,0,is_account_locked,0,user_type,'
+								|exists:users,facebook_app_id,deleted_at,NULL,is_account_activated,1,is_account_locked,0,user_type,'
 								. $this->__get('user_type'),
 							'user_type' => 'required|in:'. config('futureed.client') . ',' . config('futureed.student')
 						];
@@ -96,7 +96,8 @@ class FacebookLoginRequest extends ApiRequest {
 			'zip.max' => config('futureed-error.error_messages.2045'),
 			'school_country_id.required' => config('futureed-error.error_messages.2603'),
 			'school_country_id.numeric' => config('futureed-error.error_messages.2604'),
-			'contact_number.regex' => config('futureed-error.error_messages.2115')
+			'contact_number.regex' => config('futureed-error.error_messages.2115'),
+			'birth_date.before' => config('futureed-error.error_messages.2028')
 		];
 	}
 
