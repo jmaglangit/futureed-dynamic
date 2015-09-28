@@ -71,7 +71,8 @@ class FacebookLoginController extends ApiController {
 			'country_id',
 			'state',
 			'city',
-			'grade_code'
+			'grade_code',
+			'username'
 		);
 
 		$client_data = $request->only(
@@ -85,7 +86,8 @@ class FacebookLoginController extends ApiController {
 			'city',
 			'state',
 			'country_id',
-			'zip'
+			'zip',
+			'username'
 		);
 
 		$school_data = $request->only(
