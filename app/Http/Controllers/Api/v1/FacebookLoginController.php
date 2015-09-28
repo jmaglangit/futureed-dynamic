@@ -5,6 +5,7 @@ use FutureEd\Http\Controllers\Controller;
 use FutureEd\Http\Requests\Api\FacebookLoginRequest;
 use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
+use FutureEd\Services\SchoolServices;
 use FutureEd\Services\StudentServices;
 use FutureEd\Services\UserServices;
 
@@ -17,6 +18,8 @@ class FacebookLoginController extends ApiController {
 	protected $student;
 
 	protected $student_service;
+
+	protected $school_service;
 
 	protected $user_service;
 
@@ -33,7 +36,8 @@ class FacebookLoginController extends ApiController {
 		StudentRepositoryInterface $studentRepositoryInterface,
 		StudentServices $studentServices,
 		ClientRepositoryInterface $clientRepositoryInterface,
-		UserServices $userServices
+		UserServices $userServices,
+		SchoolServices $schoolServices
 	){
 
 		$this->student = $studentRepositoryInterface;
@@ -43,6 +47,8 @@ class FacebookLoginController extends ApiController {
 		$this->client = $clientRepositoryInterface;
 
 		$this->user_service = $userServices;
+
+		$this->school_service = $schoolServices;
 	}
 
 	/**
@@ -74,13 +80,23 @@ class FacebookLoginController extends ApiController {
 			'last_name',
 			'email',
 			'user_type',
-			'birth_date',
 			'client_role',
 			'street_address',
 			'city',
 			'state',
 			'country_id',
 			'zip'
+		);
+
+		$school_data = $request->only(
+			'school_name',
+			'school_address',
+			'school_city',
+			'school_state',
+			'school_zip',
+			'contact_name',
+			'contact_number',
+			'school_country_id'
 		);
 
 		switch ($user_type['user_type']){
@@ -105,12 +121,23 @@ class FacebookLoginController extends ApiController {
 
 			case config('futureed.client'):
 
+				//Add New School
+				if ($client_data['client_role'] == config('futureed.principal')) {
+
+					// add school, return status
+					$school_response = $this->school_service->addSchool($school_data);
+
+					$client_data = array_add($client_data,'school_code',$school_response['message']);
+				}
+
 				//Registration for Client.
-				$response = $this->client->addClientFromFacebook($client_data);
+				$client_response = $this->client->addClientFromFacebook($client_data);
 
-				if($response){
 
-					return $this->respondWithData($response[0]->toArray());
+
+				if($client_response){
+
+					return $this->respondWithData($client_response[0]->toArray());
 
 				}else{
 
