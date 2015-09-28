@@ -73,7 +73,7 @@ class FacebookLoginRequest extends ApiRequest {
 
 						return [
 							'facebook_app_id' => 'required|string
-								|exists:users,facebook_app_id,deleted_at,NULL,is_account_activated,0,is_account_locked,0,user_type,'
+								|exists:users,facebook_app_id,deleted_at,NULL,is_account_activated,1,is_account_locked,0,user_type,'
 								. $this->__get('user_type'),
 							'user_type' => 'required|in:'. config('futureed.client') . ',' . config('futureed.student')
 						];
