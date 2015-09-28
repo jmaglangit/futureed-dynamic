@@ -30,7 +30,7 @@ class FacebookLoginRequest extends ApiRequest {
 					case 'api.v1.registration.facebook':
 
 						return [
-							'facebook_app_id' => 'required|integer
+							'facebook_app_id' => 'required|string
 								|unique:users,facebook_app_id,NULL,id,user_type,' . $this->__get('user_type'),
 							'email' => 'required|email|unique:users,email,NULL,id,user_type,'.$this->__get('user_type'),
 							'user_type' => 'required|in:'. config('futureed.client') . ',' . config('futureed.student'),
@@ -52,7 +52,7 @@ class FacebookLoginRequest extends ApiRequest {
 					case 'api.v1.login.facebook':
 
 						return [
-							'facebook_app_id' => 'required|integer
+							'facebook_app_id' => 'required|string
 								|exists:users,facebook_app_id,deleted_at,NULL,is_account_activated,0,is_account_locked,0,user_type,'
 								. $this->__get('user_type'),
 							'user_type' => 'required|in:'. config('futureed.client') . ',' . config('futureed.student')
