@@ -74,13 +74,23 @@ class FacebookLoginController extends ApiController {
 			'last_name',
 			'email',
 			'user_type',
-			'birth_date',
 			'client_role',
 			'street_address',
 			'city',
 			'state',
 			'country_id',
 			'zip'
+		);
+
+		$school_data = $request->only(
+			'school_name',
+			'school_address',
+			'school_city',
+			'school_state',
+			'school_zip',
+			'contact_name',
+			'contact_number',
+			'school_country_id'
 		);
 
 		switch ($user_type['user_type']){
@@ -106,11 +116,18 @@ class FacebookLoginController extends ApiController {
 			case config('futureed.client'):
 
 				//Registration for Client.
-				$response = $this->client->addClientFromFacebook($client_data);
+				$client_response = $this->client->addClientFromFacebook($client_data);
 
-				if($response){
+				//Add New School
+				if ($client_data['client_role'] == config('futureed.principal')) {
 
-					return $this->respondWithData($response[0]->toArray());
+					// add school, return status
+					$school_response = $this->school->addSchool($school_data);
+				}
+
+				if($client_response){
+
+					return $this->respondWithData($client_response[0]->toArray());
 
 				}else{
 
