@@ -90,8 +90,16 @@ class FacebookLoginController extends ApiController {
 				//Registration of Student.
 				$response = $this->student->addStudentFromFacebook($student_data);
 
-				return ($response) ?
-					$this->respondWithData(['id' => $response->id]) : $this->respondErrorMessage(7000) ;
+				if($response){
+
+					return $this->respondWithData(
+						$this->student_service->getStudentDetails($response->id)
+					);
+
+				}else{
+
+					return $this->respondErrorMessage(7000);
+				}
 
 				break;
 
@@ -100,8 +108,14 @@ class FacebookLoginController extends ApiController {
 				//Registration for Client.
 				$response = $this->client->addClientFromFacebook($client_data);
 
-				return ($response) ?
-					$this->respondWithData(['id' => $response->id]) : $this->respondErrorMessage(7000) ;
+				if($response){
+
+					return $this->respondWithData($response[0]->toArray());
+
+				}else{
+
+					return $this->respondErrorMessage(7000);
+				}
 
 				break;
 
