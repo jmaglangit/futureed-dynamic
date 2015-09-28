@@ -54,6 +54,26 @@
 					'as' => 'student.login.set_password'
 					, 'uses' => 'FutureLesson\Student\LoginController@set_password'
 				]);
+
+			Routes::get('/confirm-media', [ 
+					'as' => 'student.login.confirm_media'
+					, 'uses' => 'FutureLesson\Student\LoginController@confirm_media'
+				]);
+
+			Routes::get('/enter-password', [ 
+					'as' => 'student.login.enter_password'
+					, 'uses' => 'FutureLesson\Student\LoginController@enter_password'
+				]);
+
+			Routes::get('/index-form', [ 
+					'as' => 'student.login.index_form'
+					, 'uses' => 'FutureLesson\Student\LoginController@index_form'
+				]);
+
+			Routes::get('/registration-form', [ 
+					'as' => 'student.login.registration_form'
+					, 'uses' => 'FutureLesson\Student\LoginController@registration_form'
+				]);
 		});
 
 		Routes::group([

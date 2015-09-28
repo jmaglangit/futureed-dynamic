@@ -18,29 +18,12 @@ function FutureedController($scope, $window, apiService, futureed) {
 	/**
 	* Common API calls
 	*/
-	$scope.errorHandler = errorHandler;
-	$scope.internalError = internalError;
-
-	$scope.goHome = goHome;
 	$scope.highlight = highlight;
 	$scope.checkAvailability = checkAvailability;
 	$scope.checkEmailAvailability = checkEmailAvailability;
 	$scope.getAnnouncement = getAnnouncement;
 
-	$scope.beforeDateRender = beforeDateRender;
-	$scope.checkRegistration = checkRegistration;
-
-	function beforeDateRender($dates){
-		maxDate = new Date().setHours(0,0,0,0); // Set minimum date to whatever you want here
-
-		for(d in $dates){        
-				if($dates[d].utcDateValue > maxDate){
-						$dates[d].selectable = false;
-				}
-		}
-	}
-
-	function errorHandler(errors, flag) {
+	$scope.errorHandler = function(errors, flag) {
 		$scope.errors = [];
 
 		if(angular.isArray(errors)) {
@@ -74,7 +57,7 @@ function FutureedController($scope, $window, apiService, futureed) {
 		return $scope.errors;
 	}
 
-	function internalError() {
+	$scope.internalError = function() {
 		$scope.errors = [Constants.MSG_INTERNAL_ERROR];
 		$("html, body").animate({ scrollTop: 0 }, "slow");
 
@@ -157,10 +140,6 @@ function FutureedController($scope, $window, apiService, futureed) {
 
 	$scope.div_unblock = function(id) {
 		$("#" + id).unblock();
-	}
-
-	function goHome() {
-		
 	}
 
 	function highlight(e) {
@@ -273,11 +252,6 @@ function FutureedController($scope, $window, apiService, futureed) {
 	* Student Page with API calls
 	*/
 	// Login 
-	$scope.validateUser = validateUser;
-	$scope.validatePassword = validatePassword;
-	$scope.getLoginPassword = getLoginPassword;
-	$scope.selectPassword = selectPassword;
-	$scope.cancelLogin = cancelLogin;
 	$scope.getUserDetails = getUserDetails;
 
 	//Forgot Password
@@ -288,7 +262,6 @@ function FutureedController($scope, $window, apiService, futureed) {
 
 	// Registration
 	$scope.showModal = showModal;
-	$scope.validateRegistration = validateRegistration;
 	$scope.studentConfirmRegistration = studentConfirmRegistration;
 	$scope.studentResendConfirmation = studentResendConfirmation;
 	$scope.saveNewPassword = saveNewPassword;
@@ -303,37 +276,9 @@ function FutureedController($scope, $window, apiService, futureed) {
 	$scope.highlightAvatar = highlightAvatar;
 	$scope.selectAvatar = selectAvatar;
 
-	/**
-	* Validate Student Email Address / Username
-	* 
-	* @Params 
-	*   username - the username
-	*/
-	function validateUser() {
-		$scope.errors = Constants.FALSE;
-		$scope.ui_block();
-		apiService.validateUser($scope.username).success(function(response) {
-			if(response.status == Constants.STATUS_OK) {
-				if(response.errors) {
-					$scope.errorHandler(response.errors);
-				} else if(response.data){
-					$scope.id = response.data.id;
-					$scope.getLoginPassword();
-					$scope.enter_pass = Constants.TRUE;
-				} 
-			}
-
-			$scope.ui_unblock();
-		}).error(function(response) {
-			$scope.ui_unblock();
-			$scope.internalError();
-		});
-	}
-
-	function getLoginPassword() {
-		$scope.id = ($scope.id) ? $scope.id : $scope.user.id;
-		apiService.getLoginPassword($scope.id).success(function (response) {
-			if(response.status == Constants.STATUS_OK) {
+	$scope.getLoginPassword = function(id) {
+		apiService.getLoginPassword(id).success(function (response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					$scope.errorHandler(response.errors);
 				} else if(response.data) {
@@ -343,55 +288,6 @@ function FutureedController($scope, $window, apiService, futureed) {
 		}).error(function(response) {
 			$scope.internalError();
 		});
-	}
-
-	/**
-	* Validate Selected Image Password
-	* 
-	* @Params 
-	*   id        - the student id
-	*   image_id  - selected image password
-	*/
-	function validatePassword() {
-		$scope.errors = Constants.FALSE;
-
-		$scope.ui_block();
-		apiService.validatePassword($scope.id, $scope.image_id).success(function(response) {
-			if(response.status == Constants.STATUS_OK) {
-				if(response.errors) {
-					$scope.errorHandler(response.errors);
-					$scope.image_pass = shuffle($scope.image_pass);
-				} else if(response.data){
-					$scope.user = JSON.stringify(response.data);
-					$("input[name='user_data']").val(JSON.stringify(response.data));
-					$("#password_form").submit();
-				} 
-			}
-
-			$scope.ui_unblock();
-		}).error(function(response) {
-			$scope.ui_unblock();
-			$scope.internalError();
-		});
-	} 
-
-	/**
-	* Highlight the selected image password; Validate.
-	*
-	*/
-	function selectPassword(e) {
-			$scope.highlight(e);
-			$scope.validatePassword();
-	}
-
-	/**
-	* Cancel selection of Image Password. 
-	*/
-	function cancelLogin() {
-		$scope.errors = Constants.FALSE;
-		$scope.enter_pass = Constants.FALSE;
-		$scope.id = "";
-		$scope.username = "";
 	}
 
 	function getUserDetails() {
@@ -562,88 +458,6 @@ function FutureedController($scope, $window, apiService, futureed) {
 				keyboard: Constants.FALSE,
 				show    : Constants.TRUE
 		});
-	}
-
-	function validateRegistration(reg, terms, flag) {
-		$scope.errors = Constants.FALSE;
-		$scope.terms = terms;
-
-		$('#registration_form input').removeClass('required-field');
-		$('#registration_form select').removeClass('required-field');
-
-		if($scope.e_error || $scope.u_error) {
-			$("html, body").animate({ scrollTop: 320 }, "slow");
-		} else {
-			if(!terms) {
-				$scope.errors = ["Please accept the terms and conditions."];
-				$("html, body").animate({ scrollTop: 0 }, "slow");
-				return;
-			}
-
-			$scope.reg = (reg) ? reg : {};
-			$scope.base_url = $("#base_url_form input[name='base_url']").val();
-			$scope.reg.callback_uri = $scope.base_url + Constants.URL_REGISTRATION(angular.lowercase(Constants.STUDENT));
-
-			var bdate = $("#registration_form #birth_date").val();
-
-			if($scope.reg && bdate) {
-				
-				var day = $("#registration_form .day").val();
-				var month = $("#registration_form .month").val();
-				var year = $("#registration_form .year").val();
-
-				$scope.reg.birth_date = year + month + day;
-				$scope.reg.school_code = -1;
-
-			}else {
-				$("#registration_form select[name='birth_date_[day]']").addClass("required-field");
-				$("#registration_form select[name='birth_date_[month]']").addClass("required-field");
-				$("#registration_form select[name='birth_date_[year]']").addClass("required-field");
-			}
-			
-			$scope.ui_block();
-			if(flag == 'add'){
-				apiService.validateRegistration($scope.reg).success(function(response) {
-					if(response.status == Constants.STATUS_OK) {
-						if(response.errors) {
-							$scope.errorHandler(response.errors);
-
-							angular.forEach(response.errors, function(value, key) {
-								$("#registration_form input[name='" + value.field +"']").addClass("required-field");
-								$("#registration_form select[name='" + value.field +"']").addClass("required-field");
-							});
-						} else if(response.data){
-							$scope.success = Constants.TRUE;
-							$scope.email = $scope.reg.email;
-						}
-					}
-					$scope.ui_unblock();
-				}).error(function(response) {
-					$scope.internalError();
-					$scope.ui_unblock();
-				});
-			}else {
-				apiService.editRegistration($scope.reg).success(function(response) {
-					if(response.status == Constants.STATUS_OK) {
-						if(response.errors) {
-							$scope.errorHandler(response.errors);
-
-							angular.forEach(response.errors, function(value, key) {
-								$("#registration_form input[name='" + value.field +"']").addClass("required-field");
-								$("#registration_form select[name='" + value.field +"']").addClass("required-field");
-							});
-						} else if(response.data){
-							$scope.success = Constants.TRUE;
-							$scope.email = $scope.reg.email;
-						}
-					}
-					$scope.ui_unblock();
-				}).error(function(response) {
-					$scope.internalError();
-					$scope.ui_unblock();
-				});
-			}
-		}
 	}
 
 	function studentConfirmRegistration() {
@@ -890,46 +704,6 @@ function FutureedController($scope, $window, apiService, futureed) {
 
 	}
 
-	function checkRegistration(id, token) {
-		$scope.invited = Constants.FALSE;
-		$scope.edit_registration = Constants.FALSE;
-		if(id != '' && token != ''){
-			$scope.errors = Constants.FALSE;
-
-			apiService.getStudentDetails(id, token).success(function(response){
-				if(angular.equals(response.status, Constants.STATUS_OK)){
-					if(response.errors) {
-						$scope.errors = $scope.errorHandler(response.errors);
-					} else if(response.data){
-						$scope.invited = Constants.TRUE;
-						$scope.reg = response.data[0];
-						$scope.reg.username = $scope.reg.user.username;
-						$scope.reg.email = $scope.reg.user.email;
-						$scope.reg.school_name = $scope.reg.school.name;
-						$scope.getGradeLevel($scope.reg.country_id);
-						$scope.edit_registration = Constants.TRUE;
-
-						$("#birth_date").dateDropdowns({
-						    submitFieldName: 'birth_date'
-						    , wrapperClass : 'birth-date-wrapper'
-						    , defaultDate: $scope.reg.birth_date
-						    , minAge: Constants.MIN_AGE
-						    , maxAge: Constants.MAX_AGE
-						});
-					}
-				}
-			}).error(function(response){
-				$scope.internalError();
-			});
-		} else {
-			$("#birth_date").dateDropdowns({
-			    submitFieldName: 'birth_date',
-			    minAge: Constants.MIN_AGE,
-			    maxAge: Constants.MAX_AGE
-			});
-		}
-	}
-
 	$scope.setCountryGrade = setCountryGrade;
 	function setCountryGrade() {
 	  	// Set Grade Code to empty string
@@ -1061,4 +835,6 @@ function FutureedController($scope, $window, apiService, futureed) {
 
 		apiService.updateUserSession($scope.user);
 	} 
+
+	
 };

@@ -1,6 +1,6 @@
 var services = angular.module('futureed.services', []);
 
-	services.factory('apiService', function($http) {
+	services.factory('apiService', function($http, $q) {
 		var futureedAPI = {};
 		var futureedAPIUrl = '/api/v1/';
 
@@ -59,15 +59,6 @@ var services = angular.module('futureed.services', []);
 			});
 		}
 
-
-		futureedAPI.validateUser = function(username) {
-			return $http({
-				method 	: 'POST'
-				, data	: { username : username} 
-				, url	: futureedAPIUrl + 'student/login/username'
-			});
-		}
-
 		futureedAPI.getLoginPassword = function(id) {
 			return $http({
 				method	: 'POST'
@@ -80,14 +71,6 @@ var services = angular.module('futureed.services', []);
 			return $http({
 				method	: 'GET'
 				, url	: futureedAPIUrl + 'student/password/image'
-			});
-		}
-
-		futureedAPI.validatePassword = function(id, image_id) {
-			return $http({
-				method	: 'POST'
-				, data	: {id : id, image_id : image_id}
-				, url	: futureedAPIUrl + 'student/login/password'
 			});
 		}
 
@@ -179,14 +162,6 @@ var services = angular.module('futureed.services', []);
 			});
 		}
 
-		futureedAPI.validateRegistration = function(registration) {
-			return $http({
-				method	: 'POST'
-				, data	: registration
-				, url	: futureedAPIUrl + 'student/register'
-			});
-		}
-
 		futureedAPI.getAvatarImages = function(gender) {
 			return $http({
 				method	: 'POST'
@@ -254,14 +229,6 @@ var services = angular.module('futureed.services', []);
 			});
 		}
 
-		futureedAPI.editRegistration = function(data) {
-			return $http({
-				method 	: Constants.METHOD_PUT
-				, data 	: data 	
-				, url	: futureedAPIUrl + 'client/manage/update-student/' + data.id
-			});
-		}
-
 		futureedAPI.getAgeGroup = function() {
 			return $http({
 				method 	: Constants.METHOD_GET
@@ -285,11 +252,26 @@ var services = angular.module('futureed.services', []);
 		}
 
 		futureedAPI.listClass = function(student_id) {
-		return $http({
-			method 	: Constants.METHOD_GET
-			, url 	: futureedAPIUrl + 'class-student/student-class-list?student_id=' + student_id
-		});
-	}
+			return $http({
+				method 	: Constants.METHOD_GET
+				, url 	: futureedAPIUrl + 'class-student/student-class-list?student_id=' + student_id
+			});
+		}
+
+		futureedAPI.getMyLastName = function() {
+            var deferred = $q.defer();
+            FB.api('/me', {
+                fields: 'last_name'
+            }, function(response) {
+                if (!response || response.error) {
+                    deferred.reject('Error occured');
+                } else {
+                    deferred.resolve(response);
+                }
+            });
+            
+            return deferred.promise;
+        }
 
 		return futureedAPI;
 	});

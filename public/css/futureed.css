@@ -265,7 +265,7 @@ body {/*background: radial-gradient(transparent 50%, rgba(0, 0, 0, 0.3) 100%), l
 .form_content{margin-top: 0;}
 form label{font-weight: normal;}
 
-.block_bottom{background: #f8f3f0; box-shadow: 0 0 0 30px #f8f3f0; margin-top: 20px; display: inline-block; width: 100%;}
+.block_bottom{background: #f8f3f0; box-shadow: 0 0 0 30px #f8f3f0; display: inline-block; width: 100%;}
 
 /*----- BOOTSTRAP -----*/
 .form-control {
@@ -305,6 +305,8 @@ form label{font-weight: normal;}
 .register_student {
 	text-align: left;
 	padding: 0;
+	margin: 60px auto;
+	width: 1000px;
 }
 .register_student .form-header img {
 	border-radius: 100%;
@@ -338,9 +340,9 @@ form label{font-weight: normal;}
 }
 .info-box h4{
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-weight: 200;
     font-size: 16px;
 	margin-top: 0;
+	font: bold;
 }
 .info-box p{
 	margin-bottom: 0;
@@ -348,6 +350,7 @@ form label{font-weight: normal;}
 .info-box.rd{
 	background: #FBE6E1;
 	border: 1px solid #F8C8BD;
+	border-radius: 8px;
 }
 .form-content legend{
 	padding-bottom: 10px;
@@ -750,10 +753,16 @@ footer{font:normal 12px/30px arial; }
 	box-shadow: none;
 }
 
-.error-msg-con{
+.error-msg-con {
 	font-style: italic;
 	font-size: 12px;
 	color: red;
+}
+
+.success-msg-con {
+	font-style: italic;
+	font-size: 12px;
+	color: #3c763d
 }
 
 /**
@@ -1149,7 +1158,7 @@ span.step {
 }
 
 .form-header > .media {
-	margin-left: 120px;
+	margin-left: 15px;
 }
 
 .margin-10-bot{
