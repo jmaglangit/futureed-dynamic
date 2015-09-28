@@ -60,7 +60,6 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 
 	function checkMediaLogin(event, data) {
 		self.setActive('confirm_media');
-		console.log(self.record);
 
 		if(data.confirm) {
 			if(angular.equals(data.media_type, Constants.GOOGLE)) {
@@ -215,13 +214,6 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 			$scope.ui_unblock();
 		});
 	} 
-
-	self.checkStudentAge = function() {
-		var birth_date = $("input#birth_date").val();
-		self.record.birth_date = $filter(Constants.DATE)(new Date(birth_date), Constants.DATE_YYYYMMDD);
-
-		console.log(birth_date);
-	}
 
 	/**
 	* Student registration
