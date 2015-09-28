@@ -9,8 +9,13 @@ $(document).on('submit', '#forgot_success_form', function() {
 	return false;
 });
 
-$("#birth_date").change(function(){
+$("input#birth_date").change(function(){
+    
+});
+
+function checkAge() {
     var bdate = $("#birth_date").val();
+
     if(bdate) {
         var str=bdate.split('-');
         var firstdate = new Date(str[0],str[1],str[2]);
@@ -26,6 +31,6 @@ $("#birth_date").change(function(){
             });
         }
     }
-});
+}
 
 

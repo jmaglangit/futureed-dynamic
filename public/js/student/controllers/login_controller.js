@@ -60,6 +60,7 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 
 	function checkMediaLogin(event, data) {
 		self.setActive('confirm_media');
+		console.log(self.record);
 
 		if(data.confirm) {
 			if(angular.equals(data.media_type, Constants.GOOGLE)) {
@@ -75,6 +76,9 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 				self.record = data;
 			}
 		}
+
+		// since API is strict with Gender case. Must be 'Male' or 'Female'; otherwise API will respond an error
+		self.record.gender = (angular.equals(angular.lowercase(Constants.MALE), angular.lowercase(self.record.gender))) ? Constants.MALE : Constants.FEMALE;
 	}
 
 	self.confirmMediaDetails = function() {
@@ -120,7 +124,7 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 
 	self.proceedToDashboard = function() {
 		$("#process_form input[name='user_data']").val($scope.user);
-		// $("#process_form").submit();
+		$("#process_form").submit();
 	}
 
 	function showModal(id) {
@@ -211,6 +215,13 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 			$scope.ui_unblock();
 		});
 	} 
+
+	self.checkStudentAge = function() {
+		var birth_date = $("input#birth_date").val();
+		self.record.birth_date = $filter(Constants.DATE)(new Date(birth_date), Constants.DATE_YYYYMMDD);
+
+		console.log(birth_date);
+	}
 
 	/**
 	* Student registration

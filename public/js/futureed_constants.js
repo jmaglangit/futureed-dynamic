@@ -197,6 +197,10 @@ var Constants = {
 	, ENABLED					: "Enabled"
 	, DISABLED					: "Disabled"
 
+	// To avoid scenario of invalid gender, API rejects 'male' or 'female'
+	, MALE						: "Male"
+	, FEMALE					: "Female"
+
 	, VOLUME					: "Volume"
 
 	/*Birthdate dropdown config*/
@@ -205,7 +209,12 @@ var Constants = {
 	, MAX_AGE					: 99
 	, AGE_RANGE					: 14
 
-	, DI_PPA_BF 				: "430329777152115"
+	// For development serve
+	// , DI_PPA_BF 				: "430329777152115"
+	
+	// For developer's local machine; comment on PR
+	, DI_PPA_BF 				: "943775322355104"
+
 	, DI_TNEILC_ELGOOG 			: "501345076089-e05ok200b81g1560d00moln30n60k9nm.apps.googleusercontent.com"
 
 	, FACEBOOK 					: "Facebook"

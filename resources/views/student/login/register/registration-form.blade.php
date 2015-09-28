@@ -54,7 +54,9 @@
 					<div class="form-group">
 						<label class="col-xs-2 control-label">Birthday<span class="required">*</span></label>
 						<div class="col-xs-4">
-							<input type="hidden" id="birth_date" ng-init="login.setDropdown()">
+							<input type="hidden" id="birth_date" 
+								onchange="checkAge()"
+								ng-init="login.setDropdown()">
 						</div>
 						<label class="col-xs-2 control-label">Gender<span class="required">*</span></label>
 						<div class="col-xs-4">

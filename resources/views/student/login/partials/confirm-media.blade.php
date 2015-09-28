@@ -43,15 +43,18 @@
 					<div class="form-group">
 						<label class="col-xs-2 control-label">Birthday<span class="required">*</span></label>
 						<div class="col-xs-4">
-							<input type="hidden" id="birth_date" ng-init="login.setDropdown(login.record.birth_date)">
+							<input type="hidden" id="birth_date" 
+								onchange="checkAge()"
+								ng-init="login.setDropdown(login.record.birth_date)">
 						</div>
 						<label class="col-xs-2 control-label">Gender<span class="required">*</span></label>
 						<div class="col-xs-4">
 							{!! Form::select('gender'
 								, array(
 									'' => '-- Select Gender --'
-									, 'male' => 'Male'
-									, 'female' => 'Female')
+									, 'Male' => 'Male'
+									, 'Female' => 'Female'
+								)
 								, ''
 								, array(
 									'class' => 'form-control'
@@ -218,6 +221,29 @@
 			</div>
 		{!! Form::close() !!}
 	</div>	
+
+	<div id="invalid_student" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myMediumModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-xs">
+			<div class="modal-content">
+				<div class="modal-header">
+					
+				</div>
+				<div class="modal-body">
+					<h5>Students 13 years old or younger cannot register. Please ask a Parent to sign up in the <a href="{!! route('client.registration') !!}">client site</a></h5>
+				</div>
+				<div class="modal-footer">
+					<div class="btncon col-xs-8 col-xs-offset-4 pull-left">
+						{!! Form::button('Cancel'
+							, array(
+								'class' => 'btn btn-gold btn-medium'
+								, 'data-dismiss' => 'modal'
+							)
+						) !!}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 
 	@include('student.login.terms-and-condition')
     @include('student.login.privacy-policy')
