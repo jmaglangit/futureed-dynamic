@@ -35,9 +35,9 @@ class ClientRegisterRequest extends ApiRequest {
 					'client_role' => 'required|in:' . config('futureed.parent').','.config('futureed.principal').','. config('futureed.teacher'),
 
 					'city' => 'required_if:client_role,'.config('futureed.parent').'|max:128|regex:'.config('regex.state_city'),
-					'state' => 'required_if:client_role,'.config('futureed.principal').'|max:128|regex:'.config('regex.state_city'),
+					'state' => 'max:128|regex:'.config('regex.state_city'),
 					'country' => 'string|max:128',
-					'country_id' => 'required|numeric|exists:countries,id',
+					'country_id' => 'required_if:client_role,'. config('futureed.parent').','. config('futureed.teacher').'|numeric|exists:countries,id',
 					'zip' => 'max:10|regex:'. config('regex.zip_code'),
 
 					//Parent
