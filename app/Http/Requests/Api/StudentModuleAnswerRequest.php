@@ -75,6 +75,7 @@ class StudentModuleAnswerRequest extends ApiRequest
             'question_id.integer' => 'Question must be a number.',
             'answer_id.required' => 'Answer is required.',
             'answer_id.integer' => 'Answer must be a number.',
+            'answer_id.exists' => 'The selected answer is invalid.',
             'student_id.required' => 'Student is required.',
             'student_id.integer' => 'Student must be a number.',
         ];
