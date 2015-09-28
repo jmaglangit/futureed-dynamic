@@ -480,6 +480,9 @@ class ClientRepository implements ClientRepositoryInterface
 
             $data = array_add($data, 'name',$data['first_name'] . ' ' . $data['last_name']);
 
+            //Set client to active.
+            $data = array_add($data, 'is_account_activated', 1);
+
             //Default to USA -- No country code from login response.
             $data['country_id'] = ($data['country_id'] == null ) ?  840 : $data['country_id'];
 
@@ -533,6 +536,9 @@ class ClientRepository implements ClientRepositoryInterface
             $data = array_add($data,'username','NA');
 
             $data = array_add($data, 'name',$data['first_name'] . ' ' . $data['last_name']);
+
+            //Set client to active.
+            $data = array_add($data, 'is_account_activated', 1);
 
             //Default to USA -- No country code from login response.
             $data['country_id'] = ($data['country_id'] == null ) ?  840 : $data['country_id'];
