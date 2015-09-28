@@ -33,7 +33,9 @@ class FacebookLoginRequest extends ApiRequest {
 							'email' => 'required|email|unique:users,email,NULL,id,user_type,'.$this->__get('user_type'),
 							'first_name' => 'required|min:2|max:64|regex:'. config('regex.name'),
 							'last_name' => 'required|min:2|max:64|regex:'. config('regex.name'),
-							'country_id' => 'required|exists:countries,id',
+							'country_id' => 'required_if:user_type,'. config('futureed.student')
+								. '|required_if:client_role,' . config('futureed.parent')
+								.'|exists:countries,id',
 							'city' => 'required_if:user_type,'. config('futureed.student')
 								. '|required_if:client_role,' . config('futureed.parent'),
 
@@ -54,7 +56,7 @@ class FacebookLoginRequest extends ApiRequest {
 							'street_address' => 'required_if:client_role,'. config('futureed.parent').'|string|max:128',
 
 							//Principal
-							'state' => 'required_if:client_role,'.config('futureed.principal').'|max:128|regex:'.config('regex.state_city'),
+							'state' => 'max:128|regex:'.config('regex.state_city'),
 							'contact_name' => 'required_if:client_role,'.config('futureed.principal').'|min:2|regex:'. config('regex.name') .'|max:128',
 							'school_name' => 'required_if:client_role,'.config('futureed.principal').'|string|max:128',
 							'school_address' => 'required_if:client_role,'.config('futureed.principal').'|String|max:128',

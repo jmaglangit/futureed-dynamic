@@ -119,7 +119,7 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 
 	self.proceedToDashboard = function() {
 		$("#process_form input[name='user_data']").val($scope.user);
-		$("#process_form").submit();
+		// $("#process_form").submit();
 	}
 
 	function showModal(id) {

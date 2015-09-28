@@ -70,7 +70,7 @@ function MediaLoginController($scope, $filter, $window, MediaLoginService) {
 				} else if(response.data) {
 					$scope.user = JSON.stringify(response.data);
 					$("input[name='user_data']").val(JSON.stringify(response.data));
-					$("#media_form").submit();
+					$("#process_form").submit();
 				} 
 			}
 
@@ -137,7 +137,7 @@ function MediaLoginController($scope, $filter, $window, MediaLoginService) {
 				} else if(response.data){
 					$scope.user = JSON.stringify(response.data);
 					$("input[name='user_data']").val(JSON.stringify(response.data));
-					$("#media_form").submit();
+					$("#process_form").submit();
 				} 
 			}
 

@@ -47,6 +47,8 @@ function LoginController($scope, $controller, apiService, clientLoginApiService,
 	$scope.$on('confirm-media', checkMediaLogin);
 
 	function checkMediaLogin(event, data) {
+		self.setActive('confirm_media');
+
 		if(data.confirm) {
 			if(angular.equals(data.media_type, Constants.GOOGLE)) {
 				self.getGoogleDetails(function(response) {
@@ -55,12 +57,10 @@ function LoginController($scope, $controller, apiService, clientLoginApiService,
 					self.record.last_name = response.family_name;
 
 					// apply before showing page
-					self.setActive('confirm_media');
 					$scope.$apply();
 				});
 			} else {
 				self.record = data;
-				self.setActive('confirm_media');
 			}
 		}
 	}
@@ -76,6 +76,7 @@ function LoginController($scope, $controller, apiService, clientLoginApiService,
 		}
 
 		self.record.user_type = Constants.CLIENT;
+		delete self.record.gender;
 
 		$scope.ui_block();
 		MediaLoginService.registerMedia(self.record, angular.lowercase(self.record.media_type)).success(function(response) {
@@ -97,6 +98,11 @@ function LoginController($scope, $controller, apiService, clientLoginApiService,
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
+	}
+
+	self.proceedToDashboard = function() {
+		$("#process_form input[name='user_data']").val($scope.user);
+		$("#process_form").submit();
 	}
 
 	self.clientLogin = function() {

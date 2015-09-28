@@ -3,6 +3,10 @@
 @section('content')
 <div class="container login" ng-controller="LoginController as login" ng-cloak>
 	
+{!! Form::open(array('id' => 'process_form', 'method' => 'POST', 'route' => 'client.login.process')) !!}
+        {!! Form::hidden('user_data', '') !!}
+    {!! Form::close() !!}
+
 	<div template-directive template-url="{!! route('client.partials.base_url') !!}"></div>
 	
 	<div template-directive template-url="{!! route('client.login.login_form') !!}"></div>

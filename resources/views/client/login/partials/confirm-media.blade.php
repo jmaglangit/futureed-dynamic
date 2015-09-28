@@ -60,6 +60,7 @@
 								{!! Form::text('first_name', ''
 									, array(
 										'class' => 'form-control'
+										, 'ng-class' => "{ 'required-field' : login.fields['first_name'] }"
 										, 'placeholder' => 'First Name'
 										, 'ng-model' => 'login.record.first_name'
 									)
@@ -70,6 +71,7 @@
 								{!! Form::text('last_name', ''
 									, array(
 										'class' => 'form-control'
+										, 'ng-class' => "{ 'required-field' : login.fields['last_name'] }"
 										, 'placeholder' => 'Last Name'
 										, 'ng-model' => 'login.record.last_name'
 									)
@@ -83,6 +85,7 @@
 								{!! Form::text('street_address', ''
 								, array(
 									'class' => 'form-control'
+									, 'ng-class' => "{ 'required-field' : login.fields['street_address'] }"
 									, 'placeholder' => 'Street Address'
 									, 'ng-model' => 'login.record.street_address'
 								)
@@ -96,6 +99,7 @@
 								{!! Form::text('city', ''
 									, array(
 										'class' => 'form-control'
+										, 'ng-class' => "{ 'required-field' : login.fields['city'] }"
 										, 'placeholder' => 'City'
 										, 'ng-model' => 'login.record.city'
 									)
@@ -106,6 +110,7 @@
 								{!! Form::text('state', ''
 									, array(
 										'class' => 'form-control'
+										, 'ng-class' => "{ 'required-field' : login.fields['state'] }"
 										, 'placeholder' => 'State'
 										, 'ng-model' => 'login.record.state'
 									)
@@ -119,6 +124,7 @@
 								{!! Form::text('zip', ''
 									, array(
 										'class' => 'form-control'
+										, 'ng-class' => "{ 'required-field' : login.fields['zip'] }"
 										, 'placeholder' => 'Postal Code'
 										, 'ng-model' => 'login.record.zip'
 									)
@@ -127,7 +133,10 @@
 
 							<label class="col-xs-2 control-label">Country<span class="required" ng-if="login.required">*</span></label>
 							<div class="col-xs-4" ng-init="getCountries()">
-								<select  name="country_id" class="form-control" ng-model="login.record.country_id">
+								<select  name="country_id" 
+									class="form-control" 
+									ng-class="{ 'required-field' : login.fields['country_id'] }"
+									ng-model="login.record.country_id">
 									<option value="">-- Select Country --</option>
 									<option ng-repeat="country in countries" ng-value="country.id">{! country.name!}</option>
 								</select>
@@ -144,6 +153,7 @@
 									{!! Form::text('school_name', ''
 										, array(
 											'class' => 'form-control'
+											, 'ng-class' => "{ 'required-field' : login.fields['school_name'] }"
 											, 'placeholder' => 'School Name'
 											, 'ng-model' => 'login.record.school_name'
 										)
@@ -157,6 +167,7 @@
 									{!! Form::text('school_address', ''
 										, array(
 											'class' => 'form-control'
+											, 'ng-class' => "{ 'required-field' : login.fields['school_address'] }"
 											, 'placeholder' => 'School Address'
 											, 'ng-model' => 'login.record.school_address'
 										)
@@ -170,6 +181,7 @@
 									{!! Form::text('school_city', ''
 										, array(
 											'class' => 'form-control'
+											, 'ng-class' => "{ 'required-field' : login.fields['school_city'] }"
 											, 'placeholder' => 'City'
 											, 'ng-model' => 'login.record.school_city'
 										)
@@ -180,6 +192,7 @@
 									{!! Form::text('school_state', ''
 										, array(
 											'class' => 'form-control'
+											, 'ng-class' => "{ 'required-field' : login.fields['school_state'] }"
 											, 'placeholder' => 'State'
 											, 'ng-model' => 'login.record.school_state'
 										)
@@ -193,15 +206,19 @@
 									{!! Form::text('school_zip', ''
 										, array(
 											'class' => 'form-control'
+											, 'ng-class' => "{ 'required-field' : login.fields['school_zip'] }"
 											, 'placeholder' => 'Postal Code'
-											, 'ng-model' => 'login.reg.school_zip'
+											, 'ng-model' => 'login.record.school_zip'
 										)
 									) !!}
 								</div>
 
 								<label class="col-xs-2 control-label">Country<span class="required">*</span></label>
 								<div class="col-xs-4" ng-init="getCountries()">
-									<select  name="school_country_id" class="form-control" ng-model="login.reg.school_country_id">
+									<select  name="school_country_id" 
+										class="form-control" 
+										ng-class="{ 'required-field' : login.fields['school_country_id'] }"
+										ng-model="login.record.school_country_id">
 										<option value="">-- Select Country --</option>
 										<option ng-repeat="country in countries" ng-value="country.id">{! country.name!}</option>
 									</select>
@@ -215,8 +232,9 @@
 									{!! Form::text('contact_name', ''
 										, array(
 											'class' => 'form-control'
+											, 'ng-class' => "{ 'required-field' : login.fields['contact_name'] }"
 											, 'placeholder' => 'Contact Person'
-											, 'ng-model' => 'login.reg.contact_name'
+											, 'ng-model' => 'login.record.contact_name'
 										)
 									) !!}
 								</div>
@@ -228,8 +246,9 @@
 									{!! Form::text('contact_number', ''
 										, array(
 											'class' => 'form-control'
+											, 'ng-class' => "{ 'required-field' : login.fields['contact_number'] }"
 											, 'placeholder' => 'Contact Number'
-											, 'ng-model' => 'login.reg.contact_number'
+											, 'ng-model' => 'login.record.contact_number'
 										)
 									) !!}
 								</div>
@@ -287,4 +306,32 @@
 	@include('client.login.terms-and-conditions')
 
 	@include('student.login.privacy-policy')
+</div>
+
+<div ng-if="login.active_confirm_success">
+	<div class="registration-container form-style form-narrow">
+		<div class="logo-container">
+			{!! Html::image('/images/logo-md.png') !!}
+		</div>
+
+		<div class="title title-student">Registration Success</div>
+
+		<div class="alert alert-success">
+			<p> Your email account has been successfully confirmed. </p>
+		</div>
+
+		<h4 class="title">
+			You will be receiving an email shortly by our Admin if your registration has been approved or not.
+		</h4>
+
+		<small> 
+			If you have not yet receive the email, please check your inbox or your spam folder.
+		</small>
+		
+		{!! Html::link(route('client.login'), 'Click here to Login'
+			, array(
+			'class' => 'btn btn-blue btn-medium'
+			) 
+		) !!}
+	</div>
 </div>
