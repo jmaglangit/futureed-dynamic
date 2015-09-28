@@ -262,8 +262,6 @@ function FutureedController($scope, $window, apiService, futureed) {
 
 	// Registration
 	$scope.showModal = showModal;
-	$scope.studentConfirmRegistration = studentConfirmRegistration;
-	$scope.studentResendConfirmation = studentResendConfirmation;
 	$scope.saveNewPassword = saveNewPassword;
 
 	// Profile
@@ -457,67 +455,6 @@ function FutureedController($scope, $window, apiService, futureed) {
 				backdrop: 'static',
 				keyboard: Constants.FALSE,
 				show    : Constants.TRUE
-		});
-	}
-
-	function studentConfirmRegistration() {
-		$scope.errors = Constants.FALSE;
-		$scope.user_type = Constants.STUDENT;
-		$scope.email = (!isStringNullorEmpty($scope.email)) ? $scope.email : $("#redirect_form input[name='email']").val();
-		$scope.confirmation_code = $("#registration_success_form input[name='confirmation_code']").val();
-
-		$scope.ui_block();
-		apiService.confirmCode($scope.email, $scope.confirmation_code, $scope.user_type).success(function(response) {
-			if(response.status == Constants.STATUS_OK) {
-				if(response.errors) {
-					$scope.errorHandler(response.errors);
-				} else if(response.data){
-					$("#redirect_form input[name='id']").val(response.data.id);
-					$("#redirect_form input[name='confirmation_code']").val($scope.confirmation_code);
-					$("#redirect_form").submit();
-				} 
-			}
-
-			$scope.ui_unblock();
-		}).error(function(response) {
-			$scope.internalError();
-			$scope.ui_unblock();
-		});
-	}
-
-	/**
-	* 
-	* 
-	* @Params
-	*   email     - the email; from scope or from link
-	*   user_type - Student
-	*/
-	function studentResendConfirmation() {
-		$scope.errors = Constants.FALSE;
-		$scope.user_type = Constants.STUDENT;
-		$scope.email = (!isStringNullorEmpty($scope.email)) ? $scope.email : $("#redirect_form input[name='email']").val();
-		$scope.base_url = $("#base_url_form input[name='base_url']").val();
-		$scope.resend_confirmation_url = $scope.base_url + Constants.URL_REGISTRATION(angular.lowercase($scope.user_type));
-
-		$scope.ui_block();
-		apiService.resendConfirmation($scope.email, $scope.user_type, $scope.resend_confirmation_url).success(function(response) {
-			if(response.status == Constants.STATUS_OK) {
-				if(response.errors) {
-					$scope.errorHandler(response.errors);
-
-					angular.forEach($scope.errors, function(value, key) {
-						if(angular.equals(value, Constants.MSG_ACC_CONFIRMED)) {
-							$scope.account_confirmed = Constants.TRUE;
-						}
-					});
-				} else if(response.data) {
-					$scope.resent = Constants.TRUE;
-				}
-			}
-			$scope.ui_unblock();
-		}).error(function(response) {
-			$scope.internalError();
-			$scope.ui_unblock();
 		});
 	}
 

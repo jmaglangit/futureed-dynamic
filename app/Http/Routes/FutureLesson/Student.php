@@ -74,6 +74,11 @@
 					'as' => 'student.login.registration_form'
 					, 'uses' => 'FutureLesson\Student\LoginController@registration_form'
 				]);
+
+			Routes::get('/registration-success', [ 
+					'as' => 'student.login.registration_success'
+					, 'uses' => 'FutureLesson\Student\LoginController@registration_success'
+				]);			
 		});
 
 		Routes::group([

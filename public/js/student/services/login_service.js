@@ -71,5 +71,13 @@ function StudentLoginService($http) {
 		});
 	}
 
+	api.confirmCode = function(email, email_code, user_type) {
+		return $http({
+			method	: 'POST'
+			, data 	: {email : email, email_code : email_code, user_type : user_type}
+			, url	: apiUrl + 'user/email/code'
+		});
+	}
+
 	return api;
 }

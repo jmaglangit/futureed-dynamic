@@ -180,8 +180,8 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 	}
 
 	self.selectPassword = function(event) {
-			$scope.highlight(event);
-			self.validatePassword();
+		$scope.highlight(event);
+		self.validatePassword();
 	}
 
 	self.validatePassword = function() {
@@ -267,8 +267,7 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 						self.fields[value.field] = Constants.TRUE;
 					});
 				} else if(response.data){
-					self.register.success = Constants.TRUE;
-					self.register.email = self.record.email;
+					self.record.success = Constants.TRUE;
 				}
 			}
 			$scope.ui_unblock();
@@ -315,5 +314,30 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 			scope.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
+	}
+
+	self.studentConfirmRegistration = function() {
+		self.errors = Constants.FALSE;
+		self.record.user_type = Constants.STUDENT;
+
+		$scope.ui_block();
+		StudentLoginService.confirmCode(self.record.email, self.record.confirmation_code, self.record.user_type).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data){
+					console.log(response.data);
+				} 
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.studentResendConfirmation = function () {
+		
 	}
 }

@@ -380,8 +380,9 @@ form p.help-block {
 }
 .student .login .roundcon i.fa{
 	background:#e8e8e8;
-	border-radius:200px;
-	padding:20px; width:120px;
+	border-radius: 50%;
+	padding:20px; 
+	width:105px;
 }
 
 .roundcon{

@@ -186,6 +186,10 @@ class LoginController extends Controller {
 	}
 
 	public function registration_form() {
-		return view('student.login.register.registration_form');
+		return view('student.login.register.registration-form');
+	}
+
+	public function registration_success() {
+		return view('student.login.register.registration-success');
 	}
 }

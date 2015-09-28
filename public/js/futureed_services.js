@@ -26,7 +26,7 @@ var services = angular.module('futureed.services', []);
 
 		futureedAPI.resendConfirmation = function(email, user_type, callback_uri) {
 			return $http({
-				method	: 'POST'
+				method	: Constants.METHOD_POST
 				, data 	: {email : email, user_type : user_type, callback_uri : callback_uri}
 				, url	: futureedAPIUrl + 'user/confirmation/code'
 			});

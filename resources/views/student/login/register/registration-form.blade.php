@@ -1,4 +1,4 @@
-<div ng-if="login.active_registration">
+<div ng-if="!login.active_registration">
 	<div class="form-style register_student form-wide" ng-cloak> 
 		{!! Form::open(array('id' => 'registration_form' , 'class' => 'form-horizontal simple-form')) !!}
 

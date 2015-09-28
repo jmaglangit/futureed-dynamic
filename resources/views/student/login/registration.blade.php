@@ -11,9 +11,9 @@
 
 	<div template-directive template-url="{!! route('student.login.registration_form') !!}"></div>
 
+	<div template-directive template-url="{!! route('student.login.registration_success') !!}"></div>
+
 	<div template-directive template-url="{!! route('student.login.confirm_media') !!}"></div>
-	
-	@include('student.login.registration-success')
 
 	@include('student.login.terms-and-condition')
 	
