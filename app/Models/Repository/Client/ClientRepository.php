@@ -488,7 +488,9 @@ class ClientRepository implements ClientRepositoryInterface
             $data = array_add($data,'user_id',$user->id);
 
             //Add Client
-            $client = Client::create($data);
+            Client::create($data);
+
+            $client = $this->getClientByFacebook($data['facebook_app_id']);
 
 
         }catch (\Exception $e){
@@ -540,7 +542,9 @@ class ClientRepository implements ClientRepositoryInterface
             $data = array_add($data,'user_id',$user->id);
 
             //Add Client
-            $client = Client::create($data);
+            Client::create($data);
+
+            $client = $this->getClientByGoogleId($data['google_app_id']);
 
 
         }catch (\Exception $e){

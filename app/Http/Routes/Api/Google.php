@@ -5,7 +5,8 @@
  */
 Routes::post('/registration/google',[
 	'uses' => 'Api\v1\GoogleLoginController@googleRegistration',
-	'as' => 'api.v1.registration.google'
+	'as' => 'api.v1.registration.google',
+	'middleware' => 'api_after_auto_login'
 ]);
 
 /**
