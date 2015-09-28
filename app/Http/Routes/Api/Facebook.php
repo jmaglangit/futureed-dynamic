@@ -10,7 +10,6 @@ Routes::post('/registration/facebook',[
 ]);
 
 
-//TODO: Add Token for middleware.
 /**
  * Facebook login
  */
