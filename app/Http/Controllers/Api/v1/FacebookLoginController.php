@@ -5,6 +5,7 @@ use FutureEd\Http\Controllers\Controller;
 use FutureEd\Http\Requests\Api\FacebookLoginRequest;
 use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
+use FutureEd\Services\SchoolServices;
 use FutureEd\Services\StudentServices;
 use FutureEd\Services\UserServices;
 
@@ -17,6 +18,8 @@ class FacebookLoginController extends ApiController {
 	protected $student;
 
 	protected $student_service;
+
+	protected $school_service;
 
 	protected $user_service;
 
@@ -33,7 +36,8 @@ class FacebookLoginController extends ApiController {
 		StudentRepositoryInterface $studentRepositoryInterface,
 		StudentServices $studentServices,
 		ClientRepositoryInterface $clientRepositoryInterface,
-		UserServices $userServices
+		UserServices $userServices,
+		SchoolServices $schoolServices
 	){
 
 		$this->student = $studentRepositoryInterface;
@@ -43,6 +47,8 @@ class FacebookLoginController extends ApiController {
 		$this->client = $clientRepositoryInterface;
 
 		$this->user_service = $userServices;
+
+		$this->school_service = $schoolServices;
 	}
 
 	/**
@@ -115,15 +121,19 @@ class FacebookLoginController extends ApiController {
 
 			case config('futureed.client'):
 
-				//Registration for Client.
-				$client_response = $this->client->addClientFromFacebook($client_data);
-
 				//Add New School
 				if ($client_data['client_role'] == config('futureed.principal')) {
 
 					// add school, return status
-					$school_response = $this->school->addSchool($school_data);
+					$school_response = $this->school_service->addSchool($school_data);
+
+					$client_data = array_add($client_data,'school_code',$school_response['message']);
 				}
+
+				//Registration for Client.
+				$client_response = $this->client->addClientFromFacebook($client_data);
+
+
 
 				if($client_response){
 
