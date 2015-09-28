@@ -1,17 +1,25 @@
 angular.module('futureed.controllers')
 	.controller('LoginController', LoginController);
 
-LoginController.$inject = ['$scope', '$controller', 'apiService', 'clientLoginApiService', 'clientProfileApiService', 'MediaLoginService'];
+LoginController.$inject = ['$scope', '$controller', 'apiService', 'ClientLoginApiService', 'MediaLoginService', 'ValidationService'];
 
-function LoginController($scope, $controller, apiService, clientLoginApiService, clientProfileApiService, MediaLoginService) {
+function LoginController($scope, $controller, apiService, ClientLoginApiService, MediaLoginService, ValidationService) {
 	var self = this;
 
 	self.validation = {};
 
 	angular.extend(self, $controller('MediaLoginController', { $scope : $scope }));
 
+	ValidationService(self);
+	self.default();
+
 	self.setSetUserType(Constants.CLIENT);
 	self.fbAsyncInit();
+
+	self.setRegistrationStatus = function(email) {
+		self.record = {};
+		self.record.email = email;
+	}
 
 	self.setActive = function(active) {
 		self.errors = Constants.FALSE;
@@ -32,6 +40,10 @@ function LoginController($scope, $controller, apiService, clientLoginApiService,
 			case 'registration'	:
 				self.record = {};
 				self.active_registration = Constants.TRUE;
+				break;
+
+			case 'registration_success'	:
+				self.active_registration_success = Constants.TRUE;
 				break;
 
 			case 'login'			:
@@ -110,7 +122,7 @@ function LoginController($scope, $controller, apiService, clientLoginApiService,
 		$scope.errors = Constants.FALSE;
 
 		$scope.ui_block();
-		clientLoginApiService.clientLogin(self.username, self.password, self.role).success(function(response) {
+		ClientLoginApiService.clientLogin(self.username, self.password, self.role).success(function(response) {
 		  if(response.status == Constants.STATUS_OK) {
 			if(response.errors) {
 			  $scope.errorHandler(response.errors);
@@ -214,7 +226,7 @@ function LoginController($scope, $controller, apiService, clientLoginApiService,
 		  var id = $("input[name='id']").val();
 
 		  $scope.ui_block();
-		  clientLoginApiService.resetClientPassword(id, reset_code, this.new_password).success(function(response) {
+		  ClientLoginApiService.resetClientPassword(id, reset_code, this.new_password).success(function(response) {
 			if(response.status == Constants.STATUS_OK) {
 			  if(response.errors) {
 				$scope.errorHandler(response.errors);
@@ -240,7 +252,7 @@ function LoginController($scope, $controller, apiService, clientLoginApiService,
 
 		if(self.set.new_password == self.set.confirm_password) {
 			$scope.ui_block();
-			clientLoginApiService.setClientPassword(self.set.id, self.set.new_password).success(function(response) {
+			ClientLoginApiService.setClientPassword(self.set.id, self.set.new_password).success(function(response) {
 				if(response.status == Constants.STATUS_OK) {
 					if(response.errors) {
 						$scope.errorHandler(response.errors);
@@ -302,7 +314,7 @@ function LoginController($scope, $controller, apiService, clientLoginApiService,
 			self.record.callback_uri = base_url + Constants.URL_REGISTRATION(angular.lowercase(Constants.CLIENT));
 
 			$scope.ui_block();
-			clientLoginApiService.registerClient(self.reg).success(function(response) {
+			ClientLoginApiService.registerClient(self.record).success(function(response) {
 				if(angular.equals(response.status, Constants.STATUS_OK)) {
 					if(response.errors) {
 						self.errors = $scope.errorHandler(response.errors);
@@ -311,7 +323,10 @@ function LoginController($scope, $controller, apiService, clientLoginApiService,
 							self.fields[value.field] = Constants.TRUE;
 						});
 					} else if(response.data) {
-						self.registered = Constants.TRUE;
+						var email = self.record.email;
+
+						self.setActive('registration_success');
+						self.record.email = email;
 					}
 				}
 
@@ -326,13 +341,12 @@ function LoginController($scope, $controller, apiService, clientLoginApiService,
 	self.resendClientConfirmation = function() {
 		self.errors = Constants.FALSE;
 
-		self.user_type = Constants.CLIENT;
-		self.email = (!isStringNullorEmpty(self.email)) ? self.email : $("#registration_success_form input[name='email']").val();
-		this.base_url = $("#base_url_form input[name='base_url']").val();
-		this.resend_confirmation_url = this.base_url + Constants.URL_REGISTRATION(angular.lowercase(this.user_type));
+		var user_type = Constants.CLIENT;
+		var base_url = $("#base_url_form input[name='base_url']").val();
+		var resend_confirmation_url = base_url + Constants.URL_REGISTRATION(angular.lowercase(user_type));
 
 		$scope.ui_block();
-		apiService.resendConfirmation(self.email, self.user_type, this.resend_confirmation_url).success(function(response) {
+		ClientLoginApiService.resendConfirmation(self.record.email, user_type, resend_confirmation_url).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
@@ -354,22 +368,28 @@ function LoginController($scope, $controller, apiService, clientLoginApiService,
 		});
 	}
 
-	self.confirmClientRegistration = function() {
+	self.confirmClientRegistration = function(event) {
+		event = getEvent(event);
+		event.preventDefault();
+
 		self.errors = Constants.FALSE;
 		
-		self.user_type = Constants.CLIENT;
-		self.email = (!isStringNullorEmpty(self.email)) ? self.email : $("#registration_success_form input[name='email']").val();
+		var user_type = Constants.CLIENT;
 
 		$scope.ui_block();
-		apiService.confirmCode(self.email, self.confirmation_code, self.user_type).success(function(response) {
-			if(response.status == Constants.STATUS_OK) {
+		ClientLoginApiService.confirmCode(self.record.email, self.record.email_code, user_type).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
-				} else if(response.data){
-					$scope.$parent.errors = Constants.FALSE;
+
+					angular.forEach($scope.errors, function(value, key) {
+						if(angular.equals(value, Constants.MSG_ACC_CONFIRMED)) {
+							self.account_confirmed = Constants.TRUE;
+						}
+					});
+				} else if(response.data) {
 					self.confirmed = Constants.TRUE;
-					self.set.id = response.data.id;
-				} 
+				}
 			}
 
 			$scope.ui_unblock();
@@ -384,7 +404,7 @@ function LoginController($scope, $controller, apiService, clientLoginApiService,
 		self.errors = Constants.FALSE;
 
 		$scope.ui_block();
-		clientLoginApiService.getTeacherDetails(id, token).success(function(response) {
+		ClientLoginApiService.getTeacherDetails(id, token).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
@@ -427,7 +447,7 @@ function LoginController($scope, $controller, apiService, clientLoginApiService,
 			self.record.callback_uri = base_url + Constants.URL_REGISTRATION(angular.lowercase(Constants.CLIENT));
 
 			$scope.ui_block();
-			clientLoginApiService.updateClientRegistration(self.record).success(function(response) {
+			ClientLoginApiService.updateClientRegistration(self.record).success(function(response) {
 				if(angular.equals(response.status, Constants.STATUS_OK)) {
 					if(response.errors) {
 						self.errors = $scope.errorHandler(response.errors);

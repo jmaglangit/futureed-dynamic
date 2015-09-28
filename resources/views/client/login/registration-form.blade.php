@@ -7,17 +7,19 @@
 				{!! Form::text('email', ''
 					, array(
 						'class' => 'form-control'
+						, 'autocomplete' => 'off'
+						, 'ng-class' => "{ 'required-field' : login.fields['email'] }"
 						, 'placeholder' => 'Email Address'
-						, 'ng-model' => 'register.reg.email'
+						, 'ng-model' => 'login.record.email'
 						, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
-						, 'ng-change' => "checkEmailAvailability(register.reg.email, 'Client')"
+						, 'ng-change' => "login.checkEmail(login.record.email, futureed.CLIENT, futureed.FALSE)"
 					)
 				) !!}
 
 				<div>
-					<span ng-if="e_error" class="error-msg-con">{! e_error !}</span>
-					<i ng-if="e_loading" class="fa fa-spinner fa-spin"></i>
-					<span ng-if="e_success" class="error-msg-con success-color">Email address is available.</span>
+					<span ng-if="login.validation.e_error" class="error-msg-con">{! login.validation.e_error !}</span>
+					<i ng-if="login.validation.e_loading" class="fa fa-spinner fa-spin"></i>
+					<span ng-if="login.validation.e_success" class="error-msg-con success-color">{! futureed.MSG_EA_AVAILABLE !}</span>
 				</div>
 			</div>
 
@@ -26,17 +28,19 @@
 				{!! Form::text('username', ''
 					, array(
 						'class' => 'form-control'
+						, 'autocomplete' => 'off'
+						, 'ng-class' => "{ 'required-field' : login.fields['username'] }"
 						, 'placeholder' => 'Username'
-						, 'ng-model' => 'register.reg.username'
+						, 'ng-model' => 'login.record.username'
 						, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
-						, 'ng-change' => "checkAvailability(register.reg.username, 'Client')"
+						, 'ng-change' => "login.checkUsername(login.record.username, futureed.CLIENT, futureed.FALSE)"
 					)
 				) !!}
 				
 				<div> 
-					<span ng-if="u_error" class="error-msg-con">{! u_error !}</span>
-					<i ng-if="u_loading" class="fa fa-spinner fa-spin"></i>
-					<span ng-if="u_success" class="error-msg-con success-color">Username is available.</span>
+					<span ng-if="login.validation.u_error" class="error-msg-con">{! login.validation.u_error !}</span>
+					<i ng-if="login.validation.u_loading" class="fa fa-spinner fa-spin"></i>
+					<span ng-if="login.validation.u_success" class="error-msg-con success-color">{! futureed.MSG_U_AVAILABLE !}</span>
 				</div>
 			</div>
 		</div>
@@ -47,19 +51,21 @@
 				{!! Form::password('password'
 					, array(
 						'class' => 'form-control'
+						, 'ng-class' => "{ 'required-field' : login.fields['password'] }"
 						, 'placeholder' => 'Password'
-						, 'ng-model' => 'register.reg.password'
+						, 'ng-model' => 'login.record.password'
 					)
 				) !!}
-			<p class="help-block">Password must be at least 8 characters and with at least 1 number.</p>
+			<p class="help-block">{! futureed.PASSWORD_TIP !}</p>
 			</div>
 		<label class="col-xs-2 control-label">Confirm Password<span class="required">*</span></label>
 			<div class="col-xs-4">
 				{!! Form::password('confirm_password'
 					, array(
 						'class' => 'form-control'
+						, 'ng-class' => "{ 'required-field' : login.fields['password'] }"
 						, 'placeholder' => 'Confirm Password'
-						, 'ng-model' => 'register.reg.confirm_password'
+						, 'ng-model' => 'login.record.confirm_password'
 					)
 				) !!}
 			</div>
@@ -74,8 +80,10 @@
 				{!! Form::text('first_name', ''
 					, array(
 						'class' => 'form-control'
+						, 'autocomplete' => 'off'
+						, 'ng-class' => "{ 'required-field' : login.fields['first_name'] }"
 						, 'placeholder' => 'First Name'
-						, 'ng-model' => 'register.reg.first_name'
+						, 'ng-model' => 'login.record.first_name'
 					)
 				) !!}
 			</div>
@@ -84,34 +92,38 @@
 				{!! Form::text('last_name', ''
 					, array(
 						'class' => 'form-control'
+						, 'autocomplete' => 'off'
+						, 'ng-class' => "{ 'required-field' : login.fields['last_name'] }"
 						, 'placeholder' => 'Last Name'
-						, 'ng-model' => 'register.reg.last_name'
+						, 'ng-model' => 'login.record.last_name'
 					)
 				) !!}
 			</div>
 		</div>
 
 		<div class="form-group">
-			<label class="col-xs-2 control-label">Street Address<span class="required" ng-if="register.required">*</span></label>
+			<label class="col-xs-2 control-label">Street Address<span class="required" ng-if="login.required">*</span></label>
 			<div class="col-xs-6">
 				{!! Form::text('street_address', ''
 				, array(
 					'class' => 'form-control'
+					, 'ng-class' => "{ 'required-field' : login.fields['street_address'] }"
 					, 'placeholder' => 'Street Address'
-					, 'ng-model' => 'register.reg.street_address'
+					, 'ng-model' => 'login.record.street_address'
 				)
 				) !!}
 			</div>
 		</div>
 
 		<div class="form-group">
-			<label class="col-xs-2 control-label">City<span class="required" ng-if="register.required">*</span></label>
+			<label class="col-xs-2 control-label">City<span class="required" ng-if="login.required">*</span></label>
 			<div class="col-xs-4">
 				{!! Form::text('city', ''
 					, array(
 						'class' => 'form-control'
+						, 'ng-class' => "{ 'required-field' : login.fields['city'] }"
 						, 'placeholder' => 'City'
-						, 'ng-model' => 'register.reg.city'
+						, 'ng-model' => 'login.record.city'
 					)
 				) !!}
 			</div>
@@ -120,8 +132,9 @@
 				{!! Form::text('state', ''
 					, array(
 						'class' => 'form-control'
+						, 'ng-class' => "{ 'required-field' : login.fields['state'] }"
 						, 'placeholder' => 'State'
-						, 'ng-model' => 'register.reg.state'
+						, 'ng-model' => 'login.record.state'
 					)
 				) !!}
 			</div>
@@ -133,15 +146,19 @@
 				{!! Form::text('zip', ''
 					, array(
 						'class' => 'form-control'
+						, 'ng-class' => "{ 'required-field' : login.fields['zip'] }"
 						, 'placeholder' => 'Postal Code'
-						, 'ng-model' => 'register.reg.zip'
+						, 'ng-model' => 'login.record.zip'
 					)
 				) !!}
 			</div>
 
-			<label class="col-xs-2 control-label">Country<span class="required" ng-if="register.required">*</span></label>
+			<label class="col-xs-2 control-label">Country<span class="required" ng-if="login.required">*</span></label>
 			<div class="col-xs-4" ng-init="getCountries()">
-				<select  name="country_id" class="form-control" ng-model="register.reg.country_id">
+				<select  name="country_id" 
+					class="form-control" 
+					ng-class="{ 'required-field' : login.fields['country_id'] }"
+					ng-model="login.record.country_id">
 					<option value="">-- Select Country --</option>
 					<option ng-repeat="country in countries" ng-value="country.id">{! country.name!}</option>
 				</select>
@@ -149,7 +166,7 @@
 		</div>
 	</fieldset>
 
-	<div id="principal" ng-if="register.principal" class="role-div">
+	<div id="principal" ng-if="login.principal" class="role-div">
 		<fieldset>
 			<legend>School Information</legend>
 			<div class="form-group">
@@ -158,8 +175,9 @@
 					{!! Form::text('school_name', ''
 						, array(
 							'class' => 'form-control'
+							, 'ng-class' => "{ 'required-field' : login.fields['school_name'] }"
 							, 'placeholder' => 'School Name'
-							, 'ng-model' => 'register.reg.school_name'
+							, 'ng-model' => 'login.record.school_name'
 						)
 					) !!}
 				</div>
@@ -171,8 +189,9 @@
 					{!! Form::text('school_address', ''
 						, array(
 							'class' => 'form-control'
+							, 'ng-class' => "{ 'required-field' : login.fields['school_address'] }"
 							, 'placeholder' => 'School Address'
-							, 'ng-model' => 'register.reg.school_address'
+							, 'ng-model' => 'login.record.school_address'
 						)
 					) !!}
 				</div>
@@ -184,8 +203,9 @@
 					{!! Form::text('school_city', ''
 						, array(
 							'class' => 'form-control'
+							, 'ng-class' => "{ 'required-field' : login.fields['school_city'] }"
 							, 'placeholder' => 'City'
-							, 'ng-model' => 'register.reg.school_city'
+							, 'ng-model' => 'login.record.school_city'
 						)
 					) !!}
 				</div>
@@ -194,8 +214,9 @@
 					{!! Form::text('school_state', ''
 						, array(
 							'class' => 'form-control'
+							, 'ng-class' => "{ 'required-field' : login.fields['school_state'] }"
 							, 'placeholder' => 'State'
-							, 'ng-model' => 'register.reg.school_state'
+							, 'ng-model' => 'login.record.school_state'
 						)
 					) !!}
 				</div>
@@ -207,15 +228,19 @@
 					{!! Form::text('school_zip', ''
 						, array(
 							'class' => 'form-control'
+							, 'ng-class' => "{ 'required-field' : login.fields['school_zip'] }"
 							, 'placeholder' => 'Postal Code'
-							, 'ng-model' => 'register.reg.school_zip'
+							, 'ng-model' => 'login.record.school_zip'
 						)
 					) !!}
 				</div>
 
 				<label class="col-xs-2 control-label">Country<span class="required">*</span></label>
 				<div class="col-xs-4" ng-init="getCountries()">
-					<select  name="school_country_id" class="form-control" ng-model="register.reg.school_country_id">
+					<select  name="school_country_id" 
+						class="form-control" 
+						ng-class="{ 'required-field' : login.fields['school_country_id'] }"
+						ng-model="login.record.school_country_id">
 						<option value="">-- Select Country --</option>
 						<option ng-repeat="country in countries" ng-value="country.id">{! country.name!}</option>
 					</select>
@@ -229,8 +254,9 @@
 					{!! Form::text('contact_name', ''
 						, array(
 							'class' => 'form-control'
+							, 'ng-class' => "{ 'required-field' : login.fields['contact_name'] }"
 							, 'placeholder' => 'Contact Person'
-							, 'ng-model' => 'register.reg.contact_name'
+							, 'ng-model' => 'login.record.contact_name'
 						)
 					) !!}
 				</div>
@@ -242,8 +268,9 @@
 					{!! Form::text('contact_number', ''
 						, array(
 							'class' => 'form-control'
+							, 'ng-class' => "{ 'required-field' : login.fields['contact_number'] }"
 							, 'placeholder' => 'Contact Number'
-							, 'ng-model' => 'register.reg.contact_number'
+							, 'ng-model' => 'login.record.contact_number'
 						)
 					) !!}
 				</div>
@@ -256,7 +283,7 @@
 			<div class="form-group">
 				<div class="checkbox text-center">
 					<label>
-						{!! Form::checkbox('terms', 1, null, array('ng-model' => 'register.record.terms')) !!}
+						{!! Form::checkbox('terms', 1, null, array('ng-model' => 'login.record.terms')) !!}
 
 						I agree on the 
 
@@ -279,8 +306,8 @@
 				</div>
 			</div>
 
-			<div class="btn-container col-sm-6 col-sm-offset-3">
-				<a ng-click="register.registerClient()" type="button" class="btn btn-blue btn-medium">Register</a>
+			<div class="btn-container col-xs-6 col-xs-offset-3">
+				<a ng-click="login.registerClient()" type="button" class="btn btn-blue btn-medium">Register</a>
 				<a href="{!! route('client.login') !!}" type="button" class="btn btn-gold btn-medium">Cancel</a>
 			</div>
 		</fieldset>

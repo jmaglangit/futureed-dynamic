@@ -37,13 +37,13 @@ class LoginController extends Controller {
 		$user_data = Input::only('user_data');
 
 		$user_object = json_decode($user_data['user_data']);
-		
+
 		if($user_object->id){
 			Session::forget('client');
-			Session::forget($user_object->client_role);
+			Session::forget($user_object->role);
 
 			Session::put('client', $user_data['user_data']);
-			Session::put($user_object->client_role, $user_data['user_data']);
+			Session::put($user_object->role, $user_data['user_data']);
 
 			return redirect()->route('client.dashboard.index');
 		}

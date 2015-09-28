@@ -378,7 +378,7 @@ form p.help-block {
 	width:120px;
 	margin: 30px auto;
 }
-.student .login .roundcon i.fa{
+.student .login .roundcon i.fa, .roundcon i.fa{
 	background:#e8e8e8;
 	border-radius: 50%;
 	padding:20px; 
@@ -388,11 +388,6 @@ form p.help-block {
 .roundcon{
 	width:120px;
 	margin: 30px auto;
-}
-.roundcon i.fa{
-	background:#e8e8e8;
-	border-radius:200px;
-	padding:20px; width:120px;
 }
 
 /*----- FOLLOW UP REGISTRATION ----- */

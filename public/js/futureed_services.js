@@ -98,14 +98,6 @@ var services = angular.module('futureed.services', []);
 			});
 		}
 
-		futureedAPI.confirmCode = function(email, email_code, user_type) {
-			return $http({
-				method	: 'POST'
-				, data 	: {email : email, email_code : email_code, user_type : user_type}
-				, url	: futureedAPIUrl + 'user/email/code'
-			});
-		}
-
 		futureedAPI.resetPassword = function (id, code, image_id) {
 			return $http({
 				method	: 'POST'
