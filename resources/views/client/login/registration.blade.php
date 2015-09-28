@@ -7,8 +7,8 @@
   <div class="form-style form-wide" ng-show="!register.registered"> 
     <div class="title">Register as</div>
     <div class="row">
-      <div class="col-md-12 register_users">
-        <div class="col-md-3 col-md-offset-3" ng-click="register.selectRole('Principal')">
+      <div class="col-xs-12 register_users">
+        <div class="col-xs-3 col-xs-offset-3" ng-click="register.selectRole('Principal')">
           {!! Html::image('/images/user_principal.png', 'Principal'
             , array(
               'id' => 'user_principal'
@@ -18,7 +18,7 @@
           ) !!}
           <h4>Principal</h4>
         </div>
-        <div class="col-md-3" ng-click="register.selectRole('Parent')">
+        <div class="col-xs-3" ng-click="register.selectRole('Parent')">
           {!! Html::image('/images/user_parent.png', 'Parent'
             , array(
               'id' => 'user_parent'
@@ -29,7 +29,7 @@
           <h4>Parent</h4>
         </div>
       </div>
-      <div class="col-md-12" ng-if="register.role_click">
+      <div class="col-xs-12" ng-if="register.role_click">
         <div class="alert alert-error" ng-if="errors">
           <p ng-repeat="error in errors track by $index"> 
             {! error !}
@@ -50,6 +50,12 @@
 @endsection
 
 @section('scripts')
+  {!! Html::script('//connect.facebook.net/en_US/sdk.js') !!}
+    {!! Html::script('https://apis.google.com/js/platform.js') !!}
+    {!! Html::script('https://apis.google.com/js/client.js') !!}
+
+  {!! Html::script('/js/student/controllers/media_login_controller.js') !!}
+    {!! Html::script('/js/student/services/media_login_service.js') !!}
 
   {!! Html::script('/js/client/controllers/login_controller.js') !!}
   {!! Html::script('/js/client/services/login_service.js') !!}

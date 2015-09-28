@@ -26,7 +26,7 @@
     {!! Html::script('/js/common/validation_service.js') !!}
 
     {!! Html::script('/js/student/controllers/media_login_controller.js') !!}
-    {!! Html::script('/js/student/services/media_login_service.js') !!} 
+    {!! Html::script('/js/student/services/media_login_service.js') !!}
 
 	{!! Html::script('/js/student/controllers/login_controller.js') !!}
     {!! Html::script('/js/student/services/login_service.js') !!}

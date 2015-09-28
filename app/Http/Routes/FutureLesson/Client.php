@@ -60,9 +60,17 @@
 					, 'uses' => 'FutureLesson\Client\LoginController@reset_password'
 				]);
 			Routes::post('/process', [ 
-				'as' => 'client.login.process'
-				, 'uses' => 'FutureLesson\Client\LoginController@process'
-			]);
+					'as' => 'client.login.process'
+					, 'uses' => 'FutureLesson\Client\LoginController@process'
+				]);
+			Routes::get('/login-form', [ 
+					'as' => 'client.login.login_form'
+					, 'uses' => 'FutureLesson\Client\LoginController@login_form'
+				]);
+			Routes::get('/confirm-media', [ 
+					'as' => 'client.login.confirm_media'
+					, 'uses' => 'FutureLesson\Client\LoginController@confirm_media'
+				]);
 		});
 
 		Routes::group(['prefix' => '/dashboard'], function()

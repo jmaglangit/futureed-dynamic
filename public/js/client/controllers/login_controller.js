@@ -1,27 +1,105 @@
 angular.module('futureed.controllers')
 	.controller('LoginController', LoginController);
 
-LoginController.$inject = ['$scope', 'apiService', 'clientLoginApiService', 'clientProfileApiService'];
+LoginController.$inject = ['$scope', '$controller', 'apiService', 'clientLoginApiService', 'clientProfileApiService', 'MediaLoginService'];
 
-function LoginController($scope, apiService, clientLoginApiService, clientProfileApiService) {
+function LoginController($scope, $controller, apiService, clientLoginApiService, clientProfileApiService, MediaLoginService) {
 	var self = this;
 
-	self.set = {};
 	self.validation = {};
 
-	self.clientLogin = clientLogin;
-	self.clientForgotPassword = clientForgotPassword;
-	self.clientValidateCode = clientValidateCode;
-	self.clientResendCode = clientResendCode;
-	self.resetClientPassword = resetClientPassword;
-	self.setNewClientPassword = setNewClientPassword;
+	angular.extend(self, $controller('MediaLoginController', { $scope : $scope }));
 
-	self.selectRole = selectRole;
-	self.registerClient = registerClient;
-	self.resendClientConfirmation = resendClientConfirmation;
-	self.confirmClientRegistration = confirmClientRegistration;
+	self.fbAsyncInit();
 
-	function clientLogin() {
+	self.setActive = function(active) {
+		self.errors = Constants.FALSE;
+
+		self.active_login = Constants.FALSE;
+		self.active_confirm = Constants.FALSE;
+		self.active_registration = Constants.FALSE;
+
+		switch(active) {
+			case 'confirm_media'	:
+				self.active_confirm = Constants.TRUE;
+				break;
+
+			case 'confirm_success'	:
+				self.active_confirm_success = Constants.TRUE;
+				break;
+
+			case 'registration'	:
+				self.active_registration = Constants.TRUE;
+				break;
+
+			case 'login'			:
+
+			default					:
+				self.active_login = Constants.TRUE;
+				break;
+		}
+
+		$("html, body").animate({ scrollTop: 0 }, "slow");
+	}
+
+	self.setActive();
+
+	$scope.$on('confirm-media', checkMediaLogin);
+
+	function checkMediaLogin(event, data) {
+		if(data.confirm) {
+			if(angular.equals(data.media_type, Constants.GOOGLE)) {
+				self.getGoogleDetails(function(response) {
+					self.record = data;
+					self.record.first_name = response.given_name;
+					self.record.last_name = response.family_name;
+
+					// apply before showing page
+					self.setActive('confirm_media');
+					$scope.$apply();
+				});
+			} else {
+				self.record = data;
+				self.setActive('confirm_media');
+			}
+		}
+	}
+
+	self.confirmMediaDetails = function() {
+		self.errors = Constants.FALSE;
+		self.fields = [];
+
+		if(!self.record.terms) {
+			self.errors = ["Please accept the terms and conditions."];
+			$("html, body").animate({ scrollTop: 0 }, "slow");
+			return;
+		}
+
+		self.record.user_type = Constants.CLIENT;
+
+		$scope.ui_block();
+		MediaLoginService.registerMedia(self.record, angular.lowercase(self.record.media_type)).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+
+					angular.forEach(response.errors, function(value, key) {
+						self.fields[value.field] = Constants.TRUE;
+					});
+				} else if(response.data){
+					$scope.user = JSON.stringify(response.data);
+					self.setActive('confirm_success');
+				} 
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.clientLogin = function() {
 	    $scope.errors = Constants.FALSE;
 
 	    $scope.ui_block();
@@ -48,7 +126,7 @@ function LoginController($scope, apiService, clientLoginApiService, clientProfil
 	    });
 	}
 
-	function clientForgotPassword() {
+	self.clientForgotPassword = function() {
 		$scope.$parent.errors = Constants.FALSE;
 	    this.user_type = Constants.CLIENT;
 	    this.base_url = $("#base_url_form input[name='base_url']").val();
@@ -72,7 +150,7 @@ function LoginController($scope, apiService, clientLoginApiService, clientProfil
 	    });
 	}
 
-	function clientValidateCode(reset_code) {
+	self.clientValidateCode = function(reset_code) {
 		$scope.$parent.errors = Constants.FALSE;
 	    $scope.reset_code = reset_code;
 	    $scope.email = (!isStringNullorEmpty($scope.email)) ? $scope.email : $("#redirect_form input[name='email']").val();
@@ -97,7 +175,7 @@ function LoginController($scope, apiService, clientLoginApiService, clientProfil
 	    });
 	}
 
-	function clientResendCode() {
+	self.clientResendCode = function() {
 	    $scope.$parent.errors = Constants.FALSE;
 	    this.user_type = Constants.CLIENT;
 	    $scope.email = (!isStringNullorEmpty($scope.email)) ? $scope.email : $("#redirect_form input[name='email']").val();
@@ -121,7 +199,7 @@ function LoginController($scope, apiService, clientLoginApiService, clientProfil
 	    });
 	}
 
-	function resetClientPassword() {
+	self.resetClientPassword = function() {
 	    $scope.$parent.errors = Constants.FALSE;
 
 	    if(this.new_password == this.confirm_password) {
@@ -149,7 +227,7 @@ function LoginController($scope, apiService, clientLoginApiService, clientProfil
 	    }
 	}
 
-	function setNewClientPassword() {
+	self.setNewClientPassword = function() {
 	    $scope.$parent.errors = Constants.FALSE;
 	    self.errors = Constants.FALSE;
 
@@ -175,42 +253,33 @@ function LoginController($scope, apiService, clientLoginApiService, clientProfil
 		}
 	}
 
-	function selectRole(role) {
-		$scope.$parent.errors = Constants.FALSE;
+	self.selectRole = function(role) {
+		self.errors = Constants.FALSE;
 
 		self.principal = Constants.FALSE;
 		self.parent = Constants.FALSE;
-		self.reg = {} ;
-
-		$scope.$parent.e_error = Constants.FALSE;
-		$scope.$parent.e_success = Constants.FALSE;
-		$scope.$parent.u_error = Constants.FALSE;
-		$scope.$parent.u_success = Constants.FALSE;
+		self.required = Constants.FALSE;
 
 		switch(role) {
 			case Constants.PRINCIPAL :
-				self.required = Constants.FALSE;
-				self.role_click = Constants.TRUE;
 				self.principal = Constants.TRUE;
-				self.reg.client_role = Constants.PRINCIPAL;
+				self.record.client_role = Constants.PRINCIPAL;
 				break;
 
 			case Constants.PARENT    :
 				self.required = Constants.TRUE;
-				self.role_click = Constants.TRUE;
 				self.parent = Constants.TRUE;
-				self.reg.client_role = Constants.PARENT;
+				self.record.client_role = Constants.PARENT;
 				break;
 
 			default:
-				self.reg = {};
 				break;
 		}
 
-		$("#registration_form input, #registration_form select").removeClass("required-field");
+		$("input, select").removeClass("required-field");
 	}
 
-	function registerClient() {
+	self.registerClient = function() {
 	    $scope.$parent.errors = Constants.FALSE;
 
 	    $("#registration_form input, #registration_form select").removeClass("required-field");
@@ -252,7 +321,7 @@ function LoginController($scope, apiService, clientLoginApiService, clientProfil
 	    }
 	  }
 
-	function resendClientConfirmation() {
+	self.resendClientConfirmation = function() {
 	    self.errors = Constants.FALSE;
 
 	    self.user_type = Constants.CLIENT;
@@ -283,7 +352,7 @@ function LoginController($scope, apiService, clientLoginApiService, clientProfil
 	    });
 	}
 
-  	function confirmClientRegistration() {
+  	self.confirmClientRegistration = function() {
   		self.errors = Constants.FALSE;
 	    
 	    self.user_type = Constants.CLIENT;

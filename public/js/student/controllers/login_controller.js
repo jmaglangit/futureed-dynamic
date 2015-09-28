@@ -55,20 +55,19 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 
 	function checkMediaLogin(event, data) {
 		if(data.confirm) {
-			self.setActive('confirm_media');
-
 			if(angular.equals(data.media_type, Constants.GOOGLE)) {
-				$scope.ui_block();
 				self.getGoogleDetails(function(response) {
 					self.record = data;
 					self.record.first_name = response.given_name;
 					self.record.last_name = response.family_name;
 
+					// apply before showing page
 					$scope.$apply();
-					$scope.ui_unblock();
+					self.setActive('confirm_media');
 				});
 			} else {
 				self.record = data;
+				self.setActive('confirm_media');
 			}
 		}
 	}
