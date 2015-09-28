@@ -23,8 +23,6 @@ class FacebookLoginRequest extends ApiRequest {
 
 			case 'POST' :
 
-				//Added checking if
-
 				switch($this->route()->getName()){
 
 					case 'api.v1.registration.facebook':
