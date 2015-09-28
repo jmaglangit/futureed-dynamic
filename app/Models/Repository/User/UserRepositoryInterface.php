@@ -83,6 +83,10 @@ interface UserRepositoryInterface {
 
 	public function deleteRegistrationToken($id);
 
+	public function getFacebookId($id);
+
+	public function getGoogleId($id);
+
 
 
 }

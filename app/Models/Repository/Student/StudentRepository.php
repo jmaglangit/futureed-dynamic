@@ -429,7 +429,7 @@ class StudentRepository implements StudentRepositoryInterface
 		try{
 
 			//Add user table
-			$data = array_add($data,'username','NA');
+//			$data = array_add($data,'username','NA');
 
 			$data = array_add($data, 'name',$data['first_name'] . ' ' . $data['last_name']);
 
@@ -484,7 +484,7 @@ class StudentRepository implements StudentRepositoryInterface
 		try{
 
 			//Add user table
-			$data = array_add($data,'username','NA');
+//			$data = array_add($data,'username','NA');
 
 			$data = array_add($data, 'name',$data['first_name'] . ' ' . $data['last_name']);
 

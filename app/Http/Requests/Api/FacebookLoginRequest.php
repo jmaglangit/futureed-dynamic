@@ -30,6 +30,7 @@ class FacebookLoginRequest extends ApiRequest {
 						return [
 							'facebook_app_id' => 'required|string
 								|unique:users,facebook_app_id,NULL,id,deleted_at,NULL,user_type,' . $this->__get('user_type'),
+							'username' => 'required|min:8|max:32|alpha_num',
 							'email' => 'required|email|unique:users,email,NULL,id,deleted_at,NULL,user_type,'.$this->__get('user_type'),
 							'first_name' => 'required|min:2|max:64|regex:'. config('regex.name'),
 							'last_name' => 'required|min:2|max:64|regex:'. config('regex.name'),
