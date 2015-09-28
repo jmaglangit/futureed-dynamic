@@ -72,7 +72,7 @@ class GoogleLoginRequest extends ApiRequest {
 
 						return [
 							'google_app_id' => 'required|string
-								|exists:users,google_app_id,deleted_at,NULL,is_account_activated,0,is_account_locked,0,user_type,'
+								|exists:users,google_app_id,deleted_at,NULL,is_account_activated,1,is_account_locked,0,user_type,'
 								. $this->__get('user_type'),
 							'user_type' => 'required|in:' . config('futureed.client') . ',' . config('futureed.student')
 						];
