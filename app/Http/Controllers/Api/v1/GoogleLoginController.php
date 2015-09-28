@@ -6,6 +6,7 @@ use FutureEd\Http\Controllers\Controller;
 use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use FutureEd\Http\Requests\Api\GoogleLoginRequest;
+use FutureEd\Services\SchoolServices;
 use FutureEd\Services\StudentServices;
 
 class GoogleLoginController extends ApiController {
@@ -22,6 +23,8 @@ class GoogleLoginController extends ApiController {
 	 */
 	protected $student_service;
 
+	protected $school_service;
+
 	/**
 	 * @var ClientRepositoryInterface
 	 */
@@ -35,11 +38,14 @@ class GoogleLoginController extends ApiController {
 	public function __construct(
 		StudentRepositoryInterface $studentRepositoryInterface,
 		StudentServices $studentServices,
-		ClientRepositoryInterface $clientRepositoryInterface
+		ClientRepositoryInterface $clientRepositoryInterface,
+		SchoolServices $schoolServices
 	){
 		$this->student = $studentRepositoryInterface;
 
 		$this->student_service = $studentServices;
+
+		$this->school_service = $schoolServices;
 
 		$this->client = $clientRepositoryInterface;
 	}
@@ -53,7 +59,7 @@ class GoogleLoginController extends ApiController {
 
 		$user_type = $request->only('user_type');
 
-		$student = $request->only(
+		$student_data = $request->only(
 			'google_app_id',
 			'email',
 			'user_type',
@@ -67,13 +73,12 @@ class GoogleLoginController extends ApiController {
 			'grade_code'
 		);
 
-		$client = $request->only(
+		$client_data = $request->only(
 			'google_app_id',
 			'first_name',
 			'last_name',
 			'email',
 			'user_type',
-			'birth_date',
 			'client_role',
 			'street_address',
 			'city',
@@ -82,12 +87,23 @@ class GoogleLoginController extends ApiController {
 			'zip'
 		);
 
+		$school_data = $request->only(
+			'school_name',
+			'school_address',
+			'school_city',
+			'school_state',
+			'school_zip',
+			'contact_name',
+			'contact_number',
+			'school_country_id'
+		);
+
 		switch($user_type['user_type']){
 
 			case config('futureed.student'):
 
 				//Registration of Student
-				$response = $this->student->addStudentFromGoogle($student);
+				$response = $this->student->addStudentFromGoogle($student_data);
 
 				if($response){
 
@@ -104,8 +120,17 @@ class GoogleLoginController extends ApiController {
 
 			case config('futureed.client'):
 
+				//Add New School
+				if ($client_data['client_role'] == config('futureed.principal')) {
+
+					// add school, return status
+					$school_response = $this->school_service->addSchool($school_data);
+
+					$client_data = array_add($client_data,'school_code',$school_response['message']);
+				}
+
 				//Registration of Client.
-				$response = $this->client->addClientFromGoogle($client);
+				$response = $this->client->addClientFromGoogle($client_data);
 
 				if($response){
 
