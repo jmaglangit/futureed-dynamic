@@ -148,6 +148,8 @@ function FutureedController($scope, $window, apiService, futureed) {
 		$("ul.form_password li").removeClass('selected');
 		$(target).addClass('selected');
 		$scope.image_id = $(target).find("#image_id").val();
+
+		console.log($scope.image_id);
 	}
 
 	/**
@@ -262,13 +264,9 @@ function FutureedController($scope, $window, apiService, futureed) {
 
 	// Registration
 	$scope.showModal = showModal;
-	$scope.saveNewPassword = saveNewPassword;
 
 	// Profile
-	$scope.updateAge = updateAge;
 	$scope.getImagePassword = getImagePassword;
-	$scope.selectNewPassword = selectNewPassword;
-	$scope.undoNewPassword = undoNewPassword;
 
 	$scope.getAvatarImages = getAvatarImages;
 	$scope.highlightAvatar = highlightAvatar;
@@ -456,75 +454,6 @@ function FutureedController($scope, $window, apiService, futureed) {
 				keyboard: Constants.FALSE,
 				show    : Constants.TRUE
 		});
-	}
-
-	/**
-	* [Registration] Save new password after email confirmation.
-	*/
-	function saveNewPassword() {
-		$scope.errors = Constants.FALSE;
-
-		if($scope.new_password == $scope.image_id) {
-			var id = $("input[name='id']").val();
-
-			$scope.ui_block();
-			apiService.setPassword(id, $scope.new_password).success(function(response) {
-				if(response.status == Constants.STATUS_OK) {
-					if(response.errors) {
-						$scope.errorHandler(response.errors);
-					} else if(response.data){
-						$scope.success = Constants.TRUE;
-					} 
-				}
-
-				$scope.ui_unblock();
-			}).error(function(response) {
-				$scope.internalError();
-				$scope.ui_unblock();
-			});
-		} else {
-			$scope.errors = [Constants.MSG_PPW_NOT_MATCH];
-			$("html, body").animate({ scrollTop: 0 }, "slow");
-		}
-	}
-
-	function updateAge() {
-		
-	}
-
-	/**
-	* Used by reset, set, and change password.
-	*/
-	function selectNewPassword() {
-		$scope.password_selected = Constants.FALSE;
-		$scope.errors = Constants.FALSE;
-
-		if($scope.image_id) {
-			$scope.password_selected = Constants.TRUE;
-			$scope.new_password = $scope.image_id;
-			$scope.image_id = Constants.FALSE;
-			$scope.image_pass = shuffle($scope.image_pass);
-			$("ul.form_password li").removeClass('selected');
-		} else {
-			$scope.errors = [Constants.MSG_PPW_SELECT_NEW];
-		}
-
-		$("html, body").animate({ scrollTop: 0 }, "slow");
-	}
-
-	/**
-	* Used by reset, set, and change password.
-	*/
-	function undoNewPassword() {
-		$scope.errors = Constants.FALSE;
-		$scope.image_pass = shuffle($scope.image_pass);
-		$scope.password_selected = Constants.FALSE;
-		$scope.image_id = $scope.new_password;
-
-		$("ul.form_password li").removeClass("selected");
-		$("input[value='"+$scope.new_password+"']").closest("li").addClass("selected");
-
-		$("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 
 	function getAvatarImages(change) {

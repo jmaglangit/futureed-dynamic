@@ -148,16 +148,14 @@ class LoginController extends Controller {
 	}
 
 	public function set_password() {
-		$input = Input::only('id', 'confirmation_code', 'email');
+		$input = Input::only('id');
 		$id = $input['id'];
-		$email = $input['email'];
-		$code = $input['confirmation_code'];
 
-		if($id == null || $code == null) {
+		if($id == null) {
 			return redirect()->route('student.registration');
 		}
 
-		return view('student.login.set-password', ['id' => $id, 'code' => $code, 'email' => $email]);
+		return view('student.login.set-password', ['id' => $id]);
 	}
 
 	/**

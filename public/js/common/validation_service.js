@@ -171,33 +171,6 @@ function ValidationService($http, apiService) {
 					scope.validation.c_success = Constants.TRUE;
 				}
 			}
-
-			, resendConfirmationCode : function(email, user_type, resend_confirmation_url) {
-				self.errors = Constants.FALSE;
-
-
-				$scope.ui_block();
-				apiService.resendConfirmation(email, user_type, resend_confirmation_url).success(function(response) {
-					if(angular.equals(response.status, Constants.STATUS_OK)) {
-						if(response.errors) {
-							self.errors = $scope.errorHandler(response.errors);
-
-							angular.forEach($scope.errors, function(value, key) {
-								if(angular.equals(value, Constants.MSG_ACC_CONFIRMED)) {
-									self.record.account_confirmed = Constants.TRUE;
-								}
-							});
-						} else if(response.data) {
-							$scope.resent = Constants.TRUE;
-						}
-					}
-					
-					$scope.ui_unblock();
-				}).error(function(response) {
-					self.errors = $scope.internalError();
-					$scope.ui_unblock();
-				});
-			}
 	    });
 	};
 }

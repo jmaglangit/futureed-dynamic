@@ -73,9 +73,25 @@ function StudentLoginService($http) {
 
 	api.confirmCode = function(email, email_code, user_type) {
 		return $http({
-			method	: 'POST'
+			method	: Constants.METHOD_POST
 			, data 	: {email : email, email_code : email_code, user_type : user_type}
 			, url	: apiUrl + 'user/email/code'
+		});
+	}
+
+	api.resendConfirmation = function(email, user_type, callback_uri) {
+		return $http({
+			method	: Constants.METHOD_POST
+			, data 	: {email : email, user_type : user_type, callback_uri : callback_uri}
+			, url	: apiUrl + 'user/confirmation/code'
+		});
+	}
+
+	api.setPassword = function (id, password_image_id) {
+		return $http({
+			method	: Constants.METHOD_POST
+			, data	: {id : id, password_image_id : password_image_id}
+			, url	: apiUrl + 'student/password/new'
 		});
 	}
 

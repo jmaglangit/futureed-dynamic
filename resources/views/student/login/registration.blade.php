@@ -1,7 +1,8 @@
 @extends('student.app')
 
 @section('content')
-<div class="container login student-fnt" ng-controller="StudentLoginController as login" ng-init="login.checkRegistration('{!! $id !!}', '{!! $registration_token !!}')">
+<div class="container login student-fnt" ng-controller="StudentLoginController as login"
+	ng-init="login.checkRegistration('{!! $email !!}', '{!! $id !!}', '{!! $registration_token !!}')">
 	
 	{!! Form::open(array('id' => 'process_form', 'method' => 'POST', 'route' => 'student.login.process')) !!}
         {!! Form::hidden('user_data', '') !!}

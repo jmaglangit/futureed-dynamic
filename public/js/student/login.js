@@ -9,11 +9,6 @@ $(document).on('submit', '#forgot_success_form', function() {
 	return false;
 });
 
-$(document).on('submit', '#registration_success_form', function() {
-	$("#confirm_registration_btn").trigger('click');
-	return false;
-});
-
 $("#birth_date").change(function(){
     var bdate = $("#birth_date").val();
     if(bdate) {
