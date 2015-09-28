@@ -43,6 +43,12 @@ class ClientLoginController extends ClientController {
             return $this->respondErrorMessage($response['data']);
         }
 
+        //check if facebook_app_id and google_app_id is empty
+        if($this->user->getFacebookId($response['data']) || $this->user->getGoogleId($response['data'])){
+
+            return $this->respondErrorMessage(2001);
+        }
+
         $client_id = $this->client->getClientId($response['data']);
 
         //check role of user if exist

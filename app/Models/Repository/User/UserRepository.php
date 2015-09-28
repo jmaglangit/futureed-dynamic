@@ -423,6 +423,17 @@ class UserRepository implements UserRepositoryInterface {
 		]);
 	}
 
+    public function getFacebookId($id){
+
+        return User::where('id',$id)->pluck('facebook_app_id');
+    }
+
+
+    public function getGoogleId($id){
+
+        return User::where('id',$id)->pluck('google_app_id');
+    }
+
 
 
 

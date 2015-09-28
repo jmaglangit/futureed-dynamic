@@ -475,6 +475,16 @@ class UserServices {
 		$this->users->addRegistrationToken($id,$registration_token);
 	}
 
+    public function getFacebookId($id){
+
+        return $this->users->getFacebookId($id);
+    }
+
+    public function getGoogleId($id){
+
+        return $this->users->getGoogleId($id);
+    }
+
     
 
 }
