@@ -11,11 +11,12 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 
 	angular.extend(self, $controller('MediaLoginController', { $scope : $scope}));
 
+	self.setSetUserType(Constants.STUDENT);
 	self.fbAsyncInit();
 
 	self.setActive = function(active) {
 		self.errors = Constants.FALSE;
-		self.record = Constants.FALSE;
+		self.record = {};
 
 		self.active_login = Constants.FALSE;
 		self.active_confirm = Constants.FALSE;
@@ -39,6 +40,10 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 				self.active_registration = Constants.TRUE;
 				break;
 
+			case 'registration_success'	:
+				self.active_registration_success = Constants.TRUE;
+				break;
+
 			case 'login'			:
 
 			default					:
@@ -54,18 +59,17 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 	$scope.$on('confirm-media', checkMediaLogin);
 
 	function checkMediaLogin(event, data) {
-		if(data.confirm) {
-			self.setActive('confirm_media');
+		self.setActive('confirm_media');
 
+		if(data.confirm) {
 			if(angular.equals(data.media_type, Constants.GOOGLE)) {
-				$scope.ui_block();
 				self.getGoogleDetails(function(response) {
 					self.record = data;
 					self.record.first_name = response.given_name;
 					self.record.last_name = response.family_name;
 
+					// apply before showing page
 					$scope.$apply();
-					$scope.ui_unblock();
 				});
 			} else {
 				self.record = data;
@@ -116,7 +120,7 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 
 	self.proceedToDashboard = function() {
 		$("#process_form input[name='user_data']").val($scope.user);
-		$("#process_form").submit();
+		// $("#process_form").submit();
 	}
 
 	function showModal(id) {
@@ -181,8 +185,8 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 	}
 
 	self.selectPassword = function(event) {
-			$scope.highlight(event);
-			self.validatePassword();
+		$scope.highlight(event);
+		self.validatePassword();
 	}
 
 	self.validatePassword = function() {
@@ -211,11 +215,10 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 	/**
 	* Student registration
 	*/
-	self.checkRegistration = function(id, token) {
+	self.checkRegistration = function(email, id, token) {
 		self.record.invited = Constants.FALSE;
-		self.setActive('registration');
-
-		if(id && token){
+		// If student is invited
+		if(id && token) {
 			self.errors = Constants.FALSE;
 
 			StudentLoginService.getStudentDetails(id, token).success(function(response){
@@ -237,6 +240,14 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 			}).error(function(response){
 				self.errors = $scope.internalError();
 			});
+		} else if(email) {
+			self.linked = Constants.TRUE;
+			self.setActive('registration_success');
+
+			self.record.email = email;
+		} else {
+
+			self.setActive('registration');
 		}
 	}
 
@@ -245,7 +256,7 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 		self.errors = Constants.FALSE;
 
 		if(!self.record.terms) {
-			$scope.errors = ["Please accept the terms and conditions."];
+			self.errors = ["Please accept the terms and conditions."];
 			$("html, body").animate({ scrollTop: 0 }, "slow");
 			return;
 		}
@@ -262,14 +273,20 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 		StudentLoginService.validateRegistration(self.record).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
-					$scope.errorHandler(response.errors);
+					self.errors = $scope.errorHandler(response.errors);
 
 					angular.forEach(response.errors, function(value, key) {
 						self.fields[value.field] = Constants.TRUE;
 					});
-				} else if(response.data){
-					self.register.success = Constants.TRUE;
-					self.register.email = self.record.email;
+
+					if(self.fields['birth_date']) {
+						$("div.birth-date-wrapper select").addClass("required-field");
+					}
+				} else if(response.data) {
+					var email = self.record.email;
+					
+					self.setActive('registration_success');
+					self.record.email = email;
 				}
 			}
 			$scope.ui_unblock();
@@ -316,5 +333,123 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 			scope.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
+	}
+
+	self.studentConfirmRegistration = function(event) {
+		event = getEvent(event);
+		event.preventDefault();
+
+		self.errors = Constants.FALSE;
+		self.record.user_type = Constants.STUDENT;
+
+		$scope.ui_block();
+		StudentLoginService.confirmCode(self.record.email, self.record.email_code, self.record.user_type).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data){
+					$("#redirect_form input[name='id']").val(response.data.id);
+					$("#redirect_form input[name='email']").val(self.record.email);
+					$("#redirect_form input[name='confirmation_code']").val(self.record.email_code);
+					$("#redirect_form").submit();
+				} 
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.studentResendConfirmation = function () {
+		self.errors = Constants.FALSE;
+		var user_type = Constants.STUDENT;
+		
+		var base_url = $("#base_url_form input[name='base_url']").val();
+		var resend_confirmation_url = base_url + Constants.URL_REGISTRATION(angular.lowercase(user_type));
+		var email = self.record.email;
+
+		$scope.ui_block();
+		StudentLoginService.resendConfirmation(email, user_type, resend_confirmation_url).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+
+					angular.forEach($scope.errors, function(value, key) {
+						if(angular.equals(value, Constants.MSG_ACC_CONFIRMED)) {
+							self.account_confirmed = Constants.TRUE;
+						}
+					});
+				} else if(response.data) {
+					self.resent = Constants.TRUE;
+				}
+			}
+			
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.setPasswordStatus = function(id) {
+		self.student_id = id;
+		self.password_isset = (self.password_isset) ? self.password_isset : Constants.FALSE;
+	}
+
+	self.selectNewPassword = function() {
+		self.errors = Constants.FALSE;
+		self.password_selected = Constants.FALSE;
+		
+		if($scope.image_id) {
+			self.password_selected = Constants.TRUE;
+			self.new_password = $scope.image_id;
+			$scope.image_id = Constants.FALSE;
+
+			$scope.image_pass = shuffle($scope.image_pass);
+			$("ul.form_password li").removeClass('selected');
+		} else {
+			self.errors = [Constants.MSG_PPW_SELECT_NEW];
+		}
+
+		$("html, body").animate({ scrollTop: 0 }, "slow");
+	}
+
+	self.undoNewPassword = function() {
+		self.errors = Constants.FALSE;
+		$scope.image_pass = shuffle($scope.image_pass);
+		self.password_selected = Constants.FALSE;
+		$scope.image_id = self.new_password;
+
+		$("ul.form_password li").removeClass("selected");
+		$("input[value='" + self.new_password + "']").closest("li").addClass("selected");
+
+		$("html, body").animate({ scrollTop: 0 }, "slow");
+	}
+
+	self.saveNewPassword = function() {
+		self.errors = Constants.FALSE;
+
+		if(self.new_password == $scope.$parent.image_id) {
+			$scope.ui_block();
+			StudentLoginService.setPassword(self.student_id, self.new_password).success(function(response) {
+				if(angular.equals(response.status, Constants.STATUS_OK)) {
+					if(response.errors) {
+						self.errors = $scope.errorHandler(response.errors);
+					} else if(response.data){
+						self.password_isset = Constants.TRUE;
+					} 
+				}
+
+				$scope.ui_unblock();
+			}).error(function(response) {
+				self.errors = $scope.internalError();
+				$scope.ui_unblock();
+			});
+		} else {
+			self.errors = [Constants.MSG_PPW_NOT_MATCH];
+			$("html, body").animate({ scrollTop: 0 }, "slow");
+		}
 	}
 }

@@ -6,9 +6,14 @@ MediaLoginController.$inject = ['$scope', '$filter', '$window', 'MediaLoginServi
 function MediaLoginController($scope, $filter, $window, MediaLoginService) {
 	var self = this;
 
+	self.user_type = Constants.FALSE;
 	/**
 	* Facebook Login for AngularJS
 	*/
+
+	self.setSetUserType = function(type) {
+		self.user_type = type;
+	}
 
 	// Initialize FB API on load
 	self.fbAsyncInit = function() {
@@ -46,7 +51,7 @@ function MediaLoginController($scope, $filter, $window, MediaLoginService) {
 	var loginFacebook = function(fb_data) {
 		var data = {
 			facebook_app_id		: fb_data.id
-			, user_type			: Constants.STUDENT
+			, user_type			: self.user_type
 		}
 
 		$scope.ui_block();
@@ -68,9 +73,10 @@ function MediaLoginController($scope, $filter, $window, MediaLoginService) {
 						$scope.$emit('confirm-media', data);
 					}
 				} else if(response.data) {
+					response.data.role = response.data.client_role;
 					$scope.user = JSON.stringify(response.data);
 					$("input[name='user_data']").val(JSON.stringify(response.data));
-					$("#media_form").submit();
+					$("#process_form").submit();
 				} 
 			}
 
@@ -111,7 +117,7 @@ function MediaLoginController($scope, $filter, $window, MediaLoginService) {
 	var loginGoogle = function(google_data) {
 		var data = {
 			google_app_id		: google_data.getId()
-			, user_type			: Constants.STUDENT
+			, user_type			: self.user_type
 		}
 
 		$scope.ui_block();
@@ -135,9 +141,10 @@ function MediaLoginController($scope, $filter, $window, MediaLoginService) {
 						$scope.$emit('confirm-media', client_data);
 					}
 				} else if(response.data){
+					response.data.role = response.data.client_role;
 					$scope.user = JSON.stringify(response.data);
 					$("input[name='user_data']").val(JSON.stringify(response.data));
-					$("#media_form").submit();
+					$("#process_form").submit();
 				} 
 			}
 

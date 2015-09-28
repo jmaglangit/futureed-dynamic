@@ -211,6 +211,8 @@ var Constants = {
 	, FACEBOOK 					: "Facebook"
 	, GOOGLE 					: "Google"
 
+	, PASSWORD_TIP				: "Password must be at least 8 characters and with at least 1 number."
+
 	, URL_FORGOT_PASSWORD		: function(user_type) {
 		return '/' + user_type + '/password/forgot';
 	}

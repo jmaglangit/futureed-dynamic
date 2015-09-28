@@ -24,14 +24,6 @@ var services = angular.module('futureed.services', []);
 			});
 		}
 
-		futureedAPI.resendConfirmation = function(email, user_type, callback_uri) {
-			return $http({
-				method	: 'POST'
-				, data 	: {email : email, user_type : user_type, callback_uri : callback_uri}
-				, url	: futureedAPIUrl + 'user/confirmation/code'
-			});
-		}
-
 		/**
 		* Student Services
 		*/
@@ -106,27 +98,11 @@ var services = angular.module('futureed.services', []);
 			});
 		}
 
-		futureedAPI.confirmCode = function(email, email_code, user_type) {
-			return $http({
-				method	: 'POST'
-				, data 	: {email : email, email_code : email_code, user_type : user_type}
-				, url	: futureedAPIUrl + 'user/email/code'
-			});
-		}
-
 		futureedAPI.resetPassword = function (id, code, image_id) {
 			return $http({
 				method	: 'POST'
 				, data	: {id : id, reset_code : code, password_image_id : image_id}
 				, url	: futureedAPIUrl + 'student/password/reset'
-			});
-		}
-
-		futureedAPI.setPassword = function (id, image_id) {
-			return $http({
-				method	: 'POST'
-				, data	: {id : id, password_image_id : image_id}
-				, url	: futureedAPIUrl + 'student/password/new'
 			});
 		}
 

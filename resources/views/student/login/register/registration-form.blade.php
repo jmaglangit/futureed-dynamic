@@ -42,8 +42,8 @@
 			</div>
 			
 			<div class="form-content col-xs-12">
-				<div class="alert alert-danger" ng-if="errors">
-				  <p ng-repeat="error in errors" > 
+				<div class="alert alert-danger" ng-if="login.errors">
+				  <p ng-repeat="error in login.errors" > 
 					{! error !}
 				  </p>
 				</div>
@@ -66,6 +66,7 @@
 								, ''
 								, array(
 									'class' => 'form-control'
+									, 'ng-class' => "{ 'required-field' : login.fields['gender'] }"
 									, 'ng-model' => 'login.record.gender')
 							); !!}
 						</div>
@@ -76,7 +77,9 @@
 							{!! Form::text('first_name', ''
 								, array(
 									'class' => 'form-control'
+									, 'ng-class' => "{ 'required-field' : login.fields['first_name'] }"
 									, 'placeholder' => 'First Name' 
+									, 'autocomplete' => 'off'
 									, 'ng-model' => 'login.record.first_name')
 							) !!}
 						</div>
@@ -85,7 +88,9 @@
 							{!! Form::text('last_name', ''
 								, array(
 									'class' => 'form-control'
+									, 'ng-class' => "{ 'required-field' : login.fields['last_name'] }"
 									, 'placeholder' => 'Last Name' 
+									, 'autocomplete' => 'off'
 									, 'ng-model' => 'login.record.last_name')
 							) !!}
 						</div>
@@ -96,6 +101,7 @@
 							{!! Form::text('city', ''
 								, array(
 									'class' => 'form-control'
+									, 'ng-class' => "{ 'required-field' : login.fields['city'] }"
 									, 'placeholder' => 'City' 
 									, 'ng-model' => 'login.record.city')
 							) !!}
@@ -105,6 +111,7 @@
 							{!! Form::text('state', ''
 								, array(
 									'class' => 'form-control'
+									, 'ng-class' => "{ 'required-field' : login.fields['state'] }"
 									, 'placeholder' => 'State' 
 									, 'ng-model' => 'login.record.state')
 							) !!}
@@ -113,7 +120,11 @@
 					<div class="form-group" ng-init="getCountries()">
 						<label class="col-xs-2 control-label">Country<span class="required">*</span></label>
 						<div class="col-xs-4">
-							<select name="country_id" id="country" class="form-control" ng-model="login.record.country_id" ng-change="getGradeLevel(login.record.country_id)">
+							<select name="country_id" id="country" 
+								class="form-control" 
+								ng-class="{ 'required-field' : login.fields['country_id'] }"
+								ng-model="login.record.country_id" 
+								ng-change="getGradeLevel(login.record.country_id)">
 								<option ng-selected ="login.record.country_id == futureed.FALSE" value="">-- Select Country --</option>
 								<option ng-selected ="login.record.country_id == country.id" ng-repeat="country in countries" ng-value="country.id">{! country.name !}</option>
 							</select>
@@ -130,6 +141,7 @@
 									'class' => 'form-control'
 									, 'ng-class' => "{ 'required-field' : login.fields['username'] }"
 									, 'placeholder' => 'Username' 
+									, 'autocomplete' => 'off'
 									, 'ng-model' => 'login.record.username'
 									, 'ng-model-options' => "{ debounce : { 'default' : 1000 } }"
 									, 'ng-change' => "login.checkUsername(login.record.username, futureed.STUDENT, futureed.FALSE)")
@@ -149,7 +161,9 @@
 							{!! Form::text('email', ''
 								, array(
 									'class' => 'form-control'
+									, 'ng-class' => "{ 'required-field' : login.fields['username'] }"
 									, 'placeholder' => 'Email Address' 
+									, 'autocomplete' => 'off'
 									, 'ng-model' => 'login.record.email'
 									, 'ng-model-options' => "{ debounce : { 'default' : 1000 } }"
 									, 'ng-change' => "login.checkEmail(login.record.email, futureed.STUDENT, futureed.FALSE)")
@@ -174,7 +188,7 @@
 							{!! Form::text('state', 'N/A'
 								, array(
 									'class' => 'form-control'
-									, 'disabled' => 'disabled'
+									, 'disabled' => 'true'
 									, 'ng-model' => 'login.record.school_name')
 							) !!}
 						</div>
@@ -182,7 +196,11 @@
 					<div class="form-group">
 						<label class="col-xs-2 control-label">School level<span class="required">*</span></label>
 						<div class="col-xs-4">
-							<select name="grade_code" ng-disabled="!grades.length" class="form-control" ng-model="login.record.grade_code">
+							<select name="grade_code" 
+								ng-disabled="!grades.length" 
+								class="form-control" 
+								ng-class="{ 'required-field' : login.fields['grade_code'] }"
+								ng-model="login.record.grade_code">
 								<option value="">-- Select Level --</option>
 								<option ng-selected="login.record.grade_code == grade.code" ng-repeat="grade in grades"  ng-value="grade.code">{! grade.name !}</option>
 							</select>

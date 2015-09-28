@@ -1,267 +1,352 @@
 angular.module('futureed.controllers')
 	.controller('LoginController', LoginController);
 
-LoginController.$inject = ['$scope', 'apiService', 'clientLoginApiService', 'clientProfileApiService'];
+LoginController.$inject = ['$scope', '$controller', 'apiService', 'ClientLoginApiService', 'MediaLoginService', 'ValidationService'];
 
-function LoginController($scope, apiService, clientLoginApiService, clientProfileApiService) {
+function LoginController($scope, $controller, apiService, ClientLoginApiService, MediaLoginService, ValidationService) {
 	var self = this;
 
-	self.set = {};
 	self.validation = {};
 
-	self.clientLogin = clientLogin;
-	self.clientForgotPassword = clientForgotPassword;
-	self.clientValidateCode = clientValidateCode;
-	self.clientResendCode = clientResendCode;
-	self.resetClientPassword = resetClientPassword;
-	self.setNewClientPassword = setNewClientPassword;
+	angular.extend(self, $controller('MediaLoginController', { $scope : $scope }));
 
-	self.selectRole = selectRole;
-	self.registerClient = registerClient;
-	self.resendClientConfirmation = resendClientConfirmation;
-	self.confirmClientRegistration = confirmClientRegistration;
+	ValidationService(self);
+	self.default();
 
-	function clientLogin() {
-	    $scope.errors = Constants.FALSE;
+	self.setSetUserType(Constants.CLIENT);
+	self.fbAsyncInit();
 
-	    $scope.ui_block();
-	    clientLoginApiService.clientLogin(self.username, self.password, self.role).success(function(response) {
-	      if(response.status == Constants.STATUS_OK) {
-	        if(response.errors) {
-	          $scope.errorHandler(response.errors);
-	          self.password = Constants.EMPTY_STR;
-	        } else if(response.data) {
-	          	var data = response.data;
-	          	  	data.role = self.role;
-	        	$("#login_form input[name='user_data']").val(angular.toJson(response.data));
-	          	$("#login_form").trigger(Constants.ATTR_SUBMIT);
-	        }
-	      }
-
-	      $scope.ui_unblock();
-	    }).error(function(response) {
-	      $scope.ui_unblock();
-	      $scope.internalError();
-	      self.username = Constants.EMPTY_STR;
-	      self.password = Constants.EMPTY_STR;
-	      self.role = Constants.EMPTY_STR;
-	    });
+	self.setRegistrationStatus = function(email) {
+		self.record = {};
+		self.record.email = email;
 	}
 
-	function clientForgotPassword() {
-		$scope.$parent.errors = Constants.FALSE;
-	    this.user_type = Constants.CLIENT;
-	    this.base_url = $("#base_url_form input[name='base_url']").val();
-	    this.forgot_password_url = this.base_url + Constants.URL_FORGOT_PASSWORD(angular.lowercase(this.user_type));
+	self.setActive = function(active) {
+		self.errors = Constants.FALSE;
 
-	    $scope.ui_block();
-	    apiService.forgotPassword(this.username, this.user_type, this.forgot_password_url).success(function(response) {
-	      if(response.status == Constants.STATUS_OK) {
-	        if(response.errors) {
-	          $scope.errorHandler(response.errors);
-	        } else if(response.data){
-	          $scope.email = response.data.email;
-	          $scope.sent = Constants.TRUE;
-	        } 
-	      }
+		self.active_login = Constants.FALSE;
+		self.active_confirm = Constants.FALSE;
+		self.active_registration = Constants.FALSE;
 
-	      $scope.ui_unblock();
-	    }).error(function(response) {
-	      $scope.internalError();
-	      $scope.ui_unblock();
-	    });
+		switch(active) {
+			case 'confirm_media'	:
+				self.active_confirm = Constants.TRUE;
+				break;
+
+			case 'confirm_success'	:
+				self.active_confirm_success = Constants.TRUE;
+				break;
+
+			case 'registration'	:
+				self.record = {};
+				self.active_registration = Constants.TRUE;
+				break;
+
+			case 'registration_success'	:
+				self.active_registration_success = Constants.TRUE;
+				break;
+
+			case 'login'			:
+
+			default					:
+				self.active_login = Constants.TRUE;
+				break;
+		}
+
+		$("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 
-	function clientValidateCode(reset_code) {
-		$scope.$parent.errors = Constants.FALSE;
-	    $scope.reset_code = reset_code;
-	    $scope.email = (!isStringNullorEmpty($scope.email)) ? $scope.email : $("#redirect_form input[name='email']").val();
-	    this.user_type = Constants.CLIENT;
+	self.setActive();
 
-	    $scope.ui_block();
-	    apiService.validateCode($scope.reset_code, $scope.email, this.user_type).success(function(response) {
-	      if(response.status == Constants.STATUS_OK) {
-	        if(response.errors) {
-	          $scope.errorHandler(response.errors);
-	        } else if(response.data){
-	          $("#redirect_form input[name='id']").val(response.data.id);
-          	  $("#redirect_form input[name='reset_code']").val($scope.reset_code);
-	          $("#redirect_form").submit();
-	        } 
-	      }
+	$scope.$on('confirm-media', checkMediaLogin);
 
-	      $scope.ui_unblock();
-	    }).error(function(response) {
-	      $scope.internalError();
-	      $scope.ui_unblock();
-	    });
-	}
+	function checkMediaLogin(event, data) {
+		self.setActive('confirm_media');
 
-	function clientResendCode() {
-	    $scope.$parent.errors = Constants.FALSE;
-	    this.user_type = Constants.CLIENT;
-	    $scope.email = (!isStringNullorEmpty($scope.email)) ? $scope.email : $("#redirect_form input[name='email']").val();
-	    this.base_url = $("#base_url_form input[name='base_url']").val();
-	    this.resend_code_url = this.base_url + Constants.URL_FORGOT_PASSWORD(angular.lowercase(this.user_type));
+		if(data.confirm) {
+			if(angular.equals(data.media_type, Constants.GOOGLE)) {
+				self.getGoogleDetails(function(response) {
+					self.record = data;
+					self.record.first_name = response.given_name;
+					self.record.last_name = response.family_name;
 
-	    $scope.ui_block();
-	    apiService.resendResetCode($scope.email, this.user_type, this.resend_code_url).success(function(response) {
-	      if(response.status == Constants.STATUS_OK) {
-	        if(response.errors) {
-	          $scope.errorHandler(response.errors);
-	        } else if(response.data){
-	          $scope.resent = Constants.TRUE;
-	        } 
-	      }
-
-	      $scope.ui_unblock();
-	    }).error(function(response) {
-	      $scope.internalError();
-	      $scope.ui_unblock();
-	    });
-	}
-
-	function resetClientPassword() {
-	    $scope.$parent.errors = Constants.FALSE;
-
-	    if(this.new_password == this.confirm_password) {
-	      var reset_code = $("input[name='reset_code']").val();
-	      var id = $("input[name='id']").val();
-
-	      $scope.ui_block();
-	      clientLoginApiService.resetClientPassword(id, reset_code, this.new_password).success(function(response) {
-	        if(response.status == Constants.STATUS_OK) {
-	          if(response.errors) {
-	            $scope.errorHandler(response.errors);
-	          } else if(response.data) {
-	            $scope.$parent.success = Constants.TRUE;
-	          }
-	        }
-
-	        $scope.ui_unblock();
-	      }).error(function(response) {
-	        $scope.internalError();
-	        $scope.ui_unblock();
-	      });
-	    } else {
-	      $scope.$parent.errors = [Constants.MSG_PW_NOT_MATCH];
-	      $("html, body").animate({ scrollTop: 0 }, "slow");
-	    }
-	}
-
-	function setNewClientPassword() {
-	    $scope.$parent.errors = Constants.FALSE;
-	    self.errors = Constants.FALSE;
-
-	    if(self.set.new_password == self.set.confirm_password) {
-		    $scope.ui_block();
-			clientLoginApiService.setClientPassword(self.set.id, self.set.new_password).success(function(response) {
-				if(response.status == Constants.STATUS_OK) {
-		          	if(response.errors) {
-		            	$scope.errorHandler(response.errors);
-		          	} else if(response.data) {
-		            	self.set.success = Constants.TRUE;
-		          	}
-		        }
-
-		        $scope.ui_unblock();
-			}).error(function(response) {
-				$scope.internalError();
-		        $scope.ui_unblock();
-			});
-		} else {
-			$scope.$parent.errors = [Constants.MSG_PW_NOT_MATCH];
-	      	$("html, body").animate({ scrollTop: 0 }, "slow");
+					$scope.$apply();
+				});
+			} else {
+				self.record = data;
+			}
 		}
 	}
 
-	function selectRole(role) {
+	self.confirmMediaDetails = function() {
+		self.errors = Constants.FALSE;
+		self.fields = [];
+
+		if(!self.record.terms) {
+			self.errors = ["Please accept the terms and conditions."];
+			$("html, body").animate({ scrollTop: 0 }, "slow");
+			return;
+		}
+
+		self.record.user_type = Constants.CLIENT;
+		delete self.record.gender;
+
+		$scope.ui_block();
+		MediaLoginService.registerMedia(self.record, angular.lowercase(self.record.media_type)).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+
+					angular.forEach(response.errors, function(value, key) {
+						self.fields[value.field] = Constants.TRUE;
+					});
+				} else if(response.data) {
+					$scope.user = JSON.stringify(response.data);
+					self.setActive('confirm_success');
+				} 
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.proceedToDashboard = function() {
+		$("#process_form input[name='user_data']").val($scope.user);
+		$("#process_form").submit();
+	}
+
+	self.clientLogin = function() {
+		$scope.errors = Constants.FALSE;
+
+		$scope.ui_block();
+		ClientLoginApiService.clientLogin(self.username, self.password, self.role).success(function(response) {
+		  if(response.status == Constants.STATUS_OK) {
+			if(response.errors) {
+			  $scope.errorHandler(response.errors);
+			  self.password = Constants.EMPTY_STR;
+			} else if(response.data) {
+				var data = response.data;
+					data.role = self.role;
+				$("#login_form input[name='user_data']").val(angular.toJson(response.data));
+				$("#login_form").trigger(Constants.ATTR_SUBMIT);
+			}
+		  }
+
+		  $scope.ui_unblock();
+		}).error(function(response) {
+		  $scope.ui_unblock();
+		  $scope.internalError();
+		  self.username = Constants.EMPTY_STR;
+		  self.password = Constants.EMPTY_STR;
+		  self.role = Constants.EMPTY_STR;
+		});
+	}
+
+	self.clientForgotPassword = function() {
 		$scope.$parent.errors = Constants.FALSE;
+		this.user_type = Constants.CLIENT;
+		this.base_url = $("#base_url_form input[name='base_url']").val();
+		this.forgot_password_url = this.base_url + Constants.URL_FORGOT_PASSWORD(angular.lowercase(this.user_type));
+
+		$scope.ui_block();
+		apiService.forgotPassword(this.username, this.user_type, this.forgot_password_url).success(function(response) {
+		  if(response.status == Constants.STATUS_OK) {
+			if(response.errors) {
+			  $scope.errorHandler(response.errors);
+			} else if(response.data){
+			  $scope.email = response.data.email;
+			  $scope.sent = Constants.TRUE;
+			} 
+		  }
+
+		  $scope.ui_unblock();
+		}).error(function(response) {
+		  $scope.internalError();
+		  $scope.ui_unblock();
+		});
+	}
+
+	self.clientValidateCode = function(reset_code) {
+		$scope.$parent.errors = Constants.FALSE;
+		$scope.reset_code = reset_code;
+		$scope.email = (!isStringNullorEmpty($scope.email)) ? $scope.email : $("#redirect_form input[name='email']").val();
+		this.user_type = Constants.CLIENT;
+
+		$scope.ui_block();
+		apiService.validateCode($scope.reset_code, $scope.email, this.user_type).success(function(response) {
+		  if(response.status == Constants.STATUS_OK) {
+			if(response.errors) {
+			  $scope.errorHandler(response.errors);
+			} else if(response.data){
+			  $("#redirect_form input[name='id']").val(response.data.id);
+			  $("#redirect_form input[name='reset_code']").val($scope.reset_code);
+			  $("#redirect_form").submit();
+			} 
+		  }
+
+		  $scope.ui_unblock();
+		}).error(function(response) {
+		  $scope.internalError();
+		  $scope.ui_unblock();
+		});
+	}
+
+	self.clientResendCode = function() {
+		$scope.$parent.errors = Constants.FALSE;
+		this.user_type = Constants.CLIENT;
+		$scope.email = (!isStringNullorEmpty($scope.email)) ? $scope.email : $("#redirect_form input[name='email']").val();
+		this.base_url = $("#base_url_form input[name='base_url']").val();
+		this.resend_code_url = this.base_url + Constants.URL_FORGOT_PASSWORD(angular.lowercase(this.user_type));
+
+		$scope.ui_block();
+		apiService.resendResetCode($scope.email, this.user_type, this.resend_code_url).success(function(response) {
+		  if(response.status == Constants.STATUS_OK) {
+			if(response.errors) {
+			  $scope.errorHandler(response.errors);
+			} else if(response.data){
+			  $scope.resent = Constants.TRUE;
+			} 
+		  }
+
+		  $scope.ui_unblock();
+		}).error(function(response) {
+		  $scope.internalError();
+		  $scope.ui_unblock();
+		});
+	}
+
+	self.resetClientPassword = function() {
+		$scope.$parent.errors = Constants.FALSE;
+
+		if(this.new_password == this.confirm_password) {
+		  var reset_code = $("input[name='reset_code']").val();
+		  var id = $("input[name='id']").val();
+
+		  $scope.ui_block();
+		  ClientLoginApiService.resetClientPassword(id, reset_code, this.new_password).success(function(response) {
+			if(response.status == Constants.STATUS_OK) {
+			  if(response.errors) {
+				$scope.errorHandler(response.errors);
+			  } else if(response.data) {
+				$scope.$parent.success = Constants.TRUE;
+			  }
+			}
+
+			$scope.ui_unblock();
+		  }).error(function(response) {
+			$scope.internalError();
+			$scope.ui_unblock();
+		  });
+		} else {
+		  $scope.$parent.errors = [Constants.MSG_PW_NOT_MATCH];
+		  $("html, body").animate({ scrollTop: 0 }, "slow");
+		}
+	}
+
+	self.setNewClientPassword = function() {
+		$scope.$parent.errors = Constants.FALSE;
+		self.errors = Constants.FALSE;
+
+		if(self.set.new_password == self.set.confirm_password) {
+			$scope.ui_block();
+			ClientLoginApiService.setClientPassword(self.set.id, self.set.new_password).success(function(response) {
+				if(response.status == Constants.STATUS_OK) {
+					if(response.errors) {
+						$scope.errorHandler(response.errors);
+					} else if(response.data) {
+						self.set.success = Constants.TRUE;
+					}
+				}
+
+				$scope.ui_unblock();
+			}).error(function(response) {
+				$scope.internalError();
+				$scope.ui_unblock();
+			});
+		} else {
+			$scope.$parent.errors = [Constants.MSG_PW_NOT_MATCH];
+			$("html, body").animate({ scrollTop: 0 }, "slow");
+		}
+	}
+
+	self.selectRole = function(role) {
+		self.errors = Constants.FALSE;
 
 		self.principal = Constants.FALSE;
 		self.parent = Constants.FALSE;
-		self.reg = {} ;
-
-		$scope.$parent.e_error = Constants.FALSE;
-		$scope.$parent.e_success = Constants.FALSE;
-		$scope.$parent.u_error = Constants.FALSE;
-		$scope.$parent.u_success = Constants.FALSE;
+		self.required = Constants.FALSE;
 
 		switch(role) {
 			case Constants.PRINCIPAL :
-				self.required = Constants.FALSE;
-				self.role_click = Constants.TRUE;
 				self.principal = Constants.TRUE;
-				self.reg.client_role = Constants.PRINCIPAL;
+				self.record.client_role = Constants.PRINCIPAL;
 				break;
 
 			case Constants.PARENT    :
 				self.required = Constants.TRUE;
-				self.role_click = Constants.TRUE;
 				self.parent = Constants.TRUE;
-				self.reg.client_role = Constants.PARENT;
+				self.record.client_role = Constants.PARENT;
 				break;
 
 			default:
-				self.reg = {};
 				break;
 		}
 
-		$("#registration_form input, #registration_form select").removeClass("required-field");
+		$("input, select").removeClass("required-field");
 	}
 
-	function registerClient() {
-	    $scope.$parent.errors = Constants.FALSE;
+	self.registerClient = function() {
+		self.errors = Constants.FALSE;
+		self.fields = [];
 
-	    $("#registration_form input, #registration_form select").removeClass("required-field");
-	    
-	    if($scope.e_error || $scope.u_error) {
-	      $("html, body").animate({ scrollTop: 320 }, "slow");
-	    } else if(!this.terms) {
-	      $scope.$parent.errors = ["Please accept the terms and conditions."];
-	      $("html, body").animate({ scrollTop: 0 }, "slow");
-	    } else if(this.reg.password != this.reg.confirm_password) {
-	      $("#registration_form input[name='password']").addClass("required-field");
-	      $("#registration_form input[name='confirm_password']").addClass("required-field");
-	      $scope.$parent.errors = [Constants.MSG_PW_NOT_MATCH];
-	      $("html, body").animate({ scrollTop: 0 }, "slow");
-	    } else {
-	      $scope.ui_block();
-	      this.email = this.reg.email;
-	      this.base_url = $("#base_url_form input[name='base_url']").val();
-	      this.reg.callback_uri = this.base_url + Constants.URL_REGISTRATION(angular.lowercase(Constants.CLIENT));
+		if(!self.record.terms) {
+			self.errors = ["Please accept the terms and conditions."];
+			$("html, body").animate({ scrollTop: 0 }, "slow");
+		} else if(self.record.password != self.record.confirm_password) {
+			self.fields['password'] = Constants.TRUE;
+			self.errors = [Constants.MSG_PW_NOT_MATCH];
+			$("html, body").animate({ scrollTop: 0 }, "slow");
+		} else {
+			var base_url = $("#base_url_form input[name='base_url']").val();
+			self.record.callback_uri = base_url + Constants.URL_REGISTRATION(angular.lowercase(Constants.CLIENT));
 
-	      clientLoginApiService.registerClient(this.reg).success(function(response) {
-	        if(response.status == Constants.STATUS_OK) {
-	          if(response.errors) {
-	            $scope.errorHandler(response.errors);
+			$scope.ui_block();
+			ClientLoginApiService.registerClient(self.record).success(function(response) {
+				if(angular.equals(response.status, Constants.STATUS_OK)) {
+					if(response.errors) {
+						self.errors = $scope.errorHandler(response.errors);
 
-	            angular.forEach(response.errors, function(value, key) {
-	              $("#registration_form input[name='" + value.field +"']").addClass("required-field");
-	              $("#registration_form select[name='" + value.field +"']").addClass("required-field");
-	            });
-	          } else if(response.data) {
-					self.registered = Constants.TRUE;
-	          }
-	        }
-	        $scope.ui_unblock();
-	      }).error(function(response) {
-	        $scope.internalError();
-	        $scope.ui_unblock();
-	      });
-	    }
-	  }
+						angular.forEach(response.errors, function(value, key) {
+							self.fields[value.field] = Constants.TRUE;
+						});
+					} else if(response.data) {
+						var email = self.record.email;
 
-	function resendClientConfirmation() {
-	    self.errors = Constants.FALSE;
+						self.setActive('registration_success');
+						self.record.email = email;
+					}
+				}
 
-	    self.user_type = Constants.CLIENT;
-	    self.email = (!isStringNullorEmpty(self.email)) ? self.email : $("#registration_success_form input[name='email']").val();
-	    this.base_url = $("#base_url_form input[name='base_url']").val();
-	    this.resend_confirmation_url = this.base_url + Constants.URL_REGISTRATION(angular.lowercase(this.user_type));
+				$scope.ui_unblock();
+			}).error(function(response) {
+				self.errors = $scope.internalError();
+				$scope.ui_unblock();
+			});
+		}
+	}
 
-	    $scope.ui_block();
-	    apiService.resendConfirmation(self.email, self.user_type, this.resend_confirmation_url).success(function(response) {
+	self.resendClientConfirmation = function() {
+		self.errors = Constants.FALSE;
+
+		var user_type = Constants.CLIENT;
+		var base_url = $("#base_url_form input[name='base_url']").val();
+		var resend_confirmation_url = base_url + Constants.URL_REGISTRATION(angular.lowercase(user_type));
+
+		$scope.ui_block();
+		ClientLoginApiService.resendConfirmation(self.record.email, user_type, resend_confirmation_url).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
@@ -277,35 +362,41 @@ function LoginController($scope, apiService, clientLoginApiService, clientProfil
 			}
 
 			$scope.ui_unblock();
-	    }).error(function(response) {
+		}).error(function(response) {
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
-	    });
+		});
 	}
 
-  	function confirmClientRegistration() {
-  		self.errors = Constants.FALSE;
-	    
-	    self.user_type = Constants.CLIENT;
-	    self.email = (!isStringNullorEmpty(self.email)) ? self.email : $("#registration_success_form input[name='email']").val();
+	self.confirmClientRegistration = function(event) {
+		event = getEvent(event);
+		event.preventDefault();
 
-	    $scope.ui_block();
-	    apiService.confirmCode(self.email, self.confirmation_code, self.user_type).success(function(response) {
-			if(response.status == Constants.STATUS_OK) {
+		self.errors = Constants.FALSE;
+		
+		var user_type = Constants.CLIENT;
+
+		$scope.ui_block();
+		ClientLoginApiService.confirmCode(self.record.email, self.record.email_code, user_type).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
-				} else if(response.data){
-					$scope.$parent.errors = Constants.FALSE;
+
+					angular.forEach($scope.errors, function(value, key) {
+						if(angular.equals(value, Constants.MSG_ACC_CONFIRMED)) {
+							self.account_confirmed = Constants.TRUE;
+						}
+					});
+				} else if(response.data) {
 					self.confirmed = Constants.TRUE;
-					self.set.id = response.data.id;
-				} 
+				}
 			}
 
 			$scope.ui_unblock();
-	    }).error(function(response) {
+		}).error(function(response) {
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
-	    });
+		});
 	}
 
 	self.getTeacherDetails = function(id, token) {
@@ -313,7 +404,7 @@ function LoginController($scope, apiService, clientLoginApiService, clientProfil
 		self.errors = Constants.FALSE;
 
 		$scope.ui_block();
-		clientLoginApiService.getTeacherDetails(id, token).success(function(response) {
+		ClientLoginApiService.getTeacherDetails(id, token).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
@@ -350,20 +441,20 @@ function LoginController($scope, apiService, clientLoginApiService, clientProfil
 			self.fields['password'] = Constants.TRUE;
 			self.errors = [Constants.MSG_PW_NOT_MATCH];
 		} else if(!self.terms) {
-	      self.errors = ["Please accept the terms and conditions."];
-	    } else {
+		  self.errors = ["Please accept the terms and conditions."];
+		} else {
 			var base_url = $("#base_url_form input[name='base_url']").val();
 			self.record.callback_uri = base_url + Constants.URL_REGISTRATION(angular.lowercase(Constants.CLIENT));
 
 			$scope.ui_block();
-			clientLoginApiService.updateClientRegistration(self.record).success(function(response) {
+			ClientLoginApiService.updateClientRegistration(self.record).success(function(response) {
 				if(angular.equals(response.status, Constants.STATUS_OK)) {
 					if(response.errors) {
 						self.errors = $scope.errorHandler(response.errors);
 
 						angular.forEach(response.errors, function(value, key) {
 							self.fields[value.field] = Constants.TRUE;
-			            });
+						});
 					} else if(response.data) {
 						self.registered = Constants.TRUE;
 						self.email = self.record.email;
