@@ -49,6 +49,8 @@ function MediaLoginController($scope, $filter, $window, MediaLoginService) {
 	}
 
 	var loginFacebook = function(fb_data) {
+		self.errors = Constants.FALSE;
+
 		var data = {
 			facebook_app_id		: fb_data.id
 			, user_type			: self.user_type
@@ -58,7 +60,7 @@ function MediaLoginController($scope, $filter, $window, MediaLoginService) {
 		MediaLoginService.loginFacebook(data).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
-					$scope.errorHandler(response.errors);
+					self.errors = $scope.errorHandler(response.errors);
 					if(angular.equals($scope.errors[0], "The selected facebook app id is invalid.")) {
 						self.errors = Constants.FALSE;
 
@@ -71,6 +73,8 @@ function MediaLoginController($scope, $filter, $window, MediaLoginService) {
 						data.confirm = Constants.TRUE;
 
 						$scope.$emit('confirm-media', data);
+					} else {
+						$scope.$emit('media-error', self.errors);
 					}
 				} else if(response.data) {
 					response.data.role = response.data.client_role;
@@ -82,7 +86,7 @@ function MediaLoginController($scope, $filter, $window, MediaLoginService) {
 
 			$scope.ui_unblock();
 		}).error(function(response) {
-			$scope.internalError();
+			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
 	}
@@ -115,6 +119,8 @@ function MediaLoginController($scope, $filter, $window, MediaLoginService) {
 	}
 
 	var loginGoogle = function(google_data) {
+		self.errors = Constants.FALSE;
+
 		var data = {
 			google_app_id		: google_data.getId()
 			, user_type			: self.user_type
@@ -124,7 +130,7 @@ function MediaLoginController($scope, $filter, $window, MediaLoginService) {
 		MediaLoginService.loginGoogle(data).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
-					$scope.errorHandler(response.errors);
+					self.errors = $scope.errorHandler(response.errors);
 
 					if(angular.equals($scope.errors[0], "The selected google app id is invalid.")) {
 						self.errors = Constants.FALSE;
@@ -139,6 +145,8 @@ function MediaLoginController($scope, $filter, $window, MediaLoginService) {
 						}
 
 						$scope.$emit('confirm-media', client_data);
+					} else {
+						$scope.$emit('media-error', self.errors);
 					}
 				} else if(response.data){
 					response.data.role = response.data.client_role;
@@ -150,7 +158,7 @@ function MediaLoginController($scope, $filter, $window, MediaLoginService) {
 
 			$scope.ui_unblock();
 		}).error(function(response) {
-			$scope.internalError();
+			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
 	}
