@@ -1,18 +1,3 @@
-//login
-$(document).on('submit', '#forgot_password_form', function() {
-	$("#forgot_password_btn").trigger('click');
-	return false;
-});
-
-$(document).on('submit', '#forgot_success_form', function() {
-	$("#validate_code_btn").trigger('click');
-	return false;
-});
-
-$("input#birth_date").change(function(){
-    
-});
-
 function checkAge() {
     var bdate = $("#birth_date").val();
 

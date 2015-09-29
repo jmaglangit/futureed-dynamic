@@ -19,7 +19,7 @@
 			]);
 		Routes::get('/password/forgot', [
 				'as' => 'student.password.forgot'
-				, 'uses' => 'FutureLesson\Student\LoginController@reset_code'
+				, 'uses' => 'FutureLesson\Student\LoginController@forgot_password'
 			]);
 		Routes::get('/logout', [ 
 				'as' => 'student.logout'
@@ -45,6 +45,12 @@
 					'as' => 'student.login.forgot_password'
 					, 'uses' => 'FutureLesson\Student\LoginController@forgot_password'
 				]);
+
+			Routes::get('/enter-reset-code', [ 
+					'as' => 'student.login.password.enter_reset_code'
+					, 'uses' => 'FutureLesson\Student\LoginController@enter_reset_code'
+				]);
+
 			Routes::post('/reset-password', [ 
 					'as' => 'student.login.reset_password'
 					, 'uses' => 'FutureLesson\Student\LoginController@reset_password'

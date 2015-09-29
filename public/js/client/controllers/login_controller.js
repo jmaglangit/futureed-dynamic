@@ -6,8 +6,6 @@ LoginController.$inject = ['$scope', '$controller', 'apiService', 'ClientLoginAp
 function LoginController($scope, $controller, apiService, ClientLoginApiService, MediaLoginService, ValidationService) {
 	var self = this;
 
-	self.validation = {};
-
 	angular.extend(self, $controller('MediaLoginController', { $scope : $scope }));
 
 	ValidationService(self);
@@ -57,6 +55,12 @@ function LoginController($scope, $controller, apiService, ClientLoginApiService,
 	}
 
 	self.setActive();
+
+	$scope.$on('media-error', displayMediaError);
+
+	function displayMediaError(event, data) {
+		self.errors = data;
+	}
 
 	$scope.$on('confirm-media', checkMediaLogin);
 

@@ -1,14 +1,8 @@
 @extends('student.app')
 
 @section('content')
-<div class="container login" ng-cloak>
-
-	<div class="col-md-9 col-md-offset-2 form-style">
-		{!! Form::open(
-			array(
-				'id' => 'confirm_email_form'
-			)
-		)!!}
+	<div class="container login" ng-cloak>
+		<div class="login-container form-style">
 			<div class="form_content">
 				<div class="title">
 					<h3>Confirming Email Address</h3>
@@ -38,11 +32,6 @@
 					<a href="{!! route('student.profile.index') !!}" class="btn btn-gold btn-large"><i class="fa fa-home"></i> Home </a>
 				</div>
 			</div>
-		{!! Form::close() !!}
+		</div>
 	</div>
-</div>
 @endsection
-
-@section('scripts')
-
-@stop
