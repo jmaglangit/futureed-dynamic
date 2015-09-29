@@ -119,13 +119,13 @@ function LoginController($scope, $controller, apiService, ClientLoginApiService,
 	}
 
 	self.clientLogin = function() {
-		$scope.errors = Constants.FALSE;
+		self.errors = Constants.FALSE;
 
 		$scope.ui_block();
 		ClientLoginApiService.clientLogin(self.username, self.password, self.role).success(function(response) {
-		  if(response.status == Constants.STATUS_OK) {
+		  if(angular.equals(response.status, Constants.STATUS_OK)) {
 			if(response.errors) {
-			  $scope.errorHandler(response.errors);
+			  self.errors = $scope.errorHandler(response.errors);
 			  self.password = Constants.EMPTY_STR;
 			} else if(response.data) {
 				var data = response.data;
@@ -146,16 +146,17 @@ function LoginController($scope, $controller, apiService, ClientLoginApiService,
 	}
 
 	self.clientForgotPassword = function() {
-		$scope.$parent.errors = Constants.FALSE;
-		this.user_type = Constants.CLIENT;
-		this.base_url = $("#base_url_form input[name='base_url']").val();
-		this.forgot_password_url = this.base_url + Constants.URL_FORGOT_PASSWORD(angular.lowercase(this.user_type));
+		self.errors = Constants.FALSE;
+		var user_type = Constants.CLIENT;
+
+		var base_url = $("#base_url_form input[name='base_url']").val();
+		var forgot_password_url = base_url + Constants.URL_FORGOT_PASSWORD(angular.lowercase(user_type));
 
 		$scope.ui_block();
-		apiService.forgotPassword(this.username, this.user_type, this.forgot_password_url).success(function(response) {
+		apiService.forgotPassword(self.username, user_type, forgot_password_url).success(function(response) {
 		  if(response.status == Constants.STATUS_OK) {
 			if(response.errors) {
-			  $scope.errorHandler(response.errors);
+			  self.errors = $scope.errorHandler(response.errors);
 			} else if(response.data){
 			  $scope.email = response.data.email;
 			  $scope.sent = Constants.TRUE;
@@ -164,7 +165,7 @@ function LoginController($scope, $controller, apiService, ClientLoginApiService,
 
 		  $scope.ui_unblock();
 		}).error(function(response) {
-		  $scope.internalError();
+		  self.errors =  $scope.internalError();
 		  $scope.ui_unblock();
 		});
 	}
@@ -196,13 +197,14 @@ function LoginController($scope, $controller, apiService, ClientLoginApiService,
 
 	self.clientResendCode = function() {
 		$scope.$parent.errors = Constants.FALSE;
-		this.user_type = Constants.CLIENT;
+		var user_type = Constants.CLIENT;
 		$scope.email = (!isStringNullorEmpty($scope.email)) ? $scope.email : $("#redirect_form input[name='email']").val();
-		this.base_url = $("#base_url_form input[name='base_url']").val();
-		this.resend_code_url = this.base_url + Constants.URL_FORGOT_PASSWORD(angular.lowercase(this.user_type));
+		
+		var base_url = $("#base_url_form input[name='base_url']").val();
+		var resend_code_url = base_url + Constants.URL_FORGOT_PASSWORD(angular.lowercase(user_type));
 
 		$scope.ui_block();
-		apiService.resendResetCode($scope.email, this.user_type, this.resend_code_url).success(function(response) {
+		apiService.resendResetCode($scope.email, user_type, resend_code_url).success(function(response) {
 		  if(response.status == Constants.STATUS_OK) {
 			if(response.errors) {
 			  $scope.errorHandler(response.errors);

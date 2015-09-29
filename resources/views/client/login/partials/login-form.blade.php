@@ -3,8 +3,8 @@
 		<div class="login-container form-style form-narrow">
 			<div class="title">Login to your account</div>
 			
-			<div class="alert alert-danger" style="text-align:left;" ng-if="errors">
-				<p ng-repeat="error in errors"> 
+			<div class="alert alert-danger" style="text-align:left;" ng-if="login.errors">
+				<p ng-repeat="error in login.errors"> 
 					{! error !}
 				</p>
 			</div>

@@ -75,6 +75,9 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 				self.record = data;
 			}
 		}
+
+		// since API is strict with Gender case. Must be 'Male' or 'Female'; otherwise API will respond an error
+		self.record.gender = (angular.equals(angular.lowercase(Constants.MALE), angular.lowercase(self.record.gender))) ? Constants.MALE : Constants.FEMALE;
 	}
 
 	self.confirmMediaDetails = function() {
@@ -120,7 +123,7 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 
 	self.proceedToDashboard = function() {
 		$("#process_form input[name='user_data']").val($scope.user);
-		// $("#process_form").submit();
+		$("#process_form").submit();
 	}
 
 	function showModal(id) {
