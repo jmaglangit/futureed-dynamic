@@ -183,7 +183,14 @@ class GoogleLoginController extends ApiController {
 
 				$client_details = $this->client->getClientByGoogleId($app_id);
 
-				return $this->respondWithData($client_details[0]->toArray());
+				if($client_details[0]->account_status <> config('futureed.client_account_status_accepted')){
+
+					return $this->respondErrorMessage(2118);
+
+				} else {
+
+					return $this->respondWithData($client_details[0]->toArray());
+				}
 
 				break;
 
