@@ -1,4 +1,4 @@
-<div class="login-container form-style" ng-if="password.active_linked">
+<div class="client-container form-style" ng-if="password.active_linked">
 	<div class="title" ng-if="!password.resent">Enter Reset Code</div>
 	<div class="title" ng-if="password.resent">Reset Code Resent</div>
 		
@@ -15,7 +15,7 @@
 			</div>
 
 			<p class="text" >
-				Please enter the reset code to create your new picture password.
+				Please enter the reset code to create your new password.
 			</p>
 		</div>
 
@@ -25,17 +25,17 @@
 			</div>
 
 			<p>
-				A new email to reset your picture password has been sent to your email account. 
+				A new reset code has been sent to your email account.
 			</p>
 			<small>Please check your inbox or your spam folder for the email. The email contains a confirmation code that you need to input below.</small>
 		</div>
 
-		{!! Form::open(array('id' => 'redirect_form', 'method' => 'POST', 'route' => 'student.login.reset_password')) !!}
+		{!! Form::open(array('id' => 'redirect_form', 'method' => 'POST', 'route' => 'client.login.reset_password')) !!}
 			{!! Form::hidden('id') !!}
 			{!! Form::hidden('reset_code', '') !!}
 		{!! Form::close() !!}
 
-		{!! Form::open(array('ng-submit' => 'password.validateCode($event)')) !!}
+		{!! Form::open(array('ng-submit' => 'password.clientValidateCode($event)')) !!}
 			<div class="form-group">
 				{!! Form::text('reset_code', ''
 					, array(
@@ -50,9 +50,9 @@
 			<div class="btn-container">
 				{!! Form::button('Proceed'
 					, array(
-						  'class' => 'btn btn-maroon btn-medium'
+						  'class' => 'btn btn-blue btn-medium'
 						, 'ng-if' => '!password.password_set'
-						, 'ng-click' => 'password.validateCode($event)'
+						, 'ng-click' => 'password.clientValidateCode($event)'
 					)
 				) !!}
 
@@ -60,7 +60,7 @@
 					, array(
 						'class' => 'btn btn-gold btn-medium'
 						, 'ng-if' => '!password.password_set'
-						, 'ng-click' => 'password.resendResetCode()'
+						, 'ng-click' => 'password.clientResendCode()'
 					)
 				) !!}
 			</div>

@@ -55,6 +55,10 @@
 					'as' => 'client.login.forgot_password'
 					, 'uses' => 'FutureLesson\Client\LoginController@forgot_password'
 				]);
+			Routes::get('/enter-reset-code', [ 
+					'as' => 'client.login.password.enter_reset_code'
+					, 'uses' => 'FutureLesson\Client\LoginController@enter_reset_code'
+				]);
 			Routes::post('/reset-password', [ 
 					'as' => 'client.login.reset_password'
 					, 'uses' => 'FutureLesson\Client\LoginController@reset_password'

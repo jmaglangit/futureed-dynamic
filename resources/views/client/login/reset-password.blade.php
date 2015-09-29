@@ -1,87 +1,74 @@
 @extends('client.app')
 
 @section('content')
-<div class="container login" ng-cloak>
-    <div class="col-md-6 col-md-offset-1" ng-show="!success">
-      <div class="form-style form-narrow">
-        <div class="title">Reset Password</div>
+<div class="container login" ng-controller="ClientPasswordController as password" 
+	ng-init="password.setPasswordStatus('{!! $id !!}', '{!! $reset_code !!}')" ng-cloak>
+		
+		<div class="client-container form-style" ng-if="!password.success">
+			<div class="title">Reset Password</div>
+			<div class="alert alert-danger" ng-if="password.errors">
+				<p ng-repeat="error in password.errors" > 
+					{! error !}
+				</p>
+			</div>
 
-          <div class="alert alert-danger" ng-if="errors">
-            <p ng-repeat="error in errors" > 
-              {! error !}
-            </p>
-          </div>
+			{!! Form::open(array('id' => 'reset_password_form')) !!}
+				<div class="input">
+					<div class="icon">
+						<i class="fa fa-unlock-alt"></i>
+					</div>
 
-          {!! Form::open(
-              array(
-                  'id' => 'reset_password_form'
-                , 'ng-controller' => 'LoginController as forgot'
-              )
-          ) !!}
-          <div class="input">
-            <div class="icon">
-              <i class="fa fa-unlock-alt"></i>
-            </div>
-            {!! Form::password('new_password'
-                  , array(
-                      'ng-model' => 'forgot.new_password'
-                    , 'placeholder' => 'New Password'
-                  )
-            ) !!}
-          </div>
-          <div class="input">
-            <div class="icon">
-              <i class="fa fa-lock"></i>
-            </div>
-            {!! Form::password('confirm_password'
-                  , array(
-                      'ng-model' => 'forgot.confirm_password'
-                    , 'placeholder' => 'Confirm New Password'
-                  )
-            ) !!}
-          </div>
+					{!! Form::password('new_password'
+						, array(
+							'ng-model' => 'password.record.new_password'
+							, 'placeholder' => 'New Password'
+						)
+					) !!}
+				</div>
+				<div class="input">
+					<div class="icon">
+						<i class="fa fa-lock"></i>
+					</div>
 
-          {!! Form::hidden('reset_code', $reset_code) !!}
-          {!! Form::hidden('id', $id) !!}
+					{!! Form::password('confirm_password'
+						, array(
+							'ng-model' => 'password.record.confirm_password'
+							, 'placeholder' => 'Confirm New Password'
+						)
+					) !!}
+				</div>
 
-          <div class="btn-container">
-            {!! Form::button('Reset'
-                , array(
-                  'class' => 'btn btn-blue btn-large'
-                  , 'ng-click' => 'forgot.resetClientPassword()'
-                )
-            ) !!}
-         </div>
-        {!! Form::close() !!}
-      </div>
-    </div>
+				<div class="btn-container">
+					{!! Form::button('Reset'
+							, array(
+								'class' => 'btn btn-blue btn-large'
+								, 'ng-click' => 'password.resetClientPassword()'
+							)
+					) !!}
+				</div>
+			{!! Form::close() !!}
+		</div>
 
-    <div class="col-md-6 col-md-offset-1" ng-if="success">
-      <div class="form-style form-select-password">
-        <div class="title">Success!</div>
+		<div class="client-container form-style" ng-if="password.success">
+			<div class="title">Success!</div>
 
-        <div class="roundcon">
-          <i class="fa fa-check fa-5x img-rounded text-center"></i>
-        </div>
+			<div class="roundcon">
+				<i class="fa fa-check fa-5x img-rounded text-center"></i>
+			</div>
 
-        <p>Your password has been set.</p>
-        <p> You may now use your new password to login.</p>
+			<p>Your password has been set.</p>
+			<p> You may now use your new password to login.</p>
 
-        <br />
+			<br />
 
-        <div class="btn-container">
-          <a class="btn btn-blue btn-large" href="{!! route('client.login') !!}">Click here to Login</a>
-        </div>
-      </div>
-    </div>
+			<div class="btn-container">
+				<a class="btn btn-blue btn-large" href="{!! route('client.login') !!}">Click here to Login</a>
+			</div>
+		</div>
 </div>
 @endsection
 
 @section('scripts')
-
-  {!! Html::script('/js/client/controllers/login_controller.js') !!}
-  {!! Html::script('/js/client/services/login_service.js') !!}
-  {!! Html::script('/js/client/services/profile_service.js') !!}
-  {!! Html::script('/js/client/login.js') !!}
-
+	{!! Html::script('/js/client/controllers/client_password_controller.js') !!}
+	{!! Html::script('/js/client/services/client_password_service.js') !!}
 @stop
