@@ -70,6 +70,12 @@ class UserPasswordController extends UserController {
 
 				$isActivated = $this->user->isActivated($return['user_id']);
 
+				//check if facebook_app_id and google_app_id is empty
+				if($this->user->getFacebookId($return['user_id']) || $this->user->getGoogleId($return['user_id'])){
+
+					return $this->respondErrorMessage(2001);
+				}
+
 				if ($isActivated == 1) {
 
 

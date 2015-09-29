@@ -46,4 +46,12 @@ interface ClientRepositoryInterface
 
 	public function getClientRole($id);
 
+	public function addClientFromFacebook($data);
+
+	public function getClientByFacebook($facebook_id);
+
+	public function addClientFromGoogle($data);
+
+	public function getClientByGoogleId($google_id);
+
 }

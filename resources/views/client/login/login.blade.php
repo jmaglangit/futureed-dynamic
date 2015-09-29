@@ -1,139 +1,32 @@
 @extends('client.app')
 
 @section('content')
-
-  <div class="container login" ng-cloak>
-    <div class="col-md-5 col-md-offset-1">
-      <div class="form-style form-narrow">
-      	<!-- ERROR -->
-      	<div style="display:none;">
-	      	<div class="title">Account Locked</div>
-	        <div class="form_content">
-	          <div style="width:120px; margin:0 auto 30px;">
-	          <i class="fa fa-lock fa-5x img-rounded text-center" style="background:#e8e8e8; border-radius:200px; padding:20px; width:120px;"></i>
-	          </div>
+<div class="container login" ng-controller="LoginController as login" ng-cloak>
 	
-	          <p>Your account has been locked due to maximum attempt of invalid login.</p>
-	          <p>Please <a href="#">click here</a> to redirect you to the steps to reset your picture password.</p>
-	        </div>
-      	</div>
-        <div class="title">Login to your account</div>
-          <div class="alert alert-danger" style="text-align:left;" ng-if="errors">
-            <p ng-repeat="error in errors" > 
-              {! error !}
-            </p>
-          </div>
-          {!! Form::open(
-              array(
-                    'id' => 'login_form'
-                  , 'route' => 'client.login.process'
-                  , 'method' => 'POST'
-                  , 'ng-controller' => 'LoginController as login'
-              )
-          ) !!}
-          <div class="input">
-            <div class="icon">
-              <i class="fa fa-user"></i>
-            </div>
-            {!! Form::text('login', ''
-                , array(
-                    'placeholder' => 'Email or Username'
-                    , 'ng-model' => 'login.username'
-                    , 'autocomplete' => 'off'
-                )
-            ) !!}
-          </div>
-          <div class="input pass">
-            <div class="icon">
-              <i class="fa fa-lock"></i>
-            </div>
-            {!! Form::password('password'
-                , array(
-                    'placeholder' => 'Password'
-                    , 'ng-model' => 'login.password'
-                )
-            ) !!}
-          </div>
+	{!! Form::open(array('id' => 'process_form', 'method' => 'POST', 'route' => 'client.login.process')) !!}
+		{!! Form::hidden('user_data', '') !!}
+	{!! Form::close() !!}
 
-          <div class="title">ROLE</div>
-          <div class="input">
-            <div class="icon">
-              <i class="fa fa-group"></i>
-            </div>
-            {!! Form::select('role'
-                , array(
-                    '' => '-- Select Role --'
-                    , 'Parent' => 'Parent'
-                    , 'Teacher' => 'Teacher'
-                    , 'Principal' => 'Principal')
-                , ''
-                , array(
-                    'class' => 'form-control'
-                    , 'ng-model' => 'login.role'
-                )
-              ) !!}
-          </div>
+	<div template-directive template-url="{!! route('client.partials.base_url') !!}"></div>
+	
+	<div template-directive template-url="{!! route('client.login.login_form') !!}"></div>
 
-          {!! Form::hidden('user_data', ''
-              , array(
-                 'ng-model' => 'user_data'
-              )
-          ) !!}
-
-          {!! Form::button('Login'
-              , array(
-                  'class' => 'btn btn-blue'
-                  , 'ng-click' => 'login.clientLogin()'
-              )
-          ) !!}
-          
-          <div class="text-group">
-            <small>Not a Parent / Teacher / School?</small>
-            <small>Click 
-
-                {!! Html::link(
-                    route('student.login')
-                    , 'here') 
-                !!}
-
-                 for Student Site
-            </small>     
-          </div>  
-
-          <div class="text-group">
-            <small>
-              {!! Html::link(route('client.login.forgot_password'), 'Forgot your password?') !!}
-            </small>  
-          </div>
-
-          <p>
-            {!! Html::link(route('client.registration'), 'Sign Up'
-                , array(
-                    'class' => 'btn btn-gold fb'
-                )
-            ) !!}
-          </p>
-
-        {!! Form::close() !!}
-      </div>
-    </div>
-    <div style="font:normal 14px/20px Arial;" class="col-md-6 bulletin" ng-init="getAnnouncement()">
-      <h2 class="title">Bulletin Board</h2>
-      <hr />
-      <h4 class="announce-title">
-          <i class="fa fa-clock-o"></i>
-          {! display_date | date:'MMMM dd, yyyy' !}
-      </h4>
-        <br />
-        <p ng-if="announce">{! announce.announcement !}</p>
-    </div>
-  </div>
+	<div template-directive template-url="{!! route('client.login.confirm_media') !!}"></div>
+</div>
 @endsection
 
 @section('scripts')
+	{!! Html::script('//connect.facebook.net/en_US/sdk.js') !!}
+	{!! Html::script('https://apis.google.com/js/platform.js') !!}
+	{!! Html::script('https://apis.google.com/js/client.js') !!}
 
-  {!! Html::script('/js/client/controllers/login_controller.js') !!}
-  {!! Html::script('/js/client/services/login_service.js') !!}
-  {!! Html::script('/js/client/services/profile_service.js') !!}
+	{!! Html::script('/js/common/validation_service.js') !!}
 
+	{!! Html::script('/js/student/controllers/media_login_controller.js') !!}
+	{!! Html::script('/js/student/services/media_login_service.js') !!}
+
+	{!! Html::script('/js/client/controllers/login_controller.js') !!}
+	{!! Html::script('/js/client/services/login_service.js') !!}
+
+	{!! Html::script('/js/client/services/profile_service.js') !!}
 @stop

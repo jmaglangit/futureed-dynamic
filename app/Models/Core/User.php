@@ -38,15 +38,35 @@ class User extends Model {
         'created_at',
         'updated_at',
         'deleted_at',
+        'facebook_app_id',
+        'google_app_id'
     ];
 
-    protected $fillable = ['username', 'email','new_email', 'name', 'password', 'user_type', 'confirmation_code',
-
-        'confirmation_code_expiry','email_code','email_code_expiry','registration_token','status', 'is_account_activated','created_by', 'updated_by'];
+    protected $fillable = [
+        'username',
+        'email',
+        'new_email',
+        'name',
+        'password',
+        'user_type',
+        'facebook_app_id',
+        'google_app_id',
+        'confirmation_code',
+        'confirmation_code_expiry',
+        'email_code',
+        'email_code_expiry',
+        'registration_token',
+        'status',
+        'is_account_activated',
+        'created_by',
+        'updated_by'
+    ];
 
 	protected $attributes = [
-		'created_by' => 1,
-		'updated_by' => 1
+        'created_by' => 1,
+        'updated_by' => 1,
+        'is_account_activated' => 0,
+        'is_account_locked' => 0
 	];
 
     

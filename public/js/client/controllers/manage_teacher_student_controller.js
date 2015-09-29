@@ -1,9 +1,9 @@
 angular.module('futureed.controllers')
 	.controller('ManageTeacherStudentController', ManageTeacherStudentController);
 
-ManageTeacherStudentController.$inject = ['$scope', 'manageTeacherStudentService', 'apiService', 'TableService', 'SearchService', 'ValidationService'];
+ManageTeacherStudentController.$inject = ['$scope', '$filter', 'manageTeacherStudentService', 'apiService', 'TableService', 'SearchService', 'ValidationService'];
 
-function ManageTeacherStudentController($scope, manageTeacherStudentService, apiService, TableService, SearchService, ValidationService) {
+function ManageTeacherStudentController($scope, $filter, manageTeacherStudentService, apiService, TableService, SearchService, ValidationService) {
 	var self = this;
 
 	ValidationService(self);
@@ -15,7 +15,7 @@ function ManageTeacherStudentController($scope, manageTeacherStudentService, api
 	SearchService(self);
 	self.searchDefaults();
 
-	self.setActive = function(active) {
+	self.setActive = function(active, id) {
 		self.errors = Constants.FALSE;
 		self.fields = [];
 		
@@ -27,11 +27,13 @@ function ManageTeacherStudentController($scope, manageTeacherStudentService, api
 		switch(active) {
 			case Constants.ACTIVE_VIEW:
 				self.active_view = Constants.TRUE;
+				self.studentDetails(id);
 				break;
 
 			case Constants.ACTIVE_EDIT:
 				self.success = Constants.FALSE;
 				self.active_edit = Constants.TRUE;
+				self.studentDetails(id);
 				break;
 
 			case Constants.ACTIVE_EMAIL:
@@ -48,6 +50,7 @@ function ManageTeacherStudentController($scope, manageTeacherStudentService, api
 				break;
 		}
 
+		$("input, select").removeClass("required-field");
 		$("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 
@@ -95,7 +98,7 @@ function ManageTeacherStudentController($scope, manageTeacherStudentService, api
 		});
 	}
 
-	self.studentDetails = function(id, active) {
+	self.studentDetails = function(id) {
 		self.errors = Constants.FALSE;
 		self.record = {};
 
@@ -111,9 +114,9 @@ function ManageTeacherStudentController($scope, manageTeacherStudentService, api
 					self.record.username = data.user.username;
 					self.record.email = data.user.email;
 					self.record.new_email = data.user.new_email;
-					self.record.birth = data.birth_date;
-
-					self.setActive(active);
+					
+					self.dateDropdown(self.record.birth_date);
+					self.getGradeLevel(self.record.country_id)
 				}
 			}
 
@@ -127,7 +130,11 @@ function ManageTeacherStudentController($scope, manageTeacherStudentService, api
 	self.updateDetails = function() {
 		self.fields = [];
 		self.errors = Constants.FALSE;
-		self.record.birth_date = $("input[name='hidden_date']").val();
+		
+		$("div.birth-date-wrapper select").removeClass("required-field");
+
+		var birth_date = $("input#birth_date").val();
+		self.record.birth_date = $filter(Constants.DATE)(new Date(birth_date), Constants.DATE_YYYYMMDD);
 
 		$scope.ui_block();
 		manageTeacherStudentService.updateDetails(self.record).success(function(response) {
@@ -138,6 +145,10 @@ function ManageTeacherStudentController($scope, manageTeacherStudentService, api
 					angular.forEach(response.errors, function(value, key) {
 						self.fields[value.field] = Constants.TRUE;
 					});
+
+					if(self.fields['birth_date']) {
+		            	$("div.birth-date-wrapper select").addClass("required-field");
+		            }
 				} else if(response.data) {
 					var data = response.data;
 
@@ -148,7 +159,7 @@ function ManageTeacherStudentController($scope, manageTeacherStudentService, api
 					self.record.birth = data.birth_date;
 					
 					self.success = TeacherConstant.UPDATE_STUDENT_SUCCESS;
-					self.setActive(Constants.ACTIVE_VIEW);
+					self.setActive(Constants.ACTIVE_VIEW, self.record.id);
 				}
 			}
 
@@ -165,7 +176,7 @@ function ManageTeacherStudentController($scope, manageTeacherStudentService, api
 
 		self.data = {};
 		self.data.student_id = self.record.id;
-		self.data.email = self.record.email;
+		self.data.email = self.change.current_email;
 		self.data.new_email = self.change.new_email;
 		self.data.password = self.change.password;
 		self.data.client_id = $scope.user.id;
@@ -184,7 +195,7 @@ function ManageTeacherStudentController($scope, manageTeacherStudentService, api
 					});
 				} else if(response.data) {
 					self.success = TeacherConstant.UPDATE_STUDENT_EMAIL_SUCCESS;
-					self.studentDetails(self.record.id, Constants.ACTIVE_VIEW);
+					self.setActive(Constants.ACTIVE_VIEW, self.record.id);
 				}
 			}
 
@@ -193,5 +204,25 @@ function ManageTeacherStudentController($scope, manageTeacherStudentService, api
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
+	}
+
+	self.getGradeLevel = function(country_id) {
+		$scope.getGradeLevel(country_id);
+	}
+
+	self.dateDropdown = function(date) {
+		$("#birth_date").dateDropdowns({
+			defaultDate : date,
+		    submitFieldName: 'birth_date',
+		    wrapperClass: 'birth-date-wrapper',
+		    minAge: Constants.MIN_AGE,
+		    maxAge: Constants.MAX_AGE
+		});
+
+		if(self.active_edit) {
+			$(".day, .month, .year").prop('disabled', false);
+		}else {
+			$(".day, .month, .year").prop('disabled', true);
+		}
 	}
 }

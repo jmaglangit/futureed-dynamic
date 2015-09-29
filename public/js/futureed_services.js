@@ -1,36 +1,8 @@
 var services = angular.module('futureed.services', []);
 
-	services.factory('apiService', function($http) {
+	services.factory('apiService', function($http, $q) {
 		var futureedAPI = {};
 		var futureedAPIUrl = '/api/v1/';
-
-		/**
-		* Common API Calls
-		*/
-
-		futureedAPI.forgotPassword = function(username, user_type, callback_uri) {
-			return $http({
-				method 	: Constants.METHOD_POST
-				, data	: {username: username, user_type : user_type, callback_uri : callback_uri}
-				, url	: futureedAPIUrl + 'user/password/forgot'
-			});
-		}
-
-		futureedAPI.resendResetCode = function(email, user_type, callback_uri) {
-			return $http({
-				method 	: Constants.METHOD_POST
-				, data	: {email: email, user_type : user_type, callback_uri : callback_uri}
-				, url	: futureedAPIUrl + 'user/reset/code'
-			});
-		}
-
-		futureedAPI.resendConfirmation = function(email, user_type, callback_uri) {
-			return $http({
-				method	: 'POST'
-				, data 	: {email : email, user_type : user_type, callback_uri : callback_uri}
-				, url	: futureedAPIUrl + 'user/confirmation/code'
-			});
-		}
 
 		/**
 		* Student Services
@@ -59,18 +31,9 @@ var services = angular.module('futureed.services', []);
 			});
 		}
 
-
-		futureedAPI.validateUser = function(username) {
-			return $http({
-				method 	: 'POST'
-				, data	: { username : username} 
-				, url	: futureedAPIUrl + 'student/login/username'
-			});
-		}
-
 		futureedAPI.getLoginPassword = function(id) {
 			return $http({
-				method	: 'POST'
+				method	: Constants.METHOD_POST
 				, data	: {id : id}
 				, url	: futureedAPIUrl + 'student/login/image'
 			});
@@ -83,21 +46,7 @@ var services = angular.module('futureed.services', []);
 			});
 		}
 
-		futureedAPI.validatePassword = function(id, image_id) {
-			return $http({
-				method	: 'POST'
-				, data	: {id : id, image_id : image_id}
-				, url	: futureedAPIUrl + 'student/login/password'
-			});
-		}
-
-		futureedAPI.validateCode = function(code, email, user_type) {
-			return $http({
-				method	: 'POST'
-				, data 	: {email : email, user_type : user_type, reset_code : code}
-				, url	: futureedAPIUrl + 'user/password/code'
-			});
-		}
+		
 
 		futureedAPI.changeValidate = function(id, email_new, image_id, callback_uri) {
 			return $http({
@@ -120,30 +69,6 @@ var services = angular.module('futureed.services', []);
 				method	: 'POST'
 				, data 	: {new_email : new_email, user_type : user_type, callback_uri : callback_uri}
 				, url 	: futureedAPIUrl + 'student/resend/email/' + id
-			});
-		}
-
-		futureedAPI.confirmCode = function(email, email_code, user_type) {
-			return $http({
-				method	: 'POST'
-				, data 	: {email : email, email_code : email_code, user_type : user_type}
-				, url	: futureedAPIUrl + 'user/email/code'
-			});
-		}
-
-		futureedAPI.resetPassword = function (id, code, image_id) {
-			return $http({
-				method	: 'POST'
-				, data	: {id : id, reset_code : code, password_image_id : image_id}
-				, url	: futureedAPIUrl + 'student/password/reset'
-			});
-		}
-
-		futureedAPI.setPassword = function (id, image_id) {
-			return $http({
-				method	: 'POST'
-				, data	: {id : id, password_image_id : image_id}
-				, url	: futureedAPIUrl + 'student/password/new'
 			});
 		}
 
@@ -176,14 +101,6 @@ var services = angular.module('futureed.services', []);
 				method	: 'POST'
 				, data 	: {email : email, user_type : user_type}
 				, url	: futureedAPIUrl + 'user/email'
-			});
-		}
-
-		futureedAPI.validateRegistration = function(registration) {
-			return $http({
-				method	: 'POST'
-				, data	: registration
-				, url	: futureedAPIUrl + 'student/register'
 			});
 		}
 
@@ -254,14 +171,6 @@ var services = angular.module('futureed.services', []);
 			});
 		}
 
-		futureedAPI.editRegistration = function(data) {
-			return $http({
-				method 	: Constants.METHOD_PUT
-				, data 	: data 	
-				, url	: futureedAPIUrl + 'client/manage/update-student/' + data.id
-			});
-		}
-
 		futureedAPI.getAgeGroup = function() {
 			return $http({
 				method 	: Constants.METHOD_GET
@@ -285,11 +194,26 @@ var services = angular.module('futureed.services', []);
 		}
 
 		futureedAPI.listClass = function(student_id) {
-		return $http({
-			method 	: Constants.METHOD_GET
-			, url 	: futureedAPIUrl + 'class-student/student-class-list?student_id=' + student_id
-		});
-	}
+			return $http({
+				method 	: Constants.METHOD_GET
+				, url 	: futureedAPIUrl + 'class-student/student-class-list?student_id=' + student_id
+			});
+		}
+
+		futureedAPI.getMyLastName = function() {
+            var deferred = $q.defer();
+            FB.api('/me', {
+                fields: 'last_name'
+            }, function(response) {
+                if (!response || response.error) {
+                    deferred.reject('Error occured');
+                } else {
+                    deferred.resolve(response);
+                }
+            });
+            
+            return deferred.promise;
+        }
 
 		return futureedAPI;
 	});

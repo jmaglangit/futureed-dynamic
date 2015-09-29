@@ -1,18 +1,14 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Jason
- * Date: 3/6/15
- * Time: 11:30 AM
- */
-namespace FutureEd\Models\Repository\Student;
+<?php namespace FutureEd\Models\Repository\Student;
 
 use FutureEd\Models\Core\Student;
 use FutureEd\Models\Core\User;
+use FutureEd\Models\Traits\LoggerTrait;
 use League\Flysystem\Exception;
+use Illuminate\Support\Facades\DB;
 
 class StudentRepository implements StudentRepositoryInterface
 {
+	use LoggerTrait;
 
 	public function getStudents($criteria = array(), $limit = 0, $offset = 0)
 	{
@@ -419,6 +415,111 @@ class StudentRepository implements StudentRepositoryInterface
 			throw new Exception($e->getMessage());
 		}
 
+	}
+
+	/**
+	 * Add new Student Registered from Facebook
+	 * @param $data
+	 * @return string|static
+	 */
+	public function addStudentFromFacebook($data){
+
+		DB::beginTransaction();
+
+		try{
+
+			//Add user table
+//			$data = array_add($data,'username','NA');
+
+			$data = array_add($data, 'name',$data['first_name'] . ' ' . $data['last_name']);
+
+			//Set client to active.
+			$data = array_add($data, 'is_account_activated', 1);
+
+			//Default to USA -- No country code from login response.
+			$data['country_id'] = ($data['country_id'] == null ) ?  840 : $data['country_id'];
+
+			$user = User::create($data);
+
+			$data = array_add($data,'user_id',$user->id);
+
+			//Add student table
+			$student = Student::create($data);
+
+		} catch(\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e);
+
+			return 0;
+
+		}
+
+		DB::commit();
+
+		return $student;
+
+	}
+
+	/**
+	 * Get Student by Facebook Id.
+	 * @param $facebook_id
+	 * @return mixed
+	 */
+	public function getStudentByFacebook($facebook_id) {
+
+		return Student::with('user')->facebookId($facebook_id)->get();
+	}
+
+	/**
+	 * Add new Student from Google.
+	 * @param $data
+	 * @return int|static
+	 */
+	public function addStudentFromGoogle($data){
+
+		DB::beginTransaction();
+
+		try{
+
+			//Add user table
+//			$data = array_add($data,'username','NA');
+
+			$data = array_add($data, 'name',$data['first_name'] . ' ' . $data['last_name']);
+
+			//Set client to active.
+			$data = array_add($data, 'is_account_activated', 1);
+
+			//Default to USA -- No country code from login response.
+			$data['country_id'] = ($data['country_id'] == null ) ?  840 : $data['country_id'];
+
+			$user = User::create($data);
+
+			$data = array_add($data,'user_id',$user->id);
+
+			//Add student table
+			$student = Student::create($data);
+
+		} catch(\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e);
+
+			return 0;
+
+		}
+
+		DB::commit();
+
+		return $student;
+
+	}
+
+	public function getStudentByGoogleId($google_id){
+
+		return Student::with('user')->googleId($google_id)->get();
 	}
 
 

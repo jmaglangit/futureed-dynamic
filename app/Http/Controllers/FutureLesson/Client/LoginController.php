@@ -154,4 +154,12 @@ class LoginController extends Controller {
 	{
 		return view('client.login.terms-and-conditions');
 	}
+
+	public function login_form() {
+		return view('client.login.partials.login-form');
+	}
+
+	public function confirm_media() {
+		return view('client.login.partials.confirm-media');
+	}
 }

@@ -48,13 +48,19 @@ class StudentLoginController extends StudentController {
              
 			//check if username exist, return id else nothing
 			$response = $this->user->checkLoginName($input['username'], config('futureed.student'));
-            
+
 
            
 			if($response['status'] == 200) {
+
+                //check if facebook_app_id and google_app_id is empty
+                if($this->user->getFacebookId($response['data']) || $this->user->getGoogleId($response['data'])){
+
+                    return $this->respondErrorMessage(2001);
+                }
                 
                 $student_id = $this->student->getStudentId($response['data']);
-                
+
                 //get student age
                 if($this->student->getAge($student_id) < 14){
                     

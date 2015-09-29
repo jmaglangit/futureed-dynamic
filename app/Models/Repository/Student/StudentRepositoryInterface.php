@@ -53,5 +53,13 @@ interface StudentRepositoryInterface {
 
 	public function updateSchool($id,$school_code);
 
+    public function addStudentFromFacebook($data);
+
+    public function getStudentByFacebook($facebook_id);
+
+    public function addStudentFromGoogle($data);
+
+    public function getStudentByGoogleId($google_id);
+
 
 }

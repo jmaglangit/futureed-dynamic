@@ -19,10 +19,9 @@
 
 	<div class="module-container">
 		{!! Form::open(['class' => 'form-horizontal', 'id' => 'change_email_form']) !!}
-		<div class="col-md-offset-1">
 			<div class="form-group">
 				<label class="control-label col-xs-3">Current Email <span class="required">*</span></label>
-				<div class="col-xs-4">
+				<div class="col-xs-5">
 					{!! Form::text('current_email', ''
 		    			, array(
 		        			'class' => 'form-control'
@@ -42,7 +41,7 @@
 			</div>
 			<div class="form-group">
 				<label class="control-label col-xs-3">New Email <span class="required">*</span></label>
-				<div class="col-xs-4">
+				<div class="col-xs-5">
 		    		{!! Form::text('new_email', ''
 		    			, array(
 		        			'class' => 'form-control'
@@ -62,14 +61,14 @@
 			</div>
 			<div class="form-group">
 				<label class="control-label col-xs-3">Confirm Email <span class="required">*</span></label>
-				<div class="col-xs-4">
+				<div class="col-xs-5">
 		    		{!! Form::text('confirm_email', ''
 		    			, array(
 		        			'class' => 'form-control'
 		        			, 'placeholder' => 'Confirm Email Address'
 		        			, 'ng-model' => 'teacher.change.confirm_email'
 		        			, 'ng-model-options' => "{ debounce: {'default' : 1000} }"
-		        			, 'ng-class' => "{ 'required-field' : teacher.fields['confirm_email'] }"
+		        			, 'ng-class' => "{ 'required-field' : teacher.fields['confirm_email'] || teacher.fields['new_email'] }"
 		        			, 'ng-change' => 'teacher.confirmNewEmail(teacher.change.new_email, teacher.change.confirm_email)') 
 		        		)!!}
 		        </div>
@@ -80,7 +79,7 @@
 			</div>
 			<div class="form-group">
 				<label class="control-label col-xs-3">Enter your Password <span class="required">*</span></label>
-				<div class="col-xs-4">
+				<div class="col-xs-5">
 					{!! 
 						Form::password('password', 
 							[
@@ -103,11 +102,10 @@
 					{!! Form::button('Cancel'
 						, array(
 							'class' => 'btn btn-gold btn-medium'
-							, 'ng-click' => "teacher.studentDetails(teacher.record.id, futureed.ACTIVE_VIEW)"
+							, 'ng-click' => "teacher.setActive(futureed.ACTIVE_VIEW, teacher.record.id)"
 						)
 					) !!}
 				</div>
 			</div>
-		</div>
 	</div>
 </div>

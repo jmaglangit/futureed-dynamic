@@ -148,7 +148,7 @@ return [
 		2603 => 'The country field is required.',
 		2604 => 'The country is invalid',
 
-		7000 => 'Oops! Something went wrong.',
+		7000 => 'Hmm, something went wrong. Please contact the system administrator.',
 
 	],
 ];

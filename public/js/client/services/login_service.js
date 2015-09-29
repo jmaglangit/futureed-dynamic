@@ -1,57 +1,73 @@
 angular.module('futureed.services')
-	.factory('clientLoginApiService', clientLoginApiService);
+	.factory('ClientLoginApiService', ClientLoginApiService);
 
-function clientLoginApiService($http) {
-	var clientLoginApi = {};
-	var clientLoginApiUrl = '/api/v1/client';
+function ClientLoginApiService($http) {
+	var api = {};
+	var apiUrl = '/api/v1/';
 
-	clientLoginApi.clientLogin = function(username, password, role) {
+	api.clientLogin = function(username, password, role) {
 		return $http({
 			method	: Constants.METHOD_POST
 			, data 	: {username : username, password : password, role : role}
-			, url	: clientLoginApiUrl + '/login'
+			, url	: apiUrl + 'client/login'
 		});
 	}
 
-	clientLoginApi.registerClient = function(data) {
+	api.registerClient = function(data) {
 		return $http({
 			method	: Constants.METHOD_POST
 			, data	: data
-			, url 	: clientLoginApiUrl + '/register'
+			, url 	: apiUrl + 'client/register'
 		});
 	}
 
-	clientLoginApi.resetClientPassword = function(id, reset_code, password) {
+	api.confirmCode = function(email, email_code, user_type) {
+		return $http({
+			method	: Constants.METHOD_POST
+			, data 	: {email : email, email_code : email_code, user_type : user_type}
+			, url	: apiUrl + 'user/email/code'
+		});
+	}
+
+	api.resendConfirmation = function(email, user_type, callback_uri) {
+		return $http({
+			method	: Constants.METHOD_POST
+			, data 	: {email : email, user_type : user_type, callback_uri : callback_uri}
+			, url	: apiUrl + 'user/confirmation/code'
+		});
+	}
+
+	api.resetClientPassword = function(id, reset_code, password) {
 		return $http({
 			method 	: Constants.METHOD_POST
 			, data 	: {reset_code : reset_code, password : password}
-			, url	: clientLoginApiUrl + '/reset-password/' + id
+			, url	: apiUrl + 'client/reset-password/' + id
 		});
 	}
 
-	clientLoginApi.setClientPassword = function(id, password) {
+	api.setClientPassword = function(id, password) {
 		return $http({
 			method 	: Constants.METHOD_POST
 			, data 	: {password : password}
-			, url	: clientLoginApiUrl + '/new-password/' + id
+			, url	: apiUrl + 'client/new-password/' + id
 		});
 	}
 
-	clientLoginApi.getTeacherDetails = function(id, registration_token) {
+	api.getTeacherDetails = function(id, registration_token) {
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url	: clientLoginApiUrl + '/teacher-information/' + id
+			, url	: apiUrl + 'client/teacher-information/' + id
 				+ '?registration_token=' + registration_token
 		});
 	}
 
-	clientLoginApi.updateClientRegistration = function(data) {
+	api.updateClientRegistration = function(data) {
 		return $http({
 			method : Constants.METHOD_PUT
 			, data : data
-			, url  : clientLoginApiUrl + '/teacher-information/' + data.id 
+			, url  : apiUrl + 'client/teacher-information/' + data.id 
 		});
 	}
 
-	return clientLoginApi;
+	return api;
 }
