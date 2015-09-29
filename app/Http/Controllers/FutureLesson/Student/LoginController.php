@@ -76,8 +76,9 @@ class LoginController extends Controller {
 	 * @return Response
 	 */
 	public function forgot_password()
-	{
-		return view('student.login.forgot-password');
+	{	
+		$input = Input::only('email');
+		return view('student.login.password.index')->with(array('email' => $input['email']));
 	}
 
 	/**
@@ -85,22 +86,9 @@ class LoginController extends Controller {
 	*
 	* @return Response
 	*/
-	public function reset_code() 
+	public function enter_reset_code() 
 	{
-		$input = Input::only('email');
-		$email = $input['email'];		
-		$show = 0;
-
-		if($email == null){
-			$email = Session::get('email');
-			$show = 1;
-		}
-
-		if($email == null) {
-			return redirect()->route('student.login.forgot_password');
-		}
-		
-		return view('student.login.enter-reset-code')->with(array('email' => $email, 'show' => $show));
+		return view('student.login.password.enter-reset-code');
 	}
 
 	/**
@@ -135,16 +123,15 @@ class LoginController extends Controller {
 	 */
 	public function reset_password()
 	{
-		$input = Input::only('id', 'reset_code', 'email');
+		$input = Input::only('id', 'reset_code');
 		$id = $input['id'];
-		$email = $input['email'];
-		$code = $input['reset_code'];
+		$reset_code = $input['reset_code'];
 
-		if($id == null || $code == null) {
+		if($id == null || $reset_code == null) {
 			return redirect()->route('student.login.forgot_password');
 		}
 
-		return view('student.login.reset-password', ['id' => $id, 'code' => $code, 'email' => $email]);
+		return view('student.login.reset-password', ['id' => $id, 'reset_code' => $reset_code]);
 	}
 
 	public function set_password() {

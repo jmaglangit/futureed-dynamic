@@ -8,21 +8,9 @@ var services = angular.module('futureed.services', []);
 		* Common API Calls
 		*/
 
-		futureedAPI.forgotPassword = function(username, user_type, callback_uri) {
-			return $http({
-				method 	: Constants.METHOD_POST
-				, data	: {username: username, user_type : user_type, callback_uri : callback_uri}
-				, url	: futureedAPIUrl + 'user/password/forgot'
-			});
-		}
+		
 
-		futureedAPI.resendResetCode = function(email, user_type, callback_uri) {
-			return $http({
-				method 	: Constants.METHOD_POST
-				, data	: {email: email, user_type : user_type, callback_uri : callback_uri}
-				, url	: futureedAPIUrl + 'user/reset/code'
-			});
-		}
+		
 
 		/**
 		* Student Services
@@ -66,13 +54,7 @@ var services = angular.module('futureed.services', []);
 			});
 		}
 
-		futureedAPI.validateCode = function(code, email, user_type) {
-			return $http({
-				method	: 'POST'
-				, data 	: {email : email, user_type : user_type, reset_code : code}
-				, url	: futureedAPIUrl + 'user/password/code'
-			});
-		}
+		
 
 		futureedAPI.changeValidate = function(id, email_new, image_id, callback_uri) {
 			return $http({
@@ -95,14 +77,6 @@ var services = angular.module('futureed.services', []);
 				method	: 'POST'
 				, data 	: {new_email : new_email, user_type : user_type, callback_uri : callback_uri}
 				, url 	: futureedAPIUrl + 'student/resend/email/' + id
-			});
-		}
-
-		futureedAPI.resetPassword = function (id, code, image_id) {
-			return $http({
-				method	: 'POST'
-				, data	: {id : id, reset_code : code, password_image_id : image_id}
-				, url	: futureedAPIUrl + 'student/password/reset'
 			});
 		}
 
