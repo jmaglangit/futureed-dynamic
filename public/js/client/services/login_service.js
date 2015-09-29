@@ -37,14 +37,6 @@ function ClientLoginApiService($http) {
 		});
 	}
 
-	api.resetClientPassword = function(id, reset_code, password) {
-		return $http({
-			method 	: Constants.METHOD_POST
-			, data 	: {reset_code : reset_code, password : password}
-			, url	: apiUrl + 'client/reset-password/' + id
-		});
-	}
-
 	api.setClientPassword = function(id, password) {
 		return $http({
 			method 	: Constants.METHOD_POST

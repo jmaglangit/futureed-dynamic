@@ -73,12 +73,17 @@ class LoginController extends Controller {
 	public function forgot_password()
 	{
 		$input = Input::only('email');
+		return view('client.login.password.index', ['email' => $input['email']]);
+	}
 
-		if($input['email']) {
-			return view('client.login.enter-reset-code', ['email' => $input['email']]);
-		}
-
-		return view('client.login.forgot-password', ['email' => $input['email']]);
+	/**
+	* Display enter reset code screen
+	*
+	* @return Response
+	*/
+	public function enter_reset_code() 
+	{
+		return view('client.login.password.enter-reset-code');
 	}
 
 	/**
