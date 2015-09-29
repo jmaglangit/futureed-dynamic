@@ -5,14 +5,6 @@ var services = angular.module('futureed.services', []);
 		var futureedAPIUrl = '/api/v1/';
 
 		/**
-		* Common API Calls
-		*/
-
-		
-
-		
-
-		/**
 		* Student Services
 		*/
 		futureedAPI.updateUserSession = function(user) {
@@ -41,7 +33,7 @@ var services = angular.module('futureed.services', []);
 
 		futureedAPI.getLoginPassword = function(id) {
 			return $http({
-				method	: 'POST'
+				method	: Constants.METHOD_POST
 				, data	: {id : id}
 				, url	: futureedAPIUrl + 'student/login/image'
 			});

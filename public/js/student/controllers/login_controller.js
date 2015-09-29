@@ -108,7 +108,8 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 					if(self.fields['birth_date']) {
 						$("div.birth-date-wrapper select").addClass("required-field");
 					}
-				} else if(response.data){
+				} else if(response.data) {
+					response.data.role = Constants.STUDENT;
 					$scope.user = JSON.stringify(response.data);
 					self.setActive('confirm_success');
 				} 
@@ -202,6 +203,8 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 					self.errors = $scope.errorHandler(response.errors);
 					$scope.image_pass = shuffle($scope.image_pass);
 				} else if(response.data){
+					response.data.role = Constants.STUDENT;
+
 					$scope.user = JSON.stringify(response.data);
 					$("#process_form input[name='user_data']").val($scope.user);
 					$("#process_form").submit();

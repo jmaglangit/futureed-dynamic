@@ -103,16 +103,16 @@
 
 							<button ng-if="record.module_status == 'On Going' && user.points >= record.points_to_unlock"
 								ng-click="class.redirect('{!! route('student.class.module.index') !!}', record)" 
-								type="button" class="btn btn-blue module-btn"><i class="fa fa-play-circle"></i> Resume lesson</button>
+								type="button" class="btn btn-blue module-btn"><i class="fa fa-play-circle"></i> Resume </button>
 
 							<button ng-if="!record.module_status && user.points >= record.points_to_unlock" ng-click="class.redirect('{!! route('student.class.module.index') !!}', record)"
-								type="button" class="btn btn-blue module-btn"><i class="fa fa-pencil"></i> Begin lesson</button>
+								type="button" class="btn btn-blue module-btn"><i class="fa fa-pencil"></i> Begin </button>
 
 							<button ng-if="user.points < record.points_to_unlock"
-								type="button" class="btn btn-blue module-btn" ng-disabled="true"><i class="fa fa-lock"></i> Module Locked</button>
+								type="button" class="btn btn-blue module-btn" ng-disabled="true"><i class="fa fa-lock"></i> Locked</button>
 
 							<button ng-if="record.module_status == 'Completed'"
-								type="button" class="btn btn-blue module-btn" ng-disabled="true"><i class="fa fa-lock"></i> Module Completed</button>
+								type="button" class="btn btn-blue module-btn" ng-disabled="true"><i class="fa fa-lock"></i> Completed</button>
 
 							<div class="progress">
 								<div class="progress-bar progress-bar-striped" role="progressbar" aria-valuemin="0" aria-valuemax="100"

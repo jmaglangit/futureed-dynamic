@@ -747,7 +747,7 @@ hr {
 	height: 80px;
 	transition: ease-out .1s;
 	background-color: #ffffff;
-	padding: 10px;
+	padding: 3px;
 
 }
 
@@ -1016,9 +1016,10 @@ hr {
 
 .module-progress {
 	color: #055A7F;
-    text-align: center;
-    position: relative;
-    bottom: 17px;
+	text-align: center;
+	position: relative;
+	bottom: 25px;
+	font-size: 10px;
 }
 
 .progress {
@@ -1338,13 +1339,15 @@ top: 41px;
 }
 
 .progress {
-	height: 20px;
+	height: 15px;
 	margin-bottom: 0px;
 	overflow: hidden;
 	background-color: #f5f5f5;
 	border-radius: 4px;
 	-webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
 	box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
+	width: 120px;
+	margin: 10px auto;
 }
 
 .content-container {

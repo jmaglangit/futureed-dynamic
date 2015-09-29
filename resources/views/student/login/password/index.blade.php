@@ -18,7 +18,7 @@
 					</p>
 				</div>				
 
-				{!! Form::open(array('ng-submit' => 'password.sendResetCode($svent)')) !!}
+				{!! Form::open(array('ng-submit' => 'password.sendResetCode($event)')) !!}
 					<div class="input">
 						<div class="icon">
 							<i class="fa fa-user"></i>
@@ -36,7 +36,7 @@
 						{!! Form::button('Send'
 							, array(
 								  'class' => 'btn btn-maroon btn-medium'
-								, 'ng-click' => 'password.sendResetCode($svent)'
+								, 'ng-click' => 'password.sendResetCode($event)'
 							)
 						) !!}
 
