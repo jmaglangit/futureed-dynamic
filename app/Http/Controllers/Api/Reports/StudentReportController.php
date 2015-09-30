@@ -38,9 +38,12 @@ class StudentReportController extends ReportController {
 	}
 
 
+	/**
+	 * Get Student status report.
+	 * @param $id
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
 	public function getStudentStatusReport($id){
-
-		//TODO: get additional information from student with avatar. get name, grade, avatar
 
 		$student = $this->student->getStudent($id);
 
@@ -57,12 +60,8 @@ class StudentReportController extends ReportController {
 			'points_earned' => 'Points Earned'
 		];
 
-		//TODO: get header information based on the report requirements.
-		// TODO: get row class_students with classroom, orders, subjects, modules left join student_modules and orders for dates.
-
 		$subject_status = $this->class_student->getClassStudentStanding($id);
 
-//		dd($subject_status->toArray());
 		$rows = [$subject_status];
 
 
