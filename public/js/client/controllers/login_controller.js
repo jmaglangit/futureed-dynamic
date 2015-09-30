@@ -12,7 +12,6 @@ function LoginController($scope, $controller, apiService, ClientLoginApiService,
 	self.default();
 
 	self.setSetUserType(Constants.CLIENT);
-	self.fbAsyncInit();
 
 	self.setRegistrationStatus = function(email) {
 		self.record = {};

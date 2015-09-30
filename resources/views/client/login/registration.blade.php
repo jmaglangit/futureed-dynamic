@@ -4,6 +4,8 @@
 	<div class="container" ng-controller="LoginController as login" 
 		ng-init="login.setActive('registration')" ng-cloak>
 
+		<div ng-init="login.initMediaIds('{!! env('FB_APP_ID') !!}', '{!! env('GL_CLIENT_ID') !!}')"></div>
+
 		{!! Form::open(array('id' => 'process_form', 'method' => 'POST', 'route' => 'client.login.process')) !!}
 			{!! Form::hidden('user_data', '') !!}
 		{!! Form::close() !!}

@@ -1,7 +1,8 @@
 @extends('client.app')
 
 @section('content')
-<div class="container login" ng-controller="LoginController as login" ng-cloak>
+<div class="container login" ng-controller="LoginController as login" 
+	ng-init="login.initMediaIds('{!! env('FB_APP_ID') !!}', '{!! env('GL_CLIENT_ID') !!}')" ng-cloak>
 	
 	{!! Form::open(array('id' => 'process_form', 'method' => 'POST', 'route' => 'client.login.process')) !!}
 		{!! Form::hidden('user_data', '') !!}
