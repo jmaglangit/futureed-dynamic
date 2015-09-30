@@ -165,6 +165,8 @@ var Constants = {
 	, BADGE_UPDATE 			: "successfully updated the badge"
 	, BADGE_DELETE 			: "successfully deleted the badge"
 
+	, ACCEPT_TERMS			: "Please accept the terms and conditions."
+
 	, ATTR_CURRENT_EMAIL 	: "current_email"
 	, ATTR_NEW_EMAIL 		: "new_email"
 	, ATTR_CONFIRM_EMAIL 	: "confirm_email"
@@ -210,10 +212,10 @@ var Constants = {
 	, AGE_RANGE					: 14
 
 	// For development serve
-	, DI_PPA_BF 				: "430329777152115"
+	// , DI_PPA_BF 				: "430329777152115"
 	
 	// For developer's local machine; comment on PR
-	// , DI_PPA_BF 				: "943775322355104"
+	, DI_PPA_BF 				: "943775322355104"
 
 	, DI_TNEILC_ELGOOG 			: "501345076089-e05ok200b81g1560d00moln30n60k9nm.apps.googleusercontent.com"
 

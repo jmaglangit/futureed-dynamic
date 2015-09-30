@@ -59,14 +59,3 @@
 		ng-change="mod.paginateContent()">
 	</pagination>
 </div>
-
-<div>
-	<button type="button" class="btn btn-maroon exit-btn" ng-click="mod.exitModule('{!! route('student.class.index') !!}')">Exit Module</button>
-	{!! Form::button('Skip'
-		,array(
-			'class' => 'btn btn-gold next-btn'
-			, 'ng-click' => 'mod.startQuestions()'
-			, 'ng-if' => "mod.record.student_module.module_status == 'On Going'"
-		)
-	)!!}
-</div>

@@ -7,21 +7,24 @@
 			</div>
 			<div class="modal-body message-container">
 				<div ng-if="mod.module_message.skip_module">
-					<div class="col-xs-12" >
-						<p class="module-message">Let's get started...</p>
-					</div>
-
-					<div class="module-icon-holder">
-						<img ng-src="{! user.avatar !}" />
-					</div>
-
-					<div class="points-badge-holder row">
-						<div class="col-xs-12">
-							<img ng-src="/images/icons/icon-reward.png"/> Reward points to earn
+					<div class="row">
+						<div class="col-xs-1"></div>
+						<div class="col-xs-3 skip-module">
+							<img ng-src="{! user.avatar !}" />
 						</div>
 
-						<div class="col-xs-12">
-							<p class="message-point">+{! mod.module_message.points_earned !}</p>
+						<div class="col-xs-6">
+							<p class="skip-module-message">Let's get started...</p>
+
+							<div class="points-badge-holder row">
+								<div class="col-xs-12">
+									<img ng-src="/images/icons/icon-reward.png"/> Reward points to earn
+								</div>
+
+								<div class="col-xs-12">
+									<p class="message-point">+{! mod.module_message.points_earned !}</p>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>

@@ -240,7 +240,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		var data = {};
 			data.module_id = self.record.student_module.id;
 
-			if(self.active_contents) {
+			if(self.active_contents && self.contents) {
 				data.last_viewed_content_id = self.contents.content_id;
 			}
 
