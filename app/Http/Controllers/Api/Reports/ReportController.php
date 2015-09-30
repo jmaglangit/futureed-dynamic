@@ -90,8 +90,6 @@ class ReportController extends Controller {
 		$this->header = $header;
 	}
 
-
-
 	/**
 	 * Main response.
 	 * @param $data
@@ -103,7 +101,11 @@ class ReportController extends Controller {
 
 	}
 
-	//Generate success response
+	/**
+	 * Generate success response.
+	 * @param $data
+	 * @return Response
+	 */
 	public function respondReport($data){
 
 		return $this->respond([
@@ -113,6 +115,13 @@ class ReportController extends Controller {
 
 	}
 
+	/**
+	 * Generate report data.
+	 * @param $information
+	 * @param $columns
+	 * @param array $rows
+	 * @return Response
+	 */
 	public function respondReportData($information, $columns, array $rows){
 
 		$this->setInformation($information);
@@ -126,7 +135,11 @@ class ReportController extends Controller {
 		]);
 	}
 
-	//Generate error response
+	/**
+	 * Generate error response.
+	 * @param $error_code
+	 * @return Response
+	 */
 	public function respondErrorMessage($error_code){
 
 		return $this->respond(
@@ -136,35 +149,5 @@ class ReportController extends Controller {
 			]
 		);
 	}
-
-
-
-//{
-//"status": 200,
-//"data": {
-//"id": 10,
-//"first_name": "qweqeqe",
-//"last_name": "sdfsdf",
-//"column_header":{
-//"first_name": "First Name",
-//"last_name" : "Last Name",
-//"birth_date" : "Birthday",
-//"address" : "Address",
-//"country" : "Country"
-//},
-//"rows" : [
-//	    {
-//			"first_name" : "Juan",
-//	    	"last_name" : "De la Cruz",
-//	    	"birth_date" : "1989-01-01",
-//	    	"addresss" : "Downtown Alley",
-//	    	"country" : "Philippines"
-//	    }
-//    [
-//  }
-//}
-
-
-
 
 }
