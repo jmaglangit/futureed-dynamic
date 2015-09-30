@@ -31,5 +31,7 @@ interface ClassStudentRepositoryInterface {
 
 	public function getCurrentClassStudent($criteria);
 
+	public function getClassStudentStanding($student_id);
+
 
 }
