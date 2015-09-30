@@ -211,9 +211,6 @@ var Constants = {
 	, MAX_AGE					: 99
 	, AGE_RANGE					: 14
 
-	// For development serve
-	, DI_PPA_BF 				: "430329777152115"
-
 	, FACEBOOK 					: "Facebook"
 	, GOOGLE 					: "Google"
 
