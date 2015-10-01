@@ -19,7 +19,7 @@ function ManageTeacherModuleService($http){
 	service.getSubject = function() {
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url 	: url + 'subject'
+			, url 	: url + 'subject?status=Enabled'
 		})
 	}
 
