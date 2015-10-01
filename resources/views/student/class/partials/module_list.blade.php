@@ -96,7 +96,7 @@
 									ng-src="/images/icons/icon-lock.png" tooltip-class="module-tooltip" tooltip-placement="bottom" tooltip="{! record.name !}">
 
 								<img ng-if="record.module_status == 'Completed'" class="locked-module-icon"
-									ng-src="/images/icons/default-module-icon.png" tooltip-class="module-tooltip" tooltip-placement="bottom" tooltip="{! record.name !}">
+									ng-src="{! record.icon_image == futureed.NONE && '/images/icons/default-module-icon.png' || record.icon_image !}" tooltip-class="module-tooltip" tooltip-placement="bottom" tooltip="{! record.name !}">
 							</div>
 
 							<p class="module-name">{! record.name !}</p>
