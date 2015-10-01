@@ -140,5 +140,13 @@ function ManageParentPaymentService($http){
 			, url 	: serviceUrl + 'subject?status=Enabled'
 		});
 	}
+
+	service.renewSubscription = function(data) {
+		return $http({
+			method	: Constants.METHOD_POST
+			, data	: data
+			, url	: serviceUrl + 'renew-subscription/' + data.invoice_id
+		});
+	}
 	return service;
 }

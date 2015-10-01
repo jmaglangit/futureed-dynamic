@@ -372,9 +372,9 @@
 				{!! Form::button('Renew Subscription'
 					, array(
 						'class' => 'btn btn-blue btn-semi-medium div-right'
-						, 'ng-click' => 'payment.renew()'
+						, 'ng-click' => 'payment.renewSubscription()'
 						, 'ng-if' => "payment.invoice.payment_status == futureed.PAID"
-						, 'ng-disabled' => 'true'
+						, 'ng-disabled' => '!payment.invoice.expired'
 					)
 				) !!}
 				{!! Form::button('Save Subscription'
