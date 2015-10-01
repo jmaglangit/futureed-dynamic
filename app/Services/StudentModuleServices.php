@@ -107,7 +107,7 @@ class StudentModuleServices {
 						//return next question.
 						return $next_question;
 
-					}elseif($next_question == -1){
+					}elseif($next_question == -1 || !$next_question){
 
 						return -1;
 					}
