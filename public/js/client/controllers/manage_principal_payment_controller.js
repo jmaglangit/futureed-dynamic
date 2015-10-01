@@ -23,6 +23,10 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 
 	self.setActive = function(active, id) {
 		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		self.fields = [];
+
 		self.records = {};
 		self.validation = {};
 
@@ -36,15 +40,14 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 
 		switch(active) {
 			case Constants.ACTIVE_VIEW:
-				self.fields = [];
-				self.success = Constants.FALSE;
 				self.active_view = Constants.TRUE;
-				self.getSubject();
+				break;
+
+			case Constants.ACTIVE_EDIT:
+				self.active_edit = Constants.TRUE;
 				break;
 
 			case Constants.ACTIVE_ADD :
-				self.success = Constants.FALSE;
-				self.fields = [];
 				self.classroom = {};
 				self.invoice = {};
 
@@ -194,17 +197,40 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 	}
 
 	self.renewSubscription = function() {
-		var start_date = new Date();
-			self.invoice.date_start = $filter(Constants.DATE)(start_date, Constants.DATE_YYYYMMDD);
-			self.invoice.dis_date_start = start_date;
+		// var start_date = new Date();
+		// 	self.invoice.date_start = $filter(Constants.DATE)(start_date, Constants.DATE_YYYYMMDD);
+		// 	self.invoice.dis_date_start = start_date;
 		
-		var end_date = new Date(start_date.getTime());
-			end_date.setDate(end_date.getDate() + parseInt(self.invoice.subscription.days));
+		// var end_date = new Date(start_date.getTime());
+		// 	end_date.setDate(end_date.getDate() + parseInt(self.invoice.subscription.days));
 
-			self.invoice.date_end = $filter(Constants.DATE)(end_date, Constants.DATE_YYYYMMDD);
-			self.invoice.dis_date_end = end_date;
+		// 	self.invoice.date_end = $filter(Constants.DATE)(end_date, Constants.DATE_YYYYMMDD);
+		// 	self.invoice.dis_date_end = end_date;
 			
-		self.addPayment(Constants.FALSE);
+		// self.addPayment(Constants.FALSE);
+
+		if(self.invoice.expired) {
+			var data = {
+				invoice_id	: self.invoice.id
+			}
+
+			managePrincipalPaymentService.renewSubscription(data).success(function(response) {
+				if(angular.equals(response.status, Constants.STATUS_OK)) {
+					if(response.errors) {
+						self.errors = $scope.errorHandler(response.errors);
+					} else if(response.data) {
+						self.setActive(Constants.ACTIVE_EDIT, response.data.id);
+					}
+				}
+
+				$scope.ui_unblock();
+			}).error(function(response) {
+				self.errors = $scope.internalError();
+				$scope.ui_unblock();
+			});
+		} else {
+			self.errors = $scope.internalError();
+		}
 	}
 
 	$window.addEventListener('beforeunload', function() {
@@ -536,7 +562,7 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 				self.invoice = response.data;
 				self.invoice.subject_id = self.invoice.invoice_detail[0].classroom.subject.id;
 				self.invoice.subject_name = self.invoice.invoice_detail[0].classroom.subject.name;
-				
+
 				self.listClassroom(self.invoice.order_no);
 				self.setActive(active);
 			}
