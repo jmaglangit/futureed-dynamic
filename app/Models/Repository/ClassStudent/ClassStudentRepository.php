@@ -4,13 +4,14 @@ namespace FutureEd\Models\Repository\ClassStudent;
 use Carbon\Carbon;
 use FutureEd\Models\Core\ClassStudent;
 use FutureEd\Models\Core\Classroom;
-use FutureEd\Models\Core\Module;
-use FutureEd\Models\Core\StudentModule;
 use FutureEd\Models\Repository\Module\ModuleRepository as ModuleRepository;
+use Illuminate\Support\Facades\DB;
 use League\Flysystem\Exception;
+use FutureEd\Models\Traits\LoggerTrait;
 
 class ClassStudentRepository implements ClassStudentRepositoryInterface
 {
+	use LoggerTrait;
 
 	protected $module;
 
@@ -272,6 +273,49 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 			return null;
 		}
 
+	}
+
+	/**
+	 * Get Subject standing status.
+	 * @param $student_id
+	 * @return int
+	 */
+	public function getClassStudentStanding($student_id){
+
+		DB::beginTransaction();
+		try{
+
+				 $subject = ClassStudent::select(
+					 'class_students.student_id', 'subjects.name',
+					 DB::raw('sum(IF (student_modules.points_earned, student_modules.points_earned, 0)) as points_earned'),
+					 DB::raw("if(student_modules.module_status,student_modules.module_status,'Not Started') as module_status")
+				 )->leftJoin('classrooms', 'class_students.class_id', '=', 'classrooms.id')
+					 ->leftJoin('subjects', 'subjects.id', '=', 'classrooms.subject_id')
+					 ->leftJoin('orders', 'orders.order_no', '=', 'classrooms.order_no')
+					 ->leftJoin('modules', 'modules.subject_id', '=', 'subjects.id')
+					 ->leftJoin('student_modules', function ($join) {
+						 $join->on('student_modules.module_id', '=', 'modules.id')
+							 ->on('class_students.student_id', '=', 'student_modules.student_id');
+					 })
+					 ->where('orders.payment_status', config('futureed.paid'))
+					 ->where('orders.date_start', '<=', Carbon::now())
+					 ->where('orders.date_end', '>=', Carbon::now())
+					 ->where('class_students.student_id', $student_id)
+					 ->groupBy('subjects.name')
+					 ->get();
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e);
+
+			return 0;
+		}
+
+		DB::commit();
+
+		return $subject;
 	}
 
 }

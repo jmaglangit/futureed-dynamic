@@ -10,6 +10,13 @@ class StudentRepository implements StudentRepositoryInterface
 {
 	use LoggerTrait;
 
+	/**
+	 * Get students by criteria.
+	 * @param array $criteria
+	 * @param int $limit
+	 * @param int $offset
+	 * @return array
+	 */
 	public function getStudents($criteria = array(), $limit = 0, $offset = 0)
 	{
 
@@ -45,30 +52,22 @@ class StudentRepository implements StudentRepositoryInterface
 
 	}
 
-	//get student basic details
+	/**
+	 * Get student information
+	 * @param $id
+	 * @return \Illuminate\Support\Collection|null|static
+	 */
 	public function getStudent($id)
 	{
-
-		return Student::select(
-			'user_id',
-			'first_name',
-			'last_name',
-			'gender',
-			'birth_date',
-			'country_id',
-			'country',
-			'state',
-			'city',
-			'points',
-			'status',
-			'learning_style_id',
-			'grade_code'
-		)
-			->where('id', $id)->first();
+		return Student::find($id);
 
 	}
 
-	//get student details
+	/**
+	 * Get student by user_id.
+	 * @param $id
+	 * @return mixed
+	 */
 	public function getStudentDetail($id)
 	{
 
@@ -76,6 +75,11 @@ class StudentRepository implements StudentRepositoryInterface
 
 	}
 
+	/**
+	 * Add Student.
+	 * @param $student
+	 * @return bool|string
+	 */
 	public function addStudent($student)
 	{
 			try {
@@ -92,11 +96,11 @@ class StudentRepository implements StudentRepositoryInterface
 
 	}
 
-	public function updateStudent($id)
-	{
-
-	}
-
+	/**
+	 * Deleted student.
+	 * @param $id
+	 * @return bool|null|string
+	 */
 	public function deleteStudent($id)
 	{
 		try {
@@ -113,6 +117,11 @@ class StudentRepository implements StudentRepositoryInterface
 
 	}
 
+	/**
+	 * Get students image password.
+	 * @param $id
+	 * @return mixed
+	 */
 	public function getImagePassword($id)
 	{
 
@@ -120,8 +129,11 @@ class StudentRepository implements StudentRepositoryInterface
 
 	}
 
-	//update student_image_password
-
+	/**
+	 * Update student image password.
+	 * @param $data
+	 * @throws Exception
+	 */
 	public function updateImagePassword($data)
 	{
 
@@ -133,21 +145,25 @@ class StudentRepository implements StudentRepositoryInterface
 		}
 	}
 
-	//get student according to parent id.
+	/**
+	 * Get student by parent_id
+	 * @param $parent_id
+	 * @return mixed
+	 */
 	public function getStudentParent($parent_id)
 	{
 
-		//student_id,
-		//avatar_id,
-		//avatar_url,
-		//first_name,
-		//last_name
 		return Student::select('id', 'avatar_id', 'first_name', 'last_name')
 			->where('parent_id', '=', $parent_id)->get()->toArray();
 
 	}
 
-	//save student avatar
+	/**
+	 * Save student avatar
+	 * @param $data
+	 * @return bool
+	 * @throws Exception
+	 */
 	public function saveStudentAvatar($data)
 	{
 
@@ -166,7 +182,11 @@ class StudentRepository implements StudentRepositoryInterface
 
 	}
 
-	//get foreign key of student table grade_code,avatar_id,school_code,learning_style_id
+	/**
+	 * Get references.
+	 * @param $id
+	 * @return mixed
+	 */
 	public function getReferences($id)
 	{
 
@@ -180,7 +200,12 @@ class StudentRepository implements StudentRepositoryInterface
 		)->where('id', '=', $id)->first();
 	}
 
-	//update student details
+	/**
+	 * Update student details.
+	 * @param $id
+	 * @param $data
+	 * @return \Illuminate\Support\Collection|null|string|static
+	 */
 	public function updateStudentDetails($id, $data)
 	{
 		try {
@@ -198,14 +223,23 @@ class StudentRepository implements StudentRepositoryInterface
 	}
 
 
-	//return student id
+	/**
+	 * Get student id by user_id.
+	 * @param $user_id
+	 * @return mixed
+	 */
 	public function getStudentId($user_id)
 	{
 		return Student::where('user_id', '=', $user_id)->pluck('id');
 	}
 
 
-	//change password_image_id
+	/**
+	 * Change student password image.
+	 * @param $id
+	 * @param $password_image_id
+	 * @throws Exception
+	 */
 	public function changePasswordImage($id, $password_image_id)
 	{
 
@@ -218,7 +252,11 @@ class StudentRepository implements StudentRepositoryInterface
 
 	}
 
-	//check if id exist
+	/**
+	 * Check if student exists by id.
+	 * @param $id
+	 * @return mixed
+	 */
 	public function checkIdExist($id)
 	{
 
@@ -226,6 +264,13 @@ class StudentRepository implements StudentRepositoryInterface
 			->pluck('id');
 	}
 
+	/**
+	 * Get student list by criteria.
+	 * @param array $criteria
+	 * @param int $limit
+	 * @param int $offset
+	 * @return array
+	 */
 	public function getStudentList($criteria = [], $limit = 0, $offset = 0)
 	{
 
@@ -268,7 +313,11 @@ class StudentRepository implements StudentRepositoryInterface
 
 	}
 
-	//get student with relation to classroom and grade tables
+	/**
+	 * Get student with relation to classroom and grade tables.
+	 * @param $id
+	 * @return Student
+	 */
 	public function viewStudent($id)
 	{
 
@@ -283,7 +332,11 @@ class StudentRepository implements StudentRepositoryInterface
 
 	}
 
-	//get student with relation to class, badges
+	/**
+	 * Get student with classroom and badges.
+	 * @param $id
+	 * @return Student
+	 */
 	public function viewStudentClassBadge($id)
 	{
 
@@ -296,8 +349,13 @@ class StudentRepository implements StudentRepositoryInterface
 
 	}
 
-	//get student who belong to a parent if client_role is parent
-	// and get student who belong to a teacher if client role is teacher
+	/**
+	 * Get student list under client.
+	 * @param array $criteria
+	 * @param int $limit
+	 * @param int $offset
+	 * @return array
+	 */
 	public function getStudentListByClient($criteria = [], $limit = 0, $offset = 0){
 
 		$student = new Student();
@@ -357,6 +415,11 @@ class StudentRepository implements StudentRepositoryInterface
 	}
 
 	//get student details with registration token
+	/**
+	 * @param $id
+	 * @param $reg_token
+	 * @return mixed
+	 */
 	public function viewStudentByToken($id,$reg_token){
 
 		$student = new Student();
@@ -369,6 +432,10 @@ class StudentRepository implements StudentRepositoryInterface
 
 
 	//get subscription
+	/**
+	 * @param $id
+	 * @return mixed
+	 */
 	public function subscriptionExpired($id)
 	{
 
@@ -379,6 +446,12 @@ class StudentRepository implements StudentRepositoryInterface
 		return $student->get()->toArray();
 	}
 
+	/**
+	 * @param $id
+	 * @param $school_code
+	 * @return bool|int
+	 * @throws Exception
+	 */
 	public function updateSchool($id,$school_code){
 
 		try{
@@ -517,6 +590,10 @@ class StudentRepository implements StudentRepositoryInterface
 
 	}
 
+	/**
+	 * @param $google_id
+	 * @return mixed
+	 */
 	public function getStudentByGoogleId($google_id){
 
 		return Student::with('user')->googleId($google_id)->get();
