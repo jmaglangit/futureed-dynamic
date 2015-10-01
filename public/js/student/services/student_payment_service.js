@@ -81,5 +81,13 @@ function StudentPaymentService($http) {
 		});
 	}
 
+	service.renewSubscription = function(data) {
+		return $http({
+			method	: Constants.METHOD_POST
+			, data	: data
+			, url	: serviceUrl + 'renew-subscription/' + data.invoice_id
+		});
+	}
+
 	return service;
 }
