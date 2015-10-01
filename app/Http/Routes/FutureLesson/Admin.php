@@ -7,6 +7,7 @@
 		]);
 
 		Routes::get('/', 'FutureLesson\Admin\LoginController@index');
+		
 		Routes::get('/password/forgot',[
 				'as' => 'admin.password.reset'
 				, 'uses' => 'FutureLesson\Admin\LoginController@forgotPass'

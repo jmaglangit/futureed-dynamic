@@ -730,7 +730,7 @@ hr {
 }
 
 .module-list {
-	background-color: rgba(255, 255, 255, .3);
+	background-color: rgba(255, 255, 255, .6);
 	border-radius: 0px 0px 10px 10px;
 }
 
@@ -747,7 +747,7 @@ hr {
 	height: 80px;
 	transition: ease-out .1s;
 	background-color: #ffffff;
-	padding: 3px;
+	box-shadow: 5px 3px 15px rgba(0, 0, 0, 0.3);
 
 }
 
@@ -804,7 +804,9 @@ hr {
     padding: 10px;
 }
 
-.module-message, .wiki-message {
+.skip-module-message
+	, .module-message
+	, .wiki-message {
 	position: relative;
 	background: #EBE3B4;
 	border: 1px solid #F9EFB7;
@@ -813,6 +815,10 @@ hr {
 	width: 50%;
 	margin: 10px auto 20px auto;
 	font-size: 1.5em;
+}
+
+.skip-module-message {
+	width: 100%;
 }
 
 .wiki-title {
@@ -869,6 +875,35 @@ hr {
     transform: skew(-58deg);
 }
 
+.skip-module img {
+	width: 270px;
+}
+
+.skip-module-message:after, .skip-module-message:before {
+	right: 100%;
+	top: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.skip-module-message:after {
+	border-color: rgba(194, 225, 245, 0);
+	border-right-color: #EBE3B4;
+	border-width: 18px;
+    margin-top: -20px;
+}
+
+.skip-module-message:before {
+	border-color: rgba(136, 183, 213, 0);
+    border-right-color: #F9EFB7;
+    border-width: 20px;
+    margin-top: -22px;
+}
+
 .message-point {
 	font-size: 5em;
     color: #055A7F;
@@ -882,7 +917,7 @@ hr {
 
 .questions-container {
 	background-color: #FFFFFF;
-	height: 450px;
+	height: 500px;
 	border-radius: 5px;
 	border: 5px solid #EEEEEE;
 	width: 100%;
@@ -981,16 +1016,11 @@ hr {
 
 .next-btn {
 	position: absolute;
-    bottom: 0px;
+    top: 12px;
+    right: 15px;
     width: 200px;
-    right: -200px;
-}
-
-.exit-btn {
-	position: absolute;
-    top: 0;
-    width: 200px;
-    right: -200px;
+    height: 40px;
+    font-size: 1.5em;
 }
 
 .panel-student {
@@ -1249,7 +1279,7 @@ top: 41px;
 }
 
 .class-search{
-	background-color: rgba(255, 255, 255, 0.5);
+	background-color: rgba(255, 255, 255, 0.6);
 	padding: 15px;
 	width: 100%;
 	border-radius: 10px;
@@ -1322,7 +1352,7 @@ top: 41px;
 	min-width: 100px;
 	text-align: center;
 	border-radius: 7px 7px 0px 0px;
-	background-color: rgba(255, 255, 255, .3) !important;
+	background-color: rgba(255, 255, 255, .6) !important;
 	color: #055A7F !important;
 }
 
@@ -1407,4 +1437,18 @@ top: 41px;
 
 .btn-google:hover, .btn-google:focus{
 	padding: 7px;
+}
+
+.btn-menu button {
+	margin: 5px auto;
+	height: 40px;
+	width: 184px;
+}
+
+.module-contents-container {
+	margin-top: -15px;
+}
+
+.module-contents-container .breadcrumb {
+	margin-bottom: 10px;
 }

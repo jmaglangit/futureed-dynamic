@@ -26,7 +26,6 @@
 @stop
 	
 @section('scripts')
-	{!! Html::script('/js/admin/constants/manage_client_constants.js')!!}
 	{!! Html::script('/js/admin/manage_client.js')!!}
 	{!! Html::script('/js/admin/controllers/manage_client_controller.js')!!}
 	{!! Html::script('/js/admin/services/manage_client_service.js')!!}

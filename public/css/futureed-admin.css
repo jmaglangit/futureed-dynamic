@@ -6,6 +6,13 @@ body.admin{
 	background-attachment: fixed;
 }
 
+.login-container {
+	width: 500px;
+	margin-top: 100px;
+	margin-right: auto;
+	margin-left: auto;
+}
+
 .lock-logo{
 	width:120px;
 	margin:0 auto 30px;
@@ -23,8 +30,8 @@ body.admin{
 .adlogin-title{
 	text-transform: uppercase;
 	color: #055a7f;
-	font-weight: 700;
-	margin-top: 40px;
+	font-weight: bold;
+	margin: 5px auto;
 	font-size: 1.1em;
 }
 .forgot-message{
@@ -198,10 +205,6 @@ table#client-list{
 }
 .table-action{
 	min-width: 250px;
-}
-
-.login-container {
-	margin-top: 150px;
 }
 
 .center-err {

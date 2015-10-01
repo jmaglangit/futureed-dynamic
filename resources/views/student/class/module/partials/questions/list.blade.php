@@ -3,9 +3,22 @@
 		<div class="questions-container col-xs-12">
 			<div class="questions-header">
 				<h3> Question #{! mod.question_counter !} </h3>
+				<button ng-if="!mod.result.answered && !mod.result.quoted && !mod.result.failed" type="button" class="btn btn-maroon next-btn" ng-click="mod.checkAnswer()"> Submit </button>
 			</div>
 
 			<div class="questions-image">
+				<div class="col-xs-12" ng-if="mod.errors || mod.success">
+					<div class="alert alert-error" ng-if="mod.errors">
+						<p ng-repeat="error in mod.errors track by $index">
+							{! error !}
+						</p>
+					</div>
+
+					<div class="alert alert-success" ng-if="mod.success">
+						<p>{! mod.success !}</p>
+					</div>
+				</div>
+				
 				<img ng-if="mod.current_question.original_image_name" ng-src="{! mod.current_question.questions_image !}" />
 			</div>
 
@@ -23,12 +36,12 @@
 
 				<div ng-if="mod.current_question.question_type == futureed.ORDERING">
 					<ul as-sortable="mod.dragControlListeners" ng-model="mod.current_question.answer_text">
-		                <li ng-repeat="item in mod.current_question.answer_text" as-sortable-item class="as-sortable-item">
-		                    <div as-sortable-item-handle class="as-sortable-item-handle">
-		                        <span data-ng-bind="item"></span>
-		                    </div>
-		                </li>
-		            </ul>
+						<li ng-repeat="item in mod.current_question.answer_text" as-sortable-item class="as-sortable-item">
+							<div as-sortable-item-handle class="as-sortable-item-handle">
+								<span data-ng-bind="item"></span>
+							</div>
+						</li>
+					</ul>
 				</div>
 			</div>
 
@@ -136,9 +149,4 @@
 			</div>
 		</div>
 	</div>
-</div>
-
-<div class="questions-btn-container">
-	<button type="button" class="btn btn-gold exit-btn" ng-click="mod.exitModule('{!! route('student.class.index') !!}')">Exit Module</button>
-	<button ng-if="!mod.result.answered && !mod.result.quoted && !mod.result.failed" type="button" class="btn btn-maroon next-btn" ng-click="mod.checkAnswer()"> Submit </button>
 </div>
