@@ -123,6 +123,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 						, discount_type 	: 	data.discount_type
 						, seats_total 		: 	data.seats_total
 						, total_amount 		: 	data.total_amount
+						, expired	 		: 	data.expired
 					}
 
 					self.getStudents(self.invoice.order_no);
@@ -534,6 +535,31 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
+	}
+
+	self.renewSubscription = function() {
+		if(self.invoice.expired) {
+			var data = {
+				invoice_id	: self.invoice.id
+			}
+
+			ManageParentPaymentService.renewSubscription(data).success(function(response) {
+				if(angular.equals(response.status, Constants.STATUS_OK)) {
+					if(response.errors) {
+						self.errors = $scope.errorHandler(response.errors);
+					} else if(response.data) {
+						self.setActive(Constants.ACTIVE_VIEW, response.data.id);
+					}
+				}
+
+				$scope.ui_unblock();
+			}).error(function(response) {
+				self.errors = $scope.internalError();
+				$scope.ui_unblock();
+			});
+		} else {
+			self.errors = $scope.internalError();
+		}
 	}
 
 	$window.addEventListener('beforeunload', function() {

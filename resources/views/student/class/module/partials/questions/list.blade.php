@@ -124,13 +124,7 @@
 				<h3> Question #{! mod.question_counter !} </h3>
 			</div>
 
-			<div class="quote-message result-incorrect">	
-				<p>
-					Wrong.
-				</p>
-			</div>
-
-			<div class="message-container">
+			<div class="result-failed message-container">
 				<div class="col-xs-12">
 					<p class="module-message">
 						You need to review the teaching content.
