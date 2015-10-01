@@ -239,7 +239,6 @@ class StudentModuleAnswerController extends ApiController{
 		$return = $this->student_module->updateStudentModule($student_module->id,$student_module);
 
 		//next question sets
-//		$return->next_question
 		$next_question = $this->student_module_services->getNextQuestion(
 			$data['student_module_id'],
 			$data['module_id'],
@@ -247,7 +246,11 @@ class StudentModuleAnswerController extends ApiController{
 		);
 
 		//Check if next question is equal to -1
-		if($next_question == -1){
+		if($next_question == -1 ){
+
+			//Set student Module to failed.
+			$student_module->module_status = config('futureed.module_status_failed');
+			$this->student_module->updateStudentModule($student_module->id,$student_module);
 
 			return $this->respondErrorMessage(2056);
 
