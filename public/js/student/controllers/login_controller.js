@@ -297,7 +297,7 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 			}
 			$scope.ui_unblock();
 		}).error(function(response) {
-			scope.errors = $scope.internalError();
+			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
 	}

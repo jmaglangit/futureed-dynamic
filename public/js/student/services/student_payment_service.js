@@ -32,7 +32,7 @@ function StudentPaymentService($http) {
 	service.getSubjects = function() {
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url 	: serviceUrl + 'subject'
+			, url 	: serviceUrl + 'subject?status=Enabled'
 		});
 	}
 

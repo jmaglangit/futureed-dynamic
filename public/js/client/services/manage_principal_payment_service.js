@@ -153,7 +153,7 @@ function managePrincipalPaymentService($http){
 	managePaymentApi.getSubject = function() {
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url 	: paymentApiUrl + 'subject'
+			, url 	: paymentApiUrl + 'subject?status=Enabled'
 		});
 	}
 
