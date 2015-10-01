@@ -61,6 +61,9 @@ class LoginController extends Controller {
 		$user_object = json_decode(Session::get('client'));
 
 		Session::forget('client');
+		Session::forget('Parent');
+		Session::forget('Principal');
+		Session::forget('Teacher');
 
 		return redirect()->route('client.login');
 	}
