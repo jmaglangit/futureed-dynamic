@@ -1,4 +1,4 @@
-<div ng-if="payment.active_view || payment.active_edit">
+<div ng-if="payment.active_view">
 	<div class="content-title">
 		<div class="title-main-content">
 			<span>View Sales Invoice</span>
@@ -144,6 +144,16 @@
 	<div class="clearfix"></div>
 
 	<div class="search-container" ng-if="payment.invoice.payment_status == futureed.PAID || payment.invoice.payment_status == futureed.CANCELLED">
+		<div class="alert alert-error" ng-if="payment.errors">
+            <p ng-repeat="error in payment.errors track by $index" > 
+              	{! error !}
+            </p>
+        </div>
+
+        <div class="alert alert-success" ng-if="payment.success">
+        	<p>{! payment.success !}</p>
+        </div>
+
 		<h4>BILLING INVOICE</h4>
 		<div class="invoice-group">
 			<p>Ref: {! payment.invoice.client_name !} {! payment.invoice.id !} / {!! date('Y') !!}</p>
@@ -316,7 +326,8 @@
 	    			)
 	    		) !!}
 			</div>
-			<div class="btn-container" ng-if="payment.invoice.payment_status == futureed.PAID || payment.invoice.payment_status == futureed.CANCELLED">
+			<div class="btn-container" 
+				ng-if="payment.invoice.payment_status == futureed.PAID || payment.invoice.payment_status == futureed.CANCELLED">
 				{!! Form::button('View List'
 	    			, array(
 	    				'class' => 'btn btn-gold btn-small pull-right'
@@ -327,8 +338,8 @@
 				{!! Form::button('Renew Subscription'
 	    			, array(
 	    				'class' => 'btn btn-blue btn-small pull-right'
-	    				, 'ng-disabled' => 'true'
-	    				, 'ng-click' => 'payment.addPayment()'
+	    				, 'ng-disabled' => '!payment.invoice.expired'
+	    				, 'ng-click' => 'payment.renewPayment()'
 	    				, 'ng-if' => "payment.invoice.payment_status == futureed.PAID"
 	    			)
 	    		) !!}

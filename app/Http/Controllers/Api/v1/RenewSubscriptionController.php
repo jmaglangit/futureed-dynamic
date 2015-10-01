@@ -55,10 +55,13 @@ class RenewSubscriptionController extends ApiController {
 	 * NOTE id = order_id
 	 * @return Response
 	 */
-	public function renewSubscription(RenewSubscriptionRequest $request,$id)
+	public function renewSubscription($id)
 	{
 
-		$data = $request->only('date_start','date_end','order_date','total_amount','discount');
+		// $data = $request->only('date_start','date_end','order_date','total_amount','discount');
+			// date_start, date_end, discount are not used
+			// order_date should be set on payment
+			// set total amount to zero, since we have to verify the subscription and discount
 
 		//get invoice details
 		$invoice = $this->invoice->getInvoice($id);
@@ -73,6 +76,7 @@ class RenewSubscriptionController extends ApiController {
 		$data['subscription_id'] = $invoice['subscription_id'];
 		$data['payment_status'] = config('futureed.pending');
 		$data['seats_taken'] = $invoice['order']['seats_taken'];
+		$data['total_amount'] = 0;
 
 
 		//get the last inputted order
@@ -111,7 +115,7 @@ class RenewSubscriptionController extends ApiController {
 		}
 
 		//add invoice
-		$data['invoice_date'] = $data['order_date'];
+		// $data['invoice_date'] = $data['order_date'];
 		$added_invoice = $this->invoice->addInvoice($data);
 
 		$invoice_detail = $invoice['InvoiceDetail'];
