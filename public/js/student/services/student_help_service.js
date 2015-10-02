@@ -15,15 +15,16 @@ function StudentHelpService($http){
 					+ '&link_type=' + search.link_type
 					+ '&student_id=' + search.student_id
 					+ '&help_request_type=' + search.help_request_type
-					+ '&question_status=' + search.question_status
 					+ '&link_id=' + search.link_id
 		} else {
 			params += 'class_id=' + search.class_id 
 					+ "&title=" + search.title
 					+ "&student_id=" + search.student_id
-					+ "&request_status=" + search.request_status 
+					+ "&request_status=" + Constants.ACCEPTED
 					+ "&help_request_type=" + search.help_request_type
 		}
+
+		params += '&question_status=Open,Answered'
 
 		if(table) {
 			params += "&limit=" + table.size + "&offset=" + table.offset
