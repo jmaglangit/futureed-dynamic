@@ -146,6 +146,11 @@ class GradeRepository implements GradeRepositoryInterface{
         return Grade::countryid($country_id)->get()->toArray();
     }
 
+    public function getGradeCountries(){
+
+        return Grade::select('country_id')->groupByCountry()->get();
+    }
+
 
 
 
