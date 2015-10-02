@@ -101,18 +101,11 @@ class LoginController extends Controller {
 		$input = Input::only('email');
 		$invitation  = Input::only('registration_token', 'id');
 
-		$success = 0;
-
 		if($invitation['id'] && $invitation['registration_token']){
-
-			return view('student.login.registration', ['success' => $success, 'email' => $input['email'], 'id' => $invitation['id'], 'registration_token' => $invitation['registration_token']]);
+			return view('student.login.registration', ['email' => null, 'id' => $invitation['id'], 'registration_token' => $invitation['registration_token']]);
 		}
 		else{
-			if($input['email']) {
-				$success = 1;
-			}
-
-			return view('student.login.registration', ['success' => $success, 'email' => $input['email'], 'id' => null, 'registration_token' => null]);
+			return view('student.login.registration', ['email' => $input['email'], 'id' => null, 'registration_token' => null]);
 		}
 	}
 	

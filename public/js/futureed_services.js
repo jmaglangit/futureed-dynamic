@@ -156,13 +156,6 @@ var services = angular.module('futureed.services', []);
 				, url 	: futureedAPIUrl + 'announcement'
 			});
 		}
-		futureedAPI.getStudentDetails = function(id, token) {
-			return $http({
-				method : Constants.METHOD_GET
-				, url  : futureedAPIUrl + 'client/manage/view-student/' + id
-					+ '?registration_token=' + token
-			})
-		}
 
 		futureedAPI.getCountryDetails = function(id) {
 			return $http({

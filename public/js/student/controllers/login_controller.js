@@ -222,25 +222,35 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 	* Student registration
 	*/
 	self.checkRegistration = function(email, id, token) {
+		self.errors = Constants.FALSE;
 		self.record.invited = Constants.FALSE;
+
 		// If student is invited
 		if(id && token) {
-			self.errors = Constants.FALSE;
-
 			StudentLoginService.getStudentDetails(id, token).success(function(response){
 				if(angular.equals(response.status, Constants.STATUS_OK)) {
 					if(response.errors) {
 						self.errors = $scope.errorHandler(response.errors);
+
+						angular.forEach(self.errors, function(value) {
+							if(angular.equals(value, "Registration token is invalid.")) {
+								self.setActive('registration');
+
+								self.record = {};
+								self.record.invited = Constants.TRUE;
+								self.errors = [value];
+							}
+						});
 					} else if(response.data){
+						self.setActive('registration');
+
 						self.record = response.data[0];
 						self.record.username = self.record.user.username;
 						self.record.email = self.record.user.email;
 						self.record.school_name = self.record.school.name;
 						
-						self.getGradeLevel(self.record.country_id);
+						$scope.getGradeLevel(self.record.country_id);
 						self.record.invited = Constants.TRUE;
-
-						self.setDropdown(self.record.birth_date);
 					}
 				}
 			}).error(function(response){
@@ -330,8 +340,10 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 						self.fields[value.field] = Constants.TRUE;
 					});
 				} else if(response.data){
-					self.register.success = Constants.TRUE;
-					self.register.email = self.record.email;
+					var email = self.record.email;
+					
+					self.setActive('registration_success');
+					self.record.email = email;
 				}
 			}
 			$scope.ui_unblock();
