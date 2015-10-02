@@ -6,9 +6,9 @@ use FutureEd\Http\Controllers\Controller;
 use FutureEd\Models\Core\ClassStudent;
 use FutureEd\Models\Repository\Avatar\AvatarRepositoryInterface;
 use FutureEd\Models\Repository\ClassStudent\ClassStudentRepositoryInterface;
+use FutureEd\Models\Repository\Grade\GradeRepositoryInterface;
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Input;
+use FutureEd\Http\Requests\Api\StudentReportRequest;
 
 class StudentReportController extends ReportController {
 
@@ -17,6 +17,8 @@ class StudentReportController extends ReportController {
 	protected $avatar;
 
 	protected $class_student;
+
+	protected $grade;
 
 
 	/**
@@ -29,12 +31,13 @@ class StudentReportController extends ReportController {
 	public function __construct(
 		StudentRepositoryInterface $studentRepositoryInterface,
 		AvatarRepositoryInterface $avatarRepositoryInterface,
-		ClassStudentRepositoryInterface $classStudentRepositoryInterface
+		ClassStudentRepositoryInterface $classStudentRepositoryInterface,
+		GradeRepositoryInterface $gradeRepositoryInterface
 	) {
 		$this->student = $studentRepositoryInterface;
-
 		$this->class_student = $classStudentRepositoryInterface;
 		$this->avatar = $avatarRepositoryInterface;
+		$this->grade = $gradeRepositoryInterface;
 	}
 
 
@@ -66,6 +69,52 @@ class StudentReportController extends ReportController {
 
 
 		return $this->respondReportData($additional_information, $column_header, $rows);
+	}
+
+	/**
+	 * @param $id
+	 * @param StudentReportRequest $request
+	 */
+	public function getStudentProgressReport($id){
+
+		//get student id and subject id
+
+		$student = $this->student->getStudent($id);
+
+		$avatar = $this->avatar->getAvatar($student->avatar_id);
+
+
+		$additional_information = [
+			'student_name' => $student->first_name . ' ' . $student->last_name,
+			'avatar' => $avatar->avatar_image,
+			'lessons_completed' => '',
+			'stories_completed' => '',
+			'tokens_bank' => '',
+			'total_tokens' => '',
+			'adventure_friends' => '',
+			'carnival_rewards' => ''
+		];
+
+		//column headers
+		//get student country_Id
+		//get grade country_Id
+		$countries = $this->grade->getGradeCountries();
+
+//		dd($countries->toArray());
+
+		//parse header based on
+
+		$column_header = [
+
+
+		];
+
+		//rows
+		$rows = [];
+
+		return $this->respondReportData($additional_information, $column_header, $rows);
+
+
 	}
 
 
