@@ -35,7 +35,7 @@
 				)
 			)!!}
 			<div class="form-group">
-				<div class="col-xs-5">
+				<div class="col-xs-4">
 					{!! Form::text('search_title', ''
 						,array(
 							'placeholder' => 'Question Title'
@@ -46,31 +46,7 @@
 					)!!}
 				</div>
 
-				<div class="col-xs-5">
-					{!! Form::select('search_request_status'
-						, array(
-							'' => '-- Select Request Status --'
-							, 'Pending' => 'Pending'
-							, 'Accepted' => 'Accepted'
-						), ''
-						, array(
-							  'ng-model' => 'help.search.request_status'
-							, 'class' => 'form-control'
-						)
-					) !!}
-				</div>
-				
-				<div class="col-xs-2">
-					{!! Form::button('Search'
-						,array(
-							'class' => 'btn btn-blue'
-							, 'ng-click' => 'help.searchFnc($event)'
-						)
-					)!!}
-				</div>
-			</div>
-			<div class="form-group">
-				<div class="col-xs-5">
+				<div class="col-xs-4">
 					{!! Form::select('search_help_request_type'
 						, array(
 							  '' => 'All'
@@ -83,8 +59,14 @@
 						)
 					) !!}
 				</div>
-
-				<div class="col-xs-5">
+				
+				<div class="col-xs-2">
+					{!! Form::button('Search'
+						,array(
+							'class' => 'btn btn-blue'
+							, 'ng-click' => 'help.searchFnc($event)'
+						)
+					)!!}
 				</div>
 
 				<div class="col-xs-2">
