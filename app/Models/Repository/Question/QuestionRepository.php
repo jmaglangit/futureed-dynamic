@@ -300,6 +300,27 @@ class QuestionRepository implements QuestionRepositoryInterface{
 			->orderBySeqNo()->take(1)->get();
 	}
 
+	/**
+	 * @param $module_id
+	 */
+	public function getQuestionLevelsByModule($module_id){
+
+		return Question::whereModuleId($module_id)
+			->groupBy('difficulty')
+			->get();
+	}
+
+	/**
+	 * @param $module_id
+	 * @param $difficulty
+	 * @return mixed
+	 */
+	public function countQuestions($module_id,$difficulty){
+
+		return Question::whereModuleId($module_id)
+			->whereDifficulty($difficulty)
+			->count();
+	}
 
 
 }
