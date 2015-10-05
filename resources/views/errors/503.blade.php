@@ -1,41 +1,35 @@
-<html>
-	<head>
-		<link href='//fonts.googleapis.com/css?family=Lato:100' rel='stylesheet' type='text/css'>
+@extends('client.app')
 
-		<style>
-			body {
-				margin: 0;
-				padding: 0;
-				width: 100%;
-				height: 100%;
-				color: #B0BEC5;
-				display: table;
-				font-weight: 100;
-				font-family: 'Lato';
-			}
+@section('content')
 
-			.container {
-				text-align: center;
-				display: table-cell;
-				vertical-align: middle;
-			}
+	<div class="container dshbrd-con" ng-cloak>
 
-			.content {
-				text-align: center;
-				display: inline-block;
-			}
+		<div class="error-response col-md-6 col-md-offset-3">
+		    <h1 class="error-display">503</h1>
 
-			.title {
-				font-size: 72px;
-				margin-bottom: 40px;
-			}
-		</style>
-	</head>
-	<body>
-		<div class="container">
-			<div class="content">
-				<div class="title">Be right back.</div>
+		    <h2>
+		    	<strong>Be right back.</strong>
+		    </h2>
+		    <p class="error-text">
+			    We are currently undergoing maintenance.
+		    </p>
+		    
+		    
+		    <div class="btn-container">
+		    	<a class="btn btn-light-blue btn-medium" href="{!! route('student.login') !!}">
+			        <i class="fa fa-home"></i>
+			        Take me home
+			    </a>
+			    <a href="#" class="btn btn-light-blue btn-medium disabled">
+			        <i class="fa fa-envelope-o"></i>
+			        Contact Support
+			    </a>
 			</div>
 		</div>
-	</body>
-</html>
+	</div>
+  
+@stop
+
+@section('scripts')
+
+@stop
