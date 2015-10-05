@@ -743,8 +743,8 @@ hr {
 
 .module-icon, .locked-module-icon {
 	border-radius: 50%;
-	width: 80px;
-	height: 80px;
+	width: 100px;
+	height: 100px;
 	transition: ease-out .1s;
 	background-color: #ffffff;
 	box-shadow: 5px 3px 15px rgba(0, 0, 0, 0.3);
@@ -776,11 +776,11 @@ hr {
 }
 
 .module-name {
-	padding: 10px 0px;
+	padding: 5px 0px;
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
-	height: 40px;
+	height: 30px;
 	font-size: 15px;
 	color: #055A7F;
 	max-width: 170px;
@@ -790,11 +790,13 @@ hr {
 .module-btn {
 	text-transform: capitalize;
 	border-radius: 20px;
+	font-size: 16px;
 }
 
 .module-btn i {
 	padding-right: 5px;
 	color: rgb(255, 244, 149);
+	font-size: 18px;
 }
 
 .message-container {
@@ -1047,7 +1049,7 @@ hr {
 	color: #055A7F;
 	text-align: center;
 	position: relative;
-	bottom: 25px;
+	bottom: 26px;
 	font-size: 10px;
 }
 
