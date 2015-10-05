@@ -95,5 +95,13 @@ function StudentLoginService($http) {
 		});
 	}
 
+	api.getStudentDetails = function(id, token) {
+		return $http({
+			method : Constants.METHOD_GET
+			, url  : apiUrl + 'client/manage/view-student/' + id
+				+ '?registration_token=' + token
+		})
+	}
+
 	return api;
 }
