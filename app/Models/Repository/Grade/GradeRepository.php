@@ -6,6 +6,13 @@ use FutureEd\Models\Core\Grade;
 class GradeRepository implements GradeRepositoryInterface{
 
 
+	/**
+     * Get list of grades.
+     * @param array $criteria
+     * @param int $limit
+     * @param int $offset
+     * @return array
+     */
     public function getGrades($criteria = [],$limit = 0, $offset = 0){
 
         $grade = new Grade();
@@ -55,6 +62,11 @@ class GradeRepository implements GradeRepositoryInterface{
 
     }
 
+	/**
+     * Get Grade by code.
+     * @param $code
+     * @return mixed
+     */
     public function getGrade($code){
 
 
@@ -62,6 +74,11 @@ class GradeRepository implements GradeRepositoryInterface{
 
     }
 
+	/**
+     * Add new Grade.
+     * @param $data
+     * @return string|static
+     */
     public function addGrade($data){
 
 		try {
@@ -78,6 +95,12 @@ class GradeRepository implements GradeRepositoryInterface{
 	
     }
 
+	/**
+     * Update Grade record.
+     * @param $id
+     * @param $data
+     * @return \Illuminate\Support\Collection|null|string|static
+     */
     public function updateGrade($id,$data){
 
     	try {
@@ -97,6 +120,11 @@ class GradeRepository implements GradeRepositoryInterface{
     }
 
 
+	/**
+     * Delete Grade
+     * @param $id
+     * @return bool|null|string
+     */
     public function deleteGrade($id){
 
     	try {
@@ -112,15 +140,24 @@ class GradeRepository implements GradeRepositoryInterface{
 		}
     }
 
-    //get grade record by id
 
+
+	/**
+     * get grade record by id
+     * @param $id
+     * @return mixed
+     */
     public function getGradeById($id){
 
         return Grade::where('id',$id)->first();
 
     }
 
-    //return student if this record is related to student
+	/**
+     * return student if this record is related to student
+     * @param $id
+     * @return \Illuminate\Database\Eloquent\Model|null|static
+     */
     public function getStudentByCode($id){
 
         $grade_class = new Grade();
@@ -131,21 +168,20 @@ class GradeRepository implements GradeRepositoryInterface{
 
     }
 
-    /**
-     * Get countries of Grades
-     *
+	/**
+     * Check country of Grades.
      * @param $country_id
+     * @return mixed
      */
-    public function getCountry(){
-
-        return Grade::select('country_id')->distinct()->with('country')->get();
-    }
-
     public function checkCountry($country_id){
 
         return Grade::countryid($country_id)->get()->toArray();
     }
 
+	/**
+     * Get countries of Grades.
+     * @return mixed
+     */
     public function getGradeCountries(){
 
         return Grade::select('country_id')->groupByCountry()->get();
