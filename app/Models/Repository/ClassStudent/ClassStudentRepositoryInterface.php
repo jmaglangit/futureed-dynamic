@@ -33,5 +33,7 @@ interface ClassStudentRepositoryInterface {
 
 	public function getClassStudentStanding($student_id);
 
+	public function getStudentModulesProgressByGrade($student_id, $country_id);
+
 
 }

@@ -266,4 +266,25 @@ class ModuleRepository implements ModuleRepositoryInterface
 
 	}
 
+	/**
+	 * Get column headers for reports based on country_id.
+	 * @param $country_id
+	 * @return mixed
+	 */
+	public function getModuleGradeByStudentCountry($country_id){
+
+		return Module::select (
+			\DB::raw('cg.grade_id as grade_id,g.name as grade_name')
+		)->leftJoin('country_grades as cg','modules.grade_id','=','cg.grade_id')
+			->leftJoin('country_grades as cg2',function($left_join) use ($country_id){
+				$left_join->on('cg2.age_group_id','=','cg.age_group_id');
+			})
+			->leftJoin('grades as g','g.id','=','cg2.grade_id')
+			->where('cg2.country_id',$country_id)
+			->groupBy('g.name')
+			->get();
+
+
+	}
+
 }

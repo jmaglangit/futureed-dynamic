@@ -58,6 +58,10 @@ class Grade extends Model {
 		return $this->belongsTo('FutureEd\Models\Core\CountryGrade','id','grade_id')->with('ageGroup');
 	}
 
+    //-------------relationships classroom
+    public function classroom() {
+        return $this->hasMany('FutureEd\Models\Core\Classroom');
+    }
 
 
 
@@ -75,11 +79,11 @@ class Grade extends Model {
         return $query->where('country_id', '=', $country_id);
     }
 
+    public function scopeGroupByCountry($query){
 
-    //-------------relationships classroom
-    public function classroom() {
-        return $this->hasMany('FutureEd\Models\Core\Classroom');
+        return $query->groupBy('country_id');
     }
+
 
 
 

@@ -15,4 +15,9 @@ Routes::group([
 		'uses' => 'Api\Reports\StudentReportController@getStudentStatusReport',
 		'as' => 'api.report.student.status'
 	]);
+
+	Routes::get('/student-progress/{id}',[
+		'uses' => 'Api\Reports\StudentReportController@getStudentProgressReport',
+		'as' => 'api.report.student.progress'
+	]);
 });
