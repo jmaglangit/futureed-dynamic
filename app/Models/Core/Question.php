@@ -20,7 +20,9 @@ class Question extends Model {
 		'updated_by',
 		'created_at',
 		'updated_at',
-		'deleted_at'];
+		'deleted_at',
+		'answer'
+	];
 
 	protected $fillable =['module_id','code','question_type','questions_text','questions_image','answer'
 		,'question_order_text','seq_no','difficulty','points_earned'
