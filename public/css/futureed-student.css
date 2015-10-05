@@ -1456,3 +1456,9 @@ top: 41px;
 .module-contents-container .breadcrumb {
 	margin-bottom: 10px;
 }
+
+.fib-text-fields input {
+    display: inline-block;
+    width: 200px;
+    margin: 15px;
+}
