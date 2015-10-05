@@ -36,6 +36,11 @@ class Question extends Model {
 		'seq_no' => 0
 	];
 
+	//Added fields not from the table.
+	protected $appends = [
+		'answer_text_field'
+	];
+
 	//Accessor
 	public function getQuestionsImageAttribute($value){
 
@@ -51,6 +56,18 @@ class Question extends Model {
 		} else {
 
 			return 'None';
+		}
+	}
+
+	public function getAnswerTextFieldAttribute($value){
+
+		if($this->attributes['question_type'] == config('futureed.question_type_fill_in_the_blank')){
+
+			return count(explode(",",$this->attributes['answer']));
+
+		}else {
+
+			return null;
 		}
 	}
 
