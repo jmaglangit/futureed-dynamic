@@ -35,6 +35,7 @@ function StudentClassService($http){
 			, url 	: serviceUrl + 'help-request?class_id=' + search.class_id
 				+ "&order_by_date=" + search.order_by_date
 				+ "&request_status=" + search.request_status
+				+ '&question_status=Open,Answered'
 				+ "&limit=" + table.size
 				+ "&offset=" + table.offset
 		});

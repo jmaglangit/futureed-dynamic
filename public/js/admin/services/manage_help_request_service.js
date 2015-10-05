@@ -14,6 +14,7 @@ function ManageHelpRequestService($http) {
 				+ '&subject=' + search.subject
 				+ '&subject_area=' + search.subject_area
 				+ '&status=' + search.request_status
+				+ '&question_status=Open,Answered'
 				+ '&title=' + search.title
 				+ '&limit=' + table.size
 				+ '&offset=' + table.offset

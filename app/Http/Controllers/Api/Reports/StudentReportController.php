@@ -76,7 +76,7 @@ class StudentReportController extends ReportController {
 
 		$subject_status = $this->class_student->getClassStudentStanding($id);
 
-		$rows = [$subject_status];
+		$rows = $subject_status->toArray();
 
 
 		return $this->respondReportData($additional_information, $column_header, $rows);

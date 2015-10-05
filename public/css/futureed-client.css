@@ -371,3 +371,15 @@ content legend {
 .btn-google:hover, .btn-google:focus{
 	padding: 7px;
 }
+
+.dashboard-content {
+	padding: 15px;
+	background-color: rgba(0, 0, 0, .1);
+	border-radius: 7px;
+	box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.1);
+	border: 1px solid #D2D2D2;
+}
+
+.dashboard-content p {
+	
+}
