@@ -19,8 +19,8 @@
 					)
 			) !!}
 				<div class="form-group">
-					<div class="col-xs-6">
-	                    <select name="grade_id" class="form-control" ng-disabled="module.grades.length <= 0" ng-model="module.search.grade_id">
+					<div class="col-xs-6" ng-init="module.getGradeLevel(user.country_id);">
+	                    <select name="grade_id" class="form-control" ng-disabled="!module.grades.length" ng-model="module.search.grade_id">
 	                        <option value="">-- Select Level --</option>
 	                        <option ng-repeat="grade in module.grades" ng-value="grade.id">{! grade.name !}</option>
 	                    </select>
@@ -37,8 +37,8 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<div class="col-xs-6">
-	                    <select name="grade_id" class="form-control" ng-disabled="module.subject.length <= 0" ng-model="module.search.subject">
+					<div class="col-xs-6" ng-init="module.getSubject()">
+	                    <select name="grade_id" class="form-control" ng-disabled="!module.subjects.length" ng-model="module.search.subject">
 	                        <option value="">-- Select Subject --</option>
 	                        <option ng-repeat="subject in module.subjects" ng-value="subject.name">{! subject.name !}</option>
 	                    </select>
@@ -93,20 +93,20 @@
 		        <tr>
 		            <th>Module</th>
 		            <th>Grade</th>
-		            <th ng-if="module.records.length" class="table-width-200">Actions</th>
+		            <th ng-if="module.records.length">Actions</th>
 		        </tr>
 	        </thead>
 	        <tbody>
-		        <tr ng-repeat="moduleInfo in module.records">
-		            <td>{! moduleInfo.name !}</td>
-		            <td>{! moduleInfo.grade.name !}</td>
-		            <td ng-if="module.records.length">
+		        <tr ng-repeat="info in module.records">
+		            <td>{! info.name !}</td>
+		            <td>{! info.grade.name !}</td>
+		            <td>
 		            	<div class="row">
 		            		<div class="col-xs-6">
-		            			<a href="" ng-click="module.launchModule(moduleInfo.id)" title="launch">Launch</a>
+		            			<a href="javascript:void(0)" ng-click="module.launchModule('{!! route('client.teacher.teaching_content.index') !!}', info.id)" title="launch">Launch</a>
 		            		</div>
 		            		<div class="col-xs-6">
-		            			<a href="" ng-click="module.setActive('view',moduleInfo.id)" title="view"><span><i class="fa fa-eye"></i></span></a>
+		            			<a href="javascript:void(0)" ng-click="module.setActive(futureed.ACTIVE_VIEW ,info.id)" title="view"><span><i class="fa fa-eye"></i></span></a>
 		            		</div>
 		            	</div>
 		            </td>

@@ -75,7 +75,7 @@
 		</div>
 		<div class="form-group">
 			<label class="control-label col-xs-2">Common Core URL</label>
-			<div class="col-xs-4">
+			<div class="col-xs-4" ng-cloak>
 				<a href="{! module.record.common_core_url !}" ng-if="module.record.common_core_url" class="btn btn-blue btn-medium">Go to link</a>
 				<span ng-if="!module.record.common_core_url" class="upload-label label label-info">No Available Link</span>
 			</div>
