@@ -1,18 +1,29 @@
 angular.module('futureed.controllers')
 	.controller('ManageTeacherQuestionController', ManageTeacherQuestionController);
 
-ManageTeacherQuestionController.$inject = ['$scope', 'ManageTeacherQuestionService', 'apiService'];
+ManageTeacherQuestionController.$inject = ['$scope', '$window', 'ManageTeacherQuestionService', 'TableService', 'SearchService'];
 
-function ManageTeacherQuestionController($scope, ManageTeacherQuestionService, apiService) {
+function ManageTeacherQuestionController($scope, $window, ManageTeacherQuestionService, TableService, SearchService) {
 	var self = this;
+
+	TableService(self);
+	self.tableDefaults();
+
+	SearchService(self);
+	self.searchDefaults();
+
+	self.setModule = function(id) {
+		if(id) {
+			self.current_module = id;
+		}
+
+		self.setActive()
+	}
 
 	self.setActive = function(active, id) {
 		self.errors = Constants.FALSE;
-		self.fields = [];
 
 		self.active_list = Constants.FALSE;
-		self.active_view = Constants.FALSE;
-		self.active_edit = Constants.FALSE;
 
 		switch(active) {
 			case Constants.ACTIVE_LIST :
@@ -20,40 +31,49 @@ function ManageTeacherQuestionController($scope, ManageTeacherQuestionService, a
 
 			default :
 				self.active_list = Constants.TRUE;
-				
+				self.viewQuestion();
 				break;
 		}
 	}
 
-	self.view = function() {
-		if(self.active_list) {
-			self.viewQuestion();
-		}
+	self.list = function() {
+		self.viewQuestion();
 	}
 
-	self.viewQuestion = function(seq, flag) {
+	self.searchFnc = function(event) {
+		event = getEvent(event);
+		event.preventDefault();
+
+		self.tableDefaults();
+		self.viewQuestion();
+	}
+
+	self.clearFnc = function(event) {
+		event = getEvent(event);
+		event.preventDefault();
+
+		self.tableDefaults();
+		self.searchDefaults();
+		self.viewQuestion();
+	}
+
+	self.viewQuestion = function() {
 		self.errors = Constants.FALSE;
-		self.filter = {};
-		self.filter.id = $scope.user.module_id;
-		self.filter.limit = 1;
-		self.filter.offset = (seq != null) ? seq:0;
-		if(flag == Constants.NEXT){
-			self.filter.offset + 1;
-		}else if(flag == Constants.BACK){
-				self.filter.offset = seq - 2;
-		}
+		self.search.module_id = self.current_module;
+
+		self.table.size = 1;
 
 		$scope.ui_block();
-		
-		ManageTeacherQuestionService.viewQuestion(self.filter, self.q_difficulty).success(function(response){
+		ManageTeacherQuestionService.viewQuestion(self.search, self.table).success(function(response){
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
-					if(response.errors) {
-						self.errors = $scope.errorHandler(response.errors);
-					} else if(response.data) {
-						self.details = response.data.records[0];
-						self.question_total = response.data.total;
-					}
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.record = response.data.records[0];
+					self.updatePageCount(response.data);
 				}
+			}
+
 			$scope.ui_unblock();
 		}).error(function(response) {
 			self.errors = $scope.internalError();
@@ -61,9 +81,7 @@ function ManageTeacherQuestionController($scope, ManageTeacherQuestionService, a
 		});
 	}
 
-	self.setDifficulty = function() {
-		self.hide_difficulty = Constants.TRUE;
-		self.q_difficulty = self.details.difficulty_filter
-		self.view();
+	self.viewContents = function(url) {
+		$window.location.href = url + "/" + self.current_module;
 	}
 }
