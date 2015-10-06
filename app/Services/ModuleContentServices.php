@@ -2,17 +2,30 @@
 
 
 use FutureEd\Models\Repository\ModuleContent\ModuleContentRepositoryInterface;
+use FutureEd\Models\Repository\Question\QuestionRepositoryInterface;
 
 class ModuleContentServices
 {
 
+	/**
+	 * @var ModuleContentRepositoryInterface
+	 */
 	protected $module_content;
 
+	protected $question;
+
+	/**
+	 * @param ModuleContentRepositoryInterface $moduleContentRepositoryInterface
+	 * @param QuestionRepositoryInterface $questionRepositoryInterface
+	 */
 	public function __construct(
-		ModuleContentRepositoryInterface $moduleContentRepositoryInterface
+		ModuleContentRepositoryInterface $moduleContentRepositoryInterface,
+		QuestionRepositoryInterface $questionRepositoryInterface
+
 	)
 	{
 		$this->module_content = $moduleContentRepositoryInterface;
+		$this->question = $questionRepositoryInterface;
 	}
 
 	/**
@@ -39,6 +52,12 @@ class ModuleContentServices
 		return $sequence;
 	}
 
+	/**
+	 * @param $module_id
+	 * @param $seq_no
+	 * @param $id
+	 * @return mixed
+	 */
 	public function pullSequenceNo($module_id,$seq_no, $id){
 
 		//get sequence number
@@ -60,6 +79,43 @@ class ModuleContentServices
 		}
 
 		return $sequence;
+	}
+
+	/**
+	 * Check module if it has complete setup.
+	 * @param $module_id
+	 * @return bool
+	 */
+	public function checkModuleComplete($module_id){
+
+		//get question modules
+		$questions = $this->question->getQuestionLevelsByModule($module_id);
+
+
+		//Check module if it has complete difficulty level.
+		$difficulty_levels = [1,2,3];
+
+		foreach($questions as $data){
+
+			if(!in_array($data->difficulty, config('futureed.question_difficulty_levels'))){
+
+				return false;
+			}
+		}
+
+		//Check each level has minimum 4 questions.
+		foreach($difficulty_levels as $level){
+
+			$question_count = $this->question->countQuestions($module_id,$level);
+
+			if($question_count < config('futureed.question_minimum_count')){
+
+				return false;
+			}
+		}
+
+		return true;
+
 	}
 
 
