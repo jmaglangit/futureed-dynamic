@@ -70,6 +70,7 @@ return [
 		2055 => 'Practice Exercise has already been Completed.',
 		2056 => 'You need to review the teaching content.',
 		2057 => 'Unable to Delete record.',
+		2058 => 'Module is incomplete. Please contact administrator.',
 
 
 		2100 => 'Reset code is invalid.',

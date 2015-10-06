@@ -186,6 +186,9 @@ return [
     'question_type_provide_answer' => 'N',
     'question_type_ordering' => 'O',
 
+	'question_difficulty_levels' => [1,2,3],
+	'question_minimum_count' => 4,
+
 	//Correct Answer
 	'yes' => 'Yes',
 	'no' => 'No',

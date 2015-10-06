@@ -14,6 +14,7 @@ use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use FutureEd\Models\Repository\StudentModule\StudentModuleRepositoryInterface;
 use FutureEd\Models\Repository\StudentModuleAnswer\StudentModuleAnswerRepositoryInterface;
 use FutureEd\Models\Repository\TeachingContent\TeachingContentRepositoryInterface;
+use FutureEd\Services\ModuleContentServices;
 use FutureEd\Services\StudentModuleServices;
 use Illuminate\Support\Facades\Input;
 
@@ -31,6 +32,7 @@ class StudentModuleAnswerController extends ApiController{
 	protected $module;
 	protected $teaching_content;
 	protected $student_module_services;
+	protected $module_services;
 
 
 	public function __construct(
@@ -45,7 +47,8 @@ class StudentModuleAnswerController extends ApiController{
 		StudentRepositoryInterface $student,
 		ModuleContentRepositoryInterface $moduleContentRepositoryInterface,
 		TeachingContentRepositoryInterface $teachingContentRepositoryInterface,
-		StudentModuleServices $studentModuleServices
+		StudentModuleServices $studentModuleServices,
+		ModuleContentServices $moduleContentServices
 	)
 	{
 
@@ -61,6 +64,7 @@ class StudentModuleAnswerController extends ApiController{
 		$this->module = $moduleContentRepositoryInterface;
 		$this->teaching_content = $teachingContentRepositoryInterface;
 		$this->student_module_services = $studentModuleServices;
+		$this->module_services = $moduleContentServices;
 	}
 
 //+-------------------+-------------------------+------+-----+---------------------+----------------+
@@ -104,6 +108,12 @@ class StudentModuleAnswerController extends ApiController{
 			'date_start',
 			'date_end'
 		);
+
+		//check if module has complete setup.
+		if(!$this->module_services->checkModuleComplete($data['module_id'])){
+
+			return $this->respondErrorMessage(2058);
+		}
 
 		//check if module has been completed.
 		if($this->student_module->getStudentModuleStatus($data['student_module_id']) == config('futureed.module_status_completed')){

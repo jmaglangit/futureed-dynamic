@@ -31,7 +31,12 @@
 					ng-click="mod.selectAnswer(choices)" ng-class="{ 'selected-choice' : mod.current_question.answer_id == choices.id }">{! choices.answer_text !}</a>
 				
 				<div ng-if="mod.current_question.question_type == futureed.FILLINBLANK || mod.current_question.question_type == futureed.PROVIDE" class="form-group">
-					<input ng-model="mod.current_question.answer_text" type="text" class="form-control question-text-answer" placeholder="Answer" />
+					<div ng-class="{ 'fib-text-fields' : mod.current_question.answer_text_field.length > 1 }">
+						<input ng-repeat="n in mod.current_question.answer_text_field track by $index" 
+							ng-model="mod.current_question.answer_text[n]"
+							name="answer_text" 
+							type="text" class="form-control question-text-answer" placeholder="Answer {! $index + 1 !}" />
+					</div>
 				</div>
 
 				<div ng-if="mod.current_question.question_type == futureed.ORDERING">

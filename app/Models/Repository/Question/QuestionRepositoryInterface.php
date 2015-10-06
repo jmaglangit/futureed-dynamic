@@ -73,6 +73,9 @@ interface QuestionRepositoryInterface {
 
 	public function getQuestionFirst($module_id);
 
+	public function getQuestionLevelsByModule($module_id);
+
+	public function countQuestions($module_id,$difficulty);
 
 
 }
