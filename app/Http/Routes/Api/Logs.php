@@ -1,7 +1,19 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jason
- * Date: 10/6/15
- * Time: 5:06 PM
- */
+
+Routes::group([
+	'prefix' => '/log',
+//	'middleware' => ['api_user', 'api_after'],
+//	'permission' => ['admin', 'client', 'student'],
+//	'role' => ['principal', 'teacher', 'parent', 'admin', 'super admin']
+], function () {
+
+	/**
+	 * User
+	 */
+	Routes::get('/user',[
+		'uses' => 'Api\Logs\UserLogController@index',
+		'as' => 'api.log.user.list'
+	]);
+
+
+});
