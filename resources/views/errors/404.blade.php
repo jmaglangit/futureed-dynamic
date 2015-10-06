@@ -19,10 +19,10 @@
 			        <i class="fa fa-home"></i>
 			        Take me home
 			    </a>
-			    <a href="#" class="btn btn-light-blue btn-medium disabled">
+			    <!-- <a href="#" class="btn btn-light-blue btn-medium disabled">
 			        <i class="fa fa-envelope-o"></i>
 			        Contact Support
-			    </a>
+			    </a> -->
 			</div>
 		</div>
 	</div>

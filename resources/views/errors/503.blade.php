@@ -13,18 +13,6 @@
 		    <p class="error-text">
 			    We are currently undergoing maintenance.
 		    </p>
-		    
-		    
-		    <div class="btn-container">
-		    	<a class="btn btn-light-blue btn-medium" href="{!! route('student.login') !!}">
-			        <i class="fa fa-home"></i>
-			        Take me home
-			    </a>
-			    <a href="#" class="btn btn-light-blue btn-medium disabled">
-			        <i class="fa fa-envelope-o"></i>
-			        Contact Support
-			    </a>
-			</div>
 		</div>
 	</div>
   
