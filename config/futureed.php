@@ -215,6 +215,10 @@ return [
 	'lsp_for_adult_age' => 18,
 	'lsp_result_name' => 'IPS1',
 	'default_lsp' => 3,
+
+	//Logs
+	'user_log' => 'User',
+	'admin_log' => 'Admin'
 	
 
 ];
