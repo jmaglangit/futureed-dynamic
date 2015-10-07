@@ -1,4 +1,9 @@
 <?php
+
+Routes::get('/client/manage/view-student/{id}', [
+    'uses' => 'Api\v1\TeacherStudentController@viewStudentDetailsByToken',
+    'as' => 'client-manage.update.student']);
+
 Routes::group([
 	'prefix' => '/parent-student',
 	'middleware' => ['api_user','api_after'],
@@ -54,10 +59,6 @@ Routes::group([
     //NOTE:student confirm his/her invitation via teacher
     Routes::put('/update-student/{id}', [
         'uses' => 'Api\v1\TeacherStudentController@studentRegistrationAfterInvitation',
-        'as' => 'client-manage.update.student']);
-
-    Routes::get('/view-student/{id}', [
-        'uses' => 'Api\v1\TeacherStudentController@viewStudentDetailsByToken',
         'as' => 'client-manage.update.student']);
 
     Routes::put('/email/student/{id}', [
