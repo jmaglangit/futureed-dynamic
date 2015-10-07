@@ -843,7 +843,7 @@ hr {
 }
 
 .wiki-icon-holder img {
-	width: 220px;
+	width: 250px;
 	border-radius: 7px;
 }
 
@@ -858,6 +858,10 @@ hr {
 	width: 0;
 	position: absolute;
 	pointer-events: none;
+}
+
+.wiki-more-message:after , .wiki-more-message:before {
+	top: 10%;
 }
 
 .skip-module-message:after
