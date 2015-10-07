@@ -260,6 +260,14 @@ function ManageModuleContentController($scope, ManageModuleContentService, Table
 					});
 				} else if(response.data) {
 					self.record = {};
+
+					self.record.module_id = self.module.id;
+					self.record.subject_id = self.module.subject.id;
+					self.record.subject_area_id = self.module.subject_area.id;
+					self.record.module = self.module.name;
+					self.record.subject = self.module.subject.name;
+					self.record.subject_area = self.module.subject_area.name;
+				
 					self.success = ContentConstants.MSG_ADD_SUCCESS;
 
 					$("html, body").animate({ scrollTop: 0 }, "slow");

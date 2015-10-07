@@ -30,13 +30,17 @@
 				<a ng-if="mod.current_question.question_type == futureed.MULTIPLECHOICE" href="" class="choices" ng-repeat="choices in mod.current_question.question_answers"
 					ng-click="mod.selectAnswer(choices)" ng-class="{ 'selected-choice' : mod.current_question.answer_id == choices.id }">{! choices.answer_text !}</a>
 				
-				<div ng-if="mod.current_question.question_type == futureed.FILLINBLANK || mod.current_question.question_type == futureed.PROVIDE" class="form-group">
+				<div ng-if="mod.current_question.question_type == futureed.FILLINBLANK" class="form-group">
 					<div ng-class="{ 'fib-text-fields' : mod.current_question.answer_text_field.length > 1 }">
 						<input ng-repeat="n in mod.current_question.answer_text_field track by $index" 
 							ng-model="mod.current_question.answer_text[n]"
 							name="answer_text" 
 							type="text" class="form-control question-text-answer" placeholder="Answer {! $index + 1 !}" />
 					</div>
+				</div>
+
+				<div ng-if="mod.current_question.question_type == futureed.PROVIDE" class="form-group">
+					<input ng-model="mod.current_question.answer_text" name="answer_text" type="text" class="form-control question-text-answer" placeholder="Answer" />
 				</div>
 
 				<div ng-if="mod.current_question.question_type == futureed.ORDERING">
@@ -78,7 +82,7 @@
 				</p>
 			</div>
 
-			<div class="btn-container">
+			<div class="proceed-btn-container btn-container">
 				<button type="button" class="btn btn-maroon btn-medium" ng-click="mod.nextQuestion()">
 					Proceed to next Question
 				</button>
@@ -104,22 +108,27 @@
 
 			<div class="message-container">
 				<div class="col-xs-12">
-					<p class="module-message">
-						{! mod.avatar_quote_info.quote !}
-					</p>
-				</div>
+					<div class="col-xs-2"></div>
+					<div class="module-icon-holder col-xs-3">
+						<img ng-src="{! mod.avatar_quote_info.avatar_pose && '/images/avatar/' + mod.avatar_quote_info.avatar_pose.pose_image || user.avatar !}" />
+					</div>
 
-				<div class="module-icon-holder">
-					<img ng-src="{! mod.avatar_quote_info.avatar_pose && '/images/avatar/' + mod.avatar_quote_info.avatar_pose.pose_image || user.avatar !}" />
+					<div class="col-xs-6">
+						<p class="module-message">
+							{! mod.avatar_quote_info.quote !} 
+						</p>
+
+						<div class="proceed-btn-container btn-container">
+							<button type="button" class="btn btn-maroon btn-large" ng-click="mod.nextQuestion()">
+								Proceed to next Question
+							</button>
+						</div>
+					</div>
 				</div>
 			</div>
 
 
-			<div class="btn-container">
-				<button type="button" class="btn btn-maroon btn-medium" ng-click="mod.nextQuestion()">
-					Proceed to next Question
-				</button>
-			</div>
+			
 		</div>
 	</div>
 
@@ -131,20 +140,23 @@
 
 			<div class="result-failed message-container">
 				<div class="col-xs-12">
-					<p class="module-message">
-						You need to review the teaching content.
-					</p>
-				</div>
+					<div class="col-xs-2"></div>
+					<div class="module-icon-holder col-xs-3">
+						<img ng-src="{! user.avatar !}" />
+					</div>
 
-				<div class="module-icon-holder">
-					<img ng-src="{! user.avatar !}" />
-				</div>
-			</div>
+					<div class="col-xs-6">
+						<p class="module-message">
+							You need to review the teaching content.
+						</p>
 
-			<div class="btn-container">
-				<button type="button" class="btn btn-maroon btn-medium" ng-click="mod.reviewContent()">
-					Review Contents
-				</button>
+						<div class="proceed-btn-container btn-container">
+							<button type="button" class="btn btn-maroon btn-large" ng-click="mod.reviewContent()">
+								Review Contents
+							</button>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

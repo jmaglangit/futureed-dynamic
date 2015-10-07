@@ -814,13 +814,10 @@ hr {
 	border: 1px solid #F9EFB7;
 	border-radius: 7px;
 	padding: 15px;
-	width: 50%;
+	width: 85%;
 	margin: 10px auto 20px auto;
 	font-size: 1.5em;
-}
-
-.skip-module-message {
-	width: 100%;
+	word-wrap: break-word;
 }
 
 .wiki-title {
@@ -850,38 +847,9 @@ hr {
 	border-radius: 7px;
 }
 
-.module-message:after, .module-message:before,
-.wiki-message:after, .wiki-message:before {
-	top: 100%;
-	left: 50%;
-	border: solid transparent;
-	content: " ";
-	height: 0;
-	width: 0;
-	position: absolute;
-	pointer-events: none;
-}
-
-.module-message:after, .wiki-message:after {
-	border-color: rgba(136, 183, 213, 0);
-    border-top-color: #EBE3B4;
-    border-width: 20px;
-    margin-left: -10px;
-    transform: skew(-58deg);
-}
-.module-message:before, .wiki-message:before {
-	border-color: rgba(194, 225, 245, 0);
-	border-top-color: #F9EFB7;
-	border-width: 22px;
-    margin-left: -15px;
-    transform: skew(-58deg);
-}
-
-.skip-module img {
-	width: 270px;
-}
-
-.skip-module-message:after, .skip-module-message:before {
+.module-message:after, .module-message:before
+	, .skip-module-message:after, .skip-module-message:before 
+	, .wiki-message:after, .wiki-message:before {
 	right: 100%;
 	top: 50%;
 	border: solid transparent;
@@ -892,14 +860,18 @@ hr {
 	pointer-events: none;
 }
 
-.skip-module-message:after {
+.skip-module-message:after
+	, .module-message:after
+	, .wiki-message:after {
 	border-color: rgba(194, 225, 245, 0);
 	border-right-color: #EBE3B4;
 	border-width: 18px;
     margin-top: -20px;
 }
 
-.skip-module-message:before {
+.skip-module-message:before
+	, .module-message:before
+	, .wiki-message:before {
 	border-color: rgba(136, 183, 213, 0);
     border-right-color: #F9EFB7;
     border-width: 20px;
@@ -1424,7 +1396,7 @@ top: 41px;
 
 .module-icon-holder img {
 	border-radius: 10px;
-	width: 145px;
+	width: 270px;
 }
 
 .disabled-tips-bar, .disabled-help-bar {
@@ -1463,4 +1435,10 @@ top: 41px;
     display: inline-block;
     width: 200px;
     margin: 15px;
+}
+
+.proceed-btn-container .btn {
+	margin: 5px auto;
+    height: 50px;
+    font-size: 16px;
 }

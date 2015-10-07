@@ -313,6 +313,10 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 			self.current_question = self.questions[0];
 		}
 
+		if(angular.equals(self.current_question.question_type, Constants.ORDERING)) {
+			self.current_question.answer_text = self.current_question.question_order_text.split(",");
+		}
+
 		if(angular.equals(self.current_question.question_type, Constants.FILLINBLANK)) {
 			var input_fields = [];
 			var field_count = parseInt(self.current_question.answer_text_field);
