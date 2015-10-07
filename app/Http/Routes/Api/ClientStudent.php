@@ -1,8 +1,22 @@
 <?php
 
-Routes::get('/client/manage/view-student/{id}', [
-    'uses' => 'Api\v1\TeacherStudentController@viewStudentDetailsByToken',
-    'as' => 'client-manage.update.student']);
+//Registration By Invitation.
+Routes::group([
+    'prefix' => '/client/manage',
+], function()
+{
+
+    Routes::get('/view-student/{id}', [
+        'uses' => 'Api\v1\TeacherStudentController@viewStudentDetailsByToken',
+        'as' => 'client-manage.update.student']);
+
+    //NOTE:student confirm his/her invitation via teacher
+    Routes::put('/update-student/{id}', [
+        'uses' => 'Api\v1\TeacherStudentController@studentRegistrationAfterInvitation',
+        'as' => 'client-manage.update.student']);
+
+});
+
 
 Routes::group([
 	'prefix' => '/parent-student',
@@ -56,10 +70,6 @@ Routes::group([
     Routes::resource('/student','Api\v1\ClientStudentController',
         ['except' => ['create','edit', 'destroy']]);
 
-    //NOTE:student confirm his/her invitation via teacher
-    Routes::put('/update-student/{id}', [
-        'uses' => 'Api\v1\TeacherStudentController@studentRegistrationAfterInvitation',
-        'as' => 'client-manage.update.student']);
 
     Routes::put('/email/student/{id}', [
         'uses' => 'Api\v1\StudentEmailController@updateStudentEmail',
