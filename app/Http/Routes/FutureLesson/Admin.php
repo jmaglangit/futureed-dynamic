@@ -657,6 +657,19 @@
 				]);
 		});
 
+		Routes::group(['prefix' => '/logs'], function()
+		{
+			Routes::get('/', [
+					'as' => 'admin.manage.logs.index'
+					, 'middleware' => 'admin'
+					, 'uses' => 'FutureLesson\Admin\AdminLogsController@index'
+				]);
+			Routes::get('/list', [
+					'as' => 'admin.manage.logs.partials.list_form'
+					, 'uses' => 'FutureLesson\Admin\AdminLogsController@list_form'
+				]);
+		});
+
 		Routes::group(['prefix' => 'partials'], function() {
 			Routes::get('/base_url', [
 					'as' => 'admin.partials.base_url'
