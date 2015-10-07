@@ -5,12 +5,12 @@ ManageLogsService.$inject = ['$http'];
 
 function ManageLogsService($http) {
 	var api = {};
-	var apiUrl = '/api/v1/';
+	var apiUrl = '/api/';
 
 	api.list = function(search, table) {
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url   : apiUrl + 'logs/users?user_id=' + search.user_id
+			, url   : apiUrl + 'log/user?user_id=' + search.user_id
 				+ '&username=' + search.username
 				+ '&email=' + search.email
 				+ '&name=' + search.name

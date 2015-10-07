@@ -30,7 +30,14 @@ function ManageLogsController($scope, ManageLogsService, TableService, SearchSer
 
 	self.list = function() {
 		ManageLogsService.list(self.search, self.table).success(function(response) {
-			console.log(response.data);
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.headers = response.data.column_header;
+					self.records = response.data.rows;
+				}
+			}
 		}).error(function(response) {
 			self.errors = $scope.internalError();
 		});

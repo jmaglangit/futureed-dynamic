@@ -1,4 +1,10 @@
 <div ng-if="logs.active_list">
+	<div class="content-title">
+		<div class="title-main-content">
+			<span>Subject Management</span>
+		</div>
+	</div>
+
 	<div class="col-xs-12" ng-if="logs.errors || logs.success">
 		<div class="alert alert-error" ng-if="logs.errors">
 			<p ng-repeat="error in logs.errors track by $index">
@@ -139,39 +145,24 @@
 				<table id="tip-list" class="table table-striped table-bordered">
 					<thead>
 				        <tr>
-				            <th>Displayed At</th>
-				            <th>Module</th>
-				            <th>Subject</th>
-				            <th>Area</th>
-				            <th>Title</th>
-				            <th>Status</th>
+				            <th ng-repeat="header in logs.headers">{! header !}</th>
 				            <th ng-if="logs.records.length">Actions</th>
 				        </tr>
 			        </thead>
 			        <tbody>
-				        <tr ng-repeat="tipInfo in logs.records">
-				            <td>{! tipInfo.link_type !}</td>
-				            <td>{! tipInfo.module.name !}</td>
-				            <td>{! tipInfo.subject.name !}</td>
-				            <td>{! tipInfo.subjectarea.name !}</td>
-				            <td>{! tipInfo.title !}</td>
-				            <td>{! tipInfo.tip_status !}</td>
-				            <td ng-if="logs.records.length">
-				            	<div class="row">
-				            		<div class="col-xs-4">
-				            			<a href="" ng-click="logs.setActive(futureed.ACTIVE_VIEW, tipInfo.id)"><span><i class="fa fa-eye"></i></span></a>
-				            		</div>
-				            		<div class="col-xs-4">
-				            			<a href="" ng-click="logs.setActive(futureed.ACTIVE_EDIT, tipInfo.id)"><span><i class="fa fa-pencil"></i></span></a>
-				            		</div>
-				            		<div class="col-xs-4">
-				            			<a href="" ng-click="logs.confirmDelete(tipInfo.id)"><span><i class="fa fa-trash"></i></span></a>
-				            		</div>	
-				            	</div>
-				            </td>
+				        <tr ng-repeat="record in logs.records">
+				            <td>{! record.link_type !}</td>
+				            <td>{! record.module.name !}</td>
+				            <td>{! record.subject.name !}</td>
+				            <td>{! record.subjectarea.name !}</td>
+				            <td>{! record.subjectarea.name !}</td>
+				            <td>{! record.subjectarea.name !}</td>
+				            <td>{! record.subjectarea.name !}</td>
+				            <td>{! record.title !}</td>
+				            <td>{! record.tip_status !}</td>
 				        </tr>
 				        <tr class="odd" ng-if="!logs.records.length && !logs.table.loading">
-				        	<td valign="top" colspan="7">
+				        	<td valign="top" colspan="10">
 				        		No records found
 				        	</td>
 				        </tr>
