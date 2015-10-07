@@ -11,8 +11,12 @@ class ManageTeacherContentController extends Controller{
 	/**
 	*@return Teaching Content Index
 	*/
-	public function index() {
-		return view('client.teacher.teaching_content.index');
+	public function index($id = null) {
+		if(!isset($id) || !is_numeric($id)) {
+			abort(404);
+		}
+
+		return view('client.teacher.teaching_content.index', array('id' => $id));
 	}
 
 	/**

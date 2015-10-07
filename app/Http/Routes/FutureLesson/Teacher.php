@@ -166,6 +166,11 @@
 					'uses' => $manage_teacher_content_controller . '@index'
 				]);
 
+				Routes::get('/{id}', [
+					'as' => 'client.teacher.teaching_content.id',
+					'uses' => $manage_teacher_content_controller . '@index'
+				]);
+
 				Routes::group(['prefix' => 'partials'], function() {
 					$manage_teacher_content_controller = 'FutureLesson\Client\ManageTeacherContentController';
 
@@ -181,6 +186,11 @@
 
 				Routes::get('/', [
 					'as' => 'client.teacher.question.index',
+					'uses' => $manage_teacher_question_controller . '@index'
+				]);
+
+				Routes::get('/{id}', [
+					'as' => 'client.teacher.question.id',
 					'uses' => $manage_teacher_question_controller . '@index'
 				]);
 

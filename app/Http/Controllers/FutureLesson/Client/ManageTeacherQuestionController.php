@@ -11,8 +11,12 @@ class ManageTeacherQuestionController extends Controller{
 	/**
 	*@return Question Index
 	*/
-	public function index() {
-		return view('client.teacher.question.index');
+	public function index($id = null) {
+		if(!isset($id) || !is_numeric($id)) {
+			abort(404);
+		}
+
+		return view('client.teacher.question.index', array('id' => $id));
 	}
 
 	/**
