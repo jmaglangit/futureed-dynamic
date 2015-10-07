@@ -8,12 +8,18 @@ use Illuminate\Http\Request;
 
 class HelpController extends Controller {
 
-	public function index()
+	public function index($class_id = null)
 	{
 		$input = Input::only('request_type', 'id');
 		
 		$input['request_type'] = ($input['request_type']) ? $input['request_type'] : '';
 		$input['id'] = ($input['id']) ? $input['id'] : '';
+
+		if(!isset($class_id) || !is_numeric($class_id)) {
+			abort(404);
+		}
+
+		$input['class_id'] = $class_id;
 		
 		return view('student.help.index', $input);
 	}

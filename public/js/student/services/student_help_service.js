@@ -17,14 +17,13 @@ function StudentHelpService($http){
 					+ '&help_request_type=' + search.help_request_type
 					+ '&link_id=' + search.link_id
 		} else {
-			params += 'class_id=' + search.class_id 
-					+ "&title=" + search.title
-					+ "&student_id=" + search.student_id
-					+ "&request_status=" + Constants.ACCEPTED
-					+ "&help_request_type=" + search.help_request_type
+			params += 'title=' + search.title
+					+ '&student_id=' + search.student_id
+					+ '&request_status=' + Constants.ACCEPTED
+					+ '&help_request_type=' + search.help_request_type
 		}
 
-		params += '&question_status=Open,Answered'
+		params += '&question_status=Open,Answered&class_id=' + search.class_id
 
 		if(table) {
 			params += "&limit=" + table.size + "&offset=" + table.offset

@@ -42,8 +42,9 @@ function HelpController($scope, apiService, StudentHelpService, TableService, Se
 		$("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 
-	self.setRequestType = function(request_type, help_id) {
+	self.setRequestType = function(request_type, help_id, class_id) {
 		self.search.help_request_type = request_type;
+		self.search.class_id = class_id;
 
 		if(help_id) {
 			self.setActive(Constants.ACTIVE_VIEW, help_id);
@@ -352,6 +353,7 @@ function HelpController($scope, apiService, StudentHelpService, TableService, Se
 		self.search.module_id= self.module.id;
 		
 		self.search.student_id= $scope.user.id;
+		self.search.class_id = self.module.student_module.class_id;
 		self.search.question_status = Constants.EMPTY_STR;
 
 		if(!self.active_all) {

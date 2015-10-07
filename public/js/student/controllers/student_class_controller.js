@@ -27,13 +27,31 @@ function StudentClassController($scope, $filter, $window, StudentClassService, S
 		}
 	}
 
-	self.redirectHelp = function(help_id) {
-		$("#redirect_help input[name='id']").val(help_id);
+	self.redirectHelp = function(help_id, request_type) {
+		var url = $("#redirect_help").prop('action');
+			url += "/" + self.current_class;
+
+		if(help_id) {
+			$("#redirect_help input[name='id']").val(help_id);
+		}
+
+		if(request_type) {
+			$("#redirect_help input[name='request_type']").val(request_type);
+		}
+		
+		$("#redirect_help").prop('action', url);
 		$("#redirect_help").submit();
 	}
 
-	self.redirectTip = function(help_id) {
-		$("#redirect_tip input[name='id']").val(help_id);
+	self.redirectTip = function(tip_id) {
+		var url = $("#redirect_tip").prop('action');
+			url += "/" + self.current_class;
+
+		if(tip_id) {
+			$("#redirect_tip input[name='id']").val(tip_id);
+		}
+		
+		$("#redirect_tip").prop('action', url);
 		$("#redirect_tip").submit();
 	}
 
