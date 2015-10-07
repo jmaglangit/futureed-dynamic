@@ -9,6 +9,7 @@ class UserLogRepository implements UserLogRepositoryInterface{
 
 	public function getUserLog($id){
 
+		return UserLog::find($id);
 	}
 
 	/**
