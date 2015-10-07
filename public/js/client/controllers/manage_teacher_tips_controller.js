@@ -113,13 +113,17 @@ function ManageTeacherTipsController($scope, ManageTeacherTipsService, TableServ
 					self.record.created_at = record.created_at;
 					self.record.created_by = record.student.first_name + ' ' + record.student.last_name;
 					self.record.link_type = record.link_type;
-					self.record.tip_status = record.tip_status;
+					
 					self.record.title = record.title;
 					self.record.content = record.content;
 					self.record.status = record.status;
-					self.record.subject = record.subject;
-					self.record.subjectarea = record.subjectarea;
-					self.record.module = record.module;
+
+					if(angular.equals(record.link_type, Constants.CONTENT)) {
+						self.record.subject = record.subject.name;
+						self.record.subject_area = record.subjectarea.name;
+						self.record.module = record.module.name;
+					}
+
 					self.record.tip_status = record.tip_status;
 				}
 			}

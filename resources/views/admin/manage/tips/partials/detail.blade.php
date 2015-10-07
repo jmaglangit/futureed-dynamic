@@ -150,23 +150,35 @@
 	        		<label class="control-label col-xs-2">Rating</label>
 	        		<div class="col-xs-4 margin-top-5">
 	        			<span ng-repeat="i in tips.record.stars track by $index">
-							<!-- <img ng-if="!answer.rating" ng-mouseover="help.changeColor($index, answer.id)" ng-src="{! (help.hovered[answer.id][$index])  && '/images/class-student/icon-star_yellow.png' || '/images/class-student/icon-star_white.png' !}" /> -->
-							<!-- <img ng-if="answer.rating" ng-src="{! $index + 1 <= answer.rating && '/images/class-student/icon-star_yellow.png' || '/images/class-student/icon-star_white.png' !}" /> -->
 							<img ng-src="{! $index+1 <= tips.record.rating && '/images/class-student/icon-star_yellow.png' || '/images/class-student/icon-star_white.png' !}" />
 						</span>
 	        		</div>
 	        	</div>
 	        	<div class="form-group" ng-if="tips.record.rated_by != futureed.ADMIN && tips.active_view">
 	        		<div class="btn-container col-xs-8 col-xs-offset-2">
-	        			<button class="btn btn-blue btn-medium" type="button" ng-click="tips.rateTip()" ng-if="tips.record.rating != futureed.NULL">Change Rating</button>
+						{!! Form::button('Change Rating'
+							, array(
+								'class' => 'btn btn-blue btn-medium'
+								, 'ng-click' => "tips.rateTip()"
+								, 'ng-if' => 'tips.record.rating != futureed.NULL'
+							)
+						) !!}
 
-	        			<button class="btn btn-blue btn-medium" type="button" ng-click="tips.rateTip()" ng-if="tips.record.rating == futureed.NULL">Accept</button>
+						{!! Form::button('Accept'
+							, array(
+								'class' => 'btn btn-blue btn-medium'
+								, 'ng-click' => "tips.rateTip()"
+								, 'ng-if' => 'tips.record.rating == futureed.NULL'
+							)
+						) !!}
+
 						{!! Form::button('Reject'
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'ng-click' => "tips.rejectTip()"
+								, 'ng-if' => 'tips.record.rating == futureed.NULL'
 							)
-						) !!}		
+						) !!}
 					</div>
 	        	</div>
 			</fieldset>
