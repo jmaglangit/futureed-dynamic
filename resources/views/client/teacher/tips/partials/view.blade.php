@@ -110,59 +110,53 @@
 				</div>
 
 				<div class="form-group" ng-if="tips.active_view && tips.record.tip_status == futureed.PENDING">
-					<div class="btn-container">
-						<div class="col-xs-8 col-xs-offset-1">
-							{!! Form::button('Approve'
-								, array(
-									'class' => 'btn btn-blue btn-medium'
-									, 'ng-click' => "tips.rateTip()"
-								)
-							) !!}
-							{!! Form::button('Reject'
-								, array(
-									'class' => 'btn btn-gold btn-medium'
-									, 'ng-click' => "tips.updateStatus(tips.record.id, futureed.FALSE)"
-								)
-							) !!}
-						</div>
+					<div class="btn-container col-xs-8 col-xs-offset-1">
+						{!! Form::button('Approve'
+							, array(
+								'class' => 'btn btn-blue btn-medium'
+								, 'ng-click' => "tips.rateTip()"
+							)
+						) !!}
+						{!! Form::button('Reject'
+							, array(
+								'class' => 'btn btn-gold btn-medium'
+								, 'ng-click' => "tips.updateStatus(tips.record.id, futureed.FALSE)"
+							)
+						) !!}
 					</div>
 				</div>
 
 				<div class="form-group" ng-if="tips.active_view">
-					<div class="btn-container">
-						<div class="col-xs-8 col-xs-offset-1">
-							{!! Form::button('Edit'
-								, array(
-									'class' => 'btn btn-blue btn-medium'
-									, 'ng-click' => "tips.setActive(futureed.ACTIVE_EDIT, tips.record.id)"
-								)
-							) !!}
-							{!! Form::button('Cancel'
-								, array(
-									'class' => 'btn btn-gold btn-medium'
-									, 'ng-click' => "tips.setActive(futureed.ACTIVE_LIST)"
-								)
-							) !!}
-						</div>
+					<div class="btn-container col-xs-8 col-xs-offset-1">
+						{!! Form::button('Edit'
+							, array(
+								'class' => 'btn btn-blue btn-medium'
+								, 'ng-click' => "tips.setActive(futureed.ACTIVE_EDIT, tips.record.id)"
+							)
+						) !!}
+						{!! Form::button('Cancel'
+							, array(
+								'class' => 'btn btn-gold btn-medium'
+								, 'ng-click' => "tips.setActive(futureed.ACTIVE_LIST)"
+							)
+						) !!}
 					</div>
 				</div>
 
 				<div class="form-group" ng-if="tips.active_edit">
-					<div class="btn-container">
-						<div class="col-xs-8 col-xs-offset-1">
-							{!! Form::button('Save'
-								, array(
-									'class' => 'btn btn-blue btn-medium'
-									, 'ng-click' => "tips.update()"
-								)
-							) !!}
-							{!! Form::button('Cancel'
-								, array(
-									'class' => 'btn btn-gold btn-medium'
-									, 'ng-click' => "tips.setActive(futureed.ACTIVE_VIEW, tips.record.id)"
-								)
-							) !!}
-						</div>
+					<div class="btn-container col-xs-8 col-xs-offset-1">
+						{!! Form::button('Save'
+							, array(
+								'class' => 'btn btn-blue btn-medium'
+								, 'ng-click' => "tips.update()"
+							)
+						) !!}
+						{!! Form::button('Cancel'
+							, array(
+								'class' => 'btn btn-gold btn-medium'
+								, 'ng-click' => "tips.setActive(futureed.ACTIVE_VIEW, tips.record.id)"
+							)
+						) !!}
 					</div>
 				</div>
 			</fieldset>
