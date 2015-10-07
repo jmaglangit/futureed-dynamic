@@ -74,3 +74,12 @@ Routes::group(['prefix' => 'api'], function () {
 	include('Routes/Api/Reports.php');
 
 });
+
+/**
+ * Log Routes
+ */
+Routes::group(['prefix' => 'api'], function () {
+
+	include('Routes/Api/Logs.php');
+
+});
