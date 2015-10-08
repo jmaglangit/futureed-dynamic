@@ -125,56 +125,32 @@ class RenewSubscriptionController extends ApiController {
 
 			foreach($invoice_detail as $k => $v){
 
+				//Change classroom first before invoice details
+				$classroom = $this->classroom->getClassroom($invoice_detail[$k]['class_id']);
+
+				$classroom->order_no = $data['order_no'];
+
+				$classroom = $this->classroom->addClassroom($classroom->toArray());
+
+				//Transfer Students
+				$class_student = $this->class_student->getClassStudentByClassId($invoice_detail[$k]['class_id']);
+
+				foreach($class_student as $key => $stud){
+
+					$stud->class_id = $classroom->id;
+
+					$this->class_student->addClassStudent($stud->toArray());
+				}
+
+
+				//Change invoice details
 				$value['invoice_id'] = $added_invoice['id'];
-				$value['class_id'] = $invoice_detail[$k]['class_id'];
+				$value['class_id'] = $classroom->id;
 				$value['grade_id'] = $invoice_detail[$k]['grade_id'];
 				$value['price'] = $data['total_amount'];
 				$this->invoice_detail->addInvoiceDetail($value);
 			}
 
-		}
-
-		//get classroom
-		$classroom = $this->classroom->getClassroomByOrderNo($invoice['order_no']);
-
-		//add classroom
-		if($classroom){
-
-			foreach($classroom as $k => $v){
-
-				$value['order_no'] = $data['order_no'];
-				$value['name'] = $classroom[$k]['name'];
-				$value['grade_id'] = $classroom[$k]['grade_id'];
-				$value['client_id'] = $classroom[$k]['client_id'];
-				$value['student_id'] = $classroom[$k]['student_id'];
-				$value['subject_id'] = $classroom[$k]['subject_id'];
-				$value['seats_taken'] = $classroom[$k]['seats_taken'];
-				$value['seats_total'] = $classroom[$k]['seats_total'];
-
-				$added_classroom = $this->classroom->addClassroom($value);
-
-				//get class_student
-				$class_student = $this->class_student->getClassStudentByClassId($classroom[$k]['id']);
-
-				//add class_student
-				if($class_student){
-
-					foreach($class_student as $key => $val){
-
-						$value1['student_id'] = $class_student[$key]['student_id'];
-						$value1['class_id'] = $added_classroom['id'];
-						$value1['date_started'] = $class_student[$key]['date_started'];
-						$value1['date_removed'] = $class_student[$key]['date_removed'];
-						$value1['subscription_status'] = $class_student[$key]['subscription_status'];
-
-						$this->class_student->addClassStudent($value1);
-
-
-					}
-
-				}
-
-			}
 		}
 
 		return $this->respondWithData($this->invoice->getInvoice($added_invoice['id']));
