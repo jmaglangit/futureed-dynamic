@@ -7,6 +7,11 @@ use FutureEd\Models\Core\AdminLog;
 
 class AdminLogRepository implements AdminLogRepositoryInterface{
 
+	/**
+	 * Get Admin log.
+	 * @param $id
+	 * @return \Illuminate\Support\Collection|null|static
+	 */
 	public function getAdminLog($id){
 
 		return AdminLog::find($id);
