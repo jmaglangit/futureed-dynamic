@@ -37,6 +37,10 @@
 					'as' => 'student.login'
 					, 'uses' => 'FutureLesson\Student\LoginController@index'
 				]);
+			Routes::post('/', [ 
+					'as' => 'student.post.login'
+					, 'uses' => 'FutureLesson\Student\LoginController@post_index'
+				]);
 			Routes::post('/process', [ 
 					'as' => 'student.login.process'
 					, 'uses' => 'FutureLesson\Student\LoginController@process'

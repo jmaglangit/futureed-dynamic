@@ -492,15 +492,6 @@ function FutureedController($scope, $window, apiService, futureed) {
 		});
 	}
 
-	$scope.checkEmail = function(id) {
-
-		if(id != Constants.EMPTY_STR){
-			$scope.id = id;
-			$scope.getLoginPassword();
-			$scope.enter_pass = Constants.TRUE;
-		}
-	}
-
 	$scope.checkLearningStyle = function() {
 		var lsp_url = Constants.LSP_URL;
 		var current_url = window.location.pathname;

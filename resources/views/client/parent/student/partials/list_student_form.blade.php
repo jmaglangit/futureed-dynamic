@@ -151,5 +151,15 @@
 				</pagination>
 			</div>
 		</div>
+
+		{!! Form::open(
+				array(
+					'id' => 'redirect_form'
+					, 'route' => 'student.post.login'
+					, 'method' => 'POST'
+				)
+			) !!}
+				{!! Form::hidden('id', '') !!}
+			{!!Form::close() !!}
 	</div>
 </div>
