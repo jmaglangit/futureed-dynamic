@@ -7,6 +7,13 @@ use FutureEd\Models\Core\SecurityLog;
 
 class SecurityLogRepository implements SecurityLogRepositoryInterface{
 
+	/**
+	 * Get list of security logs.
+	 * @param $criteria
+	 * @param $offset
+	 * @param $limit
+	 * @return array
+	 */
 	public function getSecurityLogs($criteria, $offset, $limit){
 
 		$log = new SecurityLog();
