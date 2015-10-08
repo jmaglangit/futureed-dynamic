@@ -60,7 +60,7 @@
 				<div class="col-xs-5">
 					{!! Form::text('search_module', ''
 						,array(
-							'placeholder' => 'Created'
+							'placeholder' => 'Created By'
 							, 'ng-model' => 'tips.search.created'
 							, 'class' => 'form-control btn-fit'
 						)

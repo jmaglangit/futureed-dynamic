@@ -58,39 +58,20 @@
 			</div>
 			<div class="form-group">
 				<div class="col-xs-5">
-					{!! Form::text('search_subject', ''
+					{!! Form::text('search_created', ''
 						,array(
-							'placeholder' => 'Subject'
-							, 'ng-model' => 'answer.search.subject'
+							'placeholder' => 'Created By'
+							, 'ng-model' => 'answer.search.created'
 							, 'class' => 'form-control'
 						)
 					)!!}
 				</div>
-				<div class="col-xs-5">
-					{!! Form::text('search_subject_area', ''
-						,array(
-							'placeholder' => 'Subject Area'
-							, 'ng-model' => 'answer.search.subject_area'
-							, 'class' => 'form-control'
-						)
-					)!!}
-				</div>
+				<div class="col-xs-5"></div>
 				<div class="col-xs-2">
 					{!! Form::button('Clear'
 						,array(
 							'class' => 'btn btn-gold'
 							, 'ng-click' => 'answer.clearFnc($event)'
-						)
-					)!!}
-				</div>
-			</div>
-			<div class="form-group">
-				<div class="col-xs-5">
-					{!! Form::text('search_created', ''
-						,array(
-							'placeholder' => 'Created'
-							, 'ng-model' => 'answer.search.created'
-							, 'class' => 'form-control'
 						)
 					)!!}
 				</div>
