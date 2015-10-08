@@ -27,12 +27,19 @@ class LoginController extends Controller {
 		} else if(Session::get('client')) {
 
 			return redirect()->route('client.dashboard.index');
-		} else if(Input::only('id')){
-			$id = Input::only('id');
-			return view('student.login.index', ['id' => $id['id']]);
 		}
 
-		return view('student.login.index');
+		return view('student.login.index', ['id' => null]);
+	}
+
+	public function post_index()
+	{
+		$input = Input::only('id');
+		if(!isset($input['id']) || !is_numeric($input['id'])) {
+			abort(404);
+		}
+		
+		return view('student.login.index', ['id' => $input['id']]);
 	}
 
 	/**
