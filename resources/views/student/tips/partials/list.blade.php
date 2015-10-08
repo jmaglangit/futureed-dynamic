@@ -35,22 +35,12 @@
 				)
 			)!!}
 			<div class="form-group">
-				<div class="col-xs-4">
+				<div class="col-xs-1"></div>
+				<div class="col-xs-6">
 					{!! Form::text('search_subject', ''
 						,array(
-							'placeholder' => 'Subject'
-							, 'ng-model' => 'tips.search.subject'
-							, 'class' => 'form-control'
-							, 'autocomplete' => 'off'
-						)
-					)!!}
-				</div>
-
-				<div class="col-xs-4">
-					{!! Form::text('search_area', ''
-						,array(
-							'placeholder' => 'Subject Area'
-							, 'ng-model' => 'tips.search.area'
+							'placeholder' => 'Title'
+							, 'ng-model' => 'tips.search.title'
 							, 'class' => 'form-control'
 							, 'autocomplete' => 'off'
 						)

@@ -41,6 +41,11 @@ class StudentTipController extends ApiController {
 			$criteria['class_id'] = Input::get('class_id');
 		}
 
+		if(Input::get('title')){
+
+			$criteria['title'] = Input::get('title');
+		}
+
 		//for area
 		if(Input::get('area')){
 

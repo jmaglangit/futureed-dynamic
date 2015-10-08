@@ -38,7 +38,7 @@
 				<div class="col-xs-4">
 					{!! Form::text('search_title', ''
 						,array(
-							'placeholder' => 'Question Title'
+							'placeholder' => 'Help Request Title'
 							, 'ng-model' => 'help.search.title'
 							, 'class' => 'form-control'
 							, 'autocomplete' => 'off'
@@ -110,7 +110,7 @@
 				<table id="tip-list" class="table table-striped table-bordered">
 					<thead>
 				        <tr>
-				            <th>Help Request Question</th>
+				            <th>Help Request Title</th>
 				            <th>Date Created</th>
 				            <th>Status</th>
 				            <th ng-if="help.records.length">Actions</th>
