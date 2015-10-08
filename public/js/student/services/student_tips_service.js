@@ -11,7 +11,7 @@ function StudentTipsService($http){
 		var params = Constants.EMPTY_STR;
 
 			if(search.module_id) {
-				params += "link_id=" + search.link_id + "&link_type=" + search.link_type + "&module_id=" + search.module_id	
+				params += "link_id=" + search.link_id + "&link_type=" + search.link_type + "&module_id=" + search.module_id	+ "&class_id=" + search.class_id
 			} else {
 				params += "class_id=" + search.class_id + "&area=" + search.area + "&subject=" + search.subject;
 				params += "&limit=" + table.size + "&offset=" + table.offset;

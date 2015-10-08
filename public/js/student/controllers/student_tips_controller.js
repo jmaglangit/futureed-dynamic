@@ -39,7 +39,9 @@ function TipsController($scope, StudentTipsService, TableService, SearchService)
 		$("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 
-	self.setTipView = function(tip_id) {
+	self.setTipView = function(tip_id, class_id) {
+		self.search.class_id = class_id;
+
 		if(tip_id) {
 			self.setActive(Constants.ACTIVE_VIEW, tip_id);
 		}
@@ -74,7 +76,6 @@ function TipsController($scope, StudentTipsService, TableService, SearchService)
 	self.listTips = function() {
 		self.records = [];
 		self.errors = Constants.FALSE;
-		self.search.class_id = Constants.EMPTY_STR;
 
 		self.table.loading = Constants.TRUE;
 
@@ -247,6 +248,8 @@ function TipsController($scope, StudentTipsService, TableService, SearchService)
 		self.searchDefaults();
 		self.active_all = Constants.FALSE;
 		self.active_current = Constants.FALSE;
+
+		self.search.class_id = self.module.student_module.class_id;
 
 		switch(active) {
 			case Constants.ALL:

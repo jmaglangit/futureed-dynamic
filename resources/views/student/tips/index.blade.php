@@ -14,7 +14,7 @@
 		</div>
 		
 		<div class="wrapr" ng-init="tips.setActive()"> 
-			<div ng-init="tips.setTipView('{!! $id !!}')"></div>
+			<div ng-init="tips.setTipView('{!! $id !!}', '{!! $class_id !!}')"></div>
 
 			<div template-directive template-url="{!! route('student.tips.partials.list') !!}"></div>
 

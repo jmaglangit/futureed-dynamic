@@ -120,7 +120,7 @@
 				        <tr ng-repeat="tipInfo in tips.records">
 				            <td>{! tipInfo.title !}</td>
 				            <td>{! tipInfo.student.first_name !} {! tipInfo.student.last_name !}</td>
-				            <td>{! tipInfo.created_at | ddMMyyHHmmss : '-' !}</td>
+				            <td>{! tipInfo.created_at | ddMMyy : '-' !}</td>
 				            <td>{! tipInfo.tip_status !}</td>
 				            <td ng-if="tips.records.length">
 				            	<div class="row">

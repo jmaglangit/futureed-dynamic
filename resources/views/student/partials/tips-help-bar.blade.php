@@ -17,6 +17,7 @@
 		)
 	) !!}
 		{!! Form::hidden('id', null) !!}
+		{!! Form::hidden('request_type', null) !!}
 	{!! Form::close() !!}
 
 	<div class="side-header">
@@ -121,10 +122,10 @@
 			</div>
 			<div class="side-btn-container row" ng-if="!class.add_tips && !class.tips.success">
 				<div class="col-xs-6 btn-left">
-					{!! Html::link(route('student.tips.index'), 'View List'
+		            {!! Form::button('View List'
 		                , array(
 		                   'class' => 'btn btn-blue'
-		                  , 'ng-if' => 'class.tips.total'
+		                   , 'ng-click' => "class.redirectTip('')"
 		                )
 		            ) !!}
 				</div>
@@ -147,19 +148,12 @@
 	<div id="help_request_form" class="side-container">
 		<div class="side-btn-container row" ng-if="!class.add_help && !class.help.success">
 			<div class="col-xs-12 submit-btn-help">
-				{!! Form::open(
-					array(
-						'route' => 'student.help.post.index'
-						, 'method' => 'futureed.METHOD_POST'
-					)
-				) !!}
-					{!! Form::hidden('request_type', 'Own') !!}
-					{!! Form::submit('My Help Requests'
-		                , array(
-		                   'class' => 'btn btn-blue'
-		                )
-		            ) !!}
-	            {!! Form::close() !!}
+				{!! Form::button('My Help Requests'
+	                , array(
+	                   'class' => 'btn btn-blue'
+	                   , 'ng-click' => "class.redirectHelp('', 'Own')"
+	                )
+	            ) !!}
 			</div>
 		</div>
 
@@ -244,10 +238,10 @@
 
 			<div class="side-btn-container row container-bottom" ng-if="!class.add_help && !class.help.success">
 				<div class="col-xs-6 btn-left">
-		            {!! Html::link(route('student.help.index'), 'View List'
+		            {!! Form::button('View List'
 		                , array(
 		                   'class' => 'btn btn-blue'
-		                  , 'ng-if' => 'class.help.total'
+		                   , 'ng-click' => "class.redirectHelp('', '')"
 		                )
 		            ) !!}
 				</div>

@@ -325,7 +325,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				input_fields.push(index);
 			}
 
-			self.current_question.answer_text_field = input_fields;
+			self.current_question.answer_text_field_count = input_fields;
 		}
 
 		self.question_counter = (self.record.student_module.question_counter) ? parseInt(self.record.student_module.question_counter) + 1 : 1;
@@ -653,13 +653,14 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 				if(angular.equals(self.current_question.question_type, Constants.FILLINBLANK)) {
 					var input_fields = [];
+
 					var field_count = parseInt(self.current_question.answer_text_field);
 
 					for(var index = 0; index < field_count; index++) {
 						input_fields.push(index);
 					}
 
-					self.current_question.answer_text_field = input_fields;
+					self.current_question.answer_text_field_count = input_fields;
 				}
 
 				self.question_counter = parseInt(self.result.question_counter) + 1;
