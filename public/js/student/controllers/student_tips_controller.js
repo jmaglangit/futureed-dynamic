@@ -61,7 +61,7 @@ function TipsController($scope, StudentTipsService, TableService, SearchService)
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
 
-		self.searchDefaults();
+		self.search.title = Constants.EMPTY_STR;
 		self.tableDefaults();
 
 		self.list();

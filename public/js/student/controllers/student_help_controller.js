@@ -65,7 +65,10 @@ function HelpController($scope, apiService, StudentHelpService, TableService, Se
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
 
-		self.searchDefaults();
+		self.search.title = Constants.EMPTY_STR;
+		self.search.help_request_type = Constants.EMPTY_STR;
+		self.search.student_id = Constants.EMPTY_STR;
+		
 		self.tableDefaults();
 
 		self.list();
