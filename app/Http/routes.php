@@ -65,3 +65,21 @@ Routes::group(['prefix' => 'api/v1'], function () {
 	include('Routes/Api/User.php');
 	include('Routes/Api/VolumeDiscount.php');
 });
+
+/**
+ * Report Routes
+ */
+Routes::group(['prefix' => 'api'], function () {
+
+	include('Routes/Api/Reports.php');
+
+});
+
+/**
+ * Log Routes
+ */
+Routes::group(['prefix' => 'api'], function () {
+
+	include('Routes/Api/Logs.php');
+
+});

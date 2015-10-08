@@ -50,7 +50,7 @@
 		<li class="client-nav" ng-class="{ 'tab-active' : class.active == 'class' }">
 			<a href="{{ route('client.teacher.class.index') }}"><span><i class="fa fa-users"></i></span>Class</a>
 		</li>
-		<li class="client-nav" ng-class="{ 'tab-active' : module.active == 'module' || content.active == 'module' || question.active == 'module'}">
+		<li class="client-nav" ng-class="{ 'tab-active' : module || content || question}">
 			<a href="{{ route('client.teacher.module.index') }}"><span><i class="fa fa-cubes"></i></span>Module</a>
 		</li>
 	</ul>

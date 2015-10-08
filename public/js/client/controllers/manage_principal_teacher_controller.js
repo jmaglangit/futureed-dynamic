@@ -183,7 +183,7 @@ function ManagePrincipalTeacherController($scope, managePrincipalTeacherService,
 			}
 			$scope.ui_unblock();
 		}).error(function(response) {
-			$scope.ui_unblock();
+			self.errors = $scope.ui_unblock();
 			self.internalError();
 		});
 

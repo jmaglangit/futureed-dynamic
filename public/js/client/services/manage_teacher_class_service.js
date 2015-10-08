@@ -12,6 +12,7 @@ function ManageClassService($http){
 			method : Constants.METHOD_GET
 			, url  : classApiUrl + 'classroom?name=' + search.name
 				+ '&client_id=' + search.client_id
+				+ '&payment_status=Paid'
 				+ '&grade_id=' + search.grade_id
 				+ '&limit=' + table.size
 				+ '&offset=' + table.offset

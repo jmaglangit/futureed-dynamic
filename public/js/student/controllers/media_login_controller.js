@@ -11,6 +11,13 @@ function MediaLoginController($scope, $filter, $window, MediaLoginService) {
 	* Facebook Login for AngularJS
 	*/
 
+	self.initMediaIds = function(fb_app_id, gl_client_id) {
+		self.DI_PPA_BF = fb_app_id;
+		self.DI_TNEILC_ELGOOG = gl_client_id;
+
+		self.fbAsyncInit();
+	}
+
 	self.setSetUserType = function(type) {
 		self.user_type = type;
 	}
@@ -18,7 +25,7 @@ function MediaLoginController($scope, $filter, $window, MediaLoginService) {
 	// Initialize FB API on load
 	self.fbAsyncInit = function() {
 	    FB.init({ 
-	      appId: Constants.DI_PPA_BF
+	      appId: self.DI_PPA_BF
 	      , status: true 
 	      , xfbml: true
 	      , version: 'v2.3'
@@ -95,7 +102,7 @@ function MediaLoginController($scope, $filter, $window, MediaLoginService) {
 	self.googleInit = function() {
 		gapi.load('auth2', function(){
 			var auth2 = gapi.auth2.init({
-				client_id: Constants.DI_TNEILC_ELGOOG
+				client_id: self.DI_TNEILC_ELGOOG
 				, cookie_policy : 'none'
 				, scope : 'https://www.googleapis.com/auth/plus.me'
 			});
@@ -150,7 +157,8 @@ function MediaLoginController($scope, $filter, $window, MediaLoginService) {
 						$scope.$emit('media-error', self.errors);
 					}
 				} else if(response.data){
-					response.data.role = response.data.client_role;
+					response.data.role = (response.data.client_role) ? response.data.client_role : Constants.STUDENT ;
+					
 					$scope.user = JSON.stringify(response.data);
 					$("input[name='user_data']").val(JSON.stringify(response.data));
 					$("#process_form").submit();

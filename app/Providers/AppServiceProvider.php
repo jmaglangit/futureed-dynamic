@@ -291,5 +291,20 @@ class AppServiceProvider extends ServiceProvider {
 			'FutureEd\Models\Repository\StudentLsAnswer\StudentLsAnswerRepositoryInterface',
 			'FutureEd\Models\Repository\StudentLsAnswer\StudentLsAnswerRepository'
 		);
+
+		$this->app->bind(
+			'FutureEd\Models\Repository\UserLog\UserLogRepositoryInterface',
+			'FutureEd\Models\Repository\UserLog\UserLogRepository'
+		);
+
+		$this->app->bind(
+			'FutureEd\Models\Repository\SecurityLog\SecurityLogRepositoryInterface',
+			'FutureEd\Models\Repository\SecurityLog\SecurityLogRepository'
+		);
+
+		$this->app->bind(
+			'FutureEd\Models\Repository\AdminLog\AdminLogRepositoryInterface',
+			'FutureEd\Models\Repository\AdminLog\AdminLogRepository'
+		);
 	}
 }

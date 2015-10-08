@@ -35,10 +35,10 @@
 				)
 			)!!}
 			<div class="form-group">
-				<div class="col-xs-5">
+				<div class="col-xs-4">
 					{!! Form::text('search_title', ''
 						,array(
-							'placeholder' => 'Question Title'
+							'placeholder' => 'Help Request Title'
 							, 'ng-model' => 'help.search.title'
 							, 'class' => 'form-control'
 							, 'autocomplete' => 'off'
@@ -46,31 +46,7 @@
 					)!!}
 				</div>
 
-				<div class="col-xs-5">
-					{!! Form::select('search_request_status'
-						, array(
-							'' => '-- Select Request Status --'
-							, 'Pending' => 'Pending'
-							, 'Accepted' => 'Accepted'
-						), ''
-						, array(
-							  'ng-model' => 'help.search.request_status'
-							, 'class' => 'form-control'
-						)
-					) !!}
-				</div>
-				
-				<div class="col-xs-2">
-					{!! Form::button('Search'
-						,array(
-							'class' => 'btn btn-blue'
-							, 'ng-click' => 'help.searchFnc($event)'
-						)
-					)!!}
-				</div>
-			</div>
-			<div class="form-group">
-				<div class="col-xs-5">
+				<div class="col-xs-4">
 					{!! Form::select('search_help_request_type'
 						, array(
 							  '' => 'All'
@@ -83,8 +59,14 @@
 						)
 					) !!}
 				</div>
-
-				<div class="col-xs-5">
+				
+				<div class="col-xs-2">
+					{!! Form::button('Search'
+						,array(
+							'class' => 'btn btn-blue'
+							, 'ng-click' => 'help.searchFnc($event)'
+						)
+					)!!}
 				</div>
 
 				<div class="col-xs-2">
@@ -128,7 +110,7 @@
 				<table id="tip-list" class="table table-striped table-bordered">
 					<thead>
 				        <tr>
-				            <th>Help Request Question</th>
+				            <th>Help Request Title</th>
 				            <th>Date Created</th>
 				            <th>Status</th>
 				            <th ng-if="help.records.length">Actions</th>

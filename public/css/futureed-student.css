@@ -730,7 +730,7 @@ hr {
 }
 
 .module-list {
-	background-color: rgba(255, 255, 255, .3);
+	background-color: rgba(255, 255, 255, .6);
 	border-radius: 0px 0px 10px 10px;
 }
 
@@ -743,11 +743,11 @@ hr {
 
 .module-icon, .locked-module-icon {
 	border-radius: 50%;
-	width: 80px;
-	height: 80px;
+	width: 100px;
+	height: 100px;
 	transition: ease-out .1s;
 	background-color: #ffffff;
-	padding: 3px;
+	box-shadow: 5px 3px 15px rgba(0, 0, 0, 0.3);
 
 }
 
@@ -776,11 +776,11 @@ hr {
 }
 
 .module-name {
-	padding: 10px 0px;
+	padding: 5px 0px;
 	text-overflow: ellipsis;
 	overflow: hidden;
 	white-space: nowrap;
-	height: 40px;
+	height: 30px;
 	font-size: 15px;
 	color: #055A7F;
 	max-width: 170px;
@@ -790,11 +790,13 @@ hr {
 .module-btn {
 	text-transform: capitalize;
 	border-radius: 20px;
+	font-size: 16px;
 }
 
 .module-btn i {
 	padding-right: 5px;
 	color: rgb(255, 244, 149);
+	font-size: 18px;
 }
 
 .message-container {
@@ -804,15 +806,18 @@ hr {
     padding: 10px;
 }
 
-.module-message, .wiki-message {
+.skip-module-message
+	, .module-message
+	, .wiki-message {
 	position: relative;
 	background: #EBE3B4;
 	border: 1px solid #F9EFB7;
 	border-radius: 7px;
 	padding: 15px;
-	width: 50%;
+	width: 85%;
 	margin: 10px auto 20px auto;
 	font-size: 1.5em;
+	word-wrap: break-word;
 }
 
 .wiki-title {
@@ -838,14 +843,15 @@ hr {
 }
 
 .wiki-icon-holder img {
-	width: 220px;
+	width: 250px;
 	border-radius: 7px;
 }
 
-.module-message:after, .module-message:before,
-.wiki-message:after, .wiki-message:before {
-	top: 100%;
-	left: 50%;
+.module-message:after, .module-message:before
+	, .skip-module-message:after, .skip-module-message:before 
+	, .wiki-message:after, .wiki-message:before {
+	right: 100%;
+	top: 50%;
 	border: solid transparent;
 	content: " ";
 	height: 0;
@@ -854,19 +860,26 @@ hr {
 	pointer-events: none;
 }
 
-.module-message:after, .wiki-message:after {
-	border-color: rgba(136, 183, 213, 0);
-    border-top-color: #EBE3B4;
-    border-width: 20px;
-    margin-left: -10px;
-    transform: skew(-58deg);
+.wiki-more-message:after , .wiki-more-message:before {
+	top: 10%;
 }
-.module-message:before, .wiki-message:before {
+
+.skip-module-message:after
+	, .module-message:after
+	, .wiki-message:after {
 	border-color: rgba(194, 225, 245, 0);
-	border-top-color: #F9EFB7;
-	border-width: 22px;
-    margin-left: -15px;
-    transform: skew(-58deg);
+	border-right-color: #EBE3B4;
+	border-width: 18px;
+    margin-top: -20px;
+}
+
+.skip-module-message:before
+	, .module-message:before
+	, .wiki-message:before {
+	border-color: rgba(136, 183, 213, 0);
+    border-right-color: #F9EFB7;
+    border-width: 20px;
+    margin-top: -22px;
 }
 
 .message-point {
@@ -882,7 +895,7 @@ hr {
 
 .questions-container {
 	background-color: #FFFFFF;
-	height: 450px;
+	height: 500px;
 	border-radius: 5px;
 	border: 5px solid #EEEEEE;
 	width: 100%;
@@ -981,16 +994,11 @@ hr {
 
 .next-btn {
 	position: absolute;
-    bottom: 0px;
+    top: 12px;
+    right: 15px;
     width: 200px;
-    right: -200px;
-}
-
-.exit-btn {
-	position: absolute;
-    top: 0;
-    width: 200px;
-    right: -200px;
+    height: 40px;
+    font-size: 1.5em;
 }
 
 .panel-student {
@@ -1017,7 +1025,7 @@ hr {
 	color: #055A7F;
 	text-align: center;
 	position: relative;
-	bottom: 25px;
+	bottom: 26px;
 	font-size: 10px;
 }
 
@@ -1137,6 +1145,10 @@ hr {
     width: 100px;	
 }
 
+.result-failed {
+	margin-top: 100px;
+}
+
 .result-message {
 	margin: 36px auto;
 	background-color: rgba(213, 213, 213, .3);
@@ -1249,7 +1261,7 @@ top: 41px;
 }
 
 .class-search{
-	background-color: rgba(255, 255, 255, 0.5);
+	background-color: rgba(255, 255, 255, 0.6);
 	padding: 15px;
 	width: 100%;
 	border-radius: 10px;
@@ -1322,7 +1334,7 @@ top: 41px;
 	min-width: 100px;
 	text-align: center;
 	border-radius: 7px 7px 0px 0px;
-	background-color: rgba(255, 255, 255, .3) !important;
+	background-color: rgba(255, 255, 255, .6) !important;
 	color: #055A7F !important;
 }
 
@@ -1388,7 +1400,7 @@ top: 41px;
 
 .module-icon-holder img {
 	border-radius: 10px;
-	width: 145px;
+	width: 270px;
 }
 
 .disabled-tips-bar, .disabled-help-bar {
@@ -1407,4 +1419,30 @@ top: 41px;
 
 .btn-google:hover, .btn-google:focus{
 	padding: 7px;
+}
+
+.btn-menu button {
+	margin: 5px auto;
+	height: 40px;
+	width: 184px;
+}
+
+.module-contents-container {
+	margin-top: -15px;
+}
+
+.module-contents-container .breadcrumb {
+	margin-bottom: 10px;
+}
+
+.fib-text-fields input {
+    display: inline-block;
+    width: 200px;
+    margin: 15px;
+}
+
+.proceed-btn-container .btn {
+	margin: 5px auto;
+    height: 50px;
+    font-size: 16px;
 }

@@ -20,4 +20,6 @@ interface ModuleRepositoryInterface
 
 	public function getModulesByStudentProgress($criteria,  $offset = 0, $limit = 0);
 
+	public function getModuleGradeByStudentCountry($country_id);
+
 }

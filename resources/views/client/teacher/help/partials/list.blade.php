@@ -58,39 +58,20 @@
 			</div>
 			<div class="form-group">
 				<div class="col-xs-5">
-					{!! Form::text('search_subject', ''
+					{!! Form::text('search_created', ''
 						,array(
-							'placeholder' => 'Subject'
-							, 'ng-model' => 'help.search.subject'
+							'placeholder' => 'Created By'
+							, 'ng-model' => 'help.search.created'
 							, 'class' => 'form-control'
 						)
 					)!!}
 				</div>
-				<div class="col-xs-5">
-					{!! Form::text('search_subject_area', ''
-						,array(
-							'placeholder' => 'Subject Area'
-							, 'ng-model' => 'help.search.subject_area'
-							, 'class' => 'form-control'
-						)
-					)!!}
-				</div>
+				<div class="col-xs-5"></div>
 				<div class="col-xs-2">
 					{!! Form::button('Clear'
 						,array(
 							'class' => 'btn btn-gold'
 							, 'ng-click' => 'help.clearFnc()'
-						)
-					)!!}
-				</div>
-			</div>
-			<div class="form-group">
-				<div class="col-xs-5">
-					{!! Form::text('search_created', ''
-						,array(
-							'placeholder' => 'Created'
-							, 'ng-model' => 'help.search.created'
-							, 'class' => 'form-control'
 						)
 					)!!}
 				</div>
@@ -139,8 +120,8 @@
 				        <tr ng-repeat="helpInfo in help.records">
 				            <td>{! helpInfo.title !}</td>
 				            <td>{! helpInfo.student.first_name !} {! helpInfo.student.last_name !}</td>
-				            <td>{! helpInfo.created_at | ddMMyyHHmmss : '-' !}</td>
-				            <td>{! helpInfo.last_answered_at | ddMMyyHHmmss : '-' !}</td>
+				            <td>{! helpInfo.created_at | ddMMyy : '-' !}</td>
+				            <td>{! helpInfo.last_answered_at | ddMMyy : '-' !}</td>
 				            <td>{! helpInfo.request_status !}</td>
 				            <td ng-if="help.records.length">
 				            	<div class="row">

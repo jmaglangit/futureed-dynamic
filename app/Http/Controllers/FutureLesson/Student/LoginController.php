@@ -27,12 +27,19 @@ class LoginController extends Controller {
 		} else if(Session::get('client')) {
 
 			return redirect()->route('client.dashboard.index');
-		} else if(Input::only('id')){
-			$id = Input::only('id');
-			return view('student.login.index', ['id' => $id['id']]);
 		}
 
-		return view('student.login.index');
+		return view('student.login.index', ['id' => null]);
+	}
+
+	public function post_index()
+	{
+		$input = Input::only('id');
+		if(!isset($input['id']) || !is_numeric($input['id'])) {
+			abort(404);
+		}
+		
+		return view('student.login.index', ['id' => $input['id']]);
 	}
 
 	/**
@@ -101,18 +108,11 @@ class LoginController extends Controller {
 		$input = Input::only('email');
 		$invitation  = Input::only('registration_token', 'id');
 
-		$success = 0;
-
 		if($invitation['id'] && $invitation['registration_token']){
-
-			return view('student.login.registration', ['success' => $success, 'email' => $input['email'], 'id' => $invitation['id'], 'registration_token' => $invitation['registration_token']]);
+			return view('student.login.registration', ['email' => null, 'id' => $invitation['id'], 'registration_token' => $invitation['registration_token']]);
 		}
 		else{
-			if($input['email']) {
-				$success = 1;
-			}
-
-			return view('student.login.registration', ['success' => $success, 'email' => $input['email'], 'id' => null, 'registration_token' => null]);
+			return view('student.login.registration', ['email' => $input['email'], 'id' => null, 'registration_token' => null]);
 		}
 	}
 	

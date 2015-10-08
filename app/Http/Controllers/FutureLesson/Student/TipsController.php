@@ -8,11 +8,17 @@ use Illuminate\Http\Request;
 
 class TipsController extends Controller {
 
-	public function index()
+	public function index($class_id = null)
 	{
 		$input = Input::only('id');
 		
 		$input['id'] = ($input['id']) ? $input['id'] : '';
+
+		if(!isset($class_id) || !is_numeric($class_id)) {
+			abort(404);
+		}
+
+		$input['class_id'] = $class_id;
 
 		return view('student.tips.index', $input);
 	}

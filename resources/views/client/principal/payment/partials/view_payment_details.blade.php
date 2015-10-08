@@ -1,4 +1,4 @@
-<div ng-if="payment.active_view || payment.active_edit">
+<div ng-if="payment.active_view">
 	<div class="content-title">
 		<div class="title-main-content">
 			<span>View Sales Invoice</span>
@@ -23,7 +23,7 @@
 			        	<div class="form-search">
 				        	<div class="form-group">
 				        		<label class="col-xs-3 control-label">Subject <span class="required">*</span></label>
-				        		<div class="col-xs-5">
+				        		<div class="col-xs-5" ng-init="payment.getSubject()">
 				        			<select class="form-control" ng-disabled="!payment.subjects.length" ng-model="payment.invoice.subject_id" ng-class="{ 'required-field' : payment.fields['subject_id'] }">
 					                        <option value="">-- Select Subject --</option>
 					                        <option ng-selected="payment.invoice.subject_id == subject.id" ng-repeat="subject in payment.subjects" ng-value="subject.id">{! subject.name !}</option>
@@ -416,7 +416,7 @@
 								{!! Form::button('Renew Subscription'
 				        			, array(
 				        				'class' => 'btn btn-blue btn-semi-medium pull-right'
-				        				, 'ng-disabled' => 'true'
+				        				, 'ng-disabled' => '!payment.invoice.expired'
 				        				, 'ng-click' => 'payment.renewSubscription()'
 				        				, 'ng-if' => "payment.invoice.payment_status == futureed.PAID"
 				        			)

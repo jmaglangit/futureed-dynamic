@@ -5,7 +5,7 @@
 @stop
 
 @section('content')
-	<div class="col-xs-12" ng-controller="StudentModuleController as mod" ng-init="mod.updateBackground();mod.launchModule('{!! $id !!}');" ng-cloak>
+	<div class="col-xs-12 module-contents-container" ng-controller="StudentModuleController as mod" ng-init="mod.updateBackground();mod.launchModule('{!! $id !!}');" ng-cloak>
 		<div template-directive template-url="{!! route('student.partials.base_url') !!}"></div>
 
 		<ul class="breadcrumb">
@@ -14,7 +14,7 @@
 		    <li>{! mod.record.name !}</li>
 		</ul>
 
-		<div class="col-xs-12" ng-if="mod.errors || mod.success">
+		<div class="col-xs-12" ng-if="mod.active_contents && (mod.errors || mod.success)">
 			<div class="alert alert-error" ng-if="mod.errors">
 				<p ng-repeat="error in mod.errors track by $index">
 					{! error !}
@@ -38,14 +38,31 @@
 					ng-if="!mod.no_record">
 					<img src="/images/class-student/icon-givetip.png" ng-click="mod.giveTip()">
 				</div>
-				<div class="pointer" ng-if="!mod.no_record && mod.active_questions && !mod.result.failed">
-					<button type="button" class="btn btn-maroon margin-top-bot-5" ng-style="{ 'width' : '182px' }"
-						ng-click="mod.reviewContent()"> Review Contents </button>
+				<br />
+				<div class="btn-menu">
+					<div class="pointer" ng-if="!mod.no_record && mod.active_questions && !mod.result.failed">
+						<button type="button" class="btn btn-maroon"
+							ng-click="mod.reviewContent()"> Review Contents </button>
+					</div>
+					<div ng-if="mod.active_contents">
+						{!! Form::button('Skip'
+							,array(
+								'class' => 'btn btn-maroon'
+								, 'ng-click' => 'mod.startQuestions()'
+								, 'ng-if' => "mod.record.student_module.module_status == 'On Going'"
+							)
+						)!!}
+					</div>
+					<div>
+						<button type="button" class="btn btn-gold"
+							ng-click="mod.exitModule('{!! route('student.class.index') !!}')">Exit Module</button>
+					</div>
 				</div>
 			</div>
 		</div>
+
 		<!-- Main Container -->
-		<div ng-if="!mod.record.module_done" class="col-xs-8">
+		<div ng-if="!mod.record.module_done" class="col-xs-9">
 			<div ng-if="mod.active_contents">
 				<div template-directive template-url="{!! route('student.class.module.partials.contents') !!}"></div>
 			</div>

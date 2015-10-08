@@ -39,7 +39,7 @@
 
 				<div class="col-xs-5">
 	        		<select ng-init="getCountries()" name="country_id" class="form-control" ng-model="grade.search.country_id">
-		          		<option ng-selected="grade.search.country_id == futureed.FALSE" value="">-- Select Country --</option>
+		          		<option ng-selected="grade.search.country_id == 'all'" value="">-- Select Country --</option>
 		          		<option ng-selected="grade.search.country_id == country.id" ng-repeat="country in countries" ng-value="country.id">{! country.name!}</option>
 	        		</select>
 	        	</div>
@@ -111,7 +111,11 @@
 		            <td>
 		            	<div class="row">
 		            		<div class="col-xs-4">
-		            			{! a.status !}
+		            			<i class="fa" 
+		            				ng-class="{ 'fa-ban error-icon' : a.status == futureed.DISABLED, 'fa-check-circle-o success-icon' : a.status == futureed.ENABLED }"
+		            				tooltip="{! a.status !}"
+		            				tooltip-placement="top"
+		            				tooltip-trigger="mouseenter"></i>
 		            		</div>
 		            		<div class="col-xs-4">
 		            			<a href="" ng-click="grade.getGradeDetails(a.id)"><span><i class="fa fa-pencil"></i></span></a>

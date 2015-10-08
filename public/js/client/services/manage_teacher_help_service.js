@@ -12,8 +12,7 @@ function ManageTeacherHelpService($http){
 				+ '&title=' + search.title
 				+ '&request_status=' + search.request_status
 				+ '&student=' + search.created
-				+ '&subject=' + search.subject
-				+ '&subject_area=' + search.subject_area
+				+ '&question_status=Open,Answered'
 				+ '&limit=' + table.size
 				+ '&offset=' + table.offset
 		});

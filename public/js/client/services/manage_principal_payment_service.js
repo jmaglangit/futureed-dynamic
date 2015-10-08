@@ -2,13 +2,13 @@ angular.module('futureed.services')
 	.factory('managePrincipalPaymentService', managePrincipalPaymentService);
 
 function managePrincipalPaymentService($http){
-	var paymentApiUrl = '/api/v1/';
-	var managePaymentApi = {};
+	var apiUrl = '/api/v1/';
+	var api = {};
 	
-	managePaymentApi.list = function(search, table) {
+	api.list = function(search, table) {
 		return $http({
 			method : Constants.METHOD_GET
-			, url  : paymentApiUrl + 'invoice?client_id=' + search.client_id
+			, url  : apiUrl + 'invoice?client_id=' + search.client_id
 				+ '&order_no=' + search.order_no
 				+ '&subscription_name=' + search.subscription_name
 				+ '&limit=' + table.size
@@ -16,146 +16,154 @@ function managePrincipalPaymentService($http){
 		});
 	}
 
-	managePaymentApi.listSubscription =function() {
+	api.listSubscription =function() {
 		return $http({
 			method : Constants.METHOD_GET
-			, url  : paymentApiUrl + 'subscription'
+			, url  : apiUrl + 'subscription'
 		});
 	}
 
-	managePaymentApi.subscriptionDetails =function(id) {
+	api.subscriptionDetails =function(id) {
 		return $http({
 			method : Constants.METHOD_GET
-			, url  : paymentApiUrl + 'subscription/' + id
+			, url  : apiUrl + 'subscription/' + id
 		});
 	}
 
-	managePaymentApi.listClassrooms = function(search, table) {
+	api.listClassrooms = function(search, table) {
 		return $http({
 			method : Constants.METHOD_GET
-			, url  : paymentApiUrl + 'classroom?order_no=' + search.order_no
+			, url  : apiUrl + 'classroom?order_no=' + search.order_no
 		});
 	}
 
-	managePaymentApi.updatePayment = function(data) {
+	api.updatePayment = function(data) {
 		return $http({
 			method : Constants.METHOD_PUT
 			, data : data
-			, url  : paymentApiUrl + 'invoice/' + data.id
+			, url  : apiUrl + 'invoice/' + data.id
 		});
 	}
 
-	managePaymentApi.getPaymentUri = function(data) {
+	api.getPaymentUri = function(data) {
 		return $http({
 			method : Constants.METHOD_POST
 			, data : data
-			, url  : paymentApiUrl + 'payment'
+			, url  : apiUrl + 'payment'
 		});
 	}
 
-	managePaymentApi.addClassroom = function(data) {
+	api.addClassroom = function(data) {
 		return $http({
 			method : Constants.METHOD_POST
 			, data : data
-			, url  : paymentApiUrl + 'classroom'
+			, url  : apiUrl + 'classroom'
 		});
 	}
 
-	managePaymentApi.addInvoice = function(data) {
+	api.addInvoice = function(data) {
 		return $http({
 			method : Constants.METHOD_POST
 			, data : data
-			, url  : paymentApiUrl + 'invoice'
+			, url  : apiUrl + 'invoice'
 		});
 	}
 
-	managePaymentApi.getOrderNo = function(id) {
+	api.getOrderNo = function(id) {
 		return $http({
 			method : Constants.METHOD_GET
-			, url  : paymentApiUrl + 'order/get-next-order-no/' + id
+			, url  : apiUrl + 'order/get-next-order-no/' + id
 		});
 	}
 
-	managePaymentApi.getClientDiscount = function(id) {
+	api.getClientDiscount = function(id) {
 		return $http({
 			method : Constants.METHOD_GET
-			, url  : paymentApiUrl + 'invoice/client-invoice-discount/' + id
+			, url  : apiUrl + 'invoice/client-invoice-discount/' + id
 		});
 	}
 
-	managePaymentApi.getBulkDiscount = function(min_seats) {
+	api.getBulkDiscount = function(min_seats) {
 		return $http({
 			method : Constants.METHOD_GET
-			, url  : paymentApiUrl + 'volume-discount/rounded-off-discount/' + min_seats
+			, url  : apiUrl + 'volume-discount/rounded-off-discount/' + min_seats
 		});
 	}
 
-	managePaymentApi.getTeacherDetails = function(search) {
+	api.getTeacherDetails = function(search) {
 		return $http({
 			method : Constants.METHOD_GET
-			, url  : paymentApiUrl + 'client/custom/view-details?'
+			, url  : apiUrl + 'client/custom/view-details?'
 				+ "school_code=" + search.school_code
 				+ "&client_role=" + search.client_role
 				+ "&name=" + search.client_name
 		});
 	}
 
-	managePaymentApi.cancelPayment = function(order_no) {
+	api.cancelPayment = function(order_no) {
 		return $http({
 			method : Constants.METHOD_DELETE
-			, url  : paymentApiUrl + 'classroom/delete-classroom-by-order-no/' + order_no
+			, url  : apiUrl + 'classroom/delete-classroom-by-order-no/' + order_no
 		});
 	}
 
-	managePaymentApi.removeClassroom = function(id) {
+	api.removeClassroom = function(id) {
 		return $http({
 			method : Constants.METHOD_DELETE
-			, url  : paymentApiUrl + 'classroom/' + id
+			, url  : apiUrl + 'classroom/' + id
 		});
 	}
 
-	managePaymentApi.paymentDetails = function(id) {
+	api.paymentDetails = function(id) {
 		return $http({
 			method : Constants.METHOD_GET
-			, url  : paymentApiUrl + 'invoice/' + id
+			, url  : apiUrl + 'invoice/' + id
 		});
 	}
 
-	managePaymentApi.deleteInvoice = function(id) {
+	api.deleteInvoice = function(id) {
 		return $http({
 			method : Constants.METHOD_DELETE
-			, url  : paymentApiUrl + 'invoice/' + id
+			, url  : apiUrl + 'invoice/' + id
 		});
 	}
 
-	managePaymentApi.cancelInvoice = function(id) {
+	api.cancelInvoice = function(id) {
 		return $http({
 			method : Constants.METHOD_PUT
-			, url  : paymentApiUrl + 'invoice/cancel-invoice/' + id
+			, url  : apiUrl + 'invoice/cancel-invoice/' + id
 		});
 	}
 
-	managePaymentApi.getClassroom = function(id) {
+	api.getClassroom = function(id) {
 		return $http({
 			method : Constants.METHOD_GET
-			, url  : paymentApiUrl + 'classroom/' + id
+			, url  : apiUrl + 'classroom/' + id
 		});
 	}
 
-	managePaymentApi.updateClassroom = function(data) {
+	api.updateClassroom = function(data) {
 		return $http({
 			method : Constants.METHOD_PUT
 			, data : data
-			, url  : paymentApiUrl + 'classroom/update-invoice-classroom/' + data.id
+			, url  : apiUrl + 'classroom/update-invoice-classroom/' + data.id
 		});
 	}
 
-	managePaymentApi.getSubject = function() {
+	api.getSubject = function() {
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url 	: paymentApiUrl + 'subject'
+			, url 	: apiUrl + 'subject?status=Enabled'
 		});
 	}
 
-	return managePaymentApi;
+	api.renewSubscription = function(data) {
+		return $http({
+			method	: Constants.METHOD_POST
+			, data	: data
+			, url	: apiUrl + 'renew-subscription/' + data.invoice_id
+		});
+	}
+
+	return api;
 }

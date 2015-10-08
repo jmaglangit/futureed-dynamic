@@ -12,7 +12,6 @@ function LoginController($scope, $controller, apiService, ClientLoginApiService,
 	self.default();
 
 	self.setSetUserType(Constants.CLIENT);
-	self.fbAsyncInit();
 
 	self.setRegistrationStatus = function(email) {
 		self.record = {};
@@ -142,37 +141,12 @@ function LoginController($scope, $controller, apiService, ClientLoginApiService,
 		  $scope.ui_unblock();
 		}).error(function(response) {
 		  $scope.ui_unblock();
-		  $scope.internalError();
+		  self.errors = $scope.internalError();
+
 		  self.username = Constants.EMPTY_STR;
 		  self.password = Constants.EMPTY_STR;
 		  self.role = Constants.EMPTY_STR;
 		});
-	}
-
-	self.setNewClientPassword = function() {
-		$scope.$parent.errors = Constants.FALSE;
-		self.errors = Constants.FALSE;
-
-		if(self.set.new_password == self.set.confirm_password) {
-			$scope.ui_block();
-			ClientLoginApiService.setClientPassword(self.set.id, self.set.new_password).success(function(response) {
-				if(response.status == Constants.STATUS_OK) {
-					if(response.errors) {
-						$scope.errorHandler(response.errors);
-					} else if(response.data) {
-						self.set.success = Constants.TRUE;
-					}
-				}
-
-				$scope.ui_unblock();
-			}).error(function(response) {
-				$scope.internalError();
-				$scope.ui_unblock();
-			});
-		} else {
-			$scope.$parent.errors = [Constants.MSG_PW_NOT_MATCH];
-			$("html, body").animate({ scrollTop: 0 }, "slow");
-		}
 	}
 
 	self.selectRole = function(role) {
@@ -291,6 +265,7 @@ function LoginController($scope, $controller, apiService, ClientLoginApiService,
 						}
 					});
 				} else if(response.data) {
+					self.record.id = response.data.id;
 					self.confirmed = Constants.TRUE;
 				}
 			}
@@ -302,20 +277,56 @@ function LoginController($scope, $controller, apiService, ClientLoginApiService,
 		});
 	}
 
+	self.setNewClientPassword = function() {
+		self.errors = Constants.FALSE;
+
+		if(self.record.new_password == self.record.confirm_password) {
+			$scope.ui_block();
+			ClientLoginApiService.setClientPassword(self.record.id, self.record.new_password).success(function(response) {
+				if(angular.equals(response.status, Constants.STATUS_OK)) {
+					if(response.errors) {
+						self.errors = $scope.errorHandler(response.errors);
+					} else if(response.data) {
+						self.success = Constants.TRUE;
+					}
+				}
+
+				$scope.ui_unblock();
+			}).error(function(response) {
+				self.errors = $scope.internalError();
+				$scope.ui_unblock();
+			});
+		} else {
+			self.errors = [Constants.MSG_PW_NOT_MATCH];
+			$("html, body").animate({ scrollTop: 0 }, "slow");
+		}
+	}
+
 	self.getTeacherDetails = function(id, token) {
 		self.fields = [];
 		self.errors = Constants.FALSE;
+
+		self.setActive('registration');
 
 		$scope.ui_block();
 		ClientLoginApiService.getTeacherDetails(id, token).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
+
+					angular.forEach(self.errors, function(value) {
+						if(angular.equals(value, "Account has already been registered.")) {
+							self.record = {};
+							self.record.invited = Constants.TRUE;
+							self.errors = [value];
+						}
+					});
 				} else {
 					if(!response.data) {
 						self.errors = [Constants.MSG_NO_RECORD];
 					} else {
 						var data = response.data;
+
 						self.record = {};
 						self.record.id = data.id;
 						self.record.email = data.user.email;
@@ -344,7 +355,7 @@ function LoginController($scope, $controller, apiService, ClientLoginApiService,
 			self.fields['password'] = Constants.TRUE;
 			self.errors = [Constants.MSG_PW_NOT_MATCH];
 		} else if(!self.terms) {
-		  self.errors = ["Please accept the terms and conditions."];
+		  self.errors = [Constants.ACCEPT_TERMS];
 		} else {
 			var base_url = $("#base_url_form input[name='base_url']").val();
 			self.record.callback_uri = base_url + Constants.URL_REGISTRATION(angular.lowercase(Constants.CLIENT));
@@ -359,8 +370,10 @@ function LoginController($scope, $controller, apiService, ClientLoginApiService,
 							self.fields[value.field] = Constants.TRUE;
 						});
 					} else if(response.data) {
-						self.registered = Constants.TRUE;
-						self.email = self.record.email;
+						var email = self.record.email;
+
+						self.setActive('registration_success');
+						self.record.email = email;
 					}
 				}
 

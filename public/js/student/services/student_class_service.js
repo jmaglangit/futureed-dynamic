@@ -20,10 +20,11 @@ function StudentClassService($http){
 		});
 	}
 
-	service.listTips = function(class_id, table) {
+	service.listTips = function(search, table) {
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url 	: serviceUrl + 'tip/student?class_id=' + class_id
+			, url 	: serviceUrl + 'tip/student?class_id=' + search.class_id
+				+ "&link_type=" + search.link_type
 				+ "&limit=" + table.size
 				+ "&offset=" + table.offset
 		});
@@ -33,8 +34,10 @@ function StudentClassService($http){
 		return $http({
 			method 	: Constants.METHOD_GET
 			, url 	: serviceUrl + 'help-request?class_id=' + search.class_id
+				+ "&link_type=" + search.link_type
 				+ "&order_by_date=" + search.order_by_date
 				+ "&request_status=" + search.request_status
+				+ '&question_status=Open,Answered'
 				+ "&limit=" + table.size
 				+ "&offset=" + table.offset
 		});
@@ -63,7 +66,7 @@ function StudentClassService($http){
 	service.getSubjects = function() {
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url 	: serviceUrl + 'subject'
+			, url 	: serviceUrl + 'subject?status=Enabled'
 		});
 	}
 

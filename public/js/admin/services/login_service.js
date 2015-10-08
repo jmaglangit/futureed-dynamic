@@ -1,25 +1,49 @@
 angular.module('futureed.services')
-	.factory('adminLoginApiService', adminLoginApiService);
+	.factory('AdminLoginApiService', AdminLoginApiService);
 
-function adminLoginApiService($http) {
-	var adminLoginApi = {};
-	var adminLoginApiUrl = '/api/v1/admin';
+function AdminLoginApiService($http) {
+	var api = {};
+	var apiUrl = '/api/v1/';
 
-	adminLoginApi.adminDoLogin = function(username, password){
+	api.adminDoLogin = function(username, password){
 		return $http({
 			method	: Constants.METHOD_POST
 			, data 	: {username : username, password : password}
-			, url 	: adminLoginApiUrl + '/login'
+			, url 	: apiUrl + 'admin/login'
 		});
 	}
 
-	adminLoginApi.adminResetPass = function(id, reset_code, new_password){
+	api.resetPassword = function(id, reset_code, new_password){
 		return $http({
 			method 	: Constants.METHOD_POST
 			, data 	: {reset_code : reset_code, password : new_password}
-			, url 	: adminLoginApiUrl + '/forgot-password/' + id
+			, url 	: apiUrl + 'admin/forgot-password/' + id
 		});
 	}
 
-	return adminLoginApi;
+	api.forgotPassword = function(username, user_type, callback_uri) {
+		return $http({
+			method 	: Constants.METHOD_POST
+			, data	: {username: username, user_type : user_type, callback_uri : callback_uri}
+			, url	: apiUrl + 'user/password/forgot'
+		});
+	}
+
+	api.resendResetCode = function(email, user_type, callback_uri) {
+		return $http({
+			method 	: Constants.METHOD_POST
+			, data	: {email: email, user_type : user_type, callback_uri : callback_uri}
+			, url	: apiUrl + 'user/reset/code'
+		});
+	}
+
+	api.validateCode = function(reset_code, email, user_type) {
+		return $http({
+			method	: Constants.METHOD_POST
+			, data 	: {email : email, user_type : user_type, reset_code : reset_code}
+			, url	: apiUrl + 'user/password/code'
+		});
+	}
+
+	return api;
 }

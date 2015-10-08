@@ -32,7 +32,7 @@ function StudentPaymentService($http) {
 	service.getSubjects = function() {
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url 	: serviceUrl + 'subject'
+			, url 	: serviceUrl + 'subject?status=Enabled'
 		});
 	}
 
@@ -78,6 +78,14 @@ function StudentPaymentService($http) {
 		return $http({
 			method : Constants.METHOD_DELETE
 			, url  : serviceUrl + 'invoice/' + id
+		});
+	}
+
+	service.renewSubscription = function(data) {
+		return $http({
+			method	: Constants.METHOD_POST
+			, data	: data
+			, url	: serviceUrl + 'renew-subscription/' + data.invoice_id
 		});
 	}
 

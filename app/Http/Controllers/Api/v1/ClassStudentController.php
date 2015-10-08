@@ -348,6 +348,9 @@ class ClassStudentController extends ApiController {
 		if(Input::get('student_id')){
 
 			$criteria['student_id'] = Input::get('student_id');
+
+			//Generate Active/Inactive classes
+			$this->student->getCurrentClass($criteria['student_id']);
 		}
 
 		$offset = (Input::get('offset')) ? Input::get('offset') : 0;

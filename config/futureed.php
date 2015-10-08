@@ -186,6 +186,9 @@ return [
     'question_type_provide_answer' => 'N',
     'question_type_ordering' => 'O',
 
+	'question_difficulty_levels' => [1,2,3],
+	'question_minimum_count' => 4,
+
 	//Correct Answer
 	'yes' => 'Yes',
 	'no' => 'No',
@@ -212,6 +215,10 @@ return [
 	'lsp_for_adult_age' => 18,
 	'lsp_result_name' => 'IPS1',
 	'default_lsp' => 3,
+
+	//Logs
+	'user_log' => 'User',
+	'admin_log' => 'Admin'
 	
 
 ];

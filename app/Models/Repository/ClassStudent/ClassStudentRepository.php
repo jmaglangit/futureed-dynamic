@@ -4,13 +4,14 @@ namespace FutureEd\Models\Repository\ClassStudent;
 use Carbon\Carbon;
 use FutureEd\Models\Core\ClassStudent;
 use FutureEd\Models\Core\Classroom;
-use FutureEd\Models\Core\Module;
-use FutureEd\Models\Core\StudentModule;
 use FutureEd\Models\Repository\Module\ModuleRepository as ModuleRepository;
+use Illuminate\Support\Facades\DB;
 use League\Flysystem\Exception;
+use FutureEd\Models\Traits\LoggerTrait;
 
 class ClassStudentRepository implements ClassStudentRepositoryInterface
 {
+	use LoggerTrait;
 
 	protected $module;
 
@@ -271,6 +272,129 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 
 			return null;
 		}
+
+	}
+
+	/**
+	 * Get Subject standing status.
+	 * @param $student_id
+	 * @return int
+	 */
+	public function getClassStudentStanding($student_id){
+
+		DB::beginTransaction();
+		try{
+
+				 $subject = ClassStudent::select(
+					 'class_students.student_id', 'subjects.name',
+					 DB::raw('sum(IF (student_modules.points_earned, student_modules.points_earned, 0)) as points_earned'),
+					 DB::raw("if(student_modules.module_status,student_modules.module_status,'Not Started') as module_status")
+				 )->leftJoin('classrooms', 'class_students.class_id', '=', 'classrooms.id')
+					 ->leftJoin('subjects', 'subjects.id', '=', 'classrooms.subject_id')
+					 ->leftJoin('orders', 'orders.order_no', '=', 'classrooms.order_no')
+					 ->leftJoin('modules', 'modules.subject_id', '=', 'subjects.id')
+					 ->leftJoin('student_modules', function ($join) {
+						 $join->on('student_modules.module_id', '=', 'modules.id')
+							 ->on('class_students.student_id', '=', 'student_modules.student_id');
+					 })
+					 ->where('orders.payment_status', config('futureed.paid'))
+					 ->where('orders.date_start', '<=', Carbon::now())
+					 ->where('orders.date_end', '>=', Carbon::now())
+					 ->where('class_students.student_id', $student_id)
+					 ->groupBy('subjects.name')
+					 ->get();
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e);
+
+			return 0;
+		}
+
+		DB::commit();
+
+		return $subject;
+	}
+
+	/**
+	 * Get student modules by student id and grade
+	 * @param $student_id
+	 * @param $country_id
+	 */
+	public function getStudentModulesProgressByGrade($student_id, $country_id){
+//select
+//m.grade_id ,count(*) as module_count, count(sm.id) as visited , count(smc.id) as completed, count(smo.id) as on_going
+//from class_students cs
+//left join classrooms c on c.id=cs.class_id
+//left join orders o on o.order_no = c.order_no
+//left join subjects s on s.id = c.subject_id
+//left join modules m on m.subject_id = s.id
+//left join country_grades cg on m.grade_id=cg.grade_id
+//left join country_grades cg2 on cg2.age_group_id=cg.age_group_id and cg2.country_id = 702
+//left join grades g on g.id=cg2.grade_id
+//left join student_modules sm on sm.module_id=m.id and sm.student_id=3 and sm.module_status <> 'Failed'
+// left join student_modules smc on smc.module_id=m.id and smc.student_id=3 and sm.module_status = 'Completed'
+//left join student_modules smo on smo.module_id=m.id and smo.student_id=3 and sm.module_status = 'On Going'
+//
+//
+//where date(o.date_start) <= now()  and date(o.date_end) >= now() and cs.student_id=3
+//group by m.grade_id
+//		;
+		try {
+
+
+			return ClassStudent::select(
+				DB::raw('m.grade_id'),
+				DB::raw('count(*) as module_count'),
+				DB::raw('count(sm.id) as visited'),
+				DB::raw('count(smc.id) as completed'),
+				DB::raw(' count(smo.id) as on_going')
+			)->leftJoin('classrooms as c', 'c.id', '=', 'class_students.class_id')
+				->leftJoin('orders as o', 'o.order_no', '=', 'c.order_no')
+				->leftJoin('subjects as s', 's.id', '=', 'c.subject_id')
+				->leftJoin('modules as m', 'm.subject_id', '=', 's.id')
+				->leftJoin('country_grades as cg', 'cg.grade_id', '=', 'm.grade_id')
+				->leftJoin('country_grades as cg2', function ($left_join) use ($country_id) {
+					$left_join->on('cg2.age_group_id', '=', 'cg.age_group_id')
+						->on('cg2.country_id','=',
+							DB::raw($country_id)
+						);
+				})
+				->leftJoin('grades as g', 'g.id', '=', 'cg2.grade_id')
+				->leftJoin('student_modules as sm', function ($left_join) use ($student_id) {
+					$left_join->on('sm.module_id', '=', 'm.id')
+						->on('sm.student_id', '=',
+							DB::raw($student_id))
+						->on('sm.module_status', '<>',
+							DB::raw("'" .config('futureed.module_status_failed')."'"));
+				})
+				->leftJoin('student_modules as smc', function ($left_join) use ($student_id) {
+					$left_join->on('smc.module_id', '=', 'm.id')
+						->on('smc.student_id', '=',
+							DB::raw($student_id))
+						->on('smc.module_status', '<>',
+							DB::raw("'" .config('futureed.module_status_completed')."'"));
+				})
+				->leftJoin('student_modules as smo', function ($left_join) use ($student_id) {
+					$left_join->on('smo.module_id', '=', 'm.id')
+						->on('smo.student_id', '=',
+							DB::raw($student_id))
+						->on('smo.module_status', '<>',
+							DB::raw("'" .config('futureed.module_status_ongoing')."'"));
+				})
+				->where('o.date_start', '<=', Carbon::now())
+				->where('o.date_end', '>=', Carbon::now())
+				->where('class_students.student_id','=',$student_id)
+				->groupBy('m.grade_id')
+				->get();
+		}catch ( \Exception $e){
+
+			return $e->getMessage();
+		}
+
+
 
 	}
 

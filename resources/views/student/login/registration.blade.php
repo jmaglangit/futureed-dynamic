@@ -4,6 +4,7 @@
 <div class="container login student-fnt" ng-controller="StudentLoginController as login"
 	ng-init="login.checkRegistration('{!! $email !!}', '{!! $id !!}', '{!! $registration_token !!}')">
 	
+	<div ng-init="login.initMediaIds('{!! env('FB_APP_ID') !!}', '{!! env('GL_CLIENT_ID') !!}')"></div>
 	{!! Form::open(array('id' => 'process_form', 'method' => 'POST', 'route' => 'student.login.process')) !!}
         {!! Form::hidden('user_data', '') !!}
     {!! Form::close() !!}

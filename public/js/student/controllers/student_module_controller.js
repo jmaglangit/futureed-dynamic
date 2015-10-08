@@ -240,7 +240,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		var data = {};
 			data.module_id = self.record.student_module.id;
 
-			if(self.active_contents) {
+			if(self.active_contents && self.contents) {
 				data.last_viewed_content_id = self.contents.content_id;
 			}
 
@@ -311,6 +311,21 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 			});
 		} else {
 			self.current_question = self.questions[0];
+		}
+
+		if(angular.equals(self.current_question.question_type, Constants.ORDERING)) {
+			self.current_question.answer_text = self.current_question.question_order_text.split(",");
+		}
+
+		if(angular.equals(self.current_question.question_type, Constants.FILLINBLANK)) {
+			var input_fields = [];
+			var field_count = parseInt(self.current_question.answer_text_field);
+
+			for(var index = 0; index < field_count; index++) {
+				input_fields.push(index);
+			}
+
+			self.current_question.answer_text_field_count = input_fields;
 		}
 
 		self.question_counter = (self.record.student_module.question_counter) ? parseInt(self.record.student_module.question_counter) + 1 : 1;
@@ -408,7 +423,20 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		answer.student_id = $scope.user.id;
 		answer.date_start = new Date();
 		answer.date_end = new Date();
-		answer.answer_text = (angular.equals(self.current_question.question_type, Constants.ORDERING)) ? self.current_question.answer_text.join(",") : self.current_question.answer_text;		
+
+		if(angular.equals(self.current_question.question_type, Constants.ORDERING)) {
+			answer.answer_text = self.current_question.answer_text.join(",");
+		} else if(angular.equals(self.current_question.question_type, Constants.FILLINBLANK)) {
+			var answer_text_array = [];
+
+			angular.forEach(self.current_question.answer_text, function(value, key) {
+				answer_text_array.push(value);
+			});
+
+			answer.answer_text = answer_text_array.join(",");
+		} else {
+			answer.answer_text = self.current_question.answer_text;
+		}
 
 		$scope.ui_block();
 		StudentModuleService.answerQuestion(answer).success(function(response) {
@@ -615,11 +643,24 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		angular.forEach(self.questions, function(value, key) {
 			if(angular.equals(parseInt(value.id), parseInt(self.result.next_question))) {
 				self.current_question = value;
+
 				self.current_question.answer_text = Constants.EMPTY_STR;
 				self.current_question.answer_id = Constants.EMPTY_STR;
 
 				if(angular.equals(self.current_question.question_type, Constants.ORDERING)) {
 					self.current_question.answer_text = self.current_question.question_order_text.split(",");
+				}
+
+				if(angular.equals(self.current_question.question_type, Constants.FILLINBLANK)) {
+					var input_fields = [];
+
+					var field_count = parseInt(self.current_question.answer_text_field);
+
+					for(var index = 0; index < field_count; index++) {
+						input_fields.push(index);
+					}
+
+					self.current_question.answer_text_field_count = input_fields;
 				}
 
 				self.question_counter = parseInt(self.result.question_counter) + 1;

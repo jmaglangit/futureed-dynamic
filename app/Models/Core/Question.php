@@ -20,7 +20,9 @@ class Question extends Model {
 		'updated_by',
 		'created_at',
 		'updated_at',
-		'deleted_at'];
+		'deleted_at',
+		'answer'
+	];
 
 	protected $fillable =['module_id','code','question_type','questions_text','questions_image','answer'
 		,'question_order_text','seq_no','difficulty','points_earned'
@@ -32,6 +34,11 @@ class Question extends Model {
 		'questions_image' =>0,
 		'original_image_name' =>0,
 		'seq_no' => 0
+	];
+
+	//Added fields not from the table.
+	protected $appends = [
+		'answer_text_field'
 	];
 
 	//Accessor
@@ -49,6 +56,18 @@ class Question extends Model {
 		} else {
 
 			return 'None';
+		}
+	}
+
+	public function getAnswerTextFieldAttribute($value){
+
+		if($this->attributes['question_type'] == config('futureed.question_type_fill_in_the_blank')){
+
+			return count(explode(",",$this->attributes['answer']));
+
+		}else {
+
+			return null;
 		}
 	}
 

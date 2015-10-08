@@ -282,6 +282,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 					, subject_name 		: 	(data.invoice_detail[0] && data.invoice_detail[0].classroom) ? data.invoice_detail[0].classroom.subject.name : Constants.EMPTY_STR
 					, date_start 		: 	data.date_start
 					, date_end 			: 	data.date_end
+					, expired 			: 	data.expired
 				};
 
 				computeDays(data.subscription, self.invoice);
@@ -335,5 +336,32 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 		});
 
 		$("html, body").animate({ scrollTop: 0 }, "slow");
+	}
+
+	self.renewPayment = function() {
+		self.errors = Constants.FALSE;
+
+		if(self.invoice.expired) {
+			var data = {
+				invoice_id	: self.invoice.id
+			}
+
+			StudentPaymentService.renewSubscription(data).success(function(response) {
+				if(angular.equals(response.status, Constants.STATUS_OK)) {
+					if(response.errors) {
+						self.errors = $scope.errorHandler(response.errors);
+					} else if(response.data) {
+						self.setActive(Constants.ACTIVE_VIEW, response.data.id);
+					}
+				}
+
+				$scope.ui_unblock();
+			}).error(function(response) {
+				self.errors = $scope.internalError();
+				$scope.ui_unblock();
+			});
+		} else {
+			self.errors = $scope.internalError();
+		}
 	}
 }

@@ -12,18 +12,16 @@ function StudentHelpService($http){
 
 		if(search.module_id) {
 			params += 'module_id=' + search.module_id
-					+ '&link_type=' + search.link_type
-					+ '&student_id=' + search.student_id
-					+ '&help_request_type=' + search.help_request_type
-					+ '&question_status=' + search.question_status
 					+ '&link_id=' + search.link_id
 		} else {
-			params += 'class_id=' + search.class_id 
-					+ "&title=" + search.title
-					+ "&student_id=" + search.student_id
-					+ "&request_status=" + search.request_status 
-					+ "&help_request_type=" + search.help_request_type
+			params += 'title=' + search.title
+					+ '&request_status=' + Constants.ACCEPTED
 		}
+
+		params += '&question_status=Open,Answered&class_id=' + search.class_id 
+				+ '&student_id=' + search.student_id
+				+ "&link_type=" + search.link_type
+				+ '&help_request_type=' + search.help_request_type
 
 		if(table) {
 			params += "&limit=" + table.size + "&offset=" + table.offset
