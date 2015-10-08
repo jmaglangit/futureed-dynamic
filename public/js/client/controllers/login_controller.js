@@ -306,16 +306,27 @@ function LoginController($scope, $controller, apiService, ClientLoginApiService,
 		self.fields = [];
 		self.errors = Constants.FALSE;
 
+		self.setActive('registration');
+
 		$scope.ui_block();
 		ClientLoginApiService.getTeacherDetails(id, token).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
+
+					angular.forEach(self.errors, function(value) {
+						if(angular.equals(value, "Account has already been registered.")) {
+							self.record = {};
+							self.record.invited = Constants.TRUE;
+							self.errors = [value];
+						}
+					});
 				} else {
 					if(!response.data) {
 						self.errors = [Constants.MSG_NO_RECORD];
 					} else {
 						var data = response.data;
+
 						self.record = {};
 						self.record.id = data.id;
 						self.record.email = data.user.email;

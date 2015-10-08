@@ -80,9 +80,12 @@ function HelpController($scope, apiService, StudentHelpService, TableService, Se
 	self.listHelp = function() {
 		self.records = [];
 		self.errors = Constants.FALSE;
+		
 		if (self.search.help_request_type) {
 			self.search.student_id = $scope.user.id;
 		}
+
+		self.search.link_type = Constants.GENERAL;
 
 		self.table.loading = Constants.TRUE;
 

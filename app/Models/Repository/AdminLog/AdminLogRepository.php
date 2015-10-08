@@ -1,15 +1,20 @@
 <?php
 
-namespace FutureEd\Models\Repository\UserLog;
+namespace FutureEd\Models\Repository\AdminLog;
 
 
-use FutureEd\Models\Core\UserLog;
+use FutureEd\Models\Core\AdminLog;
 
-class UserLogRepository implements UserLogRepositoryInterface{
+class AdminLogRepository implements AdminLogRepositoryInterface{
 
-	public function getUserLog($id){
+	/**
+	 * Get Admin log.
+	 * @param $id
+	 * @return \Illuminate\Support\Collection|null|static
+	 */
+	public function getAdminLog($id){
 
-		return UserLog::find($id);
+		return AdminLog::find($id);
 	}
 
 	/**
@@ -19,7 +24,7 @@ class UserLogRepository implements UserLogRepositoryInterface{
 	 * @param $limit
 	 * @return array
 	 */
-	public function getUserLogs($criteria, $offset, $limit){
+	public function getAdminLogs($criteria, $offset, $limit){
 
 		/**
 		 * user_id equals
@@ -35,7 +40,7 @@ class UserLogRepository implements UserLogRepositoryInterface{
 		 * date_end
 		 */
 
-		$log = new UserLog();
+		$log = new AdminLog();
 
 		if(isset($criteria['user_id'])){
 
@@ -58,9 +63,9 @@ class UserLogRepository implements UserLogRepositoryInterface{
 			$log = $log->name($criteria['name']);
 		}
 
-		if(isset($criteria['user_type'])){
+		if(isset($criteria['admin_type'])){
 
-			$log = $log->userType($criteria['user_type']);
+			$log = $log->adminType($criteria['admin_type']);
 		}
 
 		if(isset($criteria['page_accessed'])){
@@ -104,5 +109,4 @@ class UserLogRepository implements UserLogRepositoryInterface{
 			'record' => $log->get()->toArray()
 		];
 	}
-
 }

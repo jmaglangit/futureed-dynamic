@@ -77,6 +77,8 @@ function TipsController($scope, StudentTipsService, TableService, SearchService)
 		self.records = [];
 		self.errors = Constants.FALSE;
 
+		self.search.link_type = Constants.GENERAL;
+
 		self.table.loading = Constants.TRUE;
 
 		$scope.ui_block();
@@ -284,8 +286,6 @@ function TipsController($scope, StudentTipsService, TableService, SearchService)
 
 		$scope.div_block('tip_list');
 		StudentTipsService.list(self.search, self.table).success(function(response) {
-			self.table.loading = Constants.FALSE;
-
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
