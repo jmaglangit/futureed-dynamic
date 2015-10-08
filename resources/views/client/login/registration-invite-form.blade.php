@@ -1,10 +1,11 @@
 @extends('client.app')
 
 @section('content')
-<div class="container" ng-controller="LoginController as login" ng-cloak>
+<div class="container" ng-controller="LoginController as login" 
+    ng-init="login.getTeacherDetails('{!! $id !!}', '{!! $registration_token !!}')" ng-cloak>
     <div template-directive template-url="{!! route('client.partials.base_url') !!}"></div>
     
-    <div class="form-style form-wide" ng-if="!login.registered" ng-init="login.getTeacherDetails('{!! $id !!}', '{!! $registration_token !!}')">
+    <div class="form-style form-wide" ng-if="login.active_registration" >
         <div class="row">
             <div class="col-xs-12 register_users">
                 <h4 class="title">Teacher Registration</h4>
@@ -28,7 +29,7 @@
                 </div>
             </div>
 
-            <div class="col-xs-12" ng-if="!login.record && login.errors">
+            <div class="col-xs-12" ng-if="login.record.invited">
                 <div class="btn-container">
                     {!! Html::link(route('client.registration'), 'Register New Account'
                         , array(
@@ -38,7 +39,7 @@
                 </div>
             </div>
 
-            <div class="col-xs-12" ng-if="login.record">
+            <div class="col-xs-12" ng-if="!login.record.invited">
             {!! Form::open(array('id' => 'registration_form', 'class' => 'form-horizontal')) !!}
                 <fieldset>
                     <legend>User Credentials</legend>
