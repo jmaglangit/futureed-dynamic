@@ -244,8 +244,18 @@
 					, 'uses' => 'FutureLesson\Student\TipsController@index'
 				]);
 
+			Routes::get('/{class_id}', [ 
+					'as' => 'student.tips.class'
+					, 'uses' => 'FutureLesson\Student\TipsController@index'
+				]);
+
 			Routes::post('/', [ 
 					'as' => 'student.tips.post.index'
+					, 'uses' => 'FutureLesson\Student\TipsController@index'
+				]);
+
+			Routes::post('/{class_id}', [ 
+					'as' => 'student.tips.post.class'
 					, 'uses' => 'FutureLesson\Student\TipsController@index'
 				]);
 
@@ -274,8 +284,18 @@
 					, 'uses' => 'FutureLesson\Student\HelpController@index'
 				]);
 
+			Routes::get('/{class_id}', [ 
+					'as' => 'student.help.class'
+					, 'uses' => 'FutureLesson\Student\HelpController@index'
+				]);
+
 			Routes::post('/', [ 
 					'as' => 'student.help.post.index'
+					, 'uses' => 'FutureLesson\Student\HelpController@index'
+				]);
+
+			Routes::post('/{class_id}', [ 
+					'as' => 'student.help.post.class'
 					, 'uses' => 'FutureLesson\Student\HelpController@index'
 				]);
 
