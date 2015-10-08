@@ -39,7 +39,9 @@ function TipsController($scope, StudentTipsService, TableService, SearchService)
 		$("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 
-	self.setTipView = function(tip_id) {
+	self.setTipView = function(tip_id, class_id) {
+		self.search.class_id = class_id;
+
 		if(tip_id) {
 			self.setActive(Constants.ACTIVE_VIEW, tip_id);
 		}
@@ -59,7 +61,7 @@ function TipsController($scope, StudentTipsService, TableService, SearchService)
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
 
-		self.searchDefaults();
+		self.search.title = Constants.EMPTY_STR;
 		self.tableDefaults();
 
 		self.list();
@@ -74,7 +76,8 @@ function TipsController($scope, StudentTipsService, TableService, SearchService)
 	self.listTips = function() {
 		self.records = [];
 		self.errors = Constants.FALSE;
-		self.search.class_id = Constants.EMPTY_STR;
+
+		self.search.link_type = Constants.GENERAL;
 
 		self.table.loading = Constants.TRUE;
 
@@ -248,6 +251,8 @@ function TipsController($scope, StudentTipsService, TableService, SearchService)
 		self.active_all = Constants.FALSE;
 		self.active_current = Constants.FALSE;
 
+		self.search.class_id = self.module.student_module.class_id;
+
 		switch(active) {
 			case Constants.ALL:
 				self.search.link_id = Constants.EMPTY_STR;
@@ -281,8 +286,6 @@ function TipsController($scope, StudentTipsService, TableService, SearchService)
 
 		$scope.div_block('tip_list');
 		StudentTipsService.list(self.search, self.table).success(function(response) {
-			self.table.loading = Constants.FALSE;
-
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);

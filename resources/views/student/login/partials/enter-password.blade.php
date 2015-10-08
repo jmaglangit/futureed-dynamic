@@ -17,7 +17,7 @@
 			</ul>
 		</div>
 
-		<div class="btn-container">
+		<div class="btn-container" ng-if="image_pass.length">
 			{!! Form::button('Cancel'
 				, array(
 					'class' => 'btn btn-gold btn-medium'

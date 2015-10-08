@@ -8,7 +8,7 @@
             {!! Form::hidden('user_data', '') !!}
         {!! Form::close() !!}
 
-        <div ng-init="checkEmail('{!! $id !!}');">
+        <div ng-init="login.checkStudent('{!! $id !!}');">
 
             <div template-directive template-url="{!! route('student.login.confirm_media') !!}"></div>
 

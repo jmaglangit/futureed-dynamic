@@ -16,6 +16,7 @@ function SearchService() {
 					
 					, date_start			: 	Constants.EMPTY_STR
 					, date_end				: 	Constants.EMPTY_STR
+					, difficulty			: 	Constants.EMPTY_STR
 
 					, email					: 	Constants.EMPTY_STR
 					, help_request			: 	Constants.EMPTY_STR
@@ -25,6 +26,7 @@ function SearchService() {
 					, learning_style		: 	Constants.EMPTY_STR
 					, link_type				: 	Constants.EMPTY_STR
 					, module				: 	Constants.EMPTY_STR
+					, module_id				: 	Constants.EMPTY_STR
 					, module_name			: 	Constants.EMPTY_STR
 					, module_status			: 	Constants.EMPTY_STR
 					, name					: 	Constants.EMPTY_STR

@@ -336,10 +336,11 @@ function ManageParentStudentController($scope, $filter, ManageParentStudentServi
 	}
 
 	self.playStudent = function(id) {
-			$scope.ui_block();
+		$scope.ui_block();
 		ManageParentStudentService.playStudent().success(function(response){
 			if(angular.equals(response.status,Constants.STATUS_OK)){
-				window.location.href = '/student/login?id=' + id;
+				$("#redirect_form input[name='id']").val(id);
+				$("#redirect_form").submit();
 			}
 
 			$scope.ui_unblock();

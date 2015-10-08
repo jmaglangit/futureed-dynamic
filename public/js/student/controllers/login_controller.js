@@ -1,9 +1,9 @@
 angular.module('futureed.controllers')
 	.controller('StudentLoginController', StudentLoginController);
 
-StudentLoginController.$inject = ['$scope', '$filter', '$controller', '$window', 'StudentLoginService', 'MediaLoginService', 'ValidationService'];
+StudentLoginController.$inject = ['$scope', '$filter', '$controller', '$window', 'StudentLoginService', 'apiService', 'MediaLoginService', 'ValidationService'];
 
-function StudentLoginController($scope, $filter, $controller, $window, StudentLoginService, MediaLoginService, ValidationService) {
+function StudentLoginController($scope, $filter, $controller, $window, StudentLoginService, apiService, MediaLoginService, ValidationService) {
 	var self = this;
 
 	ValidationService(self);
@@ -156,6 +156,14 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 	}
 
 	self.manual = {};
+
+	self.checkStudent = function(id) {
+		if(id != Constants.EMPTY_STR) {
+			self.manual.id = id;
+			$scope.getLoginPassword(self.manual.id);
+			self.setActive('enter_password');
+		}
+	}
 
 	self.validateUser = function(event) {
 		event = getEvent(event);

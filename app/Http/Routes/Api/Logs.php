@@ -15,5 +15,21 @@ Routes::group([
 		'as' => 'api.log.user.list'
 	]);
 
+	/**
+	 * Security
+	 */
+	Routes::get('/security',[
+		'uses' => 'Api\Logs\SecurityLogController@index',
+		'as' => 'api.log.security.list'
+	]);
+
+	/**
+	 * Admin
+	 */
+	Routes::get('/admin',[
+		'uses' => 'Api\Logs\AdminLogController@index',
+		'as' => 'api.log.admin.list'
+	]);
+
 
 });

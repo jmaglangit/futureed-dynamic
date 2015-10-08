@@ -64,6 +64,7 @@ function FutureedController($scope, $window, apiService, futureed) {
 	$scope.ui_block = function() {
 		$.blockUI({ 
 				message : '<img class="loader" src="/images/loading.png" /> Please wait... '
+				, baseZ	: 2000
 				, css 	: {
 					  'border-radius' 		: '10px'
 					, 'width' 	  			: '24%'
@@ -489,15 +490,6 @@ function FutureedController($scope, $window, apiService, futureed) {
 		}).error(function(response) {
 			$scope.internalError()
 		});
-	}
-
-	$scope.checkEmail = function(id) {
-
-		if(id != Constants.EMPTY_STR){
-			$scope.id = id;
-			$scope.getLoginPassword();
-			$scope.enter_pass = Constants.TRUE;
-		}
 	}
 
 	$scope.checkLearningStyle = function() {
