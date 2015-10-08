@@ -10,11 +10,12 @@ function StudentTipsService($http){
 	service.list = function(search, table) {
 		var params = Constants.EMPTY_STR;
 
+			params += "&class_id=" + search.class_id + "&link_type=" + search.link_type
+
 			if(search.module_id) {
-				params += "link_id=" + search.link_id + "&link_type=" + search.link_type + "&module_id=" + search.module_id	+ "&class_id=" + search.class_id
+				params += "link_id=" + search.link_id + "&module_id=" + search.module_id
 			} else {
-				params += "class_id=" + search.class_id + "&area=" + search.area + "&subject=" + search.subject;
-				params += "&limit=" + table.size + "&offset=" + table.offset;
+				params += "&title=" + search.title + "&limit=" + table.size + "&offset=" + table.offset;
 			}
 
 		return $http({
