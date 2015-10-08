@@ -138,17 +138,20 @@ function StudentClassController($scope, $filter, $window, StudentClassService, S
 			$scope.div_unblock("help_request_form");
 		})
 	}
-	// API changes object class to class_id
+	
 	self.listTips = function() {
 		self.errors = Constants.FALSE;
-		var class_id = (self.current_class) ? self.current_class : Constants.EMPTY_STR;
 		
+		self.search = {};
+		self.search.class_id = (self.current_class) ? self.current_class : Constants.EMPTY_STR;
+		self.search.link_type = Constants.GENERAL;
+
 		self.table = {};
 		self.table.size = 3;
 		self.table.offset = Constants.FALSE;
 
 		$scope.div_block("tips_form");
-		StudentClassService.listTips(class_id, self.table).success(function(response) {
+		StudentClassService.listTips(self.search, self.table).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					$scope.errorHandler(response.errors);
@@ -176,6 +179,7 @@ function StudentClassController($scope, $filter, $window, StudentClassService, S
 
 		self.search = {};
 		self.search.order_by_date = Constants.TRUE;
+		self.search.link_type = Constants.GENERAL;
 		self.search.request_status = Constants.ACCEPTED;
 		self.search.class_id = (self.current_class) ? self.current_class : Constants.EMPTY_STR;
 
