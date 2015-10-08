@@ -96,7 +96,7 @@ class UserLogRepository implements UserLogRepositoryInterface{
 		$count = $log->count();
 
 		if($limit > 0 && $offset >= 0) {
-			$log = $log->with('areas')->offset($offset)->limit($limit);;
+			$log = $log->offset($offset)->limit($limit);;
 		}
 
 		return [

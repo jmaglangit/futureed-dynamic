@@ -2,17 +2,17 @@ angular.module('futureed.services')
 	.factory('ManageTeacherQuestionService', ManageTeacherQuestionService);
 
 function ManageTeacherQuestionService($http){
-	var url = '/api/v1/';
-	var service = {};
+	var apiUrl = '/api/v1/';
+	var api = {};
 
-	service.viewQuestion = function(data,difficulty) {
+	api.viewQuestion = function(search, table) {
 		return $http({
 			method 		: Constants.METHOD_GET
-			, url 		: url + 'question?module_id=' + data.id
-				+ '&difficulty=' + difficulty
-				+ '&limit=' + data.limit
-				+ '&offset=' + data.offset
+			, url 		: apiUrl + 'question?module_id=' + search.module_id
+				+ '&difficulty=' + search.difficulty
+				+ '&limit=' + table.size
+				+ '&offset=' + table.offset
 		})
 	} 
-	return service;
+	return api;
 }

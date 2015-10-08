@@ -139,8 +139,8 @@
 				        <tr ng-repeat="helpInfo in help.records">
 				            <td>{! helpInfo.title !}</td>
 				            <td>{! helpInfo.student.first_name !} {! helpInfo.student.last_name !}</td>
-				            <td>{! helpInfo.created_at | ddMMyyHHmmss : '-' !}</td>
-				            <td>{! helpInfo.last_answered_at | ddMMyyHHmmss : '-' !}</td>
+				            <td>{! helpInfo.created_at | ddMMyy : '-' !}</td>
+				            <td>{! helpInfo.last_answered_at | ddMMyy : '-' !}</td>
 				            <td>{! helpInfo.request_status !}</td>
 				            <td ng-if="help.records.length">
 				            	<div class="row">

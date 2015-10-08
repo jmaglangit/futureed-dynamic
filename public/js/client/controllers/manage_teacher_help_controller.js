@@ -110,18 +110,23 @@ function ManageTeacherHelpController($scope, ManageTeacherHelpService, TableServ
 
 					var record = response.data;
 					
-					self.record.link_type = record.link_type;
-					self.record.request_status = record.request_status;
-					self.record.status = record.status;
 					self.record.id = record.id;
-					self.record.subject = record.subject;
-					self.record.subject_area = record.subject_area;
-					self.record.module = record.module;
-					self.record.created_at = record.created_at;
+					
 					self.record.title = record.title;
 					self.record.content = record.content;
+
+					self.record.created_at = record.created_at;
 					self.record.created_by = record.student.first_name + ' ' + record.student.last_name;
 
+					self.record.status = record.status;
+					self.record.link_type = record.link_type;
+					self.record.request_status = record.request_status;
+
+					if(angular.equals(record.link_type, Constants.CONTENT)) {
+						self.record.subject = record.subject.name;
+						self.record.subjectarea = record.subject_area.name;
+						self.record.module = record.module.name;
+					}
 				}
 			}
 			$scope.ui_unblock();

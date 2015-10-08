@@ -58,14 +58,13 @@
 					</div>
 
 					<div class="col-xs-12">
-						<div class="col-xs-1"></div>
 						<div class="col-xs-3 wiki-icon-holder">
 							<img ng-if="mod.module_message.image" ng-src="{! mod.module_message.image !}" />
 							<img ng-if="!mod.module_message.image" ng-src="{! user.avatar !}" />
 						</div>
-
+						<div class="col-xs-1"></div>
 						<div class="col-xs-8">
-							<p class="wiki-message">{! mod.module_message.message !}</p>
+							<p class="wiki-message" ng-class="{ 'wiki-more-message' : mod.module_message.full_message }">{! mod.module_message.message !}</p>
 							<div class="wiki-view-more" ng-if="!mod.module_message.full_message">
 								<button type="button" class="btn btn-gold" ng-click="mod.viewMoreWikiMessage()">
 									View More
@@ -109,11 +108,10 @@
 						) !!}
 					</div>
 					<div ng-if="mod.module_message.module_done">
-						{!! Html::link(route('student.class.index'), 'Class Dashboard'
-							, array(
-								'class' => 'btn btn-maroon btn-medium'
-							)
-						) !!}
+						<button class="btn btn-maroon btn-medium" 
+							ng-click="mod.exitModule('{!! route('student.class.index') !!}')">
+							Class Dashboard
+						</button>
 					</div>
 				</div>
 			</div>

@@ -64,6 +64,7 @@ function FutureedController($scope, $window, apiService, futureed) {
 	$scope.ui_block = function() {
 		$.blockUI({ 
 				message : '<img class="loader" src="/images/loading.png" /> Please wait... '
+				, baseZ	: 2000
 				, css 	: {
 					  'border-radius' 		: '10px'
 					, 'width' 	  			: '24%'

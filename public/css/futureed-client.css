@@ -379,13 +379,18 @@ content legend {
 	
 }
 
-.no-content-container, .content-container {
+.no-content-container, .content-container
+	, .view-question-container {
 	background-color: #FFFFFF;
 	min-height: 200px;
 	border-radius: 5px;
 	border: 1px solid #EEEEEE;
 	width: 1000px;
 	margin: 22px;
+}
+
+.view-question-container  {
+	padding: 10px;
 }
 
 .no-content-container {
@@ -444,7 +449,7 @@ content legend {
 	margin: 20px 0px;
 }
 
-.teacher-module-btn {
+.teacher-module-btn, .view-contents-btn {
 	margin: 10px 5px 0px 15px;
 }
 
@@ -456,8 +461,45 @@ content legend {
 	margin: 10px;
 }
 
+.view-contents-btn button.btn {
+	height: 40px;
+	font-size: 16px;
+	display: inline-block;
+	width: 310px;
+	margin: 10px 5px;
+}
+
 .teacher-module-back {
 	position: relative;
     bottom: 10px;
     right: -20px;
+}
+
+.question-search-container {
+	padding: 0 20px 10px 20px;
+    color: #887c70;
+}
+
+.question-message {
+	font-size: 2em;
+	color: #055A7F;
+	overflow: auto;
+	max-height: 350px;
+}
+
+.question-image {
+	text-align: center;
+}
+
+.question-image img {
+	width: 250px;
+	border-radius: 10px;
+}
+
+.question-pagination {
+	margin-bottom: 30px;
+}
+
+.teacher-module-container {
+	margin-bottom: 30px;
 }

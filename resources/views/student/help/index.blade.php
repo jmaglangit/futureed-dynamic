@@ -14,7 +14,7 @@
 		</div>
 
 		<div class="wrapr" ng-init="help.setActive()"> 
-			<div ng-init="help.setRequestType('{!! $request_type !!}', '{!! $id !!}')"></div>
+			<div ng-init="help.setRequestType('{!! $request_type !!}', '{!! $id !!}', '{!! $class_id !!}')"></div>
 		
 			<div template-directive template-url="{!! route('student.help.partials.list') !!}"></div>
 
