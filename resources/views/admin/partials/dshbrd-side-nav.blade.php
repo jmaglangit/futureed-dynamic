@@ -61,13 +61,13 @@
             <a href="" class="nav-link">Master Settings <i class="fa fa-caret-down"></i></a>
         </li>  
         <ul class="sub-menu collapse" ng-class="{ 'in' : tips || announce || logs }" id="master">
-            <li>
+            <li ng-class="{ 'active' : announce }">
                 <a href="{!! route('admin.manage.announce.index') !!}"><span><i class="fa fa-bullhorn"></i>Announcement</span></a>
             </li>
-            <li>
+            <li ng-class="{ 'active' : tips }">
                 <a href="{!! route('admin.manage.tips.index') !!}"><span><i class="fa fa-lightbulb-o"></i> Tips & Help Requests</span></a>
             </li>
-            <li>
+            <li ng-class="{ 'active' : logs }">
                 <a href="{!! route('admin.manage.logs.index') !!}"><span><i class="fa fa-file-o"></i> Logs </span></a>
             </li>
         </ul>

@@ -8,9 +8,11 @@ function SearchService() {
 			searchDefaults : function() {
 				scope.search = {
 					  area					: 	Constants.EMPTY_STR
+					, admin_type			: 	Constants.EMPTY_STR
 					, api_accessed			: 	Constants.EMPTY_STR
 
 					, client_id				: 	Constants.EMPTY_STR
+					, client_user_agent		: 	Constants.EMPTY_STR
 					, country_id			: 	Constants.EMPTY_STR
 					, class_id				: 	Constants.EMPTY_STR
 					
@@ -25,6 +27,7 @@ function SearchService() {
 					, grade_id				: 	Constants.EMPTY_STR
 					, learning_style		: 	Constants.EMPTY_STR
 					, link_type				: 	Constants.EMPTY_STR
+					, log_type				: 	Constants.EMPTY_STR
 					, module				: 	Constants.EMPTY_STR
 					, module_id				: 	Constants.EMPTY_STR
 					, module_name			: 	Constants.EMPTY_STR
@@ -54,6 +57,8 @@ function SearchService() {
 					, username				: 	Constants.EMPTY_STR
 					, user_id				: 	Constants.EMPTY_STR
 					, user_type				: 	Constants.EMPTY_STR
+
+					, url					:	Constants.EMPTY_STR
 
 					, created				: 	Constants.EMPTY_STR
 					, question_type			: 	Constants.EMPTY_STR

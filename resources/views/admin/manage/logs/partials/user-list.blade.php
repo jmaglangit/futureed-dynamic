@@ -1,22 +1,4 @@
-<div ng-if="logs.active_list">
-	<div class="content-title">
-		<div class="title-main-content">
-			<span>Subject Management</span>
-		</div>
-	</div>
-
-	<div class="col-xs-12" ng-if="logs.errors || logs.success">
-		<div class="alert alert-error" ng-if="logs.errors">
-			<p ng-repeat="error in logs.errors track by $index">
-				{! error !}
-			</p>
-		</div>
-
-        <div class="alert alert-success" ng-if="logs.success">
-            <p>{! logs.success !}</p>
-        </div>
-    </div>
-
+<div ng-if="logs.active_users_log">
 	<div class="col-xs-12 search-container">
 		<div class="title-mid">
 			Search
@@ -33,18 +15,18 @@
 				<div class="col-xs-5">
 					{!! Form::text('search_module', ''
 						,array(
-							'placeholder' => 'Module'
-							, 'ng-model' => 'logs.search.module'
+							'placeholder' => 'Username'
+							, 'ng-model' => 'logs.search.username'
 							, 'class' => 'form-control btn-fit'
 						)
 					)!!}
 				</div>
 
 				<div class="col-xs-5">
-					{!! Form::text('search_subject', ''
+					{!! Form::text('client_user_agent', ''
 						,array(
-							'placeholder' => 'Subject'
-							, 'ng-model' => 'logs.search.subject'
+							'placeholder' => 'Agent Used'
+							, 'ng-model' => 'logs.search.client_user_agent'
 							, 'class' => 'form-control btn-fit'
 						)
 					)!!}
@@ -61,28 +43,23 @@
 			</div>
 			<div class="form-group">
 				<div class="col-xs-5">
-					{!! Form::text('search_area', ''
+					{!! Form::text('result_response', ''
 						,array(
-							'placeholder' => 'Area'
-							, 'ng-model' => 'logs.search.area'
+							'placeholder' => 'Result Response'
+							, 'ng-model' => 'logs.search.result_response'
 							, 'class' => 'form-control btn-fit'
 						)
 					)!!}
 				</div>
 				
 				<div class="col-xs-5">
-					{!! Form::select('search_status'
-						, array(
-							'' => '-- Select Status --'
-							, 'Pending' => 'Pending'
-							, 'Accepted' => 'Accepted'
+					{!! Form::text('log_type', ''
+						,array(
+							'placeholder' => 'Log Type'
+							, 'ng-model' => 'logs.search.log_type'
+							, 'class' => 'form-control btn-fit'
 						)
-						, ''
-						, array(
-							'class' => 'form-control'
-							, 'ng-model' => 'logs.search.status'
-						)
-					) !!}
+					)!!}
 				</div>
 				
 				<div class="col-xs-2">
@@ -94,31 +71,12 @@
 					)!!}
 				</div>
 			</div>
-			<div class="form-group">
-				<div class="col-xs-3"></div>
-				<label class="col-xs-2 control-label">Displayed At</label>
-				<div class="col-xs-5">
-					{!! Form::select('search_link_type'
-						, array(
-							'' => '-- Select Type --'
-							, 'General' => 'General'
-							, 'Content' => 'Content'
-							, 'Question' => 'Question'
-						)
-						, ''
-						, array(
-							'class' => 'form-control'
-							, 'ng-model' => 'logs.search.link_type'
-						)
-					) !!}
-				</div>
-			</div>
 		</div>
 	</div>
 	 
 	<div class="col-xs-12 table-container">
 		<div class="title-mid">
-			Tip List
+			Logs
 		</div>
 
 		<div class="list-container" ng-cloak>
@@ -141,25 +99,25 @@
 			</div>
 
 			<div class="clearfix"></div>
-			<div class="table-responsive" ng-init="logs.list()">
-				<table id="tip-list" class="table table-striped table-bordered">
+
+			<div class="table-responsive">
+				<table class="table table-striped table-bordered">
 					<thead>
 				        <tr>
-				            <th ng-repeat="header in logs.headers">{! header !}</th>
-				            <th ng-if="logs.records.length">Actions</th>
+				            <th>Username</th>
+				            <th>IP Address</th>
+				            <th>Agent Used</th>
+				            <th>HTTP Response</th>
+				            <th>Log Type</th>
 				        </tr>
 			        </thead>
 			        <tbody>
 				        <tr ng-repeat="record in logs.records">
-				            <td>{! record.link_type !}</td>
-				            <td>{! record.module.name !}</td>
-				            <td>{! record.subject.name !}</td>
-				            <td>{! record.subjectarea.name !}</td>
-				            <td>{! record.subjectarea.name !}</td>
-				            <td>{! record.subjectarea.name !}</td>
-				            <td>{! record.subjectarea.name !}</td>
-				            <td>{! record.title !}</td>
-				            <td>{! record.tip_status !}</td>
+				            <td>{! record.username !}</td>
+				            <td>{! record.client_ip !}:{! record.client_port !}</td>
+				            <td>{! record.client_user_agent !}</td>
+				            <td>{! record.result_response !}</td>
+				            <td>{! record.log_type !}</td>
 				        </tr>
 				        <tr class="odd" ng-if="!logs.records.length && !logs.table.loading">
 				        	<td valign="top" colspan="10">

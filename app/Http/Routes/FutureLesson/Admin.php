@@ -664,9 +664,17 @@
 					, 'middleware' => 'admin'
 					, 'uses' => 'FutureLesson\Admin\AdminLogsController@index'
 				]);
-			Routes::get('/list', [
-					'as' => 'admin.manage.logs.partials.list_form'
-					, 'uses' => 'FutureLesson\Admin\AdminLogsController@list_form'
+			Routes::get('/security-list', [
+					'as' => 'admin.manage.logs.partials.security_list_form'
+					, 'uses' => 'FutureLesson\Admin\AdminLogsController@security_list_form'
+				]);
+			Routes::get('/administrator-list', [
+					'as' => 'admin.manage.logs.partials.admin_list_form'
+					, 'uses' => 'FutureLesson\Admin\AdminLogsController@admin_list_form'
+				]);
+			Routes::get('/user-list', [
+					'as' => 'admin.manage.logs.partials.user_list_form'
+					, 'uses' => 'FutureLesson\Admin\AdminLogsController@user_list_form'
 				]);
 		});
 

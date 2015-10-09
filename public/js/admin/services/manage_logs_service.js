@@ -7,20 +7,26 @@ function ManageLogsService($http) {
 	var api = {};
 	var apiUrl = '/api/';
 
-	api.list = function(search, table) {
+	api.securityLogs = function(search, table) {
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url   : apiUrl + 'log/user?user_id=' + search.user_id
-				+ '&username=' + search.username
+			, url   : apiUrl + 'log/security?username=' + search.username
+				+ '&client_user_agent=' + search.client_user_agent
+				+ '&result_response=' + search.result_response
+				+ '&log_type=' + search.log_type
+				+ '&limit=' + table.size
+				+ '&offset=' + table.offset
+		});
+	}
+
+	api.adminLogs = function(search, table) {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url   : apiUrl + 'log/admin?username=' + search.username
 				+ '&email=' + search.email
 				+ '&name=' + search.name
-				+ '&user_type=' + search.user_type
-				+ '&page_accessed=' + search.page_accessed
-				+ '&api_accessed=' + search.api_accessed
 				+ '&result_response=' + search.result_response
-				+ '&status=' + search.status
-				+ '&date_start=' + search.date_start
-				+ '&date_end=' + search.date_end
+				+ '&admin_type=' + search.admin_type
 				+ '&limit=' + table.size
 				+ '&offset=' + table.offset
 		});
