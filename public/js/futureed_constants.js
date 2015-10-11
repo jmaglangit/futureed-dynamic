@@ -216,6 +216,10 @@ var Constants = {
 
 	, PASSWORD_TIP				: "Password must be at least 8 characters and with at least 1 number."
 
+	, SECURITY					: "Security"
+	, ADMINISTRATOR				: "Administrator"
+	, USERS						: "Users"
+
 	, URL_FORGOT_PASSWORD		: function(user_type) {
 		return '/' + user_type + '/password/forgot';
 	}
