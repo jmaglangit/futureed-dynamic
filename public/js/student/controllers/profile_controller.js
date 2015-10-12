@@ -52,6 +52,7 @@ function ProfileController($scope, apiService, profileService) {
 	    self.active_avatar = Constants.FALSE;
 	    self.active_rewards = Constants.FALSE;
 	    self.active_password = Constants.FALSE;
+	    self.active_reports = Constants.FALSE;
 
 	    self.validation = {};
 	    self.select_password = Constants.FALSE;
@@ -63,6 +64,10 @@ function ProfileController($scope, apiService, profileService) {
 	        self.active_rewards = Constants.TRUE;
 	        self.getPoints();
 	        self.getBadges();
+	        break;
+
+	      case 'reports'  		:
+	        self.active_reports = Constants.TRUE;
 	        break;
 
 	      case Constants.AVATAR   		:
@@ -81,7 +86,7 @@ function ProfileController($scope, apiService, profileService) {
 	      	self.active_edit = Constants.TRUE;
 	        break;
 
-	      case Constants.EDIT_EMAIL 	:
+	      case Constants.EDIT_EMAIL && !$scope.user.media_login :
 	      	self.change = {};
 	      	self.studentDetails();
 	      	self.active_edit_email = Constants.TRUE;
