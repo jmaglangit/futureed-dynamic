@@ -18,13 +18,11 @@
 		</div>
 	</div>
 
-	<div class="col-xs-12 padding-0-30">
+	<div class="col-xs-12 search-container">
 		<div class="title-mid">
 			Search
 		</div>
-	</div>
-
-	<div class="col-xs-12 search-container">
+		
 		<div class="form-search">
 			{!! Form::open(
 					[

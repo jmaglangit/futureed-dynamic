@@ -69,12 +69,12 @@
 	</div>
 
 	<div class="col-xs-12 table-container" ng-init="teacher.listStudent()">
-		<div class="title-mid">
-			Student List
-		</div>
-
 		<div class="list-container" ng-cloak>
-			<div class="size-container">
+			<div class="col-xs-6 title-mid">
+				Student List
+			</div>
+
+			<div class="col-xs-6 size-container">
 				{!! Form::select('size'
 					, array(
 						  '10' => '10'
@@ -92,7 +92,7 @@
 				) !!}
 			</div>
 
-			<table class="table table-striped table-bordered">
+			<table class="col-xs-12 table table-striped table-bordered">
 				<thead>
 			        <tr>
 			            <th>Name</th>

@@ -29,7 +29,7 @@
 							)
 						) !!}
 					</div>
-					<div class="col-md-4">
+					<div class="col-xs-4">
 	                    <select ng-init="class.getGradeLevel(user.country_id)" 
 	                    	name="grade_id" 
 	                    	class="form-control" 
@@ -62,11 +62,11 @@
 
 	<div class="col-xs-12 table-container" ng-init="class.list()">
 		<div class="list-container" ng-cloak>
-			<div class="title-mid">
+			<div class="col-xs-6 title-mid">
 				Class List
 			</div>
 
-			<div class="size-container">
+			<div class="col-xs-6 size-container">
 				{!! Form::select('size'
 					, array(
 						  '10' => '10'
@@ -84,7 +84,7 @@
 				) !!}
 			</div>
 
-			<table id="class-list" class="table table-striped table-bordered">
+			<table class="col-xs-12 table table-striped table-bordered">
 			<thead>
 		        <tr>
 		            <th>Grade</th>
