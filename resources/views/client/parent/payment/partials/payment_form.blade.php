@@ -5,19 +5,17 @@
 		</div>
 	</div>
 
-	<div class="col-xs-12 form-container">
-		<div class="alert-container" ng-if="payment.errors || payment.success">
-			<div class="alert alert-error" ng-if="payment.errors">
-	            <p ng-repeat="error in payment.errors track by $index" > 
-	              	{! error !}
-	            </p>
-	        </div>
+	<div class="col-xs-12 success-container" ng-if="payment.errors || payment.success">
+		<div class="alert alert-error" ng-if="payment.errors">
+            <p ng-repeat="error in payment.errors track by $index" > 
+              	{! error !}
+            </p>
+        </div>
 
-	        <div class="alert alert-success" ng-if="payment.success">
-				<p ng-repeat="success in payment.success track by $index" > 
-					{! success !}
-				</p>
-			</div>
+        <div class="alert alert-success" ng-if="payment.success">
+			<p ng-repeat="success in payment.success track by $index" > 
+				{! success !}
+			</p>
 		</div>
 	</div>
 
@@ -72,19 +70,17 @@
 		</div>
 	</div>
 
-	<div class="clearfix"></div>
-
-	<button class="btn btn-blue btn-small margin-0-30" ng-click="payment.setActive(futureed.ACTIVE_ADD)">
-		<i class="fa fa-plus-square"></i> Add Payment
-	</button>
-	<div class="col-xs-12 padding-0-30">
-		<div class="title-mid">
-			Payment List
-		</div>
-	</div>
 	<div class="col-xs-12 table-container" ng-init="payment.list()">
+		<button class="btn btn-blue btn-small" ng-click="payment.setActive(futureed.ACTIVE_ADD)">
+			<i class="fa fa-plus-square"></i> Add Payment
+		</button>
+
 		<div class="list-container" ng-cloak>
-			<div class="size-container">
+			<div class="col-xs-6 title-mid">
+				Payment List
+			</div>
+
+			<div class="col-xs-6 size-container">
 				{!! Form::select('size'
 					, array(
 						  '10' => '10'
@@ -102,7 +98,7 @@
 				) !!}
 			</div>
 
-			<table class="table table-striped table-bordered">
+			<table class="col-xs-12 table table-striped table-bordered">
 				<thead>
 			        <tr>
 			            <th>Order #</th>
