@@ -20,6 +20,7 @@
 						<span><i class="fa fa-gear"></i> Tips & Help Requests</span>
 					</div>
 				</div>
+				
 				<div class="form-content col-xs-12">
 					<ul class="nav nav-tabs">
 					    <li>

@@ -63,20 +63,18 @@
 			</div>
 		</div>
 	</div>
-
-	<button class="btn btn-blue btn-small margin-0-30" ng-click="grade.setActive('add_grade')">
-		<i class="fa fa-plus-square"></i> Add Grade
-	</button>
-
-	<div class="col-xs-12 padding-0-30">
-		<div class="title-mid">
-			Grade List
-		</div>
-	</div>
 	 
 	<div class="col-xs-12 table-container">
+		<button class="btn btn-blue btn-small" ng-click="grade.setActive('add_grade')">
+			<i class="fa fa-plus-square"></i> Add Grade
+		</button>
+
 		<div class="list-container" ng-cloak>
-			<div class="size-container">
+			<div class="col-xs-6 title-mid">
+				Grade List
+			</div>
+
+			<div class="col-xs-6 size-container">
 				{!! Form::select('size'
 					, array(
 						  '10' => '10'
@@ -94,13 +92,13 @@
 				) !!}
 			</div>
 
-			<table id="grade-list" class="table table-striped table-bordered">
+			<table class="col-xs-12  table table-striped table-bordered">
 			<thead>
 		        <tr>
 		            <th>Grade Code</th>
 		            <th>Grade</th>
 		            <th>Country</th>
-		            <th>Action</th>
+		            <th ng-if="grade.grades.length">Action</th>
 		        </tr>
 	        </thead>
 	        <tbody>

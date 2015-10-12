@@ -110,13 +110,13 @@
 		</div>
 	</div>
 	 
-	<div class="col-xs-12 table-container">
-		<div class="title-mid">
-			Tip List
-		</div>
-
+	<div class="table-container" ng-init="tips.listTips()">
 		<div class="list-container" ng-cloak>
-			<div class="size-container">
+			<div class="col-xs-6 title-mid">
+				Tip List
+			</div>
+
+			<div class="col-xs-6 size-container">
 				{!! Form::select('size'
 					, array(
 						  '10' => '10'
@@ -134,55 +134,53 @@
 				) !!}
 			</div>
 
-			<div class="clearfix"></div>
-			<div class="table-responsive" ng-init="tips.listTips()">
-				<table id="tip-list" class="table table-striped table-bordered">
-					<thead>
-				        <tr>
-				            <th>Displayed At</th>
-				            <th>Module</th>
-				            <th>Subject</th>
-				            <th>Area</th>
-				            <th>Title</th>
-				            <th>Status</th>
-				            <th ng-if="tips.records.length">Actions</th>
-				        </tr>
-			        </thead>
-			        <tbody>
-				        <tr ng-repeat="tipInfo in tips.records">
-				            <td>{! tipInfo.link_type !}</td>
-				            <td>{! tipInfo.module.name !}</td>
-				            <td>{! tipInfo.subject.name !}</td>
-				            <td>{! tipInfo.subjectarea.name !}</td>
-				            <td>{! tipInfo.title !}</td>
-				            <td>{! tipInfo.tip_status !}</td>
-				            <td ng-if="tips.records.length">
-				            	<div class="row">
-				            		<div class="col-xs-4">
-				            			<a href="" ng-click="tips.setActive(futureed.ACTIVE_VIEW, tipInfo.id)"><span><i class="fa fa-eye"></i></span></a>
-				            		</div>
-				            		<div class="col-xs-4">
-				            			<a href="" ng-click="tips.setActive(futureed.ACTIVE_EDIT, tipInfo.id)"><span><i class="fa fa-pencil"></i></span></a>
-				            		</div>
-				            		<div class="col-xs-4">
-				            			<a href="" ng-click="tips.confirmDelete(tipInfo.id)"><span><i class="fa fa-trash"></i></span></a>
-				            		</div>	
-				            	</div>
-				            </td>
-				        </tr>
-				        <tr class="odd" ng-if="!tips.records.length && !tips.table.loading">
-				        	<td valign="top" colspan="7">
-				        		No records found
-				        	</td>
-				        </tr>
-				        <tr class="odd" ng-if="tips.table.loading">
-				        	<td valign="top" colspan="7">
-				        		Loading...
-				        	</td>
-				        </tr>
-			        </tbody>
-				</table>
-			</div>
+			<table class="col-xs-12 table table-striped table-bordered">
+				<thead>
+			        <tr>
+			            <th>Displayed At</th>
+			            <th>Module</th>
+			            <th>Subject</th>
+			            <th>Area</th>
+			            <th>Title</th>
+			            <th>Status</th>
+			            <th ng-if="tips.records.length">Actions</th>
+			        </tr>
+		        </thead>
+		        <tbody>
+			        <tr ng-repeat="tipInfo in tips.records">
+			            <td>{! tipInfo.link_type !}</td>
+			            <td>{! tipInfo.module.name !}</td>
+			            <td>{! tipInfo.subject.name !}</td>
+			            <td>{! tipInfo.subjectarea.name !}</td>
+			            <td>{! tipInfo.title !}</td>
+			            <td>{! tipInfo.tip_status !}</td>
+			            <td ng-if="tips.records.length">
+			            	<div class="row">
+			            		<div class="col-xs-4">
+			            			<a href="" ng-click="tips.setActive(futureed.ACTIVE_VIEW, tipInfo.id)"><span><i class="fa fa-eye"></i></span></a>
+			            		</div>
+			            		<div class="col-xs-4">
+			            			<a href="" ng-click="tips.setActive(futureed.ACTIVE_EDIT, tipInfo.id)"><span><i class="fa fa-pencil"></i></span></a>
+			            		</div>
+			            		<div class="col-xs-4">
+			            			<a href="" ng-click="tips.confirmDelete(tipInfo.id)"><span><i class="fa fa-trash"></i></span></a>
+			            		</div>	
+			            	</div>
+			            </td>
+			        </tr>
+			        <tr class="odd" ng-if="!tips.records.length && !tips.table.loading">
+			        	<td valign="top" colspan="7">
+			        		No records found
+			        	</td>
+			        </tr>
+			        <tr class="odd" ng-if="tips.table.loading">
+			        	<td valign="top" colspan="7">
+			        		Loading...
+			        	</td>
+			        </tr>
+		        </tbody>
+			</table>
+
 			<div class="pull-right" ng-if="tips.records.length">
 				<pagination 
 					total-items="tips.table.total_items" 

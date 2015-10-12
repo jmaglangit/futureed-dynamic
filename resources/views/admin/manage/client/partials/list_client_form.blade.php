@@ -19,13 +19,11 @@
         </div>
     </div>
 
-	<div class="col-xs-12 padding-0-30">
+	<div class="col-xs-12 search-container">
 		<div class="title-mid">
 			Search
 		</div>
-	</div>
-
-	<div class="col-xs-12 search-container">
+		
 		{!! Form::open(
 			array('id' => 'search_form'
 				, 'class' => 'form-horizontal'
@@ -107,11 +105,11 @@
 		</button>
 
 		<div class="list-container" ng-cloak>
-			<div class="title-mid">
+			<div class="col-xs-6 title-mid">
 				Client List
 			</div>
 
-			<div class="size-container">
+			<div class="col-xs-6 size-container">
 				{!! Form::select('size'
 					, array(
 						  '10' => '10'
@@ -129,14 +127,14 @@
 				) !!}
 			</div>
 
-			<table class="table table-striped table-bordered" >
+			<table class="col-xs-12 table table-striped table-bordered" >
 				<thead>
 			        <tr>
-			            <th class="width-200">Name</th>
-			            <th class="width-200">Email</th>
+			            <th>Name</th>
+			            <th>Email</th>
 			            <th>Role</th>
 			            <th>Account Status</th>
-			            <th>Action</th>
+			            <th ng-if="client.clients.length">Action</th>
 			        </tr>
 		        </thead>
 		         <tbody>

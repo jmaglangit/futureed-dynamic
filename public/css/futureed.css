@@ -503,7 +503,7 @@ li.active .rnd-identifier{
 	border-radius: 8px;
 	box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
 	width: 100%;
-	min-height: 450px;
+	min-height: 500px;
 	position: relative;
 	overflow: hidden;
 	margin-bottom: 40px;
@@ -1202,7 +1202,8 @@ span.step {
 	text-transform: uppercase;
   	color: #055A7F;
   	font-size: 1.5em;
-  	margin: 10px 0 10px 0;
+  	margin: 17px 0px;
+  	padding-left: 0px;
 }
 
 fieldset {
@@ -1278,4 +1279,12 @@ fieldset legend {
   	box-shadow: inset 0px 0px 8px rgba(0,0,0,.125);
   	outline: none;
 	border-radius: 5px;
+}
+
+.size-container {
+	padding-right: 0px; 
+}
+
+.table {
+	margin-bottom: 0px;
 }

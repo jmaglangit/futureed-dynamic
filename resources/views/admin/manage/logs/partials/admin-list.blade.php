@@ -111,13 +111,13 @@
 		</div>
 	</div>
 	 
-	<div class="col-xs-12 table-container">
-		<div class="title-mid">
-			Logs
-		</div>
-
+	<div class="table-container">
 		<div class="list-container" ng-cloak>
-			<div class="size-container">
+			<div class="col-xs-6 title-mid">
+				Logs
+			</div>
+
+			<div class="col-xs-6 size-container">
 				{!! Form::select('size'
 					, array(
 						  '10' => '10'
@@ -135,42 +135,39 @@
 				) !!}
 			</div>
 
-			<div class="clearfix"></div>
+			<table class="col-xs-12 table table-striped table-bordered">
+				<thead>
+			        <tr>
+			            <th>Username</th>
+			            <th>Email</th>
+			            <th>Name</th>
+			            <th>Admin Type</th>
+			            <th>Page Accessed</th>
+			            <th>Response Status</th>
+			        </tr>
+		        </thead>
+		        <tbody>
+			        <tr ng-repeat="record in logs.records">
+			            <td>{! record.username !}</td>
+			            <td>{! record.email !}</td>
+			            <td>{! record.name !}</td>
+			            <td>{! record.admin_type !}</td>
+			            <td>{! record.page_accessed !}</td>
+			            <td>{! record.result_response !}</td>
+			        </tr>
+			        <tr class="odd" ng-if="!logs.records.length && !logs.table.loading">
+			        	<td valign="top" colspan="10">
+			        		No records found
+			        	</td>
+			        </tr>
+			        <tr class="odd" ng-if="logs.table.loading">
+			        	<td valign="top" colspan="10">
+			        		Loading...
+			        	</td>
+			        </tr>
+		        </tbody>
+			</table>
 
-			<div class="table-responsive">
-				<table class="table table-striped table-bordered">
-					<thead>
-				        <tr>
-				            <th>Username</th>
-				            <th>Email</th>
-				            <th>Name</th>
-				            <th>Admin Type</th>
-				            <th>Page Accessed</th>
-				            <th>Response Status</th>
-				        </tr>
-			        </thead>
-			        <tbody>
-				        <tr ng-repeat="record in logs.records">
-				            <td>{! record.username !}</td>
-				            <td>{! record.email !}</td>
-				            <td>{! record.name !}</td>
-				            <td>{! record.admin_type !}</td>
-				            <td>{! record.page_accessed !}</td>
-				            <td>{! record.result_response !}</td>
-				        </tr>
-				        <tr class="odd" ng-if="!logs.records.length && !logs.table.loading">
-				        	<td valign="top" colspan="10">
-				        		No records found
-				        	</td>
-				        </tr>
-				        <tr class="odd" ng-if="logs.table.loading">
-				        	<td valign="top" colspan="10">
-				        		Loading...
-				        	</td>
-				        </tr>
-			        </tbody>
-				</table>
-			</div>
 			<div class="pull-right" ng-if="logs.records.length">
 				<pagination 
 					total-items="logs.table.total_items" 

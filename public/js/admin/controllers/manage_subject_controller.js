@@ -13,7 +13,6 @@ function ManageSubjectController($scope, apiService, manageSubjectService, Table
 	SearchService(self);
 	self.searchDefaults();
 
-	self.search = {};
 	self.create = {};
 	self.delete = {};
 	self.details = {};
@@ -22,9 +21,6 @@ function ManageSubjectController($scope, apiService, manageSubjectService, Table
 	self.search_area = {};
 	self.delete_area = {};
 	self.area_details = {};
-	self.errors = Constants.FALSE;
-
-	self.setManageSubjectActive = setManageSubjectActive;
 
 	/**
 	* Subject Function Calls
@@ -37,7 +33,7 @@ function ManageSubjectController($scope, apiService, manageSubjectService, Table
 	self.confirmDeleteSubject = confirmDeleteSubject;
 	self.deleteSubject = deleteSubject;
 
-	function setManageSubjectActive(active) {
+	self.setManageSubjectActive = function(active) {
 		self.errors = Constants.FALSE;
 
 		self.tableDefaults();

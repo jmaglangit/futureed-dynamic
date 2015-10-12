@@ -20,6 +20,7 @@
 						<span><i class="fa fa-gear"></i> Tips & Help Requests</span>
 					</div>
 				</div>
+				
 				<div class="form-content col-xs-12">
 					<ul class="nav nav-tabs">
 					    <li class="active">
@@ -33,7 +34,7 @@
 					    </li>
 					</ul>
 				</div>
-					
+
 				<div class="tab-content" ng-init="tips.setActive()">
 				  	<div class="tab-pane fade in active">
 						<div template-directive template-url="{!! route('admin.manage.tips.partials.list') !!}"></div>

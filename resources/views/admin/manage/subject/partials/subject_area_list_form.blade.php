@@ -26,7 +26,7 @@
 				)
 			) !!}
 			<div class="form-group">
-				<div class="col-xs-8">
+				<div class="col-xs-6">
 					{!! Form::text('search_subject', ''
 						,array(
 							'placeholder' => 'Area'
@@ -36,7 +36,7 @@
 					)!!}
 				</div>
 				
-				<div class="col-xs-2">
+				<div class="col-xs-3">
 					{!! Form::button('Search'
 						,array(
 							'class' => 'btn btn-blue'
@@ -44,7 +44,7 @@
 						)
 					)!!}
 				</div>
-				<div class="col-xs-2">
+				<div class="col-xs-3">
 					{!! Form::button('Clear'
 						,array(
 							'class' => 'btn btn-gold'
@@ -55,23 +55,22 @@
 			</div>
 		</div>
 	</div>
-
-	<button class="btn btn-blue btn-small margin-0-30" ng-click="area.setActive('add_subject_area')">
-		<i class="fa fa-plus-square"></i> Add Subject Area
-	</button>
-	<button class="btn btn-gold btn-small margin-0-30 pull-right" ng-click="area.setSubjectList(); subject.setManageSubjectActive()">
-		Back to Subject
-	</button>
-
-	<div class="col-xs-12 padding-0-30">
-		<div class="title-mid">
-			Subject Area List
-		</div>
-	</div>
 	 
 	<div class="col-xs-12 table-container">
+		<button class="btn btn-blue btn-semi-medium" ng-click="area.setActive('add_subject_area')">
+			<i class="fa fa-plus-square"></i> Add Subject Area
+		</button>
+
+		<button class="btn btn-gold btn-small pull-right" ng-click="area.setSubjectList(); subject.setManageSubjectActive()">
+			Back to Subject
+		</button>
+
 		<div class="list-container" ng-init="area.setActive()" ng-cloak>
-			<div class="size-container">
+			<div class="col-xs-6 title-mid">
+				Subject Area List
+			</div>
+
+			<div class="col-xs-6 size-container">
 				{!! Form::select('size'
 					, array(
 						  '10' => '10'
@@ -89,12 +88,12 @@
 				) !!}
 			</div>
 
-			<table class="table table-striped table-bordered">
+			<table class="col-xs-12 table table-striped table-bordered">
 				<thead>
 			        <tr>
 			            <th>Area Code</th>
 			            <th>Area</th>
-			            <th>Action</th>
+			            <th ng-if="area.records.length">Action</th>
 			        </tr>
 		        </thead>
 		        <tbody>

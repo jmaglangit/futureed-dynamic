@@ -102,13 +102,13 @@
 		</div>
 	</div>
 	 
-	<div class="col-xs-12 table-container">
-		<div class="title-mid">
-			Help Request List
-		</div>
-
+	<div class="table-container" ng-init="help.list()">
 		<div class="list-container" ng-cloak>
-			<div class="size-container">
+			<div class="col-xs-6 title-mid">
+				Help Request List
+			</div>
+
+			<div class="col-xs-6 size-container">
 				{!! Form::select('size'
 					, array(
 						  '10' => '10'
@@ -126,55 +126,53 @@
 				) !!}
 			</div>
 
-			<div class="clearfix"></div>
-			<div class="table-responsive" ng-init="help.list()">
-				<table id="grade-list" class="table table-striped table-bordered">
-					<thead>
-				        <tr>
-				            <th>Displayed At</th>
-				            <th>Module</th>
-				            <th>Subject</th>
-				            <th>Area</th>
-				            <th>Title</th>
-				            <th>Status</th>
-				            <th ng-if="help.records.length">Actions</th>
-				        </tr>
-			        </thead>
-			        <tbody>
-				        <tr ng-repeat="helpInfo in help.records">
-				            <td>{! helpInfo.link_type !}</td>
-				            <td>{! helpInfo.module.name !}</td>
-				            <td>{! helpInfo.subject.name !}</td>
-				            <td>{! helpInfo.subject_area.name !}</td>
-				            <td>{! helpInfo.title !}</td>
-				            <td>{! helpInfo.request_status !}</td>
-				            <td ng-if="help.records.length">
-				            	<div class="row">
-				            		<div class="col-xs-4">
-				            			<a href="" ng-click="help.setActive(futureed.ACTIVE_VIEW, helpInfo.id)"><span><i class="fa fa-eye"></i></span></a>
-				            		</div>
-				            		<div class="col-xs-4">
-				            			<a href="" ng-click="help.setActive(futureed.ACTIVE_EDIT, helpInfo.id)"><span><i class="fa fa-pencil"></i></span></a>
-				            		</div>
-				            		<div class="col-xs-4">
-				            			<a href="" ng-click="help.confirmDelete(helpInfo.id)"><span><i class="fa fa-trash"></i></span></a>
-				            		</div>	
-				            	</div>
-				            </td>
-				        </tr>
-				        <tr class="odd" ng-if="!help.records.length && !help.table.loading">
-				        	<td valign="top" colspan="7">
-				        		No records found
-				        	</td>
-				        </tr>
-				        <tr class="odd" ng-if="help.table.loading">
-				        	<td valign="top" colspan="7">
-				        		Loading...
-				        	</td>
-				        </tr>
-			        </tbody>
-				</table>
-			</div>
+			<table class="col-xs-12 table table-striped table-bordered">
+				<thead>
+			        <tr>
+			            <th>Displayed At</th>
+			            <th>Module</th>
+			            <th>Subject</th>
+			            <th>Area</th>
+			            <th>Title</th>
+			            <th>Status</th>
+			            <th ng-if="help.records.length">Actions</th>
+			        </tr>
+		        </thead>
+		        <tbody>
+			        <tr ng-repeat="helpInfo in help.records">
+			            <td>{! helpInfo.link_type !}</td>
+			            <td>{! helpInfo.module.name !}</td>
+			            <td>{! helpInfo.subject.name !}</td>
+			            <td>{! helpInfo.subject_area.name !}</td>
+			            <td>{! helpInfo.title !}</td>
+			            <td>{! helpInfo.request_status !}</td>
+			            <td ng-if="help.records.length">
+			            	<div class="row">
+			            		<div class="col-xs-4">
+			            			<a href="" ng-click="help.setActive(futureed.ACTIVE_VIEW, helpInfo.id)"><span><i class="fa fa-eye"></i></span></a>
+			            		</div>
+			            		<div class="col-xs-4">
+			            			<a href="" ng-click="help.setActive(futureed.ACTIVE_EDIT, helpInfo.id)"><span><i class="fa fa-pencil"></i></span></a>
+			            		</div>
+			            		<div class="col-xs-4">
+			            			<a href="" ng-click="help.confirmDelete(helpInfo.id)"><span><i class="fa fa-trash"></i></span></a>
+			            		</div>	
+			            	</div>
+			            </td>
+			        </tr>
+			        <tr class="odd" ng-if="!help.records.length && !help.table.loading">
+			        	<td valign="top" colspan="7">
+			        		No records found
+			        	</td>
+			        </tr>
+			        <tr class="odd" ng-if="help.table.loading">
+			        	<td valign="top" colspan="7">
+			        		Loading...
+			        	</td>
+			        </tr>
+		        </tbody>
+			</table>
+
 			<div class="pull-right" ng-if="help.records.length">
 				<pagination 
 					total-items="help.table.total_items" 

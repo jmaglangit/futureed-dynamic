@@ -146,16 +146,12 @@
 	      </div>
 	</div>
 
-	<div class="row">
-		<div class="col-xs-12">
-			<div class="title-mid">
-				Price List
-			</div>
-		</div>
-	</div>
-
 	<div class="list-container" ng-cloak>
-		<div class="size-container">
+		<div class="col-xs-6 title-mid">
+			Price List
+		</div>
+
+		<div class="col-xs-6 size-container">
 			{!! Form::select('size'
 				, array(
 					  '10' => '10'
@@ -173,7 +169,7 @@
 			) !!}
 		</div>
 
-		<table id="price-list" class="table table-striped table-bordered">
+		<table class="col-xs-12 table table-striped table-bordered">
 			<thead>
 	        <tr>
 	            <th class="width-200">Subscription Name</th>

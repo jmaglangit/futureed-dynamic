@@ -27,13 +27,14 @@
 							{! sale.data.is_success !}
 						</p>
 					</div>
+					
 					<ul class="nav nav-tabs">
 					    <li class="active">
-					    	<a data-toggle="pill" ng-click="sale.selectTab()" href="#home"><span><i class="fa fa-dollar"></i>Price Settings</span></a></li>
+					    	<a ng-click="sale.selectTab()" href="#home"><span><i class="fa fa-dollar"></i>Price Settings</span></a></li>
 					    <li>
-					    	<a data-toggle="pill" ng-click="sale.selectTab('client_discount_list')" href="#discount"><span><i class="fa fa-tags"></i>Client Discount</span></a></li>
+					    	<a ng-click="sale.selectTab('client_discount_list')" href="#discount"><span><i class="fa fa-tags"></i>Client Discount</span></a></li>
 					    <li>
-					    	<a data-toggle="pill" ng-click="sale.selectTab('bulk_settings_list')" href="#bulk"><span><i class="fa fa-database"></i>Bulk Settings</span></a></li>
+					    	<a ng-click="sale.selectTab('bulk_settings_list')" href="#bulk"><span><i class="fa fa-database"></i>Bulk Settings</span></a></li>
 					</ul>
 					
 					<div class="tab-content">
