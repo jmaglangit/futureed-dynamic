@@ -51,7 +51,7 @@ class LogMiddleware {
 				'page_accessed' => ($request->server('HTTP_REFERER'))
 					? $request->server('HTTP_REFERER') : $request->server('REQUEST_URI'),
 				'api_accessed' => ($request->server('SCRIPT_URI')) ? $request->server('SCRIPT_URI') : 'NA',
-				'result_response' => ($request->server('REDIRECT_STATUS')) ? $request->server('REDIRECT_STATUS') : 'NA'
+				'result_response' => ($request->server('REDIRECT_STATUS')) ? $request->server('REDIRECT_STATUS') : 0
 			];
 
 			switch($payload['type']){
@@ -80,7 +80,7 @@ class LogMiddleware {
 				'page_accessed' => ($request->server('HTTP_REFERER'))
 					? $request->server('HTTP_REFERER') : $request->server('REQUEST_URI'),
 				'api_accessed' => ($request->server('REQUEST_URI')) ? $request->server('REQUEST_URI') : 'NA',
-				'result_response' => ($request->server('REDIRECT_STATUS')) ? $request->server('REDIRECT_STATUS') : 'NA'
+				'result_response' => ($request->server('REDIRECT_STATUS')) ? $request->server('REDIRECT_STATUS') : 0
 			];
 
 			$log_response = $this->log_services->addUserLog($log_data);
