@@ -51,7 +51,7 @@ class LogMiddleware {
 				'page_accessed' => ($request->server('HTTP_REFERER'))
 					? $request->server('HTTP_REFERER') : $request->server('REQUEST_URI'),
 				'api_accessed' => ($request->server('SCRIPT_URI')) ? $request->server('SCRIPT_URI') : 'NA',
-				'result_response' => ($request->server('REDIRECT_STATUS')) ? $request->server('REDIRECT_STATUS') : 'NA'
+				'result_response' => ($request->server('REDIRECT_STATUS')) ? $request->server('REDIRECT_STATUS') : 0
 			];
 
 			switch($payload['type']){
@@ -80,7 +80,7 @@ class LogMiddleware {
 				'page_accessed' => ($request->server('HTTP_REFERER'))
 					? $request->server('HTTP_REFERER') : $request->server('REQUEST_URI'),
 				'api_accessed' => ($request->server('REQUEST_URI')) ? $request->server('REQUEST_URI') : 'NA',
-				'result_response' => ($request->server('REDIRECT_STATUS')) ? $request->server('REDIRECT_STATUS') : 'NA'
+				'result_response' => ($request->server('REDIRECT_STATUS')) ? $request->server('REDIRECT_STATUS') : 0
 			];
 
 			$log_response = $this->log_services->addUserLog($log_data);
@@ -109,7 +109,7 @@ class LogMiddleware {
 			'user_id' => $log_response->user_id,
 			'username' => $log_response->username,
 			'client_ip' => ($request->server('REMOTE_ADDR')) ? $request->server('REMOTE_ADDR') : 'NA',
-			'client_port' => ($request->server('REMOTE_PORT')) ? $request->server('REMOTE_PORT') : 'NA',
+			'client_port' => ($request->server('REMOTE_PORT')) ? $request->server('REMOTE_PORT') : 0,
 			'client_user_agent' => ($request->server('HTTP_USER_AGENT')) ? $request->server('HTTP_USER_AGENT') : 'NA',
 			'url' => ($request->server('REQUEST_URI')) ? $request->server('REQUEST_URI') : 'NA',
 			'result_response' => $log_response->result_response,
