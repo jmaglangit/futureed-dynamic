@@ -85,6 +85,7 @@ function MediaLoginController($scope, $filter, $window, MediaLoginService) {
 					}
 				} else if(response.data) {
 					response.data.role = (response.data.client_role) ? response.data.client_role : Constants.STUDENT ;
+					response.data.media_login = Constants.TRUE;
 
 					$scope.user = JSON.stringify(response.data);
 					$("input[name='user_data']").val(JSON.stringify(response.data));
@@ -158,7 +159,8 @@ function MediaLoginController($scope, $filter, $window, MediaLoginService) {
 					}
 				} else if(response.data){
 					response.data.role = (response.data.client_role) ? response.data.client_role : Constants.STUDENT ;
-					
+					response.data.media_login = Constants.TRUE;
+
 					$scope.user = JSON.stringify(response.data);
 					$("input[name='user_data']").val(JSON.stringify(response.data));
 					$("#process_form").submit();

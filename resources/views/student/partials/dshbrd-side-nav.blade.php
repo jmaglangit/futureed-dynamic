@@ -5,22 +5,26 @@
 	</li>
 
 	<li ng-class="{ 'active' : profile.active_index || profile.active_edit_email || profile.active_confirm_email}">
-		<a href="" ng-click="profile.setStudentProfileActive('index')">My Profile</a>
+		<a href="javascript:void(0)" ng-click="profile.setStudentProfileActive('index')">My Profile</a>
 	</li>
 
 	<li ng-class="{ 'active' : profile.active_edit }">
-		<a href="" ng-click="profile.setStudentProfileActive('edit')">Edit Profile</a>
+		<a href="javascript:void(0)" ng-click="profile.setStudentProfileActive('edit')">Edit Profile</a>
 	</li>
 
 	<li ng-class="{ 'active' : profile.active_rewards }">
-		<a href="" ng-click="profile.setStudentProfileActive('rewards')">Student Rewards</a>
+		<a href="javascript:void(0)" ng-click="profile.setStudentProfileActive('rewards')">Student Rewards</a>
 	</li>
 
 	<li ng-class="{ 'active' : profile.active_avatar }">
-		<a href="" ng-click="profile.setStudentProfileActive('avatar')">Change Avatar</a>
+		<a href="javascript:void(0)" ng-click="profile.setStudentProfileActive('avatar')">Change Avatar</a>
 	</li>
 
-	<li ng-class="{ 'active' : profile.active_password }">
-		<a href="" ng-click="profile.setStudentProfileActive('password')">Change Picture Password</a>
+	<li ng-if="!user.media_login" ng-class="{ 'active' : profile.active_password }">
+		<a href="javascript:void(0)" ng-click="profile.setStudentProfileActive('password')">Change Picture Password</a>
+	</li>
+
+	<li ng-class="{ 'active' : profile.active_reports }">
+		<a href="javascript:void(0)" ng-click="profile.setStudentProfileActive('reports')"> Reports </a>
 	</li>
 </ul>

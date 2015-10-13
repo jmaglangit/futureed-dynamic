@@ -220,6 +220,9 @@ var Constants = {
 	, ADMINISTRATOR				: "Administrator"
 	, USERS						: "Users"
 
+	, REPORT_CARD				: "Report Card"
+	, SUMMARY_PROGRESS			: "Summary Progress"
+
 	, URL_FORGOT_PASSWORD		: function(user_type) {
 		return '/' + user_type + '/password/forgot';
 	}
