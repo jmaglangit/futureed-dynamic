@@ -50,8 +50,8 @@ class LogMiddleware {
 				'role' => $payload['role'],
 				'page_accessed' => ($request->server('HTTP_REFERER'))
 					? $request->server('HTTP_REFERER') : $request->server('REQUEST_URI'),
-				'api_accessed' => $request->server('SCRIPT_URI'),
-				'result_response' => $request->server('REDIRECT_STATUS')
+				'api_accessed' => ($request->server('SCRIPT_URI')) ? $request->server('SCRIPT_URI') : 'NA',
+				'result_response' => ($request->server('REDIRECT_STATUS')) ? $request->server('REDIRECT_STATUS') : 'NA'
 			];
 
 			switch($payload['type']){
@@ -79,8 +79,8 @@ class LogMiddleware {
 				'username' => ($request->server('UNIQUE_ID')) ? $request->server('UNIQUE_ID') : 'NA',
 				'page_accessed' => ($request->server('HTTP_REFERER'))
 					? $request->server('HTTP_REFERER') : $request->server('REQUEST_URI'),
-				'api_accessed' => $request->server('REQUEST_URI'),
-				'result_response' => $request->server('REDIRECT_STATUS')
+				'api_accessed' => ($request->server('REQUEST_URI')) ? $request->server('REQUEST_URI') : 'NA',
+				'result_response' => ($request->server('REDIRECT_STATUS')) ? $request->server('REDIRECT_STATUS') : 'NA'
 			];
 
 			$log_response = $this->log_services->addUserLog($log_data);
@@ -108,10 +108,10 @@ class LogMiddleware {
 		$security_log = [
 			'user_id' => $log_response->user_id,
 			'username' => $log_response->username,
-			'client_ip' => $request->server('REMOTE_ADDR'),
-			'client_port' => $request->server('REMOTE_PORT'),
-			'client_user_agent' => $request->server('HTTP_USER_AGENT'),
-			'url' => $request->server('REQUEST_URI'),
+			'client_ip' => ($request->server('REMOTE_ADDR')) ? $request->server('REMOTE_ADDR') : 'NA',
+			'client_port' => ($request->server('REMOTE_PORT')) ? $request->server('REMOTE_PORT') : 'NA',
+			'client_user_agent' => ($request->server('HTTP_USER_AGENT')) ? $request->server('HTTP_USER_AGENT') : 'NA',
+			'url' => ($request->server('REQUEST_URI')) ? $request->server('REQUEST_URI') : 'NA',
 			'result_response' => $log_response->result_response,
 			'data_size_transferred' => memory_get_usage(),
 			'log_type' => (isset($log_response->admin_type)) ? config('futureed.admin_log') : config('futureed.user_log'),
