@@ -109,7 +109,7 @@ class LogMiddleware {
 			'user_id' => $log_response->user_id,
 			'username' => $log_response->username,
 			'client_ip' => ($request->server('REMOTE_ADDR')) ? $request->server('REMOTE_ADDR') : 'NA',
-			'client_port' => ($request->server('REMOTE_PORT')) ? $request->server('REMOTE_PORT') : 'NA',
+			'client_port' => ($request->server('REMOTE_PORT')) ? $request->server('REMOTE_PORT') : 0,
 			'client_user_agent' => ($request->server('HTTP_USER_AGENT')) ? $request->server('HTTP_USER_AGENT') : 'NA',
 			'url' => ($request->server('REQUEST_URI')) ? $request->server('REQUEST_URI') : 'NA',
 			'result_response' => $log_response->result_response,
