@@ -31,5 +31,21 @@ Routes::group([
 		'as' => 'api.log.admin.list'
 	]);
 
+	/**
+	 * Error Logs
+	 */
+	Routes::get('/error',[
+		'uses' => 'Api\Logs\ErrorLogController@getErrorLogs',
+		'as' => 'api.log.error.files'
+	]);
+
+	/**
+	 * Download Log
+	 */
+	Routes::get('/error/download/{filename}',[
+		'uses' => 'Api\Logs\ErrorLogController@downloadErrorLog',
+		'as' => 'api.log.error.file.download'
+	]);
+
 
 });
