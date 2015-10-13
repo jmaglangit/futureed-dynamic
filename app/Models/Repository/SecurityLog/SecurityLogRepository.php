@@ -4,8 +4,12 @@ namespace FutureEd\Models\Repository\SecurityLog;
 
 
 use FutureEd\Models\Core\SecurityLog;
+use FutureEd\Models\Traits\LoggerTrait;
+use Illuminate\Support\Facades\DB;
 
 class SecurityLogRepository implements SecurityLogRepositoryInterface{
+
+	use LoggerTrait;
 
 	/**
 	 * Get list of security logs.
@@ -88,6 +92,34 @@ class SecurityLogRepository implements SecurityLogRepositoryInterface{
 			'total' => $count,
 			'record' => $log->get()->toArray()
 		];
+
+	}
+
+	/**
+	 * Add security log.
+	 * @param $data
+	 */
+	public function addSecurityLogs($data){
+
+		DB::beginTransaction();
+
+		try{
+
+			$response =  SecurityLog::create($data);
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+
+			return 0;
+
+		}
+		DB::commit();
+
+		return $response;
 
 	}
 

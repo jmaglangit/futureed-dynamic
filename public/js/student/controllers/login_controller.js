@@ -110,6 +110,8 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 					}
 				} else if(response.data) {
 					response.data.role = Constants.STUDENT;
+					response.data.media_login = Constants.TRUE;
+					
 					$scope.user = JSON.stringify(response.data);
 					self.setActive('confirm_success');
 				} 

@@ -7,4 +7,6 @@ interface SecurityLogRepositoryInterface {
 
 	public function getSecurityLogs($criteria, $offset, $limit);
 
+	public function addSecurityLogs($data);
+
 }

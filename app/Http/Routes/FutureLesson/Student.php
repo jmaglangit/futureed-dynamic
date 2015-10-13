@@ -353,6 +353,10 @@
 						'as' => 'student.partials.change_password_form'
 						, 'uses' => 'FutureLesson\Student\ProfileController@change_password_form'
 					]);
+				Routes::get('/reports_form', [
+						'as' => 'student.partials.reports_form'
+						, 'uses' => 'FutureLesson\Student\ProfileController@reports_form'
+					]);
 			});
 		});
 
