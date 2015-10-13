@@ -125,6 +125,7 @@
 		            {!! Form::button('View List'
 		                , array(
 		                   'class' => 'btn btn-blue'
+		                   , 'ng-if' => 'class.tips.total'
 		                   , 'ng-click' => "class.redirectTip('')"
 		                )
 		            ) !!}
@@ -241,6 +242,7 @@
 		            {!! Form::button('View List'
 		                , array(
 		                   'class' => 'btn btn-blue'
+		                   , 'ng-if' => 'class.help.total'
 		                   , 'ng-click' => "class.redirectHelp('', '')"
 		                )
 		            ) !!}
@@ -279,6 +281,6 @@
 	</div>
 	
 	<div class="side-btn-in" ng-class="{ 'side-btn-out' : class.bool_change_class }">
-		<img src="/images/class-student/btn-slide.png" ng-class="{'flip-180' : !class.bool_change_class }" ng-click="class.click()">
+		<p ng-click="class.click()">Tips / Help</p> 
 	</div>
 </div>
