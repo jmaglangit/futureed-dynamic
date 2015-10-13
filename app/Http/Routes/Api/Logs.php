@@ -42,7 +42,7 @@ Routes::group([
 	/**
 	 * Download Log
 	 */
-	Routes::get('/error/download/{filename}',[
+	Routes::get('/error/{filename}',[
 		'uses' => 'Api\Logs\ErrorLogController@downloadErrorLog',
 		'as' => 'api.log.error.file.download'
 	]);
