@@ -76,7 +76,7 @@ class LogMiddleware {
 
 			$log_data = [
 				'id' => 0,
-				'username' => $request->server('UNIQUE_ID'),
+				'username' => ($request->server('UNIQUE_ID')) ? $request->server('UNIQUE_ID') : 'NA',
 				'page_accessed' => ($request->server('HTTP_REFERER'))
 					? $request->server('HTTP_REFERER') : $request->server('REQUEST_URI'),
 				'api_accessed' => $request->server('REQUEST_URI'),
