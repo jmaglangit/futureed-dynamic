@@ -40,6 +40,13 @@ class UserLog extends Model {
 		'updated_by'
 	];
 
+	protected $attributes = [
+		'user_id' => 0,
+		'username' => 'NA',
+		'email' => 'NA',
+		'name' => 'NA'
+	];
+
 
 	//Scopes
 

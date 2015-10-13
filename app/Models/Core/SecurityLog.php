@@ -3,6 +3,7 @@
 use FutureEd\Models\Traits\TransactionTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Session;
 
 class SecurityLog extends Model {
 

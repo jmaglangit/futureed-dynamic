@@ -9,5 +9,7 @@ interface AdminLogRepositoryInterface {
 
 	public function getAdminLogs($criteria, $offset, $limit);
 
+	public function addAdminLog($data);
+
 
 }

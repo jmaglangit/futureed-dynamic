@@ -42,7 +42,10 @@ class Kernel extends HttpKernel {
 		'api_after_student_login' => 'FutureEd\Http\Middleware\Api\AfterStudentLoginMiddleware',
 		'api_after_client_login' => 'FutureEd\Http\Middleware\Api\AfterClientLoginMiddleware',
 		'api_after_admin_login' => 'FutureEd\Http\Middleware\Api\AfterAdminLoginMiddleware',
-		'api_after_auto_login' => 'FutureEd\Http\Middleware\Api\AfterAutoLoginMiddleware'
+		'api_after_auto_login' => 'FutureEd\Http\Middleware\Api\AfterAutoLoginMiddleware',
+
+		//LOG
+		'log' => 'FutureEd\Http\Middleware\Log\LogMiddleware'
 	];
 
 }

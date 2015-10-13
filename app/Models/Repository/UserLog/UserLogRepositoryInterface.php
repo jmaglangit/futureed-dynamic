@@ -9,4 +9,6 @@ interface UserLogRepositoryInterface {
 
 	public function getUserLogs($criteria, $offset, $limit);
 
+	public function addUserLog($data);
+
 }

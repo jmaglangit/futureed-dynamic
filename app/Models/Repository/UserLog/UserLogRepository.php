@@ -4,8 +4,12 @@ namespace FutureEd\Models\Repository\UserLog;
 
 
 use FutureEd\Models\Core\UserLog;
+use FutureEd\Models\Traits\LoggerTrait;
+use Illuminate\Support\Facades\DB;
 
 class UserLogRepository implements UserLogRepositoryInterface{
+
+	use LoggerTrait;
 
 	public function getUserLog($id){
 
@@ -103,6 +107,34 @@ class UserLogRepository implements UserLogRepositoryInterface{
 			'total' => $count,
 			'record' => $log->get()->toArray()
 		];
+	}
+
+	/**
+	 * Add user log.
+	 * @param $data
+	 */
+	public function addUserLog($data){
+
+		DB::beginTransaction();
+
+		try{
+
+			$response = UserLog::create($data);
+
+		}catch(\Exception $e){
+
+			$this->errorLog($e->getMessage());
+
+			DB::rollback();
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+
+
 	}
 
 }
