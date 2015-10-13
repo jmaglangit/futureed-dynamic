@@ -1,5 +1,6 @@
 <?php namespace FutureEd\Http\Controllers\Api\Logs;
 
+use FutureEd\Http\Controllers\Api\Traits\ErrorMessageTrait;
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 use Illuminate\Http\Response;
@@ -7,6 +8,7 @@ use Illuminate\Http\Response;
 
 class LogController extends Controller {
 
+	use ErrorMessageTrait;
 	/**
 	 * Generate log report from the system.
 	 * - User Logs
@@ -16,13 +18,30 @@ class LogController extends Controller {
 
 	protected $header;
 
+	/**
+	 * @var int
+	 */
 	protected $status = Response::HTTP_OK;
 
+	/**
+	 * @var
+	 */
 	protected $information;
 
+	/**
+	 * @var
+	 */
 	protected $column_header;
 
+	/**
+	 * @var
+	 */
 	protected $rows;
+
+	/**
+	 * @var array
+	 */
+	public $messageBag = [];
 
 	/**
 	 * @return mixed
@@ -139,6 +158,53 @@ class LogController extends Controller {
 		]);
 	}
 
+
+	/**
+	 * @param $message
+	 * @return $this
+	 */
+	public function setMessageBag($message){
+		$this->messageBag = $message;
+		return $this;
+	}
+
+	/**
+	 * @return array
+	 */
+	public function getMessageBag(){
+		return $this->messageBag;
+	}
+
+	/**
+	 * @param $message
+	 */
+	public function addMessageBag($message){
+
+		if(empty($this->messageBag) && !empty($message)){
+			$this->setMessageBag([$message]);
+		} elseif(!empty($message) ) {
+			$this->messageBag = array_merge(
+				$this->getMessageBag(),
+				[$message]
+			);
+		}
+	}
+
+	/**
+	 * @param string $message
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
+	public function respondWithError($message = 'Not Found!'){
+
+		return $this->respond(
+			[
+				'status' => $this->getStatus(),
+				'errors' => $message
+			]
+		);
+
+	}
+
 	/**
 	 * Generate error response.
 	 * @param $error_code
@@ -146,12 +212,20 @@ class LogController extends Controller {
 	 */
 	public function respondErrorMessage($error_code){
 
-		return $this->respond(
-			[
-				'status' => $this->getStatus(),
-				'errors' => config('futureed-error.error_messages.'. $error_code)
-			]
-		);
+
+		if(!is_null($error_code)){
+
+			$return = $this->setErrorCode($error_code)
+				->setMessage(config('futureed-error.error_messages.' . $error_code))
+				->errorMessageCommon();
+
+
+			$this->addMessageBag($return);
+
+			return $this->respondWithError($this->getMessageBag());
+		}
 	}
+
+
 
 }
