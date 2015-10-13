@@ -5,12 +5,12 @@ ManageLogsService.$inject = ['$http'];
 
 function ManageLogsService($http) {
 	var api = {};
-	var apiUrl = '/api/';
+	var apiUrl = '/api/log/';
 
 	api.securityLogs = function(search, table) {
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url   : apiUrl + 'log/security?username=' + search.username
+			, url   : apiUrl + 'security?username=' + search.username
 				+ '&client_user_agent=' + search.client_user_agent
 				+ '&result_response=' + search.result_response
 				+ '&log_type=' + search.log_type
@@ -22,7 +22,7 @@ function ManageLogsService($http) {
 	api.adminLogs = function(search, table) {
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url   : apiUrl + 'log/admin?username=' + search.username
+			, url   : apiUrl + 'admin?username=' + search.username
 				+ '&email=' + search.email
 				+ '&name=' + search.name
 				+ '&result_response=' + search.result_response
@@ -31,6 +31,30 @@ function ManageLogsService($http) {
 				+ '&offset=' + table.offset
 		});
 	}
+
+	api.systemLogs = function() {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url   : apiUrl + 'system'
+		});
+	}
+
+	api.downloadSystemLog = function(filename) {
+		return apiUrl + 'system/' + filename;
+	}
+
+	// api.errorsLogs = function(search, table) {
+	// 	return $http({
+	// 		method 	: Constants.METHOD_GET
+	// 		, url   : apiUrl + 'log/admin?username=' + search.username
+	// 			+ '&email=' + search.email
+	// 			+ '&name=' + search.name
+	// 			+ '&result_response=' + search.result_response
+	// 			+ '&admin_type=' + search.admin_type
+	// 			+ '&limit=' + table.size
+	// 			+ '&offset=' + table.offset
+	// 	});
+	// }
 
 	return api;
 }

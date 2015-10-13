@@ -19,6 +19,8 @@ function ManageLogsController($scope, ManageLogsService, TableService, SearchSer
 		self.active_security_log = Constants.FALSE;
 		self.active_users_log = Constants.FALSE;
 		self.active_administrator_log = Constants.FALSE;
+		self.active_system_log = Constants.FALSE;
+		self.active_errors_log = Constants.FALSE;
 
 		switch(active) {
 
@@ -29,6 +31,15 @@ function ManageLogsController($scope, ManageLogsService, TableService, SearchSer
 
 			case Constants.USERS			:
 				self.active_users_log = Constants.TRUE;
+				break;
+
+			case Constants.SYSTEM			:
+				self.active_system_log = Constants.TRUE;
+				self.systemLogs();
+				break;
+
+			case Constants.ERRORS			:
+				self.active_errors_log = Constants.TRUE;
 				break;
 
 			case Constants.SECURITY			:
@@ -121,5 +132,46 @@ function ManageLogsController($scope, ManageLogsService, TableService, SearchSer
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
+	}
+
+	self.systemLogs = function() {
+		self.errors = Constants.FALSE;
+		self.records = {};
+
+		self.table.loading = Constants.TRUE;
+
+		$scope.ui_block();
+		ManageLogsService.systemLogs().success(function(response) {
+			self.table.loading = Constants.FALSE;
+
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.headers = response.data.column_header;
+					self.rows = response.data.rows;
+
+					self.records = [];
+					angular.forEach(self.rows, function(value, key) {
+						var data = {
+							'name'		: value 
+							, 'path'	: self.setDownloadLink(value)
+						}
+
+						self.records.push(data);
+
+					});
+				}
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.setDownloadLink = function(filename) {
+		return ManageLogsService.downloadSystemLog(filename);
 	}
 }
