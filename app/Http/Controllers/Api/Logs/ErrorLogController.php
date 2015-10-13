@@ -8,8 +8,7 @@ use Illuminate\Support\Facades\Storage;
 class ErrorLogController extends LogController {
 
 	/**
-	 * Get error log files.
-	 * @param Filesystem $filesystem
+	 * Get list of error logs.
 	 * @return \Illuminate\Http\Response
 	 */
 	public function getErrorLogs(){
@@ -38,13 +37,34 @@ class ErrorLogController extends LogController {
 	}
 
 	/**
-	 * Download laravel log file.
+	 * Download error log.
 	 * @param $filename
 	 * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
 	 */
-	public function downloadErrorLog($filename){
+	public function downloadErrorLog($log_file){
 
-		return response()->download(storage_path() . '/logs/' . $filename);
+		//check if in the list
+		$storage = Storage::disk('logs')->files();
+
+		$laravel_logs = [];
+		foreach($storage as $files => $filename){
+
+			//parse if laravel
+			if(preg_match('/^laravel/',$filename)){
+
+				$laravel_logs = array_merge($laravel_logs,[$filename]);
+
+			}
+		}
+
+		//check if file in the list
+		if(in_array($log_file,$laravel_logs)){
+
+			return response()->download(storage_path() . '/logs/' . $log_file);
+		}else {
+
+			return $this->respondErrorMessage(2059);
+		}
 
 	}
 
