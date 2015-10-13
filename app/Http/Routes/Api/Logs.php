@@ -40,11 +40,27 @@ Routes::group([
 	]);
 
 	/**
-	 * Download Log
+	 * Download error Log
 	 */
 	Routes::get('/error/{filename}',[
 		'uses' => 'Api\Logs\ErrorLogController@downloadErrorLog',
 		'as' => 'api.log.error.file.download'
+	]);
+
+	/**
+	 * System log
+	 */
+	Routes::get('/system',[
+		'uses' => 'Api\Logs\SystemLogController@getSystemLogs',
+		'as' => 'api.log.system.files'
+	]);
+
+	/**
+	 * Download system Log
+	 */
+	Routes::get('/system/{filename}',[
+		'uses' => 'Api\Logs\SystemLogController@downloadSystemLog',
+		'as' => 'api.log.system.file.download'
 	]);
 
 
