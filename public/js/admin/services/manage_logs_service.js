@@ -43,18 +43,16 @@ function ManageLogsService($http) {
 		return apiUrl + 'system/' + filename;
 	}
 
-	// api.errorsLogs = function(search, table) {
-	// 	return $http({
-	// 		method 	: Constants.METHOD_GET
-	// 		, url   : apiUrl + 'log/admin?username=' + search.username
-	// 			+ '&email=' + search.email
-	// 			+ '&name=' + search.name
-	// 			+ '&result_response=' + search.result_response
-	// 			+ '&admin_type=' + search.admin_type
-	// 			+ '&limit=' + table.size
-	// 			+ '&offset=' + table.offset
-	// 	});
-	// }
+	api.errorLogs = function() {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url   : apiUrl + 'error'
+		});
+	}
+
+	api.downloadErrorLog = function(filename) {
+		return apiUrl + 'error/' + filename;
+	}
 
 	return api;
 }

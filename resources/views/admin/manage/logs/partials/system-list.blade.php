@@ -21,7 +21,7 @@
 				<thead>
 			        <tr>
 			            <th>Log Files</th>
-			            <th>Action</th>
+			            <th>Download</th>
 			        </tr>
 		        </thead>
 		        <tbody>
@@ -29,7 +29,7 @@
 			            <td>{! record.name !}</td>
 			            <td>
 	            			<a target="_self" href="{! record.path !}" 
-	            				tooltip="Download {! record.name !}"
+	            				tooltip="{! record.name !}"
 	            				tooltip-placement="top"
 	            				tooltip-trigger="mouseenter"
 	            				download="{! record.name !}">
