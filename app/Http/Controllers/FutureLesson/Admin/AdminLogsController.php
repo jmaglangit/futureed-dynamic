@@ -19,4 +19,12 @@ class AdminLogsController extends Controller {
 	public function user_list_form() {
 		return view('admin.manage.logs.partials.user-list');
 	}
+
+	public function system_list_form() {
+		return view('admin.manage.logs.partials.system-list');
+	}
+
+	public function errors_list_form() {
+		return view('admin.manage.logs.partials.errors-list');
+	}
 }

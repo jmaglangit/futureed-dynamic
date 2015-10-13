@@ -676,6 +676,14 @@
 					'as' => 'admin.manage.logs.partials.user_list_form'
 					, 'uses' => 'FutureLesson\Admin\AdminLogsController@user_list_form'
 				]);
+			Routes::get('/system-list', [
+					'as' => 'admin.manage.logs.partials.system_list_form'
+					, 'uses' => 'FutureLesson\Admin\AdminLogsController@system_list_form'
+				]);
+			Routes::get('/errors-list', [
+					'as' => 'admin.manage.logs.partials.errors_list_form'
+					, 'uses' => 'FutureLesson\Admin\AdminLogsController@errors_list_form'
+				]);
 		});
 
 		Routes::group(['prefix' => 'partials'], function() {

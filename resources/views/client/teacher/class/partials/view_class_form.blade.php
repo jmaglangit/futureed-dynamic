@@ -17,7 +17,8 @@
         </div>
     </div>
 
-	<div class="module-container">
+	<div class="col-xs-12 search-container">
+		<div class="title-mid"></div>
 		{!! Form::open(
 			array(
 				'id' => 'class_detail_form'
@@ -152,30 +153,30 @@
 			<i class="fa fa-plus-square"></i> Add Student
 		</button>
 
-		<div class="title-mid">
-			Student List
-		</div>
-
-		<div class="size-container">
-			{!! Form::select('size'
-				, array(
-					  '10' => '10'
-					, '20' => '20'
-					, '50' => '50'
-					, '100' => '100'
-				)
-				, '10'
-				, array(
-					'ng-model' => 'class.table.size'
-					, 'ng-change' => 'class.paginateBySize()'
-					, 'ng-if' => "class.students.length"
-					, 'class' => 'form-control paginate-size pull-right'
-				)
-			) !!}
-		</div>
-
 		<div class="list-container" ng-cloak>
-			<table id="student-list" class="table table-striped table-bordered">
+			<div class="col-xs-6 title-mid">
+				Student List
+			</div>
+
+			<div class="col-xs-6 size-container">
+				{!! Form::select('size'
+					, array(
+						  '10' => '10'
+						, '20' => '20'
+						, '50' => '50'
+						, '100' => '100'
+					)
+					, '10'
+					, array(
+						'ng-model' => 'class.table.size'
+						, 'ng-change' => 'class.paginateBySize()'
+						, 'ng-if' => "class.students.length"
+						, 'class' => 'form-control paginate-size pull-right'
+					)
+				) !!}
+			</div>
+
+			<table class="col-xs-12 table table-striped table-bordered">
 				<thead>
 			        <tr>
 			            <th>Student's Name</th>

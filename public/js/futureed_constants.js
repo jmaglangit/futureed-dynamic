@@ -219,6 +219,8 @@ var Constants = {
 	, SECURITY					: "Security"
 	, ADMINISTRATOR				: "Administrator"
 	, USERS						: "Users"
+	, ERRORS					: "Errors"
+	, SYSTEM					: "System"
 
 	, REPORT_CARD				: "Report Card"
 	, SUMMARY_PROGRESS			: "Summary Progress"
