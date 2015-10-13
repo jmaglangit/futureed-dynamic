@@ -5,7 +5,7 @@
 		</div>
 	</div>
 
-	<div class="col-xs-12 success-container" ng-if="payment.errors || payment.success">
+	<div class="col-xs-12" ng-if="payment.errors || payment.success">
 		<div class="alert alert-error" ng-if="payment.errors">
 			<p ng-repeat="error in payment.errors track by $index">
 				{! error !}
@@ -72,12 +72,12 @@
 			<i class="fa fa-plus-square"></i> Add Payment
 		</button>
 
-		<div class="title-mid">
-			Payment List
-		</div>
-
 		<div class="list-container" ng-cloak>
-			<div class="size-container">
+			<div class="col-xs-6 title-mid">
+				Payment List
+			</div>
+
+			<div class="col-xs-6 size-container">
 				{!! Form::select('size'
 					, array(
 						  '10' => '10'
@@ -95,7 +95,7 @@
 				) !!}
 			</div>
 
-			<table class="table table-striped table-bordered table-responsive">
+			<table class="col-xs-12 table table-striped table-bordered table-responsive">
 				<thead>
 			        <tr>
 			            <th>Order #</th>
@@ -104,7 +104,7 @@
 			            <th>Total # of Seats</th>
 			            <th>Total Price</th>
 			            <th>Payment Status</th>
-			            <th>Action</th>
+			            <th ng-if="payment.records.length">Action</th>
 			        </tr>
 			    </thead>
 

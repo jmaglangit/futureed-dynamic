@@ -11,8 +11,8 @@
 				<h4 class="panel-title">
 					Module Details
 
-					<span class="pull-right" ng-if="!module.detail_hidden"><i class="fa fa-angle-double-down"></i></span>
-					<span class="pull-right" ng-if="module.detail_hidden"><i class="fa fa-angle-double-up"></i></span>
+					<span class="pull-right"><i class="fa"
+						ng-class="{ 'fa-angle-double-up' : module.detail_hidden,  'fa-angle-double-down' : !module.detail_hidden }"></i></span>
 				</h4>
 			</div>
 
@@ -299,9 +299,8 @@
 				<h4 class="panel-title">
 					Module Contents
 
-					<span class="pull-right" ng-if="!module.content_hidden"><i class="fa fa-angle-double-down"></i></span>
-					
-					<span class="pull-right" ng-if="module.content_hidden"><i class="fa fa-angle-double-up"></i></span>
+					<span class="pull-right"><i class="fa"
+						ng-class="{ 'fa-angle-double-up' : module.content_hidden,  'fa-angle-double-down' : !module.content_hidden }"></i></span>
 				</h4>
 			</div>
 

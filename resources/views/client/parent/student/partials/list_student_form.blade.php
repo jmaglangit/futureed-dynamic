@@ -4,7 +4,7 @@
 			<span>Student Management</span>
 		</div>
 	</div>
-	<div class="alert-container col-xs-12" ng-if="student.errors || student.success">
+	<div class="col-xs-12" ng-if="student.errors || student.success">
 		<div class="alert alert-error" ng-if="student.errors">
             <p ng-repeat="error in student.errors track by $index" > 
                 {! error !}
@@ -75,11 +75,11 @@
 		</button>
 
 		<div class="list-container" ng-cloak>
-			<div class="title-mid">
+			<div class="col-xs-6 title-mid">
 				Student List
 			</div>
 
-			<div class="size-container">
+			<div class="col-xs-6 size-container">
 				{!! Form::select('size'
 					, array(
 						  '10' => '10'
@@ -97,7 +97,7 @@
 				) !!}
 			</div>
 
-			<table class="table table-striped table-bordered">
+			<table class="col-xs-12 table table-striped table-bordered">
 				<thead>
 			        <tr>
 			            <th>Name</th>

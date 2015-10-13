@@ -69,18 +69,18 @@
 			{!! Form::close() !!}
 		</div>
 	</div>
-
-	<button class="btn btn-blue btn-semi-medium margin-0-30" ng-click="teacher.setActive('add')">
-		<i class="fa fa-plus-square"></i> Teacher Invitation
-	</button>
 	
 	<div class="col-xs-12 table-container" ng-init="teacher.listRecords()">
+		<button class="btn btn-blue btn-semi-medium" ng-click="teacher.setActive('add')">
+			<i class="fa fa-plus-square"></i> Teacher Invitation
+		</button>
+
 		<div class="list-container" ng-cloak>
-			<div class="title-mid">
+			<div class="col-xs-6 title-mid">
 				Teacher List
 			</div>
 
-			<div class="size-container">
+			<div class="col-xs-6 size-container">
 				{!! Form::select('size'
 					, array(
 						  '10' => '10'
@@ -98,7 +98,7 @@
 				) !!}
 			</div>
 
-			<table id="teacher-list" class="table table-striped table-bordered">
+			<table class="col-xs-12 table table-striped table-bordered">
 				<thead>
 					<tr>
 						<th class="width-small">Name</th>

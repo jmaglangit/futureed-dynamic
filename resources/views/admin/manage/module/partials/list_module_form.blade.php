@@ -78,38 +78,38 @@
 			{!! Form::close() !!}
 		</div>
 	</div>
+
 	<div class="clearfix"></div>
-	<button class="btn btn-blue btn-small margin-0-30" ng-click="module.setActive('add')">
-		<i class="fa fa-plus-square"></i> Add Module
-	</button>
-
-	<div class="module-container">
-		<div class="title-mid">
-			module List
-		</div>
-
-		<div class="size-container">
-			{!! Form::select('size'
-				, array(
-					  '10' => '10'
-					, '20' => '20'
-					, '50' => '50'
-					, '100' => '100'
-				)
-				, '10'
-				, array(
-					'ng-model' => 'module.table.size'
-					, 'ng-change' => 'module.paginateBySize()'
-					, 'ng-if' => "module.records.length"
-					, 'class' => 'form-control paginate-size pull-right'
-				)
-			) !!}
-		</div>
-	</div>
 
 	<div class="col-xs-12 table-container">
+		<button class="btn btn-blue btn-small" ng-click="module.setActive('add')">
+			<i class="fa fa-plus-square"></i> Add Module
+		</button>
+
 		<div class="list-container" ng-cloak>
-			<table id="module-list" class="table table-striped table-bordered">
+			<div class="col-xs-6 title-mid">
+				module List
+			</div>
+
+			<div class="col-xs-6 size-container">
+				{!! Form::select('size'
+					, array(
+						  '10' => '10'
+						, '20' => '20'
+						, '50' => '50'
+						, '100' => '100'
+					)
+					, '10'
+					, array(
+						'ng-model' => 'module.table.size'
+						, 'ng-change' => 'module.paginateBySize()'
+						, 'ng-if' => "module.records.length"
+						, 'class' => 'form-control paginate-size pull-right'
+					)
+				) !!}
+			</div>
+
+			<table class="col-xs-12 table table-striped table-bordered">
 				<thead>
 			        <tr>
 			            <th>Module</th>
