@@ -77,6 +77,7 @@ class RenewSubscriptionController extends ApiController {
 		$data['payment_status'] = config('futureed.pending');
 		$data['seats_taken'] = $invoice['order']['seats_taken'];
 		$data['total_amount'] = 0;
+		$data['renew'] = 1;
 
 
 		//get the last inputted order
