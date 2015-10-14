@@ -225,6 +225,18 @@ var Constants = {
 	, REPORT_CARD				: "Report Card"
 	, SUMMARY_PROGRESS			: "Summary Progress"
 
+	, MSG_CREATED				: function(noun) {
+		return noun + " created.";
+	}
+
+	, MSG_UPDATED				: function(noun) {
+		return noun + " updated.";
+	}
+
+	, MSG_DELETED				: function(noun) {
+		return noun + " deleted.";
+	}
+
 	, URL_FORGOT_PASSWORD		: function(user_type) {
 		return '/' + user_type + '/password/forgot';
 	}

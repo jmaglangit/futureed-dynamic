@@ -9,7 +9,7 @@
   		
   		<div template-directive template-url="{!! route('admin.partials.base_url') !!}"></div>
 
-		<div class="wrapr">
+		<div class="wrapr" ng-init="client.setActive()">
 			<div class="client-nav side-nav">
 				@include('admin.partials.dshbrd-side-nav')
 			</div>	        
@@ -26,7 +26,10 @@
 @stop
 	
 @section('scripts')
-	{!! Html::script('/js/admin/manage_client.js')!!}
 	{!! Html::script('/js/admin/controllers/manage_client_controller.js')!!}
 	{!! Html::script('/js/admin/services/manage_client_service.js')!!}
+	
+	{!! Html::script('/js/common/table_service.js')!!}
+	{!! Html::script('/js/common/search_service.js')!!}
+	{!! Html::script('/js/common/validation_service.js')!!}
 @stop

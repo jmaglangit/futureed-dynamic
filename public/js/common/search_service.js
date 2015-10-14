@@ -12,6 +12,7 @@ function SearchService() {
 					, api_accessed			: 	Constants.EMPTY_STR
 
 					, client_id				: 	Constants.EMPTY_STR
+					, client_role			: 	Constants.EMPTY_STR
 					, client_user_agent		: 	Constants.EMPTY_STR
 					, country_id			: 	Constants.EMPTY_STR
 					, class_id				: 	Constants.EMPTY_STR
@@ -40,6 +41,7 @@ function SearchService() {
 					, request_answer_status	: 	Constants.EMPTY_STR
 					, request_status		: 	Constants.EMPTY_STR
 					, role					: 	Constants.EMPTY_STR
+					, school				: 	Constants.EMPTY_STR
 					, school_code			: 	Constants.EMPTY_STR
 					, question_status		: 	Constants.EMPTY_STR
 					, status				: 	Constants.EMPTY_STR
