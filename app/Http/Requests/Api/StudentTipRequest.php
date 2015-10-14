@@ -29,6 +29,7 @@ class StudentTipRequest extends ApiRequest {
 					'title' => 'required|string|max:128',
 					'content' => 'required|string|max:128',
 					'student_id' => 'required|integer',
+					'class_id' => 'required|integer'
 				];
 				break;
 		}
@@ -42,6 +43,8 @@ class StudentTipRequest extends ApiRequest {
 			'student_id.integer' => 'Student is invalid.',
 			'content.required' => 'The description field is required.',
 			'content.string' => 'The description field is invalid.',
+			'class_id.required' => 'Class is required',
+			'class_id.integer' => 'Class is invalid'
 		];
 	}
 
