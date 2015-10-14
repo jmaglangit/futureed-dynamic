@@ -63,7 +63,7 @@ function ManageLogsController($scope, ManageLogsService, TableService, SearchSer
 		self.list();
 	}
 
-	self.clearFnc = function() {
+	self.clearFnc = function(event) {
 		event = getEvent(event);
 		event.preventDefault();
 
