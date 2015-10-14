@@ -1,11 +1,11 @@
 angular.module('futureed.services')
-	.factory('manageSubjectAreaService', manageSubjectAreaService);
+	.factory('ManageSubjectAreaService', ManageSubjectAreaService);
 
-manageSubjectAreaService.$inject = ['$http'];
+ManageSubjectAreaService.$inject = ['$http'];
 
-function manageSubjectAreaService($http) {
+function ManageSubjectAreaService($http) {
 	var api = {};
-	var url = '/api/v1/';
+	var apiUrl = '/api/v1/';
 
 	/**
 	* Get Subject Area List
@@ -17,7 +17,7 @@ function manageSubjectAreaService($http) {
 	api.list = function(search, table) {
 		return $http({
 			  method : Constants.METHOD_GET
-			, url 	 : url 
+			, url 	 : apiUrl 
 				+ 'subject-area?subject_id=' + search.subject_id 
 				+ '&name=' + search.name
 				+ '&limit=' + table.size
@@ -35,7 +35,7 @@ function manageSubjectAreaService($http) {
 		return $http({
 			method 	: Constants.METHOD_POST
 			, data	: data
-			, url 	 : url + 'subject-area'
+			, url 	 : apiUrl + 'subject-area'
 		});
 	}
 
@@ -48,7 +48,7 @@ function manageSubjectAreaService($http) {
 	api.details = function(id) {
 		return $http({
 			  method : Constants.METHOD_GET
-			, url 	 : url + 'subject-area/' + id
+			, url 	 : apiUrl + 'subject-area/' + id
 		});
 	}
 
@@ -62,7 +62,7 @@ function manageSubjectAreaService($http) {
 		return $http({
 			  method : Constants.METHOD_PUT
 			, data	 : data
-			, url 	 : url + 'subject-area/' + data.id
+			, url 	 : apiUrl + 'subject-area/' + data.id
 		});
 	}
 
@@ -75,7 +75,7 @@ function manageSubjectAreaService($http) {
 	api.delete_area = function(id) {
 		return $http({
 			  method : Constants.METHOD_DELETE
-			, url 	 : url + 'subject-area/' + id
+			, url 	 : apiUrl + 'subject-area/' + id
 		});
 	}
 

@@ -256,12 +256,6 @@
 							, 'middleware' => 'admin'
 							, 'uses' => $subject_controller . '@delete_subject_form'
 						]);
-					Routes::get('/subject_side_nav',
-						[
-							'as' => 'admin.manage.subject.partials.subject_side_nav'
-							, 'middleware' => 'admin'
-							, 'uses' => $subject_controller . '@subject_side_nav'
-						]);
 
 					/**
 					* CRUD Subject Areas

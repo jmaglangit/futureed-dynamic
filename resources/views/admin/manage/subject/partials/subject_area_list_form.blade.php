@@ -1,23 +1,27 @@
-<div ng-if="subject_area_list || area.active_list">
+<div ng-if="subject.active_view && area.active_list">
 	<div class="content-title">
 		<div class="title-main-content">
 			<span>Subject Area Management</span>
 		</div>
 	</div>
 
-	<div class="col-xs-12 success-container" ng-if="area.delete_area.success">
-            <div class="alert alert-success">
-                <p>{! area.delete_area.success !}</p>
-            </div>
-    </div>
+	<div class="col-xs-12 success-container" ng-if="area.errors || area.success">
+		<div class="alert alert-error" ng-if="area.errors">
+			<p ng-repeat="error in area.errors track by $index">
+				{! error !}
+			</p>
+		</div>
 
-	<div class="col-xs-12 padding-0-30">
-		<div class="title-mid">
-			Search
+		<div class="alert alert-success" ng-if="area.success">
+			<p>{! area.success !}</p>
 		</div>
 	</div>
 
 	<div class="col-xs-12 search-container">
+		<div class="title-mid">
+			Search
+		</div>
+
 		<div class="form-search">
 			{!! Form::open(
 				array('id' => 'search_form'
@@ -57,11 +61,11 @@
 	</div>
 	 
 	<div class="col-xs-12 table-container">
-		<button class="btn btn-blue btn-semi-medium" ng-click="area.setActive('add_subject_area')">
+		<button class="btn btn-blue btn-semi-medium" ng-click="area.setActive(futureed.ACTIVE_ADD)">
 			<i class="fa fa-plus-square"></i> Add Subject Area
 		</button>
 
-		<button class="btn btn-gold btn-small pull-right" ng-click="area.setSubjectList(); subject.setManageSubjectActive()">
+		<button class="btn btn-gold btn-semi-medium pull-right" ng-click="subject.setActive()">
 			Back to Subject
 		</button>
 
@@ -97,24 +101,24 @@
 			        </tr>
 		        </thead>
 		        <tbody>
-			        <tr ng-repeat="a in area.records">
-			            <td>{! a.code !}</td>
-			            <td>{! a.name !}</td>
+			        <tr ng-repeat="record in area.records">
+			            <td>{! record.code !}</td>
+			            <td>{! record.name !}</td>
 			            <td>
 			            	<div class="row">
 			            		<div class="col-xs-4">
 			            			<i class="fa" 
-			            				ng-class="{ 'fa-ban error-icon' : a.status == futureed.DISABLED, 'fa-check-circle-o success-icon' : a.status == futureed.ENABLED }"
-			            				tooltip="{! a.status !}"
+			            				ng-class="{ 'fa-ban error-icon' : record.status == futureed.DISABLED, 'fa-check-circle-o success-icon' : record.status == futureed.ENABLED }"
+			            				tooltip="{! record.status !}"
 			            				tooltip-placement="top"
 			            				tooltip-trigger="mouseenter"></i>
 			            		</div>
 			            		<div class="col-xs-4">
-			            			<a href="" ng-click="area.details(a.id)"><span><i class="fa fa-pencil"></i></span></a>
+			            			<a href="" ng-click="area.setActive(futureed.ACTIVE_EDIT, record.id)"><span><i class="fa fa-pencil"></i></span></a>
 			            		</div>
 			            		
 			            		<div class="col-xs-4">
-			            			<a href="" ng-click="area.confirmDelete(a.id)"><span><i class="fa fa-trash"></i></span></a>
+			            			<a href="" ng-click="area.confirmDelete(record.id)"><span><i class="fa fa-trash"></i></span></a>
 			            		</div>	
 			            	</div>
 			            </td>
