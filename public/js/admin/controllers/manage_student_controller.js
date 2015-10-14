@@ -1,9 +1,9 @@
 angular.module('futureed.controllers')
 	.controller('ManageStudentController', ManageStudentController);
 
-ManageStudentController.$inject = ['$scope', '$filter', 'manageStudentService', 'apiService',  'TableService', 'SearchService'];
+ManageStudentController.$inject = ['$scope', '$filter', 'manageStudentService', 'apiService',  'TableService', 'SearchService', 'ValidationService'];
 
-function ManageStudentController($scope, $filter, manageStudentService, apiService, TableService, SearchService) {
+function ManageStudentController($scope, $filter, manageStudentService, apiService, TableService, SearchService, ValidationService) {
 	var self = this;
 
 	TableService(self);
@@ -12,11 +12,12 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 	SearchService(self);
 	self.searchDefaults();
 
-	self.delete = {};
-	self.user_type = Constants.STUDENT;
+	ValidationService(self);
+	self.default();
 
 	self.setActive = function(active, id, flag) {
 		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
 		self.fields = [];
 
 		self.searchDefaults();
@@ -41,7 +42,6 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 
 		switch(active) {
 			case Constants.ACTIVE_EDIT 	:
-				self.success = Constants.FALSE;
 				self.active_edit = Constants.TRUE;
 				self.tableDefaults();
 				self.viewStudent(id);
@@ -54,7 +54,6 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 				
 			case Constants.ACTIVE_ADD 	:
 				self.record = {};
-				self.success = Constants.FALSE;
 				self.active_add = Constants.TRUE;
 				break;
 
@@ -65,7 +64,6 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 				break;
 
 			case 'edit_reward' :
-				self.success = Constants.FALSE;
 				self.active_edit_reward = Constants.TRUE;
 					if(flag == 'points'){
 						self.getPointDetail(id)
@@ -80,7 +78,6 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 				break;
 
 			default 					:
-				self.success = Constants.FALSE;
 				self.active_list = Constants.TRUE;
 				self.list();
 				break;
@@ -141,68 +138,6 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 		}).error(function(response){
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
-		});
-	}
-
-	self.checkUsernameAvailability = function(username) {
-		self.errors = Constants.FALSE;
-		self.validation.u_loading = Constants.TRUE;
-		self.validation.u_error = Constants.FALSE;
-		self.validation.u_success = Constants.FALSE;
-
-		apiService.validateUsername(username, self.user_type).success(function(response) {
-			self.validation.u_loading = Constants.FALSE;
-
-			if(angular.equals(response.status, Constants.STATUS_OK)) {
-				if(response.errors) {
-					self.validation.u_error = response.errors[0].message;
-					
-					if(angular.equals(self.validation.u_error, Constants.MSG_U_NOTEXIST)) {
-						self.validation.u_error = Constants.FALSE;
-						self.validation.u_success = Constants.MSG_U_AVAILABLE;
-					}
-				} else if(response.data) {
-					if(self.record.id != response.data.id) {
-						self.validation.u_error = Constants.MSG_U_EXIST;
-					} else {
-						self.validation.u_success = Constants.TRUE;
-					}
-				}
-			}
-		}).error(function(response) {
-			self.validation.u_loading = Constants.FALSE;
-			self.errors = $scope.internalError();
-		});
-	}
-
-	self.checkEmailAvailability = function(email) {
-		self.errors = Constants.FALSE;
-		self.validation.e_loading = Constants.TRUE;
-		self.validation.e_error = Constants.FALSE;
-		self.validation.e_success = Constants.FALSE;
-
-		apiService.validateEmail(email, self.user_type).success(function(response) {
-			self.validation.e_loading = Constants.FALSE;
-
-			if(angular.equals(response.status, Constants.STATUS_OK)) {
-				if(response.errors) {
-					self.validation.e_error = response.errors[0].message;
-
-					if(angular.equals(self.validation.e_error, Constants.MSG_EA_NOTEXIST)) {
-						self.validation.e_error = Constants.FALSE;
-						self.validation.e_success = Constants.TRUE;
-					}
-				} else if(response.data) {
-					if(self.record.id != response.data.id) {
-						self.validation.e_error = Constants.MSG_EA_EXIST;
-					} else {
-						self.validation.e_success = Constants.TRUE;
-					}
-				}
-			}
-		}).error(function(response) {
-			self.validation.e_loading = Constants.FALSE;
-			self.errors = $scope.internalError();
 		});
 	}
 
@@ -285,8 +220,8 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 		            	$("div.birth-date-wrapper select").addClass("required-field");
 		            }
 				} else if(response.data) {
-					self.success = "Successfully added new student user.";
-					self.record = {};
+					self.setActive(Constants.ACTIVE_ADD);
+					self.success = Constants.MSG_CREATED("Account");
 				}
 			}
 			$scope.ui_unblock();
@@ -334,16 +269,14 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 		})
 	}
 
-	/**
-	*@return id
-	*/
-	self.saveEdit = function() {
+	self.update = function() {
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
+
 		self.schools = Constants.FALSE;
 		self.validation = {};
-		
 		self.fields = [];
+
 		$("div.birth-date-wrapper select").removeClass("required-field");
 
 		var birth_date = $("input#birth_date").val();
@@ -363,8 +296,8 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 		            	$("div.birth-date-wrapper select").addClass("required-field");
 		            }
 				} else if(response.data) {
-					self.success = "Successfully updated this student user.";
 					self.setActive(Constants.ACTIVE_VIEW, self.record.id);
+					self.success = Constants.MSG_UPDATED("Account");
 				}
 			}
 
@@ -379,8 +312,9 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
 
-		self.delete.id = id;
-		self.delete.confirm = Constants.TRUE;
+		self.record = {};
+		self.record.id = id;
+		self.record.confirm = Constants.TRUE;
 
 		$("#delete_student_modal").modal({
 	        backdrop: 'static',
@@ -391,13 +325,13 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 
 	self.deleteStudent = function(){
 		$scope.ui_block();
-		manageStudentService.deleteStudent(self.delete.id).success(function(response){
+		manageStudentService.deleteStudent(self.record.id).success(function(response){
 			if(angular.equals(response.status,Constants.STATUS_OK)){
 				if(response.errors){
 					self.errors = $scope.errorHandler(response.errors);
 				}else if(response.data){
-					self.success = 'Student ' + Constants.DELETE_SUCCESS;
 					self.setActive(Constants.ACTIVE_LIST);
+					self.success = Constants.MSG_DELETED("Account");
 				}
 			}
 			$scope.ui_unblock();
@@ -707,7 +641,7 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 
 		$("#birth_date").dateDropdowns(options);
 
-		if(self.active_edit) {
+		if(self.active_edit || self.active_add) {
 			$(".day, .month, .year").prop('disabled', false);
 		}else {
 			$(".day, .month, .year").prop('disabled', true);

@@ -12,10 +12,10 @@
 			</p>
 		</div>
 
-        <div class="alert alert-success" ng-if="student.success">
-            <p>{! student.success !}</p>
-        </div>
-    </div>
+		<div class="alert alert-success" ng-if="student.success">
+			<p>{! student.success !}</p>
+		</div>
+	</div>
 
 	<div class="col-xs-12 search-container">
 		<div class="title-mid">
@@ -69,7 +69,7 @@
 	</div>
 
 	<div class="col-xs-12 table-container">
-		<button class="btn btn-blue btn-small" ng-click="student.setActive(futureed.ACTIVE_ADD)">
+		<button class="btn btn-blue btn-semi-medium" ng-click="student.setActive(futureed.ACTIVE_ADD)">
 			<i class="fa fa-plus-square"></i> Add Student
 		</button>
 
@@ -98,44 +98,44 @@
 
 			<table class="col-xs-12 table table-striped table-bordered">
 				<thead>
-			        <tr>
-			            <th>Name</th>
-			            <th>Email</th>
-			            <th>Points</th>
-			            <th ng-if="student.records.length">Actions</th>
-			        </tr>
-			    </thead>
+					<tr>
+						<th>Name</th>
+						<th>Email</th>
+						<th>Points</th>
+						<th ng-if="student.records.length">Actions</th>
+					</tr>
+				</thead>
 
-		        <tbody>
-		        <tr ng-repeat="record in student.records">
-		            <td>{! record.user.name !}</td>
-		            <td>{! record.user.email !}</td>
-		            <td>{! record.points !}</td>
-		            <td ng-if="student.records.length">
-		            	<div class="row">
-		            		<div class="col-xs-4">
-	    						<a href="" ng-click="student.setActive(futureed.ACTIVE_VIEW, record.id)"><span><i class="fa fa-eye"></i></span></a>
-	    					</div>
-	    					<div class="col-xs-4">
-	    						<a href="" ng-click="student.setActive(futureed.ACTIVE_EDIT, record.id)"><span><i class="fa fa-pencil"></i></span></a>
-	    					</div>
-	    					<div class="col-xs-4">
-	    						<a href="" ng-click="student.confirmDelete(record.id)"><span><i class="fa fa-trash"></i></span></a>
-	    					</div>
-		            	</div>
-		            </td>
-		        </tr>
-		        <tr class="odd" ng-if="!student.records.length && !student.table.loading">
-		        	<td valign="top" colspan="7">
-		        		No records found
-		        	</td>
-		        </tr>
-		        <tr class="odd" ng-if="student.table.loading">
-		        	<td valign="top" colspan="7">
-		        		Loading...
-		        	</td>
-		        </tr>
-		        </tbody>
+				<tbody>
+				<tr ng-repeat="record in student.records">
+					<td>{! record.user.name !}</td>
+					<td>{! record.user.email !}</td>
+					<td>{! record.points !}</td>
+					<td ng-if="student.records.length">
+						<div class="row">
+							<div class="col-xs-4">
+								<a href="" ng-click="student.setActive(futureed.ACTIVE_VIEW, record.id)"><span><i class="fa fa-eye"></i></span></a>
+							</div>
+							<div class="col-xs-4">
+								<a href="" ng-click="student.setActive(futureed.ACTIVE_EDIT, record.id)"><span><i class="fa fa-pencil"></i></span></a>
+							</div>
+							<div class="col-xs-4">
+								<a href="" ng-click="student.confirmDelete(record.id)"><span><i class="fa fa-trash"></i></span></a>
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr class="odd" ng-if="!student.records.length && !student.table.loading">
+					<td valign="top" colspan="7">
+						No records found
+					</td>
+				</tr>
+				<tr class="odd" ng-if="student.table.loading">
+					<td valign="top" colspan="7">
+						Loading...
+					</td>
+				</tr>
+				</tbody>
 			</table>
 
 			<div class="pull-right" ng-if="student.records.length">
