@@ -118,13 +118,6 @@
 				Routes::group(['prefix' => 'partials'], function() {
 					$manage_client_controller = 'FutureLesson\Admin\ManageClientController';
 
-					Routes::get('/side_nav', [
-						  'as' => 'admin.manage.client.partials.side_nav'
-						, 'middleware' => 'admin'
-						, 'uses' => $manage_client_controller . '@side_nav'
-					]);
-
-
 					Routes::get('/list_client_form', [
 						  'as' => 'admin.manage.client.partials.list_client_form'
 						, 'middleware' => 'admin'
