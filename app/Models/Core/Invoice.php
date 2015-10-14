@@ -12,11 +12,39 @@ class Invoice extends Model {
 
 	protected $table = 'invoices';
 
-	protected $dates = ['deleted_at'];
+	protected $dates = [
+		'deleted_at',
+		'created_at',
+		'updated_at'
+	];
 
-	protected $fillable = ['order_no', 'invoice_date', 'invoice_no', 'client_id', 'client_name', 'date_start', 'date_end', 'seats_total', 'discount_type', 'discount_id', 'discount', 'total_amount', 'subscription_id', 'payment_status', 'student_id', 'student_name'];
+	protected $fillable = [
+		'order_no',
+		'invoice_date',
+		'invoice_no',
+		'client_id',
+		'client_name',
+		'date_start',
+		'date_end',
+		'seats_total',
+		'discount_type',
+		'discount_id',
+		'discount',
+		'total_amount',
+		'subscription_id',
+		'payment_status',
+		'student_id',
+		'student_name',
+		'renew'
+	];
 
-	protected $hidden = ['created_by', 'updated_by', 'created_at', 'updated_at', 'deleted_at'];
+	protected $hidden = [
+		'created_by',
+		'updated_by',
+		'created_at',
+		'updated_at',
+		'deleted_at'
+	];
 
 	protected $attributes = [
 		'client_id' => 0,
@@ -24,7 +52,8 @@ class Invoice extends Model {
 		'discount_id' => 0,
 		'discount' => 0,
 		'created_by' => 1,
-		'updated_by' => 1
+		'updated_by' => 1,
+		'renew' => 0
 	];
 
 	//-------------relationships
