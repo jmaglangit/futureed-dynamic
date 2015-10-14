@@ -64,7 +64,7 @@ function ManageLogsController($scope, ManageLogsService, TableService, SearchSer
 		self.list();
 	}
 
-	self.clearFnc = function() {
+	self.clearFnc = function(event) {
 		event = getEvent(event);
 		event.preventDefault();
 
@@ -100,6 +100,7 @@ function ManageLogsController($scope, ManageLogsService, TableService, SearchSer
 				} else if(response.data) {
 					self.headers = response.data.column_header;
 					self.records = response.data.rows.record;
+					self.updatePageCount(response.data.rows);
 				}
 			}
 
@@ -126,6 +127,7 @@ function ManageLogsController($scope, ManageLogsService, TableService, SearchSer
 				} else if(response.data) {
 					self.headers = response.data.column_header;
 					self.records = response.data.rows.record;
+					self.updatePageCount(response.data.rows);
 				}
 			}
 
@@ -152,6 +154,7 @@ function ManageLogsController($scope, ManageLogsService, TableService, SearchSer
 				} else if(response.data) {
 					self.headers = response.data.column_header;
 					self.records = response.data.rows.record;
+					self.updatePageCount(response.data.rows);
 				}
 			}
 

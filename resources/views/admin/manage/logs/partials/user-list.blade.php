@@ -13,10 +13,10 @@
 			)!!}
 			<div class="form-group">
 				<div class="col-xs-5">
-					{!! Form::text('search_module', ''
+					{!! Form::text('page_accessed', ''
 						,array(
-							'placeholder' => 'Username'
-							, 'ng-model' => 'logs.search.username'
+							'placeholder' => 'Page Accessed'
+							, 'ng-model' => 'logs.search.page_accessed'
 							, 'class' => 'form-control btn-fit'
 						)
 					)!!}
@@ -85,6 +85,17 @@
 					)!!}
 				</div>
 			</div>
+			<div class="form-group">
+				<div class="col-xs-5">
+					{!! Form::text('search_module', ''
+						,array(
+							'placeholder' => 'Username'
+							, 'ng-model' => 'logs.search.username'
+							, 'class' => 'form-control btn-fit'
+						)
+					)!!}
+				</div>
+			</div>
 		</div>
 	</div>
 	 
@@ -118,6 +129,7 @@
 						<th>Username</th>
 						<th>User Type</th>
 						<th>API Accessed</th>
+						<th>Page Accessed</th>
 						<th>HTTP Response</th>
 					</tr>
 				</thead>
@@ -126,6 +138,7 @@
 						<td>{! record.username !}</td>
 						<td>{! record.user_type !}</td>
 						<td>{! record.api_accessed !}</td>
+						<td>{! record.page_accessed !}</td>
 						<td>{! record.result_response !}</td>
 					</tr>
 					<tr class="odd" ng-if="!logs.records.length && !logs.table.loading">
