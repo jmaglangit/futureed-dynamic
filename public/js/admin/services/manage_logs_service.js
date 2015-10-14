@@ -32,6 +32,18 @@ function ManageLogsService($http) {
 		});
 	}
 
+	api.userLogs = function(search, table) {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url   : apiUrl + 'user?username=' + search.username
+				+ '&user_type=' + search.user_type
+				+ '&result_response=' + search.result_response
+				+ '&api_accessed=' + search.api_accessed
+				+ '&limit=' + table.size
+				+ '&offset=' + table.offset
+		});
+	}
+
 	api.systemLogs = function() {
 		return $http({
 			method 	: Constants.METHOD_GET
