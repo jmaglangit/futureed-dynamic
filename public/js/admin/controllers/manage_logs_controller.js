@@ -31,6 +31,7 @@ function ManageLogsController($scope, ManageLogsService, TableService, SearchSer
 
 			case Constants.USERS			:
 				self.active_users_log = Constants.TRUE;
+				self.userLogs();
 				break;
 
 			case Constants.SYSTEM			:
@@ -79,7 +80,7 @@ function ManageLogsController($scope, ManageLogsService, TableService, SearchSer
 		} else if(self.active_administrator_log) {
 			self.adminLogs();
 		} else if(self.active_users_log) {
-			// self.usersLogs();
+			self.userLogs();
 		}
 	}
 
@@ -117,6 +118,32 @@ function ManageLogsController($scope, ManageLogsService, TableService, SearchSer
 
 		$scope.ui_block();
 		ManageLogsService.adminLogs(self.search, self.table).success(function(response) {
+			self.table.loading = Constants.FALSE;
+
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.headers = response.data.column_header;
+					self.records = response.data.rows.record;
+				}
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.userLogs = function() {
+		self.errors = Constants.FALSE;
+		self.records = {};
+
+		self.table.loading = Constants.TRUE;
+
+		$scope.ui_block();
+		ManageLogsService.userLogs(self.search, self.table).success(function(response) {
 			self.table.loading = Constants.FALSE;
 
 			if(angular.equals(response.status, Constants.STATUS_OK)) {

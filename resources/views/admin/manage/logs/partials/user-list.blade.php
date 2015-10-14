@@ -23,10 +23,10 @@
 				</div>
 
 				<div class="col-xs-5">
-					{!! Form::text('client_user_agent', ''
+					{!! Form::text('api_accessed', ''
 						,array(
-							'placeholder' => 'Agent Used'
-							, 'ng-model' => 'logs.search.client_user_agent'
+							'placeholder' => 'API Accessed'
+							, 'ng-model' => 'logs.search.api_accessed'
 							, 'class' => 'form-control btn-fit'
 						)
 					)!!}
@@ -43,23 +43,37 @@
 			</div>
 			<div class="form-group">
 				<div class="col-xs-5">
-					{!! Form::text('result_response', ''
-						,array(
-							'placeholder' => 'Result Response'
-							, 'ng-model' => 'logs.search.result_response'
-							, 'class' => 'form-control btn-fit'
+					{!! Form::select('result_response'
+						, array(
+							'' =>' -- Select Response Code --'
+							, '200'=>'200'
+							, '201'=>'201'
+							, '404'=>'404'
+							, '405'=>'405'
+							, '500'=>'500'
+							, '503'=>'503'
 						)
-					)!!}
+						, null
+						, array(
+							'class' => 'form-control'
+							, 'ng-model' => 'logs.search.result_response'
+						)
+					) !!}
 				</div>
 				
 				<div class="col-xs-5">
-					{!! Form::text('log_type', ''
-						,array(
-							'placeholder' => 'Log Type'
-							, 'ng-model' => 'logs.search.log_type'
-							, 'class' => 'form-control btn-fit'
+					{!! Form::select('user_type'
+						, array(
+							'' =>' -- Select User Type --'
+							, 'Client'=>'Client'
+							, 'Student'=>'Student'
 						)
-					)!!}
+						, null
+						, array(
+							'class' => 'form-control'
+							, 'ng-model' => 'logs.search.user_type'
+						)
+					) !!}
 				</div>
 				
 				<div class="col-xs-2">
@@ -102,19 +116,17 @@
 				<thead>
 					<tr>
 						<th>Username</th>
-						<th>IP Address</th>
-						<th>Agent Used</th>
+						<th>User Type</th>
+						<th>API Accessed</th>
 						<th>HTTP Response</th>
-						<th>Log Type</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr ng-repeat="record in logs.records">
 						<td>{! record.username !}</td>
-						<td>{! record.client_ip !}:{! record.client_port !}</td>
-						<td>{! record.client_user_agent !}</td>
+						<td>{! record.user_type !}</td>
+						<td>{! record.api_accessed !}</td>
 						<td>{! record.result_response !}</td>
-						<td>{! record.log_type !}</td>
 					</tr>
 					<tr class="odd" ng-if="!logs.records.length && !logs.table.loading">
 						<td valign="top" colspan="10">
