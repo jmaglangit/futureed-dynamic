@@ -38,7 +38,7 @@
 			            </td>
 
 			        </tr>
-			        <tr class="odd" ng-if="!logs.records.length && !logs.table.loading">
+			        <tr class="odd" ng-if="!logs.records.length">
 			        	<td valign="top" colspan="10">
 			        		No records found
 			        	</td>

@@ -305,4 +305,11 @@ input[type=radio]:checked+.lbl::before{content:"\2022";}
 	border-radius: 0px;
 	border-top-right-radius: 5px;
 	border-top-left-radius: 5px;
+	background-color: #EEEEEE;
+}
+
+.nav-admin li a:hover {
+	text-decoration: none;
+    color: #ffffff;
+    background-color: #337ab7;
 }

@@ -39,6 +39,7 @@ function ManageLogsService($http) {
 				+ '&user_type=' + search.user_type
 				+ '&result_response=' + search.result_response
 				+ '&api_accessed=' + search.api_accessed
+				+ '&page_accessed=' + search.page_accessed
 				+ '&limit=' + table.size
 				+ '&offset=' + table.offset
 		});
