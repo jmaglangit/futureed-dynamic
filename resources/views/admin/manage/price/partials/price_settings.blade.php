@@ -185,7 +185,7 @@
 					<th>Subscription Name</th>
 					<th>Description</th>
 					<th>Price</th>
-					<th>Action</th>
+					<th ng-if="price.records.length">Action</th>
 				</tr>
 				</thead>
 				<tbody>

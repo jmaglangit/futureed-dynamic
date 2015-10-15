@@ -154,7 +154,7 @@
 					<tr>
 						<th>Minimum Seats</th>
 						<th>bulk</th>
-						<th>Action</th>
+						<th ng-if="bulk.records.length">Action</th>
 					</tr>
 				</thead>
 				<tbody>

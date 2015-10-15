@@ -184,7 +184,7 @@
 							<th>Email</th>
 							<th>Role</th>
 							<th>Discount</th>
-							<th>Action</th>
+							<th ng-if="discount.records.length">Action</th>
 						</tr>
 						</thead>
 					<tbody>
