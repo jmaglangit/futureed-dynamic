@@ -1,226 +1,243 @@
-<div ng-if="sale.active_price_settings_list">
-	<div class="row" ng-if = "!sale.active_price_settings_add && !sale.active_price_settings_edit">
-	    <div class="col-xs-4 add-price">
-	      	<button class="btn btn-blue" 
-	      		ng-click="sale.setDiscountsActive('price_settings_add')">
-	      		<span><i class="fa fa-plus-square"></i></span> Add Price
-	      	</button>
-	    </div>
-  	</div>
-
-  	<div class="row" ng-if="sale.active_price_settings_add">
-	    <div class="col-xs-12">
+<div ng-if="price.active_list">
+	<div class="search-container" ng-if="price.active_add">
+		<div class="col-xs-12">
 			<div class="title-mid">
 				Add Price
 			</div>
 		</div>
-  	</div>
+	</div>
 
-  	<div class="row" ng-if="sale.active_price_settings_edit">
-	    <div class="col-xs-12">
+	<div class="search-container" ng-if="price.active_edit">
+		<div class="col-xs-12">
 			<div class="title-mid">
-				Edit Price
+				Update Price
 			</div>
 		</div>
-  	</div>
+	</div>
 
-  	<div class="row" ng-if="sale.active_price_settings_add || sale.active_price_settings_edit">
-	      <div id="add-form">
-	      	<div class="price-form">
-	      		{!! Form::open([
-	      			'id' => 'price_form', 
-	      			'class'=> 'form-horizontal'
-	      			]) 
-	      		!!}
-	      		<div class="form-group">
-	      			<label class="col-xs-3 control-label">Subscription Name <span class="required">*</span></label>
-	      			<div class="col-xs-5">
-	      				{!! Form::text('name', '', 
-		      				[
-		      					'class' => 'form-control', 
-		      					'ng-model' => 'sale.data.name', 
-		      					'placeholder' => 'Name'
-		      				])
-		      			!!}
-	      			</div>
-	      		</div>
-	      		<div class="form-group">
-	      			<label class="col-xs-3 control-label">Description <span class="required">*</span></label>
-	      			<div class="col-xs-5">
-	      				{!! Form::textarea('description', '', 
-		      				[
-		      					'class' => 'form-control',
-		      					'placeholder' => 'Description', 
-		      					'rows' => '4', 
-		      					'style' => 'resize:vertical;', 
-		      					'ng-model' => 'sale.data.description'
-		      				]) 
-		      			!!}
-	      			</div>
-	      		</div>
-	      		<div class="form-group">
-	      			<label class="col-xs-3 control-label">Price <span class="required">*</span></label>
-	      			<div class="col-xs-5">
-	      				<div class="input-group">
+	<div class="col-xs-12" ng-class="{ 'success-container' : price.active_add || price.active_edit, 'search-container' : !(price.active_add || price.active_edit) }" ng-if="price.errors || price.success">
+		<div class="alert alert-error" ng-if="price.errors">
+			<p ng-repeat="error in price.errors track by $index">
+				{! error !}
+			</p>
+		</div>
+
+		<div class="alert alert-success" ng-if="price.success">
+			<p>{! price.success !}</p>
+		</div>
+	</div>
+
+	<div ng-if="price.active_add || price.active_edit">
+		<div class="search-container col-xs-12">
+			{!! Form::open([
+				'id' => 'price_form', 
+				'class'=> 'form-horizontal'
+				]) 
+			!!}
+			<fieldset>
+				<div class="form-group">
+					<label class="col-xs-3 control-label">Subscription Name <span class="required">*</span></label>
+					<div class="col-xs-5">
+						{!! Form::text('name', '', 
+							[
+								'class' => 'form-control'
+								, 'ng-model' => 'price.record.name'
+								, 'ng-class' => "{ 'required-field' : price.fields['name'] }"
+								, 'placeholder' => 'Name'
+							])
+						!!}
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-3 control-label">Description <span class="required">*</span></label>
+					<div class="col-xs-5">
+						{!! Form::textarea('description', '', 
+							[
+								'class' => 'form-control disabled-textarea'
+								, 'placeholder' => 'Description'
+								, 'rows' => '4'
+								, 'ng-model' => 'price.record.description'
+								, 'ng-class' => "{ 'required-field' : price.fields['description'] }"
+							]) 
+						!!}
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-3 control-label">Price <span class="required">*</span></label>
+					<div class="col-xs-5">
+						<div class="input-group">
 							  <span class="input-group-addon" id="basic-addon1">USD$</span>
 							  {!! Form::text('total_amount',''
 								, [
 									'class' => 'form-control'
-									, 'ng-model' => 'sale.data.price'
+									, 'ng-model' => 'price.record.price'
+									, 'ng-class' => "{ 'required-field' : price.fields['price'] }"
 									, 'placeholder' => 'Price'
 								]
 							) !!}
 						</div>
-	      			</div>
-	      		</div>
-	      		<div class="form-group">
-	      			<label class="col-xs-3 control-label">Days <span class="required">*</span></label>
-	      			<div class="col-xs-5">
-	      				{!! Form::text('days','',
-	      					[
-	      						'class' => 'form-control',
-	      						'placeholder' => 'Days',
-	      						'ng-model' => 'sale.data.days'
-	      					]) 
-	      				!!}
-	      			</div>
-	      		</div>
-	      		<div class="form-group">
-                		<label class="col-xs-3 control-label" id="status">Status <span class="required">*</span></label>
-                		<div class="col-xs-5">
-                			<div class="col-xs-6 checkbox">	                				
-                				<label>
-                				{!! Form::radio('status'
-                					, 'Enabled'
-                					, true
-                					, array(
-	        							'class' => 'field'
-	        							, 'ng-model' => 'sale.data.status'
-        							) 
-        						) !!}
-                				<span class="lbl padding-8">Enabled</span>
-                				</label>
-                			</div>
-                			<div class="col-xs-6 checkbox">
-                				<label>
-                				{!! Form::radio('status'
-                					, 'Disabled'
-                					, false
-                					, array(
-	        							'class' => 'field'
-	        							, 'ng-model' => 'sale.data.status'
-        							) 
-                				) !!}
-                				<span class="lbl padding-8">Disabled</span>
-                				</label>
-                			</div>
-                		</div>
-                	</div>
-                	<div class="col-xs-7 col-xs-offset-2">
-                		<div class="btn-container">
-                			{!! Form::button('Save'
-                				, array(
-                					'class' => 'btn btn-blue btn-medium'
-                					, 'ng-click' => "sale.editPrice()"
-                					, 'ng-if' => 'sale.active_price_settings_edit'
-                				)
-                			) !!}
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-3 control-label">Days <span class="required">*</span></label>
+					<div class="col-xs-5">
+						{!! Form::text('days','',
+							[
+								'class' => 'form-control'
+								, 'placeholder' => 'Days'
+								, 'ng-class' => "{ 'required-field' : price.fields['days'] }"
+								, 'ng-model' => 'price.record.days'
+							]) 
+						!!}
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-3 control-label" id="status">Status <span class="required">*</span></label>
+					<div class="col-xs-5">
+						<div class="col-xs-6 checkbox">
+							<label>
+							{!! Form::radio('status'
+								, 'Enabled'
+								, true
+								, array(
+									'class' => 'field'
+									, 'ng-model' => 'price.record.status'
+								) 
+							) !!}
+							<span class="lbl padding-8">Enabled</span>
+							</label>
+						</div>
+						<div class="col-xs-6 checkbox">
+							<label>
+							{!! Form::radio('status'
+								, 'Disabled'
+								, false
+								, array(
+									'class' => 'field'
+									, 'ng-model' => 'price.record.status'
+								) 
+							) !!}
+							<span class="lbl padding-8">Disabled</span>
+							</label>
+						</div>
+					</div>
+				</div>
+			</fieldset>
 
-                			{!! Form::button('Add Price'
-                				, array(
-                					'class' => 'btn btn-blue btn-medium'
-                					, 'ng-click' => "sale.addPrice()"
-                					, 'ng-if' => 'sale.active_price_settings_add'
-                				)
-                			) !!}
+			<fieldset>
+				<div class="form-group">
+					<div class="btn-container col-xs-9 col-xs-offset-1">
+						{!! Form::button('Update'
+							, array(
+								'class' => 'btn btn-blue btn-medium'
+								, 'ng-click' => "price.update()"
+								, 'ng-if' => 'price.active_edit'
+							)
+						) !!}
 
-                			{!! Form::button('Cancel'
-                				, array(
-                					'class' => 'btn btn-gold btn-medium'
-                					, 'ng-click' => "sale.setDiscountsActive('price_settings_list')"
-                				)
-                			) !!}
-                		</div>
-                	</div>
-	      	</div>
-	      </div>
+						{!! Form::button('Add Price'
+							, array(
+								'class' => 'btn btn-blue btn-medium'
+								, 'ng-click' => "price.add()"
+								, 'ng-if' => 'price.active_add'
+							)
+						) !!}
+
+						{!! Form::button('Cancel'
+							, array(
+								'class' => 'btn btn-gold btn-medium'
+								, 'ng-click' => "price.setActive()"
+							)
+						) !!}
+					</div>
+				</div>
+			</fieldset>
+		</div>
 	</div>
 
-	<div class="list-container" ng-cloak>
-		<div class="col-xs-6 title-mid">
-			Price List
-		</div>
+	<div class="table-container">
+		<button class="btn btn-blue btn-semi-medium" 
+			ng-click="price.setActive(futureed.ACTIVE_ADD)"
+			ng-if="!(price.active_add || price.active_edit)">
+			<span><i class="fa fa-plus-square"></i></span> Add Price
+		</button>
 
-		<div class="col-xs-6 size-container">
-			{!! Form::select('size'
-				, array(
-					  '10' => '10'
-					, '20' => '20'
-					, '50' => '50'
-					, '100' => '100'
-				)
-				, '10'
-				, array(
-					'ng-model' => 'sale.table.size'
-					, 'ng-change' => 'sale.paginateBySize()'
-					, 'ng-if' => "sale.price.length"
-					, 'class' => 'form-control paginate-size pull-right'
-				)
-			) !!}
-		</div>
+		<div class="list-container">
+			<div class="col-xs-6 title-mid">
+				Price List
+			</div>
 
-		<table class="col-xs-12 table table-striped table-bordered">
-			<thead>
-	        <tr>
-	            <th class="width-200">Subscription Name</th>
-	            <th class="width-200">Description</th>
-	            <th>Price</th>
-	            <th>Action</th>
-	        </tr>
-	        </thead>
-	        <tbody>
-	        <tr ng-repeat="prce in sale.price">
-	            <td>{! prce.name !}</td>
-	            <td>{! prce.description !}</td>
-	            <td>{! prce.price | currency : "USD$ " : 2 !}</td>
-	            <td>
-	            	<div class="row">
-	            		<div class="col-xs-4">
-	            			<i class="fa" 
-	            				ng-class="{ 'fa-ban error-icon' : prce.status == futureed.DISABLED, 'fa-check-circle-o success-icon' : prce.status == futureed.ENABLED }"
-	            				tooltip="{! prce.status !}"
-	            				tooltip-placement="top"
-	            				tooltip-trigger="mouseenter"></i>
-	            		</div>
-	            		<div class="col-xs-4">
-	            			<a href="" ng-click="sale.getPrice(prce.id)"><span><i class="fa fa-pencil"></i></span></a>
-	            		</div>
-	            		<div class="col-xs-4">
-	            			<a href="" ng-click="sale.deletePrice(prce.id)"><span><i class="fa fa-trash"></i></span></a>
-	            		</div>
-	            	</div>
-	            </td>
-	        </tr>
-	        <tr class="odd" ng-if="!sale.price.length">
-	        	<td valign="top" colspan="4">
-	        		No records found
-	        	</td>
-	        </tr>
-	        </tbody>
-		</table>
+			<div class="col-xs-6 size-container">
+				{!! Form::select('size'
+					, array(
+						  '10' => '10'
+						, '20' => '20'
+						, '50' => '50'
+						, '100' => '100'
+					)
+					, '10'
+					, array(
+						'ng-model' => 'price.table.size'
+						, 'ng-change' => 'price.paginateBySize()'
+						, 'ng-if' => "price.records.length"
+						, 'class' => 'form-control paginate-size pull-right'
+					)
+				) !!}
+			</div>
 
-		<div class="pull-right" ng-if="sale.price.length">
-			<pagination 
-				total-items="sale.table.total_items" 
-				ng-model="sale.table.page"
-				max-size="3"
-				items-per-page="sale.table.size" 
-				previous-text = "&lt;"
-				next-text="&gt;"
-				class="pagination" 
-				boundary-links="true"
-				ng-change="sale.paginateByPage()">
-			</pagination>
+			<table class="col-xs-12 table table-striped table-bordered">
+				<thead>
+				<tr>
+					<th>Subscription Name</th>
+					<th>Description</th>
+					<th>Price</th>
+					<th>Action</th>
+				</tr>
+				</thead>
+				<tbody>
+				<tr ng-repeat="record in price.records">
+					<td>{! record.name !}</td>
+					<td>{! record.description !}</td>
+					<td>{! record.price | currency : "USD$ " : 2 !}</td>
+					<td>
+						<div class="row">
+							<div class="col-xs-4">
+								<i class="fa" 
+									ng-class="{ 'fa-ban error-icon' : record.status == futureed.DISABLED, 'fa-check-circle-o success-icon' : record.status == futureed.ENABLED }"
+									tooltip="{! record.status !}"
+									tooltip-placement="top"
+									tooltip-trigger="mouseenter"></i>
+							</div>
+							<div class="col-xs-4">
+								<a href="" ng-click="price.setActive(futureed.ACTIVE_EDIT, record.id)"><span><i class="fa fa-pencil"></i></span></a>
+							</div>
+							<div class="col-xs-4">
+								<a href="" ng-click="price.deletePrice(record.id)"><span><i class="fa fa-trash"></i></span></a>
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr class="odd" ng-if="!price.records.length">
+					<td valign="top" colspan="4">
+						No records found
+					</td>
+				</tr>
+				</tbody>
+			</table>
+
+			<div class="pull-right" ng-if="price.records.length">
+				<pagination 
+					total-items="price.table.total_items" 
+					ng-model="price.table.page"
+					max-size="3"
+					items-per-page="price.table.size" 
+					previous-text = "&lt;"
+					next-text="&gt;"
+					class="pagination" 
+					boundary-links="true"
+					ng-change="price.paginateByPage()">
+				</pagination>
+			</div>
 		</div>
 	</div>
 </div>
