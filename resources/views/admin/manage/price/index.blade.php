@@ -5,7 +5,8 @@
 @stop
 
 @section('content')
-	<div class="container dshbrd-con" ng-controller="SalesController as sale" ng-cloak>
+	<div class="container dshbrd-con" ng-controller="SalesController as sale" 
+		ng-init="sale.setActive()" ng-cloak>
 		<div class="wrapr">
 			<div class="client-nav side-nav">
 				@include('admin.partials.dshbrd-side-nav')				
@@ -19,20 +20,22 @@
 
 				
 				<ul class="nav nav-pills nav-admin">
-					<li class="active">
+					<li ng-class="{ 'active' : sale.active_price_settings }">
 						<a ng-click="sale.setActive('price_settings')" href="javascript:void(0)"><span><i class="fa fa-dollar"></i>Price Settings</span></a></li>
-					<li>
+					<li ng-class="{ 'active' : sale.active_client_discount }">
 						<a ng-click="sale.setActive('client_discount')" href="javascript:void(0)"><span><i class="fa fa-tags"></i>Client Discount</span></a></li>
-					<li>
+					<li ng-class="{ 'active' : sale.active_bulk_settings }">
 						<a ng-click="sale.setActive('bulk_settings')" href="javascript:void(0)"><span><i class="fa fa-database"></i>Bulk Settings</span></a></li>
 				</ul>
 					
-				<div ng-controller="ManagePriceController as price" ng-init="price.setActive()" 
+				<div ng-if="sale.active_price_settings" ng-controller="ManagePriceController as price" ng-init="price.setActive()" 
 					template-directive template-url="{!! route('admin.manage.price.partials.price_settings') !!}"></div>
 
-				<div template-directive template-url="{!! route('admin.manage.price.partials.client_discount') !!}"></div>
+				<div ng-if="sale.active_client_discount" ng-controller="ManageDiscountController as discount" ng-init="discount.setActive()" 
+					template-directive template-url="{!! route('admin.manage.price.partials.client_discount') !!}"></div>
 				
-				<div template-directive template-url="{!! route('admin.manage.price.partials.bulk_discount') !!}"></div>
+				<div ng-if="sale.active_bulk_settings"
+					template-directive template-url="{!! route('admin.manage.price.partials.bulk_discount') !!}"></div>
 
 			</div>
 		</div>
@@ -42,6 +45,7 @@
 @section('scripts')
 	{!! Html::script('//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js')!!}
 	{!! Html::script('/js/admin/controllers/manage_price_controller.js')!!}
+	{!! Html::script('/js/admin/controllers/manage_discount_controller.js')!!}
 
 	{!! Html::script('/js/admin/controllers/sales_controller.js')!!}
 	{!! Html::script('/js/admin/services/sales_service.js')!!}

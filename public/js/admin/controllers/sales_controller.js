@@ -15,14 +15,6 @@ function SalesController($scope, salesService, TableService) {
 	self.delete 		= {};
 	self.validation		= {};
 
-	self.setDiscountsActive = setDiscountsActive;
-
-	self.addPrice 		= addPrice;
-	self.getPriceList 	= getPriceList;
-	self.deletePrice 	= deletePrice;
-	self.editPrice 		= editPrice;
-	self.getPrice 		= getPrice;
-
 	self.getDiscountList = getDiscountList;
 	self.addClientDiscount = addClientDiscount;
 	self.getDiscountDetails = getDiscountDetails;
@@ -38,75 +30,27 @@ function SalesController($scope, salesService, TableService) {
 	self.editBulk 		= editBulk;
 	self.deleteBulk 	= deleteBulk;
 
-	function setDiscountsActive(active) {
+	self.setActive = function(active) {
 		self.errors = Constants.FALSE;
-		self.validation = {};
 
-		self.active_price_settings_list = Constants.FALSE;
-		self.active_price_settings_add = Constants.FALSE;
-		self.active_price_settings_edit = Constants.FALSE;
-
-		self.active_client_discount_list = Constants.FALSE;
-		self.active_client_discount_add = Constants.FALSE;
-		self.active_client_discount_edit = Constants.FALSE;
-
-		self.active_bulk_settings_list = Constants.FALSE;
-		self.active_bulk_settings_add = Constants.FALSE;
-		self.active_bulk_settings_edit = Constants.FALSE;
+		self.active_price_settings = Constants.FALSE;
+		self.active_client_discount = Constants.FALSE;
+		self.active_bulk_settings = Constants.FALSE;
 
 		switch(active) {
-			case	'price_settings_add' :
-				self.data = {};
-				self.active_price_settings_add = Constants.TRUE;
-				self.active_price_settings_list = Constants.TRUE;
+			case 'bulk_settings':
+				self.active_bulk_settings = Constants.TRUE;
 				break;
 
-			case	'price_settings_edit' :
-				self.active_price_settings_edit = Constants.TRUE;
-				self.active_price_settings_list = Constants.TRUE;
+			case 'client_discount':
+				self.active_client_discount = Constants.TRUE;
 				break;
 
-			case	'client_discount_list' :
-				self.getDiscountList();
-				self.active_client_discount_list = Constants.TRUE;
-				break;
-
-			case	'client_discount_add' :
-				self.data = {};
-				self.active_client_discount_add = Constants.TRUE;
-				self.active_client_discount_list = Constants.TRUE;
-				break;
-
-			case	'client_discount_edit' :
-				self.active_client_discount_edit = Constants.TRUE;
-				self.active_client_discount_list = Constants.TRUE;
-				break;
-
-			case	'bulk_settings_list' :
-				self.getBulkList();
-				self.active_bulk_settings_list = Constants.TRUE;
-				break;
-
-			case	'bulk_settings_add' :
-				self.data = {};
-				self.active_bulk_settings_add = Constants.TRUE;
-				self.active_bulk_settings_list = Constants.TRUE;
-				break;
-
-			case	'bulk_settings_edit' :
-				self.active_bulk_settings_edit = Constants.TRUE;
-				self.active_bulk_settings_list = Constants.TRUE;
-				break;
-					
-			case	'price_settings_list' :
-			default	:
-				self.getPriceList();
-				self.active_price_settings_list = Constants.TRUE;
+			case 'price_settings':
+			default:
+				self.active_price_settings = Constants.TRUE;
 				break;
 		}
-
-		$("input, textarea, select").removeClass("required-field");
-		$("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 
 	/**
@@ -121,139 +65,6 @@ function SalesController($scope, salesService, TableService) {
 		} else if(self.active_bulk_settings_list) {
 			self.getBulkList();
 		}
-	}
-
-	function getPriceList(){
-		self.errors = Constants.FALSE;
-
-		$scope.ui_block();
-		salesService.getPriceList(self.table).success(function(response){
-			if(angular.equals(response.status, Constants.STATUS_OK)){
-				if(response.errors){
-					self.errors = $scope.errorHandler(response.errors);
-				}else if(response.data){
-					self.price = response.data.records
-					self.updatePageCount(response.data);
-				}
-			}
-
-			$scope.ui_unblock();
-		}).error(function(response){
-			self.errors = $scope.internalError();
-			$scope.ui_unblock();
-		});
-	}
-
-	/**
-	* Add price
-	*/
-	function addPrice(){
-		self.errors = Constants.FALSE;
-
-		$("input, textarea").removeClass("required-field");
-		self.data.days = Math.abs(self.data.days);
-
-		$scope.ui_block();
-		salesService.addPrice(self.data).success(function(response){
-			if(response.status == Constants.STATUS_OK){
-				if(response.errors){
-					self.errors = $scope.errorHandler(response.errors);
-
-					angular.forEach(response.errors, function(value, key){
-						$("#price_form input[name='" + value.field +"']" ).addClass("required-field");
-						$("#price_form textarea[name='" + value.field +"']" ).addClass("required-field");
-					});
-				}else if(response.data){
-					self.data = {};
-					self.data.is_success = Constants.ADD_PRICE_SUCCESS;
-					self.setDiscountsActive('price_settings_list');
-				}
-			}
-			$scope.ui_unblock();
-		}).error(function(response){
-			$scope.ui_unblock();
-			self.errors = $scope.internalError();
-		});
-	}
-
-	/**
-	* get Price
-	*/
-	function getPrice(id){
-		self.errors = Constants.FALSE;
-		self.data = {};
-
-		$scope.ui_block();		
-		salesService.getPrice(id).success(function(response){
-			if(angular.equals(response.status, Constants.STATUS_OK)){
-				if(response.data){
-					self.data = response.data;
-					self.setDiscountsActive('price_settings_edit');
-				}
-			}
-
-			$scope.ui_unblock();		
-		}).error(function(response){
-			self.errors = $scope.internalError();
-			$scope.ui_unblock();		
-		});
-	}
-
-	/**
-	* edit Price
-	*/
-	function editPrice(){
-		this.errors = Constants.FALSE;
-		$('input, select').removeClass('required-field');
-		self.data.days = Math.abs(self.data.days);
-
-		$scope.ui_block();
-		salesService.editPrice(this.data).success(function(response){
-			if(angular.equals(response.status, Constants.STATUS_OK)){
-				if(response.errors){
-					self.errors = $scope.errorHandler(response.errors);
-
-					angular.forEach(response.errors, function(value, key){
-						$("#price_form input[name='" + value.field +"']" ).addClass("required-field");
-					});
-				}else if(response.data) {
-					self.data = {};
-					self.data.is_success = Constants.EDIT_PRICE_SUCCESS;
-					self.setDiscountsActive('price_settings_list');
-				}
-			}
-			$scope.ui_unblock();
-		}).error(function(response){
-			$scope.ui_unblock();
-			this.errors = $scope.internalError();
-		});
-	}
-
-	/**
-	* Delete Price
-	*/
-	function deletePrice(id){
-		self.errors = Constants.FALSE;
-		self.data = {};
-
-		$scope.ui_block();
-		salesService.deletePrice(id).success(function(response){
-			if(angular.equals(response.status, Constants.STATUS_OK)){
-				if(response.data){
-					if(response.data == Constants.STATUS_FALSE){
-						self.errors = Constants.DELETE_ERROR;
-					}else{
-						self.data.is_success = Constants.DELETE_PRICE_SUCCESS;
-						self.setDiscountsActive('price_settings_list');
-					}
-				}
-			}
-
-			$scope.ui_unblock();
-		}).error(function(response){
-			$scope.ui_unblock();
-			self.errors = $scope.internalError();
-		});
 	}
 
 	/**

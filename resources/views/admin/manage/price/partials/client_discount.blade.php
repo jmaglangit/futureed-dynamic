@@ -1,232 +1,239 @@
-<div ng-if="sale.active_client_discount_list">
-      	<div class="row" ng-if = "!sale.active_client_discount_add && !sale.active_client_discount_edit">
-		    <div class="col-xs-4 add-price">
-		      	<button class="btn btn-blue" 
-		      		ng-click="sale.setDiscountsActive('client_discount_add')">
-		      		<span><i class="fa fa-plus-square"></i></span> Add Client Discount
-		      	</button>
-		    </div>
-	  	</div>
-
-	  	<div class="row" ng-if="sale.active_client_discount_add">
-		    <div class="col-xs-12">
-				<div class="title-mid">
-					Add Client Discount
-				</div>
+<div ng-if="discount.active_list">
+	<div class="search-container" ng-if="discount.active_add">
+		<div class="col-xs-12">
+			<div class="title-mid">
+				Add Client Discount
 			</div>
-	  	</div>
+		</div>
+	</div>
 
-	  	<div class="row" ng-if="sale.active_client_discount_edit">
-		    <div class="col-xs-12">
-				<div class="title-mid">
-					Edit Client Discount
-				</div>
+	<div class="search-container" ng-if="discount.active_edit">
+		<div class="col-xs-12">
+			<div class="title-mid">
+				Update Client Discount
 			</div>
-	  	</div>
+		</div>
+	</div>
 
-      	<div class="row" ng-if="sale.active_client_discount_add || sale.active_client_discount_edit">
-		      <div id="discount_form">
-		      	<div class="price-form">
-		      		{!! Form::open([
-		      			'id' => 'price_form', 
-		      			'class'=> 'form-horizontal'
-		      			]) 
-		      		!!}
-		      		<div class="form-group">
-		      			<label class="col-xs-2 control-label">Name <span class="required">*</span></label>
-		      			<div class="col-xs-5">
-		      				{!! Form::text('name', '', 
-			      				[
-			      					'class' => 'form-control'
-			      					, 'ng-model' => 'sale.data.name'
-			      					, 'placeholder' => 'Name'
-			      					, 'autocomplete' => 'off'
-			      					, 'ng-disabled' => 'sale.active_client_discount_edit'
-			      					, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
-	        						, 'ng-change' => 'sale.suggestClient()'
-			      				])
-			      			!!}
-			      			<div class="angucomplete-holder" ng-if="sale.clients && sale.active_client_discount_add">
+	<div class="col-xs-12" ng-class="{ 'success-container' : discount.active_add || discount.active_edit, 'search-container' : !(discount.active_add || discount.active_edit) }" ng-if="discount.errors || discount.success">
+		<div class="alert alert-error" ng-if="discount.errors">
+			<p ng-repeat="error in discount.errors track by $index">
+				{! error !}
+			</p>
+		</div>
+
+		<div class="alert alert-success" ng-if="discount.success">
+			<p>{! discount.success !}</p>
+		</div>
+	</div>
+
+	<div ng-if="discount.active_add || discount.active_edit">
+		<div class="search-container col-xs-12">
+			{!! Form::open(['class'=> 'form-horizontal']) !!}
+				<fieldset>
+					<div class="form-group">
+						<label class="col-xs-3 control-label">Name <span class="required">*</span></label>
+						<div class="col-xs-5">
+							{!! Form::text('name', '', 
+								[
+									'class' => 'form-control'
+									, 'ng-model' => 'discount.record.name'
+									, 'placeholder' => 'Name'
+									, 'autocomplete' => 'off'
+									, 'ng-disabled' => 'discount.active_edit'
+									, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
+									, 'ng-change' => 'discount.suggestClient()'
+									, 'ng-class' => "{ 'required-field' : discount.fields['name'] || discount.fields['client_id'] }"
+								])
+							!!}
+							<div class="angucomplete-holder" ng-if="discount.clients && discount.active_add">
 								<ul class="col-xs-5 angucomplete-dropdown">
-									<li class="angucomplete-row" ng-repeat="client in sale.clients" ng-click="sale.selectClient(client)">
+									<li class="angucomplete-row" ng-repeat="client in discount.clients" ng-click="discount.selectClient(client)">
 										{! client.first_name !} {! client.last_name !}
 									</li>
 								</ul>
 							</div>
-
-
-			      			{!! Form::hidden('client_id', null, 
-			      				[
-			      					'ng-model' => 'sale.data.client_id', 
-			      				])
-			      			!!}
-		      			</div>
-		      			<div class="margin-top-8" ng-if="sale.active_client_discount_add"> 
-			                <i ng-if="sale.validation.c_loading" class="fa fa-spinner fa-spin"></i>
-			                <span ng-if="sale.validation.c_error" class="error-msg-con">{! sale.validation.c_error !}</span>
-			            </div>
-		      		</div>
-		      		<div class="form-group">
-		      			<label class="col-xs-2 control-label">Email</label>
-		      			<div class="col-xs-5">
-		      				{!! Form::text('email', '', 
-			      				[	
-			      					'class' => 'form-control' 
-			      					, 'ng-disabled' => 'true'
-			      					, 'ng-model' => 'sale.data.email'
-			      					, 'placeholder' => 'Email Address'
-			      				]) 
-			      			!!}
-		      			</div>
-		      		</div>
-		      		<div class="form-group">
-		      			<label class="col-xs-2 control-label">Percentage <span class="required">*</span></label>
-		      			<div class="col-xs-5">
-			      			<div class="input-group">
+						</div>
+						<div class="margin-top-8" ng-if="discount.active_add"> 
+							<i ng-if="discount.validation.c_loading" class="fa fa-spinner fa-spin"></i>
+							<span ng-if="discount.validation.c_error" class="error-msg-con">{! discount.validation.c_error !}</span>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-xs-3 control-label">Email</label>
+						<div class="col-xs-5">
+							{!! Form::text('email', '', 
+								[	
+									'class' => 'form-control' 
+									, 'ng-disabled' => 'true'
+									, 'ng-model' => 'discount.record.email'
+									, 'ng-class' => "{ 'required-field' : discount.fields['email'] }"
+									, 'placeholder' => 'Email Address'
+								]) 
+							!!}
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-xs-3 control-label">Percentage <span class="required">*</span></label>
+						<div class="col-xs-5">
+							<div class="input-group">
 								{!! Form::text('percentage', '', 
-				      				[	
-				      					'class' => 'form-control' 
-				      					, 'placeholder' => 'Discount Percentage'
-				      					, 'ng-model' => 'sale.data.percentage'
-				      				]) 
-			      				!!}
-			      				<span class="input-group-addon" id="basic-addon1">%</span>
+									[	
+										'class' => 'form-control' 
+										, 'placeholder' => 'Discount Percentage'
+										, 'ng-model' => 'discount.record.percentage'
+										, 'ng-class' => "{ 'required-field' : discount.fields['percentage'] }"
+									]) 
+								!!}
+								<span class="input-group-addon">%</span>
 							</div>
-		      			</div>
-		      		</div>
-		      		<div class="form-group">
-	                		<label class="col-xs-2 control-label" id="status">Status <span class="required">*</span></label>
-	                		<div class="col-xs-5">
-	                			<div class="col-xs-6 checkbox">	                				
-	                				<label>
-	                				{!! Form::radio('example','Enabled', true, 
-	                					[
-	                						'class' => 'field', 
-	                						'ng-model'=> 'sale.data.status'
-	                					]) 
-	                				!!}
-	                				<span class="lbl padding-8">Enabled</span>
-	                				</label>
-	                			</div>
-	                			<div class="col-xs-6 checkbox">
-	                				<label>
-	                				{!! Form::radio('example', 'Disabled', false, 
-	                					[
-	                						'class' => 'field', 
-	                						'ng-model'=> 'sale.data.status'
-	                					]) 
-	                				!!}
-	                				<span class="lbl padding-8">Disabled</span>
-	                				</label>
-	                			</div>
-	                		</div>
-	                	</div>
-	                	<div class="col-xs-7 col-xs-offset-1">
-	                		<div class="btn-container">
-	                			{!! Form::button('Save'
-	                				, array(
-	                					'class' => 'btn btn-blue btn-medium'
-	                					, 'ng-click' => "sale.updateClientDiscount()"
-	                					, 'ng-if' => 'sale.active_client_discount_edit'
-	                				)
-	                			) !!}
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-xs-3 control-label">Status <span class="required">*</span></label>
+						<div class="col-xs-5">
+							<div class="col-xs-6 checkbox">	                				
+								<label>
+								{!! Form::radio('example','Enabled', true, 
+									[
+										'class' => 'field', 
+										'ng-model'=> 'discount.record.status'
+									]) 
+								!!}
+								<span class="lbl padding-8">Enabled</span>
+								</label>
+							</div>
+							<div class="col-xs-6 checkbox">
+								<label>
+								{!! Form::radio('example', 'Disabled', false, 
+									[
+										'class' => 'field', 
+										'ng-model'=> 'discount.record.status'
+									]) 
+								!!}
+								<span class="lbl padding-8">Disabled</span>
+								</label>
+							</div>
+						</div>
+					</div>
+					</fieldset>
+					<fieldset>
+						<div class="form-group">
+							<div class="btn-container col-xs-9 col-xs-offset-1">
+								{!! Form::button('Update'
+									, array(
+										'class' => 'btn btn-blue btn-medium'
+										, 'ng-click' => "discount.update()"
+										, 'ng-if' => 'discount.active_edit'
+									)
+								) !!}
 
-	                			{!! Form::button('Add Client Discount'
-	                				, array(
-	                					'class' => 'btn btn-blue btn-medium'
-	                					, 'ng-click' => "sale.addClientDiscount()"
-	                					, 'ng-if' => 'sale.active_client_discount_add'
-	                				)
-	                			) !!}
+								{!! Form::button('Add Client Discount'
+									, array(
+										'class' => 'btn btn-blue btn-medium'
+										, 'ng-click' => "discount.add()"
+										, 'ng-if' => 'discount.active_add'
+									)
+								) !!}
 
-	                			{!! Form::button('Cancel'
-	                				, array(
-	                					'class' => 'btn btn-gold btn-medium'
-	                					, 'ng-click' => "sale.setDiscountsActive('client_discount_list')"
-	                				)
-	                			) !!}
-	                		</div>
-	                	</div>
-		      	</div>
-		    </div>
+								{!! Form::button('Cancel'
+									, array(
+										'class' => 'btn btn-gold btn-medium'
+										, 'ng-click' => "discount.setActive()"
+									)
+								) !!}
+							</div>
+						</div>
+					</fieldset>
+				{!! Form::close() !!}
+			</div>
 		</div>
 
-		<div class="list-container" ng-cloak>
-			<div class="col-xs-6 title-mid">
-				Client Discount List
-			</div>
 
-			<div class="col-xs-6 size-container">
-				{!! Form::select('size'
-					, array(
-						  '10' => '10'
-						, '20' => '20'
-						, '50' => '50'
-						, '100' => '100'
-					)
-					, '10'
-					, array(
-						'ng-model' => 'sale.table.size'
-						, 'ng-change' => 'sale.paginateBySize()'
-						, 'ng-if' => "sale.discounts.length"
-						, 'class' => 'form-control paginate-size pull-right'
-					)
-				) !!}
-			</div>
+		<div class="table-container">
+			<button class="btn btn-blue btn-semi-medium" 
+				ng-click="discount.setActive(futureed.ACTIVE_ADD)"
+				ng-if="!(discount.active_add || discount.active_edit)">
+				<span><i class="fa fa-plus-square"></i></span> Add Client Discount
+			</button>
 
-			<table class="col-xs-12 table table-striped table-bordered">
-				<thead>
-			        <tr>
-			            <th>Name</th>
-			            <th>Email</th>
-			            <th>Role</th>
-			            <th>Discount</th>
-			            <th>Action</th>
-			        </tr>
-			        </thead>
-			    <tbody>
-			        <tr ng-repeat="p in sale.discounts">
-			            <td>{! p.client.user.name !}</td>
-			            <td>{! p.client.user.email !}</td>
-			            <td>{! p.client.client_role !}</td>
-			            <td>{! p.percentage | percent !}</td>
-			            <td>
-			            	<div class="row">
-			            		<div class="col-xs-4">
-			            			<i class="fa" 
-			            				ng-class="{ 'fa-ban error-icon' : p.status == futureed.DISABLED, 'fa-check-circle-o success-icon' : p.status == futureed.ENABLED }"
-			            				tooltip="{! p.status !}"
-			            				tooltip-placement="top"
-			            				tooltip-trigger="mouseenter"></i>
-			            		</div>
-			            		<div class="col-xs-4">
-			            			<a href="" ng-click="sale.getDiscountDetails(p.id)"><span><i class="fa fa-pencil"></i></span></a>
-			            		</div>
-			            		<div class="col-xs-4">
-			            			<a href="" ng-click="sale.deleteClientDiscount(p.id)"><span><i class="fa fa-trash"></i></span></a>
-			            		</div>
-			            	</div>
-			            </td>
-			        </tr>
-			        <tr class="odd" ng-if="!sale.discounts.length">
-			        	<td valign="top" colspan="5">
-			        		No records found
-			        	</td>
-			        </tr>
-			    </tbody>
-			</table>
-			<div class="pull-right" ng-if="sale.discounts.length">
-				<pagination 
-					total-items="sale.table.total_items" 
-					ng-model="sale.table.page"
-					max-size="3"
-					items-per-page="sale.table.size" 
-					previous-text = "&lt;"
-					next-text="&gt;"
-					class="pagination" 
-					boundary-links="true"
-					ng-change="sale.paginateByPage()">
-				</pagination>
+			<div class="list-container" ng-cloak>
+				<div class="col-xs-6 title-mid">
+					Client Discount List
+				</div>
+
+				<div class="col-xs-6 size-container">
+					{!! Form::select('size'
+						, array(
+							  '10' => '10'
+							, '20' => '20'
+							, '50' => '50'
+							, '100' => '100'
+						)
+						, '10'
+						, array(
+							'ng-model' => 'discount.table.size'
+							, 'ng-change' => 'discount.paginateBySize()'
+							, 'ng-if' => "discount.records.length"
+							, 'class' => 'form-control paginate-size pull-right'
+						)
+					) !!}
+				</div>
+
+				<table class="col-xs-12 table table-striped table-bordered">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Email</th>
+							<th>Role</th>
+							<th>Discount</th>
+							<th>Action</th>
+						</tr>
+						</thead>
+					<tbody>
+						<tr ng-repeat="record in discount.records">
+							<td>{! record.client.user.name !}</td>
+							<td>{! record.client.user.email !}</td>
+							<td>{! record.client.client_role !}</td>
+							<td>{! record.percentage | percent !}</td>
+							<td>
+								<div class="row">
+									<div class="col-xs-4">
+										<i class="fa" 
+											ng-class="{ 'fa-ban error-icon' : record.status == futureed.DISABLED, 'fa-check-circle-o success-icon' : record.status == futureed.ENABLED }"
+											tooltip="{! record.status !}"
+											tooltip-placement="top"
+											tooltip-trigger="mouseenter"></i>
+									</div>
+									<div class="col-xs-4">
+										<a href="" ng-click="discount.setActive(futureed.ACTIVE_EDIT, record.id)"><span><i class="fa fa-pencil"></i></span></a>
+									</div>
+									<div class="col-xs-4">
+										<a href="" ng-click="discount.deleteClientDiscount(record.id)"><span><i class="fa fa-trash"></i></span></a>
+									</div>
+								</div>
+							</td>
+						</tr>
+						<tr class="odd" ng-if="!discount.records.length">
+							<td valign="top" colspan="5">
+								No records found
+							</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="pull-right" ng-if="discount.records.length">
+					<pagination 
+						total-items="discount.table.total_items" 
+						ng-model="discount.table.page"
+						max-size="3"
+						items-per-page="discount.table.size" 
+						previous-text = "&lt;"
+						next-text="&gt;"
+						class="pagination" 
+						boundary-links="true"
+						ng-change="discount.paginateByPage()">
+					</pagination>
+				</div>
 			</div>
 		</div>
 	</div>	
