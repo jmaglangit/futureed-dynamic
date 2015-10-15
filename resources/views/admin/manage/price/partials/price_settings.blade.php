@@ -1,5 +1,5 @@
 <div ng-if="price.active_list">
-	<div class="search-container" ng-if="price.active_add">
+	<div class="col-xs-12 search-container" ng-if="price.active_add">
 		<div class="col-xs-12">
 			<div class="title-mid">
 				Add Price
@@ -7,7 +7,7 @@
 		</div>
 	</div>
 
-	<div class="search-container" ng-if="price.active_edit">
+	<div class="col-xs-12 search-container" ng-if="price.active_edit">
 		<div class="col-xs-12">
 			<div class="title-mid">
 				Update Price
@@ -27,135 +27,129 @@
 		</div>
 	</div>
 
-	<div ng-if="price.active_add || price.active_edit">
-		<div class="search-container col-xs-12">
-			{!! Form::open([
-				'id' => 'price_form', 
-				'class'=> 'form-horizontal'
-				]) 
-			!!}
-			<fieldset>
-				<div class="form-group">
-					<label class="col-xs-3 control-label">Subscription Name <span class="required">*</span></label>
-					<div class="col-xs-5">
-						{!! Form::text('name', '', 
-							[
+	<div class="col-xs-12 search-container" ng-if="price.active_add || price.active_edit">
+		{!! Form::open(['class'=> 'form-horizontal']) !!}
+		<fieldset>
+			<div class="form-group">
+				<label class="col-xs-3 control-label">Subscription Name <span class="required">*</span></label>
+				<div class="col-xs-5">
+					{!! Form::text('name', '', 
+						[
+							'class' => 'form-control'
+							, 'ng-model' => 'price.record.name'
+							, 'ng-class' => "{ 'required-field' : price.fields['name'] }"
+							, 'placeholder' => 'Name'
+						])
+					!!}
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-xs-3 control-label">Description <span class="required">*</span></label>
+				<div class="col-xs-5">
+					{!! Form::textarea('description', '', 
+						[
+							'class' => 'form-control disabled-textarea'
+							, 'placeholder' => 'Description'
+							, 'rows' => '4'
+							, 'ng-model' => 'price.record.description'
+							, 'ng-class' => "{ 'required-field' : price.fields['description'] }"
+						]) 
+					!!}
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-xs-3 control-label">Price <span class="required">*</span></label>
+				<div class="col-xs-5">
+					<div class="input-group">
+						  <span class="input-group-addon" id="basic-addon1">USD$</span>
+						  {!! Form::text('total_amount',''
+							, [
 								'class' => 'form-control'
-								, 'ng-model' => 'price.record.name'
-								, 'ng-class' => "{ 'required-field' : price.fields['name'] }"
-								, 'placeholder' => 'Name'
-							])
-						!!}
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-xs-3 control-label">Description <span class="required">*</span></label>
-					<div class="col-xs-5">
-						{!! Form::textarea('description', '', 
-							[
-								'class' => 'form-control disabled-textarea'
-								, 'placeholder' => 'Description'
-								, 'rows' => '4'
-								, 'ng-model' => 'price.record.description'
-								, 'ng-class' => "{ 'required-field' : price.fields['description'] }"
-							]) 
-						!!}
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-xs-3 control-label">Price <span class="required">*</span></label>
-					<div class="col-xs-5">
-						<div class="input-group">
-							  <span class="input-group-addon" id="basic-addon1">USD$</span>
-							  {!! Form::text('total_amount',''
-								, [
-									'class' => 'form-control'
-									, 'ng-model' => 'price.record.price'
-									, 'ng-class' => "{ 'required-field' : price.fields['price'] }"
-									, 'placeholder' => 'Price'
-								]
-							) !!}
-						</div>
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-xs-3 control-label">Days <span class="required">*</span></label>
-					<div class="col-xs-5">
-						{!! Form::text('days','',
-							[
-								'class' => 'form-control'
-								, 'placeholder' => 'Days'
-								, 'ng-class' => "{ 'required-field' : price.fields['days'] }"
-								, 'ng-model' => 'price.record.days'
-							]) 
-						!!}
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-xs-3 control-label" id="status">Status <span class="required">*</span></label>
-					<div class="col-xs-5">
-						<div class="col-xs-6 checkbox">
-							<label>
-							{!! Form::radio('status'
-								, 'Enabled'
-								, true
-								, array(
-									'class' => 'field'
-									, 'ng-model' => 'price.record.status'
-								) 
-							) !!}
-							<span class="lbl padding-8">Enabled</span>
-							</label>
-						</div>
-						<div class="col-xs-6 checkbox">
-							<label>
-							{!! Form::radio('status'
-								, 'Disabled'
-								, false
-								, array(
-									'class' => 'field'
-									, 'ng-model' => 'price.record.status'
-								) 
-							) !!}
-							<span class="lbl padding-8">Disabled</span>
-							</label>
-						</div>
-					</div>
-				</div>
-			</fieldset>
-
-			<fieldset>
-				<div class="form-group">
-					<div class="btn-container col-xs-9 col-xs-offset-1">
-						{!! Form::button('Update'
-							, array(
-								'class' => 'btn btn-blue btn-medium'
-								, 'ng-click' => "price.update()"
-								, 'ng-if' => 'price.active_edit'
-							)
-						) !!}
-
-						{!! Form::button('Add Price'
-							, array(
-								'class' => 'btn btn-blue btn-medium'
-								, 'ng-click' => "price.add()"
-								, 'ng-if' => 'price.active_add'
-							)
-						) !!}
-
-						{!! Form::button('Cancel'
-							, array(
-								'class' => 'btn btn-gold btn-medium'
-								, 'ng-click' => "price.setActive()"
-							)
+								, 'ng-model' => 'price.record.price'
+								, 'ng-class' => "{ 'required-field' : price.fields['price'] }"
+								, 'placeholder' => 'Price'
+							]
 						) !!}
 					</div>
 				</div>
-			</fieldset>
-		</div>
+			</div>
+			<div class="form-group">
+				<label class="col-xs-3 control-label">Days <span class="required">*</span></label>
+				<div class="col-xs-5">
+					{!! Form::text('days','',
+						[
+							'class' => 'form-control'
+							, 'placeholder' => 'Days'
+							, 'ng-class' => "{ 'required-field' : price.fields['days'] }"
+							, 'ng-model' => 'price.record.days'
+						]) 
+					!!}
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-xs-3 control-label" id="status">Status <span class="required">*</span></label>
+				<div class="col-xs-5">
+					<div class="col-xs-6 checkbox">
+						<label>
+						{!! Form::radio('status'
+							, 'Enabled'
+							, true
+							, array(
+								'class' => 'field'
+								, 'ng-model' => 'price.record.status'
+							) 
+						) !!}
+						<span class="lbl padding-8">Enabled</span>
+						</label>
+					</div>
+					<div class="col-xs-6 checkbox">
+						<label>
+						{!! Form::radio('status'
+							, 'Disabled'
+							, false
+							, array(
+								'class' => 'field'
+								, 'ng-model' => 'price.record.status'
+							) 
+						) !!}
+						<span class="lbl padding-8">Disabled</span>
+						</label>
+					</div>
+				</div>
+			</div>
+		</fieldset>
+
+		<fieldset>
+			<div class="form-group">
+				<div class="btn-container col-xs-9 col-xs-offset-1">
+					{!! Form::button('Update'
+						, array(
+							'class' => 'btn btn-blue btn-medium'
+							, 'ng-click' => "price.update()"
+							, 'ng-if' => 'price.active_edit'
+						)
+					) !!}
+
+					{!! Form::button('Add Price'
+						, array(
+							'class' => 'btn btn-blue btn-medium'
+							, 'ng-click' => "price.add()"
+							, 'ng-if' => 'price.active_add'
+						)
+					) !!}
+
+					{!! Form::button('Cancel'
+						, array(
+							'class' => 'btn btn-gold btn-medium'
+							, 'ng-click' => "price.setActive()"
+						)
+					) !!}
+				</div>
+			</div>
+		</fieldset>
 	</div>
 
-	<div class="table-container">
+	<div class="col-xs-12 search-container">
 		<button class="btn btn-blue btn-semi-medium" 
 			ng-click="price.setActive(futureed.ACTIVE_ADD)"
 			ng-if="!(price.active_add || price.active_edit)">

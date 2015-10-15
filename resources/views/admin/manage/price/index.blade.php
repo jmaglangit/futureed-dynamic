@@ -34,7 +34,7 @@
 				<div ng-if="sale.active_client_discount" ng-controller="ManageDiscountController as discount" ng-init="discount.setActive()" 
 					template-directive template-url="{!! route('admin.manage.price.partials.client_discount') !!}"></div>
 				
-				<div ng-if="sale.active_bulk_settings"
+				<div ng-if="sale.active_bulk_settings" ng-controller="ManageBulkController as bulk" ng-init="bulk.setActive()" 
 					template-directive template-url="{!! route('admin.manage.price.partials.bulk_discount') !!}"></div>
 
 			</div>
@@ -43,14 +43,12 @@
 @stop
 	
 @section('scripts')
-	{!! Html::script('//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment-with-locales.js')!!}
-	{!! Html::script('/js/admin/controllers/manage_price_controller.js')!!}
-	{!! Html::script('/js/admin/controllers/manage_discount_controller.js')!!}
-
 	{!! Html::script('/js/admin/controllers/sales_controller.js')!!}
 	{!! Html::script('/js/admin/services/sales_service.js')!!}
+
+	{!! Html::script('/js/admin/controllers/manage_price_controller.js')!!}
+	{!! Html::script('/js/admin/controllers/manage_discount_controller.js')!!}
+	{!! Html::script('/js/admin/controllers/manage_bulk_controller.js')!!}
 	
 	{!! Html::script('/js/common/table_service.js')!!}
-	{!! Html::script('/js/common/search_service.js')!!}
-
 @stop

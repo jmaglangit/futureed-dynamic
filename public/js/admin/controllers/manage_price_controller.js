@@ -108,7 +108,7 @@ function ManagePriceController($scope, salesService, TableService) {
 				}
 			}
 			
-			$scope.ui_unblock();		
+			$scope.ui_unblock();	
 		}).error(function(response){
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();		
@@ -117,6 +117,7 @@ function ManagePriceController($scope, salesService, TableService) {
 
 	self.update = function(){
 		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
 		self.fields = [];
 
 		self.record.days = Math.abs(self.record.days);
@@ -148,6 +149,7 @@ function ManagePriceController($scope, salesService, TableService) {
 
 	self.deletePrice = function(id){
 		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
 
 		$scope.ui_block();
 		salesService.deletePrice(id).success(function(response){

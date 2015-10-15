@@ -1,5 +1,5 @@
 <div ng-if="discount.active_list">
-	<div class="search-container" ng-if="discount.active_add">
+	<div class="col-xs-12 search-container" ng-if="discount.active_add">
 		<div class="col-xs-12">
 			<div class="title-mid">
 				Add Client Discount
@@ -7,7 +7,7 @@
 		</div>
 	</div>
 
-	<div class="search-container" ng-if="discount.active_edit">
+	<div class="col-xs-12 search-container" ng-if="discount.active_edit">
 		<div class="col-xs-12">
 			<div class="title-mid">
 				Update Client Discount
@@ -27,130 +27,127 @@
 		</div>
 	</div>
 
-	<div ng-if="discount.active_add || discount.active_edit">
-		<div class="search-container col-xs-12">
-			{!! Form::open(['class'=> 'form-horizontal']) !!}
-				<fieldset>
-					<div class="form-group">
-						<label class="col-xs-3 control-label">Name <span class="required">*</span></label>
-						<div class="col-xs-5">
-							{!! Form::text('name', '', 
-								[
-									'class' => 'form-control'
-									, 'ng-model' => 'discount.record.name'
-									, 'placeholder' => 'Name'
-									, 'autocomplete' => 'off'
-									, 'ng-disabled' => 'discount.active_edit'
-									, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
-									, 'ng-change' => 'discount.suggestClient()'
-									, 'ng-class' => "{ 'required-field' : discount.fields['name'] || discount.fields['client_id'] }"
-								])
-							!!}
-							<div class="angucomplete-holder" ng-if="discount.clients && discount.active_add">
-								<ul class="col-xs-5 angucomplete-dropdown">
-									<li class="angucomplete-row" ng-repeat="client in discount.clients" ng-click="discount.selectClient(client)">
-										{! client.first_name !} {! client.last_name !}
-									</li>
-								</ul>
-							</div>
-						</div>
-						<div class="margin-top-8" ng-if="discount.active_add"> 
-							<i ng-if="discount.validation.c_loading" class="fa fa-spinner fa-spin"></i>
-							<span ng-if="discount.validation.c_error" class="error-msg-con">{! discount.validation.c_error !}</span>
+	<div class="col-xs-12 search-container" ng-if="discount.active_add || discount.active_edit">
+		{!! Form::open(['class'=> 'form-horizontal']) !!}
+			<fieldset>
+				<div class="form-group">
+					<label class="col-xs-3 control-label">Name <span class="required">*</span></label>
+					<div class="col-xs-5">
+						{!! Form::text('name', '', 
+							[
+								'class' => 'form-control'
+								, 'ng-model' => 'discount.record.name'
+								, 'placeholder' => 'Name'
+								, 'autocomplete' => 'off'
+								, 'ng-disabled' => 'discount.active_edit'
+								, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
+								, 'ng-change' => 'discount.suggestClient()'
+								, 'ng-class' => "{ 'required-field' : discount.fields['name'] || discount.fields['client_id'] }"
+							])
+						!!}
+						<div class="angucomplete-holder" ng-if="discount.clients && discount.active_add">
+							<ul class="col-xs-5 angucomplete-dropdown">
+								<li class="angucomplete-row" ng-repeat="client in discount.clients" ng-click="discount.selectClient(client)">
+									{! client.first_name !} {! client.last_name !}
+								</li>
+							</ul>
 						</div>
 					</div>
-					<div class="form-group">
-						<label class="col-xs-3 control-label">Email</label>
-						<div class="col-xs-5">
-							{!! Form::text('email', '', 
+					<div class="margin-top-8" ng-if="discount.active_add"> 
+						<i ng-if="discount.validation.c_loading" class="fa fa-spinner fa-spin"></i>
+						<span ng-if="discount.validation.c_error" class="error-msg-con">{! discount.validation.c_error !}</span>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-3 control-label">Email</label>
+					<div class="col-xs-5">
+						{!! Form::text('email', '', 
+							[	
+								'class' => 'form-control' 
+								, 'ng-disabled' => 'true'
+								, 'ng-model' => 'discount.record.email'
+								, 'ng-class' => "{ 'required-field' : discount.fields['email'] }"
+								, 'placeholder' => 'Email Address'
+							]) 
+						!!}
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-3 control-label">Percentage <span class="required">*</span></label>
+					<div class="col-xs-5">
+						<div class="input-group">
+							{!! Form::text('percentage', '', 
 								[	
 									'class' => 'form-control' 
-									, 'ng-disabled' => 'true'
-									, 'ng-model' => 'discount.record.email'
-									, 'ng-class' => "{ 'required-field' : discount.fields['email'] }"
-									, 'placeholder' => 'Email Address'
+									, 'placeholder' => 'Discount Percentage'
+									, 'ng-model' => 'discount.record.percentage'
+									, 'ng-class' => "{ 'required-field' : discount.fields['percentage'] }"
 								]) 
 							!!}
+							<span class="input-group-addon">%</span>
 						</div>
 					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-xs-3 control-label">Status <span class="required">*</span></label>
+					<div class="col-xs-5">
+						<div class="col-xs-6 checkbox">	                				
+							<label>
+							{!! Form::radio('example','Enabled', true, 
+								[
+									'class' => 'field', 
+									'ng-model'=> 'discount.record.status'
+								]) 
+							!!}
+							<span class="lbl padding-8">Enabled</span>
+							</label>
+						</div>
+						<div class="col-xs-6 checkbox">
+							<label>
+							{!! Form::radio('example', 'Disabled', false, 
+								[
+									'class' => 'field', 
+									'ng-model'=> 'discount.record.status'
+								]) 
+							!!}
+							<span class="lbl padding-8">Disabled</span>
+							</label>
+						</div>
+					</div>
+				</div>
+				</fieldset>
+				<fieldset>
 					<div class="form-group">
-						<label class="col-xs-3 control-label">Percentage <span class="required">*</span></label>
-						<div class="col-xs-5">
-							<div class="input-group">
-								{!! Form::text('percentage', '', 
-									[	
-										'class' => 'form-control' 
-										, 'placeholder' => 'Discount Percentage'
-										, 'ng-model' => 'discount.record.percentage'
-										, 'ng-class' => "{ 'required-field' : discount.fields['percentage'] }"
-									]) 
-								!!}
-								<span class="input-group-addon">%</span>
-							</div>
+						<div class="btn-container col-xs-9 col-xs-offset-1">
+							{!! Form::button('Update'
+								, array(
+									'class' => 'btn btn-blue btn-medium'
+									, 'ng-click' => "discount.update()"
+									, 'ng-if' => 'discount.active_edit'
+								)
+							) !!}
+
+							{!! Form::button('Add Client Discount'
+								, array(
+									'class' => 'btn btn-blue btn-medium'
+									, 'ng-click' => "discount.add()"
+									, 'ng-if' => 'discount.active_add'
+								)
+							) !!}
+
+							{!! Form::button('Cancel'
+								, array(
+									'class' => 'btn btn-gold btn-medium'
+									, 'ng-click' => "discount.setActive()"
+								)
+							) !!}
 						</div>
 					</div>
-					<div class="form-group">
-						<label class="col-xs-3 control-label">Status <span class="required">*</span></label>
-						<div class="col-xs-5">
-							<div class="col-xs-6 checkbox">	                				
-								<label>
-								{!! Form::radio('example','Enabled', true, 
-									[
-										'class' => 'field', 
-										'ng-model'=> 'discount.record.status'
-									]) 
-								!!}
-								<span class="lbl padding-8">Enabled</span>
-								</label>
-							</div>
-							<div class="col-xs-6 checkbox">
-								<label>
-								{!! Form::radio('example', 'Disabled', false, 
-									[
-										'class' => 'field', 
-										'ng-model'=> 'discount.record.status'
-									]) 
-								!!}
-								<span class="lbl padding-8">Disabled</span>
-								</label>
-							</div>
-						</div>
-					</div>
-					</fieldset>
-					<fieldset>
-						<div class="form-group">
-							<div class="btn-container col-xs-9 col-xs-offset-1">
-								{!! Form::button('Update'
-									, array(
-										'class' => 'btn btn-blue btn-medium'
-										, 'ng-click' => "discount.update()"
-										, 'ng-if' => 'discount.active_edit'
-									)
-								) !!}
-
-								{!! Form::button('Add Client Discount'
-									, array(
-										'class' => 'btn btn-blue btn-medium'
-										, 'ng-click' => "discount.add()"
-										, 'ng-if' => 'discount.active_add'
-									)
-								) !!}
-
-								{!! Form::button('Cancel'
-									, array(
-										'class' => 'btn btn-gold btn-medium'
-										, 'ng-click' => "discount.setActive()"
-									)
-								) !!}
-							</div>
-						</div>
-					</fieldset>
-				{!! Form::close() !!}
-			</div>
+				</fieldset>
+			{!! Form::close() !!}
 		</div>
 
-
-		<div class="table-container">
+		<div class="col-xs-12 search-container">
 			<button class="btn btn-blue btn-semi-medium" 
 				ng-click="discount.setActive(futureed.ACTIVE_ADD)"
 				ng-if="!(discount.active_add || discount.active_edit)">
