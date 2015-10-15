@@ -5,7 +5,7 @@
 		</div>
 	</div>
 
-	<div class="col-xs-12 success-container" ng-if="invoice.errors || invoice.success">
+	<div class="col-xs-12 search-container" ng-if="invoice.errors || invoice.success">
 		<div class="alert alert-error" ng-if="invoice.errors">
 			<p ng-repeat="error in invoice.errors track by $index">
 				{! error !}

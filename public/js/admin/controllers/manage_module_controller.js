@@ -20,6 +20,8 @@ function ManageModuleController($scope, manageModuleService, TableService, Searc
 		self.create = {};
 		self.area_field = Constants.FALSE;
 
+		self.fields = [];
+
 		self.active_list = Constants.FALSE;
 		self.active_view = Constants.FALSE;
 		self.active_add = Constants.FALSE;
@@ -61,6 +63,9 @@ function ManageModuleController($scope, manageModuleService, TableService, Searc
 	}
 
 	self.toggleDetail = function() {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
 		var detail_shown = $('#module_detail').hasClass('in');
 
 		if(detail_shown) {
@@ -72,6 +77,9 @@ function ManageModuleController($scope, manageModuleService, TableService, Searc
 	}
 
 	self.toggleContent = function() {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
 		var content_shown = $('#module_tabs').hasClass('in');
 		
 		if(content_shown) {
@@ -103,6 +111,7 @@ function ManageModuleController($scope, manageModuleService, TableService, Searc
 		self.errors = Constants.FALSE;
 
 		self.searchDefaults();
+		self.tableDefaults();
 		self.list();
 	}
 
@@ -178,10 +187,14 @@ function ManageModuleController($scope, manageModuleService, TableService, Searc
 
 		switch (method){
 			case 'create' :
-				self.area_field = (self.create.subject_id !='') ? Constants.TRUE:Constants.FALSE;
+				self.area_field = (self.create.subject_id !='') ? Constants.TRUE : Constants.FALSE;
+				self.create.subject_area_id = Constants.EMPTY_STR;
+				self.create.area = Constants.EMPTY_STR;
 				break;
 			case 'edit' :
-				self.area_field = (self.details.subject_id !='') ? Constants.TRUE:Constants.FALSE;
+				self.area_field = (self.details.subject_id !='') ? Constants.TRUE : Constants.FALSE;
+				self.details.subject_area_id = Constants.EMPTY_STR;
+				self.details.area = Constants.EMPTY_STR;
 				break;
 		}
 	}
@@ -286,9 +299,8 @@ function ManageModuleController($scope, manageModuleService, TableService, Searc
 					});
 				} else if(response.data) {
 					self.validation = {};
-					self.success = Constants.TRUE;
-					self.setActive('view', self.details.id, 1);
-	    			$("html, body").animate({ scrollTop: 0 }, "slow");
+					self.setActive(Constants.ACTIVE_VIEW, self.details.id);
+	    			self.success = Constants.MSG_UPDATED("Module");
 				}
 			}
 		$scope.ui_unblock();

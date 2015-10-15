@@ -296,6 +296,11 @@ input[type=radio]:checked+.lbl::before{content:"\2022";}
 	margin-bottom: 17px;
 }
 
+.panel-body > .nav-admin {
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
 .nav-admin li {
 	min-width: 134px;
 	text-align: center;
@@ -312,4 +317,13 @@ input[type=radio]:checked+.lbl::before{content:"\2022";}
 	text-decoration: none;
     color: #ffffff;
     background-color: #337ab7;
+}
+
+.navbar-default .navbar-nav > li > a {
+    min-width: 100px;
+    text-align: center;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+    color: #777;
 }
