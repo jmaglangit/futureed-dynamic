@@ -1,23 +1,29 @@
-<div ng-if="grade.active_list_grade">
+<div ng-if="grade.active_list">
 	<div class="content-title">
 		<div class="title-main-content">
 			<span>Grade Management</span>
 		</div>
 	</div>
 
-	<div class="form-content col-xs-12" ng-if="grade.delete.success">
-		<div class="alert alert-success">
-	    	<p>Successfully deleted the selected grade.</p>
-	    </div>
-	</div>
+	<div class="col-xs-12 success-container" ng-if="grade.errors || grade.success">
+		<div class="alert alert-error" ng-if="grade.errors">
+			<p ng-repeat="error in grade.errors track by $index" > 
+				{! error !}
+			</p>
+		</div>
 
-	<div class="col-xs-12 padding-0-30">
-		<div class="title-mid">
-			Search
+		<div class="alert alert-success" ng-if="grade.success">
+			<p> 
+				{! grade.success !}
+			</p>
 		</div>
 	</div>
 
 	<div class="col-xs-12 search-container">
+		<div class="title-mid">
+			Search
+		</div>
+
 		<div class="form-search">
 			{!! Form::open(
 				array('id' => 'search_form'
@@ -65,7 +71,7 @@
 	</div>
 	 
 	<div class="col-xs-12 table-container">
-		<button class="btn btn-blue btn-small" ng-click="grade.setActive('add_grade')">
+		<button class="btn btn-blue btn-semi-medium" ng-click="grade.setActive(futureed.ACTIVE_ADD)">
 			<i class="fa fa-plus-square"></i> Add Grade
 		</button>
 
@@ -86,7 +92,7 @@
 					, array(
 						'ng-model' => 'grade.table.size'
 						, 'ng-change' => 'grade.paginateBySize()'
-						, 'ng-if' => "grade.grades.length"
+						, 'ng-if' => "grade.records.length"
 						, 'class' => 'form-control paginate-size pull-right'
 					)
 				) !!}
@@ -98,34 +104,34 @@
 		            <th>Grade Code</th>
 		            <th>Grade</th>
 		            <th>Country</th>
-		            <th ng-if="grade.grades.length">Action</th>
+		            <th ng-if="grade.records.length">Action</th>
 		        </tr>
 	        </thead>
 	        <tbody>
-		        <tr ng-repeat="a in grade.grades">
-		            <td>{! a.code !}</td>
-		            <td>{! a.name !}</td>
-		            <td>{! a.country.name !}</td>
+		        <tr ng-repeat="record in grade.records">
+		            <td>{! record.code !}</td>
+		            <td>{! record.name !}</td>
+		            <td>{! record.country.name !}</td>
 		            <td>
 		            	<div class="row">
 		            		<div class="col-xs-4">
 		            			<i class="fa" 
-		            				ng-class="{ 'fa-ban error-icon' : a.status == futureed.DISABLED, 'fa-check-circle-o success-icon' : a.status == futureed.ENABLED }"
-		            				tooltip="{! a.status !}"
+		            				ng-class="{ 'fa-ban error-icon' : record.status == futureed.DISABLED, 'fa-check-circle-o success-icon' : record.status == futureed.ENABLED }"
+		            				tooltip="{! record.status !}"
 		            				tooltip-placement="top"
 		            				tooltip-trigger="mouseenter"></i>
 		            		</div>
 		            		<div class="col-xs-4">
-		            			<a href="" ng-click="grade.getGradeDetails(a.id)"><span><i class="fa fa-pencil"></i></span></a>
+		            			<a href="" ng-click="grade.setActive(futureed.ACTIVE_EDIT, record.id)"><span><i class="fa fa-pencil"></i></span></a>
 		            		</div>
 		            		
 		            		<div class="col-xs-4">
-		            			<a href="" ng-click="grade.confirmDeleteGrade(a.id)"><span><i class="fa fa-trash"></i></span></a>
+		            			<a href="" ng-click="grade.confirmDeleteGrade(record.id)"><span><i class="fa fa-trash"></i></span></a>
 		            		</div>	
 		            	</div>
 		            </td>
 		        </tr>
-		        <tr class="odd" ng-if="!grade.grades.length && !grade.table.loading">
+		        <tr class="odd" ng-if="!grade.records.length && !grade.table.loading">
 			        	<td valign="top" colspan="5">
 			        		No records found
 			        	</td>
@@ -139,7 +145,7 @@
 
 			</table>
 
-			<div class="pull-right" ng-if="grade.grades.length">
+			<div class="pull-right" ng-if="grade.records.length">
 				<pagination 
 					total-items="grade.table.total_items" 
 					ng-model="grade.table.page"

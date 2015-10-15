@@ -330,12 +330,6 @@
 							, 'middleware' => 'admin'
 							, 'uses' => $grade_controller . '@delete_grade_form'
 						]);
-					Routes::get('/grade_side_nav',
-						[
-							'as' => 'admin.manage.grades.partials.grade_side_nav'
-							, 'middleware' => 'admin'
-							, 'uses' => $grade_controller . '@grade_side_nav'
-						]);
 				});
 			});
 

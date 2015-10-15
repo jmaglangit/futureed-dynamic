@@ -52,7 +52,4 @@
 	{!! Html::script('/js/admin/controllers/manage_module_content_controller.js')!!}
 	{!! Html::script('/js/admin/services/manage_module_content_service.js')!!}
 	{!! Html::script('/js/admin/constants/manage_module_content_constants.js')!!}
-
-	{!! Html::script('/js/common/search_service.js')!!}
-	{!! Html::script('/js/common/table_service.js')!!}
 @stop

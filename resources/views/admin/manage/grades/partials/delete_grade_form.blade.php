@@ -1,4 +1,4 @@
-<div id="delete_grade_modal" ng-show="grade.delete.confirm" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div id="delete_grade_modal" ng-show="grade.record.confirm" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
         <div class="modal-header">
@@ -12,7 +12,7 @@
                 {!! Form::button('Yes'
                     , array(
                         'class' => 'btn btn-blue btn-medium'
-                        , 'ng-click' => 'grade.deleteGrade(grade.delete.id)'
+                        , 'ng-click' => 'grade.deleteGrade()'
                         , 'data-dismiss' => 'modal'
                     )
                 ) !!}
