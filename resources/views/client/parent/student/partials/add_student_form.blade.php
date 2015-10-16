@@ -5,16 +5,20 @@
 		</div>
 	</div>
 
-	<div class="col-xs-12 form-content">
+	<div class="col-xs-12 success-container" ng-if="student.errors || student.success">
 		<div class="alert alert-error" ng-if="student.errors">
-            <p ng-repeat="error in student.errors track by $index" > 
-                {! error !}
-            </p>
-        </div>
-        <div class="alert alert-success" ng-if="student.success">
-        	<p>Successfully added new student user.</p>
-        </div>
+			<p ng-repeat="error in student.errors track by $index" > 
+				{! error !}
+			</p>
+		</div>
+		<div class="alert alert-success" ng-if="student.success">
+			<p> 
+				{! student.success !}
+			</p>
+		</div>
+	</div>
 
+	<div class="col-xs-12 search-container">
         <fieldset ng-init="student.existActive('new')">
 	        <div class="col-xs-6  col-xs-offset-2"> 
 	            <label class="cursor-pointer">
@@ -64,6 +68,7 @@
 									'class' => 'form-control'
 									, 'ng-class' => "{ 'required-field' : student.fields['email'] }"
 									, 'ng-model' => 'student.record.email_exist'
+									, 'autocomplete' => 'off'
 									, 'placeHolder' => 'Email'
 								]
 							) !!}

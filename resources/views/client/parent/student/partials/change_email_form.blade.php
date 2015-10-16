@@ -21,7 +21,7 @@
 		        			, 'placeholder' => 'Current Email Address'
 		        			, 'ng-model' => 'student.change.current_email'
 		        			, 'ng-model-options' => "{ debounce: {'default' : 1000} }"
-		        			, 'ng-class' => "{ 'required-field' : student.fields['current_email'] }"
+		        			, 'ng-class' => "{ 'required-field' : student.fields['current_email'] || student.fields['email'] }"
 		        			, 'ng-change' => 'student.validateCurrentEmail(student.record.email, student.change.current_email, futureed.STUDENT)'
 		        		)
 	        		)!!}
@@ -61,7 +61,7 @@
 		        			, 'placeholder' => 'Confirm Email Address'
 		        			, 'ng-model' => 'student.change.confirm_email'
 		        			, 'ng-model-options' => "{ debounce: {'default' : 1000} }"
-		        			, 'ng-class' => "{ 'required-field' : student.fields['confirm_email'] }"
+		        			, 'ng-class' => "{ 'required-field' : student.fields['confirm_email'] || student.fields['new_email'] }"
 		        			, 'ng-change' => 'student.confirmNewEmail(student.change.new_email, student.change.confirm_email)') 
 		        		)!!}
 				</div>
@@ -77,6 +77,7 @@
 						[
 							'class' => 'form-control'
 							, 'ng-model' => 'student.change.password'
+							, 'ng-class' => "{ 'required-field' : student.fields['password'] }"
 							, 'placeHolder' => 'Password'
 						]
 					) !!}
