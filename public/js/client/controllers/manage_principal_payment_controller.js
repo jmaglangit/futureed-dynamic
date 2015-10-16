@@ -492,7 +492,7 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 		var client_id = $scope.user.id;
 
 		self.invoice.discount = Constants.FALSE;
-		self.invoice.discount_id = Constants.EMPTY_STR;
+		self.invoice.discount_id = Constants.FALSE;
 		self.invoice.discount_type = Constants.CLIENT;
 		self.invoice.total_amount = self.invoice.sub_total;
 

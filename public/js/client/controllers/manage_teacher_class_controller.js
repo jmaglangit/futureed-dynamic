@@ -390,6 +390,9 @@ function ManageTeacherClassController($scope, ManageClassService, apiService, Ta
 	}
 
 	self.setTabActive = function(active) {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
 		self.help_ans_tab_active = Constants.FALSE;
 		self.help_tab_active = Constants.FALSE;
 		self.tip_tab_active = Constants.FALSE;
