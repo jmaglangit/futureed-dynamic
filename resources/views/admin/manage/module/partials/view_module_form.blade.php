@@ -18,17 +18,19 @@
 
 			<div id="module_detail" class="panel-collapse collapse in">
 				<div class="panel-body">
+					<div class="col-xs-12" ng-if="module.errors || module.success">
+						<div class="alert alert-error" ng-if="module.errors">
+							<p ng-repeat="error in module.errors track by $index" > 
+								{! error !}
+							</p>
+						</div>
+						<div class="alert alert-success" ng-if="module.success">
+							<p> {! module.success !} </p>
+						</div>
+					</div>
+
 					{!! Form::open(array('id'=> 'add_module_form', 'class' => 'form-horizontal')) !!}
 						<div class="col-xs-12">
-							<div class="alert alert-error" ng-if="module.errors">
-								<p ng-repeat="error in module.errors track by $index" > 
-									{! error !}
-								</p>
-							</div>
-
-							<div class="alert alert-success" ng-if="module.success">
-								<p>Successfully edit module.</p>
-							</div>
 							<fieldset>
 								<div class="form-group">
 									<label class="control-label col-xs-2">Subject <span class="required">*</span></label>
@@ -306,8 +308,7 @@
 
 			<div id="module_tabs" class="panel-collapse collapse">
 				<div class="panel-body">
-
-					<ul class="nav nav-tabs">
+					<ul class="nav nav-pills nav-admin">
 						<li role="presentation" class="tab active"><a href="#age_group" ng-click="module.setActiveContent(futureed.AGEGROUP)" aria-controls="home" data-toggle="tab">Age Group</a></li>
 						<li role="presentation" class="tab"><a href="#contents" ng-click="module.setActiveContent(futureed.CONTENTS)" aria-controls="profile" data-toggle="tab">Contents</a></li>
 						<li role="presentation" class="tab"><a href="#q_and_a" ng-click="module.setActiveContent(futureed.QANDA)" aria-controls="messages" data-toggle="tab">Q & A</a></li>

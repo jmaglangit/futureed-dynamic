@@ -26,7 +26,4 @@
 @section('scripts')
 	{!! Html::script('/js/admin/controllers/manage_invoice_controller.js')!!}
 	{!! Html::script('/js/admin/services/manage_invoice_service.js')!!}
-	
-	{!! Html::script('/js/common/table_service.js')!!}
-	{!! Html::script('/js/common/search_service.js')!!}
 @stop
