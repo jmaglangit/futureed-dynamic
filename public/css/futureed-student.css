@@ -271,9 +271,7 @@
 .row {
 	margin: 0;
 }
-.alert-success{
-	margin-left: 0 !important;
-}
+
 .container-bottom {
 	margin-bottom: 20px;
 }
@@ -294,7 +292,7 @@
 }
 
 .search-container{
-	padding:15px 30px;
+	padding:0px 30px 15px 30px;
 	color: #887c70;
 }
 
@@ -1528,4 +1526,12 @@ top: 41px;
 	margin-right: 10px;
 	border: 1px solid #38AB30;
 	border-radius: 5px;
+}
+
+.alert-success, .alert-error {
+	margin-bottom: 15px;
+}
+
+.alert-success{
+	margin-left: 0 !important;
 }
