@@ -127,19 +127,25 @@
 				<thead>
 					<tr>
 						<th>Username</th>
+						<th>Email</th>
+			            <th>Name</th>
 						<th>User Type</th>
-						<th>API Accessed</th>
-						<th>Page Accessed</th>
-						<th>HTTP Response</th>
+						<th>Action</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr ng-repeat="record in logs.records">
 						<td>{! record.username !}</td>
+			            <td>{! record.email !}</td>
+			            <td>{! record.name !}</td>
 						<td>{! record.user_type !}</td>
-						<td>{! record.api_accessed !}</td>
-						<td>{! record.page_accessed !}</td>
-						<td>{! record.result_response !}</td>
+						<td>
+							<div class="row">
+								<div class="col-xs-12">
+									<a href="" ng-click="logs.viewDetails(record)"><span><i class="fa fa-eye"></i></span></a>
+								</div>
+							</div>
+						</td>
 					</tr>
 					<tr class="odd" ng-if="!logs.records.length && !logs.table.loading">
 						<td valign="top" colspan="10">
@@ -166,6 +172,78 @@
 					boundary-links="true"
 					ng-change="logs.paginateByPage()">
 				</pagination>
+			</div>
+		</div>
+	</div>
+
+	<div id="detail_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					Log Details
+				</div>
+				<div class="modal-body">
+					<table class="col-xs-12 table table-striped table-bordered">
+						<thead>
+							<tr>
+								<th>Info</th>
+								<th>Value</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Username</td>
+								<td>{! logs.record.username !}</td>
+							</tr>
+
+							<tr>
+								<td>Name</td>
+								<td>{! logs.record.name !}</td>
+							</tr>
+
+							<tr>
+								<td>Email Address</td>
+								<td>{! logs.record.email !}</td>
+							</tr>
+
+							<tr>
+								<td>User Type</td>
+								<td>{! logs.record.user_type !}</td>
+							</tr>
+
+							<tr>
+								<td>Page Accessed</td>
+								<td>{! logs.record.page_accessed !}</td>
+							</tr>
+
+							<tr>
+								<td>API Accessed</td>
+								<td>{! logs.record.api_accessed !}</td>
+							</tr>
+
+							<tr>
+								<td>Response Status</td>
+								<td>{! logs.record.result_response !}</td>
+							</tr>
+
+							<tr class="odd" ng-if="!logs.record">
+								<td valign="top" colspan="10">
+									No records found
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div class="modal-footer">
+					<div class="btncon col-xs-8 col-xs-offset-4 pull-left">
+						{!! Form::button('Close'
+							, array(
+								'class' => 'btn btn-gold btn-medium'
+								, 'data-dismiss' => 'modal'
+							)
+						) !!}
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>

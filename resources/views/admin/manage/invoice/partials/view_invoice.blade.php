@@ -95,7 +95,7 @@
 		</div>
 	</div>
 
-	<div class="col-xs-12 table-container">
+	<div class="col-xs-12 search-container">
 		<div class="list-container" ng-cloak>
 			<div class="title-mid">
 				Order List

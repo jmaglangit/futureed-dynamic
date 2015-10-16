@@ -6,10 +6,10 @@
 			</p>
 		</div>
 
-        <div class="alert alert-success" ng-if="logs.success">
-            <p>{! logs.success !}</p>
-        </div>
-    </div>
+		<div class="alert alert-success" ng-if="logs.success">
+			<p>{! logs.success !}</p>
+		</div>
+	</div>
 
 	<div class="col-xs-12 search-container">
 		<div class="title-mid">
@@ -126,33 +126,33 @@
 
 			<table class="col-xs-12 table table-striped table-bordered">
 				<thead>
-			        <tr>
-			            <th>Username</th>
-			            <th>IP Address</th>
-			            <th>Agent Used</th>
-			            <th>HTTP Response</th>
-			            <th>Log Type</th>
-			        </tr>
-		        </thead>
-		        <tbody>
-			        <tr ng-repeat="record in logs.records">
-			            <td>{! record.username !}</td>
-			            <td>{! record.client_ip !}:{! record.client_port !}</td>
-			            <td>{! record.client_user_agent !}</td>
-			            <td>{! record.result_response !}</td>
-			            <td>{! record.log_type !}</td>
-			        </tr>
-			        <tr class="odd" ng-if="!logs.records.length && !logs.table.loading">
-			        	<td valign="top" colspan="10">
-			        		No records found
-			        	</td>
-			        </tr>
-			        <tr class="odd" ng-if="logs.table.loading">
-			        	<td valign="top" colspan="10">
-			        		Loading...
-			        	</td>
-			        </tr>
-		        </tbody>
+					<tr>
+						<th>Username</th>
+						<th>IP Address</th>
+						<th>Agent Used</th>
+						<th>HTTP Response</th>
+						<th>Log Type</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="record in logs.records">
+						<td>{! record.username !}</td>
+						<td>{! record.client_ip !}:{! record.client_port !}</td>
+						<td>{! record.client_user_agent !}</td>
+						<td>{! record.result_response !}</td>
+						<td>{! record.log_type !}</td>
+					</tr>
+					<tr class="odd" ng-if="!logs.records.length && !logs.table.loading">
+						<td valign="top" colspan="10">
+							No records found
+						</td>
+					</tr>
+					<tr class="odd" ng-if="logs.table.loading">
+						<td valign="top" colspan="10">
+							Loading...
+						</td>
+					</tr>
+				</tbody>
 			</table>
 
 			<div class="pull-right" ng-if="logs.records.length">
