@@ -219,3 +219,5 @@
 		</div>
 	</div>
 {!! Form::close() !!}
+
+<br />
