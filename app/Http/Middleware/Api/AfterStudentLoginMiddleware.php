@@ -1,8 +1,28 @@
 <?php namespace FutureEd\Http\Middleware\Api;
 
 use Closure;
+use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
+use FutureEd\Services\SessionServices;
+use FutureEd\Services\TokenServices;
+use Illuminate\Support\Facades\Session;
 
 class AfterStudentLoginMiddleware extends JWTMiddleware{
+
+	protected $session;
+
+	protected $token;
+
+	protected $student;
+
+	public function __construct(
+		SessionServices $sessionServices,
+		TokenServices $tokenServices,
+		StudentRepositoryInterface $studentRepositoryInterface
+	){
+		$this->session = $sessionServices;
+		$this->token = $tokenServices;
+		$this->student = $studentRepositoryInterface;
+	}
 
 	/**
 	 * Handle an incoming request.
@@ -25,6 +45,22 @@ class AfterStudentLoginMiddleware extends JWTMiddleware{
 				'type' => config('futureed.student'),
 				'role' => 0
 			]);
+
+
+			//TODO: check if token has expired empty
+
+			//TODO: Add session token, last_activity to users table.
+
+			$user_data = [
+				'user_id' => $content->data->user->id,
+				'session_token' => session('_token')
+			];
+
+			if(!$this->session->addSessionToken($user_data)){
+
+				return $this->respondErrorMessage(2060);
+			}
+
 
 
 			$headers = $response->headers;
