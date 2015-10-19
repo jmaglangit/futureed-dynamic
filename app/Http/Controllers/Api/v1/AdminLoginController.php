@@ -17,6 +17,13 @@ use Illuminate\Support\Facades\Input;
 class AdminLoginController extends ApiController
 {
 
+	/**
+	 * @param UserServices $user
+	 * @param AdminServices $admin
+	 * @param AdminRepositoryInterface $adminRepositoryInterface
+	 * @param PasswordServices $password
+	 * @param TokenServices $tokenServices
+	 */
 	public function __construct(
 		UserServices $user,
 		AdminServices $admin,
@@ -33,6 +40,10 @@ class AdminLoginController extends ApiController
 		$this->admin_repo = $adminRepositoryInterface;
 	}
 
+	/**
+	 * Admin Login.
+	 * @return mixed
+	 */
 	public function login()
 	{
 
