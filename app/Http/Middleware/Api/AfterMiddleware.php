@@ -38,6 +38,7 @@ class AfterMiddleware extends JWTMiddleware {
 				'role' => $payload_data['role'],
 			]);
 
+			//Add update last_activity based on session token
 
 			$collection = $response->headers;
 
