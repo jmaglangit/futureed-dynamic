@@ -34,9 +34,11 @@ function ManageParentStudentController($scope, $filter, ManageParentStudentServi
 
 	self.setActive = function(active, id) {
 		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
 
 		self.fields = [];
 
+		self.record = {};
 		self.validation = {};
 		
 		self.active_list = Constants.FALSE;
@@ -128,6 +130,7 @@ function ManageParentStudentController($scope, $filter, ManageParentStudentServi
 			$scope.ui_unblock();
 		}).error(function(response){
 			self.errors = $scope.internalError();
+			self.table.loading = Constants.FALSE;
 			$scope.ui_unblock();
 		});
 	}
@@ -220,16 +223,16 @@ function ManageParentStudentController($scope, $filter, ManageParentStudentServi
 		            	$("div.birth-date-wrapper select").addClass("required-field");
 		            }
 				} else if(response.data) {
-					self.success = Constants.TRUE;
-					self.record = {};
-					self.validation = {};
+					self.setActive(Constants.ACTIVE_ADD);
+					self.exist = Constants.FALSE;
+					self.success = Constants.MSG_CREATED("Student account");
 
 					$("div.birth-date-wrapper select").val(Constants.EMPTY_STR);
 				}
 			}
 			$scope.ui_unblock();
 		}).error(function(response){
-			$scope.internalError();
+			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
 
@@ -289,9 +292,8 @@ function ManageParentStudentController($scope, $filter, ManageParentStudentServi
 		            	$("div.birth-date-wrapper select").addClass("required-field");
 		            }
 				}else if(response.data) {
-					self.validation = {};
-					self.success = Constants.TRUE;
 					self.setActive(Constants.ACTIVE_VIEW, self.record.id);
+					self.success = Constants.MSG_UPDATED("Student account");
 				}
 			}
 			$scope.ui_unblock();
@@ -324,13 +326,13 @@ function ManageParentStudentController($scope, $filter, ManageParentStudentServi
 						self.fields[value.field] = Constants.TRUE;
 					});
 				} else if(response.data) {
-					self.e_success = ParentConstant.UPDATE_STUDENT_EMAIL_SUCCESS;
 					self.setActive(Constants.ACTIVE_VIEW, self.record.id);
+					self.success = Constants.MSG_UPDATED("Email address");
 				}
 			}
 			$scope.ui_unblock();
 		}).error(function(response){
-			$scope.internalError();
+			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
 	}

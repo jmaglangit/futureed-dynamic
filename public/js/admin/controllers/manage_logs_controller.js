@@ -55,6 +55,16 @@ function ManageLogsController($scope, ManageLogsService, TableService, SearchSer
 		$("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 
+	self.viewDetails = function(record) {
+		self.record = record;
+
+		$("#detail_modal").modal({
+			backdrop: 'static',
+			keyboard: Constants.FALSE,
+			show    : Constants.TRUE
+		});
+	}
+
 	self.searchFnc = function(event) {
 		event = getEvent(event);
 		event.preventDefault();

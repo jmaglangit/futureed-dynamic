@@ -5,7 +5,7 @@
 		</div>
 	</div>
 
-	<div class="col-xs-12 success-container" ng-if="class.errors || class.success">
+	<div class="col-xs-12 search-container" ng-if="class.errors || class.success">
 		<div class="alert alert-error" ng-if="class.errors">
             <p ng-repeat="error in class.errors track by $index" > 
               	{! error !}
@@ -17,7 +17,7 @@
         </div>
     </div>
 
-	<div class="module-container">
+	<div class="col-xs-12 search-container">
         <div class="col-xs-6  col-xs-offset-2"> 
             <label class="cursor-pointer">
             {!! Form::radio('status'

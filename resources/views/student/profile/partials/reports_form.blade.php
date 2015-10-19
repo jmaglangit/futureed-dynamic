@@ -6,16 +6,17 @@
 			<a href="javascript:void(0)" ng-click="reports.setActive(futureed.SUMMARY_PROGRESS)">Summary Progress</a></li>
 	</ul>
 
-	<div class="col-xs-12" ng-if="reports.errors || reports.success">
-		<br />
-		<div class="alert alert-error" ng-if="reports.errors">
-			<p ng-repeat="error in reports.errors track by $index">
-				{! error !}
-			</p>
-		</div>
+	<div class="col-xs-12 search-container">
+		<div ng-if="reports.errors || reports.success">
+			<div class="alert alert-error" ng-if="reports.errors">
+				<p ng-repeat="error in reports.errors track by $index">
+					{! error !}
+				</p>
+			</div>
 
-		<div class="alert alert-success" ng-if="reports.success">
-			<p>{! reports.success !}</p>
+			<div class="alert alert-success" ng-if="reports.success">
+				<p>{! reports.success !}</p>
+			</div>
 		</div>
 	</div>
 	 
@@ -100,11 +101,15 @@
 
 			<div class="row">
 				<p class="progress-key">Keys</p>
-				<div class="progress-legends col-xs-6">
+				<div class="progress-legends col-xs-4">
 					<div class="success-legend"> Completed </div>
 				</div>
-				<div class="progress-legends col-xs-6">
+				<div class="progress-legends col-xs-4">
 					<div class="ongoing-legend"> Ongoing </div>
+				</div>
+
+				<div class="progress-legends col-xs-4">
+					<div class="not-started-legend"> Not yet started </div>
 				</div>
 			</div>
 		</div>

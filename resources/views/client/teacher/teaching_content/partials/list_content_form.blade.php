@@ -32,7 +32,7 @@
 			</div>
 
 			<div class="content-image" ng-if="content.content.media_type_id == futureed.IMAGE">
-				<img ng-src="{! content.content.content_url !}" />
+				<img ng-if="content.content.content_url" ng-src="{! content.content.content_url !}" />
 			</div>
 
 			<div class="content-video" ng-if="content.content.media_type.id == futureed.VIDEO">

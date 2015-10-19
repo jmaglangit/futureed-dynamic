@@ -183,8 +183,8 @@ function ManagePrincipalTeacherController($scope, managePrincipalTeacherService,
 			}
 			$scope.ui_unblock();
 		}).error(function(response) {
-			self.errors = $scope.ui_unblock();
-			self.internalError();
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
 		});
 
 	}
@@ -234,7 +234,6 @@ function ManagePrincipalTeacherController($scope, managePrincipalTeacherService,
 	self.update = function() {
 		self.errors = Constants.FALSE;
 		$("#update_teacher_form input").removeClass("required-field");
-		delete self.record.user;
 
 		$scope.ui_block();
 		managePrincipalTeacherService.update(self.record).success(function(response) {
