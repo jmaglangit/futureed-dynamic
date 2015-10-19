@@ -97,6 +97,11 @@ class Student extends Model {
 
 
     //-------------scopes
+	public function scopeUserId($query, $user_id){
+
+		return $query->where('user_id',$user_id);
+	}
+
     public function scopeName($query, $name) {
 
         return $query->where(function($query) use ($name) {
