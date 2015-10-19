@@ -120,9 +120,6 @@ class SessionServices {
 		//get session by id
 		$stored_session = $this->user_repo->getSessionToken($user_data['user_id']);
 
-
-//	dd($stored_session->last_activity, Carbon::now()->diffInSeconds(Carbon::parse($stored_session->last_activity)));
-
 		if(!$stored_session->session_token){
 
 			//update user with token
