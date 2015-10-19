@@ -1,25 +1,30 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Jason
- * Date: 3/5/15
- * Time: 6:06 PM
- */
-namespace FutureEd\Models\Repository\User;
+<?php namespace FutureEd\Models\Repository\User;
 
+use Carbon\Carbon;
 use FutureEd\Models\Core\User;
+use FutureEd\Models\Traits\LoggerTrait;
+use Illuminate\Support\Facades\DB;
 use League\Flysystem\Exception;
 
 
 class UserRepository implements UserRepositoryInterface {
 
-    //TODO: filter all query by user_type.
 
+    use LoggerTrait;
+
+	/**
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
     public function getUsers(){
         return User::all();
     }
 
     // get common information
+	/**
+     * @param $id
+     * @param string $user_type
+     * @return mixed
+     */
     public function getUser($id,$user_type = 'all'){
         $user =  User::select(
             'id'
@@ -41,6 +46,11 @@ class UserRepository implements UserRepositoryInterface {
     }
 
     //get all details of the user
+	/**
+     * @param $id
+     * @param $user_type
+     * @return mixed
+     */
     public function getUserDetail($id,$user_type){
         return User::where('id','=',$id)
             ->where('user_type','=',$user_type)
@@ -48,6 +58,10 @@ class UserRepository implements UserRepositoryInterface {
     }
 
 
+	/**
+     * @param $user
+     * @return string|static
+     */
     public function addUser($user){
 
         try{
@@ -72,6 +86,11 @@ class UserRepository implements UserRepositoryInterface {
 
     }
 
+	/**
+     * @param $id
+     * @param $data
+     * @return \Illuminate\Support\Collection|null|string|static
+     */
     public function updateUser($id, $data) {
         try {
 		
@@ -88,10 +107,19 @@ class UserRepository implements UserRepositoryInterface {
 		return $user;
     }
 
+	/**
+     * @param $id
+     * @return int
+     */
     public function deleteUser($id){
         return 0;
     }
 
+	/**
+     * @param $username
+     * @param $user_type
+     * @return mixed
+     */
     public function checkUserName($username,$user_type){
 
         //return user id
@@ -100,6 +128,11 @@ class UserRepository implements UserRepositoryInterface {
 
     }
 
+	/**
+     * @param $email
+     * @param $user_type
+     * @return mixed
+     */
     public function checkEmail($email,$user_type){
 
         //return user id
@@ -108,35 +141,59 @@ class UserRepository implements UserRepositoryInterface {
 
     }
 
+	/**
+     * @param $id
+     * @return mixed
+     */
     public function getLoginAttempts($id){
 
         return User::where('id','=',$id)->pluck('login_attempt');
 
     }
 
+	/**
+     * @param $id
+     * @return mixed
+     */
     public function accountActivated($id){
 
         return User::where('id','=',$id)->pluck('is_account_activated');
 
     }
 
+	/**
+     * @param $id
+     * @return mixed
+     */
     public function accountLocked($id){
 
         return User::where('id','=',$id)->pluck('is_account_locked');
     }
 
+	/**
+     * @param $id
+     * @return mixed
+     */
     public function accountDeleted($id){
 
         return User::where('id','=',$id)->pluck('is_account_deleted');
 
     }
 
-	public function accountStatus($id){
+    /**
+     * @param $id
+     * @return mixed
+     */
+    public function accountStatus($id){
 
 		return User::where('id','=',$id)->pluck('status');
 
 	}
 
+	/**
+     * @param $id
+     * @throws Exception
+     */
     public function addLoginAttempt($id){
         $attempt = $this->getLoginAttempts($id);
 
@@ -172,6 +229,10 @@ class UserRepository implements UserRepositoryInterface {
         }
     }
 
+	/**
+     * @param $id
+     * @throws Exception
+     */
     public function lockAccount($id){
         try{
 
@@ -184,6 +245,10 @@ class UserRepository implements UserRepositoryInterface {
         }
     }
 
+	/**
+     * @param $id
+     * @return mixed
+     */
     public function getEmail($id){
 
         return User::where('id','=',$id)->pluck('email');
@@ -191,15 +256,25 @@ class UserRepository implements UserRepositoryInterface {
     }
 
     //set access token of the user
+	/**
+     * @param $access_token
+     */
     public function setAccessToken($access_token){
 
     }
 
     //get access token of the user
+	/**
+     * @param $user
+     */
     public function getAccessToken($user){
 
     }
 
+	/**
+     * @param $id
+     * @return mixed
+     */
     public function getConfirmationCode($id)
     {
 
@@ -208,6 +283,11 @@ class UserRepository implements UserRepositoryInterface {
     }
 
     //update reset_code and reset_code_expiry
+	/**
+     * @param $id
+     * @param $code
+     * @throws Exception
+     */
     public function updateResetCode($id,$code){
         try{
 
@@ -222,6 +302,11 @@ class UserRepository implements UserRepositoryInterface {
     }
 
     //check id with password
+	/**
+     * @param $id
+     * @param $password
+     * @return mixed
+     */
     public function checkPassword($id,$password){
 
         return User::where('id',$id)
@@ -231,6 +316,10 @@ class UserRepository implements UserRepositoryInterface {
     }
     
     //return only the username and the email
+	/**
+     * @param $id
+     * @return mixed
+     */
     public function getUsernameEmail($id){
        
         return User::select('username','email','new_email')
@@ -238,7 +327,11 @@ class UserRepository implements UserRepositoryInterface {
     }
     
     //update username and email
-    
+
+	/**
+     * @param $id
+     * @param $data
+     */
     public function updateUsernameEmail($id,$data){
         User::where('id','=',$id)
                      ->update(['username'=>$data['username'],
@@ -248,6 +341,9 @@ class UserRepository implements UserRepositoryInterface {
     
     
     //update username inactive || locked
+	/**
+     * @param $id
+     */
     public function updateInactiveLock($id){
          User::where('id','=',$id)
                      ->update(['is_account_activated'=>1,
@@ -260,7 +356,11 @@ class UserRepository implements UserRepositoryInterface {
                               ]);
         
     }
-    
+
+	/**
+     * @param $id
+     * @return mixed
+     */
     public function isActivated($id){
         
          return User::where('id','=',$id)
@@ -268,6 +368,11 @@ class UserRepository implements UserRepositoryInterface {
                      
     }
 
+	/**
+     * @param $id
+     * @param $code
+     * @throws Exception
+     */
     public function updateConfirmationCode($id,$code){
         try{
 
@@ -281,6 +386,11 @@ class UserRepository implements UserRepositoryInterface {
         }
     }
 
+	/**
+     * @param $id
+     * @param $password
+     * @throws Exception
+     */
     public function updatePassword($id,$password){
 
         try{
@@ -295,6 +405,11 @@ class UserRepository implements UserRepositoryInterface {
 
     }
 
+	/**
+     * @param $id
+     * @param $username
+     * @throws Exception
+     */
     public function updateUsername($id,$username){
 
          try{
@@ -311,6 +426,11 @@ class UserRepository implements UserRepositoryInterface {
 
     }
 
+	/**
+     * @param $id
+     * @param $new_email
+     * @throws Exception
+     */
     public function addNewEmail($id,$new_email){
 
         try{
@@ -326,6 +446,11 @@ class UserRepository implements UserRepositoryInterface {
 
     }
 
+	/**
+     * @param $new_email
+     * @param $user_type
+     * @return mixed
+     */
     public function checkNewEmailExist($new_email,$user_type){
 
          return User::where('new_email','=',$new_email)
@@ -334,6 +459,11 @@ class UserRepository implements UserRepositoryInterface {
 
     }
 
+	/**
+     * @param $user_id
+     * @param $new_email
+     * @throws Exception
+     */
     public function updateToNewEmail($user_id,$new_email){
 
 
@@ -353,6 +483,11 @@ class UserRepository implements UserRepositoryInterface {
 
     }
 
+	/**
+     * @param $id
+     * @param $code
+     * @throws Exception
+     */
     public function updateEmailCode($id,$code){
         try{
 
@@ -367,6 +502,11 @@ class UserRepository implements UserRepositoryInterface {
     }
 
 
+	/**
+     * @param $id
+     * @param $status
+     * @throws Exception
+     */
     public function updateStatus($id,$status){
         
         try{
@@ -423,15 +563,168 @@ class UserRepository implements UserRepositoryInterface {
 		]);
 	}
 
+	/**
+     * @param $id
+     * @return mixed
+     */
     public function getFacebookId($id){
 
         return User::where('id',$id)->pluck('facebook_app_id');
     }
 
 
+	/**
+     * @param $id
+     * @return mixed
+     */
     public function getGoogleId($id){
 
         return User::where('id',$id)->pluck('google_app_id');
+    }
+
+	/**
+     * @param $id
+     * @return mixed
+     */
+    public function getSessionToken($id){
+
+        return User::select('session_token','last_activity')->find($id);
+
+    }
+
+	/**
+     * @param $data
+     * @return bool
+     */
+    public function updateSessionToken($data){
+
+        DB::beginTransaction();
+
+        try{
+
+            $response = User::where('id',$data['user_id'])
+                ->update([
+                    'session_token' => $data['session_token'],
+                    'last_activity' => Carbon::now()
+                ]);
+
+        }catch (\Exception $e){
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
+        }
+
+        DB::commit();
+
+        return $response;
+
+    }
+
+
+	/**
+     * @param $id
+     * @return bool
+     */
+    public function emptySessionToken($id){
+
+        DB::beginTransaction();
+
+        try{
+
+            $response = User::where('id',$id);
+
+            $response = $response
+                ->update([
+                    'session_token' => NULL
+                ]);
+        }catch(\Exception $e){
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
+        }
+
+        DB::commit();
+
+        return $response;
+    }
+
+
+	/**
+     * @param $id
+     * @param $impersonator
+     * @return bool
+     */
+    public function enableImpersonate($id, $impersonator){
+
+        DB::beginTransaction();
+
+        try{
+
+            $response = User::where('id',$id)
+                ->update([
+                    'impersonate' => 1,
+                    'impersonated_by' => $impersonator
+                ]);
+
+        }catch (\Exception $e){
+
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
+        }
+
+        DB::commit();
+
+        return $response;
+    }
+
+	/**
+     * @param $id
+     * @return bool
+     */
+    public function disabledImpersonate($id){
+
+        DB::beginTransaction();
+
+        try{
+
+            $response = User::where('id',$id)
+                ->update([
+                    'impersonate' => NULL,
+                    'impersonated_by' => NULL
+                ]);
+
+        }catch (\Exception $e){
+
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
+        }
+
+        DB::commit();
+
+        return $response;
+    }
+
+	/**
+     * @param $id
+     * @return mixed
+     */
+    public function getImpersonator($id){
+
+        return User::where('id',$id)->pluck('impersonated_by');
     }
 
 
