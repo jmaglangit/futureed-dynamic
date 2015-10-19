@@ -87,6 +87,18 @@ interface UserRepositoryInterface {
 
 	public function getGoogleId($id);
 
+	public function getSessionToken($id);
+
+	public function updateSessionToken($data);
+
+	public function emptySessionToken($id);
+
+	public function enableImpersonate($id, $impersonator);
+
+	public function disabledImpersonate($id);
+
+	public function getImpersonator($id);
+
 
 
 }

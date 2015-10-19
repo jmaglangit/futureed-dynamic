@@ -1,6 +1,7 @@
 <?php namespace FutureEd\Services;
 
 
+use Carbon\Carbon;
 use FutureEd\Models\Repository\Admin\AdminRepositoryInterface;
 use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
@@ -13,6 +14,8 @@ class SessionServices {
 	 * @var user
 	 */
 	protected $user;
+
+	protected $user_repo;
 
 	/**
 	 * @var student
@@ -35,12 +38,15 @@ class SessionServices {
 	public function __construct(
 		AdminRepositoryInterface $adminRepositoryInterface,
 		ClientRepositoryInterface $clientRepositoryInterface,
-		StudentRepositoryInterface $studentRepositoryInterface
+		StudentRepositoryInterface $studentRepositoryInterface,
+		UserRepositoryInterface $userRepositoryInterface
+
 	){
 
 		$this->student = $studentRepositoryInterface;
 		$this->client = $clientRepositoryInterface;
 		$this->admin = $adminRepositoryInterface;
+		$this->user_repo = $userRepositoryInterface;
 	}
 
 	/**
@@ -104,6 +110,41 @@ class SessionServices {
 		$user = $this->getUser();
 
 		Session::put('current_user',$user['user_id']);
+
+	}
+
+	//check user login if available.
+	public function addSessionToken($user_data){
+
+		//user_data - user_id, token.
+		//get session by id
+		$stored_session = $this->user_repo->getSessionToken($user_data['user_id']);
+
+
+//	dd($stored_session->last_activity, Carbon::now()->diffInSeconds(Carbon::parse($stored_session->last_activity)));
+
+		if(!$stored_session->session_token){
+
+			//update user with token
+			return $this->user_repo->updateSessionToken($user_data);
+
+		} elseif($stored_session->session_token <> $user_data['session_token']
+			&&  Carbon::now()->diffInHours(Carbon::parse($stored_session->last_activity)) > 2 ){
+			//	if exist compare token  and last_activity <= 2hrs/ session expiry.
+
+			//update user with token
+			return $this->user_repo->updateSessionToken($user_data);
+
+		} elseif($stored_session->session_token == $user_data['session_token']) {
+
+			//update last_activity to now
+			return $this->user_repo->updateSessionToken($user_data);
+
+		} else {
+
+			return false;
+		}
+
 
 	}
 
