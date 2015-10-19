@@ -14,6 +14,7 @@ function ManageHelpRequestController($scope, ManageHelpRequestService, TableServ
 
 	self.setActive = function(active, id) {
 		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
 		self.fields = [];
 
 		self.active_list = Constants.FALSE;
@@ -51,6 +52,9 @@ function ManageHelpRequestController($scope, ManageHelpRequestService, TableServ
 	}
 
 	self.searchFnc = function(event) {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
 		self.tableDefaults();
 		self.list();
 
@@ -147,8 +151,8 @@ function ManageHelpRequestController($scope, ManageHelpRequestService, TableServ
 						self.fields[value.field] = Constants.TRUE;
 					});
 				} else if(response.data) {
-					self.success = HelpConstants.MSG_UPDATE_SUCCESS;
 					self.setActive(Constants.ACTIVE_VIEW, self.record.id);
+					self.success = Constants.MSG_UPDATED("Help request");
 				}
 			}
 
@@ -162,8 +166,8 @@ function ManageHelpRequestController($scope, ManageHelpRequestService, TableServ
 	self.acceptHelp = function() {
 		var data = {};
 			data.id = self.record.id;
-			data.request_status = "Accepted";
-			data.message = HelpConstants.MSG_ACCEPT_HELP_SUCCESS;
+			data.request_status = Constants.ACCEPTED;
+			data.message = Constants.MSG_ACCEPTED("Help request");
 
 		updateHelpStatus(data);
 	}
@@ -171,8 +175,8 @@ function ManageHelpRequestController($scope, ManageHelpRequestService, TableServ
 	self.rejectHelp = function() {
 		var data = {};
 			data.id = self.record.id;
-			data.request_status = "Rejected";
-			data.message = HelpConstants.MSG_REJECT_HELP_SUCCESS;
+			data.request_status = Constants.REJECTED;
+			data.message = Constants.MSG_REJECTED("Help request");;
 
 		updateHelpStatus(data);
 	}
@@ -187,8 +191,8 @@ function ManageHelpRequestController($scope, ManageHelpRequestService, TableServ
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
-					self.success = data.message;
 					self.setActive(Constants.ACTIVE_VIEW, data.id);
+					self.success = data.message;
 				}
 			}
 
@@ -221,8 +225,8 @@ function ManageHelpRequestController($scope, ManageHelpRequestService, TableServ
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
-					self.success = HelpConstants.MSG_DELETE_SUCCESS;
 					self.setActive(Constants.ACTIVE_LIST);
+					self.success = Constants.MSG_DELETED("Help request");
 				}
 			}
 

@@ -50,5 +50,4 @@
 @section('scripts')
 	{!! Html::script('/js/admin/controllers/manage_help_request_controller.js')!!}
 	{!! Html::script('/js/admin/services/manage_help_request_service.js')!!}
-	{!! Html::script('/js/admin/constants/manage_help_constants.js')!!}
 @stop
