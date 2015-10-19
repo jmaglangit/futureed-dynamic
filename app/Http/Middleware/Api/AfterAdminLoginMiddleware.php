@@ -2,6 +2,7 @@
 
 use Closure;
 use FutureEd\Models\Repository\Admin\AdminRepositoryInterface;
+use FutureEd\Services\SessionServices;
 use FutureEd\Services\TokenServices;
 
 class AfterAdminLoginMiddleware extends JWTMiddleware{
@@ -10,14 +11,19 @@ class AfterAdminLoginMiddleware extends JWTMiddleware{
 
 	protected $token;
 
+	protected $session;
+
 	public function __construct(
 		TokenServices $tokenServices,
-		AdminRepositoryInterface $adminRepositoryInterface
+		AdminRepositoryInterface $adminRepositoryInterface,
+		SessionServices $sessionServices
 	){
 
 		$this->admin = $adminRepositoryInterface;
 
 		$this->token = $tokenServices;
+
+		$this->session = $sessionServices;
 	}
 
 
@@ -44,6 +50,18 @@ class AfterAdminLoginMiddleware extends JWTMiddleware{
 			]);
 
 
+			//TODO: check if token has expired empty
+			//TODO: Add session token, last_activity to users table.
+
+			$user_data = [
+				'user_id' => $this->admin->getAdminUserId($content->data->id),
+				'session_token' => session('_token')
+			];
+
+			if(!$this->session->addSessionToken($user_data)){
+
+				return $this->respondErrorMessage(2060);
+			}
 
 			$headers = $response->headers;
 
