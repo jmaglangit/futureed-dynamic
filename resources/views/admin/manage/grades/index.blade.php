@@ -27,7 +27,6 @@
 @stop
 	
 @section('scripts')
-	{!! Html::script('/js/admin/manage_grade.js')!!}
 	{!! Html::script('/js/admin/controllers/manage_grade_controller.js')!!}
 	{!! Html::script('/js/admin/services/manage_grade_service.js')!!}
 @stop
