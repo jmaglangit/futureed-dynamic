@@ -50,5 +50,4 @@
 @section('scripts')
 	{!! Html::script('/js/admin/controllers/manage_help_answer_controller.js')!!}
 	{!! Html::script('/js/admin/services/manage_help_answer_service.js')!!}
-	{!! Html::script('/js/admin/constants/manage_help_answer_constants.js')!!}
 @stop

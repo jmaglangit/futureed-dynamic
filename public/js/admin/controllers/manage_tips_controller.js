@@ -169,6 +169,7 @@ function ManageTipsController($scope, ManageTipsService, TableService, SearchSer
 	self.rateTip = function() {
 		self.rate_modal = Constants.TRUE;
 		self.rate_errors = Constants.FALSE;
+		self.rating = Constants.EMPTY_STR;
 
 		$("#rate_tip").modal({
 	        backdrop: 'static',

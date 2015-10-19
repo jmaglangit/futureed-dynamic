@@ -14,6 +14,7 @@ function ManageHelpAnswerController($scope, ManageHelpAnswerService, TableServic
 
 	self.setActive = function(active, id) {
 		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
 		self.fields = [];
 
 		self.active_list = Constants.FALSE;
@@ -42,7 +43,6 @@ function ManageHelpAnswerController($scope, ManageHelpAnswerService, TableServic
 				break;
 
 			default:
-				self.success = Constants.FALSE;
 				self.active_list = Constants.TRUE;
 				break;
 		}
@@ -51,6 +51,7 @@ function ManageHelpAnswerController($scope, ManageHelpAnswerService, TableServic
 	}
 
 	self.searchFnc = function(event) {
+		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
 
 		self.tableDefaults();
@@ -152,8 +153,8 @@ function ManageHelpAnswerController($scope, ManageHelpAnswerService, TableServic
 						self.fields[value.field] = Constants.TRUE;
 					});
 				} else if(response.data) {
-					self.success = HelpAnswerConstants.MSG_UPDATE_SUCCESS;
 					self.setActive(Constants.ACTIVE_VIEW, response.data.id);
+					self.success = Constants.MSG_UPDATED("Help answer");
 				}
 			}
 
@@ -166,6 +167,9 @@ function ManageHelpAnswerController($scope, ManageHelpAnswerService, TableServic
 
 	self.rateAnswer = function() {
 		self.rate_modal = Constants.TRUE;
+		self.rate_errors = Constants.FALSE;
+		self.rating = Constants.EMPTY_STR;
+
 		$("#rate_answer").modal({
 	        backdrop: 'static',
 	        keyboard: Constants.FALSE,
@@ -178,8 +182,8 @@ function ManageHelpAnswerController($scope, ManageHelpAnswerService, TableServic
 			data.id = self.record.id;
 			data.rated_by = Constants.ADMIN;
 			data.rating = self.rating;
-			data.request_answer_status = "Accepted";
-			data.message = HelpAnswerConstants.MSG_ACCEPT_ANSWER_SUCCESS;
+			data.request_answer_status = Constants.ACCEPTED;
+			data.message = Constants.MSG_ACCEPTED("Help answer");
 
 		updateHelpAnswerStatus(data);
 	}
@@ -187,8 +191,9 @@ function ManageHelpAnswerController($scope, ManageHelpAnswerService, TableServic
 	self.rejectAnswer = function() {
 		var data = {};
 			data.id = self.record.id;
-			data.request_answer_status = "Rejected";
-			data.message = HelpAnswerConstants.MSG_REJECT_ANSWER_SUCCESS;
+			data.rated_by = Constants.ADMIN;
+			data.request_answer_status = Constants.REJECTED;
+			data.message = Constants.MSG_REJECTED("Help answer");
 
 		updateHelpAnswerStatus(data);
 	}
@@ -204,10 +209,8 @@ function ManageHelpAnswerController($scope, ManageHelpAnswerService, TableServic
 					self.rate_errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					$("#rate_answer").modal('hide');
-					self.success = data.message;
 					self.setActive(Constants.ACTIVE_VIEW, response.data.id);
-					self.rate_errors = Constants.FALSE;
-					self.rating = Constants.EMPTY_STR
+					self.success = data.message;
 				}
 			}
 
@@ -240,8 +243,8 @@ function ManageHelpAnswerController($scope, ManageHelpAnswerService, TableServic
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
-					self.success = HelpAnswerConstants.MSG_DELETE_SUCCESS;
 					self.setActive(Constants.ACTIVE_LIST);
+					self.success = Constants.MSG_DELETED("Help answer");
 				}
 			}
 
