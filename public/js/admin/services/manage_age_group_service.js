@@ -4,55 +4,55 @@ angular.module('futureed.services')
 ManageAgeGroupService.$inject = ['$http'];
 
 function ManageAgeGroupService($http) {
-	var ageGroupServiceApi = {};
-	var ageGroupServiceUrl = '/api/v1/';
+	var api = {};
+	var apiUrl = '/api/v1/';
 
-	ageGroupServiceApi.getAge = function() {
+	api.getAges = function() {
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url 	: ageGroupServiceUrl + 'age-group'
+			, url 	: apiUrl + 'age-group'
 		});
 	}
 
-	ageGroupServiceApi.addAgeGroup = function(data) {
+	api.add = function(data) {
 		return $http({
 			method 	: Constants.METHOD_POST
 			, data 	: data
-			, url 	: ageGroupServiceUrl + 'module-group'
+			, url 	: apiUrl + 'module-group'
 		});
 	}
 
-	ageGroupServiceApi.getAgeGroupDetail = function(id) {
+	api.details = function(id) {
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url 	: ageGroupServiceUrl + 'module-group/' + id
+			, url 	: apiUrl + 'module-group/' + id
 		});
 	}
 
-	ageGroupServiceApi.saveAgeGroup  = function(data) {
+	api.update  = function(data) {
 		return $http({
 			method 	: Constants.METHOD_PUT
 			, data 	: data
-			, url 	: ageGroupServiceUrl + 'module-group/' + data.id
+			, url 	: apiUrl + 'module-group/' + data.id
 		});
 	}
 
-	ageGroupServiceApi.deleteAgeGroup  = function(id) {
+	api.deleteAgeGroup  = function(id) {
 		return $http({
 			method 	: Constants.METHOD_DELETE
-			, url 	: ageGroupServiceUrl + 'module-group/' + id
+			, url 	: apiUrl + 'module-group/' + id
 		});
 	}
 
-	ageGroupServiceApi.ageModuleList = function(module, table) {
+	api.list = function(module, table) {
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url 	: ageGroupServiceUrl + 'module-group?module_id=' + module
+			, url 	: apiUrl + 'module-group?module_id=' + module
 				+ '&limit=' + table.size
 				+ '&offset=' + table.offset
 		});
 	}
 
-	return ageGroupServiceApi;
+	return api;
 
 }

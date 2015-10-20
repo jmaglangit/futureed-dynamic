@@ -1,5 +1,5 @@
 <div ng-if="age.active_list" id="age-group">
-	<div class="col-xs-12 success-container" ng-if="age.errors || age.success">
+	<div class="col-xs-12 search-container" ng-if="age.errors || age.success">
 		<div class="alert alert-error" ng-if="age.errors">
 			<p ng-repeat="error in age.errors track by $index">
 				{! error !}
@@ -11,10 +11,8 @@
 		</div>
 	</div>
 
-	<div class="col-xs-12 search-container"></div>
-
 	<div class="table-container" ng-init="age.ageModuleList()">
-		<button class="btn btn-blue btn-semi-medium" ng-click="age.setActive('add')">
+		<button class="btn btn-blue btn-semi-medium" ng-click="age.setActive(futureed.ACTIVE_ADD)">
 			<i class="fa fa-plus-square"></i> Add Age Group
 		</button>
 
@@ -35,7 +33,7 @@
 					, array(
 						'ng-model' => 'age.table.size'
 						, 'ng-change' => 'age.paginateBySize()'
-						, 'ng-if' => "age.age_records.length"
+						, 'ng-if' => "age.records.length"
 						, 'class' => 'form-control paginate-size pull-right'
 					)
 				) !!}
@@ -46,25 +44,25 @@
 					<tr>
 						<th>Age</th>
 						<th>Total Earned Points</th>
-						<th ng-if="age.age_records.length">Action</th>
+						<th ng-if="age.records.length">Action</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="ageInfo in age.age_records">
-						<td>{! ageInfo.age_group.age !}</td>
-						<td>{! ageInfo.points_earned !}</td>
+					<tr ng-repeat="record in age.records">
+						<td>{! record.age_group.age !}</td>
+						<td>{! record.points_earned !}</td>
 						<td>
 							<div class="row">
 								<div class="col-xs-6">
-									<a href="" ng-click="age.setActive(futureed.ACTIVE_EDIT, ageInfo.id)"><span><i class="fa fa-pencil"></i></span></a>
+									<a href="" ng-click="age.setActive(futureed.ACTIVE_EDIT, record.id)"><span><i class="fa fa-pencil"></i></span></a>
 								</div>
 								<div class="col-xs-6">
-									<a href="" ng-click="age.confirmDelete(ageInfo.id)"><span><i class="fa fa-trash"></i></span></a>
+									<a href="" ng-click="age.confirmDelete(record.id)"><span><i class="fa fa-trash"></i></span></a>
 								</div>
 							</div>
 						</td>
 					</tr>
-					<tr class="odd" ng-if="!age.age_records.length && !age.table.loading">
+					<tr class="odd" ng-if="!age.records.length && !age.table.loading">
 						<td valign="top" colspan="7">
 							No records found
 						</td>
@@ -77,7 +75,7 @@
 				</tbody>
 			</table>
 
-			<div class="pull-right" ng-if="age.age_records.length">
+			<div class="pull-right" ng-if="age.records.length">
 				<pagination 
 					total-items="age.table.total_items" 
 					ng-model="age.table.page"
@@ -93,14 +91,14 @@
 		</div>
 	</div>
 
-	<div id="delete_age_group_modal" ng-show="age.delete.confirm" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	<div id="delete_age_group_modal" ng-show="age.record.confirm" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
 					Delete Age Group
 				</div>
 				<div class="modal-body">
-					Are you sure you want to delete this Age Group?
+					Are you sure you want to delete this age group?
 				</div>
 				<div class="modal-footer">
 					<div class="btncon col-md-8 col-md-offset-4 pull-left">
@@ -123,3 +121,4 @@
 			</div>
 		</div>
 	</div>
+</div>
