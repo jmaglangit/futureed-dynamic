@@ -136,6 +136,6 @@
 			{! display_date | date:'MMMM dd, yyyy' !}
 		</h4>
 		<br />
-		<p ng-if="!announce">{! announce.announcement !}</p>
+		<p>{! announce.announcement !}</p>
 	</div>
 </div>

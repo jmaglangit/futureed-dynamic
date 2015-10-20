@@ -36,8 +36,6 @@
 @stop
 	
 @section('scripts')
-	{!! Html::script('/js/admin/manage_subject.js')!!}
-	
 	{!! Html::script('/js/admin/controllers/manage_subject_controller.js')!!}
 	{!! Html::script('/js/admin/services/manage_subject_service.js')!!}
 

@@ -1,5 +1,5 @@
 <div ng-if="answer.active_list">
-	<div class="col-xs-12" ng-if="answer.errors || answer.success">
+	<div class="col-xs-12 success-container" ng-if="answer.errors || answer.success">
 		<div class="alert alert-error" ng-if="answer.errors">
 			<p ng-repeat="error in answer.errors track by $index">
 				{! error !}

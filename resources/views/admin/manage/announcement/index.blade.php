@@ -13,7 +13,7 @@
 			<div class="announce-content">
 				<div class="content-title">
 					<div class="title-main-content">
-						<span><i class="fa fa-gear"></i> System Settings</span>
+						<span><i class="fa fa-bullhorn"></i> Client Announcement</span>
 					</div>
 				</div>
 				<div class="form-content col-xs-12">
@@ -26,17 +26,12 @@
 					 <div class="alert alert-success" ng-if="announce.data.success">
 			        	<p>Successfully created this announcement.</p>
 			        </div>
-
-					<div class="subtitle-content">
-						<span><i class="fa fa-plus-square"></i> Create Client Announcement</span>
-					</div>
 					{!! Form::open([
 						'id' => 'announcement_form'
 						, 'class' => 'form-horizontal'
 						, 'ng-init' => 'announce.getAnnouncement()'
 						]) !!}
 						<fieldset>
-							<legend class="legend-name-mid legend-announce"></legend>
 								<div class="col-xs-10">
 									<div class="row">
 									 	<div class="form-group">

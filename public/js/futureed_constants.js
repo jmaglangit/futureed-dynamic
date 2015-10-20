@@ -237,6 +237,14 @@ var Constants = {
 		return noun + " deleted.";
 	}
 
+	, MSG_ACCEPTED				: function(noun) {
+		return noun + " accepted.";
+	}
+
+	, MSG_REJECTED				: function(noun) {
+		return noun + " rejected.";
+	}
+
 	, URL_FORGOT_PASSWORD		: function(user_type) {
 		return '/' + user_type + '/password/forgot';
 	}
