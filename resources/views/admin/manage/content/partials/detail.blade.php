@@ -273,7 +273,7 @@
 						{!! Form::button('Save'
 							, array(
 								'class' => 'btn btn-blue btn-medium'
-								, 'ng-click' => "content.updateContent()"
+								, 'ng-click' => "content.update()"
 							)
 						) !!}
 
