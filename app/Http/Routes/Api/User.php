@@ -77,3 +77,15 @@ Routes::group([
     Routes::resource('/user','Api\v1\UserController',
         ['except' => ['create','edit']]);
 });
+
+
+/**
+ * User Logout
+ */
+Routes::post('user/logout',[
+    'uses' => 'Api\v1\UserController@logout',
+    'as' => 'api.v1.user.logout',
+    'middleware' => ['api_user'],
+    'permission' => ['admin','client','student'],
+    'role' => ['principal','teacher','parent','admin','super admin']
+]);

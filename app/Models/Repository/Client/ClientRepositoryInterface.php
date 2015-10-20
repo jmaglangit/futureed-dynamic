@@ -4,7 +4,7 @@ interface ClientRepositoryInterface
 {
 
 
-	public function getClient($user_id, $role);
+	public function getClient($user_id, $role = 0);
 
 	public function getTeacher($id, $role);
 
@@ -14,7 +14,7 @@ interface ClientRepositoryInterface
 
 	public function addClient($client);
 
-	public function getClientId($id);
+	public function getClientId($user_id);
 
 	public function getRole($user_id);
 
