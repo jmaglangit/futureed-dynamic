@@ -534,11 +534,6 @@
 
 				Routes::group(['prefix' => '/content'], function() {
 
-					Routes::get('/', 
-						['as' => 'admin.manage.module.content.index'
-							, 'uses' => 'FutureLesson\Admin\ManageModuleContentController@index'
-						]);
-
 					Routes::group(['prefix' => '/partials'], function() {
 
 						Routes::get('/add', 

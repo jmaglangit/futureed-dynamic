@@ -11,12 +11,8 @@
         </div>
     </div>
 	
-	<div class="form-content col-xs-12">
-		{!! Form::open([
-				'id' => 'add_admin_form',
-				'class' => 'form-horizontal'
-			]) 
-		!!}
+	<div class="col-xs-12 search-container">
+		{!! Form::open(['class' => 'form-horizontal']) !!}
 			<fieldset>
 				<legend class="legend-name-mid">
 					Module Details
