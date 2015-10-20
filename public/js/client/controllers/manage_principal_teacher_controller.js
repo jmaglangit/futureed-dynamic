@@ -1,11 +1,10 @@
 angular.module('futureed.controllers')
 	.controller('ManagePrincipalTeacherController', ManagePrincipalTeacherController);
 
-ManagePrincipalTeacherController.$inject = ['$scope', 'managePrincipalTeacherService', 'clientProfileApiService', 'apiService'
-	, 'TableService', 'SearchService'];
+ManagePrincipalTeacherController.$inject = ['$scope', 'ManagePrincipalTeacherService', 'clientProfileApiService', 'apiService'
+	, 'TableService', 'SearchService', 'ValidationService'];
 
-function ManagePrincipalTeacherController($scope, managePrincipalTeacherService, clientProfileApiService, apiService, TableService, SearchService){
-
+function ManagePrincipalTeacherController($scope, ManagePrincipalTeacherService, clientProfileApiService, apiService, TableService, SearchService, ValidationService){
 	var self = this;
 
 	SearchService(self);
@@ -14,26 +13,85 @@ function ManagePrincipalTeacherController($scope, managePrincipalTeacherService,
 	TableService(self);
 	self.tableDefaults();
 
-	self.records = {};
-	self.record = {};
+	ValidationService(self);
+	self.default();
 
-	self.validation = {};
-	self.user_type = Constants.CLIENT;
+	self.setActive = function(active, id) {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
 
-	/**
-	* Return Teacher List
-	*/
+		self.records = {};
+		self.record = {};
+		self.fields = [];
+
+		self.tableDefaults();
+		self.searchDefaults();
+
+		self.active_list = Constants.FALSE;
+		self.active_add = Constants.FALSE;
+		self.active_view = Constants.FALSE;
+		self.active_edit = Constants.FALSE;
+		self.active_delete = Constants.FALSE;
+
+		switch(active) {
+			case Constants.ACTIVE_ADD	:
+				self.active_add = Constants.TRUE;
+				break;
+
+			case Constants.ACTIVE_VIEW	:
+				self.active_view = Constants.TRUE;
+				self.details(id);
+				self.classDetails(id);
+				break;
+
+			case Constants.ACTIVE_EDIT	:
+				self.active_edit = Constants.TRUE;
+				self.details(id);
+				break;
+
+			case Constants.ACTIVE_LIST :
+
+			default:
+				self.active_list = Constants.TRUE;
+				break
+		}
+
+	    $("html, body").animate({ scrollTop: 0 }, "slow");			
+	}
+
+	self.searchFnc = function(event) {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		self.tableDefaults();
+		self.list();
+
+		event = getEvent(event);
+		event.preventDefault();
+	}
+
+	self.clearFnc = function() {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+		
+		self.tableDefaults();
+		self.searchDefaults();
+		
+		self.list();
+	}
+
 	self.list = function() {
 		if(self.active_list) {
 			self.listRecords();
 		} else if(self.active_view) {
-			self.classDetails($scope.user.id);
+			self.classDetails(self.record.id);
 		}
 	}
 
 	self.listRecords = function() {
 		self.errors = Constants.FALSE;
-		self.records = {};
+		self.records = [];
+
 		self.table.loading = Constants.TRUE;
 
 		$scope.ui_block();
@@ -47,7 +105,7 @@ function ManagePrincipalTeacherController($scope, managePrincipalTeacherService,
 				} else if(response.data) {
 					self.search.school_code = response.data.school_code;
 
-					managePrincipalTeacherService.list(self.search, self.table).success(function(response){
+					ManagePrincipalTeacherService.list(self.search, self.table).success(function(response){
 						self.table.loading = Constants.FALSE;
 
 						if(angular.equals(response.status, Constants.STATUS_OK)){
@@ -74,101 +132,18 @@ function ManagePrincipalTeacherController($scope, managePrincipalTeacherService,
 		})
 	}
 
-	self.clear = function() {
+	self.save = function(callback_uri) {
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
 		
-		self.tableDefaults();
-		self.searchDefaults();
-		
-		self.list();
-	}
-
-	self.searchFnc = function(event) {
-		self.errors = Constants.FALSE;
-		self.success = Constants.FALSE;
-
-		self.tableDefaults();
-		self.list();
-		event = getEvent(event);
-		event.preventDefault();
-	}
-
-	self.checkUsernameAvailability = function() {
-		self.errors = Constants.FALSE;
-		self.success = Constants.FALSE;
-		self.validation.u_error = Constants.FALSE;
-		self.validation.u_success = Constants.FALSE;
-		self.validation.u_loading = Constants.TRUE;
-
-		apiService.validateUsername(self.record.username, self.user_type).success(function(response) {
-			self.validation.u_loading = Constants.FALSE;
-
-			if(angular.equals(response.status, Constants.STATUS_OK)) {
-				self.fields['username'] = Constants.TRUE;
-
-				if(response.errors){
-					self.validation.u_error = response.errors[0].message;
-
-					if(angular.equals(self.validation.u_error, Constants.MSG_U_NOTEXIST)){
-						self.validation.u_error = Constants.FALSE;
-						self.validation.u_success = Constants.TRUE;
-						self.fields['username'] = Constants.FALSE;
-					}
-				}else if(response.data){
-					self.validation.u_error = Constants.MSG_U_EXIST;
-				}
-			}
-		}).error(function(response) {
-			self.validation.u_loading = Constants.FALSE;
-			self.errors = $scope.internalError();
-		});
-	}
-
-	
-	self.checkEmailAvailability = function() {
-		self.errors = Constants.FALSE;
-		self.success = Constants.FALSE;
-		self.validation.e_error = Constants.FALSE;
-		self.validation.e_success = Constants.FALSE;
-		self.validation.e_loading = Constants.TRUE;
-
-		apiService.validateEmail(self.record.email, self.user_type).success(function(response) {
-			self.validation.e_loading = Constants.FALSE;
-
-			if(angular.equals(response.status, Constants.STATUS_OK)){
-				self.fields['email'] = Constants.TRUE;
-
-				if(response.errors){
-					self.validation.e_error = response.errors[0].message;
-
-					if(angular.equals(self.validation.e_error, Constants.MSG_EA_NOTEXIST)){
-						self.validation.e_error = Constants.FALSE;
-						self.validation.e_success = Constants.TRUE;
-						self.fields['email'] = Constants.FALSE;
-					}
-				}else if(response.data){
-					self.validation.e_error = Constants.MSG_EA_EXIST;
-				}
-			}
-		}).error(function(response) {
-			self.validation.e_loading = Constants.FALSE;
-			self.errors = $scope.internalError();
-		});
-	}
-
-	self.save = function() {
-		self.errors = Constants.FALSE;
-		self.success = Constants.FALSE;
 		self.validation = {};
 		self.fields = [];
 
-		var base_url = $('input[name="base_url"]').val();
-		self.record.callback_uri = base_url + '/client/registration';
+		self.record.callback_uri = callback_uri;
 		self.record.current_user = $scope.user.id;
 
 		$scope.ui_block();
-		managePrincipalTeacherService.save(self.record).success(function(response){
+		ManagePrincipalTeacherService.save(self.record).success(function(response){
 			if(angular.equals(response.status, Constants.STATUS_OK)){
 				if(response.errors){
 					self.errors = $scope.errorHandler(response.errors);
@@ -177,10 +152,11 @@ function ManagePrincipalTeacherController($scope, managePrincipalTeacherService,
 						self.fields[value.field] = Constants.TRUE;
 					});
 				} else if(response.data) {
-					self.record = {};
-					self.success = TeacherConstant.ADD_TEACHER_SUCCESS;
+					self.setActive(Constants.ACTIVE_ADD);
+					self.success = Constants.MSG_CREATED("Account");
 				}
 			}
+
 			$scope.ui_unblock();
 		}).error(function(response) {
 			self.errors = $scope.internalError();
@@ -193,8 +169,7 @@ function ManagePrincipalTeacherController($scope, managePrincipalTeacherService,
 		self.record = Constants.FALSE;
 
 		$scope.ui_block();
-		managePrincipalTeacherService.details(id).success(function(response) {
-
+		ManagePrincipalTeacherService.details(id).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)){
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
@@ -212,9 +187,15 @@ function ManagePrincipalTeacherController($scope, managePrincipalTeacherService,
 
 	self.classDetails = function(id) {
 		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		self.classes = [];
+		self.table.loading = Constants.TRUE;
 
 		$scope.ui_block();
-		managePrincipalTeacherService.classDetails(id, self.table).success(function(response) {
+		ManagePrincipalTeacherService.classDetails(id, self.table).success(function(response) {
+			self.table.loading = Constants.FALSE;
+
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
@@ -227,32 +208,29 @@ function ManagePrincipalTeacherController($scope, managePrincipalTeacherService,
 			$scope.ui_unblock();
 		}).error(function(response) {
 			self.errors = $scope.internalError();
+			self.table.loading = Constants.FALSE;
 			$scope.ui_unblock();
 		});
 	}
 
 	self.update = function() {
 		self.errors = Constants.FALSE;
-		$("#update_teacher_form input").removeClass("required-field");
+		self.success = Constants.FALSE;
+
+		self.fields = [];
 
 		$scope.ui_block();
-		managePrincipalTeacherService.update(self.record).success(function(response) {
+		ManagePrincipalTeacherService.update(self.record).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)){
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 
 					angular.forEach(response.errors, function(value, key){
-						$("#update_teacher_form input[name='" + value.field +"']" ).addClass("required-field");
+						self.fields[value.field] = Constants.TRUE;
 					});
 				} else if(response.data){
-					self.record = response.data;
-					self.success = TeacherConstant.UPDATE_TEACHER_SUCCESS;
-
-					self.active_edit = Constants.FALSE;
-					self.active_view = Constants.TRUE;
-
-					$("html, body").animate({ scrollTop: 0 }, "slow");
-					self.details(response.data.id);
+					self.setActive(Constants.ACTIVE_VIEW, self.record.id);
+					self.success = Constants.MSG_UPDATED("Account");
 				}
 			}
 
@@ -267,9 +245,9 @@ function ManagePrincipalTeacherController($scope, managePrincipalTeacherService,
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
 
-		self.delete_teacher = {};
-		self.delete_teacher.id = id;
-		self.delete_teacher.confirm = Constants.TRUE;
+		self.record = {};
+		self.record.id = id;
+		self.record.confirm = Constants.TRUE;
 		
 		$("#delete_teacher_modal").modal({
 	        backdrop: 'static',
@@ -282,14 +260,13 @@ function ManagePrincipalTeacherController($scope, managePrincipalTeacherService,
 		self.errors = Constants.FALSE;
 
 		$scope.ui_block();
-		managePrincipalTeacherService.delete(self.delete_teacher.id).success(function(response) {
+		ManagePrincipalTeacherService.delete(self.record.id).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
-					self.success = TeacherConstant.DELETE_TEACHER_SUCCESS;
-					$("html, body").animate({ scrollTop: 0 }, "slow");
-					self.list();
+					self.setActive(Constants.ACTIVE_LIST);
+					self.success = Constants.MSG_DELETED("Account");
 				}
  			}
 
@@ -298,53 +275,5 @@ function ManagePrincipalTeacherController($scope, managePrincipalTeacherService,
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
-	}
-
-	self.setActive = function(page, id) {
-		self.records = {};
-
-		self.tableDefaults();
-		self.searchDefaults();
-
-		self.errors = Constants.FALSE;
-		self.success = Constants.FALSE;
-
-		self.active_list = Constants.FALSE;
-		self.active_add = Constants.FALSE;
-		self.active_view = Constants.FALSE;
-		self.active_edit = Constants.FALSE;
-		self.active_delete = Constants.FALSE;
-
-		switch(page) {
-
-			case 'add'	:
-				self.record = {};
-				self.fields = [];
-				self.active_add = Constants.TRUE;
-				break;
-
-			case 'view'	:
-				self.details(id);
-				self.classDetails(id);
-				self.active_view = Constants.TRUE;
-				break;
-
-			case 'edit'	:
-				self.details(id);
-				self.active_edit = Constants.TRUE;
-				break;
-
-			case 'delete':
-				self.active_delete = Constants.TRUE
-				break;
-
-			case 'list' :
-			default:
-				self.active_list = Constants.TRUE;
-				break
-		}
-
-		$('input, select').removeClass('required-field');
-	    $("html, body").animate({ scrollTop: 0 }, "slow");			
 	}
 }
