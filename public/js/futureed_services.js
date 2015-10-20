@@ -208,5 +208,13 @@ var services = angular.module('futureed.services', []);
             return deferred.promise;
         }
 
+        futureedAPI.logout = function(data) {
+        	return $http({
+				method 	: Constants.METHOD_POST
+				, data	: data
+				, url 	: futureedAPIUrl + 'user/logout'
+			});
+        }
+
 		return futureedAPI;
 	});
