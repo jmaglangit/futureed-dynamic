@@ -60,7 +60,7 @@ class AfterAdminLoginMiddleware extends JWTMiddleware{
 
 			if(!$this->session->addSessionToken($user_data)){
 
-				return $this->respondErrorMessage(2060);
+				return $this->setStatusCode(Response::HTTP_OK)->respondErrorMessage(2060);
 			}
 
 			$headers = $response->headers;
