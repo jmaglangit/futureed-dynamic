@@ -21,6 +21,8 @@ class JWTMiddleware {
      */
     protected $token;
 
+    protected $status_code = Response::HTTP_UNAUTHORIZED;
+
     /**
      * @param TokenServices $tokenServices
      * @param UserRepositoryInterface $userRepositoryInterface
@@ -72,6 +74,22 @@ class JWTMiddleware {
 
         return $this->token->getPayloadData();
     }
+
+    /**
+     * @return mixed
+     */
+    public function getStatusCode() {
+        return $this->status_code;
+    }
+
+    /**
+     * @param mixed $status_code
+     */
+    public function setStatusCode($status_code) {
+        $this->status_code = $status_code;
+        return $this;
+    }
+
 
 
     /**
@@ -148,7 +166,7 @@ class JWTMiddleware {
 
         return $this->respond(
             [
-                'status' => Response::HTTP_UNAUTHORIZED,
+                'status' => $this->getStatusCode(),
                 'errors' => $message
             ]
         );
