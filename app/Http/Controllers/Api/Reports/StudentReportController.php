@@ -86,7 +86,7 @@ class StudentReportController extends ReportController {
 	 * @param $id
 	 * @param StudentReportRequest $request
 	 */
-	public function getStudentProgressReport($id){
+	public function getStudentProgressReport($id,$subject_id){
 
 		//get student id and subject id
 
@@ -134,7 +134,7 @@ class StudentReportController extends ReportController {
 		//ROWS
 		//get each completed on each grades.
 
-		$row_data = $this->class_student->getStudentModulesProgressByGrade($id,$student->country_id);
+		$row_data = $this->class_student->getStudentModulesProgressByGrade($id,$subject_id,$student->country_id);
 
 
 		foreach($row_data as $data){
