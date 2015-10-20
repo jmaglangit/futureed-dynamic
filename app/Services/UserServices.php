@@ -485,6 +485,10 @@ class UserServices {
         return $this->users->getGoogleId($id);
     }
 
+    public function emptySession($id) {
+
+        return $this->users->emptySessionToken($id);
+    }
     
 
 }

@@ -2,6 +2,25 @@
 
 Routes::group(['prefix' => '/admin'], function()
 {
+    Routes::group([
+        'prefix' => '/impersonate',
+        'middleware' => ['api_user','api_after'],
+        'permission' => ['admin'],
+        'role' => ['admin','super admin']
+    ], function(){
+
+        Routes::post('/login',[
+            'uses' => 'Api\v1\ImpersonateController@impersonateLogin',
+            'as' => 'api.v1.admin.impersonate.login'
+        ]);
+
+        Routes::post('/logout',[
+            'uses' => 'Api\v1\ImpersonateController@impersonateLogout',
+            'as' => 'api.v1.admin.impersonate.logout'
+        ]);
+
+    });
+
 
 
 	Routes::post('/login',[

@@ -72,6 +72,9 @@ return [
 		2057 => 'Unable to Delete record.',
 		2058 => 'Module is incomplete. Please contact administrator.',
 		2059 => 'File does not exist.',
+		2060 => 'Student is currently logged in.',
+		2061 => 'Client is currently logged in.',
+		2062 => 'Admin is currently logged in.',
 
 
 		2100 => 'Reset code is invalid.',
