@@ -4,6 +4,7 @@ use FutureEd\Models\Traits\TransactionTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Facades\Session;
 
 class QuestionAnswer extends Model {
 
@@ -21,7 +22,6 @@ class QuestionAnswer extends Model {
 		'created_at',
 		'updated_at',
 		'deleted_at',
-		'correct_answer'
 	];
 
 	protected $fillable =[
@@ -62,6 +62,27 @@ class QuestionAnswer extends Model {
 
 			return 'None';
 		}
+	}
+
+	public function getCorrectAnswerAttribute($value){
+
+		if(session('current_user')){
+
+			$user = User::find(session('current_user'));
+
+			//Check if user is Admin or not.
+			if($user->user_type == config('futureed.admin')){
+
+				return $value;
+			} else {
+
+				return null;
+			}
+		} else {
+
+			return null;
+		}
+
 	}
 
 

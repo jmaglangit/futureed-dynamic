@@ -4,6 +4,7 @@ use Closure;
 use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
 use FutureEd\Services\SessionServices;
 use FutureEd\Services\TokenServices;
+use Illuminate\Http\Response;
 
 class AfterClientLoginMiddleware extends JWTMiddleware {
 
