@@ -65,6 +65,10 @@ class LoginController extends Controller {
 		Session::forget('Principal');
 		Session::forget('Teacher');
 
+		if($user_object->impersonate) {
+			return redirect()->route('admin.manage.client.index');
+		}
+
 		return redirect()->route('client.login');
 	}
 	

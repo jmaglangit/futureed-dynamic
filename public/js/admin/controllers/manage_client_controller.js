@@ -338,9 +338,9 @@ function ManageClientController($scope, manageClientService, TableService, Searc
 		});
 	}
 
-	self.impersonate = function(client_id) {
+	self.impersonate = function(user_id) {
 		var data = {
-			id : client_id
+			id : user_id
 		}
 		
 		$scope.ui_block();
@@ -349,7 +349,17 @@ function ManageClientController($scope, manageClientService, TableService, Searc
 				if(response.errors){
 					self.errors = $scope.errorHandler(response.errors);
 				}else if(response.data){
-					console.log(response.data);
+					var data = {
+						id				: response.data.id
+						, first_name	: response.data.first_name
+						, last_name		: response.data.last_name
+						, country_id	: response.data.country_id
+						, role			: response.data.client_role
+						, impersonate	: response.data.user.impersonate
+					}
+
+					$("#login_form input[name='user_data']").val(JSON.stringify(data));
+					$("#login_form").submit();
 				}
 			}
 
