@@ -61,7 +61,7 @@ class AfterClientLoginMiddleware extends JWTMiddleware {
 
 			if(!$this->session->addSessionToken($user_data)){
 
-				return $this->setStatusCode(Response::HTTP_OK)->respondErrorMessage(2060);
+				return $this->setStatusCode(Response::HTTP_OK)->respondErrorMessage(2061);
 			}
 
 			$headers = $response->headers;
