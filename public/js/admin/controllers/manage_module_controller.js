@@ -81,7 +81,7 @@ function ManageModuleController($scope, ManageModuleService, TableService, Searc
 			self.content_hidden = Constants.FALSE;
 			self.detail_hidden = Constants.TRUE;
 
-			if(!self.details.current_view) {
+			if(!self.record.current_view) {
 				self.setActiveContent(Constants.AGEGROUP)
 			}
 		}

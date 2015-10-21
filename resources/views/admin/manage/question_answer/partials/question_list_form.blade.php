@@ -78,7 +78,7 @@
 
 		<div class="list-container">
 			<div class="col-xs-6 title-mid">
-				Question & Answer List
+				Question List
 			</div>
 
 			<div class="col-xs-6 size-container">

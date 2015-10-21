@@ -98,11 +98,14 @@ function ManageQuestionAnsController($scope, ManageQuestionAnsService, TableServ
 				self.active_add = Constants.TRUE;
 				break;
 
+			case Constants.ACTIVE_LIST : 
 			default:
 				self.active_list = Constants.TRUE;
 				self.list();
 				break;
 		}
+
+		$("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 
 	self.searchFnc = function(event) {
@@ -128,7 +131,7 @@ function ManageQuestionAnsController($scope, ManageQuestionAnsService, TableServ
 		if(self.active_list) {
 			self.questionList();
 		}else if(self.active_view) {
-			self.answerList();
+			self.listAnswer();
 		}
 	}
 
@@ -167,7 +170,7 @@ function ManageQuestionAnsController($scope, ManageQuestionAnsService, TableServ
 		self.record.module_id = self.module.id;
 
 		$scope.ui_block();
-		ManageQuestionAnsService.addNewQuestion(self.record).success(function(response){
+		ManageQuestionAnsService.add(self.record).success(function(response){
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
@@ -177,7 +180,7 @@ function ManageQuestionAnsController($scope, ManageQuestionAnsService, TableServ
 					});
 				} else if(response.data) {
 					self.setActive(Constants.ACTIVE_ADD);
-					self.success = Constants.MSG_CREATE("Question");
+					self.success = Constants.MSG_CREATED("Question");
 				}
 			}
 			
@@ -188,20 +191,20 @@ function ManageQuestionAnsController($scope, ManageQuestionAnsService, TableServ
 		})
 	}
 
-	self.getQuestionDetail = function(id) {
+	self.details = function(id) {
 		self.errors = Constants.FALSE;
-		self.details = {};
 
 		$scope.ui_block();
-		ManageQuestionAnsService.getQuestionDetail(id).success(function(response){
+		ManageQuestionAnsService.details(id).success(function(response){
 			if(angular.equals(response.status,Constants.STATUS_OK)){
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
-					self.q_details = response.data;
+					self.record = response.data;
 				}
 			}
-		$scope.ui_unblock();
+			
+			$scope.ui_unblock();
 		}).error(function(response) {
 			self.errors = internalError();
 			$scope.ui_unblock();
@@ -255,12 +258,14 @@ function ManageQuestionAnsController($scope, ManageQuestionAnsService, TableServ
 		});
 	}
 
-	self.saveEditQuestion = function(){
+	self.update = function(){
 		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
 		self.fields = [];
 
 		$scope.ui_block();
-		ManageQuestionAnsService.saveEditQuestion(self.q_details).success(function(response){
+		ManageQuestionAnsService.update(self.record).success(function(response){
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
@@ -269,12 +274,12 @@ function ManageQuestionAnsController($scope, ManageQuestionAnsService, TableServ
 						self.fields[value.field] = Constants.TRUE;
 					});
 				} else if(response.data) {
-					self.validation = {};
-					self.success = ManageModuleConstants.SUCCESS_EDIT_QUESTION;
-					self.setActive('view', self.q_details.id, 1);
+					self.setActive(Constants.ACTIVE_VIEW, self.record.id);
+					self.success = Constants.MSG_UPDATED("Question");
 				}
 			}
-		$scope.ui_unblock();
+			
+			$scope.ui_unblock();
 		}).error(function(response){
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
@@ -283,8 +288,11 @@ function ManageQuestionAnsController($scope, ManageQuestionAnsService, TableServ
 
 	self.confirmDelete = function(id) {
 		self.errors = Constants.FALSE;
-		self.delete.id = id;
-		self.delete.confirm = Constants.TRUE;
+		self.success = Constants.FALSE;
+
+		self.record = {};
+		self.record.id = id;
+		self.record.confirm = Constants.TRUE;
 
 		$("#delete_question_modal").modal({
 			backdrop: 'static',
@@ -298,13 +306,13 @@ function ManageQuestionAnsController($scope, ManageQuestionAnsService, TableServ
 		self.success = Constants.FALSE;
 
 		$scope.ui_block();
-		ManageQuestionAnsService.deleteQuestion(self.delete.id).success(function(response){
+		ManageQuestionAnsService.deleteQuestion(self.record.id).success(function(response){
 			if(angular.equals(response.status,Constants.STATUS_OK)){
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
-					self.success = ManageModuleConstants.SUCCESS_DELETE_QUESTION;
-					self.setActive('', '', 1);
+					self.setActive(Constants.ACTIVE_LIST);
+					self.success = Constants.MSG_DELETED("Question");
 				}
 			}
 			$scope.ui_unblock();
@@ -314,29 +322,28 @@ function ManageQuestionAnsController($scope, ManageQuestionAnsService, TableServ
 		})
 	}
 
-	self.setAnsActive = function(active, id, flag) {
-		self.answers.errors = Constants.FALSE
-		self.answers = {};
+	/**
+	* Functions for manage question answer (MC)
+	*/
+	self.setAnsActive = function(active, id) {
+		self.answers.errors = Constants.FALSE;
+		self.answers.success = Constants.FALSE;
+
 		self.fields = [];
-		self.area_field = Constants.FALSE;
+		self.answers.record = {};
 
 		self.active_anslist = Constants.FALSE;
 		self.active_ansedit = Constants.FALSE;
 
-		if(flag != 1) {
-			self.answers.success = Constants.FALSE;
-		}
-
 		switch (active) {
 			case Constants.ACTIVE_EDIT:
 				self.active_ansedit = Constants.TRUE;
-				self.getAnswerDetail(id);
-				self.answers.success = Constants.FALSE;
+				self.answerDetails(id);
 				break;
 
 			default:
 				self.active_anslist = Constants.TRUE;
-				self.answerList();
+				self.listAnswer();
 				break;
 		}
 	}
@@ -349,22 +356,23 @@ function ManageQuestionAnsController($scope, ManageQuestionAnsService, TableServ
 		self.answers.errors = Constants.FALSE;
 		self.answers.success = Constants.FALSE;
 		self.fields = [];
-		self.answers.module_id = self.module.id;
-		self.answers.question_id = self.q_details.id;
+		
+		self.answers.record.module_id = self.module.id;
+		self.answers.record.question_id = self.record.id;
+
 		$scope.ui_block();
-		ManageQuestionAnsService.addAnswer(self.answers).success(function(response){
+		ManageQuestionAnsService.addAnswer(self.answers.record).success(function(response){
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
-					self.answers.errors = $scope.errorHandler(response.errors, 1);
+					self.answers.errors = $scope.errorHandler(response.errors, Constants.TRUE);
 
 					angular.forEach(response.errors, function(value, a) {
 						self.fields[value.field + '_ans'] = Constants.TRUE;
 					});
 
 				} else if(response.data) {
-					self.answers = {};
-					self.answers.success = ManageModuleConstants.SUCCESS_ADD_ANSWER;
-					self.setAnsActive('','',1);
+					self.setAnsActive();
+					self.answers.success = Constants.MSG_CREATED("Answer");
 				}
 			}
 		$scope.ui_unblock();
@@ -374,34 +382,37 @@ function ManageQuestionAnsController($scope, ManageQuestionAnsService, TableServ
 		})
 	}
 
-	self.answerList = function(flag) {
-		if(flag != 1){
-			self.errors = Constants.FALSE;
-		}
-		var id = self.q_details.id;
-		self.ans_records = {};
+	self.listAnswer = function() {
+		self.answers.errors = Constants.FALSE;
+
+		self.answers.records = [];
+		self.table.loading = Constants.TRUE;
 
 		$scope.ui_block();
-		ManageQuestionAnsService.answerList(id).success(function(response){
+		ManageQuestionAnsService.listAnswer(self.record.id).success(function(response) {
+			self.table.loading = Constants.FALSE;
+
 			if(angular.equals(response.status, Constants.STATUS_OK)){
 				if(response.errors) {
 					self.answers.errors = $scope.errorHandler(response.errors);
 				}else if(response.data){
-					self.ans_records = response.data.records;
+					self.answers.records = response.data.records;
 					self.updatePageCount(response.data);
 				}
 			}
 			$scope.ui_unblock();
 		}).error(function(response){
-			self.errors = $scope.internalError();
+			self.answers.errors = $scope.internalError();
+			self.table.loading = Constants.FALSE;
 			$scope.ui_unblock();
 		});
 	}
 
 	self.confirmAnsDelete = function(id) {
-		self.errors = Constants.FALSE;
+		self.answers.errors = Constants.FALSE;
 		self.setAnsActive();
 
+		self.delete = {};
 		self.delete.ans_id = id;
 		self.delete.ans_confirm = Constants.TRUE;
 
@@ -413,68 +424,71 @@ function ManageQuestionAnsController($scope, ManageQuestionAnsService, TableServ
 	}
 
 	self.deleteAnswer = function() {
-		self.errors = Constants.FALSE;
-		self.success = Constants.FALSE;
-
+		self.answers.errors = Constants.FALSE;
+		self.answers.success = Constants.FALSE;
+		
 		$scope.ui_block();
 		ManageQuestionAnsService.deleteAnswer(self.delete.ans_id).success(function(response){
 			if(angular.equals(response.status,Constants.STATUS_OK)){
 				if(response.errors) {
 					self.answers.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
-					self.answers.success = ManageModuleConstants.SUCCESS_DELETE_ANS;
-					self.answerList(1);
+					self.setAnsActive();
+					self.answers.success = Constants.MSG_DELETED("Answer");
 				}
 			}
 			$scope.ui_unblock();
 		}).error(function(response){
-			self.errors = $scope.internalError();
+			self.answers.errors = $scope.internalError();
 			$scope.ui_unblock();
 		})
 	}
 
-	self.getAnswerDetail = function(id) {
+	self.answerDetails = function(id) {
 		self.answers.errors = Constants.FALSE;
 		self.fields = [];
 
 		$scope.ui_block();
-		ManageQuestionAnsService.getAnswerDetail(id).success(function(response){
+		ManageQuestionAnsService.answerDetails(id).success(function(response){
 			if(angular.equals(response.status,Constants.STATUS_OK)){
 				if(response.errors) {
 					self.answers.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
-					self.answers = response.data;
+					self.answers.record = response.data;
 				}
 			}
 
 			$scope.ui_unblock();
 		}).error(function(response) {
-			self.errors = $scope.internalError();
+			self.answers.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
 	}
 
-	self.saveAnswer = function(){
+	self.updateAnswer = function(){
 		self.answers.errors = Constants.FALSE;
+		self.answers.success = Constants.FALSE;
+
 		self.fields = [];
 
 		$scope.ui_block();
-		ManageQuestionAnsService.saveAnswer(self.answers).success(function(response){
+		ManageQuestionAnsService.updateAnswer(self.answers.record).success(function(response){
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
-					self.answers.errors = $scope.errorHandler(response.errors);
+					self.answers.errors = $scope.errorHandler(response.errors, Constants.TRUE);
 
 					angular.forEach(response.errors, function(value, a) {
 						self.fields[value.field + '_ans'] = Constants.TRUE;
 					});
 				} else if(response.data) {
-					self.answers.success = ManageModuleConstants.SUCCESS_EDIT_ANS;
-					self.setAnsActive('list', '' , 1);
+					self.setAnsActive(Constants.ACTIVE_LIST);
+					self.answers.success = Constants.MSG_UPDATED("Answer");
 				}
 			}
-		$scope.ui_unblock();
+			
+			$scope.ui_unblock();
 		}).error(function(response){
-			self.errors = $scope.internalError();
+			self.answers.errors = $scope.internalError();
 			$scope.ui_unblock();
 		})
 	}
