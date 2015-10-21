@@ -194,7 +194,9 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 
 	self.cancelLogin = function() {
 		self.errors = Constants.FALSE;
+		$scope.image_pass = [];
 		self.manual = {};
+
 		self.setActive();
 	}
 
