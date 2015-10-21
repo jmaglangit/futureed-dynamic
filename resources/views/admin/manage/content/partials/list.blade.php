@@ -62,7 +62,7 @@
 		</div>
 	</div>
 	 
-	<div class="col-xs-12 table-container" ng-init="content.listContents()">
+	<div class="col-xs-12 table-container" ng-init="content.list()">
 		<button class="btn btn-blue btn-semi-medium" ng-click="content.setActive(futureed.ACTIVE_ADD)">
 			<i class="fa fa-plus-square"></i> Add Content
 		</button>
@@ -101,21 +101,21 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="contentInfo in content.records">
-						<td>{! contentInfo.code !}</td>
-						<td class="wide-column">{! contentInfo.teaching_module !}</td>
-						<td>{! contentInfo.learning_style.name !}</td>
-						<td>{! contentInfo.media_type.name !}</td>
+					<tr ng-repeat="record in content.records">
+						<td>{! record.code !}</td>
+						<td class="wide-column">{! record.teaching_module !}</td>
+						<td>{! record.learning_style.name !}</td>
+						<td>{! record.media_type.name !}</td>
 						<td ng-if="content.records.length">
 							<div class="row">
 								<div class="col-xs-4">
-									<a href="" ng-click="content.setActive(futureed.ACTIVE_VIEW, contentInfo.id)"><span><i class="fa fa-eye"></i></span></a>
+									<a href="" ng-click="content.setActive(futureed.ACTIVE_VIEW, record.id)"><span><i class="fa fa-eye"></i></span></a>
 								</div>
 								<div class="col-xs-4">
-									<a href="" ng-click="content.setActive(futureed.ACTIVE_EDIT, contentInfo.id)"><span><i class="fa fa-pencil"></i></span></a>
+									<a href="" ng-click="content.setActive(futureed.ACTIVE_EDIT, record.id)"><span><i class="fa fa-pencil"></i></span></a>
 								</div>
 								<div class="col-xs-4">
-									<a href="" ng-click="content.confirmDelete(contentInfo.id)"><span><i class="fa fa-trash"></i></span></a>
+									<a href="" ng-click="content.confirmDelete(record.id)"><span><i class="fa fa-trash"></i></span></a>
 								</div>	
 							</div>
 						</td>

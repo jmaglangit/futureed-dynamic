@@ -1,13 +1,10 @@
 angular.module('futureed.controllers')
 	.controller('ManageModuleController', ManageModuleController);
 
-ManageModuleController.$inject = ['$scope', 'manageModuleService', 'TableService', 'SearchService', 'Upload'];
+ManageModuleController.$inject = ['$scope', 'ManageModuleService', 'TableService', 'SearchService', 'Upload'];
 
-function ManageModuleController($scope, manageModuleService, TableService, SearchService, Upload) {
+function ManageModuleController($scope, ManageModuleService, TableService, SearchService, Upload) {
 	var self = this;
-
-	self.details = {};
-	self.delete = {};
 
 	TableService(self);
 	self.tableDefaults();
@@ -15,39 +12,34 @@ function ManageModuleController($scope, manageModuleService, TableService, Searc
 	SearchService(self);
 	self.searchDefaults();
 
-	self.setActive = function(active, id, flag) {
+	self.setActive = function(active, id) {
 		self.errors = Constants.FALSE;
-		self.create = {};
-		self.area_field = Constants.FALSE;
+		self.success = Constants.FALSE;
 
+		self.validation = {};
+		self.record = {};
 		self.fields = [];
 
 		self.active_list = Constants.FALSE;
 		self.active_view = Constants.FALSE;
 		self.active_add = Constants.FALSE;
 		self.active_edit = Constants.FALSE;
-		self.edit = Constants.FALSE;
 
 		self.tableDefaults();
 		self.searchDefaults();
 
-		if(flag != 1) {
-			self.success = Constants.FALSE;
-		}
-
 		switch (active) {
 			case Constants.ACTIVE_EDIT:
 				self.active_edit = Constants.TRUE;
-				self.getModuleDetail(id);
-				self.edit = Constants.TRUE;
-				self.success = Constants.FALSE;
+				self.details(id);
 				break;
 
 			case Constants.ACTIVE_VIEW :
 				self.active_view = Constants.TRUE;
+				self.details(id);
+
 				self.detail_hidden = Constants.FALSE;
 				self.content_hidden = Constants.TRUE;
-				self.getModuleDetail(id);
 				break;
 
 			case Constants.ACTIVE_ADD : 
@@ -59,6 +51,7 @@ function ManageModuleController($scope, manageModuleService, TableService, Searc
 				self.list();
 				break;
 		}
+
 		$("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 
@@ -88,18 +81,20 @@ function ManageModuleController($scope, manageModuleService, TableService, Searc
 			self.content_hidden = Constants.FALSE;
 			self.detail_hidden = Constants.TRUE;
 
-			if(!self.details.current_view) {
+			if(!self.record.current_view) {
 				self.setActiveContent(Constants.AGEGROUP)
 			}
 		}
 	}
 
 	self.setActiveContent = function(view) {
-		self.details.current_view = view;
+		self.record.current_view = view;
 	}
 
 	self.searchFnc = function(event) {
 		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
 		self.tableDefaults();
 		self.list();
 		
@@ -109,6 +104,7 @@ function ManageModuleController($scope, manageModuleService, TableService, Searc
 
 	self.clearFnc = function() {
 		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
 
 		self.searchDefaults();
 		self.tableDefaults();
@@ -117,11 +113,12 @@ function ManageModuleController($scope, manageModuleService, TableService, Searc
 
 	self.list = function() {
 		self.errors = Constants.FALSE;
-		self.records = {};
-		self.table.loading = Constants.TRUE;
-		$scope.ui_block();
+		self.records = [];
 
-		manageModuleService.list(self.search, self.table).success(function(response){
+		self.table.loading = Constants.TRUE;
+		
+		$scope.ui_block();
+		ManageModuleService.list(self.search, self.table).success(function(response){
 			self.table.loading = Constants.FALSE;
 			if(angular.equals(response.status, Constants.STATUS_OK)){
 				if(response.errors) {
@@ -138,13 +135,17 @@ function ManageModuleController($scope, manageModuleService, TableService, Searc
 		});
 	}
 
-	self.addNewModule = function(){
+	self.add = function(){
 		self.errors = Constants.FALSE;
-		self.create.success = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		self.validation = {};
+
+		self.areas = Constants.FALSE;
 		self.fields = [];
 
 		$scope.ui_block();
-		manageModuleService.addNewModule(self.create).success(function(response){
+		ManageModuleService.add(self.record).success(function(response){
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
@@ -153,13 +154,12 @@ function ManageModuleController($scope, manageModuleService, TableService, Searc
 						self.fields[value.field] = Constants.TRUE;
 					});
 				} else if(response.data) {
-					self.create = {};
-					self.validation = {};
-					self.create.success = Constants.TRUE;
-	    			$("html, body").animate({ scrollTop: 0 }, "slow");
+					self.setActive(Constants.ACTIVE_ADD);
+					self.success = Constants.MSG_CREATED("Module");
 				}
 			}
-		$scope.ui_unblock();
+			
+			$scope.ui_unblock();
 		}).error(function(response){
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
@@ -168,7 +168,7 @@ function ManageModuleController($scope, manageModuleService, TableService, Searc
 
 	self.getSubject = function() {
 		$scope.ui_block();
-		manageModuleService.getSubject().success(function(response){
+		ManageModuleService.getSubject().success(function(response){
 			if(angular.equals(response.status, Constants.STATUS_OK)){
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
@@ -183,45 +183,17 @@ function ManageModuleController($scope, manageModuleService, TableService, Searc
 		})
 	}
 
-	self.setSubject = function(method) {
-
-		switch (method){
-			case 'create' :
-				self.area_field = (self.create.subject_id !='') ? Constants.TRUE : Constants.FALSE;
-				self.create.subject_area_id = Constants.EMPTY_STR;
-				self.create.area = Constants.EMPTY_STR;
-				break;
-			case 'edit' :
-				self.area_field = (self.details.subject_id !='') ? Constants.TRUE : Constants.FALSE;
-				self.details.subject_area_id = Constants.EMPTY_STR;
-				self.details.area = Constants.EMPTY_STR;
-				break;
-		}
+	self.setSubject = function() {
+		self.record.subject_area_id = Constants.EMPTY_STR;
+		self.record.area = Constants.EMPTY_STR;
+		self.areas = Constants.FALSE;
 	}
 
-	self.searchArea = function(method) {
-		self.method = method;
+	self.searchArea = function() {
 		self.validation = {};
 		self.validation.s_loading = Constants.TRUE;
 
-		var area = '';
-		var subject_id = '';
-
-		switch(method){
-
-			case 'edit':
-				area = self.details.area;
-				subject_id = self.details.subject.id;
-				break;
-
-			case 'create':
-			default:
-				area = self.create.area;
-				subject_id = self.create.subject_id;
-				break;
-		}
-
-		manageModuleService.searchArea(subject_id, area).success(function(response){
+		ManageModuleService.searchArea(self.record.subject_id, self.record.area).success(function(response){
 			self.validation.s_loading = Constants.FALSE;
 			if(angular.equals(response.status, Constants.STATUS_OK)){
 				if(response.data) {
@@ -232,7 +204,6 @@ function ManageModuleController($scope, manageModuleService, TableService, Searc
 							self.validation.s_error = ManageModuleConstants.NO_AREA;
 						}
 					}else {
-						self.areas = {};
 						self.areas = response.data.records;
 					}
 				}
@@ -243,38 +214,23 @@ function ManageModuleController($scope, manageModuleService, TableService, Searc
 	}
 
 	self.selectArea = function(area) {
-		var method = self.method;
-
-		switch(method){
-			case 'edit':
-				self.details.subject_area_id = area.id;
-				self.details.area = area.name;
-				break;
-
-			case 'create':
-			default:
-				self.create.subject_area_id = area.id;
-				self.create.area = area.name;
-				break;
-		}
+		self.record.subject_area_id = area.id;
+		self.record.area = area.name;
 
 		self.areas = Constants.FALSE;
 	}
 
-	self.getModuleDetail = function(id) {
+	self.details = function(id) {
 		self.errors = Constants.FALSE;
 
 		$scope.ui_block();
-		manageModuleService.getModuleDetail(id).success(function(response){
+		ManageModuleService.details(id).success(function(response){
 			if(angular.equals(response.status,Constants.STATUS_OK)){
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
-					self.details = response.data;
-					self.details.area = (self.details.subjectarea) ? self.details.subjectarea.name : Constants.EMPTY_STR;
-					$scope.module_id = self.details.id;
-					$scope.module_name = self.details.name;
-					self.age_records = {};
+					self.record = response.data;
+					self.record.area = (self.record.subjectarea) ? self.record.subjectarea.name : Constants.EMPTY_STR;
 				}
 			}
 		$scope.ui_unblock();
@@ -284,12 +240,17 @@ function ManageModuleController($scope, manageModuleService, TableService, Searc
 		});
 	}
 
-	self.saveModule = function(){
+	self.update = function(){
 		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		self.validation = {};
+		
+		self.areas = Constants.FALSE;
 		self.fields = [];
 
 		$scope.ui_block();
-		manageModuleService.saveModule(self.details).success(function(response){
+		ManageModuleService.update(self.record).success(function(response){
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
@@ -298,12 +259,12 @@ function ManageModuleController($scope, manageModuleService, TableService, Searc
 						self.fields[value.field] = Constants.TRUE;
 					});
 				} else if(response.data) {
-					self.validation = {};
-					self.setActive(Constants.ACTIVE_VIEW, self.details.id);
+					self.setActive(Constants.ACTIVE_VIEW, self.record.id);
 	    			self.success = Constants.MSG_UPDATED("Module");
 				}
 			}
-		$scope.ui_unblock();
+			
+			$scope.ui_unblock();
 		}).error(function(response){
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
@@ -312,8 +273,11 @@ function ManageModuleController($scope, manageModuleService, TableService, Searc
 
 	self.confirmDelete = function(id) {
 		self.errors = Constants.FALSE;
-		self.delete.id = id;
-		self.delete.confirm = Constants.TRUE;
+		self.success = Constants.FALSE;
+
+		self.record = {};
+		self.record.id = id;
+		self.record.confirm = Constants.TRUE;
 
 		$("#delete_module_modal").modal({
 	        backdrop: 'static',
@@ -327,23 +291,27 @@ function ManageModuleController($scope, manageModuleService, TableService, Searc
 		self.success = Constants.FALSE;
 
 		$scope.ui_block();
-		manageModuleService.deleteModule(self.delete.id).success(function(response){
+		ManageModuleService.deleteModule(self.record.id).success(function(response){
 			if(angular.equals(response.status,Constants.STATUS_OK)){
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
-					self.success = ManageModuleConstants.SUCCESS_DELETE_MOD;
-					self.setActive('list', '', 1);
+					self.setActive(Constants.ACTIVE_LIST);
+					self.success = Constants.MSG_DELETED("Module");
 				}
 			}
+
 			$scope.ui_unblock();
 		}).error(function(response){
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
-		})
+		});
 	}
 
 	self.upload = function(file, object) {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+		
     	object.uploaded = Constants.FALSE;
 
 		if(file.length) {

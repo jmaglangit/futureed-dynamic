@@ -32,7 +32,7 @@ function ManageModuleContentService($http) {
 		});
 	}
 
-	service.detail = function(id) {
+	service.details = function(id) {
 		return $http({
 			method 	: Constants.METHOD_GET
 			, url   : serviceUrl + 'teaching-content/' + id
