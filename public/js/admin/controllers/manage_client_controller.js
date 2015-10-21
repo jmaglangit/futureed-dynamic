@@ -1,9 +1,9 @@
 angular.module('futureed.controllers')
 	.controller('ManageClientController', ManageClientController);
 
-ManageClientController.$inject = ['$scope', 'apiService','manageClientService', 'TableService', 'SearchService', 'ValidationService'];
+ManageClientController.$inject = ['$scope','manageClientService', 'TableService', 'SearchService', 'ValidationService'];
 
-function ManageClientController($scope, apiService, manageClientService, TableService, SearchService, ValidationService) {
+function ManageClientController($scope, manageClientService, TableService, SearchService, ValidationService) {
 	var self = this;
 
 	TableService(self);
@@ -333,6 +333,28 @@ function ManageClientController($scope, apiService, manageClientService, TableSe
 
 			$scope.ui_unblock();
 		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.impersonate = function(client_id) {
+		var data = {
+			id : client_id
+		}
+		
+		$scope.ui_block();
+		manageClientService.impersonate(data).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)){
+				if(response.errors){
+					self.errors = $scope.errorHandler(response.errors);
+				}else if(response.data){
+					console.log(response.data);
+				}
+			}
+
+			$scope.ui_unblock();
+		}).error(function() {
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});

@@ -129,5 +129,13 @@ function manageClientService($http) {
 		});
 	}
 
+	api.impersonate = function(data) {
+		return $http({
+			method	: Constants.METHOD_POST
+			, data	: data
+			, url 	: apiUrl + 'admin/impersonate/login'
+		});
+	}
+
 	return api;
 }
