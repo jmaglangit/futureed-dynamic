@@ -5,7 +5,6 @@ use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use FutureEd\Services\SessionServices;
 use FutureEd\Services\TokenServices;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Session;
 
 class AfterStudentLoginMiddleware extends JWTMiddleware{
 

@@ -12,10 +12,10 @@
 			</p>
 		</div>
 
-        <div class="alert alert-success" ng-if="module.success">
-            <p>{! module.success !}</p>
-        </div>
-    </div>
+		<div class="alert alert-success" ng-if="module.success">
+			<p>{! module.success !}</p>
+		</div>
+	</div>
 
 	<div class="col-xs-12 search-container">
 		<div class="title-mid">
@@ -82,7 +82,7 @@
 	<div class="clearfix"></div>
 
 	<div class="col-xs-12 table-container">
-		<button class="btn btn-blue btn-small" ng-click="module.setActive('add')">
+		<button class="btn btn-blue btn-semi-medium" ng-click="module.setActive(futureed.ACTIVE_ADD)">
 			<i class="fa fa-plus-square"></i> Add Module
 		</button>
 
@@ -111,43 +111,43 @@
 
 			<table class="col-xs-12 table table-striped table-bordered">
 				<thead>
-			        <tr>
-			            <th>Module</th>
-			            <th>Subject</th>
-			            <th>Area</th>
-			            <th ng-if="module.records.length">Action</th>
-			        </tr>
-		        </thead>
-		        <tbody>
-			        <tr ng-repeat="moduleInfo in module.records">
-			            <td class="wide-column">{! moduleInfo.name !}</td>
-			            <td>{! moduleInfo.subject.name !}</td>
-			            <td>{! moduleInfo.subject_area.name !}</td>
-			            <td ng-if="module.records.length">
-			            	<div class="row">
-			            		<div class="col-xs-4">
-			            			<a href="" ng-click="module.setActive(futureed.ACTIVE_VIEW, moduleInfo.id)"><span><i class="fa fa-eye"></i></span></a>
-			            		</div>
-			            		<div class="col-xs-4">
-			            			<a href="" ng-click="module.setActive(futureed.ACTIVE_EDIT, moduleInfo.id)"><span><i class="fa fa-pencil"></i></span></a>
-			            		</div>
-			            		<div class="col-xs-4">
-			            			<a href="" ng-click="module.confirmDelete(moduleInfo.id)"><span><i class="fa fa-trash"></i></span></a>
-			            		</div>
-			            	</div>
-			            </td>
-			        </tr>
-			        <tr class="odd" ng-if="!module.records.length && !module.table.loading">
-			        	<td valign="top" colspan="7">
-			        		No records found
-			        	</td>
-			        </tr>
-			        <tr class="odd" ng-if="module.table.loading">
-			        	<td valign="top" colspan="7">
-			        		Loading...
-			        	</td>
-			        </tr>
-		        </tbody>
+					<tr>
+						<th>Module</th>
+						<th>Subject</th>
+						<th>Area</th>
+						<th ng-if="module.records.length">Action</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="record in module.records">
+						<td>{! record.name !}</td>
+						<td>{! record.subject.name !}</td>
+						<td>{! record.subject_area.name !}</td>
+						<td ng-if="module.records.length">
+							<div class="row">
+								<div class="col-xs-4">
+									<a href="" ng-click="module.setActive(futureed.ACTIVE_VIEW, record.id)"><span><i class="fa fa-eye"></i></span></a>
+								</div>
+								<div class="col-xs-4">
+									<a href="" ng-click="module.setActive(futureed.ACTIVE_EDIT, record.id)"><span><i class="fa fa-pencil"></i></span></a>
+								</div>
+								<div class="col-xs-4">
+									<a href="" ng-click="module.confirmDelete(record.id)"><span><i class="fa fa-trash"></i></span></a>
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr class="odd" ng-if="!module.records.length && !module.table.loading">
+						<td valign="top" colspan="7">
+							No records found
+						</td>
+					</tr>
+					<tr class="odd" ng-if="module.table.loading">
+						<td valign="top" colspan="7">
+							Loading...
+						</td>
+					</tr>
+				</tbody>
 			</table>
 
 			<div class="pull-right" ng-if="module.records.length">
@@ -165,35 +165,35 @@
 			</div>
 		</div>
 	</div>
-</div>
 
-<div id="delete_module_modal" ng-show="module.delete.confirm" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-        <div class="modal-header">
-            Delete Module
-        </div>
-        <div class="modal-body">
-            Are you sure you want to delete this module?
-        </div>
-        <div class="modal-footer">
-        	<div class="btncon col-md-8 col-md-offset-4 pull-left">
-                {!! Form::button('Yes'
-                    , array(
-                        'class' => 'btn btn-blue btn-medium'
-                        , 'ng-click' => 'module.deleteModule()'
-                        , 'data-dismiss' => 'modal'
-                    )
-                ) !!}
+	<div id="delete_module_modal" ng-show="module.record.confirm" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	  	<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					Delete Module
+				</div>
+				<div class="modal-body">
+					Are you sure you want to delete this module?
+				</div>
+				<div class="modal-footer">
+					<div class="btncon col-xs-8 col-xs-offset-4 pull-left">
+						{!! Form::button('Yes'
+							, array(
+								'class' => 'btn btn-blue btn-medium'
+								, 'ng-click' => 'module.deleteModule()'
+								, 'data-dismiss' => 'modal'
+							)
+						) !!}
 
-                {!! Form::button('No'
-                    , array(
-                        'class' => 'btn btn-gold btn-medium'
-                        , 'data-dismiss' => 'modal'
-                    )
-                ) !!}
-        	</div>
-        </div>
-    </div>
-  </div>
+						{!! Form::button('No'
+							, array(
+								'class' => 'btn btn-gold btn-medium'
+								, 'data-dismiss' => 'modal'
+							)
+						) !!}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

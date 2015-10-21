@@ -20,7 +20,7 @@ function FutureedController($scope, $window, apiService, futureed) {
 	*/
 	$scope.highlight = highlight;
 
-	$scope.errorHandler = function(errors, flag) {
+	$scope.errorHandler = function(errors, noScroll) {
 		$scope.errors = [];
 
 		if(angular.isArray(errors)) {
@@ -48,7 +48,7 @@ function FutureedController($scope, $window, apiService, futureed) {
 		} else {
 			$scope.errors[0] = errors.message;
 		}
-		if(flag != 1) {
+		if(!noScroll) {
 			$("html, body").animate({ scrollTop: 0 }, "slow");
 		}
 		return $scope.errors;

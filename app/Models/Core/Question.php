@@ -21,7 +21,6 @@ class Question extends Model {
 		'created_at',
 		'updated_at',
 		'deleted_at',
-		'answer'
 	];
 
 	protected $fillable =['module_id','code','question_type','questions_text','questions_image','answer'
@@ -69,6 +68,28 @@ class Question extends Model {
 
 			return null;
 		}
+	}
+
+	public function getAnswerAttribute($value){
+
+		if(session('current_user')){
+
+			$user = User::find(session('current_user'));
+
+			//Check if user is Admin or not.
+			if($user->user_type == config('futureed.admin')){
+
+				return $value;
+			} else {
+
+				return null;
+			}
+
+		} else {
+
+			return null;
+		}
+
 	}
 
 	//-------------relationships

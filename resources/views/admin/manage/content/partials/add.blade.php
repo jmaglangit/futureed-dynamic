@@ -11,12 +11,8 @@
         </div>
     </div>
 	
-	<div class="form-content col-xs-12">
-		{!! Form::open([
-				'id' => 'add_admin_form',
-				'class' => 'form-horizontal'
-			]) 
-		!!}
+	<div class="col-xs-12 search-container">
+		{!! Form::open(['class' => 'form-horizontal']) !!}
 			<fieldset>
 				<legend class="legend-name-mid">
 					Module Details
@@ -217,7 +213,7 @@
 						{!! Form::button('Add Content'
 							, array(
 								'class' => 'btn btn-blue btn-medium'
-								, 'ng-click' => "content.addContent()"
+								, 'ng-click' => "content.add()"
 							)
 						) !!}
 
@@ -245,7 +241,7 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <div class="btncon col-md-8 col-md-offset-4 pull-left">
+                    <div class="btncon col-xs-8 col-xs-offset-4 pull-left">
                         {!! Form::button('Close'
                             , array(
                                 'class' => 'btn btn-gold btn-medium'

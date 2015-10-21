@@ -1,5 +1,5 @@
 <div ng-if="qa.active_list">
-	<div class="col-xs-12" ng-if="qa.errors || qa.success">
+	<div class="col-xs-12 success-container" ng-if="qa.errors || qa.success">
 		<div class="alert alert-error" ng-if="qa.errors">
 			<p ng-repeat="error in qa.errors track by $index">
 				{! error !}
@@ -72,13 +72,13 @@
 	</div>
 
 	<div class="col-xs-12 table-container">
-		<button class="btn btn-blue btn-semi-medium" ng-click="qa.setActive('add')">
+		<button class="btn btn-blue btn-semi-medium" ng-click="qa.setActive(futureed.ACTIVE_ADD)">
 			<i class="fa fa-plus-square"></i> Add Q & A
 		</button>
 
 		<div class="list-container">
 			<div class="col-xs-6 title-mid">
-				Question & Answer List
+				Question List
 			</div>
 
 			<div class="col-xs-6 size-container">
@@ -93,7 +93,7 @@
 					, array(
 						'ng-model' => 'qa.table.size'
 						, 'ng-change' => 'qa.paginateBySize()'
-						, 'ng-if' => "qa.qa_records.length"
+						, 'ng-if' => "qa.records.length"
 						, 'class' => 'form-control paginate-size pull-right'
 					)
 				) !!}
@@ -107,31 +107,31 @@
 						<th>Question Image</th>
 						<th>Question Type</th>
 						<th>Difficulty</th>
-						<th ng-if="qa.qa_records.length">Action</th>
+						<th ng-if="qa.records.length">Action</th>
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="qaInfo in qa.qa_records">
-						<td>{! qaInfo.code !}</td>
-						<td class="wide-column">{! qaInfo.questions_text !}</td>
-						<td><a href="javascript:;" ng-if="qaInfo.questions_image != futureed.NONE" ng-click="qa.viewImage(qaInfo)">View Image</a></td>
-						<td>{! qaInfo.question_type !}</td>
-						<td>{! qaInfo.difficulty !}</td>
-						<td ng-if="qa.qa_records.length">
+					<tr ng-repeat="record in qa.records">
+						<td>{! record.code !}</td>
+						<td class="wide-column">{! record.questions_text !}</td>
+						<td><a href="javascript:;" ng-if="record.questions_image != futureed.NONE" ng-click="qa.viewImage(record)">View Image</a></td>
+						<td>{! record.question_type !}</td>
+						<td>{! record.difficulty !}</td>
+						<td ng-if="qa.records.length">
 							<div class="row">
 								<div class="col-xs-4">
-									<a href="" ng-click="qa.setActive(futureed.ACTIVE_VIEW, qaInfo.id)"><span><i class="fa fa-eye"></i></span></a>
+									<a href="" ng-click="qa.setActive(futureed.ACTIVE_VIEW, record.id)"><span><i class="fa fa-eye"></i></span></a>
 								</div>
 								<div class="col-xs-4">
-									<a href="" ng-click="qa.setActive(futureed.ACTIVE_EDIT, qaInfo.id)"><span><i class="fa fa-pencil"></i></span></a>
+									<a href="" ng-click="qa.setActive(futureed.ACTIVE_EDIT, record.id)"><span><i class="fa fa-pencil"></i></span></a>
 								</div>
 								<div class="col-xs-4">
-									<a href="" ng-click="qa.confirmDelete(qaInfo.id)"><span><i class="fa fa-trash"></i></span></a>
+									<a href="" ng-click="qa.confirmDelete(record.id)"><span><i class="fa fa-trash"></i></span></a>
 								</div>
 							</div>
 						</td>
 					</tr>
-					<tr class="odd" ng-if="!qa.qa_records.length">
+					<tr class="odd" ng-if="!qa.records.length">
 						<td valign="top" colspan="7">
 							No records found
 						</td>
@@ -139,7 +139,7 @@
 				</tbody>
 			</table>
 
-			<div class="pull-right" ng-if="qa.qa_records.length">
+			<div class="pull-right" ng-if="qa.records.length">
 				<pagination 
 					total-items="qa.table.total_items" 
 					ng-model="qa.table.page"
@@ -155,14 +155,14 @@
 		</div>
 	</div>
 
-	<div id="delete_question_modal" ng-show="qa.delete.confirm" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	<div id="delete_question_modal" ng-show="qa.record.confirm" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
 					Delete Question
 				</div>
 				<div class="modal-body">
-					Are you sure you want to delete this Question?
+					Are you sure you want to delete this question?
 				</div>
 				<div class="modal-footer">
 					<div class="btncon col-md-8 col-md-offset-4 pull-left">

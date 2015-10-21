@@ -4,6 +4,7 @@ use Closure;
 use FutureEd\Models\Repository\Admin\AdminRepositoryInterface;
 use FutureEd\Services\SessionServices;
 use FutureEd\Services\TokenServices;
+use Illuminate\Http\Response;
 
 class AfterAdminLoginMiddleware extends JWTMiddleware{
 

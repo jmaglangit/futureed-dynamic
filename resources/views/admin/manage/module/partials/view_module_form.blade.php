@@ -5,7 +5,7 @@
 		</div>
 	</div>
 
-	<div class="panel-group module-container" id="accordion">
+	<div class="panel-group search-container" id="accordion">
 		<div class="panel panel-default">
 			<div id="detail_heading" class="panel-heading" data-toggle="collapse" ng-click="module.toggleDetail()" data-parent="#accordion" href="#module_detail" aria-expanded="true" aria-controls="module_detail">
 				<h4 class="panel-title">
@@ -29,15 +29,15 @@
 						</div>
 					</div>
 
-					{!! Form::open(array('id'=> 'add_module_form', 'class' => 'form-horizontal')) !!}
+					{!! Form::open(array('class' => 'form-horizontal')) !!}
 						<div class="col-xs-12">
 							<fieldset>
 								<div class="form-group">
 									<label class="control-label col-xs-2">Subject <span class="required">*</span></label>
 									<div class="col-xs-4" ng-init="module.getSubject()">
-										<select ng-disabled="!module.edit" name="subject_id" class="form-control" name="subject_id" ng-model="module.details.subject_id" ng-change="module.setSubject('edit')" ng-class="{'required-field' : module.fields['subject_id']}">
-											<option ng-selected="module.details.subject.id == futureed.FALSE" value="">-- Select Subject --</option>
-											<option ng-selected="module.details.subject.name == subject.name" ng-repeat="subject in module.subjects" ng-value="subject.id">{! subject.name!}</option>
+										<select ng-disabled="module.active_view" name="subject_id" class="form-control" name="subject_id" ng-model="module.record.subject_id" ng-change="module.setSubject()" ng-class="{'required-field' : module.fields['subject_id']}">
+											<option ng-selected="module.record.subject.id == futureed.FALSE" value="">-- Select Subject --</option>
+											<option ng-selected="module.record.subject.name == subject.name" ng-repeat="subject in module.subjects" ng-value="subject.id">{! subject.name!}</option>
 										</select>
 									</div>
 									
@@ -50,7 +50,7 @@
 													, true
 													, array(
 														'class' => 'field'
-														, 'ng-model' => 'module.details.status'
+														, 'ng-model' => 'module.record.status'
 													) 
 												) !!}
 											<span class="lbl padding-8">Enabled</span>
@@ -63,7 +63,7 @@
 													, false
 													, array(
 														'class' => 'field'
-														, 'ng-model' => 'module.details.status'
+														, 'ng-model' => 'module.record.status'
 													)
 												) !!}
 											<span class="lbl padding-8">Disabled</span>
@@ -71,15 +71,15 @@
 										</div>
 									</div>
 									<div class="col-xs-3" ng-if="module.active_view">
-										<label ng-if="module.details.status == 'Enabled'">
+										<label ng-if="module.record.status == 'Enabled'">
 											<b class="success-icon">
-												<i class="margin-top-8 fa fa-check-circle-o"></i> {! module.details.status !}
+												<i class="margin-top-8 fa fa-check-circle-o"></i> {! module.record.status !}
 											</b>
 										</label>
 
-										<label ng-if="module.details.status == 'Disabled'">
+										<label ng-if="module.record.status == 'Disabled'">
 											<b class="error-icon">
-												<i class="margin-top-8 fa fa-ban"></i> {! module.details.status !}
+												<i class="margin-top-8 fa fa-ban"></i> {! module.record.status !}
 											</b>
 										</label>
 									</div>
@@ -90,10 +90,10 @@
 										{!! Form::text('area',''
 											, array(
 												'placeHolder' => 'Subject Area'
-												, 'ng-model' => 'module.details.area'
-												, 'ng-disabled' => '!module.area_field || !module.edit'
+												, 'ng-model' => 'module.record.area'
+												, 'ng-disabled' => 'module.active_view'
 												, 'class' => 'form-control'
-												, 'ng-change' => "module.searchArea('edit')"
+												, 'ng-change' => "module.searchArea()"
 												, 'ng-class' => "{ 'required-field' : module.fields['subject_area_id'] }"
 												, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
 											)
@@ -114,32 +114,32 @@
 									<div class="form-group" ng-if="module.active_edit">
 										<label class="control-label col-xs-2">Image</label>
 										<div class="col-xs-3">
-											<div class="btn btn-blue" ngf-select ngf-change="module.upload($files, module.details)"> Choose Image... </div>
+											<div class="btn btn-blue" ngf-select ngf-change="module.upload($files, module.record)"> Choose Image... </div>
 										</div>
 
-										<div class="margin-top-8" ng-if="module.details.uploaded">
-											<a href="" ng-click="module.removeImage(module.details)"><i class="fa fa-trash"></i></a>
+										<div class="margin-top-8" ng-if="module.record.uploaded">
+											<a href="" ng-click="module.removeImage(module.record)"><i class="fa fa-trash"></i></a>
 										</div>
 									</div>
 
 									<div ng-if="module.active_view">
 										<label class="col-xs-2 control-label">Image </label>
-										<div class="col-xs-3" ng-if="module.details.icon_image != 'None'">
-						                    <a href="javascript:void(0);" class="top-5" ng-click="module.viewImage(module.details)">View Image</a>
+										<div class="col-xs-3" ng-if="module.record.icon_image != 'None'">
+						                    <a href="javascript:void(0);" class="top-5" ng-click="module.viewImage(module.record)">View Image</a>
 										</div>
 
-										<div class="col-xs-3" ng-if="module.details.icon_image == 'None'">
-						                    <span class="upload-label label label-info">{! module.details.icon_image !}</span>
+										<div class="col-xs-3" ng-if="module.record.icon_image == 'None'">
+						                    <span class="upload-label label label-info">{! module.record.icon_image !}</span>
 										</div>
 									</div>
 								</div>
 
-								<div class="form-group" ng-if="module.active_edit && module.details.uploaded">
+								<div class="form-group" ng-if="module.active_edit && module.record.uploaded">
 					                <div class="col-xs-6"></div>
 					                <div class="col-xs-6">
 										<div class="col-xs-2"></div>
 										<span class="col-xs-5 upload-label label label-info">Image Uploaded...</span>
-										<a href="" class="control-label col-xs-5" ng-click="module.viewImage(module.details)">View Image</a>
+										<a href="" class="control-label col-xs-5" ng-click="module.viewImage(module.record)">View Image</a>
 					                </div>
 					            </div>
 
@@ -149,9 +149,9 @@
 										{!! Form::text('module',''
 											, array(
 												'placeHolder' => 'Module'
-												, 'ng-model' => 'module.details.name'
+												, 'ng-model' => 'module.record.name'
 												, 'class' => 'form-control'
-												, 'ng-disabled' => '!module.edit'
+												, 'ng-disabled' => 'module.active_view'
 												, 'ng-class' => "{ 'required-field' : module.fields['name'] }"
 											)
 										) !!}
@@ -161,9 +161,9 @@
 										{!! Form::text('points_to_unlock',''
 											, array(
 												'placeHolder' => 'Points to Unlock'
-												, 'ng-model' => 'module.details.points_to_unlock'
+												, 'ng-model' => 'module.record.points_to_unlock'
 												, 'class' => 'form-control'
-												, 'ng-disabled' => '!module.edit'
+												, 'ng-disabled' => 'module.active_view'
 												, 'ng-class' => "{ 'required-field' : module.fields['points_to_unlock'] }"
 											)
 										) !!}
@@ -175,9 +175,9 @@
 										{!! Form::textarea('description',''
 											, array(
 												'placeHolder' => 'Description'
-												, 'ng-model' => 'module.details.description'
+												, 'ng-model' => 'module.record.description'
 												, 'class' => 'form-control disabled-textarea'
-												, 'ng-disabled' => '!module.edit'
+												, 'ng-disabled' => 'module.active_view'
 												, 'ng-class' => "{ 'required-field' : module.fields['description'] }"
 												, 'rows' => '5'
 											)
@@ -188,9 +188,9 @@
 										{!! Form::text('points_to_finish',''
 											, array(
 												'placeHolder' => 'Points to Finish'
-												, 'ng-model' => 'module.details.points_to_finish'
+												, 'ng-model' => 'module.record.points_to_finish'
 												, 'class' => 'form-control'
-												, 'ng-disabled' => '!module.edit'
+												, 'ng-disabled' => 'module.active_view'
 												, 'ng-class' => "{ 'required-field' : module.fields['points_to_finish'] }"
 											)
 										) !!}
@@ -210,9 +210,9 @@
 										{!! Form::text('common_core_area',''
 											, array(
 												'placeHolder' => 'Common Core Area'
-												, 'ng-model' => 'module.details.common_core_area'
+												, 'ng-model' => 'module.record.common_core_area'
 												, 'class' => 'form-control'
-												, 'ng-disabled' => '!module.edit'
+												, 'ng-disabled' => 'module.active_view'
 												, 'ng-class' => "{ 'required-field' : module.fields['common_core_area'] }"
 											)
 										) !!}
@@ -223,48 +223,53 @@
 										{!! Form::text('common_core_url',''
 											, array(
 												'placeHolder' => 'Common Core URL'
-												, 'ng-model' => 'module.details.common_core_url'
+												, 'ng-model' => 'module.record.common_core_url'
 												, 'class' => 'form-control'
-												, 'ng-disabled' => '!module.edit'
+												, 'ng-disabled' => 'module.active_view'
 												, 'ng-class' => "{ 'required-field' : module.fields['common_core_url'] }"
 											)
 										) !!}
 									</div>
 								</div>
 							</fieldset>
-							<div class="col-xs-9 col-xs-offset-2">
-								<div class="btn-container">
-									{!! Form::button('Save'
-										, array(
-											'class' => 'btn btn-blue btn-medium'
-											, 'ng-if' => 'module.active_edit'
-											, 'ng-click' => 'module.saveModule()'
-										)
-									) !!}
-									{!! Form::button('Edit'
-										, array(
-											'class' => 'btn btn-blue btn-medium'
-											, 'ng-if' => 'module.active_view'
-											, 'ng-click' => "module.setActive('edit', module.details.id)"
-										)
-									) !!}
 
-									{!! Form::button('Cancel'
-										, array(
-											'class' => 'btn btn-gold btn-medium'
-											, 'ng-click' => 'module.setActive()'
-											, 'ng-if' => 'module.active_view'
-										)
-									) !!}
-									{!! Form::button('Cancel'
-										, array(
-											'class' => 'btn btn-gold btn-medium'
-											, 'ng-click' => "module.setActive('view', module.details.id)"
-											, 'ng-if' => 'module.active_edit'
-										)
-									) !!}
+							<fieldset>
+								<div class="form-group">
+									<div class="btn-container col-xs-9 col-xs-offset-2">
+										{!! Form::button('Update'
+											, array(
+												'class' => 'btn btn-blue btn-medium'
+												, 'ng-if' => 'module.active_edit'
+												, 'ng-click' => 'module.update()'
+											)
+										) !!}
+
+										{!! Form::button('Edit'
+											, array(
+												'class' => 'btn btn-blue btn-medium'
+												, 'ng-if' => 'module.active_view'
+												, 'ng-click' => "module.setActive(futureed.ACTIVE_EDIT, module.record.id)"
+											)
+										) !!}
+
+										{!! Form::button('Cancel'
+											, array(
+												'class' => 'btn btn-gold btn-medium'
+												, 'ng-click' => 'module.setActive()'
+												, 'ng-if' => 'module.active_view'
+											)
+										) !!}
+
+										{!! Form::button('Cancel'
+											, array(
+												'class' => 'btn btn-gold btn-medium'
+												, 'ng-click' => "module.setActive(futureed.ACTIVE_VIEW, module.record.id)"
+												, 'ng-if' => 'module.active_edit'
+											)
+										) !!}
+									</div>
 								</div>
-							</div>
+							</fieldset>
 						</div>
 					{!! Form::close() !!}
 				</div>
@@ -281,7 +286,7 @@
 			                    </div>
 			                </div>
 			                <div class="modal-footer">
-			                    <div class="btncon col-md-8 col-md-offset-4 pull-left">
+			                    <div class="btncon col-xs-8 col-xs-offset-4 pull-left">
 			                        {!! Form::button('Close'
 			                            , array(
 			                                'class' => 'btn btn-gold btn-medium'
@@ -296,7 +301,7 @@
 			</div>
 		</div>
 
-		<div class="panel panel-default" ng-if="module.details.id && module.active_view">
+		<div class="panel panel-default" ng-if="module.record.id && module.active_view">
 			<div id="content_heading" class="panel-heading" data-toggle="collapse" ng-click="module.toggleContent()" data-parent="#accordion" href="#module_tabs" aria-expanded="false" aria-controls="module_tabs">
 				<h4 class="panel-title">
 					Module Contents
@@ -315,7 +320,7 @@
 					</ul>
 
 					<div class="tab-content row">
-						<div ng-if="module.details.current_view == futureed.AGEGROUP" ng-controller="ManageAgeGroupController as age" class="tab-pane fade in active" ng-init="age.setModule(module.details)" id="age_group">
+						<div ng-if="module.record.current_view == futureed.AGEGROUP" ng-controller="ManageAgeGroupController as age" class="tab-pane fade in active" ng-init="age.setModule(module.record)" id="age_group">
 							<div ng-init="age.setActive()">
 
 								<div template-directive template-url="{!! route('admin.manage.age_group.partials.list_view_form') !!}"></div>
@@ -326,7 +331,7 @@
 							</div>
 						</div>
 
-						<div ng-if="module.details.current_view == futureed.CONTENTS" ng-controller="ManageModuleContentController as content" class="tab-pane fade" ng-init="content.setModule(module.details)" id="contents">
+						<div ng-if="module.record.current_view == futureed.CONTENTS" ng-controller="ManageModuleContentController as content" class="tab-pane fade" ng-init="content.setModule(module.record)" id="contents">
 							<div ng-init="content.setActive()">
 								
 								<div template-directive template-url="{!! route('admin.manage.module.content.partials.list') !!}"></div>
@@ -339,7 +344,7 @@
 							</div>
 						</div>
 
-						<div ng-if="module.details.current_view == futureed.QANDA" ng-controller="ManageQuestionAnsController as qa" class="tab-pane fade" ng-init="qa.setModule(module.details)" id="q_and_a">
+						<div ng-if="module.record.current_view == futureed.QANDA" ng-controller="ManageQuestionAnsController as qa" class="tab-pane fade" ng-init="qa.setModule(module.record)" id="q_and_a">
 							<div ng-init="qa.setActive()">
 
 								<div template-directive template-url="{!! route('admin.manage.question_answer.partials.question_list_form') !!}"></div>

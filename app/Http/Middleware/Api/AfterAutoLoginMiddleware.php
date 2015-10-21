@@ -5,6 +5,7 @@ use FutureEd\Models\Repository\Admin\AdminRepositoryInterface;
 use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
 use FutureEd\Services\SessionServices;
 use FutureEd\Services\TokenServices;
+use Illuminate\Http\Response;
 
 class AfterAutoLoginMiddleware extends JWTMiddleware {
 
