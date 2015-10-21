@@ -152,13 +152,17 @@
 										tooltip-placement="top"
 										tooltip-trigger="mouseenter"></i>
 								</div>
-								<div class="col-xs-3">
+								<div class="col-xs-2">
+									<a href="" ng-click="client.impersonate(record.user_id)"><span>
+										<i ng-class="{ 'success-icon' : record.user.impersonate }" class="fa fa-user-secret"></i></span></a>
+								</div>
+								<div class="col-xs-2">
 									<a href="" ng-click="client.setActive(futureed.ACTIVE_VIEW, record.id)"><span><i class="fa fa-eye"></i></span></a>
 								</div>
-								<div class="col-xs-3">
+								<div class="col-xs-2">
 									<a href="" ng-click="client.setActive(futureed.ACTIVE_EDIT, record.id)"><span><i class="fa fa-pencil"></i></span></a>
 								</div>
-								<div class="col-xs-3">
+								<div class="col-xs-2">
 									<a href="" ng-click="client.confirmDelete(record.id)"><span><i class="fa fa-trash	"></i></span></a>
 								</div>
 							</div>
@@ -192,4 +196,14 @@
 			</div>
 		</div>
 	</div>
+
+	{!! Form::open(
+		array(
+			'id' => 'login_form'
+			, 'route' => 'client.login.process'
+			, 'method' => 'POST'
+		)
+	) !!}
+		{!! Form::hidden('user_data', '', array('id' => 'user_data')) !!}
+	{!! Form::close() !!}
 </div>
