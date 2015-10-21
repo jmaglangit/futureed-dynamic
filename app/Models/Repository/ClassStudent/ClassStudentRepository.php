@@ -321,9 +321,11 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 	/**
 	 * Get student modules by student id and grade
 	 * @param $student_id
+	 * @param $subject_id
 	 * @param $country_id
+	 * @return string
 	 */
-	public function getStudentModulesProgressByGrade($student_id, $country_id){
+	public function getStudentModulesProgressByGrade($student_id, $subject_id, $country_id){
 //select
 //m.grade_id ,count(*) as module_count, count(sm.id) as visited , count(smc.id) as completed, count(smo.id) as on_going
 //from class_students cs
@@ -387,6 +389,7 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 				->where('o.date_start', '<=', Carbon::now())
 				->where('o.date_end', '>=', Carbon::now())
 				->where('class_students.student_id','=',$student_id)
+				->where('s.id','=',$subject_id)
 				->groupBy('m.grade_id')
 				->get();
 		}catch ( \Exception $e){
