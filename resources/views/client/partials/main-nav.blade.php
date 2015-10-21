@@ -12,10 +12,14 @@
                         
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{!! route('client.profile.index') !!}">Profile</a></li>
-                            <li><a href="javascript:void(0)" ng-click="logout(user.id, futureed.CLIENT, '{!! route('client.logout') !!}')">
-                                <span ng-if="!user.impersonate">Logout</span>
-                                <span ng-if="user.impersonate">Stop Impersonating</span>
-                            </a></li>
+                            <li>
+                                <a  ng-if="!user.impersonate" href="javascript:void(0)" ng-click="logout(user.id, futureed.CLIENT, '{!! route('client.logout') !!}')">
+                                <span>Logout</span>
+                            </a>
+                                <a ng-if="user.impersonate" href="javascript:void(0)" ng-click="stopImpersonate(user.user_id, '{!! route('client.logout') !!}')">
+                                    <span >Stop Impersonating</span>
+                                </a>
+                            </li>
                         </ul>
                     </li>
                 </ul>

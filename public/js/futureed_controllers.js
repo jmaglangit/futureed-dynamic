@@ -159,6 +159,24 @@ function FutureedController($scope, $window, apiService, futureed) {
 		});
 	}
 
+	$scope.stopImpersonate = function(id,callback) {
+		var data = {
+			id	: id
+		}
+
+		apiService.stopImpersonate(data).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					$scope.errorHandler(response.errors);
+				} else if(response.data) {
+					$window.location.href = callback;
+				}
+			}
+		}).error(function() {
+			$scope.internalError();
+		});
+	}
+
 	function highlight(e) {
 		var target = getTarget(e);    
 

@@ -216,5 +216,13 @@ var services = angular.module('futureed.services', []);
 			});
         }
 
+		futureedAPI.stopImpersonate = function(data) {
+			return $http({
+				method 	: Constants.METHOD_POST
+				, data	: data
+				, url 	: futureedAPIUrl + 'admin/impersonate/logout'
+			});
+		}
+
 		return futureedAPI;
 	});
