@@ -110,7 +110,6 @@ class AfterAutoLoginMiddleware extends JWTMiddleware {
 
 			if(!$this->session->addSessionToken($user_data)){
 
-//				return $this->setStatusCode(Response::HTTP_OK)->respondErrorMessage(2060);
 				switch($request_data['user_type']){
 
 					case config('futureed.student'):
