@@ -1,16 +1,16 @@
 angular.module('futureed.services')
-	.factory('managePrincipalTeacherService', managePrincipalTeacherService);
+	.factory('ManagePrincipalTeacherService', ManagePrincipalTeacherService);
 
-managePrincipalTeacherService.$inject = ['$http'];
+ManagePrincipalTeacherService.$inject = ['$http'];
 
-function managePrincipalTeacherService($http){
-	var manageTeacherApi = {};
-	var teacherApiUrl = '/api/v1/';
+function ManagePrincipalTeacherService($http){
+	var api = {};
+	var apiUrl = '/api/v1/';
 
-	manageTeacherApi.list = function(search, table) {
+	api.list = function(search, table) {
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url 	: teacherApiUrl + 'client/teacher?name=' + search.name
+			, url 	: apiUrl + 'client/teacher?name=' + search.name
 				+ '&school_code=' + search.school_code
 				+ '&email=' + search.email
 				+ '&limit=' + table.size
@@ -18,45 +18,44 @@ function managePrincipalTeacherService($http){
 		});
 	}
 
-	manageTeacherApi.details = function(id) {
+	api.details = function(id) {
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url 	: teacherApiUrl + 'client/teacher/'+ id
+			, url 	: apiUrl + 'client/teacher/'+ id
 		});
 	}
 
-	manageTeacherApi.classDetails = function(id, table) {
+	api.classDetails = function(id, table) {
 		return $http({
 			method  : Constants.METHOD_GET
-			, url 	: teacherApiUrl + 'classroom?client_id=' + id
+			, url 	: apiUrl + 'classroom?client_id=' + id
 				+ '&limit=' + table.size
 				+ '&offset=' + table.offset
 		});
 	}
 
-	manageTeacherApi.update = function(data) {
+	api.update = function(data) {
 		return $http({
 			method 	: Constants.METHOD_PUT
 			, data	: data
-			, url 	: teacherApiUrl + 'client/teacher/'+ data.id
+			, url 	: apiUrl + 'client/teacher/'+ data.id
 		});
 	}
 
-	manageTeacherApi.save = function(data) {
+	api.save = function(data) {
 		return $http({
 			method 	: Constants.METHOD_POST
 			, data 	: data 
-			, url 	: teacherApiUrl + 'client/teacher'
+			, url 	: apiUrl + 'client/teacher'
 		});
 	}	
 
-	manageTeacherApi.delete = function(id) {
+	api.delete = function(id) {
 		return $http({
 			method 	: Constants.METHOD_DELETE
-			, url 	: teacherApiUrl + 'client/teacher/' + id
+			, url 	: apiUrl + 'client/teacher/' + id
 		});
 	}
 
-
-	return manageTeacherApi;
+	return api;
 }
