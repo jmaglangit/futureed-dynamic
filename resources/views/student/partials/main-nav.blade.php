@@ -39,7 +39,7 @@
 							<li><a href="{!! route('student.profile.index') !!}">Profile</a></li>
 							<li ng-if="user.age > 13"><a href="{!! route('student.payment.index') !!}">Payment</a></li>
 							<li class="divider"></li>
-							<li><a href="{!! route('student.logout') !!}">Logout</a></li>
+							<li><a href="javascript:void(0)" ng-click="logout(user.id, futureed.STUDENT, '{!! route('student.logout') !!}')">Logout</a></li>
 						</ul>
 					</li>
 				</ul>

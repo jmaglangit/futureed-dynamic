@@ -4,6 +4,7 @@ use Closure;
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use FutureEd\Services\SessionServices;
 use FutureEd\Services\TokenServices;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Session;
 
 class AfterStudentLoginMiddleware extends JWTMiddleware{
@@ -58,7 +59,7 @@ class AfterStudentLoginMiddleware extends JWTMiddleware{
 
 			if(!$this->session->addSessionToken($user_data)){
 
-				return $this->respondErrorMessage(2060);
+				return $this->setStatusCode(Response::HTTP_OK)->respondErrorMessage(2060);
 			}
 
 

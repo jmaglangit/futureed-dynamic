@@ -17,7 +17,7 @@
                         
                         <ul class="dropdown-menu" role="menu">
                             <li><a href="{!! route('client.profile.index') !!}">Profile</a></li>
-                            <li><a href="{!! route('client.logout') !!}">Logout</a></li>
+                            <li><a href="javascript:void(0)" ng-click="logout(user.id, futureed.CLIENT, '{!! route('client.logout') !!}')">Logout</a></li>
                         </ul>
                     </li>
                 </ul>

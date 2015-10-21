@@ -9,12 +9,15 @@ use FutureEd\Models\Repository\Module\ModuleRepositoryInterface;
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use FutureEd\Http\Requests\Api\StudentReportRequest;
 use FutureEd\Models\Repository\StudentModule\StudentModuleRepository;
+use FutureEd\Services\AvatarServices;
 
 class StudentReportController extends ReportController {
 
 	protected $student;
 
 	protected $avatar;
+
+	protected $avatar_service;
 
 	protected $class_student;
 
@@ -32,7 +35,9 @@ class StudentReportController extends ReportController {
 	 * @param ClassStudentRepositoryInterface $classStudentRepositoryInterface
 	 * @param GradeRepositoryInterface $gradeRepositoryInterface
 	 * @param ModuleRepositoryInterface $moduleRepositoryInterface
-	 * @param StudentModuleRepository $studentModuleRepository
+	 * @param StudentRepositoryInterface $studentRepositoryInterface
+	 * @param AvatarServices $avatarServices
+	 * @internal param StudentModuleRepository $studentModuleRepository
 	 * @internal param $student
 	 */
 	public function __construct(
@@ -41,7 +46,8 @@ class StudentReportController extends ReportController {
 		ClassStudentRepositoryInterface $classStudentRepositoryInterface,
 		GradeRepositoryInterface $gradeRepositoryInterface,
 		ModuleRepositoryInterface $moduleRepositoryInterface,
-		StudentRepositoryInterface $studentRepositoryInterface
+		StudentRepositoryInterface $studentRepositoryInterface,
+		AvatarServices $avatarServices
 	) {
 		$this->student = $studentRepositoryInterface;
 		$this->class_student = $classStudentRepositoryInterface;
@@ -49,6 +55,7 @@ class StudentReportController extends ReportController {
 		$this->grade = $gradeRepositoryInterface;
 		$this->module = $moduleRepositoryInterface;
 		$this->student_module = $studentRepositoryInterface;
+		$this->avatar_service = $avatarServices;
 	}
 
 
@@ -63,9 +70,13 @@ class StudentReportController extends ReportController {
 
 		$avatar = $this->avatar->getAvatar($student->avatar_id);
 
+		$student_grade = $this->grade->getGrade($student->grade_code);
+
 		$additional_information = [
 			'student_name' => $student->first_name . ' ' . $student->last_name,
-			'avatar' => $avatar->avatar_image
+			'grade_level' => $student_grade->name,
+			'avatar' => $this->avatar_service->getAvatarUrl($avatar->avatar_image),
+			'avatar_thumbnail' => $this->avatar_service->getAvatarThumbnailUrl($avatar->avatar_image)
 		];
 
 		$column_header = [
@@ -86,7 +97,7 @@ class StudentReportController extends ReportController {
 	 * @param $id
 	 * @param StudentReportRequest $request
 	 */
-	public function getStudentProgressReport($id){
+	public function getStudentProgressReport($id,$subject_id){
 
 		//get student id and subject id
 
@@ -97,7 +108,8 @@ class StudentReportController extends ReportController {
 
 		$additional_information = [
 			'student_name' => $student->first_name . ' ' . $student->last_name,
-			'avatar' => $avatar->avatar_image,
+			'avatar' => $this->avatar_service->getAvatarUrl($avatar->avatar_image),
+			'avatar_thumbnail' => $this->avatar_service->getAvatarThumbnailUrl($avatar->avatar_image),
 			'lessons_completed' => '',
 			'stories_completed' => '',
 			'tokens_bank' => '',
@@ -134,7 +146,7 @@ class StudentReportController extends ReportController {
 		//ROWS
 		//get each completed on each grades.
 
-		$row_data = $this->class_student->getStudentModulesProgressByGrade($id,$student->country_id);
+		$row_data = $this->class_student->getStudentModulesProgressByGrade($id,$subject_id,$student->country_id);
 
 
 		foreach($row_data as $data){

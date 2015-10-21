@@ -140,6 +140,25 @@ function FutureedController($scope, $window, apiService, futureed) {
 		$("#" + id).unblock();
 	}
 
+	$scope.logout = function(id, user_type, callback) {
+		var data = {
+			id	: id
+			, user_type : user_type
+		}
+
+		apiService.logout(data).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					$scope.errorHandler(response.errors);
+				} else if(response.data) {
+					$window.location.href = callback;
+				}
+			}
+		}).error(function() {
+			$scope.internalError();
+		});
+	}
+
 	function highlight(e) {
 		var target = getTarget(e);    
 

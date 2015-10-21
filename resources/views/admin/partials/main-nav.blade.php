@@ -17,7 +17,7 @@
 						<a>Welcome, {! user.first_name !}</a>
 					</li>
 					<li>
-						<a href="{!! route('admin.logout') !!}">Logout</a>
+						<a href="javascript:void(0)" ng-click="logout(user.id, futureed.ADMIN, '{!! route('admin.logout') !!}')">Logout</a>
 					</li>
 				</ul>
 			</div>
