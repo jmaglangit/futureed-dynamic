@@ -10,10 +10,14 @@ use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use FutureEd\Http\Requests\Api\StudentReportRequest;
 use FutureEd\Models\Repository\StudentModule\StudentModuleRepository;
 use FutureEd\Services\AvatarServices;
+use FutureEd\Services\StudentServices;
+use Illuminate\Support\Facades\Input;
 
 class StudentReportController extends ReportController {
 
 	protected $student;
+
+	protected $student_service;
 
 	protected $avatar;
 
@@ -37,6 +41,7 @@ class StudentReportController extends ReportController {
 	 * @param ModuleRepositoryInterface $moduleRepositoryInterface
 	 * @param StudentRepositoryInterface $studentRepositoryInterface
 	 * @param AvatarServices $avatarServices
+	 * @param StudentServices $studentServices
 	 * @internal param StudentModuleRepository $studentModuleRepository
 	 * @internal param $student
 	 */
@@ -47,7 +52,8 @@ class StudentReportController extends ReportController {
 		GradeRepositoryInterface $gradeRepositoryInterface,
 		ModuleRepositoryInterface $moduleRepositoryInterface,
 		StudentRepositoryInterface $studentRepositoryInterface,
-		AvatarServices $avatarServices
+		AvatarServices $avatarServices,
+		StudentServices $studentServices
 	) {
 		$this->student = $studentRepositoryInterface;
 		$this->class_student = $classStudentRepositoryInterface;
@@ -56,6 +62,7 @@ class StudentReportController extends ReportController {
 		$this->module = $moduleRepositoryInterface;
 		$this->student_module = $studentRepositoryInterface;
 		$this->avatar_service = $avatarServices;
+		$this->student_service = $studentServices;
 	}
 
 
@@ -95,7 +102,9 @@ class StudentReportController extends ReportController {
 
 	/**
 	 * @param $id
-	 * @param StudentReportRequest $request
+	 * @param $subject_id
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 * @internal param StudentReportRequest $request
 	 */
 	public function getStudentProgressReport($id,$subject_id){
 
@@ -160,6 +169,42 @@ class StudentReportController extends ReportController {
 		}
 
 		return $this->respondReportData($additional_information, $column_header, $rows);
+
+
+	}
+
+	/**
+	 * @param StudentReportRequest $request
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
+	public function getStudentSubjectGradeProgressReport($student_id, $subject_id, StudentReportRequest $request){
+
+		//get student, subject
+		//mitigate class student
+		//check student and subject exists now.
+
+		//get student subject query curriculum group by grades
+
+		//automate class students current class.
+		$this->student_service->getCurrentClass($student_id);
+
+
+
+
+		$grades = $this->grade->getGradesByCountries(Input::get('country_id'));
+
+
+		$additional_information = [];
+
+		$column_header = [['name' => 'Curriculum']];
+
+		$column_header = array_merge($column_header,$grades->toArray());
+
+		$rows = [];
+
+		return $this->respondReportData($additional_information,$column_header,$rows);
+
+
 
 
 	}
