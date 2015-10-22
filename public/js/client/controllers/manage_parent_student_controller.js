@@ -1,9 +1,9 @@
 angular.module('futureed.controllers')
 	.controller('ManageParentStudentController', ManageParentStudentController);
 
-ManageParentStudentController.$inject = ['$scope', '$filter', 'ManageParentStudentService', 'TableService', 'SearchService', 'ValidationService'];
+ManageParentStudentController.$inject = ['$scope', '$filter', 'ManageParentStudentService', 'TableService', 'SearchService', 'ValidationService','apiService'];
 
-function ManageParentStudentController($scope, $filter, ManageParentStudentService, TableService, SearchService, ValidationService) {
+function ManageParentStudentController($scope, $filter, ManageParentStudentService, TableService, SearchService, ValidationService, apiService) {
 	var self = this;
 
 	TableService(self);
@@ -339,14 +339,33 @@ function ManageParentStudentController($scope, $filter, ManageParentStudentServi
 
 	self.playStudent = function(id) {
 		$scope.ui_block();
-		ManageParentStudentService.playStudent().success(function(response){
-			if(angular.equals(response.status,Constants.STATUS_OK)){
-				$("#redirect_form input[name='id']").val(id);
-				$("#redirect_form").submit();
+		var data = {
+			id: id
+			, user_type: Constants.CLIENT
+		}
+
+		apiService.logout(data).success(function (response) {
+			if (angular.equals(response.status, Constants.STATUS_OK)) {
+				if (response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if (response.data) {
+
+					ManageParentStudentService.playStudent().success(function (response) {
+						if (angular.equals(response.status, Constants.STATUS_OK)) {
+							$("#redirect_form input[name='id']").val(id);
+							$("#redirect_form").submit();
+						}
+
+						$scope.ui_unblock();
+					}).error(function () {
+						self.errors = $scope.internalError();
+						$scope.ui_unblock();
+					})
+				}
 			}
 
 			$scope.ui_unblock();
-		}).error(function(){
+		}).error(function () {
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		})
