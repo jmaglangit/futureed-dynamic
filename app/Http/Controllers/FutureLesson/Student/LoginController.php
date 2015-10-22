@@ -77,7 +77,7 @@ class LoginController extends Controller {
 
 		Session::forget('student');
 
-		if($user_object->impersonate) {
+		if(isset($user_object->impersonate)) {
 			return redirect()->route('admin.manage.student.index');
 		}
 

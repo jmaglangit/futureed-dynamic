@@ -6,88 +6,97 @@
 			<a href="javascript:void(0)" ng-click="reports.setActive(futureed.SUMMARY_PROGRESS)">Summary Progress</a></li>
 	</ul>
 
-	<div class="col-xs-12 search-container">
-		<div ng-if="reports.errors || reports.success">
-			<div class="alert alert-error" ng-if="reports.errors">
-				<p ng-repeat="error in reports.errors track by $index">
-					{! error !}
-				</p>
-			</div>
+	<div ng-if="reports.errors || reports.success">
+		<div class="alert alert-error" ng-if="reports.errors">
+			<p ng-repeat="error in reports.errors track by $index">
+				{! error !}
+			</p>
+		</div>
 
-			<div class="alert alert-success" ng-if="reports.success">
-				<p>{! reports.success !}</p>
-			</div>
+		<div class="alert alert-success" ng-if="reports.success">
+			<p>{! reports.success !}</p>
 		</div>
 	</div>
 	 
 	<div ng-if="reports.active_report_card">
+		<div class="form-search report-card-container">
+			{!! Form::open(
+					[
+						'id' => 'search_form',
+						'class' => 'form-horizontal'
+						, 'ng-submit' => 'reports.searchFnc($event)'
+					]
+			) !!}
+			<div class="form-group">
+				<div class="col-xs-3">
+					<img ng-src="{! reports.student.avatar_thumbnail !}" />
+				</div>
+				<div class="col-xs-9">
+					<fieldset>
+						<legend>{! reports.student.student_name!}</legend>
+						<p>{! reports.student.grade_level!}</p>
+					</fieldset>
+				</div>
+			</div>
+			{!! Form::close() !!}
+		</div>
+
+		<br />
+
 		<div class="list-container" ng-cloak>
-			<div class="size-container">
-				{!! Form::select('size'
-					, array(
-						  '10' => '10'
-						, '20' => '20'
-						, '50' => '50'
-						, '100' => '100'
-					)
-					, '10'
-					, array(
-						'ng-model' => 'reports.table.size'
-						, 'ng-change' => 'reports.paginateBySize()'
-						, 'ng-if' => "reports.records.length"
-						, 'class' => 'form-control paginate-size pull-right'
-					)
-				) !!}
-			</div>
-
-			<div class="clearfix"></div>
-
-			<div class="table-responsive">
-				<table id="tip-list" class="table table-striped table-bordered">
-					<thead>
-						<tr>
-							<th>Subject</th>
-							<th>Module Status</th>
-							<th>Points Earned</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr ng-repeat="data in reports.records">
-							<td>{! data.name !}</td>
-							<td>{! data.module_status !}</td>
-							<td>{! data.points_earned !}</td>
-						</tr>
-						<tr class="odd" ng-if="!reports.records.length && !reports.table.loading">
-							<td valign="top" colspan="7">
-								No records found
-							</td>
-						</tr>
-						<tr class="odd" ng-if="reports.table.loading">
-							<td valign="top" colspan="7">
-								Loading...
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			<div class="reports-pagination" ng-if="reports.records.length">
-				<pagination 
-					total-items="reports.table.total_items" 
-					ng-model="reports.table.page"
-					max-size="3"
-					items-per-page="reports.table.size" 
-					previous-text = "&lt;"
-					next-text="&gt;"
-					class="pagination" 
-					boundary-links="true"
-					ng-change="reports.paginateByPage()">
-				</pagination>
-			</div>
+			<table id="tip-list" class="table table-striped table-bordered">
+				<thead>
+					<tr>
+						<th>Subject</th>
+						<th>Module Status</th>
+						<th>Points Earned</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="data in reports.records">
+						<td>{! data.name !}</td>
+						<td>{! data.module_status !}</td>
+						<td>{! data.points_earned !}</td>
+					</tr>
+					<tr class="odd" ng-if="!reports.records.length && !reports.table.loading">
+						<td valign="top" colspan="7">
+							No records found
+						</td>
+					</tr>
+					<tr class="odd" ng-if="reports.table.loading">
+						<td valign="top" colspan="7">
+							Loading...
+						</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
 
 	<div ng-if="reports.active_summary_progress">
-		<br />
+		<div class="form-search">
+			{!! Form::open(
+					[
+						'id' => 'search_form',
+						'class' => 'form-horizontal'
+						, 'ng-submit' => 'reports.searchFnc($event)'
+					]
+			) !!}
+			<div class="form-group">
+				<div class="col-xs-3"></div>
+				<div class="col-xs-6">
+					<select ng-model="reports.search.subject_id" 
+						ng-change="reports.summaryProgress()"
+						ng-disabled="!reports.subjects.length"
+						class="form-control">
+						<option value="">-- Select Subject --</option>
+						<option ng-selected="reports.search.subject_id == subject.id" ng-repeat="subject in reports.subjects" ng-value="subject.id">{! subject.name !}</option>
+					</select>
+				</div>
+			</div>
+			{!! Form::close() !!}
+		</div>
+
 		<div class="reports-container" ng-cloak>
 			<div class="progress-holder" ng-repeat="(key, value) in reports.summary.columns track by $index">
 			  	<p>{! value !}</p>
