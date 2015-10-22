@@ -396,6 +396,17 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 
 			return $e->getMessage();
 		}
+	}
+
+
+	/**
+	 * Student Progress by Subject group by Curriculum by grade.
+	 * @param $student_id
+	 * @param $subject_id
+	 */
+	public function getStudentSubjectProgressByCurriculum($student_id, $subject_id){
+
+		//sub
 
 
 
