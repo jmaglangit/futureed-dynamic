@@ -49,7 +49,7 @@
 					) !!}
 				</div>
 				<div class="col-xs-2">
-					{!! Form::button('Search', 
+					{!! Form::button('Search',
 						array(
 							'class' => 'btn btn-blue'
 							, 'ng-click' => "student.searchFnc()"
@@ -57,7 +57,7 @@
 					) !!}
 				</div>
 				<div class="col-xs-2">
-					{!! Form::button('Clear', 
+					{!! Form::button('Clear',
 						array(
 							'class' => 'btn btn-gold'
 							, 'ng-click' => 'student.clear()'
@@ -65,6 +65,7 @@
 					) !!}
 				</div>
 			</div>
+            {!! Form::close() !!}
 		</div>
 	</div>
 
@@ -113,13 +114,18 @@
 					<td>{! record.points !}</td>
 					<td ng-if="student.records.length">
 						<div class="row">
-							<div class="col-xs-4">
+
+                            <div class="col-xs-3">
+							<a href="" ng-click="student.impersonate(record.user_id)"><span>
+										<i ng-class="{ 'success-icon' : record.user.impersonate }" class="fa fa-user-secret"></i></span></a>
+							</div>
+							<div class="col-xs-3">
 								<a href="" ng-click="student.setActive(futureed.ACTIVE_VIEW, record.id)"><span><i class="fa fa-eye"></i></span></a>
 							</div>
-							<div class="col-xs-4">
+							<div class="col-xs-3">
 								<a href="" ng-click="student.setActive(futureed.ACTIVE_EDIT, record.id)"><span><i class="fa fa-pencil"></i></span></a>
 							</div>
-							<div class="col-xs-4">
+							<div class="col-xs-3">
 								<a href="" ng-click="student.confirmDelete(record.id)"><span><i class="fa fa-trash"></i></span></a>
 							</div>
 						</div>
@@ -139,18 +145,27 @@
 			</table>
 
 			<div class="pull-right" ng-if="student.records.length">
-				<pagination 
-					total-items="student.table.total_items" 
+				<pagination
+					total-items="student.table.total_items"
 					ng-model="student.table.page"
 					max-size="student.table.paging_size"
-					items-per-page="student.table.size" 
+					items-per-page="student.table.size"
 					previous-text = "&lt;"
 					next-text="&gt;"
-					class="pagination" 
+					class="pagination"
 					boundary-links="true"
 					ng-change="student.paginateByPage()">
 				</pagination>
 			</div>
 		</div>
 	</div>
+    {!! Form::open(
+		array(
+			'id' => 'login_form'
+			, 'route' => 'student.login.process'
+			, 'method' => 'POST'
+		)
+	) !!}
+    {!! Form::hidden('user_data', '', array('id' => 'user_data')) !!}
+    {!! Form::close() !!}
 </div>

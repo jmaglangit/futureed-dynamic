@@ -351,6 +351,7 @@ function ManageClientController($scope, manageClientService, TableService, Searc
 				}else if(response.data){
 					var data = {
 						id				: response.data.id
+						, user_id		: response.data.user_id
 						, first_name	: response.data.first_name
 						, last_name		: response.data.last_name
 						, country_id	: response.data.country_id
