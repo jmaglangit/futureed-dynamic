@@ -194,7 +194,7 @@
             <div class="form-group">
                 <label class="col-md-3 control-label">Birthday <span class="required">*</span></label>
                 <div class="col-xs-6">
-                    <input type="hidden" id="student_bdate" ng-init="class.setDropdown()">
+                    <input type="hidden" id="birth_date" ng-init="class.setDropdown()">
                 </div>
             </div> 
             <div class="form-group">

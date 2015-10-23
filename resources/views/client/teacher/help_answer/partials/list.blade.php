@@ -1,5 +1,5 @@
 <div ng-if="answer.active_list">
-	<div class="col-xs-12" ng-if="answer.errors || answer.success">
+	<div class="col-xs-12 success-container" ng-if="answer.errors || answer.success">
 		<div class="alert alert-error" ng-if="answer.errors">
 			<p ng-repeat="error in answer.errors track by $index">
 				{! error !}
@@ -82,7 +82,7 @@
 	<div class="col-xs-12 table-container">
 		<div class="list-container" ng-cloak>
 			<div class="col-xs-6 title-mid">
-				Help Request Answer List
+				Answer List
 			</div>
 
 			<div class="col-xs-6 size-container">
@@ -115,19 +115,19 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="answerInfo in answer.records">
-						<td>{! answerInfo.help_request.title !}</td>
-						<td class="wide-column">{! answerInfo.content !}</td>
-						<td>{! answerInfo.user.name !}</td>
-						<td>{! answerInfo.created_at | ddMMyyHHmmss : '-' !}</td>
-						<td>{! answerInfo.request_answer_status !}</td>
+					<tr ng-repeat="record in answer.records">
+						<td>{! record.help_request.title !}</td>
+						<td class="wide-column">{! record.content !}</td>
+						<td>{! record.user.name !}</td>
+						<td>{! record.created_at | ddMMyy : '-' !}</td>
+						<td>{! record.request_answer_status !}</td>
 						<td ng-if="answer.records.length">
 							<div class="row">
 								<div class="col-xs-6">
-									<a href="" ng-click="answer.setActive(futureed.ACTIVE_VIEW, answerInfo.id)"><span><i class="fa fa-eye"></i></span></a>
+									<a href="" ng-click="answer.setActive(futureed.ACTIVE_VIEW, record.id)"><span><i class="fa fa-eye"></i></span></a>
 								</div>
 								<div class="col-xs-6">
-									<a href="" ng-click="answer.setActive(futureed.ACTIVE_EDIT, answerInfo.id)"><span><i class="fa fa-pencil"></i></span></a>
+									<a href="" ng-click="answer.setActive(futureed.ACTIVE_EDIT, record.id)"><span><i class="fa fa-pencil"></i></span></a>
 								</div>
 							</div>
 						</td>
