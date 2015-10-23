@@ -7,7 +7,7 @@
 		</div>
 
 		<div class="alert alert-success" ng-if="answer.success">
-			<p>{! answer.success !} asd</p>
+			<p>{! answer.success !}</p>
 		</div>
 	</div>
 
