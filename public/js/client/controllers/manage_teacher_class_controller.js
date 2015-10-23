@@ -406,11 +406,15 @@ function ManageTeacherClassController($scope, $filter, ManageClassService, apiSe
 
 	self.setTabActive = function(active) {
 		self.errors = Constants.FALSE;
-		self.success = Constants.FALSE;
 
 		self.help_ans_tab_active = Constants.FALSE;
 		self.help_tab_active = Constants.FALSE;
 		self.tip_tab_active = Constants.FALSE;
+
+		if(active) {
+			self.success = Constants.FALSE;
+		}
+
 		switch(active) {
 			case 'help-ans':
 				self.help_ans_tab_active = Constants.TRUE;
@@ -419,6 +423,11 @@ function ManageTeacherClassController($scope, $filter, ManageClassService, apiSe
 			case 'help':
 				self.help_tab_active = Constants.TRUE;
 				break;
+
+			case 'tip':
+				self.tip_tab_active = Constants.TRUE;
+				break;
+			
 			default:
 				self.tip_tab_active = Constants.TRUE;
 				break;
