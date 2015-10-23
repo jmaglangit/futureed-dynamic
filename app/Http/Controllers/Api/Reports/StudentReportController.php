@@ -179,6 +179,8 @@ class StudentReportController extends ReportController {
 	}
 
 	/**
+	 * @param $student_id
+	 * @param $subject_id
 	 * @param StudentReportRequest $request
 	 * @return \Symfony\Component\HttpFoundation\Response
 	 */
@@ -203,12 +205,13 @@ class StudentReportController extends ReportController {
 		//check valid class subject.
 		$class = $this->class_student->getStudentValidClassBySubject($student_id,$subject_id);
 
-		dd($class->toArray());
 
-		//TODO: continue here...
 		//get student modules but subject areas
-//		$curriculum_data = $this->class_student->getStudentSubjectProgressByCurriculum($class);
+		$curriculum_data = $this->class_student->getStudentSubjectProgressByCurriculum(
+			$class[0]->student_id, $class[0]->subject_id,$class[0]->class_id
+		);
 
+		dd($curriculum_data);
 
 		//get grades collection
 		$grades = $this->grade->getGradesByCountries($student->country_id);
