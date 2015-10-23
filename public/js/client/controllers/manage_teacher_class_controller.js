@@ -1,9 +1,9 @@
 angular.module('futureed.controllers')
 	.controller('ManageTeacherClassController', ManageTeacherClassController);
 
-ManageTeacherClassController.$inject = ['$scope', 'ManageClassService', 'apiService', 'TableService', 'SearchService'];
+ManageTeacherClassController.$inject = ['$scope', '$filter', 'ManageClassService', 'apiService', 'TableService', 'SearchService'];
 
-function ManageTeacherClassController($scope, ManageClassService, apiService, TableService, SearchService) {
+function ManageTeacherClassController($scope, $filter, ManageClassService, apiService, TableService, SearchService) {
 	var self = this;
 
 	TableService(self);
@@ -66,6 +66,9 @@ function ManageTeacherClassController($scope, ManageClassService, apiService, Ta
 	}
 
 	self.searchFnc = function(event) {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
 		self.tableDefaults();
 		self.list();
 
@@ -74,6 +77,9 @@ function ManageTeacherClassController($scope, ManageClassService, apiService, Ta
 	}
 
 	self.clear = function() {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
 		self.searchDefaults();
 		self.tableDefaults();
 		
@@ -177,8 +183,8 @@ function ManageTeacherClassController($scope, ManageClassService, apiService, Ta
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
-					self.success = TeacherConstant.UPDATE_CLASSNAME_SUCCESS;
 					self.setActive(Constants.ACTIVE_VIEW, self.record.id);
+					self.success = TeacherConstant.UPDATE_CLASSNAME_SUCCESS;
 				}
 			}
 
@@ -295,12 +301,10 @@ function ManageTeacherClassController($scope, ManageClassService, apiService, Ta
 		self.add.client_id = self.record.client_id;
 		self.add.class_id = self.record.id;
 
-		var bdate = $("#add_new_student #student_bdate").val();
-		var day = $("#add_new_student .day").val();
-		var month = $("#add_new_student .month").val();
-		var year = $("#add_new_student .year").val();
+		$("div.birth-date-wrapper select").removeClass("required-field");
 
-		self.add.birth_date = year + month + day;
+		var birth_date = $("input#birth_date").val();
+		self.add.birth_date = $filter(Constants.DATE)(new Date(birth_date), Constants.DATE_YYYYMMDD);
 		
 		var base_url = $("#base_url_form input[name='base_url']").val();
 		self.add.callback_uri = base_url + "/student/registration";
@@ -314,6 +318,10 @@ function ManageTeacherClassController($scope, ManageClassService, apiService, Ta
 					angular.forEach(response.errors, function(value, key) {
 						self.fields[value.field] = Constants.TRUE;
 					});
+
+					if(self.fields['birth_date']) {
+		            	$("div.birth-date-wrapper select").addClass("required-field");
+		            }
 				} else if(response.data) {
 					delete self.add;
 					self.success = "You have successfully added a student to " + self.record.name;
@@ -346,12 +354,19 @@ function ManageTeacherClassController($scope, ManageClassService, apiService, Ta
 		self.add.birth = Constants.EMPTY_STR;
 	}
 
-	self.setDropdown = function() {
-		$("#student_bdate").dateDropdowns({
-		    submitFieldName: 'student_bdate',
-		    minAge: Constants.MIN_AGE,
-		    maxAge: Constants.MAX_AGE
-		});
+	self.setDropdown = function(default_date) {
+		var options = {
+		      submitFieldName	: 'birth_date'
+		    , wrapperClass	: 'birth-date-wrapper'
+		    , minAge		: Constants.MIN_AGE
+		    , maxAge		: Constants.MAX_AGE
+		}
+
+		if(default_date) {
+			options.defaultDate = default_date;
+		}
+
+		$("#birth_date").dateDropdowns(options);
 	}
 
 	self.getSchoolDetails = function(school_code) {
@@ -413,6 +428,7 @@ function ManageTeacherClassController($scope, ManageClassService, apiService, Ta
 
 	self.confirmDeleteStudent = function(id) {
 		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
 		
 		self.delete_student_id = id;
 		self.delete_student_modal = Constants.TRUE;

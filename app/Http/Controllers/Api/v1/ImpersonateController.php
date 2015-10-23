@@ -79,6 +79,8 @@ class ImpersonateController extends ApiController {
 			'session_token' => session('_token')
 		];
 
+		//enable impersonate
+		$this->user->enableImpersonate($user->id, session('current_user'));
 
 		switch($user->user_type){
 
@@ -120,9 +122,6 @@ class ImpersonateController extends ApiController {
 
 
 		if(is_object($response) && session('current_user')){
-
-			//enable impersonate
-			$this->user->enableImpersonate($user->id, session('current_user'));
 
 			return $this->respondWithData($response);
 		} else {

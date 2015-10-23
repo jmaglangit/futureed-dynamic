@@ -138,5 +138,14 @@ function manageStudentService($http) {
 			, url 	: adminApiUrl + 'badge/student/' + id
 		});
 	}
+
+	manageStudentApi.impersonate = function(data) {
+		return $http({
+			method	: Constants.METHOD_POST
+			, data	: data
+			, url 	: adminApiUrl + 'admin/impersonate/login'
+		});
+	}
+
 	return manageStudentApi
 }

@@ -61,7 +61,7 @@
 									])
 							!!}
 
-							<span class="input-group-addon" ng-click="student.setActive('change')"><i class="fa fa-pencil edit-addon"></i></span>
+							<span class="input-group-addon" ng-click="student.setActive('change', student.record.id)"><i class="fa fa-pencil edit-addon"></i></span>
 						</div>
 					</div>
 

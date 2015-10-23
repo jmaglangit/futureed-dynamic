@@ -647,4 +647,33 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 			$(".day, .month, .year").prop('disabled', true);
 		}
 	}
+
+	self.impersonate = function(user_id) {
+		var data = {
+			id : user_id
+		}
+
+		$scope.ui_block();
+		manageStudentService.impersonate(data).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)){
+				if(response.errors){
+					self.errors = $scope.errorHandler(response.errors);
+				}else if(response.data){
+
+					var data = response.data;
+
+					data.impersonate = data.user.impersonate;
+					data.role = Constants.STUDENT;
+
+					$("#login_form input[name='user_data']").val(JSON.stringify(data));
+					$("#login_form").submit();
+				}
+			}
+
+			$scope.ui_unblock();
+		}).error(function() {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
 }

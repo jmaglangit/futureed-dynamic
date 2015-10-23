@@ -16,6 +16,9 @@ function ManageLogsController($scope, ManageLogsService, TableService, SearchSer
 		self.errors = Constants.FALSE;
 		self.records = {};
 
+		self.tableDefaults();
+		self.searchDefaults();
+
 		self.active_security_log = Constants.FALSE;
 		self.active_users_log = Constants.FALSE;
 		self.active_administrator_log = Constants.FALSE;

@@ -47,10 +47,18 @@ function StudentLoginService($http) {
 		});
 	}
 
-	api.validatePassword = function(id, image_id) {
+	api.getLoginPassword = function(data) {
 		return $http({
 			method	: Constants.METHOD_POST
-			, data	: {id : id, image_id : image_id}
+			, data	: data
+			, url	: apiUrl + 'student/login/image'
+		});
+	}
+
+	api.validatePassword = function(data) {
+		return $http({
+			method	: Constants.METHOD_POST
+			, data	: data
 			, url	: apiUrl + 'student/login/password'
 		});
 	}

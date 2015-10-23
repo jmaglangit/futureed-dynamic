@@ -73,7 +73,14 @@ class LoginController extends Controller {
 	 */
 	public function logout()
 	{
+		$user_object = json_decode(Session::get('student'));
+
 		Session::forget('student');
+
+		if(isset($user_object->impersonate)) {
+			return redirect()->route('admin.manage.student.index');
+		}
+
 		return redirect()->route('student.login');
 	}
 	
@@ -83,7 +90,7 @@ class LoginController extends Controller {
 	 * @return Response
 	 */
 	public function forgot_password()
-	{	
+	{
 		$input = Input::only('email');
 		return view('student.login.password.index')->with(array('email' => $input['email']));
 	}

@@ -1000,7 +1000,6 @@ hr {
 }
 
 .reports-pagination .pagination  {
-	margin-top: 0px;
 	float: right;
 }
 
@@ -1465,6 +1464,7 @@ top: 41px;
 
 .nav-student {
 	border-bottom: 1px solid #e5e5e5;
+	margin-bottom: 15px;
 }
 
 .nav-student li {
@@ -1534,4 +1534,9 @@ top: 41px;
 
 .alert-success{
 	margin-left: 0 !important;
+}
+
+.report-card-container img {
+	margin: 17px 40px;
+	border-radius: 50%;
 }

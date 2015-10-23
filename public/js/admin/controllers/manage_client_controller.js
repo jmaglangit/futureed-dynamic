@@ -1,9 +1,9 @@
 angular.module('futureed.controllers')
 	.controller('ManageClientController', ManageClientController);
 
-ManageClientController.$inject = ['$scope', 'apiService','manageClientService', 'TableService', 'SearchService', 'ValidationService'];
+ManageClientController.$inject = ['$scope','manageClientService', 'TableService', 'SearchService', 'ValidationService'];
 
-function ManageClientController($scope, apiService, manageClientService, TableService, SearchService, ValidationService) {
+function ManageClientController($scope, manageClientService, TableService, SearchService, ValidationService) {
 	var self = this;
 
 	TableService(self);
@@ -333,6 +333,39 @@ function ManageClientController($scope, apiService, manageClientService, TableSe
 
 			$scope.ui_unblock();
 		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.impersonate = function(user_id) {
+		var data = {
+			id : user_id
+		}
+		
+		$scope.ui_block();
+		manageClientService.impersonate(data).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)){
+				if(response.errors){
+					self.errors = $scope.errorHandler(response.errors);
+				}else if(response.data){
+					var data = {
+						id				: response.data.id
+						, user_id		: response.data.user_id
+						, first_name	: response.data.first_name
+						, last_name		: response.data.last_name
+						, country_id	: response.data.country_id
+						, role			: response.data.client_role
+						, impersonate	: response.data.user.impersonate
+					}
+
+					$("#login_form input[name='user_data']").val(JSON.stringify(data));
+					$("#login_form").submit();
+				}
+			}
+
+			$scope.ui_unblock();
+		}).error(function() {
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
