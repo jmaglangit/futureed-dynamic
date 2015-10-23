@@ -427,7 +427,7 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 		try{
 
 			$response = Subject::select(
-				DB::raw('s.name as subject_name'),
+				DB::raw('subjects.name as subject_name'),
 				DB::raw('sa.id as area_id'),
 				DB::raw('sa.name as area_name'),
 				DB::raw('m.grade_id'),
@@ -435,11 +435,11 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 				DB::raw('sm.student_id'),
 				DB::raw('sm.module_status'),
 				DB::raw('sm.progress')
-			)->leftJoin('subject_areas as sa','sa.subject_id','=','subject.id')
+			)->leftJoin('subject_areas as sa','sa.subject_id','=','subjects.id')
 				->leftJoin('modules as m','m.subject_area_id','=','sa.id')
 				->leftJoin('student_modules as sm', function($left_join) {
-					$left_join->on('sm.module_id','=','m.id.')
-						->on('sm.module_status','<>',config('futureed.module_status_failed'))
+					$left_join->on('sm.module_id','=','m.id')
+						->on('sm.module_status','<>',"'".config('futureed.module_status_failed')."'")
 					;
 				})->where('sm.student_id','=',$student_id)
 				->where('sa.id','=',$subject_id)
@@ -455,10 +455,11 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 
 			DB::rollback();
 
-			return false;
+			return $e->getMessage();
 		}
 
 		DB::commit();
+		dd($response->toArray());
 		return $response;
 
 	}
