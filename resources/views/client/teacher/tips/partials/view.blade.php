@@ -68,6 +68,7 @@
 							, array(
 								'ng-disabled'=>'tips.active_view'
 								, 'class' => 'form-control'
+								, 'ng-class' => "{ 'required-field' : tips.fields['title'] }"
 								, 'ng-model' => 'tips.record.title'
 								, 'placeholder' => 'Title'
 							)
@@ -81,6 +82,7 @@
 							, array(
 								'ng-disabled'=>'tips.active_view'
 								, 'class' => 'form-control disabled-textarea'
+								, 'ng-class' => "{ 'required-field' : tips.fields['content'] }"
 								, 'ng-model' => 'tips.record.content'
 								, 'placeholder' => 'Description'
 							)

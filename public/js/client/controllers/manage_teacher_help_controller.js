@@ -140,11 +140,17 @@ function ManageTeacherHelpController($scope, ManageTeacherHelpService, TableServ
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
 
+		self.fields = [];
+
 		$scope.ui_block();
 		ManageTeacherHelpService.update(self.record).success(function(response){
 			if(angular.equals(response.status, Constants.STATUS_OK)){
 				if(response.errors){
-					self.errors = $scope.errorHandler(response.errors);
+					self.errors = $scope.errorHandler(response.errors, Constants.TRUE);
+
+					angular.forEach(response.errors, function(value, key) {
+						self.fields[value.field] = Constants.TRUE;
+					});
 				}else if(response.data){
 					self.success = TeacherConstant.SUCCESS_EDIT_HELP;
 					self.setActive(Constants.ACTIVE_VIEW, self.record.id);
@@ -167,7 +173,7 @@ function ManageTeacherHelpController($scope, ManageTeacherHelpService, TableServ
 		ManageTeacherHelpService.updateStatus(id, tip_status).success(function(response){
 			if(angular.equals(response.status,Constants.STATUS_OK)){
 				if(response.errors){
-					self.errors = $scope.errorHandler(response.errors);
+					self.errors = $scope.errorHandler(response.errors, Constants.TRUE);
 				}else if(response.data){
 					self.success = (status) ? TeacherConstant.APPROVE_HELP : TeacherConstant.REJECT_HELP;
 					self.setActive(Constants.ACTIVE_VIEW, id);

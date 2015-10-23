@@ -1,5 +1,5 @@
 <div ng-if="help.active_list">
-	<div class="col-xs-12" ng-if="help.errors || help.success">
+	<div class="col-xs-12 success-container" ng-if="help.errors || help.success">
 		<div class="alert alert-error" ng-if="help.errors">
 			<p ng-repeat="error in help.errors track by $index">
 				{! error !}
@@ -115,19 +115,19 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="helpInfo in help.records">
-						<td>{! helpInfo.title !}</td>
-						<td>{! helpInfo.student.first_name !} {! helpInfo.student.last_name !}</td>
-						<td>{! helpInfo.created_at | ddMMyy : '-' !}</td>
-						<td>{! helpInfo.last_answered_at | ddMMyy : '-' !}</td>
-						<td>{! helpInfo.request_status !}</td>
+					<tr ng-repeat="record in help.records">
+						<td>{! record.title !}</td>
+						<td>{! record.student.first_name !} {! record.student.last_name !}</td>
+						<td>{! record.created_at | ddMMyy : '-' !}</td>
+						<td>{! record.last_answered_at | ddMMyy : '-' !}</td>
+						<td>{! record.request_status !}</td>
 						<td ng-if="help.records.length">
 							<div class="row">
 								<div class="col-xs-6">
-									<a href="" ng-click="help.setActive(futureed.ACTIVE_VIEW, helpInfo.id)"><span><i class="fa fa-eye"></i></span></a>
+									<a href="" ng-click="help.setActive(futureed.ACTIVE_VIEW, record.id)"><span><i class="fa fa-eye"></i></span></a>
 								</div>
 								<div class="col-xs-6">
-									<a href="" ng-click="help.setActive(futureed.ACTIVE_EDIT, helpInfo.id)"><span><i class="fa fa-pencil"></i></span></a>
+									<a href="" ng-click="help.setActive(futureed.ACTIVE_EDIT, record.id)"><span><i class="fa fa-pencil"></i></span></a>
 								</div>
 							</div>
 						</td>

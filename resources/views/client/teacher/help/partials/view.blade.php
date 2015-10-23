@@ -70,6 +70,7 @@
 						, array(
 							'ng-disabled'=>'help.active_view'
 							, 'class' => 'form-control'
+							, 'ng-class' => "{ 'required-field' : help.fields['title'] }"
 							, 'ng-model' => 'help.record.title'
 							, 'placeholder' => 'Title'
 						)
@@ -84,6 +85,7 @@
 						, array(
 							'ng-disabled'=>'help.active_view'
 							, 'class' => 'form-control disabled-textarea'
+							, 'ng-class' => "{ 'required-field' : help.fields['content'] }"
 							, 'ng-model' => 'help.record.content'
 							, 'placeholder' => 'Description'
 						)
@@ -113,7 +115,7 @@
 				</div>
 			</div>
 
-			<div class="form-group" ng-if="help.active_view && help.record.tip_status == futureed.PENDING">
+			<div class="form-group" ng-if="help.active_view && help.record.request_status == futureed.PENDING">
 				<div class="btn-container col-xs-8 col-xs-offset-1">
 					{!! Form::button('Approve'
 						, array(
