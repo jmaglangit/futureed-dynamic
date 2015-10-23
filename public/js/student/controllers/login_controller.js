@@ -1,15 +1,15 @@
 angular.module('futureed.controllers')
 	.controller('StudentLoginController', StudentLoginController);
 
-StudentLoginController.$inject = ['$scope', '$filter', '$controller', '$window', 'StudentLoginService', 'apiService', 'MediaLoginService', 'ValidationService'];
+StudentLoginController.$inject = ['$scope', '$filter', '$controller', 'StudentLoginService', 'MediaLoginService', 'ValidationService'];
 
-function StudentLoginController($scope, $filter, $controller, $window, StudentLoginService, apiService, MediaLoginService, ValidationService) {
+function StudentLoginController($scope, $filter, $controller, StudentLoginService, MediaLoginService, ValidationService) {
 	var self = this;
 
 	ValidationService(self);
 	self.default();
 
-	angular.extend(self, $controller('MediaLoginController', { $scope : $scope}));
+	angular.extend(self, $controller('MediaLoginController', { $scope : $scope }));
 
 	self.setSetUserType(Constants.STUDENT);
 	self.fbAsyncInit();
@@ -162,7 +162,7 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 	self.checkStudent = function(id) {
 		if(id != Constants.EMPTY_STR) {
 			self.manual.id = id;
-			$scope.getLoginPassword(self.manual.id);
+			$scope.getLoginPassword(self.manual.id, self);
 			self.setActive('enter_password');
 		}
 	}
@@ -171,7 +171,7 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 		event = getEvent(event);
 		event.preventDefault();
 		
-		$scope.errors = Constants.FALSE;
+		self.errors = Constants.FALSE;
 
 		$scope.ui_block();
 		StudentLoginService.validateUser(self.manual.username).success(function(response) {
@@ -180,9 +180,29 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data){
 					self.manual.id = response.data.id;
-					$scope.getLoginPassword(self.manual.id);
-					self.setActive('enter_password');
+					self.getLoginPassword();
 				} 
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.getLoginPassword = function() {
+		self.errors = Constants.FALSE;
+
+		$scope.ui_block();
+		StudentLoginService.getLoginPassword(self.manual).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.image_pass = response.data;
+					self.setActive('enter_password');
+				}
 			}
 
 			$scope.ui_unblock();
@@ -194,14 +214,14 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 
 	self.cancelLogin = function() {
 		self.errors = Constants.FALSE;
-		$scope.image_pass = [];
+		self.image_pass = [];
 		self.manual = {};
 
 		self.setActive();
 	}
 
-	self.selectPassword = function(event) {
-		$scope.highlight(event);
+	self.selectPassword = function(image_id) {
+		self.manual.image_id = image_id;
 		self.validatePassword();
 	}
 
@@ -209,11 +229,12 @@ function StudentLoginController($scope, $filter, $controller, $window, StudentLo
 		self.errors = Constants.FALSE;
 
 		$scope.ui_block();
-		StudentLoginService.validatePassword(self.manual.id, $scope.image_id).success(function(response) {
-			if(response.status == Constants.STATUS_OK) {
+		StudentLoginService.validatePassword(self.manual).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
-					$scope.image_pass = shuffle($scope.image_pass);
+					
+					self.image_pass = shuffle(self.image_pass);
 				} else if(response.data){
 					response.data.role = Constants.STUDENT;
 
