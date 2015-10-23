@@ -1,15 +1,11 @@
 angular.module('futureed.services')
-	.factory('profileService', profileService);
+	.factory('ProfileService', ProfileService);
 
-profileService.$inject = ['$http'];
+ProfileService.$inject = ['$http'];
 
-function profileService($http) {
+function ProfileService($http) {
 	var api = {};
 	var apiUrl = '/api/v1/';
-
-	/**
-	* Common API Calls
-	*/
 
 	api.getCountryDetails = function(id) {
 		return $http({
@@ -29,6 +25,37 @@ function profileService($http) {
 		return $http({
 			  method 	: Constants.METHOD_GET
 			, url	: apiUrl + 'student-point?student_id=' + id
+		});
+	}
+
+	api.getLoginPassword = function(data) {
+		return $http({
+			method	: Constants.METHOD_POST
+			, data	: data
+			, url	: apiUrl + 'student/login/image'
+		});
+	}
+
+	api.validateCurrentPassword = function(data) {
+		return $http({
+			method	: Constants.METHOD_POST
+			, data 	: data
+			, url 	: apiUrl + 'student/password/confirm/' + data.id
+		});
+	}
+
+	api.getImagePassword = function() {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url	: apiUrl + 'student/password/image'
+		});
+	}
+
+	api.changePassword = function(data) {
+		return $http({
+			method	: Constants.METHOD_POST
+			, data 	: data
+			, url 	: apiUrl + 'student/password/' + data.id
 		});
 	}
 

@@ -218,6 +218,5 @@
 			</div>
 		</div>
 	</div>
+	<div class="form-group"></div>
 {!! Form::close() !!}
-
-<br />
