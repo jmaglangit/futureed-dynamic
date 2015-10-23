@@ -6,6 +6,8 @@ StudentLoginController.$inject = ['$scope', '$filter', '$controller', 'StudentLo
 function StudentLoginController($scope, $filter, $controller, StudentLoginService, MediaLoginService, ValidationService) {
 	var self = this;
 
+	self.manual = {};
+
 	ValidationService(self);
 	self.default();
 
@@ -157,12 +159,10 @@ function StudentLoginController($scope, $filter, $controller, StudentLoginServic
 		$("#birth_date").dateDropdowns(options);
 	}
 
-	self.manual = {};
-
 	self.checkStudent = function(id) {
 		if(id != Constants.EMPTY_STR) {
 			self.manual.id = id;
-			$scope.getLoginPassword(self.manual.id, self);
+			self.getLoginPassword();
 			self.setActive('enter_password');
 		}
 	}
