@@ -9,9 +9,9 @@ use FutureEd\Models\Repository\Module\ModuleRepositoryInterface;
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use FutureEd\Http\Requests\Api\StudentReportRequest;
 use FutureEd\Models\Repository\StudentModule\StudentModuleRepository;
+use FutureEd\Models\Repository\SubjectArea\SubjectAreaRepository;
 use FutureEd\Services\AvatarServices;
 use FutureEd\Services\StudentServices;
-use Illuminate\Support\Facades\Input;
 
 class StudentReportController extends ReportController {
 
@@ -31,6 +31,8 @@ class StudentReportController extends ReportController {
 
 	protected $student_module;
 
+	protected $subject_areas;
+
 
 	/**
 	 * StudentReportController constructor.
@@ -42,6 +44,7 @@ class StudentReportController extends ReportController {
 	 * @param StudentRepositoryInterface $studentRepositoryInterface
 	 * @param AvatarServices $avatarServices
 	 * @param StudentServices $studentServices
+	 * @param SubjectAreaRepository $subjectAreaRepository
 	 * @internal param StudentModuleRepository $studentModuleRepository
 	 * @internal param $student
 	 */
@@ -53,7 +56,8 @@ class StudentReportController extends ReportController {
 		ModuleRepositoryInterface $moduleRepositoryInterface,
 		StudentRepositoryInterface $studentRepositoryInterface,
 		AvatarServices $avatarServices,
-		StudentServices $studentServices
+		StudentServices $studentServices,
+		SubjectAreaRepository $subjectAreaRepository
 	) {
 		$this->student = $studentRepositoryInterface;
 		$this->class_student = $classStudentRepositoryInterface;
@@ -63,6 +67,7 @@ class StudentReportController extends ReportController {
 		$this->student_module = $studentRepositoryInterface;
 		$this->avatar_service = $avatarServices;
 		$this->student_service = $studentServices;
+		$this->subject_areas = $subjectAreaRepository;
 	}
 
 
@@ -183,16 +188,30 @@ class StudentReportController extends ReportController {
 		//mitigate class student
 		//check student and subject exists now.
 
-		//get student subject query curriculum group by grades
+		//Get student details
+		$student = $this->student->getStudent($student_id);
 
 		//automate class students current class.
 		$this->student_service->getCurrentClass($student_id);
 
 
 
+		//Get Subject Areas as Curriculumns
+		$subject_areas = $this->subject_areas->getAreasBySubjectId($subject_id);
 
-		$grades = $this->grade->getGradesByCountries(Input::get('country_id'));
 
+		//check valid class subject.
+		$class = $this->class_student->getStudentValidClassBySubject($student_id,$subject_id);
+
+		dd($class->toArray());
+
+		//TODO: continue here...
+		//get student modules but subject areas
+//		$curriculum_data = $this->class_student->getStudentSubjectProgressByCurriculum($class);
+
+
+		//get grades collection
+		$grades = $this->grade->getGradesByCountries($student->country_id);
 
 		$additional_information = [];
 
