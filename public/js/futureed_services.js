@@ -31,14 +31,6 @@ var services = angular.module('futureed.services', []);
 			});
 		}
 
-		futureedAPI.getLoginPassword = function(id) {
-			return $http({
-				method	: Constants.METHOD_POST
-				, data	: {id : id}
-				, url	: futureedAPIUrl + 'student/login/image'
-			});
-		}
-
 		futureedAPI.getImagePassword = function() {
 			return $http({
 				method	: 'GET'
@@ -132,22 +124,6 @@ var services = angular.module('futureed.services', []);
 
 		futureedAPI.saveProfile = function(data) {
 			return $http.put(futureedAPIUrl + 'student/' + data.id, data);
-		}
-
-		futureedAPI.validateCurrentPassword = function(id, password_image_id) {
-			return $http({
-				method 	: 'POST'
-				, data 	: {password_image_id : password_image_id}
-				, url 	: futureedAPIUrl + 'student/password/confirm/' + id
-			});
-		}
-
-		futureedAPI.changePassword = function(id, password_image_id, access_token) {
-			return $http({
-				method	: 'POST'
-				, data 	: {password_image_id : password_image_id, access_token : access_token}
-				, url 	: futureedAPIUrl + 'student/password/' + id
-			});
 		}
 
 		futureedAPI.getAnnouncement = function(){

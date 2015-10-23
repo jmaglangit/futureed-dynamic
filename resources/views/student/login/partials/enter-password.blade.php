@@ -10,14 +10,15 @@
 
 		<div class="form_content">
 			<ul class="form_password list-unstyled list-inline">
-				<li class="item col-xs-4" ng-repeat="item in image_pass" ng-click="login.selectPassword($event)">
+				<li class="item col-xs-4" ng-repeat="item in login.image_pass" 
+					ng-class="{ 'selected' : login.manual.image_id == item.id }"
+					ng-click="login.selectPassword(item.id)">
 					<img ng-src="{! item.url !}" class="login-img" alt="{! item.name !}">
-					<input type="hidden" id="image_id" name="image_id" value="{! item.id !}">
 				</li>
 			</ul>
 		</div>
 
-		<div class="btn-container" ng-if="image_pass.length">
+		<div class="btn-container" ng-if="login.image_pass.length">
 			{!! Form::button('Cancel'
 				, array(
 					'class' => 'btn btn-gold btn-medium'
