@@ -2,7 +2,7 @@
 
 use FutureEd\Http\Requests\Request;
 
-class StudentReportRequest extends Request {
+class StudentReportRequest extends ApiRequest {
 
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -31,7 +31,12 @@ class StudentReportRequest extends Request {
 					case 'api.report.student.progress':
 
 						return [
-							'subject_id' => 'required|exists:subjects,id,deleted_at,NULL'
+						];
+						break;
+
+					case 'api.report.student.progress.curriculum':
+
+						return [
 						];
 						break;
 				}
