@@ -14,7 +14,6 @@ class SubjectTableSeeder extends Seeder
 		$seed = [
 			[1,'Math','Singapore Math','Enabled'],
 			[2,'English','US Common Core, Singapore English','Enabled'],
-			[3,'Digital Citizenship','Global D-C Standards','Enabled']
 		];
 
 		\DB::table('subjects')->truncate();
