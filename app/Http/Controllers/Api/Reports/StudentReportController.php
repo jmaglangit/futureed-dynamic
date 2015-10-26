@@ -204,17 +204,20 @@ class StudentReportController extends ReportController {
 		//initiate array.
 		$row_data = [];
 
-		//loop to get each data per subject areas.
-		foreach($subject_areas as $areas){
+			//loop to get each data per subject areas.
+			foreach($subject_areas as $areas){
 
-				//get student modules by subject areas
-				$curriculum_data = $this->class_student->getStudentSubjectProgressByCurriculum(
-					$class[0]->student_id, $areas->id,$class[0]->class_id
-				);
+				if (!empty($class->toArray())) {
 
-			//append to every row of areas
-			$row_data[$areas->name] = (!empty($curriculum_data)) ? $curriculum_data : null;
-		}
+					//get student modules by subject areas
+					$curriculum_data = $this->class_student->getStudentSubjectProgressByCurriculum(
+						$class[0]->student_id, $areas->id, $class[0]->class_id
+					);
+				}
+
+				//append to every row of areas
+				$row_data[$areas->name] = (!empty($curriculum_data)) ? $curriculum_data : [];
+			}
 
 		$additional_information = [];
 
