@@ -71,7 +71,7 @@ function StudentReportsController($scope, $timeout, StudentReportsService, Searc
 					self.summary.columns = response.data.column_header;
 
 					$timeout(function() {
-						self.summary.records = response.data.rows;
+						self.summary.records = response.data.rows.progress;
 
 						angular.forEach(self.summary.records, function(value, key) {
 							value.completed = value.completed + "%";
