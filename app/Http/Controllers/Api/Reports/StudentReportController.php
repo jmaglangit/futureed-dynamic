@@ -215,8 +215,16 @@ class StudentReportController extends ReportController {
 					);
 				}
 
+				$area = new \stdClass();
 				//append to every row of areas
-				$row_data[$areas->name] = (!empty($curriculum_data)) ? $curriculum_data : [];
+				$curr_data = (!empty($curriculum_data)) ? $curriculum_data : [];
+
+				$area->curriculum_name = $areas->name;
+
+				$area->curriculum_data = $curr_data;
+
+				array_push($row_data,$area);
+
 			}
 
 		$additional_information = [];
@@ -226,6 +234,8 @@ class StudentReportController extends ReportController {
 		$column_header = array_merge($column_header,$grades->toArray());
 
 		$rows = $row_data;
+
+
 
 		return $this->respondReportData($additional_information,$column_header,$rows);
 
