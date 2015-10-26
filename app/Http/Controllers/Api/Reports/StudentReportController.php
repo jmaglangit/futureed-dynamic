@@ -186,35 +186,35 @@ class StudentReportController extends ReportController {
 	 */
 	public function getStudentSubjectGradeProgressReport($student_id, $subject_id, StudentReportRequest $request){
 
-		//get student, subject
-		//mitigate class student
-		//check student and subject exists now.
-
 		//Get student details
 		$student = $this->student->getStudent($student_id);
 
 		//automate class students current class.
 		$this->student_service->getCurrentClass($student_id);
 
-
-
 		//Get Subject Areas as Curriculumns
 		$subject_areas = $this->subject_areas->getAreasBySubjectId($subject_id);
-
 
 		//check valid class subject.
 		$class = $this->class_student->getStudentValidClassBySubject($student_id,$subject_id);
 
-
-		//get student modules but subject areas
-		$curriculum_data = $this->class_student->getStudentSubjectProgressByCurriculum(
-			$class[0]->student_id, $class[0]->subject_id,$class[0]->class_id
-		);
-
-		dd($curriculum_data);
-
 		//get grades collection
 		$grades = $this->grade->getGradesByCountries($student->country_id);
+
+		//initiate array.
+		$row_data = [];
+
+		//loop to get each data per subject areas.
+		foreach($subject_areas as $areas){
+
+				//get student modules by subject areas
+				$curriculum_data = $this->class_student->getStudentSubjectProgressByCurriculum(
+					$class[0]->student_id, $areas->id,$class[0]->class_id
+				);
+
+			//append to every row of areas
+			$row_data[$areas->name] = (!empty($curriculum_data)) ? $curriculum_data : null;
+		}
 
 		$additional_information = [];
 
@@ -222,12 +222,9 @@ class StudentReportController extends ReportController {
 
 		$column_header = array_merge($column_header,$grades->toArray());
 
-		$rows = [];
+		$rows = $row_data;
 
 		return $this->respondReportData($additional_information,$column_header,$rows);
-
-
-
 
 	}
 
