@@ -9,11 +9,15 @@ use FutureEd\Models\Repository\Module\ModuleRepositoryInterface;
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use FutureEd\Http\Requests\Api\StudentReportRequest;
 use FutureEd\Models\Repository\StudentModule\StudentModuleRepository;
+use FutureEd\Models\Repository\SubjectArea\SubjectAreaRepository;
 use FutureEd\Services\AvatarServices;
+use FutureEd\Services\StudentServices;
 
 class StudentReportController extends ReportController {
 
 	protected $student;
+
+	protected $student_service;
 
 	protected $avatar;
 
@@ -27,6 +31,8 @@ class StudentReportController extends ReportController {
 
 	protected $student_module;
 
+	protected $subject_areas;
+
 
 	/**
 	 * StudentReportController constructor.
@@ -37,6 +43,8 @@ class StudentReportController extends ReportController {
 	 * @param ModuleRepositoryInterface $moduleRepositoryInterface
 	 * @param StudentRepositoryInterface $studentRepositoryInterface
 	 * @param AvatarServices $avatarServices
+	 * @param StudentServices $studentServices
+	 * @param SubjectAreaRepository $subjectAreaRepository
 	 * @internal param StudentModuleRepository $studentModuleRepository
 	 * @internal param $student
 	 */
@@ -47,7 +55,9 @@ class StudentReportController extends ReportController {
 		GradeRepositoryInterface $gradeRepositoryInterface,
 		ModuleRepositoryInterface $moduleRepositoryInterface,
 		StudentRepositoryInterface $studentRepositoryInterface,
-		AvatarServices $avatarServices
+		AvatarServices $avatarServices,
+		StudentServices $studentServices,
+		SubjectAreaRepository $subjectAreaRepository
 	) {
 		$this->student = $studentRepositoryInterface;
 		$this->class_student = $classStudentRepositoryInterface;
@@ -56,6 +66,8 @@ class StudentReportController extends ReportController {
 		$this->module = $moduleRepositoryInterface;
 		$this->student_module = $studentRepositoryInterface;
 		$this->avatar_service = $avatarServices;
+		$this->student_service = $studentServices;
+		$this->subject_areas = $subjectAreaRepository;
 	}
 
 
@@ -95,7 +107,9 @@ class StudentReportController extends ReportController {
 
 	/**
 	 * @param $id
-	 * @param StudentReportRequest $request
+	 * @param $subject_id
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 * @internal param StudentReportRequest $request
 	 */
 	public function getStudentProgressReport($id,$subject_id){
 
@@ -161,6 +175,59 @@ class StudentReportController extends ReportController {
 
 		return $this->respondReportData($additional_information, $column_header, $rows);
 
+
+	}
+
+	/**
+	 * @param $student_id
+	 * @param $subject_id
+	 * @param StudentReportRequest $request
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
+	public function getStudentSubjectGradeProgressReport($student_id, $subject_id, StudentReportRequest $request){
+
+		//Get student details
+		$student = $this->student->getStudent($student_id);
+
+		//automate class students current class.
+		$this->student_service->getCurrentClass($student_id);
+
+		//Get Subject Areas as Curriculumns
+		$subject_areas = $this->subject_areas->getAreasBySubjectId($subject_id);
+
+		//check valid class subject.
+		$class = $this->class_student->getStudentValidClassBySubject($student_id,$subject_id);
+
+		//get grades collection
+		$grades = $this->grade->getGradesByCountries($student->country_id);
+
+		//initiate array.
+		$row_data = [];
+
+			//loop to get each data per subject areas.
+			foreach($subject_areas as $areas){
+
+				if (!empty($class->toArray())) {
+
+					//get student modules by subject areas
+					$curriculum_data = $this->class_student->getStudentSubjectProgressByCurriculum(
+						$class[0]->student_id, $areas->id, $class[0]->class_id
+					);
+				}
+
+				//append to every row of areas
+				$row_data[$areas->name] = (!empty($curriculum_data)) ? $curriculum_data : [];
+			}
+
+		$additional_information = [];
+
+		$column_header = [['name' => 'Curriculum']];
+
+		$column_header = array_merge($column_header,$grades->toArray());
+
+		$rows = $row_data;
+
+		return $this->respondReportData($additional_information,$column_header,$rows);
 
 	}
 

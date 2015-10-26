@@ -21,5 +21,7 @@ interface GradeRepositoryInterface {
 
     public function getGradeCountries();
 
+    public function getGradesByCountries($country_id);
+
 
 }
