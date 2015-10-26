@@ -102,9 +102,9 @@
 			  	<p>{! value !}</p>
 			  	<div class="progress">
 				  	<div class="progress-bar progress-bar-success"
-						ng-style="{ 'width' : reports.summary.records[key].completed }"></div>
+						ng-style="{ 'width' : reports.summary.records[key-1].completed }"></div>
 				  	<div class="progress-bar progress-bar-warning" 
-				  		ng-style="{ 'width' : reports.summary.records[key].on_going }"></div>
+				  		ng-style="{ 'width' : reports.summary.records[key-1].on_going }"></div>
 				</div>
 			</div>
 
