@@ -95,7 +95,9 @@ class StudentReportController extends ReportController {
 
 	/**
 	 * @param $id
-	 * @param StudentReportRequest $request
+	 * @param $subject_id
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 * @internal param StudentReportRequest $request
 	 */
 	public function getStudentProgressReport($id,$subject_id){
 
@@ -140,7 +142,6 @@ class StudentReportController extends ReportController {
 		foreach($header as $column){
 
 			$column_header = array_add($column_header,$column->grade_id,$column->grade_name);
-			$rows = array_add($rows,$column->grade_id,0);
 		}
 
 		//ROWS
@@ -151,17 +152,15 @@ class StudentReportController extends ReportController {
 
 		foreach($row_data as $data){
 
-			$status_data = [
-				'completed' => ($data->completed) ? round(($data->completed/$data->module_count) * 100): 0,
-				'on_going' => ($data->on_going) ? round(($data->on_going/$data->module_count) * 100) : 0
-			];
-
-			$rows[$data->grade_id] = $status_data;
+			$data->completed = ($data->completed) ? round(($data->completed/$data->module_count) * 100): 0;
+			$data->on_going = ($data->on_going) ? round(($data->on_going/$data->module_count) * 100) : 0;
 		}
 
-		return $this->respondReportData($additional_information, $column_header, $rows);
+		$data = [
+			'progress' => $row_data
+		];
 
-
+		return $this->respondReportData($additional_information, $column_header, $data);
 	}
 
 
