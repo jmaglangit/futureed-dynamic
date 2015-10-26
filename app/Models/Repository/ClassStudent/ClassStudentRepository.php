@@ -439,7 +439,8 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 				->leftJoin('modules as m','m.subject_area_id','=','sa.id')
 				->leftJoin('student_modules as sm', function($left_join) {
 					$left_join->on('sm.module_id','=','m.id')
-						->on('sm.module_status','<>',"'".config('futureed.module_status_failed')."'")
+						->on('sm.module_status', '<>',
+							DB::raw("'" .config('futureed.module_status_failed')."'"))
 					;
 				})->where('sm.student_id','=',$student_id)
 				->where('sa.id','=',$subject_id)
@@ -459,7 +460,6 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 		}
 
 		DB::commit();
-		dd($response->toArray());
 		return $response;
 
 	}
