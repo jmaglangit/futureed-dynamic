@@ -521,5 +521,78 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 
 	}
 
+	public function getStudentCurrentLearning($student_id,$subject_id, $country_id){
+			//		select
+			//m.grade_id as m_grade_id
+			//,sa.name as subject_area
+			//,sm.class_id, sm.subject_id,sm.module_id, sm.module_status, sm.progress
+			//
+			//from class_students cs
+			//left join classrooms c on c.id=cs.class_id
+			//left join subjects s on s.id=c.subject_id
+			//left join subject_areas sa on sa.subject_id = s.id
+			//left join modules m on m.subject_area_id = sa.id
+			//left join student_modules sm on sm.module_id = m.id
+			//		and sm.module_status <> 'Failed'
+			//		and sm.deleted_at is null
+			//		and sm.student_id = 3
+			//left join students st on st.id = cs.student_id
+			//where
+			//cs.student_id = 3
+			//and s.id = 1
+			//and cs.subscription_status = 'Active'
+			//group by m_grade_id, subject_area
+			//order by m_grade_id asc, subject_area asc
+			//		;
+
+		DB::beginTransaction();
+		try{
+
+			$response = DB::table('class_students as cs')->select(
+				DB::raw('m.grade_id'),
+				DB::raw('g.name as grade_name'),
+				DB::raw('sa.name'),
+				DB::raw('sm.progress')
+			)->leftJoin('classrooms as c','c.id','=','cs.class_id')
+				->leftJoin('subjects as s','s.id','=','c.subject_id')
+				->leftJoin('subject_areas as sa','sa.subject_id','=','s.id')
+				->leftJoin('modules as m','m.subject_area_id','=','sa.id')
+				->leftJoin('student_modules as sm',function($left_join) use ($student_id) {
+					$left_join->on('sm.module_id','=','m.id')
+						->on('sm.module_status','<>',DB::raw("'".config('futureed.module_status_failed')."'"))
+						->whereNULL('sm.deleted_at')
+						->where('sm.student_id','=',DB::raw($student_id));
+				})->leftJoin('students as st','st.id','=','cs.student_id')
+				->leftJoin('country_grades as cg', 'cg.grade_id', '=', 'm.grade_id')
+				->leftJoin('country_grades as cg2', function ($left_join) use ($country_id) {
+					$left_join->on('cg2.age_group_id', '=', 'cg.age_group_id')
+						->on('cg2.country_id','=',
+							DB::raw($country_id)
+						);
+				})
+				->leftJoin('grades as g', 'g.id', '=', 'cg2.grade_id')
+				->where('cs.student_id',DB::raw($student_id))
+				->where('s.id',DB::raw($subject_id))
+				->where('cs.subscription_status',DB::raw("'".config('futureed.active')."'"))
+				->groupBy('grade_id','name')
+				->orderBy('grade_id','asc')
+				->orderBy('name','asc')
+				->get()
+				;
+
+
+		}catch (\Exception $e){
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return $e->getMessage();
+		}
+
+		DB::commit();
+
+		return $response;
+	}
+
 
 }
