@@ -156,6 +156,7 @@ class StudentReportController extends ReportController {
 			$column_header = array_add($column_header,$column->grade_id,$column->grade_name);
 		}
 
+		$column_header = [$column_header];
 		//ROWS
 		//get each completed on each grades.
 
