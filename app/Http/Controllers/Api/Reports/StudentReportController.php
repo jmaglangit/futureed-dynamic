@@ -228,6 +228,12 @@ class StudentReportController extends ReportController {
 
 	}
 
+	/**
+	 * Get Students current learning.
+	 * @param $student_id
+	 * @param $subject_id
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
 	public function getStudentCurrentLearning($student_id,$subject_id){
 
 		//automate class students current class.

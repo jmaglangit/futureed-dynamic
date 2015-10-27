@@ -14,8 +14,14 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 {
 	use LoggerTrait;
 
+	/**
+	 * @var ModuleRepository
+	 */
 	protected $module;
 
+	/**
+	 * @param ModuleRepository $moduleRepository
+	 */
 	public function __construct(
 		ModuleRepository $moduleRepository
 	){
@@ -75,6 +81,10 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 		];
 	}
 
+	/**
+	 * @param $student_id
+	 * @return mixed
+	 */
 	public function getClassStudent($student_id)
 	{
 
@@ -83,6 +93,10 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 			->pluck('student_id');
 	}
 
+	/**
+	 * @param $class_student
+	 * @return array|string
+	 */
 	public function addClassStudent($class_student)
 	{
 		try {
@@ -113,11 +127,18 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 
 	}
 
+	/**
+	 * @param $id
+	 */
 	public function deleteClassStudent($id)
 	{
 
 	}
 
+	/**
+	 * @param $class_id
+	 * @return array|null
+	 */
 	public function getClassroom($class_id)
 	{
 		$classroom = Classroom::find($class_id);
@@ -521,6 +542,12 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 
 	}
 
+	/**
+	 * @param $student_id
+	 * @param $subject_id
+	 * @param $country_id
+	 * @return string
+	 */
 	public function getStudentCurrentLearning($student_id,$subject_id, $country_id){
 			//		select
 			//m.grade_id as m_grade_id
