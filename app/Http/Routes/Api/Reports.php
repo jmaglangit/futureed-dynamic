@@ -26,4 +26,11 @@ Routes::group([
 		'as' => 'api.report.student.progress.curriculum'
 	]);
 
+	Routes::get('/student-progress/current-learning/{student_id}/{subject_id}',[
+		'uses' => 'Api\Reports\StudentReportController@getStudentCurrentLearning',
+		'as' => 'api.report.student.progress.current-learning'
+	]);
+
+
+
 });
