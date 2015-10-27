@@ -39,5 +39,7 @@ interface ClassStudentRepositoryInterface {
 
 	public function getStudentValidClassBySubject($student_id, $subject_id);
 
+	public function getStudentCurrentLearning($student_id,$subject_id, $country_id);
+
 
 }
