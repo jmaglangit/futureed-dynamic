@@ -228,5 +228,39 @@ class StudentReportController extends ReportController {
 
 	}
 
+	public function getStudentCurrentLearning($student_id,$subject_id){
+
+		//automate class students current class.
+		$this->student_service->getCurrentClass($student_id);
+
+		//Get student details
+		$student = $this->student->getStudent($student_id);
+
+		//check valid class subject.
+		$class = $this->class_student->getStudentValidClassBySubject($student_id,$subject_id);
+
+		//get grades collection
+		$grades = $this->grade->getGradesByCountries($student->country_id);
+
+
+		$country_id  = (empty($this->grade->checkCountry($student->country_id)))
+			? config('futureed.default_country') : $student->country_id;
+
+		//Get student current learning
+		$current_learning = $this->class_student->getStudentCurrentLearning($student_id,$subject_id,$country_id);
+
+		$addition_information = [];
+
+		$column_header = [
+			'grade_level' => 'Grade Level',
+			'curriculum_category' => 'Curriculum Category',
+			'percent_completed' => 'Percent Completed'
+		];
+
+		$rows = $current_learning;
+
+		return $this->respondReportData($addition_information,$column_header,$rows);
+	}
+
 
 }
