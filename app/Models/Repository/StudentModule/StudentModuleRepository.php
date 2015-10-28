@@ -3,10 +3,13 @@
 use Carbon\Carbon;
 use FutureEd\Models\Core\Student;
 use FutureEd\Models\Core\StudentModule;
+use FutureEd\Models\Traits\LoggerTrait;
+use Illuminate\Support\Facades\DB;
 
 class StudentModuleRepository implements StudentModuleRepositoryInterface
 {
 
+	use LoggerTrait;
 
 	/**
 	 * Add new Student Module
@@ -36,6 +39,11 @@ class StudentModuleRepository implements StudentModuleRepositoryInterface
 		}
 	}
 
+	/**
+	 * @param $id
+	 * @param $data
+	 * @return \Illuminate\Support\Collection|null|string|static
+	 */
 	public function updateStudentModule($id, $data)
 	{
 		try {
@@ -170,6 +178,42 @@ class StudentModuleRepository implements StudentModuleRepositoryInterface
 			return $e->getMessage();
 		}
 	}
+
+	/**
+	 * @param $class_id
+	 * @return string
+	 */
+	public function getStudentModuleByClassId($class_id){
+
+		DB::beginTransaction();
+		try{
+
+			$response = StudentModule::select(
+				'id'
+				,'class_id'
+				,'student_id'
+				,DB::raw('((sum(progress) /(count(progress) * 100)) * 100 ) as progress')
+			)->with('student')
+				->classId($class_id)
+				->notFailed()
+				->groupBy('student_id')
+				->get();
+
+		}catch (\Exception $e){
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return $e->getMessage();
+		}
+
+		DB::commit();
+
+		return $response;
+
+	}
+
+
 
 
 

@@ -27,4 +27,6 @@ interface ClassroomRepositoryInterface {
 
     public function getClassroomBySubjectId($subject_id, $student_id);
 
+    public function checkClassroomActive($class_id);
+
 }
