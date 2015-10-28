@@ -74,6 +74,11 @@ class StudentModule extends Model {
 		return $this->belongsTo('FutureEd\Models\Core\Subject','subject_id');
 	}
 
+	public function student(){
+
+		return $this->belongsTo('FutureEd\Models\Core\Student','student_id')->with('user');
+	}
+
 
 	//-------------scope
 	public function scopeStudentId($query, $student_id){

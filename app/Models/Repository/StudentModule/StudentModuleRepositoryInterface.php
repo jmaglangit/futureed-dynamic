@@ -22,4 +22,6 @@ interface StudentModuleRepositoryInterface
 
 	public function deleteStudentModule($id);
 
+	public function getStudentModuleByClassId($class_id);
+
 }
