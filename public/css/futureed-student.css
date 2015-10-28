@@ -1468,7 +1468,8 @@ top: 41px;
 }
 
 .nav-student li {
-	width: 334px;
+	/*width: 334px;*/
+	width: 160px;
 	text-align: center;
 }
 
