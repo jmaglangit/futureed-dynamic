@@ -68,7 +68,7 @@ function StudentReportsController($scope, $timeout, StudentReportsService, Searc
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
-					self.summary.columns = response.data.column_header;
+					self.summary.columns = response.data.column_header[0];
 
 					$timeout(function() {
 						self.summary.records = response.data.rows.progress;
