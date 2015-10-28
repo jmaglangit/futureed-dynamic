@@ -17,6 +17,7 @@ function StudentReportsController($scope, $timeout, StudentReportsService, Searc
 		self.active_report_card = Constants.FALSE;
 		self.active_summary_progress = Constants.FALSE;
 		self.active_add = Constants.FALSE;
+		self.active_current_learning = Constants.FALSE;
 
 		self.searchDefaults();
 
@@ -27,6 +28,14 @@ function StudentReportsController($scope, $timeout, StudentReportsService, Searc
 				break;
 
 			case Constants.REPORT_CARD			:
+				self.active_report_card = Constants.TRUE;
+				self.reportCard();
+				break;
+
+			case Constants.CURRENT_LEARNING		:
+				self.active_current_learning = Constants.TRUE;
+				self.listLearning();
+				break;
 
 			default								:
 				self.active_report_card = Constants.TRUE;
@@ -116,4 +125,80 @@ function StudentReportsController($scope, $timeout, StudentReportsService, Searc
 			$scope.ui_unblock();
 		});
 	}
+
+	self.listLearning = function() {
+		self.errors = Constants.FALSE;
+
+		$scope.ui_block();
+		StudentReportsService.listClass($scope.user.id).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					var data = response.data.records;
+					if(data.length) {
+						self.subjects = [];
+
+						angular.forEach(data, function(value, key) {
+							self.subjects[key] = value.classroom.subject;
+						});
+
+						self.currentLearning(self.subjects[0].id);
+					}
+				}
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.currentLearning = function(subject_id){
+		self.errors = Constants.FALSE;
+		self.summary = {};
+		self.grade_name = '';
+
+
+		self.search.subject_id = (self.search.subject_id) ? self.search.subject_id : subject_id;
+
+		$scope.ui_block();
+		StudentReportsService.currentLearning($scope.user.id, self.search.subject_id).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)){
+				if(response.errors){
+					self.errors = $scope.errorHandler(response.errors);
+				} else if (response.data) {
+					self.summary.columns = response.data.column_header;
+
+					self.row_data = {};
+					var data = response.data.rows;
+					var raw_grade = 0;
+
+					angular.forEach(data, function(value, key) {
+
+						if(value.grade_id == raw_grade){
+
+							value.grade_name = '';
+							self.row_data[key] = value;
+						} else {
+
+							raw_grade = value.grade_id;
+						}
+					});
+
+					self.summary.records = response.data.rows;
+				}
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+
+
+	}
+
+
 }
