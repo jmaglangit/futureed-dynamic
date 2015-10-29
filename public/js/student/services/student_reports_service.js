@@ -35,7 +35,14 @@ function StudentReportsService($http) {
 			, url	: apiUrl + 'report/student-progress/current-learning/' + student_id + '/' + subject_id
 		});
 	}
-	
+
+	//GET /api/report/student-progress/curriculum/{student_id}/{subject_id}
+	api.subjectArea = function (student_id, subject_id) {
+		return $http({
+			method	:	Constants.METHOD_GET
+			,	url	:	apiUrl + 'report/student-progress/curriculum/' + student_id + '/' + subject_id
+		});
+	}
 
 	return api;	
 }
