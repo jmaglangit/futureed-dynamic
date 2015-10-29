@@ -50,11 +50,17 @@ class TokenServices {
 
     protected $payload_data;
 
+    protected $session_service;
 
 
-    public function __construct(UserRepositoryInterface $userRepositoryInterface){
+
+    public function __construct(
+        UserRepositoryInterface $userRepositoryInterface,
+        SessionServices $sessionServices
+    ){
         $this->token_config = config('token');
         $this->user = $userRepositoryInterface;
+        $this->session_service = $sessionServices;
     }
 
     /**
@@ -274,7 +280,13 @@ class TokenServices {
 
         $this->setSignature($token_decoded[0],$token_decoded[1]);
 
+        //Inactive User
         if(Carbon::now()->timestamp >= $payload['exp']){
+
+            // Force logout user.
+            $user = $this->session_service->getUserInformation($payload['id'], $payload['type']);
+
+            $this->user->emptySessionToken($user['user_id']);
 
             return false;
         }
