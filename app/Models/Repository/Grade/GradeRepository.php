@@ -205,7 +205,13 @@ class GradeRepository implements GradeRepositoryInterface{
         $country_id  = (empty($this->checkCountry($country_id))) ? config('futureed.default_country') : $country_id;
 
         $grade_list = CountryGrade::select(
-            DB::raw('g.*')
+
+            DB::raw('country_grades.id as id'),
+            DB::raw('g.country_id'),
+            DB::raw('g.code'),
+            DB::raw('g.name'),
+            DB::raw('g.description'),
+            DB::raw('g.status')
         )->leftJoin('country_grades as cg2','cg2.age_group_id','=','country_grades.age_group_id')
             ->leftJoin('grades as g','g.id','=','cg2.grade_id')
             ->where('cg2.country_id',$country_id)
