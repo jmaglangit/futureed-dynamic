@@ -38,6 +38,7 @@ class QuestionAnswerRepository implements QuestionAnswerRepositoryInterface{
 	 */
 	public function getQuestionAnswers($criteria = array(), $limit = 0, $offset = 0){
 
+		session(['super_access' => 1]);
 		$question_answer = new QuestionAnswer();
 
 		$count = 0;
@@ -68,7 +69,11 @@ class QuestionAnswerRepository implements QuestionAnswerRepositoryInterface{
 
 		}
 
-		return ['total' => $count, 'records' => $question_answer->get()->toArray()];
+		$records = $question_answer->get()->toArray();
+
+		Session::forget('super_access');
+
+		return ['total' => $count, 'records' => $records];
 
 	}
 
