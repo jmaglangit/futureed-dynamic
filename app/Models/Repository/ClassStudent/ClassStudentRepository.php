@@ -4,6 +4,7 @@ namespace FutureEd\Models\Repository\ClassStudent;
 use Carbon\Carbon;
 use FutureEd\Models\Core\ClassStudent;
 use FutureEd\Models\Core\Classroom;
+use FutureEd\Models\Core\Subject;
 use FutureEd\Models\Repository\Module\ModuleRepository as ModuleRepository;
 use Illuminate\Support\Facades\DB;
 use League\Flysystem\Exception;
@@ -13,8 +14,14 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 {
 	use LoggerTrait;
 
+	/**
+	 * @var ModuleRepository
+	 */
 	protected $module;
 
+	/**
+	 * @param ModuleRepository $moduleRepository
+	 */
 	public function __construct(
 		ModuleRepository $moduleRepository
 	){
@@ -74,6 +81,10 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 		];
 	}
 
+	/**
+	 * @param $student_id
+	 * @return mixed
+	 */
 	public function getClassStudent($student_id)
 	{
 
@@ -82,6 +93,10 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 			->pluck('student_id');
 	}
 
+	/**
+	 * @param $class_student
+	 * @return array|string
+	 */
 	public function addClassStudent($class_student)
 	{
 		try {
@@ -112,11 +127,18 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 
 	}
 
+	/**
+	 * @param $id
+	 */
 	public function deleteClassStudent($id)
 	{
 
 	}
 
+	/**
+	 * @param $class_id
+	 * @return array|null
+	 */
 	public function getClassroom($class_id)
 	{
 		$classroom = Classroom::find($class_id);
@@ -396,9 +418,208 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 
 			return $e->getMessage();
 		}
+	}
 
 
+	/**
+	 * Student Progress by Subject group by Curriculum by grade.
+	 * @param $student_id
+	 * @param $subject_id
+	 * @param $class_id
+	 * @return bool
+	 */
+	public function getStudentSubjectProgressByCurriculum($student_id, $subject_id, $class_id){
+		//-- Getting every row on every subject area - FINAL
+		//select
+		//s.name as subject_name,sa.id as area_id, sa.name as area_name, m.grade_id, sm.class_id, sm.student_id, sm.module_status, sm.progress, sm.updated_at
+		//from subjects s
+		//left join subject_areas sa on sa.subject_id=s.id
+		//left join modules m on m.subject_area_id=sa.id
+		//left join student_modules sm on sm.module_id=m.id and sm.module_status <> 'Failed' and sm.deleted_at is null
+		//where sm.student_id = 1 -- student_module.student_id
+		//and sa.id = 1 -- subject_area.id
+		//and sm.class_id =1 -- student_module.class_id data from verified classrooms
+		//group by m.grade_id
+		//order by sa.name,m.grade_id
+		//;
+		//
+
+		DB::beginTransaction();
+		try{
+
+			$response = Subject::select(
+				DB::raw('subjects.name as subject_name'),
+				DB::raw('sa.id as area_id'),
+				DB::raw('sa.name as area_name'),
+				DB::raw('m.grade_id'),
+				DB::raw('sm.class_id'),
+				DB::raw('sm.student_id'),
+				DB::raw('sm.module_status'),
+				DB::raw('sm.progress')
+			)->leftJoin('subject_areas as sa','sa.subject_id','=','subjects.id')
+				->leftJoin('modules as m','m.subject_area_id','=','sa.id')
+				->leftJoin('student_modules as sm', function($left_join) {
+					$left_join->on('sm.module_id','=','m.id')
+						->on('sm.module_status', '<>',
+							DB::raw("'" .config('futureed.module_status_failed')."'"))
+					;
+				})->where('sm.student_id','=',$student_id)
+				->where('sa.id','=',$subject_id)
+				->where('sm.class_id','=',$class_id)
+				->groupBy('m.grade_id')
+				->orderBy('sa.name')
+				->orderBy('m.grade_id')
+				->get()
+			;
+		}catch (\Exception $e){
+
+			$this->errorLog($e->getMessage());
+
+			DB::rollback();
+
+			return $e->getMessage();
+		}
+
+		DB::commit();
+		return $response;
 
 	}
+
+	/**
+	 * Check class validation by order.
+	 * @param $student_id
+	 * @param $subject_id
+	 * @return bool
+	 */
+	public function getStudentValidClassBySubject($student_id, $subject_id){
+		//		-- Get valid class based on active class students.
+		//select
+		//cs.class_id, cs.student_id
+		//,c.id as c_id,c.name as c_name,c.subject_id
+		//,o.order_no as o_order_no
+		//from class_students cs
+		//left join classrooms c on c.id=cs.class_id
+		//left join orders o on o.order_no = c.order_no
+		//where
+		//subject_id = 1 -- subject_id
+		//		and cs.student_id=1 -- student_id
+		//		and date(o.date_start) <= now()  and date(o.date_end) >= now()
+		//		and o.payment_status = 'Paid'
+		//order by o.updated_at desc
+		//		;
+
+		DB::beginTransaction();
+		try{
+
+			$response = ClassStudent::select(
+				DB::raw('class_students.class_id'),
+				DB::raw('class_students.student_id'),
+				DB::raw('c.id as c_id'),
+				DB::raw('c.name as c_name'),
+				DB::raw('c.subject_id'),
+				DB::raw('o.order_no as order_no')
+			)->leftJoin('classrooms as c','c.id','=','class_students.class_id')
+				->leftJoin('orders as o','o.order_no','=','c.order_no')
+				->where('c.subject_id','=',$subject_id)
+				->where('class_students.student_id','=',$student_id)
+				->where('o.date_start', '<=', Carbon::now())
+				->where('o.date_end', '>=', Carbon::now())
+				->where('o.payment_status','=',config('futureed.paid'))
+				->orderBy('o.updated_at','desc')
+				->get();
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return $e->getMessage();
+		}
+		DB::commit();
+
+		return $response;
+
+	}
+
+	/**
+	 * @param $student_id
+	 * @param $subject_id
+	 * @param $country_id
+	 * @return string
+	 */
+	public function getStudentCurrentLearning($student_id,$subject_id, $country_id){
+			//		select
+			//m.grade_id as m_grade_id
+			//,sa.name as subject_area
+			//,sm.class_id, sm.subject_id,sm.module_id, sm.module_status, sm.progress
+			//
+			//from class_students cs
+			//left join classrooms c on c.id=cs.class_id
+			//left join subjects s on s.id=c.subject_id
+			//left join subject_areas sa on sa.subject_id = s.id
+			//left join modules m on m.subject_area_id = sa.id
+			//left join student_modules sm on sm.module_id = m.id
+			//		and sm.module_status <> 'Failed'
+			//		and sm.deleted_at is null
+			//		and sm.student_id = 3
+			//left join students st on st.id = cs.student_id
+			//where
+			//cs.student_id = 3
+			//and s.id = 1
+			//and cs.subscription_status = 'Active'
+			//group by m_grade_id, subject_area
+			//order by m_grade_id asc, subject_area asc
+			//		;
+
+		DB::beginTransaction();
+		try{
+
+			$response = DB::table('class_students as cs')->select(
+				DB::raw('m.grade_id'),
+				DB::raw('g.name as grade_name'),
+				DB::raw('sa.name'),
+				DB::raw('sm.progress')
+			)->leftJoin('classrooms as c','c.id','=','cs.class_id')
+				->leftJoin('subjects as s','s.id','=','c.subject_id')
+				->leftJoin('subject_areas as sa','sa.subject_id','=','s.id')
+				->leftJoin('modules as m','m.subject_area_id','=','sa.id')
+				->leftJoin('student_modules as sm',function($left_join) use ($student_id) {
+					$left_join->on('sm.module_id','=','m.id')
+						->on('sm.module_status','<>',DB::raw("'".config('futureed.module_status_failed')."'"))
+						->whereNULL('sm.deleted_at')
+						->where('sm.student_id','=',DB::raw($student_id));
+				})->leftJoin('students as st','st.id','=','cs.student_id')
+				->leftJoin('country_grades as cg', 'cg.grade_id', '=', 'm.grade_id')
+				->leftJoin('country_grades as cg2', function ($left_join) use ($country_id) {
+					$left_join->on('cg2.age_group_id', '=', 'cg.age_group_id')
+						->on('cg2.country_id','=',
+							DB::raw($country_id)
+						);
+				})
+				->leftJoin('grades as g', 'g.id', '=', 'cg2.grade_id')
+				->where('cs.student_id',DB::raw($student_id))
+				->where('s.id',DB::raw($subject_id))
+				->where('cs.subscription_status',DB::raw("'".config('futureed.active')."'"))
+				->groupBy('grade_id','name')
+				->orderBy('grade_id','asc')
+				->orderBy('name','asc')
+				->get()
+				;
+
+
+		}catch (\Exception $e){
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return $e->getMessage();
+		}
+
+		DB::commit();
+
+		return $response;
+	}
+
 
 }

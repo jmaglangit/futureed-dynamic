@@ -28,17 +28,20 @@
 			<div class="form-group">
 				<label class="col-xs-3 control-label">Class <span class="required">*</span></label>
 				<div class="col-xs-5">
-					{!! Form::text('class_name', ''
-						, array(
-							'ng-disabled'=>'class.active_view'
-							, 'class' => 'form-control'
-							, 'ng-model' => 'class.record.name'
-							, 'placeholder' => 'Class Name'
-						)
-					) !!}
-				</div>
-				<div class="col-xs-2 margin-top-8">
-					<a href="" ng-if="class.active_view" ng-click="class.setActive('edit', class.record.id)" class="edit-class">Edit Class</a>
+					<div ng-class="{ 'input-group' : class.active_view }">
+						{!! Form::text('class_name', ''
+							, array(
+								'ng-disabled'=>'class.active_view'
+								, 'class' => 'form-control'
+								, 'ng-model' => 'class.record.name'
+								, 'placeholder' => 'Class Name'
+							)
+						) !!}
+
+						<span class="input-group-addon" 
+							ng-if="class.active_view"
+							ng-click="class.setActive(futureed.ACTIVE_EDIT, class.record.id)"><i class="fa fa-pencil edit-addon"></i></span>
+					</div>
 				</div>
 			</div>
 			<div class="form-group">

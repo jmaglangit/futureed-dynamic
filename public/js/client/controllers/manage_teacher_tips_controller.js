@@ -139,11 +139,17 @@ function ManageTeacherTipsController($scope, ManageTeacherTipsService, TableServ
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
 
+		self.fields = [];
+
 		$scope.ui_block();
 		ManageTeacherTipsService.update(self.record).success(function(response){
 			if(angular.equals(response.status,Constants.STATUS_OK)){
 				if(response.errors){
-					self.errors = $scope.errorHandler(response.errors);
+					self.errors = $scope.errorHandler(response.errors, Constants.TRUE);
+
+					angular.forEach(response.errors, function(value, key) {
+						self.fields[value.field] = Constants.TRUE;
+					});
 				}else if(response.data){
 					self.success = TeacherConstant.SUCCESS_EDIT_TIP;
 					self.setActive(Constants.ACTIVE_VIEW, response.data.id);
@@ -170,7 +176,7 @@ function ManageTeacherTipsController($scope, ManageTeacherTipsService, TableServ
 		ManageTeacherTipsService.updateStatus(self.rate).success(function(response){
 			if(angular.equals(response.status,Constants.STATUS_OK)){
 				if(response.errors){
-					self.rate_errors = $scope.errorHandler(response.errors);
+					self.rate_errors = $scope.errorHandler(response.errors, Constants.TRUE);
 				}else if(response.data){
 					$("#rate_tip").modal('hide');
 					self.success = (status) ? TeacherConstant.APPROVE_TIP : TeacherConstant.REJECT_TIP;
@@ -185,7 +191,9 @@ function ManageTeacherTipsController($scope, ManageTeacherTipsService, TableServ
 	}
 
 	self.rateTip = function() {
+		self.rate_errors = Constants.FALSE;
 		self.rate_modal = Constants.TRUE;
+
 		$("#rate_tip").modal({
 	        backdrop: 'static',
 	        keyboard: Constants.FALSE,

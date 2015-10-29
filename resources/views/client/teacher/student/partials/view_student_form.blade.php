@@ -42,7 +42,7 @@
 						</div>
 					</div>	
 
-					<div class="form-group" ng-if="teacher.record.new_email">
+					<div class="form-group">
 						<label class="control-label col-xs-2">Email <span class="required">*</span></label>
 						<div class="col-xs-4">
 							<div class="input-group">
@@ -59,16 +59,18 @@
 							</div>
 						</div>
 
-						<label class="control-label col-xs-2 text-red">Pending Email</label>
-						<div class="col-xs-4">
-							{!! Form::text('pending_email','',
-								[
-									'class' => 'form-control',
-									'ng-model' => 'teacher.record.new_email',
-									'ng-readonly' => 'true',
-									'placeHolder' => 'Pending Email'
-								])
-							!!}
+						<div ng-if="teacher.record.new_email">
+							<label class="control-label col-xs-2 text-red">Pending Email</label>
+							<div class="col-xs-4">
+								{!! Form::text('pending_email','',
+									[
+										'class' => 'form-control',
+										'ng-model' => 'teacher.record.new_email',
+										'ng-readonly' => 'true',
+										'placeHolder' => 'Pending Email'
+									])
+								!!}
+							</div>
 						</div>
 					</div>
 				</fieldset>

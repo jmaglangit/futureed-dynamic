@@ -296,20 +296,6 @@ function FutureedController($scope, $window, apiService, futureed) {
 	$scope.highlightAvatar = highlightAvatar;
 	$scope.selectAvatar = selectAvatar;
 
-	$scope.getLoginPassword = function(id) {
-		apiService.getLoginPassword(id).success(function (response) {
-			if(angular.equals(response.status, Constants.STATUS_OK)) {
-				if(response.errors) {
-					$scope.errorHandler(response.errors);
-				} else if(response.data) {
-					$scope.image_pass = response.data
-				}
-			}
-		}).error(function(response) {
-			$scope.internalError();
-		});
-	}
-
 	$scope.getUserDetails = function() {
 		var user = $("input[name='userdata']").val();
 

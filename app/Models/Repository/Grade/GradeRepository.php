@@ -1,7 +1,9 @@
 <?php namespace FutureEd\Models\Repository\Grade;
 
 
+use FutureEd\Models\Core\CountryGrade;
 use FutureEd\Models\Core\Grade;
+use Illuminate\Support\Facades\DB;
 
 class GradeRepository implements GradeRepositoryInterface{
 
@@ -185,6 +187,43 @@ class GradeRepository implements GradeRepositoryInterface{
     public function getGradeCountries(){
 
         return Grade::select('country_id')->groupByCountry()->get();
+    }
+
+    /**
+     * Get Grades list by countries.
+     * @param $country_id
+     */
+    public function getGradesByCountries($country_id){
+        /*
+        select * from country_grades cg
+        left join country_grades cg2 on cg2.age_group_id=cg.age_group_id
+        where cg2.country_id=702
+        group by cg2.age_group_id
+        ;
+        */
+
+        $country_id  = (empty($this->checkCountry($country_id))) ? config('futureed.default_country') : $country_id;
+
+        $grade_list = CountryGrade::select(
+
+            DB::raw('country_grades.id as id'),
+            DB::raw('g.country_id'),
+            DB::raw('g.code'),
+            DB::raw('g.name'),
+            DB::raw('g.description'),
+            DB::raw('g.status')
+        )->leftJoin('country_grades as cg2','cg2.age_group_id','=','country_grades.age_group_id')
+            ->leftJoin('grades as g','g.id','=','cg2.grade_id')
+            ->where('cg2.country_id',$country_id)
+            ->groupBy('cg2.age_group_id')
+            ->get();
+
+
+        return $grade_list;
+
+
+
+
     }
 
 

@@ -10,10 +10,15 @@ namespace FutureEd\Models\Repository\Classroom;
 
 
 use FutureEd\Models\Core\Classroom;
+use FutureEd\Models\Core\ClassStudent;
+use FutureEd\Models\Traits\LoggerTrait;
 use Illuminate\Support\Facades\DB;
 use League\Flysystem\Exception;
 
 class ClassroomRepository implements ClassroomRepositoryInterface{
+
+
+    use LoggerTrait;
 
     /**
      * Get list of classroom based with optional pagination.
@@ -151,6 +156,10 @@ class ClassroomRepository implements ClassroomRepositoryInterface{
         }
     }
 
+	/**
+     * @param $order_no
+     * @return null|string
+     */
     public function getClassroomByOrderNo($order_no){
         try{
             $result = Classroom::order_no($order_no);
@@ -188,5 +197,36 @@ class ClassroomRepository implements ClassroomRepositoryInterface{
 
    }
 
+	/**
+     * @param $class_id
+     * @return string
+     */
+    public function checkClassroomActive($class_id){
+
+
+        DB::beginTransaction();
+        try{
+
+            $response = Classroom::with('order')
+                ->paymentStatus(config('futureed.paid'))
+                ->validSubscription()
+                ->find($class_id);
+            ;
+        } catch(\Exception $e){
+
+            DB::rollback();
+
+            $this->errorLog($e->get());
+
+            return $e->getMessage();
+        }
+
+        DB::commit();
+
+        return $response;
+
+
+
+    }
 
 }

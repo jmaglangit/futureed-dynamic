@@ -57,6 +57,7 @@ function ManageParentStudentController($scope, $filter, ManageParentStudentServi
 			case 'change':
 				self.change = {};
 				self.active_change = Constants.TRUE;
+				self.viewStudent(id);
 				break;
 
 			case Constants.ACTIVE_ADD:

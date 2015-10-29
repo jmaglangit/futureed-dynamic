@@ -158,23 +158,23 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr ng-repeat="b in bulk.records">
-						<td>{! b.min_seats !}</td>
-						<td>{! b.percentage | percent !}</td>
+					<tr ng-repeat="record in bulk.records">
+						<td>{! record.min_seats !}</td>
+						<td>{! record.percentage | percent !}</td>
 						<td>
 							<div class="row">
 								<div class="col-xs-4">
 									<i class="fa" 
-										ng-class="{ 'fa-ban error-icon' : b.status == futureed.DISABLED, 'fa-check-circle-o success-icon' : b.status == futureed.ENABLED }"
-										tooltip="{! b.status !}"
+										ng-class="{ 'fa-ban error-icon' : record.status == futureed.DISABLED, 'fa-check-circle-o success-icon' : record.status == futureed.ENABLED }"
+										tooltip="{! record.status !}"
 										tooltip-placement="top"
 										tooltip-trigger="mouseenter"></i>
 								</div>
 								<div class="col-xs-4">
-									<a href="" ng-click="bulk.getBulk(b.id)"><span><i class="fa fa-pencil"></i></span></a>
+									<a href="" ng-click="bulk.setActive(futureed.ACTIVE_EDIT, record.id)"><span><i class="fa fa-pencil"></i></span></a>
 								</div>
 								<div class="col-xs-4">
-									<a href="" ng-click="bulk.deleteBulk(b.id)"><span><i class="fa fa-trash"></i></span></a>
+									<a href="" ng-click="bulk.deleteBulk(record.id)"><span><i class="fa fa-trash"></i></span></a>
 								</div>
 							</div>
 						</td>
