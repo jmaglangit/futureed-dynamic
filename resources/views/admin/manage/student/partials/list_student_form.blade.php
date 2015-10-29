@@ -116,8 +116,18 @@
 						<div class="row">
 
                             <div class="col-xs-3">
-							<a href="" ng-click="student.impersonate(record.user_id)"><span>
+							<a ng-if="record.user.is_account_activated == 1
+									&& record.user.is_account_locked == 0
+									&& record.user.status == 'Enabled'
+									&& record.user.session_token == NULL "
+							   href="" ng-click="student.impersonate(record.user_id)"><span>
 										<i ng-class="{ 'success-icon' : record.user.impersonate }" class="fa fa-user-secret"></i></span></a>
+							<a ng-if="record.user.is_account_activated == 0
+								|| record.user.is_account_locked == 1
+								|| record.user.status == 'Disabled'
+								|| record.user.session_token != NULL "
+							   href="" ><span>
+									<i ng-class="{ 'success-icon' : record.user.impersonate }" class="fa fa-user-secret text-danger"></i></span></a>
 							</div>
 							<div class="col-xs-3">
 								<a href="" ng-click="student.setActive(futureed.ACTIVE_VIEW, record.id)"><span><i class="fa fa-eye"></i></span></a>
