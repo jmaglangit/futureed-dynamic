@@ -4,7 +4,7 @@ namespace FutureEd\Models\Repository\QuestionAnswer;
 
 use FutureEd\Models\Core\QuestionAnswer;
 use League\Flysystem\Exception;
-
+use Illuminate\Support\Facades\Session;
 
 class QuestionAnswerRepository implements QuestionAnswerRepositoryInterface{
 
@@ -153,7 +153,13 @@ class QuestionAnswerRepository implements QuestionAnswerRepositoryInterface{
 	 */
 	public function getQuestionCorrectAnswer($id){
 
-		return QuestionAnswer::whereId($id)->pluck('correct_answer');
+		session(['super_access' => 1]);
+
+		$return = QuestionAnswer::whereId($id)->pluck('correct_answer');
+
+		Session::forget('super_access');
+
+		return $return;
 	}
 
 
