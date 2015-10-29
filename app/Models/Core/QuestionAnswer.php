@@ -64,9 +64,11 @@ class QuestionAnswer extends Model {
 		}
 	}
 
+	//TODO: Remove this function. Remove answers on the controller level.
 	public function getCorrectAnswerAttribute($value){
 
-		if(session('current_user')){
+
+		if(session('current_user') || session('super_access')){
 
 			$user = User::find(session('current_user'));
 
@@ -74,10 +76,14 @@ class QuestionAnswer extends Model {
 			if($user->user_type == config('futureed.admin')){
 
 				return $value;
-			} else {
+			} elseif(session('super_access') == 1){
+
+				return $value;
+			}else{
 
 				return null;
 			}
+
 		} else {
 
 			return null;

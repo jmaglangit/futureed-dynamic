@@ -4,7 +4,7 @@ namespace FutureEd\Models\Repository\QuestionAnswer;
 
 use FutureEd\Models\Core\QuestionAnswer;
 use League\Flysystem\Exception;
-
+use Illuminate\Support\Facades\Session;
 
 class QuestionAnswerRepository implements QuestionAnswerRepositoryInterface{
 
@@ -38,6 +38,7 @@ class QuestionAnswerRepository implements QuestionAnswerRepositoryInterface{
 	 */
 	public function getQuestionAnswers($criteria = array(), $limit = 0, $offset = 0){
 
+		session(['super_access' => 1]);
 		$question_answer = new QuestionAnswer();
 
 		$count = 0;
@@ -68,7 +69,11 @@ class QuestionAnswerRepository implements QuestionAnswerRepositoryInterface{
 
 		}
 
-		return ['total' => $count, 'records' => $question_answer->get()->toArray()];
+		$records = $question_answer->get()->toArray();
+
+		Session::forget('super_access');
+
+		return ['total' => $count, 'records' => $records];
 
 	}
 
@@ -148,7 +153,14 @@ class QuestionAnswerRepository implements QuestionAnswerRepositoryInterface{
 	 */
 	public function getQuestionCorrectAnswer($id){
 
-		return QuestionAnswer::whereId($id)->pluck('correct_answer');
+		//TODO: Refactor remove supper_access.
+		session(['super_access' => 1]);
+
+		$return = QuestionAnswer::whereId($id)->pluck('correct_answer');
+
+		Session::forget('super_access');
+
+		return $return;
 	}
 
 
