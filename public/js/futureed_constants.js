@@ -225,6 +225,7 @@ var Constants = {
 	, REPORT_CARD				: "Report Card"
 	, SUMMARY_PROGRESS			: "Summary Progress"
 	, CURRENT_LEARNING			: "Current Learning"
+	, SUBJECT_AREA				: "Subject Area"
 
 	, MSG_CREATED				: function(noun) {
 		return noun + " created.";
