@@ -5,11 +5,11 @@
         <li role="presentation" ng-class="{ 'active' : reports.active_summary_progress }">
             <a href="javascript:void(0)" ng-click="reports.setActive(futureed.SUMMARY_PROGRESS)">Summary Progress</a>
         </li>
-        <li role="presentation" ng-class="{ 'active' : reports.active_current_learning }">
-            <a href="javascript:void(0)" ng-click="reports.setActive(futureed.CURRENT_LEARNING)">Current Learning</a>
-        </li>
         <li role="presentation" ng-class="{ 'active' : reports.active_subject_area }">
             <a href="javascript:void(0)" ng-click="reports.setActive(futureed.SUBJECT_AREA)">Subject Area</a>
+        </li>
+        <li role="presentation" ng-class="{ 'active' : reports.active_current_learning }">
+            <a href="javascript:void(0)" ng-click="reports.setActive(futureed.CURRENT_LEARNING)">Current Learning</a>
         </li>
     </ul>
 
