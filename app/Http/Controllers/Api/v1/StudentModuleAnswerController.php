@@ -17,6 +17,7 @@ use FutureEd\Models\Repository\TeachingContent\TeachingContentRepositoryInterfac
 use FutureEd\Services\ModuleContentServices;
 use FutureEd\Services\StudentModuleServices;
 use Illuminate\Support\Facades\Input;
+use SebastianBergmann\Environment\Console;
 
 class StudentModuleAnswerController extends ApiController{
 
@@ -194,9 +195,6 @@ class StudentModuleAnswerController extends ApiController{
 
 			//increment wrong counter.
 			$student_module->wrong_counter++;
-
-
-
 
 			//starting 3 consecutive wrongs to minus 1 to correct points.
 			if($student_module->wrong_counter >= 3){
