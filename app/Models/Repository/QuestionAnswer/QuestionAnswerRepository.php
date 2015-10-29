@@ -153,6 +153,7 @@ class QuestionAnswerRepository implements QuestionAnswerRepositoryInterface{
 	 */
 	public function getQuestionCorrectAnswer($id){
 
+		//TODO: Refactor remove supper_access.
 		session(['super_access' => 1]);
 
 		$return = QuestionAnswer::whereId($id)->pluck('correct_answer');

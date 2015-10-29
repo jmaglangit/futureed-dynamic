@@ -258,6 +258,7 @@ class QuestionRepository implements QuestionRepositoryInterface{
 	 */
 	public function getQuestionAnswer($id){
 
+		//TODO: Refactor remove supper_access.
 		session(['super_access' => 1]);
 		$response =  Question::whereId($id)->pluck('answer');
 		Session::forget('super_access');

@@ -64,7 +64,9 @@ class QuestionAnswer extends Model {
 		}
 	}
 
+	//TODO: Remove this function. Remove answers on the controller level.
 	public function getCorrectAnswerAttribute($value){
+
 
 		if(session('current_user') || session('super_access')){
 
