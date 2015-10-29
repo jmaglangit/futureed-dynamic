@@ -5,24 +5,25 @@
 		</div>
 	</div>
 
+	<div class="col-xs-12 success-container" ng-if="admin.errors || admin.success">
+		<div class="alert alert-error" ng-if="admin.errors">
+			<p ng-repeat="error in admin.errors track by $index" > 
+				{! error !}
+			</p>
+		</div>
+		<div class="alert alert-success" ng-if="admin.success">
+			<p ng-repeat="success in admin.success track by $index" > 
+				{! success !}
+			</p>
+		</div>
+	</div>
+
 	{!! Form::open([
 			'id' => 'add_admin_form',
 			'class' => 'form-horizontal'
 		]) 
 	!!}
-	<div class="form-content col-xs-12">
-		<div class="alert alert-error" ng-if="admin.errors">
-			<p ng-repeat="error in admin.errors track by $index">
-				{! error !}
-			</p>
-		</div>
-
-		<div class="alert alert-success" ng-if="admin.success">
-			<p ng-repeat="success in admin.success track by $index">
-				{! success !}
-			</p>
-		</div>
-
+	<div class="col-xs-12 search-container">
 		<fieldset>
 			<legend class="legend-name-mid">
 				User Credentials
@@ -170,7 +171,10 @@
 					) !!}
 				</div>
 			</div>
-			<div class="btn-container col-xs-8 col-xs-offset-1">
+		</fieldset>
+		<fieldset>
+			<div class="form-group">
+				<div class="btn-container col-xs-8 col-xs-offset-1">
 				{!! Form::button('Save'
 					, array(
 						'class' => 'btn btn-blue btn-medium'
@@ -184,6 +188,7 @@
 						, 'ng-click' => "admin.setActive()"
 					)
 				) !!}
+			</div>
 			</div>
 		</fieldset>
 	</div>

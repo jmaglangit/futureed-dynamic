@@ -7,7 +7,7 @@ function ManageHelpRequestService($http) {
 	var service = {};
 	var serviceUrl = '/api/v1/';
 
-	service.list = function list(search, table) {
+	service.list = function(search, table) {
 		return $http({
 			method 	: Constants.METHOD_GET
 			, url   : serviceUrl + 'help-request?module=' + search.module

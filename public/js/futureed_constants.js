@@ -216,6 +216,37 @@ var Constants = {
 
 	, PASSWORD_TIP				: "Password must be at least 8 characters and with at least 1 number."
 
+	, SECURITY					: "Security"
+	, ADMINISTRATOR				: "Administrator"
+	, USERS						: "Users"
+	, ERRORS					: "Errors"
+	, SYSTEM					: "System"
+
+	, REPORT_CARD				: "Report Card"
+	, SUMMARY_PROGRESS			: "Summary Progress"
+	, CURRENT_LEARNING			: "Current Learning"
+	, SUBJECT_AREA				: "Subject Area"
+
+	, MSG_CREATED				: function(noun) {
+		return noun + " created.";
+	}
+
+	, MSG_UPDATED				: function(noun) {
+		return noun + " updated.";
+	}
+
+	, MSG_DELETED				: function(noun) {
+		return noun + " deleted.";
+	}
+
+	, MSG_ACCEPTED				: function(noun) {
+		return noun + " accepted.";
+	}
+
+	, MSG_REJECTED				: function(noun) {
+		return noun + " rejected.";
+	}
+
 	, URL_FORGOT_PASSWORD		: function(user_type) {
 		return '/' + user_type + '/password/forgot';
 	}

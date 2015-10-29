@@ -1,43 +1,34 @@
 angular.module('futureed.controllers')
 	.controller('ManageAgeGroupController', ManageAgeGroupController);
 
-ManageAgeGroupController.$inject = ['$scope', '$timeout', 'ManageAgeGroupService', 'apiService', 'TableService', 'SearchService'];
+ManageAgeGroupController.$inject = ['$scope', 'ManageAgeGroupService', 'TableService'];
 
-function ManageAgeGroupController($scope, $timeout, ManageAgeGroupService, apiService, TableService, SearchService) {
+function ManageAgeGroupController($scope, ManageAgeGroupService, TableService) {
 	var self = this;
-
-	self.details = {};
-	self.delete = {};
 
 	TableService(self);
 	self.tableDefaults();
 
 	self.setModule = function(data) {
         self.module = data;
-        self.module.id = data.id;
     }
 
-	self.setActive = function(active, id, flag) {
-		self.fields = [];
+	self.setActive = function(active, id) {
 		self.errors = Constants.FALSE;
-		self.create = {};
-		self.area_field = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		self.fields = [];
+		self.record = {};
+		self.tableDefaults();
 
 		self.active_list = Constants.FALSE;
 		self.active_add = Constants.FALSE;
 		self.active_edit = Constants.FALSE;
-		self.edit = Constants.FALSE;
-
-		if(flag != 1) {
-			self.success = Constants.FALSE;
-		}
 
 		switch (active) {
 			case Constants.ACTIVE_EDIT:
 				self.active_edit = Constants.TRUE;
-				self.getAgeGroupDetail(id);
-				self.edit = Constants.TRUE;
-				self.success = Constants.FALSE;
+				self.details(id);
 				break;
 
 			case Constants.ACTIVE_ADD : 
@@ -46,24 +37,26 @@ function ManageAgeGroupController($scope, $timeout, ManageAgeGroupService, apiSe
 
 			default:
 				self.active_list = Constants.TRUE;
-				self.ageModuleList();
+				self.list();
 				break;
 		}
 	}
 
-	self.ageModuleList = function() {
+	self.list = function() {
 		self.errors = Constants.FALSE;
-		self.records = {};
+		self.records = [];
 
 		$scope.ui_block();
-		ManageAgeGroupService.ageModuleList(self.module.id, self.table).success(function(response){
+		ManageAgeGroupService.list(self.module.id, self.table).success(function(response){
 			if(angular.equals(response.status, Constants.STATUS_OK)){
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				}else if(response.data){
-					self.age_records = response.data.records;
+					self.records = response.data.records;
+					self.updatePageCount(response.data);
 				}
 			}
+
 			$scope.ui_unblock();
 		}).error(function(response){
 			self.errors = $scope.internalError();
@@ -71,33 +64,30 @@ function ManageAgeGroupController($scope, $timeout, ManageAgeGroupService, apiSe
 		});
 	}
 
-	self.getAge = function() {
-		$scope.ui_block();
+	self.getAges = function() {
+		self.ages = [];
 
-		ManageAgeGroupService.getAge().success(function(response){
+		ManageAgeGroupService.getAges().success(function(response){
 			if(angular.equals(response.status, Constants.STATUS_OK)){
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data){
-					self.ages = {};
 					self.ages = response.data;
 				}
 			}
-			$scope.ui_unblock();
 		}).error(function(response){
 			self.errors = $scope.internalError();
-			$scope.ui_unblock();
-		})
+		});
 	}
 
-	self.addAgeGroup = function() {
+	self.add = function() {
 		self.errors = Constants.FALSE;
 		self.fields = [];
-		self.create.success = Constants.FALSE;
-		self.create.module_id = $scope.module_id;
+		
+		self.record.module_id = self.module.id;
 
 		$scope.ui_block();
-		ManageAgeGroupService.addAgeGroup(self.create).success(function(response){
+		ManageAgeGroupService.add(self.record).success(function(response){
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
@@ -106,51 +96,56 @@ function ManageAgeGroupController($scope, $timeout, ManageAgeGroupService, apiSe
 						self.fields[value.field] = Constants.TRUE;
 					});
 				} else if(response.data) {
-					self.create = {};
-					self.create.success = Constants.TRUE;
+					self.setActive(Constants.ACTIVE_ADD);
+					self.success = Constants.MSG_CREATED("Age group");
 				}
 			}
-		$scope.ui_unblock();
+			
+			$scope.ui_unblock();
 		}).error(function(response){
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		})
 	}
 
-	self.getAgeGroupDetail = function(id) {
+	self.details = function(id) {
 		self.errors = Constants.FALSE;
 
 		$scope.ui_block();
-		ManageAgeGroupService.getAgeGroupDetail(id).success(function(response){
+		ManageAgeGroupService.details(id).success(function(response){
 			if(angular.equals(response.status,Constants.STATUS_OK)){
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
-					self.details = response.data;
+					self.record = response.data;
 				}
 			}
-		$scope.ui_unblock();
+		
+			$scope.ui_unblock();
 		}).error(function(response) {
-			self.errors = internalError();
+			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
 	}
 
-	self.saveAgeGroup = function() {
+	self.update = function() {
 		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+		
 		self.fields = [];
 
 		$scope.ui_block();
-		ManageAgeGroupService.saveAgeGroup(self.details).success(function(response){
+		ManageAgeGroupService.update(self.record).success(function(response){
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 
-					angular.forEach(response.errors, function(value, a) {
+					angular.forEach(response.errors, function(value, key) {
 						self.fields[value.field] = Constants.TRUE;
 					});
 				} else if(response.data) {
-					self.success = ManageModuleConstants.SUCCESS_EDIT_AGE_GROUP;
+					self.setActive(Constants.ACTIVE_EDIT);
+					self.success = Constants.MSG_UPDATED("Age group");
 				}
 			}
 		
@@ -163,8 +158,11 @@ function ManageAgeGroupController($scope, $timeout, ManageAgeGroupService, apiSe
 
 	self.confirmDelete = function(id) {
 		self.errors = Constants.FALSE;
-		self.delete.id = id;
-		self.delete.confirm = Constants.TRUE;
+		self.success = Constants.FALSE;
+		
+		self.record = {};
+		self.record.id = id;
+		self.record.confirm = Constants.TRUE;
 
 		$("#delete_age_group_modal").modal({
 	        backdrop: 'static',
@@ -178,13 +176,13 @@ function ManageAgeGroupController($scope, $timeout, ManageAgeGroupService, apiSe
 		self.success = Constants.FALSE;
 
 		$scope.ui_block();
-		ManageAgeGroupService.deleteAgeGroup(self.delete.id).success(function(response){
+		ManageAgeGroupService.deleteAgeGroup(self.record.id).success(function(response){
 			if(angular.equals(response.status,Constants.STATUS_OK)){
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
-					self.success = ManageModuleConstants.SUCCESS_DELETE_AGE_GROUP;
-					self.ageModuleList();
+					self.setActive(Constants.ACTIVE_LIST);
+					self.success = Constants.MSG_DELETED("Age group");
 				}
 			}
 			$scope.ui_unblock();

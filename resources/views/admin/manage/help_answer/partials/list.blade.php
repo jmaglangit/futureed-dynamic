@@ -1,5 +1,5 @@
 <div ng-if="answer.active_list">
-	<div class="col-xs-12" ng-if="answer.errors || answer.success">
+	<div class="col-xs-12 success-container" ng-if="answer.errors || answer.success">
 		<div class="alert alert-error" ng-if="answer.errors">
 			<p ng-repeat="error in answer.errors track by $index">
 				{! error !}
@@ -103,13 +103,13 @@
 		</div>
 	</div>
 	 
-	<div class="col-xs-12 table-container">
-		<div class="title-mid">
-			Help Answer List
-		</div>
-
+	<div class="table-container" ng-init="answer.list()">
 		<div class="list-container" ng-cloak>
-			<div class="size-container">
+			<div class="col-xs-6 title-mid">
+				Help Answer List
+			</div>
+
+			<div class="col-xs-6 size-container">
 				{!! Form::select('size'
 					, array(
 						  '10' => '10'
@@ -127,55 +127,53 @@
 				) !!}
 			</div>
 
-			<div class="clearfix"></div>
-			<div class="table-responsive" ng-init="answer.list()">
-				<table id="grade-list" class="table table-striped table-bordered">
-					<thead>
-				        <tr>
-				            <th>Module</th>
-				            <th>Subject</th>
-				            <th>Area</th>
-				            <th>Help Request</th>
-				            <th>Answer</th>
-				            <th>Status</th>
-				            <th ng-if="answer.records.length">Actions</th>
-				        </tr>
-			        </thead>
-			        <tbody>
-				        <tr ng-repeat="answerInfo in answer.records">
-				            <td>{! answerInfo.module.name !}</td>
-				            <td>{! answerInfo.subject.name !}</td>
-				            <td>{! answerInfo.subject_area.name !}</td>
-				            <td>{! answerInfo.help_request.title !}</td>
-				            <td>{! answerInfo.content !}</td>
-				            <td>{! answerInfo.request_answer_status !}</td>
-				            <td ng-if="answer.records.length">
-				            	<div class="row">
-				            		<div class="col-xs-4">
-				            			<a href="" ng-click="answer.setActive(futureed.ACTIVE_VIEW, answerInfo.id)"><span><i class="fa fa-eye"></i></span></a>
-				            		</div>
-				            		<div class="col-xs-4">
-				            			<a href="" ng-click="answer.setActive(futureed.ACTIVE_EDIT, answerInfo.id)"><span><i class="fa fa-pencil"></i></span></a>
-				            		</div>
-				            		<div class="col-xs-4">
-				            			<a href="" ng-click="answer.confirmDelete(answerInfo.id)"><span><i class="fa fa-trash"></i></span></a>
-				            		</div>	
-				            	</div>
-				            </td>
-				        </tr>
-				        <tr class="odd" ng-if="!answer.records.length && !answer.table.loading">
-				        	<td valign="top" colspan="7">
-				        		No records found
-				        	</td>
-				        </tr>
-				        <tr class="odd" ng-if="answer.table.loading">
-				        	<td valign="top" colspan="7">
-				        		Loading...
-				        	</td>
-				        </tr>
-			        </tbody>
-				</table>
-			</div>
+			<table class="col-xs-12 table table-striped table-bordered">
+				<thead>
+			        <tr>
+			            <th>Module</th>
+			            <th>Subject</th>
+			            <th>Area</th>
+			            <th>Help Request</th>
+			            <th>Answer</th>
+			            <th>Status</th>
+			            <th ng-if="answer.records.length">Actions</th>
+			        </tr>
+		        </thead>
+		        <tbody>
+			        <tr ng-repeat="answerInfo in answer.records">
+			            <td>{! answerInfo.module.name !}</td>
+			            <td>{! answerInfo.subject.name !}</td>
+			            <td>{! answerInfo.subject_area.name !}</td>
+			            <td>{! answerInfo.help_request.title !}</td>
+			            <td>{! answerInfo.content !}</td>
+			            <td>{! answerInfo.request_answer_status !}</td>
+			            <td ng-if="answer.records.length">
+			            	<div class="row">
+			            		<div class="col-xs-4">
+			            			<a href="" ng-click="answer.setActive(futureed.ACTIVE_VIEW, answerInfo.id)"><span><i class="fa fa-eye"></i></span></a>
+			            		</div>
+			            		<div class="col-xs-4">
+			            			<a href="" ng-click="answer.setActive(futureed.ACTIVE_EDIT, answerInfo.id)"><span><i class="fa fa-pencil"></i></span></a>
+			            		</div>
+			            		<div class="col-xs-4">
+			            			<a href="" ng-click="answer.confirmDelete(answerInfo.id)"><span><i class="fa fa-trash"></i></span></a>
+			            		</div>	
+			            	</div>
+			            </td>
+			        </tr>
+			        <tr class="odd" ng-if="!answer.records.length && !answer.table.loading">
+			        	<td valign="top" colspan="7">
+			        		No records found
+			        	</td>
+			        </tr>
+			        <tr class="odd" ng-if="answer.table.loading">
+			        	<td valign="top" colspan="7">
+			        		Loading...
+			        	</td>
+			        </tr>
+		        </tbody>
+			</table>
+
 			<div class="pull-right" ng-if="answer.records.length">
 				<pagination 
 					total-items="answer.table.total_items" 

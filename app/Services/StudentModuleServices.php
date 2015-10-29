@@ -3,21 +3,62 @@
 
 use FutureEd\Models\Repository\Module\ModuleRepositoryInterface;
 use FutureEd\Models\Repository\Question\QuestionRepositoryInterface;
+use FutureEd\Models\Repository\StudentModule\StudentModuleRepositoryInterface;
 use FutureEd\Models\Repository\StudentModuleAnswer\StudentModuleAnswerRepositoryInterface;
 
 class StudentModuleServices {
 
+	/**
+	 * @var ModuleRepositoryInterface
+	 */
 	protected $module;
 
+	/**
+	 * @var QuestionRepositoryInterface
+	 */
 	protected $question;
 
+	/**
+	 * @var StudentModuleAnswerRepositoryInterface
+	 */
 	protected $student_module_answer;
 
+	/**
+	 * @var StudentModuleRepositoryInterface
+	 */
+	protected $student_module;
 
+	/**
+	 * @var int
+	 */
+	protected $stuck = 0;
+
+	/**
+	 * @var int
+	 */
+	protected $high_effort = 0;
+
+	/**
+	 * @var int
+	 */
+	protected $struggling = 0;
+
+	/**
+	 * @var int
+	 */
+	protected $excelling = 0;
+
+	/**
+	 * @param ModuleRepositoryInterface $moduleRepositoryInterface
+	 * @param QuestionRepositoryInterface $questionRepositoryInterface
+	 * @param StudentModuleAnswerRepositoryInterface $studentModuleAnswerRepositoryInterface
+	 * @param StudentModuleRepositoryInterface $studentModuleRepositoryInterface
+	 */
 	public function __construct(
 		ModuleRepositoryInterface $moduleRepositoryInterface,
 		QuestionRepositoryInterface $questionRepositoryInterface,
-		StudentModuleAnswerRepositoryInterface $studentModuleAnswerRepositoryInterface
+		StudentModuleAnswerRepositoryInterface $studentModuleAnswerRepositoryInterface,
+		StudentModuleRepositoryInterface $studentModuleRepositoryInterface
 	){
 		$this->module = $moduleRepositoryInterface;
 
@@ -25,11 +66,16 @@ class StudentModuleServices {
 
 		$this->student_module_answer = $studentModuleAnswerRepositoryInterface;
 
+		$this->student_module = $studentModuleRepositoryInterface;
 	}
 
 	//TODO: GET THE NEXT QUESTION
 
 	//TODO: parse; get modules questions and levels
+	/**
+	 * @param $module_id
+	 * @return array
+	 */
 	public function getModuleQuestions($module_id){
 
 		//get points to finish.
@@ -54,12 +100,21 @@ class StudentModuleServices {
 	}
 
 	//TODO: get answers from db
+	/**
+	 * @param $student_module_id
+	 * @param $module_id
+	 * @return mixed
+	 */
 	public function getStudentModuleAnswer($student_module_id, $module_id){
 
 		return $this->student_module_answer->getStudentModuleAnswer($student_module_id,$module_id);
 	}
 
 	//TODO: get module points to finish
+	/**
+	 * @param $module_id
+	 * @return mixed
+	 */
 	public function getPointsToFinish($module_id){
 
 		//points to finish is also the number of questions to finish; 1 question is 1 point.
@@ -69,6 +124,12 @@ class StudentModuleServices {
 
 
 	//TODO: merge module answer
+	/**
+	 * @param $student_module_id
+	 * @param $module_id
+	 * @param $student_answer
+	 * @return int|mixed
+	 */
 	public function checkAnswers($student_module_id, $module_id,$student_answer){
 
 
@@ -263,6 +324,128 @@ class StudentModuleServices {
 	public function getNextQuestion($student_module_id, $module_id,$student_answer){
 
 		return $this->checkAnswers($student_module_id,$module_id,$student_answer);
+	}
+
+	/**
+	 * @param $class_id
+	 * @return array
+	 */
+	public function getStudentProgress($class_id){
+
+		//Struggling = 20% and Below of the Progress of the Module Per Class
+		//Excelling = 80% to 100% of the Progress of the Module Per Class
+		//Stuck - if get more than 40% in module wrong and must redo (progress)
+		//Mastered - If they get 80% above correct (progress)
+
+		$standing = [];
+
+		//get class id and student id
+		$student_module = $this->student_module->getStudentModuleByClassId($class_id);
+
+		foreach($student_module as $progress){
+
+			$data = new \stdClass();
+
+			$data->first_name = $progress->student->first_name;
+			$data->last_name = $progress->student->last_name;
+			$data->progress = $this->getProgressStatusConverter($progress);
+
+			array_push($standing,$data);
+
+		}
+
+		return $standing;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getStuck() {
+		return $this->stuck;
+	}
+
+	/**
+	 * @param int $stuck
+	 */
+	public function setStuck($stuck) {
+		$this->stuck += $stuck;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getHighEffort() {
+		return $this->high_effort;
+	}
+
+	/**
+	 * @param int $high_effort
+	 */
+	public function setHighEffort($high_effort) {
+		$this->high_effort += $high_effort;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getStruggling() {
+		return $this->struggling;
+	}
+
+	/**
+	 * @param int $struggling
+	 */
+	public function setStruggling($struggling) {
+		$this->struggling += $struggling;
+	}
+
+	/**
+	 * @return int
+	 */
+	public function getExcelling() {
+		return $this->excelling;
+	}
+
+	/**
+	 * @param int $excelling
+	 */
+	public function setExcelling($excelling) {
+		$this->excelling += $excelling;
+	}
+
+
+
+	/**
+	 * @param $progress_percentage
+	 * @return mixed|null
+	 */
+	public function getProgressStatusConverter($progress){
+
+		switch($progress->progress){
+
+			//Struggling 20 and below
+			case $progress->progress <= 20:
+
+				$this->setStruggling(1);
+				return config('futureed.student_struggling');
+				break;
+
+			//Excelling and Mastering/High Effort
+			case $progress->progress >= 80 && $progress->progress <= 100:
+
+				$this->setHighEffort(1);
+				$this->setExcelling(1);
+				return config('futureed.student_excelling');
+				break;
+
+			//None
+			default:
+
+				$this->setStuck(1);
+				return null;
+				break;
+		}
+
 	}
 
 }

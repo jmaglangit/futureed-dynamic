@@ -37,6 +37,8 @@
 		</div>
 	</div>
 
+	<br />
+	
 	<div class="btn-container" ng-if="profile.success">
 		{!! Html::link(route('student.profile.index'), 'View Profile'
 			, array(

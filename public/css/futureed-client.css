@@ -75,8 +75,9 @@ table#client-list{
 .alert-container {
 	margin-top: 30px;
 }
+
 .success-container {
-	padding: 15px 30px 0px 30px;
+	padding: 0px 30px;
 }
 
 .margin-side{
@@ -502,4 +503,8 @@ content legend {
 
 .teacher-module-container {
 	margin-bottom: 30px;
+}
+
+.alert-success, .alert-error {
+	margin-bottom: 15px;
 }

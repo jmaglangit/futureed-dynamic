@@ -82,7 +82,6 @@
     {!! Html::script('/js/ng-sortable.min.js')!!}
     {!! Html::script('/js/jquery.date-dropdowns.js') !!}
     
-    {!! Html::script('/js/student/app.js') !!}
     {!! Html::script('/js/futureed_constants.js') !!}
     {!! Html::script('/js/futureed_utils.js') !!}
 	{!! Html::script('/js/common/angular/marked.js')!!}

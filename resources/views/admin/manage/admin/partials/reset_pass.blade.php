@@ -4,17 +4,26 @@
 			<span>Reset Password</span>
 		</div>
 	</div>
+
+	<div class="col-xs-12 success-container" ng-if="admin.errors || admin.success">
+		<div class="alert alert-error" ng-if="admin.errors">
+			<p ng-repeat="error in admin.errors track by $index" > 
+				{! error !}
+			</p>
+		</div>
+		<div class="alert alert-success" ng-if="admin.success">
+			<p ng-repeat="success in admin.success track by $index" > 
+				{! success !}
+			</p>
+		</div>
+	</div>
+
 	{!! Form::open([
 			'id' => 'reset_pass_form',
 			'class' => 'form-horizontal'
 		]) 
 	!!}
 	<div class="form-content col-xs-12" ng-if="!admin.reset_success">
-		<div class="alert alert-error" ng-if="admin.errors">
-			<p ng-repeat="error in admin.errors track by $index">
-				{! error !}
-			</p>
-		</div>
 		<div class="form-group">
 			<label class="col-xs-3 control-label">Password <span class="required">*</span></label>
 			<div class="col-xs-5">
@@ -35,7 +44,7 @@
 						[
 							'placeholder' => 'Password'
 							, 'ng-model' => 'admin.change.confirm_password'
-							, 'ng-class' => "{ 'required-field' : admin.fields['confirm_password'] }"
+							, 'ng-class' => "{ 'required-field' : admin.fields['confirm_password'] || admin.fields['new_password'] }"
 							, 'class' => 'form-control'
 						]
 					) !!}

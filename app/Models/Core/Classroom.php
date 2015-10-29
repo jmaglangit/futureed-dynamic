@@ -1,5 +1,6 @@
 <?php namespace FutureEd\Models\Core;
 
+use Carbon\Carbon;
 use FutureEd\Models\Traits\TransactionTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -125,7 +126,14 @@ class Classroom extends Model {
 			$query->where('payment_status', $payment_status);
 
 		});
+	}
 
+	public function scopeValidSubscription($query){
+
+		return $query->whereHas('order', function ($query) {
+			$query->where('date_start','<=',Carbon::now())
+				->where('date_end','>=',Carbon::now());
+		});
 
 	}
 

@@ -11,7 +11,7 @@ interface UserRepositoryInterface {
 
 	public function getUsers();
 
-	public function getUser($id, $user_type);
+	public function getUser($id, $user_type = 'all');
 
 	public function getUserDetail($id, $user_type);
 
@@ -86,6 +86,18 @@ interface UserRepositoryInterface {
 	public function getFacebookId($id);
 
 	public function getGoogleId($id);
+
+	public function getSessionToken($id);
+
+	public function updateSessionToken($data);
+
+	public function emptySessionToken($id);
+
+	public function enableImpersonate($id, $impersonator);
+
+	public function disabledImpersonate($id);
+
+	public function getImpersonator($id);
 
 
 

@@ -1,29 +1,25 @@
 <div ng-if="student.active_view || student.active_edit">
 	<div class="content-title">
-		<div class="title-main-content" ng-if="student.active_view">
-			<span>View Student</span>
+		<div class="title-main-content">
+			<span>Student Details</span>
 		</div>
-		<div class="title-main-content" ng-if="student.active_edit">
-			<span>Edit Student</span>
+	</div>
+
+	<div class="col-xs-12 success-container" ng-if="student.errors || student.success">
+		<div class="alert alert-error" ng-if="student.errors">
+			<p ng-repeat="error in student.errors track by $index" > 
+				{! error !}
+			</p>
+		</div>
+		<div class="alert alert-success" ng-if="student.success">
+			<p> 
+				{! student.success !}
+			</p>
 		</div>
 	</div>
 
 	{!! Form::open(['class' => 'form-horizontal', 'id' => 'student_form']) !!}
-		<div class="col-xs-12 form-content">
-			<div class="alert alert-error" ng-if="student.errors">
-	            <p ng-repeat="error in student.errors track by $index" > 
-	              	{! error !}
-	            </p>
-	        </div>
-
-	        <div class="alert alert-success" ng-if="student.success">
-	        	<p>Successfully edited student.</p>
-	        </div>
-
-	        <div class="alert alert-success" ng-if="student.e_success">
-	        	<p>{! student.e_success !}</p>
-	        </div>
-
+		<div class="col-xs-12 search-container">
 			<fieldset>
 				<legend class="legend">
 					User Credentials
@@ -65,7 +61,7 @@
 									])
 							!!}
 
-							<span class="input-group-addon" ng-click="student.setActive('change')"><i class="fa fa-pencil edit-addon"></i></span>
+							<span class="input-group-addon" ng-click="student.setActive('change', student.record.id)"><i class="fa fa-pencil edit-addon"></i></span>
 						</div>
 					</div>
 
@@ -159,7 +155,7 @@
 							Form::text('state','',
 								[
 									'class' => 'form-control'
-									, 'ng-class' => "{ 'required-field' : student.fields['city'] }"
+									, 'ng-class' => "{ 'required-field' : student.fields['state'] }"
 									, 'ng-model' => 'student.record.state'
 									, 'ng-disabled' => 'student.active_view'
 									, 'placeHolder' => 'State'
@@ -193,10 +189,10 @@
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-if' => 'student.active_view'
-								, 'ng-click' => "student.setActive('edit', student.record.id)"
+								, 'ng-click' => "student.setActive(futureed.ACTIVE_EDIT, student.record.id)"
 							)
 						) !!}
-						{!! Form::button('Save'
+						{!! Form::button('Update'
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-if' => 'student.active_edit'

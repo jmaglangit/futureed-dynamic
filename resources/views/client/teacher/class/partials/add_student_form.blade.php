@@ -5,7 +5,7 @@
 		</div>
 	</div>
 
-	<div class="col-xs-12 success-container" ng-if="class.errors || class.success">
+	<div class="col-xs-12 search-container" ng-if="class.errors || class.success">
 		<div class="alert alert-error" ng-if="class.errors">
             <p ng-repeat="error in class.errors track by $index" > 
               	{! error !}
@@ -17,7 +17,7 @@
         </div>
     </div>
 
-	<div class="module-container">
+	<div class="col-xs-12 search-container">
         <div class="col-xs-6  col-xs-offset-2"> 
             <label class="cursor-pointer">
             {!! Form::radio('status'
@@ -194,7 +194,7 @@
             <div class="form-group">
                 <label class="col-md-3 control-label">Birthday <span class="required">*</span></label>
                 <div class="col-xs-6">
-                    <input type="hidden" id="student_bdate" ng-init="class.setDropdown()">
+                    <input type="hidden" id="birth_date" ng-init="class.setDropdown()">
                 </div>
             </div> 
             <div class="form-group">

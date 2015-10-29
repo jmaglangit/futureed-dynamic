@@ -8,9 +8,8 @@
 </div>
 
 <div class="nav-menu">
-
     <ul id="menu-content" class="nav-list">
-        <li  data-toggle="collapse" data-target="#students" class="collapsed side-nav-li" ng-class="{ 'active' : admincon.active_student}">
+        <li  data-toggle="collapse" data-target="#students" data-parent="#menu-content" class="collapsed side-nav-li" ng-class="{ 'active' : admincon.active_student}">
             <a href="" class="nav-link">
               User Management <i class="fa fa-caret-down"></i>
             </a>
@@ -29,7 +28,7 @@
             </li>
         </ul>
 
-        <li data-toggle="collapse" data-target="#module" class="collapsed side-nav-li">
+        <li data-toggle="collapse" data-target="#module" data-parent="#menu-content" class="collapsed side-nav-li">
             <a href="" class="nav-link">Module Management <i class="fa fa-caret-down"></i></a>
         </li>
         <ul class="sub-menu collapse" ng-class="{ 'in' : subject || grade }" id="module">
@@ -45,7 +44,7 @@
             </li>
         </ul> 
 
-        <li data-toggle="collapse" data-target="#price" class="collapsed side-nav-li" ng-class="{'active' : admincon.active_price}">
+        <li data-toggle="collapse" data-target="#price" data-parent="#menu-content" class="collapsed side-nav-li" ng-class="{'active' : admincon.active_price}">
             <a href="" class="nav-link">Price Management <i class="fa fa-caret-down"></i></a>
         </li>  
         <ul class="sub-menu collapse" ng-class="{ 'in' : sale || invoice }" id="price">
@@ -57,15 +56,18 @@
             </li>
         </ul>
 
-        <li data-toggle="collapse" data-target="#master" class="collapsed side-nav-li" ng-class="{'active' : admincon.active_announcement}">
+        <li data-toggle="collapse" data-target="#master" data-parent="#menu-content" class="collapsed side-nav-li" ng-class="{'active' : admincon.active_announcement}">
             <a href="" class="nav-link">Master Settings <i class="fa fa-caret-down"></i></a>
         </li>  
-        <ul class="sub-menu collapse" ng-class="{ 'in' : tips || announce }" id="master">
-            <li>
+        <ul class="sub-menu collapse" ng-class="{ 'in' : tips || announce || logs }" id="master">
+            <li ng-class="{ 'active' : announce }">
                 <a href="{!! route('admin.manage.announce.index') !!}"><span><i class="fa fa-bullhorn"></i>Announcement</span></a>
             </li>
-            <li>
+            <li ng-class="{ 'active' : tips }">
                 <a href="{!! route('admin.manage.tips.index') !!}"><span><i class="fa fa-lightbulb-o"></i> Tips & Help Requests</span></a>
+            </li>
+            <li ng-class="{ 'active' : logs }">
+                <a href="{!! route('admin.manage.logs.index') !!}"><span><i class="fa fa-file-o"></i> Logs </span></a>
             </li>
         </ul>
     </ul>

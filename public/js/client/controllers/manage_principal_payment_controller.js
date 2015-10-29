@@ -93,10 +93,15 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 
 	self.listPayments = function() {
 		self.errors = Constants.FALSE;
+		self.records = {};
 		self.search.client_id = $scope.user.id;
+
+		self.table.loading = Constants.TRUE;
 
 		$scope.ui_block();
 		managePrincipalPaymentService.list(self.search, self.table).success(function(response) {
+			self.table.loading = Constants.FALSE;
+
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
@@ -487,7 +492,7 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 		var client_id = $scope.user.id;
 
 		self.invoice.discount = Constants.FALSE;
-		self.invoice.discount_id = Constants.EMPTY_STR;
+		self.invoice.discount_id = Constants.FALSE;
 		self.invoice.discount_type = Constants.CLIENT;
 		self.invoice.total_amount = self.invoice.sub_total;
 

@@ -1,83 +1,60 @@
 angular.module('futureed.controllers')
 	.controller('ManageSubjectController', ManageSubjectController);
 
-ManageSubjectController.$inject = ['$scope', 'apiService','manageSubjectService', 'TableService', 'SearchService'];
+ManageSubjectController.$inject = ['$scope', 'apiService','ManageSubjectService', 'TableService', 'SearchService'];
 
-function ManageSubjectController($scope, apiService, manageSubjectService, TableService, SearchService) {
+function ManageSubjectController($scope, apiService, ManageSubjectService, TableService, SearchService) {
 	var self = this;
 
-	//Table Services
 	TableService(self);
 	self.tableDefaults();
 
 	SearchService(self);
 	self.searchDefaults();
 
-	self.search = {};
-	self.create = {};
-	self.delete = {};
-	self.details = {};
-
-	self.create_area = {};
-	self.search_area = {};
-	self.delete_area = {};
-	self.area_details = {};
-	self.errors = Constants.FALSE;
-
-	self.setManageSubjectActive = setManageSubjectActive;
-
-	/**
-	* Subject Function Calls
-	*/
-	self.addNewSubject = addNewSubject;
-
-	self.getSubjectDetails = getSubjectDetails;
-	self.updateSubjectDetails = updateSubjectDetails;
-
-	self.confirmDeleteSubject = confirmDeleteSubject;
-	self.deleteSubject = deleteSubject;
-
-	function setManageSubjectActive(active) {
+	self.setActive = function(active, id) {
 		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		self.fields = [];
+		self.record = {};
 
 		self.tableDefaults();
 		self.searchDefaults();
-	
-		self.create = {};
-		self.delete = {};
 
-		self.active_subject_details = Constants.FALSE;
-		self.active_add_subject = Constants.FALSE;
-		self.active_list_subject = Constants.FALSE;
+		self.active_edit = Constants.FALSE;
+		self.active_view = Constants.FALSE;
+		self.active_add = Constants.FALSE;
+		self.active_list = Constants.FALSE;
 
 		switch(active) {
-			case ManageSubjectConstants.VIEW_SUBJECT_ADD 			:
-				self.active_add_subject = Constants.TRUE;
+			case Constants.ACTIVE_ADD 			:
+				self.active_add = Constants.TRUE;
 				break;
 
-			case ManageSubjectConstants.VIEW_SUBJECT_DETAILS 		:
-				self.active_subject_details = Constants.TRUE;
+			case Constants.ACTIVE_EDIT 			:
+				self.active_edit = Constants.TRUE;
+				self.details(id);
 				break;
 
-			case ManageSubjectConstants.VIEW_SUBJECT_AREA_LIST		:
-				$scope.subject_area_list = Constants.TRUE;
+			case Constants.ACTIVE_VIEW			:
+				self.active_view = Constants.TRUE;
 				break;
 
-			case ManageSubjectConstants.VIEW_SUBJECT_LIST			:
+			case Constants.ACTIVE_LIST			:
 			default:
+				self.active_list = Constants.TRUE;
 				self.list();
-				self.active_list_subject = Constants.TRUE;
-				$scope.list_subject = Constants.TRUE;
 				break;
 		}
 
-		$('input, select').removeClass('required-field');
 	    $("html, body").animate({ scrollTop: 0 }, "slow");
 	}
 
 	self.searchFnc = function(event) {
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
+		
 		self.tableDefaults();
 		self.list();
 
@@ -87,25 +64,25 @@ function ManageSubjectController($scope, apiService, manageSubjectService, Table
 
 	self.list = function() {
 		self.errors = Constants.FALSE;
-		self.subjects = {};
+		self.records = {};
+
 		self.table.loading = Constants.TRUE;
 
 		$scope.ui_block();
-		manageSubjectService.getSubjectList(self.search, self.table).success(function(response) {
+		ManageSubjectService.getSubjectList(self.search, self.table).success(function(response) {
 			self.table.loading = Constants.FALSE;
 
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
-					self.subjects = response.data.records;
+					self.records = response.data.records;
 					self.updatePageCount(response.data);
 				}
 			}
 
 			$scope.ui_unblock();
 		}).error(function(response) {
-			self.table.loading = Constants.FALSE;
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
@@ -113,52 +90,31 @@ function ManageSubjectController($scope, apiService, manageSubjectService, Table
 
 	self.clear = function() {
 		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
 		self.searchDefaults();
 		self.tableDefaults();
 
 		self.list();
 	}
 
-	function addNewSubject() {
+	self.add = function() {
 		self.errors = Constants.FALSE;
-		self.create.success = Constants.FALSE;
-		$("input").removeClass("required-field");
+		self.success = Constants.FALSE;
+		self.fields = [];
 
 		$scope.ui_block();
-		manageSubjectService.addNewSubject(self.create).success(function(response) {
+		ManageSubjectService.add(self.record).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 
 					angular.forEach(response.errors, function(value, key) {
-						$("input[name='" + value.field + "']").addClass("required-field");
+						self.fields[value.field] = Constants.TRUE;
 					});
 				} else if(response.data) {
-					self.create = {};
-					self.create.success = Constants.TRUE;
-	    			$("html, body").animate({ scrollTop: 0 }, "slow");
-				}
-			}
-
-			$scope.ui_unblock();
-		}).error(function(response) {
-			$scope.ui_unblock();
-			self.errors = $scope.internalError();
-		});
-	}
-
-	function updateSubjectDetails() {
-		self.errors = Constants.FALSE;
-		self.details.success = Constants.FALSE;
-
-		$scope.ui_block();
-		manageSubjectService.updateSubjectDetails(self.details).success(function(response) {
-			if(angular.equals(response.status, Constants.STATUS_OK)) {
-				if(response.errors) {
-					self.errors = $scope.errorHandler(response.errors);
-				} else if(response.data) {
-					self.details.success = Constants.TRUE;
-	    			$("html, body").animate({ scrollTop: 0 }, "slow");
+					self.setActive(Constants.ACTIVE_ADD);
+					self.success = Constants.MSG_CREATED("Subject");
 				}
 			}
 
@@ -169,17 +125,43 @@ function ManageSubjectController($scope, apiService, manageSubjectService, Table
 		});
 	}
 
-	function getSubjectDetails(id) {
+	self.update = function() {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+		self.fields = [];
+
+		$scope.ui_block();
+		ManageSubjectService.update(self.record).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+
+					angular.forEach(response.errors, function(value, key) {
+						self.fields[value.field] = Constants.TRUE;
+					});
+				} else if(response.data) {
+					self.setActive(Constants.ACTIVE_EDIT, self.record.id);
+					self.success = Constants.MSG_UPDATED("Subject");
+				}
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.details = function(id) {
 		self.errors = Constants.FALSE;
 
 		$scope.ui_block();
-		manageSubjectService.getSubjectDetails(id).success(function(response) {
+		ManageSubjectService.details(id).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
-					self.details = response.data;
-					self.setManageSubjectActive('subject_details');
+					self.record = response.data;
 				}
 			}
 
@@ -190,11 +172,13 @@ function ManageSubjectController($scope, apiService, manageSubjectService, Table
 		});	
 	}
 
-	function confirmDeleteSubject(id) {
+	self.confirmDeleteSubject = function(id) {
 		self.errors = Constants.FALSE;
 
-		self.delete.id = id;
-		self.delete.confirm = Constants.TRUE;
+		self.record = {};
+		self.record.id = id;
+		self.record.confirm = Constants.TRUE;
+
 		$("#delete_subject_modal").modal({
 	        backdrop: 'static',
 	        keyboard: Constants.FALSE,
@@ -202,18 +186,16 @@ function ManageSubjectController($scope, apiService, manageSubjectService, Table
 	    });
 	}
 
-	function deleteSubject(id) {
+	self.deleteSubject = function() {
 		self.errors = Constants.FALSE;
 
-		manageSubjectService.deleteSubject(id).success(function(response) {
+		ManageSubjectService.deleteSubject(self.record.id).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
-					self.success = ManageSubjectConstants.DELETE_SUBJECT_SUCCESS;
-					self.list();
-
-					$("html, body").animate({ scrollTop: 0 }, "slow");
+					self.setActive();
+					self.success = Constants.MSG_DELETED("Subject");
 				}
 			}
 			
@@ -225,10 +207,10 @@ function ManageSubjectController($scope, apiService, manageSubjectService, Table
 	}
 
 	self.setSubjectAreaDetails = function(id, name) {
+		self.setActive(Constants.ACTIVE_VIEW);
+
 		self.subject_id = id;
 		self.subject_name = name;
-
-		self.setManageSubjectActive(ManageSubjectConstants.VIEW_SUBJECT_AREA_LIST);
 	}
 
 	$scope.getSubjectId = function() {

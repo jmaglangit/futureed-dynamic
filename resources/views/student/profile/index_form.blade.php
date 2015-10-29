@@ -35,7 +35,8 @@
 							, 'ng-model' => 'profile.prof.email'
 						)
 					) !!}
-					<span class="input-group-addon edit-addon" ng-click="profile.setStudentProfileActive('edit_email')"><i class="fa fa-pencil"></i></span>
+					<span ng-if="!user.media_login" class="input-group-addon edit-addon" ng-click="profile.setStudentProfileActive('edit_email')"><i class="fa fa-pencil"></i></span>
+					<span ng-if="user.media_login" class="input-group-addon edit-addon"><i class="fa fa-pencil disabled"></i></span>
 				</div>
 			</div>
 		</div>
@@ -217,4 +218,5 @@
 			</div>
 		</div>
 	</div>
+	<div class="form-group"></div>
 {!! Form::close() !!}

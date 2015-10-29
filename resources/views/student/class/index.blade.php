@@ -26,5 +26,4 @@
 	{!! Html::script('/js/common/search_service.js')!!}
 	{!! Html::script('/js/common/table_service.js')!!}
 	{!! Html::script('/js/student/class.js')!!}
-	{!! Html::script('/js/student/slug.js')!!}
 @stop

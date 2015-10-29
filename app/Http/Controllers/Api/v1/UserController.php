@@ -9,6 +9,7 @@ use FutureEd\Services\MailServices;
 use FutureEd\Services\CodeGeneratorServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
+use FutureEd\Http\Requests\Api\UserRequest;
 
 class UserController extends ApiController{
 
@@ -292,6 +293,51 @@ class UserController extends ApiController{
 
 
 
+
+    }
+
+    /**
+     * Logout user by user_type
+     * @param UserRequest $request
+     * @return mixed
+     */
+    public function logout(UserRequest $request){
+
+        //logout
+        //input id, user_type
+        //get token and and update user token to null
+
+        $id = $request->get('id');
+        $user_type = $request->get('user_type');
+        $user = new \stdClass();
+
+        switch($user_type){
+
+            case config('futureed.student'):
+
+                $user = $this->student->getStudent($id);
+                //get user_id of student
+                break;
+            case config('futureed.client'):
+
+                //get user_id of client
+                $user = $this->client->getClientDetails($id);
+
+                break;
+            case config('futureed.admin'):
+
+                //get user_id of admin
+                $user = $this->admin->getAdminDetail($id);
+                break;
+
+            default:
+
+                break;
+        }
+
+       //empty session in user table and boolean.
+        return ($this->user->emptySession($user->user_id))
+            ? $this->respondWithData(true) : $this->respondWithData(false);
 
     }
 

@@ -5,21 +5,48 @@ use FutureEd\Http\Requests\Api\InvoiceDetailRequest;
 
 use FutureEd\Models\Repository\InvoiceDetail\InvoiceDetailRepositoryInterface as InvoiceDetail;
 use FutureEd\Models\Repository\Invoice\InvoiceRepositoryInterface;
+use FutureEd\Models\Repository\Order\OrderRepositoryInterface;
+use FutureEd\Models\Repository\OrderDetail\OrderDetailRepositoryInterface;
 use Illuminate\Support\Facades\Input;
 
 class InvoiceDetailController extends ApiController {
 
+	/**
+	 * @var InvoiceDetail
+	 */
 	protected $detail;
+
+	/**
+	 * @var InvoiceRepositoryInterface
+	 */
 	protected $invoice;
 
-	public function __construct(InvoiceDetail $detail, InvoiceRepositoryInterface $invoice)
+	/**
+	 * @var OrderRepositoryInterface
+	 */
+	protected $order;
+
+	/**
+	 * @param InvoiceDetail $detail
+	 * @param InvoiceRepositoryInterface $invoice
+	 * @param OrderRepositoryInterface $orderRepositoryInterface
+	 */
+	public function __construct(
+		InvoiceDetail $detail,
+		InvoiceRepositoryInterface $invoice,
+		OrderRepositoryInterface $orderRepositoryInterface
+	)
 	{
 
 		$this->detail = $detail;
 		$this->invoice = $invoice;
+		$this->order = $orderRepositoryInterface;
 	}
 
 
+	/**
+	 * @return mixed
+	 */
 	public function viewInvoiceDetail()
 	{
 
@@ -44,6 +71,10 @@ class InvoiceDetailController extends ApiController {
 	}
 
 
+	/**
+	 * @param InvoiceDetailRequest $request
+	 * @return mixed
+	 */
 	public function editInvoiceDetails(InvoiceDetailRequest $request)
 	{
 
@@ -59,6 +90,11 @@ class InvoiceDetailController extends ApiController {
 
 		//update invoice
 		$this->invoice->updateInvoice($id, $data);
+
+		//update order payment_status
+		$invoice = $this->invoice->getInvoice($id);
+
+		$this->order->updateOrderPaymentStatusByOrderNo($invoice->order_no, $data['payment_status']);
 
 		//get updated invoice
 		$return = $this->invoice->getInvoice($id);

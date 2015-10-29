@@ -12,10 +12,10 @@
 			</p>
 		</div>
 
-        <div class="alert alert-success" ng-if="student.success">
-            <p>{! student.success !}</p>
-        </div>
-    </div>
+		<div class="alert alert-success" ng-if="student.success">
+			<p>{! student.success !}</p>
+		</div>
+	</div>
 
 	<div class="col-xs-12 search-container">
 		<div class="title-mid">
@@ -49,7 +49,7 @@
 					) !!}
 				</div>
 				<div class="col-xs-2">
-					{!! Form::button('Search', 
+					{!! Form::button('Search',
 						array(
 							'class' => 'btn btn-blue'
 							, 'ng-click' => "student.searchFnc()"
@@ -57,7 +57,7 @@
 					) !!}
 				</div>
 				<div class="col-xs-2">
-					{!! Form::button('Clear', 
+					{!! Form::button('Clear',
 						array(
 							'class' => 'btn btn-gold'
 							, 'ng-click' => 'student.clear()'
@@ -65,20 +65,21 @@
 					) !!}
 				</div>
 			</div>
+            {!! Form::close() !!}
 		</div>
 	</div>
 
 	<div class="col-xs-12 table-container">
-		<button class="btn btn-blue btn-small" ng-click="student.setActive(futureed.ACTIVE_ADD)">
+		<button class="btn btn-blue btn-semi-medium" ng-click="student.setActive(futureed.ACTIVE_ADD)">
 			<i class="fa fa-plus-square"></i> Add Student
 		</button>
 
 		<div class="list-container" ng-cloak ng-init="student.studentList()">
-			<div class="title-mid">
+			<div class="col-xs-6 title-mid">
 				Student List
 			</div>
 
-			<div class="size-container">
+			<div class="col-xs-6 size-container">
 				{!! Form::select('size'
 					, array(
 						  '10' => '10'
@@ -96,61 +97,85 @@
 				) !!}
 			</div>
 
-			<table class="table table-striped table-bordered">
+			<table class="col-xs-12 table table-striped table-bordered">
 				<thead>
-			        <tr>
-			            <th>Name</th>
-			            <th>Email</th>
-			            <th>Points</th>
-			            <th ng-if="student.records.length">Actions</th>
-			        </tr>
-			    </thead>
+					<tr>
+						<th>Name</th>
+						<th>Email</th>
+						<th>Points</th>
+						<th ng-if="student.records.length">Actions</th>
+					</tr>
+				</thead>
 
-		        <tbody>
-		        <tr ng-repeat="record in student.records">
-		            <td>{! record.user.name !}</td>
-		            <td>{! record.user.email !}</td>
-		            <td>{! record.points !}</td>
-		            <td ng-if="student.records.length">
-		            	<div class="row">
-		            		<div class="col-xs-4">
-	    						<a href="" ng-click="student.setActive(futureed.ACTIVE_VIEW, record.id)"><span><i class="fa fa-eye"></i></span></a>
-	    					</div>
-	    					<div class="col-xs-4">
-	    						<a href="" ng-click="student.setActive(futureed.ACTIVE_EDIT, record.id)"><span><i class="fa fa-pencil"></i></span></a>
-	    					</div>
-	    					<div class="col-xs-4">
-	    						<a href="" ng-click="student.confirmDelete(record.id)"><span><i class="fa fa-trash"></i></span></a>
-	    					</div>
-		            	</div>
-		            </td>
-		        </tr>
-		        <tr class="odd" ng-if="!student.records.length && !student.table.loading">
-		        	<td valign="top" colspan="7">
-		        		No records found
-		        	</td>
-		        </tr>
-		        <tr class="odd" ng-if="student.table.loading">
-		        	<td valign="top" colspan="7">
-		        		Loading...
-		        	</td>
-		        </tr>
-		        </tbody>
+				<tbody>
+				<tr ng-repeat="record in student.records">
+					<td>{! record.user.name !}</td>
+					<td>{! record.user.email !}</td>
+					<td>{! record.points !}</td>
+					<td ng-if="student.records.length">
+						<div class="row">
+
+                            <div class="col-xs-3">
+							<a ng-if="record.user.is_account_activated == 1
+									&& record.user.is_account_locked == 0
+									&& record.user.status == 'Enabled'
+									&& record.user.session_token == NULL "
+							   href="" ng-click="student.impersonate(record.user_id)"><span>
+										<i ng-class="{ 'success-icon' : record.user.impersonate }" class="fa fa-user-secret"></i></span></a>
+							<a ng-if="record.user.is_account_activated == 0
+								|| record.user.is_account_locked == 1
+								|| record.user.status == 'Disabled'
+								|| record.user.session_token != NULL "
+							   href="" ><span>
+									<i ng-class="{ 'success-icon' : record.user.impersonate }" class="fa fa-user-secret text-danger"></i></span></a>
+							</div>
+							<div class="col-xs-3">
+								<a href="" ng-click="student.setActive(futureed.ACTIVE_VIEW, record.id)"><span><i class="fa fa-eye"></i></span></a>
+							</div>
+							<div class="col-xs-3">
+								<a href="" ng-click="student.setActive(futureed.ACTIVE_EDIT, record.id)"><span><i class="fa fa-pencil"></i></span></a>
+							</div>
+							<div class="col-xs-3">
+								<a href="" ng-click="student.confirmDelete(record.id)"><span><i class="fa fa-trash"></i></span></a>
+							</div>
+						</div>
+					</td>
+				</tr>
+				<tr class="odd" ng-if="!student.records.length && !student.table.loading">
+					<td valign="top" colspan="7">
+						No records found
+					</td>
+				</tr>
+				<tr class="odd" ng-if="student.table.loading">
+					<td valign="top" colspan="7">
+						Loading...
+					</td>
+				</tr>
+				</tbody>
 			</table>
 
 			<div class="pull-right" ng-if="student.records.length">
-				<pagination 
-					total-items="student.table.total_items" 
+				<pagination
+					total-items="student.table.total_items"
 					ng-model="student.table.page"
 					max-size="student.table.paging_size"
-					items-per-page="student.table.size" 
+					items-per-page="student.table.size"
 					previous-text = "&lt;"
 					next-text="&gt;"
-					class="pagination" 
+					class="pagination"
 					boundary-links="true"
 					ng-change="student.paginateByPage()">
 				</pagination>
 			</div>
 		</div>
 	</div>
+    {!! Form::open(
+		array(
+			'id' => 'login_form'
+			, 'route' => 'student.login.process'
+			, 'method' => 'POST'
+		)
+	) !!}
+    {!! Form::hidden('user_data', '', array('id' => 'user_data')) !!}
+    {!! Form::close() !!}
 </div>

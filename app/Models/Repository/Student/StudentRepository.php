@@ -59,7 +59,7 @@ class StudentRepository implements StudentRepositoryInterface
 	 */
 	public function getStudent($id)
 	{
-		return Student::find($id);
+		return Student::with('user')->find($id);
 
 	}
 
@@ -230,7 +230,7 @@ class StudentRepository implements StudentRepositoryInterface
 	 */
 	public function getStudentId($user_id)
 	{
-		return Student::where('user_id', '=', $user_id)->pluck('id');
+		return Student::userId($user_id)->pluck('id');
 	}
 
 

@@ -17,12 +17,12 @@ class ClientRepository implements ClientRepositoryInterface
      * @param $role
      * @return mixed
      */
-    public function getClient($user_id, $role)
+    public function getClient($user_id, $role = 0)
     {
 
 		return Client::with('school')
 			->userid($user_id)
-			->role($role)->first();
+            ->first();
 
     }
 
@@ -95,7 +95,7 @@ class ClientRepository implements ClientRepositoryInterface
     public function getClientId($user_id)
     {
 
-        return Client::where('user_id', '=', $user_id)->pluck('id');
+        return Client::userId($user_id)->pluck('id');
     }
 
 	/**
@@ -126,7 +126,7 @@ class ClientRepository implements ClientRepositoryInterface
     public function getClientDetails($id)
     {
 
-        return Client::find($id);
+        return Client::with('user')->find($id);
 
     }
 

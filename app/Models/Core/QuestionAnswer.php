@@ -3,6 +3,8 @@
 use FutureEd\Models\Traits\TransactionTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Facades\Session;
 
 class QuestionAnswer extends Model {
 
@@ -20,7 +22,6 @@ class QuestionAnswer extends Model {
 		'created_at',
 		'updated_at',
 		'deleted_at',
-		'correct_answer'
 	];
 
 	protected $fillable =[
@@ -44,6 +45,52 @@ class QuestionAnswer extends Model {
 		'original_image_name' => 0,
 
 	];
+
+	//Accessor
+	public function getAnswerImageAttribute($value){
+
+		$filesystem = new Filesystem();
+
+		//get path
+		$image_path = config('futureed.answer_image_path_final') .'/'. $this->attributes['id'] . '/'. $value;
+
+		//check path
+		if($filesystem->exists($image_path)){
+			return asset(config('futureed.answer_image_path_final_public') .'/'. $this->attributes['id'] . '/'. $value);
+
+		} else {
+
+			return 'None';
+		}
+	}
+
+	//TODO: Remove this function. Remove answers on the controller level.
+	public function getCorrectAnswerAttribute($value){
+
+
+		if(session('current_user') || session('super_access')){
+
+			$user = User::find(session('current_user'));
+
+			//Check if user is Admin or not.
+			if($user->user_type == config('futureed.admin')){
+
+				return $value;
+			} elseif(session('super_access') == 1){
+
+				return $value;
+			}else{
+
+				return null;
+			}
+
+		} else {
+
+			return null;
+		}
+
+	}
+
 
 	//-------------scopes
 	public function scopeQuestionId($query, $question_id){

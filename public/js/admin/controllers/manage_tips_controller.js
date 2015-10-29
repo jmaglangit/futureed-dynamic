@@ -14,6 +14,7 @@ function ManageTipsController($scope, ManageTipsService, TableService, SearchSer
 
 	self.setActive = function(active, id) {
 		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
 		self.fields = [];
 
 		self.active_list = Constants.FALSE;
@@ -51,6 +52,7 @@ function ManageTipsController($scope, ManageTipsService, TableService, SearchSer
 	}
 
 	self.searchFnc = function(event) {
+		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
 
 		self.tableDefaults();
@@ -152,8 +154,8 @@ function ManageTipsController($scope, ManageTipsService, TableService, SearchSer
 						self.fields[value.field] = Constants.TRUE;
 					});
 				} else if(response.data) {
-					self.success = TipConstants.MSG_UPDATE_SUCCESS;
 					self.setActive(Constants.ACTIVE_VIEW, response.data.id);
+					self.success = Constants.MSG_UPDATED("Tip");
 				}
 			}
 
@@ -166,6 +168,9 @@ function ManageTipsController($scope, ManageTipsService, TableService, SearchSer
 
 	self.rateTip = function() {
 		self.rate_modal = Constants.TRUE;
+		self.rate_errors = Constants.FALSE;
+		self.rating = Constants.EMPTY_STR;
+
 		$("#rate_tip").modal({
 	        backdrop: 'static',
 	        keyboard: Constants.FALSE,
@@ -177,9 +182,9 @@ function ManageTipsController($scope, ManageTipsService, TableService, SearchSer
 		var data = {};
 			data.id = self.record.id;
 			data.rated_by = Constants.ADMIN;
-			data.tip_status = "Accepted";
+			data.tip_status = Constants.ACCEPTED;
 			data.rating = self.rating;
-			data.message = TipConstants.MSG_ACCEPT_TIP_SUCCESS;
+			data.message = "Tip accepted.";
 
 		updateTipStatus(data);
 	}
@@ -187,14 +192,16 @@ function ManageTipsController($scope, ManageTipsService, TableService, SearchSer
 	self.rejectTip = function() {
 		var data = {};
 			data.id = self.record.id;
-			data.tip_status = "Rejected";
-			data.message = TipConstants.MSG_REJECT_TIP_SUCCESS;
+			data.tip_status = Constants.REJECTED;
+			data.rated_by = Constants.ADMIN;
+			data.message = "Tip rejected.";
 
 		updateTipStatus(data);
 	}
 
 	function updateTipStatus(data) {
 		self.errors = Constants.FALSE;
+		self.rate_errors = Constants.FALSE;
 		self.success = Constants.FALSE;
 
 		$scope.ui_block();
@@ -204,9 +211,8 @@ function ManageTipsController($scope, ManageTipsService, TableService, SearchSer
 					self.rate_errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					$("#rate_tip").modal('hide');
-					self.success = data.message;
 					self.setActive(Constants.ACTIVE_VIEW, response.data.id);
-					self.rate_errors = Constants.FALSE;
+					self.success = data.message;
 				}
 			}
 
@@ -239,8 +245,8 @@ function ManageTipsController($scope, ManageTipsService, TableService, SearchSer
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
-					self.success = TipConstants.MSG_DELETE_SUCCESS;
 					self.setActive(Constants.ACTIVE_LIST);
+					self.success = Constants.MSG_DELETED("Tip");
 				}
 			}
 

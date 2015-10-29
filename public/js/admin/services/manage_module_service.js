@@ -1,16 +1,16 @@
 angular.module('futureed.services')
-	.factory('manageModuleService', manageModuleService);
+	.factory('ManageModuleService', ManageModuleService);
 
-manageModuleService.$inject = ['$http'];
+ManageModuleService.$inject = ['$http'];
 
-function manageModuleService($http) {
-	var moduleServiceApi = {};
-	var moduleServiceUrl = '/api/v1/';
+function ManageModuleService($http) {
+	var api = {};
+	var apiUrl = '/api/v1/';
 
-	moduleServiceApi.list = function(search, table) {
+	api.list = function(search, table) {
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url 	: moduleServiceUrl + 'module/admin?subject=' + search.subject
+			, url 	: apiUrl + 'module/admin?subject=' + search.subject
 				+ '&name=' + search.name
 				+ '&area=' + search.area
 				+ '&limit=' + table.size
@@ -18,50 +18,50 @@ function manageModuleService($http) {
 		});
 	}
 
-	moduleServiceApi.getSubject = function() {
+	api.getSubject = function() {
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url 	: moduleServiceUrl + 'subject'
+			, url 	: apiUrl + 'subject'
 		});
 	}
 
-	moduleServiceApi.searchArea = function(id, name) {
+	api.searchArea = function(id, name) {
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url 	: moduleServiceUrl + 'subject-area?subject_id=' + id
+			, url 	: apiUrl + 'subject-area?subject_id=' + id
 				+ '&name=' + name
 		});
 	}
 
-	moduleServiceApi.addNewModule  = function(data){
+	api.add  = function(data){
 		return $http({
 			method 	: Constants.METHOD_POST
 			, data 	: data
-			, url 	: moduleServiceUrl + 'module/admin'
+			, url 	: apiUrl + 'module/admin'
 		});
 	}
 
-	moduleServiceApi.getModuleDetail  = function(id) {
+	api.details  = function(id) {
 		return $http({
 			method 	: Constants.METHOD_GET
-			, url 	: moduleServiceUrl + 'module/admin/' + id
+			, url 	: apiUrl + 'module/admin/' + id
 		});
 	}
 
-	moduleServiceApi.saveModule  = function(data) {
+	api.update  = function(data) {
 		return $http({
 			method 	: Constants.METHOD_PUT
 			, data 	: data
-			, url 	: moduleServiceUrl + 'module/admin/' + data.id
+			, url 	: apiUrl + 'module/admin/' + data.id
 		});
 	}
 
-	moduleServiceApi.deleteModule  = function(id) {
+	api.deleteModule  = function(id) {
 		return $http({
 			method 	: Constants.METHOD_DELETE
-			, url 	: moduleServiceUrl + 'module/admin/' + id
+			, url 	: apiUrl + 'module/admin/' + id
 		});
 	}
 
-	return moduleServiceApi
+	return api
 }

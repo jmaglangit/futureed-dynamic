@@ -59,7 +59,6 @@ class UserMiddleware extends JWTMiddleware{
             return $this->respondWithError($this->getMessageBag());
         }
 
-		//TODO: CHECK user if it has right access.
 
 		//check id by user type
 		//if client and admin, check role.

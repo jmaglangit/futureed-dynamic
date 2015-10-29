@@ -8,7 +8,7 @@
             Are you sure you want to delete this subject area?
         </div>
         <div class="modal-footer">
-        	<div class="btncon col-md-8 col-md-offset-4 pull-left">
+        	<div class="btncon col-xs-8 col-xs-offset-4 pull-left">
                 {!! Form::button('Yes'
                     , array(
                         'class' => 'btn btn-blue btn-medium'

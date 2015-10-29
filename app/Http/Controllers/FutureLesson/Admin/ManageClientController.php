@@ -17,13 +17,6 @@ class ManageClientController extends Controller{
 	}
 
 	/**
-	* Manage Client Side Nav
-	*/
-	public function side_nav() {
-		return view('admin.manage.client.partials.client_side_nav');
-	}
-
-	/**
 	* List / Search Client
 	*/
 	public function list_client_form() {

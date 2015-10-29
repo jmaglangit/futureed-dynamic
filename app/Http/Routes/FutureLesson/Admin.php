@@ -118,13 +118,6 @@
 				Routes::group(['prefix' => 'partials'], function() {
 					$manage_client_controller = 'FutureLesson\Admin\ManageClientController';
 
-					Routes::get('/side_nav', [
-						  'as' => 'admin.manage.client.partials.side_nav'
-						, 'middleware' => 'admin'
-						, 'uses' => $manage_client_controller . '@side_nav'
-					]);
-
-
 					Routes::get('/list_client_form', [
 						  'as' => 'admin.manage.client.partials.list_client_form'
 						, 'middleware' => 'admin'
@@ -263,12 +256,6 @@
 							, 'middleware' => 'admin'
 							, 'uses' => $subject_controller . '@delete_subject_form'
 						]);
-					Routes::get('/subject_side_nav',
-						[
-							'as' => 'admin.manage.subject.partials.subject_side_nav'
-							, 'middleware' => 'admin'
-							, 'uses' => $subject_controller . '@subject_side_nav'
-						]);
 
 					/**
 					* CRUD Subject Areas
@@ -342,12 +329,6 @@
 							'as' => 'admin.manage.grades.partials.delete_grade_form'
 							, 'middleware' => 'admin'
 							, 'uses' => $grade_controller . '@delete_grade_form'
-						]);
-					Routes::get('/grade_side_nav',
-						[
-							'as' => 'admin.manage.grades.partials.grade_side_nav'
-							, 'middleware' => 'admin'
-							, 'uses' => $grade_controller . '@grade_side_nav'
 						]);
 				});
 			});
@@ -553,11 +534,6 @@
 
 				Routes::group(['prefix' => '/content'], function() {
 
-					Routes::get('/', 
-						['as' => 'admin.manage.module.content.index'
-							, 'uses' => 'FutureLesson\Admin\ManageModuleContentController@index'
-						]);
-
 					Routes::group(['prefix' => '/partials'], function() {
 
 						Routes::get('/add', 
@@ -654,6 +630,35 @@
 			Routes::get('/announcement', [
 					'as' => 'admin.dashboard.announcement'
 					, 'uses' => 'FutureLesson\Admin\DashboardController@announcement'
+				]);
+		});
+
+		Routes::group(['prefix' => '/logs'], function()
+		{
+			Routes::get('/', [
+					'as' => 'admin.manage.logs.index'
+					, 'middleware' => 'admin'
+					, 'uses' => 'FutureLesson\Admin\AdminLogsController@index'
+				]);
+			Routes::get('/security-list', [
+					'as' => 'admin.manage.logs.partials.security_list_form'
+					, 'uses' => 'FutureLesson\Admin\AdminLogsController@security_list_form'
+				]);
+			Routes::get('/administrator-list', [
+					'as' => 'admin.manage.logs.partials.admin_list_form'
+					, 'uses' => 'FutureLesson\Admin\AdminLogsController@admin_list_form'
+				]);
+			Routes::get('/user-list', [
+					'as' => 'admin.manage.logs.partials.user_list_form'
+					, 'uses' => 'FutureLesson\Admin\AdminLogsController@user_list_form'
+				]);
+			Routes::get('/system-list', [
+					'as' => 'admin.manage.logs.partials.system_list_form'
+					, 'uses' => 'FutureLesson\Admin\AdminLogsController@system_list_form'
+				]);
+			Routes::get('/errors-list', [
+					'as' => 'admin.manage.logs.partials.errors_list_form'
+					, 'uses' => 'FutureLesson\Admin\AdminLogsController@errors_list_form'
 				]);
 		});
 

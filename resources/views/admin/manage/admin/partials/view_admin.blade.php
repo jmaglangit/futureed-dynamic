@@ -8,23 +8,25 @@
 		</div>
 	</div>
 
+	<div class="col-xs-12 success-container" ng-if="admin.errors || admin.success">
+		<div class="alert alert-error" ng-if="admin.errors">
+			<p ng-repeat="error in admin.errors track by $index" > 
+				{! error !}
+			</p>
+		</div>
+		<div class="alert alert-success" ng-if="admin.success">
+			<p ng-repeat="success in admin.success track by $index" > 
+				{! success !}
+			</p>
+		</div>
+	</div>
+
 	{!! Form::open([
 			'id' => 'add_admin_form',
 			'class' => 'form-horizontal'
 		]) 
 	!!}
-	<div class="form-content col-xs-12">
-		<div class="alert alert-error" ng-if="admin.errors">
-			<p ng-repeat="error in admin.errors track by $index">
-				{! error !}
-			</p>
-		</div>
-		
-		<div class="alert alert-success" ng-if="admin.success">
-			<p ng-repeat="success in admin.success track by $index">
-				{! success !}
-			</p>
-		</div>
+	<div class="col-xs-12 search-container">
 		<fieldset>
 			<legend class="legend-name-mid">
 				User Credentials
@@ -53,17 +55,18 @@
 			<div class="form-group">
 				<label class="col-xs-3 control-label" id="email">Email <span class="required">*</span></label>
 				<div class="col-xs-4">
-					{!! Form::text('email', '',
-						[
-							'placeholder' => 'Email',
-							'ng-model' => 'admin.record.email',
-							'ng-disabled' => 'true',
-							'class' => 'form-control'
-						]
-					) !!}
-				</div>
-				<div class="col-xs-2">
-					<a href="" ng-click="admin.setActive('edit_email')" class="edit-email">Edit Email</a>
+					<div class="input-group">
+						{!! Form::text('email', '',
+							[
+								'placeholder' => 'Email',
+								'ng-model' => 'admin.record.email',
+								'ng-disabled' => 'true',
+								'class' => 'form-control'
+							]
+						) !!}
+
+						<span class="input-group-addon" ng-click="admin.setActive('edit_email')"><i class="fa fa-pencil edit-addon"></i></span>
+					</div>
 				</div>
 			</div>
 			<div class="form-group">
@@ -160,38 +163,42 @@
 					) !!}
 				</div>
 			</div>
-			<div class="btn-container col-xs-6 col-xs-offset-2" ng-if="admin.active_edit">
-				<div class="row form-group">		
-					<div class="col-xs-6">
-						{!! Form::button('Save'
-							, array(
-								'class' => 'btn btn-blue'
-								, 'ng-click' => "admin.updateAdmin()"
-							)
-						) !!}
+		</fieldset>
+		<fieldset>
+			<div class="form-group">
+				<div class="btn-container col-xs-6 col-xs-offset-2" ng-if="admin.active_edit">
+					<div class="row form-group">		
+						<div class="col-xs-6">
+							{!! Form::button('Save'
+								, array(
+									'class' => 'btn btn-blue'
+									, 'ng-click' => "admin.updateAdmin()"
+								)
+							) !!}
+						</div>
+						<div class="col-xs-6">
+							{!! Form::button('Cancel'
+								, array(
+									'class' => 'btn btn-gold'
+									, 'ng-click' => "admin.setActive(futureed.ACTIVE_VIEW, admin.record.id)"
+								)
+							) !!}
+						</div>
 					</div>
-					<div class="col-xs-6">
-						{!! Form::button('Cancel'
-							, array(
-								'class' => 'btn btn-gold'
-								, 'ng-click' => "admin.setActive(futureed.ACTIVE_VIEW, admin.record.id)"
-							)
-						) !!}
-					</div>
-				</div>
 
-				<div class="row form-group">
-					<div class="col-xs-12">
-						{!! Form::button('Reset Password'
-							, array(
-								'class' => 'btn btn-blue'
-								, 'ng-click' => "admin.setActive('pass')"
-							)
-						) !!}
+					<div class="row form-group">
+						<div class="col-xs-12">
+							{!! Form::button('Reset Password'
+								, array(
+									'class' => 'btn btn-blue'
+									, 'ng-click' => "admin.setActive('pass')"
+								)
+							) !!}
+						</div>
 					</div>
-				</div>
-			</div>	
-			<div class="btn-container col-xs-8 col-xs-offset-1" ng-if="admin.active_view">
+				</div>	
+				
+				<div class="btn-container col-xs-8 col-xs-offset-1" ng-if="admin.active_view">
 					{!! Form::button('Edit'
 						, array(
 							'class' => 'btn btn-blue btn-medium'
@@ -205,6 +212,7 @@
 							, 'ng-click' => "admin.setActive()"
 						)
 					) !!}		
+				</div>
 			</div>
 		</fieldset>
 	</div>

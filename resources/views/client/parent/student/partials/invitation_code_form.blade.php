@@ -4,14 +4,23 @@
 			<span>Invitation Code</span>
 		</div>
 	</div>
-	<div class="col-xs-12 form-content">
+
+	<div class="col-xs-12 success-container" ng-if="student.errors || student.success">
 		<div class="alert alert-error" ng-if="student.errors">
-            <p ng-repeat="error in student.errors track by $index" > 
-                {! error !}
-            </p>
-        </div>
+			<p ng-repeat="error in student.errors track by $index" > 
+				{! error !}
+			</p>
+		</div>
+		<div class="alert alert-success" ng-if="student.success">
+			<p> 
+				{! student.success !}
+			</p>
+		</div>
+	</div>
+
+	<div class="col-xs-12 search-container">
         {!! Form::open(['class' => 'form-horizontal', 'ng-submit' => 'student.submitCode($event)']) !!}
-	        <div class="col-xs-12">
+	        <fieldset>
 	        	<div class="form-group">
 	        		<label class="control-label col-xs-3">Invitation Code <span class="required">*</span></label>
 	        		<div class="col-xs-5">
@@ -60,7 +69,7 @@
 	        		<p>Please get this code from the student and input it on the field above.</p>
 	        		<p ng-if="!student.record.id">You can also confirm the invitation code in viewing the student details.</p>
 	        	</div>
-	        </div>
+	        </fieldset>
 	    {!! Form::close() !!}
 	</div>
 </div>

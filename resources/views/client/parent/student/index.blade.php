@@ -13,6 +13,7 @@
 			<div class="client-nav side-nav">
 				@include('client.partials.dshbrd-side-nav')			
 			</div>
+			
 			<div class="client-content">
 				<div template-directive template-url="{!! route('client.parent.student.partials.list_student_form') !!}"></div>
 

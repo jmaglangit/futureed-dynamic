@@ -1,15 +1,15 @@
 <div ng-if="help.active_list">
-	<div class="col-xs-12" ng-if="help.errors || help.success">
+	<div class="col-xs-12 success-container" ng-if="help.errors || help.success">
 		<div class="alert alert-error" ng-if="help.errors">
 			<p ng-repeat="error in help.errors track by $index">
 				{! error !}
 			</p>
 		</div>
 
-        <div class="alert alert-success" ng-if="help.success">
-            <p>{! help.success !}</p>
-        </div>
-    </div>
+		<div class="alert alert-success" ng-if="help.success">
+			<p>{! help.success !}</p>
+		</div>
+	</div>
 
 	<div class="col-xs-12 search-container">
 		<div class="title-mid">
@@ -80,12 +80,12 @@
 	</div>
 	 
 	<div class="col-xs-12 table-container">
-		<div class="title-mid">
-			Help Request List
-		</div>
-
 		<div class="list-container" ng-cloak>
-			<div class="size-container">
+			<div class="col-xs-6 title-mid">
+				Help Request List
+			</div>
+
+			<div class="col-xs-6 size-container">
 				{!! Form::select('size'
 					, array(
 						  '10' => '10'
@@ -103,50 +103,48 @@
 				) !!}
 			</div>
 
-			<div class="clearfix"></div>
-			<div class="table-responsive">
-				<table id="help-list" class="table table-striped table-bordered">
-					<thead>
-				        <tr>
-				            <th>Title</th>
-				            <th>Created By</th>
-				            <th>Date Created</th>
-				            <th>Date of Last Answer</th>
-				            <th>Status</th>
-				            <th ng-if="help.records.length">Actions</th>
-				        </tr>
-			        </thead>
-			        <tbody>
-				        <tr ng-repeat="helpInfo in help.records">
-				            <td>{! helpInfo.title !}</td>
-				            <td>{! helpInfo.student.first_name !} {! helpInfo.student.last_name !}</td>
-				            <td>{! helpInfo.created_at | ddMMyy : '-' !}</td>
-				            <td>{! helpInfo.last_answered_at | ddMMyy : '-' !}</td>
-				            <td>{! helpInfo.request_status !}</td>
-				            <td ng-if="help.records.length">
-				            	<div class="row">
-				            		<div class="col-xs-6">
-				            			<a href="" ng-click="help.setActive(futureed.ACTIVE_VIEW, helpInfo.id)"><span><i class="fa fa-eye"></i></span></a>
-				            		</div>
-				            		<div class="col-xs-6">
-				            			<a href="" ng-click="help.setActive(futureed.ACTIVE_EDIT, helpInfo.id)"><span><i class="fa fa-pencil"></i></span></a>
-				            		</div>
-				            	</div>
-				            </td>
-				        </tr>
-				        <tr class="odd" ng-if="!help.records.length && !help.table.loading">
-				        	<td valign="top" colspan="7">
-				        		No records found
-				        	</td>
-				        </tr>
-				        <tr class="odd" ng-if="help.table.loading">
-				        	<td valign="top" colspan="7">
-				        		Loading...
-				        	</td>
-				        </tr>
-			        </tbody>
-				</table>
-			</div>
+			<table class="col-xs-12 table table-striped table-bordered">
+				<thead>
+					<tr>
+						<th>Title</th>
+						<th>Created By</th>
+						<th>Date Created</th>
+						<th>Date of Last Answer</th>
+						<th>Status</th>
+						<th ng-if="help.records.length">Actions</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="record in help.records">
+						<td>{! record.title !}</td>
+						<td>{! record.student.first_name !} {! record.student.last_name !}</td>
+						<td>{! record.created_at | ddMMyy : '-' !}</td>
+						<td>{! record.last_answered_at | ddMMyy : '-' !}</td>
+						<td>{! record.request_status !}</td>
+						<td ng-if="help.records.length">
+							<div class="row">
+								<div class="col-xs-6">
+									<a href="" ng-click="help.setActive(futureed.ACTIVE_VIEW, record.id)"><span><i class="fa fa-eye"></i></span></a>
+								</div>
+								<div class="col-xs-6">
+									<a href="" ng-click="help.setActive(futureed.ACTIVE_EDIT, record.id)"><span><i class="fa fa-pencil"></i></span></a>
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr class="odd" ng-if="!help.records.length && !help.table.loading">
+						<td valign="top" colspan="7">
+							No records found
+						</td>
+					</tr>
+					<tr class="odd" ng-if="help.table.loading">
+						<td valign="top" colspan="7">
+							Loading...
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
 			<div class="pull-right" ng-if="help.records.length">
 				<pagination 
 					total-items="help.table.total_items" 

@@ -1,5 +1,5 @@
 <div ng-if="help.active_view || help.active_edit">
-	<div class="col-xs-12" ng-if="help.errors || help.success">
+	<div class="col-xs-12 success-container" ng-if="help.errors || help.success">
 		<div class="alert alert-error" ng-if="help.errors">
 			<p ng-repeat="error in help.errors track by $index">
 				{! error !}
@@ -11,19 +11,16 @@
         </div>
     </div>
 
-	<div class="module-container">
-		<div class="title-main-content">
-			<span>Help Request Detail</span>
-		</div>
-	</div>
-
-	<div class="form-content col-xs-12">
+	<div class="search-container col-xs-12">
 		{!! Form::open([
 				'id' => 'add_admin_form',
 				'class' => 'form-horizontal'
 			]) 
 		!!}
 			<fieldset>
+				<legend class="legend-name-mid">
+					Request Details
+				</legend>
 				<div class="form-group">
 					<div ng-if="help.record.link_type != futureed.GENERAL">
 						<label class="col-xs-2 control-label" id="username">Module <span class="required">*</span></label>
@@ -187,7 +184,7 @@
 					<div class="col-xs-6">
 						{!! Form::textarea('content','',
 							[
-								'class' => 'form-control',
+								'class' => 'form-control disabled-textarea',
 								'ng-disabled' => 'help.active_view',
 								'ng-model' => 'help.record.content',
 								'placeholder' => 'Description'
@@ -209,35 +206,37 @@
 						) !!}
 					</div>
 				</div>
-				<div class="btn-container col-xs-8 col-xs-offset-2" ng-if="help.active_edit">
-						{!! Form::button('Save'
-							, array(
-								'class' => 'btn btn-blue btn-medium'
-								, 'ng-click' => "help.updateHelp()"
-							)
-						) !!}
+				<div class="form-group">
+					<div class="btn-container col-xs-8 col-xs-offset-2" ng-if="help.active_edit">
+							{!! Form::button('Save'
+								, array(
+									'class' => 'btn btn-blue btn-medium'
+									, 'ng-click' => "help.updateHelp()"
+								)
+							) !!}
 
-						{!! Form::button('Cancel'
-							, array(
-								'class' => 'btn btn-gold btn-medium'
-								, 'ng-click' => "help.setActive(futureed.ACTIVE_VIEW, help.record.id)"
-							)
-						) !!}
-				</div>	
-				<div class="btn-container col-xs-8 col-xs-offset-2" ng-if="help.active_view">
-						{!! Form::button('Edit'
-							, array(
-								'class' => 'btn btn-blue btn-medium'
-								, 'ng-click' => "help.setActive(futureed.ACTIVE_EDIT, help.record.id)"
-							)
-						) !!}
+							{!! Form::button('Cancel'
+								, array(
+									'class' => 'btn btn-gold btn-medium'
+									, 'ng-click' => "help.setActive(futureed.ACTIVE_VIEW, help.record.id)"
+								)
+							) !!}
+					</div>	
+					<div class="btn-container col-xs-8 col-xs-offset-2" ng-if="help.active_view">
+							{!! Form::button('Edit'
+								, array(
+									'class' => 'btn btn-blue btn-medium'
+									, 'ng-click' => "help.setActive(futureed.ACTIVE_EDIT, help.record.id)"
+								)
+							) !!}
 
-						{!! Form::button('Cancel'
-							, array(
-								'class' => 'btn btn-gold btn-medium'
-								, 'ng-click' => "help.setActive()"
-							)
-						) !!}		
+							{!! Form::button('Cancel'
+								, array(
+									'class' => 'btn btn-gold btn-medium'
+									, 'ng-click' => "help.setActive()"
+								)
+							) !!}		
+					</div>
 				</div>
 			</fieldset>
 		{!! Form::close() !!}

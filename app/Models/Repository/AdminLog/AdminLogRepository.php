@@ -4,8 +4,14 @@ namespace FutureEd\Models\Repository\AdminLog;
 
 
 use FutureEd\Models\Core\AdminLog;
+use FutureEd\Models\Traits\LoggerTrait;
+use Illuminate\Support\Facades\DB;
+use League\Flysystem\Exception;
+use Monolog\Logger;
 
 class AdminLogRepository implements AdminLogRepositoryInterface{
+
+	use LoggerTrait;
 
 	/**
 	 * Get Admin log.
@@ -108,5 +114,32 @@ class AdminLogRepository implements AdminLogRepositoryInterface{
 			'total' => $count,
 			'record' => $log->get()->toArray()
 		];
+	}
+
+	/**
+	 * Add admin log.
+	 * @param $data
+	 */
+	public function addAdminLog($data){
+
+		DB::beginTransaction();
+
+		try{
+
+			$response = AdminLog::create($data);
+
+		}catch(\Exception $e){
+
+			$this->errorLog($e->getMessage());
+
+			DB::rollback();
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+
 	}
 }

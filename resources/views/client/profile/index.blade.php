@@ -1,12 +1,12 @@
 @extends('client.app')
 
 @section('navbar')
-    @include('client.partials.main-nav')
+	@include('client.partials.main-nav')
 @stop
 @section('content')
 	<div class="container dshbrd-con" ng-controller="ProfileController as profile" ng-init="profileActive = futureed.TRUE" ng-cloak>
-  		
-  		<div template-directive template-url="{!! route('client.partials.base_url') !!}"></div>
+		
+		<div template-directive template-url="{!! route('client.partials.base_url') !!}"></div>
 
 		<div class="wrapr">
 			<div class="client-nav side-nav">
@@ -22,22 +22,27 @@
 						<span ng-if="profile.active_password">Change Password</span>
 					</div>
 				</div>
-				<div class="form-content col-xs-12">
+
+				<div class="col-xs-12 search-container" ng-if="profile.errors || profile.success">
 					<div class="alert alert-error" ng-if="profile.errors">
-			            <p ng-repeat="error in profile.errors track by $index" > 
-			              	{! error !}
-			            </p>
-			        </div>
-	                <div class="alert alert-success" ng-if="profile.success">
-	                	<p>You have successfully updated your profile.</p>
-	                </div>
-	                <div template-directive template-url="{!! route('client.profile.partial.index_form') !!}"></div>
+						<p ng-repeat="error in profile.errors track by $index" > 
+							{! error !}
+						</p>
+					</div>
 
-	                <div template-directive template-url="{!! route('client.profile.partial.edit_email_form') !!}"></div>
+					<div class="alert alert-success" ng-if="profile.success">
+						<p>You have successfully updated your profile.</p>
+					</div>
+				</div>
+					
+				<div class="col-xs-12 search-container">
+					<div template-directive template-url="{!! route('client.profile.partial.index_form') !!}"></div>
 
-	                <div template-directive template-url="{!! route('client.profile.partial.confirm_email_form') !!}"></div>
+					<div template-directive template-url="{!! route('client.profile.partial.edit_email_form') !!}"></div>
 
-	                <div template-directive template-url="{!! route('client.profile.partial.change_password_form') !!}"></div>
+					<div template-directive template-url="{!! route('client.profile.partial.confirm_email_form') !!}"></div>
+
+					<div template-directive template-url="{!! route('client.profile.partial.change_password_form') !!}"></div>
 				</div>
 			</div>
 		</div>		
@@ -45,9 +50,7 @@
 @stop
 
 @section('scripts')
-	
 	{!! Html::script('/js/client/controllers/profile_controller.js') !!}
 	{!! Html::script('/js/client/services/profile_service.js') !!}
 	{!! Html::script('/js/client/profile.js') !!}
-
 @stop

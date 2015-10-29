@@ -66,11 +66,11 @@
 
 	<div class="col-xs-12 table-container">
 		<div class="list-container" ng-cloak>
-			<div class="title-mid">
+			<div class="col-xs-6 title-mid">
 				Module List
 			</div>
 
-			<div class="size-container">
+			<div class="col-xs-6 size-container">
 				{!! Form::select('size'
 					, array(
 						  '10' => '10'
@@ -88,7 +88,7 @@
 				) !!}
 			</div>
 
-			<table id="class-list" class="table table-striped table-bordered">
+			<table class="col-xs-12 table table-striped table-bordered">
 			<thead>
 		        <tr>
 		            <th>Module</th>

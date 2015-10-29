@@ -172,8 +172,7 @@ div > .nav-list > li > a{
 	float: right;
 }
 .table-container{
-	padding: 0 30px 0 30px;
-	margin-bottom: 30px;
+	padding: 0 30px 15px 30px;
 }
 .width-200 {
 	width: 200px;
@@ -250,7 +249,7 @@ input[type=radio]+.lbl::before{border-radius:32px;font-family:Arial,Helvetica,sa
 input[type=radio]:checked+.lbl::before{content:"\2022";}
 
 .success-container {
-	padding: 30px 30px 0px 30px;
+	padding: 0px 30px;
 }
 
 .panel-heading {
@@ -289,4 +288,42 @@ input[type=radio]:checked+.lbl::before{content:"\2022";}
 .top-40 {
 	position: relative;
 	top: 40px;
+}
+
+.nav-admin {
+	margin: 0px 25px;
+	border-bottom: 1px solid #e5e5e5;
+	margin-bottom: 17px;
+}
+
+.panel-body > .nav-admin {
+	margin-left: 0px;
+	margin-right: 0px;
+}
+
+.nav-admin li {
+	min-width: 134px;
+	text-align: center;
+}
+
+.nav-admin li a {
+	border-radius: 0px;
+	border-top-right-radius: 5px;
+	border-top-left-radius: 5px;
+	background-color: #EEEEEE;
+}
+
+.nav-admin li a:hover {
+	text-decoration: none;
+    color: #ffffff;
+    background-color: #337ab7;
+}
+
+.navbar-default .navbar-nav > li > a {
+    min-width: 100px;
+    text-align: center;
+}
+
+.navbar-default .navbar-nav > li > a:hover {
+    color: #777;
 }

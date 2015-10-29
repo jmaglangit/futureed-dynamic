@@ -16,8 +16,28 @@ Routes::group([
 		'as' => 'api.report.student.status'
 	]);
 
-	Routes::get('/student-progress/{id}',[
+	Routes::get('/student-progress/{id}/{subject_id}',[
 		'uses' => 'Api\Reports\StudentReportController@getStudentProgressReport',
 		'as' => 'api.report.student.progress'
 	]);
+
+	Routes::get('/student-progress/curriculum/{id}/{subject_id}',[
+		'uses' => 'Api\Reports\StudentReportController@getStudentSubjectGradeProgressReport',
+		'as' => 'api.report.student.progress.curriculum'
+	]);
+
+	Routes::get('/student-progress/current-learning/{student_id}/{subject_id}',[
+		'uses' => 'Api\Reports\StudentReportController@getStudentCurrentLearning',
+		'as' => 'api.report.student.progress.current-learning'
+	]);
+
+
+	/**
+	 * Class
+	 */
+	Routes::get('/classroom/{class_id}',[
+		'uses' => 'Api\Reports\ClassReportController@getClassReport',
+		'as' => 'api.report.classroom.status'
+	]);
+
 });

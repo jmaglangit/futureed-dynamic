@@ -1,11 +1,11 @@
 angular.module('futureed.services')
-	.factory('manageSubjectService', manageSubjectService);
+	.factory('ManageSubjectService', ManageSubjectService);
 
-manageSubjectService.$inject = ['$http'];
+ManageSubjectService.$inject = ['$http'];
 
-function manageSubjectService($http) {
-	var manageSubjectApi = {};
-	var manageSubjectApiUrl = '/api/v1/';
+function ManageSubjectService($http) {
+	var api = {};
+	var apiUrl = '/api/v1/';
 
 	/**
 	* Get Subject List
@@ -13,10 +13,10 @@ function manageSubjectService($http) {
 	* @Param
 	*		name - [Optional] the subject name
 	*/
-	manageSubjectApi.getSubjectList = function(search, table) {
+	api.getSubjectList = function(search, table) {
 		return $http({
 			  method : Constants.METHOD_GET
-			, url 	 : manageSubjectApiUrl 
+			, url 	 : apiUrl 
 				+ 'subject?name=' + search.name
 				+ '&limit=' + table.size
 				+ '&offset=' + table.offset
@@ -29,11 +29,11 @@ function manageSubjectService($http) {
 	* @Param
 	*		data - [Required] the subject data (code, name, description, status)
 	*/
-	manageSubjectApi.addNewSubject = function(data) {
+	api.add = function(data) {
 		return $http({
 			method 	 : Constants.METHOD_POST
 			, data	 : data
-			, url 	 : manageSubjectApiUrl + 'subject'
+			, url 	 : apiUrl + 'subject'
 		});
 	}
 
@@ -43,10 +43,10 @@ function manageSubjectService($http) {
 	* @Param
 	*		id 	- [Required] the subject id
 	*/
-	manageSubjectApi.getSubjectDetails = function(id) {
+	api.details = function(id) {
 		return $http({
 			  method : Constants.METHOD_GET
-			, url 	 : manageSubjectApiUrl + 'subject/' + id
+			, url 	 : apiUrl + 'subject/' + id
 		});
 	}
 
@@ -56,11 +56,11 @@ function manageSubjectService($http) {
 	* @Param
 	*		data - [Required] the updated subject data (code, name, description, status)
 	*/
-	manageSubjectApi.updateSubjectDetails = function(data) {
+	api.update = function(data) {
 		return $http({
 			  method : Constants.METHOD_PUT
 			, data	 : data
-			, url 	 : manageSubjectApiUrl + 'subject/' + data.id
+			, url 	 : apiUrl + 'subject/' + data.id
 		});
 	}
 
@@ -70,12 +70,12 @@ function manageSubjectService($http) {
 	* @Param
 	*		id 	- [Required] the subject id
 	*/
-	manageSubjectApi.deleteSubject = function(id) {
+	api.deleteSubject = function(id) {
 		return $http({
 			  method : Constants.METHOD_DELETE
-			, url 	 : manageSubjectApiUrl + 'subject/' + id
+			, url 	 : apiUrl + 'subject/' + id
 		});
 	}
 
-	return manageSubjectApi;
+	return api;
 }

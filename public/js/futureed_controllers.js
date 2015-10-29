@@ -20,7 +20,7 @@ function FutureedController($scope, $window, apiService, futureed) {
 	*/
 	$scope.highlight = highlight;
 
-	$scope.errorHandler = function(errors, flag) {
+	$scope.errorHandler = function(errors, noScroll) {
 		$scope.errors = [];
 
 		if(angular.isArray(errors)) {
@@ -48,7 +48,7 @@ function FutureedController($scope, $window, apiService, futureed) {
 		} else {
 			$scope.errors[0] = errors.message;
 		}
-		if(flag != 1) {
+		if(!noScroll) {
 			$("html, body").animate({ scrollTop: 0 }, "slow");
 		}
 		return $scope.errors;
@@ -138,6 +138,43 @@ function FutureedController($scope, $window, apiService, futureed) {
 
 	$scope.div_unblock = function(id) {
 		$("#" + id).unblock();
+	}
+
+	$scope.logout = function(id, user_type, callback) {
+		var data = {
+			id	: id
+			, user_type : user_type
+		}
+
+		apiService.logout(data).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					$scope.errorHandler(response.errors);
+				} else if(response.data) {
+					$window.location.href = callback;
+				}
+			}
+		}).error(function() {
+			$scope.internalError();
+		});
+	}
+
+	$scope.stopImpersonate = function(id,callback) {
+		var data = {
+			id	: id
+		}
+
+		apiService.stopImpersonate(data).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					$scope.errorHandler(response.errors);
+				} else if(response.data) {
+					$window.location.href = callback;
+				}
+			}
+		}).error(function() {
+			$scope.internalError();
+		});
 	}
 
 	function highlight(e) {
@@ -258,20 +295,6 @@ function FutureedController($scope, $window, apiService, futureed) {
 	$scope.getAvatarImages = getAvatarImages;
 	$scope.highlightAvatar = highlightAvatar;
 	$scope.selectAvatar = selectAvatar;
-
-	$scope.getLoginPassword = function(id) {
-		apiService.getLoginPassword(id).success(function (response) {
-			if(angular.equals(response.status, Constants.STATUS_OK)) {
-				if(response.errors) {
-					$scope.errorHandler(response.errors);
-				} else if(response.data) {
-					$scope.image_pass = response.data
-				}
-			}
-		}).error(function(response) {
-			$scope.internalError();
-		});
-	}
 
 	$scope.getUserDetails = function() {
 		var user = $("input[name='userdata']").val();

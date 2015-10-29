@@ -5,7 +5,8 @@
 @stop
 
 @section('content')
-	<div class="container dshbrd-con" ng-controller="ManageGradeController as grade" ng-cloak>
+	<div class="container dshbrd-con" ng-controller="ManageGradeController as grade" 
+		ng-init="grade.setActive()" ng-cloak>
   		
   		<div template-directive template-url="{!! route('admin.partials.base_url') !!}"></div>
 
@@ -26,7 +27,6 @@
 @stop
 	
 @section('scripts')
-	{!! Html::script('/js/admin/manage_grade.js')!!}
 	{!! Html::script('/js/admin/controllers/manage_grade_controller.js')!!}
 	{!! Html::script('/js/admin/services/manage_grade_service.js')!!}
 @stop

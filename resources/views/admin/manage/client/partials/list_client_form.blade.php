@@ -1,31 +1,29 @@
-<div ng-if="client.active_client_list">
+<div ng-if="client.active_list">
 	<div class="content-title">
 		<div class="title-main-content">
 			<span>Client Management</span>
 		</div>
 	</div>
 
-	<div class="col-xs-12 success-container" ng-if="client.errors || client.validate.c_success">
+	<div class="col-xs-12 success-container" ng-if="client.errors || client.success">
 		<div class="alert alert-error" ng-if="client.errors">
-            <p ng-repeat="error in client.errors track by $index" > 
-              	{! error !}
-            </p>
-        </div>
+			<p ng-repeat="error in client.errors track by $index" > 
+				{! error !}
+			</p>
+		</div>
 
-        <div class="alert alert-success" ng-if="client.validate.c_success">
-            <p> 
-                {! client.validate.c_success !}
-            </p>
-        </div>
-    </div>
-
-	<div class="col-xs-12 padding-0-30">
-		<div class="title-mid">
-			Search
+		<div class="alert alert-success" ng-if="client.success">
+			<p> 
+				{! client.success !}
+			</p>
 		</div>
 	</div>
 
 	<div class="col-xs-12 search-container">
+		<div class="title-mid">
+			Search
+		</div>
+		
 		{!! Form::open(
 			array('id' => 'search_form'
 				, 'class' => 'form-horizontal'
@@ -56,8 +54,8 @@
 					{!! Form::button('Search'
 						,array(
 							'class' => 'btn btn-blue'
-							, 'ng-click' => 'client.getClientList()'
-							)
+							, 'ng-click' => 'client.searchFnc()'
+						)
 					)!!}
 				</div>
 			</div>
@@ -92,7 +90,7 @@
 					{!! Form::button('clear'
 						,array(
 							'class' => 'btn btn-gold'
-							, 'ng-click' => 'client.clearSearchForm()'
+							, 'ng-click' => 'client.clearFnc()'
 							)
 					)!!}
 				</div>
@@ -102,16 +100,16 @@
 	</div>
 	 
 	<div class="col-xs-12 table-container">
-		<button class="btn btn-blue btn-small" ng-click="client.setManageClientActive('add_client')">
+		<button class="btn btn-blue btn-semi-medium" ng-click="client.setActive(futureed.ACTIVE_ADD)">
 			<i class="fa fa-plus-square"></i> Add Client
 		</button>
 
 		<div class="list-container" ng-cloak>
-			<div class="title-mid">
+			<div class="col-xs-6 title-mid">
 				Client List
 			</div>
 
-			<div class="size-container">
+			<div class="col-xs-6 size-container">
 				{!! Form::select('size'
 					, array(
 						  '10' => '10'
@@ -123,63 +121,71 @@
 					, array(
 						'ng-model' => 'client.table.size'
 						, 'ng-change' => 'client.paginateBySize()'
-						, 'ng-if' => "client.clients.length"
+						, 'ng-if' => "client.records.length"
 						, 'class' => 'form-control paginate-size pull-right'
 					)
 				) !!}
 			</div>
 
-			<table class="table table-striped table-bordered" >
+			<table class="col-xs-12 table table-striped table-bordered" >
 				<thead>
-			        <tr>
-			            <th class="width-200">Name</th>
-			            <th class="width-200">Email</th>
-			            <th>Role</th>
-			            <th>Account Status</th>
-			            <th>Action</th>
-			        </tr>
-		        </thead>
-		         <tbody>
-			        <tr ng-repeat="a in client.clients">
-			            <td>{! a.first_name !} {! a.last_name !}</td>
-			            <td>{! a.user.email !}</td>
-			            <td>{! a.client_role !}</td>
-			            <td>{! a.account_status !}</td>
-			            <td>
-			            	<div class="row">
-			            		<div class="col-xs-3">
-			            			<i class="fa" 
-			            				ng-class="{ 'fa-ban error-icon' : a.user.status == futureed.DISABLED, 'fa-check-circle-o success-icon' : a.user.status == futureed.ENABLED }"
-			            				tooltip="{! a.user.status !}"
-			            				tooltip-placement="top"
-			            				tooltip-trigger="mouseenter"></i>
-			            		</div>
-			            		<div class="col-xs-3">
-			            			<a href="" ng-click="client.setManageClientActive('view_client',a.id)"><span><i class="fa fa-eye"></i></span></a>
-			            		</div>
-			            		<div class="col-xs-3">
-			            			<a href="" ng-click="client.setManageClientActive('edit_client', a.id)"><span><i class="fa fa-pencil"></i></span></a>
-			            		</div>
-			            		<div class="col-xs-3">
-			            			<a href="" ng-click="client.confirmDelete(a.id)"><span><i class="fa fa-trash	"></i></span></a>
-			            		</div>
-			            	</div>
-			            </td>
-			        </tr>
-			        <tr class="odd" ng-if="!client.clients.length && !client.table.loading">
-			        	<td valign="top" colspan="5">
-			        		No records found
-			        	</td>
-			        </tr>
-			        <tr class="odd" ng-if="client.table.loading">
-			        	<td valign="top" colspan="5">
-			        		Loading...
-			        	</td>
-			        </tr>
-		        </tbody>
+					<tr>
+						<th>Name</th>
+						<th>Email</th>
+						<th>Role</th>
+						<th>Account Status</th>
+						<th ng-if="client.records.length">Action</th>
+					</tr>
+				</thead>
+				 <tbody>
+					<tr ng-repeat="record in client.records">
+						<td>{! record.first_name !} {! record.last_name !}</td>
+						<td>{! record.user.email !}</td>
+						<td>{! record.client_role !}</td>
+						<td>{! record.account_status !}</td>
+						<td>
+							<div class="row">
+								<div class="col-xs-3">
+									<i class="fa" 
+										ng-class="{ 'fa-ban error-icon' : record.user.status == futureed.DISABLED, 'fa-check-circle-o success-icon' : record.user.status == futureed.ENABLED }"
+										tooltip="{! record.user.status !}"
+										tooltip-placement="top"
+										tooltip-trigger="mouseenter"></i>
+								</div>
+								<div class="col-xs-2">
+									<a ng-if="record.account_status == 'Accepted' && record.user.session_token == NULL "
+									   href="" ng-click="client.impersonate(record.user_id)"><span>
+									<i ng-class="{ 'success-icon' : record.user.impersonate }" class="fa fa-user-secret"></i></span></a>
+									<a ng-if="record.account_status != 'Accepted' || record.user.session_token != NULL"
+									   href="" ><span>
+									<i ng-class="{ 'success-icon' : record.user.impersonate }" class="fa fa-user-secret text-danger"></i></span></a>
+								</div>
+								<div class="col-xs-2">
+									<a href="" ng-click="client.setActive(futureed.ACTIVE_VIEW, record.id)"><span><i class="fa fa-eye"></i></span></a>
+								</div>
+								<div class="col-xs-2">
+									<a href="" ng-click="client.setActive(futureed.ACTIVE_EDIT, record.id)"><span><i class="fa fa-pencil"></i></span></a>
+								</div>
+								<div class="col-xs-2">
+									<a href="" ng-click="client.confirmDelete(record.id)"><span><i class="fa fa-trash	"></i></span></a>
+								</div>
+							</div>
+						</td>
+					</tr>
+					<tr class="odd" ng-if="!client.records.length && !client.table.loading">
+						<td valign="top" colspan="5">
+							No records found
+						</td>
+					</tr>
+					<tr class="odd" ng-if="client.table.loading">
+						<td valign="top" colspan="5">
+							Loading...
+						</td>
+					</tr>
+				</tbody>
 			</table>
 
-			<div class="pull-right" ng-if="client.clients.length">
+			<div class="pull-right" ng-if="client.records.length">
 				<pagination 
 					total-items="client.table.total_items" 
 					ng-model="client.table.page"
@@ -194,4 +200,14 @@
 			</div>
 		</div>
 	</div>
+
+	{!! Form::open(
+		array(
+			'id' => 'login_form'
+			, 'route' => 'client.login.process'
+			, 'method' => 'POST'
+		)
+	) !!}
+		{!! Form::hidden('user_data', '', array('id' => 'user_data')) !!}
+	{!! Form::close() !!}
 </div>

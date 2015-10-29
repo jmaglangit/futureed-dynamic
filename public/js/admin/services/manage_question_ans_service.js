@@ -4,13 +4,13 @@ angular.module('futureed.services')
 ManageQuestionAnsService.$inject = ['$http'];
 
 function ManageQuestionAnsService($http) {
-    var qaServiceApi = {};
-    var qaServiceUrl = '/api/v1/';
+    var api = {};
+    var apiUrl = '/api/v1/';
 
-    qaServiceApi.list = function(id, search, table) {
+    api.list = function(search, table) {
         return $http({
             method  : Constants.METHOD_GET
-            , url   : qaServiceUrl + 'question/admin?module_id=' + id
+            , url   : apiUrl + 'question/admin?module_id=' + search.module_id
                 + '&question_type=' + search.question_type
                 + '&questions_text=' + search.questions_text
                 + '&limit=' + table.size
@@ -18,72 +18,72 @@ function ManageQuestionAnsService($http) {
         });
     }
 
-    qaServiceApi.addNewQuestion = function(data) {
+    api.add = function(data) {
         return $http({
             method  : Constants.METHOD_POST
             , data  : data
-            , url   : qaServiceUrl + 'question/admin'
+            , url   : apiUrl + 'question/admin'
         });
     }
 
-    qaServiceApi.getQuestionDetail = function(id) {
+    api.details = function(id) {
         return $http({
             method  : Constants.METHOD_GET
-            , url   : qaServiceUrl + 'question/admin/' + id
+            , url   : apiUrl + 'question/admin/' + id
         });
     }
 
-    qaServiceApi.saveEditQuestion = function(data) {
+    api.update = function(data) {
         return $http({
             method  : Constants.METHOD_PUT
             , data  : data
-            , url   : qaServiceUrl + 'question/admin/' + data.id
+            , url   : apiUrl + 'question/admin/' + data.id
         });
     }
 
-    qaServiceApi.deleteQuestion = function(id) {
+    api.deleteQuestion = function(id) {
         return $http({
             method  : Constants.METHOD_DELETE
-            , url   : qaServiceUrl + 'question/admin/' + id
+            , url   : apiUrl + 'question/admin/' + id
         });
     }
 
-    qaServiceApi.addAnswer = function(data) {
+    api.addAnswer = function(data) {
         return $http({
             method  : Constants.METHOD_POST
             , data  : data
-            , url   : qaServiceUrl + 'question/answer/admin'
+            , url   : apiUrl + 'question/answer/admin'
         });
     }
 
-    qaServiceApi.answerList = function(id) {
+    api.listAnswer = function(question_id) {
         return $http({
             method  : Constants.METHOD_GET
-            , url   : qaServiceUrl + 'question/answer/admin?question_id=' + id
+            , url   : apiUrl + 'question/answer/admin?question_id=' + question_id
         });
     }
 
-    qaServiceApi.deleteAnswer = function(id) {
+    api.deleteAnswer = function(id) {
         return $http({
             method  : Constants.METHOD_DELETE
-            , url   : qaServiceUrl + 'question/answer/admin/' + id
+            , url   : apiUrl + 'question/answer/admin/' + id
         });
     }
 
-    qaServiceApi.getAnswerDetail = function(id) {
+    api.answerDetails = function(id) {
         return $http({
             method  : Constants.METHOD_GET
-            , url   : qaServiceUrl + 'question/answer/admin/' + id
+            , url   : apiUrl + 'question/answer/admin/' + id
         });
     }
 
-    qaServiceApi.saveAnswer = function(data) {
+    api.updateAnswer = function(data) {
         return $http({
             method  : Constants.METHOD_PUT
             , data  : data
-            , url   : qaServiceUrl + 'question/answer/admin/' + data.id
+            , url   : apiUrl + 'question/answer/admin/' + data.id
         });
     }
 
-    return qaServiceApi;
+    return api;
 }
