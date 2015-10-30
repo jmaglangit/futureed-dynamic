@@ -153,8 +153,12 @@
 										tooltip-trigger="mouseenter"></i>
 								</div>
 								<div class="col-xs-2">
-									<a href="" ng-click="client.impersonate(record.user_id)"><span>
-										<i ng-class="{ 'success-icon' : record.user.impersonate }" class="fa fa-user-secret"></i></span></a>
+									<a ng-if="record.account_status == 'Accepted' && record.user.session_token == NULL "
+									   href="" ng-click="client.impersonate(record.user_id)"><span>
+									<i ng-class="{ 'success-icon' : record.user.impersonate }" class="fa fa-user-secret"></i></span></a>
+									<a ng-if="record.account_status != 'Accepted' || record.user.session_token != NULL"
+									   href="" ><span>
+									<i ng-class="{ 'success-icon' : record.user.impersonate }" class="fa fa-user-secret text-danger"></i></span></a>
 								</div>
 								<div class="col-xs-2">
 									<a href="" ng-click="client.setActive(futureed.ACTIVE_VIEW, record.id)"><span><i class="fa fa-eye"></i></span></a>
