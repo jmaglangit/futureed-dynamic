@@ -28,8 +28,11 @@
 
 			<div class="questions-answers">
 				<a ng-if="mod.current_question.question_type == futureed.MULTIPLECHOICE" href="" class="choices" ng-repeat="choices in mod.current_question.question_answers"
-					ng-click="mod.selectAnswer(choices)" ng-class="{ 'selected-choice' : mod.current_question.answer_id == choices.id }">{! choices.answer_text !}</a>
-				
+					ng-click="mod.selectAnswer(choices)" ng-class="{ 'selected-choice' : mod.current_question.answer_id == choices.id }">
+					<div ng-if="choices.answer_text != '' ">{! choices.answer_text !}</div>
+					<img ng-if="choices.answer_image != 'None' " ng-src="{! choices.answer_image !}" />
+				</a>
+
 				<div ng-if="mod.current_question.question_type == futureed.FILLINBLANK" class="form-group">
 					<div ng-class="{ 'fib-text-fields' : mod.current_question.answer_text_field_count.length > 1 }">
 						<input ng-repeat="n in mod.current_question.answer_text_field_count track by $index" 

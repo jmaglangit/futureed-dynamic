@@ -975,6 +975,12 @@ hr {
 	font-size: 1.25em;
 }
 
+.choices img{
+	/*height: 200px;*/
+	max-width: 200px;
+	margin: 2px 2px 2px 2px;
+}
+
 .choices:hover, .selected-choice
 , .selected-choice:focus, .choices:focus {
 	text-decoration: none;
