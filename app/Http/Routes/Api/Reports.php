@@ -40,4 +40,17 @@ Routes::group([
 		'as' => 'api.report.classroom.status'
 	]);
 
+	/**
+	 * School
+	 */
+	Routes::get('/school/{school_code}',[
+		'uses' => 'Api\Reports\SchoolReportController@getSchoolProgress',
+		'as' => 'api.report.school.status'
+	]);
+
+	Routes::get('/school/{school_code}/teachers',[
+		'uses' => 'Api\Reports\SchoolReportController@getSchoolTeacherProgress',
+		'as' => 'api.report.school.teacher.progress'
+	]);
+
 });
