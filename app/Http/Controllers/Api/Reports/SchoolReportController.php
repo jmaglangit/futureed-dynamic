@@ -3,53 +3,106 @@
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
+use FutureEd\Models\Core\StudentModule;
+use FutureEd\Models\Repository\School\SchoolRepositoryInterface;
+use FutureEd\Models\Repository\StudentModule\StudentModuleRepositoryInterface;
+use FutureEd\Services\SchoolServices;
+use FutureEd\Services\StudentModuleServices;
 use Illuminate\Http\Request;
 
 class SchoolReportController extends ReportController {
 
-	public function __construct(){}
+	protected $school;
 
-		//-- Key Skills to watch
-		//-- Average of progress of subject area of the whole school
-		//
-		//select
-		//sm.student_id, sm.subject_id, sm.module_id, sm.progress
-		//,m.grade_id as m_grade_id, m.code as m_code, m.name as m_name, m.subject_area_id
-		//,sa.id as sa_id, sa.code as sa_code,sa.name as sa_name
-		//,c.id as c_id,c.name as c_name
-		//,st.first_name, st.last_name, st.school_code
-		//from student_modules sm
-		//left join modules m on m.id=sm.module_id
-		//left join subject_areas sa on sa.id=m.subject_area_id
-		//left join classrooms c on c.id = sm.class_id
-		//left join orders o on o.order_no=c.order_no
-		//left join students st on st.id=sm.student_id and st.school_code is not null
-		//where
-		//sm.module_status <> 'Failed'
-		//and sm.deleted_at is null
-		//and date(o.date_start) <= now() and date(o.date_end) >= now()
-		//and school_code = 1
-		//
-		//;
+	protected $student_module;
 
-	public function getSchoolProgress(){
+	protected $school_service;
+
+	public function __construct(
+		SchoolRepositoryInterface $schoolRepositoryInterface,
+		StudentModuleRepositoryInterface $studentModuleRepositoryInterface,
+		SchoolServices $schoolServices
+	) {
+		$this->school = $schoolRepositoryInterface;
+		$this->student_module = $studentModuleRepositoryInterface;
+		$this->school_service = $schoolServices;
+	}
+
+
+	public function getSchoolProgress($school_code) {
+
 
 		// Key Skills to watch
+		$skill = $this->school->getSchoolAreaRanking($school_code);
+
+		$skill_watch = [
+			'highest_skill' => null,
+			'lowest_skill' => null
+		];
+
+		if ($skill) {
+
+			$skills = $skill->toArray();
+			$skill_watch['highest_skill'] = reset($skills);
+			$skill_watch['lowest_skill'] = (count($skills) > 1) ? end($skills) : null;
+		}
 
 		// Key classes to watch
-		// highest scorer
-		// lowest scorer
-		// Key student to watch
+		$class = $this->school->getSchoolClassRanking($school_code);
+
+		$class_watch = [
+			'highest_class' => null,
+			'lowest_class' => null
+		];
+
+		if ($class) {
+
+			$classes = $class->toArray();
+			$class_watch['highest_class'] = reset($classes);
+			$class_watch['lowest_class'] = (count($classes) > 1) ? end($classes) : null;
+		}
+
+		// highest scorer - on hold
+		// lowest scorer - on hold
+
+		// Key student to watch - refer to previous query
+		$student = $this->school->getSchoolStudentRanking($school_code);
+
+		$student_progress = $this->school_service->getStudentProgress($student);
+
+		$student_watch = $student_progress;
 
 
 		$additional_information = [];
 
-		$column_header = [];
+		$column_header = [
+			'skills_watch' => 'Key Skill areas to watch',
+		];
 
-		$rows = [];
+		$rows = [
+			'skills_watch' => $skill_watch,
+			'class_watch' => $class_watch,
+			'student_watch' => $student_watch
+		];
 
-		return $this->respondReportData($additional_information,$column_header,$rows);
+		return $this->respondReportData($additional_information, $column_header, $rows);
+	}
 
+	public function getSchoolTeacherProgress($school_code){
+
+		//Teacher progress.
+		$class = $this->school->getSchoolClassRanking($school_code);
+
+		$additional_information = [];
+
+		$column_header = [
+			'teacher_list' => 'Teacher',
+			'progress' => 'Progress'
+		];
+
+		$rows = $class->toArray();
+
+		return $this->respondReportData($additional_information, $column_header, $rows);
 	}
 
 }
