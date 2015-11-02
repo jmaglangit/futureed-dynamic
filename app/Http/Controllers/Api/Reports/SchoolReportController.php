@@ -12,12 +12,26 @@ use Illuminate\Http\Request;
 
 class SchoolReportController extends ReportController {
 
+	/**
+	 * @var SchoolRepositoryInterface
+	 */
 	protected $school;
 
+	/**
+	 * @var StudentModuleRepositoryInterface
+	 */
 	protected $student_module;
 
+	/**
+	 * @var SchoolServices
+	 */
 	protected $school_service;
 
+	/**
+	 * @param SchoolRepositoryInterface $schoolRepositoryInterface
+	 * @param StudentModuleRepositoryInterface $studentModuleRepositoryInterface
+	 * @param SchoolServices $schoolServices
+	 */
 	public function __construct(
 		SchoolRepositoryInterface $schoolRepositoryInterface,
 		StudentModuleRepositoryInterface $studentModuleRepositoryInterface,
@@ -29,6 +43,10 @@ class SchoolReportController extends ReportController {
 	}
 
 
+	/**
+	 * @param $school_code
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
 	public function getSchoolProgress($school_code) {
 
 
@@ -88,6 +106,10 @@ class SchoolReportController extends ReportController {
 		return $this->respondReportData($additional_information, $column_header, $rows);
 	}
 
+	/**
+	 * @param $school_code
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
 	public function getSchoolTeacherProgress($school_code){
 
 		//Teacher progress.

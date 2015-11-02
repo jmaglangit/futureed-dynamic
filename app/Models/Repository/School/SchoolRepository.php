@@ -238,6 +238,10 @@ class SchoolRepository implements SchoolRepositoryInterface{
 	}
 
 
+	/**
+	 * @param $school_code
+	 * @return string
+	 */
 	public function getSchoolClassRanking($school_code){
 			//select
 			///* s.id as s_id,s.code as s_code
@@ -312,6 +316,10 @@ class SchoolRepository implements SchoolRepositoryInterface{
 	}
 
 
+	/**
+	 * @param $school_code
+	 * @return string
+	 */
 	public function getSchoolStudentRanking($school_code){
 			//select
 			///* s.id as s_id,s.code as s_code
