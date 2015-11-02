@@ -24,4 +24,6 @@ interface SchoolRepositoryInterface {
     public function getSchoolCode($school_name);
 
     public function searchSchool($school_name);
+
+    public function getSchoolAreas($school_id);
 }
