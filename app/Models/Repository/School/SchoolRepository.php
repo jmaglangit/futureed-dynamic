@@ -1,35 +1,48 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jason
- * Date: 3/17/15
- * Time: 10:35 AM
- */
 
 namespace FutureEd\Models\Repository\School;
 
 use FutureEd\Models\Core\School;
+use FutureEd\Models\Traits\LoggerTrait;
+use Illuminate\Support\Facades\DB;
 use League\Flysystem\Exception;
 use FutureEd\Services\CodeGeneratorServices;
 use Carbon\Carbon;
 
 
 class SchoolRepository implements SchoolRepositoryInterface{
-	
+
+	use LoggerTrait;
+
+	/**
+	 * @param CodeGeneratorServices $code
+	 */
 	public function __construct(CodeGeneratorServices $code){
 		$this->code = $code;
 	}
+
+	/**
+	 * @return \Illuminate\Database\Eloquent\Collection|static[]
+	 */
 	public function getSchools(){
 
         return School::all();
     }
 
+	/**
+	 * @param $school_code
+	 * @return mixed
+	 */
 	public function getSchoolName($school_code){
 
 		return School::where('code','=',$school_code)->pluck('name');
 	}
 
-	public function addSchool($school){		
+	/**
+	 * @param $school
+	 * @return int|string
+	 */
+	public function addSchool($school){
 		$code = $code = Carbon::now()->timestamp;
 		try{
 			School::insert([
@@ -53,11 +66,19 @@ class SchoolRepository implements SchoolRepositoryInterface{
 		return $code;
 	}
 
+	/**
+	 * @param $name
+	 * @return mixed
+	 */
 	public function getSchoolId($name){
 		//return user id
         return School::where('name','=',$name)->pluck('id');            
 	}
 
+	/**
+	 * @param $input
+	 * @return mixed
+	 */
 	public function checkSchoolName($input){
 
 		return School::where('name','=',$input['school_name'])
@@ -65,12 +86,20 @@ class SchoolRepository implements SchoolRepositoryInterface{
             ->where('state','=',$input['school_state'])->pluck('id');
 	}
 
+	/**
+	 * @param $id
+	 * @return mixed
+	 */
 	public function getSchoolDetails($id){
 
 		return School::where('code','=',$id)->first();
 
 	}
 
+	/**
+	 * @param $input
+	 * @return mixed
+	 */
 	public function checkSchoolNameExist($input){
 
 		return School::where('name','=',$input['school_name'])
@@ -78,6 +107,10 @@ class SchoolRepository implements SchoolRepositoryInterface{
             ->where('state','=',$input['school_state'])->pluck('code');
 	}
 
+	/**
+	 * @param $input
+	 * @return string
+	 */
 	public function updateSchoolDetails($input){
 
 
@@ -106,16 +139,249 @@ class SchoolRepository implements SchoolRepositoryInterface{
 
 	}
 
+	/**
+	 * @param $school_name
+	 * @return mixed
+	 */
 	public function getSchoolCode($school_name){
 
 		return School::where('name','=',$school_name)->pluck('code');
 
 	}
 
+	/**
+	 * @param $school_name
+	 * @return mixed
+	 */
 	public function searchSchool($school_name){
 
 		return School::select('name','code','city','state','street_address')
 						->where('name','Like',$school_name.'%')->get()->toArray();
+
+
+	}
+
+	/**
+	 * @param $school_id
+	 */
+	public function getSchoolAreaRanking($school_code) {
+		//select
+		//-- s.id as s_id,s.code as s_code
+		//-- ,c.id as c_id, c.user_id as c_user_id
+		//-- ,cr.id as cr_id,cr.name as cr_name
+		//-- ,sb.id as sb_id,sb.name as sb_name
+		//-- ,sa.id as sa_id,sa.name as sa_name
+		//-- ,m.id as m_id, m.name as m_name
+		//-- ,sm.id as sm_id,sm.class_id as sm_class_id, sm.subject_id as sm_subject_id,sm.student_id as sm_student_id, sm.module_status as sm_module_status, sm.progress as sm_progress
+		//-- ,
+		//sa.name as subject_name, avg(sm.progress) as percent_progress
+		//from schools s
+		//left join clients c on s.code=c.school_code and c.client_role='Teacher'
+		//left join classrooms cr on cr.client_id=c.id
+		//left join orders o on o.order_no=cr.order_no
+		//left join subjects sb on sb.id=cr.subject_id
+		//left join subject_areas sa on sa.subject_id=sb.id
+		//left join modules m on m.subject_area_id=sa.id
+		//left join student_modules sm on sm.module_id=m.id and sm.subject_id=sb.id and sm.class_id=cr.id and sm.module_status <> 'Failed' and sm.deleted_at is NULL
+		//where
+		//s.code = 1441379529
+		//and date(o.date_start) <= now() and date(o.date_end) >= now()
+		//and cr.id is not null
+		//and sm.module_id is not null
+		//and sm.progress > 0
+		//group by sa.name
+		//order by percent_progress desc
+		//;
+
+		DB::beginTransaction();
+		try {
+
+			$response = School::select(
+				DB::raw('sa.name as subject_name'),
+				DB::raw('avg(sm.progress) as percent_progress')
+			)->leftJoin('clients as c', function ($left_join) {
+				$left_join->on('schools.code', '=', 'c.school_code')
+					->on('c.client_role', '=', DB::raw("'" . config('futureed.teacher') . "'"));
+			})->leftJoin('classrooms as cr', 'cr.client_id', '=', 'c.id')
+				->leftJoin('orders as o', 'o.order_no', '=', 'cr.order_no')
+				->leftJoin('subjects as sb', 'sb.id', '=', 'cr.subject_id')
+				->leftJoin('subject_areas as sa', 'sa.subject_id', '=', 'sb.id')
+				->leftJoin('modules as m', 'm.subject_area_id', '=', 'sa.id')
+				->leftJoin('student_modules as sm', function ($left_join) {
+					$left_join->on('sm.module_id', '=', 'm.id')
+						->on('sm.subject_id', '=', 'sb.id')
+						->on('sm.class_id', '=', 'cr.id')
+						->on('sm.module_status', '<>', DB::raw("'" . config('futureed.module_status_failed') . "'"))
+						->whereNULL('sm.deleted_at');
+				})->where('schools.code', '=', $school_code)
+				->where(DB::raw('o.date_start'), '<=', DB::raw('now()'))
+				->where(DB::raw('o.date_end'), '>=', DB::raw('now()'))
+				->whereNotNull('cr.id')
+				->whereNotNull('sm.module_id')
+				->where('sm.progress', '>', 0)
+				->groupBy('sa.name')
+				->orderBy('percent_progress', 'desc')
+				->get();
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return $e->getMessage();
+		}
+
+		DB::commit();
+
+		return $response;
+	}
+
+
+	public function getSchoolClassRanking($school_code){
+			//select
+			///* s.id as s_id,s.code as s_code
+			//,c.id as c_id, c.user_id as c_user_id
+			//,cr.id as cr_id,cr.name as cr_name
+			//,sb.id as sb_id,sb.name as sb_name
+			//,sa.id as sa_id,sa.name as sa_name
+			//,m.id as m_id, m.name as m_name
+			//,sm.id as sm_id,sm.class_id as sm_class_id, sm.subject_id as sm_subject_id,sm.student_id as sm_student_id, sm.module_status as sm_module_status, sm.progress as sm_progress
+			//,  */
+			//-- sa.name as subject_name, avg(sm.progress) as percent_progress
+			//c.id, c.first_name, c.last_name, cr.name, avg(sm.progress) as percent_progress
+			//from schools s
+			//left join clients c on s.code=c.school_code and c.client_role='Teacher'
+			//left join classrooms cr on cr.client_id=c.id
+			//left join orders o on o.order_no=cr.order_no
+			//left join subjects sb on sb.id=cr.subject_id
+			//left join subject_areas sa on sa.subject_id=sb.id
+			//left join modules m on m.subject_area_id=sa.id
+			//left join student_modules sm on sm.module_id=m.id and sm.subject_id=sb.id and sm.class_id=cr.id and sm.module_status <> 'Failed' and sm.deleted_at is NULL
+			//where
+			//s.code = 1441379529
+			//and date(o.date_start) <= now() and date(o.date_end) >= now()
+			//and cr.id is not null
+			//and sm.module_id is not null
+			//and sm.progress > 0
+			//group by c.id
+			//order by percent_progress desc
+			//;
+
+		DB::beginTransaction();
+		try {
+
+			$response = School::select(
+				DB::raw('c.id, c.first_name, c.last_name, cr.name as class_name, avg(sm.progress) as percent_progress')
+			)->leftJoin('clients as c', function ($left_join) {
+				$left_join->on('schools.code', '=', 'c.school_code')
+					->on('c.client_role', '=', DB::raw("'" . config('futureed.teacher') . "'"));
+			})->leftJoin('classrooms as cr', 'cr.client_id', '=', 'c.id')
+				->leftJoin('orders as o', 'o.order_no', '=', 'cr.order_no')
+				->leftJoin('subjects as sb', 'sb.id', '=', 'cr.subject_id')
+				->leftJoin('subject_areas as sa', 'sa.subject_id', '=', 'sb.id')
+				->leftJoin('modules as m', 'm.subject_area_id', '=', 'sa.id')
+				->leftJoin('student_modules as sm', function ($left_join) {
+					$left_join->on('sm.module_id', '=', 'm.id')
+						->on('sm.subject_id', '=', 'sb.id')
+						->on('sm.class_id', '=', 'cr.id')
+						->on('sm.module_status', '<>', DB::raw("'" . config('futureed.module_status_failed') . "'"))
+						->whereNULL('sm.deleted_at');
+				})->where('schools.code', '=', $school_code)
+				->where(DB::raw('o.date_start'), '<=', DB::raw('now()'))
+				->where(DB::raw('o.date_end'), '>=', DB::raw('now()'))
+				->whereNotNull('cr.id')
+				->whereNotNull('sm.module_id')
+				->where('sm.progress', '>', 0)
+				->groupBy('c.id')
+				->orderBy('percent_progress', 'desc')
+				->get();
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return $e->getMessage();
+		}
+
+		DB::commit();
+
+		return $response;
+	}
+
+
+	public function getSchoolStudentRanking($school_code){
+			//select
+			///* s.id as s_id,s.code as s_code
+			//,c.id as c_id, c.user_id as c_user_id
+			//,cr.id as cr_id,cr.name as cr_name
+			//,sb.id as sb_id,sb.name as sb_name
+			//,sa.id as sa_id,sa.name as sa_name
+			//,m.id as m_id, m.name as m_name
+			//,sm.id as sm_id,sm.class_id as sm_class_id, sm.subject_id as sm_subject_id,sm.student_id as sm_student_id, sm.module_status as sm_module_status, sm.progress as sm_progress */
+			//stud.id, stud.first_name, stud.last_name, avg(sm.progress) as percent_progress
+			//from schools s
+			//left join clients c on s.code=c.school_code and c.client_role='Teacher'
+			//left join classrooms cr on cr.client_id=c.id
+			//left join orders o on o.order_no=cr.order_no
+			//left join subjects sb on sb.id=cr.subject_id
+			//left join subject_areas sa on sa.subject_id=sb.id
+			//left join modules m on m.subject_area_id=sa.id
+			//left join student_modules sm on sm.module_id=m.id and sm.subject_id=sb.id and sm.class_id=cr.id and sm.module_status <> 'Failed' and sm.deleted_at is NULL
+			//left join students stud on stud.id=sm.student_id
+			//where
+			//s.code = 1441379529
+			//and date(o.date_start) <= now() and date(o.date_end) >= now()
+			//and cr.id is not null
+			//and sm.module_id is not null
+			//and sm.progress > 0
+			//group by stud.id
+			//order by percent_progress desc
+			//;
+		DB::beginTransaction();
+		try {
+
+			$response = School::select(
+				DB::raw('stud.id, stud.first_name, stud.last_name, avg(sm.progress) as percent_progress')
+			)->leftJoin('clients as c', function ($left_join) {
+				$left_join->on('schools.code', '=', 'c.school_code')
+					->on('c.client_role', '=', DB::raw("'" . config('futureed.teacher') . "'"));
+			})->leftJoin('classrooms as cr', 'cr.client_id', '=', 'c.id')
+				->leftJoin('orders as o', 'o.order_no', '=', 'cr.order_no')
+				->leftJoin('subjects as sb', 'sb.id', '=', 'cr.subject_id')
+				->leftJoin('subject_areas as sa', 'sa.subject_id', '=', 'sb.id')
+				->leftJoin('modules as m', 'm.subject_area_id', '=', 'sa.id')
+				->leftJoin('student_modules as sm', function ($left_join) {
+					$left_join->on('sm.module_id', '=', 'm.id')
+						->on('sm.subject_id', '=', 'sb.id')
+						->on('sm.class_id', '=', 'cr.id')
+						->on('sm.module_status', '<>', DB::raw("'" . config('futureed.module_status_failed') . "'"))
+						->whereNULL('sm.deleted_at');
+				})->leftJoin('students as stud','stud.id','=','sm.student_id')
+				->where('schools.code', '=', $school_code)
+				->where(DB::raw('o.date_start'), '<=', DB::raw('now()'))
+				->where(DB::raw('o.date_end'), '>=', DB::raw('now()'))
+				->whereNotNull('cr.id')
+				->whereNotNull('sm.module_id')
+				->where('sm.progress', '>', 0)
+				->groupBy('stud.id')
+				->orderBy('percent_progress', 'desc')
+				->get();
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return $e->getMessage();
+		}
+
+		DB::commit();
+
+		return $response;
 
 
 	}
