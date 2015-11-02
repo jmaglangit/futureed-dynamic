@@ -32,5 +32,12 @@ Routes::group([
 	]);
 
 
+	/**
+	 * Class
+	 */
+	Routes::get('/classroom/{class_id}',[
+		'uses' => 'Api\Reports\ClassReportController@getClassReport',
+		'as' => 'api.report.classroom.status'
+	]);
 
 });

@@ -218,7 +218,11 @@ return [
 
 	//Logs
 	'user_log' => 'User',
-	'admin_log' => 'Admin'
+	'admin_log' => 'Admin',
+
+	//Reports
+	'student_excelling' => 'Excelling',
+	'student_struggling' => 'Struggling',
 	
 
 ];

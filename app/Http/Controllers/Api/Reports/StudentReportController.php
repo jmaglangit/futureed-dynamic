@@ -146,14 +146,14 @@ class StudentReportController extends ReportController {
 		$student_country = (in_array($student->country_id,$countries)) ?
 			$student->country_id : config('futureed.default_country');
 
-		$header = $this->module->getModuleGradeByStudentCountry($student_country);
+		$header = $this->grade->getGradesByCountries($student_country);;
 
 		$column_header = [];
 		$rows = [];
 
 		foreach($header as $column){
 
-			$column_header = array_add($column_header,$column->grade_id,$column->grade_name);
+			$column_header = array_add($column_header,$column->id,$column->name);
 		}
 
 		$column_header = [$column_header];
