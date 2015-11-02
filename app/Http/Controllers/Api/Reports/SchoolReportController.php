@@ -5,7 +5,7 @@ use FutureEd\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
 
-class SchoolReportController extends Controller {
+class SchoolReportController extends ReportController {
 
 	public function __construct(){}
 
@@ -32,5 +32,24 @@ class SchoolReportController extends Controller {
 		//
 		//;
 
+	public function getSchoolProgress(){
+
+		// Key Skills to watch
+
+		// Key classes to watch
+		// highest scorer
+		// lowest scorer
+		// Key student to watch
+
+
+		$additional_information = [];
+
+		$column_header = [];
+
+		$rows = [];
+
+		return $this->respondReportData($additional_information,$column_header,$rows);
+
+	}
 
 }
