@@ -599,5 +599,13 @@ class StudentRepository implements StudentRepositoryInterface
 		return Student::with('user')->googleId($google_id)->get();
 	}
 
+	/**
+	 * @param $student_id
+	 */
+	public function getStudentPoints($student_id){
+
+		return Student::whereId($student_id)->pluck('points');
+	}
+
 
 }

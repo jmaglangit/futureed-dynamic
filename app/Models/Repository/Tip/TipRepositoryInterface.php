@@ -17,4 +17,6 @@ interface TipRepositoryInterface {
 
 	public function viewCurrentTips($class_id);
 
+	public function getStudentActiveTips($student_id, $subject_id);
+
 }
