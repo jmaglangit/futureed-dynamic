@@ -6,10 +6,14 @@ use FutureEd\Models\Repository\Avatar\AvatarRepositoryInterface;
 use FutureEd\Models\Repository\ClassStudent\ClassStudentRepositoryInterface;
 use FutureEd\Models\Repository\Grade\GradeRepositoryInterface;
 use FutureEd\Models\Repository\Module\ModuleRepositoryInterface;
+use FutureEd\Models\Repository\PointLevel\PointLevelRepositoryInterface;
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use FutureEd\Http\Requests\Api\StudentReportRequest;
+use FutureEd\Models\Repository\StudentBadge\StudentBadgeRepositoryInterface;
 use FutureEd\Models\Repository\StudentModule\StudentModuleRepository;
+use FutureEd\Models\Repository\StudentModule\StudentModuleRepositoryInterface;
 use FutureEd\Models\Repository\SubjectArea\SubjectAreaRepository;
+use FutureEd\Models\Repository\Tip\TipRepositoryInterface;
 use FutureEd\Services\AvatarServices;
 use FutureEd\Services\StudentServices;
 
@@ -33,41 +37,56 @@ class StudentReportController extends ReportController {
 
 	protected $subject_areas;
 
+	protected $tip;
+
+	protected $point_level;
+
+	protected $student_badges;
+
 
 	/**
 	 * StudentReportController constructor.
 	 * @param StudentRepositoryInterface $studentRepositoryInterface
+	 * @param StudentModuleRepositoryInterface $studentModuleRepositoryInterface
 	 * @param AvatarRepositoryInterface $avatarRepositoryInterface
 	 * @param ClassStudentRepositoryInterface $classStudentRepositoryInterface
 	 * @param GradeRepositoryInterface $gradeRepositoryInterface
 	 * @param ModuleRepositoryInterface $moduleRepositoryInterface
-	 * @param StudentRepositoryInterface $studentRepositoryInterface
 	 * @param AvatarServices $avatarServices
 	 * @param StudentServices $studentServices
 	 * @param SubjectAreaRepository $subjectAreaRepository
+	 * @param TipRepositoryInterface $tipRepositoryInterface
+	 * @param PointLevelRepositoryInterface $pointLevelRepositoryInterface
+	 * @param StudentBadgeRepositoryInterface $studentBadgeRepositoryInterface
 	 * @internal param StudentModuleRepository $studentModuleRepository
 	 * @internal param $student
 	 */
 	public function __construct(
 		StudentRepositoryInterface $studentRepositoryInterface,
+		StudentModuleRepositoryInterface $studentModuleRepositoryInterface,
 		AvatarRepositoryInterface $avatarRepositoryInterface,
 		ClassStudentRepositoryInterface $classStudentRepositoryInterface,
 		GradeRepositoryInterface $gradeRepositoryInterface,
 		ModuleRepositoryInterface $moduleRepositoryInterface,
-		StudentRepositoryInterface $studentRepositoryInterface,
 		AvatarServices $avatarServices,
 		StudentServices $studentServices,
-		SubjectAreaRepository $subjectAreaRepository
+		SubjectAreaRepository $subjectAreaRepository,
+		TipRepositoryInterface $tipRepositoryInterface,
+		PointLevelRepositoryInterface $pointLevelRepositoryInterface,
+		StudentBadgeRepositoryInterface $studentBadgeRepositoryInterface
 	) {
 		$this->student = $studentRepositoryInterface;
 		$this->class_student = $classStudentRepositoryInterface;
 		$this->avatar = $avatarRepositoryInterface;
 		$this->grade = $gradeRepositoryInterface;
 		$this->module = $moduleRepositoryInterface;
-		$this->student_module = $studentRepositoryInterface;
+		$this->student_module = $studentModuleRepositoryInterface;
 		$this->avatar_service = $avatarServices;
 		$this->student_service = $studentServices;
 		$this->subject_areas = $subjectAreaRepository;
+		$this->tip = $tipRepositoryInterface;
+		$this->point_level = $pointLevelRepositoryInterface;
+		$this->student_badges = $studentBadgeRepositoryInterface;
 	}
 
 
@@ -106,12 +125,15 @@ class StudentReportController extends ReportController {
 	}
 
 	/**
-	 * @param $id
+	 * @param $id - student_id
 	 * @param $subject_id
 	 * @return \Symfony\Component\HttpFoundation\Response
 	 * @internal param StudentReportRequest $request
 	 */
 	public function getStudentProgressReport($id,$subject_id){
+
+		//automate class students current class.
+		$this->student_service->getCurrentClass($id);
 
 		//get student id and subject id
 
@@ -119,17 +141,39 @@ class StudentReportController extends ReportController {
 
 		$avatar = $this->avatar->getAvatar($student->avatar_id);
 
+		//earned_badges
+		$badge = $this->student_badges->getStudentBadges([
+			'student_id' => $id
+		]);
+
+		$student_badge = $badge['total'];
+
+		//earned_medals
+		$point_level =  $this->point_level->findPointsLevel($this->student->getStudentPoints($id));
+		$student_medal = ($point_level) ? $point_level->id : 0;
+
+		//completed_lessons
+		$lessons = $this->class_student->getStudentModulesCompleted($id,$subject_id,$student->country_id);
+
+		//written_tips
+		$tips = $this->tip->getStudentActiveTips($id,$subject_id);
+
+		//week_hours
+		$week_hours = $this->class_student->getStudentModulesWeekHours($id, $subject_id,$student->country_id);
+
+		//total_hours
+		$total_hours = $this->class_student->getStudentModulesTotalHours($id, $subject_id,$student->country_id);
 
 		$additional_information = [
 			'student_name' => $student->first_name . ' ' . $student->last_name,
 			'avatar' => $this->avatar_service->getAvatarUrl($avatar->avatar_image),
 			'avatar_thumbnail' => $this->avatar_service->getAvatarThumbnailUrl($avatar->avatar_image),
-			'lessons_completed' => '',
-			'stories_completed' => '',
-			'tokens_bank' => '',
-			'total_tokens' => '',
-			'adventure_friends' => '',
-			'carnival_rewards' => ''
+			'earned_badges' => $student_badge,
+			'earned_medals' => $student_medal,
+			'completed_lessons' => ($lessons) ? count($lessons->toArray()) : 0,
+			'written_tips' => ($tips) ? count($tips->toArray()) : 0,
+			'week_hours' => (empty($week_hours)) ? round((($week_hours[0]->total_time/60)/60),1,PHP_ROUND_HALF_UP): 0 ,
+			'total_hours' => (empty($total_hours)) ? round((($total_hours[0]->total_time/60)/60),1,PHP_ROUND_HALF_UP): 0,
 		];
 
 		//COLUMN
@@ -225,7 +269,37 @@ class StudentReportController extends ReportController {
 
 			}
 
-		$additional_information = [];
+		//earned_badges
+		$badge = $this->student_badges->getStudentBadges([
+			'student_id' => $student_id
+		]);
+
+		$student_badge = $badge['total'];
+
+		//earned_medals
+		$point_level =  $this->point_level->findPointsLevel($this->student->getStudentPoints($student_id));
+		$student_medal = ($point_level) ? $point_level->id : 0;
+
+		//completed_lessons
+		$lessons = $this->class_student->getStudentModulesCompleted($student_id,$subject_id,$student->country_id);
+
+		//written_tips
+		$tips = $this->tip->getStudentActiveTips($student_id,$subject_id);
+
+		//week_hours
+		$week_hours = $this->class_student->getStudentModulesWeekHours($student_id, $subject_id,$student->country_id);
+
+		//total_hours
+		$total_hours = $this->class_student->getStudentModulesTotalHours($student_id, $subject_id,$student->country_id);
+
+		$additional_information = [
+			'earned_badges' => $student_badge,
+			'earned_medals' => $student_medal,
+			'completed_lessons' => ($lessons) ? count($lessons->toArray()) : 0,
+			'written_tips' => ($tips) ? count($tips->toArray()) : 0,
+			'week_hours' => (empty($week_hours)) ? round((($week_hours[0]->total_time/60)/60),1,PHP_ROUND_HALF_UP): 0 ,
+			'total_hours' => (empty($total_hours)) ? round((($total_hours[0]->total_time/60)/60),1,PHP_ROUND_HALF_UP): 0,
+		];
 
 		$column_header = [['name' => 'Curriculum']];
 
