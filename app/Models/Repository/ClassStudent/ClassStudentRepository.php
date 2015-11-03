@@ -348,28 +348,10 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 	 * @return string
 	 */
 	public function getStudentModulesProgressByGrade($student_id, $subject_id, $country_id){
-//select
-//m.grade_id ,count(*) as module_count, count(sm.id) as visited , count(smc.id) as completed, count(smo.id) as on_going
-//from class_students cs
-//left join classrooms c on c.id=cs.class_id
-//left join orders o on o.order_no = c.order_no
-//left join subjects s on s.id = c.subject_id
-//left join modules m on m.subject_id = s.id
-//left join country_grades cg on m.grade_id=cg.grade_id
-//left join country_grades cg2 on cg2.age_group_id=cg.age_group_id and cg2.country_id = 702
-//left join grades g on g.id=cg2.grade_id
-//left join student_modules sm on sm.module_id=m.id and sm.student_id=3 and sm.module_status <> 'Failed'
-// left join student_modules smc on smc.module_id=m.id and smc.student_id=3 and sm.module_status = 'Completed'
-//left join student_modules smo on smo.module_id=m.id and smo.student_id=3 and sm.module_status = 'On Going'
-//
-//
-//where date(o.date_start) <= now()  and date(o.date_end) >= now() and cs.student_id=3
-//group by m.grade_id
-//		;
+
+		DB::beginTransaction();
 		try {
-
-
-			return ClassStudent::select(
+			$response =  ClassStudent::select(
 				DB::raw('m.grade_id'),
 				DB::raw('count(*) as module_count'),
 				DB::raw('count(sm.id) as visited'),
@@ -416,8 +398,154 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 				->get();
 		}catch ( \Exception $e){
 
-			return $e->getMessage();
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
+
+		DB::commit();
+
+		return $response;
+
+	}
+
+	/**
+	 * @param $student_id
+	 * @param $subject_id
+	 * @param $country_id
+	 * @return string
+	 */
+	public function getStudentModulesCompleted($student_id,$subject_id, $country_id){
+
+		DB::beginTransaction();
+		try {
+
+			$response =  ClassStudent::select(
+				DB::raw('class_students.id'),
+				DB::raw('smc.*')
+			)->leftJoin('classrooms as c', 'c.id', '=', 'class_students.class_id')
+				->leftJoin('orders as o', 'o.order_no', '=', 'c.order_no')
+				->leftJoin('subjects as s', 's.id', '=', 'c.subject_id')
+				->leftJoin('modules as m', 'm.subject_id', '=', 's.id')
+				->leftJoin('student_modules as smc', function ($left_join) use ($student_id) {
+					$left_join->on('smc.module_id', '=', 'm.id')
+						->on('smc.student_id', '=',
+							DB::raw($student_id));
+				})
+				->where('o.date_start', '<=', Carbon::now())
+				->where('o.date_end', '>=', Carbon::now())
+				->where('class_students.student_id','=',$student_id)
+				->where('s.id','=',$subject_id)
+				->whereNotNull('smc.id')
+				->where('smc.module_status',
+					DB::raw("'" .config('futureed.module_status_completed')."'"))
+				->get();
+
+		}catch ( \Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
+
+	/**
+	 * @param $student_id
+	 * @param $subject_id
+	 * @param $country_id
+	 * @return string
+	 */
+	public function getStudentModulesTotalHours($student_id,$subject_id, $country_id){
+
+		DB::beginTransaction();
+		try {
+
+			$response =  ClassStudent::select(
+				DB::raw('sum(smc.total_time) as total_time')
+			)->leftJoin('classrooms as c', 'c.id', '=', 'class_students.class_id')
+				->leftJoin('orders as o', 'o.order_no', '=', 'c.order_no')
+				->leftJoin('subjects as s', 's.id', '=', 'c.subject_id')
+				->leftJoin('modules as m', 'm.subject_id', '=', 's.id')
+				->leftJoin('student_modules as smc', function ($left_join) use ($student_id) {
+					$left_join->on('smc.module_id', '=', 'm.id')
+						->on('smc.student_id', '=',
+							DB::raw($student_id));
+				})
+				->where('o.date_start', '<=', Carbon::now())
+				->where('o.date_end', '>=', Carbon::now())
+				->where('class_students.student_id','=',$student_id)
+				->where('s.id','=',$subject_id)
+				->whereNotNull('smc.id')
+				->groupBy('class_students.id')
+				->get();
+
+		}catch ( \Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
+
+	/**
+	 * @param $student_id
+	 * @param $subject_id
+	 * @param $country_id
+	 */
+	public function getStudentModulesWeekHours($student_id,$subject_id, $country_id){
+
+		DB::beginTransaction();
+		try {
+
+			DB::enableQueryLog();
+			$response =  ClassStudent::select(
+				DB::raw('sum(sma.total_time) as total_time')
+			)->leftJoin('classrooms as c', 'c.id', '=', 'class_students.class_id')
+				->leftJoin('orders as o', 'o.order_no', '=', 'c.order_no')
+				->leftJoin('subjects as s', 's.id', '=', 'c.subject_id')
+				->leftJoin('modules as m', 'm.subject_id', '=', 's.id')
+				->leftJoin('student_modules as smc', function ($left_join) use ($student_id) {
+					$left_join->on('smc.module_id', '=', 'm.id')
+						->on('smc.student_id', '=',
+							DB::raw($student_id));
+				})->leftJoin('student_module_answers as sma','sma.student_module_id','=','smc.id')
+				->where('o.date_start', '<=', Carbon::now())
+				->where('o.date_end', '>=', Carbon::now())
+				->where('class_students.student_id','=',$student_id)
+				->where('s.id','=',$subject_id)
+				->where('sma.date_start', '>=', Carbon::now()->subWeek())
+				->where('sma.date_end','<=', Carbon::now())
+				->whereNotNull('smc.id')
+				->groupBy('class_students.id')
+				->get();
+
+
+		}catch ( \Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 
