@@ -22,7 +22,7 @@ class QuestionTableSeeder extends Seeder
 
 			\DB::table('questions')->insert([
 				[
-					'module_id' => $row[1],
+					'module_id' => ($row[1]) ? $row[1] : 0,
 					'code' => $row[2],
 					'question_type' => $row[3],
 					'questions_text' => $row[4],
@@ -31,7 +31,7 @@ class QuestionTableSeeder extends Seeder
 					'answer' => $row[7],
 					'question_order_text' => $row[8],
 					'question_graph_image' => $row[9],
-					'seq_no' => $row[10],
+					'seq_no' => ($row[10]) ? $row[10] : 0,
 					'difficulty' => ($row[11] == '')? 0 : $row[11],
 					'points_earned' => ($row[12])? $row[12] : 0 ,
 					'status' => ($row[13])? $row[13] : config('futureed.enabled'),
