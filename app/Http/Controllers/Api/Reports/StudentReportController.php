@@ -321,6 +321,9 @@ class StudentReportController extends ReportController {
 	 */
 	public function getStudentCurrentLearning($student_id,$subject_id){
 
+		$student_id = ($student_id > 0) ? $student_id : 0;
+		$subject_id = ($subject_id > 0) ? $subject_id : 0;
+
 		//automate class students current class.
 		$this->student_service->getCurrentClass($student_id);
 
