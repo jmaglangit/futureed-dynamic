@@ -125,44 +125,43 @@ class StudentReportController extends ReportController {
 	}
 
 	/**
-	 * @param $id - student_id
+	 * @param $student_id
 	 * @param $subject_id
 	 * @return \Symfony\Component\HttpFoundation\Response
-	 * @internal param StudentReportRequest $request
 	 */
-	public function getStudentProgressReport($id,$subject_id){
+	public function getStudentProgressReport($student_id,$subject_id){
 
 		//automate class students current class.
-		$this->student_service->getCurrentClass($id);
+		$this->student_service->getCurrentClass($student_id);
 
 		//get student id and subject id
 
-		$student = $this->student->getStudent($id);
+		$student = $this->student->getStudent($student_id);
 
 		$avatar = $this->avatar->getAvatar($student->avatar_id);
 
 		//earned_badges
 		$badge = $this->student_badges->getStudentBadges([
-			'student_id' => $id
+			'student_id' => $student_id
 		]);
 
 		$student_badge = $badge['total'];
 
 		//earned_medals
-		$point_level =  $this->point_level->findPointsLevel($this->student->getStudentPoints($id));
+		$point_level =  $this->point_level->findPointsLevel($this->student->getStudentPoints($student_id));
 		$student_medal = ($point_level) ? $point_level->id : 0;
 
 		//completed_lessons
-		$lessons = $this->class_student->getStudentModulesCompleted($id,$subject_id,$student->country_id);
+		$lessons = $this->class_student->getStudentModulesCompleted($student_id,$subject_id,$student->country_id);
 
 		//written_tips
-		$tips = $this->tip->getStudentActiveTips($id,$subject_id);
+		$tips = $this->tip->getStudentActiveTips($student_id,$subject_id);
 
 		//week_hours
-		$week_hours = $this->class_student->getStudentModulesWeekHours($id, $subject_id,$student->country_id);
+		$week_hours = $this->class_student->getStudentModulesWeekHours($student_id, $subject_id,$student->country_id);
 
 		//total_hours
-		$total_hours = $this->class_student->getStudentModulesTotalHours($id, $subject_id,$student->country_id);
+		$total_hours = $this->class_student->getStudentModulesTotalHours($student_id, $subject_id,$student->country_id);
 
 		$additional_information = [
 			'student_name' => $student->first_name . ' ' . $student->last_name,
@@ -204,7 +203,7 @@ class StudentReportController extends ReportController {
 		//ROWS
 		//get each completed on each grades.
 
-		$row_data = $this->class_student->getStudentModulesProgressByGrade($id,$subject_id,$student->country_id);
+		$row_data = $this->class_student->getStudentModulesProgressByGrade($student_id,$subject_id,$student->country_id);
 
 
 		foreach($row_data as $data){
@@ -226,7 +225,7 @@ class StudentReportController extends ReportController {
 	 * @param StudentReportRequest $request
 	 * @return \Symfony\Component\HttpFoundation\Response
 	 */
-	public function getStudentSubjectGradeProgressReport($student_id, $subject_id, StudentReportRequest $request){
+	public function getStudentSubjectGradeProgressReport($student_id, $subject_id){
 
 		//Get student details
 		$student = $this->student->getStudent($student_id);
