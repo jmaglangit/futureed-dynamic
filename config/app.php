@@ -141,6 +141,7 @@ return [
          */
         'Laracasts\Generators\GeneratorsServiceProvider',
         'Webpatser\Countries\CountriesServiceProvider',
+		'Maatwebsite\Excel\ExcelServiceProvider',
 
 		/*
 		 * Project Specific Service Providers...
@@ -210,6 +211,7 @@ return [
 		'Form'      => 'Illuminate\Html\FormFacade',
 		'Html'      => 'Illuminate\Html\HtmlFacade',
         'Countries' => 'Webpatser\Countries\CountriesFacade',
+		'Excel' 	=> 'Maatwebsite\Excel\Facades\Excel',
 
 
 	],
