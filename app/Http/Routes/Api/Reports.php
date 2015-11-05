@@ -36,7 +36,7 @@ Routes::group([
 	 * Class
 	 */
 	Routes::get('/classroom/{class_id}',[
-		'uses' => 'Api\Reports\ClassReportController@getClassReport',
+		'uses' => 'Api\Reports\ClassReportRestController@classReport',
 		'as' => 'api.report.classroom.status'
 	]);
 
@@ -44,13 +44,27 @@ Routes::group([
 	 * School
 	 */
 	Routes::get('/school/{school_code}',[
-		'uses' => 'Api\Reports\SchoolReportController@getSchoolProgress',
+		'uses' => 'Api\Reports\SchoolReportRestController@schoolProgress',
 		'as' => 'api.report.school.status'
 	]);
 
 	Routes::get('/school/{school_code}/teachers',[
-		'uses' => 'Api\Reports\SchoolReportController@getSchoolTeacherProgress',
+		'uses' => 'Api\Reports\SchoolReportRestController@schoolTeacherProgress',
 		'as' => 'api.report.school.teacher.progress'
 	]);
+
+
+	/**
+	 * REPORT EXPORTS ============================>
+	 */
+
+	/**
+	 * Student export
+	 */
+	Routes::get('/student/{id}/{export}',[
+			'uses' => 'Api\Reports\ExportReportController@exportStudentReportStatusReport',
+			'as' => 'api.report.student.status.export'
+	]);
+
 
 });
