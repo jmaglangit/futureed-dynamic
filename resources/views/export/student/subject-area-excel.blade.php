@@ -1,24 +1,27 @@
 @extends('export.master')
 
 @section('content')
-    <table style="width: 100%">
+    <table>
 
         <tr>
-            <td colspan="{{ count($column_header) }}" style="text-align: center;"><h4>Future Lessons</h4>
+            <td></td><td></td><td></td><td></td><td></td>
+            <td colspan="13" style="align: middle;">
+                <img src="{{ base_path().'/public/images/logo-md.png' }}">
             </td>
         </tr>
+        <tr></tr>
         <tr>
-            <th rowspan="4" ><img src="{{ base_path().'/public/' . config('futureed.thumbnail') . '/'.$additional_information['avatar_thumbnail'] }}" alt=" "></th>
-        </tr>
-        <tr>
-            <td colspan="{{ count($column_header)-1 }}">Student
+            <th valign="middle"><img src="{{ base_path().'/public/' . config('futureed.thumbnail') . '/'.$additional_information['avatar_thumbnail'] }}" alt=" "></th>
+            <td colspan="1">Student
                 : {{ $additional_information['first_name'].' '.$additional_information['last_name'] }}</td>
         </tr>
         <tr>
-            <td colspan="{{ count($column_header)-1 }}">Grade : {{ $additional_information['grade_name'] }}</td>
+            <td colspan="1">Grade : {{ $additional_information['grade_name'] }}</td>
         </tr>
         <tr>
-            <td colspan="{{ count($column_header)-1 }}">Subject : {{ $additional_information['subject_name'] }}</td>
+            <td colspan="1">Subject : {{ $additional_information['subject_name'] }}</td>
+        </tr>
+        <tr>
         </tr>
         <tr>
             <td colspan="{{ floor(count($column_header)/3) }}"
@@ -45,9 +48,10 @@
                 style="text-align: center;">{{ $additional_information['total_hours'] }} Total hours spend
             </td>
         </tr>
+        <tr></tr>
         <tr>
             @foreach( $column_header as $column)
-                <th style="width: 100%; text-align: center; border: 1px solid black;">{{ $column['name'] }}</th>
+                <th style=" width: 20px; text-align: center; border: 1px solid black;">{{ $column['name'] }}</th>
             @endforeach
         </tr>
         @foreach($rows as $row)
