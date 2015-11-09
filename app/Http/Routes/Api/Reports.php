@@ -12,22 +12,22 @@ Routes::group([
 	 * Student
 	 */
 	Routes::get('/student/{id}',[
-		'uses' => 'Api\Reports\StudentReportController@getStudentStatusReport',
+		'uses' => 'Api\Reports\StudentReportRestController@studentStatusReport',
 		'as' => 'api.report.student.status'
 	]);
 
 	Routes::get('/student-progress/{id}/{subject_id}',[
-		'uses' => 'Api\Reports\StudentReportController@getStudentProgressReport',
+		'uses' => 'Api\Reports\StudentReportRestController@studentProgressReport',
 		'as' => 'api.report.student.progress'
 	]);
 
 	Routes::get('/student-progress/curriculum/{id}/{subject_id}',[
-		'uses' => 'Api\Reports\StudentReportController@getStudentSubjectGradeProgressReport',
+		'uses' => 'Api\Reports\StudentReportRestController@studentSubjectGradeProgressReport',
 		'as' => 'api.report.student.progress.curriculum'
 	]);
 
 	Routes::get('/student-progress/current-learning/{student_id}/{subject_id}',[
-		'uses' => 'Api\Reports\StudentReportController@getStudentCurrentLearning',
+		'uses' => 'Api\Reports\StudentReportRestController@studentCurrentLearning',
 		'as' => 'api.report.student.progress.current-learning'
 	]);
 
@@ -61,10 +61,17 @@ Routes::group([
 	/**
 	 * Student export
 	 */
-	Routes::get('/student/{id}/{export}',[
-			'uses' => 'Api\Reports\ExportReportController@exportStudentReportStatusReport',
-			'as' => 'api.report.student.status.export'
+	Routes::get('/student-progress/curriculum/{id}/{subject_id}/{file_type}',[
+			'uses' => 'Api\Reports\StudentReportExportController@studentSubjectGradeProgressReport',
+			'as' => 'api.report.student.progress.curriculum'
 	]);
+
+	Routes::get('/student-progress/current-learning/{student_id}/{subject_id}/{file_type}',[
+			'uses' => 'Api\Reports\StudentReportExportController@studentCurrentLearning',
+			'as' => 'api.report.student.progress.current-learning.export'
+	]);
+
+
 
 
 });
