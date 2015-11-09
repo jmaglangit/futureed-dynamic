@@ -76,6 +76,7 @@ return [
 		2061 => 'Client is currently logged in.',
 		2062 => 'Admin is currently logged in.',
 		2063 => 'User is currently logged in.',
+		2063 => 'Invalid export file format',
 
 
 		2100 => 'Reset code is invalid.',
