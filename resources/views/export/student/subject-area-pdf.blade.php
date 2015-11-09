@@ -1,14 +1,18 @@
 @extends('export.master')
 
 @section('content')
-    <table style="width: 100%">
+    <table style="width: 100%" cellpadding="0" cellspacing="0">
 
         <tr>
-            <td colspan="{{ count($column_header) }}" style="text-align: center;"><h4>Future Lessons</h4>
+            <td colspan="{{ count($column_header) }}" style="text-align: center;">
+                <img src="{{ base_path().'/public/images/logo-md.png' }}">
+            </td>
             </td>
         </tr>
         <tr>
-            <th rowspan="4" ><img src="{{ base_path().'/public/' . config('futureed.thumbnail') . '/'.$additional_information['avatar_thumbnail'] }}" alt=" "></th>
+            <th rowspan="4" >
+                <img style="border: 1px solid; border-radius: 25px; border-color: " src="{{ base_path().'/public/' . config('futureed.thumbnail') . '/'.$additional_information['avatar_thumbnail'] }}" alt=" ">
+            </th>
         </tr>
         <tr>
             <td colspan="{{ count($column_header)-1 }}">Student
@@ -19,6 +23,9 @@
         </tr>
         <tr>
             <td colspan="{{ count($column_header)-1 }}">Subject : {{ $additional_information['subject_name'] }}</td>
+        </tr>
+        <tr>
+            <td colspan="13" height="50px"><hr style="width:1000px"/></td>
         </tr>
         <tr>
             <td colspan="{{ floor(count($column_header)/3) }}"
@@ -33,6 +40,7 @@
                 completed
             </td>
         </tr>
+
         <tr>
             <td colspan="{{ floor(count($column_header)/3) }}"
                 style="text-align: center;">{{ $additional_information['written_tips'] }} Tips written
@@ -44,6 +52,9 @@
             <td colspan="{{ ceil(count($column_header)/3) }}"
                 style="text-align: center;">{{ $additional_information['total_hours'] }} Total hours spend
             </td>
+        </tr>
+        <tr>
+            <td colspan="13" height="50px"><hr style="width:1000px"/></td>
         </tr>
         <tr>
             @foreach( $column_header as $column)
