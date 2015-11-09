@@ -27,7 +27,7 @@ class StudentReportRestController extends ReportController {
 	 * @param $file_type
 	 * @return \Symfony\Component\HttpFoundation\Response
 	 */
-	public function studentStatusReport($student_id, $file_type){
+	public function studentStatusReport($student_id){
 
 		$report = $this->student_report->getStudentStatusReport($student_id);
 
