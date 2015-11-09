@@ -12,6 +12,7 @@ use FutureEd\Http\Requests\Api\StudentReportRequest;
 use FutureEd\Models\Repository\StudentBadge\StudentBadgeRepositoryInterface;
 use FutureEd\Models\Repository\StudentModule\StudentModuleRepository;
 use FutureEd\Models\Repository\StudentModule\StudentModuleRepositoryInterface;
+use FutureEd\Models\Repository\Subject\SubjectRepositoryInterface;
 use FutureEd\Models\Repository\SubjectArea\SubjectAreaRepository;
 use FutureEd\Models\Repository\Tip\TipRepositoryInterface;
 use FutureEd\Services\AvatarServices;
@@ -34,6 +35,8 @@ class StudentReportController extends ReportController {
 	protected $module;
 
 	protected $student_module;
+
+	protected $subject;
 
 	protected $subject_areas;
 
@@ -58,6 +61,7 @@ class StudentReportController extends ReportController {
 	 * @param TipRepositoryInterface $tipRepositoryInterface
 	 * @param PointLevelRepositoryInterface $pointLevelRepositoryInterface
 	 * @param StudentBadgeRepositoryInterface $studentBadgeRepositoryInterface
+	 * @param SubjectRepositoryInterface $subjectRepositoryInterface
 	 * @internal param StudentModuleRepository $studentModuleRepository
 	 * @internal param $student
 	 */
@@ -73,7 +77,8 @@ class StudentReportController extends ReportController {
 		SubjectAreaRepository $subjectAreaRepository,
 		TipRepositoryInterface $tipRepositoryInterface,
 		PointLevelRepositoryInterface $pointLevelRepositoryInterface,
-		StudentBadgeRepositoryInterface $studentBadgeRepositoryInterface
+		StudentBadgeRepositoryInterface $studentBadgeRepositoryInterface,
+		SubjectRepositoryInterface $subjectRepositoryInterface
 	) {
 		$this->student = $studentRepositoryInterface;
 		$this->class_student = $classStudentRepositoryInterface;
@@ -87,6 +92,7 @@ class StudentReportController extends ReportController {
 		$this->tip = $tipRepositoryInterface;
 		$this->point_level = $pointLevelRepositoryInterface;
 		$this->student_badges = $studentBadgeRepositoryInterface;
+		$this->subject = $subjectRepositoryInterface;
 	}
 
 
@@ -120,8 +126,11 @@ class StudentReportController extends ReportController {
 
 		$rows = $subject_status->toArray();
 
-
-		return $this->respondReportData($additional_information, $column_header, $rows);
+		return [
+			'additional_information' => $additional_information,
+			'column_header' => $column_header,
+			'rows' => $rows
+		];
 	}
 
 	/**
@@ -216,7 +225,11 @@ class StudentReportController extends ReportController {
 			'progress' => $row_data
 		];
 
-		return $this->respondReportData($additional_information, $column_header, $data);
+		return [
+			'additional_information' => $additional_information,
+			'column_header' => $column_header,
+			'rows' => $data
+		];
 	}
 
 	/**
@@ -230,10 +243,17 @@ class StudentReportController extends ReportController {
 		//Get student details
 		$student = $this->student->getStudent($student_id);
 
+		//Get Avatar thumbnail
+		$avatar = $this->avatar->getAvatar($student->avatar_id);
+		$avatar_thumbnail = $this->avatar_service->getAvatarThumbnailUrl($avatar->avatar_image);
+
+		//Get subject information
+		$subject = $this->subject->getSubject($subject_id);
+
 		//automate class students current class.
 		$this->student_service->getCurrentClass($student_id);
 
-		//Get Subject Areas as Curriculumns
+		//Get Subject Areas as curriculum.
 		$subject_areas = $this->subject_areas->getAreasBySubjectId($subject_id);
 
 		//check valid class subject.
@@ -241,6 +261,9 @@ class StudentReportController extends ReportController {
 
 		//get grades collection
 		$grades = $this->grade->getGradesByCountries($student->country_id);
+
+		//get student grade
+		$student_grade = $this->grade->getGrade($student->grade_code);
 
 		//initiate array.
 		$row_data = [];
@@ -292,6 +315,11 @@ class StudentReportController extends ReportController {
 		$total_hours = $this->class_student->getStudentModulesTotalHours($student_id, $subject_id,$student->country_id);
 
 		$additional_information = [
+			'first_name' => $student->first_name,
+			'last_name' => $student->last_name,
+			'avatar_thumbnail' => $avatar->avatar_image,
+			'subject_name' => $subject->name,
+			'grade_name' => $student_grade->name,
 			'earned_badges' => $student_badge,
 			'earned_medals' => $student_medal,
 			'completed_lessons' => ($lessons) ? count($lessons->toArray()) : 0,
@@ -306,10 +334,11 @@ class StudentReportController extends ReportController {
 
 		$rows = $row_data;
 
-
-
-		return $this->respondReportData($additional_information,$column_header,$rows);
-
+		return [
+			'additional_information' => $additional_information,
+			'column_header' => $column_header,
+			'rows' => $rows
+		];
 	}
 
 	/**
@@ -352,7 +381,11 @@ class StudentReportController extends ReportController {
 
 		$rows = $current_learning;
 
-		return $this->respondReportData($addition_information,$column_header,$rows);
+		return [
+			'additional_information' => $addition_information,
+			'column_header' => $column_header,
+			'rows' => $rows
+		];
 	}
 
 
