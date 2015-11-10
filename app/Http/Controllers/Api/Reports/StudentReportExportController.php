@@ -73,8 +73,34 @@ class StudentReportExportController extends ReportController {
 	public function studentCurrentLearning($student_id, $subject_id, $file_type){
 
 		$report = $this->student_report->getStudentCurrentLearning($student_id,$subject_id);
+		$student_info = $report['additional_information'];
+		$file_name = $student_info['first_name'].'_'.$student_info['last_name'].'_Current_Learning_'. Carbon::now()->toDateString();
 
-		return Excel::create('filename')->export($file_type);
+		//Export file
+		switch($file_type){
+
+			case 'pdf':
+				$pdf = \PDF::loadView('export.student.current-learning-pdf', $report)->setPaper('a4')->setOrientation('portrait');
+				return $pdf->download($file_name);
+				break;
+				break;
+			case 'xls' || 'xlsx':
+				//Initiate format
+				Excel::create($file_name,function($excel) use ($report){
+
+					$excel->sheet('NewSheet', function($sheet) use ($report){
+
+						$sheet->mergeCells('A1:C1');
+						$sheet->mergeCells('A3:A5');
+						$sheet->setOrientation('portrait');
+						$sheet->loadView('export.student.current-learning-excel',$report);
+					});
+				})->download($file_type);
+				break;
+			default:
+				return $this->respondErrorMessage(2063);
+				break;
+		}
 	}
 
 }
