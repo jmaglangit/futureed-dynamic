@@ -11,6 +11,15 @@
 			ng-click="help.setModuleActive()"> Back </button>
 	</div>
 
+    <div class="alert alert-error" ng-if="help.errors">
+	        <p ng-repeat="error in help.errors track by $index" > 
+	            {! error !}
+	        </p>
+	    </div>
+	    <div class="alert alert-success" ng-if="help.success">
+	    	<p>Successfully submitted your answer.</p>
+	    </div>
+
 	<div id="help_request_details">
 		<div class="view-help-container">
 			<div class="content-box row margin-top-bot-5">
