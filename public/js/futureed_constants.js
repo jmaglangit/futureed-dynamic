@@ -27,6 +27,7 @@ var Constants = {
 	, PARENT		: "Parent"
 	, TEACHER		: "Teacher"
 	, ADMIN			: "Admin"
+	, PEACHES		: "Peaches"
 
 	, PENDING		: "Pending"
 	, PAID			: "Paid"
