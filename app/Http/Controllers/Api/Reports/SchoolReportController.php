@@ -103,7 +103,11 @@ class SchoolReportController extends ReportController {
 			'student_watch' => $student_watch
 		];
 
-		return $this->respondReportData($additional_information, $column_header, $rows);
+		return [
+			'additional_information' => $additional_information,
+			'column_header' => $column_header,
+			'rows' => $rows
+		];
 	}
 
 	/**
@@ -124,7 +128,11 @@ class SchoolReportController extends ReportController {
 
 		$rows = $class->toArray();
 
-		return $this->respondReportData($additional_information, $column_header, $rows);
+		return [
+			'additional_information' => $additional_information,
+			'column_header' => $column_header,
+			'rows' => $rows
+		];
 	}
 
 }
