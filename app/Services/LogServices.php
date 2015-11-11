@@ -123,15 +123,17 @@ class LogServices {
 		$log_data = [
 			'user_id' => (isset($user_data->user_id)) ? $user_data->user_id : 0,
 			'username' =>(isset($user_data->user->username))
-					? $user_data->user->username : (isset($data['username']))?$data['username']:0,
+					? $user_data->user->username
+					:((array_key_exists('username',$data))
+							? $data['username'] :0),
 			'email' => (isset($user_data->user->email))
-					? $user_data->user->email :(isset($data['username']))?$data['username']:0,
+					? $user_data->user->email :((array_key_exists('username',$data))?$data['username']:0),
 			'name' => (isset($user_data))
-					? $user_data->first_name.' '.$user_data->last_name : (isset($data['username']))?$data['username']:0,
-			'user_type' => (isset($data['type'])) ? $data['type'] : config('futureed.client'),
-			'page_accessed' => (isset($data['page_accessed'])) ? $data['page_accessed'] : 'NA',
-			'api_accessed' => (isset($data['api_accessed'])) ? $data['api_accessed'] : 'NA',
-			'result_response' => (isset($data['result_response'])) ? $data['result_response'] : 0,
+					? $user_data->first_name.' '.$user_data->last_name : ((array_key_exists('username',$data))?$data['username']:0),
+			'user_type' => (array_key_exists('type',$data)) ? $data['type'] : config('futureed.client'),
+			'page_accessed' => (array_key_exists('page_accessed',$data)) ? $data['page_accessed'] : 'NA',
+			'api_accessed' => (array_key_exists('api_accessed',$data)) ? $data['api_accessed'] : 'NA',
+			'result_response' => (array_key_exists('result_response',$data)) ? $data['result_response'] : 0,
 			'created_by' => (isset($user_data->user_id)) ? $user_data->user_id : 0,
 			'updated_by' => (isset($user_data->user_id)) ? $user_data->user_id : 0
 		];
