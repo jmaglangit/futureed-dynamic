@@ -141,7 +141,7 @@ class AdminQuestionAnswerController extends ApiController {
 	 */
 	public function update($id, AdminQuestionAnswerRequest $request)
 	{
-		$data = $request->only('answer_text','correct_answer','point_equivalent','image','label');
+		$data = $request->only('answer_text','correct_answer','point_equivalent','answer_image','label','image');
 
 		$question_answer = $this->question_answer->viewQuestionAnswer($id);
 
@@ -150,7 +150,7 @@ class AdminQuestionAnswerController extends ApiController {
 			return $this->respondErrorMessage(2120);
 		}
 
-		if($data['image']){
+		if(!empty($data['image'])){
 
 			$from = config('futureed.answer_image_path');
 			$to = config('futureed.answer_image_path_final').'/'.$id;
@@ -165,6 +165,10 @@ class AdminQuestionAnswerController extends ApiController {
 			$this->file->move($from.'/'.$image[0],$to);
 			$this->file->copy($to.'/'.$image[1],$to.'/'.$data['answer_image']);
 
+		} else {
+
+			$image = explode('/',$data['answer_image']);
+			$data['answer_image'] = $image[6];
 		}
 
 		//update question_answer
