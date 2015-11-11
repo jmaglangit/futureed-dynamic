@@ -122,9 +122,12 @@ class LogServices {
 
 		$log_data = [
 			'user_id' => (isset($user_data->user_id)) ? $user_data->user_id : 0,
-			'username' =>(isset($user_data->user->username)) ? $user_data->user->username : $data['username'],
-			'email' => (isset($user_data->user->email)) ? $user_data->user->email : $data['username'],
-			'name' => (isset($user_data)) ? $user_data->first_name.' '.$user_data->last_name : $data['username'],
+			'username' =>(isset($user_data->user->username))
+					? $user_data->user->username : (isset($data['username']))?$data['username']:0,
+			'email' => (isset($user_data->user->email))
+					? $user_data->user->email :(isset($data['username']))?$data['username']:0,
+			'name' => (isset($user_data))
+					? $user_data->first_name.' '.$user_data->last_name : (isset($data['username']))?$data['username']:0,
 			'user_type' => (isset($data['type'])) ? $data['type'] : config('futureed.client'),
 			'page_accessed' => (isset($data['page_accessed'])) ? $data['page_accessed'] : 'NA',
 			'api_accessed' => (isset($data['api_accessed'])) ? $data['api_accessed'] : 'NA',
