@@ -58,6 +58,7 @@ function ManageQuestionAnsController($scope, ManageQuestionAnsService, TableServ
 					if(response.errors) {
 						self.errors = $scope.errorHandler(response.errors);
 					}else if(response.data){
+						object.answer_image = "/uploads/temp/answer/" + response.data.image_name;
 						object.image = response.data.image_name;
 						object.uploaded = Constants.TRUE;
 					}
