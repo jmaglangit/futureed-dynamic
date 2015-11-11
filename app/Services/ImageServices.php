@@ -13,16 +13,6 @@ use Illuminate\Filesystem\Filesystem;
 
 class ImageServices {
 
-	/**
-	 * Constructors
-	 */
-	
-	public function __construct(){
-		// $this->avatar = $avatar;
-		// $this->validator=$validator;
-		// $this->student = $student;
-	}
-
 	/*function will iterate throught the provided array and will output an updated array*/
 	public function getIconImageUrl($current_learning){
 		foreach($current_learning as $row){
@@ -50,5 +40,5 @@ class ImageServices {
 
 		return $image_path;
 	}
-
+	
 }
