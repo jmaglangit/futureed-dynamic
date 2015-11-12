@@ -317,14 +317,10 @@ They have ____ cookies altogether",,,61,,,4,3,1,Enabled,,,,,,,
 314,16,11314,N,36<br>+06,,,42,,,4,3,1,Enabled,,,,,,,
 315,16,11315,N,59<br>+09,,,68,,,5,3,1,Enabled,,,,,,,
 316,16,11316,N,15<br>+18,,,33,,,6,3,1,Enabled,,,,,,,
-317,16,11317,"N
-",23<br>+17,,,40,,,7,3,1,Enabled,,,,,,,
-318,16,11318,"N
-",34<br>+28,,,62,,,8,3,1,Enabled,,,,,,,
-319,16,11319,"N
-",43<br>+31,,,74,,,9,3,1,Enabled,,,,,,,
-320,16,11320,"N
-",58<br>+29,,,87,,,10,3,1,Enabled,,,,,,,
+317,16,11317,"N",23<br>+17,,,40,,,7,3,1,Enabled,,,,,,,
+318,16,11318,"N",34<br>+28,,,62,,,8,3,1,Enabled,,,,,,,
+319,16,11319,"N",43<br>+31,,,74,,,9,3,1,Enabled,,,,,,,
+320,16,11320,"N",58<br>+29,,,87,,,10,3,1,Enabled,,,,,,,
 321,65,11321,O,Arrange these numbers from smallest to largest,arrange flash cards,arrange-flash-cards.JPG,"97,1021,12,345,347,565,5,067,345",,,1,3,1,Enabled,,,,,,,
 322,1,11322,FIB,Fill in the missing numbers,Fill in the blanks,fill-in-the-blanks.jpg,"30,50",,,7,3,1,Enabled,,,,,,,
 323,43,11323,MC,"Which number has ten thousands, six hundreds and twenty one?",mc 10620,mc-10620.jpg,,,,1,3,1,Enabled,,,,,,,
@@ -664,75 +660,42 @@ They have ____ cookies altogether",,,61,,,4,3,1,Enabled,,,,,,,
 657,26,11657,N,90<br>-50<br>___<br>??,,,40,,,4,1,1,Enabled,,,,,,,
 658,26,11658,N,65<br>-12<br>___<br>??,,,35,,,1,2,1,Enabled,,,,,,,
 659,26,11659,N,38<br>-24<br>___<br>??,,,14,,,2,2,1,Enabled,,,,,,,
-660,26,11660,"N
-",99<br>-40<br>___<br>??,,,59,,,3,2,1,Enabled,,,,,,,
-661,26,11661,"N
-",72<br>-22<br>___<br>??,,,50,,,4,2,1,Enabled,,,,,,,
-662,26,11662,"N
-",86<br>-25<br>___<br>??,,,61,,,5,2,1,Enabled,,,,,,,
-663,26,11663,"N
-",64<br>-55<br>___<br>??,,,9,,,1,3,1,Enabled,,,,,,,
-664,26,11664,"N
-",92<br>-78<br>___<br>??,,,14,,,2,3,1,Enabled,,,,,,,
-665,26,11665,"N
-",23<br>-18<br>___<br>??,,,5,,,3,3,1,Enabled,,,,,,,
-666,26,11666,"N
-",60<br>-34<br>___<br>??,,,26,,,4,3,1,Enabled,,,,,,,
-667,26,11667,"N
-",97<br>-49<br>___<br>??,,,48,,,5,3,1,Enabled,,,,,,,
-668,26,11668,"N
-","Dustin received $65 for his allowance, he spent $17 on a gift for this mom on Mother's Day. How much money does Dustin have now?",,,40,,,6,3,1,Enabled,,,,,,,
-669,26,11669,"N
-",Preethi was given 80 inches of gift wrap. She used 25 inches of the gift wrap to wrap her friend's present. She then used 36 inches of wrapping paper to wrap her father's gift. How much gift wrap does Preethi have now?,,,20,,,7,3,1,Enabled,,,,,,,
-670,26,11670,"N
-","J.T was selling fruits at the beach. He had 86 pineapples with him, then he managed to sell 38 of those pineapples by the end of the day. Then he gave away 15 pineapples to his friends. How many pineapples does he have now?",,,33,,,8,3,1,Enabled,,,,,,,
-671,26,11671,"N
-","Marianne bought 64 crayons for school. At the end of the year, she only has 47 crayons. How many crayons did Marianne lose over the course of the year?",,,15,,,9,3,1,Enabled,,,,,,,
+660,26,11660,"N",99<br>-40<br>___<br>??,,,59,,,3,2,1,Enabled,,,,,,,
+661,26,11661,"N",72<br>-22<br>___<br>??,,,50,,,4,2,1,Enabled,,,,,,,
+662,26,11662,"N",86<br>-25<br>___<br>??,,,61,,,5,2,1,Enabled,,,,,,,
+663,26,11663,"N",64<br>-55<br>___<br>??,,,9,,,1,3,1,Enabled,,,,,,,
+664,26,11664,"N",92<br>-78<br>___<br>??,,,14,,,2,3,1,Enabled,,,,,,,
+665,26,11665,"N",23<br>-18<br>___<br>??,,,5,,,3,3,1,Enabled,,,,,,,
+666,26,11666,"N",60<br>-34<br>___<br>??,,,26,,,4,3,1,Enabled,,,,,,,
+667,26,11667,"N",97<br>-49<br>___<br>??,,,48,,,5,3,1,Enabled,,,,,,,
+668,26,11668,"N","Dustin received $65 for his allowance, he spent $17 on a gift for this mom on Mother's Day. How much money does Dustin have now?",,,40,,,6,3,1,Enabled,,,,,,,
+669,26,11669,"N",Preethi was given 80 inches of gift wrap. She used 25 inches of the gift wrap to wrap her friend's present. She then used 36 inches of wrapping paper to wrap her father's gift. How much gift wrap does Preethi have now?,,,20,,,7,3,1,Enabled,,,,,,,
+670,26,11670,"N","J.T was selling fruits at the beach. He had 86 pineapples with him, then he managed to sell 38 of those pineapples by the end of the day. Then he gave away 15 pineapples to his friends. How many pineapples does he have now?",,,33,,,8,3,1,Enabled,,,,,,,
+671,26,11671,"N","Marianne bought 64 crayons for school. At the end of the year, she only has 47 crayons. How many crayons did Marianne lose over the course of the year?",,,15,,,9,3,1,Enabled,,,,,,,
 672,26,11672,FIB,"Fill in the sequence:<br>83, ____, 57, 44, 31, ____",,,"70,18",,,10,3,1,Enabled,,,,,,,
 673,26,11673,FIB,"Fill in the sequence:<br>112, 88 ,____, ____, 16, ",,,"64,40",,,11,3,1,Enabled,,,,,,,
 674,26,11674,FIB,"Fill in the sequence:<br>____. 89, 64, ____, 14",,,"114,39",,,12,3,1,Enabled,,,,,,,
-675,27,11675,"N
-",100<br>+200<br>___<br>???,,,300,,,3,1,1,Enabled,,,,,,,
-676,27,11676,"N
-",400<br>+500<br>___<br>???,,,900,,,4,1,1,Enabled,,,,,,,
-677,27,11677,"N
-",200<br>+400<br>___<br>???,,,600,,,5,1,1,Enabled,,,,,,,
-678,27,11678,"N
-",600<br>+300<br>___<br>???,,,900,,,6,1,1,Enabled,,,,,,,
-679,27,11679,"N
-",500<br>+200<br>___<br>???,,,700,,,7,1,1,Enabled,,,,,,,
-680,27,11680,"N
-",140<br>+  34<br>___<br>???,,,174,,,1,2,1,Enabled,,,,,,,
-681,27,11681,"N
-",  432<br>+566<br>___<br>???,,,998,,,2,2,1,Enabled,,,,,,,
-682,27,11682,"N
-",  942<br>+  21<br>___<br>???,,,963,,,3,2,1,Enabled,,,,,,,
-683,27,11683,"N
-",  441<br>+  36<br>___<br>???,,,477,,,4,2,1,Enabled,,,,,,,
-684,27,11684,"N
-",  742<br>+  53<br> ___<br>???,,,795,,,5,2,1,Enabled,,,,,,,
-685,27,11685,"N
-",  495<br>+  59<br> ___<br>???,,,554,,,1,3,1,Enabled,,,,,,,
-686,27,11686,"N
-",  234<br>+  88<br> ___<br>???,,,322,,,2,3,1,Enabled,,,,,,,
-687,27,11687,"N
-",  323<br>+  48<br> ___<br>???,,,371,,,3,3,1,Enabled,,,,,,,
-688,27,11688,"N
-",  867<br>+  43<br> ___<br>???,,,910,,,4,3,1,Enabled,,,,,,,
-689,27,11689,"N
-",  655<br>+  98<br> ___<br>???,,,753,,,5,3,1,Enabled,,,,,,,
-690,27,11690,"N
-","Kim bought 648 flowers for her wedding, but she order 23 more for honeymoon. She realized she needed to order 42 more. How many flowers did she order in total? ",,,700,,,6,3,1,Enabled,,,,,,,
-691,27,11691,"N
-",Justin had 342 notes for all the students in his graduating class. He forgot that there were a total of new 68 students that transferred that year. How many notes does he need altogether?,,,410,,,7,3,1,Enabled,,,,,,,
-692,27,11692,"N
-",  122<br>+  ??<br> ___<br>234,,,112,,,8,3,1,Enabled,,,,,,,
-693,27,11693,"N
-",  215<br>+  ??<br> ___<br>830,,,615,,,19,,1,Enabled,,,,,,,
-694,27,11694,"N
-",  308<br>+  ??<br> ___<br>395,,,87,,,20,,1,Enabled,,,,,,,
-695,27,11695,"N
-",  ???<br>+  76<br> ___<br>842,,,766,,,21,,1,Enabled,,,,,,,
+675,27,11675,"N",100<br>+200<br>___<br>???,,,300,,,3,1,1,Enabled,,,,,,,
+676,27,11676,"N",400<br>+500<br>___<br>???,,,900,,,4,1,1,Enabled,,,,,,,
+677,27,11677,"N",200<br>+400<br>___<br>???,,,600,,,5,1,1,Enabled,,,,,,,
+678,27,11678,"N",600<br>+300<br>___<br>???,,,900,,,6,1,1,Enabled,,,,,,,
+679,27,11679,"N",500<br>+200<br>___<br>???,,,700,,,7,1,1,Enabled,,,,,,,
+680,27,11680,"N",140<br>+  34<br>___<br>???,,,174,,,1,2,1,Enabled,,,,,,,
+681,27,11681,"N",  432<br>+566<br>___<br>???,,,998,,,2,2,1,Enabled,,,,,,,
+682,27,11682,"N",  942<br>+  21<br>___<br>???,,,963,,,3,2,1,Enabled,,,,,,,
+683,27,11683,"N",  441<br>+  36<br>___<br>???,,,477,,,4,2,1,Enabled,,,,,,,
+684,27,11684,"N",  742<br>+  53<br> ___<br>???,,,795,,,5,2,1,Enabled,,,,,,,
+685,27,11685,"N",  495<br>+  59<br> ___<br>???,,,554,,,1,3,1,Enabled,,,,,,,
+686,27,11686,"N",  234<br>+  88<br> ___<br>???,,,322,,,2,3,1,Enabled,,,,,,,
+687,27,11687,"N",  323<br>+  48<br> ___<br>???,,,371,,,3,3,1,Enabled,,,,,,,
+688,27,11688,"N",  867<br>+  43<br> ___<br>???,,,910,,,4,3,1,Enabled,,,,,,,
+689,27,11689,"N",  655<br>+  98<br> ___<br>???,,,753,,,5,3,1,Enabled,,,,,,,
+690,27,11690,"N","Kim bought 648 flowers for her wedding, but she order 23 more for honeymoon. She realized she needed to order 42 more. How many flowers did she order in total? ",,,700,,,6,3,1,Enabled,,,,,,,
+691,27,11691,"N",Justin had 342 notes for all the students in his graduating class. He forgot that there were a total of new 68 students that transferred that year. How many notes does he need altogether?,,,410,,,7,3,1,Enabled,,,,,,,
+692,27,11692,"N",  122<br>+  ??<br> ___<br>234,,,112,,,8,3,1,Enabled,,,,,,,
+693,27,11693,"N",  215<br>+  ??<br> ___<br>830,,,615,,,19,,1,Enabled,,,,,,,
+694,27,11694,"N",  308<br>+  ??<br> ___<br>395,,,87,,,20,,1,Enabled,,,,,,,
+695,27,11695,"N",  ???<br>+  76<br> ___<br>842,,,766,,,21,,1,Enabled,,,,,,,
 721,37,11721,FIB,Use the words more or less. The length of the first blackbaord is ____ than one foot?,measurement 1,measurement-1.JPG,more,,,1,1,1,Enabled,,,,,,,
 722,37,11722,FIB,Use the words more or less. The length of the first blackbaord is ____ than six feet?,measurement 1,measurement-1.JPG,less,,,2,1,1,Enabled,,,,,,,
 723,37,11723,FIB,Which blackboard is longer?,measurement 1,measurement-1.JPG,B,,,3,1,1,Enabled,,,,,,,

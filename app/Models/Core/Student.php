@@ -53,6 +53,12 @@ class Student extends Model {
 		'updated_by' => 1,
 	];
 
+	// Accessor
+	public function getPointsAttribute($value){
+
+		return ($value) ? $value : 0;
+	}
+
 
 
     //-------------relationships

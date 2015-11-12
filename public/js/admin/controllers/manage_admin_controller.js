@@ -276,7 +276,7 @@ function ManageAdminController($scope, ManageAdminService, TableService, SearchS
 		self.errors = Constants.FALSE;
 
 		self.base_url = $("#base_url_form input[name='base_url']").val();
-	    var callback_uri = self.base_url + "/" + angular.lowercase(Constants.ADMIN);
+	    var callback_uri = self.base_url + "/" + angular.lowercase(Constants.PEACHES);
 
 	    if(!angular.equals(self.change.new_email, self.change.confirm_email)){
 			self.errors = [Constants.MSG_EA_NOT_MATCH];

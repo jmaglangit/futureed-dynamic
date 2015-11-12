@@ -8,7 +8,7 @@ use FutureEd\Models\Repository\StudentModule\StudentModuleRepository;
 use FutureEd\Services\StudentModuleServices;
 use Illuminate\Http\Request;
 
-class ClassReportController extends ReportController {
+class ClassReportController {
 
 
 	/**
@@ -94,7 +94,13 @@ class ClassReportController extends ReportController {
 			],
 		]];
 
-		return $this->respondReportData($additional_information,$column_header,$rows);
+		return [
+			'additional_information' => $additional_information,
+			'column_header' => $column_header,
+			'rows' => $rows
+		];
+
+//		return $this->respondReportData($additional_information,$column_header,$rows);
 	}
 
 }
