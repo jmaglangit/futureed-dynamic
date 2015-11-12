@@ -47,6 +47,7 @@ class Invoice extends Model {
 	];
 
 	protected $attributes = [
+		'subscription_id' => 0,
 		'client_id' => 0,
 		'client_name' => 0,
 		'discount_id' => 0,
