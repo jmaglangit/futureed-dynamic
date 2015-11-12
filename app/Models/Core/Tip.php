@@ -75,6 +75,11 @@ class Tip extends Model {
 	}
 
 	//-------------scopes
+	public function scopeStatus($query, $status){
+
+		return $query->where('status',$status);
+	}
+
 	public function scopeTipStatus($query, $tip_status) {
 
 		return $query->where(function($query) use ($tip_status) {
