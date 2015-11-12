@@ -71,9 +71,9 @@ class StudentReportExportController extends ReportController {
 
 			case 'pdf':
 				$pdf = \PDF::loadView('export.student.subject-area-pdf', $report)->setPaper('a4')->setOrientation('landscape');
-				return $pdf->download($file_name);
+				return $pdf->download($file_name.'.'.$file_type);
 				break;
-			case 'xls' | 'xlsx':
+			case 'xls' || 'xlsx':
 				//Initiate format
 				Excel::create($file_name,function($excel) use ($report){
 
@@ -107,26 +107,27 @@ class StudentReportExportController extends ReportController {
 		$file_name = $student_info['first_name'].'_'.$student_info['last_name'].'_Current_Learning_'. Carbon::now()->toDateString();
 
 		//Export file
-		switch($file_type){
+		switch ($file_type) {
 
 			case 'pdf':
 				$pdf = \PDF::loadView('export.student.current-learning-pdf', $report)->setPaper('a4')->setOrientation('portrait');
-				return $pdf->download($file_name);
+				return $pdf->download($file_name . '.' . $file_type);
 				break;
-				break;
+
 			case 'xls' || 'xlsx':
 				//Initiate format
-				Excel::create($file_name,function($excel) use ($report){
+				Excel::create($file_name, function ($excel) use ($report) {
 
-					$excel->sheet('NewSheet', function($sheet) use ($report){
+					$excel->sheet('NewSheet', function ($sheet) use ($report) {
 
 						$sheet->mergeCells('A1:C1');
 						$sheet->mergeCells('A3:A5');
 						$sheet->setOrientation('portrait');
-						$sheet->loadView('export.student.current-learning-excel',$report);
+						$sheet->loadView('export.student.current-learning-excel', $report);
 					});
 				})->download($file_type);
 				break;
+
 			default:
 				return $this->respondErrorMessage(2063);
 				break;
