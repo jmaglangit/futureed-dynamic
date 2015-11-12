@@ -77,7 +77,10 @@ class StudentTipController extends ApiController {
 		}
 
 		//assign value to status = Accepted
-		$criteria['status'] = config('futureed.tip_status_accepted');
+		$criteria['tip_status'] = config('futureed.tip_status_accepted');
+
+		//assign value to status = Accepted
+		$criteria['status'] = config('futureed.enabled');
 
 		if(Input::get('limit')) {
 			$limit = intval(Input::get('limit'));
