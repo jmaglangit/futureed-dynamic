@@ -17,6 +17,7 @@ use FutureEd\Models\Repository\SubjectArea\SubjectAreaRepository;
 use FutureEd\Models\Repository\Tip\TipRepositoryInterface;
 use FutureEd\Services\AvatarServices;
 use FutureEd\Services\StudentServices;
+use FutureEd\Services\ImageServices;
 
 class StudentReportController extends ReportController {
 
@@ -46,6 +47,8 @@ class StudentReportController extends ReportController {
 
 	protected $student_badges;
 
+	protected $image_service;
+
 
 	/**
 	 * StudentReportController constructor.
@@ -57,6 +60,7 @@ class StudentReportController extends ReportController {
 	 * @param ModuleRepositoryInterface $moduleRepositoryInterface
 	 * @param AvatarServices $avatarServices
 	 * @param StudentServices $studentServices
+	 * @param ImageServices $imageServices
 	 * @param SubjectAreaRepository $subjectAreaRepository
 	 * @param TipRepositoryInterface $tipRepositoryInterface
 	 * @param PointLevelRepositoryInterface $pointLevelRepositoryInterface
@@ -74,6 +78,7 @@ class StudentReportController extends ReportController {
 		ModuleRepositoryInterface $moduleRepositoryInterface,
 		AvatarServices $avatarServices,
 		StudentServices $studentServices,
+		ImageServices $imageServices,
 		SubjectAreaRepository $subjectAreaRepository,
 		TipRepositoryInterface $tipRepositoryInterface,
 		PointLevelRepositoryInterface $pointLevelRepositoryInterface,
@@ -88,6 +93,7 @@ class StudentReportController extends ReportController {
 		$this->student_module = $studentModuleRepositoryInterface;
 		$this->avatar_service = $avatarServices;
 		$this->student_service = $studentServices;
+		$this->image_service = $imageServices;
 		$this->subject_areas = $subjectAreaRepository;
 		$this->tip = $tipRepositoryInterface;
 		$this->point_level = $pointLevelRepositoryInterface;
@@ -375,7 +381,8 @@ class StudentReportController extends ReportController {
 			? config('futureed.default_country') : $student->country_id;
 
 		//Get student current learning
-		$current_learning = $this->class_student->getStudentCurrentLearning($student_id, $subject_id, $country_id);
+		$current_learning = $this->class_student->getStudentCurrentLearning($student_id,$subject_id,$country_id);
+		$current_learning = $this->image_service->getIconImageUrl($current_learning);
 
 		$addition_information = [
 			'first_name' => $student->first_name,

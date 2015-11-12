@@ -704,7 +704,9 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 		try{
 
 			$response = DB::table('class_students as cs')->select(
+				DB::raw('m.id as module_id'),
 				DB::raw('m.grade_id'),
+				DB::raw('m.icon_image'),
 				DB::raw('g.name as grade_name'),
 				DB::raw('sa.name'),
 				DB::raw('sm.progress')
