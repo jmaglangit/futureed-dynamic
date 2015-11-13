@@ -74,6 +74,11 @@ class HelpRequestController extends ApiController{
             $criteria['request_status'] = Input::get('request_status');
         }
 
+        if(Input::get('status')){
+            $criteria['status'] = Input::get('status');
+        }
+
+
         if(Input::get('link_id')){
             $criteria['link_id'] = Input::get('link_id');
         }
