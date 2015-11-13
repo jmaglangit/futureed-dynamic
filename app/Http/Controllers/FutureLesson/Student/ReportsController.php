@@ -30,4 +30,8 @@ class ReportsController extends Controller {
 	public function current_learning() {
 		return view('student.reports.partials.current_learning_form');
 	}
+
+	public function progress_bar(){
+		return view('student.reports.partials.progress_bar');
+	}
 }

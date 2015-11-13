@@ -24,29 +24,7 @@
 		{!! Form::close() !!}
 	</div>
 
-	<div class="progress-container">
-		<p>[Student's] Progress in Future Lesson Curriculum</p>
-		<div class="row">
-			<div class="progress-item col-xs-2">
-				<div class=""> Badges Earned</div>
-			</div>
-			<div class="progress-item col-xs-2">
-				<div class=""> Number of Medals Earned</div>
-			</div>
-			<div class="progress-item col-xs-2">
-				<div class=""> Lessons Completed</div>
-			</div>
-			<div class="progress-item col-xs-2">
-				<div class=""> Tips Written </div>
-			</div>
-			<div class="progress-item col-xs-2">
-				<div class=""> Hours Spent </div>
-			</div>
-			<div class="progress-item col-xs-2">
-				<div class=""> Sample Stuff</div>
-			</div>
-		</div>
-	</div>
+	<div template-directive template-url="{!! route('reports.partials.progress_bar') !!}"></div>
 
 	<div class="reports-container" ng-cloak>
 		<table id="tip-list" class="table table-striped table-bordered">
