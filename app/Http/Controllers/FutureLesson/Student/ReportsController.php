@@ -14,4 +14,20 @@ class ReportsController extends Controller {
 	public function reports_form() {
 		return view('student.reports.partials.reports_form');
 	}
+
+	public function report_card() {
+		return view('student.reports.partials.report_card_form');
+	}
+
+	public function subject_area() {
+		return view('student.reports.partials.subject_area_form');
+	}
+
+	public function summary_progress() {
+		return view('student.reports.partials.summary_progress_form');
+	}
+
+	public function current_learning() {
+		return view('student.reports.partials.current_learning_form');
+	}
 }
