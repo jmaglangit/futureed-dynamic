@@ -1596,11 +1596,11 @@ top: 41px;
 #student-reports .report-options ul li {
 	float: right; margin-left:5px; width: 80px;
 }
-#student-reports .table > tbody > tr > td {
-    padding: 2px;
-    border:none;
+.current-learning .table > tbody > tr > td {
+	padding: 2px;
+	border:none;
 }
-#student-reports .table th{
+.current-learning .table th{
 	background-color: #A92147;
 	color: #fff;
 }
@@ -1627,4 +1627,27 @@ top: 41px;
 .pill-gold-report>li.active>a, .pill-gold-report>li.active>a:focus, .pill-gold-report>li.active>a:hover {
 	background-color: #DFC100;
 }
+
+/*begin subject area tab*/
+.subject-area .form-search{
+	border: none;
+	border-radius: 0;
+	padding: 5px 15px;
+	background-color: #A92147;
+}
+
+.subject-area .progress-container {border:1px solid;}
+/*.subject-area .progress-container .progress-item {border:1px solid red; height: 80px;}*/
+.subject-area .progress-container .progress-item {padding-left: 5px; padding-right: 5px;}
+.subject-area .progress-container .progress-item div {border:1px solid; height: 80px;}
+
+.subject-area .table > tbody > tr > td, .subject-area .table > thead > tr > th {
+	padding: 10px;
+}
+
+.subject-area .table-bordered>thead>tr>td, .subject-area .table-bordered>thead>tr>th{
+	border-bottom-width: 1px;
+}
+/*end subject area tab*/
+
 /*end custom css for report page*/
