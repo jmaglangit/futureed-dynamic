@@ -45,7 +45,7 @@
 							ng-click="mod.reviewContent()"> Review Contents </button>
 					</div>
 					<div ng-if="mod.active_contents">
-						{!! Form::button('Skip'
+						{!! Form::button('Proceed'
 							,array(
 								'class' => 'btn btn-maroon'
 								, 'ng-click' => 'mod.startQuestions()'

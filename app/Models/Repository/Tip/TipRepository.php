@@ -2,7 +2,9 @@
 
 namespace FutureEd\Models\Repository\Tip;
 
+use Carbon\Carbon;
 use FutureEd\Models\Core\Tip;
+use Illuminate\Support\Facades\DB;
 use League\Flysystem\Exception;
 
 
@@ -180,10 +182,16 @@ class TipRepository implements TipRepositoryInterface{
 
 
 				//for tip_status
-				if(isset($criteria['status'])) {
+				if(isset($criteria['tip_status'])) {
 
-					$tip = $tip->tipStatus($criteria['status']);
+					$tip = $tip->tipStatus($criteria['tip_status']);
 
+				}
+
+				//for status
+				if(isset($criteria['status'])){
+
+					$tip = $tip->status($criteria['status']);
 				}
 
 				//relation to student query creators name
@@ -237,6 +245,32 @@ class TipRepository implements TipRepositoryInterface{
 		$tip = $tip->orderBy('created_at','desc')->take(config('futureed.tip_take'));
 		return $tip->get();
 
+	}
+
+	/**
+	 * @param $student_id
+	 * @param $subject_id
+	 */
+	public function getStudentActiveTips($student_id, $subject_id){
+		//
+		//select
+		//t.id, t.class_id,t.student_id
+		//from tips t
+		//left join classrooms c on c.id=t.class_id
+		//left join orders o on o.order_no=c.order_no
+		//where
+		//t.student_id = 3
+		//and t.subject_id = 3
+		//and o.date_start <= now() and o.date_end >= now()
+		//;
+
+		return Tip::select('tips.*')->leftJoin('classrooms as c','c.id','=','tips.class_id')
+			->leftJoin('orders as o','o.order_no','=','c.order_no')
+			->where('tips.student_id',$student_id)
+			->where('tips.subject_id',$subject_id)
+			->where('o.date_start','<=',Carbon::now())
+			->where('o.date_end','>=',Carbon::now())
+			->get();
 	}
 
 

@@ -202,7 +202,7 @@
                 <div class="col-xs-3"></div>
                 <div class="col-xs-6">
                     <select ng-model="reports.search.subject_id"
-                            ng-change="reports.currentLearning()"
+                            ng-change="reports.subjectArea()"
                             ng-disabled="!reports.subjects.length"
                             class="form-control">
                         <option value="">-- Select Subject --</option>

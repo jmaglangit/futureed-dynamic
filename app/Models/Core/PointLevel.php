@@ -30,6 +30,11 @@ class PointLevel extends Model {
 
 	}
 
+	public function scopePointLevel($query, $acquired_points){
+
+		return $query->where('points_required', '<=', $acquired_points);
+	}
+
 
 
 

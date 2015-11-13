@@ -59,5 +59,7 @@ interface StudentRepositoryInterface {
 
     public function getStudentByGoogleId($google_id);
 
+    public function getStudentPoints($student_id);
+
 
 }
