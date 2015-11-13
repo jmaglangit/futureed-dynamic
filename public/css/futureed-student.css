@@ -1652,6 +1652,8 @@ top: 41px;
 .progress-container .progress-item-container .progress-item p {margin: 5px 0 0; color:#337ab7; font-size: 14px;}
 /*end progress bar*/
 
+.subject-area .table {border-top:none;}
+
 .subject-area .table > tbody > tr > td, .subject-area .table > thead > tr > th {
 	padding: 10px;
 }
