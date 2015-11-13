@@ -35,10 +35,6 @@ class ProfileController extends Controller {
 		return view('student.profile.confirm_email_form');
 	}
 
-	public function reports_form() {
-		return view('student.profile.partials.reports_form');
-	}
-
 	public function enter_email_code() {
 		$input = Input::only('email');
 		$student_session = Session::get('student');

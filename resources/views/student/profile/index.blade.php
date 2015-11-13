@@ -44,7 +44,6 @@
 							<span class="thin" ng-if="profile.active_confirm_email">Confirm Email Address</span>
 							<span class="thin" ng-if="profile.active_rewards">Student Rewards</span>
 							<span class="thin" ng-if="profile.active_avatar">Change Avatar</span>
-							<span class="thin" ng-if="profile.active_reports">My Reports</span>
 							<div ng-if="profile.active_password">
 								<span ng-if="!profile.password_validated" class="thin">
 									Current
@@ -85,7 +84,6 @@
 
 				<div template-directive template-url="{!! route('student.partials.change_password_form') !!}"></div>
 
-				<div ng-controller="StudentReportsController as reports" template-directive template-url="{!! route('student.partials.reports_form') !!}"></div>
 			</div>
 		</div>
 	</div>

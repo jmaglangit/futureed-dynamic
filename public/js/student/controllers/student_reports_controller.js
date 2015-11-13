@@ -87,6 +87,9 @@ function StudentReportsController($scope, $timeout, StudentReportsService, Searc
 
                     $timeout(function () {
                         self.summary.records = response.data.rows.progress;
+                        self.student = response.data.additional_information;
+
+                        console.log(self.student);
 
                         angular.forEach(self.summary.records, function (value, key) {
                             value.completed = value.completed + "%";
@@ -246,7 +249,7 @@ function StudentReportsController($scope, $timeout, StudentReportsService, Searc
                     self.errors = $scope.errorHandler(response.errors);
                 } else if (response.data) {
                     self.summary.columns = response.data.column_header;
-
+            
                     var column = response.data.column_header;
 
                     angular.forEach(column, function (value, key){
@@ -255,6 +258,9 @@ function StudentReportsController($scope, $timeout, StudentReportsService, Searc
                     });
 
                     self.summary.records = response.data.rows;
+                    self.student = response.data.additional_information;
+                    
+                    console.log(self.student);
                 }
             }
 
