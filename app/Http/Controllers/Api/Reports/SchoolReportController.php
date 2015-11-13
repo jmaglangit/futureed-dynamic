@@ -80,8 +80,8 @@ class SchoolReportController extends ReportController {
 			$class_watch['lowest_class'] = (count($classes) > 1) ? end($classes) : null;
 		}
 
-		// highest scorer - on hold
-		// lowest scorer - on hold
+
+
 
 		// Key student to watch - refer to previous query
 		$student = $this->school->getSchoolStudentRanking($school_code);
@@ -90,17 +90,32 @@ class SchoolReportController extends ReportController {
 
 		$student_watch = $student_progress;
 
+		//Correct Wrong -
+		$student_scores = $this->school->getSchoolStudentScores($school_code);
+
+
+		//Highest score
+		$highest_correct_score = $this->school_service->getHighCorrectScores($student_scores);
+
+		//lowest score
+		$highest_wrong_score = $this->school_service->getHighWrongScores($student_scores);
 
 		$additional_information = [];
 
 		$column_header = [
 			'skills_watch' => 'Key Skill areas to watch',
+			'class_watch' => 'Key Classes to watch',
+			'student_watch' => 'Key Student to watch',
+			'highest_score' => 'Highest Score',
+			'lowest_score' => 'Lowest Score'
 		];
 
 		$rows = [
 			'skills_watch' => $skill_watch,
 			'class_watch' => $class_watch,
-			'student_watch' => $student_watch
+			'student_watch' => $student_watch,
+			'highest_score' => $highest_correct_score,
+			'lowest_score' => $highest_wrong_score
 		];
 
 		return [
