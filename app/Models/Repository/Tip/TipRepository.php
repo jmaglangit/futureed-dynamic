@@ -182,10 +182,16 @@ class TipRepository implements TipRepositoryInterface{
 
 
 				//for tip_status
-				if(isset($criteria['status'])) {
+				if(isset($criteria['tip_status'])) {
 
-					$tip = $tip->tipStatus($criteria['status']);
+					$tip = $tip->tipStatus($criteria['tip_status']);
 
+				}
+
+				//for status
+				if(isset($criteria['status'])){
+
+					$tip = $tip->status($criteria['status']);
 				}
 
 				//relation to student query creators name
