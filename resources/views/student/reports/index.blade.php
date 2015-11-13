@@ -30,7 +30,7 @@
 				</div>
 			</div>
 
-			<div class="reports" ng-controller="StudentReportsController as reports" ng-init="profile.setStudentProfileActive('reports')" template-directive template-url="{!! route('student.reports.reports_form') !!}"></div>
+			<div class="reports" ng-controller="StudentReportsController as reports" ng-init="profile.setStudentProfileActive('reports')" template-directive template-url="{!! route('reports.partials.reports_form') !!}"></div>
 		</div>
 	</div>
 @stop
