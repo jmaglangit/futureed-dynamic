@@ -1579,3 +1579,52 @@ top: 41px;
 	margin: 17px 40px;
 	border-radius: 50%;
 }
+
+/*custom css for report page*/
+#student-reports .wrapr {
+	padding:10px 15px;
+}
+#student-reports .title-main-content {
+	overflow: auto; margin-top:10px bottom:50px;
+}
+#student-reports .report-options {
+	margin-top:20px;
+}
+#student-reports .report-options ul {
+	list-style: none;
+}
+#student-reports .report-options ul li {
+	float: right; margin-left:5px; width: 80px;
+}
+#student-reports .table > tbody > tr > td {
+    padding: 2px;
+    border:none;
+}
+#student-reports .table th{
+	background-color: #A92147;
+	color: #fff;
+}
+#student-reports .reports {
+	margin-top:60px;
+}
+#student-reports div.category-info {
+	margin-left:120px;
+}
+#student-reports div.category-info img {
+	width: 30px;
+}
+
+#student-reports .nav-student {
+	border-bottom: none;
+	margin-bottom: 0;
+}
+
+#student-reports .nav-student li {
+	width: 233px;
+	text-align: center;
+}
+
+.pill-gold-report>li.active>a, .pill-gold-report>li.active>a:focus, .pill-gold-report>li.active>a:hover {
+	background-color: #DFC100;
+}
+/*end custom css for report page*/
