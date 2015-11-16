@@ -163,7 +163,10 @@ class SchoolRepository implements SchoolRepositoryInterface{
 	}
 
 	/**
-	 * @param $school_id
+	 * Get School Area rankings.
+	 * @param $school_code
+	 * @return string
+	 * @internal param $school_id
 	 */
 	public function getSchoolAreaRanking($school_code) {
 		//select
@@ -240,6 +243,7 @@ class SchoolRepository implements SchoolRepositoryInterface{
 
 
 	/**
+	 * Get School Class Rankings.
 	 * @param $school_code
 	 * @return string
 	 */
@@ -318,6 +322,7 @@ class SchoolRepository implements SchoolRepositoryInterface{
 
 
 	/**
+	 * Get School Student Rankings.
 	 * @param $school_code
 	 * @return string
 	 */
@@ -397,28 +402,29 @@ class SchoolRepository implements SchoolRepositoryInterface{
 
 
 	/**
+	 * Get School Students Scores.
 	 * @param $school_code
 	 * @return string
 	 */
 	public function getSchoolStudentScores($school_code){
-//select
-//sma.id,stud.id as student_id, stud.first_name, stud.last_name
-//,count(case when sma.answer_status = 'Correct' then 1 else null end) as Correct
-//,count(case when sma.answer_status = 'Wrong' then 1 else null end) as Wrong
-//,cl.first_name,cl.last_name
-//
-//from student_module_answers sma
-//left join student_modules sm on sma.student_module_id=sm.id
-//left join students stud on stud.id=sm.student_id
-//left join classrooms c on c.id=sm.class_id
-//left join orders o on o.order_no=c.order_no
-//left join clients cl on cl.id=c.client_id
-//left join schools sch on sch.code = cl.school_code
-//where
-//o.date_start <= now() and o.date_end >= now()
-//and sch.code = 1441379529
-//group by student_id
-//;
+		//select
+		//sma.id,stud.id as student_id, stud.first_name, stud.last_name
+		//,count(case when sma.answer_status = 'Correct' then 1 else null end) as Correct
+		//,count(case when sma.answer_status = 'Wrong' then 1 else null end) as Wrong
+		//,cl.first_name,cl.last_name
+		//
+		//from student_module_answers sma
+		//left join student_modules sm on sma.student_module_id=sm.id
+		//left join students stud on stud.id=sm.student_id
+		//left join classrooms c on c.id=sm.class_id
+		//left join orders o on o.order_no=c.order_no
+		//left join clients cl on cl.id=c.client_id
+		//left join schools sch on sch.code = cl.school_code
+		//where
+		//o.date_start <= now() and o.date_end >= now()
+		//and sch.code = 1441379529
+		//group by student_id
+		//;
 
 		DB::beginTransaction();
 		try{
