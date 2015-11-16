@@ -174,6 +174,7 @@ class SchoolServices {
 	}
 
 	/**
+	 * Get student progress by approve level.
 	 * @param $students
 	 * @return array
 	 */
@@ -203,6 +204,7 @@ class SchoolServices {
 	}
 
 	/**
+	 * Get highest correct scorer.
 	 * @param $student_scores
 	 * @return array
 	 */
@@ -239,6 +241,7 @@ class SchoolServices {
 	}
 
 	/**
+	 * Get highest wrong scorer.
 	 * @param $student_scores
 	 * @return array
 	 */
@@ -276,6 +279,7 @@ class SchoolServices {
 
 
 	/**
+	 * Convert progress status to approved format.
 	 * @param $progress
 	 * @return mixed|null
 	 */
