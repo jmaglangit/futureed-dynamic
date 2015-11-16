@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 class ReportController extends Controller {
 
 	/**
-	 * TODO: Generate dashboard format.
+	 * TODO: Generate report format.
 	 */
 
 	protected $header;
@@ -116,7 +116,7 @@ class ReportController extends Controller {
 	}
 
 	/**
-	 * Generate dashboard data.
+	 * Generate report data.
 	 * @param $information
 	 * @param $columns
 	 * @param array $rows

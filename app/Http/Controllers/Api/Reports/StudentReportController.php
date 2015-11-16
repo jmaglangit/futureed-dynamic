@@ -103,7 +103,7 @@ class StudentReportController extends ReportController {
 
 
 	/**
-	 * Get Student status dashboard.
+	 * Get Student status report.
 	 * @param $id
 	 * @return \Symfony\Component\HttpFoundation\Response
 	 */
