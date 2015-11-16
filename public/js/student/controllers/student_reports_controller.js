@@ -89,8 +89,6 @@ function StudentReportsController($scope, $timeout, StudentReportsService, Searc
                         self.summary.records = response.data.rows.progress;
                         self.student = response.data.additional_information;
 
-                        console.log(self.student);
-
                         angular.forEach(self.summary.records, function (value, key) {
                             value.completed = value.completed + "%";
                             value.on_going = value.on_going + "%";
@@ -259,8 +257,6 @@ function StudentReportsController($scope, $timeout, StudentReportsService, Searc
 
                     self.summary.records = response.data.rows;
                     self.student = response.data.additional_information;
-                    
-                    console.log(self.student);
                 }
             }
 
