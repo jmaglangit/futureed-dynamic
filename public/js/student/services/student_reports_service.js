@@ -10,14 +10,14 @@ function StudentReportsService($http) {
 	api.reportCard = function(id) {
 		return $http({
 			method : Constants.METHOD_GET
-			, url  : apiUrl + 'report/student/' + id
+			, url  : apiUrl + 'dashboard/student/' + id
 		});
 	}
 
 	api.summaryProgress = function(student_id, subject_id) {
 		return $http({
 			method : Constants.METHOD_GET
-			, url  : apiUrl + 'report/student-progress/' + student_id + '/' + subject_id
+			, url  : apiUrl + 'dashboard/student-progress/' + student_id + '/' + subject_id
 		});
 	}
 	
@@ -28,19 +28,19 @@ function StudentReportsService($http) {
 		});
 	}
 
-	//GET api/report/student-progress/current-learning/{student_id}/{subject_id}
+	//GET api/dashboard/student-progress/current-learning/{student_id}/{subject_id}
 	api.currentLearning = function (student_id, subject_id) {
 		return $http({
 			method	: Constants.METHOD_GET
-			, url	: apiUrl + 'report/student-progress/current-learning/' + student_id + '/' + subject_id
+			, url	: apiUrl + 'dashboard/student-progress/current-learning/' + student_id + '/' + subject_id
 		});
 	}
 
-	//GET /api/report/student-progress/curriculum/{student_id}/{subject_id}
+	//GET /api/dashboard/student-progress/curriculum/{student_id}/{subject_id}
 	api.subjectArea = function (student_id, subject_id) {
 		return $http({
 			method	:	Constants.METHOD_GET
-			,	url	:	apiUrl + 'report/student-progress/curriculum/' + student_id + '/' + subject_id
+			,	url	:	apiUrl + 'dashboard/student-progress/curriculum/' + student_id + '/' + subject_id
 		});
 	}
 

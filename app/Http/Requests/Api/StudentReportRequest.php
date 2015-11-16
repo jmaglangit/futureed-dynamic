@@ -28,13 +28,13 @@ class StudentReportRequest extends ApiRequest {
 
 				switch($this->route()->getName()){
 
-					case 'api.report.student.progress':
+					case 'api.dashboard.student.progress':
 
 						return [
 						];
 						break;
 
-					case 'api.report.student.progress.curriculum':
+					case 'api.dashboard.student.progress.curriculum':
 
 						return [
 						];

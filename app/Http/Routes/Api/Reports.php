@@ -2,7 +2,7 @@
 
 
 Routes::group([
-	'prefix' => '/report',
+	'prefix' => '/dashboard',
 //	'middleware' => ['api_user', 'api_after'],
 //	'permission' => ['admin', 'client', 'student'],
 //	'role' => ['principal', 'teacher', 'parent', 'admin', 'super admin']
@@ -13,22 +13,22 @@ Routes::group([
 	 */
 	Routes::get('/student/{id}',[
 		'uses' => 'Api\Reports\StudentReportRestController@studentStatusReport',
-		'as' => 'api.report.student.status'
+		'as' => 'api.dashboard.student.status'
 	]);
 
 	Routes::get('/student-progress/{id}/{subject_id}',[
 		'uses' => 'Api\Reports\StudentReportRestController@studentProgressReport',
-		'as' => 'api.report.student.progress'
+		'as' => 'api.dashboard.student.progress'
 	]);
 
 	Routes::get('/student-progress/curriculum/{id}/{subject_id}',[
 		'uses' => 'Api\Reports\StudentReportRestController@studentSubjectGradeProgressReport',
-		'as' => 'api.report.student.progress.curriculum'
+		'as' => 'api.dashboard.student.progress.curriculum'
 	]);
 
 	Routes::get('/student-progress/current-learning/{student_id}/{subject_id}',[
 		'uses' => 'Api\Reports\StudentReportRestController@studentCurrentLearning',
-		'as' => 'api.report.student.progress.current-learning'
+		'as' => 'api.dashboard.student.progress.current-learning'
 	]);
 
 
@@ -37,7 +37,7 @@ Routes::group([
 	 */
 	Routes::get('/classroom/{class_id}',[
 		'uses' => 'Api\Reports\ClassReportRestController@classReport',
-		'as' => 'api.report.classroom.status'
+		'as' => 'api.dashboard.classroom.status'
 	]);
 
 	/**
@@ -45,12 +45,12 @@ Routes::group([
 	 */
 	Routes::get('/school/{school_code}',[
 		'uses' => 'Api\Reports\SchoolReportRestController@schoolProgress',
-		'as' => 'api.report.school.status'
+		'as' => 'api.dashboard.school.status'
 	]);
 
 	Routes::get('/school/{school_code}/teachers',[
 		'uses' => 'Api\Reports\SchoolReportRestController@schoolTeacherProgress',
-		'as' => 'api.report.school.teacher.progress'
+		'as' => 'api.dashboard.school.teacher.progress'
 	]);
 
 
@@ -63,12 +63,12 @@ Routes::group([
 	 */
 	Routes::get('/student-progress/curriculum/{id}/{subject_id}/{file_type}',[
 			'uses' => 'Api\Reports\StudentReportExportController@studentSubjectGradeProgressReport',
-			'as' => 'api.report.student.progress.curriculum'
+			'as' => 'api.dashboard.student.progress.curriculum'
 	]);
 
 	Routes::get('/student-progress/current-learning/{student_id}/{subject_id}/{file_type}',[
 			'uses' => 'Api\Reports\StudentReportExportController@studentCurrentLearning',
-			'as' => 'api.report.student.progress.current-learning.export'
+			'as' => 'api.dashboard.student.progress.current-learning.export'
 	]);
 
 

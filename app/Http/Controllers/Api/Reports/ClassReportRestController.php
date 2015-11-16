@@ -14,7 +14,7 @@ class ClassReportRestController extends ReportController {
 	}
 
 	/**
-	 * Class report for front-end.
+	 * Class dashboard for front-end.
 	 * @param $class_id
 	 * @return \Symfony\Component\HttpFoundation\Response
 	 */
