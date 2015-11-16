@@ -44,7 +44,7 @@
 
             <hr/>
 
-            <fieldset class="payment-field">
+            <fieldset class="payment-field" ng-if="!payment.invoice.renew">
                 <span class="step">2</span>
 
                 <p class="step-label">Please add a classroom.</p>
@@ -166,12 +166,12 @@
                         </div>
                     </div>
                 </div>
+                <hr/>
             </fieldset>
 
-            <hr/>
-
             <fieldset class="payment-field">
-                <span class="step">3</span>
+                <span class="step" ng-if="!payment.invoice.renew">3</span>
+                <span class="step"  ng-if="payment.invoice.renew">2</span>
 
                 <p class="step-label">Please select a subscription.</p>
 

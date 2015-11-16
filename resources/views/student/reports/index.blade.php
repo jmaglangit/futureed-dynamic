@@ -5,32 +5,31 @@
 @stop
 
 @section('content')
-	<div id="student-reports" class="container dshbrd-con" ng-controller="ProfileController as profile" ng-cloak>
+	<div class="container dshbrd-con reports" ng-controller="ProfileController as profile" ng-cloak>
 		<div class="wrapr">
-			<div class="title-main-content">
-				<div class="report-title col-xs-6">
-					<h3><i class="fa fa-file-text-o"></i> My Reports</h3>
-				</div>
-
-				<div class="report-options col-xs-6 pull-right">
-					<ul>
-						<li>
-							<button class="btn btn-blue"><i class="fa fa-save"></i> Save </button>
-						</li>
-						<li>
-							<button class="btn btn-blue"><i class="fa fa-file-pdf-o"></i> Export </button>
-						</li>
-						<li>
-							<button class="btn btn-blue"><i class="fa fa-print"></i> Print </button>
-						</li>
-						<li>
-							<button class="btn btn-blue"><i class="fa fa-envelope-o"></i> Email </button>
-						</li>
-					</ul>
+			<div class="content-title">
+				<div class="title-main-content">
+					<span><i class="fa fa-file-text-o"></i> My Reports</span>
+					<div class="report-options col-xs-6 pull-right top-10">
+						<ul>
+							<li>
+								<button class="btn btn-blue"><i class="fa fa-save"></i> Save </button>
+							</li>
+							<li>
+								<button class="btn btn-blue"><i class="fa fa-file-pdf-o"></i> Export </button>
+							</li>
+							<li>
+								<button class="btn btn-blue"><i class="fa fa-print"></i> Print </button>
+							</li>
+							<li>
+								<button class="btn btn-blue"><i class="fa fa-envelope-o"></i> Email </button>
+							</li>
+						</ul>
+					</div>
 				</div>
 			</div>
 
-			<div class="reports" ng-controller="StudentReportsController as reports" ng-init="profile.setStudentProfileActive('reports')" template-directive template-url="{!! route('reports.partials.reports_form') !!}"></div>
+			<div class="report-content" ng-controller="StudentReportsController as reports" ng-init="profile.setStudentProfileActive('reports')" template-directive template-url="{!! route('reports.partials.reports_form') !!}"></div>
 		</div>
 	</div>
 @stop
