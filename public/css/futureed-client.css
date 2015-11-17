@@ -508,3 +508,53 @@ content legend {
 .alert-success, .alert-error {
 	margin-bottom: 15px;
 }
+
+/*dashboard reports*/
+.report-options {
+	overflow: auto;
+}
+
+.report-options ul {
+	list-style: none;
+}
+
+.report-options ul li {
+	float: right; 
+	margin-left:5px;
+	width: 80px;
+}
+
+.report-container {
+	border:1px solid #DCDCDC;
+	padding:15px;
+}
+
+.report-container h3{
+	font-size: 16px;
+	color:#055a7f;
+}
+
+.report-nav li{
+	padding-left: 0;
+}
+
+.report-nav .class-list{
+	padding-top:8px;
+}
+
+.report-nav>li.active>a, .report-nav>li.active>a:focus, .report-nav>li.active>a:hover{
+	background-color: #d3bf49;
+	text-align: center;
+	color:#fff;
+	padding:15px	;	
+}
+
+.report-nav .nav-tabs>li.active>a:hover {}
+
+.magenta {
+	background-color: #AC2A4E;
+}
+
+.magenta td{
+	color:#fff;
+}
