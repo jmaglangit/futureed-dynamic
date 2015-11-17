@@ -482,4 +482,22 @@ function ManageTeacherClassController($scope, $filter, ManageClassService, apiSe
 			$scope.ui_unblock();
 		});
 	}
+
+	self.getClassReport = function(classroom_id){
+		self.studentList = {};
+		self.columnHeader = {};
+		ManageClassService.getClassReport(classroom_id).success(function(response) {
+			if(response.status == Constants.STATUS_OK) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.studentList = response.data.rows[0].student_progress;
+					self.columnHeader = response.data.column_header;
+					console.log(self.columnHeader);
+				}
+			}
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+		});
+	}
 }

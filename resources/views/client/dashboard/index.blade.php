@@ -24,7 +24,7 @@
 					<div template-directive template-url="{!! route('client.principal.dashboard.index') !!}"></div>
 
 					<div template-directive template-url="{!! route('client.teacher.dashboard.index') !!}"></div>
-					
+
 				</div>
 			</div>
 		</div>
@@ -32,5 +32,12 @@
 @stop
 
 @section('scripts')
+	{!! Html::script('/js/client/controllers/manage_teacher_class_controller.js')!!}
+	{!! Html::script('/js/client/services/manage_teacher_class_service.js')!!}
+
+	{!! Html::script('/js/common/validation_service.js')!!}
+	{!! Html::script('/js/common/table_service.js')!!}
+	{!! Html::script('/js/common/search_service.js')!!}
+@stop
 
 @stop
