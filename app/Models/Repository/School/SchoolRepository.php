@@ -3,6 +3,7 @@
 namespace FutureEd\Models\Repository\School;
 
 use FutureEd\Models\Core\School;
+use FutureEd\Models\Core\StudentModuleAnswer;
 use FutureEd\Models\Traits\LoggerTrait;
 use Illuminate\Support\Facades\DB;
 use League\Flysystem\Exception;
@@ -162,7 +163,10 @@ class SchoolRepository implements SchoolRepositoryInterface{
 	}
 
 	/**
-	 * @param $school_id
+	 * Get School Area rankings.
+	 * @param $school_code
+	 * @return string
+	 * @internal param $school_id
 	 */
 	public function getSchoolAreaRanking($school_code) {
 		//select
@@ -239,6 +243,7 @@ class SchoolRepository implements SchoolRepositoryInterface{
 
 
 	/**
+	 * Get School Class Rankings.
 	 * @param $school_code
 	 * @return string
 	 */
@@ -317,6 +322,7 @@ class SchoolRepository implements SchoolRepositoryInterface{
 
 
 	/**
+	 * Get School Student Rankings.
 	 * @param $school_code
 	 * @return string
 	 */
@@ -391,6 +397,72 @@ class SchoolRepository implements SchoolRepositoryInterface{
 
 		return $response;
 
+
+	}
+
+
+	/**
+	 * Get School Students Scores.
+	 * @param $school_code
+	 * @return string
+	 */
+	public function getSchoolStudentScores($school_code){
+		//select
+		//sma.id,stud.id as student_id, stud.first_name, stud.last_name
+		//,count(case when sma.answer_status = 'Correct' then 1 else null end) as Correct
+		//,count(case when sma.answer_status = 'Wrong' then 1 else null end) as Wrong
+		//,cl.first_name,cl.last_name
+		//
+		//from student_module_answers sma
+		//left join student_modules sm on sma.student_module_id=sm.id
+		//left join students stud on stud.id=sm.student_id
+		//left join classrooms c on c.id=sm.class_id
+		//left join orders o on o.order_no=c.order_no
+		//left join clients cl on cl.id=c.client_id
+		//left join schools sch on sch.code = cl.school_code
+		//where
+		//o.date_start <= now() and o.date_end >= now()
+		//and sch.code = 1441379529
+		//group by student_id
+		//;
+
+		DB::beginTransaction();
+		try{
+
+			$response = StudentModuleAnswer::select(
+					DB::raw('student_module_answers.id as student_module_answer')
+					,DB::raw('stud.id as student_id')
+					,DB::raw('stud.first_name as stud_first_name')
+					,DB::raw('stud.last_name as stud_last_name')
+					,DB::raw("count(case when student_module_answers.answer_status = 'Correct' then 1 else null end) as Correct")
+					,DB::raw("count(case when student_module_answers.answer_status = 'Wrong' then 1 else null end) as Wrong")
+					,DB::raw("cl.first_name as client_first_name")
+					,DB::raw("cl.last_name as client_last_name")
+			)->leftJoin('student_modules as sm','sm.id','=','student_module_answers.student_module_id')
+					->leftJoin('students as stud','stud.id','=','sm.student_id')
+					->leftJoin('classrooms as c','c.id','=','sm.class_id')
+					->leftJoin('orders as o','o.order_no','=','c.order_no')
+					->leftJoin('clients as cl','cl.id','=','c.client_id')
+					->leftJoin('schools as sch','sch.code','=','cl.school_code')
+					->where('o.date_start','<=', Carbon::now())
+					->where('o.date_end','>=',Carbon::now())
+					->where('sch.code','=', $school_code)
+					->groupBy('student_id')
+					->get();
+			;
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return $e->getMessage();
+		}
+
+		DB::commit();
+
+		return $response;
 
 	}
 

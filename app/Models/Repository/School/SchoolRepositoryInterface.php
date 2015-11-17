@@ -31,4 +31,6 @@ interface SchoolRepositoryInterface {
 
     public function getSchoolStudentRanking($school_code);
 
+    public function getSchoolStudentScores($school_code);
+
 }

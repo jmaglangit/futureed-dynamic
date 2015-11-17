@@ -47,6 +47,8 @@ class Invoice extends Model {
 	];
 
 	protected $attributes = [
+		'total_amount' => 0,
+		'seats_total' => 0,
 		'subscription_id' => 0,
 		'client_id' => 0,
 		'client_name' => 0,

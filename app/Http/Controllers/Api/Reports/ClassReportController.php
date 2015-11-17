@@ -99,8 +99,6 @@ class ClassReportController {
 			'column_header' => $column_header,
 			'rows' => $rows
 		];
-
-//		return $this->respondReportData($additional_information,$column_header,$rows);
 	}
 
 }

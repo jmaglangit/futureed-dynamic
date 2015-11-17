@@ -124,6 +124,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 						, seats_total 		: 	data.seats_total
 						, total_amount 		: 	data.total_amount
 						, expired	 		: 	data.expired
+						, renew				:	data.renew
 					}
 
 					self.getStudents(self.invoice.order_no);
@@ -548,6 +549,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 					if(response.errors) {
 						self.errors = $scope.errorHandler(response.errors);
 					} else if(response.data) {
+
 						self.setActive(Constants.ACTIVE_VIEW, response.data.id);
 					}
 				}

@@ -84,6 +84,21 @@
 					, 'middleware' => 'client'
 					, 'uses' => 'FutureLesson\Client\DashboardController@index'
 				]);
+
+			Routes::get('/parent',[
+				'as' => 'client.parent.dashboard.index'
+				,'uses' => 'FutureLesson\Client\ParentDashboardController@index'
+			]);
+
+			Routes::get('/principal',[
+				'as' => 'client.principal.dashboard.index',
+				'uses' => 'FutureLesson\Client\PrincipalDashboardController@index'
+			]);
+
+			Routes::get('/teacher',[
+				'as' => 'client.teacher.dashboard.index',
+				'uses' => 'FutureLesson\Client\TeacherDashboardController@index'
+			]);
 			
 		});
 

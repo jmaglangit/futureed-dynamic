@@ -1579,3 +1579,132 @@ top: 41px;
 	margin: 17px 40px;
 	border-radius: 50%;
 }
+
+/*reports*/
+.reports .report-options ul {
+	list-style: none;
+}
+
+.reports .report-options ul li {
+	float: right; margin-left:5px; width: 80px;
+}
+
+.reports .wrapr {
+	padding:15px;
+}
+
+.reports .content-title{
+	border-bottom: none;
+	height: auto;
+	margin-left:0px;
+	margin-bottom: 35px;	
+}
+
+.reports .nav-student {
+	border-bottom: none;
+	margin-bottom: 0;
+}
+
+.reports .nav-student li {
+	width: 233px;
+}
+
+.reports .nav-student li a {
+	border:1px solid #dcdcdc;
+	border-bottom: none;
+}
+
+.pill-gold-report>li.active>a, .pill-gold-report>li.active>a:focus, .pill-gold-report>li.active>a:hover {
+	background-color: #DFC100;
+}
+
+.reports .form-search{
+	border: none;
+	border-radius: 0;
+	padding: 5px 15px;
+	background-color: #A92147;
+}
+/*end reports*/
+
+
+/*current learning tab*/
+.current-learning .table > tbody > tr > td {
+	padding: 2px;
+	border:none;
+}
+.current-learning .table th{
+	background-color: #A92147;
+	color: #fff;
+}
+
+.category-info {
+	margin-left:120px;
+}
+
+.category-info img {
+	width: 30px;
+}
+/*end current learning tab*/
+
+/*subject-area tab*/
+
+.subject-area .table {border-top:none;}
+
+.subject-area .table > tbody > tr > td, .subject-area .table > thead > tr > th {
+	padding: 10px;
+}
+
+.subject-area .table-bordered>thead>tr>td, .subject-area .table-bordered>thead>tr>th{
+	border-bottom-width: 1px;
+}
+
+.progress-container .circle {
+	width: 75px;
+	height: 75px;
+	border: 5px solid #E9CC45;
+	background: #DDBE0E;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+	margin:auto;
+	vertical-align: middle;
+	font-size: 30px;
+	padding-top:15px;
+	color: #fff;
+}
+/*end subject area tab*/
+
+/*begin progress bar*/
+.progress-container {
+	border:1px solid #ddd; 
+	padding: 0 5px 20px;
+}
+
+.progress-container h3 {
+	color:#337ab7;
+}
+
+.progress-container .progress-item-container {
+	padding-left: 0px; 
+	padding-right: 8px;
+}
+
+.progress-container .progress-item-container:last-child {
+	padding-right: 0;
+}
+
+.progress-container .progress-item-container .progress-item {
+	background: #F9F9F9;
+	border:1px solid #F3F3F3;
+	padding:10px;
+	text-align: center;
+	border-radius: 5px;
+	height: 165px;
+}
+
+.progress-container .progress-item-container .progress-item p {
+	margin: 5px 0 0; 
+	color:#337ab7; 
+	font-size: 14px;
+}
+/*end progress bar*/
