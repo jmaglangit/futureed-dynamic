@@ -174,6 +174,7 @@ class SchoolServices {
 	}
 
 	/**
+	 * Get student progress by approve level.
 	 * @param $students
 	 * @return array
 	 */
@@ -202,8 +203,83 @@ class SchoolServices {
 		return $standing;
 	}
 
+	/**
+	 * Get highest correct scorer.
+	 * @param $student_scores
+	 * @return array
+	 */
+	public function getHighCorrectScores($student_scores){
+
+		$correct_score = [
+			'id' => 0,
+			'score' => 0,
+			'student_first_name' => '',
+			'student_last_name' => '',
+			'teacher_first_name' => '',
+			'teacher_last_name' => ''
+		];
+
+		$current_score = 0;
+
+		foreach($student_scores as $score){
+
+			if($score->Correct > $current_score){
+				$correct_score = [
+						'id' => $score->student_module_answer,
+						'score' => $score->Correct,
+						'student_first_name' => $score->stud_first_name,
+						'student_last_name' => $score->stud_last_name,
+						'teacher_first_name' => $score->client_first_name,
+						'teacher_last_name' => $score->client_last_name
+				];
+
+				$current_score = $score->Correct;
+			}
+		}
+
+		return $correct_score;
+	}
 
 	/**
+	 * Get highest wrong scorer.
+	 * @param $student_scores
+	 * @return array
+	 */
+	public function getHighWrongScores($student_scores){
+
+		$wrong_score = [
+				'id' => 0,
+				'score' => 0,
+				'student_first_name' => '',
+				'student_last_name' => '',
+				'teacher_first_name' => '',
+				'teacher_last_name' => ''
+		];
+
+		$current_score = 0;
+
+		foreach($student_scores as $score){
+
+			if($score->Wrong > $current_score){
+				$wrong_score = [
+						'id' => $score->student_module_answer,
+						'score' => $score->Correct,
+						'student_first_name' => $score->stud_first_name,
+						'student_last_name' => $score->stud_last_name,
+						'teacher_first_name' => $score->client_first_name,
+						'teacher_last_name' => $score->client_last_name
+				];
+
+				$current_score = $score->Correct;
+			}
+		}
+
+		return $wrong_score;
+	}
+
+
+	/**
+	 * Convert progress status to approved format.
 	 * @param $progress
 	 * @return mixed|null
 	 */
