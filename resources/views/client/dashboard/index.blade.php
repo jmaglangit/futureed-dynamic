@@ -1,7 +1,7 @@
 @extends('client.app')
 
 @section('navbar')
-    @include('client.partials.main-nav')
+	@include('client.partials.main-nav')
 @stop
 
 @section('content')
@@ -24,7 +24,7 @@
 					<div template-directive template-url="{!! route('client.principal.dashboard.index') !!}"></div>
 
 					<div template-directive template-url="{!! route('client.teacher.dashboard.index') !!}"></div>
-
+					
 				</div>
 			</div>
 		</div>
