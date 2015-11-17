@@ -1647,6 +1647,9 @@ top: 41px;
 /*end current learning tab*/
 
 /*subject-area tab*/
+
+.subject-area .table {border-top:none;}
+
 .subject-area .table > tbody > tr > td, .subject-area .table > thead > tr > th {
 	padding: 10px;
 }

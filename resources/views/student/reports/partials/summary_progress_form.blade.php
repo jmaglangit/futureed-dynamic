@@ -1,4 +1,4 @@
-<div ng-if="reports.active_summary_progress">
+<div class="summary-progress" ng-if="reports.active_summary_progress">
 	<div class="form-search">
 		{!! Form::open(
 				[
@@ -23,6 +23,8 @@
 		</div>
 		{!! Form::close() !!}
 	</div>
+
+	<div template-directive template-url="{!! route('reports.partials.progress_bar') !!}"></div>
 
 	<div class="reports-container" ng-cloak>
 		<div class="progress-holder" ng-repeat="(key, value) in reports.summary.columns track by $index">
