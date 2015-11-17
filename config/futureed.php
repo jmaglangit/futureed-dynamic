@@ -119,23 +119,23 @@ return [
 	'tip_rating' => 'rating',
 
 	//uploads base path
-	'uploads' => base_path(). '/public/uploads',
+	'uploads' => base_path() . '/public/uploads',
 
 	//path for question uploaded images temp
-	'question_image_path' =>  base_path().'/public/uploads/temp/question',
+	'question_image_path' => base_path() . '/public/uploads/temp/question',
 
 	//path for question uploaded images final
-	'question_image_path_final' => base_path().'/public/uploads/question',
+	'question_image_path_final' => base_path() . '/public/uploads/question',
 	'question_image_path_final_public' => '/uploads/question',
 
 	//question
 	'question' => 'question',
 
 	//path for answer uploaded images temp
-	'answer_image_path' =>  base_path().'/public/uploads/temp/answer',
+	'answer_image_path' => base_path() . '/public/uploads/temp/answer',
 
 	//path for question uploaded images final
-	'answer_image_path_final' => base_path().'/public/uploads/answer',
+	'answer_image_path_final' => base_path() . '/public/uploads/answer',
 	'answer_image_path_final_public' => '/uploads/answer',
 
 	//answer
@@ -146,12 +146,11 @@ return [
 	'teaching_content_image_uploads' => '/uploads/content',
 
 
-
 	//path for content uploaded images temp
-	'content_image_path' =>  base_path().'/public/uploads/temp/content',
+	'content_image_path' => base_path() . '/public/uploads/temp/content',
 
 	//path for content uploaded images final
-	'content_image_path_final' => base_path().'/public/uploads/content',
+	'content_image_path_final' => base_path() . '/public/uploads/content',
 	'content_image_path_final_public' => '/uploads/content',
 
 	//answer
@@ -180,21 +179,21 @@ return [
 	'points_to_finish_module' => 12,
 	'deductions_to_fail_module' => 10,
 
-    //Question Types
-    'question_type_fill_in_the_blank' => 'FIB',
-    'question_type_multiple_choice' => 'MC',
-    'question_type_provide_answer' => 'N',
-    'question_type_ordering' => 'O',
+	//Question Types
+	'question_type_fill_in_the_blank' => 'FIB',
+	'question_type_multiple_choice' => 'MC',
+	'question_type_provide_answer' => 'N',
+	'question_type_ordering' => 'O',
 
-	'question_difficulty_levels' => [1,2,3],
+	'question_difficulty_levels' => [1, 2, 3],
 	'question_minimum_count' => 4,
 
 	//Correct Answer
 	'yes' => 'Yes',
 	'no' => 'No',
 
-    //reset module
-    'reset_module' => 'Reset Module',
+	//reset module
+	'reset_module' => 'Reset Module',
 
 	//student points description
 	'student_point_description' => 'Completion of Module',
@@ -208,13 +207,14 @@ return [
 	//STU shortcut for Student
 	'STU' => 'STU',
 
-	
+
 	#iAssess IDs for LSP
-	'lsp_child_id' => 100063,
-	'lsp_adult_id' => 100064,
-	'lsp_for_adult_age' => 18,
-	'lsp_result_name' => 'IPS1',
-	'default_lsp' => 3,
+	'lsp_child_id' => env('IASSESS_LSP_CHILD', 100063),
+	'lsp_adult_id' => env('IASSESS_LSP_ADULT', 100064),
+	'lsp_for_adult_age' => env('IASSESS_LSP_ADULT_AGE', 18),
+	'lsp_result_name' => env('IASSESS_LSP_RESULT_NAME', 'IPS1'),
+	'default_lsp' => env('IASSESS_LSP_DEFAULT', 3),
+
 
 	//Logs
 	'user_log' => 'User',
@@ -223,6 +223,6 @@ return [
 	//Reports
 	'student_excelling' => 'Excelling',
 	'student_struggling' => 'Struggling',
-	
+
 
 ];
