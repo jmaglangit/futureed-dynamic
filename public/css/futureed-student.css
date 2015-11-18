@@ -1622,7 +1622,14 @@ top: 41px;
 	border: none;
 	border-radius: 0;
 	padding: 5px 15px;
+}
+
+.magenta{
 	background-color: #A92147;
+}
+
+.magenta th{
+	color: #fff;
 }
 /*end reports*/
 
