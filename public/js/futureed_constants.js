@@ -84,6 +84,8 @@ var Constants = {
 
 	, ACTIVE_QUESTIONS 	: "questions"
 	, ACTIVE_CONTENTS 	: "contents"
+	, ACTIVE_SCHOOL		: "school"
+	, ACTIVE_SCHOOL_TEACHER	: "school_teacher"
 
 	, ADD_CLIENT 	: "add_client"
 	, ADD_STUDENT	: "add_student"

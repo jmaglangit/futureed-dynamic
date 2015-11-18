@@ -40,4 +40,9 @@
 	{!! Html::script('/js/common/search_service.js')!!}
 @stop
 
+	{!! Html::script('/js/client/controllers/manage_principal_content_controller.js')!!}
+	{!! Html::script('/js/client/services/manage_principal_content_service.js')!!}
+
+	{!! Html::script('/js/client/services/profile_service.js')!!}
+
 @stop

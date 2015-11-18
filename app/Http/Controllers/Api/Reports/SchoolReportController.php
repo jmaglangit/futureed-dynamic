@@ -61,8 +61,8 @@ class SchoolReportController extends ReportController {
 		if ($skill) {
 
 			$skills = $skill->toArray();
-			$skill_watch['highest_skill'] = reset($skills);
-			$skill_watch['lowest_skill'] = (count($skills) > 1) ? end($skills) : null;
+			$skill_watch['highest_skill'] = (count($skills) > 0) ? reset($skills): null;
+			$skill_watch['lowest_skill'] = (count($skills) > 0) ? end($skills) : null;
 		}
 
 		// Key classes to watch
@@ -76,8 +76,10 @@ class SchoolReportController extends ReportController {
 		if ($class) {
 
 			$classes = $class->toArray();
-			$class_watch['highest_class'] = reset($classes);
-			$class_watch['lowest_class'] = (count($classes) > 1) ? end($classes) : null;
+			$class_watch['highest_class'] = (count($classes) > 0) ? reset($classes) : null;
+			$class_lowest = end($classes);
+			$class_watch['lowest_class'] = (count($classes) > 0
+					&& $class_watch['highest_class']['class_name'] <> $class_lowest['class_name']) ? $class_lowest : null;
 		}
 
 
