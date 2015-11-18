@@ -32,8 +32,8 @@
 @stop
 
 @section('scripts')
-	{!! Html::script('/js/client/controllers/manage_teacher_class_controller.js')!!}
-	{!! Html::script('/js/client/services/manage_teacher_class_service.js')!!}
+	{!! Html::script('/js/client/controllers/manage_teacher_content_controller.js')!!}
+	{!! Html::script('/js/client/services/manage_teacher_content_service.js')!!}
 
 	{!! Html::script('/js/common/validation_service.js')!!}
 	{!! Html::script('/js/common/table_service.js')!!}

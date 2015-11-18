@@ -63,6 +63,7 @@ class ClassReportController {
 		$additional_information = [
 			'grade_name' => $class_data->grade->name,
 			'subject_name' => $class_data->subject->name,
+			'class_name' => $class_data->name,
 			'teacher_first_name' => ($class_data->client)? $class_data->client->first_name : null,
 			'teacher_last_name' => ($class_data->client)? $class_data->client->last_name : null,
 		];

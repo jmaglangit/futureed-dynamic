@@ -54,6 +54,7 @@ var Constants = {
 	, CONTENT 		: "Content"
 	, QUESTION		: "Question"
 	, ANSWER		: "Answer"
+	, DASHBOARD		: "Dashboard"
 
 	/**
 	* Media Types
