@@ -1,19 +1,30 @@
-angular.module('futureed.services').factory('ManagePrincipalContentService',ManagePrincipalContentService);
+angular.module('futureed.services')
+    .factory('ManagePrincipalContentService', ManagePrincipalContentService);
 
-function ManagePrincipalContentService($http){
+ManagePrincipalContentService.$inject = ['$http'];
+
+function ManagePrincipalContentService($http) {
 
     var apiUrl = '/api/v1/';
     var reportUrl = '/api/report/';
     var managePrincipalApi = {};
 
-    //get api report
-    managePrincipalApi.schoolReport = function(school_code){
+    //get school report
+    managePrincipalApi.schoolReport = function (school_code) {
         return $http({
-                method : Constants.METHOD_GET
-            , url : reportUrl + 'school/' + school_code
+            method  :   Constants.METHOD_GET
+            , url   :   reportUrl + 'school/' + school_code
         });
     }
 
+    //get school teacher report
+    managePrincipalApi.schoolTeacherReport = function (school_code){
+        return $http({
+            method  :   Constants.METHOD_GET
+            ,url    :   reportUrl + 'school/' + school_code + '/teachers'
+        });
+    }
 
+    return managePrincipalApi;
 
 }
