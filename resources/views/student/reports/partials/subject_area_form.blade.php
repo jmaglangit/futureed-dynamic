@@ -1,5 +1,5 @@
 <div class="subject-area" ng-if="reports.active_subject_area">
-	<div class="form-search">
+	<div class="form-search magenta">
 		{!! Form::open(
 				[
 					'id' => 'search_form',
