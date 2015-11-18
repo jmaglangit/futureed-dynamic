@@ -75,12 +75,5 @@ function ManageClassService($http){
 		});
 	}
 
-	manageClassApi.getClassReport = function(id) {
-		return $http({
-			method : Constants.METHOD_GET
-			, url  : '/api/report/classroom/' + id
-		});
-	}
-
 	return manageClassApi;
 }
