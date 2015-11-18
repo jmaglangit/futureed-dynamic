@@ -28,7 +28,7 @@ class UserRequest extends ApiRequest {
 					case 'api.v1.user.logout':
 
 						return [
-							'id' => 'required|integer|exists:users,id,deleted_at,NULL',
+							'id' => 'required|integer',
 							'user_type' => 'required|in:'.config('futureed.student').','.config('futureed.client').','
 								.config('futureed.admin'),
 						];
