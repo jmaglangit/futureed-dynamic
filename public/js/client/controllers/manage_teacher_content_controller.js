@@ -25,7 +25,7 @@ function ManageTeacherContentController($scope, $window, ManageTeacherContentSer
 		self.classroom_id = Constants.FALSE;
 
 		switch(active) {
-			case Constants.DASHBOARD
+			case Constants.DASHBOARD :
 				self.getClassList();
 				break;
 

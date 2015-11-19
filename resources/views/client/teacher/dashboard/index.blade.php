@@ -49,12 +49,12 @@
 			<div>
 				<h3><i class="fa fa-th-list"></i> Teacher Details</h3>
 				<table class="table table-bordered">
-					<tr>
-						<td class="col-xs-3">Class Name</td>
+					<tr class="magenta-row">
+						<th class="col-xs-3">Class Name</th>
 						<td>{! dashboard.additional_information.class_name !}</td>
 					</tr>
-					<tr>
-						<td class="col-xs-3">Class Level</td>
+					<tr class="magenta-row">
+						<th class="col-xs-3">Class Level</th>
 						<td>{! dashboard.additional_information.grade_name !}</td>
 					</tr>
 				</table>
@@ -66,8 +66,8 @@
 				<table class="table table-bordered">
 					<thead>
 						<tr class="magenta">
-							<td class="col-xs-6">{! dashboard.column_header.student_progress.name !}</td>
-							<td class="col-xs-6">{! dashboard.column_header.student_progress.status !}</td>
+							<th class="col-xs-6">{! dashboard.column_header.student_progress.name !}</th>
+							<th class="col-xs-6">{! dashboard.column_header.student_progress.status !}</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -83,12 +83,12 @@
 			<div>
 				<h3><i class="fa fa-user"></i> Students to watch</h3>
 				<table class="table table-bordered">
-					<tr>
-						<td class="col-xs-3">{! dashboard.column_header.student_watch.struggling !}</td>
+					<tr class="magenta-row">
+						<th class="col-xs-3">{! dashboard.column_header.student_watch.struggling !}</th>
 						<td>{! dashboard.record.student_watch.excelling !}</td>
 					</tr>
-					<tr>
-						<td class="col-xs-3">{! dashboard.column_header.student_watch.excelling !}</td>
+					<tr class="magenta-row">
+						<th class="col-xs-3">{! dashboard.column_header.student_watch.excelling !}</th>
 						<td>{! dashboard.record.student_watch.struggling !}</td>
 					</tr>
 				</table>
