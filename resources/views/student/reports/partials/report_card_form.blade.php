@@ -1,4 +1,4 @@
-<div ng-if="reports.active_report_card">
+<div class="report-card" ng-if="reports.active_report_card">
 	<div class="form-search report-card-container">
 		{!! Form::open(
 				[
@@ -26,7 +26,7 @@
 	<div class="list-container" ng-cloak>
 		<table id="tip-list" class="table table-striped table-bordered">
 			<thead>
-			<tr>
+			<tr class="magenta">
 				<th>Subject</th>
 				<th>Module Status</th>
 				<th>Points Earned</th>

@@ -27,5 +27,22 @@ function ManageTeacherContentService($http){
 			, url 	: url + 'teaching-content/' + id
 		})
 	}
+
+	service.getClassReport = function(id) {
+		return $http({
+			method : Constants.METHOD_GET
+			, url  : '/api/report/classroom/' + id
+		});
+	}
+
+	service.getClassList = function(id) {
+		return $http({
+			method : Constants.METHOD_GET
+			, url  : url + 'classroom?client_id=' + id
+			+ '&payment_status=' + 'Paid'
+			+ '&offset=' + '0'
+		});
+	}
+
 	return service;
 }

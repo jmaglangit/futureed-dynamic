@@ -1,5 +1,5 @@
 <div class="summary-progress" ng-if="reports.active_summary_progress">
-	<div class="form-search">
+	<div class="form-search magenta">
 		{!! Form::open(
 				[
 					'id' => 'search_form',
