@@ -1581,14 +1581,6 @@ top: 41px;
 }
 
 /*reports*/
-.reports .report-options ul {
-	list-style: none;
-}
-
-.reports .report-options ul li {
-	float: right; margin-left:5px; width: 80px;
-}
-
 .reports .wrapr {
 	padding:15px;
 }
@@ -1715,3 +1707,13 @@ top: 41px;
 	font-size: 14px;
 }
 /*end progress bar*/
+
+/*export buttons*/
+.export-buttons button {
+	border-radius:3px !important;
+}
+.export-buttons .dropdown-menu{
+	text-align:center;
+	min-width: 100px;
+}
+/*end export buttons*/
