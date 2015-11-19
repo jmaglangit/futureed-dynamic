@@ -11,7 +11,7 @@
 	</div>
 
 	<div ng-if="dashboard.active_report">
-		<div class="report-options">
+		<div ng-if="dashboard.export" class="report-options">
 			<ul class="pull-right">
 				<li>
 					<button class="btn btn-blue"><i class="fa fa-save"></i> Save </button>

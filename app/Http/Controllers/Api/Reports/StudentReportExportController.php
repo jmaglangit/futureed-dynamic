@@ -66,6 +66,7 @@ class StudentReportExportController extends ReportController {
 		$student_info = $report['additional_information'];
 		$file_name = $student_info['first_name'].'_'.$student_info['last_name'].'_Subject_Area_'. Carbon::now()->toDateString();
 
+
 		//Execute output.
 		switch($file_type){
 
@@ -75,6 +76,8 @@ class StudentReportExportController extends ReportController {
 				break;
 			case 'xls' || 'xlsx':
 				//Initiate format
+				ob_end_clean();
+				ob_start();
 				Excel::create($file_name,function($excel) use ($report){
 
 					$excel->sheet('NewSheet', function($sheet) use ($report){
@@ -116,6 +119,8 @@ class StudentReportExportController extends ReportController {
 
 			case 'xls' || 'xlsx':
 				//Initiate format
+				ob_end_clean();
+				ob_start();
 				Excel::create($file_name, function ($excel) use ($report) {
 
 					$excel->sheet('NewSheet', function ($sheet) use ($report) {
