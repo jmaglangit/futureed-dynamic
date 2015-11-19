@@ -6,30 +6,27 @@
 
 @section('content')
 	<div class="container dshbrd-con reports" ng-controller="ProfileController as profile" ng-cloak>
-		<div class="wrapr">
+		<div ng-controller="StudentReportsController as reports" class="wrapr">
 			<div class="content-title">
-				<div class="title-main-content">
-					<span><i class="fa fa-file-text-o"></i> My Reports</span>
-					<div class="report-options col-xs-6 pull-right top-10">
-						<ul>
-							<li>
-								<button class="btn btn-blue"><i class="fa fa-save"></i> Save </button>
-							</li>
-							<li>
-								<button class="btn btn-blue"><i class="fa fa-file-pdf-o"></i> Export </button>
-							</li>
-							<li>
-								<button class="btn btn-blue"><i class="fa fa-print"></i> Print </button>
-							</li>
-							<li>
-								<button class="btn btn-blue"><i class="fa fa-envelope-o"></i> Email </button>
-							</li>
-						</ul>
+				<div class="title-main-content row">
+					<div class="col-xs-6">
+						<span><i class="fa fa-file-text-o"></i> My Reports</span>
+					</div>
+
+					<div class="col-xs-6">
+						<div class="btn-group pull-right export-buttons" ng-if="reports.student_report_export">
+							<button class="btn btn-blue" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-file-pdf-o"></i> Export </button>
+
+							<ul class="dropdown-menu">
+								<li><a href="{!reports.student_report_export!}/pdf">PDF</a></li>
+								<li><a href="{!reports.student_report_export!}/xls">Excel</a></li>
+							</ul>
+						</div>
 					</div>
 				</div>
 			</div>
 
-			<div class="report-content" ng-controller="StudentReportsController as reports" ng-init="profile.setStudentProfileActive('reports')" template-directive template-url="{!! route('reports.partials.reports_form') !!}"></div>
+			<div class="report-content" ng-init="profile.setStudentProfileActive('reports')" template-directive template-url="{!! route('reports.partials.reports_form') !!}"></div>
 		</div>
 	</div>
 @stop
