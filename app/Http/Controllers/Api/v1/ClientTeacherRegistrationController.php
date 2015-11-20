@@ -37,6 +37,9 @@ class ClientTeacherRegistrationController extends ApiController
 
 	/**
 	 * @param ClientRepositoryInterface $clientRepositoryInterface
+	 * @param UserRepositoryInterface $userRepositoryInterface
+	 * @param MailServices $mailServices
+	 * @param CodeGeneratorServices $codeGeneratorServices
 	 */
 	public function __construct(
 		ClientRepositoryInterface $clientRepositoryInterface,
@@ -97,6 +100,7 @@ class ClientTeacherRegistrationController extends ApiController
         //apply name on user table.
         $name = ['name' => $input['first_name'].' '.$input['last_name']];
         $input = array_merge($input, $name);
+		$input['country_id'] = (!empty($input['country_id']))? $input['country_id']:0;
 
 		//apply code
 		$input = array_merge($input, $this->code->getCodeExpiry());
@@ -111,6 +115,9 @@ class ClientTeacherRegistrationController extends ApiController
 		} else {
 
 			$data->callback_uri = $input['callback_uri'];
+
+			//Remove session_token
+			$this->user->emptySessionToken($data->user_id);
 
 			//send email to teacher
 			$this->mail->sendTeacherRegistration($data);

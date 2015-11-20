@@ -353,10 +353,6 @@
 						'as' => 'student.partials.change_password_form'
 						, 'uses' => 'FutureLesson\Student\ProfileController@change_password_form'
 					]);
-				Routes::get('/reports_form', [
-						'as' => 'student.partials.reports_form'
-						, 'uses' => 'FutureLesson\Student\ProfileController@reports_form'
-					]);
 			});
 		});
 
@@ -371,6 +367,45 @@
 
 			
 		});
+
+		Routes::group([
+				'prefix' => 'reports'
+				,'middleware' => 'student'], function(){
+					Routes::get('/', [
+						'as' => 'student.reports.index'
+						, 'uses' => 'FutureLesson\Student\ReportsController@index'
+					]);
+
+					Routes::get('/reports_form', [
+						'as' => 'reports.partials.reports_form'
+						, 'uses' => 'FutureLesson\Student\ReportsController@reports_form'
+					]);
+
+					Routes::get('/report_card_form', [
+						'as' => 'reports.partials.report_card_form'
+						, 'uses' => 'FutureLesson\Student\ReportsController@report_card'
+					]);
+
+					Routes::get('/subject_area_form', [
+						'as' => 'reports.partials.subject_area_form'
+						, 'uses' => 'FutureLesson\Student\ReportsController@subject_area'
+					]);
+
+					Routes::get('/summary_progress_form', [
+						'as' => 'reports.partials.summary_progress_form'
+						, 'uses' => 'FutureLesson\Student\ReportsController@summary_progress'
+					]);
+
+					Routes::get('/current_learning_form', [
+						'as' => 'reports.partials.current_learning_form'
+						, 'uses' => 'FutureLesson\Student\ReportsController@current_learning'
+					]);
+
+					Routes::get('/progress_bar', [
+						'as' => 'reports.partials.progress_bar'
+						, 'uses' => 'FutureLesson\Student\ReportsController@progress_bar'
+					]);
+				});
 
 		Routes::group(['prefix' => 'partials'], function() {
 			Routes::get('/base_url', [

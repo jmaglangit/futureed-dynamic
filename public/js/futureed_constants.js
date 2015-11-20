@@ -27,6 +27,7 @@ var Constants = {
 	, PARENT		: "Parent"
 	, TEACHER		: "Teacher"
 	, ADMIN			: "Admin"
+	, PEACHES		: "Peaches"
 
 	, PENDING		: "Pending"
 	, PAID			: "Paid"
@@ -53,6 +54,7 @@ var Constants = {
 	, CONTENT 		: "Content"
 	, QUESTION		: "Question"
 	, ANSWER		: "Answer"
+	, DASHBOARD		: "Dashboard"
 
 	/**
 	* Media Types
@@ -82,6 +84,8 @@ var Constants = {
 
 	, ACTIVE_QUESTIONS 	: "questions"
 	, ACTIVE_CONTENTS 	: "contents"
+	, ACTIVE_SCHOOL		: "school"
+	, ACTIVE_SCHOOL_TEACHER	: "school_teacher"
 
 	, ADD_CLIENT 	: "add_client"
 	, ADD_STUDENT	: "add_student"

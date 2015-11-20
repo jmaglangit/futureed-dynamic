@@ -1,7 +1,7 @@
 @extends('client.app')
 
 @section('navbar')
-    @include('client.partials.main-nav')
+	@include('client.partials.main-nav')
 @stop
 
 @section('content')
@@ -17,35 +17,14 @@
 					</div>
 				</div>
 
-				<div class="form-content col-xs-12">	
-					<div class="dashboard-content" ng-cloak>
-						<div ng-if="user.role == futureed.PRINCIPAL">
-							<p>To get started on using Future Lesson, you need to invite a
-								<a href="{!! route('client.principal.teacher.index') !!}"> teacher</a> first to manage your classes.</p>
-							<p>If you have already invited a Teacher, you need to go to the 
-								<a href="{!! route('client.principal.payment.index') !!}"> payment</a> to buy seats for your classes.</p>
-						</div>
+				<div class="form-content col-xs-12">
 
-						<div ng-if="user.role == futureed.PARENT">
-							<p>
-								To get started on using Future Lesson, you need to add a student, click
-								<a href="{!! route('client.parent.student.index') !!}"> student</a>.
-							</p>
-							<p>If you already added a Student, you can
-								<a href="{!! route('client.parent.payment.index') !!}"> buy a subject</a> for the your student</p>
-							<p>You can also 
-								<a href="{!! route('client.parent.module.index') !!}"> review</a> the lessons and practice questions.</p>
-						</div>
+					<div template-directive template-url="{!! route('client.parent.dashboard.index') !!}"></div>
 
-						<div ng-if="user.role == futureed.TEACHER">
-							<p>To get started on using Future Lesson, you need to add a student under a 
-								<a href="{!! route('client.teacher.class.index') !!}"> class</a>.</p>
-							<p>To see all your students, click
-								<a href="{!! route('client.teacher.student.index') !!}"> student</a>.</p>
-							<p>To review the lessons and practice questions, click on 
-								<a href="{!! route('client.teacher.module.index') !!}"> module</a>.</p>
-						</div>
-					</div>
+					<div template-directive template-url="{!! route('client.principal.dashboard.index') !!}"></div>
+
+					<div template-directive template-url="{!! route('client.teacher.dashboard.index') !!}"></div>
+
 				</div>
 			</div>
 		</div>
@@ -53,5 +32,23 @@
 @stop
 
 @section('scripts')
+	{!! Html::script('/js/client/controllers/manage_principal_content_controller.js')!!}
+	{!! Html::script('/js/client/services/manage_principal_content_service.js')!!}
+	{!! Html::script('/js/client/controllers/manage_teacher_content_controller.js')!!}
+	{!! Html::script('/js/client/services/manage_teacher_content_service.js')!!}
 
+	{!! Html::script('/js/common/validation_service.js')!!}
+	{!! Html::script('/js/common/table_service.js')!!}
+	{!! Html::script('/js/common/search_service.js')!!}
+
+	{!! Html::script('/js/client/controllers/manage_principal_content_controller.js')!!}
+	{!! Html::script('/js/client/services/manage_principal_content_service.js')!!}
+
+	{!! Html::script('/js/client/controllers/manage_parent_content_controller.js')!!}
+	{!! Html::script('/js/client/services/manage_parent_content_service.js')!!}
+
+	{!! Html::script('/js/client/controllers/manage_parent_reports_controller.js')!!}
+	{!! Html::script('/js/client/services/manage_parent_reports_service.js')!!}
+
+	{!! Html::script('/js/client/services/profile_service.js')!!}
 @stop

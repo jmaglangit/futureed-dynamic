@@ -212,7 +212,10 @@ function ManagePrincipalPaymentController($scope, $window, $filter, managePrinci
 					if(response.errors) {
 						self.errors = $scope.errorHandler(response.errors);
 					} else if(response.data) {
-						self.setActive(Constants.ACTIVE_EDIT, response.data.id);
+
+						self.invoice = response.data;
+						self.invoice.subscription_id = null;
+						self.setActive(Constants.ACTIVE_VIEW, response.data.id);
 					}
 				}
 

@@ -19,6 +19,7 @@ function StudentReportsController($scope, $timeout, StudentReportsService, Searc
         self.active_add = Constants.FALSE;
         self.active_current_learning = Constants.FALSE;
         self.active_subject_area = Constants.FALSE;
+        self.student_report_export = Constants.FALSE;
 
         self.searchDefaults();
 
@@ -87,6 +88,7 @@ function StudentReportsController($scope, $timeout, StudentReportsService, Searc
 
                     $timeout(function () {
                         self.summary.records = response.data.rows.progress;
+                        self.student = response.data.additional_information;
 
                         angular.forEach(self.summary.records, function (value, key) {
                             value.completed = value.completed + "%";
@@ -166,7 +168,6 @@ function StudentReportsController($scope, $timeout, StudentReportsService, Searc
         self.summary = {};
         self.grade_name = '';
 
-
         self.search.subject_id = (self.search.subject_id) ? self.search.subject_id : subject_id;
 
         $scope.ui_block();
@@ -194,6 +195,8 @@ function StudentReportsController($scope, $timeout, StudentReportsService, Searc
                     });
 
                     self.summary.records = response.data.rows;
+
+                    self.student_report_export = '/api/report/student-progress/current-learning/' + $scope.user.id +'/' + self.search.subject_id;
                 }
             }
 
@@ -246,7 +249,7 @@ function StudentReportsController($scope, $timeout, StudentReportsService, Searc
                     self.errors = $scope.errorHandler(response.errors);
                 } else if (response.data) {
                     self.summary.columns = response.data.column_header;
-
+            
                     var column = response.data.column_header;
 
                     angular.forEach(column, function (value, key){
@@ -255,6 +258,8 @@ function StudentReportsController($scope, $timeout, StudentReportsService, Searc
                     });
 
                     self.summary.records = response.data.rows;
+                    self.student = response.data.additional_information;
+                    self.student_report_export = '/api/report/student-progress/curriculum/' + $scope.user.id +'/' + self.search.subject_id;
                 }
             }
 
@@ -265,6 +270,4 @@ function StudentReportsController($scope, $timeout, StudentReportsService, Searc
         });
 
     }
-
-
 }

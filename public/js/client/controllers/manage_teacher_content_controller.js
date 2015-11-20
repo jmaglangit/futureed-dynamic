@@ -21,8 +21,15 @@ function ManageTeacherContentController($scope, $window, ManageTeacherContentSer
 		self.errors = Constants.FALSE;
 
 		self.active_list = Constants.FALSE;
+		self.active_report = Constants.FALSE;
+		self.classroom_id = Constants.FALSE;
+		self.exort = Constants.FALSE;
 
 		switch(active) {
+			case Constants.DASHBOARD :
+				self.getClassList();
+				break;
+
 			case Constants.ACTIVE_LIST :
 				self.success = Constants.FALSE;
 
@@ -95,5 +102,45 @@ function ManageTeacherContentController($scope, $window, ManageTeacherContentSer
 
 	self.viewQuestions = function(url) {
 		$window.location.href = url + "/" + self.current_module;
+	}
+
+	self.getClassList = function(){
+		ManageTeacherContentService.getClassList($scope.user.id).success(function(response) {
+			if(response.status == Constants.STATUS_OK) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.class_list = response.data.record;
+					self.getDashboardReport(self.class_list[0].id);
+				}
+			}
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+		});
+	}
+
+	self.getDashboardReport = function (classroom_id) {
+		self.additional_information = {};
+		self.column_header = {};
+		self.record = {};
+		self.classroom_id = (self.classroom_id) ? self.classroom_id : classroom_id;
+
+		$scope.ui_block();
+		ManageTeacherContentService.getClassReport(self.classroom_id).success(function(response) {
+			if(response.status == Constants.STATUS_OK) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					self.additional_information = response.data.additional_information;
+					self.column_header = response.data.column_header[0];
+					self.record = response.data.rows[0];
+					self.active_report = Constants.TRUE;
+				}
+			}
+		$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
 	}
 }

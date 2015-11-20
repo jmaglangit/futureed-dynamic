@@ -41,10 +41,10 @@ class AdminQuestionAnswerRequest extends ApiRequest {
 			case 'PUT':
 				return [
 
-					'answer_text' => 'required_if:image,|string',
+					'answer_text' => 'required_if:answer_image,|string',
 					'correct_answer' => 'required|alpha|in:Yes,No',
 					'point_equivalent' => 'required|integer',
-					'image' => 'required_if:answer_text,|string',
+					'image' => 'required_if:answer_image,None,answer_text,|string',
 					'label' => 'string'
 
 
