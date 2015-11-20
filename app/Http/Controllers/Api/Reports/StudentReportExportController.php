@@ -65,6 +65,7 @@ class StudentReportExportController extends ReportController {
 		//File name format  --> first_name _ last_name _ tab_name _ date
 		$student_info = $report['additional_information'];
 		$file_name = $student_info['first_name'].'_'.$student_info['last_name'].'_Subject_Area_'. Carbon::now()->toDateString();
+		$file_name = str_replace(' ','_',$file_name);
 
 
 		//Execute output.
@@ -108,6 +109,7 @@ class StudentReportExportController extends ReportController {
 		$report = $this->student_report->getStudentCurrentLearning($student_id,$subject_id);
 		$student_info = $report['additional_information'];
 		$file_name = $student_info['first_name'].'_'.$student_info['last_name'].'_Current_Learning_'. Carbon::now()->toDateString();
+		$file_name = str_replace(' ','_',$file_name);
 
 		//Export file
 		switch ($file_type) {
