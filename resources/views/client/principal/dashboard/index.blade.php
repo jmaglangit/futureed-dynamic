@@ -18,8 +18,8 @@
                 <button class="btn btn-blue dropdown-toggle" type="button" data-toggle="dropdown">
                     <i class="fa fa-file-text-o"></i> Export<span class="caret"></span></button>
                 <ul class="dropdown-menu">
-                    <li stlye="width: 20px"><a href="#">PDF</a></li>
-                    <li stlye="width: 20px"><a href="#">Excel</a></li>
+                    <li stlye="width: 20px"><a ng-click="dashboard.exportSchoolReport('pdf')">PDF</a></li>
+                    <li stlye="width: 20px"><a ng-click="dashboard.exportSchoolReport('xls')">Excel</a></li>
                 </ul>
             </div>
         </div>

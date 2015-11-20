@@ -1,7 +1,25 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: jason
- * Date: 11/20/15
- * Time: 3:01 PM
- */
+@extends('export.client.principal')
+
+@section('content')
+    {{--Header--}}
+    <div>
+        {{--Logo--}}
+
+        {{--School info--}}
+
+    </div>
+
+    {{--Contents--}}
+    <div>
+        {{--Skills watch--}}
+        <table></table>
+        {{--Class watch--}}
+        <table>
+        </table>
+        {{--student watch--}}
+        <table>
+        </table>
+        {{--score--}}
+        <table></table>
+    </div>
+@stop

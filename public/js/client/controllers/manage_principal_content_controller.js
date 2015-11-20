@@ -105,8 +105,8 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
                         || self.report.rows.class_watch.highest_class === null
                         || self.report.rows.class_watch.lowest_class === null
                         || self.report.rows.student_watch
-                        || self.report.rows.highest_score
-                        || self.report.rows.lowest_score) {
+                        || self.report.rows.highest_score.id == 0
+                        || self.report.rows.lowest_score.id == 0) {
 
                         self.active_report = Constants.TRUE;
                         self.active_school = Constants.TRUE;
@@ -143,8 +143,20 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
             self.errors = $scope.internalError();
             $scope.ui_unblock();
         });
+    }
 
+    //export school report
+    self.exportSchoolReport = function(file_type){
+        self.errors = $scope.internalError();
 
+        //$scope.ui_block();
+        //ManagePrincipalContentService.schoolReportDownload(self.principal.school_code, file_type).success(function(response){
+        //
+        //    $scope.ui_unblock();
+        //}).error(function (response) {
+        //    self.errors = $scope.internalError();
+        //    $scope.ui_unblock();
+        //});
     }
 
 

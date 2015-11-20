@@ -1,14 +1,10 @@
 <?php namespace FutureEd\Http\Controllers\Api\Reports;
 
 use FutureEd\Http\Requests;
-use FutureEd\Http\Controllers\Controller;
-
-use FutureEd\Models\Core\StudentModule;
+use FutureEd\Models\Repository\Country\CountryRepositoryInterface;
 use FutureEd\Models\Repository\School\SchoolRepositoryInterface;
 use FutureEd\Models\Repository\StudentModule\StudentModuleRepositoryInterface;
 use FutureEd\Services\SchoolServices;
-use FutureEd\Services\StudentModuleServices;
-use Illuminate\Http\Request;
 
 class SchoolReportController extends ReportController {
 
@@ -27,6 +23,8 @@ class SchoolReportController extends ReportController {
 	 */
 	protected $school_service;
 
+	protected $country;
+
 	/**
 	 * @param SchoolRepositoryInterface $schoolRepositoryInterface
 	 * @param StudentModuleRepositoryInterface $studentModuleRepositoryInterface
@@ -35,11 +33,13 @@ class SchoolReportController extends ReportController {
 	public function __construct(
 		SchoolRepositoryInterface $schoolRepositoryInterface,
 		StudentModuleRepositoryInterface $studentModuleRepositoryInterface,
-		SchoolServices $schoolServices
+		SchoolServices $schoolServices,
+		CountryRepositoryInterface $countryRepositoryInterface
 	) {
 		$this->school = $schoolRepositoryInterface;
 		$this->student_module = $studentModuleRepositoryInterface;
 		$this->school_service = $schoolServices;
+		$this->country = $countryRepositoryInterface;
 	}
 
 
@@ -102,7 +102,20 @@ class SchoolReportController extends ReportController {
 		//lowest score
 		$highest_wrong_score = $this->school_service->getHighWrongScores($student_scores);
 
-		$additional_information = [];
+
+		//additional information
+		$school = $this->school->getSchoolByCode($school_code);
+
+		//get country info
+		$country = $this->country->getCountry($school[0]->country_id);
+
+
+		//Principal Name, School, School Address (Address, City, state, Postal code, country)
+		$additional_information = [
+			'principal_name' => $school[0]->contact_name,
+			'school_name' => $school[0]->name,
+			'school_address' => $school[0]->street_address . ", " . $school[0]->city . ", " . $school[0]->state . ", " . $school[0]->zip . ", " . $country[0]['full_name'], //format: address, city, state, postal code, country
+		];
 
 		$column_header = [
 			'skills_watch' => 'Key Skill areas to watch',
