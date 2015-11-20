@@ -1,5 +1,5 @@
-<div ng-if="user.role == futureed.PARENT" ng-controller="ManageParentContentController as dashboard" ng-init="dashboard.setActive('Dashboard')">
-	<div ng-if="!dashboard.active_report" class="dashboard-content" ng-cloak>
+<div ng-if="user.role == futureed.PARENT" ng-controller="ManageParentReportsController as reports" ng-init="reports.setActive()">
+	<div ng-if="!reports.active_report" class="dashboard-content" ng-cloak>
 		<p>
 			To get started on using Future Lesson, you need to add a student, click
 			<a href="{!! route('client.parent.student.index') !!}"> student</a>.
@@ -14,14 +14,22 @@
 		</p>
 	</div>
 
-	<div ng-if="dashboard.active_report">
-		<h3>Stuent Report</h3>
-		<select>
-			<option ng-repeat="student in dashboard.student_list">{! student.first_name !} {! student.last_name !}<optionp>
-		</select>
+	<div ng-if="reports.active_report" class="reports">
+		<h3>Student Report</h3>
+			<div class="student-search">
+				<select ng-model="reports.student_id"
+					ng-change="reports.changeStudentId()"
+					class="form-control">
+				<option ng-repeat="student in reports.student_list"
+						ng-value="student.id"
+						ng-selected="reports.student_id == student.id"
+						>{! student.first_name + ' ' +  student.last_name !}
+				</option>
+			</select>
+		</div>
 
-		<div ng-controller="ManageParentReportsController as reports">
-			<ul class="nav nav-pills pill-gold-report nav-student" ng-init="reports.setActive()">
+		<div>
+			<ul class="nav nav-pills pill-gold-report nav-student">
 				<li role="presentation" ng-class="{ 'active' : reports.active_report_card }">
 					<a href="javascript:void(0)" ng-click="reports.setActive(futureed.REPORT_CARD)">
 						<i class="fa fa-file-text-o"></i>

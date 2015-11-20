@@ -19,13 +19,5 @@ function ManageParentContentService($http){
 		})
 	}
 
-	// /api/v1/client/manage/student?client_id={id of client}&name=&email=&limit=&offset=0
-	service.listStudents = function(client_id){
-		return $http({
-			method 	: Constants.METHOD_GET
-			, url 	: url + 'client/manage/student?client_id='+client_id
-			+ '&offset=0'
-		})
-	}
 	return service;
 }

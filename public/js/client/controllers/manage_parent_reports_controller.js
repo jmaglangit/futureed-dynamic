@@ -8,6 +8,9 @@ function ManageParentReportsController($scope, $timeout, ManageParentReportsServ
 	SearchService(self);
     self.searchDefaults();
 
+	self.active_report = Constants.FALSE;
+	self.student_id = Constants.FALSE;
+
 	self.setActive = function (active) {
 		self.records = {};
 		self.errors = Constants.FALSE;
@@ -33,7 +36,6 @@ function ManageParentReportsController($scope, $timeout, ManageParentReportsServ
 				break;
 
 			case Constants.CURRENT_LEARNING        :
-				console.log('it works');
 				self.active_current_learning = Constants.TRUE;
 				self.listLearning();
 				break;
@@ -45,6 +47,7 @@ function ManageParentReportsController($scope, $timeout, ManageParentReportsServ
 
 			default                                :
 				self.active_report_card = Constants.TRUE;
+				self.listStudents();
 				self.reportCard();
 				break;
 		}
@@ -54,7 +57,7 @@ function ManageParentReportsController($scope, $timeout, ManageParentReportsServ
 		self.errors = Constants.FALSE;
 
 		$scope.ui_block();
-		ManageParentReportsService.reportCard($scope.user.id).success(function (response) {
+		ManageParentReportsService.reportCard(self.student_id).success(function (response) {
 			if (angular.equals(response.status, Constants.STATUS_OK)) {
 				if (response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
@@ -78,7 +81,7 @@ function ManageParentReportsController($scope, $timeout, ManageParentReportsServ
 		self.search.subject_id = (self.search.subject_id) ? self.search.subject_id : subject_id;
 
 		$scope.ui_block();
-		ManageParentReportsService.summaryProgress($scope.user.id, self.search.subject_id).success(function (response) {
+		ManageParentReportsService.summaryProgress(self.student_id, self.search.subject_id).success(function (response) {
 			if (angular.equals(response.status, Constants.STATUS_OK)) {
 				if (response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
@@ -108,7 +111,7 @@ function ManageParentReportsController($scope, $timeout, ManageParentReportsServ
 		self.errors = Constants.FALSE;
 
 		$scope.ui_block();
-		ManageParentReportsService.listClass($scope.user.id).success(function (response) {
+		ManageParentReportsService.listClass(self.student_id).success(function (response) {
 			if (angular.equals(response.status, Constants.STATUS_OK)) {
 				if (response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
@@ -137,7 +140,7 @@ function ManageParentReportsController($scope, $timeout, ManageParentReportsServ
 		self.errors = Constants.FALSE;
 
 		$scope.ui_block();
-		ManageParentReportsService.listClass($scope.user.id).success(function (response) {
+		ManageParentReportsService.listClass(self.student_id).success(function (response) {
 			if (angular.equals(response.status, Constants.STATUS_OK)) {
 				if (response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
@@ -171,7 +174,7 @@ function ManageParentReportsController($scope, $timeout, ManageParentReportsServ
 		self.search.subject_id = (self.search.subject_id) ? self.search.subject_id : subject_id;
 
 		$scope.ui_block();
-		ManageParentReportsService.currentLearning($scope.user.id, self.search.subject_id).success(function (response) {
+		ManageParentReportsService.currentLearning(self.student_id, self.search.subject_id).success(function (response) {
 			if (angular.equals(response.status, Constants.STATUS_OK)) {
 				if (response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
@@ -209,7 +212,7 @@ function ManageParentReportsController($scope, $timeout, ManageParentReportsServ
 		self.errors = Constants.FALSE;
 
 		$scope.ui_block();
-		ManageParentReportsService.listClass($scope.user.id).success(function (response) {
+		ManageParentReportsService.listClass(self.student_id).success(function (response) {
 			if (angular.equals(response.status, Constants.STATUS_OK)) {
 				if (response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
@@ -241,7 +244,7 @@ function ManageParentReportsController($scope, $timeout, ManageParentReportsServ
 		self.search.subject_id = (self.search.subject_id) ? self.search.subject_id : subject_id;
 
 		$scope.ui_block();
-		ManageParentReportsService.subjectArea($scope.user.id, self.search.subject_id).success(function (response) {
+		ManageParentReportsService.subjectArea(self.student_id, self.search.subject_id).success(function (response) {
 			if (angular.equals(response.status, Constants.STATUS_OK)) {
 				if (response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
@@ -265,5 +268,33 @@ function ManageParentReportsController($scope, $timeout, ManageParentReportsServ
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
+	}
+
+	self.listStudents = function() {
+		self.student_list = {};
+
+		$scope.ui_block();
+		ManageParentReportsService.listStudents($scope.user.id).success(function(response){
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					if(response.data.total){
+						self.active_report = Constants.TRUE;
+						self.student_list = response.data.records;
+						self.changeStudentId(self.student_list[0].id);
+					}
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		})
+	}
+
+	self.changeStudentId = function(student_id){
+		self.student_id = (self.student_id) ? self.student_id : student_id;
+		self.setActive(Constants.REPORT_CARD);
 	}
 }

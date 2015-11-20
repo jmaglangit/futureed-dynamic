@@ -38,7 +38,7 @@
 			</div>
 		</div>
 
-		<div class="row">
+		<div>
 			<p class="progress-key">Keys</p>
 
 			<div class="progress-legends col-xs-4">

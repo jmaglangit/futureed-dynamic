@@ -43,6 +43,15 @@ function ManageParentReportsService($http) {
 			,	url	:	apiUrl + 'report/student-progress/curriculum/' + student_id + '/' + subject_id
 		});
 	}
+
+	// /api/v1/client/manage/student?client_id={id of client}&name=&email=&limit=&offset=0
+	api.listStudents = function(client_id){
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url 	: apiUrl + 'v1/client/manage/student?client_id='+client_id
+			+ '&offset=0'
+		})
+	}
 	
 	return api;
 }

@@ -13,13 +13,8 @@ function ManageParentContentController($scope, ManageParentContentService, apiSe
 		self.active_list = Constants.FALSE;
 		self.active_view = Constants.FALSE;
 		self.active_edit = Constants.FALSE;
-		self.active_report = Constants.FALSE;
 
 		switch(active) {
-			case Constants.DASHBOARD:
-				self.listStudents();
-				break;
-
 			case Constants.ACTIVE_VIEW :
 				self.detail(id);
 				self.active_view = Constants.TRUE;
@@ -103,30 +98,6 @@ function ManageParentContentController($scope, ManageParentContentService, apiSe
 						self.content = response.data;
 					}
 				}
-			$scope.ui_unblock();
-		}).error(function(response) {
-			self.errors = $scope.internalError();
-			$scope.ui_unblock();
-		})
-	}
-
-	self.listStudents = function() {
-		console.log($scope.user);
-		self.student_list = {};
-
-		$scope.ui_block();
-		ManageParentContentService.listStudents($scope.user.id).success(function(response){
-			if(angular.equals(response.status, Constants.STATUS_OK)) {
-				if(response.errors) {
-					self.errors = $scope.errorHandler(response.errors);
-				} else if(response.data) {
-					if(response.data.total){
-						self.active_report = Constants.TRUE;
-						self.student_list = response.data.records;
-						console.log(response.data.records);
-					}
-				}
-			}
 			$scope.ui_unblock();
 		}).error(function(response) {
 			self.errors = $scope.internalError();
