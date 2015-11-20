@@ -13,34 +13,29 @@
 
     {{--Reports--}}
     <div ng-if="dashboard.active_report" ng-cloak>
-        <div class="report-options">
-            <ul class="pull-right">
-                <li>
-                    <button class="btn btn-blue"><i class="fa fa-save"></i> Save</button>
-                </li>
-                <li>
-                    <button class="btn btn-blue"><i class="fa fa-file-pdf-o"></i> Export</button>
-                </li>
-                <li>
-                    <button class="btn btn-blue"><i class="fa fa-print"></i> Print</button>
-                </li>
-                <li>
-                    <button class="btn btn-blue"><i class="fa fa-envelope-o"></i> Email</button>
-                </li>
-            </ul>
+        <div class="row">
+            <div ng-if="dashboard.export" class="col-xs-4 pull-right dropdown" stlye="width: 20px">
+                <button class="btn btn-blue dropdown-toggle" type="button" data-toggle="dropdown">
+                    <i class="fa fa-file-text-o"></i> Export<span class="caret"></span></button>
+                <ul class="dropdown-menu">
+                    <li stlye="width: 20px"><a href="#">PDF</a></li>
+                    <li stlye="width: 20px"><a href="#">Excel</a></li>
+                </ul>
+            </div>
         </div>
-
         <div class="report-container">
             <ul class="nav nav-tabs report-nav" role="tablist">
-                <li class="col-xs-6 active"><a ng-click="dashboard.setActive('school')" aria-controls="home" role="tab" data-toggle="tab"><i
+                <li class="col-xs-6 active"><a ng-click="dashboard.setActive('school')" aria-controls="home" role="tab"
+                                               data-toggle="tab"><i
                                 class="fa fa-line-chart"></i> Overall School Progress</a></li>
-                <li class="col-xs-6"><a ng-click="dashboard.setActive('school_teacher')" aria-controls="home" role="tab" data-toggle="tab"><i
+                <li class="col-xs-6"><a ng-click="dashboard.setActive('school_teacher')" aria-controls="home" role="tab"
+                                        data-toggle="tab"><i
                                 class="fa fa-tasks"></i> Teacher Comparison Progress</a></li>
             </ul>
 
 
-           {{--School Reports--}}
-            <div ng-if="dashboard.active_school" >
+            {{--School Reports--}}
+            <div ng-if="dashboard.active_school">
                 {{--Skills watch--}}
                 <div>
                     <h3><i class="fa fa-th-list"></i> {! dashboard.report.column_header.skills_watch !}</h3>
@@ -152,8 +147,12 @@
                         </tr>
                         <tr ng-if="dashboard.teacher_report.rows" ng-repeat=" teacher in dashboard.teacher_report.rows">
                             <td>Teacher {! teacher.first_name +' '+ teacher.last_name !}</td>
-                            <td class="report-progress"><div class="report-progress-bar report-progress-bar-success"
-                                ng-style="{ 'width' : teacher.percent_progress + '%' }">{! teacher.percent_progress +'%' !}</div></td>
+                            <td class="report-progress">
+                                <div class="report-progress-bar report-progress-bar-success"
+                                     ng-style="{ 'width' : teacher.percent_progress + '%' }">{! teacher.percent_progress
+                                    +'%' !}
+                                </div>
+                            </td>
 
                         </tr>
                         <tr ng-if="!dashboard.teacher_report.rows">

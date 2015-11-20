@@ -14,6 +14,7 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
         self.active_report = Constants.FALSE;
         self.active_school = Constants.FALSE;
         self.active_school_teacher = Constants.FALSE;
+        self.export = Constants.FALSE;
 
         //self.active_report = Constants.TRUE;
 

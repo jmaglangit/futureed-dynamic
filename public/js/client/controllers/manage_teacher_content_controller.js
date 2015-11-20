@@ -23,6 +23,7 @@ function ManageTeacherContentController($scope, $window, ManageTeacherContentSer
 		self.active_list = Constants.FALSE;
 		self.active_report = Constants.FALSE;
 		self.classroom_id = Constants.FALSE;
+		self.exort = Constants.FALSE;
 
 		switch(active) {
 			case Constants.DASHBOARD :
