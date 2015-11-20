@@ -1,4 +1,4 @@
-@extends('export.master')
+@extends('export.student.index')
 
 @section('content')
     <table style="width: 100%" cellpadding="0" cellspacing="0">
