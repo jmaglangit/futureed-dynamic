@@ -1781,6 +1781,7 @@ top: 41px;
 
 .export-report .report-data {
 	text-align: center;
+	margin-top:20px;
 }
 
 .export-report .report-data .category-icon {
@@ -1790,5 +1791,9 @@ top: 41px;
 .export-report .report-data tr, .export-report .report-data td, .export-report .report-data th{
 	border: 1px solid black;
 }
-.export-report .report-data tr:nth-child(even) {background: #DDD}
-.export-report .report-data tr:nth-child(odd) {background: #FFF}
+.export-report .report-data tr:nth-child(even) {
+	background: #DDD;
+}
+.export-report .report-data tr:nth-child(odd) {
+	background: #FFF;
+}
