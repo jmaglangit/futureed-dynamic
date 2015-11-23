@@ -156,27 +156,27 @@
 			$reports_controller = 'FutureLesson\Client\ManageParentReportsController';
 
 			Routes::get('/progress_bar', [
-				'as' => 'client.parent.reports.progress_bar',
+				'as' => 'client.parent.partials.reports_progress_bar',
 				'uses' => $reports_controller.'@progress_bar'
 			]);
 
 			Routes::get('/report_card', [
-				'as' => 'client.parent.reports.report_card',
+				'as' => 'client.parent.partials.reports_report_card',
 				'uses' => $reports_controller.'@report_card'
 			]);
 
 			Routes::get('/summary_progress', [
-				'as' => 'client.parent.reports.summary_progress',
+				'as' => 'client.parent.partials.reports_summary_progress',
 				'uses' => $reports_controller.'@summary_progress'
 			]);
 
 			Routes::get('/subject_area', [
-				'as' => 'client.parent.reports.subject_area',
+				'as' => 'client.parent.partials.reports_subject_area',
 				'uses' => $reports_controller.'@subject_area'
 			]);
 
 			Routes::get('/current_learning', [
-				'as' => 'client.parent.reports.current_learning',
+				'as' => 'client.parent.partials.reports_current_learning',
 				'uses' => $reports_controller.'@current_learning'
 			]);			
 		});

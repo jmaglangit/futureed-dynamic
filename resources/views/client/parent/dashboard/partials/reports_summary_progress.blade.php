@@ -24,7 +24,7 @@
 		{!! Form::close() !!}
 	</div>
 
-	<div template-directive template-url="{!! route('client.parent.reports.progress_bar') !!}"></div>
+	<div template-directive template-url="{!! route('client.parent.partials.reports_progress_bar') !!}"></div>
 
 	<div class="reports-container" ng-cloak>
 		<div class="progress-holder" ng-repeat="(key, value) in reports.summary.columns track by $index">
