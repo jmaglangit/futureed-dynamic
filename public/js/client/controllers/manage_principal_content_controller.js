@@ -23,12 +23,14 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
                 self.active_school = Constants.FALSE;
                 self.active_report = Constants.TRUE;
                 self.active_school_teacher = Constants.TRUE;
+                self.export = Constants.TRUE;
                 break;
 
             case Constants.ACTIVE_SCHOOL:
                 self.active_school_teacher = Constants.FALSE;
                 self.active_report = Constants.TRUE;
                 self.active_school = Constants.TRUE;
+                self.export = Constants.TRUE;
                 break;
 
             default:
@@ -81,6 +83,8 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
                 } else if (response.data) {
                     self.report = response.data;
 
+                    self.active_report = Constants.TRUE;
+                    self.active_school = Constants.TRUE;
 
                     //if skill has record
                     if (self.report.rows.skills_watch.highest_skill === null
@@ -95,7 +99,7 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
                     }
 
                     //if student has record
-                    if (self.report.rows.student_watch === null) {
+                    if (self.report.rows.student_watch.length == 0 ) {
                         self.report_active_student = Constants.FALSE;
                     }
 
@@ -104,12 +108,13 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
                         || self.report.rows.skills_watch.lowest_skill === null
                         || self.report.rows.class_watch.highest_class === null
                         || self.report.rows.class_watch.lowest_class === null
-                        || self.report.rows.student_watch
+                        || self.report.rows.student_watch.length == 0
                         || self.report.rows.highest_score.id == 0
                         || self.report.rows.lowest_score.id == 0) {
 
-                        self.active_report = Constants.TRUE;
-                        self.active_school = Constants.TRUE;
+                        self.active_report = Constants.FALSE;
+                        self.active_school = Constants.FALSE;
+                        self.export = Constants.FALSE;
                     }
                 }
             }
@@ -136,6 +141,15 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
                     self.errors = $scope.errorHandler(response.errors);
                 } else if (response.data) {
                     self.teacher_report = response.data;
+
+                    //check if has data
+                    if(self.teacher_report.rows.length > 0
+                        && self.active_report == Constants.FALSE
+                        && self.active_school == Constants.FALSE){
+
+                        self.active_report = Constants.TRUE;
+                        self.export = Constants.TRUE;
+                    }
                 }
             }
             $scope.ui_unblock();
