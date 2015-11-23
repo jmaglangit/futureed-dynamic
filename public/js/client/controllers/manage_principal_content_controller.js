@@ -159,19 +159,58 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
         });
     }
 
-    //export school report
-    self.exportSchoolReport = function(file_type){
-        self.errors = $scope.internalError();
+    ////export school report
+    //self.saveAs(file_type){
+    //
+    //    if(self.active_school == Constants.TRUE){
+    //        //goto download school report
+    //        self.schoolReportExport(file_type);
+    //
+    //    }else if (self.active_school_teacher == Constants.TRUE){
+    //        //goto download school teacher report
+    //    }
+    //}
 
-        //$scope.ui_block();
-        //ManagePrincipalContentService.schoolReportDownload(self.principal.school_code, file_type).success(function(response){
-        //
-        //    $scope.ui_unblock();
-        //}).error(function (response) {
-        //    self.errors = $scope.internalError();
-        //    $scope.ui_unblock();
-        //});
-    }
+    ////download school report
+    //self.schoolReportExport(file_type){
+    //    self.errors = Constants.FALSE;
+    //
+    //    $scope.ui_block();
+    //    ManagePrincipalContentService.schoolReportDownload(self.principal.school_code, file_type).success(function(response){
+    //        if(angular.equals(response.status, Constants.STATUS_OK)){
+    //            if(response.errors){
+    //                self.errors = $scope.errorHandler(response.errors);
+    //            }else if(response.data){
+    //
+    //            }
+    //        }
+    //        $scope.ui_block();
+    //    }).error(function (response) {
+    //        self.errors = $scope.internalError();
+    //        $scope.ui_unblock();
+    //    });
+    //
+    //}
+    //
+    ////download school teacher report
+    //self.schoolTeacherReportExport(file_type){
+    //    self.errors = Constants.FALSE;
+    //
+    //    $scope.ui_block;
+    //    ManagePrincipalContentService.schoolTeacherReportDownload(self.principal.school_code, file_type).success(function(response){
+    //        if(angular.equals(response.status, Constants.STATUS_OK)){
+    //            if(response.errors){
+    //                self.errors = $scope.errorHandler(response.errors);
+    //            }else if(response.data){
+    //
+    //            }
+    //        }
+    //        $scope.ui_block();
+    //    }).error(function (response) {
+    //        self.errors = $scope.internalError();
+    //        $scope.ui_unblock();
+    //    });
+    //}
 
 
 }
