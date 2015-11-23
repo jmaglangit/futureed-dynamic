@@ -18,5 +18,6 @@ function ManageParentContentService($http){
 			, url 	: url + 'teaching-content/' + id
 		})
 	}
+
 	return service;
 }
