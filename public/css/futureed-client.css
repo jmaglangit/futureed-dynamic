@@ -810,6 +810,7 @@ content legend {
 	margin-bottom: 0px;
 	width: 100%;
 	margin: 0px 0px 0px 0px;
+	border-collapse: collapse;
 }
 
 .export-table > tbody > tr > td {
@@ -826,4 +827,13 @@ content legend {
 
 .export-header {
 	text-align: center;
+}
+
+.school-excel-header > th {
+	column-span: 3;
+	text-align: center;
+}
+.school-excel-header > tr > td{
+	column-span: 3;
+	text-align: left;
 }
