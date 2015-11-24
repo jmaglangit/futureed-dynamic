@@ -77,11 +77,6 @@ class SchoolReportExportController extends ReportController {
 				break;
 		}
 
-
-
-		// Template to export
-
-		return Excel::create('SchoolProgress')->export($file_type);
 	}
 
 	/**
@@ -93,7 +88,47 @@ class SchoolReportExportController extends ReportController {
 
 		$report = $this->school_report->getSchoolTeacherProgress($school_code);
 
-		return Excel::create('SchoolTeacherProgress')->export($file_type);
+		//File name format  --> first_name _ last_name _ tab_name _ date
+		$school_info = $report['additional_information'];
+		$file_name = $school_info['principal_name'].'_'.$school_info['school_name'].'_School_Progress_'. Carbon::now()->toDateString();
+		$file_name = str_replace(' ','_',$file_name);
+
+		//Export file
+		switch ($file_type) {
+
+			case 'pdf':
+
+				$export_pdf = $this->pdf->loadView('export.client.principal.school-teacher-progress-pdf', $report)
+						->setPaper('a4')
+						->setOrientation('portrait');
+				return $export_pdf->download($file_name . '.' . $file_type);
+				break;
+
+			case 'xls' || 'xlsx':
+				//Initiate format
+				ob_end_clean();
+				ob_start();
+				Excel::create($file_name,function($excel) use ($report){
+
+					$excel->sheet('NewSheet', function($sheet) use ($report){
+
+						$sheet->mergeCells('A1:E1');
+						$sheet->mergeCells('A2:E2');
+						$sheet->mergeCells('A3:E3');
+						$sheet->mergeCells('A4:E4');
+						$sheet->mergeCells('A5:E5');
+						$sheet->mergeCells('A7:E7');
+
+						$sheet->setOrientation('landscape');
+						$sheet->loadView('export.client.principal.school-teacher-progress-excel',$report);
+					});
+				})->download($file_type);
+				break;
+
+			default:
+				return $this->respondErrorMessage(2063);
+				break;
+		}
 	}
 
 }
