@@ -819,3 +819,11 @@ content legend {
 .export-table-bordered td {
 	border: 1px solid #ddd !important;
 }
+
+.export-header, .export-sub-header {
+	color: #055a7f;
+}
+
+.export-header {
+	text-align: center;
+}
