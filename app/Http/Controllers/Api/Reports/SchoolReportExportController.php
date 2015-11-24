@@ -40,7 +40,6 @@ class SchoolReportExportController extends ReportController {
 		$file_name = $school_info['principal_name'].'_'.$school_info['school_name'].'_School_Progress_'. Carbon::now()->toDateString();
 		$file_name = str_replace(' ','_',$file_name);
 
-//		dd($report);
 		//Export file
 		switch ($file_type) {
 
@@ -56,9 +55,21 @@ class SchoolReportExportController extends ReportController {
 				//Initiate format
 				ob_end_clean();
 				ob_start();
+				Excel::create($file_name,function($excel) use ($report){
 
+					$excel->sheet('NewSheet', function($sheet) use ($report){
 
+						$sheet->mergeCells('A1:E1');
+						$sheet->mergeCells('A2:E2');
+						$sheet->mergeCells('A3:E3');
+						$sheet->mergeCells('A4:E4');
+						$sheet->mergeCells('A5:E5');
+						$sheet->mergeCells('A7:E7');
 
+						$sheet->setOrientation('landscape');
+						$sheet->loadView('export.client.principal.school-progress-excel',$report);
+					});
+				})->download($file_type);
 				break;
 
 			default:
