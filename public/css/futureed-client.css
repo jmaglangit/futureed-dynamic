@@ -807,10 +807,10 @@ content legend {
 
 /*Export Report*/
 .export-table {
-	border-collapse: collapse;
 	margin-bottom: 0px;
 	width: 100%;
-	margin: 0px 0px 30px 0px;
+	margin: 0px 0px 0px 0px;
+	border-collapse: collapse;
 }
 
 .export-table > tbody > tr > td {

@@ -69,13 +69,14 @@ class StudentReportExportController extends ReportController {
 		//File name format  --> first_name _ last_name _ tab_name _ date
 		$student_info = $report['additional_information'];
 		$file_name = $student_info['first_name'].'_'.$student_info['last_name'].'_Subject_Area_'. Carbon::now()->toDateString();
+		$file_name = str_replace(' ','_',$file_name);
 
 
 		//Execute output.
 		switch($file_type){
 
 			case 'pdf':
-				$pdf = \PDF::loadView('export.student.subject-area-pdf', $report)->setPaper('a4')->setOrientation('landscape');
+				$pdf = PDF::loadView('export.student.subject-area-pdf', $report)->setPaper('a4')->setOrientation('landscape');
 				return $pdf->download($file_name.'.'.$file_type);
 				break;
 			case 'xls' || 'xlsx':
@@ -113,6 +114,7 @@ class StudentReportExportController extends ReportController {
 		$report = $this->image_service->getIconImagePath($report);
 		$student_info = $report['additional_information'];
 		$file_name = $student_info['first_name'].'_'.$student_info['last_name'].'_Current_Learning_'. Carbon::now()->toDateString();
+		$file_name = str_replace(' ','_',$file_name);
 
 		//Export file
 		switch ($file_type) {
