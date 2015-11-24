@@ -46,32 +46,4 @@
         </tr >
     @endif
 
-    {{--Contents--}}
-    {{--<div>--}}
-        {{--<div class="export-header"><h3>Teacher Comparison Progress</h3></div>--}}
-        {{--<div>--}}
-            {{--<div class="export-sub-header"><h3>Class Progress Report</h3></div>--}}
-            {{--<table class="export-table export-table-bordered">--}}
-                {{--<tr class="magenta">--}}
-                    {{--<th class="col-xs-4">{{ $column_header['teacher_list'] }}</th>--}}
-                    {{--<th class="col-xs-3">{{ $column_header['progress'] }}</th>--}}
-                {{--</tr>--}}
-                {{--@if(count($rows) > 0 )--}}
-                    {{--@foreach($rows as $teacher)--}}
-                        {{--<tr>--}}
-                            {{--<td>Teacher {{ $teacher['first_name'].' ' . $teacher['last_name'] }}</td>--}}
-                            {{--<td>{{ $teacher['percent_progress'].'%' }}</td>--}}
-                        {{--</tr>--}}
-                    {{--@endforeach--}}
-                {{--@else--}}
-                    {{--<tr >--}}
-                        {{--<td colspan="2"><p>No result...</p></td>--}}
-                    {{--</tr >--}}
-                {{--@endif--}}
-
-
-            {{--</table>--}}
-        {{--</div>--}}
-
-    {{--</div>--}}
 @stop
