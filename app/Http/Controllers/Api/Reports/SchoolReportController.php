@@ -156,7 +156,24 @@ class SchoolReportController extends ReportController {
 		//Teacher progress.
 		$class = $this->school->getSchoolClassRanking($school_code);
 
-		$additional_information = [];
+		//additional information
+		$school = $this->school->getSchoolByCode($school_code);
+
+		//get country info
+		$country = $this->country->getCountry($school[0]->country_id);
+
+		//get address -- filter if null data
+		$school_address = (empty($school[0]->street_address)) ? '' : $school[0]->street_address;
+		$school_address = (empty($school[0]->city))? $school_address : $school_address.", ".$school[0]->city;
+		$school_address = (empty($school[0]->state))? $school_address : $school_address.", ".$school[0]->state;
+		$school_address = (empty($school[0]->zip))? $school_address : $school_address.", ".$school[0]->zip;
+		$school_address = (empty($country[0]['full_name']))? $school_address : $school_address.", ". $country[0]['full_name'];
+
+		$additional_information = [
+				'principal_name' => $school[0]->contact_name,
+				'school_name' => $school[0]->name,
+				'school_address' => $school_address
+		];
 
 		$column_header = [
 			'teacher_list' => 'Teacher',
