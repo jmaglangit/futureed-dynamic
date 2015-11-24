@@ -49,8 +49,7 @@ class SchoolReportExportController extends ReportController {
 				$export_pdf = $this->pdf->loadView('export.client.principal.school-progress-pdf', $report)
 						->setPaper('a4')
 						->setOrientation('portrait');
-				return $export_pdf->stream();
-//				return $export_pdf->download($file_name . '.' . $file_type);
+				return $export_pdf->download($file_name . '.' . $file_type);
 				break;
 
 			case 'xls' || 'xlsx':
