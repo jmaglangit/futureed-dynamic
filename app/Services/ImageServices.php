@@ -13,7 +13,11 @@ use Illuminate\Filesystem\Filesystem;
 
 class ImageServices {
 
-	/*function will iterate throught the provided array and will output an updated array*/
+	/**
+	 * Updates the image icon full url for each row
+	 * @param $report
+	 * @return object
+	 */
 	public function getIconImageUrl($report){
 		foreach($report['rows'] as $row){
 			$row->icon_image = $this->getIconImageAttribute($row->icon_image, $row->module_id, 'url');
@@ -22,6 +26,11 @@ class ImageServices {
 		return $report;
 	}
 
+	/**
+	 * Updates the image icon base path for each row
+	 * @param $report
+	 * @return object
+	 */
 	public function getIconImagePath($report){
 		foreach($report['rows'] as $row){
 			$row->icon_image = $this->getIconImageAttribute($row->icon_image, $row->module_id, 'path');
@@ -30,7 +39,13 @@ class ImageServices {
 		return $report;
 	}
 
-	/*This function will get the full path of the icon_image and will concatinate it with the provided icon_image filename*/
+	/**
+	 * Updates and assigns the correct url or base path for the icon image
+	 * @param $icon_image
+	 * @param $module_id
+	 * @param $type
+	 * @return string
+	 */
 	public function getIconImageAttribute($icon_image, $module_id, $type){
 		$filesystem = new Filesystem();
 

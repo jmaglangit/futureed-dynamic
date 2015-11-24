@@ -40,7 +40,7 @@
 					<td>{! data.grade_name !}</td>
 					<td>
 						<div class="pull-left category-info">
-							<img ng-if="data.icon_image != null" src="{! data.icon_image !}" /
+							<img ng-if="data.icon_image != null" src="{! data.icon_image !}" />
 							<span>{! data.name !}</span>
 						</div>
 					</td>
