@@ -4,6 +4,7 @@ use Barryvdh\DomPDF\PDF;
 use Carbon\Carbon;
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
+use FutureEd\Services\ImageServices;
 
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -14,15 +15,18 @@ class StudentReportExportController extends ReportController {
 	 * @var StudentReportController
 	 */
 	protected $student_report;
+	protected $image_service;
 
 	/**
 	 * StudentReportExportController constructor.
 	 * @param StudentReportController $studentReportController
 	 */
 	public function __construct(
-		StudentReportController $studentReportController
+		StudentReportController $studentReportController,
+		ImageServices $imageServices
 	) {
 		$this->student_report = $studentReportController;
+		$this->image_service = $imageServices;
 	}
 
 	/**
@@ -107,6 +111,7 @@ class StudentReportExportController extends ReportController {
 	public function studentCurrentLearning($student_id, $subject_id, $file_type){
 
 		$report = $this->student_report->getStudentCurrentLearning($student_id,$subject_id);
+		$report = $this->image_service->getIconImagePath($report);
 		$student_info = $report['additional_information'];
 		$file_name = $student_info['first_name'].'_'.$student_info['last_name'].'_Current_Learning_'. Carbon::now()->toDateString();
 		$file_name = str_replace(' ','_',$file_name);

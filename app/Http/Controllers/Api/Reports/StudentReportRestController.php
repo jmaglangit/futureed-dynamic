@@ -2,6 +2,7 @@
 
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
+use FutureEd\Services\ImageServices;
 
 use Illuminate\Http\Request;
 
@@ -11,15 +12,18 @@ class StudentReportRestController extends ReportController {
 	 * @var StudentReportController
 	 */
 	protected $student_report;
+	protected $image_service;
 
 	/**
 	 * StudentReportRestController constructor.
 	 * @param StudentReportController $studentReportController
 	 */
 	public function __construct(
-		StudentReportController $studentReportController
+		StudentReportController $studentReportController,
+		ImageServices $imageServices
 	) {
 		$this->student_report = $studentReportController;
+		$this->image_service = $imageServices;
 	}
 
 	/**
@@ -79,6 +83,7 @@ class StudentReportRestController extends ReportController {
 	public function studentCurrentLearning($student_id, $subject_id){
 
 		$report = $this->student_report->getStudentCurrentLearning($student_id,$subject_id);
+		$report = $this->image_service->getIconImageUrl($report);
 
 		return $this->respondReportData(
 			$report['additional_information'],

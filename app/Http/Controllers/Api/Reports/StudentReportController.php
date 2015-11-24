@@ -382,7 +382,6 @@ class StudentReportController extends ReportController {
 
 		//Get student current learning
 		$current_learning = $this->class_student->getStudentCurrentLearning($student_id,$subject_id,$country_id);
-		$current_learning = $this->image_service->getIconImageUrl($current_learning);
 
 		$addition_information = [
 			'first_name' => $student->first_name,
