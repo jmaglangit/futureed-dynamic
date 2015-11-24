@@ -336,6 +336,12 @@ th, td {
 	overflow-y: scroll;
 }
 
+.avatar-container-small{
+	padding: 8px 0;
+	margin-right: 20px;
+}
+
+
 .avatar-container-small img {
 	width: 100px;
 	height: 100px;
@@ -344,7 +350,7 @@ th, td {
 }
 
 .avatar-name-container, .btn-help  {
-	margin-top: 30px;
+	margin-top: 35px;
 	text-align: center;
 }
 

@@ -24,11 +24,11 @@
 				<p>{! tips.record.created_moment !}</p>
 			</div>
 
-			<div class="col-xs-6 margin-top-8 pull-right">
-				<div class="col-xs-3 avatar-container-small">
-					<img class="pull-left" ng-src="{! tips.record.avatar_url !}" />
+			<div class="col-xs-6">
+				<div class="pull-right avatar-name-container">Posted by <br /> {! tips.record.name !}</div>
+				<div class="pull-right avatar-container-small">
+					<img ng-src="{! tips.record.avatar_url !}" />
 				</div>
-				<div class="avatar-name-container col-xs-6">Posted by <br /> {! tips.record.name !}</div>
 			</div>
 		</div>
 
