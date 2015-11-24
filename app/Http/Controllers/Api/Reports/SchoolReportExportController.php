@@ -40,6 +40,7 @@ class SchoolReportExportController extends ReportController {
 		$file_name = $school_info['principal_name'].'_'.$school_info['school_name'].'_School_Progress_'. Carbon::now()->toDateString();
 		$file_name = str_replace(' ','_',$file_name);
 
+//		dd($report);
 		//Export file
 		switch ($file_type) {
 
