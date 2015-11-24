@@ -24,7 +24,7 @@
     <div>
         {{--Skills watch--}}
         <div>
-            <h3><i class="fa fa-th-list">&#xf00b;</i>{{ $column_header['skills_watch'] }}</h3>
+            <h3>{{ $column_header['skills_watch'] }}</h3>
             <table class="export-table export-table-bordered">
                 <tr class="magenta">
                     <th class="col-xs-4">Subject</th>
@@ -52,7 +52,7 @@
         </div>
         {{--Class watch--}}
         <div>
-            <h3><i class="fa fa-area-chart"></i>{{ $column_header['class_watch'] }}</h3>
+            <h3>{{ $column_header['class_watch'] }}</h3>
             <table class="export-table export-table-bordered">
                 <tr class="magenta">
                     <th class="col-xs-4">Teacher</th>
@@ -84,7 +84,7 @@
         </div>
         {{--Student watch--}}
         <div>
-            <h3><i class="fa fa-users"></i>{{ $column_header['student_watch'] }}</h3>
+            <h3>{{ $column_header['student_watch'] }}</h3>
             <table class="export-table export-table-bordered">
                 <tr class="magenta">
                     <th class="col-xs-4">Student</th>
@@ -107,7 +107,7 @@
         </div>
         {{--Highest Lowest Scorers--}}
         <div>
-            <h3><i class="fa fa-bar-chart"></i>Scores</h3>
+            <h3>Scores</h3>
             <table class="export-table export-table-bordered">
                 <tr class="magenta">
                     <th class="report-empty-column"></th>
