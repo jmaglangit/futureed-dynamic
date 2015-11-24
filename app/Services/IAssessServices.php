@@ -2,7 +2,11 @@
 
 namespace FutureEd\Services;
 
+use FutureEd\Models\Traits\LoggerTrait;
+
 class IAssessServices {
+
+	use LoggerTrait;
 
 	/**
      *   holds the user_id returned by the login from iAssess
@@ -28,7 +32,7 @@ class IAssessServices {
      *   holds the data if successful cURL has been done
      */
 	var $data;
-	
+
 	public function __construct() {
 		$curl = new \Curl\Curl();
 		$this->curl = $curl;
@@ -52,6 +56,9 @@ class IAssessServices {
 			if ($this->curl->error) {
 			
 				$this->error_code = $this->curl->error_code;
+
+				$this->errorLog('IASSESS : '. $this->error_code . '/ '. $this->curl->error_message
+						. '/ ' . $this->curl->http_error_message);
 				
 				return FALSE;
 			
@@ -78,11 +85,15 @@ class IAssessServices {
     	if($this->login()) {
 	    	if($this->user_id && $this->token) {
 	    		
-			    $this->curl->get(env('IASSESS_URL').'/api/v1/tests/'.($is_adult ? config('futureed.lsp_adult_id') : config('futureed.lsp_child_id') ).'/questions?user_id='.$this->user_id.'&token='.$this->token);
+			    $this->curl->get(env('IASSESS_URL').'/api/v1/tests/'.($is_adult ? config('futureed.lsp_adult_id')
+								: config('futureed.lsp_child_id') ).'/questions?user_id='.$this->user_id.'&token='.$this->token);
 			    
 			    if ($this->curl->error) {
 				
 					$this->error_code = $this->curl->error_code;
+
+					$this->errorLog('IASSESS : '. $this->error_code . '/ '. $this->curl->error_message
+							. '/ ' . $this->curl->http_error_message);
 					
 					return FALSE;
 				
@@ -93,9 +104,13 @@ class IAssessServices {
 					return TRUE;
 				}
 	    	} else {
+
+				$this->errorLog('IASSESS : Invalid user and token, ' . $this->user_id . ', ' . $this->token );
 		    	return FALSE;
 	    	}
     	} else {
+
+			$this->errorLog('IASSESS : Invalid login');
 	    	return FALSE;
     	}
     }
@@ -123,6 +138,9 @@ class IAssessServices {
 			    if($this->curl->error) {
 				
 					$this->error_code = $this->curl->error_code;
+
+					$this->errorLog('IASSESS : '. $this->error_code . '/ '. $this->curl->error_message
+							. '/ ' . $this->curl->http_error_message);
 					
 /*
 					error_log($this->error_code);
@@ -139,9 +157,11 @@ class IAssessServices {
 					return TRUE;
 				}
 	    	} else {
+				$this->errorLog('IASSESS : Invalid user and token, ' . $this->user_id . ', ' . $this->token );
 		    	return FALSE;
 	    	}
     	} else {
+			$this->errorLog('IASSESS : Invalid login');
 	    	return FALSE;
     	}
     }
