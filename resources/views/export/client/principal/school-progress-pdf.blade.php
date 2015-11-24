@@ -1,9 +1,25 @@
 @extends('export.client.principal.index')
 
+@section('metadata')
+        <!-- Bootstrap core CSS -->
+{!! Html::style('//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css'); !!}
+        <!-- Fonts -->
+{!! Html::style('//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css'); !!}
+{!! Html::style('//fonts.googleapis.com/css?family=Roboto:400,300,400italic,500,500italic,700,700italic'); !!}
+
+        <!-- Custom styles for this template -->
+{!! Html::style('/css/datetimepicker.css') !!}
+{{--{!! Html::style('/css/futureed.css'); !!}--}}
+
+{!! Html::style('/css/futureed-client.css') !!}
+{!! Html::style('/css/angucomplete.css') !!}
+{!! Html::style('/css/datatables.bootstrap.min.css') !!}
+@stop
+
 @section('content')
     <table>
         <tr>
-            <td style="text-align: left"><img src="{{ base_path().'/public/images/logo-md.png' }}"></td>
+            <td style="text-align: left; float: left;"><img src="{{ base_path().'/public/images/logo-md.png' }}"></td>
         </tr>
         <tr>
             <td></td>
@@ -31,21 +47,21 @@
                     <th class="col-xs-3">Progress</th>
                 </tr>
                 @if(!is_null($rows['skills_watch']['highest_skill']))
-                <tr>
-                    <td>{{ $rows['skills_watch']['highest_skill']['subject_name'] }}</td>
-                    <td>{{ $rows['skills_watch']['highest_skill']['percent_progress'] }}%</td>
-                </tr>
+                    <tr>
+                        <td>{{ $rows['skills_watch']['highest_skill']['subject_name'] }}</td>
+                        <td>{{ $rows['skills_watch']['highest_skill']['percent_progress'] }}%</td>
+                    </tr>
                 @endif
                 @if(!is_null($rows['skills_watch']['lowest_skill']))
-                <tr>
-                    <td>{{ $rows['skills_watch']['lowest_skill']['subject_name'] }}</td>
-                    <td>{{ $rows['skills_watch']['lowest_skill']['percent_progress'] }}%</td>
-                </tr>
+                    <tr>
+                        <td>{{ $rows['skills_watch']['lowest_skill']['subject_name'] }}</td>
+                        <td>{{ $rows['skills_watch']['lowest_skill']['percent_progress'] }}%</td>
+                    </tr>
                 @endif
                 @if(is_null($rows['skills_watch']['highest_skill']) && is_null($rows['skills_watch']['lowest_skill']))
-                <tr>
-                    <td colspan="2"><p>No result...</p></td>
-                </tr>
+                    <tr>
+                        <td colspan="2"><p>No result...</p></td>
+                    </tr>
                 @endif
             </table>
 
@@ -59,20 +75,20 @@
                     <th class="col-xs-3">Progress</th>
                 </tr>
                 @if(!is_null($rows['class_watch']['highest_class']))
-                <tr>
-                    <td>Teacher {{ $rows['class_watch']['highest_class']['first_name']
+                    <tr>
+                        <td>Teacher {{ $rows['class_watch']['highest_class']['first_name']
                     .' '.$rows['class_watch']['highest_class']['last_name'] }}
-                    </td>
-                    <td>{{ $rows['class_watch']['highest_class']['percent_progress'] }} %</td>
-                </tr>
+                        </td>
+                        <td>{{ $rows['class_watch']['highest_class']['percent_progress'] }} %</td>
+                    </tr>
                 @endif
                 @if(!is_null($rows['class_watch']['lowest_class']))
-                <tr>
-                    <td>Teacher {{ $rows['class_watch']['lowest_class']['first_name']
+                    <tr>
+                        <td>Teacher {{ $rows['class_watch']['lowest_class']['first_name']
                      .' '. $rows['class_watch']['lowest_class']['last_name']}}
-                    </td>
-                    <td>{{ $rows['class_watch']['lowest_class']['percent_progress'] }}%</td>
-                </tr>
+                        </td>
+                        <td>{{ $rows['class_watch']['lowest_class']['percent_progress'] }}%</td>
+                    </tr>
                 @endif
                 @if(is_null($rows['class_watch']['highest_class']) && is_null($rows['class_watch']['lowest_class']))
                     <tr>
@@ -93,12 +109,12 @@
                 @if(count($rows['student_watch']) > 0)
                     @foreach($rows['student_watch'] as $student)
                         <tr>
-                        <td>{{ $student->first_name.' '.$student->last_name }}</td>
-                        <td>{{ $student->progress }}</td>
+                            <td>{{ $student->first_name.' '.$student->last_name }}</td>
+                            <td>{{ $student->progress }}</td>
                         </tr>
                     @endforeach
                 @else
-                    <tr >
+                    <tr>
                         <td colspan="2"><p>No result...</p></td>
                     </tr>
                 @endif
