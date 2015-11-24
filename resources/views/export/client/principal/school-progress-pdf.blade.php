@@ -9,22 +9,22 @@
             <td></td>
         </tr>
         <tr>
-            <td>{{ $additional_information['principal_name'] }}</td>
+            <td style="text-align: left">{{ $additional_information['principal_name'] }}</td>
         </tr>
         <tr>
-            <td>{{ $additional_information['school_name'] }}</td>
+            <td style="text-align: left">{{ $additional_information['school_name'] }}</td>
         </tr>
         <tr>
-            <td>{{ $additional_information['school_address'] }}</td>
+            <td style="text-align: left">{{ $additional_information['school_address'] }}</td>
         </tr>
         <tr></tr>
     </table>
     <div>&nbsp;</div>
-    <div style="text-align: center"><h3>Overall School Progress</h3></div>
+    <div class="export-header"><h3>Overall School Progress</h3></div>
     <div>
         {{--Skills watch--}}
         <div>
-            <h3>{{ $column_header['skills_watch'] }}</h3>
+            <h3 class="export-sub-header">{{ $column_header['skills_watch'] }}</h3>
             <table class="export-table export-table-bordered">
                 <tr class="magenta">
                     <th class="col-xs-4">Subject</th>
@@ -52,7 +52,7 @@
         </div>
         {{--Class watch--}}
         <div>
-            <h3>{{ $column_header['class_watch'] }}</h3>
+            <h3 class="export-sub-header">{{ $column_header['class_watch'] }}</h3>
             <table class="export-table export-table-bordered">
                 <tr class="magenta">
                     <th class="col-xs-4">Teacher</th>
@@ -84,7 +84,7 @@
         </div>
         {{--Student watch--}}
         <div>
-            <h3>{{ $column_header['student_watch'] }}</h3>
+            <h3 class="export-sub-header">{{ $column_header['student_watch'] }}</h3>
             <table class="export-table export-table-bordered">
                 <tr class="magenta">
                     <th class="col-xs-4">Student</th>
@@ -107,7 +107,7 @@
         </div>
         {{--Highest Lowest Scorers--}}
         <div>
-            <h3>Scores</h3>
+            <h3 class="export-sub-header">Scores</h3>
             <table class="export-table export-table-bordered">
                 <tr class="magenta">
                     <th class="report-empty-column"></th>
