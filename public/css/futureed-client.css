@@ -817,23 +817,19 @@ content legend {
 	padding: 15px;
 }
 
-.export-table-bordered td {
+.export-table-bordered td, .export-table-bordered th {
 	border: 1px solid #ddd !important;
 }
 
+.export-table-bordered th{
+	padding:15px;
+}
 .export-header, .export-sub-header {
 	color: #055a7f;
 }
-
 .export-header {
 	text-align: center;
 }
-
-.school-excel-header > th {
-	column-span: 3;
-	text-align: center;
-}
-.school-excel-header > tr > td{
-	column-span: 3;
-	text-align: left;
+.export-table .class-report th{
+	width: 200px;
 }

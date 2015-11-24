@@ -84,5 +84,12 @@ Routes::group([
 			'as' => 'api.report.school.teacher.progress.export'
 	]);
 
+	/*
+	 * Teacher/Class export
+	 */
+	Routes::get('/classroom/{class_id}/{file_type}',[
+		'uses' => 'Api\Reports\ClassReportExportController@classReport',
+		'as' => 'api.report.classroom.status.export'
+	]);
 
 });
