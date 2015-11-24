@@ -1,4 +1,4 @@
-@extends('export.client.principal')
+@extends('export.client.principal.index')
 
 @section('content')
     {{--Header--}}
@@ -12,14 +12,14 @@
     {{--Contents--}}
     <div>
         {{--Skills watch--}}
-        <table></table>
+        <div></div>
         {{--Class watch--}}
-        <table>
-        </table>
+        <div>
+        </div>
         {{--student watch--}}
-        <table>
-        </table>
+        <div>
+        </div>
         {{--score--}}
-        <table></table>
+        <div></div>
     </div>
 @stop

@@ -111,10 +111,17 @@ class SchoolReportController extends ReportController {
 
 
 		//Principal Name, School, School Address (Address, City, state, Postal code, country)
+
+		$school_address = (empty($school[0]->street_address)) ? '' : $school[0]->street_address;
+		$school_address = (empty($school[0]->city))? $school_address : $school_address.", ".$school[0]->city;
+		$school_address = (empty($school[0]->state))? $school_address : $school_address.", ".$school[0]->state;
+		$school_address = (empty($school[0]->zip))? $school_address : $school_address.", ".$school[0]->zip;
+		$school_address = (empty($country[0]['full_name']))? $school_address : $school_address.", ". $country[0]['full_name'];
+
 		$additional_information = [
 			'principal_name' => $school[0]->contact_name,
 			'school_name' => $school[0]->name,
-			'school_address' => $school[0]->street_address . ", " . $school[0]->city . ", " . $school[0]->state . ", " . $school[0]->zip . ", " . $country[0]['full_name'], //format: address, city, state, postal code, country
+			'school_address' => $school_address
 		];
 
 		$column_header = [

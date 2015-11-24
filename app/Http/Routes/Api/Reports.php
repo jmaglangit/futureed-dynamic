@@ -71,7 +71,18 @@ Routes::group([
 			'as' => 'api.report.student.progress.current-learning.export'
 	]);
 
+	/**
+	 * School export
+	 */
+	Routes::get('/school/{school_code}/{file_type}',[
+			'uses' => 'Api\Reports\SchoolReportExportController@schoolProgress',
+			'as' => 'api.report.school.status.export'
+	]);
 
+	Routes::get('/school/{school_code}/teachers/{file_type}',[
+			'uses' => 'Api\Reports\SchoolReportExportController@schoolTeacherProgress',
+			'as' => 'api.report.school.teacher.progress.export'
+	]);
 
 
 });
