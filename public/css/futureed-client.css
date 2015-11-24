@@ -803,3 +803,33 @@ content legend {
 
 /*subject-area tab*/
 .subject-area .table {border-top:none;}
+
+
+/*Export Report*/
+.export-table {
+	border-collapse: collapse;
+	margin-bottom: 0px;
+	width: 100%;
+	margin: 0px 0px 30px 0px;
+}
+
+.export-table > tbody > tr > td {
+	padding: 15px;
+}
+
+.export-table-bordered td, .export-table-bordered th {
+	border: 1px solid #ddd !important;
+}
+
+.export-table-bordered th{
+	padding:15px;
+}
+.export-header, .export-sub-header {
+	color: #055a7f;
+}
+.export-header {
+	text-align: center;
+}
+.export-table .class-report th{
+	width: 200px;
+}
