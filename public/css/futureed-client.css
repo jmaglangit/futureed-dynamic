@@ -833,3 +833,17 @@ content legend {
 .export-table .class-report th{
 	width: 200px;
 }
+
+/*dashboard export button area*/
+.client-export-button-container {
+	margin-bottom:20px;
+}
+
+.client-export-button-container .export-buttons button{
+	border-radius: 3px !important;
+}
+
+.client-export-button-container .export-buttons .dropdown-menu{
+	min-width: 100px;
+	text-align: center;
+}
