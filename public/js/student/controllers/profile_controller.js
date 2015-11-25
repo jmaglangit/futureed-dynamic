@@ -51,6 +51,9 @@ function ProfileController($scope, apiService, ProfileService) {
 		self.select_password = Constants.FALSE;
 		self.email_confirmed = Constants.FALSE;
 
+		console.log($scope);
+		console.log(!$scope.user.media_login);
+
 		switch(active) {
 
 		  case Constants.REWARDS  		:
@@ -80,10 +83,12 @@ function ProfileController($scope, apiService, ProfileService) {
 			self.active_edit = Constants.TRUE;
 			break;
 
-		  case Constants.EDIT_EMAIL && !$scope.user.media_login :
-			self.change = {};
-			self.studentDetails();
-			self.active_edit_email = Constants.TRUE;
+		  case Constants.EDIT_EMAIL :
+			if(!$scope.user.media_login){
+				self.change = {};
+				self.studentDetails();
+				self.active_edit_email = Constants.TRUE;
+			}
 			break;
 
 		  case Constants.CONFIRM_EMAIL  :
