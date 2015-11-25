@@ -51,9 +51,6 @@ function ProfileController($scope, apiService, ProfileService) {
 		self.select_password = Constants.FALSE;
 		self.email_confirmed = Constants.FALSE;
 
-		console.log($scope);
-		console.log(!$scope.user.media_login);
-
 		switch(active) {
 
 		  case Constants.REWARDS  		:
