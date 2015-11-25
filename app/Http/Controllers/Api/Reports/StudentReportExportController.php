@@ -76,7 +76,7 @@ class StudentReportExportController extends ReportController {
 		switch($file_type){
 
 			case 'pdf':
-				$pdf = PDF::loadView('export.student.subject-area-pdf', $report)->setPaper('a4')->setOrientation('landscape');
+				$pdf = \PDF::loadView('export.student.subject-area-pdf', $report)->setPaper('a4')->setOrientation('landscape');
 				return $pdf->download($file_name.'.'.$file_type);
 				break;
 			case 'xls' || 'xlsx':
