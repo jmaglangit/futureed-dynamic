@@ -577,6 +577,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 			payment.price = self.invoice.total_amount;
 			payment.client_id = self.invoice.client_id;
 			payment.order_no = self.invoice.order_no;
+			payment.renew = self.invoice.renew;
 
 		var base_url = $("#base_url_form input[name='base_url']").val();
 			payment.success_callback_uri = base_url + "/" + angular.lowercase(Constants.CLIENT) + "/parent/payment/success"
