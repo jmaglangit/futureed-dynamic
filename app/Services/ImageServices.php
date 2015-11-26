@@ -50,7 +50,12 @@ class ImageServices {
 		$filesystem = new Filesystem();
 
 		//get path
-		$image_path = config('futureed.icon_image_path_final') . '/' . $module_id . '/' . $icon_image;
+		if($icon_image != null){
+			$image_path = config('futureed.icon_image_path_final') . '/' . $module_id . '/' . $icon_image;
+		}
+		else{
+			$image_path = null;
+		}
 
 		//check path
 		if($filesystem->exists($image_path)){

@@ -1,4 +1,4 @@
-<div ng-if="user.role == futureed.TEACHER" ng-controller="ManageTeacherContentController as dashboard" ng-init="dashboard.setActive('Dashboard')" ng-cloak>
+<div ng-if="user.role == futureed.TEACHER" ng-controller="ManageTeacherContentController as dashboard" ng-init="dashboard.setActive(futureed.DASHBOARD)" ng-cloak>
 	<div ng-if="!dashboard.active_report" class="dashboard-content">
 		<p>To get started on using Future Lesson, you need to add a student under a
 		<a href="{!! route('client.teacher.class.index') !!}"> class</a>.</p>
@@ -11,6 +11,19 @@
 	</div>
 
 	<div ng-if="dashboard.active_report">
+
+		<div class="row client-export-button-container">
+			<div class="col-xs-12">
+				<div class="btn-group export-buttons pull-right">
+					<button class="btn btn-blue" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-file-pdf-o"></i> Export </button>
+					<ul class="dropdown-menu">
+						<li><a href="{!dashboard.teacher_report_export!}/pdf">PDF</a></li>
+						<li><a href="{!dashboard.teacher_report_export!}/xls">Excel</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
 		<div ng-if="dashboard.export" class="report-options">
 			<ul class="pull-right">
 				<li>

@@ -36,10 +36,11 @@
 				<?php $var = $row->grade_name ?>
 					<td>
 						@if(!is_null($row->icon_image))
-							<img class="category-icon" src="{{$row->icon_image}}" />{{ $row->name }}
+							<img class="category-icon" src="{{$row->icon_image}}" />
 						@else
-							{{ $row->name }}
+							<img class="category-icon" src="{{ base_path().'/public/images/icons/default-module-icon.png' }}" />
 						@endif
+						{{ $row->name }}
 					</td>
 				@if($row->progress > 0)
 					<td>{{ $row->progress }}</td>
