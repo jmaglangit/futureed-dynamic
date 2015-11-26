@@ -80,10 +80,12 @@ function ProfileController($scope, apiService, ProfileService) {
 			self.active_edit = Constants.TRUE;
 			break;
 
-		  case Constants.EDIT_EMAIL && !$scope.user.media_login :
-			self.change = {};
-			self.studentDetails();
-			self.active_edit_email = Constants.TRUE;
+		  case Constants.EDIT_EMAIL :
+			if(!$scope.user.media_login){
+				self.change = {};
+				self.studentDetails();
+				self.active_edit_email = Constants.TRUE;
+			}
 			break;
 
 		  case Constants.CONFIRM_EMAIL  :

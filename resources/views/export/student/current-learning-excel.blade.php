@@ -39,7 +39,7 @@
 						@if(!is_null($row->icon_image))
 							<img class="category-icon" src="{{$row->icon_image}}" width="30" />
 						@else
-							&nbsp;
+							<img class="category-icon" src="{{ base_path().'/public/images/icons/default-module-icon.png' }}" width="30" />
 						@endif
 					</td>
 					<td style="text-align: center; border: 1px solid black;">{{ $row->name }}</td>
