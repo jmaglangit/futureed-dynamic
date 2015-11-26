@@ -11,7 +11,6 @@ function AdminDashboardController($scope){
 	this.setActiveAdmin = setActiveAdmin;	
 
 	$scope.role_select = Constants.TRUE;
-	self.user_type = $scope.user.admin_role;
 
 	/*Field Changes on role select*/
 	function changeField(field){

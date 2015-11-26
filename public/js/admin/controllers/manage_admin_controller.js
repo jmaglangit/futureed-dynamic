@@ -14,6 +14,8 @@ function ManageAdminController($scope, ManageAdminService, TableService, SearchS
 
 	ValidationService(self);
 	self.default();
+
+	self.user_type = Constants.ADMIN;
 	
 
 	self.setActive = function(active, id){
