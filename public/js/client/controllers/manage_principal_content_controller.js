@@ -117,6 +117,7 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
                         self.export = Constants.FALSE;
                     }
                 }
+
             }
             $scope.ui_unblock();
 
@@ -160,57 +161,36 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
     }
 
     ////export school report
-    //self.saveAs(file_type){
-    //
-    //    if(self.active_school == Constants.TRUE){
-    //        //goto download school report
-    //        self.schoolReportExport(file_type);
-    //
-    //    }else if (self.active_school_teacher == Constants.TRUE){
-    //        //goto download school teacher report
-    //    }
-    //}
+    self.exportReport = function(file_type){
 
-    ////download school report
-    //self.schoolReportExport(file_type){
-    //    self.errors = Constants.FALSE;
-    //
-    //    $scope.ui_block();
-    //    ManagePrincipalContentService.schoolReportDownload(self.principal.school_code, file_type).success(function(response){
-    //        if(angular.equals(response.status, Constants.STATUS_OK)){
-    //            if(response.errors){
-    //                self.errors = $scope.errorHandler(response.errors);
-    //            }else if(response.data){
-    //
-    //            }
-    //        }
-    //        $scope.ui_block();
-    //    }).error(function (response) {
-    //        self.errors = $scope.internalError();
-    //        $scope.ui_unblock();
-    //    });
-    //
-    //}
-    //
-    ////download school teacher report
-    //self.schoolTeacherReportExport(file_type){
-    //    self.errors = Constants.FALSE;
-    //
-    //    $scope.ui_block;
-    //    ManagePrincipalContentService.schoolTeacherReportDownload(self.principal.school_code, file_type).success(function(response){
-    //        if(angular.equals(response.status, Constants.STATUS_OK)){
-    //            if(response.errors){
-    //                self.errors = $scope.errorHandler(response.errors);
-    //            }else if(response.data){
-    //
-    //            }
-    //        }
-    //        $scope.ui_block();
-    //    }).error(function (response) {
-    //        self.errors = $scope.internalError();
-    //        $scope.ui_unblock();
-    //    });
-    //}
+        if(self.active_school == Constants.TRUE){
+            //download school report
+            self.schoolReportExport(file_type);
+
+        }else if (self.active_school_teacher == Constants.TRUE){
+            //download school teacher report
+            self.schoolTeacherReportExport(file_type);
+        }
+    }
+
+    //download school report
+    self.schoolReportExport = function(file_type){
+        self.errors = Constants.FALSE;
+
+        $scope.ui_block();
+        self.schoolDownload = ManagePrincipalContentService.schoolReportDownload(self.principal.school_code, file_type);
+        $scope.ui_unblock();
+
+    }
+
+    //download school teacher report
+    self.schoolTeacherReportExport = function(file_type){
+        self.errors = Constants.FALSE;
+
+        $scope.ui_block;
+        self.schoolDownload = ManagePrincipalContentService.schoolTeacherReportDownload(self.principal.school_code, file_type);
+        $scope.ui_unblock();
+    }
 
 
 }

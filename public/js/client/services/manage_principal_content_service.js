@@ -27,18 +27,12 @@ function ManagePrincipalContentService($http) {
 
     //download school progress
     managePrincipalApi.schoolReportDownload = function(school_code,file_type){
-        return $http({
-            method  :   Constants.METHOD_GET
-            , url   :   reportUrl + 'school/' + school_code + '/' + file_type
-        });
+        return reportUrl + 'school/' + school_code + '/' + file_type;
     }
 
     //download school teacher progress
     managePrincipalApi.schoolTeacherReportDownload = function(school_code, file_type){
-        return $http({
-            method  :   Constants.METHOD_GET
-            ,url    :   reportUrl + 'school/' + school_code + '/teachers/' + file_type
-        });
+        return reportUrl + 'school/' + school_code + '/teachers/' + file_type
     }
 
     return managePrincipalApi;

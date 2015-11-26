@@ -56,6 +56,7 @@ class PaymentController extends ApiController
     public function postPayment(PaymentRequest $request)
     {
         $data = $request->all();
+
         //default currency to USD.
         $currency = "USD";
         $payer = new Payer();
@@ -107,6 +108,7 @@ class PaymentController extends ApiController
         if(isset($data['client_id'])){
             Session::put('paypal_payment_client_id', $data['client_id']);
             Session::put('paypal_payment_order_no', $data['order_no']);
+            Session::put('is_renewal', isset($data['renew']) ? $data['renew'] : 0);
         }
 
         if(isset($redirect_url)) {
@@ -168,9 +170,11 @@ class PaymentController extends ApiController
                 //send email
                 if(Session::has('paypal_payment_client_id')){
                     $client_id = Session::get('paypal_payment_client_id');
+                    $is_renewal = Session::get('is_renewal');
 
                     Session::forget('paypal_payment_client_id');
                     Session::forget('paypal_payment_order_no');
+                    Session::forget('is_renewal');
 
                     $client = $this->client->getClientDetails($client_id);
                     $client = $this->client->getClient($client->user_id,config('futureed.principal'));
@@ -190,7 +194,10 @@ class PaymentController extends ApiController
                                 //client
                                 $data['school_name'] = $client['school']['name'];
                                 $data['login_link'] = URL::to('/client/login');
-                                $this->email->sendTeacherAddClass($data);
+
+                                if(!$is_renewal){
+                                    $this->email->sendTeacherAddClass($data);
+                                }
                             }
                         }
                     }
