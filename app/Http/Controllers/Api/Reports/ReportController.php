@@ -116,6 +116,21 @@ class ReportController extends Controller {
 	}
 
 	/**
+	 * Generate response for download link.
+	 * @param $data
+	 * @return Response
+	 */
+	public function respondReportDownloadLink($data){
+
+		return $this->respond([
+				'status' => $this->getStatus(),
+				'data' => [
+					'download_link' => $data
+				]
+		]);
+	}
+
+	/**
 	 * Generate report data.
 	 * @param $information
 	 * @param $columns
