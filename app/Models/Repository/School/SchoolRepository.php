@@ -158,8 +158,16 @@ class SchoolRepository implements SchoolRepositoryInterface{
 
 		return School::select('name','code','city','state','street_address')
 						->where('name','Like',$school_name.'%')->get()->toArray();
+	}
 
+	/**
+	 * Get school by school code.
+	 * @param $school_code
+	 * @return mixed
+	 */
+	public function getSchoolByCode($school_code){
 
+		return School::whereCode($school_code)->get();
 	}
 
 	/**

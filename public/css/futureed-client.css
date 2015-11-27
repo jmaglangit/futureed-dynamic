@@ -803,3 +803,47 @@ content legend {
 
 /*subject-area tab*/
 .subject-area .table {border-top:none;}
+
+
+/*Export Report*/
+.export-table {
+	margin-bottom: 0px;
+	width: 100%;
+	margin: 0px 0px 0px 0px;
+	border-collapse: collapse;
+}
+
+.export-table > tbody > tr > td {
+	padding: 15px;
+}
+
+.export-table-bordered td, .export-table-bordered th {
+	border: 1px solid #ddd !important;
+}
+
+.export-table-bordered th{
+	padding:15px;
+}
+.export-header, .export-sub-header {
+	color: #055a7f;
+}
+.export-header {
+	text-align: center;
+}
+.export-table .class-report th{
+	width: 200px;
+}
+
+/*dashboard export button area*/
+.client-export-button-container {
+	margin-bottom:20px;
+}
+
+.client-export-button-container .export-buttons button{
+	border-radius: 3px !important;
+}
+
+.client-export-button-container .export-buttons .dropdown-menu{
+	min-width: 100px;
+	text-align: center;
+}

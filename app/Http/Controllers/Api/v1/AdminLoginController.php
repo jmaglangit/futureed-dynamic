@@ -119,7 +119,8 @@ class AdminLoginController extends ApiController
 			return $this->setHeader($token)->respondWithData([
 				'id' => $admin_detail['id'],
 				'first_name' => $admin_detail['first_name'],
-				'last_name' => $admin_detail['last_name']
+				'last_name' => $admin_detail['last_name'],
+				'admin_role' => $admin_detail['admin_role']
 			]);
 
 		}

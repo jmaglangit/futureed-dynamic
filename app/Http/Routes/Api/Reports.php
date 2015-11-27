@@ -57,6 +57,13 @@ Routes::group([
 	/**
 	 * REPORT EXPORTS ============================>
 	 */
+	/**
+	 * Retrieve Saved file.
+	 */
+	Routes::get('/{folder_name}',[
+		'uses' => 'Api\Reports\ReportFileController@getReportFile',
+		'as' => 'api.report.folder.file'
+	]);
 
 	/**
 	 * Student export
@@ -71,7 +78,25 @@ Routes::group([
 			'as' => 'api.report.student.progress.current-learning.export'
 	]);
 
+	/**
+	 * School export
+	 */
+	Routes::get('/school/{school_code}/{file_type}',[
+			'uses' => 'Api\Reports\SchoolReportExportController@schoolProgress',
+			'as' => 'api.report.school.status.export'
+	]);
 
+	Routes::get('/school/{school_code}/teachers/{file_type}',[
+			'uses' => 'Api\Reports\SchoolReportExportController@schoolTeacherProgress',
+			'as' => 'api.report.school.teacher.progress.export'
+	]);
 
+	/*
+	 * Teacher/Class export
+	 */
+	Routes::get('/classroom/{class_id}/{file_type}',[
+		'uses' => 'Api\Reports\ClassReportExportController@classReport',
+		'as' => 'api.report.classroom.status.export'
+	]);
 
 });

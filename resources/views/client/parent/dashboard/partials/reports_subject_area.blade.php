@@ -24,7 +24,7 @@
 		{!! Form::close() !!}
 	</div>
 
-	<div template-directive template-url="{!! route('client.parent.reports.progress_bar') !!}"></div>
+	<div template-directive template-url="{!! route('client.parent.partials.reports_progress_bar') !!}"></div>
 
 	<div class="reports-container" ng-cloak>
 		<table id="tip-list" class="table table-striped table-bordered">

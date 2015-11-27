@@ -66,6 +66,9 @@
 				<div ng-if="$index == 0"><span ng-init="class.selectClass(aClass.class_id)"></span></div>
 				<a href="#home" aria-controls="home" role="tab" data-toggle="tab" >{! aClass.classroom.subject.name !}</a>
 			</li>
+			<li role="presentation" class="module-tabs" ng-class="{ 'active' : aClass.class_id == class.current_class }">
+				<a href="{!! route('student.reports.index') !!}">Reports</a>
+			</li>
 		</ul>
 
 		<div class="tab-content">

@@ -124,6 +124,7 @@ function ManageTeacherContentController($scope, $window, ManageTeacherContentSer
 		self.column_header = {};
 		self.record = {};
 		self.classroom_id = (self.classroom_id) ? self.classroom_id : classroom_id;
+		self.teacher_report_export = Constants.FALSE;
 
 		$scope.ui_block();
 		ManageTeacherContentService.getClassReport(self.classroom_id).success(function(response) {
@@ -135,6 +136,7 @@ function ManageTeacherContentController($scope, $window, ManageTeacherContentSer
 					self.column_header = response.data.column_header[0];
 					self.record = response.data.rows[0];
 					self.active_report = Constants.TRUE;
+					self.teacher_report_export = "/api/report/classroom/" + self.classroom_id;
 				}
 			}
 		$scope.ui_unblock();

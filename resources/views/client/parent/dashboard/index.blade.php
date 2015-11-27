@@ -57,10 +57,10 @@
 			</ul>
 
 			
-			<div template-directive template-url="{!! route('client.parent.reports.report_card') !!}"></div>
-			<div template-directive template-url="{!! route('client.parent.reports.summary_progress') !!}"></div>
-			<div template-directive template-url="{!! route('client.parent.reports.subject_area') !!}"></div>
-			<div template-directive template-url="{!! route('client.parent.reports.current_learning') !!}"></div>
+			<div template-directive template-url="{!! route('client.parent.partials.reports_report_card') !!}"></div>
+			<div template-directive template-url="{!! route('client.parent.partials.reports_summary_progress') !!}"></div>
+			<div template-directive template-url="{!! route('client.parent.partials.reports_subject_area') !!}"></div>
+			<div template-directive template-url="{!! route('client.parent.partials.reports_current_learning') !!}"></div>
 		</div>	
 	</div>	
 </div>

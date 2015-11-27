@@ -336,6 +336,12 @@ th, td {
 	overflow-y: scroll;
 }
 
+.avatar-container-small{
+	padding: 8px 0;
+	margin-right: 20px;
+}
+
+
 .avatar-container-small img {
 	width: 100px;
 	height: 100px;
@@ -344,7 +350,7 @@ th, td {
 }
 
 .avatar-name-container, .btn-help  {
-	margin-top: 30px;
+	margin-top: 35px;
 	text-align: center;
 }
 
@@ -1528,6 +1534,10 @@ top: 41px;
 	margin: 10px;
 }
 
+.reports-container img {
+	width: 30px;
+}
+
 .progress-key {
 	color: #0E79A3;
 	font-size: 20px;
@@ -1717,3 +1727,79 @@ top: 41px;
 	min-width: 100px;
 }
 /*end export buttons*/
+
+
+/*export report*/
+.export-report hr{
+	width: 1000px;
+}
+
+.export-report table {
+	width: 100%;
+	border-collapse: collapse;
+	padding: 0;
+
+}
+
+.export-report table th{
+	text-align: center;
+}
+
+.export-report .export-header img {
+	border: 1px solid;
+	border-radius: 25px;
+}
+
+.export-report .export-header td {
+	text-align: left;
+}
+
+.export-report .progress-container{
+	border:5px solid red;
+}
+
+.export-report .progress-item{
+	width: 150px;
+	height: 160px;
+}
+
+.export-report .progress-container .circle{
+	width: 100px;
+	height: 100px;
+	background: #DDBE0E;
+	-moz-border-radius: 50px;
+	-webkit-border-radius: 50px;
+	border-radius: 50px;
+	margin:auto;
+	font-size: 30px;
+	color: #fff;
+	padding:0;
+	border:none;
+}
+
+.export-report .progress-items .circle .span{
+	border:1px solid;
+}
+
+.export-report .progress-container .progress-item span{
+	margin-top:100px;
+}
+
+.export-report .report-data {
+	text-align: center;
+	margin-top:20px;
+}
+
+.export-report .report-data .category-icon {
+	width:30px;
+}
+
+.export-report .report-data tr, .export-report .report-data td, .export-report .report-data th{
+	border: 1px solid black;
+}
+.export-report .report-data tr:nth-child(even) {
+	background: #DDD;
+}
+.export-report .report-data tr:nth-child(odd) {
+	background: #FFF;
+}

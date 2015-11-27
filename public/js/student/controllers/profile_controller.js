@@ -80,10 +80,12 @@ function ProfileController($scope, apiService, ProfileService) {
 			self.active_edit = Constants.TRUE;
 			break;
 
-		  case Constants.EDIT_EMAIL && !$scope.user.media_login :
-			self.change = {};
-			self.studentDetails();
-			self.active_edit_email = Constants.TRUE;
+		  case Constants.EDIT_EMAIL :
+			if(!$scope.user.media_login){
+				self.change = {};
+				self.studentDetails();
+				self.active_edit_email = Constants.TRUE;
+			}
 			break;
 
 		  case Constants.CONFIRM_EMAIL  :
@@ -327,7 +329,7 @@ function ProfileController($scope, apiService, ProfileService) {
 		self.callback_uri = self.base_url + Constants.URL_CHANGE_EMAIL(angular.lowercase(Constants.STUDENT));
 
 		  $scope.ui_block();
-		  apiService.changeValidate(self.prof.id, self.change.new_email, self.image_id, self.callback_uri).success(function(response){
+		  apiService.changeValidate(self.prof.id, self.change.new_email, self.change.password_image_id, self.callback_uri).success(function(response){
 			if(angular.equals(response.status, Constants.STATUS_OK)){
 			  if(response.errors){
 				self.errors = $scope.errorHandler(response.errors);

@@ -7,6 +7,14 @@
 @section('content')
 	<div class="container dshbrd-con reports" ng-controller="ProfileController as profile" ng-cloak>
 		<div ng-controller="StudentReportsController as reports" class="wrapr">
+			<div class="row">
+				<div class="col-xs-3">
+					<a class="btn btn-blue" href="{!! route('student.dashboard.index') !!}">
+						<i class="fa fa-arrow-left"></i> Back to Dashboard</a>
+					</a>
+				</div>
+				<div class="col-xs-offset-9"></div>
+			</div>
 			<div class="content-title">
 				<div class="title-main-content row">
 					<div class="col-xs-6">
