@@ -77,6 +77,7 @@ return [
 		2062 => 'Admin is currently logged in.',
 		2063 => 'User is currently logged in.',
 		2063 => 'Invalid export file format',
+		2064 =>	'File does not exist.',
 
 
 		2100 => 'Reset code is invalid.',
@@ -127,6 +128,7 @@ return [
 		2145 => 'Student needs to watch the videos again.',
 		2146 => 'Prevent having dot for an image file name.',
 		2147 => 'Unable to Delete. Subscription already expired.',
+		2148 => 'Unable to generate report.',
 
 		// Client Error messages
 		2200 => 'Email already exists.',

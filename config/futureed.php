@@ -224,5 +224,14 @@ return [
 	'student_excelling' => 'Excelling',
 	'student_struggling' => 'Struggling',
 
+	//Reports folder name
+	'reports_folder' => 'reports',
+
+	//Reports file type
+	'pdf' => 'pdf',
+	'xls' => 'xls',
+	'mobile-pdf' => 'mobile-pdf',
+	'mobile-xls' => 'mobile-xls'
+
 
 ];

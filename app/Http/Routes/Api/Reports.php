@@ -57,6 +57,13 @@ Routes::group([
 	/**
 	 * REPORT EXPORTS ============================>
 	 */
+	/**
+	 * Retrieve Saved file.
+	 */
+	Routes::get('/{folder_name}',[
+		'uses' => 'Api\Reports\ReportFileController@getReportFile',
+		'as' => 'api.report.folder.file'
+	]);
 
 	/**
 	 * Student export
