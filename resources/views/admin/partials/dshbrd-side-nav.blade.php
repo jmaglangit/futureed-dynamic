@@ -9,12 +9,12 @@
 
 <div class="nav-menu">
     <ul id="menu-content" class="nav-list">
-        <li  data-toggle="collapse" data-target="#students" data-parent="#menu-content" class="collapsed side-nav-li" ng-class="{ 'active' : admincon.active_student}">
+        <li data-toggle="collapse" data-target="#students" data-parent="#menu-content" class="collapsed side-nav-li" ng-class="{ 'active' : admincon.active_student}" ng-if="user.admin_role == futureed.SUPER_ADMIN">
             <a href="" class="nav-link">
               User Management <i class="fa fa-caret-down"></i>
             </a>
         </li>
-        <ul class="sub-menu collapse" ng-class="{ 'in' : admin || client || student }" id="students">
+        <ul class="sub-menu collapse" ng-class="{ 'in' : admin || client || student }" id="students" ng-if="user.admin_role == futureed.SUPER_ADMIN">
             <li>
 				<a href="{!! route('admin.manage.admin.index') !!}" ng-init="admin.setActive()"><span><i class="fa fa-user"></i></span>Manage Admin</a>
             </li>
