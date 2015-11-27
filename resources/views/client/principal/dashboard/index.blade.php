@@ -13,16 +13,20 @@
 
     {{--Reports--}}
     <div ng-if="dashboard.active_report" ng-cloak>
-        <div class="row">
-            <div ng-if="dashboard.export" class="col-xs-4 pull-right dropdown" stlye="width: 20px">
-                <button class="btn btn-blue dropdown-toggle" type="button" data-toggle="dropdown">
-                    <i class="fa fa-file-text-o"></i> Export<span class="caret"></span></button>
-                <ul class="dropdown-menu">
-                    <li stlye="width: 20px"><a href="{! dashboard.schoolDownload !}" ng-click="dashboard.exportReport('pdf')">PDF</a></li>
-                    <li stlye="width: 20px"><a href="{! dashboard.schoolDownload !}" ng-click="dashboard.exportReport('xls')">Excel</a></li>
-                </ul>
+        <div class="row client-export-button-container">
+            <div ng-if="dashboard.export" class="col-xs-12">
+                <div class="btn-group export-buttons pull-right">
+                    <button class="btn btn-blue" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="fa fa-file-text-o"></i> Export
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a href="{! dashboard.schoolDownload !}" ng-click="dashboard.exportReport('pdf')">PDF</a></li>
+                        <li><a href="{! dashboard.schoolDownload !}" ng-click="dashboard.exportReport('xls')">Excel</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
+
         <div class="report-container">
             <ul class="nav nav-tabs report-nav" role="tablist">
                 <li class="col-xs-6 active"><a ng-click="dashboard.setActive('school')" aria-controls="home" role="tab"
