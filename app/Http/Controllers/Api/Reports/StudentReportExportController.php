@@ -126,6 +126,8 @@ class StudentReportExportController extends ReportController {
 
 				try{
 					//generate excel
+					ob_end_clean();
+					ob_start();
 					$this->studentSubjectGradeProgressExcel($report,$file_name)->store('xls',storage_path('app/'.$report_dir['path']));
 
 					//return generate report url
@@ -234,6 +236,8 @@ class StudentReportExportController extends ReportController {
 
 				try{
 					//generate excel
+					ob_end_clean();
+					ob_start();
 					$this->studentCurrentLearningExcel($report,$file_name)->store('xls',storage_path('app/'.$report_dir['path']));
 
 					//return generate report url
