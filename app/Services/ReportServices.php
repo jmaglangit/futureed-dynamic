@@ -1,12 +1,15 @@
 <?php namespace FutureEd\Services;
 
-
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 
 class ReportServices {
 
-	//generate hash filename
+	/**
+	 * Generate Hash file foldername
+	 * @param $data
+	 * @return array
+	 */
 	public function createReportFileFolder($data){
 
 		$file_folder = sha1($data . Carbon::now()->timestamp);
@@ -19,11 +22,22 @@ class ReportServices {
 		];;
 	}
 
+	/**
+	 * Save report file folder.
+	 * @param $file_location
+	 * @param $contents
+	 * @return mixed
+	 */
 	public function saveReportFileFolder($file_location, $contents){
 
 		return Storage::put($file_location,$contents);
 	}
 
+	/**
+	 * Generate Report file folder.
+	 * @param $file_folder
+	 * @return string
+	 */
 	public function getReportFileURL($file_folder){
 
 		$route_name = route('api.report.folder.file',[
