@@ -124,7 +124,7 @@ class StudentReportExportController extends ReportController {
 					//generate excel
 					ob_end_clean();
 					ob_start();
-					$this->studentSubjectGradeProgressExcel($report,$file_name)->store('xls',storage_path('app/'.$report_dir['path']));
+					$this->studentSubjectGradeProgressExcel($report,$file_name,$report_dir);
 
 					//return generate report url
 					return $this->respondReportDownloadLink($this->report_services->getReportFileURL($report_dir['folder_name']));
@@ -158,20 +158,35 @@ class StudentReportExportController extends ReportController {
 	 * @param $name
 	 * @return mixed
 	 */
-	public function studentSubjectGradeProgressExcel($data, $name){
+	public function studentSubjectGradeProgressExcel($data, $name, $report_dir){
 
 		ob_end_clean();
 		ob_start();
-		return Excel::create($name,function($excel) use ($data){
+		if(empty($report_dir)){
+			return Excel::create($name,function($excel) use ($data){
 
-			$excel->sheet('NewSheet', function($sheet) use ($data){
+				$excel->sheet('NewSheet', function($sheet) use ($data){
 
-				$sheet->mergeCells('A1:M1');
-				$sheet->mergeCells('A3:A5');
-				$sheet->setOrientation('landscape');
-				$sheet->loadView('export.student.subject-area-excel',$data);
+					$sheet->mergeCells('A1:M1');
+					$sheet->mergeCells('A3:A5');
+					$sheet->setOrientation('landscape');
+					$sheet->loadView('export.student.subject-area-excel',$data);
+				});
 			});
-		});
+		}else {
+			return Excel::create($name,function($excel) use ($data){
+
+				$excel->sheet('NewSheet', function($sheet) use ($data){
+
+					$sheet->mergeCells('A1:M1');
+					$sheet->mergeCells('A3:A5');
+					$sheet->setOrientation('landscape');
+					$sheet->loadView('export.student.subject-area-excel',$data);
+				});
+			})->store('xls',storage_path('app/'.$report_dir['path']));
+
+		}
+
 	}
 
 	/**
@@ -234,7 +249,7 @@ class StudentReportExportController extends ReportController {
 					//generate excel
 					ob_end_clean();
 					ob_start();
-					$this->studentCurrentLearningExcel($report,$file_name)->store('xls',storage_path('app/'.$report_dir['path']));
+					$this->studentCurrentLearningExcel($report,$file_name,$report_dir);
 
 					//return generate report url
 					return $this->respondReportDownloadLink($this->report_services->getReportFileURL($report_dir['folder_name']));
@@ -264,22 +279,34 @@ class StudentReportExportController extends ReportController {
 	 * Student Current Learning Report to Excel.
 	 * @param $data
 	 * @param $name
+	 * @param $report_dir
 	 * @return mixed
 	 */
-	public function studentCurrentLearningExcel($data, $name){
+	public function studentCurrentLearningExcel($data, $name, $report_dir){
 		ob_end_clean();
 		ob_start();
-		return Excel::create($name, function ($excel) use ($data) {
+		if(empty($report_dir)){
+			return Excel::create($name, function ($excel) use ($data) {
 
-			$excel->sheet('NewSheet', function ($sheet) use ($data) {
+				$excel->sheet('NewSheet', function ($sheet) use ($data) {
 
-				$sheet->mergeCells('A1:C1');
-				$sheet->mergeCells('A3:A5');
-				$sheet->setOrientation('portrait');
-				$sheet->loadView('export.student.current-learning-excel', $data);
+					$sheet->mergeCells('A1:C1');
+					$sheet->mergeCells('A3:A5');
+					$sheet->setOrientation('portrait');
+					$sheet->loadView('export.student.current-learning-excel', $data);
+				});
 			});
-		});
-	}
+		}else {
+			return Excel::create($name, function ($excel) use ($data) {
 
+				$excel->sheet('NewSheet', function ($sheet) use ($data) {
+
+					$sheet->mergeCells('A1:C1');
+					$sheet->mergeCells('A3:A5');
+					$sheet->setOrientation('portrait');
+					$sheet->loadView('export.student.current-learning-excel', $data);
+				});
+			})->store('xls',storage_path('app/'.$report_dir['path']));
+		}
+	}
 }
-?>
