@@ -1,14 +1,24 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: jason
- * Date: 12/1/15
- * Time: 11:41 AM
- */
+<?php namespace FutureEd\Services;
 
-namespace FutureEd\Services;
-
+use Maatwebsite\Excel\Facades\Excel;
 
 class ExcelServices {
+
+	protected $excel;
+
+	public function __construct(
+		Excel $excel
+	) {
+		$this->excel=$excel;
+	}
+
+	public function importCsv($csv_file){
+
+		Excel::load($csv_file,function ($reader){
+
+			dd($reader);
+		});
+
+	}
 
 }
