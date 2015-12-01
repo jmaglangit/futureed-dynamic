@@ -1,15 +1,11 @@
 <?php namespace FutureEd\Http\Controllers\Api\Reports;
-
 use Barryvdh\DomPDF\PDF;
 use Carbon\Carbon;
 use FutureEd\Http\Requests;
 use FutureEd\Services\ImageServices;
-
 use FutureEd\Services\ReportServices;
 use Maatwebsite\Excel\Facades\Excel;
 use PhpSpec\Exception\Exception;
-
-
 class StudentReportExportController extends ReportController {
 
 	/**
@@ -286,3 +282,4 @@ class StudentReportExportController extends ReportController {
 	}
 
 }
+?>
