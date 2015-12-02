@@ -1,6 +1,7 @@
 <?php namespace FutureEd\Http\Requests\Api;
 
 use FutureEd\Http\Requests\Request;
+use Illuminate\Support\Facades\Input;
 
 class StudentImportRequest extends ApiRequest {
 
@@ -9,8 +10,7 @@ class StudentImportRequest extends ApiRequest {
 	 *
 	 * @return bool
 	 */
-	public function authorize()
-	{
+	public function authorize() {
 		return true;
 	}
 
@@ -19,13 +19,14 @@ class StudentImportRequest extends ApiRequest {
 	 *
 	 * @return array
 	 */
-	public function rules()
-	{
-		switch($this->method()){
+	public function rules() {
+
+		switch ($this->method()) {
 			case 'POST':
 
 				return [
-					'file' => 'mimes:csv'
+					'file' => 'required',
+					'callback_uri' => 'required'
 				];
 				break;
 
