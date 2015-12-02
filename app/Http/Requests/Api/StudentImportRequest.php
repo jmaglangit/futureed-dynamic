@@ -1,8 +1,5 @@
 <?php namespace FutureEd\Http\Requests\Api;
 
-use FutureEd\Http\Requests\Request;
-use Illuminate\Support\Facades\Input;
-
 class StudentImportRequest extends ApiRequest {
 
 	/**
