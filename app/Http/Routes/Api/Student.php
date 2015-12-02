@@ -155,9 +155,9 @@ Routes::group([
  * Import batch of new students
  */
 Routes::group([
-//		'middleware' => ['api_user','api_after'],
-//		'permission' => ['admin'],
-//		'role' => ['admin','super admin']
+		'middleware' => ['api_user','api_after'],
+		'permission' => ['admin'],
+		'role' => ['admin','super admin']
 ], function(){
 
 	Routes::post('/student/import',[
