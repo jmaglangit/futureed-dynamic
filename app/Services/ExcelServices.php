@@ -2,22 +2,12 @@
 
 use Maatwebsite\Excel\Facades\Excel;
 
-class ExcelServices {
+class ExcelServices extends Excel{
 
-	protected $excel;
 
-	public function __construct(
-		Excel $excel
-	) {
-		$this->excel=$excel;
-	}
+	public function importCsv($csv_file,$headers = []){
 
-	public function importCsv($csv_file){
-
-		Excel::load($csv_file,function ($reader){
-
-			dd($reader);
-		});
+		return Excel::load($csv_file,function ($reader){})->get($headers);
 
 	}
 
