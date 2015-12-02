@@ -158,3 +158,19 @@ Routes::group([
 		'as' => 'api.v1.client.custom.view-details'
 	]);
 });
+
+
+/**
+ * Import batch of new teachers
+ */
+Routes::group([
+		'middleware' => ['api_user','api_after'],
+		'permission' => ['admin'],
+		'role' => ['admin','super admin']
+], function(){
+
+	Routes::post('/client/import',[
+			'uses' => 'Api\v1\ClientImportController@clientImport',
+			'as' => 'api.v1.client.import.csv'
+	]);
+});
