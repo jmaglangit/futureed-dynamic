@@ -164,9 +164,9 @@ Routes::group([
  * Import batch of new teachers
  */
 Routes::group([
-//		'middleware' => ['api_user','api_after'],
-//		'permission' => ['admin'],
-//		'role' => ['admin','super admin']
+		'middleware' => ['api_user','api_after'],
+		'permission' => ['admin'],
+		'role' => ['admin','super admin']
 ], function(){
 
 	Routes::post('/client/import',[
