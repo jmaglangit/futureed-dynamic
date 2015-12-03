@@ -83,6 +83,7 @@ class HelpRequestRepository implements HelpRequestRepositoryInterface{
                         $query = $query->ownRequest($criteria['student_id']);
                     }else{
                         $query = $query->otherRequest($criteria['student_id']);
+                        $query = $query->requestStatus(config('futureed.help_request_status_accepted'));
                     }
                 }
 
