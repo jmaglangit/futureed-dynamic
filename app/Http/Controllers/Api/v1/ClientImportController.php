@@ -66,6 +66,14 @@ class ClientImportController extends ApiController {
 
 		$callback_uri = $request->get('callback_uri');
 
+		$file = $request->file('file');
+
+		//check csv file type
+		if($file->getClientMimeType() <> 'text/csv'){
+
+			return $this->respondErrorMessage(2149);
+		}
+
 		$headers = [
 			'username',
 			'email',
@@ -74,7 +82,7 @@ class ClientImportController extends ApiController {
 			'school_code'
 		];
 
-		$records = $this->excel->importCsv($request->file('file'), $headers);
+		$records = $this->excel->importCsv($file, $headers);
 
 		//insert records
 		$success_records = [];
