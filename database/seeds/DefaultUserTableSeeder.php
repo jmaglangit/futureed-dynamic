@@ -9,7 +9,7 @@ class DefaultUserTableSeeder extends Seeder
     public function run()
     {
         //append default users
-        DB::table('users')->truncate();
+//        DB::table('users')->truncate();
         DB::table('users')->insert([
             [
                 'username' => 'admin',
