@@ -105,10 +105,7 @@ class RebootFutureLessonCommand extends Command {
 
 			//seed default admin
 			$this->seeder->call('DefaultUserTableSeeder');
-			//avatars
-			//avatar accesories
-			//quotes
-			//
+			//Call Seeders here...
 
 		}
 
@@ -122,7 +119,7 @@ class RebootFutureLessonCommand extends Command {
 	 */
 	protected function getArguments() {
 		return [
-//			['all', InputArgument::OPTIONAL, 'An example argument.'],
+			//['all', InputArgument::OPTIONAL, 'An example argument.'],
 		];
 	}
 
@@ -139,7 +136,10 @@ class RebootFutureLessonCommand extends Command {
 		];
 	}
 
-	//truncate database
+	/**
+	 * Truncate Database
+	 * @param $table
+	 */
 	public function truncateDataBaseTable($table) {
 
 		DB::beginTransaction();
@@ -155,6 +155,7 @@ class RebootFutureLessonCommand extends Command {
 			$this->errorLog('CONSOLE_LOG: ' . $e);
 			$this->comment('Truncate failed ' . $table);
 		}
+
 		DB::commit();
 		$this->alertLog('DATABASE_TABLE_TRUNCATE : ' . $table);
 
