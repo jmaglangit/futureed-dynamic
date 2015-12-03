@@ -54,11 +54,20 @@ class RebootFutureLessonCommand extends Command {
 		$db_name = "Tables_in_" . strtolower(DB::getConfig('database'));
 		$except = [
 			'migrations',
+			'age_groups',
+			'answer_explanations',
+			'countries',
+			'country_grades',
+			'grades',
+			'module_contents',
+			'module_groups',
 			'modules',
-			'questions',
 			'question_answers',
-			'contents',
-			'module_contents'
+			'questions',
+			'subject_areas',
+			'subjects',
+			'subscription',
+			'teaching_contents'
 		];
 
 
@@ -101,11 +110,33 @@ class RebootFutureLessonCommand extends Command {
 				}
 			}
 
-			$this->comment('seeding default admin');
+			$this->comment('running table seeders...');
 
-			//seed default admin
-			$this->seeder->call('DefaultUserTableSeeder');
-			//Call Seeders here...
+			//Call Seeders
+			$seeders = [
+				'DefaultUserTableSeeder', //seed default admin
+				//TODO 'AnswerExplanationsTableSeeder',
+				//TODO 'AvatarAccessoriesTableSeeder',
+				'AvatarPosesTableSeeder',
+				'AvatarQuotesTableSeeder',
+				'AvatarWikisTableSeeder',
+				'AvatarsTableSeeder',
+				'BadgesTableSeeder',
+				'CountriesSeeder',
+				'EventTableSeeder',
+				'LearningStyleTableSeeder',
+				//TODO 'LevelsTableSeeder',
+				'MediaTypeTableSeeder',
+				'PasswordImagesTableSeeder',
+				'QuotesTableSeeder'
+			];
+
+			//iterate seeders
+			foreach ($seeders as $seed) {
+
+				$this->seedTables($seed);
+			}
+
 
 		}
 
@@ -159,6 +190,27 @@ class RebootFutureLessonCommand extends Command {
 		DB::commit();
 		$this->alertLog('DATABASE_TABLE_TRUNCATE : ' . $table);
 
+	}
+
+	/**
+	 * Seeding tables.
+	 * @param $seeder
+	 */
+	public function seedTables($seeder) {
+
+		DB::beginTransaction();
+		try {
+
+			$this->seeder->call($seeder);
+			$this->comment($seeder . 'seeded...');
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+			$this->errorLog('CONSOLE_LOG : ' . $e);
+			$this->comment('Seeder failed ' . $seeder);
+		}
+		DB::commit();
 	}
 
 }
