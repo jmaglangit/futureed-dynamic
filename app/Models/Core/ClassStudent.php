@@ -15,7 +15,7 @@ class ClassStudent extends Model {
 
 	protected $dates = ['deleted_at'];
 
-	protected $fillable = ['student_id', 'class_id', 'status', 'verification_code','date_started','date_removed'];
+	protected $fillable = ['student_id', 'class_id', 'status', 'verification_code','date_started','date_removed', 'subscription_status'];
 
 	protected $hidden = ['verification_code', 'created_by', 'updated_by', 'created_at', 'updated_at', 'deleted_at'];
 
@@ -168,5 +168,17 @@ class ClassStudent extends Model {
 		});
 	}
 
+	public function scopeSubscriptionSubjectId($query, $subject_id){
+		return $query->whereHas('classroom', function($query) use ($subject_id){
+			$query->where('subject_id', $subject_id);
+		});
+	}
 
+	public function scopeSubscriptionStudentId($query, $student_id){
+		$query->where('student_id', $student_id);
+	}
+
+	public function scopeSubscriptionStatus($query){
+		$query->where('subscription_status', config('futureed.active'));
+	}
 }
