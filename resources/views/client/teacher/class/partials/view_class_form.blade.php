@@ -254,6 +254,7 @@
 	                    , array(
 	                        'class' => 'btn btn-gold btn-medium'
 	                        , 'data-dismiss' => 'modal'
+	                        , 'ng-click' => 'class.cancelDeleteStudent()'
 	                    )
 	                ) !!}
 	        	</div>

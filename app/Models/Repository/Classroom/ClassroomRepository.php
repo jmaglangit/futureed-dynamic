@@ -197,6 +197,32 @@ class ClassroomRepository implements ClassroomRepositoryInterface{
 
    }
 
+
+	/**
+	 *  Gets active subscription of a student based on a subject id
+	 *  @param $subject_id
+	 *  @param $student_id
+	 *  @return boolean
+	 */
+	public function getActiveSubscription($subject_id, $student_id){
+
+		$class_student = new  ClassStudent();
+
+		try{
+			$class_student = $class_student->with('student','classroom');
+			$class_student = $class_student->subscriptionSubjectId($subject_id);
+			$class_student = $class_student->subscriptionStudentId($student_id);
+			$class_student = $class_student->subscriptionStatus();
+
+			return count($class_student->get()->toArray());
+
+		} catch( Exception $e ){
+
+			return $e->getMessage();//
+		}
+	}
+
+
 	/**
      * @param $class_id
      * @return string

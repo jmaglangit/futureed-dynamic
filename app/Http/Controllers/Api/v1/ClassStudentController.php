@@ -191,6 +191,7 @@ class ClassStudentController extends ApiController {
 		$classroom_status = $this->classroom_services->checkActiveClassroom($data['class_id']);
 		
 		if(!$classroom_status){
+
 			return $this->respondErrorMessage(2051);
 		}
 
@@ -198,6 +199,7 @@ class ClassStudentController extends ApiController {
 		$isEnrolled = $this->class_student->isEnrolled($student_id,$data['class_id']);
 
 		if($isEnrolled && !$isEnrolled['date_removed']){
+
 			return $this->respondErrorMessage(2125);// Student is already in the class.
 		}
 
@@ -205,23 +207,17 @@ class ClassStudentController extends ApiController {
         $classroom = $this->classroom->getClassroom($data['class_id']);
 
         //check if student have a subscription with the same subject_id
-        $check_subscription = $this->classroom->getClassroomBySubjectId($classroom['subject_id'], $student_id);
+        $check_subscription = $this->classroom->getActiveSubscription($classroom['subject_id'], $student_id);
+        if ($check_subscription) {
 
-        if ($check_subscription && !$isEnrolled['date_removed']) {
-			return $this->respondErrorMessage(2037);
+           return $this->respondErrorMessage(2037);
         }
 
-        if(!$isEnrolled['date_removed']){
-	        $data['student_id'] = $student_id;
-	        $data['status'] = 'Enabled';
-	        $data['date_started'] = Carbon::now();
-			$this->class_student->addClassStudent($data);
-        }
-        else{
-			$data['date_started'] = Carbon::now();
-			$data['date_removed'] = null;
-			$this->class_student->updateClassStudent($isEnrolled['id'], $data);
-        }
+        //add to class student table.
+        $data['student_id'] = $student_id;
+        $data['status'] = 'Enabled';
+        $data['date_started'] = Carbon::now();
+        $this->class_student->addClassStudent($data);
 
         //increment seats_taken
         $classroom_data['seats_taken'] = $classroom->seats_taken + 1;
@@ -311,6 +307,7 @@ class ClassStudentController extends ApiController {
 	public function removeStudentClass(ClassStudentRequest $request, $id){
 
 		$data = $request->only('date_removed');
+		$data['subscription_status'] = config('futureed.inactive');
 
 		$class_student = $this->class_student->getClassStudentById($id);
 
@@ -327,7 +324,9 @@ class ClassStudentController extends ApiController {
 
 		$data['seats_taken'] = $class_student['classroom']['seats_taken']-1;
 
+
 		$this->classroom->updateClassroom($class_student['classroom']['id'],$data);
+
 
 		$this->class_student->updateClassStudent($id,$data);
 

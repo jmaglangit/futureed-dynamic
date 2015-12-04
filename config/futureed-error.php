@@ -129,6 +129,7 @@ return [
 		2146 => 'Prevent having dot for an image file name.',
 		2147 => 'Unable to Delete. Subscription already expired.',
 		2148 => 'Unable to generate report.',
+		2149 => 'The file must be a file of type: csv.',
 
 		// Client Error messages
 		2200 => 'Email already exists.',
