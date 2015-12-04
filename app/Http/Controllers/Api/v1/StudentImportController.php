@@ -68,6 +68,14 @@ class StudentImportController extends ApiController {
 
 		$callback_uri = $request->get('callback_uri');
 
+		$file = $request->file('file');
+
+		//check csv file type
+		if($file->getClientMimeType() <> 'text/csv'){
+
+			return $this->respondErrorMessage(2149);
+		}
+
 		$headers = [
 				'username',
 				'email',
@@ -83,7 +91,7 @@ class StudentImportController extends ApiController {
 		];
 
 		//generate services to import
-		$records = $this->excel_services->importCsv(Input::file('file'),$headers);
+		$records = $this->excel_services->importCsv($file,$headers);
 
 
 		//insert records
@@ -145,13 +153,11 @@ class StudentImportController extends ApiController {
 					//list record
 					array_push($success_records,$student);
 				}else {
-					array_push($student,$user_data);
 					array_push($fail_records,['errors'=> $student]);
 				}
 
 			}else {
 				//iterate fail records
-				array_push($student,$error_msg);
 				array_push($fail_records,['errors'=> $student]);
 				$this->setMessageBag([]);
 			}
