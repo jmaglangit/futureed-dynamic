@@ -18,7 +18,7 @@ trait LoggerTrait {
 	//Log Alert
 	public function alertLog($error) {
 
-		Log::alert($error);
+		Log::alert('FUTUREED_ALERT: '.$error);
 
 	}
 
