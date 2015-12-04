@@ -16,6 +16,10 @@
 		<a href="javascript:void(0)" ng-click="profile.setStudentProfileActive('rewards')">Student Rewards</a>
 	</li>
 
+	<li ng-class="{ 'active' : profile.active_avatar_accessory }">
+		<a href="javascript:void(0)" ng-click="profile.setStudentProfileActive('avatar_accessory')">Avatar Accessories</a>
+	</li>
+
 	<li ng-class="{ 'active' : profile.active_avatar }">
 		<a href="javascript:void(0)" ng-click="profile.setStudentProfileActive('avatar')">Change Avatar</a>
 	</li>

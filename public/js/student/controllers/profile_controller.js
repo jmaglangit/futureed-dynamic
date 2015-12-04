@@ -46,6 +46,7 @@ function ProfileController($scope, apiService, ProfileService) {
 		self.active_rewards = Constants.FALSE;
 		self.active_password = Constants.FALSE;
 		self.active_reports = Constants.FALSE;
+		self.active_avatar_accessory = Constants.FALSE;
 
 		self.validation = {};
 		self.select_password = Constants.FALSE;
@@ -92,6 +93,10 @@ function ProfileController($scope, apiService, ProfileService) {
 			self.resent = Constants.FALSE;
 			self.confirmation_code = Constants.EMPTY_STR;
 			self.active_confirm_email = Constants.TRUE;
+			break;
+
+		  case Constants.AVATAR_ACCESSORY:
+			self.active_avatar_accessory = Constants.TRUE;
 			break;
 
 		  case Constants.INDEX    		:

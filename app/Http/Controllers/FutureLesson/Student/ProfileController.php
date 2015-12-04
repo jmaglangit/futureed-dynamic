@@ -35,6 +35,10 @@ class ProfileController extends Controller {
 		return view('student.profile.confirm_email_form');
 	}
 
+	public function avatar_accessory_form() {
+		return view('student.profile.avatar_accessory_form');
+	}
+
 	public function enter_email_code() {
 		$input = Input::only('email');
 		$student_session = Session::get('student');
