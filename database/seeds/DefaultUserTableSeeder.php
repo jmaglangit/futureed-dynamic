@@ -12,7 +12,7 @@ class DefaultUserTableSeeder extends Seeder
 //        DB::table('users')->truncate();
         DB::table('users')->insert([
             [
-                'username' => 'admin',
+                'username' => 'administrator',
                 'email' => 'futureedlesson@gmail.com',
                 'password' => sha1('FutureEd1'), //FutureEd1
                 'name' => 'Admin',
