@@ -401,6 +401,7 @@ function ProfileController($scope, apiService, ProfileService) {
 			  if(response.errors) {
 				self.errors = $scope.errorHandler(response.errors);
 			  } else if(response.data){
+
 				self.avatars = response.data;
 			  }
 			}
@@ -408,6 +409,22 @@ function ProfileController($scope, apiService, ProfileService) {
 			self.errors = $scope.internalError();
 		});
 	  }
+
+	self.getAvatarAccessories = function(){
+		apiService.getAvatarAccessories($scope.user.id).success(function(response){
+			if(response.status == Constants.STATUS_OK) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				}
+				else if(response.data){
+
+					self.avatar_accessories = response.data;
+				}
+			}
+		}).error(function(response){
+			self.errors = $scope.internalError();
+		});
+	}
 
 	function highlightAvatar(e) {
 		var target = getTarget(e);

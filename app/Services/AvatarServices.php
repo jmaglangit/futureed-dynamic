@@ -12,6 +12,7 @@ namespace FutureEd\Services;
 use FutureEd\Models\Repository\Avatar\AvatarRepositoryInterface;
 use FutureEd\Models\Repository\Validator\ValidatorRepositoryInterface;
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
+use FutureEd\Models\Repository\AvatarAccessory\AvatarAccessoryRepositoryInterface;
 
 class AvatarServices {
 
@@ -20,13 +21,16 @@ class AvatarServices {
      * @param AvatarRepositoryInterface $avatar
      * @param ValidatorRepositoryInterface $validator
      * @param StudentRepositoryInterface $student
+     * @param AvatarAccessoryRepositoryInterface $avatar_accessory
      */
     public function __construct(AvatarRepositoryInterface $avatar,
         ValidatorRepositoryInterface $validator,
-        StudentRepositoryInterface $student){
+        StudentRepositoryInterface $student,
+        AvatarAccessoryRepositoryInterface $avatar_accessory){
         $this->avatar = $avatar;
         $this->validator=$validator;
         $this->student = $student;
+        $this->avatar_accessory = $avatar_accessory;
     }
 
     /**
@@ -118,6 +122,20 @@ class AvatarServices {
     }
     
    
+	public function getAvatarAccessories($student_id) {
+		$image_avatar_accessory_folder = config('futureed.image_avatar_accessory_folder');
+		$image_avatar=$this->avatar_accessory->getAvatarAccessories($student_id);
 
+		foreach($image_avatar as $row){
+			$temp_avatar['id'] = $row['id'];
+			$temp_avatar['name'] = $row['name'];
+			$temp_avatar['url'] = url() . '/' . $image_avatar_accessory_folder . '/' . $row['accessory_image'];
+			$temp_avatar['points_to_unlock'] = $row['points_to_unlock'];
+			$temp_avatar['description'] = $row['description'];
+			$avatar_accessory[]= $temp_avatar;
+		}
+
+		return $avatar_accessory;
+	}
    
 }

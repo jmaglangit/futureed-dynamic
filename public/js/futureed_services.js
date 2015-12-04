@@ -112,6 +112,13 @@ var services = angular.module('futureed.services', []);
 			});
 		}
 
+		futureedAPI.getAvatarAccessories = function(student_id) {
+			return $http({
+				method	: 'GET'
+				, url	: futureedAPIUrl + 'avatar-accessory?student_id=' + student_id
+			});
+		}
+
 		/**
 		* Profile related calls
 		*/
