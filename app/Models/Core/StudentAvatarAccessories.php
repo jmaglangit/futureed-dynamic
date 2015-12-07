@@ -38,4 +38,8 @@ class StudentAvatarAccessories extends Model {
 		return $query->where('user_id', '=', $accessory['user_id'])
 			->where('avatar_accessories_id', $accessory['avatar_accessories_id']);
 	}
+
+	public function scopeStudentAvatarAccessories($query, $user_id){
+		return $query->where('user_id', '=', $user_id);
+	}
 }

@@ -127,7 +127,14 @@ class AvatarServices {
      * @return array
      */
     public function getAvatarAccessories($student_id) {
+        //get the image folder path
         $image_avatar_accessory_folder = config('futureed.image_avatar_accessory_folder');
+
+        //get student's already bought avatar
+        $student_avatar_accessories = $this->avatar_accessory->getStudentAvatarAccessories($student_id);
+        //dd($student_avatar_accessories);
+
+        //get all avatar accessories based on student id
         $image_avatar=$this->avatar_accessory->getAvatarAccessories($student_id);
 
         foreach($image_avatar as $row){
@@ -136,6 +143,7 @@ class AvatarServices {
             $temp_avatar['url'] = url() . '/' . $image_avatar_accessory_folder . '/' . $row['accessory_image'];
             $temp_avatar['points_to_unlock'] = $row['points_to_unlock'];
             $temp_avatar['description'] = $row['description'];
+            $temp_avatar['isBought'] = in_array($row['id'], array_column($student_avatar_accessories,'avatar_accessories_id'));
             $avatar_accessory[]= $temp_avatar;
         }
 

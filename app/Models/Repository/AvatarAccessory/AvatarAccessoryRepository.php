@@ -30,6 +30,25 @@ class AvatarAccessoryRepository implements AvatarAccessoryRepositoryInterface{
 		}
 	}
 
+	public function getStudentAvatarAccessories($student_id){
+		$student = new Student();
+		$student_avatar_accessory = new StudentAvatarAccessories();
+
+		try {
+			$user_id = $student->Id($student_id)->pluck('user_id');
+			$student_avatar_accessory = $student_avatar_accessory->StudentAvatarAccessories($user_id)->get();
+
+			return !is_null($student_avatar_accessory) ? $student_avatar_accessory->toArray() : null;
+
+		} catch(\Exception $e) {
+
+			return $e->getMessage();
+
+		}
+
+		dd('test student avatar accessory');
+	}
+
 	public function buyAvatarAccessory($accessory){
 		try {
 			return StudentAvatarAccessories::create($accessory)->toArray();
