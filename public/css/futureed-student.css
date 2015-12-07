@@ -1803,3 +1803,8 @@ top: 41px;
 .export-report .report-data tr:nth-child(odd) {
 	background: #FFF;
 }
+
+.text-gold {
+	color: #E9AB17;
+	font-size:15px;
+}

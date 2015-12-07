@@ -231,7 +231,8 @@ return [
 	'pdf' => 'pdf',
 	'xls' => 'xls',
 	'mobile-pdf' => 'mobile-pdf',
-	'mobile-xls' => 'mobile-xls'
+	'mobile-xls' => 'mobile-xls',
 
-
+	//avatar accessory folder
+	'image_avatar_accessory_folder' => 'images/avatar_accessory'
 ];
