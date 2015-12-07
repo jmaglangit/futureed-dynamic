@@ -426,6 +426,23 @@ function ProfileController($scope, apiService, ProfileService) {
 		});
 	}
 
+	self.buyAvatarAccessory = function(accessory_id){
+		user_id = $scope.user.user.id;
+
+		apiService.buyAvatarAccessory(user_id, accessory_id).success(function(response){
+			if(response.status == Constants.STATUS_OK){
+				if(response.errors) {
+
+				}
+				else if(response.data) {
+					self.errors = $scope.internalError();
+				}
+			}
+		}).error(function(response){
+			self.errors = $scope.internalError();
+		});
+	}
+
 	function highlightAvatar(e) {
 		var target = getTarget(e);
 

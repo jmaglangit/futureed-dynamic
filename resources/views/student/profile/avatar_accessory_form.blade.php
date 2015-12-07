@@ -8,7 +8,7 @@
 					{!! Form::button('BUY'
 						, array(
 							'class' => 'btn btn-maroon btn-medium center-block'
-							, 'ng-click' => ''
+							, 'ng-click' => 'profile.buyAvatarAccessory(accessory.id)'
 						)
 					) !!}
 				</li>

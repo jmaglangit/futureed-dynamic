@@ -27,6 +27,13 @@ class AvatarAccessoryRequest extends ApiRequest {
 					'student_id' => 'required'
 				];
 				break;
+
+			case 'POST':
+				return [
+					'user_id' => 'required'
+					,'accessory_id' => 'required'
+				];
+				break;
 			
 			default:
 				# code...
