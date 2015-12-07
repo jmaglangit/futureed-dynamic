@@ -121,6 +121,11 @@ class AvatarServices {
         
     }
 
+    /**
+     * Gets avatar accessories.
+     * @param $student_id
+     * @return array
+     */
     public function getAvatarAccessories($student_id) {
         $image_avatar_accessory_folder = config('futureed.image_avatar_accessory_folder');
         $image_avatar=$this->avatar_accessory->getAvatarAccessories($student_id);
