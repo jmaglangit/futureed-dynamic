@@ -3,7 +3,6 @@
 		<div class="form-class">
 			<ul class="avatar_list list-unstyled list-inline" ng-init="profile.getAvatarAccessories()">
 				<li class="item avtrcon" ng-repeat="accessory in profile.avatar_accessories">
-					<!-- <img src="http://localhost:8000/images/icons/default-module-icon.png"> -->
 					<img ng-src="{! accessory.url !}" alt="{! accessory.name !}">
 					<p class="text-gold text-center">{! accessory.points_to_unlock !} points</p>
 					{!! Form::button('BUY'
