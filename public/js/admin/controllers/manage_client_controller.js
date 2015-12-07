@@ -400,6 +400,9 @@ function ManageClientController($scope, manageClientService, TableService, Searc
 		//upload file directly
 
 		self.uploaded = Constants.FALSE;
+		self.base_url = $("#base_url_form input[name='base_url']").val();
+		var import_callback_uri = self.base_url + Constants.URL_USER_CREATION(angular.lowercase(Constants.CLIENT));
+
 
 		var callbackUri = {
 			callback_uri : 'www.google.com'
@@ -408,7 +411,7 @@ function ManageClientController($scope, manageClientService, TableService, Searc
 		if(file.length) {
 			$scope.ui_block();
 			Upload.upload({
-				url: '/api/v1/client/import?callback_uri=' + 'www.google.com'
+				url: '/api/v1/client/import?callback_uri=' + import_callback_uri
 				, file: file[0]
 			}).success(function(response) {
 				if(angular.equals(response.status, Constants.STATUS_OK)) {

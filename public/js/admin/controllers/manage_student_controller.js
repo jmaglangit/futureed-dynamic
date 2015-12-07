@@ -712,14 +712,13 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 
 		self.uploaded = Constants.FALSE;
 
-		var callbackUri = {
-			callback_uri : 'www.google.com'
-		};
+		var base_url = $("#base_url_form input[name='base_url']").val();
+		var callback_uri = base_url + Constants.URL_REGISTRATION(angular.lowercase(Constants.STUDENT));
 
 		if(file.length) {
 			$scope.ui_block();
 			Upload.upload({
-				url: '/api/v1/student/import?callback_uri=' + 'www.google.com'
+				url: '/api/v1/student/import?callback_uri=' + callback_uri
 				, file: file[0]
 			}).success(function(response) {
 				if(angular.equals(response.status, Constants.STATUS_OK)) {
