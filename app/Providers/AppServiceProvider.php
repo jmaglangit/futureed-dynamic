@@ -306,5 +306,10 @@ class AppServiceProvider extends ServiceProvider {
 			'FutureEd\Models\Repository\AdminLog\AdminLogRepositoryInterface',
 			'FutureEd\Models\Repository\AdminLog\AdminLogRepository'
 		);
+
+		$this->app->bind(
+			'FutureEd\Models\Repository\AvatarAccessory\AvatarAccessoryRepositoryInterface',
+			'FutureEd\Models\Repository\AvatarAccessory\AvatarAccessoryRepository'
+		);
 	}
 }
