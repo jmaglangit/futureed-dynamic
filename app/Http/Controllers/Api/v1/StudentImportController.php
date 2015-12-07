@@ -153,12 +153,12 @@ class StudentImportController extends ApiController {
 					//list record
 					array_push($success_records,$student);
 				}else {
-					array_push($fail_records,['errors'=> $student]);
+					array_push($fail_records,$student);
 				}
 
 			}else {
 				//iterate fail records
-				array_push($fail_records,['errors'=> $student]);
+				array_push($fail_records,$student);
 				$this->setMessageBag([]);
 			}
 
