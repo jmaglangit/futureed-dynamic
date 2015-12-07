@@ -137,5 +137,22 @@ function manageClientService($http) {
 		});
 	}
 
+	//download student template
+	api.downloadTemplate = function(file){
+		return $http({
+			method	:	Constants.METHOD_GET
+			,url	:	'/downloads/' + file
+		});
+	}
+
+	//import student template
+	api.importClient = function(data){
+		return $http({
+			method	:	Constants.METHOD_POST
+			,data	:	data
+			,url	:	apiUrl + '/client/import'
+		});
+	}
+
 	return api;
 }
