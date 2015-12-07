@@ -52,7 +52,7 @@ class AvatarAccessoryController extends ApiController {
 			$accessory['created_at'] = Carbon::now();
 			$accessory['updated_at'] = Carbon::now();
 
-			return $this->avatar_accessory->buyAvatarAccessory($accessory);
+			return $this->respondWithData($this->avatar_accessory->buyAvatarAccessory($accessory));
 		}else{
 			return $this->respondErrorMessage(2065); //You already have this accessory
 		}

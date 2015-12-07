@@ -396,6 +396,7 @@ function ProfileController($scope, apiService, ProfileService) {
 	  }
 
 	  function getAvatarImages() {
+	  	$scope.ui_block();
 		apiService.getAvatarImages(self.prof.gender).success(function(response) {
 			if(response.status == Constants.STATUS_OK) {
 			  if(response.errors) {
@@ -405,12 +406,15 @@ function ProfileController($scope, apiService, ProfileService) {
 				self.avatars = response.data;
 			  }
 			}
+		$scope.ui_unblock();
 		}).error(function(response) {
 			self.errors = $scope.internalError();
+			$scope.ui_unblock();
 		});
 	  }
 
 	self.getAvatarAccessories = function(){
+		$scope.ui_block();
 		apiService.getAvatarAccessories($scope.user.id).success(function(response){
 			if(response.status == Constants.STATUS_OK) {
 				if(response.errors) {
@@ -421,8 +425,10 @@ function ProfileController($scope, apiService, ProfileService) {
 					self.avatar_accessories = response.data;
 				}
 			}
+			$scope.ui_unblock();
 		}).error(function(response){
 			self.errors = $scope.internalError();
+			$scope.ui_unblock();
 		});
 	}
 
@@ -432,10 +438,11 @@ function ProfileController($scope, apiService, ProfileService) {
 		apiService.buyAvatarAccessory(user_id, accessory_id).success(function(response){
 			if(response.status == Constants.STATUS_OK){
 				if(response.errors) {
-
+					self.errors = $scope.errorHandler(response.errors);
 				}
 				else if(response.data) {
-					self.errors = $scope.internalError();
+					self.getAvatarAccessories();
+					console.log(response.data);
 				}
 			}
 		}).error(function(response){
