@@ -100,9 +100,15 @@
 	</div>
 	 
 	<div class="col-xs-12 table-container">
-		<button class="btn btn-blue btn-semi-medium" ng-click="client.setActive(futureed.ACTIVE_ADD)">
-			<i class="fa fa-plus-square"></i> Add Client
-		</button>
+		<div class="dropdown">
+			<button class="btn btn-blue btn-semi-medium dropdown-toggle" type="button" data-toggle="dropdown">
+				Add Client <i class="fa fa-caret-square-o-down"></i>
+			</button>
+			<ul class="dropdown-menu dropdown-menu-medium">
+				<li ng-click="client.setActive(futureed.ACTIVE_IMPORT)"><a><i class="fa fa-cloud-upload"></i> Import Teacher</a></li>
+				<li ng-click="client.setActive(futureed.ACTIVE_ADD)"><a><i class="fa fa-plus-square"></i> Add Client </a></li>
+			</ul>
+		</div>
 
 		<div class="list-container" ng-cloak>
 			<div class="col-xs-6 title-mid">

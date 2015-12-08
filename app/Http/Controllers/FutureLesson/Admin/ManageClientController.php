@@ -65,8 +65,19 @@ class ManageClientController extends Controller{
 		return view('admin.manage.client.partials.detail_form');
 	}
 
+	/**
+	 * @return \Illuminate\View\View
+	 */
 	public function type_ahead_form() {
 		return view('admin.manage.client.partials.type_ahead_form');
+	}
+
+	/**
+	 * Import client - teacher
+	 * @return \Illuminate\View\View
+	 */
+	public function import(){
+		return view('admin.manage.client.partials.import_client_form');
 	}
 	
 }

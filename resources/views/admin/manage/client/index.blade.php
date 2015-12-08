@@ -17,6 +17,8 @@
 			<div class="client-content" template-directive template-url="{!! route('admin.manage.client.partials.list_client_form') !!}"></div>
 
 			<div class="client-content" template-directive template-url="{!! route('admin.manage.client.partials.add_client_form') !!}"></div>
+
+			<div class="client-content" template-directive template-url="{!! route('admin.manage.client.partials.import_client_form') !!}"></div>
 			
 			<div class="client-content" template-directive template-url="{!! route('admin.manage.client.partials.client_details_form') !!}"></div>
 
