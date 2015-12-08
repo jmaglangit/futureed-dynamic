@@ -612,7 +612,7 @@ class StudentRepository implements StudentRepositoryInterface
 	 */
 	public function getStudentPointsUsed($student_id){
 
-		return Student::whereUserId($student_id)->pluck('points_used');
+		return Student::whereId($student_id)->pluck('points_used');
 	}
 
 

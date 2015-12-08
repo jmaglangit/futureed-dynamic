@@ -96,6 +96,7 @@ function ProfileController($scope, apiService, ProfileService) {
 			break;
 
 		  case Constants.AVATAR_ACCESSORY:
+			self.getPointsUsed();
 			self.active_avatar_accessory = Constants.TRUE;
 			break;
 
@@ -442,8 +443,8 @@ function ProfileController($scope, apiService, ProfileService) {
 					self.errors = $scope.errorHandler(response.errors);
 				}
 				else if(response.data) {
+					self.getPointsUsed();
 					self.getAvatarAccessories();
-					console.log(response.data);
 				}
 			}
 		}).error(function(response){
@@ -673,5 +674,24 @@ function ProfileController($scope, apiService, ProfileService) {
 			$(".month").prop('disabled', false);
 			$(".year").prop('disabled', false);
 		}
+	}
+
+	self.getPointsUsed = function() {
+		var id = $scope.user.id;
+
+		$scope.ui_block();
+		ProfileService.getPointsUsed(id).success(function(response){
+			if(response.status == Constants.STATUS_OK) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data){
+					self.points_used = response.data.points_used;
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
 	}
 }
