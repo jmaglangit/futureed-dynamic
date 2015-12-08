@@ -1,9 +1,9 @@
 angular.module('futureed.controllers')
 	.controller('ManageClientController', ManageClientController);
 
-ManageClientController.$inject = ['$scope','manageClientService', 'TableService', 'SearchService', 'ValidationService'];
+ManageClientController.$inject = ['$scope','manageClientService', 'TableService', 'SearchService', 'ValidationService','Upload'];
 
-function ManageClientController($scope, manageClientService, TableService, SearchService, ValidationService) {
+function ManageClientController($scope, manageClientService, TableService, SearchService, ValidationService, Upload) {
 	var self = this;
 
 	TableService(self);
@@ -26,11 +26,16 @@ function ManageClientController($scope, manageClientService, TableService, Searc
 		self.active_view = Constants.FALSE;
 		self.active_edit = Constants.FALSE;
 		self.active_list = Constants.FALSE;
+		self.active_import = Constants.FALSE;
 
 		switch(active) {
 			
 			case Constants.ACTIVE_ADD 	:
 				self.active_add = Constants.TRUE;
+				break;
+
+			case Constants.ACTIVE_IMPORT	:
+				self.active_import = Constants.TRUE;
 				break;
 
 			case Constants.ACTIVE_VIEW	:
@@ -369,5 +374,69 @@ function ManageClientController($scope, manageClientService, TableService, Searc
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
+	}
+
+	//download template
+	self.downloadTemplate = function(data){
+
+		$scope.ui_block();
+		manageStudentService.downloadTemplate(data).success(function(response){
+			if(angular.equals(response.status, Constants.STATUS_OK)){
+				if(response.errors){
+					self.errors = $scope.errorHandler(response.errors);
+				}else if(response.data){
+
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function() {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	//import student
+	self.importFile = function(file){
+		//upload file directly
+
+		self.uploaded = Constants.FALSE;
+		self.base_url = $("#base_url_form input[name='base_url']").val();
+		var import_callback_uri = self.base_url + Constants.URL_USER_CREATION(angular.lowercase(Constants.CLIENT));
+
+
+		var callbackUri = {
+			callback_uri : 'www.google.com'
+		};
+
+		if(file.length) {
+			$scope.ui_block();
+			Upload.upload({
+				url: '/api/v1/client/import?callback_uri=' + import_callback_uri
+				, file: file[0]
+			}).success(function(response) {
+				if(angular.equals(response.status, Constants.STATUS_OK)) {
+					if(response.errors) {
+						self.errors = $scope.errorHandler(response.errors);
+					}else if(response.data){
+						var data = response.data;
+						self.upload_records = data;
+						self.report_status = Constants.TRUE;
+
+						if(data.fail_count > 0){
+							self.fail_count = Constants.TRUE;
+						}
+
+						if(data.inserted_count > 0){
+							self.inserted_count = Constants.TRUE;
+						}
+					}
+				}
+
+				$scope.ui_unblock();
+			}).error(function(response) {
+				self.errors = $scope.internalError();
+				$scope.ui_unblock();
+			});
+		}
 	}
 }

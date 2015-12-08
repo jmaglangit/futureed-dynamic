@@ -26,6 +26,7 @@ function AdminLoginController($scope, AdminLoginApiService){
 		self.errors = Constants.FALSE;
 
 		$scope.ui_block();
+		localStorage.authorization = 0;
 		AdminLoginApiService.adminDoLogin(self.username, self.password).success(function(response){
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {

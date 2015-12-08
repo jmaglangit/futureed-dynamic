@@ -83,6 +83,7 @@ var Constants = {
 	, ACTIVE_EDIT	: "edit"
 	, ACTIVE_ADD	: "add"
 	, ACTIVE_EMAIL	: "email"
+	, ACTIVE_IMPORT	: "import"
 
 	, ACTIVE_QUESTIONS 	: "questions"
 	, ACTIVE_CONTENTS 	: "contents"
