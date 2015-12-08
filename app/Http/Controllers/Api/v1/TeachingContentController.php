@@ -252,7 +252,6 @@ class TeachingContentController extends ApiController {
      */
     public function destroy($id)
     {
-		//add delete module_content
         return $this->respondWithData($this->teaching_content->deleteTeachingContent($id));
     }
 
