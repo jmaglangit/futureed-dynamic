@@ -13,7 +13,7 @@ class QuestionController extends ApiController {
 
 	protected $question;
 
-	public function __construct(QuestionRepositoryInterface $question){
+	public function __construct(QuestionRepositoryInterface $question) {
 
 		$this->question = $question;
 	}
@@ -21,87 +21,87 @@ class QuestionController extends ApiController {
 	/**
 	 * @return Display all questions.
 	 */
-	public function index(){
+	public function index() {
 
 		$criteria = [];
-		$limit = 0 ;
+		$limit = 0;
 		$offset = 0;
 
 		//for module_id
-		if(Input::get('module_id')){
+		if (Input::get('module_id')) {
 
 			$criteria['module_id'] = Input::get('module_id');
 		}
 
 		//for question_type
-		if(Input::get('question_type')){
+		if (Input::get('question_type')) {
 
 			$criteria['question_type'] = Input::get('question_type');
 		}
 
 		//for questions_text
-		if(Input::get('questions_text')){
+		if (Input::get('questions_text')) {
 
 			$criteria['questions_text'] = Input::get('questions_text');
 		}
 
-		if(Input::get('questions_id')){
+		if (Input::get('questions_id')) {
 			$criteria['questions_id'] = Input::get('questions_id');
 		}
 
-		if(Input::get('last_answered_question_id')){
+		if (Input::get('last_answered_question_id')) {
 			$criteria['last_answered_question_id'] = Input::get('last_answered_question_id');
 		}
 
-		if(Input::get('difficulty')){
+		if (Input::get('difficulty')) {
 			$criteria['difficulty'] = Input::get('difficulty');
 		}
 
-		if(Input::get('limit')) {
+		$criteria['status'] = config('futureed.enabled');
+
+		if (Input::get('limit')) {
 			$limit = intval(Input::get('limit'));
 		}
 
-		if(Input::get('offset')) {
+		if (Input::get('offset')) {
 			$offset = intval(Input::get('offset'));
 		}
 
-		return $this->respondWithData($this->question->getQuestions($criteria , $limit, $offset ));
+		return $this->respondWithData($this->question->getQuestions($criteria, $limit, $offset));
 	}
 
 	/**
 	 * Update the specified resource in storage.
 	 *
-	 * @param  int  $id
+	 * @param  int $id
 	 * @return Response
 	 */
-	public function uploadQuestionImage(QuestionRequest $request)
-	{
+	public function uploadQuestionImage(QuestionRequest $request) {
 
 		$input = $request->only('file');
 
 		$now = Carbon::now()->timestamp;
 		$return = NULL;
-		define('MB',1048576);
+		define('MB', 1048576);
 
 		//check if has images uploaded
-		if($input['file'])
-		{
-			if($_FILES['file']['type'] != 'image/jpeg' && $_FILES['file']['type'] != 'image/png'){
+		if ($input['file']) {
+			if ($_FILES['file']['type'] != 'image/jpeg' && $_FILES['file']['type'] != 'image/png') {
 
 				return $this->respondErrorMessage(2142);
 
 			}
 
-			$image_type = explode('.',$_FILES['file']['name']);
+			$image_type = explode('.', $_FILES['file']['name']);
 
-			if(count($image_type) >= 3){
+			if (count($image_type) >= 3) {
 
 				return $this->respondErrorMessage(2146);
 
 			}
 
 
-			if($_FILES['file']['size'] > 2 * MB){
+			if ($_FILES['file']['size'] > 2 * MB) {
 
 				return $this->respondErrorMessage(2143);
 
@@ -111,10 +111,10 @@ class QuestionController extends ApiController {
 			$image = $_FILES['file']['name'];
 
 			//uploads image file
-			$input['file']->move(config('futureed.question_image_path').'/'.$now,$image);
+			$input['file']->move(config('futureed.question_image_path') . '/' . $now, $image);
 
 			//return the original name of the image
-			$return['image_name'] = $now.'/'.$image;
+			$return['image_name'] = $now . '/' . $image;
 		}
 
 		return $this->respondWithData($return);
