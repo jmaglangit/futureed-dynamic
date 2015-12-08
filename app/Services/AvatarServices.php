@@ -147,7 +147,7 @@ class AvatarServices {
             $temp_avatar['url'] = url() . '/' . $image_avatar_accessory_folder . '/' . $row['accessory_image'];
             $temp_avatar['points_to_unlock'] = $row['points_to_unlock'];
             $temp_avatar['description'] = $row['description'];
-            $temp_avatar['isBought'] = in_array($row['id'], array_column($student_avatar_accessories,'avatar_accessories_id'));
+            $temp_avatar['is_bought'] = in_array($row['id'], array_column($student_avatar_accessories,'avatar_accessories_id'));
             $avatar_accessory[]= $temp_avatar;
         }
 
