@@ -75,8 +75,8 @@
                 Add Student <i class="fa fa-caret-square-o-down"></i>
             </button>
             <ul class="dropdown-menu dropdown-menu-medium">
-                <li ng-click="student.setActive(futureed.ACTIVE_IMPORT)"><a><i class="fa fa-cloud-upload"></i> Import</a></li>
-                <li ng-click="student.setActive(futureed.ACTIVE_ADD)"><a><i class="fa fa-plus-square"></i> Manual</a></li>
+                <li class="cursor-pointer" ng-click="student.setActive(futureed.ACTIVE_IMPORT)"><a><i class="fa fa-cloud-upload"></i> Import</a></li>
+                <li class="cursor-pointer" ng-click="student.setActive(futureed.ACTIVE_ADD)"><a><i class="fa fa-plus-square"></i> Manual</a></li>
             </ul>
         </div>
 
