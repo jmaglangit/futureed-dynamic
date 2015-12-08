@@ -47,7 +47,7 @@
 	</div>
 </div>
 
-<div class="content-pagination" ng-if="mod.contents">
+<div class="content-pagination" ng-if="mod.table.page_count > 1">
 	<pagination 
 		total-items="mod.table.total_items" 
 		ng-model="mod.table.page"
