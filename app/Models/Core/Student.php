@@ -45,7 +45,8 @@ class Student extends Model {
 		'learning_style_id',
 		'status',
 		'created_by',
-		'updated_by'
+		'updated_by',
+		'points_used'
 	];
 
 	protected $attributes = [
@@ -236,11 +237,6 @@ class Student extends Model {
 			$query->where('facebook_app_id',$facebook_id);
 		});
 	}
-
-
-
-
-
 
 
 }

@@ -11,7 +11,7 @@ class AvatarAccessoryRepository implements AvatarAccessoryRepositoryInterface{
 	/**
 	 * Get list of avatar accessoires based on the avatar id of the student
 	 * @param $student_id
-	 * @return Object
+	 * @return Array
 	 */
 	public function getAvatarAccessories($student_id){
 		$student = new Student();
@@ -30,6 +30,11 @@ class AvatarAccessoryRepository implements AvatarAccessoryRepositoryInterface{
 		}
 	}
 
+	/**
+	 * Get list of all avatar accessories the student has already bought
+	 * @param $studnet
+	 * @return Array
+	 */
 	public function getStudentAvatarAccessories($student_id){
 		$student = new Student();
 		$student_avatar_accessory = new StudentAvatarAccessories();
@@ -45,10 +50,13 @@ class AvatarAccessoryRepository implements AvatarAccessoryRepositoryInterface{
 			return $e->getMessage();
 
 		}
-
-		dd('test student avatar accessory');
 	}
 
+	/**
+	 * Buy an acessory
+	 * @param $accessory
+	 * @return Array
+	 */
 	public function buyAvatarAccessory($accessory){
 		try {
 			return StudentAvatarAccessories::create($accessory)->toArray();
@@ -57,6 +65,11 @@ class AvatarAccessoryRepository implements AvatarAccessoryRepositoryInterface{
 		}
 	}
 
+	/**
+	 * Check if student has already bought the avatar accessory
+	 * @param $accessory
+	 * @return Array
+	 */
 	public function hasAvatarAccessory($accessory){
 		try {
 			return StudentAvatarAccessories::hasAvatarAccessory($accessory)->get()->toArray();
@@ -64,4 +77,20 @@ class AvatarAccessoryRepository implements AvatarAccessoryRepositoryInterface{
 			return $e->getMessage();
 		}
 	}
+
+	/**
+	 * Updates the ponts used column on the student table
+	 * @param $studnet_id
+	 * @param $points_used
+	 * @return Boolean
+	 */
+	public function updatePointsUsed($student_id, $points_used){
+		try {
+			return Student::where('id', $student_id)
+				->update(['points_used' => $points_used]);
+		} catch (Exception $e) {
+			return $e->getMessage();
+		}
+	}
+
 }

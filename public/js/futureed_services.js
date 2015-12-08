@@ -119,10 +119,10 @@ var services = angular.module('futureed.services', []);
 			});
 		}
 
-		futureedAPI.buyAvatarAccessory = function(user_id, accessory_id) {
+		futureedAPI.buyAvatarAccessory = function(user_id, student_id, accessory_id, points_to_unlock) {
 			return $http({
 				method	: 'POST'
-				, data	: {user_id : user_id, accessory_id : accessory_id}
+				, data	: {user_id : user_id, student_id : student_id, accessory_id : accessory_id, points_to_unlock : points_to_unlock}
 				, url	: futureedAPIUrl + 'avatar-accessory/buy-accessory'
 			});
 		}
