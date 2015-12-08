@@ -29,6 +29,8 @@ interface ModuleContentRepositoryInterface {
 
 	public function getModulePointsToFinish($id);
 
+	public function deleteModuleContentByContent($id);
+
 
 
 }
