@@ -47,6 +47,7 @@ function ProfileController($scope, apiService, ProfileService) {
 		self.active_password = Constants.FALSE;
 		self.active_reports = Constants.FALSE;
 		self.active_avatar_accessory = Constants.FALSE;
+		self.buy_avatar_accessory_modal = Constants.FALSE;
 
 		self.validation = {};
 		self.select_password = Constants.FALSE;
@@ -434,6 +435,18 @@ function ProfileController($scope, apiService, ProfileService) {
 		});
 	}
 
+	self.confrimBuyAvatarAccessory = function(accessory_id, points_to_unlock){
+		self.accessory_id = accessory_id;
+		self.points_to_unlock = points_to_unlock;
+
+		self.buy_avatar_accessory_modal = Constants.TRUE;
+		$("#buy_avatar_accessory_modal").modal({
+			backdrop : 'static',
+			keyboard : Constants.FALSE,
+			show : Constants.TRUE
+		});
+	}
+
 	self.buyAvatarAccessory = function(accessory_id, points_to_unlock){
 		user_id = $scope.user.user.id;
 		student_id = $scope.user.id;
@@ -446,6 +459,7 @@ function ProfileController($scope, apiService, ProfileService) {
 				else if(response.data) {
 					self.getPointsUsed();
 					self.getAvatarAccessories();
+					$('#buy_avatar_accessory_modal').modal('toggle');
 				}
 			}
 		}).error(function(response){

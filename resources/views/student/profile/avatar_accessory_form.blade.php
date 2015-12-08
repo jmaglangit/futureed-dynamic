@@ -11,12 +11,49 @@
 					{!! Form::button('BUY'
 						, array(
 							'class' => 'btn btn-maroon btn-medium center-block'
-							, 'ng-click' => 'profile.buyAvatarAccessory(accessory.id, accessory.points_to_unlock)'
+							, 'ng-click' => 'profile.confrimBuyAvatarAccessory(accessory.id, accessory.points_to_unlock)'
 							, 'ng-if' => '!accessory.isBought'
 						)
 					) !!}
 				</li>
 			</ul>
+		</div>
+	</div>
+</div>
+
+<div id="buy_avatar_accessory_modal" ng-show="profile.buy_avatar_accessory_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				Buy Accessory
+			</div>
+			<div class="modal-body center-date">
+				<div class="alert alert-error" ng-if="profile.errors">
+					<p>
+						{! error !}
+					</p>
+				</div>
+				<div ng-if="!profile.errors">
+					<p>Are you sure you want to buy this accessory?</p>
+				</div>
+			</div>
+			<div class="modal-footer">
+				<div class="btncon col-md-8 col-md-offset-4 pull-left">
+					{!! Form::button('BUY'
+						, array(
+							'class' => 'btn btn-blue btn-medium'
+							, 'ng-click' => 'profile.buyAvatarAccessory(profile.accessory_id, profile.points_to_unlock)'
+						)
+					) !!}
+
+					{!! Form::button('CANCEL'
+						, array(
+							'class' => 'btn btn-gold btn-medium'
+							, 'data-dismiss' => 'modal'
+						)
+					) !!}
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
