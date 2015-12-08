@@ -10,10 +10,19 @@ namespace FutureEd\Models\Repository\TeachingContent;
 
 
 use FutureEd\Models\Core\TeachingContent;
+use FutureEd\Models\Repository\ModuleContent\ModuleContentRepositoryInterface;
 use League\Flysystem\Exception;
 
 class TeachingContentRepository implements TeachingContentRepositoryInterface{
 
+    protected $module_content;
+
+    public function __construct(
+        ModuleContentRepositoryInterface $moduleContentRepositoryInterface
+    ){
+        $this->module_content = $moduleContentRepositoryInterface;
+
+    }
     /**
      * Add Teaching content.
      * @param $data
@@ -79,6 +88,9 @@ class TeachingContentRepository implements TeachingContentRepositoryInterface{
     public function deleteTeachingContent($id){
         try{
             $result = TeachingContent::find($id);
+
+            $this->module_content->deleteModuleContentByContent($id);
+
             return is_null($result) ? false : $result->delete();
         }catch (\Exception $e){
             return $e->getMessage();
