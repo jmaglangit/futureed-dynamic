@@ -137,6 +137,10 @@ class AvatarServices {
         //get all avatar accessories based on student id
         $image_avatar=$this->avatar_accessory->getAvatarAccessories($student_id);
 
+        if(!$image_avatar){
+            return null;
+        }
+
         foreach($image_avatar as $row){
             $temp_avatar['id'] = $row['id'];
             $temp_avatar['name'] = $row['name'];

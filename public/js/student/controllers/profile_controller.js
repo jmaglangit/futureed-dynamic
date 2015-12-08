@@ -419,10 +419,11 @@ function ProfileController($scope, apiService, ProfileService) {
 		apiService.getAvatarAccessories($scope.user.id).success(function(response){
 			if(response.status == Constants.STATUS_OK) {
 				if(response.errors) {
+					self.has_accessories = Constants.FALSE;
 					self.errors = $scope.errorHandler(response.errors);
 				}
 				else if(response.data){
-
+					self.has_accessories = Constants.TRUE;
 					self.avatar_accessories = response.data;
 				}
 			}

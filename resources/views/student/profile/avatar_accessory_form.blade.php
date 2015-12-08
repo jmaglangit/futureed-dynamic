@@ -1,7 +1,7 @@
 <div ng-if="profile.active_avatar_accessory">
 	<div class="col-md-12">
 		<div class="form-class">
-			<div>
+			<div ng-if="profile.has_accessories">
 				<p>Cash Points: <span class="text-gold"> {! profile.points_used !}</span></p>
 			</div>
 			<ul class="avatar_list list-unstyled list-inline" ng-init="profile.getAvatarAccessories()">
@@ -17,5 +17,6 @@
 					) !!}
 				</li>
 			</ul>
+		</div>
 	</div>
 </div>

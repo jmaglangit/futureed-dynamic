@@ -31,7 +31,12 @@ class AvatarAccessoryController extends ApiController {
 	public function getAvatarAccessories(AvatarAccessoryRequest $request)
 	{
 		$student_id = $request->only('student_id');
-		return $this->respondWithData($this->avatar->getAvatarAccessories($student_id));
+		$avatar_accessory = $this->avatar->getAvatarAccessories($student_id);
+		if($avatar_accessory){
+			return $this->respondWithData();
+		}else{
+			return $this->respondErrorMessage(2066); //No Accessories available
+		}
 	}
 
 	/**
