@@ -1,7 +1,7 @@
 <?php
 namespace FutureEd\Models\Repository\Country;
 
-
+use Illuminate\Support\Facades\DB;
 use Webpatser\Countries\Countries;
 
 class CountryRepository implements CountryRepositoryInterface{
@@ -19,7 +19,7 @@ class CountryRepository implements CountryRepositoryInterface{
             'capital',
             'country_code'
         )
-            ->orderBy('name','ASC')
+            ->orderBy(DB::raw("CASE WHEN name = 'United States' THEN 1 ELSE 2 END, name"))
             ->get()
             ->toArray();
     }
