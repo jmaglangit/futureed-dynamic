@@ -234,6 +234,9 @@ var Constants = {
 	, CURRENT_LEARNING			: "Current Learning"
 	, SUBJECT_AREA				: "Subject Area"
 
+	/*Country Codes*/
+	, UNITED_STATES				: 840
+
 	, MSG_CREATED				: function(noun) {
 		return noun + " created.";
 	}
