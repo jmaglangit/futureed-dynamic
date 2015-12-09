@@ -188,6 +188,9 @@ return [
 	'question_difficulty_levels' => [1, 2, 3],
 	'question_minimum_count' => 4,
 
+	//MB
+	'question_mb' => 1048576,
+
 	//Correct Answer
 	'yes' => 'Yes',
 	'no' => 'No',

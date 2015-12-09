@@ -75,6 +75,10 @@ class QuestionRepository implements QuestionRepositoryInterface{
 
 					$question = $question->difficulty($criteria['difficulty']);
 				}
+				if(isset($criteria['status'])){
+
+					$question = $question->status($criteria['status']);
+				}
 
 
 			}
