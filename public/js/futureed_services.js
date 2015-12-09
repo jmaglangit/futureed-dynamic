@@ -115,7 +115,15 @@ var services = angular.module('futureed.services', []);
 		futureedAPI.getAvatarAccessories = function(student_id) {
 			return $http({
 				method	: 'GET'
-				, url	: futureedAPIUrl + 'avatar-accessory?student_id=' + student_id
+				, url	: futureedAPIUrl + 'avatar-accessory/get-accessories?student_id=' + student_id
+			});
+		}
+
+		futureedAPI.buyAvatarAccessory = function(user_id, student_id, accessory_id, points_to_unlock) {
+			return $http({
+				method	: 'POST'
+				, data	: {user_id : user_id, student_id : student_id, accessory_id : accessory_id, points_to_unlock : points_to_unlock}
+				, url	: futureedAPIUrl + 'avatar-accessory/buy-accessory'
 			});
 		}
 

@@ -601,10 +601,20 @@ class StudentRepository implements StudentRepositoryInterface
 
 	/**
 	 * @param $student_id
+	 * @return int
 	 */
 	public function getStudentPoints($student_id){
 
 		return Student::whereId($student_id)->pluck('points');
+	}
+
+	/**
+	 * @param $student_id
+	 * @return int
+	 */
+	public function getStudentPointsUsed($student_id){
+
+		return Student::whereId($student_id)->pluck('points_used');
 	}
 
 

@@ -1808,3 +1808,8 @@ top: 41px;
 	color: #E9AB17;
 	font-size:15px;
 }
+
+.greyscale {
+	-webkit-filter: grayscale(1);
+	filter: grayscale(1);
+}

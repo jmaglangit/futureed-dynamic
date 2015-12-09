@@ -61,5 +61,5 @@ interface StudentRepositoryInterface {
 
     public function getStudentPoints($student_id);
 
-
+    public function getStudentPointsUsed($user_id);
 }

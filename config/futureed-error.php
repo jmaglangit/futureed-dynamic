@@ -78,6 +78,8 @@ return [
 		2063 => 'User is currently logged in.',
 		2063 => 'Invalid export file format',
 		2064 =>	'File does not exist.',
+		2065 => 'You already have this accessory',
+		2066 => 'No Accessories available',
 
 
 		2100 => 'Reset code is invalid.',
