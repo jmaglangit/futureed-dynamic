@@ -82,7 +82,6 @@ class QuestionController extends ApiController {
 
 		$now = Carbon::now()->timestamp;
 		$return = NULL;
-		define('MB', 1048576);
 
 		//check if has images uploaded
 		if ($input['file']) {
@@ -101,7 +100,7 @@ class QuestionController extends ApiController {
 			}
 
 
-			if ($_FILES['file']['size'] > 2 * MB) {
+			if ($_FILES['file']['size'] > 2 * config('futureed.question_mb')) {
 
 				return $this->respondErrorMessage(2143);
 
