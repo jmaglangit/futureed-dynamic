@@ -299,7 +299,6 @@ function FutureedController($scope, $window, apiService, futureed) {
 
 	$scope.getUserDetails = function() {
 		var user = $("input[name='userdata']").val();
-		console.log($scope);
 
 		if(angular.isString(user) && user.length > 0) {
 			$scope.user = JSON.parse(user);
