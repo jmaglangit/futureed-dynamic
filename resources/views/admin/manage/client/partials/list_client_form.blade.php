@@ -105,8 +105,8 @@
 				Add Client <i class="fa fa-caret-square-o-down"></i>
 			</button>
 			<ul class="dropdown-menu dropdown-menu-medium">
-				<li ng-click="client.setActive(futureed.ACTIVE_IMPORT)"><a><i class="fa fa-cloud-upload"></i> Import Teacher</a></li>
-				<li ng-click="client.setActive(futureed.ACTIVE_ADD)"><a><i class="fa fa-plus-square"></i> Add Client </a></li>
+				<li class="cursor-pointer" ng-click="client.setActive(futureed.ACTIVE_IMPORT)"><a><i class="fa fa-cloud-upload"></i> Import Teacher</a></li>
+				<li class="cursor-pointer" ng-click="client.setActive(futureed.ACTIVE_ADD)"><a><i class="fa fa-plus-square"></i> Add Client </a></li>
 			</ul>
 		</div>
 

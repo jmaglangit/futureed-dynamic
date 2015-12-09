@@ -350,3 +350,6 @@ input[type=radio]:checked+.lbl::before{content:"\2022";}
 	display: flex;
 }
 
+.cursor-pointer {
+	cursor: pointer;
+}
