@@ -225,4 +225,14 @@ class ModuleContentRepository implements ModuleContentRepositoryInterface{
 		return Module::whereId($id)->pluck('points_to_finish');
 	}
 
+	/**
+	 * Delete module content.
+	 * @param $content_id
+	 * @return mixed
+	 */
+	public function deleteModuleContentByContent($content_id){
+
+		return ModuleContent::contentId($content_id)->delete();
+	}
+
 }
