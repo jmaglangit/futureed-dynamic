@@ -110,7 +110,7 @@ function MediaLoginController($scope, $filter, $window, MediaLoginService) {
 
 			auth2.attachClickHandler('btn-google', auth2, function(response) {
 				var profile = auth2.currentUser.get();
-				loginGoogle(profile.getBasicProfile());
+				console.log(loginGoogle(profile.getBasicProfile()));
 			}, function(response) {
 				var authInstance = gapi.auth2.getAuthInstance();
 			});
@@ -154,8 +154,6 @@ function MediaLoginController($scope, $filter, $window, MediaLoginService) {
 						}
 
 						$scope.$emit('confirm-media', client_data);
-					} else {
-						$scope.$emit('media-error', self.errors);
 					}
 				} else if(response.data){
 					response.data.role = (response.data.client_role) ? response.data.client_role : Constants.STUDENT ;
