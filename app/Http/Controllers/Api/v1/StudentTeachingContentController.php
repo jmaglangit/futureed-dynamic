@@ -30,6 +30,9 @@ class StudentTeachingContentController extends ApiController {
 			$criteria['module_id'] = Input::get('module_id');
 		}
 
+		//Get enabled content.
+		$criteria['teaching_status'] = config('futureed.enabled');
+
 		$limit = (Input::get('limit')) ? Input::get('limit') : 0;
 		$offset = (Input::get('offset')) ? Input::get('offset') : 0;
 
