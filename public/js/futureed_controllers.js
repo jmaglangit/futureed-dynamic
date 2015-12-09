@@ -299,6 +299,7 @@ function FutureedController($scope, $window, apiService, futureed) {
 
 	$scope.getUserDetails = function() {
 		var user = $("input[name='userdata']").val();
+		console.log($scope);
 
 		if(angular.isString(user) && user.length > 0) {
 			$scope.user = JSON.parse(user);
@@ -323,14 +324,32 @@ function FutureedController($scope, $window, apiService, futureed) {
 								$scope.user.class = Constants.TRUE;
 							}
 						}
-
+						$scope.getCashPoints();
 						$scope.updateUserData($scope.user);
 					}
+
 				}).error(function(response) {
 					$scope.internalError();
 				});
 			}
 		}
+	}
+
+	$scope.getCashPoints = function() {
+		var id = $scope.user.id;
+
+		apiService.getCashPoints(id).success(function(response){
+			if(response.status == Constants.STATUS_OK) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data){
+					$scope.user.cash_points = response.data.cash_points;
+				}
+			}
+
+		}).error(function(response){
+			self.errors = $scope.internalError();
+		});
 	}
 
 	function showModal(id) {

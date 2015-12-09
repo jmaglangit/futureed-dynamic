@@ -28,13 +28,6 @@ function ProfileService($http) {
 		});
 	}
 
-	api.getPointsUsed = function(id) {
-		return $http({
-			  method 	: Constants.METHOD_GET
-			, url	: apiUrl + 'student-points-used?student_id=' + id
-		});
-	}
-
 	api.getLoginPassword = function(data) {
 		return $http({
 			method	: Constants.METHOD_POST

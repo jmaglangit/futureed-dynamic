@@ -180,7 +180,7 @@ class StudentPointController extends ApiController {
 	 *
 	 * @return Array
 	 */
-	public function getPointsUsed()
+	public function getCashPoints()
 	{
 		if(Input::get('student_id')){
 			$student_id = Input::get('student_id');
@@ -188,7 +188,7 @@ class StudentPointController extends ApiController {
 
 		$total_points = $this->student->getStudentPoints($student_id);
 		$used_points = $this->student->getStudentPointsUsed($student_id);
-		$points_used['points_used'] = $total_points - $used_points;
+		$points_used['cash_points'] = $total_points - $used_points;
 
 		return $this->respondWithData($points_used);
 	}
