@@ -226,6 +226,7 @@ class ModuleContentRepository implements ModuleContentRepositoryInterface{
 	/**
 	 * Delete module content.
 	 * @param $content_id
+	 * @return mixed
 	 */
 	public function deleteModuleContentByContent($content_id){
 
