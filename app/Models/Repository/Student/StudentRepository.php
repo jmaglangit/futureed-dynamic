@@ -601,6 +601,7 @@ class StudentRepository implements StudentRepositoryInterface
 
 	/**
 	 * @param $student_id
+	 * @return int
 	 */
 	public function getStudentPoints($student_id){
 
@@ -609,6 +610,7 @@ class StudentRepository implements StudentRepositoryInterface
 
 	/**
 	 * @param $student_id
+	 * @return int
 	 */
 	public function getStudentPointsUsed($student_id){
 
