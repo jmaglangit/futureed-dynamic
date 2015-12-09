@@ -110,7 +110,7 @@ function MediaLoginController($scope, $filter, $window, MediaLoginService) {
 
 			auth2.attachClickHandler('btn-google', auth2, function(response) {
 				var profile = auth2.currentUser.get();
-				console.log(loginGoogle(profile.getBasicProfile()));
+				loginGoogle(profile.getBasicProfile());
 			}, function(response) {
 				var authInstance = gapi.auth2.getAuthInstance();
 			});
