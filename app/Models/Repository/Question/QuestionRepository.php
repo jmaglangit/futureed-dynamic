@@ -333,5 +333,15 @@ class QuestionRepository implements QuestionRepositoryInterface{
 			->count();
 	}
 
+	/**
+	 * Get enabled question
+	 * @param $id
+	 * @return mixed
+	 */
+	public function getEnabledQuestion($id){
+
+		return Question::id($id)->status(config('futureed.enabled'))->get();
+	}
+
 
 }
