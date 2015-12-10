@@ -336,6 +336,7 @@ class QuestionRepository implements QuestionRepositoryInterface{
 	/**
 	 * Get enabled question
 	 * @param $id
+	 * @return mixed
 	 */
 	public function getEnabledQuestion($id){
 
