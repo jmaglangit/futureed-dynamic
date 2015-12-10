@@ -1,8 +1,16 @@
 <div ng-if="profile.active_avatar_accessory">
 	<div class="col-md-12">
 		<div class="form-class">
-			<div ng-if="profile.has_accessories">
-				<p>Cash Points: <span class="text-gold"> {! profile.points_used !}</span></p>
+			<div class="clearfix" ng-if="profile.has_accessories">
+				<ul class="nav navbar-nav">
+					<li class="nav-label">Cash Points</li>
+					<li class="nav-points-rewards">
+						{!! Html::image('/images/icons/icon-cash-points.png', ''
+							, array(
+								'class' => 'nav-icon-holder'
+							)
+						) !!} {! user.cash_points !}
+					</li>
 			</div>
 			<ul class="avatar_list list-unstyled list-inline" ng-init="profile.getAvatarAccessories()">
 				<li class="item avtrcon" ng-repeat="accessory in profile.avatar_accessories">
