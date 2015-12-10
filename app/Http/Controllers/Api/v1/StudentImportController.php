@@ -71,7 +71,7 @@ class StudentImportController extends ApiController {
 		$file = $request->file('file');
 
 		//check csv file type
-		if($file->getClientMimeType() <> 'text/csv'){
+		if(!in_array($file->getClientMimeType(), config('futureed.accepted_csv'))){
 
 			return $this->respondErrorMessage(2149);
 		}
