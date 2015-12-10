@@ -142,16 +142,16 @@ function StudentClassController($scope, $filter, $window, StudentClassService, S
 	self.listTips = function() {
 		self.errors = Constants.FALSE;
 		
-		self.search = {};
-		self.search.class_id = (self.current_class) ? self.current_class : Constants.EMPTY_STR;
-		self.search.link_type = Constants.GENERAL;
+		self.tipsSearch = {};
+		self.tipsSearch.class_id = (self.current_class) ? self.current_class : Constants.EMPTY_STR;
+		self.tipsSearch.link_type = Constants.GENERAL;
 
-		self.table = {};
-		self.table.size = 3;
-		self.table.offset = Constants.FALSE;
+		self.tipsTable = {};
+		self.tipsTable.size = 3;
+		self.tipsTable.offset = Constants.FALSE;
 
 		$scope.div_block("tips_form");
-		StudentClassService.listTips(self.search, self.table).success(function(response) {
+		StudentClassService.listTips(self.tipsSearch, self.tipsTable).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					$scope.errorHandler(response.errors);
@@ -177,18 +177,18 @@ function StudentClassController($scope, $filter, $window, StudentClassService, S
 	self.listHelpRequests = function() {
 		self.errors = Constants.FALSE;
 
-		self.search = {};
-		self.search.order_by_date = Constants.TRUE;
-		self.search.link_type = Constants.GENERAL;
-		self.search.request_status = Constants.ACCEPTED;
-		self.search.class_id = (self.current_class) ? self.current_class : Constants.EMPTY_STR;
+		self.helpRequestsSearch = {};
+		self.helpRequestsSearch.order_by_date = Constants.TRUE;
+		self.helpRequestsSearch.link_type = Constants.GENERAL;
+		self.helpRequestsSearch.request_status = Constants.ACCEPTED;
+		self.helpRequestsSearch.class_id = (self.current_class) ? self.current_class : Constants.EMPTY_STR;
 
-		self.table = {};
-		self.table.size = 3;
-		self.table.offset = Constants.FALSE;
+		self.helpRequestsTable = {};
+		self.helpRequestsTable.size = 3;
+		self.helpRequestsTable.offset = Constants.FALSE;
 
 		$scope.div_block("help_request_form");
-		StudentClassService.listHelpRequests(self.search, self.table).success(function(response) {
+		StudentClassService.listHelpRequests(self.helpRequestsSearch, self.helpRequestsTable).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					$scope.errorHandler(response.errors);
