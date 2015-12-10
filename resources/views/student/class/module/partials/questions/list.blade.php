@@ -19,7 +19,7 @@
 					</div>
 				</div>
 				
-				<img ng-if="mod.current_question.original_image_name" ng-src="{! mod.current_question.questions_image !}" />
+				<img ng-if="mod.current_question.questions_image != 'None' " ng-src="{! mod.current_question.questions_image !}" />
 			</div>
 
 			<div class="questions-message">
