@@ -353,3 +353,11 @@ input[type=radio]:checked+.lbl::before{content:"\2022";}
 .cursor-pointer {
 	cursor: pointer;
 }
+
+.imprt-err {
+	color : #843534;
+}
+
+.imprt-err-msgs {
+	padding-left: 10px;
+}
