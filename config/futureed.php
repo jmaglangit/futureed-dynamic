@@ -237,5 +237,10 @@ return [
 	'mobile-xls' => 'mobile-xls',
 
 	//avatar accessory folder
-	'image_avatar_accessory_folder' => 'images/avatar_accessory'
+	'image_avatar_accessory_folder' => 'images/avatar_accessory',
+
+	'accepted_csv' => [
+		'text/csv',
+		'application/vnd.ms-excel'
+	],
 ];

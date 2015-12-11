@@ -720,6 +720,9 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 			Upload.upload({
 				url: '/api/v1/student/import?callback_uri=' + callback_uri
 				, file: file[0]
+				,headers: {
+					'Content-Type': 'text/csv'
+				}
 			}).success(function(response) {
 				if(angular.equals(response.status, Constants.STATUS_OK)) {
 					if(response.errors) {
