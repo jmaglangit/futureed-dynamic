@@ -30,7 +30,7 @@ class QuestionTableSeeder extends Seeder
 					'questions_image' => $row[6],
 					'answer' => $row[7],
 					'question_order_text' => $row[8],
-					'question_graph_image' => $row[9],
+					'question_graph_content' => $row[9],
 					'seq_no' => ($row[10]) ? $row[10] : 0,
 					'difficulty' => ($row[11] == '')? 0 : $row[11],
 					'points_earned' => ($row[12])? $row[12] : 0 ,
