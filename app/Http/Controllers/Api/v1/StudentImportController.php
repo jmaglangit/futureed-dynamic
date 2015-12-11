@@ -103,7 +103,6 @@ class StudentImportController extends ApiController {
 			$student = $row->toArray();
 
 			//data conversions
-			$student['birth_date'] = Carbon::parse($student['birth_date'])->format('Ymd');
 			$student['user_type'] = config('futureed.student');
 
 			//Student fields validations
@@ -153,11 +152,13 @@ class StudentImportController extends ApiController {
 					//list record
 					array_push($success_records,$student);
 				}else {
+					$student['errors'] = [$user_data];
 					array_push($fail_records,$student);
 				}
 
 			}else {
 				//iterate fail records
+				$student['errors'] = $error_msg;
 				array_push($fail_records,$student);
 				$this->setMessageBag([]);
 			}
