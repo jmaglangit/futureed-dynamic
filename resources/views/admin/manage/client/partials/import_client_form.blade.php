@@ -61,27 +61,35 @@
                 <h5>Records Not Inserted</h5>
                 <hr>
                 <div ng-repeat="client in client.upload_records.failed_records">
-                    <p>Username : {! client.errors.username !}</p>
+                    <div class="imprt-err">
+                        <hr>
+                        <div class="imprt-err-hdr">Error(s) : </div>
+                        <div class="imprt-err-msgs" ng-repeat="error in client.errors">
+                            <div>- {! error.message !}</div>
+                        </div>
+                        <hr>
+                    </div>
+                    <div>Username : {! client.username !}</div>
 
-                    <p>Email : {! client.errors.email !}</p>
+                    <div>Email : {! client.email !}</div>
 
-                    <p>Name : {! client.errors.first_name !}</p>
+                    <div>Name : {! client.first_name + ' ' + client.last_name !}</div>
 
-                    <p>Birthdate : {! client.errors.birth_date !}</p>
+                    <div>Birthdate : {! client.birth_date !}</div>
 
-                    <p>Gender : {! client.errors.gender !}</p>
+                    <div>Gender : {! client.gender !}</div>
 
-                    <p>Type : {! client.errors.user_type !}</p>
+                    <div>Type : {! client.user_type !}</div>
 
-                    <p>School : {! client.errors.school !}</p>
+                    <div>School : {! client.school !}</div>
 
-                    <p>Grade Code : {! client.errors.grade_code !}</p>
+                    <div>Grade Code : {! client.grade_code !}</div>
 
-                    <p>County : {! client.errors.country !}</p>
+                    <div>County : {! client.country !}</div>
 
-                    <p>State : {! client.errors.state !}</p>
+                    <div>State : {! client.state !}</div>
 
-                    <p>City : {! client.errors.city !}</p>
+                    <div>City : {! client.city !}</div>
                     <hr>
                 </div>
             </div>
