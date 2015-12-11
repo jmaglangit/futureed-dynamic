@@ -715,7 +715,6 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 		var base_url = $("#base_url_form input[name='base_url']").val();
 		var callback_uri = base_url + Constants.URL_REGISTRATION(angular.lowercase(Constants.STUDENT));
 
-		console.log('importing....');
 		if(file.length) {
 			$scope.ui_block();
 			Upload.upload({
