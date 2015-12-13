@@ -154,15 +154,19 @@ class ClientImportController extends ApiController {
 
 					}else {
 						//list to fail
+						$client['errors'] = [$client_data];
 						array_push($fail_records,$client);
 					}
 				}else {
 					//list to fail
+					$client['errors'] = [$user_data];
 					array_push($fail_records,$client);
 				}
 			}else{
 				//list to fail
+				$client['errors'] = $msg_bag;
 				array_push($fail_records,$client);
+				$this->setMessageBag([]);
 			}
 		}
 

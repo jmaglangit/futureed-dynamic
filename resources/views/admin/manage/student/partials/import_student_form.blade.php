@@ -61,27 +61,35 @@
                 <h5>Records Not Inserted</h5>
                 <hr>
                 <div ng-repeat="student in student.upload_records.failed_records">
-                    <p>Username : {! student.errors.username !}</p>
+                    <div class="imprt-err">
+                        <hr>
+                        <div class="imprt-err-hdr">Error(s) : </div>
+                        <div class="imprt-err-msgs" ng-repeat="error in student.errors">
+                            <div>- {! error.message !}</div>
+                        </div>
+                        <hr>
+                    </div>
+                    <div>Username : {! student.username !}</div>
 
-                    <p>Email : {! student.email !}</p>
+                    <div>Email : {! student.email !}</div>
 
-                    <p>Name : {! student.first_name !}</p>
+                    <div>Name : {! student.first_name  +' ' + student.last_name !}</div>
 
-                    <p>Birthdate : {! student.birth_date !}</p>
+                    <div>Birthdate : {! student.birth_date !}</div>
 
-                    <p>Gender : {! student.gender !}</p>
+                    <div>Gender : {! student.gender !}</div>
 
-                    <p>Type : {! student.user_type !}</p>
+                    <div>Type : {! student.user_type !}</div>
 
-                    <p>School : {! student.school !}</p>
+                    <div>School : {! student.school !}</div>
 
-                    <p>Grade Code : {! student.grade_code !}</p>
+                    <div>Grade Code : {! student.grade_code !}</div>
 
-                    <p>County : {! student.country !}</p>
+                    <div>County : {! student.country !}</div>
 
-                    <p>State : {! student.state !}</p>
+                    <idv>State : {! student.state !}</idv>
 
-                    <p>City : {! student.city !}</p>
+                    <div>City : {! student.city !}</div>
                     <hr>
                 </div>
             </div>
