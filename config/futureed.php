@@ -184,6 +184,11 @@ return [
 	'question_type_multiple_choice' => 'MC',
 	'question_type_provide_answer' => 'N',
 	'question_type_ordering' => 'O',
+	'question_type_graph' => 'GR',
+	'question_type_quad' => 'QUAD',
+
+	//Graph setup
+	'graph_divisible' => 5,
 
 	'question_difficulty_levels' => [1, 2, 3],
 	'question_minimum_count' => 4,
