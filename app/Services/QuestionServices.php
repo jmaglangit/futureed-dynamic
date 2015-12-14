@@ -72,4 +72,45 @@ class QuestionServices {
 		return $sequence;
 	}
 
+	/**
+	 * Get graph dimension based on the highest answer count.
+	 * @param $answers
+	 * @return int
+	 */
+	public function getGraphDimension($answers){
+
+		$dimension = 5;
+
+		foreach($answers as $data){
+			if($data->count > $dimension){
+				$count_mod = $data->count % config('futureed.graph_divisible');
+				$dimension = $data->count + (config('futureed.graph_divisible') - $count_mod);
+			}
+		}
+
+		return $dimension;
+	}
+
+	/**
+	 * Get quadrant dimension based on the answer coordinates.
+	 * @param $answers
+	 * @return int|number
+	 */
+	public function getQuadDimension($answers){
+
+		$dimension = 5;
+
+		foreach($answers as $data){
+			foreach($data as $d){
+				$axes = abs($d);
+				if($axes > $dimension){
+					$count_mod = $axes % config('futureed.graph_divisible');
+					$dimension = $axes + (config('futureed.graph_divisible') - $count_mod);
+				}
+			}
+		}
+
+		return $dimension;
+	}
+
 }
