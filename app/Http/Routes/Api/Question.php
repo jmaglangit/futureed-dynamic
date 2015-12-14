@@ -44,6 +44,11 @@ Routes::group([
 		'uses' => 'Api\v1\StudentQuestionController@index',
 		'as' => 'api.v1.student.question.index'
 	]);
+
+	Routes::get('student/question/graph/{question_id}',[
+		'uses' => 'Api\v1\StudentQuestionController@graph',
+		'as' => 'api.v1.student.question.graph'
+	]);
 });
 
 
