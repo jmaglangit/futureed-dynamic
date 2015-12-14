@@ -79,4 +79,6 @@ interface QuestionRepositoryInterface {
 
 	public function getEnabledQuestion($id);
 
+	public function getGraphQuestion($id);
+
 }

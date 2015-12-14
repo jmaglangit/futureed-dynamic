@@ -107,9 +107,11 @@ class Question extends Model {
 	}
 
 	//-------------scopes
-	public function scopeQuestionType($query, $question_type) {
+	public function scopeQuestionType($query, $question_type ) {
 
-		return $query->where('question_type', '=', $question_type);
+		$question_types = (array) $question_type;
+
+		return $query->whereIn('question_type',$question_types);
 
 	}
 
