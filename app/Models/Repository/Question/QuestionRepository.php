@@ -343,6 +343,11 @@ class QuestionRepository implements QuestionRepositoryInterface{
 		return Question::id($id)->status(config('futureed.enabled'))->get();
 	}
 
+	/**
+	 * Get Graph questions.
+	 * @param $id
+	 * @return mixed
+	 */
 	public function getGraphQuestion($id){
 
 		$question_types = [
