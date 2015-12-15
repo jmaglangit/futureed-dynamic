@@ -23,9 +23,23 @@ class Question extends Model {
 		'deleted_at',
 	];
 
-	protected $fillable = ['module_id', 'code', 'question_type', 'questions_text', 'questions_image', 'answer'
-		, 'question_order_text', 'seq_no', 'difficulty', 'points_earned'
-		, 'original_image_name', 'status', 'created_by', 'updated_by'];
+	protected $fillable = [
+		'module_id',
+		'code',
+		'question_type',
+		'questions_text',
+		'questions_image',
+		'answer',
+		'question_order_text',
+		'seq_no',
+		'difficulty',
+		'points_earned',
+		'original_image_name',
+		'question_graph_content',
+		'status',
+		'created_by',
+		'updated_by'
+	];
 
 	protected $attributes = [
 		'created_by' => 1,
