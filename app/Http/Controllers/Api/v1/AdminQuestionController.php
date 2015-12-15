@@ -79,8 +79,31 @@ class AdminQuestionController extends ApiController {
 	public function store(AdminQuestionRequest $request)
 	{
 
-		$data =  $request->only('image','answer','seq_no','code','module_id','questions_text','status','question_type','points_earned','difficulty');
+		$data =  $request->only(
+			'image',
+			'answer',
+			'seq_no',
+			'code',
+			'module_id',
+			'questions_text',
+			'status',
+			'question_type',
+			'points_earned',
+			'difficulty',
+			'orientation'
+		);
 
+
+		//Graph
+		if($data['question_type'] == config('futureed.question_type_graph')
+			|| $data['question_type'] == config('futureed.question_type_graph')){
+
+			//generate graph answers json format
+			$data['answer'] = $this->question_service->getGraphAnswerJson();
+
+			//generate graph content json format
+			$data['question_graph_content'] = $this->question_service->getGraphContentJson($data['orientation'], $data['image']);
+		}
 
 		$last_sequence = $this->question->getLastSequence($data['module_id'],$data['difficulty']);
 
