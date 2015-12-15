@@ -1,7 +1,5 @@
 <?php namespace FutureEd\Http\Requests\Api;
 
-use FutureEd\Http\Requests\Request;
-
 class AdminQuestionRequest extends ApiRequest {
 
 	/**
@@ -32,12 +30,13 @@ class AdminQuestionRequest extends ApiRequest {
 					'questions_text' => 'required|string',
 					'difficulty' => 'required|integer',
 					'status' => 'required|alpha|in:Enabled,Disabled',
-					'question_type' => 'required|alpha|in:MC,FIB,O,N',
+					'question_type' => 'required|alpha|in:MC,FIB,O,N,GR,QUAD',
 					'points_earned' => 'required|integer',
 					'code' => 'required|integer|unique:questions,code,NULL,id,deleted_at,NULL',
 					'answer' => 'required_if:question_type,FIB,O,N|string',
 					'question_order_text' => 'required_if:question_type,O|string',
 					'seq_no' => 'integer|min:1',
+					'orientation' => 'required_if:question_type,GR|in:horizontal,vertical'
 				];
 				break;
 
