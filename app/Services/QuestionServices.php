@@ -113,4 +113,38 @@ class QuestionServices {
 		return $dimension;
 	}
 
+	/**
+	 * Generate Graph answers in json format.
+	 * @param array $answer
+	 * @return string
+	 */
+	public function getGraphAnswerJson(array $answer = []){
+
+		$answers = new \stdClass();
+
+		$answers->answers = $answer;
+
+		return json_encode($answers);
+	}
+
+	/**
+	 * Generate Graph Content in json format.
+	 * @param null $orientation
+	 * @param array $images
+	 * @return string
+	 */
+	public function getGraphContentJson($orientation = NULL, $images = []){
+
+		$contents = new \stdClass();
+
+		$contents->orientation = $orientation;
+
+		$contents->image = (empty($images)) ? [] : $images;
+
+		return json_encode($contents);
+
+	}
+
+
+
 }
