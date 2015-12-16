@@ -25,6 +25,11 @@ Routes::group([
 	Routes::resource('/answer/admin', 'Api\v1\AdminQuestionAnswerController',
 		['except' => ['create', 'edit']]);
 
+	Routes::post('/graph-answer/admin/{question_id}',[
+		'as' => 'api.v1.question.graph-answer.admin',
+		'uses' => 'Api\v1\AdminQuestionGraphAnswerController@updateGraphAnswer'
+	]);
+
 
 
 });
