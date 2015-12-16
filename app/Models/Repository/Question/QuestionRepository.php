@@ -355,7 +355,7 @@ class QuestionRepository implements QuestionRepositoryInterface{
 			config('futureed.question_type_quad')
 		];
 
-		return Question::id($id)->questionType($question_types)->get();
+		return Question::id($id)->questionType($question_types)->first();
 	}
 
 
