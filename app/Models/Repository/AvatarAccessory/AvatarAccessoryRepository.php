@@ -5,6 +5,7 @@ use FutureEd\Models\Core\AvatarAccessory;
 use FutureEd\Models\Core\Student;
 use FutureEd\Models\Core\StudentAvatarAccessories;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 
 class AvatarAccessoryRepository implements AvatarAccessoryRepositoryInterface{
 	
@@ -47,6 +48,27 @@ class AvatarAccessoryRepository implements AvatarAccessoryRepositoryInterface{
 
 		} catch(\Exception $e) {
 
+			return $e->getMessage();
+
+		}
+	}
+
+	/**
+	 * Return true or false weather the student can buy the accessory
+	 * @param $student_id, $avatar_accessories_id
+	 * @return Boolean
+	 */
+	public function canBuyAvatarAccessory($student_id, $avatar_accessories_id){
+		$student = new Student();
+		$avatar_accessory = new AvatarAccessory();
+
+		try {
+			$avatar_id = $student->Id($student_id)->pluck('avatar_id');
+			$avatar_accessory = $avatar_accessory->AvatarAccessories($avatar_id);
+			$avatar_accessory = $avatar_accessory->where('id', $avatar_accessories_id)->get()->toArray();
+			return count($avatar_accessory) >= 1 ? true : false;
+
+		} catch(\Exception $e) {
 			return $e->getMessage();
 
 		}

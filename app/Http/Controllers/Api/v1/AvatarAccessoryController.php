@@ -47,10 +47,17 @@ class AvatarAccessoryController extends ApiController {
 	public function buyAvatarAccessory(AvatarAccessoryRequest $request)
 	{
 		$data = $request;
-		$accessory['user_id'] = intval($data['user_id']);
 		$accessory['student_id'] = intval($data['student_id']);
+		$accessory['user_id'] = $this->student->getUserId($accessory['student_id']);
 		$accessory['avatar_accessories_id'] = intval($data['accessory_id']);
 		$accessory['points_to_unlock'] = intval($data['points_to_unlock']);
+
+		//check if user can buy the accessory
+		$canBuyAvatarAccessory = $this->avatar_accessory->canBuyAvatarAccessory($accessory['student_id'], $accessory['avatar_accessories_id']);
+
+		if(!$canBuyAvatarAccessory){
+			return $this->respondErrorMessage(2067); //This accessory is not available for your
+		}
 
 		//check if user already has the accessory
 		$hasAvatarAccessory = $this->avatar_accessory->hasAvatarAccessory($accessory);

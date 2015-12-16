@@ -447,10 +447,9 @@ function ProfileController($scope, apiService, ProfileService) {
 	}
 
 	self.buyAvatarAccessory = function(accessory_id, points_to_unlock){
-		user_id = $scope.user.user.id;
 		student_id = $scope.user.id;
 
-		apiService.buyAvatarAccessory(user_id, student_id, accessory_id, points_to_unlock).success(function(response){
+		apiService.buyAvatarAccessory(student_id, accessory_id, points_to_unlock).success(function(response){
 			if(response.status == Constants.STATUS_OK){
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);

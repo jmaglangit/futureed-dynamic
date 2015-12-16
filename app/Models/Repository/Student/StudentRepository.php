@@ -63,6 +63,16 @@ class StudentRepository implements StudentRepositoryInterface
 
 	}
 
+
+	/**
+	 * Get student's user id with the given student id
+	 * @param $id
+	 * @return mixed
+	 */
+	public function getUserId($id){
+		return Student::whereId($id)->pluck('user_id');
+	}
+
 	/**
 	 * Get student by user_id.
 	 * @param $id

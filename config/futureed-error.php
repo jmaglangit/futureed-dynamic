@@ -80,6 +80,7 @@ return [
 		2064 =>	'File does not exist.',
 		2065 => 'You already have this accessory',
 		2066 => 'No Accessories available',
+		2067 => 'This accessory is not available for your avatar',
 
 
 		2100 => 'Reset code is invalid.',
