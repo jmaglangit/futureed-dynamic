@@ -97,9 +97,10 @@ class StudentQuestionController extends ApiController {
 	public function graph($id){
 
 		$graph = $this->question->getGraphQuestion($id);
-		$answer = $this->question->getQuestionAnswer($graph[0]->id);
 
 		if (!empty($graph)) {
+			$answer = $this->question->getQuestionAnswer($graph[0]->id);
+
 			$question_answers = json_decode($answer);
 
 			//Get dimension	of each graph.
