@@ -145,6 +145,27 @@ class QuestionServices {
 
 	}
 
+	//check answer if graph has correct format
+	public function checkGraphAnswerContent($graph_answer){
+
+		$graph = json_decode($graph_answer);
+
+//		dd(isset($graph->answer));
+		if(isset($graph->answer)){
+
+			foreach($graph->answer as $answer){
+
+
+			}
+
+
+		}else {
+//			return false
+		}
+
+		return true;
+	}
+
 
 
 }
