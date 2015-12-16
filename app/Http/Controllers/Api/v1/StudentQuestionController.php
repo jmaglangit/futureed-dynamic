@@ -99,20 +99,20 @@ class StudentQuestionController extends ApiController {
 		$graph = $this->question->getGraphQuestion($id);
 
 		if (!empty($graph)) {
-			$answer = $this->question->getQuestionAnswer($graph[0]->id);
+			$answer = $this->question->getQuestionAnswer($graph->id);
 
 			$question_answers = json_decode($answer);
 
 			//Get dimension	of each graph.
-			if ($graph[0]->question_type == config('futureed.question_type_graph')) {
-				$graph[0]->dimension = $this->question_services->getGraphDimension($question_answers->answer);
+			if ($graph->question_type == config('futureed.question_type_graph')) {
+				$graph->dimension = $this->question_services->getGraphDimension($question_answers->answer);
 			}
 
-			if ($graph[0]->question_type == config('futureed.question_type_quad')) {
-				$graph[0]->dimension = $this->question_services->getQuadDimension($question_answers->answer);
+			if ($graph->question_type == config('futureed.question_type_quad')) {
+				$graph->dimension = $this->question_services->getQuadDimension($question_answers->answer);
 			}
 
-			unset($graph[0]->answer);
+			unset($graph->answer);
 		}
 
 		return $this->respondWithData($graph);
