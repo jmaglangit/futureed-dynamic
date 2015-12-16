@@ -184,8 +184,18 @@ class AdminQuestionController extends ApiController {
 	 */
 	public function update($id,AdminQuestionRequest $request)
 	{
-		$data =  $request->only('image','answer','question_order_text','questions_text','status','question_type'
-			,'points_earned','difficulty','seq_no');
+		$data =  $request->only(
+			'image',
+			'answer',
+			'question_order_text',
+			'questions_text',
+			'status',
+			'question_type',
+			'question_graph_content',
+			'points_earned',
+			'difficulty',
+			'seq_no'
+		);
 
 		$question = $this->question->viewQuestion($id);
 
