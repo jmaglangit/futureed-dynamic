@@ -30,9 +30,9 @@ class AvatarAccessoryRequest extends ApiRequest {
 
 			case 'POST':
 				return [
-					'student_id' => 'required'
-					,'points_to_unlock' => 'required'
-					,'accessory_id' => 'required'
+					'student_id' => 'required|integer'
+					,'points_to_unlock' => 'required|integer'
+					,'avatar_accessories_id' => 'required|integer'
 				];
 				break;
 			

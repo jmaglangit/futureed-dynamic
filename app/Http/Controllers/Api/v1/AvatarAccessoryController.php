@@ -46,17 +46,14 @@ class AvatarAccessoryController extends ApiController {
 	 */
 	public function buyAvatarAccessory(AvatarAccessoryRequest $request)
 	{
-		$data = $request;
-		$accessory['student_id'] = intval($data['student_id']);
+		$accessory = $request->all();
 		$accessory['user_id'] = $this->student->getUserId($accessory['student_id']);
-		$accessory['avatar_accessories_id'] = intval($data['accessory_id']);
-		$accessory['points_to_unlock'] = intval($data['points_to_unlock']);
 
 		//check if user can buy the accessory
 		$canBuyAvatarAccessory = $this->avatar_accessory->canBuyAvatarAccessory($accessory['student_id'], $accessory['avatar_accessories_id']);
 
 		if(!$canBuyAvatarAccessory){
-			return $this->respondErrorMessage(2067); //This accessory is not available for your
+			return $this->respondErrorMessage(2067); //This accessory is not available for your avatar
 		}
 
 		//check if user already has the accessory
@@ -77,11 +74,7 @@ class AvatarAccessoryController extends ApiController {
 
 		//update points used on students table here
 		$points_used = $points_used + $accessory['points_to_unlock'];
-		$points_to_unlock = $this->avatar_accessory->updatePointsUsed($accessory['student_id'], $points_used);
-
-		$accessory['earned_at'] = Carbon::now();
-		$accessory['created_at'] = Carbon::now();
-		$accessory['updated_at'] = Carbon::now();
+		$this->avatar_accessory->updatePointsUsed($accessory['student_id'], $points_used);
 
 		return $this->respondWithData($this->avatar_accessory->buyAvatarAccessory($accessory));
 	}

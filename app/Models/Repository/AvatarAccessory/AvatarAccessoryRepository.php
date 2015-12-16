@@ -109,7 +109,7 @@ class AvatarAccessoryRepository implements AvatarAccessoryRepositoryInterface{
 	 */
 	public function updatePointsUsed($student_id, $points_used){
 		try {
-			return Student::where('id', $student_id)
+			Student::where('id', $student_id)
 				->update(['points_used' => $points_used]);
 		} catch (Exception $e) {
 			return $e->getMessage();

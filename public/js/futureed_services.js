@@ -122,7 +122,7 @@ var services = angular.module('futureed.services', []);
 		futureedAPI.buyAvatarAccessory = function(student_id, accessory_id, points_to_unlock) {
 			return $http({
 				method	: 'POST'
-				, data	: {student_id : student_id, accessory_id : accessory_id, points_to_unlock : points_to_unlock}
+				, data	: {student_id : student_id, avatar_accessories_id : accessory_id, points_to_unlock : points_to_unlock}
 				, url	: futureedAPIUrl + 'avatar-accessory/buy-accessory'
 			});
 		}
