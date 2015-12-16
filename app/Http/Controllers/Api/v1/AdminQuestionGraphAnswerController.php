@@ -26,7 +26,7 @@ class AdminQuestionGraphAnswerController extends ApiController {
 	 * @param AdminQuestionGraphAnswerRequest $request
 	 * @return mixed
 	 */
-	public function UpdateGraphAnswer($id,AdminQuestionGraphAnswerRequest $request){
+	public function updateGraphAnswer($id,AdminQuestionGraphAnswerRequest $request){
 
 		$question = $this->question->getGraphQuestion($id);
 

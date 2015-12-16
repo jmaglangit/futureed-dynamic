@@ -27,7 +27,7 @@ Routes::group([
 
 	Routes::post('/graph-answer/admin/{question_id}',[
 		'as' => 'api.v1.question.graph-answer.admin',
-		'uses' => 'Api\v1\AdminQuestionGraphAnswerController@UpdateGraphAnswer'
+		'uses' => 'Api\v1\AdminQuestionGraphAnswerController@updateGraphAnswer'
 	]);
 
 
