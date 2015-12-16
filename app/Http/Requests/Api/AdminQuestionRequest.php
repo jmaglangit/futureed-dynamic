@@ -36,7 +36,7 @@ class AdminQuestionRequest extends ApiRequest {
 					'answer' => 'required_if:question_type,FIB,O,N|string',
 					'question_order_text' => 'required_if:question_type,O|string',
 					'seq_no' => 'integer|min:1',
-					'orientation' => 'required_if:question_type,GR|in:horizontal,vertical'
+					'orientation' => 'required_if:question_type,GR|in:horizontal,vertical',
 				];
 				break;
 
@@ -52,6 +52,7 @@ class AdminQuestionRequest extends ApiRequest {
 					'points_earned' => 'required|integer',
 					'answer' => 'string',
 					'question_order_text' => 'required_if:question_type,O|string',
+					'question_graph_content' => 'required_if:question_type,GR|required_if:question_type,QUAD|json'
 				];
 				break;
 		}
