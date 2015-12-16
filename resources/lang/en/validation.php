@@ -86,6 +86,8 @@ return [
 	*/
 
 	"json" => "The :attribute is not json format.",
+	"graph_answer" => "The :attribute format/values is invalid.",
+	"url_exists" => "The :attribute does not exist.",
 	'custom' => [
 		'attribute-name' => [
 			'rule-name' => 'custom-message',
