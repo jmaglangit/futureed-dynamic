@@ -1,4 +1,4 @@
-<?php
+	<?php
 
 return [
 
@@ -85,6 +85,7 @@ return [
 	|
 	*/
 
+	"json" => "The :attribute is not json format.",
 	'custom' => [
 		'attribute-name' => [
 			'rule-name' => 'custom-message',
