@@ -20,8 +20,12 @@ class AdminQuestionGraphAnswerController extends ApiController {
 		$this->question_service = $questionServices;
 	}
 
-	//get graph answer and update question table
-	// this is to update each answer.
+	/**
+	 * Get Graph answers and update question table answer.
+	 * @param $id
+	 * @param AdminQuestionGraphAnswerRequest $request
+	 * @return mixed
+	 */
 	public function UpdateGraphAnswer($id,AdminQuestionGraphAnswerRequest $request){
 
 		$question = $this->question->getGraphQuestion($id);
@@ -33,14 +37,8 @@ class AdminQuestionGraphAnswerController extends ApiController {
 			return $this->respondErrorMessage(2120);
 		}
 
-		//check if answer has correct format.
 		//if confirmed save answer else return error.
-
-		$this->question_service->checkGraphAnswerContent($answer);
-
-
-
-
+		return $this->respondWithData($this->question->updateQuestion($id,['answer'=>$answer]));
 	}
 
 }
