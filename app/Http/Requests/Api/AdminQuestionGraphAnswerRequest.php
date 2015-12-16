@@ -28,7 +28,8 @@ class AdminQuestionGraphAnswerRequest extends ApiRequest {
 					case 'api.v1.question.graph-answer.admin':
 
 						return [
-							'answer' => 'required|json|graph_answer',
+							'answer' => 'required|json|graph_answer:'.$this->request->get('question_type'),
+							'question_type' => 'required|in:'.config('futureed.question_type_graph').','.config('futureed.question_type_quad'),
 						];
 						break;
 				}
