@@ -54,7 +54,8 @@ class AvatarAccessoryRepository implements AvatarAccessoryRepositoryInterface{
 	}
 
 	/**
-	 * Return true or false weather the student can buy the accessory
+	 * Check weather or not the accessory the student wants to buy
+	 * belongs to the student's current avatar
 	 * @param $student_id, $avatar_accessories_id
 	 * @return Boolean
 	 */

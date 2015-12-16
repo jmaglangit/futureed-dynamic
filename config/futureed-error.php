@@ -81,6 +81,7 @@ return [
 		2065 => 'You already have this accessory',
 		2066 => 'No Accessories available',
 		2067 => 'This accessory is not available for your avatar',
+		2068 => 'You do not have enough points to buy this accessory',
 
 
 		2100 => 'Reset code is invalid.',

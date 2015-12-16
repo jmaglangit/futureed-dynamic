@@ -453,6 +453,7 @@ function ProfileController($scope, apiService, ProfileService) {
 			if(response.status == Constants.STATUS_OK){
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
+					$('#buy_avatar_accessory_modal').modal('toggle');
 				}
 				else if(response.data) {
 					self.getAvatarAccessories();
