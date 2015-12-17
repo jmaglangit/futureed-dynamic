@@ -48,11 +48,11 @@ class AdminQuestionRequest extends ApiRequest {
 					'questions_text' => 'required|string|max:256',
 					'difficulty' => 'required|integer',
 					'status' => 'required|alpha|in:Enabled,Disabled',
-					'question_type' => 'required|alpha|in:MC,FIB,O,N',
+					'question_type' => 'required|alpha|in:MC,FIB,O,N,GR,QUAD',
 					'points_earned' => 'required|integer',
 					'answer' => 'string',
 					'question_order_text' => 'required_if:question_type,O|string',
-					'question_graph_content' => 'required_if:question_type,GR|required_if:question_type,QUAD|json'
+					'orientation' => 'required_if:question_type,GR|in:horizontal,vertical',
 				];
 				break;
 		}
