@@ -154,7 +154,12 @@ class QuestionServices {
 
 	}
 
-	//update graph image content
+	/**
+	 * Update Graph Image Content.
+	 * @param $content
+	 * @param array $images
+	 * @return string
+	 */
 	public function updateGraphContentImage($content, $images = []){
 
 		$graph_content = json_decode($content);
