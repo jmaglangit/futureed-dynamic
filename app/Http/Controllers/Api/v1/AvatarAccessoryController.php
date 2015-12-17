@@ -46,11 +46,15 @@ class AvatarAccessoryController extends ApiController {
 	 */
 	public function buyAvatarAccessory(AvatarAccessoryRequest $request)
 	{
-		$data = $request;
-		$accessory['user_id'] = intval($data['user_id']);
-		$accessory['student_id'] = intval($data['student_id']);
-		$accessory['avatar_accessories_id'] = intval($data['accessory_id']);
-		$accessory['points_to_unlock'] = intval($data['points_to_unlock']);
+		$accessory = $request->all();
+		$accessory['user_id'] = $this->student->getUserId($accessory['student_id']);
+
+		//check if user can buy the accessory
+		$canBuyAvatarAccessory = $this->avatar_accessory->canBuyAvatarAccessory($accessory['student_id'], $accessory['avatar_accessories_id']);
+
+		if(!$canBuyAvatarAccessory){
+			return $this->respondErrorMessage(2067); //This accessory is not available for your avatar
+		}
 
 		//check if user already has the accessory
 		$hasAvatarAccessory = $this->avatar_accessory->hasAvatarAccessory($accessory);
@@ -59,14 +63,18 @@ class AvatarAccessoryController extends ApiController {
 			return $this->respondErrorMessage(2065); //You already have this accessory
 		}
 
-		//update points used on students table here
+		//check if user still has points to buy
+		$total_points = $this->student->getStudentPoints($accessory['student_id']);
 		$points_used = $this->student->getStudentPointsUsed($accessory['student_id']);
-		$points_used = $points_used + $accessory['points_to_unlock'];
-		$points_to_unlock = $this->avatar_accessory->updatePointsUsed($accessory['student_id'], $points_used);
+		$points_left = ($total_points - $points_used) - $accessory['points_to_unlock'];
 
-		$accessory['earned_at'] = Carbon::now();
-		$accessory['created_at'] = Carbon::now();
-		$accessory['updated_at'] = Carbon::now();
+		if($points_left < 0){
+			return $this->respondErrorMessage(2068); //You do not have enough points to buy this accessory
+		};
+
+		//update points used on students table here
+		$points_used = $points_used + $accessory['points_to_unlock'];
+		$this->avatar_accessory->updatePointsUsed($accessory['student_id'], $points_used);
 
 		return $this->respondWithData($this->avatar_accessory->buyAvatarAccessory($accessory));
 	}
