@@ -247,4 +247,21 @@ class QuestionServices {
 
 		return json_encode($graph_content);
 	}
+
+	/**
+	 * Get Orientation.
+	 * @param $content
+	 * @return string
+	 */
+	public function getGraphOrientation($content){
+
+		$graph_content = json_decode($content);
+		$response = '';
+
+		if(isset($graph_content->orientation)){
+			$response = $graph_content->orientation;
+		}
+
+		return $response;
+	}
 }
