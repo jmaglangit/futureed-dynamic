@@ -30,14 +30,32 @@ class AdminQuestionGraphAnswerController extends ApiController {
 
 		$question = $this->question->getGraphQuestion($id);
 
-		$answer = $request->get('answer');
-
 		if(empty($question->toArray())){
 
 			return $this->respondErrorMessage(2120);
 		}
 
-		//if confirmed save answer else return error.
+		$answer = $request->get('answer');
+		$question_type = $request->get('question_type');
+
+		//check graph if GR
+		if($question_type == config('futureed.question_type_graph')){
+
+			$graph = $this->question_service->graphImageFileTransfer($id,$answer);
+
+			//update image content
+			$question_graph_content = $this->question_service->updateGraphContentImage($question->question_graph_content,$graph['content']);
+
+			return $this->respondWithData(
+				$this->question->updateQuestion(
+					$id,[
+						'answer'=>$graph['answer'],
+						'question_graph_content' => $question_graph_content
+					]
+				)
+			);
+		}
+
 		return $this->respondWithData($this->question->updateQuestion($id,['answer'=>$answer]));
 	}
 
