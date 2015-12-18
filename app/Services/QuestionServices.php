@@ -248,7 +248,12 @@ class QuestionServices {
 		return json_encode($graph_content);
 	}
 
-	//validate graph answer
+	/**
+	 * Validate Graph Answer.
+	 * @param $input
+	 * @param $source
+	 * @return bool
+	 */
 	public function validateGraphAnswer($input, $source){
 
 		$input = (array) json_decode($input);
@@ -276,4 +281,20 @@ class QuestionServices {
 		return (empty($input['answer'])) ? true : false;
 	}
 
+	/**
+	 * Get Orientation.
+	 * @param $content
+	 * @return string
+	 */
+	public function getGraphOrientation($content){
+
+		$graph_content = json_decode($content);
+		$response = '';
+
+		if(isset($graph_content->orientation)){
+			$response = $graph_content->orientation;
+		}
+
+		return $response;
+	}
 }
