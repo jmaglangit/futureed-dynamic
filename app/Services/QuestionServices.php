@@ -247,4 +247,33 @@ class QuestionServices {
 
 		return json_encode($graph_content);
 	}
+
+	//validate graph answer
+	public function validateGraphAnswer($input, $source){
+
+		$input = (array) json_decode($input);
+
+		$source = (array) json_decode($source);
+
+		//check input if has answer
+		if(!isset($input['answer'])){
+			return false;
+		}elseif(count($input['answer']) <> count($source['answer'])){
+			return false;
+		}
+
+		//parse source answer
+		foreach($input['answer'] as $answer){
+
+			foreach($source['answer'] as $correct){
+
+				if($answer->field == $correct->field){
+					array_shift($input['answer']);
+				}
+			}
+		}
+
+		return (empty($input['answer'])) ? true : false;
+	}
+
 }
