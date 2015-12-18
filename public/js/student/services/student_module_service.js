@@ -105,5 +105,12 @@ function StudentModuleService($http){
 		});
 	}
 
+	service.getGraph = function(question_id) {
+		return $http({
+			method 	: Constants.METHOD_GET
+			, url 	: serviceUrl + 'student/question/graph/' + question_id
+		});
+	}
+
 	return service;
 }

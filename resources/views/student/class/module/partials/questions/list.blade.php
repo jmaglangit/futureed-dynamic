@@ -55,6 +55,26 @@
 						</li>
 					</ul>
 				</div>
+
+				<div ng-if="mod.current_question.question_type == futureed.GRAPH">
+					<div ng-init="mod.getGraph(mod.current_question.id)">
+						<table class="table">
+							<tr ng-repeat="item in mod.question_graph_content.image" class="{! item.field !}">
+								<th class="origin-container" ng-init="mod.initDrag()">
+									<div class="origin {! item.field !}">
+										<img style="width:50px;" ng-src="/uploads/questions/{! mod.current_question.id !}/{! item.path !}" />
+									</div>
+								</th>
+
+								<td ng-init="mod.initDrop()" class="drop" ng-repeat="col in mod.graph_layout">
+								</td>
+							</tr>
+						</table>
+						<div class="col-xs-3 pull-right reset-graph">
+							<button class="btn btn-gold" ng-click="mod.resetGraph()">RESET</button>
+						</div>
+					</div>
+				</div>
 			</div>
 
 			<div class="questions-tips" ng-if="mod.current_question.question_type == futureed.ORDERING">

@@ -434,6 +434,22 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 			});
 
 			answer.answer_text = answer_text_array.join(",");
+		} else if(angular.equals(self.current_question.question_type, Constants.GRAPH)) {
+			var answer_graph_json = {};
+
+			angular.forEach(self.question_graph_content.image, function(value, key){
+				obj = {
+					"field" : value.field,
+					"image" : value.path,
+					"count" : $('tr.' + value.field + ' div.' + value.field).length - 1,
+					"count_objects": $('tr.' + value.field + ' div.origin').length - 1
+				};
+				answer_graph_array.push(obj);
+			});
+
+			obj = {"answer" : answer_graph_array};
+			answer_graph_json = JSON.stringify(obj);
+
 		} else {
 			answer.answer_text = self.current_question.answer_text;
 		}
@@ -720,5 +736,55 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 			self.current_question = {};
 			self.launchModule(self.record.id);
 		}
+	}
+
+	self.getGraph = function(question_id) {
+		$scope.ui_block();
+		StudentModuleService.getGraph(question_id).success(function(response) {
+
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else {
+					self.graph_layout = [];
+
+					for(i = 0; i < response.data.dimension; i++){
+						self.graph_layout.push(i+1);
+					}
+
+					self.question_graph_content = JSON.parse(response.data.question_graph_content);
+				}
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.initDrag = function (){
+		$('.origin').draggable({
+			connectToSortable: '.drop',
+			helper: 'clone',
+			cursor: "move",
+			revert: "invalid"
+		});
+	}
+
+	self.initDrop = function (){
+		$('.drop').droppable({
+			accept: '.origin',
+			drop: function(event, ui) {
+				$(this).append($(ui.draggable).clone());
+				//$("#container .product").addClass("item");
+				//$(".item").removeClass("ui-draggable product");
+				$(this).droppable('disable');
+			}
+		});
+	}
+
+	self.resetGraph = function () {
+		$('.drop').removeClass('ui-droppable-disabled ui-state-disabled').empty().droppable('enable');
 	}
 }

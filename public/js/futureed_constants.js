@@ -115,6 +115,7 @@ var Constants = {
 	, MULTIPLECHOICE 	: "MC"
 	, ORDERING 			: "O"
 	, PROVIDE 			: "N"
+	, GRAPH				: "GR"
 
 	, MSG_INTERNAL_ERROR	: "Hmm, something went wrong. Please contact the system administrator."
 	, MSG_PPW_NOT_MATCH 	: "Picture Password does not match."
