@@ -424,7 +424,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		answer.date_start = new Date();
 		answer.date_end = new Date();
 
-		var anf.current_question.question_type, Constants.ORDERING)) {
+		if(angular.equals(self.current_question.question_type, Constants.ORDERING)) {
 			answer.answer_text = self.current_question.answer_text.join(",");
 		} else if(angular.equals(self.current_question.question_type, Constants.FILLINBLANK)) {
 			var answer_text_array = [];
