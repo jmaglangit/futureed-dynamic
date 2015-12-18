@@ -171,6 +171,11 @@ class AdminQuestionController extends ApiController {
 		if(!$question){
 
 			return $this->respondErrorMessage(2120);
+		}elseif($question->question_type == config('futureed.question_type_graph')){
+
+			//get orientation and return as orientation
+			$question->orientation = $this->question_service->getGraphOrientation($question->question_graph_content);
+
 		}
 
 		return $this->respondWithData($question);
@@ -199,7 +204,8 @@ class AdminQuestionController extends ApiController {
 
 		$question = $this->question->viewQuestion($id);
 
-		$data['answer'] = $this->question_service->updateContentOrientation($question->question_graph_content,$data['orientation']);
+		//
+		$data['question_graph_content'] = $this->question_service->updateContentOrientation($question->question_graph_content,$data['orientation']);
 
 		if(!$question){
 
