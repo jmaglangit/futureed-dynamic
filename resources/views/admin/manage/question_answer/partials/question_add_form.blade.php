@@ -115,6 +115,8 @@
 								, 'FIB' => 'Fill in the Blanks'
 								, 'O' => 'Orders'
 								, 'N' => 'Provide'
+								, 'GR' => 'Graph'
+								, 'QUAD' => 'Quadrant'
 							)
 							, ''
 							, array(
@@ -126,9 +128,14 @@
 					</div>
 				</div>
 
-				<div class="form-group" ng-if="qa.record.question_type && qa.record.question_type != futureed.MULTIPLECHOICE && qa.record.question_type != futureed.ORDERING">
+				<div class="form-group"
+					 ng-if="qa.record.question_type && qa.record.question_type != futureed.MULTIPLECHOICE
+					 && qa.record.question_type != futureed.ORDERING
+					 && qa.record.question_type != futureed.GRAPH
+					 && qa.record.question_type != futureed.QUADRANT">
 					<label class="control-label col-xs-4">Answer <span class="required">*</span></label>
-					<div class="col-xs-5" >
+
+					<div class="col-xs-5">
 						{!! Form::textarea('answer',''
 							, array(
 								'placeHolder' => 'Answer'
@@ -136,6 +143,25 @@
 								, 'class' => 'form-control disabled-textarea'
 								, 'ng-class' => "{ 'required-field' : qa.fields['answer'] }"
 								, 'rows' => 3
+							)
+						) !!}
+					</div>
+				</div>
+
+				<div class="form-group" ng-if="qa.record.question_type == futureed.GRAPH">
+					<label class="control-label col-xs-4">Orientation <span class="required">*</span></label>
+					<div class="col-xs-5">
+						{!! Form::select('orientation'
+							, array(
+								'' => '-- Select Orientation --'
+								, 'vertical' => 'Vertical'
+								, 'horizontal' => 'Horizontal'
+							)
+							, ''
+							, array(
+								'class' => 'form-control'
+								, 'ng-model' => 'qa.record.orientation'
+								, 'ng-class' => "{ 'required-field' : qa.fields['orientation'] }"
 							)
 						) !!}
 					</div>
