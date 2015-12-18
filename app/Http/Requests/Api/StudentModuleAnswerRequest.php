@@ -24,7 +24,6 @@ class StudentModuleAnswerRequest extends ApiRequest
      */
     public function rules()
     {
-//		dd(is_null($this->__get('question_id')));
 
         $return = [
 			'student_module_id' => 'required|integer|exists:student_modules,id,deleted_at,NULL',
