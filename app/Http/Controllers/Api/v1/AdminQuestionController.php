@@ -191,13 +191,15 @@ class AdminQuestionController extends ApiController {
 			'questions_text',
 			'status',
 			'question_type',
-			'question_graph_content',
 			'points_earned',
 			'difficulty',
-			'seq_no'
+			'seq_no',
+			'orientation'
 		);
 
 		$question = $this->question->viewQuestion($id);
+
+		$data['answer'] = $this->question_service->updateContentOrientation($question->question_graph_content,$data['orientation']);
 
 		if(!$question){
 

@@ -144,4 +144,19 @@ class QuestionServices {
 		return json_encode($contents);
 
 	}
+
+	/**
+	 * Update Orientation.
+	 * @param $content
+	 * @param null $orientation
+	 * @return string
+	 */
+	public function updateContentOrientation($content, $orientation = NULL){
+
+		$graph_content = json_decode($content);
+
+		$graph_content->orientation = $orientation;
+
+		return json_encode($graph_content);
+	}
 }
