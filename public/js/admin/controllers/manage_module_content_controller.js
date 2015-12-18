@@ -242,7 +242,7 @@ function ManageModuleContentController($scope, ManageModuleContentService, Table
 		self.success = Constants.FALSE;
 		self.fields = [];
 
-		self.record.image = (self.record.image) ? self.record.image : null; 
+		self.record.image = (self.record.image) ? self.record.image : null;
 
 		$scope.ui_block();
 		ManageModuleContentService.add(self.record).success(function(response) {
