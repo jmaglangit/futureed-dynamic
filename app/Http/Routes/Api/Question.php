@@ -10,6 +10,10 @@ Routes::post('question/answer/upload-image/',[
 	'as' => 'api.v1.admin.answer.image.upload',
 	'uses' => 'Api\v1\QuestionAnswerController@uploadQuestionAnswerImage']);
 
+Routes::post('question/answer-graph/upload-image/',[
+	'as' => 'api.v1.admin.answer-graph.image.upload',
+	'uses' => 'Api\v1\QuestionController@uploadQuestionImage']);
+
 
 Routes::group([
 	'prefix' => '/question',

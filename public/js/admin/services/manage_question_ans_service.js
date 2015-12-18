@@ -56,6 +56,14 @@ function ManageQuestionAnsService($http) {
         });
     }
 
+    api.addAnswerGraph = function(question_id, data) {
+        return $http({
+           method  : Constants.METHOD_POST
+            , data  : data
+            , url   : apiUrl + 'question/graph-answer/admin/' + question_id 
+        });
+    }
+
     api.listAnswer = function(question_id) {
         return $http({
             method  : Constants.METHOD_GET

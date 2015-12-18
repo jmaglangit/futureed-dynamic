@@ -279,3 +279,107 @@
         </div>
     </div>
 </div>
+
+<div ng-if="qa.record.question_type == futureed.GRAPH" ng-init="qa.setAnsActive()">
+    <div class="col-xs-12 search-container">
+        {!! Form::open(array('class' => 'form-horizontal')) !!}
+        <div class="form-search">
+            <div class="form-group">
+                <label class="col-xs-4 control-label">Field<span class="required">*</span></label>
+
+                <div class="col-xs-5">
+                    {!! Form::text('code',''
+                        , array(
+                            'placeHolder' => 'Field Name'
+                            , 'ng-model' => 'qa.answers.record.field'
+                            , 'ng-disabled' => 'qa.active_ansedit'
+                            , 'class' => 'form-control'
+                            , 'ng-class' => "{ 'required-field' : qa.fields['code_ans'] }"
+                        )
+                    ) !!}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-xs-4 control-label">Count <span class="required">*</span></label>
+
+                <div class="col-xs-5">
+                    {!! Form::text('answer_text',''
+                        , array(
+                            'placeHolder' => 'Count'
+                            , 'ng-model' => 'qa.answers.record.count'
+                            , 'class' => 'form-control'
+                            , 'ng-class' => "{ 'required-field' : qa.fields['answer_text_ans'] }"
+                        )
+                    ) !!}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-xs-4">Answer Image</label>
+
+                <div class="col-xs-5">
+                    <div class="btn btn-blue" ngf-select ngf-change="qa.uploadGraphImage($files, qa.answers.record)"> Choose
+                        Image...
+                    </div>
+                </div>
+
+                <div class="margin-top-8" ng-if="qa.answers.record.uploaded">
+                    <a href="" ng-click="qa.removeImage(qa.answers.record)"><i class="fa fa-trash"></i></a>
+                </div>
+            </div>
+
+            <div class="form-group" ng-if="qa.answers.record.uploaded">
+                <div class="col-xs-4"></div>
+                <div class="col-xs-5">
+                    <span class="col-xs-6 upload-label label label-info">Image Uploaded...</span>
+                    <a href="" class="control-label col-xs-6" ng-click="qa.viewAnswerImage(qa.answers.record)">View
+                        Image</a>
+                </div>
+            </div>
+
+            <div class="form-group"
+                 ng-if="qa.active_view
+                 && !qa.answers.record.uploaded
+                 && qa.answers.record.original_image_name
+                 && qa.answers.record.original_image_name != '0'">
+                <div class="control-label col-xs-4"></div>
+                <div class="col-xs-5">
+                    <a href="" ng-click="qa.viewAnswerImage(qa.answers.record)">View Image</a>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="btn-container col-xs-10 col-xs-offset-1" ng-if="qa.active_anslist">
+                    {!! Form::button('Add'
+                        , array(
+                            'class' => 'btn btn-blue btn-medium'
+                            , 'ng-click' => 'qa.addAnswer()'
+                        )
+                    ) !!}
+                    {!! Form::button('Clear'
+                        , array(
+                            'class' => 'btn btn-gold btn-medium'
+                            , 'ng-click' => 'qa.clearAnswer()'
+                        )
+                    ) !!}
+                </div>
+                <div class="btn-container col-xs-10 col-xs-offset-1" ng-if="qa.active_ansedit">
+                    {!! Form::button('Update'
+                        , array(
+                            'class' => 'btn btn-blue btn-medium'
+                            , 'ng-click' => 'qa.updateAnswer()'
+                        )
+                    ) !!}
+                    {!! Form::button('Cancel'
+                        , array(
+                            'class' => 'btn btn-gold btn-medium'
+                            , 'ng-click' => 'qa.setAnsActive()'
+                        )
+                    ) !!}
+                </div>
+            </div>
+        </div>
+        {!! Form::close() !!}
+    </div>
+</div>

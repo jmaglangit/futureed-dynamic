@@ -72,6 +72,33 @@ function ManageQuestionAnsController($scope, ManageQuestionAnsService, TableServ
 		}
 	}
 
+	self.uploadGraphImage = function(file, object) {
+		object.uploaded = Constants.FALSE;
+
+		if(file.length) {
+			$scope.ui_block();
+			Upload.upload({
+				url: '/api/v1/question/answer-graph/upload-image'
+				, file: file[0]
+			}).success(function(response) {
+				if(angular.equals(response.status, Constants.STATUS_OK)) {
+					if(response.errors) {
+						self.errors = $scope.errorHandler(response.errors);
+					}else if(response.data){
+						object.answer_image = "/uploads/temp/question/" + response.data.image_name;
+						object.image = response.data.image_name;
+						object.uploaded = Constants.TRUE;
+					}
+				}
+
+				$scope.ui_unblock();
+			}).error(function(response) {
+				self.errors = $scope.internalError();
+				$scope.ui_unblock();
+			});
+		}
+	}
+
 	self.setActive = function(active, id) {
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
@@ -341,7 +368,7 @@ function ManageQuestionAnsController($scope, ManageQuestionAnsService, TableServ
 				self.active_ansedit = Constants.TRUE;
 				self.answerDetails(id);
 				break;
-
+ 
 			default:
 				self.active_anslist = Constants.TRUE;
 				self.listAnswer();
@@ -358,29 +385,76 @@ function ManageQuestionAnsController($scope, ManageQuestionAnsService, TableServ
 		self.answers.success = Constants.FALSE;
 		self.fields = [];
 		
-		self.answers.record.module_id = self.module.id;
-		self.answers.record.question_id = self.record.id;
+		switch(self.record.question_type) {
+			case Constants.GRAPH:
+				object = JSON.parse(self.record.answer);
+				new_answer = [];
 
-		$scope.ui_block();
-		ManageQuestionAnsService.addAnswer(self.answers.record).success(function(response){
-			if(angular.equals(response.status, Constants.STATUS_OK)) {
-				if(response.errors) {
-					self.answers.errors = $scope.errorHandler(response.errors, Constants.TRUE);
-
-					angular.forEach(response.errors, function(value, a) {
-						self.fields[value.field + '_ans'] = Constants.TRUE;
-					});
-
-				} else if(response.data) {
-					self.setAnsActive();
-					self.answers.success = Constants.MSG_CREATED("Answer");
+				obj = {
+					"field" : self.answers.record.field
+					, "count" : parseInt(self.answers.record.count)
+					, "count_objects" : parseInt(self.answers.record.count)
+					, "image" : self.answers.record.answer_image
 				}
-			}
-		$scope.ui_unblock();
-		}).error(function(response){
-			self.errors = $scope.internalError();
-			$scope.ui_unblock();
-		})
+
+				new_answer.push(obj);
+				object.answer = new_answer;
+				console.log(JSON.stringify(object));
+				data = {"question_type" : self.record.question_type, "answer" : JSON.stringify(object)};
+
+				ManageQuestionAnsService.addAnswerGraph(self.record.id, data).success(function(response){
+					if(angular.equals(response.status, Constants.STATUS_OK)) {
+						if(response.errors) {
+							self.answers.errors = $scope.errorHandler(response.errors, Constants.TRUE);
+
+							angular.forEach(response.errors, function(value, a) {
+								self.fields[value.field + '_ans'] = Constants.TRUE;
+							});
+
+						} else if(response.data) {
+							console.log(response.data);
+							// self.setAnsActive();
+							// self.answers.success = Constants.MSG_CREATED("Answer");
+						}
+					}
+				$scope.ui_unblock();
+				}).error(function(response){
+					self.errors = $scope.internalError();
+					$scope.ui_unblock();
+				})
+
+				break;
+
+			default:
+				self.answers.record.module_id = self.module.id;
+				self.answers.record.question_id = self.record.id;
+
+				$scope.ui_block();
+				ManageQuestionAnsService.addAnswer(self.answers.record).success(function(response){
+					if(angular.equals(response.status, Constants.STATUS_OK)) {
+						if(response.errors) {
+							self.answers.errors = $scope.errorHandler(response.errors, Constants.TRUE);
+
+							angular.forEach(response.errors, function(value, a) {
+								self.fields[value.field + '_ans'] = Constants.TRUE;
+							});
+
+						} else if(response.data) {
+							self.setAnsActive();
+							self.answers.success = Constants.MSG_CREATED("Answer");
+						}
+					}
+				$scope.ui_unblock();
+				}).error(function(response){
+					self.errors = $scope.internalError();
+					$scope.ui_unblock();
+				})
+
+				break;
+		}
+
+
+		
 	}
 
 	self.listAnswer = function() {
