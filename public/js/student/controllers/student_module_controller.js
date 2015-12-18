@@ -424,7 +424,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		answer.date_start = new Date();
 		answer.date_end = new Date();
 
-		if(angular.equals(self.current_question.question_type, Constants.ORDERING)) {
+		var anf.current_question.question_type, Constants.ORDERING)) {
 			answer.answer_text = self.current_question.answer_text.join(",");
 		} else if(angular.equals(self.current_question.question_type, Constants.FILLINBLANK)) {
 			var answer_text_array = [];
@@ -435,8 +435,6 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 			answer.answer_text = answer_text_array.join(",");
 		} else if(angular.equals(self.current_question.question_type, Constants.GRAPH)) {
-			var answer_graph_json = {};
-
 			angular.forEach(self.question_graph_content.image, function(value, key){
 				obj = {
 					"field" : value.field,
@@ -448,7 +446,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 			});
 
 			obj = {"answer" : answer_graph_array};
-			answer_graph_json = JSON.stringify(obj);
+			answer.answer_text = JSON.stringify(obj);
 
 		} else {
 			answer.answer_text = self.current_question.answer_text;
