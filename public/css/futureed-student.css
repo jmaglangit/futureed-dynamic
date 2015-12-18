@@ -1813,3 +1813,21 @@ top: 41px;
 	-webkit-filter: grayscale(1);
 	filter: grayscale(1);
 }
+
+/*graph*/
+.origin-container {
+	border:none !important;
+	width: 50px;
+}
+
+.drop{
+	border:1px solid #ddd;
+	height:50px;
+	width: 50px;
+	padding:0 !important;
+}
+
+.reset-graph{
+	padding:0px;
+	margin-top:20px;
+}
