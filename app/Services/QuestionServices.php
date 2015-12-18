@@ -176,45 +176,45 @@ class QuestionServices {
 	 * @param $answers
 	 * @return array
 	 */
-	public function graphImageFileTransfer($id,$answers){
+	public function graphImageFileTransfer($id,$answers) {
 
 		$graph_answer = json_decode($answers);
 		$image_seq = 1;
 		$graph_content = [];
 
-		foreach($graph_answer->answer as $answer){
+		foreach ($graph_answer->answer as $answer) {
 
 			$image_content = new \stdClass();
 
 			//check image if it is in temp location
-			$path_check = strstr(base_path().'/public'.$answer->image, config('futureed.question_image_path'));
-			$temp_file = base_path().'/public'.$answer->image;
+			$path_check = strstr(base_path() . '/public' . $answer->image, config('futureed.question_image_path'));
+			$temp_file = base_path() . '/public' . $answer->image;
 
-			if($path_check){
+			if ($path_check) {
 
 				//get file extension.
-				$file = explode('.',$answer->image);
+				$file = explode('.', $answer->image);
 
 				//generate filename
-				$filename = str_replace(' ','-',$answer->field.'.'.$file[1]);
+				$filename = str_replace(' ', '-', $answer->field . '.' . $file[1]);
 
 				//local destination file
-				$destination = config('futureed.question_image_path_final').'/'.$id.'/'.$filename;
+				$destination = config('futureed.question_image_path_final') . '/' . $id . '/' . $filename;
 
 				//app destination file.
-				$app_path = config('futureed.question_image_path_final_public').'/'.$id.'/'.$filename;
+				$app_path = config('futureed.question_image_path_final_public') . '/' . $id . '/' . $filename;
 
 				//check if file exists.
-				if($this->file->exists($destination)){
+				if ($this->file->exists($destination)) {
 
 					//delete file
 					$this->file->delete($destination);
 				}
 
 				//copy files from temp to destination question folder.
-				if($this->file->copy($temp_file,$destination)){
+				if ($this->file->copy($temp_file, $destination)) {
 
-					 $answer->image = $app_path;
+					$answer->image = $app_path;
 				}
 			}
 
@@ -223,7 +223,7 @@ class QuestionServices {
 			$image_content->path = $answer->image;
 			$image_content->seq_no = $image_seq++;
 
-			array_push($graph_content,$image_content);
+			array_push($graph_content, $image_content);
 
 		}
 
@@ -231,5 +231,20 @@ class QuestionServices {
 			'answer' => json_encode($graph_answer),
 			'content' => $graph_content
 		];
+	}
+
+	/**
+	 * Update Orientation.
+	 * @param $content
+	 * @param null $orientation
+	 * @return string
+	 */
+	public function updateContentOrientation($content, $orientation = NULL){
+
+		$graph_content = json_decode($content);
+
+		$graph_content->orientation = $orientation;
+
+		return json_encode($graph_content);
 	}
 }
