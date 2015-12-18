@@ -2,6 +2,7 @@
 
 
 use FutureEd\Models\Repository\Question\QuestionRepositoryInterface;
+use Illuminate\Filesystem\Filesystem;
 
 class QuestionServices {
 
@@ -12,13 +13,21 @@ class QuestionServices {
 	protected $question;
 
 	/**
+	 * Initialized file.
+	 * @var
+	 */
+	protected $file;
+
+	/**
 	 * Initialized
 	 * @param QuestionRepositoryInterface $questionRepositoryInterface
 	 */
 	public function __construct(
-		QuestionRepositoryInterface $questionRepositoryInterface
+		QuestionRepositoryInterface $questionRepositoryInterface,
+		Filesystem $filesystem
 	){
 		$this->question = $questionRepositoryInterface;
+		$this->file = $filesystem;
 
 	}
 
@@ -143,6 +152,85 @@ class QuestionServices {
 
 		return json_encode($contents);
 
+	}
+
+	/**
+	 * Update Graph Image Content.
+	 * @param $content
+	 * @param array $images
+	 * @return string
+	 */
+	public function updateGraphContentImage($content, $images = []){
+
+		$graph_content = json_decode($content);
+
+		$graph_content->image = $images;
+
+		return json_encode($graph_content);
+
+	}
+
+	/**
+	 * Transfer graph image files.
+	 * @param $id
+	 * @param $answers
+	 * @return array
+	 */
+	public function graphImageFileTransfer($id,$answers) {
+
+		$graph_answer = json_decode($answers);
+		$image_seq = 1;
+		$graph_content = [];
+
+		foreach ($graph_answer->answer as $answer) {
+
+			$image_content = new \stdClass();
+
+			//check image if it is in temp location
+			$path_check = strstr(base_path() . '/public' . $answer->image, config('futureed.question_image_path'));
+			$temp_file = base_path() . '/public' . $answer->image;
+
+			if ($path_check) {
+
+				//get file extension.
+				$file = explode('.', $answer->image);
+
+				//generate filename
+				$filename = str_replace(' ', '-', $answer->field . '.' . $file[1]);
+
+				//local destination file
+				$destination = config('futureed.question_image_path_final') . '/' . $id . '/' . $filename;
+
+				//app destination file.
+				$app_path = config('futureed.question_image_path_final_public') . '/' . $id . '/' . $filename;
+
+				//check if file exists.
+				if ($this->file->exists($destination)) {
+
+					//delete file
+					$this->file->delete($destination);
+				}
+
+				//copy files from temp to destination question folder.
+				if ($this->file->copy($temp_file, $destination)) {
+
+					$answer->image = $app_path;
+				}
+			}
+
+			//content image
+			$image_content->field = $answer->field;
+			$image_content->path = $answer->image;
+			$image_content->seq_no = $image_seq++;
+
+			array_push($graph_content, $image_content);
+
+		}
+
+		return [
+			'answer' => json_encode($graph_answer),
+			'content' => $graph_content
+		];
 	}
 
 	/**
