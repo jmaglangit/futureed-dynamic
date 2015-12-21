@@ -71,6 +71,13 @@ function ManageQuestionAnsService($http) {
         });
     }
 
+    api.listGraphAnswer = function(question_id) {
+        return $http({
+            method  : Constants.METHOD_GET
+            , url   : apiUrl + 'question/graph-answer/admin/' + question_id
+        });
+    }
+
     api.deleteAnswer = function(id) {
         return $http({
             method  : Constants.METHOD_DELETE

@@ -34,7 +34,10 @@ Routes::group([
 		'uses' => 'Api\v1\AdminQuestionGraphAnswerController@updateGraphAnswer'
 	]);
 
-
+	Routes::get('/graph-answer/admin/{question_id}',[
+		'as' => 'api.v1.question.graph-answer.getanswer',
+		'uses' => 'Api\v1\AdminQuestionGraphAnswerController@getGraphAnswer'
+	]);
 
 });
 
