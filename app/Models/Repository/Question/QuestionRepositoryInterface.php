@@ -81,4 +81,6 @@ interface QuestionRepositoryInterface {
 
 	public function getGraphQuestion($id);
 
+	public function getGraphQuestionByType($id, $question_type);
+
 }
