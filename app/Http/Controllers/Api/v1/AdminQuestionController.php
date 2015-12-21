@@ -94,9 +94,9 @@ class AdminQuestionController extends ApiController {
 		);
 
 
-		//Graph
+		//Graph and Quadrant.
 		if($data['question_type'] == config('futureed.question_type_graph')
-			|| $data['question_type'] == config('futureed.question_type_graph')){
+			|| $data['question_type'] == config('futureed.question_type_quad')){
 
 			//generate graph answers json format
 			$data['answer'] = $this->question_service->getGraphAnswerJson();
@@ -171,6 +171,7 @@ class AdminQuestionController extends ApiController {
 		if(!$question){
 
 			return $this->respondErrorMessage(2120);
+
 		}elseif($question->question_type == config('futureed.question_type_graph')){
 
 			//get orientation and return as orientation
@@ -204,7 +205,14 @@ class AdminQuestionController extends ApiController {
 
 		$question = $this->question->viewQuestion($id);
 
-		//
+		//disable answer if Graph and quadrant
+		if($data['question_type'] == config('futureed.question_type_graph')
+			|| $data['question_type'] == config('futureed.question_type_quad')
+		){
+
+			unset($data['answer']);
+		}
+
 		$data['question_graph_content'] = $this->question_service->updateContentOrientation($question->question_graph_content,$data['orientation']);
 
 		if(!$question){
@@ -240,7 +248,7 @@ class AdminQuestionController extends ApiController {
 
 			//pull sequence number.
 			$pulled = $this->question_service->pullSequenceNo($current_sequence[0]->module_id, $current_sequence[0]->seq_no,$id,$data['difficulty']);
-			
+
 			//update sequence
 			$this->question->updateSequence($pulled);
 
