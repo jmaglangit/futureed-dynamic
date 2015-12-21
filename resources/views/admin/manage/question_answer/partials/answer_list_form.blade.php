@@ -303,7 +303,6 @@
                         , array(
                             'placeHolder' => 'Field Name'
                             , 'ng-model' => 'qa.answers.record.field'
-                            , 'ng-disabled' => 'qa.active_ansedit'
                             , 'class' => 'form-control'
                             , 'ng-class' => "{ 'required-field' : qa.fields['code_ans'] }"
                         )
@@ -430,12 +429,12 @@
                 <tbody>
                 <tr ng-repeat="record in qa.answers.records.answer">
                     <td>{! record.field !}</td>
-                    <td>{! record.image !}</td>
+                    <td><a href="" ng-click="qa.viewAnswerImage(record.image)">View Image</a></td>
                     <td>{! record.count !}</td>
                     <td ng-if="qa.answers.records.answer.length">
                         <div class="row">
                             <div class="col-xs-6">
-                                <a href="" ng-click="qa.setAnsActive(futureed.ACTIVE_EDIT, record.id)"><span><i
+                                <a href="" ng-click="qa.setAnsActive(futureed.ACTIVE_EDIT, $index)"><span><i
                                                 class="fa fa-pencil"></i></span></a>
                             </div>
                             <div class="col-xs-6">

@@ -415,7 +415,7 @@ function ManageQuestionAnsController($scope, ManageQuestionAnsService, TableServ
 							self.answers.success = Constants.MSG_CREATED("Answer");
 						}
 					}
-				$scope.ui_unblock();
+					$scope.ui_unblock();
 
 				}).error(function(response){
 					self.errors = $scope.internalError();
@@ -443,7 +443,7 @@ function ManageQuestionAnsController($scope, ManageQuestionAnsService, TableServ
 							self.answers.success = Constants.MSG_CREATED("Answer");
 						}
 					}
-				$scope.ui_unblock();
+					$scope.ui_unblock();
 				}).error(function(response){
 					self.errors = $scope.internalError();
 					$scope.ui_unblock();
@@ -548,21 +548,46 @@ function ManageQuestionAnsController($scope, ManageQuestionAnsService, TableServ
 		self.answers.errors = Constants.FALSE;
 		self.fields = [];
 
-		$scope.ui_block();
-		ManageQuestionAnsService.answerDetails(id).success(function(response){
-			if(angular.equals(response.status,Constants.STATUS_OK)){
-				if(response.errors) {
-					self.answers.errors = $scope.errorHandler(response.errors);
-				} else if(response.data) {
-					self.answers.record = response.data;
-				}
-			}
+		switch(self.record.question_type) {
+			case Constants.GRAPH:
+				$scope.ui_block();
+					ManageQuestionAnsService.listGraphAnswer(self.record.id).success(function(response) {
+						if(angular.equals(response.status,Constants.STATUS_OK)){
+							if(response.errors) {
+								self.answers.errors = $scope.errorHandler(response.errors);
+							} else if(response.data) {
+								self.answers.record = JSON.parse(response.data).answer[id];
+								self.answers.update_records = JSON.parse(response.data);
+								self.answers.update_index = id;
+							}
+						}
 
-			$scope.ui_unblock();
-		}).error(function(response) {
-			self.answers.errors = $scope.internalError();
-			$scope.ui_unblock();
-		});
+						$scope.ui_unblock();
+					}).error(function(response) {
+						self.answers.errors = $scope.internalError();
+						$scope.ui_unblock();
+					});
+
+				break;
+
+			default:
+				$scope.ui_block();
+					ManageQuestionAnsService.answerDetails(id).success(function(response){
+						if(angular.equals(response.status,Constants.STATUS_OK)){
+							if(response.errors) {
+								self.answers.errors = $scope.errorHandler(response.errors);
+							} else if(response.data) {
+								self.answers.record = response.data;
+							}
+						}
+
+						$scope.ui_unblock();
+					}).error(function(response) {
+						self.answers.errors = $scope.internalError();
+						$scope.ui_unblock();
+					});
+				break;
+		}
 	}
 
 	self.updateAnswer = function(){
@@ -571,25 +596,63 @@ function ManageQuestionAnsController($scope, ManageQuestionAnsService, TableServ
 
 		self.fields = [];
 
-		$scope.ui_block();
-		ManageQuestionAnsService.updateAnswer(self.answers.record).success(function(response){
-			if(angular.equals(response.status, Constants.STATUS_OK)) {
-				if(response.errors) {
-					self.answers.errors = $scope.errorHandler(response.errors, Constants.TRUE);
+		switch(self.record.question_type) {
+			case Constants.GRAPH:
+					obj = {
+						"field" : self.answers.record.field
+						, "count" : parseInt(self.answers.record.count)
+						, "count_objects" : parseInt(self.answers.record.count)
+						, "image" : self.answers.record.uploaded == Constants.TRUE ? self.answers.record.answer_image : self.answers.record.image
+					}
 
-					angular.forEach(response.errors, function(value, a) {
-						self.fields[value.field + '_ans'] = Constants.TRUE;
-					});
-				} else if(response.data) {
-					self.setAnsActive(Constants.ACTIVE_LIST);
-					self.answers.success = Constants.MSG_UPDATED("Answer");
-				}
-			}
-			
-			$scope.ui_unblock();
-		}).error(function(response){
-			self.answers.errors = $scope.internalError();
-			$scope.ui_unblock();
-		})
+					self.answers.update_records.answer[self.answers.update_index] = obj;
+
+					data = {"question_type" : self.record.question_type, "answer" : JSON.stringify(self.answers.update_records)};
+
+					ManageQuestionAnsService.updateGraphAnswer(self.record.id, data).success(function(response){
+						if(angular.equals(response.status, Constants.STATUS_OK)) {
+							if(response.errors) {
+								self.answers.errors = $scope.errorHandler(response.errors, Constants.TRUE);
+
+								angular.forEach(response.errors, function(value, a) {
+									self.fields[value.field + '_ans'] = Constants.TRUE;
+								});
+
+							} else if(response.data) {
+								self.setAnsActive(Constants.ACTIVE_LIST);
+								self.answers.success = Constants.MSG_UPDATED("Answer");
+							}
+						}
+						$scope.ui_unblock();
+
+					}).error(function(response){
+						self.errors = $scope.internalError();
+						$scope.ui_unblock();
+					})
+				break;
+
+			default:
+				$scope.ui_block();
+					ManageQuestionAnsService.updateAnswer(self.answers.record).success(function(response){
+						if(angular.equals(response.status, Constants.STATUS_OK)) {
+							if(response.errors) {
+								self.answers.errors = $scope.errorHandler(response.errors, Constants.TRUE);
+
+								angular.forEach(response.errors, function(value, a) {
+									self.fields[value.field + '_ans'] = Constants.TRUE;
+								});
+							} else if(response.data) {
+								self.setAnsActive(Constants.ACTIVE_LIST);
+								self.answers.success = Constants.MSG_UPDATED("Answer");
+							}
+						}
+
+						$scope.ui_unblock();
+					}).error(function(response){
+						self.answers.errors = $scope.internalError();
+						$scope.ui_unblock();
+					})
+				break;
+		}
 	}
 }
