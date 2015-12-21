@@ -137,6 +137,8 @@ class ClientImportController extends ApiController {
 
 					$client['user_id'] = $user_data['id'];
 
+					$client['client_role'] = config('futureed.teacher');
+
 					$client_data = $this->client_services->addClient($client);
 
 					if(isset($client_data['status'])){
