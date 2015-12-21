@@ -96,6 +96,12 @@ class ValidationServices extends Validator{
 							'y' => 'required|integer'
 						];
 
+						//check if x and y is set.
+						if(!isset($answer->x) || !isset($answer->y)){
+
+							return false;
+						}
+
 						$data = [
 							'x' => $answer->x,
 							'y' => $answer->y

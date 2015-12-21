@@ -28,9 +28,9 @@ class AdminQuestionGraphAnswerController extends ApiController {
 	 */
 	public function updateGraphAnswer($id,AdminQuestionGraphAnswerRequest $request){
 
-		$question = $this->question->getGraphQuestion($id);
+		$question = $this->question->getGraphQuestionByType($id, $request->get('question_type'));
 
-		if(empty($question->toArray())){
+		if($question == NULL){
 
 			return $this->respondErrorMessage(2120);
 		}

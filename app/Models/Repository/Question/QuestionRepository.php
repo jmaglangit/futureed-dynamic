@@ -358,5 +358,16 @@ class QuestionRepository implements QuestionRepositoryInterface{
 		return Question::id($id)->questionType($question_types)->first();
 	}
 
+	/**
+	 * Get Graph by Question Type.
+	 * @param $id
+	 * @param $question_type
+	 * @return mixed
+	 */
+	public function getGraphQuestionByType($id, $question_type){
+
+		return Question::id($id)->questionType($question_type)->first();
+	}
+
 
 }
