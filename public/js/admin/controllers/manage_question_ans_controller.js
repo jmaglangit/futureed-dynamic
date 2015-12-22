@@ -389,8 +389,7 @@ function ManageQuestionAnsController($scope, ManageQuestionAnsService, TableServ
 
 		switch(self.record.question_type) {
 			case Constants.GRAPH:
-				answer_array = JSON.parse(self.record.answer);
-				answer_array = self.answers.records;
+				answer_array = self.answers.graph_records;
 
 				obj = {
 					"field" : self.answers.record.field
@@ -401,31 +400,29 @@ function ManageQuestionAnsController($scope, ManageQuestionAnsService, TableServ
 
 				answer_array.answer.push(obj);
 
-				console.log(answer_array);
-
 				data = {"question_type" : self.record.question_type, "answer" : JSON.stringify(answer_array)};
 
-				// ManageQuestionAnsService.addAnswerGraph(self.record.id, data).success(function(response){
-				// 	if(angular.equals(response.status, Constants.STATUS_OK)) {
-				// 		if(response.errors) {
-				// 			self.answers.errors = $scope.errorHandler(response.errors, Constants.TRUE);
+				ManageQuestionAnsService.addAnswerGraph(self.record.id, data).success(function(response){
+					if(angular.equals(response.status, Constants.STATUS_OK)) {
+						if(response.errors) {
+							self.answers.errors = $scope.errorHandler(response.errors, Constants.TRUE);
 
-				// 			angular.forEach(response.errors, function(value, a) {
-				// 				self.fields[value.field + '_ans'] = Constants.TRUE;
-				// 			});
+							angular.forEach(response.errors, function(value, a) {
+								self.fields[value.field + '_ans'] = Constants.TRUE;
+							});
 
-				// 		} else if(response.data) {
-				// 			self.listAnswer();
-				// 			self.setAnsActive();
-				// 			self.answers.success = Constants.MSG_CREATED("Answer");
-				// 		}
-				// 	}
-				// 	$scope.ui_unblock();
+						} else if(response.data) {
+							self.listAnswer();
+							self.setAnsActive();
+							self.answers.success = Constants.MSG_CREATED("Answer");
+						}
+					}
+					$scope.ui_unblock();
 
-				// }).error(function(response){
-				// 	self.errors = $scope.internalError();
-				// 	$scope.ui_unblock();
-				// })
+				}).error(function(response){
+					self.errors = $scope.internalError();
+					$scope.ui_unblock();
+				})
 
 				break;
 
@@ -479,7 +476,7 @@ function ManageQuestionAnsController($scope, ManageQuestionAnsService, TableServ
 								self.answers.errors = $scope.errorHandler(response.errors);
 							}else if(response.data){
 								self.answers.records = JSON.parse(response.data);
-								self.answers.graph_records = JSON.parse(response.data);
+								self.answers.graph_records = angular.fromJson(response.data);
 								self.updatePageCount(response.data);
 							}
 						}
