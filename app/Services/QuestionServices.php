@@ -131,7 +131,7 @@ class QuestionServices {
 
 		$answers = new \stdClass();
 
-		$answers->answers = $answer;
+		$answers->answer = $answer;
 
 		return json_encode($answers);
 	}
