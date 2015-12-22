@@ -246,38 +246,6 @@
             </div>
         </div>
     </div>
-
-    <div id="delete_answer_modal" ng-show="qa.delete.ans_confirm" class="modal fade" tabindex="-1" role="dialog"
-         aria-labelledby="myLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    Delete Answer
-                </div>
-                <div class="modal-body">
-                    Are you sure you want to delete this Answer?
-                </div>
-                <div class="modal-footer">
-                    <div class="btncon col-md-8 col-md-offset-4 pull-left">
-                        {!! Form::button('Yes'
-                            , array(
-                                'class' => 'btn btn-blue btn-medium'
-                                , 'ng-click' => 'qa.deleteAnswer()'
-                                , 'data-dismiss' => 'modal'
-                            )
-                        ) !!}
-
-                        {!! Form::button('No'
-                            , array(
-                                'class' => 'btn btn-gold btn-medium'
-                                , 'data-dismiss' => 'modal'
-                            )
-                        ) !!}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 </div>
 
 <div ng-if="qa.record.question_type == futureed.GRAPH" ng-init="qa.setAnsActive()">
@@ -438,7 +406,7 @@
                                                 class="fa fa-pencil"></i></span></a>
                             </div>
                             <div class="col-xs-6">
-                                <a href="" ng-click="qa.confirmAnsDelete(record.id)"><span><i
+                                <a href="" ng-click="qa.confirmAnsDelete($index)"><span><i
                                                 class="fa fa-trash"></i></span></a>
                             </div>
                         </div>
@@ -469,6 +437,39 @@
                         boundary-links="true"
                         ng-change="qa.paginateByPage()">
                 </pagination>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div id="delete_answer_modal" ng-show="qa.delete.ans_confirm" class="modal fade" tabindex="-1" role="dialog"
+     aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                Delete Answer
+            </div>
+            <div class="modal-body">
+                Are you sure you want to delete this Answer?
+            </div>
+            <div class="modal-footer">
+                <div class="btncon col-md-8 col-md-offset-4 pull-left">
+                    {!! Form::button('Yes'
+                        , array(
+                            'class' => 'btn btn-blue btn-medium'
+                            , 'ng-click' => 'qa.deleteAnswer()'
+                            , 'data-dismiss' => 'modal'
+                        )
+                    ) !!}
+
+                    {!! Form::button('No'
+                        , array(
+                            'class' => 'btn btn-gold btn-medium'
+                            , 'data-dismiss' => 'modal'
+                        )
+                    ) !!}
+                </div>
             </div>
         </div>
     </div>
