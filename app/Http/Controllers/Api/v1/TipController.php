@@ -6,6 +6,7 @@ use FutureEd\Http\Requests\Api\TipRequest;
 use FutureEd\Models\Repository\Tip\TipRepositoryInterface;
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use FutureEd\Models\Repository\StudentPoint\StudentPointRepositoryInterface;
+use FutureEd\Services\RatingService;
 use Illuminate\Support\Facades\Input;
 
 use Illuminate\Http\Request;
@@ -15,14 +16,17 @@ class TipController extends ApiController {
 	protected $tip;
 	protected $student;
 	protected $student_points;
+	protected $rating_service;
 
 	public function __construct(TipRepositoryInterface $tip
 		,StudentRepositoryInterface $student
-		,StudentPointRepositoryInterface $student_point){
+		,StudentPointRepositoryInterface $student_point
+		,RatingService $rating_service){
 
 		$this->tip = $tip;
 		$this->student = $student;
 		$this->student_point = $student_point;
+		$this->rating_service = $rating_service;
 	}
 
 
@@ -35,9 +39,7 @@ class TipController extends ApiController {
 	 */
 	public function updateTipStatus($id, TipRequest $request)
 	{
-		//$data = $request->only('tip_status','rated_by','rating');
-
-		$data = $request->all();
+		$data = $request->only('tip_status','rated_by','rating');
 
 		//view tip details
 		$tip = $this->tip->viewTip($id);
@@ -53,10 +55,10 @@ class TipController extends ApiController {
 		}
 
 		//create variables needed for add student points
-		$data['points_earned'] = $this->getPointsEquivalent($data['rating']);
+		$data['points_earned'] = $this->rating_service->getPointsEquivalent($data['rating']);
 		$data['student_id'] = $tip['student_id'];
-		$data['event_id'] = config('futureed.student_point_description_tip_code');
-		$data['description'] = config('futureed.student_point_description_tip_desc');
+		$data['event_id'] = config('futureed.student_point_description_code_tip');
+		$data['description'] = config('futureed.student_point_description_tip');
 
 		//add row to student_points table
 		$student_point = $this->student_point->addStudentPoint($data);
@@ -72,34 +74,6 @@ class TipController extends ApiController {
 
 		return $this->respondWithData($this->tip->viewTip($id));
 
-	}
-
-	private function getPointsEquivalent($rating){
-		switch ($rating) {
-			case 1:
-				return 4;
-				break;
-
-			case 2:
-				return 8;
-				break;
-
-			case 3:
-				return 12;
-				break;
-
-			case 4:
-				return 16;
-				break;
-
-			case 5:
-				return 20;
-				break;
-
-			default:
-				return 0;
-				break;
-		}
 	}
 
 	/**

@@ -205,11 +205,13 @@ return [
 
 	//student points code
 	'student_point_description_code' => 1,
-	'student_point_description_tip_code' => 3,
+	'student_point_description_code_tip' => 3,
+	'student_point_description_code_help' => 4,
 
 	//student points description
 	'student_point_description' => 'Completion of Module',
-	'student_point_description_tip_desc' => 'Contribute a Tip',
+	'student_point_description_tip' => 'Contribute a Tip',
+	'student_point_description_help' => 'Contribute an Answer',
 
 	//student progress
 	'student_progress' => 100,

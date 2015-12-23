@@ -16,4 +16,32 @@ class RatingService {
         }
         return $calculated_rating;
     }
+
+    public function getPointsEquivalent($rating){
+        switch ($rating) {
+            case 1:
+                return 4;
+                break;
+
+            case 2:
+                return 8;
+                break;
+
+            case 3:
+                return 12;
+                break;
+
+            case 4:
+                return 16;
+                break;
+
+            case 5:
+                return 20;
+                break;
+
+            default:
+                return 0;
+                break;
+        }
+    }
 }
