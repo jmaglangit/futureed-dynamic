@@ -435,15 +435,27 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 			answer.answer_text = answer_text_array.join(",");
 		} else if(angular.equals(self.current_question.question_type, Constants.GRAPH)) {
-			angular.forEach(self.question_graph_content.image, function(value, key){
-				obj = {
-					"field" : value.field,
-					"image" : value.path,
-					"count" : $('tr.' + value.field + ' div.' + value.field).length - 1,
-					"count_objects": $('tr.' + value.field + ' div.origin').length - 1
-				};
-				answer_graph_array.push(obj);
-			});
+
+			var answer_graph_array = [];
+
+			//Get horizontal
+			if(self.question_graph_content.orientation == Constants.HORIZONTAL){
+
+				//get table data
+				//parse each value for horizontal values.
+				var horizontalTable = document.getElementById('horizontalTable');
+
+				answer_graph_array = self.horizontalGraph(horizontalTable);
+
+
+				//Get Vertical
+			}else if(self.question_graph_content.orientation == Constants.VERTICAL){
+
+				//parse each value for vertical values
+				var verticalTable = document.getElementById('verticalTable');
+
+				answer_graph_array = self.verticalGraph(verticalTable);
+			}
 
 			obj = {"answer" : answer_graph_array};
 			answer.answer_text = JSON.stringify(obj);
@@ -546,6 +558,93 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
+	}
+
+	//parse horizontal table data.
+	self.horizontalGraph = function(data){
+		var graph_json = [];
+
+		var y = data.rows.length;
+		var header_count = data.rows.length;
+
+		//horizontal headers
+		for(h=0; h < header_count ; h++){
+
+			header_data = {
+				field : data.rows.item(h).cells.item(0).childNodes.item(1).className.replace("origin ",""),
+				image :  data.rows.item(h).cells.item(0).childNodes.item(1).childNodes.item(1).attributes.item(2).nodeValue,
+				count : 0,
+				count_objects : 0
+			};
+
+			graph_json.push(header_data);
+		}
+
+
+		//parse the answers
+		for(i=0; i < y ; i++){
+			var cells = data.rows.item(i).cells;
+			var x = cells.length;
+
+			for(t=1; t < x ; t++){
+
+				if(cells.item(t).firstElementChild !== null){
+
+					if(graph_json[i].field == cells.item(t).firstElementChild.className.replace("origin ","")){
+						graph_json[i].count = graph_json[i].count + 1;
+						graph_json[i].count_objects = graph_json[i].count_objects + 1;
+					}else {
+						graph_json[i].count_objects = graph_json[i].count_objects + 1;
+					}
+				}
+			}
+		}
+
+		return graph_json;
+	}
+
+	//parse vertical table data
+	self.verticalGraph = function(data){
+
+		var graph_json = [];
+		var y = data.rows.length;
+
+		//vertical headers
+		var header_count = data.rows.item(0).cells.length;
+
+		//get the headers
+		for(h=0; h < header_count ; h++){
+			header_data = {
+				field : data.rows.item(0).cells.item(h).className,
+				image : data.rows.item(0).cells.item(h).childNodes.item(1).childNodes.item(1).attributes.item(2).nodeValue,
+				count : 0,
+				count_objects : 0
+			};
+
+			graph_json.push(header_data);
+
+		}
+
+		//parse the answers
+		for(i=1; i < y; i++){
+			var cells = data.rows.item(i).cells;
+			var x = cells.length;
+
+			for(t=0; t < x; t++){
+
+				if(cells.item(t).firstElementChild !== null){
+
+					if(graph_json[t].field == cells.item(t).firstElementChild.className.replace("origin ","")){
+						graph_json[t].count = graph_json[t].count + 1;
+						graph_json[t].count_objects = graph_json[t].count_objects + 1;
+					}else {
+						graph_json[t].count_objects = graph_json[t].count_objects + 1;
+					}
+				}
+			}
+		}
+
+		return graph_json;
 	}
 
 	self.viewMoreWikiMessage = function() {

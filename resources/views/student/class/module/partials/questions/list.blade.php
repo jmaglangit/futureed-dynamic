@@ -58,17 +58,33 @@
 
 				<div ng-if="mod.current_question.question_type == futureed.GRAPH">
 					<div ng-init="mod.getGraph(mod.current_question.id)">
-						<table class="table">
+						{{--Horizontal--}}
+						<table id="horizontalTable" class="table" ng-if="mod.question_graph_content.orientation == futureed.HORIZONTAL">
 							<tr ng-repeat="item in mod.question_graph_content.image" class="{! item.field !}">
 								<th class="origin-container" ng-init="mod.initDrag()">
 									<div class="origin {! item.field !}">
-										<img style="width:50px;" ng-src="/uploads/questions/{! mod.current_question.id !}/{! item.path !}" />
+										<img style="width:50px;" ng-src="{! item.path !}" />
 									</div>
 								</th>
 
 								<td ng-init="mod.initDrop()" class="drop" ng-repeat="col in mod.graph_layout">
 								</td>
 							</tr>
+						</table>
+						{{--Vertical--}}
+						<table id="verticalTable" class="table" ng-if="mod.question_graph_content.orientation == futureed.VERTICAL">
+							<tr>
+								<th ng-repeat="item in mod.question_graph_content.image" class="{! item.field !}" ng-init="mod.initDrag()">
+									<div class="origin {! item.field !}">
+										<img style="width:50px;" ng-src="{! item.path !}" />
+									</div>
+								</th>
+							</tr>
+							<tr ng-repeat="col in mod.graph_layout">
+								<td ng-repeat="item in mod.question_graph_content.image" ng-init="mod.initDrop()" class="drop">
+								</td>
+							</tr>
+
 						</table>
 						<div class="col-xs-3 pull-right reset-graph">
 							<button class="btn btn-gold" ng-click="mod.resetGraph()">RESET</button>

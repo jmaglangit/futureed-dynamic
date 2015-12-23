@@ -131,7 +131,7 @@ class QuestionServices {
 
 		$answers = new \stdClass();
 
-		$answers->answers = $answer;
+		$answers->answer = $answer;
 
 		return json_encode($answers);
 	}
@@ -272,7 +272,11 @@ class QuestionServices {
 
 			foreach($source['answer'] as $correct){
 
-				if($answer->field == $correct->field){
+
+				if($answer->field == $correct->field
+					&& $answer->count == $correct->count
+					&& $answer->count_objects == $correct->count_objects){
+
 					array_shift($input['answer']);
 				}
 			}

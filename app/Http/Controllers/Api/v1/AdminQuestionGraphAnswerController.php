@@ -59,4 +59,14 @@ class AdminQuestionGraphAnswerController extends ApiController {
 		return $this->respondWithData($this->question->updateQuestion($id,['answer'=>$answer]));
 	}
 
+	/**
+	 * Gets the answers of the GRAPH question type
+	 *
+	 * @param  int $id
+	 * @return Response
+	 */
+	public function getGraphAnswer($id){
+		return $this->respondWithData($this->question->getQuestionAnswer($id));
+	}
+
 }

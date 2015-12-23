@@ -118,6 +118,9 @@ var Constants = {
 	, GRAPH				: "GR"
 	, QUADRANT			: "QUAD"
 
+	, HORIZONTAL		: "horizontal"
+	, VERTICAL			: "vertical"
+
 	, MSG_INTERNAL_ERROR	: "Hmm, something went wrong. Please contact the system administrator."
 	, MSG_PPW_NOT_MATCH 	: "Picture Password does not match."
 	, MSG_PPW_INCORRECT		: "Picture password is incorrect."
