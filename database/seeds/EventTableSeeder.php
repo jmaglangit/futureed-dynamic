@@ -13,8 +13,8 @@ class EventTableSeeder extends Seeder
 		$seeder = [
 			['1','Complete Module','Completion of the Modules','1','1'],
 			['2','Complete Subject','Completion of all the Modules under the subject','1','1'],
-
-
+			['3','Contribute a Tip','Contribute a Tip','1','1'],
+			['4','Contribute an Answer','Contribute an Answer','1','1'],
 		];
 
 
