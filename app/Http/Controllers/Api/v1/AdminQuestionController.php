@@ -209,11 +209,9 @@ class AdminQuestionController extends ApiController {
 		if($data['question_type'] == config('futureed.question_type_graph')
 			|| $data['question_type'] == config('futureed.question_type_quad')
 		){
-
 			unset($data['answer']);
+			$data['question_graph_content'] = $this->question_service->updateContentOrientation($question->question_graph_content,$data['orientation']);
 		}
-
-		$data['question_graph_content'] = $this->question_service->updateContentOrientation($question->question_graph_content,$data['orientation']);
 
 		if(!$question){
 
