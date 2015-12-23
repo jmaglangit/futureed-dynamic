@@ -150,3 +150,18 @@ Routes::group([
     Routes::resource('/admin/manage/student', 'Api\v1\AdminStudentController',
         ['except' => ['create', 'edit']]);
 });
+
+/**
+ * Import batch of new students
+ */
+Routes::group([
+		'middleware' => ['api_user','api_after'],
+		'permission' => ['admin'],
+		'role' => ['admin','super admin']
+], function(){
+
+	Routes::post('/student/import',[
+		'uses' => 'Api\v1\StudentImportController@studentImport',
+		'as' => 'api.v1.student.import.csv'
+	]);
+});

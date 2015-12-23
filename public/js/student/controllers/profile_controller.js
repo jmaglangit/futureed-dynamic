@@ -46,6 +46,8 @@ function ProfileController($scope, apiService, ProfileService) {
 		self.active_rewards = Constants.FALSE;
 		self.active_password = Constants.FALSE;
 		self.active_reports = Constants.FALSE;
+		self.active_avatar_accessory = Constants.FALSE;
+		self.buy_avatar_accessory_modal = Constants.FALSE;
 
 		self.validation = {};
 		self.select_password = Constants.FALSE;
@@ -92,6 +94,10 @@ function ProfileController($scope, apiService, ProfileService) {
 			self.resent = Constants.FALSE;
 			self.confirmation_code = Constants.EMPTY_STR;
 			self.active_confirm_email = Constants.TRUE;
+			break;
+
+		  case Constants.AVATAR_ACCESSORY:
+			self.active_avatar_accessory = Constants.TRUE;
 			break;
 
 		  case Constants.INDEX    		:
@@ -391,18 +397,74 @@ function ProfileController($scope, apiService, ProfileService) {
 	  }
 
 	  function getAvatarImages() {
+	  	$scope.ui_block();
 		apiService.getAvatarImages(self.prof.gender).success(function(response) {
 			if(response.status == Constants.STATUS_OK) {
 			  if(response.errors) {
 				self.errors = $scope.errorHandler(response.errors);
 			  } else if(response.data){
+
 				self.avatars = response.data;
 			  }
 			}
+		$scope.ui_unblock();
 		}).error(function(response) {
 			self.errors = $scope.internalError();
+			$scope.ui_unblock();
 		});
 	  }
+
+	self.getAvatarAccessories = function(){
+		$scope.ui_block();
+		apiService.getAvatarAccessories($scope.user.id).success(function(response){
+			if(response.status == Constants.STATUS_OK) {
+				if(response.errors) {
+					self.has_accessories = Constants.FALSE;
+					self.errors = $scope.errorHandler(response.errors);
+				}
+				else if(response.data){
+					self.has_accessories = Constants.TRUE;
+					self.avatar_accessories = response.data;
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.confrimBuyAvatarAccessory = function(accessory_id, points_to_unlock){
+		self.accessory_id = accessory_id;
+		self.points_to_unlock = points_to_unlock;
+
+		self.buy_avatar_accessory_modal = Constants.TRUE;
+		$("#buy_avatar_accessory_modal").modal({
+			backdrop : 'static',
+			keyboard : Constants.FALSE,
+			show : Constants.TRUE
+		});
+	}
+
+	self.buyAvatarAccessory = function(accessory_id, points_to_unlock){
+		student_id = $scope.user.id;
+
+		apiService.buyAvatarAccessory(student_id, accessory_id, points_to_unlock).success(function(response){
+			if(response.status == Constants.STATUS_OK){
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+					$('#buy_avatar_accessory_modal').modal('toggle');
+				}
+				else if(response.data) {
+					self.getAvatarAccessories();
+					$scope.getCashPoints();
+					$('#buy_avatar_accessory_modal').modal('toggle');
+				}
+			}
+		}).error(function(response){
+			self.errors = $scope.internalError();
+		});
+	}
 
 	function highlightAvatar(e) {
 		var target = getTarget(e);

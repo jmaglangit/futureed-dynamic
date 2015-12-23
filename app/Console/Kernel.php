@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel {
 	protected $commands = [
 		'FutureEd\Console\Commands\Inspire',
 		'FutureEd\Console\Commands\DatabaseRefreshCommand',
-		'FutureEd\Console\Commands\DeleteTempImageCommand'
+		'FutureEd\Console\Commands\DeleteTempImageCommand',
+		'FutureEd\Console\Commands\RebootFutureLessonCommand'
 	];
 
 	/**

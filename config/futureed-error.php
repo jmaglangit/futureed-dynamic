@@ -72,12 +72,17 @@ return [
 		2057 => 'Unable to Delete record.',
 		2058 => 'Module is incomplete. Please contact administrator.',
 		2059 => 'File does not exist.',
-		2060 => 'Student is currently logged in.',
-		2061 => 'Client is currently logged in.',
-		2062 => 'Admin is currently logged in.',
-		2063 => 'User is currently logged in.',
+		2060 => 'Student is currently login on another device.',
+		2061 => 'Client is currently login on another device.',
+		2062 => 'Admin is currently login on another device.',
+		2063 => 'User is currently login on another device.',
 		2063 => 'Invalid export file format',
 		2064 =>	'File does not exist.',
+		2065 => 'You already have this accessory',
+		2066 => 'No Accessories available',
+		2067 => 'This accessory is not available for your avatar',
+		2068 => 'You do not have enough points to buy this accessory',
+		2069 => 'Invalid graph answer.',
 
 
 		2100 => 'Reset code is invalid.',
@@ -129,6 +134,7 @@ return [
 		2146 => 'Prevent having dot for an image file name.',
 		2147 => 'Unable to Delete. Subscription already expired.',
 		2148 => 'Unable to generate report.',
+		2149 => 'The file must be a file of type: csv.',
 
 		// Client Error messages
 		2200 => 'Email already exists.',

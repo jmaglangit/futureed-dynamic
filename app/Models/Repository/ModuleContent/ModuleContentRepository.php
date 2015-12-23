@@ -3,6 +3,7 @@
 
 use FutureEd\Models\Core\Module;
 use FutureEd\Models\Core\ModuleContent;
+use Illuminate\Support\Facades\Session;
 use League\Flysystem\Exception;
 
 class ModuleContentRepository implements ModuleContentRepositoryInterface{
@@ -186,17 +187,18 @@ class ModuleContentRepository implements ModuleContentRepositoryInterface{
 		$query = new ModuleContent();
 		$query = $query->with('teachingContent');
 
-
-
 		if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
 
 			$count = $query->count();
 		} else {
 			if (count($criteria) > 0) {
 
-
 				if(isset($criteria['module_id'])){
 					$query = $query->moduleId($criteria['module_id']);
+				}
+
+				if(isset($criteria['teaching_status'])){
+					$query = $query->teachingStatus($criteria['teaching_status']);
 				}
 			}
 
@@ -221,6 +223,16 @@ class ModuleContentRepository implements ModuleContentRepositoryInterface{
 	public function getModulePointsToFinish($id){
 
 		return Module::whereId($id)->pluck('points_to_finish');
+	}
+
+	/**
+	 * Delete module content.
+	 * @param $content_id
+	 * @return mixed
+	 */
+	public function deleteModuleContentByContent($content_id){
+
+		return ModuleContent::contentId($content_id)->delete();
 	}
 
 }

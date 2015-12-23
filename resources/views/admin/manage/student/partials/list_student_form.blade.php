@@ -70,9 +70,16 @@
 	</div>
 
 	<div class="col-xs-12 table-container">
-		<button class="btn btn-blue btn-semi-medium" ng-click="student.setActive(futureed.ACTIVE_ADD)">
-			<i class="fa fa-plus-square"></i> Add Student
-		</button>
+        <div class="dropdown">
+            <button class="btn btn-blue btn-semi-medium dropdown-toggle" type="button" data-toggle="dropdown">
+                Add Student <i class="fa fa-caret-square-o-down"></i>
+            </button>
+            <ul class="dropdown-menu dropdown-menu-medium">
+                <li class="cursor-pointer" ng-click="student.setActive(futureed.ACTIVE_IMPORT)"><a><i class="fa fa-cloud-upload"></i> Import</a></li>
+                <li class="cursor-pointer" ng-click="student.setActive(futureed.ACTIVE_ADD)"><a><i class="fa fa-plus-square"></i> Manual</a></li>
+            </ul>
+        </div>
+
 
 		<div class="list-container" ng-cloak ng-init="student.studentList()">
 			<div class="col-xs-6 title-mid">

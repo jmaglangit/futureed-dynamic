@@ -63,4 +63,11 @@ class ManageStudentController extends Controller{
 	{
 		return view('admin.manage.student.partials.edit_reward');
 	}
+
+	/**
+	 * @return \Illuminate\View\View
+	 */
+	public function import(){
+		return view('admin.manage.student.partials.import_student_form');
+	}
 }

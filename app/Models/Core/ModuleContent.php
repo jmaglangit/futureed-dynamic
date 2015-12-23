@@ -68,6 +68,12 @@ class ModuleContent extends Model {
 		 return $query->orderBy('seq_no','desc');
 	}
 
+	public function scopeTeachingStatus($query,$status){
+		return $query->whereHas('teachingContent', function($query) use ($status){
+			$query->whereStatus($status);
+		});
+	}
+
 
 
 }

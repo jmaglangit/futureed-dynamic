@@ -482,4 +482,11 @@ function ManageTeacherClassController($scope, $filter, ManageClassService, apiSe
 			$scope.ui_unblock();
 		});
 	}
+
+	self.cancelDeleteStudent = function(){
+		$(".day").prop("selectedIndex",0);
+		$(".month").prop("selectedIndex",0);
+		$(".year").prop("selectedIndex",0);
+		self.delete_student = Constants.FALSE;
+	}
 }

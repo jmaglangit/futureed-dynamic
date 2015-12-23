@@ -19,11 +19,11 @@ class ModuleContentTableSeeder extends Seeder
 
 			\DB::table('module_contents')->insert([
 				[
-					'module_id' => $row[0],
-					'subject_id' => $row[1],
-					'subject_area_id' => $row[2],
-					'content_id' => $row[3],
-					'seq_no' => $row[4],
+					'module_id' => $row[1],
+					'subject_id' => $row[2],
+					'subject_area_id' => $row[3],
+					'content_id' => $row[4],
+					'seq_no' => $row[5],
 					'created_by' => 1,
 					'updated_by' => 1,
 					'created_at' => Carbon::now(),

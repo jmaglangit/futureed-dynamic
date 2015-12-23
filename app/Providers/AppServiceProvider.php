@@ -57,6 +57,7 @@ class AppServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
+
 		$this->app->bind(
 			'Illuminate\Contracts\Auth\Registrar',
 			'FutureEd\Services\Registrar'
@@ -305,6 +306,11 @@ class AppServiceProvider extends ServiceProvider {
 		$this->app->bind(
 			'FutureEd\Models\Repository\AdminLog\AdminLogRepositoryInterface',
 			'FutureEd\Models\Repository\AdminLog\AdminLogRepository'
+		);
+
+		$this->app->bind(
+			'FutureEd\Models\Repository\AvatarAccessory\AvatarAccessoryRepositoryInterface',
+			'FutureEd\Models\Repository\AvatarAccessory\AvatarAccessoryRepository'
 		);
 	}
 }

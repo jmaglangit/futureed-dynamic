@@ -75,6 +75,10 @@ class QuestionRepository implements QuestionRepositoryInterface{
 
 					$question = $question->difficulty($criteria['difficulty']);
 				}
+				if(isset($criteria['status'])){
+
+					$question = $question->status($criteria['status']);
+				}
 
 
 			}
@@ -327,6 +331,42 @@ class QuestionRepository implements QuestionRepositoryInterface{
 		return Question::whereModuleId($module_id)
 			->whereDifficulty($difficulty)
 			->count();
+	}
+
+	/**
+	 * Get enabled question
+	 * @param $id
+	 * @return mixed
+	 */
+	public function getEnabledQuestion($id){
+
+		return Question::id($id)->status(config('futureed.enabled'))->get();
+	}
+
+	/**
+	 * Get Graph questions.
+	 * @param $id
+	 * @return mixed
+	 */
+	public function getGraphQuestion($id){
+
+		$question_types = [
+			config('futureed.question_type_graph'),
+			config('futureed.question_type_quad')
+		];
+
+		return Question::id($id)->questionType($question_types)->first();
+	}
+
+	/**
+	 * Get Graph by Question Type.
+	 * @param $id
+	 * @param $question_type
+	 * @return mixed
+	 */
+	public function getGraphQuestionByType($id, $question_type){
+
+		return Question::id($id)->questionType($question_type)->first();
 	}
 
 

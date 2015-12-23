@@ -15,6 +15,7 @@ use FutureEd\Models\Repository\StudentModule\StudentModuleRepositoryInterface;
 use FutureEd\Models\Repository\StudentModuleAnswer\StudentModuleAnswerRepositoryInterface;
 use FutureEd\Models\Repository\TeachingContent\TeachingContentRepositoryInterface;
 use FutureEd\Services\ModuleContentServices;
+use FutureEd\Services\QuestionServices;
 use FutureEd\Services\StudentModuleServices;
 use Illuminate\Support\Facades\Input;
 use SebastianBergmann\Environment\Console;
@@ -26,6 +27,7 @@ class StudentModuleAnswerController extends ApiController{
     protected $avatar_wiki;
     protected $question;
     protected $question_answer;
+	protected $question_service;
     protected $quote;
     protected $student;
     protected $student_module;
@@ -49,7 +51,8 @@ class StudentModuleAnswerController extends ApiController{
 		ModuleContentRepositoryInterface $moduleContentRepositoryInterface,
 		TeachingContentRepositoryInterface $teachingContentRepositoryInterface,
 		StudentModuleServices $studentModuleServices,
-		ModuleContentServices $moduleContentServices
+		ModuleContentServices $moduleContentServices,
+		QuestionServices $questionServices
 	)
 	{
 
@@ -66,6 +69,7 @@ class StudentModuleAnswerController extends ApiController{
 		$this->teaching_content = $teachingContentRepositoryInterface;
 		$this->student_module_services = $studentModuleServices;
 		$this->module_services = $moduleContentServices;
+		$this->question_service = $questionServices;
 	}
 
 //+-------------------+-------------------------+------+-----+---------------------+----------------+
@@ -148,6 +152,37 @@ class StudentModuleAnswerController extends ApiController{
 
 			$data['points_earned'] = $this->question_answer->getQuestionPointEquivalent($data['answer_id']);
 
+
+		}elseif($question_type == config('futureed.question_type_graph')){
+			//if question is graph
+
+			//check answer graph if correct
+			//check answer if valid
+			if(!json_decode($data['answer_text'])){
+
+				return $this->respondErrorMessage(2069);
+			}
+
+			//get answer
+			$answer = $this->question->getQuestionAnswer($data['question_id']);
+
+
+			//compare answers
+			$graph_result = $this->question_service->validateGraphAnswer($data['answer_text'],$answer);
+
+
+			//designate points and results
+			$data['answer_status'] = ($graph_result) ?
+				config('futureed.answer_status_correct') :
+				config('futureed.answer_status_wrong');
+
+			$data['points_earned'] = ($graph_result) ?
+				$this->question->getQuestionPointsEarned($data['question_id'])
+				: 0;
+
+
+		}elseif($question_type == config('futureed.question_type_quad')){
+			//if question is quad (quadrant)
 
 		}else {
 

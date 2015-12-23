@@ -153,6 +153,12 @@
 						, 'middleware' => 'admin'
 						, 'uses' => $manage_client_controller . '@delete_client_form'
 					]);
+
+					Routes::get('/import_client_form', [
+						'as' => 'admin.manage.client.partials.import_client_form'
+						, 'middleware' => 'admin'
+						, 'uses' => $manage_client_controller . '@import'
+					]);
 				});
 			});
 			
@@ -209,6 +215,12 @@
 							, 'middleware' => 'admin'
 							, 'uses' => $manage_student_controller . '@edit_reward'
 						]);
+
+					Routes::get('/import',[
+						'as'=> 'admin.manage.student.partials.import_student_form'
+						, 'middleware' => 'admin'
+						, 'uses' => $manage_student_controller . '@import'
+					]);
 				});
 			});
 

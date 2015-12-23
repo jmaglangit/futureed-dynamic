@@ -45,6 +45,7 @@ var Constants = {
 	, EDIT			: "edit"
 	, EDIT_EMAIL	: "edit_email"
 	, CONFIRM_EMAIL : "confirm_email"
+	, AVATAR_ACCESSORY	:"avatar_accessory"
 
 	, AGEGROUP		: "agegroup"
 	, CONTENTS 		: "contents"
@@ -82,6 +83,7 @@ var Constants = {
 	, ACTIVE_EDIT	: "edit"
 	, ACTIVE_ADD	: "add"
 	, ACTIVE_EMAIL	: "email"
+	, ACTIVE_IMPORT	: "import"
 
 	, ACTIVE_QUESTIONS 	: "questions"
 	, ACTIVE_CONTENTS 	: "contents"
@@ -113,6 +115,11 @@ var Constants = {
 	, MULTIPLECHOICE 	: "MC"
 	, ORDERING 			: "O"
 	, PROVIDE 			: "N"
+	, GRAPH				: "GR"
+	, QUADRANT			: "QUAD"
+
+	, HORIZONTAL		: "horizontal"
+	, VERTICAL			: "vertical"
 
 	, MSG_INTERNAL_ERROR	: "Hmm, something went wrong. Please contact the system administrator."
 	, MSG_PPW_NOT_MATCH 	: "Picture Password does not match."
@@ -231,6 +238,9 @@ var Constants = {
 	, SUMMARY_PROGRESS			: "Summary Progress"
 	, CURRENT_LEARNING			: "Current Learning"
 	, SUBJECT_AREA				: "Subject Area"
+
+	/*Country Codes*/
+	, UNITED_STATES				: 840
 
 	, MSG_CREATED				: function(noun) {
 		return noun + " created.";

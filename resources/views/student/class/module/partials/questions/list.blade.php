@@ -19,7 +19,7 @@
 					</div>
 				</div>
 				
-				<img ng-if="mod.current_question.original_image_name" ng-src="{! mod.current_question.questions_image !}" />
+				<img ng-if="mod.current_question.questions_image != 'None' " ng-src="{! mod.current_question.questions_image !}" />
 			</div>
 
 			<div class="questions-message">
@@ -54,6 +54,42 @@
 							</div>
 						</li>
 					</ul>
+				</div>
+
+				<div ng-if="mod.current_question.question_type == futureed.GRAPH">
+					<div ng-init="mod.getGraph(mod.current_question.id)">
+						{{--Horizontal--}}
+						<table id="horizontalTable" class="table" ng-if="mod.question_graph_content.orientation == futureed.HORIZONTAL">
+							<tr ng-repeat="item in mod.question_graph_content.image" class="{! item.field !}">
+								<th class="origin-container" ng-init="mod.initDrag()">
+									<div class="origin {! item.field !}">
+										<img style="width:50px;" ng-src="{! item.path !}" />
+									</div>
+								</th>
+
+								<td ng-init="mod.initDrop()" class="drop" ng-repeat="col in mod.graph_layout">
+								</td>
+							</tr>
+						</table>
+						{{--Vertical--}}
+						<table id="verticalTable" class="table" ng-if="mod.question_graph_content.orientation == futureed.VERTICAL">
+							<tr>
+								<th ng-repeat="item in mod.question_graph_content.image" class="{! item.field !}" ng-init="mod.initDrag()">
+									<div class="origin {! item.field !}">
+										<img style="width:50px;" ng-src="{! item.path !}" />
+									</div>
+								</th>
+							</tr>
+							<tr ng-repeat="col in mod.graph_layout">
+								<td ng-repeat="item in mod.question_graph_content.image" ng-init="mod.initDrop()" class="drop">
+								</td>
+							</tr>
+
+						</table>
+						<div class="col-xs-3 pull-right reset-graph">
+							<button class="btn btn-gold" ng-click="mod.resetGraph()">RESET</button>
+						</div>
+					</div>
 				</div>
 			</div>
 

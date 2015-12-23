@@ -12,6 +12,7 @@ namespace FutureEd\Services;
 use FutureEd\Models\Repository\Avatar\AvatarRepositoryInterface;
 use FutureEd\Models\Repository\Validator\ValidatorRepositoryInterface;
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
+use FutureEd\Models\Repository\AvatarAccessory\AvatarAccessoryRepositoryInterface;
 
 class AvatarServices {
 
@@ -20,13 +21,16 @@ class AvatarServices {
      * @param AvatarRepositoryInterface $avatar
      * @param ValidatorRepositoryInterface $validator
      * @param StudentRepositoryInterface $student
+     * @param AvatarAccessoryRepositoryInterface $avatar_accessory
      */
     public function __construct(AvatarRepositoryInterface $avatar,
         ValidatorRepositoryInterface $validator,
-        StudentRepositoryInterface $student){
+        StudentRepositoryInterface $student,
+        AvatarAccessoryRepositoryInterface $avatar_accessory){
         $this->avatar = $avatar;
         $this->validator=$validator;
         $this->student = $student;
+        $this->avatar_accessory = $avatar_accessory;
     }
 
     /**
@@ -116,8 +120,38 @@ class AvatarServices {
         return $this->avatar->checkAvatarExist($avatar_id);
         
     }
-    
-   
 
-   
+    /**
+     * Gets avatar accessories.
+     * @param $student_id
+     * @return array
+     */
+    public function getAvatarAccessories($student_id) {
+        //get the image folder path
+        $image_avatar_accessory_folder = config('futureed.image_avatar_accessory_folder');
+
+        //get student's already bought avatar
+        $student_avatar_accessories = $this->avatar_accessory->getStudentAvatarAccessories($student_id);
+        //dd($student_avatar_accessories);
+
+        //get all avatar accessories based on student id
+        $image_avatar=$this->avatar_accessory->getAvatarAccessories($student_id);
+
+        if(!$image_avatar){
+            return null;
+        }
+
+        foreach($image_avatar as $row){
+            $temp_avatar['id'] = $row['id'];
+            $temp_avatar['name'] = $row['name'];
+            $temp_avatar['url'] = url() . '/' . $image_avatar_accessory_folder . '/' . $row['accessory_image'];
+            $temp_avatar['points_to_unlock'] = $row['points_to_unlock'];
+            $temp_avatar['description'] = $row['description'];
+            $temp_avatar['is_bought'] = in_array($row['id'], array_column($student_avatar_accessories,'avatar_accessories_id'));
+            $avatar_accessory[]= $temp_avatar;
+        }
+
+        return $avatar_accessory;
+    }
+
 }

@@ -1,9 +1,9 @@
 angular.module('futureed.controllers')
 	.controller('ManageStudentController', ManageStudentController);
 
-ManageStudentController.$inject = ['$scope', '$filter', 'manageStudentService', 'apiService',  'TableService', 'SearchService', 'ValidationService'];
+ManageStudentController.$inject = ['$scope', '$filter', 'manageStudentService', 'apiService',  'TableService', 'SearchService', 'ValidationService','Upload'];
 
-function ManageStudentController($scope, $filter, manageStudentService, apiService, TableService, SearchService, ValidationService) {
+function ManageStudentController($scope, $filter, manageStudentService, apiService, TableService, SearchService, ValidationService, Upload) {
 	var self = this;
 
 	TableService(self);
@@ -19,6 +19,11 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
 		self.fields = [];
+		self.file_name = 'filename';
+		self.has_file = Constants.FALSE;
+		self.report_status = Constants.FALSE;
+		self.fail_count = Constants.FALSE;
+		self.inserted_count = Constants.FALSE;
 
 		self.searchDefaults();
 		self.tableDefaults();
@@ -33,6 +38,7 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 		self.active_edit_reward = Constants.FALSE;
 		self.active_points = Constants.FALSE;
 		self.active_badge = Constants.FALSE;
+		self.active_import = Constants.FALSE;
 
 		if(flag == 'points'){
 			self.active_points = Constants.TRUE;
@@ -52,9 +58,13 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 				self.viewStudent(id);
 				break;
 				
-			case Constants.ACTIVE_ADD 	:
+			case Constants.ACTIVE_ADD	:
 				self.record = {};
 				self.active_add = Constants.TRUE;
+				break;
+
+			case Constants.ACTIVE_IMPORT	:
+				self.active_import = Constants.TRUE;
 				break;
 
 			case 'reward' :
@@ -676,4 +686,68 @@ function ManageStudentController($scope, $filter, manageStudentService, apiServi
 			$scope.ui_unblock();
 		});
 	}
+
+	//download template
+	self.downloadTemplate = function(data){
+
+		$scope.ui_block();
+		manageStudentService.downloadTemplate(data).success(function(response){
+			if(angular.equals(response.status, Constants.STATUS_OK)){
+				if(response.errors){
+					self.errors = $scope.errorHandler(response.errors);
+				}else if(response.data){
+
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function() {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	//import student
+	self.importFile = function(file){
+		//upload file directly
+
+		self.uploaded = Constants.FALSE;
+
+		var base_url = $("#base_url_form input[name='base_url']").val();
+		var callback_uri = base_url + Constants.URL_REGISTRATION(angular.lowercase(Constants.STUDENT));
+
+		if(file.length) {
+			$scope.ui_block();
+			Upload.upload({
+				url: '/api/v1/student/import?callback_uri=' + callback_uri
+				, file: file[0]
+				,headers: {
+					'Content-Type': 'text/csv'
+				}
+			}).success(function(response) {
+				if(angular.equals(response.status, Constants.STATUS_OK)) {
+					if(response.errors) {
+						self.errors = $scope.errorHandler(response.errors);
+					}else if(response.data){
+						var data = response.data;
+						self.upload_records = data;
+						self.report_status = Constants.TRUE;
+
+						if(data.fail_count > 0){
+							self.fail_count = Constants.TRUE;
+						}
+
+						if(data.inserted_count > 0){
+							self.inserted_count = Constants.TRUE;
+						}
+					}
+				}
+
+				$scope.ui_unblock();
+			}).error(function(response) {
+				self.errors = $scope.internalError();
+				$scope.ui_unblock();
+			});
+		}
+	}
+
 }

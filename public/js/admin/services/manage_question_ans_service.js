@@ -56,10 +56,25 @@ function ManageQuestionAnsService($http) {
         });
     }
 
+    api.addAnswerGraph = function(question_id, data) {
+        return $http({
+           method  : Constants.METHOD_POST
+            , data  : data
+            , url   : apiUrl + 'question/graph-answer/admin/' + question_id 
+        });
+    }
+
     api.listAnswer = function(question_id) {
         return $http({
             method  : Constants.METHOD_GET
             , url   : apiUrl + 'question/answer/admin?question_id=' + question_id
+        });
+    }
+
+    api.listGraphAnswer = function(question_id) {
+        return $http({
+            method  : Constants.METHOD_GET
+            , url   : apiUrl + 'question/graph-answer/admin/' + question_id
         });
     }
 
@@ -82,6 +97,14 @@ function ManageQuestionAnsService($http) {
             method  : Constants.METHOD_PUT
             , data  : data
             , url   : apiUrl + 'question/answer/admin/' + data.id
+        });
+    }
+
+    api.updateGraphAnswer = function(id, data) {
+        return $http({
+            method  : Constants.METHOD_POST
+            , data  : data
+            , url   : apiUrl + 'question/graph-answer/admin/' + id
         });
     }
 

@@ -112,6 +112,28 @@ var services = angular.module('futureed.services', []);
 			});
 		}
 
+		futureedAPI.getAvatarAccessories = function(student_id) {
+			return $http({
+				method	: 'GET'
+				, url	: futureedAPIUrl + 'avatar-accessory/get-accessories?student_id=' + student_id
+			});
+		}
+
+		futureedAPI.buyAvatarAccessory = function(student_id, accessory_id, points_to_unlock) {
+			return $http({
+				method	: 'POST'
+				, data	: {student_id : student_id, avatar_accessories_id : accessory_id, points_to_unlock : points_to_unlock}
+				, url	: futureedAPIUrl + 'avatar-accessory/buy-accessory'
+			});
+		}
+
+		futureedAPI.getCashPoints = function(id) {
+			return $http({
+				  method 	: Constants.METHOD_GET
+				, url	: futureedAPIUrl + 'student-point-cash?student_id=' + id
+			});
+		}
+
 		/**
 		* Profile related calls
 		*/

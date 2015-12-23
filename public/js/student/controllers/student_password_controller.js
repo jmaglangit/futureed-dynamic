@@ -125,11 +125,10 @@ function StudentPasswordController($scope, StudentPasswordService) {
 	self.selectNewPassword = function() {
 		self.errors = Constants.FALSE;
 		self.password_selected = Constants.FALSE;
-		
+
 		if($scope.image_id) {
 			self.password_selected = Constants.TRUE;
 			self.new_password = $scope.image_id;
-			$scope.image_id = Constants.FALSE;
 
 			$scope.image_pass = shuffle($scope.image_pass);
 			$("ul.form_password li").removeClass('selected');

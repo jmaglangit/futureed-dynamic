@@ -63,6 +63,16 @@ class StudentRepository implements StudentRepositoryInterface
 
 	}
 
+
+	/**
+	 * Get student's user id with the given student id
+	 * @param $id
+	 * @return mixed
+	 */
+	public function getUserId($id){
+		return Student::whereId($id)->pluck('user_id');
+	}
+
 	/**
 	 * Get student by user_id.
 	 * @param $id
@@ -601,10 +611,20 @@ class StudentRepository implements StudentRepositoryInterface
 
 	/**
 	 * @param $student_id
+	 * @return int
 	 */
 	public function getStudentPoints($student_id){
 
 		return Student::whereId($student_id)->pluck('points');
+	}
+
+	/**
+	 * @param $student_id
+	 * @return int
+	 */
+	public function getStudentPointsUsed($student_id){
+
+		return Student::whereId($student_id)->pluck('points_used');
 	}
 
 

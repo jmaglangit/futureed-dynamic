@@ -13,6 +13,13 @@
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 				<ul class="nav navbar-nav navbar-right">
+					<li class="nav-label">Cash Points</li>
+					<li class="nav-points-rewards">
+						{!! Html::image('/images/icons/icon-cash-points.png', ''
+							, array(
+								'class' => 'nav-icon-holder'
+							)
+						) !!} {! user.cash_points !}</li>
 					<li class="nav-label">Reward Points</li>
 					<li class="nav-points-rewards">
 						{!! Html::image('/images/icons/icon-reward.png', ''

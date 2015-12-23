@@ -44,6 +44,7 @@
 							<span class="thin" ng-if="profile.active_confirm_email">Confirm Email Address</span>
 							<span class="thin" ng-if="profile.active_rewards">Student Rewards</span>
 							<span class="thin" ng-if="profile.active_avatar">Change Avatar</span>
+							<span class="thin" ng-if="profile.active_avatar_accessory">Avatar Accessories</span>
 							<div ng-if="profile.active_password">
 								<span ng-if="!profile.password_validated" class="thin">
 									Current
@@ -83,6 +84,8 @@
 				<div template-directive template-url="{!! route('student.partials.avatar_form') !!}"></div>
 
 				<div template-directive template-url="{!! route('student.partials.change_password_form') !!}"></div>
+
+				<div template-directive template-url="{!! route('student.partials.avatar_accessory_form') !!}"></div>
 
 			</div>
 		</div>

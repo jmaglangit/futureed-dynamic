@@ -198,18 +198,16 @@ class ClassStudentController extends ApiController {
 		//check if student is added in a class already including inactive class
 		$isEnrolled = $this->class_student->isEnrolled($student_id,$data['class_id']);
 
-		if($isEnrolled){
+		if($isEnrolled && !$isEnrolled['date_removed']){
 
 			return $this->respondErrorMessage(2125);// Student is already in the class.
 		}
-
 
         //check seats availability.
         $classroom = $this->classroom->getClassroom($data['class_id']);
 
         //check if student have a subscription with the same subject_id
-        $check_subscription = $this->classroom->getClassroomBySubjectId($classroom['subject_id'], $student_id);
-
+        $check_subscription = $this->classroom->getActiveSubscription($classroom['subject_id'], $student_id);
         if ($check_subscription) {
 
            return $this->respondErrorMessage(2037);
@@ -309,6 +307,7 @@ class ClassStudentController extends ApiController {
 	public function removeStudentClass(ClassStudentRequest $request, $id){
 
 		$data = $request->only('date_removed');
+		$data['subscription_status'] = config('futureed.inactive');
 
 		$class_student = $this->class_student->getClassStudentById($id);
 
@@ -324,6 +323,7 @@ class ClassStudentController extends ApiController {
 		}
 
 		$data['seats_taken'] = $class_student['classroom']['seats_taken']-1;
+
 
 		$this->classroom->updateClassroom($class_student['classroom']['id'],$data);
 

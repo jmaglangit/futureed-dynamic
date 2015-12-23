@@ -154,8 +154,6 @@ function MediaLoginController($scope, $filter, $window, MediaLoginService) {
 						}
 
 						$scope.$emit('confirm-media', client_data);
-					} else {
-						$scope.$emit('media-error', self.errors);
 					}
 				} else if(response.data){
 					response.data.role = (response.data.client_role) ? response.data.client_role : Constants.STUDENT ;

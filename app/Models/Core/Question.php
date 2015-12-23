@@ -23,15 +23,29 @@ class Question extends Model {
 		'deleted_at',
 	];
 
-	protected $fillable =['module_id','code','question_type','questions_text','questions_image','answer'
-		,'question_order_text','seq_no','difficulty','points_earned'
-		,'original_image_name','status','created_by','updated_by'];
+	protected $fillable = [
+		'module_id',
+		'code',
+		'question_type',
+		'questions_text',
+		'questions_image',
+		'answer',
+		'question_order_text',
+		'seq_no',
+		'difficulty',
+		'points_earned',
+		'original_image_name',
+		'question_graph_content',
+		'status',
+		'created_by',
+		'updated_by'
+	];
 
 	protected $attributes = [
 		'created_by' => 1,
 		'updated_by' => 1,
-		'questions_image' =>0,
-		'original_image_name' =>0,
+		'questions_image' => 0,
+		'original_image_name' => 0,
 		'seq_no' => 0
 	];
 
@@ -41,16 +55,16 @@ class Question extends Model {
 	];
 
 	//Accessor
-	public function getQuestionsImageAttribute($value){
+	public function getQuestionsImageAttribute($value) {
 
 		$filesystem = new Filesystem();
 
 		//get path
-		$image_path = config('futureed.question_image_path_final') .'/'. $this->attributes['id'] . '/'. $value;
+		$image_path = config('futureed.question_image_path_final') . '/' . $this->attributes['id'] . '/' . $value;
 
 		//check path
-		if($filesystem->exists($image_path)){
-			return asset(config('futureed.question_image_path_final_public') .'/'. $this->attributes['id'] . '/'. $value);
+		if ($filesystem->exists($image_path)) {
+			return asset(config('futureed.question_image_path_final_public') . '/' . $this->attributes['id'] . '/' . $value);
 
 		} else {
 
@@ -58,33 +72,33 @@ class Question extends Model {
 		}
 	}
 
-	public function getAnswerTextFieldAttribute($value){
+	public function getAnswerTextFieldAttribute($value) {
 
-		if($this->attributes['question_type'] == config('futureed.question_type_fill_in_the_blank')){
+		if ($this->attributes['question_type'] == config('futureed.question_type_fill_in_the_blank')) {
 
-			return count(explode(",",$this->attributes['answer']));
+			return count(explode(",", $this->attributes['answer']));
 
-		}else {
+		} else {
 
 			return null;
 		}
 	}
 
 	//TODO: Remove this function. Remove answers on the controller level.
-	public function getAnswerAttribute($value){
+	public function getAnswerAttribute($value) {
 
-		if(session('current_user') || session('super_access')){
+		if (session('current_user') || session('super_access')) {
 
 			$user = User::find(session('current_user'));
 
 			//Check if user is Admin or not.
-			if($user->user_type == config('futureed.admin')){
+			if ($user->user_type == config('futureed.admin')) {
 
 				return $value;
-			} elseif(session('super_access') == 1){
+			} elseif (session('super_access') == 1) {
 
 				return $value;
-			}else{
+			} else {
 
 				return null;
 			}
@@ -98,53 +112,58 @@ class Question extends Model {
 
 	//-------------relationships
 	public function module() {
-		return $this->belongsTo('FutureEd\Models\Core\Module')->with('subject','subjectArea');
+		return $this->belongsTo('FutureEd\Models\Core\Module')->with('subject', 'subjectArea');
 	}
 
 	//
-	public function questionAnswers(){
+	public function questionAnswers() {
 		return $this->hasMany('FutureEd\Models\Core\QuestionAnswer');
 	}
 
 	//-------------scopes
-	public function scopeQuestionType($query, $question_type)
-	{
+	public function scopeQuestionType($query, $question_type ) {
 
-		return $query->where('question_type', '=', $question_type);
+		$question_types = (array) $question_type;
 
-	}
-
-	public function scopeQuestionText($query, $questions_text)
-	{
-
-		return $query->where('questions_text', 'like', '%'.$questions_text.'%');
+		return $query->whereIn('question_type',$question_types);
 
 	}
 
-	public function scopeModuleId($query, $module_id)
-	{
+	public function scopeQuestionText($query, $questions_text) {
+
+		return $query->where('questions_text', 'like', '%' . $questions_text . '%');
+
+	}
+
+	public function scopeModuleId($query, $module_id) {
 
 		return $query->where('module_id', '=', $module_id);
 
 	}
 
-	public function scopeId($query, $id){
+	public function scopeId($query, $id) {
 
-		return $query->where('id',$id);
+		return $query->where('id', $id);
 	}
 
-	public function scopeOrderBySeqNo($query){
+	public function scopeOrderBySeqNo($query) {
 
 		return $query->OrderBy('seq_no');
 	}
 
-	public function scopeOrderBySeqNoDesc($query){
+	public function scopeOrderBySeqNoDesc($query) {
 
-		return $query->OrderBy('seq_no','desc');
+		return $query->OrderBy('seq_no', 'desc');
 	}
 
-	public function scopeDifficulty($query,$difficulty){
+	public function scopeDifficulty($query, $difficulty) {
+
 		return $query->whereDifficulty($difficulty);
+	}
+
+	public function scopeStatus($query, $status) {
+
+		return $query->whereStatus($status);
 	}
 
 

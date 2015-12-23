@@ -77,5 +77,10 @@ interface QuestionRepositoryInterface {
 
 	public function countQuestions($module_id,$difficulty);
 
+	public function getEnabledQuestion($id);
+
+	public function getGraphQuestion($id);
+
+	public function getGraphQuestionByType($id, $question_type);
 
 }

@@ -157,6 +157,7 @@ return [
 		'FutureEd\Providers\ConfigServiceProvider',
 		'FutureEd\Providers\EventServiceProvider',
 		'FutureEd\Providers\RouteServiceProvider',
+		'FutureEd\Providers\ValidationServiceProvider',
 
 	],
 

@@ -143,7 +143,8 @@
 									class="form-control" 
 									ng-class="{ 'required-field' : login.fields['country_id'] }"
 									ng-model="login.record.country_id" 
-									ng-change="getGradeLevel(login.record.country_id)">
+									ng-change="getGradeLevel(login.record.country_id)"
+									ng-init="login.record.country_id = futureed.UNITED_STATES">
 									<option ng-selected ="login.record.country_id == futureed.FALSE" value="">-- Select Country --</option>
 									<option ng-selected ="login.record.country_id == country.id" ng-repeat="country in countries" ng-value="country.id">{! country.name !}</option>
 								</select>

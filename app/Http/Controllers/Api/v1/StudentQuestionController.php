@@ -1,19 +1,23 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
 use FutureEd\Http\Requests;
-use FutureEd\Http\Controllers\Controller;
 use FutureEd\Models\Repository\Question\QuestionRepositoryInterface;
+use FutureEd\Services\QuestionServices;
 use Illuminate\Support\Facades\Input;
-
-use Illuminate\Http\Request;
 
 class StudentQuestionController extends ApiController {
 
 	protected $question;
 
-	public function __construct(QuestionRepositoryInterface $question){
+	protected $question_services;
+
+	public function __construct(
+		QuestionRepositoryInterface $question,
+		QuestionServices $questionServices
+	){
 
 		$this->question = $question;
+		$this->question_services = $questionServices;
 	}
 	/**
 	 * Display a listing of the resource.
@@ -81,6 +85,37 @@ class StudentQuestionController extends ApiController {
 
 
 		return $this->respondWithData($question);
+
+	}
+
+	/**
+	 * Get Graph Questions.
+	 * @param $id
+	 * @param StudentQuestionRequest $request
+	 * @return mixed
+	 */
+	public function graph($id){
+
+		$graph = $this->question->getGraphQuestion($id);
+
+		if (!empty($graph)) {
+			$answer = $this->question->getQuestionAnswer($graph->id);
+
+			$question_answers = json_decode($answer);
+
+			//Get dimension	of each graph.
+			if ($graph->question_type == config('futureed.question_type_graph')) {
+				$graph->dimension = $this->question_services->getGraphDimension($question_answers->answer);
+			}
+
+			if ($graph->question_type == config('futureed.question_type_quad')) {
+				$graph->dimension = $this->question_services->getQuadDimension($question_answers->answer);
+			}
+
+			unset($graph->answer);
+		}
+
+		return $this->respondWithData($graph);
 
 	}
 }
