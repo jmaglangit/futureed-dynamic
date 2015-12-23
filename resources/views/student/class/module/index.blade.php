@@ -132,6 +132,6 @@
 
 	{!! Html::script('/js/common/search_service.js')!!}
 	{!! Html::script('/js/common/table_service.js')!!}	
-	{!! Html::script('http://code.jquery.com/ui/1.9.2/jquery-ui.js')!!}
+	{!! Html::script('https://code.jquery.com/ui/1.9.2/jquery-ui.js')!!}
 @stop
 
