@@ -862,10 +862,10 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 	self.initDrag = function (){
 		$('.origin').draggable({
-			connectToSortable: '.drop',
+			containment: 'table',
 			helper: 'clone',
-			cursor: "move",
-			revert: "invalid"
+			cursor: 'move',
+			cursorAt: { left:-30 }
 		});
 	}
 
@@ -873,15 +873,28 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		$('.drop').droppable({
 			accept: '.origin',
 			drop: function(event, ui) {
-				$(this).append($(ui.draggable).clone());
-				//$("#container .product").addClass("item");
-				//$(".item").removeClass("ui-draggable product");
-				$(this).droppable('disable');
+				var thisClass = $(this).hasClass('disabled');
+
+				if(thisClass){
+					ui.draggable.draggable('option','revert',true);
+				}else{
+					$(this).append($(ui.draggable).clone());
+					$(this).droppable('disable');
+					ui.draggable.draggable('option','revert','invalid');
+
+					if(angular.equals(self.question_graph_content.orientation, Constants.HORIZONTAL)) {
+						$(this).next().removeClass('disabled');
+					}else{
+						var cellIndex = $(this).index();
+						$(this).closest('tr').next().children().eq(cellIndex).removeClass('disabled');
+					}
+				}
 			}
 		});
 	}
 
 	self.resetGraph = function () {
-		$('.drop').removeClass('ui-droppable-disabled ui-state-disabled').empty().droppable('enable');
+		$('.drop').removeClass('ui-droppable-disabled ui-state-disabled').addClass('disabled').empty().droppable('enable');
+		$('td.first').removeClass('disabled');
 	}
 }
