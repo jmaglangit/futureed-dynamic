@@ -572,7 +572,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 			header_data = {
 				field : data.rows.item(h).cells.item(0).childNodes.item(1).className.replace("origin ",""),
-				image :  data.rows.item(h).cells.item(0).childNodes.item(1).childNodes.item(1).attributes.item(2).nodeValue,
+				image :  data.rows.item(h).cells.item(0).childNodes.item(1).childNodes.item(1).attributes.item(1).nodeValue,
 				count : 0,
 				count_objects : 0
 			};
@@ -616,7 +616,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		for(h=0; h < header_count ; h++){
 			header_data = {
 				field : data.rows.item(0).cells.item(h).className,
-				image : data.rows.item(0).cells.item(h).childNodes.item(1).childNodes.item(1).attributes.item(2).nodeValue,
+				image : data.rows.item(0).cells.item(h).childNodes.item(1).childNodes.item(1).attributes.item(1).nodeValue,
 				count : 0,
 				count_objects : 0
 			};

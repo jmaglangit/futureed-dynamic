@@ -63,6 +63,37 @@
 						<span ng-if="student.validation.e_error" class="error-msg-con">{! student.validation.e_error !}</span>
 					</div>	
 				</div>
+				<div class="form-group">
+					<label class="col-xs-3 control-label" id="status">Status <span class="required">*</span></label>
+					<div class="col-xs-5">
+						<div class="col-xs-6 checkbox">
+							<label>
+								{!! Form::radio('status'
+									, 'Enabled'
+									, false
+									, array(
+										'class' => 'field'
+										, 'ng-model' => 'student.record.status'
+									)
+								) !!}
+							<span class="lbl padding-8">Enabled</span>
+							</label>
+						</div>
+						<div class="col-xs-6 checkbox">
+							<label>
+								{!! Form::radio('status'
+									, 'Disabled'
+									, false
+									, array(
+										'class' => 'field'
+										, 'ng-model' => 'student.record.status'
+									)
+								) !!}
+							<span class="lbl padding-8">Disabled</span>
+							</label>
+						</div>
+					</div>
+				</div>
 			</fieldset>
 			<fieldset>
 				<legend class="legend-name-mid">
