@@ -323,7 +323,8 @@ function FutureedController($scope, $window, apiService, futureed) {
 								$scope.user.class = Constants.TRUE;
 							}
 						}
-						$scope.getCashPoints();
+
+						$scope.getUserPoints();
 						$scope.updateUserData($scope.user);
 					}
 
@@ -334,18 +335,22 @@ function FutureedController($scope, $window, apiService, futureed) {
 		}
 	}
 
-	$scope.getCashPoints = function() {
+	$scope.getUserPoints = function() {
 		var id = $scope.user.id;
+		var user = $("input[name='userdata']").val();
+		$scope.user = JSON.parse(user);
 
-		apiService.getCashPoints(id).success(function(response){
+		apiService.getUserPoints(id).success(function(response){
 			if(response.status == Constants.STATUS_OK) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data){
+					$scope.user.points = response.data.reward_points;
 					$scope.user.cash_points = response.data.cash_points;
 				}
 			}
 
+			$scope.updateUserData($scope.user);
 		}).error(function(response){
 			self.errors = $scope.internalError();
 		});
