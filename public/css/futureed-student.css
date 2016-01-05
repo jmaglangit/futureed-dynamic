@@ -1820,6 +1820,15 @@ top: 41px;
 	width: 50px;
 }
 
+.origin {
+	width: 50px;
+	margin: 0 auto;
+}
+
+.origin img {
+	width: 50px;
+}
+
 .drop{
 	border:1px solid #ddd;
 	height:50px;
