@@ -255,4 +255,17 @@ return [
 		'text/csv',
 		'application/vnd.ms-excel'
 	],
+
+	//Rating Scores
+	'rating_1' => 1,
+	'rating_2' => 2,
+	'rating_3' => 3,
+	'rating_4' => 4,
+	'rating_5' => 5,
+	'rating_points_0' => 0,
+	'rating_points_4' => 4,
+	'rating_points_8' => 8,
+	'rating_points_12' => 12,
+	'rating_points_16' => 16,
+	'rating_points_20' => 20,
 ];

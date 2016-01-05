@@ -17,30 +17,35 @@ class RatingService {
         return $calculated_rating;
     }
 
+    /**
+     * Returns points equivalent to provided rating.
+     * @param $rating
+     * @return int
+     **/
     public function getPointsEquivalent($rating){
         switch ($rating) {
-            case 1:
-                return 4;
+            case config('futureed.rating_1'):
+                return config('futureed.rating_points_4');
                 break;
 
-            case 2:
-                return 8;
+            case config('futureed.rating_2'):
+                return config('futureed.rating_points_8');
                 break;
 
-            case 3:
-                return 12;
+            case config('futureed.rating_3'):
+                return config('futureed.rating_points_12');
                 break;
 
-            case 4:
-                return 16;
+            case config('futureed.rating_4'):
+                return config('futureed.rating_points_16');
                 break;
 
-            case 5:
-                return 20;
+            case config('futureed.rating_5'):
+                return config('futureed.rating_points_20');
                 break;
 
             default:
-                return 0;
+                return config('futureed.rating_points_0');
                 break;
         }
     }
