@@ -127,7 +127,7 @@ var services = angular.module('futureed.services', []);
 			});
 		}
 
-		futureedAPI.getCashPoints = function(id) {
+		futureedAPI.getUserPoints = function(id) {
 			return $http({
 				  method 	: Constants.METHOD_GET
 				, url	: futureedAPIUrl + 'student-point-cash?student_id=' + id
