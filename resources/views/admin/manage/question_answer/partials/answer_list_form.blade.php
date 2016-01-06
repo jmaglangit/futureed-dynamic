@@ -454,7 +454,7 @@
             <p>{! qa.answers.success !}</p>
         </div>
     </div>
-    <div class="col-xs-12 search-container">
+    <div class="col-xs-12 search-container" ng-if="qa.answers.graph_records.answer.length == 0 || qa.active_ansedit">
         {!! Form::open(array('class' => 'form-horizontal')) !!}
         <div class="form-search">
             <div class="form-group">
