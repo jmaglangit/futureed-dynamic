@@ -211,9 +211,8 @@ class AdminQuestionController extends ApiController {
 		){
 
 			unset($data['answer']);
+			$data['question_graph_content'] = $this->question_service->updateContentOrientation($question->question_graph_content,$data['orientation']);
 		}
-
-		$data['question_graph_content'] = $this->question_service->updateContentOrientation($question->question_graph_content,$data['orientation']);
 
 		if(!$question){
 
