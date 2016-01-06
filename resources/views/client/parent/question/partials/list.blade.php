@@ -26,7 +26,7 @@
 	<div class="col-xs-12 question-container" ng-if="question.hide_difficulty">
 		<div class="row content-display">
 			<div class="content-text">
-				<p>{! question.details.questions_text !}</p>
+				<p ng-bind-html="question.details.questions_text | trustAsHtml"></p>
 				<div ng-if="question.details.questions_image != futureed.NONE">
 					<img class="img-full" ng-src="{! question.details.questions_image !}">
 				</div>
