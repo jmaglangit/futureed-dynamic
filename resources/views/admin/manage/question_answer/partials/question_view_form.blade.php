@@ -126,7 +126,7 @@
 								, 'O' => 'Orders'
 								, 'N' => 'Provide'
 								, 'GR' => 'Graph'
-								, 'QUAD' => 'QUADRANT'
+								, 'QUAD' => 'Quadrant'
 							)
 							, ''
 							, array(
