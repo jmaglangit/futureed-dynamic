@@ -127,6 +127,14 @@ class HelpRequestAnswerController extends ApiController {
 	public function store(HelpRequestAnswerRequest $request)
 	{
 		$data = $request->all();
+
+		//Add help request details
+		$help_request_details = $this->help_request->getHelpRequest($data['help_request_id']);
+
+		$data['module_id'] = $help_request_details->module_id;
+		$data['subject_id'] = $help_request_details->subject_id;
+		$data['subject_area_id'] = $help_request_details->subject_area_id;
+
 		$result = $this->help_request_answer->addHelpRequestAnswer($data);
 
 		//update last_answered_at in help_request table
