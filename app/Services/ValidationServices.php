@@ -29,6 +29,7 @@ class ValidationServices extends Validator{
 	public function validateUrlExists($attribute,$value,$parameters){
 
 		$file = url() . $value;
+		$file = str_replace(' ','%20',$file);
 		$file_headers = @get_headers($file);
 		if($file_headers[0] == 'HTTP/1.1 200 OK') {
 			return true;
