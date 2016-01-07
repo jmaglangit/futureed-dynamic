@@ -211,8 +211,14 @@ class QuestionServices {
 					$this->file->delete($destination);
 				}
 
+				if(!$this->file->exists(config('futureed.question_image_path_final') . '/' . $id . '/')){
+
+					//make directory
+					$this->file->makeDirectory(config('futureed.question_image_path_final') . '/' . $id . '/');
+				}
+
 				//copy files from temp to destination question folder.
-				if ($this->file->copy($temp_file, $destination)) {
+				if ($this->file->move($temp_file, $destination)) {
 
 					$answer->image = $app_path;
 				}
