@@ -323,6 +323,7 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 					 ->where('orders.date_start', '<=', Carbon::now())
 					 ->where('orders.date_end', '>=', Carbon::now())
 					 ->where('class_students.student_id', $student_id)
+					 ->whereNULL('student_modules.deleted_at')
 					 ->groupBy('subjects.name')
 					 ->get();
 
