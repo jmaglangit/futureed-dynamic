@@ -459,6 +459,20 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 			obj = {"answer" : answer_graph_array};
 			answer.answer_text = JSON.stringify(obj);
+		} else if(angular.equals(self.current_question.question_type, Constants.QUADRANT)) {
+
+			quadData = self.quad.getData();
+			answer_quad_array = [];
+
+			$.each(quadData[0].data, function(i,item){
+				if(i > 0){
+					obj = {'x' : quadData[0].data[i][0], 'y' : quadData[0].data[i][1]}
+					answer_quad_array.push(obj);
+				}
+			});
+
+			obj = {"answer" : answer_quad_array};
+			answer.answer_text = JSON.stringify(obj);
 
 		} else {
 			answer.answer_text = self.current_question.answer_text;
@@ -860,6 +874,63 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		});
 	}
 
+	self.getQuadrant = function(question_id){
+		$scope.ui_block();
+		StudentModuleService.getGraph(question_id).success(function(response) {
+
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				}else {
+					//initialize plot data and options
+					data = [[null]];
+					options = {
+						yaxis: { min: -response.data.dimension, max: response.data.dimension, ticks: response.data.dimension * 2},
+						xaxis: { min: -response.data.dimension, max: response.data.dimension, ticks: response.data.dimension * 2},
+						grid: {clickable: true},
+						points: { show: true, radius: 4, fill: true, fillColor: "#EDC240" }
+					};
+
+					//draw plot
+					self.quad = $.plot($("#placeholder"), data, options);
+					$("#placeholder").bind("plotclick", function (event, pos, item) {
+
+						if(!item){
+							newData = self.quad.getData();
+
+							//check for duplicates
+							$.each(newData[0].data, function(i,item){
+								var arr1 = newData[0].data[i];
+								var arr2 = [Math.round(pos.x),Math.round(pos.y)];
+
+								if(newData[0].data[i] != null){
+									duplicate_point = self.arraysEqual(arr1,arr2);
+									if(duplicate_point){
+										return false;
+									}
+								}else{
+									duplicate_point = false;
+								}
+							});
+
+							if(!duplicate_point){
+								newData[0].data.push([Math.round(pos.x),Math.round(pos.y)]);
+								self.quad.setData(newData);
+								self.quad.setupGrid();
+								self.quad.draw();
+							}
+						}
+					});
+				}
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
 	self.initDrag = function (){
 		$('.origin').draggable({
 			containment: 'table',
@@ -894,7 +965,25 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 	}
 
 	self.resetGraph = function () {
-		$('.drop').removeClass('ui-droppable-disabled ui-state-disabled').addClass('disabled').empty().droppable('enable');
-		$('td.first').removeClass('disabled');
+		if(angular.equals(self.current_question.question_type, Constants.GRAPH)){
+			$('.drop').removeClass('ui-droppable-disabled ui-state-disabled').addClass('disabled').empty().droppable('enable');
+			$('td.first').removeClass('disabled');
+		}else if(angular.equals(self.current_question.question_type, Constants.QUADRANT)){
+			data = [[null]];
+			self.quad = $.plot($("#placeholder"), data, options);
+		}
+	}
+
+	//function to compare arrays - used to evaluate quadrant plots
+	self.arraysEqual = function(arr1, arr2) {
+		if(arr1.length !== arr2.length)
+			return false;
+
+		for(var i = arr1.length; i--;) {
+			if(arr1[i] !== arr2[i])
+			return false;
+		}
+
+		return true;
 	}
 }
