@@ -184,6 +184,28 @@ class StudentModuleAnswerController extends ApiController{
 		}elseif($question_type == config('futureed.question_type_quad')){
 			//if question is quad (quadrant)
 
+			//validate json format.
+			if(!json_decode($data['answer_text'])){
+
+				return $this->respondErrorMessage(2069);
+			}
+
+			//get answer
+			$answer = $this->question->getQuestionAnswer($data['question_id']);
+
+			//compare answers
+			$graph_result = $this->question_service->validateQuadrantAnswer($data['answer_text'],$answer);
+
+			//designate points and results
+			$data['answer_status'] = ($graph_result) ?
+				config('futureed.answer_status_correct') :
+				config('futureed.answer_status_wrong');
+
+			$data['points_earned'] = ($graph_result) ?
+				$this->question->getQuestionPointsEarned($data['question_id'])
+				: 0;
+
+
 		}else {
 
 			//Get answer and point from Question.
