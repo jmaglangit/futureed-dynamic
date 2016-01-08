@@ -144,14 +144,33 @@ class InvoiceController extends ApiController {
         $invoice = $this->invoice->updateInvoice($id,$input);
 
         //insert order here.
-        $order_input = $request->only('order_no','client_id','subscription_id','date_start','date_end','seats_total','total_amount','payment_status');
+        $order_input = $request->only(
+            'order_no',
+            'client_id',
+            'subscription_id',
+            'date_start',
+            'date_end',
+            'seats_total',
+            'total_amount',
+            'payment_status');
         $order_input['order_date'] = $input['invoice_date'];
         $order_input['seats_taken'] = 0;
 
         $order = $this->order->getOrderByOrderNo($order_input['order_no']);
 
         if( !is_null($order) ){
-            $this->order->updateOrder($order['id'],$order_input);
+            $order_response = $this->order->updateOrder($order['id'],$order_input);
+
+            //for successful order update.
+            if($order_response){
+
+                //update related classrooms
+                $data = [
+                    'subject_id' => $input['subject_id'],
+                ];
+
+                $this->classrooms->updateClassroomByOrderNo($order_input['order_no'],$data);
+            }
         }else{
             $this->order->addOrder($order_input);
         }
