@@ -38,6 +38,7 @@ class InvoiceRequest extends ApiRequest {
                     'total_amount' => 'required|numeric|between:1,999999.99',
                     'subscription_id' => 'required|integer',
                     'payment_status' => 'required|in:Pending,Paid,Cancelled',
+                    'subject_id' => 'required|exists:subjects,id,deleted_at,NULL'
                 ];
                 break;
 
