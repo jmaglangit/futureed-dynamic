@@ -23,6 +23,8 @@ interface ClassroomRepositoryInterface {
 
     public function deleteClassroomByOrderNo($order_no);
 
+    public function updateClassroomByOrderNo($order_no, $data);
+
     public function getClassroomByOrderNo($order_no);
 
     public function getClassroomBySubjectId($subject_id, $student_id);
