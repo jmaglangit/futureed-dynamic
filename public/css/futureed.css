@@ -1290,3 +1290,10 @@ fieldset legend {
 .table {
 	margin-bottom: 0px;
 }
+
+.footnotes {
+	font: 10px tahoma, verdana, arial, sans-serif;
+	font-style: italic;
+	padding: 8px;
+}
+
