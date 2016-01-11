@@ -167,6 +167,11 @@ class ModuleRepository implements ModuleRepositoryInterface
 		return Module::find($module_id)->pluck('points_to_finish');
 	}
 
+	public function getGradeModule($subject_id,$grade_id){
+
+		return Module::subjectId($subject_id)->gradeId($grade_id)->get();
+	}
+
 	/**
 	 * count the number of module under a subject under a grade
 	 * @param $subject_id ,$grade_id;
