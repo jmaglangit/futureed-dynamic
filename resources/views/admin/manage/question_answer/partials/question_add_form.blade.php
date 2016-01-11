@@ -167,8 +167,29 @@
 					</div>
 				</div>
 
+				<div class="form-group"
+					 ng-if="qa.record.question_type
+					 && qa.record.question_type != futureed.MULTIPLECHOICE
+					 && qa.record.question_type != futureed.GRAPH
+					 && qa.record.question_type != futureed.QUADRANT">
+					<label class="control-label col-xs-4">Answer <span class="required">*</span></label>
+
+					<div class="col-xs-5">
+						{!! Form::textarea('answer',''
+							, array(
+								'placeHolder' => 'Answer'
+								, 'ng-model' => 'qa.record.answer'
+								, 'class' => 'form-control disabled-textarea'
+								, 'ng-disabled' => 'qa.active_view'
+								, 'ng-class' => "{ 'required-field' : qa.fields['answer'] }"
+								, 'rows' => 3
+							)
+						) !!}
+					</div>
+				</div>
+
 				<div class="form-group" ng-if="qa.record.question_type == futureed.ORDERING  && qa.record.question_type">
-					<label class="control-label col-xs-4">Order <span class="required">*</span></label>
+					<label class="control-label col-xs-4">Order <span class="required">**</span></label>
 					<div class="col-xs-5">
 						{!! Form::textarea('question_order_text',''
 							, array(
@@ -179,7 +200,6 @@
 								, 'rows' => 3
 							)
 						) !!}
-						<p class="help-block">Answer should be comma separated to indicate the order.</p>
 					</div>
 				</div>
 
@@ -301,5 +321,10 @@
 				</div>
 			</div>
 		</div>
+	</div>
+	<br>
+	<div class="footnotes">
+		<div><label class="required">*</label> required information</div>
+		<div ng-if="qa.record.question_type == futureed.ORDERING  && qa.record.question_type"><label class="required">**</label> answer should be comma separated to indicate the order. </div>
 	</div>
 </div>

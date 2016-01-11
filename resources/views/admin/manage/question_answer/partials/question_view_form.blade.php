@@ -126,7 +126,7 @@
 								, 'O' => 'Orders'
 								, 'N' => 'Provide'
 								, 'GR' => 'Graph'
-								, 'QUAD' => 'QUADRANT'
+								, 'QUAD' => 'Quadrant'
 							)
 							, ''
 							, array(
@@ -162,7 +162,6 @@
 				<div class="form-group"
 					 ng-if="qa.record.question_type
 					 && qa.record.question_type != futureed.MULTIPLECHOICE
-					 && qa.record.question_type != futureed.ORDERING
 					 && qa.record.question_type != futureed.GRAPH
 					 && qa.record.question_type != futureed.QUADRANT">
 					<label class="control-label col-xs-3">Answer <span class="required">*</span></label>
@@ -194,7 +193,6 @@
 								, 'rows' => 3
 							)
 						) !!}
-						<p class="help-block">Answer should be comma separated to indicate the order.</p>
 					</div>
 				</div>
 
@@ -349,5 +347,11 @@
 				</div>
 			</div>
 		</div>
+	</div>
+
+	<br>
+	<div class="footnotes">
+		<div><label class="required">*</label> required information</div>
+		<div ng-if="qa.record.question_type == futureed.ORDERING  && qa.record.question_type"><label class="required">**</label> answer should be comma separated to indicate the order. </div>
 	</div>
 </div>

@@ -156,6 +156,33 @@ class ClassroomRepository implements ClassroomRepositoryInterface{
         }
     }
 
+    /**
+     * Update Classroom by Order No.
+     * @param $order_no
+     * @param $data
+     * @return string
+     */
+    public function updateClassroomByOrderNo($order_no, $data){
+
+        DB::beginTransaction();
+        try{
+
+           $response = Classroom::whereOrderNo($order_no)->update($data);
+
+        } catch(\Exception $e){
+
+            DB::rollback();
+
+            $this->errorLog($e->get());
+
+            return $e->getMessage();
+        }
+
+        DB::commit();
+
+        return $response;
+    }
+
 	/**
      * @param $order_no
      * @return null|string

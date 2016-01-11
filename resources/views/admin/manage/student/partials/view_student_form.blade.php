@@ -67,6 +67,54 @@
 						<span ng-if="student.validation.e_error" class="error-msg-con">{! student.validation.e_error !}</span>
 					</div>
 				</div>
+				<div class="form-group">
+					<label class="col-xs-3 control-label" id="status">Status <span class="required">*</span></label>
+
+					<div class="col-xs-5" ng-if="student.active_edit">
+						<div class="col-xs-6 checkbox">
+							<label>
+								{!! Form::radio('status'
+									, 'Enabled'
+									, false
+									, array(
+										'class' => 'field'
+										, 'ng-model' => 'student.record.status'
+										, 'ng-click' => 'student.studentChangeStatus()'
+									)
+								) !!}
+							<span class="lbl padding-8">Enabled</span>
+							</label>
+						</div>
+						<div class="col-xs-6 checkbox">
+							<label>
+								{!! Form::radio('status'
+									, 'Disabled'
+									, false
+									, array(
+										'class' => 'field'
+										, 'ng-model' => 'student.record.status'
+										, 'ng-click' => 'student.studentChangeStatus()'
+									)
+								) !!}
+							<span class="lbl padding-8">Disabled</span>
+							</label>
+						</div>
+					</div>
+
+					<div ng-if="student.active_view">
+						<label class="col-xs-5" ng-if="student.record.status == 'Enabled'">
+							<b class="success-icon">
+								<i class="margin-top-8 fa fa-check-circle-o"></i> {! student.record.status !}
+							</b>
+						</label>
+
+						<label class="col-xs-5" ng-if="student.record.status == 'Disabled'">
+							<b class="error-icon">
+								<i class="margin-top-8 fa fa-ban"></i> {! student.record.status !}
+							</b>
+						</label>
+					</div>
+				</div>
 				<div class="form-group" ng-if="student.record.new_email">
 					<label class="col-xs-3 control-label text-red" id="email">Pending Email <span class="required">*</span></label>
 					<div class="col-xs-5">

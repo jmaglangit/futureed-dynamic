@@ -203,8 +203,15 @@ return [
 	//reset module
 	'reset_module' => 'Reset Module',
 
+	//student points code
+	'student_point_description_code' => 1,
+	'student_point_description_code_tip' => 3,
+	'student_point_description_code_help' => 4,
+
 	//student points description
 	'student_point_description' => 'Completion of Module',
+	'student_point_description_tip' => 'Contribute a Tip',
+	'student_point_description_help' => 'Contribute an Answer',
 
 	//student progress
 	'student_progress' => 100,
@@ -248,4 +255,17 @@ return [
 		'text/csv',
 		'application/vnd.ms-excel'
 	],
+
+	//Rating Scores
+	'rating_1' => 1,
+	'rating_2' => 2,
+	'rating_3' => 3,
+	'rating_4' => 4,
+	'rating_5' => 5,
+	'rating_points_0' => 0,
+	'rating_points_1' => 4,
+	'rating_points_2' => 8,
+	'rating_points_3' => 12,
+	'rating_points_4' => 16,
+	'rating_points_5' => 20,
 ];

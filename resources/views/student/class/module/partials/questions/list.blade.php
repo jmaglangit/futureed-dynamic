@@ -63,11 +63,12 @@
 							<tr ng-repeat="item in mod.question_graph_content.image" class="{! item.field !}">
 								<th class="origin-container" ng-init="mod.initDrag()">
 									<div class="origin {! item.field !}">
-										<img style="width:50px;" ng-src="{! item.path !}" />
+										<img ng-src="{! item.path !}" />
 									</div>
 								</th>
-
-								<td ng-init="mod.initDrop()" class="drop" ng-repeat="col in mod.graph_layout">
+								<td ng-init="mod.initDrop()" class="drop first">
+								</td>
+								<td ng-init="mod.initDrop()" class="drop disabled" ng-repeat="col in mod.graph_layout" ng-if="$index > 0">
 								</td>
 							</tr>
 						</table>
@@ -76,16 +77,29 @@
 							<tr>
 								<th ng-repeat="item in mod.question_graph_content.image" class="{! item.field !}" ng-init="mod.initDrag()">
 									<div class="origin {! item.field !}">
-										<img style="width:50px;" ng-src="{! item.path !}" />
+										<img ng-src="{! item.path !}" />
 									</div>
 								</th>
 							</tr>
-							<tr ng-repeat="col in mod.graph_layout">
-								<td ng-repeat="item in mod.question_graph_content.image" ng-init="mod.initDrop()" class="drop">
+							<tr>
+								<td ng-repeat="item in mod.question_graph_content.image" ng-init="mod.initDrop()" class="drop first">
+								</td>
+							</tr>
+							<tr ng-repeat="col in mod.graph_layout" ng-if="$index > 0">
+								<td ng-repeat="item in mod.question_graph_content.image" ng-init="mod.initDrop()" class="drop disabled">
 								</td>
 							</tr>
 
 						</table>
+						<div class="col-xs-3 pull-right reset-graph">
+							<button class="btn btn-gold" ng-click="mod.resetGraph()">RESET</button>
+						</div>
+					</div>
+				</div>
+
+				<div ng-if="mod.current_question.question_type == futureed.QUADRANT">
+					<div ng-init="mod.getQuadrant(mod.current_question.id)">
+						<div id="placeholder" style="width:400px;height:400px;margin:0 auto;"></div>
 						<div class="col-xs-3 pull-right reset-graph">
 							<button class="btn btn-gold" ng-click="mod.resetGraph()">RESET</button>
 						</div>

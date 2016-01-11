@@ -442,6 +442,176 @@
     </div>
 </div>
 
+<div ng-if="qa.record.question_type == futureed.QUADRANT" ng-init="qa.setAnsActive()">
+    <div class="col-xs-12 search-container" ng-if="qa.answers.errors || qa.answers.success">
+        <div class="alert alert-error" ng-if="qa.answers.errors">
+            <p ng-repeat="error in qa.answers.errors track by $index">
+                {! error !}
+            </p>
+        </div>
+
+        <div class="alert alert-success" ng-if="qa.answers.success">
+            <p>{! qa.answers.success !}</p>
+        </div>
+    </div>
+    <div class="col-xs-12 search-container" ng-if="qa.answers.graph_records.answer.length == 0 || qa.active_ansedit">
+        {!! Form::open(array('class' => 'form-horizontal')) !!}
+        <div class="form-search">
+            <div class="form-group">
+                <label class="col-xs-4 control-label">X Axis<span class="required">*</span></label>
+
+                <div class="col-xs-5">
+                    {!! Form::text('code',''
+                        , array(
+                            'placeHolder' => 'coordinate'
+                            , 'ng-model' => 'qa.answers.record.x'
+                            , 'class' => 'form-control'
+                            , 'ng-class' => "{ 'required-field' : qa.fields['code_ans'] }"
+                        )
+                    ) !!}
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-xs-4 control-label">Y Axis<span class="required">*</span></label>
+
+                <div class="col-xs-5">
+                    {!! Form::text('answer_text',''
+                        , array(
+                            'placeHolder' => 'coordinate'
+                            , 'ng-model' => 'qa.answers.record.y'
+                            , 'class' => 'form-control'
+                            , 'ng-class' => "{ 'required-field' : qa.fields['answer_text_ans'] }"
+                        )
+                    ) !!}
+                </div>
+            </div>
+
+
+            <div class="form-group"
+                 ng-if="qa.active_view
+                 && !qa.answers.record.uploaded
+                 && qa.answers.record.original_image_name
+                 && qa.answers.record.original_image_name != '0'">
+                <div class="control-label col-xs-4"></div>
+                <div class="col-xs-5">
+                    <a href="" ng-click="qa.viewAnswerImage(qa.answers.record)">View Image</a>
+                </div>
+            </div>
+
+
+            <div class="form-group">
+                <div class="btn-container col-xs-10 col-xs-offset-1" ng-if="qa.active_anslist && qa.answers.graph_records.answer.length == 0">
+                    {!! Form::button('Add'
+                        , array(
+                            'class' => 'btn btn-blue btn-medium'
+                            , 'ng-click' => 'qa.addAnswer()'
+                        )
+                    ) !!}
+                    {!! Form::button('Clear'
+                        , array(
+                            'class' => 'btn btn-gold btn-medium'
+                            , 'ng-click' => 'qa.clearAnswer()'
+                        )
+                    ) !!}
+                </div>
+                <div class="btn-container col-xs-10 col-xs-offset-1" ng-if="qa.active_ansedit && qa.answers.graph_records.answer.length != 0">
+                    {!! Form::button('Update'
+                        , array(
+                            'class' => 'btn btn-blue btn-medium'
+                            , 'ng-click' => 'qa.updateAnswer()'
+                        )
+                    ) !!}
+                    {!! Form::button('Cancel'
+                        , array(
+                            'class' => 'btn btn-gold btn-medium'
+                            , 'ng-click' => 'qa.setAnsActive()'
+                        )
+                    ) !!}
+                </div>
+            </div>
+        </div>
+        {!! Form::close() !!}
+    </div>
+
+    <div class="col-xs-12 table-container">
+        <div class="list-container" ng-cloak>
+            <div class="col-xs-6 title-mid">
+                Answer List
+            </div>
+
+            <div class="col-xs-6 size-container">
+                {!! Form::select('size'
+                    , array(
+                          '10' => '10'
+                        , '20' => '20'
+                        , '50' => '50'
+                        , '100' => '100'
+                    )
+                    , '10'
+                    , array(
+                        'ng-model' => 'qa.table.size'
+                        , 'ng-change' => 'qa.paginateBySize()'
+                        , 'ng-if' => "qa.answers.records.length"
+                        , 'class' => 'form-control paginate-size pull-right'
+                    )
+                ) !!}
+            </div>
+
+            <table class="col-xs-12 table table-striped table-bordered">
+                <thead>
+                <tr>
+                    <th>X Coordinates</th>
+                    <th>Y Coordinates</th>
+                    <th ng-if="qa.record.answer.length">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="record in qa.answers.graph_records.answer">
+                    <td>{! record.x !}</td>
+                    <td>{! record.y !}</td>
+                    <td ng-if="qa.answers.graph_records.answer">
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <a href="" ng-click="qa.setAnsActive(futureed.ACTIVE_EDIT, $index)"><span><i
+                                                class="fa fa-pencil"></i></span></a>
+                            </div>
+                            <div class="col-xs-6">
+                                <a href="" ng-click="qa.confirmAnsDelete($index)"><span><i
+                                                class="fa fa-trash"></i></span></a>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="odd" ng-if="!qa.answers.graph_records.answer.length && !qa.table.loading">
+                    <td valign="top" colspan="7">
+                        No records found
+                    </td>
+                </tr>
+                <tr class="odd" ng-if="qa.table.loading">
+                    <td valign="top" colspan="7">
+                        Loading...
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <div class="pull-right" ng-if="qa.answers.records.answer.length">
+                <pagination
+                        total-items="qa.table.total_items"
+                        ng-model="qa.table.page"
+                        max-size="3"
+                        items-per-page="qa.table.size"
+                        previous-text="&lt;"
+                        next-text="&gt;"
+                        class="pagination"
+                        boundary-links="true"
+                        ng-change="qa.paginateByPage()">
+                </pagination>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div id="delete_answer_modal" ng-show="qa.delete.ans_confirm" class="modal fade" tabindex="-1" role="dialog"
      aria-labelledby="myLargeModalLabel" aria-hidden="true">

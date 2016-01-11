@@ -156,7 +156,7 @@ class AdminQuestionAnswerController extends ApiController {
 		} else {
 
 			$image = explode('/',$data['answer_image']);
-			$data['answer_image'] = $image[6];
+			$data['answer_image'] = $image[5];
 		}
 
 		//update question_answer
