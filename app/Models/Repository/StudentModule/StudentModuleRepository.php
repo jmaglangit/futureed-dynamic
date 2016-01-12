@@ -213,12 +213,17 @@ class StudentModuleRepository implements StudentModuleRepositoryInterface
 
 	}
 
-	public function getStudentModuleGrade($student_id, $subject_id, $grade_id){
+	public function getStudentModuleGradeCompleted($student_id, $subject_id, $grade_id){
 
 		DB::beginTransaction();
 		try{
 
-			//TODO get student_module by student, subject, grade
+			$response = StudentModule::studentId($student_id)
+				->subjectId($subject_id)
+				->gradeId($grade_id)
+				->completed()
+				->groupBy('module_id')
+				->get();
 
 		}catch (\Exception $e){
 			DB::rollback();
