@@ -59,6 +59,7 @@ function ProfileController($scope, apiService, ProfileService) {
 			self.active_rewards = Constants.TRUE;
 			self.getPoints();
 			self.getBadges();
+			self.getPointLevel();
 			break;
 
 		  case 'reports'  		:
@@ -664,6 +665,24 @@ function ProfileController($scope, apiService, ProfileService) {
 				} 
 			  }
 			  $scope.ui_unblock();
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.getPointLevel = function() {
+		$scope.ui_block();
+		ProfileService.getPointLevel(self.prof.points).success(function(response){
+			if(response.status == Constants.STATUS_OK) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data){
+					console.log(response.data.records);
+					self.point_level = response.data.records;
+				}
+			}
+			$scope.ui_unblock();
 		}).error(function(response){
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();

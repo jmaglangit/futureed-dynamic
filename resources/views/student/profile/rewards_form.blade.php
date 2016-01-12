@@ -61,8 +61,15 @@
 	</fieldset>
 	<fieldset class="reward-set">
 		<legend>Medals</legend>
-		<div>
+		<div ng-if="!profile.point_level">
 			<div class="alert alert-info">No Medals Available</div>
+		</div>
+		<div ng-if="profile.point_level">
+			<ul class="medals">
+				<li class="pull-left" ng-repeat="medal in profile.point_level">
+					<img ng-src="../images/medals/{! medal.filename !}" />
+				</li>
+			<ul>
 		</div>
 	</fieldset>
 </div>
