@@ -678,7 +678,6 @@ function ProfileController($scope, apiService, ProfileService) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data){
-					console.log(response.data.records);
 					self.point_level = response.data.records;
 				}
 			}
