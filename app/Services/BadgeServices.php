@@ -1,6 +1,7 @@
 <?php namespace FutureEd\Services;
 
 use FutureEd\Models\Repository\Badge\BadgeRepositoryInterface;
+use FutureEd\Models\Repository\CountryGrade\CountryGradeRepositoryInterface;
 use FutureEd\Models\Repository\Module\ModuleRepositoryInterface;
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use FutureEd\Models\Repository\StudentBadge\StudentBadgeRepositoryInterface;
@@ -18,36 +19,75 @@ class BadgeServices {
 
 	protected $module;
 
+	protected $country_grade;
+
 	public function __construct(
 		StudentRepositoryInterface $studentRepositoryInterface,
 		StudentModuleRepositoryInterface $studentModuleRepositoryInterface,
 		BadgeRepositoryInterface $badgeRepositoryInterface,
 		StudentBadgeRepositoryInterface $studentBadgeRepositoryInterface,
-		ModuleRepositoryInterface $moduleRepositoryInterface
+		ModuleRepositoryInterface $moduleRepositoryInterface,
+		CountryGradeRepositoryInterface $countryGradeRepositoryInterface
 	){
 		$this->student = $studentRepositoryInterface;
 		$this->student_module = $studentModuleRepositoryInterface;
 		$this->badge = $badgeRepositoryInterface;
 		$this->student_badge = $studentBadgeRepositoryInterface;
 		$this->module = $moduleRepositoryInterface;
+		$this->country_grade = $countryGradeRepositoryInterface;
 	}
 
-	//get all modules where subject, grade
-	//get all student modules where subject, grade,student
 
-	//compare modules and student_modules
-		//if complete  unlock badge
-		//else do nothing
+	/**
+	 * Check student candidate for badge.
+	 * @param $student_id
+	 * @param $subject_id
+	 * @param $grade_id
+	 * @return bool
+	 */
 	public function checkBadgeCandidate($student_id, $subject_id, $grade_id){
 
 		$module = $this->module->getGradeModule($subject_id,$grade_id);
-		$student_module = $this->student_module->getStudentModuleGrade($student_id,$subject_id,$grade_id);
+		$student_module = $this->student_module->getStudentModuleGradeCompleted($student_id,$subject_id,$grade_id);
 
+		//check if module is complete.
+		if(count($module->toArray()) == count($student_module->toArray())){
 
+			$this->unlockBadge($student_id,$subject_id,$grade_id);
+			return true;
+		}
+
+		return false;
 	}
 
 
-	//Unlock badge
-		//if not exists add badge to student_badge
+	/**
+	 * Add student badge.
+	 * @param $student_id
+	 * @param $subject_id
+	 * @param $grade_id
+	 * @return bool
+	 */
+	public function unlockBadge($student_id,$subject_id, $grade_id){
+
+		//get age_group_id
+		$country_grade = $this->country_grade->getCountryGradeByGrade($grade_id);
+
+		//get student's badge
+		$student_badge = $this->student_badge->getStudentBadge($student_id,$subject_id,$grade_id);
+
+		//Add student badge if it doesn't exist.
+		if(empty($student_badge->toArray())){
+
+			$this->student_badge->addStudentBadge([
+				'student_id' => $student_id,
+				'subject_id' => $subject_id,
+				'age_group_id' => $country_grade->age_group_id
+			]);
+
+		}
+
+		return true;
+	}
 
 }
