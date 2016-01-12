@@ -3,11 +3,14 @@
 namespace FutureEd\Models\Repository\StudentBadge;
 
 use FutureEd\Models\Core\StudentBadge;
+use FutureEd\Models\Traits\LoggerTrait;
 use League\Flysystem\Exception;
+use Illuminate\Support\Facades\DB;
 
 
 class StudentBadgeRepository implements StudentBadgeRepositoryInterface{
 
+	use LoggerTrait;
 	/**
 	 * Gets list of StudentBadges.
 	 * @param $criteria
@@ -126,6 +129,30 @@ class StudentBadgeRepository implements StudentBadgeRepositoryInterface{
 
 	}
 
+	public function getStudentBadge($student_id, $subject_id, $age_group_id){
+
+		DB::beginTransaction();
+		try{
+
+			$response = StudentBadge::studentId($student_id)
+				->subjectId($subject_id)
+				->ageGroupId($age_group_id)
+				->get();
+
+		}catch(\Exception $e){
+
+			DB::rollback();
+
+			dd($e->getMessage());
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
 
 
 }
