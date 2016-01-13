@@ -114,7 +114,7 @@
 						<td>
 							<div class="row">
 								<div class="col-xs-4">
-									<a href="javascript:void(0)" ng-click="student.playStudent(record.id)"><span><i class="fa fa-play"></i></span></a>
+									<a href="javascript:void(0)" ng-click="student.playStudent(user.id,record.id)"><span><i class="fa fa-play"></i></span></a>
 								</div>
 								<div class="col-xs-4">
 									<a href="javascript:void(0)" ng-click="student.setActive(futureed.ACTIVE_VIEW, record.id)"><span><i class="fa fa-eye"></i></span></a>
