@@ -16,6 +16,7 @@ return [
 	'pending' => 'Pending',
 	'accepted' => 'Accepted',
 	'rejected' => 'Rejected',
+	'none' => 'None',
 
 
 	//Request code expiry in seconds
