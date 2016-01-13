@@ -3,6 +3,7 @@
 
 use FutureEd\Models\Core\Invoice;
 use FutureEd\Models\Core\ClientDiscount;
+use FutureEd\Models\Core\User;
 
 
 class InvoiceRepository implements InvoiceRepositoryInterface{
@@ -18,6 +19,12 @@ class InvoiceRepository implements InvoiceRepositoryInterface{
     {
 
         $invoice = new Invoice();
+
+        // included deleted information for admin users.
+        if ( User::where('id',session('current_user'))->pluck('user_type') == config('futureed.admin')) {
+
+            $invoice = $invoice->withTrashed();
+        }
 
         $count = 0;
 
