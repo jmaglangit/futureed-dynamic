@@ -28,6 +28,13 @@ function ProfileService($http) {
 		});
 	}
 
+	api.getPointLevel = function(points_required) {
+		return $http({
+			  method 	: Constants.METHOD_GET
+			, url	: apiUrl + 'point-level/' + points_required
+		});
+	}
+
 	api.getLoginPassword = function(data) {
 		return $http({
 			method	: Constants.METHOD_POST
