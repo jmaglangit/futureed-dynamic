@@ -11,6 +11,11 @@ class PointLevelController extends ApiController {
 		$this->point_level = $point_level;
 	}
 
+	/**
+	 * Retruns an array of points_level for the student
+	 * @param $points_required;
+	 * @return object
+	 */
 	public function show($points_required){
 		$point_level = $this->point_level->getPointsLevel($points_required);
 		return $this->respondWithData($point_level);
