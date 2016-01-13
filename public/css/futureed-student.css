@@ -1320,6 +1320,10 @@ top: 41px;
 	margin-bottom: 0;
 }
 
+.reward-set .medals{
+	list-style: none;
+}
+
 .panel-heading {
 	padding: 0 15px;
 }

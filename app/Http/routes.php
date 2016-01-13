@@ -51,6 +51,7 @@ Routes::group([
 	include('Routes/Api/Order.php');
 	include('Routes/Api/OrderDetail.php');
 	include('Routes/Api/Payment.php');
+	include('Routes/Api/PointLevel.php');
 	include('Routes/Api/Question.php');
 	include('Routes/Api/QuestionAnswer.php');
 	include('Routes/Api/Quote.php');

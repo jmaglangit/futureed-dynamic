@@ -6,6 +6,7 @@ use FutureEd\Http\Requests\Api\StudentModuleAnswerRequest;
 use FutureEd\Models\Repository\AvatarPose\AvatarPoseRepositoryInterface;
 use FutureEd\Models\Repository\AvatarQuote\AvatarQuoteRepositoryInterface;
 use FutureEd\Models\Repository\AvatarWiki\AvatarWikiRepositoryInterface;
+use FutureEd\Models\Repository\Module\ModuleRepositoryInterface;
 use FutureEd\Models\Repository\ModuleContent\ModuleContentRepositoryInterface;
 use FutureEd\Models\Repository\Question\QuestionRepositoryInterface;
 use FutureEd\Models\Repository\QuestionAnswer\QuestionAnswerRepositoryInterface;
@@ -14,6 +15,7 @@ use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use FutureEd\Models\Repository\StudentModule\StudentModuleRepositoryInterface;
 use FutureEd\Models\Repository\StudentModuleAnswer\StudentModuleAnswerRepositoryInterface;
 use FutureEd\Models\Repository\TeachingContent\TeachingContentRepositoryInterface;
+use FutureEd\Services\BadgeServices;
 use FutureEd\Services\ModuleContentServices;
 use FutureEd\Services\QuestionServices;
 use FutureEd\Services\StudentModuleServices;
@@ -35,7 +37,9 @@ class StudentModuleAnswerController extends ApiController{
 	protected $module;
 	protected $teaching_content;
 	protected $student_module_services;
-	protected $module_services;
+	protected $module_content;
+	protected $module_content_services;
+	protected $badge_services;
 
 
 	public function __construct(
@@ -52,7 +56,9 @@ class StudentModuleAnswerController extends ApiController{
 		TeachingContentRepositoryInterface $teachingContentRepositoryInterface,
 		StudentModuleServices $studentModuleServices,
 		ModuleContentServices $moduleContentServices,
-		QuestionServices $questionServices
+		QuestionServices $questionServices,
+		BadgeServices $badgeServices,
+		ModuleRepositoryInterface $moduleRepositoryInterface
 	)
 	{
 
@@ -65,11 +71,13 @@ class StudentModuleAnswerController extends ApiController{
 		$this->student = $student;
 		$this->student_module = $student_module;
 		$this->student_module_answer = $student_module_answer;
-		$this->module = $moduleContentRepositoryInterface;
+		$this->module_content = $moduleContentRepositoryInterface;
 		$this->teaching_content = $teachingContentRepositoryInterface;
 		$this->student_module_services = $studentModuleServices;
-		$this->module_services = $moduleContentServices;
+		$this->module_content_services = $moduleContentServices;
 		$this->question_service = $questionServices;
+		$this->badge_services = $badgeServices;
+		$this->module = $moduleRepositoryInterface;
 	}
 
 //+-------------------+-------------------------+------+-----+---------------------+----------------+
@@ -115,7 +123,7 @@ class StudentModuleAnswerController extends ApiController{
 		);
 
 		//check if module has complete setup.
-		if(!$this->module_services->checkModuleComplete($data['module_id'])){
+		if(!$this->module_content_services->checkModuleComplete($data['module_id'])){
 
 			return $this->respondErrorMessage(2058);
 		}
@@ -240,7 +248,7 @@ class StudentModuleAnswerController extends ApiController{
 
 		//get necessary data to compare.
 		$student_module  = $this->student_module->getStudentModule($data['student_module_id']);
-		$points_to_finish = $this->module->getModulePointsToFinish($data['module_id']);
+		$points_to_finish = $this->module_content->getModulePointsToFinish($data['module_id']);
 
 		//CURRENT UPDATE
 
@@ -286,6 +294,13 @@ class StudentModuleAnswerController extends ApiController{
 		if($student_module->running_points >= $points_to_finish){
 
 			$student_module->module_status = config('futureed.module_status_completed');
+
+			//get module to get subject and grade
+			$module = $this->module->getModule($data['module_id']);
+
+			//Nominate for badge.
+			$this->badge_services->checkBadgeCandidate($data['student_id'],$module->subject_id,$module->grade_id);
+
 
 		} //when 10 wrong answer set status to Failed.
 		elseif($student_module->wrong_counter >= 10){

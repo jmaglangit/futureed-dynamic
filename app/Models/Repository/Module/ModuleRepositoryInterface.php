@@ -8,6 +8,8 @@ interface ModuleRepositoryInterface
 
 	public function getModules($criteria = array(), $limit = 0, $offset = 0);
 
+	public function getModule($module_id);
+
 	public function viewModule($id);
 
 	public function updateModule($id, $data);
@@ -15,6 +17,8 @@ interface ModuleRepositoryInterface
 	public function deleteModule($id);
 
 	public function getPointsToFinish($module_id);
+
+	public function getGradeModule($subject_id,$grade_id);
 
 	public function countSubjectModule($subject_id, $grade_id);
 

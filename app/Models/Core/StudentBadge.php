@@ -15,7 +15,7 @@ class StudentBadge extends Model {
 	protected $dates = ['deleted_at'];
 
 	protected $hidden = ['created_by','updated_by','updated_at','deleted_at'];
-	protected $fillable = ['student_id','badge_id','created_by','updated_by'];
+	protected $fillable = ['student_id','subject_id','age_group_id','created_by','updated_by'];
 
 	protected $attributes = [
 		'created_by' => 1,
@@ -24,14 +24,24 @@ class StudentBadge extends Model {
 
 	//-------------relationships
 	public function badges() {
-		return $this->belongsTo('FutureEd\Models\Core\Badge','badge_id','id');
+		return $this->belongsTo('FutureEd\Models\Core\Badge','subject_id','subject_id');
 	}
 
 	//-------------scopes
 	public function scopeStudentId($query, $student_id) {
 
-		return $query->where('student_id', '=', $student_id);
+		return $query->whereStudentId($student_id);
 
+	}
+
+	public function scopeSubjectId($query, $subject_id){
+
+		return $query->whereSubjectId($subject_id);
+	}
+
+	public function scopeAgeGroupId($query, $age_group_id){
+
+		return $query->whereAgeGroupId($age_group_id);
 	}
 
 
