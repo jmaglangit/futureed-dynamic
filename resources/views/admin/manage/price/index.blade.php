@@ -25,7 +25,7 @@
 					<li ng-class="{ 'active' : sale.active_client_discount }">
 						<a ng-click="sale.setActive('client_discount')" href="javascript:void(0)"><span><i class="fa fa-tags"></i>Client Discount</span></a></li>
 					<li ng-class="{ 'active' : sale.active_bulk_settings }">
-						<a ng-click="sale.setActive('bulk_settings')" href="javascript:void(0)"><span><i class="fa fa-database"></i>Bulk Settings</span></a></li>
+						<a ng-click="sale.setActive('bulk_settings')" href="javascript:void(0)"><span><i class="fa fa-database"></i>Percentage Settings</span></a></li>
 				</ul>
 					
 				<div ng-if="sale.active_price_settings" ng-controller="ManagePriceController as price" ng-init="price.setActive()" 

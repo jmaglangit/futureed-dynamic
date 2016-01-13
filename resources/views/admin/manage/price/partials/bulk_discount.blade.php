@@ -1,13 +1,13 @@
 <div ng-if="bulk.active_list">
 	<div class="col-xs-12 search-container" ng-if="bulk.active_add">
 		<div class="title-mid">
-			Add Bulk Discount
+			Add Percentage Discount
 		</div>
 	</div>
 
 	<div class="col-xs-12 search-container" ng-if="bulk.active_edit">
 		<div class="title-mid">
-			Update Bulk Discount
+			Update Percentage Discount
 		</div>
 	</div>
 
@@ -40,7 +40,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-xs-3 control-label">bulk <span class="required">*</span></label>
+					<label class="col-xs-3 control-label">Percentage <span class="required">*</span></label>
 					<div class="col-xs-5">
 						<div class="input-group">
 							{!! Form::text('percentage', '',
@@ -48,7 +48,7 @@
 									'class' => 'form-control'
 									, 'ng-model' => 'bulk.record.percentage'
 									, 'ng-class' => "{ 'required-field' : bulk.fields['percentage'] }"
-									, 'placeholder' => 'bulk'
+									, 'placeholder' => 'Percentage'
 								]) 
 							!!}
 							<span class="input-group-addon">%</span>
@@ -99,7 +99,7 @@
 							)
 						) !!}
 
-						{!! Form::button('Add Bulk Discount'
+						{!! Form::button('Add Percentage Discount'
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-click' => "bulk.add()"
@@ -123,12 +123,12 @@
 		<button class="btn btn-blue btn-semi-medium" 
 			ng-click="bulk.setActive(futureed.ACTIVE_ADD)"
 			ng-if="!(bulk.active_add || bulk.active_edit)">
-			<span><i class="fa fa-plus-square"></i></span> Add Bulk Discount
+			<span><i class="fa fa-plus-square"></i></span> Add Percentage Discount
 		</button>
 
 		<div class="list-container" ng-cloak>
 			<div class="col-xs-6 title-mid">
-				Bulk List
+				Percentage List
 			</div>
 
 			<div class="col-xs-6 size-container">
@@ -153,7 +153,7 @@
 				<thead>
 					<tr>
 						<th>Minimum Seats</th>
-						<th>bulk</th>
+						<th>Percentage</th>
 						<th ng-if="bulk.records.length">Action</th>
 					</tr>
 				</thead>
