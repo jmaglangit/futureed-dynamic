@@ -6,6 +6,8 @@ use FutureEd\Http\Requests\Api\StudentModuleRequest;
 use FutureEd\Models\Repository\Module\ModuleRepositoryInterface;
 use FutureEd\Models\Repository\Question\QuestionRepositoryInterface;
 use FutureEd\Models\Repository\StudentModule\StudentModuleRepositoryInterface;
+use FutureEd\Models\Repository\StudentModuleAnswer\StudentModuleAnswerRepositoryInterface;
+use FutureEd\Services\StudentModuleServices;
 use Illuminate\Support\Facades\Input;
 
 class StudentModuleController extends ApiController {
@@ -13,16 +15,19 @@ class StudentModuleController extends ApiController {
 	protected $module;
 	protected $student_module;
 	protected $question;
+	protected $student_module_services;
 
 
 	public function __construct(
 		ModuleRepositoryInterface $moduleRepositoryInterface,
 		StudentModuleRepositoryInterface $student_module,
-		QuestionRepositoryInterface $questionRepositoryInterface
+		QuestionRepositoryInterface $questionRepositoryInterface,
+		StudentModuleServices $studentModuleServices
 	) {
 		$this->module = $moduleRepositoryInterface;
 		$this->student_module = $student_module;
 		$this->question = $questionRepositoryInterface;
+		$this->student_module_services = $studentModuleServices;
 	}
 
 	/**
@@ -125,6 +130,9 @@ class StudentModuleController extends ApiController {
 		if(empty($question->toArray())){
 
 			$data['last_answered_question_id'] = 0;
+
+			//check for non-existing questions.
+			$this->student_module_services->checkEnabledQuestions($id,$student_module->module_id);
 		}
 
 		$return = $this->student_module->updateStudentActivity($id,$data);
