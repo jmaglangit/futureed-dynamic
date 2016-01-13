@@ -338,10 +338,10 @@ function ManageParentStudentController($scope, $filter, ManageParentStudentServi
 		});
 	}
 
-	self.playStudent = function(id) {
+	self.playStudent = function(parent_id,student_id) {
 		$scope.ui_block();
 		var data = {
-			id: id
+			id: parent_id
 			, user_type: Constants.CLIENT
 		}
 
@@ -353,7 +353,7 @@ function ManageParentStudentController($scope, $filter, ManageParentStudentServi
 
 					ManageParentStudentService.playStudent().success(function (response) {
 						if (angular.equals(response.status, Constants.STATUS_OK)) {
-							$("#redirect_form input[name='id']").val(id);
+							$("#redirect_form input[name='id']").val(student_id);
 							$("#redirect_form").submit();
 						}
 
