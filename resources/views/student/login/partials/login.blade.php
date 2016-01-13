@@ -11,11 +11,6 @@
             {! error !}
         </p>
     </div>
-    <div class="alert alert-danger" ng-if="errors">
-        <p ng-repeat="error in errors">
-            {! error !}
-        </p>
-    </div>
 
     <div class="form-group">
         {!! Form::text('username', ''
