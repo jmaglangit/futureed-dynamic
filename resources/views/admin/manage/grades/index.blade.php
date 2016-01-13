@@ -5,9 +5,8 @@
 @stop
 
 @section('content')
-	<div class="container dshbrd-con" ng-controller="ManageGradeController as grade" 
-		ng-init="grade.setActive()" ng-cloak>
-  		
+	<div class="container dshbrd-con" ng-controller="ManageGradeController as grade" ng-cloak>
+
   		<div template-directive template-url="{!! route('admin.partials.base_url') !!}"></div>
 
 		<div class="wrapr">
