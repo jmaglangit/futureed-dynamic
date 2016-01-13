@@ -85,6 +85,7 @@ class AdminQuestionController extends ApiController {
 			'seq_no',
 			'code',
 			'module_id',
+			'question_order_text',
 			'questions_text',
 			'status',
 			'question_type',
