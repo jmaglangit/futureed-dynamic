@@ -840,4 +840,31 @@ function ManageQuestionAnsController($scope, ManageQuestionAnsService, TableServ
 			$scope.ui_unblock();
 		});
 	}
+
+	self.confirmImageDelete = function(object){
+		self.view_image = {};
+
+		if(object.uploaded) {
+			self.view_image.image_path = "/uploads/temp/question/" + object.image;
+		} else {
+			self.view_image.image_path = object.questions_image;
+		}
+
+		self.view_image.questions_text = (object.questions_text) ? object.questions_text : Constants.QUESTION ;
+		self.view_image.show = Constants.TRUE;
+
+		$('#qa_delete_image_modal').modal({
+			backdrop: 'static',
+			keyboard: Constants.FALSE,
+			show    : Constants.TRUE
+		})
+	}
+
+	self.deleteImage = function(object){
+		self.record.image = Constants.NONE;
+		self.record.image_path = Constants.EMPTY_STR;
+		self.record.uploaded = Constants.FALSE;
+		self.update();
+	}
+
 }
