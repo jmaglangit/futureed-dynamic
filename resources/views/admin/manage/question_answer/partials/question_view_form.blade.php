@@ -97,13 +97,24 @@
 					</div>
 
 					<div ng-if="qa.active_view && qa.record.questions_image != 'None' && qa.record.original_image_name != '0'">
-						<div class="col-xs-4 margin-top-8">
+						<div class="col-xs-5 margin-top-8">
 							<a href="" ng-click="qa.viewImage(qa.record)">View Image</a>
+							<a class="pull-right" href="" ng-click="qa.removeImage(qa.record)"><i class="fa fa-trash"></i></a>
 						</div>
 					</div>
 
 					<div class="col-xs-3" ng-if="qa.active_view && qa.record.questions_image == 'None'">
 						<span class="upload-label label label-info">{! qa.record.questions_image !}</span>
+					</div>
+				</div>
+
+				<div class="form-group" ng-if="qa.record.image != futureed.NONE && !qa.record.uploaded">
+					<div class="col-xs-3"></div>
+					<div ng-if="qa.active_edit && qa.record.questions_image != futureed.NONE">
+						<div class="col-xs-5 margin-top-8">
+							<a href="" ng-click="qa.viewImage(qa.record)">View Image</a>
+							<a class="pull-right" href="" ng-click="qa.removeImage(qa.record)"><i class="fa fa-trash"></i></a>
+						</div>
 					</div>
 				</div>
 
