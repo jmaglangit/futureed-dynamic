@@ -12,7 +12,7 @@ Routes::group([
 });
 
 Routes::group([
-	'middleware' => ['api_user','api_after'],
+	'middleware' => ['api_user','api_after', 'module'],
 	'permission' => ['admin','client','student'],
 	'role' => ['principal','teacher','parent','admin','super admin']
 ], function(){
