@@ -191,6 +191,7 @@ function ManageTeacherTipsController($scope, ManageTeacherTipsService, TableServ
 	}
 
 	self.rateTip = function() {
+		self.rating = Constants.EMPTY_STR;
 		self.rate_errors = Constants.FALSE;
 		self.rate_modal = Constants.TRUE;
 
