@@ -1,13 +1,13 @@
 <div ng-if="bulk.active_list">
 	<div class="col-xs-12 search-container" ng-if="bulk.active_add">
 		<div class="title-mid">
-			Add Percentage Discount
+			Add Bulk Discount
 		</div>
 	</div>
 
 	<div class="col-xs-12 search-container" ng-if="bulk.active_edit">
 		<div class="title-mid">
-			Update Percentage Discount
+			Update Bulk Discount
 		</div>
 	</div>
 
@@ -99,7 +99,7 @@
 							)
 						) !!}
 
-						{!! Form::button('Add Percentage Discount'
+						{!! Form::button('Add Bulk Discount'
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-click' => "bulk.add()"
@@ -123,7 +123,7 @@
 		<button class="btn btn-blue btn-semi-medium" 
 			ng-click="bulk.setActive(futureed.ACTIVE_ADD)"
 			ng-if="!(bulk.active_add || bulk.active_edit)">
-			<span><i class="fa fa-plus-square"></i></span> Add Percentage Discount
+			<span><i class="fa fa-plus-square"></i></span> Add Bulk Discount
 		</button>
 
 		<div class="list-container" ng-cloak>
