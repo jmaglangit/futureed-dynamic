@@ -47,5 +47,7 @@ interface ClassStudentRepositoryInterface {
 
 	public function getStudentCurrentLearning($student_id,$subject_id, $country_id);
 
+	public function getStudentValidModule($student_id, $module_id);
+
 
 }
