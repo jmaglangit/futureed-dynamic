@@ -97,13 +97,24 @@
 					</div>
 
 					<div ng-if="qa.active_view && qa.record.questions_image != 'None' && qa.record.original_image_name != '0'">
-						<div class="col-xs-4 margin-top-8">
-							<a href="" ng-click="qa.viewImage(qa.record)">View Image</a>
+						<div class="col-xs-5 margin-top-8">
+							<a href="" ng-click="qa.viewImage(qa.record)">View Image Test</a>
+							<a class="pull-right" href="" ng-click="qa.confirmImageDelete(qa.record)"><i class="fa fa-trash"></i></a>
 						</div>
 					</div>
 
 					<div class="col-xs-3" ng-if="qa.active_view && qa.record.questions_image == 'None'">
 						<span class="upload-label label label-info">{! qa.record.questions_image !}</span>
+					</div>
+				</div>
+
+				<div class="form-group" ng-if="qa.active_edit && qa.record.image != futureed.NONE && !qa.record.uploaded">
+					<div class="col-xs-3"></div>
+					<div ng-if="qa.active_edit && qa.record.questions_image != futureed.NONE">
+						<div class="col-xs-5 margin-top-8">
+							<a href="" ng-click="qa.viewImage(qa.record)">View Image</a>
+							<a class="pull-right" href="" ng-click="qa.removeImage(qa.record)"><i class="fa fa-trash"></i></a>
+						</div>
 					</div>
 				</div>
 
@@ -338,6 +349,40 @@
 				<div class="modal-footer">
 					<div class="btncon col-xs-8 col-xs-offset-4 pull-left">
 						{!! Form::button('Close'
+							, array(
+								'class' => 'btn btn-gold btn-medium'
+								, 'data-dismiss' => 'modal'
+							)
+						) !!}
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div id="qa_delete_image_modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					Delete Image
+				</div>
+				<div class="modal-body">
+					Are you sure you want to delete this image?
+					<div class="modal-image">
+						<img ng-src="{! qa.view_image.image_path !}"/>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<div class="btncon col-md-8 col-md-offset-4 pull-left">
+						{!! Form::button('Yes'
+							, array(
+								'class' => 'btn btn-blue btn-medium'
+								, 'ng-click' => 'qa.deleteImage(object)'
+								, 'data-dismiss' => 'modal'
+							)
+						) !!}
+
+						{!! Form::button('No'
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'data-dismiss' => 'modal'

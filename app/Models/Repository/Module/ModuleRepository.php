@@ -3,13 +3,19 @@
 namespace FutureEd\Models\Repository\Module;
 
 use FutureEd\Models\Core\Module;
+use FutureEd\Models\Traits\LoggerTrait;
 use League\Flysystem\Exception;
 use Illuminate\Support\Facades\DB;
 
 
 class ModuleRepository implements ModuleRepositoryInterface
 {
+	use LoggerTrait;
 
+	/**
+	 * @param $data
+	 * @return string|static
+	 */
 	public function addModule($data)
 	{
 
@@ -27,6 +33,12 @@ class ModuleRepository implements ModuleRepositoryInterface
 
 	}
 
+	/**
+	 * @param array $criteria
+	 * @param int $limit
+	 * @param int $offset
+	 * @return array
+	 */
 	public function getModules($criteria = array(), $limit = 0, $offset = 0)
 	{
 
@@ -114,6 +126,36 @@ class ModuleRepository implements ModuleRepositoryInterface
 
 	}
 
+	/**
+	 * @param $module_id
+	 * @return bool|mixed
+	 */
+	public function getModule($module_id){
+
+		DB::beginTransaction();
+		try{
+
+			$response = Module::find($module_id);
+
+		}catch(Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+
+	}
+
+	/**
+	 * @param $id
+	 * @return Module|\Illuminate\Database\Eloquent\Builder|static
+	 */
 	public function viewModule($id)
 	{
 
@@ -125,6 +167,12 @@ class ModuleRepository implements ModuleRepositoryInterface
 
 	}
 
+	/**
+	 * @param $id
+	 * @param $data
+	 * @return bool|int
+	 * @throws Exception
+	 */
 	public function updateModule($id, $data)
 	{
 
@@ -140,6 +188,10 @@ class ModuleRepository implements ModuleRepositoryInterface
 
 	}
 
+	/**
+	 * @param $id
+	 * @return bool|null|string
+	 */
 	public function deleteModule($id)
 	{
 
@@ -165,6 +217,16 @@ class ModuleRepository implements ModuleRepositoryInterface
 	{
 
 		return Module::find($module_id)->pluck('points_to_finish');
+	}
+
+	/**
+	 * @param $subject_id
+	 * @param $grade_id
+	 * @return mixed
+	 */
+	public function getGradeModule($subject_id,$grade_id){
+
+		return Module::subjectId($subject_id)->gradeId($grade_id)->get();
 	}
 
 	/**

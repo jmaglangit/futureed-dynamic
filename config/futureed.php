@@ -1,6 +1,10 @@
 <?php
 
 return [
+	//conditions
+	'true' => 1,
+	'false' => 0,
+
 	'login' => [
 		'attempt' => 3
 	],
@@ -16,6 +20,7 @@ return [
 	'pending' => 'Pending',
 	'accepted' => 'Accepted',
 	'rejected' => 'Rejected',
+	'none' => 'None',
 
 
 	//Request code expiry in seconds

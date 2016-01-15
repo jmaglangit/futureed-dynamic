@@ -75,4 +75,9 @@ class StudentModuleAnswer extends Model {
 		return $query->orderBy('seq_no');
 	}
 
+	public function scopeQuestionId($query, $question_id){
+
+		return $query->whereQuestionId($question_id);
+	}
+
 }

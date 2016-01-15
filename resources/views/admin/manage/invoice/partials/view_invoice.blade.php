@@ -28,12 +28,12 @@
 				<div class="form-group">
 					<label class="col-xs-2 control-label">Subject</label>
 					<div class="col-xs-4">
-						{!! Form::text('invoice_no', ''
+						{!! Form::text('subject', ''
 							, array(
 								  'ng-disabled' => 'true'
 								, 'class' => 'form-control'
-								, 'ng-model' => 'invoice.record.subject_name'
-								, 'placeholder' => 'Invoice No.'
+								, 'ng-model' => 'invoice.record.invoice_detail[0].classroom.subject.name'
+								, 'placeholder' => 'Subject'
 							)
 						) !!}
 					</div>

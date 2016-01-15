@@ -13,5 +13,7 @@ interface StudentBadgeRepositoryInterface {
 
 	public function addStudentBadge($data);
 
+	public function getStudentBadge($student_id, $subject_id, $age_group_id);
+
 
 }

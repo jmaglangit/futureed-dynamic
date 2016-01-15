@@ -85,6 +85,7 @@ class AdminQuestionController extends ApiController {
 			'seq_no',
 			'code',
 			'module_id',
+			'question_order_text',
 			'questions_text',
 			'status',
 			'question_type',
@@ -200,8 +201,10 @@ class AdminQuestionController extends ApiController {
 			'points_earned',
 			'difficulty',
 			'seq_no',
-			'orientation'
+			'orientation',
+			'uploaded'
 		);
+
 
 		$question = $this->question->viewQuestion($id);
 
@@ -219,20 +222,25 @@ class AdminQuestionController extends ApiController {
 		}
 
 		if($data['image']){
+			if($data['uploaded']){
+				$from = config('futureed.question_image_path');
+				$to = config('futureed.question_image_path_final').'/'.$id;
 
-			$from = config('futureed.question_image_path');
-			$to = config('futureed.question_image_path_final').'/'.$id;
+				$image = explode('/',$data['image']);
+				$image_type = explode('.',$image[1]);
 
-			$image = explode('/',$data['image']);
-			$image_type = explode('.',$image[1]);
+				$data['original_image_name'] = $image[1];
+				$data['questions_image'] = config('futureed.question').'_'.$id.'.'.$image_type[1];
 
-			$data['original_image_name'] = $image[1];
-			$data['questions_image'] = config('futureed.question').'_'.$id.'.'.$image_type[1];
-
-			$this->file->deleteDirectory($to);
-			$this->file->move($from.'/'.$image[0],$to);
-			$this->file->copy($to.'/'.$image[1],$to.'/'.$data['questions_image']);
-
+				$this->file->deleteDirectory($to);
+				$this->file->move($from.'/'.$image[0],$to);
+				$this->file->copy($to.'/'.$image[1],$to.'/'.$data['questions_image']);
+			}else{
+				if($data['image'] == config('futureed.none')){
+					$data['original_image_name'] = config('futureed.false');
+					$data['questions_image'] = config('futureed.none');
+				}
+			}
 		}
 
 		//update sequence

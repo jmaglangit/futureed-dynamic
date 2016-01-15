@@ -129,7 +129,8 @@
 				</div>
 
 				<div class="form-group"
-					 ng-if="qa.record.question_type && qa.record.question_type != futureed.MULTIPLECHOICE
+					 ng-if="qa.record.question_type
+					 && qa.record.question_type != futureed.MULTIPLECHOICE
 					 && qa.record.question_type != futureed.ORDERING
 					 && qa.record.question_type != futureed.GRAPH
 					 && qa.record.question_type != futureed.QUADRANT">
@@ -169,6 +170,7 @@
 
 				<div class="form-group"
 					 ng-if="qa.record.question_type
+					 && qa.record.question_type != futureed.FILLINBLANK
 					 && qa.record.question_type != futureed.MULTIPLECHOICE
 					 && qa.record.question_type != futureed.GRAPH
 					 && qa.record.question_type != futureed.QUADRANT">

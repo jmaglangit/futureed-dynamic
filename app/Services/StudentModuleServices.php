@@ -448,4 +448,24 @@ class StudentModuleServices {
 
 	}
 
+	/**
+	 * Check for existing questions.
+	 * @param $student_module_id
+	 * @param $module_id
+	 */
+	public function checkEnabledQuestions($student_module_id, $module_id){
+
+		$module_answers = $this->student_module_answer->getStudentModuleAnswer($student_module_id,$module_id);
+
+		foreach($module_answers as $answer){
+
+			if(is_null($answer->question)){
+
+				//deleted question answer
+				$this->student_module_answer->deletedStudentModuleAnswer($student_module_id,$answer->question_id);
+			}
+		}
+
+	}
+
 }

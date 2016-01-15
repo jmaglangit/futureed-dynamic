@@ -213,9 +213,64 @@ class StudentModuleRepository implements StudentModuleRepositoryInterface
 
 	}
 
+	/**
+	 * Get Student Module Grade By Student, Subject, and Grade.
+	 * @param $student_id
+	 * @param $subject_id
+	 * @param $grade_id
+	 * @return string
+	 */
+	public function getStudentModuleGradeCompleted($student_id, $subject_id, $grade_id){
 
+		DB::beginTransaction();
+		try{
 
+			$response = StudentModule::studentId($student_id)
+				->subjectId($subject_id)
+				->gradeId($grade_id)
+				->completed()
+				->groupBy('module_id')
+				->get();
 
+		}catch (\Exception $e){
+			DB::rollback();
 
+			$this->errorLog($e->getMessage());
 
+			return $e->getMessage();
+		}
+
+		DB::commit();
+		return $response;
+	}
+
+	/**
+	 * Get student module_status.
+	 * @param $module_id
+	 * @param $student_id
+	 * @return bool
+	 */
+	public function getStudentModuleStatusByModuleStudent($module_id, $student_id){
+
+		DB::beginTransaction();
+		try{
+
+			$response = StudentModule::with('classroom_order')
+				->validClass()
+				->studentId($student_id)
+				->moduleId($module_id)
+				->pluck('module_status');
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+		DB::commit();
+
+		return $response;
+	}
 }

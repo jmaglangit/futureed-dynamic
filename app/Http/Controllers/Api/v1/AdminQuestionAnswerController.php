@@ -153,7 +153,7 @@ class AdminQuestionAnswerController extends ApiController {
 			$this->file->move($from.'/'.$image[0],$to);
 			$this->file->copy($to.'/'.$image[1],$to.'/'.$data['answer_image']);
 
-		} else {
+		} elseif($data['answer_image'] <> config('futureed.none')) {
 
 			$image = explode('/',$data['answer_image']);
 			$data['answer_image'] = $image[5];

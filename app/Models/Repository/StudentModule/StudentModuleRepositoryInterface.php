@@ -24,4 +24,8 @@ interface StudentModuleRepositoryInterface
 
 	public function getStudentModuleByClassId($class_id);
 
+	public function getStudentModuleGradeCompleted($student_id,$subject_id,$grade_id);
+
+	public function getStudentModuleStatusByModuleStudent($module_id, $student_id);
+
 }
