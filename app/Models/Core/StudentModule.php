@@ -79,6 +79,11 @@ class StudentModule extends Model {
 		return $this->belongsTo('FutureEd\Models\Core\Student','student_id')->with('user');
 	}
 
+	public function classroom_order(){
+
+		return $this->belongsTo('FutureEd\Models\Core\Classroom','class_id')->with('order');
+	}
+
 
 	//-------------scope
 	public function scopeStudentId($query, $student_id){
@@ -98,6 +103,16 @@ class StudentModule extends Model {
 				$query->where('subject_id',$subject_id);
 		});
 
+	}
+
+	public function scopeValidClass($query){
+
+		return $query->whereHas('classroom_order', function($query) {
+			$query->whereHas('order',function($query){
+				$query->where('date_start','<=',Carbon::now())
+					->where('date_end','>=', Carbon::now());
+			});
+		});
 	}
 
 	public function scopeGradeId($query, $grade_id){
