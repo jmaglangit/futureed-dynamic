@@ -135,7 +135,7 @@ class ModuleRepository implements ModuleRepositoryInterface
 		DB::beginTransaction();
 		try{
 
-			$response = Module::find($module_id)->get();
+			$response = Module::find($module_id);
 
 		}catch(Exception $e){
 
