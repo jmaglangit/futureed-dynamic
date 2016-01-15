@@ -89,8 +89,7 @@ function ManageInvoiceController($scope, ManageInvoiceService, apiService, Table
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					self.record = response.data;
-					self.record.subject_name = (self.record.invoice_detail) ? self.record.invoice_detail[0].classroom.subject.name : Constants.EMPTY_STR;
-					
+
 					var class_name = self.record.invoice_detail[0].classroom.name;
 					var prefix = class_name.substring(0,3);
 
