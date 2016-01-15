@@ -42,6 +42,8 @@
 								, 'FIB' => 'Fill in the Blanks'
 								, 'O' => 'Orders'
 								, 'N' => 'Provide'
+								, 'GR' => 'Graph'
+								, 'QUAD' => 'Quadrant'
 							)
 							, ''
 							, array(
