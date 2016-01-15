@@ -32,7 +32,7 @@
 							, array(
 								  'ng-disabled' => 'true'
 								, 'class' => 'form-control'
-								, 'ng-model' => 'invoice.record.subject_name'
+								, 'ng-model' => 'invoice.record.invoice_detail[0].classroom.subject.name'
 								, 'placeholder' => 'Subject'
 							)
 						) !!}
