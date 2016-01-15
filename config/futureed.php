@@ -1,6 +1,10 @@
 <?php
 
 return [
+	//conditions
+	'true' => 1,
+	'false' => 0,
+
 	'login' => [
 		'attempt' => 3
 	],

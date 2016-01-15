@@ -32,11 +32,13 @@ function ManageQuestionAnsController($scope, ManageQuestionAnsService, TableServ
 					if(response.errors) {
 						self.errors = $scope.errorHandler(response.errors);
 					}else if(response.data){
+						if(object.image){
+							object.image_temp = object.image;
+						}
 						object.image = response.data.image_name;
 						object.uploaded = Constants.TRUE;
 					}
 				}
-
 				$scope.ui_unblock();
 			}).error(function(response) {
 				self.errors = $scope.internalError();
@@ -229,6 +231,11 @@ function ManageQuestionAnsController($scope, ManageQuestionAnsService, TableServ
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
 					self.record = response.data;
+
+					if(response.data.original_image_name){
+						self.record.image = response.data.original_image_name;
+					}
+
 					self.listGraphAnswer(self.record.id);
 				}
 			}
@@ -244,7 +251,13 @@ function ManageQuestionAnsController($scope, ManageQuestionAnsService, TableServ
 		// In add question 
 		self.view_image = {};
 
-		object.image = Constants.EMPTY_STR;
+		if(object.image_temp){
+			object.image = object.image_temp;
+			object.image_temp = Constants.EMPTY_STR;
+		}else{
+			object.image = Constants.NONE;
+		}
+
 		object.image_path = Constants.EMPTY_STR;
 		object.uploaded = Constants.FALSE;
 	} 
@@ -252,9 +265,9 @@ function ManageQuestionAnsController($scope, ManageQuestionAnsService, TableServ
 	self.viewImage = function(object) {
 		self.view_image = {};
 
-		if(object.image) {
+		if(object.uploaded) {
 			self.view_image.image_path = "/uploads/temp/question/" + object.image;
-		} else if(object.questions_image) {
+		} else {
 			self.view_image.image_path = object.questions_image;
 		}
 
@@ -827,4 +840,31 @@ function ManageQuestionAnsController($scope, ManageQuestionAnsService, TableServ
 			$scope.ui_unblock();
 		});
 	}
+
+	self.confirmImageDelete = function(object){
+		self.view_image = {};
+
+		if(object.uploaded) {
+			self.view_image.image_path = "/uploads/temp/question/" + object.image;
+		} else {
+			self.view_image.image_path = object.questions_image;
+		}
+
+		self.view_image.questions_text = (object.questions_text) ? object.questions_text : Constants.QUESTION ;
+		self.view_image.show = Constants.TRUE;
+
+		$('#qa_delete_image_modal').modal({
+			backdrop: 'static',
+			keyboard: Constants.FALSE,
+			show    : Constants.TRUE
+		})
+	}
+
+	self.deleteImage = function(object){
+		self.record.image = Constants.NONE;
+		self.record.image_path = Constants.EMPTY_STR;
+		self.record.uploaded = Constants.FALSE;
+		self.update();
+	}
+
 }
