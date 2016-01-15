@@ -45,7 +45,10 @@ class Kernel extends HttpKernel {
 		'api_after_auto_login' => 'FutureEd\Http\Middleware\Api\AfterAutoLoginMiddleware',
 
 		//LOG
-		'log' => 'FutureEd\Http\Middleware\Log\LogMiddleware'
+		'log' => 'FutureEd\Http\Middleware\Log\LogMiddleware',
+
+		//Module
+		'module' => 'FutureEd\Http\Middleware\Api\ModuleAccessMiddleware',
 	];
 
 }
