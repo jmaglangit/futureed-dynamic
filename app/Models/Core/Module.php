@@ -94,6 +94,10 @@ class Module extends Model
 		return $this->hasMany('FutureEd\Models\Core\StudentModule')->notFailed();
 	}
 
+	public function studentModuleValid() {
+		return $this->hasMany('FutureEd\Models\Core\StudentModule')->validClass()->notFailed();
+	}
+
 
 
 
