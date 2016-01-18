@@ -46,7 +46,6 @@ class Kernel extends HttpKernel {
 
 		//LOG
 		'log' => 'FutureEd\Http\Middleware\Log\LogMiddleware',
-
 	];
 
 }
