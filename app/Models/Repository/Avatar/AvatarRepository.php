@@ -13,18 +13,67 @@ use League\Flysystem\Exception;
 
 class AvatarRepository implements AvatarRepositoryInterface{
 
-    public function getAvatars($gender,$count){
-    	return Avatar::where('gender','=', $gender)->get();
-    }
-    
-    public function getAvatar($avatar_id){
-    	return Avatar::where('id','=',$avatar_id)->get()->first();
-    }
-    
-    public function checkAvatarExist($avatar_id){
-    	
-    	return Avatar::where('id','=',$avatar_id)->pluck('id');
-    	
-    }
+	public function getAvatars($gender,$count){
+
+		DB::beginTransaction();
+
+		try{
+			$response = Avatar::where('gender','=', $gender)->get();
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
+
+	public function getAvatar($avatar_id){
+
+		DB::beginTransaction();
+
+		try{
+			$response = Avatar::where('id','=',$avatar_id)->get()->first();
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
+
+	public function checkAvatarExist($avatar_id){
+
+		DB::beginTransaction();
+
+		try{
+			$response = Avatar::where('id','=',$avatar_id)->pluck('id');
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
 
 }

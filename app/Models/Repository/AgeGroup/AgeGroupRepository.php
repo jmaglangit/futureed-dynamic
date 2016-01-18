@@ -19,7 +19,23 @@ class AgeGroupRepository implements AgeGroupRepositoryInterface{
 	 */
 	public function getAges(){
 
-		return AgeGroup::all();
+		DB::beginTransaction();
+
+		try{
+			$response = AgeGroup::all();
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 }
