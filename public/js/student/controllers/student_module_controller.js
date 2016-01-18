@@ -167,7 +167,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 								loadModuleView();
 							} else {
-								self.errors = $internalError();
+								self.errors = $scope.internalError();
 							}
 						});
 					});
@@ -237,7 +237,11 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 	}
 
 	self.exitModule = function(redirect_to) {
-		var data = {};
+
+		if(self.errors){
+			$window.location.href = redirect_to
+		}else {
+			var data = {};
 			data.module_id = self.record.student_module.id;
 
 			if(self.active_contents && self.contents) {
@@ -247,10 +251,13 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 			if(self.active_questions) {
 				data.last_answered_question_id = parseInt(self.questions.id);
 			}
-			
-		updateModuleStudent(data, function() {
-			$window.location.href = redirect_to + "/" + self.record.student_module.class_id;
-		});
+
+			updateModuleStudent(data, function() {
+				$window.location.href = redirect_to + "/" + self.record.student_module.class_id;
+			});
+		}
+
+
 	}
 
 	self.paginateContent = function() {
