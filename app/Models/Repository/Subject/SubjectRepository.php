@@ -2,9 +2,12 @@
 namespace FutureEd\Models\Repository\Subject;
 
 use FutureEd\Models\Core\Subject;
+use FutureEd\Models\Traits\LoggerTrait;
+use Illuminate\Support\Facades\DB;
 
 class SubjectRepository implements SubjectRepositoryInterface {
 
+	use LoggerTrait;
 	/**
 	 * Display a listing of subjects.
 	 *
@@ -15,39 +18,55 @@ class SubjectRepository implements SubjectRepositoryInterface {
 	 * @return array
 	 */
     public function getSubjects($criteria = array(), $limit = 0, $offset = 0) {
-		
-		$subjects = new Subject();
-		
-		$count = 0;
-		
-		if(count($criteria) <= 0 && $limit == 0 && $offset == 0) {
-			
-			$count = $subjects->count();
-		
-		} else {
-			
-			if(count($criteria) > 0) {
-				if(isset($criteria['name'])) {
-					$subjects = $subjects->with('areas')->name($criteria['name']);
-				}
+
+		DB::beginTransaction();
+
+		try {
+			$subjects = new Subject();
+
+			$count = 0;
+
+			if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
+
+				$count = $subjects->count();
+
+			} else {
+
+				if (count($criteria) > 0) {
+					if (isset($criteria['name'])) {
+						$subjects = $subjects->with('areas')->name($criteria['name']);
+					}
 
 
-				if(isset($criteria['status'])) {
-					$subjects = $subjects->with('areas')->status($criteria['status']);
+					if (isset($criteria['status'])) {
+						$subjects = $subjects->with('areas')->status($criteria['status']);
+					}
 				}
+
+				$count = $subjects->count();
+
+				if ($limit > 0 && $offset >= 0) {
+					$subjects = $subjects->with('areas')->offset($offset)->limit($limit);;
+				}
+
 			}
-		
-			$count = $subjects->count();
-		
-			if($limit > 0 && $offset >= 0) {
-				$subjects = $subjects->with('areas')->offset($offset)->limit($limit);;
-			}
-														
+
+			$subjects = $subjects->with('areas')->orderBy('name', 'asc');
+
+			$response = ['total' => $count, 'records' => $subjects->get()->toArray()];
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
-		
-		$subjects = $subjects->with('areas')->orderBy('name', 'asc');
-		
-		return ['total' => $count, 'records' => $subjects->get()->toArray()];	
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -58,16 +77,23 @@ class SubjectRepository implements SubjectRepositoryInterface {
 	 * @return boolean
 	 */
 	public function addSubject($subject) {
-		
+
+		DB::beginTransaction();
+
 		try {
 		
 			$subject = Subject::create($subject);
 			
-		} catch(Exception $e) {
-		
-			return $e->getMessage();
-			
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
+
+		DB::commit();
 		
 		return $subject;
 		
@@ -81,21 +107,40 @@ class SubjectRepository implements SubjectRepositoryInterface {
 	 * @return Resource
 	 */
 	public function getSubject($id) {
-				
-		return Subject::with('areas')->find($id);
-		
+
+		DB::beginTransaction();
+
+		try {
+
+			$response = Subject::with('areas')->find($id);
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
-	
+
 	/**
 	 * Update subject.
 	 *
-	 * @param	int	$id
-	 * @param	array	$subject
+	 * @param    int $id
+	 * @param $data
+	 * @return bool
+	 * @internal param array $subject
 	 *
-	 * @return boolean
 	 */
 	public function updateSubject($id, $data) {
-		
+
+		DB::beginTransaction();
+
 		try {
 		
 			$subject = Subject::with('areas')->find($id);
@@ -116,40 +161,50 @@ class SubjectRepository implements SubjectRepositoryInterface {
             //update related table.
             $subject->push();
 
+		} catch (\Exception $e) {
 
-			
-		} catch(Exception $e) {
-		
-			return $e->getMessage();
-			
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
+
+		DB::commit();
 		
 		return $subject;
-		
 	}
-	
+
 	/**
 	 * Delete subject.
 	 *
-	 * @param	int	$id
-	 * @param	array	$subject
+	 * @param    int $id
+	 * @return bool
+	 * @internal param array $subject
 	 *
-	 * @return boolean
 	 */
 	public function deleteSubject($id) {
-		
+
+		DB::beginTransaction();
+
 		try {
 		
 			$subject = Subject::find($id);
 						
-			return !is_null($subject) ? $subject->delete() : false;
+			$response = !is_null($subject) ? $subject->delete() : false;
 			
-		} catch(Exception $e) {
-		
-			return $e->getMessage();
-			
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
-				
+
+		DB::commit();
+
+		return $response;
 	}
 
 }
