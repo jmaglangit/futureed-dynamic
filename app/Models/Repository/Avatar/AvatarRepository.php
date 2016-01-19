@@ -9,9 +9,13 @@ namespace FutureEd\Models\Repository\Avatar;
 
 use FutureEd\Models\Core\Avatar;
 use FutureEd\Models\Core\User;
+use FutureEd\Models\Traits\LoggerTrait;
 use League\Flysystem\Exception;
+use Illuminate\Support\Facades\DB;
 
 class AvatarRepository implements AvatarRepositoryInterface{
+
+	use LoggerTrait;
 
 	public function getAvatars($gender,$count){
 

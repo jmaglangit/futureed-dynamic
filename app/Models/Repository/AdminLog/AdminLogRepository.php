@@ -23,7 +23,7 @@ class AdminLogRepository implements AdminLogRepositoryInterface{
 		DB::beginTransaction();
 
 		try{
-			$response AdminLog::find($id);
+			$response = AdminLog::find($id);
 
 		}catch (\Exception $e){
 

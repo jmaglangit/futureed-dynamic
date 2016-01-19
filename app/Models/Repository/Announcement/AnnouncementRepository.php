@@ -3,8 +3,12 @@
 namespace FutureEd\Models\Repository\Announcement;
 
 use FutureEd\Models\Core\Announcement;
+use FutureEd\Models\Traits\LoggerTrait;
+use Illuminate\Support\Facades\DB;
 
 class AnnouncementRepository implements AnnouncementRepositoryInterface {
+
+	use LoggerTrait;
 
 	/**
 	*   return the one and only announcement.

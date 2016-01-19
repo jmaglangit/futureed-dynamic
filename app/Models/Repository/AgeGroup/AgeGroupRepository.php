@@ -10,8 +10,12 @@ namespace FutureEd\Models\Repository\AgeGroup;
 
 
 use FutureEd\Models\Core\AgeGroup;
+use FutureEd\Models\Traits\LoggerTrait;
+use Illuminate\Support\Facades\DB;
 
 class AgeGroupRepository implements AgeGroupRepositoryInterface{
+
+	use LoggerTrait;
 
 	/**
 	 * Get all list of Age Groups

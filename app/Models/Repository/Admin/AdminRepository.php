@@ -8,6 +8,8 @@
 namespace FutureEd\Models\Repository\Admin;
 
 use FutureEd\Models\Core\Admin;
+use FutureEd\Models\Traits\LoggerTrait;
+use Illuminate\Support\Facades\DB;
 
 class AdminRepository implements  AdminRepositoryInterface {
 

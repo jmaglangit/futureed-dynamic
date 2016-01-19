@@ -4,11 +4,14 @@ namespace FutureEd\Models\Repository\AvatarAccessory;
 use FutureEd\Models\Core\AvatarAccessory;
 use FutureEd\Models\Core\Student;
 use FutureEd\Models\Core\StudentAvatarAccessories;
+use FutureEd\Models\Traits\LoggerTrait;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
 
 class AvatarAccessoryRepository implements AvatarAccessoryRepositoryInterface{
-	
+
+	use LoggerTrait;
+
 	/**
 	 * Get list of avatar accessoires based on the avatar id of the student
 	 * @param $student_id
