@@ -11,9 +11,12 @@ namespace FutureEd\Models\Repository\TeachingContent;
 
 use FutureEd\Models\Core\TeachingContent;
 use FutureEd\Models\Repository\ModuleContent\ModuleContentRepositoryInterface;
-use League\Flysystem\Exception;
+use FutureEd\Models\Traits\LoggerTrait;
+use Illuminate\Support\Facades\DB;
 
 class TeachingContentRepository implements TeachingContentRepositoryInterface{
+
+    use LoggerTrait;
 
     protected $module_content;
 
@@ -29,11 +32,25 @@ class TeachingContentRepository implements TeachingContentRepositoryInterface{
      * @return string|static
      */
     public function addTeachingContent($data){
+
+        DB::beginTransaction();
+
         try{
-            return TeachingContent::create($data);
-        }catch (Exception $e){
-            return $e->getMessage();
+
+            $response = TeachingContent::create($data);
+
+        }catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
         }
+
+        DB::commit();
+
+        return $response;
     }
 
     /**
@@ -45,39 +62,54 @@ class TeachingContentRepository implements TeachingContentRepositoryInterface{
      */
     public function getTeachingContents($criteria = [],$limit,$offset){
 
-        $query = new TeachingContent();
+        DB::beginTransaction();
 
-        $query = $query->with('module','learningStyle','mediaType');
+        try {
+            $query = new TeachingContent();
 
-        if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
+            $query = $query->with('module', 'learningStyle', 'mediaType');
 
-            $count = $query->count();
-        } else {
-            if (count($criteria) > 0) {
+            if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
 
-                if(isset($criteria['teaching_module'])){
-                    $query = $query->teachingModule($criteria['teaching_module']);
+                $count = $query->count();
+            } else {
+                if (count($criteria) > 0) {
+
+                    if (isset($criteria['teaching_module'])) {
+                        $query = $query->teachingModule($criteria['teaching_module']);
+                    }
+
+                    if (isset($criteria['teaching_module_id'])) {
+                        $query = $query->teachingModuleId($criteria['teaching_module_id']);
+                    }
+
+                    if (isset($criteria['learning_style'])) {
+                        $query = $query->learningStyleId($criteria['learning_style']);
+                    }
                 }
 
-                if(isset($criteria['teaching_module_id'])){
-                    $query = $query->teachingModuleId($criteria['teaching_module_id']);
+                $count = $query->count();
+
+                if ($limit > 0 && $offset >= 0) {
+                    $query = $query->offset($offset)->limit($limit);
                 }
 
-                if(isset($criteria['learning_style'])){
-                    $query = $query->learningStyleId($criteria['learning_style']);
-                }
             }
 
-            $count = $query->count();
+            $response = ['total' => $count, 'records' => $query->get()->toArray()];
 
-            if ($limit > 0 && $offset >= 0) {
-                $query = $query->offset($offset)->limit($limit);
-            }
+        } catch (\Exception $e) {
 
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
         }
 
-        return ['total' => $count, 'records' => $query->get()->toArray()];
+        DB::commit();
 
+        return $response;
     }
 
     /**
@@ -86,15 +118,29 @@ class TeachingContentRepository implements TeachingContentRepositoryInterface{
      * @return bool
      */
     public function deleteTeachingContent($id){
+
+        DB::beginTransaction();
+
         try{
+
             $result = TeachingContent::find($id);
 
             $this->module_content->deleteModuleContentByContent($id);
 
-            return is_null($result) ? false : $result->delete();
-        }catch (\Exception $e){
-            return $e->getMessage();
+            $response = is_null($result) ? false : $result->delete();
+
+        }catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
         }
+
+        DB::commit();
+
+        return $response;
     }
 
     /**
@@ -104,21 +150,34 @@ class TeachingContentRepository implements TeachingContentRepositoryInterface{
      * @return bool
      */
     public function updateTeachingContent($id,$data){
+
+        DB::beginTransaction();
+
 		try {
 
 			$result = TeachingContent::find($id);
 
-			$response =  is_null($result) ? false : $result->update($data);
+			$result =  is_null($result) ? false : $result->update($data);
 
-			if($response){
+			if($result){
 
-				return $this->getTeachingContent($id);
-			}
+				$response = $this->getTeachingContent($id);
+			} else {
+                $response = null;
+            }
 
 		} catch (\Exception $e) {
 
-			return $e->getMessage();
-		}
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
+        }
+
+        DB::commit();
+
+        return $response;
     }
 
     /**
@@ -127,20 +186,52 @@ class TeachingContentRepository implements TeachingContentRepositoryInterface{
      * @return Object
      */
     public function getTeachingContent($id){
+
+        DB::beginTransaction();
+
         try{
-            return TeachingContent::with('subject','subjectArea','module','learningStyle','mediaType','moduleContent')->find($id);
-        }catch (\Exception $e){
-            return $e->getMessage();
+
+            $response = TeachingContent::with('subject','subjectArea','module','learningStyle','mediaType','moduleContent')
+                ->find($id);
+
+        }catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
         }
+
+        DB::commit();
+
+        return $response;
     }
 
-	/**
-	 * Get teaching content Id.
-	 * @param $module_id
-	 */
+    /**
+     * Get teaching content Id.
+     * @param $module_id
+     * @return bool
+     */
 	public function getTeachingContentId($module_id){
 
-		return TeachingContent::teachingModuleId($module_id)->pluck('id');
+        DB::beginTransaction();
 
+        try {
+
+            $response = TeachingContent::teachingModuleId($module_id)->pluck('id');
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
+        }
+
+        DB::commit();
+
+        return $response;
 	}
 }
