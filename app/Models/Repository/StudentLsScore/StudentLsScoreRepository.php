@@ -2,11 +2,14 @@
 namespace FutureEd\Models\Repository\StudentLsScore;
 
 use FutureEd\Models\Core\StudentLsScore;
+use FutureEd\Models\Traits\LoggerTrait;
+use Illuminate\Support\Facades\DB;
 use League\Flysystem\Exception;
 
 
 class StudentLsScoreRepository implements StudentLsScoreRepositoryInterface {
 
+	use LoggerTrait;
 
 	/**
 	 * Add record in storage
