@@ -3,18 +3,37 @@
 
 use FutureEd\Models\Core\Module;
 use FutureEd\Models\Core\ModuleContent;
+use FutureEd\Models\Traits\LoggerTrait;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\DB;
 use League\Flysystem\Exception;
 
+
 class ModuleContentRepository implements ModuleContentRepositoryInterface{
+	use LoggerTrait;
 
 	/**
 	 * Return all of the Module Contents.
 	 * @return \Illuminate\Database\Eloquent\Collection|static[]
 	 */
 	public function getModuleContents(){
+		DB::beginTransaction();
 
-		return ModuleContent::all();
+		try{
+			$response = ModuleContent::all();
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -23,8 +42,23 @@ class ModuleContentRepository implements ModuleContentRepositoryInterface{
 	 * @return \Illuminate\Support\Collection|null|static
 	 */
 	public function getModuleContent($id){
+		DB::beginTransaction();
 
-		return ModuleContent::find($id);
+		try{
+			$response = ModuleContent::find($id);
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -33,9 +67,23 @@ class ModuleContentRepository implements ModuleContentRepositoryInterface{
 	 * @return mixed
 	 */
 	public function getModuleContentByTeachingContent($content_id){
+		DB::beginTransaction();
 
-		return ModuleContent::contentId($content_id)
-			->get();
+		try{
+			$response = ModuleContent::contentId($content_id)->get();
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -44,15 +92,23 @@ class ModuleContentRepository implements ModuleContentRepositoryInterface{
 	 * @return string|static
 	 */
 	public function addModuleContent($data){
+		DB::beginTransaction();
 
-		try {
+		try{
+			$response = ModuleContent::create($data);
 
-			return ModuleContent::create($data);
+		}catch (\Exception $e){
 
-		} catch (Exception $e) {
+			DB::rollback();
 
-			return $e->getMessage();
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -62,18 +118,27 @@ class ModuleContentRepository implements ModuleContentRepositoryInterface{
 	 * @return ModuleContentRepository|\Illuminate\Support\Collection|null|string|static
 	 */
 	public function updateModuleContent($id,$data){
+		DB::beginTransaction();
 
 		try{
 
 			ModuleContent::id($id)
 				->update($data);
 
-			return $this->getModuleContent($id);
+			$response = $this->getModuleContent($id);
 
-		}catch (Exception $e){
+		}catch (\Exception $e){
 
-			return $e->getMessage();
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -83,18 +148,27 @@ class ModuleContentRepository implements ModuleContentRepositoryInterface{
 	 * @return ModuleContentRepository|\Illuminate\Support\Collection|null|string|static
 	 */
 	public function updateModuleContentByTeachingContent($content_id, $data){
+		DB::beginTransaction();
 
 		try{
 
 			ModuleContent::contentId($content_id)
 				->update($data);
 
-			return $this->getModuleContent($content_id);
+			$response = $this->getModuleContent($content_id);
 
-		}catch (Exception $e){
+		}catch (\Exception $e){
 
-			return $e->getMessage();
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -104,15 +178,27 @@ class ModuleContentRepository implements ModuleContentRepositoryInterface{
 	 * @return ModuleContentRepository|\Illuminate\Support\Collection|null|string|static
 	 */
 	public function getModuleContentCount($module_id){
+		DB::beginTransaction();
 
-		$module_content = new ModuleContent();
+		try{
+			$module_content = new ModuleContent();
 
-		$module_content = $module_content->moduleId($module_id);
+			$module_content = $module_content->moduleId($module_id);
 
-		$count = $module_content->get()->count();
+			$response = $module_content->get()->count();
 
-		return $count;
+		}catch (\Exception $e){
 
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -120,11 +206,26 @@ class ModuleContentRepository implements ModuleContentRepositoryInterface{
 	 * @param $module_id
 	 */
 	public function getModuleContentSequenceNos($module_id){
+		DB::beginTransaction();
 
-		return ModuleContent::select('id','seq_no')
-			->moduleId($module_id)
-			->orderBySeqNo()
-			->get();
+		try{
+			$response = ModuleContent::select('id','seq_no')
+							->moduleId($module_id)
+							->orderBySeqNo()
+							->get();
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -133,10 +234,25 @@ class ModuleContentRepository implements ModuleContentRepositoryInterface{
 	 * @return mixed
 	 */
 	public function getModuleContentSequenceNo($content_id){
+		DB::beginTransaction();
 
-		return ModuleContent::select('id','seq_no','module_id')
-			->contentId($content_id)
-			->get();
+		try{
+			$response = ModuleContent::select('id','seq_no','module_id')
+							->contentId($content_id)
+							->get();
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -145,10 +261,25 @@ class ModuleContentRepository implements ModuleContentRepositoryInterface{
 	 * @return mixed
 	 */
 	public function getLastSequenceNo($module_id){
+		DB::beginTransaction();
 
-		return ModuleContent::moduleId($module_id)
-			->orderBySeqNoDesc()
-			->pluck('seq_no');
+		try{
+			$response = ModuleContent::moduleId($module_id)
+							->orderBySeqNoDesc()
+							->pluck('seq_no');
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -156,6 +287,8 @@ class ModuleContentRepository implements ModuleContentRepositoryInterface{
 	 * @param $sequence
 	 */
 	public function updateSequence($sequence){
+		DB::beginTransaction();
+
 		try {
 			$data = $sequence;
 
@@ -168,11 +301,16 @@ class ModuleContentRepository implements ModuleContentRepositoryInterface{
 			}
 
 
-		} catch (Exception $e) {
+		}catch (\Exception $e){
 
-			return $e->getMessage();
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
 
+		DB::commit();
 	}
 
 	/**
@@ -183,37 +321,51 @@ class ModuleContentRepository implements ModuleContentRepositoryInterface{
 	 * @return array
 	 */
 	public function getModuleContentLists($criteria = [],$limit,$offset){
+		DB::beginTransaction();
 
-		$query = new ModuleContent();
-		$query = $query->with('teachingContent');
+		try{
+			$query = new ModuleContent();
+			$query = $query->with('teachingContent');
 
-		if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
+			if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
 
-			$count = $query->count();
-		} else {
-			if (count($criteria) > 0) {
+				$count = $query->count();
+			} else {
+				if (count($criteria) > 0) {
 
-				if(isset($criteria['module_id'])){
-					$query = $query->moduleId($criteria['module_id']);
+					if(isset($criteria['module_id'])){
+						$query = $query->moduleId($criteria['module_id']);
+					}
+
+					if(isset($criteria['teaching_status'])){
+						$query = $query->teachingStatus($criteria['teaching_status']);
+					}
 				}
 
-				if(isset($criteria['teaching_status'])){
-					$query = $query->teachingStatus($criteria['teaching_status']);
+				$count = $query->count();
+
+				if ($limit > 0 && $offset >= 0) {
+					$query = $query->offset($offset)->limit($limit);
 				}
+
 			}
 
-			$count = $query->count();
+			$query = $query->orderBySeqNo();
 
-			if ($limit > 0 && $offset >= 0) {
-				$query = $query->offset($offset)->limit($limit);
-			}
+			$response = ['total' => $count, 'records' => $query->get()->toArray()];
 
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
 
-		$query = $query->orderBySeqNo();
+		DB::commit();
 
-		return ['total' => $count, 'records' => $query->get()->toArray()];
-
+		return $response;
 	}
 
 	/**
@@ -221,8 +373,23 @@ class ModuleContentRepository implements ModuleContentRepositoryInterface{
 	 * @param $id
 	 */
 	public function getModulePointsToFinish($id){
+		DB::beginTransaction();
 
-		return Module::whereId($id)->pluck('points_to_finish');
+		try{
+			$response = Module::whereId($id)->pluck('points_to_finish');
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -231,8 +398,23 @@ class ModuleContentRepository implements ModuleContentRepositoryInterface{
 	 * @return mixed
 	 */
 	public function deleteModuleContentByContent($content_id){
+		DB::beginTransaction();
 
-		return ModuleContent::contentId($content_id)->delete();
+		try{
+			$response = ModuleContent::contentId($content_id)->delete();
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 }

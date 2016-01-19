@@ -18,184 +18,271 @@ use League\Flysystem\Exception;
 class ClassroomRepository implements ClassroomRepositoryInterface{
 
 
-    use LoggerTrait;
-
-    /**
-     * Get list of classroom based with optional pagination.
-     * @param $criteria
-     * @param $limit
-     * @param $offset
-     * @return array
-     */
-    public function getClassrooms($criteria,$limit,$offset){
-
-        $classroom = new Classroom();
-
-        //get client id -- teacher
-        if (isset($criteria['client_id'])) {
-
-            $classroom = $classroom->client_id($criteria['client_id']);
-        }
-
-        if (isset($criteria['name'])) {
-
-            $classroom = $classroom->name($criteria['name']);
-        }
-
-        if (isset($criteria['grade_id'])) {
-
-            $classroom = $classroom->grade_id($criteria['grade_id']);
-        }
-
-        if (isset($criteria['order_no'])) {
-
-            $classroom = $classroom->order_no($criteria['order_no']);
-        }
-
-        if (isset($criteria['payment_status'])) {
-
-            $classroom = $classroom->paymentStatus($criteria['payment_status']);
-        }
-
-        $classroom = $classroom->with('order', 'grade', 'client','subject');
-
-        $count = $classroom->get()->count();
-
-        if ($offset >= 0 && $limit > 0) {
-
-            $classroom = $classroom->skip($offset)->take($limit);
-        }
-
-        $records = $classroom->get();
-
-        Return [
-            'total' => $count,
-            'record' => $records
-        ];
-    }
-
-    /**
-     * Get classroom information.
-     * @param $id
-     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|\Illuminate\Support\Collection|null|static
-     */
-    public function getClassroom($id){
-
-        $return = Classroom::with('order','grade','client','subject')->find($id);
-
-        return $return;
-    }
-
-    /**
-     * Add new classroom.
-     * @param $classroom
-     * @return string|static
-     */
-    public function addClassroom($classroom){
-
-        try{
-
-            $classroom = Classroom::create($classroom);
-
-        }catch(Exception $e){
-
-            return $e->getMessage();
-        }
-
-        return $classroom;
-    }
-
-
-    /**
-     * Update new classroom based on the data needed.
-     * @param $id
-     * @param $data
-     * @return ClassroomRepository|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|\Illuminate\Support\Collection|null|string|static
-     */
-    public function updateClassroom($id,$data){
-
-        try{
-
-            Classroom::find($id)->update($data);
-
-            return $this->getClassroom($id);
-
-        }catch (Exception $e){
-
-            return $e->getMessage();
-        }
-
-    }
-
-    /**
-     * Delete Classroom
-     * @param $id
-     */
-    public function deleteClassroom($id){
-
-        try{
-
-            return Classroom::find($id)->delete();
-        }catch (Exception $e){
-
-            return $e->getMessage();
-        }
-    }
-
-    /**
-     *  Delete classrooms by order no.
-     *  @param $order_no
-     *  @return boolean
-     */
-
-    public function deleteClassroomByOrderNo($order_no){
-        try{
-            return Classroom::order_no($order_no)->delete();
-        } catch( Exception $e ){
-            return $e->getMessage();
-        }
-    }
-
-    /**
-     * Update Classroom by Order No.
-     * @param $order_no
-     * @param $data
-     * @return string
-     */
-    public function updateClassroomByOrderNo($order_no, $data){
-
-        DB::beginTransaction();
-        try{
-
-           $response = Classroom::whereOrderNo($order_no)->update($data);
-
-        } catch(\Exception $e){
-
-            DB::rollback();
-
-            $this->errorLog($e->get());
-
-            return $e->getMessage();
-        }
-
-        DB::commit();
-
-        return $response;
-    }
+	use LoggerTrait;
 
 	/**
-     * @param $order_no
-     * @return null|string
-     */
-    public function getClassroomByOrderNo($order_no){
-        try{
-            $result = Classroom::order_no($order_no);
-            $result = $result->with('client')->get();
-            return !is_null($result) ? $result->toArray():null;
-        } catch( Exception $e ){
-            return $e->getMessage();
-        }
-    }
+	 * Get list of classroom based with optional pagination.
+	 * @param $criteria
+	 * @param $limit
+	 * @param $offset
+	 * @return array
+	 */
+	public function getClassrooms($criteria,$limit,$offset){
+
+		DB::beginTransaction();
+
+		try{
+
+			$classroom = new Classroom();
+
+			//get client id -- teacher
+			if (isset($criteria['client_id'])) {
+
+				$classroom = $classroom->client_id($criteria['client_id']);
+			}
+
+			if (isset($criteria['name'])) {
+
+				$classroom = $classroom->name($criteria['name']);
+			}
+
+			if (isset($criteria['grade_id'])) {
+
+				$classroom = $classroom->grade_id($criteria['grade_id']);
+			}
+
+			if (isset($criteria['order_no'])) {
+
+				$classroom = $classroom->order_no($criteria['order_no']);
+			}
+
+			if (isset($criteria['payment_status'])) {
+
+				$classroom = $classroom->paymentStatus($criteria['payment_status']);
+			}
+
+			$classroom = $classroom->with('order', 'grade', 'client','subject');
+
+			$count = $classroom->get()->count();
+
+			if ($offset >= 0 && $limit > 0) {
+
+				$classroom = $classroom->skip($offset)->take($limit);
+			}
+
+			$records = $classroom->get();
+
+			$response = [
+				'total' => $count,
+				'record' => $records
+			];
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
+
+	/**
+	 * Get classroom information.
+	 * @param $id
+	 * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|\Illuminate\Support\Collection|null|static
+	 */
+	public function getClassroom($id){
+
+		DB::beginTransaction();
+
+		try{
+			$response = Classroom::with('order','grade','client','subject')->find($id);
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
+
+	/**
+	 * Add new classroom.
+	 * @param $classroom
+	 * @return string|static
+	 */
+	public function addClassroom($classroom){
+
+		DB::beginTransaction();
+
+		try{
+
+			$response = Classroom::create($classroom);
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
+
+
+	/**
+	 * Update new classroom based on the data needed.
+	 * @param $id
+	 * @param $data
+	 * @return ClassroomRepository|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|\Illuminate\Support\Collection|null|string|static
+	 */
+	public function updateClassroom($id,$data){
+
+		DB::beginTransaction();
+
+		try{
+
+			Classroom::find($id)->update($data);
+
+			$response = $this->getClassroom($id);
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+
+	}
+
+	/**
+	 * Delete Classroom
+	 * @param $id
+	 */
+	public function deleteClassroom($id){
+
+		DB::beginTransaction();
+
+		try{
+
+			$response = Classroom::find($id)->delete();
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
+
+	/**
+	 *  Delete classrooms by order no.
+	 *  @param $order_no
+	 *  @return boolean
+	 */
+
+	public function deleteClassroomByOrderNo($order_no){
+
+		DB::beginTransaction();
+
+		try{
+
+			$response = Classroom::order_no($order_no)->delete();
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
+
+	/**
+	 * Update Classroom by Order No.
+	 * @param $order_no
+	 * @param $data
+	 * @return string
+	 */
+	public function updateClassroomByOrderNo($order_no, $data){
+
+		DB::beginTransaction();
+		try{
+
+		   $response = Classroom::whereOrderNo($order_no)->update($data);
+
+		} catch(\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->get());
+
+			return $e->getMessage();
+		}
+
+		DB::commit();
+
+		return $response;
+	}
+
+	/**
+	 * @param $order_no
+	 * @return null|string
+	 */
+	public function getClassroomByOrderNo($order_no){
+
+		DB::beginTransaction();
+
+		try{
+			$result = Classroom::order_no($order_no);
+			$result = $result->with('client')->get();
+			$response = !is_null($result) ? $result->toArray():null;
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
 
 	/**
 	 *  Get classroom by subject and by student.
@@ -204,26 +291,33 @@ class ClassroomRepository implements ClassroomRepositoryInterface{
 	 *  @return boolean
 	 */
 
-    public function getClassroomBySubjectId($subject_id,$student_id){
+	public function getClassroomBySubjectId($subject_id,$student_id){
 
-        $classroom = new Classroom();
+		DB::beginTransaction();
 
-        try{
+		try{
+			$classroom = new Classroom();
 
-          $classroom = $classroom->subject_Id($subject_id);
-          $classroom = $classroom->active();
-          $classroom = $classroom->student_id($student_id);
-          $classroom = $classroom->with('classStudent')->get();
+			$classroom = $classroom->subject_Id($subject_id);
+			$classroom = $classroom->active();
+			$classroom = $classroom->student_id($student_id);
+			$classroom = $classroom->with('classStudent')->get();
 
-          return !is_null($classroom) ? $classroom->toArray():null;
+			$response = !is_null($classroom) ? $classroom->toArray():null;
 
-       } catch( Exception $e ){
+		}catch (\Exception $e){
 
-         return $e->getMessage();
-       }
+			DB::rollback();
 
-   }
+			$this->errorLog($e->getMessage());
 
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
 
 	/**
 	 *  Gets active subscription of a student based on a subject id
@@ -233,53 +327,60 @@ class ClassroomRepository implements ClassroomRepositoryInterface{
 	 */
 	public function getActiveSubscription($subject_id, $student_id){
 
-		$class_student = new  ClassStudent();
+		DB::beginTransaction();
 
 		try{
+			$class_student = new  ClassStudent();
+
 			$class_student = $class_student->with('student','classroom');
 			$class_student = $class_student->subscriptionSubjectId($subject_id);
 			$class_student = $class_student->subscriptionStudentId($student_id);
 			$class_student = $class_student->subscriptionStatus();
 
-			return count($class_student->get()->toArray());
+			$response = count($class_student->get()->toArray());
 
-		} catch( Exception $e ){
+		}catch (\Exception $e){
 
-			return $e->getMessage();//
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 
 	/**
-     * @param $class_id
-     * @return string
-     */
-    public function checkClassroomActive($class_id){
+	 * @param $class_id
+	 * @return string
+	 */
+	public function checkClassroomActive($class_id){
 
 
-        DB::beginTransaction();
-        try{
+		DB::beginTransaction();
+		try{
 
-            $response = Classroom::with('order')
-                ->paymentStatus(config('futureed.paid'))
-                ->validSubscription()
-                ->find($class_id);
-            ;
-        } catch(\Exception $e){
+			$response = Classroom::with('order')
+				->paymentStatus(config('futureed.paid'))
+				->validSubscription()
+				->find($class_id);
+				
+		} catch(\Exception $e){
 
-            DB::rollback();
+			DB::rollback();
 
-            $this->errorLog($e->get());
+			$this->errorLog($e->get());
 
-            return $e->getMessage();
-        }
+			return $e->getMessage();
+		}
 
-        DB::commit();
+		DB::commit();
 
-        return $response;
-
-
-
-    }
+		return $response;
+	}
 
 }

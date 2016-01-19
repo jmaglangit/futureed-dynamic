@@ -4,189 +4,305 @@
 use FutureEd\Models\Core\Invoice;
 use FutureEd\Models\Core\ClientDiscount;
 use FutureEd\Models\Core\User;
+use FutureEd\Models\Traits\LoggerTrait;
+use Illuminate\Support\Facades\DB;
 
 
 class InvoiceRepository implements InvoiceRepositoryInterface{
+	use LoggerTrait;
 
-    /**
-     * Get list of invoice based with optional pagination.
-     * @param array $criteria
-     * @param int $limit
-     * @param int $offset
-     * @return array
-     */
-    public function getInvoiceDetails($criteria = [], $limit = 0, $offset = 0)
-    {
+	/**
+	 * Get list of invoice based with optional pagination.
+	 * @param array $criteria
+	 * @param int $limit
+	 * @param int $offset
+	 * @return array
+	 */
+	public function getInvoiceDetails($criteria = [], $limit = 0, $offset = 0)
+	{
+		DB::beginTransaction();
 
-        $invoice = new Invoice();
+		try{
+			$invoice = new Invoice();
 
-        // included deleted information for admin users.
-        if ( User::where('id',session('current_user'))->pluck('user_type') == config('futureed.admin')) {
+			// included deleted information for admin users.
+			if ( User::where('id',session('current_user'))->pluck('user_type') == config('futureed.admin')) {
 
-            $invoice = $invoice->withTrashed();
-        }
+				$invoice = $invoice->withTrashed();
+			}
 
-        $count = 0;
+			$count = 0;
 
-        if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
+			if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
 
-            $count = $invoice->count();
+				$count = $invoice->count();
 
-            $invoice = $invoice->with('subscription');
+				$invoice = $invoice->with('subscription');
 
-        } else {
-
-
-            if (count($criteria) > 0) {
-                if (isset($criteria['order_no'])) {
-
-                    $invoice = $invoice->with('subscription')->order($criteria['order_no']);
-
-                }
-
-                if (isset($criteria['subscription_name'])) {
-
-                    $invoice = $invoice->with('subscription')->subscription($criteria['subscription_name']);
-
-                }
-
-                if (isset($criteria['payment_status'])) {
-
-                    $invoice = $invoice->with('subscription')->payment($criteria['payment_status']);
-
-                }
-
-                if (isset($criteria['client_id'])) {
-                    $invoice = $invoice->with('subscription')->clientId($criteria['client_id']);
-                }
-
-                if (isset($criteria['student_id'])) {
-	                $invoice = $invoice->with('subscription')->studentId($criteria['student_id']);
-                }
-            }
+			} else {
 
 
-            $count = $invoice->count();
+				if (count($criteria) > 0) {
+					if (isset($criteria['order_no'])) {
 
-            if ($limit > 0 && $offset >= 0) {
-                $invoice = $invoice->with('subscription')->offset($offset)->limit($limit);
-            }
+						$invoice = $invoice->with('subscription')->order($criteria['order_no']);
 
-            $invoice = $invoice->orderBy('id', 'desc');
+					}
 
-        }
+					if (isset($criteria['subscription_name'])) {
 
-        return ['total' => $count, 'records' => $invoice->get()->toArray()];
-    }
+						$invoice = $invoice->with('subscription')->subscription($criteria['subscription_name']);
 
-    /**
-     * Add new Invoice
-     * @param $data
-     * @return array|string
-     */
-    public function addInvoice($data)
-    {
-        try {
-            return Invoice::create($data)->toArray();
+					}
 
-        } catch (Exception $e) {
-            return $e->getMessage();
-        }
-    }
+					if (isset($criteria['payment_status'])) {
 
-    /**
-     * Get invoice info.
-     * @param $id
-     * @return Object
-     */
-    public function getInvoice($id)
-    {
-        return Invoice::with('subscription','order','invoiceDetail')->find($id);
-    }
+						$invoice = $invoice->with('subscription')->payment($criteria['payment_status']);
 
-    /**
-     * Update invoice based on the data needed.
-     * @param $id
-     * @param $data
-     * @return bool|int|string
-     */
-    public function updateInvoice($id, $data)
-    {
-        try {
-            $result = Invoice::find($id);
-            return !is_null($result) ? $result->update($data) : false;
-        } catch (Exception $e) {
-            return $e->getMessage();
-        }
-    }
+					}
 
-    /**
-     *  Get client discount to be used when adding invoice.
-     * @param $client_id int
-     * @return object
-     */
+					if (isset($criteria['client_id'])) {
+						$invoice = $invoice->with('subscription')->clientId($criteria['client_id']);
+					}
 
-    public function getClientInvoiceDiscount($client_id)
-    {
-        return ClientDiscount::clientId($client_id)->get();
-    }
-
-    /**
-     * Get next invoice data from the storage.
-     * @return array
-     */
-    public function getNextInvoiceNo()
-    {
-        return Invoice::orderBy('id', 'desc')->first()->toArray();
-    }
+					if (isset($criteria['student_id'])) {
+						$invoice = $invoice->with('subscription')->studentId($criteria['student_id']);
+					}
+				}
 
 
-    /**
-     * Get invoice with relation to subscription and invoice_detail which related to classroom and client
-     * @param $id
-     * @return Invoice
-     */
-    public function getDetails($id)
-    {
+				$count = $invoice->count();
 
-        $invoice = new Invoice();
+				if ($limit > 0 && $offset >= 0) {
+					$invoice = $invoice->with('subscription')->offset($offset)->limit($limit);
+				}
 
-        //query relation to subscription and invoice_detail
-        $invoice = $invoice->select('id', 'payment_status', 'date_start', 'date_end', 'subscription_id', 'discount')
-            ->with('subscription')->with('InvoiceDetail')->id($id);
+				$invoice = $invoice->orderBy('id', 'desc');
+
+			}
+
+			$response = ['total' => $count, 'records' => $invoice->get()->toArray()];
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
+
+	/**
+	 * Add new Invoice
+	 * @param $data
+	 * @return array|string
+	 */
+	public function addInvoice($data)
+	{
+		DB::beginTransaction();
+
+		try {
+			$response = Invoice::create($data)->toArray();
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
+
+	/**
+	 * Get invoice info.
+	 * @param $id
+	 * @return Object
+	 */
+	public function getInvoice($id)
+	{
+		DB::beginTransaction();
+
+		try{
+			$response = Invoice::with('subscription','order','invoiceDetail')->find($id);
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
+
+	/**
+	 * Update invoice based on the data needed.
+	 * @param $id
+	 * @param $data
+	 * @return bool|int|string
+	 */
+	public function updateInvoice($id, $data)
+	{
+		DB::beginTransaction();
+
+		try{
+			$result = Invoice::find($id);
+			$response = !is_null($result) ? $result->update($data) : false;
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
+
+	/**
+	 *  Get client discount to be used when adding invoice.
+	 * @param $client_id int
+	 * @return object
+	 */
+
+	public function getClientInvoiceDiscount($client_id)
+	{
+		DB::beginTransaction();
+
+		try{
+			$response = ClientDiscount::clientId($client_id)->get();
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
+
+	/**
+	 * Get next invoice data from the storage.
+	 * @return array
+	 */
+	public function getNextInvoiceNo()
+	{
+		DB::beginTransaction();
+
+		try{
+			$response = Invoice::orderBy('id', 'desc')->first()->toArray();
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
 
 
-        $subtotal = 0;
+	/**
+	 * Get invoice with relation to subscription and invoice_detail which related to classroom and client
+	 * @param $id
+	 * @return Invoice
+	 */
+	public function getDetails($id)
+	{
+		DB::beginTransaction();
 
-        $invoice = $invoice->first();
+		try{
+			$invoice = new Invoice();
 
-        foreach ($invoice['InvoiceDetail'] as $key => $value) {
-
-            $subtotal += $value['price'];
-
-        }
-
-        $invoice->price_discount= $subtotal * ($invoice['discount'] / 100);
-        $invoice->total = $subtotal - $invoice['price_discount'];
-        $invoice->subtotal =$subtotal;
+			//query relation to subscription and invoice_detail
+			$invoice = $invoice->select('id', 'payment_status', 'date_start', 'date_end', 'subscription_id', 'discount')
+				->with('subscription')->with('InvoiceDetail')->id($id);
 
 
-        return $invoice;
-    }
+			$subtotal = 0;
 
-    /**
-     * Delete invoice from storage.
-     * @param $id
-     * @return bool|null|string
-     */
-    public function deleteInvoice($id){
-        try{
-            $result = Invoice::find($id);
-            return is_null($result) ? null : $result->delete();
-        }catch (\Exception $e){
-            return $e->getMessage();
-        }
-    }
+			$invoice = $invoice->first();
+
+			foreach ($invoice['InvoiceDetail'] as $key => $value) {
+
+				$subtotal += $value['price'];
+
+			}
+
+			$invoice->price_discount= $subtotal * ($invoice['discount'] / 100);
+			$invoice->total = $subtotal - $invoice['price_discount'];
+			$invoice->subtotal =$subtotal;
+
+
+			$response = $invoice;
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
+
+	/**
+	 * Delete invoice from storage.
+	 * @param $id
+	 * @return bool|null|string
+	 */
+	public function deleteInvoice($id){
+		DB::beginTransaction();
+
+		try{
+			$result = Invoice::find($id);
+			$response = is_null($result) ? null : $result->delete();
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
 
 
 	/**
@@ -196,15 +312,25 @@ class InvoiceRepository implements InvoiceRepositoryInterface{
 	 */
 
 	public function getInvoiceByOrderNo($order_no){
+		DB::beginTransaction();
 
-		$invoice = new Invoice();
+		try{
+			$invoice = new Invoice();
 
-		//query relation to subscription and invoice_detail
-		return $invoice = $invoice->with('subscription')->with('InvoiceDetail')->order($order_no)->get();
+			//query relation to subscription and invoice_detail
+			return $invoice = $invoice->with('subscription')->with('InvoiceDetail')->order($order_no)->get();
 
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
-
-
-
-
 }

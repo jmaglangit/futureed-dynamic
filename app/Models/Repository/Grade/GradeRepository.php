@@ -3,230 +3,333 @@
 
 use FutureEd\Models\Core\CountryGrade;
 use FutureEd\Models\Core\Grade;
+use FutureEd\Models\Traits\LoggerTrait;
 use Illuminate\Support\Facades\DB;
 
 class GradeRepository implements GradeRepositoryInterface{
-
-
-	/**
-     * Get list of grades.
-     * @param array $criteria
-     * @param int $limit
-     * @param int $offset
-     * @return array
-     */
-    public function getGrades($criteria = [],$limit = 0, $offset = 0){
-
-        $grade = new Grade();
-
-
-        $count = 0;
-
-        if(count($criteria) <= 0 && $limit == 0 && $offset == 0) {
-
-            $count = $grade->count();
-
-        } else {
-
-            if(count($criteria) > 0) {
-                if(isset($criteria['name'])) {
-
-                    $grade = $grade->with('country')->name($criteria['name']);
-
-                }
-
-                if(isset($criteria['country_id']) && $criteria['country_id'] <> 'all'){
-
-                    $grade = $grade->with('country')->countryid($criteria['country_id']);
-                }
-
-                if($criteria['country_id'] == 'all'){
-
-                    $grade = $grade->with('country');
-
-                }
-            }
-
-            $count = $grade->count();
-
-            if($limit > 0 && $offset >= 0) {
-                $grade = $grade->with('country')->offset($offset)->limit($limit);
-            }
-
-        }
-
-        $grade = $grade->with('country')->orderBy('id', 'asc');
-
-        return ['total' => $count, 'records' => $grade->get()->toArray()];
-
-
-
-
-    }
+	use LoggerTrait;
 
 	/**
-     * Get Grade by code.
-     * @param $code
-     * @return mixed
-     */
-    public function getGrade($code){
+	 * Get list of grades.
+	 * @param array $criteria
+	 * @param int $limit
+	 * @param int $offset
+	 * @return array
+	 */
+	public function getGrades($criteria = [],$limit = 0, $offset = 0){
+		DB::beginTransaction();
+
+		try{
+			$grade = new Grade();
 
 
-        return Grade::where('code',$code)->with('countryGrade')->first();
+			$count = 0;
 
-    }
+			if(count($criteria) <= 0 && $limit == 0 && $offset == 0) {
+
+				$count = $grade->count();
+
+			} else {
+
+				if(count($criteria) > 0) {
+					if(isset($criteria['name'])) {
+
+						$grade = $grade->with('country')->name($criteria['name']);
+
+					}
+
+					if(isset($criteria['country_id']) && $criteria['country_id'] <> 'all'){
+
+						$grade = $grade->with('country')->countryid($criteria['country_id']);
+					}
+
+					if($criteria['country_id'] == 'all'){
+
+						$grade = $grade->with('country');
+
+					}
+				}
+
+				$count = $grade->count();
+
+				if($limit > 0 && $offset >= 0) {
+					$grade = $grade->with('country')->offset($offset)->limit($limit);
+				}
+
+			}
+
+			$grade = $grade->with('country')->orderBy('id', 'asc');
+
+			$response = ['total' => $count, 'records' => $grade->get()->toArray()];
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
 
 	/**
-     * Add new Grade.
-     * @param $data
-     * @return string|static
-     */
-    public function addGrade($data){
+	 * Get Grade by code.
+	 * @param $code
+	 * @return mixed
+	 */
+	public function getGrade($code){
+		DB::beginTransaction();
+
+		try{
+			$response = Grade::where('code',$code)->with('countryGrade')->first();
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
+
+	/**
+	 * Add new Grade.
+	 * @param $data
+	 * @return string|static
+	 */
+	public function addGrade($data){
+		DB::beginTransaction();
 
 		try {
 		
-			$grade = Grade::create($data);
+			$response = Grade::create($data);
 			
-		} catch(Exception $e) {
-		
-			return $e->getMessage();
-			
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
-		
-		return $grade;
-	
-    }
+
+		DB::commit();
+
+		return $response;
+	}
 
 	/**
-     * Update Grade record.
-     * @param $id
-     * @param $data
-     * @return \Illuminate\Support\Collection|null|string|static
-     */
-    public function updateGrade($id,$data){
+	 * Update Grade record.
+	 * @param $id
+	 * @param $data
+	 * @return \Illuminate\Support\Collection|null|string|static
+	 */
+	public function updateGrade($id,$data){
+		DB::beginTransaction();
 
-    	try {
+		try {
+			$grade = Grade::find($id);
+			$response = $grade->update($data);
 
-    		$grade = Grade::find($id);
-    		$grade->update($data);
+		}catch (\Exception $e){
 
-    	} catch (Exception $e) {
+			DB::rollback();
 
-    		return $e->getMessage();
-    		
-    	}
+			$this->errorLog($e->getMessage());
 
-    	return $grade;
+			return false;
+		}
 
+		DB::commit();
 
-    }
+		return $response;
+	}
 
 
 	/**
-     * Delete Grade
-     * @param $id
-     * @return bool|null|string
-     */
-    public function deleteGrade($id){
+	 * Delete Grade
+	 * @param $id
+	 * @return bool|null|string
+	 */
+	public function deleteGrade($id){
+		DB::beginTransaction();
 
-    	try {
-
+		try {
 			$grade = Grade::find($id);
 
-			return !is_null($grade) ? $grade->delete() : false;
+			$response = !is_null($grade) ? $grade->delete() : false;
 
-		} catch(Exception $e) {
+		}catch (\Exception $e){
 
-			return $e->getMessage();
+			DB::rollback();
 
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
-    }
+
+		DB::commit();
+
+		return $response;
+	}
 
 
 
 	/**
-     * get grade record by id
-     * @param $id
-     * @return mixed
-     */
-    public function getGradeById($id){
+	 * get grade record by id
+	 * @param $id
+	 * @return mixed
+	 */
+	public function getGradeById($id){
+		DB::beginTransaction();
 
-        return Grade::where('id',$id)->first();
+		try{
+			$response = Grade::where('id',$id)->first();
 
-    }
+		}catch (\Exception $e){
 
-	/**
-     * return student if this record is related to student
-     * @param $id
-     * @return \Illuminate\Database\Eloquent\Model|null|static
-     */
-    public function getStudentByCode($id){
+			DB::rollback();
 
-        $grade_class = new Grade();
+			$this->errorLog($e->getMessage());
 
-        $grade_class = $grade_class->with('students')->where('id',"=",$id);
+			return false;
+		}
 
-        return $grade_class->first();
+		DB::commit();
 
-    }
-
-	/**
-     * Check country of Grades.
-     * @param $country_id
-     * @return mixed
-     */
-    public function checkCountry($country_id){
-
-        return Grade::countryid($country_id)->get()->toArray();
-    }
+		return $response;
+	}
 
 	/**
-     * Get countries of Grades.
-     * @return mixed
-     */
-    public function getGradeCountries(){
+	 * return student if this record is related to student
+	 * @param $id
+	 * @return \Illuminate\Database\Eloquent\Model|null|static
+	 */
+	public function getStudentByCode($id){
+		DB::beginTransaction();
 
-        return Grade::select('country_id')->groupByCountry()->get();
-    }
+		try{
+			$grade_class = new Grade();
 
-    /**
-     * Get Grades list by countries.
-     * @param $country_id
-     */
-    public function getGradesByCountries($country_id){
-        /*
-        select * from country_grades cg
-        left join country_grades cg2 on cg2.age_group_id=cg.age_group_id
-        where cg2.country_id=702
-        group by cg2.age_group_id
-        ;
-        */
+			$grade_class = $grade_class->with('students')->where('id',"=",$id);
+			$response = $grade_class->first();
 
-        $country_id  = (empty($this->checkCountry($country_id))) ? config('futureed.default_country') : $country_id;
+		}catch (\Exception $e){
 
-        $grade_list = CountryGrade::select(
+			DB::rollback();
 
-            DB::raw('country_grades.id as id'),
-            DB::raw('g.country_id'),
-            DB::raw('g.code'),
-            DB::raw('g.name'),
-            DB::raw('g.description'),
-            DB::raw('g.status')
-        )->leftJoin('country_grades as cg2','cg2.age_group_id','=','country_grades.age_group_id')
-            ->leftJoin('grades as g','g.id','=','cg2.grade_id')
-            ->where('cg2.country_id',$country_id)
-            ->groupBy('cg2.age_group_id')
-            ->get();
+			$this->errorLog($e->getMessage());
 
+			return false;
+		}
 
-        return $grade_list;
+		DB::commit();
 
+		return $response;
+	}
 
+	/**
+	 * Check country of Grades.
+	 * @param $country_id
+	 * @return mixed
+	 */
+	public function checkCountry($country_id){
+		DB::beginTransaction();
 
+		try{
+			$response = Grade::countryid($country_id)->get()->toArray();
 
-    }
+		}catch (\Exception $e){
 
+			DB::rollback();
 
+			$this->errorLog($e->getMessage());
 
+			return false;
+		}
 
+		DB::commit();
+
+		return $response;
+	}
+
+	/**
+	 * Get countries of Grades.
+	 * @return mixed
+	 */
+	public function getGradeCountries(){
+		DB::beginTransaction();
+
+		try{
+			$response = Grade::select('country_id')->groupByCountry()->get();
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
+
+	/**
+	 * Get Grades list by countries.
+	 * @param $country_id
+	 */
+	public function getGradesByCountries($country_id){
+		/*
+		select * from country_grades cg
+		left join country_grades cg2 on cg2.age_group_id=cg.age_group_id
+		where cg2.country_id=702
+		group by cg2.age_group_id
+		;
+		*/
+
+		DB::beginTransaction();
+
+		try{
+			$country_id  = (empty($this->checkCountry($country_id))) ? config('futureed.default_country') : $country_id;
+
+			$grade_list = CountryGrade::select(
+				DB::raw('country_grades.id as id'),
+				DB::raw('g.country_id'),
+				DB::raw('g.code'),
+				DB::raw('g.name'),
+				DB::raw('g.description'),
+				DB::raw('g.status')
+				)->leftJoin('country_grades as cg2','cg2.age_group_id','=','country_grades.age_group_id')
+				->leftJoin('grades as g','g.id','=','cg2.grade_id')
+				->where('cg2.country_id',$country_id)
+				->groupBy('cg2.age_group_id')
+				->get();
+
+			$response = $grade_list;
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
 }

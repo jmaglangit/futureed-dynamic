@@ -2,10 +2,13 @@
 
 
 use FutureEd\Models\Core\Badge;
+use FutureEd\Models\Traits\LoggerTrait;
 use Illuminate\Support\Facades\DB;
 use League\Flysystem\Exception;
 
 class BadgeRepository implements BadgeRepositoryInterface{
+
+	use LoggerTrait;
 
 	/**
 	 * Gets list of Badges.
@@ -16,37 +19,52 @@ class BadgeRepository implements BadgeRepositoryInterface{
 	 */
 	public function getBadges($criteria = array(), $limit = 0, $offset = 0){
 
-		$badge = new Badge();
+		DB::beginTransaction();
 
-		$count = 0;
+		try{
+			$badge = new Badge();
 
-		if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
+			$count = 0;
 
-			$count = $badge->count();
+			if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
 
-		} else {
+				$count = $badge->count();
+
+			} else {
 
 
-			if (count($criteria) > 0) {
+				if (count($criteria) > 0) {
 
-				//check scope name
-				if(isset($criteria['name'])){
+					//check scope name
+					if(isset($criteria['name'])){
 
-					$badge = $badge->name($criteria['name']);
+						$badge = $badge->name($criteria['name']);
+					}
+
+				}
+
+				$count = $badge->count();
+
+				if ($limit > 0 && $offset >= 0) {
+					$badge = $badge->offset($offset)->limit($limit);
 				}
 
 			}
 
-			$count = $badge->count();
+			$response = ['total' => $count, 'records' => $badge->get()->toArray()];
 
-			if ($limit > 0 && $offset >= 0) {
-				$badge = $badge->offset($offset)->limit($limit);
-			}
+		}catch (\Exception $e){
 
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
 
-		return ['total' => $count, 'records' => $badge->get()->toArray()];
+		DB::commit();
 
+		return $response;
 	}
 
 
@@ -59,13 +77,29 @@ class BadgeRepository implements BadgeRepositoryInterface{
 	 */
 	public function getCompletedBadges($criteria = array()){
 
-		$badge = new Badge();
+		DB::beginTransaction();
 
-		$badge = $badge->ageGroupId($criteria['age_group_id']);
-		$badge = $badge->subjectId($criteria['subject_id']);
-		$badge = $badge->gender($criteria['gender']);
+		try{
+			$badge = new Badge();
 
-		return $badge->first();
+			$badge = $badge->ageGroupId($criteria['age_group_id']);
+			$badge = $badge->subjectId($criteria['subject_id']);
+			$badge = $badge->gender($criteria['gender']);
+
+			$response = $badge->first();
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 
 	}
 }
