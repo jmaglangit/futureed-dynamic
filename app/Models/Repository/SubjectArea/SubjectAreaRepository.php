@@ -2,9 +2,13 @@
 namespace FutureEd\Models\Repository\SubjectArea;
 
 use FutureEd\Models\Core\SubjectArea;
+use FutureEd\Models\Traits\LoggerTrait;
+use Illuminate\Support\Facades\DB;
 
 class SubjectAreaRepository implements SubjectAreaRepositoryInterface {
-	
+
+	use LoggerTrait;
+
 	/**
 	 * Get a listing of subject areas by subject id.
 	 *
@@ -13,11 +17,25 @@ class SubjectAreaRepository implements SubjectAreaRepositoryInterface {
 	 * @return array
 	 */	
 	public function getAreasBySubjectId($subject_id) {
-		
-		$subject_areas = SubjectArea::subjectId($subject_id)->get();
-		
-		return $subject_areas;
-		
+
+		DB::beginTransaction();
+
+		try {
+
+			$response = SubjectArea::subjectId($subject_id)->get();
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 	
 	/**
@@ -30,40 +48,56 @@ class SubjectAreaRepository implements SubjectAreaRepositoryInterface {
 	 * @return array
 	 */
     public function getSubjectAreas($criteria = array(), $limit = 0, $offset = 0) {
-		
-		$subject_areas = new SubjectArea();
-		
-		$count = 0;
-		
-		if(count($criteria) <= 0 && $limit == 0 && $offset == 0) {
-			
-			$count = $subject_areas->count();
-		
-		} else {
-			
-			if(count($criteria) > 0) {
-				if(isset($criteria['name'])) {
-					$subject_areas = $subject_areas->name($criteria['name']);
+
+		DB::beginTransaction();
+
+		try {
+			$subject_areas = new SubjectArea();
+
+			$count = 0;
+
+			if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
+
+				$count = $subject_areas->count();
+
+			} else {
+
+				if (count($criteria) > 0) {
+					if (isset($criteria['name'])) {
+						$subject_areas = $subject_areas->name($criteria['name']);
+					}
+
+					if (isset($criteria['subject_id'])) {
+						$subject_areas = $subject_areas->subjectid($criteria['subject_id']);
+					}
+
+
 				}
 
-                if(isset($criteria['subject_id'])) {
-                    $subject_areas = $subject_areas->subjectid($criteria['subject_id']);
-                }
+				$count = $subject_areas->count();
 
+				if ($limit > 0 && $offset >= 0) {
+					$subject_areas = $subject_areas->offset($offset)->limit($limit);;
+				}
 
-            }
-		
-			$count = $subject_areas->count();
-		
-			if($limit > 0 && $offset >= 0) {
-				$subject_areas = $subject_areas->offset($offset)->limit($limit);;
 			}
-														
+			$subject_areas = $subject_areas->with('subject')->orderBy('name', 'desc');
+			$subject_areas = $subject_areas->orderBy('name', 'asc');
+
+			$response = ['total' => $count, 'records' => $subject_areas->get()->toArray()];
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
-		$subject_areas =  $subject_areas->with('subject')->orderBy('name','desc');
-		$subject_areas = $subject_areas->orderBy('name', 'asc');
-		
-		return ['total' => $count, 'records' => $subject_areas->get()->toArray()];	
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -74,18 +108,25 @@ class SubjectAreaRepository implements SubjectAreaRepositoryInterface {
 	 * @return boolean
 	 */
 	public function addSubjectArea($subject_area) {
-		
+
+		DB::beginTransaction();
+
 		try {
 		
-			$subject_area = SubjectArea::create($subject_area);
+			$response = SubjectArea::create($subject_area);
 			
-		} catch(Exception $e) {
-		
-			return $e->getMessage();
-			
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
-		
-		return $subject_area;
+
+		DB::commit();
+
+		return $response;
 		
 	}
 
@@ -97,9 +138,25 @@ class SubjectAreaRepository implements SubjectAreaRepositoryInterface {
 	 * @return Resource
 	 */
 	public function getSubjectArea($id) {
-				
-		return SubjectArea::find($id);
-		
+
+		DB::beginTransaction();
+
+		try {
+
+			$response = SubjectArea::find($id);
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -111,7 +168,9 @@ class SubjectAreaRepository implements SubjectAreaRepositoryInterface {
 	 * @return boolean
 	 */
 	public function updateSubjectArea($id, $data) {
-		
+
+		DB::beginTransaction();
+
 		try {
 		
 			$subject_area = SubjectArea::find($id);
@@ -120,37 +179,51 @@ class SubjectAreaRepository implements SubjectAreaRepositoryInterface {
 			
 			$subject_area->update($data);
 			
-		} catch(Exception $e) {
-		
-			return $e->getMessage();
-			
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
+
+		DB::commit();
 		
 		return $subject_area;
 		
 	}
-	
+
 	/**
 	 * Delete subject area.
 	 *
-	 * @param	int	$id
-	 * @param	array	$subject
+	 * @param    int $id
+	 * @return bool
+	 * @internal param array $subject
 	 *
-	 * @return boolean
 	 */
 	public function deleteSubjectArea($id) {
-		
+
+		DB::beginTransaction();
+
 		try {
 		
 			$subject_area = SubjectArea::find($id);
 						
-			return !is_null($subject_area) ? $subject_area->delete() : false;
+			$response = !is_null($subject_area) ? $subject_area->delete() : false;
 			
-		} catch(Exception $e) {
-		
-			return $e->getMessage();
-			
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
+
+		DB::commit();
+
+		return $response;
 				
 	}
 
