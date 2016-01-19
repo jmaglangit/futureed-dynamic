@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 class StudentBadgeRepository implements StudentBadgeRepositoryInterface{
 
 	use LoggerTrait;
+
 	/**
 	 * Gets list of StudentBadges.
 	 * @param $criteria
@@ -20,39 +21,54 @@ class StudentBadgeRepository implements StudentBadgeRepositoryInterface{
 	 */
 	public function getStudentBadges($criteria = array(), $limit = 0, $offset = 0){
 
-		$student_badge = new StudentBadge();
+		DB::beginTransaction();
 
-		$student_badge = $student_badge->with('badges');
+		try {
+			$student_badge = new StudentBadge();
 
-		$count = 0;
+			$student_badge = $student_badge->with('badges');
 
-		if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
+			$count = 0;
 
-			$count = $student_badge->count();
+			if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
 
-		} else {
+				$count = $student_badge->count();
+
+			} else {
 
 
-			if (count($criteria) > 0) {
+				if (count($criteria) > 0) {
 
-				//check scope to student_id
-				if(isset($criteria['student_id'])){
+					//check scope to student_id
+					if (isset($criteria['student_id'])) {
 
-					$student_badge = $student_badge->studentId($criteria['student_id']);
+						$student_badge = $student_badge->studentId($criteria['student_id']);
+					}
+
+				}
+
+				$count = $student_badge->count();
+
+				if ($limit > 0 && $offset >= 0) {
+					$student_badge = $student_badge->offset($offset)->limit($limit);
 				}
 
 			}
 
-			$count = $student_badge->count();
+			$response = ['total' => $count, 'records' => $student_badge->get()->toArray()];
 
-			if ($limit > 0 && $offset >= 0) {
-				$student_badge = $student_badge->offset($offset)->limit($limit);
-			}
+		} catch (\Exception $e) {
 
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
 
-		return ['total' => $count, 'records' => $student_badge->get()->toArray()];
+		DB::commit();
 
+		return $response;
 	}
 
 	/**
@@ -61,18 +77,27 @@ class StudentBadgeRepository implements StudentBadgeRepositoryInterface{
 	 * @param $data
 	 * @return bool|int|string
 	 */
-
 	public function updateStudentBadge($id,$data){
+
+		DB::beginTransaction();
 
 		try{
 
-			return StudentBadge::find($id)
+			$response = StudentBadge::find($id)
 				->update($data);
 
-		}catch (Exception $e){
+		}catch (\Exception $e) {
 
-			return $e->getMessage();
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -82,11 +107,26 @@ class StudentBadgeRepository implements StudentBadgeRepositoryInterface{
 	 */
 	public function viewStudentBadge($id){
 
-		$student_badge = new StudentBadge();
-		$student_badge = $student_badge->with('badges');
-		$student_badge = $student_badge->find($id);
-		return $student_badge;
+		DB::beginTransaction();
 
+		try {
+
+			$student_badge = new StudentBadge();
+			$student_badge = $student_badge->with('badges');
+			$student_badge = $student_badge->find($id);
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $student_badge;
 	}
 
 	/**
@@ -96,16 +136,25 @@ class StudentBadgeRepository implements StudentBadgeRepositoryInterface{
 	 */
 	public function deleteStudentBadge($id){
 
+		DB::beginTransaction();
+
 		try{
 
-			return StudentBadge::find($id)
+			$response = StudentBadge::find($id)
 				->delete();
 
-		}catch (Exception $e){
+		} catch (\Exception $e) {
 
-			return $e->getMessage();
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
 
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -115,20 +164,32 @@ class StudentBadgeRepository implements StudentBadgeRepositoryInterface{
 	 */
 	public function addStudentBadge($data){
 
+		DB::beginTransaction();
+
 		try {
 
 			$student_badge = StudentBadge::create($data);
 
-		} catch(Exception $e) {
+		} catch (\Exception $e) {
 
-			return $e->getMessage();
+			DB::rollback();
 
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
 
-		return $student_badge;
+		DB::commit();
 
+		return $student_badge;
 	}
 
+	/**
+	 * @param $student_id
+	 * @param $subject_id
+	 * @param $age_group_id
+	 * @return bool
+	 */
 	public function getStudentBadge($student_id, $subject_id, $age_group_id){
 
 		DB::beginTransaction();
@@ -143,7 +204,6 @@ class StudentBadgeRepository implements StudentBadgeRepositoryInterface{
 
 			DB::rollback();
 
-			dd($e->getMessage());
 			$this->errorLog($e->getMessage());
 
 			return false;
