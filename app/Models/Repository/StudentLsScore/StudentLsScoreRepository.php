@@ -15,6 +15,8 @@ class StudentLsScoreRepository implements StudentLsScoreRepositoryInterface {
 	 */
 	public function addScore($data) {
 
+		DB::beginTransaction();
+
 		try {
 			
 			$existing_score = StudentLsScore::student_id($data['student_id'])->test_id($data['ls_test_id'])->name($data['ls_name'])->first();
@@ -35,14 +37,18 @@ class StudentLsScoreRepository implements StudentLsScoreRepositoryInterface {
 				$student_ls_score = StudentLsScore::create($data);
 			}
 		
-		} catch(Exception $e) {
+		} catch (\Exception $e) {
 
-			return $e->getMessage();
+			DB::rollback();
 
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
 
-		return $student_ls_score;
+		DB::commit();
 
+		return $student_ls_score;
 	}
 
 
