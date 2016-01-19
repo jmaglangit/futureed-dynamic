@@ -27,7 +27,24 @@ class SchoolRepository implements SchoolRepositoryInterface{
 	 */
 	public function getSchools(){
 
-        return School::all();
+		DB::beginTransaction();
+
+		try {
+
+			$response = School::all();
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
     }
 
 	/**
@@ -36,7 +53,24 @@ class SchoolRepository implements SchoolRepositoryInterface{
 	 */
 	public function getSchoolName($school_code){
 
-		return School::where('code','=',$school_code)->pluck('name');
+		DB::beginTransaction();
+
+		try {
+
+			$response = School::where('code', '=', $school_code)->pluck('name');
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -44,8 +78,13 @@ class SchoolRepository implements SchoolRepositoryInterface{
 	 * @return int|string
 	 */
 	public function addSchool($school){
-		$code = $code = Carbon::now()->timestamp;
+
+		DB::beginTransaction();
+
+
 		try{
+			$code = $code = Carbon::now()->timestamp;
+
 			School::insert([
 				'code' => $code,
 				'name' => $school['school_name'],
@@ -60,11 +99,21 @@ class SchoolRepository implements SchoolRepositoryInterface{
 				'created_by' => 1,
 				'updated_by' => 1,
 			]);
-		}catch(Exception $e){
-			return $e->getMessage();
+
+			$response = $code;
+
+		}catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
 
-		return $code;
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -72,8 +121,25 @@ class SchoolRepository implements SchoolRepositoryInterface{
 	 * @return mixed
 	 */
 	public function getSchoolId($name){
-		//return user id
-        return School::where('name','=',$name)->pluck('id');            
+
+		DB::beginTransaction();
+
+		try {
+
+			$response = School::where('name', '=', $name)->pluck('id');
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -82,9 +148,26 @@ class SchoolRepository implements SchoolRepositoryInterface{
 	 */
 	public function checkSchoolName($input){
 
-		return School::where('name','=',$input['school_name'])
-            ->where('street_address','=',$input['school_address'])
-            ->where('state','=',$input['school_state'])->pluck('id');
+		DB::beginTransaction();
+
+		try {
+
+			$response = School::where('name', '=', $input['school_name'])
+				->where('street_address', '=', $input['school_address'])
+				->where('state', '=', $input['school_state'])->pluck('id');
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -93,8 +176,24 @@ class SchoolRepository implements SchoolRepositoryInterface{
 	 */
 	public function getSchoolDetails($id){
 
-		return School::where('code','=',$id)->first();
+		DB::beginTransaction();
 
+		try {
+
+			$response = School::where('code', '=', $id)->first();
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -103,9 +202,26 @@ class SchoolRepository implements SchoolRepositoryInterface{
 	 */
 	public function checkSchoolNameExist($input){
 
-		return School::where('name','=',$input['school_name'])
-            ->where('street_address','=',$input['school_street_address'])
-            ->where('state','=',$input['school_state'])->pluck('code');
+		DB::beginTransaction();
+
+		try {
+
+			$response = School::where('name', '=', $input['school_name'])
+				->where('street_address', '=', $input['school_street_address'])
+				->where('state', '=', $input['school_state'])->pluck('code');
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -114,30 +230,36 @@ class SchoolRepository implements SchoolRepositoryInterface{
 	 */
 	public function updateSchoolDetails($input){
 
+		DB::beginTransaction();
 
-		foreach ($input as $key => $value) {
+		try {
+			foreach ($input as $key => $value) {
 
-			if($value !=null ){
+				if ($value != null) {
 
-		 		$update[substr($key,7)] = $value;
+					$update[substr($key, 7)] = $value;
 
-		 	}else{ 
+				} else {
 
-		 		$update[substr($key,7)] = null;
+					$update[substr($key, 7)] = null;
 
-		 	}
-	
+				}
+			}
+
+			$response = School::where('code', $input['school_code'])->update($update);
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
 
-		try{
+		DB::commit();
 
-			School::where('code',$input['school_code'])->update($update);
-
-		}catch(Exception $e){
-			return $e->getMessage();
-		}
-
-
+		return $response;
 	}
 
 	/**
@@ -146,8 +268,24 @@ class SchoolRepository implements SchoolRepositoryInterface{
 	 */
 	public function getSchoolCode($school_name){
 
-		return School::where('name','=',$school_name)->pluck('code');
+		DB::beginTransaction();
 
+		try {
+
+			$response = School::where('name', '=', $school_name)->pluck('code');
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -156,8 +294,25 @@ class SchoolRepository implements SchoolRepositoryInterface{
 	 */
 	public function searchSchool($school_name){
 
-		return School::select('name','code','city','state','street_address')
-						->where('name','Like',$school_name.'%')->get()->toArray();
+		DB::beginTransaction();
+
+		try {
+
+			$response = School::select('name', 'code', 'city', 'state', 'street_address')
+				->where('name', 'Like', $school_name . '%')->get()->toArray();
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -167,7 +322,24 @@ class SchoolRepository implements SchoolRepositoryInterface{
 	 */
 	public function getSchoolByCode($school_code){
 
-		return School::whereCode($school_code)->get();
+		DB::beginTransaction();
+
+		try {
+
+			$response = School::whereCode($school_code)->get();
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
