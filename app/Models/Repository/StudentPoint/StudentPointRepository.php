@@ -1,9 +1,12 @@
 <?php namespace FutureEd\Models\Repository\StudentPoint;
 
 use FutureEd\Models\Core\StudentPoint;
+use FutureEd\Models\Traits\LoggerTrait;
+use Illuminate\Support\Facades\DB;
 
 class StudentPointRepository implements StudentPointRepositoryInterface{
 
+	use LoggerTrait;
 
 	/**
 	 * Add record in storage
@@ -12,20 +15,25 @@ class StudentPointRepository implements StudentPointRepositoryInterface{
 	 */
 	public function addStudentPoint($data){
 
+		DB::beginTransaction();
+
 		try {
 
 			$student_point = StudentPoint::create($data);
 
-		} catch(Exception $e) {
+		} catch (\Exception $e) {
 
-			return $e->getMessage();
+			DB::rollback();
 
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
 
+		DB::commit();
+
 		return $student_point;
-
 	}
-
 
 	/**
 	 * Display a listing of subscriptions.
@@ -38,32 +46,48 @@ class StudentPointRepository implements StudentPointRepositoryInterface{
 	 */
 	public function getStudentPoints($criteria = array(), $limit = 0, $offset = 0) {
 
-		$student_point = new StudentPoint();
-		$student_point = $student_point->with('event');
+		DB::beginTransaction();
 
-		$count = 0;
+		try {
+			$student_point = new StudentPoint();
+			$student_point = $student_point->with('event');
 
-		if(count($criteria) <= 0 && $limit == 0 && $offset == 0) {
+			$count = 0;
 
-			$count = $student_point->count();
+			if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
 
-		} else {
+				$count = $student_point->count();
 
-			if(count($criteria) > 0) {
-				if(isset($criteria['student_id'])) {
-					$student_point = $student_point->studentId($criteria['student_id']);
+			} else {
+
+				if (count($criteria) > 0) {
+					if (isset($criteria['student_id'])) {
+						$student_point = $student_point->studentId($criteria['student_id']);
+					}
 				}
+
+				$count = $student_point->count();
+
+				if ($limit > 0 && $offset >= 0) {
+					$student_point = $student_point->offset($offset)->limit($limit);
+				}
+
 			}
 
-			$count = $student_point->count();
+			$response = ['total' => $count, 'records' => $student_point->get()->toArray()];
 
-			if($limit > 0 && $offset >= 0) {
-				$student_point = $student_point->offset($offset)->limit($limit);
-			}
+		} catch (\Exception $e) {
 
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
 
-		return ['total' => $count, 'records' => $student_point->get()->toArray()];
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -73,12 +97,25 @@ class StudentPointRepository implements StudentPointRepositoryInterface{
 	 */
 	public function viewStudentPoint($id){
 
-		$student_point = new StudentPoint();
+		DB::beginTransaction();
 
-		$student_point = $student_point->with('event');
-		$student_point = $student_point->find($id);
+		try {
+			$student_point = new StudentPoint();
+
+			$student_point = $student_point->with('event');
+			$student_point = $student_point->find($id);
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
 		return $student_point;
-
 	}
 
 	/**
@@ -87,18 +124,27 @@ class StudentPointRepository implements StudentPointRepositoryInterface{
 	 * @param $data
 	 * @return bool|int|string
 	 */
-
 	public function updateStudentPoint($id,$data){
+
+		DB::beginTransaction();
 
 		try{
 
-			return StudentPoint::find($id)
+			$response = StudentPoint::find($id)
 				->update($data);
 
-		}catch (Exception $e){
+		} catch (\Exception $e) {
 
-			return $e->getMessage();
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 }
