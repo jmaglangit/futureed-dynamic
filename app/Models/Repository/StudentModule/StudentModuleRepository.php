@@ -18,11 +18,24 @@ class StudentModuleRepository implements StudentModuleRepositoryInterface
 	 */
 	public function addStudentModule($data)
 	{
+		DB::beginTransaction();
+
 		try {
-			return StudentModule::create($data);
+
+			$response = StudentModule::create($data);
+
 		} catch (\Exception $e) {
-			return $e->getMessage();
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -32,11 +45,24 @@ class StudentModuleRepository implements StudentModuleRepositoryInterface
 	 */
 	public function getStudentModule($id)
 	{
+		DB::beginTransaction();
+
 		try {
-			return StudentModule::find($id);
+
+			$response = StudentModule::find($id);
+
 		} catch (\Exception $e) {
-			return $e->getMessage();
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -46,6 +72,8 @@ class StudentModuleRepository implements StudentModuleRepositoryInterface
 	 */
 	public function updateStudentModule($id, $data)
 	{
+		DB::beginTransaction();
+
 		try {
 
 			StudentModule::whereId($id)
@@ -66,11 +94,20 @@ class StudentModuleRepository implements StudentModuleRepositoryInterface
 					'current_difficulty_level' => $data->current_difficulty_level
 				]);
 
-			return StudentModule::find($id);
+			$response = StudentModule::find($id);
 
 		} catch (\Exception $e) {
-			return $e->getMessage();
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -80,8 +117,24 @@ class StudentModuleRepository implements StudentModuleRepositoryInterface
 	 */
 	public function viewStudentModule($id)
 	{
+		DB::beginTransaction();
 
-		return StudentModule::with('question')->find($id);
+		try {
+
+			$response = StudentModule::with('question')->find($id);
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -91,38 +144,75 @@ class StudentModuleRepository implements StudentModuleRepositoryInterface
 	 */
 	public function countSubjectModuleDone($criteria = array())
 	{
+		DB::beginTransaction();
 
-		$student_module = new StudentModule();
-		$student_module = $student_module->studentId($criteria['student_id']);
-		$student_module = $student_module->progress($criteria['progress']);
-		$student_module = $student_module->subjectId($criteria['subject_id']);
-		$student_module = $student_module->gradeId($criteria['grade_id']);
-		$student_module = $student_module->with('module');
-		return $student_module->count();
+		try {
+
+			$student_module = new StudentModule();
+			$student_module = $student_module->studentId($criteria['student_id']);
+			$student_module = $student_module->progress($criteria['progress']);
+			$student_module = $student_module->subjectId($criteria['subject_id']);
+			$student_module = $student_module->gradeId($criteria['grade_id']);
+			$student_module = $student_module->with('module');
+			$response = $student_module->count();
+
+			} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
 	 * Get Student Module Status.
 	 * @param $id
+	 * @return mixed
 	 */
 	public function getStudentModuleStatus($id){
 
-		$return = StudentModule::find($id);
+		DB::beginTransaction();
 
-		return $return->module_status;
+		try {
+
+			$return = StudentModule::find($id);
+
+			$response = $return->module_status;
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
 	 * Updated Student last activities.
 	 * @param $id
 	 * @param $data
+	 * @return bool|int|string
 	 */
 	public function updateStudentActivity($id,$data){
+
+		DB::beginTransaction();
 
 		$student_module = $this->getStudentModule($id);
 
 		try{
-			return StudentModule::find($id)
+			$response = StudentModule::find($id)
 				->update([
 					'last_viewed_content_id' => isset($data['last_viewed_content_id'])
 						? $data['last_viewed_content_id'] : $student_module->last_viewed_content_id,
@@ -130,53 +220,107 @@ class StudentModuleRepository implements StudentModuleRepositoryInterface
 						? $data['last_answered_question_id'] : $student_module->last_answered_question_id
 				]);
 
-		} catch(\Exception $e){
+		} catch (\Exception $e) {
 
-			return $e->getMessage();
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
 	 * Get Wrong count.
 	 * @param $id
+	 * @return bool|mixed
 	 */
 	public function getStudentModuleWrongCount($id){
 
-		$return  = StudentModule::find($id);
+		DB::beginTransaction();
 
-		return $return->wrong_counter;
+		try {
 
+			$return = StudentModule::find($id);
+
+			$response = $return->wrong_counter;
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
 	 * Get Student Module by Student and Class
 	 * @param $student_id
 	 * @param $class_id
+	 * @return bool
 	 */
 	public function getStudentModuleByClass($student_id, $class_id){
 
-		$class_id = (array) $class_id;
+		DB::beginTransaction();
 
-		return StudentModule::with('subject')
-			->studentId($student_id)
-			->classId($class_id)
-			->get();
+		try {
+
+			$class_id = (array)$class_id;
+
+			$response = StudentModule::with('subject')
+				->studentId($student_id)
+				->classId($class_id)
+				->get();
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
 	 * Delete Student Module.
 	 * @param $id
+	 * @return bool|null
 	 */
 	public function deleteStudentModule($id){
 
+		DB::beginTransaction();
+
 		try{
 
-			return StudentModule::find($id)->delete();
+			$response = StudentModule::find($id)->delete();
 
-		} catch(\Exception $e){
+		} catch (\Exception $e) {
 
-			return $e->getMessage();
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
