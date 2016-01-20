@@ -173,7 +173,7 @@ class ModuleRepository implements ModuleRepositoryInterface
 		try{
 			$module = new Module();
 
-			$module = $module->with('subject', 'subjectarea', 'grade', 'content', 'question', 'studentModule');
+			$module = $module->with('subject', 'subjectarea', 'grade', 'content', 'question', 'studentModuleValid');
 			$response = $module->find($id);
 
 		}catch (\Exception $e){

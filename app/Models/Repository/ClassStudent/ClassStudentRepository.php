@@ -945,7 +945,10 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 				DB::raw('sm.progress')
 			)->leftJoin('classrooms as c','c.id','=','cs.class_id')
 				->leftJoin('subjects as s','s.id','=','c.subject_id')
-				->leftJoin('subject_areas as sa','sa.subject_id','=','s.id')
+				->leftJoin('subject_areas as sa', function($left_join){
+					$left_join->on('sa.subject_id','=','s.id')
+						->whereNull('sa.deleted_at');
+				})
 				->leftJoin('modules as m','m.subject_area_id','=','sa.id')
 				->leftJoin('student_modules as sm',function($left_join) use ($student_id) {
 					$left_join->on('sm.module_id','=','m.id')
