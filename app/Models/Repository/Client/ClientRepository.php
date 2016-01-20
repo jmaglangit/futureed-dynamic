@@ -10,449 +10,671 @@ use Illuminate\Support\Facades\DB;
 
 class ClientRepository implements ClientRepositoryInterface
 {
-    use LoggerTrait;
+	use LoggerTrait;
 
 	/**
-     * @param $user_id
-     * @param $role
-     * @return mixed
-     */
-    public function getClient($user_id, $role = 0)
-    {
-
-		return Client::with('school')
-			->userid($user_id)
-            ->first();
-
-    }
-
-    /**
-     * Gets teacher information for registration.
-     * @param $id
-     * @param $registration_token
-     * @return mixed
-     */
-    public function  getTeacher($id, $registration_token){
-
-        $client = new Client();
-
-        return $client->with('user','school')
-            ->role(config('futureed.teacher'))
-            ->registrationtoken($registration_token)
-            ->find($id);
-
-    }
-
-
-	/**
-     * @param $id
-     * @param $role
-     * @return mixed
-     */
-    public function checkClient($id, $role)
-    {
-
-        return Client::where('id', '=', $id)
-            ->where('client_role', '=', $role)->pluck('user_id');
-
-    }
-
-	/**
-     * @param $input
-     */
-    public function checkClientEmail($input)
-    {
-        $email = $input['email'];
-        $client_role = $input['client_role'];
-    }
-
-	/**
-     * @param $client
-     * @return string|static
-     */
-    public function addClient($client)
-    {
-		$client['country_id'] = isset($client['country_id']) ? $client['country_id'] : 0;
-
-        try {
-
-			$client =  Client::create($client);
-
-
-			return $client;
-
-
-        } catch (Exception $e) {
-            return $e->getMessage();
-        }
-
-    }
-
-	/**
-     * @param $user_id
-     * @return mixed
-     */
-    public function getClientId($user_id)
-    {
-
-        return Client::userId($user_id)->pluck('id');
-    }
-
-	/**
-     * @param $user_id
-     * @return mixed
-     */
-    public function getRole($user_id)
-    {
-
-        return Client::where('user_id', '=', $user_id)->pluck('client_role');
-    }
-
-	/**
-     * @param $id
-     * @return mixed
-     */
-    public function verifyClientId($id)
-    {
-
-        return Client::select('id', 'user_id')->where('id', '=', $id)->first();
-
-    }
-
-	/**
-     * @param $id
-     * @return \Illuminate\Support\Collection|null|static
-     */
-    public function getClientDetails($id)
-    {
-
-        return Client::with('user')->find($id);
-
-    }
-
-	/**
-     * @param $id
-     * @param $client
-     * @throws Exception
-     */
-    public function updateClientDetails($id, $client)
-    {
-
-        try {
-
-            Client::where('id', $id)->update($client);
-
-        } catch (Exception $e) {
-            throw new Exception($e->getMessage());
-        }
-    }
-
-    /**
-     * Updates client and it's relationships.
-     * @param $id
-     * @param $data
-     * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|\Illuminate\Support\Collection|null|string|static
-     */
-    public function updateClient($id,$data){
-
-        try{
-
-            $client = Client::id($id)->role(config('futureed.teacher'))->pluck('user_id');
-
-            //return if no record found.
-            if(!$client){
-
-                return false;
-            }
-
-            $data['password'] =  (!isset($data['password'])) ?: sha1($data['password']);
-
-            //TODO: to be updated through relationships.
-
-            $user = User::find($client)->update($data);
-
-            $client = Client::find($id)->update($data);
-
-            if($user && $client){
-
-                return Client::with('user','school')->find($id);
-            }
-
-
-        }catch (Exception $e){
-
-            return $e->getMessage();
-        }
-
-    }
-
-
-    /**
-     * Display a listing of clients.
-     *
-     * @param    array $criteria
-     * @param    int $limit
-     * @param    int $offset
-     *
-     * @return array
-     */
-    public function getClients($criteria = array(), $limit = 0, $offset = 0)
-    {
-
-        $clients = new Client();
-
-        $count = 0;
-
-        if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
-
-            $count = $clients->count();
-
-        } else {
-
-            if (count($criteria) > 0) {
-                if (isset($criteria['name'])) {
-                    $clients = $clients->name($criteria['name']);
-                }
-
-                if (isset($criteria['email'])) {
-                    $clients = $clients->email($criteria['email']);
-                }
-
-                if (isset($criteria['client_role'])) {
-                    $clients = $clients->role($criteria['client_role']);
-                }
-
-                if (isset($criteria['status'])) {
-                    $clients = $clients->status($criteria['status']);
-                }
-
-                if (isset($criteria['school'])) {
-                    $clients = $clients->school_name($criteria['school']);
-                }
-
-				if (isset($criteria['school_code'])) {
-					$clients = $clients->schoolcode($criteria['school_code']);
-				}
-            }
-
-            $count = $clients->count();
-
-            if ($limit > 0 && $offset >= 0) {
-                $clients = $clients->offset($offset)->limit($limit);;
-            }
-
-        }
-
-        $clients = $clients->with('user', 'school')->orderBy('created_at', 'desc');
-
-        return ['total' => $count, 'records' => $clients->get()->toArray()];
-    }
-
-	/**
-     * @param $criteria
-     * @return mixed
-     */
-    public function getClientCustomDetails($criteria)
-    {
-
-        $clients = new Client();
-
-
-        if (isset($criteria['school_code'])) {
-            $clients = $clients->schoolCode($criteria['school_code']);
-        }
-
-        //accepts comma separated value. e.g client_role=Parent,Teacher
-        if (isset($criteria['client_role'])) {
-
-            $client_role = explode(',',$criteria['client_role'] );
-
-            $clients = $clients->role($client_role);
-        }
-
-        if (isset($criteria['name'])) {
-            $clients = $clients->name($criteria['name']);
-        }
-
-        $clients = $clients->with('user')->activated()->verified()->orderBy('created_at', 'desc');
-
-        return $clients->get()->toArray();
-
-
-    }
-
-    /**
-     * @param array $criteria
-     * @param int $limit
-     * @param int $offset
-     * @return array
-     */
-    public function getTeacherDetails($criteria = array(), $limit = 0, $offset = 0)
+	 * @param $user_id
+	 * @param $role
+	 * @return mixed
+	 */
+	public function getClient($user_id, $role = 0)
 	{
+		DB::beginTransaction();
 
+		try{
+			$response = Client::with('school')
+							->userid($user_id)
+							->first();
 
-		$clients = new Client();
+		}catch (\Exception $e){
 
-		$clients = $clients->teacher()->activated()->verified();
+			DB::rollback();
 
-		$count = 0;
+			$this->errorLog($e->getMessage());
 
-		if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
-
-			$count = $clients->count();
-
-		} else {
-
-			if (count($criteria) > 0) {
-
-				if (isset($criteria['name'])) {
-
-					$clients = $clients->name($criteria['name']);
-
-				}
-
-				if (isset($criteria['email'])) {
-
-					$clients = $clients->email($criteria['email']);
-
-				}
-
-				if (isset($criteria['school_code'])) {
-
-					$clients = $clients->schoolcode($criteria['school_code']);
-
-				}
-			}
-
-			$count = $clients->count();
-
-			if ($limit > 0 && $offset >= 0) {
-				$clients = $clients->offset($offset)->limit($limit);;
-			}
-
+			return false;
 		}
 
-		$clients = $clients->with('user')->orderBy('first_name', 'asc');
+		DB::commit();
 
-		return ['total' => $count, 'records' => $clients->get()->toArray()];
+		return $response;
+	}
+
+	/**
+	 * Gets teacher information for registration.
+	 * @param $id
+	 * @param $registration_token
+	 * @return mixed
+	 */
+	public function  getTeacher($id, $registration_token){
+
+		DB::beginTransaction();
+
+		try{
+			$client = new Client();
+
+			$response = $client->with('user','school')
+							->role(config('futureed.teacher'))
+							->registrationtoken($registration_token)
+							->find($id);
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+
+	}
+
+
+	/**
+	 * @param $id
+	 * @param $role
+	 * @return mixed
+	 */
+	public function checkClient($id, $role)
+	{
+		DB::beginTransaction();
+
+		try{
+			$response = Client::where('id', '=', $id)
+							->where('client_role', '=', $role)->pluck('user_id');
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
+
+	/**
+	 * @param $client
+	 * @return string|static
+	 */
+	public function addClient($client)
+	{
+		DB::beginTransaction();
+
+		try {
+			$client['country_id'] = isset($client['country_id']) ? $client['country_id'] : 0;
+
+			$response =  Client::create($client);
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
+
+	/**
+	 * @param $user_id
+	 * @return mixed
+	 */
+	public function getClientId($user_id)
+	{
+		DB::beginTransaction();
+
+		try{
+			$response = Client::userId($user_id)->pluck('id');
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
+
+	/**
+	 * @param $user_id
+	 * @return mixed
+	 */
+	public function getRole($user_id)
+	{
+		DB::beginTransaction();
+
+		try{
+			$response = Client::where('user_id', '=', $user_id)->pluck('client_role');
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
+
+	/**
+	 * @param $id
+	 * @return mixed
+	 */
+	public function verifyClientId($id)
+	{
+		DB::beginTransaction();
+
+		try{
+			$response = Client::select('id', 'user_id')->where('id', '=', $id)->first();
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 
 	}
 
 	/**
-     * @param $id
-     * @return Client
-     */
-    public function getClientByUserId($id)
-    {
+	 * @param $id
+	 * @return \Illuminate\Support\Collection|null|static
+	 */
+	public function getClientDetails($id)
+	{
+		DB::beginTransaction();
 
-        $clients = new Client();
+		try{
+			$response = Client::with('user')->find($id);
 
-        $clients = $clients->where('id', '=', $id);
+		}catch (\Exception $e){
 
-        $clients = $clients->with('user')->first();
+			DB::rollback();
 
-        return $clients;
-    }
+			$this->errorLog($e->getMessage());
 
-	/**
-     * @param $id
-     * @return bool|\Illuminate\Support\Collection|null|string|static
-     */
-    public function deleteClient($id)
-    {
+			return false;
+		}
 
-        try {
+		DB::commit();
 
-            $client = Client::find($id);
-
-            return !is_null($client) ? $client->delete() : false;
-
-        } catch (Exception $e) {
-
-            return $e->getMessage();
-
-        }
-
-        return $client;
-    }
-
-    //check relation of teacher to classroom
+		return $response;
+	}
 
 	/**
-     * @param $id
-     * @return Client
-     */
-    public function getClassroom($id)
-    {
+	 * @param $id
+	 * @param $client
+	 * @throws Exception
+	 */
+	public function updateClientDetails($id, $client)
+	{
+		DB::beginTransaction();
 
-        $clients = new Client();
+		try {
 
-        $clients = $clients->with('classroom')->where('id', $id)->orderBy('created_at', 'desc')->first();
+			$response = Client::where('id', $id)->update($client);
 
-        return $clients;
-    }
+		}catch (\Exception $e){
 
-	/**
-     * @param $id
-     * @return Client
-     */
-    public function getStudent($id)
-    {
+			DB::rollback();
 
-        $clients = new Client();
+			$this->errorLog($e->getMessage());
 
-        $clients = $clients->with('student')->where('id', $id)->orderBy('created_at', 'desc')->first();
+			return false;
+		}
 
-        return $clients;
+		DB::commit();
 
-
-    }
-
+		return $response;
+	}
 
 	/**
-     * @param $id
-     * @return Client
-     */
-    public function getClientToClassroom($id)
-    {
+	 * Updates client and it's relationships.
+	 * @param $id
+	 * @param $data
+	 * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|\Illuminate\Support\Collection|null|string|static
+	 */
+	public function updateClient($id,$data){
+		DB::beginTransaction();
 
-        $clients = new Client();
+		try{
 
-        $grades = new Grade();
+			$client = Client::id($id)->role(config('futureed.teacher'))->pluck('user_id');
+
+			//return if no record found.
+			if(!$client){
+
+				return false;
+			}
+
+			$data['password'] =  (!isset($data['password'])) ?: sha1($data['password']);
+
+			//TODO: to be updated through relationships.
+
+			$user = User::find($client)->update($data);
+
+			$client = Client::find($id)->update($data);
+
+			if($user && $client){
+
+				return Client::with('user','school')->find($id);
+			}
 
 
-        $grades = $grades->with('classroom')->orderBy('created_at', 'desc');
+		}catch (\Exception $e){
 
-        $clients = $clients->with('classroom')->orderBy('created_at', 'desc');
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+
+	}
 
 
-        $clients = $clients->where('id', '=', $id)->first();
+	/**
+	 * Display a listing of clients.
+	 *
+	 * @param    array $criteria
+	 * @param    int $limit
+	 * @param    int $offset
+	 *
+	 * @return array
+	 */
+	public function getClients($criteria = array(), $limit = 0, $offset = 0)
+	{
+		use LoggerTrait;
 
-        $grade = array();
+		try{
+			$clients = new Client();
 
-        foreach ($clients['classroom'] as $k => $v) {
+			$count = 0;
 
-            $grade[] = $v['grade_id'];
+			if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
 
-        }
+				$count = $clients->count();
 
-        $grades = $grades->whereIn('id', $grade)->get();
+			} else {
 
-        if(isset($clients)){
+				if (count($criteria) > 0) {
+					if (isset($criteria['name'])) {
+						$clients = $clients->name($criteria['name']);
+					}
 
-            $clients->grade = $grades;
-        }
+					if (isset($criteria['email'])) {
+						$clients = $clients->email($criteria['email']);
+					}
 
-        return $clients;
-    }
+					if (isset($criteria['client_role'])) {
+						$clients = $clients->role($criteria['client_role']);
+					}
 
-    /**
-     * @param $id
-     * @return mixed
-     */
-    public function getSchoolCode($id){
+					if (isset($criteria['status'])) {
+						$clients = $clients->status($criteria['status']);
+					}
 
-		return Client::id($id)->pluck('school_code');
+					if (isset($criteria['school'])) {
+						$clients = $clients->school_name($criteria['school']);
+					}
+
+					if (isset($criteria['school_code'])) {
+						$clients = $clients->schoolcode($criteria['school_code']);
+					}
+				}
+
+				$count = $clients->count();
+
+				if ($limit > 0 && $offset >= 0) {
+					$clients = $clients->offset($offset)->limit($limit);;
+				}
+
+			}
+
+			$clients = $clients->with('user', 'school')->orderBy('created_at', 'desc');
+
+			$response = ['total' => $count, 'records' => $clients->get()->toArray()];
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
+
+	/**
+	 * @param $criteria
+	 * @return mixed
+	 */
+	public function getClientCustomDetails($criteria)
+	{
+		DB::beginTransaction();
+
+		try{
+			$clients = new Client();
+
+			if (isset($criteria['school_code'])) {
+				$clients = $clients->schoolCode($criteria['school_code']);
+			}
+
+			//accepts comma separated value. e.g client_role=Parent,Teacher
+			if (isset($criteria['client_role'])) {
+
+				$client_role = explode(',',$criteria['client_role'] );
+
+				$clients = $clients->role($client_role);
+			}
+
+			if (isset($criteria['name'])) {
+				$clients = $clients->name($criteria['name']);
+			}
+
+			$clients = $clients->with('user')->activated()->verified()->orderBy('created_at', 'desc');
+
+			$response = $clients->get()->toArray();
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
+
+	/**
+	 * @param array $criteria
+	 * @param int $limit
+	 * @param int $offset
+	 * @return array
+	 */
+	public function getTeacherDetails($criteria = array(), $limit = 0, $offset = 0)
+	{
+		DB::beginTransaction();
+
+		try{
+			$clients = new Client();
+
+			$clients = $clients->teacher()->activated()->verified();
+
+			$count = 0;
+
+			if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
+
+				$count = $clients->count();
+
+			} else {
+
+				if (count($criteria) > 0) {
+
+					if (isset($criteria['name'])) {
+
+						$clients = $clients->name($criteria['name']);
+
+					}
+
+					if (isset($criteria['email'])) {
+
+						$clients = $clients->email($criteria['email']);
+
+					}
+
+					if (isset($criteria['school_code'])) {
+
+						$clients = $clients->schoolcode($criteria['school_code']);
+
+					}
+				}
+
+				$count = $clients->count();
+
+				if ($limit > 0 && $offset >= 0) {
+					$clients = $clients->offset($offset)->limit($limit);;
+				}
+
+			}
+
+			$clients = $clients->with('user')->orderBy('first_name', 'asc');
+
+			$response = ['total' => $count, 'records' => $clients->get()->toArray()];
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
+
+	/**
+	 * @param $id
+	 * @return Client
+	 */
+	public function getClientByUserId($id)
+	{
+		DB::beginTransaction();
+
+		try{
+			$clients = new Client();
+			$clients = $clients->where('id', '=', $id);
+			$clients = $clients->with('user')->first();
+
+			$response = $clients;
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
+
+	/**
+	 * @param $id
+	 * @return bool|\Illuminate\Support\Collection|null|string|static
+	 */
+	public function deleteClient($id)
+	{
+		DB::beginTransaction();
+
+		try {
+
+			$client = Client::find($id);
+
+			$response = !is_null($client) ? $client->delete() : false;
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
+
+	//check relation of teacher to classroom
+
+	/**
+	 * @param $id
+	 * @return Client
+	 */
+	public function getClassroom($id)
+	{
+		DB::beginTransaction();
+
+		try{
+			$clients = new Client();
+			$response = $clients->with('classroom')->where('id', $id)->orderBy('created_at', 'desc')->first();
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
+
+	/**
+	 * @param $id
+	 * @return Client
+	 */
+	public function getStudent($id)
+	{
+		DB::beginTransaction();
+
+		try{
+			$clients = new Client();
+			$response = $clients->with('student')->where('id', $id)->orderBy('created_at', 'desc')->first();
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
+
+
+	/**
+	 * @param $id
+	 * @return Client
+	 */
+	public function getClientToClassroom($id)
+	{
+		DB::beginTransaction();
+
+		try{
+			$clients = new Client();
+			$grades = new Grade();
+
+			$grades = $grades->with('classroom')->orderBy('created_at', 'desc');
+			$clients = $clients->with('classroom')->orderBy('created_at', 'desc');
+			$clients = $clients->where('id', '=', $id)->first();
+
+			$grade = array();
+
+			foreach ($clients['classroom'] as $k => $v) {
+				$grade[] = $v['grade_id'];
+			}
+
+			$grades = $grades->whereIn('id', $grade)->get();
+
+			if(isset($clients)){
+
+				$clients->grade = $grades;
+			}
+
+			$response = $clients;
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
+
+	/**
+	 * @param $id
+	 * @return mixed
+	 */
+	public function getSchoolCode($id){
+		DB::beginTransaction();
+
+		try{
+			$response = Client::id($id)->pluck('school_code');
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -460,115 +682,159 @@ class ClientRepository implements ClientRepositoryInterface
 	 * @param $id
 	 */
 	public function getClientRole($id){
+		DB::beginTransaction();
 
-		return Client::find($id)->pluck('client_role');
+		try{
+			$response = Client::find($id)->pluck('client_role');
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
-    /**
-     * Add new Client Register from Facebook.
-     * @param $data
-     * @return string|static
-     */
-    public function addClientFromFacebook($data){
+	/**
+	 * Add new Client Register from Facebook.
+	 * @param $data
+	 * @return string|static
+	 */
+	public function addClientFromFacebook($data){
 
-        DB::beginTransaction();
+		DB::beginTransaction();
 
-        try{
+		try{
 
-            //Add user
-            $data = array_add($data,'username','NA');
+			//Add user
+			$data = array_add($data,'username','NA');
 
-            $data = array_add($data, 'name',$data['first_name'] . ' ' . $data['last_name']);
+			$data = array_add($data, 'name',$data['first_name'] . ' ' . $data['last_name']);
 
-            //Set client to active.
-            $data = array_add($data, 'is_account_activated', 1);
+			//Set client to active.
+			$data = array_add($data, 'is_account_activated', 1);
 
-            //Default to USA -- No country code from login response.
-            $data['country_id'] = ($data['country_id'] == null ) ?  840 : $data['country_id'];
+			//Default to USA -- No country code from login response.
+			$data['country_id'] = ($data['country_id'] == null ) ?  840 : $data['country_id'];
 
-            $user = User::create($data);
+			$user = User::create($data);
 
-            $data = array_add($data,'user_id',$user->id);
+			$data = array_add($data,'user_id',$user->id);
 
-            //Add Client
-            Client::create($data);
+			//Add Client
+			Client::create($data);
 
-            $client = $this->getClientByFacebook($data['facebook_app_id']);
+			$client = $this->getClientByFacebook($data['facebook_app_id']);
 
 
-        }catch (\Exception $e){
+		}catch (\Exception $e){
 
-            DB::rollback();
+			DB::rollback();
 
-            $this->errorLog($e);
+			$this->errorLog($e);
 
-            return 0;
-        }
+			return 0;
+		}
 
-        DB::commit();
+		DB::commit();
 
-        return $client;
-    }
+		return $client;
+	}
 
 	/**
-     * Get Client by Facebook id.
-     * @param $facebook_id
-     * @return mixed
-     */
-    public function getClientByFacebook($facebook_id) {
+	 * Get Client by Facebook id.
+	 * @param $facebook_id
+	 * @return mixed
+	 */
+	public function getClientByFacebook($facebook_id) {
+		DB::beginTransaction();
 
-        return Client::with('user')->facebookId($facebook_id)->get();
+		try{
+			$response = Client::with('user')->facebookId($facebook_id)->get();
 
-    }
+		}catch (\Exception $e){
 
-    /**
-     * Ad new Client Register from Google.
-     * @param $data
-     * @return int|static
-     */
-    public function addClientFromGoogle($data){
+			DB::rollback();
 
-        DB::beginTransaction();
+			$this->errorLog($e->getMessage());
 
-        try{
+			return false;
+		}
 
-            //Add user
-            $data = array_add($data,'username','NA');
+		DB::commit();
 
-            $data = array_add($data, 'name',$data['first_name'] . ' ' . $data['last_name']);
+		return $response;
+	}
 
-            //Set client to active.
-            $data = array_add($data, 'is_account_activated', 1);
+	/**
+	 * Ad new Client Register from Google.
+	 * @param $data
+	 * @return int|static
+	 */
+	public function addClientFromGoogle($data){
 
-            //Default to USA -- No country code from login response.
-            $data['country_id'] = ($data['country_id'] == null ) ?  840 : $data['country_id'];
+		DB::beginTransaction();
 
-            $user = User::create($data);
+		try{
 
-            $data = array_add($data,'user_id',$user->id);
+			//Add user
+			$data = array_add($data,'username','NA');
 
-            //Add Client
-            Client::create($data);
+			$data = array_add($data, 'name',$data['first_name'] . ' ' . $data['last_name']);
 
-            $client = $this->getClientByGoogleId($data['google_app_id']);
+			//Set client to active.
+			$data = array_add($data, 'is_account_activated', 1);
+
+			//Default to USA -- No country code from login response.
+			$data['country_id'] = ($data['country_id'] == null ) ?  840 : $data['country_id'];
+
+			$user = User::create($data);
+
+			$data = array_add($data,'user_id',$user->id);
+
+			//Add Client
+			Client::create($data);
+
+			$client = $this->getClientByGoogleId($data['google_app_id']);
 
 
-        }catch (\Exception $e){
+		}catch (\Exception $e){
 
-            DB::rollback();
+			DB::rollback();
 
-            $this->errorLog($e);
+			$this->errorLog($e);
 
-            return 0;
-        }
+			return 0;
+		}
 
-        DB::commit();
+		DB::commit();
 
-        return $client;
-    }
+		return $client;
+	}
 
-    public function getClientByGoogleId($google_id){
+	public function getClientByGoogleId($google_id){
+		DB::beginTransaction();
 
-        return Client::with('user')->googleId($google_id)->get();
-    }
+		try{
+			$response = Client::with('user')->googleId($google_id)->get();
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
 }

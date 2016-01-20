@@ -2,8 +2,11 @@
 
 
 use FutureEd\Models\Core\HelpRequestAnswer;
+use FutureEd\Models\Traits\LoggerTrait;
+use Illuminate\Support\Facades\DB;
 
 class HelpRequestAnswerRepository implements HelpRequestAnswerRepositoryInterface{
+	use LoggerTrait;
 
 	/**
 	 * Gets list of Help Request Answers.
@@ -13,84 +16,97 @@ class HelpRequestAnswerRepository implements HelpRequestAnswerRepositoryInterfac
 	 * @return array
 	 */
 	public function getHelpRequestAnswers($criteria,$limit,$offset){
+		DB::beginTransaction();
 
-		$help_request_answer = new HelpRequestAnswer();
+		try{
+			$help_request_answer = new HelpRequestAnswer();
 
-		/*
-		 * Filters:
-		 * help_request
-		 * module
-		 * subject_area
-		 * subject
-		 * request_answer_status
-		 * created_by
-		 *
-		 */
+			/*
+			 * Filters:
+			 * help_request
+			 * module
+			 * subject_area
+			 * subject
+			 * request_answer_status
+			 * created_by
+			 *
+			 */
 
-		if(isset($criteria['class_id'])){
+			if(isset($criteria['class_id'])){
 
-			$help_request_answer = $help_request_answer->ClassId($criteria['class_id']);
+				$help_request_answer = $help_request_answer->ClassId($criteria['class_id']);
+			}
+
+			if(isset($criteria['help_request'])){
+
+				$help_request_answer = $help_request_answer->RequestTitle($criteria['help_request']);
+			}
+
+			if(isset($criteria['help_request_id'])){
+
+				$help_request_answer = $help_request_answer->RequestId($criteria['help_request_id']);
+			}
+
+			if(isset($criteria['module'])){
+
+				$help_request_answer = $help_request_answer->ModuleName($criteria['module']);
+
+			}
+
+			if(isset($criteria['subject'])){
+
+				$help_request_answer = $help_request_answer->SubjectName($criteria['subject']);
+			}
+
+			if(isset($criteria['subject_area'])){
+
+				$help_request_answer = $help_request_answer->SubjectAreaName($criteria['subject_area']);
+			}
+
+			if(isset($criteria['request_answer_status'])){
+
+				$help_request_answer = $help_request_answer->AnswerStatus($criteria['request_answer_status']);
+
+			}
+
+			if(isset($criteria['status'])){
+
+				$help_request_answer = $help_request_answer->status($criteria['status']);
+
+			}
+
+			if(isset($criteria['created_by'])){
+
+				$help_request_answer = $help_request_answer->createdBy($criteria['created_by']);
+			}
+
+			$help_request_answer = $help_request_answer
+				->with('student', 'helpRequest','module','subject','subjectArea','user')->where('request_answer_status','!=','Rejected');
+
+			$count = $help_request_answer->count();
+
+
+			if($limit > 0 && $offset >= 0) {
+				$help_request_answer = $help_request_answer->offset($offset)->limit($limit);
+			}
+
+			$response = [
+				'total' => $count,
+				'records' => $help_request_answer->get()
+			];
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
 
-		if(isset($criteria['help_request'])){
+		DB::commit();
 
-			$help_request_answer = $help_request_answer->RequestTitle($criteria['help_request']);
-		}
-
-		if(isset($criteria['help_request_id'])){
-
-			$help_request_answer = $help_request_answer->RequestId($criteria['help_request_id']);
-		}
-
-		if(isset($criteria['module'])){
-
-			$help_request_answer = $help_request_answer->ModuleName($criteria['module']);
-
-		}
-
-		if(isset($criteria['subject'])){
-
-			$help_request_answer = $help_request_answer->SubjectName($criteria['subject']);
-		}
-
-		if(isset($criteria['subject_area'])){
-
-			$help_request_answer = $help_request_answer->SubjectAreaName($criteria['subject_area']);
-		}
-
-		if(isset($criteria['request_answer_status'])){
-
-			$help_request_answer = $help_request_answer->AnswerStatus($criteria['request_answer_status']);
-
-		}
-
-		if(isset($criteria['status'])){
-
-			$help_request_answer = $help_request_answer->status($criteria['status']);
-
-		}
-
-		if(isset($criteria['created_by'])){
-
-			$help_request_answer = $help_request_answer->createdBy($criteria['created_by']);
-		}
-
-		$help_request_answer = $help_request_answer
-			->with('student', 'helpRequest','module','subject','subjectArea','user')->where('request_answer_status','!=','Rejected');
-
-		$count = $help_request_answer->count();
-
-
-		if($limit > 0 && $offset >= 0) {
-			$help_request_answer = $help_request_answer->offset($offset)->limit($limit);
-		}
-
-		return [
-			'total' => $count,
-			'records' => $help_request_answer->get()
-		];
-
-
+		return $response;
 	}
 
 	/**
@@ -99,9 +115,23 @@ class HelpRequestAnswerRepository implements HelpRequestAnswerRepositoryInterfac
 	 * @return mixed
 	 */
 	public function getHelpRequestAnswer($id){
+		DB::beginTransaction();
 
-		return HelpRequestAnswer::with('helpRequest','module','subject','subjectArea','user')->find($id);
+		try{
+			$response = HelpRequestAnswer::with('helpRequest','module','subject','subjectArea','user')->find($id);
 
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -111,18 +141,27 @@ class HelpRequestAnswerRepository implements HelpRequestAnswerRepositoryInterfac
 	 * @return bool|int|string
 	 */
 	public function updateHelpRequestAnswer($id,$data){
+		DB::beginTransaction();
 
 		try {
 
 			HelpRequestAnswer::find($id)
 				->update($data);
 
-			return $this->getHelpRequestAnswer($id);
+			$response = $this->getHelpRequestAnswer($id);
 
-		} catch(Exception $e){
+		}catch (\Exception $e){
 
-			return $e->getMessage();
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -132,16 +171,25 @@ class HelpRequestAnswerRepository implements HelpRequestAnswerRepositoryInterfac
 	 * @throws \Exception
 	 */
 	public function deleteHelpRequestAnswer($id){
+		DB::beginTransaction();
 
 		try{
 
-			return HelpRequestAnswer::find($id)
+			$response = HelpRequestAnswer::find($id)
 				->delete();
 
-		}catch (Exception $e){
+		}catch (\Exception $e){
 
-			return $e->getMessage();
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -151,7 +199,23 @@ class HelpRequestAnswerRepository implements HelpRequestAnswerRepositoryInterfac
 	 */
 	public function getHelpRequestAnswerByHelpRequestId($help_request_id)
 	{
-		return HelpRequestAnswer::with('helpRequest', 'module', 'subject', 'subjectArea','user')->helpRequestId($help_request_id)->first();
+		DB::beginTransaction();
+
+		try{
+			$response = HelpRequestAnswer::with('helpRequest', 'module', 'subject', 'subjectArea','user')->helpRequestId($help_request_id)->first();
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -161,6 +225,7 @@ class HelpRequestAnswerRepository implements HelpRequestAnswerRepositoryInterfac
 	 * @return mixed|string
 	 */
 	public function updateRequestAnswerStatus($id,$status){
+		DB::beginTransaction();
 
 		try{
 			HelpRequestAnswer::find($id)
@@ -168,41 +233,69 @@ class HelpRequestAnswerRepository implements HelpRequestAnswerRepositoryInterfac
 					'request_answer_status' => $status
 				]);
 
-			return $this->getHelpRequestAnswer($id);
+			$response = $this->getHelpRequestAnswer($id);
 
-		}catch (Exception $e){
+		}catch (\Exception $e){
 
-			return $e->getMessage();
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
+
+		DB::commit();
+
+		return $response;
 	}
 
-    /**
-     * Add record in storage
-     * @param $data
-     * @return object
-     */
-    public function addHelpRequestAnswer($data){
-        try{
-            return HelpRequestAnswer::create($data)->toArray();
-        }catch (\Exception $e){
-            return $e->getMessage();
-        }
-    }
+	/**
+	 * Add record in storage
+	 * @param $data
+	 * @return object
+	 */
+	public function addHelpRequestAnswer($data){
+		DB::beginTransaction();
 
-    /**
-     * Get answer by student id and asnwer id
-     * @param $student_id
-     * @param $help_request_answer_id
-     * @return null|string
-     */
-    public function checkStudentHelpRequestAnswer($student_id,$help_request_answer_id){
-        try{
-            $result = HelpRequestAnswer::StudentId($student_id)->find($help_request_answer_id);
-            return is_null($result) ? null : $result->toArray();
-        }catch (\Exception $e){
-            return $e->getMessage();
-        }
-    }
+		try{
+			$response = HelpRequestAnswer::create($data)->toArray();
+		}catch (\Exception $e){
 
+			DB::rollback();
 
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
+
+	/**
+	 * Get answer by student id and asnwer id
+	 * @param $student_id
+	 * @param $help_request_answer_id
+	 * @return null|string
+	 */
+	public function checkStudentHelpRequestAnswer($student_id,$help_request_answer_id){
+		DB::beginTransaction();
+		try{
+			$result = HelpRequestAnswer::StudentId($student_id)->find($help_request_answer_id);
+			$response = is_null($result) ? null : $result->toArray();
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
 }

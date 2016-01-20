@@ -2,8 +2,11 @@
 
 
 use FutureEd\Models\Core\Event;
+use FutureEd\Models\Traits\LoggerTrait;
+use Illuminate\Support\Facades\DB;
 
 class EventRepository implements EventRepositoryInterface{
+	use LoggerTrait;
 
 	/**
 	 * Gets list of Events.
@@ -13,38 +16,50 @@ class EventRepository implements EventRepositoryInterface{
 	 * @return array
 	 */
 	public function getEvents($criteria = array(), $limit = 0, $offset = 0){
+		DB::beginTransaction();
 
-		$event = new Event();
+		try{
+			$event = new Event();
 
-		$count = 0;
+			$count = 0;
 
-		if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
+			if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
 
-			$count = $event->count();
+				$count = $event->count();
 
-		} else {
+			} else {
 
-			if (count($criteria) > 0) {
+				if (count($criteria) > 0) {
 
-				//check scope name
-				if(isset($criteria['name'])){
+					//check scope name
+					if(isset($criteria['name'])){
 
-					$event = $event->name($criteria['name']);
+						$event = $event->name($criteria['name']);
+					}
+
+
 				}
 
+				$count = $event->count();
 
+				if ($limit > 0 && $offset >= 0) {
+					$event = $event->offset($offset)->limit($limit);
+				}
 			}
 
-			$count = $event->count();
+			$response = ['total' => $count, 'records' => $event->get()->toArray()];
 
-			if ($limit > 0 && $offset >= 0) {
-				$event = $event->offset($offset)->limit($limit);
-			}
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
 
-		return ['total' => $count, 'records' => $event->get()->toArray()];
+		DB::commit();
 
+		return $response;
 	}
-
-
 }

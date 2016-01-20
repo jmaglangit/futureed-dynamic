@@ -4,9 +4,12 @@ namespace FutureEd\Models\Repository\LearningStyle;
 
 use FutureEd\Models\Core\LearningStyle;
 use League\Flysystem\Exception;
+use FutureEd\Models\Traits\LoggerTrait;
+use Illuminate\Support\Facades\DB;
 
 
 class LearningStyleRepository implements LearningStyleRepositoryInterface{
+	use LoggerTrait;
 
 	/**
 	 * Gets list of LearningStyle.
@@ -16,40 +19,54 @@ class LearningStyleRepository implements LearningStyleRepositoryInterface{
 	 * @return array
 	 */
 	public function getLearningStyles($criteria = array(), $limit = 0, $offset = 0){
+		DB::beginTransaction();
 
-		$learning_style = new LearningStyle();
+		try{
+			$learning_style = new LearningStyle();
 
-		$count = 0;
+			$count = 0;
 
-		if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
+			if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
 
-			$count = $learning_style->count();
+				$count = $learning_style->count();
 
-		} else {
+			} else {
 
 
-			if (count($criteria) > 0) {
+				if (count($criteria) > 0) {
 
-				//check name
-				if(isset($criteria['name'])){
+					//check name
+					if(isset($criteria['name'])){
 
-					$learning_style = $learning_style->name($criteria['name']);
+						$learning_style = $learning_style->name($criteria['name']);
+					}
+
+
+
 				}
 
+				$count = $learning_style->count();
 
+				if ($limit > 0 && $offset >= 0) {
+					$learning_style = $learning_style->offset($offset)->limit($limit);
+				}
 
 			}
 
-			$count = $learning_style->count();
+			$response = ['total' => $count, 'records' => $learning_style->get()->toArray()];
 
-			if ($limit > 0 && $offset >= 0) {
-				$learning_style = $learning_style->offset($offset)->limit($limit);
-			}
+		}catch (\Exception $e){
 
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
 
-		return ['total' => $count, 'records' => $learning_style->get()->toArray()];
+		DB::commit();
 
+		return $response;
 	}
 	
 	/**
@@ -58,10 +75,22 @@ class LearningStyleRepository implements LearningStyleRepositoryInterface{
 	 * @return Object
 	 */
 	public function getLearningStyleByBanding($ls_banding) {
-		
-		$learning_style = LearningStyle::lsBanding($ls_banding)->first();
-		
-		return $learning_style;
-	
+		DB::beginTransaction();
+
+		try{
+			$response = LearningStyle::lsBanding($ls_banding)->first();
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 }

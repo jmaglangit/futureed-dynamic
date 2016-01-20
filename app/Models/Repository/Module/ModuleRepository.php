@@ -41,89 +41,99 @@ class ModuleRepository implements ModuleRepositoryInterface
 	 */
 	public function getModules($criteria = array(), $limit = 0, $offset = 0)
 	{
+		DB::beginTransaction();
 
-		$module = new Module();
+		try{
+			$module = new Module();
 
-		$count = 0;
+			$count = 0;
 
-		$module = $module->with('subject', 'subjectArea', 'grade', 'studentModule');
+			$module = $module->with('subject', 'subjectArea', 'grade', 'studentModule');
 
+			if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
+				$count = $module->count();
 
-		if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
+			} else {
+				if (count($criteria) > 0) {
 
-			$count = $module->count();
+					//check  subject_id
+					if (isset($criteria['subject_id'])) {
 
-		} else {
+						$module = $module->subjectId($criteria['subject_id']);
+					}
 
+					//check grade_id
+					if (isset($criteria['grade_id'])) {
 
-			if (count($criteria) > 0) {
+						$module = $module->gradeId($criteria['grade_id']);
+					}
 
-				//check  subject_id
-				if (isset($criteria['subject_id'])) {
+					//check module student_id
+					if (isset($criteria['student_id'])) {
 
-					$module = $module->subjectId($criteria['subject_id']);
+						$module = $module->studentId($criteria['student_id']);
+					}
+
+					//check module class_id
+					if (isset($criteria['class_id'])) {
+
+						$module = $module->classId($criteria['class_id']);
+					}
+
+					//check module status
+					if (isset($criteria['module_status'])) {
+
+						$module = $module->moduleStatus($criteria['module_status']);
+					}
+
+					//check relation to subject
+					if (isset($criteria['subject'])) {
+
+						$module = $module->subjectName($criteria['subject']);
+					}
+
+					//check module name
+					if (isset($criteria['name'])) {
+
+						$module = $module->name($criteria['name']);
+					}
+
+					//check relation to subject_area
+					if (isset($criteria['area'])) {
+
+						$module = $module->subjectAreaName($criteria['area']);
+					}
+
+					//check age group
+					if (isset($criteria['age_group_id'])) {
+
+						$module = $module->ageGroup($criteria['age_group_id']);
+					}
+
 				}
 
-				//check grade_id
-				if (isset($criteria['grade_id'])) {
+				$count = $module->count();
 
-					$module = $module->gradeId($criteria['grade_id']);
-				}
-
-				//check module student_id
-				if (isset($criteria['student_id'])) {
-
-					$module = $module->studentId($criteria['student_id']);
-				}
-
-				//check module class_id
-				if (isset($criteria['class_id'])) {
-
-					$module = $module->classId($criteria['class_id']);
-				}
-
-				//check module status
-				if (isset($criteria['module_status'])) {
-
-					$module = $module->moduleStatus($criteria['module_status']);
-				}
-
-				//check relation to subject
-				if (isset($criteria['subject'])) {
-
-					$module = $module->subjectName($criteria['subject']);
-				}
-
-				//check module name
-				if (isset($criteria['name'])) {
-
-					$module = $module->name($criteria['name']);
-				}
-
-				//check relation to subject_area
-				if (isset($criteria['area'])) {
-
-					$module = $module->subjectAreaName($criteria['area']);
-				}
-
-				//check age group
-				if (isset($criteria['age_group_id'])) {
-
-					$module = $module->ageGroup($criteria['age_group_id']);
+				if ($limit > 0 && $offset >= 0) {
+					$module = $module->offset($offset)->limit($limit);
 				}
 
 			}
 
-			$count = $module->count();
+			$response = ['total' => $count, 'records' => $module->get()->toArray()];
 
-			if ($limit > 0 && $offset >= 0) {
-				$module = $module->offset($offset)->limit($limit);
-			}
+		}catch (\Exception $e){
 
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
 
-		return ['total' => $count, 'records' => $module->get()->toArray()];
+		DB::commit();
 
+		return $response;
 	}
 
 	/**
@@ -158,13 +168,26 @@ class ModuleRepository implements ModuleRepositoryInterface
 	 */
 	public function viewModule($id)
 	{
+		DB::beginTransaction();
 
-		$module = new Module();
+		try{
+			$module = new Module();
 
-		$module = $module->with('subject', 'subjectarea', 'grade', 'content', 'question', 'studentModuleValid');
-		$module = $module->find($id);
-		return $module;
+			$module = $module->with('subject', 'subjectarea', 'grade', 'content', 'question', 'studentModule');
+			$response = $module->find($id);
 
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -175,16 +198,24 @@ class ModuleRepository implements ModuleRepositoryInterface
 	 */
 	public function updateModule($id, $data)
 	{
+		DB::beginTransaction();
 
 		try {
-
-			return Module::find($id)
+			$response = Module::find($id)
 				->update($data);
 
-		} catch (Exception $e) {
+		}catch (\Exception $e){
 
-			throw new Exception($e->getMessage());
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
+
+		DB::commit();
+
+		return $response;
 
 	}
 
@@ -194,18 +225,26 @@ class ModuleRepository implements ModuleRepositoryInterface
 	 */
 	public function deleteModule($id)
 	{
+		DB::beginTransaction();
 
 		try {
 
 			$module = Module::find($id);
 
-			return !is_null($module) ? $module->delete() : false;
+			$response = !is_null($module) ? $module->delete() : false;
 
-		} catch (Exception $e) {
+		}catch (\Exception $e){
 
-			return $e->getMessage();
+			DB::rollback();
 
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
+
+		DB::commit();
+
+		return $response;
 
 	}
 
@@ -215,8 +254,23 @@ class ModuleRepository implements ModuleRepositoryInterface
 	 */
 	public function getPointsToFinish($module_id)
 	{
+		DB::beginTransaction();
 
-		return Module::find($module_id)->pluck('points_to_finish');
+		try{
+			$response = Module::find($module_id)->pluck('points_to_finish');
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -225,8 +279,23 @@ class ModuleRepository implements ModuleRepositoryInterface
 	 * @return mixed
 	 */
 	public function getGradeModule($subject_id,$grade_id){
+		DB::beginTransaction();
 
-		return Module::subjectId($subject_id)->gradeId($grade_id)->get();
+		try{
+			$response = Module::subjectId($subject_id)->gradeId($grade_id)->get();
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -236,14 +305,27 @@ class ModuleRepository implements ModuleRepositoryInterface
 	 */
 	public function countSubjectModule($subject_id, $grade_id)
 	{
+		DB::beginTransaction();
 
-		$module = new Module();
+		try{
+			$module = new Module();
 
-		$module = $module->subjectId($subject_id);
-		$module = $module->gradeId($grade_id);
-		$count = $module->count();
+			$module = $module->subjectId($subject_id);
+			$module = $module->gradeId($grade_id);
+			$response = $module->count();
 
-		return $count;
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	//
@@ -255,6 +337,7 @@ class ModuleRepository implements ModuleRepositoryInterface
 	 * @return array
 	 */
 	public function getModulesByStudentProgress($criteria, $offset = 0, $limit = 0){
+		DB::beginTransaction();
 
 		try {
 
@@ -319,13 +402,20 @@ class ModuleRepository implements ModuleRepositoryInterface
 				$student_module = $student_module->offset($offset)->limit($limit);
 			}
 
-			return ['total' => $count, 'records' => $student_module->get()];
+			$response = ['total' => $count, 'records' => $student_module->get()];
 
-		} catch (\Exception $e) {
+		}catch (\Exception $e){
 
-			return null;
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
 
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -334,19 +424,32 @@ class ModuleRepository implements ModuleRepositoryInterface
 	 * @return mixed
 	 */
 	public function getModuleGradeByStudentCountry($country_id){
+		DB::beginTransaction();
 
-		return Module::select (
-			\DB::raw('cg.grade_id as grade_id,g.name as grade_name')
-		)->leftJoin('country_grades as cg','modules.grade_id','=','cg.grade_id')
-			->leftJoin('country_grades as cg2',function($left_join) use ($country_id){
-				$left_join->on('cg2.age_group_id','=','cg.age_group_id');
-			})
-			->leftJoin('grades as g','g.id','=','cg2.grade_id')
-			->where('cg2.country_id',$country_id)
-			->groupBy('g.name')
-			->get();
+		try{
+			$response = Module::select (
+				\DB::raw('cg.grade_id as grade_id,g.name as grade_name')
+				)->leftJoin('country_grades as cg','modules.grade_id','=','cg.grade_id')
+				->leftJoin('country_grades as cg2',function($left_join) use ($country_id){
+					$left_join->on('cg2.age_group_id','=','cg.age_group_id');
+				})
+				->leftJoin('grades as g','g.id','=','cg2.grade_id')
+				->where('cg2.country_id',$country_id)
+				->groupBy('g.name')
+				->get();
 
+		}catch (\Exception $e){
 
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 }

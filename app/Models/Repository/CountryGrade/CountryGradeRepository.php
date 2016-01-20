@@ -10,9 +10,12 @@ namespace FutureEd\Models\Repository\CountryGrade;
 
 
 use FutureEd\Models\Core\CountryGrade;
+use FutureEd\Models\Traits\LoggerTrait;
 use League\Flysystem\Exception;
+use Illuminate\Support\Facades\DB;
 
 class CountryGradeRepository implements CountryGradeRepositoryInterface{
+	use LoggerTrait;
 
 	/**
 	 * Add Country Grade.
@@ -20,14 +23,23 @@ class CountryGradeRepository implements CountryGradeRepositoryInterface{
 	 * @return string|static
 	 */
 	public function addCountryGrade($data){
+		DB::beginTransaction();
+
 		try {
+			$response = CountryGrade::create($data);
 
-			return CountryGrade::create($data);
+		}catch (\Exception $e){
 
-		} catch (Exception $e){
+			DB::rollback();
 
-			return $e->getMessage();
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -36,8 +48,23 @@ class CountryGradeRepository implements CountryGradeRepositoryInterface{
 	 * @return mixed
 	 */
 	public function getCountryGradeByGrade($grade_id){
+		DB::beginTransaction();
 
-		return CountryGrade::gradeId($grade_id)->first();
+		try{
+			$response = CountryGrade::gradeId($grade_id)->first();
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -47,18 +74,25 @@ class CountryGradeRepository implements CountryGradeRepositoryInterface{
 	 * @return mixed|string
 	 */
 	public function updateAgeGroup($grade_id, $data){
+		DB::beginTransaction();
 
 		try{
+			CountryGrade::gradeId($grade_id)->update($data);
 
-			CountryGrade::gradeId($grade_id)
-				->update($data);
+			$response = $this->getCountryGradeByGrade($grade_id);
 
-			return $this->getCountryGradeByGrade($grade_id);
+		}catch (\Exception $e){
 
-		} catch(Exception $e){
+			DB::rollback();
 
-			return $e->getMessage();
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 }

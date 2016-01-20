@@ -42,49 +42,63 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 	 */
 	public function getClassStudents($criteria = [], $limit = 0, $offset = 0)
 	{
+		DB::beginTransaction();
 
+		try{
+			$class_student = new ClassStudent();
+			$class_student = $class_student->isDateRemovedNull();
+			$class_student = $class_student->with('student');
 
-		$class_student = new ClassStudent();
-		$class_student = $class_student->isDateRemovedNull();
-		$class_student = $class_student->with('student');
+			if (isset($criteria['class_id'])) {
 
-		if (isset($criteria['class_id'])) {
+				$class_student = $class_student->classroom($criteria['class_id']);
+			}
 
-			$class_student = $class_student->classroom($criteria['class_id']);
+			if (isset($criteria['name'])) {
+
+				$class_student = $class_student->name($criteria['name']);
+			}
+
+			if (isset($criteria['email'])) {
+
+				$class_student = $class_student->email($criteria['email']);
+			}
+
+			if(isset($criteria['student_id'])){
+
+				$class_student = $class_student->studentId($criteria['student_id']);
+				$class_student = $class_student->active();
+				$class_student = $class_student->with('classroom');
+				$class_student = $class_student->subjectEnabled();
+				$class_student = $class_student->paidOrder();
+
+			}
+
+			if ($limit > 0 && $offset >= 0) {
+
+				$class_student = $class_student->offset($offset)->limit($limit);
+			}
+
+			$records = $class_student->get();
+			$count = $class_student->get()->count();
+
+			$response = [
+				'total' => $count,
+				'records' => $records
+			];
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
 
-		if (isset($criteria['name'])) {
+		DB::commit();
 
-			$class_student = $class_student->name($criteria['name']);
-		}
-
-		if (isset($criteria['email'])) {
-
-			$class_student = $class_student->email($criteria['email']);
-		}
-
-		if(isset($criteria['student_id'])){
-
-			$class_student = $class_student->studentId($criteria['student_id']);
-			$class_student = $class_student->active();
-			$class_student = $class_student->with('classroom');
-			$class_student = $class_student->subjectEnabled();
-			$class_student = $class_student->paidOrder();
-
-		}
-
-		if ($limit > 0 && $offset >= 0) {
-
-			$class_student = $class_student->offset($offset)->limit($limit);
-		}
-
-		$records = $class_student->get();
-		$count = $class_student->get()->count();
-
-		return [
-			'total' => $count,
-			'records' => $records
-		];
+		return $response;
 	}
 
 	/**
@@ -93,10 +107,25 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 	 */
 	public function getClassStudent($student_id)
 	{
+		DB::beginTransaction();
 
-		return ClassStudent::where('student_id', $student_id)
-			->active()
-			->pluck('student_id');
+		try{
+			$response = ClassStudent::where('student_id', $student_id)
+							->active()
+							->pluck('student_id');
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -105,11 +134,23 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 	 */
 	public function addClassStudent($class_student)
 	{
-		try {
-			return ClassStudent::create($class_student)->toArray();
-		} catch (Exception $e) {
-			return $e->getMessage();
+		DB::beginTransaction();
+
+		try{
+			$response = ClassStudent::create($class_student)->toArray();
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -121,15 +162,24 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 
 	public function updateClassStudent($id, $class_student)
 	{
-		try{
+		DB::beginTransaction();
 
-			return ClassStudent::find($id)
+		try{
+			$response = ClassStudent::find($id)
 				->update($class_student);
 
-		} catch (Exception $e) {
+		}catch (\Exception $e){
 
-			throw new Exception($e->getMessage());
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
+
+		DB::commit();
+
+		return $response;
 
 	}
 
@@ -147,8 +197,24 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 	 */
 	public function getClassroom($class_id)
 	{
-		$classroom = Classroom::find($class_id);
-		return !is_null($classroom) ? $classroom->toArray() : null;
+		DB::beginTransaction();
+
+		try{
+			$classroom = Classroom::find($class_id);
+			$response = !is_null($classroom) ? $classroom->toArray() : null;
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -157,11 +223,27 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 	 */
 	public function getStudentCurrentClassroom($student_id)
 	{
-		return ClassStudent::with('classroom')
-			->studentid($student_id)
-			->active()
-			->currentdate(Carbon::now())
-			->first();
+		DB::beginTransaction();
+
+		try{
+			$response = ClassStudent::with('classroom')
+							->studentid($student_id)
+							->active()
+							->currentdate(Carbon::now())
+							->first();
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -170,9 +252,25 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 	 */
 	public function getActiveClassStudent($student_id)
 	{
-		return ClassStudent::with('classroom')
-			->studentId($student_id)
-			->get();
+		DB::beginTransaction();
+
+		try{
+			$response = ClassStudent::with('classroom')
+							->studentId($student_id)
+							->get();
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -181,14 +279,26 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 	 */
 	public function setClassStudentInactive($id)
 	{
+		DB::beginTransaction();
+
 		try{
-			return ClassStudent::id($id)
-				->update([
-					'subscription_status' => config('futureed.inactive')
-				]);
-		}catch (Exception $e){
-			return $e->getMessage();
+			$response = ClassStudent::id($id)
+							->update([
+								'subscription_status' => config('futureed.inactive')
+							]);
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -197,10 +307,26 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 	 */
 	public function getInactiveClassStudent($student_id)
 	{
-		return ClassStudent::with('classroom')
-			->studentId($student_id)
-			->currentDate(Carbon::now())
-			->get();
+		DB::beginTransaction();
+
+		try{
+			$response = ClassStudent::with('classroom')
+							->studentId($student_id)
+							->currentDate(Carbon::now())
+							->get();
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -209,16 +335,25 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 	 */
 	public function setClassStudentActive($id)
 	{
+		DB::beginTransaction();
+
 		try {
+			$response = ClassStudent::id($id)
+							->update([
+								'subscription_status' => config('futureed.active')
+							]);
+		}catch (\Exception $e){
 
-			return ClassStudent::id($id)
-				->update([
-					'subscription_status' => config('futureed.active')
-				]);
-		} catch (Exception $e){
+			DB::rollback();
 
-			return $e->getMessage();
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -227,12 +362,26 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 	 */
 	public function isEnrolled($student_id,$class_id)
 	{
+		DB::beginTransaction();
 
-		$class_student = new  ClassStudent();
-		$class_student = $class_student->studentId($student_id)->classroom($class_id);
+		try{
+			$class_student = new  ClassStudent();
+			$class_student = $class_student->studentId($student_id)->classroom($class_id);
 
-		return $class_student->first();
+			$response = $class_student->first();
 
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -241,10 +390,25 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 	 */
 	public function getClassStudentByClassId($class_id)
 	{
+		DB::beginTransaction();
 
-		$class_student = new  ClassStudent();
-		$class_student = $class_student->where('class_id',$class_id);
-		return $class_student->get();
+		try{
+			$class_student = new  ClassStudent();
+			$class_student = $class_student->where('class_id',$class_id);
+			$response = $class_student->get();
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 
 	}
 
@@ -254,10 +418,25 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 	 */
 	public function getClassStudentById($id)
 	{
+		DB::beginTransaction();
 
-		$class_student = new  ClassStudent();
-		$class_student = $class_student->with('student','classroom')->find($id);
-		return $class_student;
+		try{
+			$class_student = new  ClassStudent();
+			$class_student = $class_student->with('student','classroom')->find($id);
+			$response = $class_student;
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 
 	}
 
@@ -268,9 +447,9 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 	 * @return mixed
 	 */
 	public function getCurrentClassStudent($criteria){
+		DB::beginTransaction();
 
 		try {
-
 			$class_student = ClassStudent::studentId($criteria['student_id'])
 				->isDateRemovedNull()
 				->classroomId($criteria['class_id'])
@@ -289,17 +468,25 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 				//merge module
 				$subject->studentClassroom->studentSubject->student_modules = $student_modules;
 
-				return $subject;
+				$response = $subject;
 
 			} else {
 
-				return null;
+				$response = null;
 			}
 
-		} catch (\Exception $e) {
+		}catch (\Exception $e){
 
-			return null;
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
+
+		DB::commit();
+
+		return $response;
 
 	}
 
@@ -647,11 +834,11 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 			;
 		}catch (\Exception $e){
 
-			$this->errorLog($e->getMessage());
-
 			DB::rollback();
 
-			return $e->getMessage();
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
 
 		DB::commit();
@@ -708,7 +895,7 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 
 			$this->errorLog($e->getMessage());
 
-			return $e->getMessage();
+			return false;
 		}
 		DB::commit();
 
@@ -789,7 +976,7 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 
 			$this->errorLog($e->getMessage());
 
-			return $e->getMessage();
+			return false;
 		}
 
 		DB::commit();
