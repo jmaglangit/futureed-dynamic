@@ -17,11 +17,12 @@ class AdminController extends ApiController {
     protected $admin;
     protected $user;
 
-    /**
-     * Admin constructor
-     *
-     * @return void
-     */
+	/**
+	 * Admin constructor
+	 *
+	 * @param Admin $admin
+	 * @param User $user
+	 */
     public function __construct(Admin $admin, User $user){
 
         $this->admin = $admin;
@@ -63,15 +64,6 @@ class AdminController extends ApiController {
 		$admins = $this->admin->getAdmins($criteria, $limit, $offset);
 
 		return $this->respondWithData($admins);
-
-        /*
-if(Input::get('limit')){
-            return $this->respondWithData($this->admin->getAdmins($limit));
-        }
-
-        return $this->respondWithData($this->admin->getAdmins());
-*/
-
 	}
 
 	/**
@@ -129,7 +121,7 @@ if(Input::get('limit')){
 		$data = $request->only(['username', 'password', 'admin_role', 'status', 'first_name', 'last_name']);
 			
 		$admin = $this->admin->updateAdmin($id, $data);
-		
+
 		if($admin) {
 			$user = $this->user->updateUser($admin->user_id, $data);
 			
