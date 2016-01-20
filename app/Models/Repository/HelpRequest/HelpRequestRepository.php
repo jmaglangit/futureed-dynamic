@@ -202,7 +202,7 @@ class HelpRequestRepository implements HelpRequestRepositoryInterface{
 
 		try{
 			$result = HelpRequest::find($id);
-			$response !is_null($result) ? $result->delete() : false;
+			$response = !is_null($result) ? $result->delete() : false;
 
 		}catch (\Exception $e){
 
