@@ -54,7 +54,7 @@
 					{!! Form::button('Search'
 						,array(
 							'class' => 'btn btn-blue'
-							, 'ng-click' => 'client.searchFnc()'
+							, 'ng-click' => 'client.searchFnc($event)'
 						)
 					)!!}
 				</div>
