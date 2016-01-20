@@ -70,6 +70,11 @@ class Classroom extends Model {
 		return $this->hasOne('FutureEd\Models\Core\Subject','id','subject_id')->whereStatus(config('futureed.enabled'));
 	}
 
+	public function module(){
+
+		return $this->hasMany('FutureEd\Models\Core\Module','subject_id','subject_id');
+	}
+
 
 	//Scopes
 

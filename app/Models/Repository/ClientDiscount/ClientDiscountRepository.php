@@ -3,6 +3,7 @@ namespace FutureEd\Models\Repository\ClientDiscount;
 
 use FutureEd\Models\Core\Client;
 use FutureEd\Models\Core\ClientDiscount;
+use Illuminate\Support\Facades\DB;
 
 class ClientDiscountRepository implements ClientDiscountRepositoryInterface
 {
@@ -18,41 +19,56 @@ class ClientDiscountRepository implements ClientDiscountRepositoryInterface
 	 */
 	public function getClientDiscounts($criteria = array(), $limit = 0, $offset = 0)
 	{
+		DB::beginTransaction();
 
-		$clientDiscounts = new ClientDiscount();
+		try{
+			$clientDiscounts = new ClientDiscount();
 
-		$count = 0;
+			$count = 0;
 
-		$clientDiscounts = $clientDiscounts->with('client');
+			$clientDiscounts = $clientDiscounts->with('client');
 
-		if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
+			if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
 
-			$count = $clientDiscounts->count();
+				$count = $clientDiscounts->count();
 
-		} else {
+			} else {
 
-			if (count($criteria) > 0) {
-				if (isset($criteria['name'])) {
-					$clientDiscounts = $clientDiscounts->name($criteria['name']);
+				if (count($criteria) > 0) {
+					if (isset($criteria['name'])) {
+						$clientDiscounts = $clientDiscounts->name($criteria['name']);
+					}
+					if (isset($criteria['client_role'])) {
+						$clientDiscounts = $clientDiscounts->role($criteria['client_role']);
+					}
+					if (isset($criteria['client_id'])) {
+						$clientDiscounts = $clientDiscounts->clientid($criteria['client_id']);
+					}
+
 				}
-				if (isset($criteria['client_role'])) {
-					$clientDiscounts = $clientDiscounts->role($criteria['client_role']);
-				}
-				if (isset($criteria['client_id'])) {
-					$clientDiscounts = $clientDiscounts->clientid($criteria['client_id']);
+
+				$count = $clientDiscounts->count();
+
+				if ($limit > 0 && $offset >= 0) {
+					$clientDiscounts = $clientDiscounts->offset($offset)->limit($limit);
 				}
 
 			}
 
-			$count = $clientDiscounts->count();
+			$response = ['total' => $count, 'records' => $clientDiscounts->get()->toArray()];
 
-			if ($limit > 0 && $offset >= 0) {
-				$clientDiscounts = $clientDiscounts->offset($offset)->limit($limit);
-			}
+		}catch (\Exception $e){
 
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
 
-		return ['total' => $count, 'records' => $clientDiscounts->get()->toArray()];
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -64,7 +80,23 @@ class ClientDiscountRepository implements ClientDiscountRepositoryInterface
 	 */
 	public function getClientDiscount($id)
 	{
-		return ClientDiscount::with('client')->find($id);
+		DB::beginTransaction();
+
+		try{
+			$response = ClientDiscount::with('client')->find($id);
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -77,13 +109,24 @@ class ClientDiscountRepository implements ClientDiscountRepositoryInterface
 
 	public function updateClientDiscount($id, $clientDiscount)
 	{
+		DB::beginTransaction();
 
 		try {
 			$result = ClientDiscount::find($id);
-			return !is_null($result) ? $result->update($clientDiscount) : false;
-		} catch (Exception $e) {
-			return $e->getMessage();
+			$response = !is_null($result) ? $result->update($clientDiscount) : false;
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -96,12 +139,23 @@ class ClientDiscountRepository implements ClientDiscountRepositoryInterface
 
 	public function addClientDiscount($clientDiscount)
 	{
+		DB::beginTransaction();
 
 		try {
-			return ClientDiscount::create($clientDiscount)->toArray();
-		} catch (Exception $e) {
-			return $e->getMessage();
+			$response = ClientDiscount::create($clientDiscount)->toArray();
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -113,18 +167,44 @@ class ClientDiscountRepository implements ClientDiscountRepositoryInterface
 	 */
 	public function deleteClientDiscount($id)
 	{
+		DB::beginTransaction();
 
 		try {
 			$result = ClientDiscount::find($id);
-			return !is_null($result) ? $result->delete() : false;
-		} catch (Exception $e) {
-			return $e->getMessage();
+			$response = !is_null($result) ? $result->delete() : false;
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	public function checkClient($client_id)
 	{
+		DB::beginTransaction();
 
-		return ClientDiscount::clientid($client_id)->pluck('id');
+		try{
+			$response = ClientDiscount::clientid($client_id)->pluck('id');
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 }

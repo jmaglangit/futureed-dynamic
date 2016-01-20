@@ -10,8 +10,6 @@ interface ClientRepositoryInterface
 
 	public function checkClient($id, $role);
 
-	public function checkClientEmail($input);
-
 	public function addClient($client);
 
 	public function getClientId($user_id);

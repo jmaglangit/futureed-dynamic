@@ -20,10 +20,10 @@
 
         	<div class="form-group">
         		<label class="control-label col-xs-3">Age <span class="required">*</span></label>
-        		<div class="col-xs-5" ng-init="age.getAge()">
-	        		<select  name="age_group_id" class="form-control" name="age_group_id" ng-model="age.details.age_group_id" ng-class="{'required-field' : age.fields['age_group_id']}">
+        		<div class="col-xs-5" ng-init="age.getAges()">
+	        		<select  name="age_group_id" class="form-control" name="age_group_id" ng-model="age.record.age_group_id" ng-class="{'required-field' : age.fields['age_group_id']}">
 		          		<option value="">-- Select Age --</option>
-		          		<option ng-selected="age.details.age_group.id == ageinfo.id" ng-repeat="ageinfo in age.ages" ng-value="ageinfo.id">{! ageinfo.age!}</option>
+		          		<option ng-selected="age.record.age_group.id == ageinfo.id" ng-repeat="ageinfo in age.ages" ng-value="ageinfo.id">{! ageinfo.age!}</option>
 	        		</select>
         		</div>
         	</div>
@@ -33,7 +33,7 @@
         			{!! Form::text('points_earned',''
 	    				, array(
 	    					'placeHolder' => 'Total Points Earned'
-	    					, 'ng-model' => 'age.details.points_earned'
+	    					, 'ng-model' => 'age.record.points_earned'
 	    					, 'class' => 'form-control'
 	    					, 'ng-class' => "{ 'required-field' : age.fields['points_earned'] }"
 	    				)
@@ -46,7 +46,7 @@
         		{!! Form::button('Save'
 	        		, array(
 	        			'class' => 'btn btn-blue btn-medium'
-	        			, 'ng-click' => 'age.saveAgeGroup()'
+	        			, 'ng-click' => 'age.update()'
 	        		)
 	        	) !!}
 

@@ -2,8 +2,12 @@
 namespace FutureEd\Models\Repository\OrderDetail;
 
 use FutureEd\Models\Core\OrderDetail;
+use FutureEd\Models\Traits\LoggerTrait;
+use Illuminate\Support\Facades\DB;
 
 class OrderDetailRepository implements OrderDetailRepositoryInterface{
+
+    use LoggerTrait;
 
     /**
      * Add record to storage
@@ -11,11 +15,25 @@ class OrderDetailRepository implements OrderDetailRepositoryInterface{
      * @return array|string
      */
     public function addOrderDetail($data){
+
+        DB::beginTransaction();
+
         try{
-            return OrderDetail::create($data)->toArray();
-        }catch (\Exception $e){
-            return $e->getMessage();
+
+            $response = OrderDetail::create($data)->toArray();
+
+        }catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
         }
+
+        DB::commit();
+
+        return $response;
     }
 
     /**
@@ -24,7 +42,25 @@ class OrderDetailRepository implements OrderDetailRepositoryInterface{
      * @return object
      */
     public function getOrderDetailsByOrderId($order_id){
-        return OrderDetail::orderId($order_id)->with('student')->get();
+
+        DB::beginTransaction();
+
+        try{
+
+            $response = OrderDetail::orderId($order_id)->with('student')->get();
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
+        }
+
+        DB::commit();
+
+        return $response;
     }
 
     /**
@@ -33,25 +69,52 @@ class OrderDetailRepository implements OrderDetailRepositoryInterface{
      * @return bool|null|string
      */
     public function deleteOrderDetail($id){
+
+        DB::beginTransaction();
+
         try{
             $result = OrderDetail::find($id);
-            return is_null($result) ? false :  $result->delete();
-        }catch (\Exception $e){
-            return $e->getMessage();
+            $response =  is_null($result) ? false :  $result->delete();
+
+        }catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
         }
+
+        DB::commit();
+
+        return $response;
     }
+
     /**
      * Get order details by student id and order_id
      * @param $order_id
      * @return object
      */
     public function getOrderDetailByStudentId($student_id){
+
+        DB::beginTransaction();
+
         try{
             $result = OrderDetail::studentId($student_id)->first();
-            return is_null($result) ? null : $result->toArray();
-        }catch (\Exception $e){
-            return $e->getMessage();
+            $response = is_null($result) ? null : $result->toArray();
+
+        }catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
         }
+
+        DB::commit();
+
+        return $response;
     }
 
     /**
@@ -60,12 +123,25 @@ class OrderDetailRepository implements OrderDetailRepositoryInterface{
      * @return bool|null|string
      */
     public function getOrderDetailByOrderIdAndStudentId($order_id,$student_id){
+
+        DB::beginTransaction();
+
         try{
             $result = OrderDetail::studentId($student_id)->orderId($order_id)->first();
-            return is_null($result) ? null : $result->toArray();
-        }catch (\Exception $e){
-            return $e->getMessage();
+            $response = is_null($result) ? null : $result->toArray();
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
         }
+
+        DB::commit();
+
+        return $response;
     }
 
     /**
@@ -74,11 +150,25 @@ class OrderDetailRepository implements OrderDetailRepositoryInterface{
      * @return bool|null|string
      */
     public function deleteOrderDetailByOrderId($order_id){
+
+        DB::beginTransaction();
+
         try{
-            return OrderDetail::orderId($order_id)->delete();
-        }catch (\Exception $e){
-            return $e->getMessage();
+
+            $response = OrderDetail::orderId($order_id)->delete();
+
+        }catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
         }
+
+        DB::commit();
+
+        return $response;
     }
 
 	/**
@@ -87,19 +177,27 @@ class OrderDetailRepository implements OrderDetailRepositoryInterface{
 	 * @param $data
 	 * @return bool|int|string
 	 */
-
 	public function updateOrderDetail($id, $data)
 	{
+        DB::beginTransaction();
+
 		try{
 
-			return OrderDetail::find($id)
+			$response = OrderDetail::find($id)
 				->update($data);
 
-		} catch (Exception $e) {
+		} catch (\Exception $e) {
 
-			throw new Exception($e->getMessage());
-		}
+            DB::rollback();
 
+            $this->errorLog($e->getMessage());
+
+            return false;
+        }
+
+        DB::commit();
+
+        return $response;
 	}
 
 

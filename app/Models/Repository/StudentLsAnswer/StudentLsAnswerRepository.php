@@ -2,11 +2,14 @@
 namespace FutureEd\Models\Repository\StudentLsAnswer;
 
 use FutureEd\Models\Core\StudentLsAnswer;
+use FutureEd\Models\Traits\LoggerTrait;
+use Illuminate\Support\Facades\DB;
 use League\Flysystem\Exception;
 
 
 class StudentLsAnswerRepository implements StudentLsAnswerRepositoryInterface {
 
+	use LoggerTrait;
 
 	/**
 	 * Add record in storage
@@ -14,6 +17,8 @@ class StudentLsAnswerRepository implements StudentLsAnswerRepositoryInterface {
 	 * @return object
 	 */
 	public function addAnswer($data) {
+
+		DB::beginTransaction();
 
 		try {
 			
@@ -40,11 +45,16 @@ class StudentLsAnswerRepository implements StudentLsAnswerRepositoryInterface {
 				$student_ls_answer = StudentLsAnswer::create($data);
 			}
 		
-		} catch(Exception $e) {
+		} catch (\Exception $e) {
 
-			return $e->getMessage();
+			DB::rollback();
 
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
+
+		DB::commit();
 
 		return $student_ls_answer;
 

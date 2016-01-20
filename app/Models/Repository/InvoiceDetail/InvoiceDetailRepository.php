@@ -1,60 +1,101 @@
 <?php namespace FutureEd\Models\Repository\InvoiceDetail;
 
 use FutureEd\Models\Core\InvoiceDetail;
+use FutureEd\Models\Traits\LoggerTrait;
+use Illuminate\Support\Facades\DB;
 
 
 class InvoiceDetailRepository implements InvoiceDetailRepositoryInterface{
-    
-    public function getInvoiceDetails($criteria = array(), $limit = 0, $offset = 0)
-    {
-        //
-    }
-    
-    public function addInvoiceDetail($data)
-    {
-        try{
-            return InvoiceDetail::create($data)->toArray();
-            
-        }catch(Exception $e){
-            return $e->getMessage();        
-        }
-    }
+	use LoggerTrait;
+	
+	public function addInvoiceDetail($data)
+	{
+		DB::beginTransaction();
+		
+		try{
+			$response = InvoiceDetail::create($data)->toArray();
+			
+		}catch (\Exception $e){
 
-    public function getInvoiceDetailByInvoiceIdAndClassId($invoice_id,$class_id){
-        try{
-            $result = InvoiceDetail::invoiceId($invoice_id)->classId($class_id)->first();
-            return !is_null($result) ? $result->toArray():null;
-        }catch(Exception $e){
-            return $e->getMessage();
-        }
-    }
+			DB::rollback();
 
-    public function deleteInvoiceDetailByInvoiceId($invoice_id){
-        try{
-            return InvoiceDetail::invoiceId($invoice_id)->delete();
-        }catch (\Exception $e){
-            return $e->getMessage();
-        }
-    }
+			$this->errorLog($e->getMessage());
 
-    /**
-    	 * Update a record.
-    	 * @param $id
-    	 * @param $data
-    	 * @return bool|int|string
-    	 */
+			return false;
+		}
 
-    	public function updateInvoiceDetail($id, $data)
-    	{
-    		try{
+		DB::commit();
 
-    			return InvoiceDetail::find($id)
-    				->update($data);
+		return $response;
+	}
 
-    		} catch (Exception $e) {
+	public function getInvoiceDetailByInvoiceIdAndClassId($invoice_id,$class_id){
+		DB::beginTransaction();
 
-    			throw new Exception($e->getMessage());
-    		}
+		try{
+			$result = InvoiceDetail::invoiceId($invoice_id)->classId($class_id)->first();
+			$response = !is_null($result) ? $result->toArray():null;
+		}catch (\Exception $e){
 
-    	}
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
+
+	public function deleteInvoiceDetailByInvoiceId($invoice_id){
+		DB::beginTransaction();
+
+		try{
+			$response = InvoiceDetail::invoiceId($invoice_id)->delete();
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
+
+	/**
+	 * Update a record.
+	 * @param $id
+	 * @param $data
+	 * @return bool|int|string
+	 */
+
+	public function updateInvoiceDetail($id, $data)
+	{
+		DB::beginTransaction();
+		
+		try{
+
+			$response = InvoiceDetail::find($id)
+							->update($data);
+
+		}catch (\Exception $e){
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
 }

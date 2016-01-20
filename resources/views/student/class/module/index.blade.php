@@ -14,7 +14,7 @@
 		    <li>{! mod.record.name !}</li>
 		</ul>
 
-		<div class="col-xs-12" ng-if="mod.active_contents && (mod.errors || mod.success)">
+		<div class="col-xs-12" ng-if="mod.active_contents && (mod.errors || mod.success) || mod.errors">
 			<div class="alert alert-error" ng-if="mod.errors">
 				<p ng-repeat="error in mod.errors track by $index">
 					{! error !}
@@ -55,7 +55,11 @@
 					</div>
 					<div>
 						<button type="button" class="btn btn-gold"
+								ng-if="!mod.errors"
 							ng-click="mod.exitModule('{!! route('student.class.index') !!}')">Exit Module</button>
+						<button type="button" class="btn btn-gold"
+								ng-if="mod.errors"
+								ng-click="mod.exitModule('{!! route('student.dashboard.index') !!}')">Exit Module</button>
 					</div>
 				</div>
 			</div>

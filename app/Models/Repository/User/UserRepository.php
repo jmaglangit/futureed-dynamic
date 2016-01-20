@@ -16,45 +16,98 @@ class UserRepository implements UserRepositoryInterface {
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
     public function getUsers(){
-        return User::all();
+
+        DB::beginTransaction();
+
+        try {
+
+            $response = User::all();
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
+        }
+
+        DB::commit();
+
+        return $response;
     }
 
-    // get common information
 	/**
+     * Get common information
      * @param $id
      * @param string $user_type
      * @return mixed
      */
     public function getUser($id,$user_type = 'all'){
-        $user =  User::select(
-            'id'
-            ,'username'
-            ,'email'
-            ,'new_email'
-            ,'password'
-            ,'name'
-            ,'user_type'
-            ,'status')->where('id',$id);
+
+        DB::beginTransaction();
+
+        try {
+
+            $user = User::select(
+                'id'
+                , 'username'
+                , 'email'
+                , 'new_email'
+                , 'password'
+                , 'name'
+                , 'user_type'
+                , 'status')->where('id', $id);
 
 
+            if ($user_type <> 'all') {
+                $user->where('user_type', $user_type);
+            }
 
-        if($user_type <> 'all'){
-            $user->where('user_type',$user_type);
+            $response = $user->first();
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
         }
 
-        return $user->first();
+        DB::commit();
+
+        return $response;
     }
 
-    //get all details of the user
 	/**
+     * Get all details of the user
      * @param $id
      * @param $user_type
      * @return mixed
      */
     public function getUserDetail($id,$user_type){
-        return User::where('id','=',$id)
-            ->where('user_type','=',$user_type)
-            ->first();
+
+        DB::beginTransaction();
+
+        try {
+
+            $response = User::where('id', '=', $id)
+                ->where('user_type', '=', $user_type)
+                ->first();
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
+        }
+
+        DB::commit();
+
+        return $response;
     }
 
 
@@ -64,12 +117,14 @@ class UserRepository implements UserRepositoryInterface {
      */
     public function addUser($user){
 
-        try{
+        DB::beginTransaction();
 
-            return User::create([
+        try {
+
+            $response = User::create([
                 'username' => $user['username'],
                 'email' => $user['email'],
-                'name' => $user['first_name'] .' '.$user['last_name'],
+                'name' => $user['first_name'] . ' ' . $user['last_name'],
                 'user_type' => $user['user_type'],
                 'password' => (isset($user['password'])) ? sha1($user['password']) : null,
                 'status' => (isset($user['status'])) ? ($user['status']) : 'Enabled',
@@ -80,9 +135,18 @@ class UserRepository implements UserRepositoryInterface {
                 'updated_by' => 1,
             ]);
 
-        }catch(Exception $e){
-            return $e->getMessage();
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
         }
+
+        DB::commit();
+
+        return $response;
 
     }
 
@@ -92,18 +156,26 @@ class UserRepository implements UserRepositoryInterface {
      * @return \Illuminate\Support\Collection|null|string|static
      */
     public function updateUser($id, $data) {
+
+        DB::beginTransaction();
+
         try {
 		
 			$user = User::find($id);
 			
 			$user->update($data);
-			
-		} catch(Exception $e) {
-		
-			return $e->getMessage();
-			
-		}
-		
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
+        }
+
+        DB::commit();
+
 		return $user;
     }
 
@@ -122,10 +194,25 @@ class UserRepository implements UserRepositoryInterface {
      */
     public function checkUserName($username,$user_type){
 
-        //return user id
-        return User::where('username','=',$username)
-            ->where('user_type','=',$user_type)->pluck('id');
+        DB::beginTransaction();
 
+        try {
+
+            $response = User::where('username', '=', $username)
+                ->where('user_type', '=', $user_type)->pluck('id');
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
+        }
+
+        DB::commit();
+
+        return $response;
     }
 
 	/**
@@ -135,9 +222,25 @@ class UserRepository implements UserRepositoryInterface {
      */
     public function checkEmail($email,$user_type){
 
-        //return user id
-        return User::where('email','=',$email)
-            ->where('user_type','=',$user_type)->pluck('id');
+        DB::beginTransaction();
+
+        try {
+
+            $response = User::where('email', '=', $email)
+                ->where('user_type', '=', $user_type)->pluck('id');
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
+        }
+
+        DB::commit();
+
+        return $response;
 
     }
 
@@ -147,8 +250,24 @@ class UserRepository implements UserRepositoryInterface {
      */
     public function getLoginAttempts($id){
 
-        return User::where('id','=',$id)->pluck('login_attempt');
+        DB::beginTransaction();
 
+        try{
+
+            $response = User::where('id','=',$id)->pluck('login_attempt');
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
+        }
+
+        DB::commit();
+
+        return $response;
     }
 
 	/**
@@ -157,8 +276,24 @@ class UserRepository implements UserRepositoryInterface {
      */
     public function accountActivated($id){
 
-        return User::where('id','=',$id)->pluck('is_account_activated');
+        DB::beginTransaction();
 
+        try{
+
+            $response = User::where('id','=',$id)->pluck('is_account_activated');
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
+        }
+
+        DB::commit();
+
+        return $response;
     }
 
 	/**
@@ -167,7 +302,24 @@ class UserRepository implements UserRepositoryInterface {
      */
     public function accountLocked($id){
 
-        return User::where('id','=',$id)->pluck('is_account_locked');
+        DB::beginTransaction();
+
+        try{
+
+            $response = User::where('id','=',$id)->pluck('is_account_locked');
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
+        }
+
+        DB::commit();
+
+        return $response;
     }
 
 	/**
@@ -176,8 +328,24 @@ class UserRepository implements UserRepositoryInterface {
      */
     public function accountDeleted($id){
 
-        return User::where('id','=',$id)->pluck('is_account_deleted');
+        DB::beginTransaction();
 
+        try{
+
+            $response = User::where('id','=',$id)->pluck('is_account_deleted');
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
+        }
+
+        DB::commit();
+
+        return $response;
     }
 
     /**
@@ -186,63 +354,121 @@ class UserRepository implements UserRepositoryInterface {
      */
     public function accountStatus($id){
 
-		return User::where('id','=',$id)->pluck('status');
+        DB::beginTransaction();
 
+        try{
+
+		    $response = User::where('id','=',$id)->pluck('status');
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
+        }
+
+        DB::commit();
+
+        return $response;
 	}
 
-	/**
+    /**
      * @param $id
+     * @return bool
      * @throws Exception
      */
-    public function addLoginAttempt($id){
-        $attempt = $this->getLoginAttempts($id);
+    public function addLoginAttempt($id) {
 
-        $attempt = $attempt + 1;
-        try{
+        DB::beginTransaction();
+
+        try {
+
+            $attempt = $this->getLoginAttempts($id);
+
+            $attempt = $attempt + 1;
 
             $user = User::find($id);
 
             $user->login_attempt = $attempt;
 
-            $user->save();
+            $response = $user->save();
 
-        }catch (Exception $e){
+        } catch (\Exception $e) {
 
-            throw new Exception ($e->getMessage());
+            DB::rollback();
 
+            $this->errorLog($e->getMessage());
+
+            return false;
         }
+
+        DB::commit();
+
+        return $response;
     }
 
     /**
      * @param $id
+     * @return bool
      * @throws Exception
      */
     public function resetLoginAttempt($id){
-        try{
+
+        DB::beginTransaction();
+
+        try {
 
             $user = User::find($id);
-            $user->login_attempt = 0;
-            $user->save();
 
-        } catch (Exception $e){
-            throw new Exception ($e->getMessage());
+            $user->login_attempt = 0;
+
+            $response = $user->save();
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
         }
+
+        DB::commit();
+
+        return $response;
     }
 
-	/**
+    /**
      * @param $id
+     * @return bool
      * @throws Exception
      */
     public function lockAccount($id){
+
+        DB::beginTransaction();
+
         try{
 
             $user = User::find($id);
+
             $user->is_account_locked = 1;
-            $user->save();
+
+            $response = $user->save();
             
-        } catch (Exception $e){
-            throw new Exception($e->getMessage());
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
         }
+
+        DB::commit();
+
+        return $response;
     }
 
 	/**
@@ -251,23 +477,25 @@ class UserRepository implements UserRepositoryInterface {
      */
     public function getEmail($id){
 
-        return User::where('id','=',$id)->pluck('email');
+        DB::beginTransaction();
 
-    }
+        try{
 
-    //set access token of the user
-	/**
-     * @param $access_token
-     */
-    public function setAccessToken($access_token){
+            $response =  User::where('id','=',$id)->pluck('email');
 
-    }
+        } catch (\Exception $e) {
 
-    //get access token of the user
-	/**
-     * @param $user
-     */
-    public function getAccessToken($user){
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
+        }
+
+        DB::commit();
+
+        return $response;
+
 
     }
 
@@ -278,74 +506,160 @@ class UserRepository implements UserRepositoryInterface {
     public function getConfirmationCode($id)
     {
 
-        return User::select('confirmation_code', 'confirmation_code_expiry')
+        DB::beginTransaction();
+
+        try{
+
+            $response = User::select('confirmation_code', 'confirmation_code_expiry')
             ->where('id', '=', $id)->first();
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
+        }
+
+        DB::commit();
+
+        return $response;
     }
 
-    //update reset_code and reset_code_expiry
-	/**
+    /**
+     * Update reset_code and reset_code_expiry
      * @param $id
      * @param $code
+     * @return bool
      * @throws Exception
      */
     public function updateResetCode($id,$code){
+
+        DB::beginTransaction();
+
         try{
 
-            User::where('id',$id)->update([
+           $response =  User::where('id',$id)->update([
                 'reset_code' => $code['confirmation_code'],
                 'reset_code_expiry' => $code['confirmation_code_expiry']
             ]);
 
-        } catch (Exception $e){
-            throw new Exception($e->getMessage());
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
         }
+
+        DB::commit();
+
+        return $response;
     }
 
-    //check id with password
 	/**
+     * Check id with password
      * @param $id
      * @param $password
      * @return mixed
      */
     public function checkPassword($id,$password){
 
-        return User::where('id',$id)
-            ->where('password',$password)
-            ->pluck('id');
+        DB::beginTransaction();
 
+        try {
+
+            $response = User::where('id', $id)
+                ->where('password', $password)
+                ->pluck('id');
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
+        }
+
+        DB::commit();
+
+        return $response;
     }
-    
-    //return only the username and the email
+
 	/**
+     * Return only the username and the email
      * @param $id
      * @return mixed
      */
     public function getUsernameEmail($id){
-       
-        return User::select('username','email','new_email')
-                    ->where('id','=',$id)->first();            
-    }
-    
-    //update username and email
 
-	/**
+        DB::beginTransaction();
+
+        try {
+
+            $response = User::select('username', 'email', 'new_email')
+                ->where('id', '=', $id)->first();
+
+        }catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
+        }
+
+        DB::commit();
+
+        return $response;
+    }
+
+    /**
+     * Update username and email
      * @param $id
      * @param $data
+     * @return bool
      */
     public function updateUsernameEmail($id,$data){
-        User::where('id','=',$id)
+
+        DB::beginTransaction();
+
+        try{
+
+        $response = User::where('id','=',$id)
                      ->update(['username'=>$data['username'],
                                'email'=>$data['email']
                               ]);
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
+        }
+
+        DB::commit();
+
+        return $response;
     }
-    
-    
-    //update username inactive || locked
-	/**
+
+    /**
+     * Update username inactive or locked
      * @param $id
+     * @return bool
      */
     public function updateInactiveLock($id){
-         User::where('id','=',$id)
+
+        DB::beginTransaction();
+
+        try{
+
+         $response = User::where('id','=',$id)
                      ->update(['is_account_activated'=>1,
                                'is_account_locked'=>0,
                                'login_attempt' => 0,
@@ -354,6 +668,19 @@ class UserRepository implements UserRepositoryInterface {
                                'reset_code' => null,
                                'reset_code_expiry' => null
                               ]);
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
+        }
+
+        DB::commit();
+
+        return $response;
         
     }
 
@@ -362,88 +689,150 @@ class UserRepository implements UserRepositoryInterface {
      * @return mixed
      */
     public function isActivated($id){
-        
-         return User::where('id','=',$id)
-                     ->pluck('is_account_activated');
-                     
+
+        DB::beginTransaction();
+
+        try {
+
+            $response = User::where('id', '=', $id)
+                ->pluck('is_account_activated');
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
+        }
+
+        DB::commit();
+
+        return $response;
     }
 
-	/**
+    /**
      * @param $id
      * @param $code
+     * @return bool
      * @throws Exception
      */
     public function updateConfirmationCode($id,$code){
+
+        DB::beginTransaction();
+
         try{
 
-            User::where('id',$id)->update([
+            $response = User::where('id',$id)->update([
                 'confirmation_code' => $code['confirmation_code'],
                 'confirmation_code_expiry' => $code['confirmation_code_expiry']
             ]);
 
-        } catch (Exception $e){
-            throw new Exception($e->getMessage());
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
         }
+
+        DB::commit();
+
+        return $response;
     }
 
-	/**
+    /**
      * @param $id
      * @param $password
+     * @return bool
      * @throws Exception
      */
     public function updatePassword($id,$password){
 
+        DB::beginTransaction();
+
         try{
 
-            User::where('id',$id)->update([
+            $response = User::where('id',$id)->update([
                 'password' => $password
             ]);
 
-        } catch (Exception $e){
-            throw new Exception($e->getMessage());
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
         }
+
+        DB::commit();
+
+        return $response;
 
     }
 
-	/**
+    /**
      * @param $id
      * @param $username
+     * @return bool
      * @throws Exception
      */
     public function updateUsername($id,$username){
 
+        DB::beginTransaction();
+
          try{
 
-            User::where('id',$id)->update([
+           $response = User::where('id',$id)->update([
                 'username' => $username['username'],
                 'name' => $username['name'],
                 'email'=>$username['email']
             ]);
 
-        } catch (Exception $e){
-            throw new Exception($e->getMessage());
-        }
+        } catch (\Exception $e) {
 
+             DB::rollback();
+
+             $this->errorLog($e->getMessage());
+
+             return false;
+         }
+
+        DB::commit();
+
+        return $response;
     }
 
-	/**
+    /**
      * @param $id
      * @param $new_email
+     * @return bool
      * @throws Exception
      */
     public function addNewEmail($id,$new_email){
 
+        DB::beginTransaction();
+
         try{
 
-            User::where('id',$id)->update([
+            $response = User::where('id',$id)->update([
                 'new_email' => $new_email
             ]);
 
-        } catch (Exception $e){
-            throw new Exception($e->getMessage());
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
         }
 
+        DB::commit();
 
+        return $response;
     }
 
 	/**
@@ -453,91 +842,151 @@ class UserRepository implements UserRepositoryInterface {
      */
     public function checkNewEmailExist($new_email,$user_type){
 
-         return User::where('new_email','=',$new_email)
-            ->where('user_type','=',$user_type)->pluck('id');
+        DB::beginTransaction();
 
+        try {
 
+            $response = User::where('new_email', '=', $new_email)
+                ->where('user_type', '=', $user_type)->pluck('id');
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
+        }
+
+        DB::commit();
+
+        return $response;
     }
 
-	/**
+    /**
      * @param $user_id
      * @param $new_email
+     * @return bool
      * @throws Exception
      */
     public function updateToNewEmail($user_id,$new_email){
 
+        DB::beginTransaction();
 
          try{
 
-            User::where('id',$user_id)->update([
+            $response = User::where('id',$user_id)->update([
                 'new_email' => '',
                 'email' => $new_email,
                 'email_code' =>'',
                 'email_code_expiry' => ''
             ]);
 
-        } catch (Exception $e){
-            throw new Exception($e->getMessage());
-        }
+        } catch (\Exception $e) {
 
+             DB::rollback();
 
+             $this->errorLog($e->getMessage());
+
+             return false;
+         }
+
+        DB::commit();
+
+        return $response;
     }
 
-	/**
+    /**
      * @param $id
      * @param $code
+     * @return bool
      * @throws Exception
      */
     public function updateEmailCode($id,$code){
+
+        DB::beginTransaction();
+
         try{
 
-            User::where('id',$id)->update([
+            $response = User::where('id',$id)->update([
                 'email_code' => $code['confirmation_code'],
                 'email_code_expiry' => $code['confirmation_code_expiry']
             ]);
 
-        } catch (Exception $e){
-            throw new Exception($e->getMessage());
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
         }
+
+        DB::commit();
+
+        return $response;
     }
 
 
-	/**
+    /**
      * @param $id
      * @param $status
+     * @return bool
      * @throws Exception
      */
     public function updateStatus($id,$status){
-        
+
+        DB::beginTransaction();
+
         try{
 
-            User::where('id',$id)->update([
+            $response = User::where('id',$id)->update([
                 'status' => $status,
             ]);
 
-        } catch (Exception $e){
-            throw new Exception($e->getMessage());
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
         }
+
+        DB::commit();
+
+        return $response;
     }
 
-	/**
-	 * Add Registration Token.
-	 * @param $id
-	 * @param $registration_token
-	 * @throws Exception
-	 */
+    /**
+     * Add Registration Token.
+     * @param $id
+     * @param $registration_token
+     * @return bool
+     * @throws Exception
+     */
 	public function addRegistrationToken($id,$registration_token){
+
+        DB::beginTransaction();
 
 		try{
 
-			User::where('id',$id)->update([
+			$response = User::where('id',$id)->update([
 				'registration_token' => $registration_token
 			]);
 
-		} catch (Exception $e){
+		} catch (\Exception $e) {
 
-			throw new Exception($e->getMessage());
-		}
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
+        }
+
+        DB::commit();
+
+        return $response;
 	}
 
 	/**
@@ -547,8 +996,24 @@ class UserRepository implements UserRepositoryInterface {
 	 */
 	public function getRegistrationToken($id){
 
-		return User::select('registration_token')
-			->where('id',$id);
+        DB::beginTransaction();
+
+        try {
+
+            $response = User::select('registration_token')
+                ->where('id', $id);
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
+        }
+
+        DB::commit();
+
+        return $response;
 	}
 
 	/**
@@ -558,9 +1023,26 @@ class UserRepository implements UserRepositoryInterface {
 	 */
 	public function deleteRegistrationToken($id){
 
-		return User::where('id',$id)->update([
-			'registration_token' => NULL
-		]);
+        DB::beginTransaction();
+
+        try {
+
+            $response = User::where('id', $id)->update([
+                'registration_token' => NULL
+            ]);
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
+        }
+
+        DB::commit();
+
+        return $response;
 	}
 
 	/**
@@ -569,7 +1051,24 @@ class UserRepository implements UserRepositoryInterface {
      */
     public function getFacebookId($id){
 
-        return User::where('id',$id)->pluck('facebook_app_id');
+        DB::beginTransaction();
+
+        try {
+
+            $response = User::where('id', $id)->pluck('facebook_app_id');
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
+        }
+
+        DB::commit();
+
+        return $response;
     }
 
 
@@ -579,7 +1078,24 @@ class UserRepository implements UserRepositoryInterface {
      */
     public function getGoogleId($id){
 
-        return User::where('id',$id)->pluck('google_app_id');
+        DB::beginTransaction();
+
+        try {
+
+            $response = User::where('id', $id)->pluck('google_app_id');
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
+        }
+
+        DB::commit();
+
+        return $response;
     }
 
 	/**
@@ -588,8 +1104,24 @@ class UserRepository implements UserRepositoryInterface {
      */
     public function getSessionToken($id){
 
-        return User::select('session_token','last_activity')->find($id);
+        DB::beginTransaction();
 
+        try {
+
+            $response = User::select('session_token', 'last_activity')->find($id);
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
+        }
+
+        DB::commit();
+
+        return $response;
     }
 
 	/**
@@ -724,7 +1256,24 @@ class UserRepository implements UserRepositoryInterface {
      */
     public function getImpersonator($id){
 
-        return User::where('id',$id)->pluck('impersonated_by');
+        DB::beginTransaction();
+
+        try {
+
+            $response = User::where('id', $id)->pluck('impersonated_by');
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
+        }
+
+        DB::commit();
+
+        return $response;
     }
 
 

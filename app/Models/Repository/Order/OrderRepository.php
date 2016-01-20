@@ -2,19 +2,12 @@
 
 
 use FutureEd\Models\Core\Order;
+use FutureEd\Models\Traits\LoggerTrait;
 use Illuminate\Support\Facades\DB;
 
 class OrderRepository implements OrderRepositoryInterface{
 
-	/**
-     * @param array $criteria
-     * @param int $limit
-     * @param int $offset
-     */
-    public function getOrders($criteria = array(), $limit = 0, $offset = 0)
-    {
-        //
-    }
+    use LoggerTrait;
 
 	/**
      * @param $data
@@ -22,12 +15,24 @@ class OrderRepository implements OrderRepositoryInterface{
      */
     public function addOrder($data)
     {
+        DB::beginTransaction();
+
         try{
-            return Order::create($data)->toArray();
+
+            $response = Order::create($data)->toArray();
             
-        }catch(Exception $e){
-            return $e->getMessage();        
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
         }
+
+        DB::commit();
+
+        return $response;
     }
 
 	/**
@@ -36,20 +41,50 @@ class OrderRepository implements OrderRepositoryInterface{
      * @return bool|int|string
      */
     public function updateOrder($id,$data){
+
+        DB::beginTransaction();
+
         try{
             $result = Order::find($id);
-            return !is_null($result) ? $result->update($data) : false;
-        }catch(Exception $e){
-            return $e->getMessage();
+            $response = !is_null($result) ? $result->update($data) : false;
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
         }
+
+        DB::commit();
+
+        return $response;
     }
 
 	/**
      * @return null
      */
     public function getNextOrderNo(){
-        $result =  Order::orderBy('id','desc')->first();
-        return !is_null($result) ? $result->toArray(): null;
+
+        DB::beginTransaction();
+
+        try {
+            $result = Order::orderBy('id', 'desc')->first();
+            $response = !is_null($result) ? $result->toArray() : null;
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
+        }
+
+        DB::commit();
+
+        return $response;
     }
 
 	/**
@@ -57,8 +92,25 @@ class OrderRepository implements OrderRepositoryInterface{
      * @return null
      */
     public function getOrderByOrderNo($order_no){
-        $result = Order::orderNo($order_no)->first();
-        return !is_null($result) ? $result->toArray(): null;
+
+        DB::beginTransaction();
+
+        try {
+            $result = Order::orderNo($order_no)->first();
+            $response = !is_null($result) ? $result->toArray() : null;
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
+        }
+
+        DB::commit();
+
+        return $response;
     }
 
 	/**
@@ -66,12 +118,25 @@ class OrderRepository implements OrderRepositoryInterface{
      * @return bool|null|string
      */
     public function deleteOrder($id){
+
+        DB::beginTransaction();
+
         try{
             $result = Order::find($id);
-            return is_null($result) ? null : $result->delete();
-        }catch (\Exception $e){
-            return $e->getMessage();
+            $response = is_null($result) ? null : $result->delete();
+
+        }catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
         }
+
+        DB::commit();
+
+        return $response;
     }
 
 	/**
@@ -79,11 +144,24 @@ class OrderRepository implements OrderRepositoryInterface{
      * @return \Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|\Illuminate\Support\Collection|null|string|static
      */
     public function getOrder($id){
+
+        DB::beginTransaction();
+
         try{
-            return Order::with('invoice')->find($id);
-        }catch (\Exception $e){
-            return $e->getMessage();
+            $response = Order::with('invoice')->find($id);
+
+        }catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
         }
+
+        DB::commit();
+
+        return $response;
     }
 
 	/**

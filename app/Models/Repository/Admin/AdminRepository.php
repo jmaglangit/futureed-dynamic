@@ -8,88 +8,95 @@
 namespace FutureEd\Models\Repository\Admin;
 
 use FutureEd\Models\Core\Admin;
+use FutureEd\Models\Traits\LoggerTrait;
+use Illuminate\Support\Facades\DB;
 
 class AdminRepository implements  AdminRepositoryInterface {
 
-    /**
-     * Get list of Administrators
-     *
-     * @param int limit
-     *
-     * @return array
-     */
-    public function getAdmins($criteria = array(), $limit = 0, $offset = 0) {
+	use LoggerTrait;
 
-        //get list of administrators username, email, roles
-        /*
-$admin = new Admin();
+	/**
+	 * Get list of Administrators
+	 *
+	 * @param int limit
+	 *
+	 * @return array
+	 */
+	public function getAdmins($criteria = array(), $limit = 0, $offset = 0) {
 
-        $admin = $admin->with('user')->paginate($limit);
+		DB::beginTransaction();
 
-        $paginator = [
-            'currentPage' => $admin->currentPage(),
-            'lastPage' => $admin->lastPage(),
-            'perPage' => $admin->perPage(),
-            'hasMorePages' => $admin->hasMorePages(),
-            'nextPageUrl' => $admin->nextPageUrl(),
-            'previousPageUrl' => $admin->previousPageUrl(),
-            'total' => $admin->total(),
-            'count' => $admin->count()
-        ];
+		try{
+			//get list of administrators username, email, roles
+			$admins = new Admin();
 
-        return [
-            'paginator' => $paginator,
-            'records' => $admin->items()
-        ];
-*/
+			$count = 0;
 
-		$admins = new Admin();
-		
-		$count = 0;
-		
-		if(count($criteria) <= 0 && $limit == 0 && $offset == 0) {
-			
-			$count = $admins->count();
-		
-		} else {
-			
-			if(count($criteria) > 0) {
-				if(isset($criteria['email'])) {
-					$admins = $admins->email($criteria['email']);
+			if(count($criteria) <= 0 && $limit == 0 && $offset == 0) {
+
+				$count = $admins->count();
+
+			} else {
+
+				if(count($criteria) > 0) {
+					if(isset($criteria['email'])) {
+						$admins = $admins->email($criteria['email']);
+					}
+
+					if(isset($criteria['username'])) {
+						$admins = $admins->username($criteria['username']);
+					}
+
+					if(isset($criteria['role'])) {
+						$admins = $admins->role($criteria['role']);
+					}
 				}
-				
-				if(isset($criteria['username'])) {
-					$admins = $admins->username($criteria['username']);
+
+				$count = $admins->count();
+
+				if($limit > 0 && $offset >= 0) {
+					$admins = $admins->offset($offset)->limit($limit);;
 				}
-				
-				if(isset($criteria['role'])) {
-					$admins = $admins->role($criteria['role']);
-				}				
+
 			}
-			
-			$count = $admins->count();
-		
-			if($limit > 0 && $offset >= 0) {
-				$admins = $admins->offset($offset)->limit($limit);;
-			}
-														
+
+			$admins = $admins->orderBy('created_at', 'asc');
+
+			$response = ['total' => $count, 'records' => $admins->with('user')->get()->toArray()];
+
+		}catch (\Exception $e){
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
-		
-		$admins = $admins->orderBy('created_at', 'asc');
-		
-		return ['total' => $count, 'records' => $admins->with('user')->get()->toArray()];
 
-    }
+		DB::commit();
 
-    public function getAdmin($id,$role='Admin') {
+		return $response;
+	}
 
-		$admin = Admin::with('user')->role($role)->find($id);
+	public function getAdmin($id,$role='Admin') {
+
+		DB::beginTransaction();
+
+		try{
+			$response = Admin::with('user')->role($role)->find($id);
 				
-		#$admin = $admin->find($id)->with('user')->get();
+		}catch (\Exception $e){
+			DB::rollback();
 
-        return $admin;
+			$this->errorLog($e->getMessage());
 
-    }
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+
+	}
 
 	/**
 	 * Get Admin information.
@@ -97,79 +104,178 @@ $admin = new Admin();
 	 */
 	public function getAdminDetail($id){
 
-		return Admin::with('user')->find($id);
+		DB::beginTransaction();
+
+		try{
+			$response = Admin::with('user')->find($id);
+
+		}catch (\Exception $e){
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
-    public function addAdmin($data) {
-		try {
-		
-			$admin = Admin::create($data);
-						
-		} catch(Exception $e) {
-		
-			return $e->getMessage();
-			
-		}
-		
-		return $admin;
-    }
+	public function addAdmin($data) {
 
-    public function updateAdmin($id, $data) {
+		DB::beginTransaction();
+
+		try {
+			$response = Admin::create($data);
+
+		} catch(\Exception $e) {
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+
+		}
+
+		DB::commit();
+
+		return $response;
+	}
+
+	public function updateAdmin($id, $data) {
+
+		DB::beginTransaction();
+
 		try {
 		
 			$admin = Admin::find($id);
-			
+
 			$admin->update($data);
-			
-		} catch(Exception $e) {
-		
-			return $e->getMessage();
-			
+
+		} catch(\Exception $e) {
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+
 		}
+
+		DB::commit();
 		
 		return $admin;
-    }
-    
-    public function deleteAdmin($id) {
+	}
+
+	public function deleteAdmin($id) {
+
+		DB::beginTransaction();
+
 		try {
-		
 			$admin = Admin::find($id);
-			
+
 			if($admin) {
 				$is_deleted = $admin->delete();
-				
-				return $is_deleted ? $admin : FALSE;
+
+				$response = $is_deleted ? $admin : FALSE;
 			} else {
-				return FALSE;
+				$response = FALSE;
 			}
-			
-		} catch(Exception $e) {
-		
-			return $e->getMessage();
-			
+
+		} catch(\Exception $e) {
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+
 		}
-    }
 
-    public function getAdminId($user_id){
+		DB::commit();
 
-        return Admin::where('user_id','=',$user_id)->pluck('id');
-    }
+		return $response;
+	}
+
+	public function getAdminId($user_id){
+
+		DB::beginTransaction();
+
+		try{
+			$response = Admin::where('user_id','=',$user_id)->pluck('id');
+
+		} catch(\Exception $e) {
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
 
 	public function getAdminUserId($id){
 
-		return Admin::find($id)->user_id;
+		DB::beginTransaction();
+
+		try{
+			$response = Admin::find($id)->user_id;
+
+		} catch(\Exception $e){
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
-    public function verifyAdminId($id){
+	public function verifyAdminId($id){
 
-        return Admin::select('id','user_id')->where('id','=',$id)->first();
+		DB::beginTransaction();
 
-    }
-    
-    public function canDelete() {
-	    $admins = Admin::all();
-	    
-	    return $admins->count() > config('futureed.admin_delete_threshold');
+		try{
+			$response = Admin::select('id','user_id')->where('id','=',$id)->first();
+
+		} catch(\Exception $e){
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
+
+	public function canDelete() {
+
+		DB::beginTransaction();
+
+		try{
+			$admins = Admin::all();
+			$response = $admins->count() > config('futureed.admin_delete_threshold');
+
+
+		} catch(\Exception $e){
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -178,7 +284,22 @@ $admin = new Admin();
 	 */
 	public function getAdminRole($id){
 
-		return Admin::where('id','=',$id)->pluck('admin_role');
+		DB::beginTransaction();
+
+		try{
+			$response = Admin::where('id','=',$id)->pluck('admin_role');
+
+		} catch(\Exception $e){
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 }
