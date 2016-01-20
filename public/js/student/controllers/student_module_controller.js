@@ -110,7 +110,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				self.record = response.data;
 				var class_id = Constants.FALSE;
 
-				var student_modules = self.record.student_module;
+				var student_modules = self.record.student_module_valid;
 				var student_id = parseInt($scope.user.id);
 				var student_module = Constants.FALSE;
 
