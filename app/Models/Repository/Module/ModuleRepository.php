@@ -308,7 +308,6 @@ class ModuleRepository implements ModuleRepositoryInterface
 		DB::beginTransaction();
 
 		try{
-			return $response;
 			$module = new Module();
 
 			$module = $module->subjectId($subject_id);
@@ -428,7 +427,7 @@ class ModuleRepository implements ModuleRepositoryInterface
 		DB::beginTransaction();
 
 		try{
-			return Module::select (
+			$response = Module::select (
 				\DB::raw('cg.grade_id as grade_id,g.name as grade_name')
 				)->leftJoin('country_grades as cg','modules.grade_id','=','cg.grade_id')
 				->leftJoin('country_grades as cg2',function($left_join) use ($country_id){
