@@ -134,9 +134,6 @@ function ManageAgeGroupController($scope, ManageAgeGroupService, TableService) {
 		
 		self.fields = [];
 
-		self.record.age_group_id = self.details.age_group_id;
-		self.record.points_earned = self.details.points_earned;
-
 		$scope.ui_block();
 		ManageAgeGroupService.update(self.record).success(function(response){
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
@@ -147,7 +144,7 @@ function ManageAgeGroupController($scope, ManageAgeGroupService, TableService) {
 						self.fields[value.field] = Constants.TRUE;
 					});
 				} else if(response.data) {
-					self.setActive(Constants.ACTIVE_EDIT);
+					self.setActive(Constants.ACTIVE_EDIT, self.record.id);
 					self.success = Constants.MSG_UPDATED("Age group");
 				}
 			}
