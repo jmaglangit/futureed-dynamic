@@ -138,7 +138,7 @@ class GradeRepository implements GradeRepositoryInterface{
 
 		try {
 			$grade = Grade::find($id);
-			$response = $grade->update($data);
+			$grade->update($data);
 
 		}catch (\Exception $e){
 
@@ -151,7 +151,7 @@ class GradeRepository implements GradeRepositoryInterface{
 
 		DB::commit();
 
-		return $response;
+		return $grade;
 	}
 
 
