@@ -318,7 +318,7 @@ class InvoiceRepository implements InvoiceRepositoryInterface{
 			$invoice = new Invoice();
 
 			//query relation to subscription and invoice_detail
-			return $invoice = $invoice->with('subscription')->with('InvoiceDetail')->order($order_no)->get();
+			$response = $invoice->with('subscription')->with('InvoiceDetail')->order($order_no)->get();
 
 		}catch (\Exception $e){
 

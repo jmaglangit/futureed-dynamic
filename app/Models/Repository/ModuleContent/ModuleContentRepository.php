@@ -311,6 +311,8 @@ class ModuleContentRepository implements ModuleContentRepositoryInterface{
 		}
 
 		DB::commit();
+
+		return true;
 	}
 
 	/**

@@ -67,9 +67,9 @@ class HelpRequestAnswerRatingRepository implements HelpRequestAnswerRatingReposi
 	 */
 	public function getRatingsByAnswerId($help_request_answer_id){
 		DB::beginTransaction();
-		
+
 		try{
-			return HelpRequestAnswerRating::HelpRequestAnswerId($help_request_answer_id)->get();
+			$response = HelpRequestAnswerRating::HelpRequestAnswerId($help_request_answer_id)->get();
 		}catch (\Exception $e){
 
 			DB::rollback();
