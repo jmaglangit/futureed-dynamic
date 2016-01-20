@@ -134,6 +134,9 @@ function ManageAgeGroupController($scope, ManageAgeGroupService, TableService) {
 		
 		self.fields = [];
 
+		self.record.age_group_id = self.details.age_group_id;
+		self.record.points_earned = self.details.points_earned;
+
 		$scope.ui_block();
 		ManageAgeGroupService.update(self.record).success(function(response){
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
