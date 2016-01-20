@@ -3,8 +3,12 @@
 namespace FutureEd\Models\Repository\Quote;
 
 use FutureEd\Models\Core\Quote;
+use FutureEd\Models\Traits\LoggerTrait;
+use Illuminate\Support\Facades\DB;
 
 class QuoteRepository implements QuoteRepositoryInterface{
+
+	use LoggerTrait;
 
     /**
      * Get Quote id by percent and seq_no
@@ -14,13 +18,25 @@ class QuoteRepository implements QuoteRepositoryInterface{
      *
      */
     public function getQuoteIdByPctAndSeqNo($pct,$seq_no){
+
+		DB::beginTransaction();
+
         try{
             $result = Quote::percent($pct)->seqNo($seq_no)->first();
-            return is_null($result) ? null : $result->id;
+            $response = is_null($result) ? null : $result->id;
 
-        }catch (\Exception $e){
-            return $e->getMessage();
-        }
+        }catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
     }
     
 	/**
@@ -30,6 +46,9 @@ class QuoteRepository implements QuoteRepositoryInterface{
      *
      */
     public function getQuotes($avatar_id){
+
+		DB::beginTransaction();
+
         try{
         	$new_array = array();
         
@@ -52,16 +71,23 @@ class QuoteRepository implements QuoteRepositoryInterface{
 				
 				}
 				
-				return $new_array;
+				$response = $new_array;
 				
 			} else {
-				return null;
+				$response = null;
 			}
-			
-            return is_null($result) ? null : $result->toArray();
 
-        }catch (\Exception $e){
-            return $e->getMessage();
-        }
+        } catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
     }
 }

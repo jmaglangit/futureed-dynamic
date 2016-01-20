@@ -9,53 +9,159 @@
 namespace FutureEd\Models\Repository\PasswordImage;
 
 use FutureEd\Models\Core\PasswordImage;
+use FutureEd\Models\Traits\LoggerTrait;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Password;
 
 
 class PasswordImageRepository implements PasswordImageRepositoryInterface{
 
+    use LoggerTrait;
+
+	/**
+     * @param $id
+     * @return bool
+     */
     public function getImage($id){
 
-        return PasswordImage::select(
-            'id',
-            'name',
-            'password_image_file as url'
-        )->where('id','=',$id)->get();
+        DB::beginTransaction();
 
+        try {
+
+            $response = PasswordImage::select(
+                'id',
+                'name',
+                'password_image_file as url'
+            )->where('id', '=', $id)->get();
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
+        }
+
+        DB::commit();
+
+        return $response;
     }
 
+	/**
+     * @return bool
+     */
     public function getImages(){
 
-        return PasswordImage::select(
-            'id',
-            'name',
-            'password_image_file as url'
-        )->get();
+        DB::beginTransaction();
+
+        try {
+
+            $response = PasswordImage::select(
+                'id',
+                'name',
+                'password_image_file as url'
+            )->get();
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
+        }
+
+        DB::commit();
+
+        return $response;
     }
 
+	/**
+     * @param int $count
+     * @param $id
+     * @return bool
+     */
     public function getRandomImageId($count = 1, $id){
 
-        return PasswordImage::select(
-            'id',
-            'name',
-            'password_image_file as url'
-        )->where('id','<>', $id)->get()->random($count);
+        DB::beginTransaction();
+
+        try {
+            $response = PasswordImage::select(
+                'id',
+                'name',
+                'password_image_file as url'
+            )->where('id', '<>', $id)->get()->random($count);
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
+        }
+
+        DB::commit();
+
+        return $response;
     }
 
+	/**
+     * @param int $count
+     * @return bool
+     */
     public function getRandomImage($count = 1){
 
-        return PasswordImage::select(
-            'id',
-            'name',
-            'password_image_file as url'
-        )->get()->random($count);
+        DB::beginTransaction();
+
+        try {
+
+            $response = PasswordImage::select(
+                'id',
+                'name',
+                'password_image_file as url'
+            )->get()->random($count);
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
+        }
+
+        DB::commit();
+
+        return $response;
 
     }
-    
+
+	/**
+     * @param $id
+     * @return bool
+     */
     public function checkPasswordExist($id){
-        
-         return PasswordImage::where('id',$id)->pluck('id');
-         
+
+        DB::beginTransaction();
+
+        try {
+
+            $response = PasswordImage::where('id', $id)->pluck('id');
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
+        }
+
+        DB::commit();
+
+        return $response;
     }
 
 

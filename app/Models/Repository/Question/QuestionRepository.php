@@ -4,11 +4,15 @@ namespace FutureEd\Models\Repository\Question;
 
 use FutureEd\Models\Core\Question;
 use FutureEd\Models\Core\QuestionAnswer;
+use FutureEd\Models\Traits\LoggerTrait;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use League\Flysystem\Exception;
 
 
 class QuestionRepository implements QuestionRepositoryInterface{
+
+	use LoggerTrait;
 
 	/**
 	 * Add record in storage
@@ -17,18 +21,24 @@ class QuestionRepository implements QuestionRepositoryInterface{
 	 */
 	public function addQuestion($data){
 
+		DB::beginTransaction();
+
 		try {
 
 			$question = Question::create($data);
 
-		} catch(Exception $e) {
+		} catch (\Exception $e) {
 
-			return $e->getMessage();
+			DB::rollback();
 
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
 
-		return $question;
+		DB::commit();
 
+		return $question;
 	}
 
 
@@ -41,70 +51,85 @@ class QuestionRepository implements QuestionRepositoryInterface{
 	 */
 	public function getQuestions($criteria = array(), $limit = 0, $offset = 0){
 
-		$question = new Question();
+		DB::beginTransaction();
 
-		$count = 0;
+		try {
+			$question = new Question();
 
-		if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
+			$count = 0;
 
-			$count = $question->count();
+			if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
 
-		} else {
+				$count = $question->count();
+
+			} else {
 
 
-			if (count($criteria) > 0) {
+				if (count($criteria) > 0) {
 
-				//check scope module_id
-				if(isset($criteria['module_id'])){
+					//check scope module_id
+					if (isset($criteria['module_id'])) {
 
-					$question = $question->moduleId($criteria['module_id']);
+						$question = $question->moduleId($criteria['module_id']);
+					}
+
+					//check scope questions_text
+					if (isset($criteria['questions_text'])) {
+
+						$question = $question->questionText($criteria['questions_text']);
+					}
+
+					//check scope to question_type
+					if (isset($criteria['question_type'])) {
+
+						$question = $question->questionType($criteria['question_type']);
+					}
+					if (isset($criteria['difficulty'])) {
+
+						$question = $question->difficulty($criteria['difficulty']);
+					}
+					if (isset($criteria['status'])) {
+
+						$question = $question->status($criteria['status']);
+					}
+
+
 				}
 
-				//check scope questions_text
-				if(isset($criteria['questions_text'])){
+				$count = $question->count();
 
-					$question = $question->questionText($criteria['questions_text']);
-				}
+				$question = $question->orderBySeqNo();
 
-				//check scope to question_type
-				if(isset($criteria['question_type'])){
+				//set offset to last_answered_question
+				if (isset($criteria['last_answered_question_id'])) {
 
-					$question = $question->questionType($criteria['question_type']);
-				}
-				if(isset($criteria['difficulty'])){
-
-					$question = $question->difficulty($criteria['difficulty']);
-				}
-				if(isset($criteria['status'])){
-
-					$question = $question->status($criteria['status']);
+					//get question_id's sequence number and set as $offset
+					$question_id = $this->getQuestionSequenceNo($criteria['last_answered_question_id']);
+					$offset = $question_id[0]->seq_no - 1;
 				}
 
 
+				if ($limit > 0 && $offset >= 0) {
+					$question = $question->offset($offset)->limit($limit);
+				}
 			}
 
-			$count = $question->count();
+			$question = $question->with('questionAnswers');
 
-			$question = $question->orderBySeqNo();
+			$response = ['total' => $count, 'records' => $question->get()->toArray()];
 
-			//set offset to last_answered_question
-			if(isset($criteria['last_answered_question_id'])){
+		} catch (\Exception $e) {
 
-				//get question_id's sequence number and set as $offset
-				$question_id = $this->getQuestionSequenceNo($criteria['last_answered_question_id']);
-				$offset = $question_id[0]->seq_no - 1;
-			}
+			DB::rollback();
 
+			$this->errorLog($e->getMessage());
 
-			if ($limit > 0 && $offset >= 0) {
-				$question = $question->offset($offset)->limit($limit);
-			}
+			return false;
 		}
 
-		$question = $question->with('questionAnswers');
+		DB::commit();
 
-		return ['total' => $count, 'records' => $question->get()->toArray()];
-
+		return $response;
 	}
 
 	/**
@@ -114,12 +139,26 @@ class QuestionRepository implements QuestionRepositoryInterface{
 	 */
 	public function viewQuestion($id){
 
-		$question = new Question();
+		DB::beginTransaction();
 
-		$question = $question->with('module');
-		$question = $question->find($id);
+		try {
+			$question = new Question();
+
+			$question = $question->with('module');
+			$question = $question->find($id);
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
 		return $question;
-
 	}
 
 
@@ -131,15 +170,25 @@ class QuestionRepository implements QuestionRepositoryInterface{
 	 */
 	public function deleteQuestion($id){
 
+		DB::beginTransaction();
+
 		try{
 
-			return Question::find($id)
+			$response = Question::find($id)
 				->delete();
 
-		}catch (Exception $e){
+		} catch (\Exception $e) {
 
-			return $e->getMessage();
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -148,18 +197,27 @@ class QuestionRepository implements QuestionRepositoryInterface{
 	 * @param $data
 	 * @return bool|int|string
 	 */
-
 	public function updateQuestion($id,$data){
+
+		DB::beginTransaction();
 
 		try{
 
-			return Question::find($id)
+			$response = Question::find($id)
 				->update($data);
 
-		}catch (Exception $e){
+		}catch (\Exception $e) {
 
-			return $e->getMessage();
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -170,9 +228,23 @@ class QuestionRepository implements QuestionRepositoryInterface{
 	 */
 	public function getQuestionCount($module_id){
 
-		$question = new Question();
-		$question = $question->moduleId($module_id);
-		$count = $question->get()->count();
+		DB::beginTransaction();
+
+		try {
+			$question = new Question();
+			$question = $question->moduleId($module_id);
+			$count = $question->get()->count();
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
 
 		return $count;
 	}
@@ -181,48 +253,102 @@ class QuestionRepository implements QuestionRepositoryInterface{
 	/**
 	 * Get questions id and sequence number order sequence.
 	 * @param $module_id
+	 * @return bool
 	 */
 	public function getQuestionSequenceNos($module_id,$difficulty){
 
-		return Question::select('id','seq_no')
-			->moduleId($module_id)
-			->difficulty($difficulty)
-			->orderBySeqNo()
-			->get();
+		DB::beginTransaction();
+
+		try{
+			$response = Question::select('id','seq_no')
+				->moduleId($module_id)
+				->difficulty($difficulty)
+				->orderBySeqNo()
+				->get();
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
 	 * Get sequence number.
-	 * @param $module_id
 	 * @param $id
+	 * @return bool
+	 * @internal param $module_id
 	 */
 	public function getQuestionSequenceNo($id){
 
-		return Question::select('id','seq_no','module_id')
-			->id($id)
-			->get();
+		DB::beginTransaction();
 
+		try {
+
+			$response = Question::select('id', 'seq_no', 'module_id')
+				->id($id)
+				->get();
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
 	 * Get last sequence number.
 	 * @param $module_id
+	 * @return bool
 	 */
 	public function getLastSequence($module_id,$difficulty){
 
-		$question = new Question();
-		return $question->moduleId($module_id)
-			->difficulty($difficulty)
-			->orderBySeqNoDesc()
-			->pluck('seq_no');
+		DB::beginTransaction();
+
+		try {
+
+			$question = new Question();
+			$response = $question->moduleId($module_id)
+				->difficulty($difficulty)
+				->orderBySeqNoDesc()
+				->pluck('seq_no');
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
 	 * Update sequence.
-	 * @param $module_id
 	 * @param $sequence
+	 * @return string
+	 * @internal param $module_id
 	 */
 	public function updateSequence($sequence){
+
+		DB::beginTransaction();
 
 		try{
 			$data = $sequence;
@@ -235,13 +361,20 @@ class QuestionRepository implements QuestionRepositoryInterface{
 					]);
 			}
 
+			$response = true;
 
-		}catch(Exception $e){
+		} catch (\Exception $e) {
 
-			return $e->getMessage();
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
 
+		DB::commit();
 
+		return $response;
 	}
 
 
@@ -252,7 +385,24 @@ class QuestionRepository implements QuestionRepositoryInterface{
 	 */
 	public function getQuestionType($id){
 
-		return Question::whereId($id)->pluck('question_type');
+		DB::beginTransaction();
+
+		try {
+
+			$response = Question::whereId($id)->pluck('question_type');
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -262,10 +412,24 @@ class QuestionRepository implements QuestionRepositoryInterface{
 	 */
 	public function getQuestionAnswer($id){
 
-		//TODO: Refactor remove supper_access.
-		session(['super_access' => 1]);
-		$response =  Question::whereId($id)->pluck('answer');
-		Session::forget('super_access');
+		DB::beginTransaction();
+
+		try {
+			//TODO: Refactor remove supper_access.
+			session(['super_access' => 1]);
+			$response = Question::whereId($id)->pluck('answer');
+			Session::forget('super_access');
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
 
 		return $response;
 	}
@@ -273,20 +437,56 @@ class QuestionRepository implements QuestionRepositoryInterface{
 	/**
 	 * Get points earned if correct.
 	 * @param $id
+	 * @return bool
 	 */
 	public function getQuestionPointsEarned($id){
-		return Question::whereId($id)->pluck('points_earned');
+
+		DB::beginTransaction();
+
+		try {
+
+			$response = Question::whereId($id)->pluck('points_earned');
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
 	 * Get questions by module.
 	 * @param $module_id
+	 * @return bool
 	 */
 	public function getQuestionsByModule($module_id){
 
-		return Question::whereModuleId($module_id)
-			->whereStatus(config('futureed.enabled'))
-			->orderBySeqNo()->get();
+		DB::beginTransaction();
+
+		try {
+
+			$response = Question::whereModuleId($module_id)
+				->whereStatus(config('futureed.enabled'))
+				->orderBySeqNo()->get();
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -296,8 +496,25 @@ class QuestionRepository implements QuestionRepositoryInterface{
 	 */
 	public function getQuestionByPointsToFinish($module_id, $points_to_finish){
 
-		return Question::whereModuleId($module_id)
-			->orderBySeqNo()->take($points_to_finish)->get();
+		DB::beginTransaction();
+
+		try {
+
+			$response = Question::whereModuleId($module_id)
+				->orderBySeqNo()->take($points_to_finish)->get();
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -307,18 +524,52 @@ class QuestionRepository implements QuestionRepositoryInterface{
 	 */
 	public function getQuestionFirst($module_id){
 
-		return Question::whereModuleId($module_id)
-			->orderBySeqNo()->take(1)->get();
+		DB::beginTransaction();
+
+		try {
+
+			$response = Question::whereModuleId($module_id)
+				->orderBySeqNo()->take(1)->get();
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
 	 * @param $module_id
+	 * @return bool
 	 */
 	public function getQuestionLevelsByModule($module_id){
 
-		return Question::whereModuleId($module_id)
-			->groupBy('difficulty')
-			->get();
+		DB::beginTransaction();
+
+		try {
+
+			$response = Question::whereModuleId($module_id)
+				->groupBy('difficulty')
+				->get();
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -328,9 +579,26 @@ class QuestionRepository implements QuestionRepositoryInterface{
 	 */
 	public function countQuestions($module_id,$difficulty){
 
-		return Question::whereModuleId($module_id)
-			->whereDifficulty($difficulty)
-			->count();
+		DB::beginTransaction();
+
+		try {
+
+			$response = Question::whereModuleId($module_id)
+				->whereDifficulty($difficulty)
+				->count();
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -340,7 +608,24 @@ class QuestionRepository implements QuestionRepositoryInterface{
 	 */
 	public function getEnabledQuestion($id){
 
-		return Question::id($id)->status(config('futureed.enabled'))->get();
+		DB::beginTransaction();
+
+		try {
+
+			$response = Question::id($id)->status(config('futureed.enabled'))->get();
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -350,12 +635,28 @@ class QuestionRepository implements QuestionRepositoryInterface{
 	 */
 	public function getGraphQuestion($id){
 
-		$question_types = [
-			config('futureed.question_type_graph'),
-			config('futureed.question_type_quad')
-		];
+		DB::beginTransaction();
 
-		return Question::id($id)->questionType($question_types)->first();
+		try {
+			$question_types = [
+				config('futureed.question_type_graph'),
+				config('futureed.question_type_quad')
+			];
+
+			$response = Question::id($id)->questionType($question_types)->first();
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -366,7 +667,24 @@ class QuestionRepository implements QuestionRepositoryInterface{
 	 */
 	public function getGraphQuestionByType($id, $question_type){
 
-		return Question::id($id)->questionType($question_type)->first();
+		DB::beginTransaction();
+
+		try {
+
+			$response = Question::id($id)->questionType($question_type)->first();
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 

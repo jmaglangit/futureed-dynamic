@@ -15,24 +15,57 @@ class StudentModuleAnswerRepository implements StudentModuleAnswerRepositoryInte
      * @return array|string
      */
     public function addStudentModuleAnswer($data){
+
+        DB::beginTransaction();
+
         try{
-            return StudentModuleAnswer::create($data);
-        }catch (\Exception $e){
-            return $e->getMessage();
+
+            $response = StudentModuleAnswer::create($data);
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
         }
+
+        DB::commit();
+
+        return $response;
     }
 
-	/**
-	 * Get student module answer.
-	 * @param $student_id
-	 * @param $module_id
-	 */
+    /**
+     * Get student module answer.
+     * @param $student_module_id
+     * @param $module_id
+     * @return bool
+     * @internal param $student_id
+     */
 	public function getStudentModuleAnswer($student_module_id, $module_id){
 
-		return StudentModuleAnswer::with('question')->studentModuleId($student_module_id)
-			->moduleId($module_id)
-			->orderBySeqNo()
-			->get();
+        DB::beginTransaction();
+
+        try {
+
+            $response = StudentModuleAnswer::with('question')->studentModuleId($student_module_id)
+                ->moduleId($module_id)
+                ->orderBySeqNo()
+                ->get();
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
+        }
+
+        DB::commit();
+
+        return $response;
 	}
 
     /**
@@ -43,6 +76,7 @@ class StudentModuleAnswerRepository implements StudentModuleAnswerRepositoryInte
     public function deletedStudentModuleAnswer($student_module_id, $question_id){
 
         DB::beginTransaction();
+
         try{
 
             $response = StudentModuleAnswer::studentModuleId($student_module_id)
@@ -60,6 +94,5 @@ class StudentModuleAnswerRepository implements StudentModuleAnswerRepositoryInte
         DB::commit();
 
         return $response;
-
     }
 }

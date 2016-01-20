@@ -3,11 +3,14 @@
 namespace FutureEd\Models\Repository\QuestionAnswer;
 
 use FutureEd\Models\Core\QuestionAnswer;
+use FutureEd\Models\Traits\LoggerTrait;
+use Illuminate\Support\Facades\DB;
 use League\Flysystem\Exception;
 use Illuminate\Support\Facades\Session;
 
 class QuestionAnswerRepository implements QuestionAnswerRepositoryInterface{
 
+	use LoggerTrait;
 	/**
 	 * Add record in storage
 	 * @param $data
@@ -15,18 +18,24 @@ class QuestionAnswerRepository implements QuestionAnswerRepositoryInterface{
 	 */
 	public function addQuestionAnswer($data){
 
+		DB::beginTransaction();
+
 		try {
 
 			$question_answer = QuestionAnswer::create($data);
 
-		} catch(Exception $e) {
+		} catch (\Exception $e) {
 
-			return $e->getMessage();
+			DB::rollback();
 
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
 
-		return $question_answer;
+		DB::commit();
 
+		return $question_answer;
 	}
 
 	/**
@@ -38,43 +47,58 @@ class QuestionAnswerRepository implements QuestionAnswerRepositoryInterface{
 	 */
 	public function getQuestionAnswers($criteria = array(), $limit = 0, $offset = 0){
 
-		session(['super_access' => 1]);
-		$question_answer = new QuestionAnswer();
+		DB::beginTransaction();
 
-		$count = 0;
+		try {
+			session(['super_access' => 1]);
+			$question_answer = new QuestionAnswer();
 
-		if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
+			$count = 0;
 
-			$count = $question_answer->count();
+			if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
 
-		} else {
+				$count = $question_answer->count();
+
+			} else {
 
 
-			if (count($criteria) > 0) {
+				if (count($criteria) > 0) {
 
-				//for question_id
-				if(isset($criteria['question_id'])) {
+					//for question_id
+					if (isset($criteria['question_id'])) {
 
-					$question_answer = $question_answer->questionId($criteria['question_id']);
+						$question_answer = $question_answer->questionId($criteria['question_id']);
 
+					}
+
+				}
+
+				$count = $question_answer->count();
+
+				if ($limit > 0 && $offset >= 0) {
+					$question_answer = $question_answer->offset($offset)->limit($limit);
 				}
 
 			}
 
-			$count = $question_answer->count();
+			$records = $question_answer->get()->toArray();
 
-			if ($limit > 0 && $offset >= 0) {
-				$question_answer = $question_answer->offset($offset)->limit($limit);
-			}
+			Session::forget('super_access');
 
+			$response = ['total' => $count, 'records' => $records];
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
 
-		$records = $question_answer->get()->toArray();
+		DB::commit();
 
-		Session::forget('super_access');
-
-		return ['total' => $count, 'records' => $records];
-
+		return $response;
 	}
 
 	/**
@@ -84,11 +108,25 @@ class QuestionAnswerRepository implements QuestionAnswerRepositoryInterface{
 	 */
 	public function viewQuestionAnswer($id){
 
-		$question_answer = new QuestionAnswer();
+		DB::beginTransaction();
 
-		$question_answer = $question_answer->find($id);
+		try {
+			$question_answer = new QuestionAnswer();
+
+			$question_answer = $question_answer->find($id);
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
 		return $question_answer;
-
 	}
 
 
@@ -98,18 +136,27 @@ class QuestionAnswerRepository implements QuestionAnswerRepositoryInterface{
 	 * @param $data
 	 * @return bool|int|string
 	 */
-
 	public function updateQuestionAnswer($id,$data){
+
+		DB::beginTransaction();
 
 		try{
 
-			return QuestionAnswer::find($id)
+			$response = QuestionAnswer::find($id)
 				->update($data);
 
-		}catch (Exception $e){
+		} catch (\Exception $e) {
 
-			return $e->getMessage();
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -120,15 +167,25 @@ class QuestionAnswerRepository implements QuestionAnswerRepositoryInterface{
 	 */
 	public function deleteQuestionAnswer($id){
 
+		DB::beginTransaction();
+
 		try{
 
-			return QuestionAnswer::find($id)
+			$response = QuestionAnswer::find($id)
 				->delete();
 
-		}catch (Exception $e){
+		} catch (\Exception $e) {
 
-			return $e->getMessage();
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
+
+		DB::commit();
+
+		return $response;
 	}
 
     /**
@@ -138,12 +195,26 @@ class QuestionAnswerRepository implements QuestionAnswerRepositoryInterface{
      * @return Boolean
      */
     public function getCorrectAnswer($question_id,$answer_id){
+
+		DB::beginTransaction();
+
         try{
+
             $result = QuestionAnswer::questionId($question_id)->isCorrectAnswer()->find($answer_id);
-            return is_null($result) ? false:true;
-        }catch (\Exception $e){
-            return $e->getMessage();
-        }
+            $response = is_null($result) ? false:true;
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
     }
 
 	/**
@@ -153,23 +224,56 @@ class QuestionAnswerRepository implements QuestionAnswerRepositoryInterface{
 	 */
 	public function getQuestionCorrectAnswer($id){
 
-		//TODO: Refactor remove supper_access.
-		session(['super_access' => 1]);
+		DB::beginTransaction();
 
-		$return = QuestionAnswer::whereId($id)->pluck('correct_answer');
+		try {
 
-		Session::forget('super_access');
+			//TODO: Refactor remove supper_access.
+			session(['super_access' => 1]);
 
-		return $return;
+			$return = QuestionAnswer::whereId($id)->pluck('correct_answer');
+
+			Session::forget('super_access');
+
+			$response = $return;
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
-
+	/**
+	 * @param $id
+	 * @return bool
+	 */
 	public function getQuestionPointEquivalent($id){
 
-		return QuestionAnswer::whereId($id)->pluck('point_equivalent');
+		DB::beginTransaction();
+
+		try {
+
+			$response = QuestionAnswer::whereId($id)->pluck('point_equivalent');
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
-
-
-
-
 }

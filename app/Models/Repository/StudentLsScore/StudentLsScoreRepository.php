@@ -2,11 +2,14 @@
 namespace FutureEd\Models\Repository\StudentLsScore;
 
 use FutureEd\Models\Core\StudentLsScore;
+use FutureEd\Models\Traits\LoggerTrait;
+use Illuminate\Support\Facades\DB;
 use League\Flysystem\Exception;
 
 
 class StudentLsScoreRepository implements StudentLsScoreRepositoryInterface {
 
+	use LoggerTrait;
 
 	/**
 	 * Add record in storage
@@ -14,6 +17,8 @@ class StudentLsScoreRepository implements StudentLsScoreRepositoryInterface {
 	 * @return object
 	 */
 	public function addScore($data) {
+
+		DB::beginTransaction();
 
 		try {
 			
@@ -35,14 +40,18 @@ class StudentLsScoreRepository implements StudentLsScoreRepositoryInterface {
 				$student_ls_score = StudentLsScore::create($data);
 			}
 		
-		} catch(Exception $e) {
+		} catch (\Exception $e) {
 
-			return $e->getMessage();
+			DB::rollback();
 
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
 
-		return $student_ls_score;
+		DB::commit();
 
+		return $student_ls_score;
 	}
 
 

@@ -2,8 +2,12 @@
 namespace FutureEd\Models\Repository\VolumeDiscount;
 
 use FutureEd\Models\Core\VolumeDiscount;
+use FutureEd\Models\Traits\LoggerTrait;
+use Illuminate\Support\Facades\DB;
 
 class VolumeDiscountRepository implements VolumeDiscountRepositoryInterface {
+
+    use LoggerTrait;
 
     /**
      * Display a listing of VolumeDiscounts.
@@ -16,33 +20,50 @@ class VolumeDiscountRepository implements VolumeDiscountRepositoryInterface {
      */
     public function getVolumeDiscounts($criteria = array(), $limit = 0, $offset = 0) {
 
-        $volumeDiscounts = new VolumeDiscount();
+        DB::beginTransaction();
 
-        $count = 0;
+        try {
 
-        if(count($criteria) <= 0 && $limit == 0 && $offset == 0) {
+            $volumeDiscounts = new VolumeDiscount();
 
-            $count = $volumeDiscounts->count();
+            $count = 0;
 
-        } else {
+            if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
 
-            if(count($criteria) > 0) {
-                if(isset($criteria['min_seats'])) {
-                    $volumeDiscounts = $volumeDiscounts->minSeats($criteria['min_seats']);
+                $count = $volumeDiscounts->count();
+
+            } else {
+
+                if (count($criteria) > 0) {
+                    if (isset($criteria['min_seats'])) {
+                        $volumeDiscounts = $volumeDiscounts->minSeats($criteria['min_seats']);
+                    }
                 }
+
+                $count = $volumeDiscounts->count();
+
+                if ($limit > 0 && $offset >= 0) {
+                    $volumeDiscounts = $volumeDiscounts->offset($offset)->limit($limit);
+                }
+
             }
 
-            $count = $volumeDiscounts->count();
+            $volumeDiscounts = $volumeDiscounts->orderBy('min_seats', 'asc');
 
-            if($limit > 0 && $offset >= 0) {
-                $volumeDiscounts = $volumeDiscounts->offset($offset)->limit($limit);
-            }
+            $response = ['total' => $count, 'records' => $volumeDiscounts->get()->toArray()];
 
+        } catch (\Exception $e) {
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
         }
 
-        $volumeDiscounts = $volumeDiscounts->orderBy('min_seats', 'asc');
+        DB::commit();
 
-        return ['total' => $count, 'records' => $volumeDiscounts->get()->toArray()];
+        return $response;
+
     }
 
     /**
@@ -53,7 +74,22 @@ class VolumeDiscountRepository implements VolumeDiscountRepositoryInterface {
      * @return object
      */
     public function getVolumeDiscount($id){
-        return VolumeDiscount::find($id);
+
+        DB::beginTransaction();
+        try{
+
+            $response = VolumeDiscount::find($id);
+
+        }catch (\Exception $e){
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
+        }
+        DB::commit();
+
+        return $response;
     }
 
     /**
@@ -63,40 +99,84 @@ class VolumeDiscountRepository implements VolumeDiscountRepositoryInterface {
      *
      * @return object
      */
-
     public function updateVolumeDiscount($id,$volumeDiscount){
 
-        try{
+        DB::beginTransaction();
+
+        try {
+
             $result = VolumeDiscount::find($id);
-            return !is_null($result) ? $result->update($volumeDiscount) : false;
-        }catch(Exception $e){
-            return $e->getMessage();
+
+            $response = !is_null($result) ? $result->update($volumeDiscount) : false;
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
         }
+
+        DB::commit();
+
+        return $response;
     }
 
+    /**
+     * @param $volumeDiscount
+     * @return array|bool
+     */
     public function addVolumeDiscount($volumeDiscount){
 
+        DB::beginTransaction();
+
         try{
-            return VolumeDiscount::create($volumeDiscount)->toArray();
-        }catch(Exception $e){
-            return $e->getMessage();
+
+            $response = VolumeDiscount::create($volumeDiscount)->toArray();
+
+        }catch(\Exception $e){
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
         }
+
+        DB::commit();
+
+        return $response;
     }
+
     /**
      * Delete specific VolumeDiscount.
-     *
-     * @param  id	$volumeDiscount
-     *
-     * @return boolean
+     * @param $id
+     * @return bool
+     * @internal param id $volumeDiscount
      */
     public function deleteVolumeDiscount($id){
 
+        DB::beginTransaction();
+
         try{
+
             $result = VolumeDiscount::find($id);
-            return !is_null($result) ? $result->delete() : false;
-        }catch(Exception $e){
-            return $e->getMessage();
+
+            $response = !is_null($result) ? $result->delete() : false;
+
+        }catch(\Exception $e){
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
         }
+
+        DB::commit();
+
+        return $response;
     }
 
     /**
@@ -104,8 +184,24 @@ class VolumeDiscountRepository implements VolumeDiscountRepositoryInterface {
      *  @param $min_seats int
      *  @return object
      */
-
     public function getRoundedOffDiscount($min_seats){
-        return VolumeDiscount::floorMinSeats($min_seats)->orderBy('id', 'desc')->first();
+
+        DB::beginTransaction();
+        try{
+
+            $response = VolumeDiscount::floorMinSeats($min_seats)->orderBy('id', 'desc')->first();
+
+        }catch(\Exception $e){
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
+        }
+
+        DB::commit();
+
+        return $response;
     }
 }

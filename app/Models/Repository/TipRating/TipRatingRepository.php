@@ -1,41 +1,70 @@
 <?php namespace FutureEd\Models\Repository\TipRating;
 
 use FutureEd\Models\Core\TipRating;
+use FutureEd\Models\Traits\LoggerTrait;
+use Illuminate\Support\Facades\DB;
 use League\Flysystem\Exception;
 
 
 class TipRatingRepository implements TipRatingRepositoryInterface{
 
+	use LoggerTrait;
+
+	/**
+	 * @param $data
+	 * @return bool|static
+	 */
 	public function addTipRating($data){
+
+		DB::beginTransaction();
 
 		try {
 
-			$tip_rating = TipRating::create($data);
+			$response = TipRating::create($data);
 
-		} catch(Exception $e) {
+		} catch (\Exception $e) {
 
-			return $e->getMessage();
+			DB::rollback();
 
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
 
-		return $tip_rating;
+		DB::commit();
 
+		return $response;
 	}
 
 	/**
-	 *
-	 * @return average of rating field of a specific tip
+	 * Average of rating field of a specific tip
+	 * @param $tip_id
+	 * @return bool|float
 	 */
-
 	public function getAverageRating($tip_id){
 
-		$tip_rating = new TipRating();
+		DB::beginTransaction();
 
-		$average = $tip_rating->tipId($tip_id)->avg(config('futureed.tip_rating'));
+		try {
 
-		$average = round($average);
+			$tip_rating = new TipRating();
 
-		return $average;
+			$average = $tip_rating->tipId($tip_id)->avg(config('futureed.tip_rating'));
+
+			$response = round($average);
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 
 	}
 
