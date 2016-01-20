@@ -159,7 +159,7 @@ class GradeController extends ApiController
 
 		$grade = $this->grade->updateGrade($id, $data);
 
-		$grade = $country_grade->age_group_id;
+		$grade->age_group_id = $country_grade->age_group_id;
 
 		return $this->respondWithData([$grade]);
 
