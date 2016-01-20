@@ -3,6 +3,7 @@ namespace FutureEd\Models\Repository\ClientDiscount;
 
 use FutureEd\Models\Core\Client;
 use FutureEd\Models\Core\ClientDiscount;
+use Illuminate\Support\Facades\DB;
 
 class ClientDiscountRepository implements ClientDiscountRepositoryInterface
 {
