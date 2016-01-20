@@ -449,5 +449,26 @@ class StudentServices
 		return ($class_student) ? $class_student : null;
 	}
 
+	/**
+	 * Check students if it has class on the module.
+	 * @param $student_id
+	 * @param $module_id
+	 * @return bool
+	 */
+	public function checkStudentValidModule($student_id, $module_id){
+
+		$modules = $this->class_student->getStudentValidModule($student_id,$module_id);
+
+		if(empty($modules->toArray())){
+
+			return false;
+		}else {
+
+			return true;
+		}
+
+
+	}
+
 
 }
