@@ -320,12 +320,16 @@ function FutureedController($scope, $window, apiService, futureed) {
 							$scope.errorHandler(response.errors);
 						} else if(response.data){
 							if(response.data.records.length) {
-								$scope.user.class = Constants.TRUE;
+								if($scope.user != null){
+									$scope.user.class = Constants.TRUE;
+								}
 							}
 						}
 
-						$scope.getUserPoints();
-						$scope.updateUserData($scope.user);
+						if($scope.user){
+							$scope.getUserPoints();
+							$scope.updateUserData($scope.user);
+						}
 					}
 
 				}).error(function(response) {
@@ -345,8 +349,10 @@ function FutureedController($scope, $window, apiService, futureed) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data){
-					$scope.user.points = response.data.reward_points;
-					$scope.user.cash_points = response.data.cash_points;
+					if($scope.user){
+						$scope.user.points = response.data.reward_points;
+						$scope.user.cash_points = response.data.cash_points;
+					}
 				}
 			}
 

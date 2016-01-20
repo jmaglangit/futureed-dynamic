@@ -53,6 +53,11 @@ class ClassStudent extends Model {
 
 	}
 
+	public function student_classroom_module(){
+
+		return $this->hasOne('FutureEd\Models\Core\Classroom','id','class_id')->with('module');
+	}
+
 
 	//Scopes
 
@@ -180,5 +185,14 @@ class ClassStudent extends Model {
 
 	public function scopeSubscriptionStatus($query){
 		$query->where('subscription_status', config('futureed.active'));
+	}
+
+	public function scopeModule($query, $module_id){
+
+		return $query->whereHas('student_classroom_module', function($query) use ($module_id){
+			$query->whereHas('module', function($query) use ($module_id){
+				$query->whereId($module_id);
+			});
+		});
 	}
 }

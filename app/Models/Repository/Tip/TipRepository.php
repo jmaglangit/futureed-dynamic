@@ -4,252 +4,363 @@ namespace FutureEd\Models\Repository\Tip;
 
 use Carbon\Carbon;
 use FutureEd\Models\Core\Tip;
+use FutureEd\Models\Traits\LoggerTrait;
 use Illuminate\Support\Facades\DB;
 use League\Flysystem\Exception;
 
 
 class TipRepository implements TipRepositoryInterface{
 
-	//create record
+	use LoggerTrait;
+
+	/**
+	 * Create record
+	 * @param $data
+	 * @return bool|static
+	 */
 	public function addTip($data){
+
+		DB::beginTransaction();
 
 		try {
 
-			$tip = Tip::create($data);
+			$response = Tip::create($data);
 
-		} catch(Exception $e) {
+		} catch (\Exception $e) {
 
-			return $e->getMessage();
+			DB::rollback();
 
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
 
-		return $tip;
+		DB::commit();
 
-
-
+		return $response;
 	}
 
+	/**
+	 * @param array $criteria
+	 * @param int $limit
+	 * @param int $offset
+	 * @return array|bool
+	 */
 	public function getTips($criteria = array(), $limit = 0, $offset = 0){
 
-		$tip = new Tip();
+		DB::beginTransaction();
 
-		$tip = $tip->with('subject','module','subjectarea')->where('tip_status','!=','Rejected');
+		try {
 
-		$count = 0;
+			$tip = new Tip();
 
-		if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
+			$tip = $tip->with('subject', 'module', 'subjectarea')->where('tip_status', '!=', 'Rejected');
 
-			$count = $tip->count();
+			$count = 0;
 
-		} else {
+			if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
+
+				$count = $tip->count();
+
+			} else {
 
 
-			if (count($criteria) > 0) {
+				if (count($criteria) > 0) {
 
-				//for tip_status
-				if(isset($criteria['status'])) {
+					//for tip_status
+					if (isset($criteria['status'])) {
 
-					$tip = $tip->tipStatus($criteria['status']);
+						$tip = $tip->tipStatus($criteria['status']);
+
+					}
+
+					//check for link_type
+					if (isset($criteria['link_type'])) {
+
+						$tip = $tip->linkType($criteria['link_type']);
+					}
+
+					//check relation to subject
+					if (isset($criteria['subject'])) {
+
+						$tip = $tip->subjectName($criteria['subject']);
+					}
+
+					//check relation to module
+					if (isset($criteria['module'])) {
+
+						$tip = $tip->moduleName($criteria['module']);
+					}
+
+					//check relation to subject_area
+					if (isset($criteria['area'])) {
+
+						$tip = $tip->subjectAreaName($criteria['area']);
+					}
 
 				}
 
-				//check for link_type
-				if(isset($criteria['link_type'])){
+				$count = $tip->count();
 
-					$tip = $tip->linkType($criteria['link_type']);
-				}
-
-				//check relation to subject
-				if(isset($criteria['subject'])){
-
-					$tip = $tip->subjectName($criteria['subject']);
-				}
-
-				//check relation to module
-				if(isset($criteria['module'])){
-
-					$tip = $tip->moduleName($criteria['module']);
-				}
-
-				//check relation to subject_area
-				if(isset($criteria['area'])){
-
-					$tip = $tip->subjectAreaName($criteria['area']);
+				if ($limit > 0 && $offset >= 0) {
+					$tip = $tip->offset($offset)->limit($limit);
 				}
 
 			}
+			$tip = $tip->orderBy('created_at', 'desc');
+			$response = ['total' => $count, 'records' => $tip->get()->toArray()];
 
-			$count = $tip->count();
+		} catch (\Exception $e) {
 
-			if ($limit > 0 && $offset >= 0) {
-				$tip = $tip->offset($offset)->limit($limit);
-			}
+			DB::rollback();
 
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
-		$tip = $tip->orderBy('created_at', 'desc');
-		return ['total' => $count, 'records' => $tip->get()->toArray()];
 
+		DB::commit();
+
+		return $response;
 	}
 
+	/**
+	 * @param $id
+	 * @return bool|\Illuminate\Database\Eloquent\Collection|\Illuminate\Database\Eloquent\Model|\Illuminate\Support\Collection|null|static
+	 */
 	public function viewTip($id){
 
-		$tip = new Tip();
+		DB::beginTransaction();
 
-		$tip = $tip->with('subject','module','subjectarea','student');
-		$tip = $tip->find($id);
-		return $tip;	
+		try {
+			$tip = new Tip();
+
+			$tip = $tip->with('subject', 'module', 'subjectarea', 'student');
+
+			$response = $tip->find($id);
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 
 	}
 
+	/**
+	 * @param $id
+	 * @param $data
+	 * @return bool|int
+	 */
 	public function updateTip($id, $data){
+
+		DB::beginTransaction();
 
 		try{
 
-			return Tip::find($id)
+			$response = Tip::find($id)
 						->update($data);
 
-		} catch (Exception $e) {
+		} catch (\Exception $e) {
 
-			throw new Exception($e->getMessage());
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
 
+		DB::commit();
+
+		return $response;
 	}
 
+	/**
+	 * @param $id
+	 * @return bool|null
+	 */
 	public function deleteTip($id){
+
+		DB::beginTransaction();
 
 		try {
 
 			$tip = Tip::find($id);
 
-			return !is_null($tip) ? $tip->delete() : false;
+			$response = !is_null($tip) ? $tip->delete() : false;
 
-		} catch(Exception $e) {
+		} catch (\Exception $e) {
 
-			return $e->getMessage();
+			DB::rollback();
 
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
-	 *
-	 * @return list of tips under a class
+	 * List of tips under a class
+	 * @param array $criteria
+	 * @param int $limit
+	 * @param int $offset
+	 * @return array|bool
 	 */
 	public function viewClassTips($criteria = array(), $limit = 0, $offset = 0){
 
-		$tip = new Tip();
+		DB::beginTransaction();
 
-		$tip = $tip->with('subject','module','subjectarea','student')->where('tip_status','!=','Rejected');
+		try{
+			$tip = new Tip();
 
-		$count = 0;
+			$tip = $tip->with('subject', 'module', 'subjectarea', 'student')->where('tip_status', '!=', 'Rejected');
 
-		if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
+			$count = 0;
 
-			$count = $tip->count();
+			if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
 
-		} else {
+				$count = $tip->count();
 
-			if (count($criteria) > 0) {
+			} else {
 
-				//for class_id
-				if(isset($criteria['class_id'])) {
+				if (count($criteria) > 0) {
 
-					$tip = $tip->classId($criteria['class_id']);
+					//for class_id
+					if (isset($criteria['class_id'])) {
+
+						$tip = $tip->classId($criteria['class_id']);
+					}
+
+					//for module_id
+					if (isset($criteria['module_id'])) {
+
+						$tip = $tip->moduleId($criteria['module_id']);
+					}
+
+					//check for link_type
+					if (isset($criteria['link_type'])) {
+
+						$tip = $tip->linkType($criteria['link_type']);
+					}
+
+					//check for link_id
+					if (isset($criteria['link_id'])) {
+
+						$tip = $tip->linkId($criteria['link_id']);
+					}
+
+					//for title
+					if (isset($criteria['title'])) {
+
+						$tip = $tip->title($criteria['title']);
+					}
+
+
+					//for tip_status
+					if (isset($criteria['tip_status'])) {
+
+						$tip = $tip->tipStatus($criteria['tip_status']);
+
+					}
+
+					//for status
+					if (isset($criteria['status'])) {
+
+						$tip = $tip->status($criteria['status']);
+					}
+
+					//relation to student query creators name
+					if (isset($criteria['created'])) {
+
+						$tip = $tip->name($criteria['created']);
+
+					}
+
+					//check relation to subject
+					if (isset($criteria['subject'])) {
+
+						$tip = $tip->subjectName($criteria['subject']);
+					}
+
+					//check relation to subject_area
+					if (isset($criteria['area'])) {
+
+						$tip = $tip->subjectAreaName($criteria['area']);
+					}
+
 				}
 
-				//for module_id
-				if(isset($criteria['module_id'])) {
+				$count = $tip->count();
 
-					$tip = $tip->moduleId($criteria['module_id']);
-				}
+				if ($limit > 0 && $offset >= 0) {
+					$tip = $tip->offset($offset)->limit($limit);
 
-				//check for link_type
-				if(isset($criteria['link_type'])){
-
-					$tip = $tip->linkType($criteria['link_type']);
-				}
-
-				//check for link_id
-				if(isset($criteria['link_id'])){
-
-					$tip = $tip->linkId($criteria['link_id']);
-				}
-
-				//for title
-				if(isset($criteria['title'])) {
-
-					$tip = $tip->title($criteria['title']);
-				}
-
-
-				//for tip_status
-				if(isset($criteria['tip_status'])) {
-
-					$tip = $tip->tipStatus($criteria['tip_status']);
-
-				}
-
-				//for status
-				if(isset($criteria['status'])){
-
-					$tip = $tip->status($criteria['status']);
-				}
-
-				//relation to student query creators name
-				if(isset($criteria['created'])) {
-
-					$tip = $tip->name($criteria['created']);
-
-				}
-
-				//check relation to subject
-				if(isset($criteria['subject'])){
-
-					$tip = $tip->subjectName($criteria['subject']);
-				}
-
-				//check relation to subject_area
-				if(isset($criteria['area'])){
-
-					$tip = $tip->subjectAreaName($criteria['area']);
 				}
 
 			}
+			$tip = $tip->orderBy('created_at', 'desc');
 
+			$response = ['total' => $count, 'records' => $tip->get()->toArray()];
 
+		} catch (\Exception $e) {
 
-			$count = $tip->count();
+			DB::rollback();
 
-			if ($limit > 0 && $offset >= 0) {
-				$tip = $tip->offset($offset)->limit($limit);
+			$this->errorLog($e->getMessage());
 
-			}
-
+			return false;
 		}
-		$tip = $tip->orderBy('created_at', 'desc');
 
-		return ['total' => $count, 'records' => $tip->get()->toArray()];
+        DB::commit();
 
+        return $response;
 	}
 
 	/**
-	 *
-	 * @return  3 currently added general tips for student under a certain class
+	 * @param $class_id
+	 * @return bool
 	 */
-
 	public function viewCurrentTips($class_id){
 
-		$tip = new Tip();
+		DB::beginTransaction();
 
-		$tip = $tip->with('subject','module','subjectarea','student')->accepted();
-		$tip = $tip->general()->classId($class_id);
-		$tip = $tip->orderBy('created_at','desc')->take(config('futureed.tip_take'));
-		return $tip->get();
+		try{
+			$tip = new Tip();
 
+			$tip = $tip->with('subject', 'module', 'subjectarea', 'student')->accepted();
+			$tip = $tip->general()->classId($class_id);
+			$tip = $tip->orderBy('created_at', 'desc')->take(config('futureed.tip_take'));
+			$response = $tip->get();
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+        DB::commit();
+
+        return $response;
 	}
 
 	/**
 	 * @param $student_id
 	 * @param $subject_id
+	 * @return bool
 	 */
 	public function getStudentActiveTips($student_id, $subject_id){
 		//
@@ -264,13 +375,30 @@ class TipRepository implements TipRepositoryInterface{
 		//and o.date_start <= now() and o.date_end >= now()
 		//;
 
-		return Tip::select('tips.*')->leftJoin('classrooms as c','c.id','=','tips.class_id')
-			->leftJoin('orders as o','o.order_no','=','c.order_no')
-			->where('tips.student_id',$student_id)
-			->where('tips.subject_id',$subject_id)
-			->where('o.date_start','<=',Carbon::now())
-			->where('o.date_end','>=',Carbon::now())
-			->get();
+		DB::beginTransaction();
+
+		try {
+
+			$response = Tip::select('tips.*')->leftJoin('classrooms as c', 'c.id', '=', 'tips.class_id')
+				->leftJoin('orders as o', 'o.order_no', '=', 'c.order_no')
+				->where('tips.student_id', $student_id)
+				->where('tips.subject_id', $subject_id)
+				->where('o.date_start', '<=', Carbon::now())
+				->where('o.date_end', '>=', Carbon::now())
+				->get();
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 

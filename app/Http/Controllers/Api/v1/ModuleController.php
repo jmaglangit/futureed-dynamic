@@ -4,6 +4,9 @@ use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
 use FutureEd\Models\Repository\Module\ModuleRepositoryInterface;
+use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
+use FutureEd\Models\Repository\User\UserRepositoryInterface;
+use FutureEd\Services\StudentServices;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
@@ -11,11 +14,23 @@ class ModuleController extends ApiController {
 
 	protected $module;
 
+	protected $student_services;
+
+	protected $student;
+
+	protected $user;
+
 	public function __construct(
-		ModuleRepositoryInterface $moduleRepositoryInterface
+		ModuleRepositoryInterface $moduleRepositoryInterface,
+		StudentServices $studentServices,
+		StudentRepositoryInterface $studentRepositoryInterface,
+		UserRepositoryInterface $userRepositoryInterface
 	){
 
 		$this->module = $moduleRepositoryInterface;
+		$this->student_services = $studentServices;
+		$this->student = $studentRepositoryInterface;
+		$this->user = $userRepositoryInterface;
 
 	}
 
@@ -83,6 +98,25 @@ class ModuleController extends ApiController {
 	 */
 	public function show($id)
 	{
+
+		//check if user is student
+		$user = $this->user->getUser(session('current_user'));
+
+		if($user->user_type == config('futureed.student')){
+
+			//get student id
+			$student_id = $this->student->getStudentId(session('current_user'));
+
+			//validate student if it has access.
+
+			$is_valid = $this->student_services->checkStudentValidModule($student_id,$id);
+
+			if(!$is_valid){
+
+				return $this->respondErrorMessage(2070);
+			}
+		}
+
 		return $this->respondWithData(
 			$this->module->viewModule($id)
 		);

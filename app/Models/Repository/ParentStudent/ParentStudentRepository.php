@@ -2,52 +2,111 @@
 
 
 use FutureEd\Models\Core\ParentStudent;
+use FutureEd\Models\Traits\LoggerTrait;
+use Illuminate\Support\Facades\DB;
 
 class ParentStudentRepository implements ParentStudentRepositoryInterface{
 
-    //add record to db
+    use LoggerTrait;
+
+	/**
+     * Add record.
+     * @param $data
+     * @return bool|ParentStudent|static
+     */
     public function addParentStudent($data){
 
-        $parent_student  = new ParentStudent();
-
+        DB::beginTransaction();
 
         try {
 
+            $parent_student = new ParentStudent();
+
             $parent_student = $parent_student->create($data);
 
-        } catch(Exception $e) {
+        } catch (\Exception $e) {
 
-            return $e->getMessage();
+            DB::rollback();
 
+            $this->errorLog($e->getMessage());
+
+            return false;
         }
 
+        DB::commit();
+
         return $parent_student;
     }
 
-    //check if parent added already a specific student
+   	/**
+     * Check if parent added a specific student.
+     * @param $parent_id
+     * @param $student_id
+     * @return bool|ParentStudent
+     */
     public function checkParentStudent($parent_id,$student_id){
 
-        $parent_student = new ParentStudent();
+        DB::beginTransaction();
 
-        $parent_student = $parent_student->parentId($parent_id);
-        $parent_student = $parent_student->studentId($student_id)->pluck('id');
+        try {
+            $parent_student = new ParentStudent();
+
+            $parent_student = $parent_student->parentId($parent_id);
+            $parent_student = $parent_student->studentId($student_id)->pluck('id');
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
+        }
+
+        DB::commit();
 
         return $parent_student;
 
+
     }
 
+	/**
+     * @param $invitation_code
+     * @param $parent_id
+     * @return bool|ParentStudent
+     */
     public function checkInvitationCode($invitation_code,$parent_id){
 
-        $parent_student = new ParentStudent();
+        DB::beginTransaction();
 
-        $parent_student = $parent_student->invitationCode($invitation_code);
-        $parent_student = $parent_student->parentId($parent_id)->first();
+        try {
+            $parent_student = new ParentStudent();
+
+            $parent_student = $parent_student->invitationCode($invitation_code);
+            $parent_student = $parent_student->parentId($parent_id)->first();
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
+        }
+
+        DB::commit();
 
         return $parent_student;
     }
 
+	/**
+     * @param $id
+     * @param $data
+     * @return bool|\Illuminate\Support\Collection|null|static
+     */
     public function updateParentStudent($id,$data){
 
+        DB::beginTransaction();
 
         try {
 
@@ -55,27 +114,52 @@ class ParentStudentRepository implements ParentStudentRepositoryInterface{
 
             $parent_student->update($data);
 
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
 
-            return $e->getMessage();
+            DB::rollback();
 
+            $this->errorLog($e->getMessage());
+
+            return false;
         }
+
+        DB::commit();
 
         return $parent_student;
-
     }
 
+	/**
+     * @param $criteria
+     * @return bool
+     */
     public function getParentStudents($criteria)
     {
-        $parentStudent = new ParentStudent();
+        DB::beginTransaction();
 
-        if(isset($criteria['parent_id'])){
-            $parentStudent = $parentStudent->parentId($criteria['parent_id']);
+        try {
+
+            $parentStudent = new ParentStudent();
+
+            if (isset($criteria['parent_id'])) {
+                $parentStudent = $parentStudent->parentId($criteria['parent_id']);
+            }
+
+            $parentStudent = $parentStudent->with('student')->userConfirmed();
+
+            $response = $parentStudent->get();
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
         }
 
-        $parentStudent = $parentStudent->with('student')->userConfirmed();
+        DB::commit();
 
-        return $parentStudent->get();
+        return $response;
     }
 
     /**
@@ -86,12 +170,25 @@ class ParentStudentRepository implements ParentStudentRepositoryInterface{
      */
     public function deleteParentStudent($id)
     {
+        DB::beginTransaction();
+
         try {
+
             $result = ParentStudent::find($id);
-            return !is_null($result) ? $result->delete() : false;
-        } catch (Exception $e) {
-            return $e->getMessage();
+            $response = !is_null($result) ? $result->delete() : false;
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
         }
+
+        DB::commit();
+
+        return $response;
     }
 
     /**
@@ -102,12 +199,23 @@ class ParentStudentRepository implements ParentStudentRepositoryInterface{
      */
     public function deleteParentStudentByParentId($parent_id)
     {
+        DB::beginTransaction();
+
         try {
             $result = ParentStudent::parentId($parent_id);
-            return !is_null($result) ? $result->delete() : false;
-        } catch (Exception $e) {
-            return $e->getMessage();
+            $response = !is_null($result) ? $result->delete() : false;
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
         }
+
+        DB::commit();
+
+        return $response;
     }
 
 }

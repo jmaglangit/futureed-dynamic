@@ -43,10 +43,6 @@ interface UserRepositoryInterface {
 
 	public function getEmail($id);
 
-	public function setAccessToken($access_token);
-
-	public function getAccessToken($id);
-
 	public function getConfirmationCode($id);
 
 	public function updateResetCode($id, $code);

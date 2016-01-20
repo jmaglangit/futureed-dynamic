@@ -984,5 +984,30 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 		return $response;
 	}
 
+	/**
+	 * Get modules listed on the classroom.
+	 * @param $student_id
+	 * @param $module_id
+	 * @return bool
+	 */
+	public function getStudentValidModule($student_id, $module_id){
+
+		DB::beginTransaction();
+		try{
+
+			$response = ClassStudent::with('student_classroom_module')->module($module_id)->get();
+		}catch (Exception $e){
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+	}
+
 
 }

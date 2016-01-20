@@ -2,8 +2,12 @@
 namespace FutureEd\Models\Repository\Subscription;
 
 use FutureEd\Models\Core\Subscription;
+use FutureEd\Models\Traits\LoggerTrait;
+use Illuminate\Support\Facades\DB;
 
 class SubscriptionRepository implements SubscriptionRepositoryInterface {
+
+    use LoggerTrait;
 
 	/**
 	 * Display a listing of subscriptions.
@@ -15,34 +19,51 @@ class SubscriptionRepository implements SubscriptionRepositoryInterface {
 	 * @return array
 	 */
     public function getSubscriptions($criteria = array(), $limit = 0, $offset = 0) {
-		
-		$subscriptions = new Subscription();
-		
-		$count = 0;
-		
-		if(count($criteria) <= 0 && $limit == 0 && $offset == 0) {
-			
-			$count = $subscriptions->count();
-		
-		} else {
-			
-			if(count($criteria) > 0) {
-				if(isset($criteria['name'])) {
-					$subscriptions = $subscriptions->name($criteria['name']);
-				}				
-			}
-		
-			$count = $subscriptions->count();
-		
-			if($limit > 0 && $offset >= 0) {
-				$subscriptions = $subscriptions->offset($offset)->limit($limit);
-			}
-														
-		}
-		
-		$subscriptions = $subscriptions->orderBy('name', 'asc');
-		
-		return ['total' => $count, 'records' => $subscriptions->get()->toArray()];	
+
+        DB::beginTransaction();
+
+        try {
+
+            $subscriptions = new Subscription();
+
+            $count = 0;
+
+            if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
+
+                $count = $subscriptions->count();
+
+            } else {
+
+                if (count($criteria) > 0) {
+                    if (isset($criteria['name'])) {
+                        $subscriptions = $subscriptions->name($criteria['name']);
+                    }
+                }
+
+                $count = $subscriptions->count();
+
+                if ($limit > 0 && $offset >= 0) {
+                    $subscriptions = $subscriptions->offset($offset)->limit($limit);
+                }
+
+            }
+
+            $subscriptions = $subscriptions->orderBy('name', 'asc');
+
+            $response = ['total' => $count, 'records' => $subscriptions->get()->toArray()];
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
+        }
+
+        DB::commit();
+
+        return $response;
 	}
 
     /**
@@ -53,7 +74,25 @@ class SubscriptionRepository implements SubscriptionRepositoryInterface {
 	 * @return object
 	 */
     public function getSubscription($id){
-        return Subscription::find($id);
+
+        DB::beginTransaction();
+
+        try {
+
+            $response = Subscription::find($id);
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
+        }
+
+        DB::commit();
+
+        return $response;
     }
     
      /**
@@ -63,42 +102,83 @@ class SubscriptionRepository implements SubscriptionRepositoryInterface {
 	 *
 	 * @return object
 	 */
-	 
     public function updateSubscription($id,$subscription){
-    
+
+        DB::beginTransaction();
+
         try{
+
             $result = Subscription::find($id);
-            return !is_null($result) ? $result->update($subscription) : false;
-        }catch(Exception $e){
-            return $e->getMessage();
+
+            $response =  !is_null($result) ? $result->update($subscription) : false;
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
         }
+
+        DB::commit();
+
+        return $response;
     }
-    
+
+    /**
+     * @param $subscription
+     * @return array|bool
+     */
     public function addSubscription($subscription){
 
-        $subscription['created_by'] = 1;
-        $subscription['updated_by'] = 1;
-    
+        DB::beginTransaction();
+
         try{
-            return Subscription::create($subscription)->toArray();
-        }catch(Exception $e){
-            return $e->getMessage();        
+
+            $response = Subscription::create($subscription)->toArray();
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
         }
+
+        DB::commit();
+
+        return $response;
     }
-     /**
-	 * Delete specific subscription.
-	 *
-	 * @param  id	$subscription
-	 *
-	 * @return boolean
-	 */
+
+    /**
+     * Delete specific subscription.
+     * @param $id
+     * @return bool
+     * @internal param id $subscription
+     */
     public function deleteSubscription($id){
-        
+
+        DB::beginTransaction();
+
         try{
+
             $result = Subscription::find($id);
-            return !is_null($result) ? $result->delete() : false;
-        }catch(Exception $e){
-            return $e->getMessage();
+
+            $response = !is_null($result) ? $result->delete() : false;
+
+        } catch (\Exception $e) {
+
+            DB::rollback();
+
+            $this->errorLog($e->getMessage());
+
+            return false;
         }
+
+        DB::commit();
+
+        return $response;
     }
 }

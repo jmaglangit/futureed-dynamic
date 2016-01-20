@@ -20,35 +20,49 @@ class StudentRepository implements StudentRepositoryInterface
 	public function getStudents($criteria = array(), $limit = 0, $offset = 0)
 	{
 
-		$student = new Student();
+		DB::beginTransaction();
 
-		if(isset($criteria['name'])){
+		try {
+			$student = new Student();
 
-			$student = $student->name($criteria['name']);
+			if (isset($criteria['name'])) {
+
+				$student = $student->name($criteria['name']);
+			}
+
+			if (isset($criteria['client_id'])) {
+
+				$student = $student->parentid($criteria['client_id']);
+			}
+
+			$student = $student->with('user', 'parent');
+
+			$count = $student->get()->count();
+
+			if ($offset >= 0 && $limit > 0) {
+
+				$student = $student->skip($offset)->take($limit);
+			}
+
+			$records = $student->get();
+
+			$response = [
+				'total' => $count,
+				'record' => $records
+			];
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
 
-		if(isset($criteria['client_id'])){
+		DB::commit();
 
-			$student = $student->parentid($criteria['client_id']);
-		}
-
-		$student = $student->with('user','parent');
-
-		$count = $student->get()->count();
-
-		if ($offset >= 0 && $limit > 0) {
-
-			$student = $student->skip($offset)->take($limit);
-		}
-
-		$records = $student->get();
-
-
-		Return [
-			'total' => $count,
-			'record' => $records
-		];
-
+		return $response;
 
 	}
 
@@ -59,8 +73,24 @@ class StudentRepository implements StudentRepositoryInterface
 	 */
 	public function getStudent($id)
 	{
-		return Student::with('user')->find($id);
+		DB::beginTransaction();
 
+		try {
+
+			$response = Student::with('user')->find($id);
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 
@@ -70,7 +100,25 @@ class StudentRepository implements StudentRepositoryInterface
 	 * @return mixed
 	 */
 	public function getUserId($id){
-		return Student::whereId($id)->pluck('user_id');
+
+		DB::beginTransaction();
+
+		try {
+
+			$response = Student::whereId($id)->pluck('user_id');
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -81,8 +129,24 @@ class StudentRepository implements StudentRepositoryInterface
 	public function getStudentDetail($id)
 	{
 
-		return Student::where('user_id', $id)->first();
+		DB::beginTransaction();
 
+		try {
+
+			$response = Student::where('user_id', $id)->first();
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -92,18 +156,24 @@ class StudentRepository implements StudentRepositoryInterface
 	 */
 	public function addStudent($student)
 	{
-			try {
+		DB::beginTransaction();
 
-				 Student::create($student);
+		try {
 
-			} catch(Exception $e) {
+			$response = Student::create($student);
 
-				return $e->getMessage();
+		} catch (\Exception $e) {
 
-			}
+			DB::rollback();
 
-			return true;
+			$this->errorLog($e->getMessage());
 
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -113,18 +183,26 @@ class StudentRepository implements StudentRepositoryInterface
 	 */
 	public function deleteStudent($id)
 	{
+		DB::beginTransaction();
+
 		try {
 
 			$student = Student::find($id);
 
-			return !is_null($student) ? $student->delete() : false;
+			$response = !is_null($student) ? $student->delete() : false;
 
-		} catch(Exception $e) {
+		} catch (\Exception $e) {
 
-			return $e->getMessage();
+			DB::rollback();
 
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
 
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -134,25 +212,53 @@ class StudentRepository implements StudentRepositoryInterface
 	 */
 	public function getImagePassword($id)
 	{
+		DB::beginTransaction();
 
-		return Student::where('id', '=', $id)->pluck('password_image_id');
+		try {
 
+			$response = Student::where('id', '=', $id)->pluck('password_image_id');
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
 	 * Update student image password.
 	 * @param $data
+	 * @return bool
 	 * @throws Exception
 	 */
 	public function updateImagePassword($data)
 	{
+		DB::beginTransaction();
 
 		try {
-			Student::where('id', $data['id'])
+
+			$response = Student::where('id', $data['id'])
 				->update(['password_image_id' => $data['password_image_id']]);
-		} catch (Exception $e) {
-			throw new Exception($e->getMessage());
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -162,10 +268,25 @@ class StudentRepository implements StudentRepositoryInterface
 	 */
 	public function getStudentParent($parent_id)
 	{
+		DB::beginTransaction();
 
-		return Student::select('id', 'avatar_id', 'first_name', 'last_name')
-			->where('parent_id', '=', $parent_id)->get()->toArray();
+		try {
 
+			$response = Student::select('id', 'avatar_id', 'first_name', 'last_name')
+				->where('parent_id', '=', $parent_id)->get()->toArray();
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -176,20 +297,27 @@ class StudentRepository implements StudentRepositoryInterface
 	 */
 	public function saveStudentAvatar($data)
 	{
+		DB::beginTransaction();
 
 		try {
+
 			Student::where('id', $data['id'])
 				->update(['avatar_id' => $data['avatar_id']]);
 
-			return true;
+			$response = true;
 
-		} catch (Exception $e) {
+		} catch (\Exception $e) {
 
-			throw new Exception($e->getMessage());
+			DB::rollback();
 
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
 
+		DB::commit();
 
+		return $response;
 	}
 
 	/**
@@ -200,14 +328,31 @@ class StudentRepository implements StudentRepositoryInterface
 	public function getReferences($id)
 	{
 
-		return Student::select(
-			'user_id',
-			'grade_code',
-			'avatar_id',
-			'school_code',
-			'learning_style_id',
-			'password_image_id'
-		)->where('id', '=', $id)->first();
+		DB::beginTransaction();
+
+		try {
+
+			$response = Student::select(
+				'user_id',
+				'grade_code',
+				'avatar_id',
+				'school_code',
+				'learning_style_id',
+				'password_image_id'
+			)->where('id', '=', $id)->first();
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -218,18 +363,26 @@ class StudentRepository implements StudentRepositoryInterface
 	 */
 	public function updateStudentDetails($id, $data)
 	{
+		DB::beginTransaction();
+
 		try {
 
 			$student = Student::find($id);
 
-			$student->update($data);
+			$response = $student->update($data);
 
-		} catch(Exception $e) {
+		} catch (\Exception $e) {
 
-			return $e->getMessage();
+			DB::rollback();
 
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
-		return $student;
+
+		DB::commit();
+
+		return $response;
 	}
 
 
@@ -240,7 +393,24 @@ class StudentRepository implements StudentRepositoryInterface
 	 */
 	public function getStudentId($user_id)
 	{
-		return Student::userId($user_id)->pluck('id');
+		DB::beginTransaction();
+
+		try {
+
+			$response = Student::userId($user_id)->pluck('id');
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 
@@ -248,18 +418,31 @@ class StudentRepository implements StudentRepositoryInterface
 	 * Change student password image.
 	 * @param $id
 	 * @param $password_image_id
+	 * @return bool
 	 * @throws Exception
 	 */
 	public function changePasswordImage($id, $password_image_id)
 	{
 
+		DB::beginTransaction();
+
 		try {
-			Student::where('id', $id)
+
+			$response = Student::where('id', $id)
 				->update(['password_image_id' => $password_image_id]);
-		} catch (Exception $e) {
-			throw new Exception($e->getMessage());
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
 
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -270,8 +453,25 @@ class StudentRepository implements StudentRepositoryInterface
 	public function checkIdExist($id)
 	{
 
-		return Student::where('id', $id)
-			->pluck('id');
+		DB::beginTransaction();
+
+		try {
+
+			$response = Student::where('id', $id)
+				->pluck('id');
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -283,43 +483,57 @@ class StudentRepository implements StudentRepositoryInterface
 	 */
 	public function getStudentList($criteria = [], $limit = 0, $offset = 0)
 	{
+		DB::beginTransaction();
 
+		try {
 
-		$student = new Student();
-		$count = 0;
+			$student = new Student();
+			$count = 0;
 
-		if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
+			if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
 
-			$count = $student->count();
+				$count = $student->count();
 
-		} else {
+			} else {
 
-			if (count($criteria) > 0) {
-				if (isset($criteria['name'])) {
+				if (count($criteria) > 0) {
+					if (isset($criteria['name'])) {
 
-					$student = $student->with('user')->name($criteria['name']);
+						$student = $student->with('user')->name($criteria['name']);
+
+					}
+					if (isset($criteria['email'])) {
+
+						$student = $student->with('user')->email($criteria['email']);
+
+					}
 
 				}
-				if (isset($criteria['email'])) {
 
-					$student = $student->with('user')->email($criteria['email']);
+				$count = $student->count();
 
+				if ($limit > 0 && $offset >= 0) {
+					$student = $student->with('user')->offset($offset)->limit($limit);
 				}
 
 			}
 
-			$count = $student->count();
+			$student = $student->with('user')->orderBy('last_name', 'asc');
 
-			if ($limit > 0 && $offset >= 0) {
-				$student = $student->with('user')->offset($offset)->limit($limit);
-			}
+			$response = ['total' => $count, 'records' => $student->get()->toArray()];
 
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
 
-		$student = $student->with('user')->orderBy('last_name', 'asc');
+		DB::commit();
 
-		return ['total' => $count, 'records' => $student->get()->toArray()];
-
+		return $response;
 
 	}
 
@@ -331,15 +545,27 @@ class StudentRepository implements StudentRepositoryInterface
 	public function viewStudent($id)
 	{
 
-		$student = new Student();
+		DB::beginTransaction();
 
-		$student = $student->with('user', 'school', 'grade', 'parent')->where('id', $id)->orderBy('created_at', 'desc');
+		try {
+			$student = new Student();
 
-		$student = $student->first();
+			$student = $student->with('user', 'school', 'grade', 'parent')->where('id', $id)->orderBy('created_at', 'desc');
 
-		return $student;
+			$response = $student->first();
 
+		} catch (\Exception $e) {
 
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -350,13 +576,25 @@ class StudentRepository implements StudentRepositoryInterface
 	public function viewStudentClassBadge($id)
 	{
 
-		$student = new Student();
+		DB::beginTransaction();
 
-		$student = $student->with('badge','classroom')->where('id', $id)->orderBy('created_at','desc')->first();
+		try {
+			$student = new Student();
 
-		return $student;
+			$response = $student->with('badge', 'classroom')->where('id', $id)->orderBy('created_at', 'desc')->first();
 
+		} catch (\Exception $e) {
 
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -368,92 +606,138 @@ class StudentRepository implements StudentRepositoryInterface
 	 */
 	public function getStudentListByClient($criteria = [], $limit = 0, $offset = 0){
 
-		$student = new Student();
-		$count = 0;
+		DB::beginTransaction();
 
-		if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
+		try {
+			$student = new Student();
+			$count = 0;
 
-			$count = $student->count();
+			if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
 
-		} else {
+				$count = $student->count();
 
-			if (count($criteria) > 0) {
-				if (isset($criteria['name'])) {
+			} else {
 
-					$student = $student->with('user')->name($criteria['name']);
+				if (count($criteria) > 0) {
+					if (isset($criteria['name'])) {
 
-				}
-				if (isset($criteria['email'])) {
+						$student = $student->with('user')->name($criteria['name']);
 
-					$student = $student->with('user')->email($criteria['email']);
+					}
+					if (isset($criteria['email'])) {
 
-				}
+						$student = $student->with('user')->email($criteria['email']);
 
-				if(isset($criteria['client_id'])){
-
-					//check if client_role is a Parent
-					if($criteria['client_role'] === config('futureed.parent')){
-
-						$student = $student->with('parent')->parent($criteria['client_id']);
 					}
 
-					//check if client_role is a Teacher
-					if($criteria['client_role'] === config('futureed.teacher')){
+					if (isset($criteria['client_id'])) {
 
-						$student = $student->with('studentclassroom')->teacher($criteria['client_id']);
-						$student = $student->isDateRemovedNull();
+						//check if client_role is a Parent
+						if ($criteria['client_role'] === config('futureed.parent')) {
+
+							$student = $student->with('parent')->parent($criteria['client_id']);
+						}
+
+						//check if client_role is a Teacher
+						if ($criteria['client_role'] === config('futureed.teacher')) {
+
+							$student = $student->with('studentclassroom')->teacher($criteria['client_id']);
+							$student = $student->isDateRemovedNull();
+						}
+
+						$student = $student->noConfirmationCode();
+
 					}
 
-					$student = $student->noConfirmationCode();
+				}
 
+				$count = $student->count();
+
+				if ($limit > 0 && $offset >= 0) {
+					$student = $student->with('user')->offset($offset)->limit($limit);
 				}
 
 			}
 
-			$count = $student->count();
+			$student = $student->with('user')->orderBy('last_name', 'asc');
 
-			if ($limit > 0 && $offset >= 0) {
-				$student = $student->with('user')->offset($offset)->limit($limit);
-			}
+			$response = ['total' => $count, 'records' => $student->get()->toArray()];
 
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
 
-		$student = $student->with('user')->orderBy('last_name', 'asc');
+		DB::commit();
 
-		return ['total' => $count, 'records' => $student->get()->toArray()];
-
+		return $response;
 	}
 
-	//get student details with registration token
 	/**
+	 * Get student details with registration token.
 	 * @param $id
 	 * @param $reg_token
 	 * @return mixed
 	 */
 	public function viewStudentByToken($id,$reg_token){
 
-		$student = new Student();
+		DB::beginTransaction();
 
-		$student = $student->with('user','school','grade')->token($reg_token)->id($id);
+		try {
 
-		return $student->get()->toArray();
+			$student = new Student();
 
+			$student = $student->with('user', 'school', 'grade')->token($reg_token)->id($id);
+
+			$response = $student->get()->toArray();
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
-
-	//get subscription
 	/**
+	 * Get subscription
 	 * @param $id
 	 * @return mixed
 	 */
 	public function subscriptionExpired($id)
 	{
 
-		$student = new Student();
+		DB::beginTransaction();
 
-		$student = $student->with('studentclassroom')->subscription()->id($id);
+		try {
+			$student = new Student();
 
-		return $student->get()->toArray();
+			$student = $student->with('studentclassroom')->subscription()->id($id);
+
+			$response = $student->get()->toArray();
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -464,40 +748,59 @@ class StudentRepository implements StudentRepositoryInterface
 	 */
 	public function updateSchool($id,$school_code){
 
+		DB::beginTransaction();
+
 		try{
 
-			return Student::find($id)
+			$response = Student::find($id)
 				->update([
 					'school_code' => $school_code
 				]);
 
-		} catch (Exception $e) {
+		} catch (\Exception $e) {
 
-			throw new Exception($e->getMessage());
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
 
+		DB::commit();
+
+		return $response;
 	}
-	
+
 	/**
 	 * Update the learning style ID
-	 * @param $ls_banding
+	 * @param $id
+	 * @param $learning_style_id
 	 * @return Object
+	 * @internal param $ls_banding
 	 */
-
 	public function updateLearningStyle($id, $learning_style_id) {
+
+		DB::beginTransaction();
 
 		try{
 
-			return Student::find($id)
+			$response = Student::find($id)
 				->update([
 					'learning_style_id' => $learning_style_id
 				]);
 
-		} catch (Exception $e) {
+		} catch (\Exception $e) {
 
-			throw new Exception($e->getMessage());
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
 		}
 
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -512,7 +815,6 @@ class StudentRepository implements StudentRepositoryInterface
 		try{
 
 			//Add user table
-//			$data = array_add($data,'username','NA');
 
 			$data = array_add($data, 'name',$data['first_name'] . ' ' . $data['last_name']);
 
@@ -552,7 +854,24 @@ class StudentRepository implements StudentRepositoryInterface
 	 */
 	public function getStudentByFacebook($facebook_id) {
 
-		return Student::with('user')->facebookId($facebook_id)->get();
+		DB::beginTransaction();
+
+		try {
+
+			$response = Student::with('user')->facebookId($facebook_id)->get();
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -567,8 +886,6 @@ class StudentRepository implements StudentRepositoryInterface
 		try{
 
 			//Add user table
-//			$data = array_add($data,'username','NA');
-
 			$data = array_add($data, 'name',$data['first_name'] . ' ' . $data['last_name']);
 
 			//Set client to active.
@@ -606,7 +923,24 @@ class StudentRepository implements StudentRepositoryInterface
 	 */
 	public function getStudentByGoogleId($google_id){
 
-		return Student::with('user')->googleId($google_id)->get();
+		DB::beginTransaction();
+
+		try {
+
+			$response = Student::with('user')->googleId($google_id)->get();
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -615,7 +949,24 @@ class StudentRepository implements StudentRepositoryInterface
 	 */
 	public function getStudentPoints($student_id){
 
-		return Student::whereId($student_id)->pluck('points');
+		DB::beginTransaction();
+
+		try {
+
+			$response = Student::whereId($student_id)->pluck('points');
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 	/**
@@ -624,7 +975,23 @@ class StudentRepository implements StudentRepositoryInterface
 	 */
 	public function getStudentPointsUsed($student_id){
 
-		return Student::whereId($student_id)->pluck('points_used');
+		DB::beginTransaction();
+
+		try {
+
+			$response = Student::whereId($student_id)->pluck('points_used');
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
 	}
 
 
