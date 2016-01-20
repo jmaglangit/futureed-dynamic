@@ -316,7 +316,7 @@ class ClientRepository implements ClientRepositoryInterface
 	 */
 	public function getClients($criteria = array(), $limit = 0, $offset = 0)
 	{
-		use LoggerTrait;
+		DB::beginTransaction();
 
 		try{
 			$clients = new Client();
