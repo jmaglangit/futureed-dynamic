@@ -151,7 +151,7 @@ class AdminRepository implements  AdminRepositoryInterface {
 		
 			$admin = Admin::find($id);
 
-			$response = $admin->update($data);
+			$admin->update($data);
 
 		} catch(\Exception $e) {
 			DB::rollback();
@@ -164,7 +164,7 @@ class AdminRepository implements  AdminRepositoryInterface {
 
 		DB::commit();
 		
-		return $response;
+		return $admin;
 	}
 
 	public function deleteAdmin($id) {
