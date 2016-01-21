@@ -124,6 +124,8 @@ class StudentModuleController extends ApiController {
 	{
 		$data = $request->only('last_viewed_content_id','last_answered_question_id');
 
+		$return = $this->student_module->updateStudentActivity($id,$data);
+
 		//check if question id still exist else value 0.
 		$student_module = $this->student_module->getStudentModule($id);
 		$question = $this->question->getEnabledQuestion($student_module->last_answered_question_id);
@@ -134,8 +136,6 @@ class StudentModuleController extends ApiController {
 			//check for non-existing questions.
 			$this->student_module_services->checkEnabledQuestions($id,$student_module->module_id);
 		}
-
-		$return = $this->student_module->updateStudentActivity($id,$data);
 
 		if($return <> true){
 
