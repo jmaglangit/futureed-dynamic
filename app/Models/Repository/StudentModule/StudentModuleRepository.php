@@ -214,9 +214,9 @@ class StudentModuleRepository implements StudentModuleRepositoryInterface
 		try{
 			$response = StudentModule::find($id)
 				->update([
-					'last_viewed_content_id' => isset($data['last_viewed_content_id'])
+					'last_viewed_content_id' => ($data['last_viewed_content_id'])
 						? $data['last_viewed_content_id'] : $student_module->last_viewed_content_id,
-					'last_answered_question_id' => isset($data['last_answered_question_id'])
+					'last_answered_question_id' => ($data['last_answered_question_id'])
 						? $data['last_answered_question_id'] : $student_module->last_answered_question_id
 				]);
 
