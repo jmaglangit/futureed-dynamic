@@ -16,6 +16,7 @@
 				<li class="item avtrcon" ng-repeat="accessory in profile.avatar_accessories">
 					<img ng-src="{! accessory.url !}" ng-class="!accessory.is_bought ? 'greyscale' : ''" alt="{! accessory.name !}">
 					<p ng-if="!accessory.is_bought" class="text-gold text-center">{! accessory.points_to_unlock !} points</p>
+					<p ng-if="!accessory.is_bought" class="text-gold text-center">{! accessory.name !}</p>
 					{!! Form::button('BUY'
 						, array(
 							'class' => 'btn btn-maroon btn-medium center-block'
