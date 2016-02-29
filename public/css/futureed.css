@@ -569,6 +569,23 @@ li.active .rnd-identifier{
     margin: 0 auto;
 }
 
+.avtr-accessory, .detcon{
+	padding: 20px 0;
+	float: left;
+}
+.avtr-accessory{
+	width: 30%;
+}
+
+.avtr-accessory img {
+	width: 110px;
+	height: 110px;
+	border: 5px solid #fff;
+	background: #fff;
+	display: block;
+	margin: 0 auto;
+}
+
 .avatar_list img {
     width: 100px;
     height: 100px;

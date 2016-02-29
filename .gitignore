@@ -1,5 +1,8 @@
 .DS_Store
 /bootstrap/compiled.php
+/public/csv
+/public/images
+/public/downloads
 /vendor
 /node_modules
 .env
