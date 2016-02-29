@@ -1,5 +1,6 @@
 .DS_Store
 /bootstrap/compiled.php
+/public/csv
 /vendor
 /node_modules
 .env
