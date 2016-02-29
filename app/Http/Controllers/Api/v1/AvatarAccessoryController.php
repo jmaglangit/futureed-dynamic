@@ -30,6 +30,8 @@ class AvatarAccessoryController extends ApiController {
 	 */
 	public function getAvatarAccessories(AvatarAccessoryRequest $request)
 	{
+		//TODO: Add Pagination.
+
 		$student_id = $request->only('student_id');
 		$avatar_accessory = $this->avatar->getAvatarAccessories($student_id);
 		if($avatar_accessory){
