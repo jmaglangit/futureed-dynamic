@@ -13,7 +13,7 @@
 					</li>
 			</div>
 			<ul class="avatar_list list-unstyled list-inline" ng-init="profile.getAvatarAccessories()">
-				<li class="item avtrcon" ng-repeat="accessory in profile.avatar_accessories">
+				<li class="item avtr-accessory" ng-repeat="accessory in profile.avatar_accessories">
 					<img ng-src="{! accessory.url !}" ng-class="!accessory.is_bought ? 'greyscale' : ''" alt="{! accessory.name !}">
 					<p ng-if="!accessory.is_bought" class="text-gold text-center">{! accessory.points_to_unlock !} points</p>
 					<p ng-if="!accessory.is_bought" class="text-gold text-center">{! accessory.name !}</p>
