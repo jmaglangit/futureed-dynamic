@@ -284,13 +284,12 @@ class ClientController extends ApiController {
 
 		if (strcasecmp($client['client_role'], config('futureed.parent')) == 0) {
 
-			$this->addMessageBag($this->validateString($client, 'street_address'));
-			$this->addMessageBag($this->validateAlphaSpace($client, 'city'));
-			$this->addMessageBag($this->validateAlphaSpace($client, 'state'));
+			$this->addMessageBag($this->validateStringOptional($client, 'street_address'));
+			$this->addMessageBag($this->validateAlphaSpaceOptional($client, 'city'));
+			$this->addMessageBag($this->validateAlphaSpaceOptional($client, 'state'));
 			$this->addMessageBag($this->validateStringOptional($client, 'country'));
-			$this->addMessageBag($this->validateNumber($client, 'country_id'));
+			$this->addMessageBag($this->validateNumberOptional($client, 'country_id'));
 			$this->addMessageBag($this->zipCodeOptional($client, 'zip'));
-
 
 		} else if (strcasecmp($client['client_role'], config('futureed.teacher')) == 0) {
 
