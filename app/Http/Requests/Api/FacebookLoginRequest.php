@@ -36,10 +36,10 @@ class FacebookLoginRequest extends ApiRequest {
 							'first_name' => 'required|min:2|max:64|regex:'. config('regex.name'),
 							'last_name' => 'required|min:2|max:64|regex:'. config('regex.name'),
 							'country_id' => 'required_if:user_type,'. config('futureed.student')
-								. '|required_if:client_role,' . config('futureed.parent')
+//								. '|required_if:client_role,' . config('futureed.parent')
 								.'|exists:countries,id',
-							'city' => 'required_if:user_type,'. config('futureed.student')
-								. '|required_if:client_role,' . config('futureed.parent'),
+							'city' => 'required_if:user_type,'. config('futureed.student'),
+//								. '|required_if:client_role,' . config('futureed.parent'),
 
 							'user_type' => 'required|in:'. config('futureed.client') . ',' . config('futureed.student'),
 
@@ -55,7 +55,7 @@ class FacebookLoginRequest extends ApiRequest {
 							'zip' => 'max:10|regex:'. config('regex.zip_code'),
 
 							//Parent
-							'street_address' => 'required_if:client_role,'. config('futureed.parent').'|string|max:128',
+//							'street_address' => 'required_if:client_role,'. config('futureed.parent').'|string|max:128',
 
 							//Principal
 							'state' => 'max:128|regex:'.config('regex.state_city'),

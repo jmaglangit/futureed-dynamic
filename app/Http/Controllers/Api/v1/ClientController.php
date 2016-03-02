@@ -121,7 +121,7 @@ class ClientController extends ApiController {
 
 				$school = Input::only('school_name','school_code','school_street_address','school_city',
 										  'school_state','school_country','school_country_id','school_zip','school_contact_name','school_contact_number');
-				
+
 				$this->addMessageBag($this->username($user,'username'));
 				$this->addMessageBag($this->email($user,'email'));
 				$this->addMessageBag($this->firstName($client,'first_name'));
@@ -130,11 +130,11 @@ class ClientController extends ApiController {
 
 				if(strtolower($clientDetails['client_role']) == 'parent'){
 
-					$this->addMessageBag($this->validateString($client, 'street_address'));
-					$this->addMessageBag($this->validateAlphaSpace($client, 'city'));
+					$this->addMessageBag($this->validateStringOptional($client, 'street_address'));
+					$this->addMessageBag($this->validateAlphaSpaceOptional($client, 'city'));
 					$this->addMessageBag($this->validateStringOptional($client, 'country'));
-					$this->addMessageBag($this->validateNumber($client, 'country_id'));
-					$this->addMessageBag($this->validateAlphaSpace($client, 'state'));
+					$this->addMessageBag($this->validateNumberOptional($client, 'country_id'));
+					$this->addMessageBag($this->validateAlphaSpaceOptional($client, 'state'));
 					$this->addMessageBag($this->zipCodeOptional($client, 'zip'));
 
 				}else if(strtolower($clientDetails['client_role']) == 'teacher'){
@@ -145,8 +145,6 @@ class ClientController extends ApiController {
 					$this->addMessageBag($this->validateNumberOptional($client, 'country_id'));
 					$this->addMessageBag($this->validateAlphaSpaceOptional($client, 'state'));
 					$this->addMessageBag($this->zipCodeOptional($client, 'zip'));
-
-
 
 				}else{
 
@@ -167,8 +165,6 @@ class ClientController extends ApiController {
 					$this->addMessageBag($this->zipCodeOptional($school, 'school_zip'));
 					$this->addMessageBag($this->validateContactName($school, 'school_contact_name'));
 					$this->addMessageBag($this->checkContactNumber($school, 'school_contact_number'));
-
-
 
 				}
 
