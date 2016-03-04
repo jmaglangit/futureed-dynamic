@@ -326,7 +326,7 @@
 	        		Address Information
 	        	</legend>
 	        	<div class="form-group">
-	        		<label class="col-xs-3 control-label" id="school_address">Street Address <span class="required" ng-if="client.record.client_role == futureed.PARENT">*</span></label>
+	        		<label class="col-xs-3 control-label" id="school_address">Street Address</label>
 	        		<div class="col-xs-6">
 	        			{!! Form::text('street_address',''
 	        				, array(
@@ -340,7 +340,7 @@
 	        		</div>
 	        	</div>
 	        	<div class="form-group">
-	        		<label class="col-xs-3 control-label" id="school_city">City <span class="required" ng-if="client.record.client_role == futureed.PARENT">*</span></label>
+	        		<label class="col-xs-3 control-label" id="school_city">City</label>
 	        		<div class="col-xs-5">
 	        			{!! Form::text('city',''
 	        				, array(
@@ -382,7 +382,7 @@
 	        		</div>
 	        	</div>
 	        	<div class="form-group">
-	        		<label class="col-xs-3 control-label">Country <span class="required" ng-if="client.record.client_role == futureed.PARENT">*</span></label>
+	        		<label class="col-xs-3 control-label">Country</label>
 				      <div class="col-xs-5" ng-init="getCountries()">
 				        <select  name="country_id" class="form-control" ng-class="{ 'required-field' : client.fields['country_id'] }" ng-disabled="client.active_view" ng-model="client.record.country_id">
 				          <option ng-selected="client.record.country_id == futureed.FALSE" value="">-- Select Country --</option>
