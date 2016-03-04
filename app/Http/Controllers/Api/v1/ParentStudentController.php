@@ -200,11 +200,11 @@ class ParentStudentController extends ApiController {
         $client_id = $parent_student_data['parent_id'];
         $client_details = $this->client->getClientDetails($client_id);
 
-        if($client_details->street_address === null
-                || $client_details->city === null
-                || $client_details->state === null
+        if($client_details->street_address == null
+                || $client_details->city == null
+                || $client_details->state == null
                 || $client_details->country_id == 0
-                || $client_details->zip === null)
+                || $client_details->zip == null)
         {
 
             return $this->respondErrorMessage(2800);

@@ -524,11 +524,11 @@ class ClientController extends ApiController {
 	{
 		$client_details = $this->billingServices->clientDetails($id);
 
-		if(!($client_details->street_address === null
-				&& $client_details->city === null
-				&& $client_details->state === null
-				&& $client_details->country_id == 0
-				&& $client_details->zip === null))
+		if($client_details->street_address == null
+				|| $client_details->city == null
+				|| $client_details->state == null
+				|| $client_details->country_id == 0
+				|| $client_details->zip == null)
 		{
 
 			return $this->respondWithData(['status' => 1]);
