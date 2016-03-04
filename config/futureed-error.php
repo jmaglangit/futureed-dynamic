@@ -145,6 +145,9 @@ return [
 		2202 => 'School Name already exists.',
 		2203 => 'The selected country is invalid.',
 
+		//  Parent Client Error Messages
+		2800 => 'You need to update your contact information in order to proceed buy a subscription.',
+
 		//account status messages
 		2230 => 'Account is inactive.',
 		2231 => 'Account Locked',

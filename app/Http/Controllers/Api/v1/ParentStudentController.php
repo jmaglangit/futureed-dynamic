@@ -194,10 +194,22 @@ class ParentStudentController extends ApiController {
     {
         $order_data = $request->only('order_no');
         $order_no = $this->order->getOrderByOrderNo($order_data['order_no']);
-
         $order_details = $this->order_details->getOrderDetailsByOrderId($order_no['id']);
-
         $order_details_ctr = $order_details->count();
+        $parent_student_data = $request->all();
+        $client_id = $parent_student_data['parent_id'];
+        $client_details = $this->client->getClientDetails($client_id);
+
+        if($client_details->street_address === null
+                || $client_details->city === null
+                || $client_details->state === null
+                || $client_details->country_id == 0
+                || $client_details->zip === null)
+        {
+
+            return $this->respondErrorMessage(2800);
+        }
+
         if($order_details_ctr == 0){
             return $this->respondErrorMessage(2038);
         }
@@ -211,11 +223,8 @@ class ParentStudentController extends ApiController {
          * 5. Insert Invoice Details.
          */
 
-        $parent_student_data = $request->all();
 
         //1. Insert Classroom.
-
-        $client_id = $parent_student_data['parent_id'];
 
         $order_no = $order_no['order_no'];
 
@@ -272,8 +281,6 @@ class ParentStudentController extends ApiController {
         }
 
         //4. Insert Invoice.
-
-        $client_details = $this->client->getClientDetails($client_id);
 
         $invoice_id = $id;
         $invoice['order_no'] = $order_no;
