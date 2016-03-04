@@ -1,66 +1,9 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
 use FutureEd\Http\Requests;
-
-use FutureEd\Models\Repository\Admin\AdminRepositoryInterface;
-use FutureEd\Models\Repository\ClientDiscount\ClientDiscountRepositoryInterface;
-use FutureEd\Models\Repository\Country\CountryRepositoryInterface;
-use FutureEd\Models\Repository\School\SchoolRepositoryInterface;
-use FutureEd\Models\Repository\Validator\ValidatorRepositoryInterface;
-use FutureEd\Services\AvatarServices;
-use FutureEd\Services\CheckClientBillingServices;
-use FutureEd\Services\ClientServices;
-use FutureEd\Services\CodeGeneratorServices;
-use FutureEd\Services\GradeServices;
-use FutureEd\Services\MailServices;
-use FutureEd\Services\PasswordImageServices;
-use FutureEd\Services\PasswordServices;
-use FutureEd\Services\SchoolServices;
-use FutureEd\Services\StudentServices;
-use FutureEd\Services\TokenServices;
-use FutureEd\Services\UserServices;
 use Illuminate\Support\Facades\Input;
 
 class ClientController extends ApiController {
-
-	/**
-	 * @var CheckClientBillingServices
-	 */
-	protected $billingServices;
-
-	/**
-	 * ClientController constructor.
-	 * @param UserServices $user
-	 * @param StudentServices $student
-	 * @param SchoolServices $school
-	 * @param PasswordImageServices $password_image
-	 * @param TokenServices $token
-	 * @param MailServices $mailServices
-	 * @param ClientServices $client
-	 * @param GradeServices $grade
-	 * @param AvatarServices $avatar
-	 * @param CodeGeneratorServices $code
-	 * @param AdminRepositoryInterface $admin
-	 * @param PasswordServices $password
-	 * @param ValidatorRepositoryInterface $validatorRepositoryInterface
-	 * @param SchoolRepositoryInterface $schoolRepositoryInterface
-	 * @param CountryRepositoryInterface $countryRepositoryInterface
-	 * @param ClientDiscountRepositoryInterface $clientDiscountRepositoryInterface
-	 * @param CheckClientBillingServices $billingServices
-	 */
-	public function __construct(
-			UserServices $user, StudentServices $student, SchoolServices $school, PasswordImageServices $password_image, TokenServices $token,
-			MailServices $mailServices, ClientServices $client, GradeServices $grade, AvatarServices $avatar, CodeGeneratorServices $code, AdminRepositoryInterface $admin,
-			PasswordServices $password, ValidatorRepositoryInterface $validatorRepositoryInterface, SchoolRepositoryInterface $schoolRepositoryInterface,
-			CountryRepositoryInterface $countryRepositoryInterface, ClientDiscountRepositoryInterface $clientDiscountRepositoryInterface, CheckClientBillingServices $billingServices)
-	{
-		parent::__construct(
-				$user, $student, $school, $password_image, $token, $mailServices,
-				$client, $grade, $avatar, $code, $admin, $password,
-				$validatorRepositoryInterface, $schoolRepositoryInterface, $countryRepositoryInterface, $clientDiscountRepositoryInterface);
-		$this->billingServices = $billingServices;
-
-	}
 
 	/**
 	 * Display a listing of the resource.
@@ -155,7 +98,6 @@ class ClientController extends ApiController {
 	 */
 	public function update($id){
 
-
 		$this->addMessageBag($this->validateVarNumber($id));
 
 		$msg_bag = $this->getMessageBag();
@@ -226,8 +168,6 @@ class ClientController extends ApiController {
 					$this->addMessageBag($this->zipCodeOptional($school, 'school_zip'));
 					$this->addMessageBag($this->validateContactName($school, 'school_contact_name'));
 					$this->addMessageBag($this->checkContactNumber($school, 'school_contact_number'));
-
-
 
 				}
 
@@ -301,15 +241,7 @@ class ClientController extends ApiController {
 
 				return $this->respondErrorMessage(2001);
 			}
-
-
-
-			
 		}
-
-
-
-
 	}
 
 
@@ -452,7 +384,6 @@ class ClientController extends ApiController {
 				return $this->respondWithData(['id' => $client_response['id']
 				]);
 
-
 			}
 
 		}
@@ -510,8 +441,6 @@ class ClientController extends ApiController {
 
 		return $this->respondWithData([$this->client->deleteClient($id)]);
 
-
-
     }
 
 	/**
@@ -522,7 +451,7 @@ class ClientController extends ApiController {
 	 */
 	public function checkBillingAddress($id)
 	{
-		$client_details = $this->billingServices->clientDetails($id);
+		$client_details = $this->client->getClientDetails($id);
 
 		if($client_details->street_address == null
 				|| $client_details->city == null
