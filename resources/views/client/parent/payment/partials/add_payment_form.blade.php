@@ -8,10 +8,16 @@
 	{!! Form::open(array('id'=> 'add_payment_form', 'class' => 'form-horizontal')) !!}
 		<div class="form-content col-xs-12"  ng-init="payment.getOrderNo()">
 			<div class="alert alert-error" ng-if="payment.errors">
-	            <p ng-repeat="error in payment.errors track by $index" > 
+	            <p ng-repeat="error in payment.errors track by $index" >
 	              	{! error !}
 	            </p>
 	        </div>
+
+			<div class="alert alert-error" ng-if="payment.billing_address_not_found">
+					<p>
+						You need to update your contact information in order to proceed buy a subscription. Update <a href="{!! route('client.profile.index') !!}">now</a>.
+					</p>
+			</div>
 
 	        <div class="alert alert-success" ng-if="payment.success">
 	        	<p ng-repeat="success in payment.success track by $index" > 

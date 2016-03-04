@@ -19,7 +19,6 @@ function FutureedController($scope, $window, apiService, futureed) {
 	* Common API calls
 	*/
 	$scope.highlight = highlight;
-
 	$scope.errorHandler = function(errors, noScroll) {
 		$scope.errors = [];
 
@@ -40,8 +39,8 @@ function FutureedController($scope, $window, apiService, futureed) {
 						$scope.internalError();
 					});
 				}
-				
-				if(angular.equals($scope.errors.indexOf(value.message), -1)) {
+
+				if (angular.equals($scope.errors.indexOf(value.message), -1)) {
 					$scope.errors[key] = value.message;
 				}
 			});
