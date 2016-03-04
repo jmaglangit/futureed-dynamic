@@ -522,7 +522,7 @@ class ClientController extends ApiController {
 	 */
 	public function checkBillingAddress($id)
 	{
-		$client_details = $this->billingServices->clientDetails($id);
+		$client_details = $this->user->getClientDetails($id);
 
 		if($client_details->street_address == null
 				|| $client_details->city == null
