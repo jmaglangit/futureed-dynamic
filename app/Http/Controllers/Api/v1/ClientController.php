@@ -55,6 +55,11 @@ class ClientController extends ApiController {
 		return $this->respondWithData($clients);
 	}
 
+	/**
+	 * Show listing of clients
+	 * @param $id
+	 * @return mixed
+	 */
 	public function show($id) {
 
 		$client = config('futureed.client');
@@ -90,6 +95,12 @@ class ClientController extends ApiController {
 
 	}
 
+	/**
+	 * Update listing of clients
+	 * @param $id
+	 * @param ClientRequest $clientRequest
+	 * @return mixed
+	 */
 	public function update($id, ClientRequest $clientRequest)
 	{
 		$return = $this->client->verifyClientId($id);
@@ -164,7 +175,11 @@ class ClientController extends ApiController {
 	}
 
 
-
+	/**
+	 * Store new created client
+	 *
+	 * @return mixed
+	 */
 	public function store(){
 
 		$user_type = config('futureed.client');
@@ -306,7 +321,13 @@ class ClientController extends ApiController {
 
 	}
 
-    public function destroy($id){
+	/**
+	 * Delete a client of a given resource
+	 *
+	 * @param $id
+	 * @return mixed
+	 */
+	public function destroy($id){
 
 		$user_type = config('futureed.client');
 
@@ -352,8 +373,6 @@ class ClientController extends ApiController {
 		}
 
 		return $this->respondWithData([$this->client->deleteClient($id)]);
-
-
-
+		
     }
 }
