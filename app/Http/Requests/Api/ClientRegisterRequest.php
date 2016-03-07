@@ -34,14 +34,14 @@ class ClientRegisterRequest extends ApiRequest {
 					'last_name' => 'required|min:2|regex:'. config('regex.name') .'|max:64',
 					'client_role' => 'required|in:' . config('futureed.parent').','.config('futureed.principal').','. config('futureed.teacher'),
 
-					'city' => 'required_if:client_role,'.config('futureed.parent').'|max:128|regex:'.config('regex.state_city'),
+					'city' => 'max:128|regex:'.config('regex.state_city'),
 					'state' => 'max:128|regex:'.config('regex.state_city'),
 					'country' => 'string|max:128',
-					'country_id' => 'required_if:client_role,'. config('futureed.parent').','. config('futureed.teacher').'|numeric|exists:countries,id',
+					'country_id' => 'required_if:client_role,'. config('futureed.teacher').'|numeric|exists:countries,id',
 					'zip' => 'max:10|regex:'. config('regex.zip_code'),
 
 					//Parent
-					'street_address' => 'required_if:client_role,'. config('futureed.parent').'|string|max:128',
+					'street_address' => 'string|max:128',
 
 					//Principal
 					'contact_name' => 'required_if:client_role,'.config('futureed.principal').'|min:2|regex:'. config('regex.name') .'|max:128',
