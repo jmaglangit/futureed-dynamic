@@ -1,5 +1,4 @@
 <div class="client-container form-style" ng-if="login.resend">
-    {{--TODO enter email address--}}
     <div class="title">Enter Your Email Address</div>
 
     <div class="alert alert-danger" ng-if="login.errors">

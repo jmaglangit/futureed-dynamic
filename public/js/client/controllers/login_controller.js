@@ -35,7 +35,6 @@ function LoginController($scope, $controller, apiService, ClientLoginApiService,
 
 					self.record.id = response.data.id;
 					self.confirmed = Constants.TRUE;
-					//TODO route to login.
 
 					var data = response.data;
 					data.role = data.client_role;
