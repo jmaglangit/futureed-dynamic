@@ -22,7 +22,7 @@ class ClientRepository implements ClientRepositoryInterface
 		DB::beginTransaction();
 
 		try{
-			$response = Client::with('school')
+			$response = Client::with('user','school')
 							->userid($user_id)
 							->first();
 

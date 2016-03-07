@@ -30,7 +30,8 @@ Routes::group(['prefix' => '/user'], function() {
 
     Routes::post('/email/code', [
         'uses' => 'Api\v1\UserController@confirmEmailCode',
-        'as' => 'aip.v1.user.email.code'
+        'as' => 'api.v1.user.email.code',
+        'middleware' => 'api_after_auto_login'
     ]);
 
     Routes::post('/reset/code', [

@@ -143,6 +143,10 @@
 					'as' => 'client.partials.registration_success'
 					, 'uses' => 'FutureLesson\Client\LoginController@registration_success' 
 				]);
+			Routes::get('/resend-confirmation',[
+				'as' => 'client.partials.resend_confirmation'
+				, 'uses' => 'FutureLesson\Client\LoginController@resendConfirmation'
+			]);
 			Routes::get('/terms', [
 					'as' => 'client.login.terms-and-condition'
 					, 'uses' => 'FutureLesson\Client\LoginController@terms' 

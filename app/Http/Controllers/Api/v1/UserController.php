@@ -4,6 +4,8 @@ use FutureEd\Http\Controllers\Api\Traits\ApiValidatorTrait;
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
+use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
+use FutureEd\Services\ClientServices;
 use FutureEd\Services\UserServices;
 use FutureEd\Services\MailServices;
 use FutureEd\Services\CodeGeneratorServices;
@@ -13,7 +15,24 @@ use FutureEd\Http\Requests\Api\UserRequest;
 
 class UserController extends ApiController{
 
-    //check user if exist
+    protected $client_service;
+    protected $client;
+    protected $user_service;
+
+    public function __construct(
+        ClientRepositoryInterface $clientRepositoryInterface,
+        ClientServices $clientServices,
+        UserServices $userServices
+    ){
+        $this->client_service = $clientServices;
+        $this->client = $clientRepositoryInterface;
+        $this->user_service = $userServices;
+    }
+
+    /**
+     * check user if it exists.
+     * @return mixed
+     */
     public function checkUser(){
         $input = Input::only('username','user_type');
 
@@ -32,7 +51,7 @@ class UserController extends ApiController{
             return $this->respondWithError($this->getMessageBag());
         }
 
-        $return =  $this->user->checkUsername($username,$user_type);
+        $return =  $this->user_service->checkUsername($username,$user_type);
 
         if(!$return){
 
@@ -44,7 +63,7 @@ class UserController extends ApiController{
 
         }elseif(strcasecmp($input['user_type'], config('futureed.client')) == 0){
 
-            $return['id'] = $this->client->getClientId($return['user_id']);
+            $return['id'] = $this->client_service->getClientId($return['user_id']);
 
         }elseif(strcasecmp($input['user_type'], config('futureed.admin')) == 0){
 
@@ -55,37 +74,27 @@ class UserController extends ApiController{
 
     }
 
-    //confirmation of email code
-    public function confirmEmailCode(){
-        $input = Input::only('email','email_code','user_type');
+    /**
+     * confirmation for email and code.
+     * @param UserRequest $request
+     * @return mixed
+     */
+    public function confirmEmailCode(UserRequest $request){
 
-        $this->addMessageBag($this->email($input,'email'));
-        $this->addMessageBag($this->emailCode($input,'email_code'));
-        $this->addMessageBag($this->userType($input,'user_type'));
+        $input = $request->only('email','email_code','user_type');
 
-        if($this->getMessageBag()){
+        //get user details.
+        $user_check = $this->user_service->checkEmail($input['email'],$input['user_type']);
 
-            return $this->respondWithError($this->getMessageBag());
-        }
-
-        //confirm email code
-        //check email
-        $user_check = $this->user->checkEmail($input['email'],$input['user_type']);
-        if(!$user_check){
-
-            return $this->respondErrorMessage(2002);
-        }
-
-        //check code
         //get user detail
-        $user_detail = $this->user->getUserDetail($user_check['user_id'],$input['user_type']);
+        $user_detail = $this->user_service->getUserDetail($user_check['user_id'],$input['user_type']);
 
         if($input['email_code'] <> $user_detail['confirmation_code']){
 
             return $this->respondErrorMessage(2006);
         }
 
-        $code_expire = $this->user->checkCodeExpiry($user_detail['confirmation_code_expiry']);
+        $code_expire = $this->user_service->checkCodeExpiry($user_detail['confirmation_code_expiry']);
         if($code_expire){
 
             return $this->respondErrorMessage(2007);
@@ -98,12 +107,15 @@ class UserController extends ApiController{
         if( strtolower($client) == strtolower($input['user_type'])) {
 
             //update is activate and is lock for client
-            $this->user->updateInactiveLock($user_check['user_id']);
+            $this->user_service->updateInactiveLock($user_check['user_id']);
 
             //Remove session_token
-            $this->user->emptySession($user_check['user_id']);
+            $this->user_service->emptySession($user_check['user_id']);
 
-            $return = $this->client->getClientId($user_check['user_id']);
+            $return  = $this->client->getClient($user_check['user_id']);
+
+            //output for client -- id, first_name, last_name, country_id, role for auto login
+            return $this->respondWithData($return->toArray());
 
         }elseif( strtolower($student) == strtolower($input['user_type'])){
             
@@ -121,8 +133,10 @@ class UserController extends ApiController{
 
     }
 
-
-    //resend reset email code 
+    /**
+     * resend reset email code.
+     * @return mixed
+     */
     public function resendResetEmailCode(){
 
         $input = Input::only('email','user_type','callback_uri'); 
@@ -142,12 +156,12 @@ class UserController extends ApiController{
 
         }else{
 
-            $return = $this->user->checkEmail($input['email'],$input['user_type']);
+            $return = $this->user_service->checkEmail($input['email'],$input['user_type']);
 
 
             if(!empty($return)){
                 
-                $userDetails = $this->user->getUserDetail($return['user_id'],$input['user_type']);
+                $userDetails = $this->user_service->getUserDetail($return['user_id'],$input['user_type']);
 
 
                 if(empty($userDetails['reset_code'])){
@@ -158,7 +172,7 @@ class UserController extends ApiController{
 
                     $code=$this->code->getCodeExpiry();
 
-                    $this->user->setResetCode($return['user_id'],$code);
+                    $this->user_service->setResetCode($return['user_id'],$code);
 
                     if(strtolower($input['user_type']) == 'student'){
 
@@ -177,10 +191,10 @@ class UserController extends ApiController{
                     }elseif(strtolower($input['user_type']) == 'client'){
 
 
-						$client_id = $this->client->getClientId($return['user_id']);
+						$client_id = $this->client_service->getClientId($return['user_id']);
 
 						//get client role
-						$client_role = $this->client->getRole($return['user_id']);
+						$client_role = $this->client_service->getRole($return['user_id']);
 
 						//change subject
 						$subject = str_replace('{user}', $client_role, $subject);
@@ -220,8 +234,10 @@ class UserController extends ApiController{
 
     }
 
-    //resend registration email code 
-
+    /**
+     * resend registration email code.
+     * @return mixed
+     */
     public function resendRegisterEmailCode(){
 
         $input = Input::only('email','user_type','callback_uri');
@@ -241,11 +257,11 @@ class UserController extends ApiController{
 
         } else {
 
-            $return = $this->user->checkEmail($input['email'], $input['user_type']);
+            $return = $this->user_service->checkEmail($input['email'], $input['user_type']);
 
             if(!empty($return)){
 
-                $userDetails = $this->user->getUserDetail($return['user_id'], $input['user_type']);
+                $userDetails = $this->user_service->getUserDetail($return['user_id'], $input['user_type']);
                                 
                 if($userDetails['is_account_activated'] == config('futureed.activated')){
 
@@ -255,7 +271,7 @@ class UserController extends ApiController{
 
                     $code=$this->code->getCodeExpiry();
 
-                    $this->user->updateConfirmationCode($return['user_id'],$code);
+                    $this->user_service->updateConfirmationCode($return['user_id'],$code);
 
 
                     if(strtolower($input['user_type']) == 'student') {
@@ -273,7 +289,7 @@ class UserController extends ApiController{
                     
                     } else {
 
-                        $client_id = $this->client->getClientId($return['user_id']);
+                        $client_id = $this->client_service->getClientId($return['user_id']);
 
                         $this->mail->sendClientRegister($userDetails,$code['confirmation_code'],$input['callback_uri'],1);
 
@@ -289,14 +305,8 @@ class UserController extends ApiController{
             } else {
 
                 return $this->respondErrorMessage(2002);
-
             }
-
         }
-
-
-
-
     }
 
     /**
@@ -324,7 +334,7 @@ class UserController extends ApiController{
             case config('futureed.client'):
 
                 //get user_id of client
-                $user = $this->client->getClientDetails($id);
+                $user = $this->client_service->getClientDetails($id);
 
                 break;
             case config('futureed.admin'):
@@ -339,11 +349,7 @@ class UserController extends ApiController{
         }
 
        //empty session in user table and boolean.
-        return ($this->user->emptySession($user->user_id))
+        return ($this->user_service->emptySession($user->user_id))
             ? $this->respondWithData(true) : $this->respondWithData(false);
-
     }
-
-
-
 }

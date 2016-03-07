@@ -83,7 +83,7 @@ class ClientRegisterController extends ClientController {
 		$user['user_type'] = config('futureed.client');
 
 		// auto activation for client
-		$user['is_account_activated'] = 1;
+		$client['account_status'] = config('futureed.accepted');
 
 		// add user, return status
 		$user_response = $this->user->addUser($user);

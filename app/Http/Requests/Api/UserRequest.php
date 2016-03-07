@@ -34,6 +34,16 @@ class UserRequest extends ApiRequest {
 						];
 						break;
 
+					case 'api.v1.user.email.code':
+
+						return [
+							'email' => 'required|email|exists:users,email,user_type,'.config('futureed.client').',deleted_at,NULL',
+							'email_code' => 'required|numeric|regex:'. config('regex.email_code'),
+							'user_type' => 'required|in:'.config('futureed.student').','.config('futureed.client').','
+								.config('futureed.admin'),
+						];
+						break;
+
 					default:
 						break;
 				}
