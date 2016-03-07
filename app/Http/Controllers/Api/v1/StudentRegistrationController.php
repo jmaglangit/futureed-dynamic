@@ -15,7 +15,6 @@ class StudentRegistrationController extends StudentController {
      */
 
     public function register(){
-
         $student = Input::only(
             'first_name',
             'last_name',
@@ -40,10 +39,10 @@ class StudentRegistrationController extends StudentController {
         $this->addMessageBag($this->lastName($student,'last_name'));
         $this->addMessageBag($this->gender($student,'gender'));
         $this->addMessageBag($this->birthDate($student,'birth_date'));
-        $this->addMessageBag($this->validateGradeCode($student,'grade_code'));
-        $this->addMessageBag($this->validateNumber($student,'country_id')); // removed country name as required and changed it to country_id
+        $this->addMessageBag($this->validateGradeCodeOptional($student,'grade_code'));
+        $this->addMessageBag($this->validateNumberOptional($student,'country_id')); // removed country name as required and changed it to country_id
         $this->addMessageBag($this->validateAlphaSpaceOptional($student,'state'));
-        $this->addMessageBag($this->validateAlphaSpace($student,'city'));
+        $this->addMessageBag($this->validateAlphaSpaceOptional($student,'city'));
 
         //User fields validations
         $this->addMessageBag($this->email($user,'email'));
