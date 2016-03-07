@@ -18,7 +18,7 @@
 					A confirmation code has been sent to your email account.
 				</p>
 
-				<small>Please check your inbox or your spam folder for the email. The email contains a confirmation code that you need to input below.</small>
+				<small>You're almost done! We just need you to confirm you email address. Please check your inbox and click on the link.</small>
 			</div>
 			
 			<div ng-if="!login.resent && login.linked">
@@ -37,40 +37,40 @@
 				</div>
 
 				<p>
-					A new confirmation code has been sent to your email account.
+					A new confirmation has been sent to your email account.
 				</p>
-				<small>Please check your inbox or your spam folder for the email. The email contains a confirmation code that you need to input below.</small>
+				<small>You're almost done! We just need you to confirm you email address. Please check your inbox and click on the link.</small>
 			</div>
 
-			{!! Form::open(
-				array(
-					'id' => 'redirect_form'
-					, 'route' => 'student.login.set_password'
-					, 'method' => 'POST'
-				)
-			) !!}
+			{{--{!! Form::open(--}}
+				{{--array(--}}
+					{{--'id' => 'redirect_form'--}}
+					{{--, 'route' => 'student.login.set_password'--}}
+					{{--, 'method' => 'POST'--}}
+				{{--)--}}
+			{{--) !!}--}}
 
-				{!! Form::hidden('id', '') !!}
+				{{--{!! Form::hidden('id', '') !!}--}}
 
-			{!! Form::close() !!}
+			{{--{!! Form::close() !!}--}}
 
-			{!! Form::open(array('id' => 'registration_success_form', 'ng-submit' => 'login.studentConfirmRegistration($event)')) !!}
-				<div class="form-group">
-					{!! Form::label('', 'Enter Confirmation Code:') !!}
-					{!! Form::text('email_code', '', 
-						array(
-							'ng-model' => 'login.record.email_code'
-							, 'placeholder' => 'Confirmation Code'
-							, 'autocomplete' => 'off'
-							, 'class' => 'form-control')
-					) !!}
-				</div>
-				<div class="btn-container">
-					<button id="confirm_registration_btn" type="button" class="btn btn-maroon btn-medium" ng-click="login.studentConfirmRegistration($event)">Confirm</button>
-					<button type="button" class="btn btn-gold btn-medium" ng-click="login.studentResendConfirmation()">Resend</button>
-				</div>
-				<br />
-				<a href="{!! route('student.login') !!}"><i class="fa fa-home"></i> Home</a>
-			{!! Form::close() !!}
+			{{--{!! Form::open(array('id' => 'registration_success_form', 'ng-submit' => 'login.studentConfirmRegistration($event)')) !!}--}}
+				{{--<div class="form-group">--}}
+					{{--{!! Form::label('', 'Enter Confirmation Code:') !!}--}}
+					{{--{!! Form::text('email_code', '', --}}
+						{{--array(--}}
+							{{--'ng-model' => 'login.record.email_code'--}}
+							{{--, 'placeholder' => 'Confirmation Code'--}}
+							{{--, 'autocomplete' => 'off'--}}
+							{{--, 'class' => 'form-control')--}}
+					{{--) !!}--}}
+				{{--</div>--}}
+				{{--<div class="btn-container">--}}
+					{{--<button id="confirm_registration_btn" type="button" class="btn btn-maroon btn-medium" ng-click="login.studentConfirmRegistration($event)">Confirm</button>--}}
+					{{--<button type="button" class="btn btn-gold btn-medium" ng-click="login.studentResendConfirmation()">Resend</button>--}}
+				{{--</div>--}}
+				{{--<br />--}}
+				{{--<a href="{!! route('student.login') !!}"><i class="fa fa-home"></i> Home</a>--}}
+			{{--{!! Form::close() !!}--}}
 		</div>
 </div>
