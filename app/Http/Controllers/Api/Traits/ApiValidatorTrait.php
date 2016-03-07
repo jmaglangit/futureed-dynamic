@@ -75,6 +75,29 @@ trait ApiValidatorTrait {
             }
     }
 
+	//Validate username field.
+	public function usernameOptional($input,$username){
+
+		$validator = Validator::make(
+				[
+						"$username" => $input["$username"],
+				],
+				[
+						"$username" => 'min:8|max:32|alpha_num'
+				]
+		);
+
+		if($validator->fails()){
+
+			$validator_msg = $validator->messages()->toArray();
+
+			return $this->setErrorCode(1004)
+					->setField($username)
+					->setMessage($validator_msg["$username"][0])
+					->errorMessage();
+		}
+	}
+
 
     //Validate birth_date field.
     public function birthDate($input,$birth_date){
@@ -223,6 +246,34 @@ trait ApiValidatorTrait {
                 ->errorMessage();
         }
     }
+
+	//Validate school level field name grade_code
+	public function validateGradeCodeOptional($input,$field_name){
+
+		$error_msg = config('futureed-error.error_messages');
+
+		$validator = Validator::make(
+				[
+						"$field_name" => strtolower($input["$field_name"]),
+				],
+				[
+						"$field_name" => 'numeric'
+				],
+				[
+						"numeric" => $error_msg[2023]
+				]
+		);
+
+		if($validator->fails()){
+
+			$validator_msg = $validator->messages()->toArray();
+
+			return $this->setErrorCode(1009)
+					->setField($field_name)
+					->setMessage($validator_msg["$field_name"][0])
+					->errorMessage();
+		}
+	}
 
     //Validating ang field that is numeric. Can be used by any number field validation.
     public function validateNumber($input,$field_name){
