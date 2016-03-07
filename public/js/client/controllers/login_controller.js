@@ -13,9 +13,43 @@ function LoginController($scope, $controller, apiService, ClientLoginApiService,
 
 	self.setSetUserType(Constants.CLIENT);
 
-	self.setRegistrationStatus = function(email) {
+	self.setRegistrationStatus = function(email,code) {
 		self.record = {};
 		self.record.email = email;
+		self.record.email_code = code;
+
+		var user_type = Constants.CLIENT;
+
+		$scope.ui_block();
+		ClientLoginApiService.confirmCode(self.record.email, self.record.email_code, user_type).success(function(response) {
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+
+					angular.forEach($scope.errors, function(value, key) {
+						if(angular.equals(value, Constants.MSG_ACC_CONFIRMED)) {
+							self.account_confirmed = Constants.TRUE;
+						}
+					});
+				} else if(response.data) {
+
+					self.record.id = response.data.id;
+					self.confirmed = Constants.TRUE;
+					//TODO route to login.
+
+					var data = response.data;
+					data.role = data.client_role;
+					$("#process_form input[name='user_data']").val(angular.toJson(response.data));
+					$("#process_form").trigger(Constants.ATTR_SUBMIT);
+				}
+			}
+
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+
 	}
 
 	self.setActive = function(active) {
@@ -42,6 +76,9 @@ function LoginController($scope, $controller, apiService, ClientLoginApiService,
 			case 'registration_success'	:
 				self.active_registration_success = Constants.TRUE;
 				break;
+
+			case 'resend'	:
+				self.resend = Constants.TRUE;
 
 			case 'login'			:
 
