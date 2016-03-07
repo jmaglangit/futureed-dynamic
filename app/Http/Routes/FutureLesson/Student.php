@@ -88,7 +88,12 @@
 			Routes::get('/registration-success', [ 
 					'as' => 'student.login.registration_success'
 					, 'uses' => 'FutureLesson\Student\LoginController@registration_success'
-				]);			
+				]);
+
+			Routes::get('/privacy-policy',[
+				'as' => 'student.login.privacy-policy'
+				, 'uses' => 'FutureLesson\Student\LoginController@privacy_policy'
+			]);
 		});
 
 		Routes::group([
