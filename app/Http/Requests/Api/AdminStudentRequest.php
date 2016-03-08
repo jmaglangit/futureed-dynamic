@@ -38,7 +38,7 @@ class AdminStudentRequest extends ApiRequest {
 				return [
 					'username' => "required|alpha_num|string|min:8|max:32|unique:users,username,NULL,id,user_type,$student,deleted_at,NULL",
 					'email' => "required|email|unique:users,email,NULL,id,user_type,$student,deleted_at,NULL",
-					'status' => "string",
+					'status' => "required|string",
 					'first_name' => 'required|regex:'. config('regex.name') .'|string',
 					'last_name' => 'required|regex:'. config('regex.name') .'|string',
 					'gender' => 'required|in:Male,Female',
@@ -62,13 +62,13 @@ class AdminStudentRequest extends ApiRequest {
 					'last_name' => 'required|regex:'. config('regex.name') .'|string',
 					'gender' => 'required|in:Male,Female',
 					'birth_date' => 'required|date_format:Ymd',
-					'city' => 'required|string',
+					'city' => 'string',
 					'state' => 'string',
 					'country' => 'string',
-					'country_id' => 'required|integer',
+					'country_id' => 'integer',
 					'school_code' => 'integer',
-					'grade_code' => 'required|integer',
-					'points' => 'integer|min:1|max:9999'];
+					'grade_code' => 'integer',
+					'points' => 'integer|min:0|max:9999'];
 				break;
 
 		}
