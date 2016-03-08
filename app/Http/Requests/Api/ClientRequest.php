@@ -36,10 +36,10 @@ class ClientRequest extends ApiRequest {
 				$common_validations = [
 						'id' => 'required|numeric',
 						'street_address' => 'string|max:128',
-						'city' => 'max:128|regex:/^[-\pL\s]+$/u',
+						'city' => 'max:128|regex:'.config('regex.state_city'),
 						'country' => 'string|max:128',
 						'country_id' => 'numeric',
-						'state' => 'max:128|regex:/^[-\pL\s]+$/u',
+						'state' => 'max:128|regex:'.config('regex.state_city'),
 						'zip' => 'max:10|regex:'. config('regex.zip_code')
 				];
 				if($role === config('futureed.principal'))
@@ -47,11 +47,11 @@ class ClientRequest extends ApiRequest {
 					$specific_role_validations = [
 						'school_code' => 'required|numeric|exists:schools,code,deleted_at,NULL',
 						'school_name' => 'required|string|max:128',
-						'school_state' => 'required|max:128|regex:/^[-\pL\s]+$/u',
+						'school_state' => 'required|max:128|regex:'.config('regex.state_city'),
 						'school_country' => 'string|max:128',
 						'school_country_id' => 'required|numeric',
 						'school_street_address' => 'required|string|max:128',
-						'school_city' => 'max:128|regex:/^[-\pL\s]+$/u',
+						'school_city' => 'max:128|regex:'.config('regex.state_city'),
 						'school_zip' => 'max:10|regex:'.config('regex.zip_code'),
 						'school_contact_name' => 'required|min:2|regex:'.config('regex.name') .'|max:128',
 						'school_contact_number' => 'required|max:20|regex:'.config('regex.phone')
@@ -66,22 +66,18 @@ class ClientRequest extends ApiRequest {
 					'street_address' => 'string|max:128',
 					'country' => 'string|max:128',
 					'country_id' => 'numeric',
-					'zip' => 'max:10|regex:'. config('regex.zip_code')
+					'zip' => 'max:10|regex:'. config('regex.zip_code'),
+					'city' => 'max:128|regex:'.config('regex.state_city'),
+					'state' => 'max:128|regex:'.config('regex.state_city'),
 				];
 				if($role == config('futureed.teacher'))
 				{
 					$specific_role_validations = [
-						'city' => 'max:128|regex:/^[-\pL\s]+$/u',
-						'state' => 'max:128|regex:/^[-\pL\s]+$/u',
 						'school_name' => 'required|string|max:128',
 					];
 				}
 				if($role === config('futureed.principal') || $role === config('futureed.parent'))
 				{
-					$specific_role_validations = [
-						'city' => 'max:128|regex:/^[-\pL\s]+$/u',
-						'state' => 'max:128|regex:/^[-\pL\s]+$/u',
-					];
 					if(strtolower($role) === config('futureed.principal'))
 					{
 						$principal_validations = [
