@@ -66,22 +66,18 @@ class ClientRequest extends ApiRequest {
 					'street_address' => 'string|max:128',
 					'country' => 'string|max:128',
 					'country_id' => 'numeric',
-					'zip' => 'max:10|regex:'. config('regex.zip_code')
+					'zip' => 'max:10|regex:'. config('regex.zip_code'),
+					'city' => 'max:128|regex:/^[-\pL\s]+$/u',
+					'state' => 'max:128|regex:/^[-\pL\s]+$/u',
 				];
 				if(strtolower($role) == 'teacher')
 				{
 					$specific_role_validations = [
-						'city' => 'max:128|regex:/^[-\pL\s]+$/u',
-						'state' => 'max:128|regex:/^[-\pL\s]+$/u',
 						'school_name' => 'required|string|max:128',
 					];
 				}
 				if(strtolower($role) == 'principal' || strtolower($role) == 'parent')
 				{
-					$specific_role_validations = [
-						'city' => 'max:128|regex:/^[-\pL\s]+$/u',
-						'state' => 'max:128|regex:/^[-\pL\s]+$/u',
-					];
 					if(strtolower($role) == 'principal')
 					{
 						$principal_validations = [
