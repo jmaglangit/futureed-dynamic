@@ -36,22 +36,22 @@ class ClientRequest extends ApiRequest {
 				$common_validations = [
 						'id' => 'required|numeric',
 						'street_address' => 'string|max:128',
-						'city' => 'max:128|regex:/^[-\pL\s]+$/u',
+						'city' => 'max:128|regex:'.config('regex.city_state'),
 						'country' => 'string|max:128',
 						'country_id' => 'numeric',
-						'state' => 'max:128|regex:/^[-\pL\s]+$/u',
+						'state' => 'max:128|regex:'.config('regex.city_state'),
 						'zip' => 'max:10|regex:'. config('regex.zip_code')
 				];
-				if(strtolower($role) == 'principal')
+				if($role == config('futureed.principal'))
 				{
 					$specific_role_validations = [
 						'school_code' => 'required|numeric|exists:schools,code,deleted_at,NULL',
 						'school_name' => 'required|string|max:128',
-						'school_state' => 'required|max:128|regex:/^[-\pL\s]+$/u',
+						'school_state' => 'required|max:128|regex:'.config('regex.city_state'),
 						'school_country' => 'string|max:128',
 						'school_country_id' => 'required|numeric',
 						'school_street_address' => 'required|string|max:128',
-						'school_city' => 'max:128|regex:/^[-\pL\s]+$/u',
+						'school_city' => 'max:128|regex:'.config('regex.city_state'),
 						'school_zip' => 'max:10|regex:'.config('regex.zip_code'),
 						'school_contact_name' => 'required|min:2|regex:'.config('regex.name') .'|max:128',
 						'school_contact_number' => 'required|max:20|regex:'.config('regex.phone')
@@ -67,18 +67,18 @@ class ClientRequest extends ApiRequest {
 					'country' => 'string|max:128',
 					'country_id' => 'numeric',
 					'zip' => 'max:10|regex:'. config('regex.zip_code'),
-					'city' => 'max:128|regex:/^[-\pL\s]+$/u',
-					'state' => 'max:128|regex:/^[-\pL\s]+$/u',
+					'city' => 'max:128|regex:'.config('regex.city_state'),
+					'state' => 'max:128|regex:'.config('regex.city_state'),
 				];
-				if(strtolower($role) == 'teacher')
+				if($role == config('futureed.teacher'))
 				{
 					$specific_role_validations = [
 						'school_name' => 'required|string|max:128',
 					];
 				}
-				if(strtolower($role) == 'principal' || strtolower($role) == 'parent')
+				if($role == config('futureed.principal') || $role == config('futureed.parent'))
 				{
-					if(strtolower($role) == 'principal')
+					if($role == config('futureed.principal'))
 					{
 						$principal_validations = [
 							'school_name' => 'required|string|max:128',
