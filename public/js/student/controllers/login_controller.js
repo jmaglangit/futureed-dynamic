@@ -254,7 +254,7 @@ function StudentLoginController($scope, $filter, $controller, StudentLoginServic
 	/**
 	* Student registration
 	*/
-	self.checkRegistration = function(email, id, token) {
+	self.checkRegistration = function(email,code, id, token) {
 		self.errors = Constants.FALSE;
 		self.record.invited = Constants.FALSE;
 
@@ -294,6 +294,30 @@ function StudentLoginController($scope, $filter, $controller, StudentLoginServic
 			self.setActive('registration_success');
 
 			self.record.email = email;
+			self.record.email_code = code;
+			self.record.user_type = Constants.STUDENT;
+
+			$scope.ui_block();
+			StudentLoginService.confirmCode(self.record.email, self.record.email_code, self.record.user_type).success(function(response) {
+				if(angular.equals(response.status, Constants.STATUS_OK)) {
+					if(response.errors) {
+						self.errors = $scope.errorHandler(response.errors);
+					} else if(response.data){
+						console.log(response.data);
+						$("#redirect_form input[name='id']").val(response.data.id);
+						$("#redirect_form input[name='email']").val(self.record.email);
+						$("#redirect_form input[name='confirmation_code']").val(self.record.email_code);
+						$("#redirect_form").submit();
+
+						self.confirmed = Constants.TRUE;
+					}
+				}
+
+				$scope.ui_unblock();
+			}).error(function(response) {
+				self.errors = $scope.internalError();
+				$scope.ui_unblock();
+			});
 		} else {
 
 			self.setActive('registration');
@@ -389,6 +413,7 @@ function StudentLoginController($scope, $filter, $controller, StudentLoginServic
 	self.studentConfirmRegistration = function(event) {
 		event = getEvent(event);
 		event.preventDefault();
+		console.log(event);
 
 		self.errors = Constants.FALSE;
 		self.record.user_type = Constants.STUDENT;
