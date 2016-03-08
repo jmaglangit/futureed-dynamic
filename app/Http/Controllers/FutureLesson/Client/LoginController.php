@@ -124,10 +124,16 @@ class LoginController extends Controller {
 		return view('client.login.registration-success');
 	}
 
+	/**
+	 * auto confirmation through email and code embedded on uri.
+	 * @return \Illuminate\View\View
+	 */
 	public function enter_confirmation() {
-		$input = Input::only('email');
+		$input = Input::only('email','code');
 
-		return view('client.login.enter-confirmation-code', ['email' => $input['email']]);
+		return view('client.login.enter-confirmation-code', [
+			'email' => $input['email']
+			, 'code' => $input['code']]);
 	}
 	/**
 	 * Display reset password screen
@@ -151,6 +157,10 @@ class LoginController extends Controller {
 		$input = Input::only('email');
 
 		return view('client.login.set-password', array('email' => $input['email']));
+	}
+
+	public function resendConfirmation(){
+		return view('client.login.registration-resend-confirmation');
 	}
 
 	/**

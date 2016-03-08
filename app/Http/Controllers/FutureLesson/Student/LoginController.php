@@ -184,4 +184,8 @@ class LoginController extends Controller {
 	public function registration_success() {
 		return view('student.login.register.registration-success');
 	}
+
+	public function privacy_policy(){
+		return view('student.login.privacy-policy');
+	}
 }

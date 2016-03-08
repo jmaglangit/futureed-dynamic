@@ -30,7 +30,8 @@ class MailServices {
 		$this->client = $client;
 		$this->reg_token = $registrationTokenServices;
     }
-    /*
+
+    /**
      * $contents
      * view - views of the email
      * data - data to be passed to view
@@ -43,6 +44,8 @@ class MailServices {
      * blind_carbon_copy - emails to be bcc'ed
      * blind_carbon_copy_name - name of the bcc'ed
      * subject - subject of the email
+     * @param $contents
+     * @throws Exception
      */
     public function sendMail($contents){
         try{
@@ -66,6 +69,11 @@ class MailServices {
         }
     }
 
+    /**
+     * @param $user_id
+     * @param $url
+     * @throws Exception
+     */
     public function sendStudentRegister($user_id,$url){
 
         $user_type = config('futureed.student');
@@ -90,6 +98,13 @@ class MailServices {
         $this->sendMail($content);
     }
 
+    /**
+     * @param $data
+     * @param $code
+     * @param $url
+     * @param $subject
+     * @throws Exception
+     */
     public function resendStudentRegister($data,$code,$url,$subject){
 
         $content = [
@@ -106,14 +121,26 @@ class MailServices {
         $this->sendMail($content);
     }
 
+    /**
+     * Send email for client registration.
+     * @param $data
+     * @param $code
+     * @param $url
+     * @param int $send
+     * @throws Exception
+     */
     public function sendClientRegister($data,$code,$url,$send = 0){
 
         if($send == 1){
+
+            //resending email registration.
             $subject = str_replace('{user}',$data->client_role,config('futureed.subject_reg_resend'));
 
             $template = 'emails.client.registration-email';
 
         }else{
+
+            //sending email registration
             $subject = str_replace('{user}',$data->client_role,config('futureed.subject_register'));
 
             $template = ($data['client_role'] == 'Parent') ? 'emails.client.register-parent-email' : 'emails.client.register-principal-email';
@@ -124,7 +151,7 @@ class MailServices {
             'data' => [
                 'name' => $data['name'],
                 'code' => $code,
-                'link' => $url . '?email=' . $data['email'],
+                'link' => $url . '?email=' . $data['email'] . '&code=' . $code,
             ],
             'mail_recipient' => $data['email'],
             'mail_recipient_name' => $data['name' ],
@@ -135,6 +162,13 @@ class MailServices {
     }
 
 
+    /**
+     * @param $data
+     * @param $code
+     * @param $url
+     * @param $subject
+     * @throws Exception
+     */
     public function sendStudentMailResetPassword($data,$code,$url,$subject){
 
         $content = [
@@ -153,6 +187,13 @@ class MailServices {
         $this->sendMail($content);
     }
 
+    /**
+     * @param $data
+     * @param $code
+     * @param $url
+     * @param $subject
+     * @throws Exception
+     */
     public function sendClientMailResetPassword($data,$code,$url,$subject){
 
         $content = [
@@ -171,6 +212,13 @@ class MailServices {
         $this->sendMail($content);
     }
 
+    /**
+     * @param $data
+     * @param $code
+     * @param $url
+     * @param $subject
+     * @throws Exception
+     */
     public function sendAdminMailResetPassword($data,$code,$url,$subject){
         $content = [
             'view' => 'emails.admin.forget-password',
@@ -188,6 +236,13 @@ class MailServices {
         $this->sendMail($content);
     }
 
+    /**
+     * @param $data
+     * @param $code
+     * @param $url
+     * @param int $send
+     * @throws Exception
+     */
     public function sendMailChangeEmail($data,$code,$url,$send = 0){
 
         $template = 'emails.student.change-email';
@@ -218,6 +273,11 @@ class MailServices {
     }
 
 
+    /**
+     * @param $data
+     * @param $url
+     * @throws Exception
+     */
     public function sendClientVerification($data,$url){
 
         $template = 'emails.client.verify-client';
@@ -239,6 +299,11 @@ class MailServices {
     }
 
 
+    /**
+     * @param $data
+     * @param $url
+     * @throws Exception
+     */
     public function sendClientRejection($data,$url){
 
         $template = 'emails.client.reject-client';
@@ -260,6 +325,11 @@ class MailServices {
     }
 
 
+    /**
+     * @param $data
+     * @param $url
+     * @throws Exception
+     */
     public function sendAdminChangeEmail($data,$url){
 
 		$template = 'emails.admin.change-email';
@@ -285,7 +355,11 @@ class MailServices {
 
     }
 
-
+    /**
+     * @param $data
+     * @param $new_password
+     * @throws Exception
+     */
     public function sendAdminChangePassword($data,$new_password){
 
 		$template = 'emails.admin.change-password';
@@ -309,6 +383,13 @@ class MailServices {
 
     }
 
+    /**
+     * @param $user
+     * @param $client
+     * @param $current
+     * @param $url
+     * @throws Exception
+     */
 	public function sendMailInviteTeacher($user,$client, $current, $url)
 	{
 
@@ -334,6 +415,10 @@ class MailServices {
 		$this->sendMail($content);
 	}
 
+    /**
+     * @param $data
+     * @throws Exception
+     */
     public function sendExistingStudentRegister($data)
     {
         $user_type = config('futureed.student');
@@ -354,6 +439,10 @@ class MailServices {
         $this->sendMail($content);
     }
 
+    /**
+     * @param $data
+     * @throws Exception
+     */
 	public function sendMailInviteStudent($data)
 	{
 		$user_type = config('futureed.student');
@@ -410,7 +499,6 @@ class MailServices {
 	 * Send email student with invitation code.
 	 * @param $data
 	 */
-
 	public function sendParentAddStudent($data,$client_details,$code){
 
 
@@ -430,6 +518,10 @@ class MailServices {
 		$this->sendMail($contents);
 	}
 
+    /**
+     * @param $data
+     * @throws Exception
+     */
     public function sendTeacherAddClass($data){
         $contents = [
             'view' => 'emails.client.invite-teacher-to-teach-class',
@@ -448,8 +540,11 @@ class MailServices {
         $this->sendMail($contents);
     }
 
-	//
-
+    /**
+     * @param $user_id
+     * @param $url
+     * @throws Exception
+     */
 	public function sendParentInviteStudent($user_id,$url){
 
 		$user_type = config('futureed.student');
@@ -474,6 +569,10 @@ class MailServices {
 		$this->sendMail($content);
 	}
 
+    /**
+     * @param $data
+     * @throws Exception
+     */
 	public function resetStudentModule($data){
 
 		$content = [
