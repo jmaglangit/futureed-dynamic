@@ -1,9 +1,7 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
 use FutureEd\Http\Requests;
-use FutureEd\Http\Requests\Api\InvoiceRequest;
 use FutureEd\Http\Requests\Api\ParentStudentRequest;
-use FutureEd\Models\Repository\Avatar\AvatarRepositoryInterface;
 use FutureEd\Models\Repository\Classroom\ClassroomRepositoryInterface;
 use FutureEd\Models\Repository\ClassStudent\ClassStudentRepositoryInterface;
 use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
@@ -16,6 +14,7 @@ use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use FutureEd\Models\Repository\User\UserRepositoryInterface;
 use FutureEd\Services\AvatarServices;
 use FutureEd\Services\CodeGeneratorServices;
+use FutureEd\Services\ErrorMessageServices as Error;
 use FutureEd\Services\MailServices;
 use FutureEd\Services\InvoiceServices;
 use Carbon\Carbon;
@@ -187,7 +186,8 @@ class ParentStudentController extends ApiController {
     /**
      * Add payment by parent.
      *
-     * @param InvoiceRequest $request
+     * @param $id
+     * @param ParentStudentRequest $request
      * @return mixed
      */
     public function paySubscription($id,ParentStudentRequest $request)
@@ -207,7 +207,7 @@ class ParentStudentController extends ApiController {
                 || $client_details->zip == null)
         {
 
-            return $this->respondErrorMessage(2800);
+            return $this->respondErrorMessage(Error ::BILLING_INFO_MISSING);
         }
 
         if($order_details_ctr == 0){
