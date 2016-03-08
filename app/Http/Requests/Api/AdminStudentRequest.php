@@ -38,7 +38,7 @@ class AdminStudentRequest extends ApiRequest {
 				return [
 					'username' => "required|alpha_num|string|min:8|max:32|unique:users,username,NULL,id,user_type,$student,deleted_at,NULL",
 					'email' => "required|email|unique:users,email,NULL,id,user_type,$student,deleted_at,NULL",
-					'status' => "string",
+					'status' => "required|string",
 					'first_name' => 'required|regex:'. config('regex.name') .'|string',
 					'last_name' => 'required|regex:'. config('regex.name') .'|string',
 					'gender' => 'required|in:Male,Female',
