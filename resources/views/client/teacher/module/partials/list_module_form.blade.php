@@ -103,7 +103,7 @@
 		            <td>
 		            	<div class="row">
 		            		<div class="col-xs-6">
-		            			<a href="javascript:void(0)" ng-click="module.launchModule('{!! route('client.teacher.teaching_content.index') !!}', info.id)" title="launch">Launch</a>
+		            			<a href="javascript:void(0)" ng-click="module.launchModule('{!! route('client.teacher.question.index') !!}', info.id)" title="launch">Launch</a>
 		            		</div>
 		            		<div class="col-xs-6">
 		            			<a href="javascript:void(0)" ng-click="module.setActive(futureed.ACTIVE_VIEW ,info.id)" title="view"><span><i class="fa fa-eye"></i></span></a>
