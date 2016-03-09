@@ -5,7 +5,9 @@ use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
 use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
+use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use FutureEd\Services\ClientServices;
+use FutureEd\Services\StudentServices;
 use FutureEd\Services\UserServices;
 use FutureEd\Services\MailServices;
 use FutureEd\Services\CodeGeneratorServices;
@@ -18,15 +20,21 @@ class UserController extends ApiController{
     protected $client_service;
     protected $client;
     protected $user_service;
+    protected $student;
+    protected $student_service;
 
     public function __construct(
         ClientRepositoryInterface $clientRepositoryInterface,
         ClientServices $clientServices,
-        UserServices $userServices
+        UserServices $userServices,
+        StudentRepositoryInterface $studentRepositoryInterface,
+        StudentServices $studentServices
     ){
         $this->client_service = $clientServices;
         $this->client = $clientRepositoryInterface;
         $this->user_service = $userServices;
+        $this->student_service = $studentServices;
+        $this->student = $studentRepositoryInterface;
     }
 
     /**
@@ -119,12 +127,14 @@ class UserController extends ApiController{
 
         }elseif( strtolower($student) == strtolower($input['user_type'])){
             
-           $return = $this->student->getStudentId($user_check['user_id']);
+            $return = $this->student->getStudentByUserId($user_check['user_id']);
+
+            return $this->respondWithData($return->toArray());
 
         }else{
 
             //todo admin confirmation for admin.methods not yet made since where not on admin side.//
-
+            $return = 0;
         }
 
         return $this->respondWithData([
