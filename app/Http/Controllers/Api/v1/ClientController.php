@@ -129,8 +129,8 @@ class ClientController extends ApiController {
 
 			if(!($checkUsername)  || $checkUsername['user_id'] == $clientDetails['user_id'] ){
 
-				if(strtolower($clientDetails['client_role']) == 'parent' ||
-				   strtolower($clientDetails['client_role']) == 'teacher'){
+				if($clientDetails['client_role'] === config('futureed.parent') ||
+				   $clientDetails['client_role'] === config('futureed.teacher')){
 
 					$this->user->updateUsername($return['user_id'],$user);
 					$this->client->updateClientDetails($return['id'],$client);
