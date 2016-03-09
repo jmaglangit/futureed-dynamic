@@ -303,7 +303,6 @@ function StudentLoginController($scope, $filter, $controller, StudentLoginServic
 					if(response.errors) {
 						self.errors = $scope.errorHandler(response.errors);
 					} else if(response.data){
-						console.log(response.data);
 						$("#redirect_form input[name='id']").val(response.data.id);
 						$("#redirect_form input[name='email']").val(self.record.email);
 						$("#redirect_form input[name='confirmation_code']").val(self.record.email_code);
@@ -413,7 +412,6 @@ function StudentLoginController($scope, $filter, $controller, StudentLoginServic
 	self.studentConfirmRegistration = function(event) {
 		event = getEvent(event);
 		event.preventDefault();
-		console.log(event);
 
 		self.errors = Constants.FALSE;
 		self.record.user_type = Constants.STUDENT;
