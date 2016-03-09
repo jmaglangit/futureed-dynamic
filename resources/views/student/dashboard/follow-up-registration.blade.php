@@ -2,23 +2,15 @@
 
 @section('content')
 <div class="container login" ng-init="resetChecked()" ng-cloak>
-    <div class="form-style form-wide" ng-if="!done"> 
+    <div class="form-style form-wide">
+
+        {!! Form::open(array('id' => 'process_form', 'method' => 'GET', 'route' => 'student.dashboard.index')) !!}
+            {!! Form::hidden('user_data', '') !!}
+        {!! Form::close() !!}
+
     	<form class="form-horizontal" name="followup_registration_form">
             <div class="form-header">
                 <div class="lmtcontain">
-                    <div class="steps two">
-                        <ul class="items">
-                            <li ng-class="{ 'active' : !has_avatar}">
-                                <div class="rnd-identifier"></div>
-                                <span>Step 1</span>
-                            </li>
-                            <li ng-class="{ 'active' : has_avatar }">
-                                <div class="rnd-identifier"></div>
-                                <span>Step 2</span>
-                                <div class="pbar"></div>
-                            </li>
-                        </ul>
-                    </div>
                 </div>
             </div>
             <div class="">
@@ -49,12 +41,6 @@
                     <div class="btmcon">
                         <button type="button" ng-if="enable" class="btn btn-maroon btn-medium" ng-click="$parent.selectAvatar()">Proceed</button>
                     </div>
-                </div>
-                <div class="lmtcontain form-group" ng-if="has_avatar">
-                    <h3>Learning Style Quiz</h3>
-
-                    <div template-directive template-url="{!! route('student.learning-style.index') !!}"></div>
-                    
                 </div>
             </div>
         </form>
