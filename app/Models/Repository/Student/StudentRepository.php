@@ -99,7 +99,6 @@ class StudentRepository implements StudentRepositoryInterface
 	 * @return bool
 	 */
 	public function getStudentByUserId($user_id){
-		DB::beginTransaction();
 
 		try {
 
@@ -107,17 +106,12 @@ class StudentRepository implements StudentRepositoryInterface
 
 		} catch (\Exception $e) {
 
-			DB::rollback();
-
 			$this->errorLog($e->getMessage());
 
 			return false;
 		}
 
-		DB::commit();
-
 		return $response;
-
 	}
 
 
