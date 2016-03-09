@@ -4,6 +4,7 @@ use FutureEd\Http\Controllers\Api\Traits\ApiValidatorTrait;
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
+use FutureEd\Models\Repository\Admin\AdminRepositoryInterface;
 use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use FutureEd\Services\ClientServices;
@@ -22,19 +23,22 @@ class UserController extends ApiController{
     protected $user_service;
     protected $student;
     protected $student_service;
+    protected $admin;
 
     public function __construct(
         ClientRepositoryInterface $clientRepositoryInterface,
         ClientServices $clientServices,
         UserServices $userServices,
         StudentRepositoryInterface $studentRepositoryInterface,
-        StudentServices $studentServices
+        StudentServices $studentServices,
+        AdminRepositoryInterface $adminRepositoryInterface
     ){
         $this->client_service = $clientServices;
         $this->client = $clientRepositoryInterface;
         $this->user_service = $userServices;
         $this->student_service = $studentServices;
         $this->student = $studentRepositoryInterface;
+        $this->admin = $adminRepositoryInterface;
     }
 
     /**
