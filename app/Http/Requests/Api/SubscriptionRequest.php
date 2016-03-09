@@ -23,11 +23,13 @@ class SubscriptionRequest extends ApiRequest {
     	    case 'POST':
 
         	    return [
-					'name' => 'required|regex:' . config('regex.name_numeric'),
-					'price' => 'required|numeric|min:0.01|max:999999.99',
-					'description' => 'required',
-					'days' => 'required|integer',
-					'status' => 'required|in:Enabled,Disabled'];
+					'name'          => 'required|regex:' . config('regex.name_numeric'),
+					'price'         => 'required|numeric|min:0.01|max:999999.99',
+					'description'   => 'required',
+					'days'          => 'required|integer',
+					'status'        => 'required|in:Enabled,Disabled',
+		            'has_lsp'       => 'required|in:1,0'
+	            ];
     	    break;
 
     	    case 'PATCH':
@@ -38,10 +40,12 @@ class SubscriptionRequest extends ApiRequest {
                     break;
                     default:
                     return [
-					'name' => 'required|regex:' . config('regex.name_numeric'),
-					'price' => 'required|numeric|min:0.01|max:999999.99',
-					'description' => 'required',
-					'status' => 'required|in:Enabled,Disabled'];
+						'name'          => 'required|regex:' . config('regex.name_numeric'),
+						'price'         => 'required|numeric|min:0.01|max:999999.99',
+						'description'   => 'required',
+						'status'        => 'required|in:Enabled,Disabled',
+		                'has_lsp'       => 'required|in:1,0'
+                    ];
                 }
 
             break;
@@ -53,7 +57,8 @@ class SubscriptionRequest extends ApiRequest {
                     'price'         => 'required|numeric|min:0.01|max:999999.99',
                     'description'   => 'required',
                     'days'          => 'required|integer',
-                    'status'        => 'required|in:Enabled,Disabled'
+                    'status'        => 'required|in:Enabled,Disabled',
+	                'has_lsp'       => 'required|in:1,0'
                 ];
 
                 break;
@@ -74,6 +79,8 @@ class SubscriptionRequest extends ApiRequest {
 			'numeric' => 'The :attribute must be a number.',
 			'name.required' => 'The subscription name field is required.',
 			'name.regex' => 'The subscription name format is invalid.',
+			'has_lsp.required' => 'The learning style is required.',
+			'has_lsp.in' => 'The learning style format is invalid'
 		];
 	}
 }

@@ -17,7 +17,8 @@ class CreateSubscriptionTable extends Migration {
             $table->string('name', 128);
             $table->decimal('price', 8, 2);
             $table->string('description', 256);
-            $table->enum('status', ['Enabled', 'Diabled']);
+			$table->bigInteger('days');
+            $table->enum('status', ['Enabled', 'Disabled']);
             $table->bigInteger('created_by');
             $table->bigInteger('updated_by');
             $table->softDeletes()->nullable();

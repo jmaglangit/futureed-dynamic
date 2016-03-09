@@ -117,6 +117,39 @@
 					</div>
 				</div>
 			</div>
+			<div class="form-group">
+				<label class="col-xs-3 control-label" id="status">Learning Style <span class="required">*</span></label>
+				<div class="col-xs-5">
+					<div class="col-xs-6 checkbox">
+						<label>
+							{!! Form::radio('lsp'
+                                , '1'
+                                , false
+                                , array(
+                                    'class' => 'field',
+                                    'value' => 'Enabled',
+                                    'ng-model' => 'price.record.has_lsp'
+                                )
+                            ) !!}
+							<span class="lbl padding-8">Enabled</span>
+						</label>
+					</div>
+					<div class="col-xs-6 checkbox">
+						<label>
+							{!! Form::radio('lsp'
+                                , '0'
+                                , false
+                                , array(
+                                    'class' => 'field',
+                                    'value' => 'Disabled',
+									'ng-model' => 'price.record.has_lsp'
+                                )
+                            ) !!}
+							<span class="lbl padding-8">Disabled</span>
+						</label>
+					</div>
+				</div>
+			</div>
 		</fieldset>
 
 		<fieldset>
