@@ -11,10 +11,6 @@
 		</div>
 	</div>
 
-	<div class="view-contents-btn">
-		<button class="btn btn-maroon" ng-click="question.viewContents('{!! route('client.teacher.teaching_content.index') !!}')">View Contents</button> 
-	</div>
-
 	<div class="col-xs-12 question-search-container">
 		<div class="form-search">
 			{!! Form::open(array('class' => 'form-horizontal', 'ng-submit' => 'question.searchFnc($event)'))!!}
