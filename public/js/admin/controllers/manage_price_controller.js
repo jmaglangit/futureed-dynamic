@@ -44,14 +44,9 @@ function ManagePriceController($scope, salesService, TableService) {
 	self.list = function(){
 		self.errors = Constants.FALSE;
 		self.table.loading = Constants.TRUE;
-		for(var props in self.table)
-		{
-			if(self.table.hasOwnProperty(props))
-			{
-				console.log(props + ': ' + self.table[props]);
-			}
-		}
+
 		$scope.ui_block();
+		
 		salesService.getPriceList(self.table).success(function(response){
 			self.table.loading = Constants.TRUE;
 
@@ -60,27 +55,6 @@ function ManagePriceController($scope, salesService, TableService) {
 					self.errors = $scope.errorHandler(response.errors);
 				}else if(response.data){
 					self.records = response.data.records;
-					for(var props in self.records)
-					{
-						if(self.records.hasOwnProperty(props)){
-							console.log(props + ': ' + self.records[props]);
-							for(var a in self.records[props])
-							{
-								console.log(a + ': ' +self.records[props][a]);
-							}
-						}
-					}
-					for(var props in response.data)
-					{
-						if(response.data.hasOwnProperty(props))
-						{
-							console.log(props + ': ' + response.data[props]);
-							for(var p in response.data[props])
-							{
-								console.log(response.data[props][p]);
-							}
-						}
-					}
 					self.updatePageCount(response.data);
 				}
 			}

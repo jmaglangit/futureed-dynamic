@@ -88,8 +88,8 @@
 			</div>
 			<div class="form-group">
 				<label class="col-xs-3 control-label" id="status">Status <span class="required">*</span></label>
-				<div class="col-xs-5">
-					<div class="col-xs-6 checkbox">
+				<div class="col-xs-9">
+					<div class="col-xs-3 checkbox">
 						<label>
 						{!! Form::radio('status'
 							, 'Enabled'
@@ -102,7 +102,7 @@
 						<span class="lbl padding-8">Enabled</span>
 						</label>
 					</div>
-					<div class="col-xs-6 checkbox">
+					<div class="col-xs-5 checkbox">
 						<label>
 						{!! Form::radio('status'
 							, 'Disabled'
@@ -119,33 +119,31 @@
 			</div>
 			<div class="form-group">
 				<label class="col-xs-3 control-label" id="status">Learning Style <span class="required">*</span></label>
-				<div class="col-xs-5">
-					<div class="col-xs-6 checkbox">
+				<div class="col-xs-9">
+					<div class="col-xs-3 checkbox">
 						<label>
 							{!! Form::radio('lsp'
                                 , '1'
                                 , false
                                 , array(
                                     'class' => 'field',
-                                    'value' => 'Enabled',
                                     'ng-model' => 'price.record.has_lsp'
                                 )
                             ) !!}
-							<span class="lbl padding-8">Enabled</span>
+							<span class="lbl padding-8">Included</span>
 						</label>
 					</div>
-					<div class="col-xs-6 checkbox">
+					<div class="col-xs-5 checkbox">
 						<label>
 							{!! Form::radio('lsp'
                                 , '0'
                                 , false
                                 , array(
                                     'class' => 'field',
-                                    'value' => 'Disabled',
 									'ng-model' => 'price.record.has_lsp'
                                 )
                             ) !!}
-							<span class="lbl padding-8">Disabled</span>
+							<span class="lbl padding-8">Not Included</span>
 						</label>
 					</div>
 				</div>
@@ -217,6 +215,7 @@
 				<tr>
 					<th>Subscription Name</th>
 					<th>Description</th>
+					<th>Learning Style</th>
 					<th>Price</th>
 					<th ng-if="price.records.length">Action</th>
 				</tr>
@@ -225,6 +224,7 @@
 				<tr ng-repeat="record in price.records">
 					<td>{! record.name !}</td>
 					<td>{! record.description !}</td>
+					<td>{! record.has_lsp ? "Included" : "Not Included" !}</td>
 					<td>{! record.price | currency : "USD$ " : 2 !}</td>
 					<td>
 						<div class="row">
