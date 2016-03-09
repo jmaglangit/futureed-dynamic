@@ -12,10 +12,8 @@
 	<br>
 	<div>So tell us, who would you like to be when you grow up? A doctor, astronaut, scientist?  Pick your Avatar </div>
     <br>
-    <div>Your confirmation code : {{ $code  }}</div>
+    <div><a href="{{ $link }}">Confirm Email</a></div>
     <br>
-    <div>Link to Future Lessons: <a href="{{ $link }}">Confirm Code</a></div><br/>
-
     <div>Regards,</div><br/>
     <div>Admin</div>
 
