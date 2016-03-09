@@ -93,6 +93,33 @@ class StudentRepository implements StudentRepositoryInterface
 		return $response;
 	}
 
+	/**
+	 * Get student information by user_id.
+	 * @param $user_id
+	 * @return bool
+	 */
+	public function getStudentByUserId($user_id){
+		DB::beginTransaction();
+
+		try {
+
+			$response = Student::with('user')->userId($user_id)->first();
+
+		} catch (\Exception $e) {
+
+			DB::rollback();
+
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+
+		DB::commit();
+
+		return $response;
+
+	}
+
 
 	/**
 	 * Get student's user id with the given student id
