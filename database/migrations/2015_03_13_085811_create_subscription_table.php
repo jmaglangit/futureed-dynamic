@@ -18,8 +18,8 @@ class CreateSubscriptionTable extends Migration {
             $table->decimal('price', 8, 2);
             $table->string('description', 256);
 			$table->bigInteger('days');
-            $table->enum('status', ['Enabled', 'Disabled']);
-            $table->bigInteger('created_by');
+			$table->enum('status', ['Enabled', 'Diabled']);
+			$table->bigInteger('created_by');
             $table->bigInteger('updated_by');
             $table->softDeletes()->nullable();
             $table->timestamps();
