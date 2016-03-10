@@ -207,7 +207,7 @@ class ParentStudentController extends ApiController {
                 || $client_details->zip == null)
         {
 
-            return $this->respondErrorMessage(Error ::BILLING_INFO_MISSING);
+            return $this->respondErrorMessage(Error::BILLING_INFO_MISSING);
         }
 
         if($order_details_ctr == 0){
