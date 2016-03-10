@@ -112,14 +112,22 @@ class LoginController extends Controller {
 	 */
 	public function registration()
 	{
-		$input = Input::only('email');
+		$input = Input::only('email','code');
 		$invitation  = Input::only('registration_token', 'id');
 
 		if($invitation['id'] && $invitation['registration_token']){
-			return view('student.login.registration', ['email' => null, 'id' => $invitation['id'], 'registration_token' => $invitation['registration_token']]);
+			return view('student.login.registration', [
+				'email' => null,
+				'id' => $invitation['id'],
+				'registration_token' => $invitation['registration_token'
+				]]);
 		}
 		else{
-			return view('student.login.registration', ['email' => $input['email'], 'id' => null, 'registration_token' => null]);
+			return view('student.login.registration', [
+				'email' => $input['email'],
+				'code' => $input['code'],
+				'id' => null,
+				'registration_token' => null]);
 		}
 	}
 	
