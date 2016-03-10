@@ -35,6 +35,7 @@ class StudentRegistrationController extends StudentController {
         $input = Input::only('callback_uri');
 
         //Student fields validations
+        //TODO: refactor into request filters.
         $this->addMessageBag($this->firstName($student,'first_name'));
         $this->addMessageBag($this->lastName($student,'last_name'));
         $this->addMessageBag($this->gender($student,'gender'));
