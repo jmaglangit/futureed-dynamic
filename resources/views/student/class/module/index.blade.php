@@ -5,7 +5,8 @@
 @stop
 
 @section('content')
-	<div class="col-xs-12 module-contents-container" ng-controller="StudentModuleController as mod" ng-init="mod.updateBackground();mod.launchModule('{!! $id !!}');" ng-cloak>
+	<div class="col-xs-12 module-contents-container" ng-controller="StudentModuleController as mod"
+		 ng-init="mod.updateBackground();mod.launchModule('{!! $id !!}');" ng-cloak>
 		<div template-directive template-url="{!! route('student.partials.base_url') !!}"></div>
 
 		<ul class="breadcrumb">
@@ -67,9 +68,6 @@
 
 		<!-- Main Container -->
 		<div ng-if="!mod.record.module_done" class="col-xs-9">
-			<div ng-if="mod.active_contents">
-				<div template-directive template-url="{!! route('student.class.module.partials.contents') !!}"></div>
-			</div>
 
 			<div ng-if="mod.active_questions">
 				<div template-directive template-url="{!! route('student.class.module.partials.questions') !!}"></div>

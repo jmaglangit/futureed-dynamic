@@ -33,7 +33,7 @@
     <![endif]-->
     @yield('styles')
   </head>
-  <body class="student" ng-controller="futureedController" ng-init="getUserDetails(); checkLearningStyle()">
+  <body class="student" ng-controller="futureedController" ng-init="getUserDetails();">
     {!! Form::hidden('userdata', Session::get('student')) !!}
 
     <p class="notice"> BETA Stage: Under Development </p>
