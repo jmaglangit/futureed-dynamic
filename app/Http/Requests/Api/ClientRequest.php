@@ -1,7 +1,5 @@
 <?php namespace FutureEd\Http\Requests\Api;
 
-use Illuminate\Support\Facades\Input;
-
 class ClientRequest extends ApiRequest {
 
 	/**

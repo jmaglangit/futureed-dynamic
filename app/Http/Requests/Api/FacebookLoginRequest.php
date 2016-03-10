@@ -35,10 +35,9 @@ class FacebookLoginRequest extends ApiRequest {
 							'email' => 'required|email|unique:users,email,NULL,id,deleted_at,NULL,user_type,'.$this->__get('user_type'),
 							'first_name' => 'required|min:2|max:64|regex:'. config('regex.name'),
 							'last_name' => 'required|min:2|max:64|regex:'. config('regex.name'),
-							'country_id' => '|required_if:client_role,' . config('futureed.parent')
-								            .'|exists:countries,id',
-							'city' => '|required_if:client_role,' . config('futureed.parent'),
-
+							'country_id' => 'required_if:user_type,'. config('futureed.student')
+								.'|exists:countries,id',
+							'city' => 'required_if:user_type,'. config('futureed.student'),
 							'user_type' => 'required|in:'. config('futureed.client') . ',' . config('futureed.student'),
 
 							//Student
@@ -51,9 +50,6 @@ class FacebookLoginRequest extends ApiRequest {
 								.'|in:' . config('futureed.parent')
 								.','. config('futureed.principal'),
 							'zip' => 'max:10|regex:'. config('regex.zip_code'),
-
-							//Parent
-							'street_address' => 'required_if:client_role,'. config('futureed.parent').'|string|max:128',
 
 							//Principal
 							'state' => 'max:128|regex:'.config('regex.state_city'),
