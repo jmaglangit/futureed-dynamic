@@ -1,21 +1,46 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
-use FutureEd\Http\Controllers\Api\Traits\ApiValidatorTrait;
-use FutureEd\Http\Requests;
-use FutureEd\Http\Controllers\Controller;
-
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Input;
-use League\Flysystem\Exception;
+use FutureEd\Http\Requests\Api\StudentRegistrationRequest;
+use FutureEd\Models\Repository\Admin\AdminRepositoryInterface;
+use FutureEd\Models\Repository\ClientDiscount\ClientDiscountRepositoryInterface;
+use FutureEd\Models\Repository\Country\CountryRepositoryInterface;
+use FutureEd\Models\Repository\School\SchoolRepositoryInterface;
+use FutureEd\Models\Repository\Validator\ValidatorRepositoryInterface;
+use FutureEd\Services\AvatarServices;
+use FutureEd\Services\ClientServices;
+use FutureEd\Services\CodeGeneratorServices;
+use FutureEd\Services\GradeServices;
+use FutureEd\Services\MailServices;
+use FutureEd\Services\PasswordImageServices;
+use FutureEd\Services\PasswordServices;
+use FutureEd\Services\SchoolServices;
+use FutureEd\Services\StudentServices;
+use FutureEd\Services\TokenServices;
+use FutureEd\Services\UserServices;
 
 class StudentRegistrationController extends StudentController {
+
+    protected $request;
+
+    public function __construct(UserServices $user, StudentServices $student, SchoolServices $school, PasswordImageServices $password_image,
+                                TokenServices $token, MailServices $mailServices, ClientServices $client, GradeServices $grade,
+                                AvatarServices $avatar, CodeGeneratorServices $code, AdminRepositoryInterface $admin,
+                                PasswordServices $password, ValidatorRepositoryInterface $validatorRepositoryInterface,
+                                SchoolRepositoryInterface $schoolRepositoryInterface, CountryRepositoryInterface $countryRepositoryInterface,
+                                ClientDiscountRepositoryInterface $clientDiscountRepositoryInterface, StudentRegistrationRequest $request)
+    {
+        parent::__construct($user, $student, $school, $password_image, $token, $mailServices, $client, $grade, $avatar, $code, $admin, $password, $validatorRepositoryInterface, $schoolRepositoryInterface, $countryRepositoryInterface, $clientDiscountRepositoryInterface);
+        $this->request = $request;
+    }
+
 
     /*
      * Candidate users registration
      */
 
-    public function register(){
-        $student = Input::only(
+    public function register()
+    {
+        $student = $this->request->only(
             'first_name',
             'last_name',
             'gender',
@@ -26,36 +51,13 @@ class StudentRegistrationController extends StudentController {
             'state',
             'city');
 
-        $user = Input::only(
+        $user = $this->request->only(
             'username',
             'email',
             'first_name',
             'last_name');
 
-        $input = Input::only('callback_uri');
-
-        //Student fields validations
-        //TODO: refactor into request filters.
-        $this->addMessageBag($this->firstName($student,'first_name'));
-        $this->addMessageBag($this->lastName($student,'last_name'));
-        $this->addMessageBag($this->gender($student,'gender'));
-        $this->addMessageBag($this->birthDate($student,'birth_date'));
-        $this->addMessageBag($this->validateGradeCodeOptional($student,'grade_code'));
-        $this->addMessageBag($this->validateNumberOptional($student,'country_id')); // removed country name as required and changed it to country_id
-        $this->addMessageBag($this->validateAlphaSpaceOptional($student,'state'));
-        $this->addMessageBag($this->validateAlphaSpaceOptional($student,'city'));
-
-        //User fields validations
-        $this->addMessageBag($this->email($user,'email'));
-        $this->addMessageBag($this->username($user, 'username'));
-        $this->addMessageBag($this->validateString($input, 'callback_uri'));
-
-
-        $msg_bag = $this->getMessageBag();
-        if(!empty($msg_bag)){
-
-            return $this->respondWithError($this->getMessageBag());
-        }
+        $input = $this->request->only('callback_uri');
 
         //check if username exist
         $check_username = $this->user->checkUsername($user['username'],config('futureed.student'));
@@ -75,8 +77,6 @@ class StudentRegistrationController extends StudentController {
             return $this->respondErrorMessage(2200);
         }
 
-
-
         $user = array_merge($user,[
             'user_type' => config('futureed.student')
         ]);
@@ -84,7 +84,8 @@ class StudentRegistrationController extends StudentController {
         // add user, return status
         $user_response = $this->user->addUser($user);
 
-        if(isset($user_response['status'])){
+        if(isset($user_response['status']))
+        {
             $student = array_merge($student,[
                 'user_id' => $user_response['id']
             ]);
@@ -100,8 +101,6 @@ class StudentRegistrationController extends StudentController {
         }
 
         if(isset($student_response['status'])){
-
-
 
             //send email to user.
             $this->mail->sendStudentRegister($user_response['id'],$input['callback_uri']);
@@ -128,7 +127,8 @@ class StudentRegistrationController extends StudentController {
      * @return array
      */
     public function invite(){
-        $input = Input::only('id');
+
+        $input = $this->request->only('id');
         $user_type = config('futureed.student');
 
         //get student user
@@ -137,14 +137,11 @@ class StudentRegistrationController extends StudentController {
         //get student
         $student  = $this->student->getStudent($input['id']);
 
-
         $detail = [
             'id' => $user['id'],
             'username' => $user['username'],
             'first_name' => $user['']
         ];
-        //TODO: return invite.
-
 
         return $detail;
     }
