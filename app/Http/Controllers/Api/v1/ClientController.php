@@ -1,6 +1,5 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
-
 use FutureEd\Http\Requests\Api\ClientRequest;
 use FutureEd\Models\Repository\Student\ClientRepositoryInterface;
 use Illuminate\Support\Facades\Input;
@@ -90,9 +89,7 @@ class ClientController extends ApiController {
 				return $this->respondErrorMessage(2001);
 
 			}
-
 		}
-
 	}
 
 	/**
@@ -108,7 +105,6 @@ class ClientController extends ApiController {
 		if($return){
 
 			$clientDetails = $this->client->getClientDetails($id)->toArray();
-			$userDetails = $this->user->getUserDetail($return['user_id'],'Client')->toArray();
 
 			$user = $clientRequest->only('username','email');
 			$client = $clientRequest->only('first_name','last_name','street_address',
@@ -207,7 +203,7 @@ class ClientController extends ApiController {
 		$school_exist = $this->school->checkSchoolNameExist($school);
 
 		if ($check_username) {
-
+			
 			return $this->respondErrorMessage(2104);
 
 		} else if ($check_email) {
