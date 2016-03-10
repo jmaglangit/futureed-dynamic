@@ -115,7 +115,7 @@ class ClientController extends ApiController {
 								  'city','country','zip','state','country_id');
 
 			$school = $clientRequest->only('school_name','school_code','school_street_address','school_city',
-									  'school_state','school_country','school_country_id','school_zip','school_contact_name','school_contact_number');>>>>>>> cbf31a94f250a7c18bf115303d8593b7a7c43e11
+									  'school_state','school_country','school_country_id','school_zip','school_contact_name','school_contact_number');
 
 			$checkUsername = $this->user->checkUsername($user['username'],'Client');
 			$user['name'] = $client['first_name'].' '.$client['last_name'];
