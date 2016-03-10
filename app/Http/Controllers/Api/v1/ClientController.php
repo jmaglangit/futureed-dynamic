@@ -6,7 +6,7 @@ use FutureEd\Models\Repository\Student\ClientRepositoryInterface;
 use Illuminate\Support\Facades\Input;
 
 class ClientController extends ApiController {
-	
+
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -168,6 +168,7 @@ class ClientController extends ApiController {
 
 		}else{
 			return $this->respondErrorMessage(2001);
+
 		}
 	}
 
@@ -178,8 +179,9 @@ class ClientController extends ApiController {
 	 * @param ClientRequest $clientRequest
 	 * @return mixed
 	 */
-	public function store(ClientRequest $clientRequest){
-	
+	public function store(ClientRequest $clientRequest)
+	{
+
 		$user_type = config('futureed.client');
 
 		$client = $clientRequest->only('first_name', 'last_name', 'client_role', 'school_code',
@@ -314,7 +316,7 @@ class ClientController extends ApiController {
 	 */
 	public function checkBillingAddress($id)
 	{
-		$client_details = $this->user->getClientDetails($id);
+		$client_details = $this->client->getClientDetails($id);
 
 		if($client_details->street_address == null
 				|| $client_details->city == null

@@ -4,7 +4,14 @@ angular.module('futureed.services')
 function ManageParentPaymentService($http){
 	var serviceUrl = '/api/v1/';
 	var service = {};
-	
+
+	service.checkBillingAddress = function(id) {
+		return $http({
+			method : Constants.METHOD_GET,
+			 url   : serviceUrl + 'client/check-billing-address/' + id
+		});
+	}
+
 	service.list = function(search, table) {
 		return $http({
 			method : Constants.METHOD_GET
