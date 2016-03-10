@@ -203,14 +203,7 @@ class ClientController extends ApiController {
 		$school_exist = $this->school->checkSchoolNameExist($school);
 
 		if ($check_username) {
-
-			$this->addMessageBag($this->validateStringOptional($client, 'street_address'));
-			$this->addMessageBag($this->validateAlphaSpaceOptional($client, 'city'));
-			$this->addMessageBag($this->validateAlphaSpaceOptional($client, 'state'));
-			$this->addMessageBag($this->validateStringOptional($client, 'country'));
-			$this->addMessageBag($this->validateNumberOptional($client, 'country_id'));
-
-			$this->addMessageBag($this->zipCodeOptional($client, 'zip'));
+			
 			return $this->respondErrorMessage(2104);
 
 		} else if ($check_email) {
