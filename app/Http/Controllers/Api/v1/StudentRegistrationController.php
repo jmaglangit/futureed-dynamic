@@ -1,46 +1,16 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
 use FutureEd\Http\Requests\Api\StudentRegistrationRequest;
-use FutureEd\Models\Repository\Admin\AdminRepositoryInterface;
-use FutureEd\Models\Repository\ClientDiscount\ClientDiscountRepositoryInterface;
-use FutureEd\Models\Repository\Country\CountryRepositoryInterface;
-use FutureEd\Models\Repository\School\SchoolRepositoryInterface;
-use FutureEd\Models\Repository\Validator\ValidatorRepositoryInterface;
-use FutureEd\Services\AvatarServices;
-use FutureEd\Services\ClientServices;
-use FutureEd\Services\CodeGeneratorServices;
-use FutureEd\Services\GradeServices;
-use FutureEd\Services\MailServices;
-use FutureEd\Services\PasswordImageServices;
-use FutureEd\Services\PasswordServices;
-use FutureEd\Services\SchoolServices;
-use FutureEd\Services\StudentServices;
-use FutureEd\Services\TokenServices;
-use FutureEd\Services\UserServices;
 
 class StudentRegistrationController extends StudentController {
-
-    protected $request;
-
-    public function __construct(UserServices $user, StudentServices $student, SchoolServices $school, PasswordImageServices $password_image,
-                                TokenServices $token, MailServices $mailServices, ClientServices $client, GradeServices $grade,
-                                AvatarServices $avatar, CodeGeneratorServices $code, AdminRepositoryInterface $admin,
-                                PasswordServices $password, ValidatorRepositoryInterface $validatorRepositoryInterface,
-                                SchoolRepositoryInterface $schoolRepositoryInterface, CountryRepositoryInterface $countryRepositoryInterface,
-                                ClientDiscountRepositoryInterface $clientDiscountRepositoryInterface, StudentRegistrationRequest $request)
-    {
-        parent::__construct($user, $student, $school, $password_image, $token, $mailServices, $client, $grade, $avatar, $code, $admin, $password, $validatorRepositoryInterface, $schoolRepositoryInterface, $countryRepositoryInterface, $clientDiscountRepositoryInterface);
-        $this->request = $request;
-    }
-
 
     /*
      * Candidate users registration
      */
 
-    public function register()
+    public function register(StudentRegistrationRequest $request)
     {
-        $student = $this->request->only(
+        $student = $request->only(
             'first_name',
             'last_name',
             'gender',
@@ -51,13 +21,13 @@ class StudentRegistrationController extends StudentController {
             'state',
             'city');
 
-        $user = $this->request->only(
+        $user = $request->only(
             'username',
             'email',
             'first_name',
             'last_name');
 
-        $input = $this->request->only('callback_uri');
+        $input = $request->only('callback_uri');
 
         //check if username exist
         $check_username = $this->user->checkUsername($user['username'],config('futureed.student'));
@@ -124,11 +94,12 @@ class StudentRegistrationController extends StudentController {
     /**
      * Student invited on the class.
      *
+     * @param StudentRegistrationRequest $request
      * @return array
      */
-    public function invite(){
+    public function invite(StudentRegistrationRequest $request){
 
-        $input = $this->request->only('id');
+        $input = $request->only('id');
         $user_type = config('futureed.student');
 
         //get student user
