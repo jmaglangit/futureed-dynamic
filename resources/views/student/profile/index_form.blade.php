@@ -6,7 +6,7 @@
 	<fieldset>
 		<legend>Credentials Information</legend>
 		<div class="form-group">
-			<label for="" class="col-xs-2 control-label">Username <span class="required">*</span></label>
+			<label for="" class="col-xs-2 control-label">Username</label>
 			<div class="col-xs-4">
 				{!! Form::text('username', ''
 					, array(
@@ -116,7 +116,7 @@
 						, 'ng-disabled' => '!profile.active_edit')
 				) !!}
 			</div>
-			<label for="" class="col-xs-2 control-label">State</span></label>
+			<label for="" class="col-xs-2 control-label">State</label>
 			<div class="col-xs-4">
 				{!! Form::text('state', ''
 					, array(
@@ -129,7 +129,7 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label for="" class="col-xs-2 control-label">City <span class="required">*</span></label>
+			<label for="" class="col-xs-2 control-label">City</label>
 			<div class="col-xs-4">
 				{!! Form::text('city', ''
 					, array(
@@ -140,7 +140,7 @@
 						, 'ng-model' => 'profile.prof.city')
 				) !!}
 			</div>
-			<label for="" class="col-xs-2 control-label">Country <span class="required">*</span></label>
+			<label for="" class="col-xs-2 control-label">Country</label>
 			<div class="col-xs-4">
 				<select class="form-control" name="country_id"
 					ng-init="getCountries()"
@@ -170,7 +170,7 @@
 			</div>
 		</div>
 		<div class="form-group">
-		<label for="" class="col-xs-2 control-label">School level <span class="required">*</span></label>
+		<label for="" class="col-xs-2 control-label">School level</label>
 
 		<div class="col-xs-4 nullable">
 			<select class="form-control" name="grade_code" 
@@ -205,7 +205,7 @@
 				{!! Form::button('Save Changes'
 					, array(
 						'class' => 'btn btn-maroon btn-medium'
-						, 'ng-click' => 'profile.saveProfile()'
+							, 'ng-click' => 'profile.saveProfile()'
 					)
 				) !!}
 
