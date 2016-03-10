@@ -178,7 +178,9 @@ class ClientController extends ApiController {
 	 * @param ClientRequest $clientRequest
 	 * @return mixed
 	 */
-	public function store(ClientRequest $clientRequest){
+
+	public function store(ClientRequest $clientRequest)
+	{
 
 		$user_type = config('futureed.client');
 
