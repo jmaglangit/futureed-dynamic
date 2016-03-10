@@ -216,7 +216,7 @@
 			Address Information
 		</legend>
 		<div class="form-group">
-			<label for="" class="col-xs-3 control-label">Street Address <span class="required" ng-if="profile.is_required">*</span></label>
+			<label for="" class="col-xs-3 control-label">Street Address</label>
 			<div class="col-xs-5">
 				{!! Form::text('street_address', ''
 					, array(
@@ -228,7 +228,7 @@
 			</div>
 		</div>
 		<div class="form-group">
-			<label for="" class="col-xs-3 control-label">City <span class="required" ng-if="profile.is_required">*</span></label>
+			<label for="" class="col-xs-3 control-label">City</label>
 			<div class="col-xs-3">
 				{!! Form::text('city', ''
 					, array(
@@ -260,7 +260,7 @@
 						, 'ng-model' => 'profile.prof.zip')
 				) !!}
 			</div>
-			<label for="" class="col-xs-3 control-label">Country <span class="required" ng-if="profile.is_required">*</span></label>
+			<label for="" class="col-xs-3 control-label">Country</label>
 			<div class="col-xs-3">
 				<select name="country_id" class="form-control" ng-model="profile.prof.country_id" ng-disabled="!profile.active_edit">
 					<option ng-selected="profile.prof.country_id == futureed.FALSE" value="">-- Select Country --</option>
