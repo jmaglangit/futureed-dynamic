@@ -18,4 +18,7 @@ return [
 
 	//Phone Format
 	'phone' => '/^[0-9()-]+$/',
+
+	//confirmation_code
+	'email_code' => '/^[0-9]{4}(\-[0-9]{4})?$/',
 ];

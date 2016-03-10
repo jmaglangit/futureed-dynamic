@@ -127,7 +127,8 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 						break;
 					}
 				};
-				
+
+				self.startQuestions();
 				// if student module data exists; continue.
 				if(student_module) {
 					self.record.student_module = student_module;
