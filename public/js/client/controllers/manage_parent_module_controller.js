@@ -155,7 +155,7 @@ function ManageParentModuleController($scope, clientProfileApiService, ManagePar
 		$scope.$parent.user.module_id = id;
 
 		clientProfileApiService.updateUserSession($scope.$parent.user).success(function(response){
-			window.location.href = 'module/teaching-content';
+			window.location.href = 'module/question';
         }).error(function(response) {
 			self.errors = $scope.internalError();
         });
