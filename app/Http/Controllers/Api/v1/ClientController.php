@@ -172,7 +172,6 @@ class ClientController extends ApiController {
 		}
 	}
 
-	
 	/**
 	 * Store newly created client
 	 *
