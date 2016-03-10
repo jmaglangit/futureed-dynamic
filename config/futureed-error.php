@@ -1,5 +1,6 @@
 <?php
 
+use FutureEd\Services\ErrorMessageServices as Error;
 
 return [
 
@@ -146,7 +147,7 @@ return [
 		2203 => 'The selected country is invalid.',
 
 		//  Parent Client Error Messages
-		2800 => 'You need to update your contact information in order to proceed buy a subscription.',
+		Error::BILLING_INFO_MISSING => 'You need to update your contact information in order to proceed buy a subscription.',
 
 		//account status messages
 		2230 => 'Account is inactive.',
