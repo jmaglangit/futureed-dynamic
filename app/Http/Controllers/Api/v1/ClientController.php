@@ -179,7 +179,9 @@ class ClientController extends ApiController {
 	 * @param ClientRequest $clientRequest
 	 * @return mixed
 	 */
-	public function store(ClientRequest $clientRequest){
+
+	public function store(ClientRequest $clientRequest)
+	{
 
 		$user_type = config('futureed.client');
 
@@ -305,7 +307,8 @@ class ClientController extends ApiController {
 
 		return $this->respondWithData([$this->client->deleteClient($id)]);
 
-    }
+
+	}
 
 	/**
 	 * To check client's billing address
