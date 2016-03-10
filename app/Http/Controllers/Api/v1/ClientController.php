@@ -166,7 +166,7 @@ class ClientController extends ApiController {
 				return $this->respondErrorMessage(2104);
 			}
 
-		}else{
+		} else {
 			return $this->respondErrorMessage(2001);
 
 		}
@@ -179,6 +179,7 @@ class ClientController extends ApiController {
 	 * @param ClientRequest $clientRequest
 	 * @return mixed
 	 */
+
 	public function store(ClientRequest $clientRequest)
 	{
 
@@ -305,6 +306,7 @@ class ClientController extends ApiController {
 		}
 
 		return $this->respondWithData([$this->client->deleteClient($id)]);
+
 
 	}
 
