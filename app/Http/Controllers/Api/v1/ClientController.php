@@ -13,15 +13,15 @@ class ClientController extends ApiController {
 	 * @return Response
 	 */
 	public function index() {
-	
+
 		$criteria = array();
 		$limit = 0;
 		$offset = 0;
-			
+
 		if(Input::get('name')) {
 			$criteria['name'] = Input::get('name');
 		}
-		
+
 		if(Input::get('school')) {
 			$criteria['school'] = Input::get('school');
 		}
@@ -29,27 +29,27 @@ class ClientController extends ApiController {
 		if(Input::get('school_code')) {
 			$criteria['school_code'] = Input::get('school_code');
 		}
-		
+
 		if(Input::get('client_role')) {
 			$criteria['client_role'] = Input::get('client_role');
 		}
-		
+
 		if(Input::get('email')) {
 			$criteria['email'] = Input::get('email');
 		}
-		
+
 		if(Input::get('status')) {
 			$criteria['status'] = Input::get('status');
 		}
-		
+
 		if(Input::get('limit')) {
 			$limit = intval(Input::get('limit'));
 		}
-		
+
 		if(Input::get('offset')) {
 			$offset = intval(Input::get('offset'));
 		}
-			
+
 		$clients = $this->client->getClients($criteria, $limit, $offset);
 
 		return $this->respondWithData($clients);
@@ -90,13 +90,10 @@ class ClientController extends ApiController {
 				return $this->respondErrorMessage(2001);
 
 			}
-
 		}
-
 	}
 
 	/**
-	 *
 	 * Update listing of clients
 	 * @param $id
 	 * @param ClientRequest $clientRequest
@@ -109,7 +106,6 @@ class ClientController extends ApiController {
 		if($return){
 
 			$clientDetails = $this->client->getClientDetails($id)->toArray();
-			$userDetails = $this->user->getUserDetail($return['user_id'],'Client')->toArray();
 
 			$user = $clientRequest->only('username','email');
 			$client = $clientRequest->only('first_name','last_name','street_address',
@@ -185,6 +181,7 @@ class ClientController extends ApiController {
 	 */
 	public function store(ClientRequest $clientRequest)
 	{
+
 		$user_type = config('futureed.client');
 
 		$client = $clientRequest->only('first_name', 'last_name', 'client_role', 'school_code',
@@ -209,7 +206,7 @@ class ClientController extends ApiController {
 		$school_exist = $this->school->checkSchoolNameExist($school);
 
 		if ($check_username) {
-
+			
 			return $this->respondErrorMessage(2104);
 
 		} else if ($check_email) {
@@ -264,10 +261,8 @@ class ClientController extends ApiController {
 	 * @param $id
 	 * @return mixed
 	 */
-	public function destroy($id){
-
-		$user_type = config('futureed.client');
-
+	public function destroy($id)
+	{
 
 		$this->addMessageBag($this->validateVarNumber($id));
 
@@ -311,7 +306,7 @@ class ClientController extends ApiController {
 
 		return $this->respondWithData([$this->client->deleteClient($id)]);
 
-    }
+	}
 
 	/**
 	 * To check client's billing address
@@ -329,7 +324,6 @@ class ClientController extends ApiController {
 				|| $client_details->country_id == 0
 				|| $client_details->zip == null)
 		{
-
 			return $this->respondWithData(['status' => 1]);
 		}
 		return $this->respondWithData(['status' => 0]);

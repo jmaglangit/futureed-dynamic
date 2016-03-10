@@ -190,7 +190,7 @@ class ParentStudentController extends ApiController {
      * @param ParentStudentRequest $request
      * @return mixed
      */
-    public function paySubscription($id,ParentStudentRequest $request)
+    public function paySubscription($id, ParentStudentRequest $request)
     {
         $order_data = $request->only('order_no');
         $order_no = $this->order->getOrderByOrderNo($order_data['order_no']);
