@@ -43,12 +43,12 @@ class AdminStudentRequest extends ApiRequest {
 					'last_name' => 'required|regex:'. config('regex.name') .'|string',
 					'gender' => 'required|in:Male,Female',
 					'birth_date' => 'required|date_format:Ymd',
-					'city' => 'required|string',
+					'city' => 'string',
 					'state' => 'string',
 					'country' => 'string',
-					'country_id' => 'required|integer',
+					'country_id' => 'integer',
 					'school_code' => 'integer',
-					'grade_code' => 'required|integer',
+					'grade_code' => 'integer',
 					'callback_uri' => 'required|string',
 				];
 				break;
