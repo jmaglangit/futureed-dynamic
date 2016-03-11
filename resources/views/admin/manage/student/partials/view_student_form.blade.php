@@ -226,7 +226,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-xs-3">City <span class="required">*</span></label>
+					<label class="control-label col-xs-3">City</label>
 					<div class="col-xs-5">
 						{!! Form::text('city','',
 							array('class' => 'form-control'
@@ -252,7 +252,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-xs-3 control-label">Country <span class="required">*</span></label>
+					<label class="col-xs-3 control-label">Country</label>
 					<div class="col-xs-5" ng-init="getCountries()">
 						<select name="country_id" 
 								id="country" 
@@ -298,7 +298,7 @@
 						</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-xs-3">Grade <span class="required">*</span></label>
+					<label class="control-label col-xs-3">Grade</label>
 					<div class="col-xs-5">
 						<select ng-disabled="student.active_view || !student.record.country_id" name="grade_code" ng-class="{ 'required-field' : student.fields['grade_code'] }" class="form-control" ng-model="student.record.grade_code">
 							<option value="">-- Select Level --</option>

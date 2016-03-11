@@ -24,7 +24,7 @@
 					User Credentials
 				</legend>
 				<div class="form-group">
-					<label class="col-xs-3 control-label" id="username">Username <span class="required">*</span></label>
+					<label class="col-xs-3 control-label" id="username">Username  <span class="required">*</span></label>
 					<div class="col-xs-5">
 						{!! Form::text('username',''
 							, array(
@@ -64,7 +64,7 @@
 					</div>	
 				</div>
 				<div class="form-group">
-					<label class="col-xs-3 control-label" id="status">Status <span class="required">*</span></label>
+					<label class="col-xs-3 control-label" id="status">Status</label>
 					<div class="col-xs-5">
 						<div class="col-xs-6 checkbox">
 							<label>
