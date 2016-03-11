@@ -1,10 +1,8 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
 use FutureEd\Http\Requests;
-use FutureEd\Http\Controllers\Controller;
+use FutureEd\Http\Requests\Api\StudentControllerRequest as StudentRequest;
 
-use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
 
 class StudentController extends ApiController {
@@ -72,35 +70,15 @@ class StudentController extends ApiController {
 	/**
 	 * Update the specified resource in storage.
 	 *
-	 * @param  int  $id
-	 * @return Response
+	 * @param StudentRequest $request
+	 * @param $id
+	 * @return mixed
 	 */
-	public function update($id)
+	public function update(StudentRequest $request ,$id)
 	{
 
-		$input = Input::only('first_name','last_name','gender','birth_date',
+		$input = $request->only('first_name','last_name','gender','birth_date',
 			              'email','username','grade_code','country_id','city','state');
-
-        //Student fields validations
-        $this->addMessageBag($this->firstName($input,'first_name'));
-        $this->addMessageBag($this->lastName($input,'last_name'));
-        $this->addMessageBag($this->gender($input,'gender'));
-        $this->addMessageBag($this->editBirthDate($input,'birth_date'));
-        $this->addMessageBag($this->validateGradeCode($input,'grade_code'));
-        $this->addMessageBag($this->validateNumber($input,'country_id'));
-        $this->addMessageBag($this->validateAlphaSpace($input,'city'));
-        $this->addMessageBag($this->validateAlphaSpaceOptional($input,'state'));
-
-        //User fields validations
-        $this->addMessageBag($this->email($input,'email'));
-        $this->addMessageBag($this->username($input, 'username'));
-
-        $msg_bag = $this->getMessageBag();
-        
-        if(!empty($msg_bag)){
-
-            return $this->respondWithError($this->getMessageBag());
-        }
 
         //check if username exist
         $check_username = $this->user->checkUsername($input['username'],config('futureed.student'));
