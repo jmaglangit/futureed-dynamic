@@ -40,7 +40,6 @@ class ClientRequest extends ApiRequest {
 						'state' => 'max:128|regex:'.config('regex.state_city'),
 						'zip' => 'max:10|regex:'. config('regex.zip_code')
 				];
-
 				if($role === config('futureed.principal'))
 				{
 					$specific_role_validations = [
@@ -75,7 +74,6 @@ class ClientRequest extends ApiRequest {
 						'school_name' => 'required|string|max:128',
 					];
 				}
-
 				if($role === config('futureed.principal') || $role === config('futureed.parent'))
 				{
 					if(strtolower($role) === config('futureed.principal'))
