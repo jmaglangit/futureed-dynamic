@@ -14,6 +14,26 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 	self.tableDefaults();
 
 	self.user_id = $scope.user.id;
+	self.student_billing_address_not_found = Constants.FALSE;
+
+	self.checkStudentBillingAddress = function() {
+		$scope.ui_block();
+		StudentPaymentService.checkBillingAddress(self.user_id).success(function(response){
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					if(response.data.status == 1) {
+						self.student_billing_address_not_found = Constants.TRUE;
+					}
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	};
 
 	self.setActive = function(active, id) {
 		self.errors = Constants.FALSE;
@@ -43,7 +63,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 				self.active_list = Constants.TRUE;
 				break;
 		}
-	}
+	};
 
 	self.searchFnc = function(event) {
 		self.errors = Constants.FALSE;
@@ -54,7 +74,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 		
 		event = getEvent(event);
 		event.preventDefault();
-	}
+	};
 
 	self.clear = function() {
 		self.errors = Constants.FALSE;
@@ -62,11 +82,11 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 
 		self.searchDefaults();
 		self.listPayments();
-	}
+	};
 
 	self.list = function() {
 		self.listPayments();
-	}
+	};
 
 	self.listPayments = function() {
 		self.errors = Constants.FALSE;
@@ -90,7 +110,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
-	}
+	};
 
 	self.listSubscription = function() {
 		self.subscriptions = [];
@@ -106,7 +126,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 		}).error(function(response) {
 			self.errors = $scope.internalError();
 		});
-	}
+	};
 
 	self.getSubjects = function() {
 		self.subjects = [];
@@ -122,7 +142,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 		}).error(function(response) {
 			self.errors = $scope.internalError();
 		});
-	}
+	};
 
 	self.setSubscription = function() {
 		$scope.ui_block();
@@ -141,7 +161,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
-	}
+	};
 
 	function computeDays(subscription, record) {
 		if(angular.equals(record.payment_status, Constants.PAID)) {
@@ -197,43 +217,46 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
-	}
+	};
 
 	self.saveSubscription = function() {
 		self.paySubscription(Constants.TRUE);
-	}
+	};
 
 	self.paySubscription = function(save) {
-		self.fields = [];
-		self.errors = Constants.FALSE;
+		self.checkStudentBillingAddress();
+		if(self.student_billing_address_not_found == Constants.FALSE) {
+			self.fields = [];
+			self.errors = Constants.FALSE;
 
-		self.invoice.order_date = $filter('date')(new Date(), 'yyyyMMdd');
-		self.invoice.payment_status = Constants.PENDING;
+			self.invoice.order_date = $filter('date')(new Date(), 'yyyyMMdd');
+			self.invoice.payment_status = Constants.PENDING;
 
-		$scope.ui_block();
-		StudentPaymentService.paySubscription(self.invoice).success(function(response) {
-			if(response.errors) {
-				self.errors = $scope.errorHandler(response.errors);
+			$scope.ui_block();
+			StudentPaymentService.paySubscription(self.invoice).success(function(response) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
 
-				angular.forEach(response.errors, function(value, key) {
-					self.fields[value.field] = Constants.TRUE;
-				});
+					angular.forEach(response.errors, function(value, key) {
+						self.fields[value.field] = Constants.TRUE;
+					});
 
-				$scope.ui_unblock();
-			} else if(response.data) {
-				if(save) {
-					self.setActive();
 					$scope.ui_unblock();
-				} else {
-					var invoice = response.data;
-					self.getPaymentUri(invoice);
+				} else if(response.data) {
+					if(save) {
+						self.setActive();
+						$scope.ui_unblock();
+					} else {
+						var invoice = response.data;
+						self.getPaymentUri(invoice);
+					}
 				}
-			}
-		}).error(function(response) {
-			self.errors = $scope.internalError();
-			$scope.ui_unblock();
-		});
-	}
+			}).error(function(response) {
+				self.errors = $scope.internalError();
+				$scope.ui_unblock();
+			});
+		}
+	};
 
 	self.getPaymentUri = function(invoice) {
 		var payment = {};
@@ -244,8 +267,8 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 			payment.order_no = invoice.order_no;
 
 		var base_url = $("#base_url_form input[name='base_url']").val();
-			payment.success_callback_uri = base_url + "/" + angular.lowercase(Constants.STUDENT) + "/payment/success"
-			payment.fail_callback_uri = base_url + "/" + angular.lowercase(Constants.STUDENT) + "/payment/fail"
+			payment.success_callback_uri = base_url + "/" + angular.lowercase(Constants.STUDENT) + "/payment/success";
+			payment.fail_callback_uri = base_url + "/" + angular.lowercase(Constants.STUDENT) + "/payment/fail";
 
 		StudentPaymentService.getPaymentUri(payment).success(function(response) {
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
@@ -261,7 +284,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
 		});
-	}
+	};
 
 	self.paymentDetail = function(id) {
 		self.errors = Constants.FALSE;
@@ -292,8 +315,8 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 		}).error(function(response) {
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();
-		});;
-	}
+		});
+	};
 
 	self.confirmDelete = function(id) {
 		self.errors = Constants.FALSE;
@@ -307,7 +330,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 	        keyboard: Constants.FALSE,
 	        show    : Constants.TRUE
 	    });
-	}
+	};
 
 	self.deleteInvoice = function(id) {
 		self.errors = Constants.FALSE;
@@ -336,7 +359,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 		});
 
 		$("html, body").animate({ scrollTop: 0 }, "slow");
-	}
+	};
 
 	self.renewPayment = function() {
 		self.errors = Constants.FALSE;
@@ -344,7 +367,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 		if(self.invoice.expired) {
 			var data = {
 				invoice_id	: self.invoice.id
-			}
+			};
 
 			StudentPaymentService.renewSubscription(data).success(function(response) {
 				if(angular.equals(response.status, Constants.STATUS_OK)) {
