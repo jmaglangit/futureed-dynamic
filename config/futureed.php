@@ -22,12 +22,6 @@ return [
 	'rejected' => 'Rejected',
 	'none' => 'None',
 
-	//General DB status(students, clients, admin)
-	'status' => [
-		'enabled' => 'Enabled',
-		'disabled' => 'Disabled'
-	],
-
 	//Request code expiry in seconds
 	'request_code_expiry' => 3600,
 

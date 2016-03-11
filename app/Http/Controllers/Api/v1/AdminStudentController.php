@@ -96,7 +96,7 @@ class AdminStudentController extends ApiController {
 		}
 
 		//default the value of status to enabled when not set
-		$student['status'] = $student['status'] == null ? config('futureed.status.enabled') : $student['status'];
+		$student['status'] = $student['status'] == null ? config('futureed.enabled') : $student['status'];
 
 		//default the country_id to 0 when not set
 		$student['country_id'] = $student['country_id'] == null ? 0 : $student['country_id'];
