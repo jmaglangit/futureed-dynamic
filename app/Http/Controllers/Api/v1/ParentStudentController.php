@@ -1,9 +1,7 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
 use FutureEd\Http\Requests;
-use FutureEd\Http\Requests\Api\InvoiceRequest;
 use FutureEd\Http\Requests\Api\ParentStudentRequest;
-use FutureEd\Models\Repository\Avatar\AvatarRepositoryInterface;
 use FutureEd\Models\Repository\Classroom\ClassroomRepositoryInterface;
 use FutureEd\Models\Repository\ClassStudent\ClassStudentRepositoryInterface;
 use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
@@ -16,6 +14,7 @@ use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use FutureEd\Models\Repository\User\UserRepositoryInterface;
 use FutureEd\Services\AvatarServices;
 use FutureEd\Services\CodeGeneratorServices;
+use FutureEd\Services\ErrorMessageServices as Error;
 use FutureEd\Services\MailServices;
 use FutureEd\Services\InvoiceServices;
 use Carbon\Carbon;
@@ -187,17 +186,30 @@ class ParentStudentController extends ApiController {
     /**
      * Add payment by parent.
      *
-     * @param InvoiceRequest $request
+     * @param $id
+     * @param ParentStudentRequest $request
      * @return mixed
      */
-    public function paySubscription($id,ParentStudentRequest $request)
+    public function paySubscription($id, ParentStudentRequest $request)
     {
         $order_data = $request->only('order_no');
         $order_no = $this->order->getOrderByOrderNo($order_data['order_no']);
-
         $order_details = $this->order_details->getOrderDetailsByOrderId($order_no['id']);
-
         $order_details_ctr = $order_details->count();
+        $parent_student_data = $request->all();
+        $client_id = $parent_student_data['parent_id'];
+        $client_details = $this->client->getClientDetails($client_id);
+
+        if($client_details->street_address == null
+                || $client_details->city == null
+                || $client_details->state == null
+                || $client_details->country_id == 0
+                || $client_details->zip == null)
+        {
+
+            return $this->respondErrorMessage(Error::BILLING_INFO_MISSING);
+        }
+
         if($order_details_ctr == 0){
             return $this->respondErrorMessage(2038);
         }
@@ -211,11 +223,8 @@ class ParentStudentController extends ApiController {
          * 5. Insert Invoice Details.
          */
 
-        $parent_student_data = $request->all();
 
         //1. Insert Classroom.
-
-        $client_id = $parent_student_data['parent_id'];
 
         $order_no = $order_no['order_no'];
 
@@ -272,8 +281,6 @@ class ParentStudentController extends ApiController {
         }
 
         //4. Insert Invoice.
-
-        $client_details = $this->client->getClientDetails($client_id);
 
         $invoice_id = $id;
         $invoice['order_no'] = $order_no;
