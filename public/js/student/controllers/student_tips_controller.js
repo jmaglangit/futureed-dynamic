@@ -228,8 +228,23 @@ function TipsController($scope, StudentTipsService, TableService, SearchService)
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
 
-		self.show_content_tips = !self.show_content_tips;
+		self.show_content_tips = Constants.TRUE;
 		
+		self.module_instance = module;
+		self.module = module.record;
+		self.question = module.current_question;
+		self.content = module.contents;
+
+		self.setActive();
+		self.setTipTabActive(Constants.CURRENT);
+	}
+
+	self.toggleTipsArrow = function(module) {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		self.show_content_tips = !self.show_content_tips;
+
 		self.module_instance = module;
 		self.module = module.record;
 		self.question = module.current_question;

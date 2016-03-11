@@ -1,9 +1,26 @@
-<div class="col-xs-12">
+<div class="col-xs-12 padding-0">
 	<div ng-if="!mod.result.answered && !mod.result.quoted && !mod.result.failed">
 		<div class="questions-container col-xs-12">
-			<div class="questions-header">
-				<h3> Question #{! mod.question_counter !} </h3>
-				<button ng-if="!mod.result.answered && !mod.result.quoted && !mod.result.failed" type="button" class="btn btn-maroon next-btn" ng-click="mod.checkAnswer()"> Submit </button>
+			<div class="row questions-header col-xs-12">
+				<div class="row col-xs-3">
+					<button type="button" class="btn btn-gold next-btn left-0"
+							ng-if="!mod.errors && !mod.record.module_done"
+							ng-click="mod.exitModule('{!! route('student.class.index') !!}')">Exit Module</button>
+					<button type="button" class="btn btn-gold next-btn "
+							ng-if="mod.errors && !mod.record.module_done"
+							ng-click="mod.exitModule('{!! route('student.dashboard.index') !!}')">Exit Module</button>
+				</div>
+
+				<div class="row col-xs-6">
+					<center><h3> Question #{! mod.question_counter !} </h3></center>
+				</div>
+
+				<div class="row col-xs-3">
+					<button ng-if="!mod.result.answered && !mod.result.quoted && !mod.result.failed"
+							type="button" class="btn btn-orange next-btn right-0"
+							ng-click="mod.checkAnswer()"> Submit </button>
+				</div>
+
 			</div>
 
 			<div class="questions-image">
@@ -35,15 +52,19 @@
 
 				<div ng-if="mod.current_question.question_type == futureed.FILLINBLANK" class="form-group">
 					<div ng-class="{ 'fib-text-fields' : mod.current_question.answer_text_field_count.length > 1 }">
-						<input ng-repeat="n in mod.current_question.answer_text_field_count track by $index" 
-							ng-model="mod.current_question.answer_text[n]"
-							name="answer_text" 
-							type="text" class="form-control question-text-answer" placeholder="Answer {! $index + 1 !}" />
+						<input ng-repeat="n in mod.current_question.answer_text_field_count track by $index"
+							   ng-model="mod.current_question.answer_text[n]"
+							   name="answer_text"
+							   type="text" class="form-control question-text-answer form-control-lg" placeholder="Answer {! $index + 1 !}"
+						/>
 					</div>
 				</div>
 
 				<div ng-if="mod.current_question.question_type == futureed.PROVIDE" class="form-group">
-					<input ng-model="mod.current_question.answer_text" name="answer_text" type="text" class="form-control question-text-answer" placeholder="Answer" />
+					<input ng-model="mod.current_question.answer_text"
+						   name="answer_text"
+						   type="text"
+						   class="form-control question-text-answer form-control-lg" placeholder="Answer"/>
 				</div>
 
 				<div ng-if="mod.current_question.question_type == futureed.ORDERING">
@@ -179,9 +200,6 @@
 					</div>
 				</div>
 			</div>
-
-
-			
 		</div>
 	</div>
 
