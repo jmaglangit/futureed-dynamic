@@ -23,12 +23,12 @@ class SubscriptionRequest extends ApiRequest {
     	    case 'POST':
 
         	    return [
-					'name'          => 'required|regex:' . config('regex.name_numeric'),
-					'price'         => 'required|numeric|min:0.01|max:999999.99',
-					'description'   => 'required',
-					'days'          => 'required|integer',
-					'status'        => 'required|in:Enabled,Disabled',
-		            'has_lsp'       => 'required|in:1,0'
+			            'name'          => 'required|regex:' . config('regex.name_numeric'),
+			            'price'         => 'required|numeric|min:0.01|max:999999.99',
+			            'description'   => 'required',
+			            'days'          => 'required|integer',
+			            'status'        => 'required|in:Enabled,Disabled',
+			            'has_lsp'       => 'required|in:1,0'
 	            ];
     	    break;
 
@@ -40,11 +40,11 @@ class SubscriptionRequest extends ApiRequest {
                     break;
                     default:
                     return [
-						'name'          => 'required|regex:' . config('regex.name_numeric'),
-						'price'         => 'required|numeric|min:0.01|max:999999.99',
-						'description'   => 'required',
-						'status'        => 'required|in:Enabled,Disabled',
-		                'has_lsp'       => 'required|in:1,0'
+		                    'name'          => 'required|regex:' . config('regex.name_numeric'),
+		                    'price'         => 'required|numeric|min:0.01|max:999999.99',
+		                    'description'   => 'required',
+		                    'status'        => 'required|in:Enabled,Disabled',
+		                    'has_lsp'       => 'required|in:1,0'
                     ];
                 }
 
@@ -53,12 +53,12 @@ class SubscriptionRequest extends ApiRequest {
             case 'PUT':
 
                 return [
-                    'name'          => 'required|regex:'. config('regex.name_numeric'),
-                    'price'         => 'required|numeric|min:0.01|max:999999.99',
-                    'description'   => 'required',
-                    'days'          => 'required|integer',
-                    'status'        => 'required|in:Enabled,Disabled',
-	                'has_lsp'       => 'required|in:1,0'
+		                'name'          => 'required|regex:'. config('regex.name_numeric'),
+		                'price'         => 'required|numeric|min:0.01|max:999999.99',
+		                'description'   => 'required',
+		                'days'          => 'required|integer',
+		                'status'        => 'required|in:Enabled,Disabled',
+		                'has_lsp'       => 'required|in:1,0'
                 ];
 
                 break;
