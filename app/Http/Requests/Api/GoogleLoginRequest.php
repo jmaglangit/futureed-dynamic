@@ -30,7 +30,7 @@ class GoogleLoginRequest extends ApiRequest {
 						return [
 							'google_app_id' => 'required|string
 								|unique:users,google_app_id,NULL,id,deleted_at,NULL,user_type,' . $this->__get('user_type'),
-							'username' => 'required|min:8|max:32|alpha_num|unique:users,username,NULL,id,deleted_at,NULL,user_type,'
+							'username' => 'min:8|max:32|alpha_num|unique:users,username,NULL,id,deleted_at,NULL,user_type,'
 								. $this->__get('user_type'),
 							'email' => 'required|email|unique:users,email,NULL,id,deleted_at,NULL,user_type,'.$this->__get('user_type'),
 							'first_name' => 'required|min:2|max:64|regex:'. config('regex.name'),
@@ -38,12 +38,11 @@ class GoogleLoginRequest extends ApiRequest {
 							'country_id' => 'required_if:user_type,'. config('futureed.student')
 								.'|exists:countries,id',
 							'city' => 'required_if:user_type,'. config('futureed.student'),
-
 							'user_type' => 'required|in:'. config('futureed.client') . ',' . config('futureed.student'),
 
 							//Student
 							'birth_date' => 'required_if:user_type,' . config('futureed.student').'|date|before:-14 year',
-							'grade_code' => 'required_if:user_type,' . config('futureed.student').'|exists:grades,code',
+							'grade_code' => 'exists:grades,code',
 							'gender' => 'required_if:user_type,' . config('futureed.student').'|in:Male,Female',
 
 							//Client
