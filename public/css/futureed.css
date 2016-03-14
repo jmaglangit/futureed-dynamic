@@ -1314,3 +1314,30 @@ fieldset legend {
 	padding: 8px;
 }
 
+.btn-orange {
+	background-color: #FA6900;
+	box-shadow: 0 0 0 1px #F38630, 0 3px 3px rgba(0, 0, 0, 0.3);
+	border-top: 1px solid #FA6900;
+}
+
+.form-control-lg {
+	font-size: 16px !important;
+	height: 40px;
+}
+
+.icon-resize {
+	height: 45px;
+	margin-left: 15px;
+}
+
+.padding-0 {
+	padding: 0;
+}
+
+.left-0 {
+	left: 0px;
+}
+
+.right-0 {
+	right: 0px;
+}

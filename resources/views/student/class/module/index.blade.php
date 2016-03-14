@@ -27,24 +27,9 @@
 	        </div>
 	    </div>
 		
-		<div class="col-xs-2">
+		<div class="col-xs-2 padding-0">
 			<div ng-if="!mod.record.module_done">
-				<div class="margin-top-bot-5 pointer" 
-					ng-class="{ 'disabled-help-bar' : mod.active_contents && !mod.contents }"
-					ng-if="!mod.no_record">
-					<img src="/images/class-student/icon-askforhelp.png" ng-click="mod.askHelp()">
-				</div>
-				<div class="margin-top-bot-5 pointer" 
-					ng-class="{ 'disabled-tips-bar' : mod.active_contents && !mod.contents }"
-					ng-if="!mod.no_record">
-					<img src="/images/class-student/icon-givetip.png" ng-click="mod.giveTip()">
-				</div>
-				<br />
 				<div class="btn-menu">
-					<div class="pointer" ng-if="!mod.no_record && mod.active_questions && !mod.result.failed">
-						<button type="button" class="btn btn-maroon"
-							ng-click="mod.reviewContent()"> Review Contents </button>
-					</div>
 					<div ng-if="mod.active_contents">
 						{!! Form::button('Proceed'
 							,array(
@@ -54,20 +39,12 @@
 							)
 						)!!}
 					</div>
-					<div>
-						<button type="button" class="btn btn-gold"
-								ng-if="!mod.errors"
-							ng-click="mod.exitModule('{!! route('student.class.index') !!}')">Exit Module</button>
-						<button type="button" class="btn btn-gold"
-								ng-if="mod.errors"
-								ng-click="mod.exitModule('{!! route('student.dashboard.index') !!}')">Exit Module</button>
-					</div>
 				</div>
 			</div>
 		</div>
 
 		<!-- Main Container -->
-		<div ng-if="!mod.record.module_done" class="col-xs-9">
+		<div ng-if="!mod.record.module_done" class="col-xs-12 padding-0">
 
 			<div ng-if="mod.active_questions">
 				<div template-directive template-url="{!! route('student.class.module.partials.questions') !!}"></div>
@@ -76,16 +53,23 @@
 		<!-- End of Main Container -->
 
 		<div class="row" ng-hide="mod.record.module_done || (mod.active_contents && !mod.contents)">
-			<div class="drawer col-xs-6" ng-controller="TipsController as tips">
+			<div class="drawer col-xs-6 left-0" ng-controller="TipsController as tips">
 				<div class="drawer-inside" ng-class="{ 'openup' : tips.show_content_tips }">
-					<div class="drawer-header pointer" ng-click="tips.toggleTips(mod)">
-						<img class="pull-left" ng-src="/images/class-student/icon-tip_principal.png">
+					<div class="drawer-header pointer">
+						<div ng-click="tips.toggleTips(mod)">
+							<img class="pull-left" ng-src="/images/class-student/icon-tip_principal.png" >
+							<p class="pull-left">Give Tips</p>
+						</div>
 
-						<p class="pull-left">Give Tips</p>	
+						<div class="pointer"
+							 ng-class="{ 'disabled-tips-bar' : mod.active_contents && !mod.contents }"
+							 ng-if="!mod.no_record && !mod.record.module_done">
+							<img src="/images/class-student/icon-givetip.png" ng-click="mod.giveTip()"
+								 class="icon-resize">
+						</div>
 
-						<img class="drawer-button" 
-							ng-class="{ 'flip-270' : tips.show_content_tips, 'flip-90' : !tips.show_content_tips, }" 
-							ng-src="/images/class-student/btn-slide.png">
+						<img class="drawer-button pull-right" ng-class="{ 'flip-270' : tips.show_content_tips, 'flip-90' : !tips.show_content_tips, }"
+							ng-src="/images/class-student/btn-slide.png" ng-click="tips.toggleTipsArrow(mod)">
 					</div>
 
 					<div template-directive template-url="{!! route('student.class.module.partials.add_tip') !!}"></div>
@@ -97,12 +81,22 @@
 			</div>
 			<div class="drawer-help col-xs-6" ng-controller="HelpController as help">
 				<div class="drawer-inside" ng-class="{ 'openup' : help.show_help_requests }">
-					<div class="drawer-header pointer" ng-click="help.toggleHelp(mod)">
-						<img class="pull-left" src="/images/class-student/icon-tip_principal.png">
-						<p class="pull-left">Help Request</p>	
+					<div class="drawer-header pointer">
+						<div ng-click="help.toggleHelp(mod)">
+							<img class="pull-left" src="/images/class-student/icon-tip_principal.png">
+							<p class="pull-left">Help Request</p>
+						</div>
 
-						<img class="drawer-button" 
-							ng-class="{ 'flip-270' : help.show_help_requests, 'flip-90' : !help.show_help_requests }" src="/images/class-student/btn-slide.png">
+						<div class="pointer"
+							 ng-class="{ 'disabled-help-bar' : mod.active_contents && !mod.contents }"
+							 ng-if="!mod.no_record && !mod.record.module_done">
+							<img src="/images/class-student/icon-askforhelp.png" ng-click="mod.askHelp()"
+								 class="icon-resize">
+						</div>
+
+						<img class="drawer-button" ng-class="{ 'flip-270' : help.show_help_requests, 'flip-90' : !help.show_help_requests }"
+							 src="/images/class-student/btn-slide.png"
+							 ng-click="help.toggleHelpArrow(mod)">
 					</div>
 					
 					<div template-directive template-url="{!! route('student.class.module.partials.add_help') !!}"></div>
