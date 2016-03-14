@@ -12,7 +12,7 @@ class AvatarsTableSeeder extends Seeder {
 
 	public function run()
 	{
-		$reader = Reader::createFromPath('public/csv/avatars.csv');
+		$reader = Reader::createFromPath( storage_path('seeders') . '/avatars.csv');
 
 		DB::table('avatars')->truncate();
 

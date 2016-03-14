@@ -13,7 +13,7 @@ class AvatarQuotesTableSeeder extends Seeder
 
 	public function run()
 	{
-		$reader = Reader::createFromPath('public/csv/avatar_quotes.csv');
+		$reader = Reader::createFromPath( storage_path('seeders') . '/avatar_quotes.csv' );
 
 		DB::table('avatar_quotes')->truncate();
 
