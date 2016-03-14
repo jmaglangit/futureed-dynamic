@@ -28,8 +28,8 @@ class SubscriptionRequest extends ApiRequest {
 			            'price'         => 'required|numeric|min:0.01|max:999999.99',
 			            'description'   => 'required',
 			            'days'          => 'required|integer',
-			            'status'        => 'required|in:Enabled,Disabled',
-			            'has_lsp'       => 'required|in:1,0'
+			            'status'        => 'required|in:'.config('futureed.enabled').','.config('futureed.disabled'),
+			            'has_lsp'       => 'required|in:'.config('futureed.true').','.config('futureed.false')
 	            ];
     	    break;
 
@@ -37,15 +37,15 @@ class SubscriptionRequest extends ApiRequest {
 
                 switch($this->route()->getName()){
                     case 'subscription.update.status':
-                        return ['status' => 'required|in:Enabled,Disabled'];    
+                        return ['status' => 'required|in:'.config('futureed.enabled').','.config('futureed.disabled')];
                     break;
                     default:
                     return [
 		                    'name'          => 'required|regex:' . config('regex.name_numeric'),
 		                    'price'         => 'required|numeric|min:0.01|max:999999.99',
 		                    'description'   => 'required',
-		                    'status'        => 'required|in:Enabled,Disabled',
-		                    'has_lsp'       => 'required|in:1,0'
+		                    'status'        => 'required|in:'.config('futureed.enabled').','.config('futureed.disabled'),
+		                    'has_lsp'       => 'required|in:'.config('futureed.true').','.config('futureed.false')
                     ];
                 }
 
@@ -58,8 +58,8 @@ class SubscriptionRequest extends ApiRequest {
 		                'price'         => 'required|numeric|min:0.01|max:999999.99',
 		                'description'   => 'required',
 		                'days'          => 'required|integer',
-		                'status'        => 'required|in:Enabled,Disabled',
-		                'has_lsp'       => 'required|in:1,0'
+		                'status'        => 'required|in:'.config('futureed.enabled').','.config('futureed.disabled'),
+		                'has_lsp'       => 'required|in:'.config('futureed.true').','.config('futureed.false')
                 ];
 
                 break;
