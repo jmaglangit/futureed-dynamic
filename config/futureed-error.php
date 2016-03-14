@@ -172,5 +172,12 @@ return [
 
 		7000 => 'Hmm, something went wrong. Please contact the system administrator.',
 
+		//  For subscription request error messages
+		Error::SUBSCRIPTION_MUST_BE_A_NUMBER => 'The :attribute must be a number.',
+		Error::SUBSCRIPTION_NAME_REQUIRED => 'The subscription name field is required.',
+		Error::SUBSCRIPTION_NAME_INVALID => 'The subscription name format is invalid.',
+		Error::SUBSCRIPTION_LSP_REQUIRED => 'The learning style is required.',
+		Error::SUBSCRIPTION_LSP_INVALID => 'The learning style format is invalid'
+
 	],
 ];
