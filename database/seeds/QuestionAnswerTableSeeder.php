@@ -8,7 +8,7 @@ class QuestionAnswerTableSeeder extends Seeder
 {
 	public function run()
 	{
-		$reader = Reader::createFromPath('public/csv/question_answers .csv');
+		$reader = Reader::createFromPath( storage_path('seeders') . '/question_answers .csv');
 
 		\DB::table('question_answers')->truncate();
 
