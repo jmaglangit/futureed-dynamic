@@ -13,16 +13,16 @@ class CreateSubscriptionTable extends Migration {
 	public function up()
 	{
 		Schema::create('subscription', function(Blueprint $table) {
-	$table->bigIncrements('id');
-	$table->string('name', 128);
-	$table->decimal('price', 8, 2);
-	$table->string('description', 256);
-	$table->bigInteger('days');
-	$table->enum('status', ['Enabled', 'Diabled']);
-	$table->bigInteger('created_by');
-	$table->bigInteger('updated_by');
-	$table->softDeletes()->nullable();
-	$table->timestamps();
+		$table->bigIncrements('id');
+		$table->string('name', 128);
+		$table->decimal('price', 8, 2);
+		$table->string('description', 256);
+		$table->bigInteger('days');
+		$table->enum('status', ['Enabled', 'Diabled']);
+		$table->bigInteger('created_by');
+		$table->bigInteger('updated_by');
+		$table->softDeletes()->nullable();
+		$table->timestamps();
         });
 	}
 
