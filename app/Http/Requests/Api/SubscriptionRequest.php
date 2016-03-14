@@ -1,6 +1,7 @@
 <?php namespace FutureEd\Http\Requests\Api;
 
 use FutureEd\Http\Requests\Api\ApiRequest;
+use FutureEd\Services\ErrorMessageServices as Error;
 
 class SubscriptionRequest extends ApiRequest {
 	
@@ -27,8 +28,8 @@ class SubscriptionRequest extends ApiRequest {
 			            'price'         => 'required|numeric|min:0.01|max:999999.99',
 			            'description'   => 'required',
 			            'days'          => 'required|integer',
-			            'status'        => 'required|in:Enabled,Disabled',
-			            'has_lsp'       => 'required|in:1,0'
+			            'status'        => 'required|in:'.config('futureed.enabled').','.config('futureed.disabled'),
+			            'has_lsp'       => 'required|in:'.config('futureed.true').','.config('futureed.false')
 	            ];
     	    break;
 
@@ -36,15 +37,15 @@ class SubscriptionRequest extends ApiRequest {
 
                 switch($this->route()->getName()){
                     case 'subscription.update.status':
-                        return ['status' => 'required|in:Enabled,Disabled'];    
+                        return ['status' => 'required|in:'.config('futureed.enabled').','.config('futureed.disabled')];
                     break;
                     default:
                     return [
 		                    'name'          => 'required|regex:' . config('regex.name_numeric'),
 		                    'price'         => 'required|numeric|min:0.01|max:999999.99',
 		                    'description'   => 'required',
-		                    'status'        => 'required|in:Enabled,Disabled',
-		                    'has_lsp'       => 'required|in:1,0'
+		                    'status'        => 'required|in:'.config('futureed.enabled').','.config('futureed.disabled'),
+		                    'has_lsp'       => 'required|in:'.config('futureed.true').','.config('futureed.false')
                     ];
                 }
 
@@ -57,8 +58,8 @@ class SubscriptionRequest extends ApiRequest {
 		                'price'         => 'required|numeric|min:0.01|max:999999.99',
 		                'description'   => 'required',
 		                'days'          => 'required|integer',
-		                'status'        => 'required|in:Enabled,Disabled',
-		                'has_lsp'       => 'required|in:1,0'
+		                'status'        => 'required|in:'.config('futureed.enabled').','.config('futureed.disabled'),
+		                'has_lsp'       => 'required|in:'.config('futureed.true').','.config('futureed.false')
                 ];
 
                 break;
@@ -76,11 +77,11 @@ class SubscriptionRequest extends ApiRequest {
 	 */
 	public function messages() {
 		return [
-			'numeric' => 'The :attribute must be a number.',
-			'name.required' => 'The subscription name field is required.',
-			'name.regex' => 'The subscription name format is invalid.',
-			'has_lsp.required' => 'The learning style is required.',
-			'has_lsp.in' => 'The learning style format is invalid'
+			'numeric' => config(Error::SUBSCRIPTION_MUST_BE_A_NUMBER),
+			'name.required' => config(Error::SUBSCRIPTION_NAME_REQUIRED),
+			'name.regex' => config(Error::SUBSCRIPTION_NAME_INVALID),
+			'has_lsp.required' => config(Error::SUBSCRIPTION_LSP_REQUIRED),
+			'has_lsp.in' => config(Error::SUBSCRIPTION_LSP_INVALID)
 		];
 	}
 }
