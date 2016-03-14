@@ -23,7 +23,7 @@ function StudentPaymentController($scope, $window, $filter, apiService, StudentP
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
 				} else if(response.data) {
-					if(response.data.status == 1) {
+					if(response.data.billing_address_not_found == Constants.TRUE) {
 						self.student_billing_address_not_found = Constants.TRUE;
 					}
 				}

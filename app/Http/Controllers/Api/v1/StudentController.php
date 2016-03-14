@@ -111,11 +111,11 @@ class StudentController extends ApiController {
 				|| $student_details->state == null
 				|| $student_details->country == null)
 			{
-				return $this->respondWithData(['status' => 1]);
+				return $this->respondWithData(['billing_address_not_found' => 1]);
 			}
 		}
 
-		return $this->respondWithData(['status' => 0]);
+		return $this->respondWithData(['billing_address_not_found' => 0]);
 	}
 
 }
