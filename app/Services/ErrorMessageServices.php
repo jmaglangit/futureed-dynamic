@@ -11,5 +11,12 @@ namespace FutureEd\Services;
  */
 class ErrorMessageServices
 {
-	const BILLING_INFO_MISSING = 2800;
+	const   BILLING_INFO_MISSING = 2800;
+
+	//  Subscription request error messages
+	const   SUBSCRIPTION_MUST_BE_A_NUMBER   = 2900;
+	const   SUBSCRIPTION_NAME_REQUIRED      = 2901;
+	const   SUBSCRIPTION_NAME_INVALID       = 2902;
+	const   SUBSCRIPTION_LSP_REQUIRED       = 2903;
+	const   SUBSCRIPTION_LSP_INVALID        = 2904;
 }

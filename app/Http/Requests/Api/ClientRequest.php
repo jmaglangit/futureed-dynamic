@@ -58,8 +58,9 @@ class ClientRequest extends ApiRequest {
 				}
 				break;
 			case 'POST':
+
 				$common_validations = [
-					'client_role' => 'required|in:Parent,Principal,Teacher',
+					'client_role' => 'required|in:'.config('futureed.parent').','.config('futureed.principal').','.config('futureed.teacher'),
 					'callback_uri' => 'required|string|max:128',
 					'status' => 'required|in:Enabled,Disabled',
 					'street_address' => 'string|max:128',
@@ -69,6 +70,7 @@ class ClientRequest extends ApiRequest {
 					'city' => 'max:128|regex:'.config('regex.state_city'),
 					'state' => 'max:128|regex:'.config('regex.state_city'),
 				];
+
 				if($role == config('futureed.teacher'))
 				{
 					$specific_role_validations = [

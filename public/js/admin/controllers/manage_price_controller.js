@@ -46,6 +46,7 @@ function ManagePriceController($scope, salesService, TableService) {
 		self.table.loading = Constants.TRUE;
 
 		$scope.ui_block();
+		
 		salesService.getPriceList(self.table).success(function(response){
 			self.table.loading = Constants.TRUE;
 
@@ -53,7 +54,7 @@ function ManagePriceController($scope, salesService, TableService) {
 				if(response.errors){
 					self.errors = $scope.errorHandler(response.errors);
 				}else if(response.data){
-					self.records = response.data.records
+					self.records = response.data.records;
 					self.updatePageCount(response.data);
 				}
 			}
