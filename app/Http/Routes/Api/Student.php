@@ -148,10 +148,10 @@ Routes::group([
         ['only' => ['index', 'show', 'update']]);
 
 	Routes::get('/student/check-billing-address/{id}',
-			[
-				'as' => 'student.check-billing-address',
-				'uses' => 'Api\v1\StudentController@checkBillingAddress'
-			]);
+		[
+			'as' => 'student.check-billing-address',
+			'uses' => 'Api\v1\StudentController@checkBillingAddress'
+		]);
 
     Routes::resource('/admin/manage/student', 'Api\v1\AdminStudentController',
         ['except' => ['create', 'edit']]);
