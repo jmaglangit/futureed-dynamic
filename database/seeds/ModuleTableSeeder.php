@@ -15,7 +15,7 @@ class ModuleTableSeeder extends Seeder
 //		points_to_finish,status,created_by,,created_at,updated_at,deleted_at
 
 		//TODO:: GET SEED DATA.
-		$reader = Reader::createFromPath('public/csv/modules.csv');
+		$reader = Reader::createFromPath( storage_path('seeders') . '/modules.csv');
 
 		\DB::table('modules')->truncate();
 
