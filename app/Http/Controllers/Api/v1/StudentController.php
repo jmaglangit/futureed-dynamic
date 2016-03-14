@@ -101,4 +101,21 @@ class StudentController extends ApiController {
 
 	}
 
+	public function checkBillingAddress($id)
+	{
+		$student_details = $this->student->getStudent($id);
+
+		if($student_details)
+		{
+			if($student_details->city == null
+				|| $student_details->state == null
+				|| $student_details->country == null)
+			{
+				return $this->respondWithData(['billing_address_not_found' => 1]);
+			}
+		}
+
+		return $this->respondWithData(['billing_address_not_found' => 0]);
+	}
+
 }
