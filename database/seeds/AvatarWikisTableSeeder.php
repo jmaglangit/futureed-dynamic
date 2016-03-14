@@ -12,7 +12,7 @@ class AvatarWikisTableSeeder extends Seeder
     public function run()
     {
 
-		$reader = Reader::createFromPath('public/csv/avatar_wiki.csv');
+		$reader = Reader::createFromPath( storage_path('seeders') . '/avatar_wiki.csv');
 
 		\DB::table('avatar_wikis')->truncate();
 		foreach($reader as $index => $row){
