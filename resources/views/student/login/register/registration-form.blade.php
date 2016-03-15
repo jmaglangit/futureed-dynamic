@@ -154,7 +154,7 @@
 					<fieldset>
 						<legend>User Credentials</legend>
 						<div class="form-group">
-							<label class="col-xs-2 control-label">Username</label>
+							<label class="col-xs-2 control-label">Username <span class="required">*</span></label>
 							<div class="col-xs-4">
 								{!! Form::text('username', ''
 									, array(
