@@ -484,7 +484,7 @@ class MailServices {
 			'data' => [
 				'name' => $data->user->name,
 				'code' => $code->confirmation_code,
-				'link' => $data->callback_uri.'?email='.$data->user->email,
+				'link' => $data->callback_uri.'?email='.$data->user->email . '&code=' . $code->confirmation_code,
 			],
 			'mail_recipient' => $data->user->email,
 			'mail_recipient_name' => $data->user->name,
