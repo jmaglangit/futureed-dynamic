@@ -6,7 +6,7 @@
 	<fieldset>
 		<legend>Credentials Information</legend>
 		<div class="form-group">
-			<label for="" class="col-xs-2 control-label">Username</label>
+			<label for="" class="col-xs-2 control-label">Username <span class="required">*</span></label>
 			<div class="col-xs-4">
 				{!! Form::text('username', ''
 					, array(
