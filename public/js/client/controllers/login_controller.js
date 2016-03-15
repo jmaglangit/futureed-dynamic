@@ -396,6 +396,7 @@ function LoginController($scope, $controller, apiService, ClientLoginApiService,
 			var base_url = $("#base_url_form input[name='base_url']").val();
 			self.record.callback_uri = base_url + Constants.URL_REGISTRATION(angular.lowercase(Constants.CLIENT));
 
+			console.log(self.record);
 			$scope.ui_block();
 			ClientLoginApiService.updateClientRegistration(self.record).success(function(response) {
 				if(angular.equals(response.status, Constants.STATUS_OK)) {
