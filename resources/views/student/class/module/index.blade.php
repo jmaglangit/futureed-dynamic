@@ -61,9 +61,9 @@
 							<p class="pull-left">Give Tips</p>
 						</div>
 
-						<div class="pointer"
+						<div class="col-xs-offset-5 col-xs-3 col-md-offset-5 col-md-3"
 							 ng-class="{ 'disabled-tips-bar' : mod.active_contents && !mod.contents }"
-							 ng-if="!mod.no_record && !mod.record.module_done">
+							 ng-if="!mod.no_record && !mod.record.module_done && tips.show_content_tips">
 							<img src="/images/class-student/icon-givetip.png" ng-click="mod.giveTip()"
 								 class="icon-resize">
 						</div>
@@ -87,9 +87,9 @@
 							<p class="pull-left">Help Request</p>
 						</div>
 
-						<div class="pointer"
+						<div class="col-xs-offset-5 col-xs-3 col-md-offset-5 col-md-3"
 							 ng-class="{ 'disabled-help-bar' : mod.active_contents && !mod.contents }"
-							 ng-if="!mod.no_record && !mod.record.module_done">
+							 ng-if="!mod.no_record && !mod.record.module_done && help.show_help_requests">
 							<img src="/images/class-student/icon-askforhelp.png" ng-click="mod.askHelp()"
 								 class="icon-resize">
 						</div>
