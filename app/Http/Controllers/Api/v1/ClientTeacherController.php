@@ -3,6 +3,7 @@
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
+use FutureEd\Services\CodeGeneratorServices;
 use FutureEd\Services\MailServices as Mail;
 
 
@@ -21,12 +22,19 @@ class ClientTeacherController extends ApiController {
 
     protected $client;
     protected $user;
+	protected $code;
 
-    public function __construct(Client  $client, User $user, Mail $mail){
+    public function __construct(
+		Client  $client,
+		User $user,
+		Mail $mail,
+		CodeGeneratorServices $codeGeneratorServices
+	){
 
         $this->client = $client;
         $this->user = $user;
         $this->mail = $mail;
+		$this->code = $codeGeneratorServices;
 
     }
 
@@ -105,6 +113,9 @@ class ClientTeacherController extends ApiController {
 
 		//get school_code of current user
 		$client['school_code'] = $current_user_details['school_code'];
+
+		//TODO add confirmation code
+		$user = array_merge($user, $this->code->getCodeExpiry());
 
 		//return newly added user details
 		$user = $this->user->addUser($user);
