@@ -260,6 +260,12 @@ return [
 		'application/vnd.ms-excel'
 	],
 
+	//Gender
+	'gender' => [
+		'male' => 'Male',
+		'female' => 'Female'
+	],
+
 	//Rating Scores
 	'rating_1' => 1,
 	'rating_2' => 2,
