@@ -136,6 +136,11 @@
 						'as' => 'student.class.partials.module_list'
 						, 'uses' => 'FutureLesson\Student\ClassController@module_list'
 					]);
+
+				Routes::get('/trial_question_list', [
+					'as' => 'student.class.partials.trial-question-list',
+					'uses' => 'FutureLesson\Student\ClassController@trial_question_list'
+				]);
 			});
 
 			Routes::group([
