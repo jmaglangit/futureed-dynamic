@@ -76,12 +76,13 @@ class SubscriptionRequest extends ApiRequest {
 	 * @return array
 	 */
 	public function messages() {
+		$config_file = config('futureed-error.error_messages');
 		return [
-			'numeric' => config(Error::SUBSCRIPTION_MUST_BE_A_NUMBER),
-			'name.required' => config(Error::SUBSCRIPTION_NAME_REQUIRED),
-			'name.regex' => config(Error::SUBSCRIPTION_NAME_INVALID),
-			'has_lsp.required' => config(Error::SUBSCRIPTION_LSP_REQUIRED),
-			'has_lsp.in' => config(Error::SUBSCRIPTION_LSP_INVALID)
+			'numeric' => $config_file[Error::SUBSCRIPTION_MUST_BE_A_NUMBER],
+			'name.required' => $config_file[Error::SUBSCRIPTION_NAME_REQUIRED],
+			'name.regex' => $config_file[Error::SUBSCRIPTION_NAME_INVALID],
+			'has_lsp.required' => $config_file[Error::SUBSCRIPTION_LSP_REQUIRED],
+			'has_lsp.in' => $config_file[Error::SUBSCRIPTION_LSP_INVALID]
 		];
 	}
 }
