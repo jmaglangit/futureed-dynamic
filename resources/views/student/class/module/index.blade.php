@@ -15,7 +15,7 @@
 		    <li>{! mod.record.name !}</li>
 		</ul>
 
-		<div class="col-xs-12" ng-if="mod.active_contents && (mod.errors || mod.success) || mod.errors">
+		<div class="col-xs-12" ng-if="mod.active_contents &&  mod.success">
 			<div class="alert alert-error" ng-if="mod.errors">
 				<p ng-repeat="error in mod.errors track by $index">
 					{! error !}
