@@ -102,9 +102,6 @@ class ClientTeacherRegistrationController extends ApiController
         $input = array_merge($input, $name);
 		$input['country_id'] = (!empty($input['country_id']))? $input['country_id']:0;
 
-		//apply code
-		$input = array_merge($input, $this->code->getCodeExpiry());
-
 		//update teacher information
 		$data = $this->client->updateClient($id, $input);
 
