@@ -30,7 +30,7 @@ class GoogleLoginRequest extends ApiRequest {
 						return [
 							'google_app_id' => 'required|string
 								|unique:users,google_app_id,NULL,id,deleted_at,NULL,user_type,' . $this->__get('user_type'),
-							'username' => 'min:8|max:32|alpha_num|unique:users,username,NULL,id,deleted_at,NULL,user_type,'
+							'username' => 'required|min:8|max:32|alpha_num|unique:users,username,NULL,id,deleted_at,NULL,user_type,'
 								. $this->__get('user_type'),
 							'email' => 'required|email|unique:users,email,NULL,id,deleted_at,NULL,user_type,'.$this->__get('user_type'),
 							'first_name' => 'required|min:2|max:64|regex:'. config('regex.name'),
