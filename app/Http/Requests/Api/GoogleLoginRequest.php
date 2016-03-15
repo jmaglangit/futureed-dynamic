@@ -28,6 +28,7 @@ class GoogleLoginRequest extends ApiRequest {
 					case 'api.v1.registration.google':
 
 						return [
+
 							'google_app_id' => 'required|string|unique:users,google_app_id,NULL,id,deleted_at,NULL,user_type,' . $this->__get('user_type'),
 							'username'      => 'required|min:8|max:32|alpha_num|unique:users,username,NULL,id,deleted_at,NULL,user_type,'. $this->__get('user_type'),
 							'email'         => 'required|email|unique:users,email,NULL,id,deleted_at,NULL,user_type,'.$this->__get('user_type'),
@@ -35,6 +36,7 @@ class GoogleLoginRequest extends ApiRequest {
 							'last_name'     => 'required|min:2|max:64|regex:'. config('regex.name'),
 							'country_id'    => 'exists:countries,id',
 							'user_type'     => 'required|in:'. config('futureed.client') . ',' . config('futureed.student'),
+
 
 							//Student
 							'birth_date'    => 'required_if:user_type,' . config('futureed.student').'|date|before:-14 year',

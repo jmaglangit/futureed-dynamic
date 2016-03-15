@@ -16,7 +16,7 @@
 					<i class="fa fa-check fa-5x img-rounded text-center"></i>
 				</div>
 
-				<small>You're almost done! We just need you to confirm you email address.</small>
+				<small>You're almost done! We just need you to confirm your email address.</small>
 
 				<p class="text" >
 					Please check your inbox and click on the link.
