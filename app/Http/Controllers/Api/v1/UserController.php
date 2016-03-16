@@ -24,6 +24,8 @@ class UserController extends ApiController{
     protected $student;
     protected $student_service;
     protected $admin;
+    protected $code_service;
+    protected $mail_service;
 
     public function __construct(
         ClientRepositoryInterface $clientRepositoryInterface,
@@ -31,7 +33,9 @@ class UserController extends ApiController{
         UserServices $userServices,
         StudentRepositoryInterface $studentRepositoryInterface,
         StudentServices $studentServices,
-        AdminRepositoryInterface $adminRepositoryInterface
+        AdminRepositoryInterface $adminRepositoryInterface,
+        CodeGeneratorServices $codeGeneratorServices,
+        MailServices $mailServices
     ){
         $this->client_service = $clientServices;
         $this->client = $clientRepositoryInterface;
@@ -39,6 +43,8 @@ class UserController extends ApiController{
         $this->student_service = $studentServices;
         $this->student = $studentRepositoryInterface;
         $this->admin = $adminRepositoryInterface;
+        $this->code_service = $codeGeneratorServices;
+        $this->mail_service = $mailServices;
     }
 
     /**
@@ -184,7 +190,7 @@ class UserController extends ApiController{
 
                 }else{
 
-                    $code=$this->code->getCodeExpiry();
+                    $code=$this->code_service->getCodeExpiry();
 
                     $this->user_service->setResetCode($return['user_id'],$code);
 
@@ -195,7 +201,7 @@ class UserController extends ApiController{
 
 						$subject = str_replace('{user}', config('futureed.student'), $subject);
 
-						$this->mail->sendStudentMailResetPassword($userDetails, $code['confirmation_code'], $input['callback_uri'], $subject);
+						$this->mail_service->sendStudentMailResetPassword($userDetails, $code['confirmation_code'], $input['callback_uri'], $subject);
 
 						return $this->respondWithData(['id' => $student_id,
 							'user_type' => $input['user_type']
@@ -213,7 +219,7 @@ class UserController extends ApiController{
 						//change subject
 						$subject = str_replace('{user}', $client_role, $subject);
 
-						$this->mail->sendClientMailResetPassword($userDetails, $code['confirmation_code'], $input['callback_uri'], $subject);
+						$this->mail_service->sendClientMailResetPassword($userDetails, $code['confirmation_code'], $input['callback_uri'], $subject);
 
 						return $this->respondWithData(['id' => $client_id,
 							'user_type' => $input['user_type']
@@ -228,7 +234,7 @@ class UserController extends ApiController{
 
 						$subject = str_replace('{user}', $admin_detail->admin_role, $subject);
 
-						$this->mail->sendAdminMailResetPassword($userDetails, $code['confirmation_code'], $input['callback_uri'], $subject);
+						$this->mail_service->sendAdminMailResetPassword($userDetails, $code['confirmation_code'], $input['callback_uri'], $subject);
 
 						return $this->respondWithData(['id' => $admin_id,
 							'user_type' => $input['user_type']
@@ -283,7 +289,7 @@ class UserController extends ApiController{
 
                 } else {
 
-                    $code=$this->code->getCodeExpiry();
+                    $code=$this->code_service->getCodeExpiry();
 
                     $this->user_service->updateConfirmationCode($return['user_id'],$code);
 
@@ -294,7 +300,7 @@ class UserController extends ApiController{
 
 						$subject = str_replace('{user}', config('futureed.student'), $subject);
 
-						$this->mail->resendStudentRegister($userDetails, $code['confirmation_code'], $input['callback_uri'], $subject);
+						$this->mail_service->resendStudentRegister($userDetails, $code['confirmation_code'], $input['callback_uri'], $subject);
 
 						return $this->respondWithData(['id' => $student_id,
 							'user_type' => $input['user_type']
@@ -305,7 +311,7 @@ class UserController extends ApiController{
 
                         $client_id = $this->client_service->getClientId($return['user_id']);
 
-                        $this->mail->sendClientRegister($userDetails,$code['confirmation_code'],$input['callback_uri'],1);
+                        $this->mail_service->sendClientRegister($userDetails,$code['confirmation_code'],$input['callback_uri'],1);
 
                         return $this->respondWithData(['id' => $client_id,
                                                        'user_type' => $input['user_type'] 
