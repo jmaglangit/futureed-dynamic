@@ -92,13 +92,6 @@
 								'class' => 'btn btn-maroon btn-medium'
 							)
 						) !!}
-
-						{!! Form::button('Close'
-							, array(
-								'class' => 'btn btn-gold btn-medium'
-								, 'data-dismiss' => 'modal'
-							)
-						) !!}
 					</div>
 					<div ng-if="mod.module_message.module_done">
 						<button class="btn btn-maroon btn-medium" 
