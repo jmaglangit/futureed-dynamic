@@ -1339,5 +1339,5 @@ fieldset legend {
 }
 
 .right-0 {
-	right: 0px;
+	right: 0px !important;
 }
