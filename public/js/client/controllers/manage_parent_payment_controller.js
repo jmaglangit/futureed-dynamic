@@ -13,6 +13,26 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 	self.searchDefaults();
 
 	self.user_id = $scope.user.id;
+	self.billing_address_not_found = Constants.FALSE;
+
+	self.checkBillingAddress = function(){
+		$scope.ui_block();
+		ManageParentPaymentService.checkBillingAddress(self.user_id).success(function(response) {
+
+			if(angular.equals(response.status, Constants.STATUS_OK)) {
+				if(response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if(response.data) {
+					if(response.data.status == 1){
+						self.billing_address_not_found = Constants.TRUE;
+					}
+				}
+			}
+			$scope.ui_unblock();
+		}).error(function(response) {
+			self.errors = $scope.internalError();
+		});
+	}
 
 	self.setActive = function(active, id) {
 		self.errors = Constants.FALSE;
@@ -511,7 +531,7 @@ function ManageParentPaymentController($scope, $window, $filter, ManageParentPay
 	self.addPayment = function() {
 		self.errors = Constants.FALSE;
 		self.fields = [];
-
+		self.missing_client_credentials = Constants.FALSE;
 		self.paying = Constants.TRUE;
 
 		self.invoice.parent_id = self.user_id;

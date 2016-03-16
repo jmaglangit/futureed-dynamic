@@ -1,5 +1,6 @@
 <?php
 
+use FutureEd\Services\ErrorMessageServices as Error;
 
 return [
 
@@ -145,6 +146,9 @@ return [
 		2202 => 'School Name already exists.',
 		2203 => 'The selected country is invalid.',
 
+		//  Parent Client Error Messages
+		Error::BILLING_INFO_MISSING => 'You need to update your contact information in order to proceed buy a subscription.',
+
 		//account status messages
 		2230 => 'Account is inactive.',
 		2231 => 'Account Locked',
@@ -167,6 +171,13 @@ return [
 		2604 => 'The country is invalid',
 
 		7000 => 'Hmm, something went wrong. Please contact the system administrator.',
+
+		//  For subscription request error messages
+		Error::SUBSCRIPTION_MUST_BE_A_NUMBER => 'The :attribute must be a number.',
+		Error::SUBSCRIPTION_NAME_REQUIRED => 'The subscription name field is required.',
+		Error::SUBSCRIPTION_NAME_INVALID => 'The subscription name format is invalid.',
+		Error::SUBSCRIPTION_LSP_REQUIRED => 'The learning style is required.',
+		Error::SUBSCRIPTION_LSP_INVALID => 'The learning style format is invalid'
 
 	],
 ];

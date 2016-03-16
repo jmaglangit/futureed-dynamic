@@ -341,8 +341,23 @@ function HelpController($scope, apiService, StudentHelpService, TableService, Se
 		self.errors = Constants.FALSE;
 		self.success = Constants.FALSE;
 
-		self.show_help_requests = !self.show_help_requests;
+		self.show_help_requests = Constants.TRUE;
 		
+		self.module_instance = module;
+		self.module = module.record;
+		self.question = module.current_question;
+		self.content = module.contents;
+
+		self.setModuleActive();
+		self.setHelpTabActive();
+	}
+
+	self.toggleHelpArrow = function(module) {
+		self.errors = Constants.FALSE;
+		self.success = Constants.FALSE;
+
+		self.show_help_requests = !self.show_help_requests;
+
 		self.module_instance = module;
 		self.module = module.record;
 		self.question = module.current_question;

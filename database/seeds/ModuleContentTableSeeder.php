@@ -11,7 +11,7 @@ class ModuleContentTableSeeder extends Seeder
 {
 	public function run()
 	{
-		$reader = Reader::createFromPath('public/csv/module_content.csv');
+		$reader = Reader::createFromPath( storage_path('seeders') . '/module_content.csv');
 
 		\DB::table('module_contents')->truncate();
 

@@ -15,7 +15,7 @@ class AvatarPosesTableSeeder extends Seeder
 
 		//id,avatar_id,code,name,pose_image,description,created_by,updated_by,created_at,updated_at,deleted_at
 
-		$reader = Reader::createFromPath('public/csv/avatar_poses.csv');
+		$reader = Reader::createFromPath(storage_path('seeders') . '/avatar_poses.csv');
 
 		DB::table('avatar_poses')->truncate();
 

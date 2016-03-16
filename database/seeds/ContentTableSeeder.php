@@ -11,7 +11,7 @@ class ContentTableSeeder extends Seeder
 {
     public function run()
     {
-		$reader = Reader::createFromPath('public/csv/content.csv');
+		$reader = Reader::createFromPath( storage_path('seeders') . '/content.csv');
 
 		\DB::table('teaching_contents')->truncate();
 		foreach($reader as $index => $row) {

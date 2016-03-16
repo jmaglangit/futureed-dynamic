@@ -24,7 +24,7 @@
 					User Credentials
 				</legend>
 				<div class="form-group">
-					<label class="col-xs-3 control-label" id="username">Username <span class="required">*</span></label>
+					<label class="col-xs-3 control-label" id="username">Username  <span class="required">*</span></label>
 					<div class="col-xs-5">
 						{!! Form::text('username',''
 							, array(
@@ -64,7 +64,7 @@
 					</div>	
 				</div>
 				<div class="form-group">
-					<label class="col-xs-3 control-label" id="status">Status <span class="required">*</span></label>
+					<label class="col-xs-3 control-label" id="status">Status</label>
 					<div class="col-xs-5">
 						<div class="col-xs-6 checkbox">
 							<label>
@@ -149,7 +149,7 @@
 				</div>
 
 				<div class="form-group">
-					<label class="control-label col-xs-3">City <span class="required">*</span></label>
+					<label class="control-label col-xs-3">City</label>
 					<div class="col-xs-5">
 						{!! Form::text('city','',
 							array('class' => 'form-control'
@@ -175,7 +175,7 @@
 				</div>
 
 				<div class="form-group">
-					<label class="col-xs-3 control-label">Country <span class="required">*</span></label>
+					<label class="col-xs-3 control-label">Country</label>
 					<div class="col-xs-5" ng-init="getCountries()">
 						<select name="country_id" id="country" class="form-control" ng-class="{ 'required-field' : student.fields['country_id']}" ng-model="student.record.country_id" ng-change="student.getGradeLevel()">
 							<option value="">-- Select Country --</option>
@@ -187,7 +187,7 @@
 			<fieldset>
 				<legend class="legend-name-mid">School Information</legend>
 				<div class="form-group" ng-init="student.getGrades()">
-					<label class="control-label col-xs-3">Grade <span class="required">*</span></label>
+					<label class="control-label col-xs-3">Grade</label>
 					<div class="col-xs-5">
 						<select name="grade_code" ng-disabled="!student.record.country_id" class="form-control" ng-class="{ 'required-field' : student.fields['grade_code']}" ng-model="student.record.grade_code">
 							<option value="">-- Select Level --</option>

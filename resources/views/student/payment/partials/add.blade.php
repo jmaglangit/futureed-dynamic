@@ -6,13 +6,17 @@
 	</div>
 
 	{!! Form::open(array('id'=> 'add_payment_form', 'class' => 'form-horizontal')) !!}
-	<div class="form-content col-xs-12">
+	<div class="form-content col-xs-12" ng-init="payment.checkStudentBillingAddress()">
 		<div class="alert alert-error" ng-if="payment.errors">
             <p ng-repeat="error in payment.errors track by $index" > 
               	{! error !}
             </p>
         </div>
-
+		<div class="alert alert-error" ng-if="payment.student_billing_address_not_found">
+			<p>
+				You need to update your billing information in order to proceed buying a subscription. <a href="{{ route('student.profile.index') }}">Update now</a>.
+			</p>
+		</div>
         <div class="alert alert-success" ng-if="payment.add.success">
         	<p>Successfully added Student</p>
         </div>

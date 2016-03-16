@@ -6,6 +6,7 @@ use Carbon\Carbon;
 
 // composer require laracasts/testdummy
 use Laracasts\TestDummy\Factory as TestDummy;
+use Illuminate\Support\Facades\Storage;
 
 class QuestionTableSeeder extends Seeder
 {
@@ -15,7 +16,7 @@ class QuestionTableSeeder extends Seeder
 //,created_by,updated_by,created_by,updated_by,deleted_by
 
 
-		$reader = Reader::createFromPath('public/csv/questions.csv');
+		$reader = Reader::createFromPath(storage_path('seeders') . '/questions.csv');
 
 		\DB::table('questions')->truncate();
 		foreach($reader as $index => $row){

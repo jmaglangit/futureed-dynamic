@@ -22,7 +22,6 @@ return [
 	'rejected' => 'Rejected',
 	'none' => 'None',
 
-
 	//Request code expiry in seconds
 	'request_code_expiry' => 3600,
 
@@ -259,6 +258,12 @@ return [
 	'accepted_csv' => [
 		'text/csv',
 		'application/vnd.ms-excel'
+	],
+
+	//Gender
+	'gender' => [
+		'male' => 'Male',
+		'female' => 'Female'
 	],
 
 	//Rating Scores

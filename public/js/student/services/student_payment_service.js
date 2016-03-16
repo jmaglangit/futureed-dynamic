@@ -7,6 +7,13 @@ function StudentPaymentService($http) {
 	var service = {};
 	var serviceUrl = '/api/v1/';
 
+	service.checkBillingAddress = function(id) {
+		return $http({
+			method : Constants.METHOD_GET,
+			url    : serviceUrl + 'student/check-billing-address/' + id
+		});
+	}
+
 	service.list = function(search, table) {
 		return $http({
 			method : Constants.METHOD_GET

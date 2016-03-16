@@ -101,7 +101,7 @@
 						</div>
 
 						<div class="form-group">
-							<label class="col-xs-2 control-label">Street Address<span class="required" ng-if="login.required">*</span></label>
+							<label class="col-xs-2 control-label">Street Address</label>
 							<div class="col-xs-6">
 								{!! Form::text('street_address', ''
 								, array(
@@ -115,7 +115,7 @@
 						</div>
 
 						<div class="form-group">
-							<label class="col-xs-2 control-label">City<span class="required" ng-if="login.required">*</span></label>
+							<label class="col-xs-2 control-label">City</label>
 							<div class="col-xs-4">
 								{!! Form::text('city', ''
 									, array(
@@ -152,7 +152,7 @@
 								) !!}
 							</div>
 
-							<label class="col-xs-2 control-label">Country<span class="required" ng-if="login.required">*</span></label>
+							<label class="col-xs-2 control-label">Country</label>
 							<div class="col-xs-4" ng-init="getCountries()">
 								<select  name="country_id" 
 									class="form-control" 

@@ -8,10 +8,16 @@
 	{!! Form::open(array('id'=> 'add_payment_form', 'class' => 'form-horizontal')) !!}
 		<div class="form-content col-xs-12"  ng-init="payment.getOrderNo()">
 			<div class="alert alert-error" ng-if="payment.errors">
-	            <p ng-repeat="error in payment.errors track by $index" > 
+	            <p ng-repeat="error in payment.errors track by $index" >
 	              	{! error !}
 	            </p>
 	        </div>
+
+			<div class="alert alert-error" ng-if="payment.billing_address_not_found">
+				<p>
+					You need to update your contact information in order to proceed buy a subscription. Update <a href="{!! route('client.profile.index') !!}">now</a>.
+				</p>
+			</div>
 
 	        <div class="alert alert-success" ng-if="payment.success">
 	        	<p ng-repeat="success in payment.success track by $index" > 
@@ -21,6 +27,7 @@
 
 	        <fieldset class="payment-field">
 	        	<span class="step">1</span><p class="step-label">Please select a subject.</p>
+
 	        	<div class="form-group">
 	        		<label class="col-xs-2 control-label">Subject <span class="required">*</span></label>
 	        		<div class="col-xs-5">
@@ -29,13 +36,15 @@
 	        				ng-disabled="!payment.subjects.length" 
 	        				ng-model="payment.invoice.subject_id" 
 	        				ng-class="{ 'required-field' : payment.fields['subject_id'] }">
-		                        <option value="">-- Select Subject --</option>
-		                        <option ng-repeat="subject in payment.subjects" ng-value="subject.id">{! subject.name !}</option>
-		                    </select>
+							<option value="">-- Select Subject --</option>
+							<option ng-repeat="subject in payment.subjects" ng-value="subject.id">{! subject.name !}</option>
+		                </select>
 	        		</div>
 	        	</div>
 	        </fieldset>
+
 	        <hr/>
+
 	        <fieldset class="payment-field">
 	        	<span class="step">2</span><p class="step-label">Please select an email or a name of a student.</p>
 	        	<div class="form-group">
@@ -64,6 +73,7 @@
 	        			<center><b> OR </b></center>
 	        		</div>
 	        	</div>
+
 	        	<div class="form-group">
 	        		<label class="col-xs-2 control-label" id="name">Name <span class="required">*</span></label>
 	        		<div class="col-xs-5">
@@ -257,32 +267,32 @@
 </div>
 
 <div id="remove_subscription_modal_add" ng-show="payment.confirm_delete" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-lg">
-    <div class="modal-content">
-        <div class="modal-header">
-            Remove Student
-        </div>
-        <div class="modal-body">
-            Are you sure you want to remove this student?
-        </div>
-        <div class="modal-footer">
-        	<div class="btncon col-md-8 col-md-offset-4 pull-left">
-                {!! Form::button('Yes'
-                    , array(
-                        'class' => 'btn btn-blue btn-medium'
-                        , 'ng-click' => "payment.removeStudent()"
-                        , 'data-dismiss' => 'modal'
-                    )
-                ) !!}
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-header">
+				Remove Student
+			</div>
+			<div class="modal-body">
+				Are you sure you want to remove this student?
+			</div>
+			<div class="modal-footer">
+				<div class="btncon col-md-8 col-md-offset-4 pull-left">
+					{!! Form::button('Yes'
+						, array(
+							'class' => 'btn btn-blue btn-medium'
+							, 'ng-click' => "payment.removeStudent()"
+							, 'data-dismiss' => 'modal'
+						)
+					) !!}
 
-                {!! Form::button('No'
-                    , array(
-                        'class' => 'btn btn-gold btn-medium'
-                        , 'data-dismiss' => 'modal'
-                    )
-                ) !!}
-        	</div>
-        </div>
-    </div>
-  </div>
+					{!! Form::button('No'
+						, array(
+							'class' => 'btn btn-gold btn-medium'
+							, 'data-dismiss' => 'modal'
+						)
+					) !!}
+				</div>
+			</div>
+		</div>
+	</div>
 </div>

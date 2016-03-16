@@ -16,6 +16,8 @@
 
 		<div template-directive template-url="{!! route('client.partials.registration_success') !!}"></div>
 
+		<div template-directive template-url="{!! route('client.partials.resend_confirmation') !!}"></div>
+
 		<div class="form-style registration-container form-wide" ng-if="login.active_registration"> 
 			<div class="title col-xs-8">Register Account as</div>
 		
@@ -62,7 +64,12 @@
 								<span>Sign up with Google</span> 
 							</button>
 						</div>
+
+						<div class="form-group col-xs-12">
+							<span>Did not receive email confirmation? <a class="cursor-pointer" ng-click="login.setActive('resend')">resend confirmation</a></span>
+						</div>
 					</div>
+
 				</div>
 			
 				<div class="col-xs-12" ng-if="login.record.client_role">

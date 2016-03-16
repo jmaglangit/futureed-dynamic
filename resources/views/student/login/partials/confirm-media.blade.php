@@ -60,7 +60,7 @@
 									'class' => 'form-control'
 									, 'ng-class' => "{ 'required-field' : login.fields['gender'] }"
 									, 'ng-model' => 'login.record.gender')
-							); !!}
+							) !!}
 						</div>
 					</div>
 					<div class="form-group">
@@ -87,7 +87,7 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-xs-2 control-label">City<span class="required">*</span></label>
+						<label class="col-xs-2 control-label">City</label>
 						<div class="col-xs-4">
 							{!! Form::text('city', ''
 								, array(
@@ -110,7 +110,7 @@
 						</div>
 					</div>
 					<div class="form-group" ng-init="getCountries()">
-						<label class="col-xs-2 control-label">Country<span class="required">*</span></label>
+						<label class="col-xs-2 control-label">Country</label>
 						<div class="col-xs-4">
 							<select name="country_id" id="country" class="form-control" 
 								ng-class="{ 'required-field' : login.fields['country_id'] }"
@@ -125,7 +125,7 @@
 				<fieldset>
 					<legend>User Credentials</legend>
 					<div class="form-group">
-						<label class="col-xs-2 control-label">Username<span class="required">*</span></label>
+						<label class="col-xs-2 control-label">Username <span class="required">*</span></label>
 						<div class="col-xs-4">
 							{!! Form::text('username', ''
 								, array(
@@ -163,7 +163,7 @@
 				<fieldset>
 					<legend>School Information</legend>
 					<div class="form-group">
-						<label class="col-xs-2 control-label">School level<span class="required">*</span></label>
+						<label class="col-xs-2 control-label">School level</label>
 						<div class="col-xs-4">
 							<select name="grade_code" ng-disabled="!grades.length" 
 								class="form-control"

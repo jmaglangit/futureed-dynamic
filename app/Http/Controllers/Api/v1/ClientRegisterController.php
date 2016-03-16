@@ -15,11 +15,13 @@ class ClientRegisterController extends ClientController {
 		//TODO: for refactoring 
 		// cannot be use for teacher registration
 
-		$client = $request->only('first_name', 'last_name', 'client_role', 'street_address', 'city', 'state', 'country', 'zip', 'country_id');
+		$client = $request->only('first_name', 'last_name', 'client_role', 'street_address'
+			, 'city', 'state', 'country', 'zip', 'country_id');
 
 		$user = $request->only('username', 'email', 'first_name', 'last_name', 'password');
 
-		$school = $request->only('school_name', 'school_address', 'school_city', 'school_state', 'school_country', 'school_zip', 'contact_name', 'contact_number', 'school_country_id');
+		$school = $request->only('school_name', 'school_address', 'school_city', 'school_state'
+			, 'school_country', 'school_zip', 'contact_name', 'contact_number', 'school_country_id');
 
 		$input = $request->only('callback_uri');
 
@@ -80,6 +82,9 @@ class ClientRegisterController extends ClientController {
 
 		$user['user_type'] = config('futureed.client');
 
+		// auto activation for client
+		$client['account_status'] = config('futureed.accepted');
+
 		// add user, return status
 		$user_response = $this->user->addUser($user);
 
@@ -107,7 +112,8 @@ class ClientRegisterController extends ClientController {
 			$code = $this->user->getConfirmationCode($user_response['id']);
 
 			$data['client_role'] = $client['client_role'];
-			// send email to user
+
+			// TODO send email with link where code is embedded. fyi no need for client to confirm code.
 			$this->mail->sendClientRegister($data, $code['confirmation_code'], $input['callback_uri']);
 
 			return $this->respondWithData([

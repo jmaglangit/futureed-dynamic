@@ -71,7 +71,7 @@
 	</div>
 
 	<div class="col-xs-12 table-container" ng-init="payment.list()">
-		<button class="btn btn-blue btn-semi-medium" ng-click="payment.setActive(futureed.ACTIVE_ADD)">
+		<button class="btn btn-blue btn-semi-medium" ng-click="payment.checkBillingAddress();payment.setActive(futureed.ACTIVE_ADD)">
 			<i class="fa fa-plus-square"></i> Add Payment
 		</button>
 

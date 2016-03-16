@@ -929,12 +929,12 @@ hr {
 }
 
 .questions-image {
-	margin-top: 80px;
+	margin-top: 90px;
 	text-align: center;
 }
 
 .questions-image img {
-	width: 250px;
+	width: 350px;
 	border-radius: 10px;
 }
 
@@ -1495,6 +1495,7 @@ top: 41px;
 }
 
 .module-contents-container .breadcrumb {
+	margin-top: 5px;
 	margin-bottom: 10px;
 }
 

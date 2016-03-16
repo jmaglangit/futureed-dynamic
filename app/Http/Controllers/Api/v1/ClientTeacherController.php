@@ -3,6 +3,7 @@
 use FutureEd\Http\Requests;
 use FutureEd\Http\Controllers\Controller;
 
+use FutureEd\Services\CodeGeneratorServices;
 use FutureEd\Services\MailServices as Mail;
 
 
@@ -19,17 +20,23 @@ use Illuminate\Support\Facades\Input;
 
 class ClientTeacherController extends ApiController {
 
-    protected $client;
-    protected $user;
+	protected $client;
+	protected $user;
+	protected $code;
 
-    public function __construct(Client  $client, User $user, Mail $mail){
+	public function __construct(
+		Client $client,
+		User $user,
+		Mail $mail,
+		CodeGeneratorServices $codeGeneratorServices
+	) {
 
-        $this->client = $client;
-        $this->user = $user;
-        $this->mail = $mail;
+		$this->client = $client;
+		$this->user = $user;
+		$this->mail = $mail;
+		$this->code = $codeGeneratorServices;
 
-    }
-
+	}
 
 
 	/**
@@ -37,46 +44,45 @@ class ClientTeacherController extends ApiController {
 	 *
 	 * @return Response
 	 */
-	public function index()
-	{
-        $criteria = array();
-        $limit = 0;
-        $offset = 0;
+	public function index() {
+		$criteria = array();
+		$limit = 0;
+		$offset = 0;
 
 
-        if(Input::get('limit')){
+		if (Input::get('limit')) {
 
-            $limit =  Input::get('limit');
+			$limit = Input::get('limit');
 
-        }
+		}
 
 
-        if(Input::get('offset')){
+		if (Input::get('offset')) {
 
-            $offset =  Input::get('offset');
+			$offset = Input::get('offset');
 
-        }
+		}
 
-        if(Input::get('name')){
+		if (Input::get('name')) {
 
-            $criteria['name'] = Input::get('name');
+			$criteria['name'] = Input::get('name');
 
-        }
+		}
 
-		if(Input::get('school_code')){
+		if (Input::get('school_code')) {
 
 			$criteria['school_code'] = Input::get('school_code');
 
 		}
 
-        if(Input::get('email')){
+		if (Input::get('email')) {
 
-            $criteria['email'] = Input::get('email');
-        }
+			$criteria['email'] = Input::get('email');
+		}
 
-        $teacher = $this->client->getTeacherDetails($criteria, $limit, $offset);
+		$teacher = $this->client->getTeacherDetails($criteria, $limit, $offset);
 
-        return $this->respondWithData($teacher);
+		return $this->respondWithData($teacher);
 
 
 	}
@@ -86,8 +92,7 @@ class ClientTeacherController extends ApiController {
 	 *
 	 * @return Response
 	 */
-	public function store(ClientTeacherRequest $request)
-	{
+	public function store(ClientTeacherRequest $request) {
 
 		$user = $request->only(['email', 'username']);
 		$client = $request->only(['first_name', 'last_name', 'current_user']);
@@ -106,6 +111,12 @@ class ClientTeacherController extends ApiController {
 		//get school_code of current user
 		$client['school_code'] = $current_user_details['school_code'];
 
+		//by pass admin approval.
+		$client['account_status'] = config('futureed.accepted');
+
+		//add confirmation code
+		$user = array_merge($user, $this->code->getCodeExpiry());
+
 		//return newly added user details
 		$user = $this->user->addUser($user);
 
@@ -115,11 +126,11 @@ class ClientTeacherController extends ApiController {
 		$client = $this->client->addClient($client);
 
 		//get user information
-		$user = $this->user->getUser($client->user_id,'all');
+		$user = $this->user->getUser($client->user_id, 'all');
 
 		//TODO: merge user details on addClient return data.
 		//send email to invited teacher
-		$this->mail->sendMailInviteTeacher($user,$client, $current_user_details, $url);
+		$this->mail->sendMailInviteTeacher($user, $client, $current_user_details, $url);
 
 		return $this->respondWithData(['id' => $client->id]);
 	}
@@ -127,34 +138,31 @@ class ClientTeacherController extends ApiController {
 	/**
 	 * Display the specified resource.
 	 *
-	 * @param  int  $id
+	 * @param  int $id
 	 * @return Response
 	 */
-	public function show($id)
-	{
-        $teacher = $this->client->getClientByUserId($id);
+	public function show($id) {
+		$teacher = $this->client->getClientByUserId($id);
 
-        if(!$teacher){
+		if (!$teacher) {
 
-            return $this->respondErrorMessage(2001);
+			return $this->respondErrorMessage(2001);
 
-        }
+		}
 
-        return $this->respondWithData($teacher);
+		return $this->respondWithData($teacher);
 	}
-
 
 
 	/**
 	 * Update the specified resource in storage.
 	 *
-	 * @param  int  $id
+	 * @param  int $id
 	 * @return Response
 	 */
-	public function update($id, ClientTeacherRequest $request)
-	{
+	public function update($id, ClientTeacherRequest $request) {
 		$user_type = config('futureed.client');
-		$client = $request->only('first_name', 'last_name', 'street_address', 'state', 'city', 'zip', 'country','country_id');
+		$client = $request->only('first_name', 'last_name', 'street_address', 'state', 'city', 'zip', 'country', 'country_id');
 		$user['name'] = $client['first_name'] . ' ' . $client['last_name'];
 
 		//add default value for country_id
@@ -174,37 +182,34 @@ class ClientTeacherController extends ApiController {
 		$teacher = $this->client->getClientByUserId($id);
 
 
-        return $this->respondWithData($teacher);
+		return $this->respondWithData($teacher);
 
 	}
 
 	/**
 	 * Remove the specified resource from storage.
 	 *
-	 * @param  int  $id
+	 * @param  int $id
 	 * @return Response
 	 */
-	public function destroy($id)
-	{
-        //check if this record is related to user before deleting
-        $client_details = $this->client->getClientDetails($id);
+	public function destroy($id) {
+		//check if this record is related to user before deleting
+		$client_details = $this->client->getClientDetails($id);
 
 
+		if (empty($client_details)) {
 
+			return $this->respondErrorMessage(2001);
+		}
 
-        if(empty($client_details)){
+		$client_to_classroom = $this->client->getClientToClassroom($id);
 
-            return $this->respondErrorMessage(2001);
-        }
+		if ($client_to_classroom['classroom']->toArray()) {
 
-        $client_to_classroom = $this->client->getClientToClassroom($id);
+			return $this->respondErrorMessage(2119);
+		}
 
-        if($client_to_classroom['classroom']->toArray()){
-
-            return $this->respondErrorMessage(2119);
-        }
-
-        return $this->respondWithData($this->client->deleteClient($id));
+		return $this->respondWithData($this->client->deleteClient($id));
 	}
 
 }
