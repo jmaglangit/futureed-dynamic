@@ -111,6 +111,9 @@ class ClientTeacherController extends ApiController {
 		//get school_code of current user
 		$client['school_code'] = $current_user_details['school_code'];
 
+		//by pass admin approval.
+		$client['account_status'] = config('futureed.accepted');
+
 		//add confirmation code
 		$user = array_merge($user, $this->code->getCodeExpiry());
 
