@@ -218,12 +218,12 @@
 
 					<div class="col-xs-6">
 						<p class="module-message">
-							You need to review the teaching content.
+							You need to review and take the test again.
 						</p>
 
 						<div class="proceed-btn-container btn-container">
 							<button type="button" class="btn btn-maroon btn-large" ng-click="mod.reviewContent()">
-								Review Contents
+								Retake Test
 							</button>
 						</div>
 					</div>
