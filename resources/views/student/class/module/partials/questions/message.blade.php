@@ -85,13 +85,6 @@
 								, 'ng-click' => 'mod.skipModule()'
 							)
 						) !!}
-
-						{!! Form::button('Later'
-							, array(
-								'class' => 'btn btn-gold btn-semi-medium'
-								, 'data-dismiss' => 'modal'
-							)
-						) !!}
 					</div>
 					<div ng-if="mod.module_message.no_questions">
 						{!! Html::link(route('student.dashboard.index'), 'Proceed to Dashboard'
