@@ -7,11 +7,9 @@
 <div>Hi there {{ $name }},</div>
 <br/>
 <div>
-	<div>You have opt to resend your confirmation code.</div>
-	<br>
-    <div>Your confirmation code : {{ $code  }}</div>
+	<div>You have opt to resend your confirmation.</div>
     <br>
-    <div>Link to Future Lessons: <a href="{{ $link }}">Confirm Code</a></div><br/>
+    <div><a href="{{ $link }}">Confirm Email</a></div><br/>
 
     <div>Regards,</div><br/>
     <div>Admin</div>
