@@ -66,7 +66,7 @@
 						</div>
 
 						<div class="form-group col-xs-12">
-							<span>Did not receive email confirmation? <a ng-click="login.setActive('resend')">resend confirmation</a></span>
+							<span>Did not receive email confirmation? <a class="cursor-pointer" ng-click="login.setActive('resend')">resend confirmation</a></span>
 						</div>
 					</div>
 
