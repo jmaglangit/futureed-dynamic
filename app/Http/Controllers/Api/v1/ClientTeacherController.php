@@ -111,7 +111,7 @@ class ClientTeacherController extends ApiController {
 		//get school_code of current user
 		$client['school_code'] = $current_user_details['school_code'];
 
-		//TODO add confirmation code
+		//add confirmation code
 		$user = array_merge($user, $this->code->getCodeExpiry());
 
 		//return newly added user details
