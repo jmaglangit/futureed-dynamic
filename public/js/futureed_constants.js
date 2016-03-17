@@ -58,6 +58,8 @@ var Constants = {
 	, ANSWER		: "Answer"
 	, DASHBOARD		: "Dashboard"
 
+	, TRIAL_QUESTIONS	:10
+
 	/**
 	* Media Types
 	*/
