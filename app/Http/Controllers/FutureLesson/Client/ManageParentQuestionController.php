@@ -21,4 +21,11 @@ class ManageParentQuestionController extends Controller{
 	public function listview() {
 		return view('client.parent.question.partials.list');
 	}
+
+	/**
+	 * @return \Illuminate\View\View
+	 */
+	public function purchase(){
+		return view('client.parent.question.partials.purchase');
+	}
 }
