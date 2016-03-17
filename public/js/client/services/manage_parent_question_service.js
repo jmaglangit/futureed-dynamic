@@ -9,7 +9,7 @@ function ManageParentQuestionService($http){
 		return $http({
 			method 		: Constants.METHOD_GET
 			, url 		: url + 'question?module_id=' + data.id
-				+ '&difficulty=' + difficulty
+				//+ '&difficulty=' + difficulty
 				+ '&limit=' + data.limit
 				+ '&offset=' + data.offset
 		})
