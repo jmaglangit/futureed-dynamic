@@ -1,10 +1,10 @@
 <div ng-if="help.active_list">
 	<div class="content-title">
 		<div class="title-main-content">
-			<span><i class="fa fa-question-circle"></i> General Help Requests </span>
+			<span><i class="fa fa-question-circle"></i> {!! trans('messages.general_help_req') !!} </span>
 			<div class="col-xs-2 pull-right">
 				<span>
-					<a href="{!! route('student.class.index') !!}" class="btn btn-maroon top-10">Back</a>
+					<a href="{!! route('student.class.index') !!}" class="btn btn-maroon top-10">{!! trans('messages.back') !!}</a>
 				</span>
 			</div>
 		</div>
@@ -24,7 +24,7 @@
 
 	<div class="col-xs-12 search-container">
 		<div class="title-mid">
-			Search
+			{!! trans('messages.search') !!}
 		</div>
 
 		<div class="form-search">
@@ -38,7 +38,7 @@
 				<div class="col-xs-4">
 					{!! Form::text('search_title', ''
 						,array(
-							'placeholder' => 'Help Request Title'
+							'placeholder' => 'trans('messages.admin_help_request_title')'
 							, 'ng-model' => 'help.search.title'
 							, 'class' => 'form-control'
 							, 'autocomplete' => 'off'
@@ -49,9 +49,9 @@
 				<div class="col-xs-4">
 					{!! Form::select('search_help_request_type'
 						, array(
-							  '' => 'All'
-							, 'Own' => 'Your Requests'
-							, 'Others' => 'Other Requests'
+							  '' => 'trans('messages.all')'
+							, 'Own' => 'trans('messages.your_req')'
+							, 'Others' => 'trans('messages.other_req')'
 						), '$request_type'
 						, array(
 							  'ng-model' => 'help.search.help_request_type'
@@ -61,7 +61,7 @@
 				</div>
 				
 				<div class="col-xs-2">
-					{!! Form::button('Search'
+					{!! Form::button('trans('messages.search')'
 						,array(
 							'class' => 'btn btn-blue'
 							, 'ng-click' => 'help.searchFnc($event)'
@@ -70,7 +70,7 @@
 				</div>
 
 				<div class="col-xs-2">
-					{!! Form::button('Clear'
+					{!! Form::button('trans('messages.clear')'
 						,array(
 							'class' => 'btn btn-gold'
 							, 'ng-click' => 'help.clearFnc($event)'
@@ -83,7 +83,7 @@
 	 
 	<div class="col-xs-12 table-container">
 		<div class="title-mid">
-			Help Request List
+			{!! trans('messages.admin_help_request_list') !!}
 		</div>
 
 		<div class="list-container" ng-cloak>
@@ -110,10 +110,10 @@
 				<table id="tip-list" class="table table-striped table-bordered">
 					<thead>
 				        <tr>
-				            <th>Help Request Title</th>
-				            <th>Date Created</th>
-				            <th>Status</th>
-				            <th ng-if="help.records.length">Actions</th>
+				            <th>{!! trans('messages.admin_help_request_title') !!}</th>
+				            <th>{!! trans('messages.date_created') !!}</th>
+				            <th>{!! trans('messages.status') !!}</th>
+				            <th ng-if="help.records.length">{!! trans('messages.action') !!}</th>
 				        </tr>
 			        </thead>
 			        <tbody>
@@ -131,12 +131,12 @@
 				        </tr>
 				        <tr class="odd" ng-if="!help.records.length && !help.table.loading">
 				        	<td valign="top" colspan="7">
-				        		No records found
+				        		{!! trans('messages.no_records_found') !!}
 				        	</td>
 				        </tr>
 				        <tr class="odd" ng-if="help.table.loading">
 				        	<td valign="top" colspan="7">
-				        		Loading...
+				        		{!! trans('messages.loading') !!}
 				        	</td>
 				        </tr>
 			        </tbody>
