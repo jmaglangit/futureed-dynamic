@@ -12,19 +12,19 @@
     	<ul class="nav nav-pills col-xs-12">
     		<li ng-class="{ 'active' : help.active_classmate }">
     			<a class="pill-grey" href="javascript:void(0);" 
-                    data-toggle="tab" ng-click="help.setHelpTabActive(futureed.CLASSMATE)">From your Classmates</a>
+                    data-toggle="tab" ng-click="help.setHelpTabActive(futureed.CLASSMATE)">{!! trans('messages.from_your_classmates') !!}</a>
     		</li>
     		<li ng-class="{ 'active' : help.active_own }">
     			<a class="pill-grey" href="javascript:void(0);" 
-                    data-toggle="tab" ng-click="help.setHelpTabActive(futureed.OWN)">From you</a>
+                    data-toggle="tab" ng-click="help.setHelpTabActive(futureed.OWN)">{!! trans('messages.from_you') !!}</a>
     		</li>
     		<li class="pull-right" ng-class="{ 'active' : help.active_all }">
     			<a class="pill-gold" href="javascript:void(0);" 
-                    data-toggle="tab" ng-click="help.setHelpTabActive(futureed.ALL)">All</a>
+                    data-toggle="tab" ng-click="help.setHelpTabActive(futureed.ALL)">{!! trans('messages.all') !!}</a>
     		</li>
     		<li class="pull-right" ng-class="{ 'active' : help.active_current }">
     			<a class="pill-gold" href="javascript:void(0);" 
-                    data-toggle="tab" ng-click="help.setHelpTabActive(futureed.CURRENT)">Current</a>
+                    data-toggle="tab" ng-click="help.setHelpTabActive(futureed.CURRENT)">{!! trans('messages.current') !!}</a>
     		</li>
     	</ul>
 
@@ -33,7 +33,7 @@
                 <div id="help_request_list" class="help-container">
                     <div class="content-box" ng-if="!help.records.length">
                         <div class="row content-row">
-                            <center><p>No Help Request Found</p></center>
+                            <center><p>{!! trans('messages.no_help_request_found') !!}</p></center>
                         </div>
                     </div>
 
@@ -61,7 +61,7 @@
                     </div>
 
                     <div class="col-xs-8" ng-if="mod.show_btn">
-                        <button class="btn btn-maroon" ng-click="mod.tipList('', futureed.CURRENT, 1)">View More</button>
+                        <button class="btn btn-maroon" ng-click="mod.tipList('', futureed.CURRENT, 1)">{!! trans('messages.view_more') !!}</button>
                     </div>
                 </div>
             </div>
