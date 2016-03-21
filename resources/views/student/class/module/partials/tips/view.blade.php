@@ -18,7 +18,7 @@
 					<p>{! tips.record.subject_area_name !} > {! tips.record.subject_name !}</p>
 				</div>
 				<div class="col-xs-6">
-					<span><i class="fa fa-user"></i> By : {! tips.record.name !}</span>
+					<span><i class="fa fa-user"></i> {!! trans('messages.by') !!} : {! tips.record.name !}</span>
 				</div>
 			</div>
 
@@ -30,6 +30,6 @@
 	</div>
 	<div class="btn-container">
 		<button type="button" class="btn btn-gold btn-medium pull-right"
-			ng-click="tips.viewTipList()"> Back </button>
+			ng-click="tips.viewTipList()"> {!! trans('messages.back') !!} </button>
 	</div>
 </div>
