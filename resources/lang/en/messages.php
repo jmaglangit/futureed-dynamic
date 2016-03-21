@@ -857,7 +857,7 @@ return [
 	
 	//resources/views/client/login/enter-confirmation-code.blade.php
 	'client_new_confirmation_code' => 'A new confirmation code has been sent to your email account.',
-	'client_check_inbox' => 'Please check your inbox or your spam folder for the email. The email contains a confirmation code that you need to input below.',
+	'client_check_inbox' => 'You\'re almost done! We just need you to confirm you email address. Please check your inbox and click on the link.',
 	
 	//resources/views/client/login/registration.blade.php
 	'client_register_as' => 'Register Account as',
