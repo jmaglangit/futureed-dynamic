@@ -148,9 +148,12 @@ class StudentController extends ApiController {
 		return $this->respondWithData(['billing_address_not_found' => 0]);
 	}
 
-	//check if student need to take the
-	// return with learning style boolean
 	// if true needs to take lsp else false no need.
+	/**
+	 * Check if student needs to take learning style program
+	 * @param $id
+	 * @return mixed
+	 */
 	public function checkRequiredLearningStyle($id) {
 
 		$learning_style = $this->student->getStudentLSP($id);
