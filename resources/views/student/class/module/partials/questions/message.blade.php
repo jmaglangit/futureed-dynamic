@@ -14,11 +14,11 @@
 						</div>
 
 						<div class="col-xs-6">
-							<p class="skip-module-message">Let's get started...</p>
+							<p class="skip-module-message">{!! trans('messages.lets_get_started') !!}</p>
 
 							<div class="points-badge-holder row">
 								<div class="col-xs-12">
-									<img ng-src="/images/icons/icon-reward.png"/> Reward points to earn
+									<img ng-src="/images/icons/icon-reward.png"/> {!! trans('messages.rewards_points_earn') !!}
 								</div>
 
 								<div class="col-xs-12">
@@ -37,8 +37,7 @@
 						</div>
 
 						<div class="col-xs-6" >
-							<p class="module-message">No available questions for this module.</br>
-							Please contact the system administrator.</p>
+							<p class="module-message">{!! trans('messages.no_available_modules') !!}</p>
 						</div>
 					</div>
 				</div>
@@ -67,7 +66,7 @@
 							<p class="wiki-message" ng-class="{ 'wiki-more-message' : mod.module_message.full_message }">{! mod.module_message.message !}</p>
 							<div class="wiki-view-more" ng-if="!mod.module_message.full_message">
 								<button type="button" class="btn btn-gold" ng-click="mod.viewMoreWikiMessage()">
-									View More
+									{!! trans('messages.view_more') !!}
 								</button>
 							</div>
 						</div>
@@ -78,25 +77,27 @@
 			<div class="modal-footer">
 				<div class="btn-container">
 					<div ng-if="mod.module_message.skip_module">
-						{!! Form::button('Proceed to Questions'
+						{!! Form::button('trans('messages.proceed_to_questions')'
 							, array(
 								'class' => 'btn btn-maroon btn-semi-medium'
 								, 'data-dismiss' => 'modal'
 								, 'ng-click' => 'mod.skipModule()'
 							)
 						) !!}
+
 					</div>
 					<div ng-if="mod.module_message.no_questions">
-						{!! Html::link(route('student.dashboard.index'), 'Proceed to Dashboard'
+						{!! Html::link(route('student.dashboard.index'), 'trans('messages.proceed_to_dashboard')'
 							, array(
 								'class' => 'btn btn-maroon btn-medium'
 							)
 						) !!}
+
 					</div>
 					<div ng-if="mod.module_message.module_done">
 						<button class="btn btn-maroon btn-medium" 
 							ng-click="mod.exitModule('{!! route('student.class.index') !!}')">
-							Class Dashboard
+							{!! trans('messages.class_dashboard') !!}
 						</button>
 					</div>
 				</div>
