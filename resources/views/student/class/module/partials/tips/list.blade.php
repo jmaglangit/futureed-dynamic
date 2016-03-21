@@ -11,10 +11,10 @@
     <div class="col-xs-12">
     	<ul class="nav nav-pills col-xs-12">
     		<li ng-class="{ 'active' : tips.active_current }">
-    			<a class="pill-grey" href="javascript:void(0)" data-toggle="tab" ng-click="tips.setTipTabActive(futureed.CURRENT)">Current</a>
+    			<a class="pill-grey" href="javascript:void(0)" data-toggle="tab" ng-click="tips.setTipTabActive(futureed.CURRENT)">{!! trans('messages.current') !!}</a>
     		</li>
     		<li ng-class="{ 'active' : tips.active_all }">
-    			<a class="pill-grey" href="javascript:void(0)" data-toggle="tab" ng-click="tips.setTipTabActive(futureed.ALL)">All</a>
+    			<a class="pill-grey" href="javascript:void(0)" data-toggle="tab" ng-click="tips.setTipTabActive(futureed.ALL)">{!! trans('messages.all') !!}</a>
     		</li>
     	</ul>
 
@@ -23,13 +23,13 @@
 		    	<div id="tip_list" class="tips-container">
 					<div class="content-box" ng-if="!tips.records.length && !tips.table.loading">
 						<div class="row content-row">
-							<center><p>No Tips Found</p></center>
+							<center><p>{!! trans('messages.no_tips_found') !!}</p></center>
 						</div>
 					</div>
 
 					<div class="content-box" ng-if="tips.table.loading">
 						<div class="row content-row">
-							<center><p>Loading...</p></center>
+							<center><p>{!! trans('messages.loading') !!}</p></center>
 						</div>
 					</div>
 
