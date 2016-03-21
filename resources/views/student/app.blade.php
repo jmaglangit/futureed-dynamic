@@ -47,10 +47,10 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    Inactive
+                    {!! trans('messages.inactive') !!}
                 </div>
                 <div class="modal-body">
-                    You have been logged out due to inactivity. Please login again.
+                    {!! trans('messages.logout_due_to_inactivity') !!}
                 </div>
                 <div class="modal-footer">
                     <div class="col-md-8 col-md-offset-4 pull-left">
@@ -66,7 +66,7 @@
         </div>
       <footer class="footer" ng-cloak>
         <div class="container text-center">
-          <p class="text-muted">{{ date('Y') }} &copy; All Rights Reserved. FutureEd Pte Ltd</p>
+          <p class="text-muted">{{ date('Y') }} &copy; {!! trans('messages.all_right_reserved') !!} FutureEd Pte Ltd</p>
         </div>
       </footer>
     @show
