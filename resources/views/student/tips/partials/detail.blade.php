@@ -1,7 +1,7 @@
 <div ng-if="tips.active_view || tips.active_edit">
 	<div class="content-title">
 		<div class="title-main-content">
-			<span>Tip Details</span>
+			<span>{!! trans('messages.admin_tip_details') !!}</span>
 		</div>
 	</div>
 
@@ -25,7 +25,7 @@
 			</div>
 
 			<div class="col-xs-6">
-				<div class="pull-right avatar-name-container">Posted by <br /> {! tips.record.name !}</div>
+				<div class="pull-right avatar-name-container">{!! trans('messages.posted_by') !!} <br /> {! tips.record.name !}</div>
 				<div class="pull-right avatar-container-small">
 					<img ng-src="{! tips.record.avatar_url !}" />
 				</div>
@@ -58,7 +58,7 @@
 		<div class="col-xs-12" ng-cloak>
 			<div class="col-xs-6"></div>
 			<div class="col-xs-6">
-					{!! Form::button('Rate'
+					{!! Form::button('trans('messages.rate')'
 						, array(
 							'class' => 'btn btn-blue pull-right'
 							, 'ng-click' => "tips.selectRate()"
@@ -67,7 +67,7 @@
 						)
 					) !!}
 
-					{!! Form::button('Cancel'
+					{!! Form::button('trans('messages.cancel')'
 						, array(
 							'class' => 'btn btn-gold btn-medium pull-right'
 							, 'ng-click' => "tips.setActive()"
