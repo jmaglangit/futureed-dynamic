@@ -11,7 +11,7 @@
 				<div class="col-xs-2">
 					{!! Form::text('search_name', ''
 						,array(
-							'placeholder' => 'Module'
+							'placeholder' => 'trans('messages.module')'
 							, 'ng-model' => 'class.search.module_name'
 							, 'class' => 'form-control btn-fit'
 							, 'data-clear-btn' => 'true'
@@ -21,9 +21,9 @@
 				<div class="col-xs-3">
 					{!! Form::select('search_module_status'
 						, array(
-							'' => 'All'
-							, 'On Going' => 'On Going'
-							, 'Completed' => 'Completed'
+							'' => 'trans('messages.all')'
+							, 'On Going' => 'trans('messages.ongoing')'
+							, 'Completed' => 'trans('messages.completed')'
 						)
 						, ''
 						, array(
@@ -34,12 +34,12 @@
 				</div>
 				<div class="col-xs-3" ng-init="getGradeLevel(user.country_id)">
 					<select class="form-control" ng-model="class.search.grade_id">
-						<option value="">-- Select Grade --</option>
+						<option value="">{!! trans('messages.select_grade') !!}</option>
 						<option ng-repeat="grade in grades" ng-value="grade.id">{! grade.name !}</option>
 					</select>
 				</div>
 				<div class="col-xs-2">
-					{!! Form::button('Search'
+					{!! Form::button('trans('messages.search')'
 						, array(
 							'class' => 'btn btn-blue'
 							, 'ng-click' => 'class.searchFnc($event)'
@@ -47,7 +47,7 @@
 					) !!}
 				</div>
 				<div class="col-xs-2">
-					{!! Form::button('Clear'
+					{!! Form::button('trans('messages.clear')'
 						, array(
 							'class' => 'btn btn-gold'
 							, 'ng-click' => 'class.clearFnc()'
@@ -67,7 +67,7 @@
 				<a href="#home" aria-controls="home" role="tab" data-toggle="tab" >{! aClass.classroom.subject.name !}</a>
 			</li>
 			<li role="presentation" class="module-tabs" ng-class="{ 'active' : aClass.class_id == class.current_class }">
-				<a href="{!! route('student.reports.index') !!}">Reports</a>
+				<a href="{!! route('student.reports.index') !!}">trans('messages.reports')</a>
 			</li>
 		</ul>
 
@@ -78,13 +78,13 @@
 
 					<div class="module-list" ng-if="!class.records.length && !class.table.loading">
 						<div class="no-module-label">
-							<p>No modules found.</p>
+							<p>{!! trans('messages.no_modules_found') !!}</p>
 						</div>
 					</div>
 
 					<div class="module-list" ng-if="class.table.loading">
 						<div class="no-module-label">
-							<p>Loading...</p>
+							<p>{!! trans('messages.loading') !!}</p>
 						</div>
 					</div>
 
@@ -106,16 +106,16 @@
 
 							<button ng-if="record.module_status == 'On Going' && user.points >= record.points_to_unlock"
 								ng-click="class.redirect('{!! route('student.class.module.index') !!}', record)" 
-								type="button" class="btn btn-blue module-btn"><i class="fa fa-play-circle"></i> Resume </button>
+								type="button" class="btn btn-blue module-btn"><i class="fa fa-play-circle"></i> {!! trans('messages.resume') !!} </button>
 
 							<button ng-if="!record.module_status && user.points >= record.points_to_unlock" ng-click="class.redirect('{!! route('student.class.module.index') !!}', record)"
-								type="button" class="btn btn-blue module-btn"><i class="fa fa-pencil"></i> Begin </button>
+								type="button" class="btn btn-blue module-btn"><i class="fa fa-pencil"></i> {!! trans('messages.begin') !!} </button>
 
 							<button ng-if="user.points < record.points_to_unlock"
-								type="button" class="btn btn-blue module-btn" ng-disabled="true"><i class="fa fa-lock"></i> Locked</button>
+								type="button" class="btn btn-blue module-btn" ng-disabled="true"><i class="fa fa-lock"></i> {!! trans('messages.locked') !!}</button>
 
 							<button ng-if="record.module_status == 'Completed'"
-								type="button" class="btn btn-blue module-btn" ng-disabled="true"><i class="fa fa-lock"></i> Completed</button>
+								type="button" class="btn btn-blue module-btn" ng-disabled="true"><i class="fa fa-lock"></i> {!! trans('messages.completed') !!}</button>
 
 							<div class="progress">
 								<div class="progress-bar progress-bar-striped" role="progressbar" aria-valuemin="0" aria-valuemax="100"
