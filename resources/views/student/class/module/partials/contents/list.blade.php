@@ -35,12 +35,12 @@
 	<div ng-if="!mod.contents.teaching_content">
 		<div class="content-container col-xs-12">
 			<div class="content-header">
-				<h3>Content</h3>
+				<h3>{!! trans('messages.content') !!}</h3>
 			</div>
 
 			<div class="content-body">
 				<div class="content-message">
-					<h3 class="alert alert-info">Content not available. </h3>
+					<h3 class="alert alert-info">{!! trans('messages.content_not_available') !!} </h3>
 				</div>
 			</div>
 		</div>
