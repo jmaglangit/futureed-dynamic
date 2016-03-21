@@ -3,7 +3,7 @@
 		<div class="form-class">
 			<div class="clearfix" ng-if="profile.has_accessories">
 				<ul class="nav navbar-nav">
-					<li class="nav-label">Cash Points</li>
+					<li class="nav-label">{!! trans('messages.cash_points') !!}</li>
 					<li class="nav-points-rewards">
 						{!! Html::image('/images/icons/icon-cash-points.png', ''
 							, array(
@@ -13,11 +13,11 @@
 					</li>
 			</div>
 			<ul class="avatar_list list-unstyled list-inline" ng-init="profile.getAvatarAccessories()">
-				<li class="item avtr-accessory" ng-repeat="accessory in profile.avatar_accessories">
+				<li class="item avtrcon" ng-repeat="accessory in profile.avatar_accessories">
 					<img ng-src="{! accessory.url !}" ng-class="!accessory.is_bought ? 'greyscale' : ''" alt="{! accessory.name !}">
-					<p ng-if="!accessory.is_bought" class="text-gold text-center">{! accessory.points_to_unlock !} points</p>
+					<p ng-if="!accessory.is_bought" class="text-gold text-center">{! accessory.points_to_unlock !} {!! trans('messages.points') !!}</p>
 					<p ng-if="!accessory.is_bought" class="text-gold text-center">{! accessory.name !}</p>
-					{!! Form::button('BUY'
+					{!! Form::button('trans('messages.buy')'
 						, array(
 							'class' => 'btn btn-maroon btn-medium center-block'
 							, 'ng-click' => 'profile.confrimBuyAvatarAccessory(accessory.id, accessory.points_to_unlock)'
@@ -34,7 +34,7 @@
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
-				Buy Accessory
+				{!! trans('messages.buy_accessory') !!}
 			</div>
 			<div class="modal-body center-date">
 				<div class="alert alert-error" ng-if="profile.errors">
@@ -43,19 +43,19 @@
 					</p>
 				</div>
 				<div ng-if="!profile.errors">
-					<p>Are you sure you want to buy this accessory?</p>
+					<p>{!! trans('messages.are_you_sure_you_want_to_buy_accessory') !!}</p>
 				</div>
 			</div>
 			<div class="modal-footer">
 				<div class="btncon col-md-8 col-md-offset-4 pull-left">
-					{!! Form::button('BUY'
+					{!! Form::button('trans('messages.buy')'
 						, array(
 							'class' => 'btn btn-blue btn-medium'
 							, 'ng-click' => 'profile.buyAvatarAccessory(profile.accessory_id, profile.points_to_unlock)'
 						)
 					) !!}
 
-					{!! Form::button('CANCEL'
+					{!! Form::button('trans('messages.cancel_caps')'
 						, array(
 							'class' => 'btn btn-gold btn-medium'
 							, 'data-dismiss' => 'modal'
