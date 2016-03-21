@@ -10,7 +10,7 @@
 			<div class="row">
 				<div class="col-xs-3">
 					<a class="btn btn-blue" href="{!! route('student.dashboard.index') !!}">
-						<i class="fa fa-arrow-left"></i> Back to Dashboard</a>
+						<i class="fa fa-arrow-left"></i> {!! trans('messages.back_to_dashboard') !!}</a>
 					</a>
 				</div>
 				<div class="col-xs-offset-9"></div>
@@ -18,12 +18,12 @@
 			<div class="content-title">
 				<div class="title-main-content row">
 					<div class="col-xs-6">
-						<span><i class="fa fa-file-text-o"></i> My Reports</span>
+						<span><i class="fa fa-file-text-o"></i> {!! trans('messages.my_reports') !!}</span>
 					</div>
 
 					<div class="col-xs-6">
 						<div class="btn-group pull-right export-buttons" ng-if="reports.student_report_export">
-							<button class="btn btn-blue" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-file-pdf-o"></i> Export </button>
+							<button class="btn btn-blue" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-file-pdf-o"></i> {!! trans('messages.export') !!} </button>
 
 							<ul class="dropdown-menu">
 								<li><a href="{!reports.student_report_export!}/pdf">PDF</a></li>
