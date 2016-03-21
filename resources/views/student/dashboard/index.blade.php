@@ -7,14 +7,14 @@
 @section('content')
     <div class="row" ng-cloak>
         <div class="col-xs-12 class-container">
-            <h3 class="alert alert-info">You have no available subjects.</h3>
+            <h3 class="alert alert-info">{!! trans('messages.student_dashboard_msg') !!}</h3>
             
             <div class="no-record-label">    
-                <p>You need a Teacher to add you to a Class. </p>
-                <p>or</p>
-                <p>You can have your Parent buy you a subscription. </p>
-                <p ng-if="user.age > 13">or</p>
-                <p ng-if="user.age > 13">You can proceed to <a href="{!! route('student.payment.index') !!}">student payment</a> page.</p>
+                <p>{!! trans('messages.student_dashboard_msg2') !!}</p>
+                <p>{!! trans('messages.or') !!}</p>
+                <p>{!! trans('messages.student_dashboard_msg3') !!}</p>
+                <p ng-if="user.age > 13">{!! trans('messages.or') !!}</p>
+                <p ng-if="user.age > 13">{!! trans('messages.student_dashboard_msg4') !!} <a href="{!! route('student.payment.index') !!}">{!! trans('messages.student_dashboard_msg5') !!}</a> {!! trans('messages.student_dashboard_msg6') !!}.</p>
             </div>
         </div>
     </div>
