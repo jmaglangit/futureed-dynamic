@@ -26,22 +26,7 @@
 	            <p>{! mod.success !}</p>
 	        </div>
 	    </div>
-		
-		<div class="col-xs-2 padding-0">
-			<div ng-if="!mod.record.module_done">
-				<div class="btn-menu">
-					<div ng-if="mod.active_contents">
-						{!! Form::button('Proceed'
-							,array(
-								'class' => 'btn btn-maroon'
-								, 'ng-click' => 'mod.startQuestions()'
-								, 'ng-if' => "mod.record.student_module.module_status == 'On Going'"
-							)
-						)!!}
-					</div>
-				</div>
-			</div>
-		</div>
+
 
 		<!-- Main Container -->
 		<div ng-if="!mod.record.module_done" class="col-xs-12 padding-0">

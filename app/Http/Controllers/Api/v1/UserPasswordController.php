@@ -1,154 +1,157 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
-use FutureEd\Http\Controllers\Api\Traits\AccessTokenTrait;
-use FutureEd\Http\Requests;
-use FutureEd\Http\Controllers\Controller;
-use FutureEd\Services;
-
-use Illuminate\Http\Request;
+use FutureEd\Http\Requests\Api\UserPasswordRequest;
+use FutureEd\Models\Repository\Admin\AdminRepositoryInterface;
+use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
+use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
+use FutureEd\Models\Repository\Validator\ValidatorRepositoryInterface;
+use FutureEd\Services\CodeGeneratorServices;
+use FutureEd\Services\MailServices;
+use FutureEd\Services\UserServices;
 use Illuminate\Support\Facades\Input;
 
 class UserPasswordController extends UserController {
 
+	protected $user_service;
+	protected $validator;
+	protected $code_generator_service;
+	protected $admin;
+	protected $mail_service;
+	protected $client;
+	protected $student;
 
-    public function passwordForgot(){
+	/**
+	 * @param UserServices $userServices
+	 * @param ValidatorRepositoryInterface $validatorRepositoryInterface
+	 * @param CodeGeneratorServices $codeGeneratorServices
+	 * @param AdminRepositoryInterface $adminRepositoryInterface
+	 * @param MailServices $mailServices
+	 * @param ClientRepositoryInterface $clientRepositoryInterface
+	 * @param StudentRepositoryInterface $studentRepositoryInterface
+	 */
+	public function __construct(
+		UserServices $userServices,
+		ValidatorRepositoryInterface $validatorRepositoryInterface,
+		CodeGeneratorServices $codeGeneratorServices,
+		AdminRepositoryInterface $adminRepositoryInterface,
+		MailServices $mailServices,
+		ClientRepositoryInterface $clientRepositoryInterface,
+		StudentRepositoryInterface $studentRepositoryInterface
+	){
+		$this->user_service = $userServices;
+		$this->validator = $validatorRepositoryInterface;
+		$this->code_generator_service = $codeGeneratorServices;
+		$this->admin = $adminRepositoryInterface;
+		$this->mail_service = $mailServices;
+		$this->client = $clientRepositoryInterface;
+		$this->student = $studentRepositoryInterface;
+	}
 
-		$input = Input::only('username', 'user_type', 'callback_uri');
+	/**
+	 * @param UserPasswordRequest $request
+	 * @return mixed
+	 */
+    public function passwordForgot(UserPasswordRequest $request){
 
-		$this->addMessageBag($this->userType($input, 'user_type'));
-		$this->addMessageBag($this->validateString($input, 'callback_uri'));
+		$input = $request->only('username', 'user_type', 'callback_uri');
+
 		$subject = config('futureed.subject_forgot');
 
-		$flag = 0;
+		$return = $this->user_service->checkLoginName($input['username'], $input['user_type']);
 
-		if (!$this->email($input, 'username')) {
+		if ($this->validator->email($input['username'])) {
 
-			$flag = 1;
-
-		}
-		if (!$this->username($input, 'username')) {
-
-			$flag = 0;
-		}
+			$return = $this->user_service->checkEmail($input['username'], $input['user_type']);
 
 
-		if ($flag) {
+		} elseif ($this->validator->username($input['username'])) {
 
-			$this->addMessageBag($this->email($input, 'username'));
-
-		} else {
-
-			$this->addMessageBag($this->username($input, 'username'));
+			$return = $this->user_service->checkUserName($input['username'], $input['user_type']);
 
 		}
 
-		if ($this->getMessageBag()) {
 
-			return $this->respondWithError($this->getMessageBag());
-
-		} else {
-
-			$return = $this->user->checkLoginName($input['username'], $input['user_type']);
+		if (isset($return['status'])) {
 
 
-			if ($this->valid->email($input['username'])) {
+			$userDetails = $this->user_service->getUserDetails($return['user_id']);
 
-				$return = $this->user->checkEmail($input['username'], $input['user_type']);
+			$isActivated = $this->user_service->isActivated($return['user_id']);
 
+			//check if facebook_app_id and google_app_id is empty
+			if ($this->user_service->getFacebookId($return['user_id']) || $this->user_service->getGoogleId($return['user_id'])) {
 
-			} elseif ($this->valid->username($input['username'])) {
-
-				$return = $this->user->checkUserName($input['username'], $input['user_type']);
-
+				return $this->respondErrorMessage(2001);
 			}
 
-
-			if (isset($return['status'])) {
-
-
-				$userDetails = $this->user->getUserDetails($return['user_id']);
-
-				$isActivated = $this->user->isActivated($return['user_id']);
-
-				//check if facebook_app_id and google_app_id is empty
-				if($this->user->getFacebookId($return['user_id']) || $this->user->getGoogleId($return['user_id'])){
-
-					return $this->respondErrorMessage(2001);
-				}
-
-				if ($isActivated == 1) {
+			if ($isActivated == 1) {
 
 
-					// get code
-					$code = $this->code->getCodeExpiry();
+				// get code
+				$code = $this->code_generator_service->getCodeExpiry();
 
-					//update reset_code and expiry to db
-					$this->user->setResetCode($return['user_id'], $code);
-
-
-					if (strcasecmp($input['user_type'], config('futureed.student')) == 0) {
-
-						$subject = str_replace('{user}', config('futureed.student'), $subject);
-
-						$this->mail->sendStudentMailResetPassword($userDetails, $code['confirmation_code'], $input['callback_uri'], $subject);
-
-					} elseif (strcasecmp($input['user_type'], config('futureed.client')) == 0) {
-
-						$client_id = $this->client->getClientId($return['user_id']);
-
-						$client = $this->client->getClientDetails($client_id);
+				//update reset_code and expiry to db
+				$this->user_service->setResetCode($return['user_id'], $code);
 
 
-						if ($client['account_status'] != config('futureed.client_account_status_accepted')) {
+				if (strcasecmp($input['user_type'], config('futureed.student')) == 0) {
 
-							return $this->respondErrorMessage(2013);
-						}
+					$subject = str_replace('{user}', config('futureed.student'), $subject);
 
-						//update subject
-						$subject = str_replace('{user}', $client->client_role, $subject);
+					$this->mail_service->sendStudentMailResetPassword($userDetails, $code['confirmation_code'], $input['callback_uri'], $subject);
 
-						$subject = str_replace('{user}', config('futureed.client'), $subject);
+				} elseif (strcasecmp($input['user_type'], config('futureed.client')) == 0) {
 
-						$this->mail->sendClientMailResetPassword($userDetails, $code['confirmation_code'], $input['callback_uri'], $subject);
+					$client_id = $this->client->getClientId($return['user_id']);
 
-					} else {
+					$client = $this->client->getClientDetails($client_id);
 
-						$admin_id = $this->admin->getAdminId($return['user_id']);
 
-						$admin = $this->admin->getAdminDetail($admin_id);
+					if ($client['account_status'] != config('futureed.client_account_status_accepted')) {
 
-						//update subject
-						$subject = str_replace('{user}', $admin->admin_role, $subject);
-
-						$subject = str_replace('{user}', config('futureed.Admin'), $subject);
-
-						$this->mail->sendAdminMailResetPassword($userDetails, $code['confirmation_code'], $input['callback_uri'], $subject);
-
+						return $this->respondErrorMessage(2013);
 					}
 
-					return $this->respondWithData($userDetails->toArray());
+					//update subject
+					$subject = str_replace('{user}', $client->client_role, $subject);
+
+					$subject = str_replace('{user}', config('futureed.client'), $subject);
+
+					$this->mail_service->sendClientMailResetPassword($userDetails, $code['confirmation_code'], $input['callback_uri'], $subject);
 
 				} else {
 
-					return $this->respondErrorMessage(2018);
+					$admin_id = $this->admin->getAdminId($return['user_id']);
+
+					$admin = $this->admin->getAdminDetail($admin_id);
+
+					//update subject
+					$subject = str_replace('{user}', $admin->admin_role, $subject);
+
+					$subject = str_replace('{user}', config('futureed.Admin'), $subject);
+
+					$this->mail_service->sendAdminMailResetPassword($userDetails, $code['confirmation_code'], $input['callback_uri'], $subject);
 
 				}
+
+				return $this->respondWithData($userDetails->toArray());
 
 			} else {
 
 				return $this->respondErrorMessage(2018);
+
 			}
+
+		} else {
+
+			return $this->respondErrorMessage(2018);
 		}
-
     }
 
-    public function passwordReset(){
-
-
-         
-    }
-
-    //confirmation of reset code
+	/**
+	 * confirmation of reset code.
+	 * @return mixed
+	 */
     public function confirmResetCode(){
       
        $input = Input::only('email','reset_code','user_type');
@@ -167,7 +170,7 @@ class UserPasswordController extends UserController {
 
          } else {
           
-           $return=$this->user->getIdByEmail($input['email'],$input['user_type']);
+           $return=$this->user_service->getIdByEmail($input['email'],$input['user_type']);
 
           
            if($return['status']==202){
@@ -176,11 +179,11 @@ class UserPasswordController extends UserController {
                         
            }else{
 
-              $userdata = $this->user->getUserDetail($return['data'],$input['user_type']);
+              $userdata = $this->user_service->getUserDetail($return['data'],$input['user_type']);
               
               if($userdata['reset_code']==$input['reset_code']){
                  
-                  $expired=$this->user->checkCodeExpiry($userdata['reset_code_expiry']);
+                  $expired=$this->user_service->checkCodeExpiry($userdata['reset_code_expiry']);
                  
                   if($expired==true){
 

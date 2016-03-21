@@ -6,7 +6,9 @@
             {! error !}
         </p>
     </div>
-
+    <div class="alert alert-success center" ng-if="login.resent">
+        <p>Email has been sent to your inbox. Please check.</p>
+    </div>
     {!! Form::open(array('id' => 'registration_success_form')) !!}
     <div class="form-group">{!! Form::label('', '') !!}
         {!! Form::text('email', '',

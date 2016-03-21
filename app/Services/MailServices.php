@@ -484,7 +484,7 @@ class MailServices {
 			'data' => [
 				'name' => $data->user->name,
 				'code' => $code->confirmation_code,
-				'link' => $data->callback_uri.'?email='.$data->user->email,
+				'link' => $data->callback_uri.'?email='.$data->user->email . '&code=' . $code->confirmation_code,
 			],
 			'mail_recipient' => $data->user->email,
 			'mail_recipient_name' => $data->user->name,
@@ -559,8 +559,7 @@ class MailServices {
 			'view' => 'emails.student.registration-email',
 			'data' => [
 				'name' => $user_detail['name'],
-				'code' => $code['confirmation_code'],
-				'link' => $url . '?email=' . $user_detail['email'],
+				'link' => $url . '?email=' . $user_detail['email'] . '&code=' . $code['confirmation_code'],
 			],
 			'mail_recipient' => $user_detail['email'],
 			'mail_recipient_name' => $user_detail['first_name' ] . $user_detail['last_name'],

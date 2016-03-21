@@ -182,6 +182,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 	var loadModuleView = function() {
 		self.getTeachingContents(self.record.id);
 		self.setActive(Constants.ACTIVE_CONTENTS);
+		self.startQuestions();
 	}
 
 	var getAvatarPose = function(avatar_id) {
