@@ -1,6 +1,6 @@
 <div ng-if="profile.active_avatar">
 	<div class="alert alert-success" ng-if="profile.success">
-		You have successfully changed your avatar.
+		{!! trans('messages.successful_change_avatar') !!}
 	</div>
 
 	<div ng-if="!profile.success">
@@ -21,7 +21,7 @@
 		</div>
 
 		<div class="btn-container" ng-if="!profile.success">
-			{!! Form::button('Proceed'
+			{!! Form::button('trans('messages.client_proceed')'
 				, array(
 					'class' => 'btn btn-maroon btn-medium'
 					, 'ng-if' => 'profile.enable'
@@ -29,7 +29,7 @@
 				)
 			) !!}
 
-			{!! Html::link(route('student.profile.index'), 'Cancel'
+			{!! Html::link(route('student.profile.index'), 'trans('messages.cancel')'
 				, array(
 					'class' => 'btn btn-gold btn-medium'
 				)	
@@ -40,7 +40,7 @@
 	<br />
 	
 	<div class="btn-container" ng-if="profile.success">
-		{!! Html::link(route('student.profile.index'), 'View Profile'
+		{!! Html::link(route('student.profile.index'), 'trans('messages.view_profile')'
 			, array(
 				'class' => 'btn btn-gold btn-medium'
 			)	
