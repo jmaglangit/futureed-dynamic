@@ -1,7 +1,7 @@
 <div ng-if="payment.active_add">
 	<div class="content-title">
 		<div class="title-main-content">
-			<span>Add Payment</span>
+			<span>{!! trans('messages.add_payment') !!}</span>
 		</div>
 	</div>
 
@@ -12,31 +12,34 @@
               	{! error !}
             </p>
         </div>
-		<div class="alert alert-error" ng-if="payment.student_billing_address_not_found">
-			<p>
-				You need to update your billing information in order to proceed buying a subscription. <a href="{{ route('student.profile.index') }}">Update now</a>.
-			</p>
-		</div>
+		
+	<div class="alert alert-error" ng-if="payment.student_billing_address_not_found">
+		<p>
+			{!! trans('messages.student_update_billing_info') !!} <a href="{{ route('student.profile.index') }}">{!! trans('messages.student_update_now') !!}</a>.
+		</p>
+	</div>
+
+
         <div class="alert alert-success" ng-if="payment.add.success">
-        	<p>Successfully added Student</p>
+        	<p>{!! trans('messages.successful_add_student') !!}</p>
         </div>
         <div class="alert alert-success" ng-if="payment.success">
-        	<p>Successfully removed Student</p>
+        	<p>{!! trans('messages.successful_remove_student') !!}</p>
         </div>
         <fieldset class="payment-field">
-        	<span class="step">1</span><p class="step-label">Please select a subject.</p>
+        	<span class="step">1</span><p class="step-label">{!! trans('messages.please_select_subject') !!}</p>
 
         	<div class="col-xs-12 search-container">
 				<div class="form-search">
 		        	<div class="form-group">
-		        		<label class="col-xs-2 control-label">Subject <span class="required">*</span></label>
+		        		<label class="col-xs-2 control-label">{!! trans('messages.subject') !!} <span class="required">*</span></label>
 		        		<div class="col-xs-4" ng-init="payment.getSubjects()">
 		        			<select class="form-control" id="subject_id" 
 		        				name="subject_id" 
 		    					ng-disabled="payment.subjects.length <= 0" 
 		    					ng-model="payment.invoice.subject_id" 
 		    					ng-class="{ 'required-field' : payment.fields['subject_id'] }">
-			                        <option value="">-- Select Subject --</option>
+			                        <option value="">{!! trans('messages.select_subject') !!}</option>
 			                        <option ng-repeat="subject in payment.subjects" ng-value="subject.id">{! subject.name !}</option>
 			                    </select>
 		        		</div>
@@ -46,12 +49,12 @@
         </fieldset>
         <hr/>
         <fieldset class="payment-field">
-        	<span class="step">2</span><p class="step-label">Please select a subscription.</p>
+        	<span class="step">2</span><p class="step-label">{!! trans('messages.please_select_subscription') !!}</p>
         	
         	<div class="col-xs-12 search-container">
 				<div class="form-search">
 					<div class="form-group">
-						<label class="col-xs-2 control-label">Subscription</label>
+						<label class="col-xs-2 control-label">{!! trans('messages.subscription') !!}</label>
 						<div class="col-xs-4">
 							<select name="subscription" ng-disabled="!payment.subscriptions.length"
 									id="subscription" 
@@ -60,16 +63,16 @@
 									ng-model="payment.invoice.subscription_id"
 									name="subscription_id" 
 									ng-class="{ 'required-field' : payment.fields['subscription_id'] }">
-		                        <option value="">-- Select Subscription --</option>
+		                        <option value="">{!! trans('messages.select_subscription') !!}</option>
 		                        <option ng-repeat="subscription in payment.subscriptions" ng-value="{! subscription.id !}">{! subscription.name!}</option>
 		                    </select>
 						</div>
 						<div class="col-xs-6">
-							<label class="col-xs-2 control-label">Starting</label>
+							<label class="col-xs-2 control-label">{!! trans('messages.starting') !!}</label>
 							<div class="col-xs-4">
 								<input type="text" name="start_date" placeHolder="Start Date" ng-disabled="true" class="form-control" value="{! payment.invoice.dis_date_start | ddMMyy !}">
 							</div>
-							<label class="col-xs-2 control-label">To</label>
+							<label class="col-xs-2 control-label">{!! trans('messages.to') !!}</label>
 							<div class="col-xs-4">
 								<input type="text" name="start_date" placeHolder="End Date" ng-disabled="true" class="form-control" value="{! payment.invoice.dis_date_end | ddMMyy !}">
 							</div>
@@ -81,7 +84,7 @@
 			<div class="col-xs-12">
 				<div class="row">
 					<div class="col-xs-4 margin-10-bot pull-right">
-						<label class="col-xs-4 control-label">Sub Total</label>
+						<label class="col-xs-4 control-label">{!! trans('messages.subtotal') !!}</label>
 						<div>
 							<div class="input-group">
 								<span class="input-group-addon" id="basic-addon1">USD$</span>
@@ -92,7 +95,7 @@
 				</div>
 				<div class="row">
 					<div class="col-xs-4 margin-10-bot pull-right">
-						<label class="col-xs-4 control-label">Discount</label>
+						<label class="col-xs-4 control-label">{!! trans('messages.discount') !!}</label>
 						<div>
 							<div class="input-group">
 								{!! Form::text('discount',''
@@ -100,7 +103,7 @@
 										'ng-disabled' => true
 										, 'class' => 'form-control'
 										, 'ng-model' => 'payment.invoice.discount'
-										, 'placeholder' => 'Discount'
+										, 'placeholder' => 'trans('messages.discount')'
 									]
 								) !!}
 								<span class="input-group-addon" id="basic-addon1">%</span>
@@ -111,7 +114,7 @@
 
 				<div class="row">
 					<div class="col-xs-4 margin-10-bot pull-right">
-						<label class="col-xs-4 control-label">Total</label>
+						<label class="col-xs-4 control-label">{!! trans('messages.total') !!}</label>
 						<div>
 							<div class="input-group">
 								<span class="input-group-addon" id="basic-addon1">USD$</span>
@@ -124,19 +127,19 @@
 
 			<div class="col-xs-12 margin-10-top">
 				<div class="btn-container">
-					{!! Form::button('Delete Subscription'
+					{!! Form::button('trans('messages.delete_subscription')'
 						, array(
 							'class' => 'btn btn-gold btn-small pull-right'
 							, 'ng-click' => "payment.setActive()"
 						)
 					) !!}
-					{!! Form::button('Save Subscription'
+					{!! Form::button('trans('messages.save_subscription')'
 						, array(
 							'class' => 'btn btn-blue btn-small pull-right'
 							, 'ng-click' => "payment.saveSubscription()"
 						)
 					) !!}
-					{!! Form::button('Pay Subscription'
+					{!! Form::button('trans('messages.pay_subscription')'
 						, array(
 							'class' => 'btn btn-blue btn-small pull-right'
 							, 'ng-click' => "payment.paySubscription()"
@@ -153,14 +156,14 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
         <div class="modal-header">
-            Cancel Subscription
+            {!! trans('messages.cancel_subscription') !!}
         </div>
         <div class="modal-body">
-            Your changes will be saved. Are you sure you want to cancel this subscription?
+            {!! trans('messages.save_subscription_msg') !!}
         </div>
         <div class="modal-footer">
         	<div class="btncon col-md-8 col-md-offset-4 pull-left">
-                {!! Form::button('Yes'
+                {!! Form::button('{!! trans('messages.yes') !!}'
                     , array(
                         'class' => 'btn btn-blue btn-medium'
                         , 'ng-click' => "payment.setActive('list')"
@@ -168,7 +171,7 @@
                     )
                 ) !!}
 
-                {!! Form::button('No'
+                {!! Form::button('{!! trans('messages.no') !!}'
                     , array(
                         'class' => 'btn btn-gold btn-medium'
                         , 'data-dismiss' => 'modal'
@@ -184,14 +187,14 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
         <div class="modal-header">
-            Remove Student
+            {!! trans('messages.remove_student') !!}
         </div>
         <div class="modal-body">
-            Are you sure you want to remove this student?
+             {!! trans('messages.are_you_sure_you_want_to_remove_student') !!}
         </div>
         <div class="modal-footer">
         	<div class="btncon col-md-8 col-md-offset-4 pull-left">
-                {!! Form::button('Yes'
+                {!! Form::button('trans('messages.yes')'
                     , array(
                         'class' => 'btn btn-blue btn-medium'
                         , 'ng-click' => "payment.removeStudent('add')"
@@ -199,7 +202,7 @@
                     )
                 ) !!}
 
-                {!! Form::button('No'
+                {!! Form::button('trans('messages.no')'
                     , array(
                         'class' => 'btn btn-gold btn-medium'
                         , 'data-dismiss' => 'modal'
