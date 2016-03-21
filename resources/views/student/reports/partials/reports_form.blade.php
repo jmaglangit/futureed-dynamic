@@ -4,24 +4,24 @@
 		<li role="presentation" ng-class="{ 'active' : reports.active_report_card }">
 			<a href="javascript:void(0)" ng-click="reports.setActive(futureed.REPORT_CARD)">
 				<i class="fa fa-file-text-o"></i>
-				 Report Card</a>
+				 {!! trans('messages.report_card') !!}</a>
 		</li>
 		<li role="presentation" ng-class="{ 'active' : reports.active_summary_progress }">
 			<a href="javascript:void(0)" ng-click="reports.setActive(futureed.SUMMARY_PROGRESS)">
 				<i class="fa fa-list-ul"></i>
-				 Summary Progress
+				 {!! trans('messages.summary_progress') !!}
 			</a>
 		</li>
 		<li role="presentation" ng-class="{ 'active' : reports.active_subject_area }">
 			<a href="javascript:void(0)" ng-click="reports.setActive(futureed.SUBJECT_AREA)">
 				<i class="fa fa-book"></i>
-				 Subject Area
+				 {!! trans('messages.subject_area') !!}
 			</a>
 		</li>
 		<li role="presentation" ng-class="{ 'active' : reports.active_current_learning }">
 			<a href="javascript:void(0)" ng-click="reports.setActive(futureed.CURRENT_LEARNING)">
 				<i class="fa fa-bar-chart"></i>
-				 Current Learning
+				 {!! trans('messages.current_learning') !!}
 			</a>
 		</li>
 	</ul>
