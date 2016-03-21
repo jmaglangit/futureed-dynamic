@@ -1115,6 +1115,10 @@ return [
 	'email_verify_client_msg3' => 'Login Page',
 	'email_verify_client_msg4' => 'and login to begin your adventure on the Future Lesson platform.',
 	
+	//views/student/payment/partials/add.blade.php
+	'student_update_billing_info' => 'You need to update your billing information in order to proceed buying a subscription.',
+	'student_update_now' => 'Update Now',
+	
 	//views/email/client/reject-client.blade.php
 	'email_reject_client_msg' => 'Your account has not been verified, please review your registration and try again or contact the system administrator at help@futurelesson.com.',
 	'email_reject_client_msg2' => 'Go To Registration',
@@ -1270,6 +1274,5 @@ return [
 	'student_tc_msg57' => 'By using our site, you consent to our terms and conditions as written in this agreement.',
 	'student_tc_msg58' => 'Contacting Us',
 	'student_tc_msg59' => 'If there are any questions regarding this policy you may contact us using the information below.',
-
 	
 ];
