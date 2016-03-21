@@ -115,6 +115,7 @@ return [
 	'delete_this_req' => 'Delete This Request',
 	'delete_req' => 'Delete Request',
 	'description' => 'Description',
+	'detail' => 'Detail',
 	'difficulty' => 'Difficulty',
 	'direct_credit_to' => 'Direct Credit to',
 	'disabled' => 'Disabled',
