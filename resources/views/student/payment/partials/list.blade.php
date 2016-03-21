@@ -1,10 +1,10 @@
 <div ng-if="payment.active_list">
 	<div class="content-title">
 		<div class="title-main-content">
-			<span><i class="fa fa-dollar"></i> Payment</span>
+			<span><i class="fa fa-dollar"></i> {!! trans('messages.payment') !!}</span>
 
 			<div class="col-xs-2 pull-right top-10">
-				<a href="{!! route('student.class.index') !!}" class="btn btn-maroon">Back</a>
+				<a href="{!! route('student.class.index') !!}" class="btn btn-maroon">{!! trans('messages.back') !!}</a>
 			</div>
 		</div>
 	</div>
@@ -23,7 +23,7 @@
 
 	<div class="col-xs-12 search-container">
 		<div class="title-mid">
-			Search
+			{!! trans('messages.search') !!}
 		</div>
 
 		<div class="form-search">
@@ -40,19 +40,19 @@
 						, array(
 							'class' => 'form-control'
 							, 'ng-model' => 'payment.search.order_no'
-							, 'placeholder' => 'Order Number'
+							, 'placeholder' => 'trans('messages.admin_order_number')'
 							, 'autocomplete' => 'off'
 						)
 					) !!}
 				</div>
 				<div class="col-xs-4">
 					<select ng-model="payment.search.subscription_name" ng-disabled="!payment.subscriptions.length" ng-init="payment.listSubscription()" class="form-control">
-						<option value="">-- Select Subscription --</option>
+						<option value="">{!! trans('messages.select_subscription') !!}</option>
 						<option ng-repeat="subscription in payment.subscriptions" ng-value="subscription.name">{! subscription.name !}</option>
 					</select>
 				</div>
 				<div class="col-xs-2">
-					{!! Form::button('Search'
+					{!! Form::button('trans('messages.search')'
 						, array(
 							'class' => 'btn btn-blue'
 							, 'ng-click' => 'payment.searchFnc($event)'
@@ -60,7 +60,7 @@
 					) !!}
 				</div>
 				<div class="col-xs-2">
-					{!! Form::button('Clear'
+					{!! Form::button('trans('messages.clear')'
 						, array(
 							'class' => 'btn btn-gold'
 							, 'ng-click' => 'payment.clear()'
@@ -73,24 +73,24 @@
 
 	<div class="col-xs-12 table-container" ng-init="payment.listPayments()">
 		<button class="btn btn-blue btn-small" ng-click="payment.setActive(futureed.ACTIVE_ADD)">
-			<i class="fa fa-plus-square"></i> Add Payment
+			<i class="fa fa-plus-square"></i> {!! trans('messages.add_payment') !!}
 		</button>
 
 		<div class="title-mid">
-			Payment List
+			{!! trans('messages.payment_list') !!}
 		</div>
 
 		<div class="list-container" ng-cloak>
 			<table class="table table-striped table-bordered table-responsive">
 				<thead>
 			        <tr>
-			            <th>Order #</th>
-			            <th>Date Started</th>
-			            <th>Date End</th>
-			            <th>Total # of Seats</th>
-			            <th>Total Price</th>
-			            <th>Payment Status</th>
-			            <th>Action</th>
+			            <th>{!! trans('messages.admin_order_no') !!}</th>
+			            <th>{!! trans('messages.date_started') !!}</th>
+			            <th>{!! trans('messages.date_end') !!}</th>
+			            <th>{!! trans('messages.total_no_seats') !!}</th>
+			            <th>{!! trans('messages.total_price') !!}</th>
+			            <th>{!! trans('messages.payment_status') !!}</th>
+			            <th>{!! trans('messages.action') !!}</th>
 			        </tr>
 			    </thead>
 
@@ -115,12 +115,12 @@
 		        </tr>
 		        <tr class="odd" ng-if="!payment.records.length && !payment.table.loading">
 		        	<td valign="top" colspan="8">
-		        		No records found
+		        		{!! trans('messages.no_records_found') !!}
 		        	</td>
 		        </tr>
 		        <tr class="odd" ng-if="payment.table.loading">
 		        	<td valign="top" colspan="8">
-		        		Loading...
+		        		{!! trans('messages.loading') !!}
 		        	</td>
 		        </tr>
 		        </tbody>
@@ -146,14 +146,14 @@
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 			    <div class="modal-header">
-			        Delete Invoice
+			        {!! trans('messages.client_delete_invoice') !!}
 			    </div>
 			    <div class="modal-body">
-			        Are you sure you want to delete this invoice?
+			        {!! trans('messages.client_delete_invoice_msg') !!}
 			    </div>
 			    <div class="modal-footer">
 			    	<div class="btncon col-md-8 col-md-offset-4 pull-left">
-			            {!! Form::button('Yes'
+			            {!! Form::button('trans('messages.yes')'
 			                , array(
 			                    'class' => 'btn btn-blue btn-medium'
 			                    , 'ng-click' => 'payment.deleteInvoice(payment.delete_invoice.id)'
@@ -161,7 +161,7 @@
 			                )
 			            ) !!}
 
-			            {!! Form::button('No'
+			            {!! Form::button('trans('messages.no')'
 			                , array(
 			                    'class' => 'btn btn-gold btn-medium'
 			                    , 'data-dismiss' => 'modal'
@@ -178,14 +178,14 @@
   	<div class="modal-dialog modal-lg">
 	    <div class="modal-content">
 	        <div class="modal-header">
-	            Cancel Subscription
+	            {!! trans('messages.cancel_subscription') !!}
 	        </div>
 	        <div class="modal-body">
-	            Are you sure you want to cancel this subscription?
+	            {!! trans('messages.client_cancel_invoice_msg') !!}
 	        </div>
 	        <div class="modal-footer">
 	        	<div class="btncon col-md-8 col-md-offset-4 pull-left">
-	                {!! Form::button('Yes'
+	                {!! Form::button('trans('messages.yes')'
 	                    , array(
 	                        'class' => 'btn btn-blue btn-medium'
 	                        , 'ng-click' => 'payment.cancelInvoice(payment.cancel_invoice.id)'
@@ -193,7 +193,7 @@
 	                    )
 	                ) !!}
 
-	                {!! Form::button('No'
+	                {!! Form::button('trans('messages.no')'
 	                    , array(
 	                        'class' => 'btn btn-gold btn-medium'
 	                        , 'data-dismiss' => 'modal'
