@@ -5,13 +5,13 @@
 				<div class="panel-header">
 								<div id="section_header">
 									<span ng-bind="sections[session.section].name" ng-hide="session.current_state == 'completed'"></span>
-									<center ng-show="session.current_state == 'completed'">Test Completed</center>
+									<center ng-show="session.current_state == 'completed'">{!! trans('messages.test_completed') !!}</center>
 									<div class="" ng-cloak ng-hide="order_candidate_test.test.time_limit_actual" ng-bind="'This test has no time limit'"></div>
 								</div>
 				</div>
 				<div class="panel-body test">
 	
-						<h6 class="text-danger ng-hide" ng-show="session.current_state == 'introduction'">Instructions</h6>
+						<h6 class="text-danger ng-hide" ng-show="session.current_state == 'introduction'">{!! trans('messages.instructions') !!}</h6>
 						
 						<!-- INTRODUCTION -->
 						<div id="instructions" class="instructions ng-hide" ng-show="session.current_state == 'introduction'">
@@ -37,7 +37,7 @@
 								
 							<div class="col-xs-2 text-center">
 								<p id="time_left" ng-show="order_candidate_test.test.time_limit_actual">
-									<b>Time Remaining</b><br>
+									<b>{!! trans('messages.time_remaining') !!}</b><br>
 									<span class="lead" id="stopwatch">
 										<span id="minutes" ng-bind="session.remaining.minutes">00</span>:<span id="seconds" ng-bind="session.remaining.seconds">00</span>
 									</span>
