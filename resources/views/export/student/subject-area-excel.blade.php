@@ -11,37 +11,34 @@
 		<tr></tr>
 		<tr>
 			<th valign="middle"><img src="{{ base_path().'/public/' . config('futureed.thumbnail') . '/'.$additional_information['avatar_thumbnail'] }}" alt=" "></th>
-			<td colspan="1">Student
+			<td colspan="1">{!! trans('messages.student') !!}
 				: {{ $additional_information['first_name'].' '.$additional_information['last_name'] }}</td>
 		</tr>
 		<tr>
-			<td colspan="1">Grade : {{ $additional_information['grade_name'] }}</td>
+			<td colspan="1">{!! trans('messages.grade') !!} : {{ $additional_information['grade_name'] }}</td>
 		</tr>
 		<tr>
-			<td colspan="1">Subject : {{ $additional_information['subject_name'] }}</td>
+			<td colspan="1">{!! trans('messages.subject') !!} : {{ $additional_information['subject_name'] }}</td>
 		</tr>
 		<tr></tr>
 		<tr>
 			<td colspan="{{ floor(count($column_header)/6) }}"
-				style="text-align: center; background: #E9CC45;">{{ $additional_information['earned_badges'] }} Badges earned
+				style="text-align: center; background: #E9CC45;">{{ $additional_information['earned_badges'] }} {!! trans('messages.client_badges_earned') !!}
 			</td>
 			<td colspan="{{ floor(count($column_header)/6) }}"
-				style="text-align: center; background: #E9CC45;">{{ $additional_information['earned_medals'] }} Number of medals
-				earned
+				style="text-align: center; background: #E9CC45;">{{ $additional_information['earned_medals'] }} {!! trans('messages.client_no_medals_earned') !!}
 			</td>
 			<td colspan="{{ ceil(count($column_header)/6) }}"
-				style="text-align: center; background: #E9CC45;">{{ $additional_information['completed_lessons'] }} Lessons
-				completed
+				style="text-align: center; background: #E9CC45;">{{ $additional_information['completed_lessons'] }} {!! trans('messages.client_lessons_completed') !!}
 			</td>
 			<td colspan="{{ floor(count($column_header)/6) }}"
-				style="text-align: center; background: #E9CC45;">{{ $additional_information['written_tips'] }} Tips written
+				style="text-align: center; background: #E9CC45;">{{ $additional_information['written_tips'] }} {!! trans('messages.client_tips_written') !!}
 			</td>
 			<td colspan="{{ floor(count($column_header)/6) }}"
-				style="text-align: center; background: #E9CC45;">{{ $additional_information['week_hours'] }} Hours spent in last 7
-				days
+				style="text-align: center; background: #E9CC45;">{{ $additional_information['week_hours'] }} {!! trans('messages.client_hours_spent_7_days') !!}
 			</td>
 			<td colspan="{{ floor(count($column_header)/6) }}"
-				style="text-align: center; background: #E9CC45;">{{ $additional_information['total_hours'] }} Total hours spend
+				style="text-align: center; background: #E9CC45;">{{ $additional_information['total_hours'] }} {!! trans('messages.client_hours_spent') !!}
 			</td>
 		</tr>
 		<tr></tr>
