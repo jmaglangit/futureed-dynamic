@@ -526,7 +526,7 @@ th, td {
 }
 
 .margin-top-30{
-	margin-top: 30px !important;
+	margin-top: 30px;
 }
 
 .breadcrumb {
@@ -1863,3 +1863,8 @@ top: 41px;
 	right: 20px;
 	bottom: 38%;
 }
+
+li.questions-answers > a, li.questions-answers div {
+	margin-bottom: 30px;
+}
+

@@ -53,85 +53,97 @@
 				<div class="col-xs-6">
 				{{--Answers--}}
 				<div class="questions-answers">
-					<a ng-if="mod.current_question.question_type == futureed.MULTIPLECHOICE" href="" class="choices margin-top-30" ng-repeat="choices in mod.current_question.question_answers"
-						ng-click="mod.selectAnswer(choices)" ng-class="{ 'selected-choice' : mod.current_question.answer_id == choices.id }">
-						<div ng-if="choices.answer_text != '' ">{! choices.answer_text !}</div>
-						<img ng-if="choices.answer_image != 'None' " ng-src="{! choices.answer_image !}" />
-					</a>
-
-					<div ng-if="mod.current_question.question_type == futureed.FILLINBLANK" class="form-group margin-top-30">
-						<div ng-class="{ 'fib-text-fields' : mod.current_question.answer_text_field_count.length > 1 }">
-							<input ng-repeat="n in mod.current_question.answer_text_field_count track by $index"
-								   ng-model="mod.current_question.answer_text[n]"
-								   name="answer_text"
-								   type="text" class="form-control question-text-answer form-control-lg" placeholder="Answer {! $index + 1 !}"
-							/>
-						</div>
+					<div class="margin-top-30">
+						<a ng-if="mod.current_question.question_type == futureed.MULTIPLECHOICE" href="" class="choices" ng-repeat="choices in mod.current_question.question_answers"
+							ng-click="mod.selectAnswer(choices)" ng-class="{ 'selected-choice' : mod.current_question.answer_id == choices.id }">
+							<div ng-if="choices.answer_text != '' ">{! choices.answer_text !}</div>
+							<img ng-if="choices.answer_image != 'None' " ng-src="{! choices.answer_image !}" />
+						</a>
 					</div>
 
-					<div ng-if="mod.current_question.question_type == futureed.PROVIDE" class="form-group margin-top-30">
-						<input ng-model="mod.current_question.answer_text"
-							   name="answer_text"
-							   type="text"
-							   class="form-control question-text-answer form-control-lg" placeholder="Answer"/>
-					</div>
-
-					<div ng-if="mod.current_question.question_type == futureed.ORDERING" class="margin-top-30">
-						<ul as-sortable="mod.dragControlListeners" ng-model="mod.current_question.answer_text">
-							<li ng-repeat="item in mod.current_question.answer_text" as-sortable-item class="as-sortable-item">
-								<div as-sortable-item-handle class="as-sortable-item-handle">
-									<span data-ng-bind="item"></span>
-								</div>
-							</li>
-						</ul>
-					</div>
-
-					<div ng-if="mod.current_question.question_type == futureed.GRAPH" class="margin-top-30">
-						<div ng-init="mod.getGraph(mod.current_question.id)">
-							{{--Horizontal--}}
-							<table id="horizontalTable" class="table" ng-if="mod.question_graph_content.orientation == futureed.HORIZONTAL">
-								<tr ng-repeat="item in mod.question_graph_content.image" class="{! item.field !}">
-									<th class="origin-container" ng-init="mod.initDrag()">
-										<div class="origin {! item.field !}">
-											<img ng-src="{! item.path !}" />
-										</div>
-									</th>
-									<td ng-init="mod.initDrop()" class="drop first">
-									</td>
-									<td ng-init="mod.initDrop()" class="drop disabled" ng-repeat="col in mod.graph_layout" ng-if="$index > 0">
-									</td>
-								</tr>
-							</table>
-							{{--Vertical--}}
-							<table id="verticalTable" class="table" ng-if="mod.question_graph_content.orientation == futureed.VERTICAL">
-								<tr>
-									<th ng-repeat="item in mod.question_graph_content.image" class="{! item.field !}" ng-init="mod.initDrag()">
-										<div class="origin {! item.field !}">
-											<img ng-src="{! item.path !}" />
-										</div>
-									</th>
-								</tr>
-								<tr>
-									<td ng-repeat="item in mod.question_graph_content.image" ng-init="mod.initDrop()" class="drop first">
-									</td>
-								</tr>
-								<tr ng-repeat="col in mod.graph_layout" ng-if="$index > 0">
-									<td ng-repeat="item in mod.question_graph_content.image" ng-init="mod.initDrop()" class="drop disabled">
-									</td>
-								</tr>
-
-							</table>
-							<div class="col-xs-3 pull-right reset-graph">
-								<button class="btn btn-gold" ng-click="mod.resetGraph()">RESET</button>
+					<div class="margin-top-30">
+						<div ng-if="mod.current_question.question_type == futureed.FILLINBLANK" class="form-group">
+							<div ng-class="{ 'fib-text-fields' : mod.current_question.answer_text_field_count.length > 1 }">
+								<input ng-repeat="n in mod.current_question.answer_text_field_count track by $index"
+									   ng-model="mod.current_question.answer_text[n]"
+									   name="answer_text"
+									   type="text" class="form-control question-text-answer form-control-lg" placeholder="Answer {! $index + 1 !}"
+								/>
 							</div>
 						</div>
 					</div>
 
-					<div ng-if="mod.current_question.question_type == futureed.QUADRANT" class="margin-top-30">
-						<div ng-init="mod.getQuadrant(mod.current_question.id)">
-							<div id="placeholder" style="width:300px;height:300px;margin:0 auto;"></div>
-							<div class="col-xs-3 pull-right reset-graph">
-								<button class="btn btn-gold" ng-click="mod.resetGraph()">RESET</button>
+					<div class="margin-top-30">
+						<div ng-if="mod.current_question.question_type == futureed.PROVIDE" class="form-group">
+						<input ng-model="mod.current_question.answer_text"
+							   name="answer_text"
+							   type="text"
+							   class="form-control question-text-answer form-control-lg" placeholder="Answer"/>
+						</div>
+					</div>
+
+					<div class="margin-top-30">
+						<div ng-if="mod.current_question.question_type == futureed.ORDERING">
+							<ul as-sortable="mod.dragControlListeners" ng-model="mod.current_question.answer_text">
+								<li ng-repeat="item in mod.current_question.answer_text" as-sortable-item class="as-sortable-item">
+									<div as-sortable-item-handle class="as-sortable-item-handle">
+										<span data-ng-bind="item"></span>
+									</div>
+								</li>
+							</ul>
+						</div>
+					</div>
+
+					<div class="margin-top-30">
+						<div ng-if="mod.current_question.question_type == futureed.GRAPH">
+							<div ng-init="mod.getGraph(mod.current_question.id)">
+								{{--Horizontal--}}
+								<table id="horizontalTable" class="table" ng-if="mod.question_graph_content.orientation == futureed.HORIZONTAL">
+									<tr ng-repeat="item in mod.question_graph_content.image" class="{! item.field !}">
+										<th class="origin-container" ng-init="mod.initDrag()">
+											<div class="origin {! item.field !}">
+												<img ng-src="{! item.path !}" />
+											</div>
+										</th>
+										<td ng-init="mod.initDrop()" class="drop first">
+										</td>
+										<td ng-init="mod.initDrop()" class="drop disabled" ng-repeat="col in mod.graph_layout" ng-if="$index > 0">
+										</td>
+									</tr>
+								</table>
+								{{--Vertical--}}
+								<table id="verticalTable" class="table" ng-if="mod.question_graph_content.orientation == futureed.VERTICAL">
+									<tr>
+										<th ng-repeat="item in mod.question_graph_content.image" class="{! item.field !}" ng-init="mod.initDrag()">
+											<div class="origin {! item.field !}">
+												<img ng-src="{! item.path !}" />
+											</div>
+										</th>
+									</tr>
+									<tr>
+										<td ng-repeat="item in mod.question_graph_content.image" ng-init="mod.initDrop()" class="drop first">
+										</td>
+									</tr>
+									<tr ng-repeat="col in mod.graph_layout" ng-if="$index > 0">
+										<td ng-repeat="item in mod.question_graph_content.image" ng-init="mod.initDrop()" class="drop disabled">
+										</td>
+									</tr>
+
+								</table>
+								<div class="col-xs-3 pull-right reset-graph">
+									<button class="btn btn-gold" ng-click="mod.resetGraph()">RESET</button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="margin-top-30">
+						<div ng-if="mod.current_question.question_type == futureed.QUADRANT">
+							<div ng-init="mod.getQuadrant(mod.current_question.id)">
+								<div id="placeholder" style="width:300px;height:300px;margin:0 auto;"></div>
+								<div class="col-xs-3 pull-right reset-graph">
+									<button class="btn btn-gold" ng-click="mod.resetGraph()">RESET</button>
+								</div>
 							</div>
 						</div>
 					</div>
