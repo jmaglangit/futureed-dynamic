@@ -79,4 +79,8 @@ class User extends Model {
 		return $this->hasOne('FutureEd\Models\Core\Admin');
 	}
 
+    public function background_image() {
+        return $this->belongsTo('FutureEd\Models\Code\BackgroundImage');
+    }
+
 }
