@@ -167,7 +167,7 @@ class StudentController extends ApiController {
 
 		} else {
 
-			$learning_style = false;
+			$learning_style = 0;
 
 			//check current class with order subscription
 			$classes = $this->class_student->getClassStudent($id);
@@ -185,7 +185,9 @@ class StudentController extends ApiController {
 				}
 			}
 
-			return $this->respondWithData($learning_style);
+			return $this->respondWithData([
+				'learning_style' => $learning_style
+			]);
 
 
 		}
