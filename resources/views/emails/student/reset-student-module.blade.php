@@ -5,14 +5,14 @@
     <meta charset="utf-8">
 </head>
 <body>
-<div>Hi there {{ $name  }},</div><br/>
+<div>{!! trans('messages.hi_there') !!} {{ $name  }},</div><br/>
 
 <div>
-    <div>All saved progress in {{$module}} Module has been reset by Admin.</div>
+    <div>{!! trans('messages.email_reset_student_module_msg') !!} {{$module}} {!! trans('messages.email_reset_student_module_msg2') !!}</div>
     <br/>
-    <div>If you did not ask for this change, please contact Administrator right away.</div><br/>
-    <div>Regards,</div><br/>
-    <div>Admin</div>
+    <div>{!! trans('messages.email_reset_student_module_msg3') !!}</div><br/>
+    <div>{!! trans('messages.regards') !!},</div><br/>
+    <div>{!! trans('messages.admin') !!}</div>
 </div>
 </body>
 </html>
