@@ -8,10 +8,10 @@
 		    <h1 class="error-display">503</h1>
 
 		    <h2>
-		    	<strong>Be right back.</strong>
+		    	<strong>{!! trans('messages.be_right_back') !!}</strong>
 		    </h2>
 		    <p class="error-text">
-			    We are currently undergoing maintenance.
+			    {!! trans('messages.on_maintenance') !!}
 		    </p>
 		</div>
 	</div>
