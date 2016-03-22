@@ -580,7 +580,24 @@ function FutureedController($scope, $window, apiService, futureed) {
 		$("input[name='userdata'").val(JSON.stringify($scope.user));
 
 		apiService.updateUserSession($scope.user);
-	} 
+	}
 
+	$scope.checkLSP = function (user) {
+
+		apiService.studentLearningStyle(user).success(function (response) {
+
+			if (response.data == Constants.FALSE) {
+				$scope.user.take_lsp = Constants.FALSE;
+				$scope.updateUserData($scope.user);
+
+			} else {
+				$scope.user.take_lsp = Constants.TRUE;
+				window.location.href = '/student/learning-style';
+			}
+
+		}).error(function () {
+			$scope.internalError();
+		});
+	}
 	
 };
