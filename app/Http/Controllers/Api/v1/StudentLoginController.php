@@ -87,7 +87,7 @@ class StudentLoginController extends StudentController {
                 $student_id = $this->student->getStudentId($response['data']);
 
                 //get student age
-                if($this->student_service->getAge($student_id) < 14){
+                if($this->student_service->getAge($student_id) <= config('futureed.student_age_guardian')){
                     
 
                     return $this->respondErrorMessage(2008);
