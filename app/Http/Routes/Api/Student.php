@@ -147,6 +147,9 @@ Routes::group([
 	Routes::resource('/student', 'Api\v1\StudentController',
 		['only' => ['index', 'show', 'update']]);
 
+	Routes::resource('/student/background-image','Api\v1\StudentBackgroundImageController',
+		['only' => ['show','update']]);
+
 	Routes::get('/student/check-billing-address/{id}',
 	[
 		'as' => 'student.check-billing-address',
