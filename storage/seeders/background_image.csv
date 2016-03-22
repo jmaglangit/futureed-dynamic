@@ -1,14 +1,13 @@
-id,name,filename
-,Toskana,background_image_1.jpg
-,Milford Sound,background_image_2.jpg
-,Italia Dolce Vita,background_image_3.jpg
-,Aqua Marine,background_image_4.jpg
-,Sakura,background_image_5.jpg
-,Manarola,background_image_6.jpg
-,Bora Bora,background_image_7.jpg
-,Ponte Vecchio,background_image_8.jpg
-,Hillside,background_image_9.jpg
-,Castel del Monte,background_image_10.jpg
-,Mountains,background_image_11.jpg
-,South America,background_image_12.jpg
-,Sunset,background_image_13.jpg
+Toskana,bg_image_1.jpg
+Milford Sound,bg_image_2.jpg
+Italia Dolce Vita,bg_image_3.jpg
+Aqua Marine,bg_image_4.jpg
+Sakura,bg_image_5.jpg
+Manarola,bg_image_6.jpg
+Bora Bora,bg_image_7.jpg
+Ponte Vecchio,bg_image_8.jpg
+Hillside,bg_image_9.jpg
+Castel del Monte,bg_image_10.jpg
+Mountains,bg_image_11.jpg
+South America,bg_image_12.jpg
+Sunset,bg_image_13.jpg
