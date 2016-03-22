@@ -1276,6 +1276,15 @@ class UserRepository implements UserRepositoryInterface {
         return $response;
     }
 
+    public function getBackgroundImage($user_type, $id){
+
+        return User::with('background_image')->whereId($id)->where('user_type',$user_type)->get();
+    }
+
+    public function updateBackgroundImage($user_type,$id){
+
+    }
+
 
 
 
