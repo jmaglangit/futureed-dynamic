@@ -1,11 +1,8 @@
-<?php
+<?php namespace FutureEd\Models\Repository\BackgroundImage;
 
-/**
- * Created by PhpStorm.
- * User: jason
- * Date: 3/22/16
- * Time: 11:22 AM
- */
-class BackgroundImageRepositoryInterface {
+interface BackgroundImageRepositoryInterface {
 
+	public function getBackgroundImages($criteria = [], $limit = 0, $offset = 0);
+
+	public function getBackgroundImage($id);
 }
