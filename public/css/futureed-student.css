@@ -1846,3 +1846,20 @@ top: 41px;
 	padding:0px;
 	margin-top:20px;
 }
+
+.previous-btn-position {
+	position: absolute;
+	left: 20px;
+	bottom: 38%;
+}
+
+.previous-btn-position span, .next-btn-position span {
+	font-size: 75px;
+	color: #055A7F;
+}
+
+.next-btn-position {
+	position: absolute;
+	right: 20px;
+	bottom: 38%;
+}

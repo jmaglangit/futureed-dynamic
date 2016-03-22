@@ -8,9 +8,31 @@ function StudentClassController($scope, $filter, $window, StudentClassService, S
 
 	self.tips = {};
 	self.help = {};
-
+	self.total_module_items_loaded = Constants.DEFAULT_SIZE;
 	SearchService(self);
 	self.searchDefaults();
+
+	self.previousPage = function()
+	{
+		if(self.table.page > 1)
+		{
+			self.total_module_items_loaded -= self.table.size;
+			self.table.page--;
+			self.paginateByPage();
+			console.log(self.total_module_items_loaded + ' : ' + self.table.size  + ' : ' + self.table.page + ' : ' + self.table.total_items);
+		}
+	}
+
+	self.nextPage = function()
+	{
+		if(self.total_module_items_loaded < self.table.total_items)
+		{
+			self.total_module_items_loaded += self.table.size;
+			self.table.page++;
+			self.paginateByPage();
+			console.log(self.total_module_items_loaded + ' : ' + self.table.size  + ' : ' + self.table.page + ' : ' + self.table.total_items + ' : ' + (self.table.page > 1));
+		}
+	}
 
 	TableService(self);
 	self.tableDefaults();

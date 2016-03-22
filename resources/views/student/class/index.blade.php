@@ -5,16 +5,20 @@
 @stop
 
 @section('content')
-	<div class="container class-con" ng-controller="StudentClassController as class" ng-init="class.updateBackground()" ng-cloak>
+	<div class="container class-con" ng-controller="StudentClassController as class" ng-init="class.updateBackground();class.listClass();" ng-cloak>
+
+
 
 		<div template-directive template-url="{!! route('client.partials.base_url') !!}"></div>
-		
+
 		<div ng-if="user.class">
 			<div template-directive template-url="{!! route('student.partials.tips_help_bar') !!}"></div>
 		</div>
 
-		<div class="module-wrapper" ng-init="class.setCurrentClass('{!! $class_id !!}')"> 
+		<div class="module-wrapper" ng-init="class.setCurrentClass('{!! $class_id !!}')">
+
 			<div template-directive template-url="{!! route('student.class.partials.module_list') !!}"></div>
+
 		</div>
 	</div>
 @stop
