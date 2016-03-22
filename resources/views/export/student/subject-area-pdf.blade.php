@@ -12,13 +12,13 @@
 			<th rowspan="3" >
 				<img src="{{ base_path().'/public/' . config('futureed.thumbnail') . '/'.$additional_information['avatar_thumbnail'] }}" alt=" ">
 			</th>
-			<td colspan="{{ count($column_header)-1 }}">Student : {{ $additional_information['first_name'].' '.$additional_information['last_name'] }}</td>
+			<td colspan="{{ count($column_header)-1 }}">{!! trans('messages.student') !!} : {{ $additional_information['first_name'].' '.$additional_information['last_name'] }}</td>
 		</tr>
 		<tr class="export-header">
-			<td colspan="{{ count($column_header)-1 }}">Grade : {{ $additional_information['grade_name'] }}</td>
+			<td colspan="{{ count($column_header)-1 }}">{!! trans('messages.grade') !!} : {{ $additional_information['grade_name'] }}</td>
 		</tr>
 		<tr class="export-header">
-			<td colspan="{{ count($column_header)-1 }}">Subject : {{ $additional_information['subject_name'] }} {{ count($column_header)-1 }}</td>
+			<td colspan="{{ count($column_header)-1 }}">{!! trans('messages.subject') !!} : {{ $additional_information['subject_name'] }} {{ count($column_header)-1 }}</td>
 		</tr>
 
 		<!-- progress bar -->
@@ -31,7 +31,7 @@
 					<div class="circle">
 						<p>{{ $additional_information['earned_badges'] }}</p>
 					</div>
-					<p>Badges earned</p>
+					<p>{!! trans('messages.client_badges_earned') !!}</p>
 				</div>
 			</td>
 			<td colspan="{{ floor(count($column_header)/6) }}">
@@ -39,7 +39,7 @@
 					<div class="circle">
 						<p>{{ $additional_information['earned_medals'] }}</p>
 					</div>
-					<p>Number of medals earned</p>
+					<p>{!! trans('messages.client_no_medals_earned') !!}</p>
 				</div>
 			</td>
 			<td colspan="{{ ceil(count($column_header)/6) }}">
@@ -47,7 +47,7 @@
 					<div class="circle">
 						<p>{{ $additional_information['completed_lessons'] }}</p>
 					</div>
-					<p>Lessons completed</p>
+					<p>{!! trans('messages.client_lessons_completed') !!}</p>
 				</div>
 			</td>
 			<td colspan="{{ floor(count($column_header)/6) }}">
@@ -55,7 +55,7 @@
 					<div class="circle">
 						<p>{{ $additional_information['written_tips'] }}</p>
 					</div>
-					<p>Tips written</p>
+					<p>{!! trans('messages.client_tips_written') !!}</p>
 				</div>
 			</td>
 			<td colspan="{{ floor(count($column_header)/6) }}">
@@ -63,7 +63,7 @@
 					<div class="circle">
 						<p>{{ $additional_information['week_hours'] }}</p>
 					</div>
-					<p>Hours spent in last 7 days</p>
+					<p>{!! trans('messages.client_hours_spent_7_days') !!}</p>
 				</div>
 			</td>
 			<td colspan="{{ ceil(count($column_header)/6) }}">
@@ -71,7 +71,7 @@
 					<div class="circle">
 						<p>{{ $additional_information['total_hours'] }}</p>
 					</div>
-					<p>Total hours spend</p>
+					<p>{!! trans('messages.client_hours_spent') !!}</p>
 				</div>
 			</td>
 		</tr>
