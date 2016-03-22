@@ -526,7 +526,7 @@ th, td {
 }
 
 .margin-top-30{
-	margin-top: 30px !important;
+	margin-top: 30px;
 }
 
 .breadcrumb {
@@ -1845,4 +1845,8 @@ top: 41px;
 .reset-graph{
 	padding:0px;
 	margin-top:20px;
+}
+
+li.questions-answers > a, li.questions-answers div {
+	margin-bottom: 30px;
 }
