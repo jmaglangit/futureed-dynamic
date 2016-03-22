@@ -13,7 +13,7 @@
 
 	<div class="col-xs-12 search-container">
 		<div class="title-mid">
-			Search
+			{!! trans('messages.search') !!}
 		</div>
 
 		<div class="form-search">
@@ -27,7 +27,7 @@
 				<div class="col-xs-5">
 					{!! Form::text('search_module', ''
 						,array(
-							'placeholder' => 'Title'
+							'placeholder' => 'trans('messages.title')'
 							, 'ng-model' => 'tips.search.title'
 							, 'class' => 'form-control btn-fit'
 						)
@@ -36,9 +36,9 @@
 				<div class="col-xs-5">
 					{!! Form::select('search_status'
 						, array(
-							'' => '-- Select Status --'
-							, 'Pending' => 'Pending'
-							, 'Accepted' => 'Accepted'
+							'' => 'trans('messages.select_status')'
+							, 'Pending' => 'trans('messages.pending')'
+							, 'Accepted' => 'trans('messages.accepted')'
 						)
 						, ''
 						, array(
@@ -48,7 +48,7 @@
 					) !!}
 				</div>
 				<div class="col-xs-2">
-					{!! Form::button('Search'
+					{!! Form::button('trans('messages.search')'
 						,array(
 							'class' => 'btn btn-blue'
 							, 'ng-click' => 'tips.searchFnc($event)'
@@ -60,7 +60,7 @@
 				<div class="col-xs-5">
 					{!! Form::text('search_module', ''
 						,array(
-							'placeholder' => 'Created By'
+							'placeholder' => 'trans('messages.created_by')'
 							, 'ng-model' => 'tips.search.created'
 							, 'class' => 'form-control btn-fit'
 						)
@@ -69,7 +69,7 @@
 				<div class="col-xs-5"></div>
 
 				<div class="col-xs-2">
-					{!! Form::button('Clear'
+					{!! Form::button('trans('messages.clear')'
 						,array(
 							'class' => 'btn btn-gold'
 							, 'ng-click' => 'tips.clearFnc($event)'
@@ -83,7 +83,7 @@
 	<div class="col-xs-12 table-container">
 		<div class="list-container" ng-cloak>
 			<div class="col-xs-6 title-mid">
-				Tip List
+				{!! trans('messages.tip_list') !!}
 			</div>
 
 			<div class="col-xs-6 size-container">
@@ -107,11 +107,11 @@
 			<table id="tip-list" class="col-xs-12 table table-striped table-bordered">
 				<thead>
 					<tr>
-						<th>Title</th>
-						<th>Created By</th>
-						<th>Date Created</th>
-						<th>Status</th>
-						<th ng-if="tips.records.length">Actions</th>
+						<th>{!! trans('messages.title') !!}</th>
+						<th>{!! trans('messages.created_by') !!}</th>
+						<th>{!! trans('messages.date_created') !!}</th>
+						<th>{!! trans('messages.status') !!}</th>
+						<th ng-if="tips.records.length">{!! trans('messages.action') !!}</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -133,12 +133,12 @@
 					</tr>
 					<tr class="odd" ng-if="!tips.records.length && !tips.table.loading">
 						<td valign="top" colspan="7">
-							No records found
+							{!! trans('messages.no_records_found') !!}
 						</td>
 					</tr>
 					<tr class="odd" ng-if="tips.table.loading">
 						<td valign="top" colspan="7">
-							Loading...
+							{!! trans('messages.loading') !!}
 						</td>
 					</tr>
 				</tbody>
