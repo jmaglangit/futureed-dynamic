@@ -526,7 +526,7 @@ th, td {
 }
 
 .margin-top-30{
-	margin-top: 30px;
+	margin-top: 30px !important;
 }
 
 .breadcrumb {
@@ -929,18 +929,19 @@ hr {
 }
 
 .questions-image {
-	margin-top: 90px;
+	margin-top: 25px;
 	text-align: center;
 }
 
 .questions-image img {
-	width: 350px;
+	width: 300px;
+	max-height: 300px;
 	border-radius: 10px;
 }
 
 .questions-message {
 	text-align: center;
-	font-size: 2em;
+	font-size: 1.68em;
 	color: #055A7F;
 	max-width: 75%;
 	margin: 10px auto;
