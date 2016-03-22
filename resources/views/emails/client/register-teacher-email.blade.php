@@ -4,19 +4,17 @@
     <meta charset="utf-8">
 </head>
 <body>
-<div>Hi there {{ $name }},</div>
+<div>{!! trans('messages.hi_there') !!} {{ $name }},</div>
 <br/>
 <div>
-    <div>Thanks for joining us at Future Lesson and congratulations on becoming part of the coolest community
-        of learners on the web!  We look forward to taking this incredible learning adventure with you and your
-        student.</div>
+    <div>{!! trans('messages.email_registration_teacher_email_msg') !!}</div>
     <br>
-    <div>To start your learning we need you to confirm by clicking the link provided below.</div>
+    <div>{!! trans('messages.email_registration_teacher_email_msg2') !!}</div>
     <br>
-    <div><a href="{{ $link }}">Confirm Email</a></div><br/>
+   <div><a href="{{ $link }}">{!! trans('messages.confirm_email') !!}</a></div><br/>
 
-    <div>Regards,</div><br/>
-    <div>Admin</div>
+    <div>{!! trans('messages.regards') !!},</div><br/>
+    <div>{!! trans('messages.admin') !!}</div>
 
 </div>
 </body>
