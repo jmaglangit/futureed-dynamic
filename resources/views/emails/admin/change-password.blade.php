@@ -4,15 +4,15 @@
     <meta charset="utf-8">
 </head>
 <body>
-<div>Hi {{ $name  }},</div><br/>
+<div>{!! trans('messages.hi_there') !!} {{ $name  }},</div><br/>
 
 <div>
-    <div>Your password has been reset. Your new password is {{$new_password}}.</div>
+    <div>{!! trans('messages.email_change_password_msg') !!} {{$new_password}}.</div>
 
-    <br/><div>If you did not request for this, please contact the administrator right away.</div><br/>
+    <br/><div>{!! trans('messages.email_change_password_msg2') !!}</div><br/>
 
-    <div>Regards,</div><br/>
-    <div>Admin</div>
+    <div>{!! trans('messages.regards') !!},</div><br/>
+    <div>{!! trans('messages.admin') !!}</div>
 
 
 </div>
