@@ -15,11 +15,10 @@
 		<div template-directive template-url="{!! route('client.login.confirm_media') !!}"></div>
 
 		<div template-directive template-url="{!! route('client.partials.registration_success') !!}"></div>
-
 		<div template-directive template-url="{!! route('client.partials.resend_confirmation') !!}"></div>
 
 		<div class="form-style registration-container form-wide" ng-if="login.active_registration"> 
-			<div class="title col-xs-8">Register Account as</div>
+			<div class="title col-xs-8">{!! trans('messages.client_register_as') !!}</div>
 		
 			<div class="row">
 				<div class="col-xs-12">
@@ -32,7 +31,7 @@
 								, 'ng-class' => '{ role : !login.principal }'
 							)
 						) !!}
-						<h4>Principal</h4>
+						<h4>{!! trans('messages.principal') !!}</h4>
 					</div>
 				
 					<div class="col-xs-3" ng-click="login.selectRole('Parent')">
@@ -43,14 +42,14 @@
 								, 'ng-class' => '{ role : !login.parent }'
 							)
 						) !!}
-						<h4>Parent</h4>
+						<h4>{!! trans('messages.parent') !!}</h4>
 					</div>
 					<div class="col-xs-1"></div>
 					<div class="col-xs-3">
 						<div class="form-group col-xs-12">
 							<button type="button" class="btn btn-fb"
 								ng-click="login.loginViaFacebook()">
-									<i class="fa fa-facebook"></i> Sign up via Facebook
+									<i class="fa fa-facebook"></i> {!! trans('messages.client_sign_up_fb') !!}
 							</button>
 						</div>
 
@@ -61,15 +60,14 @@
 						<div class="form-group col-xs-12">
 							<button id="btn-google" type="button" class="btn btn-google" ng-init="login.googleInit()"> 
 								<span><img src="/images/icons/google-logo.png" /></span>
-								<span>Sign up with Google</span> 
+								<span>{!! trans('messages.client_sign_up_google') !!}</span> 
 							</button>
 						</div>
-
-						<div class="form-group col-xs-12">
-							<span>Did not receive email confirmation? <a class="cursor-pointer" ng-click="login.setActive('resend')">resend confirmation</a></span>
-						</div>
 					</div>
-
+				</div>
+				
+				 <div class="form-group col-xs-12">
+					<span>{!! trans('messages.did_not_receive_email_confirmation') !!} <a class="cursor-pointer" ng-click="login.setActive('resend')">{!! trans('messages.resend_confirmation') !!}</a></span>
 				</div>
 			
 				<div class="col-xs-12" ng-if="login.record.client_role">
