@@ -1,7 +1,7 @@
 <div ng-if="teacher.active_view || teacher.active_edit">
 	<div class="content-title">
 		<div class="title-main-content">
-			<span>Teacher Details</span>
+			<span>{!! trans('messages.client_teacher_details') !!}</span>
 		</div>
 	</div>
 
@@ -21,14 +21,14 @@
 		{!! Form::open(array('id'=> 'update_teacher_form', 'class' => 'form-horizontal')) !!}
 			<fieldset>
 				<legend class="legend-name-mid">
-					User Credentials
+					{!! trans('messages.user_credentials') !!}
 				</legend>
 				<div class="form-group">
-					<label class="col-xs-2 control-label">Username <span class="required">*</span></label>
+					<label class="col-xs-2 control-label">{!! trans('messages.username') !!} <span class="required">*</span></label>
 					<div class="col-xs-4">
 						{!! Form::text('username',''
 							, array(
-								'placeHolder' => 'Username'
+								'placeHolder' => 'trans('messages.username')'
 								, 'ng-model' => 'teacher.record.user.username'
 								, 'ng-class' => "{ 'required-field' : teacher.fields['username'] }"
 								, 'ng-disabled' => 'true'
@@ -38,11 +38,11 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-xs-2 control-label">Email <span class="required">*</span></label>
+					<label class="col-xs-2 control-label">{!! trans('messages.email') !!} <span class="required">*</span></label>
 					<div class="col-xs-4">
 						{!! Form::text('email',''
 							, array(
-								'placeHolder' => 'Email'
+								'placeHolder' => 'trans('messages.email')'
 								, 'ng-model' => 'teacher.record.user.email'
 								, 'ng-class' => "{ 'required-field' : teacher.fields['email'] }"
 								, 'ng-disabled' => 'true'
@@ -55,14 +55,14 @@
 
 			<fieldset>
 				<legend class="legend-name-mid">
-					Personal Information
+					{!! trans('messages.personal_info') !!}
 				</legend>
 				<div class="form-group">
-					<label class="col-xs-2 control-label" id="first_name">First Name <span class="required">*</span></label>
+					<label class="col-xs-2 control-label" id="first_name">{!! trans('messages.first_name') !!} <span class="required">*</span></label>
 					<div class="col-xs-4">
 						{!! Form::text('first_name',''
 							, array(
-								'placeholder' => 'First Name'
+								'placeholder' => 'trans('messages.first_name')'
 								, 'ng-disabled' => 'teacher.active_view'
 								, 'ng-model' => 'teacher.record.first_name'
 								, 'ng-class' => "{ 'required-field' : teacher.fields['first_name'] }"
@@ -71,11 +71,11 @@
 						) !!}
 					</div>
 
-					<label class="col-xs-2 control-label" id="last_name">Last Name <span class="required">*</span></label>
+					<label class="col-xs-2 control-label" id="last_name">{!! trans('messages.last_name') !!} <span class="required">*</span></label>
 					<div class="col-xs-4">
 						{!! Form::text('last_name',''
 							, array(
-								'placeholder' => 'Last Name'
+								'placeholder' => 'trans('messages.last_name')'
 								, 'ng-disabled' => 'teacher.active_view'
 								, 'ng-model' => 'teacher.record.last_name'
 								, 'ng-class' => "{ 'required-field' : teacher.fields['last_name'] }"
@@ -88,14 +88,14 @@
 
 			<fieldset>
 				<legend class="legend-name-mid">
-					Other Address Information (Optional)
+					{!! trans('messages.other_address_info') !!}
 				</legend>
 				<div class="form-group">
-					<label class="col-xs-2 control-label" id="school_address">Street Address</label>
+					<label class="col-xs-2 control-label" id="school_address">{!! trans('messages.street_address') !!}</label>
 					<div class="col-xs-6">
 						{!! Form::text('street_address',''
 							, array(
-								'placeHolder' => 'Street Address'
+								'placeHolder' => 'trans('messages.street_address')'
 								, 'ng-disabled' => 'teacher.active_view'
 								, 'ng-model' => 'teacher.record.street_address'
 								, 'class' => 'form-control'
@@ -104,22 +104,22 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-xs-2 control-label" id="school_city">City</label>
+					<label class="col-xs-2 control-label" id="school_city">{!! trans('messages.city') !!}</label>
 					<div class="col-xs-4">
 						{!! Form::text('city',''
 							, array(
-								'placeHolder' => 'City'
+								'placeHolder' => 'trans('messages.city')'
 								, 'ng-disabled' => 'teacher.active_view'
 								, 'ng-model' => 'teacher.record.city'
 								, 'class' => 'form-control'
 							)
 						) !!}
 					</div>
-					<label class="col-xs-2 control-label" id="school_state">State</label>
+					<label class="col-xs-2 control-label" id="school_state">{!! trans('messages.state') !!}</label>
 					<div class="col-xs-4">
 						{!! Form::text('state',''
 							, array(
-								'placeHolder' => 'State'
+								'placeHolder' => 'trans('messages.state')'
 								, 'ng-disabled' => 'teacher.active_view'
 								, 'ng-model' => 'teacher.record.state'
 								, 'class' => 'form-control'
@@ -128,21 +128,21 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-xs-2 control-label" id="school_postal">Postal Code</label>
+					<label class="col-xs-2 control-label" id="school_postal">{!! trans('messages.postal_code') !!}</label>
 					<div class="col-xs-4">
 						{!! Form::text('zip',''
 							, array(
-								'placeHolder' => 'Postal Code'
+								'placeHolder' => 'trans('messages.postal_code')'
 								, 'ng-disabled' => 'teacher.active_view'
 								, 'ng-model' => 'teacher.record.zip'
 								, 'class' => 'form-control'
 							)
 						) !!}
 					</div>
-					<label class="col-xs-2 control-label">Country</label>
+					<label class="col-xs-2 control-label">{!! trans('messages.country') !!}</label>
 					  <div class="col-xs-4" ng-init="getCountries()">
 						<select  name="country" class="form-control" ng-model="teacher.record.country_id" ng-disabled="teacher.active_view">
-						  <option ng-selected="futureed.FALSE == teacher.record.country_id" value="">-- Select Country --</option>
+						  <option ng-selected="futureed.FALSE == teacher.record.country_id" value="">{!! trans('messages.select_country') !!}</option>
 						  <option ng-selected="country.id == teacher.record.country_id" 
 									ng-repeat="country in countries" ng-value="country.id">{! country.name!}</option>
 						</select>
@@ -154,14 +154,14 @@
 				<div class="form-group">
 					<div class="btn-container col-xs-8 col-xs-offset-2">
 						<div ng-if="teacher.active_view">
-							{!! Form::button('Edit'
+							{!! Form::button('{!! trans('messages.edit') !!}'
 								, array(
 									'class' => 'btn btn-blue btn-medium'
 									, 'ng-click' => "teacher.setActive('edit', teacher.record.id)"
 								)
 							) !!}
 
-							{!! Form::button('Cancel'
+							{!! Form::button('{!! trans('messages.cancel') !!}'
 								, array(
 									'class' => 'btn btn-gold btn-medium'
 									, 'ng-click' => "teacher.setActive('list')"
@@ -169,14 +169,14 @@
 							) !!}
 						</div>
 						<div ng-if="teacher.active_edit">
-							{!! Form::button('Save'
+							{!! Form::button('{!! trans('messages.save') !!}'
 								, array(
 									'class' => 'btn btn-blue btn-medium'
 									, 'ng-click' => "teacher.update()"
 								)
 							) !!}
 
-							{!! Form::button('Cancel'
+							{!! Form::button('{!! trans('messages.cancel') !!}'
 								, array(
 									'class' => 'btn btn-gold btn-medium'
 									, 'ng-click' => "teacher.setActive('view', teacher.record.id)"
@@ -192,7 +192,7 @@
 	<div class="col-xs-12 table-container" ng-if="teacher.active_view">
 		<div class="list-container" ng-cloak>
 			<div class="col-xs-6 title-mid">
-				Class List
+				{!! trans('messages.class_list') !!}
 			</div>
 
 			<div class="col-xs-6 size-container">
@@ -216,9 +216,9 @@
 			<table class="col-xs-12 table table-striped table-bordered">
 				<thead>
 					<tr>
-						<th>Class Handled</th>
-						<th>Number of Students</th>
-						<th>Grade</th>
+						<th>{!! trans('messages.class_handled') !!}</th>
+						<th>{!! trans('messages.number_of_students') !!}</th>
+						<th>{!! trans('messages.grade') !!}</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -229,7 +229,7 @@
 					</tr>
 					<tr class="odd" ng-if="!teacher.classes.length && !teacher.table.loading">
 						<td valign="top" colspan="4">
-							No records found
+							{!! trans('messages.no_records_found') !!}
 						</td>
 					</tr>
 				</tbody>
