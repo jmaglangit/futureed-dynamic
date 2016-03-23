@@ -8,7 +8,7 @@
 		<meta name="description" content="">
 		<meta name="author" content="">
 		
-		<title>FutureEd Online Education Platform</title>
+		<title>{!! trans('messages.futureed_online_platform') !!}</title>
 		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 		<!--[if IE]>
 		<link rel="stylesheet" type="text/css" media="all" href="https://www.formstack.com/forms/css/3/ie.css?20140508" />
@@ -50,14 +50,14 @@
 	        <div class="modal-dialog modal-lg">
 	            <div class="modal-content">
 	                <div class="modal-header">
-	                    Inactive
+	                    {!! trans('messages.inactive') !!}
 	                </div>
 	                <div class="modal-body">
-	                    You have been logged out due to inactivity. Please login again.
+	                    {!! trans('messages.logout_due_to_inactivity') !!}
 	                </div>
 	                <div class="modal-footer">
 	                    <div class="col-md-8 col-md-offset-4 pull-left">
-	                        {!! Html::link(route('client.login'), 'Login'
+	                        {!! Html::link(route('client.login'), 'trans('messages.login')'
 	                            , array(
 	                                'class' => 'btn btn-gold btn-medium'
 	                            )
@@ -69,7 +69,7 @@
 	        </div>
 			<footer class="footer" ng-cloak>
 				<div class="container text-center">
-					<p class="text-muted">{{ date('Y') }} &copy; All Rights Reserved. FutureEd Pte Ltd</p>
+					<p class="text-muted">{{ date('Y') }} &copy; {!! trans('messages.all_right_reserved') !!} FutureEd Pte Ltd</p>
 				</div>
 			</footer>
 		@show
