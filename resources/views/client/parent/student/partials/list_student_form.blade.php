@@ -1,7 +1,7 @@
 <div ng-if="student.active_list">
 	<div class="content-title">
 		<div class="title-main-content">
-			<span>Student Management</span>
+			<span>{!! trans('messages.admin_student_management') !!}</span>
 		</div>
 	</div>
 
@@ -20,7 +20,7 @@
 
 	<div class="col-xs-12 search-container">
 		<div class="title-mid">
-			Search
+			{!! trans('messages.search') !!}
 		</div>
 
 		{!! Form::open(
@@ -36,7 +36,7 @@
 							, array(
 								'class' => 'form-control'
 								, 'ng-model' => 'student.search.name'
-								, 'placeholder' => 'Name'
+								, 'placeholder' => 'trans('messages.name')'
 							)
 						) !!}
 					</div>
@@ -45,12 +45,12 @@
 							, array(
 								'class' => 'form-control'
 								, 'ng-model' => 'student.search.email'
-								, 'placeholder' => 'Email'
+								, 'placeholder' => 'trans('messages.email')'
 							)
 						) !!}
 					</div>
 					<div class="col-xs-2">
-						{!! Form::button('Search'
+						{!! Form::button('trans('messages.search')'
 							, array(
 								'class' => 'btn btn-blue'
 								, 'ng-click' => 'student.searchFnc($event)'
@@ -58,7 +58,7 @@
 						) !!}
 					</div>
 					<div class="col-xs-2">
-						{!! Form::button('Clear'
+						{!! Form::button('trans('messages.clear')'
 							, array(
 								'class' => 'btn btn-gold'
 								, 'ng-click' => 'student.clear()'
@@ -72,12 +72,12 @@
 	
 	<div class="col-xs-12 table-container" ng-init="student.list()">
 		<button class="btn btn-blue btn-semi-medium" ng-click="student.setActive(futureed.ACTIVE_ADD)">
-			<i class="fa fa-plus-square"></i> Add Student
+			<i class="fa fa-plus-square"></i> {!! trans('messages.add_student') !!}
 		</button>
 
 		<div class="list-container" ng-cloak>
 			<div class="col-xs-6 title-mid">
-				Student List
+				{!! trans('messages.student_list') !!}
 			</div>
 
 			<div class="col-xs-6 size-container">
@@ -101,9 +101,9 @@
 			<table class="col-xs-12 table table-striped table-bordered">
 				<thead>
 					<tr>
-						<th>Name</th>
-						<th>Email</th>
-						<th ng-if="student.records.length">Actions</th>
+						<th>{!! trans('messages.name') !!}</th>
+						<th>{!! trans('messages.email') !!}</th>
+						<th ng-if="student.records.length">{!! trans('messages.action') !!}</th>
 					</tr>
 				</thead>
 
@@ -127,12 +127,12 @@
 					</tr>
 					<tr class="odd" ng-if="!student.records.length && !student.table.loading">
 						<td valign="top" colspan="7">
-							No records found
+							{!! trans('messages.no_records_found') !!}
 						</td>
 					</tr>
 					<tr class="odd" ng-if="student.table.loading">
 						<td valign="top" colspan="7">
-							Loading...
+							{!! trans('messages.loading') !!}
 						</td>
 					</tr>
 				</tbody>
