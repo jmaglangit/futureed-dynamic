@@ -6,12 +6,12 @@
 	)
 ) !!}
 	<div class="form-group">
-		<label class="col-xs-3 control-label">Current Email Address <span class="required">*</span></label>
+		<label class="col-xs-3 control-label">{!! trans('messages.current_email') !!} <span class="required">*</span></label>
 		<div class="col-xs-5">
     		{!! Form::text('current_email', ''
     			, array(
         			'class' => 'form-control'
-        			, 'placeholder' => 'Current Email Address'
+        			, 'placeholder' => 'trans('messages.current_email')'
                     , 'ng-class' => "{ 'required-field' : profile.fields['current_email'] }"
         			, 'ng-model' => 'profile.change.current_email'
         			, 'ng-model-options' => "{ debounce: {'default' : 1000} }"
@@ -25,12 +25,12 @@
         </div>		
 	</div>
 	<div class="form-group">
-		<label class="col-xs-3 control-label">New Email Address <span class="required">*</span></label>
+		<label class="col-xs-3 control-label">{!! trans('messages.new_email') !!} <span class="required">*</span></label>
 		<div class="col-xs-5">
     		{!! Form::text('new_email', ''
     			, array(
         			'class' => 'form-control'
-        			, 'placeholder' => 'New Email Address'
+        			, 'placeholder' => 'trans('messages.new_email')'
                     , 'ng-class' => "{ 'required-field' : profile.fields['new_email'] }"
         			, 'ng-model' => 'profile.change.new_email'
         			, 'ng-model-options' => "{ debounce: {'default' : 1000} }"
@@ -44,12 +44,12 @@
         </div>	
 	</div>
 	<div class="form-group">
-		<label class="col-xs-3 control-label">Confirm Email Address <span class="required">*</span></label>
+		<label class="col-xs-3 control-label">{!! trans('messages.confirm_email') !!} <span class="required">*</span></label>
 		<div class="col-xs-5">
     		{!! Form::text('confirm_email', ''
     			, array(
         			'class' => 'form-control'
-        			, 'placeholder' => 'Confirm Email Address'
+        			, 'placeholder' => 'trans('messages.confirm_email')'
         			, 'ng-model' => 'profile.change.confirm_email'
                     , 'ng-class' => "{ 'required-field' : profile.fields['confirm_email'] }"
         			, 'ng-model-options' => "{ debounce: {'default' : 1000} }"
@@ -62,26 +62,26 @@
         </div>	
 	</div>
 	<div class="form-group">
-		<label class="col-xs-3 control-label">Password <span class="required">*</span></label>
+		<label class="col-xs-3 control-label">{!! trans('messages.password') !!} <span class="required">*</span></label>
 		<div class="col-xs-5">
     		{!! Form::password('password'
     			, array(
         			'class' => 'form-control'
                     , 'ng-class' => "{ 'required-field' : profile.fields['password'] }"
-        			, 'placeholder' => 'Password'
+        			, 'placeholder' => 'trans('messages.password')'
         			, 'ng-model' => 'profile.change.password') 
         		)!!}
         </div>		
 	</div>
 	<div class="btn-container">
-		{!! Form::button('Save'
+		{!! Form::button('trans('messages.save')'
             , array(
                 'class' => 'btn btn-blue btn-medium'
                 , 'ng-click' => "profile.changeClientEmail()"
             )
         ) !!}
 
-        {!! Form::button('Cancel'
+        {!! Form::button('trans('messages.cancel')'
             , array(
                 'class' => 'btn btn-gold btn-medium'
                 , 'ng-click' => "profile.setClientProfileActive('index')"
