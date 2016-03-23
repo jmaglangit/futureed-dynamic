@@ -2,14 +2,14 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
         <div class="modal-header">
-            Delete Teacher
+            {!! trans('messages.client_delete_teacher') !!}
         </div>
         <div class="modal-body">
-            Are you sure you want to delete this teacher account?
+            {!! trans('messages.client_delete_teacher_msg') !!}
         </div>
         <div class="modal-footer">
         	<div class="btncon col-xs-8 col-xs-offset-4 pull-left">
-                {!! Form::button('Yes'
+                {!! Form::button('trans('messages.yes')'
                     , array(
                         'class' => 'btn btn-blue btn-medium'
                         , 'ng-click' => 'teacher.delete()'
@@ -17,7 +17,7 @@
                     )
                 ) !!}
 
-                {!! Form::button('No'
+                {!! Form::button('trans('messages.no')'
                     , array(
                         'class' => 'btn btn-gold btn-medium'
                         , 'data-dismiss' => 'modal'
