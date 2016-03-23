@@ -1,7 +1,7 @@
 <div ng-if="teacher.active_add">
 	<div class="content-title">
 		<div class="title-main-content">
-			<span>Add Teacher</span>
+			<span>{!! trans('messages.client_add_teacher') !!}</span>
 		</div>
 	</div>
 
@@ -27,14 +27,14 @@
 		!!}
 			<fieldset>
 				<legend class="legend-name-mid">
-					User Credentials
+					{!! trans('messages.user_credentials') !!}
 				</legend>
 				<div class="form-group">
-					<label class="col-xs-3 control-label" id="username">Username <span class="required">*</span></label>
+					<label class="col-xs-3 control-label" id="username">{!! trans('messages.username') !!} <span class="required">*</span></label>
 					<div class="col-xs-4">
 						{!! Form::text('username', ''
 							, array(
-								'placeholder' => 'Username',
+								'placeholder' => 'trans('messages.username')',
 								'ng-class' => "{ 'required-field' : teacher.fields['username']}", 
 								'ng-model' => 'teacher.record.username',
 								'ng-model-options' => "{ debounce : {'default' : 1000} }",
@@ -51,11 +51,11 @@
 					</div>
 				</div>
 				<div class="form-group">				
-					<label class="col-xs-3 control-label" id="email">Email <span class="required">*</span></label>
+					<label class="col-xs-3 control-label" id="email">{!! trans('messages.email') !!} <span class="required">*</span></label>
 					<div class="col-xs-4">
 						{!! Form::text('email', ''
 							, array(
-								'placeholder' => 'Email',
+								'placeholder' => 'trans('messages.email')',
 								'ng-model' => 'teacher.record.email',
 								'ng-class' => "{ 'required-field' : teacher.fields['email']}", 
 								'ng-model-options' => "{ debounce : {'default' : 1000} }",
@@ -75,30 +75,30 @@
 
 			<fieldset>
 				<legend class="legend-name-mid">
-					Personal Information
+					{!! trans('messages.personal_info') !!}
 				</legend>
 				<div class="form-group">
-					<label class="col-xs-3 control-label">First Name <span class="required">*</span></label>
+					<label class="col-xs-3 control-label">{!! trans('messages.first_name') !!} <span class="required">*</span></label>
 					<div class="col-xs-4">
 						{!! Form::text('first_name','',
 							[
 								'class' => 'form-control',
 								'ng-class' => "{ 'required-field' : teacher.fields['first_name']}", 
 								'ng-model' => 'teacher.record.first_name',
-								'placeholder' => 'First Name'
+								'placeholder' => 'trans('messages.first_name')'
 							]
 						) !!}
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-xs-3 control-label">Last Name <span class="required">*</span></label>
+					<label class="col-xs-3 control-label">{!! trans('messages.last_name') !!} <span class="required">*</span></label>
 					<div class="col-xs-4">
 						{!! Form::text('last_name','',
 							[
 								'class' => 'form-control',
 								'ng-class' => "{ 'required-field' : teacher.fields['last_name']}", 
 								'ng-model' => 'teacher.record.last_name',
-								'placeholder' => 'Last Name'
+								'placeholder' => 'trans('messages.last_name')'
 							]
 						) !!}
 					</div>
@@ -107,10 +107,10 @@
 					<div class="btn-container col-xs-8 col-xs-offset-1">
 						<button type="button" class="btn btn-blue btn-medium"
 							ng-click="teacher.save('{!! route('client.registration') !!}')">
-							Send Invitation
+							{!! trans('messages.client_send_invitation') !!}
 						</button>
 
-						{!! Form::button('Cancel'
+						{!! Form::button('trans('messages.cancel')'
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'ng-click' => 'teacher.setActive()'
