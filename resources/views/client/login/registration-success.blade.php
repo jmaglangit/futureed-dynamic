@@ -44,7 +44,7 @@
 		<div class="form_content">
 			<div class="roundcon">
 					<i class="fa fa-check fa-5x img-rounded text-center"></i>
-			</div>			
+			</div>
 			 
 			<p>
 				{!! trans('messages.client_registration_success_msg') !!}
