@@ -1,7 +1,7 @@
 <div ng-if="student.active_invite">
 	<div class="content-title">
 		<div class="title-main-content">
-			<span>Invitation Code</span>
+			<span>{!! trans('messages.email_parent_added_student_msg3') !!}</span>
 		</div>
 	</div>
 
@@ -22,14 +22,14 @@
         {!! Form::open(['class' => 'form-horizontal', 'ng-submit' => 'student.submitCode($event)']) !!}
 	        <fieldset>
 	        	<div class="form-group">
-	        		<label class="control-label col-xs-3">Invitation Code <span class="required">*</span></label>
+	        		<label class="control-label col-xs-3">{!! trans('messages.email_parent_added_student_msg3') !!} <span class="required">*</span></label>
 	        		<div class="col-xs-5">
 	        			{!! Form::text('invitation_code', '',
 							[
 								'class' => 'form-control'
 								, 'ng-model' => 'student.record.invitation_code'
 								, 'ng-class' => "{ 'required-field' : student.fields['invitation_code'] }"
-								, 'placeholder' => 'Invitation Code'
+								, 'placeholder' => 'trans('messages.email_parent_added_student_msg3')'
 							]
 						) !!}
 	        		</div>
@@ -37,14 +37,14 @@
 
 	        	<div class="form-group btn-container">
 	        		<div class="col-xs-9 col-xs-offset-1">
-	        			{!! Form::button('Proceed'
+	        			{!! Form::button('trans('messages.client_proceed')'
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-click' => 'student.submitCode($event)'
 							)
 						) !!}
 
-						{!! Form::button('Cancel'
+						{!! Form::button('trans('messages.cancel')'
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'ng-if' => 'student.record.id'
@@ -52,7 +52,7 @@
 							)
 						) !!}
 
-						{!! Form::button('Cancel'
+						{!! Form::button('trans('messages.cancel')'
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'ng-if' => '!student.record.id'
@@ -65,9 +65,9 @@
 	        	<hr />
 	        	
 	        	<div class="form-group invitation-code">
-	        		<p>The student you have added will be receiving an email containing the code.</p>
-	        		<p>Please get this code from the student and input it on the field above.</p>
-	        		<p ng-if="!student.record.id">You can also confirm the invitation code in viewing the student details.</p>
+	        		<p>{!! trans('messages.client_invitation_msg1') !!}</p>
+	        		<p>{!! trans('messages.client_invitation_msg2') !!}</p>
+	        		<p ng-if="!student.record.id">{!! trans('messages.client_invitation_msg3') !!}</p>
 	        	</div>
 	        </fieldset>
 	    {!! Form::close() !!}
