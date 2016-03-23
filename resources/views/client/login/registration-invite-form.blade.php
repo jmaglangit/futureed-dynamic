@@ -8,7 +8,7 @@
     <div class="form-style form-wide" ng-if="login.active_registration" >
         <div class="row">
             <div class="col-xs-12 register_users">
-                <h4 class="title">Teacher Registration</h4>
+                <h4 class="title">{!! trans('messages.client_teacher_registration') !!}</h4>
 
                 <div class="col-xs-4 col-xs-offset-4">
                     {!! Html::image('/images/user_teacher.png', 'Teacher'
@@ -31,7 +31,7 @@
 
             <div class="col-xs-12" ng-if="login.record.invited">
                 <div class="btn-container">
-                    {!! Html::link(route('client.registration'), 'Register New Account'
+                    {!! Html::link(route('client.registration'), 'trans('messages.client_register_new_account')'
                         , array(
                             'class' => 'btn btn-blue btn-medium'
                         )
@@ -42,14 +42,14 @@
             <div class="col-xs-12" ng-if="!login.record.invited">
             {!! Form::open(array('id' => 'registration_form', 'class' => 'form-horizontal')) !!}
                 <fieldset>
-                    <legend>User Credentials</legend>
+                    <legend>{!! trans('messages.user_credentials') !!}</legend>
                     <div class="form-group">
-                        <label class="col-xs-2 control-label">Email<span class="required">*</span></label>
+                        <label class="col-xs-2 control-label">{!! trans('messages.email') !!}<span class="required">*</span></label>
                         <div class="col-xs-4">
                             {!! Form::text('email', ''
                                 , array(
                                     'class' => 'form-control'
-                                    , 'placeholder' => 'Email Address'
+                                    , 'placeholder' => 'trans('messages.email_address')'
                                     , 'autocomplete' => 'off'
                                     , 'ng-model' => 'login.record.email'
                                     , 'ng-class' => "{ 'required-field' : login.fields['email'] }"
@@ -65,12 +65,12 @@
                             </div>
                         </div>
 
-                        <label class="col-xs-2 control-label">Username<span class="required">*</span></label>
+                        <label class="col-xs-2 control-label">{!! trans('messages.username') !!}<span class="required">*</span></label>
                         <div class="col-xs-4">
                             {!! Form::text('username', ''
                                 , array(
                                     'class' => 'form-control'
-                                    , 'placeholder' => 'Username'
+                                    , 'placeholder' => 'trans('messages.username')'
                                     , 'autocomplete' => 'off'
                                     , 'ng-model' => 'login.record.username'
                                     , 'ng-class' => "{ 'required-field' : login.fields['username'] }"
@@ -88,24 +88,24 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-xs-2 control-label">Password<span class="required">*</span></label>
+                        <label class="col-xs-2 control-label">{!! trans('messages.password') !!}<span class="required">*</span></label>
                         <div class="col-xs-4">
                             {!! Form::password('password'
                                 , array(
                                     'class' => 'form-control'
-                                    , 'placeholder' => 'Password'
+                                    , 'placeholder' => 'trans('messages.password')'
                                     , 'ng-class' => "{ 'required-field' : login.fields['password'] }"
                                     , 'ng-model' => 'login.record.password'
                                 )
                             ) !!}
-                            <p class="help-block">Password must be at least 8 characters and with at least 1 number.</p>
+                            <p class="help-block">{!! trans('messages.password_limit') !!}</p>
                         </div>
-                        <label class="col-xs-2 control-label">Confirm Password<span class="required">*</span></label>
+                        <label class="col-xs-2 control-label">{!! trans('messages.confirm_password') !!}<span class="required">*</span></label>
                         <div class="col-xs-4">
                             {!! Form::password('confirm_password'
                                 , array(
                                     'class' => 'form-control'
-                                    , 'placeholder' => 'Confirm Password'
+                                    , 'placeholder' => 'trans('messages.confirm_password')'
                                     , 'ng-class' => "{ 'required-field' : login.fields['password'] }"
                                     , 'ng-model' => 'login.record.confirm_password'
                                 )
@@ -115,26 +115,26 @@
                 </fieldset>
 
             <fieldset>
-                <legend>Personal Information</legend>
+                <legend>{!! trans('messages.personal_info') !!}</legend>
                 <div class="form-group">
-                    <label class="col-xs-2 control-label">First Name<span class="required">*</span></label>
+                    <label class="col-xs-2 control-label">{!! trans('messages.first_name') !!}<span class="required">*</span></label>
                     <div class="col-xs-4">
                         {!! Form::text('first_name', ''
                             , array(
                                 'class' => 'form-control'
-                                , 'placeholder' => 'First Name'
+                                , 'placeholder' => 'trans('messages.first_name')'
                                 , 'ng-class' => "{ 'required-field' : login.fields['first_name'] }"
                                 , 'ng-model' => 'login.record.first_name'
                             )
                         ) !!}
                     </div>
                 
-                    <label class="col-xs-2 control-label">Last Name<span class="required">*</span></label>
+                    <label class="col-xs-2 control-label">{!! trans('messages.last_name') !!}<span class="required">*</span></label>
                     <div class="col-xs-4">
                         {!! Form::text('last_name', ''
                             , array(
                                 'class' => 'form-control'
-                                , 'placeholder' => 'Last Name'
+                                , 'placeholder' => 'trans('messages.last_name')'
                                 , 'ng-class' => "{ 'required-field' : login.fields['last_name'] }"
                                 , 'ng-model' => 'login.record.last_name'
                             )
@@ -143,12 +143,12 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="col-xs-2 control-label">Street Address</label>
+                    <label class="col-xs-2 control-label">{!! trans('messages.street_address') !!}</label>
                     <div class="col-xs-6">
                         {!! Form::text('street_address', ''
                             , array(
                                 'class' => 'form-control'
-                                , 'placeholder' => 'Street Address'
+                                , 'placeholder' => 'trans('messages.street_address')'
                                 , 'ng-class' => "{ 'required-field' : login.fields['street_address'] }"
                                 , 'ng-model' => 'login.record.street_address'
                             )
@@ -157,24 +157,24 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="col-xs-2 control-label">City</label>
+                    <label class="col-xs-2 control-label">{!! trans('messages.city') !!}</label>
                     <div class="col-xs-4">
                         {!! Form::text('city', ''
                             , array(
                                 'class' => 'form-control'
-                                , 'placeholder' => 'City'
+                                , 'placeholder' => 'trans('messages.city')'
                                 , 'ng-class' => "{ 'required-field' : login.fields['city'] }"
                                 , 'ng-model' => 'login.record.city'
                             )
                         ) !!}
                     </div>
                     
-                    <label class="col-xs-2 control-label">State</label>
+                    <label class="col-xs-2 control-label">{!! trans('messages.state') !!}</label>
                     <div class="col-xs-4">
                         {!! Form::text('state', ''
                             , array(
                                 'class' => 'form-control'
-                                , 'placeholder' => 'State'
+                                , 'placeholder' => 'trans('messages.state')'
                                 , 'ng-class' => "{ 'required-field' : login.fields['state'] }"
                                 , 'ng-model' => 'login.record.state'
                             )
@@ -183,23 +183,23 @@
                 </div>   
             
                 <div class="form-group">
-                    <label class="col-xs-2 control-label">Postal Code</label>
+                    <label class="col-xs-2 control-label">{!! trans('messages.postal_code') !!}</label>
                     <div class="col-xs-4">
                         {!! Form::text('zip', ''
                             , array(
                                 'class' => 'form-control'
-                                , 'placeholder' => 'Postal Code'
+                                , 'placeholder' => 'trans('messages.postal_code')'
                                 , 'ng-class' => "{ 'required-field' : login.fields['zip'] }"
                                 , 'ng-model' => 'login.record.zip'
                             )
                         ) !!}
                     </div>
                 
-                    <label class="col-xs-2 control-label">Country</label>
+                    <label class="col-xs-2 control-label">{!! trans('messages.country') !!}</label>
                     <div class="col-xs-4" ng-init="getCountries()">
                         <select  name="country_id" ng-class="{ 'required-field' : login.fields['country_id'] }" 
                                 class="form-control" ng-model="login.record.country_id">
-                            <option value="">-- Select Country --</option>
+                            <option value="">{!! trans('messages.select_country') !!}</option>
                             <option ng-repeat="country in countries" ng-value="country.id">{! country.name!}</option>
                         </select>
                     </div>
@@ -207,14 +207,14 @@
             </fieldset>
             <div class="role-div">
                 <fieldset>
-                    <legend>School Information</legend>
+                    <legend>{!! trans('messages.school_info') !!}</legend>
                     <div class="form-group">
-                        <label class="col-xs-2 control-label">School Name<span class="required">*</span></label>
+                        <label class="col-xs-2 control-label">{!! trans('messages.school_name') !!}<span class="required">*</span></label>
                         <div class="col-xs-6">
                             {!! Form::text('school_name', ''
                                 , array(
                                     'class' => 'form-control'
-                                    , 'placeholder' => 'School Name'
+                                    , 'placeholder' => 'trans('messages.school_name')'
                                     , 'ng-disabled' => 'true'
                                     , 'ng-class' => "{ 'required-field' : login.fields['school_id'] }" 
                                     , 'ng-model' => 'login.record.school_name'
@@ -231,20 +231,20 @@
                         <div class="checkbox text-center">
                             <label>
                                 <input type="checkbox" ng-model="login.terms">
-                                I agree on the <a href="#" data-toggle="modal" ng-click="showModal('terms_modal')">Terms and Conditions</a> and <a href="#" data-toggle="modal" ng-click="showModal('policy_modal')">Data Privacy Policy</a>
+                                {!! trans('messages.i_agree') !!} <a href="#" data-toggle="modal" ng-click="showModal('terms_modal')">{!! trans('messages.terms_and_conditions') !!}</a> {!! trans('messages.and') !!} <a href="#" data-toggle="modal" ng-click="showModal('policy_modal')">{!! trans('messages.data_privacy_policy') !!}</a>
                             </label>
                         </div>
                     </div>
 
                     <div class="btn-container col-sm-6 col-sm-offset-3">
-                        {!! Form::button('Register'
+                        {!! Form::button('trans('messages.register')'
                             , array(
                                 'class' => 'btn btn-blue btn-medium'
                                 , 'ng-click' => 'login.updateClientRegistration()'
                             )
                         ) !!}
 
-                        {!! Html::link(route('client.login'), 'Cancel'
+                        {!! Html::link(route('client.login'), 'trans('messages.cancel')'
                             , array(
                                 'class' => 'btn btn-gold btn-medium'
                             )
