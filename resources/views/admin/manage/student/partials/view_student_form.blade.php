@@ -1,7 +1,7 @@
 <div ng-if="student.active_view || student.active_edit">
 	<div class="content-title">
 		<div class="title-main-content">
-			<span>Student Details</span>
+			<span>{!! trans('messages.admin_student_details') !!}</span>
 		</div>
 	</div>
 
@@ -21,14 +21,14 @@
 	   {!! Form::open(array('id'=> 'view_student_form', 'class' => 'form-horizontal')) !!}
 			<fieldset>
 				<legend class="legend-name-mid">
-					User Credentials
+					{!! trans('messages.user_credentials') !!}
 				</legend>
 				<div class="form-group">
-					<label class="control-label col-xs-3">Username <span class="required">*</span></label>
+					<label class="control-label col-xs-3">{!! trans('messages.username') !!} <span class="required">*</span></label>
 					<div class="col-xs-5">
 						{!! Form::text('username',''
 							, array(
-								'placeHolder' => 'Username'
+								'placeHolder' => 'trans('messages.username')'
 								, 'ng-disabled' => 'student.active_view'
 								, 'ng-model' => 'student.record.username'
 								, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
@@ -46,11 +46,11 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-xs-3 control-label" id="email">Email <span class="required">*</span></label>
+					<label class="col-xs-3 control-label" id="email">{!! trans('messages.email') !!} <span class="required">*</span></label>
 					<div class="col-xs-5">
 						{!! Form::text('email',''
 							, array(
-								'placeHolder' => 'Email'
+								'placeHolder' => 'trans('messages.email')'
 								, 'ng-disabled' => 'student.active_view'
 								, 'ng-model' => 'student.record.email'
 								, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
@@ -68,7 +68,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-xs-3 control-label" id="status">Status <span class="required">*</span></label>
+					<label class="col-xs-3 control-label" id="status">{!! trans('messages.status') !!} <span class="required">*</span></label>
 
 					<div class="col-xs-5" ng-if="student.active_edit">
 						<div class="col-xs-6 checkbox">
@@ -82,7 +82,7 @@
 										, 'ng-click' => 'student.studentChangeStatus()'
 									)
 								) !!}
-							<span class="lbl padding-8">Enabled</span>
+							<span class="lbl padding-8">{!! trans('messages.enabled') !!}</span>
 							</label>
 						</div>
 						<div class="col-xs-6 checkbox">
@@ -96,7 +96,7 @@
 										, 'ng-click' => 'student.studentChangeStatus()'
 									)
 								) !!}
-							<span class="lbl padding-8">Disabled</span>
+							<span class="lbl padding-8">{!! trans('messages.disabled') !!}</span>
 							</label>
 						</div>
 					</div>
@@ -116,11 +116,11 @@
 					</div>
 				</div>
 				<div class="form-group" ng-if="student.record.new_email">
-					<label class="col-xs-3 control-label text-red" id="email">Pending Email <span class="required">*</span></label>
+					<label class="col-xs-3 control-label text-red" id="email">{!! trans('messages.pending_email') !!} <span class="required">*</span></label>
 					<div class="col-xs-5">
 						{!! Form::text('email',''
 							, array(
-								'placeHolder' => 'Email'
+								'placeHolder' => 'trans('messages.email')'
 								, 'ng-disabled' => 'true'
 								, 'class' => 'form-control'
 							)
@@ -131,14 +131,14 @@
 
 			<fieldset>
 				<legend class="legend-name-mid">
-					Quick Stats
+					{!! trans('messages.quick_stats') !!}
 				</legend>
 				<div class="form-group">
-					<label class="control-label col-xs-3">Points</label>
+					<label class="control-label col-xs-3">{!! trans('messages.points') !!}</label>
 					<div class="col-xs-5">
 						{!! Form::text('points',''
 							, array(
-								'placeHolder' => 'Points'
+								'placeHolder' => 'trans('messages.points')'
 								, 'ng-disabled' => 'student.active_view'
 								, 'ng-model' => 'student.record.points'
 								, 'ng-class' => "{ 'required-field' : student.fields['points'] }"
@@ -148,11 +148,11 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-xs-3">Badges</label>
+					<label class="control-label col-xs-3">{!! trans('messages.badge') !!}</label>
 					<div class="col-xs-5">
 						{!! Form::text('badges',''
 							, array(
-								'placeHolder' => 'Badges'
+								'placeHolder' => 'trans('messages.badge')'
 								, 'ng-disabled' => 'student.active_view'
 								, 'ng-model' => 'student.record.badges'
 								, 'ng-class' => "{ 'required-field' : student.fields['badges'] }"
@@ -164,7 +164,7 @@
 				<div class="form-group" ng-if="student.active_view">
 					<div class="col-xs-3"></div>
 					<div class="col-xs-5">
-						{!! Form::button('View Rewards'
+						{!! Form::button('trans('messages.admin_view_rewards')'
 							, array(
 								'class' => 'btn btn-blue'
 								, 'ng-click' => "student.setActive('reward', student.record.id)"
@@ -176,41 +176,41 @@
 
 			<fieldset>
 				<legend class="legend-name-mid">
-					Personal Information
+					{!! trans('messages.personal_info') !!}
 				</legend>
 				<div class="form-group">
-					<label class="control-label col-xs-3">First Name <span class="required">*</span></label>
+					<label class="control-label col-xs-3">{!! trans('messages.first_name') !!} <span class="required">*</span></label>
 					<div class="col-xs-5">
 						{!! Form::text('first_name','',
 							array('class' => 'form-control'
 									, 'ng-disabled' => 'student.active_view'
 									, 'ng-model' => 'student.record.first_name'
 									, 'ng-class' => "{ 'required-field' : student.fields['first_name'] }"
-									, 'placeHolder' => 'First Name'
+									, 'placeHolder' => 'trans('messages.first_name')'
 								 )
 							)!!}
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-xs-3">Last Name <span class="required">*</span></label>
+					<label class="control-label col-xs-3">{!! trans('messages.last_name') !!} <span class="required">*</span></label>
 					<div class="col-xs-5">
 						{!! Form::text('last_name','',
 							array('class' => 'form-control'
 									, 'ng-disabled' => 'student.active_view'
 									, 'ng-model' => 'student.record.last_name'
 									, 'ng-class' => "{ 'required-field' : student.fields['last_name'] }"
-									, 'placeHolder' => 'Last Name'
+									, 'placeHolder' => 'trans('messages.last_name')'
 								 )
 							)!!}
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-xs-3">Gender <span class="required">*</span></label>
+					<label class="control-label col-xs-3">{!! trans('messages.gender') !!} <span class="required">*</span></label>
 					<div class="col-xs-5">
 						{!! Form::select('gender',
-							array('' => '-- Select Gender --'
-									, 'Male' => 'Male'
-									, 'Female' => 'Female'),'',
+							array('' => 'trans('messages.select_gender')'
+									, 'trans('messages.male')' => 'Male'
+									, 'trans('messages.female')' => 'Female'),'',
 							array('class' => 'form-control'
 									, 'ng-disabled' => 'student.active_view'
 									, 'ng-model' => 'student.record.gender'
@@ -220,39 +220,39 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-xs-3">Birthday <span class="required">*</span></label>
+					<label class="control-label col-xs-3">{!! trans('messages.birthday') !!} <span class="required">*</span></label>
 					<div class="col-xs-5">
 						<input type="hidden" id="birth_date" />
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-xs-3">City</label>
+					<label class="control-label col-xs-3">{!! trans('messages.city') !!} <span class="required">*</span></label>
 					<div class="col-xs-5">
 						{!! Form::text('city','',
 							array('class' => 'form-control'
 									, 'ng-disabled' => 'student.active_view'
 									, 'ng-model' => 'student.record.city'
 									, 'ng-class' => "{ 'required-field' : student.fields['city'] }"
-									, 'placeHolder' => 'City'
+									, 'placeHolder' => 'trans('messages.city')'
 								 )
 							)!!}
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-xs-3">State</label>
+					<label class="control-label col-xs-3">{!! trans('messages.state') !!}</label>
 					<div class="col-xs-5">
 						{!! Form::text('state','',
 							array('class' => 'form-control'
 									, 'ng-disabled' => 'student.active_view'
 									, 'ng-model' => 'student.record.state'
 									, 'ng-class' => "{ 'required-field' : student.fields['state'] }"
-									, 'placeHolder' => 'State'
+									, 'placeHolder' => 'trans('messages.state')'
 								 )
 							)!!}
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-xs-3 control-label">Country</label>
+					<label class="col-xs-3 control-label">{!! trans('messages.country') !!} <span class="required">*</span></label>
 					<div class="col-xs-5" ng-init="getCountries()">
 						<select name="country_id" 
 								id="country" 
@@ -261,20 +261,20 @@
 								ng-change="student.getGradeLevel()"
 								ng-disabled="student.active_view"
 								ng-class="{ 'required-field' : student.fields['country_id'] }">
-							<option ng-selected="student.record.country_id == futureed.FALSE" value="">-- Select Country --</option>
+							<option ng-selected="student.record.country_id == futureed.FALSE" value="">{!! trans('messages.select_country') !!}</option>
 							<option ng-selected="student.record.country_id == country.id" ng-repeat="country in countries" ng-value="country.id">{! country.name!}</option>
 						</select>
 					</div>
 				</div>
 			</fieldset>
 			<fieldset>
-				<legend class="legend-name-mid">School Information</legend>
+				<legend class="legend-name-mid">{!! trans('messages.school_info') !!}</legend>
 				<div class="form-group">
-					<label class="control-label col-xs-3">School Name </label>
+					<label class="control-label col-xs-3">{!! trans('messages.school_name') !!} </label>
 					<div class="col-xs-5">
 						{!! Form::text('school_name',''
 								, array(
-									'placeHolder' => 'School Name'
+									'placeHolder' => 'trans('messages.school_name')'
 									, 'ng-disabled' => 'student.active_view'
 									, 'id' => 'school_code'
 									, 'ng-model' => 'student.record.school_name'
@@ -298,10 +298,10 @@
 						</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-xs-3">Grade</label>
+					<label class="control-label col-xs-3">{!! trans('messages.grade') !!} <span class="required">*</span></label>
 					<div class="col-xs-5">
 						<select ng-disabled="student.active_view || !student.record.country_id" name="grade_code" ng-class="{ 'required-field' : student.fields['grade_code'] }" class="form-control" ng-model="student.record.grade_code">
-							<option value="">-- Select Level --</option>
+							<option value="">{!! trans('messages.select_level') !!}</option>
 							<option ng-repeat="grade in student.grades" ng-selected="student.record.grade_code == grade.code" ng-value="grade.code">{! grade.name !}</option>
 						</select>
 					</div>
@@ -311,14 +311,14 @@
 				<div class="form-group">
 					<div class="col-xs-9 col-xs-offset-1">
 						<div class="btn-container" ng-if="student.active_view">
-							{!! Form::button('Edit'
+							{!! Form::button('trans('messages.edit')'
 								, array(
 									'class' => 'btn btn-blue btn-medium'
 									, 'ng-click' => "student.setActive(futureed.ACTIVE_EDIT, student.record.id)"
 								)
 							) !!}
 
-							{!! Form::button('Cancel'
+							{!! Form::button('trans('messages.cancel')'
 								, array(
 									'class' => 'btn btn-gold btn-medium'
 									, 'ng-click' => "student.setActive()"
@@ -327,14 +327,14 @@
 						</div>
 
 						<div class="btn-container" ng-if="student.active_edit">
-							{!! Form::button('Save'
+							{!! Form::button('trans('messages.save')'
 								, array(
 									'class' => 'btn btn-blue btn-medium'
 									, 'ng-click' => "student.update()"
 								)
 							) !!}
 
-							{!! Form::button('Cancel'
+							{!! Form::button('trans('messages.cancel')'
 								, array(
 									'class' => 'btn btn-gold btn-medium'
 									, 'ng-click' => "student.setActive(futureed.ACTIVE_VIEW, student.record.id)"
@@ -350,7 +350,7 @@
 	<div class="col-xs-12 search-container">
 		<div class="list-container" ng-cloak>
 			<div class="col-xs-6 title-mid">
-				Module List
+				{!! trans('messages.admin_module_list') !!}
 			</div>
 
 			<div class="col-xs-6 size-container">
@@ -374,9 +374,9 @@
 			<table class="col-xs-12 table table-striped table-bordered">
 				<thead>
 					<tr>
-						<th>Modules</th>
-						<th>Age Group</th>
-						<th ng-if="student.modules.length">Actions</th>
+						<th>{!! trans('messages.module') !!}</th>
+						<th>{!! trans('messages.admin_age_group') !!}</th>
+						<th ng-if="student.modules.length">{!! trans('messages.action') !!}</th>
 					</tr>
 				</thead>
 
@@ -394,12 +394,12 @@
 				</tr>
 				<tr class="odd" ng-if="!student.modules.length && !student.table.loading">
 					<td valign="top" colspan="7">
-						No records found
+						{!! trans('messages.no_records_found') !!}
 					</td>
 				</tr>
 				<tr class="odd" ng-if="student.table.loading">
 					<td valign="top" colspan="7">
-						Loading...
+						{!! trans('messages.loading') !!}
 					</td>
 				</tr>
 				</tbody>
