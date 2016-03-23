@@ -138,8 +138,8 @@
 					]);
 
 				Routes::get('/trial_question_list', [
-					'as' => 'student.class.partials.trial-question-list',
-					'uses' => 'FutureLesson\Student\ClassController@trial_question_list'
+					'as' => 'student.class.partials.trial.module',
+					'uses' => 'FutureLesson\Student\ClassController@trial_module'
 				]);
 			});
 
@@ -147,6 +147,11 @@
 				  'prefix' => '/module'
 				, 'middleware' => 'student_partial'], function()
 			{
+				Routes::get('trial', [
+					'as' => 'student.class.module.trial-index',
+					'uses' => 'FutureLesson\Student\ClassModuleController@trial_module'
+				]);
+
 				Routes::get('/', [ 
 					'as' => 'student.class.module.index'
 					, 'uses' => 'FutureLesson\Student\ClassModuleController@index'
@@ -156,6 +161,7 @@
 					'as' => 'student.class.module.view'
 					, 'uses' => 'FutureLesson\Student\ClassModuleController@index'
 				]);
+
 				
 				Routes::group([
 					  'prefix' => '/partials'
@@ -200,6 +206,11 @@
 						'as' => 'student.class.module.partials.questions'
 						, 'uses' => 'FutureLesson\Student\ClassModuleController@questions'
 						]);
+
+					Routes::get('/trial/questions', [
+						'as' => 'student.class.module.partials.trial.questions',
+						'uses' => 'FutureLesson\Student\ClassModuleController@trial_module_question_list'
+					]);
 
 					Routes::get('/messages', [
 						'as' => 'student.class.module.partials.view_question_message'

@@ -11,75 +11,24 @@
                 <div class="list-container" ng-cloak>
                     <div class="clearfix"></div>
 
-                    {{--<div class="module-list" ng-if="!class.records.length && !class.table.loading">--}}
-                        {{--<div class="no-module-label">--}}
-                            {{--<p>No modules found.</p>--}}
-                        {{--</div>--}}
-                    {{--</div>--}}
-
                     <div class="module-list">
-                        <div class="no-module-label">
-                            <p>Loading...</p>
-                        </div>
-                    </div>
-
-                    <div class="module-list" ng-if="class.records.length">
-                        <div class="module-item" ng-repeat="record in class.records">
+                        <div class="module-item">
                             <div class="module-image-holder">
-                                <img ng-if="record.module_status != 'Completed' && user.points >= record.points_to_unlock" class="module-icon"
-                                     ng-src="{! record.icon_image == futureed.NONE && '/images/icons/default-module-icon.png' || record.icon_image !}"
-                                     ng-click="class.redirect('{!! route('student.class.module.index') !!}', record)" tooltip-class="module-tooltip" tooltip-placement="bottom" tooltip="{! record.name !}">
-
-                                <img ng-if="record.module_status !== 'Completed' && user.points < record.points_to_unlock" class="locked-module-icon"
-                                     ng-src="/images/icons/icon-lock.png" tooltip-class="module-tooltip" tooltip-placement="bottom" tooltip="{! record.name !}">
-
-                                <img ng-if="record.module_status == 'Completed'" class="locked-module-icon"
-                                     ng-src="{! record.icon_image == futureed.NONE && '/images/icons/default-module-icon.png' || record.icon_image !}" tooltip-class="module-tooltip" tooltip-placement="bottom" tooltip="{! record.name !}">
+                                <img class="module-icon"
+                                     ng-src="{!! url('/trial-module/images/module/icon-spatial.png') !!}"
+                                     ng-click="class.redirect('{!! route('student.class.module.trial-index') !!}')"
+                                     tooltip-class="module-tooltip"
+                                     tooltip-placement="bottom"
+                                     tooltip="Trial Module">
                             </div>
 
-                            <p class="module-name">{! record.name !}</p>
+                            <p class="module-name">Trial Module</p>
 
-                            <button ng-if="record.module_status == 'On Going' && user.points >= record.points_to_unlock"
-                                    ng-click="class.redirect('{!! route('student.class.module.index') !!}', record)"
-                                    type="button" class="btn btn-blue module-btn"><i class="fa fa-play-circle"></i> Resume </button>
+                            <button type="button"
+                                    ng-click="class.redirect('{!! route('student.class.module.trial-index') !!}')"
+                                    class="btn btn-blue module-btn margin-bottom-15"><i class="fa fa-pencil"></i> Begin </button>
 
-                            <button ng-if="!record.module_status && user.points >= record.points_to_unlock" ng-click="class.redirect('{!! route('student.class.module.index') !!}', record)"
-                                    type="button" class="btn btn-blue module-btn"><i class="fa fa-pencil"></i> Begin </button>
-
-                            <button ng-if="user.points < record.points_to_unlock"
-                                    type="button" class="btn btn-blue module-btn" ng-disabled="true"><i class="fa fa-lock"></i> Locked</button>
-
-                            <button ng-if="record.module_status == 'Completed'"
-                                    type="button" class="btn btn-blue module-btn" ng-disabled="true"><i class="fa fa-lock"></i> Completed</button>
-
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuemin="0" aria-valuemax="100"
-                                     ng-class="{
-										'progress-bar-success' : record.progress > 75,
-										'progress-bar-info' : record.progress > 50 && record.progress <= 75 ,
-										'progress-bar-warning' : record.progress > 25 && record.progress <= 50 ,
-										'progress-bar-danger' : record.progress <= 25,
-
-									}"
-                                     ng-style="{ 'width' : record.progress+'%' }">
-                                </div>
-                            </div>
-                            <span class="module-progress">{! record.progress !}%</span>
                         </div>
-                    </div>
-
-                    <div class="pull-right" ng-if="class.records.length">
-                        <pagination
-                                total-items="class.table.total_items"
-                                ng-model="class.table.page"
-                                max-size="3"
-                                items-per-page="class.table.size"
-                                previous-text = "&lt;"
-                                next-text="&gt;"
-                                class="pagination"
-                                boundary-links="true"
-                                ng-change="class.paginateByPage()">
-                        </pagination>
                     </div>
                 </div>
             </div>

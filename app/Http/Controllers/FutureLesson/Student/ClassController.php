@@ -41,7 +41,7 @@ class ClassController extends Controller {
 	 *
 	 * @return \Illuminate\View\View
 	 */
-	public function trial_question_list() {
+	public function trial_module() {
 		return view('student.class.partials.trial_question_list');
 	}
 }

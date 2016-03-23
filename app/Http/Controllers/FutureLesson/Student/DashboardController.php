@@ -23,7 +23,6 @@ class DashboardController extends Controller {
 		if(isset($user_object->class) && $user_object->class) {
 			return view('student.class.index', array('class_id' => null));
 		}
-//		dd($user_object);
 //		return view('student.dashboard.index');
 		return view('student.dashboard.index-trial');
 	}

@@ -1850,3 +1850,7 @@ top: 41px;
 li.questions-answers > a, li.questions-answers div {
 	margin-bottom: 30px;
 }
+
+.table>tbody>tr>th {
+	border-top : transparent !important;
+}
