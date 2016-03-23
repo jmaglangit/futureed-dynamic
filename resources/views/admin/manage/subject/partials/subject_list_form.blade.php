@@ -1,7 +1,7 @@
 <div ng-if="subject.active_list">
 	<div class="content-title">
 		<div class="title-main-content">
-			<span>Subject Management</span>
+			<span>{!! trans('messages.admin_subject_mngt') !!}</span>
 		</div>
 	</div>
 
@@ -19,7 +19,7 @@
 
 	<div class="col-xs-12 search-container">
 		<div class="title-mid">
-			Search
+			{!! trans('messages.search') !!}
 		</div>
 
 		<div class="form-search">
@@ -33,7 +33,7 @@
 				<div class="col-xs-6">
 					{!! Form::text('search_subject', ''
 						,array(
-							'placeholder' => 'Name'
+							'placeholder' => 'trans('messages.name')'
 							, 'ng-model' => 'subject.search.name'
 							, 'class' => 'form-control btn-fit'
 						)
@@ -41,7 +41,7 @@
 				</div>
 				
 				<div class="col-xs-3">
-					{!! Form::button('Search'
+					{!! Form::button('trans('messages.search')'
 						,array(
 							'class' => 'btn btn-blue'
 							, 'ng-click' => 'subject.searchFnc($event)'
@@ -49,7 +49,7 @@
 					)!!}
 				</div>
 				<div class="col-xs-3">
-					{!! Form::button('Clear'
+					{!! Form::button('trans('messages.clear')'
 						,array(
 							'class' => 'btn btn-gold'
 							, 'ng-click' => 'subject.clear()'
@@ -62,12 +62,12 @@
 	 
 	<div class="col-xs-12 table-container">
 		<button class="btn btn-blue btn-semi-medium" ng-click="subject.setActive(futureed.ACTIVE_ADD)">
-			<i class="fa fa-plus-square"></i> Add Subject
+			<i class="fa fa-plus-square"></i> {!! trans('messages.admin_add_subject') !!}
 		</button>
 
 		<div class="list-container" ng-cloak>
 			<div class="col-xs-6 title-mid">
-				Subject List
+				{!! trans('messages.admin_subject_list') !!}
 			</div>
 
 			<div class="col-xs-6 size-container">
@@ -91,9 +91,9 @@
 			<table class="col-xs-12 table table-striped table-bordered">
 				<thead>
 					<tr>
-						<th>Subject Code</th>
-						<th>Subject Name</th>
-						<th ng-if="subject.records.length">Action</th>
+						<th>{!! trans('messages.admin_subject_code') !!}</th>
+						<th>{!! trans('messages.admin_subject_name') !!}</th>
+						<th ng-if="subject.records.length">{!! trans('messages.action') !!}</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -110,7 +110,7 @@
 										tooltip-trigger="mouseenter"></i>
 								</div>
 								<div class="col-xs-3">
-									<a href="javascript:void(0)" ng-click="subject.setSubjectAreaDetails(record.id, record.name)"><span><i class="fa fa-plus"></i></span> Area</a>
+									<a href="javascript:void(0)" ng-click="subject.setSubjectAreaDetails(record.id, record.name)"><span><i class="fa fa-plus"></i></span> {!! trans('messages.area') !!}</a>
 								</div>
 								<div class="col-xs-3">
 									<a href="javascript:void(0)" ng-click="subject.setActive(futureed.ACTIVE_EDIT, record.id)"><span><i class="fa fa-pencil"></i></span></a>
@@ -124,12 +124,12 @@
 					</tr>
 					<tr class="odd" ng-if="!subject.records.length && !subject.table.loading">
 						<td valign="top" colspan="4">
-							No records found
+							{!! trans('messages.no_records_found') !!}
 						</td>
 					</tr>
 					<tr class="odd" ng-if="subject.table.loading">
 						<td valign="top" colspan="4">
-							Loading...
+							{!! trans('messages.loading') !!}
 						</td>
 					</tr>
 				</tbody>
