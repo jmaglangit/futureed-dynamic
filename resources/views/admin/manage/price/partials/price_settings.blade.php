@@ -2,7 +2,7 @@
 	<div class="col-xs-12 search-container" ng-if="price.active_add">
 		<div class="col-xs-12">
 			<div class="title-mid">
-				Add Price
+				{!! trans('messages.admin_add_price') !!}
 			</div>
 		</div>
 	</div>
@@ -10,7 +10,7 @@
 	<div class="col-xs-12 search-container" ng-if="price.active_edit">
 		<div class="col-xs-12">
 			<div class="title-mid">
-				Update Price
+				{!! trans('messages.admin_update_price') !!}
 			</div>
 		</div>
 	</div>
@@ -31,25 +31,25 @@
 		{!! Form::open(['class'=> 'form-horizontal']) !!}
 		<fieldset>
 			<div class="form-group">
-				<label class="col-xs-3 control-label">Subscription Name <span class="required">*</span></label>
+				<label class="col-xs-3 control-label">{!! trans('messages.admin_subscription_name') !!} <span class="required">*</span></label>
 				<div class="col-xs-5">
 					{!! Form::text('name', '', 
 						[
 							'class' => 'form-control'
 							, 'ng-model' => 'price.record.name'
 							, 'ng-class' => "{ 'required-field' : price.fields['name'] }"
-							, 'placeholder' => 'Name'
+							, 'placeholder' => 'trans('messages.name')'
 						])
 					!!}
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-xs-3 control-label">Description <span class="required">*</span></label>
+				<label class="col-xs-3 control-label">{!! trans('messages.description') !!} <span class="required">*</span></label>
 				<div class="col-xs-5">
 					{!! Form::textarea('description', '', 
 						[
 							'class' => 'form-control disabled-textarea'
-							, 'placeholder' => 'Description'
+							, 'placeholder' => 'trans('messages.description')'
 							, 'rows' => '4'
 							, 'ng-model' => 'price.record.description'
 							, 'ng-class' => "{ 'required-field' : price.fields['description'] }"
@@ -58,28 +58,28 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-xs-3 control-label">Price <span class="required">*</span></label>
+				<label class="col-xs-3 control-label">{!! trans('messages.price') !!} <span class="required">*</span></label>
 				<div class="col-xs-5">
 					<div class="input-group">
-						  <span class="input-group-addon" id="basic-addon1">USD$</span>
+						  <span class="input-group-addon" id="basic-addon1">{!! trans('messages.usd') !!}</span>
 						  {!! Form::text('total_amount',''
 							, [
 								'class' => 'form-control'
 								, 'ng-model' => 'price.record.price'
 								, 'ng-class' => "{ 'required-field' : price.fields['price'] }"
-								, 'placeholder' => 'Price'
+								, 'placeholder' => 'trans('messages.price')'
 							]
 						) !!}
 					</div>
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-xs-3 control-label">Days <span class="required">*</span></label>
+				<label class="col-xs-3 control-label">{!! trans('messages.admin_days') !!} <span class="required">*</span></label>
 				<div class="col-xs-5">
 					{!! Form::text('days','',
 						[
 							'class' => 'form-control'
-							, 'placeholder' => 'Days'
+							, 'placeholder' => 'trans('messages.admin_days')'
 							, 'ng-class' => "{ 'required-field' : price.fields['days'] }"
 							, 'ng-model' => 'price.record.days'
 						]) 
@@ -87,7 +87,7 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="col-xs-3 control-label" id="status">Status <span class="required">*</span></label>
+				<label class="col-xs-3 control-label" id="status">{!! trans('messages.status') !!} <span class="required">*</span></label>
 				<div class="col-xs-9">
 					<div class="col-xs-3 checkbox">
 						<label>
@@ -99,7 +99,7 @@
 								, 'ng-model' => 'price.record.status'
 							) 
 						) !!}
-						<span class="lbl padding-8">Enabled</span>
+						<span class="lbl padding-8">{!! trans('messages.enabled') !!}</span>
 						</label>
 					</div>
 					<div class="col-xs-5 checkbox">
@@ -112,38 +112,39 @@
 								, 'ng-model' => 'price.record.status'
 							) 
 						) !!}
-						<span class="lbl padding-8">Disabled</span>
-						</label>
-					</div>
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="col-xs-3 control-label" id="status">Learning Style <span class="required">*</span></label>
-				<div class="col-xs-9">
-					<div class="col-xs-3 checkbox">
-						<label>
-							{!! Form::radio('lsp'
-                                , '1'
-                                , false
-                                , array(
-                                    'class' => 'field',
-                                    'ng-model' => 'price.record.has_lsp'
-                                )
-                            ) !!}
-							<span class="lbl padding-8">Included</span>
-						</label>
-					</div>
-					<div class="col-xs-5 checkbox">
-						<label>
-							{!! Form::radio('lsp'
-                                , '0'
-                                , false
-                                , array(
-                                    'class' => 'field',
-									'ng-model' => 'price.record.has_lsp'
-                                )
-                            ) !!}
-							<span class="lbl padding-8">Not Included</span>
+						<span class="lbl padding-8">{!! trans('messages.disabled') !!}</span>
+                                               </label>
+                                       </div>
+                               </div>
+                       </div>
+                       <div class="form-group">
+                               <label class="col-xs-3 control-label" id="status">{!! trans('messages.learning_style') !!} <span class="required">*</span></label>
+                               <div class="col-xs-9">
+                                       <div class="col-xs-3 checkbox">
+                                               <label>
+                                                       {!! Form::radio('lsp'
+															, '1'
+															, false
+															, array(
+																'class' => 'field',
+																'ng-model' => 'price.record.has_lsp'
+															)
+														) !!}
+                                                       <span class="lbl padding-8">{!! trans('messages.included') !!}</span>
+                                               </label>
+                                       </div>
+                                       <div class="col-xs-5 checkbox">
+                                               <label>
+                                                       {!! Form::radio('lsp'
+															, '0'
+															, false
+															, array(
+																'class' => 'field',
+																'ng-model' => 'price.record.has_lsp'
+															)
+														) !!}
+                                                       <span class="lbl padding-8">{!! trans('messages.not_included') !!}</span>
+
 						</label>
 					</div>
 				</div>
@@ -153,7 +154,7 @@
 		<fieldset>
 			<div class="form-group">
 				<div class="btn-container col-xs-9 col-xs-offset-1">
-					{!! Form::button('Update'
+					{!! Form::button('trans('messages.update')'
 						, array(
 							'class' => 'btn btn-blue btn-medium'
 							, 'ng-click' => "price.update()"
@@ -161,7 +162,7 @@
 						)
 					) !!}
 
-					{!! Form::button('Add Price'
+					{!! Form::button('trans('messages.admin_add_price')'
 						, array(
 							'class' => 'btn btn-blue btn-medium'
 							, 'ng-click' => "price.add()"
@@ -169,7 +170,7 @@
 						)
 					) !!}
 
-					{!! Form::button('Cancel'
+					{!! Form::button('trans('messages.cancel')'
 						, array(
 							'class' => 'btn btn-gold btn-medium'
 							, 'ng-click' => "price.setActive()"
@@ -184,12 +185,12 @@
 		<button class="btn btn-blue btn-semi-medium" 
 			ng-click="price.setActive(futureed.ACTIVE_ADD)"
 			ng-if="!(price.active_add || price.active_edit)">
-			<span><i class="fa fa-plus-square"></i></span> Add Price
+			<span><i class="fa fa-plus-square"></i></span> {!! trans('messages.admin_add_price') !!}
 		</button>
 
 		<div class="list-container">
 			<div class="col-xs-6 title-mid">
-				Price List
+				{!! trans('messages.admin_price_list') !!}
 			</div>
 
 			<div class="col-xs-6 size-container">
@@ -213,18 +214,16 @@
 			<table class="col-xs-12 table table-striped table-bordered">
 				<thead>
 				<tr>
-					<th>Subscription Name</th>
-					<th>Description</th>
-					<th>Learning Style</th>
-					<th>Price</th>
-					<th ng-if="price.records.length">Action</th>
+					<th>{!! trans('messages.admin_subscription_name') !!}</th>
+					<th>{!! trans('messages.description') !!}</th>
+					<th>{!! trans('messages.price') !!}</th>
+					<th ng-if="price.records.length">{!! trans('messages.action') !!}</th>
 				</tr>
 				</thead>
 				<tbody>
 				<tr ng-repeat="record in price.records">
 					<td>{! record.name !}</td>
 					<td>{! record.description !}</td>
-					<td>{! record.has_lsp ? "Included" : "Not Included" !}</td>
 					<td>{! record.price | currency : "USD$ " : 2 !}</td>
 					<td>
 						<div class="row">
@@ -246,7 +245,7 @@
 				</tr>
 				<tr class="odd" ng-if="!price.records.length">
 					<td valign="top" colspan="4">
-						No records found
+						{!! trans('messages.no_records_found') !!}
 					</td>
 				</tr>
 				</tbody>
