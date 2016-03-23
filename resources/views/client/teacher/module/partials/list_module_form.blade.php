@@ -1,7 +1,7 @@
 <div ng-if="module.active_list">
 	<div class="content-title">
 		<div class="title-main-content">
-			<span>Module Management</span>
+			<span>{!! trans('messages.admin_module_mgmt') !!}</span>
 		</div>
 	</div>
 
@@ -21,7 +21,7 @@
 				<div class="form-group">
 					<div class="col-xs-6" ng-init="module.getGradeLevel(user.country_id);">
 	                    <select name="grade_id" class="form-control" ng-disabled="!module.grades.length" ng-model="module.search.grade_id">
-	                        <option value="">-- Select Level --</option>
+	                        <option value="">{!! trans('messages.select_level') !!}</option>
 	                        <option ng-repeat="grade in module.grades" ng-value="grade.id">{! grade.name !}</option>
 	                    </select>
 	                </div>
@@ -30,7 +30,7 @@
 							, array(
 								'class' => 'form-control'
 								, 'ng-model' => 'module.search.name'
-								, 'placeholder' => 'Module Name'
+								, 'placeholder' => 'trans('messages.admin_module_name')'
 								, 'autocomplete' => 'off'
 							)
 						) !!}
@@ -39,12 +39,12 @@
 				<div class="form-group">
 					<div class="col-xs-6" ng-init="module.getSubject()">
 	                    <select name="grade_id" class="form-control" ng-disabled="!module.subjects.length" ng-model="module.search.subject">
-	                        <option value="">-- Select Subject --</option>
+	                        <option value="">{!! trans('messages.select_subject') !!}</option>
 	                        <option ng-repeat="subject in module.subjects" ng-value="subject.name">{! subject.name !}</option>
 	                    </select>
 	                </div>
 					<div class="col-xs-3">
-						{!! Form::button('Search', 
+						{!! Form::button('trans('messages.search')', 
 							array(
 								'class' => 'btn btn-blue'
 								, 'ng-click' => 'module.searchFnc($event)'
@@ -52,7 +52,7 @@
 						) !!}
 					</div>
 					<div class="col-xs-3">
-						{!! Form::button('Clear', 
+						{!! Form::button('trans('messages.clear')', 
 							array(
 								'class' => 'btn btn-gold'
 								, 'ng-click' => 'module.clearFnc()'
@@ -67,7 +67,7 @@
 	<div class="col-xs-12 table-container">
 		<div class="list-container" ng-cloak>
 			<div class="col-xs-6 title-mid">
-				Module List
+				{!! trans('messages.admin_module_list') !!}
 			</div>
 
 			<div class="col-xs-6 size-container">
@@ -91,9 +91,9 @@
 			<table class="col-xs-12 table table-striped table-bordered">
 			<thead>
 		        <tr>
-		            <th>Module</th>
-		            <th>Grade</th>
-		            <th ng-if="module.records.length">Actions</th>
+		            <th>{!! trans('messages.module') !!}</th>
+		            <th>{!! trans('messages.grade') !!}</th>
+		            <th ng-if="module.records.length">{!! trans('messages.action') !!}</th>
 		        </tr>
 	        </thead>
 	        <tbody>
@@ -103,7 +103,7 @@
 		            <td>
 		            	<div class="row">
 		            		<div class="col-xs-6">
-		            			<a href="javascript:void(0)" ng-click="module.launchModule('{!! route('client.teacher.question.index') !!}', info.id)" title="launch">Launch</a>
+		            			<a href="javascript:void(0)" ng-click="module.launchModule('{!! route('client.teacher.teaching_content.index') !!}', info.id)" title="launch">{!! trans('messages.launch') !!}</a>
 		            		</div>
 		            		<div class="col-xs-6">
 		            			<a href="javascript:void(0)" ng-click="module.setActive(futureed.ACTIVE_VIEW ,info.id)" title="view"><span><i class="fa fa-eye"></i></span></a>
@@ -113,12 +113,12 @@
         		</tr>
         		<tr class="odd" ng-if="!module.records.length && !module.table.loading">
 		        	<td valign="top" colspan="4">
-		        		No records found
+		        		{!! trans('messages.no_records_found') !!}
 		        	</td>
 		        </tr>
 		        <tr class="odd" ng-if="module.table.loading">
 		        	<td valign="top" colspan="4">
-		        		Loading...
+		        		{!! trans('messages.loading') !!}
 		        	</td>
 		        </tr>
 	        	</tbody>

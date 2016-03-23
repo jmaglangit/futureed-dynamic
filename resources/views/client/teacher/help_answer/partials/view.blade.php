@@ -1,6 +1,6 @@
 <div class="row module-container" ng-if="answer.active_view || answer.active_edit">
 	<div class="title-mid">
-		<span>Help Request Answer Details</span>		
+		<span>{!! trans('messages.help_request_answer_details') !!}</span>		
 	</div>
 
 	<div class="form-content col-xs-12">
@@ -22,59 +22,59 @@
 
 		<fieldset>
 			<div class="form-group" ng-if="answer.record.link_type != futureed.GENERAL && answer.record.subject">
-				<label class="control-label col-xs-3">Subject</label>
+				<label class="control-label col-xs-3">{!! trans('messages.subject') !!}</label>
 				<div class="col-md-5">
 					{!! Form::text('subject', ''
 						, array(
 							'ng-disabled'=>'true'
 							, 'class' => 'form-control'
 							, 'ng-model' => 'answer.record.subject'
-							, 'placeholder' => 'Subject'
+							, 'placeholder' => 'trans('messages.subject')'
 						)
 					) !!}
 				</div>
 			</div>
 			<div class="form-group" ng-if="answer.record.link_type != futureed.GENERAL && answer.record.subject_area">
-				<label class="control-label col-xs-3">Subject Area</label>
+				<label class="control-label col-xs-3">{!! trans('messages.subject_area') !!}</label>
 				<div class="col-md-5">
 					{!! Form::text('subject', ''
 						, array(
 							'ng-disabled'=>'true'
 							, 'class' => 'form-control'
 							, 'ng-model' => 'answer.record.subject_area'
-							, 'placeholder' => 'Subject Area'
+							, 'placeholder' => 'trans('messages.subject_area')'
 						)
 					) !!}
 				</div>
 			</div>
 			<div class="form-group" ng-if="answer.record.link_type != futureed.GENERAL && answer.record.module">
-				<label class="control-label col-xs-3">Module</label>
+				<label class="control-label col-xs-3">{!! trans('messages.module') !!}</label>
 				<div class="col-md-5">
 					{!! Form::text('subject', ''
 						, array(
 							'ng-disabled'=>'true'
 							, 'class' => 'form-control'
 							, 'ng-model' => 'answer.record.module'
-							, 'placeholder' => 'Module'
+							, 'placeholder' => 'trans('messages.module')'
 						)
 					) !!}
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-xs-3">Title <span class="required">*</span></label>
+				<label class="control-label col-xs-3">{!! trans('messages.title') !!} <span class="required">*</span></label>
 				<div class="col-xs-5">
 					{!! Form::text('title', ''
 						, array(
 							'ng-disabled'=>'true'
 							, 'class' => 'form-control'
 							, 'ng-model' => 'answer.record.title'
-							, 'placeholder' => 'Title'
+							, 'placeholder' => 'trans('messages.title')'
 						)
 					) !!}
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-xs-3">Answer <span class="required">*</span></label>
+				<label class="control-label col-xs-3">{!! trans('messages.answer') !!} <span class="required">*</span></label>
 				<div class="col-xs-5">
 					{!! Form::textarea('search_content', ''
 						, array(
@@ -82,14 +82,14 @@
 							, 'class' => 'form-control disabled-textarea'
 							, 'ng-class' => "{ 'required-field' : answer.fields['content'] }"
 							, 'ng-model' => 'answer.record.content'
-							, 'placeholder' => 'Answer'
+							, 'placeholder' => 'trans('messages.answer')'
 						)
 					) !!}
 				</div>
 			</div>
 
 			<div class="form-group">
-				<label class="control-label col-xs-3">Date Created</label>
+				<label class="control-label col-xs-3">{!! trans('messages.date_created') !!}</label>
 				<div class="col-xs-5">
 					<input type="text" ng-disabled="true" class="form-control" placeholder="Date Created" 
 						value="{! answer.record.created_at | ddMMyy : '-' !}" />
@@ -97,27 +97,27 @@
 			</div>
 
 			<div class="form-group">
-				<label class="control-label col-xs-3">Created By</span></label>
+				<label class="control-label col-xs-3">{!! trans('messages.created_by') !!}</span></label>
 				<div class="col-xs-5">
 					{!! Form::text('search_name', ''
 						, array(
 							'ng-disabled'=>'true'
 							, 'class' => 'form-control'
 							, 'ng-model' => 'answer.record.created_by'
-							, 'placeholder' => 'Created By'
+							, 'placeholder' => 'trans('messages.created_by')'
 						)
 					) !!}
 				</div>
 			</div>
 			<div class="form-group" ng-if="answer.active_view && answer.record.request_answer_status == futureed.PENDING">
 				<div class="btn-container col-xs-8 col-xs-offset-1">
-					{!! Form::button('Approve'
+					{!! Form::button('trans('messages.approve')'
 						, array(
 							'class' => 'btn btn-blue btn-medium'
 							, 'ng-click' => "answer.rateAnswer()"
 						)
 					) !!}
-					{!! Form::button('Reject'
+					{!! Form::button('trans('messages.reject')'
 						, array(
 							'class' => 'btn btn-gold btn-medium'
 							, 'ng-click' => "answer.updateStatus(answer.record.id, futureed.FALSE)"
@@ -128,13 +128,13 @@
 
 			<div class="form-group" ng-if="answer.active_view">
 				<div class="btn-container col-xs-8 col-xs-offset-1">
-					{!! Form::button('Edit'
+					{!! Form::button('trans('messages.edit')'
 						, array(
 							'class' => 'btn btn-blue btn-medium'
 							, 'ng-click' => "answer.setActive(futureed.ACTIVE_EDIT, answer.record.id)"
 						)
 					) !!}
-					{!! Form::button('Cancel'
+					{!! Form::button('trans('messages.cancel')'
 						, array(
 							'class' => 'btn btn-gold btn-medium'
 							, 'ng-click' => "answer.setActive(futureed.ACTIVE_LIST)"
@@ -145,13 +145,13 @@
 
 			<div class="form-group" ng-if="answer.active_edit">
 				<div class="btn-container col-xs-8 col-xs-offset-1">
-					{!! Form::button('Save'
+					{!! Form::button('trans('messages.save')'
 						, array(
 							'class' => 'btn btn-blue btn-medium'
 							, 'ng-click' => "answer.update()"
 						)
 					) !!}
-					{!! Form::button('Cancel'
+					{!! Form::button('trans('messages.cancel')'
 						, array(
 							'class' => 'btn btn-gold btn-medium'
 							, 'ng-click' => "answer.setActive(futureed.ACTIVE_VIEW, answer.record.id)"
@@ -167,7 +167,7 @@
 		<div class="modal-dialog modal-md">
 			<div class="modal-content">
 				<div class="modal-header">
-					Rate this Answer
+					{!! trans('messages.rate_this_answer') !!}
 				</div>	
 				<div class="modal-body">
 					<div class="alert alert-error" ng-if="answer.rate_errors">
@@ -177,7 +177,7 @@
 					</div>
 					{!! Form::select('rate'
 						, array(
-							'' => '-- Select Rate --'
+							'' => 'trans('messages.select_rate')'
 							, '1' => '1'
 							, '2' => '2'
 							, '3' => '3'
@@ -193,13 +193,13 @@
 				</div>
 				<div class="modal-footer">
 					<div class="btncon col-md-8 col-md-offset-4 pull-left">
-						{!! Form::button('Accept'
+						{!! Form::button('trans('messages.accept')'
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-click' => 'answer.updateStatus(answer.record.id, futureed.TRUE)'
 							)
 						) !!}
-						{!! Form::button('Cancel'
+						{!! Form::button('trans('messages.cancel')'
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'data-dismiss' => 'modal'
