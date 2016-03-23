@@ -929,18 +929,19 @@ hr {
 }
 
 .questions-image {
-	margin-top: 90px;
+	margin-top: 25px;
 	text-align: center;
 }
 
 .questions-image img {
-	width: 350px;
+	width: 300px;
+	max-height: 300px;
 	border-radius: 10px;
 }
 
 .questions-message {
 	text-align: center;
-	font-size: 2em;
+	font-size: 1.68em;
 	color: #055A7F;
 	max-width: 75%;
 	margin: 10px auto;
@@ -1844,4 +1845,8 @@ top: 41px;
 .reset-graph{
 	padding:0px;
 	margin-top:20px;
+}
+
+li.questions-answers > a, li.questions-answers div {
+	margin-bottom: 30px;
 }

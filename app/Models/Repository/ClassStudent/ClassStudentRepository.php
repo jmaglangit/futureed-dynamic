@@ -111,8 +111,9 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 
 		try{
 			$response = ClassStudent::where('student_id', $student_id)
+							->with('classroom')
 							->active()
-							->pluck('student_id');
+							->get();
 
 		}catch (\Exception $e){
 
