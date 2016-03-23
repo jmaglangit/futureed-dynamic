@@ -14,7 +14,7 @@
 						ng-change="reports.subjectArea()"
 						ng-disabled="!reports.subjects.length"
 						class="form-control">
-					<option value="">-- Select Subject --</option>
+					<option value="">{!! trans('messages.admin_select_subject') !!}</option>
 					<option ng-selected="reports.search.subject_id == subject.id"
 							ng-repeat="subject in reports.subjects" ng-value="subject.id">{! subject.name !}
 					</option>
