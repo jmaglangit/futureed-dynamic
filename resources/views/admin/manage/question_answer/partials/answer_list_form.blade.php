@@ -15,12 +15,12 @@
         {!! Form::open(array('class' => 'form-horizontal')) !!}
         <div class="form-search">
             <div class="form-group">
-                <label class="col-xs-4 control-label">Answer Code<span class="required">*</span></label>
+                <label class="col-xs-4 control-label">{!! trans('messages.admin_answer_code') !!}<span class="required">*</span></label>
 
                 <div class="col-xs-5">
                     {!! Form::text('code',''
                         , array(
-                            'placeHolder' => 'Answer Code'
+                            'placeHolder' => 'trans('messages.admin_answer_code')'
                             , 'ng-model' => 'qa.answers.record.code'
                             , 'ng-disabled' => 'qa.active_ansedit'
                             , 'class' => 'form-control'
@@ -31,12 +31,12 @@
             </div>
 
             <div class="form-group">
-                <label class="col-xs-4 control-label">Answer <span class="required">*</span></label>
+                <label class="col-xs-4 control-label">{!! trans('messages.answer') !!} <span class="required">*</span></label>
 
                 <div class="col-xs-5">
                     {!! Form::text('answer_text',''
                         , array(
-                            'placeHolder' => 'Answer'
+                            'placeHolder' => 'trans('messages.answer')'
                             , 'ng-model' => 'qa.answers.record.answer_text'
                             , 'class' => 'form-control'
                             , 'ng-class' => "{ 'required-field' : qa.fields['answer_text_ans'] }"
@@ -46,12 +46,12 @@
             </div>
 
             <div class="form-group">
-                <label class="col-xs-4 control-label">Label </label>
+                <label class="col-xs-4 control-label">{!! trans('messages.admin_label') !!} </label>
 
                 <div class="col-xs-5">
                     {!! Form::text('label',''
                         , array(
-                            'placeHolder' => 'Label'
+                            'placeHolder' => 'trans('messages.admin_label')'
                             , 'ng-model' => 'qa.answers.record.label'
                             , 'class' => 'form-control'
                             , 'ng-class' => "{ 'required-field' : qa.fields['label_ans'] }"
@@ -61,14 +61,14 @@
             </div>
 
             <div class="form-group">
-                <label class="col-xs-4 control-label">Correct Answer <span class="required">*</span></label>
+                <label class="col-xs-4 control-label">{!! trans('messages.admin_correct_answer') !!} <span class="required">*</span></label>
 
                 <div class="col-xs-5">
                     {!! Form::select('correct_answer'
                         , array(
-                            '' => '-- Select Answer --'
-                            , 'Yes' => 'Yes'
-                            , 'No' => 'No'
+                            '' => 'trans('messages.admin_select_answer')'
+                            , 'Yes' => 'trans('messages.yes')'
+                            , 'No' => 'trans('messages.no')'
                         )
                         , ''
                         , array(
@@ -81,12 +81,12 @@
             </div>
 
             <div class="form-group">
-                <label class="col-xs-4 control-label">Points Equivalent <span class="required">*</span></label>
+                <label class="col-xs-4 control-label">{!! trans('messages.admin_points_equivalent') !!} <span class="required">*</span></label>
 
                 <div class="col-xs-5">
                     {!! Form::text('point_equivalent',''
                         , array(
-                            'placeHolder' => 'Points Equivalent'
+                            'placeHolder' => 'trans('messages.admin_points_equivalent')'
                             , 'ng-model' => 'qa.answers.record.point_equivalent'
                             , 'class' => 'form-control'
                             , 'ng-class' => "{ 'required-field' : qa.fields['point_equivalent_ans'] }"
@@ -96,11 +96,10 @@
             </div>
 
             <div class="form-group">
-                <label class="control-label col-xs-4">Answer Image</label>
+                <label class="control-label col-xs-4">{!! trans('messages.admin_answer_image') !!}</label>
 
                 <div class="col-xs-5">
-                    <div class="btn btn-blue" ngf-select ngf-change="qa.uploadAnswer($files, qa.answers.record)"> Choose
-                        Image...
+                    <div class="btn btn-blue" ngf-select ngf-change="qa.uploadAnswer($files, qa.answers.record)"> {!! trans('messages.choose_image') !!}
                     </div>
                 </div>
 
@@ -112,9 +111,8 @@
             <div class="form-group" ng-if="qa.answers.record.uploaded">
                 <div class="col-xs-4"></div>
                 <div class="col-xs-5">
-                    <span class="col-xs-6 upload-label label label-info">Image Uploaded...</span>
-                    <a href="" class="control-label col-xs-6" ng-click="qa.viewAnswerImage(qa.answers.record)">View
-                        Image</a>
+                    <span class="col-xs-6 upload-label label label-info">{!! trans('messages.image_uploaded') !!}</span>
+                    <a href="" class="control-label col-xs-6" ng-click="qa.viewAnswerImage(qa.answers.record)">{!! trans('messages.view_image') !!}</a>
                 </div>
             </div>
 
@@ -125,19 +123,19 @@
                  && qa.answers.record.original_image_name != '0'">
                 <div class="control-label col-xs-4"></div>
                 <div class="col-xs-5">
-                    <a href="" ng-click="qa.viewAnswerImage(qa.answers.record)">View Image</a>
+                    <a href="" ng-click="qa.viewAnswerImage(qa.answers.record)">{!! trans('messages.view_image') !!}</a>
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="btn-container col-xs-10 col-xs-offset-1" ng-if="qa.active_anslist">
-                    {!! Form::button('Add'
+                    {!! Form::button('trans('messages.add')'
                         , array(
                             'class' => 'btn btn-blue btn-medium'
                             , 'ng-click' => 'qa.addAnswer()'
                         )
                     ) !!}
-                    {!! Form::button('Clear'
+                    {!! Form::button('trans('messages.clear')'
                         , array(
                             'class' => 'btn btn-gold btn-medium'
                             , 'ng-click' => 'qa.clearAnswer()'
@@ -145,13 +143,13 @@
                     ) !!}
                 </div>
                 <div class="btn-container col-xs-10 col-xs-offset-1" ng-if="qa.active_ansedit">
-                    {!! Form::button('Update'
+                    {!! Form::button('trans('messages.update')'
                         , array(
                             'class' => 'btn btn-blue btn-medium'
                             , 'ng-click' => 'qa.updateAnswer()'
                         )
                     ) !!}
-                    {!! Form::button('Cancel'
+                    {!! Form::button('trans('messages.cancel')'
                         , array(
                             'class' => 'btn btn-gold btn-medium'
                             , 'ng-click' => 'qa.setAnsActive()'
@@ -166,7 +164,7 @@
     <div class="col-xs-12 table-container">
         <div class="list-container" ng-cloak>
             <div class="col-xs-6 title-mid">
-                Answer List
+                {!! trans('messages.admin_answer_list') !!}
             </div>
 
             <div class="col-xs-6 size-container">
@@ -190,12 +188,12 @@
             <table class="col-xs-12 table table-striped table-bordered">
                 <thead>
                 <tr>
-                    <th>Code</th>
-                    <th>Label</th>
-                    <th>Answer</th>
-                    <th>Correct Answer</th>
-                    <th>Point Equivalent</th>
-                    <th ng-if="qa.answers.records.length">Actions</th>
+                    <th>{!! trans('messages.code') !!}</th>
+                    <th>{!! trans('messages.admin_label') !!}</th>
+                    <th>{!! trans('messages.answer') !!}</th>
+                    <th>{!! trans('messages.admin_correct_answer') !!}</th>
+                    <th>{!! trans('messages.admin_points_equivalent') !!}</th>
+                    <th ng-if="qa.answers.records.length">{!! trans('messages.action') !!}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -220,12 +218,12 @@
                 </tr>
                 <tr class="odd" ng-if="!qa.answers.records.length && !qa.table.loading">
                     <td valign="top" colspan="7">
-                        No records found
+                        {!! trans('messages.no_records_found') !!}
                     </td>
                 </tr>
                 <tr class="odd" ng-if="qa.table.loading">
                     <td valign="top" colspan="7">
-                        Loading...
+                        {!! trans('messages.loading') !!}
                     </td>
                 </tr>
                 </tbody>
@@ -264,12 +262,12 @@
         {!! Form::open(array('class' => 'form-horizontal')) !!}
         <div class="form-search">
             <div class="form-group">
-                <label class="col-xs-4 control-label">Field<span class="required">*</span></label>
+                <label class="col-xs-4 control-label">{!! trans('messages.admin_field') !!}<span class="required">*</span></label>
 
                 <div class="col-xs-5">
                     {!! Form::text('code',''
                         , array(
-                            'placeHolder' => 'Field Name'
+                            'placeHolder' => 'trans('messages.admin_field_name')'
                             , 'ng-model' => 'qa.answers.record.field'
                             , 'class' => 'form-control'
                             , 'ng-class' => "{ 'required-field' : qa.fields['code_ans'] }"
@@ -279,12 +277,12 @@
             </div>
 
             <div class="form-group">
-                <label class="col-xs-4 control-label">Count <span class="required">*</span></label>
+                <label class="col-xs-4 control-label">{!! trans('messages.admin_count') !!} <span class="required">*</span></label>
 
                 <div class="col-xs-5">
                     {!! Form::text('answer_text',''
                         , array(
-                            'placeHolder' => 'Count'
+                            'placeHolder' => 'trans('messages.admin_count')'
                             , 'ng-model' => 'qa.answers.record.count'
                             , 'class' => 'form-control'
                             , 'ng-class' => "{ 'required-field' : qa.fields['answer_text_ans'] }"
@@ -294,11 +292,10 @@
             </div>
 
             <div class="form-group">
-                <label class="control-label col-xs-4">Answer Image <span class="required">*</span></label>
+                <label class="control-label col-xs-4">{!! trans('messages.admin_answer_image') !!} <span class="required">*</span></label>
 
                 <div class="col-xs-5">
-                    <div class="btn btn-blue" ngf-select ngf-change="qa.uploadGraphImage($files, qa.answers.record)"> Choose
-                        Image...
+                    <div class="btn btn-blue" ngf-select ngf-change="qa.uploadGraphImage($files, qa.answers.record)"> {!! trans('messages.choose_image') !!}
                     </div>
                 </div>
 
@@ -310,9 +307,8 @@
             <div class="form-group" ng-if="qa.answers.record.uploaded">
                 <div class="col-xs-4"></div>
                 <div class="col-xs-5">
-                    <span class="col-xs-6 upload-label label label-info">Image Uploaded...</span>
-                    <a href="" class="control-label col-xs-6" ng-click="qa.viewAnswerImage(qa.answers.record)">View
-                        Image</a>
+                    <span class="col-xs-6 upload-label label label-info">{!! trans('messages.image_uploaded') !!}</span>
+                    <a href="" class="control-label col-xs-6" ng-click="qa.viewAnswerImage(qa.answers.record)">{!! trans('messages.view_image') !!}</a>
                 </div>
             </div>
 
@@ -323,19 +319,19 @@
                  && qa.answers.record.original_image_name != '0'">
                 <div class="control-label col-xs-4"></div>
                 <div class="col-xs-5">
-                    <a href="" ng-click="qa.viewAnswerImage(qa.answers.record)">View Image</a>
+                    <a href="" ng-click="qa.viewAnswerImage(qa.answers.record)">{!! trans('messages.view_image') !!}</a>
                 </div>
             </div>
 
             <div class="form-group">
                 <div class="btn-container col-xs-10 col-xs-offset-1" ng-if="qa.active_anslist">
-                    {!! Form::button('Add'
+                    {!! Form::button('trans('messages.add')'
                         , array(
                             'class' => 'btn btn-blue btn-medium'
                             , 'ng-click' => 'qa.addAnswer()'
                         )
                     ) !!}
-                    {!! Form::button('Clear'
+                    {!! Form::button('trans('messages.clear')'
                         , array(
                             'class' => 'btn btn-gold btn-medium'
                             , 'ng-click' => 'qa.clearAnswer()'
@@ -343,13 +339,13 @@
                     ) !!}
                 </div>
                 <div class="btn-container col-xs-10 col-xs-offset-1" ng-if="qa.active_ansedit">
-                    {!! Form::button('Update'
+                    {!! Form::button('trans('messages.update')'
                         , array(
                             'class' => 'btn btn-blue btn-medium'
                             , 'ng-click' => 'qa.updateAnswer()'
                         )
                     ) !!}
-                    {!! Form::button('Cancel'
+                    {!! Form::button('trans('messages.cancel')'
                         , array(
                             'class' => 'btn btn-gold btn-medium'
                             , 'ng-click' => 'qa.setAnsActive()'
@@ -364,7 +360,7 @@
     <div class="col-xs-12 table-container">
         <div class="list-container" ng-cloak>
             <div class="col-xs-6 title-mid">
-                Answer List
+                {!! trans('messages.admin_answer_list') !!}
             </div>
 
             <div class="col-xs-6 size-container">
@@ -388,16 +384,16 @@
             <table class="col-xs-12 table table-striped table-bordered">
                 <thead>
                 <tr>
-                    <th>Field</th>
-                    <th>Image</th>
-                    <th>Count</th>
-                    <th ng-if="qa.answers.records.answer.length">Actions</th>
+                    <th>{!! trans('messages.admin_field') !!}</th>
+                    <th>{!! trans('messages.image') !!}</th>
+                    <th>{!! trans('messages.admin_count') !!}</th>
+                    <th ng-if="qa.answers.records.answer.length">{!! trans('messages.action') !!}</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr ng-repeat="record in qa.answers.records.answer">
                     <td>{! record.field !}</td>
-                    <td><a href="" ng-click="qa.viewAnswerImage(record.image)">View Image</a></td>
+                    <td><a href="" ng-click="qa.viewAnswerImage(record.image)">{!! trans('messages.view_image') !!}</a></td>
                     <td>{! record.count !}</td>
                     <td ng-if="qa.answers.records.answer.length">
                         <div class="row">
@@ -414,12 +410,12 @@
                 </tr>
                 <tr class="odd" ng-if="!qa.answers.records.answer.length && !qa.table.loading">
                     <td valign="top" colspan="7">
-                        No records found
+                        {!! trans('messages.no_records_found') !!}
                     </td>
                 </tr>
                 <tr class="odd" ng-if="qa.table.loading">
                     <td valign="top" colspan="7">
-                        Loading...
+                        {!! trans('messages.loading') !!}
                     </td>
                 </tr>
                 </tbody>
@@ -458,12 +454,12 @@
         {!! Form::open(array('class' => 'form-horizontal')) !!}
         <div class="form-search">
             <div class="form-group">
-                <label class="col-xs-4 control-label">X Axis<span class="required">*</span></label>
+                <label class="col-xs-4 control-label">{!! trans('messages.admin_x_axis') !!}<span class="required">*</span></label>
 
                 <div class="col-xs-5">
                     {!! Form::text('code',''
                         , array(
-                            'placeHolder' => 'coordinate'
+                            'placeHolder' => 'trans('messages.admin_coordinate')'
                             , 'ng-model' => 'qa.answers.record.x'
                             , 'class' => 'form-control'
                             , 'ng-class' => "{ 'required-field' : qa.fields['code_ans'] }"
@@ -473,12 +469,12 @@
             </div>
 
             <div class="form-group">
-                <label class="col-xs-4 control-label">Y Axis<span class="required">*</span></label>
+                <label class="col-xs-4 control-label">{!! trans('messages.admin_y_axis') !!}<span class="required">*</span></label>
 
                 <div class="col-xs-5">
                     {!! Form::text('answer_text',''
                         , array(
-                            'placeHolder' => 'coordinate'
+                            'placeHolder' => 'trans('messages.admin_coordinate')'
                             , 'ng-model' => 'qa.answers.record.y'
                             , 'class' => 'form-control'
                             , 'ng-class' => "{ 'required-field' : qa.fields['answer_text_ans'] }"
@@ -495,20 +491,20 @@
                  && qa.answers.record.original_image_name != '0'">
                 <div class="control-label col-xs-4"></div>
                 <div class="col-xs-5">
-                    <a href="" ng-click="qa.viewAnswerImage(qa.answers.record)">View Image</a>
+                    <a href="" ng-click="qa.viewAnswerImage(qa.answers.record)">{!! trans('messages.view_image') !!}</a>
                 </div>
             </div>
 
 
             <div class="form-group">
                 <div class="btn-container col-xs-10 col-xs-offset-1" ng-if="qa.active_anslist && qa.answers.graph_records.answer.length == 0">
-                    {!! Form::button('Add'
+                    {!! Form::button('trans('messages.add')'
                         , array(
                             'class' => 'btn btn-blue btn-medium'
                             , 'ng-click' => 'qa.addAnswer()'
                         )
                     ) !!}
-                    {!! Form::button('Clear'
+                    {!! Form::button('trans('messages.clear')'
                         , array(
                             'class' => 'btn btn-gold btn-medium'
                             , 'ng-click' => 'qa.clearAnswer()'
@@ -516,13 +512,13 @@
                     ) !!}
                 </div>
                 <div class="btn-container col-xs-10 col-xs-offset-1" ng-if="qa.active_ansedit && qa.answers.graph_records.answer.length != 0">
-                    {!! Form::button('Update'
+                    {!! Form::button('trans('messages.update')'
                         , array(
                             'class' => 'btn btn-blue btn-medium'
                             , 'ng-click' => 'qa.updateAnswer()'
                         )
                     ) !!}
-                    {!! Form::button('Cancel'
+                    {!! Form::button('trans('messages.cancel')'
                         , array(
                             'class' => 'btn btn-gold btn-medium'
                             , 'ng-click' => 'qa.setAnsActive()'
@@ -537,7 +533,7 @@
     <div class="col-xs-12 table-container">
         <div class="list-container" ng-cloak>
             <div class="col-xs-6 title-mid">
-                Answer List
+                {!! trans('messages.admin_answer_list') !!}
             </div>
 
             <div class="col-xs-6 size-container">
@@ -561,9 +557,9 @@
             <table class="col-xs-12 table table-striped table-bordered">
                 <thead>
                 <tr>
-                    <th>X Coordinates</th>
-                    <th>Y Coordinates</th>
-                    <th ng-if="qa.record.answer.length">Actions</th>
+                    <th>{!! trans('messages.admin_x_coordinates') !!}</th>
+                    <th>{!! trans('messages.admin_y_coordinates') !!}</th>
+                    <th ng-if="qa.record.answer.length">{!! trans('messages.action') !!}</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -585,12 +581,12 @@
                 </tr>
                 <tr class="odd" ng-if="!qa.answers.graph_records.answer.length && !qa.table.loading">
                     <td valign="top" colspan="7">
-                        No records found
+                        {!! trans('messages.no_records_found') !!}
                     </td>
                 </tr>
                 <tr class="odd" ng-if="qa.table.loading">
                     <td valign="top" colspan="7">
-                        Loading...
+                        {!! trans('messages.loading') !!}
                     </td>
                 </tr>
                 </tbody>
@@ -618,14 +614,14 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                Delete Answer
+                {!! trans('messages.admin_delete_answer') !!}
             </div>
             <div class="modal-body">
-                Are you sure you want to delete this Answer?
+                {!! trans('messages.admin_delete_answer_msg') !!}
             </div>
             <div class="modal-footer">
                 <div class="btncon col-md-8 col-md-offset-4 pull-left">
-                    {!! Form::button('Yes'
+                    {!! Form::button('trans('messages.yes')'
                         , array(
                             'class' => 'btn btn-blue btn-medium'
                             , 'ng-click' => 'qa.deleteAnswer()'
@@ -633,7 +629,7 @@
                         )
                     ) !!}
 
-                    {!! Form::button('No'
+                    {!! Form::button('trans('messages.no')'
                         , array(
                             'class' => 'btn btn-gold btn-medium'
                             , 'data-dismiss' => 'modal'
