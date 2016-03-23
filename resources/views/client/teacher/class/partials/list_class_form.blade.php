@@ -1,7 +1,7 @@
 <div ng-if="class.active_list">
 	<div class="content-title">
 		<div class="title-main-content">
-			<span>Class Management</span>
+			<span>{!! trans('messages.class_management') !!}</span>
 		</div>
 	</div>
 
@@ -19,7 +19,7 @@
 
 	<div class="col-xs-12 search-container">
 		<div class="title-mid">
-			Search
+			{!! trans('messages.search') !!}
 		</div>
 
 		<div class="form-search">
@@ -36,7 +36,7 @@
 							, array(
 								'class' => 'form-control'
 								, 'ng-model' => 'class.search.name'
-								, 'placeholder' => 'Class Name'
+								, 'placeholder' => 'trans('messages.class_name')'
 								, 'autocomplete' => 'off'
 							)
 						) !!}
@@ -47,12 +47,12 @@
 	                    	class="form-control" 
 	                    	ng-disabled="!class.grades.length"
 	                    	ng-model="class.search.grade_id">
-	                        <option value="">-- Select Level --</option>
+	                        <option value="">{!! trans('messages.select_level') !!}</option>
 	                        <option ng-repeat="grade in class.grades" ng-value="grade.id">{! grade.name !}</option>
 	                    </select>
 	                </div>
 					<div class="col-xs-2">
-						{!! Form::button('Search', 
+						{!! Form::button('trans('messages.search')', 
 							array(
 								'class' => 'btn btn-blue'
 								, 'ng-click' => 'class.searchFnc($event)'
@@ -60,7 +60,7 @@
 						) !!}
 					</div>
 					<div class="col-xs-2">
-						{!! Form::button('Clear', 
+						{!! Form::button('trans('messages.clear')', 
 							array(
 								'class' => 'btn btn-gold'
 								, 'ng-click' => 'class.clear()'
@@ -75,7 +75,7 @@
 	<div class="col-xs-12 table-container" ng-init="class.list()">
 		<div class="list-container" ng-cloak>
 			<div class="col-xs-6 title-mid">
-				Class List
+				{!! trans('messages.class_list') !!}
 			</div>
 
 			<div class="col-xs-6 size-container">
@@ -99,11 +99,11 @@
 			<table class="col-xs-12 table table-striped table-bordered">
 			<thead>
 		        <tr>
-		            <th>Grade</th>
-		            <th>Class Name</th>
-		            <th>No. of Seats Taken</th>
-		            <th>No. of seats Enrolled</th>
-		            <th ng-if="class.records.length">Action</th>
+		            <th>{!! trans('messages.grade') !!}</th>
+		            <th>{!! trans('messages.class_name') !!}</th>
+		            <th>{!! trans('messages.no_of_seats_taken') !!}</th>
+		            <th>{!! trans('messages.no_of_seats_enrolled') !!}</th>
+		            <th ng-if="class.records.length">{!! trans('messages.action') !!}</th>
 		        </tr>
 	        </thead>
 	        <tbody>
@@ -128,12 +128,12 @@
         		</tr>
         		<tr class="odd" ng-if="!class.records.length && !class.table.loading">
 		        	<td valign="top" colspan="4">
-		        		No records found
+		        		{!! trans('messages.no_records_found') !!}
 		        	</td>
 		        </tr>
 		        <tr class="odd" ng-if="class.table.loading">
 		        	<td valign="top" colspan="4">
-		        		Loading...
+		        		{!! trans('messages.loading') !!}
 		        	</td>
 		        </tr>
 	        	</tbody>
