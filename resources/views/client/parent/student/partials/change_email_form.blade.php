@@ -1,7 +1,7 @@
 <div ng-if="student.active_change">
 	<div class="content-title">
 		<div class="title-main-content">
-			<span>Change Student Email</span>
+			<span>{!! trans('messages.change_student_email') !!}</span>
 		</div>
 	</div>
 
@@ -17,12 +17,12 @@
 		{!! Form::open(['class' => 'form-horizontal', 'id' => 'add_student_form']) !!}
 		<fieldset>
 			<div class="form-group">
-				<label class="control-label col-xs-3">Current Email <span class="required">*</span></label>
+				<label class="control-label col-xs-3">{!! trans('messages.current_email') !!} <span class="required">*</span></label>
 				<div class="col-xs-5">
 					{!! Form::text('current_email', ''
 						, array(
 							'class' => 'form-control'
-							, 'placeholder' => 'Current Email Address'
+							, 'placeholder' => 'trans('messages.current_email')'
 							, 'ng-model' => 'student.change.current_email'
 							, 'ng-model-options' => "{ debounce: {'default' : 1000} }"
 							, 'ng-class' => "{ 'required-field' : student.fields['current_email'] || student.fields['email'] }"
@@ -37,12 +37,12 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-xs-3">New Email <span class="required">*</span></label>
+				<label class="control-label col-xs-3">{!! trans('messages.new_email') !!} <span class="required">*</span></label>
 				<div class="col-xs-5">
 					{!! Form::text('new_email', ''
 						, array(
 							'class' => 'form-control'
-							, 'placeholder' => 'New Email Address'
+							, 'placeholder' => 'trans('messages.new_email')'
 							, 'ng-model' => 'student.change.new_email'
 							, 'ng-model-options' => "{ debounce: {'default' : 1000} }"
 							, 'ng-class' => "{ 'required-field' : student.fields['new_email'] }"
@@ -57,12 +57,12 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-xs-3">Confirm Email <span class="required">*</span></label>
+				<label class="control-label col-xs-3">{!! trans('messages.confirm_email') !!} <span class="required">*</span></label>
 				<div class="col-xs-5">
 					{!! Form::text('confirm_email', ''
 						, array(
 							'class' => 'form-control'
-							, 'placeholder' => 'Confirm Email Address'
+							, 'placeholder' => 'trans('messages.confirm_email')'
 							, 'ng-model' => 'student.change.confirm_email'
 							, 'ng-model-options' => "{ debounce: {'default' : 1000} }"
 							, 'ng-class' => "{ 'required-field' : student.fields['confirm_email'] || student.fields['new_email'] }"
@@ -75,27 +75,27 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-xs-3">Password <span class="required">*</span></label>
+				<label class="control-label col-xs-3">{!! trans('messages.password') !!} <span class="required">*</span></label>
 				<div class="col-xs-5">
 					{!! Form::password('password',
 						[
 							'class' => 'form-control'
 							, 'ng-model' => 'student.change.password'
 							, 'ng-class' => "{ 'required-field' : student.fields['password'] }"
-							, 'placeHolder' => 'Password'
+							, 'placeHolder' => 'trans('messages.password')'
 						]
 					) !!}
 				</div>
 			</div>
 			<div class="form-group">
 				<div class="btn-container col-xs-8 col-xs-offset-1">
-					{!! Form::button('Change'
+					{!! Form::button('trans('messages.change')'
 						, array(
 							'class' => 'btn btn-blue btn-medium'
 							, 'ng-click' => 'student.changeEmail()'
 						)
 					) !!}
-					{!! Form::button('Cancel'
+					{!! Form::button('trans('messages.cancel')'
 						, array(
 							'class' => 'btn btn-gold btn-medium'
 							, 'ng-click' => "student.setActive(futureed.ACTIVE_VIEW, student.record.id)"
