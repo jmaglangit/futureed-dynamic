@@ -4,11 +4,11 @@
 
     <div ng-if="!dashboard.active_report" class="dashboard-content" ng-cloak>
 
-        <p>To get started on using Future Lesson, you need to invite a
-            <a href="{!! route('client.principal.teacher.index') !!}"> teacher</a> first to manage your classes.</p>
+        <p>{!! trans('messages.client_principal_dashboard_msg') !!}
+            <a href="{!! route('client.principal.teacher.index') !!}"> {!! trans('messages.teacher') !!}</a> {!! trans('messages.client_principal_dashboard_msg2') !!}</p>
 
-        <p>If you have already invited a Teacher, you need to go to the
-            <a href="{!! route('client.principal.payment.index') !!}"> payment</a> to buy seats for your classes.</p>
+        <p>{!! trans('messages.client_principal_dashboard_msg3') !!}
+            <a href="{!! route('client.principal.payment.index') !!}"> {!! trans('messages.payment') !!}</a> {!! trans('messages.client_principal_dashboard_msg4') !!}</p>
     </div>
 
     {{--Reports--}}
@@ -17,7 +17,7 @@
             <div ng-if="dashboard.export" class="col-xs-12">
                 <div class="btn-group export-buttons pull-right">
                     <button class="btn btn-blue" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-file-text-o"></i> Export
+                        <i class="fa fa-file-text-o"></i> {!! trans('messages.export') !!}
                     </button>
                     <ul class="dropdown-menu">
                         <li><a href="{! dashboard.schoolDownload !}" ng-click="dashboard.exportReport('pdf')">PDF</a></li>
@@ -31,10 +31,10 @@
             <ul class="nav nav-tabs report-nav" role="tablist">
                 <li class="col-xs-6 active"><a ng-click="dashboard.setActive('school')" aria-controls="home" role="tab"
                                                data-toggle="tab"><i
-                                class="fa fa-line-chart"></i> Overall School Progress</a></li>
+                                class="fa fa-line-chart"></i> {!! trans('messages.overall_school_progress') !!}</a></li>
                 <li class="col-xs-6"><a ng-click="dashboard.setActive('school_teacher')" aria-controls="home" role="tab"
                                         data-toggle="tab"><i
-                                class="fa fa-tasks"></i> Teacher Comparison Progress</a></li>
+                                class="fa fa-tasks"></i> {!! trans('messages.teacher_comparison_progress') !!}</a></li>
             </ul>
 
 
@@ -45,8 +45,8 @@
                     <h3><i class="fa fa-th-list"></i> {! dashboard.report.column_header.skills_watch !}</h3>
                     <table class="table table-bordered">
                         <tr class="magenta">
-                            <th class="col-xs-4">Subject</th>
-                            <th class="col-xs-3">Progress</th>
+                            <th class="col-xs-4">{!! trans('messages.subject') !!}</th>
+                            <th class="col-xs-3">{!! trans('messages.progress') !!}</th>
                         </tr>
                         <tr ng-if="dashboard.report_active_skill && dashboard.report.rows.skills_watch.highest_skill">
                             <td>{! dashboard.report.rows.skills_watch.highest_skill.subject_name !}</td>
@@ -59,7 +59,7 @@
                             </td>
                         </tr>
                         <tr ng-if="!dashboard.report_active_skill">
-                            <td colspan="2"><p>No result...</p></td>
+                            <td colspan="2"><p>{!! trans('messages.no_records_found') !!}</p></td>
                         </tr>
 
                     </table>
@@ -70,8 +70,8 @@
                     <h3><i class="fa fa-area-chart"></i> {! dashboard.report.column_header.class_watch !}</h3>
                     <table class="table table-bordered">
                         <tr class="magenta">
-                            <th class="col-xs-4">Teacher</th>
-                            <th class="col-xs-3">Progress</th>
+                            <th class="col-xs-4">{!! trans('messages.teacher') !!}</th>
+                            <th class="col-xs-3">{!! trans('messages.progress') !!}</th>
                         </tr>
                         <tr ng-if="dashboard.report_active_class &&  dashboard.report.rows.class_watch.highest_class">
                             <td>Teacher {! dashboard.report.rows.class_watch.highest_class.first_name
@@ -86,7 +86,7 @@
                             <td>{! dashboard.report.rows.class_watch.lowest_class.percent_progress !}%</td>
                         </tr>
                         <tr ng-if="!dashboard.report_active_class">
-                            <td colspan="2"><p>No result...</p></td>
+                            <td colspan="2"><p>{!! trans('messages.no_records_found') !!}</p></td>
                         </tr>
                     </table>
                 </div>
@@ -95,8 +95,8 @@
                     <h3><i class="fa fa-users"></i> {! dashboard.report.column_header.student_watch !}</h3>
                     <table class="table table-bordered">
                         <tr class="magenta">
-                            <th class="col-xs-4">Student</th>
-                            <th class="col-xs-3">Status</th>
+                            <th class="col-xs-4">{!! trans('messages.student') !!}</th>
+                            <th class="col-xs-3">{!! trans('messages.status') !!}</th>
                         </tr>
                         <tr ng-if="dashboard.report_active_student"
                             ng-repeat="student in dashboard.report.rows.student_watch">
@@ -104,21 +104,21 @@
                             <td>{! student.progress !}</td>
                         </tr>
                         <tr ng-if="!dashboard.report_active_student">
-                            <td colspan="2"><p>No result...</p></td>
+                            <td colspan="2"><p>{!! trans('messages.no_records_found') !!}</p></td>
                         </tr>
                     </table>
                 </div>
                 {{--Highest Lowest Scorers--}}
                 <div>
-                    <h3><i class="fa fa-bar-chart"></i>Scores</h3>
+                    <h3><i class="fa fa-bar-chart"></i>{!! trans('messages.scores') !!}</h3>
                     <table class="table table-bordered">
                         <tr class="magenta">
                             <th class="report-empty-column"></th>
-                            <th>Student</th>
-                            <th>Teacher</th>
+                            <th>{!! trans('messages.student') !!}</th>
+                            <th>{!! trans('messages.teacher') !!}</th>
                         </tr>
                         <tr class="magenta-row">
-                            <th>Highest Score</th>
+                            <th>{!! trans('messages.highest_score') !!}</th>
                             <td>{! dashboard.report.rows.highest_score.student_first_name +' '+
                                 dashboard.report.rows.highest_score.student_first_name !}
                             </td>
@@ -127,7 +127,7 @@
                             </td>
                         </tr>
                         <tr class="magenta-row">
-                            <th>Lowest Score</th>
+                            <th>{!! trans('messages.lowest_score') !!}</th>
                             <td>{! dashboard.report.rows.lowest_score.student_first_name +' '+
                                 dashboard.report.rows.lowest_score.student_first_name !}
                             </td>
@@ -143,14 +143,14 @@
             <div ng-if="dashboard.active_school_teacher">
 
                 <div>
-                    <h3><i class="fa fa-file-text"></i> Class Progress Report</h3>
+                    <h3><i class="fa fa-file-text"></i> {!! trans('messages.class_progress_report') !!}</h3>
                     <table class="table table-bordered">
                         <tr class="magenta">
                             <th class="col-xs-4">{! dashboard.teacher_report.column_header.teacher_list !}</th>
                             <th class="col-xs-3">{! dashboard.teacher_report.column_header.progress !}</th>
                         </tr>
                         <tr ng-if="dashboard.teacher_report.rows" ng-repeat=" teacher in dashboard.teacher_report.rows">
-                            <td>Teacher {! teacher.first_name +' '+ teacher.last_name !}</td>
+                            <td>{!! trans('messages.teacher') !!} {! teacher.first_name +' '+ teacher.last_name !}</td>
                             <td class="report-progress">
                                 <div class="report-progress-bar report-progress-bar-success"
                                      ng-style="{ 'width' : teacher.percent_progress + '%' }">{! teacher.percent_progress
@@ -160,7 +160,7 @@
 
                         </tr>
                         <tr ng-if="!dashboard.teacher_report.rows">
-                            <td colspan="2"><p>No result...</p></td>
+                            <td colspan="2"><p>{!! trans('messages.no_records_found') !!}</p></td>
                         </tr>
                     </table>
                 </div>
