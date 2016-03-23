@@ -1,7 +1,7 @@
 <div ng-if="student.active_reward">
 	<div class="content-title">
 		<div class="title-main-content">
-			<span>Rewards</span>
+			<span>{!! trans('messages.rewards') !!}</span>
 		</div>
 	</div>
 
@@ -18,7 +18,7 @@
     </div>
     <div class="table-container" ng-cloak>
 		<div class="title-mid">
-			Point History
+			{!! trans('messages.admin_point_history') !!}
 		</div>
 		<div class="size-container">
             {!! Form::select('size'
@@ -41,11 +41,11 @@
 		<table class="table table-striped table-bordered">
 			<thead>
 		        <tr>
-		            <th>Points</th>
-		            <th>Event</th>
-		            <th>Description</th>
-		            <th>Date Earned</th>
-		            <th ng-if="student.points.length">Actions</th>
+		            <th>{!! trans('messages.points') !!}</th>
+		            <th>{!! trans('messages.event') !!}</th>
+		            <th>{!! trans('messages.description') !!}</th>
+		            <th>{!! trans('messages.admin_date_earned') !!}</th>
+		            <th ng-if="student.points.length">{!! trans('messages.action') !!}</th>
 		        </tr>
 		    </thead>
 
@@ -65,12 +65,12 @@
 	        </tr>
 	        <tr class="odd" ng-if="!student.points.length && !student.table.loading">
 	        	<td valign="top" colspan="7">
-	        		No records found
+	        		{!! trans('messages.no_records_found') !!}
 	        	</td>
 	        </tr>
 	        <tr class="odd" ng-if="student.table.loading">
 	        	<td valign="top" colspan="7">
-	        		Loading...
+	        		{!! trans('messages.loading') !!}
 	        	</td>
 	        </tr>
 	        </tbody>
@@ -92,7 +92,7 @@
 	</div>
 	<div class="table-container col-xs-12" ng-cloak>
 		<div class="title-mid">
-			Badges
+			{!! trans('messages.badge') !!}
 		</div>
 		<div class="size-container">
             {!! Form::select('size'
@@ -115,9 +115,9 @@
 		<table class="table table-striped table-bordered">
 			<thead>
 		        <tr>
-		            <th>Badge name</th>
-		            <th>Date Earned</th>
-		            <th ng-if="student.badges.length">Actions</th>
+		            <th>{!! trans('messages.admin_badge_name') !!}</th>
+		            <th>{!! trans('messages.admin_date_earned') !!}</th>
+		            <th ng-if="student.badges.length">{!! trans('messages.action') !!}</th>
 		        </tr>
 		    </thead>
 
@@ -138,12 +138,12 @@
 	        </tr>
 	        <tr class="odd" ng-if="!student.badges.length && !student.table.loading">
 	        	<td valign="top" colspan="7">
-	        		No records found
+	        		{!! trans('messages.no_records_found') !!}
 	        	</td>
 	        </tr>
 	        <tr class="odd" ng-if="student.table.loading">
 	        	<td valign="top" colspan="7">
-	        		Loading...
+	        		{!! trans('messages.loading') !!}
 	        	</td>
 	        </tr>
 	        </tbody>
@@ -164,7 +164,7 @@
 		</div>
 	</div>
 	<div class="col-xs-12 btn-container">
-		{!! Form::button('Back'
+		{!! Form::button('trans('messages.back')'
     		, array(
     			'class' => 'btn btn-gold btn-small pull-right'
     			, 'ng-click' => "student.setActive('view', student.record.id)"
