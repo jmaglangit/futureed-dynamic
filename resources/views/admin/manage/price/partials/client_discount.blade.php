@@ -2,7 +2,7 @@
 	<div class="col-xs-12 search-container" ng-if="discount.active_add">
 		<div class="col-xs-12">
 			<div class="title-mid">
-				Add Client Discount
+				{!! trans('messages.admin_add_client_discount') !!}
 			</div>
 		</div>
 	</div>
@@ -10,7 +10,7 @@
 	<div class="col-xs-12 search-container" ng-if="discount.active_edit">
 		<div class="col-xs-12">
 			<div class="title-mid">
-				Update Client Discount
+				{!! trans('messages.admin_update_client_discount') !!}
 			</div>
 		</div>
 	</div>
@@ -31,13 +31,13 @@
 		{!! Form::open(['class'=> 'form-horizontal']) !!}
 			<fieldset>
 				<div class="form-group">
-					<label class="col-xs-3 control-label">Name <span class="required">*</span></label>
+					<label class="col-xs-3 control-label">{!! trans('messages.name') !!} <span class="required">*</span></label>
 					<div class="col-xs-5">
 						{!! Form::text('name', '', 
 							[
 								'class' => 'form-control'
 								, 'ng-model' => 'discount.record.name'
-								, 'placeholder' => 'Name'
+								, 'placeholder' => 'trans('messages.name')'
 								, 'autocomplete' => 'off'
 								, 'ng-disabled' => 'discount.active_edit'
 								, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
@@ -59,7 +59,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-xs-3 control-label">Email</label>
+					<label class="col-xs-3 control-label">{!! trans('messages.email') !!}</label>
 					<div class="col-xs-5">
 						{!! Form::text('email', '', 
 							[	
@@ -67,19 +67,19 @@
 								, 'ng-disabled' => 'true'
 								, 'ng-model' => 'discount.record.email'
 								, 'ng-class' => "{ 'required-field' : discount.fields['email'] }"
-								, 'placeholder' => 'Email Address'
+								, 'placeholder' => 'trans('messages.email_address')'
 							]) 
 						!!}
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-xs-3 control-label">Percentage <span class="required">*</span></label>
+					<label class="col-xs-3 control-label">{!! trans('messages.admin_percentage') !!} <span class="required">*</span></label>
 					<div class="col-xs-5">
 						<div class="input-group">
 							{!! Form::text('percentage', '', 
 								[	
 									'class' => 'form-control' 
-									, 'placeholder' => 'Discount Percentage'
+									, 'placeholder' => 'trans('messages.admin_discount_percentage')'
 									, 'ng-model' => 'discount.record.percentage'
 									, 'ng-class' => "{ 'required-field' : discount.fields['percentage'] }"
 								]) 
@@ -89,7 +89,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-xs-3 control-label">Status <span class="required">*</span></label>
+					<label class="col-xs-3 control-label">{!! trans('messages.status') !!} <span class="required">*</span></label>
 					<div class="col-xs-5">
 						<div class="col-xs-6 checkbox">	                				
 							<label>
@@ -99,7 +99,7 @@
 									'ng-model'=> 'discount.record.status'
 								]) 
 							!!}
-							<span class="lbl padding-8">Enabled</span>
+							<span class="lbl padding-8">{!! trans('messages.enabled') !!}</span>
 							</label>
 						</div>
 						<div class="col-xs-6 checkbox">
@@ -110,7 +110,7 @@
 									'ng-model'=> 'discount.record.status'
 								]) 
 							!!}
-							<span class="lbl padding-8">Disabled</span>
+							<span class="lbl padding-8">{!! trans('messages.disabled') !!}</span>
 							</label>
 						</div>
 					</div>
@@ -119,7 +119,7 @@
 				<fieldset>
 					<div class="form-group">
 						<div class="btn-container col-xs-9 col-xs-offset-1">
-							{!! Form::button('Update'
+							{!! Form::button('trans('messages.update')'
 								, array(
 									'class' => 'btn btn-blue btn-medium'
 									, 'ng-click' => "discount.update()"
@@ -127,7 +127,7 @@
 								)
 							) !!}
 
-							{!! Form::button('Add Client Discount'
+							{!! Form::button('trans('messages.admin_add_client_discount')'
 								, array(
 									'class' => 'btn btn-blue btn-medium'
 									, 'ng-click' => "discount.add()"
@@ -135,7 +135,7 @@
 								)
 							) !!}
 
-							{!! Form::button('Cancel'
+							{!! Form::button('trans('messages.cancel')'
 								, array(
 									'class' => 'btn btn-gold btn-medium'
 									, 'ng-click' => "discount.setActive()"
@@ -151,12 +151,12 @@
 			<button class="btn btn-blue btn-semi-medium" 
 				ng-click="discount.setActive(futureed.ACTIVE_ADD)"
 				ng-if="!(discount.active_add || discount.active_edit)">
-				<span><i class="fa fa-plus-square"></i></span> Add Client Discount
+				<span><i class="fa fa-plus-square"></i></span> {!! trans('messages.admin_add_client_discount') !!}
 			</button>
 
 			<div class="list-container" ng-cloak>
 				<div class="col-xs-6 title-mid">
-					Client Discount List
+					{!! trans('messages.admin_client_discount_list') !!}
 				</div>
 
 				<div class="col-xs-6 size-container">
@@ -180,11 +180,11 @@
 				<table class="col-xs-12 table table-striped table-bordered">
 					<thead>
 						<tr>
-							<th>Name</th>
-							<th>Email</th>
-							<th>Role</th>
-							<th>Discount</th>
-							<th ng-if="discount.records.length">Action</th>
+							<th>{!! trans('messages.name') !!}</th>
+							<th>{!! trans('messages.email') !!}</th>
+							<th>{!! trans('messages.role') !!}</th>
+							<th>{!! trans('messages.discount') !!}</th>
+							<th ng-if="discount.records.length">{!! trans('messages.action') !!}</th>
 						</tr>
 						</thead>
 					<tbody>
@@ -213,7 +213,7 @@
 						</tr>
 						<tr class="odd" ng-if="!discount.records.length">
 							<td valign="top" colspan="5">
-								No records found
+								{!! trans('messages.no_records_found') !!}
 							</td>
 						</tr>
 					</tbody>
