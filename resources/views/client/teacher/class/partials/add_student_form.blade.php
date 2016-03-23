@@ -1,7 +1,7 @@
 <div ng-if="class.active_add_student">
 	<div class="content-title">
 		<div class="title-main-content">
-			<span>Add Student</span>
+			<span>{!! trans('messages.add_student') !!}</span>
 		</div>
 	</div>
 
@@ -28,7 +28,7 @@
                     , 'ng-change' => 'class.clearData()'
                 )
             ) !!}
-            <span class="lbl padding-8">New Student</span>
+            <span class="lbl padding-8">{!! trans('messages.new_student') !!}</span>
             </label>
         </div>
         <div>
@@ -41,7 +41,7 @@
                     , 'ng-change' => 'class.clearData()'
                 )
             ) !!}
-            <span class="lbl padding-8">Existing Student</span>
+            <span class="lbl padding-8">{!! trans('messages.existing_student') !!}</span>
             </label>
         </div>
 	</div>
@@ -55,15 +55,15 @@
 			]
 		) !!}
             <fieldset>
-                <legend>User Credential</legend>
+                <legend>{!! trans('messages.user_credentials') !!}</legend>
                 <div class="form-group">
-                    <label for="" class="col-md-3 control-label">Email Address <span class="required">*</span></label>
+                    <label for="" class="col-md-3 control-label">{!! trans('messages.email_address') !!} <span class="required">*</span></label>
                     <div class="col-xs-4">
                         {!! Form::text('email', ''
                             , array(
                                 'class' => 'form-control'
                                 , 'ng-model' => 'class.add.email'
-                                , 'placeholder' => 'Email Address'
+                                , 'placeholder' => 'trans('messages.email_address')'
                                 , 'ng-class' => "{ 'required-field' : class.fields['email'] }"
                                 , 'autocomplete' => 'off'
                             )
@@ -73,14 +73,14 @@
             </fieldset>
             <fieldset>
                 <div class="btn-container col-xs-5 col-xs-offset-2">
-                    {!! Form::button('Add Student'
+                    {!! Form::button('trans('messages.add_student')'
                         , array(
                             'class' => 'btn btn-blue btn-medium'
                             , 'ng-click' => 'class.addExistingStudent()'
                         )
                     ) !!}
 
-                    {!! Form::button('Cancel'
+                    {!! Form::button('trans('messages.cancel')'
                         , array(
                             'class' => 'btn btn-gold btn-medium'
                             , 'ng-click' => "class.setActive('view', class.record.id)"
@@ -100,14 +100,14 @@
 		) !!}
 		
 		<fieldset>
-            <legend>User Credentials</legend>
+            <legend>{!! trans('messages.user_credentials') !!}</legend>
             <div class="form-group">
-                <label for="" class="col-md-3 control-label">Username <span class="required">*</span></label>
+                <label for="" class="col-md-3 control-label">{!! trans('messages.username') !!} <span class="required">*</span></label>
                 <div class="col-md-5">
                     {!! Form::text('username', ''
                         , array(
                             'class' => 'form-control'
-                            , 'placeholder' => 'Username' 
+                            , 'placeholder' => 'trans('messages.username')' 
                             , 'ng-model' => 'class.add.username'
                             , 'ng-model-options' => "{ debounce : { 'default' : 1000 } }"
                             , 'ng-class' => "{ 'required-field' : class.fields['username'] }"
@@ -123,12 +123,12 @@
                 </div>
             </div> 
             <div class="form-group">
-                <label for="" class="col-md-3 control-label">Email Address <span class="required">*</span></label>
+                <label for="" class="col-md-3 control-label">{!! trans('messages.email_address') !!} <span class="required">*</span></label>
                 <div class="col-md-5">
                     {!! Form::text('email', ''
                         , array(
                             'class' => 'form-control'
-                            , 'placeholder' => 'Email Address' 
+                            , 'placeholder' => 'trans('messages.email_address')' 
                             , 'ng-model' => 'class.add.email'
                             , 'ng-model-options' => "{ debounce : { 'default' : 1000 } }"
                             , 'ng-class' => "{ 'required-field' : class.fields['email'] }"
@@ -145,15 +145,15 @@
             </div>
         </fieldset>
         <fieldset>
-            <legend>Personal Information</legend>
+            <legend>{!! trans('messages.personal_info') !!}</legend>
             <div class="form-group">
-                <label for="" class="col-md-3 control-label">First Name <span class="required">*</span></label>
+                <label for="" class="col-md-3 control-label">{!! trans('messages.first_name') !!} <span class="required">*</span></label>
                 <div class="col-md-5">
                     {!! Form::text('first_name', ''
                         , array(
                             'class' => 'form-control'
                             , 'ng-class' => "{ 'required-field' : class.fields['first_name'] }"
-                            , 'placeholder' => 'First Name' 
+                            , 'placeholder' => 'trans('messages.first_name')' 
                             , 'ng-model' => 'class.add.first_name'
                             , 'autocomplete' => 'off'
                         )
@@ -161,13 +161,13 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="" class="col-md-3 control-label">Last Name <span class="required">*</span></label>
+                <label for="" class="col-md-3 control-label">{!! trans('messages.last_name') !!} <span class="required">*</span></label>
                 <div class="col-md-5">
                     {!! Form::text('last_name', ''
                         , array(
                             'class' => 'form-control'
                             , 'ng-class' => "{ 'required-field' : class.fields['last_name'] }"
-                            , 'placeholder' => 'Last Name' 
+                            , 'placeholder' => 'trans('messages.last_name')' 
                             , 'ng-model' => 'class.add.last_name'
                             , 'autocomplete' => 'off'
                         )
@@ -175,13 +175,13 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="" class="col-md-3 control-label">Gender <span class="required">*</span></label>
+                <label for="" class="col-md-3 control-label">{!! trans('messages.gender') !!} <span class="required">*</span></label>
                 <div class="col-md-5">
                     {!! Form::select('gender'
                         , array(
-                            '' => '-- Select Gender --'
-                            , 'male' => 'Male'
-                            , 'female' => 'Female')
+                            '' => 'trans('messages.select_gender')'
+                            , 'male' => 'trans('messages.male')'
+                            , 'female' => 'trans('messages.female')')
                         , ''
                         , array(
                             'class' => 'form-control'
@@ -192,18 +192,18 @@
                 </div>
             </div>  
             <div class="form-group">
-                <label class="col-md-3 control-label">Birthday <span class="required">*</span></label>
+                <label class="col-md-3 control-label">{!! trans('messages.birthday') !!} <span class="required">*</span></label>
                 <div class="col-xs-6">
                     <input type="hidden" id="birth_date" ng-init="class.setDropdown()">
                 </div>
             </div> 
             <div class="form-group">
-                <label for="" class="col-md-3 control-label">City <span class="required">*</span></label>
+                <label for="" class="col-md-3 control-label">{!! trans('messages.city') !!} <span class="required">*</span></label>
                 <div class="col-md-5">
                     {!! Form::text('city', ''
                         , array(
                             'class' => 'form-control'
-                            , 'placeholder' => 'City' 
+                            , 'placeholder' => 'trans('messages.city')' 
                             , 'ng-class' => "{ 'required-field' : class.fields['city'] }"
                             , 'ng-model' => 'class.add.city'
                         )
@@ -211,12 +211,12 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="" class="col-md-3 control-label">State</label>
+                <label for="" class="col-md-3 control-label">{!! trans('messages.state') !!}</label>
                 <div class="col-md-5">
                     {!! Form::text('state', ''
                         , array(
                             'class' => 'form-control'
-                            , 'placeholder' => 'State' 
+                            , 'placeholder' => 'trans('messages.state')' 
                             , 'ng-class' => "{ 'required-field' : class.fields['state'] }"
                             , 'ng-model' => 'class.add.state'
                         )
@@ -224,19 +224,19 @@
                 </div>
             </div>
             <div class="form-group" ng-init="getCountries()">
-                <label for="" class="col-md-3 control-label">Country <span class="required">*</span></label>
+                <label for="" class="col-md-3 control-label">{!! trans('messages.country') !!} <span class="required">*</span></label>
                 <div class="col-md-5">
                     <select name="country_id" class="form-control" ng-disabled="true" ng-class="{ 'required-field' : class.fields['country'] }" ng-model="class.add.country_id" ng-change="getGrades(reg.country_id">
-                        <option ng-selected="class.add.country_id == futureed.FALSE" value="">-- Select Country --</option>
+                        <option ng-selected="class.add.country_id == futureed.FALSE" value="">{!! trans('messages.select_country') !!}</option>
                         <option ng-selected="class.add.country_id == country.id" ng-repeat="country in countries" ng-value="country.id">{! country.name!}</option>
                     </select>
                 </div>
             </div>
         </fieldset>
         <fieldset>
-            <legend>School Information</legend>
+            <legend>{!! trans('messages.school_info') !!}</legend>
             <div class="form-group">
-                <label for="" class="col-md-3 control-label">School Name <span class="required">*</span></label>
+                <label for="" class="col-md-3 control-label">{!! trans('messages.school_name') !!} <span class="required">*</span></label>
                 <div class="col-md-5">
                     {!! Form::text('school_name', ''
                         , array(
@@ -249,11 +249,11 @@
                 </div>
             </div>
             <div class="form-group">
-                <label for="" class="col-md-3 control-label">School level <span class="required">*</span></label>
+                <label for="" class="col-md-3 control-label">{!! trans('messages.school_level') !!} <span class="required">*</span></label>
 
                 <div class="col-md-5 nullable" ng-init="class.getGradeLevel(class.add.country_id)">
                     <select name="grade_code" class="form-control" ng-disabled="true" ng-class="{ 'required-field' : class.fields['grade_code'] }" ng-model="class.add.grade_codse">
-                        <option value="">-- Select Level --</option>
+                        <option value="">{!! trans('messages.select_level') !!}</option>
                         <option ng-selected="class.add.grade_code == grade.code" ng-repeat="grade in class.grades" ng-value="grade.code">{! grade.name !}</option>
                     </select>
                 </div>
@@ -261,14 +261,14 @@
         </fieldset> 
         <fieldset>
 			<div class="btn-container col-xs-6 col-xs-offset-2">
-				{!! Form::button('Add Student'
+				{!! Form::button('trans('messages.add_student')'
 					, array(
 						'class' => 'btn btn-blue btn-medium'
 						, 'ng-click' => 'class.addNewStudent()'
 					)
 				) !!}
 
-				{!! Form::button('Cancel'
+				{!! Form::button('trans('messages.cancel')'
 					, array(
 						'class' => 'btn btn-gold btn-medium'
 						, 'ng-click' => "class.setActive('view', class.record.id)"
