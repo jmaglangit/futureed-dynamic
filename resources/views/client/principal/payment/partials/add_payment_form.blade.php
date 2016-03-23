@@ -1,7 +1,7 @@
 <div ng-if="payment.active_add" ng-init="payment.getOrderNo()">
 	<div class="content-title">
 		<div class="title-main-content">
-			<span>Add Payment</span>
+			<span>{!! trans('messages.add_payment') !!}</span>
 		</div>
 	</div>
 
@@ -18,15 +18,15 @@
 	        </div>
 
         	<fieldset class="payment-field">
-        		<span class="step">1</span><p class="step-label">Please select a subject.</p>
+        		<span class="step">1</span><p class="step-label">{!! trans('messages.please_select_subject') !!}</p>
 
         		<div class="col-xs-12">
 	        		<div class="form-search">
 			        	<div class="form-group">
-			        		<label class="col-xs-3 control-label">Subject <span class="required">*</span></label>
+			        		<label class="col-xs-3 control-label">{!! trans('messages.subject') !!} <span class="required">*</span></label>
 			        		<div class="col-xs-5">
 			        			<select class="form-control" ng-disabled="!payment.subjects.length" ng-model="payment.invoice.subject_id" ng-class="{ 'required-field' : payment.fields['subject_id'] }">
-				                        <option value="">-- Select Subject --</option>
+				                        <option value="">{!! trans('messages.select_subject') !!}</option>
 				                        <option ng-selected="payment.invoice.subject_id == subject.id" ng-repeat="subject in payment.subjects" ng-value="subject.id">{! subject.name !}</option>
 				                    </select>
 			        		</div>
@@ -38,16 +38,16 @@
 		    <hr />
 
         	<fieldset class="payment-field">
-	        	<span class="step">2</span><p class="step-label">Please add a classroom.</p>
+	        	<span class="step">2</span><p class="step-label">{!! trans('messages.please_add_classroom') !!}</p>
 
 	        	<div class="col-xs-12">
 		        	<div class="form-search">
 			        	<div class="form-group">
-			        		<label class="col-xs-3 control-label" id="email">Number of Seats <span class="required">*</span></label>
+			        		<label class="col-xs-3 control-label" id="email">{!! trans('messages.no_of_seats') !!} <span class="required">*</span></label>
 			        		<div class="col-xs-5">
 			        			{!! Form::text('seats_total',''
 			        				, array(
-			        					'placeHolder' => 'Number of Seats'
+			        					'placeHolder' => 'trans('messages.no_of_seats')'
 			        					, 'ng-model' => 'payment.classroom.seats_total'
 			        					, 'ng-class' => "{ 'required-field' : payment.fields['seats_total'] }"
 			        					, 'class' => 'form-control'
@@ -57,21 +57,21 @@
 			        	</div>
 
 			        	<div class="form-group" ng-init="getGradeLevel(user.country_id)">
-			        		<label class="col-xs-3 control-label">Grade <span class="required">*</span></label>
+			        		<label class="col-xs-3 control-label">{!! trans('messages.grade') !!} <span class="required">*</span></label>
 			        		<div class="col-xs-5">
 			        			<select name="grade_id" ng-disabled="!grades.length" ng-class="{ 'required-field' : payment.fields['grade_id'] }" class="form-control" ng-model="payment.classroom.grade_id">
-		                            <option ng-selected="payment.classroom.grade_id == futureed.false" value="">-- Select Level --</option>
+		                            <option ng-selected="payment.classroom.grade_id == futureed.false" value="">{!! trans('messages.select_level') !!}</option>
 		                            <option ng-selected="payment.classroom.grade_id == grade.id" ng-repeat="grade in grades" ng-value="grade.id">{! grade.name !}</option>
 		                        </select>
 			        		</div>		
 			        	</div>
 
 			        	<div class="form-group">
-			        		<label class="col-xs-3 control-label" id="email">Teacher <span class="required">*</span></label>
+			        		<label class="col-xs-3 control-label" id="email">{!! trans('messages.teacher') !!} <span class="required">*</span></label>
 			        		<div class="col-xs-5">
 			        			{!! Form::text('teacher',''
 			        				, array(
-			        					'placeHolder' => 'Teacher'
+			        					'placeHolder' => 'trans('messages.teacher')'
 			        					, 'ng-model' => 'payment.classroom.client_name'
 			        					, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
 			        					, 'ng-class' => "{ 'required-field' : payment.fields['client_id'] }"
@@ -96,11 +96,11 @@
 			        	</div>
 
 			        	<div class="form-group">
-			        		<label class="col-xs-3 control-label">Class <span class="required">*</span></label>
+			        		<label class="col-xs-3 control-label">{!! trans('messages.class') !!} <span class="required">*</span></label>
 			        		<div class="col-xs-5">
 			        			{!! Form::text('name',''
 			        				, array(
-			        					'placeHolder' => 'Class'
+			        					'placeHolder' => 'trans('messages.class')'
 			        					, 'ng-model' => 'payment.classroom.name'
 			        					, 'ng-class' => "{ 'required-field' : payment.fields['name'] }"
 			        					, 'autocomplete' => 'off'
@@ -112,7 +112,7 @@
 
 			        	<div class="form-group">
 			        		<div class="btn-container col-xs-offset-2 col-xs-7">
-				        		{!! Form::button('Update'
+				        		{!! Form::button('trans('messages.update')'
 				        			, array(
 				        				'class' => 'btn btn-blue btn-medium'
 				        				, 'ng-click' => 'payment.updateClassroom()'
@@ -120,7 +120,7 @@
 				        			)
 				        		) !!}
 
-				        		{!! Form::button('Add Classroom'
+				        		{!! Form::button('trans('messages.add_classroom')'
 				        			, array(
 				        				'class' => 'btn btn-blue btn-medium'
 				        				, 'ng-click' => 'payment.addClassroom()'
@@ -128,7 +128,7 @@
 				        			)
 				        		) !!}
 
-				        		{!! Form::button('Clear'
+				        		{!! Form::button('trans('messages.clear')'
 				        			, array(
 				        				'class' => 'btn btn-gold btn-medium'
 				        				, 'ng-click' => 'payment.clearClassroom()'
@@ -143,7 +143,7 @@
 	        <hr/>
 	        
 	        <fieldset class="payment-field">
-	        	<span class="step">3</span><p class="step-label">Please select a subscription.</p>
+	        	<span class="step">3</span><p class="step-label">{!! trans('messages.please_select_subscription') !!}</p>
 	        	
 	        	<div class="col-xs-12">
 		        	<div class="form-search">
@@ -155,16 +155,16 @@
 									ng-change="payment.selectSubscription()" 
 									class="form-control" ng-class="{ 'required-field' : payment.fields['subscription_id'] }">
 
-									<option value="">-- Select Subscription --</option>
+									<option value="">{!! trans('messages.select_subscription') !!}</option>
 									<option ng-repeat="subscription in payment.subscriptions" ng-value="subscription.id">{! subscription.name !}</option>
 								</select>
 							</div>
 							<div class="col-xs-8">
-								<label class="col-xs-2 control-label">Starting</label>
+								<label class="col-xs-2 control-label">{!! trans('messages.starting') !!}</label>
 								<div class="col-xs-4">
 									<input class="form-control" ng-disabled="true" value="{! payment.invoice.dis_date_start | ddMMyy !}" placeholder="DD/MM/YY" />
 								</div>
-								<label class="col-xs-2 control-label">To</label>
+								<label class="col-xs-2 control-label">{!! trans('messages.to') !!}</label>
 								<div class="col-xs-4">
 									<input class="form-control" ng-disabled="true" value="{! payment.invoice.dis_date_end | ddMMyy !}" placeholder="DD/MM/YY" />
 								</div>
@@ -180,12 +180,12 @@
 						<table class="table table-striped table-bordered">
 							<thead>
 						        <tr>
-						            <th>Number of Seats</th>
-						            <th>Grade</th>
-						            <th>Teacher</th>
-						            <th>Class</th>
-						            <th>Price</th>
-						            <th>Action</th>
+						            <th>{!! trans('messages.no_of_seats') !!}</th>
+						            <th>{!! trans('messages.grade') !!}</th>
+						            <th>{!! trans('messages.teacher') !!}</th>
+						            <th>{!! trans('messages.class') !!}</th>
+						            <th>{!! trans('messages.price') !!}</th>
+						            <th>{!! trans('messages.action') !!}</th>
 						        </tr>
 						    </thead>
 
@@ -209,12 +209,12 @@
 					        </tr>
 					        <tr class="odd" ng-if="!payment.classrooms.length && !payment.table.loading">
 					        	<td valign="top" colspan="7">
-					        		No records found
+					        		{!! trans('messages.no_records_found') !!}
 					        	</td>
 					        </tr>
 					        <tr class="odd" ng-if="payment.table.loading">
 					        	<td valign="top" colspan="7">
-					        		Loading...
+					        		{!! trans('messages.loading') !!}
 					        	</td>
 					        </tr>
 					        </tbody>
@@ -227,7 +227,7 @@
 				<div class="form-group">
 					<div class="col-xs-6"></div>
 					<div class="col-xs-6 div-right">
-						<label class="col-xs-4 control-label">Subtotal</label>
+						<label class="col-xs-4 control-label">{!! trans('messages.subtotal') !!}</label>
 						<div class="col-xs-8">
 							<div class="input-group">
 								<span class="input-group-addon" id="basic-addon1">USD$</span>
@@ -239,7 +239,7 @@
 				<div class="form-group">
 					<div class="col-xs-6"></div>
 					<div class="col-xs-6 div-right">
-						<label class="col-xs-4 control-label">Discount</label>
+						<label class="col-xs-4 control-label">{!! trans('messages.discount') !!}</label>
 						<div class="col-xs-8">
 							<div class="input-group">
 								{!! Form::text('discount',''
@@ -259,7 +259,7 @@
 				<div class="form-group">
 					<div class="col-xs-6"></div>
 					<div class="col-xs-6 div-right">
-						<label class="col-xs-4 control-label">Total</label>
+						<label class="col-xs-4 control-label">{!! trans('messages.total') !!}</label>
 						<div class="col-xs-8">
 							<div class="input-group">
 								<span class="input-group-addon" id="basic-addon1">USD$</span>
@@ -271,21 +271,21 @@
 
 				<div class="form-group">
 					<div class="btn-container">
-		        		{!! Form::button('Pay Subscription'
+		        		{!! Form::button('trans('messages.pay_subscription')'
 		        			, array(
 		        				'class' => 'btn btn-blue btn-semi-medium'
 		        				, 'ng-click' => 'payment.addPayment()'
 		        			)
 		        		) !!}
 
-		        		{!! Form::button('Save Subscription'
+		        		{!! Form::button('trans('messages.save_subscription')'
 		        			, array(
 		        				'class' => 'btn btn-blue btn-semi-medium'
 		        				, 'ng-click' => 'payment.savePayment()'
 		        			)
 		        		) !!}
 
-		        		{!! Form::button('Delete Subscription'
+		        		{!! Form::button('trans('messages.delete_subscription')'
 		        			, array(
 		        				'class' => 'btn btn-gold btn-semi-medium'
 		        				, 'ng-click' => 'payment.deleteInvoice(payment.invoice.id)'
