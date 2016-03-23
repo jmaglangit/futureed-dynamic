@@ -1,13 +1,13 @@
 <div ng-if="bulk.active_list">
 	<div class="col-xs-12 search-container" ng-if="bulk.active_add">
 		<div class="title-mid">
-			Add Bulk Discount
+			{!! trans('messages.admin_add_bulk_discount') !!}
 		</div>
 	</div>
 
 	<div class="col-xs-12 search-container" ng-if="bulk.active_edit">
 		<div class="title-mid">
-			Update Bulk Discount
+			{!! trans('messages.admin_update_bulk_discount') !!}
 		</div>
 	</div>
 
@@ -27,20 +27,20 @@
 		{!! Form::open(['class'=> 'form-horizontal']) !!}
 			<fieldset>
 				<div class="form-group">
-					<label class="col-xs-3 control-label">Minimum Seats <span class="required">*</span></label>
+					<label class="col-xs-3 control-label">{!! trans('messages.admin_min_seats') !!} <span class="required">*</span></label>
 					<div class="col-xs-5">
 						{!! Form::text('min_seats', '',
 							[
 								'class' => 'form-control'
 								, 'ng-model' => 'bulk.record.min_seats'
 								, 'ng-class' => "{ 'required-field' : bulk.fields['min_seats'] }"
-								, 'placeholder' => 'Minimum Seats'
+								, 'placeholder' => 'trans('messages.admin_min_seats')'
 							]) 
 						!!}
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-xs-3 control-label">Percentage <span class="required">*</span></label>
+					<label class="col-xs-3 control-label">{!! trans('messages.admin_percentage') !!} <span class="required">*</span></label>
 					<div class="col-xs-5">
 						<div class="input-group">
 							{!! Form::text('percentage', '',
@@ -48,7 +48,7 @@
 									'class' => 'form-control'
 									, 'ng-model' => 'bulk.record.percentage'
 									, 'ng-class' => "{ 'required-field' : bulk.fields['percentage'] }"
-									, 'placeholder' => 'Percentage'
+									, 'placeholder' => 'trans('messages.admin_percentage')'
 								]) 
 							!!}
 							<span class="input-group-addon">%</span>
@@ -56,7 +56,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-xs-3 control-label">Status <span class="required">*</span></label>
+					<label class="col-xs-3 control-label">{!! trans('messages.status') !!} <span class="required">*</span></label>
 					<div class="col-xs-5">
 						<div class="col-xs-6 checkbox">	                				
 							<label>
@@ -68,7 +68,7 @@
 									, 'ng-model' => 'bulk.record.status'
 								) 
 							) !!}
-							<span class="lbl padding-8">Enabled</span>
+							<span class="lbl padding-8">{!! trans('messages.enabled') !!}</span>
 							</label>
 						</div>
 						<div class="col-xs-6 checkbox">
@@ -81,7 +81,7 @@
 									, 'ng-model' => 'bulk.record.status'
 								) 
 							) !!}
-							<span class="lbl padding-8">Disabled</span>
+							<span class="lbl padding-8">{!! trans('messages.disabled') !!}</span>
 							</label>
 						</div>
 					</div>
@@ -91,7 +91,7 @@
 			<fieldset>
 				<div class="form-group">
 					<div class="btn-container col-xs-9 col-xs-offset-1">
-						{!! Form::button('Update'
+						{!! Form::button('trans('messages.update')'
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-click' => "bulk.update()"
@@ -99,7 +99,7 @@
 							)
 						) !!}
 
-						{!! Form::button('Add Bulk Discount'
+						{!! Form::button('trans('messages.admin_add_bulk_discount')'
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-click' => "bulk.add()"
@@ -107,7 +107,7 @@
 							)
 						) !!}
 
-						{!! Form::button('Cancel'
+						{!! Form::button('trans('messages.cancel')'
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'ng-click' => "bulk.setActive()"
@@ -123,12 +123,12 @@
 		<button class="btn btn-blue btn-semi-medium" 
 			ng-click="bulk.setActive(futureed.ACTIVE_ADD)"
 			ng-if="!(bulk.active_add || bulk.active_edit)">
-			<span><i class="fa fa-plus-square"></i></span> Add Bulk Discount
+			<span><i class="fa fa-plus-square"></i></span> {!! trans('messages.admin_add_bulk_discount') !!}
 		</button>
 
 		<div class="list-container" ng-cloak>
 			<div class="col-xs-6 title-mid">
-				Percentage List
+				{!! trans('messages.admin_percentage_list') !!}
 			</div>
 
 			<div class="col-xs-6 size-container">
@@ -152,9 +152,9 @@
 			<table class="col-xs-12 table table-striped table-bordered">
 				<thead>
 					<tr>
-						<th>Minimum Seats</th>
-						<th>Percentage</th>
-						<th ng-if="bulk.records.length">Action</th>
+						<th>{!! trans('messages.admin_min_seats') !!}</th>
+						<th>{!! trans('messages.admin_percentage') !!}</th>
+						<th ng-if="bulk.records.length">{!! trans('messages.action') !!}</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -181,7 +181,7 @@
 					</tr>
 					<tr class="odd" ng-if="!bulk.records.length">
 							<td valign="top" colspan="4">
-								No records found
+								{!! trans('messages.no_records_found') !!}
 							</td>
 						</tr>
 				</tbody>
