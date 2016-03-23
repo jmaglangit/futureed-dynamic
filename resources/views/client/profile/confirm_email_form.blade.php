@@ -7,8 +7,8 @@
 
 <div class="enter-pass-con form-select-password col-xs-8 col-xs-offset-2">
 	<div class="form_content" ng-if="!profile.email_confirmed">
-	    <div class="title" ng-if="!profile.resent">Email Confirmation Code Sent</div>
-	    <div class="title" ng-if="profile.resent">Email Confirmation Code Resent</div>
+	    <div class="title" ng-if="!profile.resent">{!! trans('messages.client_email_confirmation_code_sent') !!}</div>
+	    <div class="title" ng-if="profile.resent">{!! trans('messages.client_email_confirmation_code_resent') !!}</div>
 
 	    <div ng-if="!profile.resent">
 	      <div class="roundcon">
@@ -16,13 +16,12 @@
 	      </div>
 	      <div>
 	        <p class="text">
-	          <strong>Success!</strong>
-	          <br /> Please enter the email code to confirm your new email address.
+	          <strong>{!! trans('messages.success') !!}</strong>
+	          <br /> {!! trans('messages.client_enter_email_code') !!}
 	        </p>
 	      
 	        <div class="form-group">
-	          <small>Please check your inbox or your spam folder for the email. 
-	          <br />The email contains an email code that you need to input below.</small>
+	          <small>{!! trans('messages.forgot_check_inbox') !!}</small>
 	        </div>
 	      </div>
 	    </div>
@@ -33,33 +32,32 @@
 	      </div>
 	      <div>
 	        <p class="text">
-	          <strong>Success!</strong>
-	          <br /> A new email code has been sent to your email account.
+	          <strong>{!! trans('messages.success') !!}</strong>
+	          <br /> {!! trans('messages.client_new_email_code_sent') !!}
 	        </p>
 	      
 	        <div class="form-group">
-	          <small>Please check your inbox or your spam folder for the email. 
-	          <br />The email contains an email code that you need to input below.</small>
+	          <small>{!! trans('messages.forgot_check_inbox') !!}</small>
 	        </div>
 	      </div>
 	    </div>
 
 	    <br />
 	    <div class="form-group">
-	        {!! Form::label(null, 'Enter Email Confirmation Code:') !!}
+	        {!! Form::label(null, 'trans('messages.client_enter_email_confirmation_code'):') !!}
 
-	        {!! Form::text('confirmation_code', '',
+	        {!! Form::text('confirm_code', '',
 	              array(
 	                  'class' => 'form-control'
 	                , 'ng-model' => 'profile.confirmation_code'
-	                , 'placeholder' => 'Confirmation Code'
+	                , 'placeholder' => 'trans('messages.confirm_code')'
 	                , 'autocomplete' => 'off'
 	              )
 	        ) !!}
 	    </div>
 
       	<div class="btn-container">
-	        {!! Form::button('Proceed'
+	        {!! Form::button('trans('messages.client_proceed')'
 	            , array(
 	                    'id' => 'proceed_btn'
 	                , 'class' => 'btn btn-blue btn-medium'
@@ -67,7 +65,7 @@
 	              )
 	        ) !!}
 
-	        {!! Form::button('Resend Code'
+	        {!! Form::button('trans('messages.client_resend_code')'
 	            , array(
 	                    'class' => 'btn btn-gold btn-medium'
 	                , 'ng-click' => 'profile.resendClientEmailCode()'
@@ -77,16 +75,16 @@
     </div>
 
 	<div class="form_content" ng-if="profile.email_confirmed">
-		<div class="title">Success!</div>
+		<div class="title">{!! trans('messages.success') !!}</div>
           <div class="form_content">
             <div class="roundcon">
                 <i class="fa fa-check fa-5x img-rounded text-center"></i>
             </div>
 
             <p class="text">
-                  You have successfully confirmed your new email address.
+                  {!! trans('messages.client_succesfully_confirmed_email_address') !!}
             </p>
-            	{!! Form::button('View Profile'
+            	{!! Form::button('trans('messages.view_profile')'
 		            , array(
 		                'class' => 'btn btn-gold'
 		                , 'ng-click' => "profile.setClientProfileActive('index')"
