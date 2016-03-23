@@ -1,7 +1,7 @@
 <div ng-if="module.active_view || module.active_edit">
 	<div class="content-title">
 		<div class="title-main-content">
-			<span>View Module</span>
+			<span>{!! trans('messages.admin_view_module') !!}</span>
 		</div>
 	</div>
 
@@ -9,7 +9,7 @@
 		<div class="panel panel-default">
 			<div id="detail_heading" class="panel-heading" data-toggle="collapse" ng-click="module.toggleDetail()" data-parent="#accordion" href="#module_detail" aria-expanded="true" aria-controls="module_detail">
 				<h4 class="panel-title">
-					Module Details
+					{!! trans('messages.admin_module_details') !!}
 
 					<span class="pull-right"><i class="fa"
 						ng-class="{ 'fa-angle-double-up' : module.detail_hidden,  'fa-angle-double-down' : !module.detail_hidden }"></i></span>
@@ -33,15 +33,15 @@
 						<div class="col-xs-12">
 							<fieldset>
 								<div class="form-group">
-									<label class="control-label col-xs-2">Subject <span class="required">*</span></label>
+									<label class="control-label col-xs-2">{!! trans('messages.subject') !!} <span class="required">*</span></label>
 									<div class="col-xs-4" ng-init="module.getSubject()">
 										<select ng-disabled="module.active_view" name="subject_id" class="form-control" name="subject_id" ng-model="module.record.subject_id" ng-change="module.setSubject()" ng-class="{'required-field' : module.fields['subject_id']}">
-											<option ng-selected="module.record.subject.id == futureed.FALSE" value="">-- Select Subject --</option>
+											<option ng-selected="module.record.subject.id == futureed.FALSE" value="">{!! trans('messages.select_subject') !!}</option>
 											<option ng-selected="module.record.subject.name == subject.name" ng-repeat="subject in module.subjects" ng-value="subject.id">{! subject.name!}</option>
 										</select>
 									</div>
 									
-									<label class="col-xs-2 control-label">Status <span class="required">*</span></label>
+									<label class="col-xs-2 control-label">{!! trans('messages.status') !!} <span class="required">*</span></label>
 									<div class="col-xs-4" ng-if="module.active_edit">
 										<div class="col-xs-6 checkbox">                                 
 											<label>
@@ -53,7 +53,7 @@
 														, 'ng-model' => 'module.record.status'
 													) 
 												) !!}
-											<span class="lbl padding-8">Enabled</span>
+											<span class="lbl padding-8">{!! trans('messages.enabled') !!}</span>
 											</label>
 										</div>
 										<div class="col-xs-6 checkbox">
@@ -66,7 +66,7 @@
 														, 'ng-model' => 'module.record.status'
 													)
 												) !!}
-											<span class="lbl padding-8">Disabled</span>
+											<span class="lbl padding-8">{!! trans('messages.disabled') !!}</span>
 											</label>
 										</div>
 									</div>
@@ -85,11 +85,11 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="control-label col-xs-2">Subject Area <span class="required">*</span></label>
+									<label class="control-label col-xs-2">{!! trans('messages.subject_area') !!} <span class="required">*</span></label>
 									<div class="col-xs-4">
 										{!! Form::text('area',''
 											, array(
-												'placeHolder' => 'Subject Area'
+												'placeHolder' => 'trans('messages.subject_area')'
 												, 'ng-model' => 'module.record.area'
 												, 'ng-disabled' => 'module.active_view'
 												, 'class' => 'form-control'
@@ -112,9 +112,9 @@
 									</div>
 
 									<div class="form-group" ng-if="module.active_edit">
-										<label class="control-label col-xs-2">Image</label>
+										<label class="control-label col-xs-2">{!! trans('messages.image') !!}</label>
 										<div class="col-xs-3">
-											<div class="btn btn-blue" ngf-select ngf-change="module.upload($files, module.record)"> Choose Image... </div>
+											<div class="btn btn-blue" ngf-select ngf-change="module.upload($files, module.record)">{!! trans('messages.choose_image') !!}</div>
 										</div>
 
 										<div class="margin-top-8" ng-if="module.record.uploaded">
@@ -123,9 +123,9 @@
 									</div>
 
 									<div ng-if="module.active_view">
-										<label class="col-xs-2 control-label">Image </label>
+										<label class="col-xs-2 control-label">{!! trans('messages.image') !!} </label>
 										<div class="col-xs-3" ng-if="module.record.icon_image != 'None'">
-						                    <a href="javascript:void(0);" class="top-5" ng-click="module.viewImage(module.record)">View Image</a>
+						                    <a href="javascript:void(0);" class="top-5" ng-click="module.viewImage(module.record)">{!! trans('messages.view_image') !!}</a>
 										</div>
 
 										<div class="col-xs-3" ng-if="module.record.icon_image == 'None'">
@@ -138,17 +138,17 @@
 					                <div class="col-xs-6"></div>
 					                <div class="col-xs-6">
 										<div class="col-xs-2"></div>
-										<span class="col-xs-5 upload-label label label-info">Image Uploaded...</span>
-										<a href="" class="control-label col-xs-5" ng-click="module.viewImage(module.record)">View Image</a>
+										<span class="col-xs-5 upload-label label label-info">{!! trans('messages.image_uploaded') !!}</span>
+										<a href="" class="control-label col-xs-5" ng-click="module.viewImage(module.record)">{!! trans('messages.view_image') !!}</a>
 					                </div>
 					            </div>
 
 								<div class="form-group">
-									<label class="control-label col-xs-2">Module <span class="required">*</span></label>
+									<label class="control-label col-xs-2">{!! trans('messages.module') !!} <span class="required">*</span></label>
 									<div class="col-xs-4">
 										{!! Form::text('module',''
 											, array(
-												'placeHolder' => 'Module'
+												'placeHolder' => 'trans('messages.module')'
 												, 'ng-model' => 'module.record.name'
 												, 'class' => 'form-control'
 												, 'ng-disabled' => 'module.active_view'
@@ -156,11 +156,11 @@
 											)
 										) !!}
 									</div>
-									<label class="control-label col-xs-3">Points to Unlock <span class="required">*</span></label>
+									<label class="control-label col-xs-3">{!! trans('messages.admin_points_to_unlock') !!} <span class="required">*</span></label>
 									<div class="col-xs-3">
 										{!! Form::text('points_to_unlock',''
 											, array(
-												'placeHolder' => 'Points to Unlock'
+												'placeHolder' => 'trans('messages.admin_points_to_unlock')'
 												, 'ng-model' => 'module.record.points_to_unlock'
 												, 'class' => 'form-control'
 												, 'ng-disabled' => 'module.active_view'
@@ -170,11 +170,11 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="control-label col-xs-2">Description <span class="required">*</span></label>
+									<label class="control-label col-xs-2">{!! trans('messages.description') !!} <span class="required">*</span></label>
 									<div class="col-xs-4">
 										{!! Form::textarea('description',''
 											, array(
-												'placeHolder' => 'Description'
+												'placeHolder' => 'trans('messages.description')'
 												, 'ng-model' => 'module.record.description'
 												, 'class' => 'form-control disabled-textarea'
 												, 'ng-disabled' => 'module.active_view'
@@ -183,11 +183,11 @@
 											)
 										) !!}
 									</div>
-									<label class="control-label col-xs-3">Points to Finish <span class="required">*</span></label>
+									<label class="control-label col-xs-3">{!! trans('messages.admin_points_to_finish') !!} <span class="required">*</span></label>
 									<div class="col-xs-3">
 										{!! Form::text('points_to_finish',''
 											, array(
-												'placeHolder' => 'Points to Finish'
+												'placeHolder' => 'trans('messages.admin_points_to_finish')'
 												, 'ng-model' => 'module.record.points_to_finish'
 												, 'class' => 'form-control'
 												, 'ng-disabled' => 'module.active_view'
@@ -197,10 +197,10 @@
 									</div>
 								</div>
 								<div class="form-group">
-									<label class="control-label col-xs-3">Common Core Area <span class="required">*</span></label>
+									<label class="control-label col-xs-3">{!! trans('messages.admin_common_core_area') !!} <span class="required">*</span></label>
 									<div class="col-xs-3"></div>
 
-									<label class="control-label col-xs-3">Common Core URL <span class="required">*</span></label>
+									<label class="control-label col-xs-3">{!! trans('messages.admin_common_core_url') !!} <span class="required">*</span></label>
 									<div class="col-xs-3"></div>
 								</div>
 
@@ -209,7 +209,7 @@
 									<div class="col-xs-5">
 										{!! Form::text('common_core_area',''
 											, array(
-												'placeHolder' => 'Common Core Area'
+												'placeHolder' => 'trans('messages.admin_common_core_area')'
 												, 'ng-model' => 'module.record.common_core_area'
 												, 'class' => 'form-control'
 												, 'ng-disabled' => 'module.active_view'
@@ -222,7 +222,7 @@
 									<div class="col-xs-5">
 										{!! Form::text('common_core_url',''
 											, array(
-												'placeHolder' => 'Common Core URL'
+												'placeHolder' => 'trans('messages.admin_common_core_url')'
 												, 'ng-model' => 'module.record.common_core_url'
 												, 'class' => 'form-control'
 												, 'ng-disabled' => 'module.active_view'
@@ -236,7 +236,7 @@
 							<fieldset>
 								<div class="form-group">
 									<div class="btn-container col-xs-9 col-xs-offset-2">
-										{!! Form::button('Update'
+										{!! Form::button('trans('messages.update')'
 											, array(
 												'class' => 'btn btn-blue btn-medium'
 												, 'ng-if' => 'module.active_edit'
@@ -244,7 +244,7 @@
 											)
 										) !!}
 
-										{!! Form::button('Edit'
+										{!! Form::button('trans('messages.edit')'
 											, array(
 												'class' => 'btn btn-blue btn-medium'
 												, 'ng-if' => 'module.active_view'
@@ -252,7 +252,7 @@
 											)
 										) !!}
 
-										{!! Form::button('Cancel'
+										{!! Form::button('trans('messages.cancel')'
 											, array(
 												'class' => 'btn btn-gold btn-medium'
 												, 'ng-click' => 'module.setActive()'
@@ -260,7 +260,7 @@
 											)
 										) !!}
 
-										{!! Form::button('Cancel'
+										{!! Form::button('trans('messages.cancel')'
 											, array(
 												'class' => 'btn btn-gold btn-medium'
 												, 'ng-click' => "module.setActive(futureed.ACTIVE_VIEW, module.record.id)"
@@ -287,7 +287,7 @@
 			                </div>
 			                <div class="modal-footer">
 			                    <div class="btncon col-xs-8 col-xs-offset-4 pull-left">
-			                        {!! Form::button('Close'
+			                        {!! Form::button('trans('messages.close')'
 			                            , array(
 			                                'class' => 'btn btn-gold btn-medium'
 			                                , 'data-dismiss' => 'modal'
@@ -304,7 +304,7 @@
 		<div class="panel panel-default" ng-if="module.record.id && module.active_view">
 			<div id="content_heading" class="panel-heading" data-toggle="collapse" ng-click="module.toggleContent()" data-parent="#accordion" href="#module_tabs" aria-expanded="false" aria-controls="module_tabs">
 				<h4 class="panel-title">
-					Module Contents
+					{!! trans('messages.admin_module_content') !!}
 
 					<span class="pull-right"><i class="fa"
 						ng-class="{ 'fa-angle-double-up' : module.content_hidden,  'fa-angle-double-down' : !module.content_hidden }"></i></span>
@@ -314,8 +314,8 @@
 			<div id="module_tabs" class="panel-collapse collapse">
 				<div class="panel-body">
 					<ul class="nav nav-pills nav-admin">
-						<li role="presentation" class="tab active"><a href="#age_group" ng-click="module.setActiveContent(futureed.AGEGROUP)" aria-controls="home" data-toggle="tab">Age Group</a></li>
-						<li role="presentation" class="tab"><a href="#q_and_a" ng-click="module.setActiveContent(futureed.QANDA)" aria-controls="messages" data-toggle="tab">Q & A</a></li>
+						<li role="presentation" class="tab active"><a href="#age_group" ng-click="module.setActiveContent(futureed.AGEGROUP)" aria-controls="home" data-toggle="tab">{!! trans('messages.admin_age_group') !!}</a></li>						
+						<li role="presentation" class="tab"><a href="#q_and_a" ng-click="module.setActiveContent(futureed.QANDA)" aria-controls="messages" data-toggle="tab">{!! trans('messages.admin_q_and_a') !!}</a></li>
 					</ul>
 
 					<div class="tab-content row">
