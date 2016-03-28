@@ -11,9 +11,13 @@ class BackgroundImageRepository implements BackgroundImageRepositoryInterface {
 	 * @param int $offset
 	 * @return array
 	 */
-	public function getBackgroundImages($criteria = [], $limit = 0, $offset = 0) {
+	public function getBackgroundImages($criteria = [],$limit = 0, $offset = 0) {
 
 		$background_image = new BackgroundImage();
+
+		if(isset($criteria['status'])){
+			$background_image = $background_image->status($criteria['status']);
+		}
 
 		if ($limit > 0 && $offset >= 0) {
 
@@ -36,6 +40,6 @@ class BackgroundImageRepository implements BackgroundImageRepositoryInterface {
 	 */
 	public function getBackgroundImage($id) {
 
-		return BackgroundImage::whereId($id)->get();
+		return BackgroundImage::whereId($id)->first();
 	}
 }
