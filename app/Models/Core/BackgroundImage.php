@@ -20,4 +20,10 @@ class BackgroundImage extends Model{
 		'created_by' => 1,
 		'updated_by' => 1
 	];
+
+	//scope
+	public function scopeStatus($query, $status){
+
+		return $query->where('status',$status);
+	}
 }
