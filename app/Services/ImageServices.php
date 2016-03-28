@@ -75,4 +75,15 @@ class ImageServices {
 		return $image_path;
 	}
 
+	/**
+	 * Get background image url.
+	 * @param $filename
+	 * @return string
+	 */
+	public function getBackgroundImage($filename){
+
+		return url() .'/'. config('futureed.background_images_folder') .'/'.$filename;
+	}
+
+
 }
