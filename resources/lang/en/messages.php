@@ -116,6 +116,7 @@ return [
 	'delete_req' => 'Delete Request',
 	'description' => 'Description',
 	'detail' => 'Detail',
+	'did_not_receive_email_confirmation' => 'Did not receive email confirmation?',
 	'difficulty' => 'Difficulty',
 	'direct_credit_to' => 'Direct Credit to',
 	'disabled' => 'Disabled',
@@ -182,6 +183,7 @@ return [
 	'image_uploaded' => 'Image Uploaded...',
 	'import' => 'Import',
 	'inactive' => 'Inactive',
+	'included' => 'Included',
 	'indicate_required_field' => 'Indicates a required field.',
 	'instructions' => 'Instructions',
 	'ip_address' => 'IP Address',
@@ -238,6 +240,7 @@ return [
 	'no_help_request_found' => 'No Help Request Found',
 	'not_yet_started' => 'Not yet started',
 	'not_a_student' => 'Not a Student?',
+	'not_included' => 'Not Included',
 	'number_of_students' => 'Number of Students',
 	'ongoing' => 'On Going',
 	'or' => 'or',
@@ -295,8 +298,10 @@ return [
 	'remove_invoice' => 'Remove Invoice',
 	'remove_student' => 'Remove Student',
 	'renew_subscription' => 'Renew Subscription',
+	'resend_confirmation' => 'resend confirmation',
 	'review_teaching_content' => 'Review Contents',
 	'review_teaching_content_msg' => 'You need to review the teaching content.',
+	'review_retake_test_msg' => 'You need to review and take the test again.',
 	'reports' => 'Reports',
 	'report_card' => 'Report Card',
 	'resend' => 'Resend',
@@ -310,6 +315,7 @@ return [
 	'rewards' => 'Rewards',
 	'reward_points' => 'Reward Points',
 	'rewards_points_earn' => 'Reward points to earn',
+	'retake_test' => 'Retake Test',
 	'rate_this_answer' => 'Rate this Answer',
 	'role' => 'Role',
 	'save' => 'Save',
@@ -439,6 +445,7 @@ return [
 	'your_req' => 'Your Requests',
 	'your_pic_password_reset' => 'Your picture password has been reset.',
 	'you_may_now_use_new_pic_password_to_login' => 'You may now use your new picture password to login.',
+	'youre_almost_done' => 'You\'re almost done! We just need you to confirm your email address.',
 	
 	//resources/views/admin/dashboard/index.blade.php
 	'admin_dashboard' => 'Admin Dashboard',
@@ -1275,5 +1282,8 @@ return [
 	'student_tc_msg57' => 'By using our site, you consent to our terms and conditions as written in this agreement.',
 	'student_tc_msg58' => 'Contacting Us',
 	'student_tc_msg59' => 'If there are any questions regarding this policy you may contact us using the information below.',
+	
+	//resources/views/client/parent/payment/partials/add_payment_form.blade.php
+	'client_update_info' => 'You need to update your contact information in order to proceed buy a subscription.',
 	
 ];
