@@ -222,5 +222,12 @@ var services = angular.module('futureed.services', []);
 			});
 		}
 
+		futureedAPI.studentLearningStyle = function(data) {
+			return $http({
+				method	:	Constants.METHOD_GET
+				, url	:	futureedAPIUrl + 'student/learning-style/' + data
+			});
+		}
+
 		return futureedAPI;
 	});
