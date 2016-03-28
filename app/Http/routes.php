@@ -28,6 +28,7 @@ Routes::group([
 	include('Routes/Api/AvatarAccessory.php');
 	include('Routes/Api/AvatarPose.php');
 	include('Routes/Api/AvatarWiki.php');
+	include('Routes/Api/BackgroundImage.php');
 	include('Routes/Api/Classroom.php');
 	include('Routes/Api/ClassStudent.php');
 	include('Routes/Api/Client.php');
