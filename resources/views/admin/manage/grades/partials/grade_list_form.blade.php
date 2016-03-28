@@ -1,7 +1,7 @@
 <div ng-if="grade.active_list">
 	<div class="content-title">
 		<div class="title-main-content">
-			<span>Grade Management</span>
+			<span>{!! trans('messages.admin_grade_management') !!}</span>
 		</div>
 	</div>
 
@@ -21,7 +21,7 @@
 
 	<div class="col-xs-12 search-container">
 		<div class="title-mid">
-			Search
+			{!! trans('messages.search') !!}
 		</div>
 
 		<div class="form-search">
@@ -35,7 +35,7 @@
 				<div class="col-xs-5">
 					{!! Form::text('search_grade', ''
 						,array(
-							'placeholder' => 'Grade'
+							'placeholder' => 'trans('messages.grade')'
 							, 'ng-model' => 'grade.search.grade'
 							, 'class' => 'form-control btn-fit'
 							, 'autocomplete' => 'off'
@@ -45,13 +45,13 @@
 
 				<div class="col-xs-5">
 	        		<select ng-init="getCountries()" name="country_id" class="form-control" ng-model="grade.search.country_id">
-		          		<option ng-selected="grade.search.country_id == 'all'" value="">-- Select Country --</option>
+		          		<option ng-selected="grade.search.country_id == 'all'" value="">{!! trans('messages.select_country') !!}</option>
 		          		<option ng-selected="grade.search.country_id == country.id" ng-repeat="country in countries" ng-value="country.id">{! country.name!}</option>
 	        		</select>
 	        	</div>
 				
 				<div class="col-xs-2">
-					{!! Form::button('Search'
+					{!! Form::button('trans('messages.search')'
 						,array(
 							'class' => 'btn btn-blue'
 							, 'ng-click' => 'grade.searchFnc()'
@@ -59,7 +59,7 @@
 					)!!}
 				</div>
 				<div class="col-xs-2">
-					{!! Form::button('Clear'
+					{!! Form::button('trans('messages.clear')'
 						,array(
 							'class' => 'btn btn-gold'
 							, 'ng-click' => 'grade.clear()'
@@ -72,12 +72,12 @@
 	 
 	<div class="col-xs-12 table-container">
 		<button class="btn btn-blue btn-semi-medium" ng-click="grade.setActive(futureed.ACTIVE_ADD)">
-			<i class="fa fa-plus-square"></i> Add Grade
+			<i class="fa fa-plus-square"></i> {!! trans('messages.admin_add_grade') !!}
 		</button>
 
 		<div class="list-container" ng-cloak>
 			<div class="col-xs-6 title-mid">
-				Grade List
+				{!! trans('messages.admin_grade_list') !!}
 			</div>
 
 			<div class="col-xs-6 size-container">
@@ -101,10 +101,10 @@
 			<table class="col-xs-12  table table-striped table-bordered">
 			<thead>
 		        <tr>
-		            <th>Grade Code</th>
-		            <th>Grade</th>
-		            <th>Country</th>
-		            <th ng-if="grade.records.length">Action</th>
+		            <th>{!! trans('messages.grade_code') !!}</th>
+		            <th>{!! trans('messages.grade') !!}</th>
+		            <th>{!! trans('messages.country') !!}</th>
+		            <th ng-if="grade.records.length">{!! trans('messages.action') !!}</th>
 		        </tr>
 	        </thead>
 	        <tbody>
@@ -133,12 +133,12 @@
 		        </tr>
 		        <tr class="odd" ng-if="!grade.records.length && !grade.table.loading">
 			        	<td valign="top" colspan="5">
-			        		No records found
+			        		{!! trans('messages.no_records_found') !!}
 			        	</td>
 			        </tr>
 			        <tr class="odd" ng-if="grade.table.loading">
 			        	<td valign="top" colspan="5">
-			        		Loading...
+			        		{!! trans('messages.loading') !!}
 			        	</td>
 			        </tr>
 	        </tbody>
