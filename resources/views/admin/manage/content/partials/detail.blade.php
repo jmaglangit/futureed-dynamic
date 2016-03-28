@@ -15,25 +15,25 @@
 		{!! Form::open(['class' => 'form-horizontal']) !!}
 			<fieldset>
 				<legend class="legend-name-mid">
-					Module Details
+					{!! trans('messages.admin_module_details') !!}
 				</legend>
 				<div class="form-group">
-					<label class="col-xs-2 control-label">Module <span class="required">*</span></label>
+					<label class="col-xs-2 control-label">{!! trans('messages.module') !!} <span class="required">*</span></label>
 					<div class="col-xs-4">
 						{!! Form::text('module', '',
 							[
-								'placeholder' => 'Module',
+								'placeholder' => 'trans('messages.module')',
 								'ng-disabled' => 'true',
 								'ng-model' => 'content.record.module',
 								'class' => 'form-control'
 							]
 						) !!}
 					</div>
-					<label class="col-xs-2 control-label">Subject <span class="required">*</span></label>
+					<label class="col-xs-2 control-label">{!! trans('messages.subject') !!} <span class="required">*</span></label>
 					<div class="col-xs-4">
 						{!! Form::text('subject', '',
 							[
-								'placeholder' => 'Subject',
+								'placeholder' => 'trans('messages.subject')',
 								'ng-disabled' => 'true',
 								'ng-model' => 'content.record.subject',
 								'class' => 'form-control'
@@ -42,22 +42,22 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-xs-2 control-label">Content Code <span class="required">*</span></label>
+					<label class="col-xs-2 control-label">{!! trans('messages.admin_content_code') !!} <span class="required">*</span></label>
 					<div class="col-xs-4">
 						{!! Form::text('code', ''
 							, array(
-								'placeholder' => 'Content Code',
+								'placeholder' => 'trans('messages.admin_content_code')',
 								'ng-disabled' => 'true',
 								'ng-model' => 'content.record.code',
 								'class' => 'form-control'
 							)
 						) !!}
 					</div>
-					<label class="col-xs-2 control-label">Area <span class="required">*</span></label>
+					<label class="col-xs-2 control-label">{!! trans('messages.area') !!} <span class="required">*</span></label>
 					<div class="col-xs-4">
 						{!! Form::text('area', '',
 							[
-								'placeholder' => 'Area',
+								'placeholder' => 'trans('messages.area')',
 								'ng-disabled' => 'true',
 								'ng-model' => 'content.record.area',
 								'class' => 'form-control'
@@ -67,14 +67,14 @@
 				</div>
 	        	<div class="form-group" ng-if="content.record.tip_status == futureed.PENDING && content.active_view">
 	        		<div class="btn-container col-xs-8 col-xs-offset-2">
-						{!! Form::button('Accept'
+						{!! Form::button('trans('messages.accept')'
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-click' => "content.acceptTip()"
 							)
 						) !!}
 
-						{!! Form::button('Reject'
+						{!! Form::button('trans('messages.reject')'
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'ng-click' => "content.rejectTip()"
@@ -85,14 +85,14 @@
 			</fieldset>
 			<fieldset>
 				<legend class="legend-name-mid">
-					Teaching Module Content
+					{!! trans('messages.teaching_content') !!}
 				</legend>
 				<div class="form-group">
-					<label class="col-xs-4 control-label">Teaching Module Name <span class="required">*</span></label>
+					<label class="col-xs-4 control-label">{!! trans('messages.admin_teaching_module_name') !!} <span class="required">*</span></label>
 					<div class="col-xs-6">
 						{!! Form::text('teaching_module', ''
 							, array(
-								  'placeholder' => 'Teaching Module Name'
+								  'placeholder' => 'trans('messages.admin_teaching_module_name')'
 								, 'ng-disabled' => 'content.active_view'
 								, 'ng-model' => 'content.record.teaching_module'
 								, 'ng-class' => "{ 'required-field' : content.fields['teaching_module'] }"
@@ -102,46 +102,46 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-xs-4 control-label" id="email">Learning Style <span class="required">*</span></label>
+					<label class="col-xs-4 control-label" id="email">{!! trans('messages.learning_style') !!} <span class="required">*</span></label>
 					<div class="col-xs-6">
 						<select  name="learning_style_id" ng-disabled="content.active_view" ng-class="{ 'required-field' : content.fields['learning_style_id'] }" class="form-control" ng-model="content.record.learning_style_id">
-							<option ng-selected="content.record.learning_style_id == futureed.FALSE" value="">-- Select Learning Style --</option>
+							<option ng-selected="content.record.learning_style_id == futureed.FALSE" value="">{!! trans('messages.select_learning_style') !!}</option>
 							<option ng-selected="content.record.learning_style_id == style.id" ng-repeat="style in content.styles" ng-value="style.id">{! style.name!}</option>
 						</select>
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-xs-4 control-label">Media Type <span class="required">*</span></label>
+					<label class="col-xs-4 control-label">{!! trans('messages.admin_media_type') !!} <span class="required">*</span></label>
 					<div class="col-xs-6" ng-init="content.getMediaTypes()">
 						<select  name="media_type_id" ng-disabled="content.active_view" ng-class="{ 'required-field' : content.fields['media_type_id'] }" ng-change="content.emptyValue()" class="form-control" ng-model="content.record.media_type_id">
-							<option ng-selected="content.record.media_type_id == futureed.FALSE" value="">-- Select Media Type --</option>
+							<option ng-selected="content.record.media_type_id == futureed.FALSE" value="">{!! trans('messages.admin_select_media') !!}</option>
 							<option ng-selected="content.record.media_type_id == type.id" ng-repeat="type in content.types" ng-value="type.id">{! type.name!}</option>
 						</select>
 					</div>
 				</div>
 				<div class="form-group" ng-if="content.record.media_type_id == futureed.VIDEO">
-					<label class="col-xs-4 control-label">Video Url <span class="required">*</span></label>
+					<label class="col-xs-4 control-label">{!! trans('messages.admin_video_type') !!} <span class="required">*</span></label>
 					<div class="col-xs-6">
 						{!! Form::text('content_url', ''
 							, array(
-								'placeholder' => 'Video Url'
+								'placeholder' => 'trans('messages.admin_video_type')'
 								, 'ng-model' => 'content.record.content_url'
 								, 'ng-disabled' => 'content.active_view'
 								, 'ng-class' => "{ 'required-field' : content.fields['content_url'] }"
 								, 'class' => 'form-control'
 							)
 						) !!}
-						<p class="help-block">Video url should have this format: 
-							<span class="error-msg-con"> https://player.vimeo.com/video/{video_id}</span>
+						<p class="help-block">{!! trans('messages.admin_video_format_msg') !!}
+							<span class="error-msg-con">{!! trans('messages.admin_video_format_msg_url') !!}</span>
 						</p>
 					</div>
 				</div>
 				<div class="form-group" ng-if="content.record.media_type_id == futureed.TEXT">
-					<label class="col-xs-4 control-label">Content Text <span class="required">*</span></label>
+					<label class="col-xs-4 control-label">{!! trans('messages.admin_content_text') !!} <span class="required">*</span></label>
 					<div class="col-xs-6">
 						{!! Form::textarea('content_text', ''
 							, array(
-								'placeholder' => 'Content Text'
+								'placeholder' => 'trans('messages.admin_content_text')'
 								, 'ng-model' => 'content.record.content_text'
 								, 'ng-disabled' => 'content.active_view'
 								, 'ng-class' => "{ 'required-field' : content.fields['content_text'] }"
@@ -152,9 +152,9 @@
 					</div>
 				</div>
 				<div class="form-group" ng-if="content.record.media_type_id == futureed.IMAGE && content.active_edit">
-					<label class="col-xs-4 control-label">Image <span class="required">*</span></label>
+					<label class="col-xs-4 control-label">{!! trans('messages.image') !!} <span class="required">*</span></label>
 					<div class="col-xs-6">
-	                    <div class="btn btn-blue" ngf-select ngf-change="content.upload($files, content.record)"> Choose Image... </div>
+	                    <div class="btn btn-blue" ngf-select ngf-change="content.upload($files, content.record)">{!! trans('messages.choose_image') !!}</div>
 					</div>
 
 					<div class="margin-top-8" ng-if="content.record.uploaded">
@@ -165,24 +165,24 @@
 				<div class="form-group" ng-if="content.record.uploaded">
 	                <div class="col-xs-4"></div>
 	                <div class="col-xs-5">
-	                    <span class="col-xs-6 upload-label label label-info">Image Uploaded...</span>
-	                    <a href="" class="control-label col-xs-6" ng-click="content.viewImage(content.record)">View Image</a>
+	                    <span class="col-xs-6 upload-label label label-info">{!! trans('messages.image_uploaded') !!}</span>
+	                    <a href="" class="control-label col-xs-6" ng-click="content.viewImage(content.record)">{!! trans('messages.admin_view_image') !!}</a>
 	                </div>
 	            </div>
 
 				<div class="form-group" ng-if="content.record.media_type_id == futureed.IMAGE && content.active_view">
-					<label class="col-xs-4 control-label">Image </label>
+					<label class="col-xs-4 control-label">{!! trans('messages.image') !!} </label>
 					<div class="col-xs-6">
-	                    <a href="javascript:;" class="top-5" ng-click="content.viewImage(content.record)">View Content Image</a>
+	                    <a href="javascript:;" class="top-5" ng-click="content.viewImage(content.record)">{!! trans('messages.admin_view_content_image') !!}</a>
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-xs-4 control-label">Description <span class="required">*</span></label>
+					<label class="col-xs-4 control-label">{!! trans('messages.description') !!} <span class="required">*</span></label>
 					<div class="col-xs-6">
 						{!! Form::textarea('description', ''
 							, array(
 								  'class' => 'form-control disabled-textarea'
-								, 'placeholder' => 'Description'
+								, 'placeholder' => 'trans('messages.description')'
 								, 'ng-disabled' => 'content.active_view'
 								, 'ng-model' => 'content.record.description'
 								, 'ng-class' => "{ 'required-field' : content.fields['description'] }"
@@ -192,11 +192,11 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-xs-4 control-label">Sequence Number</label>
+					<label class="col-xs-4 control-label">{!! trans('messages.sequence_number') !!}</label>
 					<div class="col-xs-6">
 						{!! Form::text('seq_no', ''
 							, array(
-								'placeholder' => 'Sequence Number'
+								'placeholder' => 'trans('messages.sequence_number')'
 								, 'ng-model' => 'content.record.seq_no'
 								, 'ng-disabled' => 'content.active_view'
 								, 'ng-class' => "{ 'required-field' : content.fields['seq_no'] }"
@@ -207,7 +207,7 @@
 					
 				</div>
 				<div class="form-group">
-	        		<label class="col-xs-4 control-label">Status <span class="required">*</span></label>
+	        		<label class="col-xs-4 control-label">{!! trans('messages.status') !!} <span class="required">*</span></label>
 	        		<div class="col-xs-6" ng-if="content.active_edit">
 	        			<div class="col-xs-6 checkbox">	                				
 	        				<label>
@@ -219,7 +219,7 @@
 	        							, 'ng-model' => 'content.record.status'
 	        						) 
 	        					) !!}
-	        				<span class="lbl padding-8">Enabled</span>
+	        				<span class="lbl padding-8">{!! trans('messages.enabled') !!}</span>
 	        				</label>
 	        			</div>
 	        			<div class="col-xs-6 checkbox">
@@ -232,7 +232,7 @@
 	        							, 'ng-model' => 'content.record.status'
 	        						)
 	        					) !!}
-	        				<span class="lbl padding-8">Disabled</span>
+	        				<span class="lbl padding-8">{!! trans('messages.disabled') !!}</span>
 	        				</label>
 	        			</div>
 	        		</div>
@@ -253,14 +253,14 @@
 	        	</div>
 	        	<div class="form-group" ng-if="content.active_view">
 	        		<div class="btn-container col-xs-9 col-xs-offset-2">
-						{!! Form::button('Edit'
+						{!! Form::button('trans('messages.edit')'
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-click' => "content.setActive(futureed.ACTIVE_EDIT, content.record.id)"
 							)
 						) !!}
 
-						{!! Form::button('Cancel'
+						{!! Form::button('trans('messages.cancel')'
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'ng-click' => "content.setActive()"
@@ -270,14 +270,14 @@
 	        	</div>
 	        	<div class="form-group" ng-if="content.active_edit">
 	        		<div class="btn-container col-xs-9 col-xs-offset-2">
-						{!! Form::button('Save'
+						{!! Form::button('trans('messages.save')'
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-click' => "content.update()"
 							)
 						) !!}
 
-						{!! Form::button('Cancel'
+						{!! Form::button('trans('messages.cancel')'
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'ng-click' => "content.setActive(futureed.ACTIVE_VIEW, content.record.id)"
@@ -301,7 +301,7 @@
                 </div>
                 <div class="modal-footer">
                     <div class="btncon col-md-8 col-md-offset-4 pull-left">
-                        {!! Form::button('Close'
+                        {!! Form::button('trans('messages.close')'
                             , array(
                                 'class' => 'btn btn-gold btn-medium'
                                 , 'data-dismiss' => 'modal'
