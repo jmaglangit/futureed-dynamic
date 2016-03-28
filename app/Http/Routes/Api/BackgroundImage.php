@@ -1,7 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: jason
- * Date: 3/28/16
- * Time: 10:06 AM
- */
+
+Routes::resource('/background-image','Api\v1\BackgroundImageController',
+	['only' => ['index','show']]);
