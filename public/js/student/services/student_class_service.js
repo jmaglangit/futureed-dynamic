@@ -71,5 +71,12 @@ function StudentClassService($http){
 		});
 	}
 
+	service.getStudentBackgroundImage = function(id){
+		return $http({
+			method	:	Constants.METHOD_GET
+			, url	: 	serviceUrl + 'student/background-image/' + id
+		});
+	}
+
 	return service;
 }
