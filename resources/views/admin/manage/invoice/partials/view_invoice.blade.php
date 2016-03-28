@@ -1,7 +1,7 @@
 <div ng-if="invoice.active_view || invoice.active_edit">
 	<div class="content-title">
 		<div class="title-main-content">
-			<span>View Invoice</span>
+			<span>{!! trans('messages.admin_view_invoice') !!}</span>
 		</div>
 	</div>
 
@@ -26,25 +26,25 @@
 					)
 			) !!}
 				<div class="form-group">
-					<label class="col-xs-2 control-label">Subject</label>
+					<label class="col-xs-2 control-label">{!! trans('messages.subject') !!}</label>
 					<div class="col-xs-4">
 						{!! Form::text('subject', ''
 							, array(
 								  'ng-disabled' => 'true'
 								, 'class' => 'form-control'
 								, 'ng-model' => 'invoice.record.invoice_detail[0].classroom.subject.name'
-								, 'placeholder' => 'Subject'
+								, 'placeholder' => 'trans('messages.subject')'
 							)
 						) !!}
 					</div>
-					<label class="col-xs-2 control-label">Payment Status</label>
+					<label class="col-xs-2 control-label">{!! trans('messages.payment_status') !!}</label>
 					<div class="col-xs-4">
 						{!! Form::select('search_status'
 							, array(
-								  ''=>'-- Select Status --'
-								, 'Pending' => 'Pending'
-								, 'Paid' => 'Paid'
-							 	, 'Cancelled' => 'Cancelled'
+								  ''=>'trans('messages.admin_select_status')'
+								, 'Pending' => 'trans('messages.pending')'
+								, 'Paid' => 'trans('messages.paid')'
+							 	, 'Cancelled' => 'trans('messages.cancelled')'
 						 	)
 						 	, null
 						 	, array(
@@ -52,7 +52,7 @@
 						 		, 'class' => 'form-control'
 						 		, 'ng-model' => 'invoice.record.payment_status'
 						 		, 'ng-class' => "{ 'required-field' : invoice.fields['payment_status'] }"
-						 		, 'placeholder' => 'Email'
+						 		, 'placeholder' => 'trans('messages.email')'
 						 	)
 						) !!}
 					</div>
@@ -65,28 +65,28 @@
 								  'ng-disabled' => 'true'
 								, 'class' => 'form-control'
 								, 'ng-model' => 'invoice.record.id'
-								, 'placeholder' => 'Invoice No.'
+								, 'placeholder' => 'trans('messages.admin_invoice_no')'
 							)
 						) !!}
 					</div>
-					<label class="col-xs-2 control-label">Subscription</label>
+					<label class="col-xs-2 control-label">{!! trans('messages.payment_status') !!}</label>
 					<div class="col-xs-4">
 						{!! Form::text('subscription_name', ''
 							, array(
 								  'ng-disabled' => 'true'
 								, 'class' => 'form-control'
 								, 'ng-model' => 'invoice.record.subscription.name'
-								, 'placeholder' => 'Subscription'
+								, 'placeholder' => 'trans('messages.subscription')'
 							)
 						) !!}
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-xs-2 control-label">Date Started</label>
+					<label class="col-xs-2 control-label">{!! trans('messages.date_started') !!}</label>
 					<div class="col-xs-4">
 						<input type="text" ng-disabled="true" class="form-control" value="{! invoice.record.date_start | ddMMyy !}"/>
 					</div>
-					<label class="col-xs-2 control-label">Date End</label>
+					<label class="col-xs-2 control-label">{!! trans('messages.date_end') !!}</label>
 					<div class="col-xs-4">
 						<input type="text" ng-disabled="true" class="form-control" value="{! invoice.record.date_end | ddMMyy !}"/>
 					</div>
@@ -98,18 +98,18 @@
 	<div class="col-xs-12 search-container">
 		<div class="list-container" ng-cloak>
 			<div class="title-mid">
-				Order List
+				{!! trans('messages.admin_order_list') !!}
 			</div>
 
 			<table id="class-list" class="table table-striped table-bordered" ng-if="!invoice.view_students_tables">
 				<thead>
 					<tr>
-						<td>Number of Seats</td>
-						<td>Seats Taken</td>
-						<td>Grade</td>
-						<td>Teacher</td>
-						<td>Class</td>
-						<td>Price</td>
+						<td>{!! trans('messages.no_of_seats') !!}</td>
+						<td>{!! trans('messages.seats_taken') !!}</td>
+						<td>{!! trans('messages.grade') !!}</td>
+						<td>{!! trans('messages.teacher') !!}</td>
+						<td>{!! trans('messages.class') !!}</td>
+						<td>{!! trans('messages.price') !!}</td>
 					</tr>
 				</thead>
 	        	<tbody>
@@ -123,7 +123,7 @@
 					</tr>
 					<tr class="odd" ng-if="!invoice.record.invoice_detail.length">
 						<td valign="top" colspan="6" >
-							No records found
+							{!! trans('messages.no_records_found') !!}
 						</td>
 					</tr>
 				</tbody>
@@ -131,10 +131,10 @@
 			<table id="class-list" class="table table-striped table-bordered" ng-if="invoice.view_students_tables">
 				<thead>
 					<tr>
-						<td>Name</td>
-						<td>Email</td>
-						<td>Date Added</td>
-						<td>Date Removed</td>
+						<td>{!! trans('messages.name') !!}</td>
+						<td>{!! trans('messages.email') !!}</td>
+						<td>{!! trans('messages.date_added') !!}</td>
+						<td>{!! trans('messages.date_removed') !!}</td>
 					</tr>
 				</thead>
 	        	<tbody>
@@ -146,14 +146,14 @@
 					</tr>
 					<tr class="odd" ng-if="!invoice.students.length">
 						<td valign="top" colspan="6" >
-							No records found
+							{!! trans('messages.no_records_found') !!}
 						</td>
 					</tr>
 				</tbody>
 			</table>
 		</div>
-		<a href="" class="pull-right" ng-if="invoice.view_student_list_link" ng-click="invoice.viewAllStudents(invoice.record.id)">View All Students under this Order</a>
-		<a href="" class="pull-right" ng-if="!invoice.view_student_list_link" ng-click="invoice.details(invoice.record.id, 'view')">Back to Class List</a>
+		<a href="" class="pull-right" ng-if="invoice.view_student_list_link" ng-click="invoice.viewAllStudents(invoice.record.id)">{!! trans('messages.admin_view_all_student_under_this_order') !!}</a>
+		<a href="" class="pull-right" ng-if="!invoice.view_student_list_link" ng-click="invoice.details(invoice.record.id, 'view')">{!! trans('messages.admin_back_to_class_list') !!}</a>
 	</div>
 
 	<div class="col-xs-12 search-container">
@@ -166,17 +166,17 @@
 			) !!}
 				<div class="form-group">
 					<div class="col-xs-6"></div>
-					<label class="col-xs-2 control-label">Sub Total</label>
+					<label class="col-xs-2 control-label">{!! trans('messages.subtotal') !!}</label>
 					<div class="col-xs-4">
 						<div class="input-group">
-							<span class="input-group-addon" id="basic-addon1">USD$</span>
+							<span class="input-group-addon" id="basic-addon1">{!! trans('messages.usd') !!}</span>
 							<input type="text" ng-disabled="true" class="form-control" value="{! invoice.record.subtotal | currency : '' : 2 !}" placeholder="Sub Total" />
 						</div>
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-xs-6"></div>
-					<label class="col-xs-2 control-label">Discount</label>
+					<label class="col-xs-2 control-label">{!! trans('messages.discount') !!}</label>
 					<div class="col-xs-4">
 						<div class="input-group">
 							{!! Form::text('discount',''
@@ -184,7 +184,7 @@
 									'ng-disabled' => true
 									, 'class' => 'form-control'
 									, 'ng-model' => 'invoice.record.discount'
-									, 'placeholder' => 'Discount'
+									, 'placeholder' => 'trans('messages.discount')'
 								]
 							) !!}
 							<span class="input-group-addon" id="basic-addon1">%</span>
@@ -193,10 +193,10 @@
 				</div>
 				<div class="form-group">
 					<div class="col-xs-6"></div>
-					<label class="col-xs-2 control-label">Total</label>
+					<label class="col-xs-2 control-label">{!! trans('messages.total') !!}</label>
 					<div class="col-xs-4">
 						<div class="input-group">
-							<span class="input-group-addon" id="basic-addon1">USD$</span>
+							<span class="input-group-addon" id="basic-addon1">{!! trans('messages.usd') !!}</span>
 							<input type="text" ng-disabled="true" class="form-control" value="{! invoice.record.total | currency : '' : 2 !}" placeholder="Total" />
 						</div>
 					</div>
@@ -204,7 +204,7 @@
 				<div class="form-group">
 					<div class="col-xs-6"></div>
 					<div class="col-xs-6 btn-container" ng-if="invoice.active_view">
-						{!! Form::button('Edit Status'
+						{!! Form::button('trans('messages.edit_status')'
 		        			, array(
 		        				'class' => 'btn btn-blue btn-medium'
 		        				, 'ng-click' => "invoice.setActive('edit')"
@@ -212,7 +212,7 @@
 		        			)
 		        		) !!}
 
-		        		{!! Form::button('Cancel'
+		        		{!! Form::button('trans('messages.cancel')'
 		        			, array(
 		        				'class' => 'btn btn-gold btn-medium'
 		        				, 'ng-click' => "invoice.setActive()"
@@ -222,7 +222,7 @@
 
 					<div class="col-xs-6 btn-container" ng-if="invoice.active_edit">
 
-		        		{!! Form::button('Save Status'
+		        		{!! Form::button('trans('messages.save_status')'
 		        			, array(
 		        				'class' => 'btn btn-blue btn-medium'
 		        				, 'ng-click' => "invoice.updateStatus()"
@@ -230,7 +230,7 @@
 		        			)
 		        		) !!}
 
-		        		{!! Form::button('Cancel'
+		        		{!! Form::button('trans('messages.cancel')'
 		        			, array(
 		        				'class' => 'btn btn-gold btn-medium'
 		        				, 'ng-click' => "invoice.details(invoice.record.id, 'view')"
