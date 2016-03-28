@@ -1,7 +1,7 @@
 <div ng-if="module.active_list">
 	<div class="content-title">
 		<div class="title-main-content">
-			<span>Module Management</span>
+			<span>{!! trans('messages.admin_module_mgmt') !!}</span>
 		</div>
 	</div>
 
@@ -19,7 +19,7 @@
 
 	<div class="col-xs-12 search-container">
 		<div class="title-mid">
-			Search
+			{!! trans('messages.search') !!}
 		</div>
 
 		<div class="form-search">
@@ -33,7 +33,7 @@
 				<div class="form-group">
 					<div class="col-xs-5" ng-init="module.getSubject()">
 						<select ng-model="module.search.subject" ng-disabled="!module.subjects.length" class="form-control">
-							<option value=""> -- Select Subject -- </option>
+							<option value="">{!! trans('messages.admin_select_subject') !!}</option>
 							<option ng-repeat="subject in module.subjects" ng-value="subject.name"> {! subject.name !} </option>
 						</select>
 					</div>
@@ -42,12 +42,12 @@
 							, array(
 								'class' => 'form-control'
 								, 'ng-model' => 'module.search.area'
-								, 'placeholder' => 'Subject Area'
+								, 'placeholder' => 'trans('messages.subject_area')'
 							)
 						) !!}
 					</div>
 					<div class="col-xs-2">
-						{!! Form::button('Search'
+						{!! Form::button('trans('messages.search')'
 							,array(
 								'class' => 'btn btn-blue'
 								, 'ng-click' => 'module.searchFnc($event)'
@@ -61,13 +61,13 @@
 							, array(
 								'class' => 'form-control'
 								, 'ng-model' => 'module.search.name'
-								, 'placeholder' => 'Module Name'
+								, 'placeholder' => 'trans('messages.admin_module_name')'
 							)
 						) !!}
 					</div>
 					<div class="col-xs-5"></div>
 					<div class="col-xs-2">
-						{!! Form::button('Clear'
+						{!! Form::button('trans('messages.clear')'
 							,array(
 								'class' => 'btn btn-gold'
 								, 'ng-click' => 'module.clearFnc($event)'
@@ -83,12 +83,12 @@
 
 	<div class="col-xs-12 table-container">
 		<button class="btn btn-blue btn-semi-medium" ng-click="module.setActive(futureed.ACTIVE_ADD)">
-			<i class="fa fa-plus-square"></i> Add Module
+			<i class="fa fa-plus-square"></i> {!! trans('messages.admin_add_module') !!}
 		</button>
 
 		<div class="list-container" ng-cloak>
 			<div class="col-xs-6 title-mid">
-				module List
+				{!! trans('messages.admin_module_list') !!}
 			</div>
 
 			<div class="col-xs-6 size-container">
@@ -112,10 +112,10 @@
 			<table class="col-xs-12 table table-striped table-bordered">
 				<thead>
 					<tr>
-						<th>Module</th>
-						<th>Subject</th>
-						<th>Area</th>
-						<th ng-if="module.records.length">Action</th>
+						<th>{!! trans('messages.module') !!}</th>
+						<th>{!! trans('messages.subject') !!}</th>
+						<th>{!! trans('messages.area') !!}</th>
+						<th ng-if="module.records.length">{!! trans('messages.action') !!}</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -139,12 +139,12 @@
 					</tr>
 					<tr class="odd" ng-if="!module.records.length && !module.table.loading">
 						<td valign="top" colspan="7">
-							No records found
+							{!! trans('messages.no_records_found') !!}
 						</td>
 					</tr>
 					<tr class="odd" ng-if="module.table.loading">
 						<td valign="top" colspan="7">
-							Loading...
+							{!! trans('messages.loading') !!}
 						</td>
 					</tr>
 				</tbody>
@@ -170,14 +170,14 @@
 	  	<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
-					Delete Module
+					{!! trans('messages.admin_delete_module') !!}
 				</div>
 				<div class="modal-body">
-					Are you sure you want to delete this module?
+					{!! trans('messages.admin_delete_module_msg') !!}
 				</div>
 				<div class="modal-footer">
 					<div class="btncon col-xs-8 col-xs-offset-4 pull-left">
-						{!! Form::button('Yes'
+						{!! Form::button('trans('messages.yes')'
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-click' => 'module.deleteModule()'
@@ -185,7 +185,7 @@
 							)
 						) !!}
 
-						{!! Form::button('No'
+						{!! Form::button('trans('messages.no')'
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'data-dismiss' => 'modal'
