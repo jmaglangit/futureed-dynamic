@@ -13,7 +13,7 @@
 
 	<div class="col-xs-12 search-container">
 		<div class="title-mid">
-			Search
+			{!! trans('messages.search') !!}
 		</div>
 
 		<div class="form-search">
@@ -27,7 +27,7 @@
 				<div class="col-xs-5">
 					{!! Form::text('search_module', ''
 						,array(
-							'placeholder' => 'Username'
+							'placeholder' => 'trans('messages.username')'
 							, 'ng-model' => 'logs.search.username'
 							, 'class' => 'form-control btn-fit'
 						)
@@ -37,7 +37,7 @@
 				<div class="col-xs-5">
 					{!! Form::text('client_user_agent', ''
 						,array(
-							'placeholder' => 'Agent Used'
+							'placeholder' => 'trans('messages.admin_agent_used')'
 							, 'ng-model' => 'logs.search.client_user_agent'
 							, 'class' => 'form-control btn-fit'
 						)
@@ -57,7 +57,7 @@
 				<div class="col-xs-5">
 					{!! Form::select('result_response'
 						, array(
-							'' =>' -- Select Response Code --'
+							'' =>'trans('messages.admin_response_code')'
 							, '200'=>'200'
 							, '201'=>'201'
 							, '404'=>'404'
@@ -76,9 +76,9 @@
 				<div class="col-xs-5">
 					{!! Form::select('log_type'
 						, array(
-							'' =>' -- Select Log Type --'
-							, 'Admin'=>'Admin'
-							, 'User'=>'User'
+							'' =>'trans('messages.admin_select_security')'
+							, 'Admin'=>'trans('messages.admin')'
+							, 'User'=>'trans('messages.user')'
 						)
 						, null
 						, array(
@@ -89,7 +89,7 @@
 				</div>
 				
 				<div class="col-xs-2">
-					{!! Form::button('Clear'
+					{!! Form::button('trans('messages.clear')'
 						,array(
 							'class' => 'btn btn-gold'
 							, 'ng-click' => 'logs.clearFnc($event)'
@@ -103,7 +103,7 @@
 	<div class="table-container">
 		<div class="list-container" ng-cloak>
 			<div class="col-xs-6 title-mid">
-				Logs
+				{!! trans('messages.logs') !!}
 			</div>
 
 			<div class="col-xs-6 size-container">
@@ -127,11 +127,11 @@
 			<table class="col-xs-12 table table-striped table-bordered">
 				<thead>
 					<tr>
-						<th>Username</th>
-						<th>IP Address</th>
-						<th>Agent Used</th>
-						<th>HTTP Response</th>
-						<th>Log Type</th>
+						<th>{!! trans('messages.username') !!}</th>
+						<th>{!! trans('messages.ip_address') !!}</th>
+						<th>{!! trans('messages.admin_agent_used') !!}</th>
+						<th>{!! trans('messages.admin_http_response') !!}</th>
+						<th>{!! trans('messages.admin_log_type') !!}</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -144,12 +144,12 @@
 					</tr>
 					<tr class="odd" ng-if="!logs.records.length && !logs.table.loading">
 						<td valign="top" colspan="10">
-							No records found
+							{!! trans('messages.no_records_found') !!}
 						</td>
 					</tr>
 					<tr class="odd" ng-if="logs.table.loading">
 						<td valign="top" colspan="10">
-							Loading...
+							{!! trans('messages.loading') !!}
 						</td>
 					</tr>
 				</tbody>
