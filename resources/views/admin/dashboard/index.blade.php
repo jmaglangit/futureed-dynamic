@@ -14,7 +14,7 @@
 			<div class="client-content">
 				<div class="content-title">
 					<div class="title-main-content">
-						<span>Admin Dashboard</span>
+						<span>{!! trans('messages.admin_dashboard') !!}</span>
 					</div>
 				</div>
 			</div>
