@@ -1,7 +1,7 @@
 <div ng-if="client.active_view || client.active_edit">
 	<div class="content-title">
 		<div class="title-main-content">
-			<span>Client Details</span>
+			<span>{!! trans('messages.admin_client_details') !!}</span>
 		</div>
 	</div>
 
@@ -23,14 +23,14 @@
 		{!! Form::open(array('id'=> 'add_client_form', 'class' => 'form-horizontal')) !!}
 	        <fieldset>
 	        	<legend class="legend-name-mid">
-	        		User Credentials
+	        		{!! trans('messages.user_credentials') !!}
 	        	</legend>
 	        	<div class="form-group">
-	        		<label class="col-xs-3 control-label" id="username">Username <span class="required">*</span></label>
+	        		<label class="col-xs-3 control-label" id="username">{!! trans('messages.username') !!} <span class="required">*</span></label>
 	        		<div class="col-xs-5">
 	        			{!! Form::text('username',''
 	        				, array(
-	        					'placeHolder' => 'Username'
+	        					'placeHolder' => 'trans('messages.username')'
 	        					, 'ng-model' => 'client.record.username'
 	        					, 'ng-disabled' => 'client.active_view'
 	        					, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
@@ -47,11 +47,11 @@
 		            </div>	
 	        	</div>
 	        	<div class="form-group">
-	        		<label class="col-xs-3 control-label" id="email">Email <span class="required">*</span></label>
+	        		<label class="col-xs-3 control-label" id="email">{!! trans('messages.email') !!} <span class="required">*</span></label>
 	        		<div class="col-xs-5">
 	        			{!! Form::text('email',''
 	        				, array(
-	        					'placeHolder' => 'Email'
+	        					'placeHolder' => 'trans('email')'
 	        					, 'ng-model' => 'client.record.email'
 	        					, 'ng-disabled' => 'client.active_view'
 	        					, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
@@ -68,7 +68,7 @@
 		            </div>	
 	        	</div>
 	        	<div class="form-group">
-	        		<label class="col-xs-3 control-label" id="status">Status <span class="required">*</span></label>
+	        		<label class="col-xs-3 control-label" id="status">{!! trans('messages.status') !!} <span class="required">*</span></label>
 	        		<div class="col-xs-5" ng-if="client.active_edit">
 	        			<div class="col-xs-6 checkbox">	                				
 	        				<label>
@@ -81,7 +81,7 @@
 	        							, 'ng-click' => 'client.clientChangeStatus()'
 	        						) 
 	        					) !!}
-	        				<span class="lbl padding-8">Enabled</span>
+	        				<span class="lbl padding-8">{!! trans('messages.enabled') !!}</span>
 	        				</label>
 	        			</div>
 	        			<div class="col-xs-6 checkbox">
@@ -95,7 +95,7 @@
 	        							, 'ng-click' => 'client.clientChangeStatus()'
 	        						)
 	        					) !!}
-	        				<span class="lbl padding-8">Disabled</span>
+	        				<span class="lbl padding-8">{!! trans('messages.disabled') !!}</span>
 	        				</label>
 	        			</div>
 	        		</div>
@@ -119,14 +119,14 @@
 
 	        <fieldset>
 	        	<legend class="legend-name-mid">
-	        		Personal Information
+	        		{!! trans('messages.personal_info') !!}
 	        	</legend>
 	        	<div class="form-group">
-	        		<label class="col-xs-3 control-label" id="first_name">First Name <span class="required">*</span></label>
+	        		<label class="col-xs-3 control-label" id="first_name">{!! trans('messages.first_name') !!} <span class="required">*</span></label>
 	        		<div class="col-xs-5">
 	        			{!! Form::text('first_name',''
 	        				, array(
-	        					'placeHolder' => 'First Name'
+	        					'placeHolder' => 'trans('messages.first_name')'
 	        					, 'ng-model' => 'client.record.first_name'
 	        					, 'ng-disabled' => 'client.active_view'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['first_name'] }"
@@ -136,11 +136,11 @@
 	        		</div>
 	        	</div>
 	        	<div class="form-group">
-	        		<label class="col-xs-3 control-label" id="last_name">Last Name <span class="required">*</span></label>
+	        		<label class="col-xs-3 control-label" id="last_name">{!! trans('messages.last_name') !!} <span class="required">*</span></label>
 	        		<div class="col-xs-5">
 	        			{!! Form::text('last_name',''
 	        				, array(
-	        					'placeHolder' => 'Last Name'
+	        					'placeHolder' => 'trans('messages.last_name')'
 	        					, 'ng-model' => 'client.record.last_name'
 	        					, 'ng-disabled' => 'client.active_view'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['last_name'] }"
@@ -150,11 +150,11 @@
 	        		</div>
 	        	</div>
 	        	<div class="form-group">
-	        		<label class="col-xs-3 control-label">Role <span class="required">*</span></label>
+	        		<label class="col-xs-3 control-label">{!! trans('messages.role') !!} <span class="required">*</span></label>
 	        		<div class="col-xs-5">
 	        			{!! Form::select('client_role'
 	        				, [	
-	        					'' => '-- Select Role --',
+	        					'' => 'trans('messages.select_role')',
 	            				'Principal' => 'Principal', 
 	            				'Teacher' => 'Teacher', 
 	            				'Parent' => 'Parent'
@@ -171,14 +171,14 @@
 	        </fieldset>
 	        <fieldset ng-if="client.record.client_role == futureed.TEACHER">
 	        	<legend class="legend-name-mid">
-	        		School Information
+	        		{!! trans('messages.school_info') !!}
 	        	</legend>
 	        	<div class="form-group">
-	        		<label class="col-xs-3 control-label">School Name <span class="required">*</span></label>
+	        		<label class="col-xs-3 control-label">{!! trans('messages.school_name') !!} <span class="required">*</span></label>
 	        		<div class="col-xs-6">
 	        			{!! Form::text('school_name',''
 	        				, array(
-	        					'placeHolder' => 'School Name'
+	        					'placeHolder' => 'trans('messages.school_name')'
 	        					, 'ng-disabled' => 'true'
 	        					, 'ng-model' => 'client.record.school_name'
 	        					, 'ng-change' => "client.searchSchool('edit')"
@@ -203,14 +203,14 @@
 	        </fieldset>
 	        <fieldset ng-if="client.record.client_role == futureed.PRINCIPAL">
 	        	<legend class="legend-name-mid">
-	        		School Information
+	        		{!! trans('messages.school_info') !!}
 	        	</legend>
 	        	<div class="form-group">
-	        		<label class="col-xs-3 control-label" id="school_name">School Name <span class="required">*</span></label>
+	        		<label class="col-xs-3 control-label" id="school_name">{!! trans('messages.school_name') !!} <span class="required">*</span></label>
 	        		<div class="col-xs-6">
 	        			{!! Form::text('school_name',''
 	        				, array(
-	        					'placeHolder' => 'School Name'
+	        					'placeHolder' => 'trans('messages.school_name')'
 	        					, 'ng-model' => 'client.record.school_name'
 	        					, 'ng-disabled' => 'client.active_view'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['school_name'] }"
@@ -220,11 +220,11 @@
 	        		</div>
 	        	</div>
 	        	<div class="form-group">
-	        		<label class="col-xs-3 control-label" id="school_address">School Address <span class="required">*</span></label>
+	        		<label class="col-xs-3 control-label" id="school_address">{!! trans('messages.school_address') !!} <span class="required">*</span></label>
 	        		<div class="col-xs-6">
 	        			{!! Form::text('school_address',''
 	        				, array(
-	        					'placeHolder' => 'School Address'
+	        					'placeHolder' => 'trans('messages.school_address')'
 	        					, 'ng-model' => 'client.record.school_street_address'
 	        					, 'ng-disabled' => 'client.active_view'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['school_address'] }"
@@ -234,11 +234,11 @@
 	        		</div>
 	        	</div>
 	        	<div class="form-group">
-	        		<label class="col-xs-3 control-label" id="school_city">City</label>
+	        		<label class="col-xs-3 control-label" id="school_city">{!! trans('messages.city') !!}</label>
 	        		<div class="col-xs-5">
 	        			{!! Form::text('school_city',''
 	        				, array(
-	        					'placeHolder' => 'School City'
+	        					'placeHolder' => 'trans('messages.school_city')'
 	        					, 'ng-model' => 'client.record.school_city'
 	        					, 'ng-disabled' => 'client.active_view'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['school_city'] }"
@@ -248,11 +248,11 @@
 	        		</div>
 	        	</div>
 	        	<div class="form-group">
-	        		<label class="col-xs-3 control-label" id="school_state">State <span class="required">*</span></label>
+	        		<label class="col-xs-3 control-label" id="school_state">{!! trans('messages.state') !!} <span class="required">*</span></label>
 	        		<div class="col-xs-5">
 	        			{!! Form::text('school_state',''
 	        				, array(
-	        					'placeHolder' => 'School State'
+	        					'placeHolder' => 'trans('messages.school_state')'
 	        					, 'ng-model' => 'client.record.school_state'
 	        					, 'ng-disabled' => 'client.active_view'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['school_state'] }"
@@ -262,11 +262,11 @@
 	        		</div>
 	        	</div>
 	        	<div class="form-group">
-	        		<label class="col-xs-3 control-label" id="school_postal">Postal Code</label>
+	        		<label class="col-xs-3 control-label" id="school_postal">{!! trans('messages.postal_code') !!}</label>
 	        		<div class="col-xs-5">
 	        			{!! Form::text('school_zip',''
 	        				, array(
-	        					'placeHolder' => 'Postal Code'
+	        					'placeHolder' => 'trans(messages.postal_code)'
 	        					, 'ng-model' => 'client.record.school_zip'
 	        					, 'ng-disabled' => 'client.active_view'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['school_zip'] }"
@@ -276,10 +276,10 @@
 	        		</div>
 	        	</div>
 	        	<div class="form-group">
-	        		<label class="col-xs-3 control-label">Country <span class="required">*</span></label>
+	        		<label class="col-xs-3 control-label">{!! trans('messages.country') !!} <span class="required">*</span></label>
 				      <div class="col-xs-5" ng-init="getCountries()">
 				        <select  name="school_country_id" class="form-control" ng-class="{ 'required-field' : client.fields['school_country_id'] }" ng-disabled="client.active_view" ng-model="client.record.school_country_id">
-				          <option ng-selected="client.record.school_country_id == futureed.FALSE" value="">-- Select Country --</option>
+				          <option ng-selected="client.record.school_country_id == futureed.FALSE" value="">{!! trans('messages.select_country') !!}</option>
 				          <option ng-selected="client.record.school_country_id == country.id" ng-repeat="country in countries" ng-value="country.id">{! country.name!}</option>
 				        </select>
 				      </div>
@@ -287,14 +287,14 @@
 	        </fieldset>
 	        <fieldset ng-if="client.record.client_role == futureed.PRINCIPAL">
 	        	<legend class="legend-name-mid">
-	        		School Contact Information
+	        		{!! trans('messages.school_info') !!}
 	        	</legend>
 	        	<div class="form-group">
-	        		<label class="col-xs-3 control-label" id="contact_person">Contact Person <span class="required">*</span></label>
+	        		<label class="col-xs-3 control-label" id="contact_person">{!! trans('messages.contact_person') !!} <span class="required">*</span></label>
 	        		<div class="col-xs-6">
 	        			{!! Form::text('school_contact_name',''
 	        				, array(
-	        					'placeHolder' => 'Contact Person'
+	        					'placeHolder' => 'trans('messages.contact_person')'
 	        					, 'ng-model' => 'client.record.school_contact_name'
 	        					, 'ng-disabled' => 'client.active_view'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['school_contact_name'] }"
@@ -304,11 +304,11 @@
 	        		</div>
 	        	</div>
 	        	<div class="form-group">
-	        		<label class="col-xs-3 control-label" id="contact_number">Contact Number <span class="required">*</span></label>
+	        		<label class="col-xs-3 control-label" id="contact_number">{!! trans('messages.contact_number') !!} <span class="required">*</span></label>
 	        		<div class="col-xs-6">
 	        			{!! Form::text('school_contact_number',''
 	        				, array(
-	        					'placeHolder' => 'Contact Number'
+	        					'placeHolder' => 'trans('messages.contact_number')'
 	        					, 'ng-model' => 'client.record.school_contact_number'
 	        					, 'ng-disabled' => 'client.active_view'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['school_contact_number'] }"
@@ -320,17 +320,17 @@
 	        </fieldset>
 	        <fieldset ng-if="client.record.client_role">
 	        	<legend class="legend-name-mid" ng-if="client.record.client_role !== futureed.PARENT">
-	        		Other Address Information (Optional)
+	        		{!! trans('messages.other_address_info') !!}
 	        	</legend>
 	        	<legend class="legend-name-mid" ng-if="client.record.client_role == futureed.PARENT">
-	        		Address Information
+	        		{!! trans('messages.address_info') !!}
 	        	</legend>
 	        	<div class="form-group">
-	        		<label class="col-xs-3 control-label" id="school_address">Street Address</label>
+	        		<label class="col-xs-3 control-label" id="school_address">{!! trans('messages.street_address') !!} <span class="required" ng-if="client.record.client_role == futureed.PARENT">*</span></label>
 	        		<div class="col-xs-6">
 	        			{!! Form::text('street_address',''
 	        				, array(
-	        					'placeHolder' => 'Street Address'
+	        					'placeHolder' => 'trans('messages.street_address')'
 	        					, 'ng-model' => 'client.record.street_address'
 	        					, 'ng-disabled' => 'client.active_view'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['street_address'] }"
@@ -340,11 +340,11 @@
 	        		</div>
 	        	</div>
 	        	<div class="form-group">
-	        		<label class="col-xs-3 control-label" id="school_city">City</label>
+	        		<label class="col-xs-3 control-label" id="school_city">{!! trans('messages.city') !!} <span class="required" ng-if="client.record.client_role == futureed.PARENT">*</span></label>
 	        		<div class="col-xs-5">
 	        			{!! Form::text('city',''
 	        				, array(
-	        					'placeHolder' => 'City'
+	        					'placeHolder' => 'trans('messages.city')'
 	        					, 'ng-model' => 'client.record.city'
 	        					, 'ng-disabled' => 'client.active_view'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['city'] }"
@@ -354,11 +354,11 @@
 	        		</div>
 	        	</div>
 	        	<div class="form-group">
-	        		<label class="col-xs-3 control-label" id="school_state">State </label>
+	        		<label class="col-xs-3 control-label" id="school_state">{!! trans('messages.state') !!} </label>
 	        		<div class="col-xs-5">
 	        			{!! Form::text('state',''
 	        				, array(
-	        					'placeHolder' => 'State'
+	        					'placeHolder' => 'trans('messages.state')'
 	        					, 'ng-model' => 'client.record.state'
 	        					, 'ng-disabled' => 'client.active_view'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['state'] }"
@@ -368,11 +368,11 @@
 	        		</div>
 	        	</div>
 	        	<div class="form-group">
-	        		<label class="col-xs-3 control-label" id="school_postal">Postal Code</label>
+	        		<label class="col-xs-3 control-label" id="school_postal">{!! trans('messages.postal_code') !!}</label>
 	        		<div class="col-xs-5">
 	        			{!! Form::text('zip',''
 	        				, array(
-	        					'placeHolder' => 'Postal Code'
+	        					'placeHolder' => 'trans('messages.postal_code')'
 	        					, 'ng-model' => 'client.record.zip'
 	        					, 'ng-disabled' => 'client.active_view'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['zip'] }"
@@ -382,10 +382,10 @@
 	        		</div>
 	        	</div>
 	        	<div class="form-group">
-	        		<label class="col-xs-3 control-label">Country</label>
+	        		<label class="col-xs-3 control-label">{!! trans('messages.country') !!} <span class="required" ng-if="client.record.client_role == futureed.PARENT">*</span></label>
 				      <div class="col-xs-5" ng-init="getCountries()">
 				        <select  name="country_id" class="form-control" ng-class="{ 'required-field' : client.fields['country_id'] }" ng-disabled="client.active_view" ng-model="client.record.country_id">
-				          <option ng-selected="client.record.country_id == futureed.FALSE" value="">-- Select Country --</option>
+				          <option ng-selected="client.record.country_id == futureed.FALSE" value="">{!! trans('messages.select_country') !!}</option>
 				          <option ng-selected="client.record.country_id == country.id" ng-repeat="country in countries" ng-value="country.id">{! country.name!}</option>
 				        </select>
 				      </div>
@@ -395,14 +395,14 @@
 		        <div class="btn-container">
 		        	<div ng-if="client.active_view">
 		        		<div ng-if="client.record.account_status == futureed.PENDING">
-			        		{!! Form::button('Verify'
+			        		{!! Form::button('trans('messages.verify')'
 				        		, array(
 				        			'class' => 'btn btn-blue btn-medium'
 				        			, 'ng-click' => "client.verifyClient()"
 				        		)
 				        	) !!}
 
-				        	{!! Form::button('Reject'
+				        	{!! Form::button('trans('messages.reject')'
 				        		, array(
 				        			'class' => 'btn btn-gold btn-medium'
 				        			, 'ng-click' => "client.rejectClient()"
@@ -411,14 +411,14 @@
 			        	</div>
 
 			        	<div class="margin-10-top">
-				        	{!! Form::button('Edit'
+				        	{!! Form::button('trans('messages.edit')'
 				        		, array(
 				        			'class' => 'btn btn-blue btn-medium'
 				        			, 'ng-click' => "client.setActive(futureed.ACTIVE_EDIT, client.record.id)"
 				        		)
 				        	) !!}
 
-				        	{!! Form::button('Cancel'
+				        	{!! Form::button('trans('messages.cancel')'
 				        		, array(
 				        			'class' => 'btn btn-gold btn-medium'
 				        			, 'ng-click' => 'client.setActive()'
@@ -428,14 +428,14 @@
 		        	</div>
 
 		        	<div ng-if="client.active_edit">
-		        		{!! Form::button('Save'
+		        		{!! Form::button('trans('messages.save')'
 			        		, array(
 			        			'class' => 'btn btn-blue btn-medium'
 			        			, 'ng-click' => 'client.updateClientDetails()'
 			        		)
 			        	) !!}
 
-			        	{!! Form::button('Cancel'
+			        	{!! Form::button('trans('messages.cancel')'
 			        		, array(
 			        			'class' => 'btn btn-gold btn-medium'
 			        			, 'ng-click' => "client.setActive(futureed.ACTIVE_VIEW, client.record.id)"
