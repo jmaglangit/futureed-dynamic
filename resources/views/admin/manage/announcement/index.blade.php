@@ -13,7 +13,7 @@
 			<div class="announce-content">
 				<div class="content-title">
 					<div class="title-main-content">
-						<span><i class="fa fa-bullhorn"></i> Client Announcement</span>
+						<span><i class="fa fa-bullhorn"></i> {!! trans('messages.admin_announce_client') !!}</span>
 					</div>
 				</div>
 				<div class="form-content col-xs-12">
@@ -24,7 +24,7 @@
 					</div>
 
 					 <div class="alert alert-success" ng-if="announce.data.success">
-			        	<p>Successfully created this announcement.</p>
+			        	<p>{!! trans('messages.admin_announce_success_created') !!}</p>
 			        </div>
 					{!! Form::open([
 						'id' => 'announcement_form'
@@ -36,7 +36,7 @@
 									<div class="row">
 									 	<div class="form-group">
 									 		<div class="col-xs-6">
-									 			<label class="content-label announce-label">Date Start</label>
+									 			<label class="content-label announce-label">{!! trans('messages.date_start') !!}</label>
 									            <div class="dropdown">
 			                              <a class="dropdown-toggle" id="dropdown1" role="button" data-toggle="dropdown" data-target="#" href="#">
 			                                <div class="input-group">
@@ -51,7 +51,7 @@
 			                            </div>
 								            </div>
 								            <div class="col-xs-6">
-								            <label class="content-label announce-label">Date End</label>
+								            <label class="content-label announce-label">{!! trans('messages.date_end') !!}</label>
 									            <div class="dropdown">
 			                              <a class="dropdown-toggle" id="dropdown2" role="button" data-toggle="dropdown" data-target="#" href="#">
 			                                <div class="input-group">
@@ -69,7 +69,7 @@
 								    </div>
 								   </div>
 								   <div class="row">
-								   		<label class="announce-label">Your Message</label>	
+								   		<label class="announce-label">{!! trans('messages.admin_announce_your_message') !!}</label>	
 								   		{!! Form::textarea('announce_message',''
 								   			,[
 								   				'class' => 'form-control'
@@ -79,8 +79,8 @@
 								   			]) !!}
 								   </div>
 								   <div class="btn-container">
-								   		<button class="btn btn-blue btn-medium" ng-click="announce.saveAnnounce()" type="button">Save</button>
-								   		<button class="btn btn-gold btn-medium" ng-click="announce.clearAnnouncementForm()" type="button">Clear</button>
+								   		<button class="btn btn-blue btn-medium" ng-click="announce.saveAnnounce()" type="button">{!! trans('messages.save') !!}</button>
+								   		<button class="btn btn-gold btn-medium" ng-click="announce.clearAnnouncementForm()" type="button">{!! trans('messages.clear') !!}</button>
 								   </div>					
 								</div>				
 						</fieldset>	
