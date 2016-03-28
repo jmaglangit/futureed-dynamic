@@ -1,7 +1,7 @@
 <div ng-if="admin.active_list">
 	<div class="content-title">
 		<div class="title-main-content">
-			<span>Admin Management</span>
+			<span>{!! trans('messages.admin_management') !!}</span>
 		</div>
 	</div>
 
@@ -20,7 +20,7 @@
 
 	<div class="col-xs-12 search-container">
 		<div class="title-mid">
-			Search
+			{!! trans('messages.search') !!}
 		</div>
 		
 		<div class="form-search">
@@ -37,7 +37,7 @@
 						, [
 							'class' => 'form-control'
 							, 'ng-model' => 'admin.search.user'
-							, 'placeholder' => 'Username'
+							, 'placeholder' => 'trans('messages.username')'
 						]
 					) !!}
 				</div>
@@ -46,12 +46,12 @@
 						, [
 							'class' => 'form-control'
 							, 'ng-model' => 'admin.search.email'
-							, 'placeholder' => 'Email'
+							, 'placeholder' => 'trans('messages.email')'
 						]
 					) !!}
 				</div>
 				<div class="col-xs-2">
-					{!! Form::button('Search'
+					{!! Form::button('trans('messages.search')'
 						,array(
 							'class' => 'btn btn-blue'
 							, 'ng-click' => 'admin.getAdminList()'
@@ -62,7 +62,7 @@
 			<div class="form-group">
 				<div class="col-xs-5">
 					{!! Form::select('role', 
-						array('' => '-- Select Role --' ,
+						array('' => 'trans('messages.select_role')' ,
 							'Admin' => 'Admin', 
 							'Super Admin' => 'Super Admin'), 
 							null, 
@@ -71,7 +71,7 @@
 				</div>
 				<div class="col-xs-5"></div>
 				<div class="col-xs-2">
-					{!! Form::button('clear'
+					{!! Form::button('trans('messages.clear')'
 						,array(
 							'class' => 'btn btn-gold'
 							, 'ng-click' => 'admin.clearSearch()'
@@ -84,12 +84,12 @@
 
 	<div class="col-xs-12 table-container">
 		<button class="btn btn-blue btn-small" ng-click="admin.setActive(futureed.ACTIVE_ADD)">
-			<i class="fa fa-plus-square"></i> Add Admin
+			<i class="fa fa-plus-square"></i> {!! trans('messages.admin_add_admin') !!}
 		</button>
 
 		<div class="list-container" ng-cloak>
 			<div class="col-xs-6 title-mid">
-				Admin List
+				{!! trans('messages.admin_list') !!}
 			</div>
 
 			<div class="col-xs-6 size-container">
@@ -113,10 +113,10 @@
 			<table class="col-xs-12 table table-striped table-bordered">
 				<thead>
 			        <tr>
-			            <th>Username</th>
-			            <th>Email</th>
-			            <th>Role</th>
-			            <th ng-if="admin.records.length">Actions</th>
+			            <th>{!! trans('messages.username') !!}</th>
+			            <th>{!! trans('messages.email') !!}</th>
+			            <th>{!! trans('messages.role') !!}</th>
+			            <th ng-if="admin.records.length">{!! Lang::choice('messages.action',2) !!}</th>
 			        </tr>
 			    </thead>
 
@@ -148,12 +148,12 @@
 		        </tr>
 		        <tr class="odd" ng-if="!admin.records.length && !admin.table.loading">
 		        	<td valign="top" colspan="4">
-		        		No records found
+		        		{!! trans('messages.no_records_found') !!}
 		        	</td>
 		        </tr>
 		        <tr class="odd" ng-if="admin.table.loading">
 		        	<td valign="top" colspan="4">
-		        		Loading...
+		        		{!! trans('messages.loading') !!}
 		        	</td>
 		        </tr>
 		        </tbody>
