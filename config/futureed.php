@@ -255,6 +255,9 @@ return [
 	//avatar accessory folder
 	'image_avatar_accessory_folder' => 'images/avatar_accessory',
 
+	//background images folder
+	'background_images_folder' => 'images/background-images',
+
 	'accepted_csv' => [
 		'text/csv',
 		'application/vnd.ms-excel'
