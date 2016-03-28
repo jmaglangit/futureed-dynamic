@@ -228,90 +228,63 @@ function StudentTrialModuleController($scope, $window, $interval, $filter, apiSe
     self.validateAnswer = function() {
         $scope.ui_block();
 
-        var data = {}; // <--- Object automatically converts to JSON when sent via ajax
+        var data = {};
 
         data.question_number = self.question_number;
         data.question_type = self.trialQuestion[self.question_number]['type'];
 
-        console.log(self.fib_answer);
-        console.log(self.fib_answer.length);
+        console.log("question_type: " + data.question_type + " fib_answer: " + self.fib_answer + " answer: " + self.answer);
 
-        if(self.answer != '' || self.fib_answer.length > 0){
-
-            if(self.trialQuestion[self.question_number]['type'] == Constants.PROVIDE || self.trialQuestion[self.question_number]['type'] == Constants.MULTIPLECHOICE){
+        if(self.trialQuestion[self.question_number]['type'] == Constants.PROVIDE || self.trialQuestion[self.question_number]['type'] == Constants.MULTIPLECHOICE){
                 data.answer = self.answer;
-
-                StudentModuleService.validateAnswer(data).success(function(response) {
-                    if(angular.equals(response.status, Constants.STATUS_OK)) {
-                        if(response.errors) {
-                            self.errors = $scope.errorHandler(response.errors);
-                        } else if(response.data) {
-                            self.answer_valid = response.data.valid;
-                            self.question_hide = true;
-                            self.show_correct = true;
-                            self.answer = '';
-                            console.log(self.question_hide + ' ' + self.show_correct);
-                        }
-                    }
-                    $scope.ui_unblock();
-                }).error(function(err) {
-                    self.errors = $scope.internalError();
-                    $scope.ui_unblock();
-                });
-            }
-            else if(self.trialQuestion[self.question_number]['type'] == Constants.FILLINBLANK) {
-                data.answer = self.fib_answer;
-
-                StudentModuleService.validateAnswer(data).success(function(response) {
-                    if(angular.equals(response.status, Constants.STATUS_OK)) {
-                        if(response.errors) {
-                            self.errors = $scope.errorHandler(response.errors);
-                        } else if(response.data) {
-                            self.answer_valid = response.data.valid;
-                            self.question_hide = true;
-                            self.show_correct = true;
-                            self.answer = '';
-                            console.log(self.question_hide + ' ' + self.show_correct);
-                        }
-                    }
-                    $scope.ui_unblock();
-                }).error(function(err) {
-                    self.errors = $scope.internalError();
-                    $scope.ui_unblock();
-                });
-            }
-        } else {
-            self.errors = ['Answer must not be empty'];
-            $scope.ui_unblock();
         }
-    }
+        else if(self.trialQuestion[self.question_number]['type'] == Constants.FILLINBLANK){
+            data.answer = self.fib_answer;
+        }
+        else if(self.trialQuestion[self.question_number]['type'] == Constants.GRAPH) {
+            if(self.trialQuestion[self.question_number]['orientation'] === Constants.HORIZONTAL) {
+                var horizontalTable = document.getElementById('horizontalTable');
+                data.answer = self.horizontalGraph(horizontalTable);
+            } else if(self.trialQuestion[self.question_number]['orientation'] === Constants.VERTICAL) {
+                var verticalTable = document.getElementById('verticalTable');
+                data.answer = self.verticalGraph(verticalTable);
+            }
+        }
+        else if(self.trialQuestion[self.question_number]['type'] == Constants.ORDERING) {
+            data.answer = self.trialQuestion[self.question_number]['answer_string'];
+        }
+        else if(self.trialQuestion[self.question_number]['type'] == Constants.QUADRANT) {
+            quadData = self.quad.getData();
+            answer_quad_array = [];
 
+            $.each(quadData[0].data, function(i,item){
+                if(i > 0){
+                    obj = {'x' : quadData[0].data[i][0], 'y' : quadData[0].data[i][1]}
+                    answer_quad_array.push(obj);
+                }
+            });
 
-    var getAvatarPose = function(avatar_id) {
-        StudentModuleService.getAvatarPose(avatar_id).success(function(response) {
+            data.answer = answer_quad_array;
+        }
+        console.log("\ndata.answer: " + data.answer);
+        StudentModuleService.validateAnswer(data).success(function(response) {
             if(angular.equals(response.status, Constants.STATUS_OK)) {
                 if(response.errors) {
                     self.errors = $scope.errorHandler(response.errors);
                 } else if(response.data) {
-                    self.avatar_pose = response.data;
-                }
-            }
-        }).error(function(response) {
-            self.errors = $scope.internalError();
-        });
-    }
+                    self.fib_answer = [];
+                    self.answer_valid = response.data.valid;
+                    self.question_hide = true;
+                    self.show_correct = true;
+                    self.answer = '';
 
-    var listAvatarQuotes = function(avatar_id) {
-        StudentModuleService.listAvatarQuotes(avatar_id).success(function(response) {
-            if(angular.equals(response.status, Constants.STATUS_OK)) {
-                if(response.errors) {
-                    self.errors = $scope.errorHandler(response.errors);
-                } else if(response.data) {
-                    self.avatar_quotes = response.data;
+                    console.log(self.question_hide + ' ' + self.show_correct);
                 }
             }
-        }).error(function(response) {
+            $scope.ui_unblock();
+        }).error(function(err) {
             self.errors = $scope.internalError();
+            $scope.ui_unblock();
         });
     }
 
@@ -458,9 +431,14 @@ function StudentTrialModuleController($scope, $window, $interval, $filter, apiSe
     self.nextQuestion = function() {
         self.errors = Constants.FALSE;
         self.success = Constants.FALSE;
-        self.question_number++;
-        self.question_hide = false;
-        self.show_correct = false;
+        if(self.question_number != 10) {
+            self.question_number++;
+            self.question_hide = false;
+            self.show_correct = false; //<---- Stuck here
+        } else {
+            self.trial_expired = true;
+        }
+
     }
 
     self.updateBackground = function() {
@@ -509,12 +487,12 @@ function StudentTrialModuleController($scope, $window, $interval, $filter, apiSe
 
     self.getQuadrant = function(){
         $scope.ui_block();
-
+        console.log("X:"+self.trialQuestion[self.question_number]['coordinates'][0]+" Y:" +self.trialQuestion[self.question_number]['coordinates'][1]);
         //initialize plot data and options
         data = [[null]];
         options = {
-            yaxis:  { min: -self.trialQuestion[self.question_number]['coordinates'][2], max: self.trialQuestion[self.question_number]['coordinates'][2], ticks: self.trialQuestion[self.question_number]['coordinates'][2] * 2},
-            xaxis:  { min: -self.trialQuestion[self.question_number]['coordinates'][1], max: self.trialQuestion[self.question_number]['coordinates'][1], ticks: self.trialQuestion[self.question_number]['coordinates'][1] * 2},
+            yaxis:  { min: -self.trialQuestion[self.question_number]['coordinates'][1], max: self.trialQuestion[self.question_number]['coordinates'][1], ticks: self.trialQuestion[self.question_number]['coordinates'][1] * 2},
+            xaxis:  { min: -self.trialQuestion[self.question_number]['coordinates'][0], max: self.trialQuestion[self.question_number]['coordinates'][0], ticks: self.trialQuestion[self.question_number]['coordinates'][0] * 2},
             grid:   {clickable: true},
             points: { show: true, radius: 4, fill: true, fillColor: "#EDC240" }
         };

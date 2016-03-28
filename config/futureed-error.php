@@ -177,7 +177,11 @@ return [
 		Error::SUBSCRIPTION_NAME_REQUIRED => 'The subscription name field is required.',
 		Error::SUBSCRIPTION_NAME_INVALID => 'The subscription name format is invalid.',
 		Error::SUBSCRIPTION_LSP_REQUIRED => 'The learning style is required.',
-		Error::SUBSCRIPTION_LSP_INVALID => 'The learning style format is invalid'
+		Error::SUBSCRIPTION_LSP_INVALID => 'The learning style format is invalid',
+
+		//  For trial module error messages
+		Error::TRIAL_MODULE_ANSWER_IS_REQUIRED => 'Answer is required.',
+		Error::TRIAL_MODULE_QUAD_PLOTTING_REQUIRED => 'Please plot your answer.'
 
 	],
 ];

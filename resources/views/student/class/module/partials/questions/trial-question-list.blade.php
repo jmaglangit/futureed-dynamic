@@ -65,14 +65,14 @@
                             </a>
                         </div>
 
-                        {{--FIB--}}{{-- <--------- stuck here --}}
+                        {{--FIB--}}
                         <div class="margin-top-30">
                             <div ng-if="mod.trialQuestion[mod.question_number]['type'] == futureed.FILLINBLANK" class="form-group">
                                 <div ng-class="{ 'fib-text-fields' : mod.trialQuestion[mod.question_number]['number_of_possible_answers'].length }">
-                                    <input ng-repeat="n in [] | range : mod.trialQuestion[mod.question_number]['number_of_possible_answers'].toString() track by $index"
-                                           ng-model="mod.fib_answers[$index]"
+                                    <input ng-repeat="n in mod.trialQuestion[mod.question_number]['number_of_possible_answers'] track by $index"
+                                           ng-model="mod.fib_answer[$index]"
                                            name="answer_text"
-                                           type="text" class="form-control question-text-answer form-control-lg" placeholder="Answer {! $index + 1 !}" value=""
+                                           type="text" class="form-control question-text-answer form-control-lg" placeholder="Answer {! $index + 1 !}"
                                     />
                                 </div>
                             </div>
@@ -171,7 +171,7 @@
     <div ng-if="mod.show_correct">
         <div class="questions-container col-xs-12">
             <div class="questions-header">
-                <h3> Question #{! mod.self.question_number + 1 !} </h3>
+                <h3> Question #{! mod.question_number + 1 !} </h3>
             </div>
 
             <div class="result-image">
@@ -237,10 +237,10 @@
         </div>
     </div>
 
-    <div ng-if="mod.result.failed">
+    <div ng-if="mod.trial_expired">
         <div class="questions-container col-xs-12">
             <div class="questions-header">
-                <h3> Question #{! mod.question_counter !} </h3>
+                <h3> Question #{! mod.question_number + 1 !} </h3>
             </div>
 
             <div class="result-failed message-container">
@@ -252,7 +252,7 @@
 
                     <div class="col-xs-6">
                         <p class="module-message">
-                            You need to review and take the test again.
+                            Trial Expired
                         </p>
 
                         <div class="proceed-btn-container btn-container">
