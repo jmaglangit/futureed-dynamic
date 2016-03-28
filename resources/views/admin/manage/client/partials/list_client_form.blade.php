@@ -1,7 +1,7 @@
 <div ng-if="client.active_list">
 	<div class="content-title">
 		<div class="title-main-content">
-			<span>Client Management</span>
+			<span>{!! trans('messages.admin_client_management') !!}</span>
 		</div>
 	</div>
 
@@ -21,7 +21,7 @@
 
 	<div class="col-xs-12 search-container">
 		<div class="title-mid">
-			Search
+			{!! trans('messages.search') !!}
 		</div>
 		
 		{!! Form::open(
@@ -35,7 +35,7 @@
 				<div class="col-xs-5">
 					{!! Form::text('search_name', ''
 						,array(
-							'placeholder' => 'Name'
+							'placeholder' => 'trans('messages.name')'
 							, 'ng-model' => 'client.search.name'
 							, 'class' => 'form-control'
 							)
@@ -44,14 +44,14 @@
 				<div class="col-xs-5">
 					{!! Form::text('search_email', ''
 						,array(
-							'placeholder' => 'Email Address'
+							'placeholder' => 'trans('messages.email_address')'
 							, 'ng-model' => 'client.search.email'
 							, 'class' => 'form-control'
 							)
 					)!!}
 				</div>
 				<div class="col-xs-2">
-					{!! Form::button('Search'
+					{!! Form::button('trans('messages.search')'
 						,array(
 							'class' => 'btn btn-blue'
 							, 'ng-click' => 'client.searchFnc($event)'
@@ -64,7 +64,7 @@
 				<div class="col-xs-5">
 					{!! Form::text('search_school', ''
 						,array(
-							'placeholder' => 'School'
+							'placeholder' => 'trans('messages.school')'
 							, 'ng-model' => 'client.search.school'
 							, 'class' => 'form-control'
 							)
@@ -73,21 +73,21 @@
 				<div class="col-xs-5">
 					{!! Form::select('search_role'
 						, array(
-							'' => '-- Select Role --'
+							'' => 'trans('messages.select_role')'
 							, 'Parent' => 'Parent'
 							, 'Teacher' => 'Teacher'
 							, 'Principal' => 'Principal'
 						)
 						, null
 						, array(
-							'placeholder' => 'Email Address'
+							'placeholder' => 'trans('messages.email_address')'
 							, 'ng-model' => 'client.search.client_role'
 							, 'class' => 'form-control'
 						)
 					)!!}
 				</div>
 				<div class="col-xs-2">
-					{!! Form::button('clear'
+					{!! Form::button('trans('messages.clear')'
 						,array(
 							'class' => 'btn btn-gold'
 							, 'ng-click' => 'client.clearFnc()'
@@ -102,17 +102,17 @@
 	<div class="col-xs-12 table-container">
 		<div class="dropdown">
 			<button class="btn btn-blue btn-semi-medium dropdown-toggle" type="button" data-toggle="dropdown">
-				Add Client <i class="fa fa-caret-square-o-down"></i>
+				{!! trans('messages.admin_add_client') !!} <i class="fa fa-caret-square-o-down"></i>
 			</button>
 			<ul class="dropdown-menu dropdown-menu-medium">
-				<li class="cursor-pointer" ng-click="client.setActive(futureed.ACTIVE_IMPORT)"><a><i class="fa fa-cloud-upload"></i> Import Teacher</a></li>
-				<li class="cursor-pointer" ng-click="client.setActive(futureed.ACTIVE_ADD)"><a><i class="fa fa-plus-square"></i> Add Client </a></li>
+				<li class="cursor-pointer" ng-click="client.setActive(futureed.ACTIVE_IMPORT)"><a><i class="fa fa-cloud-upload"></i> {!! trans('messages.admin_import_teacher') !!}</a></li>
+				<li class="cursor-pointer" ng-click="client.setActive(futureed.ACTIVE_ADD)"><a><i class="fa fa-plus-square"></i> {!! trans('messages.admin_add_client') !!} </a></li>
 			</ul>
 		</div>
 
 		<div class="list-container" ng-cloak>
 			<div class="col-xs-6 title-mid">
-				Client List
+				{!! trans('messages.admin_client_list') !!}
 			</div>
 
 			<div class="col-xs-6 size-container">
@@ -136,11 +136,11 @@
 			<table class="col-xs-12 table table-striped table-bordered" >
 				<thead>
 					<tr>
-						<th>Name</th>
-						<th>Email</th>
-						<th>Role</th>
-						<th>Account Status</th>
-						<th ng-if="client.records.length">Action</th>
+						<th>{!! trans('messages.name') !!}</th>
+						<th>{!! trans('messages.email') !!}</th>
+						<th>{!! trans('messages.role') !!}</th>
+						<th>{!! trans('messages.account_status') !!}</th>
+						<th ng-if="client.records.length">{!! trans('messages.action') !!}</th>
 					</tr>
 				</thead>
 				 <tbody>
@@ -180,12 +180,12 @@
 					</tr>
 					<tr class="odd" ng-if="!client.records.length && !client.table.loading">
 						<td valign="top" colspan="5">
-							No records found
+							{!! trans('messages.no_records_found') !!}
 						</td>
 					</tr>
 					<tr class="odd" ng-if="client.table.loading">
 						<td valign="top" colspan="5">
-							Loading...
+							{!! trans('messages.loading') !!}
 						</td>
 					</tr>
 				</tbody>
