@@ -318,8 +318,19 @@ function StudentClassController($scope, $filter, $window, StudentClassService, S
 	}
 
 	self.updateBackground = function() {
-		angular.element('body.student').css({
-			'background-image' : 'url("/images/class-student/mountain-full-bg.png")'
+
+		StudentClassService.getStudentBackgroundImage($scope.user.user.id).success(function(response){
+			if(response.data){
+				angular.element('body.student').css({
+					'background-image' : 'url("' + response.data.url + '")'
+				});
+			}else{
+				angular.element('body.student').css({
+					'background-image' : 'url("/images/class-student/mountain-full-bg.png")'
+				});
+			}
+		}).error(function(response){
+			self.error = $scope.internalError();
 		});
 	}
 }
