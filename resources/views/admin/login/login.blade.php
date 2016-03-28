@@ -26,7 +26,7 @@
 						</div>
 						{!! Form::text('login', ''
 								, array(
-										'placeholder' => 'trans('messages.email_or_username')'
+										'placeholder' => 'Email or Username'
 										, 'ng-model' => 'login.username'
 										, 'autocomplete' => 'off'
 								)
@@ -38,7 +38,7 @@
 						</div>
 						{!! Form::password('password'
 								, array(
-										'placeholder' => 'trans('messages.password')'
+										'placeholder' => 'Password'
 										, 'ng-model' => 'login.password'
 								)
 						) !!}
@@ -61,10 +61,10 @@
 					{!! Form::close() !!}
 					<br />
 					<div class="form-group">
-						<a href="{!! route('admin.login.forgot_password') !!}" style="color:#055A7F;">{!! trans('messages.login_forgot') !!}</a>
+						<a href="{!! route('admin.login.forgot_password') !!}" style="color:#055A7F;">Forgot your password?</a>
 					</div>
 			</div>
-		</div> 
+		</div>
 	</div>
 
 @stop

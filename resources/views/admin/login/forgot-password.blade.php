@@ -19,7 +19,7 @@
 					</p>
 				</div>
 
-				<div class="adlogin-title">{!! trans('messages.admin_forgot_password') !!}</div>
+				<div class="adlogin-title">Forgot Password</div>
 
 				{!! Form::open(array('ng-submit' => 'forgot.forgotPassword($event)')) !!}
 				<div class="input">
@@ -29,7 +29,7 @@
 
 					{!! Form::text('username', ''
 						, array(
-							'placeholder' => 'trans('messages.email_or_username')'
+							'placeholder' => 'Email or Username'
 							, 'ng-model' => 'forgot.username'
 							, 'autocomplete' => 'off'
 						)
@@ -40,10 +40,10 @@
 				<div class="btn-container">
 					<button type="button" class="btn btn-blue btn-medium"
 						ng-click="forgot.forgotPassword($event)">
-						{!! trans('messages.forgot_send') !!}
+						Send
 					</button>
 
-					{!! Html::link(route('admin.login'), 'trans('messages.cancel')'
+					{!! Html::link(route('admin.login'), 'Cancel'
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 							)
@@ -63,7 +63,7 @@
 					{!! Form::hidden('reset_code', '') !!}
 				{!!Form::close() !!}
 
-				<div class="adlogin-title">{!! trans('messages.admin_password_reset') !!}</div>
+				<div class="adlogin-title">Password Reset</div>
 
 				<div class="alert alert-danger" ng-if="forgot.errors">
 					<p ng-repeat="error in forgot.errors">
@@ -77,10 +77,11 @@
 					</div>
 
 					<div class="forgot-message">
-						<p>{!! trans('messages.forgot_email_sent') !!}</p>
+						<p>An email to reset your password has been sent to your email account.</p>
 						
-						<small>						
-							{!! trans('messages.forgot_check_inbox') !!}
+						<small>
+							Please check your inbox or your spam folder for the email.
+							The email contains a confirmation code that you need to input below.
 						</small>
 					</div>
 				</div>
@@ -91,16 +92,17 @@
 					</div>
 
 					<div class="forgot-message">
-						<p>{!! trans('messages.forgot_new_code') !!}</p>
+						<p>A new reset code has been sent to your email account.</p>
 
 						<small>
-							{!! trans('messages.forgot_check_inbox') !!}
+							Please check your inbox or your spam folder for the email.
+							The email contains a confirmation code that you need to input below.
 						</small>
 					</div>
 				</div>
 
 				<div class="title-mid">
-					{!! trans('messages.admin_forgot_enter_code') !!}					
+					Enter code
 				</div>
 
 				{!! Form::open(array('ng-submit' => 'forgot.validateCode($event)')) !!}
@@ -111,7 +113,7 @@
 
 						{!! Form::text('reset_code', ''
 							, array(
-								'placeholder' => 'trans('messages.admin_forgot_enter_code')'
+								'placeholder' => 'Enter Code'
 								, 'ng-model' => 'forgot.record.reset_code'
 								, 'autocomplete' => 'off'
 							)
@@ -119,14 +121,14 @@
 					</div>
 					
 					<div class="btn-container">
-						{!! Form::button('trans('messages.client_proceed')'
+						{!! Form::button('Proceed'
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-click' => 'forgot.validateCode($event)'
 							)
 						) !!}
 
-						{!! Form::button('trans(messages.client_resend_code)'
+						{!! Form::button('Resend Code'
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'ng-click' => 'forgot.resendCode()'
@@ -135,7 +137,7 @@
 					</div>
 
 					<br />
-					<a href="{!! route('admin.login') !!}"><i class="fa fa-home"></i> {!! trans('messages.forgot_home') !!}</a>
+					<a href="{!! route('admin.login') !!}"><i class="fa fa-home"></i> Home</a>
 				{!! Form::close() !!}
 			</div>
 		</div>
