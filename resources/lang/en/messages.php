@@ -243,6 +243,7 @@ return [
 	'or' => 'or',
 	'other_address_info' => 'Other Address Information (Optional)',
 	'other_req' => 'Other Requests',
+	'out_of' => 'out of',
 	'overall_school_progress' => 'Overall School Progress',
 	'paid' => 'Paid',
 	'parent' => 'Parent',
@@ -1275,5 +1276,9 @@ return [
 	'student_tc_msg57' => 'By using our site, you consent to our terms and conditions as written in this agreement.',
 	'student_tc_msg58' => 'Contacting Us',
 	'student_tc_msg59' => 'If there are any questions regarding this policy you may contact us using the information below.',
+	
+	//resources/views/student/learning-style/index.blade.php
+	'ls_text_msg_1' => 'Please answer all the questions on this page before proceeding to the next page',
+	'ls_text_msg_2' => 'Please read the examples carefully to understand the instructions before clicking NEXT'
 	
 ];
