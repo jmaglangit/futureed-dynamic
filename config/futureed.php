@@ -175,6 +175,9 @@ return [
 	'answer_status_correct' => 'Correct',
 	'answer_status_wrong' => 'Wrong',
 
+	//student age guide by parent
+	'student_age_guardian' => 13,
+
 	//Student Module
 	'module_status_available' => 'Available',
 	'module_status_ongoing' => 'On Going',

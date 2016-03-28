@@ -1364,3 +1364,7 @@ fieldset legend {
 	display: block;
 	margin: 0 auto;
 }
+
+.question-contents {
+	margin-top: 73px;
+}

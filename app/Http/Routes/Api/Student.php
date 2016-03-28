@@ -156,6 +156,11 @@ Routes::group([
 		'uses' => 'Api\v1\StudentController@checkBillingAddress'
 	]);
 
+	Routes::get('/student/learning-style/{id}',[
+		'as' => 'student.learning-style.id',
+		'uses' => 'Api\v1\StudentController@checkRequiredLearningStyle'
+	]);
+
 	Routes::resource('/admin/manage/student', 'Api\v1\AdminStudentController',
 		['except' => ['create', 'edit']]);
 });
