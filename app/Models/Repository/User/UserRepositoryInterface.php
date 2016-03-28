@@ -97,7 +97,7 @@ interface UserRepositoryInterface {
 
 	public function getBackgroundImage($user_type, $id);
 
-	public function updateBackgroundImage($user_type,$id);
+	public function updateBackgroundImage($user_id,$background_image_i);
 
 
 }
