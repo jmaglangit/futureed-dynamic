@@ -25,7 +25,7 @@ class StudentBackgroundImageRequest extends ApiRequest {
 
 			case 'PUT':
 				return [
-					'id' => 'required|exists:background_images,id,deleted_at,NULL'
+					'background_image_id' => 'required|integer|exists:background_images,id,deleted_at,NULL'
 				];
 				break;
 		}
