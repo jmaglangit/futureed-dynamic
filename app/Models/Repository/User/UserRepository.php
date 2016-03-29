@@ -1284,7 +1284,7 @@ class UserRepository implements UserRepositoryInterface {
      */
     public function getBackgroundImage($user_type, $id){
 
-        return User::with('background_image')->whereId($id)->where('user_type',$user_type)->get();
+        return User::with('background_image')->where('user_type',$user_type)->find($id);
     }
 
     /**
