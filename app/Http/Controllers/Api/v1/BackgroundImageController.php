@@ -31,9 +31,9 @@ class BackgroundImageController extends ApiController {
 			$criteria['status'] = Input::get('status');
 		}
 
-		$limit = (Input::get('limit')) ? Input::get('limit') : 0;
+		$limit = Input::get('limit',0);
 
-		$offset = (Input::get('offset')) ? Input::get('offset') : 0;
+		$offset = Input::get('offset',0);
 
 		$record = $this->background_image->getBackgroundImages($criteria, $limit, $offset);
 
