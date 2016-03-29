@@ -95,6 +95,9 @@ interface UserRepositoryInterface {
 
 	public function getImpersonator($id);
 
+	public function getBackgroundImage($user_type, $id);
+
+	public function updateBackgroundImage($user_id,$background_image_i);
 
 
 }

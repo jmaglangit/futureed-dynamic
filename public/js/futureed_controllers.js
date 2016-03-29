@@ -586,7 +586,7 @@ function FutureedController($scope, $window, apiService, futureed) {
 
 		apiService.studentLearningStyle(user).success(function (response) {
 
-			if (response.data == Constants.FALSE) {
+			if (response.data.learning_style == Constants.FALSE) {
 				$scope.user.take_lsp = Constants.FALSE;
 				$scope.updateUserData($scope.user);
 
