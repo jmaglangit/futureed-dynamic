@@ -35,9 +35,9 @@ class StudentBackgroundImageController extends ApiController {
 		$response = 0;
 
 		//if student has background image.
-		if($student_background[0]->background_image){
+		if($student_background->background_image){
 
-			$response = $student_background[0]->background_image;
+			$response = $student_background->background_image;
 
 			//get image service to get background image
 			$response->url = $this->image_service->getBackgroundImage($response->filename);
