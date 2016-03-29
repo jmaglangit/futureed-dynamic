@@ -174,7 +174,7 @@ class StudentController extends ApiController {
 
 			foreach ($classes as $class) {
 
-				if ($class->classroom->order->subscription_id) {
+				if ($class->classroom) {
 
 					//get subscription
 					$subscription = $this->subscription->getSubscription($class->classroom->order->subscription_id);
