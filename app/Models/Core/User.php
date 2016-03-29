@@ -49,6 +49,7 @@ class User extends Model {
         'name',
         'password',
         'user_type',
+        'background_image_id',
         'facebook_app_id',
         'google_app_id',
         'confirmation_code',
@@ -78,5 +79,9 @@ class User extends Model {
 	public function admin() {
 		return $this->hasOne('FutureEd\Models\Core\Admin');
 	}
+
+    public function background_image() {
+        return $this->belongsTo('FutureEd\Models\Core\BackgroundImage');
+    }
 
 }
