@@ -19,7 +19,6 @@ function StudentClassController($scope, $filter, $window, StudentClassService, S
 			self.total_module_items_loaded -= self.table.size;
 			self.table.page--;
 			self.paginateByPage();
-			console.log(self.total_module_items_loaded + ' : ' + self.table.size  + ' : ' + self.table.page + ' : ' + self.table.total_items);
 		}
 	}
 
@@ -30,7 +29,6 @@ function StudentClassController($scope, $filter, $window, StudentClassService, S
 			self.total_module_items_loaded += self.table.size;
 			self.table.page++;
 			self.paginateByPage();
-			console.log(self.total_module_items_loaded + ' : ' + self.table.size  + ' : ' + self.table.page + ' : ' + self.table.total_items + ' : ' + (self.table.page > 1));
 		}
 	}
 
