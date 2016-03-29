@@ -312,5 +312,10 @@ class AppServiceProvider extends ServiceProvider {
 			'FutureEd\Models\Repository\AvatarAccessory\AvatarAccessoryRepositoryInterface',
 			'FutureEd\Models\Repository\AvatarAccessory\AvatarAccessoryRepository'
 		);
+
+		$this->app->bind(
+			'FutureEd\Models\Repository\BackgroundImage\BackgroundImageRepositoryInterface',
+			'FutureEd\Models\Repository\BackgroundImage\BackgroundImageRepository'
+		);
 	}
 }

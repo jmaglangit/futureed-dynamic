@@ -100,6 +100,9 @@ class DatabaseSeeder extends Seeder {
 		
 		$this->call('SubjectTableSeeder');
 		$this->command->info('SubjectTableSeeder seeded!');
+
+		$this->call('BackgroundImageTableSeeder');
+		$this->command->info('BackgroundImageTableSeeder seeded!');
 		
 		#$this->call('UsersTableSeeder');
 		#$this->command->info('UsersTableSeeder seeded!');

@@ -362,6 +362,10 @@
 						'as' => 'student.partials.avatar_accessory_form'
 						, 'uses' => 'FutureLesson\Student\ProfileController@avatar_accessory_form'
 					]);
+				Routes::get('/settings',[
+					'as' => 'student.partials.settings'
+					, 'uses' => 'FutureLesson\Student\ProfileController@settings'
+				]);
 			});
 		});
 
