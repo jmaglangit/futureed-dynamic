@@ -139,7 +139,7 @@ class StudentController extends ApiController {
 		{
 			if($student_details->city == null
 				|| $student_details->state == null
-				|| $student_details->country == null)
+				|| $student_details->country_id == null)
 			{
 				return $this->respondWithData(['billing_address_not_found' => 1]);
 			}
