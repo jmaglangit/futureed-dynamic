@@ -19,13 +19,14 @@ class BackgroundImageRepository implements BackgroundImageRepositoryInterface {
 			$background_image = $background_image->status($criteria['status']);
 		}
 
+		$count = $background_image->count();
+
 		if ($limit > 0 && $offset >= 0) {
 
 			$background_image = $background_image->offset($offset)->limit($limit);
 		}
 
 		$records = $background_image->get();
-		$count = $background_image->get()->count();
 
 		return [
 			'total' => $count,
@@ -40,6 +41,6 @@ class BackgroundImageRepository implements BackgroundImageRepositoryInterface {
 	 */
 	public function getBackgroundImage($id) {
 
-		return BackgroundImage::whereId($id)->first();
+		return BackgroundImage::find($id);
 	}
 }
