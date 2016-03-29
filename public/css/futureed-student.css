@@ -1854,3 +1854,11 @@ li.questions-answers > a, li.questions-answers div {
 .table>tbody>tr>th {
 	border-top : transparent !important;
 }
+
+.font-size-16 {
+	font-size: 16px;
+}
+
+.margin-top-50 {
+	margin-top: 50px;
+}

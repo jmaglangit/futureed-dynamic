@@ -1,5 +1,5 @@
 <div class="col-xs-12 padding-0">
-    <div ng-if="!mod.question_hide">
+    <div ng-if="!mod.question_hide" class="margin-top-50">
         <div class="questions-container col-xs-12">
             {{--Header--}}
             <div class="row questions-header col-xs-12">
@@ -23,7 +23,7 @@
             <div class="question-contents">
                 {{--Error Messages--}}
                 <div class="col-xs-12">
-                    <div class="alert alert-error" ng-if="mod.errors">
+                    <div class="alert trial-question-alert-error" ng-if="mod.errors">
                         <p ng-repeat="error in mod.errors track by $index">
                             {! error !}
                         </p>
@@ -56,7 +56,7 @@
                         <div class="margin-top-30">
                             <a ng-if="mod.trialQuestion[mod.question_number]['type'] == futureed.MULTIPLECHOICE" href=""
                                class="choices"
-                               ng-repeat="choices in [] | range : mod.trialQuestion[mod.question_number]['number_of_possible_answers'].toString()"
+                               ng-repeat="choices in mod.trialQuestion[mod.question_number]['number_of_possible_answers']"
                                ng-click="mod.selectAnswer(choices)" ng-class="{ 'selected-choice' : mod.current_question.answer_id == choices }"
                             >
                                 <div>{! mod.trialQuestion[mod.question_number]['string_question'][choices] !}</div>
@@ -168,7 +168,7 @@
         </div>
     </div>
 
-    <div ng-if="mod.show_correct">
+    <div ng-if="mod.show_correct" class="margin-top-50">
         <div class="questions-container col-xs-12">
             <div class="questions-header">
                 <h3> Question #{! mod.question_number + 1 !} </h3>
@@ -186,7 +186,7 @@
                 </p>
 
                 <p ng-if="!mod.answer_valid">
-                    Wrong.
+                    Wrong
                 </p>
             </div>
 
@@ -198,46 +198,7 @@
         </div>
     </div>
 
-    <div ng-if="mod.result.quoted">
-        <div class="questions-container col-xs-12">
-            <div class="questions-header">
-                <h3> Question #{! mod.question_counter !} </h3>
-            </div>
-            <div class="quote-message"
-                 ng-class="{ 'result-correct' : mod.result.points_earned, 'result-incorrect' : !mod.result.points_earned }">
-                <p ng-if="mod.result.points_earned > 0">
-                    Correct!
-                </p>
-
-                <p ng-if="mod.result.points_earned <= 0">
-                    Wrong.
-                </p>
-            </div>
-
-            <div class="message-container">
-                <div class="col-xs-12">
-                    <div class="col-xs-2"></div>
-                    <div class="module-icon-holder col-xs-3">
-                        <img ng-src="{! mod.avatar_quote_info.avatar_pose && '/images/avatar/' + mod.avatar_quote_info.avatar_pose.pose_image || user.avatar !}" />
-                    </div>
-
-                    <div class="col-xs-6">
-                        <p class="module-message">
-                            {! mod.avatar_quote_info.quote !}
-                        </p>
-
-                        <div class="proceed-btn-container btn-container">
-                            <button type="button" class="btn btn-maroon btn-large" ng-click="mod.nextQuestion()">
-                                Proceed to next Question
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div ng-if="mod.trial_expired">
+    <div ng-if="mod.trial_expired" class="margin-top-50">
         <div class="questions-container col-xs-12">
             <div class="questions-header">
                 <h3> Question #{! mod.question_number + 1 !} </h3>
@@ -252,12 +213,14 @@
 
                     <div class="col-xs-6">
                         <p class="module-message">
-                            Trial Expired
+                            You have reached the end of the trial questions.
+                            <p class="font-size-16" ng-if="user.age > 13">Please subscribe if you want to continue using Future Lesson!</p>
+                            <p class="font-size-16" ng-if="user.age <= 13">You can ask your Parent or be invited by your Teacher to join a class!</p>
                         </p>
 
                         <div class="proceed-btn-container btn-container">
-                            <button type="button" class="btn btn-maroon btn-large" ng-click="mod.reviewContent()">
-                                Retake Test
+                            <button type="button" class="btn btn-maroon btn-large" ng-click="mod.exitModule('{!! route('student.payment.index') !!}')">
+                                Subscribe Now!
                             </button>
                         </div>
                     </div>

@@ -1,10 +1,6 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
-use FutureEd\Http\Requests;
-use FutureEd\Http\Controllers\Controller;
-
-use FutureEd\Services\ErrorMessageServices;
-use Illuminate\Http\Request;
+use FutureEd\Http\Requests\Api\TrialModuleRequest;
 use Illuminate\Support\Facades\Input;
 use League\Csv\Reader;
 
@@ -26,9 +22,10 @@ class StudentTrialModuleController extends ApiController {
 			if( $data[0] === config('futureed.question_type_provide_answer') ||
 				$data[0] === config('futureed.question_type_fill_in_the_blank'))
 			{
+				$col = [];
 				if($data[0] === config('futureed.question_type_fill_in_the_blank'))
 				{
-					for($i = 0 ; $i < $data[3] ; $i++) {
+					for($i = 0 ; $i < $data[3]; $i++) {
 						$col[$i] = $i; // <------ $col is to be used in ng-repeat for FIB question type : ng-repeat bases on array
 					}
 				}
@@ -48,6 +45,7 @@ class StudentTrialModuleController extends ApiController {
 
 				$string = [];
 				$image = [];
+				$col = [];
 
 				foreach($questionStringImage as $haystack) {
 					if(strpos($haystack, '.png') == true || strpos($haystack, '.jpg') == true) {
@@ -60,11 +58,15 @@ class StudentTrialModuleController extends ApiController {
 					$haystackIndex++;
 				}
 
+				for($i = 0 ; $i < $data[3] ; $i++) {
+					$col = array_merge($col, [$i]);
+				}
+
 				$datum[$index] = [
 					'type'                      => $data[0],
 					'image'                     => $data[1] === '' ? 'none' : $image_path.'/'.$data[1],
 					'question'                  => $data[2],
-					'number_of_possible_answers'=> $data[3],
+					'number_of_possible_answers'=> $data[0] === config('futureed.question_type_multiple_choice') ? $col : $data[3],
 					'string_question'           => $data[0] === config('futureed.question_type_multiple_choice') ? $string : '',
 					'image_question'            => $data[0] === config('futureed.question_type_multiple_choice') ? $image : '',
 					'answer_string'             => $data[0] === config('futureed.question_type_ordering') ? $string : '',
@@ -128,30 +130,27 @@ class StudentTrialModuleController extends ApiController {
 	/**
 	 * Store a newly created resource in storage.
 	 *
-	 * @return Response
+	 * @param TrialModuleRequest $request
+	 * @return mixed
 	 */
-	public function store()
+	public function store(TrialModuleRequest $request)
 	{
 		$question_type = Input::get('question_type');
 		$question_number = Input::get('question_number');
 		$reader = Reader::createFromPath(storage_path('trial-module/csv/') . 'answer.csv');
-		$answer = Input::get('answer');
+		$answer = $request->get('answer');
 
 		if( $question_type === config('futureed.question_type_provide_answer') ||
 			$question_type === config('futureed.question_type_multiple_choice'))
 		{
-			if($answer != '') {
-				foreach($reader as $data){
-					if($question_number == $data[0]){
-						if ($answer === $data[1]) {
-							return $this->respondWithData(['valid' => true]);
-						} else {
-							return $this->respondWithData(['valid' => false]);
-						}
+			foreach($reader as $data){
+				if($question_number == $data[0]){
+					if ($answer === $data[1]) {
+						return $this->respondWithData(['valid' => true]);
+					} else {
+						return $this->respondWithData(['valid' => false]);
 					}
 				}
-			} else {
-				return $this->respondErrorMessage(ErrorMessageServices::TRIAL_MODULE_ANSWER_IS_REQUIRED);
 			}
 		}
 		else if($question_type === config('futureed.question_type_fill_in_the_blank') ||
@@ -178,34 +177,24 @@ class StudentTrialModuleController extends ApiController {
 						} else {
 							$temp[$index] = false;
 						}
-					} else {
-						return $this->respondErrorMessage(ErrorMessageServices::TRIAL_MODULE_ANSWER_IS_REQUIRED);
 					}
 				}
 				else if($question_type === config('futureed.question_type_graph'))
 				{
-					if($answer[0]['count_objects'] != 0) {
-						if((string)$answer[$index]['count_objects'] === $csv_answer_value) {
-							$temp[$index] = true;
-						} else {
-							$temp[$index] = false;
-						}
+					if((string)$answer[$index] === $csv_answer_value) {
+						$temp[$index] = true;
 					} else {
-						return $this->respondErrorMessage(ErrorMessageServices::TRIAL_MODULE_ANSWER_IS_REQUIRED);
+						$temp[$index] = false;
 					}
 				}
 				else if($question_type === config('futureed.question_type_quad'))
 				{
-					if(count($answer)){
-						$csv_coords =  $this->CoordStringToArray($csv_answer_value);
+					$csv_coords =  $this->CoordStringToArray($csv_answer_value);
 
-						if($csv_coords['x'] === (string)$answer[$index]['x'] && $csv_coords['y'] === (string)$answer[$index]['y']){
-							$temp[$index] = true;
-						} else {
-							$temp[$index] = false;
-						}
+					if($csv_coords['x'] === (string)$answer[$index]['x'] && $csv_coords['y'] === (string)$answer[$index]['y']){
+						$temp[$index] = true;
 					} else {
-						return $this->respondErrorMessage(ErrorMessageServices::TRIAL_MODULE_QUAD_PLOTTING_REQUIRED);
+						$temp[$index] = false;
 					}
 				}
 				$index++;
@@ -219,10 +208,11 @@ class StudentTrialModuleController extends ApiController {
 		}
 	}
 
+
 	/**
 	 * Converts string coords to array with delimiter of
-	 * "|" for every axis  ex: y:5|x:5
-	 * ":" for the axis ex: x:5
+	 * "|" for every axis   ex: y:5|x:5
+	 * ":" for the axis     ex: x:5
 	 * returns ex: [x=>5,y=>5]
 	 *
 	 * @param $string
@@ -237,51 +227,6 @@ class StudentTrialModuleController extends ApiController {
 			$finalArray[ $tmp[0] ] = $tmp[1];
 		}
 		return $finalArray;
-	}
-
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
 	}
 
 }
