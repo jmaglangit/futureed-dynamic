@@ -60,7 +60,7 @@
 	</div>
 
 	<div class="col-xs-12 class-container">
-		<ul class="nav nav-pills module-pills" role="tablist" ng-init="class.listClass()">
+		<ul class="nav nav-pills module-pills" role="tablist">
 			<li role="presentation" class="module-tabs" ng-repeat="aClass in class.classes track by $index" ng-class="{ 'active' : aClass.class_id == class.current_class }"
 				ng-click="class.redirectClass('{!! route('student.class.index') !!}', aClass.class_id)">
 				<div ng-if="$index == 0"><span ng-init="class.selectClass(aClass.class_id)"></span></div>
@@ -88,7 +88,7 @@
 						</div>
 					</div>
 
-					<div class="module-list" ng-if="class.records.length">
+					<div class="module-list" ng-if="class.records.length" style="padding-left: 29px;padding-right: 1px;">
 						<div class="module-item" ng-repeat="record in class.records">
 							<div class="module-image-holder">
 								<img ng-if="record.module_status != 'Completed' && user.points >= record.points_to_unlock" class="module-icon"
@@ -105,7 +105,7 @@
 							<p class="module-name">{! record.name !}</p>
 
 							<button ng-if="record.module_status == 'On Going' && user.points >= record.points_to_unlock"
-								ng-click="class.redirect('{!! route('student.class.module.index') !!}', record)" 
+								ng-click="class.redirect('{!! route('student.class.module.index') !!}', record)"
 								type="button" class="btn btn-blue module-btn"><i class="fa fa-play-circle"></i> Resume </button>
 
 							<button ng-if="!record.module_status && user.points >= record.points_to_unlock" ng-click="class.redirect('{!! route('student.class.module.index') !!}', record)"
@@ -119,7 +119,7 @@
 
 							<div class="progress">
 								<div class="progress-bar progress-bar-striped" role="progressbar" aria-valuemin="0" aria-valuemax="100"
-									ng-class="{ 
+									ng-class="{
 										'progress-bar-success' : record.progress > 75,
 										'progress-bar-info' : record.progress > 50 && record.progress <= 75 ,
 										'progress-bar-warning' : record.progress > 25 && record.progress <= 50 ,
@@ -132,22 +132,22 @@
 							<span class="module-progress">{! record.progress !}%</span>
 						</div>
 					</div>
-					
-					<div class="pull-right" ng-if="class.records.length">
-						<pagination 
-							total-items="class.table.total_items" 
-							ng-model="class.table.page"
-							max-size="3"
-							items-per-page="class.table.size" 
-							previous-text = "&lt;"
-							next-text="&gt;"
-							class="pagination" 
-							boundary-links="true"
-							ng-change="class.paginateByPage()">
-						</pagination>
+
+					<div ng-if="class.records.length">
+						<div class="previous-btn-position"
+							 ng-if="class.table.page > 1">
+							<span  ng-click="class.previousPage()"
+								   ng-model="class.table.page">&lt;</span>
+						</div>
+						<div class="next-btn-position"
+							 ng-if="class.total_module_items_loaded < class.table.total_items">
+							<span  ng-click="class.nextPage()"
+								   ng-model="class.table.page">&gt;</span>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+
 	</div>
 </div>
