@@ -9,7 +9,7 @@
 							ng-click="mod.exitModule('{!! route('student.class.index') !!}')">Exit Module</button>
 					<button type="button" class="btn btn-gold next-btn left-0"
 							ng-if="mod.errors && !mod.record.module_done"
-							ng-click="mod.exitModule('{!! route('student.dashboard.index') !!}')">Exit Module</button>
+							ng-click="mod.exitModule('{!! route('student.class.index') !!}')">Exit Module</button>
 				</div>
 
 				<div class="row col-xs-6">
