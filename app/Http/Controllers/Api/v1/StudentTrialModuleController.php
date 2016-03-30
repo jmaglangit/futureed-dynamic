@@ -13,8 +13,8 @@ class StudentTrialModuleController extends ApiController {
 	 */
 	public function index()
 	{
-		$reader = Reader::createFromPath(storage_path('trial-module/csv/') . 'questions.csv');
-		$image_path = url('/trial-module/images/questions');
+		$reader = Reader::createFromPath(storage_path('seeders/trial-module/csv/') . 'questions.csv');
+		$image_path = url('images/trial-module/images/questions');
 		$datum = [];
 		$index = 0;
 
@@ -105,6 +105,14 @@ class StudentTrialModuleController extends ApiController {
 			else if($data[0] === config('futureed.question_type_quad'))
 			{
 				$coords = preg_split('/[,:xy]+/', $data[3], -1, PREG_SPLIT_NO_EMPTY);
+
+				$max = max($coords);
+				$graph_dimension = $max < 5 ? 5 : intval(round($max, -1));
+
+				foreach($coords as $axis => $value) {
+					$coords[$axis] = $graph_dimension;
+				}
+
 				$datum[$index] = [
 					'type'          => $data[0],
 					'image'         => $data[1],
@@ -118,16 +126,6 @@ class StudentTrialModuleController extends ApiController {
 	}
 
 	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
-
-	/**
 	 * Store a newly created resource in storage.
 	 *
 	 * @param TrialModuleRequest $request
@@ -137,7 +135,7 @@ class StudentTrialModuleController extends ApiController {
 	{
 		$question_type = Input::get('question_type');
 		$question_number = Input::get('question_number');
-		$reader = Reader::createFromPath(storage_path('trial-module/csv/') . 'answer.csv');
+		$reader = Reader::createFromPath(storage_path('seeders/trial-module/csv/') . 'answer.csv');
 		$answer = $request->get('answer');
 
 		if( $question_type === config('futureed.question_type_provide_answer') ||

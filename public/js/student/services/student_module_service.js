@@ -15,7 +15,6 @@ function StudentModuleService($http){
 	}
 
 	service.validateAnswer = function(data){
-		console.log(data);
 		return $http({
 			method	:	Constants.METHOD_POST,
 			data	:	data,

@@ -26,7 +26,7 @@ class TrialModuleRequest extends ApiRequest {
 	{
 		$question_type=$this->request->get('question_type');
 		$question_number = $this->request->get('question_number');
-		$reader = Reader::createFromPath(storage_path('trial-module/csv/') . 'answer.csv');
+		$reader = Reader::createFromPath(storage_path('seeders/trial-module/csv/') . 'answer.csv');
 
 		$rules = [];
 
@@ -112,7 +112,7 @@ class TrialModuleRequest extends ApiRequest {
 	{
 		$question_type = $this->request->get('question_type');
 		$question_number = $this->request->get('question_number');
-		$reader = Reader::createFromPath(storage_path('trial-module/csv/') . 'answer.csv');
+		$reader = Reader::createFromPath(storage_path('seeders/trial-module/csv/') . 'answer.csv');
 
 		$message = [];
 

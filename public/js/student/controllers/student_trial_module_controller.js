@@ -10,8 +10,8 @@ function StudentTrialModuleController($scope, $window, $interval, $filter, apiSe
     self.answer = '';
     self.fib_answer = [];
     self.multi_array_answer = [];
-    self.question_hide = false;
-    self.show_correct = false;
+    self.question_hide = Constants.FALSE;
+    self.show_correct = Constants.FALSE;
 
     self.setActive = function(active, id) {
         self.errors = Constants.FALSE;
@@ -99,8 +99,8 @@ function StudentTrialModuleController($scope, $window, $interval, $filter, apiSe
                 } else if(response.data) {
                     self.fib_answer = [];
                     self.answer_valid = response.data.valid;
-                    self.question_hide = true;
-                    self.show_correct = true;
+                    self.question_hide = Constants.TRUE;
+                    self.show_correct = Constants.TRUE;
                     self.answer = '';
                 }
             }
@@ -197,11 +197,11 @@ function StudentTrialModuleController($scope, $window, $interval, $filter, apiSe
         self.success = Constants.FALSE;
         if(self.question_number != 9) {
             self.question_number++;
-            self.question_hide = false;
-            self.show_correct = false;
+            self.question_hide = Constants.FALSE;
+            self.show_correct = Constants.FALSE;
         } else {
-            self.show_correct = false;
-            self.trial_expired = true;
+            self.show_correct = Constants.FALSE;
+            self.trial_expired = Constants.TRUE;
         }
 
     }
@@ -214,7 +214,7 @@ function StudentTrialModuleController($scope, $window, $interval, $filter, apiSe
 
     self.dragControlListeners = {
         accept: function (sourceItemHandleScope, destSortableScope) {
-            return true;
+            return Constants.TRUE;
         }
         , itemMoved: function (event) {
 
@@ -257,8 +257,8 @@ function StudentTrialModuleController($scope, $window, $interval, $filter, apiSe
         options = {
             yaxis:  { min: -self.trialQuestion[self.question_number]['coordinates'][1], max: self.trialQuestion[self.question_number]['coordinates'][1], ticks: self.trialQuestion[self.question_number]['coordinates'][1] * 2},
             xaxis:  { min: -self.trialQuestion[self.question_number]['coordinates'][0], max: self.trialQuestion[self.question_number]['coordinates'][0], ticks: self.trialQuestion[self.question_number]['coordinates'][0] * 2},
-            grid:   {clickable: true},
-            points: { show: true, radius: 4, fill: true, fillColor: "#EDC240" }
+            grid:   {clickable: Constants.TRUE},
+            points: { show: Constants.TRUE, radius: 4, fill: Constants.TRUE, fillColor: "#EDC240" }
         };
 
         //draw plot
@@ -276,10 +276,10 @@ function StudentTrialModuleController($scope, $window, $interval, $filter, apiSe
                     if(newData[0].data[i] != null){
                         duplicate_point = self.arraysEqual(arr1,arr2);
                         if(duplicate_point){
-                            return false;
+                            return Constants.FALSE;
                         }
                     }else{
-                        duplicate_point = false;
+                        duplicate_point = Constants.FALSE;
                     }
                 });
 
@@ -312,7 +312,7 @@ function StudentTrialModuleController($scope, $window, $interval, $filter, apiSe
                 var thisClass = $(this).hasClass('disabled');
 
                 if(thisClass){
-                    ui.draggable.draggable('option','revert',true);
+                    ui.draggable.draggable('option','revert',Constants.TRUE);
                 }else{
                     $(this).append($(ui.draggable).clone());
                     $(this).droppable('disable');
@@ -342,13 +342,13 @@ function StudentTrialModuleController($scope, $window, $interval, $filter, apiSe
     //function to compare arrays - used to evaluate quadrant plots
     self.arraysEqual = function(arr1, arr2) {
         if(arr1.length !== arr2.length)
-            return false;
+            return Constants.FALSE;
 
         for(var i = arr1.length; i--;) {
             if(arr1[i] !== arr2[i])
-                return false;
+                return Constants.FALSE;
         }
 
-        return true;
+        return Constants.TRUE;
     }
 }

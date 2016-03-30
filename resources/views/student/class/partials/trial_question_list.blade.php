@@ -15,7 +15,7 @@
                         <div class="module-item">
                             <div class="module-image-holder">
                                 <img class="module-icon"
-                                     ng-src="{!! url('/trial-module/images/module/icon-spatial.png') !!}"
+                                     ng-src="{!! url('images/trial-module/images/module/icon-spatial.png') !!}"
                                      ng-click="class.redirect('{!! route('student.class.module.trial-index') !!}')"
                                      tooltip-class="module-tooltip"
                                      tooltip-placement="bottom"
