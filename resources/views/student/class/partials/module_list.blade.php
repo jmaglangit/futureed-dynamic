@@ -60,7 +60,7 @@
 	</div>
 
 	<div class="col-xs-12 class-container">
-		<ul class="nav nav-pills module-pills" role="tablist" ng-init="">
+		<ul class="nav nav-pills module-pills" role="tablist">
 			<li role="presentation" class="module-tabs" ng-repeat="aClass in class.classes track by $index" ng-class="{ 'active' : aClass.class_id == class.current_class }"
 				ng-click="class.redirectClass('{!! route('student.class.index') !!}', aClass.class_id)">
 				<div ng-if="$index == 0"><span ng-init="class.selectClass(aClass.class_id)"></span></div>
