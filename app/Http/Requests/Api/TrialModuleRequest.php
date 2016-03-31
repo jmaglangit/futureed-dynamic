@@ -14,7 +14,9 @@ class TrialModuleRequest extends ApiRequest {
 	{
 		if($this->method() === 'POST'){
 			return true;
-		} else return false;
+		} else {
+			return false;
+		}
 	}
 
 	/**
