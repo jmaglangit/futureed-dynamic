@@ -983,8 +983,8 @@ hr {
 }
 
 .choices img{
-	/*height: 200px;*/
-	max-width: 200px;
+	max-height: 88px;
+	max-width: 150px;
 	margin: 2px 2px 2px 2px;
 }
 
@@ -1867,5 +1867,17 @@ top: 41px;
 
 li.questions-answers > a, li.questions-answers div {
 	margin-bottom: 30px;
+}
+
+.table>tbody>tr>th {
+	border-top : transparent !important;
+}
+
+.font-size-16 {
+	font-size: 16px;
+}
+
+.margin-top-50 {
+	margin-top: 50px;
 }
 

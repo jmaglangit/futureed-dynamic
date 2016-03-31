@@ -36,4 +36,12 @@ class ClassController extends Controller {
 		return view('student.class.partials.module_list');
 	}
 
+	/**
+	 * Display 10 Trial Questions
+	 *
+	 * @return \Illuminate\View\View
+	 */
+	public function trial_module() {
+		return view('student.class.partials.trial_question_list');
+	}
 }

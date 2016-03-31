@@ -993,6 +993,16 @@ div > .btncon > a {
   	margin-bottom: 0px;
 }
 
+.trial-question-alert-error{
+	color: #a94442;
+	background-color: #f2dede;
+	border-color: #ebccd1;
+	font-size: 12px;
+	padding: 10px;
+	text-align: left;
+	margin-bottom: 0px;
+}
+
 .margin-top-8 {
 	margin-top: 8px;
 }
@@ -1372,4 +1382,8 @@ fieldset legend {
 
 .question-contents {
 	margin-top: 73px;
+}
+
+.margin-bottom-15 {
+	margin-bottom: 15px;
 }

@@ -206,6 +206,11 @@ return [
 	//Correct Answer
 	'yes' => 'Yes',
 	'no' => 'No',
+	//Correct flag
+	'correct' => 'Y',
+	'incorrect' => 'N',
+	//MC none
+	'mc_none' => 'none',
 
 	//reset module
 	'reset_module' => 'Reset Module',
