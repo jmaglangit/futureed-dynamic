@@ -25,55 +25,30 @@ class TrialModuleRequest extends ApiRequest {
 	public function rules()
 	{
 		$question_type=$this->request->get('question_type');
-		$question_number = $this->request->get('question_number');
-		$reader = Reader::createFromPath(storage_path('seeders/trial-module/csv/') . 'answer.csv');
+		$question_answer = $this->request->get('answer');
+		$fib_length = $this->request->get('fib_length');
 
 		$rules = [];
 
 		switch($question_type) {
-			case config('futureed.question_type_provide_answer'):
-			case config('futureed.question_type_multiple_choice'):
-				return [
-					'answer' => 'required'
-				];
-				break;
 
 			case config('futureed.question_type_fill_in_the_blank'):
-				$answer = $this->get('answer');
-
-				$answer_list = [];
-
-				foreach($reader as $data){
-					if($question_number == $data[0]) {
-						$answer_list = array_slice($data, 1);
-						break;
+				if(empty($question_answer)){
+					return [
+						'answer' => 'required'
+					];
+				} else {
+					foreach($fib_length as $key => $answer) {
+						$rules['answer.'.$key] = 'required';
 					}
 				}
-
-				if(count($answer) == 0) {
-					$rules = ['answer' => 'required'];
-				}
-				else if(count($answer) <= count($answer_list))
-				{
-					foreach($answer_list as $key => $value) {
-						if(array_key_exists($key, $answer)){
-							if($answer[$key] == null) {
-								$rules['answer.'.$key] = 'required';
-							}
-						} else {
-							$rules['answer.'.$key] = 'required';
-						}
-					}
-				}
-
 				return $rules;
 				break;
 
 			case config('futureed.question_type_graph'):
-				$answers = $this->get('answer');
 				$has_answer = [];
 
-				foreach($answers as $answer) {
+				foreach($question_answer as $answer) {
 					if($answer == 0) {
 						$has_answer = array_merge($has_answer, [false]);
 					} else {
@@ -91,19 +66,15 @@ class TrialModuleRequest extends ApiRequest {
 				break;
 
 			case config('futureed.question_type_quad'):
-				$answers = $this->get('answer');
-
-				if(empty($answers)) {
-					$rules = [
-						'answer' => 'required'
-					];
-				}
-
-				return $rules;
+				return[
+					'has_plotted' => 'numeric|min:1'
+				];
 				break;
 
 			default:
-				return [];
+				return [
+					'answer' => 'required'
+				];
 				break;
 		}
 	}
@@ -111,64 +82,43 @@ class TrialModuleRequest extends ApiRequest {
 	public function messages()
 	{
 		$question_type = $this->request->get('question_type');
-		$question_number = $this->request->get('question_number');
-		$reader = Reader::createFromPath(storage_path('seeders/trial-module/csv/') . 'answer.csv');
+		$question_answer = $this->request->get('answer');
+		$fib_length = $this->request->get('fib_length');
 
 		$message = [];
 
 		switch($question_type) {
-			case config('futureed.question_type_provide_answer'):
-			case config('futureed.question_type_multiple_choice'):
-			case config('futureed.question_type_quad'):
-				return [
-					'answer.required' => config('futureed-error.error_messages.'.ErrorMessageServices::TRIAL_MODULE_ANSWER_IS_REQUIRED)
-				];
-				break;
 
 			case config('futureed.question_type_fill_in_the_blank'):
-				$answer = $this->get('answer');
 
-				$answer_list = [];
-
-				foreach($reader as $data){
-					if($question_number == $data[0]) {
-						$answer_list = array_slice($data, 1);
-						break;
+				if(empty($question_answer)){
+					$message['answer.required'] = config('futureed-error.error_messages.'.ErrorMessageServices::TRIAL_MODULE_MULTIPLE_ANSWERS_REQUIRED);
+				} else {
+					foreach ($fib_length as $key => $answer) {
+						$message['answer.' . $key . '.required'] = 'Answer ' . ($key + 1) . ' is required';
 					}
 				}
-
-				if(count($answer) == 0) {
-					$message = [
-						'answer.required' => config('futureed-error.error_messages.'.ErrorMessageServices::TRIAL_MODULE_MULTIPLE_ANSWERS_REQUIRED)
-					];
-				}
-				else if(count($answer) <= count($answer_list))
-				{
-					// check if array index exists on answers(from UI) based from the actual csv answer
-					foreach($answer_list as $key => $value) {
-						if(array_key_exists($key, $answer)){
-							if($answer[$key] == null) {
-								$message['answer.'.$key.'.required'] = 'Answer '.($key + 1).' is required';
-							}
-						} else {
-							$message['answer.'.$key.'.required'] = 'Answer '.($key + 1) .' is required';
-						}
-					}
-				}
-
 				return $message;
 				break;
 
 			case config('futureed.question_type_graph'):
-				$message = [
+				return [
 					'answer.0.min' => config('futureed-error.error_messages.'.ErrorMessageServices::TRIAL_MODULE_DRAG_DROP_REQUIRED)
 				];
 
-				return $message;
+				break;
+
+			case config('futureed.question_type_quad'):
+				return[
+					'has_plotted.min' => config('futureed-error.error_messages.'.ErrorMessageServices::TRIAL_MODULE_QUAD_PLOTTING_REQUIRED)
+				];
 				break;
 
 			default:
-				return [];
+				return [
+					'answer.required' => config('futureed-error.error_messages.'.ErrorMessageServices::TRIAL_MODULE_ANSWER_IS_REQUIRED)
+				];
+				break;
 				break;
 
 		}

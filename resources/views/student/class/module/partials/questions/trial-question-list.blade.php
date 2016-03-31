@@ -37,8 +37,8 @@
                     {{--Image--}}
                     <div class="col-xs-12">
                         <div class="questions-image">
-                            <img ng-if="mod.trialQuestion[mod.question_number]['image'] != 'none'"
-                                 ng-src="{! mod.trialQuestion[mod.question_number]['image'] !}"/>
+                            <img ng-if="mod.trialQuestion[mod.question_number]['question_image'] != 'none'"
+                                 ng-src="{! mod.trialQuestion[mod.question_number]['question_image'] !}"/>
                         </div>
                     </div>
                     {{--Message--}}
@@ -56,20 +56,23 @@
                         <div class="margin-top-30">
                             <a ng-if="mod.trialQuestion[mod.question_number]['type'] == futureed.MULTIPLECHOICE" href=""
                                class="choices"
-                               ng-repeat="choices in mod.trialQuestion[mod.question_number]['number_of_possible_answers']"
+                               ng-repeat="choices in mod.trialQuestion[mod.question_number]['number_of_choices']"
                                ng-click="mod.selectAnswer(choices)" ng-class="{ 'selected-choice' : mod.current_question.answer_id == choices }"
                             >
-                                <div>{! mod.trialQuestion[mod.question_number]['string_question'][choices] !}</div>
-                                <img ng-if="mod.trialQuestion[mod.question_number]['image_question'].length"
-                                     ng-src="{! mod.trialQuestion[mod.question_number]['image_question'][choices] !}"/>
+                                <div ng-if="mod.trialQuestion[mod.question_number]['choices_list'][choices]['string_choice'] != 'none'">
+                                    {! mod.trialQuestion[mod.question_number]['choices_list'][choices]['string_choice'] !}
+                                </div>
+                                <div ng-if="mod.trialQuestion[mod.question_number]['choices_list'][choices]['image_choice'] != 'none'">
+                                    <img ng-src="{! mod.trialQuestion[mod.question_number]['choices_list'][choices]['image_choice'] !}"/>
+                                </div>
                             </a>
                         </div>
 
                         {{--FIB--}}
                         <div class="margin-top-30">
                             <div ng-if="mod.trialQuestion[mod.question_number]['type'] == futureed.FILLINBLANK" class="form-group">
-                                <div ng-class="{ 'fib-text-fields' : mod.trialQuestion[mod.question_number]['number_of_possible_answers'].length }">
-                                    <input ng-repeat="n in mod.trialQuestion[mod.question_number]['number_of_possible_answers'] track by $index"
+                                <div ng-class="{ 'fib-text-fields' : mod.trialQuestion[mod.question_number]['number_of_blanks'].length }">
+                                    <input ng-repeat="n in mod.trialQuestion[mod.question_number]['number_of_blanks'] track by $index"
                                            ng-model="mod.fib_answer[$index]"
                                            name="answer_text"
                                            type="text" class="form-control question-text-answer form-control-lg" placeholder="Answer {! $index + 1 !}"
@@ -91,8 +94,8 @@
                         {{--O--}}
                         <div class="margin-top-30">
                             <div ng-if="mod.trialQuestion[mod.question_number]['type'] == futureed.ORDERING">
-                                <ul as-sortable="mod.dragControlListeners" ng-model="mod.trialQuestion[mod.question_number]['answer_string']">
-                                    <li ng-repeat="item in mod.trialQuestion[mod.question_number]['answer_string']"
+                                <ul as-sortable="mod.dragControlListeners" ng-model="mod.trialQuestion[mod.question_number]['unordered_list']">
+                                    <li ng-repeat="item in mod.trialQuestion[mod.question_number]['unordered_list']"
                                         as-sortable-item class="as-sortable-item">
                                         <div as-sortable-item-handle class="as-sortable-item-handle">
                                             <span data-ng-bind="item"></span>
@@ -107,10 +110,10 @@
                             <div ng-if="mod.trialQuestion[mod.question_number]['type'] == futureed.GRAPH">
                                 {{--Horizontal--}}
                                 <table id="horizontalTable" class="table" ng-if="mod.trialQuestion[mod.question_number]['orientation'] == futureed.HORIZONTAL">
-                                    <tr ng-repeat="item in mod.trialQuestion[mod.question_number]['table_image']">
+                                    <tr ng-repeat="item in mod.trialQuestion[mod.question_number]['table_image'] track by $index">
                                         <th class="origin-container" ng-init="mod.initDrag()">
                                             <div class="origin">
-                                                <img ng-src="{! item !}" />
+                                                <img ng-src="{! item.path !}" alt="item.field"/>
                                             </div>
                                         </th>
                                         <td ng-init="mod.initDrop()" class="drop first">
@@ -126,7 +129,7 @@
                                         <th ng-repeat="item in mod.trialQuestion[mod.question_number]['table_image']"
                                             ng-init="mod.initDrag()">
                                             <div class="origin">
-                                                <img ng-src="{! item !}" />
+                                                <img ng-src="{! item.path !}" alt="item.field"/>
                                             </div>
                                         </th>
                                     </tr>

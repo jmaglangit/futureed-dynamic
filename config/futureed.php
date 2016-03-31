@@ -206,6 +206,9 @@ return [
 	//Correct Answer
 	'yes' => 'Yes',
 	'no' => 'No',
+	//Correct flag
+	'correct' => 'Y',
+	'incorrect' => 'N',
 
 	//reset module
 	'reset_module' => 'Reset Module',

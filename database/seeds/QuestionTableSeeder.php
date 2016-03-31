@@ -16,7 +16,7 @@ class QuestionTableSeeder extends Seeder
 //,created_by,updated_by,created_by,updated_by,deleted_by
 
 
-		$reader = Reader::createFromPath(storage_path('seeders') . '/questions.csv');
+		$reader = Reader::createFromPath(storage_path('seeders') . '/questions-old.csv');
 
 		\DB::table('questions')->truncate();
 		foreach($reader as $index => $row){

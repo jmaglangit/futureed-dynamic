@@ -1340,6 +1340,10 @@ fieldset legend {
 	margin-left: 15px;
 }
 
+.icon-help {
+	height: 45px;
+}
+
 .padding-0 {
 	padding: 0;
 }

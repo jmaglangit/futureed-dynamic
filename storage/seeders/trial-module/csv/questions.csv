@@ -1,10 +1,10 @@
-N,,13 + 5 is equals to?,1
-N,baseball-7.jpg,How many baseball bats are there?,1
-MC,baseball-7.jpg,How many baseball bats are there?,4,13,4,7,8
-MC,,which of the shapes is an octagon?,4,triangle.jpg,trapezoid.png,octagon.png,square.jpg
-FIB,,"Fill in the blanks.<br>The ___ brown ___ jumps over the lazy ___",3,quick,fox,dog
-O,,Arrange from least to greatest,4,5,3,4,8
-GR,,"Put on the graph 5 octagon, and 3 squares",5,horizontal,2,octagon.png,square.jpg
-GR,,"Put on the graph 5 octagon, and 3 squares",5,vertical,2,octagon.png,square.jpg
-QUAD,,"Plot X:6, and Y:4","x:6,y:4"
-N,,13 + 5 is equals to?,1
+1,,,N,How many baseball bats are there?,,Baseball-7.jpg,7,,,,,,,,,,,
+2,,,N,13 + 5 is equals to?,,,18,,,,,,,,,,,
+3,,,MC,How many baseball bats are there?,,Baseball-7.jpg,,,,,,,,,,,,
+4,,,MC,Which of these shapes is an octagon?,,,,,,,,,,,,,,
+5,,,FIB,Fill in the blanks.<br>The ___ brown ___ jumps over the ___ dog,,,"quick,fox,lazy",,,,,,,,,,,
+6,,,O,Arrange from least to greatest,,,"1,18,19,30","18,30,1,19",,,,,,,,,,
+7,,,GR,"Complete the set by graphing 5 octagons, and 3 squares",,,,,"{""orientation"":""horizontal"",""image"":[{""field"":""octagon"",""path"":""/images/trial-module/images/questions/octagon.png"",""seq_no"":""5""},{""field"":""square"",""path"":""/images/trial-module/images/questions/square.jpg"",""seq_no"":""3""}]}",,,,,,,,,
+8,,,GR,"Complete the set by graphing 1 octagons, and 2 squares",,,,,"{""orientation"":""vertical"",""image"":[{""field"":""octagon"",""path"":""/images/trial-module/images/questions/octagon.png"",""seq_no"":""1""},{""field"":""square"",""path"":""/images/trial-module/images/questions/square.jpg"",""seq_no"":""2""}]}",,,,,,,,,
+9,,,QUAD,"Can you plot this point on the worksheet? (6,4)",,,"{""answer"":[{""x"":""6"",""y"":""4""}]}",,,,,,,,,,,
+10,,,N,13 + 5 is equals to?,,,18,,,,,,,,,,,

@@ -66,6 +66,7 @@ function StudentTrialModuleController($scope, $window, $interval, $filter, apiSe
         }
         else if(self.trialQuestion[self.question_number]['type'] == Constants.FILLINBLANK){
             data.answer = self.fib_answer;
+            data.fib_length = self.trialQuestion[self.question_number]['number_of_blanks'];
         }
         else if(self.trialQuestion[self.question_number]['type'] == Constants.GRAPH) {
             if(self.trialQuestion[self.question_number]['orientation'] === Constants.HORIZONTAL) {
@@ -77,20 +78,21 @@ function StudentTrialModuleController($scope, $window, $interval, $filter, apiSe
             }
         }
         else if(self.trialQuestion[self.question_number]['type'] == Constants.ORDERING) {
-            data.answer = self.trialQuestion[self.question_number]['answer_string'];
+            data.answer = self.trialQuestion[self.question_number]['unordered_list'].join();
         }
         else if(self.trialQuestion[self.question_number]['type'] == Constants.QUADRANT) {
             quadData = self.quad.getData();
-            answer_quad_array = [];
+            answer_quad_array = {};
 
             $.each(quadData[0].data, function(i,item){
                 if(i > 0){
                     obj = {'x' : quadData[0].data[i][0], 'y' : quadData[0].data[i][1]}
-                    answer_quad_array.push(obj);
+                    answer_quad_array.answer = [obj];
                 }
+                data.has_plotted = i;
             });
 
-            data.answer = answer_quad_array;
+            data.answer =  JSON.stringify(answer_quad_array);
         }
         StudentModuleService.validateAnswer(data).success(function(response) {
             if(angular.equals(response.status, Constants.STATUS_OK)) {
@@ -189,7 +191,10 @@ function StudentTrialModuleController($scope, $window, $interval, $filter, apiSe
     }
 
     self.selectAnswer = function(object) {
-        self.answer = object.toString();
+        self.answer = [
+            self.trialQuestion[self.question_number]['choices_list'][object]['image_choice'],
+            self.trialQuestion[self.question_number]['choices_list'][object]['string_choice']
+        ];
     }
 
     self.nextQuestion = function() {
@@ -203,7 +208,7 @@ function StudentTrialModuleController($scope, $window, $interval, $filter, apiSe
             self.show_correct = Constants.FALSE;
             self.trial_expired = Constants.TRUE;
         }
-
+        self.trialQuestion
     }
 
     self.updateBackground = function() {
@@ -254,10 +259,12 @@ function StudentTrialModuleController($scope, $window, $interval, $filter, apiSe
         $scope.ui_block();
         //initialize plot data and options
         data = [[null]];
+        var quadrant = self.trialQuestion[self.question_number]['dimension'];
+
         options = {
-            yaxis:  { min: -self.trialQuestion[self.question_number]['coordinates'][1], max: self.trialQuestion[self.question_number]['coordinates'][1], ticks: self.trialQuestion[self.question_number]['coordinates'][1] * 2},
-            xaxis:  { min: -self.trialQuestion[self.question_number]['coordinates'][0], max: self.trialQuestion[self.question_number]['coordinates'][0], ticks: self.trialQuestion[self.question_number]['coordinates'][0] * 2},
-            grid:   {clickable: Constants.TRUE},
+            yaxis:  { min: -quadrant.y, max: quadrant.y, ticks: quadrant.y * 2},
+            xaxis:  { min: -quadrant.x, max: quadrant.x, ticks: quadrant.x * 2},
+            grid:   { clickable: Constants.TRUE},
             points: { show: Constants.TRUE, radius: 4, fill: Constants.TRUE, fillColor: "#EDC240" }
         };
 

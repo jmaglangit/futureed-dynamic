@@ -13,115 +13,119 @@ class StudentTrialModuleController extends ApiController {
 	 */
 	public function index()
 	{
-		$reader = Reader::createFromPath(storage_path('seeders/trial-module/csv/') . 'questions.csv');
+		$question_reader = Reader::createFromPath(storage_path('seeders/trial-module/csv/') . 'questions.csv');
+		$question_answer_reader = Reader::createFromPath(storage_path('seeders/trial-module/csv/') . 'question_answer.csv');
 		$image_path = url('images/trial-module/images/questions');
+
 		$datum = [];
 		$index = 0;
 
-		foreach($reader as $data) {
-			if( $data[0] === config('futureed.question_type_provide_answer') ||
-				$data[0] === config('futureed.question_type_fill_in_the_blank'))
-			{
-				$col = [];
-				if($data[0] === config('futureed.question_type_fill_in_the_blank'))
-				{
-					for($i = 0 ; $i < $data[3]; $i++) {
-						$col[$i] = $i; // <------ $col is to be used in ng-repeat for FIB question type : ng-repeat bases on array
+		foreach($question_reader as $data_row) {
+			if($data_row[3] === config('futureed.question_type_provide_answer')){
+				$datum[$index] = [
+					'type' => $data_row[3],
+					'question' => $data_row[4],
+					'question_image' => $data_row[6] == '' ? 'none' : $image_path.'/'.$data_row[6]
+				];
+			}
+			else if($data_row[3] === config('futureed.question_type_multiple_choice')) {
+				$choices_list = [];
+				$number_of_choices = [];
+				$choices_list_index = 0;
+
+				foreach($question_answer_reader as $choices) {
+					if($choices['2'] == $data_row[0]) {
+						$choices_list[$choices_list_index]['string_choice'] = $choices[5] != '' ? $choices[5] : 'none';
+						$choices_list[$choices_list_index]['image_choice'] = $choices[6] != '' ? $image_path.'/'.$choices[6] : 'none';
+
+						$number_of_choices[$choices_list_index] = $choices_list_index;
+						$choices_list_index++;
 					}
 				}
 
 				$datum[$index] = [
-					'type'                      => $data[0],
-					'image'                     => $data[1] === '' ? 'none' : $image_path.'/'.$data[1],
-					'question'                  => $data[2],
-					'number_of_possible_answers'=>  $data[0] === config('futureed.question_type_fill_in_the_blank') ? $col : $data[3]
+					'type' => $data_row[3],
+					'question' => $data_row[4],
+					'question_image' => $data_row[6] == '' ? 'none' : $image_path.'/'.$data_row[6],
+					'number_of_choices' => $number_of_choices,
+					'choices_list' => $choices_list
 				];
 			}
-			else if($data[0] === config('futureed.question_type_multiple_choice') ||
-					$data[0] === config('futureed.question_type_ordering'))
-			{
-				$questionStringImage = array_slice($data, count($data) - $data[3]);
-				$haystackIndex = 0;
+			else if($data_row[3] === config('futureed.question_type_fill_in_the_blank')) {
+				$number_of_blanks = [];
+				$blank_index = 0;
+				$answer_list = preg_split('/[\W]/',$data_row[7], -1, PREG_SPLIT_NO_EMPTY);
 
-				$string = [];
-				$image = [];
-				$col = [];
-
-				foreach($questionStringImage as $haystack) {
-					if(strpos($haystack, '.png') == true || strpos($haystack, '.jpg') == true) {
-						$image[$haystackIndex] = $image_path.'/'.$haystack;
-					} else if($haystack === '') {
-						$image[$haystackIndex] = 'none';
-					} else {
-						$string[$haystackIndex] = $haystack;
-					}
-					$haystackIndex++;
-				}
-
-				for($i = 0 ; $i < $data[3] ; $i++) {
-					$col = array_merge($col, [$i]);
+				foreach($answer_list as $blank) {
+					$number_of_blanks[$blank_index] = $blank_index;
+					$blank_index++;
 				}
 
 				$datum[$index] = [
-					'type'                      => $data[0],
-					'image'                     => $data[1] === '' ? 'none' : $image_path.'/'.$data[1],
-					'question'                  => $data[2],
-					'number_of_possible_answers'=> $data[0] === config('futureed.question_type_multiple_choice') ? $col : $data[3],
-					'string_question'           => $data[0] === config('futureed.question_type_multiple_choice') ? $string : '',
-					'image_question'            => $data[0] === config('futureed.question_type_multiple_choice') ? $image : '',
-					'answer_string'             => $data[0] === config('futureed.question_type_ordering') ? $string : '',
-					'answer_image'              => $data[0] === config('futureed.question_type_ordering') ? $image : ''
+					'type' => $data_row[3],
+					'question' => $data_row[4],
+					'question_image' => $data_row[6] == '' ? 'none' : $image_path.'/'.$data_row[6],
+					'number_of_blanks' => $number_of_blanks
 				];
 			}
-			else if($data[0] === config('futureed.question_type_graph'))
+			else if($data_row[3] === config('futureed.question_type_ordering')) {
+				$unordered_list = preg_split('/[\W]/',$data_row[8], -1, PREG_SPLIT_NO_EMPTY);
+				$datum[$index] = [
+					'type' => $data_row[3],
+					'question' => $data_row[4],
+					'question_image' => $data_row[6] == '' ? 'none' : $image_path.'/'.$data_row[6],
+					'unordered_list' => $unordered_list
+				];
+			}
+			else if($data_row[3] === config('futureed.question_type_graph'))
 			{
-				$images = array_slice($data, count($data) - $data[5]);
-				$haystackIndex = 0;
-				$col = [];
+				$graph_content = (array)json_decode($data_row[9]);
+				$temp = [];
+				$max_column = [];
 
-				foreach($images as $haystack) {
-					if(strpos($haystack, '.png') == true || strpos($haystack, '.jpg') == true) {
-						$images[$haystackIndex] = $image_path.'/'.$haystack;
-					} else if($haystack === '') {
-						$image[$haystackIndex] = 'none';
-					}
-					$haystackIndex++;
+				foreach($graph_content['image'] as $key => $image_prop) {
+					$temp[$key] = $image_prop->seq_no;
 				}
 
-				for($i = 0 ; $i < $data[3] ; $i++) {
-					$col = array_merge($col, [$i]);
+				for($i = 0; $i < max($temp) ; $i++) {
+					$max_column[$i] = $i;
 				}
 
 				$datum[$index] = [
-					'type' => $data[0],
-					'image' => $data[1] === '' ? 'none' : $image_path.'/'.$data[1],
-					'question' => $data[2],
-					'number_of_possible_answers' => $data[5],
-					'orientation' => $data[4],
-					'number_of_columns' => $col,
-					'table_image' => $images,
+					'type' => $data_row[3],
+					'question' => $data_row[4],
+					'question_image' => $data_row[6] == '' ? 'none' : $image_path.'/'.$data_row[6],
+					'orientation' => $graph_content['orientation'],
+					'table_image' => $graph_content['image'],
+					'number_of_columns' => $max_column
 				];
 			}
-			else if($data[0] === config('futureed.question_type_quad'))
+			else if($data_row[3] === config('futureed.question_type_quad'))
 			{
-				$coords = preg_split('/[,:xy]+/', $data[3], -1, PREG_SPLIT_NO_EMPTY);
+				$temp = (json_decode($data_row[7]));
+				$coordinates = [];
 
-				$max = max($coords);
+				foreach($temp->answer as $key => $value){
+					$coordinates = (array)$value;
+				}
+
+				$max = max($coordinates);
 				$graph_dimension = $max < 5 ? 5 : intval(round($max, -1));
 
-				foreach($coords as $axis => $value) {
-					$coords[$axis] = $graph_dimension;
+				foreach($coordinates as $axis => $value) {
+					$dimension[$axis] = $graph_dimension;
 				}
 
 				$datum[$index] = [
-					'type'          => $data[0],
-					'image'         => $data[1],
-					'question'      => $data[2],
-					'coordinates'   => $coords
+					'type' => $data_row[3],
+					'question' => $data_row[4],
+					'question_image' => $data_row[6] == '' ? 'none' : $image_path.'/'.$data_row[6],
+					'dimension' => $dimension
 				];
 			}
 			$index++;
 		}
+
 		return $this->respondWithData($datum);
 	}
 
@@ -133,98 +137,121 @@ class StudentTrialModuleController extends ApiController {
 	 */
 	public function store(TrialModuleRequest $request)
 	{
-		$question_type = Input::get('question_type');
-		$question_number = Input::get('question_number');
-		$reader = Reader::createFromPath(storage_path('seeders/trial-module/csv/') . 'answer.csv');
-		$answer = $request->get('answer');
+		$question_type = $request->get('question_type');
+		$question_number = Input::get('question_number') + 1;
+		$question_reader = Reader::createFromPath(storage_path('seeders/trial-module/csv/') . 'questions.csv');
+		$question_answer_reader = Reader::createFromPath(storage_path('seeders/trial-module/csv/') . 'question_answer.csv');
+		$answer = Input::get('answer');
 
-		if( $question_type === config('futureed.question_type_provide_answer') ||
-			$question_type === config('futureed.question_type_multiple_choice'))
+		if($question_type == config('futureed.question_type_provide_answer'))
 		{
-			foreach($reader as $data){
-				if($question_number == $data[0]){
-					if ($answer === $data[1]) {
+			foreach($question_reader as $answer_provide_type) {
+				if($question_number == $answer_provide_type[0]) {
+					if($answer === $answer_provide_type[7]) {
 						return $this->respondWithData(['valid' => true]);
-					} else {
-						return $this->respondWithData(['valid' => false]);
-					}
+					} else return $this->respondWithData(['valid' => false]);
 				}
 			}
 		}
-		else if($question_type === config('futureed.question_type_fill_in_the_blank') ||
-				$question_type === config('futureed.question_type_ordering') ||
-				$question_type === config('futureed.question_type_graph') ||
-				$question_type === config('futureed.question_type_quad'))
+		else if($question_type == config('futureed.question_type_multiple_choice'))
 		{
-			$index = 0;
+			$answer[0] = $answer[0] != 'none' ? preg_split('/[\w\W]+\//', $answer[0], -1, PREG_SPLIT_NO_EMPTY) : $answer[0]; //<--- remove url except for file name
+			$answer_found = false;
 
-			foreach($reader as $data){
-				if($question_number == $data[0]) {
-					$answer_list = array_slice($data, 1);
-					break;
+			foreach($question_answer_reader as $answer_MC) {
+				if($question_number == $answer_MC[2]) {
+					if(($answer[0] == 'none' && ($answer[1] == $answer_MC[5] && $answer_MC[7] == 'Y')) ||
+						($answer[1] == 'none' && ($answer[0][0] == $answer_MC[6] && $answer_MC[7] == 'Y'))
+					){
+						$answer_found = true;
+						break;
+					}
 				}
 			}
 
-			foreach($answer_list as $csv_answer_value) {
-				if( $question_type === config('futureed.question_type_ordering') ||
-					$question_type === config('futureed.question_type_fill_in_the_blank'))
-				{
-					if($index < count($answer)) {
-						if((string)$answer[$index] === $csv_answer_value) {
-							$temp[$index] = true;
-						} else {
-							$temp[$index] = false;
-						}
-					}
-				}
-				else if($question_type === config('futureed.question_type_graph'))
-				{
-					if((string)$answer[$index] === $csv_answer_value) {
-						$temp[$index] = true;
-					} else {
-						$temp[$index] = false;
-					}
-				}
-				else if($question_type === config('futureed.question_type_quad'))
-				{
-					$csv_coords =  $this->CoordStringToArray($csv_answer_value);
-
-					if($csv_coords['x'] === (string)$answer[$index]['x'] && $csv_coords['y'] === (string)$answer[$index]['y']){
-						$temp[$index] = true;
-					} else {
-						$temp[$index] = false;
-					}
-				}
-				$index++;
+			if($answer_found) {
+				return $this->respondWithData(['valid' => true]);
 			}
 
-			if(in_array(false, $temp)) {
+			return $this->respondWithData(['valid' => false]);
+		}
+		else if($question_type == config('futureed.question_type_fill_in_the_blank'))
+		{
+			$individual_answer_validation = [];
+			$answer_index = 0;
+			$answer_list = [];
+
+			foreach($question_reader as $answer_row) {
+				if($answer_row[3] === config('futureed.question_type_fill_in_the_blank') && $question_number == $answer_row[0]) {
+					$answer_list = preg_split('/[\W]/',$answer_row[7], -1, PREG_SPLIT_NO_EMPTY);
+				}
+			}
+
+			foreach($answer as $key => $individual_answer_value) {
+				if($answer_list[$answer_index] == $individual_answer_value) $individual_answer_validation[$answer_index] = true;
+				else $individual_answer_validation[$answer_index] = false;
+				$answer_index++;
+			}
+
+			if(in_array(false, $individual_answer_validation)) {
+				return $this->respondWithData(['valid' => false]);
+			} else {
+				return $this->respondWithData(['valid' => true]);
+			}
+		}
+		else if($question_type == config('futureed.question_type_ordering'))
+		{
+			foreach($question_reader as $answer_row) {
+				if($question_number == $answer_row[0]){
+					if($answer_row[7] === $answer){
+						return $this->respondWithData(['valid' => true]);
+					}
+					return $this->respondWithData(['valid' => false]);
+				}
+			}
+		}
+		else if($question_type == config('futureed.question_type_graph'))
+		{
+			$answer_list = [];
+			foreach($question_reader as $answer_row) {
+				if($question_number == $answer_row[0]){
+					$graph_content = json_decode($answer_row[9]);
+					foreach($graph_content->image as $key => $object){
+						if($object->seq_no == $answer[$key]){
+							$answer_list[$key] = true;
+						} else $answer_list[$key] = false;
+
+					}
+				}
+			}
+
+			if(in_array(false, $answer_list)) {
+				return $this->respondWithData(['valid' => false]);
+			} else {
+				return $this->respondWithData(['valid' => true]);
+			}
+		}
+		else if($question_type == config('futureed.question_type_quad'))
+		{
+			$individual_answer_validation = [];
+			foreach($question_reader as $answer_row) {
+				if($question_number == $answer_row[0]) {
+					$answer_csv = (json_decode($answer_row[7]));
+					$answer_user = (json_decode($answer));
+					$coords_csv = $answer_csv->answer;
+
+					foreach($answer_user->answer as $key => $coords) {
+						$curr_csv_coords = $coords_csv[$key];
+						if($curr_csv_coords->x == $coords->x && $curr_csv_coords->y == $coords->y) $individual_answer_validation[$key] = true;
+						else $individual_answer_validation[$key] = false;
+					}
+				}
+			}
+			if(in_array(false, $individual_answer_validation)) {
 				return $this->respondWithData(['valid' => false]);
 			} else {
 				return $this->respondWithData(['valid' => true]);
 			}
 		}
 	}
-
-
-	/**
-	 * Converts string coords to array with delimiter of
-	 * "|" for every axis   ex: y:5|x:5
-	 * ":" for the axis     ex: x:5
-	 * returns ex: [x=>5,y=>5]
-	 *
-	 * @param $string
-	 * @return array
-	 */
-	private function CoordStringToArray($string) {
-		$finalArray = [];
-		$asArr = explode( '|', $string );
-
-		foreach( $asArr as $val ){
-			$tmp = explode( ':', $val );
-			$finalArray[ $tmp[0] ] = $tmp[1];
-		}
-		return $finalArray;
-	}
-
 }
