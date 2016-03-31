@@ -983,8 +983,8 @@ hr {
 }
 
 .choices img{
-	/*height: 200px;*/
-	max-width: 200px;
+	max-height: 88px;
+	max-width: 150px;
 	margin: 2px 2px 2px 2px;
 }
 
