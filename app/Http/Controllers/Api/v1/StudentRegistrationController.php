@@ -1,13 +1,31 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
 use FutureEd\Http\Requests\Api\StudentRegistrationRequest;
+use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
+use FutureEd\Services\MailServices;
+use FutureEd\Services\UserServices;
 
 class StudentRegistrationController extends StudentController {
 
-    /*
-     * Candidate users registration
-     */
+    protected $user_service;
+    protected $student;
+    protected $mail_service;
 
+    public function __construct(
+        UserServices $userServices,
+        StudentRepositoryInterface $studentRepositoryInterface,
+        MailServices $mailServices
+    ){
+        $this->user_service = $userServices;
+        $this->student = $studentRepositoryInterface;
+        $this->mail_service = $mailServices;
+    }
+
+    /**
+     * Candidate users registration
+     * @param StudentRegistrationRequest $request
+     * @return
+     */
     public function register(StudentRegistrationRequest $request)
     {
         $student = $request->only(
@@ -30,10 +48,10 @@ class StudentRegistrationController extends StudentController {
         $input = $request->only('callback_uri');
 
         //check if username exist
-        $check_username = $this->user->checkUsername($user['username'],config('futureed.student'));
+        $check_username = $this->user_service->checkUsername($user['username'],config('futureed.student'));
 
         //check if email exist
-        $check_email = $this->user->checkEmail($user['email'],config('futureed.student'));
+        $check_email = $this->user_service->checkEmail($user['email'],config('futureed.student'));
 
 
         if($check_username){
@@ -52,7 +70,7 @@ class StudentRegistrationController extends StudentController {
         ]);
 
         // add user, return status
-        $user_response = $this->user->addUser($user);
+        $user_response = $this->user_service->addUser($user);
 
         if(isset($user_response['status']))
         {
@@ -70,10 +88,10 @@ class StudentRegistrationController extends StudentController {
 
         }
 
-        if(isset($student_response['status'])){
+        if(isset($student_response->id)){
 
             //send email to user.
-            $this->mail->sendStudentRegister($user_response['id'],$input['callback_uri']);
+            $this->mail_service->sendStudentRegister($user_response['id'],$input['callback_uri']);
 
             $student_id = $this->student->getStudentId($user_response['id']);
             //return success
@@ -103,7 +121,7 @@ class StudentRegistrationController extends StudentController {
         $user_type = config('futureed.student');
 
         //get student user
-        $user = $this->user->getUser($input['id'],$user_type);
+        $user = $this->user_service->getUser($input['id'],$user_type);
 
         //get student
         $student  = $this->student->getStudent($input['id']);
