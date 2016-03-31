@@ -720,7 +720,9 @@ function ProfileController($scope, apiService, ProfileService) {
 		ProfileService.getStudentBackgroundImage($scope.user.user.id).success(function(response){
 			if(response.errors) {
 				self.errors = $scope.errorHandler(response.errors);
-			} else if(response.data){
+			} else if(response.data == Constants.FALSE) {
+				self.background_image.url = "/images/class-student/mountain-full-bg.png";
+			}else {
 				self.background_image = response.data;
 			}
 
