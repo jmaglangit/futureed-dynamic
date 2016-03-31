@@ -1332,6 +1332,7 @@ fieldset legend {
 
 .icon-help {
 	height: 45px;
+	padding-left: 100%;
 }
 
 .padding-0 {
