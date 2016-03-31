@@ -1856,6 +1856,7 @@ top: 41px;
 .previous-btn-position span, .next-btn-position span {
 	font-size: 75px;
 	color: #055A7F;
+	cursor: pointer;
 }
 
 .next-btn-position {
