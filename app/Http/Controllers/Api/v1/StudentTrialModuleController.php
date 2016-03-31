@@ -52,14 +52,9 @@ class StudentTrialModuleController extends ApiController {
 				];
 			}
 			else if($data_row[3] === config('futureed.question_type_fill_in_the_blank')) {
-				$number_of_blanks = [];
-				$blank_index = 0;
 				$answer_list = preg_split('/[\W]/',$data_row[7], -1, PREG_SPLIT_NO_EMPTY);
-
-				foreach($answer_list as $blank) {
-					$number_of_blanks[$blank_index] = $blank_index;
-					$blank_index++;
-				}
+				$number_of_blanks = new \SplFixedArray(count($answer_list));
+				$number_of_blanks = array_fill(0, count($number_of_blanks), ' ');
 
 				$datum[$index] = [
 					'type' => $data_row[3],
