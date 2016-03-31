@@ -216,7 +216,9 @@ class StudentTrialModuleController extends ApiController {
 					foreach($graph_content->image as $key => $object){
 						if($object->seq_no == $answer[$key]){
 							$answer_list[$key] = true;
-						} else $answer_list[$key] = false;
+						} else {
+							$answer_list[$key] = false;
+						}
 
 					}
 				}
@@ -239,8 +241,12 @@ class StudentTrialModuleController extends ApiController {
 
 					foreach($answer_user->answer as $key => $coords) {
 						$curr_csv_coords = $coords_csv[$key];
-						if($curr_csv_coords->x == $coords->x && $curr_csv_coords->y == $coords->y) $individual_answer_validation[$key] = true;
-						else $individual_answer_validation[$key] = false;
+						if($curr_csv_coords->x == $coords->x && $curr_csv_coords->y == $coords->y) {
+							$individual_answer_validation[$key] = true;
+						}
+						else {
+							$individual_answer_validation[$key] = false;
+						}
 					}
 				}
 			}
