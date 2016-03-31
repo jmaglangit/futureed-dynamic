@@ -98,11 +98,7 @@ class StudentTrialModuleController extends ApiController {
 			else if($data_row[3] === config('futureed.question_type_quad'))
 			{
 				$temp = (json_decode($data_row[7]));
-				$coordinates = [];
-
-				foreach($temp->answer as $key => $value){
-					$coordinates = (array)$value;
-				}
+				$coordinates = (array)$temp->answer[0];
 
 				$max = max($coordinates);
 				$graph_dimension = $max < 5 ? 5 : intval(round($max, -1));
@@ -144,7 +140,9 @@ class StudentTrialModuleController extends ApiController {
 				if($question_number == $answer_provide_type[0]) {
 					if($answer === $answer_provide_type[7]) {
 						return $this->respondWithData(['valid' => true]);
-					} else return $this->respondWithData(['valid' => false]);
+					} else {
+						return $this->respondWithData(['valid' => false]);
+					}
 				}
 			}
 		}
@@ -155,8 +153,8 @@ class StudentTrialModuleController extends ApiController {
 
 			foreach($question_answer_reader as $answer_MC) {
 				if($question_number == $answer_MC[2]) {
-					if(($answer[0] == 'none' && ($answer[1] == $answer_MC[5] && $answer_MC[7] == 'Y')) ||
-						($answer[1] == 'none' && ($answer[0][0] == $answer_MC[6] && $answer_MC[7] == 'Y'))
+					if(($answer[0] == config('futureed.mc_none') && ($answer[1] == $answer_MC[5] && $answer_MC[7] == config('futureed.correct'))) ||
+						($answer[1] == config('futureed.mc_none') && ($answer[0][0] == $answer_MC[6] && $answer_MC[7] == config('futureed.correct')))
 					){
 						$answer_found = true;
 						break;
@@ -183,8 +181,12 @@ class StudentTrialModuleController extends ApiController {
 			}
 
 			foreach($answer as $key => $individual_answer_value) {
-				if($answer_list[$answer_index] == $individual_answer_value) $individual_answer_validation[$answer_index] = true;
-				else $individual_answer_validation[$answer_index] = false;
+				if($answer_list[$answer_index] == $individual_answer_value) {
+					$individual_answer_validation[$answer_index] = true;
+				}
+				else {
+					$individual_answer_validation[$answer_index] = false;
+				}
 				$answer_index++;
 			}
 

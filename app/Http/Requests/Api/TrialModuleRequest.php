@@ -50,9 +50,9 @@ class TrialModuleRequest extends ApiRequest {
 
 				foreach($question_answer as $answer) {
 					if($answer == 0) {
-						$has_answer = array_merge($has_answer, [false]);
+						$has_answer[] = false;
 					} else {
-						$has_answer = array($has_answer, [true]);
+						$has_answer[] = true;
 					}
 				}
 
@@ -90,7 +90,6 @@ class TrialModuleRequest extends ApiRequest {
 		switch($question_type) {
 
 			case config('futureed.question_type_fill_in_the_blank'):
-
 				if(empty($question_answer)){
 					$message['answer.required'] = config('futureed-error.error_messages.'.ErrorMessageServices::TRIAL_MODULE_MULTIPLE_ANSWERS_REQUIRED);
 				} else {
@@ -105,7 +104,6 @@ class TrialModuleRequest extends ApiRequest {
 				return [
 					'answer.0.min' => config('futureed-error.error_messages.'.ErrorMessageServices::TRIAL_MODULE_DRAG_DROP_REQUIRED)
 				];
-
 				break;
 
 			case config('futureed.question_type_quad'):
@@ -118,7 +116,6 @@ class TrialModuleRequest extends ApiRequest {
 				return [
 					'answer.required' => config('futureed-error.error_messages.'.ErrorMessageServices::TRIAL_MODULE_ANSWER_IS_REQUIRED)
 				];
-				break;
 				break;
 
 		}
