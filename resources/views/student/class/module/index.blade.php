@@ -75,7 +75,7 @@
 							<p class="pull-left">Help Request</p>
 						</div>
 
-						<div class="col-xs-offset-5 col-xs-3 col-md-offset-5 col-md-3 clearfix"
+						<div class="col-xs-offset-4 col-xs-1 col-md-offset-4 col-md-1 clearfix"
 							 ng-class="{ 'disabled-help-bar' : mod.active_contents && !mod.contents }"
 							 ng-if="!mod.no_record && !mod.record.module_done && help.show_help_requests">
 
