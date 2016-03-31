@@ -7,6 +7,7 @@ use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use FutureEd\Models\Repository\Validator\ValidatorRepositoryInterface;
 use FutureEd\Services\CodeGeneratorServices;
 use FutureEd\Services\MailServices;
+use FutureEd\Services\StudentServices;
 use FutureEd\Services\UserServices;
 use Illuminate\Support\Facades\Input;
 
@@ -19,6 +20,7 @@ class UserPasswordController extends UserController {
 	protected $mail_service;
 	protected $client;
 	protected $student;
+	protected $student_service;
 
 	/**
 	 * @param UserServices $userServices
@@ -28,6 +30,7 @@ class UserPasswordController extends UserController {
 	 * @param MailServices $mailServices
 	 * @param ClientRepositoryInterface $clientRepositoryInterface
 	 * @param StudentRepositoryInterface $studentRepositoryInterface
+	 * @param StudentServices $studentServices
 	 */
 	public function __construct(
 		UserServices $userServices,
@@ -36,7 +39,8 @@ class UserPasswordController extends UserController {
 		AdminRepositoryInterface $adminRepositoryInterface,
 		MailServices $mailServices,
 		ClientRepositoryInterface $clientRepositoryInterface,
-		StudentRepositoryInterface $studentRepositoryInterface
+		StudentRepositoryInterface $studentRepositoryInterface,
+		StudentServices $studentServices
 	){
 		$this->user_service = $userServices;
 		$this->validator = $validatorRepositoryInterface;
@@ -45,6 +49,7 @@ class UserPasswordController extends UserController {
 		$this->mail_service = $mailServices;
 		$this->client = $clientRepositoryInterface;
 		$this->student = $studentRepositoryInterface;
+		$this->student_service = $studentServices;
 	}
 
 	/**
@@ -193,7 +198,7 @@ class UserPasswordController extends UserController {
                      
                       if(strcasecmp($input['user_type'],config('futureed.student')) == 0){
 
-                        $studentdata = $this->student->resetCodeResponse($return['data']);
+                        $studentdata = $this->student_service->resetCodeResponse($return['data']);
                         return $this->respondWithData($studentdata);
 
                       }elseif(strcasecmp($input['user_type'],config('futureed.client')) == 0){
