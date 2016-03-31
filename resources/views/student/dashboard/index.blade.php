@@ -8,7 +8,7 @@
     <div class="row" ng-cloak>
         <div class="col-xs-12 class-container">
             <h3 class="alert alert-info">You have no available subjects.</h3>
-
+            
             <div class="no-record-label">    
                 <p>You need a Teacher to add you to a Class. </p>
                 <p>or</p>
