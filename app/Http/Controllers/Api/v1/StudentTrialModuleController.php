@@ -25,7 +25,7 @@ class StudentTrialModuleController extends ApiController {
 				$datum[$index] = [
 					'type' => $data_row[3],
 					'question' => $data_row[4],
-					'question_image' => $data_row[6] == '' ? 'none' : $image_path.'/'.$data_row[6]
+					'question_image' => $data_row[6] == '' ? config('futureed.mc_none') : $image_path.'/'.$data_row[6]
 				];
 			}
 			else if($data_row[3] === config('futureed.question_type_multiple_choice')) {
@@ -35,8 +35,8 @@ class StudentTrialModuleController extends ApiController {
 
 				foreach($question_answer_reader as $choices) {
 					if($choices['2'] == $data_row[0]) {
-						$choices_list[$choices_list_index]['string_choice'] = $choices[5] != '' ? $choices[5] : 'none';
-						$choices_list[$choices_list_index]['image_choice'] = $choices[6] != '' ? $image_path.'/'.$choices[6] : 'none';
+						$choices_list[$choices_list_index]['string_choice'] = $choices[5] != '' ? $choices[5] : config('futureed.mc_none');
+						$choices_list[$choices_list_index]['image_choice'] = $choices[6] != '' ? $image_path.'/'.$choices[6] : config('futureed.mc_none');
 
 						$number_of_choices[$choices_list_index] = $choices_list_index;
 						$choices_list_index++;
@@ -46,7 +46,7 @@ class StudentTrialModuleController extends ApiController {
 				$datum[$index] = [
 					'type' => $data_row[3],
 					'question' => $data_row[4],
-					'question_image' => $data_row[6] == '' ? 'none' : $image_path.'/'.$data_row[6],
+					'question_image' => $data_row[6] == '' ? config('futureed.mc_none') : $image_path.'/'.$data_row[6],
 					'number_of_choices' => $number_of_choices,
 					'choices_list' => $choices_list
 				];
@@ -59,7 +59,7 @@ class StudentTrialModuleController extends ApiController {
 				$datum[$index] = [
 					'type' => $data_row[3],
 					'question' => $data_row[4],
-					'question_image' => $data_row[6] == '' ? 'none' : $image_path.'/'.$data_row[6],
+					'question_image' => $data_row[6] == '' ? config('futureed.mc_none') : $image_path.'/'.$data_row[6],
 					'number_of_blanks' => $number_of_blanks
 				];
 			}
@@ -68,7 +68,7 @@ class StudentTrialModuleController extends ApiController {
 				$datum[$index] = [
 					'type' => $data_row[3],
 					'question' => $data_row[4],
-					'question_image' => $data_row[6] == '' ? 'none' : $image_path.'/'.$data_row[6],
+					'question_image' => $data_row[6] == '' ? config('futureed.mc_none') : $image_path.'/'.$data_row[6],
 					'unordered_list' => $unordered_list
 				];
 			}
@@ -89,7 +89,7 @@ class StudentTrialModuleController extends ApiController {
 				$datum[$index] = [
 					'type' => $data_row[3],
 					'question' => $data_row[4],
-					'question_image' => $data_row[6] == '' ? 'none' : $image_path.'/'.$data_row[6],
+					'question_image' => $data_row[6] == '' ? config('futureed.mc_none') : $image_path.'/'.$data_row[6],
 					'orientation' => $graph_content['orientation'],
 					'table_image' => $graph_content['image'],
 					'number_of_columns' => $max_column
@@ -110,7 +110,7 @@ class StudentTrialModuleController extends ApiController {
 				$datum[$index] = [
 					'type' => $data_row[3],
 					'question' => $data_row[4],
-					'question_image' => $data_row[6] == '' ? 'none' : $image_path.'/'.$data_row[6],
+					'question_image' => $data_row[6] == '' ? config('futureed.mc_none') : $image_path.'/'.$data_row[6],
 					'dimension' => $dimension
 				];
 			}
@@ -148,7 +148,7 @@ class StudentTrialModuleController extends ApiController {
 		}
 		else if($question_type == config('futureed.question_type_multiple_choice'))
 		{
-			$answer[0] = $answer[0] != 'none' ? preg_split('/[\w\W]+\//', $answer[0], -1, PREG_SPLIT_NO_EMPTY) : $answer[0]; //<--- remove url except for file name
+			$answer[0] = $answer[0] != config('futureed.mc_none') ? preg_split('/[\w\W]+\//', $answer[0], -1, PREG_SPLIT_NO_EMPTY) : $answer[0]; //<--- remove url except for file name
 			$answer_found = false;
 
 			foreach($question_answer_reader as $answer_MC) {
