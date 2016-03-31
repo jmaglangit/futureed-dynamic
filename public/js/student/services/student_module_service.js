@@ -7,6 +7,21 @@ function StudentModuleService($http){
 	var service = {};
 	var serviceUrl = '/api/v1/';
 
+	service.getTrialModule = function() {
+		return $http({
+			method	:	Constants.METHOD_GET,
+			url		:	serviceUrl + "trial"
+		});
+	}
+
+	service.validateAnswer = function(data){
+		return $http({
+			method	:	Constants.METHOD_POST,
+			data	:	data,
+			url		:	serviceUrl + "trial"
+		});
+	}
+
 	service.getModuleDetail = function(id) {
 		return $http({
 			method  : Constants.METHOD_GET

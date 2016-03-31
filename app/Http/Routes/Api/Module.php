@@ -17,6 +17,8 @@ Routes::group([
 	'role' => ['principal','teacher','parent','admin','super admin']
 ], function(){
 
+	Routes::resource('/trial', 'Api\v1\StudentTrialModuleController');
+
 	Routes::resource('/module/student','Api\v1\StudentModuleController',
 		['except' => ['create', 'edit', 'destroy']]);
 

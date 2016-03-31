@@ -53,8 +53,11 @@
 								 class="icon-resize">
 						</div>
 
-						<img class="drawer-button pull-right" ng-class="{ 'flip-270' : tips.show_content_tips, 'flip-90' : !tips.show_content_tips, }"
-							ng-src="/images/class-student/btn-slide.png" ng-click="tips.toggleTipsArrow(mod)">
+						<div>
+							<img class="drawer-button pull-right" ng-class="{ 'flip-270' : tips.show_content_tips, 'flip-90' : !tips.show_content_tips, }"
+								 ng-src="/images/class-student/btn-slide.png" ng-click="tips.toggleTipsArrow(mod)">
+						</div>
+						<div class="clearfix"></div>
 					</div>
 
 					<div template-directive template-url="{!! route('student.class.module.partials.add_tip') !!}"></div>
@@ -75,13 +78,19 @@
 						<div class="col-xs-offset-5 col-xs-3 col-md-offset-5 col-md-3 clearfix"
 							 ng-class="{ 'disabled-help-bar' : mod.active_contents && !mod.contents }"
 							 ng-if="!mod.no_record && !mod.record.module_done && help.show_help_requests">
+
 							<img src="/images/class-student/icon-askforhelp.png" ng-click="mod.askHelp()"
 								 class="icon-help">
 						</div>
 
-						<img class="drawer-button" ng-class="{ 'flip-270' : help.show_help_requests, 'flip-90' : !help.show_help_requests }"
-							 src="/images/class-student/btn-slide.png"
-							 ng-click="help.toggleHelpArrow(mod)">
+
+						<div>
+							<img class="drawer-button" ng-class="{ 'flip-270' : help.show_help_requests, 'flip-90' : !help.show_help_requests }"
+								 src="/images/class-student/btn-slide.png"
+								 ng-click="help.toggleHelpArrow(mod)">
+						</div>
+						<div class="clearfix"></div>
+
 					</div>
 					
 					<div template-directive template-url="{!! route('student.class.module.partials.add_help') !!}"></div>
