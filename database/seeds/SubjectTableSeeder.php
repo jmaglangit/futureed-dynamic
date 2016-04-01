@@ -13,7 +13,8 @@ class SubjectTableSeeder extends Seeder
 
 		$seed = [
 			[1,'Math','Singapore Math','Enabled'],
-			[2,'English','US Common Core, Singapore English','Enabled'],
+			[2,'English Grammar','US Common Core, Singapore English Grammar','Enabled'],
+			[3,'English Vocabulary','US Common Core, Singapore English Vocabulary','Enabled'],
 		];
 
 		\DB::table('subjects')->truncate();
