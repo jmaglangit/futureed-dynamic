@@ -7,6 +7,7 @@ use FutureEd\Models\Repository\ClassStudent\ClassStudentRepositoryInterface;
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
 use FutureEd\Models\Repository\Subscription\SubscriptionRepository;
 use FutureEd\Models\Repository\Subscription\SubscriptionRepositoryInterface;
+use FutureEd\Services\LearningStyleServices;
 use FutureEd\Services\StudentServices;
 use FutureEd\Services\UserServices;
 use Illuminate\Support\Facades\Input;
@@ -18,19 +19,22 @@ class StudentController extends ApiController {
 	protected $user_service;
 	protected $class_student;
 	protected $subscription;
+	protected $lsp_service;
 
 	public function __construct(
 		StudentServices $studentServices,
 		UserServices $userServices,
 		StudentRepositoryInterface $studentRepositoryInterface,
 		ClassStudentRepositoryInterface $classStudentRepositoryInterface,
-		SubscriptionRepositoryInterface $subscriptionRepositoryInterface
+		SubscriptionRepositoryInterface $subscriptionRepositoryInterface,
+		LearningStyleServices $learningStyleServices
 	){
 		$this->student = $studentRepositoryInterface;
 		$this->student_service = $studentServices;
 		$this->user_service = $userServices;
 		$this->class_student = $classStudentRepositoryInterface;
 		$this->subscription = $subscriptionRepositoryInterface;
+		$this->lsp_service = $learningStyleServices;
 	}
 
 	/**
@@ -148,7 +152,6 @@ class StudentController extends ApiController {
 		return $this->respondWithData(['billing_address_not_found' => 0]);
 	}
 
-	// if true needs to take lsp else false no need.
 	/**
 	 * Check if student needs to take learning style program
 	 * @param $id
@@ -156,43 +159,9 @@ class StudentController extends ApiController {
 	 */
 	public function checkRequiredLearningStyle($id) {
 
-		$learning_style = $this->student->getStudentLSP($id);
-
-		//check if student has lsp return false.
-		if ($learning_style <> 0) {
-
 			return $this->respondWithData([
-				'learning_style' => 0
+				'learning_style' => $this->lsp_service->checkRequiredLearningStyle($id)
 			]);
-
-		} else {
-
-			$learning_style = 0;
-
-			//check current class with order subscription
-			$classes = $this->class_student->getClassStudent($id);
-
-			foreach ($classes as $class) {
-
-				if ($class->classroom) {
-
-					//get subscription
-					$subscription = $this->subscription->getSubscription($class->classroom->order->subscription_id);
-
-					if ($subscription->has_lsp > 0) {
-						$learning_style = $id;
-					}
-				}
-			}
-
-			return $this->respondWithData([
-				'learning_style' => $learning_style
-			]);
-
-
-		}
-
-
 	}
 
 }
