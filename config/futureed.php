@@ -242,6 +242,8 @@ return [
 	'lsp_result_name' => env('IASSESS_LSP_RESULT_NAME', 'IPS1'),
 	'default_lsp' => env('IASSESS_LSP_DEFAULT', 3),
 
+	//number of years for student to retake LSP
+	'lsp_retake_year' => 1,
 
 	//Logs
 	'user_log' => 'User',
