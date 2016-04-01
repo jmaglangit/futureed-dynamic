@@ -911,7 +911,7 @@ hr {
 
 .questions-container {
 	background-color: #FFFFFF;
-	height: 500px;
+	height: 43em;
 	border-radius: 5px;
 	border: 5px solid #EEEEEE;
 	width: 100%;
@@ -1880,4 +1880,3 @@ li.questions-answers > a, li.questions-answers div {
 .margin-top-50 {
 	margin-top: 50px;
 }
-
