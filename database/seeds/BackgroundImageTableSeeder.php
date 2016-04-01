@@ -13,7 +13,7 @@ class BackgroundImageTableSeeder extends Seeder
     {
         $reader = Reader::createFromPath(storage_path('seeders') . '/background_image.csv');
 
-        \DB::table('questions')->truncate();
+        \DB::table('background_images')->truncate();
         foreach($reader as $index => $row){
 
             \DB::table('background_images')->insert([
