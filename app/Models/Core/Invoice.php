@@ -113,5 +113,10 @@ class Invoice extends Model {
 		return $query->where('student_id', $student_id);
 	}
 
+	public function scopeStatus($query, $status){
+
+		return $query->where('status',$status);
+	}
+
 
 }
