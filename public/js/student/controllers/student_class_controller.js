@@ -8,9 +8,29 @@ function StudentClassController($scope, $filter, $window, StudentClassService, S
 
 	self.tips = {};
 	self.help = {};
-
+	self.total_module_items_loaded = Constants.DEFAULT_SIZE;
 	SearchService(self);
 	self.searchDefaults();
+
+	self.previousPage = function()
+	{
+		if(self.table.page > 1)
+		{
+			self.total_module_items_loaded -= self.table.size;
+			self.table.page--;
+			self.paginateByPage();
+		}
+	}
+
+	self.nextPage = function()
+	{
+		if(self.total_module_items_loaded < self.table.total_items)
+		{
+			self.total_module_items_loaded += self.table.size;
+			self.table.page++;
+			self.paginateByPage();
+		}
+	}
 
 	TableService(self);
 	self.tableDefaults();
@@ -318,8 +338,19 @@ function StudentClassController($scope, $filter, $window, StudentClassService, S
 	}
 
 	self.updateBackground = function() {
-		angular.element('body.student').css({
-			'background-image' : 'url("/images/class-student/mountain-full-bg.png")'
+
+		StudentClassService.getStudentBackgroundImage($scope.user.user.id).success(function(response){
+			if(response.data){
+				angular.element('body.student').css({
+					'background-image' : 'url("' + response.data.url + '")'
+				});
+			}else{
+				angular.element('body.student').css({
+					'background-image' : 'url("/images/class-student/mountain-full-bg.png")'
+				});
+			}
+		}).error(function(response){
+			self.error = $scope.internalError();
 		});
 	}
 }

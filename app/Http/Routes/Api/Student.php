@@ -147,10 +147,18 @@ Routes::group([
 	Routes::resource('/student', 'Api\v1\StudentController',
 		['only' => ['index', 'show', 'update']]);
 
+	Routes::resource('/student/background-image','Api\v1\StudentBackgroundImageController',
+		['only' => ['show','update']]);
+
 	Routes::get('/student/check-billing-address/{id}',
 	[
 		'as' => 'student.check-billing-address',
 		'uses' => 'Api\v1\StudentController@checkBillingAddress'
+	]);
+
+	Routes::get('/student/learning-style/{id}',[
+		'as' => 'student.learning-style.id',
+		'uses' => 'Api\v1\StudentController@checkRequiredLearningStyle'
 	]);
 
 	Routes::resource('/admin/manage/student', 'Api\v1\AdminStudentController',

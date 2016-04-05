@@ -148,6 +148,11 @@
 						'as' => 'client.parent.question.partials.list',
 						'uses' => $manage_parent_question_controller . '@listview'
 					]);
+
+					Routes::get('purchase',[
+						'as' => 'client.parent.questions.partials.purchase',
+						'uses' =>  $manage_parent_question_controller . '@purchase'
+					]);
 				});
 			});
 		});

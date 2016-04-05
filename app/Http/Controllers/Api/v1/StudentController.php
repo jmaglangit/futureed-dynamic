@@ -3,9 +3,39 @@
 use FutureEd\Http\Requests;
 use FutureEd\Http\Requests\Api\StudentControllerRequest as StudentRequest;
 
+use FutureEd\Models\Repository\ClassStudent\ClassStudentRepositoryInterface;
+use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
+use FutureEd\Models\Repository\Subscription\SubscriptionRepository;
+use FutureEd\Models\Repository\Subscription\SubscriptionRepositoryInterface;
+use FutureEd\Services\LearningStyleServices;
+use FutureEd\Services\StudentServices;
+use FutureEd\Services\UserServices;
 use Illuminate\Support\Facades\Input;
 
 class StudentController extends ApiController {
+
+	protected $student;
+	protected $student_service;
+	protected $user_service;
+	protected $class_student;
+	protected $subscription;
+	protected $lsp_service;
+
+	public function __construct(
+		StudentServices $studentServices,
+		UserServices $userServices,
+		StudentRepositoryInterface $studentRepositoryInterface,
+		ClassStudentRepositoryInterface $classStudentRepositoryInterface,
+		SubscriptionRepositoryInterface $subscriptionRepositoryInterface,
+		LearningStyleServices $learningStyleServices
+	){
+		$this->student = $studentRepositoryInterface;
+		$this->student_service = $studentServices;
+		$this->user_service = $userServices;
+		$this->class_student = $classStudentRepositoryInterface;
+		$this->subscription = $subscriptionRepositoryInterface;
+		$this->lsp_service = $learningStyleServices;
+	}
 
 	/**
 	 * Display all student.
@@ -56,7 +86,7 @@ class StudentController extends ApiController {
         }
 		if($this->student->checkIdExist($id)){
 		     
-	        $students = $this->student->getStudentDetails($id); 
+	        $students = $this->student_service->getStudentDetails($id);
 	        return $this->respondWithData([
 	            $students
 	        ]);
@@ -81,7 +111,7 @@ class StudentController extends ApiController {
 			              'email','username','grade_code','country_id','city','state');
 
         //check if username exist
-        $check_username = $this->user->checkUsername($input['username'],config('futureed.student'));
+        $check_username = $this->user_service->checkUsername($input['username'],config('futureed.student'));
 
         if( $check_username ){
 
@@ -94,13 +124,17 @@ class StudentController extends ApiController {
 
         }
 
-        $this->student->updateStudentDetails($id,$input);
-        $return = $this->student->getStudentDetails($id);
+        $this->student_service->updateStudentDetails($id,$input);
+        $return = $this->student_service->getStudentDetails($id);
 
         return $this->respondWithData($return);
 
 	}
 
+	/**
+	 * @param $id
+	 * @return mixed
+	 */
 	public function checkBillingAddress($id)
 	{
 		$student_details = $this->student->getStudent($id);
@@ -116,6 +150,18 @@ class StudentController extends ApiController {
 		}
 
 		return $this->respondWithData(['billing_address_not_found' => 0]);
+	}
+
+	/**
+	 * Check if student needs to take learning style program
+	 * @param $id
+	 * @return mixed
+	 */
+	public function checkRequiredLearningStyle($id) {
+
+			return $this->respondWithData([
+				'learning_style' => $this->lsp_service->checkRequiredLearningStyle($id)
+			]);
 	}
 
 }

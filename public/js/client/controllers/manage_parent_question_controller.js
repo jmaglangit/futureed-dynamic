@@ -8,11 +8,13 @@ function ManageParentQuestionController($scope, ManageParentQuestionService, api
 
 	self.setActive = function(active, id) {
 		self.errors = Constants.FALSE;
+		self.purchase = Constants.FALSE;
 		self.fields = [];
 
 		self.active_list = Constants.FALSE;
 		self.active_view = Constants.FALSE;
 		self.active_edit = Constants.FALSE;
+		self.offset = Constants.FALSE;
 
 		switch(active) {
 			case Constants.ACTIVE_LIST :
@@ -20,6 +22,7 @@ function ManageParentQuestionController($scope, ManageParentQuestionService, api
 
 			default :
 				self.active_list = Constants.TRUE;
+				self.viewQuestion();
 
 				break;
 		}
@@ -31,34 +34,43 @@ function ManageParentQuestionController($scope, ManageParentQuestionService, api
 		}
 	}
 
-	self.viewQuestion = function(seq, flag) {
+	self.viewQuestion = function(flag) {
 		self.errors = Constants.FALSE;
 		self.filter = {};
 		self.filter.id = $scope.user.module_id;
 		self.filter.limit = 1;
-		self.filter.offset = (seq != null) ? seq:0;
+		self.filter.offset = (self.offset) ? self.offset :  Constants.TRUE;
+
 		if(flag == Constants.NEXT){
-			self.filter.offset + 1;
+			self.offset += 1;
 		}else if(flag == Constants.BACK){
-				self.filter.offset = seq - 2;
+			self.offset -= 1;
 		}
 
-		$scope.ui_block();
-		
-		ManageParentQuestionService.viewQuestion(self.filter, self.q_difficulty).success(function(response){
-			if(angular.equals(response.status, Constants.STATUS_OK)) {
-					if(response.errors) {
+		self.filter.offset = self.offset;
+
+		if (self.filter.offset >= Constants.TRIAL_QUESTIONS) {
+			self.purchase = Constants.TRUE;
+			self.active_list = Constants.FALSE;
+		} else {
+
+			$scope.ui_block();
+
+			ManageParentQuestionService.viewQuestion(self.filter, self.q_difficulty).success(function (response) {
+				if (angular.equals(response.status, Constants.STATUS_OK)) {
+					if (response.errors) {
 						self.errors = $scope.errorHandler(response.errors);
-					} else if(response.data) {
+					} else if (response.data) {
 						self.details = response.data.records[0];
 						self.question_total = response.data.total;
 					}
 				}
-			$scope.ui_unblock();
-		}).error(function(response) {
-			self.errors = $scope.internalError();
-			$scope.ui_unblock();
-		});
+				$scope.ui_unblock();
+			}).error(function (response) {
+				self.errors = $scope.internalError();
+				$scope.ui_unblock();
+			});
+		}
 	}
 
 	self.setDifficulty = function() {

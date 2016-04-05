@@ -24,7 +24,7 @@ class DashboardController extends Controller {
 			return view('student.class.index', array('class_id' => null));
 		}
 
-		return view('student.dashboard.index');
+		return view('student.dashboard.index-trial');
 	}
 
 	/**
