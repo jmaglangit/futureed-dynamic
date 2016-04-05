@@ -1880,3 +1880,12 @@ li.questions-answers > a, li.questions-answers div {
 .margin-top-50 {
 	margin-top: 50px;
 }
+
+.trial-module-message {
+	color: #055A7F;
+}
+
+a.payment-page-text {
+	color: #A92147;
+	text-decoration: none;
+}
