@@ -911,7 +911,6 @@ hr {
 
 .questions-container {
 	background-color: #FFFFFF;
-	height: 43em;
 	border-radius: 5px;
 	border: 5px solid #EEEEEE;
 	width: 100%;
@@ -955,16 +954,15 @@ hr {
 }
 
 .questions-tips {
-	margin: 36px auto;
 	background-color: rgba(213, 213, 213, .3);
-	padding: 20px;
+	padding: 5px 5px -5px 5px;
 	border-radius: 5px;
-	font-size: 22px;
+	font-size: 15px;
 }
 
 .questions-tips img {
 	border-radius: 50%;
-	width: 100px;
+	width: 55px;
 	margin: 5px 10px 5px 5px;
 }
 
@@ -1085,7 +1083,7 @@ hr {
 	border: 4px solid #F3D94F;
 	color: #FEFEC4;
 	margin: 10px auto;
-	padding: 20px;
+	padding: 13px 10px 13px 10px;
 	border-radius: 5px;
 	font-size: 1.25em;
 }
