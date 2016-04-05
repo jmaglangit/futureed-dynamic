@@ -31,7 +31,7 @@
                         </div>
                         <div class="col-xs-8">
                             <h4 class="margin-top-30 trial-module-message">
-                                This is a Trial Module. If you would like to subscribe, please proceed to the Payment Page
+                                This is a Trial Module. If you would like to subscribe, please proceed to the <a href="{{ route('student.payment.index') }}" class="payment-page-text">Payment Page</a>
                             </h4>
                             <h4 class="trial-module-message">
                                 OR have a parent or teacher invite you to a class.
