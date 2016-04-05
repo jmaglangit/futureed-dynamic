@@ -1,6 +1,6 @@
 <div class="col-xs-12 padding-0">
 	<div ng-if="!mod.result.answered && !mod.result.quoted && !mod.result.failed">
-		<div class="questions-container col-xs-12">
+		<div class="questions-container col-xs-12 col-md-12">
 			{{--Header--}}
 			<div class="row questions-header col-xs-12">
 				<div class="row col-xs-3">
