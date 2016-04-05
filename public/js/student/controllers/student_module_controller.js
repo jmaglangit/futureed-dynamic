@@ -245,17 +245,16 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 		}else {
 			var data = {};
 			data.module_id = self.record.student_module.id;
-			console.log(self.active_contents && self.contents);
+
 			if(self.active_contents && self.contents) {
 				data.last_viewed_content_id = self.contents.content_id;
 			}
-			console.log(self.active_questions);
+
 			if(self.active_questions) {
 				data.last_answered_question_id = parseInt(self.questions.id);
 			}
-			console.log(data);
+
 			updateModuleStudent(data, function() {
-				console.log(redirect_to + "/" + self.record.student_module.class_id);
 				$window.location.href = redirect_to + "/" + self.record.student_module.class_id;
 			});
 		}
