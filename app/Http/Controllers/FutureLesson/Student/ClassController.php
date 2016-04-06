@@ -11,7 +11,7 @@ class ClassController extends Controller {
 	public function index($id = null) {
 		$user_object = json_decode(Session::get('student'));
 
-		if(empty($user_object->class) || !(isset($user_object->class)) || $user_object->class ) {
+		if(isset($user_object)) {
 			return redirect()->route('student.dashboard.index');
 		}
 		else {
