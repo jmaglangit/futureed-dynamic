@@ -11,11 +11,11 @@ class ClassController extends Controller {
 	public function index($id = null) {
 		$user_object = json_decode(Session::get('student'));
 
-		if(is_null($user_object->class) || empty($user_object->class) || $user_object->class) {
-			return redirect()->route('student.dashboard.index');				
+		if(empty($user_object->class) || !(isset($user_object->class)) || $user_object->class ) {
+			return redirect()->route('student.dashboard.index');
 		}
 
-		if(isset($id) && !intval($id)) {
+		if(isset($id) && !intval($id) || empty($user_object) || !isset($user_object)) {
 			abort(404);
 		}
 	}
