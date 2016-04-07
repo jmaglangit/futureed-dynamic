@@ -31,50 +31,57 @@ class InvoiceRepository implements InvoiceRepositoryInterface{
 				$invoice = $invoice->withTrashed();
 			}
 
-			$count = 0;
-
 			if (count($criteria) <= 0 && $limit == 0 && $offset == 0) {
 
 				$count = $invoice->count();
 
-				$invoice = $invoice->with('subscription');
+				$invoice = $invoice->with('subscription','invoiceDetail');
 
 			} else {
 
+				$invoice = $invoice->with('subscription','invoiceDetail');
 
 				if (count($criteria) > 0) {
 					if (isset($criteria['order_no'])) {
 
-						$invoice = $invoice->with('subscription')->order($criteria['order_no']);
+						$invoice = $invoice->order($criteria['order_no']);
 
 					}
 
 					if (isset($criteria['subscription_name'])) {
 
-						$invoice = $invoice->with('subscription')->subscription($criteria['subscription_name']);
+						$invoice = $invoice->subscription($criteria['subscription_name']);
 
 					}
 
 					if (isset($criteria['payment_status'])) {
 
-						$invoice = $invoice->with('subscription')->payment($criteria['payment_status']);
+						$invoice = $invoice->payment($criteria['payment_status']);
 
 					}
 
 					if (isset($criteria['client_id'])) {
-						$invoice = $invoice->with('subscription')->clientId($criteria['client_id']);
+						$invoice = $invoice->clientId($criteria['client_id']);
 					}
 
 					if (isset($criteria['student_id'])) {
-						$invoice = $invoice->with('subscription')->studentId($criteria['student_id']);
+						$invoice = $invoice->studentId($criteria['student_id']);
 					}
+
+					//TODO add checking on current subscription.
+					if(isset($criteria['current_subscription']) && $criteria['current_subscription'] == 1){
+
+						$invoice = $invoice->current();
+
+					}
+
 				}
 
 
 				$count = $invoice->count();
 
 				if ($limit > 0 && $offset >= 0) {
-					$invoice = $invoice->with('subscription')->offset($offset)->limit($limit);
+					$invoice = $invoice->offset($offset)->limit($limit);
 				}
 
 				$invoice = $invoice->orderBy('id', 'desc');
