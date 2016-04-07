@@ -338,6 +338,24 @@ function FutureedController($scope, $window, apiService, futureed) {
 		}
 	}
 
+	$scope.checkClassRecord = function(SuccessCallback) {
+
+		if(angular.equals($scope.user.role, Constants.STUDENT)) {
+			apiService.listClass($scope.user.id).success(function(response) {
+				if(angular.equals(response.status, Constants.STATUS_OK)) {
+					if(response.errors) {
+						$scope.errorHandler(response.errors);
+					} else if(response.data){
+						SuccessCallback(response.data);
+					}
+				}
+			}).error(function(response){
+				$scope.internalError();
+			});
+		}
+
+	}
+
 	$scope.getUserPoints = function() {
 		var id = $scope.user.id;
 		var user = $("input[name='userdata']").val();

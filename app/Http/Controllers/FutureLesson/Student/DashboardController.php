@@ -1,6 +1,7 @@
 <?php namespace FutureEd\Http\Controllers\FutureLesson\Student;
 
 use FutureEd\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 
 
@@ -21,6 +22,10 @@ class DashboardController extends Controller {
 		}
 
 		if(isset($user_object->class) && $user_object->class) {
+			return view('student.class.index', array('class_id' => $user_object->class));
+		}
+
+		if(Input::get('class')){
 			return view('student.class.index', array('class_id' => $user_object->class));
 		}
 
