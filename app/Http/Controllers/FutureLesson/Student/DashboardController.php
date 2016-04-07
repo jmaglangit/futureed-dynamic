@@ -25,8 +25,11 @@ class DashboardController extends Controller {
 			return view('student.class.index', array('class_id' => $user_object->class));
 		}
 
+		// This will work/execute after the student.dashboard.index-trial calls the class.checkStudentSubscription()
+		// This acts as a fail-safe when $user_object->class returns null, or 0(for unknown reasons in beta)
+		// even if student has a subscription
 		if(Input::get('class')){
-			return view('student.class.index', array('class_id' => $user_object->class));
+			return view('student.class.index', array('class_id' => null));
 		}
 
 		return view('student.dashboard.index-trial');
