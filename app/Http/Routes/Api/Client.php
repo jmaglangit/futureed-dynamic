@@ -22,6 +22,11 @@ Routes::group(['prefix' => '/client'], function()
 			'as' => 'api.v1.client.parent.student.list'
 		]);
 
+		Routes::get('/parent/questions/{id}',[
+			'uses' => 'Api\v1\ParentQuestionController@getParentQuestions',
+			'as' => 'api.v1.client.parent.questions'
+		]);
+
 		/**
 		 * Teacher resource
 		 */
