@@ -2,21 +2,35 @@
 
 
 use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
+use FutureEd\Models\Repository\Module\ModuleRepositoryInterface;
 use FutureEd\Models\Repository\User\UserRepositoryInterface;
 use FutureEd\Models\Repository\School\SchoolRepositoryInterface;
 use FutureEd\Models\Repository\Validator\ValidatorRepositoryInterface;
 
 class ClientServices {
 
+    protected $client;
+    protected $validator;
+    protected $user;
+    protected $school;
+    protected $subscription_service;
+    protected $module;
+
+
     public function __construct(
         ClientRepositoryInterface $client,
         ValidatorRepositoryInterface $validator,
         UserRepositoryInterface $user,
-        SchoolRepositoryInterface $school){
+        SchoolRepositoryInterface $school,
+        SubscriptionServices $subscriptionServices,
+        ModuleRepositoryInterface $moduleRepositoryInterface
+    ){
         $this->client = $client;
         $this->validator = $validator;
         $this->user = $user;
         $this->school = $school;
+        $this->subscription_service = $subscriptionServices;
+        $this->module = $moduleRepositoryInterface;
 
     }
 
@@ -200,6 +214,33 @@ class ClientServices {
 
         return $this->client->deleteClient($id);
 
+    }
+
+    /**
+     * Check Parent subscription.
+     * @param $client_id
+     * @param $module_id
+     * @return int
+     */
+    public function checkParentModuleSubscription($client_id, $module_id){
+
+        $client_subscription = $this->subscription_service->checkParentSubscription($client_id);
+
+        $module = $this->module->getModule($module_id);
+
+        $has_subscription = 0;
+
+        foreach($client_subscription as $subscription){
+
+            foreach($subscription->subject as $subs){
+
+                if($module->subject_id == $subs){
+                    $has_subscription = 1;
+                }
+            }
+        }
+
+        return $has_subscription;
     }
 
 }
