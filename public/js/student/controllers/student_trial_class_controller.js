@@ -5,6 +5,7 @@ StudentTrialClassController.$inject = ['$scope','$window','StudentClassService']
 
 function StudentTrialClassController($scope,$window,StudentClassService) {
     var self = this;
+    self.has_subscription = Constants.FALSE;
 
     self.redirect = function(url) {
             $window.location.href = url;
@@ -23,6 +24,23 @@ function StudentTrialClassController($scope,$window,StudentClassService) {
             }
         }).error(function(response){
             self.error = $scope.internalError();
+        });
+    }
+
+    self.checkStudentSubscription = function() {
+        $scope.ui_block();
+        $scope.checkClassRecord(function(data)
+        {
+            if(data.records.length)
+            {
+                $window.location.href = '/student/dashboard?class=true';
+                $scope.ui_unblock();
+            }
+
+            self.has_subscription = Constants.TRUE;
+
+            self.updateBackground();
+            $scope.ui_unblock();
         });
     }
 }
