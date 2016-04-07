@@ -5,10 +5,10 @@
 @stop
 
 @section('content')
-    <div class="container class-con" ng-controller="StudentTrialClassController as class" ng-init="class.updateBackground()" ng-cloak>
-
-        <div template-directive template-url="{!! route('student.class.partials.trial.module') !!}"></div>
-
+    <div class="container class-con" ng-controller="StudentTrialClassController as class" ng-init="class.checkStudentSubscription()" ng-cloak>
+        <div ng-if="class.has_subscription == futureed.TRUE">
+            <div template-directive template-url="{!! route('student.class.partials.trial.module') !!}"></div>
+        </div>
     </div>
 @stop
 
