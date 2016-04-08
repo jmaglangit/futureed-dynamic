@@ -236,6 +236,7 @@ class ClientServices {
 
                 if($module->subject_id == $subs){
                     $has_subscription = 1;
+                    break;
                 }
             }
         }
