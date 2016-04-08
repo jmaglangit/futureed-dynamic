@@ -87,6 +87,8 @@
 
 				<div template-directive template-url="{!! route('student.partials.avatar_accessory_form') !!}"></div>
 
+				<div template-directive template-url="{!! route('student.partials.settings') !!}"></div>
+
 			</div>
 		</div>
 	</div>

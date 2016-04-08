@@ -25,4 +25,15 @@ class ClassModuleController extends Controller {
 	public function view_question_message() {
 		return view('student.class.module.partials.questions.message');
 	}
+
+	//For trial module
+	public function trial_module()
+	{
+		return view('student.class.module.module-index-trial');
+	}
+
+	public function trial_module_question_list()
+	{
+		return view('student.class.module.partials.questions.trial-question-list');
+	}
 }

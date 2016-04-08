@@ -175,7 +175,7 @@ class StudentPaymentController extends ApiController {
 		$this->order_detail->updateOrderDetail($order_detail_record[0]['id'],$order_detail);
 
 		//get invoice details
-		$invoice_record = $this->invoice->getInvoiceByOrderNo($order_record['order_no']);
+		$invoice_record = $this->invoice->getInvoiceByOrderNo($order_record['order_no'],config('futureed.enabled'));
 
 		//form data for invoice
 		$invoice['invoice_date'] = $order['order_date'];

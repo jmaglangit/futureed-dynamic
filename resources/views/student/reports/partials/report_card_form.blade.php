@@ -14,7 +14,7 @@
 			<div class="col-xs-9">
 				<fieldset>
 					<legend>{! reports.student.student_name!}</legend>
-					<p>{! reports.student.grade_level!}</p>
+					<p ng-if="reports.student.grade_level != futureed.NONE">{! reports.student.grade_level!}</p>
 				</fieldset>
 			</div>
 		</div>

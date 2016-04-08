@@ -53,12 +53,12 @@ class RenewSubscriptionController extends ApiController {
 	/**
 	 * Show the form for creating a new resource.
 	 * NOTE id = order_id
-	 * @return Response
+	 * @param $id
+	 * @return mixed
 	 */
 	public function renewSubscription($id)
 	{
 
-		// $data = $request->only('date_start','date_end','order_date','total_amount','discount');
 			// date_start, date_end, discount are not used
 			// order_date should be set on payment
 			// set total amount to zero, since we have to verify the subscription and discount
@@ -78,85 +78,32 @@ class RenewSubscriptionController extends ApiController {
 		$data['seats_taken'] = $invoice['order']['seats_taken'];
 		$data['total_amount'] = 0;
 		$data['renew'] = 1;
-
-
-		//get the last inputted order
-		$prev_order = $this->order->getNextOrderNo();
-
-		if(!$prev_order){
-
-			$next_order_id = 1;
-		}else{
-
-			$next_order_id = ++$prev_order['id'];
-		}
-
-		$id = ($invoice['student_id']==NULL ? $invoice['client_id'] : $invoice['student_id']);
-
-		$data['order_no'] = $this->invoice_service->createOrderNo($id,$next_order_id);
-
-
-		//add order
-		$added_order = $this->order->addOrder($data);
-
-		//get order_detail
-		$order_detail = $this->order_detail->getOrderDetailsByOrderId($invoice['order']['id']);
-
-		//add order_detail
-		if($order_detail){
-
-			foreach($order_detail as $k => $v){
-
-				$value['order_id'] = $added_order['id'];
-				$value['student_id'] = $order_detail[$k]['student_id'];
-				$value['price'] = $data['total_amount'];
-
-				$this->order_detail->addOrderDetail($value);
-			}
-		}
+		$data['order_no'] = $invoice['order_no'];
 
 		//add invoice
-		// $data['invoice_date'] = $data['order_date'];
 		$added_invoice = $this->invoice->addInvoice($data);
 
-		$invoice_detail = $invoice['InvoiceDetail'];
+		$invoice_detail = $invoice->invoiceDetail;
 
 		//add invoice_detail
 		if($invoice_detail){
 
 			foreach($invoice_detail as $k => $v){
 
-				//Change classroom first before invoice details
-				$classroom = $this->classroom->getClassroom($invoice_detail[$k]['class_id']);
-
-				$classroom->order_no = $data['order_no'];
-
-				$classroom = $this->classroom->addClassroom($classroom->toArray());
-
-				//Transfer Students
-				$class_student = $this->class_student->getClassStudentByClassId($invoice_detail[$k]['class_id']);
-
-				foreach($class_student as $key => $stud){
-
-					$stud->class_id = $classroom->id;
-
-					$this->class_student->addClassStudent($stud->toArray());
-				}
-
-
 				//Change invoice details
 				$value['invoice_id'] = $added_invoice['id'];
-				$value['class_id'] = $classroom->id;
-				$value['grade_id'] = $invoice_detail[$k]['grade_id'];
+				$value['class_id'] = $v->class_id;
+				$value['grade_id'] = $v->grade_id;
 				$value['price'] = $data['total_amount'];
 				$this->invoice_detail->addInvoiceDetail($value);
 			}
 
 		}
 
+		//update old purchase
+		$this->invoice->updateStatus($id,config('futureed.disabled'));
+
 		return $this->respondWithData($this->invoice->getInvoice($added_invoice['id']));
-
-
 	}
 
 

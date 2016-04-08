@@ -19,4 +19,9 @@ class ErrorMessageServices
 	const   SUBSCRIPTION_NAME_INVALID       = 2902;
 	const   SUBSCRIPTION_LSP_REQUIRED       = 2903;
 	const   SUBSCRIPTION_LSP_INVALID        = 2904;
+	//  Trial module error messages
+	const   TRIAL_MODULE_ANSWER_IS_REQUIRED         = 3000;
+	const   TRIAL_MODULE_QUAD_PLOTTING_REQUIRED     = 3001;
+	const   TRIAL_MODULE_MULTIPLE_ANSWERS_REQUIRED  = 3002;
+	const   TRIAL_MODULE_DRAG_DROP_REQUIRED         = 3003;
 }

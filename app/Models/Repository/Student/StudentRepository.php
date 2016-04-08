@@ -1025,5 +1025,14 @@ class StudentRepository implements StudentRepositoryInterface
 		return Student::whereId($student_id)->pluck('learning_style_id');
 	}
 
+	/**
+	 * @param $student_id
+	 * @return mixed
+	 */
+	public function getStudentLSPDate($student_id){
+
+		return Student::whereId($student_id)->pluck('learning_style_date');
+	}
+
 
 }

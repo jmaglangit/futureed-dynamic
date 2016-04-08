@@ -33,7 +33,7 @@ function ProfileController($scope, apiService, ProfileService) {
 
 		$scope.$parent.u_error = Constants.FALSE;
 		$scope.$parent.u_success = Constants.FALSE;
-		
+
 		self.password_validated = Constants.FALSE;
 		self.password_selected = Constants.FALSE;
 		self.password_confirmed = Constants.FALSE;
@@ -48,68 +48,74 @@ function ProfileController($scope, apiService, ProfileService) {
 		self.active_reports = Constants.FALSE;
 		self.active_avatar_accessory = Constants.FALSE;
 		self.buy_avatar_accessory_modal = Constants.FALSE;
+		self.settings = Constants.FALSE;
 
 		self.validation = {};
 		self.select_password = Constants.FALSE;
 		self.email_confirmed = Constants.FALSE;
 
-		switch(active) {
+		switch (active) {
 
-		  case Constants.REWARDS  		:
-			self.active_rewards = Constants.TRUE;
-			self.getPoints();
-			self.getBadges();
-			self.getPointLevel();
-			break;
+			case Constants.REWARDS        :
+				self.active_rewards = Constants.TRUE;
+				self.getPoints();
+				self.getBadges();
+				self.getPointLevel();
+				break;
 
-		  case 'reports'  		:
-			self.active_reports = Constants.TRUE;
-			break;
+			case 'reports'        :
+				self.active_reports = Constants.TRUE;
+				break;
 
-		  case Constants.AVATAR   		:
-			self.enable = Constants.FALSE;
-			self.active_avatar = Constants.TRUE;
-			break;
+			case Constants.AVATAR        :
+				self.enable = Constants.FALSE;
+				self.active_avatar = Constants.TRUE;
+				break;
 
-		  case Constants.PASSWORD 		:
-		  	self.change = {};
-
-			self.getLoginPassword();
-			self.active_password = Constants.TRUE;
-			break;
-
-		  case Constants.EDIT    		:
-			self.studentDetails();
-			self.active_edit = Constants.TRUE;
-			break;
-
-		  case Constants.EDIT_EMAIL :
-			if(!$scope.user.media_login){
+			case Constants.PASSWORD        :
 				self.change = {};
+
+				self.getLoginPassword();
+				self.active_password = Constants.TRUE;
+				break;
+
+			case Constants.EDIT            :
 				self.studentDetails();
-				self.active_edit_email = Constants.TRUE;
-			}
-			break;
+				self.active_edit = Constants.TRUE;
+				break;
 
-		  case Constants.CONFIRM_EMAIL  :
-			self.resent = Constants.FALSE;
-			self.confirmation_code = Constants.EMPTY_STR;
-			self.active_confirm_email = Constants.TRUE;
-			break;
+			case Constants.EDIT_EMAIL :
+				if (!$scope.user.media_login) {
+					self.change = {};
+					self.studentDetails();
+					self.active_edit_email = Constants.TRUE;
+				}
+				break;
 
-		  case Constants.AVATAR_ACCESSORY:
-			self.active_avatar_accessory = Constants.TRUE;
-			break;
+			case Constants.CONFIRM_EMAIL  :
+				self.resent = Constants.FALSE;
+				self.confirmation_code = Constants.EMPTY_STR;
+				self.active_confirm_email = Constants.TRUE;
+				break;
 
-		  case Constants.INDEX    		:
-		  default:
-			self.studentDetails();
-			self.active_index = Constants.TRUE;
-			break;
+			case Constants.AVATAR_ACCESSORY:
+				self.active_avatar_accessory = Constants.TRUE;
+				break;
+
+			case Constants.SETTINGS    :
+				self.settings = Constants.TRUE;
+				self.getStudentBackgroundImage();
+				break;
+
+			case Constants.INDEX            :
+			default:
+				self.studentDetails();
+				self.active_index = Constants.TRUE;
+				break;
 		}
 
 		$('input, select').removeClass('required-field');
-		$("html, body").animate({ scrollTop: 0 }, "slow");
+		$("html, body").animate({scrollTop: 0}, "slow");
 	  }
 
 	  function studentDetails() {
@@ -706,5 +712,59 @@ function ProfileController($scope, apiService, ProfileService) {
 			$(".month").prop('disabled', false);
 			$(".year").prop('disabled', false);
 		}
+	}
+
+	self.getStudentBackgroundImage = function(){
+		self.background_image = {};
+
+		ProfileService.getStudentBackgroundImage($scope.user.user.id).success(function(response){
+			if(response.errors) {
+				self.errors = $scope.errorHandler(response.errors);
+			} else if(response.data == Constants.FALSE) {
+				self.background_image.url = "/images/class-student/mountain-full-bg.png";
+			}else {
+				self.background_image = response.data;
+			}
+
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.updateStudentBackgroundImage = function(image){
+
+		var data = {};
+
+		data.background_image_id = image.id;
+		data.user_id = $scope.user.user.id;
+
+		ProfileService.updateStudentBackgroundImage(data).success(function(response){
+			if(response.errors) {
+				self.errors = $scope.errorHandler(response.errors);
+			} else if(response.data){
+				self.background_image = image;
+			}
+
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.getBackgroundImage = function() {
+		self.background_image_list = {};
+		self.background_image_total = 0;
+
+		ProfileService.getBackgroundImage().success(function(response){
+
+			if(response.data){
+				self.background_image_list = response.data.records;
+				self.background_image_total = response.data.total;
+			}
+		}).error(function(response){
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
 	}
 }

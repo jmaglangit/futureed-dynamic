@@ -1,0 +1,22 @@
+@extends('student.app')
+
+@section('navbar')
+    @include('student.partials.main-nav')
+@stop
+
+@section('content')
+    <div class="container class-con" ng-controller="StudentTrialClassController as class" ng-init="class.checkStudentSubscription()" ng-cloak>
+        <div ng-if="class.has_subscription == futureed.TRUE">
+            <div template-directive template-url="{!! route('student.class.partials.trial.module') !!}"></div>
+        </div>
+    </div>
+@stop
+
+@section('scripts')
+    {!! Html::script('/js/student/controllers/student_trial_class_controller.js')!!}
+    {!! Html::script('/js/student/services/student_class_service.js')!!}
+
+    {!! Html::script('/js/common/search_service.js')!!}
+    {!! Html::script('/js/common/table_service.js')!!}
+    {!! Html::script('/js/student/class.js')!!}
+@stop

@@ -66,5 +66,27 @@ function ProfileService($http) {
 		});
 	}
 
+	api.getStudentBackgroundImage = function(id) {
+		return $http({
+			method	: Constants.METHOD_GET
+			, url	: apiUrl + 'student/background-image/' + id
+		});
+	}
+
+	api.updateStudentBackgroundImage = function(data) {
+		return $http({
+			method	:	Constants.METHOD_PUT
+			, data	:	{'background_image_id' : data.background_image_id }
+			, url	:	apiUrl + 'student/background-image/' + data.user_id
+		});
+	}
+
+	api.getBackgroundImage = function() {
+		return $http({
+			method	: Constants.METHOD_GET
+			, url	: apiUrl + 'background-image'
+		});
+	}
+
 	return api;
 }

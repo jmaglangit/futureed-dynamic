@@ -46,6 +46,7 @@ var Constants = {
 	, EDIT_EMAIL	: "edit_email"
 	, CONFIRM_EMAIL : "confirm_email"
 	, AVATAR_ACCESSORY	:"avatar_accessory"
+	, SETTINGS		: 'settings'
 
 	, AGEGROUP		: "agegroup"
 	, CONTENTS 		: "contents"

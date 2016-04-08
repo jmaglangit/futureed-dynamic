@@ -27,4 +27,8 @@
 	<li ng-if="!user.media_login" ng-class="{ 'active' : profile.active_password }">
 		<a href="javascript:void(0)" ng-click="profile.setStudentProfileActive('password')">{!! trans('messages.student_change_picture_password') !!}</a>
 	</li>
+
+	<li ng-if="!user.media_login" ng-class="{ 'active' : profile.settings }">
+		<a href="javascript:void(0)" ng-click="profile.setStudentProfileActive('settings')">Settings</a>
+	</li>
 </ul>

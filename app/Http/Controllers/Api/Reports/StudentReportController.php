@@ -117,7 +117,7 @@ class StudentReportController extends ReportController {
 
 		$additional_information = [
 			'student_name' => $student->first_name . ' ' . $student->last_name,
-			'grade_level' => $student_grade->name,
+			'grade_level' => isset($student_grade->name) ? $student_grade->name : config('futureed.none'),
 			'avatar' => $this->avatar_service->getAvatarUrl($avatar->avatar_image),
 			'avatar_thumbnail' => $this->avatar_service->getAvatarThumbnailUrl($avatar->avatar_image)
 		];
@@ -325,7 +325,7 @@ class StudentReportController extends ReportController {
 			'last_name' => $student->last_name,
 			'avatar_thumbnail' => $avatar->avatar_image,
 			'subject_name' => $subject->name,
-			'grade_name' => $student_grade->name,
+			'grade_name' => isset($student_grade->name) ? $student_grade->name : config('futureed.none'),
 			'earned_badges' => $student_badge,
 			'earned_medals' => $student_medal,
 			'completed_lessons' => ($lessons) ? count($lessons->toArray()) : 0,

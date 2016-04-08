@@ -1,26 +1,24 @@
-<div class="col-xs-12">
+<div class="col-xs-12 padding-0">
 	<div ng-if="!mod.result.answered && !mod.result.quoted && !mod.result.failed">
-		<div class="questions-container col-xs-12">
+		<div class="questions-container col-xs-12 col-md-12">
 			{{--Header--}}
 			<div class="row questions-header col-xs-12">
 				<div class="row col-xs-3">
-					<button type="button" class="btn btn-gold next-btn left-0" 
-									ng-if="!mod.errors && !mod.record.module_done" 
-									ng-click="mod.exitModule('{!! route('student.class.index') !!}')">{!! trans('messages.exit_module') !!}</button>
-					<button type="button" class="btn btn-gold next-btn left-0" 
-									ng-if="mod.errors && !mod.record.module_done" 
-									ng-click="mod.exitModule('{!! route('student.dashboard.index') !!}')">{!! trans('messages.exit_module') !!}</button>
+					<button type="button" class="btn btn-gold next-btn left-0" ng-click="mod.exitModule('{!! route('student.class.index') !!}')">
+						Exit Module
+					</button>
 				</div>
 
 				<div class="row col-xs-6">
-					<center><h3>{!! trans('messages.question') !!} #{! mod.question_counter !} </h3></center>
+					<center><h3> Question #{! mod.question_counter !} </h3></center>
 				</div>
 
 				<div class="row col-xs-3">
-					<button ng-if="!mod.result.answered && !mod.result.quoted && !mod.result.failed" 
-									type="button" class="btn btn-orange next-btn right-0" 
-									ng-click="mod.checkAnswer()">{!! trans('messages.submit') !!}</button>
+					<button ng-if="!mod.result.answered && !mod.result.quoted && !mod.result.failed"
+							type="button" class="btn btn-orange next-btn right-0"
+							ng-click="mod.checkAnswer()"> Submit </button>
 				</div>
+
 			</div>
 			<div class="question-contents">
 				{{--Error Messages--}}
@@ -71,6 +69,7 @@
 							</div>
 						</div>
 					</div>
+
 					<div class="margin-top-30">
 						<div ng-if="mod.current_question.question_type == futureed.PROVIDE" class="form-group">
 						<input ng-model="mod.current_question.answer_text"
@@ -129,7 +128,7 @@
 
 								</table>
 								<div class="col-xs-3 pull-right reset-graph">
-									<button class="btn btn-gold" ng-click="mod.resetGraph()">{!! trans('messages.reset_caps') !!}</button>
+									<button class="btn btn-gold" ng-click="mod.resetGraph()">RESET</button>
 								</div>
 							</div>
 						</div>
@@ -140,7 +139,7 @@
 							<div ng-init="mod.getQuadrant(mod.current_question.id)">
 								<div id="placeholder" style="width:300px;height:300px;margin:0 auto;"></div>
 								<div class="col-xs-3 pull-right reset-graph">
-									<button class="btn btn-gold" ng-click="mod.resetGraph()">{!! trans('messages.reset_caps') !!}</button>
+									<button class="btn btn-gold" ng-click="mod.resetGraph()">RESET</button>
 								</div>
 							</div>
 						</div>
@@ -148,7 +147,7 @@
 				</div>
 				{{--Tips--}}
 				<div class="questions-tips" ng-if="mod.current_question.question_type == futureed.ORDERING">
-					<p> <img ng-src="{! user.avatar !}" /> <span>{!! trans('messages.drag_items_reorder') !!} </span></p>
+					<p> <img ng-src="{! user.avatar !}" /> <span>Drag the items to reorder. </span></p>
 				</div>
 			</div>
 			</div>
@@ -158,7 +157,7 @@
 	<div ng-if="mod.result.answered">
 		<div class="questions-container col-xs-12">
 			<div class="questions-header">
-				<h3> {!! trans('messages.question') !!} #{! mod.question_counter !} </h3>
+				<h3> Question #{! mod.question_counter !} </h3>
 			</div>
 
 			<div class="result-image">
@@ -169,17 +168,17 @@
 			<div class="result-message"
 				ng-class="{ 'result-correct' : mod.result.points_earned, 'result-incorrect' : !mod.result.points_earned }">	
 				<p ng-if="mod.result.points_earned > 0">
-					{!! trans('messages.correct') !!}
+					Correct!
 				</p>
 
 				<p ng-if="mod.result.points_earned <= 0">
-					{!! trans('messages.wrong') !!}
+					Wrong.
 				</p>
 			</div>
 
 			<div class="proceed-btn-container btn-container">
 				<button type="button" class="btn btn-maroon btn-medium" ng-click="mod.nextQuestion()">
-					{!! trans('messages.proceed_to_next_questions') !!}
+					Proceed to next Question
 				</button>
 			</div>
 		</div>
@@ -188,16 +187,16 @@
 	<div ng-if="mod.result.quoted">
 		<div class="questions-container col-xs-12">
 			<div class="questions-header">
-				<h3> {!! trans('messages.question') !!} #{! mod.question_counter !} </h3>
+				<h3> Question #{! mod.question_counter !} </h3>
 			</div>
 			<div class="quote-message"
 				ng-class="{ 'result-correct' : mod.result.points_earned, 'result-incorrect' : !mod.result.points_earned }">	
 					<p ng-if="mod.result.points_earned > 0">
-						{!! trans('messages.correct') !!}
+						Correct!
 					</p>
 
 					<p ng-if="mod.result.points_earned <= 0">
-						{!! trans('messages.wrong') !!}
+						Wrong.
 					</p>
 			</div>
 
@@ -215,22 +214,19 @@
 
 						<div class="proceed-btn-container btn-container">
 							<button type="button" class="btn btn-maroon btn-large" ng-click="mod.nextQuestion()">
-								{!! trans('messages.proceed_to_next_questions') !!}
+								Proceed to next Question
 							</button>
 						</div>
 					</div>
 				</div>
 			</div>
-
-
-			
 		</div>
 	</div>
 
 	<div ng-if="mod.result.failed">
 		<div class="questions-container col-xs-12">
 			<div class="questions-header">
-				<h3> {!! trans('messages.question') !!} #{! mod.question_counter !} </h3>
+				<h3> Question #{! mod.question_counter !} </h3>
 			</div>
 
 			<div class="result-failed message-container">
@@ -242,12 +238,12 @@
 
 					<div class="col-xs-6">
 						<p class="module-message">
-							{!! trans('messages.review_retake_test_msg') !!}
+							You need to review and take the test again.
 						</p>
 
 						<div class="proceed-btn-container btn-container">
 							<button type="button" class="btn btn-maroon btn-large" ng-click="mod.reviewContent()">
-								{!! trans('messages.retake_test') !!}
+								Retake Test
 							</button>
 						</div>
 					</div>

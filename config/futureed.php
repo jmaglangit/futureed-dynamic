@@ -206,6 +206,11 @@ return [
 	//Correct Answer
 	'yes' => 'Yes',
 	'no' => 'No',
+	//Correct flag
+	'correct' => 'Y',
+	'incorrect' => 'N',
+	//MC none
+	'mc_none' => 'none',
 
 	//reset module
 	'reset_module' => 'Reset Module',
@@ -237,6 +242,8 @@ return [
 	'lsp_result_name' => env('IASSESS_LSP_RESULT_NAME', 'IPS1'),
 	'default_lsp' => env('IASSESS_LSP_DEFAULT', 3),
 
+	//number of years for student to retake LSP
+	'lsp_retake_year' => 1,
 
 	//Logs
 	'user_log' => 'User',
@@ -257,6 +264,9 @@ return [
 
 	//avatar accessory folder
 	'image_avatar_accessory_folder' => 'images/avatar_accessory',
+
+	//background images folder
+	'background_images_folder' => 'images/background-images',
 
 	'accepted_csv' => [
 		'text/csv',
