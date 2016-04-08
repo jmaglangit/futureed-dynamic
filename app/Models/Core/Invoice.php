@@ -1,5 +1,6 @@
 <?php namespace FutureEd\Models\Core;
 
+use Carbon\Carbon;
 use FutureEd\Models\Traits\TransactionTrait;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -116,6 +117,12 @@ class Invoice extends Model {
 	public function scopeStatus($query, $status){
 
 		return $query->where('status',$status);
+	}
+
+	public function scopeCurrent($query){
+
+		return $query->where('date_start','<=',Carbon::now())
+			->where('date_end','>=',Carbon::now());
 	}
 
 
