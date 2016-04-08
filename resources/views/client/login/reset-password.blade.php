@@ -21,7 +21,7 @@
 					{!! Form::password('new_password'
 						, array(
 							'ng-model' => 'password.record.new_password'
-							, 'placeholder' => 'trans('messages.new_password')'
+							, 'placeholder' => trans('messages.new_password')
 						)
 					) !!}
 				</div>
@@ -33,13 +33,13 @@
 					{!! Form::password('confirm_password'
 						, array(
 							'ng-model' => 'password.record.confirm_password'
-							, 'placeholder' => 'trans('messages.confirm_new_password')'
+							, 'placeholder' => trans('messages.confirm_new_password')
 						)
 					) !!}
 				</div>
 
 				<div class="btn-container">
-					{!! Form::button('trans('messages.reset')'
+					{!! Form::button(trans('messages.reset')
 							, array(
 								'class' => 'btn btn-blue btn-large'
 								, 'ng-click' => 'password.resetClientPassword()'

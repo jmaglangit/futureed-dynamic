@@ -38,7 +38,7 @@
 						, array(
 							'class' => 'form-control'
 							, 'ng-model' => 'payment.search.order_no'
-							, 'placeholder' => 'trans('messages.admin_order_number')'
+							, 'placeholder' => trans('messages.admin_order_number')
 						)
 					) !!}
 				</div>
@@ -50,7 +50,7 @@
 	                </select>
 				</div>
 				<div class="col-xs-2">
-					{!! Form::button('trans('messages.search')'
+					{!! Form::button(trans('messages.search')
 						, array(
 							'class' => 'btn btn-blue'
 							, 'ng-click' => 'payment.searchFnc()'
@@ -58,7 +58,7 @@
 					) !!}
 				</div>
 				<div class="col-xs-2">
-					{!! Form::button('trans('messages.clear')'
+					{!! Form::button(trans('messages.clear')
 						, array(
 							'class' => 'btn btn-gold'
 							, 'ng-click' => 'payment.clear()'

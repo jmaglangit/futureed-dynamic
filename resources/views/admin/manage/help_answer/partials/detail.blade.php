@@ -27,7 +27,7 @@
 						<div class="col-xs-4">
 							{!! Form::text('username', '',
 								[
-									'placeholder' => 'trans('messages.module')',
+									'placeholder' => trans('messages.module'),
 									'ng-disabled' => 'true',
 									'ng-model' => 'answer.record.module',
 									'class' => 'form-control'
@@ -39,10 +39,10 @@
 					<div class="col-xs-4">
 						{!! Form::select('link_type'
 							, array(
-								'' => 'trans('messages.admin_select_type')'
-								, 'General' => 'trans('messages.general')'
-								, 'Content' => 'trans('messages.content')'
-								, 'Question' => 'trans('messages.question')'
+								'' => trans('messages.admin_select_type')
+								, 'General' => trans('messages.general')
+								, 'Content' => trans('messages.content')
+								, 'Question' => trans('messages.question')
 							)
 							, ''
 							, array(
@@ -58,7 +58,7 @@
 					<div class="col-xs-4">
 						{!! Form::text('subject', '',
 							[
-								'placeholder' => 'trans('messages.subject')',
+								'placeholder' => trans('messages.subject'),
 								'ng-disabled' => 'true',
 								'ng-model' => 'answer.record.subject',
 								'class' => 'form-control'
@@ -69,7 +69,7 @@
 					<div class="col-xs-4">
 						{!! Form::text('area', '',
 							[
-								'placeholder' => 'trans('messages.area')',
+								'placeholder' => trans('messages.area'),
 								'ng-disabled' => 'true',
 								'ng-model' => 'answer.record.area',
 								'class' => 'form-control'
@@ -158,7 +158,7 @@
 						<button class="btn btn-blue btn-medium" type="button" ng-click="answer.rateAnswer()" 
 							ng-if="answer.record.request_answer_status == futureed.PENDING">{!! trans('messages.accept') !!}</button>
 
-						{!! Form::button('trans('messages.reject')'
+						{!! Form::button(trans('messages.reject')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'ng-if' => 'answer.record.request_answer_status == futureed.PENDING'
@@ -180,7 +180,7 @@
 								'class' => 'form-control',
 								'ng-disabled' => 'true',
 								'ng-model' => 'answer.record.title',
-								'placeholder' => 'trans('messages.title')'
+								'placeholder' => trans('messages.title')
 							]
 						) !!}
 					</div>
@@ -193,7 +193,7 @@
 								'class' => 'form-control disabled-textarea',
 								'ng-disabled' => 'answer.active_view',
 								'ng-model' => 'answer.record.content',
-								'placeholder' => 'trans('messages.answer')'
+								'placeholder' => trans('messages.answer')
 							]
 						) !!}
 					</div>
@@ -206,21 +206,21 @@
 								'class' => 'form-control',
 								'ng-disabled' => 'true',
 								'ng-model' => 'answer.record.name',
-								'placeholder' => 'trans('messages.answered_by')'
+								'placeholder' => trans('messages.answered_by')
 							]
 						) !!}
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="btn-container col-xs-8 col-xs-offset-2" ng-if="answer.active_edit">
-							{!! Form::button('trans('messages.save')'
+							{!! Form::button(trans('messages.save')
 								, array(
 									'class' => 'btn btn-blue btn-medium'
 									, 'ng-click' => "answer.updateHelpAnswer()"
 								)
 							) !!}
 
-							{!! Form::button('trans('messages.cancel')'
+							{!! Form::button(trans('messages.cancel')
 								, array(
 									'class' => 'btn btn-gold btn-medium'
 									, 'ng-click' => "answer.setActive(futureed.ACTIVE_VIEW, answer.record.id)"
@@ -228,14 +228,14 @@
 							) !!}
 					</div>	
 					<div class="btn-container col-xs-8 col-xs-offset-2" ng-if="answer.active_view">
-							{!! Form::button('trans('messages.edit')'
+							{!! Form::button(trans('messages.edit')
 								, array(
 									'class' => 'btn btn-blue btn-medium'
 									, 'ng-click' => "answer.setActive(futureed.ACTIVE_EDIT, answer.record.id)"
 								)
 							) !!}
 
-							{!! Form::button('trans('messages.cancel')'
+							{!! Form::button(trans('messages.cancel')
 								, array(
 									'class' => 'btn btn-gold btn-medium'
 									, 'ng-click' => "answer.setActive()"
@@ -271,13 +271,13 @@
 				</div>
 				<div class="modal-footer">
 					<div class="btncon col-xs-8 col-xs-offset-4 pull-left">
-						{!! Form::button('trans('messages.accept')'
+						{!! Form::button(trans('messages.accept')
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-click' => 'answer.acceptAnswer()'
 							)
 						) !!}
-						{!! Form::button('trans('messages.cancel')'
+						{!! Form::button(trans('messages.cancel')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'data-dismiss' => 'modal'

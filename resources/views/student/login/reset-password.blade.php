@@ -24,7 +24,7 @@
 					</li>
 				</ul>
 
-				{!! Form::button('trans('messages.client_proceed')'
+				{!! Form::button(trans('messages.client_proceed')
 					, array(
 						'class' => 'btn btn-maroon btn-medium'
 						, 'ng-click' => 'password.selectNewPassword()'
@@ -34,14 +34,14 @@
 
 				<div ng-if="password.password_selected">
 					<div class="btn-container">
-						{!! Form::button('trans('messages.previous')'
+						{!! Form::button(trans('messages.previous')
 							, array(
 								'class' => 'btn btn-maroon btn-medium'
 								, 'ng-click' => 'password.undoNewPassword()'
 							) 
 						) !!}
 
-						{!! Form::button('trans('messages.save')'
+						{!! Form::button(trans('messages.save')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'ng-click' => 'password.resetPassword()'
@@ -64,7 +64,7 @@
 
 			<br />
 
-			{!! Html::link(route('student.login') , 'trans('messages.click_to_login')'
+			{!! Html::link(route('student.login') , trans('messages.click_to_login')
 				, array(
 					'class' => 'btn btn-maroon'
 				)

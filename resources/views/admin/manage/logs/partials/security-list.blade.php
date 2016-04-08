@@ -27,7 +27,7 @@
 				<div class="col-xs-5">
 					{!! Form::text('search_module', ''
 						,array(
-							'placeholder' => 'trans('messages.username')'
+							'placeholder' => trans('messages.username')
 							, 'ng-model' => 'logs.search.username'
 							, 'class' => 'form-control btn-fit'
 						)
@@ -37,7 +37,7 @@
 				<div class="col-xs-5">
 					{!! Form::text('client_user_agent', ''
 						,array(
-							'placeholder' => 'trans('messages.admin_agent_used')'
+							'placeholder' => trans('messages.admin_agent_used')
 							, 'ng-model' => 'logs.search.client_user_agent'
 							, 'class' => 'form-control btn-fit'
 						)
@@ -57,7 +57,7 @@
 				<div class="col-xs-5">
 					{!! Form::select('result_response'
 						, array(
-							'' =>'trans('messages.admin_response_code')'
+							'' =>trans('messages.admin_response_code')
 							, '200'=>'200'
 							, '201'=>'201'
 							, '404'=>'404'
@@ -76,9 +76,9 @@
 				<div class="col-xs-5">
 					{!! Form::select('log_type'
 						, array(
-							'' =>'trans('messages.admin_select_security')'
-							, 'Admin'=>'trans('messages.admin')'
-							, 'User'=>'trans('messages.user')'
+							'' =>trans('messages.admin_select_security')
+							, 'Admin'=>trans('messages.admin')
+							, 'User'=>trans('messages.user')
 						)
 						, null
 						, array(
@@ -89,7 +89,7 @@
 				</div>
 				
 				<div class="col-xs-2">
-					{!! Form::button('trans('messages.clear')'
+					{!! Form::button(trans('messages.clear')
 						,array(
 							'class' => 'btn btn-gold'
 							, 'ng-click' => 'logs.clearFnc($event)'

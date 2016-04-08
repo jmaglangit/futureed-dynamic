@@ -36,7 +36,7 @@
 							, array(
 								'class' => 'form-control'
 								, 'ng-model' => 'student.search.name'
-								, 'placeholder' => 'trans('messages.name')'
+								, 'placeholder' => trans('messages.name')
 							)
 						) !!}
 					</div>
@@ -45,12 +45,12 @@
 							, array(
 								'class' => 'form-control'
 								, 'ng-model' => 'student.search.email'
-								, 'placeholder' => 'trans('messages.email')'
+								, 'placeholder' => trans('messages.email')
 							)
 						) !!}
 					</div>
 					<div class="col-xs-2">
-						{!! Form::button('trans('messages.search')'
+						{!! Form::button(trans('messages.search')
 							, array(
 								'class' => 'btn btn-blue'
 								, 'ng-click' => 'student.searchFnc($event)'
@@ -58,7 +58,7 @@
 						) !!}
 					</div>
 					<div class="col-xs-2">
-						{!! Form::button('trans('messages.clear')'
+						{!! Form::button(trans('messages.clear')
 							, array(
 								'class' => 'btn btn-gold'
 								, 'ng-click' => 'student.clear()'

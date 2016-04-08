@@ -34,7 +34,7 @@
 								'class' => 'form-control'
 								, 'ng-model' => 'bulk.record.min_seats'
 								, 'ng-class' => "{ 'required-field' : bulk.fields['min_seats'] }"
-								, 'placeholder' => 'trans('messages.admin_min_seats')'
+								, 'placeholder' => trans('messages.admin_min_seats')
 							]) 
 						!!}
 					</div>
@@ -48,7 +48,7 @@
 									'class' => 'form-control'
 									, 'ng-model' => 'bulk.record.percentage'
 									, 'ng-class' => "{ 'required-field' : bulk.fields['percentage'] }"
-									, 'placeholder' => 'trans('messages.admin_percentage')'
+									, 'placeholder' => trans('messages.admin_percentage')
 								]) 
 							!!}
 							<span class="input-group-addon">%</span>
@@ -91,7 +91,7 @@
 			<fieldset>
 				<div class="form-group">
 					<div class="btn-container col-xs-9 col-xs-offset-1">
-						{!! Form::button('trans('messages.update')'
+						{!! Form::button(trans('messages.update')
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-click' => "bulk.update()"
@@ -99,7 +99,7 @@
 							)
 						) !!}
 
-						{!! Form::button('trans('messages.admin_add_bulk_discount')'
+						{!! Form::button(trans('messages.admin_add_bulk_discount')
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-click' => "bulk.add()"
@@ -107,7 +107,7 @@
 							)
 						) !!}
 
-						{!! Form::button('trans('messages.cancel')'
+						{!! Form::button(trans('messages.cancel')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'ng-click' => "bulk.setActive()"

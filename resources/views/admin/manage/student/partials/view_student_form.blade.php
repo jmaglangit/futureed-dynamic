@@ -28,7 +28,7 @@
 					<div class="col-xs-5">
 						{!! Form::text('username',''
 							, array(
-								'placeHolder' => 'trans('messages.username')'
+								'placeHolder' => trans('messages.username')
 								, 'ng-disabled' => 'student.active_view'
 								, 'ng-model' => 'student.record.username'
 								, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
@@ -50,7 +50,7 @@
 					<div class="col-xs-5">
 						{!! Form::text('email',''
 							, array(
-								'placeHolder' => 'trans('messages.email')'
+								'placeHolder' => trans('messages.email')
 								, 'ng-disabled' => 'student.active_view'
 								, 'ng-model' => 'student.record.email'
 								, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
@@ -120,7 +120,7 @@
 					<div class="col-xs-5">
 						{!! Form::text('email',''
 							, array(
-								'placeHolder' => 'trans('messages.email')'
+								'placeHolder' => trans('messages.email')
 								, 'ng-disabled' => 'true'
 								, 'class' => 'form-control'
 							)
@@ -138,7 +138,7 @@
 					<div class="col-xs-5">
 						{!! Form::text('points',''
 							, array(
-								'placeHolder' => 'trans('messages.points')'
+								'placeHolder' => trans('messages.points')
 								, 'ng-disabled' => 'student.active_view'
 								, 'ng-model' => 'student.record.points'
 								, 'ng-class' => "{ 'required-field' : student.fields['points'] }"
@@ -152,7 +152,7 @@
 					<div class="col-xs-5">
 						{!! Form::text('badges',''
 							, array(
-								'placeHolder' => 'trans('messages.badge')'
+								'placeHolder' => trans('messages.badge')
 								, 'ng-disabled' => 'student.active_view'
 								, 'ng-model' => 'student.record.badges'
 								, 'ng-class' => "{ 'required-field' : student.fields['badges'] }"
@@ -164,7 +164,7 @@
 				<div class="form-group" ng-if="student.active_view">
 					<div class="col-xs-3"></div>
 					<div class="col-xs-5">
-						{!! Form::button('trans('messages.admin_view_rewards')'
+						{!! Form::button(trans('messages.admin_view_rewards')
 							, array(
 								'class' => 'btn btn-blue'
 								, 'ng-click' => "student.setActive('reward', student.record.id)"
@@ -186,7 +186,7 @@
 									, 'ng-disabled' => 'student.active_view'
 									, 'ng-model' => 'student.record.first_name'
 									, 'ng-class' => "{ 'required-field' : student.fields['first_name'] }"
-									, 'placeHolder' => 'trans('messages.first_name')'
+									, 'placeHolder' => trans('messages.first_name')
 								 )
 							)!!}
 					</div>
@@ -199,7 +199,7 @@
 									, 'ng-disabled' => 'student.active_view'
 									, 'ng-model' => 'student.record.last_name'
 									, 'ng-class' => "{ 'required-field' : student.fields['last_name'] }"
-									, 'placeHolder' => 'trans('messages.last_name')'
+									, 'placeHolder' => trans('messages.last_name')
 								 )
 							)!!}
 					</div>
@@ -208,9 +208,9 @@
 					<label class="control-label col-xs-3">{!! trans('messages.gender') !!} <span class="required">*</span></label>
 					<div class="col-xs-5">
 						{!! Form::select('gender',
-							array('' => 'trans('messages.select_gender')'
-									, 'trans('messages.male')' => 'Male'
-									, 'trans('messages.female')' => 'Female'),'',
+							array('' => trans('messages.select_gender')
+									, trans('messages.male') => 'Male'
+									, trans('messages.female') => 'Female'),'',
 							array('class' => 'form-control'
 									, 'ng-disabled' => 'student.active_view'
 									, 'ng-model' => 'student.record.gender'
@@ -233,7 +233,7 @@
 									, 'ng-disabled' => 'student.active_view'
 									, 'ng-model' => 'student.record.city'
 									, 'ng-class' => "{ 'required-field' : student.fields['city'] }"
-									, 'placeHolder' => 'trans('messages.city')'
+									, 'placeHolder' => trans('messages.city')
 								 )
 							)!!}
 					</div>
@@ -246,7 +246,7 @@
 									, 'ng-disabled' => 'student.active_view'
 									, 'ng-model' => 'student.record.state'
 									, 'ng-class' => "{ 'required-field' : student.fields['state'] }"
-									, 'placeHolder' => 'trans('messages.state')'
+									, 'placeHolder' => trans('messages.state')
 								 )
 							)!!}
 					</div>
@@ -274,7 +274,7 @@
 					<div class="col-xs-5">
 						{!! Form::text('school_name',''
 								, array(
-									'placeHolder' => 'trans('messages.school_name')'
+									'placeHolder' => trans('messages.school_name')
 									, 'ng-disabled' => 'student.active_view'
 									, 'id' => 'school_code'
 									, 'ng-model' => 'student.record.school_name'
@@ -311,14 +311,14 @@
 				<div class="form-group">
 					<div class="col-xs-9 col-xs-offset-1">
 						<div class="btn-container" ng-if="student.active_view">
-							{!! Form::button('trans('messages.edit')'
+							{!! Form::button(trans('messages.edit')
 								, array(
 									'class' => 'btn btn-blue btn-medium'
 									, 'ng-click' => "student.setActive(futureed.ACTIVE_EDIT, student.record.id)"
 								)
 							) !!}
 
-							{!! Form::button('trans('messages.cancel')'
+							{!! Form::button(trans('messages.cancel')
 								, array(
 									'class' => 'btn btn-gold btn-medium'
 									, 'ng-click' => "student.setActive()"
@@ -327,14 +327,14 @@
 						</div>
 
 						<div class="btn-container" ng-if="student.active_edit">
-							{!! Form::button('trans('messages.save')'
+							{!! Form::button(trans('messages.save')
 								, array(
 									'class' => 'btn btn-blue btn-medium'
 									, 'ng-click' => "student.update()"
 								)
 							) !!}
 
-							{!! Form::button('trans('messages.cancel')'
+							{!! Form::button(trans('messages.cancel')
 								, array(
 									'class' => 'btn btn-gold btn-medium'
 									, 'ng-click' => "student.setActive(futureed.ACTIVE_VIEW, student.record.id)"

@@ -29,7 +29,7 @@
 
 					{!! Form::text('username', ''
 						, array(
-							'placeholder' => 'trans('messages.email_or_username')'
+							'placeholder' => trans('messages.email_or_username')
 							, 'ng-model' => 'forgot.username'
 							, 'autocomplete' => 'off'
 						)
@@ -43,7 +43,7 @@
 						{!! trans('messages.forgot_send') !!}
 					</button>
 
-					{!! Html::link(route('admin.login'), 'trans('messages.cancel')'
+					{!! Html::link(route('admin.login'), trans('messages.cancel')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 							)
@@ -111,7 +111,7 @@
 
 						{!! Form::text('reset_code', ''
 							, array(
-								'placeholder' => 'trans('messages.admin_forgot_enter_code')'
+								'placeholder' => trans('messages.admin_forgot_enter_code')
 								, 'ng-model' => 'forgot.record.reset_code'
 								, 'autocomplete' => 'off'
 							)
@@ -119,7 +119,7 @@
 					</div>
 					
 					<div class="btn-container">
-						{!! Form::button('trans('messages.client_proceed')'
+						{!! Form::button( trans('messages.client_proceed')
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-click' => 'forgot.validateCode($event)'

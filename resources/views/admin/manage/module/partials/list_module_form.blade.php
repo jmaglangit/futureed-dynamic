@@ -42,12 +42,12 @@
 							, array(
 								'class' => 'form-control'
 								, 'ng-model' => 'module.search.area'
-								, 'placeholder' => 'trans('messages.subject_area')'
+								, 'placeholder' => trans('messages.subject_area')
 							)
 						) !!}
 					</div>
 					<div class="col-xs-2">
-						{!! Form::button('trans('messages.search')'
+						{!! Form::button(trans('messages.search')
 							,array(
 								'class' => 'btn btn-blue'
 								, 'ng-click' => 'module.searchFnc($event)'
@@ -61,13 +61,13 @@
 							, array(
 								'class' => 'form-control'
 								, 'ng-model' => 'module.search.name'
-								, 'placeholder' => 'trans('messages.admin_module_name')'
+								, 'placeholder' => trans('messages.admin_module_name')
 							)
 						) !!}
 					</div>
 					<div class="col-xs-5"></div>
 					<div class="col-xs-2">
-						{!! Form::button('trans('messages.clear')'
+						{!! Form::button(trans('messages.clear')
 							,array(
 								'class' => 'btn btn-gold'
 								, 'ng-click' => 'module.clearFnc($event)'
@@ -177,7 +177,7 @@
 				</div>
 				<div class="modal-footer">
 					<div class="btncon col-xs-8 col-xs-offset-4 pull-left">
-						{!! Form::button('trans('messages.yes')'
+						{!! Form::button(trans('messages.yes')
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-click' => 'module.deleteModule()'
@@ -185,7 +185,7 @@
 							)
 						) !!}
 
-						{!! Form::button('trans('messages.no')'
+						{!! Form::button(trans('messages.no')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'data-dismiss' => 'modal'

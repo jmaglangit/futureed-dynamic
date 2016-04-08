@@ -48,20 +48,20 @@
 			<br />
 
 			<div class="form-group">
-				{!! Form::label(null, 'trans('messages.client_enter_email_confirmation_code'):') !!}
+				{!! Form::label(null, trans('messages.client_enter_email_confirmation_code'):') !!}
 
 				{!! Form::text('confirmation_code', '',
 					array(
 						'class' => 'form-control'
 						, 'ng-model' => 'profile.confirmation_code'
-						, 'placeholder' => 'trans('messages.confirm_code')'
+						, 'placeholder' => trans('messages.confirm_code')
 						, 'autocomplete' => 'off'
 					)
 				) !!}
 			</div>
 
 			<div class="btn-container">
-				{!! Form::button('trans('messages.client_proceed')'
+				{!! Form::button(trans('messages.client_proceed')
 					, array(
 						'id' => 'proceed_btn'
 						, 'class' => 'btn btn-maroon btn-medium'
@@ -69,7 +69,7 @@
 					)
 				) !!}
 
-				{!! Form::button('trans('messages.client_resend_code')'
+				{!! Form::button(trans('messages.client_resend_code')
 					, array(
 						'class' => 'btn btn-gold btn-medium'
 						, 'ng-click' => 'profile.resendStudentEmailCode()'
@@ -88,7 +88,7 @@
 				<p class="text">
 					{!! trans('messages.client_succesfully_confirmed_email_address') !!}
 				</p>
-				{!! Form::button('trans('messages.view_profile')'
+				{!! Form::button(trans('messages.view_profile')
 					, array(
 						'class' => 'btn btn-gold'
 						, 'ng-click' => "profile.setStudentProfileActive('index')"

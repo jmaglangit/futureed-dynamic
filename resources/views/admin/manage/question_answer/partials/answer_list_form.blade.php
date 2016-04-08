@@ -20,7 +20,7 @@
                 <div class="col-xs-5">
                     {!! Form::text('code',''
                         , array(
-                            'placeHolder' => 'trans('messages.admin_answer_code')'
+                            'placeHolder' => trans('messages.admin_answer_code')
                             , 'ng-model' => 'qa.answers.record.code'
                             , 'ng-disabled' => 'qa.active_ansedit'
                             , 'class' => 'form-control'
@@ -36,7 +36,7 @@
                 <div class="col-xs-5">
                     {!! Form::text('answer_text',''
                         , array(
-                            'placeHolder' => 'trans('messages.answer')'
+                            'placeHolder' => trans('messages.answer')
                             , 'ng-model' => 'qa.answers.record.answer_text'
                             , 'class' => 'form-control'
                             , 'ng-class' => "{ 'required-field' : qa.fields['answer_text_ans'] }"
@@ -51,7 +51,7 @@
                 <div class="col-xs-5">
                     {!! Form::text('label',''
                         , array(
-                            'placeHolder' => 'trans('messages.admin_label')'
+                            'placeHolder' => trans('messages.admin_label')
                             , 'ng-model' => 'qa.answers.record.label'
                             , 'class' => 'form-control'
                             , 'ng-class' => "{ 'required-field' : qa.fields['label_ans'] }"
@@ -66,9 +66,9 @@
                 <div class="col-xs-5">
                     {!! Form::select('correct_answer'
                         , array(
-                            '' => 'trans('messages.admin_select_answer')'
-                            , 'Yes' => 'trans('messages.yes')'
-                            , 'No' => 'trans('messages.no')'
+                            '' => trans('messages.admin_select_answer')
+                            , 'Yes' => trans('messages.yes')
+                            , 'No' => trans('messages.no')
                         )
                         , ''
                         , array(
@@ -86,7 +86,7 @@
                 <div class="col-xs-5">
                     {!! Form::text('point_equivalent',''
                         , array(
-                            'placeHolder' => 'trans('messages.admin_points_equivalent')'
+                            'placeHolder' => trans('messages.admin_points_equivalent')
                             , 'ng-model' => 'qa.answers.record.point_equivalent'
                             , 'class' => 'form-control'
                             , 'ng-class' => "{ 'required-field' : qa.fields['point_equivalent_ans'] }"
@@ -129,13 +129,13 @@
 
             <div class="form-group">
                 <div class="btn-container col-xs-10 col-xs-offset-1" ng-if="qa.active_anslist">
-                    {!! Form::button('trans('messages.add')'
+                    {!! Form::button(trans('messages.add')
                         , array(
                             'class' => 'btn btn-blue btn-medium'
                             , 'ng-click' => 'qa.addAnswer()'
                         )
                     ) !!}
-                    {!! Form::button('trans('messages.clear')'
+                    {!! Form::button(trans('messages.clear')
                         , array(
                             'class' => 'btn btn-gold btn-medium'
                             , 'ng-click' => 'qa.clearAnswer()'
@@ -143,13 +143,13 @@
                     ) !!}
                 </div>
                 <div class="btn-container col-xs-10 col-xs-offset-1" ng-if="qa.active_ansedit">
-                    {!! Form::button('trans('messages.update')'
+                    {!! Form::button(trans('messages.update')
                         , array(
                             'class' => 'btn btn-blue btn-medium'
                             , 'ng-click' => 'qa.updateAnswer()'
                         )
                     ) !!}
-                    {!! Form::button('trans('messages.cancel')'
+                    {!! Form::button(trans('messages.cancel')
                         , array(
                             'class' => 'btn btn-gold btn-medium'
                             , 'ng-click' => 'qa.setAnsActive()'
@@ -267,7 +267,7 @@
                 <div class="col-xs-5">
                     {!! Form::text('code',''
                         , array(
-                            'placeHolder' => 'trans('messages.admin_field_name')'
+                            'placeHolder' => trans('messages.admin_field_name')
                             , 'ng-model' => 'qa.answers.record.field'
                             , 'class' => 'form-control'
                             , 'ng-class' => "{ 'required-field' : qa.fields['code_ans'] }"
@@ -282,7 +282,7 @@
                 <div class="col-xs-5">
                     {!! Form::text('answer_text',''
                         , array(
-                            'placeHolder' => 'trans('messages.admin_count')'
+                            'placeHolder' => trans('messages.admin_count')
                             , 'ng-model' => 'qa.answers.record.count'
                             , 'class' => 'form-control'
                             , 'ng-class' => "{ 'required-field' : qa.fields['answer_text_ans'] }"
@@ -325,13 +325,13 @@
 
             <div class="form-group">
                 <div class="btn-container col-xs-10 col-xs-offset-1" ng-if="qa.active_anslist">
-                    {!! Form::button('trans('messages.add')'
+                    {!! Form::button(trans('messages.add')
                         , array(
                             'class' => 'btn btn-blue btn-medium'
                             , 'ng-click' => 'qa.addAnswer()'
                         )
                     ) !!}
-                    {!! Form::button('trans('messages.clear')'
+                    {!! Form::button(trans('messages.clear')
                         , array(
                             'class' => 'btn btn-gold btn-medium'
                             , 'ng-click' => 'qa.clearAnswer()'
@@ -339,13 +339,13 @@
                     ) !!}
                 </div>
                 <div class="btn-container col-xs-10 col-xs-offset-1" ng-if="qa.active_ansedit">
-                    {!! Form::button('trans('messages.update')'
+                    {!! Form::button(trans('messages.update')
                         , array(
                             'class' => 'btn btn-blue btn-medium'
                             , 'ng-click' => 'qa.updateAnswer()'
                         )
                     ) !!}
-                    {!! Form::button('trans('messages.cancel')'
+                    {!! Form::button(trans('messages.cancel')
                         , array(
                             'class' => 'btn btn-gold btn-medium'
                             , 'ng-click' => 'qa.setAnsActive()'
@@ -459,7 +459,7 @@
                 <div class="col-xs-5">
                     {!! Form::text('code',''
                         , array(
-                            'placeHolder' => 'trans('messages.admin_coordinate')'
+                            'placeHolder' => trans('messages.admin_coordinate')
                             , 'ng-model' => 'qa.answers.record.x'
                             , 'class' => 'form-control'
                             , 'ng-class' => "{ 'required-field' : qa.fields['code_ans'] }"
@@ -474,7 +474,7 @@
                 <div class="col-xs-5">
                     {!! Form::text('answer_text',''
                         , array(
-                            'placeHolder' => 'trans('messages.admin_coordinate')'
+                            'placeHolder' => trans('messages.admin_coordinate')
                             , 'ng-model' => 'qa.answers.record.y'
                             , 'class' => 'form-control'
                             , 'ng-class' => "{ 'required-field' : qa.fields['answer_text_ans'] }"
@@ -498,13 +498,13 @@
 
             <div class="form-group">
                 <div class="btn-container col-xs-10 col-xs-offset-1" ng-if="qa.active_anslist && qa.answers.graph_records.answer.length == 0">
-                    {!! Form::button('trans('messages.add')'
+                    {!! Form::button(trans('messages.add')
                         , array(
                             'class' => 'btn btn-blue btn-medium'
                             , 'ng-click' => 'qa.addAnswer()'
                         )
                     ) !!}
-                    {!! Form::button('trans('messages.clear')'
+                    {!! Form::button(trans('messages.clear')
                         , array(
                             'class' => 'btn btn-gold btn-medium'
                             , 'ng-click' => 'qa.clearAnswer()'
@@ -512,13 +512,13 @@
                     ) !!}
                 </div>
                 <div class="btn-container col-xs-10 col-xs-offset-1" ng-if="qa.active_ansedit && qa.answers.graph_records.answer.length != 0">
-                    {!! Form::button('trans('messages.update')'
+                    {!! Form::button(trans('messages.update')
                         , array(
                             'class' => 'btn btn-blue btn-medium'
                             , 'ng-click' => 'qa.updateAnswer()'
                         )
                     ) !!}
-                    {!! Form::button('trans('messages.cancel')'
+                    {!! Form::button(trans('messages.cancel')
                         , array(
                             'class' => 'btn btn-gold btn-medium'
                             , 'ng-click' => 'qa.setAnsActive()'
@@ -621,7 +621,7 @@
             </div>
             <div class="modal-footer">
                 <div class="btncon col-md-8 col-md-offset-4 pull-left">
-                    {!! Form::button('trans('messages.yes')'
+                    {!! Form::button(trans('messages.yes')
                         , array(
                             'class' => 'btn btn-blue btn-medium'
                             , 'ng-click' => 'qa.deleteAnswer()'
@@ -629,7 +629,7 @@
                         )
                     ) !!}
 
-                    {!! Form::button('trans('messages.no')'
+                    {!! Form::button(trans('messages.no')
                         , array(
                             'class' => 'btn btn-gold btn-medium'
                             , 'data-dismiss' => 'modal'

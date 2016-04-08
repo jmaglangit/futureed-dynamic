@@ -16,7 +16,7 @@
 						'ng-disabled'=>'true'
 						, 'class' => 'form-control'
 						, 'ng-model' => 'module.record.name'
-						, 'placeholder' => 'trans('messages.module')'
+						, 'placeholder' => trans('messages.module')
 					)
 				) !!}
 			</div>
@@ -29,7 +29,7 @@
 						'ng-disabled'=>'true'
 						, 'class' => 'form-control'
 						, 'ng-model' => 'module.record.subject.name'
-						, 'placeholder' => 'trans('messages.subject')'
+						, 'placeholder' => trans('messages.subject')
 					)
 				) !!}
 			</div>
@@ -42,7 +42,7 @@
 						'ng-disabled'=>'true'
 						, 'class' => 'form-control'
 						, 'ng-model' => 'module.record.subjectarea.name'
-						, 'placeholder' => 'trans('messages.area')'
+						, 'placeholder' => trans('messages.area')
 					)
 				) !!}
 			</div>
@@ -55,7 +55,7 @@
 						'ng-disabled'=>'true'
 						, 'class' => 'form-control'
 						, 'ng-model' => 'module.record.grade.name'
-						, 'placeholder' => 'trans('messages.grade')'
+						, 'placeholder' => trans('messages.grade')
 					)
 				) !!}
 			</div>
@@ -68,7 +68,7 @@
 						'ng-disabled'=>'true'
 						, 'class' => 'form-control'
 						, 'ng-model' => 'module.record.common_core_area'
-						, 'placeholder' => 'trans('messages.admin_common_core_area')'
+						, 'placeholder' => trans('messages.admin_common_core_area')
 					)
 				) !!}
 			</div>
@@ -88,14 +88,14 @@
 						'ng-disabled'=>'true'
 						, 'class' => 'form-control disabled-textarea'
 						, 'ng-model' => 'module.record.description'
-						, 'placeholder' => 'trans('messages.description')'
+						, 'placeholder' => trans('messages.description')
 						, 'rows' => '5'
 					)
 				) !!}
 			</div>
 		</div>
 		<div class="col-xs-9 col-xs-offset-2">
-			{!! Form::button('trans('messages.back')'
+			{!! Form::button(trans('messages.back')
 				, array(
 					'class' => 'btn btn-gold btn-medium'
 					, 'ng-click' => "module.setActive()"

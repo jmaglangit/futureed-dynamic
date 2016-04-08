@@ -15,7 +15,7 @@
 				{!! Form::text('current_email', ''
 					, array(
 						'class' => 'form-control'
-						, 'placeholder' => 'trans('messages.current_email')'
+						, 'placeholder' => trans('messages.current_email')
 						, 'ng-model' => 'profile.change.current_email'
 						, 'ng-class' => "{ 'required-field' : profile.fields['current_email'] }"
 						, 'ng-model-options' => "{ debounce: {'default' : 1000} }"
@@ -38,7 +38,7 @@
 				{!! Form::text('new_email', ''
 					, array(
 						'class' => 'form-control'
-						, 'placeholder' => 'trans('messages.new_email')'
+						, 'placeholder' => trans('messages.new_email')
 						, 'ng-model' => 'profile.change.new_email'
 						, 'ng-class' => "{ 'required-field' : profile.fields['new_email'] }"
 						, 'ng-model-options' => "{ debounce: {'default' : 1000} }"
@@ -61,7 +61,7 @@
 				{!! Form::text('confirm_email', ''
 					, array(
 						'class' => 'form-control'
-						, 'placeholder' => 'trans('messages.confirm_email')'
+						, 'placeholder' => trans('messages.confirm_email')
 						, 'ng-model' => 'profile.change.confirm_email'
 						, 'ng-class' => "{ 'required-field' : profile.fields['confirm_email'] }"
 						, 'ng-model-options' => "{ debounce: {'default' : 1000} }"
@@ -78,14 +78,14 @@
 		<br />
 		<div class="form-group">
 			<div class="btn-container">
-				{!! Form::button('trans('messages.next')'
+				{!! Form::button(trans('messages.next')
 					, array(
 						'class' => 'btn btn-maroon btn-medium'
 						, 'ng-click' => 'profile.selectPicturePassword()'
 					)
 				) !!}
 
-				{!! Form::button('trans('messages.cancel')'
+				{!! Form::button(trans('messages.cancel')
 					, array(
 						'class' => 'btn btn-gold btn-medium'
 						, 'ng-click' => "profile.setStudentProfileActive('index')"
@@ -111,14 +111,14 @@
 			</div>
 		</div>
 		<div class="btn-container">
-			{!! Form::button('trans('messages.save')'
+			{!! Form::button(trans('messages.save')
 				, array(
 					'class' => 'btn btn-maroon btn-medium'
 					, 'ng-click' => 'profile.changeStudentEmail()'
 				)
 			) !!}
 
-			{!! Form::button('trans('messages.previous')'
+			{!! Form::button(trans('messages.previous')
 				, array(
 					'class' => 'btn btn-gold btn-medium'
 					, 'ng-click' => 'profile.backToEditEmail()'

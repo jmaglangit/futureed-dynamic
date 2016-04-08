@@ -32,7 +32,7 @@
 					<div class="col-xs-5">
 						{!! Form::text('points_earned',''
 							, array(
-								'placeHolder' => 'trans('messages.admin_total_points_earned')'
+								'placeHolder' => trans('messages.admin_total_points_earned')
 								, 'ng-model' => 'age.record.points_earned'
 								, 'class' => 'form-control'
 								, 'ng-class' => "{ 'required-field' : age.fields['points_earned'] }"
@@ -45,14 +45,14 @@
 			<fieldset>
 				<div class="form-group">
 					<div class="btn-container col-xs-9 col-xs-offset-1">
-						{!! Form::button('trans('messages.add')'
+						{!! Form::button(trans('messages.add')
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-click' => 'age.add()'
 							)
 						) !!}
 
-						{!! Form::button('trans('messages.cancel')'
+						{!! Form::button(trans('messages.cancel')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'ng-click' => "age.setActive()"

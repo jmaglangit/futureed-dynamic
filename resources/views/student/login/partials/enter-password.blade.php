@@ -19,7 +19,7 @@
 		</div>
 
 		<div class="btn-container" ng-if="login.image_pass.length">
-			{!! Form::button('trans('messages.cancel')'
+			{!! Form::button(trans('messages.cancel')
 				, array(
 					'class' => 'btn btn-gold btn-medium'
 					, 'ng-click' => 'login.cancelLogin()'

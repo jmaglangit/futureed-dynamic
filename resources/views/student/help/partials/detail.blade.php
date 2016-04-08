@@ -46,7 +46,7 @@
 		        		</label>
 					</div>
 					<div class="btn-help col-xs-12">
-						{!! Form::button('trans('messages.view_list')'
+						{!! Form::button(trans('messages.view_list')
 							, array(
 								'class' => 'btn btn-gold'
 								, 'ng-click' => "help.setActive()"
@@ -54,7 +54,7 @@
 						) !!}
 
 						<div ng-if="help.record.question_status == futureed.OPEN && help.record.own"> 
-							{!! Form::button('trans('messages.delete_this_req')'
+							{!! Form::button(trans('messages.delete_this_req')
 								, array(
 									'class' => 'btn btn-maroon margin-top-10'
 									, 'ng-click' => "help.deleteRequest()"
@@ -62,7 +62,7 @@
 								)
 							) !!}
 
-							{!! Form::button('trans('messages.close_this_req')'
+							{!! Form::button(trans('messages.close_this_req')
 								, array(
 									'class' => 'btn btn-maroon margin-top-10'
 									, 'ng-click' => "help.closeRequest()"
@@ -136,7 +136,7 @@
 			{!! Form::textarea('answer', ''
 				, array(
 					'class' => 'form-control'
-					, 'placeholder' => 'trans('messages.answer')'
+					, 'placeholder' => trans('messages.answer')
 					, 'ng-model' => 'help.record.answer'
 					, 'rows' => '5'
 				)
@@ -144,14 +144,14 @@
 		</div>
 
 		<div class="btn-container search-container col-xs-12" ng-if="help.record.question_status == futureed.OPEN">
-			{!! Form::button('trans('messages.clear')'
+			{!! Form::button(trans('messages.clear')
 				, array(
 					'class' => 'btn btn-gold btn-small pull-right'
 					, 'ng-click' => "help.clearAnswer()"
 				)
 			) !!}
 
-			{!! Form::button('trans('messages.submit')'
+			{!! Form::button(trans('messages.submit')
 				, array(
 					'class' => 'btn btn-maroon btn-small pull-right'
 					, 'ng-click' => "help.answerRequest()"

@@ -13,7 +13,7 @@
 								<h3 class="box-title">{!! trans('messages.student_registration') !!}</h3>
 								<div class="info-box rd" >
 									<h4>{!! trans('messages.for_students_13_years') !!}</h4>
-									<p>{!! trans('messages.parent_should_register') !!} {!! Html::link(route('client.registration'), 'trans('messages.here')') !!} {!! trans('messages.to_register') !!}</p>
+									<p>{!! trans('messages.parent_should_register') !!} {!! Html::link(route('client.registration'), trans('messages.here')) !!} {!! trans('messages.to_register') !!}</p>
 								</div>
 							</div>
 						</div>
@@ -49,7 +49,7 @@
 				</div>
 
 				<div class="btn-container">
-					{!! Html::link(route('student.registration'), 'trans('messages.client_register_new_account')'
+					{!! Html::link(route('student.registration'), trans('messages.client_register_new_account')
 						, array(
 							'class' => 'btn btn-maroon btn-medium'
 						)
@@ -79,9 +79,9 @@
 							<div class="col-xs-4">
 								{!! Form::select('gender'
 									, array(
-										'' => 'trans('messages.select_gender')'
-										, 'Male' => 'trans('messages.male')'
-										, 'Female' => 'trans('messages.female')')
+										'' => trans('messages.select_gender')
+										, 'Male' => trans('messages.male')
+										, 'Female' => trans('messages.female'))
 									, ''
 									, array(
 										'class' => 'form-control'
@@ -97,7 +97,7 @@
 									, array(
 										'class' => 'form-control'
 										, 'ng-class' => "{ 'required-field' : login.fields['first_name'] }"
-										, 'placeholder' => 'trans('messages.first_name')' 
+										, 'placeholder' => trans('messages.first_name')
 										, 'autocomplete' => 'off'
 										, 'ng-model' => 'login.record.first_name')
 								) !!}
@@ -108,7 +108,7 @@
 									, array(
 										'class' => 'form-control'
 										, 'ng-class' => "{ 'required-field' : login.fields['last_name'] }"
-										, 'placeholder' => 'trans('messages.last_name')' 
+										, 'placeholder' => trans('messages.last_name')
 										, 'autocomplete' => 'off'
 										, 'ng-model' => 'login.record.last_name')
 								) !!}
@@ -121,7 +121,7 @@
 									, array(
 										'class' => 'form-control'
 										, 'ng-class' => "{ 'required-field' : login.fields['city'] }"
-										, 'placeholder' => 'trans('messages.city')' 
+										, 'placeholder' => trans('messages.city')
 										, 'ng-model' => 'login.record.city')
 								) !!}
 							</div>
@@ -131,7 +131,7 @@
 									, array(
 										'class' => 'form-control'
 										, 'ng-class' => "{ 'required-field' : login.fields['state'] }"
-										, 'placeholder' => 'trans('messages.state')' 
+										, 'placeholder' => trans('messages.state')
 										, 'ng-model' => 'login.record.state')
 								) !!}
 							</div>
@@ -160,7 +160,7 @@
 									, array(
 										'class' => 'form-control'
 										, 'ng-class' => "{ 'required-field' : login.fields['username'] }"
-										, 'placeholder' => 'trans('messages.username')' 
+										, 'placeholder' => trans('messages.username')
 										, 'autocomplete' => 'off'
 										, 'ng-model' => 'login.record.username'
 										, 'ng-model-options' => "{ debounce : { 'default' : 1000 } }"
@@ -182,7 +182,7 @@
 									, array(
 										'class' => 'form-control'
 										, 'ng-class' => "{ 'required-field' : login.fields['username'] }"
-										, 'placeholder' => 'trans('messages.email_address')' 
+										, 'placeholder' => trans('messages.email_address')
 										, 'autocomplete' => 'off'
 										, 'ng-model' => 'login.record.email'
 										, 'ng-model-options' => "{ debounce : { 'default' : 1000 } }"
@@ -237,7 +237,7 @@
 									
 									{!! trans('messages.i_agree') !!}
 
-									{!! Html::link('#', 'trans('messages.terms_and_conditions')'
+									{!! Html::link('#', trans('messages.terms_and_conditions')
 										, array(
 											'ng-click' => "showModal('terms_modal')"
 											, 'data-toggle' => 'modal'
@@ -246,7 +246,7 @@
 
 									 and 
 
-									{!! Html::link('#', 'trans('messages.data_privacy_policy')'
+									{!! Html::link('#', trans('messages.data_privacy_policy')
 										, array(
 											'ng-click' => "showModal('policy_modal')"
 											, 'data-toggle' => 'modal'
@@ -256,7 +256,7 @@
 							</div>
 						</div>
 						<div class="btn-container col-sm-6 col-sm-offset-3">
-							{!! Form::button('trans('messages.register')'
+							{!! Form::button(trans('messages.register')
 								, array(
 									'class' => 'btn btn-maroon btn-medium'
 									, 'ng-click' => "login.validateRegistration()"
@@ -264,7 +264,7 @@
 								)
 							) !!}
 
-							 {!! Form::button('trans('messages.confirm_registration')'
+							 {!! Form::button(trans('messages.confirm_registration')
 								, array(
 									'class' => 'btn btn-maroon btn-medium'
 									, 'ng-click' => "login.editRegistration()"
@@ -272,7 +272,7 @@
 								)
 							) !!}
 
-							{!! Html::link(route('student.login'), 'trans('messages.cancel')'
+							{!! Html::link(route('student.login'), trans('messages.cancel')
 								, array(
 									'class' => 'btn btn-gold btn-medium'
 								)
@@ -295,7 +295,7 @@
 				</div>
 				<div class="modal-footer">
 					<div class="btncon col-xs-8 col-xs-offset-4 pull-left">
-						{!! Form::button('trans('messages.cancel')'
+						{!! Form::button(trans('messages.cancel')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'data-dismiss' => 'modal'

@@ -58,7 +58,7 @@
                             <div class="col-xs-5">
                                 {!! Form::text('seats_total',''
                                     , array(
-                                        'placeHolder' => 'trans('messages.no_of_seats')'
+                                        'placeHolder' => trans('messages.no_of_seats')
                                         , 'ng-model' => 'payment.classroom.seats_total'
                                         , 'ng-class' => "{ 'required-field' : payment.fields['seats_total'] }"
                                         , 'ng-disabled' => "payment.invoice.renew"
@@ -91,7 +91,7 @@
                             <div class="col-xs-5">
                                 {!! Form::text('teacher',''
                                     , array(
-                                        'placeHolder' => 'trans('messages.teacher')'
+                                        'placeHolder' => trans('messages.teacher')
                                         , 'ng-model' => 'payment.classroom.client_name'
                                         , 'ng-model-options' => "{ debounce : {'default' : 1000} }"
                                         , 'ng-class' => "{ 'required-field' : payment.fields['client_id'] }"
@@ -124,7 +124,7 @@
                             <div class="col-xs-5">
                                 {!! Form::text('name',''
                                     , array(
-                                        'placeHolder' => 'trans('messages.class')'
+                                        'placeHolder' => trans('messages.class')
                                         , 'ng-model' => 'payment.classroom.name'
                                         , 'ng-class' => "{ 'required-field' : payment.fields['name'] }"
                                         , 'autocomplete' => 'off'
@@ -137,7 +137,7 @@
 
                         <div class="form-group">
                             <div class="btn-container col-xs-offset-2 col-xs-7">
-                                {!! Form::button('trans('messages.update')'
+                                {!! Form::button(trans('messages.update')
                                     , array(
                                         'class' => 'btn btn-blue btn-medium'
                                         , 'ng-click' => 'payment.updateClassroom()'
@@ -145,7 +145,7 @@
                                     )
                                 ) !!}
 
-                                {!! Form::button('trans('messages.add_classroom')'
+                                {!! Form::button(trans('messages.add_classroom')
                                     , array(
                                         'class' => 'btn btn-blue btn-medium'
                                         , 'ng-click' => 'payment.addClassroom()'
@@ -154,7 +154,7 @@
                                     )
                                 ) !!}
 
-                                {!! Form::button('trans('messages.clear')'
+                                {!! Form::button(trans('messages.clear')
                                     , array(
                                         'class' => 'btn btn-gold btn-medium'
                                         , 'ng-click' => 'payment.clearClassroom()'
@@ -201,7 +201,7 @@
                             <div class="col-xs-4">
                                 {!! Form::text('name',''
                                     , array(
-                                        'placeHolder' => 'trans('messages.payment_status')'
+                                        'placeHolder' => trans('messages.payment_status')
                                         , 'ng-model' => 'payment.invoice.payment_status'
                                         , 'ng-disabled' => 'true'
                                         , 'class' => 'form-control'
@@ -279,7 +279,7 @@
                             <div class="col-xs-4">
                                 {!! Form::text('name',''
                                     , array(
-                                        'placeHolder' => 'trans('messages.payment_status')'
+                                        'placeHolder' => trans('messages.payment_status')
                                         , 'ng-model' => 'payment.invoice.payment_status'
                                         , 'ng-disabled' => 'true'
                                         , 'class' => 'form-control'
@@ -458,21 +458,21 @@
                 <div class="col-xs-12">
                     <div class="btn-container">
                         <div ng-if="payment.invoice.payment_status == futureed.PENDING">
-                            {!! Form::button('trans('messages.pay_subscription')'
+                            {!! Form::button(trans('messages.pay_subscription')
                                 , array(
                                     'class' => 'btn btn-blue btn-semi-medium'
                                     , 'ng-click' => 'payment.addPayment()'
                                 )
                             ) !!}
 
-                            {!! Form::button('trans('messages.save_subscription')'
+                            {!! Form::button(trans('messages.save_subscription')
                                 , array(
                                     'class' => 'btn btn-blue btn-semi-medium'
                                     , 'ng-click' => 'payment.savePayment()'
                                 )
                             ) !!}
 
-                            {!! Form::button('trans('messages.delete_subscription')'
+                            {!! Form::button(trans('messages.delete_subscription')
                                 , array(
                                     'class' => 'btn btn-gold btn-semi-medium'
                                     , 'ng-click' => 'payment.deleteInvoice(payment.invoice.id)'
@@ -481,14 +481,14 @@
                         </div>
                         <div ng-if="payment.invoice.payment_status !== futureed.PENDING">
                             <hr/>
-                            {!! Form::button('trans('messages.view_list')'
+                            {!! Form::button(trans('messages.view_list')
                                 , array(
                                     'class' => 'btn btn-gold btn-semi-medium pull-right'
                                     , 'ng-click' => 'payment.setActive()'
                                 )
                             ) !!}
 
-                            {!! Form::button('trans('messages.renew_subscription')'
+                            {!! Form::button(trans('messages.renew_subscription')
                                 , array(
                                     'class' => 'btn btn-blue btn-semi-medium pull-right'
                                     , 'ng-disabled' => '!payment.invoice.expired'

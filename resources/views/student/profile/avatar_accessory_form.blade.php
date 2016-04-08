@@ -17,7 +17,7 @@
 					<img ng-src="{! accessory.url !}" ng-class="!accessory.is_bought ? 'greyscale' : ''" alt="{! accessory.name !}">
 					<p ng-if="!accessory.is_bought" class="text-gold text-center">{! accessory.points_to_unlock !} {!! trans('messages.points') !!}</p>
 					<p ng-if="!accessory.is_bought" class="text-gold text-center">{! accessory.name !}</p>
-					{!! Form::button('trans('messages.buy')'
+					{!! Form::button(trans('messages.buy')
 						, array(
 							'class' => 'btn btn-maroon btn-medium center-block'
 							, 'ng-click' => 'profile.confrimBuyAvatarAccessory(accessory.id, accessory.points_to_unlock)'
@@ -48,14 +48,14 @@
 			</div>
 			<div class="modal-footer">
 				<div class="btncon col-md-8 col-md-offset-4 pull-left">
-					{!! Form::button('trans('messages.buy')'
+					{!! Form::button(trans('messages.buy')
 						, array(
 							'class' => 'btn btn-blue btn-medium'
 							, 'ng-click' => 'profile.buyAvatarAccessory(profile.accessory_id, profile.points_to_unlock)'
 						)
 					) !!}
 
-					{!! Form::button('trans('messages.cancel_caps')'
+					{!! Form::button(trans('messages.cancel_caps')
 						, array(
 							'class' => 'btn btn-gold btn-medium'
 							, 'data-dismiss' => 'modal'

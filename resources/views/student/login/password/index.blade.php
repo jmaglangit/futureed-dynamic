@@ -26,21 +26,21 @@
 						{!! Form::text('username', ''
 							, array(
 								'class' => 'form-control'
-								, 'placeholder' => 'trans('messages.username_or_email')'
+								, 'placeholder' => trans('messages.username_or_email')
 								, 'autocomplete' => 'off'
 								, 'ng-model' => 'password.record.username'
 							)
 						) !!}
 					</div>
 					<div class="btn-container">
-						{!! Form::button('trans('messages.forgot_send')'
+						{!! Form::button(trans('messages.forgot_send')
 							, array(
 								  'class' => 'btn btn-maroon btn-medium'
 								, 'ng-click' => 'password.sendResetCode($event)'
 							)
 						) !!}
 
-						{!! Html::link(route('student.login'), 'trans('messages.cancel')'
+						{!! Html::link(route('student.login'), trans('messages.cancel')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 							)
@@ -95,7 +95,7 @@
 							{!! Form::text('reset_code', ''
 								, array(
 									'class' => 'form-control'
-									, 'placeholder' => 'trans('messages.client_reset_code ')'
+									, 'placeholder' => trans('messages.client_reset_code ')
 									, 'autocomplete' => 'off'
 									, 'ng-disabled' => 'password.password_set'
 									, 'ng-model' => 'password.record.reset_code'
@@ -103,7 +103,7 @@
 							) !!}
 						</div>
 						<div class="btn-container">
-							{!! Form::button('trans('messages.client_proceed ')'
+							{!! Form::button(trans('messages.client_proceed ')
 									, array(
 											  'class' => 'btn btn-maroon btn-medium'
 											, 'ng-if' => '!password.password_set'
@@ -111,7 +111,7 @@
 									)
 							) !!}
 
-							{!! Form::button('trans('messages.client_resend_code'
+							{!! Form::button(trans('messages.client_resend_code'
 									, array(
 											'class' => 'btn btn-gold btn-medium'
 											, 'ng-if' => '!password.password_set'

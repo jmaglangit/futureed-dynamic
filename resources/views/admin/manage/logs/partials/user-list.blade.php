@@ -15,7 +15,7 @@
 				<div class="col-xs-5">
 					{!! Form::text('page_accessed', ''
 						,array(
-							'placeholder' => 'trans('messages.admin_page_accessed')'
+							'placeholder' => trans('messages.admin_page_accessed')
 							, 'ng-model' => 'logs.search.page_accessed'
 							, 'class' => 'form-control btn-fit'
 						)
@@ -25,7 +25,7 @@
 				<div class="col-xs-5">
 					{!! Form::text('api_accessed', ''
 						,array(
-							'placeholder' => 'trans('messages.admin_api_accessed')'
+							'placeholder' => trans('messages.admin_api_accessed')
 							, 'ng-model' => 'logs.search.api_accessed'
 							, 'class' => 'form-control btn-fit'
 						)
@@ -33,7 +33,7 @@
 				</div>
 				
 				<div class="col-xs-2">
-					{!! Form::button('trans('messages.search')'
+					{!! Form::button(trans('messages.search')
 						,array(
 							'class' => 'btn btn-blue'
 							, 'ng-click' => 'logs.searchFnc($event)'
@@ -45,7 +45,7 @@
 				<div class="col-xs-5">
 					{!! Form::select('result_response'
 						, array(
-							'' =>'trans('messages.admin_response_code')'
+							'' =>trans('messages.admin_response_code')
 							, '200'=>'200'
 							, '201'=>'201'
 							, '404'=>'404'
@@ -64,7 +64,7 @@
 				<div class="col-xs-5">
 					{!! Form::select('user_type'
 						, array(
-							'' =>'trans('messages.admin_user_type')'
+							'' =>trans('messages.admin_user_type')
 							, 'Client'=>'Client'
 							, 'Student'=>'Student'
 						)
@@ -77,7 +77,7 @@
 				</div>
 				
 				<div class="col-xs-2">
-					{!! Form::button('trans('messages.clear')'
+					{!! Form::button(trans('messages.clear')
 						,array(
 							'class' => 'btn btn-gold'
 							, 'ng-click' => 'logs.clearFnc($event)'
@@ -89,7 +89,7 @@
 				<div class="col-xs-5">
 					{!! Form::text('search_module', ''
 						,array(
-							'placeholder' => 'trans('messages.username')'
+							'placeholder' => trans('messages.username')
 							, 'ng-model' => 'logs.search.username'
 							, 'class' => 'form-control btn-fit'
 						)
@@ -236,7 +236,7 @@
 				</div>
 				<div class="modal-footer">
 					<div class="btncon col-xs-8 col-xs-offset-4 pull-left">
-						{!! Form::button('trans('messages.close')'
+						{!! Form::button(trans('messages.close')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'data-dismiss' => 'modal'

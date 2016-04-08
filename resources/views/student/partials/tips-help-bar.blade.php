@@ -65,7 +65,7 @@
 							{!! Form::text('title', ''
 				                , array(
 				                    'class' => 'form-control sidebar-input'
-				                    , 'placeholder' => 'trans('messages.title')' 
+				                    , 'placeholder' => trans('messages.title')
 				                    , 'ng-model' => 'class.tips.title'
 				                    , 'autocomplete' => 'off')
 				            ) !!}
@@ -75,20 +75,20 @@
 							{!! Form::textarea('description', ''
 				                , array(
 				                    'class' => 'form-control sidebar-input disabled-textarea'
-				                    , 'placeholder' => 'trans('messages.description')' 
+				                    , 'placeholder' => trans('messages.description')
 				                    , 'ng-model' => 'class.tips.content'
 				                    , 'autocomplete' => 'off')
 				            ) !!}	
 						</div>
 						<div class="side-btn-container submit-btn-tips">
-							{!! Form::button('trans('messages.submit')'
+							{!! Form::button(trans('messages.submit')
 				                , array(
 				                  'id' => 'submit'
 				                  , 'class' => 'btn btn-blue side-btn'
 				                  , 'ng-click' => 'class.submitTips()'
 				                )
 				            ) !!}
-				            {!! Form::button('trans('messages.back')'
+				            {!! Form::button(trans('messages.back')
 				                , array(
 				                  'id' => 'back'
 				                  , 'class' => 'btn btn-maroon'
@@ -102,7 +102,7 @@
 			<div class="clearfix"></div>
 			<div class="side-btn-container row" ng-if="class.tips.success">
 				<div class="col-xs-6 btn-left">
-					{!! Form::button('trans('messages.add_more')'
+					{!! Form::button(trans('messages.add_more')
 		                , array(
 		                  'id' => 'validate_code_btn'
 		                  , 'class' => 'btn btn-blue'
@@ -111,7 +111,7 @@
 		            ) !!}
 				</div>
 				<div class="col-xs-6 btn-right">
-					{!! Form::button('trans('messages.back')'
+					{!! Form::button(trans('messages.back')
 		                , array(
 		                  'id' => 'validate_code_btn'
 		                  , 'class' => 'btn btn-maroon'
@@ -122,7 +122,7 @@
 			</div>
 			<div class="side-btn-container row" ng-if="!class.add_tips && !class.tips.success">
 				<div class="col-xs-6 btn-left">
-		            {!! Form::button('trans('messages.view_list')'
+		            {!! Form::button(trans('messages.view_list')
 		                , array(
 		                   'class' => 'btn btn-blue'
 		                   , 'ng-if' => 'class.tips.total'
@@ -131,7 +131,7 @@
 		            ) !!}
 				</div>
 				<div class="col-xs-6 btn-right">
-					{!! Form::button('trans('messages.add_tips')'
+					{!! Form::button(trans('messages.add_tips')
 		                , array(
 		                  'id' => 'validate_code_btn'
 		                  , 'class' => 'btn btn-maroon'
@@ -149,7 +149,7 @@
 	<div id="help_request_form" class="side-container">
 		<div class="side-btn-container row" ng-if="!class.add_help && !class.help.success">
 			<div class="col-xs-12 submit-btn-help">
-				{!! Form::button('trans('messages.my_help_requests')'
+				{!! Form::button(trans('messages.my_help_requests')
 	                , array(
 	                   'class' => 'btn btn-blue'
 	                   , 'ng-click' => "class.redirectHelp('', 'Own')"
@@ -202,7 +202,7 @@
 							{!! Form::text('title', ''
 				                , array(
 				                    'class' => 'form-control sidebar-input'
-				                    , 'placeholder' => 'trans('messages.title')' 
+				                    , 'placeholder' => trans('messages.title')
 				                    , 'ng-model' => 'class.help.title'
 				                    , 'autocomplete' => 'off')
 				            ) !!}
@@ -212,20 +212,20 @@
 								{!! Form::textarea('content', ''
 					                , array(
 					                    'class' => 'form-control sidebar-input disabled-textarea'
-					                    , 'placeholder' => 'trans('messages.description')' 
+					                    , 'placeholder' => trans('messages.description')
 					                    , 'ng-model' => 'class.help.content'
 					                    , 'autocomplete' => 'off')
 					            ) !!}
 						</div>
 						<div class="side-btn-container submit-btn-help">
-							{!! Form::button('trans('messages.submit')'
+							{!! Form::button(trans('messages.submit')
 				                , array(
 				                  'id' => 'validate_code_btn'
 				                  , 'class' => 'btn btn-blue side-btn'
 				                  , 'ng-click' => 'class.submitHelp()'
 				                )
 				            ) !!}
-				            {!! Form::button('trans('messages.back')'
+				            {!! Form::button(trans('messages.back')
 				                , array(
 				                  'id' => 'back'
 				                  , 'class' => 'btn btn-maroon'
@@ -239,7 +239,7 @@
 
 			<div class="side-btn-container row container-bottom" ng-if="!class.add_help && !class.help.success">
 				<div class="col-xs-6 btn-left">
-		            {!! Form::button('trans('messages.view_list')'
+		            {!! Form::button(trans('messages.view_list')
 		                , array(
 		                   'class' => 'btn btn-blue'
 		                   , 'ng-if' => 'class.help.total'
@@ -248,7 +248,7 @@
 		            ) !!}
 				</div>
 				<div class="col-xs-6 btn-right">
-					{!! Form::button('trans('messages.add_help')'
+					{!! Form::button(trans('messages.add_help')
 		                , array(
 		                  'id' => 'validate_code_btn'
 		                  , 'class' => 'btn btn-maroon'
@@ -259,7 +259,7 @@
 			</div>
 			<div class="side-btn-container row" ng-if="class.help.success">
 				<div class="col-xs-6 btn-left">
-					{!! Form::button('trans('messages.add_more')'
+					{!! Form::button(trans('messages.add_more')
 		                , array(
 		                  'id' => 'validate_code_btn'
 		                  , 'class' => 'btn btn-blue'
@@ -268,7 +268,7 @@
 		            ) !!}
 				</div>
 				<div class="col-xs-6 btn-right">
-					{!! Form::button('trans('messages.back')'
+					{!! Form::button(trans('messages.back')
 		                , array(
 		                  'id' => 'validate_code_btn'
 		                  , 'class' => 'btn btn-maroon'

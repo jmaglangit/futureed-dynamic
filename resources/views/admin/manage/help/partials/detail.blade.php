@@ -27,7 +27,7 @@
 						<div class="col-xs-4">
 							{!! Form::text('username', '',
 								[
-									'placeholder' => 'trans('messages.module')',
+									'placeholder' => trans('messages.module'),
 									'ng-disabled' => 'true',
 									'ng-model' => 'help.record.module',
 									'class' => 'form-control'
@@ -39,10 +39,10 @@
 					<div class="col-xs-4">
 						{!! Form::select('link_type'
 							, array(
-								'' => 'trans('messages.admin_select_type')'
-								, 'General' => 'trans('messages.general')'
-								, 'Content' => 'trans('messages.content')'
-								, 'Question' => 'trans('messages.question')'
+								'' => trans('messages.admin_select_type')
+								, 'General' => trans('messages.general')
+								, 'Content' => trans('messages.content')
+								, 'Question' => trans('messages.question')
 							)
 							, ''
 							, array(
@@ -59,7 +59,7 @@
 					<div class="col-xs-4">
 						{!! Form::text('subject', '',
 							[
-								'placeholder' => 'trans('messages.subject')',
+								'placeholder' => trans('messages.subject'),
 								'ng-disabled' => 'true',
 								'ng-model' => 'help.record.subject',
 								'class' => 'form-control'
@@ -70,7 +70,7 @@
 					<div class="col-xs-4">
 						{!! Form::text('area', '',
 							[
-								'placeholder' => 'trans('messages.area')',
+								'placeholder' => trans('messages.area'),
 								'ng-disabled' => 'true',
 								'ng-model' => 'help.record.area',
 								'class' => 'form-control'
@@ -145,14 +145,14 @@
 	        	</div>
 	        	<div class="form-group" ng-if="help.record.request_status == 'Pending' && help.active_view">
 	        		<div class="btn-container col-xs-8 col-xs-offset-2">
-						{!! Form::button('trans('messages.accept')'
+						{!! Form::button(trans('messages.accept')
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-click' => "help.acceptHelp()"
 							)
 						) !!}
 
-						{!! Form::button('trans('messages.reject')'
+						{!! Form::button(trans('messages.reject')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'ng-click' => "help.rejectHelp()"
@@ -173,7 +173,7 @@
 								'class' => 'form-control',
 								'ng-disabled' => 'help.active_view',
 								'ng-model' => 'help.record.title',
-								'placeholder' => 'trans('messages.title')'
+								'placeholder' => trans('messages.title')
 								, 'ng-class' => "{ 'required-field' : help.fields['title'] }"
 							]
 						) !!}
@@ -187,7 +187,7 @@
 								'class' => 'form-control disabled-textarea',
 								'ng-disabled' => 'help.active_view',
 								'ng-model' => 'help.record.content',
-								'placeholder' => 'trans('messages.description')'
+								'placeholder' => trans('messages.description')
 								, 'ng-class' => "{ 'required-field' : help.fields['content'] }"
 							]
 						) !!}
@@ -201,21 +201,21 @@
 								'class' => 'form-control',
 								'ng-disabled' => 'true',
 								'ng-model' => 'help.record.name',
-								'placeholder' => 'trans('messages.created_by')'
+								'placeholder' => trans('messages.created_by')
 							]
 						) !!}
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="btn-container col-xs-8 col-xs-offset-2" ng-if="help.active_edit">
-							{!! Form::button('trans('messages.save')'
+							{!! Form::button(trans('messages.save')
 								, array(
 									'class' => 'btn btn-blue btn-medium'
 									, 'ng-click' => "help.updateHelp()"
 								)
 							) !!}
 
-							{!! Form::button('trans('messages.cancel')'
+							{!! Form::button(trans('messages.cancel')
 								, array(
 									'class' => 'btn btn-gold btn-medium'
 									, 'ng-click' => "help.setActive(futureed.ACTIVE_VIEW, help.record.id)"
@@ -223,14 +223,14 @@
 							) !!}
 					</div>	
 					<div class="btn-container col-xs-8 col-xs-offset-2" ng-if="help.active_view">
-							{!! Form::button('trans('messages.edit')'
+							{!! Form::button(trans('messages.edit')
 								, array(
 									'class' => 'btn btn-blue btn-medium'
 									, 'ng-click' => "help.setActive(futureed.ACTIVE_EDIT, help.record.id)"
 								)
 							) !!}
 
-							{!! Form::button('trans('messages.cancel')'
+							{!! Form::button(trans('messages.cancel')
 								, array(
 									'class' => 'btn btn-gold btn-medium'
 									, 'ng-click' => "help.setActive()"

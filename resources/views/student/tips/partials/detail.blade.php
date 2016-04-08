@@ -58,7 +58,7 @@
 		<div class="col-xs-12" ng-cloak>
 			<div class="col-xs-6"></div>
 			<div class="col-xs-6">
-					{!! Form::button('trans('messages.rate')'
+					{!! Form::button(trans('messages.rate')
 						, array(
 							'class' => 'btn btn-blue pull-right'
 							, 'ng-click' => "tips.selectRate()"
@@ -67,7 +67,7 @@
 						)
 					) !!}
 
-					{!! Form::button('trans('messages.cancel')'
+					{!! Form::button(trans('messages.cancel')
 						, array(
 							'class' => 'btn btn-gold btn-medium pull-right'
 							, 'ng-click' => "tips.setActive()"

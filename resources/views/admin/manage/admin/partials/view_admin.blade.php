@@ -36,7 +36,7 @@
 				<div class="col-xs-4">
 					{!! Form::text('username', '',
 						[
-							'placeholder' => 'trans('messages.username')'
+							'placeholder' => trans('messages.username')
 							, 'ng-disabled' => 'admin.active_view'
 							, 'ng-model' => 'admin.record.username'
 							, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
@@ -58,7 +58,7 @@
 					<div class="input-group">
 						{!! Form::text('email', '',
 							[
-								'placeholder' => 'trans('messages.email')',
+								'placeholder' => trans('messages.email'),
 								'ng-model' => 'admin.record.email',
 								'ng-disabled' => 'true',
 								'class' => 'form-control'
@@ -74,7 +74,7 @@
 				<div class="col-xs-4">
 					{!! Form::select('role',
 						[
-							'' => 'trans('messages.select_role')',
+							'' => trans('messages.select_role'),
 							'Admin' => 'Admin',
 							'Super Admin' => 'Super Admin'
 						],'{! admin.record.admin_role !}',
@@ -144,7 +144,7 @@
 							, 'ng-disabled' => 'admin.active_view'
 							, 'ng-model' => 'admin.record.first_name'
 							, 'ng-class' => "{ 'required-field' : admin.fields['first_name'] }"
-							, 'placeholder' => 'trans('messages.first_name')'
+							, 'placeholder' => trans('messages.first_name')
 						]
 					) !!}
 				</div>
@@ -158,7 +158,7 @@
 							, 'ng-disabled' => 'admin.active_view'
 							, 'ng-model' => 'admin.record.last_name'
 							, 'ng-class' => "{ 'required-field' : admin.fields['last_name'] }"
-							, 'placeholder' => 'trans('messages.last_name')'
+							, 'placeholder' => trans('messages.last_name')
 						]
 					) !!}
 				</div>
@@ -169,7 +169,7 @@
 				<div class="btn-container col-xs-6 col-xs-offset-2" ng-if="admin.active_edit">
 					<div class="row form-group">		
 						<div class="col-xs-6">
-							{!! Form::button('trans('messages.save')'
+							{!! Form::button(trans('messages.save')
 								, array(
 									'class' => 'btn btn-blue'
 									, 'ng-click' => "admin.updateAdmin()"
@@ -177,7 +177,7 @@
 							) !!}
 						</div>
 						<div class="col-xs-6">
-							{!! Form::button('trans('messages.cancel')'
+							{!! Form::button(trans('messages.cancel')
 								, array(
 									'class' => 'btn btn-gold'
 									, 'ng-click' => "admin.setActive(futureed.ACTIVE_VIEW, admin.record.id)"
@@ -188,7 +188,7 @@
 
 					<div class="row form-group">
 						<div class="col-xs-12">
-							{!! Form::button('trans('messages.reset_password')'
+							{!! Form::button(trans('messages.reset_password')
 								, array(
 									'class' => 'btn btn-blue'
 									, 'ng-click' => "admin.setActive('pass')"
@@ -199,14 +199,14 @@
 				</div>	
 				
 				<div class="btn-container col-xs-8 col-xs-offset-1" ng-if="admin.active_view">
-					{!! Form::button('trans('messages.edit')'
+					{!! Form::button(trans('messages.edit')
 						, array(
 							'class' => 'btn btn-blue btn-medium'
 							, 'ng-click' => "admin.setActive(futureed.ACTIVE_EDIT, admin.record.id)"
 						)
 					) !!}
 
-					{!! Form::button('trans('messages.cancel')'
+					{!! Form::button(trans('messages.cancel')
 						, array(
 							'class' => 'btn btn-gold btn-medium'
 							, 'ng-click' => "admin.setActive()"

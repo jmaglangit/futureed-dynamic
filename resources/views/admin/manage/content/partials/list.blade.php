@@ -27,7 +27,7 @@
 				<div class="col-xs-4">
 					{!! Form::text('search_teaching_module', ''
 						,array(
-							'placeholder' => 'trans('messages.admin_teaching_module_name')'
+							'placeholder' => trans('messages.admin_teaching_module_name')
 							, 'ng-model' => 'content.search.teaching_module'
 							, 'class' => 'form-control'
 						)
@@ -42,7 +42,7 @@
 				</div>
 				
 				<div class="col-xs-2">
-					{!! Form::button('trans('messages.search')'
+					{!! Form::button(trans('messages.search')
 						,array(
 							'class' => 'btn btn-blue'
 							, 'ng-click' => 'content.searchFnc($event)'
@@ -51,7 +51,7 @@
 				</div>
 
 				<div class="col-xs-2">
-					{!! Form::button('trans('messages.clear')'
+					{!! Form::button(trans('messages.clear')
 						,array(
 							'class' => 'btn btn-gold'
 							, 'ng-click' => 'content.clearFnc($event)'

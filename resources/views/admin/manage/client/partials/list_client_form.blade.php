@@ -35,7 +35,7 @@
 				<div class="col-xs-5">
 					{!! Form::text('search_name', ''
 						,array(
-							'placeholder' => 'trans('messages.name')'
+							'placeholder' => trans('messages.name')
 							, 'ng-model' => 'client.search.name'
 							, 'class' => 'form-control'
 							)
@@ -44,14 +44,14 @@
 				<div class="col-xs-5">
 					{!! Form::text('search_email', ''
 						,array(
-							'placeholder' => 'trans('messages.email_address')'
+							'placeholder' => trans('messages.email_address')
 							, 'ng-model' => 'client.search.email'
 							, 'class' => 'form-control'
 							)
 					)!!}
 				</div>
 				<div class="col-xs-2">
-					{!! Form::button('trans('messages.search')'
+					{!! Form::button(trans('messages.search')
 						,array(
 							'class' => 'btn btn-blue'
 							, 'ng-click' => 'client.searchFnc($event)'
@@ -64,7 +64,7 @@
 				<div class="col-xs-5">
 					{!! Form::text('search_school', ''
 						,array(
-							'placeholder' => 'trans('messages.school')'
+							'placeholder' => trans('messages.school')
 							, 'ng-model' => 'client.search.school'
 							, 'class' => 'form-control'
 							)
@@ -73,21 +73,21 @@
 				<div class="col-xs-5">
 					{!! Form::select('search_role'
 						, array(
-							'' => 'trans('messages.select_role')'
+							'' => trans('messages.select_role')
 							, 'Parent' => 'Parent'
 							, 'Teacher' => 'Teacher'
 							, 'Principal' => 'Principal'
 						)
 						, null
 						, array(
-							'placeholder' => 'trans('messages.email_address')'
+							'placeholder' => trans('messages.email_address')
 							, 'ng-model' => 'client.search.client_role'
 							, 'class' => 'form-control'
 						)
 					)!!}
 				</div>
 				<div class="col-xs-2">
-					{!! Form::button('trans('messages.clear')'
+					{!! Form::button(trans('messages.clear')
 						,array(
 							'class' => 'btn btn-gold'
 							, 'ng-click' => 'client.clearFnc()'

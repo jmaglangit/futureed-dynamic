@@ -279,7 +279,7 @@ return [
 	'price' => 'Price',
 	'print' => 'Print',
 	'profile' => 'Profile',
-	'proceed_to_dashboard' => 'Proceed to Dashboard'
+	'proceed_to_dashboard' => 'Proceed to Dashboard',
 	'proceed_to_questions' => 'Proceed to Questions',
 	'proceed_to_next_questions' => 'Proceed to next Question',
 	'progress' => 'Progress',
@@ -345,7 +345,7 @@ return [
 	'select_subject' => '-- Select Subject --',
 	'select_subscription' => '-- Select Subscription --',
 	'select_pic_new_pic_password' => 'Select a picture for your new picture password',
-	'select_pic_confirm_pic_password' => 'Select a picture to confirm your new picture password'
+	'select_pic_confirm_pic_password' => 'Select a picture to confirm your new picture password',
 	'sequence_number' => 'Sequence Number',
 	'sequence_no' => 'Sequence No',
 	'set_new_password' => 'Set New Password',
@@ -502,7 +502,7 @@ return [
 	
 	//resources/views/admin/manage/client/partials/delete_client_form.blade.php
 	'admin_delete_client' => 'Delete Client',
-	'admin_delete_confirm_msg' = 'Are you sure you want to delete this account?',
+	'admin_delete_confirm_msg' => 'Are you sure you want to delete this account?',
 	
 	//resources/views/admin/manage/client/partials/import_client_form.blade.php	
 	'admin_records_not_inserted' => 'Records Not Inserted',
@@ -868,7 +868,7 @@ return [
 	//resources/views/client/login/terms-and-conditions.blade.php
 	'tc_msg' => 'FUTUREED PTE LTD CLIENT TERMS AND CONDITIONS',
 	
-	'tc_msg2' => 'Thank you for choosing Futureed Pte Ltd for your assessment needs.<br/>We intend to provide provide you with a best-in-industry products that are of high quality, price competitive, psychometrically sound and in a technically reliable manner.<br/>To achieve that goal, we need to make certain legal declarations to ensure that our Service is being used in a reasonable, safe, and legal way.<br/>These Terms may be updated from time to time. Notice of modifications to these Terms will appear on this page.'
+	'tc_msg2' => 'Thank you for choosing Futureed Pte Ltd for your assessment needs.<br/>We intend to provide provide you with a best-in-industry products that are of high quality, price competitive, psychometrically sound and in a technically reliable manner.<br/>To achieve that goal, we need to make certain legal declarations to ensure that our Service is being used in a reasonable, safe, and legal way.<br/>These Terms may be updated from time to time. Notice of modifications to these Terms will appear on this page.',
 	
 	'tc_msg3' => 'Introduction',
 	

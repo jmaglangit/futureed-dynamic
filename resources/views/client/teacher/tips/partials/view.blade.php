@@ -29,7 +29,7 @@
 								'ng-disabled'=>'true'
 								, 'class' => 'form-control'
 								, 'ng-model' => 'tips.record.subject'
-								, 'placeholder' => 'trans('messages.subject')'
+								, 'placeholder' => trans('messages.subject')
 							)
 						) !!}
 					</div>
@@ -42,7 +42,7 @@
 								'ng-disabled'=>'true'
 								, 'class' => 'form-control'
 								, 'ng-model' => 'tips.record.subject_area'
-								, 'placeholder' => 'trans('messages.subject_area')'
+								, 'placeholder' => trans('messages.subject_area')
 							)
 						) !!}
 					</div>
@@ -55,7 +55,7 @@
 								'ng-disabled'=>'true'
 								, 'class' => 'form-control'
 								, 'ng-model' => 'tips.record.module'
-								, 'placeholder' => 'trans('messages.module')'
+								, 'placeholder' => trans('messages.module')
 							)
 						) !!}
 					</div>
@@ -70,7 +70,7 @@
 								, 'class' => 'form-control'
 								, 'ng-class' => "{ 'required-field' : tips.fields['title'] }"
 								, 'ng-model' => 'tips.record.title'
-								, 'placeholder' => 'trans('messages.title')'
+								, 'placeholder' => trans('messages.title')
 							)
 						) !!}
 					</div>
@@ -84,7 +84,7 @@
 								, 'class' => 'form-control disabled-textarea'
 								, 'ng-class' => "{ 'required-field' : tips.fields['content'] }"
 								, 'ng-model' => 'tips.record.content'
-								, 'placeholder' => 'trans('messages.description')'
+								, 'placeholder' => trans('messages.description')
 							)
 						) !!}
 					</div>
@@ -105,7 +105,7 @@
 								'ng-disabled'=>'true'
 								, 'class' => 'form-control'
 								, 'ng-model' => 'tips.record.created_by'
-								, 'placeholder' => 'trans('messages.created_by')'
+								, 'placeholder' => trans('messages.created_by')
 							)
 						) !!}
 					</div>
@@ -113,13 +113,13 @@
 
 				<div class="form-group" ng-if="tips.active_view && tips.record.tip_status == futureed.PENDING">
 					<div class="btn-container col-xs-8 col-xs-offset-1">
-						{!! Form::button('trans('messages.approve')'
+						{!! Form::button(trans('messages.approve')
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-click' => "tips.rateTip()"
 							)
 						) !!}
-						{!! Form::button('trans('messages.reject')'
+						{!! Form::button(trans('messages.reject')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'ng-click' => "tips.updateStatus(tips.record.id, futureed.FALSE)"
@@ -130,13 +130,13 @@
 
 				<div class="form-group" ng-if="tips.active_view">
 					<div class="btn-container col-xs-8 col-xs-offset-1">
-						{!! Form::button('trans('messages.edit')'
+						{!! Form::button(trans('messages.edit')
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-click' => "tips.setActive(futureed.ACTIVE_EDIT, tips.record.id)"
 							)
 						) !!}
-						{!! Form::button('trans('messages.cancel')'
+						{!! Form::button(trans('messages.cancel')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'ng-click' => "tips.setActive(futureed.ACTIVE_LIST)"
@@ -147,13 +147,13 @@
 
 				<div class="form-group" ng-if="tips.active_edit">
 					<div class="btn-container col-xs-8 col-xs-offset-1">
-						{!! Form::button('trans('messages.save')'
+						{!! Form::button(trans('messages.save')
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-click' => "tips.update()"
 							)
 						) !!}
-						{!! Form::button('trans('messages.cancel')'
+						{!! Form::button(trans('messages.cancel')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'ng-click' => "tips.setActive(futureed.ACTIVE_VIEW, tips.record.id)"
@@ -180,7 +180,7 @@
 			        </div>
                     {!! Form::select('rate'
 						, array(
-							'' => 'trans('messages.select_rate')'
+							'' => trans('messages.select_rate')
 							, '1' => '1'
 							, '2' => '2'
 							, '3' => '3'
@@ -196,13 +196,13 @@
                 </div>
                 <div class="modal-footer">
                     <div class="btncon col-md-8 col-md-offset-4 pull-left">
-                        {!! Form::button('trans('messages.accept')'
+                        {!! Form::button(trans('messages.accept')
                             , array(
                                 'class' => 'btn btn-blue btn-medium'
                                 , 'ng-click' => 'tips.updateStatus(tips.record.id, futureed.TRUE)'
                             )
                         ) !!}
-                        {!! Form::button('trans('messages.cancel')'
+                        {!! Form::button(trans('messages.cancel')
                             , array(
                                 'class' => 'btn btn-gold btn-medium'
                                 , 'data-dismiss' => 'modal'

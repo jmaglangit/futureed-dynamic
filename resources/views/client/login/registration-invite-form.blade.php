@@ -31,7 +31,7 @@
 
             <div class="col-xs-12" ng-if="login.record.invited">
                 <div class="btn-container">
-                    {!! Html::link(route('client.registration'), 'trans('messages.client_register_new_account')'
+                    {!! Html::link(route('client.registration'), trans('messages.client_register_new_account')
                         , array(
                             'class' => 'btn btn-blue btn-medium'
                         )
@@ -49,7 +49,7 @@
                             {!! Form::text('email', ''
                                 , array(
                                     'class' => 'form-control'
-                                    , 'placeholder' => 'trans('messages.email_address')'
+                                    , 'placeholder' => trans('messages.email_address')
                                     , 'autocomplete' => 'off'
                                     , 'ng-model' => 'login.record.email'
                                     , 'ng-class' => "{ 'required-field' : login.fields['email'] }"
@@ -70,7 +70,7 @@
                             {!! Form::text('username', ''
                                 , array(
                                     'class' => 'form-control'
-                                    , 'placeholder' => 'trans('messages.username')'
+                                    , 'placeholder' => trans('messages.username')
                                     , 'autocomplete' => 'off'
                                     , 'ng-model' => 'login.record.username'
                                     , 'ng-class' => "{ 'required-field' : login.fields['username'] }"
@@ -93,7 +93,7 @@
                             {!! Form::password('password'
                                 , array(
                                     'class' => 'form-control'
-                                    , 'placeholder' => 'trans('messages.password')'
+                                    , 'placeholder' => trans('messages.password')
                                     , 'ng-class' => "{ 'required-field' : login.fields['password'] }"
                                     , 'ng-model' => 'login.record.password'
                                 )
@@ -105,7 +105,7 @@
                             {!! Form::password('confirm_password'
                                 , array(
                                     'class' => 'form-control'
-                                    , 'placeholder' => 'trans('messages.confirm_password')'
+                                    , 'placeholder' => trans('messages.confirm_password')
                                     , 'ng-class' => "{ 'required-field' : login.fields['password'] }"
                                     , 'ng-model' => 'login.record.confirm_password'
                                 )
@@ -122,7 +122,7 @@
                         {!! Form::text('first_name', ''
                             , array(
                                 'class' => 'form-control'
-                                , 'placeholder' => 'trans('messages.first_name')'
+                                , 'placeholder' => trans('messages.first_name')
                                 , 'ng-class' => "{ 'required-field' : login.fields['first_name'] }"
                                 , 'ng-model' => 'login.record.first_name'
                             )
@@ -134,7 +134,7 @@
                         {!! Form::text('last_name', ''
                             , array(
                                 'class' => 'form-control'
-                                , 'placeholder' => 'trans('messages.last_name')'
+                                , 'placeholder' => trans('messages.last_name')
                                 , 'ng-class' => "{ 'required-field' : login.fields['last_name'] }"
                                 , 'ng-model' => 'login.record.last_name'
                             )
@@ -148,7 +148,7 @@
                         {!! Form::text('street_address', ''
                             , array(
                                 'class' => 'form-control'
-                                , 'placeholder' => 'trans('messages.street_address')'
+                                , 'placeholder' => trans('messages.street_address')
                                 , 'ng-class' => "{ 'required-field' : login.fields['street_address'] }"
                                 , 'ng-model' => 'login.record.street_address'
                             )
@@ -162,7 +162,7 @@
                         {!! Form::text('city', ''
                             , array(
                                 'class' => 'form-control'
-                                , 'placeholder' => 'trans('messages.city')'
+                                , 'placeholder' => trans('messages.city')
                                 , 'ng-class' => "{ 'required-field' : login.fields['city'] }"
                                 , 'ng-model' => 'login.record.city'
                             )
@@ -174,7 +174,7 @@
                         {!! Form::text('state', ''
                             , array(
                                 'class' => 'form-control'
-                                , 'placeholder' => 'trans('messages.state')'
+                                , 'placeholder' => trans('messages.state')
                                 , 'ng-class' => "{ 'required-field' : login.fields['state'] }"
                                 , 'ng-model' => 'login.record.state'
                             )
@@ -188,7 +188,7 @@
                         {!! Form::text('zip', ''
                             , array(
                                 'class' => 'form-control'
-                                , 'placeholder' => 'trans('messages.postal_code')'
+                                , 'placeholder' => trans('messages.postal_code')
                                 , 'ng-class' => "{ 'required-field' : login.fields['zip'] }"
                                 , 'ng-model' => 'login.record.zip'
                             )
@@ -214,7 +214,7 @@
                             {!! Form::text('school_name', ''
                                 , array(
                                     'class' => 'form-control'
-                                    , 'placeholder' => 'trans('messages.school_name')'
+                                    , 'placeholder' => trans('messages.school_name')
                                     , 'ng-disabled' => 'true'
                                     , 'ng-class' => "{ 'required-field' : login.fields['school_id'] }" 
                                     , 'ng-model' => 'login.record.school_name'
@@ -237,14 +237,14 @@
                     </div>
 
                     <div class="btn-container col-sm-6 col-sm-offset-3">
-                        {!! Form::button('trans('messages.register')'
+                        {!! Form::button(trans('messages.register')
                             , array(
                                 'class' => 'btn btn-blue btn-medium'
                                 , 'ng-click' => 'login.updateClientRegistration()'
                             )
                         ) !!}
 
-                        {!! Html::link(route('client.login'), 'trans('messages.cancel')'
+                        {!! Html::link(route('client.login'), trans('messages.cancel')
                             , array(
                                 'class' => 'btn btn-gold btn-medium'
                             )

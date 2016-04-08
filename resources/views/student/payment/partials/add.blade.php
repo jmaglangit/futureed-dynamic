@@ -103,7 +103,7 @@
 										'ng-disabled' => true
 										, 'class' => 'form-control'
 										, 'ng-model' => 'payment.invoice.discount'
-										, 'placeholder' => 'trans('messages.discount')'
+										, 'placeholder' => trans('messages.discount')
 									]
 								) !!}
 								<span class="input-group-addon" id="basic-addon1">%</span>
@@ -127,19 +127,19 @@
 
 			<div class="col-xs-12 margin-10-top">
 				<div class="btn-container">
-					{!! Form::button('trans('messages.delete_subscription')'
+					{!! Form::button(trans('messages.delete_subscription')
 						, array(
 							'class' => 'btn btn-gold btn-small pull-right'
 							, 'ng-click' => "payment.setActive()"
 						)
 					) !!}
-					{!! Form::button('trans('messages.save_subscription')'
+					{!! Form::button(trans('messages.save_subscription')
 						, array(
 							'class' => 'btn btn-blue btn-small pull-right'
 							, 'ng-click' => "payment.saveSubscription()"
 						)
 					) !!}
-					{!! Form::button('trans('messages.pay_subscription')'
+					{!! Form::button(trans('messages.pay_subscription')
 						, array(
 							'class' => 'btn btn-blue btn-small pull-right'
 							, 'ng-click' => "payment.paySubscription()"
@@ -194,7 +194,7 @@
         </div>
         <div class="modal-footer">
         	<div class="btncon col-md-8 col-md-offset-4 pull-left">
-                {!! Form::button('trans('messages.yes')'
+                {!! Form::button(trans('messages.yes')
                     , array(
                         'class' => 'btn btn-blue btn-medium'
                         , 'ng-click' => "payment.removeStudent('add')"
@@ -202,7 +202,7 @@
                     )
                 ) !!}
 
-                {!! Form::button('trans('messages.no')'
+                {!! Form::button(trans('messages.no')
                     , array(
                         'class' => 'btn btn-gold btn-medium'
                         , 'data-dismiss' => 'modal'

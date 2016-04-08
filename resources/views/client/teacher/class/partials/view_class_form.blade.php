@@ -34,7 +34,7 @@
 								'ng-disabled'=>'class.active_view'
 								, 'class' => 'form-control'
 								, 'ng-model' => 'class.record.name'
-								, 'placeholder' => 'trans('messages.class_name')'
+								, 'placeholder' => trans('messages.class_name')
 							)
 						) !!}
 
@@ -52,7 +52,7 @@
 							'ng-disabled'=>'true'
 							, 'class' => 'form-control'
 							, 'ng-model' => 'class.record.subject.name'
-							, 'placeholder' => 'trans('messages.subject')'
+							, 'placeholder' => trans('messages.subject')
 						)
 					) !!}
 				</div>
@@ -65,7 +65,7 @@
 							'ng-disabled'=>'true'
 							, 'class' => 'form-control'
 							, 'ng-model' => 'class.record.grade.name'
-							, 'placeholder' => 'trans('messages.grade')'
+							, 'placeholder' => trans('messages.grade')
 						)
 					) !!}
 				</div>
@@ -73,7 +73,7 @@
 		{!! Form::close() !!}
 
 		<div class="btn-container col-xs-5 col-xs-offset-3 margin-10-top" ng-if="class.active_view">
-			{!! Form::button('trans('messages.view_list')'
+			{!! Form::button(trans('messages.view_list')
 				, array(
 					'class' => 'btn btn-gold btn-large'
 					, 'ng-click' => "class.setActive('list')"
@@ -82,14 +82,14 @@
 		</div>
 
 		<div class="btn-container col-xs-5 col-xs-offset-3 margin-10-top" ng-if="class.active_edit">
-			{!! Form::button('trans('messages.save')'
+			{!! Form::button(trans('messages.save')
 				, array(
 					'class' => 'btn btn-blue btn-medium'
 					, 'ng-click' => 'class.update()'
 				)
 			) !!}
 
-			{!! Form::button('trans('messages.cancel')'
+			{!! Form::button(trans('messages.cancel')
 				, array(
 					'class' => 'btn btn-gold btn-medium'
 					, 'ng-click' => "class.setActive('view')"
@@ -117,7 +117,7 @@
 							, array(
 								'class' => 'form-control'
 								, 'ng-model' => 'class.search.name'
-								, 'placeholder' => 'trans('messages.name')'
+								, 'placeholder' => trans('messages.name')
 							)
 						) !!}
 					</div>
@@ -126,12 +126,12 @@
 							, array(
 								'class' => 'form-control'
 								, 'ng-model' => 'class.search.email'
-								, 'placeholder' => 'trans('messages.email')'
+								, 'placeholder' => trans('messages.email')
 							)
 						) !!}
 					</div>
 					<div class="col-xs-2">
-						{!! Form::button('trans('messages.search')'
+						{!! Form::button(trans('messages.search')
 							, array(
 								'class' => 'btn btn-blue'
 								, 'ng-click' => 'class.searchFnc($event)'
@@ -139,7 +139,7 @@
 						) !!}
 					</div>
 					<div class="col-xs-2">
-						{!! Form::button('trans('messages.clear')'
+						{!! Form::button(trans('messages.clear')
 							, array(
 								'class' => 'btn btn-gold'
 								, 'ng-click' => 'class.clear()'
@@ -243,14 +243,14 @@
 	        </div>
 	        <div class="modal-footer">
 	        	<div class="btncon col-md-8 col-md-offset-4 pull-left">
-	                {!! Form::button('trans('messages.delete')'
+	                {!! Form::button(trans('messages.delete')
 	                    , array(
 	                        'class' => 'btn btn-blue btn-medium'
 	                        , 'ng-click' => 'class.deleteStudent(class.delete_student_id)'
 	                    )
 	                ) !!}
 
-	                {!! Form::button('trans('messages.cancel')'
+	                {!! Form::button(trans('messages.cancel')
 	                    , array(
 	                        'class' => 'btn btn-gold btn-medium'
 	                        , 'data-dismiss' => 'modal'

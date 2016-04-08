@@ -23,7 +23,7 @@
 			</div>
 		
 			<div class="btn-container">
-				{!! Html::link(route('student.payment.index'), 'trans('messages.view_payment_list')'
+				{!! Html::link(route('student.payment.index'), trans('messages.view_payment_list')
 					, array(
 						'class' => 'btn btn-blue btn-medium'
 					)

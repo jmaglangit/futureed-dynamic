@@ -6,7 +6,7 @@
     		{!! Form::password('password'
     			, array(
         			'class' => 'form-control'
-        			, 'placeholder' => 'trans('messages.current_password')'
+        			, 'placeholder' => trans('messages.current_password')
         			, 'ng-model' => 'profile.change.password')
         		)!!}
         </div>		
@@ -17,7 +17,7 @@
     		{!! Form::password('new_password'
     			, array(
         			'class' => 'form-control'
-        			, 'placeholder' => 'trans('messages.new_password')'
+        			, 'placeholder' => trans('messages.new_password')
         			, 'ng-model' => 'profile.change.new_password'
         			, 'ng-model-option' => "{debounce: {'default' : 10000} }") 
         		)!!}
@@ -30,21 +30,21 @@
     		{!! Form::password('confirm_password'
     			, array(
         			'class' => 'form-control'
-        			, 'placeholder' => 'trans('messages.confirm_password')'
+        			, 'placeholder' => trans('messages.confirm_password')
         			, 'ng-model' => 'profile.change.confirm_password'
         			, 'ng-model-option' => "{debounce: {'default' : 10000} }") 
         		)!!}
         </div>		
 	</div>
 	<div class="btn-container">
-		{!! Form::button('trans('messages.save')'
+		{!! Form::button(trans('messages.save')
             , array(
                 'class' => 'btn btn-blue btn-medium'
                 , 'ng-click' => "profile.changeClientPassword()"
             )
         ) !!}
 
-        {!! Form::button('trans('messages.cancel')'
+        {!! Form::button(trans('messages.cancel')
             , array(
                 'class' => 'btn btn-gold btn-medium'
                 , 'ng-click' => "profile.setClientProfileActive('index')"
@@ -59,7 +59,7 @@
 	</div>
 
 	<div class="btn-container">
-        {!! Form::button('trans('messages.view_profile') !!}'
+        {!! Form::button(trans('messages.view_profile') !!}'
             , array(
                 'class' => 'btn btn-blue btn-medium'
                 , 'ng-click' => "profile.setClientProfileActive('index')"

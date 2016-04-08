@@ -28,7 +28,7 @@
 	        		<div class="col-xs-5">
 	        			{!! Form::text('username',''
 	        				, array(
-	        					'placeHolder' => 'trans('messages.username')'
+	        					'placeHolder' => trans('messages.username')
 	        					, 'ng-model' => 'client.record.username'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['username'] }"
 	        					, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
@@ -48,7 +48,7 @@
 	        		<div class="col-xs-5">
 	        			{!! Form::text('email',''
 	        				, array(
-	        					'placeHolder' => 'trans('messages.email')'
+	        					'placeHolder' => trans('messages.email')
 	        					, 'ng-model' => 'client.record.email'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['email'] }"
 	        					, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
@@ -106,7 +106,7 @@
 	        		<div class="col-xs-5">
 	        			{!! Form::text('first_name',''
 	        				, array(
-	        					'placeHolder' => 'trans('messages.first_name')'
+	        					'placeHolder' => trans('messages.first_name')
 	        					, 'ng-model' => 'client.record.first_name'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['first_name'] }"
 	        					, 'class' => 'form-control'
@@ -119,7 +119,7 @@
 	        		<div class="col-xs-5">
 	        			{!! Form::text('last_name',''
 	        				, array(
-	        					'placeHolder' => 'trans('messages.last_name')'
+	        					'placeHolder' => trans('messages.last_name')
 	        					, 'ng-model' => 'client.record.last_name'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['last_name'] }"
 	        					, 'class' => 'form-control'
@@ -132,7 +132,7 @@
 	        		<div class="col-xs-5">
 	        			{!! Form::select('client_role'
 	        				, [	
-	        					'' => 'trans('messages.select_role')',
+	        					'' => trans('messages.select_role'),
 	            				'Principal' => 'Principal', 
 	            				'Teacher' => 'Teacher', 
 	            				'Parent' => 'Parent'
@@ -157,7 +157,7 @@
 	        		<div class="col-xs-6">
 	        			{!! Form::text('school_name',''
 	        				, array(
-	        					'placeHolder' => 'trans('messages.school_name')'
+	        					'placeHolder' => trans('messages.school_name')
 	        					, 'ng-model' => 'client.record.school_name'
 	        					, 'ng-change' => "client.searchSchool('record')"
 	        					, 'ng-class' => "{ 'required-field' : client.fields['school_name'] }"
@@ -188,7 +188,7 @@
 	        		<div class="col-xs-6">
 	        			{!! Form::text('school_name',''
 	        				, array(
-	        					'placeHolder' => 'trans('messages.school_name')'
+	        					'placeHolder' => trans('messages.school_name')
 	        					, 'ng-model' => 'client.record.school_name'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['school_name'] }"
 	        					, 'class' => 'form-control'
@@ -201,7 +201,7 @@
 	        		<div class="col-xs-6">
 	        			{!! Form::text('school_address',''
 	        				, array(
-	        					'placeHolder' => 'trans('messages.school_address')'
+	        					'placeHolder' => trans('messages.school_address')
 	        					, 'ng-model' => 'client.record.school_address'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['school_address'] }"
 	        					, 'class' => 'form-control'
@@ -214,7 +214,7 @@
 	        		<div class="col-xs-5">
 	        			{!! Form::text('school_city',''
 	        				, array(
-	        					'placeHolder' => 'trans('messages.school_city')'
+	        					'placeHolder' => trans('messages.school_city')
 	        					, 'ng-model' => 'client.record.school_city'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['school_city'] }"
 	        					, 'class' => 'form-control'
@@ -227,7 +227,7 @@
 	        		<div class="col-xs-5">
 	        			{!! Form::text('school_state',''
 	        				, array(
-	        					'placeHolder' => 'trans('messages.school_state')'
+	        					'placeHolder' => trans('messages.school_state')
 	        					, 'ng-model' => 'client.record.school_state'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['school_state'] }"
 	        					, 'class' => 'form-control'
@@ -240,7 +240,7 @@
 	        		<div class="col-xs-5">
 	        			{!! Form::text('school_zip',''
 	        				, array(
-	        					'placeHolder' => 'trans('messages.postal_code')'
+	        					'placeHolder' => trans('messages.postal_code')
 	        					, 'ng-model' => 'client.record.school_zip'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['school_zip'] }"
 	        					, 'class' => 'form-control'
@@ -267,7 +267,7 @@
 	        		<div class="col-xs-6">
 	        			{!! Form::text('contact_name',''
 	        				, array(
-	        					'placeHolder' => 'trans('messages.contact_person')'
+	        					'placeHolder' => trans('messages.contact_person')
 	        					, 'ng-model' => 'client.record.contact_name'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['contact_name'] }"
 	        					, 'class' => 'form-control'
@@ -280,7 +280,7 @@
 	        		<div class="col-xs-6">
 	        			{!! Form::text('contact_number',''
 	        				, array(
-	        					'placeHolder' => 'trans('messages.contact_number')'
+	        					'placeHolder' => trans('messages.contact_number')
 	        					, 'ng-model' => 'client.record.contact_number'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['contact_number'] }"
 	        					, 'class' => 'form-control'
@@ -301,7 +301,7 @@
 	        		<div class="col-xs-6">
 	        			{!! Form::text('street_address',''
 	        				, array(
-	        					'placeHolder' => 'trans('messages.street_address')'
+	        					'placeHolder' => trans('messages.street_address')
 	        					, 'ng-model' => 'client.record.street_address'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['street_address'] }"
 	        					, 'class' => 'form-control'
@@ -314,7 +314,7 @@
 	        		<div class="col-xs-5">
 	        			{!! Form::text('city',''
 	        				, array(
-	        					'placeHolder' => 'trans('messages.city')'
+	        					'placeHolder' => trans('messages.city')
 	        					, 'ng-model' => 'client.record.city'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['city'] }"
 	        					, 'class' => 'form-control'
@@ -327,7 +327,7 @@
 	        		<div class="col-xs-5">
 	        			{!! Form::text('state',''
 	        				, array(
-	        					'placeHolder' => 'trans('messages.state')'
+	        					'placeHolder' => trans('messages.state')
 	        					, 'ng-model' => 'client.record.state'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['state'] }"
 	        					, 'class' => 'form-control'
@@ -340,7 +340,7 @@
 	        		<div class="col-xs-5">
 	        			{!! Form::text('zip',''
 	        				, array(
-	        					'placeHolder' => trans('messages.postal_code')'
+	        					'placeHolder' => trans('messages.postal_code')
 	        					, 'ng-model' => 'client.record.zip'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['zip'] }"
 	        					, 'class' => 'form-control'
@@ -360,14 +360,14 @@
 	        </fieldset>
 	        <fieldset>
 		        <div class="btn-container col-xs-9 col-xs-offset-1">
-		        	{!! Form::button('trans('messages.save')'
+		        	{!! Form::button(trans('messages.save')
 		        		, array(
 		        			'class' => 'btn btn-blue btn-medium'
 		        			, 'ng-click' => 'client.add()'
 		        		)
 		        	) !!}
 
-		        	{!! Form::button('trans('messages.cancel')'
+		        	{!! Form::button(trans('messages.cancel')
 		        		, array(
 		        			'class' => 'btn btn-gold btn-medium'
 		        			, 'ng-click' => 'client.setActive()'

@@ -30,7 +30,7 @@
 							, array(
 								'class' => 'form-control'
 								, 'ng-model' => 'module.search.name'
-								, 'placeholder' => 'trans('messages.admin_module_name')'
+								, 'placeholder' => trans('messages.admin_module_name')
 								, 'autocomplete' => 'off'
 							)
 						) !!}
@@ -44,7 +44,7 @@
 	                    </select>
 	                </div>
 					<div class="col-xs-3">
-						{!! Form::button('trans('messages.search')', 
+						{!! Form::button(trans('messages.search'),
 							array(
 								'class' => 'btn btn-blue'
 								, 'ng-click' => 'module.searchFnc($event)'
@@ -52,7 +52,7 @@
 						) !!}
 					</div>
 					<div class="col-xs-3">
-						{!! Form::button('trans('messages.clear')', 
+						{!! Form::button(trans('messages.clear'),
 							array(
 								'class' => 'btn btn-gold'
 								, 'ng-click' => 'module.clearFnc()'

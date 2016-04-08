@@ -36,7 +36,7 @@
 										'class' => 'form-control'
 										, 'ng-model' => 'teacher.record.username'
 										, 'ng-disabled' => 'true'
-										, 'placeHolder' => 'trans('messages.username')'
+										, 'placeHolder' => trans('messages.username')
 									])
 							!!}
 						</div>
@@ -51,7 +51,7 @@
 										'class' => 'form-control'
 										, 'ng-model' => 'teacher.record.email'
 										, 'ng-disabled' => 'true'
-										, 'placeHolder' => 'trans('messages.email')'
+										, 'placeHolder' => trans('messages.email')
 									])
 								!!}	
 
@@ -67,7 +67,7 @@
 										'class' => 'form-control',
 										'ng-model' => 'teacher.record.new_email',
 										'ng-readonly' => 'true',
-										'placeHolder' => 'trans('messages.pending_email')'
+										'placeHolder' => trans('messages.pending_email')
 									])
 								!!}
 							</div>
@@ -88,7 +88,7 @@
 										, 'ng-model' => 'teacher.record.first_name'
 										, 'ng-disabled' => 'teacher.active_view'
 										, 'ng-class' => "{ 'required-field' : teacher.fields['first_name'] }"
-										, 'placeHolder' => 'trans('messages.first_name')'
+										, 'placeHolder' => trans('messages.first_name')
 									])
 							!!}
 						</div>
@@ -101,7 +101,7 @@
 										, 'ng-model' => 'teacher.record.last_name'
 										, 'ng-disabled' => 'teacher.active_view'
 										, 'ng-class' => "{ 'required-field' : teacher.fields['last_name'] }"
-										, 'placeHolder' => 'trans('messages.last_name')'
+										, 'placeHolder' => trans('messages.last_name')
 									])
 							!!}
 						</div>
@@ -111,9 +111,9 @@
 						<div class="col-xs-4">
 							{!! Form::select('gender'
 									, array(
-										'' => 'trans('messages.select_gender')'
-										, 'Male' => 'trans('messages.male')'
-										, 'Female' => 'trans('messages.female')')
+										'' => trans('messages.select_gender')
+										, 'Male' => trans('messages.male')
+										, 'Female' => trans('messages.female'))
 									, null
 									, array(
 										'class' => 'form-control'
@@ -133,7 +133,7 @@
 										, 'ng-model' => 'teacher.record.city'
 										, 'ng-disabled' => 'teacher.active_view'
 										, 'ng-class' => "{ 'required-field' : teacher.fields['city'] }"
-										, 'placeHolder' => 'trans('messages.city')'
+										, 'placeHolder' => trans('messages.city')
 									])
 							!!}
 						</div>
@@ -148,7 +148,7 @@
 										, 'ng-model' => 'teacher.record.state'
 										, 'ng-disabled' => 'teacher.active_view'
 										, 'ng-class' => "{ 'required-field' : teacher.fields['state'] }"
-										, 'placeHolder' => 'trans('messages.state')'
+										, 'placeHolder' => trans('messages.state')
 									])
 							!!}
 						</div>
@@ -179,7 +179,7 @@
 										'class' => 'form-control',
 										'ng-model' => 'teacher.record.school.name',
 										'ng-disabled' => 'true',
-										'placeHolder' => 'trans('messages.school_name')'
+										'placeHolder' => trans('messages.school_name')
 									])
 							!!}
 						</div>
@@ -196,13 +196,13 @@
 				</fieldset>
 				<div class="row margin-40-bot">
 					<div class="col-xs-6 col-xs-offset-3 btn-container" ng-if="teacher.active_view">
-						{!! Form::button('trans('messages.edit')'
+						{!! Form::button(trans('messages.edit')
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-click' => "teacher.setActive(futureed.ACTIVE_EDIT, teacher.record.id)"
 							)
 						) !!}
-						{!! Form::button('trans('messages.cancel')'
+						{!! Form::button(trans('messages.cancel')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'ng-click' => "teacher.setActive()"
@@ -210,13 +210,13 @@
 						) !!}
 					</div>
 					<div class="col-xs-6 col-xs-offset-3 btn-container" ng-if="teacher.active_edit">
-						{!! Form::button('trans('messages.save')'
+						{!! Form::button(trans('messages.save')
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-click' => "teacher.updateDetails()"
 							)
 						) !!}
-						{!! Form::button('trans('messages.cancel')'
+						{!! Form::button(trans('messages.cancel')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'ng-click' => "teacher.setActive(futureed.ACTIVE_VIEW, teacher.record.id)"

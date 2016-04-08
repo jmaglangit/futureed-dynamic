@@ -29,7 +29,7 @@
 								'class' => 'form-control'
 								, 'ng-model' => 'student.record.invitation_code'
 								, 'ng-class' => "{ 'required-field' : student.fields['invitation_code'] }"
-								, 'placeholder' => 'trans('messages.email_parent_added_student_msg3')'
+								, 'placeholder' => trans('messages.email_parent_added_student_msg3')
 							]
 						) !!}
 	        		</div>
@@ -37,14 +37,14 @@
 
 	        	<div class="form-group btn-container">
 	        		<div class="col-xs-9 col-xs-offset-1">
-	        			{!! Form::button('trans('messages.client_proceed')'
+	        			{!! Form::button(trans('messages.client_proceed')
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-click' => 'student.submitCode($event)'
 							)
 						) !!}
 
-						{!! Form::button('trans('messages.cancel')'
+						{!! Form::button(trans('messages.cancel')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'ng-if' => 'student.record.id'
@@ -52,7 +52,7 @@
 							)
 						) !!}
 
-						{!! Form::button('trans('messages.cancel')'
+						{!! Form::button(trans('messages.cancel')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'ng-if' => '!student.record.id'

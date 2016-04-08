@@ -28,7 +28,7 @@
 					<div class="col-xs-5">
 						{!! Form::text('username',''
 							, array(
-								'placeHolder' => 'trans('messages.username')'
+								'placeHolder' => trans('messages.username')
 								, 'ng-model' => 'student.record.username'
 								, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
 								, 'ng-change' => 'student.checkUsername(student.record.username, futureed.STUDENT, futureed.FALSE)'
@@ -48,7 +48,7 @@
 					<div class="col-xs-5">
 						{!! Form::text('email',''
 							, array(
-								'placeHolder' => 'trans('messages.email')'
+								'placeHolder' => trans('messages.email')
 								, 'ng-model' => 'student.record.email'
 								, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
 								, 'ng-change' => 'student.checkEmail(student.record.email, futureed.STUDENT, futureed.FALSE)'
@@ -107,7 +107,7 @@
 							array('class' => 'form-control'
 									, 'ng-model' => 'student.record.first_name'
 									, 'ng-class' => "{ 'required-field' : student.fields['first_name'] }"
-									, 'placeHolder' => 'trans('messages.first_name')'
+									, 'placeHolder' => trans('messages.first_name')
 								 )
 							)!!}
 					</div>
@@ -120,7 +120,7 @@
 							array('class' => 'form-control'
 									, 'ng-model' => 'student.record.last_name'
 									, 'ng-class' => "{ 'required-field' : student.fields['last_name'] }"
-									, 'placeHolder' => 'trans('messages.last_name')'
+									, 'placeHolder' => trans('messages.last_name')
 								 )
 							)!!}
 					</div>
@@ -130,9 +130,9 @@
 					<label class="control-label col-xs-3">{!! trans('messages.gender') !!} <span class="required">*</span></label>
 					<div class="col-xs-5">
 						{!! Form::select('gender',
-							array('' => 'trans('messages.select_gender')'
-									, 'Male' => 'trans('messages.male')'
-									, 'Female' => 'trans('messages.female')'),null,
+							array('' => trans('messages.select_gender')
+									, 'Male' => trans('messages.male')
+									, 'Female' => trans('messages.female')),null,
 							array('class' => 'form-control'
 									, 'ng-model' => 'student.record.gender'
 									, 'ng-class' => "{ 'required-field' : student.fields['gender'] }"
@@ -155,7 +155,7 @@
 							array('class' => 'form-control'
 									, 'ng-model' => 'student.record.city'
 									, 'ng-class' => "{ 'required-field' : student.fields['city'] }"
-									, 'placeHolder' => 'trans('messages.city')'
+									, 'placeHolder' => trans('messages.city')
 								 )
 							)!!}
 					</div>
@@ -168,7 +168,7 @@
 							array('class' => 'form-control'
 									, 'ng-model' => 'student.record.state'
 									, 'ng-class' => "{ 'required-field' : student.fields['state'] }"
-									, 'placeHolder' => 'trans('messages.state')'
+									, 'placeHolder' => trans('messages.state')
 								 )
 							)!!}
 					</div>
@@ -199,13 +199,13 @@
 			<fieldset>
 				<div class="form-group">
 					<div class="col-xs-9 col-xs-offset-1 btn-container">
-						{!! Form::button('trans('messages.save')'
+						{!! Form::button(trans('messages.save')
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-click' => 'student.save()'
 							)
 						) !!}
-						{!! Form::button('trans('messages.cancel')'
+						{!! Form::button(trans('messages.cancel')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'ng-click' => 'student.setActive()'

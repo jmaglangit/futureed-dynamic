@@ -33,7 +33,7 @@
 				<div class="col-xs-4">
 					{!! Form::text('username', '',
 						array(
-							'placeholder' => 'trans('messages.username')'
+							'placeholder' => trans('messages.username')
 							, 'autocomplete' => 'off'
 							, 'ng-model' => 'admin.record.username'
 							, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
@@ -54,7 +54,7 @@
 				<div class="col-xs-4">
 					{!! Form::text('email', '',
 						array(
-							'placeholder' => 'trans('messages.email')'
+							'placeholder' => trans('messages.email')
 							, 'autocomplete' => 'off'
 							, 'ng-model' => 'admin.record.email'
 							, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
@@ -75,7 +75,7 @@
 				<div class="col-xs-4">
 					{!! Form::select('admin_role',
 						[
-							'' => 'trans('messages.select_role')',
+							'' => trans('messages.select_role'),
 							'Admin' => 'Admin',
 							'Super Admin' => 'Super Admin'
 						], null,
@@ -122,7 +122,7 @@
 							'class' => 'form-control'
 							, 'ng-model' => 'admin.record.password'
 							, 'ng-class' => "{ 'required-field' : admin.fields['password'] }"
-							, 'placeholder' => 'trans('messages.password')'
+							, 'placeholder' => trans('messages.password')
 						]) 
 					!!}
 				</div>
@@ -135,7 +135,7 @@
 							'class' => 'form-control'
 							, 'ng-model' => 'admin.record.confirm_password'
 							, 'ng-class' => "{ 'required-field' : admin.fields['password'] }"
-							, 'placeholder' => 'trans('messages.confirm_password')'
+							, 'placeholder' => trans('messages.confirm_password')
 						]) 
 					!!}
 				</div>
@@ -152,7 +152,7 @@
 						[
 							'class' => 'form-control'
 							, 'ng-model' => 'admin.record.first_name'
-							, 'placeholder' => 'trans('messages.first_name')'
+							, 'placeholder' => trans('messages.first_name')
 							, 'ng-class' => "{ 'required-field' : admin.fields['first_name'] }"
 						]
 					) !!}
@@ -165,7 +165,7 @@
 						[
 							'class' => 'form-control'
 							, 'ng-model' => 'admin.record.last_name'
-							, 'placeholder' => 'trans('messages.last_name')'
+							, 'placeholder' => trans('messages.last_name')
 							, 'ng-class' => "{ 'required-field' : admin.fields['last_name'] }"
 						]
 					) !!}
@@ -175,14 +175,14 @@
 		<fieldset>
 			<div class="form-group">
 				<div class="btn-container col-xs-8 col-xs-offset-1">
-				{!! Form::button('trans('messages.save')'
+				{!! Form::button(trans('messages.save')
 					, array(
 						'class' => 'btn btn-blue btn-medium'
 						, 'ng-click' => "admin.saveAdmin()"
 					)
 				) !!}
 
-				{!! Form::button('trans('messages.cancel')'
+				{!! Form::button(trans('messages.cancel')
 					, array(
 						'class' => 'btn btn-gold btn-medium'
 						, 'ng-click' => "admin.setActive()"

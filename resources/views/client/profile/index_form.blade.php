@@ -9,7 +9,7 @@
 				{!! Form::text('username', ''
 					, array(
 						'class' => 'form-control'
-						, 'placeholder' => 'trans('messages.username')' 
+						, 'placeholder' => trans('messages.username')
 						, 'ng-disabled' => '!profile.active_edit' 
 						, 'ng-model' => 'profile.prof.username'
 						, 'ng-model-options' => "{debounce : {'default' : 1000} }"
@@ -31,7 +31,7 @@
 					{!! Form::text('email', ''
 						, array(
 							'class' => 'form-control'
-							, 'placeholder' => 'trans('messages.email_address')' 
+							, 'placeholder' => trans('messages.email_address')
 							, 'readonly' => 'readonly' 
 							, 'ng-model' => 'profile.prof.email'
 						)
@@ -48,7 +48,7 @@
 				{!! Form::text('email', ''
 					, array(
 						'class' => 'form-control'
-						, 'placeholder' => 'trans('messages.email_address')' 
+						, 'placeholder' => trans('messages.email_address')
 						, 'readonly' => 'readonly' 
 						, 'ng-model' => 'profile.prof.new_email'
 					)
@@ -70,7 +70,7 @@
 					{!! Form::text('first_name', ''
 						, array(
 							'class' => 'form-control'
-							, 'placeholder' => 'trans('messages.first_name')'
+							, 'placeholder' => trans('messages.first_name')
 							, 'ng-disabled' => '!profile.active_edit' 
 							, 'ng-model' => 'profile.prof.first_name')
 					) !!}
@@ -82,7 +82,7 @@
 					{!! Form::text('last_name', ''
 						, array(
 							'class' => 'form-control'
-							, 'placeholder' => 'trans('messages.last_name')'
+							, 'placeholder' => trans('messages.last_name')
 							, 'ng-disabled' => '!profile.active_edit' 
 							, 'ng-model' => 'profile.prof.last_name')
 					) !!}
@@ -100,7 +100,7 @@
 				{!! Form::text('school_name', ''
 					, array(
 						'class' => 'form-control'
-						, 'placeholder' => 'trans('messages.school_name')'
+						, 'placeholder' => trans('messages.school_name')
 						, 'ng-disabled' => 'true' 
 						, 'ng-model' => 'profile.prof.school_name')
 				) !!}
@@ -118,7 +118,7 @@
 				{!! Form::text('school_name', ''
 					, array(
 						'class' => 'form-control'
-						, 'placeholder' => 'trans('messages.school_name')'
+						, 'placeholder' => trans('messages.school_name')
 						, 'ng-disabled' => '!profile.active_edit' 
 						, 'ng-model' => 'profile.prof.school_name')
 				) !!}
@@ -130,7 +130,7 @@
 				{!! Form::text('school_street_address', ''
 					, array(
 						'class' => 'form-control'
-						, 'placeholder' => 'trans('messages.street_address')'
+						, 'placeholder' => trans('messages.street_address')
 						, 'ng-disabled' => '!profile.active_edit' 
 						, 'ng-model' => 'profile.prof.school_street_address')
 				) !!}
@@ -142,7 +142,7 @@
 				{!! Form::text('school_city', ''
 					, array(
 						'class' => 'form-control'
-						, 'placeholder' => 'trans('messages.city')'
+						, 'placeholder' => trans('messages.city')
 						, 'ng-disabled' => '!profile.active_edit' 
 						, 'ng-model' => 'profile.prof.school_city')
 				) !!}
@@ -152,7 +152,7 @@
 				{!! Form::text('school_state', ''
 					, array(
 						'class' => 'form-control'
-						, 'placeholder' => 'trans('messages.state')'
+						, 'placeholder' => trans('messages.state')
 						, 'ng-disabled' => '!profile.active_edit' 
 						, 'ng-model' => 'profile.prof.school_state')
 				) !!}
@@ -164,7 +164,7 @@
 				{!! Form::text('school_zip', ''
 					, array(
 						'class' => 'form-control'
-						, 'placeholder' => 'trans('messages.postal_code')'
+						, 'placeholder' => trans('messages.postal_code')
 						, 'ng-disabled' => '!profile.active_edit' 
 						, 'ng-model' => 'profile.prof.school_zip')
 				) !!}
@@ -186,7 +186,7 @@
 			  {!! Form::text('school_contact_name', ''
 				  , array(
 					'class' => 'form-control'
-					, 'placeholder' => 'trans('messages.contact_person')'
+					, 'placeholder' => trans('messages.contact_person')
 					, 'ng-disabled' => '!profile.active_edit' 
 					, 'ng-model' => 'profile.prof.school_contact_name'
 				  )
@@ -200,7 +200,7 @@
 			  {!! Form::text('school_contact_number', ''
 				  , array(
 					'class' => 'form-control'
-					, 'placeholder' => 'trans('messages.contact_number')'
+					, 'placeholder' => trans('messages.contact_number')
 					, 'ng-disabled' => '!profile.active_edit' 
 					, 'ng-model' => 'profile.prof.school_contact_number'
 				  )
@@ -221,7 +221,7 @@
 				{!! Form::text('street_address', ''
 					, array(
 						'class' => 'form-control'
-						, 'placeholder' => 'trans('messages.street_address')'
+						, 'placeholder' => trans('messages.street_address')
 						, 'ng-disabled' => '!profile.active_edit' 
 						, 'ng-model' => 'profile.prof.street_address')
 				) !!}
@@ -233,7 +233,7 @@
 				{!! Form::text('city', ''
 					, array(
 						'class' => 'form-control'
-						, 'placeholder' => 'trans('messages.city')'
+						, 'placeholder' => trans('messages.city')
 						, 'ng-disabled' => '!profile.active_edit' 
 						, 'ng-model' => 'profile.prof.city')
 				) !!}
@@ -243,7 +243,7 @@
 				{!! Form::text('state', ''
 					, array(
 						'class' => 'form-control'
-						, 'placeholder' => 'trans('messages.state')'
+						, 'placeholder' => trans('messages.state')
 						, 'ng-disabled' => '!profile.active_edit' 
 						, 'ng-model' => 'profile.prof.state')
 				) !!}
@@ -255,7 +255,7 @@
 				{!! Form::text('zip', ''
 					, array(
 						'class' => 'form-control'
-						, 'placeholder' => 'trans('messages.postal_code')'
+						, 'placeholder' => trans('messages.postal_code')
 						, 'ng-disabled' => '!profile.active_edit' 
 						, 'ng-model' => 'profile.prof.zip')
 				) !!}
@@ -273,7 +273,7 @@
 	<fieldset>
 		<div class="form-group">
 			<div class="btn-container">
-				{!! Form::button('trans('messages.edit')'
+				{!! Form::button(trans('messages.edit')
 					, array(
 						'class' => 'btn btn-blue btn-medium'
 						, 'ng-click' => "profile.setClientProfileActive('edit')"
@@ -281,7 +281,7 @@
 					)
 				) !!}
 
-				{!! Form::button('trans('messages.save')'
+				{!! Form::button(trans('messages.save')
 					, array(
 						'class' => 'btn btn-blue btn-medium'
 						, 'ng-click' => 'profile.saveClientProfile()'
@@ -289,7 +289,7 @@
 					)
 				) !!}
 
-				{!! Form::button('trans('messages.cancel')'
+				{!! Form::button(trans('messages.cancel')
 					, array(
 						'class' => 'btn btn-gold btn-medium'
 						, 'ng-click' => "profile.setClientProfileActive('index')"

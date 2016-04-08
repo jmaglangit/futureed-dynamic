@@ -21,7 +21,7 @@
 		</div>
 
 		<div class="btn-container" ng-if="!profile.success">
-			{!! Form::button('trans('messages.client_proceed')'
+			{!! Form::button(trans('messages.client_proceed')
 				, array(
 					'class' => 'btn btn-maroon btn-medium'
 					, 'ng-if' => 'profile.enable'
@@ -29,7 +29,7 @@
 				)
 			) !!}
 
-			{!! Html::link(route('student.profile.index'), 'trans('messages.cancel')'
+			{!! Html::link(route('student.profile.index'), trans('messages.cancel')
 				, array(
 					'class' => 'btn btn-gold btn-medium'
 				)	
@@ -40,7 +40,7 @@
 	<br />
 	
 	<div class="btn-container" ng-if="profile.success">
-		{!! Html::link(route('student.profile.index'), 'trans('messages.view_profile')'
+		{!! Html::link(route('student.profile.index'), trans('messages.view_profile')
 			, array(
 				'class' => 'btn btn-gold btn-medium'
 			)	

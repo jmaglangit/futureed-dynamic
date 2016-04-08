@@ -38,7 +38,7 @@
 							'class' => 'form-control'
 							, 'ng-model' => 'price.record.name'
 							, 'ng-class' => "{ 'required-field' : price.fields['name'] }"
-							, 'placeholder' => 'trans('messages.name')'
+							, 'placeholder' => trans('messages.name')
 						])
 					!!}
 				</div>
@@ -49,7 +49,7 @@
 					{!! Form::textarea('description', '', 
 						[
 							'class' => 'form-control disabled-textarea'
-							, 'placeholder' => 'trans('messages.description')'
+							, 'placeholder' => trans('messages.description')
 							, 'rows' => '4'
 							, 'ng-model' => 'price.record.description'
 							, 'ng-class' => "{ 'required-field' : price.fields['description'] }"
@@ -67,7 +67,7 @@
 								'class' => 'form-control'
 								, 'ng-model' => 'price.record.price'
 								, 'ng-class' => "{ 'required-field' : price.fields['price'] }"
-								, 'placeholder' => 'trans('messages.price')'
+								, 'placeholder' => trans('messages.price')
 							]
 						) !!}
 					</div>
@@ -79,7 +79,7 @@
 					{!! Form::text('days','',
 						[
 							'class' => 'form-control'
-							, 'placeholder' => 'trans('messages.admin_days')'
+							, 'placeholder' => trans('messages.admin_days')
 							, 'ng-class' => "{ 'required-field' : price.fields['days'] }"
 							, 'ng-model' => 'price.record.days'
 						]) 
@@ -154,7 +154,7 @@
 		<fieldset>
 			<div class="form-group">
 				<div class="btn-container col-xs-9 col-xs-offset-1">
-					{!! Form::button('trans('messages.update')'
+					{!! Form::button(trans('messages.update')
 						, array(
 							'class' => 'btn btn-blue btn-medium'
 							, 'ng-click' => "price.update()"
@@ -162,7 +162,7 @@
 						)
 					) !!}
 
-					{!! Form::button('trans('messages.admin_add_price')'
+					{!! Form::button(trans('messages.admin_add_price')
 						, array(
 							'class' => 'btn btn-blue btn-medium'
 							, 'ng-click' => "price.add()"
@@ -170,7 +170,7 @@
 						)
 					) !!}
 
-					{!! Form::button('trans('messages.cancel')'
+					{!! Form::button(trans('messages.cancel')
 						, array(
 							'class' => 'btn btn-gold btn-medium'
 							, 'ng-click' => "price.setActive()"

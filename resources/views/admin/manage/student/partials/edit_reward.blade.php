@@ -28,7 +28,7 @@
                 <div class="col-xs-5">
                     {!! Form::text('points',''
                         , array(
-                            'placeHolder' => 'trans('messages.points')'
+                            'placeHolder' => trans('messages.points')
                             , 'ng-model' => 'student.point_detail.points_earned'
                             , 'class' => 'form-control'
                         )
@@ -40,7 +40,7 @@
         		<div class="col-md-5">
         			{!! Form::text('event',''
         				, array(
-        					'placeHolder' => 'trans('messages.admin_event')'
+        					'placeHolder' => trans('messages.admin_event')
         					, 'ng-model' => 'student.point_detail.event'
         					, 'ng-change' => "student.getEvents(student.point_detail.event)"
         					, 'ng-class' => "{ 'required-field' : student.fields['event'] }"
@@ -66,7 +66,7 @@
                 <div class="col-xs-5">
                     {!! Form::text('description',''
                         , array(
-                            'placeHolder' => 'trans('messages.description')'
+                            'placeHolder' => trans('messages.description')
                             , 'ng-disabled' => 'true'
                             , 'ng-model' => 'student.point_detail.description'
                             , 'class' => 'form-control'
@@ -79,7 +79,7 @@
                 <div class="col-xs-5">
                     {!! Form::text('date_earned',''
                         , array(
-                            'placeHolder' => 'trans('messages.admin_date_earned')'
+                            'placeHolder' => trans('messages.admin_date_earned')
                             , 'ng-disabled' => 'true'
                             , 'ng-model' => 'student.point_detail.date_earned'
                             , 'class' => 'form-control'
@@ -89,14 +89,14 @@
             </div>
     	</fieldset>
     	<div class="btn-container col-md-9 col-md-offset-1">
-	        	{!! Form::button('trans('messages.save')'
+	        	{!! Form::button(trans('messages.save')
 	        		, array(
 	        			'class' => 'btn btn-blue btn-medium'
 	        			, 'ng-click' => 'student.savePoint()'
 	        		)
 	        	) !!}
 
-	        	{!! Form::button('trans('messages.cancel')'
+	        	{!! Form::button(trans('messages.cancel')
 	        		, array(
 	        			'class' => 'btn btn-gold btn-medium'
 	        			, 'ng-click' => "student.setActive('reward', student.record.id)"
@@ -111,7 +111,7 @@
         		<div class="col-md-5">
         			{!! Form::text('badge',''
         				, array(
-        					'placeHolder' => 'trans('messages.badge')'
+        					'placeHolder' => trans('messages.badge')
         					, 'ng-model' => 'student.badge_detail.name'
         					, 'ng-change' => "student.getAllBadges(student.badge_detail.name)"
         					, 'ng-class' => "{ 'required-field' : student.fields['name'] }"
@@ -137,7 +137,7 @@
                 <div class="col-xs-5">
                     {!! Form::text('date_earned',''
                         , array(
-                            'placeHolder' => 'trans('messages.admin_date_earned')'
+                            'placeHolder' => trans('messages.admin_date_earned')
                             , 'ng-disabled' => 'true'
                             , 'ng-model' => 'student.point_detail.date_earned'
                             , 'class' => 'form-control'
@@ -147,14 +147,14 @@
             </div>
     	</fieldset>
     	<div class="btn-container col-md-9 col-md-offset-1">
-	        	{!! Form::button('trans('messages.save')'
+	        	{!! Form::button(trans('messages.save')
 	        		, array(
 	        			'class' => 'btn btn-blue btn-medium'
 	        			, 'ng-click' => 'student.saveBadge()'
 	        		)
 	        	) !!}
 
-	        	{!! Form::button('trans('messages.cancel')'
+	        	{!! Form::button(trans('messages.cancel')
 	        		, array(
 	        			'class' => 'btn btn-gold btn-medium'
 	        			, 'ng-click' => "student.setActive('reward', student.record.id)"
@@ -174,7 +174,7 @@
         </div>
         <div class="modal-footer">
         	<div class="btncon col-md-8 col-md-offset-4 pull-left">
-                {!! Form::button('trans('messages.yes')'
+                {!! Form::button(trans('messages.yes')
                     , array(
                         'class' => 'btn btn-blue btn-medium'
                         , 'ng-click' => 'student.deleteBadge()'
@@ -182,7 +182,7 @@
                     )
                 ) !!}
 
-                {!! Form::button('trans('messages.no')'
+                {!! Form::button(trans('messages.no')
                     , array(
                         'class' => 'btn btn-gold btn-medium'
                         , 'data-dismiss' => 'modal'

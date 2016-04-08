@@ -40,7 +40,7 @@
 					<div class="col-xs-5">
 						{!! Form::text('name',''
 							, array(
-								'placeHolder' => 'trans('messages.grade')'
+								'placeHolder' => trans('messages.grade')
 								, 'ng-model' => 'grade.record.name'
 								, 'class' => 'form-control'
 								, 'ng-class' => "{ 'required-field' : grade.fields['name'] }"
@@ -111,14 +111,14 @@
 			<fieldset>
 				<div class="form-group">
 					<div class="btn-container col-xs-9 col-xs-offset-1">
-						{!! Form::button('trans('messages.update')'
+						{!! Form::button(trans('messages.update')
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-click' => 'grade.update()'
 							)
 						) !!}
 
-						{!! Form::button('trans('messages.cancel')'
+						{!! Form::button(trans('messages.cancel')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'ng-click' => 'grade.setActive()'

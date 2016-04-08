@@ -90,7 +90,7 @@
 			{!! Form::textarea('answer', ''
 				, array(
 					'class' => 'form-control disabled-textarea'
-					, 'placeholder' => 'trans('messages.answer')'
+					, 'placeholder' => trans('messages.answer')
 					, 'ng-model' => 'help.record.answer'
 					, 'rows' => '5'
 				)
@@ -98,14 +98,14 @@
 		</div>
 
 		<div class="btn-container" ng-if="help.record.question_status == futureed.OPEN">
-			{!! Form::button('trans('messages.clear')'
+			{!! Form::button(trans('messages.clear')
 				, array(
 					'class' => 'btn btn-gold btn-small pull-right'
 					, 'ng-click' => "help.clearAnswer()"
 				)
 			) !!}
 
-			{!! Form::button('trans('messages.submit')'
+			{!! Form::button(trans('messages.submit')
 				, array(
 					'class' => 'btn btn-maroon btn-small pull-right'
 					, 'ng-click' => "help.answerRequest()"

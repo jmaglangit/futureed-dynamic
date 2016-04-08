@@ -18,7 +18,7 @@
 
 		<div class="col-xs-12 btn-container">
 			<div ng-if="!profile.password_validated">
-				{!! Form::button('trans('messages.client_proceed')'
+				{!! Form::button(trans('messages.client_proceed')
 					, array(
 						'class' => 'btn btn-maroon btn-medium'
 						, 'ng-click' => 'profile.validateCurrentPassword()'
@@ -26,7 +26,7 @@
 					)
 				) !!}
 
-				{!! Form::button('trans('messages.cancel')'
+				{!! Form::button(trans('messages.cancel')
 					, array(
 						'class' => 'btn btn-gold btn-medium'
 						, 'ng-click' => "profile.setStudentProfileActive('index')"
@@ -35,7 +35,7 @@
 			</div>
 
 			<div ng-if="profile.password_validated && !profile.password_selected">
-				{!! Form::button('trans('messages.client_proceed')'
+				{!! Form::button(trans('messages.client_proceed')
 					, array(
 						'class' => 'btn btn-maroon btn-medium'
 						, 'ng-click' => 'profile.selectNewPassword()'
@@ -44,14 +44,14 @@
 			</div>
 
 			<div ng-if="profile.password_validated && profile.password_selected && !profile.password_confirmed">
-				{!! Form::button('trans('messages.student_change_picture_password')'
+				{!! Form::button(trans('messages.student_change_picture_password')
 					, array(
 						'class' => 'btn btn-maroon btn-medium'
 						, 'ng-click' => 'profile.changePassword()'
 					)
 				) !!}
 
-				{!! Form::button('trans('messages.previous')'
+				{!! Form::button(trans('messages.previous')
 					, array(
 						'class' => 'btn btn-gold btn-medium'
 						, 'ng-click' => "profile.undoNewPassword()"
@@ -62,7 +62,7 @@
 	</div>
 
 	<div class="col-xs-12 btn-container" ng-if="profile.password_confirmed">
-		{!! Html::link(route('student.profile.index'), 'trans('messages.view_profile')'
+		{!! Html::link(route('student.profile.index'), trans('messages.view_profile')
 			, array(
 				'class' => 'btn btn-gold btn-medium'
 			)	

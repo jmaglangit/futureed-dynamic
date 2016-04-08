@@ -47,7 +47,7 @@
 			        		<div class="col-xs-5">
 			        			{!! Form::text('seats_total',''
 			        				, array(
-			        					'placeHolder' => 'trans('messages.no_of_seats')'
+			        					'placeHolder' => trans('messages.no_of_seats')
 			        					, 'ng-model' => 'payment.classroom.seats_total'
 			        					, 'ng-class' => "{ 'required-field' : payment.fields['seats_total'] }"
 			        					, 'class' => 'form-control'
@@ -71,7 +71,7 @@
 			        		<div class="col-xs-5">
 			        			{!! Form::text('teacher',''
 			        				, array(
-			        					'placeHolder' => 'trans('messages.teacher')'
+			        					'placeHolder' => trans('messages.teacher')
 			        					, 'ng-model' => 'payment.classroom.client_name'
 			        					, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
 			        					, 'ng-class' => "{ 'required-field' : payment.fields['client_id'] }"
@@ -100,7 +100,7 @@
 			        		<div class="col-xs-5">
 			        			{!! Form::text('name',''
 			        				, array(
-			        					'placeHolder' => 'trans('messages.class')'
+			        					'placeHolder' => trans('messages.class')
 			        					, 'ng-model' => 'payment.classroom.name'
 			        					, 'ng-class' => "{ 'required-field' : payment.fields['name'] }"
 			        					, 'autocomplete' => 'off'
@@ -112,7 +112,7 @@
 
 			        	<div class="form-group">
 			        		<div class="btn-container col-xs-offset-2 col-xs-7">
-				        		{!! Form::button('trans('messages.update')'
+				        		{!! Form::button(trans('messages.update')
 				        			, array(
 				        				'class' => 'btn btn-blue btn-medium'
 				        				, 'ng-click' => 'payment.updateClassroom()'
@@ -120,7 +120,7 @@
 				        			)
 				        		) !!}
 
-				        		{!! Form::button('trans('messages.add_classroom')'
+				        		{!! Form::button(trans('messages.add_classroom')
 				        			, array(
 				        				'class' => 'btn btn-blue btn-medium'
 				        				, 'ng-click' => 'payment.addClassroom()'
@@ -128,7 +128,7 @@
 				        			)
 				        		) !!}
 
-				        		{!! Form::button('trans('messages.clear')'
+				        		{!! Form::button(trans('messages.clear')
 				        			, array(
 				        				'class' => 'btn btn-gold btn-medium'
 				        				, 'ng-click' => 'payment.clearClassroom()'
@@ -271,21 +271,21 @@
 
 				<div class="form-group">
 					<div class="btn-container">
-		        		{!! Form::button('trans('messages.pay_subscription')'
+		        		{!! Form::button(trans('messages.pay_subscription')
 		        			, array(
 		        				'class' => 'btn btn-blue btn-semi-medium'
 		        				, 'ng-click' => 'payment.addPayment()'
 		        			)
 		        		) !!}
 
-		        		{!! Form::button('trans('messages.save_subscription')'
+		        		{!! Form::button(trans('messages.save_subscription')
 		        			, array(
 		        				'class' => 'btn btn-blue btn-semi-medium'
 		        				, 'ng-click' => 'payment.savePayment()'
 		        			)
 		        		) !!}
 
-		        		{!! Form::button('trans('messages.delete_subscription')'
+		        		{!! Form::button(trans('messages.delete_subscription')
 		        			, array(
 		        				'class' => 'btn btn-gold btn-semi-medium'
 		        				, 'ng-click' => 'payment.deleteInvoice(payment.invoice.id)'

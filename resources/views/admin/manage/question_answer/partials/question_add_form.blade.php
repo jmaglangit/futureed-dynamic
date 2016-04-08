@@ -22,7 +22,7 @@
 					<div class="col-xs-4">
 						{!! Form::text('module',''
 							, array(
-								'placeHolder' => 'trans('messages.module')'
+								'placeHolder' => trans('messages.module')
 								, 'ng-model' => 'qa.module.name'
 								, 'ng-disabled' => 'true'
 								, 'class' => 'form-control'
@@ -34,7 +34,7 @@
 					<div class="col-xs-4">
 						{!! Form::text('subject',''
 							, array(
-								'placeHolder' => 'trans('messages.subject')'
+								'placeHolder' => trans('messages.subject')
 								, 'ng-model' => 'qa.module.subject.name'
 								, 'ng-disabled' => 'true'
 								, 'class' => 'form-control'
@@ -47,7 +47,7 @@
 					<div class="col-xs-4">
 						{!! Form::text('area',''
 							, array(
-								'placeHolder' => 'trans('messages.area')'
+								'placeHolder' => trans('messages.area')
 								, 'ng-model' => 'qa.module.area'
 								, 'ng-disabled' => 'true'
 								, 'class' => 'form-control'
@@ -66,7 +66,7 @@
 					<div class="col-xs-5">
 						{!! Form::text('code',''
 							, array(
-								'placeHolder' => 'trans('messages.code')'
+								'placeHolder' => trans('messages.code')
 								, 'ng-model' => 'qa.record.code'
 								, 'class' => 'form-control'
 								, 'ng-class' => "{ 'required-field' : qa.fields['code'] }"
@@ -79,7 +79,7 @@
 					<div class="col-xs-5">
 						{!! Form::textarea('question',''
 							, array(
-								'placeHolder' => 'trans('messages.question')'
+								'placeHolder' => trans('messages.question')
 								, 'ng-model' => 'qa.record.questions_text'
 								, 'class' => 'form-control disabled-textarea'
 								, 'ng-class' => "{ 'required-field' : qa.fields['questions_text'] }"
@@ -110,13 +110,13 @@
 					<div class="col-xs-5">
 						{!! Form::select('question_type'
 							, array(
-								'' => 'trans('messages.admin_select_question_type')'
-								, 'MC' => 'trans('messages.admin_mc')'
-								, 'FIB' => 'trans('messages.admin_fib')'
-								, 'O' => 'trans('messages.admin_order')'
-								, 'N' => 'trans('messages.admin_provide')'
-								, 'GR' => 'trans('messages.admin_graph')'
-								, 'QUAD' => 'trans('messages.admin_quadrant')'
+								'' => trans('messages.admin_select_question_type')
+								, 'MC' => trans('messages.admin_mc')
+								, 'FIB' => trans('messages.admin_fib')
+								, 'O' => trans('messages.admin_order')
+								, 'N' => trans('messages.admin_provide')
+								, 'GR' => trans('messages.admin_graph')
+								, 'QUAD' => trans('messages.admin_quadrant')
 							)
 							, ''
 							, array(
@@ -139,7 +139,7 @@
 					<div class="col-xs-5">
 						{!! Form::textarea('answer',''
 							, array(
-								'placeHolder' => 'trans('messages.answer')'
+								'placeHolder' => trans('messages.answer')
 								, 'ng-model' => 'qa.record.answer'
 								, 'class' => 'form-control disabled-textarea'
 								, 'ng-class' => "{ 'required-field' : qa.fields['answer'] }"
@@ -154,9 +154,9 @@
 					<div class="col-xs-5">
 						{!! Form::select('orientation'
 							, array(
-								'' => 'trans('messages.admin_select_orientation')'
-								, 'vertical' => 'trans('messages.admin_vertical')'
-								, 'horizontal' => 'trans('messages.admin_horizontal')'
+								'' => trans('messages.admin_select_orientation')
+								, 'vertical' => trans('messages.admin_vertical')
+								, 'horizontal' => trans('messages.admin_horizontal')
 							)
 							, ''
 							, array(
@@ -179,7 +179,7 @@
 					<div class="col-xs-5">
 						{!! Form::textarea('answer',''
 							, array(
-								'placeHolder' => 'trans('messages.answer')'
+								'placeHolder' => trans('messages.answer')
 								, 'ng-model' => 'qa.record.answer'
 								, 'class' => 'form-control disabled-textarea'
 								, 'ng-disabled' => 'qa.active_view'
@@ -195,7 +195,7 @@
 					<div class="col-xs-5">
 						{!! Form::textarea('question_order_text',''
 							, array(
-								'placeHolder' => 'trans('messages.admin_order')'
+								'placeHolder' => trans('messages.admin_order')
 								, 'ng-model' => 'qa.record.question_order_text'
 								, 'class' => 'form-control disabled-textarea'
 								, 'ng-class' => "{ 'required-field' : qa.fields['question_order_text'] }"
@@ -210,7 +210,7 @@
 					<div class="col-xs-5">
 						{!! Form::text('points_earned',''
 							, array(
-								'placeHolder' => 'trans('messages.admin_points_earned')'
+								'placeHolder' => trans('messages.admin_points_earned')
 								, 'ng-model' => 'qa.record.points_earned'
 								, 'class' => 'form-control'
 								, 'ng-class' => "{ 'required-field' : qa.fields['points_earned'] }"
@@ -224,7 +224,7 @@
 					<div class="col-xs-5">
 						{!! Form::text('difficulty',''
 							, array(
-								'placeHolder' => 'trans('messages.difficulty')'
+								'placeHolder' => trans('messages.difficulty')
 								, 'ng-model' => 'qa.record.difficulty'
 								, 'class' => 'form-control'
 								, 'ng-class' => "{ 'required-field' : qa.fields['difficulty'] }"
@@ -237,7 +237,7 @@
 					<div class="col-xs-5">
 						{!! Form::text('seq_no',''
 							, array(
-								'placeHolder' => 'trans('messages.sequence_no')'
+								'placeHolder' => trans('messages.sequence_no')
 								, 'ng-model' => 'qa.record.seq_no'
 								, 'class' => 'form-control'
 								, 'ng-class' => "{ 'required-field' : qa.fields['seq_no'] }"
@@ -281,14 +281,14 @@
 			<fieldset>
 				<div class="form-group">
 					<div class="btn-container col-xs-8 col-xs-offset-2">
-						{!! Form::button('trans('messages.save')'
+						{!! Form::button(trans('messages.save')
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-click' => 'qa.add()'
 							)
 						) !!}
 
-						{!! Form::button('trans('messages.cancel')'
+						{!! Form::button(trans('messages.cancel')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'ng-click' => 'qa.setActive()'
@@ -313,7 +313,7 @@
 				</div>
 				<div class="modal-footer">
 					<div class="btncon col-xs-8 col-xs-offset-4 pull-left">
-						{!! Form::button('trans('messages.close')'
+						{!! Form::button(trans('messages.close')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'data-dismiss' => 'modal'

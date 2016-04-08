@@ -63,7 +63,7 @@
                             , array(
                                 'class' => 'form-control'
                                 , 'ng-model' => 'class.add.email'
-                                , 'placeholder' => 'trans('messages.email_address')'
+                                , 'placeholder' => trans('messages.email_address')
                                 , 'ng-class' => "{ 'required-field' : class.fields['email'] }"
                                 , 'autocomplete' => 'off'
                             )
@@ -73,14 +73,14 @@
             </fieldset>
             <fieldset>
                 <div class="btn-container col-xs-5 col-xs-offset-2">
-                    {!! Form::button('trans('messages.add_student')'
+                    {!! Form::button(trans('messages.add_student')
                         , array(
                             'class' => 'btn btn-blue btn-medium'
                             , 'ng-click' => 'class.addExistingStudent()'
                         )
                     ) !!}
 
-                    {!! Form::button('trans('messages.cancel')'
+                    {!! Form::button(trans('messages.cancel')
                         , array(
                             'class' => 'btn btn-gold btn-medium'
                             , 'ng-click' => "class.setActive('view', class.record.id)"
@@ -107,7 +107,7 @@
                     {!! Form::text('username', ''
                         , array(
                             'class' => 'form-control'
-                            , 'placeholder' => 'trans('messages.username')' 
+                            , 'placeholder' => trans('messages.username')
                             , 'ng-model' => 'class.add.username'
                             , 'ng-model-options' => "{ debounce : { 'default' : 1000 } }"
                             , 'ng-class' => "{ 'required-field' : class.fields['username'] }"
@@ -128,7 +128,7 @@
                     {!! Form::text('email', ''
                         , array(
                             'class' => 'form-control'
-                            , 'placeholder' => 'trans('messages.email_address')' 
+                            , 'placeholder' => trans('messages.email_address')
                             , 'ng-model' => 'class.add.email'
                             , 'ng-model-options' => "{ debounce : { 'default' : 1000 } }"
                             , 'ng-class' => "{ 'required-field' : class.fields['email'] }"
@@ -153,7 +153,7 @@
                         , array(
                             'class' => 'form-control'
                             , 'ng-class' => "{ 'required-field' : class.fields['first_name'] }"
-                            , 'placeholder' => 'trans('messages.first_name')' 
+                            , 'placeholder' => trans('messages.first_name')
                             , 'ng-model' => 'class.add.first_name'
                             , 'autocomplete' => 'off'
                         )
@@ -167,7 +167,7 @@
                         , array(
                             'class' => 'form-control'
                             , 'ng-class' => "{ 'required-field' : class.fields['last_name'] }"
-                            , 'placeholder' => 'trans('messages.last_name')' 
+                            , 'placeholder' => trans('messages.last_name')
                             , 'ng-model' => 'class.add.last_name'
                             , 'autocomplete' => 'off'
                         )
@@ -179,9 +179,9 @@
                 <div class="col-md-5">
                     {!! Form::select('gender'
                         , array(
-                            '' => 'trans('messages.select_gender')'
-                            , 'male' => 'trans('messages.male')'
-                            , 'female' => 'trans('messages.female')')
+                            '' => trans('messages.select_gender')
+                            , 'male' => trans('messages.male')
+                            , 'female' => trans('messages.female'))
                         , ''
                         , array(
                             'class' => 'form-control'
@@ -203,7 +203,7 @@
                     {!! Form::text('city', ''
                         , array(
                             'class' => 'form-control'
-                            , 'placeholder' => 'trans('messages.city')' 
+                            , 'placeholder' => trans('messages.city')
                             , 'ng-class' => "{ 'required-field' : class.fields['city'] }"
                             , 'ng-model' => 'class.add.city'
                         )
@@ -216,7 +216,7 @@
                     {!! Form::text('state', ''
                         , array(
                             'class' => 'form-control'
-                            , 'placeholder' => 'trans('messages.state')' 
+                            , 'placeholder' => trans('messages.state')
                             , 'ng-class' => "{ 'required-field' : class.fields['state'] }"
                             , 'ng-model' => 'class.add.state'
                         )
@@ -261,14 +261,14 @@
         </fieldset> 
         <fieldset>
 			<div class="btn-container col-xs-6 col-xs-offset-2">
-				{!! Form::button('trans('messages.add_student')'
+				{!! Form::button(trans('messages.add_student')
 					, array(
 						'class' => 'btn btn-blue btn-medium'
 						, 'ng-click' => 'class.addNewStudent()'
 					)
 				) !!}
 
-				{!! Form::button('trans('messages.cancel')'
+				{!! Form::button(trans('messages.cancel')
 					, array(
 						'class' => 'btn btn-gold btn-medium'
 						, 'ng-click' => "class.setActive('view', class.record.id)"

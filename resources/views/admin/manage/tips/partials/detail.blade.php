@@ -28,7 +28,7 @@
 						<div class="col-xs-4">
 							{!! Form::text('username', '',
 								[
-									'placeholder' => 'trans('messages.module')',
+									'placeholder' => trans('messages.module'),
 									'ng-disabled' => 'true',
 									'ng-model' => 'tips.record.module',
 									'class' => 'form-control'
@@ -40,10 +40,10 @@
 					<div class="col-xs-4">
 						{!! Form::select('link_type'
 							, array(
-								'' => 'trans('messages.admin_select_type')'
-								, 'General' => 'trans('messages.general')'
-								, 'Content' => 'trans('messages.content')'
-								, 'Question' => 'trans('messages.question')'
+								'' => trans('messages.admin_select_type')
+								, 'General' => trans('messages.general')
+								, 'Content' => trans('messages.content')
+								, 'Question' => trans('messages.question')
 							)
 							, ''
 							, array(
@@ -60,7 +60,7 @@
 					<div class="col-xs-4">
 						{!! Form::text('subject', '',
 							[
-								'placeholder' => 'trans('messages.subject')',
+								'placeholder' => trans('messages.subject'),
 								'ng-disabled' => 'true',
 								'ng-model' => 'tips.record.subject',
 								'class' => 'form-control'
@@ -71,7 +71,7 @@
 					<div class="col-xs-4">
 						{!! Form::text('area', '',
 							[
-								'placeholder' => 'trans('messages.area')',
+								'placeholder' => trans('messages.area'),
 								'ng-disabled' => 'true',
 								'ng-model' => 'tips.record.area',
 								'class' => 'form-control'
@@ -154,7 +154,7 @@
 				</div>
 				<div class="form-group" ng-if="tips.record.rated_by != futureed.ADMIN && tips.active_view">
 					<div class="btn-container col-xs-8 col-xs-offset-2">
-						{!! Form::button('trans('messages.change_rating')'
+						{!! Form::button(trans('messages.change_rating')
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-click' => "tips.rateTip()"
@@ -192,7 +192,7 @@
 								'class' => 'form-control'
 								, 'ng-disabled' => 'tips.active_view'
 								, 'ng-model' => 'tips.record.title'
-								, 'placeholder' => 'trans('messages.title')'
+								, 'placeholder' => trans('messages.title')
 								, 'ng-class' => "{ 'required-field' : tips.fields['title'] }"
 							]
 						) !!}
@@ -206,7 +206,7 @@
 								'class' => 'form-control disabled-textarea'
 								, 'ng-disabled' => 'tips.active_view'
 								, 'ng-model' => 'tips.record.content'
-								, 'placeholder' => 'trans('messages.description')'
+								, 'placeholder' => trans('messages.description')
 								, 'ng-class' => "{ 'required-field' : tips.fields['content'] }"
 							]
 						) !!}
@@ -220,21 +220,21 @@
 								'class' => 'form-control'
 								, 'ng-disabled' => 'true'
 								, 'ng-model' => 'tips.record.name'
-								, 'placeholder' => 'trans('messages.created_by')'
+								, 'placeholder' => trans('messages.created_by')
 							]
 						) !!}
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="btn-container col-xs-8 col-xs-offset-2" ng-if="tips.active_edit">
-							{!! Form::button('trans('messages.save')'
+							{!! Form::button(trans('messages.save')
 								, array(
 									'class' => 'btn btn-blue btn-medium'
 									, 'ng-click' => "tips.updateTip()"
 								)
 							) !!}
 
-							{!! Form::button('trans('messages.cancel')'
+							{!! Form::button(trans('messages.cancel')
 								, array(
 									'class' => 'btn btn-gold btn-medium'
 									, 'ng-click' => "tips.setActive(futureed.ACTIVE_VIEW, tips.record.id)"
@@ -242,14 +242,14 @@
 							) !!}
 					</div>	
 					<div class="btn-container col-xs-8 col-xs-offset-2" ng-if="tips.active_view">
-							{!! Form::button('trans('messages.edit')'
+							{!! Form::button(trans('messages.edit')
 								, array(
 									'class' => 'btn btn-blue btn-medium'
 									, 'ng-click' => "tips.setActive(futureed.ACTIVE_EDIT, tips.record.id)"
 								)
 							) !!}
 
-							{!! Form::button('trans('messages.cancel')'
+							{!! Form::button(trans('messages.cancel')
 								, array(
 									'class' => 'btn btn-gold btn-medium'
 									, 'ng-click' => "tips.setActive()"
@@ -285,13 +285,13 @@
 				</div>
 				<div class="modal-footer">
 					<div class="btncon col-xs-8 col-xs-offset-4 pull-left">
-						{!! Form::button('trans('messages.accept')'
+						{!! Form::button(trans('messages.accept')
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-click' => 'tips.acceptTip()'
 							)
 						) !!}
-						{!! Form::button('trans('messages.cancel')'
+						{!! Form::button(trans('messages.cancel')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'data-dismiss' => 'modal'

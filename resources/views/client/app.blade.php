@@ -57,7 +57,7 @@
 	                </div>
 	                <div class="modal-footer">
 	                    <div class="col-md-8 col-md-offset-4 pull-left">
-	                        {!! Html::link(route('client.login'), 'trans('messages.login')'
+	                        {!! Html::link(route('client.login'), trans('messages.login')
 	                            , array(
 	                                'class' => 'btn btn-gold btn-medium'
 	                            )

@@ -50,7 +50,7 @@
 	        		<div class="col-xs-5">
 	        			{!! Form::text('Email',''
 	        				, array(
-	        					'placeHolder' => 'trans('messages.email')'
+	        					'placeHolder' => trans('messages.email')
 	        					, 'ng-model' => 'payment.add.email'
 	        					, 'class' => 'form-control'
 	        					, 'autocomplete' => 'off'
@@ -76,7 +76,7 @@
 	        		<div class="col-xs-5">
 	        			{!! Form::text('name',''
 	        				, array(
-	        					'placeHolder' => 'trans('messages.name')'
+	        					'placeHolder' => trans('messages.name')
 	        					, 'ng-model' => 'payment.add.name'
 	        					, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
 	        					, 'ng-change' => "payment.searchName()"
@@ -210,7 +210,7 @@
 										'ng-disabled' => true
 										, 'class' => 'form-control'
 										, 'ng-model' => 'payment.invoice.discount'
-										, 'placeholder' => 'trans('messages.discount')'
+										, 'placeholder' => trans('messages.discount')
 									]
 								) !!}
 								<span class="input-group-addon" id="basic-addon1">%</span>
@@ -237,21 +237,21 @@
 
         	<div class="col-xs-12">
 				<div class="btn-container">
-					{!! Form::button('trans('messages.pay_subscription')'
+					{!! Form::button(trans('messages.pay_subscription')
 						, array(
 							'class' => 'btn btn-blue btn-semi-medium'
 							, 'ng-click' => "payment.addPayment()"
 						)
 					) !!}
 
-					{!! Form::button('trans('messages.save_subscription'
+					{!! Form::button(trans('messages.save_subscription'
 						, array(
 							'class' => 'btn btn-blue btn-semi-medium'
 							, 'ng-click' => "payment.savePayment()"
 						)
 					) !!}
 
-					{!! Form::button('trans('messages.delete_subscription'
+					{!! Form::button(trans('messages.delete_subscription'
 						, array(
 							'class' => 'btn btn-gold btn-semi-medium'
 							, 'ng-click' => "payment.deleteInvoice()"
@@ -274,7 +274,7 @@
         </div>
         <div class="modal-footer">
         	<div class="btncon col-md-8 col-md-offset-4 pull-left">
-                {!! Form::button('trans('messages.yes')'
+                {!! Form::button(trans('messages.yes')
                     , array(
                         'class' => 'btn btn-blue btn-medium'
                         , 'ng-click' => "payment.removeStudent()"
@@ -282,7 +282,7 @@
                     )
                 ) !!}
 
-                {!! Form::button('trans('messages.no')'
+                {!! Form::button(trans('messages.no')
                     , array(
                         'class' => 'btn btn-gold btn-medium'
                         , 'data-dismiss' => 'modal'

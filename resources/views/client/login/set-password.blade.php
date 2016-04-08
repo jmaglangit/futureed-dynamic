@@ -40,12 +40,12 @@
 							<small>{!! trans('messages.client_check_inbox') !!}</small>
 							{!! Form::open(array('ng-submit' => 'confirm.confirmClientRegistration($event)')) !!}
 									<div class="form-group" ng-if="!confirm.account_confirmed">
-											{!! Form::label('', 'trans('messages.enter_confirmation_code'):')!!}
+											{!! Form::label('', trans('messages.enter_confirmation_code'):')!!}
 											
 											{!! Form::text('confirmation_code', ''
 															, array(
 																	'class' => 'form-control'
-																	, 'placeholder' => 'trans('messages.confirm_code')'
+																	, 'placeholder' => trans('messages.confirm_code')
 																	, 'ng-model' => 'confirm.record.email_code'
 																	, 'autocomplete' => 'off'
 															)
@@ -54,7 +54,7 @@
 											{!! Form::hidden('email', $email) !!}
 									</div>
 									<div class="btn-container">
-											{!! Form::button('trans('messages.confirm')'
+											{!! Form::button(trans('messages.confirm')
 													, array(
 																'id' => 'proceed_btn'
 															, 'class' => 'btn btn-blue btn-medium'
@@ -63,7 +63,7 @@
 													)
 											) !!}
 
-											{!! Form::button('trans('messages.resend'
+											{!! Form::button(trans('messages.resend'
 													, array(
 																'class' => 'btn btn-gold btn-medium'
 															, 'ng-click' => 'confirm.resendClientConfirmation()'
@@ -98,7 +98,7 @@
 								{!! Form::password('new_password'
 											, array(
 													'ng-model' => 'confirm.record.new_password'
-												, 'placeholder' => 'trans('messages.new_password')'
+												, 'placeholder' => trans('messages.new_password')
 											)
 								) !!}
 							</div>
@@ -109,13 +109,13 @@
 								{!! Form::password('confirm_password'
 											, array(
 													'ng-model' => 'confirm.record.confirm_password'
-												, 'placeholder' => 'trans('messages.confirm_new_password')'
+												, 'placeholder' => trans('messages.confirm_new_password')
 											)
 								) !!}
 							</div>
 
 							<div class="btn-container">
-								{!! Form::button('trans('messages.set_password')'
+								{!! Form::button(trans('messages.set_password')
 										, array(
 											'class' => 'btn btn-blue btn-large'
 											, 'ng-click' => 'confirm.setNewClientPassword()'

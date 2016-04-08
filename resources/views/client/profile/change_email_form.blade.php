@@ -11,7 +11,7 @@
     		{!! Form::text('current_email', ''
     			, array(
         			'class' => 'form-control'
-        			, 'placeholder' => 'trans('messages.current_email')'
+        			, 'placeholder' => trans('messages.current_email')
                     , 'ng-class' => "{ 'required-field' : profile.fields['current_email'] }"
         			, 'ng-model' => 'profile.change.current_email'
         			, 'ng-model-options' => "{ debounce: {'default' : 1000} }"
@@ -30,7 +30,7 @@
     		{!! Form::text('new_email', ''
     			, array(
         			'class' => 'form-control'
-        			, 'placeholder' => 'trans('messages.new_email')'
+        			, 'placeholder' => trans('messages.new_email')
                     , 'ng-class' => "{ 'required-field' : profile.fields['new_email'] }"
         			, 'ng-model' => 'profile.change.new_email'
         			, 'ng-model-options' => "{ debounce: {'default' : 1000} }"
@@ -49,7 +49,7 @@
     		{!! Form::text('confirm_email', ''
     			, array(
         			'class' => 'form-control'
-        			, 'placeholder' => 'trans('messages.confirm_email')'
+        			, 'placeholder' => trans('messages.confirm_email')
         			, 'ng-model' => 'profile.change.confirm_email'
                     , 'ng-class' => "{ 'required-field' : profile.fields['confirm_email'] }"
         			, 'ng-model-options' => "{ debounce: {'default' : 1000} }"
@@ -68,20 +68,20 @@
     			, array(
         			'class' => 'form-control'
                     , 'ng-class' => "{ 'required-field' : profile.fields['password'] }"
-        			, 'placeholder' => 'trans('messages.password')'
+        			, 'placeholder' => trans('messages.password')
         			, 'ng-model' => 'profile.change.password') 
         		)!!}
         </div>		
 	</div>
 	<div class="btn-container">
-		{!! Form::button('trans('messages.save')'
+		{!! Form::button(trans('messages.save')
             , array(
                 'class' => 'btn btn-blue btn-medium'
                 , 'ng-click' => "profile.changeClientEmail()"
             )
         ) !!}
 
-        {!! Form::button('trans('messages.cancel')'
+        {!! Form::button(trans('messages.cancel')
             , array(
                 'class' => 'btn btn-gold btn-medium'
                 , 'ng-click' => "profile.setClientProfileActive('index')"

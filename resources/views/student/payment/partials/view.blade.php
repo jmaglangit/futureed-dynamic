@@ -58,7 +58,7 @@
 								<div class="col-xs-4">
 									{!! Form::text('name',''
 				        				, array(
-				        					'placeHolder' => 'trans('messages.payment_status')'
+				        					'placeHolder' => trans('messages.payment_status')
 				        					, 'ng-model' => 'payment.invoice.payment_status'
 				        					, 'ng-disabled' => 'true'
 				        					, 'class' => 'form-control'
@@ -115,7 +115,7 @@
 												'ng-disabled' => true
 												, 'class' => 'form-control'
 												, 'ng-model' => 'payment.invoice.discount'
-												, 'placeholder' => 'trans('messages.discount')'
+												, 'placeholder' => trans('messages.discount')
 											]
 										) !!}
 										<span class="input-group-addon" id="basic-addon1">%</span>
@@ -190,7 +190,7 @@
 					<div class="col-xs-4">
 						{!! Form::text('subject',''
 	        				, array(
-								'placeHolder' => 'trans('messages.subject')'
+								'placeHolder' => trans('messages.subject')
 								, 'ng-model' => 'payment.invoice.subject_name'
 								, 'ng-disabled' => 'true'
 								, 'class' => 'form-control'
@@ -202,7 +202,7 @@
 					<div class="col-xs-4">
 						{!! Form::text('name',''
 	        				, array(
-								'placeHolder' => 'trans('messages.payment_status')'
+								'placeHolder' => trans('messages.payment_status')
 								, 'ng-model' => 'payment.invoice.payment_status'
 								, 'ng-disabled' => 'true'
 								, 'class' => 'form-control'
@@ -258,7 +258,7 @@
 									'ng-disabled' => true
 									, 'class' => 'form-control'
 									, 'ng-model' => 'payment.invoice.discount'
-									, 'placeholder' => 'trans('messages.discount')'
+									, 'placeholder' => trans('messages.discount')
 								]
 							) !!}
 							<span class="input-group-addon" id="basic-addon1">%</span>
@@ -305,21 +305,21 @@
 			<hr />
 
 			<div class="btn-container" ng-if="payment.invoice.payment_status == futureed.PENDING">
-	    		{!! Form::button('trans('messages.delete_subscription')'
+	    		{!! Form::button(trans('messages.delete_subscription')
 	    			, array(
 	    				'class' => 'btn btn-gold btn-small pull-right'
 	    				, 'ng-click' => 'payment.deleteInvoice(payment.invoice.id)'
 	    			)
 	    		) !!}
 
-	    		{!! Form::button('trans('messages.save_subscription')'
+	    		{!! Form::button(trans('messages.save_subscription')
 	    			, array(
 	    				'class' => 'btn btn-blue btn-small pull-right'
 	    				, 'ng-click' => 'payment.updateSubscription(futureed.TRUE)'
 	    			)
 	    		) !!}
 
-	    		{!! Form::button('trans('messages.pay_subscription')'
+	    		{!! Form::button(trans('messages.pay_subscription')
 	    			, array(
 	    				'class' => 'btn btn-blue btn-small pull-right'
 	    				, 'ng-click' => 'payment.updateSubscription()'
@@ -328,14 +328,14 @@
 			</div>
 			<div class="btn-container" 
 				ng-if="payment.invoice.payment_status == futureed.PAID || payment.invoice.payment_status == futureed.CANCELLED">
-				{!! Form::button('trans('messages.view_list')'
+				{!! Form::button(trans('messages.view_list')
 	    			, array(
 	    				'class' => 'btn btn-gold btn-small pull-right'
 	    				, 'ng-click' => 'payment.setActive()'
 	    			)
 	    		) !!}
 
-				{!! Form::button('trans('messages.renew_subscription')'
+				{!! Form::button(trans('messages.renew_subscription')
 	    			, array(
 	    				'class' => 'btn btn-blue btn-small pull-right'
 	    				, 'ng-disabled' => '!payment.invoice.expired'

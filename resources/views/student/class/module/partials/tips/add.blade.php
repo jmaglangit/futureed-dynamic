@@ -18,7 +18,7 @@
 					{!! Form::text('title', ''
 						, array(
 						    'class' => 'form-control sidebar-input'
-						    , 'placeholder' => 'trans('messages.title')' 
+						    , 'placeholder' => trans('messages.title')
 						    , 'ng-model' => 'tips.record.title'
 						    , 'autocomplete' => 'off')
 					) !!}
@@ -30,7 +30,7 @@
 					{!! Form::textarea('content', ''
 		                , array(
 		                    'class' => 'form-control sidebar-input disabled-textarea'
-		                    , 'placeholder' => 'trans('messages.description')' 
+		                    , 'placeholder' => trans('messages.description')
 		                    , 'ng-model' => 'tips.record.content'
 		                    , 'autocomplete' => 'off')
 		            ) !!}
@@ -39,7 +39,7 @@
 		</div>
 	</div>
 	<div class="col-xs-10 col-xs-offset-2 btn-container">
-		{!! Form::button('trans('messages.submit')'
+		{!! Form::button(trans('messages.submit')
 			, array(
 			  'id' => 'validate_code_btn'
 			  , 'class' => 'btn btn-maroon btn-medium'
@@ -47,7 +47,7 @@
 			)
 		) !!}
 
-		{!! Form::button('trans('messages.back')'
+		{!! Form::button(trans('messages.back')
 			, array(
 				 'class' => 'btn btn-gold btn-medium'
 				, 'ng-click' => 'tips.viewTipList()'

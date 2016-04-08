@@ -33,7 +33,7 @@
 								  'ng-disabled' => 'true'
 								, 'class' => 'form-control'
 								, 'ng-model' => 'invoice.record.invoice_detail[0].classroom.subject.name'
-								, 'placeholder' => 'trans('messages.subject')'
+								, 'placeholder' => trans('messages.subject')
 							)
 						) !!}
 					</div>
@@ -41,10 +41,10 @@
 					<div class="col-xs-4">
 						{!! Form::select('search_status'
 							, array(
-								  ''=>'trans('messages.admin_select_status')'
-								, 'Pending' => 'trans('messages.pending')'
-								, 'Paid' => 'trans('messages.paid')'
-							 	, 'Cancelled' => 'trans('messages.cancelled')'
+								  ''=>trans('messages.admin_select_status')
+								, 'Pending' => trans('messages.pending')
+								, 'Paid' => trans('messages.paid')
+							 	, 'Cancelled' => trans('messages.cancelled')
 						 	)
 						 	, null
 						 	, array(
@@ -52,7 +52,7 @@
 						 		, 'class' => 'form-control'
 						 		, 'ng-model' => 'invoice.record.payment_status'
 						 		, 'ng-class' => "{ 'required-field' : invoice.fields['payment_status'] }"
-						 		, 'placeholder' => 'trans('messages.email')'
+						 		, 'placeholder' => trans('messages.email')
 						 	)
 						) !!}
 					</div>
@@ -65,7 +65,7 @@
 								  'ng-disabled' => 'true'
 								, 'class' => 'form-control'
 								, 'ng-model' => 'invoice.record.id'
-								, 'placeholder' => 'trans('messages.admin_invoice_no')'
+								, 'placeholder' => trans('messages.admin_invoice_no')
 							)
 						) !!}
 					</div>
@@ -76,7 +76,7 @@
 								  'ng-disabled' => 'true'
 								, 'class' => 'form-control'
 								, 'ng-model' => 'invoice.record.subscription.name'
-								, 'placeholder' => 'trans('messages.subscription')'
+								, 'placeholder' => trans('messages.subscription')
 							)
 						) !!}
 					</div>
@@ -184,7 +184,7 @@
 									'ng-disabled' => true
 									, 'class' => 'form-control'
 									, 'ng-model' => 'invoice.record.discount'
-									, 'placeholder' => 'trans('messages.discount')'
+									, 'placeholder' => trans('messages.discount')
 								]
 							) !!}
 							<span class="input-group-addon" id="basic-addon1">%</span>
@@ -204,7 +204,7 @@
 				<div class="form-group">
 					<div class="col-xs-6"></div>
 					<div class="col-xs-6 btn-container" ng-if="invoice.active_view">
-						{!! Form::button('trans('messages.edit_status')'
+						{!! Form::button(trans('messages.edit_status')
 		        			, array(
 		        				'class' => 'btn btn-blue btn-medium'
 		        				, 'ng-click' => "invoice.setActive('edit')"
@@ -212,7 +212,7 @@
 		        			)
 		        		) !!}
 
-		        		{!! Form::button('trans('messages.cancel')'
+		        		{!! Form::button(trans('messages.cancel')
 		        			, array(
 		        				'class' => 'btn btn-gold btn-medium'
 		        				, 'ng-click' => "invoice.setActive()"
@@ -222,7 +222,7 @@
 
 					<div class="col-xs-6 btn-container" ng-if="invoice.active_edit">
 
-		        		{!! Form::button('trans('messages.save_status')'
+		        		{!! Form::button(trans('messages.save_status')
 		        			, array(
 		        				'class' => 'btn btn-blue btn-medium'
 		        				, 'ng-click' => "invoice.updateStatus()"
@@ -230,7 +230,7 @@
 		        			)
 		        		) !!}
 
-		        		{!! Form::button('trans('messages.cancel')'
+		        		{!! Form::button(trans('messages.cancel')
 		        			, array(
 		        				'class' => 'btn btn-gold btn-medium'
 		        				, 'ng-click' => "invoice.details(invoice.record.id, 'view')"

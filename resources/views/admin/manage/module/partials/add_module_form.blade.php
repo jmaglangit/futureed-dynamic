@@ -66,7 +66,7 @@
 				<div class="col-xs-4">
 					{!! Form::text('area',''
 						, array(
-							'placeHolder' => 'trans('messages.area')'
+							'placeHolder' => trans('messages.area')
 							, 'ng-model' => 'module.record.area'
 							, 'ng-disabled' => '!module.record.subject_id'
 							, 'class' => 'form-control'
@@ -104,7 +104,7 @@
 				<div class="col-xs-4">
 					{!! Form::text('code',''
 						, array(
-							'placeHolder' => 'trans('messages.code')'
+							'placeHolder' => trans('messages.code')
 							, 'ng-model' => 'module.record.code'
 							, 'class' => 'form-control'
 							, 'ng-class' => "{ 'required-field' : module.fields['code'] }"
@@ -122,7 +122,7 @@
 				<div class="col-xs-4">
 					{!! Form::text('module',''
 						, array(
-							'placeHolder' => 'trans('messages.module')'
+							'placeHolder' => trans('messages.module')
 							, 'ng-model' => 'module.record.name'
 							, 'class' => 'form-control'
 							, 'ng-class' => "{ 'required-field' : module.fields['name'] }"
@@ -133,7 +133,7 @@
 				<div class="col-xs-3">
 					{!! Form::text('points_to_unlock',''
 						, array(
-							'placeHolder' => 'trans('messages.admin_points_to_unlock')'
+							'placeHolder' => trans('messages.admin_points_to_unlock')
 							, 'ng-model' => 'module.record.points_to_unlock'
 							, 'class' => 'form-control'
 							, 'ng-class' => "{ 'required-field' : module.fields['points_to_unlock'] }"
@@ -146,7 +146,7 @@
 				<div class="col-xs-4">
 					{!! Form::textarea('description',''
 						, array(
-							'placeHolder' => 'trans('messages.description')'
+							'placeHolder' => trans('messages.description')
 							, 'ng-model' => 'module.record.description'
 							, 'class' => 'form-control disabled-textarea'
 							, 'ng-class' => "{ 'required-field' : module.fields['description'] }"
@@ -158,7 +158,7 @@
 				<div class="col-xs-3">
 					{!! Form::text('points_to_finish',''
 						, array(
-							'placeHolder' => 'trans('messages.admin_points_to_finish')'
+							'placeHolder' => trans('messages.admin_points_to_finish')
 							, 'ng-model' => 'module.record.points_to_finish'
 							, 'class' => 'form-control'
 							, 'ng-class' => "{ 'required-field' : module.fields['points_to_finish'] }"
@@ -180,7 +180,7 @@
 				<div class="col-xs-5">
 					{!! Form::text('common_core_area',''
 						, array(
-							'placeHolder' => 'trans('messages.admin_common_core_area')'
+							'placeHolder' => trans('messages.admin_common_core_area')
 							, 'ng-model' => 'module.record.common_core_area'
 							, 'class' => 'form-control'
 							, 'ng-class' => "{ 'required-field' : module.fields['common_core_area'] }"
@@ -192,7 +192,7 @@
 				<div class="col-xs-5">
 					{!! Form::text('common_core_url',''
 						, array(
-							'placeHolder' => 'trans('messages.admin_common_core_url')'
+							'placeHolder' => trans('messages.admin_common_core_url')
 							, 'ng-model' => 'module.record.common_core_url'
 							, 'class' => 'form-control'
 							, 'ng-class' => "{ 'required-field' : module.fields['common_core_url'] }"
@@ -204,14 +204,14 @@
 		<fieldset>
 			<div class="form-group">
 				<div class="btn-container col-xs-9 col-xs-offset-2">
-					{!! Form::button('trans('messages.save')'
+					{!! Form::button(trans('messages.save')
 						, array(
 							'class' => 'btn btn-blue btn-medium'
 							, 'ng-click' => 'module.add()'
 						)
 					) !!}
 
-					{!! Form::button('trans('messages.cancel')'
+					{!! Form::button(trans('messages.cancel')
 						, array(
 							'class' => 'btn btn-gold btn-medium'
 							, 'ng-click' => 'module.setActive()'
@@ -236,7 +236,7 @@
 				</div>
 				<div class="modal-footer">
 					<div class="btncon col-xs-8 col-xs-offset-4 pull-left">
-						{!! Form::button('trans('messages.close')'
+						{!! Form::button(trans('messages.close')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'data-dismiss' => 'modal'

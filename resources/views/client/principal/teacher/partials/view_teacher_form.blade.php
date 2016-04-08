@@ -28,7 +28,7 @@
 					<div class="col-xs-4">
 						{!! Form::text('username',''
 							, array(
-								'placeHolder' => 'trans('messages.username')'
+								'placeHolder' => trans('messages.username')
 								, 'ng-model' => 'teacher.record.user.username'
 								, 'ng-class' => "{ 'required-field' : teacher.fields['username'] }"
 								, 'ng-disabled' => 'true'
@@ -42,7 +42,7 @@
 					<div class="col-xs-4">
 						{!! Form::text('email',''
 							, array(
-								'placeHolder' => 'trans('messages.email')'
+								'placeHolder' => trans('messages.email')
 								, 'ng-model' => 'teacher.record.user.email'
 								, 'ng-class' => "{ 'required-field' : teacher.fields['email'] }"
 								, 'ng-disabled' => 'true'
@@ -62,7 +62,7 @@
 					<div class="col-xs-4">
 						{!! Form::text('first_name',''
 							, array(
-								'placeholder' => 'trans('messages.first_name')'
+								'placeholder' => trans('messages.first_name')
 								, 'ng-disabled' => 'teacher.active_view'
 								, 'ng-model' => 'teacher.record.first_name'
 								, 'ng-class' => "{ 'required-field' : teacher.fields['first_name'] }"
@@ -75,7 +75,7 @@
 					<div class="col-xs-4">
 						{!! Form::text('last_name',''
 							, array(
-								'placeholder' => 'trans('messages.last_name')'
+								'placeholder' => trans('messages.last_name')
 								, 'ng-disabled' => 'teacher.active_view'
 								, 'ng-model' => 'teacher.record.last_name'
 								, 'ng-class' => "{ 'required-field' : teacher.fields['last_name'] }"
@@ -95,7 +95,7 @@
 					<div class="col-xs-6">
 						{!! Form::text('street_address',''
 							, array(
-								'placeHolder' => 'trans('messages.street_address')'
+								'placeHolder' => trans('messages.street_address')
 								, 'ng-disabled' => 'teacher.active_view'
 								, 'ng-model' => 'teacher.record.street_address'
 								, 'class' => 'form-control'
@@ -108,7 +108,7 @@
 					<div class="col-xs-4">
 						{!! Form::text('city',''
 							, array(
-								'placeHolder' => 'trans('messages.city')'
+								'placeHolder' => trans('messages.city')
 								, 'ng-disabled' => 'teacher.active_view'
 								, 'ng-model' => 'teacher.record.city'
 								, 'class' => 'form-control'
@@ -119,7 +119,7 @@
 					<div class="col-xs-4">
 						{!! Form::text('state',''
 							, array(
-								'placeHolder' => 'trans('messages.state')'
+								'placeHolder' => trans('messages.state')
 								, 'ng-disabled' => 'teacher.active_view'
 								, 'ng-model' => 'teacher.record.state'
 								, 'class' => 'form-control'
@@ -132,7 +132,7 @@
 					<div class="col-xs-4">
 						{!! Form::text('zip',''
 							, array(
-								'placeHolder' => 'trans('messages.postal_code')'
+								'placeHolder' => trans('messages.postal_code')
 								, 'ng-disabled' => 'teacher.active_view'
 								, 'ng-model' => 'teacher.record.zip'
 								, 'class' => 'form-control'

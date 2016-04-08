@@ -69,20 +69,20 @@
 									, 'ng-class' => "{ 'required-field' : student.fields['email'] }"
 									, 'ng-model' => 'student.record.email_exist'
 									, 'autocomplete' => 'off'
-									, 'placeHolder' => 'trans('messages.email')'
+									, 'placeHolder' => trans('messages.email')
 								]
 							) !!}
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="col-xs-7 col-xs-offset-2 btn-container">
-							{!! Form::button('trans('messages.add_student')'
+							{!! Form::button(trans('messages.add_student')
 								, array(
 									'class' => 'btn btn-blue btn-medium'
 									, 'ng-click' => 'student.addExist($event)'
 								)
 							) !!}
-							{!! Form::button('trans('messages.cancel')'
+							{!! Form::button(trans('messages.cancel')
 								, array(
 									'class' => 'btn btn-gold btn-medium'
 									, 'ng-click' => "student.setActive()"
@@ -111,7 +111,7 @@
 								[
 									'class' => 'form-control'
 									, 'ng-model' => 'student.record.username'
-									, 'placeHolder' => 'trans('messages.username')'
+									, 'placeHolder' => trans('messages.username')
 									, 'ng-class' => "{ 'required-field' : student.fields['username'] }"
 									, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
 									, 'ng-change' => 'student.checkUsername(student.record.username, futureed.STUDENT, futureed.FALSE)'
@@ -132,7 +132,7 @@
 									'class' => 'form-control'
 									, 'ng-model' => 'student.record.email'
 									, 'ng-class' => "{ 'required-field' : student.fields['email'] }"
-									, 'placeHolder' => 'trans('messages.email')'
+									, 'placeHolder' => trans('messages.email')
 									, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
 									, 'ng-change' => 'student.checkEmail(student.record.email, futureed.STUDENT, futureed.FALSE)'
 								]
@@ -156,7 +156,7 @@
 									'class' => 'form-control'
 									, 'ng-model' => 'student.record.first_name'
 									, 'ng-class' => "{ 'required-field' : student.fields['first_name'] }"
-									, 'placeHolder' => 'trans('messages.first_name')'
+									, 'placeHolder' => trans('messages.first_name')
 								]
 							) !!}
 						</div>
@@ -169,7 +169,7 @@
 									'class' => 'form-control'
 									, 'ng-model' => 'student.record.last_name'
 									, 'ng-class' => "{ 'required-field' : student.fields['last_name'] }"
-									, 'placeHolder' => 'trans('messages.last_name')'
+									, 'placeHolder' => trans('messages.last_name')
 								]
 							) !!}
 						</div>
@@ -178,9 +178,9 @@
 						<label class="col-xs-3 control-label">{!! trans('messages.gender') !!} <span class="required">*</span></label>
 						<div class="col-xs-5">
 							{!! Form::select('gender',
-								['' => 'trans('messages.select_gender')',
-								'Male'=> 'trans('messages.male')', 
-								'Female' => 'trans('messages.female')']
+								['' => trans('messages.select_gender'),
+								'Male'=> trans('messages.male'),
+								'Female' => trans('messages.female')]
 								,null,
 								['class' => 'form-control'
 								, 'ng-model' => 'student.record.gender'
@@ -203,7 +203,7 @@
 									'class' => 'form-control'
 									, 'ng-model' => 'student.record.city'
 									, 'ng-class' => "{'required-field' : student.fields['city']}"
-									, 'placeHolder' => 'trans('messages.city')'
+									, 'placeHolder' => trans('messages.city')
 								]
 							) !!}
 						</div>
@@ -215,7 +215,7 @@
 								[
 									'class' => 'form-control',
 									'ng-model' => 'student.record.state',
-									'placeHolder' => 'trans('messages.state')'
+									'placeHolder' => trans('messages.state')
 								]
 							) !!}
 						</div>
@@ -233,13 +233,13 @@
 
 				<fieldset>
 					<div class="col-xs-8 col-xs-offset-1 btn-container">
-						{!! Form::button('trans('messages.add_student')'
+						{!! Form::button(trans('messages.add_student')
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-click' => 'student.addStudent($event)'
 							)
 						) !!}
-						{!! Form::button('trans('messages.cancel')'
+						{!! Form::button(trans('messages.cancel')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'ng-click' => "student.setActive()"

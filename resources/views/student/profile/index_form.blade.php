@@ -11,7 +11,7 @@
 				{!! Form::text('username', ''
 					, array(
 						'class' => 'form-control'
-						, 'placeholder' => 'trans('messages.username')' 
+						, 'placeholder' => trans('messages.username')
 						, 'ng-disabled' => '!profile.active_edit' 
 						, 'ng-model' => 'profile.prof.username'
 						, 'ng-class' => "{ 'required-field' : profile.fields['username']}"
@@ -30,7 +30,7 @@
 					{!! Form::text('email', ''
 						, array(
 							'class' => 'form-control'
-							, 'placeholder' => 'trans('messages.email_address')' 
+							, 'placeholder' => trans('messages.email_address')
 							, 'readonly' => 'readonly'
 							, 'ng-model' => 'profile.prof.email'
 						)
@@ -46,7 +46,7 @@
 				{!! Form::text('email', ''
 					, array(
 						'class' => 'form-control'
-						, 'placeholder' => 'trans('messages.pending_email_address')' 
+						, 'placeholder' => trans('messages.pending_email_address')
 						, 'readonly' => 'readonly' 
 						, 'ng-model' => 'profile.prof.new_email'
 					)
@@ -65,7 +65,7 @@
 				{!! Form::text('first_name', ''
 					, array(
 						'class' => 'form-control'
-						, 'placeholder' => 'trans('messages.first_name')'
+						, 'placeholder' => trans('messages.first_name')
 						, 'ng-disabled' => '!profile.active_edit' 
 						, 'ng-class' => "{ 'required-field' : profile.fields['first_name']}"
 						, 'ng-model' => 'profile.prof.first_name')
@@ -76,7 +76,7 @@
 				{!! Form::text('last_name', ''
 					, array(
 						'class' => 'form-control'
-						, 'placeholder' => 'trans('messages.last_name')'
+						, 'placeholder' => trans('messages.last_name')
 						, 'ng-disabled' => '!profile.active_edit' 
 						, 'ng-class' => "{ 'required-field' : profile.fields['last_name']}"
 						, 'ng-model' => 'profile.prof.last_name')
@@ -94,7 +94,7 @@
 					, array(
 						'class' => 'form-control'
 						, 'ng-disabled' => 'true'
-						, 'placeholder' => 'trans('messages.age')' 
+						, 'placeholder' => trans('messages.age')
 						, 'ng-model' => 'profile.prof.age')
 				) !!}
 			</div>
@@ -104,9 +104,9 @@
 			<div class="col-xs-4">
 				{!! Form::select(''
 					, array(
-						'' => 'trans('messages.select_gender')'
-						, 'Male' => 'trans('messages.male')'
-						, 'Female' => 'trans('messages.female')'
+						'' => trans('messages.select_gender')
+						, 'Male' => trans('messages.male')
+						, 'Female' => trans('messages.female')
 					)
 					, 'prof.gender'
 					, array(
@@ -122,7 +122,7 @@
 					, array(
 						'class' => 'form-control'
 						, 'ng-disabled' => '!profile.active_edit'
-						, 'placeholder' => 'trans('messages.state')' 
+						, 'placeholder' => trans('messages.state')
 						, 'ng-class' => "{ 'required-field' : profile.fields['state']}"
 						, 'ng-model' => 'profile.prof.state')
 				) !!}
@@ -135,7 +135,7 @@
 					, array(
 						'class' => 'form-control'
 						, 'ng-disabled' => '!profile.active_edit'
-						, 'placeholder' => 'trans('messages.city')' 
+						, 'placeholder' => trans('messages.city')
 						, 'ng-class' => "{ 'required-field' : profile.fields['city']}"
 						, 'ng-model' => 'profile.prof.city')
 				) !!}
@@ -163,7 +163,7 @@
 					, array(
 						'class' => 'form-control'
 						, 'ng-disabled' => '!profile.active_edit'
-						, 'placeholder' => 'trans('messages.school_name')' 
+						, 'placeholder' => trans('messages.school_name')
 						, 'ng-class' => "{ 'required-field' : profile.fields['first_name']}"
 						, 'ng-model' => 'prof.school_name')
 				) !!}
@@ -186,14 +186,14 @@
 	<div class="form-group">
 		<div class="btn-container">
 			<div class="col-xs-9 col-xs-offset-2" ng-if="!profile.active_edit">
-				{!! Form::button('trans('messages.student_change_picture_password')'
+				{!! Form::button(trans('messages.student_change_picture_password')
 					, array(
 						'class' => 'btn btn-maroon btn-medium'
 						, 'ng-click' => "profile.setStudentProfileActive('password')"
 					)
 				) !!}
 
-				{!! Form::button('trans('messages.edit_profile')'
+				{!! Form::button(trans('messages.edit_profile')
 					, array(
 						'class' => 'btn btn-gold btn-medium'
 						, 'ng-click' => "profile.setStudentProfileActive('edit')"
@@ -202,14 +202,14 @@
 			</div>
 
 			<div class="col-xs-9 col-xs-offset-2" ng-if="profile.active_edit">
-				{!! Form::button('trans('messages.save_changes')'
+				{!! Form::button(trans('messages.save_changes')
 					, array(
 						'class' => 'btn btn-maroon btn-medium'
 						, 'ng-click' => 'profile.saveProfile()'
 					)
 				) !!}
 
-				{!! Form::button('trans('messages.cancel')'
+				{!! Form::button(trans('messages.cancel')
 					, array(
 						'class' => 'btn btn-gold btn-medium'
 						, 'ng-click' => "profile.setStudentProfileActive('index')"

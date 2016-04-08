@@ -27,7 +27,7 @@
 				<div class="col-xs-5">
 					{!! Form::text('search_module', ''
 						,array(
-							'placeholder' => 'trans('messages.module')'
+							'placeholder' => trans('messages.module')
 							, 'ng-model' => 'answer.search.module'
 							, 'class' => 'form-control'
 						)
@@ -37,7 +37,7 @@
 				<div class="col-xs-5">
 					{!! Form::text('search_subject', ''
 						,array(
-							'placeholder' => 'trans('messages.subject')'
+							'placeholder' => trans('messages.subject')
 							, 'ng-model' => 'answer.search.subject'
 							, 'class' => 'form-control'
 							, 'autocomplete' => 'off'
@@ -46,7 +46,7 @@
 				</div>
 				
 				<div class="col-xs-2">
-					{!! Form::button('trans('messages.search')'
+					{!! Form::button(trans('messages.search')
 						,array(
 							'class' => 'btn btn-blue'
 							, 'ng-click' => 'answer.searchFnc($event)'
@@ -58,7 +58,7 @@
 				<div class="col-xs-5">
 					{!! Form::text('search_subject_area', ''
 						,array(
-							'placeholder' => 'trans('messages.area')'
+							'placeholder' => trans('messages.area')
 							, 'ng-model' => 'answer.search.subject_area'
 							, 'class' => 'form-control'
 						)
@@ -68,9 +68,9 @@
 				<div class="col-xs-5">
 					{!! Form::select('search_request_answer_status'
 						, array(
-							'' => 'trans('messages.admin_select_status')'
-							, 'Pending' => 'trans('messages.pending')'
-							, 'Accepted' => 'trans('messages.accepted')'
+							'' => trans('messages.admin_select_status')
+							, 'Pending' => trans('messages.pending')
+							, 'Accepted' => trans('messages.accepted')
 						)
 						, ''
 						, array(
@@ -81,7 +81,7 @@
 				</div>
 				
 				<div class="col-xs-2">
-					{!! Form::button('trans('messages.clear')'
+					{!! Form::button(trans('messages.clear')
 						,array(
 							'class' => 'btn btn-gold'
 							, 'ng-click' => 'answer.clearFnc($event)'
@@ -93,7 +93,7 @@
 				<div class="col-xs-5">
 					{!! Form::text('help_request', ''
 						,array(
-							'placeholder' => 'trans('messages.help_request')'
+							'placeholder' => trans('messages.help_request')
 							, 'ng-model' => 'answer.search.help_request'
 							, 'class' => 'form-control'
 						)

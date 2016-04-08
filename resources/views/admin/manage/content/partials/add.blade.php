@@ -22,7 +22,7 @@
 					<div class="col-xs-4">
 						{!! Form::text('module', '',
 							[
-								'placeholder' => 'trans('messages.module')',
+								'placeholder' => trans('messages.module'),
 								'ng-disabled' => 'true',
 								'ng-model' => 'content.record.module',
 								'class' => 'form-control'
@@ -33,7 +33,7 @@
 					<div class="col-xs-4">
 						{!! Form::text('subject', '',
 							[
-								'placeholder' => 'trans('messages.subject')',
+								'placeholder' => trans('messages.subject'),
 								'ng-disabled' => 'true',
 								'ng-model' => 'content.record.subject',
 								'class' => 'form-control'
@@ -46,7 +46,7 @@
 					<div class="col-xs-4">
 						{!! Form::text('subject_area', '',
 							[
-								'placeholder' => 'trans('messages.area')',
+								'placeholder' => trans('messages.area'),
 								'ng-disabled' => 'true',
 								'ng-model' => 'content.record.subject_area',
 								'class' => 'form-control'
@@ -64,7 +64,7 @@
 					<div class="col-xs-5">
 						{!! Form::text('code', ''
 							, array(
-								'placeholder' => 'trans('messages.admin_content_code')'
+								'placeholder' => trans('messages.admin_content_code')
 								, 'ng-model' => 'content.record.code'
 								, 'ng-class' => "{ 'required-field' : content.fields['code'] }"
 								, 'class' => 'form-control'
@@ -77,7 +77,7 @@
 					<div class="col-xs-5">
 						{!! Form::text('teaching_module', ''
 							, array(
-								  'placeholder' => 'trans('messages.admin_teaching_module_name')'
+								  'placeholder' => trans('messages.admin_teaching_module_name')
 								, 'ng-model' => 'content.record.teaching_module'
 								, 'ng-class' => "{ 'required-field' : content.fields['teaching_module'] }"
 								, 'class' => 'form-control'
@@ -108,7 +108,7 @@
 					<div class="col-xs-5">
 						{!! Form::text('content_url', ''
 							, array(
-								'placeholder' => 'trans('messages.admin_video_type')'
+								'placeholder' => trans('messages.admin_video_type')
 								, 'ng-model' => 'content.record.content_url'
 								, 'ng-class' => "{ 'required-field' : content.fields['content_url'] }"
 								, 'class' => 'form-control'
@@ -124,7 +124,7 @@
 					<div class="col-xs-5">
 						{!! Form::textarea('content_text', ''
 							, array(
-								'placeholder' => 'trans('messages.admin_content_text')'
+								'placeholder' => trans('messages.admin_content_text')
 								, 'ng-model' => 'content.record.content_text'
 								, 'ng-class' => "{ 'required-field' : content.fields['content_text'] }"
 								, 'class' => 'form-control disabled-textarea'
@@ -156,7 +156,7 @@
 						{!! Form::textarea('description', ''
 							, array(
 								  'class' => 'form-control disabled-textarea'
-								, 'placeholder' => 'trans('messages.description')'
+								, 'placeholder' => trans('messages.description')
 								, 'ng-model' => 'content.record.description'
 								, 'ng-class' => "{ 'required-field' : content.fields['description'] }"
 								, 'rows' => '5'
@@ -169,7 +169,7 @@
 					<div class="col-xs-5">
 						{!! Form::text('seq_no', ''
 							, array(
-								'placeholder' => 'trans('messages.sequence_number')'
+								'placeholder' => trans('messages.sequence_number')
 								, 'ng-model' => 'content.record.seq_no'
 								, 'ng-class' => "{ 'required-field' : content.fields['seq_no'] }"
 								, 'class' => 'form-control'
@@ -210,14 +210,14 @@
 	        	</div>
 	        	<div class="form-group">
 	        		<div class="btn-container col-xs-8 col-xs-offset-2">
-						{!! Form::button('trans('messages.admin_add_content')'
+						{!! Form::button(trans('messages.admin_add_content')
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-click' => "content.add()"
 							)
 						) !!}
 
-						{!! Form::button('trans('messages.cancel')'
+						{!! Form::button(trans('messages.cancel')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'ng-click' => "content.setActive()"
@@ -242,7 +242,7 @@
                 </div>
                 <div class="modal-footer">
                     <div class="btncon col-xs-8 col-xs-offset-4 pull-left">
-                        {!! Form::button('trans('messages.close')'
+                        {!! Form::button(trans('messages.close')
                             , array(
                                 'class' => 'btn btn-gold btn-medium'
                                 , 'data-dismiss' => 'modal'

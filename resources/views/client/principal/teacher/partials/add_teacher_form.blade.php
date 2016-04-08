@@ -34,7 +34,7 @@
 					<div class="col-xs-4">
 						{!! Form::text('username', ''
 							, array(
-								'placeholder' => 'trans('messages.username')',
+								'placeholder' => trans('messages.username'),
 								'ng-class' => "{ 'required-field' : teacher.fields['username']}", 
 								'ng-model' => 'teacher.record.username',
 								'ng-model-options' => "{ debounce : {'default' : 1000} }",
@@ -55,7 +55,7 @@
 					<div class="col-xs-4">
 						{!! Form::text('email', ''
 							, array(
-								'placeholder' => 'trans('messages.email')',
+								'placeholder' => trans('messages.email'),
 								'ng-model' => 'teacher.record.email',
 								'ng-class' => "{ 'required-field' : teacher.fields['email']}", 
 								'ng-model-options' => "{ debounce : {'default' : 1000} }",
@@ -85,7 +85,7 @@
 								'class' => 'form-control',
 								'ng-class' => "{ 'required-field' : teacher.fields['first_name']}", 
 								'ng-model' => 'teacher.record.first_name',
-								'placeholder' => 'trans('messages.first_name')'
+								'placeholder' => trans('messages.first_name')
 							]
 						) !!}
 					</div>
@@ -98,7 +98,7 @@
 								'class' => 'form-control',
 								'ng-class' => "{ 'required-field' : teacher.fields['last_name']}", 
 								'ng-model' => 'teacher.record.last_name',
-								'placeholder' => 'trans('messages.last_name')'
+								'placeholder' => trans('messages.last_name')
 							]
 						) !!}
 					</div>
@@ -110,7 +110,7 @@
 							{!! trans('messages.client_send_invitation') !!}
 						</button>
 
-						{!! Form::button('trans('messages.cancel')'
+						{!! Form::button(trans('messages.cancel')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'ng-click' => 'teacher.setActive()'

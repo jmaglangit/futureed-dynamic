@@ -25,7 +25,7 @@
 					{!! Form::text('current_email', ''
 		    			, array(
 		        			'class' => 'form-control'
-		        			, 'placeholder' => 'trans('messages.current_email')'
+		        			, 'placeholder' => trans('messages.current_email')
 		        			, 'ng-model' => 'teacher.change.current_email'
 		        			, 'ng-model-options' => "{ debounce: {'default' : 1000} }"
 		        			, 'ng-class' => "{ 'required-field' : teacher.fields['current_email'] || teacher.fields['email'] }"
@@ -45,7 +45,7 @@
 		    		{!! Form::text('new_email', ''
 		    			, array(
 		        			'class' => 'form-control'
-		        			, 'placeholder' => 'trans('messages.new_email')'
+		        			, 'placeholder' => trans('messages.new_email')
 		        			, 'ng-model' => 'teacher.change.new_email'
 		        			, 'ng-model-options' => "{ debounce: {'default' : 1000} }"
 		        			, 'ng-class' => "{ 'required-field' : teacher.fields['new_email'] }"
@@ -65,7 +65,7 @@
 		    		{!! Form::text('confirm_email', ''
 		    			, array(
 		        			'class' => 'form-control'
-		        			, 'placeholder' => 'trans('messages.confirm_email')'
+		        			, 'placeholder' => trans('messages.confirm_email')
 		        			, 'ng-model' => 'teacher.change.confirm_email'
 		        			, 'ng-model-options' => "{ debounce: {'default' : 1000} }"
 		        			, 'ng-class' => "{ 'required-field' : teacher.fields['confirm_email'] || teacher.fields['new_email'] }"
@@ -86,20 +86,20 @@
 								'class' => 'form-control'
 								, 'ng-model' => 'teacher.change.password'
 								, 'ng-class' => "{ 'required-field' : teacher.fields['password'] }"
-								, 'placeHolder' => 'trans('messages.password')'
+								, 'placeHolder' => trans('messages.password')
 							])
 					!!}
 				</div>
 			</div>
 			<div class="col-xs-8 col-xs-offset-1">
 				<div class="btn-container">
-					{!! Form::button('trans('messages.save')'
+					{!! Form::button(trans('messages.save')
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-click' => "teacher.updateEmail()"
 							)
 						) !!}
-					{!! Form::button('trans('messages.cancel')'
+					{!! Form::button(trans('messages.cancel')
 						, array(
 							'class' => 'btn btn-gold btn-medium'
 							, 'ng-click' => "teacher.setActive(futureed.ACTIVE_VIEW, teacher.record.id)"

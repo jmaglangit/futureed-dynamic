@@ -33,7 +33,7 @@
 				<div class="col-xs-6">
 					{!! Form::text('search_subject', ''
 						,array(
-							'placeholder' => 'trans('messages.name')'
+							'placeholder' => trans('messages.name')
 							, 'ng-model' => 'subject.search.name'
 							, 'class' => 'form-control btn-fit'
 						)
@@ -41,7 +41,7 @@
 				</div>
 				
 				<div class="col-xs-3">
-					{!! Form::button('trans('messages.search')'
+					{!! Form::button(trans('messages.search')
 						,array(
 							'class' => 'btn btn-blue'
 							, 'ng-click' => 'subject.searchFnc($event)'
@@ -49,7 +49,7 @@
 					)!!}
 				</div>
 				<div class="col-xs-3">
-					{!! Form::button('trans('messages.clear')'
+					{!! Form::button(trans('messages.clear')
 						,array(
 							'class' => 'btn btn-gold'
 							, 'ng-click' => 'subject.clear()'

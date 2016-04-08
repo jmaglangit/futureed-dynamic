@@ -36,7 +36,7 @@
 						, array(
 							'class' => 'form-control'
 							, 'ng-model' => 'payment.search.order_no'
-							, 'placeholder' => 'trans('messages.admin_order_no')'
+							, 'placeholder' => trans('messages.admin_order_no')
 							, 'autocomplete' => 'off'
 						)
 					) !!}
@@ -48,7 +48,7 @@
 					</select>
 				</div>
 				<div class="col-xs-2">
-					{!! Form::button('trans('messages.search')'
+					{!! Form::button(trans('messages.search')
 						, array(
 							'class' => 'btn btn-blue'
 							, 'ng-click' => 'payment.searchFnc($event)'
@@ -56,7 +56,7 @@
 					) !!}
 				</div>
 				<div class="col-xs-2">
-					{!! Form::button('trans('messages.clear')'
+					{!! Form::button(trans('messages.clear')
 						, array(
 							'class' => 'btn btn-gold'
 							, 'ng-click' => 'payment.clear()'
@@ -167,7 +167,7 @@
 			    </div>
 			    <div class="modal-footer">
 			    	<div class="btncon col-md-8 col-md-offset-4 pull-left">
-			            {!! Form::button('trans('messages.yes')'
+			            {!! Form::button(trans('messages.yes')
 			                , array(
 			                    'class' => 'btn btn-blue btn-medium'
 			                    , 'ng-click' => 'payment.deleteInvoice(payment.delete_invoice.id)'
@@ -175,7 +175,7 @@
 			                )
 			            ) !!}
 
-			            {!! Form::button('trans('messages.no')'
+			            {!! Form::button(trans('messages.no')
 			                , array(
 			                    'class' => 'btn btn-gold btn-medium'
 			                    , 'data-dismiss' => 'modal'
@@ -199,7 +199,7 @@
 	        </div>
 	        <div class="modal-footer">
 	        	<div class="btncon col-md-8 col-md-offset-4 pull-left">
-	                {!! Form::button('trans('messages.yes')'
+	                {!! Form::button(trans('messages.yes')
 	                    , array(
 	                        'class' => 'btn btn-blue btn-medium'
 	                        , 'ng-click' => 'payment.cancelInvoice(payment.cancel_invoice.id)'
@@ -207,7 +207,7 @@
 	                    )
 	                ) !!}
 
-	                {!! Form::button('trans('messages.no')'
+	                {!! Form::button(trans('messages.no')
 	                    , array(
 	                        'class' => 'btn btn-gold btn-medium'
 	                        , 'data-dismiss' => 'modal'

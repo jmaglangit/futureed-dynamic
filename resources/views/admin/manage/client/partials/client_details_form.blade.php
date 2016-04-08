@@ -30,7 +30,7 @@
 	        		<div class="col-xs-5">
 	        			{!! Form::text('username',''
 	        				, array(
-	        					'placeHolder' => 'trans('messages.username')'
+	        					'placeHolder' => trans('messages.username')
 	        					, 'ng-model' => 'client.record.username'
 	        					, 'ng-disabled' => 'client.active_view'
 	        					, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
@@ -51,7 +51,7 @@
 	        		<div class="col-xs-5">
 	        			{!! Form::text('email',''
 	        				, array(
-	        					'placeHolder' => 'trans('email')'
+	        					'placeHolder' => trans('email')
 	        					, 'ng-model' => 'client.record.email'
 	        					, 'ng-disabled' => 'client.active_view'
 	        					, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
@@ -126,7 +126,7 @@
 	        		<div class="col-xs-5">
 	        			{!! Form::text('first_name',''
 	        				, array(
-	        					'placeHolder' => 'trans('messages.first_name')'
+	        					'placeHolder' => trans('messages.first_name')
 	        					, 'ng-model' => 'client.record.first_name'
 	        					, 'ng-disabled' => 'client.active_view'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['first_name'] }"
@@ -140,7 +140,7 @@
 	        		<div class="col-xs-5">
 	        			{!! Form::text('last_name',''
 	        				, array(
-	        					'placeHolder' => 'trans('messages.last_name')'
+	        					'placeHolder' => trans('messages.last_name')
 	        					, 'ng-model' => 'client.record.last_name'
 	        					, 'ng-disabled' => 'client.active_view'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['last_name'] }"
@@ -154,7 +154,7 @@
 	        		<div class="col-xs-5">
 	        			{!! Form::select('client_role'
 	        				, [	
-	        					'' => 'trans('messages.select_role')',
+	        					'' => trans('messages.select_role'),
 	            				'Principal' => 'Principal', 
 	            				'Teacher' => 'Teacher', 
 	            				'Parent' => 'Parent'
@@ -178,7 +178,7 @@
 	        		<div class="col-xs-6">
 	        			{!! Form::text('school_name',''
 	        				, array(
-	        					'placeHolder' => 'trans('messages.school_name')'
+	        					'placeHolder' => trans('messages.school_name')
 	        					, 'ng-disabled' => 'true'
 	        					, 'ng-model' => 'client.record.school_name'
 	        					, 'ng-change' => "client.searchSchool('edit')"
@@ -210,7 +210,7 @@
 	        		<div class="col-xs-6">
 	        			{!! Form::text('school_name',''
 	        				, array(
-	        					'placeHolder' => 'trans('messages.school_name')'
+	        					'placeHolder' => trans('messages.school_name')
 	        					, 'ng-model' => 'client.record.school_name'
 	        					, 'ng-disabled' => 'client.active_view'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['school_name'] }"
@@ -224,7 +224,7 @@
 	        		<div class="col-xs-6">
 	        			{!! Form::text('school_address',''
 	        				, array(
-	        					'placeHolder' => 'trans('messages.school_address')'
+	        					'placeHolder' => trans('messages.school_address')
 	        					, 'ng-model' => 'client.record.school_street_address'
 	        					, 'ng-disabled' => 'client.active_view'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['school_address'] }"
@@ -238,7 +238,7 @@
 	        		<div class="col-xs-5">
 	        			{!! Form::text('school_city',''
 	        				, array(
-	        					'placeHolder' => 'trans('messages.school_city')'
+	        					'placeHolder' => trans('messages.school_city')
 	        					, 'ng-model' => 'client.record.school_city'
 	        					, 'ng-disabled' => 'client.active_view'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['school_city'] }"
@@ -252,7 +252,7 @@
 	        		<div class="col-xs-5">
 	        			{!! Form::text('school_state',''
 	        				, array(
-	        					'placeHolder' => 'trans('messages.school_state')'
+	        					'placeHolder' => trans('messages.school_state')
 	        					, 'ng-model' => 'client.record.school_state'
 	        					, 'ng-disabled' => 'client.active_view'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['school_state'] }"
@@ -294,7 +294,7 @@
 	        		<div class="col-xs-6">
 	        			{!! Form::text('school_contact_name',''
 	        				, array(
-	        					'placeHolder' => 'trans('messages.contact_person')'
+	        					'placeHolder' => trans('messages.contact_person')
 	        					, 'ng-model' => 'client.record.school_contact_name'
 	        					, 'ng-disabled' => 'client.active_view'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['school_contact_name'] }"
@@ -308,7 +308,7 @@
 	        		<div class="col-xs-6">
 	        			{!! Form::text('school_contact_number',''
 	        				, array(
-	        					'placeHolder' => 'trans('messages.contact_number')'
+	        					'placeHolder' => trans('messages.contact_number')
 	        					, 'ng-model' => 'client.record.school_contact_number'
 	        					, 'ng-disabled' => 'client.active_view'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['school_contact_number'] }"
@@ -330,7 +330,7 @@
 	        		<div class="col-xs-6">
 	        			{!! Form::text('street_address',''
 	        				, array(
-	        					'placeHolder' => 'trans('messages.street_address')'
+	        					'placeHolder' => trans('messages.street_address')
 	        					, 'ng-model' => 'client.record.street_address'
 	        					, 'ng-disabled' => 'client.active_view'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['street_address'] }"
@@ -344,7 +344,7 @@
 	        		<div class="col-xs-5">
 	        			{!! Form::text('city',''
 	        				, array(
-	        					'placeHolder' => 'trans('messages.city')'
+	        					'placeHolder' => trans('messages.city')
 	        					, 'ng-model' => 'client.record.city'
 	        					, 'ng-disabled' => 'client.active_view'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['city'] }"
@@ -358,7 +358,7 @@
 	        		<div class="col-xs-5">
 	        			{!! Form::text('state',''
 	        				, array(
-	        					'placeHolder' => 'trans('messages.state')'
+	        					'placeHolder' => trans('messages.state')
 	        					, 'ng-model' => 'client.record.state'
 	        					, 'ng-disabled' => 'client.active_view'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['state'] }"
@@ -372,7 +372,7 @@
 	        		<div class="col-xs-5">
 	        			{!! Form::text('zip',''
 	        				, array(
-	        					'placeHolder' => 'trans('messages.postal_code')'
+	        					'placeHolder' => trans('messages.postal_code')
 	        					, 'ng-model' => 'client.record.zip'
 	        					, 'ng-disabled' => 'client.active_view'
 	        					, 'ng-class' => "{ 'required-field' : client.fields['zip'] }"
@@ -395,14 +395,14 @@
 		        <div class="btn-container">
 		        	<div ng-if="client.active_view">
 		        		<div ng-if="client.record.account_status == futureed.PENDING">
-			        		{!! Form::button('trans('messages.verify')'
+			        		{!! Form::button(trans('messages.verify')
 				        		, array(
 				        			'class' => 'btn btn-blue btn-medium'
 				        			, 'ng-click' => "client.verifyClient()"
 				        		)
 				        	) !!}
 
-				        	{!! Form::button('trans('messages.reject')'
+				        	{!! Form::button(trans('messages.reject')
 				        		, array(
 				        			'class' => 'btn btn-gold btn-medium'
 				        			, 'ng-click' => "client.rejectClient()"
@@ -411,14 +411,14 @@
 			        	</div>
 
 			        	<div class="margin-10-top">
-				        	{!! Form::button('trans('messages.edit')'
+				        	{!! Form::button(trans('messages.edit')
 				        		, array(
 				        			'class' => 'btn btn-blue btn-medium'
 				        			, 'ng-click' => "client.setActive(futureed.ACTIVE_EDIT, client.record.id)"
 				        		)
 				        	) !!}
 
-				        	{!! Form::button('trans('messages.cancel')'
+				        	{!! Form::button(trans('messages.cancel')
 				        		, array(
 				        			'class' => 'btn btn-gold btn-medium'
 				        			, 'ng-click' => 'client.setActive()'
@@ -428,14 +428,14 @@
 		        	</div>
 
 		        	<div ng-if="client.active_edit">
-		        		{!! Form::button('trans('messages.save')'
+		        		{!! Form::button(trans('messages.save')
 			        		, array(
 			        			'class' => 'btn btn-blue btn-medium'
 			        			, 'ng-click' => 'client.updateClientDetails()'
 			        		)
 			        	) !!}
 
-			        	{!! Form::button('trans('messages.cancel')'
+			        	{!! Form::button(trans('messages.cancel')
 			        		, array(
 			        			'class' => 'btn btn-gold btn-medium'
 			        			, 'ng-click' => "client.setActive(futureed.ACTIVE_VIEW, client.record.id)"

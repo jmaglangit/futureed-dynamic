@@ -56,7 +56,7 @@
                     <div class="col-xs-5">
                         {!! Form::text('Email',''
                             , array(
-                                'placeHolder' => 'trans('messages.email')'
+                                'placeHolder' => trans('messages.email')
                                 , 'ng-model' => 'payment.add.email'
                                 , 'class' => 'form-control'
                             )
@@ -86,7 +86,7 @@
                     <div class="col-xs-5">
                         {!! Form::text('name',''
                             , array(
-                                'placeHolder' => 'trans('messages.name')'
+                                'placeHolder' => trans('messages.name')
                                 , 'ng-model' => 'payment.add.name'
                                 , 'ng-model-options' => "{ debounce : {'default' : 1000} }"
                                 , 'ng-change' => "payment.searchName()"
@@ -133,7 +133,7 @@
 
         <div ng-if="payment.invoice.payment_status == futureed.PAID || payment.invoice.payment_status == futureed.CANCELLED">
             <div class="col-xs-3 pull-right" ng-if="payment.print">
-                {!! Form::button('trans('messages.print')'
+                {!! Form::button(trans('messages.print')
                     , array(
                         'class' => 'btn btn-blue btn-medium pull-right'
                         , 'ng-click' => 'payment.print()'
@@ -217,7 +217,7 @@
                         <div class="col-xs-4">
                             {!! Form::text('invoice',''
                                 , array(
-                                    'placeHolder' => 'trans('messages.status')'
+                                    'placeHolder' => trans('messages.status')
                                     , 'ng-model' => 'payment.invoice.payment_status'
                                     , 'class' => 'form-control'
                                     , 'ng-disabled' => 'true'
@@ -343,7 +343,7 @@
                                     'ng-disabled' => true
                                     , 'class' => 'form-control'
                                     , 'ng-model' => 'payment.invoice.discount'
-                                    , 'placeholder' => 'trans('messages.discount')'
+                                    , 'placeholder' => trans('messages.discount')
                                 ]
                             ) !!}
                             <span class="input-group-addon" id="basic-addon1">%</span>
@@ -394,21 +394,21 @@
         <hr/>
         <div class="col-xs-12">
             <div class="btn-container">
-                {!! Form::button('trans('messages.delete_subscription')'
+                {!! Form::button(trans('messages.delete_subscription')
                     , array(
                         'class' => 'btn btn-gold btn-semi-medium div-right'
                         , 'ng-click' => "payment.deleteInvoice()"
                         , 'ng-if' => "payment.invoice.payment_status == futureed.PENDING"
                     )
                 ) !!}
-                {!! Form::button('trans('messages.view_list')'
+                {!! Form::button(trans('messages.view_list')
                     , array(
                         'class' => 'btn btn-gold btn-semi-medium div-right'
                         , 'ng-click' => "payment.setActive()"
                         , 'ng-if' => "payment.invoice.payment_status != futureed.PENDING"
                     )
                 ) !!}
-                {!! Form::button('trans('messages.renew_subscription')'
+                {!! Form::button(trans('messages.renew_subscription')
                     , array(
                         'class' => 'btn btn-blue btn-semi-medium div-right'
                         , 'ng-click' => 'payment.renewSubscription()'
@@ -416,14 +416,14 @@
                         , 'ng-disabled' => '!payment.invoice.expired'
                     )
                 ) !!}
-                {!! Form::button('trans('messages.save_subscription')'
+                {!! Form::button(trans('messages.save_subscription')
                     , array(
                         'class' => 'btn btn-blue btn-semi-medium div-right'
                         , 'ng-click' => "payment.savePayment()"
                         , 'ng-if' => "payment.invoice.payment_status == futureed.PENDING"
                     )
                 ) !!}
-                {!! Form::button('trans('messages.pay_subscription')'
+                {!! Form::button(trans('messages.pay_subscription')
                     , array(
                         'class' => 'btn btn-blue btn-semi-medium div-right'
                         , 'ng-click' => "payment.addPayment()"
@@ -448,7 +448,7 @@
 
                 <div class="modal-footer">
                     <div class="btncon col-md-8 col-md-offset-4 pull-left">
-                        {!! Form::button('trans('messages.yes')'
+                        {!! Form::button(trans('messages.yes')
                             , array(
                                 'class' => 'btn btn-blue btn-medium'
                                 , 'ng-click' => "payment.removeStudent()"
@@ -456,7 +456,7 @@
                             )
                         ) !!}
 
-                        {!! Form::button('trans('messages.no')'
+                        {!! Form::button(trans('messages.no')
                             , array(
                                 'class' => 'btn btn-gold btn-medium'
                                 , 'data-dismiss' => 'modal'

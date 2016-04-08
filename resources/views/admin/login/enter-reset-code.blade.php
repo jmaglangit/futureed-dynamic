@@ -62,7 +62,7 @@
 
 					{!! Form::text('reset_code', ''
 						, array(
-							'placeholder' => 'trans('messages.admin_forgot_enter_code')'
+							'placeholder' => trans('messages.admin_forgot_enter_code')
 							, 'ng-model' => 'forgot.record.reset_code'
 							, 'autocomplete' => 'off'
 						)
@@ -70,14 +70,14 @@
 				</div>
 				
 				<div class="btn-container">
-					{!! Form::button('trans('messages.client_proceed')'
+					{!! Form::button(trans('messages.client_proceed')
 						, array(
 							'class' => 'btn btn-blue btn-medium'
 							, 'ng-click' => 'forgot.validateCode($event)'
 						)
 					) !!}
 
-					{!! Form::button('trans('messages.client_resend_code')'
+					{!! Form::button(trans('messages.client_resend_code')
 						, array(
 							'class' => 'btn btn-gold btn-medium'
 							, 'ng-click' => 'forgot.resendCode()'

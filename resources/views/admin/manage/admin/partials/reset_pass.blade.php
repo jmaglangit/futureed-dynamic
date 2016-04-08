@@ -29,7 +29,7 @@
 			<div class="col-xs-5">
 				{!! Form::password('new_password',
 						[
-							'placeholder' => 'trans('messages.password')'
+							'placeholder' => trans('messages.password')
 							, 'ng-model' => 'admin.change.new_password'
 							, 'ng-class' => "{ 'required-field' : admin.fields['new_password'] }"
 							, 'class' => 'form-control'
@@ -42,7 +42,7 @@
 			<div class="col-xs-5">
 				{!! Form::password('confirm_password',
 						[
-							'placeholder' => 'trans('messages.password')'
+							'placeholder' => trans('messages.password')
 							, 'ng-model' => 'admin.change.confirm_password'
 							, 'ng-class' => "{ 'required-field' : admin.fields['confirm_password'] || admin.fields['new_password'] }"
 							, 'class' => 'form-control'
@@ -51,14 +51,14 @@
 			</div>
 		</div>
 		<div class="btn-container col-xs-7 col-xs-offset-2">
-			{!! Form::button('trans('messages.reset')'
+			{!! Form::button(trans('messages.reset')
 				, array(
 					'class' => 'btn btn-blue btn-medium'
 					, 'ng-click' => "admin.resetPassword()"
 				)
 			) !!}
 
-			{!! Form::button('trans('messages.cancel')'
+			{!! Form::button(trans('messages.cancel')
 				, array(
 					'class' => 'btn btn-gold btn-medium'
 					, 'ng-click' => "admin.setActive(futureed.ACTIVE_VIEW, admin.record.id)"
@@ -79,7 +79,7 @@
 			</p>
 
 			<div class="btn-container">
-				{!! Form::button('trans('messages.view_profile')',
+				{!! Form::button(trans('messages.view_profile'),
 					array(
 						'class' => 'btn btn-blue'
 						, 'ng-click' => 'admin.setActive(futureed.ACTIVE_VIEW, admin.record.id)'

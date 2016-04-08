@@ -9,7 +9,7 @@
 						'class' => 'form-control'
 						, 'autocomplete' => 'off'
 						, 'ng-class' => "{ 'required-field' : login.fields['email'] }"
-						, 'placeholder' => 'trans('messages.email_address')'
+						, 'placeholder' => trans('messages.email_address')
 						, 'ng-model' => 'login.record.email'
 						, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
 						, 'ng-change' => "login.checkEmail(login.record.email, futureed.CLIENT, futureed.FALSE)"
@@ -30,7 +30,7 @@
 						'class' => 'form-control'
 						, 'autocomplete' => 'off'
 						, 'ng-class' => "{ 'required-field' : login.fields['username'] }"
-						, 'placeholder' => 'trans('messages.username')'
+						, 'placeholder' => trans('messages.username')
 						, 'ng-model' => 'login.record.username'
 						, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
 						, 'ng-change' => "login.checkUsername(login.record.username, futureed.CLIENT, futureed.FALSE)"
@@ -52,7 +52,7 @@
 					, array(
 						'class' => 'form-control'
 						, 'ng-class' => "{ 'required-field' : login.fields['password'] }"
-						, 'placeholder' => 'trans('messages.password')'
+						, 'placeholder' => trans('messages.password')
 						, 'ng-model' => 'login.record.password'
 					)
 				) !!}
@@ -64,7 +64,7 @@
 					, array(
 						'class' => 'form-control'
 						, 'ng-class' => "{ 'required-field' : login.fields['password'] }"
-						, 'placeholder' => 'trans('messages.confirm_password')'
+						, 'placeholder' => trans('messages.confirm_password')
 						, 'ng-model' => 'login.record.confirm_password'
 					)
 				) !!}
@@ -82,7 +82,7 @@
 						'class' => 'form-control'
 						, 'autocomplete' => 'off'
 						, 'ng-class' => "{ 'required-field' : login.fields['first_name'] }"
-						, 'placeholder' => 'trans('messages.first_name')'
+						, 'placeholder' => trans('messages.first_name')
 						, 'ng-model' => 'login.record.first_name'
 					)
 				) !!}
@@ -94,7 +94,7 @@
 						'class' => 'form-control'
 						, 'autocomplete' => 'off'
 						, 'ng-class' => "{ 'required-field' : login.fields['last_name'] }"
-						, 'placeholder' => 'trans('messages.last_name')'
+						, 'placeholder' => trans('messages.last_name')
 						, 'ng-model' => 'login.record.last_name'
 					)
 				) !!}
@@ -108,7 +108,7 @@
 				, array(
 					'class' => 'form-control'
 					, 'ng-class' => "{ 'required-field' : login.fields['street_address'] }"
-					, 'placeholder' => 'trans('messages.street_address')'
+					, 'placeholder' => trans('messages.street_address')
 					, 'ng-model' => 'login.record.street_address'
 				)
 				) !!}
@@ -122,7 +122,7 @@
 					, array(
 						'class' => 'form-control'
 						, 'ng-class' => "{ 'required-field' : login.fields['city'] }"
-						, 'placeholder' => 'trans('messages.city')'
+						, 'placeholder' => trans('messages.city')
 						, 'ng-model' => 'login.record.city'
 					)
 				) !!}
@@ -133,7 +133,7 @@
 					, array(
 						'class' => 'form-control'
 						, 'ng-class' => "{ 'required-field' : login.fields['state'] }"
-						, 'placeholder' => 'trans('messages.state')'
+						, 'placeholder' => trans('messages.state')
 						, 'ng-model' => 'login.record.state'
 					)
 				) !!}
@@ -147,7 +147,7 @@
 					, array(
 						'class' => 'form-control'
 						, 'ng-class' => "{ 'required-field' : login.fields['zip'] }"
-						, 'placeholder' => 'trans('messages.postal_code')'
+						, 'placeholder' => trans('messages.postal_code')
 						, 'ng-model' => 'login.record.zip'
 					)
 				) !!}
@@ -176,7 +176,7 @@
 						, array(
 							'class' => 'form-control'
 							, 'ng-class' => "{ 'required-field' : login.fields['school_name'] }"
-							, 'placeholder' => 'trans('messages.school_name')'
+							, 'placeholder' => trans('messages.school_name')
 							, 'ng-model' => 'login.record.school_name'
 						)
 					) !!}
@@ -190,7 +190,7 @@
 						, array(
 							'class' => 'form-control'
 							, 'ng-class' => "{ 'required-field' : login.fields['school_address'] }"
-							, 'placeholder' => trans('messages.school_address')'
+							, 'placeholder' => trans('messages.school_address')
 							, 'ng-model' => 'login.record.school_address'
 						)
 					) !!}
@@ -204,7 +204,7 @@
 						, array(
 							'class' => 'form-control'
 							, 'ng-class' => "{ 'required-field' : login.fields['school_city'] }"
-							, 'placeholder' => 'trans('messages.city')'
+							, 'placeholder' => trans('messages.city')
 							, 'ng-model' => 'login.record.school_city'
 						)
 					) !!}
@@ -215,7 +215,7 @@
 						, array(
 							'class' => 'form-control'
 							, 'ng-class' => "{ 'required-field' : login.fields['school_state'] }"
-							, 'placeholder' => 'trans('messages.state')'
+							, 'placeholder' => trans('messages.state')
 							, 'ng-model' => 'login.record.school_state'
 						)
 					) !!}
@@ -229,7 +229,7 @@
 						, array(
 							'class' => 'form-control'
 							, 'ng-class' => "{ 'required-field' : login.fields['school_zip'] }"
-							, 'placeholder' => 'trans('messages.postal_code')'
+							, 'placeholder' => trans('messages.postal_code')
 							, 'ng-model' => 'login.record.school_zip'
 						)
 					) !!}
@@ -255,7 +255,7 @@
 						, array(
 							'class' => 'form-control'
 							, 'ng-class' => "{ 'required-field' : login.fields['contact_name'] }"
-							, 'placeholder' => 'trans('messages.contact_person')'
+							, 'placeholder' => trans('messages.contact_person')
 							, 'ng-model' => 'login.record.contact_name'
 						)
 					) !!}
@@ -269,7 +269,7 @@
 						, array(
 							'class' => 'form-control'
 							, 'ng-class' => "{ 'required-field' : login.fields['contact_number'] }"
-							, 'placeholder' => 'trans('messages.contact_number')'
+							, 'placeholder' => trans('messages.contact_number')
 							, 'ng-model' => 'login.record.contact_number'
 						)
 					) !!}
@@ -287,7 +287,7 @@
 
 						I agree on the 
 
-						{!! Html::link('#', 'trans('messages.terms_and_conditions')'
+						{!! Html::link('#', trans('messages.terms_and_conditions')
 							, array(
 								'ng-click' => "showModal('terms_modal')"
 								, 'data-toggle' => 'modal'
@@ -296,7 +296,7 @@
 
 						and 
 
-						{!! Html::link('#', 'trans('messages.data_privacy_policy')'
+						{!! Html::link('#', trans('messages.data_privacy_policy')
 							, array(
 								'ng-click' => "showModal('policy_modal')"
 								, 'data-toggle' => 'modal'

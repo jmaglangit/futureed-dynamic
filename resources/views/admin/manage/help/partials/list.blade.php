@@ -27,7 +27,7 @@
 				<div class="col-xs-5">
 					{!! Form::text('search_module', ''
 						,array(
-							'placeholder' => 'trans('messages.module')'
+							'placeholder' => trans('messages.module')
 							, 'ng-model' => 'help.search.module'
 							, 'class' => 'form-control btn-fit'
 						)
@@ -37,7 +37,7 @@
 				<div class="col-xs-5">
 					{!! Form::text('search_subject', ''
 						,array(
-							'placeholder' => 'trans('messages.subject')'
+							'placeholder' => trans('messages.subject')
 							, 'ng-model' => 'help.search.subject'
 							, 'class' => 'form-control btn-fit'
 						)
@@ -57,7 +57,7 @@
 				<div class="col-xs-5">
 					{!! Form::text('search_subject_area', ''
 						,array(
-							'placeholder' => 'trans('messages.area')'
+							'placeholder' => trans('messages.area')
 							, 'ng-model' => 'help.search.subject_area'
 							, 'class' => 'form-control btn-fit'
 						)
@@ -67,9 +67,9 @@
 				<div class="col-xs-5">
 					{!! Form::select('search_status'
 						, array(
-							'' => 'trans('messages.admin_select_status')'
-							, 'Pending' => 'trans('messages.pending')'
-							, 'Accepted' => 'trans('messages.accepted')'
+							'' => trans('messages.admin_select_status')
+							, 'Pending' => trans('messages.pending')
+							, 'Accepted' => trans('messages.accepted')
 						)
 						, ''
 						, array(
@@ -80,7 +80,7 @@
 				</div>
 				
 				<div class="col-xs-2">
-					{!! Form::button('trans('messages.clear')'
+					{!! Form::button(trans('messages.clear')
 						,array(
 							'class' => 'btn btn-gold'
 							, 'ng-click' => 'help.clearFnc($event)'
@@ -92,7 +92,7 @@
 				<div class="col-xs-5">
 					{!! Form::text('search_title', ''
 						,array(
-							'placeholder' => 'trans('messages.title')'
+							'placeholder' => trans('messages.title')
 							, 'ng-model' => 'help.search.title'
 							, 'class' => 'form-control btn-fit'
 						)

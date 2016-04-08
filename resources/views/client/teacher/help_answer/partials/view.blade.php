@@ -29,7 +29,7 @@
 							'ng-disabled'=>'true'
 							, 'class' => 'form-control'
 							, 'ng-model' => 'answer.record.subject'
-							, 'placeholder' => 'trans('messages.subject')'
+							, 'placeholder' => trans('messages.subject')
 						)
 					) !!}
 				</div>
@@ -42,7 +42,7 @@
 							'ng-disabled'=>'true'
 							, 'class' => 'form-control'
 							, 'ng-model' => 'answer.record.subject_area'
-							, 'placeholder' => 'trans('messages.subject_area')'
+							, 'placeholder' => trans('messages.subject_area')
 						)
 					) !!}
 				</div>
@@ -55,7 +55,7 @@
 							'ng-disabled'=>'true'
 							, 'class' => 'form-control'
 							, 'ng-model' => 'answer.record.module'
-							, 'placeholder' => 'trans('messages.module')'
+							, 'placeholder' => trans('messages.module')
 						)
 					) !!}
 				</div>
@@ -68,7 +68,7 @@
 							'ng-disabled'=>'true'
 							, 'class' => 'form-control'
 							, 'ng-model' => 'answer.record.title'
-							, 'placeholder' => 'trans('messages.title')'
+							, 'placeholder' => trans('messages.title')
 						)
 					) !!}
 				</div>
@@ -82,7 +82,7 @@
 							, 'class' => 'form-control disabled-textarea'
 							, 'ng-class' => "{ 'required-field' : answer.fields['content'] }"
 							, 'ng-model' => 'answer.record.content'
-							, 'placeholder' => 'trans('messages.answer')'
+							, 'placeholder' => trans('messages.answer')
 						)
 					) !!}
 				</div>
@@ -104,20 +104,20 @@
 							'ng-disabled'=>'true'
 							, 'class' => 'form-control'
 							, 'ng-model' => 'answer.record.created_by'
-							, 'placeholder' => 'trans('messages.created_by')'
+							, 'placeholder' => trans('messages.created_by')
 						)
 					) !!}
 				</div>
 			</div>
 			<div class="form-group" ng-if="answer.active_view && answer.record.request_answer_status == futureed.PENDING">
 				<div class="btn-container col-xs-8 col-xs-offset-1">
-					{!! Form::button('trans('messages.approve')'
+					{!! Form::button(trans('messages.approve')
 						, array(
 							'class' => 'btn btn-blue btn-medium'
 							, 'ng-click' => "answer.rateAnswer()"
 						)
 					) !!}
-					{!! Form::button('trans('messages.reject')'
+					{!! Form::button(trans('messages.reject')
 						, array(
 							'class' => 'btn btn-gold btn-medium'
 							, 'ng-click' => "answer.updateStatus(answer.record.id, futureed.FALSE)"
@@ -128,13 +128,13 @@
 
 			<div class="form-group" ng-if="answer.active_view">
 				<div class="btn-container col-xs-8 col-xs-offset-1">
-					{!! Form::button('trans('messages.edit')'
+					{!! Form::button(trans('messages.edit')
 						, array(
 							'class' => 'btn btn-blue btn-medium'
 							, 'ng-click' => "answer.setActive(futureed.ACTIVE_EDIT, answer.record.id)"
 						)
 					) !!}
-					{!! Form::button('trans('messages.cancel')'
+					{!! Form::button(trans('messages.cancel')
 						, array(
 							'class' => 'btn btn-gold btn-medium'
 							, 'ng-click' => "answer.setActive(futureed.ACTIVE_LIST)"
@@ -145,13 +145,13 @@
 
 			<div class="form-group" ng-if="answer.active_edit">
 				<div class="btn-container col-xs-8 col-xs-offset-1">
-					{!! Form::button('trans('messages.save')'
+					{!! Form::button(trans('messages.save')
 						, array(
 							'class' => 'btn btn-blue btn-medium'
 							, 'ng-click' => "answer.update()"
 						)
 					) !!}
-					{!! Form::button('trans('messages.cancel')'
+					{!! Form::button(trans('messages.cancel')
 						, array(
 							'class' => 'btn btn-gold btn-medium'
 							, 'ng-click' => "answer.setActive(futureed.ACTIVE_VIEW, answer.record.id)"
@@ -177,7 +177,7 @@
 					</div>
 					{!! Form::select('rate'
 						, array(
-							'' => 'trans('messages.select_rate')'
+							'' => trans('messages.select_rate')
 							, '1' => '1'
 							, '2' => '2'
 							, '3' => '3'
@@ -193,13 +193,13 @@
 				</div>
 				<div class="modal-footer">
 					<div class="btncon col-md-8 col-md-offset-4 pull-left">
-						{!! Form::button('trans('messages.accept')'
+						{!! Form::button(trans('messages.accept')
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-click' => 'answer.updateStatus(answer.record.id, futureed.TRUE)'
 							)
 						) !!}
-						{!! Form::button('trans('messages.cancel')'
+						{!! Form::button(trans('messages.cancel')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'data-dismiss' => 'modal'

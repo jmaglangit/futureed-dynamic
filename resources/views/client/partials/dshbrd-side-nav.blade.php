@@ -13,7 +13,7 @@
 			{!! trans('messages.welcome') !!}, {! user.first_name !}
 		</div>
 		<div class="back-link">
-			{!! HTML::link(route('client.dashboard.index'),'trans('messages.back_to_dashboard')') !!}
+			{!! HTML::link(route('client.dashboard.index'),trans('messages.back_to_dashboard')) !!}
 		</div>
 	</div>
 

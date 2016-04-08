@@ -164,7 +164,7 @@
 		</div>
 	</div>
 	<div class="col-xs-12 btn-container">
-		{!! Form::button('trans('messages.back')'
+		{!! Form::button(trans('messages.back')
     		, array(
     			'class' => 'btn btn-gold btn-small pull-right'
     			, 'ng-click' => "student.setActive('view', student.record.id)"

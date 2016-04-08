@@ -27,7 +27,7 @@
 					<div class="col-xs-5">
 						{!! Form::text('code',''
 							, array(
-								'placeHolder' => 'trans('messages.admin_grade_code')'
+								'placeHolder' => trans('messages.admin_grade_code')
 								, 'ng-model' => 'grade.record.code'
 								, 'ng-class' => "{ 'required-field' : grade.fields['code'] }"
 								, 'class' => 'form-control'
@@ -40,7 +40,7 @@
 					<div class="col-xs-5">
 						{!! Form::text('name',''
 							, array(
-								'placeHolder' => 'trans('messages.admin_grade_name')'
+								'placeHolder' => trans('messages.admin_grade_name')
 								, 'ng-model' => 'grade.record.name'
 								, 'ng-class' => "{ 'required-field' : grade.fields['name'] }"
 								, 'class' => 'form-control'
@@ -109,14 +109,14 @@
 			<fieldset>
 				<div class="form-group">
 					<div class="btn-container col-xs-9 col-xs-offset-1">
-						{!! Form::button('trans('messages.save')'
+						{!! Form::button(trans('messages.save')
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-click' => 'grade.add()'
 							)
 						) !!}
 
-						{!! Form::button('trans('messages.cancel')'
+						{!! Form::button(trans('messages.cancel')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'ng-click' => 'grade.setActive()'

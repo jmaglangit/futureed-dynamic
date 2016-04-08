@@ -32,7 +32,7 @@
 					{!! Form::text('new_email', ''
 						, array(
 							'class' => 'form-control'
-							, 'placeholder' => 'trans('messages.admin_new_email')'
+							, 'placeholder' => trans('messages.admin_new_email')
 							, 'ng-model' => 'admin.change.new_email'
 							, 'ng-model-options' => "{ debounce: {'default' : 1000} }"
 							, 'ng-class' => "{ 'required-field' : admin.fields['new_email'] }"
@@ -53,7 +53,7 @@
 					{!! Form::text('confirm_email', ''
 						, array(
 							'class' => 'form-control'
-							, 'placeholder' => 'trans('messages.confirm_email')'
+							, 'placeholder' => trans('messages.confirm_email')
 							, 'ng-model' => 'admin.change.confirm_email'
 							, 'ng-model-options' => "{ debounce: {'default' : 1000} }"
 							, 'ng-class' => "{ 'required-field' : admin.fields['confirm_email'] || admin.fields['new_email'] }"
@@ -70,14 +70,14 @@
 
 		<fieldset>
 			<div class="btn-container col-xs-7 col-xs-offset-2">
-				{!! Form::button('trans('messages.save')'
+				{!! Form::button(trans('messages.save')
 					, array(
 						'class' => 'btn btn-blue btn-medium'
 						, 'ng-click' => "admin.changeAdminEmail()"
 					)
 				) !!}
 
-				{!! Form::button('trans('messages.cancel')'
+				{!! Form::button(trans('messages.cancel')
 					, array(
 						'class' => 'btn btn-gold btn-medium'
 						, 'ng-click' => "admin.setActive(futureed.ACTIVE_VIEW, admin.record.id)"

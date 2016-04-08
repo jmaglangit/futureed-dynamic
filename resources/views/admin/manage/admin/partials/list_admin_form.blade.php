@@ -37,7 +37,7 @@
 						, [
 							'class' => 'form-control'
 							, 'ng-model' => 'admin.search.user'
-							, 'placeholder' => 'trans('messages.username')'
+							, 'placeholder' => trans('messages.username')
 						]
 					) !!}
 				</div>
@@ -46,12 +46,12 @@
 						, [
 							'class' => 'form-control'
 							, 'ng-model' => 'admin.search.email'
-							, 'placeholder' => 'trans('messages.email')'
+							, 'placeholder' => trans('messages.email')
 						]
 					) !!}
 				</div>
 				<div class="col-xs-2">
-					{!! Form::button('trans('messages.search')'
+					{!! Form::button(trans('messages.search')
 						,array(
 							'class' => 'btn btn-blue'
 							, 'ng-click' => 'admin.getAdminList()'
@@ -62,7 +62,7 @@
 			<div class="form-group">
 				<div class="col-xs-5">
 					{!! Form::select('role', 
-						array('' => 'trans('messages.select_role')' ,
+						array('' => trans('messages.select_role') ,
 							'Admin' => 'Admin', 
 							'Super Admin' => 'Super Admin'), 
 							null, 
@@ -71,7 +71,7 @@
 				</div>
 				<div class="col-xs-5"></div>
 				<div class="col-xs-2">
-					{!! Form::button('trans('messages.clear')'
+					{!! Form::button(trans('messages.clear')
 						,array(
 							'class' => 'btn btn-gold'
 							, 'ng-click' => 'admin.clearSearch()'

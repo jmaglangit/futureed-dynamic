@@ -25,7 +25,7 @@
 						</div>						
 						{!! Form::password('new_password'
 								, array(
-										'placeholder' => 'trans('messages.enter_password')'
+										'placeholder' => trans('messages.enter_password')
 										, 'ng-model' => 'forgot.new_password'
 										, 'autocomplete' => 'off'
 								)
@@ -38,13 +38,13 @@
 						</div>
 						{!! Form::password('confirm_password'
 								, array(
-										'placeholder' => 'trans('messages.confirm_password')'
+										'placeholder' => trans('messages.confirm_password')
 										, 'ng-model' => 'forgot.confirm_password'
 								)
 						) !!}
 					</div>
 
-					{!! Form::button('trans('messages.reset')'
+					{!! Form::button( trans('messages.reset')
 						, array(
 							'class' => 'btn btn-blue'
 							, 'ng-click' => 'forgot.resetPassword()'

@@ -22,7 +22,7 @@
 				</div>
 				{!! Form::text('login', ''
 					, array(
-						'placeholder' => 'trans('messages.email_or_username')'
+						'placeholder' => trans('messages.email_or_username')
 						, 'ng-model' => 'login.username'
 						, 'autocomplete' => 'off'
 					)
@@ -35,7 +35,7 @@
 				</div>
 				{!! Form::password('password'
 					, array(
-						'placeholder' => 'trans('messages.password')'
+						'placeholder' => trans('messages.password')
 						, 'ng-model' => 'login.password'
 					)
 				) !!}
@@ -49,10 +49,10 @@
 				</div>
 				{!! Form::select('role'
 					, array(
-						'' => 'trans('messages.select_role')'
-						, 'Parent' => 'trans('messages.parent')'
-						, 'Teacher' => 'trans('messages.teacher')'
-						, 'Principal' => 'trans('messages.principal')'
+						'' => trans('messages.select_role')
+						, 'Parent' => trans('messages.parent')
+						, 'Teacher' => trans('messages.teacher')
+						, 'Principal' => trans('messages.principal')
 					)
 					, ''
 					, array(
@@ -69,7 +69,7 @@
 			) !!}
 		
 			<div class="form-group">
-				{!! Form::button('trans('messages.login')'
+				{!! Form::button(trans('messages.login')
 					, array(
 						'class' => 'btn btn-blue'
 						, 'ng-click' => 'login.clientLogin()'
@@ -103,7 +103,7 @@
 
 				{!! Html::link(
 					route('student.login')
-					, 'trans('messages.here')') 
+					, trans('messages.here'))
 				!!}
 
 				{!! trans('messages.for_student_site') !!}
@@ -112,12 +112,12 @@
 
 			<div class="text-group">
 				<small>
-					{!! Html::link(route('client.login.forgot_password'), 'trans('messages.forgot_your_password')') !!}
+					{!! Html::link(route('client.login.forgot_password'), trans('messages.forgot_your_password')) !!}
 				</small>  
 			</div>
 
 			<p>
-				{!! Html::link(route('client.registration'), 'trans('messages.sign_up')'
+				{!! Html::link(route('client.registration'), trans('messages.sign_up')
 					, array(
 						'class' => 'btn btn-gold fb'
 					)

@@ -77,7 +77,7 @@
 			<div class="modal-footer">
 				<div class="btn-container">
 					<div ng-if="mod.module_message.skip_module">
-						{!! Form::button('trans('messages.proceed_to_questions')'
+						{!! Form::button(trans('messages.proceed_to_questions')
 							, array(
 								'class' => 'btn btn-maroon btn-semi-medium'
 								, 'data-dismiss' => 'modal'
@@ -87,7 +87,7 @@
 
 					</div>
 					<div ng-if="mod.module_message.no_questions">
-						{!! Html::link(route('student.dashboard.index'), 'trans('messages.proceed_to_dashboard')'
+						{!! Html::link(route('student.dashboard.index'), trans('messages.proceed_to_dashboard')
 							, array(
 								'class' => 'btn btn-maroon btn-medium'
 							)

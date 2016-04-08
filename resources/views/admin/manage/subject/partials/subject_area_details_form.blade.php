@@ -25,7 +25,7 @@
 					<div class="col-xs-5">
 						{!! Form::text('subject_id',''
 							, array(
-								'placeHolder' => 'trans('messages.admin_subject_code')'
+								'placeHolder' => trans('messages.admin_subject_code')
 								, 'ng-model' => 'area.record.subject_id'
 								, 'ng-class' => "{ 'required-field' : area.fields['subject_id'] }"
 								, 'ng-disabled' => 'true'
@@ -39,7 +39,7 @@
 					<div class="col-xs-5">
 						{!! Form::text('subject_id',''
 							, array(
-								'placeHolder' => 'trans('messages.admin_subject_name')'
+								'placeHolder' => trans('messages.admin_subject_name')
 								, 'ng-model' => 'area.record.subject_name'
 								, 'ng-class' => "{ 'required-field' : area.fields['subject_name'] }"
 								, 'ng-disabled' => 'true'
@@ -53,7 +53,7 @@
 					<div class="col-xs-5">
 						{!! Form::text('code',''
 							, array(
-								'placeHolder' => 'trans('messages.admin_area_code')'
+								'placeHolder' => trans('messages.admin_area_code')
 								, 'ng-model' => 'area.record.code'
 								, 'ng-class' => "{ 'required-field' : area.fields['code'] }"
 								, 'ng-disabled' => 'true'
@@ -67,7 +67,7 @@
 					<div class="col-xs-5">
 						{!! Form::text('name',''
 							, array(
-								'placeHolder' => 'trans('messages.area')'
+								'placeHolder' => trans('messages.area')
 								, 'ng-model' => 'area.record.name'
 								, 'ng-class' => "{ 'required-field' : area.fields['name'] }"
 								, 'class' => 'form-control'
@@ -80,7 +80,7 @@
 						<div class="col-xs-5">
 							{!! Form::textarea('description','',
 							[
-								'id'=> 'trans('messages.description')'
+								'id'=> trans('messages.description')
 								, 'class' => 'form-control disabled-textarea'
 								, 'ng-class' => "{ 'required-field' : area.fields['description'] }"
 								, 'ng-model' => 'area.record.description'
@@ -123,14 +123,14 @@
 			<fieldset>
 				<div class="form-group">
 					<div class="btn-container col-xs-9 col-xs-offset-1">
-						{!! Form::button('trans('messages.update')'
+						{!! Form::button(trans('messages.update')
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-click' => 'area.update()'
 							)
 						) !!}
 
-						{!! Form::button('trans('messages.cancel')'
+						{!! Form::button(trans('messages.cancel')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'ng-click' => "area.setActive()"

@@ -37,7 +37,7 @@
 							[
 								'class' => 'form-control'
 								, 'ng-model' => 'discount.record.name'
-								, 'placeholder' => 'trans('messages.name')'
+								, 'placeholder' => trans('messages.name')
 								, 'autocomplete' => 'off'
 								, 'ng-disabled' => 'discount.active_edit'
 								, 'ng-model-options' => "{ debounce : {'default' : 1000} }"
@@ -67,7 +67,7 @@
 								, 'ng-disabled' => 'true'
 								, 'ng-model' => 'discount.record.email'
 								, 'ng-class' => "{ 'required-field' : discount.fields['email'] }"
-								, 'placeholder' => 'trans('messages.email_address')'
+								, 'placeholder' => trans('messages.email_address')
 							]) 
 						!!}
 					</div>
@@ -79,7 +79,7 @@
 							{!! Form::text('percentage', '', 
 								[	
 									'class' => 'form-control' 
-									, 'placeholder' => 'trans('messages.admin_discount_percentage')'
+									, 'placeholder' => trans('messages.admin_discount_percentage')
 									, 'ng-model' => 'discount.record.percentage'
 									, 'ng-class' => "{ 'required-field' : discount.fields['percentage'] }"
 								]) 
@@ -119,7 +119,7 @@
 				<fieldset>
 					<div class="form-group">
 						<div class="btn-container col-xs-9 col-xs-offset-1">
-							{!! Form::button('trans('messages.update')'
+							{!! Form::button(trans('messages.update')
 								, array(
 									'class' => 'btn btn-blue btn-medium'
 									, 'ng-click' => "discount.update()"
@@ -127,7 +127,7 @@
 								)
 							) !!}
 
-							{!! Form::button('trans('messages.admin_add_client_discount')'
+							{!! Form::button(trans('messages.admin_add_client_discount')
 								, array(
 									'class' => 'btn btn-blue btn-medium'
 									, 'ng-click' => "discount.add()"
@@ -135,7 +135,7 @@
 								)
 							) !!}
 
-							{!! Form::button('trans('messages.cancel')'
+							{!! Form::button(trans('messages.cancel')
 								, array(
 									'class' => 'btn btn-gold btn-medium'
 									, 'ng-click' => "discount.setActive()"

@@ -13,7 +13,7 @@
 				{!! Form::text('points', ''
                     , array(
                         'class' => 'form-control'
-                        , 'placeholder' => 'trans('messages.points')' 
+                        , 'placeholder' => trans('messages.points')
                         , 'ng-disabled' => 'true'
                         , 'ng-model' => 'profile.prof.points')
                 ) !!}

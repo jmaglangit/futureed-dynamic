@@ -23,7 +23,7 @@
 				<div class="col-xs-4">
 					{!! Form::select('search_status'
 						, array(
-							'' => 'trans('messages.select_difficulty')'
+							'' => trans('messages.select_difficulty')
 							, '1' => '1'
 							, '2' => '2'
 							, '3' => '3'
@@ -37,7 +37,7 @@
 					) !!}
 				</div>
 				<div class="col-xs-2">
-					{!! Form::button('trans('messages.clear')'
+					{!! Form::button(trans('messages.clear')
 						,array(
 							'class' => 'btn btn-gold'
 							, 'ng-click' => 'question.clearFnc($event)'

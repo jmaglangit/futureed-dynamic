@@ -26,14 +26,14 @@
 									, array(
 											'class' => 'form-control'
 										, 'ng-model' => 'password.record.username'
-										, 'placeholder' => 'trans('messages.email_or_username')'
+										, 'placeholder' => trans('messages.email_or_username')
 										, 'autocomplete' => 'off'
 									)
 						)!!}
 					</div>
 
 					<div class="btn-container">
-						{!! Form::button('trans('messages.forgot_send')'
+						{!! Form::button(trans('messages.forgot_send')
 								, array(
 											'id' => 'proceed_btn'
 										, 'class' => 'btn btn-blue btn-medium'
@@ -42,7 +42,7 @@
 								)
 						) !!}
 
-						{!! Html::link(route('client.login'), 'trans('messages.cancel')'
+						{!! Html::link(route('client.login'), trans('messages.cancel')
 								, array(
 									'class' => 'btn btn-gold btn-medium'
 								)
@@ -100,21 +100,21 @@
 
 				{!! Form::open(array('ng-submit' => 'password.clientValidateCode($event)')) !!} 
 					<div class="form-group">
-						{!! Form::label(null, 'trans('messages.client_enter_reset_code'):') !!}
+						{!! Form::label(null, trans('messages.client_enter_reset_code'):') !!}
 
 						{!! Form::text('reset_code', '',
 							array(
 								'class' => 'form-control'
 								, 'ng-model' => 'password.record.reset_code'
 								, 'ng-disabled' => 'password.password_set'
-								, 'placeholder' => 'trans('messages.client_reset_code')'
+								, 'placeholder' => trans('messages.client_reset_code')
 								, 'autocomplete' => 'off'
 							)
 						) !!}
 					</div>
 
 					<div class="btn-container">
-						{!! Form::button('trans('messages.client_proceed')'
+						{!! Form::button(trans('messages.client_proceed')
 							, array(
 								'id' => 'proceed_btn'
 								, 'class' => 'btn btn-blue btn-medium'
@@ -123,7 +123,7 @@
 							)
 						) !!}
 
-						{!! Form::button('trans('messages.client_resend_code')'
+						{!! Form::button(trans('messages.client_resend_code')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'ng-if' => '!password.password_set'

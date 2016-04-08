@@ -38,7 +38,7 @@
 				<div class="col-xs-4">
 					{!! Form::text('search_title', ''
 						,array(
-							'placeholder' => 'trans('messages.admin_help_request_title')'
+							'placeholder' => trans('messages.admin_help_request_title')
 							, 'ng-model' => 'help.search.title'
 							, 'class' => 'form-control'
 							, 'autocomplete' => 'off'
@@ -49,9 +49,9 @@
 				<div class="col-xs-4">
 					{!! Form::select('search_help_request_type'
 						, array(
-							  '' => 'trans('messages.all')'
-							, 'Own' => 'trans('messages.your_req')'
-							, 'Others' => 'trans('messages.other_req')'
+							  '' => trans('messages.all')
+							, 'Own' => trans('messages.your_req')
+							, 'Others' => trans('messages.other_req')
 						), '$request_type'
 						, array(
 							  'ng-model' => 'help.search.help_request_type'
@@ -61,7 +61,7 @@
 				</div>
 				
 				<div class="col-xs-2">
-					{!! Form::button('trans('messages.search')'
+					{!! Form::button(trans('messages.search')
 						,array(
 							'class' => 'btn btn-blue'
 							, 'ng-click' => 'help.searchFnc($event)'
@@ -70,7 +70,7 @@
 				</div>
 
 				<div class="col-xs-2">
-					{!! Form::button('trans('messages.clear')'
+					{!! Form::button(trans('messages.clear')
 						,array(
 							'class' => 'btn btn-gold'
 							, 'ng-click' => 'help.clearFnc($event)'

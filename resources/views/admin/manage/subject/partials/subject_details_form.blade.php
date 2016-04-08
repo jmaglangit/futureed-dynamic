@@ -38,7 +38,7 @@
 					<div class="col-xs-5">
 						{!! Form::text('name',''
 							, array(
-								'placeHolder' => 'trans('messages.admin_subject_name')'
+								'placeHolder' => trans('messages.admin_subject_name')
 								, 'ng-model' => 'subject.record.name'
 								, 'ng-class' => "{ 'required-field' : subject.fields['name'] }"
 								, 'class' => 'form-control'
@@ -92,14 +92,14 @@
 			<fieldset>
 				<div class="form-group">
 					<div class="btn-container col-xs-8 col-xs-offset-1">
-						{!! Form::button('trans('messages.update')'
+						{!! Form::button(trans('messages.update')
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-click' => 'subject.update()'
 							)
 						) !!}
 
-						{!! Form::button('trans('messages.cancel')'
+						{!! Form::button(trans('messages.cancel')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'ng-click' => 'subject.setActive()'

@@ -11,7 +11,7 @@
 				<div class="col-xs-2">
 					{!! Form::text('search_name', ''
 						,array(
-							'placeholder' => 'trans('messages.module')'
+							'placeholder' => trans('messages.module')
 							, 'ng-model' => 'class.search.module_name'
 							, 'class' => 'form-control btn-fit'
 							, 'data-clear-btn' => 'true'
@@ -21,9 +21,9 @@
 				<div class="col-xs-3">
 					{!! Form::select('search_module_status'
 						, array(
-							'' => 'trans('messages.all')'
-							, 'On Going' => 'trans('messages.ongoing')'
-							, 'Completed' => 'trans('messages.completed')'
+							'' => trans('messages.all')
+							, 'On Going' => trans('messages.ongoing')
+							, 'Completed' => trans('messages.completed')
 						)
 						, ''
 						, array(
@@ -39,7 +39,7 @@
 					</select>
 				</div>
 				<div class="col-xs-2">
-					{!! Form::button('trans('messages.search')'
+					{!! Form::button(trans('messages.search')
 						, array(
 							'class' => 'btn btn-blue'
 							, 'ng-click' => 'class.searchFnc($event)'
@@ -47,7 +47,7 @@
 					) !!}
 				</div>
 				<div class="col-xs-2">
-					{!! Form::button('trans('messages.clear')'
+					{!! Form::button(trans('messages.clear')
 						, array(
 							'class' => 'btn btn-gold'
 							, 'ng-click' => 'class.clearFnc()'
@@ -67,7 +67,7 @@
 				<a href="#home" aria-controls="home" role="tab" data-toggle="tab" >{! aClass.classroom.subject.name !}</a>
 			</li>
 			<li role="presentation" class="module-tabs" ng-class="{ 'active' : aClass.class_id == class.current_class }">
-				<a href="{!! route('student.reports.index') !!}">trans('messages.reports')</a>
+				<a href="{!! route('student.reports.index') !!}">{!! trans('messages.reports') !!}</a>
 			</li>
 		</ul>
 

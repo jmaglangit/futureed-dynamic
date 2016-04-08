@@ -22,7 +22,7 @@
 					<div class="col-xs-4">
 						{!! Form::text('module', '',
 							[
-								'placeholder' => 'trans('messages.module')',
+								'placeholder' => trans('messages.module'),
 								'ng-disabled' => 'true',
 								'ng-model' => 'content.record.module',
 								'class' => 'form-control'
@@ -33,7 +33,7 @@
 					<div class="col-xs-4">
 						{!! Form::text('subject', '',
 							[
-								'placeholder' => 'trans('messages.subject')',
+								'placeholder' => trans('messages.subject'),
 								'ng-disabled' => 'true',
 								'ng-model' => 'content.record.subject',
 								'class' => 'form-control'
@@ -46,7 +46,7 @@
 					<div class="col-xs-4">
 						{!! Form::text('code', ''
 							, array(
-								'placeholder' => 'trans('messages.admin_content_code')',
+								'placeholder' => trans('messages.admin_content_code'),
 								'ng-disabled' => 'true',
 								'ng-model' => 'content.record.code',
 								'class' => 'form-control'
@@ -57,7 +57,7 @@
 					<div class="col-xs-4">
 						{!! Form::text('area', '',
 							[
-								'placeholder' => 'trans('messages.area')',
+								'placeholder' => trans('messages.area'),
 								'ng-disabled' => 'true',
 								'ng-model' => 'content.record.area',
 								'class' => 'form-control'
@@ -67,14 +67,14 @@
 				</div>
 	        	<div class="form-group" ng-if="content.record.tip_status == futureed.PENDING && content.active_view">
 	        		<div class="btn-container col-xs-8 col-xs-offset-2">
-						{!! Form::button('trans('messages.accept')'
+						{!! Form::button(trans('messages.accept')
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-click' => "content.acceptTip()"
 							)
 						) !!}
 
-						{!! Form::button('trans('messages.reject')'
+						{!! Form::button(trans('messages.reject')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'ng-click' => "content.rejectTip()"
@@ -92,7 +92,7 @@
 					<div class="col-xs-6">
 						{!! Form::text('teaching_module', ''
 							, array(
-								  'placeholder' => 'trans('messages.admin_teaching_module_name')'
+								  'placeholder' => trans('messages.admin_teaching_module_name')
 								, 'ng-disabled' => 'content.active_view'
 								, 'ng-model' => 'content.record.teaching_module'
 								, 'ng-class' => "{ 'required-field' : content.fields['teaching_module'] }"
@@ -124,7 +124,7 @@
 					<div class="col-xs-6">
 						{!! Form::text('content_url', ''
 							, array(
-								'placeholder' => 'trans('messages.admin_video_type')'
+								'placeholder' => trans('messages.admin_video_type')
 								, 'ng-model' => 'content.record.content_url'
 								, 'ng-disabled' => 'content.active_view'
 								, 'ng-class' => "{ 'required-field' : content.fields['content_url'] }"
@@ -141,7 +141,7 @@
 					<div class="col-xs-6">
 						{!! Form::textarea('content_text', ''
 							, array(
-								'placeholder' => 'trans('messages.admin_content_text')'
+								'placeholder' => trans('messages.admin_content_text')
 								, 'ng-model' => 'content.record.content_text'
 								, 'ng-disabled' => 'content.active_view'
 								, 'ng-class' => "{ 'required-field' : content.fields['content_text'] }"
@@ -182,7 +182,7 @@
 						{!! Form::textarea('description', ''
 							, array(
 								  'class' => 'form-control disabled-textarea'
-								, 'placeholder' => 'trans('messages.description')'
+								, 'placeholder' => trans('messages.description')
 								, 'ng-disabled' => 'content.active_view'
 								, 'ng-model' => 'content.record.description'
 								, 'ng-class' => "{ 'required-field' : content.fields['description'] }"
@@ -196,7 +196,7 @@
 					<div class="col-xs-6">
 						{!! Form::text('seq_no', ''
 							, array(
-								'placeholder' => 'trans('messages.sequence_number')'
+								'placeholder' => trans('messages.sequence_number')
 								, 'ng-model' => 'content.record.seq_no'
 								, 'ng-disabled' => 'content.active_view'
 								, 'ng-class' => "{ 'required-field' : content.fields['seq_no'] }"
@@ -253,14 +253,14 @@
 	        	</div>
 	        	<div class="form-group" ng-if="content.active_view">
 	        		<div class="btn-container col-xs-9 col-xs-offset-2">
-						{!! Form::button('trans('messages.edit')'
+						{!! Form::button(trans('messages.edit')
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-click' => "content.setActive(futureed.ACTIVE_EDIT, content.record.id)"
 							)
 						) !!}
 
-						{!! Form::button('trans('messages.cancel')'
+						{!! Form::button(trans('messages.cancel')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'ng-click' => "content.setActive()"
@@ -270,14 +270,14 @@
 	        	</div>
 	        	<div class="form-group" ng-if="content.active_edit">
 	        		<div class="btn-container col-xs-9 col-xs-offset-2">
-						{!! Form::button('trans('messages.save')'
+						{!! Form::button(trans('messages.save')
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-click' => "content.update()"
 							)
 						) !!}
 
-						{!! Form::button('trans('messages.cancel')'
+						{!! Form::button(trans('messages.cancel')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'ng-click' => "content.setActive(futureed.ACTIVE_VIEW, content.record.id)"
@@ -301,7 +301,7 @@
                 </div>
                 <div class="modal-footer">
                     <div class="btncon col-md-8 col-md-offset-4 pull-left">
-                        {!! Form::button('trans('messages.close')'
+                        {!! Form::button(trans('messages.close')
                             , array(
                                 'class' => 'btn btn-gold btn-medium'
                                 , 'data-dismiss' => 'modal'

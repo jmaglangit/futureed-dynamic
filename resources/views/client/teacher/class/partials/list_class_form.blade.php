@@ -36,7 +36,7 @@
 							, array(
 								'class' => 'form-control'
 								, 'ng-model' => 'class.search.name'
-								, 'placeholder' => 'trans('messages.class_name')'
+								, 'placeholder' => trans('messages.class_name')
 								, 'autocomplete' => 'off'
 							)
 						) !!}
@@ -52,7 +52,7 @@
 	                    </select>
 	                </div>
 					<div class="col-xs-2">
-						{!! Form::button('trans('messages.search')', 
+						{!! Form::button(trans('messages.search'),
 							array(
 								'class' => 'btn btn-blue'
 								, 'ng-click' => 'class.searchFnc($event)'
@@ -60,7 +60,7 @@
 						) !!}
 					</div>
 					<div class="col-xs-2">
-						{!! Form::button('trans('messages.clear')', 
+						{!! Form::button(trans('messages.clear'),
 							array(
 								'class' => 'btn btn-gold'
 								, 'ng-click' => 'class.clear()'

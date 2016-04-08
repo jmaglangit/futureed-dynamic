@@ -36,23 +36,23 @@
 							, array(
 								'class' => 'form-control'
 								, 'ng-model' => 'invoice.search.order_no'
-								, 'placeholder' => 'trans('messages.admin_order_number')'
+								, 'placeholder' => trans('messages.admin_order_number')
 							)
 						) !!}
 					</div>
 					<div class="col-xs-4">
 						{!! Form::select('payment_status'
 							, array(
-								'' =>'trans('messages.admin_select_status')'
-								, 'Pending'=>'trans('messages.pending')'
-								, 'Paid'=>'trans('messages.paid')'
-								, 'Cancelled'=> 'trans('messages.cancelled')'
+								'' =>trans('messages.admin_select_status')
+								, 'Pending'=>trans('messages.pending')
+								, 'Paid'=>trans('messages.paid')
+								, 'Cancelled'=> trans('messages.cancelled')
 							)
 							, null
 							, array(
 								'class' => 'form-control'
 								, 'ng-model' => 'invoice.search.payment_status'
-								, 'placeholder' => 'trans('messages.email')')
+								, 'placeholder' => trans('messages.email'))
 						) !!}
 					</div>
 					<div class="col-xs-2">

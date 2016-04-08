@@ -30,20 +30,20 @@
 							, array(
 								'class' => 'form-control'
 								, 'ng-model' => 'qa.search.questions_text'
-								, 'placeholder' => 'trans('messages.admin_question_text')'
+								, 'placeholder' => trans('messages.admin_question_text')
 							)
 						) !!}
 					</div>
 					<div class="col-xs-4">
 						{!! Form::select('question_type'
 							, array(
-								'' => 'trans('messages.admin_select_question_type')'
-								, 'MC' => 'trans('messages.admin_mc')'
-								, 'FIB' => 'trans('messages.admin_fib')'
-								, 'O' => 'trans('messages.admin_order')'
-								, 'N' => 'trans('messages.admin_provide')'
-								, 'GR' => 'trans('messages.admin_graph')'
-								, 'QUAD' => 'trans('messages.admin_quadrant')'
+								'' => trans('messages.admin_select_question_type')
+								, 'MC' => trans('messages.admin_mc')
+								, 'FIB' => trans('messages.admin_fib')
+								, 'O' => trans('messages.admin_order')
+								, 'N' => trans('messages.admin_provide')
+								, 'GR' => trans('messages.admin_graph')
+								, 'QUAD' => trans('messages.admin_quadrant')
 							)
 							, ''
 							, array(
@@ -53,7 +53,7 @@
 						) !!}
 					</div>
 					<div class="col-xs-2">
-						{!! Form::button('trans('messages.search')'
+						{!! Form::button(trans('messages.search')
 							,array(
 								'class' => 'btn btn-blue'
 								, 'ng-click' => 'qa.searchFnc($event)'
@@ -61,7 +61,7 @@
 						)!!}
 					</div>
 					<div class="col-xs-2">
-						{!! Form::button('trans('messages.clear')'
+						{!! Form::button(trans('messages.clear')
 							,array(
 								'class' => 'btn btn-gold'
 								, 'ng-click' => 'qa.clearFnc($event)'
@@ -168,7 +168,7 @@
 				</div>
 				<div class="modal-footer">
 					<div class="btncon col-md-8 col-md-offset-4 pull-left">
-						{!! Form::button('trans('messages.yes')'
+						{!! Form::button(trans('messages.yes')
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-click' => 'qa.deleteQuestion()'
@@ -176,7 +176,7 @@
 							)
 						) !!}
 
-						{!! Form::button('trans('messages.no')'
+						{!! Form::button(trans('messages.no')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'data-dismiss' => 'modal'
@@ -201,7 +201,7 @@
 				</div>
 				<div class="modal-footer">
 					<div class="btncon col-md-8 col-md-offset-4 pull-left">
-						{!! Form::button('trans('messages.close')'
+						{!! Form::button(trans('messages.close')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'data-dismiss' => 'modal'

@@ -23,14 +23,14 @@
 			</div>
 		
 			<div class="btn-container">
-			{!! Html::link(route('client.principal.payment.index'), 'trans('messages.view_payment_list')'
+			{!! Html::link(route('client.principal.payment.index'), trans('messages.view_payment_list')
 				, array(
 					'class' => 'btn btn-blue btn-medium'
 					, 'ng-if' => "user.role == 'Principal'"
 				)
 			) !!}
 
-			{!! Html::link(route('client.parent.payment.index'), 'trans('messages.view_payment_list')'
+			{!! Html::link(route('client.parent.payment.index'), trans('messages.view_payment_list')
 				, array(
 					'class' => 'btn btn-blue btn-medium'
 					, 'ng-if' => "user.role == 'Parent'"
