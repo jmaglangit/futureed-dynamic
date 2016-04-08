@@ -232,13 +232,18 @@ class ClientServices {
 
         foreach($client_subscription as $subscription){
 
-            foreach($subscription->subject as $subs){
+            if($has_subscription == 1){
+                break;
+            }else{
+                foreach($subscription->subject as $subs){
 
-                if($module->subject_id == $subs){
-                    $has_subscription = 1;
-                    break;
+                    if($module->subject_id == $subs){
+                        $has_subscription = 1;
+                        break;
+                    }
                 }
             }
+
         }
 
         return $has_subscription;
