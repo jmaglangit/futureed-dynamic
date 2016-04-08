@@ -68,7 +68,7 @@ class InvoiceRepository implements InvoiceRepositoryInterface{
 						$invoice = $invoice->studentId($criteria['student_id']);
 					}
 
-					//TODO add checking on current subscription.
+					//add checking on current subscription.
 					if(isset($criteria['current_subscription']) && $criteria['current_subscription'] == 1){
 
 						$invoice = $invoice->current();
