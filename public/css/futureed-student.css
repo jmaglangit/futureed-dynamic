@@ -917,13 +917,15 @@ hr {
 	background-color: rgba(213, 213, 213, .3);
 	padding: 5px 5px -5px 5px;
 	border-radius: 5px;
-	font-size: 15px;
+	font-size: 1.68em;
+	position: relative;
+	bottom: 35px;
 }
 
 .questions-tips img {
 	border-radius: 50%;
-	width: 55px;
-	margin: 5px 10px 5px 5px;
+	width: 70px;
+	margin: 5px 10px 5px 10px;
 }
 
 .choices {
