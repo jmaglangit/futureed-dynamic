@@ -1013,7 +1013,7 @@ hr {
 	color: #055A7F;
 	text-align: center;
 	position: relative;
-	bottom: 26px;
+	bottom: 17px;
 	font-size: 10px;
 }
 
@@ -1256,7 +1256,7 @@ top: 41px;
 }
 
 .class-container {
-	margin-top: 10px;
+	margin-top: 7px;
 }
 
 .student {
@@ -1343,14 +1343,13 @@ top: 41px;
 
 .progress {
 	height: 15px;
-	margin-bottom: 0px;
 	overflow: hidden;
 	background-color: #f5f5f5;
 	border-radius: 4px;
 	-webkit-box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
 	box-shadow: inset 0 1px 2px rgba(0,0,0,.1);
 	width: 120px;
-	margin: 10px auto;
+	margin: 10px auto 0px auto;
 }
 
 .report-progress {
@@ -1926,8 +1925,8 @@ a.payment-page-text {
 	
 	.module-icon, .locked-module-icon {
 		border-radius: 50%;
-		width: 80px;
-		height: 80px;
+		width: 100px;
+		height: 100px;
 		transition: ease-out .1s;
 		background-color: #ffffff;
 		box-shadow: 5px 3px 15px rgba(0, 0, 0, 0.3);
@@ -1965,7 +1964,7 @@ a.payment-page-text {
 	.navbar {
 		position: relative;
 		min-height: 50px;
-		margin-bottom: 15px;
+		margin-bottom: 7px;
 		border: 1px solid transparent;
 	}
 
