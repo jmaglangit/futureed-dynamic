@@ -29,6 +29,6 @@
 	</li>
 
 	<li ng-if="!user.media_login" ng-class="{ 'active' : profile.settings }">
-		<a href="javascript:void(0)" ng-click="profile.setStudentProfileActive('settings')">Settings</a>
+		<a href="javascript:void(0)" ng-click="profile.setStudentProfileActive('settings')">Change Background</a>
 	</li>
 </ul>
