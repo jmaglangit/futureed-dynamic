@@ -46,6 +46,7 @@
 							<p ng-bind-html="mod.current_question.questions_text | trustAsHtml"></p>
 						</div>
 					</div>
+
 				</div>
 				<div class="col-xs-6">
 				{{--Answers--}}
@@ -145,11 +146,14 @@
 						</div>
 					</div>
 				</div>
-				{{--Tips--}}
-				<div class="questions-tips" ng-if="mod.current_question.question_type == futureed.ORDERING">
-					<p> <img ng-src="{! user.avatar !}" /> <span>Drag the items to reorder. </span></p>
-				</div>
+
 			</div>
+				{{--Tips--}}
+				<div class="col-xs-6">
+					<div class="questions-tips" ng-if="mod.current_question.question_type == futureed.ORDERING">
+						<p> <img ng-src="{! user.avatar !}" /> <span>Drag the items to reorder. </span></p>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
