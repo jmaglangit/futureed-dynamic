@@ -757,6 +757,13 @@ hr {
 	width: 15%;
 }
 
+.trial-module-item {
+	margin: 20px 0 0 0;
+	display: inline-block;
+	text-align: center;
+}
+
+
 .module-icon:hover {
 	box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
 	cursor: pointer;
@@ -1467,8 +1474,8 @@ top: 41px;
 
 .proceed-btn-container .btn {
 	margin: 5px auto;
-	height: 50px;
-	font-size: 16px;
+	height: 90px;
+	font-size: 36px;
 }
 
 .nav-student {
@@ -1865,7 +1872,15 @@ a.payment-page-text {
 	transition: ease-out .1s;
 	background-color: #ffffff;
 	box-shadow: 5px 3px 15px rgba(0, 0, 0, 0.3);
+}
 
+.trial-module-icon {
+	border-radius: 50%;
+	width: 200px;
+	height: 200px;
+	transition: ease-out .1s;
+	background-color: #ffffff;
+	box-shadow: 5px 3px 15px rgba(0, 0, 0, 0.3);
 }
 
 .module-name {
@@ -1875,6 +1890,18 @@ a.payment-page-text {
 	white-space: nowrap;
 	height: 30px;
 	font-size: 15px;
+	color: #055A7F;
+	max-width: 170px;
+	margin-bottom: 0;
+}
+
+.trial-module-name {
+	padding: 5px 0px;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+	height: 50px;
+	font-size: 25px;
 	color: #055A7F;
 	max-width: 170px;
 	margin-bottom: 0;
@@ -1892,6 +1919,22 @@ a.payment-page-text {
 	font-size: 18px;
 }
 
+.trial-module-btn {
+	text-transform: capitalize;
+	border-radius: 20px;
+	font-size: 25px;
+}
+
+.trial-module-btn i {
+	padding-right: 5px;
+	color: rgb(255, 244, 149);
+	font-size: 25px;
+}
+
+.fa-lightbulb-o {
+	color: #DEC010;
+	padding-right: 5px;
+}
 @media only screen and (max-height: 680px) and (max-width: 1390px) {
 
 	.class-search{
@@ -1927,6 +1970,14 @@ a.payment-page-text {
 		border-radius: 50%;
 		width: 100px;
 		height: 100px;
+		transition: ease-out .1s;
+		background-color: #ffffff;
+		box-shadow: 5px 3px 15px rgba(0, 0, 0, 0.3);
+	}
+	.trial-module-icon {
+		border-radius: 50%;
+		width: 200px;
+		height: 200px;
 		transition: ease-out .1s;
 		background-color: #ffffff;
 		box-shadow: 5px 3px 15px rgba(0, 0, 0, 0.3);

@@ -220,7 +220,7 @@
                     <div class="col-xs-6">
                         <p class="module-message">
                             You have reached the end of the trial questions.
-                            <p class="font-size-16" ng-if="user.age > 13">Please subscribe if you want to continue using Future Lesson!</p>
+                            <p class="font-size-16" ng-if="user.age > 13"><span class="fa fa-lightbulb-o"></span>Please subscribe if you want to continue using Future Lesson!</p>
                             <p class="font-size-16" ng-if="user.age <= 13">You can ask your Parent or be invited by your Teacher to join a class!</p>
                         </p>
 
