@@ -40,7 +40,7 @@ class ErrorServices {
 	*/
 	private function getErrorMessageByCode($error_code) {
 	
-		$error_messages = config('futureed-error.error_messages');
+		$error_messages = trans('errors');
 		
 		if(isset($error_messages[$error_code])) {
 			return 'Field error.';

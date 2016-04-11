@@ -40,9 +40,6 @@ class StudentLoginController extends StudentController {
 
 		$input = Input::only('username');
 
-        $parent_message = config('futureed-error.error_messages');
-        //$this->addMessageBag($this->emptyUsername($input,'username'));
-        
         $flag=0;
         
         if(!$this->email($input,'username')){
@@ -149,7 +146,6 @@ class StudentLoginController extends StudentController {
      */
     public function loginPassword(){
 
-        $error_msg = config('futureed-error.error_messages');
         //check email and password matched
         $input = Input::only('id','image_id');
 

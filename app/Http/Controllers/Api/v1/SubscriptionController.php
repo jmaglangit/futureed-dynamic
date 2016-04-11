@@ -1,15 +1,9 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
 use FutureEd\Http\Requests;
-use FutureEd\Http\Controllers\Controller;
-
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Input;
-
 use FutureEd\Models\Repository\Subscription\SubscriptionRepositoryInterface as Subscription;
-
 use FutureEd\Http\Requests\Api\SubscriptionRequest;
-use FutureEd\Http\Requests\Api\StatusRequest;
 
 class SubscriptionController extends ApiController {
 
@@ -19,7 +13,7 @@ class SubscriptionController extends ApiController {
 	/**
 	 * Subscription Controller constructor
 	 *
-	 * @return void
+	 * @param Subscription $subscription
 	 */
 	public function __construct(Subscription $subscription) 
 	{
@@ -57,6 +51,7 @@ class SubscriptionController extends ApiController {
 	/**
 	 * Store a newly created resource in storage.
 	 *
+	 * @param SubscriptionRequest $request
 	 * @return Response
 	 */
 	public function store(SubscriptionRequest $request)
@@ -84,7 +79,8 @@ class SubscriptionController extends ApiController {
 	/**
 	 * Update the specified resource in storage.
 	 *
-	 * @param  int  $id
+	 * @param  int $id
+	 * @param SubscriptionRequest $request
 	 * @return Response
 	 */
 	public function update($id,SubscriptionRequest $request)

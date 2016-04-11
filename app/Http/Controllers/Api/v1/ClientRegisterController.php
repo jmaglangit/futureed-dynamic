@@ -25,7 +25,7 @@ class ClientRegisterController extends ClientController {
 
 		$input = $request->only('callback_uri');
 
-		$error_msg = config('futureed-error.error_messages');
+		$error_msg = trans('errors');
 
 		//TODO: Create password validation.
 		$this->addMessageBag($this->checkPassword($user, 'password'));

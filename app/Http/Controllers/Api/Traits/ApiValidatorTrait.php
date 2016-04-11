@@ -9,7 +9,7 @@ trait ApiValidatorTrait {
 
     //Check parameters of the fields.
     public function parameterCheck($input, $paramName){
-        $error_msg = config('futureed-error.error_messages');
+        $error_msg = trans('errors');
 
         if(is_null($input["$paramName"])){
 
@@ -78,7 +78,7 @@ trait ApiValidatorTrait {
 
     //Validate birth_date field.
     public function birthDate($input,$birth_date){
-        $error_msg = config('futureed-error.error_messages');
+        $error_msg = trans('errors');
 
             $validator = Validator::make(
                 [
@@ -198,7 +198,7 @@ trait ApiValidatorTrait {
     //Validate school level field name grade_code
     public function validateGradeCode($input,$field_name){
 
-        $error_msg = config('futureed-error.error_messages');
+        $error_msg = trans('errors');
 
         $validator = Validator::make(
             [
@@ -227,7 +227,7 @@ trait ApiValidatorTrait {
     //Validating ang field that is numeric. Can be used by any number field validation.
     public function validateNumber($input,$field_name){
 
-		$error_msg = config('futureed-error.error_messages');
+		$error_msg = trans('errors');
 
 		$validator = Validator::make(
 			[
@@ -260,7 +260,7 @@ trait ApiValidatorTrait {
 
 	public function validateNumberOptional($input,$field_name){
 
-		$error_msg = config('futureed-error.error_messages');
+		$error_msg = trans('errors');
 
 		$validator = Validator::make(
 			[
@@ -391,7 +391,7 @@ trait ApiValidatorTrait {
 
     public function checkPassword($input,$field_name){
 
-             $error_msg = config('futureed-error.error_messages');
+             $error_msg = trans('errors');
 
             $validator = Validator::make(
                 [
@@ -497,7 +497,7 @@ trait ApiValidatorTrait {
 
     public function validatePicturePassword($input,$field_name){
 
-            $error_msg = config('futureed-error.error_messages');
+            $error_msg = trans('errors');
             
             $validator = Validator::make(
                 [
@@ -526,7 +526,7 @@ trait ApiValidatorTrait {
     }
 
     public function emailCode($input,$field_name){
-        $error_msg = config('futureed-error.error_messages');
+        $error_msg = trans('errors');
 
         $validator = Validator::make(
             [
@@ -554,7 +554,7 @@ trait ApiValidatorTrait {
     }
 
     public function resetCode($input,$field_name){
-        $error_msg = config('futureed-error.error_messages');
+        $error_msg = trans('errors');
 
         $validator = Validator::make(
             [
@@ -617,7 +617,7 @@ trait ApiValidatorTrait {
     }
     
     public function validateDate( $input,$date_field ){
-        $error_msg = config('futureed-error.error_messages');
+        $error_msg = trans('errors');
         $validator = Validator::make(
             [
                 "$date_field" => $input["$date_field"]
@@ -638,7 +638,7 @@ trait ApiValidatorTrait {
     }
     
     public function validateDateRange($input,$date_start,$date_end){
-        $error_msg = config('futureed-error.error_messages');
+        $error_msg = trans('errors');
         $validator = Validator::make(
             [
                 "$date_start" => $input["$date_start"],
@@ -664,7 +664,7 @@ trait ApiValidatorTrait {
     }
 
     public function validateStatus($input,$field_name){
-        $error_msg = config('futureed-error.error_messages');
+        $error_msg = trans('errors');
 
         $validator = Validator::make(
             [
@@ -687,8 +687,6 @@ trait ApiValidatorTrait {
     }
 
     public function isAccountReviewed($input,$field_name){
-
-        $error_msg = config('futureed-error.error_messages');
 
         $validator = Validator::make(
             [
@@ -713,7 +711,7 @@ trait ApiValidatorTrait {
 
      //Validate birth_date field.
     public function editBirthDate($input,$birth_date){
-        $error_msg = config('futureed-error.error_messages');
+        $error_msg = trans('errors');
 
             $validator = Validator::make(
                 [
@@ -790,7 +788,7 @@ trait ApiValidatorTrait {
     // validation for state and city
     // accepts spaces,alphabet characters and dash
     public function validateAlphaSpace($input, $field_name){
-        $error_msg = config('futureed-error.error_messages');
+        $error_msg = trans('errors');
 
             $validator = Validator::make(
                 [
@@ -812,7 +810,7 @@ trait ApiValidatorTrait {
     }
 
 	public function validateAlphaSpaceOptional($input, $field_name){
-		$error_msg = config('futureed-error.error_messages');
+		$error_msg = trans('errors');
 
 		$validator = Validator::make(
 			[

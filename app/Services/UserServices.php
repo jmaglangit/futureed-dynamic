@@ -233,7 +233,6 @@ class UserServices {
     }
 
     public function checkEmail($email,$user_type){
-        $error_msg = config('futureed-error.error_messages');
         //check email if it exist
         $return =  $this->users->checkEmail($email,$user_type);
 
@@ -247,7 +246,6 @@ class UserServices {
     }
 
     public function checkUsername($username,$user_type){
-        $error_msg = config('futureed-error.error_messages');
         $return = $this->users->checkUserName($username,$user_type);
 
         if(is_null($return)){
@@ -311,6 +309,7 @@ class UserServices {
     /**
      * Check user admin if disabled. Specified by messages
      * @param $id
+     * @return bool|int
      */
     public function checkAdminDisabled($id){
 

@@ -76,8 +76,6 @@ class StudentController extends ApiController {
 	public function show($id)
 	{
 
-		$error = config('futureed-error.error_messages');
-
         $this->addMessageBag($this->validateVarNumber($id));
 
         if($this->getMessageBag()){
