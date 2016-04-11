@@ -36,10 +36,6 @@
                                 OR have a parent or teacher invite you to a class.
                             </h4>
                         </div>
-                        <div class="col-xs-8">
-
-                        </div>
-
                     </div>
                 </div>
             </div>
