@@ -158,10 +158,17 @@ body {/*background: radial-gradient(transparent 50%, rgba(0, 0, 0, 0.3) 100%), l
   	box-shadow: inset 0 5px 8px rgba(0,0,0,.125);
 }
 .btn-maroon{
+	border-top: 1px solid #D2476E;
+	background-color: #A92147;
+	box-shadow: 0 0 0 1px #941C3F, 0 3px 3px rgba(0, 0, 0, 0.3);
+}
+
+.trial-btn-maroon{
 	border-top: 1px solid #E7654A;
 	background-color: #C0392B;
 	box-shadow: 0 0 0 1px #C0392B, 0 3px 3px rgba(0, 0, 0, 0.3);
 }
+
 .btn-maroon:hover{
 	background-color: #A92147;
 	box-shadow: 0 0 0 1px #941C3F, 0 3px 3px rgba(0, 0, 0, 0.3);

@@ -925,9 +925,19 @@ hr {
 	padding: 5px 5px -5px 5px;
 	border-radius: 5px;
 	font-size: 1.68em;
-	position: relative;
-	bottom: 35px;
+
 }
+
+.question-tip-pos-top-10 {
+	position: relative;
+	top: 10px;
+}
+
+.question-tip-pos-top-130 {
+	position: relative;
+	top: 130px;
+}
+
 
 .questions-tips img {
 	border-radius: 50%;
@@ -1472,10 +1482,16 @@ top: 41px;
 	margin: 15px;
 }
 
-.proceed-btn-container .btn {
+.trial-proceed-btn-container .btn {
 	margin: 5px auto;
 	height: 90px;
 	font-size: 36px;
+}
+
+.proceed-btn-container .btn {
+	margin: 5px auto;
+	height: 50px;
+	font-size: 16px;
 }
 
 .nav-student {
