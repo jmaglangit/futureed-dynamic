@@ -63,7 +63,7 @@ class Question extends Model {
 		$image_path = config('futureed.question_image_path_final') . '/' . $this->attributes['id'] . '/' . $value;
 
 		//check path
-		if ($filesystem->exists($image_path)) {
+		if ($filesystem->exists($image_path) && $value != "") {
 			return asset(config('futureed.question_image_path_final_public') . '/' . $this->attributes['id'] . '/' . $value);
 
 		} else {
