@@ -39,7 +39,7 @@ class StudentTipRequest extends ApiRequest {
 	{
 
 		return [
-			'student_id.required' => 'Student is required.',
+			'student_id.required' => trans('errors.1003',['attribute' => trans('errors.2192')]),
 			'student_id.integer' => 'Student is invalid.',
 			'content.required' => 'The description field is required.',
 			'content.string' => 'The description field is invalid.',

@@ -45,7 +45,7 @@ class AvatarAccessoryRequest extends ApiRequest {
 
 	public function messages() {
 		return [
-			'student_id.required' => 'Student ID is required.'
+			'student_id.required' => trans('errors.1003',['attribute' => trans('errors.2174')]),
 		];
     }
 

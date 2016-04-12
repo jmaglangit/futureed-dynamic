@@ -92,13 +92,13 @@ class ClassStudentRequest extends ApiRequest {
      */
     public function messages() {
 		return [
-			'country_id.integer' => 'country is invalid.',
-			'country_id.required' => 'The country field is required.',
-			'grade_code.required' => 'The grade field is required.',
-			'grade_code.numeric' => 'grade is invalid.',
-			'class_id.required' => 'The class field is required.',
-			'after' => 'Date range should be today or after the student was added.',
-			'before' => 'Date range should be today or after the student was added.'
+			'country_id.integer' => trans('errors.1004',['attribute' => trans('errors.2154')]),
+			'country_id.required' => trans('validation.required',['attribute' => trans('errors.2154')]),
+			'grade_code.required' => trans('validation.required',['attribute' => trans('errors.2153')]),
+			'grade_code.numeric' => trans('errors.1004',['attribute' => trans('errors.2153')]),
+			'class_id.required' => trans('validation.required',['attribute' => trans('errors.2182')]),
+			'after' =>  trans('errors.2183'),
+			'before' => trans('errors.2183'),
 		];
     }
 }

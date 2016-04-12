@@ -40,7 +40,7 @@ class LearningStyleRequest extends ApiRequest {
 		
 		$custom_messages = [
 			'test_id.required' => 'Test is required.',
-			'student_id.required' => 'Student is required.',
+			'student_id.required' => trans('errors.1003',['attribute' => trans('errors.2192')]),
 			'student_id.exists' => 'Student does not exist.',
 			'student_id.integer' => 'Student is invalid.',
 			'section_id.required' => 'Section is required.',

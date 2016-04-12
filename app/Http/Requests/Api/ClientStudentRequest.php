@@ -61,8 +61,8 @@ class ClientStudentRequest extends ApiRequest {
 	public function messages()
 	{
 		return [
-			'country_id.required' => config('futureed-error.error_messages.2047'),
-			'grade_code.required' => config('futureed-error.error_messages.2048')
+			'country_id.required' => trans('errors.1012',['attribute' => trans('errors.2154')]),
+			'grade_code.required' => trans('errors.1012',['attribute' => trans('errors.2153')]),
 		];
 	}
 

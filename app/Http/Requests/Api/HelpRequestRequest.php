@@ -62,10 +62,10 @@ class HelpRequestRequest extends ApiRequest{
      */
     public function messages() {
         return [
-            'class_id.required' =>'Class is required.',
-            'student_id.required' =>'User is required.',
-            'class_id.integer' => 'Class must be a number.',
-            'student_id.integer' => 'Student must be a number.',
+            'class_id.required' => trans('errors.1003',['attribute' => trans('errors.2182')]),//'Class is required.',
+            'student_id.required' => trans('errors.1003',['attribute' => trans('errors.2195')]),//'User is required.',
+            'class_id.integer' => trans('errors.1013',['attribute' => trans('errors.2182')]),//'Class must be a number.',
+            'student_id.integer' => trans('errors.1003',['attribute' => trans('errors.2192')]),
             'module_id.integer' => 'Module must be a number.',
             'subject_id.integer' => 'Subject must be a number.',
             'subject_area_id.integer' => 'Subject area must be a number.',

@@ -75,8 +75,8 @@ class StudentModuleAnswerRequest extends ApiRequest
             'answer_id.required' => 'Answer is required.',
             'answer_id.integer' => 'Answer must be a number.',
             'answer_id.exists' => 'The selected answer is invalid.',
-            'student_id.required' => 'Student is required.',
-            'student_id.integer' => 'Student must be a number.',
+            'student_id.required' => trans('errors.1003',['attribute' => trans('errors.2192')]),
+            'student_id.integer' => trans('errors.1003',['attribute' => trans('errors.2192')]),
         ];
     }
 }

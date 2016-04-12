@@ -41,7 +41,7 @@ class TipRequest extends ApiRequest {
 	public function messages(){
 
 		return [
-			'rating.required_if' => 'The rating is required.',
+			'rating.required_if' => trans('errors.1003',['attribute' => trans('errors.2194')]),
 		];
 	}
 

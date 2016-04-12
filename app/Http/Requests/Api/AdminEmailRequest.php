@@ -46,7 +46,7 @@ class AdminEmailRequest extends ApiRequest {
 			$email = $input['email'];
 		
 			if($email == $admin->user->email) {
-				$custom_messages['email.unique'] = 'The new email and the current email are the same.';
+				$custom_messages['email.unique'] = trans('errors.2152');
 			}
 		}
 

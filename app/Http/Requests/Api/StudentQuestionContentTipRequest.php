@@ -49,7 +49,7 @@ class StudentQuestionContentTipRequest extends ApiRequest {
 		return [
 			'class_id.required' => 'Class is required.',
 			'class_id.integer' => 'Class is invalid.',
-			'student_id.required' => 'Student is required.',
+			'student_id.required' => trans('errors.1003',['attribute' => trans('errors.2192')]),
 			'student_id.integer' => 'Student is invalid.',
 			'module_id.required' => 'Module is required.',
 			'module_id.integer' => 'Module is invalid.',

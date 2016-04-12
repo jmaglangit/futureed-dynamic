@@ -49,7 +49,7 @@ class StudentPointRequest extends ApiRequest {
 		return [
 			'event_id.integer' => 'Event is invalid.',
 			'points_earned.integer' => 'Points must be a number.',
-			'student_id.required' => 'Student is required.',
+			'student_id.required' => trans('errors.1003',['attribute' => trans('errors.2192')]),
 			'student_id.integer' => 'Student is invalid.',
 			'module_id.required' => 'Module is required.',
 			'module_id.integer' => 'Module is invalid.',

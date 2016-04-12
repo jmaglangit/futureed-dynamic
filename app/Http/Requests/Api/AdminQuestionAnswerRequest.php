@@ -58,14 +58,22 @@ class AdminQuestionAnswerRequest extends ApiRequest {
 	{
 		return [
 
-			'module_id.required' => 'Module is required.',
-			'module_id.integer' => 'Module is invalid.',
-			'question_id.required' => 'Question is required.',
-			'question_id.integer' => 'Question is invalid.',
-			'code.integer' => 'Code must be a number.',
-			'point_equivalent.integer' => 'Points Equivalent must be a number.',
-			'answer_text.required_if' =>'The answer text field is required when image is empty.',
-			'image.required_if' =>'The image field is required when answer text is empty.',
+			'module_id.required' => trans('errors.1003',['attribute' => trans('errors.2161')]),
+			'module_id.integer' => trans('errors.1004',['attribute' => trans('errors.2161')]),
+			'question_id.required' => trans('errors.1003',['attribute' => trans('errors.2162')]),
+			'question_id.integer' => trans('errors.1004',['attribute' => trans('errors.2162')]),
+			'code.integer' =>  trans('validation.numeric',['attribute' => trans('errors.2163')]),
+			'point_equivalent.integer' => trans('validation.numeric',['attribute' => trans('errors.2164')]),
+			'answer_text.required_if' => trans('validation.required_if',[
+				'attribute' => trans('errors.2165'),
+				'other' => trans('errors.2166'),
+				'value' => trans('errors.2167')
+			]),
+			'image.required_if' =>  trans('validation.required_if',[
+				'attribute' => trans('errors.2166'),
+				'other' => trans('errors.2165'),
+				'value' => trans('errors.2167')
+			]),
 
 
 		];

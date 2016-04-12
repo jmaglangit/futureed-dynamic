@@ -44,8 +44,8 @@ class StudentModuleRequest extends ApiRequest
 		return [
 			'class_id.required' => 'Class is required.',
 			'class_id.integer' => 'Class must be a number.',
-			'student_id.required' => 'Student is required.',
-			'student_id.integer' => 'Student must be a number.',
+			'student_id.required' => trans('errors.1003',['attribute' => trans('errors.2192')]),
+			'student_id.integer' => trans('errors.1003',['attribute' => trans('errors.2192')]),
 			'module_id.required' => 'Module is required.',
 			'module_id.integer' => 'Module must be a number.',
 			'subject_id.required' => 'Subject is required.',

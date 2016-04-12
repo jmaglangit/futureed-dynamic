@@ -59,9 +59,8 @@ class ClientTeacherRequest extends ApiRequest
 	public function messages()
 	{
 		return [
-			'numeric' => 'The :attribute must be a number.',
-			'unique' => 'Teacher already exists.',
-			'country_id.integer' => 'Country is invalid.',
+			'unique' => trans('errors.1007',['attribute' => trans('errors.2175')]),
+			'country_id.integer' => trans('errors.1004',['attribute' => trans('errors.2154')]),
 		];
 	}
 }
