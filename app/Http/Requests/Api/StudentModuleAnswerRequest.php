@@ -64,17 +64,17 @@ class StudentModuleAnswerRequest extends ApiRequest
     public function messages()
     {
         return [
-            'student_module_id.required' => 'Class is required.',
-            'student_module_id.integer' => 'Class must be a number.',
-            'module_id.required' => 'Module is required.',
-            'module_id.integer' => 'Module must be a number.',
-            'seq_no.required' => 'Sequence number is required.',
-            'seq_no.integer' => 'Sequence number must be a number.',
-            'question_id.required' => 'Question is required.',
-            'question_id.integer' => 'Question must be a number.',
-            'answer_id.required' => 'Answer is required.',
-            'answer_id.integer' => 'Answer must be a number.',
-            'answer_id.exists' => 'The selected answer is invalid.',
+            'student_module_id.required' => trans('errors.1003',['attribute' => trans('errors.2182')]),
+            'student_module_id.integer' => trans('errors.1013',['attribute' => trans('errors.2182')]),
+            'module_id.required' => trans('errors.1003',['attribute' => trans('errors.2161')]),
+            'module_id.integer' => trans('errors.1013',['attribute' => trans('errors.2161')]),
+            'seq_no.required' => trans('errors.1003',['attribute' => trans('errors.2170')]),
+            'seq_no.integer' => trans('errors.1013',['attribute' => trans('errors.2170')]),
+            'question_id.required' => trans('errors.1003',['attribute' => trans('errors.2162')]),
+            'question_id.integer' => trans('errors.1013',['attribute' => trans('errors.2162')]),
+            'answer_id.required' => trans('errors.1003',['attribute' => trans('errors.2171')]),
+            'answer_id.integer' => trans('errors.1013',['attribute' => trans('errors.2162')]),
+            'answer_id.exists' => trans('errors.1004',['attribute' => trans('errors.2206')]),
             'student_id.required' => trans('errors.1003',['attribute' => trans('errors.2192')]),
             'student_id.integer' => trans('errors.1003',['attribute' => trans('errors.2192')]),
         ];

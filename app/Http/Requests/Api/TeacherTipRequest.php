@@ -37,8 +37,8 @@ class TeacherTipRequest extends ApiRequest {
 	public function messages(){
 
 		return [
-			'content.required' => 'The description field is required.',
-			'content.string' => 'The description field is invalid.',
+			'content.required' => trans('validation.required',['attribute' => trans('errors.2172')]),
+			'content.string' => trans('errors.1004',['attribute' => trans('errors.2172')]),
 		];
 	}
 

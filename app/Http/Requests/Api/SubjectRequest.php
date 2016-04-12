@@ -48,10 +48,10 @@ class SubjectRequest extends ApiRequest {
 	 */
 	public function messages() {
 		return [
-			'integer' => 'The :attribute must be a number.',
-			'name.required' => 'The subject field is required.',
-			'code.required' => 'The subject code field is required.',
-			'code.numeric' => 'The subject code field must be a number.',
+			'integer' => trans('errors.1013'),
+			'name.required' => trans('validation.required',['attribute' => trans('errors.2155')]),
+			'code.required' => trans('validation.required',['attribute' => trans('errors.2216')]),
+			'code.numeric' => trans('validation.numeric',['attribute' => trans('errors.2155')]),
 		];
 	}
 }

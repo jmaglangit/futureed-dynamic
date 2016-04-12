@@ -55,10 +55,8 @@ class VolumeDiscountRequest extends ApiRequest {
 	 */
 	public function messages() {
 		return [
-			'numeric' => 'The :attribute must be a number.',
-			'unique'  => 'Minimum Seats already exists.',
-			'percentage.required' => 'The percentage field is required.',
-			'percentage.numeric' => 'The percentage must be a number.',
+			'numeric' => trans('errors.1013'),
+			'unique'  => trans('errors.2222'),
 		];
 	}
 }

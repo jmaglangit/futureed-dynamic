@@ -64,7 +64,7 @@ class TeacherStudentRequest extends ApiRequest {
 	{
 		return [
 			'country_id.required' => trans('errors.1012',['attribute' => trans('errors.2154')]),
-			'grade_code.required' => config('futureed-error.error_messages.2022')
+			'grade_code.required' => trans('errors.2022'),
 		];
 	}
 

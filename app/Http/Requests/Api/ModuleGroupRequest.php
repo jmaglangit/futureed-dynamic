@@ -33,13 +33,13 @@ class ModuleGroupRequest extends ApiRequest{
     public function messages(){
 
         return [
-            'age_group_id.required' =>'Age is required.',
-            'module_id.required' =>'Module is required.',
-            'age_group_id.integer' =>'Age must be a number.',
-            'module_id.integer' =>'Module must be a number.',
-            'age_group_id.unique' => 'Age already exist.',
-            'points_earned.required' => 'Total Points earned is required.',
-            'points_earned.integer' => 'Total Points earned must be a number.'
+            'age_group_id.required' => trans('errors.1003',['attribute' => trans('errors.2207')]),
+            'module_id.required' => trans('errors.1003',['attribute' => trans('errors.2161')]),
+            'age_group_id.integer' => trans('errors.1013',['attribute' => trans('errors.2207')]),
+            'module_id.integer' => trans('errors.1013',['attribute' => trans('errors.2161')]),
+            'age_group_id.unique' => trans('errors.1007',['attribute' => trans('errors.2207')]),
+            'points_earned.required' => trans('errors.1015',['attribute' => trans('errors.2169')]),
+            'points_earned.integer' => trans('errors.1016',['attribute' => trans('errors.2169')]),
         ];
     }
 }

@@ -18,6 +18,9 @@ return [
 		1011 => 'The :attribute should not exceed 20 digits.',
 		1012 => 'The :attribute name is required.',
 		1013 => 'The :attribute must be a number',
+		1014 => 'The :attribute does not exist.',
+		1015 => 'Total :attribute is required',
+		1016 => 'Total :attribute must be a number',
 
 
 		//Rules messages
@@ -109,7 +112,7 @@ return [
 		2109 => 'Your account has already been confirmed.',
 		2110 => 'You have already setup the forgot password steps.',
 		2111 => 'You have already setup the email confirmation steps.',
-//		2112 => 'Password must be at least 8 characters and with at least 1 number.',
+		2112 => 'Password must be at least 8 characters and with at least 1 number.',
 		2113 => 'Username and password is invalid.',
 		2114 => 'Your password is incorrect.',
 //		2115 => 'Contact number format is incorrect.',
@@ -168,8 +171,8 @@ return [
 		2168 => 'Difficulty',
 		2169 => 'Points earned',
 		2170 => 'Sequence number',
-		2171 => 'answer',
-		2172 => 'description',
+		2171 => 'Answer',
+		2172 => 'Description',
 		2173 => 'Question order',
 		2174 => 'Student ID',
 		2175 => 'Teacher',
@@ -193,12 +196,34 @@ return [
 		2193 => 'Help request',
 		2194 => 'Rating',
 		2195 => 'User',
-
-		// Client Error messages
+		2196 => 'Subject Area',
+		2197 => 'Link',
+		2198 => 'Invoice',
+		2199 => 'Subscription',
 		2200 => 'Email already exists.',
 		2201 => 'Username already exists.',
 		2202 => 'School Name already exists.',
-//		2203 => 'The selected country is invalid.',
+		2203 => 'Discount',
+		2204 => 'Test',
+		2205 => 'Section',
+		2206 => 'Selected Answer',
+		2207 => 'Age',
+		2208 => 'Parent',
+		2209 => 'Order',
+		2210 => 'Badge name',
+		2211 => 'Content',
+		2212 => 'Event',
+		2213 => 'Points',
+		2214 => 'Tip',
+		2215 => 'Area Code',
+		2216 => 'Subject Code',
+		2217 => 'Learning Style',
+		2218 => 'Media',
+		2219 => 'Image',
+		2220 => 'Content URL',
+		2221 => 'Teaching Module',
+		2222 => 'Minimum Seats already exists.',
+
 
 		//  Parent Client Error Messages
 		Error::BILLING_INFO_MISSING => 'You need to update your contact information in order to proceed buy a subscription.',
@@ -234,7 +259,7 @@ return [
 		Error::SUBSCRIPTION_LSP_INVALID => 'The learning style format is invalid',
 
 		//  For trial module error messages
-		Error::TRIAL_MODULE_ANSWER_IS_REQUIRED => 'Answer is required',
+			Error::TRIAL_MODULE_ANSWER_IS_REQUIRED => 'Answer is required',
 		Error::TRIAL_MODULE_MULTIPLE_ANSWERS_REQUIRED => 'Answers are required',
 		Error::TRIAL_MODULE_QUAD_PLOTTING_REQUIRED => 'Plot a point to answer',
 		Error::TRIAL_MODULE_DRAG_DROP_REQUIRED => 'Drag at least one object to answer',

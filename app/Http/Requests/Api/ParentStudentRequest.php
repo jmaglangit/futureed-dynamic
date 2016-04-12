@@ -105,17 +105,17 @@ class ParentStudentRequest extends ApiRequest {
     public function messages()
     {
         return [
-            'client_id.required' =>'Client is required.',
-            'client_id.integer' =>'Client must be a number.',
-            'country_id.required' => 'Country is required.',
-            'subscription_id.required' => 'Subscription is required.',
-            'subscription_id.integer' => 'Subscription must be a number.',
-            'parent_id.required' => 'Parent is required.',
-            'parent_id.integer' => 'Parent must be a number.',
-            'order_id.required' => 'Order is required.',
-            'order_id.integer' => 'Order must be a number.',
-            'subject_id.required' => 'Subject is required.',
-            'subject_id.integer' => 'Subject must be a number',
+            'client_id.required' => trans('errors.1003',['attribute' => trans('errors.2176')]),
+            'client_id.integer' => trans('errors.1013',['attribute' => trans('errors.2176')]),
+            'country_id.required' => trans('errors.1003',['attribute' => trans('errors.2154')]),
+            'subscription_id.required' => trans('errors.1003',['attribute' => trans('errors.2199')]),
+            'subscription_id.integer' => trans('errors.1013',['attribute' => trans('errors.2199')]),
+            'parent_id.required' => trans('errors.1003',['attribute' => trans('errors.2208')]),
+            'parent_id.integer' => trans('errors.1013',['attribute' => trans('errors.2208')]),
+            'order_id.required' => trans('errors.1003',['attribute' => trans('errors.2209')]),
+            'order_id.integer' => trans('errors.1013',['attribute' => trans('errors.2209')]),
+            'subject_id.required' => trans('errors.1003',['attribute' => trans('errors.2155')]),
+            'subject_id.integer' => trans('errors.1013',['attribute' => trans('errors.2155')]),
         ];
     }
 }

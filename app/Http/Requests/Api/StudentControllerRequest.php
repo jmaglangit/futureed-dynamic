@@ -41,9 +41,9 @@ class StudentControllerRequest extends ApiRequest {
 	public function messages()
 	{
 		return [
-			'birth_date.before' => config('futureed-error.error_messages.2117'),
-			'grade_code.numeric' => config('futureed-error.error_messages.2023'),
-			'country_id.numeric' => config('futureed-error.error_messages.2604')
+			'birth_date.before' => trans('errors.2117'),
+			'grade_code.numeric' => trans('errors.2023'),
+			'country_id.numeric' =>  trans('errors.1004',['attribute' => trans('errors.2154')]),
 		];
 	}
 

@@ -62,15 +62,15 @@ class HelpRequestRequest extends ApiRequest{
      */
     public function messages() {
         return [
-            'class_id.required' => trans('errors.1003',['attribute' => trans('errors.2182')]),//'Class is required.',
-            'student_id.required' => trans('errors.1003',['attribute' => trans('errors.2195')]),//'User is required.',
-            'class_id.integer' => trans('errors.1013',['attribute' => trans('errors.2182')]),//'Class must be a number.',
+            'class_id.required' => trans('errors.1003',['attribute' => trans('errors.2182')]),
+            'student_id.required' => trans('errors.1003',['attribute' => trans('errors.2195')]),
+            'class_id.integer' => trans('errors.1013',['attribute' => trans('errors.2182')]),
             'student_id.integer' => trans('errors.1003',['attribute' => trans('errors.2192')]),
-            'module_id.integer' => 'Module must be a number.',
-            'subject_id.integer' => 'Subject must be a number.',
-            'subject_area_id.integer' => 'Subject area must be a number.',
-            'link_id.integer' => 'Link must be a number.',
-            'content.required' => 'The description field is required.',
+            'module_id.integer' => trans('errors.1013',['attribute' => trans('errors.2161')]),
+            'subject_id.integer' => trans('errors.1013',['attribute' => trans('errors.2155')]),
+            'subject_area_id.integer' => trans('errors.1013',['attribute' => trans('errors.2196')]),
+            'link_id.integer' => trans('errors.1013',['attribute' => trans('errors.2197')]),
+            'content.required' => trans('validation.required',['attribute' => trans('errors.2172')]),
         ];
     }
 }

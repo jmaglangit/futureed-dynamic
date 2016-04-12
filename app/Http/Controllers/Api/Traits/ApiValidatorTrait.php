@@ -478,8 +478,8 @@ trait ApiValidatorTrait {
                     "$field_name" => 'max:10|regex:'. config('regex.zip_code')
                 ],
 				[
-					'regex' => config('futureed-error.error_messages.2044'),
-					'max' => config('futureed-error.error_messages.2045')
+					'regex' => trans('errors.2044'),
+					'max' => trans('errors.2045')
 				]
             );
 
@@ -593,7 +593,7 @@ trait ApiValidatorTrait {
 				"$field_name" => "required|max:20"
 			],
 			[
-				'max' => config('futureed-error.error_messages.2046')
+				'max' => trans('errors.2046')
 			]
         );
 
@@ -611,7 +611,7 @@ trait ApiValidatorTrait {
 
             return $this->setErrorCode(2115)
                 ->setField($field_name)
-                ->setMessage(config('futureed-error.error_messages.2115'))
+                ->setMessage(trans('errors.2115'))
                 ->errorMessage();
         }
     }
@@ -746,7 +746,7 @@ trait ApiValidatorTrait {
                 "$school_code" => 'required|numeric|exists:schools,code,deleted_at,NULL'
             ],
             [
-                "exist" => config('futureed-error.error_messages.2602')
+                "exist" => trans('errors.2602')
             ]
         );
 
@@ -754,7 +754,7 @@ trait ApiValidatorTrait {
 
             return $this->setErrorCode(2602)
                 ->setField($school_code)
-                ->setMessage(config('futureed-error.error_messages.2602'))
+                ->setMessage(trans('errors.2602'))
                 ->errorMessage();
         }
     }
@@ -769,7 +769,7 @@ trait ApiValidatorTrait {
                 "$date_now" => 'required|date:today'
             ],
             [
-                'date' => config('futureed-error.error_messages.2500')
+                'date' => trans('errors.2500')
             ]
         );
 

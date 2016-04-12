@@ -93,7 +93,7 @@ class TrialModuleRequest extends ApiRequest {
 
 			case config('futureed.question_type_fill_in_the_blank'):
 				if(empty($question_answer)){
-					$message['answer.required'] = config('futureed-error.error_messages.'.ErrorMessageServices::TRIAL_MODULE_MULTIPLE_ANSWERS_REQUIRED);
+					$message['answer.required'] = trans('errors.'.ErrorMessageServices::TRIAL_MODULE_MULTIPLE_ANSWERS_REQUIRED);
 				} else {
 					foreach ($fib_length as $key => $answer) {
 						$message['answer.' . $key . '.required'] = 'Answer ' . ($key + 1) . ' is required';
@@ -104,19 +104,19 @@ class TrialModuleRequest extends ApiRequest {
 
 			case config('futureed.question_type_graph'):
 				return [
-					'answer.0.min' => config('futureed-error.error_messages.'.ErrorMessageServices::TRIAL_MODULE_DRAG_DROP_REQUIRED)
+					'answer.0.min' => trans('errors.'.ErrorMessageServices::TRIAL_MODULE_DRAG_DROP_REQUIRED)
 				];
 				break;
 
 			case config('futureed.question_type_quad'):
 				return[
-					'has_plotted.min' => config('futureed-error.error_messages.'.ErrorMessageServices::TRIAL_MODULE_QUAD_PLOTTING_REQUIRED)
+					'has_plotted.min' => trans('errors.'.ErrorMessageServices::TRIAL_MODULE_QUAD_PLOTTING_REQUIRED)
 				];
 				break;
 
 			default:
 				return [
-					'answer.required' => config('futureed-error.error_messages.'.ErrorMessageServices::TRIAL_MODULE_ANSWER_IS_REQUIRED)
+					'answer.required' => trans('errors.'.ErrorMessageServices::TRIAL_MODULE_ANSWER_IS_REQUIRED)
 				];
 				break;
 

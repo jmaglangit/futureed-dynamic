@@ -62,17 +62,17 @@ class TeachingContentRequest extends ApiRequest {
 	public function messages(){
 
 		return [
-			'integer' => 'The :attribute must be a number',
-			'learning_style_id.required' => 'The learning style field is required.',
-			'media_type_id.required' => 'The media type field is required.',
-			'module_id.required' => 'The module field is required.',
-			'subject_id.required' => 'The subject field is required.',
-			'subject_area_id.required' => 'The subject area field is required.',
-			'image.required_if' =>'The image field is required.',
-			'content_url.required_if' =>'The content url field is required.',
-			'content_text.required_if' =>'The content text field is required.',
-			'teaching_module.required' => 'The teaching module name field is required.',
-			'seq_no.integer' => 'The sequence must be a number.'
+			'integer' => trans('errors.1013'),
+			'learning_style_id.required' => trans('errors.1003',['attribute' => trans('errors.2217')]),
+			'media_type_id.required' => trans('validation.required',['attribute' => trans('errors.2218')]),
+			'module_id.required' => trans('validation.required',['attribute' => trans('errors.2161')]),
+			'subject_id.required' => trans('validation.required',['attribute' => trans('errors.2155')]),
+			'subject_area_id.required' => trans('validation.required',['attribute' => trans('errors.2196')]),
+			'image.required_if' => trans('validation.required',['attribute' => trans('errors.2219')]),
+			'content_url.required_if' => trans('validation.required',['attribute' => trans('errors.2220')]),
+			'content_text.required_if' => trans('validation.required',['attribute' => trans('errors.2211')]),
+			'teaching_module.required' => trans('validation.required',['attribute' => trans('errors.2221')]),
+			'seq_no.integer' => trans('validation.numeric',['attribute' => trans('errors.2170')]),
 		];
 	}
 
