@@ -40,6 +40,10 @@ class CountryGrade extends Model {
 		return $this->belongsTo('FutureEd\Models\Core\AgeGroup');
 	}
 
+	public function gradeLevel(){
+		return $this->hasOne('FutureEd\Models\Core\CountryGrade', 'grade_id', 'age_group_id');
+	}
+
 	//Scopes
 	public function scopeGradeId($query, $grade_id){
 

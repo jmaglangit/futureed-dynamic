@@ -377,17 +377,9 @@ class ModuleRepository implements ModuleRepositoryInterface
 			//Get grade_id
 			if (isset($criteria['grade_id']))
 			{
-				$d = DB::select
-				("SELECT A.grade_id FROM `country_grades` as A
-				  LEFT OUTER JOIN `country_grades` as B
-				  ON B.`age_group_id`= A.`age_group_id` and A.`country_id`= :country_id WHERE B.`grade_id`= :grade_id",
-					[
-						'country_id' => config('futureed.default_country'),
-						'grade_id' => $criteria['grade_id']
-					]
-				);
-
-				$student_module = $student_module->gradeId($d[0]->grade_id);
+				$country_grade = CountryGrade::whereGradeId($criteria['grade_id'])->with('gradeLevel')->first()->toArray();
+				
+				$student_module = $student_module->gradeId($country_grade['grade_level']['grade_id']);
 			}
 
 			//module_status
