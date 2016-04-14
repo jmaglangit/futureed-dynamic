@@ -378,7 +378,7 @@ class ModuleRepository implements ModuleRepositoryInterface
 			if (isset($criteria['grade_id']))
 			{
 				$country_grade = CountryGrade::whereGradeId($criteria['grade_id'])->with('gradeLevel')->first()->toArray();
-
+				
 				$student_module = $student_module->gradeId($country_grade['grade_level']['grade_id']);
 			}
 
