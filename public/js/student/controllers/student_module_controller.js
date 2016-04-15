@@ -289,6 +289,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 			} else {
 				self.module_message.points_earned = self.record.points_earned;
 				self.module_message.badge_to_earn = self.record.badge_to_earn;
+				self.module_message.description = self.record.description;
 				self.module_message.skip_module = Constants.TRUE;
 			}
 

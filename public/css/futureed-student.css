@@ -1899,3 +1899,11 @@ a.payment-page-text {
 	color: #A92147;
 	text-decoration: none;
 }
+
+.image-badge {
+	width: 75px;
+}
+
+.reward-message {
+	padding-bottom: 15px;
+}
