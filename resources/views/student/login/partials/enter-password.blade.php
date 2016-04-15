@@ -9,7 +9,7 @@
 		</div>
 
 		<div class="form_content">
-			<ul class="form_password list-unstyled list-inline">
+			<ul class="form_password list-unstyled list-inline on-login">
 				<li class="item col-xs-4" ng-repeat="item in login.image_pass" 
 					ng-class="{ 'selected' : login.manual.image_id == item.id }"
 					ng-click="login.selectPassword(item.id)">

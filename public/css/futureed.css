@@ -236,9 +236,15 @@ body {/*background: radial-gradient(transparent 50%, rgba(0, 0, 0, 0.3) 100%), l
 	border-radius: 50%;
 	border: 6px solid transparent;
 	cursor: pointer;
-	width: 100px;
-	height: 100px;
+	width: 150px;
+	height: 150px;
 }
+
+.form-select-password .list-inline li h5 {
+	color: #055A7F;
+	font-size: 15px;
+}
+
 .selected {
 	/*text-align: center; */
 	/*transform: scale(1.1);*/
@@ -1411,4 +1417,29 @@ fieldset legend {
 
 .margin-bottom-15 {
 	margin-bottom: 15px;
+}
+
+@media only screen and (max-height: 680px) and (max-width: 1390px) {
+	.form-select-password .list-inline li img {
+		border-radius: 50%;
+		border: 6px solid transparent;
+		cursor: pointer;
+		width: 100px;
+		height: 100px;
+	}
+	.form-select-password .list-inline li h5 {
+		color: #055A7F;
+		font-size: 10px;
+	}
+	.form-select-password h4 {
+		font-size: 13px;
+	}
+}
+
+.form-select-password .on-login li img {
+	border-radius: 50%;
+	border: 6px solid transparent;
+	cursor: pointer;
+	width: 100px;
+	height: 100px;
 }

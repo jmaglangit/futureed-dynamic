@@ -29,8 +29,9 @@
                               <div class="form_content col-xs-12">
                                 <ul class="avatar_list list-unstyled list-inline" ng-init="getAvatarImages()">
                                   <li class="item col-xs-4" ng-repeat="avatar in avatars" ng-click="highlightAvatar($event)">
-                                     <img ng-src="{! avatar.url !}" alt="{! avatar.name !}">
-                                     <input type="hidden" id="avatar_id" name="avatar_id" value="{! avatar.id !}">
+                                        <img ng-src="{! avatar.url !}" alt="{! avatar.name !}">
+                                        <input type="hidden" id="avatar_id" name="avatar_id" value="{! avatar.id !}">
+                                        <h5>{! avatar.name !}</h5>
                                   </li>
                                 </ul>
                               </div>
