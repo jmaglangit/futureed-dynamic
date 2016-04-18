@@ -1194,6 +1194,12 @@ hr {
 	min-height: 300px;
 }
 
+.content-video-body {
+	height: 100%;
+	width: 100%;
+	padding-top: 3%;
+}
+
 .time-right {
 	position: relative;
 	top: 20px;
@@ -1413,6 +1419,16 @@ hr {
 .content-header {
 	background-color: #D5D5D5;
 	min-height: 55px;
+	position: absolute;
+	right: 0;
+	left: 0;
+	text-align: center;
+	padding-bottom: 10px;
+}
+
+.content-video-header {
+	background-color: #D5D5D5;
+	height: 55px;
 	position: absolute;
 	right: 0;
 	left: 0;

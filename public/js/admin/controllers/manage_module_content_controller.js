@@ -360,6 +360,25 @@ function ManageModuleContentController($scope, ManageModuleContentService, Table
 	    });
     }
 
+	self.playVideo = function(object) {
+		self.play_video = {};
+
+		if(object.video) {
+			self.play_video.content_url = object.video;
+		} else if(object.content_url) {
+			self.play_video.content_url = object.content_url;
+		}
+
+		self.play_video.teaching_module = (object.teaching_module) ? object.teaching_module : Constants.CONTENT;
+		self.play_video.show = Constants.TRUE;
+
+		$("#videoModal").modal({
+			backdrop: 'static',
+			keyboard: Constants.FALSE,
+			show    : Constants.TRUE
+		});
+	}
+
     self.emptyValue = function() {
     	self.record.content_url = Constants.EMPTY_STR;
     	self.record.content_text = Constants.EMPTY_STR;
