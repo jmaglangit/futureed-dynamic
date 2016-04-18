@@ -795,19 +795,7 @@ hr {
 	padding: 10px;
 }
 
-.skip-module-message
-, .module-message
-, .wiki-message {
-	position: relative;
-	background: #EBE3B4;
-	border: 1px solid #F9EFB7;
-	border-radius: 7px;
-	padding: 15px;
-	width: 85%;
-	margin: 10px auto 20px auto;
-	font-size: 1.5em;
-	word-wrap: break-word;
-}
+
 
 .wiki-title {
 	font-size: 2em;
@@ -836,21 +824,34 @@ hr {
 	border-radius: 7px;
 }
 
+.skip-module-message
+, .module-message
+, .wiki-message {
+	position: relative;
+	background: #EBE3B4;
+	border: 1px solid #F9EFB7;
+	border-radius: 20px;
+	padding: 15px;
+	width: 85%;
+	margin: 10px auto 20px auto;
+	font-size: 1.5em;
+	word-wrap: break-word;
+	color: #055A7F;
+}
+
 .module-message:after, .module-message:before
 , .skip-module-message:after, .skip-module-message:before
 , .wiki-message:after, .wiki-message:before {
 	right: 100%;
 	top: 50%;
-	border: solid transparent;
+	border-right: solid transparent;
+	border-left: solid transparent;
+	border-bottom: solid transparent;
 	content: " ";
 	height: 0;
 	width: 0;
 	position: absolute;
 	pointer-events: none;
-}
-
-.wiki-more-message:after , .wiki-more-message:before {
-	top: 10%;
 }
 
 .skip-module-message:after
@@ -867,8 +868,59 @@ hr {
 , .wiki-message:before {
 	border-color: rgba(136, 183, 213, 0);
 	border-right-color: #F9EFB7;
-	border-width: 20px;
+	border-width: 23px;
 	margin-top: -22px;
+}
+
+/*For 10 wrong consecutive answers and quoted answers*/
+.failed-module-message, .quoted-module-message {
+	position: relative;
+	background: #EBE3B4;
+	border: 2px solid #F9EFB7;
+	border-radius: 15px;
+	padding: 15px;
+	width: 55%;
+	margin: 10px auto 20px auto;
+	font-size: 1.5em;
+	word-wrap: break-word;
+	color: #055A7F;
+}
+
+
+.failed-module-message:after, .failed-module-message:before,
+.quoted-module-message:after, .quoted-module-message:before
+{
+	right: 100%;
+	top: 50%;
+	border-right: solid transparent;
+	border-left: solid transparent;
+	border-bottom: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.quoted-module-message:after,
+.failed-module-message:after
+{
+	border-color: rgba(194, 225, 245, 0);
+	border-right-color: #EBE3B4;
+	border-width: 18px;
+	margin-top: -20px;
+}
+
+.quoted-module-message:before,
+.failed-module-message:before {
+	border-color: rgba(136, 183, 213, 0);
+	border-right-color: #F9EFB7;
+	border-width: 23px;
+	margin-top: -22px;
+}
+
+.wiki-more-message:after , .wiki-more-message:before {
+	top: 10%;
 }
 
 .message-point {
@@ -1457,6 +1509,14 @@ hr {
 .module-icon-holder img {
 	border-radius: 10px;
 	width: 270px;
+}
+
+.quoted-module-icon-holder img,
+.failed-module-icon-holder img
+{
+	border-radius: 10px;
+	width: 270px;
+	margin-left: 190px;
 }
 
 .disabled-tips-bar, .disabled-help-bar {
@@ -2066,5 +2126,5 @@ a.payment-page-text {
 
 .reward-message {
 	padding-bottom: 15px;
-
+	color: #E67E22;
 }
