@@ -1,9 +1,9 @@
 angular.module('futureed.controllers')
 	.controller('ProfileController', ProfileController);
 
-ProfileController.$inject = ['$scope', 'apiService', 'ProfileService'];
+ProfileController.$inject = ['$scope', '$timeout','apiService', 'ProfileService'];
 
-function ProfileController($scope, apiService, ProfileService) {
+function ProfileController($scope, $timeout,apiService, ProfileService) {
 	var self = this;
 	self.prof = {};
 	self.user_type = Constants.STUDENT;
@@ -26,6 +26,17 @@ function ProfileController($scope, apiService, ProfileService) {
 	self.getAvatarImages = getAvatarImages;
 	self.highlightAvatar = highlightAvatar;
 	self.selectAvatar = selectAvatar;
+
+	$scope.$watch("profile.avatar_accessories", function (newValue, oldValue) {
+		$timeout(function() {
+			$('.avtr-accessory').each(function() {
+				$(this).magnificPopup({
+					delegate: '.accessory-img',
+					type:'image',
+				});
+			});
+		});
+	});
 
 	function setStudentProfileActive(active) {
 		self.errors = Constants.FALSE;
