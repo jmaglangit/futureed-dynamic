@@ -446,6 +446,8 @@ function ProfileController($scope, apiService, ProfileService) {
 		self.points_to_unlock = points_to_unlock;
 
 		self.buy_avatar_accessory_modal = Constants.TRUE;
+		self.errors = Constants.FALSE;
+
 		$("#buy_avatar_accessory_modal").modal({
 			backdrop : 'static',
 			keyboard : Constants.FALSE,
