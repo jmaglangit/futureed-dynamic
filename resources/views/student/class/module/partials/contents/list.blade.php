@@ -3,7 +3,7 @@
 	<div ng-if="mod.contents.teaching_content.media_type.id == futureed.VIDEO">
 
 		<div class="content-container col-xs-12 col-md-12">
-			<div class="content-video-header">
+			<div class="content-header">
 				<div class="row col-xs-3">
 					<button type="button" class="btn btn-gold next-btn left-0" ng-click="mod.exitModule('{!! route('student.class.index') !!}')">
 						Exit Module
@@ -16,7 +16,7 @@
 
 				<div class="row col-xs-3">
 
-					<button type="button" class="btn btn-gold next-btn right-0" ng-click="mod.setActive(futureed.ACTIVE_QUESTIONS)"> Questions </button>
+					<button type="button" class="btn btn-gold next-btn right-0" ng-click="mod.setActive(futureed.ACTIVE_QUESTIONS)"> Skip </button>
 				</div>
 			</div>
 			<div class="content-video-body">
@@ -35,7 +35,20 @@
 	<div ng-if="mod.contents.teaching_content.media_type.id == futureed.IMAGE">
 		<div class="content-container col-xs-12">
 			<div class="content-header">
-				<h3> {! mod.contents.teaching_content.teaching_module !} </h3>
+				<div class="row col-xs-3">
+					<button type="button" class="btn btn-gold next-btn left-0" ng-click="mod.exitModule('{!! route('student.class.index') !!}')">
+						Exit Module
+					</button>
+				</div>
+
+				<div class="row col-xs-6">
+					<h3> {! mod.contents.teaching_content.teaching_module !} </h3>
+				</div>
+
+				<div class="row col-xs-3">
+
+					<button type="button" class="btn btn-gold next-btn right-0" ng-click="mod.setActive(futureed.ACTIVE_QUESTIONS)"> Skip </button>
+				</div>
 			</div>
 
 			<div class="content-body">
@@ -49,7 +62,20 @@
 	<div ng-if="mod.contents.teaching_content.media_type.id == futureed.TEXT">
 		<div class="content-container col-xs-12">
 			<div class="content-header">
-				<h3> {! mod.contents.teaching_content.teaching_module !} </h3>
+				<div class="row col-xs-3">
+					<button type="button" class="btn btn-gold next-btn left-0" ng-click="mod.exitModule('{!! route('student.class.index') !!}')">
+						Exit Module
+					</button>
+				</div>
+
+				<div class="row col-xs-6">
+					<h3> {! mod.contents.teaching_content.teaching_module !} </h3>
+				</div>
+
+				<div class="row col-xs-3">
+
+					<button type="button" class="btn btn-gold next-btn right-0" ng-click="mod.setActive(futureed.ACTIVE_QUESTIONS)"> Skip </button>
+				</div>
 			</div>
 
 			<div class="content-body">
