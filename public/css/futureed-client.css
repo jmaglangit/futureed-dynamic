@@ -370,7 +370,7 @@ content legend {
 
 .dashboard-content {
 	padding: 15px;
-	background-color: rgba(0, 0, 0, .1);
+	background-color: #FCFCFB;
 	border-radius: 7px;
 	box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.1);
 	border: 1px solid #D2D2D2;
@@ -846,4 +846,32 @@ content legend {
 .client-export-button-container .export-buttons .dropdown-menu{
 	min-width: 100px;
 	text-align: center;
+}
+
+/* Parent Dashboard Content Button */
+
+.dashboard-content-btn {
+	background: rgba(0,0,0,0);
+	padding: 15px;
+	border-radius: 10px;
+	border: solid 2px #6496c8;
+	word-spacing: 2px;
+	width: 80%;
+}
+
+.dashboard-content-btn a {
+	text-transform: capitalize;
+	color: #6496c8;
+	text-decoration: none;
+	font-weight: 200;
+	font-size:13px;
+}
+
+.dashboard-content .row {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.dashboard-content .row div h5 {
+	padding-top: 10px;
 }

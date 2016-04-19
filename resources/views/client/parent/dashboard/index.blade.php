@@ -1,17 +1,38 @@
 <div ng-if="user.role == futureed.PARENT" ng-controller="ManageParentReportsController as reports" ng-init="reports.setActive()">
 	<div ng-if="!reports.active_report" class="dashboard-content" ng-cloak>
-		<p>
-			To get started on using Future Lesson, you need to add a student, click
-			<a href="{!! route('client.parent.student.index') !!}"> student</a>.
-		</p>
+		<div class="col-xs-12 row">
+			<div class="col-xs-8">
+				<h5>
+					To get started on using Future Lesson, you need to a student.
+				</h5>
+			</div>
+			<div class="col-xs-4">
+				<button class="dashboard-content-btn" type="button"><a href="{!! route('client.parent.student.index') !!}"> Add student now!</a></button>
+			</div>
+		</div>
 
-		<p>If you already added a Student, you can
-			<a href="{!! route('client.parent.payment.index') !!}"> buy a subject</a> for the your student
-		</p>
+		<div class="col-xs-12 row">
+			<div class="col-xs-8">
+				<h5>If you already added a Student, you can buy a subject for your student.</h5>
+			</div>
+			<div class="col-xs-4">
+				<button type="button" class="dashboard-content-btn"><a href="{!! route('client.parent.payment.index') !!}"> buy a subject now!</a></button>
+			</div>
+		</div>
 
-		<p>You can also
-			<a href="{!! route('client.parent.module.index') !!}"> review</a> the lessons and practice questions.
-		</p>
+		<div class="col-xs-12 row">
+			<div class="col-xs-8">
+				<h5>
+					You can also review the lessons and practice questions.
+				</h5>
+			</div>
+			<div class="col-xs-4">
+				<button class="dashboard-content-btn">
+					<a href="{!! route('client.parent.module.index') !!}">Review</a>
+				</button>
+			</div>
+		</div>
+		<div class="clearfix"></div>
 	</div>
 
 	<div ng-if="reports.active_report" class="reports">
