@@ -640,12 +640,13 @@ content legend {
 /*reporting tabs*/
 
 .reports .nav-student li {
-	width: 191px;
+	width: 152px;
 }
 
 .reports .nav-student li a {
 	border:1px solid #dcdcdc;
 	border-bottom: none;
+	padding: 10px 8px;
 }
 
 .reports .nav-pills>li>a{
