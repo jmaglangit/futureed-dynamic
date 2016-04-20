@@ -23,6 +23,10 @@ class ReportsController extends Controller {
 		return view('student.reports.partials.subject_area_form');
 	}
 
+	public function subject_area_heatmap(){
+		return view('student.reports.partials.subject_area_heatmap_form');
+	}
+
 	public function summary_progress() {
 		return view('student.reports.partials.summary_progress_form');
 	}

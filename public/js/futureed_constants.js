@@ -241,6 +241,7 @@ var Constants = {
 	, SUMMARY_PROGRESS			: "Summary Progress"
 	, CURRENT_LEARNING			: "Current Learning"
 	, SUBJECT_AREA				: "Subject Area"
+	, SUBJECT_AREA_HEATMAP		: "Subject Area Heatmap"
 
 	/*Country Codes*/
 	, UNITED_STATES				: 840

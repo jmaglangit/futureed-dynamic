@@ -309,4 +309,128 @@ class StudentReportExportController extends ReportController {
 			})->store('xls',storage_path('app/'.$report_dir['path']));
 		}
 	}
+
+	/**
+	 * @param $student_id
+	 * @param $subject_id
+	 * @param $file_type
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
+	public function getSubjectAreaHeatMap($student_id, $subject_id, $file_type){
+
+		$report = $this->student_report->getSubjectAreaHeatMap($student_id,$subject_id);
+
+		// Create export format.
+		//File name format  --> first_name _ last_name _ tab_name _ date
+		$student_info = $report['additional_information'];
+		$file_name = $student_info['first_name'].'_'.$student_info['last_name'].'_Subject_Area_'. Carbon::now()->toDateString();
+		$file_name = str_replace(' ','_',$file_name);
+
+
+		//Execute output.
+		switch($file_type){
+
+			case config('futureed.pdf'):
+				return $this->getSubjectAreaHeatMapPdf($report)->download($file_name.'.'.$file_type);
+				break;
+			case config('futureed.xls'):
+				return $this->getSubjectAreaHeatMapExcel($report,$file_name)->download($file_type);
+				break;
+			case config('futureed.mobile-pdf'):
+
+				//generate pdf
+				$pdf_contents = $this->getSubjectAreaHeatMapPdf($report)
+					->download($file_name.'.'.$file_type);
+
+				//create file folder
+				$report_dir = $this->report_services->createReportFileFolder($file_name);
+
+				//concat location and file.
+				$report_file = $report_dir['path'].'/'.$file_name.'.pdf';
+
+
+				//save file with contents
+				$save_response = $this->report_services->saveReportFileFolder($report_file,$pdf_contents);
+
+				if($save_response){
+					//return generated report url
+					return $this->respondReportDownloadLink($this->report_services->getReportFileURL($report_dir['folder_name']));
+
+				}else {
+					return $this->respondErrorMessage(2048);
+				}
+
+				break;
+			case config('futureed.mobile-xls'):
+
+				$report_dir = $this->report_services->createReportFileFolder($file_name);
+
+				try{
+					//generate excel
+					ob_end_clean();
+					ob_start();
+					$this->getSubjectAreaHeatMapExcel($report,$file_name,$report_dir);
+
+					//return generate report url
+					return $this->respondReportDownloadLink($this->report_services->getReportFileURL($report_dir['folder_name']));
+				}catch (Exception $e){
+
+					return $this->respondErrorMessage(2048);
+				}
+
+				break;
+			default:
+
+				return $this->respondErrorMessage(2063);
+				break;
+		}
+	}
+
+	/**
+	 * Student Subject Grade Progress Report to PDF
+	 * @param $data
+	 * @return static
+	 */
+	public function getSubjectAreaHeatMapPdf($data){
+
+		return $this->pdf->loadView('export.student.subject-area-heat-map-pdf', $data)->setPaper('a4')->setOrientation('landscape');
+	}
+
+	/**
+	 * Student Subject Grade Progress Report to Excel
+	 * @param $data
+	 * @param $name
+	 * @param null $report_dir
+	 * @return mixed
+	 */
+	public function getSubjectAreaHeatMapExcel($data, $name, $report_dir = null){
+
+		ob_end_clean();
+		ob_start();
+		if(empty($report_dir)){
+			return Excel::create($name,function($excel) use ($data){
+
+				$excel->sheet('NewSheet', function($sheet) use ($data){
+
+					$sheet->mergeCells('A1:M1');
+					$sheet->mergeCells('A3:A5');
+					$sheet->setOrientation('landscape');
+					$sheet->loadView('export.student.subject-area-heat-map-excel',$data);
+				});
+			});
+		}else {
+			return Excel::create($name,function($excel) use ($data){
+
+				$excel->sheet('NewSheet', function($sheet) use ($data){
+
+					$sheet->mergeCells('A1:M1');
+					$sheet->mergeCells('A3:A5');
+					$sheet->setOrientation('landscape');
+					$sheet->loadView('export.student.subject-area-heat-map-excel',$data);
+				});
+			})->store('xls',storage_path('app/'.$report_dir['path']));
+
+		}
+
+	}
 }

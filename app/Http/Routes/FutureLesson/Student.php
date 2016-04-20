@@ -420,6 +420,11 @@
 						, 'uses' => 'FutureLesson\Student\ReportsController@subject_area'
 					]);
 
+					Routes::get('/subject_area_heatmap_form', [
+						'as' => 'reports.partials.subject_area_heatmap_form'
+						, 'uses' => 'FutureLesson\Student\ReportsController@subject_area_heatmap'
+					]);
+
 					Routes::get('/summary_progress_form', [
 						'as' => 'reports.partials.summary_progress_form'
 						, 'uses' => 'FutureLesson\Student\ReportsController@summary_progress'

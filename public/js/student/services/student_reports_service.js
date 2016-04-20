@@ -44,5 +44,12 @@ function StudentReportsService($http) {
 		});
 	}
 
+	api.subjectAreaHeatmap = function (student_id, subject_id) {
+		return $http({
+			method	:	Constants.METHOD_GET
+			,	url	:	apiUrl + 'report/student-progress/curriculum/heat-map/' + student_id + '/' + subject_id
+		});
+	}
+
 	return api;	
 }

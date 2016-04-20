@@ -26,6 +26,11 @@ Routes::group([
 		'as' => 'api.report.student.progress.curriculum'
 	]);
 
+	Routes::get('/student-progress/curriculum/heat-map/{id}/{subject_id}',[
+		'uses' => 'Api\Reports\StudentReportRestController@getSubjectAreaHeatMap',
+		'as' => 'api.report.student.progress.curriculum.heat-map'
+	]);
+
 	Routes::get('/student-progress/current-learning/{student_id}/{subject_id}',[
 		'uses' => 'Api\Reports\StudentReportRestController@studentCurrentLearning',
 		'as' => 'api.report.student.progress.current-learning'
@@ -71,6 +76,11 @@ Routes::group([
 	Routes::get('/student-progress/curriculum/{id}/{subject_id}/{file_type}',[
 			'uses' => 'Api\Reports\StudentReportExportController@studentSubjectGradeProgressReport',
 			'as' => 'api.report.student.progress.curriculum'
+	]);
+
+	Routes::get('/student-progress/curriculum/heat-map/{id}/{subject_id}/{file_type}',[
+		'uses' => 'Api\Reports\StudentReportExportController@getSubjectAreaHeatMap',
+		'as' => 'api.report.student.progress.curriculum.heat-map'
 	]);
 
 	Routes::get('/student-progress/current-learning/{student_id}/{subject_id}/{file_type}',[

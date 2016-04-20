@@ -817,7 +817,10 @@ class ClassStudentRepository implements ClassStudentRepositoryInterface
 				DB::raw('sm.class_id'),
 				DB::raw('sm.student_id'),
 				DB::raw('sm.module_status'),
-				DB::raw('sm.progress')
+				DB::raw('sm.progress'),
+				DB::raw('round(((sm.correct_counter/sm.question_counter) * 100),0) as heat_map'),
+				DB::raw('sm.question_counter'),
+				DB::raw('sm.correct_counter')
 			)->leftJoin('subject_areas as sa','sa.subject_id','=','subjects.id')
 				->leftJoin('modules as m','m.subject_area_id','=','sa.id')
 				->leftJoin('student_modules as sm', function($left_join) {
