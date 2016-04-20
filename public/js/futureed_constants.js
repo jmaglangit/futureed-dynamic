@@ -246,6 +246,11 @@ var Constants = {
 	/*Country Codes*/
 	, UNITED_STATES				: 840
 
+	, REPORT_PROGRESS_PASS	: 81
+	, REPORT_PROGRESS_MEDIAN_CEILING	: 80
+	, REPORT_PROGRESS_MEDIAN_FLOOR	: 51
+	, REPORT_PROGRESS_FAIL	: 50
+
 	, MSG_CREATED				: function(noun) {
 		return noun + " created.";
 	}

@@ -152,12 +152,17 @@
                         <tr ng-if="dashboard.teacher_report.rows" ng-repeat=" teacher in dashboard.teacher_report.rows">
                             <td>Teacher {! teacher.first_name +' '+ teacher.last_name !}</td>
                             <td class="report-progress">
-                                <div class="report-progress-bar report-progress-bar-success"
+                                <div class="progress-bar progress-bar-striped"
+                                     ng-class="{
+										'progress-bar-success' : teacher.percent_progress > futureed.REPORT_PROGRESS_PASS,
+										'progress-bar-warning' : teacher.percent_progress > futureed.REPORT_PROGRESS_MEDIAN_FLOOR
+										    && teacher.percent_progress <= futureed.REPORT_PROGRESS_MEDIAN_CEILING ,
+										'progress-bar-danger' : teacher.percent_progress <= futureed.REPORT_PROGRESS_FAIL ,
+									}"
                                      ng-style="{ 'width' : teacher.percent_progress + '%' }">{! teacher.percent_progress
                                     +'%' !}
                                 </div>
                             </td>
-
                         </tr>
                         <tr ng-if="!dashboard.teacher_report.rows">
                             <td colspan="2"><p>No result...</p></td>
