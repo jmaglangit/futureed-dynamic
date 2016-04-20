@@ -114,7 +114,10 @@
 								, 'class' => 'form-control'
 							)
 						) !!}
-						<a href="" class="control-label col-xs-6" ng-click="content.playVideo(content.record)">Play Video</a>
+						<p class="help-block">
+							Please check if you can see the video on the screen when you click
+							<span><a href="" ng-click="content.playVideo(content.record)">Play Video.</a></span>
+						</p>
 					</div>
 				</div>
 				<div class="form-group" ng-if="content.record.media_type_id == futureed.TEXT">

@@ -131,8 +131,9 @@
 								, 'class' => 'form-control'
 							)
 						) !!}
-						<p class="help-block">Video url should have this format: 
-							<span class="error-msg-con"> https://player.vimeo.com/video/{video_id}</span>
+						<p class="help-block">
+							Please check if you can see the video on the screen when you click
+							<span><a href="" ng-click="content.playVideo(content.record)">Play Video.</a></span>
 						</p>
 					</div>
 				</div>
@@ -312,4 +313,34 @@
             </div>
         </div>
     </div>
+	<div id="videoModal" ng-show="content.play_video.show" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-lg">
+
+			<div class="modal-content">
+				<div class="modal-header">
+					<h4 class="modal-title"> {! content.play_video.teaching_module !}</h4>
+				</div>
+				<div class="modal-body">
+					<iframe ng-if="content.play_video.content_url"
+							ng-src="{! content.play_video.content_url | trustAsResourceUrl !}"
+							width="560"
+							height="360"
+							align="middle"
+							frameborder="2"
+							webkitallowfullscreen mozallowfullscreen allowfullscreen ng-cloak></iframe>
+				</div>
+				<div class="modal-footer">
+					<div class="btncon col-xs-8 col-xs-offset-4 pull-left">
+						{!! Form::button('Close'
+                            , array(
+                                'class' => 'btn btn-gold btn-medium'
+                                , 'data-dismiss' => 'modal'
+                            )
+                        ) !!}
+					</div>
+				</div>
+			</div>
+
+		</div>
+	</div>
 </div>
