@@ -322,7 +322,7 @@ function StudentReportsController($scope, $timeout, StudentReportsService, Searc
 
                     self.summary.records = response.data.rows;
                     self.student = response.data.additional_information;
-                    self.student_report_export = '/api/report/student-progress/curriculum/heat-map' + $scope.user.id +'/' + self.search.subject_id;
+                    self.student_report_export = '/api/report/student-progress/curriculum/heat-map/' + $scope.user.id +'/' + self.search.subject_id;
                 }
             }
 

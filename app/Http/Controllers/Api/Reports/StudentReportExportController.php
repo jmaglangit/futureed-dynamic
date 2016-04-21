@@ -393,6 +393,16 @@ class StudentReportExportController extends ReportController {
 	 */
 	public function getSubjectAreaHeatMapPdf($data){
 
+		//add pdf format
+		$format = [
+			'column_header_count' => count($data['column_header']),
+			'column_header_neg' => count($data['column_header']) - 1,
+			'column_header_floor' => floor(count($data['column_header'])/6),
+			'column_header_ceil' => ceil(count($data['column_header'])/6)
+		];
+
+		$data['format'] = $format;
+
 		return $this->pdf->loadView('export.student.subject-area-heat-map-pdf', $data)->setPaper('a4')->setOrientation('landscape');
 	}
 
@@ -404,6 +414,14 @@ class StudentReportExportController extends ReportController {
 	 * @return mixed
 	 */
 	public function getSubjectAreaHeatMapExcel($data, $name, $report_dir = null){
+
+		//Added excel format
+		$format = [
+			'column_header_floor' => floor(count($data['column_header'])/6),
+			'column_header_ceil' => ceil(count($data['column_header'])/6),
+		];
+
+		$data['format'] = $format;
 
 		ob_end_clean();
 		ob_start();
