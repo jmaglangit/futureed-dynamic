@@ -2028,6 +2028,11 @@ a.payment-page-text {
 	padding-right: 5px;
 }
 
+.avatar-image {
+	width: 20%;
+	margin: 20px 0px 20px 0px;
+}
+
 @media only screen and (max-height: 680px) and (max-width: 1390px) {
 
 	.class-search {
@@ -2118,6 +2123,11 @@ a.payment-page-text {
 		border: 1px solid transparent;
 	}
 
+	.avatar-image {
+		width: 20%;
+		margin: 13px 0px 13px 0px;
+	}
+
 }
 
 .image-badge {
@@ -2128,4 +2138,8 @@ a.payment-page-text {
 	padding-bottom: 15px;
 	color: #E67E22;
 	font-size:14px;
+}
+
+.follow-up-form div .form-select-password {
+	padding-bottom: 0px;
 }

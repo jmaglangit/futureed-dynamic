@@ -1424,8 +1424,8 @@ fieldset legend {
 		border-radius: 50%;
 		border: 6px solid transparent;
 		cursor: pointer;
-		width: 100px;
-		height: 100px;
+		width: 130px;
+		height: 130px;
 	}
 	.form-select-password .list-inline li h5 {
 		color: #055A7F;
