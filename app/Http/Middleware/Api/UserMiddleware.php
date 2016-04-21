@@ -4,9 +4,10 @@ use Closure;
 use FutureEd\Models\Repository\Admin\AdminRepositoryInterface;
 use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
+use FutureEd\Models\Repository\User\UserRepositoryInterface;
 use FutureEd\Services\TokenServices;
 use FutureEd\Services\SessionServices;
-
+use Illuminate\Http\Response;
 class UserMiddleware extends JWTMiddleware{
 
 	protected $student;
@@ -20,12 +21,15 @@ class UserMiddleware extends JWTMiddleware{
 	protected $session;
 
 	public function __construct(
+		TokenServices $tokenServices,
+		UserRepositoryInterface $userRepositoryInterface,
+		SessionServices $sessionServices,
 		StudentRepositoryInterface $studentRepositoryInterface,
 		ClientRepositoryInterface $clientRepositoryInterface,
-		AdminRepositoryInterface $adminRepositoryInterface,
-		TokenServices $tokenServices,
-		SessionServices $sessionServices
-	){
+		AdminRepositoryInterface $adminRepositoryInterface
+	)
+	{
+		parent::__construct($tokenServices, $userRepositoryInterface);
 
 		$this->student = $studentRepositoryInterface;
 
@@ -53,16 +57,25 @@ class UserMiddleware extends JWTMiddleware{
 
 		$this->validateToken($authorization);
 
-
         if($this->getMessageBag()){
 
             return $this->respondWithError($this->getMessageBag());
         }
 
-
 		//check id by user type
 		//if client and admin, check role.
 		$payload_data = $this->token->getPayloadData();
+
+		//  Get session_token
+		$current_user_id = $this->getUserId($payload_data['id'], $payload_data['type']);
+		$current_user_session_token = $this->user->getSessionToken($current_user_id)->session_token;
+
+		$token = session('_token');
+
+		if($current_user_session_token <> $token)
+		{
+			return $this->setStatusCode(Response::HTTP_NOT_ACCEPTABLE)->respondErrorMessage(2063);
+		}
 
 		//get actions
 		$routes_actions = $request->route()->getAction();
@@ -87,6 +100,43 @@ class UserMiddleware extends JWTMiddleware{
 			return $this->respondErrorMessage(2032);
 		}
 
+	}
+
+	/**
+	 * Get equivalent User ID for the given user type, role, id
+	 *
+	 * @param $id
+	 * @param $user_type
+	 *
+	 * @return null for default
+	 */
+	public function getUserId($id, $user_type)
+	{
+
+		switch($user_type)
+		{
+			case config('futureed.student'):
+
+				return $this->student->getUserId($id);
+
+				break;
+
+			case config('futureed.client'):
+
+				return $this->client->getUserId($id);
+
+				break;
+
+			case config('futureed.admin'):
+
+				return $this->admin->getUserId($id);;
+
+				break;
+
+			default:
+				return null;
+				break;
+		}
 	}
 
 	/**

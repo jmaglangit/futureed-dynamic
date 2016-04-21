@@ -1,7 +1,6 @@
 <?php namespace FutureEd\Services;
 
 
-use Carbon\Carbon;
 use FutureEd\Models\Repository\Admin\AdminRepositoryInterface;
 use FutureEd\Models\Repository\Client\ClientRepositoryInterface;
 use FutureEd\Models\Repository\Student\StudentRepositoryInterface;
@@ -125,10 +124,7 @@ class SessionServices {
 			//update user with token
 			return $this->user_repo->updateSessionToken($user_data);
 
-		} elseif($stored_session->session_token <> $user_data['session_token']
-			&&  Carbon::now()->diffInHours(Carbon::parse($stored_session->last_activity)) > 2 ){
-			//	if exist compare token  and last_activity <= 2hrs/ session expiry.
-
+		} elseif($stored_session->session_token <> $user_data['session_token']){
 			//update user with token
 			return $this->user_repo->updateSessionToken($user_data);
 

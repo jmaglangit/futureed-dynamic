@@ -32,6 +32,8 @@ interface ClientRepositoryInterface
 
 	public function getClientByUserId($id);
 
+	public function getUserId($id);
+
 	public function deleteClient($id);
 
 	public function getClassroom($id);

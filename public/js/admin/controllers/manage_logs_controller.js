@@ -106,6 +106,7 @@ function ManageLogsController($scope, ManageLogsService, TableService, SearchSer
 		$scope.ui_block();
 		ManageLogsService.securityLogs(self.search, self.table).success(function(response) {
 			self.table.loading = Constants.FALSE;
+			$scope.ui_unblock();
 
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
@@ -116,8 +117,6 @@ function ManageLogsController($scope, ManageLogsService, TableService, SearchSer
 					self.updatePageCount(response.data.rows);
 				}
 			}
-
-			$scope.ui_unblock();
 		}).error(function(response) {
 			self.errors = $scope.internalError();
 			$scope.ui_unblock();

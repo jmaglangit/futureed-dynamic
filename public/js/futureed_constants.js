@@ -243,6 +243,9 @@ var Constants = {
 	, SUBJECT_AREA				: "Subject Area"
 	, SUBJECT_AREA_HEATMAP		: "Subject Area Heatmap"
 
+	, HTTP_UNAUTHORIZED			: 401
+	, HTTP_NOT_ACCEPTABLE 		: 406
+
 	/*Country Codes*/
 	, UNITED_STATES				: 840
 

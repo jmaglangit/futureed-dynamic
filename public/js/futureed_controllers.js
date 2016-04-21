@@ -74,9 +74,10 @@ function FutureedController($scope, $window, apiService, futureed) {
 	}
 
 	$scope.ui_unblock = function() {
+		var url = window.location.pathname;
+		var segment = url.split('/');
+
 		if(localStorage.token_expire == Constants.TRUE) {
-			var url = window.location.pathname;
-			var segment = url.split('/');
 			if(segment[1] == 'student') {
 				$scope.user = null;
 
@@ -109,6 +110,49 @@ function FutureedController($scope, $window, apiService, futureed) {
 				apiService.updateAdminUserSession($scope.user).success(function(response) {
 					$scope.session_expire = Constants.TRUE;
 					$("#session_expire").modal({
+						backdrop: 'static',
+						keyboard: Constants.FALSE,
+						show    : Constants.TRUE
+					});
+				}).error(function() {
+					$scope.internalError();
+				});
+			}
+		}
+
+		if(localStorage.multiple_session == Constants.TRUE) {
+			$scope.user = null;
+			if(segment[1] == 'student')
+			{
+				apiService.updateUserSession($scope.user).success(function(response) {
+					$scope.multiple_session = Constants.TRUE;
+					$("#multiple_session").modal({
+						backdrop: 'static',
+						keyboard: Constants.FALSE,
+						show    : Constants.TRUE
+					});
+				}).error(function() {
+					$scope.internalError();
+				});
+			}
+			else if(segment[1] == 'client')
+			{
+				apiService.updateClientUserSession($scope.user).success(function(response) {
+					$scope.multiple_session = Constants.TRUE;
+					$("#multiple_session").modal({
+						backdrop: 'static',
+						keyboard: Constants.FALSE,
+						show    : Constants.TRUE
+					});
+				}).error(function() {
+					$scope.internalError();
+				});
+			}
+			else if(segment[1] == 'peaches')
+			{
+				apiService.updateAdminUserSession($scope.user).success(function(response) {
+					$scope.multiple_session = Constants.TRUE;
+					$("#multiple_session").modal({
 						backdrop: 'static',
 						keyboard: Constants.FALSE,
 						show    : Constants.TRUE
@@ -310,10 +354,12 @@ function FutureedController($scope, $window, apiService, futureed) {
 				$scope.confirm_email = Constants.TRUE;
 			}
 
-			if(angular.equals($scope.user.role, Constants.STUDENT)) {
+			if(angular.equals($scope.user.role, Constants.STUDENT))
+			{
 				$scope.user.class = Constants.FALSE;
-
+				$scope.ui_block();
 				apiService.listClass($scope.user.id).success(function(response) {
+					$scope.ui_unblock();
 					if(angular.equals(response.status, Constants.STATUS_OK)) {
 						if(response.errors) {
 							$scope.errorHandler(response.errors);
@@ -428,7 +474,7 @@ function FutureedController($scope, $window, apiService, futureed) {
 				} else if(response.data){
 					$scope.user.avatar_id = response.data.id;
 					$scope.user.avatar = response.data.url;
-				
+
 					$scope.session_user = $scope.user;
 					$scope.has_avatar = Constants.TRUE;
 					apiService.updateUserSession($scope.user).success(function(response) {

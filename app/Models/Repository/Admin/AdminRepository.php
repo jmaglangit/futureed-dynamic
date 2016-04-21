@@ -98,6 +98,20 @@ class AdminRepository implements  AdminRepositoryInterface {
 
 	}
 
+	public function getUserId($id)
+	{
+		try
+		{
+			return Admin::find($id)->user_id;
+		}
+		catch (\Exception $e)
+		{
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+	}
+
 	/**
 	 * Get Admin information.
 	 * @param $id
@@ -108,7 +122,6 @@ class AdminRepository implements  AdminRepositoryInterface {
 
 		try{
 			$response = Admin::with('user')->find($id);
-
 		}catch (\Exception $e){
 			DB::rollback();
 
