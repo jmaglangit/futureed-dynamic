@@ -36,8 +36,6 @@
   <body class="student" ng-controller="futureedController" ng-init="getUserDetails();">
     {!! Form::hidden('userdata', Session::get('student')) !!}
 
-    <p class="notice"> BETA Stage: Under Development </p>
-
     @yield('navbar')
 
   	@yield('content')
