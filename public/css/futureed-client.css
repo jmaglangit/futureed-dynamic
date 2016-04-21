@@ -851,21 +851,43 @@ content legend {
 
 /* Parent Dashboard Content Button */
 
-.dashboard-content-btn {
-	background: rgba(0,0,0,0);
+.dashboard-content-btn button {
+	text-transform: capitalize;
+	color: #6496c8;
+	text-decoration: none;
+	font-weight: 200;
+	font-size:13px;
 	padding: 15px;
+	background: rgba(0,0,0,0);
 	border-radius: 10px;
 	border: solid 2px #6496c8;
 	word-spacing: 2px;
 	width: 80%;
 }
 
-.dashboard-content-btn a {
-	text-transform: capitalize;
-	color: #6496c8;
-	text-decoration: none;
-	font-weight: 200;
-	font-size:13px;
+.dashboard-content-btn .subscribe-button {
+	background-color: #03658A;
+	font-size: 30px;
+	color: whitesmoke;
+	margin-top: 50px;
+}
+
+.dashboard-content-btn .subscribe-button:hover {
+	color: #E7E7E7;
+}
+
+.dashboard-content-btn .subscribe-button:active {
+	color: #E7E7E7;
+}
+
+.dashboard-content-btn button:hover {
+	border-color: #346392;
+	color: #346392;
+}
+
+.dashboard-content-btn button:active {
+	border-color: #27496d;
+	color: #27496d;
 }
 
 .dashboard-content .row {

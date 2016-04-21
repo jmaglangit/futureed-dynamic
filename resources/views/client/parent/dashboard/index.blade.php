@@ -7,7 +7,11 @@
 				</h5>
 			</div>
 			<div class="col-xs-4">
-				<button class="dashboard-content-btn" type="button"><a href="{!! route('client.parent.student.index') !!}"> Add student now!</a></button>
+				<a class="dashboard-content-btn" href="{!! route('client.parent.student.index') !!}">
+					<button  type="button">
+						Add student now!
+					</button>
+				</a>
 			</div>
 		</div>
 
@@ -16,7 +20,11 @@
 				<h5>If you already added a Student, you can buy a subject for your student.</h5>
 			</div>
 			<div class="col-xs-4">
-				<button type="button" class="dashboard-content-btn"><a href="{!! route('client.parent.payment.index') !!}"> buy a subject now!</a></button>
+				<a href="{!! route('client.parent.payment.index') !!}" class="dashboard-content-btn">
+					<button type="button">
+						buy a subject now!
+					</button>
+				</a>
 			</div>
 		</div>
 
@@ -27,9 +35,11 @@
 				</h5>
 			</div>
 			<div class="col-xs-4">
-				<button class="dashboard-content-btn">
-					<a href="{!! route('client.parent.module.index') !!}">Review</a>
-				</button>
+				<a href="{!! route('client.parent.module.index') !!}" class="dashboard-content-btn">
+					<button type="button">
+						Review
+					</button>
+				</a>
 			</div>
 		</div>
 		<div class="clearfix"></div>
