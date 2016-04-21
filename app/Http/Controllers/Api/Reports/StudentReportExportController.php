@@ -148,6 +148,16 @@ class StudentReportExportController extends ReportController {
 	 */
 	public function studentSubjectGradeProgressPdf($data){
 
+		//add pdf format
+		$format = array_merge([
+			'column_header_count' => count($data['column_header']),
+			'column_header_neg' => count($data['column_header']) - 1,
+			'column_header_floor' => floor(count($data['column_header'])/6),
+			'column_header_ceil' => ceil(count($data['column_header'])/6),
+		],config('futureed.report_export_style_subject'));
+
+		$data['format'] = $format;
+
 		return $this->pdf->loadView('export.student.subject-area-pdf', $data)->setPaper('a4')->setOrientation('landscape');
 	}
 
@@ -156,9 +166,19 @@ class StudentReportExportController extends ReportController {
 	 * Student Subject Grade Progress Report to Excel
 	 * @param $data
 	 * @param $name
+	 * @param null $report_dir
 	 * @return mixed
 	 */
-	public function studentSubjectGradeProgressExcel($data, $name, $report_dir){
+	public function studentSubjectGradeProgressExcel($data, $name, $report_dir = null){
+
+		//Added excel format
+		$format = array_merge([
+			'column_header_count' => count($data['column_header']),
+			'column_header_floor' => floor(count($data['column_header'])/6),
+			'column_header_ceil' => ceil(count($data['column_header'])/6),
+		],config('futureed.report_export_style_subject'));
+
+		$data['format'] = $format;
 
 		ob_end_clean();
 		ob_start();
@@ -323,7 +343,7 @@ class StudentReportExportController extends ReportController {
 		// Create export format.
 		//File name format  --> first_name _ last_name _ tab_name _ date
 		$student_info = $report['additional_information'];
-		$file_name = $student_info['first_name'].'_'.$student_info['last_name'].'_Subject_Area_'. Carbon::now()->toDateString();
+		$file_name = $student_info['first_name'].'_'.$student_info['last_name'].'_Subject_Area_Heatmap_'. Carbon::now()->toDateString();
 		$file_name = str_replace(' ','_',$file_name);
 
 
@@ -394,12 +414,12 @@ class StudentReportExportController extends ReportController {
 	public function getSubjectAreaHeatMapPdf($data){
 
 		//add pdf format
-		$format = [
+		$format = array_merge([
 			'column_header_count' => count($data['column_header']),
 			'column_header_neg' => count($data['column_header']) - 1,
 			'column_header_floor' => floor(count($data['column_header'])/6),
-			'column_header_ceil' => ceil(count($data['column_header'])/6)
-		];
+			'column_header_ceil' => ceil(count($data['column_header'])/6),
+		],config('futureed.report_export_style'));
 
 		$data['format'] = $format;
 
@@ -416,10 +436,11 @@ class StudentReportExportController extends ReportController {
 	public function getSubjectAreaHeatMapExcel($data, $name, $report_dir = null){
 
 		//Added excel format
-		$format = [
+		$format = array_merge([
+			'column_header_count' => count($data['column_header']),
 			'column_header_floor' => floor(count($data['column_header'])/6),
 			'column_header_ceil' => ceil(count($data['column_header'])/6),
-		];
+		],config('futureed.report_export_style'));
 
 		$data['format'] = $format;
 

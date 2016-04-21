@@ -18,7 +18,7 @@
 			<td colspan="1">Grade : {{ $additional_information['grade_name'] }}</td>
 		</tr>
 		<tr>
-			<td colspan="1">Subject : {{ $additional_information['subject_name'] }}</td>
+			<td colspan="1">Subject : {{ $additional_information['subject_name'] .'=>' . $format['progress_pass']}}</td>
 		</tr>
 		<tr></tr>
 		<tr>
@@ -53,13 +53,23 @@
 		@foreach($rows as $row)
 			<tr>
 				<td style="text-align: center; border: 1px solid black;">{{ $row->curriculum_name }}</td>
-				@for($i = 1; $i < (count($column_header)); $i++)
+				@for($i = 1; $i < ($format['column_header_count']); $i++)
 					@if(empty($row->curriculum_data->toArray()))
 						<td style="text-align: center; border: 1px solid black;">{{ '' }}</td>
 					@else
 						@foreach($row->curriculum_data as $data)
 							@if($data->grade_id == $i)
-								<td style="text-align: center; border: 1px solid black;">{{ (($data->heat_map > 0) ? $data->heat_map . '%' : '')}}</td>
+								<td style="text-align: center; border: 1px solid black; background-color:
+									@if($data->heat_map > $format['progress_pass'])
+										#5cb85c;
+									@elseif($data->heat_map > $format['progress_median_floor'] && $data->heat_map <= $format['progress_median_ceil'])
+										#f0ad4e;
+									@elseif($data->heat_map > $format['progress_median_floor'] && $data->heat_map <= $format['progress_median_ceil'])
+										#d9534f;
+									@else
+										#ffffff;
+									@endif
+								 ">{{ (($data->heat_map > 0) ? $data->heat_map . '%' : '')}}</td>
 							@else
 								<td style="text-align: center; border: 1px solid black;">{{ ''}}</td>
 							@endif

@@ -4,7 +4,7 @@
 <div class="export-report">
 	<table>
 		<tr class="export-logo">
-			<td colspan="{{ count($column_header) }}">
+			<td colspan="{{ $format['column_header_count'] }}">
 				<img src="{{ base_path().'/public/images/logo-md.png' }}">
 			</td>
 		</tr>
@@ -12,13 +12,13 @@
 			<th rowspan="3" >
 				<img src="{{ base_path().'/public/' . config('futureed.thumbnail') . '/'.$additional_information['avatar_thumbnail'] }}" alt=" ">
 			</th>
-			<td colspan="{{ count($column_header)-1 }}">Student : {{ $additional_information['first_name'].' '.$additional_information['last_name'] }}</td>
+			<td colspan="{{ $format['column_header_neg'] }}">Student : {{ $additional_information['first_name'].' '.$additional_information['last_name'] }}</td>
 		</tr>
 		<tr class="export-header">
-			<td colspan="{{ count($column_header)-1 }}">Grade : {{ $additional_information['grade_name'] }}</td>
+			<td colspan="{{ $format['column_header_neg'] }}">Grade : {{ $additional_information['grade_name'] }}</td>
 		</tr>
 		<tr class="export-header">
-			<td colspan="{{ count($column_header)-1 }}">Subject : {{ $additional_information['subject_name'] }} {{ count($column_header)-1 }}</td>
+			<td colspan="{{ $format['column_header_neg'] }}">Subject : {{ $additional_information['subject_name'] }} {{ count($column_header)-1 }}</td>
 		</tr>
 
 		<!-- progress bar -->
@@ -26,7 +26,7 @@
 			<td colspan="13"><hr/></td>
 		</tr>
 		<tr class="progress-container">
-			<td colspan="{{ floor(count($column_header)/6) }}">
+			<td colspan="{{ $format['column_header_floor'] }}">
 				<div class="progress-item">
 					<div class="circle">
 						<p>{{ $additional_information['earned_badges'] }}</p>
@@ -34,7 +34,7 @@
 					<p>Badges earned</p>
 				</div>
 			</td>
-			<td colspan="{{ floor(count($column_header)/6) }}">
+			<td colspan="{{ $format['column_header_floor'] }}">
 				<div class="progress-item">
 					<div class="circle">
 						<p>{{ $additional_information['earned_medals'] }}</p>
@@ -42,7 +42,7 @@
 					<p>Number of medals earned</p>
 				</div>
 			</td>
-			<td colspan="{{ ceil(count($column_header)/6) }}">
+			<td colspan="{{ $format['column_header_ceil'] }}">
 				<div class="progress-item">
 					<div class="circle">
 						<p>{{ $additional_information['completed_lessons'] }}</p>
@@ -50,7 +50,7 @@
 					<p>Lessons completed</p>
 				</div>
 			</td>
-			<td colspan="{{ floor(count($column_header)/6) }}">
+			<td colspan="{{ $format['column_header_floor'] }}">
 				<div class="progress-item">
 					<div class="circle">
 						<p>{{ $additional_information['written_tips'] }}</p>
@@ -58,7 +58,7 @@
 					<p>Tips written</p>
 				</div>
 			</td>
-			<td colspan="{{ floor(count($column_header)/6) }}">
+			<td colspan="{{ $format['column_header_floor'] }}">
 				<div class="progress-item">
 					<div class="circle">
 						<p>{{ $additional_information['week_hours'] }}</p>
@@ -66,7 +66,7 @@
 					<p>Hours spent in last 7 days</p>
 				</div>
 			</td>
-			<td colspan="{{ ceil(count($column_header)/6) }}">
+			<td colspan="{{ $format['column_header_ceil'] }}">
 				<div class="progress-item">
 					<div class="circle">
 						<p>{{ $additional_information['total_hours'] }}</p>
@@ -90,13 +90,25 @@
 		@foreach($rows as $row)
 			<tr>
 				<td>{{ $row->curriculum_name }}</td>
-				@for($i = 1; $i < (count($column_header)); $i++)
+				@for($i = 1; $i < ($format['column_header_count']); $i++)
 					@if(empty($row->curriculum_data->toArray()))
 						<td>{{ '' }}</td>
 					@else
 						@foreach($row->curriculum_data as $data)
 							@if($data->grade_id == $i)
-								<td>{{ (($data->progress > 0) ? $data->progress . '%' : '')}}</td>
+								<td style=" background-color:
+								@if($data->progress > $format['progress_pass'])
+										#5cb85c;
+								@elseif($data->progress > $format['progress_above_ave_floor'] && $data->progress <= $format['progress_above_ave_ceil'])
+										#5bc0de;
+								@elseif($data->progress > $format['progress_below_ave_floor'] && $data->progress <= $format['progress_below_ave_ceil'])
+										#f0ad4e;
+								@elseif($data->progress > $format['progress_below_fail_floor'] && $data->progress <= $format['progress_below_fail_ceil'])
+										#d9534f;
+								@else
+										#ffffff;
+								@endif
+										">{{ (($data->progress > 0) ? $data->progress . '%' : '')}}</td>
 							@else
 								<td>{{ ''}}</td>
 							@endif

@@ -1861,12 +1861,12 @@ hr {
 .export-report .report-data tr, .export-report .report-data td, .export-report .report-data th{
 	border: 1px solid black;
 }
-.export-report .report-data tr:nth-child(even) {
-	background: #DDD;
-}
-.export-report .report-data tr:nth-child(odd) {
-	background: #FFF;
-}
+/*.export-report .report-data tr:nth-child(even) {*/
+	/*background: #DDD;*/
+/*}*/
+/*.export-report .report-data tr:nth-child(odd) {*/
+	/*background: #FFF;*/
+/*}*/
 
 .text-gold {
 	color: #E9AB17;

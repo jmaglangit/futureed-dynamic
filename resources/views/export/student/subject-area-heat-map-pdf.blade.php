@@ -96,7 +96,17 @@
 					@else
 						@foreach($row->curriculum_data as $data)
 							@if($data->grade_id == $i)
-								<td>{{ (($data->heat_map > 0) ? $data->heat_map . '%' : '')}}</td>
+								<td style=" background-color:
+								@if($data->heat_map > $format['progress_pass'])
+										#5cb85c;
+								@elseif($data->heat_map > $format['progress_median_floor'] && $data->heat_map <= $format['progress_median_ceil'])
+										#f0ad4e;
+								@elseif($data->heat_map > $format['progress_median_floor'] && $data->heat_map <= $format['progress_median_ceil'])
+										#d9534f;
+								@else
+										#ffffff;
+								@endif
+								">{{ (($data->heat_map > 0) ? $data->heat_map . '%' : '')}}</td>
 							@else
 								<td>{{ ''}}</td>
 							@endif
