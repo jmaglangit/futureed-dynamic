@@ -131,7 +131,7 @@
 								, 'class' => 'form-control'
 							)
 						) !!}
-						<p class="help-block">
+						<p ng-if="content.active_edit" class="help-block">
 							Please check if you can see the video on the screen when you click
 							<span><a href="" ng-click="content.playVideo(content.record)">Play Video.</a></span>
 						</p>

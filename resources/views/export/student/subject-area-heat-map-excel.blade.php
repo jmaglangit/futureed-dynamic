@@ -64,7 +64,7 @@
 										#5cb85c;
 									@elseif($data->heat_map > $format['progress_median_floor'] && $data->heat_map <= $format['progress_median_ceil'])
 										#f0ad4e;
-									@elseif($data->heat_map > $format['progress_median_floor'] && $data->heat_map <= $format['progress_median_ceil'])
+									@elseif($data->heat_map > $format['progress_fail_floor'] && $data->heat_map <= $format['progress_fail_ceil'])
 										#d9534f;
 									@else
 										#ffffff;

@@ -44,9 +44,9 @@
 							<div ng-if="dataValue.heat_map" class="progress-bar progress-bar-striped"
 								 ng-class="{
 										'progress-bar-success' : dataValue.heat_map > futureed.REPORT_PROGRESS_PASS,
-										'progress-bar-warning' : dataValue.heat_map > futureed.REPORT_PROGRESS_FLOOR
-											&& dataValue.heat_map <= futureed.REPORT_PROGRESS_CEILING ,
-										'progress-bar-danger' : dataValue.heat_map <= futureed.REPORT_PROGRESS_FAIL ,
+										'progress-bar-warning' : dataValue.heat_map > futureed.REPORT_PROGRESS_MEDIAN_FLOOR
+										&& dataValue.heat_map <= futureed.REPORT_PROGRESS_MEDIAN_CEILING ,
+										'progress-bar-danger' : dataValue.heat_map <= futureed.REPORT_PROGRESS_FAIL,
 									}"
 								 ng-style="{ 'width' : dataValue.heat_map + '%' }">{! dataValue.heat_map !}%</div>
 						</div>
