@@ -37,7 +37,9 @@ function StudentClassController($scope, $filter, $window, StudentClassService, S
 
 	self.setCurrentClass = function(class_id) {
 		if(parseInt(class_id)) {
-			self.current_class = class_id;	
+			self.current_class = parseInt(class_id);
+			$scope.user.class = parseInt(class_id);
+			$scope.updateUserData($scope.user);
 		}
 	}
 
