@@ -327,7 +327,6 @@ function FutureedController($scope, $window, apiService, futureed) {
 
 						if($scope.user){
 							$scope.getUserPoints();
-							$scope.updateUserData($scope.user);
 						}
 					}
 
@@ -595,7 +594,7 @@ function FutureedController($scope, $window, apiService, futureed) {
 
 	$scope.updateUserData = function(data) {
 		$scope.user = data;
-		$("input[name='userdata'").val(JSON.stringify($scope.user));
+		$("input[name='userdata']").val(JSON.stringify($scope.user));
 
 		apiService.updateUserSession($scope.user);
 	}
