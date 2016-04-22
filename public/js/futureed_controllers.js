@@ -474,6 +474,7 @@ function FutureedController($scope, $window, apiService, futureed) {
 				} else if(response.data){
 					$scope.user.avatar_id = response.data.id;
 					$scope.user.avatar = response.data.url;
+					$scope.user.thumbnail = response.data.thumbnail;
 
 					$scope.session_user = $scope.user;
 					$scope.has_avatar = Constants.TRUE;
