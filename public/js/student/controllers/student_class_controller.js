@@ -234,6 +234,7 @@ function StudentClassController($scope, $filter, $window, StudentClassService, S
 	}
 
 	self.searchFnc = function(event) {
+		self.total_module_items_loaded = Constants.DEFAULT_SIZE;
 		self.errors = Constants.FALSE;
 		self.tableDefaults();
 		self.list();
