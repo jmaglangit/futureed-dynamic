@@ -613,6 +613,7 @@ li.active .rnd-identifier{
 .avatar_list img {
     width: 100px;
     height: 100px;
+    cursor: zoom-in;
 }
 
 .detcon h1{
