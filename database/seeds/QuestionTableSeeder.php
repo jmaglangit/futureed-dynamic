@@ -15,8 +15,19 @@ class QuestionTableSeeder extends Seeder
 //id,module_id,code,question_type,question_text,question_image,answer,seq_no,difficulty,points_earned,status
 //,created_by,updated_by,created_by,updated_by,deleted_by
 
+		$this->command->info('Loading Question Batch 1...');
+		$this->dataLoader('questions.csv');
 
-		$reader = Reader::createFromPath(storage_path('seeders') . '/questions.csv');
+		$this->command->info('Loading Question Batch 2...');
+		$this->dataLoader('questions_two.csv');
+    }
+
+	/**
+	 * @param $seeder_csv_file
+	 */
+	public function dataLoader($seeder_csv_file){
+
+		$reader = Reader::createFromPath(storage_path('seeders') . '/' . $seeder_csv_file);
 
 		\DB::table('questions')->truncate();
 		foreach($reader as $index => $row){
@@ -44,6 +55,5 @@ class QuestionTableSeeder extends Seeder
 			]);
 
 		}
-
-    }
+	}
 }
