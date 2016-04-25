@@ -90,31 +90,25 @@
 		@foreach($rows as $row)
 			<tr>
 				<td>{{ $row->curriculum_name }}</td>
-				@for($i = 1; $i < ($format['column_header_count']); $i++)
-					@if(empty($row->curriculum_data->toArray()))
-						<td>{{ '' }}</td>
+				@foreach($row->curriculum_data as $data)
+					@if(!empty($data))
+						<td style=" background-color:
+						@if($data['progress'] > $format['progress_pass'])
+								#5cb85c;
+						@elseif($data['progress'] > $format['progress_above_ave_floor'] && $data['progress'] <= $format['progress_above_ave_ceil'])
+								#5bc0de;
+						@elseif($data['progress'] > $format['progress_below_ave_floor'] && $data['progress'] <= $format['progress_below_ave_ceil'])
+								#f0ad4e;
+						@elseif($data['progress'] > $format['progress_below_fail_floor'] && $data['progress'] <= $format['progress_below_fail_ceil'])
+								#d9534f;
+						@else
+								#ffffff;
+						@endif
+								">{{ (($data['progress'] > 0) ? $data['progress'] . '%' : '')}}</td>
 					@else
-						@foreach($row->curriculum_data as $data)
-							@if($data->grade_id == $i)
-								<td style=" background-color:
-								@if($data->progress > $format['progress_pass'])
-										#5cb85c;
-								@elseif($data->progress > $format['progress_above_ave_floor'] && $data->progress <= $format['progress_above_ave_ceil'])
-										#5bc0de;
-								@elseif($data->progress > $format['progress_below_ave_floor'] && $data->progress <= $format['progress_below_ave_ceil'])
-										#f0ad4e;
-								@elseif($data->progress > $format['progress_below_fail_floor'] && $data->progress <= $format['progress_below_fail_ceil'])
-										#d9534f;
-								@else
-										#ffffff;
-								@endif
-										">{{ (($data->progress > 0) ? $data->progress . '%' : '')}}</td>
-							@else
-								<td>{{ ''}}</td>
-							@endif
-						@endforeach
+						<td>{{ ''}}</td>
 					@endif
-				@endfor
+				@endforeach
 			</tr>
 		@endforeach
 	</table>

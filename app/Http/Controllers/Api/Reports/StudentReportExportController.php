@@ -158,6 +158,8 @@ class StudentReportExportController extends ReportController {
 
 		$data['format'] = $format;
 
+		$data = $this->exportCellGenerator($data);
+
 		return $this->pdf->loadView('export.student.subject-area-pdf', $data)->setPaper('a4')->setOrientation('landscape');
 	}
 
@@ -179,6 +181,8 @@ class StudentReportExportController extends ReportController {
 		],config('futureed.report_export_style_subject'));
 
 		$data['format'] = $format;
+
+		$data = $this->exportCellGenerator($data);
 
 		ob_end_clean();
 		ob_start();
@@ -423,6 +427,8 @@ class StudentReportExportController extends ReportController {
 
 		$data['format'] = $format;
 
+		$data = $this->exportCellGenerator($data);
+
 		return $this->pdf->loadView('export.student.subject-area-heat-map-pdf', $data)->setPaper('a4')->setOrientation('landscape');
 	}
 
@@ -443,6 +449,10 @@ class StudentReportExportController extends ReportController {
 		],config('futureed.report_export_style'));
 
 		$data['format'] = $format;
+
+
+		//populate rows.
+		$data = $this->exportCellGenerator($data);
 
 		ob_end_clean();
 		ob_start();
@@ -471,5 +481,26 @@ class StudentReportExportController extends ReportController {
 
 		}
 
+	}
+
+	/**
+	 * Generate rows for export tables.
+	 * @param $data
+	 * @return mixed
+	 */
+	public function exportCellGenerator($data){
+
+		foreach($data['rows'] as $row_data){
+
+			//allocate rows.
+			$row_progress = array_fill(0,count($data['column_header'])-1,[]);
+
+			foreach($row_data->curriculum_data as $curr_data){
+				$row_progress[$curr_data->grade_id -1] = $curr_data->toArray();
+			}
+			$row_data->curriculum_data = $row_progress;
+		}
+
+		return $data;
 	}
 }

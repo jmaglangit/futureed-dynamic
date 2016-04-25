@@ -53,31 +53,25 @@
 		@foreach($rows as $row)
 			<tr>
 				<td style="text-align: center; border: 1px solid black;">{{ $row->curriculum_name }}</td>
-				@for($i = 1; $i < ($format['column_header_count']); $i++)
-					@if(empty($row->curriculum_data->toArray()))
-						<td style="text-align: center; border: 1px solid black;">{{ '' }}</td>
+				@foreach($row->curriculum_data as $data)
+					@if(!empty($data))
+						<td style="text-align: center; border: 1px solid black;" class="
+						@if($data['progress'] > $format['progress_pass'])
+								progress-bar-success
+						@elseif($data['progress'] > $format['progress_above_ave_floor'] && $data['progress'] <= $format['progress_above_ave_ceil'])
+								progress-bar-info
+						@elseif($data['progress'] > $format['progress_below_ave_floor'] && $data['progress'] <= $format['progress_below_ave_ceil'])
+								progress-bar-warning
+						@elseif($data['progress'] > $format['progress_below_fail_floor'] && $data['progress'] <= $format['progress_below_fail_ceil'])
+								progress-bar-danger
+						@else
+								progress-bar-none
+						@endif
+								">{{ (($data['progress'] > 0) ? $data['progress'] . '%' : '')}}</td>
 					@else
-						@foreach($row->curriculum_data as $data)
-							@if($data->grade_id == $i)
-								<td style="text-align: center; border: 1px solid black; background-color:
-									@if($data->progress > $format['progress_pass'])
-											#5cb85c;
-									@elseif($data->progress > $format['progress_above_ave_floor'] && $data->progress <= $format['progress_above_ave_ceil'])
-											#5bc0de;
-									@elseif($data->progress > $format['progress_below_ave_floor'] && $data->progress <= $format['progress_below_ave_ceil'])
-											#f0ad4e;
-									@elseif($data->progress > $format['progress_below_fail_floor'] && $data->progress <= $format['progress_below_fail_ceil'])
-											#d9534f;
-									@else
-											#ffffff;
-									@endif
-								">{{ (($data->progress > 0) ? $data->progress . '%' : '')}}</td>
-							@else
-								<td style="text-align: center; border: 1px solid black;">{{ ''}}</td>
-							@endif
-						@endforeach
+						<td style="text-align: center; border: 1px solid black;">{{ ''}}</td>
 					@endif
-				@endfor
+				@endforeach
 			</tr>
 		@endforeach
 	</table>
