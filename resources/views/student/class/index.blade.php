@@ -7,17 +7,15 @@
 @section('content')
 	<div class="container class-con" ng-controller="StudentClassController as class" ng-init="checkLSP(user.id);class.updateBackground();class.listClass();" ng-cloak>
 
-
 		<div template-directive template-url="{!! route('client.partials.base_url') !!}"></div>
+		<div ng-if="student_details_updated == futureed.TRUE">
+			<div ng-if="user.class">
+				<div template-directive template-url="{!! route('student.partials.tips_help_bar') !!}"></div>
+			</div>
 
-		<div ng-if="user.class">
-			<div template-directive template-url="{!! route('student.partials.tips_help_bar') !!}"></div>
-		</div>
-
-		<div class="module-wrapper" ng-init="class.setCurrentClass('{!! $class_id !!}')">
-
-			<div template-directive template-url="{!! route('student.class.partials.module_list') !!}"></div>
-
+			<div class="module-wrapper" ng-init="class.setCurrentClass('{!! $class_id !!}')">
+				<div template-directive template-url="{!! route('student.class.partials.module_list') !!}"></div>
+			</div>
 		</div>
 	</div>
 @stop

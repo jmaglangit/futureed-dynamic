@@ -156,6 +156,12 @@ Routes::group([
 		'uses' => 'Api\v1\StudentController@checkBillingAddress'
 	]);
 
+	Routes::get('/student/latest-details/{id}',
+	[
+		'as' => 'student.get.latest-details',
+		'uses' => 'Api\v1\StudentController@getUpdatedDetails'
+	]);
+
 	Routes::get('/student/learning-style/{id}',[
 		'as' => 'student.learning-style.id',
 		'uses' => 'Api\v1\StudentController@checkRequiredLearningStyle'

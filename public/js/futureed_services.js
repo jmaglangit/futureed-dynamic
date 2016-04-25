@@ -177,6 +177,13 @@ var services = angular.module('futureed.services', []);
 			});
 		}
 
+		futureedAPI.getUpdatedStudentDetails = function(student_user_id) {
+			return $http({
+				method	: Constants.METHOD_GET,
+				url		: futureedAPIUrl + 'student/latest-details/' + student_user_id
+			});
+		}
+
 		futureedAPI.getStudentBadges = function(id) {
 			return $http({
 				method 	: Constants.METHOD_GET

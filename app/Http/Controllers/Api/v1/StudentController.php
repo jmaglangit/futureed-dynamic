@@ -164,4 +164,10 @@ class StudentController extends ApiController {
 			]);
 	}
 
+	public function getUpdatedDetails($user_id)
+	{
+		$student_id = $this->student->getStudentByUserId($user_id)->id;
+
+		return $this->respondWithData($this->student_service->getStudentDetails($student_id));
+	}
 }

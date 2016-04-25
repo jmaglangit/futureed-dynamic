@@ -356,26 +356,54 @@ function FutureedController($scope, $window, apiService, futureed) {
 
 			if(angular.equals($scope.user.role, Constants.STUDENT))
 			{
-				$scope.user.class = Constants.FALSE;
+				$scope.student_details_updated = Constants.FALSE;
 				$scope.ui_block();
 				apiService.listClass($scope.user.id).success(function(response) {
-					$scope.ui_unblock();
 					if(angular.equals(response.status, Constants.STATUS_OK)) {
 						if(response.errors) {
 							$scope.errorHandler(response.errors);
 						} else if(response.data){
-							if(response.data.records.length) {
-								if($scope.user != null){
-									$scope.user.class = Constants.TRUE;
-								}
+							if(response.data.records.length && $scope.user.class)
+							{
+								$scope.user.class = response.data.records[0].class_id;
+								$scope.student_details_updated = Constants.TRUE;
+								$scope.ui_unblock();
+							}
+							else if(!(response.data.records.length) && $scope.user.class == null)
+							{
+								$scope.user.class = null;
+								$scope.student_details_updated = Constants.TRUE;
+								$scope.ui_unblock();
+							}
+							else
+							{
+								apiService.getUpdatedStudentDetails($scope.user.user.id).success(function(response) {
+									if(angular.equals(response.status, Constants.STATUS_OK))
+									{
+										if(response.errors) {
+											$scope.errorHandler(response.errors);
+										}
+										else if(response.data)
+										{
+											$scope.user = JSON.stringify(response.data);
+
+											$("input[name='userdata']").val(JSON.stringify($scope.user));
+											apiService.updateUserSession($scope.user).success(function(response) {
+												$window.location.href = '/student/dashboard';
+											}).error(function(response){
+
+											});
+										}
+									}
+								}).error(function(response){
+									$scope.internalError();
+								});
 							}
 						}
-
 						if($scope.user){
 							$scope.getUserPoints();
 						}
 					}
-
 				}).error(function(response) {
 					$scope.internalError();
 				});
