@@ -116,10 +116,14 @@
 		            <td ng-if="module.records.length">
 		            	<div class="row">
 		            		<div class="col-xs-6">
-		            			<a href="" ng-click="module.launchModule(moduleInfo.id)" title="launch">Launch</a>
-		            		</div>
+		            			<button class="btn btn-success" ng-click="module.launchModule(moduleInfo.id)"
+										tooltip-class="parent-module-tooltip" tooltip-placement="top"
+										tooltip="Go through the System by Clicking on this button">Launch</button>
+							</div>
 		            		<div class="col-xs-6">
-		            			<a href="" ng-click="module.setActive('view',moduleInfo.id)" title="view"><span><i class="fa fa-eye"></i></span></a>
+		            			<a href="" ng-click="module.setActive('view',moduleInfo.id)" title="view"
+								   tooltip-class="parent-module-tooltip" tooltip-placement="top"
+								   tooltip="Read all about the module by clicking here"><span><i class="fa fa-eye"></i></span></a>
 		            		</div>
 		            	</div>
 		            </td>
@@ -138,14 +142,14 @@
 			</table>
 
 			<div class="pull-right" ng-if="module.records.length">
-				<pagination 
-					total-items="module.table.total_items" 
+				<pagination
+					total-items="module.table.total_items"
 					ng-model="module.table.page"
 					max-size="3"
-					items-per-page="module.table.size" 
+					items-per-page="module.table.size"
 					previous-text = "&lt;"
 					next-text="&gt;"
-					class="pagination" 
+					class="pagination"
 					boundary-links="true"
 					ng-change="module.paginateByPage()">
 				</pagination>

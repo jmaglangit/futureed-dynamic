@@ -898,3 +898,18 @@ content legend {
 .dashboard-content .row div h5 {
 	padding-top: 10px;
 }
+
+.tooltip.parent-module-tooltip .tooltip-inner {
+	background-color: #04435e;
+	margin: 20px 0px;
+	padding: 15px;
+	box-sizing: border-box;
+	font-family: 'Schoolbell', sans-serif;
+	width: 180px;
+}
+
+.tooltip.parent-module-tooltip .tooltip-arrow {
+	margin:20px;
+	border-bottom-color: #04435e;
+	left: 65px;
+}
