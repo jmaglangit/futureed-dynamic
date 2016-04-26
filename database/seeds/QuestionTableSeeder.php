@@ -15,6 +15,8 @@ class QuestionTableSeeder extends Seeder
 //id,module_id,code,question_type,question_text,question_image,answer,seq_no,difficulty,points_earned,status
 //,created_by,updated_by,created_by,updated_by,deleted_by
 
+		\DB::table('questions')->truncate();
+
 		$this->command->info('Loading Question Batch 1...');
 		$this->dataLoader('questions.csv');
 
@@ -27,9 +29,9 @@ class QuestionTableSeeder extends Seeder
 	 */
 	public function dataLoader($seeder_csv_file){
 
+		$this->command->info(storage_path('seeders') . '/' . $seeder_csv_file);
 		$reader = Reader::createFromPath(storage_path('seeders') . '/' . $seeder_csv_file);
 
-		\DB::table('questions')->truncate();
 		foreach($reader as $index => $row){
 
 			\DB::table('questions')->insert([
