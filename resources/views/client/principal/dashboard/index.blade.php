@@ -4,11 +4,36 @@
 
     <div ng-if="!dashboard.active_report" class="dashboard-content" ng-cloak>
 
-        <p>To get started on using Future Lesson, you need to invite a
-            <a href="{!! route('client.principal.teacher.index') !!}"> teacher</a> first to manage your classes.</p>
+        <div class="col-xs-12 row">
+            <div class="col-xs-8">
+                <h5>
+                    To get started using Future Lesson, you need to invite a teacher first to manage your classes.
+                </h5>
+            </div>
+            <div class="col-xs-4">
+                <a class="dashboard-content-btn" href="{!! route('client.principal.teacher.index') !!}">
+                    <button  type="button">
+                        Add Teacher
+                    </button>
+                </a>
+            </div>
+        </div>
 
-        <p>If you have already invited a Teacher, you need to go to the
-            <a href="{!! route('client.principal.payment.index') !!}"> payment</a> to buy seats for your classes.</p>
+        <div class="col-xs-12 row">
+            <div class="col-xs-8">
+                <h5>If you already invited a Teacher, you need to go to the payment to buy seats for your classes.</h5>
+            </div>
+            <div class="col-xs-4">
+                <a href="{!! route('client.principal.payment.index') !!}" class="dashboard-content-btn">
+                    <button type="button">
+                        Buy Seats
+                    </button>
+                </a>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
     </div>
 
     {{--Reports--}}

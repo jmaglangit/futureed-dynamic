@@ -1,13 +1,53 @@
 <div ng-if="user.role == futureed.TEACHER" ng-controller="ManageTeacherContentController as dashboard" ng-init="dashboard.setActive(futureed.DASHBOARD)" ng-cloak>
 	<div ng-if="!dashboard.active_report" class="dashboard-content">
-		<p>To get started on using Future Lesson, you need to add a student under a
-		<a href="{!! route('client.teacher.class.index') !!}"> class</a>.</p>
 
-		<p>To see all your students, click
-		<a href="{!! route('client.teacher.student.index') !!}"> student</a>.</p>
+		<div class="col-xs-12 row">
+			<div class="col-xs-8">
+				<h5>
+					To get started on using Future Lesson, you need to add a student.
+				</h5>
+			</div>
+			<div class="col-xs-4">
+				<a class="dashboard-content-btn" href="{!! route('client.teacher.class.index') !!}">
+					<button  type="button">
+						Add student now!
+					</button>
+				</a>
+			</div>
+		</div>
 
-		<p>To review the lessons and practice questions, click on
-		<a href="{!! route('client.teacher.module.index') !!}"> module</a>.</p>
+		<div class="col-xs-12 row">
+			<div class="col-xs-8">
+				<h5>
+					To see all your students, click student.
+				</h5>
+			</div>
+			<div class="col-xs-4">
+				<a class="dashboard-content-btn" href="{!! route('client.teacher.student.index') !!}">
+					<button  type="button">
+						Student List
+					</button>
+				</a>
+			</div>
+		</div>
+
+		<div class="col-xs-12 row">
+			<div class="col-xs-8">
+				<h5>
+					To review the lessons and practice questions, click the module.
+				</h5>
+			</div>
+			<div class="col-xs-4">
+				<a class="dashboard-content-btn" href="{!! route('client.teacher.module.index') !!}">
+					<button  type="button">
+						Module
+					</button>
+				</a>
+			</div>
+		</div>
+
+		<div class="clearfix"></div>
+
 	</div>
 
 	<div ng-if="dashboard.active_report">

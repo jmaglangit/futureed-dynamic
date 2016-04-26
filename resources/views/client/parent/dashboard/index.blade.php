@@ -3,7 +3,7 @@
 		<div class="col-xs-12 row">
 			<div class="col-xs-8">
 				<h5>
-					To get started on using Future Lesson, you need to a student.
+					To get started on using Future Lesson, you need to add a student.
 				</h5>
 			</div>
 			<div class="col-xs-4">
