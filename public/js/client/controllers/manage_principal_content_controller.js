@@ -15,6 +15,7 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
         self.active_school = Constants.FALSE;
         self.active_school_teacher = Constants.FALSE;
         self.export = Constants.FALSE;
+        self.active_purchase = Constants.FALSE;
 
         //self.active_report = Constants.TRUE;
 
@@ -116,6 +117,8 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
                         self.active_school = Constants.FALSE;
                         self.export = Constants.FALSE;
                     }
+                }else {
+                    self.active_purchase = Constants.TRUE;
                 }
 
             }
@@ -149,7 +152,10 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
                         && self.active_school == Constants.FALSE){
 
                         self.active_report = Constants.TRUE;
+                        self.active_school = Constants.TRUE;
                         self.export = Constants.TRUE;
+                    }else {
+                        self.active_purchase = Constants.TRUE;
                     }
                 }
             }

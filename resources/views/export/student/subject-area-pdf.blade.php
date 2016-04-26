@@ -18,7 +18,7 @@
 			<td colspan="{{ $format['column_header_neg'] }}">Grade : {{ $additional_information['grade_name'] }}</td>
 		</tr>
 		<tr class="export-header">
-			<td colspan="{{ $format['column_header_neg'] }}">Subject : {{ $additional_information['subject_name'] }} {{ count($column_header)-1 }}</td>
+			<td colspan="{{ $format['column_header_neg'] }}">Subject : {{ $additional_information['subject_name'] }}</td>
 		</tr>
 
 		<!-- progress bar -->

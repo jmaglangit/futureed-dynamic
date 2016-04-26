@@ -2,7 +2,7 @@
      ng-init="dashboard.setActive();" ng-cloak>
 
 
-    <div ng-if="!dashboard.active_report" class="dashboard-content" ng-cloak>
+    <div ng-if="dashboard.active_purchase" class="dashboard-content" ng-cloak>
 
         <div class="col-xs-12 row">
             <div class="col-xs-8">
@@ -175,8 +175,8 @@
                             <th class="col-xs-3">{! dashboard.teacher_report.column_header.progress !}</th>
                         </tr>
                         <tr ng-if="dashboard.teacher_report.rows" ng-repeat=" teacher in dashboard.teacher_report.rows">
-                            <td>{!! trans('messages.teacher') !!} {! teacher.first_name +' '+ teacher.last_name !}</td>
-                            <td class="report-progress">
+                            <td>Teacher {! teacher.first_name +' '+ teacher.last_name !}</td>
+                            <td>
                                 <div class="progress-bar progress-bar-striped"
                                      ng-class="{
 										'progress-bar-success' : teacher.percent_progress > futureed.REPORT_PROGRESS_PASS,
