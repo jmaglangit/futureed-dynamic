@@ -41,7 +41,13 @@
 				<td ng-repeat="(key, value) in reports.summary.columns " ng-if="key > 0">
 					<div ng-repeat="(dataKey, dataValue) in data.curriculum_data" ng-if="dataValue.grade_id == value.id">
 						<div class="report-progress">
-							<div ng-if="dataValue.progress" class="report-progress-bar report-progress-bar-success"
+							<div ng-if="dataValue.progress" class="progress-bar progress-bar-striped"
+								 ng-class="{
+										'progress-bar-success' : dataValue.progress > 75,
+										'progress-bar-info' : dataValue.progress > 50 && dataValue.progress <= 75 ,
+										'progress-bar-warning' : dataValue.progress > 25 && dataValue.progress <= 50 ,
+										'progress-bar-danger' : dataValue.progress <= 25,
+									}"
 								 ng-style="{ 'width' : dataValue.progress + '%' }"></div>
 						</div>
 					</div>

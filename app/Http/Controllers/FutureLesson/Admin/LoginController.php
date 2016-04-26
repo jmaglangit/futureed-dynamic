@@ -5,8 +5,6 @@ use FutureEd\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Input;
 use Illuminate\Support\Facades\Session;
 
-use Illuminate\Http\Request;
-
 class LoginController extends Controller{
 	public function index(){
 		
@@ -34,16 +32,16 @@ class LoginController extends Controller{
 		$user_object = json_decode($user_data['user_data']);
 
 		if($user_object->id){
-			Session::flush();
+			Session::forget('admin');
 			Session::put('admin', $user_data['user_data']);
 
 			return redirect()->route('admin.dashboard.index');
 		}
 	}
 
-	public function logout(){
-		Session::flush();
-		
+	public function logout()
+	{
+		Session::forget('admin');
 		return redirect()->route('admin.login');
 	}
 	/*POST method*/

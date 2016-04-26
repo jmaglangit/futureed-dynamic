@@ -4,11 +4,36 @@
 
     <div ng-if="!dashboard.active_report" class="dashboard-content" ng-cloak>
 
-        <p>{!! trans('messages.client_principal_dashboard_msg') !!}
-            <a href="{!! route('client.principal.teacher.index') !!}"> {!! trans('messages.teacher') !!}</a> {!! trans('messages.client_principal_dashboard_msg2') !!}</p>
+        <div class="col-xs-12 row">
+            <div class="col-xs-8">
+                <h5>
+                    To get started using Future Lesson, you need to invite a teacher first to manage your classes.
+                </h5>
+            </div>
+            <div class="col-xs-4">
+                <a class="dashboard-content-btn" href="{!! route('client.principal.teacher.index') !!}">
+                    <button  type="button">
+                        Add Teacher
+                    </button>
+                </a>
+            </div>
+        </div>
 
-        <p>{!! trans('messages.client_principal_dashboard_msg3') !!}
-            <a href="{!! route('client.principal.payment.index') !!}"> {!! trans('messages.payment') !!}</a> {!! trans('messages.client_principal_dashboard_msg4') !!}</p>
+        <div class="col-xs-12 row">
+            <div class="col-xs-8">
+                <h5>If you already invited a Teacher, you need to go to the payment to buy seats for your classes.</h5>
+            </div>
+            <div class="col-xs-4">
+                <a href="{!! route('client.principal.payment.index') !!}" class="dashboard-content-btn">
+                    <button type="button">
+                        Buy Seats
+                    </button>
+                </a>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
     </div>
 
     {{--Reports--}}
@@ -152,12 +177,17 @@
                         <tr ng-if="dashboard.teacher_report.rows" ng-repeat=" teacher in dashboard.teacher_report.rows">
                             <td>{!! trans('messages.teacher') !!} {! teacher.first_name +' '+ teacher.last_name !}</td>
                             <td class="report-progress">
-                                <div class="report-progress-bar report-progress-bar-success"
+                                <div class="progress-bar progress-bar-striped"
+                                     ng-class="{
+										'progress-bar-success' : teacher.percent_progress > futureed.REPORT_PROGRESS_PASS,
+										'progress-bar-warning' : teacher.percent_progress > futureed.REPORT_PROGRESS_MEDIAN_FLOOR
+										    && teacher.percent_progress <= futureed.REPORT_PROGRESS_MEDIAN_CEILING ,
+										'progress-bar-danger' : teacher.percent_progress <= futureed.REPORT_PROGRESS_FAIL ,
+									}"
                                      ng-style="{ 'width' : teacher.percent_progress + '%' }">{! teacher.percent_progress
                                     +'%' !}
                                 </div>
                             </td>
-
                         </tr>
                         <tr ng-if="!dashboard.teacher_report.rows">
                             <td colspan="2"><p>{!! trans('messages.no_records_found') !!}</p></td>

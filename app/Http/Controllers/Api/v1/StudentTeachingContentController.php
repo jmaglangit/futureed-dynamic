@@ -1,17 +1,17 @@
 <?php namespace FutureEd\Http\Controllers\Api\v1;
 
 use FutureEd\Http\Requests;
-use FutureEd\Http\Controllers\Controller;
 use FutureEd\Models\Repository\ModuleContent\ModuleContentRepositoryInterface;
 use Illuminate\Support\Facades\Input;
 
-use Illuminate\Http\Request;
 
 class StudentTeachingContentController extends ApiController {
 
 	protected $module_content;
 
-	public function __construct(ModuleContentRepositoryInterface $module_content){
+	public function __construct(
+		ModuleContentRepositoryInterface $module_content
+	){
 
 		$this->module_content = $module_content;
 	}
@@ -37,9 +37,8 @@ class StudentTeachingContentController extends ApiController {
 		$offset = (Input::get('offset')) ? Input::get('offset') : 0;
 
 		return $this->respondWithData(
-			$this->module_content->getModuleContentLists($criteria,$limit,$offset)
+			$this->module_content->getModuleContentLists($criteria, $limit, $offset)
 		);
-
 	}
 
 }

@@ -63,7 +63,6 @@
 		<ul class="nav nav-pills module-pills" role="tablist" ng-init="class.listClass()">
 			<li role="presentation" class="module-tabs" ng-repeat="aClass in class.classes track by $index" ng-class="{ 'active' : aClass.class_id == class.current_class }"
 				ng-click="class.redirectClass('{!! route('student.class.index') !!}', aClass.class_id)">
-				<div ng-if="$index == 0"><span ng-init="class.selectClass(aClass.class_id)"></span></div>
 				<a href="#home" aria-controls="home" role="tab" data-toggle="tab" >{! aClass.classroom.subject.name !}</a>
 			</li>
 			<li role="presentation" class="module-tabs" ng-class="{ 'active' : aClass.class_id == class.current_class }">

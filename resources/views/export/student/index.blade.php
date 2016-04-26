@@ -5,6 +5,7 @@
     <title>Future Lesson</title>
 
     <link rel="stylesheet" type="text/css" href="{{ base_path().'/public/css/futureed-student.css' }}">
+    <link rel="stylesheet" type="text/css" href="{{ base_path().'/public/css/futureed-report.css' }}">
 </head>
 <body>
 

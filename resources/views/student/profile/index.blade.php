@@ -1,5 +1,9 @@
 @extends('student.app')
 
+@section('styles')
+	{!! Html::style('/css/magnific-popup.css') !!}
+@stop
+
 @section('navbar')
     @include('student.partials.main-nav')
 @stop
@@ -98,6 +102,7 @@
 @stop
 
 @section('scripts')
+	{!! Html::script('/js/jquery.magnific-popup.js') !!}
 	{!! Html::script('/js/student/controllers/profile_controller.js') !!}
 	{!! Html::script('/js/student/services/profile_service.js') !!}
 

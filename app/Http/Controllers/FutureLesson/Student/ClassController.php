@@ -11,11 +11,14 @@ class ClassController extends Controller {
 	public function index($id = null) {
 		$user_object = json_decode(Session::get('student'));
 
-		if(isset($user_object)) {
+		if(!(isset($user_object->class) && $user_object->class)) {
 			return redirect()->route('student.dashboard.index');
 		}
-		else {
+		else if(isset($id) && !intval($id)) {
 			abort(404);
+		}
+		else {
+			return view('student.class.index', array('class_id' => $id));
 		}
 	}
 

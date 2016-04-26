@@ -46,6 +46,15 @@
 							<p ng-bind-html="mod.current_question.questions_text | trustAsHtml"></p>
 						</div>
 					</div>
+					{{--Tips--}}
+					<div class="col-xs-12">
+						<div class="questions-tips"
+							 ng-class="{'question-tip-pos-top-10' : mod.current_question.questions_image != 'None', 'question-tip-pos-top-130' : mod.current_question.questions_image == 'None'}"
+							 ng-if="mod.current_question.question_type == futureed.ORDERING">
+							<p> <img ng-src="{! user.avatar !}" /> <span>Drag the items to reorder. </span></p>
+						</div>
+					</div>
+
 				</div>
 				<div class="col-xs-6">
 				{{--Answers--}}
@@ -145,11 +154,9 @@
 						</div>
 					</div>
 				</div>
-				{{--Tips--}}
-				<div class="questions-tips" ng-if="mod.current_question.question_type == futureed.ORDERING">
-					<p> <img ng-src="{! user.avatar !}" /> <span>Drag the items to reorder. </span></p>
-				</div>
+
 			</div>
+
 			</div>
 		</div>
 	</div>
@@ -203,12 +210,12 @@
 			<div class="message-container">
 				<div class="col-xs-12">
 					<div class="col-xs-2"></div>
-					<div class="module-icon-holder col-xs-3">
+					<div class="quoted-module-icon-holder col-xs-3">
 						<img ng-src="{! mod.avatar_quote_info.avatar_pose && '/images/avatar/' + mod.avatar_quote_info.avatar_pose.pose_image || user.avatar !}" />
 					</div>
 
-					<div class="col-xs-6">
-						<p class="module-message">
+					<div class="col-xs-5">
+						<p class="quoted-module-message">
 							{! mod.avatar_quote_info.quote !} 
 						</p>
 
@@ -232,12 +239,12 @@
 			<div class="result-failed message-container">
 				<div class="col-xs-12">
 					<div class="col-xs-2"></div>
-					<div class="module-icon-holder col-xs-3">
+					<div class="failed-module-icon-holder col-xs-3">
 						<img ng-src="{! user.avatar !}" />
 					</div>
 
-					<div class="col-xs-6">
-						<p class="module-message">
+					<div class="col-xs-5">
+						<p class="failed-module-message">
 							You need to review and take the test again.
 						</p>
 

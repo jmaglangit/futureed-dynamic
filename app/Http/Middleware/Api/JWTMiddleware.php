@@ -21,6 +21,8 @@ class JWTMiddleware {
      */
     protected $token;
 
+    protected $user;
+
     protected $status_code = Response::HTTP_UNAUTHORIZED;
 
     /**

@@ -1,17 +1,48 @@
 <div ng-if="user.role == futureed.PARENT" ng-controller="ManageParentReportsController as reports" ng-init="reports.setActive()">
 	<div ng-if="!reports.active_report" class="dashboard-content" ng-cloak>
-		<p>
-			{!! trans('messages.client_parent_dashboard_msg_1') !!}
-			<a href="{!! route('client.parent.student.index') !!}"> {!! trans('messages.student') !!}</a>.
-		</p>
+		<div class="col-xs-12 row">
+			<div class="col-xs-8">
+				<h5>
+					To get started on using Future Lesson, you need to add a student.
+				</h5>
+			</div>
+			<div class="col-xs-4">
+				<a class="dashboard-content-btn" href="{!! route('client.parent.student.index') !!}">
+					<button  type="button">
+						Add student now!
+					</button>
+				</a>
+			</div>
+		</div>
 
-		<p>{!! trans('messages.client_parent_dashboard_msg_2') !!}
-			<a href="{!! route('client.parent.payment.index') !!}"> {!! trans('messages.client_parent_dashboard_msg_3') !!}</a> {!! trans('messages.client_parent_dashboard_msg_4') !!}
-		</p>
+		<div class="col-xs-12 row">
+			<div class="col-xs-8">
+				<h5>If you already added a Student, you can buy a subject for your student.</h5>
+			</div>
+			<div class="col-xs-4">
+				<a href="{!! route('client.parent.payment.index') !!}" class="dashboard-content-btn">
+					<button type="button">
+						buy a subject now!
+					</button>
+				</a>
+			</div>
+		</div>
 
-		<p>{!! trans('messages.client_parent_dashboard_msg_5') !!}
-			<a href="{!! route('client.parent.module.index') !!}"> {!! trans('messages.client_parent_dashboard_msg_6') !!}</a> {!! trans('messages.client_parent_dashboard_msg_7') !!}
-		</p>
+		<div class="col-xs-12 row">
+			<div class="col-xs-8">
+				<h5>
+					You can also review the lessons and practice questions.
+				</h5>
+			</div>
+			<div class="col-xs-4">
+				<a href="{!! route('client.parent.module.index') !!}" class="dashboard-content-btn">
+					<button type="button">
+						Review
+					</button>
+				</a>
+			</div>
+		</div>
+		<div class="clearfix"></div>
 	</div>
 
 	<div ng-if="reports.active_report" class="reports">
@@ -48,6 +79,12 @@
 						 {!! trans('messages.subject_area') !!}
 					</a>
 				</li>
+				<li role="presentation" ng-class="{ 'active' : reports.active_subject_area_heatmap }">
+					<a href="javascript:void(0)" ng-click="reports.setActive(futureed.SUBJECT_AREA_HEATMAP)">
+						<i class="fa fa-bookmark"></i>
+						Subject Area Heatmap
+					</a>
+				</li>
 				<li role="presentation" ng-class="{ 'active' : reports.active_current_learning }">
 					<a href="javascript:void(0)" ng-click="reports.setActive(futureed.CURRENT_LEARNING)">
 						<i class="fa fa-bar-chart"></i>
@@ -60,6 +97,7 @@
 			<div template-directive template-url="{!! route('client.parent.partials.reports_report_card') !!}"></div>
 			<div template-directive template-url="{!! route('client.parent.partials.reports_summary_progress') !!}"></div>
 			<div template-directive template-url="{!! route('client.parent.partials.reports_subject_area') !!}"></div>
+			<div template-directive template-url="{!! route('client.parent.partials.reports_subject_area_heatmap') !!}"></div>
 			<div template-directive template-url="{!! route('client.parent.partials.reports_current_learning') !!}"></div>
 		</div>	
 	</div>	

@@ -31,7 +31,7 @@ class ModuleTableSeeder extends Seeder
 					'name' => $data[5],
 					'icon_image' => $data[6],
 					'original_icon_image' => $data[7],
-					'description' => ($data[8] == '') ? '' : $data[5],
+					'description' => ($data[8] == '') ? '' : $data[8],
 					'common_core_area' => $data[9],
 					'common_core_url' => $data[10],
 					'points_earned' => $data[11],

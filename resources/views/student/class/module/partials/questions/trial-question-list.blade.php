@@ -47,6 +47,14 @@
                             <p ng-bind-html="mod.trialQuestion[mod.question_number]['question'] | trustAsHtml"></p>
                         </div>
                     </div>
+                    {{--Tips--}}
+                    <div class="col-xs-12">
+                        <div class="questions-tips"
+                             ng-class="{'question-tip-pos-top-10' : mod.trialQuestion[mod.question_number]['question_image'] != 'none', 'question-tip-pos-top-130' : mod.trialQuestion[mod.question_number]['question_image'] == 'none'}"
+                             ng-if="mod.trialQuestion[mod.question_number]['type'] == futureed.ORDERING">
+                            <p> <img ng-src="{! user.avatar !}" /> <span>Drag the items to reorder. </span></p>
+                        </div>
+                    </div>
                 </div>
                 <div class="col-xs-6">
                     {{--Answers--}}
@@ -162,11 +170,9 @@
                         </div>
 
                     </div>
-                    {{--Tips--}}
-                    <div class="questions-tips" ng-if="mod.current_question.question_type == futureed.ORDERING">
-                        <p> <img ng-src="{! user.avatar !}" /> <span>Drag the items to reorder. </span></p>
-                    </div>
+
                 </div>
+
             </div>
         </div>
     </div>
@@ -217,12 +223,12 @@
                     <div class="col-xs-6">
                         <p class="module-message">
                             You have reached the end of the trial questions.
-                            <p class="font-size-16" ng-if="user.age > 13">Please subscribe if you want to continue using Future Lesson!</p>
+                            <p class="font-size-16" ng-if="user.age > 13"><span class="fa fa-lightbulb-o"></span>Please subscribe if you want to continue using Future Lesson!</p>
                             <p class="font-size-16" ng-if="user.age <= 13">You can ask your Parent or be invited by your Teacher to join a class!</p>
                         </p>
 
-                        <div class="proceed-btn-container btn-container">
-                            <button type="button" class="btn btn-maroon btn-large" ng-click="mod.exitModule('{!! route('student.payment.index') !!}')">
+                        <div class="trial-proceed-btn-container btn-container">
+                            <button type="button" class="btn trial-btn-maroon btn-large" ng-click="mod.exitModule('{!! route('student.payment.index') !!}')">
                                 Subscribe Now!
                             </button>
                         </div>

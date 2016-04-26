@@ -314,8 +314,9 @@
 			<div id="module_tabs" class="panel-collapse collapse">
 				<div class="panel-body">
 					<ul class="nav nav-pills nav-admin">
-						<li role="presentation" class="tab active"><a href="#age_group" ng-click="module.setActiveContent(futureed.AGEGROUP)" aria-controls="home" data-toggle="tab">{!! trans('messages.admin_age_group') !!}</a></li>						
-						<li role="presentation" class="tab"><a href="#q_and_a" ng-click="module.setActiveContent(futureed.QANDA)" aria-controls="messages" data-toggle="tab">{!! trans('messages.admin_q_and_a') !!}</a></li>
+						<li role="presentation" class="tab active"><a href="#age_group" ng-click="module.setActiveContent(futureed.AGEGROUP)" aria-controls="home" data-toggle="tab">Age Group</a></li>
+						<li role="presentation" class="tab"><a href="#contents" ng-click="module.setActiveContent(futureed.CONTENTS)" aria-controls="profile" data-toggle="tab">Contents</a></li>
+						<li role="presentation" class="tab"><a href="#q_and_a" ng-click="module.setActiveContent(futureed.QANDA)" aria-controls="messages" data-toggle="tab">Q & A</a></li>
 					</ul>
 
 					<div class="tab-content row">

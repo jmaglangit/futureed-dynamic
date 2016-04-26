@@ -65,6 +65,17 @@ body {/*background: radial-gradient(transparent 50%, rgba(0, 0, 0, 0.3) 100%), l
 }
 
 /*----- BUTTON -----*/
+
+.trial-btn {
+	font-size: 12px;
+	width: 25%;
+	color: #fff;
+	font-weight: 100;
+	text-transform: uppercase;
+	letter-spacing: .02em;
+	border-radius: 2px;
+}
+
 .btn {
 	font-size: 12px;
 	width: 100%;
@@ -151,6 +162,13 @@ body {/*background: radial-gradient(transparent 50%, rgba(0, 0, 0, 0.3) 100%), l
 	background-color: #A92147;
 	box-shadow: 0 0 0 1px #941C3F, 0 3px 3px rgba(0, 0, 0, 0.3);
 }
+
+.trial-btn-maroon{
+	border-top: 1px solid #E7654A;
+	background-color: #C0392B;
+	box-shadow: 0 0 0 1px #C0392B, 0 3px 3px rgba(0, 0, 0, 0.3);
+}
+
 .btn-maroon:hover{
 	background-color: #A92147;
 	box-shadow: 0 0 0 1px #941C3F, 0 3px 3px rgba(0, 0, 0, 0.3);
@@ -218,9 +236,15 @@ body {/*background: radial-gradient(transparent 50%, rgba(0, 0, 0, 0.3) 100%), l
 	border-radius: 50%;
 	border: 6px solid transparent;
 	cursor: pointer;
-	width: 100px;
-	height: 100px;
+	width: 150px;
+	height: 150px;
 }
+
+.form-select-password .list-inline li h5 {
+	color: #055A7F;
+	font-size: 15px;
+}
+
 .selected {
 	/*text-align: center; */
 	/*transform: scale(1.1);*/
@@ -589,6 +613,7 @@ li.active .rnd-identifier{
 .avatar_list img {
     width: 100px;
     height: 100px;
+    cursor: zoom-in;
 }
 
 .detcon h1{
@@ -1393,4 +1418,29 @@ fieldset legend {
 
 .margin-bottom-15 {
 	margin-bottom: 15px;
+}
+
+@media only screen and (max-height: 680px) and (max-width: 1390px) {
+	.form-select-password .list-inline li img {
+		border-radius: 50%;
+		border: 6px solid transparent;
+		cursor: pointer;
+		width: 130px;
+		height: 130px;
+	}
+	.form-select-password .list-inline li h5 {
+		color: #055A7F;
+		font-size: 15px;
+	}
+	.form-select-password h4 {
+		font-size: 13px;
+	}
+}
+
+.form-select-password .on-login li img {
+	border-radius: 50%;
+	border: 6px solid transparent;
+	cursor: pointer;
+	width: 100px;
+	height: 100px;
 }

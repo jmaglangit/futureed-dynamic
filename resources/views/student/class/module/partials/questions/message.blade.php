@@ -8,23 +8,26 @@
 			<div class="modal-body message-container">
 				<div ng-if="mod.module_message.skip_module">
 					<div class="row">
-						<div class="col-xs-1"></div>
-						<div class="col-xs-3 module-icon-holder">
+						<div class="col-xs-12">
+							<div class="points-badge-holder row">
+								<div class="col-xs-12 reward-message">
+									Reward points to earn
+								</div>
+								<div class="col-xs-6">
+									<img ng-src="/images/icons/icon-reward.png" class="image-badge pull-right"/>
+								</div>
+
+								<div class="col-xs-6">
+									<p class="message-point pull-left">+{! mod.module_message.points_earned !}</p>
+								</div>
+							</div>
+						</div>
+						<div class="col-xs-offset-1 col-xs-3 module-icon-holder">
 							<img ng-src="{! user.avatar !}" />
 						</div>
 
 						<div class="col-xs-6">
-							<p class="skip-module-message">{!! trans('messages.lets_get_started') !!}</p>
-
-							<div class="points-badge-holder row">
-								<div class="col-xs-12">
-									<img ng-src="/images/icons/icon-reward.png"/> {!! trans('messages.rewards_points_earn') !!}
-								</div>
-
-								<div class="col-xs-12">
-									<p class="message-point">+{! mod.module_message.points_earned !}</p>
-								</div>
-							</div>
+							<p class="skip-module-message">{! mod.module_message.description !} <br><br>Let's get started...</p>
 						</div>
 					</div>
 				</div>
@@ -77,7 +80,7 @@
 			<div class="modal-footer">
 				<div class="btn-container">
 					<div ng-if="mod.module_message.skip_module">
-						{!! Form::button(trans('messages.proceed_to_questions')
+						{!! Form::button('Proceed'
 							, array(
 								'class' => 'btn btn-maroon btn-semi-medium'
 								, 'data-dismiss' => 'modal'

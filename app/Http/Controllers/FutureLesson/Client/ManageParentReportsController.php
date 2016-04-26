@@ -25,6 +25,10 @@ class ManageParentReportsController extends Controller{
 		return view('client.parent.dashboard.partials.reports_subject_area');
 	}
 
+	public function subject_area_heatmap() {
+		return view('client.parent.dashboard.partials.reports_subject_area_heatmap');
+	}
+
 	public function current_learning() {
 		return view('client.parent.dashboard.partials.reports_current_learning');
 	}

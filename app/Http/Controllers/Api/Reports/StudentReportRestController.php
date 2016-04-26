@@ -92,4 +92,21 @@ class StudentReportRestController extends ReportController {
 		);
 	}
 
+	/**
+	 * Get student progress heat map for platforms.
+	 * @param $student_id
+	 * @param $subject_id
+	 * @return \Symfony\Component\HttpFoundation\Response
+	 */
+	public function getSubjectAreaHeatMap($student_id,$subject_id){
+
+		$report = $this->student_report->getSubjectAreaHeatMap($student_id,$subject_id);
+
+		return $this->respondReportData(
+			$report['additional_information'],
+			$report['column_header'],
+			$report['rows']
+		);
+	}
+
 }

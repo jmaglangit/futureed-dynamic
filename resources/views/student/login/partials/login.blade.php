@@ -1,7 +1,7 @@
 <div class="login-container form-style" ng-if="login.active_login">
     {!! Form::open(array('ng-submit' => 'login.validateUser($event)')) !!}
     <div class="logo-container">
-        {!! Html::image('/images/logo-md.png') !!}
+        {!! Html::image('/images/logo-md-beta.png') !!}
     </div>
 
     <div class="title title-student">{!! trans('messages.student_login') !!}</div>

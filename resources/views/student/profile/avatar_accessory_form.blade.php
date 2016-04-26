@@ -11,11 +11,19 @@
 							)
 						) !!} {! user.cash_points !}
 					</li>
+				</ul>
 			</div>
 			<ul class="avatar_list list-unstyled list-inline" ng-init="profile.getAvatarAccessories()">
-				<li class="item avtrcon" ng-repeat="accessory in profile.avatar_accessories">
-					<img ng-src="{! accessory.url !}" ng-class="!accessory.is_bought ? 'greyscale' : ''" alt="{! accessory.name !}">
-					<p ng-if="!accessory.is_bought" class="text-gold text-center">{! accessory.points_to_unlock !} {!! trans('messages.points') !!}</p>
+				<li class="item avtr-accessory" ng-repeat="accessory in profile.avatar_accessories">
+					<a 	 href="{! accessory.url !}"
+						 alt="{! accessory.name !}"
+						 class="accessory-img"
+					>
+						<img ng-src="{! accessory.url !}"
+						   ng-class="!accessory.is_bought ? 'greyscale' : ''"
+						   alt="{! accessory.name !}">
+					</a>
+					<p ng-if="!accessory.is_bought" class="text-gold text-center">{! accessory.points_to_unlock !} points</p>
 					<p ng-if="!accessory.is_bought" class="text-gold text-center">{! accessory.name !}</p>
 					{!! Form::button(trans('messages.buy')
 						, array(

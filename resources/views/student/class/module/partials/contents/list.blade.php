@@ -1,13 +1,54 @@
 
-<div class="col-xs-12">
+<div class="col-xs-12 padding-0">
 	<div ng-if="mod.contents.teaching_content.media_type.id == futureed.VIDEO">
-		<iframe ng-if="mod.contents.teaching_content.content_url" ng-src="{! mod.contents.teaching_content.content_url | trustAsResourceUrl !}" width="100%" height="450" frameborder="2" webkitallowfullscreen mozallowfullscreen allowfullscreen ng-cloak></iframe>
+
+		<div class="content-container col-xs-12 col-md-12">
+			<div class="content-header">
+				<div class="row col-xs-3">
+					<button type="button" class="btn btn-gold next-btn left-0" ng-click="mod.exitModule('{!! route('student.class.index') !!}')">
+						Exit Module
+					</button>
+				</div>
+
+				<div class="row col-xs-6">
+					<h3> {! mod.contents.teaching_content.teaching_module !} </h3>
+				</div>
+
+				<div class="row col-xs-3">
+
+					<button type="button" class="btn btn-gold next-btn right-0" ng-click="mod.setActive(futureed.ACTIVE_QUESTIONS)"> Skip </button>
+				</div>
+			</div>
+			<div class="content-video-body">
+				<iframe ng-if="mod.contents.teaching_content.content_url"
+						ng-src="{! mod.contents.teaching_content.content_url | trustAsResourceUrl !}"
+						width="100%"
+						height="100%"
+						align="middle"
+						frameborder="2"
+						webkitallowfullscreen mozallowfullscreen allowfullscreen ng-cloak></iframe>
+			</div>
+		</div>
+
 	</div>
 
 	<div ng-if="mod.contents.teaching_content.media_type.id == futureed.IMAGE">
 		<div class="content-container col-xs-12">
 			<div class="content-header">
-				<h3> {! mod.contents.teaching_content.teaching_module !} </h3>
+				<div class="row col-xs-3">
+					<button type="button" class="btn btn-gold next-btn left-0" ng-click="mod.exitModule('{!! route('student.class.index') !!}')">
+						Exit Module
+					</button>
+				</div>
+
+				<div class="row col-xs-6">
+					<h3> {! mod.contents.teaching_content.teaching_module !} </h3>
+				</div>
+
+				<div class="row col-xs-3">
+
+					<button type="button" class="btn btn-gold next-btn right-0" ng-click="mod.setActive(futureed.ACTIVE_QUESTIONS)"> Skip </button>
+				</div>
 			</div>
 
 			<div class="content-body">
@@ -21,7 +62,20 @@
 	<div ng-if="mod.contents.teaching_content.media_type.id == futureed.TEXT">
 		<div class="content-container col-xs-12">
 			<div class="content-header">
-				<h3> {! mod.contents.teaching_content.teaching_module !} </h3>
+				<div class="row col-xs-3">
+					<button type="button" class="btn btn-gold next-btn left-0" ng-click="mod.exitModule('{!! route('student.class.index') !!}')">
+						Exit Module
+					</button>
+				</div>
+
+				<div class="row col-xs-6">
+					<h3> {! mod.contents.teaching_content.teaching_module !} </h3>
+				</div>
+
+				<div class="row col-xs-3">
+
+					<button type="button" class="btn btn-gold next-btn right-0" ng-click="mod.setActive(futureed.ACTIVE_QUESTIONS)"> Skip </button>
+				</div>
 			</div>
 
 			<div class="content-body">
@@ -47,15 +101,14 @@
 	</div>
 </div>
 
-<div class="content-pagination" ng-if="mod.table.page_count > 1">
-	<pagination 
-		total-items="mod.table.total_items" 
-		ng-model="mod.table.page"
-		max-size="1"
-		items-per-page="mod.table.size" 
-		previous-text = "Prev"
-		next-text="Next"
-		class="pagination" 
-		ng-change="mod.paginateContent()">
-	</pagination>
+<div ng-if="mod.table.page_count > 1">
+
+	<div class="previous-btn-position" ng-if="mod.table.page > futureed.DEFAULT_PAGE">
+							<span  ng-click="mod.previousPage()"
+								   ng-model="mod.table.page">&lt;</span>
+	</div>
+	<div class="next-btn-position" ng-if="mod.table.page != mod.table.total_items">
+							<span  ng-click="mod.nextPage()"
+								   ng-model="mod.table.page">&gt;</span>
+	</div>
 </div>

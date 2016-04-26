@@ -219,7 +219,7 @@ class InvoiceController extends ApiController {
             $this->order->deleteOrder($order['id']);
 
             //delete class.
-            $this->classrooms->deleteClassroomByOrderNo($invoice->order_no);
+            //$this->classrooms->deleteClassroomByOrderNo($invoice->order_no);
 
             //delete invoice details
             $this->invoice_detail->deleteInvoiceDetailByInvoiceId($id);

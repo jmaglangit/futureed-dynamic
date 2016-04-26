@@ -180,6 +180,11 @@
 				'uses' => $reports_controller.'@subject_area'
 			]);
 
+			Routes::get('/subject_area_heatmap', [
+				'as' => 'client.parent.partials.reports_subject_area_heatmap',
+				'uses' => $reports_controller.'@subject_area_heatmap'
+			]);
+
 			Routes::get('/current_learning', [
 				'as' => 'client.parent.partials.reports_current_learning',
 				'uses' => $reports_controller.'@current_learning'

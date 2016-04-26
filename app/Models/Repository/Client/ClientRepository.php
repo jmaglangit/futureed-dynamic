@@ -525,6 +525,20 @@ class ClientRepository implements ClientRepositoryInterface
 		return $response;
 	}
 
+	public function getUserId($id)
+	{
+		try
+		{
+			return Client::find($id)->user_id;
+		}
+		catch (\Exception $e)
+		{
+			$this->errorLog($e->getMessage());
+
+			return false;
+		}
+	}
+
 	/**
 	 * @param $id
 	 * @return bool|\Illuminate\Support\Collection|null|string|static

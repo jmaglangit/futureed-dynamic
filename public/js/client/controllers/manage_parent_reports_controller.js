@@ -21,6 +21,7 @@ function ManageParentReportsController($scope, $timeout, ManageParentReportsServ
 		self.active_add = Constants.FALSE;
 		self.active_current_learning = Constants.FALSE;
 		self.active_subject_area = Constants.FALSE;
+		self.active_subject_area_heatmap = Constants.FALSE;
 
 		self.searchDefaults();
 
@@ -43,6 +44,11 @@ function ManageParentReportsController($scope, $timeout, ManageParentReportsServ
 			case Constants.SUBJECT_AREA            :
 				self.active_subject_area = Constants.TRUE;
 				self.listSubjectAreaSubject();
+				break;
+
+			case Constants.SUBJECT_AREA_HEATMAP	:
+				self.active_subject_area_heatmap = Constants.TRUE;
+				self.listSubjectAreaHeatmapSubject();
 				break;
 
 			default                                :
@@ -257,6 +263,63 @@ function ManageParentReportsController($scope, $timeout, ManageParentReportsServ
 
 
 					});
+
+					self.summary.records = response.data.rows;
+					self.student = response.data.additional_information;
+				}
+			}
+
+			$scope.ui_unblock();
+		}).error(function (response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.listSubjectAreaHeatmapSubject = function () {
+		self.errors = Constants.FALSE;
+
+		$scope.ui_block();
+		ManageParentReportsService.listClass(self.student_id).success(function (response) {
+			if (angular.equals(response.status, Constants.STATUS_OK)) {
+				if (response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if (response.data) {
+					var data = response.data.records;
+					if (data.length) {
+						self.subjects = [];
+
+						angular.forEach(data, function (value, key) {
+							self.subjects[key] = value.classroom.subject;
+						});
+
+						self.subjectAreaHeatmap(self.subjects[0].id);
+					}
+				}
+			}
+
+			$scope.ui_unblock();
+		}).error(function (response) {
+			self.errors = $scope.internalError();
+			$scope.ui_unblock();
+		});
+	}
+
+	self.subjectAreaHeatmap = function (subject_id) {
+		self.errors = Constants.FALSE;
+		self.summary = {};
+
+		self.search.subject_id = (self.search.subject_id) ? self.search.subject_id : subject_id;
+
+		$scope.ui_block();
+		ManageParentReportsService.subjectAreaHeatmap(self.student_id, self.search.subject_id).success(function (response) {
+			if (angular.equals(response.status, Constants.STATUS_OK)) {
+				if (response.errors) {
+					self.errors = $scope.errorHandler(response.errors);
+				} else if (response.data) {
+					self.summary.columns = response.data.column_header;
+
+					var column = response.data.column_header;
 
 					self.summary.records = response.data.rows;
 					self.student = response.data.additional_information;
