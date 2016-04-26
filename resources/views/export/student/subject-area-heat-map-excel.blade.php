@@ -18,7 +18,7 @@
 			<td colspan="1">Grade : {{ $additional_information['grade_name'] }}</td>
 		</tr>
 		<tr>
-			<td colspan="1">Subject : {{ $additional_information['subject_name'] .'=>' . $format['progress_pass']}}</td>
+			<td colspan="1">Subject : {{ $additional_information['subject_name']}}</td>
 		</tr>
 		<tr></tr>
 		<tr>
