@@ -84,6 +84,7 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
 
                     self.active_report_teacher = Constants.TRUE;
                     self.active_school = Constants.TRUE;
+                    self.active_purchase = Constants.FALSE;
 
                     //if skill has record
                     if (self.report.rows.skills_watch.highest_skill === null
@@ -104,16 +105,12 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
 
                     //Check if report has data.
                     if (self.report.rows.skills_watch.highest_skill === null
-                        || self.report.rows.skills_watch.lowest_skill === null
-                        || self.report.rows.class_watch.highest_class === null
-                        || self.report.rows.class_watch.lowest_class === null
-                        || self.report.rows.student_watch.length == 0
-                        || self.report.rows.highest_score.id == 0
-                        || self.report.rows.lowest_score.id == 0) {
+                        && self.report.rows.skills_watch.lowest_skill === null) {
 
                         self.active_report_teacher = Constants.FALSE;
                         self.active_school = Constants.FALSE;
                         self.export = Constants.FALSE;
+                        self.active_purchase = Constants.TRUE;
                     }
                 }else {
                     self.active_purchase = Constants.TRUE;
@@ -145,16 +142,11 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
                     self.teacher_report = response.data;
 
                     //check if has data
-                    if(self.teacher_report.rows.length > 0
-                        && self.active_report_teacher == Constants.FALSE
-                        && self.active_school == Constants.FALSE){
-
+                    if(self.teacher_report.rows.length > 0){
                         self.active_report_teacher = Constants.TRUE;
                         self.active_school = Constants.TRUE;
                         self.export = Constants.TRUE;
-
-                    }else {
-                        self.active_purchase = Constants.TRUE;
+                        self.active_purchase = Constants.FALSE;
                     }
                 }
             }
