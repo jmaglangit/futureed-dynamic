@@ -8,7 +8,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a href="{!! route('admin.dashboard.index') !!}"><img ng-src="/images/logo-sm.png" /></a>
+				<a href="{!! route('admin.dashboard.index') !!}"><img ng-src="/images/logo-sm-beta.png" /></a>
 			</div>
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">

@@ -370,7 +370,7 @@ content legend {
 
 .dashboard-content {
 	padding: 15px;
-	background-color: rgba(0, 0, 0, .1);
+	background-color: #FCFCFB;
 	border-radius: 7px;
 	box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.1);
 	border: 1px solid #D2D2D2;
@@ -640,12 +640,13 @@ content legend {
 /*reporting tabs*/
 
 .reports .nav-student li {
-	width: 191px;
+	width: 152px;
 }
 
 .reports .nav-student li a {
 	border:1px solid #dcdcdc;
 	border-bottom: none;
+	padding: 10px 8px;
 }
 
 .reports .nav-pills>li>a{
@@ -846,4 +847,69 @@ content legend {
 .client-export-button-container .export-buttons .dropdown-menu{
 	min-width: 100px;
 	text-align: center;
+}
+
+/* Parent Dashboard Content Button */
+
+.dashboard-content-btn button {
+	text-transform: capitalize;
+	color: #6496c8;
+	text-decoration: none;
+	font-weight: 200;
+	font-size:13px;
+	padding: 15px;
+	background: rgba(0,0,0,0);
+	border-radius: 10px;
+	border: solid 2px #6496c8;
+	word-spacing: 2px;
+	width: 80%;
+}
+
+.dashboard-content-btn .subscribe-button {
+	background-color: #03658A;
+	font-size: 30px;
+	color: whitesmoke;
+	margin-top: 50px;
+}
+
+.dashboard-content-btn .subscribe-button:hover {
+	color: #E7E7E7;
+}
+
+.dashboard-content-btn .subscribe-button:active {
+	color: #E7E7E7;
+}
+
+.dashboard-content-btn button:hover {
+	border-color: #346392;
+	color: #346392;
+}
+
+.dashboard-content-btn button:active {
+	border-color: #27496d;
+	color: #27496d;
+}
+
+.dashboard-content .row {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
+.dashboard-content .row div h5 {
+	padding-top: 10px;
+}
+
+.tooltip.parent-module-tooltip .tooltip-inner {
+	background-color: #04435e;
+	margin: 20px 0px;
+	padding: 15px;
+	box-sizing: border-box;
+	font-family: 'Schoolbell', sans-serif;
+	width: 180px;
+}
+
+.tooltip.parent-module-tooltip .tooltip-arrow {
+	margin:20px;
+	border-bottom-color: #04435e;
+	left: 65px;
 }

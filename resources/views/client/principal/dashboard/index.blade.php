@@ -2,17 +2,42 @@
      ng-init="dashboard.setActive();" ng-cloak>
 
 
-    <div ng-if="!dashboard.active_report" class="dashboard-content" ng-cloak>
+    <div ng-if="dashboard.active_purchase" class="dashboard-content" ng-cloak>
 
-        <p>To get started on using Future Lesson, you need to invite a
-            <a href="{!! route('client.principal.teacher.index') !!}"> teacher</a> first to manage your classes.</p>
+        <div class="col-xs-12 row">
+            <div class="col-xs-8">
+                <h5>
+                    To get started using Future Lesson, you need to invite a teacher first to manage your classes.
+                </h5>
+            </div>
+            <div class="col-xs-4">
+                <a class="dashboard-content-btn" href="{!! route('client.principal.teacher.index') !!}">
+                    <button  type="button">
+                        Add Teacher
+                    </button>
+                </a>
+            </div>
+        </div>
 
-        <p>If you have already invited a Teacher, you need to go to the
-            <a href="{!! route('client.principal.payment.index') !!}"> payment</a> to buy seats for your classes.</p>
+        <div class="col-xs-12 row">
+            <div class="col-xs-8">
+                <h5>If you already invited a Teacher, you need to go to the payment to buy seats for your classes.</h5>
+            </div>
+            <div class="col-xs-4">
+                <a href="{!! route('client.principal.payment.index') !!}" class="dashboard-content-btn">
+                    <button type="button">
+                        Buy Seats
+                    </button>
+                </a>
+            </div>
+        </div>
+
+        <div class="clearfix"></div>
+
     </div>
 
     {{--Reports--}}
-    <div ng-if="dashboard.active_report" ng-cloak>
+    <div ng-if="dashboard.active_report_teacher" ng-cloak>
         <div class="row client-export-button-container">
             <div ng-if="dashboard.export" class="col-xs-12">
                 <div class="btn-group export-buttons pull-right">
@@ -151,13 +176,18 @@
                         </tr>
                         <tr ng-if="dashboard.teacher_report.rows" ng-repeat=" teacher in dashboard.teacher_report.rows">
                             <td>Teacher {! teacher.first_name +' '+ teacher.last_name !}</td>
-                            <td class="report-progress">
-                                <div class="report-progress-bar report-progress-bar-success"
+                            <td>
+                                <div class="progress-bar progress-bar-striped"
+                                     ng-class="{
+										'progress-bar-success' : teacher.percent_progress > futureed.REPORT_PROGRESS_PASS,
+										'progress-bar-warning' : teacher.percent_progress > futureed.REPORT_PROGRESS_MEDIAN_FLOOR
+										    && teacher.percent_progress <= futureed.REPORT_PROGRESS_MEDIAN_CEILING ,
+										'progress-bar-danger' : teacher.percent_progress <= futureed.REPORT_PROGRESS_FAIL ,
+									}"
                                      ng-style="{ 'width' : teacher.percent_progress + '%' }">{! teacher.percent_progress
                                     +'%' !}
                                 </div>
                             </td>
-
                         </tr>
                         <tr ng-if="!dashboard.teacher_report.rows">
                             <td colspan="2"><p>No result...</p></td>

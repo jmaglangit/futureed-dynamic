@@ -66,7 +66,8 @@ function ManageGradeController($scope, apiService, ManageGradeService, TableServ
 		$scope.ui_block();
 		ManageGradeService.list(self.search, self.table).success(function(response) {
 			self.table.loading = Constants.FALSE;
-			
+			$scope.ui_unblock();
+
 			if(angular.equals(response.status, Constants.STATUS_OK)) {
 				if(response.errors) {
 					self.errors = $scope.errorHandler(response.errors);
@@ -76,7 +77,7 @@ function ManageGradeController($scope, apiService, ManageGradeService, TableServ
 				}
 			}
 
-			$scope.ui_unblock();
+
 		}).error(function(response) {
 			self.errors = $scope.internalError();
 			self.table.loading = Constants.FALSE;

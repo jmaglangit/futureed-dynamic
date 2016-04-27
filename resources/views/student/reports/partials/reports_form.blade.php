@@ -18,6 +18,12 @@
 				 Subject Area
 			</a>
 		</li>
+		<li role="presentation" ng-class="{ 'active' : reports.active_subject_area_heatmap }">
+			<a href="javascript:void(0)" ng-click="reports.setActive(futureed.SUBJECT_AREA_HEATMAP)">
+				<i class="fa fa-bookmark"></i>
+				Subject Area Heatmap
+			</a>
+		</li>
 		<li role="presentation" ng-class="{ 'active' : reports.active_current_learning }">
 			<a href="javascript:void(0)" ng-click="reports.setActive(futureed.CURRENT_LEARNING)">
 				<i class="fa fa-bar-chart"></i>
@@ -44,6 +50,8 @@
 	<div template-directive template-url="{!! route('reports.partials.summary_progress_form') !!}"></div>
 
 	<div template-directive template-url="{!! route('reports.partials.subject_area_form') !!}"></div>
+
+	<div template-directive template-url="{!! route('reports.partials.subject_area_heatmap_form') !!}"></div>
 
 	<div template-directive template-url="{!! route('reports.partials.current_learning_form') !!}"></div>
 

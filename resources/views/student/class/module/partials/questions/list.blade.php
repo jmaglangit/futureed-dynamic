@@ -1,6 +1,6 @@
 <div class="col-xs-12 padding-0">
 	<div ng-if="!mod.result.answered && !mod.result.quoted && !mod.result.failed">
-		<div class="questions-container col-xs-12">
+		<div class="questions-container col-xs-12 col-md-12">
 			{{--Header--}}
 			<div class="row questions-header col-xs-12">
 				<div class="row col-xs-3">
@@ -210,12 +210,12 @@
 			<div class="message-container">
 				<div class="col-xs-12">
 					<div class="col-xs-2"></div>
-					<div class="module-icon-holder col-xs-3">
+					<div class="quoted-module-icon-holder col-xs-3">
 						<img ng-src="{! mod.avatar_quote_info.avatar_pose && '/images/avatar/' + mod.avatar_quote_info.avatar_pose.pose_image || user.avatar !}" />
 					</div>
 
-					<div class="col-xs-6">
-						<p class="module-message">
+					<div class="col-xs-5">
+						<p class="quoted-module-message">
 							{! mod.avatar_quote_info.quote !} 
 						</p>
 
@@ -239,12 +239,12 @@
 			<div class="result-failed message-container">
 				<div class="col-xs-12">
 					<div class="col-xs-2"></div>
-					<div class="module-icon-holder col-xs-3">
+					<div class="failed-module-icon-holder col-xs-3">
 						<img ng-src="{! user.avatar !}" />
 					</div>
 
-					<div class="col-xs-6">
-						<p class="module-message">
+					<div class="col-xs-5">
+						<p class="failed-module-message">
 							You need to review and take the test again.
 						</p>
 

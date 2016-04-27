@@ -5,7 +5,7 @@
 		<div class="login-container">
 			<div class="form-style form-narrow">
 				<div class="logo-container">
-					{!! Html::image('images/logo-md.png') !!}
+					{!! Html::image('images/logo-md-beta.png') !!}
 				</div>
 				<br />
 				<div class="alert alert-danger" ng-if="login.errors">

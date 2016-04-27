@@ -36,9 +36,10 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 				break;
 
 			case Constants.ACTIVE_CONTENTS 	:
+				self.active_contents = Constants.TRUE;
+				break;
 
 			default 		:
-				self.active_contents = Constants.TRUE;
 				break;
 		}
 	}
@@ -128,7 +129,6 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 					}
 				};
 
-				self.startQuestions();
 				// if student module data exists; continue.
 				if(student_module) {
 					self.record.student_module = student_module;
@@ -181,7 +181,6 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 	var loadModuleView = function() {
 		self.getTeachingContents(self.record.id);
-		self.setActive(Constants.ACTIVE_CONTENTS);
 		self.startQuestions();
 	}
 
@@ -289,6 +288,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 			} else {
 				self.module_message.points_earned = self.record.points_earned;
 				self.module_message.badge_to_earn = self.record.badge_to_earn;
+				self.module_message.description = self.record.description;
 				self.module_message.skip_module = Constants.TRUE;
 			}
 
@@ -305,7 +305,7 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 	self.skipModule = function() {
 		// update current view
-		self.setActive(Constants.ACTIVE_QUESTIONS);
+		self.setActive(Constants.ACTIVE_CONTENTS);
 
 		// get question list; offset to 0
 		getAvatarPose($scope.user.avatar_id);
@@ -995,4 +995,31 @@ function StudentModuleController($scope, $window, $interval, $filter, apiService
 
 		return true;
 	}
+
+	self.previousPage = function()
+	{
+		if(self.table.page > 1)
+		{
+			self.total_module_items_loaded -= self.table.size;
+			self.table.page--;
+			self.paginateByPage();
+		}
+	}
+
+	self.nextPage = function()
+	{
+
+		if(self.table.page < self.table.total_items)
+		{
+			self.total_module_items_loaded += self.table.size;
+			self.table.page++;
+			self.paginateByPage();
+		}
+	}
+
+	self.list = function(){
+
+		self.getTeachingContents(self.record.id);
+	}
+
 }

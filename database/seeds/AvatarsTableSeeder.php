@@ -22,6 +22,7 @@ class AvatarsTableSeeder extends Seeder {
 			DB::table('avatars')->insert([
 				'id' => $data[0],
 				'code' => Carbon::now()->addMinute($i++)->timestamp,
+				'name' => $data[1],
 				'gender' => $data[2],
 				'avatar_image' => $data[3],
 				'background_image' => $data[4],

@@ -22,25 +22,25 @@
 		</tr>
 		<tr></tr>
 		<tr>
-			<td colspan="{{ floor(count($column_header)/6) }}"
+			<td colspan="{{ $format['column_header_floor'] }}"
 				style="text-align: center; background: #E9CC45;">{{ $additional_information['earned_badges'] }} Badges earned
 			</td>
-			<td colspan="{{ floor(count($column_header)/6) }}"
+			<td colspan="{{ $format['column_header_floor'] }}"
 				style="text-align: center; background: #E9CC45;">{{ $additional_information['earned_medals'] }} Number of medals
 				earned
 			</td>
-			<td colspan="{{ ceil(count($column_header)/6) }}"
+			<td colspan="{{ $format['column_header_ceil'] }}"
 				style="text-align: center; background: #E9CC45;">{{ $additional_information['completed_lessons'] }} Lessons
 				completed
 			</td>
-			<td colspan="{{ floor(count($column_header)/6) }}"
+			<td colspan="{{ $format['column_header_floor'] }}"
 				style="text-align: center; background: #E9CC45;">{{ $additional_information['written_tips'] }} Tips written
 			</td>
-			<td colspan="{{ floor(count($column_header)/6) }}"
+			<td colspan="{{ $format['column_header_floor'] }}"
 				style="text-align: center; background: #E9CC45;">{{ $additional_information['week_hours'] }} Hours spent in last 7
 				days
 			</td>
-			<td colspan="{{ floor(count($column_header)/6) }}"
+			<td colspan="{{ $format['column_header_floor'] }}"
 				style="text-align: center; background: #E9CC45;">{{ $additional_information['total_hours'] }} Total hours spend
 			</td>
 		</tr>
@@ -53,19 +53,25 @@
 		@foreach($rows as $row)
 			<tr>
 				<td style="text-align: center; border: 1px solid black;">{{ $row->curriculum_name }}</td>
-				@for($i = 1; $i < (count($column_header)); $i++)
-					@if(empty($row->curriculum_data->toArray()))
-						<td style="text-align: center; border: 1px solid black;">{{ '' }}</td>
+				@foreach($row->curriculum_data as $data)
+					@if(!empty($data))
+						<td style="text-align: center; border: 1px solid black;" class="
+						@if($data['progress'] > $format['progress_pass'])
+								progress-bar-success
+						@elseif($data['progress'] > $format['progress_above_ave_floor'] && $data['progress'] <= $format['progress_above_ave_ceil'])
+								progress-bar-info
+						@elseif($data['progress'] > $format['progress_below_ave_floor'] && $data['progress'] <= $format['progress_below_ave_ceil'])
+								progress-bar-warning
+						@elseif($data['progress'] > $format['progress_below_fail_floor'] && $data['progress'] <= $format['progress_below_fail_ceil'])
+								progress-bar-danger
+						@else
+								progress-bar-none
+						@endif
+								">{{ (($data['progress'] > 0) ? $data['progress'] . '%' : '')}}</td>
 					@else
-						@foreach($row->curriculum_data as $data)
-							@if($data->grade_id == $i)
-								<td style="text-align: center; border: 1px solid black;">{{ (($data->progress > 0) ? $data->progress . '%' : '')}}</td>
-							@else
-								<td style="text-align: center; border: 1px solid black;">{{ ''}}</td>
-							@endif
-						@endforeach
+						<td style="text-align: center; border: 1px solid black;">{{ ''}}</td>
 					@endif
-				@endfor
+				@endforeach
 			</tr>
 		@endforeach
 	</table>

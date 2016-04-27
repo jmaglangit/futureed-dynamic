@@ -5,8 +5,9 @@
 @stop
 
 @section('content')
-    <div class="container class-con" ng-controller="StudentTrialClassController as class" ng-init="class.checkStudentSubscription()" ng-cloak>
-        <div ng-if="class.has_subscription == futureed.TRUE">
+    <div class="container class-con" ng-controller="StudentTrialClassController as class" ng-cloak>
+        <div ng-if="student_details_updated == futureed.TRUE">
+            <div ng-init="class.updateBackground()"></div>
             <div template-directive template-url="{!! route('student.class.partials.trial.module') !!}"></div>
         </div>
     </div>

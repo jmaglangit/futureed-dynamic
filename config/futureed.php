@@ -262,6 +262,25 @@ return [
 	'mobile-pdf' => 'mobile-pdf',
 	'mobile-xls' => 'mobile-xls',
 
+	//Reports color code
+	'report_export_style' => [
+		'progress_pass' => 81,
+		'progress_median_ceil' => 80,
+		'progress_median_floor' => 51,
+		'progress_fail_ceil' => 50,
+		'progress_fail_floor' => 1,
+	],
+
+	'report_export_style_subject' => [
+		'progress_pass' => 75,
+		'progress_above_ave_floor' => 50,
+		'progress_above_ave_ceil' => 75,
+		'progress_below_ave_floor' => 25,
+		'progress_below_ave_ceil' => 50,
+		'progress_below_fail_ceil' => 25,
+		'progress_below_fail_floor' => 1
+	],
+
 	//avatar accessory folder
 	'image_avatar_accessory_folder' => 'images/avatar_accessory',
 

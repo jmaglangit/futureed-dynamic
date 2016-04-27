@@ -241,9 +241,18 @@ var Constants = {
 	, SUMMARY_PROGRESS			: "Summary Progress"
 	, CURRENT_LEARNING			: "Current Learning"
 	, SUBJECT_AREA				: "Subject Area"
+	, SUBJECT_AREA_HEATMAP		: "Subject Area Heatmap"
+
+	, HTTP_UNAUTHORIZED			: 401
+	, HTTP_NOT_ACCEPTABLE 		: 406
 
 	/*Country Codes*/
 	, UNITED_STATES				: 840
+
+	, REPORT_PROGRESS_PASS	: 81
+	, REPORT_PROGRESS_MEDIAN_CEILING	: 80
+	, REPORT_PROGRESS_MEDIAN_FLOOR	: 51
+	, REPORT_PROGRESS_FAIL	: 50
 
 	, MSG_CREATED				: function(noun) {
 		return noun + " created.";

@@ -13,7 +13,7 @@
                 <div class="lmtcontain">
                 </div>
             </div>
-            <div class="">
+            <div class="follow-up-form">
                 <div ng-if="!has_avatar">
                     <div class="lmtcontain form-select-password form-group">
                         <h4>Pick an Avatar for your Profile</h4>
@@ -28,9 +28,10 @@
                               <div id="title" class="title"></div>
                               <div class="form_content col-xs-12">
                                 <ul class="avatar_list list-unstyled list-inline" ng-init="getAvatarImages()">
-                                  <li class="item col-xs-4" ng-repeat="avatar in avatars" ng-click="highlightAvatar($event)">
-                                     <img ng-src="{! avatar.url !}" alt="{! avatar.name !}">
-                                     <input type="hidden" id="avatar_id" name="avatar_id" value="{! avatar.id !}">
+                                  <li class="item avatar-image" ng-repeat="avatar in avatars" ng-click="highlightAvatar($event)">
+                                        <img ng-src="{! avatar.url !}" alt="{! avatar.name !}">
+                                        <input type="hidden" id="avatar_id" name="avatar_id" value="{! avatar.id !}">
+                                        <h5>{! avatar.name !}</h5>
                                   </li>
                                 </ul>
                               </div>

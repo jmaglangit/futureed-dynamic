@@ -11,24 +11,24 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
     self.setActive = function (active) {
 
 
-        self.active_report = Constants.FALSE;
+        self.active_report_teacher = Constants.FALSE;
         self.active_school = Constants.FALSE;
         self.active_school_teacher = Constants.FALSE;
         self.export = Constants.FALSE;
-
-        //self.active_report = Constants.TRUE;
+        self.active_purchase = Constants.FALSE;
+        
 
         switch (active) {
             case Constants.ACTIVE_SCHOOL_TEACHER:
                 self.active_school = Constants.FALSE;
-                self.active_report = Constants.TRUE;
+                self.active_report_teacher = Constants.TRUE;
                 self.active_school_teacher = Constants.TRUE;
                 self.export = Constants.TRUE;
                 break;
 
             case Constants.ACTIVE_SCHOOL:
                 self.active_school_teacher = Constants.FALSE;
-                self.active_report = Constants.TRUE;
+                self.active_report_teacher = Constants.TRUE;
                 self.active_school = Constants.TRUE;
                 self.export = Constants.TRUE;
                 break;
@@ -83,8 +83,9 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
                 } else if (response.data) {
                     self.report = response.data;
 
-                    self.active_report = Constants.TRUE;
+                    self.active_report_teacher = Constants.TRUE;
                     self.active_school = Constants.TRUE;
+                    self.active_purchase = Constants.FALSE;
 
                     //if skill has record
                     if (self.report.rows.skills_watch.highest_skill === null
@@ -105,17 +106,15 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
 
                     //Check if report has data.
                     if (self.report.rows.skills_watch.highest_skill === null
-                        || self.report.rows.skills_watch.lowest_skill === null
-                        || self.report.rows.class_watch.highest_class === null
-                        || self.report.rows.class_watch.lowest_class === null
-                        || self.report.rows.student_watch.length == 0
-                        || self.report.rows.highest_score.id == 0
-                        || self.report.rows.lowest_score.id == 0) {
+                        && self.report.rows.skills_watch.lowest_skill === null) {
 
-                        self.active_report = Constants.FALSE;
+                        self.active_report_teacher = Constants.FALSE;
                         self.active_school = Constants.FALSE;
                         self.export = Constants.FALSE;
+                        self.active_purchase = Constants.TRUE;
                     }
+                }else {
+                    self.active_purchase = Constants.TRUE;
                 }
 
             }
@@ -144,12 +143,11 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
                     self.teacher_report = response.data;
 
                     //check if has data
-                    if(self.teacher_report.rows.length > 0
-                        && self.active_report == Constants.FALSE
-                        && self.active_school == Constants.FALSE){
-
-                        self.active_report = Constants.TRUE;
+                    if(self.teacher_report.rows.length > 0){
+                        self.active_report_teacher = Constants.TRUE;
+                        self.active_school = Constants.TRUE;
                         self.export = Constants.TRUE;
+                        self.active_purchase = Constants.FALSE;
                     }
                 }
             }

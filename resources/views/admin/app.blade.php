@@ -36,38 +36,21 @@
   </head>
   <body class="admin" ng-controller="futureedController" ng-init="getUserDetails()" ng-cloak>
     {!! Form::hidden('userdata', Session::get('admin')) !!}
-    <p class="notice"> BETA Stage: Under Development </p>
+
     @yield('navbar')
 
   	@yield('content')
 
     @section('footer')
-        <div id="session_expire" ng-show="session_expire" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        Inactive
-                    </div>
-                    <div class="modal-body">
-                        You have been logged out due to inactivity. Please login again.
-                    </div>
-                    <div class="modal-footer">
-                        <div class="col-md-8 col-md-offset-4 pull-left">
-                            {!! Html::link(route('admin.login'), 'Login'
-                                , array(
-                                    'class' => 'btn btn-gold btn-medium'
-                                )
-                            ) !!}
-                        </div>
-                    </div>
-                </div>
-              </div>
+
+        @include('common.modal-session-time-expired', ['link' => route('admin.login')])
+        @include('common.modal-multiple-session', ['link' => route('admin.login')])
+
+        <footer class="footer" ng-cloak>
+            <div class="container text-center">
+                <p class="text-muted">{{ date('Y') }} &copy; All Rights Reserved. FutureEd Pte Ltd</p>
             </div>
-            <footer class="footer" ng-cloak>
-                <div class="container text-center">
-                    <p class="text-muted">{{ date('Y') }} &copy; All Rights Reserved. FutureEd Pte Ltd</p>
-                </div>
-            </footer>
+        </footer>
     @show
 
     <!-- START SCRIPTS -->

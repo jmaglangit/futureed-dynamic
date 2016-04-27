@@ -2,6 +2,7 @@
 
 namespace FutureEd\Models\Repository\Module;
 
+use FutureEd\Models\Core\CountryGrade;
 use FutureEd\Models\Core\Module;
 use FutureEd\Models\Traits\LoggerTrait;
 use League\Flysystem\Exception;
@@ -374,9 +375,11 @@ class ModuleRepository implements ModuleRepositoryInterface
 			}
 
 			//Get grade_id
-			if (isset($criteria['grade_id'])) {
-
-				$student_module = $student_module->gradeId($criteria['grade_id']);
+			if (isset($criteria['grade_id']))
+			{
+				$country_grade = CountryGrade::whereGradeId($criteria['grade_id'])->with('gradeLevel')->first()->toArray();
+				
+				$student_module = $student_module->gradeId($country_grade['grade_level']['grade_id']);
 			}
 
 			//module_status

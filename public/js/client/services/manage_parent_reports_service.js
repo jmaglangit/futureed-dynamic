@@ -44,6 +44,13 @@ function ManageParentReportsService($http) {
 		});
 	}
 
+	api.subjectAreaHeatmap = function (student_id, subject_id) {
+		return $http({
+			method: Constants.METHOD_GET
+			, url: apiUrl + 'report/student-progress/curriculum/heat-map/' + student_id + '/' + subject_id
+		});
+	}
+
 	// /api/v1/client/manage/student?client_id={id of client}&name=&email=&limit=&offset=0
 	api.listStudents = function(client_id){
 		return $http({

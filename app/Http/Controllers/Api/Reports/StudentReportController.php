@@ -405,5 +405,113 @@ class StudentReportController extends ReportController {
 		];
 	}
 
+	/**
+	 * Get Student progress heat map data.
+	 * @param $student_id
+	 * @param $subject_id
+	 * @return array
+	 */
+	public function getSubjectAreaHeatMap($student_id,$subject_id){
+		//Get student details
+		$student = $this->student->getStudent($student_id);
+
+		//Get Avatar thumbnail
+		$avatar = $this->avatar->getAvatar($student->avatar_id);
+
+		//Get subject information
+		$subject = $this->subject->getSubject($subject_id);
+
+		//automate class students current class.
+		$this->student_service->getCurrentClass($student_id);
+
+		//Get Subject Areas as curriculum.
+		$subject_areas = $this->subject_areas->getAreasBySubjectId($subject_id);
+
+		//check valid class subject.
+		$class = $this->class_student->getStudentValidClassBySubject($student_id, $subject_id);
+
+		//get grades collection
+		$grades = $this->grade->getGradesByCountries($student->country_id);
+
+		//get student grade
+		$student_grade = $this->grade->getGrade($student->grade_code);
+
+		//initiate array.
+		$row_data = [];
+		$class = $class[0];
+
+		//loop to get each data per subject areas.
+		foreach ($subject_areas as $areas) {
+
+			if (!empty($class->toArray())) {
+
+				//get student modules by subject areas
+				$curriculum_data = $this->class_student->getStudentSubjectProgressByCurriculum(
+					$class->student_id, $areas->id, $class->class_id
+				);
+			}
+
+			$area = new \stdClass();
+			//append to every row of areas
+			$curr_data = (!empty($curriculum_data)) ? $curriculum_data : [];
+
+			$area->curriculum_name = $areas->name;
+
+			$area->curriculum_data = $curr_data;
+
+			array_push($row_data, $area);
+
+		}
+
+		//earned_badges
+		$badge = $this->student_badges->getStudentBadges([
+			'student_id' => $student_id
+		]);
+
+		$student_badge = $badge['total'];
+
+		//earned_medals
+		$point_level = $this->point_level->findPointsLevel($this->student->getStudentPoints($student_id));
+		$student_medal = ($point_level) ? $point_level->id : 0;
+
+		//completed_lessons
+		$lessons = $this->class_student->getStudentModulesCompleted($student_id, $subject_id, $student->country_id);
+
+		//written_tips
+		$tips = $this->tip->getStudentActiveTips($student_id, $subject_id);
+
+		//week_hours
+		$week_hours = $this->class_student->getStudentModulesWeekHours($student_id, $subject_id, $student->country_id);
+
+		//total_hours
+		$total_hours = $this->class_student->getStudentModulesTotalHours($student_id, $subject_id, $student->country_id);
+
+		$additional_information = [
+			'first_name' => $student->first_name,
+			'last_name' => $student->last_name,
+			'avatar_thumbnail' => $avatar->avatar_image,
+			'subject_name' => $subject->name,
+			'grade_name' => isset($student_grade->name) ? $student_grade->name : config('futureed.none'),
+			'earned_badges' => $student_badge,
+			'earned_medals' => $student_medal,
+			'completed_lessons' => ($lessons) ? count($lessons->toArray()) : 0,
+			'written_tips' => ($tips) ? count($tips->toArray()) : 0,
+			'week_hours' => (empty($week_hours)) ? round((($week_hours[0]->total_time / 60) / 60), 1, PHP_ROUND_HALF_UP) : 0,
+			'total_hours' => (empty($total_hours)) ? round((($total_hours[0]->total_time / 60) / 60), 1, PHP_ROUND_HALF_UP) : 0,
+		];
+
+		$column_header = [['name' => 'Curriculum']];
+
+		$column_header = array_merge($column_header, $grades->toArray());
+
+		$rows = $row_data;
+
+		return [
+			'additional_information' => $additional_information,
+			'column_header' => $column_header,
+			'rows' => $rows
+		];
+	}
+
 
 }

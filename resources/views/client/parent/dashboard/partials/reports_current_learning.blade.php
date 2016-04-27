@@ -40,7 +40,8 @@
 					<td>{! data.grade_name !}</td>
 					<td>
 						<div class="pull-left category-info">
-							<img src="{! data.icon_image !}" />
+							<img ng-if="data.icon_image != null" src="{! data.icon_image !}" />
+							<img ng-if="data.icon_image == futureed.NULL" src="/images/icons/default-module-icon.png" />
 							<span>{! data.name !}</span>
 						</div>
 					</td>

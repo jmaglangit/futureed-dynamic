@@ -2,9 +2,9 @@
 
 Routes::group([
 	'prefix' => '/log',
-//	'middleware' => ['api_user', 'api_after'],
-//	'permission' => ['admin', 'client', 'student'],
-//	'role' => ['principal', 'teacher', 'parent', 'admin', 'super admin']
+	'middleware' => ['api_user', 'api_after'],
+	'permission' => ['admin', 'client', 'student'],
+	'role' => ['principal', 'teacher', 'parent', 'admin', 'super admin']
 ], function () {
 
 	/**

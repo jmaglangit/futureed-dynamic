@@ -13,6 +13,8 @@ interface AdminRepositoryInterface {
 
     public function getAdmin($id, $role='Admin');
 
+	public function getUserId($id);
+
 	public function getAdminDetail($id);
 
     public function addAdmin($data);

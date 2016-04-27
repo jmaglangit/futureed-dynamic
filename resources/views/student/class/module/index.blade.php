@@ -31,11 +31,17 @@
 		<!-- Main Container -->
 		<div ng-if="!mod.record.module_done" class="col-xs-12 padding-0">
 
+			<div ng-if="mod.active_contents">
+				<div template-directive template-url="{!! route('student.class.module.partials.contents') !!}"></div>
+			</div>
+
 			<div ng-if="mod.active_questions">
 				<div template-directive template-url="{!! route('student.class.module.partials.questions') !!}"></div>
 			</div>
 		</div>
 		<!-- End of Main Container -->
+
+
 
 		<div class="row" ng-hide="mod.record.module_done || (mod.active_contents && !mod.contents)">
 			<div class="drawer col-xs-6 left-0" ng-controller="TipsController as tips">
