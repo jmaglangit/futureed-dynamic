@@ -87,11 +87,22 @@
 	</div>
 
 	<div ng-if="!mod.contents.teaching_content">
-		<div class="content-container col-xs-12">
-			<div class="content-header">
-				<h3>Content</h3>
-			</div>
+		<div class="content-container col-xs-12 col-md-12">
+			<div class="content-text-header">
+				<div class="row col-xs-3">
+					<button type="button" class="btn btn-gold next-btn left-0" ng-click="mod.exitModule('{!! route('student.class.index') !!}')">
+						Exit Module
+					</button>
+				</div>
 
+				<div class="row col-xs-6">
+					<h3> {! mod.contents.teaching_content.teaching_module !} </h3>
+				</div>
+
+				<div class="row col-xs-3">
+					<button type="button" class="btn btn-gold next-btn right-0" ng-click="mod.setActive(futureed.ACTIVE_QUESTIONS)"> Skip </button>
+				</div>
+			</div>
 			<div class="content-body">
 				<div class="content-message">
 					<h3 class="alert alert-info">Content not available. </h3>
