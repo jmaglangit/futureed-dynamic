@@ -48,6 +48,13 @@ class SubjectAreaTableSeeder extends Seeder
 			[2,210,'Vocabulary','','Enabled'],
 			[2,211,'Word Analysis','','Enabled'],
 			[2,212,'Writing Conventions And Strategies','','Enabled'],
+			[3,213,'Vocabulary','','Enabled'],
+			[3,214,'Vocab A-C','','Enabled'],
+			[3,215,'Vocab D-H','','Enabled'],
+			[3,216,'Vocab I-L','','Enabled'],
+			[3,217,'Vocab M-P','','Enabled'],
+			[3,218,'Vocab Q-T','','Enabled'],
+			[3,219,'Vocab U-Z','','Enabled'],
 		];
 
 		\DB::table('subject_areas')->truncate();
