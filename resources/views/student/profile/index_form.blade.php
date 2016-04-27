@@ -58,7 +58,7 @@
 		</div>
 	</fieldset>					
 	<fieldset>
-		<legend>Personal Information</legend>
+		<legend>{{ trans('messages.personal_info') }}</legend>
 		<div class="form-group">
 			<label for="" class="col-xs-2 control-label">{!! trans('messages.first_name') !!} <span class="required">*</span></label>
 			<div class="col-xs-4">
@@ -116,7 +116,7 @@
 						, 'ng-disabled' => '!profile.active_edit')
 				) !!}
 			</div>
-			<label for="" class="col-xs-2 control-label">{!! trans('messages.state') !!}</span></label>
+			<label for="" class="col-xs-2 control-label"><span>{!! trans('messages.state') !!}</span></label>
 			<div class="col-xs-4">
 				{!! Form::text('state', ''
 					, array(

@@ -50,7 +50,7 @@
 							<div>{! '' !}</div>
 						</div>
 						<div ng-if="data.progress">
-							{! data.progress !}% Completed
+							{! data.progress !}% {{ trans('messages.completed') }}
 						</div>
 					</td>
 					<td>&nbsp;</td>

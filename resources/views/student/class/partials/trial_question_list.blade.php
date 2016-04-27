@@ -3,7 +3,7 @@
     <div class="col-xs-12 class-container">
         <ul class="nav nav-pills module-pills" role="tablist" ng-init="class.listClass()">
             <li role="presentation" class="module-tabs" ng-class="{ 'active' : aClass.class_id == class.current_class }">
-                <a href="#">Module</a>
+                <a href="#">{{ trans_choice('messages.module', 1) }}</a>
             </li>
         </ul>
         <div class="tab-content">
@@ -25,21 +25,21 @@
                                 </div>
                             </center>
                             <center>
-                                <p class="trial-module-name">Trial Module</p>
+                                <p class="trial-module-name">{{ trans('messages.trial_module') }}</p>
                             </center>
                             <center>
                                 <button type="button"
                                         ng-click="class.redirect('{!! route('student.class.module.trial-index') !!}')"
                                         class="trial-btn btn-blue trial-module-btn margin-bottom-15">
-                                    <i class="fa fa-pencil"></i> Begin
+                                    <i class="fa fa-pencil"></i> {{ trans('messages.begin') }}
                                 </button>
                             </center>
                             <center>
                                 <h4 class="margin-top-30 trial-module-message">
-                                    This is a Trial Module. If you would like to subscribe, please proceed to the <a href="{{ route('student.payment.index') }}" class="payment-page-text">Payment Page</a>
+                                    {{ trans('messages.trial_module_message_1') }}<a href="{{ route('student.payment.index') }}" class="payment-page-text">{{ trans('messages.trial_module_payment_page_text') }}</a>
                                 </h4>
                                 <h4 class="trial-module-message">
-                                    OR have a parent or teacher invite you to a class.
+                                    {{ trans('messages.trial_module_message_2') }}
                                 </h4>
                             </center>
                         </div>

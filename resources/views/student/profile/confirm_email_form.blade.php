@@ -48,7 +48,7 @@
 			<br />
 
 			<div class="form-group">
-				{!! Form::label(null, trans('messages.client_enter_email_confirmation_code'):') !!}
+				{!! Form::label(null, trans('messages.client_enter_email_confirmation_code')) !!}
 
 				{!! Form::text('confirmation_code', '',
 					array(

@@ -860,7 +860,7 @@ hr {
 	border-color: rgba(194, 225, 245, 0);
 	border-right-color: #EBE3B4;
 	border-width: 18px;
-	margin-top: -20px;
+	margin-top: -14px;
 }
 
 .skip-module-message:before
@@ -869,7 +869,7 @@ hr {
 	border-color: rgba(136, 183, 213, 0);
 	border-right-color: #F9EFB7;
 	border-width: 23px;
-	margin-top: -22px;
+	margin-top: -16px;
 }
 
 /*For 10 wrong consecutive answers and quoted answers*/

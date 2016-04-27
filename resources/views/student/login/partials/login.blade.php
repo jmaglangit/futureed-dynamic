@@ -33,7 +33,7 @@
     </div>
 
     <div class="form-group login-divider">
-        <em>or</em>
+        <em>{{ trans('messages.or') }}</em>
     </div>
 
     <div class="row form-group">

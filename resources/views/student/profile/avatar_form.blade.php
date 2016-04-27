@@ -4,7 +4,7 @@
 	</div>
 
 	<div ng-if="!profile.success">
-		<div class="col-md-12">
+		<div class="col-md-offset-1 col-md-11">
 			{!! Form::open(array('id' => 'change_avatar_form')) !!}
 			    <div class="form-select-password">
 			      <div class="form_content">

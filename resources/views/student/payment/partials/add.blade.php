@@ -163,7 +163,7 @@
         </div>
         <div class="modal-footer">
         	<div class="btncon col-md-8 col-md-offset-4 pull-left">
-                {!! Form::button('{!! trans('messages.yes') !!}'
+                {!! Form::button(trans('messages.yes')
                     , array(
                         'class' => 'btn btn-blue btn-medium'
                         , 'ng-click' => "payment.setActive('list')"
@@ -171,7 +171,7 @@
                     )
                 ) !!}
 
-                {!! Form::button('{!! trans('messages.no') !!}'
+                {!! Form::button(trans('messages.no')
                     , array(
                         'class' => 'btn btn-gold btn-medium'
                         , 'data-dismiss' => 'modal'

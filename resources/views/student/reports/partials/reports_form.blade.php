@@ -21,7 +21,7 @@
 		<li role="presentation" ng-class="{ 'active' : reports.active_subject_area_heatmap }">
 			<a href="javascript:void(0)" ng-click="reports.setActive(futureed.SUBJECT_AREA_HEATMAP)">
 				<i class="fa fa-bookmark"></i>
-				Subject Area Heatmap
+				{{ trans('messages.subject_area_heatmap') }}
 			</a>
 		</li>
 		<li role="presentation" ng-class="{ 'active' : reports.active_current_learning }">
