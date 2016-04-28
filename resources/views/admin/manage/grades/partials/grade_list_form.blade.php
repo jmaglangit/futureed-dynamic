@@ -35,7 +35,7 @@
 				<div class="col-xs-5">
 					{!! Form::text('search_grade', ''
 						,array(
-							'placeholder' => trans('messages.grade')
+							'placeholder' => trans_choice('messages.grade', 1)
 							, 'ng-model' => 'grade.search.grade'
 							, 'class' => 'form-control btn-fit'
 							, 'autocomplete' => 'off'
@@ -50,7 +50,7 @@
 	        		</select>
 	        	</div>
 				
-				<div class="col-xs-2">
+				<div class="col-xs-2 admin-search-grade">
 					{!! Form::button(trans('messages.search')
 						,array(
 							'class' => 'btn btn-blue'
@@ -58,7 +58,7 @@
 						)
 					)!!}
 				</div>
-				<div class="col-xs-2">
+				<div class="col-xs-2 admin-search-grade">
 					{!! Form::button(trans('messages.clear')
 						,array(
 							'class' => 'btn btn-gold'

@@ -63,7 +63,7 @@
                 <div ng-repeat="client in client.upload_records.failed_records">
                     <div class="imprt-err">
                         <hr>
-                        <div class="imprt-err-hdr">{!! trans('messages.admin_error', 2) !!}:</div>
+                        <div class="imprt-err-hdr">{!! trans_choice('messages.admin_error', 2) !!}:</div>
                         <div class="imprt-err-msgs" ng-repeat="error in client.errors">
                             <div>- {! error.message !}</div>
                         </div>

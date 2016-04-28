@@ -90,7 +90,7 @@
 					</div>
 				<div class="form-group">
 					<label class="col-xs-3 control-label">{!! trans('messages.status') !!} <span class="required">*</span></label>
-					<div class="col-xs-5">
+					<div class="col-xs-5 admin-view-subject-area-details">
 						<div class="col-xs-6 checkbox">	                				
 							<label>
 								{!! Form::radio('status'

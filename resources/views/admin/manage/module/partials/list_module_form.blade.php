@@ -46,7 +46,7 @@
 							)
 						) !!}
 					</div>
-					<div class="col-xs-2">
+					<div class="col-xs-2 admin-search-module">
 						{!! Form::button(trans('messages.search')
 							,array(
 								'class' => 'btn btn-blue'
@@ -66,7 +66,7 @@
 						) !!}
 					</div>
 					<div class="col-xs-5"></div>
-					<div class="col-xs-2">
+					<div class="col-xs-2 admin-search-module">
 						{!! Form::button(trans('messages.clear')
 							,array(
 								'class' => 'btn btn-gold'

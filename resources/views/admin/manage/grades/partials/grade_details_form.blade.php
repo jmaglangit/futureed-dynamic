@@ -76,7 +76,7 @@
 						</select>
 					</div>
 				</div>
-				<div class="form-group">
+				<div class="form-group admin-view-grade-details">
 					<label class="col-xs-3 control-label">{!! trans('messages.status') !!} <span class="required">*</span></label>
 					<div class="col-xs-5">
 						<div class="col-xs-6 checkbox">	                				

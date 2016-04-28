@@ -244,14 +244,14 @@
 						)
 					) !!}
 
-					{!! Form::button(trans('messages.save_subscription'
+					{!! Form::button(trans('messages.save_subscription')
 						, array(
 							'class' => 'btn btn-blue btn-semi-medium'
 							, 'ng-click' => "payment.savePayment()"
 						)
 					) !!}
 
-					{!! Form::button(trans('messages.delete_subscription'
+					{!! Form::button(trans('messages.delete_subscription')
 						, array(
 							'class' => 'btn btn-gold btn-semi-medium'
 							, 'ng-click' => "payment.deleteInvoice()"

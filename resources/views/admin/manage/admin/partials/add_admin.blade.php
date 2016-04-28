@@ -1,7 +1,7 @@
 <div ng-if="admin.active_add">
 	<div class="content-title">
 		<div class="title-main-content">
-			<span>{!! trans('messages.admin_add_admin_user') !!}</span>
+			<span>{!! ucfirst(trans('messages.admin_add_admin_user')) !!}</span>
 		</div>
 	</div>
 
@@ -97,7 +97,7 @@
 	                				'ng-model' => 'admin.record.status'
 	                			)
 	                		) !!}
-	                		<span class="lbl padding-8">{! futureed.ENABLED !}</span>
+	                		<span class="lbl padding-8">{{ trans('messages.enabled') }}</span>
 	                		</label>
 	                	</div>
 	                	<div class="col-xs-6 checkbox">
@@ -109,7 +109,7 @@
 	                				'ng-model' => 'admin.record.status'
 	                			)
 	                		) !!}
-	                		<span class="lbl padding-8">{! futureed.DISABLED !}</span>
+	                		<span class="lbl padding-8">{{ trans('messages.disabled') }}</span>
 	                		</label>
 	                	</div>
 	                </div>

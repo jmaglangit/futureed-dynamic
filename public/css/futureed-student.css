@@ -1478,6 +1478,16 @@ hr {
 	padding-bottom: 10px;
 }
 
+.content-text-header {
+	background-color: #D5D5D5;
+	min-height: 55px;
+	position: absolute;
+	right: 0;
+	left: 0;
+	text-align: center;
+	padding-bottom: 50px;
+}
+
 .content-video-header {
 	background-color: #D5D5D5;
 	height: 55px;

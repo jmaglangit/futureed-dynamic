@@ -34,14 +34,14 @@
 					)!!}
 				</div>
 
-				<div class="col-xs-4" ng-init="content.getLearningStyle()">
+				<div class="col-xs-4 admin-view-module-content" ng-init="content.getLearningStyle()">
 					<select  name="learning_style" class="form-control" ng-model="content.search.learning_style">
 						<option value="">{!! trans('messages.select_learning_style') !!}</option>
 						<option ng-repeat="style in content.styles" ng-value="style.id">{! style.name!}</option>
 					</select>
 				</div>
 				
-				<div class="col-xs-2">
+				<div class="col-xs-2 admin-search-module-content">
 					{!! Form::button(trans('messages.search')
 						,array(
 							'class' => 'btn btn-blue'
@@ -50,7 +50,7 @@
 					)!!}
 				</div>
 
-				<div class="col-xs-2">
+				<div class="col-xs-2 admin-search-module-content">
 					{!! Form::button(trans('messages.clear')
 						,array(
 							'class' => 'btn btn-gold'

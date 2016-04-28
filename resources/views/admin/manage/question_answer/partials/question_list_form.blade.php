@@ -34,7 +34,7 @@
 							)
 						) !!}
 					</div>
-					<div class="col-xs-4">
+					<div class="col-xs-4 admin-view-module-content">
 						{!! Form::select('question_type'
 							, array(
 								'' => trans('messages.admin_select_question_type')
@@ -52,7 +52,7 @@
 							)
 						) !!}
 					</div>
-					<div class="col-xs-2">
+					<div class="col-xs-2 admin-search-module-content">
 						{!! Form::button(trans('messages.search')
 							,array(
 								'class' => 'btn btn-blue'
@@ -60,7 +60,7 @@
 							)
 						)!!}
 					</div>
-					<div class="col-xs-2">
+					<div class="col-xs-2 admin-search-module-content">
 						{!! Form::button(trans('messages.clear')
 							,array(
 								'class' => 'btn btn-gold'

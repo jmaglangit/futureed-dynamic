@@ -154,14 +154,14 @@
 				<div class="form-group">
 					<div class="btn-container col-xs-8 col-xs-offset-2">
 						<div ng-if="teacher.active_view">
-							{!! Form::button('{!! trans('messages.edit') !!}'
+							{!! Form::button(trans('messages.edit')
 								, array(
 									'class' => 'btn btn-blue btn-medium'
 									, 'ng-click' => "teacher.setActive('edit', teacher.record.id)"
 								)
 							) !!}
 
-							{!! Form::button('{!! trans('messages.cancel') !!}'
+							{!! Form::button(trans('messages.cancel')
 								, array(
 									'class' => 'btn btn-gold btn-medium'
 									, 'ng-click' => "teacher.setActive('list')"
@@ -169,14 +169,14 @@
 							) !!}
 						</div>
 						<div ng-if="teacher.active_edit">
-							{!! Form::button('{!! trans('messages.save') !!}'
+							{!! Form::button(trans('messages.save')
 								, array(
 									'class' => 'btn btn-blue btn-medium'
 									, 'ng-click' => "teacher.update()"
 								)
 							) !!}
 
-							{!! Form::button('{!! trans('messages.cancel') !!}'
+							{!! Form::button(trans('messages.cancel')
 								, array(
 									'class' => 'btn btn-gold btn-medium'
 									, 'ng-click' => "teacher.setActive('view', teacher.record.id)"

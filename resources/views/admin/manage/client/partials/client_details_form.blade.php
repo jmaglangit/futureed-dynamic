@@ -69,7 +69,7 @@
 	        	</div>
 	        	<div class="form-group">
 	        		<label class="col-xs-3 control-label" id="status">{!! trans('messages.status') !!} <span class="required">*</span></label>
-	        		<div class="col-xs-5" ng-if="client.active_edit">
+	        		<div class="col-xs-6 admin-view-client-details" ng-if="client.active_edit">
 	        			<div class="col-xs-6 checkbox">	                				
 	        				<label>
 	        					{!! Form::radio('status'

@@ -4,13 +4,13 @@
 		<div class="col-xs-12 row">
 			<div class="col-xs-8">
 				<h5>
-					To get started on using Future Lesson, you need to add a student.
+					{{ trans('messages.teacher_dashboard_message_1') }}
 				</h5>
 			</div>
 			<div class="col-xs-4">
 				<a class="dashboard-content-btn" href="{!! route('client.teacher.class.index') !!}">
 					<button  type="button">
-						Add student now!
+						{{ trans('messages.teacher_dashboard_add_student') }}
 					</button>
 				</a>
 			</div>
@@ -19,13 +19,13 @@
 		<div class="col-xs-12 row">
 			<div class="col-xs-8">
 				<h5>
-					To see all your students, click student.
+					{{ trans('messages.teacher_dashboard_message_2') }}
 				</h5>
 			</div>
 			<div class="col-xs-4">
 				<a class="dashboard-content-btn" href="{!! route('client.teacher.student.index') !!}">
 					<button  type="button">
-						Student List
+						{{ trans('messages.teacher_dashboard_student_list') }}
 					</button>
 				</a>
 			</div>
@@ -34,13 +34,13 @@
 		<div class="col-xs-12 row">
 			<div class="col-xs-8">
 				<h5>
-					To review the lessons and practice questions, click the module.
+					{{ trans('messages.teacher_dashboard_message_3') }}
 				</h5>
 			</div>
 			<div class="col-xs-4">
 				<a class="dashboard-content-btn" href="{!! route('client.teacher.module.index') !!}">
 					<button  type="button">
-						Module
+						{{ trans('messages.teacher_dashboard_module') }}
 					</button>
 				</a>
 			</div>

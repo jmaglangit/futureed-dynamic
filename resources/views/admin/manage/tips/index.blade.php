@@ -23,10 +23,10 @@
 				
 				<ul class="nav nav-pills nav-admin">
 					<li class="active">
-						<a href=""><span><i class="fa fa-lightbulb-o"></i>{!! trans('messages.tips') !!}</span></a>
+						<a href=""><span><i class="fa fa-lightbulb-o"></i>{!! ucfirst(trans('messages.tips')) !!}</span></a>
 					</li>
 					<li>
-						<a href="{!! route('admin.manage.help.index') !!}"><span><i class="fa fa-question-circle"></i>{!! trans('messages.help_request') !!}</span></a>
+						<a href="{!! route('admin.manage.help.index') !!}"><span><i class="fa fa-question-circle"></i>{!! ucfirst(trans_choice('messages.help_request', 1)) !!}</span></a>
 					</li>
 					<li>
 						<a href="{!! route('admin.manage.answer.index') !!}"><span><i class="fa fa-exclamation-circle"></i>{!! trans('messages.help_request_answers') !!}</span></a>

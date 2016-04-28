@@ -33,7 +33,7 @@
 			<div class="form-group">
 				<label class="col-xs-3 control-label">{!! trans('messages.admin_subscription_name') !!} <span class="required">*</span></label>
 				<div class="col-xs-5">
-					{!! Form::text('name', '', 
+					{!! Form::text('name', '',
 						[
 							'class' => 'form-control'
 							, 'ng-model' => 'price.record.name'
@@ -46,14 +46,14 @@
 			<div class="form-group">
 				<label class="col-xs-3 control-label">{!! trans('messages.description') !!} <span class="required">*</span></label>
 				<div class="col-xs-5">
-					{!! Form::textarea('description', '', 
+					{!! Form::textarea('description', '',
 						[
 							'class' => 'form-control disabled-textarea'
 							, 'placeholder' => trans('messages.description')
 							, 'rows' => '4'
 							, 'ng-model' => 'price.record.description'
 							, 'ng-class' => "{ 'required-field' : price.fields['description'] }"
-						]) 
+						])
 					!!}
 				</div>
 			</div>
@@ -82,14 +82,14 @@
 							, 'placeholder' => trans('messages.admin_days')
 							, 'ng-class' => "{ 'required-field' : price.fields['days'] }"
 							, 'ng-model' => 'price.record.days'
-						]) 
+						])
 					!!}
 				</div>
 			</div>
 			<div class="form-group">
 				<label class="col-xs-3 control-label" id="status">{!! trans('messages.status') !!} <span class="required">*</span></label>
 				<div class="col-xs-9">
-					<div class="col-xs-3 checkbox">
+					<div class="col-xs-4 checkbox">
 						<label>
 						{!! Form::radio('status'
 							, 'Enabled'
@@ -97,7 +97,7 @@
 							, array(
 								'class' => 'field'
 								, 'ng-model' => 'price.record.status'
-							) 
+							)
 						) !!}
 						<span class="lbl padding-8">{!! trans('messages.enabled') !!}</span>
 						</label>
@@ -110,44 +110,44 @@
 							, array(
 								'class' => 'field'
 								, 'ng-model' => 'price.record.status'
-							) 
+							)
 						) !!}
 						<span class="lbl padding-8">{!! trans('messages.disabled') !!}</span>
-                                               </label>
-                                       </div>
-                               </div>
-                       </div>
-                       <div class="form-group">
-                               <label class="col-xs-3 control-label" id="status">{!! trans('messages.learning_style') !!} <span class="required">*</span></label>
-                               <div class="col-xs-9">
-                                       <div class="col-xs-3 checkbox">
-                                               <label>
-                                                       {!! Form::radio('lsp'
-															, '1'
-															, false
-															, array(
-																'class' => 'field',
-																'ng-model' => 'price.record.has_lsp'
-															)
-														) !!}
-                                                       <span class="lbl padding-8">{!! trans('messages.included') !!}</span>
-                                               </label>
-                                       </div>
-                                       <div class="col-xs-5 checkbox">
-                                               <label>
-                                                       {!! Form::radio('lsp'
-															, '0'
-															, false
-															, array(
-																'class' => 'field',
-																'ng-model' => 'price.record.has_lsp'
-															)
-														) !!}
-                                                       <span class="lbl padding-8">{!! trans('messages.not_included') !!}</span>
-
 						</label>
 					</div>
 				</div>
+			 </div>
+		   <div class="form-group">
+				   <label class="col-xs-3 control-label" id="status">{!! trans('messages.learning_style') !!} <span class="required">*</span></label>
+				   <div class="col-xs-9">
+						   <div class="col-xs-4 checkbox">
+								   <label>
+										   {!! Form::radio('lsp'
+												, '1'
+												, false
+												, array(
+													'class' => 'field',
+													'ng-model' => 'price.record.has_lsp'
+												)
+											) !!}
+										   <span class="lbl padding-8">{!! trans('messages.included') !!}</span>
+								   </label>
+						   </div>
+						   <div class="col-xs-5 checkbox">
+									<label>
+										   {!! Form::radio('lsp'
+												, '0'
+												, false
+												, array(
+													'class' => 'field',
+													'ng-model' => 'price.record.has_lsp'
+												)
+											) !!}
+										   <span class="lbl padding-8">{!! trans('messages.not_included') !!}</span>
+
+									</label>
+							</div>
+					</div>
 			</div>
 		</fieldset>
 

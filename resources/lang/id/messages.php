@@ -30,6 +30,8 @@ return [
 
 	"admin_client_management" => "Manajemen Klien",
 
+	"admin_management" => "Manajemen Admin",
+
 	"an_email_reset_pic_password" => "Email untuk mengubah gambar sandi Anda telah dikirim ke akun email Anda.",
 
 	"a_new_email_reset_pic_password" => "Email baru untuk mereset gambar sandi Anda telah dikirim ke akun email Anda.",
@@ -170,7 +172,7 @@ return [
 
 	"confirm_new_password" => "Konfirmasi Kata Sandi Baru",
 
-	"confirm_password" => "konfirmasi Kata Sandi",
+	"confirm_password" => "Konfirmasi Kata Sandi",
 
 	"confirm_registration" => "konfirmasi Pendaftaran",
 
@@ -370,6 +372,8 @@ return [
 
 	"inactive" => "tidak aktif",
 
+	"included" => "Termasuk",
+
 	"indicate_required_field" => "Menandakan bidang yang diperlukan.",
 
 	"instructions" => "instruksi",
@@ -478,6 +482,8 @@ return [
 
 	"no_help_request_found" => "permintaan bantuan tidak ditemukan",
 
+	"not_included" => "Tidak termasuk",
+
 	"not_yet_started" => "Belum dimulai",
 
 	"not_a_student" => "Bukan murid ?",
@@ -501,6 +507,18 @@ return [
 	"parent" => "Orang tua",
 
 	"parent_should_register" => "Pendaftaran harus dilakukan oleh orang tua silakan klik",
+
+	"parent_dashboard_instruction_1" => "Untuk memulai menggunakan Future Lesson, Anda perlu menambahkan mahasiswa.",
+
+	"parent_dashboard_instruction_2" => "Jika Anda sudah menambahkan Mahasiswa, Anda dapat membeli subjek bagi siswa Anda.",
+
+	"parent_dashboard_instruction_3" => "Anda juga dapat meninjau pelajaran dan soal latihan.",
+
+	"parent_dashboard_add_student" => "Tambahkan mahasiswa sekarang!",
+
+	"parent_dashboard_buy_subject" => "Beli subjek sekarang!",
+
+	"parent_dashboard_review" => "Ulasan",
 
 	"password" => "Kata sandi",
 
@@ -557,6 +575,14 @@ return [
 	"previous" => "Sebelumnya",
 
 	"principal" => "Kepala Sekolah",
+
+	"principal_dashboard_message_1" => "Untuk memulai menggunakan Future Lesson, Anda perlu untuk mengundang guru pertama untuk mengelola kelas Anda.",
+
+	"principal_dashboard_message_2" => "Jika Anda sudah diundang Guru, Anda perlu pergi ke pembayaran untuk membeli kursi untuk kelas Anda.",
+
+	"principal_dashboard_add_teacher" => "Tambahkan Guru",
+
+	"principal_dashboard_buy_seats" => "Beli Kursi",
 
 	"price" => "Harga",
 
@@ -794,6 +820,18 @@ return [
 
 	"teacher" => "Guru",
 
+	"teacher_dashboard_message_1" => "Untuk memulai menggunakan Future Lesson, Anda perlu menambahkan mahasiswa.",
+
+	"teacher_dashboard_message_2" => "Untuk melihat semua siswa Anda, klik siswa.",
+
+	"teacher_dashboard_message_3" => "Untuk meninjau pelajaran dan soal latihan, klik modul.",
+
+	"teacher_dashboard_add_student" => "Tambahkan mahasiswa sekarang!",
+
+	"teacher_dashboard_student_list" => "Daftar siswa",
+
+	"teacher_dashboard_module" => "Modul",
+
 	"teacher_comparison_progress" => "Perbandingan Perkembangan guru",
 
 	"teaching_content" => "Konten Modul Pengajaran",
@@ -818,7 +856,7 @@ return [
 
 	"tips_help" => "petunjuk / Bantuan",
 
-	"tips_and_help_request" => "petunjuk & Permintaan Bantuan",
+	"tips_and_help_request" => "Petunjuk & Permintaan Bantuan",
 
 	"title" => "Judul",
 
@@ -854,7 +892,7 @@ return [
 
 	"user" => "Pengguna",
 
-	"" => "",
+	"user_credentials" => "Kredensial Pengguna",
 
 	"username" => "Nama pengguna",
 
@@ -912,7 +950,7 @@ return [
 
 	"//resources/views/admin/manage/admin/partials/add_admin.blade.php" => "",
 
-	"admin_add_admin_user" => "tambah pengguna admin",
+	"admin_add_admin_user" => "Tambah Pengguna Admin",
 
 	"super_admin" => "super Admin",
 
@@ -944,11 +982,11 @@ return [
 
 	"admin_view_user" => "Lihat pengguna admin",
 
-	"admin_edit_user" => "ubah pengguna admin",
+	"admin_edit_user" => "Ubah Pengguna Admin",
 
 	"//resources/views/admin/manage/age_group/partials/add_view_form.blade.php" => "",
 
-	"admin_add_age_group" => "tambah kelompok umur",
+	"admin_add_age_group" => "Tambah Kelompok Umur",
 
 	"admin_select_age" => "pilih umur",
 
@@ -956,7 +994,7 @@ return [
 
 	"//resources/views/admin/manage/age_group/partials/edit_view_form.blade.php" => "",
 
-	"admin_edit_age_group" => "ubah kelompok umur",
+	"admin_edit_age_group" => "Ubah Kelompok Umur",
 
 	"//resources/views/admin/manage/age_group/partials/list_view_form.blade.php" => "",
 
@@ -980,7 +1018,7 @@ return [
 
 	"//resources/views/admin/manage/client/partials/client_details_form.blade.php" => "",
 
-	"admin_client_details" => "Rincian klien",
+	"admin_client_details" => "Rincian Klien",
 
 	"//resources/views/admin/manage/client/partials/delete_client_form.blade.php" => "",
 
@@ -1210,7 +1248,7 @@ return [
 
 	"admin_delete_module_msg" => "Apakah Anda yakin ingin menghapus modul ini ?",
 
-	"admin_module_management" => "Manajemen modul",
+	"admin_module_management" => "Manajemen Modul",
 
 	"admin_module_name" => "Nama Modul",
 
@@ -1220,7 +1258,7 @@ return [
 
 	"admin_contents" => "Konten",
 
-	"admin_module_content" => "Konten modul",
+	"admin_module_content" => "Konten Modul",
 
 	"admin_q_and_a" => "Q & A",
 
@@ -1396,7 +1434,7 @@ return [
 
 	"//resources/views/admin/manage/student/partials/view_student_form.blade.php" => "",
 
-	"admin_student_details" => "Rincian murid",
+	"admin_student_details" => "Rincian Murid",
 
 	"admin_view_rewards" => "lihat Hadiah",
 
@@ -1438,7 +1476,7 @@ return [
 
 	"//resources/views/admin/manage/subject/partials/subject_details_form.blade.php" => "",
 
-	"admin_update_subject" => "Perbaharui subyek",
+	"admin_update_subject" => "Perbaharui Subyek",
 
 	"//resources/views/admin/manage/subject/partials/subject_list_form.blade.php" => "",
 
@@ -1476,7 +1514,7 @@ return [
 
 	"admin_manage_student" => "kelola Murid",
 
-	"admin_master_settings" => "Pengaturan utama",
+	"admin_master_settings" => "Pengaturan Utama",
 
 	"admin_module_mgmt" => "Manajemen modul",
 
@@ -1484,13 +1522,13 @@ return [
 
 	"admin_price_discounts" => "Harga & Diskon",
 
-	"admin_user_mgmt" => "manajemen pengguna",
+	"admin_user_mgmt" => "Manajemen Pengguna",
 
 	"//Client" => "",
 
 	"//resources/views/client/dashboard/index.blade.php" => "",
 
-	"client_dashboard" => "dasbor klien",
+	"client_dashboard" => "Dasbor Klien",
 
 	"//resources/views/client/login/partials/confirm-media.blade.php" => "",
 

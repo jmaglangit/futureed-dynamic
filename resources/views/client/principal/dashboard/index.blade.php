@@ -7,13 +7,13 @@
         <div class="col-xs-12 row">
             <div class="col-xs-8">
                 <h5>
-                    To get started using Future Lesson, you need to invite a teacher first to manage your classes.
+                    {{ trans('messages.principal_dashboard_message_1') }}
                 </h5>
             </div>
             <div class="col-xs-4">
                 <a class="dashboard-content-btn" href="{!! route('client.principal.teacher.index') !!}">
                     <button  type="button">
-                        Add Teacher
+                        {{ trans('messages.principal_dashboard_add_teacher') }}
                     </button>
                 </a>
             </div>
@@ -21,12 +21,12 @@
 
         <div class="col-xs-12 row">
             <div class="col-xs-8">
-                <h5>If you already invited a Teacher, you need to go to the payment to buy seats for your classes.</h5>
+                <h5>{{ trans('messages.principal_dashboard_message_2') }}</h5>
             </div>
             <div class="col-xs-4">
                 <a href="{!! route('client.principal.payment.index') !!}" class="dashboard-content-btn">
                     <button type="button">
-                        Buy Seats
+                        {{ trans('messages.principal_dashboard_buy_seats') }}
                     </button>
                 </a>
             </div>

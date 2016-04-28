@@ -18,7 +18,7 @@
 					{!! trans('messages.admin_module_details') !!}
 				</legend>
 				<div class="form-group">
-					<label class="col-xs-2 control-label">{!! trans('messages.module') !!} <span class="required">*</span></label>
+					<label class="col-xs-2 control-label">{!! trans_choice('messages.module', 1) !!} <span class="required">*</span></label>
 					<div class="col-xs-4">
 						{!! Form::text('module', '',
 							[
@@ -207,7 +207,7 @@
 					</div>
 					
 				</div>
-				<div class="form-group">
+				<div class="form-group admin-view-module-details">
 	        		<label class="col-xs-4 control-label">{!! trans('messages.status') !!} <span class="required">*</span></label>
 	        		<div class="col-xs-6" ng-if="content.active_edit">
 	        			<div class="col-xs-6 checkbox">	                				

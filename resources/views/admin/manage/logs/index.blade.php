@@ -37,7 +37,7 @@
 					<li role="presentation" ng-class="{ 'active' : logs.active_system_log }">
 						<a href="javascript:void(0)" ng-click="logs.setActive(futureed.SYSTEM)">{!! trans('messages.admin_system') !!}</a></li>
 					<li role="presentation" ng-class="{ 'active' : logs.active_errors_log }">
-						<a href="javascript:void(0)" ng-click="logs.setActive(futureed.ERRORS)">{!! trans('messages.admin_error') !!}</a></li>
+						<a href="javascript:void(0)" ng-click="logs.setActive(futureed.ERRORS)">{!! trans_choice('messages.admin_error', 1) !!}</a></li>
 				</ul>
 
 				<div template-directive template-url="{!! route('admin.manage.logs.partials.security_list_form') !!}"></div>

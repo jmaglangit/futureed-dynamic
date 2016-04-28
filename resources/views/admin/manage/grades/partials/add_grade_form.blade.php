@@ -36,7 +36,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-xs-3 control-label">{!! trans('messages.grade') !!} <span class="required">*</span></label>
+					<label class="col-xs-3 control-label">{!! trans_choice('messages.grade', 1) !!} <span class="required">*</span></label>
 					<div class="col-xs-5">
 						{!! Form::text('name',''
 							, array(
@@ -57,7 +57,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-md-3 control-label">{!! trans('messages.admin_group') !!} <span class="required">*</span></label>
+					<label class="col-md-3 control-label">{!! ucfirst(trans('messages.admin_group')) !!} <span class="required">*</span></label>
 					<div class="col-md-5" ng-init="grade.getAgeGroup()">
 						<select  name="age_group_id" class="form-control" ng-class="{ 'required-field' : grade.fields['age_group_id'] }" ng-disabled="!grade.ageGroup.length" ng-model="grade.record.age_group_id">
 							<option value="">{!! trans('messages.admin_select_age_group') !!}</option>
@@ -76,7 +76,7 @@
 				</div>
 				<div class="form-group">
 					<label class="col-xs-3 control-label">{!! trans('messages.status') !!} <span class="required">*</span></label>
-					<div class="col-xs-5">
+					<div class="col-xs-6 add-grade">
 						<div class="col-xs-6 checkbox">	                				
 							<label>
 								{!! Form::radio('status'

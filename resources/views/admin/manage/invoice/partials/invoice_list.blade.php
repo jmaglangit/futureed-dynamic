@@ -55,10 +55,10 @@
 								, 'placeholder' => trans('messages.email'))
 						) !!}
 					</div>
-					<div class="col-xs-2">
+					<div class="col-xs-2 invoice-btn">
 						<button class="btn btn-blue" type="button" ng-click="invoice.searchFnc($event)">{!! trans('messages.search') !!}</button>
 					</div>
-					<div class="col-xs-2">
+					<div class="col-xs-2 invoice-btn">
 						<button class="btn btn-gold" type="button" ng-click="invoice.clear()">{!! trans('messages.clear') !!}</button>
 					</div>
 				</div>

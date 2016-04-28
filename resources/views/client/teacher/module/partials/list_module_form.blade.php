@@ -7,7 +7,7 @@
 
 	<div class="col-xs-12 search-container">
 		<div class="title-mid">
-			Search
+			{{ trans('messages.search') }}
 		</div>
 
 		<div class="form-search">

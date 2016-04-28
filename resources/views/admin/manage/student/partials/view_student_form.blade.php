@@ -67,7 +67,7 @@
 						<span ng-if="student.validation.e_error" class="error-msg-con">{! student.validation.e_error !}</span>
 					</div>
 				</div>
-				<div class="form-group">
+				<div class="form-group admin-view-student-form">
 					<label class="col-xs-3 control-label" id="status">{!! trans('messages.status') !!} <span class="required">*</span></label>
 
 					<div class="col-xs-5" ng-if="student.active_edit">
@@ -374,7 +374,7 @@
 			<table class="col-xs-12 table table-striped table-bordered">
 				<thead>
 					<tr>
-						<th>{!! trans('messages.module') !!}</th>
+						<th>{!! trans_choice('messages.module', 1) !!}</th>
 						<th>{!! trans('messages.admin_age_group') !!}</th>
 						<th ng-if="student.modules.length">{!! trans('messages.action') !!}</th>
 					</tr>

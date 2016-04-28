@@ -27,7 +27,7 @@
 				<div class="col-xs-5">
 					{!! Form::text('search_module', ''
 						,array(
-							'placeholder' => trans('messages.module')
+							'placeholder' => trans_choice('messages.module', 1)
 							, 'ng-model' => 'tips.search.module'
 							, 'class' => 'form-control btn-fit'
 						)

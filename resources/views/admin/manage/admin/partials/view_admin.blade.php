@@ -88,7 +88,7 @@
 			</div>
 			<div class="form-group">
 				<label class="col-xs-3 control-label" id="status">{!! trans('messages.status') !!} <span class="required">*</span></label>
-	                <div class="col-xs-5" ng-if="admin.active_edit">
+	                <div class="col-xs-6 admin-view-admin" ng-if="admin.active_edit">
 	                	<div class="col-xs-6 checkbox">	                				
 	                		<label>
 	                		{!! Form::radio('status'
@@ -99,7 +99,7 @@
 	                				, 'ng-click' => 'admin.adminChangeStatus()'
 	                			)
 	                		) !!}
-	                		<span class="lbl padding-8">{! futureed.ENABLED !}</span>
+	                		<span class="lbl padding-8">{{ trans('messages.enabled') }}</span>
 	                		</label>
 	                	</div>
 	                	<div class="col-xs-6 checkbox">
@@ -112,7 +112,7 @@
 	                				, 'ng-click' => 'admin.adminChangeStatus()'
 	                			)
 	                		) !!}
-	                		<span class="lbl padding-8">{! futureed.DISABLED !}</span>
+	                		<span class="lbl padding-8">{{ trans('messages.disabled') }}</span>
 	                		</label>
 	                	</div>
 	                </div>

@@ -3,13 +3,13 @@
 		<div class="col-xs-12 row">
 			<div class="col-xs-8">
 				<h5>
-					To get started on using Future Lesson, you need to add a student.
+					{{ trans('messages.parent_dashboard_instruction_1') }}
 				</h5>
 			</div>
 			<div class="col-xs-4">
 				<a class="dashboard-content-btn" href="{!! route('client.parent.student.index') !!}">
 					<button  type="button">
-						Add student now!
+						{{ trans('messages.parent_dashboard_add_student') }}
 					</button>
 				</a>
 			</div>
@@ -17,12 +17,12 @@
 
 		<div class="col-xs-12 row">
 			<div class="col-xs-8">
-				<h5>If you already added a Student, you can buy a subject for your student.</h5>
+				<h5>{{ trans('messages.parent_dashboard_instruction_2') }}</h5>
 			</div>
 			<div class="col-xs-4">
 				<a href="{!! route('client.parent.payment.index') !!}" class="dashboard-content-btn">
 					<button type="button">
-						buy a subject now!
+						{{ trans('messages.parent_dashboard_buy_subject') }}
 					</button>
 				</a>
 			</div>
@@ -31,13 +31,13 @@
 		<div class="col-xs-12 row">
 			<div class="col-xs-8">
 				<h5>
-					You can also review the lessons and practice questions.
+					{{ trans('messages.parent_dashboard_instruction_3') }}
 				</h5>
 			</div>
 			<div class="col-xs-4">
 				<a href="{!! route('client.parent.module.index') !!}" class="dashboard-content-btn">
 					<button type="button">
-						Review
+						{{ trans('messages.parent_dashboard_review') }}
 					</button>
 				</a>
 			</div>
@@ -82,7 +82,7 @@
 				<li role="presentation" ng-class="{ 'active' : reports.active_subject_area_heatmap }">
 					<a href="javascript:void(0)" ng-click="reports.setActive(futureed.SUBJECT_AREA_HEATMAP)">
 						<i class="fa fa-bookmark"></i>
-						Subject Area Heatmap
+						{{ trans('messages.subject_area_heatmap') }}
 					</a>
 				</li>
 				<li role="presentation" ng-class="{ 'active' : reports.active_current_learning }">
