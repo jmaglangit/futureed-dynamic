@@ -10,7 +10,10 @@ use FutureEd\Models\Repository\Subscription\SubscriptionRepositoryInterface;
 use FutureEd\Services\LearningStyleServices;
 use FutureEd\Services\StudentServices;
 use FutureEd\Services\UserServices;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Lang;
+use Illuminate\Support\Facades\Session;
 
 class StudentController extends ApiController {
 
@@ -167,5 +170,22 @@ class StudentController extends ApiController {
 		$student_id = $this->student->getStudentByUserId($user_id)->id;
 
 		return $this->respondWithData($this->student_service->getStudentDetails($student_id));
+	}
+
+	public function setLanguage($lang)
+	{
+		if(!Session::has('appLanguage'))
+		{
+			Session::set('appLanguage', $lang);
+		}
+		else
+		{
+			Session::forget('appLanguage');
+			Session::set('appLanguage', $lang);
+		}
+
+		Lang::setLocale(Session::get('appLanguage'));
+
+		return back()->with('id', '');
 	}
 }

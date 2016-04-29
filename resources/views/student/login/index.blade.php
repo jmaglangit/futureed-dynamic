@@ -17,6 +17,25 @@
             <div template-directive template-url="{!! route('student.login.index_form') !!}"></div>
         </div>
     </div>
+
+    <div class="col-xs-12" style="padding-top: 10px;padding-bottom: 10px; color: whitesmoke;">
+        {!! Html::link(url('/lang/en'), 'English - US'
+              , array(
+                  'class' => 'col-xs-offset-5 col-xs-1',
+                  'style' => 'text-decoration:none;color: whitesmoke;',
+
+              )
+          ) !!}
+        {!! Html::link(url('/lang/id'), 'Bahasa Indonesia'
+                , array(
+                    'class' => 'col-xs-6',
+                    'style' => 'text-decoration:none;color: whitesmoke;',
+
+                )
+            ) !!}
+        {{--<p class="col-xs-offset-5 col-xs-1"></p>--}}
+        {{--<p class="col-xs-6">Bahasa Indonesia</p>--}}
+    </div>
 @stop
 
 @section('scripts')

@@ -89,3 +89,8 @@ Routes::group(['prefix' => 'api'], function () {
 	include('Routes/Api/Logs.php');
 
 });
+
+Routes::get('/lang/{lang}', [
+	'uses' => 'Api\v1\StudentController@setLanguage',
+	'as' => 'student.set.language',
+]);
