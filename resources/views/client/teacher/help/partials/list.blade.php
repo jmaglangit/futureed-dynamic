@@ -13,7 +13,7 @@
 
 	<div class="col-xs-12 search-container">
 		<div class="title-mid">
-			Search
+			{!! trans('messages.search') !!}
 		</div>
 
 		<div class="form-search">
@@ -27,7 +27,7 @@
 				<div class="col-xs-5">
 					{!! Form::text('search_title', ''
 						,array(
-							'placeholder' => 'Title'
+							'placeholder' => trans('messages.title')
 							, 'ng-model' => 'help.search.title'
 							, 'class' => 'form-control'
 						)
@@ -36,9 +36,9 @@
 				<div class="col-xs-5">
 					{!! Form::select('search_status'
 						, array(
-							'' => '-- Select Help Request Status --'
-							, 'Pending' => 'Pending'
-							, 'Accepted' => 'Accepted'
+							'' => trans('messages.select_help_request_status')
+							, 'Pending' => trans('messages.pending')
+							, 'Accepted' => trans('messages.accepted')
 						)
 						, ''
 						, array(
@@ -48,7 +48,7 @@
 					) !!}
 				</div>
 				<div class="col-xs-2">
-					{!! Form::button('Search'
+					{!! Form::button(trans('messages.search')
 						,array(
 							'class' => 'btn btn-blue'
 							, 'ng-click' => 'help.searchFnc($event)'
@@ -60,7 +60,7 @@
 				<div class="col-xs-5">
 					{!! Form::text('search_created', ''
 						,array(
-							'placeholder' => 'Created By'
+							'placeholder' => trans('messages.created_by')
 							, 'ng-model' => 'help.search.created'
 							, 'class' => 'form-control'
 						)
@@ -68,7 +68,7 @@
 				</div>
 				<div class="col-xs-5"></div>
 				<div class="col-xs-2">
-					{!! Form::button('Clear'
+					{!! Form::button(trans('messages.clear')
 						,array(
 							'class' => 'btn btn-gold'
 							, 'ng-click' => 'help.clearFnc()'
@@ -82,7 +82,7 @@
 	<div class="col-xs-12 table-container">
 		<div class="list-container" ng-cloak>
 			<div class="col-xs-6 title-mid">
-				Help Request List
+				{!! trans('messages.admin_help_request_list') !!}
 			</div>
 
 			<div class="col-xs-6 size-container">
@@ -106,12 +106,12 @@
 			<table class="col-xs-12 table table-striped table-bordered">
 				<thead>
 					<tr>
-						<th>Title</th>
-						<th>Created By</th>
-						<th>Date Created</th>
-						<th>Date of Last Answer</th>
-						<th>Status</th>
-						<th ng-if="help.records.length">Actions</th>
+						<th>{!! trans('messages.title') !!}</th>
+						<th>{!! trans('messages.created_by') !!}</th>
+						<th>{!! trans('messages.date_created') !!}</th>
+						<th>{!! trans('messages.date_last_answer') !!}</th>
+						<th>{!! trans('messages.status') !!}</th>
+						<th ng-if="help.records.length">{!! trans('messages.action') !!}</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -134,12 +134,12 @@
 					</tr>
 					<tr class="odd" ng-if="!help.records.length && !help.table.loading">
 						<td valign="top" colspan="7">
-							No records found
+							{!! trans('messages.no_records_found') !!}
 						</td>
 					</tr>
 					<tr class="odd" ng-if="help.table.loading">
 						<td valign="top" colspan="7">
-							Loading...
+							{!! trans('messages.loading') !!}
 						</td>
 					</tr>
 				</tbody>

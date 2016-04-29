@@ -1,7 +1,7 @@
 <div ng-if="teacher.active_list">
 	<div class="content-title">
 		<div class="title-main-content">
-			<span>Student Management</span>
+			<span>{!! trans('messages.admin_student_management') !!}</span>
 		</div>
 	</div>
 
@@ -19,7 +19,7 @@
 
 	<div class="col-xs-12 search-container">
 		<div class="title-mid">
-			Search
+			{!! trans('messages.search') !!}
 		</div>
 
 		<div class="form-search">
@@ -35,7 +35,7 @@
 						, array(
 							'class' => 'form-control'
 							, 'ng-model' => 'teacher.search.name'
-							, 'placeholder' => 'Name'
+							, 'placeholder' => trans('messages.name')
 						)
 					) !!}
 				</div>
@@ -44,12 +44,12 @@
 						, array(
 							'class' => 'form-control'
 							, 'ng-model' => 'teacher.search.email'
-							, 'placeholder' => 'Email'
+							, 'placeholder' => trans('messages.email')
 						)
 					) !!}
 				</div>
 				<div class="col-xs-2">
-					{!! Form::button('Search'
+					{!! Form::button(trans('messages.search')
 						, array(
 							'class' => 'btn btn-blue'
 							, 'ng-click' => 'teacher.searchFnc()'
@@ -57,7 +57,7 @@
 					) !!}
 				</div>
 				<div class="col-xs-2">
-					{!! Form::button('Clear'
+					{!! Form::button(trans('messages.clear')
 						, array(
 							'class' => 'btn btn-gold'
 							, 'ng-click' => 'teacher.clearSearch()'
@@ -71,7 +71,7 @@
 	<div class="col-xs-12 table-container" ng-init="teacher.listStudent()">
 		<div class="list-container" ng-cloak>
 			<div class="col-xs-6 title-mid">
-				Student List
+				{!! trans('messages.student_list') !!}
 			</div>
 
 			<div class="col-xs-6 size-container">
@@ -95,9 +95,9 @@
 			<table class="col-xs-12 table table-striped table-bordered">
 				<thead>
 			        <tr>
-			            <th>Name</th>
-			            <th>Email</th>
-			            <th>Actions</th>
+			            <th>{!! trans('messages.name') !!}</th>
+			            <th>{!! trans('messages.email') !!}</th>
+			            <th>{!! trans('messages.action') !!}</th>
 			        </tr>
 			    </thead>
 		        <tbody>
@@ -117,12 +117,12 @@
 			        </tr>
 			        <tr class="odd" ng-if="!teacher.records.length && !teacher.table.loading">
 			        	<td valign="top" colspan="7">
-			        		No records found
+			        		{!! trans('messages.no_records_found') !!}
 			        	</td>
 			        </tr>
 			        <tr class="odd" ng-if="teacher.table.loading">
 			        	<td valign="top" colspan="7">
-			        		Loading...
+			        		{!! trans('messages.loading') !!}
 			        	</td>
 			        </tr>
 		        </tbody>

@@ -31,7 +31,7 @@
 					<div class="circle">
 						<p>{{ $additional_information['earned_badges'] }}</p>
 					</div>
-					<p>Badges earned</p>
+					<p>{!! trans('messages.client_badges_earned') !!}</p>
 				</div>
 			</td>
 			<td colspan="{{ $format['column_header_floor'] }}">
@@ -39,7 +39,7 @@
 					<div class="circle">
 						<p>{{ $additional_information['earned_medals'] }}</p>
 					</div>
-					<p>Number of medals earned</p>
+					<p>{!! trans('messages.client_no_medals_earned') !!}</p>
 				</div>
 			</td>
 			<td colspan="{{ $format['column_header_ceil'] }}">
@@ -47,7 +47,7 @@
 					<div class="circle">
 						<p>{{ $additional_information['completed_lessons'] }}</p>
 					</div>
-					<p>Lessons completed</p>
+					<p>{!! trans('messages.client_lessons_completed') !!}</p>
 				</div>
 			</td>
 			<td colspan="{{ $format['column_header_floor'] }}">
@@ -55,7 +55,7 @@
 					<div class="circle">
 						<p>{{ $additional_information['written_tips'] }}</p>
 					</div>
-					<p>Tips written</p>
+					<p>{!! trans('messages.client_tips_written') !!}</p>
 				</div>
 			</td>
 			<td colspan="{{ $format['column_header_floor'] }}">
@@ -63,7 +63,7 @@
 					<div class="circle">
 						<p>{{ $additional_information['week_hours'] }}</p>
 					</div>
-					<p>Hours spent in last 7 days</p>
+					<p>{!! trans('messages.client_hours_spent_7_days') !!}</p>
 				</div>
 			</td>
 			<td colspan="{{ $format['column_header_ceil'] }}">
@@ -71,7 +71,7 @@
 					<div class="circle">
 						<p>{{ $additional_information['total_hours'] }}</p>
 					</div>
-					<p>Total hours spend</p>
+					<p>{!! trans('messages.client_hours_spent') !!}</p>
 				</div>
 			</td>
 		</tr>

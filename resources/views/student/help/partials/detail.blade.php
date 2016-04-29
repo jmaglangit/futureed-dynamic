@@ -1,7 +1,7 @@
 <div ng-if="help.active_view || help.active_edit">
 	<div class="content-title">
 		<div class="title-main-content">
-			<span>Help Request Details</span>
+			<span>{!! trans('messages.help_request_details') !!}</span>
 		</div>
 	</div>
 
@@ -24,9 +24,9 @@
 					<div class="col-xs-12 avatar-container-small">
 						<img class="avatar-help" ng-src="{! help.record.avatar_url !}" />
 					</div>
-					<div class="avatar-name-container col-xs-12"> Posted by: {! help.record.name !}</div>
+					<div class="avatar-name-container col-xs-12"> {!! trans('messages.posted_by') !!}: {! help.record.name !}</div>
 					<div class="help-status col-xs-12">
-						Post Status: 
+						{!! trans('messages.post_status') !!}: 
 						<label ng-if="help.record.question_status == futureed.ANSWERED">
 	        			<b class="success-icon">
 	        				<i class="margin-top-8 fa fa-check-circle-o"></i> {! help.record.question_status !}
@@ -46,7 +46,7 @@
 		        		</label>
 					</div>
 					<div class="btn-help col-xs-12">
-						{!! Form::button('View List'
+						{!! Form::button(trans('messages.view_list')
 							, array(
 								'class' => 'btn btn-gold'
 								, 'ng-click' => "help.setActive()"
@@ -54,7 +54,7 @@
 						) !!}
 
 						<div ng-if="help.record.question_status == futureed.OPEN && help.record.own"> 
-							{!! Form::button('Delete This Request'
+							{!! Form::button(trans('messages.delete_this_req')
 								, array(
 									'class' => 'btn btn-maroon margin-top-10'
 									, 'ng-click' => "help.deleteRequest()"
@@ -62,7 +62,7 @@
 								)
 							) !!}
 
-							{!! Form::button('Close This Request'
+							{!! Form::button(trans('messages.close_this_req')
 								, array(
 									'class' => 'btn btn-maroon margin-top-10'
 									, 'ng-click' => "help.closeRequest()"
@@ -92,7 +92,7 @@
 				<hr />
 			</div>
 			<fieldset class="col-xs-12">
-				<legend>Answers</legend>
+				<legend>{!! trans('messages.answer') !!}</legend>
 			</fieldset>
 		</div>
 
@@ -100,7 +100,7 @@
 			<div class="col-xs-12 search-container" ng-if="!help.answers.length">
 				<div class="form-search">
 					<div class="form-group">
-						No answers for now . . .
+						{!! trans('messages.no_answers_for_now') !!}
 					</div>
 				</div>
 			</div>
@@ -110,7 +110,7 @@
 					<div class="col-xs-12 avatar-container-small">
 						<img class="avatar-help" ng-src="{! answer.answer_av !}" />
 					</div>
-					<div class="avatar-name-container col-xs-12"> Answered by: {! answer.student.user.name !}</div>
+					<div class="avatar-name-container col-xs-12"> {!! trans('messages.answered_by') !!}: {! answer.student.user.name !}</div>
 					<div class="col-xs-12">
 						<div class="rating-container">
 							<span ng-repeat="i in help.record.stars track by $index">
@@ -136,7 +136,7 @@
 			{!! Form::textarea('answer', ''
 				, array(
 					'class' => 'form-control'
-					, 'placeholder' => 'Answer'
+					, 'placeholder' => trans('messages.answer')
 					, 'ng-model' => 'help.record.answer'
 					, 'rows' => '5'
 				)
@@ -144,14 +144,14 @@
 		</div>
 
 		<div class="btn-container search-container col-xs-12" ng-if="help.record.question_status == futureed.OPEN">
-			{!! Form::button('Clear'
+			{!! Form::button(trans('messages.clear')
 				, array(
 					'class' => 'btn btn-gold btn-small pull-right'
 					, 'ng-click' => "help.clearAnswer()"
 				)
 			) !!}
 
-			{!! Form::button('Submit'
+			{!! Form::button(trans('messages.submit')
 				, array(
 					'class' => 'btn btn-maroon btn-small pull-right'
 					, 'ng-click' => "help.answerRequest()"

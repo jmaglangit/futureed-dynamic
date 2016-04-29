@@ -1,7 +1,7 @@
 <div ng-if="invoice.active_list">
 	<div class="content-title">
 		<div class="title-main-content">
-			<span>Invoice Management</span>
+			<span>{!! trans('messages.admin_invoice_management') !!}</span>
 		</div>
 	</div>
 
@@ -19,7 +19,7 @@
 
 	<div class="col-xs-12 search-container">
 		<div class="title-mid">
-			Search
+			{!! trans('messages.search') !!}
 		</div>
 
 		<div class="form-search">
@@ -36,30 +36,30 @@
 							, array(
 								'class' => 'form-control'
 								, 'ng-model' => 'invoice.search.order_no'
-								, 'placeholder' => 'Order Number'
+								, 'placeholder' => trans('messages.admin_order_number')
 							)
 						) !!}
 					</div>
 					<div class="col-xs-4">
 						{!! Form::select('payment_status'
 							, array(
-								'' =>' -- Select Status --'
-								, 'Pending'=>'Pending'
-								, 'Paid'=>'Paid'
-								, 'Cancelled'=> 'Cancelled'
+								'' =>trans('messages.admin_select_status')
+								, 'Pending'=>trans('messages.pending')
+								, 'Paid'=>trans('messages.paid')
+								, 'Cancelled'=> trans('messages.cancelled')
 							)
 							, null
 							, array(
 								'class' => 'form-control'
 								, 'ng-model' => 'invoice.search.payment_status'
-								, 'placeholder' => 'Email')
+								, 'placeholder' => trans('messages.email'))
 						) !!}
 					</div>
-					<div class="col-xs-2">
-						<button class="btn btn-blue" type="button" ng-click="invoice.searchFnc($event)">Search</button>
+					<div class="col-xs-2 invoice-btn">
+						<button class="btn btn-blue" type="button" ng-click="invoice.searchFnc($event)">{!! trans('messages.search') !!}</button>
 					</div>
-					<div class="col-xs-2">
-						<button class="btn btn-gold" type="button" ng-click="invoice.clear()">Clear</button>
+					<div class="col-xs-2 invoice-btn">
+						<button class="btn btn-gold" type="button" ng-click="invoice.clear()">{!! trans('messages.clear') !!}</button>
 					</div>
 				</div>
 			{!! Form::close() !!}
@@ -69,7 +69,7 @@
 	<div class="table-container" ng-init="invoice.list()">
 		<div class="list-container" ng-cloak>
 			<div class="col-xs-6 title-mid">
-				Invoice List
+				{!! trans('messages.admin_invoice_list') !!}
 			</div>
 
 			<div class="col-xs-6 size-container">
@@ -93,13 +93,13 @@
 			<table class="col-xs-12 table table-striped table-bordered">
 				<thead>
 			        <tr>
-			            <th>Order #</th>
-			            <th>Date Started</th>
-			            <th>Date End</th>
-			            <th>Total # of Seats</th>
-			            <th>Total Price</th>
-			            <th>Status</th>
-			            <th ng-if="invoice.records.length">Action</th>
+			            <th>{!! trans('messages.admin_order_no') !!}</th>
+			            <th>{!! trans('messages.date_started') !!}</th>
+			            <th>{!! trans('messages.date_end') !!}</th>
+			            <th>{!! trans('messages.total_no_seats') !!}</th>
+			            <th>{!! trans('messages.total_price') !!}</th>
+			            <th>{!! trans('messages.status') !!}</th>
+			            <th ng-if="invoice.records.length">{!! trans('messages.action') !!}</th>
 			        </tr>
 		        </thead>
 		        <tbody>
@@ -123,12 +123,12 @@
 			        </tr>
 			        <tr class="odd" ng-if="!invoice.records.length && !invoice.table.loading">
 			        	<td valign="top" colspan="7">
-			        		No records found
+			        		{!! trans('messages.no_records_found') !!}
 			        	</td>
 			        </tr>
 			        <tr class="odd" ng-if="invoice.table.loading">
 			        	<td valign="top" colspan="4">
-			        		Loading...
+			        		{!! trans('messages.loading') !!}
 			        	</td>
 			        </tr>
 		        </tbody>

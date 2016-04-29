@@ -1,7 +1,7 @@
 <div ng-if="profile.active_password">
 	<div class="alert alert-success" ng-if="profile.password_validated && profile.password_selected && profile.password_confirmed">
-		<p>Your Picture Password has been saved.</p>
-		<p>You may now use this picture password in your succeeding login.</p>
+		<p>{!! trans('messages.student_pic_password_saved') !!}</p>
+		<p>{!! trans('messages.student_pic_password_succeed_login') !!}</p>
 	</div>
 
 	<div class="col-xs-12 search-container" ng-if="!profile.password_confirmed">
@@ -18,7 +18,7 @@
 
 		<div class="col-xs-12 btn-container">
 			<div ng-if="!profile.password_validated">
-				{!! Form::button('Proceed'
+				{!! Form::button(trans('messages.client_proceed')
 					, array(
 						'class' => 'btn btn-maroon btn-medium'
 						, 'ng-click' => 'profile.validateCurrentPassword()'
@@ -26,7 +26,7 @@
 					)
 				) !!}
 
-				{!! Form::button('Cancel'
+				{!! Form::button(trans('messages.cancel')
 					, array(
 						'class' => 'btn btn-gold btn-medium'
 						, 'ng-click' => "profile.setStudentProfileActive('index')"
@@ -35,7 +35,7 @@
 			</div>
 
 			<div ng-if="profile.password_validated && !profile.password_selected">
-				{!! Form::button('Proceed'
+				{!! Form::button(trans('messages.client_proceed')
 					, array(
 						'class' => 'btn btn-maroon btn-medium'
 						, 'ng-click' => 'profile.selectNewPassword()'
@@ -44,14 +44,14 @@
 			</div>
 
 			<div ng-if="profile.password_validated && profile.password_selected && !profile.password_confirmed">
-				{!! Form::button('Change Picture Password'
+				{!! Form::button(trans('messages.student_change_picture_password')
 					, array(
 						'class' => 'btn btn-maroon btn-medium'
 						, 'ng-click' => 'profile.changePassword()'
 					)
 				) !!}
 
-				{!! Form::button('Previous'
+				{!! Form::button(trans('messages.previous')
 					, array(
 						'class' => 'btn btn-gold btn-medium'
 						, 'ng-click' => "profile.undoNewPassword()"
@@ -62,7 +62,7 @@
 	</div>
 
 	<div class="col-xs-12 btn-container" ng-if="profile.password_confirmed">
-		{!! Html::link(route('student.profile.index'), 'View Profile'
+		{!! Html::link(route('student.profile.index'), trans('messages.view_profile')
 			, array(
 				'class' => 'btn btn-gold btn-medium'
 			)	

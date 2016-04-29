@@ -1,16 +1,16 @@
 <div class="col-xs-12 search-container" ng-if="content.active_list">
 	<div class="title-mid">
-		<span>Teaching Content</span>
+		<span>{!! trans('messages.client_teaching_content') !!}</span>
 		<div class="pull-right col-xs-4 btn-right" ng-if="!content.no_content">
-			<a class="btn btn-medium btn-maroon pull-right" href="{!! route('client.parent.question.index') !!}">Skip</a>	
+			<a class="btn btn-medium btn-maroon pull-right" href="{!! route('client.parent.question.index') !!}">{!! trans('messages.skip') !!}</a>	
 		</div>
 		<div class="pull-right col-xs-4 btn-right" ng-if="content.no_content">
-			<a class="btn btn-medium btn-gold pull-right" href="{!! route('client.parent.module.index') !!}">Back</a>
+			<a class="btn btn-medium btn-gold pull-right" href="{!! route('client.parent.module.index') !!}">{!! trans('messages.back') !!}</a>
 		</div>	
 	</div>
 	<div class="col-xs-12 content-container" ng-if="content.no_content">
 		<div class="alert alert-info margin-top-60">
-			<center><span><i class="fa fa-info-circle"></i> No Content Available</span></center>
+			<center><span><i class="fa fa-info-circle"></i> {!! trans('messages.no_content_available') !!}</span></center>
 		</div>
 	</div>
 	<div class="col-xs-12 content-container" ng-if="!content.no_content">
@@ -28,13 +28,13 @@
 	</div>
 	<div class="col-xs-12 btn-content" ng-if="!content.no_content">
 		<div class="col-xs-4">
-			<button class="btn btn-gold btn-medium" ng-click="content.navigate(content.detail.key, futureed.BACK)" ng-if="content.detail.key != futureed.FALSE">Previous</button>
+			<button class="btn btn-gold btn-medium" ng-click="content.navigate(content.detail.key, futureed.BACK)" ng-if="content.detail.key != futureed.FALSE">{!! trans('messages.previous') !!}</button>
 		</div>
 		<div class="col-xs-4">
 			<center><h2 class="title-content">{! content.content.teaching_module !}</h2></center>
 		</div>
 		<div class="col-xs-4">
-			<button class="btn btn-maroon btn-medium pull-right" ng-click="content.navigate(content.detail.key, futureed.NEXT)" ng-if="content.detail.key != content.total">Next</button>
+			<button class="btn btn-maroon btn-medium pull-right" ng-click="content.navigate(content.detail.key, futureed.NEXT)" ng-if="content.detail.key != content.total">{!! trans('messages.next') !!}</button>
 		</div>
 	</div>
 	<div class="col-xs-12 content-list margin-20-bot">

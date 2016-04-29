@@ -2,14 +2,14 @@
 	<div class="modal-dialog modal-lg">
 		<div class="modal-content">
 			<div class="modal-header">
-				Delete Help Request Answer
+				{!! trans('messages.admin_delete_help_request_answer') !!}
 			</div>
 			<div class="modal-body">
-				Are you sure you want to delete this help request answer?
+				{!! trans('messages.admin_delete_help_request_answer_msg') !!}
 			</div>
 			<div class="modal-footer">
 				<div class="btncon col-md-8 col-md-offset-4 pull-left">
-					{!! Form::button('Yes'
+					{!! Form::button(trans('messages.yes')
 						, array(
 							'class' => 'btn btn-blue btn-medium'
 							, 'ng-click' => 'answer.deleteAnswer()'
@@ -17,7 +17,7 @@
 						)
 					) !!}
 
-					{!! Form::button('No'
+					{!! Form::button(trans('messages.no')
 						, array(
 							'class' => 'btn btn-gold btn-medium'
 							, 'data-dismiss' => 'modal'

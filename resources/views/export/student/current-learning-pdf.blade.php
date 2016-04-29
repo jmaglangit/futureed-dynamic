@@ -12,10 +12,10 @@
 			<th rowspan="3"  style="width:100px;">
 				<img src="{{ base_path().'/public/' . config('futureed.thumbnail') . '/'.$additional_information['avatar_thumbnail'] }}" alt=" ">
 			</th>
-			<td colspan="{{ count($column_header)-1 }}">Student : {{ $additional_information['first_name'].' '.$additional_information['last_name'] }}</td>
+			<td colspan="{{ count($column_header)-1 }}">{!! trans('messages.student') !!} : {{ $additional_information['first_name'].' '.$additional_information['last_name'] }}</td>
 		</tr>
 		<tr class="export-header">
-			<td colspan="{{ count($column_header)-1 }}">Subject : {{ $additional_information['subject_name'] }}</td>
+			<td colspan="{{ count($column_header)-1 }}">{!! trans('messages.subject') !!} : {{ $additional_information['subject_name'] }}</td>
 		</tr>
 	</table>
 

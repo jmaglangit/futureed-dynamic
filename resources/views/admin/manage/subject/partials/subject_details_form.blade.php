@@ -1,7 +1,7 @@
 <div ng-if="subject.active_edit">
 	<div class="content-title">
 		<div class="title-main-content">
-			<span>Update Subject</span>
+			<span>{!! trans('messages.admin_update_subject') !!}</span>
 		</div>
 	</div>
 
@@ -21,7 +21,7 @@
 		{!! Form::open(array('id'=> 'add_subject_form', 'class' => 'form-horizontal')) !!}
 			<fieldset>
 				<div class="form-group">
-					<label class="col-xs-3 control-label">Subject Code <span class="required">*</span></label>
+					<label class="col-xs-3 control-label">{!! trans('messages.admin_subject_code') !!} <span class="required">*</span></label>
 					<div class="col-xs-5">
 						{!! Form::text('code',''
 							, array(
@@ -34,11 +34,11 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-xs-3 control-label">Subject <span class="required">*</span></label>
+					<label class="col-xs-3 control-label">{!! trans('messages.subject') !!} <span class="required">*</span></label>
 					<div class="col-xs-5">
 						{!! Form::text('name',''
 							, array(
-								'placeHolder' => 'Subject Name'
+								'placeHolder' => trans('messages.admin_subject_name')
 								, 'ng-model' => 'subject.record.name'
 								, 'ng-class' => "{ 'required-field' : subject.fields['name'] }"
 								, 'class' => 'form-control'
@@ -47,7 +47,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-xs-3 control-label">Description </label>
+					<label class="col-xs-3 control-label">{!! trans('messages.description') !!} </label>
 					<div class="col-xs-5">
 						<textarea name="description" 
 							ng-model="subject.record.description"
@@ -56,9 +56,9 @@
 							cols="50" rows="10"></textarea>
 					</div>
 				</div>
-				<div class="form-group">
-					<label class="col-xs-3 control-label">Status <span class="required">*</span></label>
-					<div class="col-xs-5">
+				<div class="form-group admin-view-subject-details">
+					<label class="col-xs-3 control-label">{!! trans('messages.status') !!} <span class="required">*</span></label>
+					<div class="col-xs-6">
 						<div class="col-xs-6 checkbox">	                				
 							<label>
 								{!! Form::radio('status'
@@ -69,7 +69,7 @@
 										, 'ng-model' => 'subject.record.status'
 									) 
 								) !!}
-							<span class="lbl padding-8">Enabled</span>
+							<span class="lbl padding-8">{!! trans('messages.enabled') !!}</span>
 							</label>
 						</div>
 						<div class="col-xs-6 checkbox">
@@ -82,7 +82,7 @@
 										, 'ng-model' => 'subject.record.status'
 									)
 								) !!}
-							<span class="lbl padding-8">Disabled</span>
+							<span class="lbl padding-8">{!! trans('messages.disabled') !!}</span>
 							</label>
 						</div>
 					</div>
@@ -92,14 +92,14 @@
 			<fieldset>
 				<div class="form-group">
 					<div class="btn-container col-xs-8 col-xs-offset-1">
-						{!! Form::button('Update'
+						{!! Form::button(trans('messages.update')
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-click' => 'subject.update()'
 							)
 						) !!}
 
-						{!! Form::button('Cancel'
+						{!! Form::button(trans('messages.cancel')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'ng-click' => 'subject.setActive()'

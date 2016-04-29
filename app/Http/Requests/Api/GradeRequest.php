@@ -50,12 +50,12 @@ class GradeRequest extends ApiRequest {
 	 */
 	public function messages() {
 		return [
-			'integer' => 'The :attribute must be a number.',
-			'code.required' => 'The grade code field is required.',
-			'code.integer' => 'The grade code field must be a number.',
-			'name.required' => 'The grade field is required.',
-			'age_group_id.required' => 'The group field is required.',
-			'country_id.required' => 'The country field is required.',
+			'integer' => trans('errors.1013'),
+			'code.required' => trans('validation.required',['attribute' => trans('errors.2190')]),
+			'code.integer' => trans('validation.numeric',['attribute' => trans('errors.2190')]),
+			'name.required' => trans('validation.required',['attribute' => trans('errors.2153')]),
+			'age_group_id.required' => trans('validation.required',['attribute' => trans('errors.2191')]),
+			'country_id.required' => trans('validation.required',['attribute' => trans('errors.2154')]),
 		];
 	}
 }

@@ -6,31 +6,31 @@
 	        </p>
 	    </div>
 	    <div class="alert alert-success" ng-if="help.success">
-	    	<p>Successfully added your help request. </p>
+	    	<p>{!! trans('messages.successful_add_help_request_2') !!} </p>
 	    </div>
 
 		<div class="col-xs-12">
 			<div class="clearfix"></div>
 			{!! Form::open(['class' => 'form-horizontal margin-top-15']) !!}
 			<div class="form-group">
-				<label class="control-label col-xs-2">Title</label>
+				<label class="control-label col-xs-2">trans('messages.title')</label>
 				<div class="col-xs-10">
 					{!! Form::text('title', ''
 						, array(
 						    'class' => 'form-control sidebar-input'
-						    , 'placeholder' => 'Title' 
+						    , 'placeholder' => trans('messages.title')
 						    , 'ng-model' => 'help.record.title'
 						    , 'autocomplete' => 'off')
 					) !!}
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-xs-2">Description</label>
+				<label class="control-label col-xs-2">{!! trans('messages.description') !!}</label>
 				<div class="col-xs-10">
 					{!! Form::textarea('content', ''
 		                , array(
 		                    'class' => 'form-control sidebar-input disabled-textarea'
-		                    , 'placeholder' => 'Description' 
+		                    , 'placeholder' => trans('messages.description')
 		                    , 'ng-model' => 'help.record.content'
 		                    , 'autocomplete' => 'off')
 		            ) !!}
@@ -39,7 +39,7 @@
 		</div>
 	</div>
 	<div class="col-xs-10 col-xs-offset-2 btn-container">
-		{!! Form::button('Submit'
+		{!! Form::button(trans('messages.submit')
 			, array(
 			  'id' => 'validate_code_btn'
 			  , 'class' => 'btn btn-maroon btn-medium'
@@ -47,7 +47,7 @@
 			)
 		) !!}
 
-		{!! Form::button('Back'
+		{!! Form::button(trans('messages.back')
 			, array(
 				 'class' => 'btn btn-gold btn-medium'
 				, 'ng-click' => 'help.viewHelpList();'

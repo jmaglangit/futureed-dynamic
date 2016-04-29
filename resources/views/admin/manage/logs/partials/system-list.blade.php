@@ -14,14 +14,14 @@
 	<div class="table-container">
 		<div class="list-container" ng-cloak>
 			<div class="col-xs-12 title-mid">
-				Logs
+				{!! trans('messages.logs') !!}
 			</div>
 	
 			<table class="col-xs-12 table table-striped table-bordered">
 				<thead>
 					<tr>
-						<th>Log Files</th>
-						<th>Download</th>
+						<th>{!! trans('messages.admin_log_files') !!}</th>
+						<th>{!! trans('messages.admin_download') !!}</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -40,7 +40,7 @@
 					</tr>
 					<tr class="odd" ng-if="!logs.records.length">
 						<td valign="top" colspan="10">
-							No records found
+							{!! trans('messages.no_records_found') !!}
 						</td>
 					</tr>
 				</tbody>

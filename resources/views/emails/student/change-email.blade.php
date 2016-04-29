@@ -4,14 +4,14 @@
     <meta charset="utf-8">
 </head>
 <body>
-<div>Hello {{ $name  }},</div><br/>
+<div>{!! trans('messages.hi_there') !!} {{ $name  }},</div><br/>
 
 <div>
-	<div>Link to Future Lessons: <a href="{{ $link }}">Confirm Code</a></div>
-    <div>Code : {{ $code  }}</div><br/>
+	<div>{!! trans('messages.email_resendregistration_msg3') !!}: <a href="{{ $link }}">{!! trans('messages.confirm_code') !!}</a></div>
+    <div>{!! trans('messages.code') !!} : {{ $code  }}</div><br/>
 
-    <div>Regards,</div><br/>
-    <div>Admin</div>
+    <div>{!! trans('messages.regards') !!},</div><br/>
+    <div>{!! trans('messages.admin') !!}</div>
 
     
 </div>

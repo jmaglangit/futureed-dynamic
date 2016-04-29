@@ -11,14 +11,14 @@
 		<tr></tr>
 		<tr>
 			<th valign="middle"><img src="{{ base_path().'/public/' . config('futureed.thumbnail') . '/'.$additional_information['avatar_thumbnail'] }}" alt=" "></th>
-			<td colspan="1">Student
+			<td colspan="1">{!! trans('messages.student') !!}
 				: {{ $additional_information['first_name'].' '.$additional_information['last_name'] }}</td>
 		</tr>
 		<tr>
-			<td colspan="1">Grade : {{ $additional_information['grade_name'] }}</td>
+			<td colspan="1">{!! trans('messages.grade') !!} : {{ $additional_information['grade_name'] }}</td>
 		</tr>
 		<tr>
-			<td colspan="1">Subject : {{ $additional_information['subject_name'] }}</td>
+			<td colspan="1">{!! trans('messages.subject') !!} : {{ $additional_information['subject_name'] }}</td>
 		</tr>
 		<tr></tr>
 		<tr>

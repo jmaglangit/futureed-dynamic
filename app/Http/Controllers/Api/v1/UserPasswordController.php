@@ -160,7 +160,6 @@ class UserPasswordController extends UserController {
     public function confirmResetCode(){
       
        $input = Input::only('email','reset_code','user_type');
-        $error = config('futureed-error.error_messages');
 
         $this->addMessageBag($this->email($input,'email'));
         $this->addMessageBag($this->resetCode($input,'reset_code'));

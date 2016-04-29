@@ -63,13 +63,13 @@ class AdminModuleRequest extends ApiRequest {
 	 */
 	public function messages() {
 		return [
-			'subject_id.required' => 'Subject is required.',
-			'subject_id.integer' => 'Subject is invalid.',
-			'subject_area_id.required' => 'Area is required.',
-			'subject_area_id.integer' => 'Area is invalid.',
-			'points_to_unlock.integer' => 'Points to unlock must be a number.',
-			'points_to_finish.integer' => 'Points to finish must be a number.',
-			'name.required' => 'The module field is required.',
+			'subject_id.required' => trans('errors.1003',['attribute' => trans('errors.2155')]),
+			'subject_id.integer' => trans('errors.1004',['attribute' => trans('errors.2155')]),
+			'subject_area_id.required' => trans('errors.1003',['attribute' => trans('errors.2156')]),
+			'subject_area_id.integer' => trans('errors.1004',['attribute' => trans('errors.2156')]),
+			'points_to_unlock.integer' => trans('errors.2157',['attribute' => trans('errors.2158')]),
+			'points_to_finish.integer' => trans('errors.2157',['attribute' => trans('errors.2159')]),
+			'name.required' => trans('validation.required',['attribute' => trans('errors.2160')]),
 
 		];
 	}

@@ -59,11 +59,11 @@ class InvoiceRequest extends ApiRequest {
     public function messages()
     {
         return [
-            'client_id.required' => 'Client is required.',
-            'client_id.integer' => 'Client must be a number.',
-            'subscription_id.required' => 'Subscription is required.',
-            'subscription_id.integer' => 'Subscription must be a number.',
-            'discount_id.integer' => 'Discount must be a number.'
+            'client_id.required' => trans('errors.1003',['attribute' => trans('errors.2176')]),
+            'client_id.integer' => trans('errors.1013',['attribute' => trans('errors.2176')]),
+            'subscription_id.required' => trans('errors.1003',['attribute' => trans('errors.2199')]),
+            'subscription_id.integer' => trans('errors.1013',['attribute' => trans('errors.2199')]),
+            'discount_id.integer' => trans('errors.1013',['attribute' => trans('errors.2203')]),
         ];
     }
 }

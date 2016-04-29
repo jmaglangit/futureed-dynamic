@@ -15,11 +15,11 @@
 			<div class="client-content">
 				<div class="content-title">
 					<div class="title-main-content" ng-if="!profile.edit">
-						<span ng-if="profile.active_index">My Profile</span>
-						<span ng-if="profile.active_edit">Edit Profile</span>
-						<span ng-if="profile.active_edit_email">Edit Email Address</span>
-						<span ng-if="profile.active_confirm_email">Confirm Email Address</span>
-						<span ng-if="profile.active_password">Change Password</span>
+						<span ng-if="profile.active_index">{!! trans('messages.my_profile') !!}</span>
+						<span ng-if="profile.active_edit">{!! trans('messages.edit_profile') !!}</span>
+						<span ng-if="profile.active_edit_email">{!! trans('messages.admin_edit_email') !!}</span>
+						<span ng-if="profile.active_confirm_email">{!! trans('messages.confirm_email') !!}</span>
+						<span ng-if="profile.active_password">{!! trans('messages.change_password') !!}</span>
 					</div>
 				</div>
 
@@ -31,7 +31,7 @@
 					</div>
 
 					<div class="alert alert-success" ng-if="profile.success">
-						<p>You have successfully updated your profile.</p>
+						<p>{!! trans('messages.updated_your_profile') !!}</p>
 					</div>
 				</div>
 					

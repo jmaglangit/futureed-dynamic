@@ -48,6 +48,11 @@ return [
 			'root'   => storage_path().'/app',
 		],
 
+		'language_local' => [
+			'driver'  => 'local',
+			'root'   => base_path().'/resources/lang/',
+		],
+
 		's3' => [
 			'driver' => 's3',
 			'key'    => 'your-key',

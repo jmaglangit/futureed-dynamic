@@ -82,11 +82,11 @@ class AdminStudentRequest extends ApiRequest {
      */
     public function messages() {
 		return [
-			'grade_code.required' => 'Grade is required.',
-			'grade_code.integer' => 'Grade is Invalid.',
-			'country_id.required' => 'Country is required.',
-			'country_id.integer' => 'Country is Invalid.',
-			'school_code.integer' => 'School is Invalid.',
+			'grade_code.required' => trans('errors.1003',['attribute' => trans('errors.2153')]),
+			'grade_code.integer' => trans('errors.1004',['attribute' => trans('errors.2153')]),
+			'country_id.required' => trans('errors.1003',['attribute' => trans('errors.2154')]),
+			'country_id.integer' => trans('errors.1004',['attribute' => trans('errors.2154')]),
+			'school_code.integer' =>  trans('errors.1004',['attribute' => trans('errors.2157')]),
 
 		];
     }

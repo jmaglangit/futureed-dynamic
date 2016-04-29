@@ -9,7 +9,7 @@ trait ClientValidatorTrait {
 	//Check parameters of the fields.
     public function parameterCheck($input, $paramName){
 
-        $error_msg = config('futureed-error.error_messages');
+        $error_msg = trans('errors');
 
         if(is_null($input["$paramName"])){
 

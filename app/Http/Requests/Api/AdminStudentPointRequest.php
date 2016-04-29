@@ -25,16 +25,10 @@ class AdminStudentPointRequest extends ApiRequest {
 			case 'PUT':
 				return [
 
-					'points' => 'required|integer'
+					'points' => 'required|numeric'
 				];
 
 		}
-	}
-
-	public function messages(){
-		return[
-			'points.integer' => 'The points must be a number.'
-		];
 	}
 
 }

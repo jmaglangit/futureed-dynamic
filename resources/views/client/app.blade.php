@@ -8,7 +8,7 @@
 		<meta name="description" content="">
 		<meta name="author" content="">
 		
-		<title>FutureEd Online Education Platform</title>
+		<title>{!! trans('messages.futureed_online_platform') !!}</title>
 		<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
 		<!--[if IE]>
 		<link rel="stylesheet" type="text/css" media="all" href="https://www.formstack.com/forms/css/3/ie.css?20140508" />
@@ -51,9 +51,10 @@
 
 			<footer class="footer" ng-cloak>
 				<div class="container text-center">
-					<p class="text-muted">{{ date('Y') }} &copy; All Rights Reserved. FutureEd Pte Ltd</p>
+					<p class="text-muted">{{ date('Y') }} &copy; {!! trans('messages.all_right_reserved') !!} FutureEd Pte Ltd</p>
 				</div>
 			</footer>
+
 		@show
 
 		<!-- START SCRIPTS -->

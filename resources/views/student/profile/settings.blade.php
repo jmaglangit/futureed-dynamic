@@ -6,15 +6,15 @@
     </div>
 
 <fieldset>
-    <legend>Current Background Image</legend>
+    <legend>{{ trans('messages.current_background_image') }}</legend>
     <div class="form-group">
-        <label for="" class="col-xs-3 control-label">Background Image</label>
+        <label for="" class="col-xs-3 control-label">{{ trans('messages.background_image') }}</label>
         <img ng-src="{! profile.background_image.url !}" class="bg-image-item" alt="{! profile.background_image.name !}">
     </div>
 
 </fieldset>
 <fieldset>
-    <legend>Select New Background Image</legend>
+    <legend>{{ trans('messages.select_new_background_image') }}</legend>
     <ul class="bg-image-list list-unstyled list-inline ng-scope" ng-init="profile.getBackgroundImage()">
         <li class="item bg-image-item"
             ng-repeat="image in profile.background_image_list"

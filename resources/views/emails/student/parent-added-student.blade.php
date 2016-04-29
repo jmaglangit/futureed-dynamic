@@ -4,16 +4,16 @@
     <meta charset="utf-8">
 </head>
 <body>
-<div>Hi  {{$name}},</div><br/>
+<div>{!! trans('messages.hi') !!} {{$name}},</div><br/>
 
 <div>
-    <div>{{$parent_name}} has requested to add you in his/her dashboard.</div>
+    <div>{{$parent_name}} {!! trans('messages.email_parent_added_student_msg') !!}</div>
     <br/>
-    <div> Please give this invitation code so that you will be added in his/her student list.</div>
-    <div>Invitation code : {{ $code }}</div>
+    <div>{!! trans('messages.email_parent_added_student_msg2') !!}</div>
+    <div>{!! trans('messages.email_parent_added_student_msg3') !!}: {{ $code }}</div>
     <br/>
-    <div>Regards,</div>
-    <div> Admin</div>
+    <div>{!! trans('messages.regards') !!},</div>
+    <div>{!! trans('messages.admin') !!}</div>
 </div>
 </body>
 </html>

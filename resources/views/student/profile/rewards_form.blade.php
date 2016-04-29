@@ -6,14 +6,14 @@
 			</p>
 		</div>
 	<fieldset class="reward-set">
-		<legend>Rewards</legend>
+		<legend>{!! trans('messages.rewards') !!}</legend>
 		<div class="form-group">
-			<label class="control-label col-xs-2">Points</label>
+			<label class="control-label col-xs-2">{!! trans('messages.points') !!}</label>
 			<div class="col-xs-5">
 				{!! Form::text('points', ''
                     , array(
                         'class' => 'form-control'
-                        , 'placeholder' => 'Points' 
+                        , 'placeholder' => trans('messages.points')
                         , 'ng-disabled' => 'true'
                         , 'ng-model' => 'profile.prof.points')
                 ) !!}
@@ -23,17 +23,17 @@
 			<div class="panel panel-student">
 				<div class="panel-heading row">
 					<div class="col-xs-6">
-						<h4>Description</h4>
+						<h4>{!! trans('messages.description') !!}</h4>
 					</div>
 					<div class="col-xs-6">
-						<h4>Points Earned</h4>
+						<h4>{!! trans('messages.admin_points_earned') !!}</h4>
 					</div>
 				</div>
 				<div class="clearfix"></div>
 				<div class="panel-body">
 					<div class="row" ng-if="profile.points.length == 0">
 						<div class="col-xs-12">
-							No Available Points
+							{!! trans('messages.no_available_points') !!}
 						</div>
 					</div>
 					<div class="row" ng-repeat="point in profile.points">
@@ -49,9 +49,9 @@
 		</div>
 	</fieldset>
 	<fieldset class="reward-set">
-		<legend>Badges</legend>
+		<legend>{!! trans('messages.badge') !!}</legend>
 		<div ng-if="profile.badges.length <=0">
-			<div class="alert alert-info">No Badges Available</div>
+			<div class="alert alert-info">{!! trans('messages.no_available_badges') !!}</div>
 		</div>
 		<div class="col-xs-12" ng-if="profile.badges.length >= 1">
 			<div class="col-xs-3" ng-repeat="badge in profile.badges">
@@ -60,9 +60,9 @@
 		</div>
 	</fieldset>
 	<fieldset class="reward-set">
-		<legend>Medals</legend>
+		<legend>{!! trans('messages.medals') !!}</legend>
 		<div ng-if="profile.point_level.length <= 0">
-			<div class="alert alert-info">No Medals Available</div>
+			<div class="alert alert-info">{!! trans('messages.no_available_medals') !!}</div>
 		</div>
 		<div ng-if="profile.point_level.length >= 1">
 			<ul class="medals">

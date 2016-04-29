@@ -47,7 +47,6 @@ class AdminLoginController extends ApiController
 	public function login()
 	{
 
-		$error = config('futureed-error.error_messages');
 		$input = Input::only('username', 'password', 'role');
 
 

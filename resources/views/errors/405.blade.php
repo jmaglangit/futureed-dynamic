@@ -8,17 +8,17 @@
 		    <h1 class="error-display">405</h1>
 
 		    <h2>
-		    	<strong>Invalid Access</strong>
+		    	<strong>{!! trans('messages.invalid_access') !!}</strong>
 		    </h2>
 		    <p class="error-text">
-			    Sorry, you do not have the permission to access this page.
+			    {!! trans('messages.sorry_no_access') !!}
 		    </p>
 		    
 		    
 		    <div class="btn-container">
 		    	<a class="btn btn-light-blue btn-medium" href="{!! route('student.login') !!}">
 			        <i class="fa fa-home"></i>
-			        Take me home
+			        {!! trans('messages.take_me_home') !!}
 			    </a>
 			    <!-- <a href="#" class="btn btn-light-blue btn-medium disabled">
 			        <i class="fa fa-envelope-o"></i>

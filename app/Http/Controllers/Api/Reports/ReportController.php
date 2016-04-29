@@ -160,7 +160,7 @@ class ReportController extends Controller {
 		return $this->respond(
 			[
 				'status' => $this->getStatus(),
-				'errors' => config('futureed-error.error_messages.'. $error_code)
+				'errors' => trans('errors.'. $error_code)
 			]
 		);
 	}

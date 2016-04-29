@@ -13,32 +13,32 @@
 		</tr>
 		<tr>
 			<td colspan="6" style="text-align:left;">
-				<p>Teacher: {{ $additional_information['teacher_first_name'] . ' ' . $additional_information['teacher_last_name'] }}</p>
+				<p>{!! trans('messages.teacher') !!}: {{ $additional_information['teacher_first_name'] . ' ' . $additional_information['teacher_last_name'] }}</p>
 			</td>
 		</tr>
 		<tr>
 			<td colspan="6">
-				<h3 class="export-sub-header">Teacher Details</h3>
+				<h3 class="export-sub-header">{!! trans('messages.client_teacher_details') !!}</h3>
 			</td>
 		</tr>
 		<tr class="magenta-row class-report">
-			<th>Class Name</th>
+			<th>{!! trans('messages.class_name') !!}</th>
 			<td colspan="5">{{ $additional_information['class_name'] }}</td>
 		</tr>
 		<tr class="magenta-row class-report">
-			<th>Class Level</th>
+			<th>{!! trans('messages.class_level') !!}</th>
 			<td colspan="5">{{ $additional_information['grade_name'] }}</td>
 		</tr>
 	</table>
 	<table>
 		<tr>
 			<td colspan="6">
-				<h3 class="export-sub-header">Student Status</h3>
+				<h3 class="export-sub-header">{!! trans('messages.student_status') !!}</h3>
 			</td>
 		</tr>
 		<tr>
-			<th style="background-color:#AC2A4E; color:#fff;" >Student Name</th>
-			<th style="background-color:#AC2A4E; color:#fff;"  colspan="5">Status</th>
+			<th style="background-color:#AC2A4E; color:#fff;" >{!! trans('messages.student_name') !!}</th>
+			<th style="background-color:#AC2A4E; color:#fff;"  colspan="5">{!! trans('messages.status') !!}</th>
 		</tr>
 		@foreach($rows[0]['student_progress'] as $row)
 		<tr>
@@ -50,15 +50,15 @@
 	<table>
 		<tr>
 			<td colspan="6">
-				<h3 class="export-sub-header">Students to Watch</h3>
+				<h3 class="export-sub-header">{!! trans('messages.student_to_watch') !!}</h3>
 			</td>
 		</tr>
 		<tr class="magenta-row class-report">
-			<th>Struggling</th>
+			<th>{!! trans('messages.struggling') !!}</th>
 			<td colspan="5">{{ $rows[0]['student_watch']['struggling'] }}</td>
 		</tr>
 		<tr class="magenta-row class-report">
-			<th>Excelling</th>
+			<th>{!! trans('messages.excelling') !!}</th>
 			<td colspan="5">{{ $rows[0]['student_watch']['excelling'] }}</td>
 		</tr>
 	</table>

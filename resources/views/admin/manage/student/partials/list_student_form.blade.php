@@ -1,7 +1,7 @@
 <div ng-if="student.active_list">
 	<div class="content-title">
 		<div class="title-main-content">
-			<span>Student Management</span>
+			<span>{!! trans('messages.admin_student_management') !!}</span>
 		</div>
 	</div>
 
@@ -19,7 +19,7 @@
 
 	<div class="col-xs-12 search-container">
 		<div class="title-mid">
-			Search
+			{!! trans('messages.search') !!}
 		</div>
 
 		<div class="form-search">
@@ -35,7 +35,7 @@
 						, array(
 							'class' => 'form-control'
 							, 'ng-model' => 'student.search.name'
-							, 'placeholder' => 'Name'
+							, 'placeholder' => trans('messages.name')
 						)
 					) !!}
 				</div>
@@ -44,20 +44,20 @@
 						, array(
 							'class' => 'form-control'
 							, 'ng-model' => 'student.search.email'
-							, 'placeholder' => 'Email'
+							, 'placeholder' => trans('messages.email')
 						)
 					) !!}
 				</div>
-				<div class="col-xs-2">
-					{!! Form::button('Search',
+				<div class="col-xs-2 admin-search-student">
+					{!! Form::button(trans('messages.search'),
 						array(
 							'class' => 'btn btn-blue'
 							, 'ng-click' => "student.searchFnc()"
 						)
 					) !!}
 				</div>
-				<div class="col-xs-2">
-					{!! Form::button('Clear',
+				<div class="col-xs-2 admin-search-student">
+					{!! Form::button(trans('messages.clear'),
 						array(
 							'class' => 'btn btn-gold'
 							, 'ng-click' => 'student.clear()'
@@ -72,18 +72,18 @@
 	<div class="col-xs-12 table-container">
         <div class="dropdown">
             <button class="btn btn-blue btn-semi-medium dropdown-toggle" type="button" data-toggle="dropdown">
-                Add Student <i class="fa fa-caret-square-o-down"></i>
+                {!! trans('messages.add_student') !!} <i class="fa fa-caret-square-o-down"></i>
             </button>
             <ul class="dropdown-menu dropdown-menu-medium">
-                <li class="cursor-pointer" ng-click="student.setActive(futureed.ACTIVE_IMPORT)"><a><i class="fa fa-cloud-upload"></i> Import</a></li>
-                <li class="cursor-pointer" ng-click="student.setActive(futureed.ACTIVE_ADD)"><a><i class="fa fa-plus-square"></i> Manual</a></li>
+                <li class="cursor-pointer" ng-click="student.setActive(futureed.ACTIVE_IMPORT)"><a><i class="fa fa-cloud-upload"></i> {!! trans('messages.import') !!}</a></li>
+                <li class="cursor-pointer" ng-click="student.setActive(futureed.ACTIVE_ADD)"><a><i class="fa fa-plus-square"></i> {!! trans('messages.admin_manual') !!}</a></li>
             </ul>
         </div>
 
 
 		<div class="list-container" ng-cloak ng-init="student.studentList()">
 			<div class="col-xs-6 title-mid">
-				Student List
+				{!! trans('messages.admin_student_list') !!}
 			</div>
 
 			<div class="col-xs-6 size-container">
@@ -107,10 +107,10 @@
 			<table class="col-xs-12 table table-striped table-bordered">
 				<thead>
 					<tr>
-						<th>Name</th>
-						<th>Email</th>
-						<th>Points</th>
-						<th ng-if="student.records.length">Actions</th>
+						<th>{!! trans('messages.name') !!}</th>
+						<th>{!! trans('messages.email') !!}</th>
+						<th>{!! trans('messages.points') !!}</th>
+						<th ng-if="student.records.length">{!! trans('messages.action') !!}</th>
 					</tr>
 				</thead>
 
@@ -150,12 +150,12 @@
 				</tr>
 				<tr class="odd" ng-if="!student.records.length && !student.table.loading">
 					<td valign="top" colspan="7">
-						No records found
+						{!! trans('messages.no_records_found') !!}
 					</td>
 				</tr>
 				<tr class="odd" ng-if="student.table.loading">
 					<td valign="top" colspan="7">
-						Loading...
+						{!! trans('messages.loading') !!}
 					</td>
 				</tr>
 				</tbody>

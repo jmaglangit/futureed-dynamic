@@ -1,7 +1,7 @@
 <div ng-if="admin.active_edit_email">
 	<div class="content-title">
 		<div class="title-main-content">
-			<span>Edit Email Address</span>
+			<span>{!! trans('messages.admin_edit_email') !!}</span>
 		</div>
 	</div>
 
@@ -27,12 +27,12 @@
 	<div class="search-container col-xs-12">
 		<fieldset>
 			<div class="form-group">
-				<label class="col-xs-3 control-label">New Email Address <span class="required">*</span></label>
+				<label class="col-xs-3 control-label">{!! trans('messages.admin_new_email') !!} <span class="required">*</span></label>
 				<div class="col-xs-5">
 					{!! Form::text('new_email', ''
 						, array(
 							'class' => 'form-control'
-							, 'placeholder' => 'New Email Address'
+							, 'placeholder' => trans('messages.admin_new_email')
 							, 'ng-model' => 'admin.change.new_email'
 							, 'ng-model-options' => "{ debounce: {'default' : 1000} }"
 							, 'ng-class' => "{ 'required-field' : admin.fields['new_email'] }"
@@ -48,12 +48,12 @@
 			</div>
 
 			<div class="form-group">
-				<label class="col-xs-3 control-label">Confirm Email Address <span class="required">*</span></label>
+				<label class="col-xs-3 control-label">{!! trans('messages.confirm_email') !!} <span class="required">*</span></label>
 				<div class="col-xs-5">
 					{!! Form::text('confirm_email', ''
 						, array(
 							'class' => 'form-control'
-							, 'placeholder' => 'Confirm Email Address'
+							, 'placeholder' => trans('messages.confirm_email')
 							, 'ng-model' => 'admin.change.confirm_email'
 							, 'ng-model-options' => "{ debounce: {'default' : 1000} }"
 							, 'ng-class' => "{ 'required-field' : admin.fields['confirm_email'] || admin.fields['new_email'] }"
@@ -70,14 +70,14 @@
 
 		<fieldset>
 			<div class="btn-container col-xs-7 col-xs-offset-2">
-				{!! Form::button('Save'
+				{!! Form::button(trans('messages.save')
 					, array(
 						'class' => 'btn btn-blue btn-medium'
 						, 'ng-click' => "admin.changeAdminEmail()"
 					)
 				) !!}
 
-				{!! Form::button('Cancel'
+				{!! Form::button(trans('messages.cancel')
 					, array(
 						'class' => 'btn btn-gold btn-medium'
 						, 'ng-click' => "admin.setActive(futureed.ACTIVE_VIEW, admin.record.id)"

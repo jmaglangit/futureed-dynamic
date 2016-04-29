@@ -1,6 +1,6 @@
 <div class="login-container form-style enter-pass-con form-select-password" ng-if="login.active_enter_password">
 	<div ng-if="!locked">
-		<div class="title">Please Select Your Picture Password</div>
+		<div class="title">{!! trans('messages.student_select_pic_password') !!}</div>
 
 		<div class="alert alert-danger" ng-if="login.errors">
 			<p ng-repeat="error in login.errors" > 
@@ -19,7 +19,7 @@
 		</div>
 
 		<div class="btn-container" ng-if="login.image_pass.length">
-			{!! Form::button('Cancel'
+			{!! Form::button(trans('messages.cancel')
 				, array(
 					'class' => 'btn btn-gold btn-medium'
 					, 'ng-click' => 'login.cancelLogin()'

@@ -4,15 +4,15 @@
     <meta charset="utf-8">
 </head>
 <body>
-<div>Hi there {{ $name }},</div>
+<div>{!! trans('messages.hi_there') !!} {{ $name }},</div>
 <br/>
 <div>
-    <div>You have opt to resend your confirmation.</div>
+    <div>{!! trans('messages.email_resendregistration_msg') !!}</div>
     <br>
-    <div><a href="{{ $link }}">Confirm Email</a></div>
+    <div><a href="{{ $link }}">{!! trans('messages.confirm_email') !!}</a></div>
 
-    <div>Regards,</div><br/>
-    <div>Admin</div>
+    <div>{!! trans('messages.regards') !!},</div><br/>
+    <div>{!! trans('messages.admin') !!}</div>
 </div>
 </body>
 </html>

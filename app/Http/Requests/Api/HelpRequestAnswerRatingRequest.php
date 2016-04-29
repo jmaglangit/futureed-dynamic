@@ -30,11 +30,11 @@ class HelpRequestAnswerRatingRequest extends ApiRequest {
     public function messages(){
 
         return [
-            'student_id.required' =>'Student is required.',
-            'help_request_answer_id.required' =>'Help request is required.',
-            'student_id.integer' =>'Student must be a number.',
-            'help_request_answer_id.integer' =>'Help request must be a number.',
-            'rating.integer' => 'Rating must be a number.'
+            'student_id.required' => trans('errors.1003',['attribute' => trans('errors.2192')]),
+            'help_request_answer_id.required' => trans('errors.1003',['attribute' => trans('errors.2193')]),
+            'student_id.integer' => trans('errors.1013',['attribute' => trans('errors.2192')]),
+            'help_request_answer_id.integer' => trans('errors.1013',['attribute' => trans('errors.2193')]),
+            'rating.integer' => trans('errors.1013',['attribute' => trans('errors.2194')]),
         ];
     }
 

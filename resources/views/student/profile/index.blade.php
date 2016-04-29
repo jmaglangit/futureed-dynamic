@@ -27,7 +27,7 @@
 						<h3>
 							<div class="rbn-left"></div>
 							<div class="rbn-right"></div>
-							Quick <span>Rewards</span>
+							{!! trans('messages.quick') !!} <span>{!! trans('messages.rewards') !!}</span>
 						</h3>
 						<div class="points">
 							{!! Html::image('/images/icons/icon-reward.png', ''
@@ -36,34 +36,34 @@
 								)
 							) !!}
 							<div class="pcon">
-								<span>{! user.points !}</span> points
+								<span>{! user.points !}</span> {!! trans('messages.points') !!}
 							</div>
-							<a href="javascript:;" ng-click="profile.setStudentProfileActive('rewards')" class="lnk">See all points</a>
+							<a href="javascript:;" ng-click="profile.setStudentProfileActive('rewards')" class="lnk">{!! trans('messages.see_all_points') !!}</a>
 						</div>
 					</div>
 					<h2 class="student-font">
-							<span class="thin" ng-if="profile.active_index">My Profile</span>
-							<span class="thin" ng-if="profile.active_edit">Edit Profile</span>
-							<span class="thin" ng-if="profile.active_edit_email">Edit Email Address</span>
-							<span class="thin" ng-if="profile.active_confirm_email">Confirm Email Address</span>
-							<span class="thin" ng-if="profile.active_rewards">Student Rewards</span>
-							<span class="thin" ng-if="profile.active_avatar">Change Avatar</span>
-							<span class="thin" ng-if="profile.active_avatar_accessory">Avatar Accessories</span>
+							<span class="thin" ng-if="profile.active_index">{!! trans('messages.my_profile') !!}</span>
+							<span class="thin" ng-if="profile.active_edit">{!! trans('messages.edit_profile') !!}</span>
+							<span class="thin" ng-if="profile.active_edit_email">{!! trans('messages.admin_edit_email') !!}</span>
+							<span class="thin" ng-if="profile.active_confirm_email">{!! trans('messages.confirm_email') !!}</span>
+							<span class="thin" ng-if="profile.active_rewards">{!! trans('messages.student_rewards') !!}</span>
+							<span class="thin" ng-if="profile.active_avatar">{!! trans('messages.change_avatar') !!}</span>
+							<span class="thin" ng-if="profile.active_avatar_accessory">{!! trans('messages.avatar_accessories') !!}</span>
 							<div ng-if="profile.active_password">
 								<span ng-if="!profile.password_validated" class="thin">
-									Current
+									{!! trans('messages.current') !!}
 								</span>
 								<span ng-if="profile.password_validated && !profile.password_selected" class="thin">
-									New
+									{!! trans('messages.new') !!}
 								</span>
 								<span ng-if="profile.password_validated && profile.password_selected && !profile.password_confirmed" class="thin">
-									Confirm
+									{!! trans('messages.confirm') !!}
 								</span>   
 
-								Picture Password
+								{!! trans('messages.picture_password') !!}
 
 								<span ng-if="profile.password_validated && profile.password_selected && profile.password_confirmed" class="thin">
-									Successfully Changed
+									{!! trans('messages.successfully_changed') !!}
 								</span>
 							</div>
 							

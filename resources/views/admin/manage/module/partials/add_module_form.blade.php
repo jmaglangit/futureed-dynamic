@@ -1,7 +1,7 @@
 <div ng-if="module.active_add">
 	<div class="content-title">
 		<div class="title-main-content">
-			<span>Add Module</span>
+			<span>{!! trans('messages.admin_add_module') !!}</span>
 		</div>
 	</div>
 
@@ -21,17 +21,17 @@
 		{!! Form::open(array('class' => 'form-horizontal')) !!}
 		<fieldset>
 			<div class="form-group">
-				<label class="control-label col-xs-2">Subject <span class="required">*</span></label>
+				<label class="control-label col-xs-2">{!! trans('messages.subject') !!} <span class="required">*</span></label>
 				<div class="col-xs-4" ng-init="module.getSubject()">
 					<select  name="subject_id" class="form-control" name="subject_id" 
 						ng-model="module.record.subject_id" 
 						ng-change="module.setSubject()" 
 						ng-class="{'required-field' : module.fields['subject_id']}">
-						<option value="">-- Select Subject --</option>
+						<option value="">{!! trans('messages.admin_select_subject') !!}</option>
 						<option ng-repeat="subject in module.subjects" ng-value="subject.id">{! subject.name!}</option>
 					</select>
 				</div>
-				<label class="col-xs-2 control-label">Status <span class="required">*</span></label>
+				<label class="col-xs-2 control-label">{!! trans('messages.status') !!} <span class="required">*</span></label>
 				<div class="col-xs-4">
 					<div class="col-xs-6 checkbox">	                				
 						<label>
@@ -43,7 +43,7 @@
 									, 'ng-model' => 'module.record.status'
 								) 
 							) !!}
-						<span class="lbl padding-8">Enabled</span>
+						<span class="lbl padding-8">{!! trans('messages.enabled') !!}</span>
 						</label>
 					</div>
 					<div class="col-xs-6 checkbox">
@@ -56,17 +56,17 @@
 									, 'ng-model' => 'module.record.status'
 								)
 							) !!}
-						<span class="lbl padding-8">Disabled</span>
+						<span class="lbl padding-8">{!! trans('messages.disabled') !!}</span>
 						</label>
 					</div>
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-xs-2">Area <span class="required">*</span></label>
+				<label class="control-label col-xs-2">{!! trans('messages.area') !!} <span class="required">*</span></label>
 				<div class="col-xs-4">
 					{!! Form::text('area',''
 						, array(
-							'placeHolder' => 'Area'
+							'placeHolder' => trans('messages.area')
 							, 'ng-model' => 'module.record.area'
 							, 'ng-disabled' => '!module.record.subject_id'
 							, 'class' => 'form-control'
@@ -89,9 +89,9 @@
 				</div>
 
 				<div class="form-group">
-					<label class="control-label col-xs-2">Image </label>
+					<label class="control-label col-xs-2">{!! trans('messages.image') !!} </label>
 					<div class="col-xs-3">
-						<div class="btn btn-blue" ngf-select ngf-change="module.upload($files, module.record)"> Choose Image... </div>
+						<div class="btn btn-blue" ngf-select ngf-change="module.upload($files, module.record)">{!! trans('messages.choose_image') !!}</div>
 					</div>
 
 					<div class="margin-top-8" ng-if="module.record.uploaded">
@@ -100,11 +100,11 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-xs-2">Code <span class="required">*</span></label>
+				<label class="control-label col-xs-2">{!! trans('messages.code') !!} <span class="required">*</span></label>
 				<div class="col-xs-4">
 					{!! Form::text('code',''
 						, array(
-							'placeHolder' => 'Code'
+							'placeHolder' => trans('messages.code')
 							, 'ng-model' => 'module.record.code'
 							, 'class' => 'form-control'
 							, 'ng-class' => "{ 'required-field' : module.fields['code'] }"
@@ -113,27 +113,27 @@
 				</div>
 				<div class="col-xs-6" ng-if="module.record.uploaded">
 					<div class="col-xs-2"></div>
-					<span class="col-xs-5 upload-label label label-info">Image Uploaded...</span>
-					<a href="" class="control-label col-xs-5" ng-click="module.viewImage(module.record)">View Image</a>
+					<span class="col-xs-5 upload-label label label-info">{!! trans('messages.image_uploaded') !!}</span>
+					<a href="" class="control-label col-xs-5" ng-click="module.viewImage(module.record)">{!! trans('messages.view_image') !!}</a>
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-xs-2">Module <span class="required">*</span></label>
+				<label class="control-label col-xs-2">{!! trans_choice('messages.module', 1) !!} <span class="required">*</span></label>
 				<div class="col-xs-4">
 					{!! Form::text('module',''
 						, array(
-							'placeHolder' => 'Module'
+							'placeHolder' => trans_choice('messages.module', 1)
 							, 'ng-model' => 'module.record.name'
 							, 'class' => 'form-control'
 							, 'ng-class' => "{ 'required-field' : module.fields['name'] }"
 						)
 					) !!}
 				</div>
-				<label class="control-label col-xs-3">Points to Unlock <span class="required">*</span></label>
+				<label class="control-label col-xs-3">{!! trans('messages.admin_points_to_unlock') !!} <span class="required">*</span></label>
 				<div class="col-xs-3">
 					{!! Form::text('points_to_unlock',''
 						, array(
-							'placeHolder' => 'Points to Unlock'
+							'placeHolder' => trans('messages.admin_points_to_unlock')
 							, 'ng-model' => 'module.record.points_to_unlock'
 							, 'class' => 'form-control'
 							, 'ng-class' => "{ 'required-field' : module.fields['points_to_unlock'] }"
@@ -142,11 +142,11 @@
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-xs-2">Description <span class="required">*</span></label>
+				<label class="control-label col-xs-2">{!! trans('messages.description') !!} <span class="required">*</span></label>
 				<div class="col-xs-4">
 					{!! Form::textarea('description',''
 						, array(
-							'placeHolder' => 'Description'
+							'placeHolder' => trans('messages.description')
 							, 'ng-model' => 'module.record.description'
 							, 'class' => 'form-control disabled-textarea'
 							, 'ng-class' => "{ 'required-field' : module.fields['description'] }"
@@ -154,11 +154,11 @@
 						)
 					) !!}
 				</div>
-				<label class="control-label col-xs-3">Points to Finish <span class="required">*</span></label>
+				<label class="control-label col-xs-3">{!! trans('messages.admin_points_to_finish') !!} <span class="required">*</span></label>
 				<div class="col-xs-3">
 					{!! Form::text('points_to_finish',''
 						, array(
-							'placeHolder' => 'Points to Finish'
+							'placeHolder' => trans('messages.admin_points_to_finish')
 							, 'ng-model' => 'module.record.points_to_finish'
 							, 'class' => 'form-control'
 							, 'ng-class' => "{ 'required-field' : module.fields['points_to_finish'] }"
@@ -168,10 +168,10 @@
 			</div>
 
 			<div class="form-group">
-				<label class="control-label col-xs-3">Common Core Area <span class="required">*</span></label>
+				<label class="control-label col-xs-3">{!! trans('messages.admin_common_core_area') !!} <span class="required">*</span></label>
 				<div class="col-xs-3"></div>
 
-				<label class="control-label col-xs-3">Common Core URL <span class="required">*</span></label>
+				<label class="control-label col-xs-3">{!! trans('messages.admin_common_core_url') !!} <span class="required">*</span></label>
 				<div class="col-xs-3"></div>
 			</div>
 
@@ -180,7 +180,7 @@
 				<div class="col-xs-5">
 					{!! Form::text('common_core_area',''
 						, array(
-							'placeHolder' => 'Common Core Area'
+							'placeHolder' => trans('messages.admin_common_core_area')
 							, 'ng-model' => 'module.record.common_core_area'
 							, 'class' => 'form-control'
 							, 'ng-class' => "{ 'required-field' : module.fields['common_core_area'] }"
@@ -192,7 +192,7 @@
 				<div class="col-xs-5">
 					{!! Form::text('common_core_url',''
 						, array(
-							'placeHolder' => 'Common Core URL'
+							'placeHolder' => trans('messages.admin_common_core_url')
 							, 'ng-model' => 'module.record.common_core_url'
 							, 'class' => 'form-control'
 							, 'ng-class' => "{ 'required-field' : module.fields['common_core_url'] }"
@@ -204,14 +204,14 @@
 		<fieldset>
 			<div class="form-group">
 				<div class="btn-container col-xs-9 col-xs-offset-2">
-					{!! Form::button('Save'
+					{!! Form::button(trans('messages.save')
 						, array(
 							'class' => 'btn btn-blue btn-medium'
 							, 'ng-click' => 'module.add()'
 						)
 					) !!}
 
-					{!! Form::button('Cancel'
+					{!! Form::button(trans('messages.cancel')
 						, array(
 							'class' => 'btn btn-gold btn-medium'
 							, 'ng-click' => 'module.setActive()'
@@ -236,7 +236,7 @@
 				</div>
 				<div class="modal-footer">
 					<div class="btncon col-xs-8 col-xs-offset-4 pull-left">
-						{!! Form::button('Close'
+						{!! Form::button(trans('messages.close')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'data-dismiss' => 'modal'

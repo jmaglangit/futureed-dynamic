@@ -1,6 +1,6 @@
 <div class="login-container form-style" ng-if="login.active_registration_success">
-	<div class="title" ng-if="!login.linked">Thank you for registering to Future Lesson!</div>
-	<div class="title" ng-if="login.linked">Confirm Your Email Address</div>
+	<div class="title" ng-if="!login.linked">{!! trans('messages.client_thank_you_for_register') !!}</div>
+	<div class="title" ng-if="login.linked">{!! trans('messages.confirm_email_address') !!}</div>
 		
 		<div class="alert alert-danger" ng-if="login.errors">
 			<p ng-repeat="error in login.errors" > 
@@ -15,10 +15,10 @@
 				</div>
 
 				<p class="text" >
-					A confirmation has been sent to your email account.
+					{!! trans('messages.client_confirm_code_sent') !!}
 				</p>
 
-				<small>You're almost done! We just need you to confirm you email address. Please check your inbox and click on the link.</small>
+				<small>{!! trans('messages.client_check_inbox') !!}</small>
 			</div>
 			
 			<div ng-if="!login.resent && login.linked">
@@ -27,7 +27,7 @@
 				</div>
 
 				<p class="text" >
-					Please enter the confirmation code to verify your email address and to setup your new picture password.
+					{!! trans('messages.student_confirm_code_verify') !!}
 				</p>
 			</div>
 
@@ -37,10 +37,9 @@
 				</div>
 
 				<p>
-					A new confirmation has been sent to your email account.
+					{!! trans('messages.client_new_confirmation_code') !!}
 				</p>
-				<small>You're almost done! We just need you to confirm you email address. Please check your inbox and click on the link.</small>
+				<small>{!! trans('messages.client_check_inbox') !!}</small>
 			</div>
-
 		</div>
 </div>

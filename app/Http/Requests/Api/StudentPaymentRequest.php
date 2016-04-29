@@ -65,12 +65,12 @@ class StudentPaymentRequest extends ApiRequest {
 
 	public function messages(){
 		return [
-			'subject_id.required' =>'The subject is required.',
-			'subject_id.numeric' =>'The subject is invalid.',
-			'student_id.required' =>'The student is required.',
-			'student_id.numeric' =>'The student is invalid.',
-			'subscription_id.required' =>'The subscription is required.',
-			'subscription_id.numeric' =>'The subscription is invalid.',
+			'subject_id.required' => trans('errors.1003',['attribute' => trans('errors.2155')]),
+			'subject_id.numeric' => trans('errors.1004',['attribute' => trans('errors.2155')]),
+			'student_id.required' => trans('errors.1003',['attribute' => trans('errors.2192')]),
+			'student_id.numeric' => trans('errors.1004',['attribute' => trans('errors.2192')]),
+			'subscription_id.required' => trans('errors.1003',['attribute' => trans('errors.2199')]),
+			'subscription_id.numeric' => trans('errors.1004',['attribute' => trans('errors.2199')]),
 
 
 		];

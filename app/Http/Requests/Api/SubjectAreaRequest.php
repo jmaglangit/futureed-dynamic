@@ -48,13 +48,13 @@ class SubjectAreaRequest extends ApiRequest {
 	 */
 	public function messages() {
 		return [
-			'integer' => 'The :attribute must be a number.',
-			'subject_id.required' =>'The subject is required.',
-			'subject_id.integer' =>'The subject is required.',
-			'subject_id.exists' =>'The subject is invalid.',
-			'code.required' => 'The area code field is required.',
-			'code.integer' => 'The area code field must be a number.',
-			'name.required' => 'The area field is required.',
+			'integer' => trans('errors.1013'),
+			'subject_id.required' => trans('errors.1003',['attribute' => trans('errors.2155')]),
+			'subject_id.integer' => trans('errors.1003',['attribute' => trans('errors.2155')]),
+			'subject_id.exists' => trans('errors.1004',['attribute' => trans('errors.2155')]),
+			'code.required' => trans('validation.required',['attribute' => trans('errors.2215')]),
+			'code.integer' => trans('validation.numeric',['attribute' => trans('errors.2215')]),
+			'name.required' => trans('validation.numeric',['attribute' => trans('errors.2156')]),
 
 		];
 	}

@@ -42,9 +42,9 @@ class StudentRegistrationRequest extends ApiRequest {
 	public function messages()
 	{
 		return [
-			'birth_date.before'     => config('futureed-error.2028'),
-			'grade_code.numeric'    => config('futureed-error.2023'),
-			'country_id.numeric'    => config('futureed-error.2604')
+			'birth_date.before'     => trans('errors.2028'),
+			'grade_code.numeric'    => trans('errors.2023'),
+			'country_id.numeric'    => trans('errors.2604'),
 		];
 	}
 }

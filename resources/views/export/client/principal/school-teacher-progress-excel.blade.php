@@ -22,12 +22,12 @@
     </table>
     <div>&nbsp;</div>
     <tr>
-        <td style="text-align: center;"><b>Overall School Progress</b></td>
+        <td style="text-align: center;"><b>{!! trans('messages.overall_school_progress') !!}</b></td>
     </tr>
     <tr></tr>
     {{--Class report--}}
     <tr>
-        <td style="text-align: left;"><b>Teacher Comparison Progress</b></td>
+        <td style="text-align: left;"><b>{!! trans('messages.teacher_comparison_progress') !!}</b></td>
     </tr>
     <tr style="background-color: #AC2A4E;">
         <th style="color:#fff;padding: 0 5px 0 5px; text-align: center; border: 1px solid black;">{{ $column_header['teacher_list'] }}</th>
@@ -36,13 +36,13 @@
     @if(count($rows) > 0 )
         @foreach($rows as $teacher)
             <tr>
-                <td style="text-align: center; border: 1px solid black;">Teacher {{ $teacher['first_name'].' ' . $teacher['last_name'] }}</td>
+                <td style="text-align: center; border: 1px solid black;">{!! trans('messages.teacher') !!} {{ $teacher['first_name'].' ' . $teacher['last_name'] }}</td>
                 <td style="text-align: center; border: 1px solid black;">{{ $teacher['percent_progress'].'%' }}</td>
             </tr>
         @endforeach
     @else
         <tr >
-            <td colspan="2" style="text-align: center; border: 1px solid black;"><p>No result...</p></td>
+            <td colspan="2" style="text-align: center; border: 1px solid black;"><p>{!! trans('messages.no_results') !!}</p></td>
         </tr >
     @endif
 

@@ -16,7 +16,6 @@ function ManagePrincipalContentController($scope, $filter, ManagePrincipalConten
         self.active_school_teacher = Constants.FALSE;
         self.export = Constants.FALSE;
         self.active_purchase = Constants.FALSE;
-        
 
         switch (active) {
             case Constants.ACTIVE_SCHOOL_TEACHER:

@@ -19,16 +19,16 @@
 		!!}
 			<fieldset>
 				<legend class="legend-name-mid">
-					Tip Details
+					{!! trans('messages.admin_tip_details') !!}
 				</legend>
 
 				<div class="form-group">
 					<div ng-if="tips.record.link_type != futureed.GENERAL">
-						<label class="col-xs-2 control-label">Module <span class="required">*</span></label>
+						<label class="col-xs-2 control-label">{!! trans('messages.module') !!} <span class="required">*</span></label>
 						<div class="col-xs-4">
 							{!! Form::text('username', '',
 								[
-									'placeholder' => 'Module',
+									'placeholder' => trans('messages.module'),
 									'ng-disabled' => 'true',
 									'ng-model' => 'tips.record.module',
 									'class' => 'form-control'
@@ -36,14 +36,14 @@
 							) !!}
 						</div>
 					</div>
-					<label class="col-xs-2 control-label">Displayed At <span class="required">*</span></label>
+					<label class="col-xs-2 control-label">{!! trans('messages.displayed_at') !!} <span class="required">*</span></label>
 					<div class="col-xs-4">
 						{!! Form::select('link_type'
 							, array(
-								'' => '-- Select Type --'
-								, 'General' => 'General'
-								, 'Content' => 'Content'
-								, 'Question' => 'Question'
+								'' => trans('messages.admin_select_type')
+								, 'General' => trans('messages.general')
+								, 'Content' => trans('messages.content')
+								, 'Question' => trans('messages.question')
 							)
 							, ''
 							, array(
@@ -56,22 +56,22 @@
 					</div>
 				</div>
 				<div class="form-group" ng-if="tips.record.link_type != futureed.GENERAL">
-					<label class="col-xs-2 control-label">Subject <span class="required">*</span></label>
+					<label class="col-xs-2 control-label">{!! trans('messages.subject') !!} <span class="required">*</span></label>
 					<div class="col-xs-4">
 						{!! Form::text('subject', '',
 							[
-								'placeholder' => 'Subject',
+								'placeholder' => trans('messages.subject'),
 								'ng-disabled' => 'true',
 								'ng-model' => 'tips.record.subject',
 								'class' => 'form-control'
 							]
 						) !!}
 					</div>
-					<label class="col-xs-2 control-label">Area <span class="required">*</span></label>
+					<label class="col-xs-2 control-label">{!! trans('messages.area') !!} <span class="required">*</span></label>
 					<div class="col-xs-4">
 						{!! Form::text('area', '',
 							[
-								'placeholder' => 'Area',
+								'placeholder' => trans('messages.area'),
 								'ng-disabled' => 'true',
 								'ng-model' => 'tips.record.area',
 								'class' => 'form-control'
@@ -80,7 +80,7 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-xs-2 control-label">Status <span class="required">*</span></label>
+					<label class="col-xs-2 control-label">{!! trans('messages.status') !!} <span class="required">*</span></label>
 					<div class="col-xs-4" ng-if="tips.active_edit">
 						<div class="col-xs-6 checkbox">	                				
 							<label>
@@ -92,7 +92,7 @@
 										, 'ng-model' => 'tips.record.status'
 									) 
 								) !!}
-							<span class="lbl padding-8">Enable</span>
+							<span class="lbl padding-8">{!! trans('messages.enabled') !!}</span>
 							</label>
 						</div>
 						<div class="col-xs-6 checkbox">
@@ -105,7 +105,7 @@
 										, 'ng-model' => 'tips.record.status'
 									)
 								) !!}
-							<span class="lbl padding-8">Disable</span>
+							<span class="lbl padding-8">{!! trans('messages.disabled') !!}</span>
 							</label>
 						</div>
 					</div>
@@ -123,7 +123,7 @@
 						</label>
 					</div>
 
-					<label class="col-xs-2 control-label">Tip Status <span class="required">*</span></label>
+					<label class="col-xs-2 control-label">{!! trans('messages.admin_tip_status') !!} <span class="required">*</span></label>
 					<div>
 						<label class="col-xs-4" ng-if="tips.record.tip_status == futureed.ACCEPTED">
 							<b class="success-icon">
@@ -145,7 +145,7 @@
 					</div>
 				</div>
 				<div class="form-group" ng-if="tips.record.tip_status == futureed.ACCEPTED">
-					<label class="control-label col-xs-2">Rating</label>
+					<label class="control-label col-xs-2">{!! trans('messages.rating') !!}</label>
 					<div class="col-xs-4 margin-top-5">
 						<span ng-repeat="i in tips.record.stars track by $index">
 							<img ng-src="{! $index+1 <= tips.record.rating && '/images/class-student/icon-star_yellow.png' || '/images/class-student/icon-star_white.png' !}" />
@@ -154,7 +154,7 @@
 				</div>
 				<div class="form-group" ng-if="tips.record.rated_by != futureed.ADMIN && tips.active_view">
 					<div class="btn-container col-xs-8 col-xs-offset-2">
-						{!! Form::button('Change Rating'
+						{!! Form::button(trans('messages.change_rating')
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-click' => "tips.rateTip()"
@@ -185,56 +185,56 @@
 					Tip Content
 				</legend>
 				<div class="form-group">
-					<label class="col-xs-3 control-label">Title <span class="required">*</span></label>
+					<label class="col-xs-3 control-label">{!! trans('messages.title') !!} <span class="required">*</span></label>
 					<div class="col-xs-6">
 						{!! Form::text('title', '',
 							[
 								'class' => 'form-control'
 								, 'ng-disabled' => 'tips.active_view'
 								, 'ng-model' => 'tips.record.title'
-								, 'placeholder' => 'Title'
+								, 'placeholder' => trans('messages.title')
 								, 'ng-class' => "{ 'required-field' : tips.fields['title'] }"
 							]
 						) !!}
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-xs-3 control-label">Description <span class="required">*</span></label>
+					<label class="col-xs-3 control-label">{!! trans('messages.description') !!} <span class="required">*</span></label>
 					<div class="col-xs-6">
 						{!! Form::textarea('content','',
 							[
 								'class' => 'form-control disabled-textarea'
 								, 'ng-disabled' => 'tips.active_view'
 								, 'ng-model' => 'tips.record.content'
-								, 'placeholder' => 'Description'
+								, 'placeholder' => trans('messages.description')
 								, 'ng-class' => "{ 'required-field' : tips.fields['content'] }"
 							]
 						) !!}
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="col-xs-3 control-label">Created By:</label>
+					<label class="col-xs-3 control-label">{!! trans('messages.created_by') !!}:</label>
 					<div class="col-xs-6">
 						{!! Form::text('created_by','',
 							[
 								'class' => 'form-control'
 								, 'ng-disabled' => 'true'
 								, 'ng-model' => 'tips.record.name'
-								, 'placeholder' => 'Description'
+								, 'placeholder' => trans('messages.created_by')
 							]
 						) !!}
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="btn-container col-xs-8 col-xs-offset-2" ng-if="tips.active_edit">
-							{!! Form::button('Save'
+							{!! Form::button(trans('messages.save')
 								, array(
 									'class' => 'btn btn-blue btn-medium'
 									, 'ng-click' => "tips.updateTip()"
 								)
 							) !!}
 
-							{!! Form::button('Cancel'
+							{!! Form::button(trans('messages.cancel')
 								, array(
 									'class' => 'btn btn-gold btn-medium'
 									, 'ng-click' => "tips.setActive(futureed.ACTIVE_VIEW, tips.record.id)"
@@ -242,14 +242,14 @@
 							) !!}
 					</div>	
 					<div class="btn-container col-xs-8 col-xs-offset-2" ng-if="tips.active_view">
-							{!! Form::button('Edit'
+							{!! Form::button(trans('messages.edit')
 								, array(
 									'class' => 'btn btn-blue btn-medium'
 									, 'ng-click' => "tips.setActive(futureed.ACTIVE_EDIT, tips.record.id)"
 								)
 							) !!}
 
-							{!! Form::button('Cancel'
+							{!! Form::button(trans('messages.cancel')
 								, array(
 									'class' => 'btn btn-gold btn-medium'
 									, 'ng-click' => "tips.setActive()"
@@ -265,7 +265,7 @@
 		<div class="modal-dialog modal-md">
 			<div class="modal-content">
 				<div class="modal-header">
-					Rate this tip
+					{!! trans('messages.admin_rate_tip') !!}
 				</div>
 				<div class="modal-body">
 					<div class="col-xs-12 search-container" ng-if="tips.rate_errors">
@@ -278,20 +278,20 @@
 
 					<div class="col-xs-12 table-container">
 						<select class="form-control" ng-model="tips.rating">
-							<option value="">-- Select Rate --</option>
+							<option value="">{!! trans('messages.select_rate') !!}</option>
 							<option ng-selected="tips.record.rating == $index+1" ng-repeat="i in tips.record.stars track by $index" ng-value="$index+1">{! $index+1 !}</option>
 						</select>
 					</div>
 				</div>
 				<div class="modal-footer">
 					<div class="btncon col-xs-8 col-xs-offset-4 pull-left">
-						{!! Form::button('Accept'
+						{!! Form::button(trans('messages.accept')
 							, array(
 								'class' => 'btn btn-blue btn-medium'
 								, 'ng-click' => 'tips.acceptTip()'
 							)
 						) !!}
-						{!! Form::button('Cancel'
+						{!! Form::button(trans('messages.cancel')
 							, array(
 								'class' => 'btn btn-gold btn-medium'
 								, 'data-dismiss' => 'modal'
