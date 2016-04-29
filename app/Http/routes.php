@@ -91,6 +91,6 @@ Routes::group(['prefix' => 'api'], function () {
 });
 
 Routes::get('/lang/{lang}', [
-	'uses' => 'Api\v1\StudentController@setLanguage',
+	'uses' => 'Api\v1\LanguageController@setLanguage',
 	'as' => 'student.set.language',
 ]);
