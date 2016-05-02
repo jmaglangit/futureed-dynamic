@@ -1,13 +1,13 @@
 <div ng-cloak>
 	<div class="client-prof">
 		<div class="client-title" ng-if="user.role == futureed.PRINCIPAL">
-			{!! ucfirst(trans('messages.client_principal_dashboard')) !!}
+			{!! trans('messages.client_principal_dashboard') !!}
 		</div>
 		<div class="client-title" ng-if="user.role == futureed.TEACHER">
-			{!! ucfirst(trans('messages.client_teacher_dashboard')) !!}
+			{!! trans('messages.client_teacher_dashboard') !!}
 		</div>
 		<div class="client-title" ng-if="user.role == futureed.PARENT">
-			{!! ucfirst(trans('messages.client_parent_dashboard')) !!}
+			{!! trans('messages.client_parent_dashboard') !!}
 		</div>
 		<div class="client-name">
 			{!! trans('messages.welcome') !!}, {! user.first_name !}
@@ -34,7 +34,7 @@
 	</ul>
 	<ul ng-if="!profileActive  && user.role == futureed.PARENT">
 		<li class="client-nav" ng-class="{ 'tab-active' : student.active == 'student' }">
-			<a href="{{ route('client.parent.student.index') }}"><span><i class="fa fa-user"></i></span>{!! ucfirst(trans('messages.student')) !!}</a>
+			<a href="{{ route('client.parent.student.index') }}"><span><i class="fa fa-user"></i></span>{!! trans('messages.student') !!}</a>
 		</li>
 		<li class="client-nav" ng-class="{ 'tab-active' : payment.active == 'payment' }">
 			<a href="{{ route('client.parent.payment.index') }}"><span><i class="fa fa-edit"></i></span>{!! trans('messages.payment') !!}</a>
@@ -45,7 +45,7 @@
 	</ul>
 	<ul ng-if="!profileActive  && user.role == futureed.TEACHER">
 		<li class="client-nav" ng-class="{ 'tab-active' : teacher.active == 'teacher' }">
-			<a href="{{ route('client.teacher.student.index') }}"><span><i class="fa fa-user"></i></span>{!! ucfirst(trans('messages.student')) !!}</a>
+			<a href="{{ route('client.teacher.student.index') }}"><span><i class="fa fa-user"></i></span>{!! trans('messages.student') !!}</a>
 		</li>
 		<li class="client-nav" ng-class="{ 'tab-active' : class.active == 'class' }">
 			<a href="{{ route('client.teacher.class.index') }}"><span><i class="fa fa-users"></i></span>{!! trans('messages.class') !!}</a>

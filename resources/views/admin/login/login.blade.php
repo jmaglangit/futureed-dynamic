@@ -51,7 +51,7 @@
 							)
 					) !!}
 
-					{!! Form::button('Login'
+					{!! Form::button(trans('messages.login')
 							, array(
 									'class' => 'btn btn-blue'
 									, 'ng-click' => 'login.validateAdmin()'
@@ -61,7 +61,7 @@
 					{!! Form::close() !!}
 					<br />
 					<div class="form-group">
-						<a href="{!! route('admin.login.forgot_password') !!}" style="color:#055A7F;">Forgot your password?</a>
+						<a href="{!! route('admin.login.forgot_password') !!}" style="color:#055A7F;">{!! trans('messages.login_forgot') !!}</a>
 					</div>
 			</div>
 		</div>

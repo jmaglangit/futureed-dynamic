@@ -44,8 +44,8 @@
 					)!!}
 				</div>
 				
-				<div class="col-xs-2">
-					{!! Form::button('Search'
+				<div class="col-xs-2 admin-help-list">
+					{!! Form::button(trans('messages.search')
 						,array(
 							'class' => 'btn btn-blue'
 							, 'ng-click' => 'help.searchFnc($event)'
@@ -79,7 +79,7 @@
 					) !!}
 				</div>
 				
-				<div class="col-xs-2">
+				<div class="col-xs-2 admin-help-list">
 					{!! Form::button(trans('messages.clear')
 						,array(
 							'class' => 'btn btn-gold'

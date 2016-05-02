@@ -19,22 +19,26 @@
     </div>
 
     <div class="col-xs-12" style="padding-top: 10px;padding-bottom: 10px; color: whitesmoke;">
-        {!! Html::link(url('/lang/en'), 'English - US'
+        <center class="col-xs-offset-4 col-xs-4">
+            <span style="margin-right: 3px;font-size: 13px;color: #D2476E;">Languages: </span>
+        {!! Html::link(url('/lang/en'), 'English - US, '
               , array(
-                  'class' => 'col-xs-offset-5 col-xs-1',
-                  'style' => 'text-decoration:none;color: whitesmoke;',
-
+                  'style' => 'text-decoration:none;color: #F2D84F;font-size: 13px;margin-right: 7px',
               )
           ) !!}
-        {!! Html::link(url('/lang/id'), 'Bahasa Indonesia'
-                , array(
-                    'class' => 'col-xs-6',
-                    'style' => 'text-decoration:none;color: whitesmoke;',
 
+        {!! Html::link(url('/lang/id'), 'Bahasa Indonesia, '
+                , array(
+                    'style' => 'text-decoration:none;color: #F2D84F;font-size: 13px;margin-right: 7px',
                 )
             ) !!}
-        {{--<p class="col-xs-offset-5 col-xs-1"></p>--}}
-        {{--<p class="col-xs-6">Bahasa Indonesia</p>--}}
+
+        {!! Html::link(url('/lang/th'), 'Thai, '
+                , array(
+                    'style' => 'text-decoration:none;color: #F2D84F;font-size: 13px;margin-right: 7px',
+                )
+            ) !!}
+        </center>
     </div>
 @stop
 

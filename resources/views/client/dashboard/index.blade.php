@@ -13,7 +13,7 @@
 			<div class="client-content">
 				<div class="content-title">
 					<div class="title-main-content">
-						<span>{!! ucfirst(trans('messages.client_dashboard')) !!}</span>
+						{!! trans('messages.client_dashboard') !!}
 					</div>
 				</div>
 
